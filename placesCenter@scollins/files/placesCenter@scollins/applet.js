@@ -17,7 +17,10 @@ const Lang = imports.lang;
 
 const HOME_DIR = GLib.get_home_dir();
 const MENU_ITEM_TEXT_LENGTH = 25;
-let menu_item_icon_size;
+
+const ICONBROWSER_PROGRAM = "yad-icon-browser";
+
+var menu_item_icon_size;
 let uuid;
 
 
@@ -151,7 +154,7 @@ class RecentFileMenuItem extends IconMenuItem {
     }
 }
 
-class MyApplet extends Applet.TextIconApplet {
+class PlacesCenter extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instanceId) {
         try {
             super(orientation, panel_height, instanceId);
@@ -163,7 +166,15 @@ class MyApplet extends Applet.TextIconApplet {
             uuid = metadata.uuid;
             Gettext.bindtextdomain(uuid, HOME_DIR + "/.local/share/locale");
 
+            this.userSection = new PopupMenu.PopupMenuSection();
+            this.systemSection = new PopupMenu.PopupMenuSection();
+            this.devicesSection = new PopupMenu.PopupMenuSection();
+            this.recentSection = new PopupMenu.PopupMenuSection();
+
             //initiate settings
+            this.settings = new Settings.AppletSettings(this, this.metadata.uuid, this.instanceId);
+            this.prepare_new_list( "userCustomPlaces", "listUserCustomPlaces" );
+            this.prepare_new_list( "systemCustomPlaces", "listSystemCustomPlaces" );
             this.bindSettings();
 
             //set up panel
@@ -173,20 +184,32 @@ class MyApplet extends Applet.TextIconApplet {
 
             //listen for changes
             this.menuManager = new PopupMenu.PopupMenuManager(this);
+            this.menu = new Applet.AppletPopupMenu(this, this.orientation);
+            //~ this.menuManager.addMenu(this.menu);
+            // cinna 3.2 and above uses a different func
+            if (typeof this.menu.setCustomStyleClass === "function") {
+                this.menu.setCustomStyleClass("xCenter-menu");
+            } else {
+                this.menu.actor.add_style_class_name("xCenter-menu");
+            }
+            this.menuManager.addMenu(this.menu);
             // (Do not use a new RecentManager but the default one, synchronous with the Cinnamon menu.)
             this.recentManager = Gtk.RecentManager.get_default();
-            this.recentManager.connect("changed", Lang.bind(this, this.buildRecentDocumentsSection));
-            Main.placesManager.connect("bookmarks-updated", Lang.bind(this, this.buildUserSection));
+            //this.recentManager.connect("changed", Lang.bind(this, this.buildRecentDocumentsSection)); // Becomes useless.
+            //Main.placesManager.connect("bookmarks-updated", Lang.bind(this, this.buildUserSection)); // Avoid.
             this.volumeMonitor = Gio.VolumeMonitor.get();
-            this.volumeMonitor.connect("volume-added", Lang.bind(this, this.updateVolumes));
-            this.volumeMonitor.connect("volume-removed", Lang.bind(this, this.updateVolumes));
-            this.volumeMonitor.connect("mount-added", Lang.bind(this, this.updateVolumes));
-            this.volumeMonitor.connect("mount-removed", Lang.bind(this, this.updateVolumes));
+            //~ this.volumeMonitor.connect("volume-added", Lang.bind(this, this.updateVolumes));
+            //~ this.volumeMonitor.connect("volume-removed", Lang.bind(this, this.updateVolumes));
+            //~ this.volumeMonitor.connect("mount-added", Lang.bind(this, this.updateVolumes));
+            //~ this.volumeMonitor.connect("mount-removed", Lang.bind(this, this.updateVolumes));
 
-            this.buildMenu();
+
+            //~ this.buildMenu();
         } catch(e) {
-            global.logError(e);
+            global.logError("constructor: " + e);
         }
+
+        this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
     }
 
     _onButtonPressEvent(actor, event) {
@@ -198,7 +221,12 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     on_applet_clicked(event) {
+        if ( ! this.menu.isOpen ) {
+            this.buildMenu();
+            //~ this.buildRecentDocumentsSection(); // Avoid errors when a document has been moved.
+        }
         this.menu.toggle();
+        this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
     }
 
     on_applet_removed_from_panel() {
@@ -219,25 +247,64 @@ class MyApplet extends Applet.TextIconApplet {
         this.menu.toggle();
     }
 
+    prepare_new_list(old_list_name, new_list_name) {
+        let _old;
+        var _new = [];
+
+        _old = this.settings.getValue( old_list_name );
+        if (_old.length > 0) {
+            var customPlaces, customPlace;
+            customPlaces = _old.split(/, *|\n/);
+            for ( let i = 0; i < customPlaces.length; i++ ) {
+                if ( customPlaces[i].length == 0 ) continue;
+
+                let entry = customPlaces[i].split(":");
+                let [ uri, name, iconName ] = [ entry[0].trim(), "", "" ];
+                if ( entry.length > 1 ) name = entry[1].trim();
+                if ( entry.length > 2 ) iconName = entry[2].trim();
+
+                _new.push( { "uri": uri, "name": name, "icon": iconName } );
+            }
+            this.settings.setValue( new_list_name, _new );
+            this.settings.setValue( old_list_name, "" );
+        }
+    }
+
     bindSettings() {
-        this.settings = new Settings.AppletSettings(this, this.metadata.uuid, this.instanceId);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "panelIcon", "panelIcon", this.setPanelIcon);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "panelText", "panelText", this.setPanelText);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "iconSize", "iconSize", this.buildMenu);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "middleClickPath", "middleClickPath");
-        this.settings.bindProperty(Settings.BindingDirection.IN, "showDesktop", "showDesktop", this.buildUserSection);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "userCustomPlaces", "userCustomPlaces", this.buildUserSection);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "showTrash", "showTrash", this.buildTrashItem);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "showComputer", "showComputer", this.buildSystemSection);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "showRoot", "showRoot", this.buildSystemSection);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "showVolumes", "showVolumes", this.buildSystemSection);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "onlyShowMounted", "onlyShowMounted", this.buildSystemSection);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "showNetwork", "showNetwork", this.buildSystemSection);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "systemCustomPlaces", "systemCustomPlaces", this.buildSystemSection);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "showRecentDocuments", "showRecentDocuments", this.buildMenu);
-        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "recentSizeLimit", "recentSizeLimit", this.buildRecentDocumentsSection);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "recentShowUri", "recentShowUri", this.buildRecentDocumentsSection);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "keyOpen", "keyOpen", this.setKeybinding);
+
+        this.settings.bind("panelIcon", "panelIcon", this.setPanelIcon);
+        this.settings.bind("panelText", "panelText", this.setPanelText);
+        //~ this.settings.bind("iconSize", "iconSize", this.buildMenu);
+        this.settings.bind("iconSize", "iconSize");
+        this.settings.bind("middleClickPath", "middleClickPath");
+        //~ this.settings.bind("showDesktop", "showDesktop", this.buildUserSection);
+        this.settings.bind("showDesktop", "showDesktop");
+        //~ this.settings.bind("listUserCustomPlaces", "listUserCustomPlaces", this.buildUserSection);
+        this.settings.bind("listUserCustomPlaces", "listUserCustomPlaces");
+        this.settings.bind("userCustomPlaces", "userCustomPlaces");
+        //~ this.settings.bind("showTrash", "showTrash", this.buildTrashItem);
+        this.settings.bind("showTrash", "showTrash");
+        //~ this.settings.bind("showComputer", "showComputer", this.buildSystemSection);
+        this.settings.bind("showComputer", "showComputer");
+        //~ this.settings.bind("showRoot", "showRoot", this.buildSystemSection);
+        this.settings.bind("showRoot", "showRoot");
+        //~ this.settings.bind("showVolumes", "showVolumes", this.buildSystemSection);
+        this.settings.bind("showVolumes", "showVolumes");
+        //~ this.settings.bind("onlyShowMounted", "onlyShowMounted", this.buildSystemSection);
+        this.settings.bind("onlyShowMounted", "onlyShowMounted");
+        //~ this.settings.bind("showNetwork", "showNetwork", this.buildSystemSection);
+        this.settings.bind("showNetwork", "showNetwork");
+        //~ this.settings.bind("listSystemCustomPlaces", "listSystemCustomPlaces", this.buildSystemSection);
+        this.settings.bind("listSystemCustomPlaces", "listSystemCustomPlaces");
+        this.settings.bind("systemCustomPlaces", "systemCustomPlaces");
+        //~ this.settings.bind("showRecentDocuments", "showRecentDocuments", this.buildMenu);
+        this.settings.bind("showRecentDocuments", "showRecentDocuments");
+        //~ this.settings.bind("recentSizeLimit", "recentSizeLimit", this.buildRecentDocumentsSection);
+        this.settings.bind("recentSizeLimit", "recentSizeLimit");
+        //~ this.settings.bind("recentShowUri", "recentShowUri", this.buildRecentDocumentsSection);
+        this.settings.bind("recentShowUri", "recentShowUri");
+        this.settings.bind("iconBrowserIsPresent", "iconBrowserIsPresent");
+        this.settings.bind("keyOpen", "keyOpen", this.setKeybinding);
         let recentSizeLimit = this.recentSizeLimit;
         if ( recentSizeLimit % 5 !== 0 ) this.recentSizeLimit = Math.ceil(recentSizeLimit / 5) * 5;
         this.setKeybinding();
@@ -251,50 +318,62 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     buildMenu() {
-        try {
-            if ( this.menu ) this.menu.destroy();
+        menu_item_icon_size = this.iconSize;
 
-            menu_item_icon_size = this.iconSize;
+        if ( this.menu ) {
+            this.menu.removeAll();
+            // As they have been removed, we need to recreate them:
+            this.userSection = new PopupMenu.PopupMenuSection();
+            this.systemSection = new PopupMenu.PopupMenuSection();
+            this.devicesSection = new PopupMenu.PopupMenuSection();
+            this.recentSection = new PopupMenu.PopupMenuSection();
+        } else return;
 
-            this.menu = new Applet.AppletPopupMenu(this, this.orientation);
-            // cinna 3.2 and above uses a different func
-            if (typeof this.menu.setCustomStyleClass === "function") {
-                this.menu.setCustomStyleClass("xCenter-menu");
-            } else {
-                this.menu.actor.add_style_class_name("xCenter-menu");
-            }
-            this.menuManager.addMenu(this.menu);
-            let section = new PopupMenu.PopupMenuSection();
+        let section = new PopupMenu.PopupMenuSection();
+        let mainBox = new St.BoxLayout({ style_class: "xCenter-mainBox", vertical: false });
+        let userPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
+        let userPane = new PopupMenu.PopupMenuSection();
+        let userTitle = new PopupMenu.PopupBaseMenuItem({ style_class: "xCenter-title", reactive: false });
+        let userSearchButton = new St.Button();
+        let userSearchImage = new St.Icon({ icon_name: "edit-find", icon_size: 10, icon_type: St.IconType.SYMBOLIC });
+        let userScrollBox = new St.ScrollView({ style_class: "xCenter-scrollBox", x_fill: true, y_fill: false, y_align: St.Align.START });
+        let userVscroll = userScrollBox.get_vscroll_bar();
+
+        //~ try {
             this.menu.addMenuItem(section);
-            let mainBox = new St.BoxLayout({ style_class: "xCenter-mainBox", vertical: false });
             section.actor.add_actor(mainBox);
+        //~ } catch(e) { global.logError("buildMenu(): Error adding mainBox as actor of section - " + e) }
+
+
+        try {
 
             //User section
-            let userPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
-            let userPane = new PopupMenu.PopupMenuSection();
+
             userPaneBox.add_actor(userPane.actor);
-            let userTitle = new PopupMenu.PopupBaseMenuItem({ style_class: "xCenter-title", reactive: false });
+
             userPane.addMenuItem(userTitle);
             userTitle.addActor(new St.Label({ text: GLib.get_user_name().toUpperCase() }));
             section._connectSubMenuSignals(userPane, userPane);
 
             //add link to search tool
-            let userSearchButton = new St.Button();
+
             userTitle.addActor(userSearchButton);
-            let userSearchImage = new St.Icon({ icon_name: "edit-find", icon_size: 10, icon_type: St.IconType.SYMBOLIC });
+
             userSearchButton.add_actor(userSearchImage);
             userSearchButton.connect("clicked", Lang.bind(this, this.search, HOME_DIR));
             new Tooltips.Tooltip(userSearchButton, _("Search Home Folder"));
 
             // create a scrollbox for large user section, if any
-            let userScrollBox = new St.ScrollView({ style_class: "xCenter-scrollBox", x_fill: true, y_fill: false, y_align: St.Align.START });
+
             userPane.actor.add_actor(userScrollBox);
             userScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
-            let userVscroll = userScrollBox.get_vscroll_bar();
-            userVscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
-            userVscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
 
-            this.userSection = new PopupMenu.PopupMenuSection();
+            //~ userVscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
+            //~ userVscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
+            userVscroll.connect("scroll-start", () => { this.menu.passEvents = true; });
+            userVscroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
+
+            //~ this.userSection = new PopupMenu.PopupMenuSection();
             userScrollBox.add_actor(this.userSection.actor);
             userPane._connectSubMenuSignals(this.userSection, this.userSection);
 
@@ -326,7 +405,7 @@ class MyApplet extends Applet.TextIconApplet {
             systemVscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
             systemVscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
 
-            this.systemSection = new PopupMenu.PopupMenuSection();
+            //~ this.systemSection = new PopupMenu.PopupMenuSection();
             systemScrollBox.add_actor(this.systemSection.actor);
             systemPane._connectSubMenuSignals(this.systemSection, this.systemSection);
 
@@ -351,7 +430,7 @@ class MyApplet extends Applet.TextIconApplet {
                 vscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
                 vscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
 
-                this.recentSection = new PopupMenu.PopupMenuSection();
+                //~ this.recentSection = new PopupMenu.PopupMenuSection();
                 recentScrollBox.add_actor(this.recentSection.actor);
                 recentPane._connectSubMenuSignals(this.recentSection, this.recentSection);
 
@@ -371,12 +450,14 @@ class MyApplet extends Applet.TextIconApplet {
                 this.buildRecentDocumentsSection();
             }
         } catch(e) {
-            global.logError(e);
+            global.logError("buildMenu(): " + e);
         }
     }
 
     buildUserSection() {
-        this.userSection.removeAll();
+        if (this.userSection) this.userSection.removeAll();
+        else this.userSection = new PopupMenu.PopupMenuSection();
+
         this.trashItem = null;
 
         let defaultPlaces = Main.placesManager.getDefaultPlaces();
@@ -394,14 +475,15 @@ class MyApplet extends Applet.TextIconApplet {
         }
 
         //custom places
-        this.buildCustomPlaces(this.userCustomPlaces, this.userSection);
+        this.buildCustomPlaces(this.listUserCustomPlaces, this.userSection);
 
         //trash
         this.buildTrashItem();
     }
 
     buildSystemSection() {
-        this.systemSection.removeAll();
+        if ( this.systemSection ) this.systemSection.removeAll();
+        else this.systemSection = new PopupMenu.PopupMenuSection();
 
         //computer
         if ( this.showComputer ) {
@@ -417,13 +499,14 @@ class MyApplet extends Applet.TextIconApplet {
 
         //volumes and mounts
         if ( this.showVolumes ) {
-            this.devicesSection = new PopupMenu.PopupMenuSection();
+            if ( ! this.devicesSection )
+                this.devicesSection = new PopupMenu.PopupMenuSection();
             this.systemSection.addMenuItem(this.devicesSection);
             this.buildDevicesSection();
         }
 
         //custom places
-        this.buildCustomPlaces(this.systemCustomPlaces, this.systemSection);
+        this.buildCustomPlaces(this.listSystemCustomPlaces, this.systemSection);
 
         //network items
         if ( this.showNetwork ) {
@@ -442,34 +525,25 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     buildCustomPlaces(list, container) {
-        if ( list == "" ) return;
-        let uris = [];
-        let customPlace;
-        let customPlaces = list.split(/, *|\n/);
-
-        for ( let i = 0; i < customPlaces.length; i++ ) {
-            if ( customPlaces[i] == "" ) continue;
-            try {
-                let entry = customPlaces[i].split(":");
-                let place = entry[0].replace("~/", HOME_DIR + "/");
-                while ( place[0] == " " ) place = place.substr(1);
-                if ( place.search("://") == -1 ) place = "file://" + place;
-                let file = Gio.File.new_for_uri(place);
-                if ( file.query_exists(null) ) {
-                    let text = null;
-                    let iconName = null;
-                    if ( entry.length > 1 ) text = entry[1];
-                    if ( entry.length > 2 ) iconName = entry[2];
-                    customPlace = new PlaceMenuItem(place, text, iconName);
-                    container.addMenuItem(customPlace);
-                }
-
-            } catch(e) { continue; }
+        if ( list.length === 0 ) return;
+        for (let item of list) {
+            let place = item["uri"].trim();
+            if ( place.length === 0) continue;
+            place = place.replace("~/", HOME_DIR + "/");
+            if ( place.search("://") == -1 ) place = "file://" + place;
+            let file = Gio.File.new_for_uri(place);
+            if ( file.query_exists(null) ) {
+                let text = ( item["name"].trim().length > 0 ) ? item["name"] : GLib.basename( item["uri"].trim() );
+                let iconName = ( item["icon"].trim().length > 0 ) ? item["icon"] : null;
+                let customPlace = new PlaceMenuItem(place, text, iconName);
+                container.addMenuItem(customPlace);
+            }
         }
     }
 
     buildDevicesSection() {
-        this.devicesSection.removeAll();
+        if ( this.devicesSection ) this.devicesSection.removeAll();
+        else this.devicesSection = new PopupMenu.PopupMenuSection();
 
         let volumes = this.volumeMonitor.get_volumes();
         let mounts = this.volumeMonitor.get_mounts();
@@ -488,7 +562,8 @@ class MyApplet extends Applet.TextIconApplet {
 
     buildRecentDocumentsSection() {
         if ( !this.showRecentDocuments ) return;
-        this.recentSection.removeAll();
+        if ( this.recentSection ) this.recentSection.removeAll();
+        else this.recentSection = new PopupMenu.PopupMenuSection();
 
         let recentDocuments = this.recentManager.get_items();
 
@@ -552,7 +627,8 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     buildTrashItem() {
-        if ( this.trashItem ) this.trashItem.destroy();
+        //~ if ( this.trashItem ) this.trashItem.destroy();
+        if ( this.trashItem != null ) return;
         if ( this.showTrash == 0 ) return;
 
         let uri = "trash:///";
@@ -635,10 +711,14 @@ class MyApplet extends Applet.TextIconApplet {
     on_btnPrivacy_pressed() {
         Util.spawnCommandLine("bash -c 'cinnamon-settings privacy'");
     }
+
+    on_btnIconBrowser_pressed() {
+        Util.spawnCommandLineAsync(ICONBROWSER_PROGRAM);
+    }
 }
 
 
 function main(metadata, orientation, panel_height, instanceId) {
-    let myApplet = new MyApplet(metadata, orientation, panel_height, instanceId);
-    return myApplet;
+    let placesCenter = new PlacesCenter(metadata, orientation, panel_height, instanceId);
+    return placesCenter;
 }

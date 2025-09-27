@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# PLACES CENTER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# collinss, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-24 20:57+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-28 00:16+0200\n"
 "PO-Revision-Date: 2024-07-24 10:12+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -16,123 +17,123 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:148
+#. applet.js:153
 msgid "(Right click to open folder)"
 msgstr "(Rechtsklik om map te openen)"
 
-#: applet.js:170
+#. applet.js:183
 msgid "Places"
 msgstr "Plaatsen"
 
-#: applet.js:284
+#. applet.js:364
 msgid "Search Home Folder"
 msgstr "Zoeken in thuismap"
 
-#: applet.js:307
+#. applet.js:389
 msgid "SYSTEM"
 msgstr "SYSTEEM"
 
-#: applet.js:316
+#. applet.js:398
 msgid "Search File System"
 msgstr "Zoeken in bestandssysteem"
 
-#: applet.js:341
+#. applet.js:423
 msgid "RECENT DOCUMENTS"
 msgstr "RECENTE DOCUMENTEN"
 
-#: applet.js:355
+#. applet.js:437
 msgid "Clear"
 msgstr "Wissen"
 
-#: applet.js:364
+#. applet.js:444
 msgid "Recent"
 msgstr "Recent"
 
-#: applet.js:398
+#. applet.js:490
 msgid "Computer"
 msgstr "Computer"
 
-#: applet.js:404
+#. applet.js:496
 msgid "File System"
 msgstr "Bestandssysteem"
 
-#: applet.js:420
+#. applet.js:513
 msgid "Network"
 msgstr "Netwerk"
 
-#: applet.js:560
+#. applet.js:648
 msgid "Trash"
 msgstr "Prullenbak"
 
-#: search.py:43
+#. search.py:43
 msgid "Open..."
 msgstr "Openen..."
 
-#: search.py:48
+#. search.py:48
 msgid "Open Containing Folder..."
 msgstr "Bijbehorende map openen..."
 
-#: search.py:85
+#. search.py:85
 msgid "Search"
 msgstr "Zoeken"
 
-#: search.py:106
+#. search.py:106
 msgid "Start in"
 msgstr "Starten in"
 
-#: search.py:107
+#. search.py:107
 msgid "Select a folder"
 msgstr "Selecteer een map"
 
-#: search.py:113
+#. search.py:113
 msgid "Follow symlinks"
 msgstr "Symlinks volgen"
 
-#: search.py:117
+#. search.py:117
 msgid "Search hidden"
 msgstr "Zoek verborgen"
 
-#: search.py:121
+#. search.py:121
 msgid "Use regular expressions"
 msgstr "Reguliere expressies gebruiken"
 
-#: search.py:125
+#. search.py:125
 msgid "Stop"
 msgstr "Stoppen"
 
-#: search.py:140
+#. search.py:140
 msgid "File"
 msgstr "Bestand"
 
-#: search.py:156
+#. search.py:156
 msgid "Path"
 msgstr "Pad"
 
-#: search.py:184
+#. search.py:184
 msgid "Searching..."
 msgstr "Zoeken..."
 
-#: search.py:198 search.py:199
+#. search.py:198 search.py:199
 msgid "Search Stopped"
 msgstr "Zoeken gestopt"
 
-#: search.py:215
+#. search.py:215
 msgid "Searching: "
 msgstr "Zoeken: "
 
-#: search.py:220
+#. search.py:220
 msgid "Error: insufficient permissions to read folder "
 msgstr "Fout: onvoldoende rechten om map te lezen "
 
-#: search.py:252
+#. search.py:252
 msgid "Search Completed"
 msgstr "Zoeken voltooid"
 
-#: search.py:259
+#. search.py:259
 msgid "Skipping"
 msgstr "Overslaan"
 
-#: search.py:259
+#. search.py:259
 msgid " - directory already searched"
 msgstr " - map al doorzocht"
 
@@ -197,6 +198,13 @@ msgstr "Menu-instellingen"
 msgid "User section"
 msgstr "Gebruikerssectie"
 
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+msgid "Custom places"
+msgstr "Aangepaste plaatsen"
+
 #. settings-schema.json->systemSection->title
 msgid "System section"
 msgstr "Systeemsectie"
@@ -239,24 +247,20 @@ msgstr "Laat leeg om uit te schakelen"
 msgid "Show desktop"
 msgstr "Bureaublad tonen"
 
-#. settings-schema.json->userCustomPlaces->description
-#. settings-schema.json->systemCustomPlaces->description
-msgid "Custom places"
-msgstr "Aangepaste plaatsen"
-
-#. settings-schema.json->userCustomPlaces->tooltip
-#. settings-schema.json->systemCustomPlaces->tooltip
-msgid ""
-"List of uris/file paths to be included. Entries may be separated by either a "
-"comma(,) or by a new-line. You can set the name to be displayed by adding :"
-"customName after the location. You can likewise set an icon name by adding :"
-"iconName after the custom name."
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
 msgstr ""
-"Lijst met URI's/bestandspaden die moeten worden opgenomen. Items kunnen "
-"worden gescheiden door een komma (,) of door een nieuwe regel. Je kunt de "
-"naam die moet worden weergegeven instellen door :aangepasteNaam toe te "
-"voegen na de locatie. Je kunt ook een pictogramnaam instellen door :"
-"pictogramNaam toe te voegen na de aangepaste naam."
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr ""
 
 #. settings-schema.json->showTrash->description
 msgid "Show trash"
@@ -330,10 +334,14 @@ msgstr "Alle recente documenten"
 msgid "Number to show"
 msgstr "Aantal te tonen"
 
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr "Toon volledige path in tooltips"
+
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"
 msgstr "Privacy"
 
-#. settings-schema.json->recentShowUri->description
-msgid "Show complete path in tooltips"
-msgstr "Toon volledige path in tooltips"
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
+msgstr ""

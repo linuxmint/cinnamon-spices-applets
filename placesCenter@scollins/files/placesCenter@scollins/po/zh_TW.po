@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: placesCenter@scollins 2.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-15 02:01+0200\n"
+"POT-Creation-Date: 2025-09-28 00:16+0200\n"
 "PO-Revision-Date: 2025-08-04 00:13+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -16,123 +16,123 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:150
+#. applet.js:153
 msgid "(Right click to open folder)"
 msgstr "（點選滑鼠右鍵開啟資料夾）"
 
-#: applet.js:172
+#. applet.js:183
 msgid "Places"
 msgstr "位置"
 
-#: applet.js:287
+#. applet.js:364
 msgid "Search Home Folder"
 msgstr "搜尋家目錄"
 
-#: applet.js:310
+#. applet.js:389
 msgid "SYSTEM"
 msgstr "系統"
 
-#: applet.js:319
+#. applet.js:398
 msgid "Search File System"
 msgstr "搜尋檔案系統"
 
-#: applet.js:344
+#. applet.js:423
 msgid "RECENT DOCUMENTS"
 msgstr "最近的文件"
 
-#: applet.js:358
+#. applet.js:437
 msgid "Clear"
 msgstr "清除"
 
-#: applet.js:364
+#. applet.js:444
 msgid "Recent"
 msgstr "最近使用"
 
-#: applet.js:407
+#. applet.js:490
 msgid "Computer"
 msgstr "電腦"
 
-#: applet.js:413
+#. applet.js:496
 msgid "File System"
 msgstr "檔案系統"
 
-#: applet.js:429
+#. applet.js:513
 msgid "Network"
 msgstr "網路"
 
-#: applet.js:569
+#. applet.js:648
 msgid "Trash"
 msgstr "資源回收筒"
 
-#: search.py:43
+#. search.py:43
 msgid "Open..."
 msgstr "開啟..."
 
-#: search.py:48
+#. search.py:48
 msgid "Open Containing Folder..."
 msgstr "開啟檔案所在資料夾..."
 
-#: search.py:85
+#. search.py:85
 msgid "Search"
 msgstr "搜尋"
 
-#: search.py:106
+#. search.py:106
 msgid "Start in"
 msgstr "開始於"
 
-#: search.py:107
+#. search.py:107
 msgid "Select a folder"
 msgstr "選擇資料夾"
 
-#: search.py:113
+#. search.py:113
 msgid "Follow symlinks"
 msgstr "跟隨符號連結"
 
-#: search.py:117
+#. search.py:117
 msgid "Search hidden"
 msgstr "搜尋隱藏項目"
 
-#: search.py:121
+#. search.py:121
 msgid "Use regular expressions"
 msgstr "使用正規表示式"
 
-#: search.py:125
+#. search.py:125
 msgid "Stop"
 msgstr "停止"
 
-#: search.py:140
+#. search.py:140
 msgid "File"
 msgstr "檔案"
 
-#: search.py:156
+#. search.py:156
 msgid "Path"
 msgstr "路徑"
 
-#: search.py:184
+#. search.py:184
 msgid "Searching..."
 msgstr "搜尋中..."
 
-#: search.py:198 search.py:199
+#. search.py:198 search.py:199
 msgid "Search Stopped"
 msgstr "搜尋已停止"
 
-#: search.py:215
+#. search.py:215
 msgid "Searching: "
 msgstr "搜尋中："
 
-#: search.py:220
+#. search.py:220
 msgid "Error: insufficient permissions to read folder "
 msgstr "錯誤：讀取資料夾的權限不足 "
 
-#: search.py:252
+#. search.py:252
 msgid "Search Completed"
 msgstr "搜尋完成"
 
-#: search.py:259
+#. search.py:259
 msgid "Skipping"
 msgstr "略過"
 
-#: search.py:259
+#. search.py:259
 msgid " - directory already searched"
 msgstr " - 目錄已搜尋過"
 
@@ -151,9 +151,9 @@ msgid ""
 "contribute by submitting pull requests, bug reports and feature requests to "
 "my github repo."
 msgstr ""
-"Places Center 是功能豐富、跨平台的 Cinnamon 小程式，"
-"可讓您輕鬆存取所有最常用的位置。"
-"歡迎到我的 GitHub 儲存庫提交 pull request、錯誤回報與功能建議來做出貢獻。"
+"Places Center 是功能豐富、跨平台的 Cinnamon 小程式，可讓您輕鬆存取所有最常用"
+"的位置。歡迎到我的 GitHub 儲存庫提交 pull request、錯誤回報與功能建議來做出貢"
+"獻。"
 
 #. metadata.json->contributors
 msgid "Stephen Collins - Author"
@@ -196,6 +196,13 @@ msgstr "選單設定"
 msgid "User section"
 msgstr "使用者區段"
 
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+msgid "Custom places"
+msgstr "自訂位置"
+
 #. settings-schema.json->systemSection->title
 msgid "System section"
 msgstr "系統區段"
@@ -236,22 +243,20 @@ msgstr "留空以停用"
 msgid "Show desktop"
 msgstr "顯示桌面"
 
-#. settings-schema.json->userCustomPlaces->description
-#. settings-schema.json->systemCustomPlaces->description
-msgid "Custom places"
-msgstr "自訂位置"
-
-#. settings-schema.json->userCustomPlaces->tooltip
-#. settings-schema.json->systemCustomPlaces->tooltip
-msgid ""
-"List of uris/file paths to be included. Entries may be separated by either a "
-"comma(,) or by a new-line. You can set the name to be displayed by adding :"
-"customName after the location. You can likewise set an icon name by adding :"
-"iconName after the custom name."
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
 msgstr ""
-"要包含的 URI/檔案路徑清單。項目之間可用逗號 (,) 或換行分隔。"
-"可以在位置後方加上 :自訂名稱 來設定顯示名稱，"
-"也可以在自訂名稱後方加上 :圖示名稱 來設定圖示。"
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr ""
 
 #. settings-schema.json->showTrash->description
 msgid "Show trash"
@@ -332,3 +337,7 @@ msgstr "在工具提示中顯示完整路徑"
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"
 msgstr "隱私"
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
+msgstr ""

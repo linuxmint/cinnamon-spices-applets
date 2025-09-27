@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# PLACES CENTER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# collinss, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-15 02:01+0200\n"
+"POT-Creation-Date: 2025-09-28 00:16+0200\n"
 "PO-Revision-Date: 2024-11-18 13:53+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
@@ -19,123 +19,123 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:150
+#. applet.js:153
 msgid "(Right click to open folder)"
 msgstr "(hiiren oikea avaa kansion)"
 
-#: applet.js:172
+#. applet.js:183
 msgid "Places"
 msgstr "Sijainnit"
 
-#: applet.js:287
+#. applet.js:364
 msgid "Search Home Folder"
 msgstr "Haku Koti"
 
-#: applet.js:310
+#. applet.js:389
 msgid "SYSTEM"
 msgstr "JÄRJESTELMÄ"
 
-#: applet.js:319
+#. applet.js:398
 msgid "Search File System"
 msgstr "Haku järjestelmä"
 
-#: applet.js:344
+#. applet.js:423
 msgid "RECENT DOCUMENTS"
 msgstr "VIIMEAIKAISET"
 
-#: applet.js:358
+#. applet.js:437
 msgid "Clear"
 msgstr "Tyhjennä"
 
-#: applet.js:364
+#. applet.js:444
 msgid "Recent"
 msgstr "Viimeisimmät"
 
-#: applet.js:407
+#. applet.js:490
 msgid "Computer"
 msgstr "Tietokone"
 
-#: applet.js:413
+#. applet.js:496
 msgid "File System"
 msgstr "Tiedostojärjestelmä"
 
-#: applet.js:429
+#. applet.js:513
 msgid "Network"
 msgstr "Verkko"
 
-#: applet.js:569
+#. applet.js:648
 msgid "Trash"
 msgstr "Roskakori"
 
-#: search.py:43
+#. search.py:43
 msgid "Open..."
 msgstr "Avaa..."
 
-#: search.py:48
+#. search.py:48
 msgid "Open Containing Folder..."
 msgstr "Avaa sisältävä kansio..."
 
-#: search.py:85
+#. search.py:85
 msgid "Search"
 msgstr "Haku"
 
-#: search.py:106
+#. search.py:106
 msgid "Start in"
 msgstr "Alkaen"
 
-#: search.py:107
+#. search.py:107
 msgid "Select a folder"
 msgstr "Valitse kansio"
 
-#: search.py:113
+#. search.py:113
 msgid "Follow symlinks"
 msgstr "Seuraa symlinkkejä"
 
-#: search.py:117
+#. search.py:117
 msgid "Search hidden"
 msgstr "Hae piilotetut"
 
-#: search.py:121
+#. search.py:121
 msgid "Use regular expressions"
 msgstr "Käytä säännöllisiä lauseita"
 
-#: search.py:125
+#. search.py:125
 msgid "Stop"
 msgstr "Pysäytä"
 
-#: search.py:140
+#. search.py:140
 msgid "File"
 msgstr "Tiedosto"
 
-#: search.py:156
+#. search.py:156
 msgid "Path"
 msgstr "Polku"
 
-#: search.py:184
+#. search.py:184
 msgid "Searching..."
 msgstr "Hakee..."
 
-#: search.py:198 search.py:199
+#. search.py:198 search.py:199
 msgid "Search Stopped"
 msgstr "Haku pysäytetty"
 
-#: search.py:215
+#. search.py:215
 msgid "Searching: "
 msgstr "Haku: "
 
-#: search.py:220
+#. search.py:220
 msgid "Error: insufficient permissions to read folder "
 msgstr "Virhe: oikeudet kansion lukemiseen ei riitä "
 
-#: search.py:252
+#. search.py:252
 msgid "Search Completed"
 msgstr "Haku valmis"
 
-#: search.py:259
+#. search.py:259
 msgid "Skipping"
 msgstr "Ohitus"
 
-#: search.py:259
+#. search.py:259
 msgid " - directory already searched"
 msgstr " - hakemisto on jo haettu"
 
@@ -198,6 +198,13 @@ msgstr "Valikon asetukset"
 msgid "User section"
 msgstr "Käyttäjä valinnat"
 
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+msgid "Custom places"
+msgstr "Mukautetut paikat - kirjoita polku"
+
 #. settings-schema.json->systemSection->title
 msgid "System section"
 msgstr "Järjestelmä valinnat"
@@ -238,23 +245,20 @@ msgstr "Jätä tyhjäksi - pois käytöstä"
 msgid "Show desktop"
 msgstr "Näytä työpöytä"
 
-#. settings-schema.json->userCustomPlaces->description
-#. settings-schema.json->systemCustomPlaces->description
-msgid "Custom places"
-msgstr "Mukautetut paikat - kirjoita polku"
-
-#. settings-schema.json->userCustomPlaces->tooltip
-#. settings-schema.json->systemCustomPlaces->tooltip
-msgid ""
-"List of uris/file paths to be included. Entries may be separated by either a "
-"comma(,) or by a new-line. You can set the name to be displayed by adding :"
-"customName after the location. You can likewise set an icon name by adding :"
-"iconName after the custom name."
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
 msgstr ""
-"Luettelo url tai polku. Merkintä voidaan erottaa joko pilkulla (,) tai "
-"uudella rivillä. Voit asettaa näytettävän nimen lisäämällä :customName "
-"sijainnin perään. Voit myös asettaa kuvakkeelle nimen lisäämällä nimen "
-"perään :iconName."
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr ""
 
 #. settings-schema.json->showTrash->description
 msgid "Show trash"
@@ -335,3 +339,7 @@ msgstr "Näytä täydellinen polku työkaluvihjeessä"
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"
 msgstr "Yksityisyys"
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
+msgstr ""

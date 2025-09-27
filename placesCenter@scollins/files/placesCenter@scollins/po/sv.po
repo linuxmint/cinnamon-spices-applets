@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: placesCenter@scollins\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-15 02:01+0200\n"
+"POT-Creation-Date: 2025-09-28 00:16+0200\n"
 "PO-Revision-Date: 2022-10-29 15:32+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -19,123 +19,123 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.1.1\n"
 
-#: applet.js:150
+#. applet.js:153
 msgid "(Right click to open folder)"
 msgstr "(Högerklicka för att öppna mapp)"
 
-#: applet.js:172
+#. applet.js:183
 msgid "Places"
 msgstr "Platser"
 
-#: applet.js:287
+#. applet.js:364
 msgid "Search Home Folder"
 msgstr "Sök i hemkatalogen"
 
-#: applet.js:310
+#. applet.js:389
 msgid "SYSTEM"
 msgstr "SYSTEM"
 
-#: applet.js:319
+#. applet.js:398
 msgid "Search File System"
 msgstr "Sök i filsystemet"
 
-#: applet.js:344
+#. applet.js:423
 msgid "RECENT DOCUMENTS"
 msgstr "TIDIGARE DOKUMENT"
 
-#: applet.js:358
+#. applet.js:437
 msgid "Clear"
 msgstr "Rensa"
 
-#: applet.js:364
+#. applet.js:444
 msgid "Recent"
 msgstr ""
 
-#: applet.js:407
+#. applet.js:490
 msgid "Computer"
 msgstr "Dator"
 
-#: applet.js:413
+#. applet.js:496
 msgid "File System"
 msgstr "Filsystem"
 
-#: applet.js:429
+#. applet.js:513
 msgid "Network"
 msgstr "Nätverk"
 
-#: applet.js:569
+#. applet.js:648
 msgid "Trash"
 msgstr "Papperskorg"
 
-#: search.py:43
+#. search.py:43
 msgid "Open..."
 msgstr "Öppna..."
 
-#: search.py:48
+#. search.py:48
 msgid "Open Containing Folder..."
 msgstr "Öppna målmappen..."
 
-#: search.py:85
+#. search.py:85
 msgid "Search"
 msgstr "Sök"
 
-#: search.py:106
+#. search.py:106
 msgid "Start in"
 msgstr "Starta i"
 
-#: search.py:107
+#. search.py:107
 msgid "Select a folder"
 msgstr "Välj en mapp"
 
-#: search.py:113
+#. search.py:113
 msgid "Follow symlinks"
 msgstr "Följ symboliska länkar"
 
-#: search.py:117
+#. search.py:117
 msgid "Search hidden"
 msgstr "Sök dolda"
 
-#: search.py:121
+#. search.py:121
 msgid "Use regular expressions"
 msgstr "Använd Regular Expressions"
 
-#: search.py:125
+#. search.py:125
 msgid "Stop"
 msgstr "Stopp"
 
-#: search.py:140
+#. search.py:140
 msgid "File"
 msgstr "Fil"
 
-#: search.py:156
+#. search.py:156
 msgid "Path"
 msgstr "Sökväg"
 
-#: search.py:184
+#. search.py:184
 msgid "Searching..."
 msgstr "Söker..."
 
-#: search.py:198 search.py:199
+#. search.py:198 search.py:199
 msgid "Search Stopped"
 msgstr "Sökning stoppad"
 
-#: search.py:215
+#. search.py:215
 msgid "Searching: "
 msgstr "Söker: "
 
-#: search.py:220
+#. search.py:220
 msgid "Error: insufficient permissions to read folder "
 msgstr "Fel: Otillräckliga rättigheter för att läsa mappen "
 
-#: search.py:252
+#. search.py:252
 msgid "Search Completed"
 msgstr "Sökning slutförd"
 
-#: search.py:259
+#. search.py:259
 msgid "Skipping"
 msgstr "Undantar"
 
-#: search.py:259
+#. search.py:259
 msgid " - directory already searched"
 msgstr "  - mappen redan genomsökt"
 
@@ -200,6 +200,13 @@ msgstr "Menyinställningar"
 msgid "User section"
 msgstr "Användarsektion"
 
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+msgid "Custom places"
+msgstr "Anpassade platser"
+
 #. settings-schema.json->systemSection->title
 msgid "System section"
 msgstr "Systemsektion"
@@ -240,23 +247,20 @@ msgstr "Lämnas tom för inaktivering"
 msgid "Show desktop"
 msgstr "Visa Skrivbord"
 
-#. settings-schema.json->userCustomPlaces->description
-#. settings-schema.json->systemCustomPlaces->description
-msgid "Custom places"
-msgstr "Anpassade platser"
-
-#. settings-schema.json->userCustomPlaces->tooltip
-#. settings-schema.json->systemCustomPlaces->tooltip
-msgid ""
-"List of uris/file paths to be included. Entries may be separated by either a "
-"comma(,) or by a new-line. You can set the name to be displayed by adding :"
-"customName after the location. You can likewise set an icon name by adding :"
-"iconName after the custom name."
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
 msgstr ""
-"Lista över uri:er/filsökvägar att inkludera. Poster kan separeras med "
-"kommatecken eller ny rad. Du kan ange visningsnamn genom att lägga till :"
-"anpassatNamn efter platsen. Du kan likaså ange ikonnamn genom att lägga "
-"till :ikonNamn efter det anpassade namnet."
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr ""
 
 #. settings-schema.json->showTrash->description
 msgid "Show trash"
@@ -337,3 +341,7 @@ msgstr ""
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"
 msgstr "Sekretess"
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
+msgstr ""

@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# PLACES CENTER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# collinss, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-15 02:01+0200\n"
+"POT-Creation-Date: 2025-09-28 00:16+0200\n"
 "PO-Revision-Date: 2022-10-27 19:44+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -19,123 +19,123 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:150
+#. applet.js:153
 msgid "(Right click to open folder)"
 msgstr "(Højreklik for at åbne mappen)"
 
-#: applet.js:172
+#. applet.js:183
 msgid "Places"
 msgstr "Steder"
 
-#: applet.js:287
+#. applet.js:364
 msgid "Search Home Folder"
 msgstr "Søg i mappen Hjem"
 
-#: applet.js:310
+#. applet.js:389
 msgid "SYSTEM"
 msgstr "SYSTEM"
 
-#: applet.js:319
+#. applet.js:398
 msgid "Search File System"
 msgstr "Søg i Filsystem"
 
-#: applet.js:344
+#. applet.js:423
 msgid "RECENT DOCUMENTS"
 msgstr "SENESTE DOKUMENTER"
 
-#: applet.js:358
+#. applet.js:437
 msgid "Clear"
 msgstr "Ryd"
 
-#: applet.js:364
+#. applet.js:444
 msgid "Recent"
 msgstr ""
 
-#: applet.js:407
+#. applet.js:490
 msgid "Computer"
 msgstr "Computer"
 
-#: applet.js:413
+#. applet.js:496
 msgid "File System"
 msgstr "Filsystem"
 
-#: applet.js:429
+#. applet.js:513
 msgid "Network"
 msgstr "Netværk"
 
-#: applet.js:569
+#. applet.js:648
 msgid "Trash"
 msgstr "Papirkurven"
 
-#: search.py:43
+#. search.py:43
 msgid "Open..."
 msgstr "Åbn …"
 
-#: search.py:48
+#. search.py:48
 msgid "Open Containing Folder..."
 msgstr "Åbn indeholdende mappe …"
 
-#: search.py:85
+#. search.py:85
 msgid "Search"
 msgstr "Søg"
 
-#: search.py:106
+#. search.py:106
 msgid "Start in"
 msgstr "Start i"
 
-#: search.py:107
+#. search.py:107
 msgid "Select a folder"
 msgstr "Vælg en mappe"
 
-#: search.py:113
+#. search.py:113
 msgid "Follow symlinks"
 msgstr "Følg symbolske henvisninger"
 
-#: search.py:117
+#. search.py:117
 msgid "Search hidden"
 msgstr "Søg skjulte"
 
-#: search.py:121
+#. search.py:121
 msgid "Use regular expressions"
 msgstr "Brug regulære udtryk"
 
-#: search.py:125
+#. search.py:125
 msgid "Stop"
 msgstr "Stop"
 
-#: search.py:140
+#. search.py:140
 msgid "File"
 msgstr "Fil"
 
-#: search.py:156
+#. search.py:156
 msgid "Path"
 msgstr "Sti"
 
-#: search.py:184
+#. search.py:184
 msgid "Searching..."
 msgstr "Søger …"
 
-#: search.py:198 search.py:199
+#. search.py:198 search.py:199
 msgid "Search Stopped"
 msgstr "Søgning stoppede"
 
-#: search.py:215
+#. search.py:215
 msgid "Searching: "
 msgstr "Søger: "
 
-#: search.py:220
+#. search.py:220
 msgid "Error: insufficient permissions to read folder "
 msgstr "Fejl: utilstrækkelige rettigheder til at læse mappen "
 
-#: search.py:252
+#. search.py:252
 msgid "Search Completed"
 msgstr "Søgning færdig"
 
-#: search.py:259
+#. search.py:259
 msgid "Skipping"
 msgstr "Springer over"
 
-#: search.py:259
+#. search.py:259
 msgid " - directory already searched"
 msgstr " - mappe allerede gennemsøgt"
 
@@ -200,6 +200,13 @@ msgstr "Menuindstillinger"
 msgid "User section"
 msgstr "Brugersektion"
 
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+msgid "Custom places"
+msgstr "Brugerdefinederede steder"
+
 #. settings-schema.json->systemSection->title
 msgid "System section"
 msgstr "Systemsektion"
@@ -240,23 +247,20 @@ msgstr "Efterlad tom for at deaktivere"
 msgid "Show desktop"
 msgstr "Vis skrivebord"
 
-#. settings-schema.json->userCustomPlaces->description
-#. settings-schema.json->systemCustomPlaces->description
-msgid "Custom places"
-msgstr "Brugerdefinederede steder"
-
-#. settings-schema.json->userCustomPlaces->tooltip
-#. settings-schema.json->systemCustomPlaces->tooltip
-msgid ""
-"List of uris/file paths to be included. Entries may be separated by either a "
-"comma(,) or by a new-line. You can set the name to be displayed by adding :"
-"customName after the location. You can likewise set an icon name by adding :"
-"iconName after the custom name."
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
 msgstr ""
-"Liste over URI'er/filstier som skal inkluderes. Poster kan adskilles med "
-"enten et komma (,) eller en ny linje. Du kan angive navnet, der skal vises, "
-"ved at tilføje :tilpassetNavn efter placeringen. Du kan også angive et "
-"ikonnavn ved at tilføje :ikonNavn efter det tilpassede navn."
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr ""
 
 #. settings-schema.json->showTrash->description
 msgid "Show trash"
@@ -337,3 +341,7 @@ msgstr ""
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"
 msgstr "Privatliv"
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
+msgstr ""

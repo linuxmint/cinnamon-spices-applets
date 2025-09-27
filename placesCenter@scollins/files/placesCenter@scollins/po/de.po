@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# PLACES CENTER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# collinss, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-15 02:01+0200\n"
+"POT-Creation-Date: 2025-09-28 00:16+0200\n"
 "PO-Revision-Date: 2021-02-24 21:50+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,123 +19,123 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:150
+#. applet.js:153
 msgid "(Right click to open folder)"
 msgstr "(Rechtsklick zum Öffnen des Ordners)"
 
-#: applet.js:172
+#. applet.js:183
 msgid "Places"
 msgstr "Orte"
 
-#: applet.js:287
+#. applet.js:364
 msgid "Search Home Folder"
 msgstr "Persönlichen Ordner durchsuchen"
 
-#: applet.js:310
+#. applet.js:389
 msgid "SYSTEM"
 msgstr "SYSTEM"
 
-#: applet.js:319
+#. applet.js:398
 msgid "Search File System"
 msgstr "Dateisystem durchsuchen"
 
-#: applet.js:344
+#. applet.js:423
 msgid "RECENT DOCUMENTS"
 msgstr "ZULETZT VERWENDETE DATEIEN"
 
-#: applet.js:358
+#. applet.js:437
 msgid "Clear"
 msgstr "Leeren"
 
-#: applet.js:364
+#. applet.js:444
 msgid "Recent"
 msgstr ""
 
-#: applet.js:407
+#. applet.js:490
 msgid "Computer"
 msgstr "Rechner"
 
-#: applet.js:413
+#. applet.js:496
 msgid "File System"
 msgstr "Dateisystem"
 
-#: applet.js:429
+#. applet.js:513
 msgid "Network"
 msgstr "Netzwerk"
 
-#: applet.js:569
+#. applet.js:648
 msgid "Trash"
 msgstr "Papierkorb"
 
-#: search.py:43
+#. search.py:43
 msgid "Open..."
 msgstr "Öffnen…"
 
-#: search.py:48
+#. search.py:48
 msgid "Open Containing Folder..."
 msgstr "Übergeordneten Ordner öffnen…"
 
-#: search.py:85
+#. search.py:85
 msgid "Search"
 msgstr "Suche"
 
-#: search.py:106
+#. search.py:106
 msgid "Start in"
 msgstr "Starten in"
 
-#: search.py:107
+#. search.py:107
 msgid "Select a folder"
 msgstr "Einen Ordner auswählen"
 
-#: search.py:113
+#. search.py:113
 msgid "Follow symlinks"
 msgstr "Symbolischen Verknüpfungen folgen"
 
-#: search.py:117
+#. search.py:117
 msgid "Search hidden"
 msgstr "Verborgene Dateien durchsuchen"
 
-#: search.py:121
+#. search.py:121
 msgid "Use regular expressions"
 msgstr "Reguläre Ausdrücke verwenden"
 
-#: search.py:125
+#. search.py:125
 msgid "Stop"
 msgstr "Anhalten"
 
-#: search.py:140
+#. search.py:140
 msgid "File"
 msgstr "Datei"
 
-#: search.py:156
+#. search.py:156
 msgid "Path"
 msgstr "Pfad"
 
-#: search.py:184
+#. search.py:184
 msgid "Searching..."
 msgstr "Suche…"
 
-#: search.py:198 search.py:199
+#. search.py:198 search.py:199
 msgid "Search Stopped"
 msgstr "Suche angehalten"
 
-#: search.py:215
+#. search.py:215
 msgid "Searching: "
 msgstr "Suchen: "
 
-#: search.py:220
+#. search.py:220
 msgid "Error: insufficient permissions to read folder "
 msgstr "Fehler: unzureichende Berechtigungen zum Lesen des Ordners "
 
-#: search.py:252
+#. search.py:252
 msgid "Search Completed"
 msgstr "Suche beendet"
 
-#: search.py:259
+#. search.py:259
 msgid "Skipping"
 msgstr "Überspringen"
 
-#: search.py:259
+#. search.py:259
 msgid " - directory already searched"
 msgstr " - Verzeichnis bereits durchsucht"
 
@@ -200,6 +200,13 @@ msgstr "Menüeinstellungen"
 msgid "User section"
 msgstr "Benutzerbereich"
 
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+msgid "Custom places"
+msgstr "Benutzerdefinierte Orte"
+
 #. settings-schema.json->systemSection->title
 msgid "System section"
 msgstr "Systembereich"
@@ -241,24 +248,20 @@ msgstr "Leer lassen, um zu deaktivieren"
 msgid "Show desktop"
 msgstr "Schreibtisch anzeigen"
 
-#. settings-schema.json->userCustomPlaces->description
-#. settings-schema.json->systemCustomPlaces->description
-msgid "Custom places"
-msgstr "Benutzerdefinierte Orte"
-
-#. settings-schema.json->userCustomPlaces->tooltip
-#. settings-schema.json->systemCustomPlaces->tooltip
-msgid ""
-"List of uris/file paths to be included. Entries may be separated by either a "
-"comma(,) or by a new-line. You can set the name to be displayed by adding :"
-"customName after the location. You can likewise set an icon name by adding :"
-"iconName after the custom name."
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
 msgstr ""
-"Liste von URIs/Dateipfaden, welche eingefügt werden sollen. Einträge können "
-"entweder durch ein Komma (,) oder durch eine neue Zeile getrennt werden. Sie "
-"können den Namen, der angezeigt werden soll, durch Hinzufügen von :"
-"ANZEIGENAME an das Pfadende festlegen. Ein Symbolname kann ebenfalls "
-"festgelegt werden durch Hinzufügen von :SYMBOLNAME nach dem Anzeigenamen."
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr ""
 
 #. settings-schema.json->showTrash->description
 msgid "Show trash"
@@ -339,3 +342,7 @@ msgstr ""
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"
 msgstr "Privatsphäre"
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
+msgstr ""

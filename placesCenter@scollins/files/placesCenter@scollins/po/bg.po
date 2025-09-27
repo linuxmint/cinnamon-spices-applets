@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# PLACES CENTER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# collinss, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-15 02:01+0200\n"
+"POT-Creation-Date: 2025-09-28 00:16+0200\n"
 "PO-Revision-Date: 2017-12-20 20:20+0200\n"
 "Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
@@ -19,123 +19,123 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:150
+#. applet.js:153
 msgid "(Right click to open folder)"
 msgstr ""
 
-#: applet.js:172
+#. applet.js:183
 msgid "Places"
 msgstr "Места"
 
-#: applet.js:287
+#. applet.js:364
 msgid "Search Home Folder"
 msgstr "Търси в домашната папка"
 
-#: applet.js:310
+#. applet.js:389
 msgid "SYSTEM"
 msgstr "СИСТЕМА"
 
-#: applet.js:319
+#. applet.js:398
 msgid "Search File System"
 msgstr "Търси във файловата система"
 
-#: applet.js:344
+#. applet.js:423
 msgid "RECENT DOCUMENTS"
 msgstr "ПОСЛЕДНИ ДОКУМЕНТИ"
 
-#: applet.js:358
+#. applet.js:437
 msgid "Clear"
 msgstr "Изчисти"
 
-#: applet.js:364
+#. applet.js:444
 msgid "Recent"
 msgstr ""
 
-#: applet.js:407
+#. applet.js:490
 msgid "Computer"
 msgstr "Компютър"
 
-#: applet.js:413
+#. applet.js:496
 msgid "File System"
 msgstr "Файлова система"
 
-#: applet.js:429
+#. applet.js:513
 msgid "Network"
 msgstr "Мрежа"
 
-#: applet.js:569
+#. applet.js:648
 msgid "Trash"
 msgstr "Кошче"
 
-#: search.py:43
+#. search.py:43
 msgid "Open..."
 msgstr "Отваряне..."
 
-#: search.py:48
+#. search.py:48
 msgid "Open Containing Folder..."
 msgstr "Отваряне на съдържащата папка..."
 
-#: search.py:85
+#. search.py:85
 msgid "Search"
 msgstr "Търсене"
 
-#: search.py:106
+#. search.py:106
 msgid "Start in"
 msgstr "Стартирай в"
 
-#: search.py:107
+#. search.py:107
 msgid "Select a folder"
 msgstr "Избор на папка"
 
-#: search.py:113
+#. search.py:113
 msgid "Follow symlinks"
 msgstr "Следвай символните връзки"
 
-#: search.py:117
+#. search.py:117
 msgid "Search hidden"
 msgstr "Търси в скритите"
 
-#: search.py:121
+#. search.py:121
 msgid "Use regular expressions"
 msgstr "Използване на регулярни изрази"
 
-#: search.py:125
+#. search.py:125
 msgid "Stop"
 msgstr "Спри"
 
-#: search.py:140
+#. search.py:140
 msgid "File"
 msgstr "Файл"
 
-#: search.py:156
+#. search.py:156
 msgid "Path"
 msgstr "Път"
 
-#: search.py:184
+#. search.py:184
 msgid "Searching..."
 msgstr "Търсене..."
 
-#: search.py:198 search.py:199
+#. search.py:198 search.py:199
 msgid "Search Stopped"
 msgstr "Търсенето е спряно"
 
-#: search.py:215
+#. search.py:215
 msgid "Searching: "
 msgstr "Търсене: "
 
-#: search.py:220
+#. search.py:220
 msgid "Error: insufficient permissions to read folder "
 msgstr "Грешка: недостатъчно права за прочитане на папката"
 
-#: search.py:252
+#. search.py:252
 msgid "Search Completed"
 msgstr "Търсенето завърши"
 
-#: search.py:259
+#. search.py:259
 msgid "Skipping"
 msgstr "Пропускане"
 
-#: search.py:259
+#. search.py:259
 #, fuzzy
 msgid " - directory already searched"
 msgstr " - директорията е вече претърсена"
@@ -201,6 +201,13 @@ msgstr "Настройки на менюто"
 msgid "User section"
 msgstr "Секция потребител"
 
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+msgid "Custom places"
+msgstr "Допълнителни места"
+
 #. settings-schema.json->systemSection->title
 msgid "System section"
 msgstr "Секция система"
@@ -242,23 +249,20 @@ msgstr "Остави празно за изключване"
 msgid "Show desktop"
 msgstr "Показване на работния плот"
 
-#. settings-schema.json->userCustomPlaces->description
-#. settings-schema.json->systemCustomPlaces->description
-msgid "Custom places"
-msgstr "Допълнителни места"
-
-#. settings-schema.json->userCustomPlaces->tooltip
-#. settings-schema.json->systemCustomPlaces->tooltip
-msgid ""
-"List of uris/file paths to be included. Entries may be separated by either a "
-"comma(,) or by a new-line. You can set the name to be displayed by adding :"
-"customName after the location. You can likewise set an icon name by adding :"
-"iconName after the custom name."
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
 msgstr ""
-"Списък с адреси/път до файл, които да се добавят. Добавените могат да се "
-"разделят със запетая(,) или нов ред. Може да добавите име за показване, като "
-"добавите :вашеИме след локацията. Също може да зададете иконка като "
-"добавите :имеНаИконка след зададеното име."
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr ""
 
 #. settings-schema.json->showTrash->description
 msgid "Show trash"
@@ -339,4 +343,8 @@ msgstr ""
 
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"
+msgstr ""
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
 msgstr ""

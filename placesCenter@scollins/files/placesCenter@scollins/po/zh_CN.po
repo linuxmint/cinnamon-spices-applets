@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# PLACES CENTER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# collinss, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-15 02:01+0200\n"
+"POT-Creation-Date: 2025-09-28 00:16+0200\n"
 "PO-Revision-Date: 2017-05-02 21:02+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,126 +19,126 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: applet.js:150
+#. applet.js:153
 msgid "(Right click to open folder)"
 msgstr ""
 
-#: applet.js:172
+#. applet.js:183
 msgid "Places"
 msgstr "位置"
 
-#: applet.js:287
+#. applet.js:364
 msgid "Search Home Folder"
 msgstr "搜索主目录文件夹"
 
-#: applet.js:310
+#. applet.js:389
 msgid "SYSTEM"
 msgstr "系统"
 
-#: applet.js:319
+#. applet.js:398
 msgid "Search File System"
 msgstr "搜索文件系统"
 
-#: applet.js:344
+#. applet.js:423
 msgid "RECENT DOCUMENTS"
 msgstr "最近的文档"
 
-#: applet.js:358
+#. applet.js:437
 msgid "Clear"
 msgstr "清除"
 
-#: applet.js:364
+#. applet.js:444
 msgid "Recent"
 msgstr ""
 
-#: applet.js:407
+#. applet.js:490
 msgid "Computer"
 msgstr "计算机"
 
-#: applet.js:413
+#. applet.js:496
 msgid "File System"
 msgstr "文件系统"
 
-#: applet.js:429
+#. applet.js:513
 msgid "Network"
 msgstr "网络"
 
-#: applet.js:569
+#. applet.js:648
 msgid "Trash"
 msgstr "回收站"
 
-#: search.py:43
+#. search.py:43
 msgid "Open..."
 msgstr ""
 
-#: search.py:48
+#. search.py:48
 msgid "Open Containing Folder..."
 msgstr ""
 
-#: search.py:85
+#. search.py:85
 msgid "Search"
 msgstr ""
 
-#: search.py:106
+#. search.py:106
 msgid "Start in"
 msgstr ""
 
-#: search.py:107
+#. search.py:107
 #, fuzzy
 msgid "Select a folder"
 msgstr "搜索主目录文件夹"
 
-#: search.py:113
+#. search.py:113
 msgid "Follow symlinks"
 msgstr ""
 
-#: search.py:117
+#. search.py:117
 msgid "Search hidden"
 msgstr ""
 
-#: search.py:121
+#. search.py:121
 msgid "Use regular expressions"
 msgstr ""
 
-#: search.py:125
+#. search.py:125
 msgid "Stop"
 msgstr ""
 
-#: search.py:140
+#. search.py:140
 msgid "File"
 msgstr ""
 
-#: search.py:156
+#. search.py:156
 msgid "Path"
 msgstr ""
 
-#: search.py:184
+#. search.py:184
 msgid "Searching..."
 msgstr ""
 
-#: search.py:198 search.py:199
+#. search.py:198 search.py:199
 #, fuzzy
 msgid "Search Stopped"
 msgstr "搜索主目录文件夹"
 
-#: search.py:215
+#. search.py:215
 msgid "Searching: "
 msgstr ""
 
-#: search.py:220
+#. search.py:220
 msgid "Error: insufficient permissions to read folder "
 msgstr ""
 
-#: search.py:252
+#. search.py:252
 #, fuzzy
 msgid "Search Completed"
 msgstr "搜索主目录文件夹"
 
-#: search.py:259
+#. search.py:259
 msgid "Skipping"
 msgstr ""
 
-#: search.py:259
+#. search.py:259
 msgid " - directory already searched"
 msgstr ""
 
@@ -206,6 +206,13 @@ msgstr "常规设置"
 msgid "User section"
 msgstr "用户部分"
 
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+msgid "Custom places"
+msgstr "自定义位置"
+
 #. settings-schema.json->systemSection->title
 msgid "System section"
 msgstr "系统部分"
@@ -246,22 +253,20 @@ msgstr "留空则禁用"
 msgid "Show desktop"
 msgstr "显示桌面"
 
-#. settings-schema.json->userCustomPlaces->description
-#. settings-schema.json->systemCustomPlaces->description
-msgid "Custom places"
-msgstr "自定义位置"
-
-#. settings-schema.json->userCustomPlaces->tooltip
-#. settings-schema.json->systemCustomPlaces->tooltip
-#, fuzzy
-msgid ""
-"List of uris/file paths to be included. Entries may be separated by either a "
-"comma(,) or by a new-line. You can set the name to be displayed by adding :"
-"customName after the location. You can likewise set an icon name by adding :"
-"iconName after the custom name."
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
 msgstr ""
-"要包含uri/文件路径的列表。条目可以用逗号(,)或换行符隔开。您可以通过在位置后面"
-"添加 :自定义名称 设置要显示的名称。"
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr ""
 
 #. settings-schema.json->showTrash->description
 msgid "Show trash"
@@ -342,4 +347,8 @@ msgstr ""
 
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"
+msgstr ""
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
 msgstr ""

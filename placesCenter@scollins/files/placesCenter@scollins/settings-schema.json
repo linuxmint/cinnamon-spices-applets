@@ -10,12 +10,12 @@
         "userPage": {
             "type": "page",
             "title": "User",
-            "sections": ["userSection"]
+            "sections": ["userSection", "userSectionCustomPlaces"]
         },
         "systemPage": {
             "type": "page",
             "title": "System",
-            "sections": ["systemSection"]
+            "sections": ["systemSection", "systemSectionCustomPlaces"]
         },
         "recentPage": {
             "type": "page",
@@ -35,12 +35,22 @@
         "userSection": {
             "type": "section",
             "title": "User section",
-            "keys": ["showDesktop", "showTrash", "userCustomPlaces"]
+            "keys": ["showDesktop", "showTrash"]
+        },
+        "userSectionCustomPlaces": {
+            "type": "section",
+            "title": "Custom places",
+            "keys": ["listUserCustomPlaces", "btnIconBrowser"]
         },
         "systemSection": {
             "type": "section",
             "title": "System section",
-            "keys": ["showComputer", "showRoot", "showVolumes", "onlyShowMounted", "showNetwork", "systemCustomPlaces"]
+            "keys": ["showComputer", "showRoot", "showVolumes", "onlyShowMounted", "showNetwork"]
+        },
+        "systemSectionCustomPlaces": {
+            "type": "section",
+            "title": "Custom places",
+            "keys": ["listSystemCustomPlaces", "btnIconBrowser"]
         },
         "recentSection": {
             "type": "section",
@@ -65,7 +75,7 @@
     "keyOpen": {
         "type": "keybinding",
         "description": "Menu shortcut key",
-        "default": "<Super>p"
+        "default": ""
     },
 
     "iconSize": {
@@ -92,12 +102,20 @@
         "default": true
     },
 
-    "userCustomPlaces": {
-        "type": "textview",
+    "listUserCustomPlaces": {
+        "type": "list",
         "description": "Custom places",
-        "default": "",
-        "height": 50,
-        "tooltip": "List of uris/file paths to be included. Entries may be separated by either a comma(,) or by a new-line. You can set the name to be displayed by adding :customName after the location. You can likewise set an icon name by adding :iconName after the custom name."
+        "default": [],
+        "columns" : [
+            {"id": "uri", "title": "URI", "type": "string", "expand-width": true},
+            {"id": "name", "title": "Name", "type": "string", "expand-width": true},
+            {"id": "icon", "title": "Icon Name", "type": "string", "expand-width": true}
+        ]
+    },
+
+    "userCustomPlaces": {
+        "type": "generic",
+        "default": ""
     },
 
     "showTrash": {
@@ -143,18 +161,26 @@
         "default": true
     },
 
-    "systemCustomPlaces": {
-        "type": "textview",
+    "listSystemCustomPlaces": {
+        "type": "list",
         "description": "Custom places",
-        "default": "",
-        "height": 50,
-        "tooltip": "List of uris/file paths to be included. Entries may be separated by either a comma(,) or by a new-line. You can set the name to be displayed by adding :customName after the location. You can likewise set an icon name by adding :iconName after the custom name."
+        "default": [],
+        "columns" : [
+            {"id": "uri", "title": "URI", "type": "string", "expand-width": true},
+            {"id": "name", "title": "Name", "type": "string", "expand-width": true},
+            {"id": "icon", "title": "Icon Name", "type": "string", "expand-width": true}
+        ]
+    },
+
+    "systemCustomPlaces": {
+        "type": "generic",
+        "default": ""
     },
 
     "showRecentDocuments": {
         "type": "checkbox",
         "description": "Show recent documents",
-        "default": false
+        "default": true
     },
 
     "recentSizeLimit": {
@@ -184,5 +210,17 @@
         "type": "button",
         "description": "Privacy",
         "callback": "on_btnPrivacy_pressed"
+    },
+
+    "iconBrowserIsPresent": {
+        "type": "generic",
+        "default": false
+    },
+
+    "btnIconBrowser": {
+        "type": "button",
+        "dependency": "iconBrowserIsPresent",
+        "description": "Icon browser",
+        "callback": "on_btnIconBrowser_pressed"
     }
 }
