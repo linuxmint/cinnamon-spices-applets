@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: sessionManager@scollins 1.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"POT-Creation-Date: 2025-09-27 10:12+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -21,39 +21,39 @@ msgstr ""
 msgid "Session"
 msgstr ""
 
-#. applet.js:228
+#. applet.js:240
 msgid "Lock Screen"
 msgstr ""
 
-#. applet.js:232
+#. applet.js:246
 msgid "Switch User"
 msgstr ""
 
-#. applet.js:237
+#. applet.js:252
 msgid "Guest Session"
 msgstr ""
 
-#. applet.js:242
+#. applet.js:258
 msgid "Log Off"
 msgstr ""
 
-#. applet.js:248
+#. applet.js:269
 msgid "Suspend"
 msgstr ""
 
-#. applet.js:253
+#. applet.js:275
 msgid "Sleep"
 msgstr ""
 
-#. applet.js:258
+#. applet.js:281
 msgid "Hibernate"
 msgstr ""
 
-#. applet.js:264
+#. applet.js:292
 msgid "Restart"
 msgstr ""
 
-#. applet.js:268
+#. applet.js:298
 msgid "Shut Down"
 msgstr ""
 
@@ -101,4 +101,44 @@ msgstr ""
 
 #. settings-schema.json->symbolicMenuIcons->description
 msgid "Symbolic icons in menu"
+msgstr ""
+
+#. settings-schema.json->menuOptions->description
+msgid "Menu Options"
+msgstr ""
+
+#. settings-schema.json->showLockScreen->description
+msgid "Show Lock Screen option"
+msgstr ""
+
+#. settings-schema.json->showSwitchUser->description
+msgid "Show Switch User option"
+msgstr ""
+
+#. settings-schema.json->showGuestSession->description
+msgid "Show Guest Session option"
+msgstr ""
+
+#. settings-schema.json->showLogOff->description
+msgid "Show Log Off option"
+msgstr ""
+
+#. settings-schema.json->showSuspend->description
+msgid "Show Suspend option"
+msgstr ""
+
+#. settings-schema.json->showSleep->description
+msgid "Show Sleep option"
+msgstr ""
+
+#. settings-schema.json->showHibernate->description
+msgid "Show Hibernate option"
+msgstr ""
+
+#. settings-schema.json->showRestart->description
+msgid "Show Restart option"
+msgstr ""
+
+#. settings-schema.json->showShutDown->description
+msgid "Show Shut Down option"
 msgstr ""
