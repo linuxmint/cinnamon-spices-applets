@@ -6,6 +6,7 @@
 * Fixes [[weather@mockturtl] - UV index options for Panel #7399](https://github.com/linuxmint/cinnamon-spices-applets/issues/7399) - UV index for the next h hours doesn't exist in most of the providers
 * GeoClue2 is borderline useless for automation location lookup so be a lot stricter when allocating time for it. Hopefully this is the cause of most of the issue reports
 * Fixes [weather@mockturl - #7624](https://github.com/linuxmint/cinnamon-spices-applets/issues/7624)
+* Update Serbian translations by minciv@protonmail.com
 
 ## 3.6.7
 
