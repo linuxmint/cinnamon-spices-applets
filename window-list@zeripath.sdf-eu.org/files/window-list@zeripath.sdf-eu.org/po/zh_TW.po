@@ -133,7 +133,7 @@ msgstr ""
 
 #. settings-schema.json->window-preview->description
 msgid "Show window thumbnails on hover"
-msgstr "滑鼠懸停時顯示視窗縮圖"
+msgstr "滑鼠游標停留時顯示視窗縮圖"
 
 #. settings-schema.json->window-preview-show-label->description
 msgid "Show title above thumbnail"
