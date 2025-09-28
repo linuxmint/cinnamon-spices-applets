@@ -2,22 +2,22 @@
 # Copyright (C) 2011 to 2024, Mauricio Barraza, jorgenqv and Åke Engelbrektson
 # This file is distributed under the same license as the gnome-shell-extension-weather package.
 # Mauricio Barraza <mauricio@barraza.se>, 2011.
-# jorgenqv <jorgenqv@yahoo.com> - 2014, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024
+# jorgenqv <jorgenqv@yahoo.com> - 2014, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024, 2025
 # Åke Engelbrektson <eson@svenskasprakfiler.se> - 2017, 2019
 msgid ""
 msgstr ""
-"Project-Id-Version: weather@mockturtl 3.6.4\n"
+"Project-Id-Version: weather@mockturtl 3.6.8\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-28 09:12+0100\n"
-"PO-Revision-Date: 2024-09-02 22:43+0200\n"
+"PO-Revision-Date: 2025-09-28 22:21+0200\n"
 "Last-Translator: jorgenqv <jorgenqv@yahoo.com>\n"
 "Language-Team: \n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #. 3.8/weather-applet.js:19744
@@ -1528,7 +1528,7 @@ msgstr ""
 
 #. 3.8/weather-applet.js:8425
 msgid "Low"
-msgstr ""
+msgstr "Lågt"
 
 #. 3.8/weather-applet.js:8428 3.8/weather-applet.js:10055
 msgid "Moderate"
@@ -1536,17 +1536,15 @@ msgstr "Måttligt"
 
 #. 3.8/weather-applet.js:8431
 msgid "High"
-msgstr ""
+msgstr "Högt"
 
 #. 3.8/weather-applet.js:8434
-#, fuzzy
 msgid "Very High"
-msgstr "Mycket god"
+msgstr "Mycket högt"
 
 #. 3.8/weather-applet.js:8437
-#, fuzzy
 msgid "Extreme"
-msgstr "Extremt regn"
+msgstr "Extremt"
 
 #. 3.8/weather-applet.js:9661
 msgid ""
@@ -1923,12 +1921,10 @@ msgid "Chance of Thunderstorms"
 msgstr "Risk för åskväder"
 
 #. 3.8/weather-applet.js:16701 3.8/weather-applet.js:16702
-#, fuzzy
 msgid "Light Rain"
 msgstr "Lättare regn"
 
 #. 3.8/weather-applet.js:16709 3.8/weather-applet.js:16710
-#, fuzzy
 msgid "Light Sleet"
 msgstr "Lätt slask"
 
@@ -2093,23 +2089,23 @@ msgstr "Nederbörd kommer att börja inom {precipStart} minuter"
 
 #. 3.8/weather-applet.js:18569
 msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Liten risk för skador från solexponering, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:18573
 msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Medelrisk för skador från solexponering, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:18577
 msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Hög risk för skador från solexponering, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:18581
 msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
-msgstr ""
+msgstr "Mycket stor risk för skador från solexponering, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:18585
 msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Extrem risk för skador från solexponering, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:18703
 msgid "Forecast parsing failed, see logs for more details."
@@ -3082,9 +3078,8 @@ msgid "Test your command"
 msgstr "Testa ditt kommando"
 
 #. 3.8->settings-schema.json->uvIndex->description
-#, fuzzy
 msgid "Enable displaying UV Index"
-msgstr "Aktivera visning av vädervarningar"
+msgstr "Aktivera visning av UV-index"
 
 #. 3.8->settings-schema.json->uvIndex->tooltip
 msgid ""
@@ -3092,3 +3087,6 @@ msgid ""
 "next to sunrise/sunset times. It will not show if the UV index is low risk "
 "(0-2)."
 msgstr ""
+"Om din väderlekstjänst stöder det så kommer UV-indexet att visas i popup-"
+"menyn bredvid soluppgång/solnedgångs tiderna. Detta visas inte om UV-indexet "
+"är låg risk (0-2)."
