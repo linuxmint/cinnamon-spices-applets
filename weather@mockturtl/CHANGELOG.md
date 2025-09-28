@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.6.8
+
+* Fixes [weather@mockturtl - superwide popup Pirateweather](https://github.com/linuxmint/cinnamon-spices-applets/issues/7389)
+* Fixes [[weather@mockturtl] - UV index options for Panel #7399](https://github.com/linuxmint/cinnamon-spices-applets/issues/7399) - UV index for the next h hours doesn't exist in most of the providers
+* GeoClue2 is borderline useless for automation location lookup so be a lot stricter when allocating time for it. Hopefully this is the cause of most of the issue reports
+* Fixes [weather@mockturl - #7624](https://github.com/linuxmint/cinnamon-spices-applets/issues/7624)
+
 ## 3.6.7
 
 * Add Slovenian translation made by Tit Elmund
@@ -68,14 +75,14 @@
 ## 3.5.0
 
 * Resolve- [Feature Request: Weather applet should show weather alerts/warnings #5546](https://github.com/linuxmint/cinnamon-spices-applets/issues/5546)
-* OpenWeatherMap sunsets it's OneCall API 2.5 in **June 2024** and they don't seem to want to enable 3.0 for the opensource plan for 
-  me. So I switch to Open-Meteo as the default and break OWM provider 
+* OpenWeatherMap sunsets it's OneCall API 2.5 in **June 2024** and they don't seem to want to enable 3.0 for the opensource plan for
+  me. So I switch to Open-Meteo as the default and break OWM provider
   into 2, one without key and one with key.
 * Fixed refreshing problem on Cinnamon 3.8 forever timing out.
 
 ## 3.4.3
 
-* Fix [#5107](https://github.com/linuxmint/cinnamon-spices-applets/issues/5107) - Do not display null if there is no temperature provided on the applet label. 
+* Fix [#5107](https://github.com/linuxmint/cinnamon-spices-applets/issues/5107) - Do not display null if there is no temperature provided on the applet label.
 * Fix [#5972](https://github.com/linuxmint/cinnamon-spices-applets/issues/5972) - Do not use locale explicitly when displaying dates, just use the system one and be more flexible about selecting locale.
 * Fix [#5990](https://github.com/linuxmint/cinnamon-spices-applets/issues/5990) - error logging crashes if error is not specified.
 * Add Known Issue to README
@@ -124,7 +131,7 @@ Fix nominatim not getting location data due to API changes. Related issues:
 
 ## 3.3.0
 
-* Fix [#4801](https://github.com/linuxmint/cinnamon-spices-applets/issues/4801) - Link to dmi.dk location not working 
+* Fix [#4801](https://github.com/linuxmint/cinnamon-spices-applets/issues/4801) - Link to dmi.dk location not working
 * Fix [#4800](https://github.com/linuxmint/cinnamon-spices-applets/issues/4800) - Wrong icons (Tomorrow.io and US Weather)
 * Fix [#4780](https://github.com/linuxmint/cinnamon-spices-applets/issues/4780) - Hourly Weather Redesign
 * Fix [#4709](https://github.com/linuxmint/cinnamon-spices-applets/issues/4709) - the free space between the interface elements disappears
@@ -153,7 +160,7 @@ Fix nominatim not getting location data due to API changes. Related issues:
 
 ## 3.2.11
 
-* Fix issue where refresh loop wouldn't ever resume after a single configuration error  
+* Fix issue where refresh loop wouldn't ever resume after a single configuration error
 
 ## 3.2.10
 
@@ -617,7 +624,7 @@ New stuff:
 
 ## 2.1.4
 
-* Applet did not load on Cinnamon version 3.6, it seems it needs the separate folder named 3.6.  
+* Applet did not load on Cinnamon version 3.6, it seems it needs the separate folder named 3.6.
   So now we have 3.8 for 3.8+, 3.6 for 3.6, and everything below uses the version in root. All working for real now..
 * DarkSky was not using TimeZone information for displaying times and forecast days
 
