@@ -50,4 +50,4 @@ msgstr "圖示"
 
 #. settings-schema.json->show-terminal->description
 msgid "Add terminal button to menu items"
-msgstr "在選單項目中加入終端機按鈕"
+msgstr "在選單選項中加入終端機按鈕"

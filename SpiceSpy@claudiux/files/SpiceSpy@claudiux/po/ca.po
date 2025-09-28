@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-25 23:34+0200\n"
-"PO-Revision-Date: 2025-02-13 20:49+0100\n"
+"PO-Revision-Date: 2025-09-28 16:08+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. applet.js:201
 msgid "score"
@@ -35,13 +35,12 @@ msgid "translations"
 msgstr "traduccions"
 
 #. applet.js:312
-#, fuzzy
 msgid "Reload icons"
-msgstr "Recarregar aquesta miniaplicació"
+msgstr "Recarregar icones"
 
 #. applet.js:318
 msgid "Visit website"
-msgstr ""
+msgstr "Visitar el lloc web"
 
 #. applet.js:826
 msgid "Spices"
@@ -57,7 +56,7 @@ msgstr "Actualitzar"
 
 #. applet.js:938
 msgid "Refreshing in progress"
-msgstr ""
+msgstr "Recàrrega en procés"
 
 #. applet.js:949
 msgid "Configure..."
@@ -117,44 +116,43 @@ msgstr "Mida de la icona"
 
 #. settings-schema.json->icon-size->options
 msgid "16"
-msgstr ""
+msgstr "16"
 
 #. settings-schema.json->icon-size->options
 msgid "22"
-msgstr ""
+msgstr "22"
 
 #. settings-schema.json->icon-size->options
 msgid "24"
-msgstr ""
+msgstr "24"
 
 #. settings-schema.json->icon-size->options
 msgid "32"
-msgstr ""
+msgstr "32"
 
 #. settings-schema.json->icon-size->options
 msgid "48"
-msgstr ""
+msgstr "48"
 
 #. settings-schema.json->icon-size->options
 msgid "64"
-msgstr ""
+msgstr "64"
 
 #. settings-schema.json->icon-size->options
 msgid "96"
-msgstr ""
+msgstr "96"
 
 #. settings-schema.json->icon-size->options
 msgid "128"
-msgstr ""
+msgstr "128"
 
 #. settings-schema.json->show-translations->description
 msgid "Show number of translations in the menu"
 msgstr "Mostrar el número de traduccions al menú"
 
 #. settings-schema.json->show-commits->description
-#, fuzzy
 msgid "Show available updates in the menu"
-msgstr "Mostrar el número d'incidències al menú"
+msgstr "Mostrar les actualitzacions disponibles al menú"
 
 #. settings-schema.json->show-issues->description
 msgid "Show number of issues in the menu"

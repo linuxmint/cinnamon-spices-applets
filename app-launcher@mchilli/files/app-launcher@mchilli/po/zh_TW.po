@@ -246,7 +246,7 @@ msgstr "固定選單寬度"
 
 #. settings-schema.json->fixed-menu-width->tooltip
 msgid "Based on the largest submenu item, to prevent menu width flickering"
-msgstr "依最大子選單項目決定，以避免選單寬度閃爍"
+msgstr "依最大的子選單選項決定，以避免選單寬度閃爍"
 
 #. settings-schema.json->visible-app-icons->description
 msgid "Show Application Icons"

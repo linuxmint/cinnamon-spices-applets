@@ -453,7 +453,7 @@ msgid ""
 "When disabled it will use the current system theme's default color for panel "
 "items."
 msgstr ""
-"停用此選項後，小程式將採用目前系統佈景主題為面板項目設定的預設顏色。"
+"停用此選項後，小程式將採用目前系統佈景主題為面板元件設定的預設顏色。"
 
 #. 6.2->settings-schema.json->base-color->description
 msgid "Base Color"

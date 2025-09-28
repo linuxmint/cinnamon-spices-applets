@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-23 19:43+0200\n"
-"PO-Revision-Date: 2025-02-13 21:27+0100\n"
+"PO-Revision-Date: 2025-09-28 17:01+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. 6.2/applet.js:138 4.4/applet.js:72 5.4/applet.js:132 4.6/applet.js:73
 #. 2.8/applet.js:65 6.4/applet.js:188 3.4/applet.js:65
@@ -250,26 +250,27 @@ msgstr "Ordres"
 
 #. 6.4/applet.js:582
 msgid "Album Art desklet settings"
-msgstr ""
+msgstr "Configuració de la miniaplicació d'escriptori Àlbum Art"
 
 #. 6.4/applet.js:589
-#, fuzzy
 msgid "Show Album Art on desktop"
-msgstr "Mostrar la caràtula de l'àlbum com a icona"
+msgstr "Mostrar la caràtula de l'àlbum a l'escriptori"
 
 #. 6.4/applet.js:715
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Necessiteu la miniaplicació d'escriptori 'Àlbum Art 3.0'"
 
 #. 6.4/applet.js:716
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
 msgstr ""
+"Podeu instal·lar-la fent clic al primer botó i buscant la cadena de text "
+"Àlbum."
 
 #. 6.4/applet.js:717 6.4/applet.js:735
 msgid "Desklets"
-msgstr ""
+msgstr "Miniaplicacions d'escriptori"
 
 #. 6.4/applet.js:718 6.4/applet.js:736 6.4/applet.js:766
 msgid "Cancel"
@@ -277,13 +278,15 @@ msgstr "Cancel·la"
 
 #. 6.4/applet.js:733
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Necessiteu activar la miniaplicació d'escriptori 'Àlbum Art 3.0'"
 
 #. 6.4/applet.js:734
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
+"Podeu activar-la fent clic al primer botó, buscant la cadena de text Àlbum i "
+"afegint-la amb el botó [+]."
 
 #. metadata.json->name
 #. 6.4/applet.js:767
@@ -311,14 +314,12 @@ msgstr ""
 "Feu clic al botó de descàrrega, busqueu OSD150 i premeu el botó ⬇."
 
 #. 6.4/applet.js:1768
-#, fuzzy
 msgid "The 'imagemagick' package is required!"
-msgstr "Es necessita el paquet 'playerctl'!"
+msgstr "Es necessita el paquet 'imagemagick'!"
 
 #. 6.4/applet.js:1769
-#, fuzzy
 msgid "Please select 'Install imagemagick' in this menu"
-msgstr "Si us plau, seleccioneu 'Instal·la playerctl' en aquest menú"
+msgstr "Si us plau, seleccioneu 'Instal·la imagemagick' en aquest menú"
 
 #. 6.4->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
 #. 6.4/applet.js:1967
@@ -326,9 +327,8 @@ msgid "Remove the OsdWithNumber extension"
 msgstr "Elimina l'extensió OsdWithNumber"
 
 #. 6.4/applet.js:1984
-#, fuzzy
 msgid "Install imagemagick"
-msgstr "Instal·la playerctl"
+msgstr "Instal·la imagemagick"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
@@ -1067,13 +1067,12 @@ msgstr ""
 "exemple per a l'ordinador d'un infant."
 
 #. 6.4->settings-schema.json->page_menus->title
-#, fuzzy
 msgid "Menus"
-msgstr "Menú"
+msgstr "Menús"
 
 #. 6.4->settings-schema.json->sectionMenu2->title
 msgid "Context Menu"
-msgstr ""
+msgstr "Menú contextual"
 
 #. 6.4->settings-schema.json->sectionIcon1->title
 msgid "Icon appearance"
@@ -1097,7 +1096,7 @@ msgstr "Ordres personalitzades"
 
 #. 6.4->settings-schema.json->dontShowAnyImageInMenu->description
 msgid "Do not show any cover art in the menu"
-msgstr ""
+msgstr "No mostris la caràtula de l'àlbum al menú"
 
 #. 6.4->settings-schema.json->showMediaOptical->description
 msgid "Show Media-Optical icon"
@@ -1105,45 +1104,43 @@ msgstr "Mostra la icona de mitjans òptics"
 
 #. 6.4->settings-schema.json->viewFullAlbumArt->description
 msgid "View Full Album Art"
-msgstr ""
+msgstr "Mostra tota la caràtula de l'àlbum"
 
 #. 6.4->settings-schema.json->viewFullAlbumArt->tooltip
 msgid ""
 "When unchecked, Album Art in the menu may be partially covered by Artist and "
 "Title."
 msgstr ""
+"En estar desactivat, és possible que la caràtula de l'àlbum quedi coberta "
+"per l'artista o el títol."
 
 #. 6.4->settings-schema.json->keepAppListOpen->description
-#, fuzzy
 msgid "Keep the App selector open"
-msgstr "Mantenir obert el selector de reproductors"
+msgstr "Manté el selector d'aplicacions obert"
 
 #. 6.4->settings-schema.json->keepOutputListOpen->description
-#, fuzzy
 msgid "Keep the Output Device selector open"
-msgstr "Mantenir obert el selector de reproductors"
+msgstr "Manté el selector de dispositius de sortida obert"
 
 #. 6.4->settings-schema.json->keepInputListOpen->description
-#, fuzzy
 msgid "Keep the Input Device selector open"
-msgstr "Mantenir obert el selector de reproductors"
+msgstr "Manté el selector de dispositius d'entrada obert"
 
 #. 6.4->settings-schema.json->keepCommandListOpen->description
-#, fuzzy
 msgid "Keep the Command selector open"
-msgstr "Mantenir obert el selector de reproductors"
+msgstr "Manté el selector d'ordres obert"
 
 #. 6.4->settings-schema.json->toolongchars->description
 msgid "If the title is too long, end it with:"
-msgstr ""
+msgstr "Si el títol és massa llarga, acaba en:"
 
 #. 6.4->settings-schema.json->toolongchars->tooltip
 msgid "Emoji accepted"
-msgstr ""
+msgstr "S'accepten emojis"
 
 #. 6.4->settings-schema.json->showalbumDelay->description
 msgid "Delay between icon and album art display (seconds)"
-msgstr ""
+msgstr "Retard entre la mostra de la icona i la caràtula de l'àlbum (segons)"
 
 #. 6.4->settings-schema.json->reverseScrolling->description
 msgid "Reverse scrolling effect"
@@ -1151,7 +1148,7 @@ msgstr "Inverteix l'efecte de desplaçament"
 
 #. 6.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether or not to show the media keys OSD"
-msgstr "Controla si es mostren o no les tecles multimèdia "
+msgstr "Controla si es mostren o no les tecles multimèdia"
 
 #. 6.4->settings-schema.json->showVolumeValue->description
 msgid "Show volume level in OSD"

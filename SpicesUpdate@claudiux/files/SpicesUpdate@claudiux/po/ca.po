@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-08 21:23+0200\n"
-"PO-Revision-Date: 2025-02-13 20:50+0100\n"
+"PO-Revision-Date: 2025-09-28 16:10+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. 4.2/SU_messageTray.js:1282 4.8/SU_messageTray.js:1282
 #. 4.6/SU_messageTray.js:1282 5.6/SU_messageTray.js:1282
@@ -2436,7 +2436,7 @@ msgstr ""
 #. 6.4->settings-schema.json->btn_tickallthenrefresh_themes->description
 #. 6.4->settings-schema.json->btn_tickallthenrefresh_actions->description
 msgid "Tick all the first boxes then refresh"
-msgstr ""
+msgstr "Marca totes les primeres opcions i actualitza"
 
 #. 6.0->settings-schema.json->check_actions->description
 #. 6.4->settings-schema.json->check_actions->description
@@ -2536,11 +2536,9 @@ msgstr ""
 "Spices ordenades per data."
 
 #. 6.4->settings-schema.json->section_general5->title
-#, fuzzy
 msgid "Dependencies"
-msgstr "Revisant dependències"
+msgstr "Dependències"
 
 #. 6.4->settings-schema.json->dont_check_dependencies->description
-#, fuzzy
 msgid "Do not check dependencies"
-msgstr "Revisant dependències"
+msgstr "No comprovis les dependències"

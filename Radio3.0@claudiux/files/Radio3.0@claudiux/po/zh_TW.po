@@ -492,7 +492,7 @@ msgstr "啟動時開啟廣播"
 
 #. applet.js:5112
 msgid "Display Station Logo"
-msgstr "顯示電台標誌"
+msgstr "顯示電台 Logo"
 
 #. applet.js:5122
 msgid "Album Art desklet settings"
@@ -1132,7 +1132,7 @@ msgid ""
 "Code"
 msgstr ""
 "國家\n"
-"代碼"
+"代號"
 
 #. settings-schema.json->search-list->columns->title
 #. settings-schema.json->search-country->description
@@ -1411,16 +1411,16 @@ msgstr ""
 
 #. settings-schema.json->show-system-items->description
 msgid "Show system items in the menu"
-msgstr "在選單中顯示系統項目"
+msgstr "在選單中顯示系統選項"
 
 #. settings-schema.json->show-system-items->tooltip
 msgid ""
 "Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
-msgstr "要在選單中顯示「設定...」與「音效設定」項目嗎？"
+msgstr "要在選單中顯示「設定...」與「音效設定」選項嗎？"
 
 #. settings-schema.json->show-reload->description
 msgid "Show the 'Reload this applet' item in the contextual menu"
-msgstr "在右鍵選單中顯示「重新載入這個小程式」項目"
+msgstr "在右鍵選單中顯示「重新載入這個小程式」選項"
 
 #. settings-schema.json->show-reload->tooltip
 msgid "For developers only"
@@ -1523,11 +1523,11 @@ msgstr "錄音時符號圖示顏色"
 
 #. settings-schema.json->show-favicon->description
 msgid "Display the logo of the radio station listened to"
-msgstr "顯示正在收聽的廣播電台標誌"
+msgstr "顯示正在收聽的廣播電台 Logo"
 
 #. settings-schema.json->show-favicon->tooltip
 msgid "Replace this applet icon with the radio station logo, if it exists."
-msgstr "若廣播電台有提供標誌，則以此取代小程式圖示。"
+msgstr "若廣播電台有提供 Logo，則以此取代小程式圖示。"
 
 #. settings-schema.json->network-quality->description
 msgid "Network Quality"

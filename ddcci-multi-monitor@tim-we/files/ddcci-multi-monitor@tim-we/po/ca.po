@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ddcci-multi-monitor@tim-we 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-28 16:33+0200\n"
-"PO-Revision-Date: 2024-07-21 03:21+0200\n"
+"POT-Creation-Date: 2025-08-22 21:49+0200\n"
+"PO-Revision-Date: 2025-09-28 16:34+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. metadata.json->description
 #. applet.js:21
@@ -25,7 +25,7 @@ msgstr "Ajusta la brillantor del monitor a través de DDC/CI"
 
 #. applet.js:169
 msgid "Use for scroll/click"
-msgstr ""
+msgstr "Utilitza per fer desplaçaments/clic"
 
 #. applet.js:300
 msgid "Detect displays"
@@ -53,7 +53,7 @@ msgstr "Multi-Monitor DDC/CI"
 
 #. settings-schema.json->page_general->title
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #. settings-schema.json->page_retry_detection->title
 msgid "Detection"
@@ -61,19 +61,19 @@ msgstr ""
 
 #. settings-schema.json->section_appearance->title
 msgid "Appearance"
-msgstr ""
+msgstr "Aparença"
 
 #. settings-schema.json->section_monitor->title
 msgid "Monitor Setup"
-msgstr ""
+msgstr "Preparació del monitor"
 
 #. settings-schema.json->section_scrolling->title
 msgid "Scrolling Settings"
-msgstr ""
+msgstr "Ajusts de desplaçament"
 
 #. settings-schema.json->section_togglepoints->title
 msgid "Toggle Points"
-msgstr ""
+msgstr "Punts de commutació"
 
 #. settings-schema.json->section_retry_detection->title
 msgid "Automatic Retry Detection"
@@ -84,10 +84,12 @@ msgid ""
 "Text shown next to the icon in the panel.\n"
 "Leave empty for no label."
 msgstr ""
+"Text mostrat al costat de la icona al tauler.\n"
+"Deixeu-ho buit per a què no hi hagi etiqueta."
 
 #. settings-schema.json->switch_show-bus-number->description
 msgid "Show bus number next to the detected monitors."
-msgstr ""
+msgstr "Mostrar el número de bus al costat dels monitors detectats."
 
 #. settings-schema.json->switch_manual-select-monitors->description
 msgid ""
@@ -95,63 +97,70 @@ msgid ""
 "Switch to enable custom monitor selection.\n"
 "This will add checkbox options for each detected monitor."
 msgstr ""
+"Per defecte, el desplaçament i els punts de commutació ajustaran la "
+"brillantor per a tots els monitors.\n"
+"Canvieu-ho per tal d'activar la selecció personalitzada de monitors.\n"
+"Això inclourà caselles per a definir els paràmetres en cada monitor detectat."
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "10"
-msgstr ""
+msgstr "10"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "20"
-msgstr ""
+msgstr "20"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "50"
-msgstr ""
+msgstr "50"
 
 #. settings-schema.json->combobox_scroll-step->description
-#, fuzzy
 msgid "Adjustment step for brightness"
-msgstr "Ajusta la brillantor del monitor a través de DDC/CI"
+msgstr "Ajusta la variació de la brillantor per cada pas"
 
 #. settings-schema.json->switch_use-toggle-points->description
 msgid ""
 "Enable toggle points for brightness adjustment.\n"
 "(via mouse middle click)"
 msgstr ""
+"Activa els punts de commutació pels ajusts de brillantor.\n"
+"(a través del clic del mig del ratolí)"
 
 #. settings-schema.json->spinbutton_num-of-toggle-points->description
 msgid ""
 "Number of toggle points for brightness adjustment\n"
 "(only the first N toggle points will be used)"
 msgstr ""
+"Número de punts de commutació pels ajusts de brillantor\n"
+"(només s'utilitzaran els primers N punts)"
 
 #. settings-schema.json->scale_toggle_point_1->description
 msgid "Brightness level for toggle point 1"
-msgstr ""
+msgstr "Nivell de brillantor pel punt de commutació 1"
 
 #. settings-schema.json->scale_toggle_point_2->description
 msgid "Brightness level for toggle point 2"
-msgstr ""
+msgstr "Nivell de brillantor pel punt de commutació 2"
 
 #. settings-schema.json->scale_toggle_point_3->description
 msgid "Brightness level for toggle point 3"
-msgstr ""
+msgstr "Nivell de brillantor pel punt de commutació 3"
 
 #. settings-schema.json->switch_enable-retry-detection->description
 msgid ""
@@ -189,3 +198,8 @@ msgid ""
 "This is a JSON object where keys are bus numbers and values are true/false.\n"
 "Example: {\"1\":true,\"2\":false}"
 msgstr ""
+"Emmagatzema quins monitors estan actius per a les funcions de desplaçament/"
+"clic.\n"
+"Això és un objecte JSON on les claus són els números de bus i els valors són "
+"true/false.\n"
+"Per exemple: {\"1\":true,\"2\":false}"

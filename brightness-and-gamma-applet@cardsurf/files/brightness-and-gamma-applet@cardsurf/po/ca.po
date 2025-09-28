@@ -10,14 +10,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-26 20:09+0200\n"
-"PO-Revision-Date: 2024-07-21 03:09+0200\n"
+"PO-Revision-Date: 2025-09-28 16:26+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. applet.js:178 6.4/applet.js:265
 msgid "The following packages were not found:"
@@ -56,24 +56,24 @@ msgstr "Blau"
 
 #. 6.4/applet.js:45 6.4/applet.js:962
 msgid "Sunrise"
-msgstr ""
+msgstr "Sortida del sol"
 
 #. 6.4/applet.js:46 6.4/applet.js:964
 msgid "Sunset"
-msgstr ""
+msgstr "Posta de sol"
 
 #. 6.4/applet.js:729
 msgid "Reload"
-msgstr ""
+msgstr "Recarregar"
 
 #. 6.4/applet.js:739
 msgid "Configure Presets"
-msgstr ""
+msgstr "Configurar predefinicions"
 
 #. 6.4->settings-schema.json->page_presets->title
 #. 6.4/applet.js:749
 msgid "Presets"
-msgstr ""
+msgstr "Predefinicions"
 
 #. metadata.json->description
 msgid "Sets brightness and gamma levels of a screen"
@@ -86,7 +86,7 @@ msgstr "Miniaplicació de Brillantor i Gamma"
 #. settings-schema.json->configuration_start->description
 #. 6.4->settings-schema.json->section_config->title
 msgid "Configuration"
-msgstr ""
+msgstr "Configuració"
 
 #. settings-schema.json->apply_startup->description
 #. 6.4->settings-schema.json->apply_startup->description
@@ -254,16 +254,16 @@ msgstr "Icona mostrada al tauler"
 
 #. 6.4->settings-schema.json->page_general->title
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #. 6.4->settings-schema.json->section_presets->title
 #. 6.4->settings-schema.json->preset_list->description
 msgid "Your presets"
-msgstr ""
+msgstr "Predefinicions existents"
 
 #. 6.4->settings-schema.json->disable_nightmode->description
 msgid "Disable Night Mode"
-msgstr ""
+msgstr "Desactiva el mode nocturn"
 
 #. 6.4->settings-schema.json->disable_nightmode->tooltip
 msgid ""
@@ -271,6 +271,11 @@ msgid ""
 "This prevents the screen from flickering.\n"
 "The adjustment time can be up to twice the number of seconds indicated below."
 msgstr ""
+"Desactiva el mode nocturn de Cinnamon mentre aquesta miniaplicació estigui "
+"activa.\n"
+"Evita parpellejos del monitor.\n"
+"Aquest temps d'ajustament pot ser fins a dues vegades el número de segons "
+"indicats a sota."
 
 #. 6.4->settings-schema.json->smooth_duration-label->description
 msgid ""
@@ -280,22 +285,27 @@ msgid ""
 "0 means instantaneous changes.\n"
 "Recommended value: between 200 and 300."
 msgstr ""
+"Els canvis es fan pas per pas.\n"
+"Aquí definiu la duració (en mil·lisegons) de cada pas en què els valors es "
+"canvien per una unitat, si s'escau.\n"
+"0 significa canvis instantanis.\n"
+"Valor recomanat: entre 200 i 300."
 
 #. 6.4->settings-schema.json->smooth_duration->description
 msgid "Step duration (ms)"
-msgstr ""
+msgstr "Duració del pas (ms)"
 
 #. 6.4->settings-schema.json->apply_changing_monitors->description
 msgid "Apply when the number of monitors changes"
-msgstr ""
+msgstr "S'aplica quan el número de monitors canvia"
 
 #. 6.4->settings-schema.json->brightness_up_shortcut->description
 msgid "Hotkey to Increase brightness"
-msgstr ""
+msgstr "Drecera del teclat per a incrementar la brillantor"
 
 #. 6.4->settings-schema.json->brightness_down_shortcut->description
 msgid "Hotkey to Decrease brightness"
-msgstr ""
+msgstr "Drecera del teclat per a disminuir la brillantor"
 
 #. 6.4->settings-schema.json->preset_label->description
 msgid ""
@@ -304,54 +314,67 @@ msgid ""
 "Only the first Start at Sunrise and Start at Sunset checked boxes are taken "
 "into account."
 msgstr ""
+"Podeu definir o modificar predefinicions a sota, a les quals pot accedir-se "
+"des del menú contextual de la miniaplicació.\n"
+"Només es tenen en compte les primeres caselles d'inici amb la sortida i/o la "
+"posta del sol."
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid ""
 "Show\n"
 "in menu"
 msgstr ""
+"Mostra\n"
+"al menú"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
-#, fuzzy
 msgid ""
 "Gamma\n"
 "Red"
-msgstr "Gamma"
+msgstr ""
+"Gamma\n"
+"Vermella"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
-#, fuzzy
 msgid ""
 "Gamma\n"
 "Green"
-msgstr "Verd"
+msgstr ""
+"Gamma\n"
+"Verda"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
-#, fuzzy
 msgid ""
 "Gamma\n"
 "Blue"
-msgstr "Gamma"
+msgstr ""
+"Gamma\n"
+"Blava"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid ""
 "Start at\n"
 "Sunrise"
 msgstr ""
+"Comença\n"
+"En sortir el sol"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid ""
 "Start at\n"
 "Sunset"
 msgstr ""
+"Comença\n"
+"En posta de sol"
 
 #. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
 msgid "Set Sunrise and Sunset times"
-msgstr ""
+msgstr "Estableix horaris de sortida i posta del sol"
 
 #. 6.4->settings-schema.json->preset_reload->description
 msgid "Apply all changes"
-msgstr ""
+msgstr "Aplica tots els canvis"
