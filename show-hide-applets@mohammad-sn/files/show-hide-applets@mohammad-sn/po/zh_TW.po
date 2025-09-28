@@ -84,19 +84,19 @@ msgstr "自動隱藏延遲時間 "
 
 #. settings-schema.json->hoveractivates->description
 msgid "Activate on hover"
-msgstr "滑鼠懸停時啟用"
+msgstr "滑鼠游標停留時啟用"
 
 #. settings-schema.json->hoveractivates->tooltip
 msgid "show applets on mouse hover"
-msgstr "滑鼠懸停時顯示小程式"
+msgstr "滑鼠游標停留時顯示小程式"
 
 #. settings-schema.json->hoveractivateshide->description
 msgid "Hide on hovering again"
-msgstr "再次懸停時隱藏"
+msgstr "滑鼠游標再次停留時隱藏"
 
 #. settings-schema.json->hoveractivateshide->tooltip
 msgid "toggle visibility of applets on mouse hover"
-msgstr "滑鼠懸停時切換小程式顯示/隱藏"
+msgstr "滑鼠游標停留時切換小程式顯示/隱藏"
 
 #. settings-schema.json->hovertime->units
 msgid "miliseconds"
@@ -104,7 +104,7 @@ msgstr "毫秒"
 
 #. settings-schema.json->hovertime->description
 msgid "Hover activates/hides after "
-msgstr "滑鼠懸停後啟用/隱藏延遲時間 "
+msgstr "滑鼠游標停留後啟用/隱藏延遲時間 "
 
 #. settings-schema.json->autohiders->description
 msgid "Autohide reshowing applets"

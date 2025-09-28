@@ -90,7 +90,7 @@ msgstr "跟隨符號連結"
 
 #: search.py:117
 msgid "Search hidden"
-msgstr "搜尋隱藏項目"
+msgstr "搜尋隱藏內容"
 
 #: search.py:121
 msgid "Use regular expressions"

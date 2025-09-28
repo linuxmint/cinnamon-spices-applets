@@ -302,7 +302,7 @@ msgid ""
 "into account."
 msgstr ""
 "您可以在下方定義或修改預設組態，並可透過小程式的右鍵選單存取。\n"
-"請注意，系統只會採用第一個勾選的「日出時啟用」及「日落時啟用」項目。"
+"請注意，系統只會採用第一個勾選的「日出時啟用」及「日落時啟用」選項。"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Name"
