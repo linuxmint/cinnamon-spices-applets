@@ -13,7 +13,7 @@ import { Logger } from "../../lib/services/logger";
 import type { WeatherData, ForecastData, HourlyForecastData, BuiltinIcons, CustomIcons, AlertData, AlertLevel } from "../../weather-data";
 import { _, IsLangSupported } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
-import type { Config } from "../../config";
+import { Services, type Config } from "../../config";
 import type { WeatherbitAlertsResponse } from "./alerts";
 import type { WeatherBitCurrentWeatherData } from "./current";
 import type { WeatherBitDailyWeatherDataResponse } from "./daily";
@@ -27,7 +27,7 @@ export class Weatherbit extends BaseProvider {
 	//  Properties
 	//--------------------------------------------------------
 	public readonly prettyName = _("WeatherBit");
-	public readonly name = "Weatherbit";
+	public readonly name = Services.Weatherbit;
 	public readonly maxForecastSupport = 16;
 	public readonly website = "https://www.weatherbit.io/";
 	public readonly maxHourlyForecastSupport = 48;
