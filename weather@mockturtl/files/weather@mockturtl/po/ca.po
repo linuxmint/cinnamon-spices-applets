@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-28 09:12+0100\n"
-"PO-Revision-Date: 2024-08-21 19:12+0200\n"
+"PO-Revision-Date: 2025-09-28 17:07+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 "X-Project-Style: default\n"
 
 #. 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
@@ -1534,7 +1534,7 @@ msgstr ""
 
 #. 3.8/weather-applet.js:8425
 msgid "Low"
-msgstr ""
+msgstr "Baix"
 
 #. 3.8/weather-applet.js:8428 3.8/weather-applet.js:10055
 msgid "Moderate"
@@ -1542,17 +1542,15 @@ msgstr "Moderat"
 
 #. 3.8/weather-applet.js:8431
 msgid "High"
-msgstr ""
+msgstr "Alt"
 
 #. 3.8/weather-applet.js:8434
-#, fuzzy
 msgid "Very High"
-msgstr "Molt bo"
+msgstr "Molt Alt"
 
 #. 3.8/weather-applet.js:8437
-#, fuzzy
 msgid "Extreme"
-msgstr "Pluja extrema"
+msgstr "Extrem"
 
 #. 3.8/weather-applet.js:9661
 msgid ""
@@ -2098,23 +2096,23 @@ msgstr "La precipitació començarà en {precipStart} minuts"
 
 #. 3.8/weather-applet.js:18569
 msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Risc baix per exposició al sol, índex UV: {uvIndex}"
 
 #. 3.8/weather-applet.js:18573
 msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Risc moderat per exposició al sol, índex UV: {uvIndex}"
 
 #. 3.8/weather-applet.js:18577
 msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Risc alt per exposició al sol, índex UV: {uvIndex}"
 
 #. 3.8/weather-applet.js:18581
 msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
-msgstr ""
+msgstr "Risc molt alt per exposició al sol, índex UV: {uvIndex}"
 
 #. 3.8/weather-applet.js:18585
 msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Risc extrem per exposició al sol, índex UV: {uvIndex}"
 
 #. 3.8/weather-applet.js:18703
 msgid "Forecast parsing failed, see logs for more details."
@@ -3086,9 +3084,8 @@ msgid "Test your command"
 msgstr "Proveu la vostra ordre"
 
 #. 3.8->settings-schema.json->uvIndex->description
-#, fuzzy
 msgid "Enable displaying UV Index"
-msgstr "Activa la mostra d'alertes del temps"
+msgstr "Activa la mostra d'índex ultraviolat"
 
 #. 3.8->settings-schema.json->uvIndex->tooltip
 msgid ""
@@ -3096,3 +3093,6 @@ msgid ""
 "next to sunrise/sunset times. It will not show if the UV index is low risk "
 "(0-2)."
 msgstr ""
+"Si el vostre proveïdor ho suporta, es mostrarà l'índex ultraviolat al menú "
+"emergent, al costat dels temps de sortida i posta de sol. No es mostrarà si "
+"el risc és baix (0-2)."
