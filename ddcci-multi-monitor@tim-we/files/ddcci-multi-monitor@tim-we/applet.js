@@ -221,6 +221,11 @@ class DDCMultiMonitor extends Applet.TextIconApplet {
             this._updateMonitorSettings();
             this.updateMenu();
         });
+        // retry detection
+        this.settings.bind("switch_enable-retry-detection", "enableRetryDetection", null);
+        this.settings.bind("spinbutton_target-monitor-count", "targetMonitorCount", null);
+        this.settings.bind("spinbutton_max-retry-attempts", "maxRetryAttempts", null);
+        this.settings.bind("spinbutton_retry-delay", "retryDelay", null);
     }
 
     _loadActiveMonitors() {
@@ -315,13 +320,44 @@ class DDCMultiMonitor extends Applet.TextIconApplet {
         });
     }
 
-    async updateMonitors(init = true) {
+    async updateMonitors(init = true, retryCount = 0) {
         this.detecting = true;
-        log("Detecting displays...");
+        
+        if (!this.enableRetryDetection) {
+            log("Detecting displays...");
+        } else {
+            log(`Detecting displays... (attempt ${retryCount + 1})`);
+        }
+        
         this.monitors = (await getDisplays()).map((d) => {
             const isActive = !!this.activeMonitors[String(d.bus)];
             return new Monitor(d.index, d.name, d.bus, d.brightnessFeatureFlag, this.showBusNumber, isActive, this.manualSelectMonitors);
         });
+
+        // RETRY LOGIC
+        const foundMonitors = this.monitors.length;
+        const targetMonitors = this.enableRetryDetection ? this.targetMonitorCount : foundMonitors;
+        const shouldRetry = this.enableRetryDetection && 
+                        foundMonitors < targetMonitors && 
+                        retryCount < this.maxRetryAttempts;
+
+        if (this.enableRetryDetection) {
+            log(`Found ${foundMonitors}/${targetMonitors} monitors`);
+        }
+
+        // If we should retry, schedule it and return early
+        if (shouldRetry) {
+            const delayMs = this.retryDelay * 1000;
+            log(`Retrying detection in ${this.retryDelay} seconds... (${foundMonitors}/${targetMonitors} monitors found)`);
+            
+            this.detecting = false;
+            setTimeout(() => {
+                this.updateMonitors(false, retryCount + 1);
+            }, delayMs);
+            
+            return;
+        }
+        // END RETRY LOGIC
 
         if (this.monitors.length === 0) {
             log("Could not find any ddc/ci displays.", "warning");
@@ -339,6 +375,14 @@ class DDCMultiMonitor extends Applet.TextIconApplet {
         this.detecting = false;
         if (!init) {
             this.updateMenu();
+            
+            // Log completion message
+            if (this.enableRetryDetection) {
+                const message = foundMonitors >= targetMonitors ? 
+                            `Found all ${foundMonitors} expected monitors` :
+                            `Found only ${foundMonitors}/${targetMonitors} monitors after ${retryCount + 1} attempts`;
+                log(message);
+            }
         }
     }
 
