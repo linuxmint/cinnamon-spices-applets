@@ -10,14 +10,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-17 13:58+0200\n"
-"PO-Revision-Date: 2025-02-13 21:31+0100\n"
+"PO-Revision-Date: 2025-09-28 17:10+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. applet.js:54
 msgid "Applet"
@@ -45,7 +45,7 @@ msgstr "Extensions"
 
 #. applet.js:112
 msgid "RELOAD ALL"
-msgstr ""
+msgstr "RECARREGAR TOT"
 
 #. applet.js:241
 msgid "Middle-click: \n"
@@ -56,22 +56,21 @@ msgid "Show .xsession-errors"
 msgstr "Mostrar .xsession-errors"
 
 #. applet.js:242
-#, fuzzy
 msgid "Ctrl + Middle-click: \n"
-msgstr "Clic del mig:\n"
+msgstr "Ctrl + Clic del mig: \n"
 
 #. applet.js:242 applet.js:331
 msgid "Show latest messages"
-msgstr ""
+msgstr "Mostra els darrers missatges"
 
 #. applet.js:295 applet.js:537
 #, javascript-format
 msgid "%s latest messages"
-msgstr ""
+msgstr "%s darrers missatges"
 
 #. applet.js:295 applet.js:537
 msgid "min: 10. max: 250."
-msgstr ""
+msgstr "mín: 10. màx: 250."
 
 #. applet.js:348
 msgid "Restart Cinnamon"
@@ -95,7 +94,7 @@ msgstr "Recarregar l'extensió:"
 
 #. applet.js:450
 msgid "Reload Current Theme"
-msgstr ""
+msgstr "Recarrega el tema actual"
 
 #. applet.js:464
 msgid "--- Settings for ---"
@@ -185,28 +184,30 @@ msgstr "128"
 
 #. settings-schema.json->section2->description
 msgid "RELOAD ALL option"
-msgstr ""
+msgstr "Opció de RECARREGAR TOT"
 
 #. settings-schema.json->show_reload_all->description
 msgid "Show the RELOAD ALL option in submenus"
-msgstr ""
+msgstr "Mostra la opció RECARREGAR TOT als submenús"
 
 #. settings-schema.json->show_reload_all->tooltip
 msgid "Caution! Reloading all spices of a given type may lead to errors."
 msgstr ""
+"Alerta! Recarregar totes les espècies d'un tipus determinat pot causar "
+"errors."
 
 #. settings-schema.json->section3->description
 msgid "Latest messages"
-msgstr ""
+msgstr "Últims missatges"
 
 #. settings-schema.json->number_latest->description
 msgid "Number of latest messages to show"
-msgstr ""
+msgstr "Número d'últims missatges a mostrar"
 
 #. settings-schema.json->number_latest->tooltip
 msgid "(Including empty lines.)"
-msgstr ""
+msgstr "(Incloent línies buides.)"
 
 #. scripts/watch-xse-latest.sh:10 scripts/watch-xse.sh:8
 msgid "-d"
-msgstr ""
+msgstr "-d"
