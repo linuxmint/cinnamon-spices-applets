@@ -55,7 +55,7 @@
         "recentSection": {
             "type": "section",
             "title": "Recent documents",
-            "keys": ["showRecentDocuments", "recentSizeLimit", "recentShowUri", "btnPrivacy"]
+            "keys": ["showRecentDocuments", "sortingMethod", "recentSizeLimit", "recentShowUri", "btnPrivacy"]
         }
     },
 
@@ -181,6 +181,18 @@
         "type": "checkbox",
         "description": "Show recent documents",
         "default": true
+    },
+
+    "sortingMethod": {
+        "type": "combobox",
+        "default": "added",
+        "options": {
+            "Added time": "added",
+            "Access time": "access",
+            "Modification time": "modification"
+        },
+        "description": "Sorting method",
+        "dependency": "showRecentDocuments"
     },
 
     "recentSizeLimit": {

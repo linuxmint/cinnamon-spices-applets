@@ -311,6 +311,7 @@ class PlacesCenter extends Applet.TextIconApplet {
         //~ this.settings.bind("recentSizeLimit", "recentSizeLimit", this.buildRecentDocumentsSection);
         this.settings.bind("recentSizeLimit", "recentSizeLimit");
         //~ this.settings.bind("recentShowUri", "recentShowUri", this.buildRecentDocumentsSection);
+        this.settings.bind("sortingMethod", "sortingMethod");
         this.settings.bind("recentShowUri", "recentShowUri");
         this.settings.bind("iconBrowserIsPresent", "iconBrowserIsPresent");
         this.settings.bind("keyOpen", "keyOpen", this.setKeybinding);
@@ -574,7 +575,39 @@ class PlacesCenter extends Applet.TextIconApplet {
         if ( this.recentSection ) this.recentSection.removeAll();
         else this.recentSection = new PopupMenu.PopupMenuSection();
 
-        let recentDocuments = this.recentManager.get_items();
+        var recentDocuments = this.recentManager.get_items();
+
+        if (this.sortingMethod === "added") {
+            recentDocuments = recentDocuments.sort(
+                function(a, b) {
+                    if (!a || !b) return 0;
+                    const aAddedTime = a.get_added();
+                    const bAddedTime = b.get_added();
+                    if (!aAddedTime || !bAddedTime) return 0;
+                    return Math.sign(bAddedTime - aAddedTime);
+                }
+            );
+        } else if (this.sortingMethod === "access") {
+            recentDocuments = recentDocuments.sort(
+                function(a, b) {
+                    if (!a || !b) return 0;
+                    const aAccessTime = a.get_visited();
+                    const bAccessTime = b.get_visited();
+                    if (!aAccessTime || !bAccessTime) return 0;
+                    return Math.sign(bAccessTime - aAccessTime);
+                }
+            );
+        } else if (this.sortingMethod === "modification") {
+            recentDocuments = recentDocuments.sort(
+                function(a, b) {
+                    if (!a || !b) return 0;
+                    const aModifTime = a.get_modified();
+                    const bModifTime = b.get_modified();
+                    if (!aModifTime || !bModifTime) return 0;
+                    return Math.sign(bModifTime - aModifTime);
+                }
+            );
+        }
 
         let appOpeningFolders = Gio.app_info_get_default_for_type('inode/directory', false).get_executable(); // usually returns: nemo
 
