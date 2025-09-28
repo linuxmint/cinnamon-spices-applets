@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-28 00:16+0200\n"
+"POT-Creation-Date: 2025-09-28 21:40+0200\n"
 "PO-Revision-Date: 2024-05-13 12:54-0400\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
@@ -19,51 +19,51 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:153
+#. applet.js:154
 msgid "(Right click to open folder)"
 msgstr "(Haga clic con el botón derecho para abrir la carpeta)"
 
-#. applet.js:183
+#. applet.js:184
 msgid "Places"
 msgstr "Lugares"
 
-#. applet.js:364
+#. applet.js:374
 msgid "Search Home Folder"
 msgstr "Buscar en la carpeta personal"
 
-#. applet.js:389
+#. applet.js:399
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:398
+#. applet.js:408
 msgid "Search File System"
 msgstr "Buscar en el sistema de archivos"
 
-#. applet.js:423
+#. applet.js:433
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTOS RECIENTES"
 
-#. applet.js:437
+#. applet.js:447
 msgid "Clear"
 msgstr "Limpiar"
 
-#. applet.js:444
+#. applet.js:454
 msgid "Recent"
 msgstr "Recientes"
 
-#. applet.js:490
+#. applet.js:500
 msgid "Computer"
 msgstr "PC"
 
-#. applet.js:496
+#. applet.js:506
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#. applet.js:513
+#. applet.js:523
 msgid "Network"
 msgstr "Red"
 
-#. applet.js:648
+#. applet.js:690
 msgid "Trash"
 msgstr "Papelera"
 
@@ -302,6 +302,22 @@ msgstr "Mostrar «Red»"
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
 msgstr "Mostrar documentos recientes"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "5"

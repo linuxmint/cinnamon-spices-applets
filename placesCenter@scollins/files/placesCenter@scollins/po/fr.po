@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-28 00:16+0200\n"
-"PO-Revision-Date: 2025-09-28 00:17+0200\n"
+"POT-Creation-Date: 2025-09-28 21:40+0200\n"
+"PO-Revision-Date: 2025-09-28 21:43+0200\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,51 +19,51 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:153
+#. applet.js:154
 msgid "(Right click to open folder)"
 msgstr "(Clic droit pour ouvrir son dossier)"
 
-#. applet.js:183
+#. applet.js:184
 msgid "Places"
 msgstr "Emplacements"
 
-#. applet.js:364
+#. applet.js:374
 msgid "Search Home Folder"
 msgstr "Rechercher dans mon dossier personnel"
 
-#. applet.js:389
+#. applet.js:399
 msgid "SYSTEM"
 msgstr "SYSTÈME"
 
-#. applet.js:398
+#. applet.js:408
 msgid "Search File System"
 msgstr "Rechercher dans le système de fichiers"
 
-#. applet.js:423
+#. applet.js:433
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTS RÉCENTS"
 
-#. applet.js:437
+#. applet.js:447
 msgid "Clear"
 msgstr "Effacer"
 
-#. applet.js:444
+#. applet.js:454
 msgid "Recent"
 msgstr "Récents"
 
-#. applet.js:490
+#. applet.js:500
 msgid "Computer"
 msgstr "Ordinateur"
 
-#. applet.js:496
+#. applet.js:506
 msgid "File System"
 msgstr "Système de fichiers"
 
-#. applet.js:513
+#. applet.js:523
 msgid "Network"
 msgstr "Réseau"
 
-#. applet.js:648
+#. applet.js:690
 msgid "Trash"
 msgstr "Corbeille"
 
@@ -305,6 +305,22 @@ msgstr "Montrer le Réseau"
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
 msgstr "Montrer les Documents Récents"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr "Date d'ajout"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr "Date d'accès"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr "Date de modification"
+
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr "Méthode de tri"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "5"

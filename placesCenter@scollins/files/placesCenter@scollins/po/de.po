@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-28 00:16+0200\n"
+"POT-Creation-Date: 2025-09-28 21:40+0200\n"
 "PO-Revision-Date: 2021-02-24 21:50+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,51 +19,51 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. applet.js:153
+#. applet.js:154
 msgid "(Right click to open folder)"
 msgstr "(Rechtsklick zum Öffnen des Ordners)"
 
-#. applet.js:183
+#. applet.js:184
 msgid "Places"
 msgstr "Orte"
 
-#. applet.js:364
+#. applet.js:374
 msgid "Search Home Folder"
 msgstr "Persönlichen Ordner durchsuchen"
 
-#. applet.js:389
+#. applet.js:399
 msgid "SYSTEM"
 msgstr "SYSTEM"
 
-#. applet.js:398
+#. applet.js:408
 msgid "Search File System"
 msgstr "Dateisystem durchsuchen"
 
-#. applet.js:423
+#. applet.js:433
 msgid "RECENT DOCUMENTS"
 msgstr "ZULETZT VERWENDETE DATEIEN"
 
-#. applet.js:437
+#. applet.js:447
 msgid "Clear"
 msgstr "Leeren"
 
-#. applet.js:444
+#. applet.js:454
 msgid "Recent"
 msgstr ""
 
-#. applet.js:490
+#. applet.js:500
 msgid "Computer"
 msgstr "Rechner"
 
-#. applet.js:496
+#. applet.js:506
 msgid "File System"
 msgstr "Dateisystem"
 
-#. applet.js:513
+#. applet.js:523
 msgid "Network"
 msgstr "Netzwerk"
 
-#. applet.js:648
+#. applet.js:690
 msgid "Trash"
 msgstr "Papierkorb"
 
@@ -302,6 +302,22 @@ msgstr "Netzwerk anzeigen"
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
 msgstr "Kürzlich verwendete Dateien anzeigen"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "5"

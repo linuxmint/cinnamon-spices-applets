@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: placesCenter@scollins 2.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-28 00:16+0200\n"
+"POT-Creation-Date: 2025-09-28 21:40+0200\n"
 "PO-Revision-Date: 2025-08-04 00:13+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -16,51 +16,51 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:153
+#. applet.js:154
 msgid "(Right click to open folder)"
 msgstr "（點選滑鼠右鍵開啟資料夾）"
 
-#. applet.js:183
+#. applet.js:184
 msgid "Places"
 msgstr "位置"
 
-#. applet.js:364
+#. applet.js:374
 msgid "Search Home Folder"
 msgstr "搜尋家目錄"
 
-#. applet.js:389
+#. applet.js:399
 msgid "SYSTEM"
 msgstr "系統"
 
-#. applet.js:398
+#. applet.js:408
 msgid "Search File System"
 msgstr "搜尋檔案系統"
 
-#. applet.js:423
+#. applet.js:433
 msgid "RECENT DOCUMENTS"
 msgstr "最近的文件"
 
-#. applet.js:437
+#. applet.js:447
 msgid "Clear"
 msgstr "清除"
 
-#. applet.js:444
+#. applet.js:454
 msgid "Recent"
 msgstr "最近使用"
 
-#. applet.js:490
+#. applet.js:500
 msgid "Computer"
 msgstr "電腦"
 
-#. applet.js:496
+#. applet.js:506
 msgid "File System"
 msgstr "檔案系統"
 
-#. applet.js:513
+#. applet.js:523
 msgid "Network"
 msgstr "網路"
 
-#. applet.js:648
+#. applet.js:690
 msgid "Trash"
 msgstr "資源回收筒"
 
@@ -90,7 +90,7 @@ msgstr "跟隨符號連結"
 
 #. search.py:117
 msgid "Search hidden"
-msgstr "搜尋隱藏項目"
+msgstr "搜尋隱藏內容"
 
 #. search.py:121
 msgid "Use regular expressions"
@@ -297,6 +297,22 @@ msgstr "顯示網路"
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
 msgstr "顯示最近的文件"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "5"

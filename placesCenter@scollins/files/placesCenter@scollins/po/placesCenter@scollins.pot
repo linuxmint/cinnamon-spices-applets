@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: placesCenter@scollins 2.5.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-28 00:16+0200\n"
+"POT-Creation-Date: 2025-09-28 21:40+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,51 +17,51 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:153
+#. applet.js:154
 msgid "(Right click to open folder)"
 msgstr ""
 
-#. applet.js:183
+#. applet.js:184
 msgid "Places"
 msgstr ""
 
-#. applet.js:364
+#. applet.js:374
 msgid "Search Home Folder"
 msgstr ""
 
-#. applet.js:389
+#. applet.js:399
 msgid "SYSTEM"
 msgstr ""
 
-#. applet.js:398
+#. applet.js:408
 msgid "Search File System"
 msgstr ""
 
-#. applet.js:423
+#. applet.js:433
 msgid "RECENT DOCUMENTS"
 msgstr ""
 
-#. applet.js:437
+#. applet.js:447
 msgid "Clear"
 msgstr ""
 
-#. applet.js:444
+#. applet.js:454
 msgid "Recent"
 msgstr ""
 
-#. applet.js:490
+#. applet.js:500
 msgid "Computer"
 msgstr ""
 
-#. applet.js:496
+#. applet.js:506
 msgid "File System"
 msgstr ""
 
-#. applet.js:513
+#. applet.js:523
 msgid "Network"
 msgstr ""
 
-#. applet.js:648
+#. applet.js:690
 msgid "Trash"
 msgstr ""
 
@@ -294,6 +294,22 @@ msgstr ""
 
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
 msgstr ""
 
 #. settings-schema.json->recentSizeLimit->options

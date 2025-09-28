@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-28 00:16+0200\n"
+"POT-Creation-Date: 2025-09-28 21:40+0200\n"
 "PO-Revision-Date: 2024-06-18 15:39+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -19,51 +19,51 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:153
+#. applet.js:154
 msgid "(Right click to open folder)"
 msgstr "(Fare clic con il tasto destro per aprire la cartella)"
 
-#. applet.js:183
+#. applet.js:184
 msgid "Places"
 msgstr "Posizioni"
 
-#. applet.js:364
+#. applet.js:374
 msgid "Search Home Folder"
 msgstr "Cerca nella cartella Home"
 
-#. applet.js:389
+#. applet.js:399
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:398
+#. applet.js:408
 msgid "Search File System"
 msgstr "Cerca nel File System"
 
-#. applet.js:423
+#. applet.js:433
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTI RECENTI"
 
-#. applet.js:437
+#. applet.js:447
 msgid "Clear"
 msgstr "Pulisci"
 
-#. applet.js:444
+#. applet.js:454
 msgid "Recent"
 msgstr "Recenti"
 
-#. applet.js:490
+#. applet.js:500
 msgid "Computer"
 msgstr "Computer"
 
-#. applet.js:496
+#. applet.js:506
 msgid "File System"
 msgstr "File System"
 
-#. applet.js:513
+#. applet.js:523
 msgid "Network"
 msgstr "Rete"
 
-#. applet.js:648
+#. applet.js:690
 msgid "Trash"
 msgstr "Cestino"
 
@@ -303,6 +303,22 @@ msgstr "Mostra rete"
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
 msgstr "Mostra documenti recenti"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "5"

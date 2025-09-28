@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Places Center 2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-28 00:16+0200\n"
+"POT-Creation-Date: 2025-09-28 21:40+0200\n"
 "PO-Revision-Date: 2017-02-26 21:10+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -20,51 +20,51 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#. applet.js:153
+#. applet.js:154
 msgid "(Right click to open folder)"
 msgstr ""
 
-#. applet.js:183
+#. applet.js:184
 msgid "Places"
 msgstr "Lokacije"
 
-#. applet.js:364
+#. applet.js:374
 msgid "Search Home Folder"
 msgstr "Pretraži osobnu mapu"
 
-#. applet.js:389
+#. applet.js:399
 msgid "SYSTEM"
 msgstr "SUSTAV"
 
-#. applet.js:398
+#. applet.js:408
 msgid "Search File System"
 msgstr "Pretraži datotečni sustav"
 
-#. applet.js:423
+#. applet.js:433
 msgid "RECENT DOCUMENTS"
 msgstr "NEDAVNI DOKUMENTI"
 
-#. applet.js:437
+#. applet.js:447
 msgid "Clear"
 msgstr "Obriši"
 
-#. applet.js:444
+#. applet.js:454
 msgid "Recent"
 msgstr ""
 
-#. applet.js:490
+#. applet.js:500
 msgid "Computer"
 msgstr "Računalo"
 
-#. applet.js:496
+#. applet.js:506
 msgid "File System"
 msgstr "Datotečni sustav"
 
-#. applet.js:513
+#. applet.js:523
 msgid "Network"
 msgstr "Mreža"
 
-#. applet.js:648
+#. applet.js:690
 msgid "Trash"
 msgstr "Smeće"
 
@@ -305,6 +305,22 @@ msgstr "Prikaži mrežu"
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
 msgstr "Prikaži nedavne dokumente"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "5"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-28 00:16+0200\n"
+"POT-Creation-Date: 2025-09-28 21:40+0200\n"
 "PO-Revision-Date: 2017-05-02 21:02+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,51 +19,51 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#. applet.js:153
+#. applet.js:154
 msgid "(Right click to open folder)"
 msgstr ""
 
-#. applet.js:183
+#. applet.js:184
 msgid "Places"
 msgstr "位置"
 
-#. applet.js:364
+#. applet.js:374
 msgid "Search Home Folder"
 msgstr "搜索主目录文件夹"
 
-#. applet.js:389
+#. applet.js:399
 msgid "SYSTEM"
 msgstr "系统"
 
-#. applet.js:398
+#. applet.js:408
 msgid "Search File System"
 msgstr "搜索文件系统"
 
-#. applet.js:423
+#. applet.js:433
 msgid "RECENT DOCUMENTS"
 msgstr "最近的文档"
 
-#. applet.js:437
+#. applet.js:447
 msgid "Clear"
 msgstr "清除"
 
-#. applet.js:444
+#. applet.js:454
 msgid "Recent"
 msgstr ""
 
-#. applet.js:490
+#. applet.js:500
 msgid "Computer"
 msgstr "计算机"
 
-#. applet.js:496
+#. applet.js:506
 msgid "File System"
 msgstr "文件系统"
 
-#. applet.js:513
+#. applet.js:523
 msgid "Network"
 msgstr "网络"
 
-#. applet.js:648
+#. applet.js:690
 msgid "Trash"
 msgstr "回收站"
 
@@ -307,6 +307,22 @@ msgstr "显示网络"
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
 msgstr "显示最近的文本"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "5"
