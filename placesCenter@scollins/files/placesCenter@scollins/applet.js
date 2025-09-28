@@ -122,7 +122,8 @@ class PlaceMenuItem extends FolderTypeMenuItem {
 
         this.uri = uri;
 
-        this.connect("activate", Lang.bind(this, this.launch));
+        //~ this.connect("activate", Lang.bind(this, this.launch));
+        this.connect( "activate", (event) => this.launch(event) );
     }
 
     launch(event) {
@@ -196,20 +197,25 @@ class PlacesCenter extends Applet.TextIconApplet {
             // (Do not use a new RecentManager but the default one, synchronous with the Cinnamon menu.)
             this.recentManager = Gtk.RecentManager.get_default();
             //this.recentManager.connect("changed", Lang.bind(this, this.buildRecentDocumentsSection)); // Becomes useless.
+            this.recentManager.connect("changed", () => { this._toggle_menu_when_open() } ); // Becomes useless.
             //Main.placesManager.connect("bookmarks-updated", Lang.bind(this, this.buildUserSection)); // Avoid.
+            Main.placesManager.connect("bookmarks-updated", () => { this._toggle_menu_when_open() });
             this.volumeMonitor = Gio.VolumeMonitor.get();
             //~ this.volumeMonitor.connect("volume-added", Lang.bind(this, this.updateVolumes));
             //~ this.volumeMonitor.connect("volume-removed", Lang.bind(this, this.updateVolumes));
             //~ this.volumeMonitor.connect("mount-added", Lang.bind(this, this.updateVolumes));
             //~ this.volumeMonitor.connect("mount-removed", Lang.bind(this, this.updateVolumes));
-
-
-            //~ this.buildMenu();
+            this.volumeMonitor.connect("volume-added", () => { this._toggle_menu_when_open() } );
+            this.volumeMonitor.connect("volume-removed", () => { this._toggle_menu_when_open() } );
+            this.volumeMonitor.connect("mount-added", () => { this._toggle_menu_when_open() } );
+            this.volumeMonitor.connect("mount-removed", () => { this._toggle_menu_when_open() } );
         } catch(e) {
             global.logError("constructor: " + e);
         }
+    }
 
-        this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
+    _toggle_menu_when_open() {
+        if ( this.menu && this.menu.isOpen ) this.menu.toggle();
     }
 
     _onButtonPressEvent(actor, event) {
@@ -226,6 +232,9 @@ class PlacesCenter extends Applet.TextIconApplet {
             //~ this.buildRecentDocumentsSection(); // Avoid errors when a document has been moved.
         }
         this.menu.toggle();
+    }
+
+    on_applet_added_to_panel() {
         this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
     }
 
