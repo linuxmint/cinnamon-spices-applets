@@ -66,7 +66,7 @@
     },
     "commandUpgrade": {
         "type": "entry",
-        "default": "pkcon update",
+        "default": "pkcon update; echo Done; read",
         "description": "Upgrade packages command:",
         "dependency": "commandUpgrade-show"
     },

@@ -32,11 +32,10 @@ command)
     if command -v gsettings &>/dev/null; then
         term=$(gsettings get org.cinnamon.desktop.default-applications.terminal exec | tr -d \')
         termarg=$(gsettings get org.cinnamon.desktop.default-applications.terminal exec-arg | tr -d \')
-        bash_cmd="echo \"Executing $cmd\"; $cmd; echo -en \"\nDone - press enter to exit\"; read"
         if [ -n "$term" ]; then
             args=("$term")
             [ -n "$termarg" ] && args+=("$termarg")
-            args+=("$bash_cmd")
+            args+=("/usr/bin/bash" "-c" "$cmd")
             "${args[@]}"
         fi
     fi
