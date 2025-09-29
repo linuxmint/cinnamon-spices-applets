@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-28 21:40+0200\n"
+"POT-Creation-Date: 2025-09-29 18:31+0200\n"
 "PO-Revision-Date: 2024-05-13 12:54-0400\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
@@ -19,51 +19,55 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:154
+#. applet.js:157
 msgid "(Right click to open folder)"
 msgstr "(Haga clic con el botón derecho para abrir la carpeta)"
 
-#. applet.js:184
+#. applet.js:220
 msgid "Places"
 msgstr "Lugares"
 
-#. applet.js:374
+#. applet.js:417
 msgid "Search Home Folder"
 msgstr "Buscar en la carpeta personal"
 
-#. applet.js:399
+#. applet.js:442
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:408
+#. applet.js:451
 msgid "Search File System"
 msgstr "Buscar en el sistema de archivos"
 
-#. applet.js:433
+#. applet.js:476
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:500
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTOS RECIENTES"
 
-#. applet.js:447
+#. applet.js:514
 msgid "Clear"
 msgstr "Limpiar"
 
-#. applet.js:454
+#. applet.js:521
 msgid "Recent"
 msgstr "Recientes"
 
-#. applet.js:500
+#. applet.js:567
 msgid "Computer"
 msgstr "PC"
 
-#. applet.js:506
+#. applet.js:573
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#. applet.js:523
+#. applet.js:590
 msgid "Network"
 msgstr "Red"
 
-#. applet.js:690
+#. applet.js:806
 msgid "Trash"
 msgstr "Papelera"
 
@@ -107,6 +111,7 @@ msgstr "Parar"
 msgid "File"
 msgstr "Archivo"
 
+#. settings-schema.json->favoriteSortingMethod->options
 #. search.py:156
 msgid "Path"
 msgstr "Ruta"
@@ -184,6 +189,10 @@ msgstr "Usuario"
 msgid "System"
 msgstr "Sistema"
 
+#. settings-schema.json->favoritesPage->title
+msgid "Favorites"
+msgstr ""
+
 #. settings-schema.json->recentPage->title
 #. settings-schema.json->recentSection->title
 msgid "Recent documents"
@@ -211,6 +220,11 @@ msgstr "Más lugares"
 #. settings-schema.json->systemSection->title
 msgid "System section"
 msgstr "Sección del sistema"
+
+#. settings-schema.json->favoritesSection->title
+#, fuzzy
+msgid "Favorite documents"
+msgstr "Mostrar documentos recientes"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -255,6 +269,7 @@ msgstr ""
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
 msgid "Name"
 msgstr ""
 
@@ -299,13 +314,69 @@ msgstr "Sólo mostrar volúmenes montados"
 msgid "Show network"
 msgstr "Mostrar «Red»"
 
-#. settings-schema.json->showRecentDocuments->description
-msgid "Show recent documents"
+#. settings-schema.json->showFavorites->description
+#, fuzzy
+msgid "Show favorite documents"
 msgstr "Mostrar documentos recientes"
 
+#. settings-schema.json->favoriteSortingMethod->options
 #. settings-schema.json->sortingMethod->options
 msgid "Added time"
 msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->description
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#, fuzzy
+msgid "All Favorite Documents"
+msgstr "Documentos recientes"
+
+#. settings-schema.json->favoriteSizeLimit->description
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Número de entradas visibles"
+
+#. settings-schema.json->favoriteShowUri->description
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr "Mostrar la ruta completa en la información sobre herramientas"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Mostrar documentos recientes"
 
 #. settings-schema.json->sortingMethod->options
 msgid "Access time"
@@ -315,45 +386,9 @@ msgstr ""
 msgid "Modification time"
 msgstr ""
 
-#. settings-schema.json->sortingMethod->description
-msgid "Sorting method"
-msgstr ""
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "5"
-msgstr "5"
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "10"
-msgstr "10"
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "15"
-msgstr "15"
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "20"
-msgstr "20"
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "25"
-msgstr "25"
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "30"
-msgstr "30"
-
 #. settings-schema.json->recentSizeLimit->options
 msgid "All Recent Documents"
 msgstr "Documentos recientes"
-
-#. settings-schema.json->recentSizeLimit->description
-msgid "Number to show"
-msgstr "Número de entradas visibles"
-
-#. settings-schema.json->recentShowUri->description
-msgid "Show complete path in tooltips"
-msgstr "Mostrar la ruta completa en la información sobre herramientas"
 
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"

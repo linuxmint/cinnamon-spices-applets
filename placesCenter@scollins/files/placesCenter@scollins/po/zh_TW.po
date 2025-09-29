@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: placesCenter@scollins 2.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-28 21:40+0200\n"
+"POT-Creation-Date: 2025-09-29 18:31+0200\n"
 "PO-Revision-Date: 2025-08-04 00:13+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -16,51 +16,55 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:154
+#. applet.js:157
 msgid "(Right click to open folder)"
 msgstr "（點選滑鼠右鍵開啟資料夾）"
 
-#. applet.js:184
+#. applet.js:220
 msgid "Places"
 msgstr "位置"
 
-#. applet.js:374
+#. applet.js:417
 msgid "Search Home Folder"
 msgstr "搜尋家目錄"
 
-#. applet.js:399
+#. applet.js:442
 msgid "SYSTEM"
 msgstr "系統"
 
-#. applet.js:408
+#. applet.js:451
 msgid "Search File System"
 msgstr "搜尋檔案系統"
 
-#. applet.js:433
+#. applet.js:476
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:500
 msgid "RECENT DOCUMENTS"
 msgstr "最近的文件"
 
-#. applet.js:447
+#. applet.js:514
 msgid "Clear"
 msgstr "清除"
 
-#. applet.js:454
+#. applet.js:521
 msgid "Recent"
 msgstr "最近使用"
 
-#. applet.js:500
+#. applet.js:567
 msgid "Computer"
 msgstr "電腦"
 
-#. applet.js:506
+#. applet.js:573
 msgid "File System"
 msgstr "檔案系統"
 
-#. applet.js:523
+#. applet.js:590
 msgid "Network"
 msgstr "網路"
 
-#. applet.js:690
+#. applet.js:806
 msgid "Trash"
 msgstr "資源回收筒"
 
@@ -104,6 +108,7 @@ msgstr "停止"
 msgid "File"
 msgstr "檔案"
 
+#. settings-schema.json->favoriteSortingMethod->options
 #. search.py:156
 msgid "Path"
 msgstr "路徑"
@@ -179,6 +184,10 @@ msgstr "使用者"
 msgid "System"
 msgstr "系統"
 
+#. settings-schema.json->favoritesPage->title
+msgid "Favorites"
+msgstr ""
+
 #. settings-schema.json->recentPage->title
 #. settings-schema.json->recentSection->title
 msgid "Recent documents"
@@ -206,6 +215,11 @@ msgstr "自訂位置"
 #. settings-schema.json->systemSection->title
 msgid "System section"
 msgstr "系統區段"
+
+#. settings-schema.json->favoritesSection->title
+#, fuzzy
+msgid "Favorite documents"
+msgstr "顯示最近的文件"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -250,6 +264,7 @@ msgstr ""
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
 msgid "Name"
 msgstr ""
 
@@ -294,13 +309,69 @@ msgstr "僅顯示已掛載的磁碟機"
 msgid "Show network"
 msgstr "顯示網路"
 
-#. settings-schema.json->showRecentDocuments->description
-msgid "Show recent documents"
+#. settings-schema.json->showFavorites->description
+#, fuzzy
+msgid "Show favorite documents"
 msgstr "顯示最近的文件"
 
+#. settings-schema.json->favoriteSortingMethod->options
 #. settings-schema.json->sortingMethod->options
 msgid "Added time"
 msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->description
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#, fuzzy
+msgid "All Favorite Documents"
+msgstr "所有最近的文件"
+
+#. settings-schema.json->favoriteSizeLimit->description
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "要顯示的數量"
+
+#. settings-schema.json->favoriteShowUri->description
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr "在工具提示中顯示完整路徑"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "顯示最近的文件"
 
 #. settings-schema.json->sortingMethod->options
 msgid "Access time"
@@ -310,45 +381,9 @@ msgstr ""
 msgid "Modification time"
 msgstr ""
 
-#. settings-schema.json->sortingMethod->description
-msgid "Sorting method"
-msgstr ""
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "5"
-msgstr "5"
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "10"
-msgstr "10"
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "15"
-msgstr "15"
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "20"
-msgstr "20"
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "25"
-msgstr "25"
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "30"
-msgstr "30"
-
 #. settings-schema.json->recentSizeLimit->options
 msgid "All Recent Documents"
 msgstr "所有最近的文件"
-
-#. settings-schema.json->recentSizeLimit->description
-msgid "Number to show"
-msgstr "要顯示的數量"
-
-#. settings-schema.json->recentShowUri->description
-msgid "Show complete path in tooltips"
-msgstr "在工具提示中顯示完整路徑"
 
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"

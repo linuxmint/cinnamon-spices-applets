@@ -1,6 +1,7 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
+const Clutter = imports.gi.Clutter;
 const Pango = imports.gi.Pango;
 const St = imports.gi.St;
 
@@ -14,6 +15,8 @@ const Tooltips = imports.ui.tooltips;
 const Util = imports.misc.util;
 const Gettext = imports.gettext;
 const Lang = imports.lang;
+
+const XApp = imports.gi.XApp;
 
 const HOME_DIR = GLib.get_home_dir();
 const MENU_ITEM_TEXT_LENGTH = 25;
@@ -155,6 +158,38 @@ class RecentFileMenuItem extends IconMenuItem {
     }
 }
 
+class FavoriteMenuItem extends PopupMenu.PopupBaseMenuItem {
+    constructor(info, show_full_uri, params) {
+        super(params);
+        this.box = new St.BoxLayout({ style_class: 'popup-combobox-item', style: 'padding: 0px;' });
+        this.info = info;
+
+        let icon = St.TextureCache.get_default().load_gicon(null, Gio.content_type_get_icon(info.cached_mimetype), 24);
+
+        let display_text = info.display_name;
+
+        let uri = null;
+        let tooltip = null;
+
+        if (show_full_uri) {
+            let file = Gio.File.new_for_uri(info.uri);
+            if (file.is_native() || file.get_path() != null) {
+                uri = file.get_path().replace(HOME_DIR, "~");
+            } else {
+                uri = info.uri;
+            }
+            if (uri != null) tooltip = new Tooltips.Tooltip(this.actor, uri);
+        }
+
+        this.box.add(icon);
+
+        let label = new St.Label({ text: display_text, y_align: Clutter.ActorAlign.CENTER });
+
+        this.box.add(label);
+        this.addActor(this.box);
+    }
+}
+
 class PlacesCenter extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instanceId) {
         try {
@@ -171,6 +206,7 @@ class PlacesCenter extends Applet.TextIconApplet {
             this.systemSection = new PopupMenu.PopupMenuSection();
             this.devicesSection = new PopupMenu.PopupMenuSection();
             this.recentSection = new PopupMenu.PopupMenuSection();
+            this.favoriteSection = new PopupMenu.PopupMenuSection();
 
             //initiate settings
             this.settings = new Settings.AppletSettings(this, this.metadata.uuid, this.instanceId);
@@ -196,6 +232,9 @@ class PlacesCenter extends Applet.TextIconApplet {
             this.menuManager.addMenu(this.menu);
             // (Do not use a new RecentManager but the default one, synchronous with the Cinnamon menu.)
             this.recentManager = Gtk.RecentManager.get_default();
+            this.favorites = XApp.Favorites.get_default();
+            this._favoriteButtons = [];
+            this.favoritesId = this.favorites.connect('changed', () => { this._toggle_menu_when_open() } );
             //this.recentManager.connect("changed", Lang.bind(this, this.buildRecentDocumentsSection)); // Becomes useless.
             this.recentManager.connect("changed", () => { this._toggle_menu_when_open() } ); // Becomes useless.
             //Main.placesManager.connect("bookmarks-updated", Lang.bind(this, this.buildUserSection)); // Avoid.
@@ -280,7 +319,6 @@ class PlacesCenter extends Applet.TextIconApplet {
     }
 
     bindSettings() {
-
         this.settings.bind("panelIcon", "panelIcon", this.setPanelIcon);
         this.settings.bind("panelText", "panelText", this.setPanelText);
         //~ this.settings.bind("iconSize", "iconSize", this.buildMenu);
@@ -308,15 +346,21 @@ class PlacesCenter extends Applet.TextIconApplet {
         this.settings.bind("systemCustomPlaces", "systemCustomPlaces");
         //~ this.settings.bind("showRecentDocuments", "showRecentDocuments", this.buildMenu);
         this.settings.bind("showRecentDocuments", "showRecentDocuments");
+        this.settings.bind("showFavorites", "showFavorites");
         //~ this.settings.bind("recentSizeLimit", "recentSizeLimit", this.buildRecentDocumentsSection);
         this.settings.bind("recentSizeLimit", "recentSizeLimit");
+        this.settings.bind("favoriteSizeLimit", "favoriteSizeLimit");
         //~ this.settings.bind("recentShowUri", "recentShowUri", this.buildRecentDocumentsSection);
         this.settings.bind("sortingMethod", "sortingMethod");
+        this.settings.bind("favoriteSortingMethod", "favoriteSortingMethod");
         this.settings.bind("recentShowUri", "recentShowUri");
+        this.settings.bind("favoriteShowUri", "favoriteShowUri");
         this.settings.bind("iconBrowserIsPresent", "iconBrowserIsPresent");
         this.settings.bind("keyOpen", "keyOpen", this.setKeybinding);
         let recentSizeLimit = this.recentSizeLimit;
         if ( recentSizeLimit % 5 !== 0 ) this.recentSizeLimit = Math.ceil(recentSizeLimit / 5) * 5;
+        let favoriteSizeLimit = this.favoriteSizeLimit;
+        if ( favoriteSizeLimit % 5 !== 0 ) this.favoriteSizeLimit = Math.ceil(favoriteSizeLimit / 5) * 5;
         this.setKeybinding();
     }
 
@@ -337,6 +381,7 @@ class PlacesCenter extends Applet.TextIconApplet {
             this.systemSection = new PopupMenu.PopupMenuSection();
             this.devicesSection = new PopupMenu.PopupMenuSection();
             this.recentSection = new PopupMenu.PopupMenuSection();
+            this.favoriteSection = new PopupMenu.PopupMenuSection();
         } else return;
 
         let section = new PopupMenu.PopupMenuSection();
@@ -349,10 +394,8 @@ class PlacesCenter extends Applet.TextIconApplet {
         let userScrollBox = new St.ScrollView({ style_class: "xCenter-scrollBox", x_fill: true, y_fill: false, y_align: St.Align.START });
         let userVscroll = userScrollBox.get_vscroll_bar();
 
-        //~ try {
-            this.menu.addMenuItem(section);
-            section.actor.add_actor(mainBox);
-        //~ } catch(e) { global.logError("buildMenu(): Error adding mainBox as actor of section - " + e) }
+        this.menu.addMenuItem(section);
+        section.actor.add_actor(mainBox);
 
 
         try {
@@ -421,6 +464,30 @@ class PlacesCenter extends Applet.TextIconApplet {
 
             mainBox.add_actor(systemPaneBox);
             this.buildSystemSection();
+
+            //favorite documents section
+            if ( this.showFavorites ) {
+                let favoritesPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
+                mainBox.add_actor(favoritesPaneBox);
+                let favoritesPane = new PopupMenu.PopupMenuSection();
+                favoritesPaneBox.add_actor(favoritesPane.actor);
+                section._connectSubMenuSignals(favoritesPane, favoritesPane);
+
+                let favoritesTitle = new PopupMenu.PopupMenuItem(_("FAVORITES"), { style_class: "xCenter-title", reactive: false });
+                favoritesPane.addMenuItem(favoritesTitle);
+
+                let favoritesScrollBox = new St.ScrollView({ style_class: "xCenter-scrollBox", x_fill: true, y_fill: false, y_align: St.Align.START });
+                favoritesPane.actor.add_actor(favoritesScrollBox);
+                favoritesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+                let favVscroll = favoritesScrollBox.get_vscroll_bar();
+                favVscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
+                favVscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
+
+                favoritesScrollBox.add_actor(this.favoriteSection.actor);
+                favoritesPane._connectSubMenuSignals(this.favoriteSection, this.favoriteSection);
+
+                this.buildFavoritesSection();
+            }
 
             //recent documents section
             if ( this.showRecentDocuments ) {
@@ -567,6 +634,55 @@ class PlacesCenter extends Applet.TextIconApplet {
             if ( !mounted && this.onlyShowMounted ) continue;
             let volumeMenuItem = new VolumeMenuItem(volume, mounted);
             this.devicesSection.addMenuItem(volumeMenuItem);
+        }
+    }
+
+    buildFavoritesSection() {
+        if ( !this.showFavorites ) return;
+        if ( this.favoriteSection ) this.favoriteSection.removeAll();
+        else this.favoriteSection = new PopupMenu.PopupMenuSection();
+
+        for (let i = 0; i < this._favoriteButtons.length; i ++) {
+            this._favoriteButtons[i].destroy();
+        }
+        this._favoriteButtons = [];
+        var infos = this.favorites.get_favorites(null);
+
+        if (this.favoriteSortingMethod === "byName") {
+            infos = infos.sort ( function(a, b) {
+                    const aName = a.display_name.toLowerCase();
+                    const bName = b.display_name.toLowerCase();
+                    if ( aName < bName ) return -1;
+                    else if ( aName > bName ) return 1;
+                    else return 0;
+                }
+            );
+        } else if (this.favoriteSortingMethod === "byPath") {
+            infos = infos.sort ( function(a, b) {
+                    if (a.uri < b.uri) return -1;
+                    else if (a.uri > b.uri) return 1;
+                    else return 0;
+                }
+            );
+        }
+
+        if ( this.favoriteSizeLimit !== 0 && this.favorites.get_n_favorites() > this.favoriteSizeLimit )
+            infos = infos.slice( 0, this.favoriteSizeLimit );
+
+        if (infos.length > 0) {
+            for (let i = 0; i < infos.length; i++) {
+                let info = infos[i];
+
+                let button = new FavoriteMenuItem(info, this.favoriteShowUri);
+
+                button.connect("activate", (button, event)=> {
+                    this.favorites.launch(button.info.uri, event.get_time());
+                    this.menu.toggle();
+                })
+
+                this._favoriteButtons.push(button);
+                this.favoriteSection.addMenuItem(button);
+            }
         }
     }
 

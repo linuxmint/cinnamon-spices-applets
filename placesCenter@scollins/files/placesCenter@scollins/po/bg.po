@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-28 21:40+0200\n"
+"POT-Creation-Date: 2025-09-29 18:31+0200\n"
 "PO-Revision-Date: 2017-12-20 20:20+0200\n"
 "Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
@@ -19,51 +19,55 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. applet.js:154
+#. applet.js:157
 msgid "(Right click to open folder)"
 msgstr ""
 
-#. applet.js:184
+#. applet.js:220
 msgid "Places"
 msgstr "Места"
 
-#. applet.js:374
+#. applet.js:417
 msgid "Search Home Folder"
 msgstr "Търси в домашната папка"
 
-#. applet.js:399
+#. applet.js:442
 msgid "SYSTEM"
 msgstr "СИСТЕМА"
 
-#. applet.js:408
+#. applet.js:451
 msgid "Search File System"
 msgstr "Търси във файловата система"
 
-#. applet.js:433
-msgid "RECENT DOCUMENTS"
-msgstr "ПОСЛЕДНИ ДОКУМЕНТИ"
-
-#. applet.js:447
-msgid "Clear"
-msgstr "Изчисти"
-
-#. applet.js:454
-msgid "Recent"
+#. applet.js:476
+msgid "FAVORITES"
 msgstr ""
 
 #. applet.js:500
+msgid "RECENT DOCUMENTS"
+msgstr "ПОСЛЕДНИ ДОКУМЕНТИ"
+
+#. applet.js:514
+msgid "Clear"
+msgstr "Изчисти"
+
+#. applet.js:521
+msgid "Recent"
+msgstr ""
+
+#. applet.js:567
 msgid "Computer"
 msgstr "Компютър"
 
-#. applet.js:506
+#. applet.js:573
 msgid "File System"
 msgstr "Файлова система"
 
-#. applet.js:523
+#. applet.js:590
 msgid "Network"
 msgstr "Мрежа"
 
-#. applet.js:690
+#. applet.js:806
 msgid "Trash"
 msgstr "Кошче"
 
@@ -107,6 +111,7 @@ msgstr "Спри"
 msgid "File"
 msgstr "Файл"
 
+#. settings-schema.json->favoriteSortingMethod->options
 #. search.py:156
 msgid "Path"
 msgstr "Път"
@@ -184,6 +189,10 @@ msgstr "Потребител"
 msgid "System"
 msgstr "Система"
 
+#. settings-schema.json->favoritesPage->title
+msgid "Favorites"
+msgstr ""
+
 #. settings-schema.json->recentPage->title
 #. settings-schema.json->recentSection->title
 msgid "Recent documents"
@@ -211,6 +220,11 @@ msgstr "Допълнителни места"
 #. settings-schema.json->systemSection->title
 msgid "System section"
 msgstr "Секция система"
+
+#. settings-schema.json->favoritesSection->title
+#, fuzzy
+msgid "Favorite documents"
+msgstr "Показване на последните документи"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -256,6 +270,7 @@ msgstr ""
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
 msgid "Name"
 msgstr ""
 
@@ -300,13 +315,69 @@ msgstr "Показвай само монтираните устройства"
 msgid "Show network"
 msgstr "Показвай мрежа"
 
-#. settings-schema.json->showRecentDocuments->description
-msgid "Show recent documents"
+#. settings-schema.json->showFavorites->description
+#, fuzzy
+msgid "Show favorite documents"
 msgstr "Показване на последните документи"
 
+#. settings-schema.json->favoriteSortingMethod->options
 #. settings-schema.json->sortingMethod->options
 msgid "Added time"
 msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->description
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#, fuzzy
+msgid "All Favorite Documents"
+msgstr "Последни документи"
+
+#. settings-schema.json->favoriteSizeLimit->description
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Брой за показване"
+
+#. settings-schema.json->favoriteShowUri->description
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr ""
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Показване на последните документи"
 
 #. settings-schema.json->sortingMethod->options
 msgid "Access time"
@@ -316,46 +387,10 @@ msgstr ""
 msgid "Modification time"
 msgstr ""
 
-#. settings-schema.json->sortingMethod->description
-msgid "Sorting method"
-msgstr ""
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "5"
-msgstr ""
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "10"
-msgstr ""
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "15"
-msgstr ""
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "20"
-msgstr ""
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "25"
-msgstr ""
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "30"
-msgstr ""
-
 #. settings-schema.json->recentSizeLimit->options
 #, fuzzy
 msgid "All Recent Documents"
 msgstr "Последни документи"
-
-#. settings-schema.json->recentSizeLimit->description
-msgid "Number to show"
-msgstr "Брой за показване"
-
-#. settings-schema.json->recentShowUri->description
-msgid "Show complete path in tooltips"
-msgstr ""
 
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"

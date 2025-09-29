@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: placesCenter@scollins 2.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-28 21:40+0200\n"
+"POT-Creation-Date: 2025-09-29 18:31+0200\n"
 "PO-Revision-Date: 2024-07-28 07:58-0400\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -18,51 +18,55 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:154
+#. applet.js:157
 msgid "(Right click to open folder)"
 msgstr "(Jobb egérgomb a mappa megnyitásához)"
 
-#. applet.js:184
+#. applet.js:220
 msgid "Places"
 msgstr "Helyek"
 
-#. applet.js:374
+#. applet.js:417
 msgid "Search Home Folder"
 msgstr "Saját mappában keresés"
 
-#. applet.js:399
+#. applet.js:442
 msgid "SYSTEM"
 msgstr "RENDSZER"
 
-#. applet.js:408
+#. applet.js:451
 msgid "Search File System"
 msgstr "Fájlrendszerben keresés"
 
-#. applet.js:433
+#. applet.js:476
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:500
 msgid "RECENT DOCUMENTS"
 msgstr "MOSTANÁBAN MEGNYITOTT DOKUMENTUMOK"
 
-#. applet.js:447
+#. applet.js:514
 msgid "Clear"
 msgstr "Törlés"
 
-#. applet.js:454
+#. applet.js:521
 msgid "Recent"
 msgstr "Friss"
 
-#. applet.js:500
+#. applet.js:567
 msgid "Computer"
 msgstr "Számítógép"
 
-#. applet.js:506
+#. applet.js:573
 msgid "File System"
 msgstr "Fájlrendszer"
 
-#. applet.js:523
+#. applet.js:590
 msgid "Network"
 msgstr "Hálózat"
 
-#. applet.js:690
+#. applet.js:806
 msgid "Trash"
 msgstr "Kuka"
 
@@ -106,6 +110,7 @@ msgstr "Megállítás"
 msgid "File"
 msgstr "Fájl"
 
+#. settings-schema.json->favoriteSortingMethod->options
 #. search.py:156
 msgid "Path"
 msgstr "Útvonal"
@@ -183,6 +188,10 @@ msgstr "Felhasználó"
 msgid "System"
 msgstr "Rendszer"
 
+#. settings-schema.json->favoritesPage->title
+msgid "Favorites"
+msgstr ""
+
 #. settings-schema.json->recentPage->title
 #. settings-schema.json->recentSection->title
 msgid "Recent documents"
@@ -210,6 +219,11 @@ msgstr "Egyedi helyek"
 #. settings-schema.json->systemSection->title
 msgid "System section"
 msgstr "Rendszer szekció"
+
+#. settings-schema.json->favoritesSection->title
+#, fuzzy
+msgid "Favorite documents"
+msgstr "Mostanában megnyitott dokumentumok mutatása"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -254,6 +268,7 @@ msgstr ""
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
 msgid "Name"
 msgstr ""
 
@@ -298,13 +313,69 @@ msgstr "Csak csatlakoztatott meghajtók mutatása"
 msgid "Show network"
 msgstr "Hálózat mutatása"
 
-#. settings-schema.json->showRecentDocuments->description
-msgid "Show recent documents"
+#. settings-schema.json->showFavorites->description
+#, fuzzy
+msgid "Show favorite documents"
 msgstr "Mostanában megnyitott dokumentumok mutatása"
 
+#. settings-schema.json->favoriteSortingMethod->options
 #. settings-schema.json->sortingMethod->options
 msgid "Added time"
 msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->description
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#, fuzzy
+msgid "All Favorite Documents"
+msgstr "Minden mostanában megnyitott dokumentum"
+
+#. settings-schema.json->favoriteSizeLimit->description
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Megjelenítendő darabszám"
+
+#. settings-schema.json->favoriteShowUri->description
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr "Teljes útvonal megjelenítése az eszköztippekben"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Mostanában megnyitott dokumentumok mutatása"
 
 #. settings-schema.json->sortingMethod->options
 msgid "Access time"
@@ -314,45 +385,9 @@ msgstr ""
 msgid "Modification time"
 msgstr ""
 
-#. settings-schema.json->sortingMethod->description
-msgid "Sorting method"
-msgstr ""
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "5"
-msgstr "5"
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "10"
-msgstr "10"
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "15"
-msgstr "15"
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "20"
-msgstr "20"
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "25"
-msgstr "25"
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "30"
-msgstr "30"
-
 #. settings-schema.json->recentSizeLimit->options
 msgid "All Recent Documents"
 msgstr "Minden mostanában megnyitott dokumentum"
-
-#. settings-schema.json->recentSizeLimit->description
-msgid "Number to show"
-msgstr "Megjelenítendő darabszám"
-
-#. settings-schema.json->recentShowUri->description
-msgid "Show complete path in tooltips"
-msgstr "Teljes útvonal megjelenítése az eszköztippekben"
 
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"

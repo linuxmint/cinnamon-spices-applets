@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Places Center 2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-28 21:40+0200\n"
+"POT-Creation-Date: 2025-09-29 18:31+0200\n"
 "PO-Revision-Date: 2017-02-26 21:10+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -20,51 +20,55 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#. applet.js:154
+#. applet.js:157
 msgid "(Right click to open folder)"
 msgstr ""
 
-#. applet.js:184
+#. applet.js:220
 msgid "Places"
 msgstr "Lokacije"
 
-#. applet.js:374
+#. applet.js:417
 msgid "Search Home Folder"
 msgstr "Pretraži osobnu mapu"
 
-#. applet.js:399
+#. applet.js:442
 msgid "SYSTEM"
 msgstr "SUSTAV"
 
-#. applet.js:408
+#. applet.js:451
 msgid "Search File System"
 msgstr "Pretraži datotečni sustav"
 
-#. applet.js:433
-msgid "RECENT DOCUMENTS"
-msgstr "NEDAVNI DOKUMENTI"
-
-#. applet.js:447
-msgid "Clear"
-msgstr "Obriši"
-
-#. applet.js:454
-msgid "Recent"
+#. applet.js:476
+msgid "FAVORITES"
 msgstr ""
 
 #. applet.js:500
+msgid "RECENT DOCUMENTS"
+msgstr "NEDAVNI DOKUMENTI"
+
+#. applet.js:514
+msgid "Clear"
+msgstr "Obriši"
+
+#. applet.js:521
+msgid "Recent"
+msgstr ""
+
+#. applet.js:567
 msgid "Computer"
 msgstr "Računalo"
 
-#. applet.js:506
+#. applet.js:573
 msgid "File System"
 msgstr "Datotečni sustav"
 
-#. applet.js:523
+#. applet.js:590
 msgid "Network"
 msgstr "Mreža"
 
-#. applet.js:690
+#. applet.js:806
 msgid "Trash"
 msgstr "Smeće"
 
@@ -109,6 +113,7 @@ msgstr ""
 msgid "File"
 msgstr ""
 
+#. settings-schema.json->favoriteSortingMethod->options
 #. search.py:156
 msgid "Path"
 msgstr ""
@@ -187,6 +192,10 @@ msgstr "Korisnik"
 msgid "System"
 msgstr "Sustav"
 
+#. settings-schema.json->favoritesPage->title
+msgid "Favorites"
+msgstr ""
+
 #. settings-schema.json->recentPage->title
 #. settings-schema.json->recentSection->title
 msgid "Recent documents"
@@ -214,6 +223,11 @@ msgstr "Prilagođene lokacije"
 #. settings-schema.json->systemSection->title
 msgid "System section"
 msgstr "Mogućnosti sustava"
+
+#. settings-schema.json->favoritesSection->title
+#, fuzzy
+msgid "Favorite documents"
+msgstr "Prikaži nedavne dokumente"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -258,6 +272,7 @@ msgstr ""
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
 msgid "Name"
 msgstr ""
 
@@ -302,13 +317,69 @@ msgstr "Prikaži samo montirane uređaje"
 msgid "Show network"
 msgstr "Prikaži mrežu"
 
-#. settings-schema.json->showRecentDocuments->description
-msgid "Show recent documents"
+#. settings-schema.json->showFavorites->description
+#, fuzzy
+msgid "Show favorite documents"
 msgstr "Prikaži nedavne dokumente"
 
+#. settings-schema.json->favoriteSortingMethod->options
 #. settings-schema.json->sortingMethod->options
 msgid "Added time"
 msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->description
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#, fuzzy
+msgid "All Favorite Documents"
+msgstr "Nedavni dokumenti"
+
+#. settings-schema.json->favoriteSizeLimit->description
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Broj prikazanih nedavnih dokumenata"
+
+#. settings-schema.json->favoriteShowUri->description
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr ""
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Prikaži nedavne dokumente"
 
 #. settings-schema.json->sortingMethod->options
 msgid "Access time"
@@ -318,46 +389,10 @@ msgstr ""
 msgid "Modification time"
 msgstr ""
 
-#. settings-schema.json->sortingMethod->description
-msgid "Sorting method"
-msgstr ""
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "5"
-msgstr ""
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "10"
-msgstr ""
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "15"
-msgstr ""
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "20"
-msgstr ""
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "25"
-msgstr ""
-
-#. settings-schema.json->recentSizeLimit->options
-msgid "30"
-msgstr ""
-
 #. settings-schema.json->recentSizeLimit->options
 #, fuzzy
 msgid "All Recent Documents"
 msgstr "Nedavni dokumenti"
-
-#. settings-schema.json->recentSizeLimit->description
-msgid "Number to show"
-msgstr "Broj prikazanih nedavnih dokumenata"
-
-#. settings-schema.json->recentShowUri->description
-msgid "Show complete path in tooltips"
-msgstr ""
 
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"

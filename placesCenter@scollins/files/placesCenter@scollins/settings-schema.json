@@ -1,7 +1,7 @@
 {
     "layout": {
         "type": "layout",
-        "pages": ["generalPage", "userPage", "systemPage", "recentPage"],
+        "pages": ["generalPage", "userPage", "systemPage", "favoritesPage", "recentPage"],
         "generalPage": {
             "type": "page",
             "title": "General",
@@ -16,6 +16,11 @@
             "type": "page",
             "title": "System",
             "sections": ["systemSection", "systemSectionCustomPlaces"]
+        },
+        "favoritesPage": {
+            "type": "page",
+            "title": "Favorites",
+            "sections": ["favoritesSection"]
         },
         "recentPage": {
             "type": "page",
@@ -51,6 +56,11 @@
             "type": "section",
             "title": "Custom places",
             "keys": ["listSystemCustomPlaces", "btnIconBrowser"]
+        },
+        "favoritesSection": {
+            "type": "section",
+            "title": "Favorite documents",
+            "keys": ["showFavorites", "favoriteSortingMethod", "favoriteSizeLimit", "favoriteShowUri"]
         },
         "recentSection": {
             "type": "section",
@@ -177,6 +187,48 @@
         "default": ""
     },
 
+    "showFavorites": {
+        "type": "checkbox",
+        "description": "Show favorite documents",
+        "default": true
+    },
+
+    "favoriteSortingMethod": {
+        "type": "combobox",
+        "default": "added",
+        "options": {
+            "Added time": "added",
+            "Name": "byName",
+            "Path": "byPath"
+        },
+        "description": "Sorting method",
+        "dependency": "showFavorites"
+    },
+
+    "favoriteSizeLimit": {
+        "type": "combobox",
+        "default": 0,
+        "options": {
+            "5": 5,
+            "10": 10,
+            "15": 15,
+            "20": 20,
+            "25": 25,
+            "30": 30,
+            "All Favorite Documents": 0
+        },
+        "description": "Number to show",
+        "indent": true,
+        "dependency": "showFavorites"
+    },
+
+    "favoriteShowUri": {
+        "type": "checkbox",
+        "description": "Show complete path in tooltips",
+        "default": true,
+        "dependency": "showFavorites"
+    },
+
     "showRecentDocuments": {
         "type": "checkbox",
         "description": "Show recent documents",
@@ -215,7 +267,8 @@
     "recentShowUri": {
         "type": "checkbox",
         "description": "Show complete path in tooltips",
-        "default": true
+        "default": true,
+        "dependency": "showRecentDocuments"
     },
 
     "btnPrivacy": {
