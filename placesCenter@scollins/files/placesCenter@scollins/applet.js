@@ -648,6 +648,12 @@ class PlacesCenter extends Applet.TextIconApplet {
         this._favoriteButtons = [];
         var infos = this.favorites.get_favorites(null);
 
+        for (let i = infos.length - 1; i >= 0 ; i-- ) {
+            const _file = Gio.File.new_for_uri(infos[i].uri);
+            if ( ! _file.query_exists(null) )
+                infos.splice(i, 1);
+        }
+
         if (this.favoriteSortingMethod === "byName") {
             infos = infos.sort ( function(a, b) {
                     const aName = a.display_name.toLowerCase();
