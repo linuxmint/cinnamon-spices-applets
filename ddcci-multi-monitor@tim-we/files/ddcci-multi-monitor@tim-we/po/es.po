@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-28 19:03+0200\n"
-"PO-Revision-Date: 2025-08-31 21:59-0400\n"
+"PO-Revision-Date: 2025-09-29 10:59-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -56,7 +56,7 @@ msgstr "General"
 
 #. settings-schema.json->page_retry_detection->title
 msgid "Detection"
-msgstr ""
+msgstr "Detección"
 
 #. settings-schema.json->section_appearance->title
 msgid "Appearance"
@@ -76,7 +76,7 @@ msgstr "Conmutar puntos"
 
 #. settings-schema.json->section_retry_detection->title
 msgid "Automatic Retry Detection"
-msgstr ""
+msgstr "Detección automática de reintentos"
 
 #. settings-schema.json->entry_applet-label->description
 msgid ""
@@ -167,6 +167,9 @@ msgid ""
 "Helps ensure all monitors are detected when DDC/CI buses take time to "
 "initialize."
 msgstr ""
+"Habilita la detección automática de reintentos durante el inicio.\n"
+"Ayuda a garantizar que se detecten todos los monitores cuando los buses DDC/"
+"CI tardan en inicializarse."
 
 #. settings-schema.json->spinbutton_target-monitor-count->description
 msgid ""
@@ -174,22 +177,30 @@ msgid ""
 "The applet will retry detection until this many monitors are found or max "
 "attempts reached."
 msgstr ""
+"Número previsto de monitores que se van a detectar.\n"
+"El applet volverá a intentar la detección hasta que se encuentren todos "
+"estos monitores o se alcance el número máximo de intentos."
 
 #. settings-schema.json->spinbutton_max-retry-attempts->description
 msgid ""
 "Maximum number of retry attempts.\n"
 "Limited to 5 attempts to prevent excessive startup delays."
 msgstr ""
+"Número máximo de intentos de reintento.\n"
+"Limitado a 5 intentos para evitar retrasos excesivos en el inicio."
 
 #. settings-schema.json->spinbutton_retry-delay->units
 msgid "seconds"
-msgstr ""
+msgstr "segundos"
 
 #. settings-schema.json->spinbutton_retry-delay->description
 msgid ""
 "Delay between detection attempts.\n"
 "Time to wait before retrying monitor detection (1-10 seconds)."
 msgstr ""
+"Retraso entre intentos de detección.\n"
+"Tiempo de espera antes de volver a intentar la detección del monitor (1-10 "
+"segundos)."
 
 #. settings-schema.json->string_active-monitors->description
 msgid ""
