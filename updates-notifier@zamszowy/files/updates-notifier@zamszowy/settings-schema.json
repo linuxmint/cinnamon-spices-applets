@@ -1,7 +1,73 @@
 {
-    "sectionSettings": {
-        "type": "section",
-        "description": "Settings"
+    "layout1": {
+        "type": "layout",
+        "pages": [
+            "pageBehavior",
+            "pageAppearance"
+        ],
+        "pageBehavior": {
+            "type": "page",
+            "title": "Behavior",
+            "sections": [
+                "sectionSettings",
+                "sectionClick",
+                "sectionMenu"
+            ]
+        },
+        "pageAppearance": {
+            "type": "page",
+            "title": "Appearance",
+            "sections": [
+                "sectionIconLabel",
+                "sectionTheme"
+            ]
+        },
+        "sectionSettings": {
+            "type": "section",
+            "title": "Settings",
+            "keys": [
+                "update-refresh",
+                "show-firmware"
+            ]
+        },
+        "sectionIconLabel": {
+            "type": "section",
+            "title": "Icon/Label",
+            "keys": [
+                "hide-applet",
+                "different-levels",
+                "level-1",
+                "level-2",
+                "show-label",
+                "label-font-size",
+                "label-font-weight",
+                "label-vertical-position"
+            ]
+        },
+        "sectionClick": {
+            "type": "section",
+            "title": "Applet click",
+            "keys": [
+                "show-window-on-click",
+                "refresh-when-no-updates"
+            ]
+        },
+        "sectionMenu": {
+            "type": "section",
+            "title": "Menu",
+            "keys": [
+                "commandUpdate-show",
+                "commandUpgrade-show",
+                "commandUpgrade"
+            ]
+        },
+        "sectionTheme": {
+            "type": "section",
+            "title": "Theme",
+            "keys": [
+                "icon-style"
+            ]
+        }
     },
     "update-refresh": {
         "type": "entry",
@@ -12,10 +78,6 @@
         "type": "switch",
         "default": true,
         "description": "Show firmware updates"
-    },
-    "sectionIconLabel": {
-        "type": "section",
-        "description": "Icon/Label"
     },
     "hide-applet": {
         "type": "switch",
@@ -71,10 +133,6 @@
         "description": "Label vertical position",
         "dependency": "show-label"
     },
-    "sectionClick": {
-        "type": "section",
-        "description": "Applet click"
-    },
     "show-window-on-click": {
         "type": "switch",
         "default": false,
@@ -85,10 +143,6 @@
         "default": true,
         "description": "Refresh updates list on left click if there are no updates",
         "dependency": "show-window-on-click"
-    },
-    "sectionMenu": {
-        "type": "section",
-        "description": "Menu"
     },
     "commandUpdate-show": {
         "type": "switch",
@@ -105,10 +159,6 @@
         "default": "pkcon update; echo Done; read",
         "description": "Upgrade packages command:",
         "dependency": "commandUpgrade-show"
-    },
-    "sectionTheme": {
-        "type": "section",
-        "description": "Theme"
     },
     "icon-style": {
         "type": "combobox",
