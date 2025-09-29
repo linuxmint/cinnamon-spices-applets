@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 00:42+0200\n"
+"POT-Creation-Date: 2025-09-30 01:13+0200\n"
 "PO-Revision-Date: 2023-08-24 12:12+0300\n"
 "Last-Translator: DmytroVoytko <Dmytro.Voytko@gmail.com>\n"
 "Language-Team: \n"
@@ -26,47 +26,47 @@ msgstr "(Клацніть правою кнопкою миші, щоб відк�
 msgid "Places"
 msgstr "Місця"
 
-#. applet.js:418
+#. applet.js:420
 msgid "Search Home Folder"
 msgstr "Пошук у домашній папці"
 
-#. applet.js:443
+#. applet.js:447
 msgid "SYSTEM"
 msgstr "СИСТЕМА"
 
-#. applet.js:452
+#. applet.js:456
 msgid "Search File System"
 msgstr "Пошук у файловій системі"
 
-#. applet.js:477
+#. applet.js:482
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:501
+#. applet.js:506
 msgid "RECENT DOCUMENTS"
 msgstr "ОСТАННІ ДОКУМЕНТИ"
 
-#. applet.js:515
+#. applet.js:520
 msgid "Clear"
 msgstr "Очистити"
 
-#. applet.js:522
+#. applet.js:527
 msgid "Recent"
 msgstr ""
 
-#. applet.js:568
+#. applet.js:573
 msgid "Computer"
 msgstr "Комп'ютер"
 
-#. applet.js:574
+#. applet.js:579
 msgid "File System"
 msgstr "Файлова система"
 
-#. applet.js:591
+#. applet.js:596
 msgid "Network"
 msgstr "Мережа"
 
-#. applet.js:813
+#. applet.js:818
 msgid "Trash"
 msgstr "Смітник"
 
@@ -262,6 +262,11 @@ msgstr "Відкрити клацанням середньою кнопкою м
 msgid "Leave blank to disable"
 msgstr "Залиште порожнім, щоб вимкнути"
 
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "Розділ користувача"
+
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
 msgstr "Показати робочий стіл"
@@ -297,6 +302,11 @@ msgstr "Завжди"
 #. settings-schema.json->showTrash->options
 msgid "When not empty"
 msgstr "Коли не порожній"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "Системний розділ"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"

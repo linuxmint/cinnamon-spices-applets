@@ -40,7 +40,7 @@
         "userSection": {
             "type": "section",
             "title": "User section",
-            "keys": ["showDesktop", "showTrash"]
+            "keys": ["showUserSection", "showDesktop", "showTrash"]
         },
         "userSectionCustomPlaces": {
             "type": "section",
@@ -50,7 +50,7 @@
         "systemSection": {
             "type": "section",
             "title": "System section",
-            "keys": ["showComputer", "showRoot", "showVolumes", "onlyShowMounted", "showNetwork"]
+            "keys": ["showSystemSection", "showComputer", "showRoot", "showVolumes", "onlyShowMounted", "showNetwork"]
         },
         "systemSectionCustomPlaces": {
             "type": "section",
@@ -113,6 +113,12 @@
         "tooltip": "Leave blank to disable"
     },
 
+    "showUserSection": {
+        "type": "checkbox",
+        "description": "Show User section",
+        "default": true
+    },
+
     "showDesktop": {
         "type": "checkbox",
         "description": "Show desktop",
@@ -144,6 +150,12 @@
             "Always": 1,
             "When not empty": 2
         }
+    },
+
+    "showSystemSection": {
+        "type": "checkbox",
+        "description": "Show System section",
+        "default": true
     },
 
     "showComputer": {

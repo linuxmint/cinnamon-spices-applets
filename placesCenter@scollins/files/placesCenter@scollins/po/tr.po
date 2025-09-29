@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 00:42+0200\n"
+"POT-Creation-Date: 2025-09-30 01:13+0200\n"
 "PO-Revision-Date: 2018-11-05 00:37+0300\n"
 "Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
 "Language-Team: Linux Mint Türkiye <gokhanlnx@gmail.com>\n"
@@ -27,47 +27,47 @@ msgstr ""
 msgid "Places"
 msgstr "Konumlar"
 
-#. applet.js:418
+#. applet.js:420
 msgid "Search Home Folder"
 msgstr "Ev Dizinini Ara"
 
-#. applet.js:443
+#. applet.js:447
 msgid "SYSTEM"
 msgstr "SİSTEM"
 
-#. applet.js:452
+#. applet.js:456
 msgid "Search File System"
 msgstr "Dosya Sistemi Ara"
 
-#. applet.js:477
+#. applet.js:482
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:501
+#. applet.js:506
 msgid "RECENT DOCUMENTS"
 msgstr "SON BELGELER"
 
-#. applet.js:515
+#. applet.js:520
 msgid "Clear"
 msgstr "Temizle"
 
-#. applet.js:522
+#. applet.js:527
 msgid "Recent"
 msgstr ""
 
-#. applet.js:568
+#. applet.js:573
 msgid "Computer"
 msgstr "Bilgiayar"
 
-#. applet.js:574
+#. applet.js:579
 msgid "File System"
 msgstr "Dosya Sistemi"
 
-#. applet.js:591
+#. applet.js:596
 msgid "Network"
 msgstr "Ağ"
 
-#. applet.js:813
+#. applet.js:818
 msgid "Trash"
 msgstr "Çöp"
 
@@ -263,6 +263,11 @@ msgstr "Orta tıklama ile açılacak konum"
 msgid "Leave blank to disable"
 msgstr "Pasifleştirmek için boş bırakın"
 
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "Kullanıcı bölümü"
+
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
 msgstr "Masaüstünü göster"
@@ -298,6 +303,11 @@ msgstr "Daima"
 #. settings-schema.json->showTrash->options
 msgid "When not empty"
 msgstr "Boş olmadığında"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "Sistem bölümü"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"

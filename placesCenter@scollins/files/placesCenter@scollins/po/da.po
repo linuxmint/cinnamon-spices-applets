@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 00:42+0200\n"
+"POT-Creation-Date: 2025-09-30 01:13+0200\n"
 "PO-Revision-Date: 2022-10-27 19:44+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -27,47 +27,47 @@ msgstr "(Højreklik for at åbne mappen)"
 msgid "Places"
 msgstr "Steder"
 
-#. applet.js:418
+#. applet.js:420
 msgid "Search Home Folder"
 msgstr "Søg i mappen Hjem"
 
-#. applet.js:443
+#. applet.js:447
 msgid "SYSTEM"
 msgstr "SYSTEM"
 
-#. applet.js:452
+#. applet.js:456
 msgid "Search File System"
 msgstr "Søg i Filsystem"
 
-#. applet.js:477
+#. applet.js:482
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:501
+#. applet.js:506
 msgid "RECENT DOCUMENTS"
 msgstr "SENESTE DOKUMENTER"
 
-#. applet.js:515
+#. applet.js:520
 msgid "Clear"
 msgstr "Ryd"
 
-#. applet.js:522
+#. applet.js:527
 msgid "Recent"
 msgstr ""
 
-#. applet.js:568
+#. applet.js:573
 msgid "Computer"
 msgstr "Computer"
 
-#. applet.js:574
+#. applet.js:579
 msgid "File System"
 msgstr "Filsystem"
 
-#. applet.js:591
+#. applet.js:596
 msgid "Network"
 msgstr "Netværk"
 
-#. applet.js:813
+#. applet.js:818
 msgid "Trash"
 msgstr "Papirkurven"
 
@@ -261,6 +261,11 @@ msgstr "Åbn ved klik på midterste museknap"
 msgid "Leave blank to disable"
 msgstr "Efterlad tom for at deaktivere"
 
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "Brugersektion"
+
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
 msgstr "Vis skrivebord"
@@ -296,6 +301,11 @@ msgstr "Altid"
 #. settings-schema.json->showTrash->options
 msgid "When not empty"
 msgstr "Når den ikke er tom"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "Systemsektion"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"

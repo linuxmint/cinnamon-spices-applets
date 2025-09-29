@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 00:42+0200\n"
+"POT-Creation-Date: 2025-09-30 01:13+0200\n"
 "PO-Revision-Date: 2024-07-24 10:12+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -25,47 +25,47 @@ msgstr "(Rechtsklik om map te openen)"
 msgid "Places"
 msgstr "Plaatsen"
 
-#. applet.js:418
+#. applet.js:420
 msgid "Search Home Folder"
 msgstr "Zoeken in thuismap"
 
-#. applet.js:443
+#. applet.js:447
 msgid "SYSTEM"
 msgstr "SYSTEEM"
 
-#. applet.js:452
+#. applet.js:456
 msgid "Search File System"
 msgstr "Zoeken in bestandssysteem"
 
-#. applet.js:477
+#. applet.js:482
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:501
+#. applet.js:506
 msgid "RECENT DOCUMENTS"
 msgstr "RECENTE DOCUMENTEN"
 
-#. applet.js:515
+#. applet.js:520
 msgid "Clear"
 msgstr "Wissen"
 
-#. applet.js:522
+#. applet.js:527
 msgid "Recent"
 msgstr "Recent"
 
-#. applet.js:568
+#. applet.js:573
 msgid "Computer"
 msgstr "Computer"
 
-#. applet.js:574
+#. applet.js:579
 msgid "File System"
 msgstr "Bestandssysteem"
 
-#. applet.js:591
+#. applet.js:596
 msgid "Network"
 msgstr "Netwerk"
 
-#. applet.js:813
+#. applet.js:818
 msgid "Trash"
 msgstr "Prullenbak"
 
@@ -261,6 +261,11 @@ msgstr "Openen bij middenklik"
 msgid "Leave blank to disable"
 msgstr "Laat leeg om uit te schakelen"
 
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "Gebruikerssectie"
+
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
 msgstr "Bureaublad tonen"
@@ -296,6 +301,11 @@ msgstr "Altijd"
 #. settings-schema.json->showTrash->options
 msgid "When not empty"
 msgstr "Wanneer niet leeg"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "Systeemsectie"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"

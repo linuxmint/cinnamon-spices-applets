@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: placesCenter@scollins 2.5.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 00:42+0200\n"
+"POT-Creation-Date: 2025-09-30 01:13+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -25,47 +25,47 @@ msgstr ""
 msgid "Places"
 msgstr ""
 
-#. applet.js:418
+#. applet.js:420
 msgid "Search Home Folder"
 msgstr ""
 
-#. applet.js:443
+#. applet.js:447
 msgid "SYSTEM"
 msgstr ""
 
-#. applet.js:452
+#. applet.js:456
 msgid "Search File System"
 msgstr ""
 
-#. applet.js:477
+#. applet.js:482
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:501
+#. applet.js:506
 msgid "RECENT DOCUMENTS"
 msgstr ""
 
-#. applet.js:515
+#. applet.js:520
 msgid "Clear"
 msgstr ""
 
-#. applet.js:522
+#. applet.js:527
 msgid "Recent"
 msgstr ""
 
-#. applet.js:568
+#. applet.js:573
 msgid "Computer"
 msgstr ""
 
-#. applet.js:574
+#. applet.js:579
 msgid "File System"
 msgstr ""
 
-#. applet.js:591
+#. applet.js:596
 msgid "Network"
 msgstr ""
 
-#. applet.js:813
+#. applet.js:818
 msgid "Trash"
 msgstr ""
 
@@ -254,6 +254,10 @@ msgstr ""
 msgid "Leave blank to disable"
 msgstr ""
 
+#. settings-schema.json->showUserSection->description
+msgid "Show User section"
+msgstr ""
+
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
 msgstr ""
@@ -288,6 +292,10 @@ msgstr ""
 
 #. settings-schema.json->showTrash->options
 msgid "When not empty"
+msgstr ""
+
+#. settings-schema.json->showSystemSection->description
+msgid "Show System section"
 msgstr ""
 
 #. settings-schema.json->showComputer->description

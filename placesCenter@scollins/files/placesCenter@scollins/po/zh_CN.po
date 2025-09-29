@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 00:42+0200\n"
+"POT-Creation-Date: 2025-09-30 01:13+0200\n"
 "PO-Revision-Date: 2017-05-02 21:02+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -27,47 +27,47 @@ msgstr ""
 msgid "Places"
 msgstr "位置"
 
-#. applet.js:418
+#. applet.js:420
 msgid "Search Home Folder"
 msgstr "搜索主目录文件夹"
 
-#. applet.js:443
+#. applet.js:447
 msgid "SYSTEM"
 msgstr "系统"
 
-#. applet.js:452
+#. applet.js:456
 msgid "Search File System"
 msgstr "搜索文件系统"
 
-#. applet.js:477
+#. applet.js:482
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:501
+#. applet.js:506
 msgid "RECENT DOCUMENTS"
 msgstr "最近的文档"
 
-#. applet.js:515
+#. applet.js:520
 msgid "Clear"
 msgstr "清除"
 
-#. applet.js:522
+#. applet.js:527
 msgid "Recent"
 msgstr ""
 
-#. applet.js:568
+#. applet.js:573
 msgid "Computer"
 msgstr "计算机"
 
-#. applet.js:574
+#. applet.js:579
 msgid "File System"
 msgstr "文件系统"
 
-#. applet.js:591
+#. applet.js:596
 msgid "Network"
 msgstr "网络"
 
-#. applet.js:813
+#. applet.js:818
 msgid "Trash"
 msgstr "回收站"
 
@@ -267,6 +267,11 @@ msgstr "中键点击时打开"
 msgid "Leave blank to disable"
 msgstr "留空则禁用"
 
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "用户部分"
+
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
 msgstr "显示桌面"
@@ -302,6 +307,11 @@ msgstr "总是"
 #. settings-schema.json->showTrash->options
 msgid "When not empty"
 msgstr "当非空时"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "系统部分"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"

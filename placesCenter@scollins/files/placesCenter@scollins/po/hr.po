@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Places Center 2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 00:42+0200\n"
+"POT-Creation-Date: 2025-09-30 01:13+0200\n"
 "PO-Revision-Date: 2017-02-26 21:10+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -28,47 +28,47 @@ msgstr ""
 msgid "Places"
 msgstr "Lokacije"
 
-#. applet.js:418
+#. applet.js:420
 msgid "Search Home Folder"
 msgstr "Pretraži osobnu mapu"
 
-#. applet.js:443
+#. applet.js:447
 msgid "SYSTEM"
 msgstr "SUSTAV"
 
-#. applet.js:452
+#. applet.js:456
 msgid "Search File System"
 msgstr "Pretraži datotečni sustav"
 
-#. applet.js:477
+#. applet.js:482
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:501
+#. applet.js:506
 msgid "RECENT DOCUMENTS"
 msgstr "NEDAVNI DOKUMENTI"
 
-#. applet.js:515
+#. applet.js:520
 msgid "Clear"
 msgstr "Obriši"
 
-#. applet.js:522
+#. applet.js:527
 msgid "Recent"
 msgstr ""
 
-#. applet.js:568
+#. applet.js:573
 msgid "Computer"
 msgstr "Računalo"
 
-#. applet.js:574
+#. applet.js:579
 msgid "File System"
 msgstr "Datotečni sustav"
 
-#. applet.js:591
+#. applet.js:596
 msgid "Network"
 msgstr "Mreža"
 
-#. applet.js:813
+#. applet.js:818
 msgid "Trash"
 msgstr "Smeće"
 
@@ -265,6 +265,11 @@ msgstr "Otvori pri srednjem kliku"
 msgid "Leave blank to disable"
 msgstr "Ostavi prazno za onemgućavanje"
 
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "Korisnikove mogućnosti"
+
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
 msgstr "Prikaži radnu površinu"
@@ -300,6 +305,11 @@ msgstr "Uvijek"
 #. settings-schema.json->showTrash->options
 msgid "When not empty"
 msgstr "Kada nije prazno"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "Mogućnosti sustava"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"

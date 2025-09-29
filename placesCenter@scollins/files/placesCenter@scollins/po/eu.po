@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 00:42+0200\n"
+"POT-Creation-Date: 2025-09-30 01:13+0200\n"
 "PO-Revision-Date: 2022-12-12 16:33+0100\n"
 "Last-Translator: Inigo Gebara <igebara@disroot.org>\n"
 "Language-Team: \n"
@@ -27,47 +27,47 @@ msgstr ""
 msgid "Places"
 msgstr "Lekuak"
 
-#. applet.js:418
+#. applet.js:420
 msgid "Search Home Folder"
 msgstr "Bilatu karpeta nagusian"
 
-#. applet.js:443
+#. applet.js:447
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:452
+#. applet.js:456
 msgid "Search File System"
 msgstr "Bilatu fitxategi-sisteman"
 
-#. applet.js:477
+#. applet.js:482
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:501
+#. applet.js:506
 msgid "RECENT DOCUMENTS"
 msgstr "DUELA GUTXIKO DOKUMENTUAK"
 
-#. applet.js:515
+#. applet.js:520
 msgid "Clear"
 msgstr "Garbitu"
 
-#. applet.js:522
+#. applet.js:527
 msgid "Recent"
 msgstr ""
 
-#. applet.js:568
+#. applet.js:573
 msgid "Computer"
 msgstr "Ordenagailua"
 
-#. applet.js:574
+#. applet.js:579
 msgid "File System"
 msgstr "Fitxategi-sistema"
 
-#. applet.js:591
+#. applet.js:596
 msgid "Network"
 msgstr "Sarea"
 
-#. applet.js:813
+#. applet.js:818
 msgid "Trash"
 msgstr "Zakarrontzia"
 
@@ -263,6 +263,11 @@ msgstr "Ireki saguaren erdiko botoia sakatuz"
 msgid "Leave blank to disable"
 msgstr "Utzi hutsik ezgaitzeko"
 
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "Erabiltzailearen atala"
+
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
 msgstr "Erakutsi mahaigaina"
@@ -298,6 +303,11 @@ msgstr "Beti"
 #. settings-schema.json->showTrash->options
 msgid "When not empty"
 msgstr "Hutsik ez dagoenean"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "Sistemaren atala"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"

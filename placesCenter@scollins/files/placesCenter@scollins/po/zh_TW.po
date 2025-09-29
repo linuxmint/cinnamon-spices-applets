@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: placesCenter@scollins 2.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 00:42+0200\n"
+"POT-Creation-Date: 2025-09-30 01:13+0200\n"
 "PO-Revision-Date: 2025-08-04 00:13+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -24,47 +24,47 @@ msgstr "（點選滑鼠右鍵開啟資料夾）"
 msgid "Places"
 msgstr "位置"
 
-#. applet.js:418
+#. applet.js:420
 msgid "Search Home Folder"
 msgstr "搜尋家目錄"
 
-#. applet.js:443
+#. applet.js:447
 msgid "SYSTEM"
 msgstr "系統"
 
-#. applet.js:452
+#. applet.js:456
 msgid "Search File System"
 msgstr "搜尋檔案系統"
 
-#. applet.js:477
+#. applet.js:482
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:501
+#. applet.js:506
 msgid "RECENT DOCUMENTS"
 msgstr "最近的文件"
 
-#. applet.js:515
+#. applet.js:520
 msgid "Clear"
 msgstr "清除"
 
-#. applet.js:522
+#. applet.js:527
 msgid "Recent"
 msgstr "最近使用"
 
-#. applet.js:568
+#. applet.js:573
 msgid "Computer"
 msgstr "電腦"
 
-#. applet.js:574
+#. applet.js:579
 msgid "File System"
 msgstr "檔案系統"
 
-#. applet.js:591
+#. applet.js:596
 msgid "Network"
 msgstr "網路"
 
-#. applet.js:813
+#. applet.js:818
 msgid "Trash"
 msgstr "資源回收筒"
 
@@ -257,6 +257,11 @@ msgstr "中鍵點選時開啟"
 msgid "Leave blank to disable"
 msgstr "留空以停用"
 
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "使用者區段"
+
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
 msgstr "顯示桌面"
@@ -292,6 +297,11 @@ msgstr "一律"
 #. settings-schema.json->showTrash->options
 msgid "When not empty"
 msgstr "不為空時"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "系統區段"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"

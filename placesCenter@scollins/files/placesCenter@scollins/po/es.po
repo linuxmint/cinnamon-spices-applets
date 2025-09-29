@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 00:42+0200\n"
+"POT-Creation-Date: 2025-09-30 01:13+0200\n"
 "PO-Revision-Date: 2024-05-13 12:54-0400\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
@@ -27,47 +27,47 @@ msgstr "(Haga clic con el botón derecho para abrir la carpeta)"
 msgid "Places"
 msgstr "Lugares"
 
-#. applet.js:418
+#. applet.js:420
 msgid "Search Home Folder"
 msgstr "Buscar en la carpeta personal"
 
-#. applet.js:443
+#. applet.js:447
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:452
+#. applet.js:456
 msgid "Search File System"
 msgstr "Buscar en el sistema de archivos"
 
-#. applet.js:477
+#. applet.js:482
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:501
+#. applet.js:506
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTOS RECIENTES"
 
-#. applet.js:515
+#. applet.js:520
 msgid "Clear"
 msgstr "Limpiar"
 
-#. applet.js:522
+#. applet.js:527
 msgid "Recent"
 msgstr "Recientes"
 
-#. applet.js:568
+#. applet.js:573
 msgid "Computer"
 msgstr "PC"
 
-#. applet.js:574
+#. applet.js:579
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#. applet.js:591
+#. applet.js:596
 msgid "Network"
 msgstr "Red"
 
-#. applet.js:813
+#. applet.js:818
 msgid "Trash"
 msgstr "Papelera"
 
@@ -262,6 +262,11 @@ msgstr "Abrir al hacer click central"
 msgid "Leave blank to disable"
 msgstr "Dejar en blanco para deshabilitar"
 
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "Sección del usuario"
+
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
 msgstr "Mostrar «Escritorio»"
@@ -297,6 +302,11 @@ msgstr "Siempre"
 #. settings-schema.json->showTrash->options
 msgid "When not empty"
 msgstr "Cuando no esté vacía"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "Sección del sistema"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"

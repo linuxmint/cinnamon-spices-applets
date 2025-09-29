@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: placesCenter@scollins 2.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 00:42+0200\n"
+"POT-Creation-Date: 2025-09-30 01:13+0200\n"
 "PO-Revision-Date: 2024-07-13 03:16+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -26,47 +26,47 @@ msgstr "(Clic dret per obrir la carpeta)"
 msgid "Places"
 msgstr "Llocs"
 
-#. applet.js:418
+#. applet.js:420
 msgid "Search Home Folder"
 msgstr "Buscar al directori Home"
 
-#. applet.js:443
+#. applet.js:447
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:452
+#. applet.js:456
 msgid "Search File System"
 msgstr "Buscar al sistema de fitxers"
 
-#. applet.js:477
+#. applet.js:482
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:501
+#. applet.js:506
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTS RECENTS"
 
-#. applet.js:515
+#. applet.js:520
 msgid "Clear"
 msgstr "Netejar"
 
-#. applet.js:522
+#. applet.js:527
 msgid "Recent"
 msgstr "Recent"
 
-#. applet.js:568
+#. applet.js:573
 msgid "Computer"
 msgstr "Ordinador"
 
-#. applet.js:574
+#. applet.js:579
 msgid "File System"
 msgstr "Sistema de fitxers"
 
-#. applet.js:591
+#. applet.js:596
 msgid "Network"
 msgstr "Xarxa"
 
-#. applet.js:813
+#. applet.js:818
 msgid "Trash"
 msgstr "Paperera"
 
@@ -261,6 +261,11 @@ msgstr "Obrir en fer clic del mig"
 msgid "Leave blank to disable"
 msgstr "Deixeu-ho buit per a desactivar-ho"
 
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "Secció de l'usuari"
+
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
 msgstr "Mostrar l'escriptori"
@@ -296,6 +301,11 @@ msgstr "Sempre"
 #. settings-schema.json->showTrash->options
 msgid "When not empty"
 msgstr "Quan no sigui buida"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "Secció del sistema"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"

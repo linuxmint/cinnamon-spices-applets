@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 00:42+0200\n"
+"POT-Creation-Date: 2025-09-30 01:13+0200\n"
 "PO-Revision-Date: 2024-06-18 15:39+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -27,47 +27,47 @@ msgstr "(Fare clic con il tasto destro per aprire la cartella)"
 msgid "Places"
 msgstr "Posizioni"
 
-#. applet.js:418
+#. applet.js:420
 msgid "Search Home Folder"
 msgstr "Cerca nella cartella Home"
 
-#. applet.js:443
+#. applet.js:447
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:452
+#. applet.js:456
 msgid "Search File System"
 msgstr "Cerca nel File System"
 
-#. applet.js:477
+#. applet.js:482
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:501
+#. applet.js:506
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTI RECENTI"
 
-#. applet.js:515
+#. applet.js:520
 msgid "Clear"
 msgstr "Pulisci"
 
-#. applet.js:522
+#. applet.js:527
 msgid "Recent"
 msgstr "Recenti"
 
-#. applet.js:568
+#. applet.js:573
 msgid "Computer"
 msgstr "Computer"
 
-#. applet.js:574
+#. applet.js:579
 msgid "File System"
 msgstr "File System"
 
-#. applet.js:591
+#. applet.js:596
 msgid "Network"
 msgstr "Rete"
 
-#. applet.js:813
+#. applet.js:818
 msgid "Trash"
 msgstr "Cestino"
 
@@ -263,6 +263,11 @@ msgstr "Apri al clic centrale"
 msgid "Leave blank to disable"
 msgstr "Lascia vuoto per disabilitare"
 
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "Sezione utente"
+
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
 msgstr "Mostra desktop"
@@ -298,6 +303,11 @@ msgstr "Sempre"
 #. settings-schema.json->showTrash->options
 msgid "When not empty"
 msgstr "Quando non vuoto"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "Sezione sistema"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"

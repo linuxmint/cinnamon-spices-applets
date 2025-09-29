@@ -326,12 +326,14 @@ class PlacesCenter extends Applet.TextIconApplet {
         this.settings.bind("iconSize", "iconSize");
         this.settings.bind("middleClickPath", "middleClickPath");
         //~ this.settings.bind("showDesktop", "showDesktop", this.buildUserSection);
+        this.settings.bind("showUserSection", "showUserSection");
         this.settings.bind("showDesktop", "showDesktop");
         //~ this.settings.bind("listUserCustomPlaces", "listUserCustomPlaces", this.buildUserSection);
         this.settings.bind("listUserCustomPlaces", "listUserCustomPlaces");
         this.settings.bind("userCustomPlaces", "userCustomPlaces");
         //~ this.settings.bind("showTrash", "showTrash", this.buildTrashItem);
         this.settings.bind("showTrash", "showTrash");
+        this.settings.bind("showSystemSection", "showSystemSection");
         //~ this.settings.bind("showComputer", "showComputer", this.buildSystemSection);
         this.settings.bind("showComputer", "showComputer");
         //~ this.settings.bind("showRoot", "showRoot", this.buildSystemSection);
@@ -402,69 +404,72 @@ class PlacesCenter extends Applet.TextIconApplet {
         try {
 
             //User section
+            if (this.showUserSection) {
+                userPaneBox.add_actor(userPane.actor);
 
-            userPaneBox.add_actor(userPane.actor);
+                userPane.addMenuItem(userTitle);
+                userTitle.addActor(new St.Label({ text: GLib.get_user_name().toUpperCase() }));
+                section._connectSubMenuSignals(userPane, userPane);
 
-            userPane.addMenuItem(userTitle);
-            userTitle.addActor(new St.Label({ text: GLib.get_user_name().toUpperCase() }));
-            section._connectSubMenuSignals(userPane, userPane);
+                //add link to search tool
 
-            //add link to search tool
+                userTitle.addActor(userSearchButton);
 
-            userTitle.addActor(userSearchButton);
+                userSearchButton.add_actor(userSearchImage);
+                userSearchButton.connect("clicked", Lang.bind(this, this.search, HOME_DIR));
+                new Tooltips.Tooltip(userSearchButton, _("Search Home Folder"));
 
-            userSearchButton.add_actor(userSearchImage);
-            userSearchButton.connect("clicked", Lang.bind(this, this.search, HOME_DIR));
-            new Tooltips.Tooltip(userSearchButton, _("Search Home Folder"));
+                // create a scrollbox for large user section, if any
 
-            // create a scrollbox for large user section, if any
+                userPane.actor.add_actor(userScrollBox);
+                userScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
 
-            userPane.actor.add_actor(userScrollBox);
-            userScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+                //~ userVscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
+                //~ userVscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
+                userVscroll.connect("scroll-start", () => { this.menu.passEvents = true; });
+                userVscroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
 
-            //~ userVscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
-            //~ userVscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
-            userVscroll.connect("scroll-start", () => { this.menu.passEvents = true; });
-            userVscroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
+                //~ this.userSection = new PopupMenu.PopupMenuSection();
+                userScrollBox.add_actor(this.userSection.actor);
+                userPane._connectSubMenuSignals(this.userSection, this.userSection);
 
-            //~ this.userSection = new PopupMenu.PopupMenuSection();
-            userScrollBox.add_actor(this.userSection.actor);
-            userPane._connectSubMenuSignals(this.userSection, this.userSection);
-
-            mainBox.add_actor(userPaneBox);
-            this.buildUserSection();
+                mainBox.add_actor(userPaneBox);
+                this.buildUserSection();
+            }
 
             //system section
-            let systemPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
-            let systemPane = new PopupMenu.PopupMenuSection();
-            systemPaneBox.add_actor(systemPane.actor);
-            let systemTitle = new PopupMenu.PopupBaseMenuItem({ style_class: "xCenter-title", reactive: false });
-            systemPane.addMenuItem(systemTitle);
-            systemTitle.addActor(new St.Label({ text: _("SYSTEM") }));
-            section._connectSubMenuSignals(systemPane, systemPane);
+            if (this.showSystemSection) {
+                let systemPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
+                let systemPane = new PopupMenu.PopupMenuSection();
+                systemPaneBox.add_actor(systemPane.actor);
+                let systemTitle = new PopupMenu.PopupBaseMenuItem({ style_class: "xCenter-title", reactive: false });
+                systemPane.addMenuItem(systemTitle);
+                systemTitle.addActor(new St.Label({ text: _("SYSTEM") }));
+                section._connectSubMenuSignals(systemPane, systemPane);
 
-            //add link to search tool
-            let systemSearchButton = new St.Button();
-            systemTitle.addActor(systemSearchButton);
-            let systemSearchImage = new St.Icon({ icon_name: "edit-find", icon_size: 10, icon_type: St.IconType.SYMBOLIC });
-            systemSearchButton.add_actor(systemSearchImage);
-            systemSearchButton.connect("clicked", Lang.bind(this, this.search));
-            new Tooltips.Tooltip(systemSearchButton, _("Search File System"));
+                //add link to search tool
+                let systemSearchButton = new St.Button();
+                systemTitle.addActor(systemSearchButton);
+                let systemSearchImage = new St.Icon({ icon_name: "edit-find", icon_size: 10, icon_type: St.IconType.SYMBOLIC });
+                systemSearchButton.add_actor(systemSearchImage);
+                systemSearchButton.connect("clicked", Lang.bind(this, this.search));
+                new Tooltips.Tooltip(systemSearchButton, _("Search File System"));
 
-            // create a scrollbox for large system section, if any
-            let systemScrollBox = new St.ScrollView({ style_class: "xCenter-scrollBox", x_fill: true, y_fill: false, y_align: St.Align.START });
-            systemPane.actor.add_actor(systemScrollBox);
-            systemScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
-            let systemVscroll = systemScrollBox.get_vscroll_bar();
-            systemVscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
-            systemVscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
+                // create a scrollbox for large system section, if any
+                let systemScrollBox = new St.ScrollView({ style_class: "xCenter-scrollBox", x_fill: true, y_fill: false, y_align: St.Align.START });
+                systemPane.actor.add_actor(systemScrollBox);
+                systemScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+                let systemVscroll = systemScrollBox.get_vscroll_bar();
+                systemVscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
+                systemVscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
 
-            //~ this.systemSection = new PopupMenu.PopupMenuSection();
-            systemScrollBox.add_actor(this.systemSection.actor);
-            systemPane._connectSubMenuSignals(this.systemSection, this.systemSection);
+                //~ this.systemSection = new PopupMenu.PopupMenuSection();
+                systemScrollBox.add_actor(this.systemSection.actor);
+                systemPane._connectSubMenuSignals(this.systemSection, this.systemSection);
 
-            mainBox.add_actor(systemPaneBox);
-            this.buildSystemSection();
+                mainBox.add_actor(systemPaneBox);
+                this.buildSystemSection();
+            }
 
             //favorite documents section
             if ( this.showFavorites ) {
