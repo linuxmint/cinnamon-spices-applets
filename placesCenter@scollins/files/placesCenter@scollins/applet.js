@@ -319,6 +319,7 @@ class PlacesCenter extends Applet.TextIconApplet {
     }
 
     bindSettings() {
+        this.settings.bind("noIconOnPanel", "noIconOnPanel", this.setPanelIcon);
         this.settings.bind("panelIcon", "panelIcon", this.setPanelIcon);
         this.settings.bind("panelText", "panelText", this.setPanelText);
         //~ this.settings.bind("iconSize", "iconSize", this.buildMenu);
@@ -825,11 +826,19 @@ class PlacesCenter extends Applet.TextIconApplet {
             else this.set_applet_icon_name(this.panelIcon);
         }
         else this.set_applet_icon_name("folder");
+
+        if ( this.noIconOnPanel && this.panelText.length > 0 ) this._applet_icon_box.hide();
+        else this._applet_icon_box.show();
     }
 
     setPanelText() {
-        if ( this.panelText ) this.set_applet_label(this.panelText);
-        else this.set_applet_label("");
+        if ( this.panelText ) {
+            this.set_applet_label(this.panelText);
+        } else {
+            this.noIconOnPanel = false;
+            this.set_applet_label("");
+        }
+        this.setPanelIcon();
     }
 
     getMiddleClickUri() {

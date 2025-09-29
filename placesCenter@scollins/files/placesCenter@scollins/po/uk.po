@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-29 18:31+0200\n"
+"POT-Creation-Date: 2025-09-30 00:42+0200\n"
 "PO-Revision-Date: 2023-08-24 12:12+0300\n"
 "Last-Translator: DmytroVoytko <Dmytro.Voytko@gmail.com>\n"
 "Language-Team: \n"
@@ -26,47 +26,47 @@ msgstr "(Клацніть правою кнопкою миші, щоб відк�
 msgid "Places"
 msgstr "Місця"
 
-#. applet.js:417
+#. applet.js:418
 msgid "Search Home Folder"
 msgstr "Пошук у домашній папці"
 
-#. applet.js:442
+#. applet.js:443
 msgid "SYSTEM"
 msgstr "СИСТЕМА"
 
-#. applet.js:451
+#. applet.js:452
 msgid "Search File System"
 msgstr "Пошук у файловій системі"
 
-#. applet.js:476
+#. applet.js:477
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:500
+#. applet.js:501
 msgid "RECENT DOCUMENTS"
 msgstr "ОСТАННІ ДОКУМЕНТИ"
 
-#. applet.js:514
+#. applet.js:515
 msgid "Clear"
 msgstr "Очистити"
 
-#. applet.js:521
+#. applet.js:522
 msgid "Recent"
 msgstr ""
 
-#. applet.js:567
+#. applet.js:568
 msgid "Computer"
 msgstr "Комп'ютер"
 
-#. applet.js:573
+#. applet.js:574
 msgid "File System"
 msgstr "Файлова система"
 
-#. applet.js:590
+#. applet.js:591
 msgid "Network"
 msgstr "Мережа"
 
-#. applet.js:806
+#. applet.js:813
 msgid "Trash"
 msgstr "Смітник"
 
@@ -249,6 +249,10 @@ msgstr "px"
 #. settings-schema.json->iconSize->description
 msgid "Menu icon size"
 msgstr "Розмір значка меню"
+
+#. settings-schema.json->noIconOnPanel->description
+msgid "No icon on panel"
+msgstr ""
 
 #. settings-schema.json->middleClickPath->description
 msgid "Open on middle click"

@@ -30,7 +30,7 @@
         "panel": {
             "type": "section",
             "title": "Panel settings",
-            "keys": ["panelIcon", "panelText", "middleClickPath"]
+            "keys": ["panelIcon", "panelText", "noIconOnPanel", "middleClickPath"]
         },
         "menu": {
             "type": "section",
@@ -96,6 +96,13 @@
         "units": "px",
         "step": 2,
         "description": "Menu icon size"
+    },
+
+    "noIconOnPanel": {
+        "type": "checkbox",
+        "description": "No icon on panel",
+        "default": false,
+        "dependency": "panelText!="
     },
 
     "middleClickPath": {
