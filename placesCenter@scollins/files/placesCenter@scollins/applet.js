@@ -202,6 +202,7 @@ class PlacesCenter extends Applet.TextIconApplet {
             uuid = metadata.uuid;
             Gettext.bindtextdomain(uuid, HOME_DIR + "/.local/share/locale");
 
+            this.enterEventId = null;
             this.userSection = new PopupMenu.PopupMenuSection();
             this.systemSection = new PopupMenu.PopupMenuSection();
             this.devicesSection = new PopupMenu.PopupMenuSection();
@@ -266,18 +267,17 @@ class PlacesCenter extends Applet.TextIconApplet {
     }
 
     on_applet_clicked(event) {
-        if ( ! this.menu.isOpen ) {
-            this.buildMenu();
-            //~ this.buildRecentDocumentsSection(); // Avoid errors when a document has been moved.
-        }
         this.menu.toggle();
     }
 
     on_applet_added_to_panel() {
+        this.enterEventId = this.actor.connect("enter-event", (actor, event) => { if ( ! this.menu.isOpen ) this.buildMenu(); } );
         this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
     }
 
     on_applet_removed_from_panel() {
+        if ( this.enterEventId )
+            this.actor.disconnect(this.enterEventId); // "enter-event"
         if ( this.keyId ) Main.keybindingManager.removeHotKey(this.keyId);
     }
 
