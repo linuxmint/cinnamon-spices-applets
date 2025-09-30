@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 1.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-24 18:34+0200\n"
+"POT-Creation-Date: 2025-09-29 10:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,38 +18,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.7\n"
 
-#. applet.js:76
+#. applet.js:79
 msgid "missing dependencies"
 msgstr "brakujące zależności"
 
-#. applet.js:202
+#. applet.js:229
 msgid "Check for new updates"
 msgstr "Sprawdź nowe aktualizacje"
 
-#. applet.js:216
+#. applet.js:243
 #, javascript-format
 msgid "View %s updates"
 msgstr "Zobacz %s aktualizacji"
 
-#. applet.js:216
+#. applet.js:243
 msgid "No updates to view"
 msgstr "Brak aktualizacji do wyświetlenia"
 
-#. applet.js:231
+#. applet.js:258
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "Zaktualizuj %s pakietów"
 
-#. applet.js:231
+#. applet.js:258
 msgid "No packages to upgrade"
 msgstr "Brak pakietów do zaktualizowania"
 
-#. applet.js:256
+#. applet.js:283
 #, javascript-format
 msgid "%s updates available"
 msgstr "%s dostępnych aktualizacji"
 
-#. applet.js:257
+#. applet.js:284
 msgid "No updates available"
 msgstr "Brak dostępnych aktualizacji"
 
@@ -105,9 +105,33 @@ msgstr "Powiadomienia o aktualizacjach"
 msgid "Shows icons for pending update packages"
 msgstr "Pokazuje ikony dla oczekujących pakietów aktualizacji"
 
-#. settings-schema.json->section1->description
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->pageAppearance->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->sectionSettings->title
 msgid "Settings"
 msgstr "Ustawienia"
+
+#. settings-schema.json->sectionIconLabel->title
+msgid "Icon/Label"
+msgstr ""
+
+#. settings-schema.json->sectionClick->title
+msgid "Applet click"
+msgstr ""
+
+#. settings-schema.json->sectionMenu->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->sectionTheme->title
+msgid "Theme"
+msgstr "Motyw"
 
 #. settings-schema.json->update-refresh->description
 msgid "Minutes to wait before refreshing updates"
@@ -141,8 +165,20 @@ msgstr ""
 "wartością niskiego poziomu a tą wartością. Pokazuj ikonę wysokiego poziomu, "
 "jeśli jest wyższa niż ta wartość."
 
-#. settings-schema.json->section2->description
-msgid "Applet click"
+#. settings-schema.json->show-label->description
+msgid "Show label with updates count"
+msgstr "Pokazuj etykietę z liczbą aktualizacji"
+
+#. settings-schema.json->label-font-size->description
+msgid "Label font size"
+msgstr ""
+
+#. settings-schema.json->label-font-weight->description
+msgid "Label font weight"
+msgstr ""
+
+#. settings-schema.json->label-vertical-position->description
+msgid "Label vertical position"
 msgstr ""
 
 #. settings-schema.json->show-window-on-click->description
@@ -155,10 +191,6 @@ msgstr ""
 "Odśwież listę aktualizacji po kliknięciu lewym przyciskiem, jeśli nie ma "
 "aktualizacji"
 
-#. settings-schema.json->section3->description
-msgid "Menu"
-msgstr ""
-
 #. settings-schema.json->commandUpdate-show->description
 msgid "Show \"Check for new updates\" command"
 msgstr "Pokaż polecenie „Sprawdź nowe aktualizacje”"
@@ -170,10 +202,6 @@ msgstr "Pokaż polecenie „Zaktualizuj pakiety”"
 #. settings-schema.json->commandUpgrade->description
 msgid "Upgrade packages command:"
 msgstr "Polecenie aktualizacji pakietów:"
-
-#. settings-schema.json->section4->description
-msgid "Theme"
-msgstr "Motyw"
 
 #. settings-schema.json->icon-style->description
 msgid "Icon style"

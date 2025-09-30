@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: updates-notifier@zamszowy 2.1.0\n"
+"Project-Id-Version: updates-notifier@zamszowy 2.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-24 18:34+0200\n"
+"POT-Creation-Date: 2025-09-29 10:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,38 +17,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:76
+#. applet.js:79
 msgid "missing dependencies"
 msgstr ""
 
-#. applet.js:202
+#. applet.js:229
 msgid "Check for new updates"
 msgstr ""
 
-#. applet.js:216
+#. applet.js:243
 #, javascript-format
 msgid "View %s updates"
 msgstr ""
 
-#. applet.js:216
+#. applet.js:243
 msgid "No updates to view"
 msgstr ""
 
-#. applet.js:231
+#. applet.js:258
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr ""
 
-#. applet.js:231
+#. applet.js:258
 msgid "No packages to upgrade"
 msgstr ""
 
-#. applet.js:256
+#. applet.js:283
 #, javascript-format
 msgid "%s updates available"
 msgstr ""
 
-#. applet.js:257
+#. applet.js:284
 msgid "No updates available"
 msgstr ""
 
@@ -98,8 +98,32 @@ msgstr ""
 msgid "Shows icons for pending update packages"
 msgstr ""
 
-#. settings-schema.json->section1->description
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->pageAppearance->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->sectionSettings->title
 msgid "Settings"
+msgstr ""
+
+#. settings-schema.json->sectionIconLabel->title
+msgid "Icon/Label"
+msgstr ""
+
+#. settings-schema.json->sectionClick->title
+msgid "Applet click"
+msgstr ""
+
+#. settings-schema.json->sectionMenu->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->sectionTheme->title
+msgid "Theme"
 msgstr ""
 
 #. settings-schema.json->update-refresh->description
@@ -128,8 +152,20 @@ msgid ""
 "this value. Show high level icon if it's higher than this value."
 msgstr ""
 
-#. settings-schema.json->section2->description
-msgid "Applet click"
+#. settings-schema.json->show-label->description
+msgid "Show label with updates count"
+msgstr ""
+
+#. settings-schema.json->label-font-size->description
+msgid "Label font size"
+msgstr ""
+
+#. settings-schema.json->label-font-weight->description
+msgid "Label font weight"
+msgstr ""
+
+#. settings-schema.json->label-vertical-position->description
+msgid "Label vertical position"
 msgstr ""
 
 #. settings-schema.json->show-window-on-click->description
@@ -138,10 +174,6 @@ msgstr ""
 
 #. settings-schema.json->refresh-when-no-updates->description
 msgid "Refresh updates list on left click if there are no updates"
-msgstr ""
-
-#. settings-schema.json->section3->description
-msgid "Menu"
 msgstr ""
 
 #. settings-schema.json->commandUpdate-show->description
@@ -154,10 +186,6 @@ msgstr ""
 
 #. settings-schema.json->commandUpgrade->description
 msgid "Upgrade packages command:"
-msgstr ""
-
-#. settings-schema.json->section4->description
-msgid "Theme"
 msgstr ""
 
 #. settings-schema.json->icon-style->description

@@ -14,12 +14,13 @@ You can:
 
 - change refresh timeout
 - include firmware updates (if `fwupdmgr` and `jq` are installed), although
-they won't we installed with applet's default "upgrade command"
+they won't be installed with applet's default "upgrade command"
 - change default upgrade `pkcon` commands  to your own.
 - disable menu and open updates window when clicked on applet
 - enable showing three (configurable) levels of icon to show how many packages
 are waiting for the upgrades.
 - hide applet if there are no updates available
+- show label (with customized size/weight) with number of available updates
 
 ## Dependencies
 
