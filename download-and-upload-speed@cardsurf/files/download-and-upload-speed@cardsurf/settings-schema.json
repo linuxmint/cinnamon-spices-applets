@@ -107,22 +107,30 @@
         "tooltip": "A CSS style applied to the text in the panel",
         "expand-width": true
     },
+    "gui_show_icons" : {
+        "type" : "switch",
+        "default" : true,
+        "description": "Show icons"
+    },
     "gui_received_icon_filename" : {
         "type" : "filechooser",
         "default" : "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_down_blue.svg",
         "description" : "Download icon",
-        "tooltip": "An icon displayed next to download speed in the panel.\nTo display a symbolic icon make sure its name ends with '-symbolic.svg'."
+        "tooltip": "An icon displayed next to download speed in the panel.\nTo display a symbolic icon make sure its name ends with '-symbolic.svg'.",
+        "dependency": "gui_show_icons"
     },
     "gui_sent_icon_filename" : {
         "type" : "filechooser",
         "default" : "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_up_red.svg",
         "description" : "Upload icon",
-        "tooltip": "An icon displayed next to upload speed in the panel.\nTo display a symbolic icon make sure its name ends with '-symbolic.svg'."
+        "tooltip": "An icon displayed next to upload speed in the panel.\nTo display a symbolic icon make sure its name ends with '-symbolic.svg'.",
+        "dependency": "gui_show_icons"
     },
     "gui_symbolic_icon" : {
         "type" : "switch",
         "default" : false,
-        "description": "Show a default set of symbolic icons"
+        "description": "Show a default set of symbolic icons",
+        "dependency": "gui_show_icons"
     },
     "hover_popup_text_css": {
         "type": "entry",

@@ -100,6 +100,7 @@ DownloadAndUploadSpeed.prototype = {
         this.data_limit_command = "";
         this.data_limit = 0;
         this.gui_text_css = "";
+        this.gui_show_icons = true;
         this.gui_received_icon_filename = "";
         this.gui_symbolic_icon = false;
         this.gui_sent_icon_filename = "";
@@ -199,6 +200,7 @@ DownloadAndUploadSpeed.prototype = {
                         [Settings.BindingDirection.IN, "show_hover", this.on_show_hover_changed],
                         [Settings.BindingDirection.IN, "gui_data_limit_type", this.on_gui_data_limit_type_changed],
                         [Settings.BindingDirection.IN, "gui_text_css", this.on_gui_css_changed],
+                        [Settings.BindingDirection.IN, "gui_show_icons", this.on_gui_icon_visible_changed],
                         [Settings.BindingDirection.IN, "gui_received_icon_filename", this.on_gui_icon_changed],
                         [Settings.BindingDirection.IN, "gui_sent_icon_filename", this.on_gui_icon_changed],
                         [Settings.BindingDirection.IN, "gui_symbolic_icon", this.on_gui_icon_style_change],
@@ -308,6 +310,10 @@ DownloadAndUploadSpeed.prototype = {
         else {
             this.hover_popup.disable();
         }
+    },
+
+    on_gui_icon_visible_changed: function () {
+        this.gui_speed.set_icons_visible(this.gui_show_icons);
     },
 
     on_gui_icon_changed: function () {
@@ -698,6 +704,7 @@ DownloadAndUploadSpeed.prototype = {
         this.actor.add(this.gui_speed.actor,
                       { x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE, y_fill: false });
         this.on_gui_icon_changed();
+        this.on_gui_icon_visible_changed();
         this.on_gui_css_changed();
     },
 

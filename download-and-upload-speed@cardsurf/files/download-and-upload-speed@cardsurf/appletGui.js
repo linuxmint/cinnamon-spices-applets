@@ -52,6 +52,15 @@ IconLabel.prototype = {
         this.actor.add(this.label);
     },
 
+    set_icon_visible: function (visible) {
+        if (visible) {
+            this.icon.show();
+        }
+        else {
+            this.icon.hide();
+        }
+    },
+
     set_gicon: function(file_icon) {
         this.icon.set_gicon(file_icon);
     },
@@ -148,6 +157,11 @@ GuiSpeed.prototype = {
     _init_actor_upload_first: function(){
         this.actor.add(this.iconlabel_sent.actor);
         this.actor.add(this.iconlabel_received.actor);
+    },
+
+    set_icons_visible: function (visible) {
+        this.iconlabel_received.set_icon_visible(visible);
+        this.iconlabel_sent.set_icon_visible(visible);
     },
 
     set_reveived_icon: function(icon_path) {
