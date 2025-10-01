@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-27 21:38+0200\n"
+"POT-Creation-Date: 2025-09-30 13:31+0200\n"
 "PO-Revision-Date: 2023-06-01 17:30+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
@@ -19,170 +19,84 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.3.1\n"
 
-#. applet.js:438
+#. applet.js:468
 msgid "Network interfaces"
 msgstr "网络接口"
 
-#. applet.js:507
+#. applet.js:537
 msgid "Total data start"
 msgstr "总数据开始"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:514
+#. applet.js:544
 msgid "Launch of applet"
 msgstr "启动小程序"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:515
+#. applet.js:545
 msgid "Today"
 msgstr "今天"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:516
+#. applet.js:546
 msgid "Yesterday"
 msgstr "昨天"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:517
+#. applet.js:547
 msgid "3 days ago"
 msgstr "3 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:518
+#. applet.js:548
 msgid "5 days ago"
 msgstr "5 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:519
+#. applet.js:549
 msgid "7 days ago"
 msgstr "7 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:520
+#. applet.js:550
 msgid "10 days ago"
 msgstr "10 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:521
+#. applet.js:551
 msgid "14 days ago"
 msgstr "14 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:522
+#. applet.js:552
 msgid "30 days ago"
 msgstr "30 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:523
+#. applet.js:553
 msgid "Custom date"
 msgstr "自定义日期"
 
 #. settings-schema.json->gui_start->description
-#. applet.js:560
+#. applet.js:590
 msgid "Gui"
 msgstr "图形用户界面"
 
 #. settings-schema.json->gui_speed_type->options
-#. applet.js:560
+#. applet.js:590
 msgid "Compact"
 msgstr "小"
 
 #. settings-schema.json->gui_speed_type->options
-#. applet.js:560
+#. applet.js:590
 msgid "Large"
 msgstr "大"
 
-#. applet.js:796
-msgid " TiB"
-msgstr ""
-
-#. applet.js:799
-msgid " GiB"
-msgstr ""
-
-#. applet.js:802
-msgid " MiB"
-msgstr ""
-
-#. applet.js:805
-msgid " kiB"
-msgstr ""
-
-#. applet.js:807
-msgid "   B"
-msgstr ""
-
-#. applet.js:810
-msgid " TB"
-msgstr ""
-
-#. applet.js:813
-#, fuzzy
-msgid " GB"
-msgstr "图形用户界面"
-
-#. applet.js:816
-#, fuzzy
-msgid " MB"
-msgstr "MB"
-
-#. applet.js:819
-msgid " kB"
-msgstr ""
-
-#. applet.js:821
-msgid "  B"
-msgstr ""
-
-#. applet.js:831
-msgid " Tib"
-msgstr ""
-
-#. applet.js:834
-msgid " Gib"
-msgstr ""
-
-#. applet.js:837
-msgid " Mib"
-msgstr ""
-
-#. applet.js:840
-msgid " kib"
-msgstr ""
-
-#. applet.js:842
-msgid "   b"
-msgstr ""
-
-#. applet.js:845
-#, fuzzy
-msgid " Tb"
-msgstr "b"
-
-#. applet.js:848
-#, fuzzy
-msgid " Gb"
-msgstr "b"
-
-#. applet.js:851
-#, fuzzy
-msgid " Mb"
-msgstr "b"
-
-#. applet.js:854
-#, fuzzy
-msgid " kb"
-msgstr "b"
-
-#. applet.js:856
-msgid "  b"
-msgstr ""
-
-#. appletGui.js:480
+#. appletGui.js:510
 msgid "Total download:"
 msgstr "总下载："
 
-#. appletGui.js:481
+#. appletGui.js:511
 msgid "Total upload:"
 msgstr "总上传："
 
@@ -214,9 +128,42 @@ msgstr "传输的数据量"
 msgid "Values shown in the panel"
 msgstr "显示在面板中的值"
 
-#. settings-schema.json->unit_type->description
+#. settings-schema.json->unit->description
 msgid "Unit"
 msgstr "单位"
+
+#. settings-schema.json->unit->options
+#. settings-schema.json->decimal_places->options
+msgid "Auto"
+msgstr "自动"
+
+#. settings-schema.json->unit->options
+msgid "Bytes/Bits"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "KB/Kb/KiB"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "MB/Mb/MiB"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "GB/Gb/GiB"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "TB/Tb/TiB"
+msgstr ""
+
+#. settings-schema.json->unit->tooltip
+msgid "Use fixed unit for displaying, or automatically choose the best unit"
+msgstr ""
+
+#. settings-schema.json->unit_type->description
+msgid "Unit type"
+msgstr ""
 
 #. settings-schema.json->unit_type->options
 msgid "Bytes"
@@ -235,9 +182,8 @@ msgid "Decimal or binary"
 msgstr ""
 
 #. settings-schema.json->is_binary->options
-#, fuzzy
 msgid "Decimal"
-msgstr "小数位"
+msgstr ""
 
 #. settings-schema.json->is_binary->options
 msgid "Binary"
@@ -302,10 +248,6 @@ msgid "Decimal places"
 msgstr "小数位"
 
 #. settings-schema.json->decimal_places->options
-msgid "Auto"
-msgstr "自动"
-
-#. settings-schema.json->decimal_places->options
 msgid "0 "
 msgstr "0 "
 
@@ -332,6 +274,20 @@ msgstr "文本 CSS"
 #. settings-schema.json->gui_text_css->tooltip
 msgid "A CSS style applied to the text in the panel"
 msgstr "应用到面板中文本的 CSS 样式"
+
+#. settings-schema.json->gui_inactive_text_css->description
+msgid "Inactive text CSS"
+msgstr ""
+
+#. settings-schema.json->gui_inactive_text_css->tooltip
+msgid ""
+"A CSS style applied to the text in the panel when there is no network "
+"activity"
+msgstr ""
+
+#. settings-schema.json->gui_show_icons->description
+msgid "Show icons"
+msgstr ""
 
 #. settings-schema.json->gui_received_icon_filename->description
 msgid "Download icon"
