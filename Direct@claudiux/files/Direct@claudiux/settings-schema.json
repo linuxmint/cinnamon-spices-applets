@@ -1,0 +1,310 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["generalPage", "userPage", "systemPage", "favoritesPage", "recentPage"],
+        "generalPage": {
+            "type": "page",
+            "title": "General",
+            "sections": ["panel", "menu"]
+        },
+        "userPage": {
+            "type": "page",
+            "title": "User",
+            "sections": ["userSection", "userSectionCustomPlaces"]
+        },
+        "systemPage": {
+            "type": "page",
+            "title": "System",
+            "sections": ["systemSection", "systemSectionCustomPlaces"]
+        },
+        "favoritesPage": {
+            "type": "page",
+            "title": "Favorites",
+            "sections": ["favoritesSection"]
+        },
+        "recentPage": {
+            "type": "page",
+            "title": "Recent documents",
+            "sections": ["recentSection"]
+        },
+        "panel": {
+            "type": "section",
+            "title": "Panel settings",
+            "keys": ["panelIcon", "panelText", "noIconOnPanel", "middleClickPath"]
+        },
+        "menu": {
+            "type": "section",
+            "title": "Menu settings",
+            "keys": ["keyOpen", "iconSize"]
+        },
+        "userSection": {
+            "type": "section",
+            "title": "User section",
+            "keys": ["showUserSection", "showDesktop", "showTrash"]
+        },
+        "userSectionCustomPlaces": {
+            "type": "section",
+            "title": "Custom places",
+            "keys": ["listUserCustomPlaces", "btnIconBrowser"]
+        },
+        "systemSection": {
+            "type": "section",
+            "title": "System section",
+            "keys": ["showSystemSection", "showComputer", "showRoot", "showVolumes", "onlyShowMounted", "showNetwork"]
+        },
+        "systemSectionCustomPlaces": {
+            "type": "section",
+            "title": "Custom places",
+            "keys": ["listSystemCustomPlaces", "btnIconBrowser"]
+        },
+        "favoritesSection": {
+            "type": "section",
+            "title": "Favorite documents",
+            "keys": ["showFavorites", "favoriteSortingMethod", "favoriteSizeLimit", "favoriteShowUri"]
+        },
+        "recentSection": {
+            "type": "section",
+            "title": "Recent documents",
+            "keys": ["showRecentDocuments", "sortingMethod", "recentSizeLimit", "recentShowUri", "btnPrivacy"]
+        }
+    },
+
+    "panelIcon": {
+        "type": "iconfilechooser",
+        "description": "Panel icon",
+        "default": "folder-saved-search",
+        "tooltip": "Accepts icon name or direct path (supports symbolic icons)"
+    },
+
+    "panelText": {
+        "type": "entry",
+        "description": "Panel text",
+        "default": ""
+    },
+
+    "keyOpen": {
+        "type": "keybinding",
+        "description": "Menu shortcut key",
+        "default": ""
+    },
+
+    "iconSize": {
+        "type": "spinbutton",
+        "default": 20,
+        "min": 10,
+        "max": 50,
+        "units": "px",
+        "step": 2,
+        "description": "Menu icon size"
+    },
+
+    "noIconOnPanel": {
+        "type": "checkbox",
+        "description": "No icon on panel",
+        "default": false,
+        "dependency": "panelText!="
+    },
+
+    "middleClickPath": {
+        "type": "filechooser",
+        "description": "Open on middle click",
+        "default": "~/",
+        "select-dir": true,
+        "tooltip": "Leave blank to disable"
+    },
+
+    "showUserSection": {
+        "type": "checkbox",
+        "description": "Show User section",
+        "default": true
+    },
+
+    "showDesktop": {
+        "type": "checkbox",
+        "description": "Show desktop",
+        "default": true
+    },
+
+    "listUserCustomPlaces": {
+        "type": "list",
+        "description": "Custom places",
+        "default": [],
+        "columns" : [
+            {"id": "uri", "title": "URI", "type": "string", "expand-width": true},
+            {"id": "name", "title": "Name", "type": "string", "expand-width": true},
+            {"id": "icon", "title": "Icon Name", "type": "string", "expand-width": true}
+        ]
+    },
+
+    "userCustomPlaces": {
+        "type": "generic",
+        "default": ""
+    },
+
+    "showTrash": {
+        "type": "combobox",
+        "description": "Show trash",
+        "default": 2,
+        "options": {
+            "Never": 0,
+            "Always": 1,
+            "When not empty": 2
+        }
+    },
+
+    "showSystemSection": {
+        "type": "checkbox",
+        "description": "Show System section",
+        "default": true
+    },
+
+    "showComputer": {
+        "type": "checkbox",
+        "description": "Show computer",
+        "default": true
+    },
+
+    "showRoot": {
+        "type": "checkbox",
+        "description": "Show file system",
+        "default": true
+    },
+
+    "showVolumes": {
+        "type": "checkbox",
+        "description": "Show volumes",
+        "default": true
+    },
+
+    "onlyShowMounted": {
+        "type": "checkbox",
+        "description": "Only show mounted drives",
+        "default": false,
+        "indent": true,
+        "dependency": "showVolumes"
+    },
+
+    "showNetwork": {
+        "type": "checkbox",
+        "description": "Show network",
+        "default": true
+    },
+
+    "listSystemCustomPlaces": {
+        "type": "list",
+        "description": "Custom places",
+        "default": [],
+        "columns" : [
+            {"id": "uri", "title": "URI", "type": "string", "expand-width": true},
+            {"id": "name", "title": "Name", "type": "string", "expand-width": true},
+            {"id": "icon", "title": "Icon Name", "type": "string", "expand-width": true}
+        ]
+    },
+
+    "systemCustomPlaces": {
+        "type": "generic",
+        "default": ""
+    },
+
+    "showFavorites": {
+        "type": "checkbox",
+        "description": "Show favorite documents",
+        "default": true
+    },
+
+    "favoriteSortingMethod": {
+        "type": "combobox",
+        "default": "added",
+        "options": {
+            "Added time": "added",
+            "Name": "byName",
+            "Path": "byPath"
+        },
+        "description": "Sorting method",
+        "dependency": "showFavorites"
+    },
+
+    "favoriteSizeLimit": {
+        "type": "combobox",
+        "default": 0,
+        "options": {
+            "5": 5,
+            "10": 10,
+            "15": 15,
+            "20": 20,
+            "25": 25,
+            "30": 30,
+            "All Favorite Documents": 0
+        },
+        "description": "Number to show",
+        "indent": true,
+        "dependency": "showFavorites"
+    },
+
+    "favoriteShowUri": {
+        "type": "checkbox",
+        "description": "Show complete path in tooltips",
+        "default": true,
+        "dependency": "showFavorites"
+    },
+
+    "showRecentDocuments": {
+        "type": "checkbox",
+        "description": "Show recent documents",
+        "default": true
+    },
+
+    "sortingMethod": {
+        "type": "combobox",
+        "default": "added",
+        "options": {
+            "Added time": "added",
+            "Access time": "access",
+            "Modification time": "modification"
+        },
+        "description": "Sorting method",
+        "dependency": "showRecentDocuments"
+    },
+
+    "recentSizeLimit": {
+        "type": "combobox",
+        "default": 10,
+        "options": {
+            "5": 5,
+            "10": 10,
+            "15": 15,
+            "20": 20,
+            "25": 25,
+            "30": 30,
+            "All Recent Documents": 0
+        },
+        "description": "Number to show",
+        "indent": true,
+        "dependency": "showRecentDocuments"
+    },
+
+    "recentShowUri": {
+        "type": "checkbox",
+        "description": "Show complete path in tooltips",
+        "default": true,
+        "dependency": "showRecentDocuments"
+    },
+
+    "btnPrivacy": {
+        "type": "button",
+        "description": "Privacy",
+        "callback": "on_btnPrivacy_pressed"
+    },
+
+    "iconBrowserIsPresent": {
+        "type": "generic",
+        "default": false
+    },
+
+    "btnIconBrowser": {
+        "type": "button",
+        "dependency": "iconBrowserIsPresent",
+        "description": "Icon browser",
+        "callback": "on_btnIconBrowser_pressed"
+    }
+}
