@@ -17,10 +17,24 @@
         },
         "tooltip" : "Values shown in the panel"
     },
-    "unit_type" : {
+    "unit" : {
         "type": "combobox",
         "default" : 0,
         "description" : "Unit",
+        "options" : {
+            "Auto" : 0,
+            "Bytes/Bits" : 1,
+            "KB/Kb/KiB" : 2,
+            "MB/Mb/MiB" : 3,
+            "GB/Gb/GiB" : 4,
+            "TB/Tb/TiB" : 5
+        },
+        "tooltip" : "Use fixed unit for displaying, or automatically choose the best unit"
+    },
+    "unit_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Unit type",
         "options" : {
             "Bytes" : 0,
             "Bits" : 1
