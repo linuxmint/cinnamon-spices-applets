@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-27 21:38+0200\n"
+"POT-Creation-Date: 2025-09-30 13:31+0200\n"
 "PO-Revision-Date: 2018-04-06 22:12+0200\n"
 "Last-Translator: xearonet\n"
 "Language-Team: \n"
@@ -20,168 +20,85 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#. applet.js:438
+#. applet.js:468
 #, fuzzy
 msgid "Network interfaces"
 msgstr "Interfejs sieciowy"
 
-#. applet.js:507
+#. applet.js:537
 msgid "Total data start"
 msgstr "Początek zliczania danych"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:514
+#. applet.js:544
 msgid "Launch of applet"
 msgstr "Od uruchomienia"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:515
+#. applet.js:545
 msgid "Today"
 msgstr "Dzisiaj"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:516
+#. applet.js:546
 msgid "Yesterday"
 msgstr "Wczoraj"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:517
+#. applet.js:547
 msgid "3 days ago"
 msgstr "3 dni temu"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:518
+#. applet.js:548
 msgid "5 days ago"
 msgstr "5 dni temu"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:519
+#. applet.js:549
 msgid "7 days ago"
 msgstr "7 dni temu"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:520
+#. applet.js:550
 msgid "10 days ago"
 msgstr "10 dni temu"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:521
+#. applet.js:551
 msgid "14 days ago"
 msgstr "14 dni temu"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:522
+#. applet.js:552
 msgid "30 days ago"
 msgstr "30 dni temu"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:523
+#. applet.js:553
 msgid "Custom date"
 msgstr "Niestandardowa data"
 
 #. settings-schema.json->gui_start->description
-#. applet.js:560
+#. applet.js:590
 msgid "Gui"
 msgstr "Rozmiar"
 
 #. settings-schema.json->gui_speed_type->options
-#. applet.js:560
+#. applet.js:590
 msgid "Compact"
 msgstr "Kompaktowy"
 
 #. settings-schema.json->gui_speed_type->options
-#. applet.js:560
+#. applet.js:590
 msgid "Large"
 msgstr "Duży"
 
-#. applet.js:796
-msgid " TiB"
-msgstr ""
-
-#. applet.js:799
-msgid " GiB"
-msgstr ""
-
-#. applet.js:802
-msgid " MiB"
-msgstr ""
-
-#. applet.js:805
-msgid " kiB"
-msgstr ""
-
-#. applet.js:807
-msgid "   B"
-msgstr ""
-
-#. applet.js:810
-msgid " TB"
-msgstr ""
-
-#. applet.js:813
-#, fuzzy
-msgid " GB"
-msgstr "Rozmiar"
-
-#. applet.js:816
-#, fuzzy
-msgid " MB"
-msgstr "MB"
-
-#. applet.js:819
-msgid " kB"
-msgstr ""
-
-#. applet.js:821
-msgid "  B"
-msgstr ""
-
-#. applet.js:831
-msgid " Tib"
-msgstr ""
-
-#. applet.js:834
-msgid " Gib"
-msgstr ""
-
-#. applet.js:837
-msgid " Mib"
-msgstr ""
-
-#. applet.js:840
-msgid " kib"
-msgstr ""
-
-#. applet.js:842
-msgid "   b"
-msgstr ""
-
-#. applet.js:845
-msgid " Tb"
-msgstr ""
-
-#. applet.js:848
-#, fuzzy
-msgid " Gb"
-msgstr "Rozmiar"
-
-#. applet.js:851
-msgid " Mb"
-msgstr ""
-
-#. applet.js:854
-msgid " kb"
-msgstr ""
-
-#. applet.js:856
-msgid "  b"
-msgstr ""
-
-#. appletGui.js:480
+#. appletGui.js:510
 msgid "Total download:"
 msgstr "Pobrano:"
 
-#. appletGui.js:481
+#. appletGui.js:511
 msgid "Total upload:"
 msgstr "Wysłano:"
 
@@ -213,9 +130,42 @@ msgstr "Ilość przesłanych danych"
 msgid "Values shown in the panel"
 msgstr "Wartości wyświetlane w panelu"
 
-#. settings-schema.json->unit_type->description
+#. settings-schema.json->unit->description
 msgid "Unit"
 msgstr "Jednostki"
+
+#. settings-schema.json->unit->options
+#. settings-schema.json->decimal_places->options
+msgid "Auto"
+msgstr "Automatycznie"
+
+#. settings-schema.json->unit->options
+msgid "Bytes/Bits"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "KB/Kb/KiB"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "MB/Mb/MiB"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "GB/Gb/GiB"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "TB/Tb/TiB"
+msgstr ""
+
+#. settings-schema.json->unit->tooltip
+msgid "Use fixed unit for displaying, or automatically choose the best unit"
+msgstr ""
+
+#. settings-schema.json->unit_type->description
+msgid "Unit type"
+msgstr ""
 
 #. settings-schema.json->unit_type->options
 msgid "Bytes"
@@ -303,10 +253,6 @@ msgid "Decimal places"
 msgstr "Miejsca dziesiętne"
 
 #. settings-schema.json->decimal_places->options
-msgid "Auto"
-msgstr "Automatycznie"
-
-#. settings-schema.json->decimal_places->options
 msgid "0 "
 msgstr "0 "
 
@@ -333,6 +279,20 @@ msgstr "Styl CSS tekstu w panelu"
 #. settings-schema.json->gui_text_css->tooltip
 msgid "A CSS style applied to the text in the panel"
 msgstr "Styl CSS zastosowany do tekstu w panelu"
+
+#. settings-schema.json->gui_inactive_text_css->description
+msgid "Inactive text CSS"
+msgstr ""
+
+#. settings-schema.json->gui_inactive_text_css->tooltip
+msgid ""
+"A CSS style applied to the text in the panel when there is no network "
+"activity"
+msgstr ""
+
+#. settings-schema.json->gui_show_icons->description
+msgid "Show icons"
+msgstr ""
 
 #. settings-schema.json->gui_received_icon_filename->description
 msgid "Download icon"
