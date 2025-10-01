@@ -107,11 +107,11 @@ msgstr "Muestra los iconos de los paquetes de actualización pendientes"
 
 #. settings-schema.json->pageBehavior->title
 msgid "Behavior"
-msgstr ""
+msgstr "Comportamiento"
 
 #. settings-schema.json->pageAppearance->title
 msgid "Appearance"
-msgstr ""
+msgstr "Apariencia"
 
 #. settings-schema.json->sectionSettings->title
 msgid "Settings"
@@ -119,7 +119,7 @@ msgstr "Configuración"
 
 #. settings-schema.json->sectionIconLabel->title
 msgid "Icon/Label"
-msgstr ""
+msgstr "Ícono/Etiqueta"
 
 #. settings-schema.json->sectionClick->title
 msgid "Applet click"
@@ -166,19 +166,19 @@ msgstr ""
 
 #. settings-schema.json->show-label->description
 msgid "Show label with updates count"
-msgstr ""
+msgstr "Mostrar etiqueta con recuento de actualizaciones"
 
 #. settings-schema.json->label-font-size->description
 msgid "Label font size"
-msgstr ""
+msgstr "Tamaño de la fuente de la etiqueta"
 
 #. settings-schema.json->label-font-weight->description
 msgid "Label font weight"
-msgstr ""
+msgstr "Grosor de la fuente de la etiqueta"
 
 #. settings-schema.json->label-vertical-position->description
 msgid "Label vertical position"
-msgstr ""
+msgstr "Posición vertical de la etiqueta"
 
 #. settings-schema.json->show-window-on-click->description
 msgid "Show updates window on left click and menu entries on right click"
