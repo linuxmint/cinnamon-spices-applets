@@ -106,6 +106,7 @@ DownloadAndUploadSpeed.prototype = {
         this.data_limit_command = "";
         this.data_limit = 0;
         this.gui_text_css = "";
+        this.gui_inactive_text_css = "";
         this.gui_show_icons = true;
         this.gui_received_icon_filename = "";
         this.gui_symbolic_icon = false;
@@ -207,6 +208,7 @@ DownloadAndUploadSpeed.prototype = {
                         [Settings.BindingDirection.IN, "show_hover", this.on_show_hover_changed],
                         [Settings.BindingDirection.IN, "gui_data_limit_type", this.on_gui_data_limit_type_changed],
                         [Settings.BindingDirection.IN, "gui_text_css", this.on_gui_css_changed],
+                        [Settings.BindingDirection.IN, "gui_inactive_text_css", null],
                         [Settings.BindingDirection.IN, "gui_show_icons", this.on_gui_icon_visible_changed],
                         [Settings.BindingDirection.IN, "gui_received_icon_filename", this.on_gui_icon_changed],
                         [Settings.BindingDirection.IN, "gui_sent_icon_filename", this.on_gui_icon_changed],
@@ -758,11 +760,13 @@ DownloadAndUploadSpeed.prototype = {
                 bytes_sent_total += info.bytes_sent_total;
             }
 
-            let received = this.get_bytes_received_iteration_string(bytes_received_iteration);
-            let sent = this.get_bytes_sent_iteration_string(bytes_sent_iteration);
+            let [received, is_received] = this.get_bytes_received_iteration_string(bytes_received_iteration);
+            let [sent, is_sent] = this.get_bytes_sent_iteration_string(bytes_sent_iteration);
             let received_total = this.convert_to_two_decimals_string(bytes_received_total);
             let sent_total = this.convert_to_two_decimals_string(bytes_sent_total);
 
+            this.gui_speed.set_received_text_style(is_received ? this.gui_text_css : this.gui_inactive_text_css);
+            this.gui_speed.set_sent_text_style(is_sent ? this.gui_text_css : this.gui_inactive_text_css);
             this.gui_speed.set_received_text(received);
             this.gui_speed.set_sent_text(sent);
             this.update_gui_data_limit(bytes_received_total, bytes_sent_total);
@@ -785,8 +789,7 @@ DownloadAndUploadSpeed.prototype = {
     get_bytes_received_iteration_string: function (bytes) {
         let received = this.replace_with_zero(bytes, this.minimum_bytes_received_to_display);
         received = this.scale(received);
-        received = this.convert_to_readable_string(received);
-        return received;
+        return this.convert_to_readable_string(received);
     },
 
     replace_with_zero: function (bytes, minimum) {
@@ -804,7 +807,7 @@ DownloadAndUploadSpeed.prototype = {
         }
 
         let output = number.toString() + unit;
-        return output;
+        return [output, parseFloat(number) !== 0];
     },
 
     convert_to_readable_unit: function (bytes) {
@@ -860,8 +863,7 @@ DownloadAndUploadSpeed.prototype = {
     get_bytes_sent_iteration_string: function (bytes) {
         let sent = this.replace_with_zero(bytes, this.minimum_bytes_sent_to_display);
         sent = this.scale(sent);
-        sent = this.convert_to_readable_string(sent);
-        return sent;
+        return this.convert_to_readable_string(sent);
     },
 
     convert_to_two_decimals_string: function (bytes) {

@@ -197,12 +197,18 @@ GuiSpeed.prototype = {
     },
 
     set_text_style: function(css_style) {
-        css_style = this.add_font_size(css_style);
-        for(let iconlabel of [this.iconlabel_received, this.iconlabel_sent]){
-            iconlabel.set_label_style(css_style);
-        }
+        this.set_received_text_style(css_style);
+        this.set_sent_text_style(css_style);
 
-        this._resize_gui_elements_to_match_text(css_style);
+        this._resize_gui_elements_to_match_text(this.add_font_size(css_style));
+    },
+
+    set_received_text_style: function(css_style) {
+        this.iconlabel_received.set_label_style(this.add_font_size(css_style));
+    },
+
+    set_sent_text_style: function(css_style) {
+        this.iconlabel_sent.set_label_style(this.add_font_size(css_style));
     },
 
     add_font_size: function(css_style) {
