@@ -106,6 +106,7 @@ DownloadAndUploadSpeed.prototype = {
         this.data_limit_command = "";
         this.data_limit = 0;
         this.gui_text_css = "";
+        this.gui_enable_inactive_text_css = false;
         this.gui_inactive_text_css = "";
         this.gui_show_icons = true;
         this.gui_received_icon_filename = "";
@@ -208,6 +209,7 @@ DownloadAndUploadSpeed.prototype = {
                         [Settings.BindingDirection.IN, "show_hover", this.on_show_hover_changed],
                         [Settings.BindingDirection.IN, "gui_data_limit_type", this.on_gui_data_limit_type_changed],
                         [Settings.BindingDirection.IN, "gui_text_css", this.on_gui_css_changed],
+                        [Settings.BindingDirection.IN, "gui_enable_inactive_text_css", null],
                         [Settings.BindingDirection.IN, "gui_inactive_text_css", null],
                         [Settings.BindingDirection.IN, "gui_show_icons", this.on_gui_icon_visible_changed],
                         [Settings.BindingDirection.IN, "gui_received_icon_filename", this.on_gui_icon_changed],
@@ -765,8 +767,8 @@ DownloadAndUploadSpeed.prototype = {
             let received_total = this.convert_to_two_decimals_string(bytes_received_total);
             let sent_total = this.convert_to_two_decimals_string(bytes_sent_total);
 
-            this.gui_speed.set_received_text_style(is_received ? this.gui_text_css : this.gui_inactive_text_css);
-            this.gui_speed.set_sent_text_style(is_sent ? this.gui_text_css : this.gui_inactive_text_css);
+            this.gui_speed.set_received_text_style((is_received || !this.gui_enable_inactive_text_css) ? this.gui_text_css : this.gui_inactive_text_css);
+            this.gui_speed.set_sent_text_style((is_sent || !this.gui_enable_inactive_text_css) ? this.gui_text_css : this.gui_inactive_text_css);
             this.gui_speed.set_received_text(received);
             this.gui_speed.set_sent_text(sent);
             this.update_gui_data_limit(bytes_received_total, bytes_sent_total);
