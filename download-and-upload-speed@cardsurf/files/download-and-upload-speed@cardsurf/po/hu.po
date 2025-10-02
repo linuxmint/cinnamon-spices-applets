@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 13:31+0200\n"
+"POT-Creation-Date: 2025-10-02 19:43+0200\n"
 "PO-Revision-Date: 2024-10-02 17:08+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -18,76 +18,76 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:468
+#. applet.js:470
 msgid "Network interfaces"
 msgstr "Hálózati csatolók"
 
-#. applet.js:537
+#. applet.js:539
 msgid "Total data start"
 msgstr "Összesített adatmennyiség indításkor"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:544
+#. applet.js:546
 msgid "Launch of applet"
 msgstr "Kisalkalmazás indítása"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:545
+#. applet.js:547
 msgid "Today"
 msgstr "Ma"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:546
+#. applet.js:548
 msgid "Yesterday"
 msgstr "Tegnap"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:547
+#. applet.js:549
 msgid "3 days ago"
 msgstr "Három nappal ezelőtt"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:548
+#. applet.js:550
 msgid "5 days ago"
 msgstr "Öt nappal ezelőtt"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:549
+#. applet.js:551
 msgid "7 days ago"
 msgstr "Hét nappal ezelőtt"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:550
+#. applet.js:552
 msgid "10 days ago"
 msgstr "Tíz nappal ezelőtt"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:551
+#. applet.js:553
 msgid "14 days ago"
 msgstr "Tízennégy nappal ezelőtt"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:552
+#. applet.js:554
 msgid "30 days ago"
 msgstr "Harminc nappal ezelőtt"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:553
+#. applet.js:555
 msgid "Custom date"
 msgstr "Egyéni dátum"
 
 #. settings-schema.json->gui_start->description
-#. applet.js:590
+#. applet.js:592
 msgid "Gui"
 msgstr "GUI"
 
 #. settings-schema.json->gui_speed_type->options
-#. applet.js:590
+#. applet.js:592
 msgid "Compact"
 msgstr "Kompakt"
 
 #. settings-schema.json->gui_speed_type->options
-#. applet.js:590
+#. applet.js:592
 msgid "Large"
 msgstr "Nagy"
 
@@ -277,6 +277,10 @@ msgstr "Szöveg CSS"
 #. settings-schema.json->gui_text_css->tooltip
 msgid "A CSS style applied to the text in the panel"
 msgstr "A panel szövegére alkalmazott CSS-stílus"
+
+#. settings-schema.json->gui_enable_inactive_text_css->description
+msgid "Enable different style for inactive (0.00) text"
+msgstr ""
 
 #. settings-schema.json->gui_inactive_text_css->description
 msgid "Inactive text CSS"

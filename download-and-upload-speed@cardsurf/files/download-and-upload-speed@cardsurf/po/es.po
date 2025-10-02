@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 13:31+0200\n"
+"POT-Creation-Date: 2025-10-02 19:43+0200\n"
 "PO-Revision-Date: 2024-09-28 11:14-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,76 +19,76 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#. applet.js:468
+#. applet.js:470
 msgid "Network interfaces"
 msgstr "Interfaces de red"
 
-#. applet.js:537
+#. applet.js:539
 msgid "Total data start"
 msgstr "Cantidad total de datos"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:544
+#. applet.js:546
 msgid "Launch of applet"
 msgstr "Desde el lanzamiento del applet"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:545
+#. applet.js:547
 msgid "Today"
 msgstr "Desde hoy"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:546
+#. applet.js:548
 msgid "Yesterday"
 msgstr "Desde ayer"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:547
+#. applet.js:549
 msgid "3 days ago"
 msgstr "Hace 3 días"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:548
+#. applet.js:550
 msgid "5 days ago"
 msgstr "Hace 5 días"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:549
+#. applet.js:551
 msgid "7 days ago"
 msgstr "Hace 7 días"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:550
+#. applet.js:552
 msgid "10 days ago"
 msgstr "Hace 10 días"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:551
+#. applet.js:553
 msgid "14 days ago"
 msgstr "Hace 14 días"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:552
+#. applet.js:554
 msgid "30 days ago"
 msgstr "Hace 30 días"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:553
+#. applet.js:555
 msgid "Custom date"
 msgstr "Fecha personalizada"
 
 #. settings-schema.json->gui_start->description
-#. applet.js:590
+#. applet.js:592
 msgid "Gui"
 msgstr "Estilo"
 
 #. settings-schema.json->gui_speed_type->options
-#. applet.js:590
+#. applet.js:592
 msgid "Compact"
 msgstr "Compacto"
 
 #. settings-schema.json->gui_speed_type->options
-#. applet.js:590
+#. applet.js:592
 msgid "Large"
 msgstr "Grande"
 
@@ -281,6 +281,10 @@ msgstr "CSS del texto"
 #. settings-schema.json->gui_text_css->tooltip
 msgid "A CSS style applied to the text in the panel"
 msgstr "Un estilo CSS aplicado al texto en el panel"
+
+#. settings-schema.json->gui_enable_inactive_text_css->description
+msgid "Enable different style for inactive (0.00) text"
+msgstr ""
 
 #. settings-schema.json->gui_inactive_text_css->description
 msgid "Inactive text CSS"
