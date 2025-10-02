@@ -23,7 +23,7 @@ msgstr "（點選滑鼠右鍵開啟資料夾）"
 #. metadata.json->name
 #. applet.js:222
 msgid "Direct"
-msgstr ""
+msgstr "直接"
 
 #. applet.js:428
 msgid "Search Home Folder"

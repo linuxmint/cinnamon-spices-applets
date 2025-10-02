@@ -25,7 +25,7 @@ msgstr "(Clic dret per obrir la carpeta)"
 #. metadata.json->name
 #. applet.js:222
 msgid "Direct"
-msgstr ""
+msgstr "Directe"
 
 #. applet.js:428
 msgid "Search Home Folder"

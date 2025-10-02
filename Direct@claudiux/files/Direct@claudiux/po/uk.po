@@ -25,7 +25,7 @@ msgstr "(Клацніть правою кнопкою миші, щоб відк�
 #. metadata.json->name
 #. applet.js:222
 msgid "Direct"
-msgstr ""
+msgstr "Прямий"
 
 #. applet.js:428
 msgid "Search Home Folder"

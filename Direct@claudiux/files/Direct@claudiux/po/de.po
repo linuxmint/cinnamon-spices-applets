@@ -26,7 +26,7 @@ msgstr "(Rechtsklick zum Öffnen des Ordners)"
 #. metadata.json->name
 #. applet.js:222
 msgid "Direct"
-msgstr ""
+msgstr "Direkt"
 
 #. applet.js:428
 msgid "Search Home Folder"

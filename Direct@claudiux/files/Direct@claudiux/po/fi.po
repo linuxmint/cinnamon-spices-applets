@@ -26,7 +26,7 @@ msgstr "(hiiren oikea avaa kansion)"
 #. metadata.json->name
 #. applet.js:222
 msgid "Direct"
-msgstr ""
+msgstr "Suora"
 
 #. applet.js:428
 msgid "Search Home Folder"
