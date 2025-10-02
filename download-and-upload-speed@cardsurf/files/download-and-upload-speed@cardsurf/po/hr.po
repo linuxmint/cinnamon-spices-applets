@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 13:31+0200\n"
+"POT-Creation-Date: 2025-10-02 19:43+0200\n"
 "PO-Revision-Date: 2017-04-29 14:01+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian\n"
@@ -20,77 +20,77 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#. applet.js:468
+#. applet.js:470
 #, fuzzy
 msgid "Network interfaces"
 msgstr "Mrežno sučelje"
 
-#. applet.js:537
+#. applet.js:539
 msgid "Total data start"
 msgstr "Pokreni s ukupno podataka"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:544
+#. applet.js:546
 msgid "Launch of applet"
 msgstr "od pokretanja apleta"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:545
+#. applet.js:547
 msgid "Today"
 msgstr "od danas"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:546
+#. applet.js:548
 msgid "Yesterday"
 msgstr "od jučer"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:547
+#. applet.js:549
 msgid "3 days ago"
 msgstr "od prije 3 dana"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:548
+#. applet.js:550
 msgid "5 days ago"
 msgstr "od prije 5 dana"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:549
+#. applet.js:551
 msgid "7 days ago"
 msgstr "od prije 7 dana"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:550
+#. applet.js:552
 msgid "10 days ago"
 msgstr "od prije 10 dana"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:551
+#. applet.js:553
 msgid "14 days ago"
 msgstr "od prije 14 dana"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:552
+#. applet.js:554
 msgid "30 days ago"
 msgstr "od prije 30 dana"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:553
+#. applet.js:555
 msgid "Custom date"
 msgstr "Prilagođeni datum"
 
 #. settings-schema.json->gui_start->description
-#. applet.js:590
+#. applet.js:592
 msgid "Gui"
 msgstr "Grafičko sučelje"
 
 #. settings-schema.json->gui_speed_type->options
-#. applet.js:590
+#. applet.js:592
 msgid "Compact"
 msgstr "Kompaktno"
 
 #. settings-schema.json->gui_speed_type->options
-#. applet.js:590
+#. applet.js:592
 msgid "Large"
 msgstr "Veliko"
 
@@ -280,12 +280,15 @@ msgstr "CSS tekst"
 msgid "A CSS style applied to the text in the panel"
 msgstr "CSS izgled primijenjen na tekst u panelu"
 
+#. settings-schema.json->gui_enable_inactive_text_css->description
+msgid "Enable different style for inactive (0.00) text"
+msgstr ""
+
 #. settings-schema.json->gui_inactive_text_css->description
 msgid "Inactive text CSS"
 msgstr ""
 
 #. settings-schema.json->gui_inactive_text_css->tooltip
-#, fuzzy
 msgid ""
 "A CSS style applied to the text in the panel when there is no network "
 "activity"

@@ -121,12 +121,18 @@
         "tooltip": "A CSS style applied to the text in the panel",
         "expand-width": true
     },
+    "gui_enable_inactive_text_css" : {
+        "type" : "switch",
+        "default" : false,
+        "description": "Enable different style for inactive (0.00) text"
+    },
     "gui_inactive_text_css": {
         "type": "entry",
         "default": "color: grey; font-weight: normal; font-size: 15px; text-align: right; font-family: monospace;",
         "description": "Inactive text CSS",
         "tooltip": "A CSS style applied to the text in the panel when there is no network activity",
-        "expand-width": true
+        "expand-width": true,
+        "dependency": "gui_enable_inactive_text_css"
     },
     "gui_show_icons" : {
         "type" : "switch",

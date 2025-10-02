@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-30 13:31+0200\n"
+"POT-Creation-Date: 2025-10-02 19:43+0200\n"
 "PO-Revision-Date: 2023-06-01 17:30+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
@@ -19,76 +19,76 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.3.1\n"
 
-#. applet.js:468
+#. applet.js:470
 msgid "Network interfaces"
 msgstr "网络接口"
 
-#. applet.js:537
+#. applet.js:539
 msgid "Total data start"
 msgstr "总数据开始"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:544
+#. applet.js:546
 msgid "Launch of applet"
 msgstr "启动小程序"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:545
+#. applet.js:547
 msgid "Today"
 msgstr "今天"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:546
+#. applet.js:548
 msgid "Yesterday"
 msgstr "昨天"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:547
+#. applet.js:549
 msgid "3 days ago"
 msgstr "3 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:548
+#. applet.js:550
 msgid "5 days ago"
 msgstr "5 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:549
+#. applet.js:551
 msgid "7 days ago"
 msgstr "7 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:550
+#. applet.js:552
 msgid "10 days ago"
 msgstr "10 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:551
+#. applet.js:553
 msgid "14 days ago"
 msgstr "14 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:552
+#. applet.js:554
 msgid "30 days ago"
 msgstr "30 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#. applet.js:553
+#. applet.js:555
 msgid "Custom date"
 msgstr "自定义日期"
 
 #. settings-schema.json->gui_start->description
-#. applet.js:590
+#. applet.js:592
 msgid "Gui"
 msgstr "图形用户界面"
 
 #. settings-schema.json->gui_speed_type->options
-#. applet.js:590
+#. applet.js:592
 msgid "Compact"
 msgstr "小"
 
 #. settings-schema.json->gui_speed_type->options
-#. applet.js:590
+#. applet.js:592
 msgid "Large"
 msgstr "大"
 
@@ -274,6 +274,10 @@ msgstr "文本 CSS"
 #. settings-schema.json->gui_text_css->tooltip
 msgid "A CSS style applied to the text in the panel"
 msgstr "应用到面板中文本的 CSS 样式"
+
+#. settings-schema.json->gui_enable_inactive_text_css->description
+msgid "Enable different style for inactive (0.00) text"
+msgstr ""
 
 #. settings-schema.json->gui_inactive_text_css->description
 msgid "Inactive text CSS"
