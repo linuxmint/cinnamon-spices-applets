@@ -27,7 +27,7 @@ msgstr ""
 #. metadata.json->name
 #. applet.js:222
 msgid "Direct"
-msgstr ""
+msgstr "Izravno"
 
 #. applet.js:428
 msgid "Search Home Folder"

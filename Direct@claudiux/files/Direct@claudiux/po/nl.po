@@ -24,7 +24,7 @@ msgstr "(Rechtsklik om map te openen)"
 #. metadata.json->name
 #. applet.js:222
 msgid "Direct"
-msgstr ""
+msgstr "Direct"
 
 #. applet.js:428
 msgid "Search Home Folder"

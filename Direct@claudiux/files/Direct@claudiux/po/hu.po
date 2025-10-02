@@ -25,7 +25,7 @@ msgstr "(Jobb egérgomb a mappa megnyitásához)"
 #. metadata.json->name
 #. applet.js:222
 msgid "Direct"
-msgstr ""
+msgstr "Közvetlen"
 
 #. applet.js:428
 msgid "Search Home Folder"
