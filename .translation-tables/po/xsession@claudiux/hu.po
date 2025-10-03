@@ -1,0 +1,215 @@
+# XSESSION
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2022
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-03 18:30+0200\n"
+"PO-Revision-Date: 2025-08-09 18:50+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:54
+msgid "Applet"
+msgstr "Kisalkalmazás"
+
+#. applet.js:55
+msgid "Desklet"
+msgstr "Asztalkalmazás"
+
+#. applet.js:56
+msgid "Extension"
+msgstr "Bővítmény"
+
+#. applet.js:57
+msgid "Applets"
+msgstr "Kisalkalmazások"
+
+#. applet.js:58
+msgid "Desklets"
+msgstr "Asztalkalmazások"
+
+#. applet.js:59
+msgid "Extensions"
+msgstr "Bővítmények"
+
+#. applet.js:112
+msgid "RELOAD ALL"
+msgstr "ÖSSZES ÚJRATÖLTÉSE"
+
+#. applet.js:248
+msgid "Middle-click: \n"
+msgstr "Kattintás a középső egérgombbal: \n"
+
+#. applet.js:248 applet.js:327
+msgid "Show .xsession-errors"
+msgstr "Az „.xsession-errors” fájl megjelenítése"
+
+#. applet.js:249
+msgid "Ctrl + Middle-click: \n"
+msgstr "Ctrl + középső kattintás: \n"
+
+#. applet.js:249 applet.js:341
+msgid "Show latest messages"
+msgstr "Show latest messages"
+
+#. applet.js:311 applet.js:553
+#, javascript-format
+msgid "%s latest messages"
+msgstr "%s legújabb üzenetek"
+
+#. applet.js:311 applet.js:553
+msgid "min: 10. max: 250."
+msgstr "min: 10. max: 250."
+
+#. applet.js:358
+msgid "Restart Cinnamon"
+msgstr "Cinnamon környezet újraindítása"
+
+#. applet.js:376
+msgid "Repeat last action"
+msgstr ""
+
+#. applet.js:380
+msgid "--- Reload Spices ---"
+msgstr "--- Spices kiegészítők újratöltése ---"
+
+#. applet.js:386
+msgid "Reload Applet:"
+msgstr "Kisalkalmazás újratöltése:"
+
+#. applet.js:413
+msgid "Reload Desklet:"
+msgstr "Asztalkalmazás újratöltése:"
+
+#. applet.js:440
+msgid "Reload Extension:"
+msgstr "Bővítmény újratöltése:"
+
+#. applet.js:466
+msgid "Reload Current Theme"
+msgstr "Az aktuális téma újratöltése"
+
+#. applet.js:480
+msgid "--- Settings for ---"
+msgstr "--- Beállítások ehhez: ---"
+
+#. applet.js:486
+msgid "Applet:"
+msgstr "Kisalkalmazás:"
+
+#. applet.js:495
+msgid "Desklet:"
+msgstr "Asztalkalmazás:"
+
+#. applet.js:504
+msgid "Extension:"
+msgstr "Bővítmény:"
+
+#. applet.js:513
+msgid "--- View Code ---"
+msgstr "--- Kód megjelenítése ---"
+
+#. applet.js:519
+msgid "View Applet Code for:"
+msgstr "Kisalkalmazás forráskód megjelenítése:"
+
+#. applet.js:528
+msgid "View Desklet Code for:"
+msgstr "Asztalkalmazás forráskód megjelenítése:"
+
+#. applet.js:537
+msgid "View Extension Code for:"
+msgstr "Bővítmény forráskód megjelenítése:"
+
+#. metadata.json->name
+msgid "Xsession"
+msgstr "Xsession"
+
+#. metadata.json->description
+msgid ""
+"Restart, access source code and configure your Spices (Applets, Desklets, "
+"Extensions). View the contents of your .xsession-errors file in real time. "
+"Restart Cinnamon."
+msgstr ""
+"Indítsa újra, nyissa meg a forráskódot, és állítsa be a Spice kiegészítőket "
+"(kisalkalmazások, asztalkalmazások, bővítmények). Tekintse meg valós időben "
+"az „.xsession-errors” fájl tartalmát. Indítsa újra a Cinnamon asztali "
+"környzetet."
+
+#. settings-schema.json->section1->description
+msgid "Icon size"
+msgstr "Ikon mérete"
+
+#. settings-schema.json->icon_size->description
+msgid "Size (in pixels) of menu icons"
+msgstr "A menüikonok mérete (pixelben)"
+
+#. settings-schema.json->icon_size->options
+msgid "16"
+msgstr "16"
+
+#. settings-schema.json->icon_size->options
+msgid "22"
+msgstr "22"
+
+#. settings-schema.json->icon_size->options
+msgid "24"
+msgstr "24"
+
+#. settings-schema.json->icon_size->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->icon_size->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->icon_size->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->icon_size->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->icon_size->options
+msgid "128"
+msgstr "128"
+
+#. settings-schema.json->section2->description
+msgid "RELOAD ALL option"
+msgstr "ÖSSZES ÚJRATÖLTÉSE opció"
+
+#. settings-schema.json->show_reload_all->description
+msgid "Show the RELOAD ALL option in submenus"
+msgstr "Az almenükben jelenítse meg az ÖSSZES ÚJRATÖLTÉSE opciót"
+
+#. settings-schema.json->show_reload_all->tooltip
+msgid "Caution! Reloading all spices of a given type may lead to errors."
+msgstr "Vigyázat! Az adott típusú Spice-ok újratöltése hibákhoz vezethet."
+
+#. settings-schema.json->section3->description
+msgid "Latest messages"
+msgstr "Legújabb üzenetek"
+
+#. settings-schema.json->number_latest->description
+msgid "Number of latest messages to show"
+msgstr "A megjelenítendő legutóbbi üzenetek száma"
+
+#. settings-schema.json->number_latest->tooltip
+msgid "(Including empty lines.)"
+msgstr "(Az üres sorokat is beleértve.)"
+
+#. scripts/watch-xse-latest.sh:10 scripts/watch-xse.sh:8
+msgid "-d"
+msgstr "-d"

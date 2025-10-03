@@ -1,0 +1,34 @@
+# UPDATES NOTIFIER
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->pageAppearance->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->sectionIconLabel->title
+msgid "Icon/Label"
+msgstr ""
+
+#. settings-schema.json->show-label->description
+msgid "Show label with updates count"
+msgstr ""
+
+#. settings-schema.json->label-font-size->description
+msgid "Label font size"
+msgstr ""
+
+#. settings-schema.json->label-font-weight->description
+msgid "Label font weight"
+msgstr ""
+
+#. settings-schema.json->label-vertical-position->description
+msgid "Label vertical position"
+msgstr ""

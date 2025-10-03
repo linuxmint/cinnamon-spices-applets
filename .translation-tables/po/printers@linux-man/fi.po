@@ -1,0 +1,112 @@
+# PRINTERS
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# linux-man, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-10-08 19:45-0400\n"
+"PO-Revision-Date: 2022-11-30 20:17+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. metadata.json->name
+#. applet.js:59 applet.js:173
+msgid "Printers"
+msgstr "Tulostimet"
+
+#. applet.js:198
+msgid "Cancel all jobs"
+msgstr "Peruuta kaikki työt"
+
+#. applet.js:225
+msgid "at"
+msgstr "klo"
+
+#. settings-schema.json->send-to-front->description
+#. applet.js:239
+msgid "Send to front"
+msgstr "Lähetä eteen"
+
+#. metadata.json->description
+msgid "Manage Jobs and Printers"
+msgstr "Hallitse tulostustöitä ja tulostimia"
+
+#. metadata.json->contributors
+msgid "Caldas Lopes"
+msgstr ""
+
+#. settings-schema.json->show-icon->description
+msgid "Show icon"
+msgstr "Näytä kuvake"
+
+#. settings-schema.json->show-icon->options
+msgid "Always"
+msgstr "Aina"
+
+#. settings-schema.json->show-icon->options
+msgid "When printers exist"
+msgstr "Kun on tulostimia"
+
+#. settings-schema.json->show-icon->options
+msgid "When printing"
+msgstr "Kun tulostetaan"
+
+#. settings-schema.json->show-icon->tooltip
+msgid "When to show the icon"
+msgstr "Milloin kuvake näytetään"
+
+#. settings-schema.json->show-error->description
+msgid "Printer errors"
+msgstr "Tulostimen virheet"
+
+#. settings-schema.json->show-error->tooltip
+msgid "Show printer error icon"
+msgstr "Näytä tulostimen virhekuvakkeen"
+
+#. settings-schema.json->show-jobs->description
+msgid "Documents count"
+msgstr "Sivujen määrä"
+
+#. settings-schema.json->show-jobs->tooltip
+msgid "Show documents count next to icon"
+msgstr "Näytä sivujen määrä kuvakkeen vieressä"
+
+#. settings-schema.json->job-number->description
+msgid "Document number"
+msgstr "Sivun numero"
+
+#. settings-schema.json->job-number->tooltip
+msgid "Show each document number on print list"
+msgstr "Näytä jokaisen sivun numeron tulostuslistalla"
+
+#. settings-schema.json->send-to-front->tooltip
+msgid "Documents can be sent to front"
+msgstr "Sivut voidaan lähettää eteen"
+
+#. settings-schema.json->symbolic-icons->description
+msgid "Symbolic icons"
+msgstr "Symboliset kuvakkeet"
+
+#. settings-schema.json->symbolic-icons->tooltip
+msgid "Use symbolic icons"
+msgstr "Käytä symbolisia kuvakkeita"
+
+#. settings-schema.json->reload-button->description
+#. settings-schema.json->reload-button->tooltip
+msgid "Reload Applet"
+msgstr "Lataa sovelma uudelleen"
+
+#. settings-schema.json->cups-button->description
+#. settings-schema.json->cups-button->tooltip
+msgid "Restart CUPS"
+msgstr "Käynnistä CUPS"

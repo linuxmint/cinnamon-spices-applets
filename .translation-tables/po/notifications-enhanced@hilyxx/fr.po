@@ -1,0 +1,169 @@
+# NOTIFICATIONS-ENHANCED
+# This file is put in the public domain.
+# hilyxx, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-05 12:43+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. applet.js:44
+msgid "Notifications applet conflict"
+msgstr "Conflit d'applets de notifications"
+
+#. applet.js:45
+msgid ""
+"Conflict detected: notifications@cinnamon.org is active.\n"
+"Remove it and restart Cinnamon before using Notifications-Enhanced applet."
+msgstr ""
+"Conflit détecté : notifications@cinnamon.org est actif.\n"
+"Retirez-le et redémarrez Cinnamon avant d'utiliser l'applet Notifications-"
+"Enhanced."
+
+#. applet.js:120
+msgid "Do not disturb"
+msgstr "Ne pas déranger"
+
+#. applet.js:126
+msgid "No notifications"
+msgstr "Aucune notification"
+
+#. settings-schema.json->keyClear->description
+#. applet.js:134
+msgid "Clear notifications"
+msgstr "Effacer les notifications"
+
+#. applet.js:157
+msgid "Enable notifications"
+msgstr "Activer les notifications"
+
+#. applet.js:168
+msgid "Notification Settings"
+msgstr "Paramètres des notifications"
+
+#. applet.js:257 applet.js:431
+#, javascript-format
+msgid "%d notification"
+msgid_plural "%d notifications"
+msgstr[0] "%d notification"
+msgstr[1] "%d notifications"
+
+#. applet.js:287
+msgid "Notifications"
+msgstr "Notifications"
+
+#. applet.js:300
+msgid "Notifications disabled"
+msgstr "Notifications désactivées"
+
+#. applet.js:447
+msgid "just now"
+msgstr "à l'instant"
+
+#. applet.js:450
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "il y a %d seconde"
+msgstr[1] "il y a %d secondes"
+
+#. applet.js:454
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "il y a %d minute"
+msgstr[1] "il y a %d minutes"
+
+#. metadata.json->name
+msgid "Notifications-Enhanced"
+msgstr "Notifications-Enhanced"
+
+#. metadata.json->description
+msgid "A notification applet but with more options"
+msgstr "Une applet de notification mais avec plus d'options"
+
+#. settings-schema.json->section1->description
+msgid "Behavior"
+msgstr "Comportement"
+
+#. settings-schema.json->ignoreTransientNotifications->description
+msgid "Ignore transient notifications"
+msgstr "Ignorer les notifications transitoires"
+
+#. settings-schema.json->ignoreTransientNotifications->tooltip
+msgid "Check this to ignore transient notifications."
+msgstr "Cochez cette case pour ignorer les notifications transitoires."
+
+#. settings-schema.json->section2->description
+msgid "Display"
+msgstr "Affichage"
+
+#. settings-schema.json->showNotificationCount->description
+msgid "Show the number of notifications"
+msgstr "Afficher le nombre de notifications"
+
+#. settings-schema.json->showEmptyTray->description
+msgid "Show notification tray"
+msgstr "Afficher l'espace de notification"
+
+#. settings-schema.json->showEmptyTray->tooltip
+msgid "Check this to always show the notification tray."
+msgstr "Cochez cette case pour toujours afficher l'espace de notification."
+
+#. settings-schema.json->showDisturbIcon->description
+msgid "Always show 'Do Not Disturb' icon"
+msgstr "Toujours afficher l'icône \"Ne pas déranger\""
+
+#. settings-schema.json->showDisturbIcon->tooltip
+msgid ""
+"Check this to show the 'Do Not Disturb icon' on the panel even when the "
+"'Show notification tray' option is disabled."
+msgstr ""
+"Cochez cette case pour afficher l'icône \"Ne pas déranger\" même si l'option "
+"\"Afficher l'espace de notification\" est désactivée."
+
+#. settings-schema.json->showNotificationSettings->description
+msgid "Show notification settings in the menu"
+msgstr "Afficher les paramètres de notification dans le menu"
+
+#. settings-schema.json->section3->description
+msgid "Keyboard shortcuts"
+msgstr "Raccourcis clavier"
+
+#. settings-schema.json->keyOpen->description
+msgid "Show notifications"
+msgstr "Afficher les notifications"
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the notification popup menu."
+msgstr ""
+"Définir un raccourci clavier pour afficher le menu contextuel de "
+"notification."
+
+#. settings-schema.json->keyClear->tooltip
+msgid "Set keybinding(s) to clear all notifications."
+msgstr "Définir un raccourci clavier pour effacer toutes les notifications."
+
+#. settings-schema.json->keyMute->description
+msgid "Enable or disable notifications"
+msgstr "Activer ou désactiver les notifications"
+
+#. settings-schema.json->keyMute->tooltip
+msgid "Set keybinding(s) to enable or disable notifications."
+msgstr ""
+"Définir un raccourci clavier pour activer ou désactiver les notifications."
+
+#. settings-schema.json->btnSystemSettings->description
+msgid "Open notification settings"
+msgstr "Ouvrir les paramètres de notification"

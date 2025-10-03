@@ -1,0 +1,115 @@
+# PRINTERS
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Marcelo Aof, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-10-08 19:45-0400\n"
+"PO-Revision-Date: 2021-10-03 14:41-0300\n"
+"Last-Translator: Marcelo Aof\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. metadata.json->name
+#. applet.js:59 applet.js:173
+msgid "Printers"
+msgstr "Impressoras"
+
+#. applet.js:198
+msgid "Cancel all jobs"
+msgstr "Cancelar todas as impressões"
+
+#. applet.js:225
+msgid "at"
+msgstr "em"
+
+#. settings-schema.json->send-to-front->description
+#. applet.js:239
+msgid "Send to front"
+msgstr "Definir prioridade máxima"
+
+#. metadata.json->description
+msgid "Manage Jobs and Printers"
+msgstr "Configure as impressões e impressoras"
+
+#. metadata.json->contributors
+msgid "Caldas Lopes"
+msgstr ""
+
+#. settings-schema.json->show-icon->description
+msgid "Show icon"
+msgstr "Mostrar o ícone"
+
+#. settings-schema.json->show-icon->options
+msgid "Always"
+msgstr "Sempre"
+
+#. settings-schema.json->show-icon->options
+msgid "When printers exist"
+msgstr "Se existirem impressoras conectadas"
+
+#. settings-schema.json->show-icon->options
+msgid "When printing"
+msgstr "Durante a impressão"
+
+#. settings-schema.json->show-icon->tooltip
+msgid "When to show the icon"
+msgstr "Mostra o ícone de impressora no painel"
+
+#. settings-schema.json->show-error->description
+msgid "Printer errors"
+msgstr "Mostrar erros de impressão"
+
+#. settings-schema.json->show-error->tooltip
+msgid "Show printer error icon"
+msgstr "Mostra o ícone de erro de impressão"
+
+#. settings-schema.json->show-jobs->description
+msgid "Documents count"
+msgstr "Mostrar a fila de impressão"
+
+#. settings-schema.json->show-jobs->tooltip
+msgid "Show documents count next to icon"
+msgstr ""
+"Mostra a quantidade de documentos na fila de impressão ao lado do ícone no "
+"painel"
+
+#. settings-schema.json->job-number->description
+msgid "Document number"
+msgstr "Mostrar a ordem de impressão do documento"
+
+#. settings-schema.json->job-number->tooltip
+msgid "Show each document number on print list"
+msgstr "Mostra a ordem de impressão de cada documento na fila de impressão"
+
+#. settings-schema.json->send-to-front->tooltip
+msgid "Documents can be sent to front"
+msgstr ""
+"A prioridade de impressão de um documento pode ser definida como máxima"
+
+#. settings-schema.json->symbolic-icons->description
+msgid "Symbolic icons"
+msgstr "Usar ícones monocromáticos"
+
+#. settings-schema.json->symbolic-icons->tooltip
+msgid "Use symbolic icons"
+msgstr "Usa ícones monocromáticos"
+
+#. settings-schema.json->reload-button->description
+#. settings-schema.json->reload-button->tooltip
+msgid "Reload Applet"
+msgstr "Recarregar o applet"
+
+#. settings-schema.json->cups-button->description
+#. settings-schema.json->cups-button->tooltip
+msgid "Restart CUPS"
+msgstr "Reiniciar o gerenciador de impressão (CUPS)"

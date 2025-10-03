@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-20 15:57+0200\n"
+"PO-Revision-Date: 2025-04-23 21:15+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. settings-schema.json->saveImage->description
+#. settings-schema.json->saveImage->tooltip
+#: applet.js:89
+msgid "Automatically save background images"
+msgstr "自動儲存桌布圖片"
+
+#. settings-schema.json->slideshow->description
+#. settings-schema.json->slideshow->tooltip
+#: applet.js:93
+msgid "Play backgrounds as a slideshow"
+msgstr "以播放投影片的方式輪播桌布"
+
+#. settings-schema.json->click->description
+#. settings-schema.json->click->tooltip
+#: applet.js:97
+msgid "Enable click to switch images"
+msgstr "啟用點選切換圖片功能"
+
+#. metadata.json->name
+msgid "Anime Desktop Wallpaper"
+msgstr "Anime 桌面桌布"
+
+#. metadata.json->description
+msgid "Download and apply Anime Wallpaper to your desktop"
+msgstr "下載並套用 Anime 桌布到您的桌面上"
+
+#. settings-schema.json->section1->description
+msgid "Configure"
+msgstr "設定"
+
+#. settings-schema.json->resource->description
+msgid "Wallpaper api resource"
+msgstr "桌布 API 資源"
+
+#. settings-schema.json->resource->options
+msgid "loliapi.com"
+msgstr "loliapi.com"
+
+#. settings-schema.json->resource->options
+msgid "zichen.zone"
+msgstr "zichen.zone"
+
+#. settings-schema.json->resource->options
+msgid "moe.jitsu.top"
+msgstr "moe.jitsu.top"
+
+#. settings-schema.json->resource->options
+msgid "paugram.com"
+msgstr "paugram.com"
+
+#. settings-schema.json->resource->options
+msgid "t.mwm.moe"
+msgstr "t.mwm.moe"
+
+#. settings-schema.json->resource->options
+msgid "dmoe.cc"
+msgstr "dmoe.cc"
+
+#. settings-schema.json->resource->options
+msgid "api.vvhan.com"
+msgstr "api.vvhan.com"
+
+#. settings-schema.json->resource->options
+msgid "paulzzh.com"
+msgstr "paulzzh.com"
+
+#. settings-schema.json->resource->tooltip
+msgid "Select a wallpaper resource"
+msgstr "選擇桌布資源"
+
+#. settings-schema.json->saveImagePath->description
+msgid "Save background images to"
+msgstr "將桌布圖片儲存到"
+
+#. settings-schema.json->saveImagePath->tooltip
+msgid "Automatically save background images to this directory"
+msgstr "自動將桌布圖片儲存到此目錄"
+
+#. settings-schema.json->delay->units
+msgid "minutes"
+msgstr "分鐘"
+
+#. settings-schema.json->delay->description
+#. settings-schema.json->delay->tooltip
+msgid "Delay"
+msgstr "間隔時間"

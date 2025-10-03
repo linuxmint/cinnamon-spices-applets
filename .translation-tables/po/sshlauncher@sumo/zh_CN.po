@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-12-24 12:01+0100\n"
+"PO-Revision-Date: 2023-02-11 19:18+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. metadata.json->name
+#: applet.js:51 applet.js:67 applet.js:110 applet.js:246 applet.js:260
+msgid "SSH Launcher"
+msgstr "SSH 启动器"
+
+#: applet.js:110
+msgid "No suitable icon found, falling back to custom icon"
+msgstr "没有找到合适的图标，退回到自定义图标"
+
+#: applet.js:116
+msgid "Force Update from SSH config"
+msgstr "强制从 SSH 配置更新"
+
+#: applet.js:183
+msgid "Background (-fN)"
+msgstr "后台 (-fN)"
+
+#: applet.js:186
+msgid "Forward X11 (-X)"
+msgstr "转发 X11 (-X)"
+
+#: applet.js:227
+msgid "ERROR. "
+msgstr "错误。"
+
+#: applet.js:230
+msgid "Edit SSH config"
+msgstr "编辑 SSH 配置"
+
+#: applet.js:246
+msgid ""
+"Error: I can't open the terminal.\n"
+"You need to set a default terminal first in Preferred Applications!\n"
+"\n"
+"(More help in Right Click->About->More Info)"
+msgstr ""
+"错误：无法打开终端。\n"
+"您需要先在首选应用程序中设置一个默认的终端！\n"
+"\n"
+"(更多帮助在右键单击->关于->更多信息)"
+
+#: applet.js:260
+msgid "Connection opened to "
+msgstr "打开连接到 "
+
+#: applet.js:260
+msgid " using "
+msgstr " 使用 "
+
+#. metadata.json->description
+msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
+msgstr "连接到 ~/.ssh/config 中配置的 SSH 主机的小程序"
+
+#. settings-schema.json->headAppearance->description
+msgid "Appearance"
+msgstr "外观"
+
+#. settings-schema.json->themeIcon->description
+msgid "Use icon from your icon theme"
+msgstr "使用您的图标主题中的图标"
+
+#. settings-schema.json->symbolicIcon->description
+msgid "Use symbolic icon"
+msgstr "使用符号图标"
+
+#. settings-schema.json->headFunc->description
+msgid "Functionality"
+msgstr "功能"
+
+#. settings-schema.json->customCommand->description
+msgid "Use custom command for opening terminal"
+msgstr "使用自定义命令来打开终端"
+
+#. settings-schema.json->customCommand->tooltip
+msgid ""
+"Usually it should end with -e so it will execute the supplied ssh command, "
+"check your chosen terminal's manual."
+msgstr ""
+"通常它应该以 -e 结尾以执行所提供的 ssh 命令，请查阅您所选择的终端的手册。"
