@@ -3,7 +3,7 @@
   "name": "Xsession",
   "max-instances": "1",
   "hide-configuration": false,
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "Restart, access source code and configure your Spices (Applets, Desklets, Extensions). View the contents of your .xsession-errors file in real time. Restart Cinnamon.",
   "author": "claudiux"
 }

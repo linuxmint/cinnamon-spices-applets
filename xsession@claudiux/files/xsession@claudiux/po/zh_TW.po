@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: xsession@claudiux 5.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-17 13:58+0200\n"
+"POT-Creation-Date: 2025-10-03 18:30+0200\n"
 "PO-Revision-Date: 2025-09-11 00:10+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -44,84 +44,88 @@ msgstr "擴充功能"
 msgid "RELOAD ALL"
 msgstr "全部重新載入"
 
-#. applet.js:241
+#. applet.js:248
 msgid "Middle-click: \n"
 msgstr "滑鼠中鍵點選：\n"
 
-#. applet.js:241 applet.js:317
+#. applet.js:248 applet.js:327
 msgid "Show .xsession-errors"
 msgstr "顯示 .xsession-errors"
 
-#. applet.js:242
+#. applet.js:249
 msgid "Ctrl + Middle-click: \n"
 msgstr "Ctrl + 滑鼠中鍵點選：\n"
 
-#. applet.js:242 applet.js:331
+#. applet.js:249 applet.js:341
 msgid "Show latest messages"
 msgstr "顯示最新訊息"
 
-#. applet.js:295 applet.js:537
+#. applet.js:311 applet.js:553
 #, javascript-format
 msgid "%s latest messages"
 msgstr "%s 則最新訊息"
 
-#. applet.js:295 applet.js:537
+#. applet.js:311 applet.js:553
 msgid "min: 10. max: 250."
 msgstr "最小值：10，最大值：250。"
 
-#. applet.js:348
+#. applet.js:358
 msgid "Restart Cinnamon"
 msgstr "重新啟動 Cinnamon"
 
-#. applet.js:364
+#. applet.js:376
+msgid "Repeat last action"
+msgstr ""
+
+#. applet.js:380
 msgid "--- Reload Spices ---"
 msgstr "--- 重新載入 Spices ---"
 
-#. applet.js:370
+#. applet.js:386
 msgid "Reload Applet:"
 msgstr "重新載入面板小程式："
 
-#. applet.js:397
+#. applet.js:413
 msgid "Reload Desklet:"
 msgstr "重新載入桌面小工具："
 
-#. applet.js:424
+#. applet.js:440
 msgid "Reload Extension:"
 msgstr "重新載入擴充功能："
 
-#. applet.js:450
+#. applet.js:466
 msgid "Reload Current Theme"
 msgstr "重新載入目前佈景主題"
 
-#. applet.js:464
+#. applet.js:480
 msgid "--- Settings for ---"
 msgstr "--- 設定選項 ---"
 
-#. applet.js:470
+#. applet.js:486
 msgid "Applet:"
 msgstr "面板小程式："
 
-#. applet.js:479
+#. applet.js:495
 msgid "Desklet:"
 msgstr "桌面小工具："
 
-#. applet.js:488
+#. applet.js:504
 msgid "Extension:"
 msgstr "擴充功能："
 
-#. applet.js:497
+#. applet.js:513
 msgid "--- View Code ---"
 msgstr "--- 檢視程式碼 ---"
 
-#. applet.js:503
+#. applet.js:519
 msgid "View Applet Code for:"
 msgstr "檢視面板小程式原始碼："
 
-#. applet.js:512
+#. applet.js:528
 msgid "View Desklet Code for:"
 msgstr "檢視桌面小工具原始碼："
 
-#. applet.js:521
+#. applet.js:537
 msgid "View Extension Code for:"
 msgstr "檢視擴充功能原始碼："
 

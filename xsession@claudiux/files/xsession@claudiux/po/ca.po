@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-17 13:58+0200\n"
+"POT-Creation-Date: 2025-10-03 18:30+0200\n"
 "PO-Revision-Date: 2025-09-28 17:10+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -47,84 +47,88 @@ msgstr "Extensions"
 msgid "RELOAD ALL"
 msgstr "RECARREGAR TOT"
 
-#. applet.js:241
+#. applet.js:248
 msgid "Middle-click: \n"
 msgstr "Clic del mig:\n"
 
-#. applet.js:241 applet.js:317
+#. applet.js:248 applet.js:327
 msgid "Show .xsession-errors"
 msgstr "Mostrar .xsession-errors"
 
-#. applet.js:242
+#. applet.js:249
 msgid "Ctrl + Middle-click: \n"
 msgstr "Ctrl + Clic del mig: \n"
 
-#. applet.js:242 applet.js:331
+#. applet.js:249 applet.js:341
 msgid "Show latest messages"
 msgstr "Mostra els darrers missatges"
 
-#. applet.js:295 applet.js:537
+#. applet.js:311 applet.js:553
 #, javascript-format
 msgid "%s latest messages"
 msgstr "%s darrers missatges"
 
-#. applet.js:295 applet.js:537
+#. applet.js:311 applet.js:553
 msgid "min: 10. max: 250."
 msgstr "mín: 10. màx: 250."
 
-#. applet.js:348
+#. applet.js:358
 msgid "Restart Cinnamon"
 msgstr "Reiniciar Cinnamon"
 
-#. applet.js:364
+#. applet.js:376
+msgid "Repeat last action"
+msgstr ""
+
+#. applet.js:380
 msgid "--- Reload Spices ---"
 msgstr "--- Recarregar Espècies ---"
 
-#. applet.js:370
+#. applet.js:386
 msgid "Reload Applet:"
 msgstr "Recarregar la miniaplicació:"
 
-#. applet.js:397
+#. applet.js:413
 msgid "Reload Desklet:"
 msgstr "Recarregar la miniaplicació d'escriptori:"
 
-#. applet.js:424
+#. applet.js:440
 msgid "Reload Extension:"
 msgstr "Recarregar l'extensió:"
 
-#. applet.js:450
+#. applet.js:466
 msgid "Reload Current Theme"
 msgstr "Recarrega el tema actual"
 
-#. applet.js:464
+#. applet.js:480
 msgid "--- Settings for ---"
 msgstr "--- Opcions per ---"
 
-#. applet.js:470
+#. applet.js:486
 msgid "Applet:"
 msgstr "Miniaplicació:"
 
-#. applet.js:479
+#. applet.js:495
 msgid "Desklet:"
 msgstr "Miniaplicació d'escriptori:"
 
-#. applet.js:488
+#. applet.js:504
 msgid "Extension:"
 msgstr "Extensió:"
 
-#. applet.js:497
+#. applet.js:513
 msgid "--- View Code ---"
 msgstr "--- Veure el codi ---"
 
-#. applet.js:503
+#. applet.js:519
 msgid "View Applet Code for:"
 msgstr "Veure el codi de la miniaplicació:"
 
-#. applet.js:512
+#. applet.js:528
 msgid "View Desklet Code for:"
 msgstr "Veure el codi de la miniaplicació d'escriptori:"
 
-#. applet.js:521
+#. applet.js:537
 msgid "View Extension Code for:"
 msgstr "Veure el codi de l'extensió:"
 
