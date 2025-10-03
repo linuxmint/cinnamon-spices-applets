@@ -59,12 +59,22 @@ class MyApplet extends Applet.TextIconApplet {
         this.signalManager.connect(global.settings, 'changed::panel-edit-mode', this.on_panel_edit_mode_changed, this)
         this.signalManager.connect(global.window_manager, 'size-change', () => {
             let w = global.display.focus_window
-            this._windowChange(w)
+            if (w) {
+                this._windowChange(w)
+            }
         }, this)
 
         this.signalManager.connect(global.display, 'notify::focus-window', () => {
             let w = global.display.focus_window
-            this._windowFocus(w)
+            if (w) {
+                this._windowFocus(w)
+            }
+        }, this)
+        this.signalManager.connect(global.screen, 'window-monitor-changed', () => {
+            let w = global.display.focus_window
+            if (w) {
+                this._onMonitorChange(w)
+            }
         }, this)
     }
 
@@ -240,6 +250,13 @@ class MyApplet extends Applet.TextIconApplet {
             })
             this.button["icon"].set_child(icon)
         }
+    }
+
+    _onMonitorChange(w) {
+        if (w.get_monitor() != this.panel.monitorIndex) {
+            this.setButtons("hide")
+        }
+        this._windowChange(w)
     }
 
     _windowFocus(w) {

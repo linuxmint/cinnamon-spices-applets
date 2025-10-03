@@ -38,16 +38,38 @@ class MyApplet extends Applet.TextIconApplet {
             let w = global.display.focus_window
             if (w) {
                 this.signalManager.connect(w, 'notify::title', () => {
-                    this._onTitleChange(w.lastTitle,w.get_monitor())
+                    this._onTitleChange(w.lastTitle, w.get_monitor())
                 })
-                this._onTitleChange(w.lastTitle,w.get_monitor())
+                this._onTitleChange(w.lastTitle, w.get_monitor())
             } else {
-                this._onTitleChange(undefined,0)
+                this._onTitleChange(undefined, 0)
+            }
+        }, this)
+        this.signalManager.connect(global.screen, 'window-monitor-changed', () => {
+            let w = global.display.focus_window
+            if (w) {
+                this._onMonitorChange(w.lastTitle, w.get_monitor())
             }
         }, this)
     }
 
-    _onTitleChange(title,monitorIndex) {
+    _onMonitorChange(title, monitorIndex) {
+        if (monitorIndex != this.panel.monitorIndex) {
+            let title = ""
+            const windows = global.get_window_actors();
+            for (let i = 0; i < windows.length; i++) {
+                if (this.panel.monitorIndex != windows[i].metaWindow.get_monitor() || windows[i].metaWindow.get_wm_class() == "Cinnamon") {
+                    continue
+                }
+                title = windows[i].metaWindow.title
+            }
+            this._onTitleChange(title, this.panel.monitorIndex)
+            return
+        }
+        this._onTitleChange(title, monitorIndex)
+    }
+
+    _onTitleChange(title, monitorIndex) {
         if (monitorIndex != this.panel.monitorIndex) {
             return
         }
