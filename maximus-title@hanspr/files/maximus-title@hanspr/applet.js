@@ -58,9 +58,12 @@ class MyApplet extends Applet.TextIconApplet {
             let title = ""
             const windows = global.get_window_actors();
             for (let i = 0; i < windows.length; i++) {
-                if (this.panel.monitorIndex != windows[i].metaWindow.get_monitor() || windows[i].metaWindow.get_wm_class() == "Cinnamon") {
+                if (this.panel.monitorIndex != windows[i].metaWindow.get_monitor() || windows[i].metaWindow.get_window_type() > 1) {
                     continue
                 }
+                //console.log("pass :", i)
+                //console.log("title:", windows[i].metaWindow.title)
+                //console.log("type :", windows[i].metaWindow.get_window_type())
                 title = windows[i].metaWindow.title
             }
             this._onTitleChange(title, this.panel.monitorIndex)
