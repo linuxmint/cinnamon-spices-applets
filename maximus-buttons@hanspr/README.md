@@ -5,6 +5,8 @@ This applet is desinged to work in pair with:
 
 * maximus-title@hanspr
 * maximus extension to remove the title bar on maximized windows
+* Multiple monitors: Add the applet to panels in all monitors to set the buttons on the active window monitor
+* Multiple monitors: buttons will be visible on the current focused monitor window to improve focus visibility between monitors
 
 # Features
 * It will show the minimize, maximize, close buttons on the panel when a window is maximized

@@ -5,6 +5,7 @@ This applet is desinged to work in pair with:
 
 * maximus-buttons@hanspr
 * maximus extension to remove the title bar on maximized windows
+* Multiple monitors. Add the applet to panels in all monitors to follow titles on different monitors
 
 # Features
 
