@@ -1,3 +1,11 @@
+### v5.1.0~20251003
+Developers often have to repeat the same action several times (reloading a Spice or opening its settings).
+
+A “Repeat last action” option is now available in the menu when an action has been performed. This option disappears after one hour.
+
+If you cannot remember what the action was, simply do not use this option.
+
+
 ### v5.0.0~20250417
   * Ctrl+MiddleClick opens only latest messages.
   * Can set from menu the number of latest messages.

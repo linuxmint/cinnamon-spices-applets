@@ -186,6 +186,7 @@ class LGSMenuItem extends PopupMenu.PopupBaseMenuItem {
                         icon = new St.Icon({ icon_name: type+"-symbolic", icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
                         //~ icon = new St.Icon({ icon_name: type+"-symbolic", icon_type: St.IconType.SYMBOLIC, });
                     }
+                    GLib.free(array_chars);
                 } else {
                     icon = new St.Icon({ icon_name: type+"-symbolic", icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
                     //~ icon = new St.Icon({ icon_name: type+"-symbolic", icon_type: St.IconType.SYMBOLIC, });
@@ -210,6 +211,8 @@ class LGSMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
 
     activate() {
+        this.parent.last_action = this.action;
+        this.parent.last_action_time = Date.now();
         this.action();
         super.activate();
     }
@@ -230,6 +233,10 @@ class LGS extends Applet.IconApplet {
         this.settings.bind("icon_size", "icon_size");
         this.settings.bind("show_reload_all", "show_reload_all");
         this.settings.bind("number_latest", "number_latest");
+
+        // Last action:
+        this.last_action = null;
+        this.last_action_time = null;
 
         // Left click menu:
         this.itemNumberLatest = null;
@@ -288,6 +295,15 @@ class LGS extends Applet.IconApplet {
             this.itemNumberLatest = null;
         }
         this.menu.removeAll();
+        /**
+         *  Sections
+         */
+        let sectionHead = new PopupMenu.PopupMenuSection();
+        let sectionReload = new PopupMenu.PopupMenuSection();
+        let sectionSettings = new PopupMenu.PopupMenuSection();
+        let sectionSource = new PopupMenu.PopupMenuSection();
+
+        // Number of latest messages to show using menu or shortcut:
         this.itemNumberLatest = new LGSsliderItem((this.number_latest - 10) /240);
         this.itemNumberLatest.set_mark(9/24);
         this.itemNumberLatest.tooltip = new Tooltips.Tooltip(
@@ -298,13 +314,7 @@ class LGS extends Applet.IconApplet {
         this.itemNumberLatestValueChangedId = this.itemNumberLatest.connect('value-changed', () => { this.numberSliderChanged() });
         this.itemNumberLatestDragEndId = this.itemNumberLatest.connect('drag-end', () => { this.numberSliderReleased() });
 
-        /**
-         *  Sections
-         */
-        let sectionHead = new PopupMenu.PopupMenuSection();
-        let sectionReload = new PopupMenu.PopupMenuSection();
-        let sectionSettings = new PopupMenu.PopupMenuSection();
-        let sectionSource = new PopupMenu.PopupMenuSection();
+
 
         /// Head
         let menuitemHead1 = new PopupMenu.PopupMenuItem(_(this.name)+' '+this.version, {
@@ -359,6 +369,12 @@ class LGS extends Applet.IconApplet {
 
         sectionHead.addMenuItem(itemReloadCinnamon);
         sectionHead.emit('allocate');
+
+        /// Repeat last action:
+        if (this.last_action != null && this.last_action_time != null && (Date.now() - this.last_action_time < 3600000)) {
+            sectionHead.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            sectionHead.addAction(_("Repeat last action"), () => { this.last_action_time = Date.now(); this.last_action(); } )
+        }
 
         /// Reload:
         let reloadHead = new PopupMenu.PopupMenuItem(_("--- Reload Spices ---"), {
