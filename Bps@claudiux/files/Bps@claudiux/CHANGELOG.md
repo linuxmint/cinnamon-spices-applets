@@ -1,3 +1,6 @@
+### v1.3.2~20251003
+  * Bugfix (using VPN).
+
 ### v1.3.1~20250922
   * Minor bugfix.
 
