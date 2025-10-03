@@ -39,6 +39,7 @@ class MyApplet extends Applet.TextIconApplet {
         this.button = []
         this.createButtons(this.buttons_style)
         this.on_panel_edit_mode_changed
+        this._windowChange(global.display.focus_window)
     }
 
     bindSettings() {
@@ -56,8 +57,15 @@ class MyApplet extends Applet.TextIconApplet {
 
         this.signalManager.connect(Main.themeManager, 'theme-set', this.loadTheme, this)
         this.signalManager.connect(global.settings, 'changed::panel-edit-mode', this.on_panel_edit_mode_changed, this)
-        this.signalManager.connect(global.window_manager, 'size-change', this._windowChange, this)
-        this.signalManager.connect(global.display, 'notify::focus-window', this._windowFocus, this)
+        this.signalManager.connect(global.window_manager, 'size-change', () => {
+            let w = global.display.focus_window
+            this._windowChange(w)
+        }, this)
+
+        this.signalManager.connect(global.display, 'notify::focus-window', () => {
+            let w = global.display.focus_window
+            this._windowFocus(w)
+        }, this)
     }
 
     on_panel_edit_mode_changed() {
@@ -234,11 +242,18 @@ class MyApplet extends Applet.TextIconApplet {
         }
     }
 
-    _windowFocus() {
-        this._windowChange()
+    _windowFocus(w) {
+        if (w == undefined) {
+            return
+        }
+        this._windowChange(w)
     }
 
-    _windowChange(shellwm, actor, change) {
+    _windowChange(w) {
+        if (w.get_monitor() != this.panel.monitorIndex) {
+            this.setButtons("hide")
+            return
+        }
         let buttons = this.buttons_style.split(":")
         if (this.checkButton(buttons, "icon")) {
             this.updateWindowIcon()
@@ -281,9 +296,20 @@ class MyApplet extends Applet.TextIconApplet {
             return
         }
         let app = tracker.get_window_app(w)
-        let buttons = this.buttons_style.split(":")
         if (app && w.get_maximized()) {
+            this.setButtons("show")
+        } else {
+            this.setButtons("hide")
+        }
+    }
+
+    setButtons(what) {
+        let buttons = this.buttons_style.split(":")
+        if (what == "show") {
             for (let i = 0; i < buttons.length; ++i) {
+                if (buttons[i] == undefined) {
+                    continue
+                }
                 this.button[buttons[i]].show()
                 this.button[buttons[i]].opacity = 255
             }

@@ -1,6 +1,6 @@
 const Applet = imports.ui.applet
 const SignalManager = imports.misc.signalManager
-const Settings = imports.ui.settings
+const Settings = imports.ui.settings;
 
 class MyApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
@@ -38,16 +38,19 @@ class MyApplet extends Applet.TextIconApplet {
             let w = global.display.focus_window
             if (w) {
                 this.signalManager.connect(w, 'notify::title', () => {
-                    this._onTitleChange(w.lastTitle)
+                    this._onTitleChange(w.lastTitle,w.get_monitor())
                 })
-                this._onTitleChange(w.lastTitle)
+                this._onTitleChange(w.lastTitle,w.get_monitor())
             } else {
-                this._onTitleChange()
+                this._onTitleChange(undefined,0)
             }
         }, this)
     }
 
-    _onTitleChange(title) {
+    _onTitleChange(title,monitorIndex) {
+        if (monitorIndex != this.panel.monitorIndex) {
+            return
+        }
         if (title == undefined) {
             try {
                 title = global.display.focus_window.get_title()

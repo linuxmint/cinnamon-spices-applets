@@ -1,6 +1,7 @@
 {
     "uuid": "maximus-title@hanspr",
-    "description": "Maximus show the title of the current window",
+    "description": "Maximus show title for the current window",
     "version": "0.0.1",
-    "name": "Maximus window title"
+    "name": "Maximus window title",
+    "max-instances": -1
 }
