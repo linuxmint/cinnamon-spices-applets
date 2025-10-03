@@ -20,6 +20,8 @@ This applet is desinged to work in pair with:
 * Apply regex to title option
   * It allow you to setup a regex on the title to clean it before display it
   * If you don't know how to create e regex or are not sure of it use, leave it blank
+  * Default regex: `(?:https?|about):.+? -`
+  * removes prepended urls from firefox, chrome extensions like `keypass helper url`
 * Maximum title length
   * Length of title so it fits better on your current panel width
 
