@@ -1,3 +1,7 @@
+### v3.1.0~20251004
+  * Improved tooltip.
+  * Fixes [#7849](https://github.com/linuxmint/cinnamon-spices-applets/issues/7849)
+
 ### v3.0.1~20250922
   * Improved network management regarding status changes and data readings.
 
