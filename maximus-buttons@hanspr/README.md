@@ -19,4 +19,7 @@ This applet is desinged to work in pair with:
 * It makes more sense when the panel is on the top, but it will work on bottom panels as well
 
 # Limitations
-* No support for extramonitors
+* No consideration for vertical panels, it's been tested on horizontal panels only
+
+# Errors
+* Please report any errors in github `https://github.com/linuxmint/cinnamon-spices-applets/issues`

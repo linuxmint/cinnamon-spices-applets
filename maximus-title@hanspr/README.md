@@ -26,5 +26,8 @@ This applet is desinged to work in pair with:
   * Length of title so it fits better on your current panel width
 
 # Limitations
-* No support for multiple monitors
-* It will only work on top, bottom panels that have enough with.
+* It will only work on top, bottom panels that have enough with to hold a window title
+* No consideration for vertical panels, it's been tested on horizontal panels only
+
+# Errors
+* Please report any errors in github `https://github.com/linuxmint/cinnamon-spices-applets/issues`
