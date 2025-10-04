@@ -13,7 +13,7 @@ class MyApplet extends Applet.TextIconApplet {
             this.instanceId = instanceId
             this.appletPath = metadata.path
             this.regex = null
-            this.cssFocus = "background-color:#5dabf9;border-radius:5px;"
+            this.cssFocus = "background-color:#5dabf9;border-radius:5px;padding-right:10px;padding-left:5px;"
             this.bindSettings()
             this.connectSignals()
             this.lastTitle = ""
@@ -68,7 +68,7 @@ class MyApplet extends Applet.TextIconApplet {
                 title = windows[i].metaWindow.title
             }
             this._onTitleChange(title, this.panel.monitorIndex)
-            this.actor.set_style("background-color:")
+            this.actor.set_style("")
             return
         }
         this._onTitleChange(title, monitorIndex)
@@ -76,7 +76,7 @@ class MyApplet extends Applet.TextIconApplet {
 
     _onTitleChange(title, monitorIndex) {
         if (monitorIndex != this.panel.monitorIndex) {
-            this.actor.set_style("background-color:")
+            this.actor.set_style("")
             return
         }
         if (title == undefined) {
@@ -94,13 +94,13 @@ class MyApplet extends Applet.TextIconApplet {
         if (this.regex != null) {
             title = title.replace(this.regex, "")
         }
-        title = title.substring(0, this.titleLength) + " "
+        title = title.substring(0, this.titleLength)
         this.set_applet_label(title)
         this.actor.set_style(this.cssFocus)
     }
 
     _lengthChange() {
-        this._onTitleChange(this.lastTitle + " ")
+        this._onTitleChange(this.lastTitle)
     }
 
     _regexChanged() {
