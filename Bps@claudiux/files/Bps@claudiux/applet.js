@@ -8,15 +8,7 @@ const Gettext = imports.gettext;
 const Util = imports.misc.util;
 const { to_string } = require("./lib/to-string");
 const {
-  _sourceIds,
   timeout_add_seconds,
-  timeout_add,
-  setTimeout,
-  clearTimeout,
-  setInterval,
-  clearInterval,
-  source_exists,
-  source_remove,
   remove_all_sources
 } = require("./lib/mainloopTools");
 
@@ -170,16 +162,33 @@ class Bps extends Applet.Applet {
         let subProcess = Util.spawnCommandLineAsyncIO(DATA_SCRIPT,
             (stdout, stderr, exitCode) => {
                 if (exitCode == 0) {
-                    let result = stdout.slice(0, -1).split(" ");
+                    //~ let result = stdout.slice(0, -1).split(" ");
+                    let result = stdout.trim().split(" ");
+                    var already_treated = [];
                     for (let r of result) {
                         let d = r.split(":");
-                        data[d[0]] = {"rx": parseInt(d[1]), "tx": parseInt(d[2]), "timestamp": Date.now()}
+                        if (already_treated.indexOf(d[0]) > -1) continue;
+                        already_treated.push(d[0]);
+                        let rx, tx;
+                        if (isNaN(d[1])) {
+                            rx = this.network_data[d[0]]["rx"];
+                        } else {
+                            rx = parseInt(d[1])
+                        }
+                        if (isNaN(d[2])) {
+                            tx = this.network_data[d[0]]["tx"];
+                        } else {
+                            tx = parseInt(d[2]);
+                        }
+
+                        data[d[0]] = {"rx": rx, "tx": tx, "timestamp": Date.now()}
                         if (this.network_data[d[0]]) {
                             diff_ts = (data[d[0]]["timestamp"] - this.network_data[d[0]]["timestamp"]);
                             received += (data[d[0]]["rx"] - this.network_data[d[0]]["rx"]) * 1000 / diff_ts;
                             sent += (data[d[0]]["tx"] - this.network_data[d[0]]["tx"]) * 1000 / diff_ts;
                         }
                         this.network_data[d[0]] = data[d[0]];
+
                     }
                     this.gui_speed.set_received_text(this.convert_bytes(received));
                     this.gui_speed.set_sent_text(this.convert_bytes(sent));

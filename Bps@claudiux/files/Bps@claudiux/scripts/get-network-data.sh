@@ -22,6 +22,7 @@ for interface in $(nmcli connection show --active | awk '{print $NF}'); do {
         i=$((i+1))
 }; done
 
-echo $data
+
+echo -n "$data"
 
 exit 0
