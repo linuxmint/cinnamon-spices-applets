@@ -253,6 +253,9 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     _onMonitorChange(w) {
+        if (!w) {
+            return
+        }
         if (w.get_monitor() != this.panel.monitorIndex) {
             this.setButtons("hide")
         }
@@ -260,13 +263,16 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     _windowFocus(w) {
-        if (w == undefined) {
+        if (!w) {
             return
         }
         this._windowChange(w)
     }
 
     _windowChange(w) {
+        if (!w) {
+            return
+        }
         if (w.get_monitor() != this.panel.monitorIndex) {
             this.setButtons("hide")
             return
@@ -295,7 +301,7 @@ class MyApplet extends Applet.TextIconApplet {
         }
         this.button = []
         this.createButtons(this.buttons_style)
-        this._windowChange()
+        this._windowChange(global.display.focus_window)
     }
 
     checkButton(arr, obj) {
