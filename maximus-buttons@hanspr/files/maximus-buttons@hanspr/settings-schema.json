@@ -27,16 +27,16 @@
     "on-desktop-shutdown": {
         "type": "switch",
         "default": false,
-        "description": "On desktop show shutdown menu when click close button"
+        "description": "Click on close: poweroff if desktop is focused"
     },
     "hide-buttons": {
         "type": "switch",
         "default": true,
-        "description": "Hide buttons instead of removing (no applets jump left right)"
+        "description": "Hide buttons: instead of removing (no applets jump left right)"
     },
     "only-maximized": {
         "type": "switch",
         "default": true,
-        "description": "Show applet only active window maximized"
+        "description": "Show buttons: only when focused window is maximized"
     }
 }
