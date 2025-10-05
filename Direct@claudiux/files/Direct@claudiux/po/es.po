@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-01 21:18+0200\n"
+"POT-Creation-Date: 2025-10-05 20:38+0200\n"
 "PO-Revision-Date: 2024-05-13 12:54-0400\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
@@ -24,51 +24,51 @@ msgid "(Right click to open folder)"
 msgstr "(Haga clic con el botón derecho para abrir la carpeta)"
 
 #. metadata.json->name
-#. applet.js:222
+#. applet.js:226
 msgid "Direct"
 msgstr "Directo"
 
-#. applet.js:428
+#. applet.js:407
 msgid "Search Home Folder"
 msgstr "Buscar en la carpeta personal"
 
-#. applet.js:455
+#. applet.js:434
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:464
+#. applet.js:443
 msgid "Search File System"
 msgstr "Buscar en el sistema de archivos"
 
-#. applet.js:490
+#. applet.js:469
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:514
+#. applet.js:493
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTOS RECIENTES"
 
-#. applet.js:528
+#. applet.js:507
 msgid "Clear"
 msgstr "Limpiar"
 
-#. applet.js:535
+#. applet.js:514
 msgid "Recent"
 msgstr "Recientes"
 
-#. applet.js:581
+#. applet.js:560
 msgid "Computer"
 msgstr "PC"
 
-#. applet.js:587
+#. applet.js:566
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#. applet.js:604
+#. applet.js:583
 msgid "Network"
 msgstr "Red"
 
-#. applet.js:826
+#. applet.js:805
 msgid "Trash"
 msgstr "Papelera"
 
@@ -367,6 +367,10 @@ msgstr "Número de entradas visibles"
 #. settings-schema.json->recentShowUri->description
 msgid "Show complete path in tooltips"
 msgstr "Mostrar la ruta completa en la información sobre herramientas"
+
+#. settings-schema.json->favoriteIconIsStar->description
+msgid "Replace icons with stars"
+msgstr ""
 
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
