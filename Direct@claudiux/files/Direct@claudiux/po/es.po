@@ -370,7 +370,6 @@ msgstr "Mostrar la ruta completa en la información sobre herramientas"
 #. settings-schema.json->favoriteIconIsStar->description
 msgid "Replace icons with stars"
 msgstr "Reemplazar iconos con estrellas"
-msgstr ""
 
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
