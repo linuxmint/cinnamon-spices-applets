@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-10-02 19:43+0200\n"
-"PO-Revision-Date: 2024-09-28 11:14-0300\n"
+"PO-Revision-Date: 2025-10-05 15:22-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.7\n"
 
 #. applet.js:470
 msgid "Network interfaces"
@@ -139,31 +139,33 @@ msgstr "Automático"
 
 #. settings-schema.json->unit->options
 msgid "Bytes/Bits"
-msgstr ""
+msgstr "Bytes/Bits"
 
 #. settings-schema.json->unit->options
 msgid "KB/Kb/KiB"
-msgstr ""
+msgstr "KB/Kb/KiB"
 
 #. settings-schema.json->unit->options
 msgid "MB/Mb/MiB"
-msgstr ""
+msgstr "MB/Mb/MiB"
 
 #. settings-schema.json->unit->options
 msgid "GB/Gb/GiB"
-msgstr ""
+msgstr "GB/Gb/GiB"
 
 #. settings-schema.json->unit->options
 msgid "TB/Tb/TiB"
-msgstr ""
+msgstr "TB/Tb/TiB"
 
 #. settings-schema.json->unit->tooltip
 msgid "Use fixed unit for displaying, or automatically choose the best unit"
 msgstr ""
+"Utilizar una unidad fija para la visualización o elegir automáticamente la "
+"unidad más adecuada."
 
 #. settings-schema.json->unit_type->description
 msgid "Unit type"
-msgstr ""
+msgstr "Tipo de unidad"
 
 #. settings-schema.json->unit_type->options
 msgid "Bytes"
@@ -284,21 +286,22 @@ msgstr "Un estilo CSS aplicado al texto en el panel"
 
 #. settings-schema.json->gui_enable_inactive_text_css->description
 msgid "Enable different style for inactive (0.00) text"
-msgstr ""
+msgstr "Habilitar un estilo diferente para el texto inactivo (0,00)"
 
 #. settings-schema.json->gui_inactive_text_css->description
 msgid "Inactive text CSS"
-msgstr ""
+msgstr "CSS de texto inactivo"
 
 #. settings-schema.json->gui_inactive_text_css->tooltip
 msgid ""
 "A CSS style applied to the text in the panel when there is no network "
 "activity"
 msgstr ""
+"Un estilo CSS aplicado al texto del panel cuando no hay actividad de red."
 
 #. settings-schema.json->gui_show_icons->description
 msgid "Show icons"
-msgstr ""
+msgstr "Mostrar íconos"
 
 #. settings-schema.json->gui_received_icon_filename->description
 msgid "Download icon"
