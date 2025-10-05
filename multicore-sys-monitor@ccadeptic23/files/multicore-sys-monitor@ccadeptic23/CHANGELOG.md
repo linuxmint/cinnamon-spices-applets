@@ -1,3 +1,6 @@
+### v3.1.1~20251005
+  * Adds the option "Place % at the very end of the line" in the General tab of this applet tooltip.
+
 ### v3.1.0~20251004
   * Improved tooltip.
   * Fixes [#7849](https://github.com/linuxmint/cinnamon-spices-applets/issues/7849)

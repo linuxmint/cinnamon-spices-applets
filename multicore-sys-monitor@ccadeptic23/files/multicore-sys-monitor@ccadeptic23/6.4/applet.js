@@ -143,6 +143,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("labelsOn", "labelsOn");
         this.settings.bind("borderOn", "borderOn");
         this.settings.bind("graphSpacing", "graphSpacing");
+        this.settings.bind("percentAtEndOfLine", "percentAtEndOfLine");
         this.settings.bind("CPU_labelOn", "CPU_labelOn");
         this.settings.bind("Mem_labelOn", "Mem_labelOn");
         this.settings.bind("Net_labelOn", "Net_labelOn");
@@ -1156,8 +1157,11 @@ class MemDataProvider {
         let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
 
         let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
+        let percentChar = "%";
+        if (this.applet.percentAtEndOfLine)
+            percentChar = "%".padStart(6, " ");
         for (let i = 0; i < attributes.length; i++) {
-            toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + " " + parseFloat((Math.round(1000 * this.currentReadings[i])/10)).toFixed(2).toString().padStart(6, ' ') + ' %\n';
+            toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + " " + parseFloat((Math.round(1000 * this.currentReadings[i])/10)).toFixed(2).toString().padStart(6, ' ') + " " + percentChar + '\n';
         }
         return toolTipString;
     }
@@ -1256,7 +1260,11 @@ class SwapDataProvider {
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
 
-        toolTipString += trans.padStart(spaces, ' ') + ':\t' + " " + parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2).toString().padStart(6, ' ') + ' %\n';
+        let percentChar = "%";
+        if (this.applet.percentAtEndOfLine)
+            percentChar = "%".padStart(6, " ");
+
+        toolTipString += trans.padStart(spaces, ' ') + ':\t' + " " + parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2).toString().padStart(6, ' ') + " " + percentChar + '\n';
         return toolTipString;
     }
 
@@ -1304,6 +1312,9 @@ class MultiCpuDataProvider {
 
         let colon = _(":");
         let lenColon = Math.max(colon.length - 1, 0);
+        let percentChar = "%";
+        if (this.applet.percentAtEndOfLine)
+            percentChar = "%".padStart(9, " ");
 
         for (let i = 0; i < this.CPUCount; i++) {
             let percentage = parseInt(100 * this.currentReadings[i]);
@@ -1314,7 +1325,7 @@ class MultiCpuDataProvider {
             } else {
                 toolTipString += (_('Core') + ' ' + i).padStart(spaces - lenColon, ' ');
             }
-            toolTipString += colon + '\t' + " " + percentage_str + ' %\n';
+            toolTipString += colon + '\t' + " " + percentage_str + " " + percentChar + '\n';
         }
         return toolTipString;
     }
@@ -1625,6 +1636,9 @@ class DiskUsageDataProvider {
 
         let colon = _(":");
         let lenColon = Math.max(colon.length - 1, 0);
+        let percentChar = "%";
+        if (this.applet.percentAtEndOfLine)
+            percentChar = "%".padStart(9, " ");
 
         var names = [];
         for (let p of this.applet.DiskUsage_pathList) {
@@ -1641,15 +1655,15 @@ class DiskUsageDataProvider {
             let maxPercentage = Math.round(100 * this.currentReadings[i].maxvalue, 2);
             if (this.applet.DiskUsage_mergeAll) {
                 if (percentage < maxPercentage)
-                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t ' + percentage.toString().padStart(3, ' ') + ' %\n';
+                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t ' + percentage.toString().padStart(3, ' ') + " " + percentChar + '\n';
                 else
-                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t <b>' + percentage.toString().padStart(3, ' ') + ' %</b>\n';
+                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t <b>' + percentage.toString().padStart(3, ' ') + " " + percentChar + '</b>\n';
             } else {
                 let name = names[i];
                 if (percentage < maxPercentage)
-                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t ' + percentage.toString().padStart(3, ' ') + ' %\n';
+                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t ' + percentage.toString().padStart(3, ' ') + " " + percentChar + '\n';
                 else
-                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t <b>' + percentage.toString().padStart(3, ' ') + ' %</b>\n';
+                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t <b>' + percentage.toString().padStart(3, ' ') + " " + percentChar + '</b>\n';
             }
         }
 

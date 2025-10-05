@@ -15,7 +15,8 @@
       "title": "General",
       "sections": [
         "sectionGeneralOptions",
-        "sectionGeneralColors"
+        "sectionGeneralColors",
+        "sectionTooltip"
       ]
     },
     "pageCPU": {
@@ -89,6 +90,13 @@
         "labelColor",
         "borderColor",
         "backgroundColor"
+      ]
+    },
+    "sectionTooltip": {
+      "type": "section",
+      "title": "Tooltip",
+      "keys": [
+        "percentAtEndOfLine"
       ]
     },
     "sectionCPUOptions": {
@@ -335,6 +343,11 @@
     "type": "colorchooser",
     "default": "rgba(48, 48, 48, 0.1)",
     "description": "Background Color"
+  },
+  "percentAtEndOfLine": {
+    "type": "switch",
+    "default": false,
+    "description": "Place % at the very end of the line"
   },
   "removeEnlightenment": {
     "type": "button",
