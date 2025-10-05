@@ -1,3 +1,7 @@
+### v3.1.2~20251005
+  * The values are formatted to the local locale, in tooltip.
+  * Fixes [#7854](https://github.com/linuxmint/cinnamon-spices-applets/issues/7854)
+
 ### v3.1.1~20251005
   * Adds the option "Place % at the very end of the line" in the General tab of this applet tooltip.
 
