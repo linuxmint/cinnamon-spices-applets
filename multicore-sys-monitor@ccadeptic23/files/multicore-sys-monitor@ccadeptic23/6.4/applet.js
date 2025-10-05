@@ -74,7 +74,37 @@ function get_nemo_size_prefixes() {
     return _interface_settings.get_string(_SETTINGS_KEY)
 }
 
-const formatBytesValueUnit = (bytes, decimals=2, withRate=true)=>{
+const _get_lang = () => {
+    if (GLib.getenv("LC_NUMERIC")) {
+        return GLib.getenv("LC_NUMERIC").split(".")[0].replace("_", "-")
+    } else if (GLib.getenv("LANG")) {
+        return GLib.getenv("LANG").split(".")[0].replace("_", "-")
+    } else if (GLib.getenv("LANGUAGE")) {
+        return GLib.getenv("LANGUAGE").replace("_", "-")
+    }
+    return "en-US"
+}
+
+const formatNumber = (value, decimals=2) => {
+    if (typeof(value) === "string")
+        value = parseFloat(value, decimals);
+    if (typeof(value) === "number") {
+        //~ global.log("Lang: " + _get_lang());
+        if (_get_lang() === "C") return ""+value;
+
+        return ""+new Intl.NumberFormat(
+            _get_lang(),
+            { minimumIntegerDigits: 1, minimumFractionDigits: decimals, maximumFractionDigits: decimals },
+        ).format(value);
+    } else {
+        //~ global.log("Type of value: " + typeof(value));
+        //~ global.log("Lang: " + _get_lang());
+        return ""+value;
+    }
+}
+
+
+const formatBytesValueUnit = (bytes, decimals=2, withRate=true) => {
     let _rate = (withRate === true) ? rate : "";
     if (bytes < 1) {
         return '0'.padStart(spaces/2 - 1) + '.00'.padEnd(spaces/2 - 1) + 'B'.padStart(3, ' ') + _rate;
@@ -100,7 +130,7 @@ const formatBytesValueUnit = (bytes, decimals=2, withRate=true)=>{
     }
 
     return [value, sizes[i] + _rate];
-};
+}
 
 
 
@@ -1161,7 +1191,7 @@ class MemDataProvider {
         if (this.applet.percentAtEndOfLine)
             percentChar = "%".padStart(6, " ");
         for (let i = 0; i < attributes.length; i++) {
-            toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + " " + parseFloat((Math.round(1000 * this.currentReadings[i])/10)).toFixed(2).toString().padStart(6, ' ') + " " + percentChar + '\n';
+            toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + " " + formatNumber(parseFloat((Math.round(1000 * this.currentReadings[i])/10)).toFixed(2), 2).padStart(6, ' ') + " " + percentChar + '\n';
         }
         return toolTipString;
     }
@@ -1212,7 +1242,7 @@ class BufferCacheSharedDataProvider {
 
         for (let i=0, len=attributes.length; i<len; i++) {
             let [value, unit] = formatBytesValueUnit(Math.round(this.currentReadings[i]), 2, false);
-            value = parseFloat(value).toFixed(2);
+            value = formatNumber(parseFloat(value).toFixed(2), 2);
             toolTipString += attributes[i].padStart(spaces - lenColon, ' ') + colon + "\t" + " " + value.padStart(6, ' ') + " " + unit.padStart(6, ' ') + '\n';
         }
         return toolTipString;
@@ -1264,7 +1294,7 @@ class SwapDataProvider {
         if (this.applet.percentAtEndOfLine)
             percentChar = "%".padStart(6, " ");
 
-        toolTipString += trans.padStart(spaces, ' ') + ':\t' + " " + parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2).toString().padStart(6, ' ') + " " + percentChar + '\n';
+        toolTipString += trans.padStart(spaces, ' ') + ':\t' + " " + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(6, ' ') + " " + percentChar + '\n';
         return toolTipString;
     }
 
@@ -1317,7 +1347,7 @@ class MultiCpuDataProvider {
             percentChar = "%".padStart(9, " ");
 
         for (let i = 0; i < this.CPUCount; i++) {
-            let percentage = parseInt(100 * this.currentReadings[i]);
+            let percentage = formatNumber(parseInt(100 * this.currentReadings[i]), 0);
             var percentage_str = "" + percentage;
             percentage_str = percentage_str.padStart(3);
             if (this.applet.CPU_mergeAll) {
@@ -1445,16 +1475,18 @@ class NetDataProvider {
                 this.currentReadings[i].tooltipUp = 0;
             }
             let [down_value, down_unit] = formatBytesValueUnit(parseFloat(this.currentReadings[i].tooltipDown).toFixed(2), 2);
-            down_value = parseFloat(down_value).toFixed(2);
-            if (isNaN(down_value)) {
-                down_value = "0.00";
+            if (isNaN(down_value) || (typeof(down_value) === "string" && down_value.length <= 1)) {
+                down_value = formatNumber("0.00", 2);
                 down_unit = "B" + rate;
+            } else {
+                down_value = formatNumber(parseFloat(down_value).toFixed(2), 2);
             }
             let [up_value, up_unit] = formatBytesValueUnit(parseFloat(this.currentReadings[i].tooltipUp).toFixed(2), 2);
-            up_value = parseFloat(up_value).toFixed(2);
-            if (isNaN(up_value)) {
-                up_value = "0.00";
+            if (isNaN(up_value) || (typeof(up_value) === "string" && up_value.length <= 1)) {
+                up_value = formatNumber("0.00", 2);
                 up_unit = "B" + rate;
+            } else {
+                up_value = formatNumber(parseFloat(up_value).toFixed(2), 2);
             }
             let name = (this.currentReadings[i]['name'].length === 0) ? this.currentReadings[i].id : this.currentReadings[i].name;
             toolTipString += name.padEnd(22) + '\n';
@@ -1575,16 +1607,18 @@ class DiskDataProvider {
                 continue;
             }
             let [read, read_unit] = formatBytesValueUnit(this.currentReadings[i].tooltipRead, 2);
-            read = parseFloat(read).toFixed(2);
             let [write, write_unit] = formatBytesValueUnit(this.currentReadings[i].tooltipWrite, 2);
-            write = parseFloat(write).toFixed(2);
-            if (isNaN(read)) {
-                read = "0.00";
+            if (isNaN(read) || (typeof(read) === "string" && read.length <= 1)) {
+                read = formatNumber("0.00", 2);
                 read_unit = "B" + rate;
+            } else {
+                read = formatNumber(parseFloat(read).toFixed(2), 2);
             }
-            if (isNaN(write)) {
-                write = "0.00";
+            if (isNaN(write) || (typeof(write) === "string" && write.length <= 1)) {
+                write = formatNumber("0.00", 2);
                 write_unit = "B" + rate;
+            } else {
+                write = formatNumber(parseFloat(write).toFixed(2), 2);
             }
             if (this.currentReadings[i].name != this.currentReadings[i].id)
                 toolTipString += this.currentReadings[i].name.padStart(1, " ").padEnd(title.length - this.currentReadings[i].id.length - 1, " ") + this.currentReadings[i].id + '\n';
@@ -1655,15 +1689,15 @@ class DiskUsageDataProvider {
             let maxPercentage = Math.round(100 * this.currentReadings[i].maxvalue, 2);
             if (this.applet.DiskUsage_mergeAll) {
                 if (percentage < maxPercentage)
-                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t ' + percentage.toString().padStart(3, ' ') + " " + percentChar + '\n';
+                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t ' + formatNumber(percentage, 0).padStart(3, ' ') + " " + percentChar + '\n';
                 else
-                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t <b>' + percentage.toString().padStart(3, ' ') + " " + percentChar + '</b>\n';
+                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t <b>' + formatNumber(percentage, 0).padStart(3, ' ') + " " + percentChar + '</b>\n';
             } else {
                 let name = names[i];
                 if (percentage < maxPercentage)
-                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t ' + percentage.toString().padStart(3, ' ') + " " + percentChar + '\n';
+                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t ' + formatNumber(percentage, 0).padStart(3, ' ') + " " + percentChar + '\n';
                 else
-                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t <b>' + percentage.toString().padStart(3, ' ') + " " + percentChar + '</b>\n';
+                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t <b>' + formatNumber(percentage, 0).padStart(3, ' ') + " " + percentChar + '</b>\n';
             }
         }
 
