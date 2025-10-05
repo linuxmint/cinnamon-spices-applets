@@ -104,7 +104,9 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     _regexChanged() {
-        if (this.titleRegex != "") {
+        if (this.titleRegex == "") {
+            this.regex = null
+        } else {
             try {
                 this.regex = new RegExp(this.titleRegex)
             } catch (e) {
@@ -112,6 +114,8 @@ class MyApplet extends Applet.TextIconApplet {
                 this.regex = null
             }
         }
+        this.lastTitle = ""
+        this._onTitleChange()
     }
 }
 
