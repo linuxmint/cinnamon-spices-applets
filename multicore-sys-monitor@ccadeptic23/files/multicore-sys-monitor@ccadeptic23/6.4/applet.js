@@ -38,7 +38,7 @@ const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
 const NETWORK_DEVICES_STATUS_PATH = XDG_RUNTIME_DIR + "/network_devices";
 
 const rate = _('/s');
-var spaces = 12;
+var spaces = 14;
 const translated_strings = [
     _("Core 128:"),
     _("Unrecoverable:"),
