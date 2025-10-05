@@ -11,6 +11,6 @@
     "title-regex": {
         "type": "entry",
         "description": "Apply regex to title to remove string, before showing",
-        "default": ""
+        "default": "(?:https?|about):.+? - ?"
     }
 }
