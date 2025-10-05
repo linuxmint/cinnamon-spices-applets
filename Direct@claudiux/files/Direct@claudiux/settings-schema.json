@@ -60,7 +60,7 @@
         "favoritesSection": {
             "type": "section",
             "title": "Favorite documents",
-            "keys": ["showFavorites", "favoriteSortingMethod", "favoriteSizeLimit", "favoriteShowUri"]
+            "keys": ["showFavorites", "favoriteSortingMethod", "favoriteSizeLimit", "favoriteShowUri", "favoriteIconIsStar"]
         },
         "recentSection": {
             "type": "section",
@@ -245,6 +245,13 @@
         "type": "checkbox",
         "description": "Show complete path in tooltips",
         "default": true,
+        "dependency": "showFavorites"
+    },
+
+    "favoriteIconIsStar": {
+        "type": "checkbox",
+        "description": "Replace icons with stars",
+        "default": false,
         "dependency": "showFavorites"
     },
 
