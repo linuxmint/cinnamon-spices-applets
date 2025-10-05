@@ -89,7 +89,6 @@ const formatNumber = (value, decimals=2) => {
     if (typeof(value) === "string")
         value = parseFloat(value, decimals);
     if (typeof(value) === "number") {
-        //~ global.log("Lang: " + _get_lang());
         if (_get_lang() === "C") return ""+value;
 
         return ""+new Intl.NumberFormat(
@@ -97,8 +96,6 @@ const formatNumber = (value, decimals=2) => {
             { minimumIntegerDigits: 1, minimumFractionDigits: decimals, maximumFractionDigits: decimals },
         ).format(value);
     } else {
-        //~ global.log("Type of value: " + typeof(value));
-        //~ global.log("Lang: " + _get_lang());
         return ""+value;
     }
 }
