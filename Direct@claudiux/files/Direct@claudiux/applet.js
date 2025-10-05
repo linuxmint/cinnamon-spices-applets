@@ -159,12 +159,18 @@ class RecentFileMenuItem extends IconMenuItem {
 }
 
 class FavoriteMenuItem extends PopupMenu.PopupBaseMenuItem {
-    constructor(info, show_full_uri, params) {
+    constructor(info, applet, params) {
         super(params);
+        let show_full_uri = applet.favoriteShowUri;
+        let icon_is_star = applet.favoriteIconIsStar;
         this.box = new St.BoxLayout({ style_class: 'popup-combobox-item', style: 'padding: 0px;' });
         this.info = info;
 
-        let icon = St.TextureCache.get_default().load_gicon(null, Gio.content_type_get_icon(info.cached_mimetype), 24);
+        let icon;
+        if (icon_is_star)
+            icon = St.TextureCache.get_default().load_icon_name(null, "starred", St.IconType.FULLCOLOR, applet.iconSize);
+        else
+            icon = St.TextureCache.get_default().load_gicon(null, Gio.content_type_get_icon(info.cached_mimetype), applet.iconSize);
 
         let display_text = info.display_name;
 
@@ -212,8 +218,6 @@ class DirectApplet extends Applet.TextIconApplet {
 
             //initiate settings
             this.settings = new Settings.AppletSettings(this, UUID, this.instanceId);
-            //~ this.prepare_new_list( "userCustomPlaces", "listUserCustomPlaces" );
-            //~ this.prepare_new_list( "systemCustomPlaces", "listSystemCustomPlaces" );
             this.bindSettings();
 
             //set up panel
@@ -224,7 +228,6 @@ class DirectApplet extends Applet.TextIconApplet {
             //listen for changes
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, this.orientation);
-            //~ this.menuManager.addMenu(this.menu);
             // cinna 3.2 and above uses a different func
             if (typeof this.menu.setCustomStyleClass === "function") {
                 this.menu.setCustomStyleClass("xCenter-menu");
@@ -237,9 +240,7 @@ class DirectApplet extends Applet.TextIconApplet {
             this.favorites = XApp.Favorites.get_default();
             this._favoriteButtons = [];
             this.favoritesId = this.favorites.connect('changed', () => { this._toggle_menu_when_open() } );
-            //this.recentManager.connect("changed", Lang.bind(this, this.buildRecentDocumentsSection)); // Becomes useless.
             this.recentManager.connect("changed", () => { this._toggle_menu_when_open() } ); // Becomes useless.
-            //Main.placesManager.connect("bookmarks-updated", Lang.bind(this, this.buildUserSection)); // Avoid.
             Main.placesManager.connect("bookmarks-updated", () => { this._toggle_menu_when_open() });
             this.volumeMonitor = Gio.VolumeMonitor.get();
             //~ this.volumeMonitor.connect("volume-added", Lang.bind(this, this.updateVolumes));
@@ -300,29 +301,6 @@ class DirectApplet extends Applet.TextIconApplet {
         this.menu.toggle();
     }
 
-    //~ prepare_new_list(old_list_name, new_list_name) {
-        //~ let _old;
-        //~ var _new = [];
-
-        //~ _old = this.settings.getValue( old_list_name );
-        //~ if (_old.length > 0) {
-            //~ var customPlaces, customPlace;
-            //~ customPlaces = _old.split(/, *|\n/);
-            //~ for ( let i = 0; i < customPlaces.length; i++ ) {
-                //~ if ( customPlaces[i].length == 0 ) continue;
-
-                //~ let entry = customPlaces[i].split(":");
-                //~ let [ uri, name, iconName ] = [ entry[0].trim(), "", "" ];
-                //~ if ( entry.length > 1 ) name = entry[1].trim();
-                //~ if ( entry.length > 2 ) iconName = entry[2].trim();
-
-                //~ _new.push( { "uri": uri, "name": name, "icon": iconName } );
-            //~ }
-            //~ this.settings.setValue( new_list_name, _new );
-            //~ this.settings.setValue( old_list_name, "" );
-        //~ }
-    //~ }
-
     bindSettings() {
         this.settings.bind("noIconOnPanel", "noIconOnPanel", this.setPanelIcon);
         this.settings.bind("panelIcon", "panelIcon", this.setPanelIcon);
@@ -363,6 +341,7 @@ class DirectApplet extends Applet.TextIconApplet {
         this.settings.bind("favoriteSortingMethod", "favoriteSortingMethod");
         this.settings.bind("recentShowUri", "recentShowUri");
         this.settings.bind("favoriteShowUri", "favoriteShowUri");
+        this.settings.bind("favoriteIconIsStar", "favoriteIconIsStar");
         this.settings.bind("iconBrowserIsPresent", "iconBrowserIsPresent");
         this.settings.bind("keyOpen", "keyOpen", this.setKeybinding);
         let recentSizeLimit = this.recentSizeLimit;
@@ -693,7 +672,7 @@ class DirectApplet extends Applet.TextIconApplet {
             for (let i = 0; i < infos.length; i++) {
                 let info = infos[i];
 
-                let button = new FavoriteMenuItem(info, this.favoriteShowUri);
+                let button = new FavoriteMenuItem(info, this);
 
                 button.connect("activate", (button, event)=> {
                     this.favorites.launch(button.info.uri, event.get_time());
