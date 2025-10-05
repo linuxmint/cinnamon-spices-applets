@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-10-01 21:18+0200\n"
-"PO-Revision-Date: 2024-05-13 12:54-0400\n"
+"PO-Revision-Date: 2025-10-05 15:38-0300\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.7\n"
 
 #. applet.js:157
 msgid "(Right click to open folder)"
@@ -42,7 +42,7 @@ msgstr "Buscar en el sistema de archivos"
 
 #. applet.js:490
 msgid "FAVORITES"
-msgstr ""
+msgstr "FAVORITOS"
 
 #. applet.js:514
 msgid "RECENT DOCUMENTS"
@@ -150,12 +150,16 @@ msgid ""
 "Provides direct and easy access to your Directories, Favorites, Recent "
 "documents and System locations"
 msgstr ""
+"Proporciona acceso directo y sencillo a tus directorios, favoritos, "
+"documentos recientes y ubicaciones del sistema"
 
 #. metadata.json->comments
 msgid ""
 "The Direct@claudiux applet is a fork from the placesCenter@scollins applet, "
 "with improvements."
 msgstr ""
+"El applet Direct@claudiux es una bifurcación del applet "
+"placesCenter@scollins, con mejoras."
 
 #. settings-schema.json->generalPage->title
 msgid "General"
@@ -171,7 +175,7 @@ msgstr "Sistema"
 
 #. settings-schema.json->favoritesPage->title
 msgid "Favorites"
-msgstr ""
+msgstr "Favoritos"
 
 #. settings-schema.json->recentPage->title
 #. settings-schema.json->recentSection->title
@@ -202,9 +206,8 @@ msgid "System section"
 msgstr "Sección del sistema"
 
 #. settings-schema.json->favoritesSection->title
-#, fuzzy
 msgid "Favorite documents"
-msgstr "Mostrar documentos recientes"
+msgstr "Documentos favoritos"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -232,7 +235,7 @@ msgstr "Tamaño de los iconos"
 
 #. settings-schema.json->noIconOnPanel->description
 msgid "No icon on panel"
-msgstr ""
+msgstr "Sin ícono en el panel"
 
 #. settings-schema.json->middleClickPath->description
 msgid "Open on middle click"
@@ -243,9 +246,8 @@ msgid "Leave blank to disable"
 msgstr "Dejar en blanco para deshabilitar"
 
 #. settings-schema.json->showUserSection->description
-#, fuzzy
 msgid "Show User section"
-msgstr "Sección del usuario"
+msgstr "Mostrar sección de usuario"
 
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
@@ -254,18 +256,18 @@ msgstr "Mostrar «Escritorio»"
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 msgid "Icon Name"
-msgstr ""
+msgstr "Nombre del ícono"
 
 #. settings-schema.json->showTrash->description
 msgid "Show trash"
@@ -284,9 +286,8 @@ msgid "When not empty"
 msgstr "Cuando no esté vacía"
 
 #. settings-schema.json->showSystemSection->description
-#, fuzzy
 msgid "Show System section"
-msgstr "Sección del sistema"
+msgstr "Mostrar sección sistema"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"
@@ -309,19 +310,18 @@ msgid "Show network"
 msgstr "Mostrar «Red»"
 
 #. settings-schema.json->showFavorites->description
-#, fuzzy
 msgid "Show favorite documents"
-msgstr "Mostrar documentos recientes"
+msgstr "Mostrar documentos favoritos"
 
 #. settings-schema.json->favoriteSortingMethod->options
 #. settings-schema.json->sortingMethod->options
 msgid "Added time"
-msgstr ""
+msgstr "Tiempo añadido"
 
 #. settings-schema.json->favoriteSortingMethod->description
 #. settings-schema.json->sortingMethod->description
 msgid "Sorting method"
-msgstr ""
+msgstr "Método de clasificación"
 
 #. settings-schema.json->favoriteSizeLimit->options
 #. settings-schema.json->recentSizeLimit->options
@@ -354,9 +354,8 @@ msgid "30"
 msgstr "30"
 
 #. settings-schema.json->favoriteSizeLimit->options
-#, fuzzy
 msgid "All Favorite Documents"
-msgstr "Documentos recientes"
+msgstr "Todos los documentos favoritos"
 
 #. settings-schema.json->favoriteSizeLimit->description
 #. settings-schema.json->recentSizeLimit->description
@@ -374,11 +373,11 @@ msgstr "Mostrar documentos recientes"
 
 #. settings-schema.json->sortingMethod->options
 msgid "Access time"
-msgstr ""
+msgstr "Tiempo de acceso"
 
 #. settings-schema.json->sortingMethod->options
 msgid "Modification time"
-msgstr ""
+msgstr "Hora de modificación"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "All Recent Documents"
@@ -390,4 +389,4 @@ msgstr "Privacidad"
 
 #. settings-schema.json->btnIconBrowser->description
 msgid "Icon browser"
-msgstr ""
+msgstr "Navegador de íconos"
