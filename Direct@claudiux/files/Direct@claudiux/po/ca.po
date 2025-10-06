@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-10-05 20:38+0200\n"
-"PO-Revision-Date: 2024-07-13 03:16+0200\n"
+"PO-Revision-Date: 2025-10-06 21:22+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. applet.js:157
 msgid "(Right click to open folder)"
@@ -41,7 +41,7 @@ msgstr "Buscar al sistema de fitxers"
 
 #. applet.js:469
 msgid "FAVORITES"
-msgstr ""
+msgstr "PREFERITS"
 
 #. applet.js:493
 msgid "RECENT DOCUMENTS"
@@ -149,12 +149,16 @@ msgid ""
 "Provides direct and easy access to your Directories, Favorites, Recent "
 "documents and System locations"
 msgstr ""
+"Proveeix accés directe i fàcil als vostres directoris, preferits, documents "
+"recents i ubicacions del sistema"
 
 #. metadata.json->comments
 msgid ""
 "The Direct@claudiux applet is a fork from the placesCenter@scollins applet, "
 "with improvements."
 msgstr ""
+"La miniaplicació Direct@claudiux és derivada de la miniaplicació "
+"placesCenter@scollins, oferint millores."
 
 #. settings-schema.json->generalPage->title
 msgid "General"
@@ -170,7 +174,7 @@ msgstr "Sistema"
 
 #. settings-schema.json->favoritesPage->title
 msgid "Favorites"
-msgstr ""
+msgstr "Preferits"
 
 #. settings-schema.json->recentPage->title
 #. settings-schema.json->recentSection->title
@@ -201,9 +205,8 @@ msgid "System section"
 msgstr "Secció del sistema"
 
 #. settings-schema.json->favoritesSection->title
-#, fuzzy
 msgid "Favorite documents"
-msgstr "Mostrar els documents recents"
+msgstr "Documents preferits"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -232,7 +235,7 @@ msgstr "Mida de la icona del menú"
 
 #. settings-schema.json->noIconOnPanel->description
 msgid "No icon on panel"
-msgstr ""
+msgstr "Tauler sense icona"
 
 #. settings-schema.json->middleClickPath->description
 msgid "Open on middle click"
@@ -243,9 +246,8 @@ msgid "Leave blank to disable"
 msgstr "Deixeu-ho buit per a desactivar-ho"
 
 #. settings-schema.json->showUserSection->description
-#, fuzzy
 msgid "Show User section"
-msgstr "Secció de l'usuari"
+msgstr "Mostrar la secció de l'usuari"
 
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
@@ -254,18 +256,18 @@ msgstr "Mostrar l'escriptori"
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 msgid "Icon Name"
-msgstr ""
+msgstr "Nom de la icona"
 
 #. settings-schema.json->showTrash->description
 msgid "Show trash"
@@ -284,9 +286,8 @@ msgid "When not empty"
 msgstr "Quan no sigui buida"
 
 #. settings-schema.json->showSystemSection->description
-#, fuzzy
 msgid "Show System section"
-msgstr "Secció del sistema"
+msgstr "Mostrar la secció del sistema"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"
@@ -309,19 +310,18 @@ msgid "Show network"
 msgstr "Mostrar la xarxa"
 
 #. settings-schema.json->showFavorites->description
-#, fuzzy
 msgid "Show favorite documents"
-msgstr "Mostrar els documents recents"
+msgstr "Mostrar els documents preferits"
 
 #. settings-schema.json->favoriteSortingMethod->options
 #. settings-schema.json->sortingMethod->options
 msgid "Added time"
-msgstr ""
+msgstr "Temps afegit"
 
 #. settings-schema.json->favoriteSortingMethod->description
 #. settings-schema.json->sortingMethod->description
 msgid "Sorting method"
-msgstr ""
+msgstr "Mètode d'ordenació"
 
 #. settings-schema.json->favoriteSizeLimit->options
 #. settings-schema.json->recentSizeLimit->options
@@ -354,9 +354,8 @@ msgid "30"
 msgstr "30"
 
 #. settings-schema.json->favoriteSizeLimit->options
-#, fuzzy
 msgid "All Favorite Documents"
-msgstr "Tots els documents recents"
+msgstr "Tots els documents preferits"
 
 #. settings-schema.json->favoriteSizeLimit->description
 #. settings-schema.json->recentSizeLimit->description
@@ -370,7 +369,7 @@ msgstr "Mostrar la ruta completa als tooltips"
 
 #. settings-schema.json->favoriteIconIsStar->description
 msgid "Replace icons with stars"
-msgstr ""
+msgstr "Substituirles icones per estrelles"
 
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
@@ -378,11 +377,11 @@ msgstr "Mostrar els documents recents"
 
 #. settings-schema.json->sortingMethod->options
 msgid "Access time"
-msgstr ""
+msgstr "Hora d'accés"
 
 #. settings-schema.json->sortingMethod->options
 msgid "Modification time"
-msgstr ""
+msgstr "Hora de modificació"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "All Recent Documents"
@@ -390,8 +389,8 @@ msgstr "Tots els documents recents"
 
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"
-msgstr "Privacitat"
+msgstr "Privadesa"
 
 #. settings-schema.json->btnIconBrowser->description
 msgid "Icon browser"
-msgstr ""
+msgstr "Navegador d'icones"
