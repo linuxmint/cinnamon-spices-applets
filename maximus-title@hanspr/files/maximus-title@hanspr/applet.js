@@ -13,11 +13,12 @@ class MyApplet extends Applet.TextIconApplet {
             this.instanceId = instanceId
             this.appletPath = metadata.path
             this.regex = null
-            this.cssFocus = "background-color:#5dabf9;border-radius:5px;padding-right:10px;padding-left:5px;"
             this.bindSettings()
             this.connectSignals()
             this.lastTitle = ""
+            this.cssFocus = "background-color:;border-radius:5px;padding-right:10px;padding-left:5px;"
             this._regexChanged()
+            this._bgChanged()
             setTimeout(() => {
                 this.initialized = true
             }, 500)
@@ -30,7 +31,8 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings = new Settings.AppletSettings(this, this.uuid, this.instanceId)
 
         this.settings.bind("title-regex", "titleRegex", this._regexChanged)
-        this.settings.bind("title-len", "titleLength", this._lengthChange)
+        this.settings.bind("title-len", "titleLength", this._lengthChanged)
+        this.settings.bind("title-bg", "titleBg", this._bgChanged)
     }
 
     connectSignals() {
@@ -99,8 +101,12 @@ class MyApplet extends Applet.TextIconApplet {
         this.actor.set_style(this.cssFocus)
     }
 
-    _lengthChange() {
+    _lengthChanged() {
         this._onTitleChange(this.lastTitle)
+    }
+
+    _bgChanged() {
+        this.cssFocus = "background-color:" + this.titleBg + ";border-radius:5px;padding-right:10px;padding-left:5px;"
     }
 
     _regexChanged() {
