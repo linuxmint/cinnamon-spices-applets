@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-05 20:38+0200\n"
-"PO-Revision-Date: 2025-10-05 20:39+0200\n"
+"POT-Creation-Date: 2025-10-07 19:25+0200\n"
+"PO-Revision-Date: 2025-10-07 19:26+0200\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,7 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:157
+#. applet.js:38 applet.js:487
+msgid "SYSTEM"
+msgstr "SYSTÈME"
+
+#. applet.js:38 applet.js:522
+msgid "FAVORITES"
+msgstr "FAVORIS"
+
+#. applet.js:38 applet.js:546
+msgid "RECENT DOCUMENTS"
+msgstr "DOCUMENTS RÉCENTS"
+
+#. applet.js:160
 msgid "(Right click to open folder)"
 msgstr "(Clic droit pour ouvrir son dossier)"
 
@@ -28,47 +40,35 @@ msgstr "(Clic droit pour ouvrir son dossier)"
 msgid "Direct"
 msgstr "Direct"
 
-#. applet.js:407
+#. applet.js:463
 msgid "Search Home Folder"
 msgstr "Rechercher dans mon dossier personnel"
 
-#. applet.js:434
-msgid "SYSTEM"
-msgstr "SYSTÈME"
-
-#. applet.js:443
+#. applet.js:496
 msgid "Search File System"
 msgstr "Rechercher dans le système de fichiers"
 
-#. applet.js:469
-msgid "FAVORITES"
-msgstr "FAVORIS"
-
-#. applet.js:493
-msgid "RECENT DOCUMENTS"
-msgstr "DOCUMENTS RÉCENTS"
-
-#. applet.js:507
+#. applet.js:560
 msgid "Clear"
 msgstr "Effacer"
 
-#. applet.js:514
+#. applet.js:567
 msgid "Recent"
 msgstr "Récents"
 
-#. applet.js:560
+#. applet.js:615
 msgid "Computer"
 msgstr "Ordinateur"
 
-#. applet.js:566
+#. applet.js:621
 msgid "File System"
 msgstr "Système de fichiers"
 
-#. applet.js:583
+#. applet.js:638
 msgid "Network"
 msgstr "Réseau"
 
-#. applet.js:805
+#. applet.js:860
 msgid "Trash"
 msgstr "Corbeille"
 
@@ -235,6 +235,25 @@ msgstr "px"
 msgid "Menu icon size"
 msgstr "Taille des icônes dans le menu"
 
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr "Déplacer ces sections pour réorganiser le menu :"
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Name"
+msgstr "Nom"
+
+#. settings-schema.json->displayOrder->description
+msgid "Display order in the menu"
+msgstr "Ordre d'affichage dans le menu"
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr "Appliquer"
+
 #. settings-schema.json->noIconOnPanel->description
 msgid "No icon on panel"
 msgstr "Pas d'icône sur le panneau"
@@ -259,12 +278,6 @@ msgstr "Montrer le Bureau"
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 msgid "URI"
 msgstr "URI"
-
-#. settings-schema.json->listUserCustomPlaces->columns->title
-#. settings-schema.json->listSystemCustomPlaces->columns->title
-#. settings-schema.json->favoriteSortingMethod->options
-msgid "Name"
-msgstr "Nom"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title

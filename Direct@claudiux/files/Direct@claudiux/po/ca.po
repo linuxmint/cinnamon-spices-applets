@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-05 20:38+0200\n"
+"POT-Creation-Date: 2025-10-07 19:25+0200\n"
 "PO-Revision-Date: 2025-10-06 21:22+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,7 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.6\n"
 
-#. applet.js:157
+#. applet.js:38 applet.js:487
+msgid "SYSTEM"
+msgstr "SISTEMA"
+
+#. applet.js:38 applet.js:522
+msgid "FAVORITES"
+msgstr "PREFERITS"
+
+#. applet.js:38 applet.js:546
+msgid "RECENT DOCUMENTS"
+msgstr "DOCUMENTS RECENTS"
+
+#. applet.js:160
 msgid "(Right click to open folder)"
 msgstr "(Clic dret per obrir la carpeta)"
 
@@ -27,47 +39,35 @@ msgstr "(Clic dret per obrir la carpeta)"
 msgid "Direct"
 msgstr "Directe"
 
-#. applet.js:407
+#. applet.js:463
 msgid "Search Home Folder"
 msgstr "Buscar al directori Home"
 
-#. applet.js:434
-msgid "SYSTEM"
-msgstr "SISTEMA"
-
-#. applet.js:443
+#. applet.js:496
 msgid "Search File System"
 msgstr "Buscar al sistema de fitxers"
 
-#. applet.js:469
-msgid "FAVORITES"
-msgstr "PREFERITS"
-
-#. applet.js:493
-msgid "RECENT DOCUMENTS"
-msgstr "DOCUMENTS RECENTS"
-
-#. applet.js:507
+#. applet.js:560
 msgid "Clear"
 msgstr "Netejar"
 
-#. applet.js:514
+#. applet.js:567
 msgid "Recent"
 msgstr "Recent"
 
-#. applet.js:560
+#. applet.js:615
 msgid "Computer"
 msgstr "Ordinador"
 
-#. applet.js:566
+#. applet.js:621
 msgid "File System"
 msgstr "Sistema de fitxers"
 
-#. applet.js:583
+#. applet.js:638
 msgid "Network"
 msgstr "Xarxa"
 
-#. applet.js:805
+#. applet.js:860
 msgid "Trash"
 msgstr "Paperera"
 
@@ -233,6 +233,25 @@ msgstr "px"
 msgid "Menu icon size"
 msgstr "Mida de la icona del menú"
 
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr ""
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Name"
+msgstr "Nom"
+
+#. settings-schema.json->displayOrder->description
+msgid "Display order in the menu"
+msgstr ""
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
 #. settings-schema.json->noIconOnPanel->description
 msgid "No icon on panel"
 msgstr "Tauler sense icona"
@@ -257,12 +276,6 @@ msgstr "Mostrar l'escriptori"
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 msgid "URI"
 msgstr "URI"
-
-#. settings-schema.json->listUserCustomPlaces->columns->title
-#. settings-schema.json->listSystemCustomPlaces->columns->title
-#. settings-schema.json->favoriteSortingMethod->options
-msgid "Name"
-msgstr "Nom"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title

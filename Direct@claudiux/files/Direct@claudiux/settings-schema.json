@@ -35,7 +35,7 @@
         "menu": {
             "type": "section",
             "title": "Menu settings",
-            "keys": ["keyOpen", "iconSize"]
+            "keys": ["keyOpen", "iconSize", "displayOrderLabel", "displayOrder", "displayOrderApply"]
         },
         "userSection": {
             "type": "section",
@@ -96,6 +96,26 @@
         "units": "px",
         "step": 2,
         "description": "Menu icon size"
+    },
+
+     "displayOrderLabel": {
+         "type": "label",
+         "description": "Move these sections to rearrange the menu:"
+     },
+
+    "displayOrder": {
+        "type": "list",
+        "default": [],
+        "columns":  [
+            {"id": "id", "title": "Name", "type": "string", "expand-width": true}
+        ],
+        "description": "Display order in the menu"
+    },
+
+    "displayOrderApply": {
+        "type": "button",
+        "description": "Apply",
+        "callback": "controlDisplayOrder"
     },
 
     "noIconOnPanel": {
