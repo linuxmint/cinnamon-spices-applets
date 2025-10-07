@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-10-07 19:25+0200\n"
-"PO-Revision-Date: 2025-10-05 15:55-0300\n"
+"PO-Revision-Date: 2025-10-07 14:37-0300\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -235,7 +235,7 @@ msgstr "Tamaño de los iconos"
 
 #. settings-schema.json->displayOrderLabel->description
 msgid "Move these sections to rearrange the menu:"
-msgstr ""
+msgstr "Mover estas secciones para reorganizar el menú:"
 
 #. settings-schema.json->displayOrder->columns->title
 #. settings-schema.json->listUserCustomPlaces->columns->title
@@ -246,11 +246,11 @@ msgstr "Nombre"
 
 #. settings-schema.json->displayOrder->description
 msgid "Display order in the menu"
-msgstr ""
+msgstr "Orden de visualización en el menú"
 
 #. settings-schema.json->displayOrderApply->description
 msgid "Apply"
-msgstr ""
+msgstr "Aplicar"
 
 #. settings-schema.json->noIconOnPanel->description
 msgid "No icon on panel"
