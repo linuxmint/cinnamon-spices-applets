@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-05 20:38+0200\n"
+"POT-Creation-Date: 2025-10-07 19:25+0200\n"
 "PO-Revision-Date: 2018-11-05 00:37+0300\n"
 "Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
 "Language-Team: Linux Mint Türkiye <gokhanlnx@gmail.com>\n"
@@ -19,7 +19,19 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. applet.js:157
+#. applet.js:38 applet.js:487
+msgid "SYSTEM"
+msgstr "SİSTEM"
+
+#. applet.js:38 applet.js:522
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:38 applet.js:546
+msgid "RECENT DOCUMENTS"
+msgstr "SON BELGELER"
+
+#. applet.js:160
 msgid "(Right click to open folder)"
 msgstr ""
 
@@ -28,47 +40,35 @@ msgstr ""
 msgid "Direct"
 msgstr "Doğrudan"
 
-#. applet.js:407
+#. applet.js:463
 msgid "Search Home Folder"
 msgstr "Ev Dizinini Ara"
 
-#. applet.js:434
-msgid "SYSTEM"
-msgstr "SİSTEM"
-
-#. applet.js:443
+#. applet.js:496
 msgid "Search File System"
 msgstr "Dosya Sistemi Ara"
 
-#. applet.js:469
-msgid "FAVORITES"
-msgstr ""
-
-#. applet.js:493
-msgid "RECENT DOCUMENTS"
-msgstr "SON BELGELER"
-
-#. applet.js:507
+#. applet.js:560
 msgid "Clear"
 msgstr "Temizle"
 
-#. applet.js:514
+#. applet.js:567
 msgid "Recent"
 msgstr ""
 
-#. applet.js:560
+#. applet.js:615
 msgid "Computer"
 msgstr "Bilgiayar"
 
-#. applet.js:566
+#. applet.js:621
 msgid "File System"
 msgstr "Dosya Sistemi"
 
-#. applet.js:583
+#. applet.js:638
 msgid "Network"
 msgstr "Ağ"
 
-#. applet.js:805
+#. applet.js:860
 msgid "Trash"
 msgstr "Çöp"
 
@@ -232,6 +232,25 @@ msgstr "piksel"
 msgid "Menu icon size"
 msgstr "Menü simge boyutu"
 
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr ""
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->displayOrder->description
+msgid "Display order in the menu"
+msgstr ""
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
 #. settings-schema.json->noIconOnPanel->description
 msgid "No icon on panel"
 msgstr ""
@@ -256,12 +275,6 @@ msgstr "Masaüstünü göster"
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 msgid "URI"
-msgstr ""
-
-#. settings-schema.json->listUserCustomPlaces->columns->title
-#. settings-schema.json->listSystemCustomPlaces->columns->title
-#. settings-schema.json->favoriteSortingMethod->options
-msgid "Name"
 msgstr ""
 
 #. settings-schema.json->listUserCustomPlaces->columns->title

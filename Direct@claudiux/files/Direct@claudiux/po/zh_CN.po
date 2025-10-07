@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-05 20:38+0200\n"
+"POT-Creation-Date: 2025-10-07 19:25+0200\n"
 "PO-Revision-Date: 2017-05-02 21:02+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,7 +19,19 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#. applet.js:157
+#. applet.js:38 applet.js:487
+msgid "SYSTEM"
+msgstr "系统"
+
+#. applet.js:38 applet.js:522
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:38 applet.js:546
+msgid "RECENT DOCUMENTS"
+msgstr "最近的文档"
+
+#. applet.js:160
 msgid "(Right click to open folder)"
 msgstr ""
 
@@ -28,47 +40,35 @@ msgstr ""
 msgid "Direct"
 msgstr "直接"
 
-#. applet.js:407
+#. applet.js:463
 msgid "Search Home Folder"
 msgstr "搜索主目录文件夹"
 
-#. applet.js:434
-msgid "SYSTEM"
-msgstr "系统"
-
-#. applet.js:443
+#. applet.js:496
 msgid "Search File System"
 msgstr "搜索文件系统"
 
-#. applet.js:469
-msgid "FAVORITES"
-msgstr ""
-
-#. applet.js:493
-msgid "RECENT DOCUMENTS"
-msgstr "最近的文档"
-
-#. applet.js:507
+#. applet.js:560
 msgid "Clear"
 msgstr "清除"
 
-#. applet.js:514
+#. applet.js:567
 msgid "Recent"
 msgstr ""
 
-#. applet.js:560
+#. applet.js:615
 msgid "Computer"
 msgstr "计算机"
 
-#. applet.js:566
+#. applet.js:621
 msgid "File System"
 msgstr "文件系统"
 
-#. applet.js:583
+#. applet.js:638
 msgid "Network"
 msgstr "网络"
 
-#. applet.js:805
+#. applet.js:860
 msgid "Trash"
 msgstr "回收站"
 
@@ -238,6 +238,25 @@ msgstr "px"
 msgid "Menu icon size"
 msgstr "菜单图标大小"
 
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr ""
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->displayOrder->description
+msgid "Display order in the menu"
+msgstr ""
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
 #. settings-schema.json->noIconOnPanel->description
 msgid "No icon on panel"
 msgstr ""
@@ -262,12 +281,6 @@ msgstr "显示桌面"
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 msgid "URI"
-msgstr ""
-
-#. settings-schema.json->listUserCustomPlaces->columns->title
-#. settings-schema.json->listSystemCustomPlaces->columns->title
-#. settings-schema.json->favoriteSortingMethod->options
-msgid "Name"
 msgstr ""
 
 #. settings-schema.json->listUserCustomPlaces->columns->title

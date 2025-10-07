@@ -24,8 +24,8 @@ const MENU_ITEM_TEXT_LENGTH = 25;
 const ICONBROWSER_PROGRAM = "yad-icon-browser";
 
 var menu_item_icon_size;
-let UUID;
-
+const UUID = "Direct@claudiux";
+Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
 
 function _(str) {
    let customTranslation = Gettext.dgettext(UUID, str);
@@ -34,6 +34,9 @@ function _(str) {
    }
    return Gettext.gettext(str);
 }
+
+const orig_names = [GLib.get_user_name().toUpperCase(), _("SYSTEM"), _("FAVORITES"), _("RECENT DOCUMENTS")];
+const orig_sections = ["User", "System", "Favorites", "RecentDocuments"];
 
 function icon_exists( iconName ) {
     return Gtk.IconTheme.get_default().has_icon( iconName );
@@ -119,7 +122,7 @@ class PlaceMenuItem extends FolderTypeMenuItem {
             icon = St.TextureCache.get_default().load_gicon(null, fileInfo.get_icon(), menu_item_icon_size)
         }
 
-        if ( !text ) text = fileInfo.get_name()
+        if ( !text ) text = fileInfo.get_name();
 
         super(text, icon);
 
@@ -206,9 +209,6 @@ class DirectApplet extends Applet.TextIconApplet {
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
             this.on_orientation_changed(orientation);
 
-            UUID = metadata.uuid;
-            Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
-
             this.enterEventId = null;
             this.userSection = new PopupMenu.PopupMenuSection();
             this.systemSection = new PopupMenu.PopupMenuSection();
@@ -273,7 +273,7 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     on_applet_added_to_panel() {
-        this.enterEventId = this.actor.connect("enter-event", (actor, event) => { if ( ! this.menu.isOpen ) this.buildMenu(); } );
+        this.enterEventId = this.actor.connect("enter-event", (actor, event) => { this.controlDisplayOrder(); if ( ! this.menu.isOpen ) this.buildMenu(); } );
         this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
     }
 
@@ -297,6 +297,7 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     openMenu() {
+        this.controlDisplayOrder();
         if ( ! this.menu.isOpen ) this.buildMenu();
         this.menu.toggle();
     }
@@ -308,6 +309,8 @@ class DirectApplet extends Applet.TextIconApplet {
         //~ this.settings.bind("iconSize", "iconSize", this.buildMenu);
         this.settings.bind("iconSize", "iconSize");
         this.settings.bind("middleClickPath", "middleClickPath");
+        this.settings.bind("displayOrder", "displayOrder");
+        this.controlDisplayOrder();
         //~ this.settings.bind("showDesktop", "showDesktop", this.buildUserSection);
         this.settings.bind("showUserSection", "showUserSection");
         this.settings.bind("showDesktop", "showDesktop");
@@ -351,6 +354,27 @@ class DirectApplet extends Applet.TextIconApplet {
         this.setKeybinding();
     }
 
+    controlDisplayOrder() {
+        var order = [];
+        for (let d of this.displayOrder) {
+            let section = d["id"];
+            if (order.indexOf(section) < 0 && orig_names.indexOf(section) >= 0) order.push(section);
+        }
+        if (order.length < orig_names.length) {
+            for (let name of orig_names) {
+                if (order.indexOf(name) < 0 ) order.push(name);
+            }
+        }
+        let displayOrder = [];
+        for (let name of order)
+            displayOrder.push({"id": name});
+
+        let _to = setTimeout( () => {
+            clearTimeout(_to);
+            this.displayOrder = displayOrder;
+        }, 0);
+    }
+
     setKeybinding() {
         if ( this.keyId ) {
             Main.keybindingManager.removeHotKey(this.keyId);
@@ -387,6 +411,38 @@ class DirectApplet extends Applet.TextIconApplet {
         this.menu.addMenuItem(section);
         section.actor.add_actor(mainBox);
 
+        let systemPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
+        let favoritesPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
+        let recentPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
+
+        let order = [];
+            for (let d of this.displayOrder) order.push(d["id"]);
+            for (let o of order) {
+                switch(orig_sections[orig_names.indexOf(o)]) {
+                    case "User":
+                        if (this.showUserSection) {
+                            mainBox.add_actor(userPaneBox);
+                        }
+                        break;
+                    case "System":
+                        if (this.showSystemSection) {
+                            mainBox.add_actor(systemPaneBox);
+                        }
+                        break;
+                    case "Favorites":
+                        if (this.showFavorites) {
+                            mainBox.add_actor(favoritesPaneBox);
+                        }
+                        break;
+                    case "RecentDocuments":
+                        if (this.showRecentDocuments) {
+                            mainBox.add_actor(recentPaneBox);
+                        }
+                        break;
+
+                }
+            }
+
 
         try {
 
@@ -411,22 +467,19 @@ class DirectApplet extends Applet.TextIconApplet {
                 userPane.actor.add_actor(userScrollBox);
                 userScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
 
-                //~ userVscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
-                //~ userVscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
                 userVscroll.connect("scroll-start", () => { this.menu.passEvents = true; });
                 userVscroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
 
-                //~ this.userSection = new PopupMenu.PopupMenuSection();
                 userScrollBox.add_actor(this.userSection.actor);
                 userPane._connectSubMenuSignals(this.userSection, this.userSection);
 
-                mainBox.add_actor(userPaneBox);
+                //~ mainBox.add_actor(userPaneBox);
                 this.buildUserSection();
             }
 
             //system section
             if (this.showSystemSection) {
-                let systemPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
+                //~ let systemPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
                 let systemPane = new PopupMenu.PopupMenuSection();
                 systemPaneBox.add_actor(systemPane.actor);
                 let systemTitle = new PopupMenu.PopupBaseMenuItem({ style_class: "xCenter-title", reactive: false });
@@ -454,14 +507,14 @@ class DirectApplet extends Applet.TextIconApplet {
                 systemScrollBox.add_actor(this.systemSection.actor);
                 systemPane._connectSubMenuSignals(this.systemSection, this.systemSection);
 
-                mainBox.add_actor(systemPaneBox);
+                //~ mainBox.add_actor(systemPaneBox);
                 this.buildSystemSection();
             }
 
             //favorite documents section
             if ( this.showFavorites ) {
-                let favoritesPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
-                mainBox.add_actor(favoritesPaneBox);
+                //~ let favoritesPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
+                //~ mainBox.add_actor(favoritesPaneBox);
                 let favoritesPane = new PopupMenu.PopupMenuSection();
                 favoritesPaneBox.add_actor(favoritesPane.actor);
                 section._connectSubMenuSignals(favoritesPane, favoritesPane);
@@ -484,8 +537,8 @@ class DirectApplet extends Applet.TextIconApplet {
 
             //recent documents section
             if ( this.showRecentDocuments ) {
-                let recentPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
-                mainBox.add_actor(recentPaneBox);
+                //~ let recentPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
+                //~ mainBox.add_actor(recentPaneBox);
                 let recentPane = new PopupMenu.PopupMenuSection();
                 recentPaneBox.add_actor(recentPane.actor);
                 section._connectSubMenuSignals(recentPane, recentPane);
@@ -519,6 +572,8 @@ class DirectApplet extends Applet.TextIconApplet {
 
                 this.buildRecentDocumentsSection();
             }
+
+
         } catch(e) {
             global.logError("buildMenu(): " + e);
         }

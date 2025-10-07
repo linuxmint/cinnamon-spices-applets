@@ -6,7 +6,7 @@ The Direct@claudiux applet is a fork from the placesCenter@scollins applet, with
 
 ## Features
 
-* Easy to read layout with multiple columns.
+* Easy-to-read layout with multiple columns, which can be rearranged.
 * All entries are file manager independent (which means that they should work for nautilus, nemo, and probably any other file manager as well).
 * Option to display all **volumes**, or just the ones that are mounted.
 * Supports **bookmarks** (eg. from Nemo).

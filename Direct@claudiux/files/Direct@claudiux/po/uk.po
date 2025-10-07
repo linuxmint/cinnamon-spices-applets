@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-05 20:38+0200\n"
+"POT-Creation-Date: 2025-10-07 19:25+0200\n"
 "PO-Revision-Date: 2023-08-24 12:12+0300\n"
 "Last-Translator: DmytroVoytko <Dmytro.Voytko@gmail.com>\n"
 "Language-Team: \n"
@@ -18,7 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.3.2\n"
 
-#. applet.js:157
+#. applet.js:38 applet.js:487
+msgid "SYSTEM"
+msgstr "СИСТЕМА"
+
+#. applet.js:38 applet.js:522
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:38 applet.js:546
+msgid "RECENT DOCUMENTS"
+msgstr "ОСТАННІ ДОКУМЕНТИ"
+
+#. applet.js:160
 msgid "(Right click to open folder)"
 msgstr "(Клацніть правою кнопкою миші, щоб відкрити папку)"
 
@@ -27,47 +39,35 @@ msgstr "(Клацніть правою кнопкою миші, щоб відк�
 msgid "Direct"
 msgstr "Прямий"
 
-#. applet.js:407
+#. applet.js:463
 msgid "Search Home Folder"
 msgstr "Пошук у домашній папці"
 
-#. applet.js:434
-msgid "SYSTEM"
-msgstr "СИСТЕМА"
-
-#. applet.js:443
+#. applet.js:496
 msgid "Search File System"
 msgstr "Пошук у файловій системі"
 
-#. applet.js:469
-msgid "FAVORITES"
-msgstr ""
-
-#. applet.js:493
-msgid "RECENT DOCUMENTS"
-msgstr "ОСТАННІ ДОКУМЕНТИ"
-
-#. applet.js:507
+#. applet.js:560
 msgid "Clear"
 msgstr "Очистити"
 
-#. applet.js:514
+#. applet.js:567
 msgid "Recent"
 msgstr ""
 
-#. applet.js:560
+#. applet.js:615
 msgid "Computer"
 msgstr "Комп'ютер"
 
-#. applet.js:566
+#. applet.js:621
 msgid "File System"
 msgstr "Файлова система"
 
-#. applet.js:583
+#. applet.js:638
 msgid "Network"
 msgstr "Мережа"
 
-#. applet.js:805
+#. applet.js:860
 msgid "Trash"
 msgstr "Смітник"
 
@@ -230,6 +230,25 @@ msgstr "px"
 msgid "Menu icon size"
 msgstr "Розмір значка меню"
 
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr ""
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->displayOrder->description
+msgid "Display order in the menu"
+msgstr ""
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
 #. settings-schema.json->noIconOnPanel->description
 msgid "No icon on panel"
 msgstr ""
@@ -254,12 +273,6 @@ msgstr "Показати робочий стіл"
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 msgid "URI"
-msgstr ""
-
-#. settings-schema.json->listUserCustomPlaces->columns->title
-#. settings-schema.json->listSystemCustomPlaces->columns->title
-#. settings-schema.json->favoriteSortingMethod->options
-msgid "Name"
 msgstr ""
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
