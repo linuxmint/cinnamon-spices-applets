@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: bose@tuuxx 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-08 21:37+0700\n"
+"PO-Revision-Date: 2025-10-08 21:37+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+msgid "Bose Quiet Comfort"
+msgstr "Bose Quiet Comfort"
+
+#. metadata.json->description
+msgid ""
+"Get connection details of BOSE Quiet Comfort 35 II, requires: bluez-tools"
+msgstr ""
+"Lấy thông tin kết nối của BOSE Quiet Comfort 35 II, yêu cầu: bluez-tools"
+
+#. settings-schema.json->head->description
+msgid "Settings for bose@tuuxx"
+msgstr "Cài đặt cho bose@tuuxx"
+
+#. settings-schema.json->address->description
+msgid "Address of the Bluethooth BOSE device:"
+msgstr "Địa chỉ của thiết bị BOSE Bluetooth:"
+
+#. settings-schema.json->address->tooltip
+msgid "Format: xx:xx:xx:xx:xx:xx"
+msgstr "Định dạng: xx:xx:xx:xx:xx:xx"
+
+#. settings-schema.json->path->description
+msgid "Path of based-connect:"
+msgstr "Đường dẫn của based-connect:"
+
+#. settings-schema.json->path->tooltip
+msgid "Path to the based-connect tool"
+msgstr "Đường dẫn đến công cụ based-connect"
+
+#. settings-schema.json->basedconnectLookup->description
+msgid "Get based-connect tool"
+msgstr "Lấy công cụ based-connect"
+
+#. settings-schema.json->basedconnectLookup->tooltip
+msgid "Opens git webpage of the based-connect tool"
+msgstr "Mở trang web git của công cụ based-connect"
