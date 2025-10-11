@@ -211,13 +211,11 @@ msgstr ""
 msgid ""
 "If the alarm time is less than the minutes specified below away,\n"
 "the alarm time can be displayed with more details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
 msgstr ""
 "Se l'ora della sveglia è inferiore ai minuti indicati di seguito,\n"
 "può essere visualizzata con maggiori dettagli\n"
-"(vedi https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
-"time-format)"
+"(vedi https://docs.gtk.org/glib/method.DateTime.format.html)"
 
 #. 3.4->settings-schema.json->alarmtime-format-large->description
 #. 6.4->settings-schema.json->alarmtime-format-large->description
@@ -231,13 +229,11 @@ msgstr ""
 msgid ""
 "If the alarm time is more than the minutes specified below away,\n"
 "the alarm time can be displayed with less details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
 msgstr ""
 "Se l'ora della sveglia è superiore ai minuti indicati di seguito,\n"
 "può essere visualizzata con meno dettagli\n"
-"(vedi https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
-"time-format)"
+"(vedi https://docs.gtk.org/glib/method.DateTime.format.html)"
 
 #. 3.4->settings-schema.json->alarmtime-format-switchover->units
 #. 6.4->settings-schema.json->alarmtime-format-switchover->units
