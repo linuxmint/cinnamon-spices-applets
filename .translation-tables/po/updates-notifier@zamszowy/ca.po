@@ -1,0 +1,223 @@
+# UPDATES NOTIFIER
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: updates-notifier@zamszowy 2.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-29 10:49+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:79
+msgid "missing dependencies"
+msgstr "dependències no instal·lades"
+
+#. applet.js:229
+msgid "Check for new updates"
+msgstr "Comprova si hi ha actualitzacions"
+
+#. applet.js:243
+#, javascript-format
+msgid "View %s updates"
+msgstr "Veure %s actualitzacions"
+
+#. applet.js:243
+msgid "No updates to view"
+msgstr "No hi ha actualitzacions per a veure"
+
+#. applet.js:258
+#, javascript-format
+msgid "Upgrade %s packages"
+msgstr "Actualitza %s paquets"
+
+#. applet.js:258
+msgid "No packages to upgrade"
+msgstr "No hi ha paquets a actualitzar"
+
+#. applet.js:283
+#, javascript-format
+msgid "%s updates available"
+msgstr "%s actualitzacions disponibles"
+
+#. applet.js:284
+msgid "No updates available"
+msgstr "No hi ha actualitzacions disponibles"
+
+#. info-window.js:66 info-window.js:85
+msgid "No details available."
+msgstr "No hi ha detalls."
+
+#. info-window.js:68 info-window.js:87
+msgid ""
+"Error:\n"
+"{0}"
+msgstr ""
+"Error:\n"
+"{0}"
+
+#. info-window.js:72 info-window.js:91
+msgid ""
+"Failed to run command:\n"
+"{0}"
+msgstr ""
+"Error en executar l'ordre:\n"
+"{0}"
+
+#. info-window.js:108
+msgid "Loading update details…"
+msgstr "Carregant detalls de l'actualització…"
+
+#. info-window.js:173
+msgid "Updates"
+msgstr "Actualitzacions"
+
+#. info-window.js:188
+msgid "Search updates…"
+msgstr "Busca actualitzacions.…"
+
+#. info-window.js:223
+msgid "{0} updates"
+msgstr "{0} actualitzacions"
+
+#. info-window.js:251
+msgid ""
+"Failed to read updates file:\n"
+"{0}"
+msgstr ""
+"No s'ha pogut llegir el fitxer de les actualitzacions:\n"
+"{0}"
+
+#. metadata.json->name
+msgid "Updates notifier"
+msgstr "Notificador d'actualitzacions"
+
+#. metadata.json->description
+msgid "Shows icons for pending update packages"
+msgstr "Mostra icones per a actualitzacions de paquets pendents"
+
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr "Comportament"
+
+#. settings-schema.json->pageAppearance->title
+msgid "Appearance"
+msgstr "Aparença"
+
+#. settings-schema.json->sectionSettings->title
+msgid "Settings"
+msgstr "Opcions"
+
+#. settings-schema.json->sectionIconLabel->title
+msgid "Icon/Label"
+msgstr "Icona/Etiqueta"
+
+#. settings-schema.json->sectionClick->title
+msgid "Applet click"
+msgstr "Clic a la miniaplicació"
+
+#. settings-schema.json->sectionMenu->title
+msgid "Menu"
+msgstr "Menú"
+
+#. settings-schema.json->sectionTheme->title
+msgid "Theme"
+msgstr "Tema"
+
+#. settings-schema.json->update-refresh->description
+msgid "Minutes to wait before refreshing updates"
+msgstr "Minuts a esperar abans de refrescar les actualitzacions"
+
+#. settings-schema.json->show-firmware->description
+msgid "Show firmware updates"
+msgstr "Mostra actualitzacions de firmware"
+
+#. settings-schema.json->hide-applet->description
+msgid "Hide applet if there are no updates"
+msgstr "Amaga la miniaplicació si no hi ha actualitzacions"
+
+#. settings-schema.json->different-levels->description
+msgid "Show different applet icon for different updgradeable packages count"
+msgstr ""
+"Mostra una icona de la miniaplicació diferent per números d'actualitzacions "
+"diferents"
+
+#. settings-schema.json->level-1->description
+msgid "Show low level icon when updates count is between 0 and this value "
+msgstr ""
+"Mostra la icona de comptador d'actualitzacions baix quan el número està "
+"entre 0 i aquest valor "
+
+#. settings-schema.json->level-2->description
+msgid ""
+"Show medium level icon when updates count is between low level value and "
+"this value. Show high level icon if it's higher than this value."
+msgstr ""
+"Mostra la icona de comptador d'actualitzacions mitjà quan el número està "
+"entre 0 i aquest valor. Mostra la icona de comptador alt quan el número "
+"sigui major a aquest valor."
+
+#. settings-schema.json->show-label->description
+msgid "Show label with updates count"
+msgstr "Mostra una etiqueta amb un comptador d'actualitzacions"
+
+#. settings-schema.json->label-font-size->description
+msgid "Label font size"
+msgstr "Mida de la font de l'etiqueta"
+
+#. settings-schema.json->label-font-weight->description
+msgid "Label font weight"
+msgstr "Gruix de la font de l'etiqueta"
+
+#. settings-schema.json->label-vertical-position->description
+msgid "Label vertical position"
+msgstr "Posició vertical de l'etiqueta"
+
+#. settings-schema.json->show-window-on-click->description
+msgid "Show updates window on left click and menu entries on right click"
+msgstr ""
+"Mostra la finestra d'actualitzacions en fer clic esquerre i els elements del "
+"menú en fer clic dret"
+
+#. settings-schema.json->refresh-when-no-updates->description
+msgid "Refresh updates list on left click if there are no updates"
+msgstr ""
+"Refresca la llista d'actualitzacions en fer clic esquerre si no hi ha "
+"actualitzacions"
+
+#. settings-schema.json->commandUpdate-show->description
+msgid "Show \"Check for new updates\" command"
+msgstr "Mostra l'ordre \"Buscar actualitzacions noves\""
+
+#. settings-schema.json->commandUpgrade-show->description
+msgid "Show \"Upgrade packages\" command"
+msgstr "Mostra l'ordre \"Actualitzar paquets\""
+
+#. settings-schema.json->commandUpgrade->description
+msgid "Upgrade packages command:"
+msgstr "Ordre d'actualitzar paquets:"
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr "Estil d'icona"
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr "fosc"
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr "clar"
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr "simbòlica"

@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-12-24 12:01+0100\n"
+"PO-Revision-Date: 2023-07-19 13:34-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#. metadata.json->name
+#: applet.js:51 applet.js:67 applet.js:110 applet.js:246 applet.js:260
+msgid "SSH Launcher"
+msgstr "SSH Launcher"
+
+#: applet.js:110
+msgid "No suitable icon found, falling back to custom icon"
+msgstr ""
+"No se encontró ningún icono adecuado, recurriendo al icono personalizado"
+
+#: applet.js:116
+msgid "Force Update from SSH config"
+msgstr "Forzar actualización desde la configuración de SSH"
+
+#: applet.js:183
+msgid "Background (-fN)"
+msgstr "Background (-fN)"
+
+#: applet.js:186
+msgid "Forward X11 (-X)"
+msgstr "Forward X11 (-X)"
+
+#: applet.js:227
+msgid "ERROR. "
+msgstr "ERROR. "
+
+#: applet.js:230
+msgid "Edit SSH config"
+msgstr "Editar configuración de SSH"
+
+#: applet.js:246
+msgid ""
+"Error: I can't open the terminal.\n"
+"You need to set a default terminal first in Preferred Applications!\n"
+"\n"
+"(More help in Right Click->About->More Info)"
+msgstr ""
+"Error: No puedo abrir la terminal.\n"
+"¡Necesitas establecer un terminal por defecto primero en Aplicaciones "
+"Preferidas!\n"
+"\n"
+"(Más ayuda en Click Derecho->Acerca->Más Información)"
+
+#: applet.js:260
+msgid "Connection opened to "
+msgstr "Conexión abierta a "
+
+#: applet.js:260
+msgid " using "
+msgstr " usando "
+
+#. metadata.json->description
+msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
+msgstr "Un applet para conectarse a hosts SSH configurados en ~/.ssh/config"
+
+#. settings-schema.json->headAppearance->description
+msgid "Appearance"
+msgstr "Apariencia"
+
+#. settings-schema.json->themeIcon->description
+msgid "Use icon from your icon theme"
+msgstr "Utilizar el ícono de su tema de íconos"
+
+#. settings-schema.json->symbolicIcon->description
+msgid "Use symbolic icon"
+msgstr "Utilizar icono simbólico"
+
+#. settings-schema.json->headFunc->description
+msgid "Functionality"
+msgstr "Funcionalidad"
+
+#. settings-schema.json->customCommand->description
+msgid "Use custom command for opening terminal"
+msgstr "Utilizar un comando personalizado para abrir el terminal"
+
+#. settings-schema.json->customCommand->tooltip
+msgid ""
+"Usually it should end with -e so it will execute the supplied ssh command, "
+"check your chosen terminal's manual."
+msgstr ""
+"Por lo general, debe terminar con -e para que ejecute el comando ssh "
+"proporcionado, consulte el manual del terminal elegido."

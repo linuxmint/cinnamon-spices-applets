@@ -1,0 +1,3328 @@
+# RADIO3.0
+# This file is put in the public domain.
+# claudiux, 2022
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Radio3.0@claudiux 3.5.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-11 12:31+0200\n"
+"PO-Revision-Date: 2025-10-11 12:40+0200\n"
+"Last-Translator: claudiux\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:286
+msgid "unassigned"
+msgstr "未指定"
+
+#. applet.js:287
+msgid "Display Album Art at full size"
+msgstr "以原始尺寸顯示專輯封面"
+
+#. applet.js:389
+msgid "This is your own list of Categories and Radio Stations."
+msgstr "這是自訂的分類與廣播電台清單。"
+
+#. applet.js:390
+msgid "You can add more using the [+] button."
+msgstr "可使用 [+] 按鈕新增更多項目。"
+
+#. applet.js:391
+msgid "For a category, fill in only its name; leave the other fields empty."
+msgstr "若要新增分類，僅需填寫名稱，其餘欄位請留空。"
+
+#. applet.js:392
+msgid "For a radio station, enter only its name and its streaming URL."
+msgstr "新增廣播電台時，請填寫名稱與串流網址。"
+
+#. applet.js:393
+msgid ""
+"You can order the rows by dragging and dropping or by using the buttons and "
+"tools below the list."
+msgstr "可透過拖曳排序，或使用清單下方的按鈕與工具來調整順序。"
+
+#. applet.js:394
+msgid ""
+"The buttons on the right below the list allow you to navigate page by page "
+"or category by category."
+msgstr "清單下方右側的按鈕可讓您逐頁或按分類瀏覽。"
+
+#. applet.js:395
+msgid ""
+"To search for one of your stations, click on the list and start writing its "
+"name."
+msgstr "請點選清單並輸入電台名稱以進行搜尋。"
+
+#. applet.js:396
+msgid ""
+"To easily add stations to your list, use the following 2 tabs: Search and "
+"Import."
+msgstr "如需快速新增電台，請使用下方的「搜尋」與「匯入」分頁。"
+
+#. applet.js:397
+msgid "Check its 'Menu' box to display a station or category in the menu."
+msgstr "勾選「選單」方塊可將該電台或分類顯示於選單。"
+
+#. applet.js:398
+msgid ""
+"Check its '♪/➟' box to listen to the station or move it to another category "
+"using the tools below the list."
+msgstr "勾選「♪/➟」方塊可收聽該電台，或利用下方工具將其移至其他分類。"
+
+#. applet.js:400
+msgid "You can have your list of stations checked by internet databases."
+msgstr "可透過網路資料庫檢查電台清單。"
+
+#. applet.js:401
+msgid ""
+"Any station recognized by one of these databases will receive a Universal "
+"Unique Identifier (UUID) provided by this database."
+msgstr "資料庫識別出的任何電台，都將收到該資料庫提供的通用唯一識別碼 (UUID)。"
+
+#. applet.js:402
+msgid ""
+"So, if a streaming URL was changed, a next check would update it and you can "
+"continue to listen to the affected station."
+msgstr ""
+"如此一來，若串流網址變更，下次檢查時便會自動更新，讓您能繼續收聽受影響的電"
+"台。"
+
+#. applet.js:404
+msgid ""
+"Here you can search for other stations in a free radio database accessible "
+"via the Internet."
+msgstr "可在此透過網際網路搜尋免費電台資料庫中的其他電台。"
+
+#. applet.js:405
+msgid ""
+"Fill in at least a few fields of the form below then click on the "
+"'Search ...' button."
+msgstr "請至少填寫下方表單的部分欄位，然後點選「搜尋...」按鈕。"
+
+#. applet.js:406
+msgid ""
+"Each time this button is clicked, a new results page is displayed in the "
+"second part of this page, where you can test certain stations and include "
+"them in the menu."
+msgstr ""
+"每次點選此按鈕，將於本頁下方顯示新的結果頁面，您可在該處測試部分電台並將其納"
+"入選單。"
+
+#. applet.js:407
+msgid ""
+"A station already in your menu will only appear in search results if its "
+"streaming URL has changed."
+msgstr "已在選單中的電台，僅當其串流網址變更時才會於搜尋結果中顯示。"
+
+#. applet.js:408
+msgid ""
+"When no new page appears, it means that all results matching your search "
+"criteria have been displayed."
+msgstr "若未顯示新頁面，表示所有符合搜尋條件的結果皆已顯示。"
+
+#. applet.js:410
+msgid ""
+"You can import a file containing the name and streaming URL of at least one "
+"radio station."
+msgstr "您可匯入包含至少一個電台名稱與串流網址的檔案。"
+
+#. applet.js:411
+msgid ""
+"These radio stations are displayed in the list below. You can test them by "
+"checking their ♪ box."
+msgstr "這些電台會顯示於下方清單，您可勾選「♪」方塊進行測試。"
+
+#. applet.js:412
+msgid "Then manage this list with the buttons at the bottom of this tab."
+msgstr "接著請用本分頁底部的按鈕管理此清單。"
+
+#. applet.js:414
+msgid ""
+"In the Shoutcast directory, click the download button to the left of the "
+"station name."
+msgstr "在 Shoutcast 目錄中，請點選電台名稱左側的下載按鈕。"
+
+#. applet.js:415
+msgid ""
+"Select the open format (.XSPF) and save the file giving it the same name as "
+"the station."
+msgstr "請選擇開放格式 (.XSPF)，並以電台名稱儲存檔案。"
+
+#. applet.js:416
+msgid "This file can then be imported here."
+msgstr "此檔案即可於此處匯入。"
+
+#. applet.js:418
+#, javascript-format
+msgid "%s bytes = %s GB = %s GiB"
+msgstr "%s 位元組 = %s GB = %s GiB"
+
+#. applet.js:420
+msgid "Sun."
+msgstr "週日"
+
+#. applet.js:420
+msgid "Mon."
+msgstr "週一"
+
+#. applet.js:420
+msgid "Tue."
+msgstr "週二"
+
+#. applet.js:420
+msgid "Wed."
+msgstr "週三"
+
+#. applet.js:420
+msgid "Thu."
+msgstr "週四"
+
+#. applet.js:420
+msgid "Fri."
+msgstr "週五"
+
+#. applet.js:420
+msgid "Sat."
+msgstr "週六"
+
+#. settings-schema.json->category-to-move->options
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->sched-radio->options
+#. settings-schema.json->search-country->options
+#. settings-schema.json->search-codec->options
+#. settings-schema.json->search-order->options
+#. settings-schema.json->alarm-clock-working-days-radio->options
+#. settings-schema.json->alarm-clock-workoff-days-radio->options
+#. applet.js:586 applet.js:604 applet.js:5511 applet.js:5527
+msgid "(Undefined)"
+msgstr "（未定義）"
+
+#. settings-schema.json->category-to-move->options
+#. applet.js:587 applet.js:5528
+msgid "(Blacklist)"
+msgstr ""
+
+#. applet.js:2263
+msgid "Start"
+msgstr "開始"
+
+#. applet.js:2271 applet.js:3014
+msgid "Stop"
+msgstr "停止"
+
+#. applet.js:2545
+msgid "Volume: %s%"
+msgstr "音量：%s%"
+
+#. applet.js:2550
+msgid "Middle-Click: Stop Recording"
+msgstr "滑鼠中鍵：停止錄音"
+
+#. applet.js:2552
+msgid "Middle-click: ON/OFF"
+msgstr "滑鼠中鍵：開啟/關閉"
+
+#. applet.js:2554
+msgid "Click: Select another station"
+msgstr "點選：選擇其他電台"
+
+#. applet.js:2555
+msgid "Scroll wheel: volume change"
+msgstr "滾輪：調整音量"
+
+#. applet.js:2558
+msgid "Click to select a station"
+msgstr "點選以選擇電台"
+
+#. applet.js:2564
+msgid "Wake Up"
+msgstr "喚醒"
+
+#. applet.js:2642 applet.js:3032 applet.js:5023
+msgid "Configure..."
+msgstr "設定..."
+
+#. applet.js:2646 applet.js:3024
+msgid "Search for new stations..."
+msgstr "搜尋新電台..."
+
+#. applet.js:2652
+msgid "Load a sample station list"
+msgstr "載入範例電台清單"
+
+#. applet.js:2699 applet.js:3036 applet.js:5093
+msgid "Sound Settings"
+msgstr "音效設定"
+
+#. applet.js:2770
+msgid "Watch on YT"
+msgstr "在 YT 上觀看"
+
+#. applet.js:2777
+msgid "Try to download it from YT (unsafe)"
+msgstr "嘗試從 YT 下載 (不安全)"
+
+#. applet.js:2797
+msgid "Recently Played Stations:"
+msgstr "最近播放的電台："
+
+#. applet.js:2848
+msgid "Visit the home page of this station"
+msgstr "造訪此電台的首頁"
+
+#. applet.js:2897
+msgid "Categories"
+msgstr "分類"
+
+#. applet.js:2900
+msgid "Radio Stations"
+msgstr "廣播電台"
+
+#. applet.js:2911
+msgid "All Categories"
+msgstr "所有分類"
+
+#. applet.js:2956
+msgid "My Radio Stations"
+msgstr "我的電台"
+
+#. applet.js:3156
+msgid "Downloading..."
+msgstr "下載中..."
+
+#. applet.js:3158
+msgid "Stop downloading"
+msgstr "停止下載"
+
+#. applet.js:3264
+msgid "Download complete"
+msgstr "下載完成"
+
+#. settings-schema.json->button-open-rec-folder->description
+#. settings-schema.json->recordings-open-folder->description
+#. applet.js:3266 applet.js:3275 applet.js:4743 applet.js:4752 applet.js:4761
+#. applet.js:5056
+msgid "Open the recordings folder"
+msgstr "開啟錄音資料夾"
+
+#. applet.js:3273 applet.js:4740 applet.js:4750 applet.js:4759
+msgid "An error seems to have occurred during recording!"
+msgstr "錄音時似乎發生錯誤！"
+
+#. applet.js:3274 applet.js:4742 applet.js:4751 applet.js:4760
+msgid "Please check this record."
+msgstr "請檢查此錄音。"
+
+#. applet.js:3381 applet.js:3415
+msgid "Record from now"
+msgstr "立即錄音"
+
+#. applet.js:3399 applet.js:5413
+msgid "Stop Current Recording"
+msgstr "停止目前錄音"
+
+#. applet.js:3548
+#, javascript-format
+msgid "Playing %s%s"
+msgstr "正在播放 %s%s"
+
+#. applet.js:3602
+msgid "Radio OFF"
+msgstr "收音機關閉"
+
+#. applet.js:3730
+msgid "Unable to record anything!"
+msgstr "無法錄音！"
+
+#. applet.js:3730 applet.js:5073 applet.js:5232
+msgid "Insufficient space"
+msgstr "空間不足"
+
+#. applet.js:3730
+msgid "The limit you set has been reached."
+msgstr "已達您設定的上限。"
+
+#. applet.js:4131
+msgid "Please Log Out then Log In"
+msgstr "請先登出再登入"
+
+#. applet.js:4131
+msgid "to finalize yt-dlp update"
+msgstr "以完成 yt-dlp 的更新"
+
+#. applet.js:4266
+msgid "Nothing to save."
+msgstr "沒有可儲存的內容。"
+
+#. applet.js:4279
+msgid "List of saved radio stations"
+msgstr "已儲存的電台清單"
+
+#. applet.js:4297
+msgid "This will replace all current radio stations."
+msgstr "這將取代目前所有的電台。"
+
+#. applet.js:4298
+msgid "Are you sure you want to continue?"
+msgstr "確定要繼續嗎？"
+
+#. applet.js:4362
+msgid "Update in progress"
+msgstr "正在更新"
+
+#. applet.js:4362
+msgid "It may take a while ... Please wait."
+msgstr "可能需要一些時間... 請稍候。"
+
+#. applet.js:4454
+msgid "Update completed successfully"
+msgstr "更新已成功完成"
+
+#. applet.js:4625 applet.js:4681
+msgid "ERROR: Invalid YT video URL!"
+msgstr "錯誤：無效的 YT 影片網址！"
+
+#. applet.js:4650
+msgid "Unable to extract a single soundtrack"
+msgstr "無法擷取單一音軌"
+
+#. applet.js:4650
+msgid "Maybe it's a playlist?"
+msgstr "這可能是個播放清單？"
+
+#. applet.js:4683
+msgid "Close"
+msgstr "關閉"
+
+#. applet.js:4841 applet.js:5300 applet.js:5318
+msgid "Cancel"
+msgstr "取消"
+
+#. applet.js:4842
+msgid "Radio3.0 applet"
+msgstr "Radio3.0 小程式"
+
+#. applet.js:4845
+msgid "Enable the OSD150 extension"
+msgstr "啟用 OSD150 擴充功能"
+
+#. applet.js:4846
+msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
+msgstr "如需橫向 OSD，請啟用 OSD150 擴充功能。"
+
+#. applet.js:4863
+msgid "Download the OSD150 extension"
+msgstr "下載 OSD150 擴充功能"
+
+#. applet.js:4864
+msgid ""
+"To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
+"Click on the Download button then search for OSD150 and select the ⬇ button."
+msgstr ""
+"如需橫向 OSD，請下載 OSD150 擴充功能。\n"
+"點選「下載」按鈕後搜尋 OSD150 並選擇「⬇」按鈕。"
+
+#. applet.js:4995
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "移除 '%s'"
+
+#. applet.js:5003
+msgid "About..."
+msgstr "關於..."
+
+#. applet.js:5010
+msgid "Manual..."
+msgstr "使用手冊..."
+
+#. applet.js:5017
+msgid "Reload this applet"
+msgstr "重新載入這個小程式"
+
+#. applet.js:5034
+msgid "Schedule a background record..."
+msgstr "排程背景錄製..."
+
+#. applet.js:5041
+msgid "Configure the Alarm Clock..."
+msgstr "設定鬧鐘..."
+
+#. applet.js:5048
+msgid "Extract soundtrack from YouTube video..."
+msgstr "從 YouTube 影片擷取音軌..."
+
+#. applet.js:5070 applet.js:5229
+msgid "(auto)"
+msgstr "（自動）"
+
+#. applet.js:5070 applet.js:5229
+msgid "(manual)"
+msgstr "（手動）"
+
+#. applet.js:5073 applet.js:5232 applet.js:5460
+msgid "Stop Recording"
+msgstr "停止錄音"
+
+#. applet.js:5073 applet.js:5232
+msgid "Start Recording"
+msgstr "開始錄音"
+
+#. applet.js:5089
+msgid "Cancel downloads from YT"
+msgstr "取消從 YT 下載"
+
+#. applet.js:5098
+msgid "Pulse Effects"
+msgstr "PulseEffects"
+
+#. applet.js:5103
+msgid "Easy Effects"
+msgstr "EasyEffects"
+
+#. applet.js:5108
+msgid "Radio ON at startup"
+msgstr "啟動時開啟廣播"
+
+#. applet.js:5117
+msgid "Display Station Logo"
+msgstr "顯示電台 Logo"
+
+#. applet.js:5127
+msgid "Album Art desklet settings"
+msgstr "專輯封面桌面小程式設定"
+
+#. settings-schema.json->alarm-clock-wake-me-up->description
+#. applet.js:5132
+msgid "Wake me up!"
+msgstr "叫我起床！"
+
+#. applet.js:5141
+msgid "Show Album Art on desktop"
+msgstr "在桌面顯示專輯封面"
+
+#. settings-schema.json->dont-check-dependencies->description
+#. applet.js:5150
+msgid "Do not check about dependencies"
+msgstr "不檢查相依性"
+
+#. settings-schema.json->show-volume-level-near-icon->description
+#. applet.js:5160
+msgid "Display volume level near icon"
+msgstr "在圖示旁顯示音量大小"
+
+#. applet.js:5297
+msgid "You need the 'Album Art 3.0' desklet"
+msgstr "您需要「Album Art 3.0」桌面小程式"
+
+#. applet.js:5298
+msgid ""
+"You can install it by clicking on the first button and then searching for "
+"Album."
+msgstr "您可以點選第一個按鈕，然後搜尋 Album 來安裝。"
+
+#. applet.js:5299 applet.js:5317
+msgid "Desklets"
+msgstr "桌面小程式"
+
+#. applet.js:5315
+msgid "You need to activate the 'Album Art 3.0' desklet"
+msgstr "您需要啟用「Album Art 3.0」桌面小程式"
+
+#. applet.js:5316
+msgid ""
+"You can activate it by clicking on the first button, then searching for "
+"Album and adding it with button [+]."
+msgstr "您可以點選第一個按鈕來啟用它，然後搜尋 Album 並使用 [+] 按鈕新增。"
+
+#. applet.js:5461
+msgid "Close without stopping recording"
+msgstr "關閉但不停止錄音"
+
+#. applet.js:5676
+#, javascript-format
+msgid "Starting recording from %s:%s to %s:%s"
+msgstr "開始錄音：從 %s:%s 到 %s:%s"
+
+#. applet.js:5688
+msgid "Recording completed"
+msgstr "錄製完成"
+
+#. applet.js:5813
+msgid "This will import a new file containing radio stations."
+msgstr "這將匯入一個包含廣播電台的新檔案。"
+
+#. applet.js:5814
+msgid "Do you want to continue?"
+msgstr "要繼續嗎？"
+
+#. applet.js:5891
+msgid "No new radio in your list."
+msgstr "清單中沒有新的廣播電台。"
+
+#. applet.js:5893
+msgid "One more radio in your list."
+msgstr "清單中增加了一個廣播電台。"
+
+#. applet.js:5895
+#, javascript-format
+msgid "%s more radios in your list."
+msgstr "清單中增加了 %s 個廣播電台。"
+
+#. applet.js:6154
+msgid "There are no new stations to add to the Radio3.0 applet menu"
+msgstr "沒有新的電台可新增至 Radio3.0 小程式選單"
+
+#. applet.js:6156
+msgid "A new station has been added to the Radio3.0 applet menu"
+msgstr "已新增一個電台至 Radio3.0 小程式選單"
+
+#. applet.js:6158
+#, javascript-format
+msgid "%s new stations have been added to the Radio3.0 applet menu"
+msgstr "已新增 %s 個電台至 Radio3.0 小程式選單"
+
+#. applet.js:6383
+#, javascript-format
+msgid "%s kbps"
+msgstr "%s kbps"
+
+#. lib/checkDependencies.js:399
+#, javascript-format
+msgid "The applet %s is fully functional."
+msgstr "小程式 %s 功能齊全。"
+
+#. lib/checkDependencies.js:400
+msgid "All dependencies are installed"
+msgstr "所有相依性皆已安裝"
+
+#. lib/checkDependencies.js:430
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr "似乎缺少了讓這個小程式完整發揮功能所需的部分程式。"
+
+#. lib/checkDependencies.js:431
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr "請在剛剛開啟的終端機中執行以下指令："
+
+#. lib/checkDependencies.js:432
+msgid "Some dependencies are not installed!"
+msgstr "部分相依性尚未安裝！"
+
+#. lib/checkTranslations.js:109
+msgid "To finalize the translation installation, please restart Cinnamon"
+msgstr "請重新啟動 Cinnamon 以完成翻譯的安裝"
+
+#. lib/util.js:245
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr "「%s」執行失敗："
+
+#. settings-schema.json->scale-update->description
+#. settings-schema.json->recordings-extract-update->description
+#. lib/volumeslider.js:188
+msgid "%"
+msgstr "%"
+
+#. xs/xlet-settings.py:214
+msgid "Previous instance"
+msgstr "前一個實體"
+
+#. xs/xlet-settings.py:218
+msgid "Next instance"
+msgstr "下一個實體"
+
+#. xs/xlet-settings.py:227
+msgid "More options"
+msgstr "更多選項"
+
+#. xs/xlet-settings.py:233
+msgid "Import from a file"
+msgstr "從檔案匯入"
+
+#. xs/xlet-settings.py:238
+msgid "Export to a file"
+msgstr "匯出至檔案"
+
+#. xs/xlet-settings.py:243
+msgid "Reset to defaults"
+msgstr "重設為預設值"
+
+#. xs/xlet-settings.py:252
+#, python-format
+msgid "Reload %s"
+msgstr "重新載入 %s"
+
+#. xs/xlet-settings.py:441
+#, python-format
+msgid "Settings for %s"
+msgstr "%s 的設定"
+
+#. xs/xlet-settings.py:533
+msgid "Select or enter file to export to"
+msgstr "選擇或輸入要匯出的檔案"
+
+#. xs/xlet-settings.py:541 xs/xlet-settings.py:562
+msgid "JSON files"
+msgstr "JSON 檔案"
+
+#. xs/xlet-settings.py:555
+msgid "Select a JSON file to import"
+msgstr "選擇要匯入的 JSON 檔案"
+
+#. xs/bin/R3TreeListWidgets.py:278 xs/bin/R3TreeListWidgets.py:501
+msgid "Add new entry"
+msgstr "新增項目"
+
+#. xs/bin/R3TreeListWidgets.py:282
+msgid "Remove selected entry"
+msgstr "移除所選項目"
+
+#. xs/bin/R3TreeListWidgets.py:287
+msgid "Edit selected entry"
+msgstr "編輯所選項目"
+
+#. xs/bin/R3TreeListWidgets.py:292
+msgid "Unselect the selected row"
+msgstr "取消選取該列"
+
+#. xs/bin/R3TreeListWidgets.py:297
+msgid "Move selected entry up"
+msgstr "將所選項目上移"
+
+#. xs/bin/R3TreeListWidgets.py:302
+msgid "Move selected entry down"
+msgstr "將所選項目下移"
+
+#. xs/bin/R3TreeListWidgets.py:325
+msgid "Go to bottom"
+msgstr "移至底部"
+
+#. xs/bin/R3TreeListWidgets.py:331
+msgid "Go to next page"
+msgstr "移至下一頁"
+
+#. xs/bin/R3TreeListWidgets.py:337
+msgid "Go to previous page"
+msgstr "移至上一頁"
+
+#. xs/bin/R3TreeListWidgets.py:342
+msgid "Go to top"
+msgstr "移至頂端"
+
+#. xs/bin/R3TreeListWidgets.py:356
+msgid "Go to next category"
+msgstr "移至下一分類"
+
+#. xs/bin/R3TreeListWidgets.py:366
+msgid "Go to previous category"
+msgstr "移至上一分類"
+
+#. xs/bin/R3TreeListWidgets.py:503
+msgid "Edit entry"
+msgstr "編輯項目"
+
+#. metadata.json->description
+msgid "The Ultimate Internet Radio Receiver & Recorder for Cinnamon"
+msgstr "Cinnamon 的終極網路收音機與錄音工具"
+
+#. metadata.json->name
+msgid "Radio3.0"
+msgstr "Radio3.0"
+
+#. settings-schema.json->pageStations->title
+#. settings-schema.json->import-list->description
+#. settings-schema.json->search-list->description
+msgid "Radios"
+msgstr "廣播"
+
+#. settings-schema.json->pageImport->title
+msgid "Import"
+msgstr "匯入"
+
+#. settings-schema.json->pageSearch->title
+msgid "Search"
+msgstr "搜尋"
+
+#. settings-schema.json->pageMenu->title
+#. settings-schema.json->sectionMenuMenu->title
+#. settings-schema.json->radios->columns->title
+msgid "Menu"
+msgstr "選單"
+
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr "行為"
+
+#. settings-schema.json->pageRecording->title
+msgid "Recording"
+msgstr "錄音"
+
+#. settings-schema.json->pageYT->title
+msgid "YT"
+msgstr "YT"
+
+#. settings-schema.json->pageScheduling->title
+msgid "Scheduling"
+msgstr "排程"
+
+#. settings-schema.json->pageNetwork->title
+msgid "Network"
+msgstr "網路"
+
+#. settings-schema.json->pageAlarmClock->title
+msgid "Alarm Clock"
+msgstr "鬧鐘"
+
+#. settings-schema.json->sectionStationsList->title
+msgid "Stations and Categories on the menu"
+msgstr "選單中的電台與分類"
+
+#. settings-schema.json->sectionStationsMove->title
+msgid "Moving selected stations"
+msgstr "移動所選取的電台"
+
+#. settings-schema.json->sectionStationsSaveRestore->title
+msgid "Save and Restore"
+msgstr "儲存與還原"
+
+#. settings-schema.json->sectionStationsUpdate->title
+msgid "Update this station list"
+msgstr "更新此電台清單"
+
+#. settings-schema.json->sectionBlacklist->title
+msgid "Unwanted (blacklist)"
+msgstr ""
+
+#. settings-schema.json->sectionImportRadiopp->title
+msgid "Only for Radio++ users"
+msgstr "僅供 Radio++ 使用者"
+
+#. settings-schema.json->sectionImportShoutcast->title
+msgid "Get files on Shoutcast to import here"
+msgstr "取得 Shoutcast 上的檔案以在此處匯入"
+
+#. settings-schema.json->sectionImportFile->title
+msgid "File to import"
+msgstr "要匯入的檔案"
+
+#. settings-schema.json->sectionImportList->title
+msgid "File contents"
+msgstr "檔案內容"
+
+#. settings-schema.json->sectionSearchOptions->title
+msgid "Search for Radio Stations"
+msgstr "搜尋廣播電台"
+
+#. settings-schema.json->sectionSearchResults->title
+msgid "Search results"
+msgstr "搜尋結果"
+
+#. settings-schema.json->sectionBehaviorSettingsWindow->title
+msgid "Settings Window"
+msgstr "設定視窗"
+
+#. settings-schema.json->sectionBehaviorStartUp->title
+msgid "Start-up"
+msgstr "啟動"
+
+#. settings-schema.json->sectionBehaviorVolumeStep->title
+msgid "Volume step"
+msgstr "音量步階"
+
+#. settings-schema.json->sectionBehaviorOSD->title
+msgid "OSD"
+msgstr "OSD (螢幕顯示)"
+
+#. settings-schema.json->sectionBehaviorTooltip->title
+msgid "Show Help"
+msgstr "顯示說明"
+
+#. settings-schema.json->sectionMenuPrivacy->title
+msgid "Privacy"
+msgstr "隱私"
+
+#. settings-schema.json->sectionMenuContextual->title
+msgid "Contextual Menu"
+msgstr "右鍵選單"
+
+#. settings-schema.json->sectionMenuShortcuts->title
+msgid "Keyboard shortcuts"
+msgstr "鍵盤快捷鍵"
+
+#. settings-schema.json->sectionBehaviorNotifications->title
+msgid "Notifications"
+msgstr "通知"
+
+#. settings-schema.json->sectionBehaviorBitrate->title
+msgid "Codec and Bitrate"
+msgstr "編解碼器與位元率"
+
+#. settings-schema.json->sectionBehaviorSymbolicIconColor->title
+#. settings-schema.json->sectionRecordingIcon->title
+#. settings-schema.json->sectionYTIcon->title
+msgid "Icon"
+msgstr "圖示"
+
+#. settings-schema.json->sectionBehaviorHorizontalPanel->title
+msgid "Only on horizontal panels"
+msgstr "僅限於橫向面板"
+
+#. settings-schema.json->sectionNetworkQuality->title
+msgid "Quality"
+msgstr "品質"
+
+#. settings-schema.json->sectionNetworkMonitoring->title
+msgid "Monitoring"
+msgstr "監控"
+
+#. settings-schema.json->sectionNetworkProxy->title
+msgid "Proxy"
+msgstr "代理伺服器"
+
+#. settings-schema.json->sectionNetworkDatabase->title
+msgid "Database Info"
+msgstr "資料庫資訊"
+
+#. settings-schema.json->sectionExperimental->title
+msgid "EXPERIMENTAL"
+msgstr "實驗性功能"
+
+#. settings-schema.json->sectionRecordingCache->title
+msgid "Cache"
+msgstr "快取"
+
+#. settings-schema.json->sectionRecordingRecordings->title
+#. settings-schema.json->sectionYTFormat->title
+msgid "Recordings"
+msgstr "錄音檔"
+
+#. settings-schema.json->sectionRecordingLimits->title
+msgid "Preservation of hard disk space"
+msgstr "保留硬碟空間"
+
+#. settings-schema.json->sectionYTIgnore->title
+msgid "Ignore YT"
+msgstr "忽略 YT"
+
+#. settings-schema.json->sectionYTExtract->title
+msgid "Extract soundtrack from YouTube video"
+msgstr "從 YouTube 影片擷取音軌"
+
+#. settings-schema.json->sectionRecordingScheduleARecording->title
+msgid "Schedule a background recording"
+msgstr "排程背景錄製"
+
+#. settings-schema.json->sectionRecordingUnableToScheduleARecording->title
+msgid "Unable to schedule a background recording"
+msgstr "無法排程背景錄製"
+
+#. settings-schema.json->sectionRecordingScheduledRecordings->title
+#. settings-schema.json->sched-recordings->description
+msgid "Scheduled recordings"
+msgstr "已排程的錄製"
+
+#. settings-schema.json->sectionWakeMeUp->title
+msgid "Options"
+msgstr "選項"
+
+#. settings-schema.json->sectionWorkingDays->title
+msgid "Working Days"
+msgstr "工作日"
+
+#. settings-schema.json->sectionWorkOffDays->title
+msgid "Work-Off Days"
+msgstr "休假日"
+
+#. settings-schema.json->show-help-in-tabs->description
+msgid "Show help labels in each tab of this Settings window"
+msgstr "在此「設定」視窗的每個分頁中顯示說明標籤"
+
+#. settings-schema.json->show-help-in-tabs->tooltip
+msgid ""
+"You can uncheck this option when you are familiar with all of these settings."
+msgstr "當熟悉所有這些設定後，可以取消勾選此選項。"
+
+#. settings-schema.json->stations-help->description
+#. settings-schema.json->button-update-help->description
+#. settings-schema.json->import-shoutcast-help->description
+#. settings-schema.json->import-help->description
+#. settings-schema.json->search-help->description
+msgid "Help"
+msgstr "說明"
+
+#. settings-schema.json->radios->description
+msgid "List of stations"
+msgstr "電台清單"
+
+#. settings-schema.json->radios->columns->title
+msgid "♥︎"
+msgstr "♥︎"
+
+#. settings-schema.json->radios->columns->title
+msgid "♪/➟"
+msgstr "♪/➟"
+
+#. settings-schema.json->radios->columns->title
+msgid "Station or Category"
+msgstr "電台或分類"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid ""
+"Bitrate\n"
+"(kbps)"
+msgstr ""
+"位元率\n"
+"(kbps)"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+#. settings-schema.json->search-codec->description
+msgid "Codec"
+msgstr "編解碼器"
+
+#. settings-schema.json->radios->columns->title
+msgid "Streaming URL (empty for a category)"
+msgstr "串流網址 (分類請留空)"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Unique identifier"
+msgstr "唯一識別碼"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Home page"
+msgstr "首頁"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Tags"
+msgstr "標籤"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Favicon"
+msgstr "網站圖示"
+
+#. settings-schema.json->radios->columns->title
+msgid "Artist/Title swap"
+msgstr "歌手/曲名對調"
+
+#. settings-schema.json->stations-list-play-button->description
+#. settings-schema.json->import-list-play-button->description
+#. settings-schema.json->search-list-play-button->description
+msgid "♪ Play the next station to test"
+msgstr "♪ 播放下一個電台以測試"
+
+#. settings-schema.json->category-to-move->description
+msgid "Category to which to move the selected stations:"
+msgstr "要將所選取的電台移至的分類："
+
+#. settings-schema.json->button-moving->description
+msgid "➟ Move selected stations to this category"
+msgstr "➟ 將所選取的電台移至此分類"
+
+#. settings-schema.json->button_go_to_category->description
+msgid "Go to this category"
+msgstr "前往此分類"
+
+#. settings-schema.json->button-show-all->description
+msgid "Show all stations and categories in the menu"
+msgstr "在選單中顯示所有電台與分類"
+
+#. settings-schema.json->button-hide-all->description
+msgid "Hide all stations and categories (so the menu becomes empty)"
+msgstr "隱藏所有電台與分類 (選單將會清空)"
+
+#. settings-schema.json->button-save->description
+msgid "Save this list of stations"
+msgstr "儲存此電台清單"
+
+#. settings-schema.json->button-restore->description
+msgid "Restore a list of stations"
+msgstr "還原電台清單"
+
+#. settings-schema.json->button_open_folder->description
+msgid "Open the folder containing these lists"
+msgstr "開啟包含這些清單的資料夾"
+
+#. settings-schema.json->button-update->description
+msgid "Update my station list with the Radio Database data"
+msgstr "使用廣播電台資料庫的資料更新電台清單"
+
+#. settings-schema.json->blacklist->columns->title
+msgid "Blacklisted URL"
+msgstr ""
+
+#. settings-schema.json->import-radiopp-button->description
+msgid "Import your stations from Radio++"
+msgstr "從 Radio++ 匯入電台"
+
+#. settings-schema.json->import-shoutcast-button->description
+msgid "Open the Shoutcast directory"
+msgstr "開啟 Shoutcast 目錄"
+
+#. settings-schema.json->import-file-button->description
+msgid "Import a .csv, .m3u, .pls, .xspf or .json file"
+msgstr "匯入 .csv, .m3u, .pls, .xspf 或 .json 檔案"
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Select"
+msgstr "選取"
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "♪"
+msgstr "♪"
+
+#. settings-schema.json->import-list->columns->title
+msgid "Title"
+msgstr "標題"
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Streaming URL"
+msgstr "串流網址"
+
+#. settings-schema.json->import-list-button->description
+#. settings-schema.json->search-list-button->description
+msgid "Import the selected stations into my own list"
+msgstr "將所選取的電台匯入清單"
+
+#. settings-schema.json->import-remove-from-list-button->description
+#. settings-schema.json->search-remove-from-list-button->description
+msgid "Remove selected items from this list"
+msgstr "從此清單移除所選項目"
+
+#. settings-schema.json->import-blacklist-button->description
+#, fuzzy
+msgid "Blacklist selected items from this list"
+msgstr "從此清單移除所選項目"
+
+#. settings-schema.json->import-select-all->description
+#. settings-schema.json->search-select-all->description
+msgid "Select all items"
+msgstr "全選"
+
+#. settings-schema.json->import-unselect-all->description
+#. settings-schema.json->search-unselect-all->description
+msgid "Unselect all items"
+msgstr "全部取消選取"
+
+#. settings-schema.json->search-list->columns->title
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Station"
+msgstr "電台"
+
+#. settings-schema.json->search-list->columns->title
+msgid ""
+"Country\n"
+"Code"
+msgstr ""
+"國家\n"
+"代號"
+
+#. settings-schema.json->search-list->columns->title
+#. settings-schema.json->search-country->description
+msgid "Country"
+msgstr "國家"
+
+#. settings-schema.json->search-list-page-label->description
+msgid "Page:"
+msgstr "頁碼："
+
+#. settings-schema.json->maximize-vertically->description
+msgid "Vertical maximization"
+msgstr "垂直最大化"
+
+#. settings-schema.json->maximize-vertically->tooltip
+msgid ""
+"When this option is checked, this Settings Window will be maximized "
+"vertically the next time it is opened."
+msgstr "勾選此選項後，下次開啟「設定」視窗時，將會垂直最大化。"
+
+#. settings-schema.json->switch-on-last-station-at-start-up->description
+msgid "Turn on the radio when Cinnamon starts up"
+msgstr "Cinnamon 啟動時開啟收音機"
+
+#. settings-schema.json->switch-on-last-station-at-start-up->tooltip
+msgid ""
+"The selected radio will be the last you listened to, even if you stopped "
+"it.\n"
+"\n"
+"VPN users: By checking this, the radio broadcast could use your VPN link in "
+"the event that this one is active before the start of this applet."
+msgstr ""
+"啟動時將自動播放上次收聽的廣播電台，即使您已停止播放。\n"
+"\n"
+"VPN 使用者注意事項：啟用此選項後，若在小程式啟動前 VPN 已啟用，廣播串流可能會"
+"使用您的 VPN 連線。"
+
+#. settings-schema.json->volume-at-startup->description
+msgid "Volume level starting a new radio (%)"
+msgstr "啟動新廣播電台時的音量 (%)"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-minimalBitrate->options
+msgid "0"
+msgstr "0"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-limit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "35"
+msgstr "35"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "40"
+msgstr "40"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "45"
+msgstr "45"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->yt-progress-interval->options
+#. settings-schema.json->search-limit->options
+msgid "50"
+msgstr "50"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "55"
+msgstr "55"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "60"
+msgstr "60"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "65"
+msgstr "65"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "70"
+msgstr "70"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "75"
+msgstr "75"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "80"
+msgstr "80"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "85"
+msgstr "85"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "90"
+msgstr "90"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "95"
+msgstr "95"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->yt-progress-interval->options
+#. settings-schema.json->search-limit->options
+msgid "100"
+msgstr "100"
+
+#. settings-schema.json->volume-at-startup->tooltip
+msgid ""
+"If set, then this will change the volume level starting a new radio, in "
+"percentage of the general volume level.\n"
+"Default is (Undefined): The volume level remains unchanged.\n"
+"\n"
+"Please note that you can change the volume level scrolling on this applet "
+"icon, or using the slider in the context menu."
+msgstr ""
+"若設定此選項，系統會以一般音量的百分比作為新開啟電台的音量。\n"
+"預設為（未定義）：音量維持不變。\n"
+"\n"
+"您可在小程式圖示上使用滾輪，或於右鍵選單中使用滑桿來調整音量大小。"
+
+#. settings-schema.json->volume-step->description
+msgid "Volume step scrolling on icon"
+msgstr "圖示上滾輪的音量步階"
+
+#. settings-schema.json->volume-step->options
+msgid "±0%"
+msgstr "±0%"
+
+#. settings-schema.json->volume-step->options
+msgid "±1%"
+msgstr "±1%"
+
+#. settings-schema.json->volume-step->options
+msgid "±2%"
+msgstr "±2%"
+
+#. settings-schema.json->volume-step->options
+msgid "±3%"
+msgstr "±3%"
+
+#. settings-schema.json->volume-step->options
+msgid "±4%"
+msgstr "±4%"
+
+#. settings-schema.json->volume-step->options
+msgid "±5%"
+msgstr "±5%"
+
+#. settings-schema.json->volume-step->tooltip
+msgid ""
+"By how much increase or decrease the volume using the mouse scroll wheel on "
+"the icon."
+msgstr "使用滑鼠滾輪於圖示上調整音量時的增減幅度。"
+
+#. settings-schema.json->volume-magnetic-on->description
+msgid "Magnetize all multiples of 25%"
+msgstr "音量每 25% 吸附"
+
+#. settings-schema.json->volume-show-osd->description
+msgid "Show OSD while changing volume"
+msgstr "調整音量時顯示 OSD"
+
+#. settings-schema.json->volume-show-osd->tooltip
+msgid "Should OSD (On-Screen Display) be displayed when changing volume?"
+msgstr "調整音量時是否顯示 OSD (螢幕顯示畫面)？"
+
+#. settings-schema.json->volume-show-osd-starting-radio->description
+msgid "Show volume OSD when changing radio station"
+msgstr "切換廣播電台時顯示音量 OSD"
+
+#. settings-schema.json->show-percent-char-in-osd->description
+msgid "Show '%' in OSD"
+msgstr "在 OSD 顯示 % 符號"
+
+#. settings-schema.json->show-horizontal-osd->description
+msgid "Show horizontal OSD"
+msgstr "顯示橫向 OSD"
+
+#. settings-schema.json->show-title-and-version->description
+msgid "Show the name and the version of this applet in the menu"
+msgstr "在選單中顯示這個小程式的名稱與版本"
+
+#. settings-schema.json->recent-number->description
+msgid "Number of Recently Played Stations in menu"
+msgstr "選單中最近播放電台的數量"
+
+#. settings-schema.json->recent-number->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->recent-number->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->recent-number->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->recent-number->options
+msgid "4"
+msgstr "4"
+
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-limit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->recent-number->options
+msgid "6"
+msgstr "6"
+
+#. settings-schema.json->recent-number->options
+msgid "7"
+msgstr "7"
+
+#. settings-schema.json->recent-number->options
+msgid "8"
+msgstr "8"
+
+#. settings-schema.json->recent-number->options
+msgid "9"
+msgstr "9"
+
+#. settings-schema.json->recent-number->tooltip
+msgid "How many recently listened stations do you want to display in the menu?"
+msgstr "要在選單中顯示多少個最近收聽的電台？"
+
+#. settings-schema.json->reset-recents->description
+msgid "Empty your Recently Played Stations list at startup"
+msgstr "啟動時清空最近播放的電台清單"
+
+#. settings-schema.json->button-reset-recents->description
+msgid "Empty your Recently Played Stations list now"
+msgstr "立即清空最近播放的電台清單"
+
+#. settings-schema.json->show-by-category->description
+msgid "Display the Station list beside the Category list"
+msgstr "在分類清單旁顯示電台清單"
+
+#. settings-schema.json->show-by-category->tooltip
+msgid ""
+"Checked: Hover (without clicking) over a Category to display its list of "
+"Stations; then select your station.\n"
+"Unchecked: Single list containing each category followed by its stations."
+msgstr ""
+"勾選：將滑鼠游標停在某個分類上 (無須點選) 以顯示其電台清單；然後選取電台。\n"
+"未勾選：在單一清單中顯示每個分類及其下的電台。"
+
+#. settings-schema.json->show-system-items->description
+msgid "Show system items in the menu"
+msgstr "在選單中顯示系統選項"
+
+#. settings-schema.json->show-system-items->tooltip
+msgid ""
+"Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
+msgstr "要在選單中顯示「設定...」與「音效設定」選項嗎？"
+
+#. settings-schema.json->show-reload->description
+msgid "Show the 'Reload this applet' item in the contextual menu"
+msgstr "在右鍵選單中顯示「重新載入這個小程式」選項"
+
+#. settings-schema.json->show-reload->tooltip
+msgid "For developers only"
+msgstr "僅供開發者使用"
+
+#. settings-schema.json->shortcut-volume-up->description
+msgid "Increase Volume"
+msgstr "增加音量"
+
+#. settings-schema.json->shortcut-volume-down->description
+msgid "Decrease Volume"
+msgstr "降低音量"
+
+#. settings-schema.json->shortcut-volume-cut->description
+msgid "Mute"
+msgstr "靜音"
+
+#. settings-schema.json->shortcut-radio-on-off->description
+msgid "Radio ON/OFF"
+msgstr "收音機開/關"
+
+#. settings-schema.json->shortcut-next-recent-radio->description
+msgid "Next station"
+msgstr "下一個電台"
+
+#. settings-schema.json->shortcut-next-recent-radio->tooltip
+msgid "Next station recently listened to"
+msgstr "下一個最近收聽的電台"
+
+#. settings-schema.json->shortcut-previous-recent-radio->description
+msgid "Previous station"
+msgstr "上一個電台"
+
+#. settings-schema.json->shortcut-previous-recent-radio->tooltip
+msgid "Previous station recently listened to"
+msgstr "上一個最近收聽的電台"
+
+#. settings-schema.json->show-help-in-tooltip->description
+msgid "Show help for mouse actions in the tooltip"
+msgstr "在工具提示中顯示滑鼠操作說明"
+
+#. settings-schema.json->show-help-in-tooltip->tooltip
+msgid "You can uncheck this option when you are familiar with all mouse roles."
+msgstr "當熟悉所有滑鼠操作後，即可取消勾選此選項。"
+
+#. settings-schema.json->notif-station-change->description
+msgid "Change of radio"
+msgstr "切換電台"
+
+#. settings-schema.json->notif-song-change->description
+msgid "Change of song or program"
+msgstr "切換歌曲或節目"
+
+#. settings-schema.json->notif-song-change->tooltip
+msgid ""
+"Please note that some radios do not notify you of a song or program change."
+msgstr "請注意，部分廣播電台不會在歌曲或節目變更時通知您。"
+
+#. settings-schema.json->notif-song-duration->units
+msgid "seconds"
+msgstr "秒"
+
+#. settings-schema.json->notif-song-duration->description
+msgid "Duration of a song or program change notification"
+msgstr "歌曲或節目切換通知的持續時間"
+
+#. settings-schema.json->notif-buttons-allowed->description
+msgid "Show in notifications the buttons to start and stop recordings"
+msgstr "在通知中顯示開始與停止錄製的按鈕"
+
+#. settings-schema.json->notif-buttons-allowed->tooltip
+msgid ""
+"Please note that this will have no effect if you do not wish to be notified "
+"of a song or program change."
+msgstr "請注意，若未啟用歌曲或節目變更通知，此設定將不會有任何作用。"
+
+#. settings-schema.json->show-codec->description
+msgid "Show codec"
+msgstr "顯示編解碼器"
+
+#. settings-schema.json->show-bitrate->description
+msgid "Show bit rate"
+msgstr "顯示位元率"
+
+#. settings-schema.json->show-bitrate->tooltip
+msgid ""
+"Unit: kbps (kilobit per second).\n"
+"The higher this bit rate, the better the sound quality of the stream."
+msgstr ""
+"單位：kbps (每秒千位元)。\n"
+"位元率越高，串流的音質越佳。"
+
+#. settings-schema.json->color-on->description
+msgid "Color of the symbolic icon while the radio is on"
+msgstr "收音機開啟時符號圖示顏色"
+
+#. settings-schema.json->color-recording->description
+msgid "Color of the symbolic icon while recording"
+msgstr "錄音時符號圖示顏色"
+
+#. settings-schema.json->show-favicon->description
+msgid "Display the logo of the radio station listened to"
+msgstr "顯示正在收聽的廣播電台 Logo"
+
+#. settings-schema.json->show-favicon->tooltip
+msgid "Replace this applet icon with the radio station logo, if it exists."
+msgstr "若廣播電台有提供 Logo，則以此取代小程式圖示。"
+
+#. settings-schema.json->network-quality->description
+msgid "Network Quality"
+msgstr "網路品質"
+
+#. settings-schema.json->network-quality->options
+msgid "High"
+msgstr "高"
+
+#. settings-schema.json->network-quality->options
+msgid "Low"
+msgstr "低"
+
+#. settings-schema.json->network-quality->tooltip
+msgid ""
+"High Quality: The recordings you make while listening to the radio will "
+"double the bit rate usually required to just listen to the radio. Thus, the "
+"recordings will not be disturbed by extraneous sounds or by a change in the "
+"volume of the radio.\n"
+"\n"
+"Low Quality: These recordings come directly from the sound card, which "
+"relieves the network but risks polluting them with extraneous sounds (system "
+"sounds for example). The volume of the radio will be set to 100% in order to "
+"obtain the best possible quality."
+msgstr ""
+"高品質：收聽電台時錄音將使用兩倍於一般收聽所需的位元率，因此錄音不會受到雜音"
+"或音量變化干擾。\n"
+"\n"
+"低品質：錄音直接來自音效卡，可減輕網路負擔，但可能混入雜音 (如系統音效)。為獲"
+"得最佳品質，電台音量將設為 100%。"
+
+#. settings-schema.json->image-resolution->description
+msgid "Quality of downloaded Album Art"
+msgstr "已下載專輯封面的品質"
+
+#. settings-schema.json->image-resolution->options
+msgid "Max Resolution"
+msgstr "最高解析度"
+
+#. settings-schema.json->image-resolution->options
+msgid "High Quality"
+msgstr "高品質"
+
+#. settings-schema.json->image-resolution->options
+msgid "Medium"
+msgstr "中等"
+
+#. settings-schema.json->image-resolution->options
+msgid "Standard"
+msgstr "標準"
+
+#. settings-schema.json->image-resolution->tooltip
+msgid ""
+"Default: High Quality. Choose a value corresponding to your Network Quality."
+msgstr "預設：高品質。請選擇與網路品質相對應的設定。"
+
+#. settings-schema.json->network-monitoring->description
+msgid "Monitor the network"
+msgstr "監控網路狀態"
+
+#. settings-schema.json->network-monitoring->tooltip
+msgid ""
+"Whether or not to restart the radio when the network becomes active again "
+"after an interruption.\n"
+"\n"
+"VPN users: By checking this, the radio broadcast may use your VPN link."
+msgstr ""
+"設定於路中斷後恢復連線時，是否自動重新啟動廣播。\n"
+"\n"
+"VPN 使用者注意事項：啟用此選項後，廣播串流可能會使用您的 VPN 連線。"
+
+#. settings-schema.json->http-proxy->description
+msgid "HTTP Proxy"
+msgstr "HTTP 代理伺服器"
+
+#. settings-schema.json->http-proxy->tooltip
+msgid ""
+"Format: http://[user:pass@]URL[:port]\n"
+"Default: empty.\n"
+"If empty, the environment variables http_proxy and ALL_PROXY will be used if "
+"present.\n"
+"If set, this proxy will not be used for https requests."
+msgstr ""
+"格式：http://[user:pass@]URL[:port]\n"
+"預設值：空白。\n"
+"如果留空，將使用環境變數 http_proxy 和 ALL_PROXY（若存在）。\n"
+"如果設定了此代理，此代理伺服器將不會用於 https 請求。"
+
+#. settings-schema.json->apply-http-proxy->description
+msgid "Apply HTTP Proxy"
+msgstr "套用 HTTP 代理伺服器"
+
+#. settings-schema.json->database-favorite->description
+msgid "Your favorite database:"
+msgstr "您偏好的資料庫："
+
+#. settings-schema.json->database-favorite->options
+msgid "Random"
+msgstr "隨機"
+
+#. settings-schema.json->database-url->description
+msgid "Database URL"
+msgstr "資料庫網址"
+
+#. settings-schema.json->cache-no-cache->description
+msgid "No cache"
+msgstr "無快取"
+
+#. settings-schema.json->cache-no-cache->tooltip
+msgid ""
+"Checking this option limits memory usage, but no longer allows the user to "
+"rewind the cache (using the sound150@claudiux applet)."
+msgstr ""
+"勾選此選項可限制記憶體用量，但使用者將無法再回溯快取（需使用 "
+"sound150@claudiux 小程式）。"
+
+#. settings-schema.json->cache-minutes->description
+msgid ""
+"Minutes to cache\n"
+"0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
+msgstr ""
+"快取分鐘數\n"
+"0 表示無限制 (預設)。1 小時 = 60 分鐘，24 小時 = 1440 分鐘。"
+
+#. settings-schema.json->cache-on-disk->description
+msgid ""
+"Cache on disk\n"
+"(Write packet data to a temporary file, instead of keeping them in memory.)"
+msgstr ""
+"快取至磁碟\n"
+"(將封包資料寫入暫存檔，而非保留於記憶體中。)"
+
+#. settings-schema.json->cache-stream-size->description
+msgid "Stream cache size"
+msgstr "串流快取大小"
+
+#. settings-schema.json->cache-stream-size->tooltip
+msgid ""
+"The amount of stream cache. Default: 10 MiB.\n"
+"Beware, setting this to a large value can reduce performance."
+msgstr ""
+"串流快取容量，預設為 10 MiB。\n"
+"請注意，將此設定值若設得太大可能會降低效能。"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "No limit"
+msgstr "無限制"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "64 KiB"
+msgstr "64 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "128 KiB"
+msgstr "128 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "256 KiB"
+msgstr "256 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "512 KiB"
+msgstr "512 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "1 MiB"
+msgstr "1 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "2 Mib"
+msgstr "2 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "3 MiB"
+msgstr "3 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "4 MiB"
+msgstr "4 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "5 MiB"
+msgstr "5 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "10 MiB"
+msgstr "10 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "20 MiB"
+msgstr "20 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "30 MiB"
+msgstr "30 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "40 MiB"
+msgstr "40 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "50 MiB"
+msgstr "50 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "100 MiB"
+msgstr "100 MiB"
+
+#. settings-schema.json->recording-path->description
+msgid "Path to the folder that will contain your future recordings"
+msgstr "用來存放您未來錄音檔案的資料夾路徑"
+
+#. settings-schema.json->button-rec-path-to-default->description
+msgid "Set this path to default one"
+msgstr "將此路徑設為預設值"
+
+#. settings-schema.json->recording-format->description
+msgid "Recording format"
+msgstr "錄音格式"
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "FLAC"
+msgstr "FLAC"
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "MP3"
+msgstr "MP3"
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "OGG"
+msgstr "OGG"
+
+#. settings-schema.json->recording-format->options
+msgid "RAW"
+msgstr "RAW"
+
+#. settings-schema.json->recording-format->options
+msgid "WAV"
+msgstr "WAV"
+
+#. settings-schema.json->recording-format->tooltip
+#. settings-schema.json->recording-ends-auto->tooltip
+msgid ""
+"Please note that this choice will have no effect on any current recording, "
+"but on subsequent ones."
+msgstr "請注意，此選項僅影響後續錄音，對目前進行中的錄音無效。"
+
+#. settings-schema.json->recording-ends-auto->description
+msgid "Way to stop recording"
+msgstr "停止錄製的方式"
+
+#. settings-schema.json->recording-ends-auto->options
+msgid "automatically, when the current song ends"
+msgstr "目前歌曲結束時自動停止"
+
+#. settings-schema.json->recording-ends-auto->options
+msgid "manually; thus, several recordings can follow one another"
+msgstr "手動；因此，可以一個接一個地進行多次錄製"
+
+#. settings-schema.json->limits-hd-space-left-label->description
+msgid "Space remaining on disk when opening this window:"
+msgstr "開啟此視窗時磁碟上的剩餘空間："
+
+#. settings-schema.json->limits-hd-size-prefixes->description
+msgid ""
+"Disk space unit as defined in Nemo's display preferences (File size prefixes)"
+msgstr "Nemo 顯示偏好設定中定義的磁碟空間單位 (檔案大小前置詞)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GB (decimal)"
+msgstr "GB (十進位)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GB (decimal long)"
+msgstr "GB (十進位完整)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GiB (binary)"
+msgstr "GiB (二進位)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GiB (binary long)"
+msgstr "GiB (二進位完整)"
+
+#. settings-schema.json->limits-hd-size-prefixes->tooltip
+msgid "Changing this also changes Nemo's file size prefixes."
+msgstr "變更此設定也會同步調整 Nemo 的檔案大小單位。"
+
+#. settings-schema.json->limits-hd-value->units
+msgid "Units: As defined above"
+msgstr "單位：定義如上"
+
+#. settings-schema.json->limits-hd-value->description
+msgid "Space to be left free on the hard disk"
+msgstr "要在硬碟上保留的可用空間"
+
+#. settings-schema.json->highlight-icon-while-background-
+#. recording->description
+msgid "Highlight this applet icon during background recording"
+msgstr "在背景錄製期間突顯這個小程式圖示"
+
+#. settings-schema.json->ignoreYT->description
+msgid "Ignore Youtube features"
+msgstr "忽略 YouTube 功能"
+
+#. settings-schema.json->ignoreYT->tooltip
+msgid ""
+"Ignoring Youtube features reduces CPU load. But loading album art becomes "
+"impossible."
+msgstr "忽略 YouTube 功能可降低 CPU 負載，但將無法載入專輯封面。"
+
+#. settings-schema.json->yt-cookies-from->description
+msgid "Use cookies from"
+msgstr "使用下列來源的 Cookie"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "(None)"
+msgstr "（無）"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Brave"
+msgstr "Brave"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chrome"
+msgstr "Chrome"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium"
+msgstr "Chromium"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (basictext)"
+msgstr "Chromium (basictext)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (gnomekeyring)"
+msgstr "Chromium (gnomekeyring)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (kwallet)"
+msgstr "Chromium (kwallet)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Firefox"
+msgstr "Firefox"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Opera"
+msgstr "Opera"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Vivaldi"
+msgstr "Vivaldi"
+
+#. settings-schema.json->yt-cookies-from->tooltip
+msgid ""
+"Cookies are used by YouTube to determine which videos you may watch. For "
+"Chromium, you can select the method (in parentheses) you chose to save "
+"cookies."
+msgstr ""
+"YouTube 會根據 Cookie 判斷可供觀看的影片。對於 Chromium，您可選擇儲存 Cookie "
+"的方式（括號中所示）。"
+
+#. settings-schema.json->show-yt-progress->description
+msgid "Display, under the icon, the progress of downloads from YT."
+msgstr "在圖示下方顯示 YT 下載進度。"
+
+#. settings-schema.json->yt-progress-interval->description
+msgid "Progression interval (ms)"
+msgstr "進度間隔 (ms)"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "Depending on network quality"
+msgstr "依網路品質而定"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "150"
+msgstr "150"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "200"
+msgstr "200"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "300"
+msgstr "300"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "400"
+msgstr "400"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "500"
+msgstr "500"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "600"
+msgstr "600"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "750"
+msgstr "750"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "1000"
+msgstr "1000"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "2000"
+msgstr "2000"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "3000"
+msgstr "3000"
+
+#. settings-schema.json->recordings-extract-url->description
+msgid "YouTube video link"
+msgstr "YouTube 影片連結"
+
+#. settings-schema.json->recordings-paste-button->description
+msgid "Paste above the YouTube link you copied"
+msgstr "在上方貼上您複製的 YouTube 連結"
+
+#. settings-schema.json->recordings-yesno-playlist->description
+msgid "In case of playlist"
+msgstr "若為播放清單"
+
+#. settings-schema.json->recordings-yesno-playlist->options
+msgid "Extract single soundtrack"
+msgstr "僅擷取單一音軌"
+
+#. settings-schema.json->recordings-yesno-playlist->options
+msgid "Extract whole playlist"
+msgstr "擷取整個播放清單"
+
+#. settings-schema.json->recordings-keep-video->description
+msgid "Keep video (slower)"
+msgstr "保留影片 (較慢)"
+
+#. settings-schema.json->recordings-keep-video->tooltip
+msgid ""
+"Whether or not to keep the intermediate video file on disk after post-"
+"processing"
+msgstr "是否在後製處理後將中介影片檔保留在磁碟上"
+
+#. settings-schema.json->recordings-subdirectory->description
+msgid "Record in subdirectory"
+msgstr "在子目錄中錄製"
+
+#. settings-schema.json->recordings-subdirectory->tooltip
+msgid "(without leading or trailing slash)"
+msgstr "(不含開頭或結尾的斜線)"
+
+#. settings-schema.json->recordings-extract-button->description
+msgid "Extract soundtrack"
+msgstr "擷取音軌"
+
+#. settings-schema.json->sched-radio->description
+#. settings-schema.json->alarm-clock-working-days-radio->description
+#. settings-schema.json->alarm-clock-workoff-days-radio->description
+msgid "Radio"
+msgstr "收音機"
+
+#. settings-schema.json->sched-begin-date->description
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Date"
+msgstr "日期"
+
+#. settings-schema.json->sched-begin-time->description
+msgid "Time"
+msgstr "時間"
+
+#. settings-schema.json->sched-begin-time->tooltip
+#. settings-schema.json->sched-duration->tooltip
+msgid "Seconds will be ignored."
+msgstr "秒數將被忽略。"
+
+#. settings-schema.json->sched-duration->description
+msgid "Duration"
+msgstr "持續時間"
+
+#. settings-schema.json->sched-button->description
+msgid "Schedule this recording"
+msgstr "排程此錄音"
+
+#. settings-schema.json->sched-alert-no-space->description
+msgid "You are running out of disk space. See in the Recording tab."
+msgstr "磁碟空間即將用盡，請至錄音分頁查看。"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Remove?"
+msgstr "移除？"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "In progress"
+msgstr "進行中"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Action"
+msgstr "動作"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Identifier"
+msgstr "識別碼"
+
+#. settings-schema.json->sched-recordings->tooltip
+msgid "Do not modify anything in this list, except in the \"Remove?\" column"
+msgstr "請勿修改此清單中的任何內容，但「移除？」欄除外"
+
+#. settings-schema.json->search-name->description
+msgid "Station Name"
+msgstr "電台名稱"
+
+#. settings-schema.json->search-name->tooltip
+msgid "OPTIONAL. Name (or part of the name) of the radio station."
+msgstr "（選填）電台的名稱 (或部分名稱)。"
+
+#. settings-schema.json->search-country->options
+msgid "(My Country)"
+msgstr "（我的國家）"
+
+#. settings-schema.json->search-country->options
+msgid "Afghanistan - AF"
+msgstr "阿富汗 - AF"
+
+#. settings-schema.json->search-country->options
+msgid "Åland Islands - AX"
+msgstr "奧蘭群島 - AX"
+
+#. settings-schema.json->search-country->options
+msgid "Albania - AL"
+msgstr "阿爾巴尼亞 - AL"
+
+#. settings-schema.json->search-country->options
+msgid "Algeria - DZ"
+msgstr "阿爾及利亞 - DZ"
+
+#. settings-schema.json->search-country->options
+msgid "American Samoa - AS"
+msgstr "美屬薩摩亞 - AS"
+
+#. settings-schema.json->search-country->options
+msgid "Andorra - AD"
+msgstr "安道爾 - AD"
+
+#. settings-schema.json->search-country->options
+msgid "Angola - AO"
+msgstr "安哥拉 - AO"
+
+#. settings-schema.json->search-country->options
+msgid "Anguilla - AI"
+msgstr "安圭拉 - AI"
+
+#. settings-schema.json->search-country->options
+msgid "Antarctica - AQ"
+msgstr "南極洲 - AQ"
+
+#. settings-schema.json->search-country->options
+msgid "Antigua And Barbuda - AG"
+msgstr "安地卡及巴布達 - AG"
+
+#. settings-schema.json->search-country->options
+msgid "Argentina - AR"
+msgstr "阿根廷 - AR"
+
+#. settings-schema.json->search-country->options
+msgid "Armenia - AM"
+msgstr "亞美尼亞 - AM"
+
+#. settings-schema.json->search-country->options
+msgid "Aruba - AW"
+msgstr "阿魯巴 - AW"
+
+#. settings-schema.json->search-country->options
+msgid "Australia - AU"
+msgstr "澳洲 - AU"
+
+#. settings-schema.json->search-country->options
+msgid "Austria - AT"
+msgstr "奧地利 - AT"
+
+#. settings-schema.json->search-country->options
+msgid "Azerbaijan - AZ"
+msgstr "亞塞拜然 - AZ"
+
+#. settings-schema.json->search-country->options
+msgid "Bahamas - BS"
+msgstr "巴哈馬 - BS"
+
+#. settings-schema.json->search-country->options
+msgid "Bahrain - BH"
+msgstr "巴林 - BH"
+
+#. settings-schema.json->search-country->options
+msgid "Bangladesh - BD"
+msgstr "孟加拉 - BD"
+
+#. settings-schema.json->search-country->options
+msgid "Barbados - BB"
+msgstr "巴貝多 - BB"
+
+#. settings-schema.json->search-country->options
+msgid "Belarus - BY"
+msgstr "白俄羅斯 - BY"
+
+#. settings-schema.json->search-country->options
+msgid "Belgium - BE"
+msgstr "比利時 - BE"
+
+#. settings-schema.json->search-country->options
+msgid "Belize - BZ"
+msgstr "貝里斯 - BZ"
+
+#. settings-schema.json->search-country->options
+msgid "Benin - BJ"
+msgstr "貝南 - BJ"
+
+#. settings-schema.json->search-country->options
+msgid "Bermuda - BM"
+msgstr "百慕達 - BM"
+
+#. settings-schema.json->search-country->options
+msgid "Bhutan - BT"
+msgstr "不丹 - BT"
+
+#. settings-schema.json->search-country->options
+msgid "Bolivia (Plurinational State Of) - BO"
+msgstr "玻利維亞 (多民族國) - BO"
+
+#. settings-schema.json->search-country->options
+msgid "Bonaire (Sint Eustatius And Saba) - BQ"
+msgstr "博奈爾 (聖尤斯特歇斯與薩巴) - BQ"
+
+#. settings-schema.json->search-country->options
+msgid "Bosnia And Herzegovina - BA"
+msgstr "波士尼亞與赫塞哥維納 - BA"
+
+#. settings-schema.json->search-country->options
+msgid "Botswana - BW"
+msgstr "波札那 - BW"
+
+#. settings-schema.json->search-country->options
+msgid "Bouvet Island - BV"
+msgstr "布韋島 - BV"
+
+#. settings-schema.json->search-country->options
+msgid "Brazil - BR"
+msgstr "巴西 - BR"
+
+#. settings-schema.json->search-country->options
+msgid "British Indian Ocean Territory - IO"
+msgstr "英屬印度洋領地 - IO"
+
+#. settings-schema.json->search-country->options
+msgid "Brunei Darussalam - BN"
+msgstr "汶萊 - BN"
+
+#. settings-schema.json->search-country->options
+msgid "Bulgaria - BG"
+msgstr "保加利亞 - BG"
+
+#. settings-schema.json->search-country->options
+msgid "Burkina Faso - BF"
+msgstr "布吉納法索 - BF"
+
+#. settings-schema.json->search-country->options
+msgid "Burundi - BI"
+msgstr "蒲隆地 - BI"
+
+#. settings-schema.json->search-country->options
+msgid "Cambodia - KH"
+msgstr "柬埔寨 - KH"
+
+#. settings-schema.json->search-country->options
+msgid "Cameroon - CM"
+msgstr "喀麥隆 - CM"
+
+#. settings-schema.json->search-country->options
+msgid "Canada - CA"
+msgstr "加拿大 - CA"
+
+#. settings-schema.json->search-country->options
+msgid "Cape Verde - CV"
+msgstr "維德角 - CV"
+
+#. settings-schema.json->search-country->options
+msgid "Cayman Islands - KY"
+msgstr "開曼群島 - KY"
+
+#. settings-schema.json->search-country->options
+msgid "Central African Republic - CF"
+msgstr "中非共和國 - CF"
+
+#. settings-schema.json->search-country->options
+msgid "Chad - TD"
+msgstr "查德 - TD"
+
+#. settings-schema.json->search-country->options
+msgid "Chile - CL"
+msgstr "智利 - CL"
+
+#. settings-schema.json->search-country->options
+msgid "China - CN"
+msgstr "中國大陸 - CN"
+
+#. settings-schema.json->search-country->options
+msgid "Christmas Island - CX"
+msgstr "聖誕島 - CX"
+
+#. settings-schema.json->search-country->options
+msgid "Cocos (Keeling) Islands - CC"
+msgstr "科科斯 (基林) 群島 - CC"
+
+#. settings-schema.json->search-country->options
+msgid "Colombia - CO"
+msgstr "哥倫比亞 - CO"
+
+#. settings-schema.json->search-country->options
+msgid "Comoros - KM"
+msgstr "葛摩 - KM"
+
+#. settings-schema.json->search-country->options
+msgid "Congo - CG"
+msgstr "剛果 - CG"
+
+#. settings-schema.json->search-country->options
+msgid "Congo (The Democratic Republic Of The) - CD"
+msgstr "剛果 (民主共和國) - CD"
+
+#. settings-schema.json->search-country->options
+msgid "Cook Islands - CK"
+msgstr "庫克群島 - CK"
+
+#. settings-schema.json->search-country->options
+msgid "Costa Rica - CR"
+msgstr "哥斯大黎加 - CR"
+
+#. settings-schema.json->search-country->options
+msgid "Côte D'Ivoire - CI"
+msgstr "象牙海岸 - CI"
+
+#. settings-schema.json->search-country->options
+msgid "Croatia - HR"
+msgstr "克羅埃西亞 - HR"
+
+#. settings-schema.json->search-country->options
+msgid "Cuba - CU"
+msgstr "古巴 - CU"
+
+#. settings-schema.json->search-country->options
+msgid "Curaçao - CW"
+msgstr "庫拉索 - CW"
+
+#. settings-schema.json->search-country->options
+msgid "Cyprus - CY"
+msgstr "賽普勒斯 - CY"
+
+#. settings-schema.json->search-country->options
+msgid "Czech Republic - CZ"
+msgstr "捷克共和國 - CZ"
+
+#. settings-schema.json->search-country->options
+msgid "Denmark - DK"
+msgstr "丹麥 - DK"
+
+#. settings-schema.json->search-country->options
+msgid "Djibouti - DJ"
+msgstr "吉布地 - DJ"
+
+#. settings-schema.json->search-country->options
+msgid "Dominica - DM"
+msgstr "多米尼克 - DM"
+
+#. settings-schema.json->search-country->options
+msgid "Dominican Republic - DO"
+msgstr "多明尼加共和國 - DO"
+
+#. settings-schema.json->search-country->options
+msgid "Ecuador - EC"
+msgstr "厄瓜多 - EC"
+
+#. settings-schema.json->search-country->options
+msgid "Egypt - EG"
+msgstr "埃及 - EG"
+
+#. settings-schema.json->search-country->options
+msgid "El Salvador - SV"
+msgstr "薩爾瓦多 - SV"
+
+#. settings-schema.json->search-country->options
+msgid "Equatorial Guinea - GQ"
+msgstr "赤道幾內亞 - GQ"
+
+#. settings-schema.json->search-country->options
+msgid "Eritrea - ER"
+msgstr "厄利垂亞 - ER"
+
+#. settings-schema.json->search-country->options
+msgid "Estonia - EE"
+msgstr "愛沙尼亞 - EE"
+
+#. settings-schema.json->search-country->options
+msgid "Ethiopia - ET"
+msgstr "衣索比亞 - ET"
+
+#. settings-schema.json->search-country->options
+msgid "Falkland Islands (Malvinas) - FK"
+msgstr "福克蘭群島 (馬爾維納斯) - FK"
+
+#. settings-schema.json->search-country->options
+msgid "Faroe Islands - FO"
+msgstr "法羅群島 - FO"
+
+#. settings-schema.json->search-country->options
+msgid "Fiji - FJ"
+msgstr "斐濟 - FJ"
+
+#. settings-schema.json->search-country->options
+msgid "Finland - FI"
+msgstr "芬蘭 - FI"
+
+#. settings-schema.json->search-country->options
+msgid "France - FR"
+msgstr "法國 - FR"
+
+#. settings-schema.json->search-country->options
+msgid "French Guiana - GF"
+msgstr "法屬圭亞那 - GF"
+
+#. settings-schema.json->search-country->options
+msgid "French Polynesia - PF"
+msgstr "法屬玻里尼西亞 - PF"
+
+#. settings-schema.json->search-country->options
+msgid "French Southern Territories - TF"
+msgstr "法屬南部屬地 - TF"
+
+#. settings-schema.json->search-country->options
+msgid "Gabon - GA"
+msgstr "加彭 - GA"
+
+#. settings-schema.json->search-country->options
+msgid "Gambia - GM"
+msgstr "甘比亞 - GM"
+
+#. settings-schema.json->search-country->options
+msgid "Georgia - GE"
+msgstr "喬治亞 - GE"
+
+#. settings-schema.json->search-country->options
+msgid "Germany - DE"
+msgstr "德國 - DE"
+
+#. settings-schema.json->search-country->options
+msgid "Ghana - GH"
+msgstr "迦納 - GH"
+
+#. settings-schema.json->search-country->options
+msgid "Gibraltar - GI"
+msgstr "直布羅陀 - GI"
+
+#. settings-schema.json->search-country->options
+msgid "Greece - GR"
+msgstr "希臘 - GR"
+
+#. settings-schema.json->search-country->options
+msgid "Greenland - GL"
+msgstr "格陵蘭 - GL"
+
+#. settings-schema.json->search-country->options
+msgid "Grenada - GD"
+msgstr "格瑞那達 - GD"
+
+#. settings-schema.json->search-country->options
+msgid "Guadeloupe - GP"
+msgstr "瓜德羅普 - GP"
+
+#. settings-schema.json->search-country->options
+msgid "Guam - GU"
+msgstr "關島 - GU"
+
+#. settings-schema.json->search-country->options
+msgid "Guatemala - GT"
+msgstr "瓜地馬拉 - GT"
+
+#. settings-schema.json->search-country->options
+msgid "Guernsey - GG"
+msgstr "根西島 - GG"
+
+#. settings-schema.json->search-country->options
+msgid "Guinea - GN"
+msgstr "幾內亞 - GN"
+
+#. settings-schema.json->search-country->options
+msgid "Guinea-Bissau - GW"
+msgstr "幾內亞比索 - GW"
+
+#. settings-schema.json->search-country->options
+msgid "Guyana - GY"
+msgstr "蓋亞那 - GY"
+
+#. settings-schema.json->search-country->options
+msgid "Haiti - HT"
+msgstr "海地 - HT"
+
+#. settings-schema.json->search-country->options
+msgid "Heard Island And Mcdonald Islands - HM"
+msgstr "赫德島與麥克唐納群島 - HM"
+
+#. settings-schema.json->search-country->options
+msgid "Holy See (Vatican City State) - VA"
+msgstr "梵蒂岡 (聖座) - VA"
+
+#. settings-schema.json->search-country->options
+msgid "Honduras - HN"
+msgstr "宏都拉斯 - HN"
+
+#. settings-schema.json->search-country->options
+msgid "Hong Kong - HK"
+msgstr "香港 - HK"
+
+#. settings-schema.json->search-country->options
+msgid "Hungary - HU"
+msgstr "匈牙利 - HU"
+
+#. settings-schema.json->search-country->options
+msgid "Iceland - IS"
+msgstr "冰島 - IS"
+
+#. settings-schema.json->search-country->options
+msgid "India - IN"
+msgstr "印度 - IN"
+
+#. settings-schema.json->search-country->options
+msgid "Indonesia - ID"
+msgstr "印尼 - ID"
+
+#. settings-schema.json->search-country->options
+msgid "Iran (Islamic Republic Of) - IR"
+msgstr "伊朗 (伊斯蘭共和國) - IR"
+
+#. settings-schema.json->search-country->options
+msgid "Iraq - IQ"
+msgstr "伊拉克 - IQ"
+
+#. settings-schema.json->search-country->options
+msgid "Ireland - IE"
+msgstr "愛爾蘭 - IE"
+
+#. settings-schema.json->search-country->options
+msgid "Isle Of Man - IM"
+msgstr "曼島 - IM"
+
+#. settings-schema.json->search-country->options
+msgid "Israel - IL"
+msgstr "以色列 - IL"
+
+#. settings-schema.json->search-country->options
+msgid "Italy - IT"
+msgstr "義大利 - IT"
+
+#. settings-schema.json->search-country->options
+msgid "Jamaica - JM"
+msgstr "牙買加 - JM"
+
+#. settings-schema.json->search-country->options
+msgid "Japan - JP"
+msgstr "日本 - JP"
+
+#. settings-schema.json->search-country->options
+msgid "Jersey - JE"
+msgstr "澤西島 - JE"
+
+#. settings-schema.json->search-country->options
+msgid "Jordan - JO"
+msgstr "約旦 - JO"
+
+#. settings-schema.json->search-country->options
+msgid "Kazakhstan - KZ"
+msgstr "哈薩克 - KZ"
+
+#. settings-schema.json->search-country->options
+msgid "Kenya - KE"
+msgstr "肯亞 - KE"
+
+#. settings-schema.json->search-country->options
+msgid "Kiribati - KI"
+msgstr "吉里巴斯 - KI"
+
+#. settings-schema.json->search-country->options
+msgid "Korea (Democratic People'S Republic Of) - KP"
+msgstr "北韓 (朝鮮民主主義人民共和國) - KP"
+
+#. settings-schema.json->search-country->options
+msgid "Korea (Republic Of) - KR"
+msgstr "南韓 (大韓民國) - KR"
+
+#. settings-schema.json->search-country->options
+msgid "Kuwait - KW"
+msgstr "科威特 - KW"
+
+#. settings-schema.json->search-country->options
+msgid "Kyrgyzstan - KG"
+msgstr "吉爾吉斯 - KG"
+
+#. settings-schema.json->search-country->options
+msgid "Lao People'S Democratic Republic - LA"
+msgstr "寮國 (寮人民民主共和國) - LA"
+
+#. settings-schema.json->search-country->options
+msgid "Latvia - LV"
+msgstr "拉脫維亞 - LV"
+
+#. settings-schema.json->search-country->options
+msgid "Lebanon - LB"
+msgstr "黎巴嫩 - LB"
+
+#. settings-schema.json->search-country->options
+msgid "Lesotho - LS"
+msgstr "賴索托 - LS"
+
+#. settings-schema.json->search-country->options
+msgid "Liberia - LR"
+msgstr "賴比瑞亞 - LR"
+
+#. settings-schema.json->search-country->options
+msgid "Libya - LY"
+msgstr "利比亞 - LY"
+
+#. settings-schema.json->search-country->options
+msgid "Liechtenstein - LI"
+msgstr "列支敦斯登 - LI"
+
+#. settings-schema.json->search-country->options
+msgid "Lithuania - LT"
+msgstr "立陶宛 - LT"
+
+#. settings-schema.json->search-country->options
+msgid "Luxembourg - LU"
+msgstr "盧森堡 - LU"
+
+#. settings-schema.json->search-country->options
+msgid "Macao - MO"
+msgstr "澳門 - MO"
+
+#. settings-schema.json->search-country->options
+msgid "Macedonia (The Former Yugoslav Republic Of) - MK"
+msgstr "北馬其頓 (前南斯拉夫馬其頓共和國) - MK"
+
+#. settings-schema.json->search-country->options
+msgid "Madagascar - MG"
+msgstr "馬達加斯加 - MG"
+
+#. settings-schema.json->search-country->options
+msgid "Malawi - MW"
+msgstr "馬拉威 - MW"
+
+#. settings-schema.json->search-country->options
+msgid "Malaysia - MY"
+msgstr "馬來西亞 - MY"
+
+#. settings-schema.json->search-country->options
+msgid "Maldives - MV"
+msgstr "馬爾地夫 - MV"
+
+#. settings-schema.json->search-country->options
+msgid "Mali - ML"
+msgstr "馬利 - ML"
+
+#. settings-schema.json->search-country->options
+msgid "Malta - MT"
+msgstr "馬爾他 - MT"
+
+#. settings-schema.json->search-country->options
+msgid "Marshall Islands - MH"
+msgstr "馬紹爾群島 - MH"
+
+#. settings-schema.json->search-country->options
+msgid "Martinique - MQ"
+msgstr "馬丁尼克 - MQ"
+
+#. settings-schema.json->search-country->options
+msgid "Mauritania - MR"
+msgstr "茅利塔尼亞 - MR"
+
+#. settings-schema.json->search-country->options
+msgid "Mauritius - MU"
+msgstr "模里西斯 - MU"
+
+#. settings-schema.json->search-country->options
+msgid "Mayotte - YT"
+msgstr "馬約特 - YT"
+
+#. settings-schema.json->search-country->options
+msgid "Mexico - MX"
+msgstr "墨西哥 - MX"
+
+#. settings-schema.json->search-country->options
+msgid "Micronesia (Federated States Of) - FM"
+msgstr "密克羅尼西亞聯邦 - FM"
+
+#. settings-schema.json->search-country->options
+msgid "Moldova (Republic Of) - MD"
+msgstr "摩爾多瓦 (共和國) - MD"
+
+#. settings-schema.json->search-country->options
+msgid "Monaco - MC"
+msgstr "摩納哥 - MC"
+
+#. settings-schema.json->search-country->options
+msgid "Mongolia - MN"
+msgstr "蒙古 - MN"
+
+#. settings-schema.json->search-country->options
+msgid "Montenegro - ME"
+msgstr "蒙特內哥羅 - ME"
+
+#. settings-schema.json->search-country->options
+msgid "Montserrat - MS"
+msgstr "蒙哲臘 - MS"
+
+#. settings-schema.json->search-country->options
+msgid "Morocco - MA"
+msgstr "摩洛哥 - MA"
+
+#. settings-schema.json->search-country->options
+msgid "Mozambique - MZ"
+msgstr "莫三比克 - MZ"
+
+#. settings-schema.json->search-country->options
+msgid "Myanmar - MM"
+msgstr "緬甸 - MM"
+
+#. settings-schema.json->search-country->options
+msgid "Namibia - NA"
+msgstr "納米比亞 - NA"
+
+#. settings-schema.json->search-country->options
+msgid "Nauru - NR"
+msgstr "諾魯 - NR"
+
+#. settings-schema.json->search-country->options
+msgid "Nepal - NP"
+msgstr "尼泊爾 - NP"
+
+#. settings-schema.json->search-country->options
+msgid "Netherlands - NL"
+msgstr "荷蘭 - NL"
+
+#. settings-schema.json->search-country->options
+msgid "New Caledonia - NC"
+msgstr "新喀里多尼亞 - NC"
+
+#. settings-schema.json->search-country->options
+msgid "New Zealand - NZ"
+msgstr "紐西蘭 - NZ"
+
+#. settings-schema.json->search-country->options
+msgid "Nicaragua - NI"
+msgstr "尼加拉瓜 - NI"
+
+#. settings-schema.json->search-country->options
+msgid "Niger - NE"
+msgstr "尼日 - NE"
+
+#. settings-schema.json->search-country->options
+msgid "Nigeria - NG"
+msgstr "奈及利亞 - NG"
+
+#. settings-schema.json->search-country->options
+msgid "Niue - NU"
+msgstr "紐埃 - NU"
+
+#. settings-schema.json->search-country->options
+msgid "Norfolk Island - NF"
+msgstr "諾福克島 - NF"
+
+#. settings-schema.json->search-country->options
+msgid "Northern Mariana Islands - MP"
+msgstr "北馬里亞納群島 - MP"
+
+#. settings-schema.json->search-country->options
+msgid "Norway - NO"
+msgstr "挪威 - NO"
+
+#. settings-schema.json->search-country->options
+msgid "Oman - OM"
+msgstr "阿曼 - OM"
+
+#. settings-schema.json->search-country->options
+msgid "Pakistan - PK"
+msgstr "巴基斯坦 - PK"
+
+#. settings-schema.json->search-country->options
+msgid "Palau - PW"
+msgstr "帛琉 - PW"
+
+#. settings-schema.json->search-country->options
+msgid "Palestine (State Of) - PS"
+msgstr "巴勒斯坦 (國) - PS"
+
+#. settings-schema.json->search-country->options
+msgid "Panama - PA"
+msgstr "巴拿馬 - PA"
+
+#. settings-schema.json->search-country->options
+msgid "Papua New Guinea - PG"
+msgstr "巴布亞紐幾內亞 - PG"
+
+#. settings-schema.json->search-country->options
+msgid "Paraguay - PY"
+msgstr "巴拉圭 - PY"
+
+#. settings-schema.json->search-country->options
+msgid "Peru - PE"
+msgstr "秘魯 - PE"
+
+#. settings-schema.json->search-country->options
+msgid "Philippines - PH"
+msgstr "菲律賓 - PH"
+
+#. settings-schema.json->search-country->options
+msgid "Pitcairn - PN"
+msgstr "皮特肯群島 - PN"
+
+#. settings-schema.json->search-country->options
+msgid "Poland - PL"
+msgstr "波蘭 - PL"
+
+#. settings-schema.json->search-country->options
+msgid "Portugal - PT"
+msgstr "葡萄牙 - PT"
+
+#. settings-schema.json->search-country->options
+msgid "Puerto Rico - PR"
+msgstr "波多黎各 - PR"
+
+#. settings-schema.json->search-country->options
+msgid "Qatar - QA"
+msgstr "卡達 - QA"
+
+#. settings-schema.json->search-country->options
+msgid "Réunion - RE"
+msgstr "留尼旺 - RE"
+
+#. settings-schema.json->search-country->options
+msgid "Romania - RO"
+msgstr "羅馬尼亞 - RO"
+
+#. settings-schema.json->search-country->options
+msgid "Russian Federation - RU"
+msgstr "俄羅斯聯邦 - RU"
+
+#. settings-schema.json->search-country->options
+msgid "Rwanda - RW"
+msgstr "盧安達 - RW"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Barthélemy - BL"
+msgstr "聖巴泰勒米 - BL"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Helena (Ascension And Tristan Da Cunha) - SH"
+msgstr "聖赫勒拿 (阿森松與特里斯坦達庫尼亞) - SH"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Kitts And Nevis - KN"
+msgstr "聖克里斯多福及尼維斯 - KN"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Lucia - LC"
+msgstr "聖露西亞 - LC"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Martin (French Part) - MF"
+msgstr "法屬聖馬丁 - MF"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Pierre And Miquelon - PM"
+msgstr "聖皮埃爾和密克隆群島 - PM"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Vincent And The Grenadines - VC"
+msgstr "聖文森及格瑞那丁 - VC"
+
+#. settings-schema.json->search-country->options
+msgid "Samoa - WS"
+msgstr "薩摩亞 - WS"
+
+#. settings-schema.json->search-country->options
+msgid "San Marino - SM"
+msgstr "聖馬利諾 - SM"
+
+#. settings-schema.json->search-country->options
+msgid "Sao Tome And Principe - ST"
+msgstr "聖多美普林西比 - ST"
+
+#. settings-schema.json->search-country->options
+msgid "Saudi Arabia - SA"
+msgstr "沙烏地阿拉伯 - SA"
+
+#. settings-schema.json->search-country->options
+msgid "Senegal - SN"
+msgstr "塞內加爾 - SN"
+
+#. settings-schema.json->search-country->options
+msgid "Serbia - RS"
+msgstr "塞爾維亞 - RS"
+
+#. settings-schema.json->search-country->options
+msgid "Seychelles - SC"
+msgstr "塞席爾 - SC"
+
+#. settings-schema.json->search-country->options
+msgid "Sierra Leone - SL"
+msgstr "獅子山 - SL"
+
+#. settings-schema.json->search-country->options
+msgid "Singapore - SG"
+msgstr "新加坡 - SG"
+
+#. settings-schema.json->search-country->options
+msgid "Sint Maarten (Dutch Part) - SX"
+msgstr "荷屬聖馬丁 - SX"
+
+#. settings-schema.json->search-country->options
+msgid "Slovakia - SK"
+msgstr "斯洛伐克 - SK"
+
+#. settings-schema.json->search-country->options
+msgid "Slovenia - SI"
+msgstr "斯洛維尼亞 - SI"
+
+#. settings-schema.json->search-country->options
+msgid "Solomon Islands - SB"
+msgstr "索羅門群島 - SB"
+
+#. settings-schema.json->search-country->options
+msgid "Somalia - SO"
+msgstr "索馬利亞 - SO"
+
+#. settings-schema.json->search-country->options
+msgid "South Africa - ZA"
+msgstr "南非 - ZA"
+
+#. settings-schema.json->search-country->options
+msgid "South Georgia And The South Sandwich Islands - GS"
+msgstr "南喬治亞與南桑威奇群島 - GS"
+
+#. settings-schema.json->search-country->options
+msgid "South Sudan - SS"
+msgstr "南蘇丹 - SS"
+
+#. settings-schema.json->search-country->options
+msgid "Spain - ES"
+msgstr "西班牙 - ES"
+
+#. settings-schema.json->search-country->options
+msgid "Sri Lanka - LK"
+msgstr "斯里蘭卡 - LK"
+
+#. settings-schema.json->search-country->options
+msgid "Sudan - SD"
+msgstr "蘇丹 - SD"
+
+#. settings-schema.json->search-country->options
+msgid "Suriname - SR"
+msgstr "蘇利南 - SR"
+
+#. settings-schema.json->search-country->options
+msgid "Svalbard And Jan Mayen - SJ"
+msgstr "斯瓦巴及揚馬延 - SJ"
+
+#. settings-schema.json->search-country->options
+msgid "Swaziland - SZ"
+msgstr "史瓦帝尼 - SZ"
+
+#. settings-schema.json->search-country->options
+msgid "Sweden - SE"
+msgstr "瑞典 - SE"
+
+#. settings-schema.json->search-country->options
+msgid "Switzerland - CH"
+msgstr "瑞士 - CH"
+
+#. settings-schema.json->search-country->options
+msgid "Syrian Arab Republic - SY"
+msgstr "敘利亞阿拉伯共和國 - SY"
+
+#. settings-schema.json->search-country->options
+msgid "Taiwan (Province Of China) - TW"
+msgstr "台灣 - TW"
+
+#. settings-schema.json->search-country->options
+msgid "Tajikistan - TJ"
+msgstr "塔吉克 - TJ"
+
+#. settings-schema.json->search-country->options
+msgid "Tanzania (United Republic Of) - TZ"
+msgstr "坦尚尼亞 (聯合共和國) - TZ"
+
+#. settings-schema.json->search-country->options
+msgid "Thailand - TH"
+msgstr "泰國 - TH"
+
+#. settings-schema.json->search-country->options
+msgid "Timor-Leste - TL"
+msgstr "東帝汶 - TL"
+
+#. settings-schema.json->search-country->options
+msgid "Togo - TG"
+msgstr "多哥 - TG"
+
+#. settings-schema.json->search-country->options
+msgid "Tokelau - TK"
+msgstr "托克勞 - TK"
+
+#. settings-schema.json->search-country->options
+msgid "Tonga - TO"
+msgstr "東加 - TO"
+
+#. settings-schema.json->search-country->options
+msgid "Trinidad And Tobago - TT"
+msgstr "千里達及托巴哥 - TT"
+
+#. settings-schema.json->search-country->options
+msgid "Tunisia - TN"
+msgstr "突尼西亞 - TN"
+
+#. settings-schema.json->search-country->options
+msgid "Turkey - TR"
+msgstr "土耳其 - TR"
+
+#. settings-schema.json->search-country->options
+msgid "Turkmenistan - TM"
+msgstr "土庫曼 - TM"
+
+#. settings-schema.json->search-country->options
+msgid "Turks And Caicos Islands - TC"
+msgstr "特克斯與凱科斯群島 - TC"
+
+#. settings-schema.json->search-country->options
+msgid "Tuvalu - TV"
+msgstr "吐瓦魯 - TV"
+
+#. settings-schema.json->search-country->options
+msgid "Uganda - UG"
+msgstr "烏干達 - UG"
+
+#. settings-schema.json->search-country->options
+msgid "Ukraine - UA"
+msgstr "烏克蘭 - UA"
+
+#. settings-schema.json->search-country->options
+msgid "United Arab Emirates - AE"
+msgstr "阿拉伯聯合大公國 - AE"
+
+#. settings-schema.json->search-country->options
+msgid "United Kingdom - GB"
+msgstr "英國 - GB"
+
+#. settings-schema.json->search-country->options
+msgid "United States - US"
+msgstr "美國 - US"
+
+#. settings-schema.json->search-country->options
+msgid "United States Minor Outlying Islands - UM"
+msgstr "美國本土外小島嶼 - UM"
+
+#. settings-schema.json->search-country->options
+msgid "Uruguay - UY"
+msgstr "烏拉圭 - UY"
+
+#. settings-schema.json->search-country->options
+msgid "Uzbekistan - UZ"
+msgstr "烏茲別克 - UZ"
+
+#. settings-schema.json->search-country->options
+msgid "Vanuatu - VU"
+msgstr "萬那杜 - VU"
+
+#. settings-schema.json->search-country->options
+msgid "Venezuela (Bolivarian Republic Of) - VE"
+msgstr "委內瑞拉 (玻利瓦共和國) - VE"
+
+#. settings-schema.json->search-country->options
+msgid "Viet Nam - VN"
+msgstr "越南 - VN"
+
+#. settings-schema.json->search-country->options
+msgid "Virgin Islands (British) - VG"
+msgstr "英屬維京群島 - VG"
+
+#. settings-schema.json->search-country->options
+msgid "Virgin Islands (U.S.) - VI"
+msgstr "美屬維京群島 - VI"
+
+#. settings-schema.json->search-country->options
+msgid "Wallis And Futuna - WF"
+msgstr "瓦利斯和富圖納 - WF"
+
+#. settings-schema.json->search-country->options
+msgid "Western Sahara - EH"
+msgstr "西撒哈拉 - EH"
+
+#. settings-schema.json->search-country->options
+msgid "Yemen - YE"
+msgstr "葉門 - YE"
+
+#. settings-schema.json->search-country->options
+msgid "Zambia - ZM"
+msgstr "尚比亞 - ZM"
+
+#. settings-schema.json->search-country->options
+msgid "Zimbabwe - ZW"
+msgstr "辛巴威 - ZW"
+
+#. settings-schema.json->search-country->tooltip
+msgid "OPTIONAL. Choose a country."
+msgstr "（選填）請選擇國家。"
+
+#. settings-schema.json->search-tag->description
+msgid "Tag"
+msgstr "標籤"
+
+#. settings-schema.json->search-tag->tooltip
+msgid "OPTIONAL. Only one word, as blues or jazz or rock or talk or..."
+msgstr "（選填）僅限一個詞，如 blues、jazz、rock 或 talk 等..."
+
+#. settings-schema.json->search-codec->options
+msgid "AAC"
+msgstr "AAC"
+
+#. settings-schema.json->search-codec->options
+msgid "AAC+"
+msgstr "AAC+"
+
+#. settings-schema.json->search-codec->options
+msgid "FLV"
+msgstr "FLV"
+
+#. settings-schema.json->search-codec->options
+msgid "AAC,H.264"
+msgstr "AAC, H.264"
+
+#. settings-schema.json->search-codec->options
+msgid "AAC+,H.264"
+msgstr "AAC+, H.264"
+
+#. settings-schema.json->search-codec->options
+msgid "MP3,H.264"
+msgstr "MP3, H.264"
+
+#. settings-schema.json->search-codec->options
+msgid "Unknown"
+msgstr "未知"
+
+#. settings-schema.json->search-codec->options
+msgid "Unknown,H.264"
+msgstr "未知, H.264"
+
+#. settings-schema.json->search-codec->tooltip
+msgid "OPTIONAL. Choose a codec."
+msgstr "（選填）請選擇編解碼器。"
+
+#. settings-schema.json->search-minimalBitrate->description
+msgid "Minimal Bitrate"
+msgstr "最低位元率"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "128"
+msgstr "128"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "192"
+msgstr "192"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "256"
+msgstr "256"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "320"
+msgstr "320"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "512"
+msgstr "512"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "640"
+msgstr "640"
+
+#. settings-schema.json->search-minimalBitrate->tooltip
+msgid "OPTIONAL. Choose a minimal bitrate (in kbps)."
+msgstr "（選填）請選擇最低位元率 (單位：kbps)。"
+
+#. settings-schema.json->search-order->description
+msgid "Order"
+msgstr "排序"
+
+#. settings-schema.json->search-order->options
+msgid "name"
+msgstr "名稱"
+
+#. settings-schema.json->search-order->options
+msgid "url"
+msgstr "網址"
+
+#. settings-schema.json->search-order->options
+msgid "tags"
+msgstr "標籤"
+
+#. settings-schema.json->search-order->options
+msgid "country"
+msgstr "國家"
+
+#. settings-schema.json->search-order->options
+msgid "state"
+msgstr "州/省"
+
+#. settings-schema.json->search-order->options
+msgid "language"
+msgstr "語言"
+
+#. settings-schema.json->search-order->options
+msgid "votes"
+msgstr "票數"
+
+#. settings-schema.json->search-order->options
+msgid "codec"
+msgstr "編解碼器"
+
+#. settings-schema.json->search-order->options
+msgid "bitrate"
+msgstr "位元率"
+
+#. settings-schema.json->search-order->options
+msgid "last check-time"
+msgstr "上次檢查時間"
+
+#. settings-schema.json->search-order->options
+msgid "click timestamp"
+msgstr "點選時間戳記"
+
+#. settings-schema.json->search-order->options
+msgid "click count"
+msgstr "點選次數"
+
+#. settings-schema.json->search-order->options
+msgid "click trend"
+msgstr "點選趨勢"
+
+#. settings-schema.json->search-order->options
+msgid "change timestamp"
+msgstr "變更時間戳記"
+
+#. settings-schema.json->search-order->options
+msgid "random"
+msgstr "隨機"
+
+#. settings-schema.json->search-order->tooltip
+msgid "OPTIONAL. Name of the attribute the result list will be sorted by."
+msgstr "（選填）結果清單將依此屬性排序。"
+
+#. settings-schema.json->search-limit->description
+msgid "Limit"
+msgstr "限制"
+
+#. settings-schema.json->search-limit->tooltip
+msgid "Maximum number of results per page."
+msgstr "每頁的最大結果數。"
+
+#. settings-schema.json->search-page->description
+msgid "Next page number"
+msgstr "下一頁頁碼"
+
+#. settings-schema.json->search-reset-button->description
+msgid "Reset"
+msgstr "重設"
+
+#. settings-schema.json->search-button->description
+msgid "Search..."
+msgstr "搜尋..."
+
+#. settings-schema.json->sched-rmbutton->description
+msgid "Remove selected items"
+msgstr "移除選取的項目"
+
+#. settings-schema.json->horizontal-show-name->description
+msgid "Display radio name"
+msgstr "顯示電台名稱"
+
+#. settings-schema.json->horizontal-show-title->description
+msgid "Display title"
+msgstr "顯示標題"
+
+#. settings-schema.json->horizontal-max-title-length->description
+msgid "Maximum title length"
+msgstr "標題最大長度"
+
+#. settings-schema.json->horizontal-max-title-length->tooltip
+msgid "0 means no maximum"
+msgstr "0 表示沒有上限"
+
+#. settings-schema.json->alarm-clock-wake-me-softly->description
+msgid "Wake me up softly"
+msgstr "柔和喚醒"
+
+#. settings-schema.json->alarm-clock-wake-me-softly->tooltip
+msgid "By checking this box, the sound volume gradually increases."
+msgstr "勾選此選項後，音量會逐漸增加。"
+
+#. settings-schema.json->alarm-clock-volume-begin->description
+msgid "Initial volume (%)"
+msgstr "初始音量 (%)"
+
+#. settings-schema.json->alarm-clock-volume-end->description
+msgid "Final volume (%)"
+msgstr "最終音量 (%)"
+
+#. settings-schema.json->alarm-clock-volume-end->tooltip
+msgid "The final volume must be greater than or equal to the initial volume."
+msgstr "最終音量必須大於或等於初始音量。"
+
+#. settings-schema.json->alarm-clock-volume-transition->description
+msgid "Transition duration (seconds)"
+msgstr "轉換持續時間 (秒)"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Sunday"
+msgstr "週日"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Monday"
+msgstr "週一"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Tuesday"
+msgstr "週二"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Wednesday"
+msgstr "週三"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Thursday"
+msgstr "週四"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Friday"
+msgstr "週五"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Saturday"
+msgstr "週六"
+
+#. settings-schema.json->alarm-clock-working-days-time->description
+#. settings-schema.json->alarm-clock-workoff-days-time->description
+msgid "Wake-Up Time"
+msgstr "喚醒時間"
+
+#. settings-schema.json->alarm-clock-working-days-radio-button->description
+#. settings-schema.json->alarm-clock-workoff-days-radio-button->description
+msgid "Last-listened-to radio station"
+msgstr "上次收聽的廣播電台"
+
+#. settings-schema.json->alarm-clock-tink-on->description
+msgid "Activate tink to ensure speakers are awake"
+msgstr "啟用提示音以確保喇叭處於喚醒狀態"

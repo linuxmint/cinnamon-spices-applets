@@ -1,0 +1,10 @@
+# BRIGHTNESS AND GAMMA APPLET
+# This file is put in the public domain.
+# cardsurf, 2017
+#
+msgid ""
+msgstr ""
+
+#. appletGui.js:236 6.4/applet.js:42 6.4/lib/appletGui.js:213
+msgid "Red"
+msgstr ""

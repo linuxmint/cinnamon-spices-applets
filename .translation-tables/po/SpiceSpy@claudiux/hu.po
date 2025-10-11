@@ -1,0 +1,247 @@
+# SPICESPY
+# This file is put in the public domain.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SpiceSpy@claudiux 3.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-25 23:34+0200\n"
+"PO-Revision-Date: 2025-04-10 14:11+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. applet.js:201
+msgid "score"
+msgstr "pontszám"
+
+#. applet.js:213
+msgid "comments"
+msgstr "megjegyzések"
+
+#. applet.js:225
+msgid "recent issues"
+msgstr "legutóbbi kiadások"
+
+#. applet.js:237
+msgid "translations"
+msgstr "fordítások"
+
+#. applet.js:312
+#, fuzzy
+msgid "Reload icons"
+msgstr "Kisalkalmazás újratöltése"
+
+#. applet.js:318
+msgid "Visit website"
+msgstr ""
+
+#. applet.js:826
+msgid "Spices"
+msgstr "Spices"
+
+#. applet.js:915
+msgid "Mark all as read"
+msgstr "Összes megjelölése olvasottként"
+
+#. applet.js:926
+msgid "Refresh"
+msgstr "Frissítés"
+
+#. applet.js:938
+msgid "Refreshing in progress"
+msgstr "Frissítés folyamatban"
+
+#. applet.js:949
+msgid "Configure..."
+msgstr "Beállítások…"
+
+#. metadata.json->name
+msgid "SpiceSpy"
+msgstr "SpiceKém"
+
+#. metadata.json->description
+msgid ""
+"Notifies you when there's a change to your favorite Spices on the website."
+msgstr ""
+"Értesít, ha változás történt a kedvenc Spice-oddal kapcsolatban a weboldalon."
+
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr "Általános"
+
+#. settings-schema.json->pageOptions->title
+#. settings-schema.json->section1->title
+msgid "Options"
+msgstr "Beállítások"
+
+#. settings-schema.json->section2->title
+msgid "List of authors of the Spices you are interested in"
+msgstr "Az önt érdeklő Spices szerzőinek listája"
+
+#. settings-schema.json->section3->title
+msgid "List of specific Spices you are interested in"
+msgstr "Az Önt érdeklő Spices listája"
+
+#. settings-schema.json->update-interval-hours->description
+msgid "Update interval"
+msgstr "Frissítési időköz"
+
+#. settings-schema.json->update-interval-hours->units
+msgid "hours"
+msgstr "óra"
+
+#. settings-schema.json->standard-opacity->description
+msgid "Opacity in absence of change"
+msgstr "Átlátszatlanság változás hiányában"
+
+#. settings-schema.json->color-on-change->description
+msgid "Color on change"
+msgstr "Szín a változáskor"
+
+#. settings-schema.json->show-icon-in-menu->description
+msgid "Show each Spice icon in the menu"
+msgstr "Minden Spice ikon megjelenítése a menüben"
+
+#. settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Ikonméret"
+
+#. settings-schema.json->icon-size->options
+msgid "16"
+msgstr "16"
+
+#. settings-schema.json->icon-size->options
+msgid "22"
+msgstr "22"
+
+#. settings-schema.json->icon-size->options
+msgid "24"
+msgstr "24"
+
+#. settings-schema.json->icon-size->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->icon-size->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->icon-size->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->icon-size->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->icon-size->options
+msgid "128"
+msgstr "128"
+
+#. settings-schema.json->show-translations->description
+msgid "Show number of translations in the menu"
+msgstr "A fordítások számának megjelenítése a menüben"
+
+#. settings-schema.json->show-commits->description
+#, fuzzy
+msgid "Show available updates in the menu"
+msgstr "A problémák számának megjelenítése a menüben"
+
+#. settings-schema.json->show-issues->description
+msgid "Show number of issues in the menu"
+msgstr "A problémák számának megjelenítése a menüben"
+
+#. settings-schema.json->sort-by->description
+msgid "Sort by"
+msgstr "Rendezés a következő szerint:"
+
+#. settings-schema.json->sort-by->options
+msgid "Translated name"
+msgstr "Lefordított név"
+
+#. settings-schema.json->sort-by->options
+msgid "Original name"
+msgstr "Eredeti név"
+
+#. settings-schema.json->sort-by->options
+#. settings-schema.json->uuid-list->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. settings-schema.json->sort-by->options
+msgid "Score (bottom-up)"
+msgstr "Pontozás (alulról felfelé)"
+
+#. settings-schema.json->sort-by->options
+msgid "Score (top-down)"
+msgstr "Pontozás (felülről lefelé)"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of comments (bottom-up)"
+msgstr "A megjegyzések száma (alulról felfelé)"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of comments (top-down)"
+msgstr "A megjegyzések száma (felülről lefelé)"
+
+#. settings-schema.json->show-uuid->description
+msgid "Show UUID instead of name"
+msgstr "Név helyett UUID megjelenítése"
+
+#. settings-schema.json->translate-name->description
+msgid "Show translated name if available"
+msgstr "Lefordított név megjelenítése, ha rendelkezésre áll"
+
+#. settings-schema.json->display-on-panel->description
+msgid "If there is nothing new"
+msgstr "Ha nincs semmi új"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Show icon and label"
+msgstr "Ikon és címke megjelenítése"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Show icon only"
+msgstr "Csak ikon megjelenítése"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Do not show anything"
+msgstr "Ne mutasson semmit"
+
+#. settings-schema.json->useful-only->description
+msgid "Show only non-zero values in panel"
+msgstr "Csak a nem nulla értékek megjelenítése a panelen"
+
+#. settings-schema.json->author-list->columns->title
+msgid "GitHub user name"
+msgstr "GitHub felhasználónév"
+
+#. settings-schema.json->button-my-spices->description
+msgid "Add all the Spices I use"
+msgstr "Adja hozzá az Spice-t amit használok"
+
+#. settings-schema.json->label-reload->description
+msgid ""
+"There's no need to include Spices maintained by members of the Authors list "
+"in the UUID list.\n"
+"Once your lists are correct, you can reload this applet to speed up the "
+"process.\n"
+"Just don't do it too often."
+msgstr ""
+"Nem szükséges felvenni azokat a Spice-okat, melyeket UUID-lista szerzőinek "
+"tagjai tartanak fennt.\n"
+"Ha a listák helyesek, a folyamat felgyorsítása érdekében újratöltheti ezt a "
+"kisalkalmazást.\n"
+"Csak ne csináld túl gyakran."
+
+#. settings-schema.json->button-reload->description
+msgid "Reload this applet"
+msgstr "Kisalkalmazás újratöltése"

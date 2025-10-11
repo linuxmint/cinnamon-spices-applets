@@ -1,0 +1,365 @@
+# BRIGHTNESS AND GAMMA APPLET
+# This file is put in the public domain.
+# cardsurf, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: brightness-and-gamma-applet@cardsurf 2.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-26 20:09+0200\n"
+"PO-Revision-Date: 2025-09-02 03:23+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:178 6.4/applet.js:265
+msgid "The following packages were not found:"
+msgstr "找不到下列套件："
+
+#. applet.js:179 6.4/applet.js:266
+msgid "Please install the above packages to use the applet"
+msgstr "請安裝上述套件以使用這個小程式"
+
+#. applet.js:564 6.4/applet.js:808
+msgid "Screen"
+msgstr "螢幕"
+
+#. applet.js:647 6.4/applet.js:891
+msgid "Outputs"
+msgstr "輸出裝置"
+
+#. settings-schema.json->options_type->options
+#. 6.4->settings-schema.json->options_type->options
+#. 6.4->settings-schema.json->preset_list->columns->title
+#. appletGui.js:235 6.4/applet.js:41 6.4/lib/appletGui.js:212
+msgid "Brightness"
+msgstr "亮度"
+
+#. appletGui.js:236 6.4/applet.js:42 6.4/lib/appletGui.js:213
+msgid "Red"
+msgstr "紅色"
+
+#. appletGui.js:237 6.4/applet.js:43 6.4/lib/appletGui.js:214
+msgid "Green"
+msgstr "綠色"
+
+#. appletGui.js:238 6.4/applet.js:44 6.4/lib/appletGui.js:215
+msgid "Blue"
+msgstr "藍色"
+
+#. 6.4/applet.js:45 6.4/applet.js:962
+msgid "Sunrise"
+msgstr "日出"
+
+#. 6.4/applet.js:46 6.4/applet.js:964
+msgid "Sunset"
+msgstr "日落"
+
+#. 6.4/applet.js:729
+msgid "Reload"
+msgstr "重新載入"
+
+#. 6.4/applet.js:739
+msgid "Configure Presets"
+msgstr "設定預設組態"
+
+#. 6.4->settings-schema.json->page_presets->title
+#. 6.4/applet.js:749
+msgid "Presets"
+msgstr "預設組態"
+
+#. metadata.json->description
+msgid "Sets brightness and gamma levels of a screen"
+msgstr "設定螢幕亮度與伽瑪值"
+
+#. metadata.json->name
+msgid "Brightness and gamma applet"
+msgstr "亮度與伽瑪值小程式"
+
+#. settings-schema.json->configuration_start->description
+#. 6.4->settings-schema.json->section_config->title
+msgid "Configuration"
+msgstr "設定"
+
+#. settings-schema.json->apply_startup->description
+#. 6.4->settings-schema.json->apply_startup->description
+msgid "Apply at startup"
+msgstr "啟動時套用"
+
+#. settings-schema.json->apply_startup->tooltip
+#. 6.4->settings-schema.json->apply_startup->tooltip
+msgid "Apply values at applet startup"
+msgstr "小程式啟動時套用數值"
+
+#. settings-schema.json->apply_every->units
+#. settings-schema.json->save_every->units
+#. 6.4->settings-schema.json->apply_every->units
+#. 6.4->settings-schema.json->save_every->units
+msgid "seconds"
+msgstr "秒"
+
+#. settings-schema.json->apply_every->description
+#. 6.4->settings-schema.json->apply_every->description
+msgid "Apply every"
+msgstr "套用間隔"
+
+#. settings-schema.json->apply_every->tooltip
+#. 6.4->settings-schema.json->apply_every->tooltip
+msgid ""
+"How often to apply values. 0 means that values are not applied periodically."
+msgstr "套用數值的頻率。0 表示不定期套用數值。"
+
+#. settings-schema.json->apply_asynchronously->description
+#. 6.4->settings-schema.json->apply_asynchronously->description
+msgid "Apply asynchronously"
+msgstr "非同步套用"
+
+#. settings-schema.json->apply_asynchronously->tooltip
+#. 6.4->settings-schema.json->apply_asynchronously->tooltip
+msgid "Apply values in a background process"
+msgstr "於背景程序中套用數值"
+
+#. settings-schema.json->update_scroll->description
+#. 6.4->settings-schema.json->update_scroll->description
+msgid "Adjust brightness scroll"
+msgstr "捲動調整亮度"
+
+#. settings-schema.json->update_scroll->tooltip
+#. 6.4->settings-schema.json->update_scroll->tooltip
+msgid "Allows to adjust a brightness value on a mouse scroll"
+msgstr "允許透過滑鼠捲動調整亮度值"
+
+#. settings-schema.json->scroll_step->units
+#. settings-schema.json->minimum_brightness->units
+#. settings-schema.json->maximum_brightness->units
+#. settings-schema.json->minimum_gamma->units
+#. settings-schema.json->maximum_gamma->units
+#. 6.4->settings-schema.json->scroll_step->units
+#. 6.4->settings-schema.json->minimum_brightness->units
+#. 6.4->settings-schema.json->maximum_brightness->units
+#. 6.4->settings-schema.json->minimum_gamma->units
+#. 6.4->settings-schema.json->maximum_gamma->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->scroll_step->description
+#. 6.4->settings-schema.json->scroll_step->description
+msgid "Scroll step"
+msgstr "捲動步進值"
+
+#. settings-schema.json->scroll_step->tooltip
+#. 6.4->settings-schema.json->scroll_step->tooltip
+msgid "A percentage of a brightness value to adjust on a mouse scroll"
+msgstr "透過滑鼠捲動調整亮度值的百分比"
+
+#. settings-schema.json->values_start->description
+#. 6.4->settings-schema.json->section_values->title
+msgid "Values"
+msgstr "數值"
+
+#. settings-schema.json->minimum_brightness->description
+#. 6.4->settings-schema.json->minimum_brightness->description
+msgid "Minimum brightness"
+msgstr "最低亮度"
+
+#. settings-schema.json->minimum_brightness->tooltip
+#. 6.4->settings-schema.json->minimum_brightness->tooltip
+msgid "A minimum value of brightness. Value from 10% to 50%."
+msgstr "亮度下限。數值範圍為 10% 至 50%。"
+
+#. settings-schema.json->maximum_brightness->description
+#. 6.4->settings-schema.json->maximum_brightness->description
+msgid "Maximum brightness"
+msgstr "最高亮度"
+
+#. settings-schema.json->maximum_brightness->tooltip
+#. 6.4->settings-schema.json->maximum_brightness->tooltip
+msgid "A maximum value of brightness. Value from 51% to 200%."
+msgstr "亮度上限。數值範圍為 51% 至 200%。"
+
+#. settings-schema.json->minimum_gamma->description
+#. 6.4->settings-schema.json->minimum_gamma->description
+msgid "Minimum gamma"
+msgstr "最低伽瑪值"
+
+#. settings-schema.json->minimum_gamma->tooltip
+#. 6.4->settings-schema.json->minimum_gamma->tooltip
+msgid "A minimum value of gamma. Value from 10% to 50%."
+msgstr "伽瑪值下限。數值範圍為 10% 至 50%。"
+
+#. settings-schema.json->maximum_gamma->description
+#. 6.4->settings-schema.json->maximum_gamma->description
+msgid "Maximum gamma"
+msgstr "最高伽瑪值"
+
+#. settings-schema.json->maximum_gamma->tooltip
+#. 6.4->settings-schema.json->maximum_gamma->tooltip
+msgid "A maximum value of gamma. Value from 51% to 200%."
+msgstr "伽瑪值上限。數值範圍為 51% 至 200%。"
+
+#. settings-schema.json->save_every->description
+#. 6.4->settings-schema.json->save_every->description
+msgid "Save every"
+msgstr "儲存間隔"
+
+#. settings-schema.json->save_every->tooltip
+#. 6.4->settings-schema.json->save_every->tooltip
+msgid "How often to save last used values"
+msgstr "儲存最近使用數值的頻率"
+
+#. settings-schema.json->gui_start->description
+#. 6.4->settings-schema.json->section_gui->title
+msgid "Gui"
+msgstr "圖形化使用者介面"
+
+#. settings-schema.json->options_type->description
+#. 6.4->settings-schema.json->options_type->description
+msgid "Show"
+msgstr "顯示"
+
+#. settings-schema.json->options_type->options
+#. 6.4->settings-schema.json->options_type->options
+msgid "All"
+msgstr "全部"
+
+#. settings-schema.json->options_type->options
+#. 6.4->settings-schema.json->options_type->options
+msgid "Gamma"
+msgstr "伽瑪"
+
+#. settings-schema.json->options_type->tooltip
+#. 6.4->settings-schema.json->options_type->tooltip
+msgid "Values shown in user interface"
+msgstr "在使用者介面中顯示的數值"
+
+#. settings-schema.json->gui_icon_filepath->description
+#. 6.4->settings-schema.json->gui_icon_filepath->description
+msgid "Icon"
+msgstr "圖示"
+
+#. settings-schema.json->gui_icon_filepath->tooltip
+#. 6.4->settings-schema.json->gui_icon_filepath->tooltip
+msgid "An icon displayed in a panel"
+msgstr "顯示在面板上的圖示"
+
+#. 6.4->settings-schema.json->page_general->title
+msgid "General"
+msgstr "一般"
+
+#. 6.4->settings-schema.json->section_presets->title
+#. 6.4->settings-schema.json->preset_list->description
+msgid "Your presets"
+msgstr "預設組態"
+
+#. 6.4->settings-schema.json->disable_nightmode->description
+msgid "Disable Night Mode"
+msgstr "停用夜間模式"
+
+#. 6.4->settings-schema.json->disable_nightmode->tooltip
+msgid ""
+"Disable Cinnamon Night Mode while this applet is running.\n"
+"This prevents the screen from flickering.\n"
+"The adjustment time can be up to twice the number of seconds indicated below."
+msgstr ""
+"當此小程式執行時，停用 Cinnamon 夜間模式。\n"
+"這能防止螢幕閃爍。\n"
+"調整時間最長可達下方指定秒數的兩倍。"
+
+#. 6.4->settings-schema.json->smooth_duration-label->description
+msgid ""
+"The changes are made step by step.\n"
+"Here you define the duration (in milliseconds) of each step in which the "
+"values are changed by one unit, if necessary.\n"
+"0 means instantaneous changes.\n"
+"Recommended value: between 200 and 300."
+msgstr ""
+
+#. 6.4->settings-schema.json->smooth_duration->description
+msgid "Step duration (ms)"
+msgstr ""
+
+#. 6.4->settings-schema.json->apply_changing_monitors->description
+msgid "Apply when the number of monitors changes"
+msgstr "當螢幕數量變更時套用"
+
+#. 6.4->settings-schema.json->brightness_up_shortcut->description
+msgid "Hotkey to Increase brightness"
+msgstr "增加亮度的熱鍵"
+
+#. 6.4->settings-schema.json->brightness_down_shortcut->description
+msgid "Hotkey to Decrease brightness"
+msgstr "降低亮度的熱鍵"
+
+#. 6.4->settings-schema.json->preset_label->description
+msgid ""
+"You can define or modify presets below, which can then be accessed via the "
+"applet's context menu.\n"
+"Only the first Start at Sunrise and Start at Sunset checked boxes are taken "
+"into account."
+msgstr ""
+"您可以在下方定義或修改預設組態，並可透過小程式的右鍵選單存取。\n"
+"請注意，系統只會採用第一個勾選的「日出時啟用」及「日落時啟用」選項。"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid "Name"
+msgstr "名稱"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Show\n"
+"in menu"
+msgstr ""
+"在選單中\n"
+"顯示"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Gamma\n"
+"Red"
+msgstr ""
+"伽瑪\n"
+"紅"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Gamma\n"
+"Green"
+msgstr ""
+"伽瑪\n"
+"綠"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Gamma\n"
+"Blue"
+msgstr ""
+"伽瑪\n"
+"藍"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Start at\n"
+"Sunrise"
+msgstr ""
+"於日出時\n"
+"啟用"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Start at\n"
+"Sunset"
+msgstr ""
+"於日落時\n"
+"啟用"
+
+#. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
+msgid "Set Sunrise and Sunset times"
+msgstr "設定日出與日落時間"
+
+#. 6.4->settings-schema.json->preset_reload->description
+msgid "Apply all changes"
+msgstr "套用所有變更"
