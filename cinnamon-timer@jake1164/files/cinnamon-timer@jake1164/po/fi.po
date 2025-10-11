@@ -202,13 +202,11 @@ msgstr "Hälytysajan näyttäminen lähitulevaisuudessa"
 msgid ""
 "If the alarm time is less than the minutes specified below away,\n"
 "the alarm time can be displayed with more details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
 msgstr ""
 "Jos hälytysaika on määritetty alle minuutin päähän,\n"
 "se voidaan näyttää tarkemmilla tiedoilla\n"
-"(katso https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
-"time-format)"
+"(katso https://docs.gtk.org/glib/method.DateTime.format.html)"
 
 #. 3.4->settings-schema.json->alarmtime-format-large->description
 #. 6.4->settings-schema.json->alarmtime-format-large->description
@@ -220,13 +218,11 @@ msgstr "Hälytysajan näyttäminen pidemmällä tulevaisuudessa"
 msgid ""
 "If the alarm time is more than the minutes specified below away,\n"
 "the alarm time can be displayed with less details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
 msgstr ""
 "Jos hälytysaika on määritetty pidemmälle kuin minuutin päähän,\n"
 "se voidaan näyttää vähemmillä tiedoilla\n"
-"(katso https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
-"time-format)"
+"(katso https://docs.gtk.org/glib/method.DateTime.format.html)"
 
 #. 3.4->settings-schema.json->alarmtime-format-switchover->units
 #. 6.4->settings-schema.json->alarmtime-format-switchover->units
