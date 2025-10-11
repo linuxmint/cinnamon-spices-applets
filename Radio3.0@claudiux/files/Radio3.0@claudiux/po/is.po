@@ -6,47 +6,47 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Radio3.0@claudiux 2.2.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/iss"
-"ues\n"
-"POT-Creation-Date: 2025-09-10 19:42+0200\n"
-"PO-Revision-Date: 2025-09-16 10:22+0000\n"
-"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-11 12:31+0200\n"
+"PO-Revision-Date: 2025-10-11 12:37+0200\n"
+"Last-Translator: claudiux\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:285
+#. applet.js:286
 msgid "unassigned"
 msgstr "ekki úthlutað"
 
-#. applet.js:286
+#. applet.js:287
 msgid "Display Album Art at full size"
 msgstr "Birta umslagsmyndir í fullri stærð"
 
-#. applet.js:388
+#. applet.js:389
 msgid "This is your own list of Categories and Radio Stations."
 msgstr "Þetta er þinn eigin listi yfir flokka og útvarpsstöðvar."
 
-#. applet.js:389
+#. applet.js:390
 msgid "You can add more using the [+] button."
 msgstr "Þú getur bætt við fleiri með því að ýta á [+] hnappinn."
 
-#. applet.js:390
+#. applet.js:391
 msgid "For a category, fill in only its name; leave the other fields empty."
 msgstr ""
 "Fyrir flokk skaltu einungis setja inn heiti hans; skildu aðra reiti eftir "
 "auða."
 
-#. applet.js:391
+#. applet.js:392
 msgid "For a radio station, enter only its name and its streaming URL."
 msgstr ""
 "Fyrir útvarpsstöð skaltu setja aðeins in nafn hennar og slóð streymisins."
 
-#. applet.js:392
+#. applet.js:393
 msgid ""
 "You can order the rows by dragging and dropping or by using the buttons and "
 "tools below the list."
@@ -54,7 +54,7 @@ msgstr ""
 "Þú getur raðað röðunum með því að draga og sleppa eða með hnöppunum hér "
 "fyrir neðan listann."
 
-#. applet.js:393
+#. applet.js:394
 msgid ""
 "The buttons on the right below the list allow you to navigate page by page "
 "or category by category."
@@ -62,7 +62,7 @@ msgstr ""
 "Hnapparnir hægra megin neðan við listann gera þér kleift að flakka síðu "
 "fyrir síðu eða flokk fyrir flokk."
 
-#. applet.js:394
+#. applet.js:395
 msgid ""
 "To search for one of your stations, click on the list and start writing its "
 "name."
@@ -70,7 +70,7 @@ msgstr ""
 "Til að leita að einhverri stöðvanna þinna, skaltu smella á listann og byrja "
 "að skrifa nafn hennar."
 
-#. applet.js:395
+#. applet.js:396
 msgid ""
 "To easily add stations to your list, use the following 2 tabs: Search and "
 "Import."
@@ -78,12 +78,12 @@ msgstr ""
 "Til að bæta stöðvum á listann þinn á einfaldan máta, skaltu nota "
 "eftirfarandi 2 flipa: 'Leita' og 'Flytja inn'."
 
-#. applet.js:396
+#. applet.js:397
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr ""
 "Merktu í valmyndarreit færslu til að birta stöð eða flokk í valmyndinni."
 
-#. applet.js:397
+#. applet.js:398
 msgid ""
 "Check its '♪/➟' box to listen to the station or move it to another category "
 "using the tools below the list."
@@ -91,11 +91,11 @@ msgstr ""
 "Merktu við '♪/➟' reit stöðvar til að hlusta á hana eða færðu hana yfir í "
 "annan flokk með verkfærunum fyrir neðan listann."
 
-#. applet.js:399
+#. applet.js:400
 msgid "You can have your list of stations checked by internet databases."
 msgstr "Þú getur látið gagnagrunna á internetinu fara yfir stöðvarnar þínar."
 
-#. applet.js:400
+#. applet.js:401
 msgid ""
 "Any station recognized by one of these databases will receive a Universal "
 "Unique Identifier (UUID) provided by this database."
@@ -103,7 +103,7 @@ msgstr ""
 "Allar stöðvar sem einhver þessara gagnagrunna þekkir, mun fá einstakt "
 "auðkenni (Universal Unique Identifier - UUID) frá viðkomandi gagnagrunni."
 
-#. applet.js:401
+#. applet.js:402
 msgid ""
 "So, if a streaming URL was changed, a next check would update it and you can "
 "continue to listen to the affected station."
@@ -112,7 +112,7 @@ msgstr ""
 "næsta athugun uppfæra hana og þú getur áfram hlustað á viðkomandi "
 "útvarpsstöð."
 
-#. applet.js:403
+#. applet.js:404
 msgid ""
 "Here you can search for other stations in a free radio database accessible "
 "via the Internet."
@@ -120,7 +120,7 @@ msgstr ""
 "Hér geturðu leitað að öðrum stöðvum í frjálsum netgagnagrunni yfir "
 "útvarpsstöðvar."
 
-#. applet.js:404
+#. applet.js:405
 msgid ""
 "Fill in at least a few fields of the form below then click on the "
 "'Search ...' button."
@@ -128,7 +128,7 @@ msgstr ""
 "Fylltu inn helst nokkra reiti hér fyrir neðan og smelltu svo á 'Leita ...' "
 "hnappinn."
 
-#. applet.js:405
+#. applet.js:406
 msgid ""
 "Each time this button is clicked, a new results page is displayed in the "
 "second part of this page, where you can test certain stations and include "
@@ -138,7 +138,7 @@ msgstr ""
 "leitarniðurstöðum á neðri hluta flipans, þar sem þú getur prófað tilteknar "
 "útvarpsstöðvar og fært þær svo inn í valmyndina þína."
 
-#. applet.js:406
+#. applet.js:407
 msgid ""
 "A station already in your menu will only appear in search results if its "
 "streaming URL has changed."
@@ -146,7 +146,7 @@ msgstr ""
 "Stöðvar sem þegar eru í valmyndinni þinni munu aðeins birtast í "
 "leitarniðurstöðum ef slóð streymisins þeirra hefur breyst."
 
-#. applet.js:407
+#. applet.js:408
 msgid ""
 "When no new page appears, it means that all results matching your search "
 "criteria have been displayed."
@@ -154,7 +154,7 @@ msgstr ""
 "Þegar engin ný síða birtist, táknar það að allar samsvarandi "
 "leitarniðurstöður hafa komið fram."
 
-#. applet.js:409
+#. applet.js:410
 msgid ""
 "You can import a file containing the name and streaming URL of at least one "
 "radio station."
@@ -162,7 +162,7 @@ msgstr ""
 "Þú getur flutt inn skrá sem inniheldur nafn og streymisslóð a.m.k. einnar "
 "útvarpsstöðvar."
 
-#. applet.js:410
+#. applet.js:411
 msgid ""
 "These radio stations are displayed in the list below. You can test them by "
 "checking their ♪ box."
@@ -170,12 +170,12 @@ msgstr ""
 "Þessar útvarpsstöðvar birtast á listanum hér fyrir neðan. Þú getur prófað "
 "þær með því að merkja í ♪ reit þeirra."
 
-#. applet.js:411
+#. applet.js:412
 msgid "Then manage this list with the buttons at the bottom of this tab."
 msgstr ""
 "Síðan geturðu sýslað með þennan lista með hnöppunum neðst á þessum flipa."
 
-#. applet.js:413
+#. applet.js:414
 msgid ""
 "In the Shoutcast directory, click the download button to the left of the "
 "station name."
@@ -183,7 +183,7 @@ msgstr ""
 "Í Shoutcast-möppunni skaltu smella á niðurhalshnappinn vinstra megin við "
 "heiti útvarpsstöðvar."
 
-#. applet.js:414
+#. applet.js:415
 msgid ""
 "Select the open format (.XSPF) and save the file giving it the same name as "
 "the station."
@@ -191,40 +191,40 @@ msgstr ""
 "Veldu opna sniðið (.XSPF) og vistaðu skrána með sama heiti og útvarpsstöðin "
 "ber."
 
-#. applet.js:415
+#. applet.js:416
 msgid "This file can then be imported here."
 msgstr "Þessa skrá er þá hægt að flytja inn hér."
 
-#. applet.js:417
+#. applet.js:418
 #, javascript-format
 msgid "%s bytes = %s GB = %s GiB"
 msgstr "%s bæti = %s GB = %s GiB"
 
-#. applet.js:419
+#. applet.js:420
 msgid "Sun."
 msgstr "Sun."
 
-#. applet.js:419
+#. applet.js:420
 msgid "Mon."
 msgstr "Mán."
 
-#. applet.js:419
+#. applet.js:420
 msgid "Tue."
 msgstr "Þri."
 
-#. applet.js:419
+#. applet.js:420
 msgid "Wed."
 msgstr "Mið."
 
-#. applet.js:419
+#. applet.js:420
 msgid "Thu."
 msgstr "Fim."
 
-#. applet.js:419
+#. applet.js:420
 msgid "Fri."
 msgstr "Fös."
 
-#. applet.js:419
+#. applet.js:420
 msgid "Sat."
 msgstr "Lau."
 
@@ -236,230 +236,230 @@ msgstr "Lau."
 #. settings-schema.json->search-order->options
 #. settings-schema.json->alarm-clock-working-days-radio->options
 #. settings-schema.json->alarm-clock-workoff-days-radio->options
-#. applet.js:585 applet.js:603 applet.js:5506 applet.js:5522
+#. applet.js:586 applet.js:604 applet.js:5511 applet.js:5527
 msgid "(Undefined)"
 msgstr "(Óskilgreint)"
 
 #. settings-schema.json->category-to-move->options
-#. applet.js:586 applet.js:5523
+#. applet.js:587 applet.js:5528
 msgid "(Blacklist)"
 msgstr "(bannlisti)"
 
-#. applet.js:2259
+#. applet.js:2263
 msgid "Start"
 msgstr "Byrja"
 
-#. applet.js:2267 applet.js:3010
+#. applet.js:2271 applet.js:3014
 msgid "Stop"
 msgstr "Stöðva"
 
-#. applet.js:2541
+#. applet.js:2545
 msgid "Volume: %s%"
 msgstr "Hljóðstyrkur: %s%"
 
-#. applet.js:2546
+#. applet.js:2550
 msgid "Middle-Click: Stop Recording"
 msgstr "Miðjusmellur: Stöðva upptöku"
 
-#. applet.js:2548
+#. applet.js:2552
 msgid "Middle-click: ON/OFF"
 msgstr "Miðjusmellur: KVEIKT/SLÖKKT"
 
-#. applet.js:2550
+#. applet.js:2554
 msgid "Click: Select another station"
 msgstr "Smella: velja aðra stöð"
 
-#. applet.js:2551
+#. applet.js:2555
 msgid "Scroll wheel: volume change"
 msgstr "Skrunhjól: breyting hljóðstyrks"
 
-#. applet.js:2554
+#. applet.js:2558
 msgid "Click to select a station"
 msgstr "Smelltu til að velja stöð"
 
-#. applet.js:2560
+#. applet.js:2564
 msgid "Wake Up"
 msgstr "Vekja"
 
-#. applet.js:2638 applet.js:3028 applet.js:5018
+#. applet.js:2642 applet.js:3032 applet.js:5023
 msgid "Configure..."
 msgstr "Grunnstilla..."
 
-#. applet.js:2642 applet.js:3020
+#. applet.js:2646 applet.js:3024
 msgid "Search for new stations..."
 msgstr "Leita að nýjum útvarpsstöðvum..."
 
-#. applet.js:2648
+#. applet.js:2652
 msgid "Load a sample station list"
 msgstr "Hlaða inn sýnishorni stöðvalista"
 
-#. applet.js:2695 applet.js:3032 applet.js:5088
+#. applet.js:2699 applet.js:3036 applet.js:5093
 msgid "Sound Settings"
 msgstr "Hljóðstillingar"
 
-#. applet.js:2766
+#. applet.js:2770
 msgid "Watch on YT"
 msgstr "Skoða á YouTube"
 
-#. applet.js:2773
+#. applet.js:2777
 msgid "Try to download it from YT (unsafe)"
 msgstr "Prófa að sækja þetta frá YouTube (óöruggt)"
 
-#. applet.js:2793
+#. applet.js:2797
 msgid "Recently Played Stations:"
 msgstr "Nýlega spilaðar útvarpsstöðvar:"
 
-#. applet.js:2844
+#. applet.js:2848
 msgid "Visit the home page of this station"
 msgstr "Fara á heimasíðu útvarpsstöðvarinnar"
 
-#. applet.js:2893
+#. applet.js:2897
 msgid "Categories"
 msgstr "Flokkar"
 
-#. applet.js:2896
+#. applet.js:2900
 msgid "Radio Stations"
 msgstr "Útvarpsstöðvar"
 
-#. applet.js:2907
+#. applet.js:2911
 msgid "All Categories"
 msgstr "Allir flokkar"
 
-#. applet.js:2952
+#. applet.js:2956
 msgid "My Radio Stations"
 msgstr "Útvarpsstöðvarnar mínar"
 
-#. applet.js:3152
+#. applet.js:3156
 msgid "Downloading..."
 msgstr "Sæki..."
 
-#. applet.js:3154
+#. applet.js:3158
 msgid "Stop downloading"
 msgstr "Hætta að sækja"
 
-#. applet.js:3260
+#. applet.js:3264
 msgid "Download complete"
 msgstr "Niðurhali lokið"
 
 #. settings-schema.json->button-open-rec-folder->description
 #. settings-schema.json->recordings-open-folder->description
-#. applet.js:3262 applet.js:3271 applet.js:4738 applet.js:4747 applet.js:4756
-#. applet.js:5051
+#. applet.js:3266 applet.js:3275 applet.js:4743 applet.js:4752 applet.js:4761
+#. applet.js:5056
 msgid "Open the recordings folder"
 msgstr "Opna upptökumöppuna"
 
-#. applet.js:3269 applet.js:4735 applet.js:4745 applet.js:4754
+#. applet.js:3273 applet.js:4740 applet.js:4750 applet.js:4759
 msgid "An error seems to have occurred during recording!"
 msgstr "Villa virðist hafa komið upp við upptöku!"
 
-#. applet.js:3270 applet.js:4737 applet.js:4746 applet.js:4755
+#. applet.js:3274 applet.js:4742 applet.js:4751 applet.js:4760
 msgid "Please check this record."
 msgstr "Athugaðu þessa upptöku."
 
-#. applet.js:3377 applet.js:3411
+#. applet.js:3381 applet.js:3415
 msgid "Record from now"
 msgstr "Taka upp héðan"
 
-#. applet.js:3395 applet.js:5408
+#. applet.js:3399 applet.js:5413
 msgid "Stop Current Recording"
 msgstr "Stöðva fyrirliggjandi upptöku"
 
-#. applet.js:3543
+#. applet.js:3548
 #, javascript-format
 msgid "Playing %s%s"
 msgstr "Spila %s%s"
 
-#. applet.js:3597
+#. applet.js:3602
 msgid "Radio OFF"
 msgstr "Útvarp AF"
 
-#. applet.js:3725
+#. applet.js:3730
 msgid "Unable to record anything!"
 msgstr "Mistókst að taka neitt upp!"
 
-#. applet.js:3725 applet.js:5068 applet.js:5227
+#. applet.js:3730 applet.js:5073 applet.js:5232
 msgid "Insufficient space"
 msgstr "Ekki nóg diskpláss"
 
-#. applet.js:3725
+#. applet.js:3730
 msgid "The limit you set has been reached."
 msgstr "Takmörkum sem þú settir hefur verið náð."
 
-#. applet.js:4126
+#. applet.js:4131
 msgid "Please Log Out then Log In"
 msgstr "Skráðu þig út og svo inn aftur"
 
-#. applet.js:4126
+#. applet.js:4131
 msgid "to finalize yt-dlp update"
 msgstr "til að ljúka uppfærslu á yt-dlp"
 
-#. applet.js:4261
+#. applet.js:4266
 msgid "Nothing to save."
 msgstr "Ekkert til að vista."
 
-#. applet.js:4274
+#. applet.js:4279
 msgid "List of saved radio stations"
 msgstr "Listi yfir vistaðar útvarpsstöðvar"
 
-#. applet.js:4292
+#. applet.js:4297
 msgid "This will replace all current radio stations."
 msgstr "Þetta mun skipta út öllum fyrirliggjandi útvarpsstöðvum."
 
-#. applet.js:4293
+#. applet.js:4298
 msgid "Are you sure you want to continue?"
 msgstr "Ertu viss um að þú viljir halda áfram?"
 
-#. applet.js:4357
+#. applet.js:4362
 msgid "Update in progress"
 msgstr "Uppfærsla í gangi"
 
-#. applet.js:4357
+#. applet.js:4362
 msgid "It may take a while ... Please wait."
 msgstr "Þetta getur tekið dálítinn tíma, sýndu smá þolinmæði."
 
-#. applet.js:4449
+#. applet.js:4454
 msgid "Update completed successfully"
 msgstr "Tókst að ljúka uppfærslunni"
 
-#. applet.js:4620 applet.js:4676
+#. applet.js:4625 applet.js:4681
 msgid "ERROR: Invalid YT video URL!"
 msgstr "Villa: Ógild slóð á YouTube-myndskeið!"
 
-#. applet.js:4645
+#. applet.js:4650
 msgid "Unable to extract a single soundtrack"
 msgstr "Mistókst að ná í stakt hljóðspor"
 
-#. applet.js:4645
+#. applet.js:4650
 msgid "Maybe it's a playlist?"
 msgstr "Er þetta kannski spilunarlisti?"
 
-#. applet.js:4678
+#. applet.js:4683
 msgid "Close"
 msgstr "Loka"
 
-#. applet.js:4836 applet.js:5295 applet.js:5313
+#. applet.js:4841 applet.js:5300 applet.js:5318
 msgid "Cancel"
 msgstr "Hætta við"
 
-#. applet.js:4837
+#. applet.js:4842
 msgid "Radio3.0 applet"
 msgstr "Radio3.0 smáforritið"
 
-#. applet.js:4840
+#. applet.js:4845
 msgid "Enable the OSD150 extension"
 msgstr "Virkjaðu OSD150 forritsaukann"
 
-#. applet.js:4841
+#. applet.js:4846
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr ""
 "Til að fá fram láréttan OSD-stjórntexta, þarftu að virkja OSD150 "
 "forritsaukann."
 
-#. applet.js:4858
+#. applet.js:4863
 msgid "Download the OSD150 extension"
 msgstr "Sækja OSD150 forritsaukann"
 
-#. applet.js:4859
+#. applet.js:4864
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
@@ -469,99 +469,99 @@ msgstr ""
 "Smelltu á niðurhalshnappinn og leitaðu síðan að OSD150 og veldu svo ⬇ "
 "hnappinn."
 
-#. applet.js:4990
+#. applet.js:4995
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Fjarlægja '%s'"
 
-#. applet.js:4998
+#. applet.js:5003
 msgid "About..."
 msgstr "Um hugbúnaðinn..."
 
-#. applet.js:5005
+#. applet.js:5010
 msgid "Manual..."
 msgstr "Handvirkt..."
 
-#. applet.js:5012
+#. applet.js:5017
 msgid "Reload this applet"
 msgstr "Endurhlaða þessu smáforriti"
 
-#. applet.js:5029
+#. applet.js:5034
 msgid "Schedule a background record..."
 msgstr "Áætla upptöku í bakgrunni..."
 
-#. applet.js:5036
+#. applet.js:5041
 msgid "Configure the Alarm Clock..."
 msgstr "Grunnstilla vekjaraklukkuna..."
 
-#. applet.js:5043
+#. applet.js:5048
 msgid "Extract soundtrack from YouTube video..."
 msgstr "Ná í hljóðspor úr YouTube-myndskeiði..."
 
-#. applet.js:5065 applet.js:5224
+#. applet.js:5070 applet.js:5229
 msgid "(auto)"
 msgstr "(sjálfvirkt)"
 
-#. applet.js:5065 applet.js:5224
+#. applet.js:5070 applet.js:5229
 msgid "(manual)"
 msgstr "(handvirkt)"
 
-#. applet.js:5068 applet.js:5227 applet.js:5455
+#. applet.js:5073 applet.js:5232 applet.js:5460
 msgid "Stop Recording"
 msgstr "Stöðva upptöku"
 
-#. applet.js:5068 applet.js:5227
+#. applet.js:5073 applet.js:5232
 msgid "Start Recording"
 msgstr "Hefja upptöku"
 
-#. applet.js:5084
+#. applet.js:5089
 msgid "Cancel downloads from YT"
 msgstr "Hætta við niðurhal frá YT"
 
-#. applet.js:5093
+#. applet.js:5098
 msgid "Pulse Effects"
 msgstr "Púls-áhrif"
 
-#. applet.js:5098
+#. applet.js:5103
 msgid "Easy Effects"
 msgstr "Slökunar-áhrif"
 
-#. applet.js:5103
+#. applet.js:5108
 msgid "Radio ON at startup"
 msgstr "Kveikt á útvarpi í ræsingu"
 
-#. applet.js:5112
+#. applet.js:5117
 msgid "Display Station Logo"
 msgstr "Birta táknmerki stöðvar"
 
-#. applet.js:5122
+#. applet.js:5127
 msgid "Album Art desklet settings"
 msgstr "Stillingar skjágræju fyrir umslagsmyndir"
 
 #. settings-schema.json->alarm-clock-wake-me-up->description
-#. applet.js:5127
+#. applet.js:5132
 msgid "Wake me up!"
 msgstr "Vekja mig!"
 
-#. applet.js:5136
+#. applet.js:5141
 msgid "Show Album Art on desktop"
 msgstr "Sýna umslagsmyndir á skjáborði"
 
 #. settings-schema.json->dont-check-dependencies->description
-#. applet.js:5145
+#. applet.js:5150
 msgid "Do not check about dependencies"
 msgstr "Ekki skoða kerfiskröfur"
 
 #. settings-schema.json->show-volume-level-near-icon->description
-#. applet.js:5155
+#. applet.js:5160
 msgid "Display volume level near icon"
 msgstr "Birta hljóðstyrk nálægt táknmynd"
 
-#. applet.js:5292
+#. applet.js:5297
 msgid "You need the 'Album Art 3.0' desklet"
 msgstr "Þú þarft 'Album Art 3.0' skjágræjuna"
 
-#. applet.js:5293
+#. applet.js:5298
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
@@ -569,15 +569,15 @@ msgstr ""
 "Þú getur virkjað það með því að smella á fyrsta hnappinn og leita síðan að "
 "albúmi."
 
-#. applet.js:5294 applet.js:5312
+#. applet.js:5299 applet.js:5317
 msgid "Desklets"
 msgstr "Skjágræjur (desklets)"
 
-#. applet.js:5310
+#. applet.js:5315
 msgid "You need to activate the 'Album Art 3.0' desklet"
 msgstr "Þú þarft að virkja 'Album Art 3.0' skjágræjuna"
 
-#. applet.js:5311
+#. applet.js:5316
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
@@ -585,57 +585,57 @@ msgstr ""
 "Þú getur virkjað það með því að smella á fyrsta hnappinn, leita síðan að "
 "albúmi og bæta því við með [+] hnappnum."
 
-#. applet.js:5456
+#. applet.js:5461
 msgid "Close without stopping recording"
 msgstr "Loka án þess að stöðva upptöku"
 
-#. applet.js:5671
+#. applet.js:5676
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr "Hefja upptöku frá %s:%s til %s:%s"
 
-#. applet.js:5683
+#. applet.js:5688
 msgid "Recording completed"
 msgstr "Upptöku lokið"
 
-#. applet.js:5808
+#. applet.js:5813
 msgid "This will import a new file containing radio stations."
 msgstr "Þetta mun flytja inn nýja skrá sem inniheldur útvarpsstöðvar."
 
-#. applet.js:5809
+#. applet.js:5814
 msgid "Do you want to continue?"
 msgstr "Viltu halda áfram?"
 
-#. applet.js:5886
+#. applet.js:5891
 msgid "No new radio in your list."
 msgstr "Engin ný útvarpsstöð á listanum þínum."
 
-#. applet.js:5888
+#. applet.js:5893
 msgid "One more radio in your list."
 msgstr "Ein ný útvarpsstöð á listanum þínum."
 
-#. applet.js:5890
+#. applet.js:5895
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr "%s nýjar útvarpsstöðvar á listanum þínum."
 
-#. applet.js:6149
+#. applet.js:6154
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr ""
 "Það eru engar nýjar útvarpsstöðvar til að bæta á valmynd Radio3.0 "
 "smáforritsins"
 
-#. applet.js:6151
+#. applet.js:6156
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr "Nýrri útvarpsstöð hefur verið bætt á valmynd Radio3.0 smáforritsins"
 
-#. applet.js:6153
+#. applet.js:6158
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr ""
 "%s nýjum útvarpsstöðvum hefur verið bætt á valmynd Radio3.0 smáforritsins"
 
-#. applet.js:6378
+#. applet.js:6383
 #, javascript-format
 msgid "%s kbps"
 msgstr "%s kb/sek"
@@ -1724,7 +1724,7 @@ msgstr ""
 "lengur spólað til baka í biðminninu (með hjálp sound150@claudiux "
 "smáforritsins)."
 
-#. settings-schema.json->cache-mins->description
+#. settings-schema.json->cache-minutes->description
 msgid ""
 "Minutes to cache\n"
 "0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
@@ -1742,30 +1742,16 @@ msgstr ""
 "(skrifar pakkagögn í bráðabirgðaskrá, í stað þess að halda þeim í "
 "vinnsluminni.)"
 
-#. settings-schema.json->cache-dir->description
-msgid ""
-"Directory used for data caching\n"
-"(Use with caution on SSD disks. Prefer a directory stored in RAM, with "
-"sufficient free space.)"
-msgstr ""
-"Mappa notuð undir biðminni gagna\n"
-"(Notist með varfærni á SSD-diskum. Veldu frekar möppu sem geymd er í RAM-"
-"vinnsluminni, með nægilegu lausu plássi.)"
-
-#. settings-schema.json->cache-dir-open->description
-msgid "Open cache directory"
-msgstr "Opna biðminnismöppu"
-
 #. settings-schema.json->cache-stream-size->description
 msgid "Stream cache size"
 msgstr "Stærð biðminnis fyrir streymi"
 
 #. settings-schema.json->cache-stream-size->tooltip
 msgid ""
-"The amount of stream cache. Default: 1 MiB.\n"
+"The amount of stream cache. Default: 10 MiB.\n"
 "Beware, setting this to a large value can reduce performance."
 msgstr ""
-"Magn biðminnis fyrir streymi. Sjálfgefið: 1 MiB.\n"
+"Magn biðminnis fyrir streymi. Sjálfgefið: 10 MiB.\n"
 "Aðvörun, sé þetta sett á hátt gildi getur það komið niður á afköstum."
 
 #. settings-schema.json->cache-stream-size->options
@@ -1815,6 +1801,22 @@ msgstr "10 MiB"
 #. settings-schema.json->cache-stream-size->options
 msgid "20 MiB"
 msgstr "20 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "30 MiB"
+msgstr "30 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "40 MiB"
+msgstr "40 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "50 MiB"
+msgstr "50 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "100 MiB"
+msgstr "100 MiB"
 
 #. settings-schema.json->recording-path->description
 msgid "Path to the folder that will contain your future recordings"
@@ -1925,8 +1927,8 @@ msgid ""
 "Ignoring Youtube features reduces CPU load. But loading album art becomes "
 "impossible."
 msgstr ""
-"Hunsun á YT-eiginleikum minnkar álag á örgjörva. En þá er ekki hægt að hlaða"
-" inn myndefni myndskeiða."
+"Hunsun á YT-eiginleikum minnkar álag á örgjörva. En þá er ekki hægt að hlaða "
+"inn myndefni myndskeiða."
 
 #. settings-schema.json->yt-cookies-from->description
 msgid "Use cookies from"

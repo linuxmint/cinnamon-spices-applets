@@ -8,85 +8,86 @@ msgstr ""
 "Project-Id-Version: Radio3.0@claudiux 3.5.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-10 19:42+0200\n"
-"PO-Revision-Date: 2025-08-07 01:21+0800\n"
-"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"POT-Creation-Date: 2025-10-11 12:31+0200\n"
+"PO-Revision-Date: 2025-10-11 12:40+0200\n"
+"Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:285
+#. applet.js:286
 msgid "unassigned"
 msgstr "未指定"
 
-#. applet.js:286
+#. applet.js:287
 msgid "Display Album Art at full size"
 msgstr "以原始尺寸顯示專輯封面"
 
-#. applet.js:388
+#. applet.js:389
 msgid "This is your own list of Categories and Radio Stations."
 msgstr "這是自訂的分類與廣播電台清單。"
 
-#. applet.js:389
+#. applet.js:390
 msgid "You can add more using the [+] button."
 msgstr "可使用 [+] 按鈕新增更多項目。"
 
-#. applet.js:390
+#. applet.js:391
 msgid "For a category, fill in only its name; leave the other fields empty."
 msgstr "若要新增分類，僅需填寫名稱，其餘欄位請留空。"
 
-#. applet.js:391
+#. applet.js:392
 msgid "For a radio station, enter only its name and its streaming URL."
 msgstr "新增廣播電台時，請填寫名稱與串流網址。"
 
-#. applet.js:392
+#. applet.js:393
 msgid ""
 "You can order the rows by dragging and dropping or by using the buttons and "
 "tools below the list."
 msgstr "可透過拖曳排序，或使用清單下方的按鈕與工具來調整順序。"
 
-#. applet.js:393
+#. applet.js:394
 msgid ""
 "The buttons on the right below the list allow you to navigate page by page "
 "or category by category."
 msgstr "清單下方右側的按鈕可讓您逐頁或按分類瀏覽。"
 
-#. applet.js:394
+#. applet.js:395
 msgid ""
 "To search for one of your stations, click on the list and start writing its "
 "name."
 msgstr "請點選清單並輸入電台名稱以進行搜尋。"
 
-#. applet.js:395
+#. applet.js:396
 msgid ""
 "To easily add stations to your list, use the following 2 tabs: Search and "
 "Import."
 msgstr "如需快速新增電台，請使用下方的「搜尋」與「匯入」分頁。"
 
-#. applet.js:396
+#. applet.js:397
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr "勾選「選單」方塊可將該電台或分類顯示於選單。"
 
-#. applet.js:397
+#. applet.js:398
 msgid ""
 "Check its '♪/➟' box to listen to the station or move it to another category "
 "using the tools below the list."
 msgstr "勾選「♪/➟」方塊可收聽該電台，或利用下方工具將其移至其他分類。"
 
-#. applet.js:399
+#. applet.js:400
 msgid "You can have your list of stations checked by internet databases."
 msgstr "可透過網路資料庫檢查電台清單。"
 
-#. applet.js:400
+#. applet.js:401
 msgid ""
 "Any station recognized by one of these databases will receive a Universal "
 "Unique Identifier (UUID) provided by this database."
 msgstr "資料庫識別出的任何電台，都將收到該資料庫提供的通用唯一識別碼 (UUID)。"
 
-#. applet.js:401
+#. applet.js:402
 msgid ""
 "So, if a streaming URL was changed, a next check would update it and you can "
 "continue to listen to the affected station."
@@ -94,19 +95,19 @@ msgstr ""
 "如此一來，若串流網址變更，下次檢查時便會自動更新，讓您能繼續收聽受影響的電"
 "台。"
 
-#. applet.js:403
+#. applet.js:404
 msgid ""
 "Here you can search for other stations in a free radio database accessible "
 "via the Internet."
 msgstr "可在此透過網際網路搜尋免費電台資料庫中的其他電台。"
 
-#. applet.js:404
+#. applet.js:405
 msgid ""
 "Fill in at least a few fields of the form below then click on the "
 "'Search ...' button."
 msgstr "請至少填寫下方表單的部分欄位，然後點選「搜尋...」按鈕。"
 
-#. applet.js:405
+#. applet.js:406
 msgid ""
 "Each time this button is clicked, a new results page is displayed in the "
 "second part of this page, where you can test certain stations and include "
@@ -115,80 +116,80 @@ msgstr ""
 "每次點選此按鈕，將於本頁下方顯示新的結果頁面，您可在該處測試部分電台並將其納"
 "入選單。"
 
-#. applet.js:406
+#. applet.js:407
 msgid ""
 "A station already in your menu will only appear in search results if its "
 "streaming URL has changed."
 msgstr "已在選單中的電台，僅當其串流網址變更時才會於搜尋結果中顯示。"
 
-#. applet.js:407
+#. applet.js:408
 msgid ""
 "When no new page appears, it means that all results matching your search "
 "criteria have been displayed."
 msgstr "若未顯示新頁面，表示所有符合搜尋條件的結果皆已顯示。"
 
-#. applet.js:409
+#. applet.js:410
 msgid ""
 "You can import a file containing the name and streaming URL of at least one "
 "radio station."
 msgstr "您可匯入包含至少一個電台名稱與串流網址的檔案。"
 
-#. applet.js:410
+#. applet.js:411
 msgid ""
 "These radio stations are displayed in the list below. You can test them by "
 "checking their ♪ box."
 msgstr "這些電台會顯示於下方清單，您可勾選「♪」方塊進行測試。"
 
-#. applet.js:411
+#. applet.js:412
 msgid "Then manage this list with the buttons at the bottom of this tab."
 msgstr "接著請用本分頁底部的按鈕管理此清單。"
 
-#. applet.js:413
+#. applet.js:414
 msgid ""
 "In the Shoutcast directory, click the download button to the left of the "
 "station name."
 msgstr "在 Shoutcast 目錄中，請點選電台名稱左側的下載按鈕。"
 
-#. applet.js:414
+#. applet.js:415
 msgid ""
 "Select the open format (.XSPF) and save the file giving it the same name as "
 "the station."
 msgstr "請選擇開放格式 (.XSPF)，並以電台名稱儲存檔案。"
 
-#. applet.js:415
+#. applet.js:416
 msgid "This file can then be imported here."
 msgstr "此檔案即可於此處匯入。"
 
-#. applet.js:417
+#. applet.js:418
 #, javascript-format
 msgid "%s bytes = %s GB = %s GiB"
 msgstr "%s 位元組 = %s GB = %s GiB"
 
-#. applet.js:419
+#. applet.js:420
 msgid "Sun."
 msgstr "週日"
 
-#. applet.js:419
+#. applet.js:420
 msgid "Mon."
 msgstr "週一"
 
-#. applet.js:419
+#. applet.js:420
 msgid "Tue."
 msgstr "週二"
 
-#. applet.js:419
+#. applet.js:420
 msgid "Wed."
 msgstr "週三"
 
-#. applet.js:419
+#. applet.js:420
 msgid "Thu."
 msgstr "週四"
 
-#. applet.js:419
+#. applet.js:420
 msgid "Fri."
 msgstr "週五"
 
-#. applet.js:419
+#. applet.js:420
 msgid "Sat."
 msgstr "週六"
 
@@ -200,228 +201,228 @@ msgstr "週六"
 #. settings-schema.json->search-order->options
 #. settings-schema.json->alarm-clock-working-days-radio->options
 #. settings-schema.json->alarm-clock-workoff-days-radio->options
-#. applet.js:585 applet.js:603 applet.js:5506 applet.js:5522
+#. applet.js:586 applet.js:604 applet.js:5511 applet.js:5527
 msgid "(Undefined)"
 msgstr "（未定義）"
 
 #. settings-schema.json->category-to-move->options
-#. applet.js:586 applet.js:5523
+#. applet.js:587 applet.js:5528
 msgid "(Blacklist)"
 msgstr ""
 
-#. applet.js:2259
+#. applet.js:2263
 msgid "Start"
 msgstr "開始"
 
-#. applet.js:2267 applet.js:3010
+#. applet.js:2271 applet.js:3014
 msgid "Stop"
 msgstr "停止"
 
-#. applet.js:2541
+#. applet.js:2545
 msgid "Volume: %s%"
 msgstr "音量：%s%"
 
-#. applet.js:2546
+#. applet.js:2550
 msgid "Middle-Click: Stop Recording"
 msgstr "滑鼠中鍵：停止錄音"
 
-#. applet.js:2548
+#. applet.js:2552
 msgid "Middle-click: ON/OFF"
 msgstr "滑鼠中鍵：開啟/關閉"
 
-#. applet.js:2550
+#. applet.js:2554
 msgid "Click: Select another station"
 msgstr "點選：選擇其他電台"
 
-#. applet.js:2551
+#. applet.js:2555
 msgid "Scroll wheel: volume change"
 msgstr "滾輪：調整音量"
 
-#. applet.js:2554
+#. applet.js:2558
 msgid "Click to select a station"
 msgstr "點選以選擇電台"
 
-#. applet.js:2560
+#. applet.js:2564
 msgid "Wake Up"
 msgstr "喚醒"
 
-#. applet.js:2638 applet.js:3028 applet.js:5018
+#. applet.js:2642 applet.js:3032 applet.js:5023
 msgid "Configure..."
 msgstr "設定..."
 
-#. applet.js:2642 applet.js:3020
+#. applet.js:2646 applet.js:3024
 msgid "Search for new stations..."
 msgstr "搜尋新電台..."
 
-#. applet.js:2648
+#. applet.js:2652
 msgid "Load a sample station list"
 msgstr "載入範例電台清單"
 
-#. applet.js:2695 applet.js:3032 applet.js:5088
+#. applet.js:2699 applet.js:3036 applet.js:5093
 msgid "Sound Settings"
 msgstr "音效設定"
 
-#. applet.js:2766
+#. applet.js:2770
 msgid "Watch on YT"
 msgstr "在 YT 上觀看"
 
-#. applet.js:2773
+#. applet.js:2777
 msgid "Try to download it from YT (unsafe)"
 msgstr "嘗試從 YT 下載 (不安全)"
 
-#. applet.js:2793
+#. applet.js:2797
 msgid "Recently Played Stations:"
 msgstr "最近播放的電台："
 
-#. applet.js:2844
+#. applet.js:2848
 msgid "Visit the home page of this station"
 msgstr "造訪此電台的首頁"
 
-#. applet.js:2893
+#. applet.js:2897
 msgid "Categories"
 msgstr "分類"
 
-#. applet.js:2896
+#. applet.js:2900
 msgid "Radio Stations"
 msgstr "廣播電台"
 
-#. applet.js:2907
+#. applet.js:2911
 msgid "All Categories"
 msgstr "所有分類"
 
-#. applet.js:2952
+#. applet.js:2956
 msgid "My Radio Stations"
 msgstr "我的電台"
 
-#. applet.js:3152
+#. applet.js:3156
 msgid "Downloading..."
 msgstr "下載中..."
 
-#. applet.js:3154
+#. applet.js:3158
 msgid "Stop downloading"
 msgstr "停止下載"
 
-#. applet.js:3260
+#. applet.js:3264
 msgid "Download complete"
 msgstr "下載完成"
 
 #. settings-schema.json->button-open-rec-folder->description
 #. settings-schema.json->recordings-open-folder->description
-#. applet.js:3262 applet.js:3271 applet.js:4738 applet.js:4747 applet.js:4756
-#. applet.js:5051
+#. applet.js:3266 applet.js:3275 applet.js:4743 applet.js:4752 applet.js:4761
+#. applet.js:5056
 msgid "Open the recordings folder"
 msgstr "開啟錄音資料夾"
 
-#. applet.js:3269 applet.js:4735 applet.js:4745 applet.js:4754
+#. applet.js:3273 applet.js:4740 applet.js:4750 applet.js:4759
 msgid "An error seems to have occurred during recording!"
 msgstr "錄音時似乎發生錯誤！"
 
-#. applet.js:3270 applet.js:4737 applet.js:4746 applet.js:4755
+#. applet.js:3274 applet.js:4742 applet.js:4751 applet.js:4760
 msgid "Please check this record."
 msgstr "請檢查此錄音。"
 
-#. applet.js:3377 applet.js:3411
+#. applet.js:3381 applet.js:3415
 msgid "Record from now"
 msgstr "立即錄音"
 
-#. applet.js:3395 applet.js:5408
+#. applet.js:3399 applet.js:5413
 msgid "Stop Current Recording"
 msgstr "停止目前錄音"
 
-#. applet.js:3543
+#. applet.js:3548
 #, javascript-format
 msgid "Playing %s%s"
 msgstr "正在播放 %s%s"
 
-#. applet.js:3597
+#. applet.js:3602
 msgid "Radio OFF"
 msgstr "收音機關閉"
 
-#. applet.js:3725
+#. applet.js:3730
 msgid "Unable to record anything!"
 msgstr "無法錄音！"
 
-#. applet.js:3725 applet.js:5068 applet.js:5227
+#. applet.js:3730 applet.js:5073 applet.js:5232
 msgid "Insufficient space"
 msgstr "空間不足"
 
-#. applet.js:3725
+#. applet.js:3730
 msgid "The limit you set has been reached."
 msgstr "已達您設定的上限。"
 
-#. applet.js:4126
+#. applet.js:4131
 msgid "Please Log Out then Log In"
 msgstr "請先登出再登入"
 
-#. applet.js:4126
+#. applet.js:4131
 msgid "to finalize yt-dlp update"
 msgstr "以完成 yt-dlp 的更新"
 
-#. applet.js:4261
+#. applet.js:4266
 msgid "Nothing to save."
 msgstr "沒有可儲存的內容。"
 
-#. applet.js:4274
+#. applet.js:4279
 msgid "List of saved radio stations"
 msgstr "已儲存的電台清單"
 
-#. applet.js:4292
+#. applet.js:4297
 msgid "This will replace all current radio stations."
 msgstr "這將取代目前所有的電台。"
 
-#. applet.js:4293
+#. applet.js:4298
 msgid "Are you sure you want to continue?"
 msgstr "確定要繼續嗎？"
 
-#. applet.js:4357
+#. applet.js:4362
 msgid "Update in progress"
 msgstr "正在更新"
 
-#. applet.js:4357
+#. applet.js:4362
 msgid "It may take a while ... Please wait."
 msgstr "可能需要一些時間... 請稍候。"
 
-#. applet.js:4449
+#. applet.js:4454
 msgid "Update completed successfully"
 msgstr "更新已成功完成"
 
-#. applet.js:4620 applet.js:4676
+#. applet.js:4625 applet.js:4681
 msgid "ERROR: Invalid YT video URL!"
 msgstr "錯誤：無效的 YT 影片網址！"
 
-#. applet.js:4645
+#. applet.js:4650
 msgid "Unable to extract a single soundtrack"
 msgstr "無法擷取單一音軌"
 
-#. applet.js:4645
+#. applet.js:4650
 msgid "Maybe it's a playlist?"
 msgstr "這可能是個播放清單？"
 
-#. applet.js:4678
+#. applet.js:4683
 msgid "Close"
 msgstr "關閉"
 
-#. applet.js:4836 applet.js:5295 applet.js:5313
+#. applet.js:4841 applet.js:5300 applet.js:5318
 msgid "Cancel"
 msgstr "取消"
 
-#. applet.js:4837
+#. applet.js:4842
 msgid "Radio3.0 applet"
 msgstr "Radio3.0 小程式"
 
-#. applet.js:4840
+#. applet.js:4845
 msgid "Enable the OSD150 extension"
 msgstr "啟用 OSD150 擴充功能"
 
-#. applet.js:4841
+#. applet.js:4846
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr "如需橫向 OSD，請啟用 OSD150 擴充功能。"
 
-#. applet.js:4858
+#. applet.js:4863
 msgid "Download the OSD150 extension"
 msgstr "下載 OSD150 擴充功能"
 
-#. applet.js:4859
+#. applet.js:4864
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
@@ -429,166 +430,166 @@ msgstr ""
 "如需橫向 OSD，請下載 OSD150 擴充功能。\n"
 "點選「下載」按鈕後搜尋 OSD150 並選擇「⬇」按鈕。"
 
-#. applet.js:4990
+#. applet.js:4995
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "移除 '%s'"
 
-#. applet.js:4998
+#. applet.js:5003
 msgid "About..."
 msgstr "關於..."
 
-#. applet.js:5005
+#. applet.js:5010
 msgid "Manual..."
 msgstr "使用手冊..."
 
-#. applet.js:5012
+#. applet.js:5017
 msgid "Reload this applet"
 msgstr "重新載入這個小程式"
 
-#. applet.js:5029
+#. applet.js:5034
 msgid "Schedule a background record..."
 msgstr "排程背景錄製..."
 
-#. applet.js:5036
+#. applet.js:5041
 msgid "Configure the Alarm Clock..."
 msgstr "設定鬧鐘..."
 
-#. applet.js:5043
+#. applet.js:5048
 msgid "Extract soundtrack from YouTube video..."
 msgstr "從 YouTube 影片擷取音軌..."
 
-#. applet.js:5065 applet.js:5224
+#. applet.js:5070 applet.js:5229
 msgid "(auto)"
 msgstr "（自動）"
 
-#. applet.js:5065 applet.js:5224
+#. applet.js:5070 applet.js:5229
 msgid "(manual)"
 msgstr "（手動）"
 
-#. applet.js:5068 applet.js:5227 applet.js:5455
+#. applet.js:5073 applet.js:5232 applet.js:5460
 msgid "Stop Recording"
 msgstr "停止錄音"
 
-#. applet.js:5068 applet.js:5227
+#. applet.js:5073 applet.js:5232
 msgid "Start Recording"
 msgstr "開始錄音"
 
-#. applet.js:5084
+#. applet.js:5089
 msgid "Cancel downloads from YT"
 msgstr "取消從 YT 下載"
 
-#. applet.js:5093
+#. applet.js:5098
 msgid "Pulse Effects"
 msgstr "PulseEffects"
 
-#. applet.js:5098
+#. applet.js:5103
 msgid "Easy Effects"
 msgstr "EasyEffects"
 
-#. applet.js:5103
+#. applet.js:5108
 msgid "Radio ON at startup"
 msgstr "啟動時開啟廣播"
 
-#. applet.js:5112
+#. applet.js:5117
 msgid "Display Station Logo"
 msgstr "顯示電台 Logo"
 
-#. applet.js:5122
+#. applet.js:5127
 msgid "Album Art desklet settings"
 msgstr "專輯封面桌面小程式設定"
 
 #. settings-schema.json->alarm-clock-wake-me-up->description
-#. applet.js:5127
+#. applet.js:5132
 msgid "Wake me up!"
 msgstr "叫我起床！"
 
-#. applet.js:5136
+#. applet.js:5141
 msgid "Show Album Art on desktop"
 msgstr "在桌面顯示專輯封面"
 
 #. settings-schema.json->dont-check-dependencies->description
-#. applet.js:5145
+#. applet.js:5150
 msgid "Do not check about dependencies"
 msgstr "不檢查相依性"
 
 #. settings-schema.json->show-volume-level-near-icon->description
-#. applet.js:5155
+#. applet.js:5160
 msgid "Display volume level near icon"
 msgstr "在圖示旁顯示音量大小"
 
-#. applet.js:5292
+#. applet.js:5297
 msgid "You need the 'Album Art 3.0' desklet"
 msgstr "您需要「Album Art 3.0」桌面小程式"
 
-#. applet.js:5293
+#. applet.js:5298
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
 msgstr "您可以點選第一個按鈕，然後搜尋 Album 來安裝。"
 
-#. applet.js:5294 applet.js:5312
+#. applet.js:5299 applet.js:5317
 msgid "Desklets"
 msgstr "桌面小程式"
 
-#. applet.js:5310
+#. applet.js:5315
 msgid "You need to activate the 'Album Art 3.0' desklet"
 msgstr "您需要啟用「Album Art 3.0」桌面小程式"
 
-#. applet.js:5311
+#. applet.js:5316
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr "您可以點選第一個按鈕來啟用它，然後搜尋 Album 並使用 [+] 按鈕新增。"
 
-#. applet.js:5456
+#. applet.js:5461
 msgid "Close without stopping recording"
 msgstr "關閉但不停止錄音"
 
-#. applet.js:5671
+#. applet.js:5676
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr "開始錄音：從 %s:%s 到 %s:%s"
 
-#. applet.js:5683
+#. applet.js:5688
 msgid "Recording completed"
 msgstr "錄製完成"
 
-#. applet.js:5808
+#. applet.js:5813
 msgid "This will import a new file containing radio stations."
 msgstr "這將匯入一個包含廣播電台的新檔案。"
 
-#. applet.js:5809
+#. applet.js:5814
 msgid "Do you want to continue?"
 msgstr "要繼續嗎？"
 
-#. applet.js:5886
+#. applet.js:5891
 msgid "No new radio in your list."
 msgstr "清單中沒有新的廣播電台。"
 
-#. applet.js:5888
+#. applet.js:5893
 msgid "One more radio in your list."
 msgstr "清單中增加了一個廣播電台。"
 
-#. applet.js:5890
+#. applet.js:5895
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr "清單中增加了 %s 個廣播電台。"
 
-#. applet.js:6149
+#. applet.js:6154
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr "沒有新的電台可新增至 Radio3.0 小程式選單"
 
-#. applet.js:6151
+#. applet.js:6156
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr "已新增一個電台至 Radio3.0 小程式選單"
 
-#. applet.js:6153
+#. applet.js:6158
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr "已新增 %s 個電台至 Radio3.0 小程式選單"
 
-#. applet.js:6378
+#. applet.js:6383
 #, javascript-format
 msgid "%s kbps"
 msgstr "%s kbps"
@@ -1644,7 +1645,7 @@ msgstr ""
 "勾選此選項可限制記憶體用量，但使用者將無法再回溯快取（需使用 "
 "sound150@claudiux 小程式）。"
 
-#. settings-schema.json->cache-mins->description
+#. settings-schema.json->cache-minutes->description
 msgid ""
 "Minutes to cache\n"
 "0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
@@ -1660,29 +1661,16 @@ msgstr ""
 "快取至磁碟\n"
 "(將封包資料寫入暫存檔，而非保留於記憶體中。)"
 
-#. settings-schema.json->cache-dir->description
-msgid ""
-"Directory used for data caching\n"
-"(Use with caution on SSD disks. Prefer a directory stored in RAM, with "
-"sufficient free space.)"
-msgstr ""
-"用於資料快取的目錄\n"
-"(在 SSD 上請謹慎使用。建議使用儲存於 RAM 中且具有足夠可用空間的目錄。)"
-
-#. settings-schema.json->cache-dir-open->description
-msgid "Open cache directory"
-msgstr "開啟快取目錄"
-
 #. settings-schema.json->cache-stream-size->description
 msgid "Stream cache size"
 msgstr "串流快取大小"
 
 #. settings-schema.json->cache-stream-size->tooltip
 msgid ""
-"The amount of stream cache. Default: 1 MiB.\n"
+"The amount of stream cache. Default: 10 MiB.\n"
 "Beware, setting this to a large value can reduce performance."
 msgstr ""
-"串流快取容量，預設為 1 MiB。\n"
+"串流快取容量，預設為 10 MiB。\n"
 "請注意，將此設定值若設得太大可能會降低效能。"
 
 #. settings-schema.json->cache-stream-size->options
@@ -1732,6 +1720,22 @@ msgstr "10 MiB"
 #. settings-schema.json->cache-stream-size->options
 msgid "20 MiB"
 msgstr "20 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "30 MiB"
+msgstr "30 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "40 MiB"
+msgstr "40 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "50 MiB"
+msgstr "50 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "100 MiB"
+msgstr "100 MiB"
 
 #. settings-schema.json->recording-path->description
 msgid "Path to the folder that will contain your future recordings"

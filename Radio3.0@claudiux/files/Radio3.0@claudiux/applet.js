@@ -206,6 +206,7 @@ const RADIO_LOGO_DIR = DOT_CONFIG_DIR + "/cover-art"; //FIXME!!!
 const SONG_ART_DIR = DOT_CONFIG_DIR + "/song-art"; //FIXME!!!
 
 const XDG_RUNTIME_DIR = getenv("XDG_RUNTIME_DIR");
+const RADIO30_CACHE = XDG_RUNTIME_DIR + "/Radio3.0/mpv_cache";
 const TMP_ALBUMART_DIR = XDG_RUNTIME_DIR + "/AlbumArt";
 const ALBUMART_ON = TMP_ALBUMART_DIR + "/ON";
 const ALBUMART_PICS_DIR = TMP_ALBUMART_DIR + "/song-art";
@@ -1054,6 +1055,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     spawnCommandLineAsync("bash -c 'cd "+ SCRIPTS_DIR + " && chmod 755 *.sh *.py'");
     spawnCommandLineAsync("bash -c 'cd "+ SCRIPTS_DIR + " && chmod 700 *.lua'");
 
+    if (!file_test(RADIO30_CACHE, FileTest.EXISTS))
+      mkdir_with_parents(RADIO30_CACHE, 0o755);
     if (!file_test(RADIO_LISTS_DIR, FileTest.EXISTS))
       mkdir_with_parents(RADIO_LISTS_DIR, 0o755);
     if (!file_test(JOBS_DIR, FileTest.EXISTS))
@@ -1158,7 +1161,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //~ let userSettings = JSON.parse(to_string(file_get_contents(RADIO30_CONFIG_FILE)[1]));
     this.context_menu_item_showDesklet = null;
     this.get_user_settings();
-    this.set_MPV_ALIAS();
+    //~ this.set_MPV_ALIAS();
 
     // Desklet:
     this._is_desklet_activated();
@@ -1287,7 +1290,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("import-dir", "import_dir");
 
     this.settings.bind("recording-path", "recording_path", () => { this.on_rec_path_changed() });
-    this.settings.bind("recording-format", "rec_format", () => { this.set_MPV_ALIAS() });
+    this.settings.bind("recording-format", "rec_format");
     this.settings.bind("recording-ends-auto", "recording_ends_auto");
 
     this.settings.bind("limits-hd-size-prefixes", "size_prefixes", (...args) => set_nemo_size_prefixes(...args));
@@ -1340,13 +1343,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("database-url", "database_url");
     this.settings.bind("database-favorite", "database_favorite", () => { this.on_database_favorite_changed() });
     // Cache:
-    this.settings.bind("cache-no-cache", "cache_no_cache", () => { this.set_MPV_ALIAS() });
-    //~ this.settings.bind("cache-stream-size", "cache_stream_size", this.set_MPV_ALIAS.bind(this));
-    this.cache_stream_size = "10MiB"; // forced
-    this.settings.bind("cache-mins", "cache_minutes", () => { this.set_MPV_ALIAS() });
-    //~ this.settings.bind("cache-on-disk", "cache_on_disk", this.set_MPV_ALIAS.bind(this));
-    this.cache_on_disk = false; // forced
-    this.settings.bind("cache-dir", "cache_dir", () => { this.set_MPV_ALIAS() });
+    this.settings.bind("cache-no-cache", "cache_no_cache");
+    this.settings.bind("cache-stream-size", "cache_stream_size");
+    //~ this.cache_stream_size = "10MiB"; // forced
+    //~ this.cache_stream_size = "100 MiB"; // forced
+    this.settings.bind("cache-minutes", "cache_minutes");
+    this.settings.bind("cache-on-disk", "cache_on_disk");
+    //~ this.cache_on_disk = false; // forced
 
     // YT:
     this.settings.bind("yt-progress-interval", "yt_interval");
@@ -1802,9 +1805,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         if (this.cache_on_disk) {
           this.MPV_ALIAS += " --cache-on-disk=yes --cache-unlink-files=immediate"; //whendone
           this.MPV_ALIAS += " --cache-secs=" + cache_secs;
-          let cache_dir = this.cache_dir.replace("file://", "");
-          this.MPV_ALIAS += " --cache-dir=" + cache_dir;
-          this.MPV_ALIAS += " --stream-record=" + cache_dir + "/stream_record."+this.rec_format;
+          this.MPV_ALIAS += " --cache-dir=" + RADIO30_CACHE;
+          this.MPV_ALIAS += " --demuxer-cache-dir=" + RADIO30_CACHE;
+          this.MPV_ALIAS += " --stream-record=" + RADIO30_CACHE + "/stream_record."+this.rec_format;
         } else {
           this.MPV_ALIAS += " --cache-on-disk=no";
         }
@@ -3535,6 +3538,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.monitor_r30stop();
     this.monitor_r30next();
     this.monitor_r30previous();
+    this.set_MPV_ALIAS();
     spawnCommandLine("%s %s".format(this.MPV_ALIAS, _id));
     this.mpvStatus = "PLAY";
 
@@ -6459,10 +6463,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.setValue("database-url", ""+_ret);
 
     return ""+_ret
-  }
-
-  _on_open_cache_dir() {
-    spawnCommandLineAsync("xdg-open "+this.cache_dir);
   }
 
   _theme_set() {
