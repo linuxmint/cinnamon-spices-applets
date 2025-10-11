@@ -1,3 +1,6 @@
+### v3.8.0~20251011
+  * Management of cache from the Recordings tab of this applet settings.
+
 ### v3.7.3~20250922
   * Minor bugfix.
 
