@@ -1,3 +1,7 @@
+### v7.9.4~20251012
+  * Improves access to settings.
+  * Adds Apply button to settings about Spices.
+
 ### v7.9.3~20251012
   * Fixes a problem with a badge.
 
