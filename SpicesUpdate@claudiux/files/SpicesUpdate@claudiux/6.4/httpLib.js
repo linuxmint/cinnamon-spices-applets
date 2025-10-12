@@ -239,3 +239,10 @@ class HttpLib {
         };
     }
 }
+
+module.exports = {
+    Soup3,
+    Soup2,
+    Jobs,
+    HttpLib
+}
