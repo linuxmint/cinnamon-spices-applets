@@ -760,7 +760,10 @@ class SpicesUpdate extends IconApplet {
     let badgeSize = (fontSize + 1) * global.ui_scale;
     let iconSize = this.getPanelIconSize(IconType.SYMBOLIC);
 
-    if (this.badge) this.actor.remove_child(this.badge);
+    if (this.badge != null) {
+      this.actor.remove_child(this.badge);
+      this.badge = null;
+    }
 
     this.badge = new BoxLayout({
       style_class: "grouped-window-list-badge",
@@ -3081,7 +3084,7 @@ class SpicesUpdate extends IconApplet {
   } // End of on_generic_changed
 
   on_applet_added_to_panel() {
-    this.makeMenu();
+    //~ this.makeMenu();
     this.get_default_icon_color();
 
     // Run loop to refresh caches:
