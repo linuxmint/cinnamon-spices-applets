@@ -6,8 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2025-08-05 12:43+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
@@ -27,7 +26,9 @@ msgstr "Xung đột applet thông báo"
 msgid ""
 "Conflict detected: notifications@cinnamon.org is active.\n"
 "Remove it and restart Cinnamon before using Notifications-Enhanced applet."
-msgstr "Phát hiện xung đột: notifications@cinnamon.org đang hoạt động.\nHãy gỡ bỏ và khởi động lại Cinnamon trước khi sử dụng applet Notifications-Enhanced."
+msgstr ""
+"Phát hiện xung đột: notifications@cinnamon.org đang hoạt động.\n"
+"Hãy gỡ bỏ và khởi động lại Cinnamon trước khi sử dụng applet Notifications-Enhanced."
 
 #. applet.js:120
 msgid "Do not disturb"
@@ -55,7 +56,6 @@ msgstr "Cài đặt thông báo"
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d thông báo"
-msgstr[1] "%d thông báo"
 
 #. applet.js:287
 msgid "Notifications"
@@ -74,14 +74,12 @@ msgstr "vừa xong"
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "cách đây %d giây"
-msgstr[1] "cách đây %d giây"
 
 #. applet.js:454
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "cách đây %d phút"
-msgstr[1] "cách đây %d phút"
 
 #. metadata.json->name
 msgid "Notifications-Enhanced"
@@ -124,9 +122,7 @@ msgid "Always show 'Do Not Disturb' icon"
 msgstr "Luôn hiển thị biểu tượng 'Không làm phiền'"
 
 #. settings-schema.json->showDisturbIcon->tooltip
-msgid ""
-"Check this to show the 'Do Not Disturb icon' on the panel even when the "
-"'Show notification tray' option is disabled."
+msgid "Check this to show the 'Do Not Disturb icon' on the panel even when the 'Show notification tray' option is disabled."
 msgstr "Chọn để hiển thị biểu tượng 'Không làm phiền' trên panel ngay cả khi tùy chọn 'Hiển thị khay thông báo' bị tắt."
 
 #. settings-schema.json->showNotificationSettings->description
