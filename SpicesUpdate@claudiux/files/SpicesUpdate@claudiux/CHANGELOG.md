@@ -1,3 +1,6 @@
+### v7.9.4~20251012
+  * Improves access to settings.
+
 ### v7.9.3~20251012
   * Fixes a problem with a badge.
 
