@@ -2810,10 +2810,12 @@ class SpicesUpdate extends IconApplet {
     }
 
     if (this.numberLabel.text.length === 0) {
-      this.badge.hide();
+      if (this.badge != null)
+        this.badge.hide();
     } else {
       this.numberLabel.text += "  ";
-      this.badge.show();
+      if (this.badge != null)
+        this.badge.show();
     }
 
     this.isUpdatingUI = false;
