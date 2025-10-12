@@ -1,3 +1,6 @@
+### v7.9.3~20251012
+  * Fixes a problem with a badge.
+
 ### v7.9.2~20251012
   * Fixes [#7090](https://github.com/linuxmint/cinnamon-spices-applets/issues/7090).
 
