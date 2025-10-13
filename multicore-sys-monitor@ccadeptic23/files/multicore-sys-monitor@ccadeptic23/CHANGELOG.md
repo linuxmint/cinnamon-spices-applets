@@ -1,3 +1,8 @@
+### v3.1.3~20251013
+  * Support for encrypted partitions.
+  * Fixes [#7880](https://github.com/linuxmint/cinnamon-spices-applets/issues/7880)
+  * Special thanks to [chrisstavrou](https://github.com/chrisstavrou).
+
 ### v3.1.2~20251005
   * The values are formatted to the local locale, in tooltip.
   * Fixes [#7854](https://github.com/linuxmint/cinnamon-spices-applets/issues/7854)
