@@ -5,19 +5,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Project-Id-Version: download-and-upload-speed@cardsurf 1.7.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2025-10-02 19:43+0200\n"
-"PO-Revision-Date: 2025-02-12 03:07+0100\n"
-"Last-Translator: claudiux\n"
+"PO-Revision-Date: 2025-10-13 14:46+0200\n"
+"Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:470
 msgid "Network interfaces"
@@ -139,31 +137,33 @@ msgstr "Auto"
 
 #. settings-schema.json->unit->options
 msgid "Bytes/Bits"
-msgstr ""
+msgstr "Octets/Bits"
 
 #. settings-schema.json->unit->options
 msgid "KB/Kb/KiB"
-msgstr ""
+msgstr "KO/Kb/KiO"
 
 #. settings-schema.json->unit->options
 msgid "MB/Mb/MiB"
-msgstr ""
+msgstr "MO/Mb/MiO"
 
 #. settings-schema.json->unit->options
 msgid "GB/Gb/GiB"
-msgstr ""
+msgstr "GO/Gb/GiO"
 
 #. settings-schema.json->unit->options
 msgid "TB/Tb/TiB"
-msgstr ""
+msgstr "TO/Tb/TiO"
 
 #. settings-schema.json->unit->tooltip
 msgid "Use fixed unit for displaying, or automatically choose the best unit"
 msgstr ""
+"Utilisez une unité fixe pour l'affichage ou choisissez automatiquement\n"
+"la meilleure unité"
 
 #. settings-schema.json->unit_type->description
 msgid "Unit type"
-msgstr ""
+msgstr "Unité type"
 
 #. settings-schema.json->unit_type->options
 msgid "Bytes"
@@ -283,21 +283,21 @@ msgstr "Saisir le style CSS appliqué au texte du panneau"
 
 #. settings-schema.json->gui_enable_inactive_text_css->description
 msgid "Enable different style for inactive (0.00) text"
-msgstr ""
+msgstr "Activer un style différent pour le texte inactif (0.00)"
 
 #. settings-schema.json->gui_inactive_text_css->description
 msgid "Inactive text CSS"
-msgstr ""
+msgstr "CSS Texte inactif"
 
 #. settings-schema.json->gui_inactive_text_css->tooltip
 msgid ""
 "A CSS style applied to the text in the panel when there is no network "
 "activity"
-msgstr ""
+msgstr "Style CSS appliqué au texte du panneau en l'absence d'activité réseau"
 
 #. settings-schema.json->gui_show_icons->description
 msgid "Show icons"
-msgstr ""
+msgstr "Afficher les icônes"
 
 #. settings-schema.json->gui_received_icon_filename->description
 msgid "Download icon"
