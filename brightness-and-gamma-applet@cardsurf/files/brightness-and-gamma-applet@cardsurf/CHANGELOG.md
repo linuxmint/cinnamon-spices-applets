@@ -1,3 +1,6 @@
+### v2.3.1~20251013
+* Allows you to set maximum values up to 200 in presets.
+
 ### v2.3.0~20250926
 * The changes can now be applied smoothly.
 
