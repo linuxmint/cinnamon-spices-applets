@@ -10,7 +10,7 @@ const Settings = imports.ui.settings;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 
-const SCROLL_DELAY = 400; // ms
+const SCROLL_DELAY = 350; // ms
 
 // l10n/translation support
 const UUID = "power-profiles@rcalixte";
