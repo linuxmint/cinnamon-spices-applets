@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.7\n"
 
 #. 5.4/applet.js:28
 msgid "Power Saver"
@@ -90,12 +90,12 @@ msgstr "Perfiles de energía"
 
 #. 5.4->settings-schema.json->section0->description
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #. 5.4->settings-schema.json->cycleProfiles->description
-#, fuzzy
 msgid "Cycle through profiles when using keyboard shortcuts or scroll wheel"
-msgstr "Pasar de un perfil a otro al usar atajos de teclado"
+msgstr ""
+"Moverse por los perfiles utilizando atajos de teclado o la rueda del ratón"
 
 #. 5.4->settings-schema.json->cycleProfiles->tooltip
 msgid ""
@@ -115,20 +115,19 @@ msgstr ""
 
 #. 5.4->settings-schema.json->scrollBehavior->description
 msgid "Scroll wheel behavior"
-msgstr ""
+msgstr "Comportamiento de la rueda de desplazamiento"
 
 #. 5.4->settings-schema.json->scrollBehavior->options
 msgid "Nothing"
-msgstr ""
+msgstr "Nada"
 
 #. 5.4->settings-schema.json->scrollBehavior->options
-#, fuzzy
 msgid "Switch profiles"
-msgstr "Próximo perfil"
+msgstr "Cambiar perfiles"
 
 #. 5.4->settings-schema.json->scrollBehavior->options
 msgid "Switch profiles (reversed)"
-msgstr ""
+msgstr "Cambiar perfiles (invertidos)"
 
 #. 5.4->settings-schema.json->section1->description
 msgid "Keyboard Shortcuts"
