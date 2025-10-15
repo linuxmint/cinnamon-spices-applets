@@ -103,7 +103,7 @@ PowerProfilesApplet.prototype = {
     this._lastScrollDirection = null;
     this._lastScrollTime = 0;
 
-    this.actor.connect('scroll-event', Lang.bind(this, this._onScrollEvent));
+    this._scrollEventId = this.actor.connect('scroll-event', Lang.bind(this, this._onScrollEvent));
 
     this._updateApplet();
     this.set_show_label_in_vertical_panels(false);
@@ -203,41 +203,51 @@ PowerProfilesApplet.prototype = {
   },
 
   _setKeybinding() {
+    this._unsetKeybinding();
     Main.keybindingManager.addHotKey("power-profiles-previous-" + this.instance_id,
       this.previousProfileKey,
-      Lang.bind(this, this._previousProfile));
+      () => this._previousProfile(this.showOSD));
     Main.keybindingManager.addHotKey("power-profiles-next-" + this.instance_id,
       this.nextProfileKey,
-      Lang.bind(this, this._nextProfile));
+      () => this._nextProfile(this.showOSD));
   },
 
-  _switchToProfileByIndex(newIndex) {
+  _unsetKeybinding() {
+    Main.keybindingManager.removeHotKey("power-profiles-previous-" + this.instance_id);
+    Main.keybindingManager.removeHotKey("power-profiles-next-" + this.instance_id);
+  },
+
+  _switchToProfileByIndex(newIndex, showOSD) {
     let nextProfile = this.Profiles[newIndex].Profile.unpack();
     if (newIndex != this.profileIndex)
       this._changeProfile(nextProfile);
 
-    if (this.showOSD)
+    if (showOSD)
       Main.osdWindowManager.show(-1,
         Gio.Icon.new_for_string(this.iconMap.get(this.ActiveProfile)));
   },
 
-  _previousProfile() {
+  _previousProfile(showOSD) {
     let nextIndex = this.profileIndex - 1 < 0 ?
       (this.cycleProfiles ? this.Profiles.length - 1 : this.profileIndex) :
       this.profileIndex - 1;
-    this._switchToProfileByIndex(nextIndex);
+    this._switchToProfileByIndex(nextIndex, showOSD);
   },
 
-  _nextProfile() {
+  _nextProfile(showOSD) {
     let nextIndex = this.profileIndex + 1 >= this.Profiles.length ?
       (this.cycleProfiles ? 0 : this.profileIndex) :
       this.profileIndex + 1;
-    this._switchToProfileByIndex(nextIndex);
+    this._switchToProfileByIndex(nextIndex, showOSD);
   },
 
   on_applet_removed_from_panel() {
-    Main.keybindingManager.removeHotKey("power-profiles-previous-" + this.instance_id);
-    Main.keybindingManager.removeHotKey("power-profiles-next-" + this.instance_id);
+    this._unsetKeybinding();
+
+    if (this._scrollEventId) {
+      this.actor.disconnect(this._scrollEventId);
+      this._scrollEventId = 0;
+    }
 
     if (!this._profilesProxy)
       return;
@@ -280,9 +290,9 @@ PowerProfilesApplet.prototype = {
           direction !== this._lastScrollDirection) {
 
           if (!((direction == Clutter.ScrollDirection.UP) ^ (this.scrollBehavior == "normal")))
-              this._previousProfile();
+              this._previousProfile(false);
           else
-              this._nextProfile();
+              this._nextProfile(false);
 
           this._lastScrollDirection = direction;
           this._lastScrollTime = time;
