@@ -1,0 +1,10 @@
+{
+  "uuid": "moonphase@kensaunders",
+  "name": "Moon Phase & Zodiac Applet",
+  "description": "Displays the current Moon phase and zodiac sign right on your Cinnamon panel.",
+  "icon": "icon",
+  "version": 1.0,
+  "max-instances": 1,
+  "multiversion": false,
+  "website": "https://github.com/kensaunders/moonphase-applet"
+}

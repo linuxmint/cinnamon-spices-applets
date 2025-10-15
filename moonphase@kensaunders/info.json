@@ -1,0 +1,9 @@
+{
+  "uuid": "moonphase@kensaunders",
+  "name": "Moon Phase & Zodiac",
+  "description": "Displays the current Moon phase and the zodiac sign in the Cinnamon panel.",
+  "author": "bnbliss",
+  "website": "https://github.com/bnbliss/cinnamon-spices-applets",
+  "version": 1,
+  "max-instances": 1
+}
