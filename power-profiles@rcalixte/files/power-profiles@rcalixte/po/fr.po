@@ -4,12 +4,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0\n"
+"Project-Id-Version: power-profiles@rcalixte 1.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-10-15 02:11-0100\n"
-"PO-Revision-Date: \n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"PO-Revision-Date: 2025-10-15 17:16+0200\n"
+"Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -90,25 +90,26 @@ msgstr "Profils de puissance (Power Profiles)"
 
 #. 5.4->settings-schema.json->section0->description
 msgid "General"
-msgstr ""
+msgstr "Général"
 
 #. 5.4->settings-schema.json->cycleProfiles->description
-#, fuzzy
 msgid "Cycle through profiles when using keyboard shortcuts or scroll wheel"
-msgstr "Parcourir les profils lors de l'utilisation de raccourcis clavier"
+msgstr ""
+"Parcourez les profils lors de l'utilisation des raccourcis clavier ou de la "
+"molette de défilement"
 
 #. 5.4->settings-schema.json->cycleProfiles->tooltip
 msgid ""
 "If enabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the next profile would be 'Performance' "
-"(or 'Balanced' on some systems).\n"
+"profile' keyboard shortcut is used, the next profile would be "
+"'Performance' (or 'Balanced' on some systems).\n"
 "\n"
 "If disabled, if the current profile is 'Power Saver' and the 'Previous "
 "profile' keyboard shortcut is used, the profile would not change."
 msgstr ""
 "S'il est activé, si le profil actuel est « Économie d'énergie » et que le "
-"raccourci clavier \"Profil précédent\" est utilisé, le profil suivant sera "
-"« Performance » (ou « Équilibré » sur certains systèmes).\n"
+"raccourci clavier \"Profil précédent\" est utilisé, le profil suivant sera « "
+"Performance » (ou « Équilibré » sur certains systèmes).\n"
 "\n"
 "S'il est désactivé, si le profil actuel est « Économie d'énergie » et que le "
 "raccourci clavier « Profil précédent » est utilisé, le profil ne changera "
@@ -116,20 +117,19 @@ msgstr ""
 
 #. 5.4->settings-schema.json->scrollBehavior->description
 msgid "Scroll wheel behavior"
-msgstr ""
+msgstr "Comportement de la molette de défilement"
 
 #. 5.4->settings-schema.json->scrollBehavior->options
 msgid "Nothing"
-msgstr ""
+msgstr "Rien"
 
 #. 5.4->settings-schema.json->scrollBehavior->options
-#, fuzzy
 msgid "Switch profiles"
-msgstr "Profil suivant"
+msgstr "Changer de profil"
 
 #. 5.4->settings-schema.json->scrollBehavior->options
 msgid "Switch profiles (reversed)"
-msgstr ""
+msgstr "Changer de profil (inversé)"
 
 #. 5.4->settings-schema.json->section1->description
 msgid "Keyboard Shortcuts"
