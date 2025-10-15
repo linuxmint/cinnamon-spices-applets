@@ -262,7 +262,7 @@ PowerProfilesApplet.prototype = {
 
   _onIconStyleChanged() {
     this._setIconMap();
-    this._updateApplet();
+    this._update();
   },
 
   _setIconMap() {
