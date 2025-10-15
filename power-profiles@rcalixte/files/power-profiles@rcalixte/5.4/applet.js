@@ -8,6 +8,9 @@ const MessageTray = imports.ui.messageTray;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 const St = imports.gi.St;
+const Clutter = imports.gi.Clutter;
+
+const SCROLL_DELAY = 400; // ms
 
 // l10n/translation support
 const UUID = "power-profiles@rcalixte";
@@ -75,6 +78,7 @@ PowerProfilesApplet.prototype = {
     this.settings.bind("cycleProfiles", "cycleProfiles");
     this.settings.bind("showOSD", "showOSD");
     this.settings.bind("iconStyle", "iconStyle", this._onIconStyleChanged);
+    this.settings.bind("scrollBehavior", "scrollBehavior");
 
     this.ActiveProfile = this._profilesProxy.ActiveProfile;
     this.PerformanceDegraded = this._profilesProxy.PerformanceDegraded;
@@ -95,6 +99,11 @@ PowerProfilesApplet.prototype = {
     this.menu = new Applet.AppletPopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
     this.contentSection = new PopupMenu.PopupMenuSection();
+
+    this._lastScrollDirection = null;
+    this._lastScrollTime = 0;
+
+    this.actor.connect('scroll-event', Lang.bind(this, this._onScrollEvent));
 
     this._updateApplet();
     this.set_show_label_in_vertical_panels(false);
@@ -252,6 +261,34 @@ PowerProfilesApplet.prototype = {
     this.iconMap.set(this.Profiles.slice(-1)[0].Profile.unpack(), this.metadata.path + `/../icons/${this.iconStyle}/profile-100-symbolic.svg`);
     if (this.iconMap.size != this.Profiles.length)
       this.iconMap.set(this.Profiles[1].Profile.unpack(), this.metadata.path + `/../icons/${this.iconStyle}/profile-50-symbolic.svg`);
+  },
+
+  _onScrollEvent(actor, event) {
+      if (this.scrollBehavior == "nothing") {
+          return GLib.SOURCE_CONTINUE;
+      }
+
+      const direction = event.get_scroll_direction();
+
+      if (direction == Clutter.ScrollDirection.SMOOTH) {
+          return GLib.SOURCE_CONTINUE;
+      }
+
+      const time = event.get_time();
+
+      if (time > (this._lastScrollTime + SCROLL_DELAY) ||
+          direction !== this._lastScrollDirection) {
+
+          if (!((direction == Clutter.ScrollDirection.UP) ^ (this.scrollBehavior == "normal")))
+              this._previousProfile();
+          else
+              this._nextProfile();
+
+          this._lastScrollDirection = direction;
+          this._lastScrollTime = time;
+      }
+
+      return GLib.SOURCE_CONTINUE;
   }
 };
 

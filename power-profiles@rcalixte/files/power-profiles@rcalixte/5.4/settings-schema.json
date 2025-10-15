@@ -1,4 +1,18 @@
 {
+    "section0": {
+        "type": "section",
+        "description": "General"
+    },
+    "scrollBehavior": {
+        "type": "combobox",
+        "default": "nothing",
+        "description": "Scroll wheel behavior",
+        "options": {
+            "Nothing": "nothing",
+            "Switch profiles": "normal",
+            "Switch profiles (reversed)": "reversed"
+        }
+    },
     "section1": {
         "type": "section",
         "description": "Keyboard Shortcuts"
