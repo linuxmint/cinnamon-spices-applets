@@ -21,8 +21,8 @@ class MyApplet extends Applet.TextIconApplet {
             this.appletPath = metadata.path
             this.hide_applet_label(false)
             this.bindSettings()
-            this.connectSignals()
             this.initButtons()
+            this.connectSignals()
             setTimeout(() => {
                 this.initialized = true
             }, 500)
@@ -73,6 +73,14 @@ class MyApplet extends Applet.TextIconApplet {
         this.signalManager.connect(global.screen, 'window-monitor-changed', () => {
             let w = global.display.focus_window
             if (w) {
+                this._onMonitorChange(w)
+            }
+        }, this)
+        this.signalManager.connect(global.screen, 'monitors-changed', () => {
+            let w = global.display.focus_window
+            if (w == null) {
+                this.setButtons("hide")
+            } else {
                 this._onMonitorChange(w)
             }
         }, this)
@@ -277,6 +285,10 @@ class MyApplet extends Applet.TextIconApplet {
             this.setButtons("hide")
             return
         }
+        if (w.get_window_type() >= 1) {
+            this.setButtons("hide")
+            return
+        }
         let buttons = this.buttons_style.split(":")
         if (this.checkButton(buttons, "icon")) {
             this.updateWindowIcon()
@@ -316,6 +328,7 @@ class MyApplet extends Applet.TextIconApplet {
     onlyMaximize() {
         let w = global.display.focus_window
         if (w == null) {
+            this.setButtons("hide")
             return
         }
         let app = tracker.get_window_app(w)
