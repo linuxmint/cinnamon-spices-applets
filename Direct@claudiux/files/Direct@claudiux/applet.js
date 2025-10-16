@@ -512,7 +512,7 @@ class DirectApplet extends Applet.TextIconApplet {
             }
 
             //favorite documents section
-            if ( this.showFavorites ) {
+            if ( this.showFavorites && this.favorites.get_n_favorites() > 0 ) {
                 //~ let favoritesPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
                 //~ mainBox.add_actor(favoritesPaneBox);
                 let favoritesPane = new PopupMenu.PopupMenuSection();
@@ -686,7 +686,7 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     buildFavoritesSection() {
-        if ( !this.showFavorites ) return;
+        if ( !this.showFavorites || this.favorites.get_n_favorites() === 0 ) return;
         if ( this.favoriteSection ) this.favoriteSection.removeAll();
         else this.favoriteSection = new PopupMenu.PopupMenuSection();
 

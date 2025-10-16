@@ -1,3 +1,6 @@
+### v1.1.1~20251016
+* Do not display the Favorites section when the number of favorites is zero.
+
 ### v1.1.0~20251007
 * Menu sections can be rearranged. See General tab in this applet settings.
 
