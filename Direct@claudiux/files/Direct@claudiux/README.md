@@ -12,7 +12,7 @@ The Direct@claudiux applet is a fork from the placesCenter@scollins applet, with
 * Supports **bookmarks** (eg. from Nemo).
 * Supports additional user defined places.
 * Ability to set the panel icon and text (symbolic icons supported).
-* Option to show **favorite** documents.
+* Option to show **favorite** documents. This section is not displayed when the number of favorites is zero.
 * Option to show **recent** documents (click on a recent document to open it; right-click to open the folder that contains it).
 * Quick keyboard access (choose your **shortcut**).
 * **Search tool** that allows you to quickly search for files and folders (supports regular expressions).
