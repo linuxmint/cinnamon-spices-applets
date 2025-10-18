@@ -1,0 +1,3420 @@
+# RADIO3.0
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2022
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-11 12:31+0200\n"
+"PO-Revision-Date: 2025-10-11 12:37+0200\n"
+"Last-Translator: claudiux\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:286
+msgid "unassigned"
+msgstr "nincs hozzárendelve"
+
+#. applet.js:287
+msgid "Display Album Art at full size"
+msgstr "Albumborító teljes méretben történő megjelenítése"
+
+#. applet.js:389
+msgid "This is your own list of Categories and Radio Stations."
+msgstr "Ez az Ön saját kategóriáinak és rádióállomásainak listája."
+
+#. applet.js:390
+msgid "You can add more using the [+] button."
+msgstr "Többet is hozzáadhat a [+] gombbal."
+
+#. applet.js:391
+msgid "For a category, fill in only its name; leave the other fields empty."
+msgstr ""
+"Egy kategória esetén csak a nevét írja be; hagyja üresen a többi mezőt."
+
+#. applet.js:392
+msgid "For a radio station, enter only its name and its streaming URL."
+msgstr "Rádióállomás esetén csak a nevét és a streaming URL-jét adja meg."
+
+#. applet.js:393
+msgid ""
+"You can order the rows by dragging and dropping or by using the buttons and "
+"tools below the list."
+msgstr ""
+"A sorokat húzással vagy a lista alatti gombok és eszközök használatával "
+"rendezheti."
+
+#. applet.js:394
+msgid ""
+"The buttons on the right below the list allow you to navigate page by page "
+"or category by category."
+msgstr ""
+"A lista alatt jobbra található gombok segítségével oldalanként vagy "
+"kategóriánként kategóriánként navigálhat."
+
+#. applet.js:395
+msgid ""
+"To search for one of your stations, click on the list and start writing its "
+"name."
+msgstr ""
+"Az egyik állomás megkereséséhez kattintson a listára, és kezdje el beírni a "
+"nevét."
+
+#. applet.js:396
+msgid ""
+"To easily add stations to your list, use the following 2 tabs: Search and "
+"Import."
+msgstr ""
+"Ha egyszerűen szeretne állomásokat hozzáadni a listához, használja a "
+"következő 2 lapot: Keresés és importálás."
+
+#. applet.js:397
+msgid "Check its 'Menu' box to display a station or category in the menu."
+msgstr ""
+"Jelölje be a „Menü” négyzetet, ha egy állomást vagy kategóriát szeretne "
+"megjeleníteni a menüben."
+
+#. applet.js:398
+msgid ""
+"Check its '♪/➟' box to listen to the station or move it to another category "
+"using the tools below the list."
+msgstr ""
+"Jelölje be a '♪/➟' jelölőnégyzetet az állomás hallgatásához, vagy a lista "
+"alatti eszközök segítségével áthelyezheti egy másik kategóriába."
+
+#. applet.js:400
+msgid "You can have your list of stations checked by internet databases."
+msgstr ""
+"Az állomások listáját internetes adatbázisok segítségével ellenőrizheti."
+
+#. applet.js:401
+msgid ""
+"Any station recognized by one of these databases will receive a Universal "
+"Unique Identifier (UUID) provided by this database."
+msgstr ""
+"Bármely állomás, amelyet ezen adatbázisok valamelyike felismer, kap egy "
+"univerzális egyedi azonosítót (UUID), amelyet ez az adatbázis biztosít."
+
+#. applet.js:402
+msgid ""
+"So, if a streaming URL was changed, a next check would update it and you can "
+"continue to listen to the affected station."
+msgstr ""
+"Tehát, ha a streaming URL megváltozott, egy következő ellenőrzés frissíti "
+"azt, és továbbra is hallgathatja az érintett állomást."
+
+#. applet.js:404
+msgid ""
+"Here you can search for other stations in a free radio database accessible "
+"via the Internet."
+msgstr ""
+"Itt kereshet más állomásokat az interneten keresztül elérhető ingyenes rádió-"
+"adatbázisban."
+
+#. applet.js:405
+msgid ""
+"Fill in at least a few fields of the form below then click on the "
+"'Search ...' button."
+msgstr ""
+"Töltse ki az alábbi űrlap legalább néhány mezőjét, majd kattintson a "
+"\"Keresés...\" gombra."
+
+#. applet.js:406
+msgid ""
+"Each time this button is clicked, a new results page is displayed in the "
+"second part of this page, where you can test certain stations and include "
+"them in the menu."
+msgstr ""
+"Minden alkalommal, amikor erre a gombra kattint, egy új eredményoldal "
+"jelenik meg az oldal második részében, ahol tesztelhet bizonyos állomásokat, "
+"és felveheti azokat a menübe."
+
+#. applet.js:407
+msgid ""
+"A station already in your menu will only appear in search results if its "
+"streaming URL has changed."
+msgstr ""
+"A menüjében már szereplő állomás csak akkor jelenik meg a keresési "
+"eredmények között, ha a streaming URL-je megváltozott."
+
+#. applet.js:408
+msgid ""
+"When no new page appears, it means that all results matching your search "
+"criteria have been displayed."
+msgstr ""
+"Ha nem jelenik meg új oldal, az azt jelenti, hogy a keresési feltételeknek "
+"megfelelő összes eredmény megjelenik."
+
+#. applet.js:410
+msgid ""
+"You can import a file containing the name and streaming URL of at least one "
+"radio station."
+msgstr ""
+"Ön importálhat egy fájlt, amely legalább egy rádióállomás nevét és streaming "
+"URL-jét tartalmazza."
+
+#. applet.js:411
+msgid ""
+"These radio stations are displayed in the list below. You can test them by "
+"checking their ♪ box."
+msgstr ""
+"Ezek a rádióállomások az alábbi listában jelennek meg. A ♪ négyzet "
+"bejelölésével tesztelheti őket."
+
+#. applet.js:412
+msgid "Then manage this list with the buttons at the bottom of this tab."
+msgstr "Ezután kezelheti ezt a listát a lap alján található gombokkal."
+
+#. applet.js:414
+msgid ""
+"In the Shoutcast directory, click the download button to the left of the "
+"station name."
+msgstr ""
+"A Shoutcast könyvtárban kattintson az állomás nevétől balra található "
+"letöltés gombra."
+
+#. applet.js:415
+msgid ""
+"Select the open format (.XSPF) and save the file giving it the same name as "
+"the station."
+msgstr ""
+"Válassza ki a nyitott formátumot (.XSPF), és mentse el a fájlt az állomás "
+"névvel megegyező névvel."
+
+#. applet.js:416
+msgid "This file can then be imported here."
+msgstr "Ez a fájl ezután ide importálható."
+
+#. applet.js:418
+#, javascript-format
+msgid "%s bytes = %s GB = %s GiB"
+msgstr "%s bájt = %s GB = %s GiB"
+
+#. applet.js:420
+msgid "Sun."
+msgstr "Vas."
+
+#. applet.js:420
+msgid "Mon."
+msgstr "Hé."
+
+#. applet.js:420
+msgid "Tue."
+msgstr "Ked."
+
+#. applet.js:420
+msgid "Wed."
+msgstr "Szer."
+
+#. applet.js:420
+msgid "Thu."
+msgstr "Csü."
+
+#. applet.js:420
+msgid "Fri."
+msgstr "Pé."
+
+#. applet.js:420
+msgid "Sat."
+msgstr "Szo."
+
+#. settings-schema.json->category-to-move->options
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->sched-radio->options
+#. settings-schema.json->search-country->options
+#. settings-schema.json->search-codec->options
+#. settings-schema.json->search-order->options
+#. settings-schema.json->alarm-clock-working-days-radio->options
+#. settings-schema.json->alarm-clock-workoff-days-radio->options
+#. applet.js:586 applet.js:604 applet.js:5511 applet.js:5527
+msgid "(Undefined)"
+msgstr "(Nincs megadva)"
+
+#. settings-schema.json->category-to-move->options
+#. applet.js:587 applet.js:5528
+msgid "(Blacklist)"
+msgstr ""
+
+#. applet.js:2263
+msgid "Start"
+msgstr "Indulás"
+
+#. applet.js:2271 applet.js:3014
+msgid "Stop"
+msgstr "Leállítás"
+
+#. applet.js:2545
+msgid "Volume: %s%"
+msgstr "Hangerő: %s%"
+
+#. applet.js:2550
+msgid "Middle-Click: Stop Recording"
+msgstr "Középső kattintás: Felvétel leállítása"
+
+#. applet.js:2552
+msgid "Middle-click: ON/OFF"
+msgstr "Középső kattintás: BE/KI"
+
+#. applet.js:2554
+msgid "Click: Select another station"
+msgstr "Kattintás: Válasszon másik állomást"
+
+#. applet.js:2555
+msgid "Scroll wheel: volume change"
+msgstr "Görgő: hangerő változtatás"
+
+#. applet.js:2558
+msgid "Click to select a station"
+msgstr "Kattintson egy állomás kiválasztásához"
+
+#. applet.js:2564
+msgid "Wake Up"
+msgstr "Ébresztő"
+
+#. applet.js:2642 applet.js:3032 applet.js:5023
+msgid "Configure..."
+msgstr "Beállítások…"
+
+#. applet.js:2646 applet.js:3024
+msgid "Search for new stations..."
+msgstr "Új állomások keresése..."
+
+#. applet.js:2652
+msgid "Load a sample station list"
+msgstr "Mintaállomás-lista betöltése"
+
+#. applet.js:2699 applet.js:3036 applet.js:5093
+msgid "Sound Settings"
+msgstr "Hangbeállítások"
+
+#. applet.js:2770
+msgid "Watch on YT"
+msgstr "Tekintse meg a YouTube-on"
+
+#. applet.js:2777
+msgid "Try to download it from YT (unsafe)"
+msgstr "Próbálja meg letölteni a YouTube-ról (nem biztonságos)"
+
+#. applet.js:2797
+msgid "Recently Played Stations:"
+msgstr "Legutóbb játszott állomások:"
+
+#. applet.js:2848
+msgid "Visit the home page of this station"
+msgstr "Látogassa meg az állomás kezdőlapját"
+
+#. applet.js:2897
+msgid "Categories"
+msgstr "Kategóriák"
+
+#. applet.js:2900
+msgid "Radio Stations"
+msgstr "Rádióállomások"
+
+#. applet.js:2911
+msgid "All Categories"
+msgstr "Összes kategória"
+
+#. applet.js:2956
+msgid "My Radio Stations"
+msgstr "Saját rádióállomások"
+
+#. applet.js:3156
+msgid "Downloading..."
+msgstr "Letöltés…"
+
+#. applet.js:3158
+msgid "Stop downloading"
+msgstr "Letöltés leállítása"
+
+#. applet.js:3264
+msgid "Download complete"
+msgstr "Letöltés befejeződött"
+
+#. settings-schema.json->button-open-rec-folder->description
+#. settings-schema.json->recordings-open-folder->description
+#. applet.js:3266 applet.js:3275 applet.js:4743 applet.js:4752 applet.js:4761
+#. applet.js:5056
+msgid "Open the recordings folder"
+msgstr "Nyissa meg a felvételek mappát"
+
+#. applet.js:3273 applet.js:4740 applet.js:4750 applet.js:4759
+msgid "An error seems to have occurred during recording!"
+msgstr "Úgy tűnik, hiba történt a rögzítés közben!"
+
+#. applet.js:3274 applet.js:4742 applet.js:4751 applet.js:4760
+msgid "Please check this record."
+msgstr "Kérjük, ellenőrizze ezt a rekordot."
+
+#. applet.js:3381 applet.js:3415
+msgid "Record from now"
+msgstr "Felvétel mostantól"
+
+#. applet.js:3399 applet.js:5413
+msgid "Stop Current Recording"
+msgstr "Az aktuális rögzítés leállítása"
+
+#. applet.js:3548
+#, javascript-format
+msgid "Playing %s%s"
+msgstr "Lejátszás: %s%s"
+
+#. applet.js:3602
+msgid "Radio OFF"
+msgstr "Rádió Ki"
+
+#. applet.js:3730
+msgid "Unable to record anything!"
+msgstr "Semmit nem lehet rögzíteni!"
+
+#. applet.js:3730 applet.js:5073 applet.js:5232
+msgid "Insufficient space"
+msgstr "Elégtelen hely"
+
+#. applet.js:3730
+msgid "The limit you set has been reached."
+msgstr "Elérte a beállított korlátot."
+
+#. applet.js:4131
+msgid "Please Log Out then Log In"
+msgstr "Kérjük, jelentkezzen ki, majd jelentkezzen be"
+
+#. applet.js:4131
+msgid "to finalize yt-dlp update"
+msgstr "a yt-dlp frissítés véglegesítéséhez"
+
+#. applet.js:4266
+msgid "Nothing to save."
+msgstr "Nincs mit menteni."
+
+#. applet.js:4279
+msgid "List of saved radio stations"
+msgstr "A mentett rádióállomások listája"
+
+#. applet.js:4297
+msgid "This will replace all current radio stations."
+msgstr "Ez felváltja az összes jelenlegi rádióállomást."
+
+#. applet.js:4298
+msgid "Are you sure you want to continue?"
+msgstr "Biztos benne, hogy folytatni kívánja?"
+
+#. applet.js:4362
+msgid "Update in progress"
+msgstr "Frissítés folyamatban"
+
+#. applet.js:4362
+msgid "It may take a while ... Please wait."
+msgstr "Eltarthat egy ideig... Kérem, várjon."
+
+#. applet.js:4454
+msgid "Update completed successfully"
+msgstr "A frissítés sikeresen befejeződött"
+
+#. applet.js:4625 applet.js:4681
+msgid "ERROR: Invalid YT video URL!"
+msgstr "HIBA: Érvénytelen a YouTube-videó URL-címe"
+
+#. applet.js:4650
+msgid "Unable to extract a single soundtrack"
+msgstr "Nem szerezhető meg kizárólag a hangsáv"
+
+#. applet.js:4650
+msgid "Maybe it's a playlist?"
+msgstr "Talán ez egy lejátszási lista?"
+
+#. applet.js:4683
+msgid "Close"
+msgstr "Bezárás"
+
+#. applet.js:4841 applet.js:5300 applet.js:5318
+msgid "Cancel"
+msgstr "Mégse"
+
+#. applet.js:4842
+msgid "Radio3.0 applet"
+msgstr "Radio3.0 kisalkalmazás"
+
+#. applet.js:4845
+msgid "Enable the OSD150 extension"
+msgstr "OSD150 bővítmény engedélyezése"
+
+#. applet.js:4846
+msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
+msgstr ""
+"A vízszintes OSD megjelenítéséhez engedélyeznie kell az OSD150 bővítményt."
+
+#. applet.js:4863
+msgid "Download the OSD150 extension"
+msgstr "OSD150 bővítmény letöltése"
+
+#. applet.js:4864
+msgid ""
+"To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
+"Click on the Download button then search for OSD150 and select the ⬇ button."
+msgstr ""
+"A vízszintes OSD kijelzéshez le kell töltenie az OSD150 bővítményt.\n"
+"Kattintson a Letöltés gombra, majd keresse meg az OSD150 bővítményt, és "
+"válassza a ⬇ gombot."
+
+#. applet.js:4995
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Eltávolítás: „%s”"
+
+#. applet.js:5003
+msgid "About..."
+msgstr "Névjegy…"
+
+#. applet.js:5010
+msgid "Manual..."
+msgstr "Kézi…"
+
+#. applet.js:5017
+msgid "Reload this applet"
+msgstr "Kisalkalmazás újratöltése"
+
+#. applet.js:5034
+msgid "Schedule a background record..."
+msgstr "Háttérrekord ütemezése..."
+
+#. applet.js:5041
+msgid "Configure the Alarm Clock..."
+msgstr "Az ébresztőóra beállítása..."
+
+#. applet.js:5048
+msgid "Extract soundtrack from YouTube video..."
+msgstr "Hangsáv kinyerése a YouTube videóból…"
+
+#. applet.js:5070 applet.js:5229
+msgid "(auto)"
+msgstr "(auto)"
+
+#. applet.js:5070 applet.js:5229
+msgid "(manual)"
+msgstr "(kézi)"
+
+#. applet.js:5073 applet.js:5232 applet.js:5460
+msgid "Stop Recording"
+msgstr "Felvétel leállítása"
+
+#. applet.js:5073 applet.js:5232
+msgid "Start Recording"
+msgstr "Felvétel elindítása"
+
+#. applet.js:5089
+msgid "Cancel downloads from YT"
+msgstr "Letöltések megszakítása a YOUTUBE webhelyről"
+
+#. applet.js:5098
+msgid "Pulse Effects"
+msgstr "Pulse Effects"
+
+#. applet.js:5103
+msgid "Easy Effects"
+msgstr "Easy Effects"
+
+#. applet.js:5108
+msgid "Radio ON at startup"
+msgstr "Rádió BE indításkor"
+
+#. applet.js:5117
+msgid "Display Station Logo"
+msgstr "Az állomás logójának megjelenítése"
+
+#. applet.js:5127
+msgid "Album Art desklet settings"
+msgstr "Albumborító kisalkalmazás beállítások"
+
+#. settings-schema.json->alarm-clock-wake-me-up->description
+#. applet.js:5132
+msgid "Wake me up!"
+msgstr "Ébressz fel!"
+
+#. applet.js:5141
+msgid "Show Album Art on desktop"
+msgstr "Albumborító megjelenítése az asztalon"
+
+#. settings-schema.json->dont-check-dependencies->description
+#. applet.js:5150
+msgid "Do not check about dependencies"
+msgstr "Ne ellenőrizze a függőségeket"
+
+#. settings-schema.json->show-volume-level-near-icon->description
+#. applet.js:5160
+msgid "Display volume level near icon"
+msgstr "Hangerőszint megjelenítése az ikon közelében"
+
+#. applet.js:5297
+msgid "You need the 'Album Art 3.0' desklet"
+msgstr "Szüksége van az „Albumborító 3.0” asztalkalmazásra"
+
+#. applet.js:5298
+msgid ""
+"You can install it by clicking on the first button and then searching for "
+"Album."
+msgstr "Telepítheti az első gombra kattintva, majd az Album keresésével."
+
+#. applet.js:5299 applet.js:5317
+msgid "Desklets"
+msgstr "Asztalkalmazások"
+
+#. applet.js:5315
+msgid "You need to activate the 'Album Art 3.0' desklet"
+msgstr "Be kell kapcsolnia az „Albumborító 3.0” asztalkalmazást"
+
+#. applet.js:5316
+msgid ""
+"You can activate it by clicking on the first button, then searching for "
+"Album and adding it with button [+]."
+msgstr ""
+"Az első gombra kattintva aktiválhatja, majd keressen egy Albumot, és a [+] "
+"gombbal hozzáadhatja."
+
+#. applet.js:5461
+msgid "Close without stopping recording"
+msgstr "Zárja be a felvétel leállítása nélkül"
+
+#. applet.js:5676
+#, javascript-format
+msgid "Starting recording from %s:%s to %s:%s"
+msgstr "Felvétel indítása %s:%s és %s:%s között"
+
+#. applet.js:5688
+msgid "Recording completed"
+msgstr "Felvétel kész"
+
+#. applet.js:5813
+msgid "This will import a new file containing radio stations."
+msgstr "Ezzel egy új fájlt importál, amely rádióállomásokat tartalmaz."
+
+#. applet.js:5814
+msgid "Do you want to continue?"
+msgstr "Szeretné folytatni?"
+
+#. applet.js:5891
+msgid "No new radio in your list."
+msgstr "Nincs új rádió a listán."
+
+#. applet.js:5893
+msgid "One more radio in your list."
+msgstr "Még egy rádió a listán."
+
+#. applet.js:5895
+#, javascript-format
+msgid "%s more radios in your list."
+msgstr "%s további rádió a listán."
+
+#. applet.js:6154
+msgid "There are no new stations to add to the Radio3.0 applet menu"
+msgstr ""
+"Nincsenek új állomások, amelyeket hozzáadhatna a Radio3.0 kisalkalmazás "
+"menühöz"
+
+#. applet.js:6156
+msgid "A new station has been added to the Radio3.0 applet menu"
+msgstr "Új állomás került a Radio3.0 kisalkalmazás menüjébe"
+
+#. applet.js:6158
+#, javascript-format
+msgid "%s new stations have been added to the Radio3.0 applet menu"
+msgstr "%s új állomás került a Radio3.0 kisalkalmazás menüjébe"
+
+#. applet.js:6383
+#, javascript-format
+msgid "%s kbps"
+msgstr "%s kbps"
+
+#. lib/checkDependencies.js:399
+#, javascript-format
+msgid "The applet %s is fully functional."
+msgstr "A kisalkalmazás %s teljesen működőképes."
+
+#. lib/checkDependencies.js:400
+msgid "All dependencies are installed"
+msgstr "Minden szükséges függőség telepítve"
+
+#. lib/checkDependencies.js:430
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a "
+"kisalkalmazás minden funkcióval rendelkezzen."
+
+#. lib/checkDependencies.js:431
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr ""
+"Kérjük, a most megnyitott terminálban hajtsa végre a következő parancsokat:"
+
+#. lib/checkDependencies.js:432
+msgid "Some dependencies are not installed!"
+msgstr "Néhány függőség nincs telepítve!"
+
+#. lib/checkTranslations.js:109
+msgid "To finalize the translation installation, please restart Cinnamon"
+msgstr ""
+"A fordítás telepítésének befejezéséhez indítsa újra a Cinnamon asztali "
+"környezetet"
+
+#. lib/util.js:245
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr "A(z) „%s” végrehajtása nem sikerült:"
+
+#. settings-schema.json->scale-update->description
+#. settings-schema.json->recordings-extract-update->description
+#. lib/volumeslider.js:188
+msgid "%"
+msgstr "%"
+
+#. xs/xlet-settings.py:214
+msgid "Previous instance"
+msgstr "Előző példány"
+
+#. xs/xlet-settings.py:218
+msgid "Next instance"
+msgstr "Következő példány"
+
+#. xs/xlet-settings.py:227
+msgid "More options"
+msgstr "További lehetőségek"
+
+#. xs/xlet-settings.py:233
+msgid "Import from a file"
+msgstr "Importálás fájlból"
+
+#. xs/xlet-settings.py:238
+msgid "Export to a file"
+msgstr "Exportálás fájlba"
+
+#. xs/xlet-settings.py:243
+msgid "Reset to defaults"
+msgstr "Alapértelmezések visszaállítása"
+
+#. xs/xlet-settings.py:252
+#, python-format
+msgid "Reload %s"
+msgstr "Újratöltés: %s"
+
+#. xs/xlet-settings.py:441
+#, python-format
+msgid "Settings for %s"
+msgstr "Beállítások ehhez: %s"
+
+#. xs/xlet-settings.py:533
+msgid "Select or enter file to export to"
+msgstr "Válassza ki vagy írja be az exportálni kívánt fájl nevét"
+
+#. xs/xlet-settings.py:541 xs/xlet-settings.py:562
+msgid "JSON files"
+msgstr "JSON-fájlok"
+
+#. xs/xlet-settings.py:555
+msgid "Select a JSON file to import"
+msgstr "Válassza ki az importálni kívánt JSON-fájlt"
+
+#. xs/bin/R3TreeListWidgets.py:278 xs/bin/R3TreeListWidgets.py:501
+msgid "Add new entry"
+msgstr "Új bejegyzés hozzáadása"
+
+#. xs/bin/R3TreeListWidgets.py:282
+msgid "Remove selected entry"
+msgstr "Kijelölt bejegyzés eltávolítása"
+
+#. xs/bin/R3TreeListWidgets.py:287
+msgid "Edit selected entry"
+msgstr "Kijelölt bejegyzés szerkesztése"
+
+#. xs/bin/R3TreeListWidgets.py:292
+msgid "Unselect the selected row"
+msgstr "Törölje a kiválasztott sor kijelölését"
+
+#. xs/bin/R3TreeListWidgets.py:297
+msgid "Move selected entry up"
+msgstr "Kijelölt bejegyzés mozgatása fel"
+
+#. xs/bin/R3TreeListWidgets.py:302
+msgid "Move selected entry down"
+msgstr "Kijelölt bejegyzés mozgatása le"
+
+#. xs/bin/R3TreeListWidgets.py:325
+msgid "Go to bottom"
+msgstr "Ugrás az aljára"
+
+#. xs/bin/R3TreeListWidgets.py:331
+msgid "Go to next page"
+msgstr "Ugrás a következő oldalra"
+
+#. xs/bin/R3TreeListWidgets.py:337
+msgid "Go to previous page"
+msgstr "Ugrás az előző oldalra"
+
+#. xs/bin/R3TreeListWidgets.py:342
+msgid "Go to top"
+msgstr "Ugrás a tetejére"
+
+#. xs/bin/R3TreeListWidgets.py:356
+msgid "Go to next category"
+msgstr "Ugrás a következő kategóriába"
+
+#. xs/bin/R3TreeListWidgets.py:366
+msgid "Go to previous category"
+msgstr "Ugrás az előző kategóriába"
+
+#. xs/bin/R3TreeListWidgets.py:503
+msgid "Edit entry"
+msgstr "Bejegyzés szerkesztése"
+
+#. metadata.json->description
+msgid "The Ultimate Internet Radio Receiver & Recorder for Cinnamon"
+msgstr ""
+"Az egyik legjobb internetes rádióvevő és -felvevő a Cinnamon asztali "
+"környezet számára"
+
+#. metadata.json->name
+msgid "Radio3.0"
+msgstr "Radio3.0"
+
+#. settings-schema.json->pageStations->title
+#. settings-schema.json->import-list->description
+#. settings-schema.json->search-list->description
+msgid "Radios"
+msgstr "Rádiók"
+
+#. settings-schema.json->pageImport->title
+msgid "Import"
+msgstr "Importálás"
+
+#. settings-schema.json->pageSearch->title
+msgid "Search"
+msgstr "Keresés"
+
+#. settings-schema.json->pageMenu->title
+#. settings-schema.json->sectionMenuMenu->title
+#. settings-schema.json->radios->columns->title
+msgid "Menu"
+msgstr "Menü"
+
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr "Viselkedés"
+
+#. settings-schema.json->pageRecording->title
+msgid "Recording"
+msgstr "Felvétel"
+
+#. settings-schema.json->pageYT->title
+msgid "YT"
+msgstr "YouTube"
+
+#. settings-schema.json->pageScheduling->title
+msgid "Scheduling"
+msgstr "Ütemezés"
+
+#. settings-schema.json->pageNetwork->title
+msgid "Network"
+msgstr "Hálózat"
+
+#. settings-schema.json->pageAlarmClock->title
+msgid "Alarm Clock"
+msgstr "Ébresztőóra"
+
+#. settings-schema.json->sectionStationsList->title
+msgid "Stations and Categories on the menu"
+msgstr "Állomások és kategóriák a menüben"
+
+#. settings-schema.json->sectionStationsMove->title
+msgid "Moving selected stations"
+msgstr "A kiválasztott állomások mozgatása"
+
+#. settings-schema.json->sectionStationsSaveRestore->title
+msgid "Save and Restore"
+msgstr "Mentés és visszaállítás"
+
+#. settings-schema.json->sectionStationsUpdate->title
+msgid "Update this station list"
+msgstr "Frissítse ezt az állomáslistát"
+
+#. settings-schema.json->sectionBlacklist->title
+msgid "Unwanted (blacklist)"
+msgstr ""
+
+#. settings-schema.json->sectionImportRadiopp->title
+msgid "Only for Radio++ users"
+msgstr "Csak a Radio++ felhasználóknak"
+
+#. settings-schema.json->sectionImportShoutcast->title
+msgid "Get files on Shoutcast to import here"
+msgstr "Szerezzen be fájlokat a Shoutcaston az importáláshoz"
+
+#. settings-schema.json->sectionImportFile->title
+msgid "File to import"
+msgstr "Importálandó fájl"
+
+#. settings-schema.json->sectionImportList->title
+msgid "File contents"
+msgstr "Fájl tartalma"
+
+#. settings-schema.json->sectionSearchOptions->title
+msgid "Search for Radio Stations"
+msgstr "Rádióállomások keresése"
+
+#. settings-schema.json->sectionSearchResults->title
+msgid "Search results"
+msgstr "Keresési eredmények"
+
+#. settings-schema.json->sectionBehaviorSettingsWindow->title
+msgid "Settings Window"
+msgstr "Beállítások ablak"
+
+#. settings-schema.json->sectionBehaviorStartUp->title
+msgid "Start-up"
+msgstr "Indulás"
+
+#. settings-schema.json->sectionBehaviorVolumeStep->title
+msgid "Volume step"
+msgstr "Hangerő lépték"
+
+#. settings-schema.json->sectionBehaviorOSD->title
+msgid "OSD"
+msgstr "OSD"
+
+#. settings-schema.json->sectionBehaviorTooltip->title
+msgid "Show Help"
+msgstr "Súgó megjelenítése"
+
+#. settings-schema.json->sectionMenuPrivacy->title
+msgid "Privacy"
+msgstr "Magánszféra"
+
+#. settings-schema.json->sectionMenuContextual->title
+msgid "Contextual Menu"
+msgstr "Kontextus szerinti menü"
+
+#. settings-schema.json->sectionMenuShortcuts->title
+msgid "Keyboard shortcuts"
+msgstr "Gyorsbillentyűk"
+
+#. settings-schema.json->sectionBehaviorNotifications->title
+msgid "Notifications"
+msgstr "Értesítések"
+
+#. settings-schema.json->sectionBehaviorBitrate->title
+msgid "Codec and Bitrate"
+msgstr "Kodek és bitráta"
+
+#. settings-schema.json->sectionBehaviorSymbolicIconColor->title
+#. settings-schema.json->sectionRecordingIcon->title
+#. settings-schema.json->sectionYTIcon->title
+msgid "Icon"
+msgstr "Ikon"
+
+#. settings-schema.json->sectionBehaviorHorizontalPanel->title
+msgid "Only on horizontal panels"
+msgstr "Csak vízszintes paneleken"
+
+#. settings-schema.json->sectionNetworkQuality->title
+msgid "Quality"
+msgstr "Minőség"
+
+#. settings-schema.json->sectionNetworkMonitoring->title
+msgid "Monitoring"
+msgstr "Megfigyelés"
+
+#. settings-schema.json->sectionNetworkProxy->title
+msgid "Proxy"
+msgstr "Proxy"
+
+#. settings-schema.json->sectionNetworkDatabase->title
+msgid "Database Info"
+msgstr "Adatbázis Info"
+
+#. settings-schema.json->sectionExperimental->title
+msgid "EXPERIMENTAL"
+msgstr "KÍSÉRLETI"
+
+#. settings-schema.json->sectionRecordingCache->title
+msgid "Cache"
+msgstr "Gyorsítótár"
+
+#. settings-schema.json->sectionRecordingRecordings->title
+#. settings-schema.json->sectionYTFormat->title
+msgid "Recordings"
+msgstr "Felvételek"
+
+#. settings-schema.json->sectionRecordingLimits->title
+msgid "Preservation of hard disk space"
+msgstr "A merevlemez-terület megőrzése"
+
+#. settings-schema.json->sectionYTIgnore->title
+msgid "Ignore YT"
+msgstr "YT figyelmen kívül hagyása"
+
+#. settings-schema.json->sectionYTExtract->title
+msgid "Extract soundtrack from YouTube video"
+msgstr "Hangsáv kinyerése a YouTube-videóból"
+
+#. settings-schema.json->sectionRecordingScheduleARecording->title
+msgid "Schedule a background recording"
+msgstr "Ütemezzen egy háttérfelvételt"
+
+#. settings-schema.json->sectionRecordingUnableToScheduleARecording->title
+msgid "Unable to schedule a background recording"
+msgstr "Nem sikerült ütemezni a háttérfelvételt"
+
+#. settings-schema.json->sectionRecordingScheduledRecordings->title
+#. settings-schema.json->sched-recordings->description
+msgid "Scheduled recordings"
+msgstr "Ütemezett felvételek"
+
+#. settings-schema.json->sectionWakeMeUp->title
+msgid "Options"
+msgstr "Lehetőségek"
+
+#. settings-schema.json->sectionWorkingDays->title
+msgid "Working Days"
+msgstr "Munkanapok"
+
+#. settings-schema.json->sectionWorkOffDays->title
+msgid "Work-Off Days"
+msgstr "Munkaszüneti napok"
+
+#. settings-schema.json->show-help-in-tabs->description
+msgid "Show help labels in each tab of this Settings window"
+msgstr "A súgócímkék megjelenítése a Beállítások ablak minden lapján"
+
+#. settings-schema.json->show-help-in-tabs->tooltip
+msgid ""
+"You can uncheck this option when you are familiar with all of these settings."
+msgstr "Ha ismeri ezeket a beállításokat, törölheti a jelölést."
+
+#. settings-schema.json->stations-help->description
+#. settings-schema.json->button-update-help->description
+#. settings-schema.json->import-shoutcast-help->description
+#. settings-schema.json->import-help->description
+#. settings-schema.json->search-help->description
+msgid "Help"
+msgstr "Súgó"
+
+#. settings-schema.json->radios->description
+msgid "List of stations"
+msgstr "Rádióállomások listája"
+
+#. settings-schema.json->radios->columns->title
+msgid "♥︎"
+msgstr "♥︎"
+
+#. settings-schema.json->radios->columns->title
+msgid "♪/➟"
+msgstr "♪/➟"
+
+#. settings-schema.json->radios->columns->title
+msgid "Station or Category"
+msgstr "Állomás vagy kategória"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid ""
+"Bitrate\n"
+"(kbps)"
+msgstr "Bitsebesség (kb/s)"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+#. settings-schema.json->search-codec->description
+msgid "Codec"
+msgstr "Kodek"
+
+#. settings-schema.json->radios->columns->title
+msgid "Streaming URL (empty for a category)"
+msgstr "Streaming URL (üres egy kategória esetén)"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Unique identifier"
+msgstr "Egyedi azonosító"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Home page"
+msgstr "Honlap"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Tags"
+msgstr "Címkék"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Favicon"
+msgstr "Favicon"
+
+#. settings-schema.json->radios->columns->title
+msgid "Artist/Title swap"
+msgstr "Előadó/Cím felcserélése"
+
+#. settings-schema.json->stations-list-play-button->description
+#. settings-schema.json->import-list-play-button->description
+#. settings-schema.json->search-list-play-button->description
+msgid "♪ Play the next station to test"
+msgstr "♪ Játsszon a következő teszteléshez"
+
+#. settings-schema.json->category-to-move->description
+msgid "Category to which to move the selected stations:"
+msgstr "Kategória, ahová a kiválasztott állomásokat áthelyezheti:"
+
+#. settings-schema.json->button-moving->description
+msgid "➟ Move selected stations to this category"
+msgstr "➟ A kiválasztott állomások áthelyezése ebbe a kategóriába"
+
+#. settings-schema.json->button_go_to_category->description
+msgid "Go to this category"
+msgstr "Ugrás ebbe a kategóriába"
+
+#. settings-schema.json->button-show-all->description
+msgid "Show all stations and categories in the menu"
+msgstr "Az összes állomás és kategória megjelenítése a menüben"
+
+#. settings-schema.json->button-hide-all->description
+msgid "Hide all stations and categories (so the menu becomes empty)"
+msgstr "Minden állomás és kategória elrejtése (így a menü üres lesz)"
+
+#. settings-schema.json->button-save->description
+msgid "Save this list of stations"
+msgstr "Mentse el az állomások listáját"
+
+#. settings-schema.json->button-restore->description
+msgid "Restore a list of stations"
+msgstr "Állomások listájának visszaállítása"
+
+#. settings-schema.json->button_open_folder->description
+msgid "Open the folder containing these lists"
+msgstr "Nyissa meg az ezeket a listákat tartalmazó mappát"
+
+#. settings-schema.json->button-update->description
+msgid "Update my station list with the Radio Database data"
+msgstr "Frissítse az állomáslistámat a Radio Database adataival"
+
+#. settings-schema.json->blacklist->columns->title
+msgid "Blacklisted URL"
+msgstr ""
+
+#. settings-schema.json->import-radiopp-button->description
+msgid "Import your stations from Radio++"
+msgstr "Importáld az állomásaidat a Radio++-ból"
+
+#. settings-schema.json->import-shoutcast-button->description
+msgid "Open the Shoutcast directory"
+msgstr "Nyissa meg a Shoutcast könyvtárat"
+
+#. settings-schema.json->import-file-button->description
+msgid "Import a .csv, .m3u, .pls, .xspf or .json file"
+msgstr ".csv, .m3u, .pls, .xspf vagy .json fájl importálása"
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Select"
+msgstr "Válasszon"
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "♪"
+msgstr "♪"
+
+#. settings-schema.json->import-list->columns->title
+msgid "Title"
+msgstr "Megszólítás"
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Streaming URL"
+msgstr "Streaming URL"
+
+#. settings-schema.json->import-list-button->description
+#. settings-schema.json->search-list-button->description
+msgid "Import the selected stations into my own list"
+msgstr "Importálja a kiválasztott állomásokat a saját listámba"
+
+#. settings-schema.json->import-remove-from-list-button->description
+#. settings-schema.json->search-remove-from-list-button->description
+msgid "Remove selected items from this list"
+msgstr "A kiválasztott elemek eltávolítása a listáról"
+
+#. settings-schema.json->import-blacklist-button->description
+#, fuzzy
+msgid "Blacklist selected items from this list"
+msgstr "A kiválasztott elemek eltávolítása a listáról"
+
+#. settings-schema.json->import-select-all->description
+#. settings-schema.json->search-select-all->description
+msgid "Select all items"
+msgstr "Válassza ki az összes elemet"
+
+#. settings-schema.json->import-unselect-all->description
+#. settings-schema.json->search-unselect-all->description
+msgid "Unselect all items"
+msgstr "Törölje az összes elem kijelölését"
+
+#. settings-schema.json->search-list->columns->title
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Station"
+msgstr "Állomás"
+
+#. settings-schema.json->search-list->columns->title
+msgid ""
+"Country\n"
+"Code"
+msgstr ""
+"Ország\n"
+"kód"
+
+#. settings-schema.json->search-list->columns->title
+#. settings-schema.json->search-country->description
+msgid "Country"
+msgstr "Ország"
+
+#. settings-schema.json->search-list-page-label->description
+msgid "Page:"
+msgstr "Oldal:"
+
+#. settings-schema.json->maximize-vertically->description
+msgid "Vertical maximization"
+msgstr "Függőleges maximalizálás"
+
+#. settings-schema.json->maximize-vertically->tooltip
+msgid ""
+"When this option is checked, this Settings Window will be maximized "
+"vertically the next time it is opened."
+msgstr ""
+"Ha ez a beállítás be van jelölve, akkor a Beállítások ablak a következő "
+"megnyitáskor függőlegesen lesz maximalizálva."
+
+#. settings-schema.json->switch-on-last-station-at-start-up->description
+msgid "Turn on the radio when Cinnamon starts up"
+msgstr "Kapcsolja be a rádiót, amikor a Cinnamon asztali környezet elindul"
+
+#. settings-schema.json->switch-on-last-station-at-start-up->tooltip
+msgid ""
+"The selected radio will be the last you listened to, even if you stopped "
+"it.\n"
+"\n"
+"VPN users: By checking this, the radio broadcast could use your VPN link in "
+"the event that this one is active before the start of this applet."
+msgstr ""
+"A kiválasztott rádió lesz az utolsó, amit hallgatott, még akkor is, ha "
+"leállította.\n"
+"\n"
+"VPN-felhasználók: Ennek bejelölésével a rádióadás használhatja az Ön VPN-"
+"hivatkozását abban az esetben, ha ez a kisalkalmazás indítása előtt aktív."
+
+#. settings-schema.json->volume-at-startup->description
+msgid "Volume level starting a new radio (%)"
+msgstr "Hangerőszint új rádió indításakor (%)"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-minimalBitrate->options
+msgid "0"
+msgstr "0"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-limit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "35"
+msgstr "35"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "40"
+msgstr "40"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "45"
+msgstr "45"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->yt-progress-interval->options
+#. settings-schema.json->search-limit->options
+msgid "50"
+msgstr "50"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "55"
+msgstr "55"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "60"
+msgstr "60"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "65"
+msgstr "65"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "70"
+msgstr "70"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "75"
+msgstr "75"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "80"
+msgstr "80"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "85"
+msgstr "85"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "90"
+msgstr "90"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "95"
+msgstr "95"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->yt-progress-interval->options
+#. settings-schema.json->search-limit->options
+msgid "100"
+msgstr "100"
+
+#. settings-schema.json->volume-at-startup->tooltip
+msgid ""
+"If set, then this will change the volume level starting a new radio, in "
+"percentage of the general volume level.\n"
+"Default is (Undefined): The volume level remains unchanged.\n"
+"\n"
+"Please note that you can change the volume level scrolling on this applet "
+"icon, or using the slider in the context menu."
+msgstr ""
+"Ha be van állítva, akkor ez megváltoztatja a hangerőt egy új rádió "
+"indításakor, az általános hangerő százalékában.\n"
+"Az alapértelmezés (Undefined): A hangerő változatlan marad.\n"
+"\n"
+"Kérjük, vegye figyelembe, hogy módosíthatja a hangerőszintet ezen a "
+"kisalkalmazásikonon görgetve, vagy a helyi menü csúszkájával."
+
+#. settings-schema.json->volume-step->description
+msgid "Volume step scrolling on icon"
+msgstr "Hangerő fokozatos görgetés az ikonon"
+
+#. settings-schema.json->volume-step->options
+msgid "±0%"
+msgstr "±0%"
+
+#. settings-schema.json->volume-step->options
+msgid "±1%"
+msgstr "±1%"
+
+#. settings-schema.json->volume-step->options
+msgid "±2%"
+msgstr "±2%"
+
+#. settings-schema.json->volume-step->options
+msgid "±3%"
+msgstr "±3%"
+
+#. settings-schema.json->volume-step->options
+msgid "±4%"
+msgstr "±4%"
+
+#. settings-schema.json->volume-step->options
+msgid "±5%"
+msgstr "±5%"
+
+#. settings-schema.json->volume-step->tooltip
+msgid ""
+"By how much increase or decrease the volume using the mouse scroll wheel on "
+"the icon."
+msgstr ""
+"Mennyivel növelje vagy csökkentse a hangerőt az egér görgőjének segítségével "
+"az ikonon."
+
+#. settings-schema.json->volume-magnetic-on->description
+msgid "Magnetize all multiples of 25%"
+msgstr "Mágnesezze az összes 25%-os szorzatot"
+
+#. settings-schema.json->volume-show-osd->description
+msgid "Show OSD while changing volume"
+msgstr "OSD megjelenítése a hangerő módosításakor"
+
+#. settings-schema.json->volume-show-osd->tooltip
+msgid "Should OSD (On-Screen Display) be displayed when changing volume?"
+msgstr ""
+"Meg kell jeleníteni az OSD kijelzést (On-Screen Display) a hangerő "
+"módosításakor?"
+
+#. settings-schema.json->volume-show-osd-starting-radio->description
+msgid "Show volume OSD when changing radio station"
+msgstr "Hangerő OSD megjelenítése rádióállomás váltásakor"
+
+#. settings-schema.json->show-percent-char-in-osd->description
+msgid "Show '%' in OSD"
+msgstr "„%” megjelenítése az OSD kijelzésben"
+
+#. settings-schema.json->show-horizontal-osd->description
+msgid "Show horizontal OSD"
+msgstr "Vízszintes OSD megjelenítése"
+
+#. settings-schema.json->show-title-and-version->description
+msgid "Show the name and the version of this applet in the menu"
+msgstr "Mutassa meg a kisalkalmazás nevét és verzióját a menüben"
+
+#. settings-schema.json->recent-number->description
+msgid "Number of Recently Played Stations in menu"
+msgstr "Legutóbb lejátszott állomások száma a menüben"
+
+#. settings-schema.json->recent-number->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->recent-number->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->recent-number->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->recent-number->options
+msgid "4"
+msgstr "4"
+
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-limit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->recent-number->options
+msgid "6"
+msgstr "6"
+
+#. settings-schema.json->recent-number->options
+msgid "7"
+msgstr "7"
+
+#. settings-schema.json->recent-number->options
+msgid "8"
+msgstr "8"
+
+#. settings-schema.json->recent-number->options
+msgid "9"
+msgstr "9"
+
+#. settings-schema.json->recent-number->tooltip
+msgid "How many recently listened stations do you want to display in the menu?"
+msgstr "Hány legutóbb hallgatott állomást szeretne megjeleníteni a menüben?"
+
+#. settings-schema.json->reset-recents->description
+msgid "Empty your Recently Played Stations list at startup"
+msgstr "Indításkor ürítse ki a Legutóbb lejátszott állomások listáját"
+
+#. settings-schema.json->button-reset-recents->description
+msgid "Empty your Recently Played Stations list now"
+msgstr "Ürítse ki most a Legutóbb lejátszott állomások listáját"
+
+#. settings-schema.json->show-by-category->description
+msgid "Display the Station list beside the Category list"
+msgstr "Az állomáslista megjelenítése a kategória lista mellett"
+
+#. settings-schema.json->show-by-category->tooltip
+msgid ""
+"Checked: Hover (without clicking) over a Category to display its list of "
+"Stations; then select your station.\n"
+"Unchecked: Single list containing each category followed by its stations."
+msgstr ""
+"Ellenőrizve: A kategória fölé mozgatva (kattintás nélkül) jelenítse meg az "
+"állomások listáját, majd válassza ki az állomást.\n"
+"Nem bejelölt: Egyetlen lista, amely tartalmazza az egyes kategóriákat, majd "
+"az állomásokat."
+
+#. settings-schema.json->show-system-items->description
+msgid "Show system items in the menu"
+msgstr "Rendszerelemek megjelenítése a menüben"
+
+#. settings-schema.json->show-system-items->tooltip
+msgid ""
+"Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
+msgstr ""
+"Meg kívánja jeleníteni a „Beállítások…” és a „Hangbeállítások” elemeket a "
+"menüben?"
+
+#. settings-schema.json->show-reload->description
+msgid "Show the 'Reload this applet' item in the contextual menu"
+msgstr "Jelenítse meg a „Kisalkalmazás újratöltése” elemet a helyi menüben"
+
+#. settings-schema.json->show-reload->tooltip
+msgid "For developers only"
+msgstr "Csak fejlesztőknek"
+
+#. settings-schema.json->shortcut-volume-up->description
+msgid "Increase Volume"
+msgstr "Hangerő növelése"
+
+#. settings-schema.json->shortcut-volume-down->description
+msgid "Decrease Volume"
+msgstr "Hangerő csökkentése"
+
+#. settings-schema.json->shortcut-volume-cut->description
+msgid "Mute"
+msgstr "Némítás"
+
+#. settings-schema.json->shortcut-radio-on-off->description
+msgid "Radio ON/OFF"
+msgstr "Rádió Be/Ki"
+
+#. settings-schema.json->shortcut-next-recent-radio->description
+msgid "Next station"
+msgstr "Következő állomás"
+
+#. settings-schema.json->shortcut-next-recent-radio->tooltip
+msgid "Next station recently listened to"
+msgstr "A következő állomás nemrég hallgatta"
+
+#. settings-schema.json->shortcut-previous-recent-radio->description
+msgid "Previous station"
+msgstr "Előző állomás"
+
+#. settings-schema.json->shortcut-previous-recent-radio->tooltip
+msgid "Previous station recently listened to"
+msgstr "Nemrég hallgatott előző állomás"
+
+#. settings-schema.json->show-help-in-tooltip->description
+msgid "Show help for mouse actions in the tooltip"
+msgstr "Segítség megjelenítése az egérműveletekhez az eszköztippben"
+
+#. settings-schema.json->show-help-in-tooltip->tooltip
+msgid "You can uncheck this option when you are familiar with all mouse roles."
+msgstr "Ezt a lehetőséget törölheti, ha ismeri az összes egérszerepet."
+
+#. settings-schema.json->notif-station-change->description
+msgid "Change of radio"
+msgstr "Rádióváltás"
+
+#. settings-schema.json->notif-song-change->description
+msgid "Change of song or program"
+msgstr "Dal vagy műsor változása"
+
+#. settings-schema.json->notif-song-change->tooltip
+msgid ""
+"Please note that some radios do not notify you of a song or program change."
+msgstr ""
+"Kérjük, vegye figyelembe, hogy egyes rádiók nem értesítik Önt a dal vagy a "
+"műsor változásáról."
+
+#. settings-schema.json->notif-song-duration->units
+msgid "seconds"
+msgstr "másodperc"
+
+#. settings-schema.json->notif-song-duration->description
+msgid "Duration of a song or program change notification"
+msgstr "Zeneszám vagy műsorváltoztatási értesítés időtartama"
+
+#. settings-schema.json->notif-buttons-allowed->description
+msgid "Show in notifications the buttons to start and stop recordings"
+msgstr ""
+"Jelenítse meg az értesítésekben a felvételek indításához és leállításához "
+"szükséges gombokat"
+
+#. settings-schema.json->notif-buttons-allowed->tooltip
+msgid ""
+"Please note that this will have no effect if you do not wish to be notified "
+"of a song or program change."
+msgstr ""
+"Kérjük, vegye figyelembe, hogy ennek nincs hatása, ha nem szeretne "
+"értesítést kapni egy dal vagy program változásáról."
+
+#. settings-schema.json->show-codec->description
+msgid "Show codec"
+msgstr "Kodek megjelenítése"
+
+#. settings-schema.json->show-bitrate->description
+msgid "Show bit rate"
+msgstr "Bitráta megjelenítése"
+
+#. settings-schema.json->show-bitrate->tooltip
+msgid ""
+"Unit: kbps (kilobit per second).\n"
+"The higher this bit rate, the better the sound quality of the stream."
+msgstr ""
+"Mértékegysége: kbps (kilobit per másodperc).\n"
+"Minél nagyobb ez a bitsebesség, annál jobb az adatfolyam hangminősége."
+
+#. settings-schema.json->color-on->description
+msgid "Color of the symbolic icon while the radio is on"
+msgstr "A szimbolikus ikon színe, amikor a rádió be van kapcsolva"
+
+#. settings-schema.json->color-recording->description
+msgid "Color of the symbolic icon while recording"
+msgstr "A szimbolikus ikon színe felvétel közben"
+
+#. settings-schema.json->show-favicon->description
+msgid "Display the logo of the radio station listened to"
+msgstr "Jelenítse meg a hallgatott rádióállomás logóját"
+
+#. settings-schema.json->show-favicon->tooltip
+msgid "Replace this applet icon with the radio station logo, if it exists."
+msgstr ""
+"Cserélje ki ezt a kisalkalmazás ikont a rádióállomás logójával, ha létezik."
+
+#. settings-schema.json->network-quality->description
+msgid "Network Quality"
+msgstr "Hálózati minőség"
+
+#. settings-schema.json->network-quality->options
+msgid "High"
+msgstr "Magas"
+
+#. settings-schema.json->network-quality->options
+msgid "Low"
+msgstr "Alacsony"
+
+#. settings-schema.json->network-quality->tooltip
+msgid ""
+"High Quality: The recordings you make while listening to the radio will "
+"double the bit rate usually required to just listen to the radio. Thus, the "
+"recordings will not be disturbed by extraneous sounds or by a change in the "
+"volume of the radio.\n"
+"\n"
+"Low Quality: These recordings come directly from the sound card, which "
+"relieves the network but risks polluting them with extraneous sounds (system "
+"sounds for example). The volume of the radio will be set to 100% in order to "
+"obtain the best possible quality."
+msgstr ""
+"Kiváló minőség: A rádióhallgatás közben készített felvételek megduplázzák a "
+"rádióhallgatáshoz általában szükséges bitsebességet. Így a felvételeket sem "
+"idegen hangok, sem a rádió hangerejének változása nem zavarja.\n"
+"\n"
+"Gyenge minőség: Ezek a felvételek közvetlenül a hangkártyáról származnak, "
+"ami tehermentesíti a hálózatot, de fennáll annak a veszélye, hogy idegen "
+"hangokkal (például rendszerhangokkal) szennyezi őket. A rádió hangereje 100%-"
+"ra lesz állítva a lehető legjobb minőség elérése érdekében."
+
+#. settings-schema.json->image-resolution->description
+msgid "Quality of downloaded Album Art"
+msgstr "A letöltött Albumborító minősége"
+
+#. settings-schema.json->image-resolution->options
+msgid "Max Resolution"
+msgstr "Teljes felbontás"
+
+#. settings-schema.json->image-resolution->options
+msgid "High Quality"
+msgstr "Magas minőség"
+
+#. settings-schema.json->image-resolution->options
+msgid "Medium"
+msgstr "Közepes"
+
+#. settings-schema.json->image-resolution->options
+msgid "Standard"
+msgstr "Standard"
+
+#. settings-schema.json->image-resolution->tooltip
+msgid ""
+"Default: High Quality. Choose a value corresponding to your Network Quality."
+msgstr ""
+"Alapértelmezett: Magas minőség. Válassza ki a hálózati minőségnek megfelelő "
+"értéket."
+
+#. settings-schema.json->network-monitoring->description
+msgid "Monitor the network"
+msgstr "Figyelje a hálózatot"
+
+#. settings-schema.json->network-monitoring->tooltip
+msgid ""
+"Whether or not to restart the radio when the network becomes active again "
+"after an interruption.\n"
+"\n"
+"VPN users: By checking this, the radio broadcast may use your VPN link."
+msgstr ""
+"Annak meghatározása, hogy újra kell-e indítani a rádiót, ha a hálózat ismét "
+"aktívvá válik egy megszakítás után.\n"
+"\n"
+"VPN-felhasználók: Ennek bejelölésével a rádióadás használhatja az Ön VPN-"
+"kapcsolatát."
+
+#. settings-schema.json->http-proxy->description
+msgid "HTTP Proxy"
+msgstr "HTTP Proxy"
+
+#. settings-schema.json->http-proxy->tooltip
+msgid ""
+"Format: http://[user:pass@]URL[:port]\n"
+"Default: empty.\n"
+"If empty, the environment variables http_proxy and ALL_PROXY will be used if "
+"present.\n"
+"If set, this proxy will not be used for https requests."
+msgstr ""
+"Formátum: http://[felhasználó:pass@]URL[:port]\n"
+"Alapértelmezett: üres.\n"
+"Ha üres, akkor a http_proxy és az ALL_PROXY környezeti változókat fogja "
+"használni, ha vannak.\n"
+"Ha be van állítva, akkor ez a proxy nem lesz használva https-kérésekhez."
+
+#. settings-schema.json->apply-http-proxy->description
+msgid "Apply HTTP Proxy"
+msgstr "HTTP proxy alkalmazása"
+
+#. settings-schema.json->database-favorite->description
+msgid "Your favorite database:"
+msgstr "Az Ön kedvenc adatbázisa:"
+
+#. settings-schema.json->database-favorite->options
+msgid "Random"
+msgstr "Véletlenszerű"
+
+#. settings-schema.json->database-url->description
+msgid "Database URL"
+msgstr "Adatbázis URL"
+
+#. settings-schema.json->cache-no-cache->description
+msgid "No cache"
+msgstr "Nincs gyorsítótár"
+
+#. settings-schema.json->cache-no-cache->tooltip
+msgid ""
+"Checking this option limits memory usage, but no longer allows the user to "
+"rewind the cache (using the sound150@claudiux applet)."
+msgstr ""
+"Ennek az opciónak a bejelölése korlátozza a memóriahasználatot, de már nem "
+"teszi lehetővé a felhasználó számára a gyorsítótár visszatekerését (a "
+"sound150@claudiux kisalkalmazás használatával)."
+
+#. settings-schema.json->cache-minutes->description
+msgid ""
+"Minutes to cache\n"
+"0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
+msgstr ""
+"Perc(ek) a gyorsítótárazáshoz\n"
+"A 0 azt jelenti, hogy nincs korlátozás (alapértelmezett). 1 óra = 60 perc. "
+"24 óra = 1440 perc."
+
+#. settings-schema.json->cache-on-disk->description
+msgid ""
+"Cache on disk\n"
+"(Write packet data to a temporary file, instead of keeping them in memory.)"
+msgstr ""
+"Gyorsítótár a lemezen\n"
+"(A csomagadatokat egy ideiglenes fájlba írja, ahelyett, hogy a memóriában "
+"tartaná őket.)"
+
+#. settings-schema.json->cache-stream-size->description
+msgid "Stream cache size"
+msgstr "Stream gyorsítótár mérete"
+
+#. settings-schema.json->cache-stream-size->tooltip
+msgid ""
+"The amount of stream cache. Default: 10 MiB.\n"
+"Beware, setting this to a large value can reduce performance."
+msgstr ""
+"A stream gyorsítótár mennyisége. Alapértelmezett: 10 MiB.\n"
+"Vigyázat, ha ezt nagy értékre állítjuk, az csökkentheti a teljesítményt."
+
+#. settings-schema.json->cache-stream-size->options
+msgid "No limit"
+msgstr "Korlátlan"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "64 KiB"
+msgstr "64 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "128 KiB"
+msgstr "128 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "256 KiB"
+msgstr "256 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "512 KiB"
+msgstr "512 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "1 MiB"
+msgstr "1 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "2 Mib"
+msgstr "2 Mib"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "3 MiB"
+msgstr "3 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "4 MiB"
+msgstr "4 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "5 MiB"
+msgstr "5 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "10 MiB"
+msgstr "10 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "20 MiB"
+msgstr "20 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "30 MiB"
+msgstr "30 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "40 MiB"
+msgstr "40 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "50 MiB"
+msgstr "50 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "100 MiB"
+msgstr "100 MiB"
+
+#. settings-schema.json->recording-path->description
+msgid "Path to the folder that will contain your future recordings"
+msgstr ""
+"Útvonal ahhoz a mappához, amely a jövőbeni felvételeit fogja tartalmazni"
+
+#. settings-schema.json->button-rec-path-to-default->description
+msgid "Set this path to default one"
+msgstr "Állítsa ezt az elérési utat alapértelmezettre"
+
+#. settings-schema.json->recording-format->description
+msgid "Recording format"
+msgstr "Felvételi formátum"
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "FLAC"
+msgstr "FLAC"
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "MP3"
+msgstr "MP3"
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "OGG"
+msgstr "OGG"
+
+#. settings-schema.json->recording-format->options
+msgid "RAW"
+msgstr "RAW"
+
+#. settings-schema.json->recording-format->options
+msgid "WAV"
+msgstr "WAV"
+
+#. settings-schema.json->recording-format->tooltip
+#. settings-schema.json->recording-ends-auto->tooltip
+msgid ""
+"Please note that this choice will have no effect on any current recording, "
+"but on subsequent ones."
+msgstr ""
+"Kérjük, vegye figyelembe, hogy ez a választás nem lesz hatással az aktuális "
+"felvételekre, hanem a későbbiekre."
+
+#. settings-schema.json->recording-ends-auto->description
+msgid "Way to stop recording"
+msgstr "A felvétel leállításának módja"
+
+#. settings-schema.json->recording-ends-auto->options
+msgid "automatically, when the current song ends"
+msgstr "automatikusan, amikor az aktuális dal véget ér"
+
+#. settings-schema.json->recording-ends-auto->options
+msgid "manually; thus, several recordings can follow one another"
+msgstr "manuálisan; így több felvétel követheti egymást"
+
+#. settings-schema.json->limits-hd-space-left-label->description
+msgid "Space remaining on disk when opening this window:"
+msgstr "A lemezen maradt hely az ablak megnyitásakor:"
+
+#. settings-schema.json->limits-hd-size-prefixes->description
+msgid ""
+"Disk space unit as defined in Nemo's display preferences (File size prefixes)"
+msgstr ""
+"Lemezterület egység a Nemo megjelenítési beállításaiban meghatározottak "
+"szerint (fájlméret előtagok)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GB (decimal)"
+msgstr "GB (tizedes)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GB (decimal long)"
+msgstr "GB (tizedes hosszú)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GiB (binary)"
+msgstr "GiB (bináris)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GiB (binary long)"
+msgstr "GiB (bináris hosszú)"
+
+#. settings-schema.json->limits-hd-size-prefixes->tooltip
+msgid "Changing this also changes Nemo's file size prefixes."
+msgstr "Ennek megváltoztatása megváltoztatja a Nemo fájlméret-előtagjait is."
+
+#. settings-schema.json->limits-hd-value->units
+msgid "Units: As defined above"
+msgstr "Mértékegységek: A fent meghatározottak szerint"
+
+#. settings-schema.json->limits-hd-value->description
+msgid "Space to be left free on the hard disk"
+msgstr "Szabad helyet kell hagyni a merevlemezen"
+
+#. settings-schema.json->highlight-icon-while-background-
+#. recording->description
+msgid "Highlight this applet icon during background recording"
+msgstr ""
+"Emelje ki ezt a kisalkalmazás ikont a háttérben történő rögzítés közben"
+
+#. settings-schema.json->ignoreYT->description
+msgid "Ignore Youtube features"
+msgstr "YouTube funkciók figyelmen kívül hagyása"
+
+#. settings-schema.json->ignoreYT->tooltip
+msgid ""
+"Ignoring Youtube features reduces CPU load. But loading album art becomes "
+"impossible."
+msgstr ""
+"A Youtube funkcióinak figyelmen kívül hagyása csökkenti a CPU terhelését. De "
+"az albumborítók betöltése lehetetlenné válik."
+
+#. settings-schema.json->yt-cookies-from->description
+msgid "Use cookies from"
+msgstr "Sütik használata innen"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "(None)"
+msgstr "(Nincs)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Brave"
+msgstr "Brave"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chrome"
+msgstr "Chrome"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium"
+msgstr "Chromium"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (basictext)"
+msgstr "Chromium (basictext)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (gnomekeyring)"
+msgstr "Chromium (gnomekeyring)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (kwallet)"
+msgstr "Chromium (kwallet)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Firefox"
+msgstr "Firefox"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Opera"
+msgstr "Opera"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Vivaldi"
+msgstr "Vivaldi"
+
+#. settings-schema.json->yt-cookies-from->tooltip
+msgid ""
+"Cookies are used by YouTube to determine which videos you may watch. For "
+"Chromium, you can select the method (in parentheses) you chose to save "
+"cookies."
+msgstr ""
+"A YouTube sötiket használ annak meghatározására, hogy mely videókat nézheti "
+"meg. A Chromium esetében kiválaszthatja (zárójelben) a sütik mentésének a "
+"módját."
+
+#. settings-schema.json->show-yt-progress->description
+msgid "Display, under the icon, the progress of downloads from YT."
+msgstr ""
+"Az ikon alatt jelenítse meg a YouTube-ról történő letöltések folyamatát."
+
+#. settings-schema.json->yt-progress-interval->description
+msgid "Progression interval (ms)"
+msgstr "Progressziós intervallum (ms)"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "Depending on network quality"
+msgstr "A hálózat minőségétől függően"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "150"
+msgstr "150"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "200"
+msgstr "200"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "300"
+msgstr "300"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "400"
+msgstr "400"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "500"
+msgstr "500"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "600"
+msgstr "600"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "750"
+msgstr "750"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "1000"
+msgstr "1000"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "2000"
+msgstr "2000"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "3000"
+msgstr "3000"
+
+#. settings-schema.json->recordings-extract-url->description
+msgid "YouTube video link"
+msgstr "YouTube videó link"
+
+#. settings-schema.json->recordings-paste-button->description
+msgid "Paste above the YouTube link you copied"
+msgstr "Illessze be a másolt YouTube-link fölé"
+
+#. settings-schema.json->recordings-yesno-playlist->description
+msgid "In case of playlist"
+msgstr "Lejátszási lista esetén"
+
+#. settings-schema.json->recordings-yesno-playlist->options
+msgid "Extract single soundtrack"
+msgstr "Kivonat egyetlen hangsávból"
+
+#. settings-schema.json->recordings-yesno-playlist->options
+msgid "Extract whole playlist"
+msgstr "A teljes lejátszási lista kibontása"
+
+#. settings-schema.json->recordings-keep-video->description
+msgid "Keep video (slower)"
+msgstr "Videó megtartása (lassabb)"
+
+#. settings-schema.json->recordings-keep-video->tooltip
+msgid ""
+"Whether or not to keep the intermediate video file on disk after post-"
+"processing"
+msgstr ""
+"Meg kell-e tartani a közbenső videofájlt a lemezen az utófeldolgozás után"
+
+#. settings-schema.json->recordings-subdirectory->description
+msgid "Record in subdirectory"
+msgstr "Rögzítés az alkönyvtárban"
+
+#. settings-schema.json->recordings-subdirectory->tooltip
+msgid "(without leading or trailing slash)"
+msgstr "(kezdő vagy záró perjel nélkül)"
+
+#. settings-schema.json->recordings-extract-button->description
+msgid "Extract soundtrack"
+msgstr "Hangsáv kibontása"
+
+#. settings-schema.json->sched-radio->description
+#. settings-schema.json->alarm-clock-working-days-radio->description
+#. settings-schema.json->alarm-clock-workoff-days-radio->description
+msgid "Radio"
+msgstr "Rádió"
+
+#. settings-schema.json->sched-begin-date->description
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Date"
+msgstr "Dátum"
+
+#. settings-schema.json->sched-begin-time->description
+msgid "Time"
+msgstr "Idő"
+
+#. settings-schema.json->sched-begin-time->tooltip
+#. settings-schema.json->sched-duration->tooltip
+msgid "Seconds will be ignored."
+msgstr "A másodpercek figyelmen kívül lesznek hagyva."
+
+#. settings-schema.json->sched-duration->description
+msgid "Duration"
+msgstr "Időtartam"
+
+#. settings-schema.json->sched-button->description
+msgid "Schedule this recording"
+msgstr "Felvétel ütemezése"
+
+#. settings-schema.json->sched-alert-no-space->description
+msgid "You are running out of disk space. See in the Recording tab."
+msgstr "Kifogy a lemezterülete. Lásd a Felvétel lapon."
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Remove?"
+msgstr "El kívánja távolítani?"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "In progress"
+msgstr "Folyamatban"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Action"
+msgstr "Művelet"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Identifier"
+msgstr "Azonosító"
+
+#. settings-schema.json->sched-recordings->tooltip
+msgid "Do not modify anything in this list, except in the \"Remove?\" column"
+msgstr ""
+"Ne módosítson semmit ebben a listában, kivéve az \"Eltávolítás?\" oszlop"
+
+#. settings-schema.json->search-name->description
+msgid "Station Name"
+msgstr "Állomásnév"
+
+#. settings-schema.json->search-name->tooltip
+msgid "OPTIONAL. Name (or part of the name) of the radio station."
+msgstr "VÁLASZTHATÓ. A rádióállomás neve (vagy a név egy része)."
+
+#. settings-schema.json->search-country->options
+msgid "(My Country)"
+msgstr "(Saját országom)"
+
+#. settings-schema.json->search-country->options
+msgid "Afghanistan - AF"
+msgstr "Afganisztán - AF"
+
+#. settings-schema.json->search-country->options
+msgid "Åland Islands - AX"
+msgstr "Åland-szigetek - AX"
+
+#. settings-schema.json->search-country->options
+msgid "Albania - AL"
+msgstr "Albánia - AL"
+
+#. settings-schema.json->search-country->options
+msgid "Algeria - DZ"
+msgstr "Algéria"
+
+#. settings-schema.json->search-country->options
+msgid "American Samoa - AS"
+msgstr "Amerikai Szamoa - AS"
+
+#. settings-schema.json->search-country->options
+msgid "Andorra - AD"
+msgstr "Andorra - AD"
+
+#. settings-schema.json->search-country->options
+msgid "Angola - AO"
+msgstr "Angola - AO"
+
+#. settings-schema.json->search-country->options
+msgid "Anguilla - AI"
+msgstr "Anguilla - AI"
+
+#. settings-schema.json->search-country->options
+msgid "Antarctica - AQ"
+msgstr "Antarktisz - AQ"
+
+#. settings-schema.json->search-country->options
+msgid "Antigua And Barbuda - AG"
+msgstr "Antigua és Barbuda - AG"
+
+#. settings-schema.json->search-country->options
+msgid "Argentina - AR"
+msgstr "Argentína - AR"
+
+#. settings-schema.json->search-country->options
+msgid "Armenia - AM"
+msgstr "Örményország - AM"
+
+#. settings-schema.json->search-country->options
+msgid "Aruba - AW"
+msgstr "Aruba - AW"
+
+#. settings-schema.json->search-country->options
+msgid "Australia - AU"
+msgstr "Ausztrália - AU"
+
+#. settings-schema.json->search-country->options
+msgid "Austria - AT"
+msgstr "Ausztria - AT"
+
+#. settings-schema.json->search-country->options
+msgid "Azerbaijan - AZ"
+msgstr "Azerbajdzsán - AZ"
+
+#. settings-schema.json->search-country->options
+msgid "Bahamas - BS"
+msgstr "Bahama-szigetek - BS"
+
+#. settings-schema.json->search-country->options
+msgid "Bahrain - BH"
+msgstr "Bahrein - BH"
+
+#. settings-schema.json->search-country->options
+msgid "Bangladesh - BD"
+msgstr "Bangladesh - BD"
+
+#. settings-schema.json->search-country->options
+msgid "Barbados - BB"
+msgstr "Barbados - BB"
+
+#. settings-schema.json->search-country->options
+msgid "Belarus - BY"
+msgstr "Fehéroroszország - BY"
+
+#. settings-schema.json->search-country->options
+msgid "Belgium - BE"
+msgstr "Belgium - BE"
+
+#. settings-schema.json->search-country->options
+msgid "Belize - BZ"
+msgstr "Belize - BZ"
+
+#. settings-schema.json->search-country->options
+msgid "Benin - BJ"
+msgstr "Benin - BJ"
+
+#. settings-schema.json->search-country->options
+msgid "Bermuda - BM"
+msgstr "Bermuda - BM"
+
+#. settings-schema.json->search-country->options
+msgid "Bhutan - BT"
+msgstr "Bhután - BT"
+
+#. settings-schema.json->search-country->options
+msgid "Bolivia (Plurinational State Of) - BO"
+msgstr "Bolívia (többszörös állam) – BO"
+
+#. settings-schema.json->search-country->options
+msgid "Bonaire (Sint Eustatius And Saba) - BQ"
+msgstr "Bonaire (Sint Eustatius és Saba) - BQ"
+
+#. settings-schema.json->search-country->options
+msgid "Bosnia And Herzegovina - BA"
+msgstr "Bosznia és Hercegovina - BA"
+
+#. settings-schema.json->search-country->options
+msgid "Botswana - BW"
+msgstr "Botswana - BW"
+
+#. settings-schema.json->search-country->options
+msgid "Bouvet Island - BV"
+msgstr "Karácsony-sziget - BV"
+
+#. settings-schema.json->search-country->options
+msgid "Brazil - BR"
+msgstr "Brazília - BR"
+
+#. settings-schema.json->search-country->options
+msgid "British Indian Ocean Territory - IO"
+msgstr "Brit indiai óceáni terület - IO"
+
+#. settings-schema.json->search-country->options
+msgid "Brunei Darussalam - BN"
+msgstr "Brunei - BN"
+
+#. settings-schema.json->search-country->options
+msgid "Bulgaria - BG"
+msgstr "Bulgária - BG"
+
+#. settings-schema.json->search-country->options
+msgid "Burkina Faso - BF"
+msgstr "Burkina Faso - BF"
+
+#. settings-schema.json->search-country->options
+msgid "Burundi - BI"
+msgstr "Burundi - BI"
+
+#. settings-schema.json->search-country->options
+msgid "Cambodia - KH"
+msgstr "Kambodzsa - KH"
+
+#. settings-schema.json->search-country->options
+msgid "Cameroon - CM"
+msgstr "Kamerun - CM"
+
+#. settings-schema.json->search-country->options
+msgid "Canada - CA"
+msgstr "Kanada - CA"
+
+#. settings-schema.json->search-country->options
+msgid "Cape Verde - CV"
+msgstr "Zöldfoki-szigetek - CV"
+
+#. settings-schema.json->search-country->options
+msgid "Cayman Islands - KY"
+msgstr "Kajmán-szigetek - KY"
+
+#. settings-schema.json->search-country->options
+msgid "Central African Republic - CF"
+msgstr "Közép-afrikai Köztársaság - CF"
+
+#. settings-schema.json->search-country->options
+msgid "Chad - TD"
+msgstr "Csád - TD"
+
+#. settings-schema.json->search-country->options
+msgid "Chile - CL"
+msgstr "Chile - CL"
+
+#. settings-schema.json->search-country->options
+msgid "China - CN"
+msgstr "Kína - CN"
+
+#. settings-schema.json->search-country->options
+msgid "Christmas Island - CX"
+msgstr "Karácsony-sziget - CX"
+
+#. settings-schema.json->search-country->options
+msgid "Cocos (Keeling) Islands - CC"
+msgstr "Cocos (Keeling) szigetek - CC"
+
+#. settings-schema.json->search-country->options
+msgid "Colombia - CO"
+msgstr "Kolumbia - CO"
+
+#. settings-schema.json->search-country->options
+msgid "Comoros - KM"
+msgstr "Comoros - KM"
+
+#. settings-schema.json->search-country->options
+msgid "Congo - CG"
+msgstr "Kongói Köztársaság - CG"
+
+#. settings-schema.json->search-country->options
+msgid "Congo (The Democratic Republic Of The) - CD"
+msgstr "Kongói Demokratikus Köztársaság - CD"
+
+#. settings-schema.json->search-country->options
+msgid "Cook Islands - CK"
+msgstr "Cook-szigetek - CK"
+
+#. settings-schema.json->search-country->options
+msgid "Costa Rica - CR"
+msgstr "Costa Rica - CR"
+
+#. settings-schema.json->search-country->options
+msgid "Côte D'Ivoire - CI"
+msgstr "Elefántcsontpart - CI"
+
+#. settings-schema.json->search-country->options
+msgid "Croatia - HR"
+msgstr "Horvátország - HR"
+
+#. settings-schema.json->search-country->options
+msgid "Cuba - CU"
+msgstr "Kuba - CU"
+
+#. settings-schema.json->search-country->options
+msgid "Curaçao - CW"
+msgstr "Curaçao – CW"
+
+#. settings-schema.json->search-country->options
+msgid "Cyprus - CY"
+msgstr "Ciprus - CY"
+
+#. settings-schema.json->search-country->options
+msgid "Czech Republic - CZ"
+msgstr "Cseh Köztársaság - CZ"
+
+#. settings-schema.json->search-country->options
+msgid "Denmark - DK"
+msgstr "Dánia - DK"
+
+#. settings-schema.json->search-country->options
+msgid "Djibouti - DJ"
+msgstr "Dzsibuti - DJ"
+
+#. settings-schema.json->search-country->options
+msgid "Dominica - DM"
+msgstr "Dominika - DM"
+
+#. settings-schema.json->search-country->options
+msgid "Dominican Republic - DO"
+msgstr "Dominikai Köztársaság - DO"
+
+#. settings-schema.json->search-country->options
+msgid "Ecuador - EC"
+msgstr "Ecuador - EC"
+
+#. settings-schema.json->search-country->options
+msgid "Egypt - EG"
+msgstr "Egyiptom - EG"
+
+#. settings-schema.json->search-country->options
+msgid "El Salvador - SV"
+msgstr "El Salvador - SV"
+
+#. settings-schema.json->search-country->options
+msgid "Equatorial Guinea - GQ"
+msgstr "Egyenlítői Guinea - GQ"
+
+#. settings-schema.json->search-country->options
+msgid "Eritrea - ER"
+msgstr "Eritrea - ER"
+
+#. settings-schema.json->search-country->options
+msgid "Estonia - EE"
+msgstr "Észtország - EE"
+
+#. settings-schema.json->search-country->options
+msgid "Ethiopia - ET"
+msgstr "Etiópia - ET"
+
+#. settings-schema.json->search-country->options
+msgid "Falkland Islands (Malvinas) - FK"
+msgstr "Falkland-szigetek (Malvinas) - FK"
+
+#. settings-schema.json->search-country->options
+msgid "Faroe Islands - FO"
+msgstr "Faroe-szigetek - FO"
+
+#. settings-schema.json->search-country->options
+msgid "Fiji - FJ"
+msgstr "Fidzsi-szigetek - FJ"
+
+#. settings-schema.json->search-country->options
+msgid "Finland - FI"
+msgstr "Finnország - FI"
+
+#. settings-schema.json->search-country->options
+msgid "France - FR"
+msgstr "Franciaország - FR"
+
+#. settings-schema.json->search-country->options
+msgid "French Guiana - GF"
+msgstr "Francia Guyana - GF"
+
+#. settings-schema.json->search-country->options
+msgid "French Polynesia - PF"
+msgstr "Francia Polinézia - PF"
+
+#. settings-schema.json->search-country->options
+msgid "French Southern Territories - TF"
+msgstr "Francia Déli Területek - TF"
+
+#. settings-schema.json->search-country->options
+msgid "Gabon - GA"
+msgstr "Gabon - GA"
+
+#. settings-schema.json->search-country->options
+msgid "Gambia - GM"
+msgstr "Gambia - GM"
+
+#. settings-schema.json->search-country->options
+msgid "Georgia - GE"
+msgstr "Georgia - GE"
+
+#. settings-schema.json->search-country->options
+msgid "Germany - DE"
+msgstr "Németország - DE"
+
+#. settings-schema.json->search-country->options
+msgid "Ghana - GH"
+msgstr "Ghana - GH"
+
+#. settings-schema.json->search-country->options
+msgid "Gibraltar - GI"
+msgstr "Gibraltár - GI"
+
+#. settings-schema.json->search-country->options
+msgid "Greece - GR"
+msgstr "Görögország - GR"
+
+#. settings-schema.json->search-country->options
+msgid "Greenland - GL"
+msgstr "Grönland - GL"
+
+#. settings-schema.json->search-country->options
+msgid "Grenada - GD"
+msgstr "Grenada - GD"
+
+#. settings-schema.json->search-country->options
+msgid "Guadeloupe - GP"
+msgstr "Guadeloupe - GP"
+
+#. settings-schema.json->search-country->options
+msgid "Guam - GU"
+msgstr "Guam - GU"
+
+#. settings-schema.json->search-country->options
+msgid "Guatemala - GT"
+msgstr "Guatemala - GT"
+
+#. settings-schema.json->search-country->options
+msgid "Guernsey - GG"
+msgstr "Guernsey - GG"
+
+#. settings-schema.json->search-country->options
+msgid "Guinea - GN"
+msgstr "Guinea - GN"
+
+#. settings-schema.json->search-country->options
+msgid "Guinea-Bissau - GW"
+msgstr "Guinea-Bissau - GW"
+
+#. settings-schema.json->search-country->options
+msgid "Guyana - GY"
+msgstr "Guyana - GY"
+
+#. settings-schema.json->search-country->options
+msgid "Haiti - HT"
+msgstr "Haiti - HT"
+
+#. settings-schema.json->search-country->options
+msgid "Heard Island And Mcdonald Islands - HM"
+msgstr "Heard-sziget és Mcdonald-szigetek - HM"
+
+#. settings-schema.json->search-country->options
+msgid "Holy See (Vatican City State) - VA"
+msgstr "Vatikán - VA"
+
+#. settings-schema.json->search-country->options
+msgid "Honduras - HN"
+msgstr "Honduras - HN"
+
+#. settings-schema.json->search-country->options
+msgid "Hong Kong - HK"
+msgstr "Hong Kong - HK"
+
+#. settings-schema.json->search-country->options
+msgid "Hungary - HU"
+msgstr "Magyarország - HU"
+
+#. settings-schema.json->search-country->options
+msgid "Iceland - IS"
+msgstr "Izland - IS"
+
+#. settings-schema.json->search-country->options
+msgid "India - IN"
+msgstr "India - IN"
+
+#. settings-schema.json->search-country->options
+msgid "Indonesia - ID"
+msgstr "Indonézia - ID"
+
+#. settings-schema.json->search-country->options
+msgid "Iran (Islamic Republic Of) - IR"
+msgstr "Irán (Iszlám Köztársaság) – IR"
+
+#. settings-schema.json->search-country->options
+msgid "Iraq - IQ"
+msgstr "Irak - IQ"
+
+#. settings-schema.json->search-country->options
+msgid "Ireland - IE"
+msgstr "Írország - IE"
+
+#. settings-schema.json->search-country->options
+msgid "Isle Of Man - IM"
+msgstr "Man-sziget - IM"
+
+#. settings-schema.json->search-country->options
+msgid "Israel - IL"
+msgstr "Izrael - IL"
+
+#. settings-schema.json->search-country->options
+msgid "Italy - IT"
+msgstr "Olaszország - IT"
+
+#. settings-schema.json->search-country->options
+msgid "Jamaica - JM"
+msgstr "Jamaica - JM"
+
+#. settings-schema.json->search-country->options
+msgid "Japan - JP"
+msgstr "Japán - JP"
+
+#. settings-schema.json->search-country->options
+msgid "Jersey - JE"
+msgstr "Jersey - JE"
+
+#. settings-schema.json->search-country->options
+msgid "Jordan - JO"
+msgstr "Jordánia - JO"
+
+#. settings-schema.json->search-country->options
+msgid "Kazakhstan - KZ"
+msgstr "Kazahsztán - KZ"
+
+#. settings-schema.json->search-country->options
+msgid "Kenya - KE"
+msgstr "Kenya - KE"
+
+#. settings-schema.json->search-country->options
+msgid "Kiribati - KI"
+msgstr "Kiribati - KI"
+
+#. settings-schema.json->search-country->options
+msgid "Korea (Democratic People'S Republic Of) - KP"
+msgstr "Dél-Korea - KP"
+
+#. settings-schema.json->search-country->options
+msgid "Korea (Republic Of) - KR"
+msgstr "Észak-Korea - KR"
+
+#. settings-schema.json->search-country->options
+msgid "Kuwait - KW"
+msgstr "Kuvait - KW"
+
+#. settings-schema.json->search-country->options
+msgid "Kyrgyzstan - KG"
+msgstr "Kirgizisztán - KG"
+
+#. settings-schema.json->search-country->options
+msgid "Lao People'S Democratic Republic - LA"
+msgstr "Laoszi Népi Demokratikus Köztársaság – LA"
+
+#. settings-schema.json->search-country->options
+msgid "Latvia - LV"
+msgstr "Lettország - LV"
+
+#. settings-schema.json->search-country->options
+msgid "Lebanon - LB"
+msgstr "Libanon - LB"
+
+#. settings-schema.json->search-country->options
+msgid "Lesotho - LS"
+msgstr "Lesotho - LS"
+
+#. settings-schema.json->search-country->options
+msgid "Liberia - LR"
+msgstr "Libéria - LR"
+
+#. settings-schema.json->search-country->options
+msgid "Libya - LY"
+msgstr "Líbia - LY"
+
+#. settings-schema.json->search-country->options
+msgid "Liechtenstein - LI"
+msgstr "Lichtenstein - LI"
+
+#. settings-schema.json->search-country->options
+msgid "Lithuania - LT"
+msgstr "Litvánia - LT"
+
+#. settings-schema.json->search-country->options
+msgid "Luxembourg - LU"
+msgstr "Luxembourg - LU"
+
+#. settings-schema.json->search-country->options
+msgid "Macao - MO"
+msgstr "Macao - MO"
+
+#. settings-schema.json->search-country->options
+msgid "Macedonia (The Former Yugoslav Republic Of) - MK"
+msgstr "Macedónia (A Volt Jugoszláv Köztársaság) – MK"
+
+#. settings-schema.json->search-country->options
+msgid "Madagascar - MG"
+msgstr "Madagaszkár - MG"
+
+#. settings-schema.json->search-country->options
+msgid "Malawi - MW"
+msgstr "Malawi - MW"
+
+#. settings-schema.json->search-country->options
+msgid "Malaysia - MY"
+msgstr "Malajzia - MY"
+
+#. settings-schema.json->search-country->options
+msgid "Maldives - MV"
+msgstr "Maldív-szigetek - MV"
+
+#. settings-schema.json->search-country->options
+msgid "Mali - ML"
+msgstr "Mali - ML"
+
+#. settings-schema.json->search-country->options
+msgid "Malta - MT"
+msgstr "Málta - MT"
+
+#. settings-schema.json->search-country->options
+msgid "Marshall Islands - MH"
+msgstr "Marshall-szigetek - MH"
+
+#. settings-schema.json->search-country->options
+msgid "Martinique - MQ"
+msgstr "Martinique - MQ"
+
+#. settings-schema.json->search-country->options
+msgid "Mauritania - MR"
+msgstr "Mauritania - MR"
+
+#. settings-schema.json->search-country->options
+msgid "Mauritius - MU"
+msgstr "Mauritius - MU"
+
+#. settings-schema.json->search-country->options
+msgid "Mayotte - YT"
+msgstr "Mayotte - YT"
+
+#. settings-schema.json->search-country->options
+msgid "Mexico - MX"
+msgstr "Mexikó - MX"
+
+#. settings-schema.json->search-country->options
+msgid "Micronesia (Federated States Of) - FM"
+msgstr "Mikronézia, Államszövetség - FM"
+
+#. settings-schema.json->search-country->options
+msgid "Moldova (Republic Of) - MD"
+msgstr "Moldova - MD"
+
+#. settings-schema.json->search-country->options
+msgid "Monaco - MC"
+msgstr "Monaco - MC"
+
+#. settings-schema.json->search-country->options
+msgid "Mongolia - MN"
+msgstr "Mongólia - MN"
+
+#. settings-schema.json->search-country->options
+msgid "Montenegro - ME"
+msgstr "Montenegró - ME"
+
+#. settings-schema.json->search-country->options
+msgid "Montserrat - MS"
+msgstr "Montserrat - MS"
+
+#. settings-schema.json->search-country->options
+msgid "Morocco - MA"
+msgstr "Marokkó - MA"
+
+#. settings-schema.json->search-country->options
+msgid "Mozambique - MZ"
+msgstr "Mozambique - MZ"
+
+#. settings-schema.json->search-country->options
+msgid "Myanmar - MM"
+msgstr "Mianmar - MM"
+
+#. settings-schema.json->search-country->options
+msgid "Namibia - NA"
+msgstr "Namibia - NA"
+
+#. settings-schema.json->search-country->options
+msgid "Nauru - NR"
+msgstr "Nauru - NR"
+
+#. settings-schema.json->search-country->options
+msgid "Nepal - NP"
+msgstr "Nepál - NP"
+
+#. settings-schema.json->search-country->options
+msgid "Netherlands - NL"
+msgstr "Hollandia - NL"
+
+#. settings-schema.json->search-country->options
+msgid "New Caledonia - NC"
+msgstr "Új-Kaledónia - NC"
+
+#. settings-schema.json->search-country->options
+msgid "New Zealand - NZ"
+msgstr "Új-Zéland - NZ"
+
+#. settings-schema.json->search-country->options
+msgid "Nicaragua - NI"
+msgstr "Nicaragua - NI"
+
+#. settings-schema.json->search-country->options
+msgid "Niger - NE"
+msgstr "Niger - NE"
+
+#. settings-schema.json->search-country->options
+msgid "Nigeria - NG"
+msgstr "Nigeria - NG"
+
+#. settings-schema.json->search-country->options
+msgid "Niue - NU"
+msgstr "Niue - NU"
+
+#. settings-schema.json->search-country->options
+msgid "Norfolk Island - NF"
+msgstr "Norfolk-sziget - NF"
+
+#. settings-schema.json->search-country->options
+msgid "Northern Mariana Islands - MP"
+msgstr "Északi Mariana-szigetek - MP"
+
+#. settings-schema.json->search-country->options
+msgid "Norway - NO"
+msgstr "Norvégia - NO"
+
+#. settings-schema.json->search-country->options
+msgid "Oman - OM"
+msgstr "Omán - OM"
+
+#. settings-schema.json->search-country->options
+msgid "Pakistan - PK"
+msgstr "Pakisztán - PK"
+
+#. settings-schema.json->search-country->options
+msgid "Palau - PW"
+msgstr "Palau - PW"
+
+#. settings-schema.json->search-country->options
+msgid "Palestine (State Of) - PS"
+msgstr "Palestine - PS"
+
+#. settings-schema.json->search-country->options
+msgid "Panama - PA"
+msgstr "Panama - PA"
+
+#. settings-schema.json->search-country->options
+msgid "Papua New Guinea - PG"
+msgstr "Pápua Új-Guinea - PG"
+
+#. settings-schema.json->search-country->options
+msgid "Paraguay - PY"
+msgstr "Paraguay - PY"
+
+#. settings-schema.json->search-country->options
+msgid "Peru - PE"
+msgstr "Peru - PE"
+
+#. settings-schema.json->search-country->options
+msgid "Philippines - PH"
+msgstr "Fülöp-szigetek - PH"
+
+#. settings-schema.json->search-country->options
+msgid "Pitcairn - PN"
+msgstr "Pitcairn - PN"
+
+#. settings-schema.json->search-country->options
+msgid "Poland - PL"
+msgstr "Lengyelország - PL"
+
+#. settings-schema.json->search-country->options
+msgid "Portugal - PT"
+msgstr "Portugália - PT"
+
+#. settings-schema.json->search-country->options
+msgid "Puerto Rico - PR"
+msgstr "Puerto Rico - PR"
+
+#. settings-schema.json->search-country->options
+msgid "Qatar - QA"
+msgstr "Katar - QA"
+
+#. settings-schema.json->search-country->options
+msgid "Réunion - RE"
+msgstr "Réunion - RE"
+
+#. settings-schema.json->search-country->options
+msgid "Romania - RO"
+msgstr "Románia - RO"
+
+#. settings-schema.json->search-country->options
+msgid "Russian Federation - RU"
+msgstr "Oroszország - RU"
+
+#. settings-schema.json->search-country->options
+msgid "Rwanda - RW"
+msgstr "Rwanda - RW"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Barthélemy - BL"
+msgstr "Saint Barthélemy - BL"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Helena (Ascension And Tristan Da Cunha) - SH"
+msgstr "Szent Ilona (Ascension és Tristan Da Cunha) - SH"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Kitts And Nevis - KN"
+msgstr "St. Kitts és Nevis - KN"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Lucia - LC"
+msgstr "Saint Lucia - LC"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Martin (French Part) - MF"
+msgstr "Saint Martin (francia rész) - MF"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Pierre And Miquelon - PM"
+msgstr "Saint Pierre és Miquelon - PM"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Vincent And The Grenadines - VC"
+msgstr "Saint Vincent és a Grenadines-szigetek - VC"
+
+#. settings-schema.json->search-country->options
+msgid "Samoa - WS"
+msgstr "Szamoa - WS"
+
+#. settings-schema.json->search-country->options
+msgid "San Marino - SM"
+msgstr "San Marino - SM"
+
+#. settings-schema.json->search-country->options
+msgid "Sao Tome And Principe - ST"
+msgstr "São Tomé és Príncipe - ST"
+
+#. settings-schema.json->search-country->options
+msgid "Saudi Arabia - SA"
+msgstr "Szaúd-Arábia - SA"
+
+#. settings-schema.json->search-country->options
+msgid "Senegal - SN"
+msgstr "Senegal - SN"
+
+#. settings-schema.json->search-country->options
+msgid "Serbia - RS"
+msgstr "Szerbia - RS"
+
+#. settings-schema.json->search-country->options
+msgid "Seychelles - SC"
+msgstr "Seychelles - SC"
+
+#. settings-schema.json->search-country->options
+msgid "Sierra Leone - SL"
+msgstr "Sierra Leone - SL"
+
+#. settings-schema.json->search-country->options
+msgid "Singapore - SG"
+msgstr "Szingapúr - SG"
+
+#. settings-schema.json->search-country->options
+msgid "Sint Maarten (Dutch Part) - SX"
+msgstr "Sint Maarten (holland rész) – SX"
+
+#. settings-schema.json->search-country->options
+msgid "Slovakia - SK"
+msgstr "Szlovákia - SK"
+
+#. settings-schema.json->search-country->options
+msgid "Slovenia - SI"
+msgstr "Szlovénia - SI"
+
+#. settings-schema.json->search-country->options
+msgid "Solomon Islands - SB"
+msgstr "Salamon-szigetek - SB"
+
+#. settings-schema.json->search-country->options
+msgid "Somalia - SO"
+msgstr "Szomália - SO"
+
+#. settings-schema.json->search-country->options
+msgid "South Africa - ZA"
+msgstr "Dél-afrikai Köztársaság - ZA"
+
+#. settings-schema.json->search-country->options
+msgid "South Georgia And The South Sandwich Islands - GS"
+msgstr "Déli-Georgia és Déli-Sandwich-szigetek - GS"
+
+#. settings-schema.json->search-country->options
+msgid "South Sudan - SS"
+msgstr "Dél-Szudán - SS"
+
+#. settings-schema.json->search-country->options
+msgid "Spain - ES"
+msgstr "Spanyolország - ES"
+
+#. settings-schema.json->search-country->options
+msgid "Sri Lanka - LK"
+msgstr "Sri Lanka - LK"
+
+#. settings-schema.json->search-country->options
+msgid "Sudan - SD"
+msgstr "Szudán - SD"
+
+#. settings-schema.json->search-country->options
+msgid "Suriname - SR"
+msgstr "Suriname - SR"
+
+#. settings-schema.json->search-country->options
+msgid "Svalbard And Jan Mayen - SJ"
+msgstr "Svalbard-szigetek és Jan Mayen-sziget - SJ"
+
+#. settings-schema.json->search-country->options
+msgid "Swaziland - SZ"
+msgstr "Swaziland - SZ"
+
+#. settings-schema.json->search-country->options
+msgid "Sweden - SE"
+msgstr "Svédország - SE"
+
+#. settings-schema.json->search-country->options
+msgid "Switzerland - CH"
+msgstr "Svájc - CH"
+
+#. settings-schema.json->search-country->options
+msgid "Syrian Arab Republic - SY"
+msgstr "Szíriai Arab Köztársaság – SY"
+
+#. settings-schema.json->search-country->options
+msgid "Taiwan (Province Of China) - TW"
+msgstr "Tajvan (Kína tartomány) – TW"
+
+#. settings-schema.json->search-country->options
+msgid "Tajikistan - TJ"
+msgstr "Tádzsikisztán - TJ"
+
+#. settings-schema.json->search-country->options
+msgid "Tanzania (United Republic Of) - TZ"
+msgstr "Tanzánia (Egyesült Köztársaság) – TZ"
+
+#. settings-schema.json->search-country->options
+msgid "Thailand - TH"
+msgstr "Thaiföld - TH"
+
+#. settings-schema.json->search-country->options
+msgid "Timor-Leste - TL"
+msgstr "Kelet-Timor - TL"
+
+#. settings-schema.json->search-country->options
+msgid "Togo - TG"
+msgstr "Togo - TG"
+
+#. settings-schema.json->search-country->options
+msgid "Tokelau - TK"
+msgstr "Tokelau - TK"
+
+#. settings-schema.json->search-country->options
+msgid "Tonga - TO"
+msgstr "Tonga - TO"
+
+#. settings-schema.json->search-country->options
+msgid "Trinidad And Tobago - TT"
+msgstr "Trinidad és Tobago - TT"
+
+#. settings-schema.json->search-country->options
+msgid "Tunisia - TN"
+msgstr "Tunézia - TN"
+
+#. settings-schema.json->search-country->options
+msgid "Turkey - TR"
+msgstr "Törökország - TR"
+
+#. settings-schema.json->search-country->options
+msgid "Turkmenistan - TM"
+msgstr "Türkmenisztán - TM"
+
+#. settings-schema.json->search-country->options
+msgid "Turks And Caicos Islands - TC"
+msgstr "Turks és Caicos-szigetek - TC"
+
+#. settings-schema.json->search-country->options
+msgid "Tuvalu - TV"
+msgstr "Tuvalu - TV"
+
+#. settings-schema.json->search-country->options
+msgid "Uganda - UG"
+msgstr "Uganda - UG"
+
+#. settings-schema.json->search-country->options
+msgid "Ukraine - UA"
+msgstr "Ukrajna - UA"
+
+#. settings-schema.json->search-country->options
+msgid "United Arab Emirates - AE"
+msgstr "Egyesült Arab Emirátusok - AE"
+
+#. settings-schema.json->search-country->options
+msgid "United Kingdom - GB"
+msgstr "Egyesült Királyság - GB"
+
+#. settings-schema.json->search-country->options
+msgid "United States - US"
+msgstr "Egyesült Államok - US"
+
+#. settings-schema.json->search-country->options
+msgid "United States Minor Outlying Islands - UM"
+msgstr "Egyesült Államok külső szigetei - UM"
+
+#. settings-schema.json->search-country->options
+msgid "Uruguay - UY"
+msgstr "Uruguay - UY"
+
+#. settings-schema.json->search-country->options
+msgid "Uzbekistan - UZ"
+msgstr "Üzbegisztán - UZ"
+
+#. settings-schema.json->search-country->options
+msgid "Vanuatu - VU"
+msgstr "Vanuatu - VU"
+
+#. settings-schema.json->search-country->options
+msgid "Venezuela (Bolivarian Republic Of) - VE"
+msgstr "Venezuela (Bolivári Köztársaság) – VE"
+
+#. settings-schema.json->search-country->options
+msgid "Viet Nam - VN"
+msgstr "Vietnam - VN"
+
+#. settings-schema.json->search-country->options
+msgid "Virgin Islands (British) - VG"
+msgstr "Brit Virgin-szigetek - VG"
+
+#. settings-schema.json->search-country->options
+msgid "Virgin Islands (U.S.) - VI"
+msgstr "Egyesült Államok Virgin-szigetek - VI"
+
+#. settings-schema.json->search-country->options
+msgid "Wallis And Futuna - WF"
+msgstr "Wallis és Futuna - WF"
+
+#. settings-schema.json->search-country->options
+msgid "Western Sahara - EH"
+msgstr "Nyugat-Szahara - EH"
+
+#. settings-schema.json->search-country->options
+msgid "Yemen - YE"
+msgstr "Jemen - YE"
+
+#. settings-schema.json->search-country->options
+msgid "Zambia - ZM"
+msgstr "Zambia - ZM"
+
+#. settings-schema.json->search-country->options
+msgid "Zimbabwe - ZW"
+msgstr "Zimbabwe - ZW"
+
+#. settings-schema.json->search-country->tooltip
+msgid "OPTIONAL. Choose a country."
+msgstr "(elhagyható) Válasszon egy országot."
+
+#. settings-schema.json->search-tag->description
+msgid "Tag"
+msgstr "Tag"
+
+#. settings-schema.json->search-tag->tooltip
+msgid "OPTIONAL. Only one word, as blues or jazz or rock or talk or..."
+msgstr ""
+"VÁLASZTHATÓ. Csak egy szó, mint blues vagy jazz vagy rock, vagy talk vagy..."
+
+#. settings-schema.json->search-codec->options
+msgid "AAC"
+msgstr "AAC"
+
+#. settings-schema.json->search-codec->options
+msgid "AAC+"
+msgstr "AAC+"
+
+#. settings-schema.json->search-codec->options
+msgid "FLV"
+msgstr "FLV"
+
+#. settings-schema.json->search-codec->options
+msgid "AAC,H.264"
+msgstr "AAC,H.264"
+
+#. settings-schema.json->search-codec->options
+msgid "AAC+,H.264"
+msgstr "AAC+,H.264"
+
+#. settings-schema.json->search-codec->options
+msgid "MP3,H.264"
+msgstr "MP3,H.264"
+
+#. settings-schema.json->search-codec->options
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+#. settings-schema.json->search-codec->options
+msgid "Unknown,H.264"
+msgstr "Ismeretlen,H.264"
+
+#. settings-schema.json->search-codec->tooltip
+msgid "OPTIONAL. Choose a codec."
+msgstr "(elhagyható) Válasszon egy kodeket."
+
+#. settings-schema.json->search-minimalBitrate->description
+msgid "Minimal Bitrate"
+msgstr "Minimális bitsebesség"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "128"
+msgstr "128"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "192"
+msgstr "192"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "256"
+msgstr "256"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "320"
+msgstr "320"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "512"
+msgstr "512"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "640"
+msgstr "640"
+
+#. settings-schema.json->search-minimalBitrate->tooltip
+msgid "OPTIONAL. Choose a minimal bitrate (in kbps)."
+msgstr "VÁLASZTHATÓ. Válasszon minimális bitsebességet (kbps-ban)."
+
+#. settings-schema.json->search-order->description
+msgid "Order"
+msgstr "Sorrend"
+
+#. settings-schema.json->search-order->options
+msgid "name"
+msgstr "név"
+
+#. settings-schema.json->search-order->options
+msgid "url"
+msgstr "url"
+
+#. settings-schema.json->search-order->options
+msgid "tags"
+msgstr "címkék"
+
+#. settings-schema.json->search-order->options
+msgid "country"
+msgstr "ország"
+
+#. settings-schema.json->search-order->options
+msgid "state"
+msgstr "állapot"
+
+#. settings-schema.json->search-order->options
+msgid "language"
+msgstr "nyelv"
+
+#. settings-schema.json->search-order->options
+msgid "votes"
+msgstr "szavazatok"
+
+#. settings-schema.json->search-order->options
+msgid "codec"
+msgstr "kodek"
+
+#. settings-schema.json->search-order->options
+msgid "bitrate"
+msgstr "bitsebesség"
+
+#. settings-schema.json->search-order->options
+msgid "last check-time"
+msgstr "utolsó ellenőrzés időpontja"
+
+#. settings-schema.json->search-order->options
+msgid "click timestamp"
+msgstr "kattintson a időbélyeghez"
+
+#. settings-schema.json->search-order->options
+msgid "click count"
+msgstr "kattintson a számlálóhoz"
+
+#. settings-schema.json->search-order->options
+msgid "click trend"
+msgstr "kattintson a trendhez"
+
+#. settings-schema.json->search-order->options
+msgid "change timestamp"
+msgstr "időbélyeg megváltoztatása"
+
+#. settings-schema.json->search-order->options
+msgid "random"
+msgstr "véletlenszerű"
+
+#. settings-schema.json->search-order->tooltip
+msgid "OPTIONAL. Name of the attribute the result list will be sorted by."
+msgstr ""
+"VÁLASZTHATÓ. Az attribútum neve, amely alapján az eredménylista rendezve "
+"lesz."
+
+#. settings-schema.json->search-limit->description
+msgid "Limit"
+msgstr "Korlátozás"
+
+#. settings-schema.json->search-limit->tooltip
+msgid "Maximum number of results per page."
+msgstr "Keresési találatok maximális száma."
+
+#. settings-schema.json->search-page->description
+msgid "Next page number"
+msgstr "Következő oldalszám"
+
+#. settings-schema.json->search-reset-button->description
+msgid "Reset"
+msgstr "Visszaállítás"
+
+#. settings-schema.json->search-button->description
+msgid "Search..."
+msgstr "Keresés…"
+
+#. settings-schema.json->sched-rmbutton->description
+msgid "Remove selected items"
+msgstr "Kiválasztott elemek eltávolítása"
+
+#. settings-schema.json->horizontal-show-name->description
+msgid "Display radio name"
+msgstr "Az állomás nevének megjelenítése"
+
+#. settings-schema.json->horizontal-show-title->description
+msgid "Display title"
+msgstr "Cím megjelenítése"
+
+#. settings-schema.json->horizontal-max-title-length->description
+msgid "Maximum title length"
+msgstr "A cím maximális hossza"
+
+#. settings-schema.json->horizontal-max-title-length->tooltip
+msgid "0 means no maximum"
+msgstr "A 0 azt jelenti, hogy nincs maximum"
+
+#. settings-schema.json->alarm-clock-wake-me-softly->description
+msgid "Wake me up softly"
+msgstr "Ébressz fel finoman"
+
+#. settings-schema.json->alarm-clock-wake-me-softly->tooltip
+msgid "By checking this box, the sound volume gradually increases."
+msgstr "Ha bejelölöd ezt a négyzetet, a hangerő fokozatosan növekszik."
+
+#. settings-schema.json->alarm-clock-volume-begin->description
+msgid "Initial volume (%)"
+msgstr "Kezdeti hangerő (%)"
+
+#. settings-schema.json->alarm-clock-volume-end->description
+msgid "Final volume (%)"
+msgstr "Végső hangerő (%)"
+
+#. settings-schema.json->alarm-clock-volume-end->tooltip
+msgid "The final volume must be greater than or equal to the initial volume."
+msgstr ""
+"A végső térfogatnak nagyobbnak vagy egyenlőnek kell lennie a kezdeti "
+"térfogattal."
+
+#. settings-schema.json->alarm-clock-volume-transition->description
+msgid "Transition duration (seconds)"
+msgstr "Átmenet időtartama (másodperc)"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Sunday"
+msgstr "Vasárnap"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Monday"
+msgstr "Hétfő"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Tuesday"
+msgstr "Kedd"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Wednesday"
+msgstr "Szerda"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Thursday"
+msgstr "Csütörtök"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Friday"
+msgstr "Péntek"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Saturday"
+msgstr "Szombat"
+
+#. settings-schema.json->alarm-clock-working-days-time->description
+#. settings-schema.json->alarm-clock-workoff-days-time->description
+msgid "Wake-Up Time"
+msgstr "Ébresztő időpontja"
+
+#. settings-schema.json->alarm-clock-working-days-radio-button->description
+#. settings-schema.json->alarm-clock-workoff-days-radio-button->description
+msgid "Last-listened-to radio station"
+msgstr "Utoljára hallgatott rádióállomás"
+
+#. settings-schema.json->alarm-clock-tink-on->description
+msgid "Activate tink to ensure speakers are awake"
+msgstr "Aktiválja a csörgést a hangszórók ébrenlétének biztosításához"

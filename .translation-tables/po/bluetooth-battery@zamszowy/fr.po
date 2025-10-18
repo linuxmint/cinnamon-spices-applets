@@ -1,0 +1,213 @@
+# BLUETOOTH BATTERY
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# zamszowy, 2022
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-29 21:28+0200\n"
+"PO-Revision-Date: 2025-09-04 10:05+0200\n"
+"Last-Translator: claudiux\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:84
+msgid "Show devices battery levels"
+msgstr "Afficher le niveau de batterie des appareils"
+
+#. settings-schema.json->notification-warn-demo->description
+#. settings-schema.json->notification-crit-demo->description
+#. applet.js:161 applet.js:166
+msgid "Test notification"
+msgstr "Notification de test"
+
+#. applet.js:161 applet.js:166 applet.js:257 applet.js:267
+msgid "Battery dropped below %d%"
+msgstr "La batterie est tombée en dessous de %d%"
+
+#. metadata.json->name
+msgid "Bluetooth battery"
+msgstr "Batterie Bluetooth"
+
+#. metadata.json->description
+msgid "Shows battery levels of different devices"
+msgstr "Affiche les niveaux de batterie des différents appareils"
+
+#. settings-schema.json->page1->title
+msgid "Settings"
+msgstr "Paramètres"
+
+#. settings-schema.json->page2->title
+msgid "Notifications"
+msgstr "Notifications"
+
+#. settings-schema.json->page3->title
+msgid "Blacklist"
+msgstr "Liste noire"
+
+#. settings-schema.json->section0->title
+msgid "Enable battery monitoring for:"
+msgstr "Activer la surveillance de batterie de :"
+
+#. settings-schema.json->section1->title
+msgid "Icon/Text:"
+msgstr "Icône / texte :"
+
+#. settings-schema.json->section2->title
+msgid "Device to display"
+msgstr "Appareil à afficher"
+
+#. settings-schema.json->section3->title
+msgid ""
+"Disable monitoring for selected devices. You can use model or serial of the "
+"device.\n"
+"Comment starts with '#'"
+msgstr ""
+"Désactiver la surveillance des appareils sélectionnés. Vous pouvez utiliser "
+"le modèle ou le numéro de série de l'appareil.\n"
+"Le commentaire commence par '#'"
+
+#. settings-schema.json->section4->title
+msgid "Warning notifications"
+msgstr "Notifications d'alerte"
+
+#. settings-schema.json->section5->title
+msgid "Critical notifications"
+msgstr "Notifications critiques"
+
+#. settings-schema.json->section6->title
+msgid ""
+"Ignore small changes of battery levels - if device reports small battery "
+"changes back and forth, this setting would help"
+msgstr ""
+"Ignorer les petits changements de niveau de batterie - si l'appareil signale "
+"de petits changements de batterie dans un sens ou dans l'autre, ce paramètre "
+"peut être utile"
+
+#. settings-schema.json->section7->title
+msgid "Showing of configured applet icon/text"
+msgstr "Affichage de l'icône/du texte de l'applet configuré"
+
+#. settings-schema.json->enable-keyboards->description
+msgid "Keyboards"
+msgstr "Claviers"
+
+#. settings-schema.json->enable-mice->description
+msgid "Mice"
+msgstr "Souris"
+
+#. settings-schema.json->enable-headphones->description
+msgid "Headphones"
+msgstr "Écouteurs"
+
+#. settings-schema.json->enable-others->description
+msgid "Other devices"
+msgstr "Autres appareils"
+
+#. settings-schema.json->applet-icon->description
+msgid "Display"
+msgstr "Affichage"
+
+#. settings-schema.json->applet-icon->options
+msgid "Icon and Text"
+msgstr "Icône et texte"
+
+#. settings-schema.json->applet-icon->options
+msgid "Icon"
+msgstr "Icône"
+
+#. settings-schema.json->applet-icon->options
+msgid "Text"
+msgstr "Texte"
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr "Style d'icône"
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr "sombre"
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr "clair"
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr "symbolique"
+
+#. settings-schema.json->blacklist->tooltip
+msgid "tooltip"
+msgstr "info-bulle"
+
+#. settings-schema.json->blacklist-apply->description
+msgid "Apply"
+msgstr "Appliquer"
+
+#. settings-schema.json->blacklist-apply->tooltip
+msgid "Apply changes"
+msgstr "Appliquer les changements"
+
+#. settings-schema.json->override-enable->description
+msgid ""
+"Manually select main device to display (instead of the one with lowest "
+"battery)"
+msgstr ""
+"Sélection manuelle de l'appareil principal à afficher (au lieu de celui dont "
+"la batterie est la plus faible)"
+
+#. settings-schema.json->override-entry->description
+msgid "Selected device:"
+msgstr "Appareil choisi :"
+
+#. settings-schema.json->override-select->description
+msgid "Select device to display"
+msgstr "Sélectionner l'appareil à afficher"
+
+#. settings-schema.json->notification-warn-enable->description
+msgid "Enable notification for battery warning level"
+msgstr "Activer la notification du niveau d'alerte de la batterie"
+
+#. settings-schema.json->notification-warn-level->description
+#. settings-schema.json->notification-crit-level->description
+msgid "Notify when battery below [%]"
+msgstr "Notifier lorsque le niveau de la batterie est inférieur à [%]"
+
+#. settings-schema.json->notification-crit-enable->description
+msgid "Enable notification for battery critical level"
+msgstr "Activer la notification du niveau critique de la batterie"
+
+#. settings-schema.json->notification-applet-icon->description
+msgid "Show icon/text only if:"
+msgstr "Afficher l'icône / le texte seulement si :"
+
+#. settings-schema.json->notification-applet-icon->options
+msgid "show always"
+msgstr "toujours afficher"
+
+#. settings-schema.json->notification-applet-icon->options
+msgid "battery below warning level"
+msgstr "batterie en-dessous du niveau d'alerte"
+
+#. settings-schema.json->notification-applet-icon->options
+msgid "battery below critical level"
+msgstr "batterie en-dessous du niveau critique"
+
+#. settings-schema.json->notification-filter->description
+msgid ""
+"Notify again only if battery increased above configured level by at least: "
+msgstr ""
+"Ne notifier à nouveau que si la batterie a dépassé le niveau configuré d'au "
+"moins : "
+
+#. settings-schema.json->notification-filter->units
+msgid "%"
+msgstr "%"

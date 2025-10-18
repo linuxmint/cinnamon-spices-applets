@@ -1,0 +1,213 @@
+# UPDATES NOTIFIER
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: updates-notifier@zamszowy 2.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-29 10:49+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:79
+msgid "missing dependencies"
+msgstr "thiếu phụ thuộc"
+
+#. applet.js:229
+msgid "Check for new updates"
+msgstr "Kiểm tra bản cập nhật mới"
+
+#. applet.js:243
+#, javascript-format
+msgid "View %s updates"
+msgstr "Xem %s bản cập nhật"
+
+#. applet.js:243
+msgid "No updates to view"
+msgstr "Không có bản cập nhật để xem"
+
+#. applet.js:258
+#, javascript-format
+msgid "Upgrade %s packages"
+msgstr "Nâng cấp %s gói"
+
+#. applet.js:258
+msgid "No packages to upgrade"
+msgstr "Không có gói nào để nâng cấp"
+
+#. applet.js:283
+#, javascript-format
+msgid "%s updates available"
+msgstr "Có %s bản cập nhật"
+
+#. applet.js:284
+msgid "No updates available"
+msgstr "Không có bản cập nhật nào"
+
+#. info-window.js:66 info-window.js:85
+msgid "No details available."
+msgstr "Không có chi tiết."
+
+#. info-window.js:68 info-window.js:87
+msgid ""
+"Error:\n"
+"{0}"
+msgstr ""
+"Lỗi:\n"
+"{0}"
+
+#. info-window.js:72 info-window.js:91
+msgid ""
+"Failed to run command:\n"
+"{0}"
+msgstr ""
+"Không thể chạy lệnh:\n"
+"{0}"
+
+#. info-window.js:108
+msgid "Loading update details…"
+msgstr "Đang tải chi tiết cập nhật…"
+
+#. info-window.js:173
+msgid "Updates"
+msgstr "Cập nhật"
+
+#. info-window.js:188
+msgid "Search updates…"
+msgstr "Tìm kiếm cập nhật…"
+
+#. info-window.js:223
+msgid "{0} updates"
+msgstr "{0} bản cập nhật"
+
+#. info-window.js:251
+msgid ""
+"Failed to read updates file:\n"
+"{0}"
+msgstr ""
+"Không thể đọc tập tin cập nhật:\n"
+"{0}"
+
+#. metadata.json->name
+msgid "Updates notifier"
+msgstr "Trình thông báo cập nhật"
+
+#. metadata.json->description
+msgid "Shows icons for pending update packages"
+msgstr "Hiển thị biểu tượng cho các gói cập nhật đang chờ xử lý"
+
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr "Hành vi"
+
+#. settings-schema.json->pageAppearance->title
+msgid "Appearance"
+msgstr "Giao diện"
+
+#. settings-schema.json->sectionSettings->title
+msgid "Settings"
+msgstr "Cài đặt"
+
+#. settings-schema.json->sectionIconLabel->title
+msgid "Icon/Label"
+msgstr "Biểu tượng/Nhãn"
+
+#. settings-schema.json->sectionClick->title
+msgid "Applet click"
+msgstr "Nhấp applet"
+
+#. settings-schema.json->sectionMenu->title
+msgid "Menu"
+msgstr "Menu"
+
+#. settings-schema.json->sectionTheme->title
+msgid "Theme"
+msgstr "Chủ đề"
+
+#. settings-schema.json->update-refresh->description
+msgid "Minutes to wait before refreshing updates"
+msgstr "Số phút chờ trước khi làm mới cập nhật"
+
+#. settings-schema.json->show-firmware->description
+msgid "Show firmware updates"
+msgstr "Hiển thị cập nhật firmware"
+
+#. settings-schema.json->hide-applet->description
+msgid "Hide applet if there are no updates"
+msgstr "Ẩn applet nếu không có cập nhật"
+
+#. settings-schema.json->different-levels->description
+msgid "Show different applet icon for different updgradeable packages count"
+msgstr "Hiển thị biểu tượng applet khác nhau cho số lượng gói có thể nâng cấp khác nhau"
+
+#. settings-schema.json->level-1->description
+msgid "Show low level icon when updates count is between 0 and this value "
+msgstr "Hiển thị biểu tượng mức thấp khi số lượng cập nhật nằm giữa 0 và giá trị này"
+
+#. settings-schema.json->level-2->description
+msgid ""
+"Show medium level icon when updates count is between low level value and "
+"this value. Show high level icon if it's higher than this value."
+msgstr ""
+"Hiển thị biểu tượng mức trung bình khi số lượng cập nhật nằm giữa giá trị mức thấp và giá trị này. Hiển thị biểu tượng mức cao nếu cao hơn giá trị này."
+
+#. settings-schema.json->show-label->description
+msgid "Show label with updates count"
+msgstr "Hiển thị nhãn với số lượng cập nhật"
+
+#. settings-schema.json->label-font-size->description
+msgid "Label font size"
+msgstr "Cỡ chữ nhãn"
+
+#. settings-schema.json->label-font-weight->description
+msgid "Label font weight"
+msgstr "Độ đậm chữ nhãn"
+
+#. settings-schema.json->label-vertical-position->description
+msgid "Label vertical position"
+msgstr "Vị trí dọc của nhãn"
+
+#. settings-schema.json->show-window-on-click->description
+msgid "Show updates window on left click and menu entries on right click"
+msgstr "Hiển thị cửa sổ cập nhật khi nhấp trái và mục menu khi nhấp phải"
+
+#. settings-schema.json->refresh-when-no-updates->description
+msgid "Refresh updates list on left click if there are no updates"
+msgstr "Làm mới danh sách cập nhật khi nhấp trái nếu không có cập nhật"
+
+#. settings-schema.json->commandUpdate-show->description
+msgid "Show \"Check for new updates\" command"
+msgstr "Hiển thị lệnh \"Kiểm tra bản cập nhật mới\""
+
+#. settings-schema.json->commandUpgrade-show->description
+msgid "Show \"Upgrade packages\" command"
+msgstr "Hiển thị lệnh \"Nâng cấp gói\""
+
+#. settings-schema.json->commandUpgrade->description
+msgid "Upgrade packages command:"
+msgstr "Lệnh nâng cấp gói:"
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr "Kiểu biểu tượng"
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr "tối"
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr "sáng"
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr "tượng trưng"

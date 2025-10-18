@@ -1,0 +1,89 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: betterlock 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-31 04:22-0400\n"
+"PO-Revision-Date: 2025-05-05 01:11+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: applet.js:105
+msgid "Scr Lock"
+msgstr "捲動鎖定鍵"
+
+#: applet.js:109
+msgid "Num Lock"
+msgstr "數字鎖定鍵"
+
+#: applet.js:113
+msgid "Caps Lock"
+msgstr "大寫鎖定鍵"
+
+#: applet.js:148
+msgid "Lock Keys"
+msgstr "鎖定鍵"
+
+#: applet.js:208
+msgid "Scr lock on"
+msgstr "捲動鎖定已開啟"
+
+#: applet.js:211
+msgid "Scr lock off"
+msgstr "捲動鎖定已關閉"
+
+#: applet.js:220
+msgid "Num lock on"
+msgstr "數字鎖定已開啟"
+
+#: applet.js:223
+msgid "Num lock off"
+msgstr "數字鎖定已關閉"
+
+#: applet.js:232
+msgid "Caps lock on"
+msgstr "大寫鎖定已開啟"
+
+#: applet.js:235
+msgid "Caps lock off"
+msgstr "大寫鎖定已關閉"
+
+#. metadata.json->description
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification "
+"when these change."
+msgstr "顯示大寫鎖定鍵、數字鎖定鍵、捲動鎖定鍵的狀態，並在狀態變更時顯示通知。"
+
+#. metadata.json->name
+msgid "Lock keys indicator with notifications"
+msgstr "鎖定鍵指示器與通知"
+
+#. settings-schema.json->show-notifications->description
+msgid "Show notifications"
+msgstr "顯示通知"
+
+#. settings-schema.json->show-silent-notifications->description
+msgid "Silence system notification sound"
+msgstr "關閉系統通知音效"
+
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr "顯示大寫鎖定指示器"
+
+#. settings-schema.json->show-num-lock-indicator->description
+msgid "Show num lock indicator"
+msgstr "顯示數字鎖定指示器"
+
+#. settings-schema.json->show-scr-lock-indicator->description
+msgid "Show scr lock indicator"
+msgstr "顯示捲動鎖定指示器"

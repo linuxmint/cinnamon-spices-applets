@@ -1,0 +1,2543 @@
+# SPICES UPDATE
+# This file is put in the public domain.
+# claudiux, 2019
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SpicesUpdate@claudiux 7.4.4\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-12 18:05+0200\n"
+"PO-Revision-Date: 2025-08-03 18:13+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
+
+#. 4.2/SU_messageTray.js:1282 4.8/SU_messageTray.js:1282
+#. 4.6/SU_messageTray.js:1282 5.6/SU_messageTray.js:1282
+msgid "Open"
+msgstr "Megnyitás"
+
+#. 4.2/SU_messageTray.js:1289 4.8/SU_messageTray.js:1289
+#. 4.6/SU_messageTray.js:1289 5.6/SU_messageTray.js:1289
+#. cs/4.4/modules/cs_applets.py:57 cs/4.4/modules/cs_desklets.py:77
+#. cs/6.0_FUTURE/modules/cs_applets.py:57
+#. cs/6.0_FUTURE/modules/cs_desklets.py:77 cs/4.2/modules/cs_applets.py:56
+#. cs/4.2/modules/cs_desklets.py:76 cs/3.8/modules/cs_applets.py:56
+#. cs/3.8/modules/cs_desklets.py:76 cs/4.6/modules/cs_applets.py:57
+#. cs/4.6/modules/cs_desklets.py:77 cs/4.0/modules/cs_applets.py:56
+#. cs/4.0/modules/cs_desklets.py:76
+msgid "Remove"
+msgstr "Eltávolítás"
+
+#. 4.2/SU_messageTray.js:1913 4.8/SU_messageTray.js:1913
+#. 4.6/SU_messageTray.js:1913 5.6/SU_messageTray.js:1913
+msgid "System Information"
+msgstr "Rendszerinformáció"
+
+#. 4.2/applet.js:141
+msgid "You are advised to restart Cinnamon"
+msgstr "Ajánlatos újraindítani a Cinnamon környezetet"
+
+#. 4.2/applet.js:142
+msgid "To be sure to use the right code, you are advised to restart Cinnamon."
+msgstr ""
+"A megfelelő kód használatához javasoljuk, hogy indítsa újra a Cinnamon-t."
+
+#. 4.2/applet.js:148
+msgid "Restart Cinnamon"
+msgstr "Cinnamon környezet újraindítása"
+
+#. metadata.json->name
+#. 4.2/applet.js:162 4.2/applet.js:580 4.2/applet.js:599 4.2/applet.js:725
+#. 4.2/applet.js:1080 4.8/applet.js:213 4.8/applet.js:717 4.8/applet.js:736
+#. 4.8/applet.js:1233 6.0/applet.js:232 6.0/applet.js:855 6.0/applet.js:883
+#. 6.0/applet.js:1520 6.0/applet_OLD.js:149 6.0/applet_OLD.js:677
+#. 6.0/applet_OLD.js:696 6.0/applet_OLD.js:1200 3.8/applet.js:212
+#. 3.8/applet.js:242 3.8/applet.js:664 3.8/applet.js:743 3.8/applet.js:1174
+#. 3.8/applet.js:1739 4.6/applet.js:214 4.6/applet.js:716 4.6/applet.js:735
+#. 4.6/applet.js:1229 2.8/applet.js:171 2.8/applet.js:192 2.8/applet.js:555
+#. 2.8/applet.js:1004 2.8/applet.js:1582 6.4/applet.js:235 6.4/applet.js:866
+#. 6.4/applet.js:895 6.4/applet.js:1546 5.6/applet.js:211 5.6/applet.js:725
+#. 5.6/applet.js:744 5.6/applet.js:1245
+msgid "Spices Update"
+msgstr "Spices frissítések"
+
+#. 4.2/applet.js:163 4.2/applet.js:1900 4.2/applet.js:1906 4.8/applet.js:214
+#. 4.8/applet.js:2099 4.8/applet.js:2107 6.0/applet.js:237 6.0/applet.js:2709
+#. 6.0/applet.js:2728 6.0/applet_OLD.js:150 6.0/applet_OLD.js:2140
+#. 6.0/applet_OLD.js:2148 3.8/applet.js:243 3.8/applet.js:1913
+#. 3.8/applet.js:1919 4.6/applet.js:215 4.6/applet.js:2093 4.6/applet.js:2101
+#. 2.8/applet.js:1709 2.8/applet.js:1715 6.4/applet.js:240 6.4/applet.js:2820
+#. 6.4/applet.js:2839 5.6/applet.js:212 5.6/applet.js:2113 5.6/applet.js:2121
+msgid "Middle-Click to Refresh"
+msgstr "Középső kattintással frissít"
+
+#. 4.2/applet.js:297 4.8/applet.js:362 6.0/applet.js:460 6.0/applet_OLD.js:320
+#. 4.6/applet.js:363 6.4/applet.js:467 5.6/applet.js:360
+msgid "Spices Update has just been installed or upgraded"
+msgstr "A Spices Frissítések éppen most lett telepítve vagy frissítve"
+
+#. 4.2/applet.js:298 4.8/applet.js:363 6.0/applet.js:462 6.0/applet_OLD.js:321
+#. 4.6/applet.js:364 6.4/applet.js:469 5.6/applet.js:361
+msgid ""
+"Certain parameters require your vigilance: some may have been modified; "
+"others are new."
+msgstr ""
+"Bizonyos paraméterek odafigyelést igényelnek: egyeseket módosulhattak; mások "
+"pedig újak."
+
+#. 4.2/applet.js:299 4.8/applet.js:364 6.0/applet.js:466 6.0/applet_OLD.js:322
+#. 4.6/applet.js:365 6.4/applet.js:473 5.6/applet.js:362
+msgid ""
+"Please check your settings using the menu of the SpicesUpdate applet or the "
+"button below."
+msgstr ""
+"Kérjük, ellenőrizze beállításait a Spices Frissítések kisalkalmazás "
+"menüjében vagy az alábbi gombra kattintva."
+
+#. 4.2/applet.js:301 4.8/applet.js:366 6.0/applet.js:470 6.0/applet_OLD.js:324
+#. 4.6/applet.js:367 6.4/applet.js:477 5.6/applet.js:364
+msgid "Spices Update Settings"
+msgstr "Spices Frissítések beállításai"
+
+#. 4.2/applet.js:625 4.8/applet.js:762 6.0/applet.js:923 6.0/applet_OLD.js:722
+#. 4.6/applet.js:761 6.4/applet.js:936 5.6/applet.js:770
+msgid "Update It Now!"
+msgstr "Azonnali frissítés!"
+
+#. 4.2/applet.js:625 4.8/applet.js:762 6.0/applet.js:924 6.0/applet_OLD.js:722
+#. 4.6/applet.js:761 6.4/applet.js:937 5.6/applet.js:770
+msgid "Update Them All Now!"
+msgstr "Az összes azonnali frissítése!"
+
+#. 4.2/applet.js:631 4.8/applet.js:768 6.0/applet.js:934 6.0/applet_OLD.js:728
+#. 4.6/applet.js:767 6.4/applet.js:947 5.6/applet.js:776
+msgid "Forget It"
+msgstr "Elfelejtés"
+
+#. 4.2/applet.js:631 4.8/applet.js:768 6.0/applet.js:935 6.0/applet_OLD.js:728
+#. 4.6/applet.js:767 6.4/applet.js:948 5.6/applet.js:776
+msgid "Forget Them All"
+msgstr "Összes elfelejtése"
+
+#. 4.2->settings-schema.json->btn_refresh_applets->description
+#. 4.2->settings-schema.json->btn_refresh_desklets->description
+#. 4.2->settings-schema.json->btn_refresh_extensions->description
+#. 4.2->settings-schema.json->btn_refresh_themes->description
+#. 4.8->settings-schema.json->btn_refresh_applets->description
+#. 4.8->settings-schema.json->btn_refresh_desklets->description
+#. 4.8->settings-schema.json->btn_refresh_extensions->description
+#. 4.8->settings-schema.json->btn_refresh_themes->description
+#. 6.0->settings-schema.json->btn_refresh_applets->description
+#. 6.0->settings-schema.json->btn_refresh_desklets->description
+#. 6.0->settings-schema.json->btn_refresh_extensions->description
+#. 6.0->settings-schema.json->btn_refresh_themes->description
+#. 6.0->settings-schema.json->btn_refresh_actions->description
+#. 3.8->settings-schema.json->btn_refresh_applets->description
+#. 3.8->settings-schema.json->btn_refresh_desklets->description
+#. 3.8->settings-schema.json->btn_refresh_extensions->description
+#. 3.8->settings-schema.json->btn_refresh_themes->description
+#. 4.6->settings-schema.json->btn_refresh_applets->description
+#. 4.6->settings-schema.json->btn_refresh_desklets->description
+#. 4.6->settings-schema.json->btn_refresh_extensions->description
+#. 4.6->settings-schema.json->btn_refresh_themes->description
+#. 6.4->settings-schema.json->btn_refresh_applets->description
+#. 6.4->settings-schema.json->btn_refresh_desklets->description
+#. 6.4->settings-schema.json->btn_refresh_extensions->description
+#. 6.4->settings-schema.json->btn_refresh_themes->description
+#. 6.4->settings-schema.json->btn_refresh_actions->description
+#. 5.6->settings-schema.json->btn_refresh_applets->description
+#. 5.6->settings-schema.json->btn_refresh_desklets->description
+#. 5.6->settings-schema.json->btn_refresh_extensions->description
+#. 5.6->settings-schema.json->btn_refresh_themes->description
+#. 4.2/applet.js:635 4.2/applet.js:1682 4.8/applet.js:772 4.8/applet.js:1838
+#. 6.0/applet.js:939 6.0/applet.js:2243 6.0/applet_OLD.js:732
+#. 6.0/applet_OLD.js:1879 3.8/applet.js:682 3.8/applet.js:1747
+#. 4.6/applet.js:771 4.6/applet.js:1832 2.8/applet.js:574 2.8/applet.js:1590
+#. 6.4/applet.js:952 6.4/applet.js:2321 5.6/applet.js:780 5.6/applet.js:1852
+#. cs/4.2/bin/SUExtensionCore.py:795
+msgid "Refresh"
+msgstr "Frissítés"
+
+#. 4.2/applet.js:807 4.8/applet.js:945 6.0/applet.js:1104 6.0/applet_OLD.js:906
+#. 3.8/applet.js:847 4.6/applet.js:944 2.8/applet.js:729 6.4/applet.js:1120
+#. 5.6/applet.js:953
+msgid "With details here, when available."
+msgstr "Részletek itt, ha rendelkezésre állnak."
+
+#. 4.2/applet.js:808 4.2/constants.js:133 4.8/applet.js:946
+#. 4.8/constants.js:140 6.0/applet.js:1106 6.0/applet_OLD.js:907
+#. 6.0/constants.js:150 3.8/applet.js:146 3.8/applet.js:848 4.6/applet.js:945
+#. 4.6/constants.js:140 2.8/applet.js:105 2.8/applet.js:730 6.4/applet.js:1122
+#. 6.4/constants.js:150 5.6/applet.js:954 5.6/constants.js:134
+msgid "One applet needs update:"
+msgstr "Egy kisalkalmazást frissíteni kell:"
+
+#. 4.2/applet.js:809 4.8/applet.js:947 6.0/applet.js:1109 6.0/applet_OLD.js:908
+#. 3.8/applet.js:848 4.6/applet.js:946 2.8/applet.js:730 6.4/applet.js:1125
+#. 5.6/applet.js:955
+msgid "Do not matter. This is a FAKE notification, just for the test."
+msgstr "Nem számít. Ez egy HAMIS értesítés, csak teszt."
+
+#. 4.2/applet.js:1080 4.8/applet.js:1233 6.0/applet.js:1520
+#. 6.0/applet_OLD.js:1200 3.8/applet.js:1174 4.6/applet.js:1229
+#. 2.8/applet.js:1004 6.4/applet.js:1546 5.6/applet.js:1245
+msgid "is fully functional."
+msgstr "teljesen működőképes."
+
+#. 4.2/applet.js:1081 4.8/applet.js:1234 6.0/applet.js:1521
+#. 6.0/applet_OLD.js:1201 3.8/applet.js:1175 4.6/applet.js:1230
+#. 2.8/applet.js:1005 6.4/applet.js:1547 5.6/applet.js:1246
+msgid "All dependencies are installed"
+msgstr "Minden szükséges függőség telepítve"
+
+#. 4.2/applet.js:1104 4.8/applet.js:1259 6.0/applet.js:1568
+#. 6.0/applet_OLD.js:1226 3.8/applet.js:1199 4.6/applet.js:1253
+#. 2.8/applet.js:1029 6.4/applet.js:1594 5.6/applet.js:1271
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a "
+"kisalkalmazás minden funkcióval rendelkezzen."
+
+#. 4.2/applet.js:1105 4.8/applet.js:1260 6.0/applet.js:1574
+#. 6.0/applet_OLD.js:1227 3.8/applet.js:1200 4.6/applet.js:1254
+#. 2.8/applet.js:1030 6.4/applet.js:1600 5.6/applet.js:1272
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr ""
+"Kérjük, a most megnyitott terminálban hajtsa végre a következő parancsokat:"
+
+#. 4.2/applet.js:1106 4.8/applet.js:1261 6.0/applet.js:1581
+#. 6.0/applet_OLD.js:1228 3.8/applet.js:1201 4.6/applet.js:1255
+#. 2.8/applet.js:1031 6.4/applet.js:1607 5.6/applet.js:1273
+msgid "Some dependencies are not installed!"
+msgstr "Néhány függőség nincs telepítve!"
+
+#. 4.2/applet.js:1504 4.8/applet.js:1659 6.0/applet.js:1983
+#. 6.0/applet_OLD.js:1700 3.8/applet.js:1582 4.6/applet.js:1653
+#. 2.8/applet.js:1423 6.4/applet.js:2020 5.6/applet.js:1673
+msgid "(Description unavailable)"
+msgstr "(Leírás nem elérhető)"
+
+#. 4.2/applet.js:1706 4.8/applet.js:1862 6.0/applet.js:2274
+#. 6.0/applet_OLD.js:1903 3.8/applet.js:1770 4.6/applet.js:1856
+#. 2.8/applet.js:1614 6.4/applet.js:2352 5.6/applet.js:1876
+msgid "Forget new Spices"
+msgstr "Felejtse el az új Spices-t"
+
+#. 4.2/applet.js:1712 4.8/applet.js:1868 6.0/applet.js:2286
+#. 6.0/applet_OLD.js:1909 3.8/applet.js:1776 4.6/applet.js:1862
+#. 2.8/applet.js:1620 6.4/applet.js:2364 5.6/applet.js:1882
+msgid "Open useful Cinnamon Settings"
+msgstr "Hasznos Cinnamon beállítások megnyitása"
+
+#. 4.2/applet.js:1719 4.8/applet.js:1875 6.0/applet.js:2300
+#. 6.0/applet_OLD.js:1916 3.8/applet.js:1783 4.6/applet.js:1869
+#. 2.8/applet.js:1627 6.4/applet.js:2378 5.6/applet.js:1889
+#. cs/4.2/bin/SUExtensionCore.py:240
+msgid "Configure"
+msgstr "Beállítás"
+
+#. 4.2->settings-schema.json->General->title
+#. 4.8->settings-schema.json->General->title
+#. 6.0->settings-schema.json->General->title
+#. 3.8->settings-schema.json->General->title
+#. 4.6->settings-schema.json->General->title
+#. 2.8->settings-schema.json->head5->description
+#. 6.4->settings-schema.json->General->title
+#. 5.6->settings-schema.json->General->title
+#. 4.2/applet.js:1722 4.8/applet.js:1878 6.0/applet.js:2308
+#. 6.0/applet_OLD.js:1919 4.6/applet.js:1872 6.4/applet.js:2386
+#. 5.6/applet.js:1892
+msgid "General"
+msgstr "Általános"
+
+#. 4.2->settings-schema.json->Applets->title
+#. 4.8->settings-schema.json->Applets->title
+#. 6.0->settings-schema.json->Applets->title
+#. 3.8->settings-schema.json->Applets->title
+#. 4.6->settings-schema.json->Applets->title
+#. 2.8->settings-schema.json->head1->description
+#. 6.4->settings-schema.json->Applets->title
+#. 5.6->settings-schema.json->Applets->title
+#. 4.2/applet.js:1722 4.2/constants.js:128 4.8/applet.js:1878
+#. 4.8/constants.js:135 6.0/applet.js:2309 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:144 3.8/applet.js:141 4.6/applet.js:1872
+#. 4.6/constants.js:135 2.8/applet.js:100 6.4/applet.js:2387
+#. 6.4/constants.js:144 5.6/applet.js:1892 5.6/constants.js:129
+#. cs/4.4/modules/cs_applets.py:35 cs/6.0_FUTURE/modules/cs_applets.py:35
+#. cs/4.2/modules/cs_applets.py:34 cs/3.8/modules/cs_applets.py:34
+#. cs/4.6/modules/cs_applets.py:35 cs/4.0/modules/cs_applets.py:34
+msgid "Applets"
+msgstr "Kisalkalmazások"
+
+#. 4.2->settings-schema.json->Desklets->title
+#. 4.8->settings-schema.json->Desklets->title
+#. 6.0->settings-schema.json->Desklets->title
+#. 3.8->settings-schema.json->Desklets->title
+#. 4.6->settings-schema.json->Desklets->title
+#. 2.8->settings-schema.json->head2->description
+#. 6.4->settings-schema.json->Desklets->title
+#. 5.6->settings-schema.json->Desklets->title
+#. 4.2/applet.js:1722 4.2/constants.js:129 4.8/applet.js:1878
+#. 4.8/constants.js:136 6.0/applet.js:2310 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:145 3.8/applet.js:142 4.6/applet.js:1872
+#. 4.6/constants.js:136 2.8/applet.js:101 6.4/applet.js:2388
+#. 6.4/constants.js:145 5.6/applet.js:1892 5.6/constants.js:130
+#. cs/4.4/modules/cs_desklets.py:33 cs/6.0_FUTURE/modules/cs_desklets.py:33
+#. cs/4.2/modules/cs_desklets.py:32 cs/3.8/modules/cs_desklets.py:32
+#. cs/4.6/modules/cs_desklets.py:33 cs/4.0/modules/cs_desklets.py:32
+msgid "Desklets"
+msgstr "Asztalkalmazások"
+
+#. 4.2->settings-schema.json->Extensions->title
+#. 4.8->settings-schema.json->Extensions->title
+#. 6.0->settings-schema.json->Extensions->title
+#. 3.8->settings-schema.json->Extensions->title
+#. 4.6->settings-schema.json->Extensions->title
+#. 2.8->settings-schema.json->head3->description
+#. 6.4->settings-schema.json->Extensions->title
+#. 5.6->settings-schema.json->Extensions->title
+#. 4.2/applet.js:1722 4.2/constants.js:130 4.8/applet.js:1878
+#. 4.8/constants.js:137 6.0/applet.js:2311 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:146 3.8/applet.js:143 4.6/applet.js:1872
+#. 4.6/constants.js:137 2.8/applet.js:102 6.4/applet.js:2389
+#. 6.4/constants.js:146 5.6/applet.js:1892 5.6/constants.js:131
+#. cs/4.4/modules/cs_extensions.py:33 cs/6.0_FUTURE/modules/cs_extensions.py:33
+#. cs/4.2/modules/cs_extensions.py:32 cs/3.8/modules/cs_extensions.py:32
+#. cs/4.6/modules/cs_extensions.py:33 cs/4.0/modules/cs_extensions.py:32
+msgid "Extensions"
+msgstr "Bővítmények"
+
+#. 4.2->settings-schema.json->Themes->title
+#. 4.8->settings-schema.json->Themes->title
+#. 6.0->settings-schema.json->Themes->title
+#. 3.8->settings-schema.json->Themes->title
+#. 4.6->settings-schema.json->Themes->title
+#. 2.8->settings-schema.json->head4->description
+#. 6.4->settings-schema.json->Themes->title
+#. 5.6->settings-schema.json->Themes->title
+#. 4.2/applet.js:1722 4.2/constants.js:131 4.8/applet.js:1878
+#. 4.8/constants.js:138 6.0/applet.js:2312 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:147 3.8/applet.js:144 4.6/applet.js:1872
+#. 4.6/constants.js:138 2.8/applet.js:103 6.4/applet.js:2390
+#. 6.4/constants.js:147 5.6/applet.js:1892 5.6/constants.js:132
+#. cs/4.4/modules/cs_themes.py:42 cs/4.4/modules/cs_themes.py:72
+#. cs/4.4/modules/cs_themes.py:74 cs/6.0_FUTURE/modules/cs_themes.py:44
+#. cs/6.0_FUTURE/modules/cs_themes.py:75 cs/6.0_FUTURE/modules/cs_themes.py:77
+#. cs/4.2/modules/cs_themes.py:38 cs/4.2/modules/cs_themes.py:61
+#. cs/4.2/modules/cs_themes.py:63 cs/3.8/modules/cs_themes.py:23
+#. cs/3.8/modules/cs_themes.py:46 cs/3.8/modules/cs_themes.py:48
+#. cs/4.6/modules/cs_themes.py:44 cs/4.6/modules/cs_themes.py:75
+#. cs/4.6/modules/cs_themes.py:77 cs/4.0/modules/cs_themes.py:36
+#. cs/4.0/modules/cs_themes.py:59 cs/4.0/modules/cs_themes.py:61
+msgid "Themes"
+msgstr "Témák"
+
+#. 4.2/applet.js:1748 4.8/applet.js:1904 6.0/applet.js:2364
+#. 6.0/applet_OLD.js:1945 3.8/applet.js:1798 4.6/applet.js:1898
+#. 2.8/applet.js:1642 6.4/applet.js:2445 5.6/applet.js:1918
+msgid "Help"
+msgstr "Súgó"
+
+#. 4.2/applet.js:1891 4.8/applet.js:2090 6.0/applet.js:2689
+#. 6.0/applet_OLD.js:2131 3.8/applet.js:1904 4.6/applet.js:2084
+#. 2.8/applet.js:1700 6.4/applet.js:2800 5.6/applet.js:2104
+msgid "Middle-Click to open useful Cinnamon Settings"
+msgstr "Hasznos Cinnamon beállítások megnyitása középső gombbal"
+
+#. 4.2/constants.js:124 4.8/constants.js:131 6.0/constants.js:140
+#. 3.8/applet.js:137 4.6/constants.js:131 2.8/applet.js:96 6.4/constants.js:140
+#. 5.6/constants.js:125
+msgid "Applet"
+msgstr "Kisalkalmazás"
+
+#. 4.2/constants.js:125 4.8/constants.js:132 6.0/constants.js:141
+#. 3.8/applet.js:138 4.6/constants.js:132 2.8/applet.js:97 6.4/constants.js:141
+#. 5.6/constants.js:126
+msgid "Desklet"
+msgstr "Asztalkalmazás"
+
+#. 4.2/constants.js:126 4.8/constants.js:133 6.0/constants.js:142
+#. 3.8/applet.js:139 4.6/constants.js:133 2.8/applet.js:98 6.4/constants.js:142
+#. 5.6/constants.js:127
+msgid "Extension"
+msgstr "Kiterjesztés"
+
+#. 4.2/constants.js:127 4.8/constants.js:134 6.0/constants.js:143
+#. 3.8/applet.js:140 4.6/constants.js:134 2.8/applet.js:99 6.4/constants.js:143
+#. 5.6/constants.js:128
+msgid "Theme"
+msgstr "Téma"
+
+#. 4.2/constants.js:132 4.8/constants.js:139 6.0/constants.js:149
+#. 3.8/applet.js:145 4.6/constants.js:139 2.8/applet.js:104
+#. 6.4/constants.js:149 5.6/constants.js:133
+msgid "One desklet needs update:"
+msgstr "Egy asztalkalmazás frissítése szükséges:"
+
+#. 4.2/constants.js:134 4.8/constants.js:141 6.0/constants.js:151
+#. 3.8/applet.js:147 4.6/constants.js:141 2.8/applet.js:106
+#. 6.4/constants.js:151 5.6/constants.js:135
+msgid "One extension needs update:"
+msgstr "Egy kisalkalmazás frissítése szükséges:"
+
+#. 4.2/constants.js:135 4.8/constants.js:142 6.0/constants.js:152
+#. 3.8/applet.js:148 4.6/constants.js:142 2.8/applet.js:107
+#. 6.4/constants.js:152 5.6/constants.js:136
+msgid "One theme needs update:"
+msgstr "Egy téma frissítése szükséges:"
+
+#. 4.2/constants.js:136 4.8/constants.js:143 6.0/constants.js:154
+#. 3.8/applet.js:149 4.6/constants.js:143 2.8/applet.js:108
+#. 6.4/constants.js:154 5.6/constants.js:137
+msgid "Some desklets need update:"
+msgstr "Néhány asztalkalmazás frissítése szükséges:"
+
+#. 4.2/constants.js:137 4.8/constants.js:144 6.0/constants.js:155
+#. 3.8/applet.js:150 4.6/constants.js:144 2.8/applet.js:109
+#. 6.4/constants.js:155 5.6/constants.js:138
+msgid "Some applets need update:"
+msgstr "Néhány kisalkalmazás frissítése szükséges:"
+
+#. 4.2/constants.js:138 4.8/constants.js:145 6.0/constants.js:156
+#. 3.8/applet.js:151 4.6/constants.js:145 2.8/applet.js:110
+#. 6.4/constants.js:156 5.6/constants.js:139
+msgid "Some extensions need update:"
+msgstr "Néhány bővítmény frissítése szükséges:"
+
+#. 4.2/constants.js:139 4.8/constants.js:146 6.0/constants.js:157
+#. 3.8/applet.js:152 4.6/constants.js:146 2.8/applet.js:111
+#. 6.4/constants.js:157 5.6/constants.js:140
+msgid "Some themes need update:"
+msgstr "Néhány téma frissítése szükséges:"
+
+#. 4.2/constants.js:140 4.8/constants.js:147 6.0/constants.js:159
+#. 3.8/applet.js:153 4.6/constants.js:147 2.8/applet.js:112
+#. 6.4/constants.js:159 5.6/constants.js:141
+msgid "New desklet available:"
+msgstr "Új asztalkalmazás érhető el:"
+
+#. 4.2/constants.js:141 4.8/constants.js:148 6.0/constants.js:160
+#. 3.8/applet.js:154 4.6/constants.js:148 2.8/applet.js:113
+#. 6.4/constants.js:160 5.6/constants.js:142
+msgid "New applet available:"
+msgstr "Új kisalkalmazás érhető el:"
+
+#. 4.2/constants.js:142 4.8/constants.js:149 6.0/constants.js:161
+#. 3.8/applet.js:155 4.6/constants.js:149 2.8/applet.js:114
+#. 6.4/constants.js:161 5.6/constants.js:143
+msgid "New extension available:"
+msgstr "Új bővítmény érhető el:"
+
+#. 4.2/constants.js:143 4.8/constants.js:150 6.0/constants.js:162
+#. 3.8/applet.js:156 4.6/constants.js:150 2.8/applet.js:115
+#. 6.4/constants.js:162 5.6/constants.js:144
+msgid "New theme available:"
+msgstr "Új téma érhető el:"
+
+#. 4.2/constants.js:144 4.8/constants.js:151 6.0/constants.js:164
+#. 3.8/applet.js:157 4.6/constants.js:151 2.8/applet.js:116
+#. 6.4/constants.js:164 5.6/constants.js:145
+msgid "New desklets available:"
+msgstr "Új asztalkalmazások érhetőek el:"
+
+#. 4.2/constants.js:145 4.8/constants.js:152 6.0/constants.js:165
+#. 3.8/applet.js:158 4.6/constants.js:152 2.8/applet.js:117
+#. 6.4/constants.js:165 5.6/constants.js:146
+msgid "New applets available:"
+msgstr "Új kisalkalmazások érhetőek el:"
+
+#. 4.2/constants.js:146 4.8/constants.js:153 6.0/constants.js:166
+#. 3.8/applet.js:159 4.6/constants.js:153 2.8/applet.js:118
+#. 6.4/constants.js:166 5.6/constants.js:147
+msgid "New extensions available:"
+msgstr "Új bővítmények érhetőek el:"
+
+#. 4.2/constants.js:147 4.8/constants.js:154 6.0/constants.js:167
+#. 3.8/applet.js:160 4.6/constants.js:154 2.8/applet.js:119
+#. 6.4/constants.js:167 5.6/constants.js:148
+msgid "New themes available:"
+msgstr "Új témák érhetőek el:"
+
+#. 4.2/constants.js:151 4.8/constants.js:158 6.0/constants.js:172
+#. 4.6/constants.js:158 6.4/constants.js:172 5.6/constants.js:152
+msgid "If you do not want an applet to be checked, uncheck its first box."
+msgstr ""
+"Ha nem szeretné, hogy egy kisalkalmazás ellenőrizve legyen, törölje az első "
+"négyzetének jelölését."
+
+#. 4.2/constants.js:152 4.8/constants.js:159 6.0/constants.js:173
+#. 4.6/constants.js:159 6.4/constants.js:173 5.6/constants.js:153
+msgid "If you do not want a desklet to be checked, uncheck its first box."
+msgstr ""
+"Ha nem szeretné, hogy egy asztalalkalmazás ellenőrizve legyen, akkor ne "
+"jelölje be az első négyzetet."
+
+#. 4.2/constants.js:153 4.8/constants.js:160 6.0/constants.js:174
+#. 4.6/constants.js:160 6.4/constants.js:174 5.6/constants.js:154
+msgid "If you do not want an extension to be checked, uncheck its first box."
+msgstr ""
+"Ha nem szeretné, hogy egy bővítmény ellenőrizve legyen, akkor ne jelölje be "
+"az első négyzetet."
+
+#. 4.2/constants.js:154 4.8/constants.js:161 6.0/constants.js:175
+#. 4.6/constants.js:161 6.4/constants.js:175 5.6/constants.js:155
+msgid "If you do not want a theme to be checked, uncheck its first box."
+msgstr ""
+"Ha nem szeretné, hogy egy téma ellenőrizve legyen, akkor ne jelölje be az "
+"első négyzetet."
+
+#. 4.2/constants.js:158 4.8/constants.js:165 6.0/constants.js:180
+#. 4.6/constants.js:165 6.4/constants.js:180 5.6/constants.js:159
+msgid ""
+"If you want to get the latest version of an applet now, check both boxes."
+msgstr ""
+"Ha most szeretné letölteni a kisalkalmazás legújabb verzióját, jelölje be "
+"mindkét négyzetet."
+
+#. 4.2/constants.js:159 4.8/constants.js:166 6.0/constants.js:181
+#. 4.6/constants.js:166 6.4/constants.js:181 5.6/constants.js:160
+msgid ""
+"If you want to get the latest version of a desklet now, check both boxes."
+msgstr ""
+"Ha most szeretné letölteni a asztalalkalmazás legújabb verzióját, jelölje be "
+"mindkét négyzetet."
+
+#. 4.2/constants.js:160 4.8/constants.js:167 6.0/constants.js:182
+#. 4.6/constants.js:167 6.4/constants.js:182 5.6/constants.js:161
+msgid ""
+"If you want to get the latest version of an extension now, check both boxes."
+msgstr ""
+"Ha most szeretné letölteni egy bővítmény legújabb verzióját, jelölje be "
+"mindkét négyzetet."
+
+#. 4.2/constants.js:161 4.8/constants.js:168 6.0/constants.js:183
+#. 4.6/constants.js:168 6.4/constants.js:183 5.6/constants.js:162
+msgid "If you want to get the latest version of a theme now, check both boxes."
+msgstr ""
+"Ha most szeretné letölteni egy téma legújabb verzióját, jelölje be mindkét "
+"négyzetet."
+
+#. 4.2/constants.js:164 4.8/constants.js:171 6.0/constants.js:187
+#. 3.8/applet.js:93 4.6/constants.js:171 6.4/constants.js:187
+#. 5.6/constants.js:165
+msgid "When all your choices are made, click the Refresh button."
+msgstr "Ha minden változtatást végrehajtott, kattintson a Frissítés gombra."
+
+#. 4.8/applet.js:2104 6.0/applet.js:2719 6.0/applet_OLD.js:2145
+#. 4.6/applet.js:2098 6.4/applet.js:2830 5.6/applet.js:2118
+msgid "The Cinnamon Server seems to be DOWN!"
+msgstr "Úgy tűnik, hogy a Cinnamon szerver NEM MŰKÖDIK!"
+
+#. 4.8/applet.js:2104 6.0/applet.js:2720 6.0/applet_OLD.js:2145
+#. 4.6/applet.js:2098 6.4/applet.js:2831 5.6/applet.js:2118
+msgid "Middle-Click to Retry"
+msgstr "Középső kattintással újrapróbálkozik"
+
+#. 6.0->settings-schema.json->Actions->title
+#. 6.4->settings-schema.json->Actions->title
+#. 6.0/applet.js:2313 6.0/constants.js:148 6.4/applet.js:2391
+#. 6.4/constants.js:148 cs/6.0_FUTURE/modules/cs_actions.py:35
+msgid "Actions"
+msgstr "Műveletek"
+
+#. 6.0/constants.js:153 6.4/constants.js:153
+msgid "One action needs update:"
+msgstr "Egy művelet frissítése szükséges:"
+
+#. 6.0/constants.js:158 6.4/constants.js:158
+msgid "Some actions need update:"
+msgstr "Néhány művelet frissítése szükséges:"
+
+#. 6.0/constants.js:163 6.4/constants.js:163
+msgid "New action available:"
+msgstr "Új művelet érhető el:"
+
+#. 6.0/constants.js:168 6.4/constants.js:168
+msgid "New actions available:"
+msgstr "Új műveletek érhetőek el:"
+
+#. 6.0/constants.js:176 6.4/constants.js:176
+msgid "If you do not want a nemo action to be checked, uncheck its first box."
+msgstr ""
+"Ha nem szeretné, hogy egy nemo művelet be legyen jelölve, vegye ki a "
+"jelölést az első négyzetből."
+
+#. 6.0/constants.js:184 6.4/constants.js:184
+msgid ""
+"If you want to get the latest version of a nemo action now, check both boxes."
+msgstr ""
+"Ha egy nemo művelet legfrissebb verzióját szeretné most megkapni, jelölje be "
+"mindkét négyzetet."
+
+#. 6.0/constants.js:187 6.4/constants.js:187
+msgid "For private Spices, both boxes will be considered unchecked."
+msgstr ""
+"A privát Spice esetében mindkét négyzetet kipipálhatatlannak kell tekinteni."
+
+#. 3.8/applet.js:80
+msgid ""
+"If you do not want an applet to be checked, set its first switch to FALSE."
+msgstr ""
+"Ha nem szeretné, hogy egy kisalkalmazás ellenőrizve, állítsa az első "
+"kapcsolóját FALSE állásba."
+
+#. 3.8/applet.js:81
+msgid ""
+"If you do not want a desklet to be checked, set its first switch to FALSE."
+msgstr ""
+"Ha nem szeretné, hogy egy kisalkalmazás ellenőrizve legyen, állítsa az első "
+"kapcsolóját FALSE állásba."
+
+#. 3.8/applet.js:82
+msgid ""
+"If you do not want an extension to be checked, set its first switch to FALSE."
+msgstr ""
+"Ha nem szeretné, hogy egy bővítmény ellenőrizve legyen, állítsa az első "
+"kapcsolóját FALSE állásba."
+
+#. 3.8/applet.js:83
+msgid ""
+"If you do not want a theme to be checked, set its first switch to FALSE."
+msgstr ""
+"Ha nem szeretné, hogy egy téma ellenőrizve legyen, állítsa az első "
+"kapcsolóját FALSE állásba."
+
+#. 3.8/applet.js:87
+msgid ""
+"If you want to get the latest version of an applet now, set its two switches "
+"to TRUE."
+msgstr ""
+"Ha most szeretné letölteni a kisalkalmazás legújabb verzióját, állítsa "
+"mindkét kapcsolóját TRUE állásba."
+
+#. 3.8/applet.js:88
+msgid ""
+"If you want to get the latest version of a desklet now, set its two switches "
+"to TRUE."
+msgstr ""
+"Ha most szeretné letölteni az asztalalkalmazás legújabb verzióját, állítsa "
+"mindkét kapcsolóját TRUE állásba."
+
+#. 3.8/applet.js:89
+msgid ""
+"If you want to get the latest version of an extension now, set its two "
+"switches to TRUE."
+msgstr ""
+"Ha most szeretné letölteni a bővítmény legújabb verzióját, állítsa mindkét "
+"kapcsolóját TRUE állásba."
+
+#. 3.8/applet.js:90
+msgid ""
+"If you want to get the latest version of a theme now, set its two switches "
+"to TRUE."
+msgstr ""
+"Ha most szeretné letölteni a téma legújabb verzióját, állítsa mindkét "
+"kapcsolóját TRUE állásba."
+
+#. cs/4.4/cinnamon-settings.py:50 cs/4.4/cinnamon-settings.py:380
+#. cs/4.4/cinnamon-settings.py:718 cs/6.0_FUTURE/cinnamon-settings.py:41
+#. cs/6.0_FUTURE/cinnamon-settings.py:387
+#. cs/6.0_FUTURE/cinnamon-settings.py:784
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:57
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:403
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:815 cs/4.2/cinnamon-settings.py:50
+#. cs/4.2/cinnamon-settings.py:379 cs/4.2/cinnamon-settings.py:717
+#. cs/3.8/cinnamon-settings.py:48 cs/3.8/cinnamon-settings.py:312
+#. cs/3.8/cinnamon-settings.py:591 cs/4.6/cinnamon-settings.py:50
+#. cs/4.6/cinnamon-settings.py:380 cs/4.6/cinnamon-settings.py:718
+#. cs/4.0/cinnamon-settings.py:48 cs/4.0/cinnamon-settings.py:316
+#. cs/4.0/cinnamon-settings.py:603
+msgid "System Settings"
+msgstr "Rendszerbeállítások"
+
+#. cs/4.4/cinnamon-settings.py:51 cs/6.0_FUTURE/cinnamon-settings.py:42
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:58 cs/4.2/cinnamon-settings.py:51
+#. cs/3.8/cinnamon-settings.py:49 cs/4.6/cinnamon-settings.py:51
+#. cs/4.0/cinnamon-settings.py:49
+msgid "Control Center"
+msgstr "Vezérlőközpont"
+
+#. cs/4.4/cinnamon-settings.py:66 cs/6.0_FUTURE/cinnamon-settings.py:64
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:80 cs/4.2/cinnamon-settings.py:66
+#. cs/3.8/cinnamon-settings.py:64 cs/4.6/cinnamon-settings.py:66
+#. cs/4.0/cinnamon-settings.py:64
+msgid "Appearance"
+msgstr "Megjelenés"
+
+#. cs/4.4/cinnamon-settings.py:67 cs/6.0_FUTURE/cinnamon-settings.py:65
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:81 cs/4.2/cinnamon-settings.py:67
+#. cs/3.8/cinnamon-settings.py:65 cs/4.6/cinnamon-settings.py:67
+#. cs/4.0/cinnamon-settings.py:65
+msgid "Preferences"
+msgstr "Beállítások"
+
+#. cs/4.4/cinnamon-settings.py:68 cs/6.0_FUTURE/cinnamon-settings.py:66
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:82 cs/4.2/cinnamon-settings.py:68
+#. cs/3.8/cinnamon-settings.py:66 cs/4.6/cinnamon-settings.py:68
+#. cs/4.0/cinnamon-settings.py:66
+msgid "Hardware"
+msgstr "Hardware"
+
+#. cs/4.4/cinnamon-settings.py:69 cs/6.0_FUTURE/cinnamon-settings.py:67
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:83 cs/4.2/cinnamon-settings.py:69
+#. cs/3.8/cinnamon-settings.py:67 cs/4.6/cinnamon-settings.py:69
+#. cs/4.0/cinnamon-settings.py:67
+msgid "Administration"
+msgstr "Adminisztráció"
+
+#. cs/4.4/cinnamon-settings.py:74 cs/6.0_FUTURE/cinnamon-settings.py:72
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:88 cs/4.2/cinnamon-settings.py:74
+#. cs/3.8/cinnamon-settings.py:72 cs/4.6/cinnamon-settings.py:74
+#. cs/4.0/cinnamon-settings.py:72
+msgid "Network"
+msgstr "Hálózat"
+
+#. cs/4.4/cinnamon-settings.py:74 cs/6.0_FUTURE/cinnamon-settings.py:72
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:88 cs/4.2/cinnamon-settings.py:74
+#. cs/3.8/cinnamon-settings.py:72 cs/4.6/cinnamon-settings.py:74
+#. cs/4.0/cinnamon-settings.py:72
+msgid "network, wireless, wifi, ethernet, broadband, internet"
+msgstr ""
+"hálózat, vezeték nélküli, wifi, ethernet, szélessávú, internet, internet"
+
+#. cs/4.4/cinnamon-settings.py:75 cs/6.0_FUTURE/cinnamon-settings.py:73
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:89 cs/4.2/cinnamon-settings.py:76
+#. cs/3.8/cinnamon-settings.py:74 cs/4.6/cinnamon-settings.py:75
+#. cs/4.0/cinnamon-settings.py:74
+msgid "Color"
+msgstr "Szín"
+
+#. cs/4.4/cinnamon-settings.py:75 cs/6.0_FUTURE/cinnamon-settings.py:73
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:89 cs/4.2/cinnamon-settings.py:76
+#. cs/3.8/cinnamon-settings.py:74 cs/4.6/cinnamon-settings.py:75
+#. cs/4.0/cinnamon-settings.py:74
+msgid "color, profile, display, printer, output"
+msgstr "szín, profil, kijelző, nyomtató, kimenet"
+
+#. cs/4.4/cinnamon-settings.py:76 cs/6.0_FUTURE/cinnamon-settings.py:74
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:90 cs/4.2/cinnamon-settings.py:77
+#. cs/3.8/cinnamon-settings.py:75 cs/4.6/cinnamon-settings.py:76
+#. cs/4.0/cinnamon-settings.py:75
+msgid "Graphics Tablet"
+msgstr "Grafikus tábla"
+
+#. cs/4.4/cinnamon-settings.py:76 cs/6.0_FUTURE/cinnamon-settings.py:74
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:90 cs/4.2/cinnamon-settings.py:77
+#. cs/3.8/cinnamon-settings.py:75 cs/4.6/cinnamon-settings.py:76
+#. cs/4.0/cinnamon-settings.py:75
+msgid "wacom, digitize, tablet, graphics, calibrate, stylus"
+msgstr "wacom, digitalizálás, tábla, grafika, kalibrálás, stylus"
+
+#. cs/4.4/cinnamon-settings.py:81 cs/6.0_FUTURE/cinnamon-settings.py:79
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:95 cs/4.2/cinnamon-settings.py:82
+#. cs/3.8/cinnamon-settings.py:80 cs/4.6/cinnamon-settings.py:81
+#. cs/4.0/cinnamon-settings.py:80
+msgid "Printers"
+msgstr "Nyomtatók"
+
+#. cs/4.4/cinnamon-settings.py:81 cs/6.0_FUTURE/cinnamon-settings.py:79
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:95 cs/4.2/cinnamon-settings.py:82
+#. cs/3.8/cinnamon-settings.py:80 cs/4.6/cinnamon-settings.py:81
+#. cs/4.0/cinnamon-settings.py:80
+msgid "printers, laser, inkjet"
+msgstr "nyomtatók, lézer, tintasugaras"
+
+#. cs/4.4/cinnamon-settings.py:82 cs/4.4/cinnamon-settings.py:83
+#. cs/6.0_FUTURE/cinnamon-settings.py:80 cs/6.0_FUTURE/cinnamon-settings.py:81
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:96
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:97 cs/4.2/cinnamon-settings.py:83
+#. cs/4.2/cinnamon-settings.py:84 cs/3.8/cinnamon-settings.py:81
+#. cs/3.8/cinnamon-settings.py:82 cs/4.6/cinnamon-settings.py:82
+#. cs/4.6/cinnamon-settings.py:83 cs/4.0/cinnamon-settings.py:81
+#. cs/4.0/cinnamon-settings.py:82
+msgid "Firewall"
+msgstr "Tűzfal"
+
+#. cs/4.4/cinnamon-settings.py:82 cs/4.4/cinnamon-settings.py:83
+#. cs/6.0_FUTURE/cinnamon-settings.py:80 cs/6.0_FUTURE/cinnamon-settings.py:81
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:96
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:97 cs/4.2/cinnamon-settings.py:83
+#. cs/4.2/cinnamon-settings.py:84 cs/3.8/cinnamon-settings.py:81
+#. cs/3.8/cinnamon-settings.py:82 cs/4.6/cinnamon-settings.py:82
+#. cs/4.6/cinnamon-settings.py:83 cs/4.0/cinnamon-settings.py:81
+#. cs/4.0/cinnamon-settings.py:82
+msgid "firewall, block, filter, programs"
+msgstr "tűzfal, blokkolás, szűrés, programok"
+
+#. cs/4.4/cinnamon-settings.py:84 cs/6.0_FUTURE/cinnamon-settings.py:82
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:98 cs/4.2/cinnamon-settings.py:85
+#. cs/3.8/cinnamon-settings.py:83 cs/4.6/cinnamon-settings.py:84
+#. cs/4.0/cinnamon-settings.py:83
+msgid "Languages"
+msgstr "Nyelvek"
+
+#. cs/4.4/cinnamon-settings.py:84 cs/6.0_FUTURE/cinnamon-settings.py:82
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:98 cs/4.2/cinnamon-settings.py:85
+#. cs/3.8/cinnamon-settings.py:83 cs/4.6/cinnamon-settings.py:84
+#. cs/4.0/cinnamon-settings.py:83
+msgid "language, install, foreign"
+msgstr "nyelv, telepítés, idegen"
+
+#. cs/4.4/cinnamon-settings.py:85 cs/6.0_FUTURE/cinnamon-settings.py:83
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:99 cs/4.2/cinnamon-settings.py:86
+#. cs/3.8/cinnamon-settings.py:84 cs/4.6/cinnamon-settings.py:85
+#. cs/4.0/cinnamon-settings.py:84
+msgid "Input Method"
+msgstr "Beviteli mód"
+
+#. cs/4.4/cinnamon-settings.py:85 cs/6.0_FUTURE/cinnamon-settings.py:83
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:99 cs/4.2/cinnamon-settings.py:86
+#. cs/3.8/cinnamon-settings.py:84 cs/4.6/cinnamon-settings.py:85
+#. cs/4.0/cinnamon-settings.py:84
+msgid ""
+"language, install, foreign, input, method, chinese, korean, japanese, typing"
+msgstr ""
+"nyelv, telepítés, idegen, bemenet, módszer, kínai, koreai, japán, gépelés"
+
+#. cs/4.4/cinnamon-settings.py:86 cs/4.4/cinnamon-settings.py:87
+#. cs/6.0_FUTURE/cinnamon-settings.py:84 cs/6.0_FUTURE/cinnamon-settings.py:85
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:100
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:101 cs/4.2/cinnamon-settings.py:87
+#. cs/4.2/cinnamon-settings.py:88 cs/3.8/cinnamon-settings.py:85
+#. cs/3.8/cinnamon-settings.py:86 cs/4.6/cinnamon-settings.py:86
+#. cs/4.6/cinnamon-settings.py:87 cs/4.0/cinnamon-settings.py:85
+#. cs/4.0/cinnamon-settings.py:86
+msgid "Login Window"
+msgstr "Bejelentkezési ablak"
+
+#. cs/4.4/cinnamon-settings.py:86 cs/6.0_FUTURE/cinnamon-settings.py:84
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:100 cs/4.2/cinnamon-settings.py:87
+#. cs/3.8/cinnamon-settings.py:85 cs/4.6/cinnamon-settings.py:86
+#. cs/4.0/cinnamon-settings.py:85
+msgid "login, lightdm, mdm, gdm, manager, user, password, startup, switch"
+msgstr ""
+"bejelentkezés, lightdm, mdm, gdm, manager, felhasználó, jelszó, indítás, "
+"kapcsoló, switch"
+
+#. cs/4.4/cinnamon-settings.py:87 cs/6.0_FUTURE/cinnamon-settings.py:85
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:101 cs/4.2/cinnamon-settings.py:88
+#. cs/3.8/cinnamon-settings.py:86 cs/4.6/cinnamon-settings.py:87
+#. cs/4.0/cinnamon-settings.py:86
+msgid "login, lightdm, manager, settings, editor"
+msgstr "bejelentkezés, lightdm, menedzser, beállítások, szerkesztő"
+
+#. cs/4.4/cinnamon-settings.py:88 cs/6.0_FUTURE/cinnamon-settings.py:86
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:102 cs/4.2/cinnamon-settings.py:89
+#. cs/3.8/cinnamon-settings.py:87 cs/4.6/cinnamon-settings.py:88
+#. cs/4.0/cinnamon-settings.py:87
+msgid "Driver Manager"
+msgstr "Illesztőprogram-kezelő"
+
+#. cs/4.4/cinnamon-settings.py:88 cs/6.0_FUTURE/cinnamon-settings.py:86
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:102 cs/4.2/cinnamon-settings.py:89
+#. cs/3.8/cinnamon-settings.py:87 cs/4.6/cinnamon-settings.py:88
+#. cs/4.0/cinnamon-settings.py:87
+msgid ""
+"video, driver, wifi, card, hardware, proprietary, nvidia, radeon, nouveau, "
+"fglrx"
+msgstr ""
+"videó, illesztőprogram, wifi, kártya, hardver, szabadalmaztatott, nvidia, "
+"radeon, nouveau, fglrx"
+
+#. cs/4.4/cinnamon-settings.py:89 cs/6.0_FUTURE/cinnamon-settings.py:87
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:103 cs/4.2/cinnamon-settings.py:90
+#. cs/3.8/cinnamon-settings.py:88 cs/4.6/cinnamon-settings.py:89
+#. cs/4.0/cinnamon-settings.py:88
+msgid "Nvidia Settings"
+msgstr "Nvidia beállítások"
+
+#. cs/4.4/cinnamon-settings.py:89 cs/6.0_FUTURE/cinnamon-settings.py:87
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:103 cs/4.2/cinnamon-settings.py:90
+#. cs/3.8/cinnamon-settings.py:88 cs/4.6/cinnamon-settings.py:89
+#. cs/4.0/cinnamon-settings.py:88
+msgid "video, driver, proprietary, nvidia, settings"
+msgstr "videó, illesztőprogram, saját, nvidia, beállítások"
+
+#. cs/4.4/cinnamon-settings.py:90 cs/6.0_FUTURE/cinnamon-settings.py:88
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:104 cs/4.2/cinnamon-settings.py:91
+#. cs/3.8/cinnamon-settings.py:89 cs/4.6/cinnamon-settings.py:90
+#. cs/4.0/cinnamon-settings.py:89
+msgid "Software Sources"
+msgstr "Szoftverforrások"
+
+#. cs/4.4/cinnamon-settings.py:90 cs/6.0_FUTURE/cinnamon-settings.py:88
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:104 cs/4.2/cinnamon-settings.py:91
+#. cs/3.8/cinnamon-settings.py:89 cs/4.6/cinnamon-settings.py:90
+#. cs/4.0/cinnamon-settings.py:89
+msgid "ppa, repository, package, source, download"
+msgstr "ppa, tároló, csomag, forrás, letöltés"
+
+#. cs/4.4/cinnamon-settings.py:91 cs/4.4/cinnamon-settings.py:92
+#. cs/6.0_FUTURE/cinnamon-settings.py:89 cs/6.0_FUTURE/cinnamon-settings.py:90
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:105
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:106 cs/4.2/cinnamon-settings.py:92
+#. cs/4.2/cinnamon-settings.py:93 cs/3.8/cinnamon-settings.py:90
+#. cs/3.8/cinnamon-settings.py:91 cs/4.6/cinnamon-settings.py:91
+#. cs/4.6/cinnamon-settings.py:92 cs/4.0/cinnamon-settings.py:90
+#. cs/4.0/cinnamon-settings.py:91
+msgid "Package Management"
+msgstr "Csomagkezelés"
+
+#. cs/4.4/cinnamon-settings.py:91 cs/4.4/cinnamon-settings.py:92
+#. cs/6.0_FUTURE/cinnamon-settings.py:89 cs/6.0_FUTURE/cinnamon-settings.py:90
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:105
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:106 cs/4.2/cinnamon-settings.py:92
+#. cs/4.2/cinnamon-settings.py:93 cs/3.8/cinnamon-settings.py:90
+#. cs/3.8/cinnamon-settings.py:91 cs/4.6/cinnamon-settings.py:91
+#. cs/4.6/cinnamon-settings.py:92 cs/4.0/cinnamon-settings.py:90
+#. cs/4.0/cinnamon-settings.py:91
+msgid "update, install, repository, package, source, download"
+msgstr "frissítés, telepítés, tároló, csomag, forrás, letöltés"
+
+#. cs/4.4/cinnamon-settings.py:93 cs/6.0_FUTURE/cinnamon-settings.py:91
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:107 cs/4.2/cinnamon-settings.py:94
+#. cs/3.8/cinnamon-settings.py:92 cs/4.6/cinnamon-settings.py:93
+#. cs/4.0/cinnamon-settings.py:92
+msgid "Users and Groups"
+msgstr "Felhasználók és csoportok"
+
+#. cs/4.4/cinnamon-settings.py:93 cs/6.0_FUTURE/cinnamon-settings.py:91
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:107 cs/4.2/cinnamon-settings.py:94
+#. cs/3.8/cinnamon-settings.py:92 cs/4.6/cinnamon-settings.py:93
+#. cs/4.0/cinnamon-settings.py:92
+msgid "user, users, account, accounts, group, groups, password"
+msgstr "felhasználó, felhasználók, fiók, fiókok, csoport, csoportok, jelszó"
+
+#. cs/4.4/cinnamon-settings.py:94 cs/6.0_FUTURE/cinnamon-settings.py:92
+#. cs/6.0_FUTURE/cinnamon-settings.py:93
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:108
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:109 cs/4.2/cinnamon-settings.py:95
+#. cs/3.8/cinnamon-settings.py:93 cs/4.6/cinnamon-settings.py:94
+#. cs/4.0/cinnamon-settings.py:93
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#. cs/4.4/cinnamon-settings.py:94 cs/6.0_FUTURE/cinnamon-settings.py:92
+#. cs/6.0_FUTURE/cinnamon-settings.py:93
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:108
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:109 cs/4.2/cinnamon-settings.py:95
+#. cs/3.8/cinnamon-settings.py:93 cs/4.6/cinnamon-settings.py:94
+#. cs/4.0/cinnamon-settings.py:93
+msgid "bluetooth, dongle, transfer, mobile"
+msgstr "bluetooth, dongle, átvitel, mobil"
+
+#. cs/4.4/cinnamon-settings.py:95 cs/6.0_FUTURE/cinnamon-settings.py:94
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:110 cs/4.2/cinnamon-settings.py:96
+#. cs/3.8/cinnamon-settings.py:94 cs/4.6/cinnamon-settings.py:95
+#. cs/4.0/cinnamon-settings.py:94
+msgid "Manage Services and Units"
+msgstr "Szolgáltatások és egységek kezelése"
+
+#. cs/4.4/cinnamon-settings.py:95 cs/6.0_FUTURE/cinnamon-settings.py:94
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:110 cs/4.2/cinnamon-settings.py:96
+#. cs/3.8/cinnamon-settings.py:94 cs/4.6/cinnamon-settings.py:95
+#. cs/4.0/cinnamon-settings.py:94
+msgid "systemd, units, services, systemctl, init"
+msgstr "systemd, units, services, systemctl, init"
+
+#. cs/4.4/cinnamon-settings.py:96 cs/6.0_FUTURE/cinnamon-settings.py:95
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:111 cs/4.6/cinnamon-settings.py:96
+msgid "Disks"
+msgstr "Lemezek"
+
+#. cs/4.4/cinnamon-settings.py:96 cs/6.0_FUTURE/cinnamon-settings.py:95
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:111 cs/4.6/cinnamon-settings.py:96
+msgid ""
+"disks, manage, hardware, management, hard, hdd, pendrive, format, erase, "
+"test, create, iso, ISO, disk, image"
+msgstr ""
+"lemezek, kezel, hardver, kezelés, kemény, hdd, pendrive, formázás, törlés, "
+"tesztelés, létrehozás, iso, ISO, lemez, kép"
+
+#. cs/4.4/cinnamon-settings.py:290 cs/6.0_FUTURE/cinnamon-settings.py:295
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:311 cs/4.2/cinnamon-settings.py:289
+#. cs/3.8/cinnamon-settings.py:215 cs/4.6/cinnamon-settings.py:290
+#. cs/4.0/cinnamon-settings.py:223
+msgid "Back to all settings"
+msgstr "Vissza az összes beállításhoz"
+
+#. cs/4.4/cinnamon-settings.py:297 cs/6.0_FUTURE/cinnamon-settings.py:302
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:318 cs/4.2/cinnamon-settings.py:296
+#. cs/4.2/bin/SUExtensionCore.py:370 cs/4.2/bin/SUExtensionCore.py:730
+#. cs/3.8/cinnamon-settings.py:225 cs/4.6/cinnamon-settings.py:297
+#. cs/4.0/cinnamon-settings.py:233
+msgid "Search"
+msgstr "Keresés"
+
+#. cs/4.4/bin/SUSpices.py:136 cs/6.0_FUTURE/bin/SUSpices.py:136
+#. cs/6.0_FUTURE/bin/Spices.py:705 cs/4.2/bin/SUSpices.py:136
+#. cs/3.8/bin/SUSpices.py:132 cs/4.6/bin/SUSpices.py:136
+#. cs/4.0/bin/SUSpices.py:132
+#, python-format
+msgid ""
+"An error occurred during the installation of %s. Please report this incident "
+"to its developer."
+msgstr ""
+"Hiba történt a %s telepítése során. Kérjük, jelentse ezt az esetet a "
+"fejlesztőjének."
+
+#. cs/4.4/modules/cs_applets.py:14 cs/6.0_FUTURE/modules/cs_applets.py:14
+#. cs/4.2/modules/cs_applets.py:13 cs/3.8/modules/cs_applets.py:13
+#. cs/4.6/modules/cs_applets.py:14 cs/4.0/modules/cs_applets.py:13
+msgid "Manage Cinnamon applets"
+msgstr "Cinnamon kisalkalmazások kezelése"
+
+#. cs/4.4/modules/cs_applets.py:33 cs/6.0_FUTURE/modules/cs_applets.py:33
+#. cs/4.2/modules/cs_applets.py:32 cs/3.8/modules/cs_applets.py:32
+#. cs/4.6/modules/cs_applets.py:33 cs/4.0/modules/cs_applets.py:32
+msgid ""
+"You can remove specific instances in panel edit mode via the context menu."
+msgstr ""
+"Eltávolíthat adott példányokat panel szerkesztési módban a helyi menüből."
+
+#. cs/4.4/modules/cs_applets.py:35 cs/6.0_FUTURE/modules/cs_applets.py:35
+#. cs/4.2/modules/cs_applets.py:34 cs/3.8/modules/cs_applets.py:34
+#. cs/4.6/modules/cs_applets.py:35 cs/4.0/modules/cs_applets.py:34
+msgid "applet"
+msgstr "kisalkalmazás"
+
+#. cs/4.4/modules/cs_applets.py:47 cs/4.4/modules/cs_desklets.py:45
+#. cs/4.4/modules/cs_extensions.py:45 cs/6.0_FUTURE/modules/cs_actions.py:48
+#. cs/6.0_FUTURE/modules/cs_applets.py:47
+#. cs/6.0_FUTURE/modules/cs_desklets.py:45
+#. cs/6.0_FUTURE/modules/cs_extensions.py:45 cs/4.2/modules/cs_applets.py:46
+#. cs/4.2/modules/cs_desklets.py:44 cs/4.2/modules/cs_extensions.py:44
+#. cs/3.8/modules/cs_applets.py:46 cs/3.8/modules/cs_desklets.py:44
+#. cs/3.8/modules/cs_extensions.py:44 cs/4.6/modules/cs_applets.py:47
+#. cs/4.6/modules/cs_desklets.py:45 cs/4.6/modules/cs_extensions.py:45
+#. cs/4.0/modules/cs_applets.py:46 cs/4.0/modules/cs_desklets.py:44
+#. cs/4.0/modules/cs_extensions.py:44
+msgid "Manage"
+msgstr "Kezelés"
+
+#. cs/4.4/modules/cs_applets.py:50 cs/4.4/modules/cs_desklets.py:48
+#. cs/4.4/modules/cs_extensions.py:48 cs/6.0_FUTURE/modules/cs_actions.py:51
+#. cs/6.0_FUTURE/modules/cs_applets.py:50
+#. cs/6.0_FUTURE/modules/cs_desklets.py:48
+#. cs/6.0_FUTURE/modules/cs_extensions.py:48 cs/4.2/modules/cs_applets.py:49
+#. cs/4.2/modules/cs_desklets.py:47 cs/4.2/modules/cs_extensions.py:47
+#. cs/3.8/modules/cs_applets.py:49 cs/3.8/modules/cs_desklets.py:47
+#. cs/3.8/modules/cs_extensions.py:47 cs/4.6/modules/cs_applets.py:50
+#. cs/4.6/modules/cs_desklets.py:48 cs/4.6/modules/cs_extensions.py:48
+#. cs/4.0/modules/cs_applets.py:49 cs/4.0/modules/cs_desklets.py:47
+#. cs/4.0/modules/cs_extensions.py:47
+msgid "Download"
+msgstr "Letöltés"
+
+#. cs/4.4/modules/cs_applets.py:55 cs/6.0_FUTURE/modules/cs_applets.py:55
+#. cs/4.2/modules/cs_applets.py:54 cs/3.8/modules/cs_applets.py:54
+#. cs/4.6/modules/cs_applets.py:55 cs/4.0/modules/cs_applets.py:54
+msgid "Installed applets"
+msgstr "Telepített kisalkalmazások"
+
+#. cs/4.4/modules/cs_applets.py:56 cs/4.4/modules/cs_desklets.py:76
+#. cs/6.0_FUTURE/modules/cs_applets.py:56
+#. cs/6.0_FUTURE/modules/cs_desklets.py:76 cs/4.2/modules/cs_applets.py:55
+#. cs/4.2/modules/cs_desklets.py:75 cs/3.8/modules/cs_applets.py:55
+#. cs/3.8/modules/cs_desklets.py:75 cs/4.6/modules/cs_applets.py:56
+#. cs/4.6/modules/cs_desklets.py:76 cs/4.0/modules/cs_applets.py:55
+#. cs/4.0/modules/cs_desklets.py:75
+msgid "Add"
+msgstr "Hozzáadás"
+
+#. cs/4.4/modules/cs_applets.py:58 cs/4.4/modules/cs_desklets.py:78
+#. cs/4.4/modules/cs_extensions.py:56 cs/6.0_FUTURE/modules/cs_actions.py:60
+#. cs/6.0_FUTURE/modules/cs_applets.py:58
+#. cs/6.0_FUTURE/modules/cs_desklets.py:78
+#. cs/6.0_FUTURE/modules/cs_extensions.py:56 cs/4.2/bin/SUExtensionCore.py:782
+#. cs/4.2/modules/cs_applets.py:57 cs/4.2/modules/cs_desklets.py:77
+#. cs/4.2/modules/cs_extensions.py:55 cs/3.8/modules/cs_applets.py:57
+#. cs/3.8/modules/cs_desklets.py:77 cs/3.8/modules/cs_extensions.py:55
+#. cs/4.6/modules/cs_applets.py:58 cs/4.6/modules/cs_desklets.py:78
+#. cs/4.6/modules/cs_extensions.py:56 cs/4.0/modules/cs_applets.py:57
+#. cs/4.0/modules/cs_desklets.py:77 cs/4.0/modules/cs_extensions.py:55
+msgid "Uninstall"
+msgstr "Eltávolítás"
+
+#. cs/4.4/modules/cs_applets.py:59 cs/6.0_FUTURE/modules/cs_applets.py:59
+#. cs/4.2/modules/cs_applets.py:58 cs/3.8/modules/cs_applets.py:58
+#. cs/4.6/modules/cs_applets.py:59 cs/4.0/modules/cs_applets.py:58
+msgid "Reset all"
+msgstr "Összes visszaállítása"
+
+#. cs/4.4/modules/cs_applets.py:74 cs/6.0_FUTURE/modules/cs_applets.py:74
+#. cs/4.2/modules/cs_applets.py:73 cs/3.8/modules/cs_applets.py:73
+#. cs/4.6/modules/cs_applets.py:74 cs/4.0/modules/cs_applets.py:73
+msgid "Previous Panel"
+msgstr "Előző panel"
+
+#. cs/4.4/modules/cs_applets.py:78 cs/6.0_FUTURE/modules/cs_applets.py:78
+#. cs/4.2/modules/cs_applets.py:77 cs/3.8/modules/cs_applets.py:77
+#. cs/4.6/modules/cs_applets.py:78 cs/4.0/modules/cs_applets.py:77
+msgid "Next Panel"
+msgstr "Következő panel"
+
+#. cs/4.4/modules/cs_desklets.py:10 cs/6.0_FUTURE/modules/cs_desklets.py:10
+#. cs/4.2/modules/cs_desklets.py:9 cs/3.8/modules/cs_desklets.py:9
+#. cs/4.6/modules/cs_desklets.py:10 cs/4.0/modules/cs_desklets.py:9
+msgid "Manage your Cinnamon desklets"
+msgstr "Kezelje Cinnamon asztalkalmazásait"
+
+#. cs/4.4/modules/cs_desklets.py:30 cs/6.0_FUTURE/modules/cs_desklets.py:30
+#. cs/4.2/modules/cs_desklets.py:29 cs/3.8/modules/cs_desklets.py:29
+#. cs/4.6/modules/cs_desklets.py:30 cs/4.0/modules/cs_desklets.py:29
+msgid ""
+"You can remove specific instances from the desktop via that desklet's "
+"context menu"
+msgstr ""
+"Eltávolíthat bizonyos példányokat az asztalról az adott asztalkalmazás helyi "
+"menüjében"
+
+#. cs/4.4/modules/cs_desklets.py:31 cs/6.0_FUTURE/modules/cs_desklets.py:31
+#. cs/4.2/modules/cs_desklets.py:30 cs/3.8/modules/cs_desklets.py:30
+#. cs/4.6/modules/cs_desklets.py:31 cs/4.0/modules/cs_desklets.py:30
+msgid "desklet, desktop, slideshow"
+msgstr "asztalkalmazás, asztal, diavetítés"
+
+#. cs/4.4/modules/cs_desklets.py:51 cs/6.0_FUTURE/modules/cs_desklets.py:51
+#. cs/4.2/modules/cs_desklets.py:50 cs/3.8/modules/cs_desklets.py:50
+#. cs/4.6/modules/cs_desklets.py:51 cs/4.0/modules/cs_desklets.py:50
+msgid "General Settings"
+msgstr "Általános beállítások"
+
+#. cs/4.4/modules/cs_desklets.py:53 cs/6.0_FUTURE/modules/cs_desklets.py:53
+#. cs/4.2/modules/cs_desklets.py:52 cs/3.8/modules/cs_desklets.py:52
+#. cs/4.6/modules/cs_desklets.py:53 cs/4.0/modules/cs_desklets.py:52
+msgid "General Desklets Settings"
+msgstr "Általános asztalkalmazás beállítások"
+
+#. cs/4.4/modules/cs_desklets.py:55 cs/6.0_FUTURE/modules/cs_desklets.py:55
+#. cs/4.2/modules/cs_desklets.py:54 cs/3.8/modules/cs_desklets.py:54
+#. cs/4.6/modules/cs_desklets.py:55 cs/4.0/modules/cs_desklets.py:54
+msgid "No decoration"
+msgstr "Nincs dekoráció"
+
+#. cs/4.4/modules/cs_desklets.py:55 cs/6.0_FUTURE/modules/cs_desklets.py:55
+#. cs/4.2/modules/cs_desklets.py:54 cs/3.8/modules/cs_desklets.py:54
+#. cs/4.6/modules/cs_desklets.py:55 cs/4.0/modules/cs_desklets.py:54
+msgid "Border only"
+msgstr "Csak szegély"
+
+#. cs/4.4/modules/cs_desklets.py:55 cs/6.0_FUTURE/modules/cs_desklets.py:55
+#. cs/4.2/modules/cs_desklets.py:54 cs/3.8/modules/cs_desklets.py:54
+#. cs/4.6/modules/cs_desklets.py:55 cs/4.0/modules/cs_desklets.py:54
+msgid "Border and header"
+msgstr "Szegély és fejléc"
+
+#. cs/4.4/modules/cs_desklets.py:57 cs/6.0_FUTURE/modules/cs_desklets.py:57
+#. cs/4.2/modules/cs_desklets.py:56 cs/3.8/modules/cs_desklets.py:56
+#. cs/4.6/modules/cs_desklets.py:57 cs/4.0/modules/cs_desklets.py:56
+msgid "Decoration of desklets"
+msgstr "Asztalkalmazások dekorációja"
+
+#. cs/4.4/modules/cs_desklets.py:60 cs/6.0_FUTURE/modules/cs_desklets.py:60
+#. cs/4.2/modules/cs_desklets.py:59 cs/3.8/modules/cs_desklets.py:59
+#. cs/4.6/modules/cs_desklets.py:60 cs/4.0/modules/cs_desklets.py:59
+msgid "Note: Some desklets require the border/header to be always present"
+msgstr ""
+"Megjegyzés: Egyes asztalkalmazások megkövetelik, hogy a szegély/fejléc "
+"mindig jelen legyen"
+
+#. cs/4.4/modules/cs_desklets.py:64 cs/6.0_FUTURE/modules/cs_desklets.py:64
+#. cs/4.2/modules/cs_desklets.py:63 cs/3.8/modules/cs_desklets.py:63
+#. cs/4.6/modules/cs_desklets.py:64 cs/4.0/modules/cs_desklets.py:63
+msgid "Such requirements override the settings selected here"
+msgstr "Az ilyen követelmények felülírják az itt kiválasztott beállításokat"
+
+#. cs/4.4/modules/cs_desklets.py:69 cs/6.0_FUTURE/modules/cs_desklets.py:69
+#. cs/4.2/modules/cs_desklets.py:68 cs/3.8/modules/cs_desklets.py:68
+#. cs/4.6/modules/cs_desklets.py:69 cs/4.0/modules/cs_desklets.py:68
+msgid "Snap desklets to grid"
+msgstr "Illessze az asztalkalmazásokat a rácsra"
+
+#. cs/4.4/modules/cs_desklets.py:70 cs/6.0_FUTURE/modules/cs_desklets.py:70
+#. cs/4.2/modules/cs_desklets.py:69 cs/3.8/modules/cs_desklets.py:69
+#. cs/4.6/modules/cs_desklets.py:70 cs/4.0/modules/cs_desklets.py:69
+msgid "Width of desklet snap grid"
+msgstr "Az asztalkalmazás rögzítő rács szélessége"
+
+#. cs/4.4/modules/cs_desklets.py:75 cs/6.0_FUTURE/modules/cs_desklets.py:75
+#. cs/4.2/modules/cs_desklets.py:74 cs/3.8/modules/cs_desklets.py:74
+#. cs/4.6/modules/cs_desklets.py:75 cs/4.0/modules/cs_desklets.py:74
+msgid "Installed desklets"
+msgstr "Telepített asztalkalmazások"
+
+#. cs/4.4/modules/cs_desklets.py:79 cs/6.0_FUTURE/modules/cs_actions.py:61
+#. cs/6.0_FUTURE/modules/cs_desklets.py:79 cs/4.2/modules/cs_desklets.py:78
+#. cs/3.8/modules/cs_desklets.py:78 cs/4.6/modules/cs_desklets.py:79
+#. cs/4.0/modules/cs_desklets.py:78
+msgid "Remove all"
+msgstr "Összes eltávolítása"
+
+#. cs/4.4/modules/cs_extensions.py:12 cs/6.0_FUTURE/modules/cs_extensions.py:12
+#. cs/4.2/modules/cs_extensions.py:11 cs/3.8/modules/cs_extensions.py:11
+#. cs/4.6/modules/cs_extensions.py:12 cs/4.0/modules/cs_extensions.py:11
+msgid "Manage your Cinnamon extensions"
+msgstr "Kezelje a Cinnamon bővítményeket"
+
+#. cs/4.4/modules/cs_extensions.py:31 cs/6.0_FUTURE/modules/cs_extensions.py:31
+#. cs/4.2/modules/cs_extensions.py:30 cs/3.8/modules/cs_extensions.py:30
+#. cs/4.6/modules/cs_extensions.py:31 cs/4.0/modules/cs_extensions.py:30
+msgid "extension, addon"
+msgstr "kiterjesztés, kiegészítés"
+
+#. cs/4.4/modules/cs_extensions.py:53 cs/6.0_FUTURE/modules/cs_extensions.py:53
+#. cs/4.2/modules/cs_extensions.py:52 cs/3.8/modules/cs_extensions.py:52
+#. cs/4.6/modules/cs_extensions.py:53 cs/4.0/modules/cs_extensions.py:52
+msgid "Installed extensions"
+msgstr "Telepített bővítmények"
+
+#. cs/4.4/modules/cs_extensions.py:54 cs/6.0_FUTURE/modules/cs_actions.py:57
+#. cs/6.0_FUTURE/modules/cs_extensions.py:54 cs/4.2/modules/cs_extensions.py:53
+#. cs/3.8/modules/cs_extensions.py:53 cs/4.6/modules/cs_extensions.py:54
+#. cs/4.0/modules/cs_extensions.py:53
+msgid "Enable"
+msgstr "Engedélyezés"
+
+#. cs/4.4/modules/cs_extensions.py:55 cs/6.0_FUTURE/modules/cs_actions.py:58
+#. cs/6.0_FUTURE/modules/cs_extensions.py:55 cs/4.2/modules/cs_extensions.py:54
+#. cs/3.8/modules/cs_extensions.py:54 cs/4.6/modules/cs_extensions.py:55
+#. cs/4.0/modules/cs_extensions.py:54
+msgid "Disable"
+msgstr "Letiltás"
+
+#. cs/4.4/modules/cs_extensions.py:57 cs/6.0_FUTURE/modules/cs_extensions.py:57
+#. cs/4.2/modules/cs_extensions.py:56 cs/3.8/modules/cs_extensions.py:56
+#. cs/4.6/modules/cs_extensions.py:57 cs/4.0/modules/cs_extensions.py:56
+msgid "Disable all"
+msgstr "Összes letiltása"
+
+#. cs/4.4/modules/cs_themes.py:34 cs/6.0_FUTURE/modules/cs_themes.py:36
+#. cs/4.2/modules/cs_themes.py:30 cs/3.8/modules/cs_themes.py:15
+#. cs/4.6/modules/cs_themes.py:36 cs/4.0/modules/cs_themes.py:28
+msgid "Manage themes to change how your desktop looks"
+msgstr "Témák kezelésével módosíthatja az asztal megjelenését"
+
+#. cs/4.4/modules/cs_themes.py:39 cs/6.0_FUTURE/modules/cs_themes.py:41
+#. cs/4.2/modules/cs_themes.py:35 cs/3.8/modules/cs_themes.py:20
+#. cs/4.6/modules/cs_themes.py:41 cs/4.0/modules/cs_themes.py:33
+msgid "themes, style"
+msgstr "témák, stílus"
+
+#. cs/4.4/modules/cs_themes.py:76 cs/6.0_FUTURE/modules/cs_themes.py:79
+#. cs/4.2/modules/cs_themes.py:65 cs/3.8/modules/cs_themes.py:50
+#. cs/4.6/modules/cs_themes.py:79 cs/4.0/modules/cs_themes.py:63
+msgid "Window borders"
+msgstr "Ablak szegély"
+
+#. cs/4.4/modules/cs_themes.py:79 cs/6.0_FUTURE/modules/cs_themes.py:82
+#. cs/4.2/modules/cs_themes.py:68 cs/3.8/modules/cs_themes.py:53
+#. cs/4.6/modules/cs_themes.py:82 cs/4.0/modules/cs_themes.py:66
+msgid "Icons"
+msgstr "Ikonok"
+
+#. cs/4.4/modules/cs_themes.py:82 cs/6.0_FUTURE/modules/cs_themes.py:85
+#. cs/4.2/modules/cs_themes.py:71 cs/3.8/modules/cs_themes.py:56
+#. cs/4.6/modules/cs_themes.py:85 cs/4.0/modules/cs_themes.py:69
+msgid "Controls"
+msgstr "Vezérlők"
+
+#. cs/4.4/modules/cs_themes.py:85 cs/6.0_FUTURE/modules/cs_themes.py:88
+#. cs/4.2/modules/cs_themes.py:74 cs/3.8/modules/cs_themes.py:59
+#. cs/4.6/modules/cs_themes.py:88 cs/4.0/modules/cs_themes.py:72
+msgid "Mouse Pointer"
+msgstr "Egér mutató"
+
+#. cs/4.4/modules/cs_themes.py:88 cs/6.0_FUTURE/modules/cs_themes.py:91
+#. cs/4.2/modules/cs_themes.py:77 cs/3.8/modules/cs_themes.py:62
+#. cs/4.6/modules/cs_themes.py:91 cs/4.0/modules/cs_themes.py:75
+msgid "Desktop"
+msgstr "Asztal"
+
+#. cs/4.4/modules/cs_themes.py:92 cs/6.0_FUTURE/modules/cs_themes.py:95
+#. cs/4.2/modules/cs_themes.py:81 cs/3.8/modules/cs_themes.py:66
+#. cs/4.6/modules/cs_themes.py:95 cs/4.0/modules/cs_themes.py:79
+msgid "Add/Remove"
+msgstr "Hozzáadás/eltávolítás"
+
+#. cs/4.4/modules/cs_themes.py:95 cs/6.0_FUTURE/modules/cs_themes.py:98
+#. cs/4.2/modules/cs_themes.py:84 cs/3.8/modules/cs_themes.py:69
+#. cs/4.6/modules/cs_themes.py:98 cs/4.0/modules/cs_themes.py:82
+msgid "Settings"
+msgstr "Beállítások"
+
+#. cs/4.4/modules/cs_themes.py:97 cs/6.0_FUTURE/modules/cs_themes.py:100
+#. cs/4.2/modules/cs_themes.py:86 cs/3.8/modules/cs_themes.py:71
+#. cs/4.6/modules/cs_themes.py:100 cs/4.0/modules/cs_themes.py:84
+msgid "Miscellaneous options"
+msgstr "További beállítások"
+
+#. cs/4.4/modules/cs_themes.py:99 cs/6.0_FUTURE/modules/cs_themes.py:102
+#. cs/4.2/modules/cs_themes.py:88 cs/3.8/modules/cs_themes.py:73
+#. cs/4.6/modules/cs_themes.py:102 cs/4.0/modules/cs_themes.py:86
+msgid "Show icons in menus"
+msgstr "Ikonok megjelenítése a menükben"
+
+#. cs/4.4/modules/cs_themes.py:102 cs/6.0_FUTURE/modules/cs_themes.py:105
+#. cs/4.2/modules/cs_themes.py:91 cs/3.8/modules/cs_themes.py:76
+#. cs/4.6/modules/cs_themes.py:105 cs/4.0/modules/cs_themes.py:89
+msgid "Show icons on buttons"
+msgstr "Ikonok megjelenítése a gombokon"
+
+#. cs/4.4/modules/cs_themes.py:105 cs/6.0_FUTURE/modules/cs_themes.py:114
+#. cs/4.2/modules/cs_themes.py:94 cs/4.6/modules/cs_themes.py:114
+msgid "Scrollbar behavior"
+msgstr "Görgetősáv viselkedése"
+
+#. cs/4.4/modules/cs_themes.py:110 cs/6.0_FUTURE/modules/cs_themes.py:119
+#. cs/4.2/modules/cs_themes.py:99 cs/4.6/modules/cs_themes.py:119
+msgid "Jump to position when clicking in a trough"
+msgstr "Ugrás a pozícióba, amikor egy vályúban kattint"
+
+#. cs/4.4/modules/cs_themes.py:113 cs/6.0_FUTURE/modules/cs_themes.py:122
+#. cs/4.2/modules/cs_themes.py:102 cs/4.6/modules/cs_themes.py:122
+msgid "Use overlay scroll bars"
+msgstr "Használjon átfedő görgetősávokat"
+
+#. cs/4.4/modules/cs_themes.py:118 cs/6.0_FUTURE/modules/cs_themes.py:127
+#. cs/4.2/modules/cs_themes.py:107 cs/4.6/modules/cs_themes.py:127
+msgid "Override the current theme's scrollbar width"
+msgstr "Az aktuális téma görgetősávszélességének felülbírálása"
+
+#. cs/4.4/modules/cs_themes.py:122 cs/6.0_FUTURE/modules/cs_themes.py:131
+#. cs/4.2/modules/cs_themes.py:111 cs/4.6/modules/cs_themes.py:131
+msgid "Scrollbar width"
+msgstr "Görgetősáv szélessége"
+
+#. cs/4.4/modules/cs_themes.py:137 cs/6.0_FUTURE/modules/cs_themes.py:146
+#. cs/4.2/modules/cs_themes.py:126 cs/4.6/modules/cs_themes.py:146
+msgid ""
+"Changes will take effect the next time you log in and may not affect all "
+"applications."
+msgstr ""
+"A változtatások a következő bejelentkezéskor lépnek életbe, és nem "
+"feltétlenül érintik az összes alkalmazást."
+
+#. cs/6.0_FUTURE/bin/SettingsWidgets.py:174
+msgid "Checking dependencies"
+msgstr "Függőségek ellenőrzése"
+
+#. cs/6.0_FUTURE/bin/SettingsWidgets.py:175
+#, python-format
+msgid "Please install: %s"
+msgstr "Kérjük, telepítse: %s"
+
+#. cs/6.0_FUTURE/bin/SettingsWidgets.py:374
+msgid "_Cancel"
+msgstr "_Megszünteti"
+
+#. cs/6.0_FUTURE/bin/SettingsWidgets.py:375
+msgid "_Open"
+msgstr "_Megnyitás"
+
+#. cs/6.0_FUTURE/bin/SettingsWidgets.py:388
+msgid "Sound files"
+msgstr "Hangfájlok"
+
+#. cs/6.0_FUTURE/bin/Spices.py:328
+msgid "Downloading images:"
+msgstr "Képek letöltése:"
+
+#. cs/6.0_FUTURE/bin/Spices.py:402
+msgid ""
+"An error occurred while trying to access the server. Please try again in a "
+"little while."
+msgstr ""
+"Hiba történt a szerver elérése közben. Kérjük, próbálja újra egy kis idő "
+"múlva."
+
+#. cs/6.0_FUTURE/bin/Spices.py:586
+msgid ""
+"Something went wrong with the spices download. Please try refreshing the "
+"list again."
+msgstr ""
+"Hiba történt a fűszerek letöltésével. Kérjük, próbálja meg újra frissíteni a "
+"listát."
+
+#. cs/6.0_FUTURE/bin/Spices.py:601
+msgid "Refreshing the cache"
+msgstr "A gyorsítótár frissítése"
+
+#. cs/6.0_FUTURE/bin/Spices.py:681
+#, python-format
+msgid "Installing %s"
+msgstr "%s telepítése"
+
+#. cs/6.0_FUTURE/bin/Spices.py:786
+#, python-format
+msgid "Uninstalling %s"
+msgstr "%s eltávolítás"
+
+#. cs/6.0_FUTURE/bin/Spices.py:820
+#, python-format
+msgid "A problem occurred while removing %s."
+msgstr "Hiba történt a(z) %s eltávolítása közben."
+
+#. cs/6.0_FUTURE/bin/Spices.py:842
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Details:  %s"
+msgstr ""
+"\n"
+"\n"
+"Részletek: %s"
+
+#. cs/6.0_FUTURE/modules/cs_actions.py:11
+msgid "Manage your actions"
+msgstr "Saját műveletek kezelése"
+
+#. cs/6.0_FUTURE/modules/cs_actions.py:33
+msgid "action"
+msgstr "Művelet"
+
+#. cs/6.0_FUTURE/modules/cs_actions.py:59
+msgid "Installed actions"
+msgstr "Telepített műveletek"
+
+#. 4.8->settings-schema.json->section_general4->title
+#. 6.0->settings-schema.json->section_general4->title
+#. 4.6->settings-schema.json->section_general4->title
+#. 6.4->settings-schema.json->section_general4->title
+#. 5.6->settings-schema.json->section_general4->title
+#. cs/4.2/cinnamon-settings.py:75 cs/3.8/cinnamon-settings.py:73
+#. cs/4.0/cinnamon-settings.py:73
+msgid "Display"
+msgstr "Megjelenítés"
+
+#. cs/4.2/cinnamon-settings.py:75 cs/3.8/cinnamon-settings.py:73
+#. cs/4.0/cinnamon-settings.py:73
+msgid "display, screen, monitor, layout, resolution, dual, lcd"
+msgstr "kijelző, képernyő, monitor, elrendezés, felbontás, kettős, lcd"
+
+#. cs/4.2/bin/SUExtensionCore.py:247
+msgid "This is a system applet. It cannot be removed."
+msgstr "Ez egy rendszerkisalkalmazás. Nem távolítható el."
+
+#. cs/4.2/bin/SUExtensionCore.py:249
+msgid "This is a system desklet. It cannot be removed."
+msgstr "Ez egy rendszerkasztalkalmazás. Nem távolítható el."
+
+#. cs/4.2/bin/SUExtensionCore.py:251
+msgid "This is a system extension. It cannot be removed."
+msgstr "Ez egy rendszerbővítmény. Nem távolítható el."
+
+#. cs/4.2/bin/SUExtensionCore.py:302
+msgid "This applet is currently enabled"
+msgstr "Ez a kisalkalmazás jelenleg engedélyezve van"
+
+#. cs/4.2/bin/SUExtensionCore.py:304
+msgid "This desklet is currently enabled"
+msgstr "Ez a asztalkalmazás jelenleg engedélyezve van"
+
+#. cs/4.2/bin/SUExtensionCore.py:306
+msgid "This extension is currently enabled"
+msgstr "Ez a bővítmény jelenleg engedélyezve van"
+
+#. cs/4.2/bin/SUExtensionCore.py:345
+msgid ""
+"This applet contains function calls that could potentially cause Cinnamon to "
+"crash or freeze. If you are experiencing crashes or freezing, please try "
+"removing it."
+msgstr ""
+"Ez a kisalkalmazás olyan függvényhívásokat tartalmaz, amelyek a Cinnamon "
+"összeomlását vagy lefagyását okozhatják. Ha összeomlik vagy lefagy, próbálja "
+"meg eltávolítani."
+
+#. cs/4.2/bin/SUExtensionCore.py:347
+msgid ""
+"This desklet contains function calls that could potentially cause Cinnamon "
+"to crash or freeze. If you are experiencing crashes or freezing, please try "
+"removing it."
+msgstr ""
+"Ez az asztalkalmazás olyan függvényhívásokat tartalmaz, amelyek a Cinnamon "
+"összeomlását vagy lefagyását okozhatják. Ha összeomlik vagy lefagy, próbálja "
+"meg eltávolítani."
+
+#. cs/4.2/bin/SUExtensionCore.py:349
+msgid ""
+"This extension contains function calls that could potentially cause Cinnamon "
+"to crash or freeze. If you are experiencing crashes or freezing, please try "
+"removing it."
+msgstr ""
+"Ez a bővítmény olyan függvényhívásokat tartalmaz, amelyek a Cinnamon "
+"összeomlását vagy lefagyását okozhatják. Ha összeomlik vagy lefagy, próbálja "
+"meg eltávolítani."
+
+#. cs/4.2/bin/SUExtensionCore.py:458
+msgid "About"
+msgstr "Névjegy"
+
+#. cs/4.2/bin/SUExtensionCore.py:514
+#, python-format
+msgid ""
+"Extension %s is not compatible with current version of cinnamon. Using it "
+"may break your system. Load anyway?"
+msgstr ""
+"A %s kiterjesztés nem kompatibilis a cinnamon jelenlegi verziójával. "
+"Használata tönkreteheti a rendszert. Amúgy betölteni?"
+
+#. cs/4.2/bin/SUExtensionCore.py:528
+msgid ""
+"There are multiple instances enabled. Are you sure you want to remove all of "
+"them?"
+msgstr ""
+"Több példány is engedélyezve van. Biztosan el szeretné távolítani "
+"mindegyiket?"
+
+#. cs/4.2/bin/SUExtensionCore.py:536 cs/4.2/bin/SUExtensionCore.py:885
+#, python-format
+msgid "Are you sure you want to completely remove %s?"
+msgstr "Biztos benne, hogy teljesen eltávolítja a következőt: %s?"
+
+#. cs/4.2/bin/SUExtensionCore.py:544
+msgid ""
+"This will restore the default set of enabled applets. Are you sure you want "
+"to do this?"
+msgstr ""
+"Ezzel visszaállítja az engedélyezett kisalkalmazások alapértelmezett "
+"készletét. Biztosan ezt akarod csinálni?"
+
+#. cs/4.2/bin/SUExtensionCore.py:546
+msgid ""
+"This will restore the default set of enabled desklets. Are you sure you want "
+"to do this?"
+msgstr ""
+"Ezzel visszaállítja az engedélyezett asztalkalmazások alapértelmezett "
+"készletét. Biztosan ezt akarod csinálni?"
+
+#. cs/4.2/bin/SUExtensionCore.py:548
+msgid ""
+"This will disable all active extensions. Are you sure you want to do this?"
+msgstr ""
+"Ezzel letiltja az összes aktív bővítményt. Biztosan ezt akarod csinálni?"
+
+#. cs/4.2/bin/SUExtensionCore.py:581
+#, python-format
+msgid ""
+"Something went wrong while loading %s. Please make sure you are using the "
+"latest version, and then report the issue to its developer."
+msgstr ""
+"Hiba történt %s betöltése közben. Kérjük, győződjön meg arról, hogy a "
+"legújabb verziót használja, majd jelentse a problémát a fejlesztőjének."
+
+#. cs/4.2/bin/SUExtensionCore.py:656
+msgid "Install"
+msgstr "Telepítés"
+
+#. cs/4.2/bin/SUExtensionCore.py:662
+msgid "Update"
+msgstr "Frissítés"
+
+#. cs/4.2/bin/SUExtensionCore.py:665 cs/4.2/bin/SUExtensionCore.py:722
+msgid "Installed"
+msgstr "Telepített"
+
+#. cs/4.2/bin/SUExtensionCore.py:709
+msgid "Sort by"
+msgstr "Rendezés a következő szerint:"
+
+#. cs/4.2/bin/SUExtensionCore.py:719
+msgid "Name"
+msgstr "Név"
+
+#. cs/4.2/bin/SUExtensionCore.py:720
+msgid "Popularity"
+msgstr "Népszerűség"
+
+#. cs/4.2/bin/SUExtensionCore.py:721
+msgid "Date"
+msgstr "Dátum"
+
+#. cs/4.2/bin/SUExtensionCore.py:723
+msgid "Upgradable"
+msgstr "Frissíthető"
+
+#. cs/4.2/bin/SUExtensionCore.py:775
+msgid "More info"
+msgstr "Több információ"
+
+#. cs/4.2/bin/SUExtensionCore.py:915
+msgid "Update all"
+msgstr "Az összes frissítése"
+
+#. cs/4.2/bin/SUExtensionCore.py:915
+#, python-format
+msgid "%d update available"
+msgid_plural "%d updates available"
+msgstr[0] "%d frissítés elérhető"
+msgstr[1] "%d frissítések elérhetőek"
+
+#. cs/4.2/bin/SUExtensionCore.py:917
+msgid "No updates available"
+msgstr "Nincsenek frissítések"
+
+#. cs/4.2/bin/SUExtensionCore.py:934
+msgid "Your cache is out of date. Would you like to update it now?"
+msgstr "A gyorsítótár elavult. Szeretné most frissíteni?"
+
+#. metadata.json->description
+msgid ""
+"Warns you when installed Spices (actions, applets, desklets, extensions, "
+"themes) require an update or new Spices are available."
+msgstr ""
+"Figyelmeztet, ha a telepített Spices (műveletek, kisalkalmazások, asztali "
+"programok, bővítmények, témák) frissítést igényel, vagy új Spices érhető el."
+
+#. 4.2->settings-schema.json->section_applets1->title
+#. 4.2->settings-schema.json->section_desklets1->title
+#. 4.2->settings-schema.json->section_extensions1->title
+#. 4.2->settings-schema.json->section_themes1->title
+#. 4.8->settings-schema.json->section_applets1->title
+#. 4.8->settings-schema.json->section_desklets1->title
+#. 4.8->settings-schema.json->section_extensions1->title
+#. 4.8->settings-schema.json->section_themes1->title
+#. 6.0->settings-schema.json->section_applets1->title
+#. 6.0->settings-schema.json->section_desklets1->title
+#. 6.0->settings-schema.json->section_extensions1->title
+#. 6.0->settings-schema.json->section_themes1->title
+#. 6.0->settings-schema.json->section_actions1->title
+#. 3.8->settings-schema.json->section_applets1->title
+#. 3.8->settings-schema.json->section_desklets1->title
+#. 3.8->settings-schema.json->section_extensions1->title
+#. 3.8->settings-schema.json->section_themes1->title
+#. 4.6->settings-schema.json->section_applets1->title
+#. 4.6->settings-schema.json->section_desklets1->title
+#. 4.6->settings-schema.json->section_extensions1->title
+#. 4.6->settings-schema.json->section_themes1->title
+#. 6.4->settings-schema.json->section_applets1->title
+#. 6.4->settings-schema.json->section_desklets1->title
+#. 6.4->settings-schema.json->section_extensions1->title
+#. 6.4->settings-schema.json->section_themes1->title
+#. 6.4->settings-schema.json->section_actions1->title
+#. 5.6->settings-schema.json->section_applets1->title
+#. 5.6->settings-schema.json->section_desklets1->title
+#. 5.6->settings-schema.json->section_extensions1->title
+#. 5.6->settings-schema.json->section_themes1->title
+msgid "Checking"
+msgstr "Ellenőrzés"
+
+#. 4.2->settings-schema.json->section_applets2->title
+#. 4.2->settings-schema.json->section_desklets2->title
+#. 4.2->settings-schema.json->section_extensions2->title
+#. 4.2->settings-schema.json->section_themes2->title
+#. 4.8->settings-schema.json->section_applets2->title
+#. 4.8->settings-schema.json->section_desklets2->title
+#. 4.8->settings-schema.json->section_extensions2->title
+#. 4.8->settings-schema.json->section_themes2->title
+#. 6.0->settings-schema.json->section_applets2->title
+#. 6.0->settings-schema.json->section_desklets2->title
+#. 6.0->settings-schema.json->section_extensions2->title
+#. 6.0->settings-schema.json->section_themes2->title
+#. 6.0->settings-schema.json->section_actions2->title
+#. 3.8->settings-schema.json->section_applets2->title
+#. 3.8->settings-schema.json->section_desklets2->title
+#. 3.8->settings-schema.json->section_extensions2->title
+#. 3.8->settings-schema.json->section_themes2->title
+#. 4.6->settings-schema.json->section_applets2->title
+#. 4.6->settings-schema.json->section_desklets2->title
+#. 4.6->settings-schema.json->section_extensions2->title
+#. 4.6->settings-schema.json->section_themes2->title
+#. 6.4->settings-schema.json->section_applets2->title
+#. 6.4->settings-schema.json->section_desklets2->title
+#. 6.4->settings-schema.json->section_extensions2->title
+#. 6.4->settings-schema.json->section_themes2->title
+#. 6.4->settings-schema.json->section_actions2->title
+#. 5.6->settings-schema.json->section_applets2->title
+#. 5.6->settings-schema.json->section_desklets2->title
+#. 5.6->settings-schema.json->section_extensions2->title
+#. 5.6->settings-schema.json->section_themes2->title
+msgid "Monitoring"
+msgstr "Megfigyelés"
+
+#. 4.2->settings-schema.json->section_general1->title
+#. 4.8->settings-schema.json->section_general1->title
+#. 6.0->settings-schema.json->section_general1->title
+#. 3.8->settings-schema.json->section_general1->title
+#. 4.6->settings-schema.json->section_general1->title
+#. 6.4->settings-schema.json->section_general1->title
+#. 5.6->settings-schema.json->section_general1->title
+msgid "Frequency"
+msgstr "Gyakoriság"
+
+#. 4.2->settings-schema.json->section_general2->title
+#. 4.8->settings-schema.json->section_general2->title
+#. 6.0->settings-schema.json->section_general2->title
+#. 3.8->settings-schema.json->section_general2->title
+#. 4.6->settings-schema.json->section_general2->title
+#. 6.4->settings-schema.json->section_general2->title
+#. 5.6->settings-schema.json->section_general2->title
+msgid "Notifications"
+msgstr "Értesítések"
+
+#. 4.2->settings-schema.json->section_general3->title
+#. 4.8->settings-schema.json->section_general3->title
+#. 6.0->settings-schema.json->section_general3->title
+#. 4.6->settings-schema.json->section_general3->title
+#. 6.4->settings-schema.json->section_general3->title
+#. 5.6->settings-schema.json->section_general3->title
+msgid "Notification contents"
+msgstr "Értesítések tartalma"
+
+#. 4.2->settings-schema.json->section_general4->title
+#. 3.8->settings-schema.json->section_general3->title
+msgid "Display type"
+msgstr "Típus megjelenítése"
+
+#. 4.2->settings-schema.json->check_applets->description
+#. 4.8->settings-schema.json->check_applets->description
+#. 6.0->settings-schema.json->check_applets->description
+#. 3.8->settings-schema.json->check_applets->description
+#. 4.6->settings-schema.json->check_applets->description
+#. 2.8->settings-schema.json->check_applets->description
+#. 6.4->settings-schema.json->check_applets->description
+#. 5.6->settings-schema.json->check_applets->description
+msgid "Check regularly whether your applets are up to date"
+msgstr "Rendszeresen ellenőrizze, hogy a kisalkalmazások naprakészek-e"
+
+#. 4.2->settings-schema.json->check_applets->tooltip
+#. 4.8->settings-schema.json->check_applets->tooltip
+#. 6.0->settings-schema.json->check_applets->tooltip
+#. 3.8->settings-schema.json->check_applets->tooltip
+#. 4.6->settings-schema.json->check_applets->tooltip
+#. 2.8->settings-schema.json->check_applets->tooltip
+#. 6.4->settings-schema.json->check_applets->tooltip
+#. 5.6->settings-schema.json->check_applets->tooltip
+msgid "If applets updates do not concern you, uncheck this box."
+msgstr ""
+"Ha a kisalkalmazások frissítései nem érdeklik önt, ne jelölje be ezt a "
+"négyzetet."
+
+#. 4.2->settings-schema.json->check_new_applets->description
+#. 4.8->settings-schema.json->check_new_applets->description
+#. 6.0->settings-schema.json->check_new_applets->description
+#. 3.8->settings-schema.json->check_new_applets->description
+#. 4.6->settings-schema.json->check_new_applets->description
+#. 2.8->settings-schema.json->check_new_applets->description
+#. 6.4->settings-schema.json->check_new_applets->description
+#. 5.6->settings-schema.json->check_new_applets->description
+msgid "Check regularly whether new applets are available"
+msgstr "Új kisalkalmazások rendszeres keresése"
+
+#. 4.2->settings-schema.json->check_new_applets->tooltip
+#. 4.8->settings-schema.json->check_new_applets->tooltip
+#. 6.0->settings-schema.json->check_new_applets->tooltip
+#. 3.8->settings-schema.json->check_new_applets->tooltip
+#. 4.6->settings-schema.json->check_new_applets->tooltip
+#. 2.8->settings-schema.json->check_new_applets->tooltip
+#. 6.4->settings-schema.json->check_new_applets->tooltip
+#. 5.6->settings-schema.json->check_new_applets->tooltip
+msgid "If new applets do not concern you, uncheck this box."
+msgstr ""
+"Ha az új kisalkalmazások nem érdeklik önt, ne jelölje be ezt a négyzetet."
+
+#. 4.2->settings-schema.json->unprotected_applets->description
+#. 4.8->settings-schema.json->unprotected_applets->description
+#. 6.0->settings-schema.json->unprotected_applets->description
+#. 3.8->settings-schema.json->unprotected_applets->description
+#. 4.6->settings-schema.json->unprotected_applets->description
+#. 6.4->settings-schema.json->unprotected_applets->description
+#. 5.6->settings-schema.json->unprotected_applets->description
+msgid "Update these applets:"
+msgstr "Frissítse ezeket kisalkalmazásokat:"
+
+#. 4.2->settings-schema.json->unprotected_applets->columns->title
+#. 4.8->settings-schema.json->unprotected_applets->columns->title
+#. 6.0->settings-schema.json->unprotected_applets->columns->title
+#. 3.8->settings-schema.json->unprotected_applets->columns->title
+#. 4.6->settings-schema.json->unprotected_applets->columns->title
+#. 6.4->settings-schema.json->unprotected_applets->columns->title
+#. 5.6->settings-schema.json->unprotected_applets->columns->title
+msgid "Your Applets"
+msgstr "Telepített kisalkalmazások"
+
+#. 4.2->settings-schema.json->unprotected_applets->columns->title
+#. 4.2->settings-schema.json->unprotected_desklets->columns->title
+#. 4.2->settings-schema.json->unprotected_extensions->columns->title
+#. 4.2->settings-schema.json->unprotected_themes->columns->title
+#. 4.8->settings-schema.json->unprotected_applets->columns->title
+#. 4.8->settings-schema.json->unprotected_desklets->columns->title
+#. 4.8->settings-schema.json->unprotected_extensions->columns->title
+#. 4.8->settings-schema.json->unprotected_themes->columns->title
+#. 6.0->settings-schema.json->unprotected_applets->columns->title
+#. 6.0->settings-schema.json->unprotected_desklets->columns->title
+#. 6.0->settings-schema.json->unprotected_extensions->columns->title
+#. 6.0->settings-schema.json->unprotected_themes->columns->title
+#. 6.0->settings-schema.json->unprotected_actions->columns->title
+#. 3.8->settings-schema.json->unprotected_applets->columns->title
+#. 3.8->settings-schema.json->unprotected_desklets->columns->title
+#. 3.8->settings-schema.json->unprotected_extensions->columns->title
+#. 3.8->settings-schema.json->unprotected_themes->columns->title
+#. 4.6->settings-schema.json->unprotected_applets->columns->title
+#. 4.6->settings-schema.json->unprotected_desklets->columns->title
+#. 4.6->settings-schema.json->unprotected_extensions->columns->title
+#. 4.6->settings-schema.json->unprotected_themes->columns->title
+#. 6.4->settings-schema.json->unprotected_applets->columns->title
+#. 6.4->settings-schema.json->unprotected_desklets->columns->title
+#. 6.4->settings-schema.json->unprotected_extensions->columns->title
+#. 6.4->settings-schema.json->unprotected_themes->columns->title
+#. 6.4->settings-schema.json->unprotected_actions->columns->title
+#. 5.6->settings-schema.json->unprotected_applets->columns->title
+#. 5.6->settings-schema.json->unprotected_desklets->columns->title
+#. 5.6->settings-schema.json->unprotected_extensions->columns->title
+#. 5.6->settings-schema.json->unprotected_themes->columns->title
+msgid "Check for updates?"
+msgstr "Keressen rá vannak-e frissítések?"
+
+#. 4.2->settings-schema.json->unprotected_applets->columns->title
+#. 4.2->settings-schema.json->unprotected_desklets->columns->title
+#. 4.2->settings-schema.json->unprotected_extensions->columns->title
+#. 4.2->settings-schema.json->unprotected_themes->columns->title
+#. 4.8->settings-schema.json->unprotected_applets->columns->title
+#. 4.8->settings-schema.json->unprotected_desklets->columns->title
+#. 4.8->settings-schema.json->unprotected_extensions->columns->title
+#. 4.8->settings-schema.json->unprotected_themes->columns->title
+#. 6.0->settings-schema.json->unprotected_applets->columns->title
+#. 6.0->settings-schema.json->unprotected_desklets->columns->title
+#. 6.0->settings-schema.json->unprotected_extensions->columns->title
+#. 6.0->settings-schema.json->unprotected_themes->columns->title
+#. 6.0->settings-schema.json->unprotected_actions->columns->title
+#. 3.8->settings-schema.json->unprotected_applets->columns->title
+#. 3.8->settings-schema.json->unprotected_desklets->columns->title
+#. 3.8->settings-schema.json->unprotected_extensions->columns->title
+#. 3.8->settings-schema.json->unprotected_themes->columns->title
+#. 4.6->settings-schema.json->unprotected_applets->columns->title
+#. 4.6->settings-schema.json->unprotected_desklets->columns->title
+#. 4.6->settings-schema.json->unprotected_extensions->columns->title
+#. 4.6->settings-schema.json->unprotected_themes->columns->title
+#. 6.4->settings-schema.json->unprotected_applets->columns->title
+#. 6.4->settings-schema.json->unprotected_desklets->columns->title
+#. 6.4->settings-schema.json->unprotected_extensions->columns->title
+#. 6.4->settings-schema.json->unprotected_themes->columns->title
+#. 6.4->settings-schema.json->unprotected_actions->columns->title
+#. 5.6->settings-schema.json->unprotected_applets->columns->title
+#. 5.6->settings-schema.json->unprotected_desklets->columns->title
+#. 5.6->settings-schema.json->unprotected_extensions->columns->title
+#. 5.6->settings-schema.json->unprotected_themes->columns->title
+msgid "Get the latest version now"
+msgstr "Legújabb verzió beszerzése"
+
+#. 4.2->settings-schema.json->btn_cs_applets->description
+#. 4.8->settings-schema.json->btn_cs_applets->description
+#. 6.0->settings-schema.json->btn_cs_applets->description
+#. 3.8->settings-schema.json->btn_cs_applets->description
+#. 4.6->settings-schema.json->btn_cs_applets->description
+#. 2.8->settings-schema.json->btn_cs_applets->description
+#. 6.4->settings-schema.json->btn_cs_applets->description
+#. 5.6->settings-schema.json->btn_cs_applets->description
+msgid "Open Cinnamon Settings to manage all the Applets"
+msgstr "Cinnamon beállítások megnyitása az kisalkalmazások kezeléséhez"
+
+#. 4.2->settings-schema.json->check_desklets->description
+#. 4.8->settings-schema.json->check_desklets->description
+#. 6.0->settings-schema.json->check_desklets->description
+#. 3.8->settings-schema.json->check_desklets->description
+#. 4.6->settings-schema.json->check_desklets->description
+#. 2.8->settings-schema.json->check_desklets->description
+#. 6.4->settings-schema.json->check_desklets->description
+#. 5.6->settings-schema.json->check_desklets->description
+msgid "Check regularly whether your desklets are up to date"
+msgstr "Az asztalkalmazások frissítéseinek rendszeres ellenőrzése"
+
+#. 4.2->settings-schema.json->check_desklets->tooltip
+#. 4.8->settings-schema.json->check_desklets->tooltip
+#. 6.0->settings-schema.json->check_desklets->tooltip
+#. 3.8->settings-schema.json->check_desklets->tooltip
+#. 4.6->settings-schema.json->check_desklets->tooltip
+#. 2.8->settings-schema.json->check_desklets->tooltip
+#. 6.4->settings-schema.json->check_desklets->tooltip
+#. 5.6->settings-schema.json->check_desklets->tooltip
+msgid "If desklets updates do not concern you, uncheck this box."
+msgstr ""
+"Ha az asztalalkalmazások frissítései nem érdeklik önt, ne jelölje be ezt a "
+"négyzetet."
+
+#. 4.2->settings-schema.json->check_new_desklets->description
+#. 4.8->settings-schema.json->check_new_desklets->description
+#. 6.0->settings-schema.json->check_new_desklets->description
+#. 3.8->settings-schema.json->check_new_desklets->description
+#. 4.6->settings-schema.json->check_new_desklets->description
+#. 2.8->settings-schema.json->check_new_desklets->description
+#. 6.4->settings-schema.json->check_new_desklets->description
+#. 5.6->settings-schema.json->check_new_desklets->description
+msgid "Check regularly whether new desklets are available"
+msgstr "Új asztalkalmazások rendszeres keresése"
+
+#. 4.2->settings-schema.json->check_new_desklets->tooltip
+#. 4.8->settings-schema.json->check_new_desklets->tooltip
+#. 6.0->settings-schema.json->check_new_desklets->tooltip
+#. 3.8->settings-schema.json->check_new_desklets->tooltip
+#. 4.6->settings-schema.json->check_new_desklets->tooltip
+#. 2.8->settings-schema.json->check_new_desklets->tooltip
+#. 6.4->settings-schema.json->check_new_desklets->tooltip
+#. 5.6->settings-schema.json->check_new_desklets->tooltip
+msgid "If new desklets do not concern you, uncheck this box."
+msgstr ""
+"Ha az új asztalalkalmazások nem érdeklik önt, ne jelölje be ezt a négyzetet."
+
+#. 4.2->settings-schema.json->unprotected_desklets->description
+#. 4.8->settings-schema.json->unprotected_desklets->description
+#. 6.0->settings-schema.json->unprotected_desklets->description
+#. 3.8->settings-schema.json->unprotected_desklets->description
+#. 4.6->settings-schema.json->unprotected_desklets->description
+#. 6.4->settings-schema.json->unprotected_desklets->description
+#. 5.6->settings-schema.json->unprotected_desklets->description
+msgid "Update these desklets:"
+msgstr "Következő asztalkalmazások frissítése:"
+
+#. 4.2->settings-schema.json->unprotected_desklets->columns->title
+#. 4.8->settings-schema.json->unprotected_desklets->columns->title
+#. 6.0->settings-schema.json->unprotected_desklets->columns->title
+#. 3.8->settings-schema.json->unprotected_desklets->columns->title
+#. 4.6->settings-schema.json->unprotected_desklets->columns->title
+#. 6.4->settings-schema.json->unprotected_desklets->columns->title
+#. 5.6->settings-schema.json->unprotected_desklets->columns->title
+msgid "Your Desklets"
+msgstr "Telepített asztalkalmazások"
+
+#. 4.2->settings-schema.json->btn_cs_desklets->description
+#. 4.8->settings-schema.json->btn_cs_desklets->description
+#. 6.0->settings-schema.json->btn_cs_desklets->description
+#. 3.8->settings-schema.json->btn_cs_desklets->description
+#. 4.6->settings-schema.json->btn_cs_desklets->description
+#. 2.8->settings-schema.json->btn_cs_desklets->description
+#. 6.4->settings-schema.json->btn_cs_desklets->description
+#. 5.6->settings-schema.json->btn_cs_desklets->description
+msgid "Open Cinnamon Settings to manage all the Desklets"
+msgstr "Cinnamon beállítások megnyitása az asztalkalmazások kezeléséhez"
+
+#. 4.2->settings-schema.json->check_extensions->description
+#. 4.8->settings-schema.json->check_extensions->description
+#. 6.0->settings-schema.json->check_extensions->description
+#. 3.8->settings-schema.json->check_extensions->description
+#. 4.6->settings-schema.json->check_extensions->description
+#. 2.8->settings-schema.json->check_extensions->description
+#. 6.4->settings-schema.json->check_extensions->description
+#. 5.6->settings-schema.json->check_extensions->description
+msgid "Check regularly whether your extensions are up to date"
+msgstr "A bővítmények frissítéseinek rendszeres ellenőrzése"
+
+#. 4.2->settings-schema.json->check_extensions->tooltip
+#. 4.8->settings-schema.json->check_extensions->tooltip
+#. 6.0->settings-schema.json->check_extensions->tooltip
+#. 3.8->settings-schema.json->check_extensions->tooltip
+#. 4.6->settings-schema.json->check_extensions->tooltip
+#. 2.8->settings-schema.json->check_extensions->tooltip
+#. 6.4->settings-schema.json->check_extensions->tooltip
+#. 5.6->settings-schema.json->check_extensions->tooltip
+msgid "If extensions updates do not concern you, uncheck this box."
+msgstr ""
+"Ha a bővítmények frissítései nem érdeklik önt, ne jelölje be ezt a négyzetet."
+
+#. 4.2->settings-schema.json->check_new_extensions->description
+#. 4.8->settings-schema.json->check_new_extensions->description
+#. 6.0->settings-schema.json->check_new_extensions->description
+#. 3.8->settings-schema.json->check_new_extensions->description
+#. 4.6->settings-schema.json->check_new_extensions->description
+#. 2.8->settings-schema.json->check_new_extensions->description
+#. 6.4->settings-schema.json->check_new_extensions->description
+#. 5.6->settings-schema.json->check_new_extensions->description
+msgid "Check regularly whether new extensions are available"
+msgstr "Új bővítmények rendszeres keresése"
+
+#. 4.2->settings-schema.json->check_new_extensions->tooltip
+#. 4.8->settings-schema.json->check_new_extensions->tooltip
+#. 6.0->settings-schema.json->check_new_extensions->tooltip
+#. 3.8->settings-schema.json->check_new_extensions->tooltip
+#. 4.6->settings-schema.json->check_new_extensions->tooltip
+#. 2.8->settings-schema.json->check_new_extensions->tooltip
+#. 6.4->settings-schema.json->check_new_extensions->tooltip
+#. 5.6->settings-schema.json->check_new_extensions->tooltip
+msgid "If new extensions do not concern you, uncheck this box."
+msgstr "Ha az új bővítmények nem érdeklik önt, ne jelölje be ezt a négyzetet."
+
+#. 4.2->settings-schema.json->unprotected_extensions->description
+#. 4.8->settings-schema.json->unprotected_extensions->description
+#. 6.0->settings-schema.json->unprotected_extensions->description
+#. 3.8->settings-schema.json->unprotected_extensions->description
+#. 4.6->settings-schema.json->unprotected_extensions->description
+#. 6.4->settings-schema.json->unprotected_extensions->description
+#. 5.6->settings-schema.json->unprotected_extensions->description
+msgid "Update these extensions:"
+msgstr "Következő bővítmények frissítése:"
+
+#. 4.2->settings-schema.json->unprotected_extensions->columns->title
+#. 4.8->settings-schema.json->unprotected_extensions->columns->title
+#. 6.0->settings-schema.json->unprotected_extensions->columns->title
+#. 3.8->settings-schema.json->unprotected_extensions->columns->title
+#. 4.6->settings-schema.json->unprotected_extensions->columns->title
+#. 6.4->settings-schema.json->unprotected_extensions->columns->title
+#. 5.6->settings-schema.json->unprotected_extensions->columns->title
+msgid "Your Extensions"
+msgstr "Telepített bővítmények"
+
+#. 4.2->settings-schema.json->btn_cs_extensions->description
+#. 4.8->settings-schema.json->btn_cs_extensions->description
+#. 6.0->settings-schema.json->btn_cs_extensions->description
+#. 3.8->settings-schema.json->btn_cs_extensions->description
+#. 4.6->settings-schema.json->btn_cs_extensions->description
+#. 2.8->settings-schema.json->btn_cs_extensions->description
+#. 6.4->settings-schema.json->btn_cs_extensions->description
+#. 5.6->settings-schema.json->btn_cs_extensions->description
+msgid "Open Cinnamon Settings to manage all the Extensions"
+msgstr "Cinnamon beállítások megnyitása a bővítmények kezeléséhez"
+
+#. 4.2->settings-schema.json->check_themes->description
+#. 4.8->settings-schema.json->check_themes->description
+#. 6.0->settings-schema.json->check_themes->description
+#. 3.8->settings-schema.json->check_themes->description
+#. 4.6->settings-schema.json->check_themes->description
+#. 2.8->settings-schema.json->check_themes->description
+#. 6.4->settings-schema.json->check_themes->description
+#. 5.6->settings-schema.json->check_themes->description
+msgid "Check regularly whether your themes are up to date"
+msgstr "A témák frissítéseinek rendszeres ellenőrzése"
+
+#. 4.2->settings-schema.json->check_themes->tooltip
+#. 4.8->settings-schema.json->check_themes->tooltip
+#. 6.0->settings-schema.json->check_themes->tooltip
+#. 3.8->settings-schema.json->check_themes->tooltip
+#. 4.6->settings-schema.json->check_themes->tooltip
+#. 2.8->settings-schema.json->check_themes->tooltip
+#. 6.4->settings-schema.json->check_themes->tooltip
+#. 5.6->settings-schema.json->check_themes->tooltip
+msgid "If themes updates do not concern you, uncheck this box."
+msgstr ""
+"Ha a témák frissítései nem érdeklik önt, ne jelölje be ezt a négyzetet."
+
+#. 4.2->settings-schema.json->check_new_themes->description
+#. 4.8->settings-schema.json->check_new_themes->description
+#. 6.0->settings-schema.json->check_new_themes->description
+#. 3.8->settings-schema.json->check_new_themes->description
+#. 4.6->settings-schema.json->check_new_themes->description
+#. 2.8->settings-schema.json->check_new_themes->description
+#. 6.4->settings-schema.json->check_new_themes->description
+#. 5.6->settings-schema.json->check_new_themes->description
+msgid "Check regularly whether new themes are available"
+msgstr "Új témák rendszeres keresése"
+
+#. 4.2->settings-schema.json->check_new_themes->tooltip
+#. 4.8->settings-schema.json->check_new_themes->tooltip
+#. 6.0->settings-schema.json->check_new_themes->tooltip
+#. 3.8->settings-schema.json->check_new_themes->tooltip
+#. 4.6->settings-schema.json->check_new_themes->tooltip
+#. 2.8->settings-schema.json->check_new_themes->tooltip
+#. 6.4->settings-schema.json->check_new_themes->tooltip
+#. 5.6->settings-schema.json->check_new_themes->tooltip
+msgid "If new themes do not concern you, uncheck this box."
+msgstr "Ha az új témák nem érdeklik önt, ne jelölje be ezt a négyzetet."
+
+#. 4.2->settings-schema.json->unprotected_themes->description
+#. 4.8->settings-schema.json->unprotected_themes->description
+#. 6.0->settings-schema.json->unprotected_themes->description
+#. 3.8->settings-schema.json->unprotected_themes->description
+#. 4.6->settings-schema.json->unprotected_themes->description
+#. 6.4->settings-schema.json->unprotected_themes->description
+#. 5.6->settings-schema.json->unprotected_themes->description
+msgid "Update these themes:"
+msgstr "Következő témák frissítése:"
+
+#. 4.2->settings-schema.json->unprotected_themes->columns->title
+#. 4.8->settings-schema.json->unprotected_themes->columns->title
+#. 6.0->settings-schema.json->unprotected_themes->columns->title
+#. 3.8->settings-schema.json->unprotected_themes->columns->title
+#. 4.6->settings-schema.json->unprotected_themes->columns->title
+#. 6.4->settings-schema.json->unprotected_themes->columns->title
+#. 5.6->settings-schema.json->unprotected_themes->columns->title
+msgid "Your Themes"
+msgstr "Telepített témák"
+
+#. 4.2->settings-schema.json->btn_cs_themes->description
+#. 4.8->settings-schema.json->btn_cs_themes->description
+#. 6.0->settings-schema.json->btn_cs_themes->description
+#. 3.8->settings-schema.json->btn_cs_themes->description
+#. 4.6->settings-schema.json->btn_cs_themes->description
+#. 2.8->settings-schema.json->btn_cs_themes->description
+#. 6.4->settings-schema.json->btn_cs_themes->description
+#. 5.6->settings-schema.json->btn_cs_themes->description
+msgid "Open Cinnamon Settings to manage all the Themes"
+msgstr "Cinnamon beállítások megnyitása az témák kezeléséhez"
+
+#. 4.2->settings-schema.json->general_frequency->units
+#. 4.8->settings-schema.json->general_frequency->units
+#. 6.0->settings-schema.json->general_frequency->units
+#. 4.6->settings-schema.json->general_frequency->units
+#. 6.4->settings-schema.json->general_frequency->units
+#. 5.6->settings-schema.json->general_frequency->units
+msgid "hours"
+msgstr "óra"
+
+#. 4.2->settings-schema.json->general_frequency->description
+#. 4.8->settings-schema.json->general_frequency->description
+#. 6.0->settings-schema.json->general_frequency->description
+#. 4.6->settings-schema.json->general_frequency->description
+#. 6.4->settings-schema.json->general_frequency->description
+#. 5.6->settings-schema.json->general_frequency->description
+msgid "Time interval between two checks"
+msgstr "Frissítések ellenőrzésének időköze"
+
+#. 4.2->settings-schema.json->general_frequency->tooltip
+#. 4.8->settings-schema.json->general_frequency->tooltip
+#. 6.0->settings-schema.json->general_frequency->tooltip
+#. 4.6->settings-schema.json->general_frequency->tooltip
+#. 6.4->settings-schema.json->general_frequency->tooltip
+#. 5.6->settings-schema.json->general_frequency->tooltip
+msgid "Min value: 1 hour. Max value: 720 hours (30 days)."
+msgstr "Min. érték: 1 óra. Max. érték: 720 óra (30 nap)."
+
+#. 4.2->settings-schema.json->general_first_check->description
+#. 4.8->settings-schema.json->general_first_check->description
+#. 6.0->settings-schema.json->general_first_check->description
+#. 4.6->settings-schema.json->general_first_check->description
+#. 6.4->settings-schema.json->general_first_check->description
+#. 5.6->settings-schema.json->general_first_check->description
+msgid "Make a first check one minute after starting"
+msgstr "Első ellenőrzés az indulás után egy perccel"
+
+#. 4.2->settings-schema.json->general_first_check->tooltip
+#. 4.8->settings-schema.json->general_first_check->tooltip
+#. 6.0->settings-schema.json->general_first_check->tooltip
+#. 4.6->settings-schema.json->general_first_check->tooltip
+#. 6.4->settings-schema.json->general_first_check->tooltip
+#. 5.6->settings-schema.json->general_first_check->tooltip
+msgid ""
+"By checking this box, the first check will take place one minute after "
+"starting this applet."
+msgstr ""
+"Ennek a négyzetnek a bejelölésével az első ellenőrzés egy perccel a "
+"kisalkalmazás indítása után történik."
+
+#. 4.2->settings-schema.json->general_warning->description
+#. 4.8->settings-schema.json->general_warning->description
+#. 6.0->settings-schema.json->general_warning->description
+#. 3.8->settings-schema.json->general_warning->description
+#. 4.6->settings-schema.json->general_warning->description
+#. 2.8->settings-schema.json->general_warning->description
+#. 6.4->settings-schema.json->general_warning->description
+#. 5.6->settings-schema.json->general_warning->description
+msgid "Notify me by changing the icon when Spices need an update"
+msgstr "Értesítsen az ikon megváltoztatásával, ha a Spices frissítésre szorul"
+
+#. 4.2->settings-schema.json->general_warning->tooltip
+#. 4.8->settings-schema.json->general_warning->tooltip
+#. 6.0->settings-schema.json->general_warning->tooltip
+#. 3.8->settings-schema.json->general_warning->tooltip
+#. 4.6->settings-schema.json->general_warning->tooltip
+#. 2.8->settings-schema.json->general_warning->tooltip
+#. 6.4->settings-schema.json->general_warning->tooltip
+#. 5.6->settings-schema.json->general_warning->tooltip
+msgid ""
+"By checking this box, you allow this applet to modify its icon to warn you "
+"when at least one of the Spices requires an update."
+msgstr ""
+"A négyzet bejelölésével engedélyezi a kisalkalmazásnak, hogy módosítsa az "
+"ikonját így figyelmeztetve önt, ha a Spice-ok legalább egyikének "
+"frissítésére van szükség."
+
+#. 4.2->settings-schema.json->events_color->description
+#. 4.8->settings-schema.json->events_color->description
+#. 6.0->settings-schema.json->events_color->description
+#. 3.8->settings-schema.json->events_color->description
+#. 4.6->settings-schema.json->events_color->description
+#. 2.8->settings-schema.json->events_color->description
+#. 6.4->settings-schema.json->events_color->description
+#. 5.6->settings-schema.json->events_color->description
+msgid "The icon color when Spices need an update"
+msgstr "Az ikon színe, ha a Spices frissítést igényel"
+
+#. 4.2->settings-schema.json->events_color->tooltip
+#. 4.8->settings-schema.json->events_color->tooltip
+#. 6.0->settings-schema.json->events_color->tooltip
+#. 6.0->settings-schema.json->processing_color->tooltip
+#. 3.8->settings-schema.json->events_color->tooltip
+#. 4.6->settings-schema.json->events_color->tooltip
+#. 2.8->settings-schema.json->events_color->tooltip
+#. 6.4->settings-schema.json->events_color->tooltip
+#. 6.4->settings-schema.json->processing_color->tooltip
+#. 5.6->settings-schema.json->events_color->tooltip
+msgid "Click the button to select another color."
+msgstr "Kattintson a gombra egy másik szín kiválasztásához."
+
+#. 4.2->settings-schema.json->general_notifications->description
+#. 4.8->settings-schema.json->general_notifications->description
+#. 6.0->settings-schema.json->general_notifications->description
+#. 3.8->settings-schema.json->general_notifications->description
+#. 4.6->settings-schema.json->general_notifications->description
+#. 2.8->settings-schema.json->general_notifications->description
+#. 6.4->settings-schema.json->general_notifications->description
+#. 5.6->settings-schema.json->general_notifications->description
+msgid "Show notification messages about Spices updates"
+msgstr "Értesítő üzenetek megjelenítése a Spices frissítéseiről"
+
+#. 4.2->settings-schema.json->general_notifications->tooltip
+#. 4.8->settings-schema.json->general_notifications->tooltip
+#. 6.0->settings-schema.json->general_notifications->tooltip
+#. 3.8->settings-schema.json->general_notifications->tooltip
+#. 4.6->settings-schema.json->general_notifications->tooltip
+#. 2.8->settings-schema.json->general_notifications->tooltip
+#. 6.4->settings-schema.json->general_notifications->tooltip
+#. 5.6->settings-schema.json->general_notifications->tooltip
+msgid ""
+"By checking this box, you allow this applet to display messages about Spices "
+"updates in notifications viewer."
+msgstr ""
+"Ennek a négyzetnek a bejelölésével engedélyezi a kisalkalmazásnak, hogy "
+"üzeneteket jelenítsen meg a Spices frissítéseiről az értesítésekben."
+
+#. 4.2->settings-schema.json->general_details_requested->description
+#. 4.8->settings-schema.json->general_details_requested->description
+#. 6.0->settings-schema.json->general_details_requested->description
+#. 3.8->settings-schema.json->general_details_requested->description
+#. 4.6->settings-schema.json->general_details_requested->description
+#. 2.8->settings-schema.json->general_details_requested->description
+#. 6.4->settings-schema.json->general_details_requested->description
+#. 5.6->settings-schema.json->general_details_requested->description
+msgid "Display the description of each update or new Spice"
+msgstr "Jelenítse meg az egyes frissítések vagy új Spice leírását"
+
+#. 4.2->settings-schema.json->general_details_requested->tooltip
+#. 4.8->settings-schema.json->general_details_requested->tooltip
+#. 6.0->settings-schema.json->general_details_requested->tooltip
+#. 3.8->settings-schema.json->general_details_requested->tooltip
+#. 4.6->settings-schema.json->general_details_requested->tooltip
+#. 2.8->settings-schema.json->general_details_requested->tooltip
+#. 6.4->settings-schema.json->general_details_requested->tooltip
+#. 5.6->settings-schema.json->general_details_requested->tooltip
+msgid ""
+"By checking this box, you'll know why an update is available, and get a "
+"description of any new Spice.\n"
+"This information will be displayed in English."
+msgstr ""
+"Ennek a négyzetnek a bejelölésével megtudhatja, miért érhető el új "
+"frissítés, és megkapja az új Spice-ok leírását is.\n"
+"Ez az információ angolul jelenik meg."
+
+#. 4.2->settings-schema.json->general_type_notif->options
+#. 4.8->settings-schema.json->general_type_notif->options
+#. 6.0->settings-schema.json->general_type_notif->options
+#. 3.8->settings-schema.json->general_type_notif->options
+#. 4.6->settings-schema.json->general_type_notif->options
+#. 2.8->settings-schema.json->general_type_notif->options
+#. 6.4->settings-schema.json->general_type_notif->options
+#. 5.6->settings-schema.json->general_type_notif->options
+msgid "Minimal (text only)"
+msgstr "Minimális (csak szöveg)"
+
+#. 4.2->settings-schema.json->general_type_notif->options
+#. 4.8->settings-schema.json->general_type_notif->options
+#. 6.0->settings-schema.json->general_type_notif->options
+#. 4.6->settings-schema.json->general_type_notif->options
+#. 6.4->settings-schema.json->general_type_notif->options
+#. 5.6->settings-schema.json->general_type_notif->options
+msgid "With action buttons"
+msgstr "Műveleti gombokkal"
+
+#. 4.2->settings-schema.json->general_type_notif->options
+#. 4.8->settings-schema.json->general_type_notif->options
+#. 6.0->settings-schema.json->general_type_notif->options
+#. 4.6->settings-schema.json->general_type_notif->options
+#. 6.4->settings-schema.json->general_type_notif->options
+#. 5.6->settings-schema.json->general_type_notif->options
+msgid "With action buttons as icons"
+msgstr "Ikonként megjelenő műveleti gombokkal"
+
+#. 4.2->settings-schema.json->general_type_notif->description
+#. 4.8->settings-schema.json->general_type_notif->description
+#. 6.0->settings-schema.json->general_type_notif->description
+#. 3.8->settings-schema.json->general_type_notif->description
+#. 4.6->settings-schema.json->general_type_notif->description
+#. 2.8->settings-schema.json->general_type_notif->description
+#. 6.4->settings-schema.json->general_type_notif->description
+#. 5.6->settings-schema.json->general_type_notif->description
+msgid "Notification style"
+msgstr "Értesítés stílusa"
+
+#. 4.2->settings-schema.json->general_type_notif->tooltip
+#. 4.8->settings-schema.json->general_type_notif->tooltip
+#. 6.0->settings-schema.json->general_type_notif->tooltip
+#. 4.6->settings-schema.json->general_type_notif->tooltip
+#. 6.4->settings-schema.json->general_type_notif->tooltip
+#. 5.6->settings-schema.json->general_type_notif->tooltip
+msgid ""
+"Minimal:\n"
+"\tDisplays simple and short notifications.\n"
+"With action buttons:\n"
+"\tNotifications also contain some buttons which have these roles:\n"
+"\t\tThe leftmost button opens the Download tab in System Settings for the "
+"concerned Spices, which are sorted by date (most recent first). So you can "
+"update the Spices you want.\n"
+"\t\tThe rightmost button refreshes the cache and notifications, if "
+"necessary.\n"
+"\t\tOptionally, a central button allows you to forget new spices or update "
+"the installed ones, depending on the case."
+msgstr ""
+"Minimális:\n"
+"\tEgyszerű és rövid értesítéseket jelenít meg.\n"
+"Műveleti gombokkal:\n"
+"\tAz értesítések tartalmaznak néhány gombot, amelyeknek ezek a szerepeik "
+"vannak:\n"
+"\t\tA bal szélső gomb megnyitja a Letöltés fület a Rendszerbeállításokban az "
+"érintett Spice-ok számára, amelyek dátum szerint vannak rendezve (a "
+"legfrissebb elöl). Így frissítheti a kívánt Spice-okat.\n"
+"\t\tA jobb szélső gomb szükség szerint frissíti a gyorsítótárat és az "
+"értesítéseket.\n"
+"\t\tOpcionálisan, a helyzettől függően egy középső gombbal figyelmen kívül "
+"hagyhatja az új Spice-okat, vagy frissítheti a telepítetteket."
+
+#. 4.2->settings-schema.json->general_show_updateall_button->description
+#. 4.8->settings-schema.json->general_show_updateall_button->description
+#. 4.6->settings-schema.json->general_show_updateall_button->description
+#. 5.6->settings-schema.json->general_show_updateall_button->description
+msgid "Show the 'Update Now' button in notifications"
+msgstr "'Frissítés Most' gomb megjelenítése az értesítésekben"
+
+#. 4.2->settings-schema.json->general_show_updateall_button->tooltip
+#. 4.8->settings-schema.json->general_show_updateall_button->tooltip
+#. 4.6->settings-schema.json->general_show_updateall_button->tooltip
+#. 5.6->settings-schema.json->general_show_updateall_button->tooltip
+msgid ""
+"By checking this box, a button 'Update All' appears in notifications.\n"
+"By pressing this button:\n"
+" 1. The Download tab of the System Settings concerning this type of Spices "
+"appears.\n"
+" 2. The cache is updated.\n"
+" 3. Your Spices are updated.\n"
+" 4. When all updates are made, just close the window."
+msgstr ""
+"Ennek a négyzetnek a bejelölésével megjelenik az „Összes frissítése” gomb az "
+"értesítésekben.\n"
+"A gomb megnyomásával:\n"
+" 1. Megjeleníti a Letöltés fület a Rendszerbeállításokban az érintett Spice-"
+"ok számára.\n"
+" 2. A gyorsítótár frissül.\n"
+" 3. Az ön Spice-jai frissülnek.\n"
+" 4. Ha minden frissítés megtörtént, zárja be az ablakot."
+
+#. 4.2->settings-schema.json->general_test_notif->description
+#. 4.8->settings-schema.json->general_test_notif->description
+#. 6.0->settings-schema.json->general_test_notif->description
+#. 3.8->settings-schema.json->general_test_notif->description
+#. 4.6->settings-schema.json->general_test_notif->description
+#. 2.8->settings-schema.json->general_test_notif->description
+#. 6.4->settings-schema.json->general_test_notif->description
+#. 5.6->settings-schema.json->general_test_notif->description
+msgid "Send a fake notification to test the style"
+msgstr "Küldjön próbaértesítést a stílus tesztelésére"
+
+#. 4.2->settings-schema.json->displayType->options
+#. 3.8->settings-schema.json->displayType->options
+#. 2.8->settings-schema.json->displayType->options
+msgid "Classic - Icon and Text"
+msgstr "Klasszikus - ikon és szöveg"
+
+#. 4.2->settings-schema.json->displayType->options
+#. 3.8->settings-schema.json->displayType->options
+#. 2.8->settings-schema.json->displayType->options
+msgid "Compact - Icon Only"
+msgstr "Kompakt - csak ikon"
+
+#. 4.2->settings-schema.json->displayType->description
+#. 3.8->settings-schema.json->displayType->description
+#. 2.8->settings-schema.json->displayType->description
+msgid "Type of Display"
+msgstr "Megjelenítés típusa"
+
+#. 4.2->settings-schema.json->displayType->tooltip
+#. 3.8->settings-schema.json->displayType->tooltip
+#. 2.8->settings-schema.json->displayType->tooltip
+msgid ""
+"This feature offers the Classic (default) display with icon and text, and "
+"compact display (Icon Only)."
+msgstr ""
+"Ez a funkció a klasszikus (alapértelmezett) megjelenítést kínálja ikonnal és "
+"szöveggel, illetve a kompakt megjelenítést (csak az ikon)."
+
+#. 4.2->settings-schema.json->general_hide->description
+#. 4.8->settings-schema.json->general_hide->description
+#. 6.0->settings-schema.json->general_hide->description
+#. 3.8->settings-schema.json->general_hide->description
+#. 4.6->settings-schema.json->general_hide->description
+#. 2.8->settings-schema.json->general_hide->description
+#. 6.4->settings-schema.json->general_hide->description
+#. 5.6->settings-schema.json->general_hide->description
+msgid "Hide the icon as long as nothing is to report"
+msgstr "Elrejti az ikont, ha nincs új frissítés"
+
+#. 4.2->settings-schema.json->general_hide->tooltip
+#. 4.8->settings-schema.json->general_hide->tooltip
+#. 6.0->settings-schema.json->general_hide->tooltip
+#. 3.8->settings-schema.json->general_hide->tooltip
+#. 4.6->settings-schema.json->general_hide->tooltip
+#. 2.8->settings-schema.json->general_hide->tooltip
+#. 6.4->settings-schema.json->general_hide->tooltip
+#. 5.6->settings-schema.json->general_hide->tooltip
+msgid ""
+"By checking this box, as long as nothing is to report the icon of Spices "
+"Update does not appear on the panel."
+msgstr ""
+"Ha bejelöli a négyzetet a Spices Frissítések ikonja mindaddig nem jelenik "
+"meg a panelen, amíg nincs új frissítés."
+
+#. 4.8->settings-schema.json->tooltip_max_width_screen_percentage->units
+#. 6.0->settings-schema.json->tooltip_max_width_screen_percentage->units
+#. 4.6->settings-schema.json->tooltip_max_width_screen_percentage->units
+#. 6.4->settings-schema.json->tooltip_max_width_screen_percentage->units
+#. 5.6->settings-schema.json->tooltip_max_width_screen_percentage->units
+msgid "% of screen width"
+msgstr "A képernyő szélesség %-a"
+
+#. 4.8->settings-schema.json->tooltip_max_width_screen_percentage->description
+#. 6.0->settings-schema.json->tooltip_max_width_screen_percentage->description
+#. 4.6->settings-schema.json->tooltip_max_width_screen_percentage->description
+#. 6.4->settings-schema.json->tooltip_max_width_screen_percentage->description
+#. 5.6->settings-schema.json->tooltip_max_width_screen_percentage->description
+msgid "Tooltip: Maximum width"
+msgstr "Eszköztipp: maximális szélesség"
+
+#. 4.8->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
+#. 6.0->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
+#. 4.6->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
+#. 6.4->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
+#. 5.6->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
+msgid ""
+"What is the maximum percentage of your screen width that the tooltip can "
+"occupy?"
+msgstr ""
+"A képernyő szélességének mekkora százalékát foglalhatja el az eszköztippek?"
+
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_applets->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_desklets->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_extensions->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_themes->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_actions->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_applets->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_desklets->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_extensions->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_themes->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_actions->description
+msgid "Tick all the first boxes then refresh"
+msgstr "Jelöld be az összes első négyzetet, majd frissítsd az oldalt"
+
+#. 6.0->settings-schema.json->check_actions->description
+#. 6.4->settings-schema.json->check_actions->description
+msgid "Check regularly whether your nemo actions are up to date"
+msgstr "Ellenőrizze rendszeresen, hogy a nemo műveletek naprakészek-e"
+
+#. 6.0->settings-schema.json->check_actions->tooltip
+#. 6.4->settings-schema.json->check_actions->tooltip
+msgid "If nemo actions updates do not concern you, uncheck this box."
+msgstr ""
+"Ha a nemo műveletek frissítései nem érintik Önt, törölje a jelölőnégyzet "
+"bejelölését."
+
+#. 6.0->settings-schema.json->check_new_actions->description
+#. 6.4->settings-schema.json->check_new_actions->description
+msgid "Check regularly whether new nemo actions are available"
+msgstr "Rendszeresen ellenőrizze, hogy elérhetőek-e új nemo műveletek"
+
+#. 6.0->settings-schema.json->check_new_actions->tooltip
+#. 6.4->settings-schema.json->check_new_actions->tooltip
+msgid "If new nemo actions do not concern you, uncheck this box."
+msgstr ""
+"Ha az új nemo műveletek nem érintik Önt, törölje a jelölőnégyzet bejelölését."
+
+#. 6.0->settings-schema.json->unprotected_actions->description
+#. 6.4->settings-schema.json->unprotected_actions->description
+msgid "Update these nemo actions:"
+msgstr "Frissítse ezeket a nemo műveleteket:"
+
+#. 6.0->settings-schema.json->unprotected_actions->columns->title
+#. 6.4->settings-schema.json->unprotected_actions->columns->title
+msgid "Your nemo actions"
+msgstr "Az ön nemo műveletei"
+
+#. 6.0->settings-schema.json->btn_cs_actions->description
+#. 6.4->settings-schema.json->btn_cs_actions->description
+msgid "Open Cinnamon Settings to manage all the nemo actions"
+msgstr "Nyissa meg a Cinnamon beállításokat az összes nemo művelet kezeléséhez"
+
+#. 6.0->settings-schema.json->processing_color->description
+#. 6.4->settings-schema.json->processing_color->description
+msgid "The icon color while SpicesUpdate is processing"
+msgstr "Az ikon színe a SpicesUpdate feldolgozása közben"
+
+#. 3.8->settings-schema.json->general_frequency->description
+#. 2.8->settings-schema.json->general_frequency->description
+msgid "Time interval between two checks (hours)"
+msgstr "Két ellenőrzés közötti időtartam (óra)"
+
+#. 3.8->settings-schema.json->general_frequency->tooltip
+#. 2.8->settings-schema.json->general_frequency->tooltip
+msgid ""
+"Please note that the first check will take place one minute after starting "
+"this applet."
+msgstr ""
+"Kérjük, vegye figyelembe, hogy az első ellenőrzés egy perccel a "
+"kisalkalmazás indítása után történik."
+
+#. 3.8->settings-schema.json->general_force_notifications->description
+#. 2.8->settings-schema.json->general_force_notifications->description
+msgid "Show notification messages even if they are unchanged"
+msgstr "Az értesítési üzenetek megjelenítése akkor is, ha azok változatlanok"
+
+#. 3.8->settings-schema.json->general_force_notifications->tooltip
+#. 2.8->settings-schema.json->general_force_notifications->tooltip
+msgid ""
+"By checking this box, all notification messages will be displayed, even if "
+"they are identical to the previous ones."
+msgstr ""
+"Ennek a négyzetnek a bejelölésével minden értesítési üzenet megjelenik, még "
+"akkor is, ha azok megegyeznek az előzőekkel."
+
+#. 3.8->settings-schema.json->general_type_notif->options
+#. 2.8->settings-schema.json->general_type_notif->options
+msgid "With button opening the System Settings"
+msgstr "Ezzel a gombbal megnyílnak a rendszerbeállítások"
+
+#. 3.8->settings-schema.json->general_type_notif->tooltip
+#. 2.8->settings-schema.json->general_type_notif->tooltip
+msgid ""
+"Minimal:\n"
+"\tDisplays simple and short notifications.\n"
+"With button opening the System Settings:\n"
+"\tNotifications also contain a button which has the same role of the menu "
+"one:\n"
+"\tOpen the Download tab in System Settings for the concerned type of Spices, "
+"with the Spices sorted by date."
+msgstr ""
+"Minimális:\n"
+"\tEgyszerű és rövid értesítéseket jelenít meg.\n"
+"Ezzel a gombbal megnyílnak a rendszerbeállítások:\n"
+"\tAz értesítések tartalmaznak egy gombot is, amelynek ugyanaz a szerepe, "
+"mint a menü gombnak:\n"
+"\tNyissa meg a Letöltés fület a Rendszerbeállításokban az érintett Spice-ok "
+"számára, a Spice-okat dátum szerint rendezve."
+
+#. 6.4->settings-schema.json->section_general5->title
+#, fuzzy
+msgid "Dependencies"
+msgstr "Függőségek ellenőrzése"
+
+#. 6.4->settings-schema.json->btn_apply_applets->description
+#. 6.4->settings-schema.json->btn_apply_desklets->description
+#. 6.4->settings-schema.json->btn_apply_extensions->description
+#. 6.4->settings-schema.json->btn_apply_themes->description
+#. 6.4->settings-schema.json->btn_apply_actions->description
+#, fuzzy
+msgid "Apply"
+msgstr "Kisalkalmazás"
+
+#. 6.4->settings-schema.json->dont_check_dependencies->description
+#, fuzzy
+msgid "Do not check dependencies"
+msgstr "Függőségek ellenőrzése"

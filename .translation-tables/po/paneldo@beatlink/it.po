@@ -1,0 +1,81 @@
+# PANELDO
+# This file is put in the public domain.
+# beatlink, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: paneldo@beatlink 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-08 08:07-0400\n"
+"PO-Revision-Date: 2025-01-03 15:13+0100\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:59
+msgid "Edit Todos"
+msgstr "Modifica To-Do"
+
+#. applet.js:63
+msgid "Toggle Reminders"
+msgstr "Attiva/disattiva promemoria"
+
+#. metadata.json->description
+msgid "Panel based quick todo applet for Cinnamon"
+msgstr "Applet di attività rapide basata su pannello per Cinnamon"
+
+#. metadata.json->name
+msgid "PanelDo"
+msgstr "PanelDo"
+
+#. settings-schema.json->list_editor->description
+msgid "The text editor used for opening the text file"
+msgstr "L'editor di testo utilizzato per aprire il file di testo"
+
+#. settings-schema.json->path_to_file->description
+msgid "The path to the text file. It must already exist."
+msgstr "Il percorso del file di testo. Deve già esistere."
+
+#. settings-schema.json->empty_file_message->description
+msgid "The message shown when the text file is empty"
+msgstr "Il messaggio mostrato quando il file di testo è vuoto"
+
+#. settings-schema.json->prefix_string->description
+msgid "The text added to the beginning of every panel message"
+msgstr "Il testo aggiunto all'inizio di ogni messaggio del pannello"
+
+#. settings-schema.json->suffix_string->description
+msgid "The text added to the end of every panel message"
+msgstr "Il testo aggiunto alla fine di ogni messaggio del pannello"
+
+#. settings-schema.json->text_width->description
+msgid "The width of the panel text in characters"
+msgstr "La larghezza del testo del pannello in caratteri"
+
+#. settings-schema.json->reminder_enabled->description
+msgid "Sets whether the reminder flashes are enabled or not"
+msgstr "Imposta se i promemoria lampeggianti sono abilitati o meno"
+
+#. settings-schema.json->reminder_delay->description
+msgid "How often (in seconds) to flash the applet periodically for reminders."
+msgstr ""
+"Con quale frequenza (in secondi) aggiornare periodicamente l'applet per i "
+"promemoria."
+
+#. settings-schema.json->reminder_time->description
+msgid ""
+"How long (in milliseconds) should the applet reminder color stay set. Set to "
+"0 for infinity"
+msgstr ""
+"Per quanto tempo (in millisecondi) deve rimanere impostato il colore del "
+"promemoria dell'applet. Impostato su 0 per l'infinito"
+
+#. settings-schema.json->reminder_color->description
+msgid "The color used when reminding"
+msgstr "Il colore utilizzato durante il promemoria"

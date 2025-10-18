@@ -1,0 +1,35 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-01-16 03:29-0100\n"
+"PO-Revision-Date: 2023-12-25 10:43+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. settings-schema.json->enabled->tooltip
+msgid ""
+"Automatically disabled under Wayland due to redshift not being yet supported "
+"by Wayland"
+msgstr ""
+
+#. settings-schema.json->enableAtStartup->description
+msgid "Reactivate QRedshift as soon as Cinnamon starts up"
+msgstr ""
+
+#. settings-schema.json->enableAtStartup->tooltip
+msgid ""
+"Won't work under Wayland due to redshift not being yet supported by Wayland"
+msgstr ""

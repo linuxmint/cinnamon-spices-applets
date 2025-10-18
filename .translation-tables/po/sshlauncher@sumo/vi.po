@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sshlauncher@sumo 0.1.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-12-24 12:01+0100\n"
+"PO-Revision-Date: 2025-10-12 16:14+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+#: applet.js:51 applet.js:67 applet.js:110 applet.js:246 applet.js:260
+msgid "SSH Launcher"
+msgstr "Trình khởi chạy SSH"
+
+#: applet.js:110
+msgid "No suitable icon found, falling back to custom icon"
+msgstr "Không tìm thấy biểu tượng phù hợp, dùng biểu tượng tùy chỉnh"
+
+#: applet.js:116
+msgid "Force Update from SSH config"
+msgstr "Cập nhật bắt buộc từ cấu hình SSH"
+
+#: applet.js:183
+msgid "Background (-fN)"
+msgstr "Chạy nền (-fN)"
+
+#: applet.js:186
+msgid "Forward X11 (-X)"
+msgstr "Chuyển tiếp X11 (-X)"
+
+#: applet.js:227
+msgid "ERROR. "
+msgstr "LỖI. "
+
+#: applet.js:230
+msgid "Edit SSH config"
+msgstr "Chỉnh sửa cấu hình SSH"
+
+#: applet.js:246
+msgid ""
+"Error: I can't open the terminal.\n"
+"You need to set a default terminal first in Preferred Applications!\n"
+"\n"
+"(More help in Right Click->About->More Info)"
+msgstr ""
+"Lỗi: Không thể mở Terminal.\n"
+"Bạn cần đặt Terminal mặc định trong Ứng dụng Ưa thích trước!\n"
+"\n"
+"(Xem thêm hướng dẫn nhấp chuột phải->Giới thiệu->Thông tin thêm)"
+
+#: applet.js:260
+msgid "Connection opened to "
+msgstr "Kết nối mở tới "
+
+#: applet.js:260
+msgid " using "
+msgstr " sử dụng "
+
+#. metadata.json->description
+msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
+msgstr "Tiện ích để kết nối tới các máy chủ SSH đã cấu hình trong ~/.ssh/config"
+
+#. settings-schema.json->headAppearance->description
+msgid "Appearance"
+msgstr "Giao diện"
+
+#. settings-schema.json->themeIcon->description
+msgid "Use icon from your icon theme"
+msgstr "Sử dụng biểu tượng từ chủ đề biểu tượng"
+
+#. settings-schema.json->symbolicIcon->description
+msgid "Use symbolic icon"
+msgstr "Sử dụng biểu tượng ký hiệu"
+
+#. settings-schema.json->headFunc->description
+msgid "Functionality"
+msgstr "Chức năng"
+
+#. settings-schema.json->customCommand->description
+msgid "Use custom command for opening terminal"
+msgstr "Sử dụng lệnh tùy chỉnh để mở Terminal"
+
+#. settings-schema.json->customCommand->tooltip
+msgid ""
+"Usually it should end with -e so it will execute the supplied ssh command, "
+"check your chosen terminal's manual."
+msgstr "Thông thường kết thúc bằng -e để thực thi lệnh ssh, kiểm tra hướng dẫn Terminal bạn chọn."

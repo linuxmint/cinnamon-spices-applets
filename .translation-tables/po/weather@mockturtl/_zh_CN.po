@@ -1,0 +1,70 @@
+# Chinese translation for gnome-shell-extension-weather, now weather@mockturtl
+# simon 软件包的简体中文翻译.
+# Copyright (C) 2011
+# This file is distributed under the same license as weather@mockturtl.
+# bill <bill_zt@sina.com>, 2011.
+# giwhub, 2015-2017.
+# Kiat, 2017
+# Echizen Ryoma <echizenryoma.zhang@gmail.com>, 2018.
+# Slinet6056 <slinet6056@gmail.com>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: 3.2.12\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-28 09:12+0100\n"
+"PO-Revision-Date: 2025-02-18 18:32+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: Chinese (simplified)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. 3.8/weather-applet.js:8425
+msgid "Low"
+msgstr ""
+
+#. 3.8/weather-applet.js:8431
+msgid "High"
+msgstr ""
+
+#. 3.8/weather-applet.js:8434
+msgid "Very High"
+msgstr ""
+
+#. 3.8/weather-applet.js:8437
+msgid "Extreme"
+msgstr ""
+
+#. 3.8/weather-applet.js:18569
+msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr ""
+
+#. 3.8/weather-applet.js:18573
+msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr ""
+
+#. 3.8/weather-applet.js:18577
+msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr ""
+
+#. 3.8/weather-applet.js:18581
+msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
+msgstr ""
+
+#. 3.8/weather-applet.js:18585
+msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr ""
+
+#. 3.8->settings-schema.json->uvIndex->description
+msgid "Enable displaying UV Index"
+msgstr ""
+
+#. 3.8->settings-schema.json->uvIndex->tooltip
+msgid ""
+"If your provider supports it, the UV index will be shown in the popup menu "
+"next to sunrise/sunset times. It will not show if the UV index is low risk "
+"(0-2)."
+msgstr ""

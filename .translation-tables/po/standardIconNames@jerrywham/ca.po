@@ -1,0 +1,78 @@
+# STANDARD ICON NAMES
+# This file is put in the public domain.
+# Cyril MAGUIRE, 2020
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: standardIconNames@jerrywham 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:66
+msgid "Standard Action Icons"
+msgstr "Icones d'acció estàndard"
+
+#. applet.js:172
+msgid "Standard Animation Icons"
+msgstr "Icones d'animació estàndard"
+
+#. applet.js:186
+msgid "Standard Applications Icons"
+msgstr "Icones d'aplicació estàndard"
+
+#. applet.js:217
+msgid "Standard Category Icons"
+msgstr "Icones de categoria estàndard"
+
+#. applet.js:243
+msgid "Standard Device Icons"
+msgstr "Icones de dispositiu estàndard"
+
+#. applet.js:285
+msgid "Standard Emblem Icons"
+msgstr "Icones d'emblemes estàndard"
+
+#. applet.js:307
+msgid "Standard Emotion Icons"
+msgstr "Icones d'emocions estàndard"
+
+#. applet.js:343
+msgid "Standard MIME Type Icons"
+msgstr "Icones MIME Type estàndard"
+
+#. applet.js:370
+msgid "Standard Place Icons"
+msgstr "Icones de llocs estàndard"
+
+#. applet.js:394
+msgid "Standard Status Icons"
+msgstr "Icones d'estat estàndard"
+
+#. applet.js:466
+#, javascript-format
+msgid "Please install the '%s' package."
+msgstr "Si us plau instal·leu el paquet '%s'."
+
+#. applet.js:484
+#, javascript-format
+msgid "Item '%s' copied to clipboard."
+msgstr "Element '%s' copiat al porta-papers."
+
+#. metadata.json->name
+msgid "Standard icon names"
+msgstr "Noms d'icones estàndard"
+
+#. metadata.json->description
+msgid "All standard icon names for applet developers"
+msgstr ""
+"Tots els noms de les icones, per a desenvolupadors de miniaplicacions"
