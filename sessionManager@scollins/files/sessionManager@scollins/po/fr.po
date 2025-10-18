@@ -5,57 +5,55 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
-"POT-Creation-Date: 2025-09-27 10:12+0200\n"
-"PO-Revision-Date: 2020-01-20 02:45+0100\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Project-Id-Version: sessionManager@scollins 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-10-18 20:07+0200\n"
+"Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. applet.js:154
 msgid "Session"
 msgstr "Session"
 
-#. applet.js:240
+#. applet.js:228
 msgid "Lock Screen"
 msgstr "Verrouiller l'écran"
 
-#. applet.js:246
+#. applet.js:232
 msgid "Switch User"
 msgstr "Changer d'utilisateur"
 
-#. applet.js:252
+#. applet.js:237
 msgid "Guest Session"
 msgstr "Session Invité"
 
-#. applet.js:258
+#. applet.js:242
 msgid "Log Off"
 msgstr "Fermer la session"
 
-#. applet.js:269
+#. applet.js:248
 msgid "Suspend"
 msgstr "Suspendre toute activité"
 
-#. applet.js:275
+#. applet.js:253
 msgid "Sleep"
 msgstr "Mettre en sommeil"
 
-#. applet.js:281
+#. applet.js:258
 msgid "Hibernate"
 msgstr "Mettre en hibernation"
 
-#. applet.js:292
+#. applet.js:264
 msgid "Restart"
 msgstr "Redémarrer"
 
-#. applet.js:298
+#. applet.js:268
 msgid "Shut Down"
 msgstr "Arrêter"
 
@@ -111,48 +109,3 @@ msgstr "Taille de l'icône"
 #. settings-schema.json->symbolicMenuIcons->description
 msgid "Symbolic icons in menu"
 msgstr "Icônes symboliques dans le menu"
-
-#. settings-schema.json->menuOptions->description
-msgid "Menu Options"
-msgstr ""
-
-#. settings-schema.json->showLockScreen->description
-#, fuzzy
-msgid "Show Lock Screen option"
-msgstr "Verrouiller l'écran"
-
-#. settings-schema.json->showSwitchUser->description
-#, fuzzy
-msgid "Show Switch User option"
-msgstr "Changer d'utilisateur"
-
-#. settings-schema.json->showGuestSession->description
-#, fuzzy
-msgid "Show Guest Session option"
-msgstr "Session Invité"
-
-#. settings-schema.json->showLogOff->description
-msgid "Show Log Off option"
-msgstr ""
-
-#. settings-schema.json->showSuspend->description
-msgid "Show Suspend option"
-msgstr ""
-
-#. settings-schema.json->showSleep->description
-msgid "Show Sleep option"
-msgstr ""
-
-#. settings-schema.json->showHibernate->description
-#, fuzzy
-msgid "Show Hibernate option"
-msgstr "Mettre en hibernation"
-
-#. settings-schema.json->showRestart->description
-msgid "Show Restart option"
-msgstr ""
-
-#. settings-schema.json->showShutDown->description
-#, fuzzy
-msgid "Show Shut Down option"
-msgstr "Arrêter"
