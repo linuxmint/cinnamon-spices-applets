@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sessionManager@scollins 1.1\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2025-07-07 13:08-0400\n"
-"PO-Revision-Date: 2025-10-18 20:07+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-27 10:12+0200\n"
+"PO-Revision-Date: 2025-10-19 09:30+0200\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -16,44 +17,45 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:154
 msgid "Session"
 msgstr "Session"
 
-#. applet.js:228
+#. applet.js:240
 msgid "Lock Screen"
 msgstr "Verrouiller l'écran"
 
-#. applet.js:232
+#. applet.js:246
 msgid "Switch User"
 msgstr "Changer d'utilisateur"
 
-#. applet.js:237
+#. applet.js:252
 msgid "Guest Session"
 msgstr "Session Invité"
 
-#. applet.js:242
+#. applet.js:258
 msgid "Log Off"
 msgstr "Fermer la session"
 
-#. applet.js:248
+#. applet.js:269
 msgid "Suspend"
 msgstr "Suspendre toute activité"
 
-#. applet.js:253
+#. applet.js:275
 msgid "Sleep"
 msgstr "Mettre en sommeil"
 
-#. applet.js:258
+#. applet.js:281
 msgid "Hibernate"
 msgstr "Mettre en hibernation"
 
-#. applet.js:264
+#. applet.js:292
 msgid "Restart"
 msgstr "Redémarrer"
 
-#. applet.js:268
+#. applet.js:298
 msgid "Shut Down"
 msgstr "Arrêter"
 
@@ -109,3 +111,43 @@ msgstr "Taille de l'icône"
 #. settings-schema.json->symbolicMenuIcons->description
 msgid "Symbolic icons in menu"
 msgstr "Icônes symboliques dans le menu"
+
+#. settings-schema.json->menuOptions->description
+msgid "Menu Options"
+msgstr "Options de menu"
+
+#. settings-schema.json->showLockScreen->description
+msgid "Show Lock Screen option"
+msgstr "Afficher l'option Verrouiller l'écran"
+
+#. settings-schema.json->showSwitchUser->description
+msgid "Show Switch User option"
+msgstr "Afficher l'option Écran de verrouillage"
+
+#. settings-schema.json->showGuestSession->description
+msgid "Show Guest Session option"
+msgstr "Afficher l'option Session Invité"
+
+#. settings-schema.json->showLogOff->description
+msgid "Show Log Off option"
+msgstr "Afficher l'option Déconnexion"
+
+#. settings-schema.json->showSuspend->description
+msgid "Show Suspend option"
+msgstr "Afficher l'option Suspendre toute activité"
+
+#. settings-schema.json->showSleep->description
+msgid "Show Sleep option"
+msgstr "Afficher l'option Mettre en sommeil"
+
+#. settings-schema.json->showHibernate->description
+msgid "Show Hibernate option"
+msgstr "Afficher l'option Mettre en hibernation"
+
+#. settings-schema.json->showRestart->description
+msgid "Show Restart option"
+msgstr "Afficher l'option Redémarrage"
+
+#. settings-schema.json->showShutDown->description
+msgid "Show Shut Down option"
+msgstr "Afficher l'option Arrêter"
