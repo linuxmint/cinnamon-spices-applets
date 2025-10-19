@@ -1124,11 +1124,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.songTitle = "";
 
     // Scroll event signal connect Id:
-    this.connectIdScroll = -1;
+    this.connectIdScroll = null;
     // Enter event signal connect Id:
-    this.connectIdEnter = -1;
+    this.connectIdEnter = null;
     // Leave event signal connect Id:
-    this.connectIdLeave = -1;
+    this.connectIdLeave = null;
 
     // Current mpv status (may be STOP or PLAY):
     this.mpvStatus = "STOP";
@@ -1149,6 +1149,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.menu = new AppletPopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
     this.menuItems = [];
+    this.menuItemsConnectActivateIds = [];
     this.currentMenuItem = null;
     this.allRadiosMenu = null;
 
@@ -2406,7 +2407,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   async search_name_by_url_on_RDB(station_url) {
     if (!station_url || station_url.length === 0) return "";
     var name = await this.searchFetch("url=" + station_url, "byurl").then( (resultJson) => { // Do not use encodeURIComponent()!
-      if (resultJson.length > 0) {
+      if (resultJson != null && resultJson.length > 0) {
         let r = resultJson[0];
         this.radiosHash[""+station_url] = {
           // Name given by the user must have precedence:
@@ -2429,7 +2430,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   async search_uuid_by_url_on_RDB(station_url) {
     if (!station_url || station_url.length === 0) return "";
     var uuid = await this.searchFetch("url=" + station_url, "byurl").then( (resultJson) => { // Do not use encodeURIComponent()!
-      if (resultJson.length > 0) {
+      if (resultJson != null && resultJson.length > 0) {
         let r = resultJson[0];
         this.radiosHash[""+station_url] = {
           // Name given by the user must have precedence:
@@ -2452,7 +2453,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   async search_url_by_uuid_on_RDB(station_uuid, old_url=null) {
     if (!station_uuid || station_uuid.length === 0) return "";
     var url = await this.searchFetch("uuids=" + station_uuid, "byuuid").then((resultJson) => { // Do not use encodeURIComponent()!
-      if (resultJson.length > 0) {
+      if (resultJson != null && resultJson.length > 0) {
         let r = resultJson[0];
 
         // If r.url is different than old_url,
@@ -2629,9 +2630,15 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   minimal_menu() {
+    if (this.menuItemsConnectActivateIds.length > 0) {
+      for (let i=0; i<this.menuItemsConnectActivateIds.length; i++)
+        if (this.menuItems[i])
+          this.menuItems[i].disconnect(this.menuItemsConnectActivateIds[i]);
+    }
     this.menu.removeAll();
     this.currentMenuItem = null;
     this.menuItems = [];
+    this.menuItemsConnectActivateIds = [];
     if (this.show_version) {
       let menuitemHead1 = new PopupIconMenuItem("" + APPNAME + "  v" + VERSION, "webradioreceiver", IconType.SYMBOLIC, { reactive: false });
       // menuitemHead1.actor.set_style("text-align: center;");
@@ -2715,6 +2722,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       if (change_tooltip) this.set_radio_tooltip_to_default_one();
 
       if (this.menu) {
+        if (this.menuItemsConnectActivateIds.length > 0) {
+          for (let i=0; i<this.menuItemsConnectActivateIds.length; i++)
+            if (this.menuItems[i])
+              this.menuItems[i].disconnect(this.menuItemsConnectActivateIds[i]);
+        }
         this.menu.removeAll();
       } else {
         this.menu = new AppletPopupMenu(this, this.orientation);
@@ -2723,6 +2735,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
       this.currentMenuItem = null;
       this.menuItems = [];
+      this.menuItemsConnectActivateIds = [];
       var item_homepage = null;
 
       // APPLET NAME and VERSION:
@@ -2984,7 +2997,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             this.menuItems[i] = new PopupMenuItem(formatTextWrap(title, WRAP_LENGTH), { reactive: reactive });
             this.allRadiosMenu.menu.addMenuItem(this.menuItems[i]);
 
-            if (reactive) this.menuItems[i].connect('activate', () => {
+            if (reactive) this.menuItemsConnectActivateIds[i] = this.menuItems[i].connect('activate', () => {
               if (this.currentMenuItem == null || this.currentMenuItem != this.menuItems[i]) {
                 if (change_tooltip) {
                   this.set_radio_tooltip_to_default_one();
@@ -3925,11 +3938,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   _connect_signals() {
     //log("_connect_signals");
     try {
-      if (this.connectIdScroll === -1)
+      if (this.connectIdScroll == null)
         this.connectIdScroll = this.actor.connect("scroll-event", (...args) => this._onScrollEvent(...args));
-      if (this.connectIdEnter === -1)
+      if (this.connectIdEnter == null)
         this.connectIdEnter = this.actor.connect("enter-event", (...args) => this._onEnterEvent(...args));
-      if (this.connectIdLeave === -1)
+      if (this.connectIdLeave == null)
         this.connectIdLeave = this.actor.connect("leave-event", (...args) => this._onLeaveEvent(...args));
     }
     catch(e) {
@@ -3939,28 +3952,28 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   _disconnect_signals(disconnectScroll=true) {
     //log("_disconnect_signals");
-    if (this.connectIdScroll > -1 && disconnectScroll) {
+    if (this.connectIdScroll != null && disconnectScroll) {
       try {
         this.actor.disconnect(this.connectIdScroll);
-        this.connectIdScroll = -1;
+        this.connectIdScroll = null;
       } catch(e) {
         logError("Error while disconnecting signals: " + e);
       }
     }
 
-    if (this.connectIdEnter > -1) {
+    if (this.connectIdEnter != null) {
       try {
         this.actor.disconnect(this.connectIdEnter);
-        this.connectIdEnter = -1;
+        this.connectIdEnter = null;
       } catch(e) {
         logError("Error while disconnecting signals: " + e);
       }
     }
 
-    if (this.connectIdLeave > -1) {
+    if (this.connectIdLeave != null) {
       try {
         this.actor.disconnect(this.connectIdLeave);
-        this.connectIdLeave = -1;
+        this.connectIdLeave = null;
       } catch(e) {
         logError("Error while disconnecting signals: " + e);
       }
@@ -6074,6 +6087,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.searchFetch(searchOptions).then((resultJson) => {
       //global.log(resultJson);
+      if (resultJson == null) return;
       var rows = [];
       for (let station of resultJson) {
         let url = ""+station.url;
@@ -6330,7 +6344,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       //global.log("!!!! OK1 !!!!");
       let url = this.get_random_server_name() + "/json/url/" + stationuuid;
       await this.fetch(url).then((resultJson) => { // Do not use encodeURIComponent()!
-        if (""+resultJson.ok == "true") {
+        if (resultJson != null && ""+resultJson.ok == "true") {
           //global.log("!!!! OK2 !!!!: "+ resultJson.name);
           new_clicks[id] = now;
           modified = true;

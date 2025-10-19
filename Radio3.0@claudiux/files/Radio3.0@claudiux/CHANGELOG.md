@@ -1,3 +1,6 @@
+### v3.8.1~20251019
+  * Improves stability.
+
 ### v3.8.0~20251011
   * Management of cache from the Recordings tab of this applet settings.
 
