@@ -374,9 +374,9 @@ UpdatesNotifier.prototype = {
                 this.hasFirmwareUpdates = fwCount > 0;
 
                 if (this.hasFirmwareUpdates) {
-                    this._update();
                     this._saveUpdatesToFile();
                 }
+                this._update();
             }
 
             this.checkingInProgress = false;
