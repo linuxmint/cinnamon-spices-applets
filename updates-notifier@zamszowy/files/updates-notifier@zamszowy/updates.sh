@@ -15,17 +15,17 @@ check)
     pkcon get-updates &>/dev/null
     pkcon get-packages --filter installed &>/dev/null
 
-    if [[ "$refreshMode" = "updates" ]]; then
-        if command -v fwupdmgr &>/dev/null && command -v jq &>/dev/null; then
+    if command -v fwupdmgr &>/dev/null && command -v jq &>/dev/null; then
+        if [[ "$refreshMode" = "updates" ]]; then
             fwupdmgr refresh &>/dev/null
-            fwupdmgr get-updates --json 2>/dev/null | jq -r '
+        fi
+        fwupdmgr get-updates --no-authenticate --json 2>/dev/null | jq -r '
             .Devices[]
             | select(.Releases | length > 0)
             | . as $d
             | $d.Releases[]
             | "\($d.Name)#\($d.DeviceId)#\($d.Version)#\(.Version)#\($d.Summary)"
         ' 2>/dev/null
-        fi
     fi
 
     sleep 1 # give time for transaction to finish
