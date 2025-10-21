@@ -343,7 +343,11 @@ class MCSM extends Applet.IconApplet {
             this.get_disk_info();
             this.get_disk_usage();
             this._setTooltip();
-            this.graphArea.queue_repaint();
+            try {
+                this.graphArea.queue_repaint();
+            } catch(e) {
+                this.refreshAll();
+            }
             return this.isRunning;
         });
     }

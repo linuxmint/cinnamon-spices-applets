@@ -1,3 +1,7 @@
+### v3.1.4~20251021
+  * Avoids random freezes.
+  * Fixes [#7898](https://github.com/linuxmint/cinnamon-spices-applets/issues/7898)
+
 ### v3.1.3~20251013
   * Support for encrypted partitions.
   * Fixes [#7880](https://github.com/linuxmint/cinnamon-spices-applets/issues/7880)
