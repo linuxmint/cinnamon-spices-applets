@@ -1,3 +1,6 @@
+### v3.8.2~20251022
+  * Improves file monitoring.
+
 ### v3.8.1~20251019
   * Improves stability.
 
