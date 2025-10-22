@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-07 19:25+0200\n"
+"POT-Creation-Date: 2025-10-22 18:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -18,15 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:38 applet.js:487
+#. applet.js:38 applet.js:495
 msgid "SYSTEM"
 msgstr "HỆ THỐNG"
 
-#. applet.js:38 applet.js:522
+#. applet.js:38 applet.js:530
 msgid "FAVORITES"
 msgstr "YÊU THÍCH"
 
-#. applet.js:38 applet.js:546
+#. applet.js:38 applet.js:554
 msgid "RECENT DOCUMENTS"
 msgstr "TÀI LIỆU GẦN ĐÂY"
 
@@ -35,39 +35,39 @@ msgid "(Right click to open folder)"
 msgstr "(Nhấn chuột phải để mở thư mục)"
 
 #. metadata.json->name
-#. applet.js:226
+#. applet.js:263
 msgid "Direct"
 msgstr "Truy Cập Nhanh"
 
-#. applet.js:463
+#. applet.js:471
 msgid "Search Home Folder"
 msgstr "Tìm trong Thư mục Cá nhân"
 
-#. applet.js:496
+#. applet.js:504
 msgid "Search File System"
 msgstr "Tìm trong Hệ thống tập tin"
 
-#. applet.js:560
+#. applet.js:568
 msgid "Clear"
 msgstr "Xóa"
 
-#. applet.js:567
+#. applet.js:575
 msgid "Recent"
 msgstr "Gần đây"
 
-#. applet.js:615
+#. applet.js:623
 msgid "Computer"
 msgstr "Máy tính"
 
-#. applet.js:621
+#. applet.js:629
 msgid "File System"
 msgstr "Hệ thống tập tin"
 
-#. applet.js:638
+#. applet.js:646
 msgid "Network"
 msgstr "Mạng"
 
-#. applet.js:860
+#. applet.js:868
 msgid "Trash"
 msgstr "Thùng rác"
 
@@ -148,13 +148,17 @@ msgstr " - thư mục đã được tìm kiếm"
 msgid ""
 "Provides direct and easy access to your Directories, Favorites, Recent "
 "documents and System locations"
-msgstr "Cung cấp truy cập trực tiếp và dễ dàng đến Thư mục, Mục yêu thích, Tài liệu gần đây và các vị trí Hệ thống"
+msgstr ""
+"Cung cấp truy cập trực tiếp và dễ dàng đến Thư mục, Mục yêu thích, Tài liệu "
+"gần đây và các vị trí Hệ thống"
 
 #. metadata.json->comments
 msgid ""
 "The Direct@claudiux applet is a fork from the placesCenter@scollins applet, "
 "with improvements."
-msgstr "Applet Direct@claudiux là phiên bản phát triển từ placesCenter@scollins với các cải tiến."
+msgstr ""
+"Applet Direct@claudiux là phiên bản phát triển từ placesCenter@scollins với "
+"các cải tiến."
 
 #. settings-schema.json->generalPage->title
 msgid "General"
@@ -210,7 +214,8 @@ msgstr "Biểu tượng trên Thanh panel"
 
 #. settings-schema.json->panelIcon->tooltip
 msgid "Accepts icon name or direct path (supports symbolic icons)"
-msgstr "Chấp nhận tên biểu tượng hoặc đường dẫn trực tiếp (hỗ trợ biểu tượng ký hiệu)"
+msgstr ""
+"Chấp nhận tên biểu tượng hoặc đường dẫn trực tiếp (hỗ trợ biểu tượng ký hiệu)"
 
 #. settings-schema.json->panelText->description
 msgid "Panel text"
@@ -258,6 +263,11 @@ msgstr "Mở khi nhấn chuột giữa"
 #. settings-schema.json->middleClickPath->tooltip
 msgid "Leave blank to disable"
 msgstr "Để trống để vô hiệu hóa"
+
+#. settings-schema.json->dontDisplayTooltip->description
+#, fuzzy
+msgid "Do not display the tooltip"
+msgstr "Hiển thị đường dẫn đầy đủ trong gợi ý"
 
 #. settings-schema.json->showUserSection->description
 msgid "Show User section"
@@ -402,4 +412,3 @@ msgstr "Quyền riêng tư"
 #. settings-schema.json->btnIconBrowser->description
 msgid "Icon browser"
 msgstr "Trình duyệt Biểu tượng"
-
