@@ -1984,13 +1984,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     let file = file_new_for_path(MPV_TITLE_FILE);
 
-    if (file.query_exists(null)) {
-      try {
-        this.titleMonitor = file.monitor_file(FileMonitorFlags.NONE, new Cancellable());
-        this.titleMonitorId = this.titleMonitor.connect('changed', () => { this._on_mpv_title_changed() });
-      } catch(e) {
-        logError("Unable to monitor %s!".format(MPV_TITLE_FILE), e)
-      }
+    try {
+      this.titleMonitor = file.monitor_file(FileMonitorFlags.NONE, new Cancellable());
+      this.titleMonitorId = this.titleMonitor.connect('changed', () => { this._on_mpv_title_changed() });
+    } catch(e) {
+      logError("Unable to monitor %s!".format(MPV_TITLE_FILE), e)
     }
   }
 
