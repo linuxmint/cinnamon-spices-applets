@@ -963,6 +963,16 @@ class BrightnessAndGamma extends Applet.IconApplet {
         tips.push(" ".repeat(MAX_TR_LENGTH - TR_SUNRISE.length) + str_sunrise);
         let str_sunset = _("Sunset") + " " + this.frac_to_h_m(this.sunset);
         tips.push(" ".repeat(MAX_TR_LENGTH - TR_SUNSET.length) + str_sunset);
+        for (let preset of this.preset_list) {
+            if (this.brightness == preset["brightness"] &&
+                this.gamma_red == preset["gamma_red"] &&
+                this.gamma_green == preset["gamma_green"] &&
+                this.gamma_blue == preset["gamma_blue"]
+            ) {
+                tips.unshift("—".repeat(MAX_TR_LENGTH + 6));
+                tips.unshift(preset["name"]);
+            }
+        }
         this.set_applet_tooltip(tips.join("\n"), true);
     }
 
