@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Direct@claudiux 1.1.0\n"
+"Project-Id-Version: Direct@claudiux 1.1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-07 19:25+0200\n"
+"POT-Creation-Date: 2025-10-22 18:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:38 applet.js:487
+#. applet.js:38 applet.js:495
 msgid "SYSTEM"
 msgstr ""
 
-#. applet.js:38 applet.js:522
+#. applet.js:38 applet.js:530
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:38 applet.js:546
+#. applet.js:38 applet.js:554
 msgid "RECENT DOCUMENTS"
 msgstr ""
 
@@ -34,39 +34,39 @@ msgid "(Right click to open folder)"
 msgstr ""
 
 #. metadata.json->name
-#. applet.js:226
+#. applet.js:263
 msgid "Direct"
 msgstr ""
 
-#. applet.js:463
+#. applet.js:471
 msgid "Search Home Folder"
 msgstr ""
 
-#. applet.js:496
+#. applet.js:504
 msgid "Search File System"
 msgstr ""
 
-#. applet.js:560
+#. applet.js:568
 msgid "Clear"
 msgstr ""
 
-#. applet.js:567
+#. applet.js:575
 msgid "Recent"
 msgstr ""
 
-#. applet.js:615
+#. applet.js:623
 msgid "Computer"
 msgstr ""
 
-#. applet.js:621
+#. applet.js:629
 msgid "File System"
 msgstr ""
 
-#. applet.js:638
+#. applet.js:646
 msgid "Network"
 msgstr ""
 
-#. applet.js:860
+#. applet.js:868
 msgid "Trash"
 msgstr ""
 
@@ -256,6 +256,10 @@ msgstr ""
 
 #. settings-schema.json->middleClickPath->tooltip
 msgid "Leave blank to disable"
+msgstr ""
+
+#. settings-schema.json->dontDisplayTooltip->description
+msgid "Do not display the tooltip"
 msgstr ""
 
 #. settings-schema.json->showUserSection->description

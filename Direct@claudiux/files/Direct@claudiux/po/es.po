@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-07 19:25+0200\n"
+"POT-Creation-Date: 2025-10-22 18:45+0200\n"
 "PO-Revision-Date: 2025-10-07 14:37-0300\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
@@ -19,15 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.7\n"
 
-#. applet.js:38 applet.js:487
+#. applet.js:38 applet.js:495
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:38 applet.js:522
+#. applet.js:38 applet.js:530
 msgid "FAVORITES"
 msgstr "FAVORITOS"
 
-#. applet.js:38 applet.js:546
+#. applet.js:38 applet.js:554
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTOS RECIENTES"
 
@@ -36,39 +36,39 @@ msgid "(Right click to open folder)"
 msgstr "(Haga clic con el botón derecho para abrir la carpeta)"
 
 #. metadata.json->name
-#. applet.js:226
+#. applet.js:263
 msgid "Direct"
 msgstr "Directo"
 
-#. applet.js:463
+#. applet.js:471
 msgid "Search Home Folder"
 msgstr "Buscar en la carpeta personal"
 
-#. applet.js:496
+#. applet.js:504
 msgid "Search File System"
 msgstr "Buscar en el sistema de archivos"
 
-#. applet.js:560
+#. applet.js:568
 msgid "Clear"
 msgstr "Limpiar"
 
-#. applet.js:567
+#. applet.js:575
 msgid "Recent"
 msgstr "Recientes"
 
-#. applet.js:615
+#. applet.js:623
 msgid "Computer"
 msgstr "PC"
 
-#. applet.js:621
+#. applet.js:629
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#. applet.js:638
+#. applet.js:646
 msgid "Network"
 msgstr "Red"
 
-#. applet.js:860
+#. applet.js:868
 msgid "Trash"
 msgstr "Papelera"
 
@@ -263,6 +263,11 @@ msgstr "Abrir al hacer click central"
 #. settings-schema.json->middleClickPath->tooltip
 msgid "Leave blank to disable"
 msgstr "Dejar en blanco para deshabilitar"
+
+#. settings-schema.json->dontDisplayTooltip->description
+#, fuzzy
+msgid "Do not display the tooltip"
+msgstr "Mostrar la ruta completa en la información sobre herramientas"
 
 #. settings-schema.json->showUserSection->description
 msgid "Show User section"

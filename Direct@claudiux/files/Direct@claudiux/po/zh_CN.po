@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-07 19:25+0200\n"
+"POT-Creation-Date: 2025-10-22 18:45+0200\n"
 "PO-Revision-Date: 2017-05-02 21:02+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,15 +19,15 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#. applet.js:38 applet.js:487
+#. applet.js:38 applet.js:495
 msgid "SYSTEM"
 msgstr "系统"
 
-#. applet.js:38 applet.js:522
+#. applet.js:38 applet.js:530
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:38 applet.js:546
+#. applet.js:38 applet.js:554
 msgid "RECENT DOCUMENTS"
 msgstr "最近的文档"
 
@@ -36,39 +36,39 @@ msgid "(Right click to open folder)"
 msgstr ""
 
 #. metadata.json->name
-#. applet.js:226
+#. applet.js:263
 msgid "Direct"
 msgstr "直接"
 
-#. applet.js:463
+#. applet.js:471
 msgid "Search Home Folder"
 msgstr "搜索主目录文件夹"
 
-#. applet.js:496
+#. applet.js:504
 msgid "Search File System"
 msgstr "搜索文件系统"
 
-#. applet.js:560
+#. applet.js:568
 msgid "Clear"
 msgstr "清除"
 
-#. applet.js:567
+#. applet.js:575
 msgid "Recent"
 msgstr ""
 
-#. applet.js:615
+#. applet.js:623
 msgid "Computer"
 msgstr "计算机"
 
-#. applet.js:621
+#. applet.js:629
 msgid "File System"
 msgstr "文件系统"
 
-#. applet.js:638
+#. applet.js:646
 msgid "Network"
 msgstr "网络"
 
-#. applet.js:860
+#. applet.js:868
 msgid "Trash"
 msgstr "回收站"
 
@@ -268,6 +268,10 @@ msgstr "中键点击时打开"
 #. settings-schema.json->middleClickPath->tooltip
 msgid "Leave blank to disable"
 msgstr "留空则禁用"
+
+#. settings-schema.json->dontDisplayTooltip->description
+msgid "Do not display the tooltip"
+msgstr ""
 
 #. settings-schema.json->showUserSection->description
 #, fuzzy

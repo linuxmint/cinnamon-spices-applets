@@ -223,7 +223,7 @@ class DirectApplet extends Applet.TextIconApplet {
             //set up panel
             this.setPanelIcon();
             this.setPanelText();
-            this.set_applet_tooltip(_("Direct"));
+            this._setTooltip();
 
             //listen for changes
             this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -254,6 +254,13 @@ class DirectApplet extends Applet.TextIconApplet {
         } catch(e) {
             global.logError("constructor: " + e);
         }
+    }
+
+    _setTooltip() {
+        if (this.dontDisplayTooltip)
+            this.set_applet_tooltip("");
+        else
+            this.set_applet_tooltip(_("Direct"));
     }
 
     _toggle_menu_when_open() {
@@ -309,6 +316,7 @@ class DirectApplet extends Applet.TextIconApplet {
         //~ this.settings.bind("iconSize", "iconSize", this.buildMenu);
         this.settings.bind("iconSize", "iconSize");
         this.settings.bind("middleClickPath", "middleClickPath");
+        this.settings.bind("dontDisplayTooltip", "dontDisplayTooltip", this._setTooltip);
         this.settings.bind("displayOrder", "displayOrder");
         this.controlDisplayOrder();
         //~ this.settings.bind("showDesktop", "showDesktop", this.buildUserSection);
