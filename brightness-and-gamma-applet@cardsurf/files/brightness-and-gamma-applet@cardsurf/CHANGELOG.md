@@ -1,3 +1,6 @@
+### v2.3.2~20251022
+* Displays the currently used preset in the tooltip.
+
 ### v2.3.1~20251013
 * Allows you to set maximum values up to 200 in presets.
 
