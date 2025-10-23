@@ -1,3 +1,7 @@
+### v3.8.3~20251023
+  * Fixes error opening menu.
+  * Fixes [#7907](https://github.com/linuxmint/cinnamon-spices-applets/issues/7907).
+
 ### v3.8.2~20251022
   * Improves file monitoring.
 

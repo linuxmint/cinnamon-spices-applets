@@ -2721,9 +2721,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
       if (this.menu) {
         if (this.menuItemsConnectActivateIds.length > 0) {
-          for (let i=0; i<this.menuItemsConnectActivateIds.length; i++)
-            if (this.menuItems[i])
-              this.menuItems[i].disconnect(this.menuItemsConnectActivateIds[i]);
+          for (let i=0; i<this.menuItemsConnectActivateIds.length; i++) {
+            if (this.menuItems[i] && this.menuItemsConnectActivateIds[i]) {
+              try {
+                this.menuItems[i].disconnect(this.menuItemsConnectActivateIds[i]);
+              } catch (e) {}
+            }
+          }
         }
         this.menu.removeAll();
       } else {
