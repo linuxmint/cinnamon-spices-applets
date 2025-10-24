@@ -139,7 +139,7 @@ msgstr "立即安装这些软件包"
 #. lib/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
-msgstr "执行“%s”失败："
+msgstr "执行“%s”失败:"
 
 #. scripts/xs.py:206
 msgid "Previous instance"
@@ -189,11 +189,11 @@ msgstr "选择要导入的JSON文件"
 
 #. metadata.json->description
 msgid "Displays the values of many computer sensors concerning Temperatures (CPU - GPU - Power Supply), Fan Speed, Voltages, Intrusions. Notifies you with color changes when a value reaches or exceeds its limit."
-msgstr "显示许多计算机传感器的温度（CPU-GPU-电源）、风扇速度、电压、侵入值。当值达到或超过其限制时，会通知您颜色变化。"
+msgstr "显示许多计算机传感器的温度(CPU-GPU-电源）、风扇速度、电压、侵入值。当值达到或超过其限制时，会通知您颜色变化。"
 
 #. metadata.json->contributors
 msgid "claudiux: Author. JEleniel: support for NVidia video cards."
-msgstr "克劳迪奥：作者。JEleniel：支持NVidia视频卡。"
+msgstr "克劳迪奥:作者。JEleniel:支持NVidia视频卡。"
 
 #. settings-schema.json->page_Temperatures->title
 msgid "⦿ Temperature"
@@ -237,7 +237,7 @@ msgstr "从面板中删除某些也使用传感器的小程序"
 
 #. settings-schema.json->section_tempDisktemp->title
 msgid "For the time being, disk temperature can only be read by root."
-msgstr "目前，磁盘温度只能由root读取。"
+msgstr "目前,磁盘温度只能由root读取。"
 
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
@@ -381,7 +381,7 @@ msgstr "选中：一旦定义了所有首选项，此小程序的大小将保持
 
 #. settings-schema.json->char_size->description
 msgid "Character size (% of standard size)"
-msgstr "字符大小（标准大小的%）"
+msgstr "字符大小（标准大小的%)"
 
 #. settings-schema.json->horizontal_width->description
 msgid "Display width (pixels) for horizontal panels"
@@ -547,7 +547,7 @@ msgstr "显示单位字符"
 
 #. settings-schema.json->show_unit_letter->tooltip
 msgid "Whether or not to show the unit character (C or F)."
-msgstr "是否显示单位字符（C 或 F）。"
+msgstr "是否显示单位字符(C 或 F)。"
 
 #. settings-schema.json->always_show_unit_in_line->description
 msgid "Vertical panel: Temperature value and °C / °F on one line"
@@ -622,7 +622,7 @@ msgstr "公式"
 
 #. settings-schema.json->temp_sensors->tooltip
 msgid "Double-click on a line to change 'Shown name', 'High', 'Critical' or 'Formula'.\\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\\n'High' and 'Critical' (optional) must be valid numbers.\\n'Formula' (optional):\\n  Use $ as the value returned by the sensor.\\n  You can use the 4 operations (+-*/) and parentheses.\\n  Example: $*1.1+0.5"
-msgstr "双击一行以更改“显示名称”、“高”、“关键”或“公式”。\\n要重置“显示的名称”，请复制/粘贴“传感器名称”。\\“High”和“Critical”（可选）必须是有效数字。\\'Formula'（可选）：\\n使用$作为传感器返回的值。\\n您可以使用4个操作（+-*/）和括号。\\n示例：$*1.1+0.5"
+msgstr "双击一行以更改“显示名称”、“高”、“关键”或“公式”。\\n要重置“显示的名称”,请复制/粘贴“传感器名称”。\\“High”和“Critical”(可选）必须是有效数字。\\'Formula'（可选）：\\n使用$作为传感器返回的值。\\n您可以使用4个操作(+-*/）和括号。\\n示例:$*1.1+0.5"
 
 #. settings-schema.json->btn_renew_disks_list->description
 msgid "Renew the list of known disks"
@@ -640,7 +640,7 @@ msgstr "显示\\n名称"
 
 #. settings-schema.json->temp_disks->tooltip
 msgid "Disk name: The name of the disk, as returned by the 'lsblk' command. Please see help.\\nHigh and Critical values: Cf. technical manual of your disk."
-msgstr "磁盘名称：磁盘的名称，由“lsblk”命令返回。请查看帮助。\\n高值和临界值：请参阅磁盘技术手册。"
+msgstr "磁盘名称:磁盘的名称,由“lsblk”命令返回。请查看帮助。\\n高值和临界值:请参阅磁盘技术手册。"
 
 #. settings-schema.json->chars_fan->tooltip
 msgid "The first emoji in this list is used for fan"
@@ -668,7 +668,7 @@ msgstr "最小\\n(rpm)"
 
 #. settings-schema.json->fan_sensors->tooltip
 msgid "Double-click on a line to change 'Shown name', 'Min' or 'Formula'.\\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\\n'Min' (optional) must be valid number.\\n'Formula' (optional):\\n  Use $ as the value returned by the sensor.\\n  You can use the 4 operations (+-*/) and parentheses.\\n  Example: $*1.1+0.5"
-msgstr "双击一行以更改“显示名称”、“最小值”或“公式”。\\n要重置“显示的名称”，请复制/粘贴“传感器名称”。\\'Min'（可选）必须是有效数字。\\'Formula'（可选）：\\n使用$作为传感器返回的值。\\n您可以使用4个操作（+-*/）和括号。\\n示例：$*1.1+0.5"
+msgstr "双击一行以更改“显示名称”、“最小值”或“公式”。\\n要重置“显示的名称”,请复制/粘贴“传感器名称”。\\'Min'（可选）必须是有效数字。\\'Formula'（可选）：\\n使用$作为传感器返回的值。\\n您可以使用4个操作(+-*/）和括号。\\n示例:$*1.1+0.5"
 
 #. settings-schema.json->chars_volt->tooltip
 msgid "The first emoji in this list is used for voltage"
@@ -680,7 +680,7 @@ msgstr "电压单位"
 
 #. settings-schema.json->volt_unit->options
 msgid "Most appropriate (V or mV)"
-msgstr "最合适的（V 或 mV）"
+msgstr "最合适的(V 或 mV)"
 
 #. settings-schema.json->volt_unit->options
 msgid "V only"
@@ -708,7 +708,7 @@ msgstr "最大\\n(V)"
 
 #. settings-schema.json->volt_sensors->tooltip
 msgid "Double-click on a line to change 'Shown name', 'Min', 'Max' or 'Formula'.\\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\\n'Min' and 'Max' (optional) must be valid numbers.\\n'Formula' (optional):\\n  Use $ as the value returned by the sensor.\\n  You can use the 4 operations (+-*/) and parentheses.\\n  Example: $*1.1+0.5"
-msgstr "双击一行以更改“显示名称”、“最小值”、“最大值”或“公式”。\\n要重置“显示的名称”，请复制/粘贴“传感器名称”。\\'Min'和'Max'（可选）必须是有效数字。\\'Formula'（可选）：\\n使用$作为传感器返回的值。\\n您可以使用4个操作（+-*/）和括号。\\n示例：$*1.1+0.5"
+msgstr "双击一行以更改“显示名称”、“最小值”、“最大值”或“公式”。\\n要重置“显示的名称”,请复制/粘贴“传感器名称”。\\'Min'和'Max'（可选）必须是有效数字。\\'Formula'（可选）：\\n使用$作为传感器返回的值。\\n您可以使用4个操作(+-*/）和括号。\\n示例:$*1.1+0.5"
 
 #. settings-schema.json->show_intrusion_name->tooltip
 #. settings-schema.json->show_custom_name->tooltip
@@ -733,7 +733,7 @@ msgstr "选中此选项后，入侵将记录在系统日志中。"
 
 #. settings-schema.json->intrusion_sensors->tooltip
 msgid "Double-click on a line to change Shown name.\\nTo reset a Shown name, copy/paste the Sensor name."
-msgstr "双击一行以更改显示的名称。\\n要重置显示的名称，请复制/粘贴传感器名称。"
+msgstr "双击一行以更改显示的名称。\\n要重置显示的名称,请复制/粘贴传感器名称。"
 
 #. settings-schema.json->custom_disclaimer->description
 msgid "These settings are for advanced users only!\\nPlease refer to the README file."
