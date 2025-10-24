@@ -1,0 +1,380 @@
+# BRIGHTNESS AND GAMMA APPLET
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# cardsurf, 2017
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-26 20:09+0200\n"
+"PO-Revision-Date: 2025-09-28 16:26+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:178 6.4/applet.js:265
+msgid "The following packages were not found:"
+msgstr "No s'han trobat els següents paquets:"
+
+#. applet.js:179 6.4/applet.js:266
+msgid "Please install the above packages to use the applet"
+msgstr "Si us plau, instal·leu els paquets per a usar la miniapliació"
+
+#. applet.js:564 6.4/applet.js:808
+msgid "Screen"
+msgstr "Pantalla"
+
+#. applet.js:647 6.4/applet.js:891
+msgid "Outputs"
+msgstr "Monitors"
+
+#. settings-schema.json->options_type->options
+#. 6.4->settings-schema.json->options_type->options
+#. 6.4->settings-schema.json->preset_list->columns->title
+#. appletGui.js:235 6.4/applet.js:41 6.4/lib/appletGui.js:212
+msgid "Brightness"
+msgstr "Brillantor"
+
+#. appletGui.js:236 6.4/applet.js:42 6.4/lib/appletGui.js:213
+msgid "Red"
+msgstr "Vermell"
+
+#. appletGui.js:237 6.4/applet.js:43 6.4/lib/appletGui.js:214
+msgid "Green"
+msgstr "Verd"
+
+#. appletGui.js:238 6.4/applet.js:44 6.4/lib/appletGui.js:215
+msgid "Blue"
+msgstr "Blau"
+
+#. 6.4/applet.js:45 6.4/applet.js:962
+msgid "Sunrise"
+msgstr "Sortida del sol"
+
+#. 6.4/applet.js:46 6.4/applet.js:964
+msgid "Sunset"
+msgstr "Posta de sol"
+
+#. 6.4/applet.js:729
+msgid "Reload"
+msgstr "Recarregar"
+
+#. 6.4/applet.js:739
+msgid "Configure Presets"
+msgstr "Configurar predefinicions"
+
+#. 6.4->settings-schema.json->page_presets->title
+#. 6.4/applet.js:749
+msgid "Presets"
+msgstr "Predefinicions"
+
+#. metadata.json->description
+msgid "Sets brightness and gamma levels of a screen"
+msgstr "Estableix els valors de brillantor i gamma d'una pantalla"
+
+#. metadata.json->name
+msgid "Brightness and gamma applet"
+msgstr "Miniaplicació de Brillantor i Gamma"
+
+#. settings-schema.json->configuration_start->description
+#. 6.4->settings-schema.json->section_config->title
+msgid "Configuration"
+msgstr "Configuració"
+
+#. settings-schema.json->apply_startup->description
+#. 6.4->settings-schema.json->apply_startup->description
+msgid "Apply at startup"
+msgstr "Aplicar a l'inici"
+
+#. settings-schema.json->apply_startup->tooltip
+#. 6.4->settings-schema.json->apply_startup->tooltip
+msgid "Apply values at applet startup"
+msgstr "Aplica els nivells a l'inici de la miniaplicació"
+
+#. settings-schema.json->apply_every->units
+#. settings-schema.json->save_every->units
+#. 6.4->settings-schema.json->apply_every->units
+#. 6.4->settings-schema.json->save_every->units
+msgid "seconds"
+msgstr "segons"
+
+#. settings-schema.json->apply_every->description
+#. 6.4->settings-schema.json->apply_every->description
+msgid "Apply every"
+msgstr "Aplicar cada"
+
+#. settings-schema.json->apply_every->tooltip
+#. 6.4->settings-schema.json->apply_every->tooltip
+msgid ""
+"How often to apply values. 0 means that values are not applied periodically."
+msgstr ""
+"Cada quan s'aplicaran els valors. 0 significa que no s'aplicaran "
+"periòdicament."
+
+#. settings-schema.json->apply_asynchronously->description
+#. 6.4->settings-schema.json->apply_asynchronously->description
+msgid "Apply asynchronously"
+msgstr "Aplicar de forma asíncrona"
+
+#. settings-schema.json->apply_asynchronously->tooltip
+#. 6.4->settings-schema.json->apply_asynchronously->tooltip
+msgid "Apply values in a background process"
+msgstr "Aplicar nivells en segon pla"
+
+#. settings-schema.json->update_scroll->description
+#. 6.4->settings-schema.json->update_scroll->description
+msgid "Adjust brightness scroll"
+msgstr "Ajustar la brillantor amb la roda del ratolí"
+
+#. settings-schema.json->update_scroll->tooltip
+#. 6.4->settings-schema.json->update_scroll->tooltip
+msgid "Allows to adjust a brightness value on a mouse scroll"
+msgstr "Permet ajustar el nivell de brillantor amb la roda del ratolí"
+
+#. settings-schema.json->scroll_step->units
+#. settings-schema.json->minimum_brightness->units
+#. settings-schema.json->maximum_brightness->units
+#. settings-schema.json->minimum_gamma->units
+#. settings-schema.json->maximum_gamma->units
+#. 6.4->settings-schema.json->scroll_step->units
+#. 6.4->settings-schema.json->minimum_brightness->units
+#. 6.4->settings-schema.json->maximum_brightness->units
+#. 6.4->settings-schema.json->minimum_gamma->units
+#. 6.4->settings-schema.json->maximum_gamma->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->scroll_step->description
+#. 6.4->settings-schema.json->scroll_step->description
+msgid "Scroll step"
+msgstr "Increment per scroll"
+
+#. settings-schema.json->scroll_step->tooltip
+#. 6.4->settings-schema.json->scroll_step->tooltip
+msgid "A percentage of a brightness value to adjust on a mouse scroll"
+msgstr ""
+"Percentatge d'increment o disminució de brillantor en usar la roda del ratolí"
+
+#. settings-schema.json->values_start->description
+#. 6.4->settings-schema.json->section_values->title
+msgid "Values"
+msgstr "Valors"
+
+#. settings-schema.json->minimum_brightness->description
+#. 6.4->settings-schema.json->minimum_brightness->description
+msgid "Minimum brightness"
+msgstr "Brillantor mínima"
+
+#. settings-schema.json->minimum_brightness->tooltip
+#. 6.4->settings-schema.json->minimum_brightness->tooltip
+msgid "A minimum value of brightness. Value from 10% to 50%."
+msgstr "Valor mínim de Brillantor [10-50]%."
+
+#. settings-schema.json->maximum_brightness->description
+#. 6.4->settings-schema.json->maximum_brightness->description
+msgid "Maximum brightness"
+msgstr "Brillantor màxima"
+
+#. settings-schema.json->maximum_brightness->tooltip
+#. 6.4->settings-schema.json->maximum_brightness->tooltip
+msgid "A maximum value of brightness. Value from 51% to 200%."
+msgstr "Valor màxim de Brillantor [51-200]%."
+
+#. settings-schema.json->minimum_gamma->description
+#. 6.4->settings-schema.json->minimum_gamma->description
+msgid "Minimum gamma"
+msgstr "Gamma mínima"
+
+#. settings-schema.json->minimum_gamma->tooltip
+#. 6.4->settings-schema.json->minimum_gamma->tooltip
+msgid "A minimum value of gamma. Value from 10% to 50%."
+msgstr "Valor mínim de Gamma [10-50]%."
+
+#. settings-schema.json->maximum_gamma->description
+#. 6.4->settings-schema.json->maximum_gamma->description
+msgid "Maximum gamma"
+msgstr "Gamma màxima"
+
+#. settings-schema.json->maximum_gamma->tooltip
+#. 6.4->settings-schema.json->maximum_gamma->tooltip
+msgid "A maximum value of gamma. Value from 51% to 200%."
+msgstr "Valor màxim de Gamma [51-200]%."
+
+#. settings-schema.json->save_every->description
+#. 6.4->settings-schema.json->save_every->description
+msgid "Save every"
+msgstr "Guardar cada"
+
+#. settings-schema.json->save_every->tooltip
+#. 6.4->settings-schema.json->save_every->tooltip
+msgid "How often to save last used values"
+msgstr "Com de sovint es guarden els últims valors seleccionats"
+
+#. settings-schema.json->gui_start->description
+#. 6.4->settings-schema.json->section_gui->title
+msgid "Gui"
+msgstr "Interfície"
+
+#. settings-schema.json->options_type->description
+#. 6.4->settings-schema.json->options_type->description
+msgid "Show"
+msgstr "Mostrar"
+
+#. settings-schema.json->options_type->options
+#. 6.4->settings-schema.json->options_type->options
+msgid "All"
+msgstr "Tot"
+
+#. settings-schema.json->options_type->options
+#. 6.4->settings-schema.json->options_type->options
+msgid "Gamma"
+msgstr "Gamma"
+
+#. settings-schema.json->options_type->tooltip
+#. 6.4->settings-schema.json->options_type->tooltip
+msgid "Values shown in user interface"
+msgstr "Valors mostrats a la interfície d'usuari"
+
+#. settings-schema.json->gui_icon_filepath->description
+#. 6.4->settings-schema.json->gui_icon_filepath->description
+msgid "Icon"
+msgstr "Icona"
+
+#. settings-schema.json->gui_icon_filepath->tooltip
+#. 6.4->settings-schema.json->gui_icon_filepath->tooltip
+msgid "An icon displayed in a panel"
+msgstr "Icona mostrada al tauler"
+
+#. 6.4->settings-schema.json->page_general->title
+msgid "General"
+msgstr "General"
+
+#. 6.4->settings-schema.json->section_presets->title
+#. 6.4->settings-schema.json->preset_list->description
+msgid "Your presets"
+msgstr "Predefinicions existents"
+
+#. 6.4->settings-schema.json->disable_nightmode->description
+msgid "Disable Night Mode"
+msgstr "Desactiva el mode nocturn"
+
+#. 6.4->settings-schema.json->disable_nightmode->tooltip
+msgid ""
+"Disable Cinnamon Night Mode while this applet is running.\n"
+"This prevents the screen from flickering.\n"
+"The adjustment time can be up to twice the number of seconds indicated below."
+msgstr ""
+"Desactiva el mode nocturn de Cinnamon mentre aquesta miniaplicació estigui "
+"activa.\n"
+"Evita parpellejos del monitor.\n"
+"Aquest temps d'ajustament pot ser fins a dues vegades el número de segons "
+"indicats a sota."
+
+#. 6.4->settings-schema.json->smooth_duration-label->description
+msgid ""
+"The changes are made step by step.\n"
+"Here you define the duration (in milliseconds) of each step in which the "
+"values are changed by one unit, if necessary.\n"
+"0 means instantaneous changes.\n"
+"Recommended value: between 200 and 300."
+msgstr ""
+"Els canvis es fan pas per pas.\n"
+"Aquí definiu la duració (en mil·lisegons) de cada pas en què els valors es "
+"canvien per una unitat, si s'escau.\n"
+"0 significa canvis instantanis.\n"
+"Valor recomanat: entre 200 i 300."
+
+#. 6.4->settings-schema.json->smooth_duration->description
+msgid "Step duration (ms)"
+msgstr "Duració del pas (ms)"
+
+#. 6.4->settings-schema.json->apply_changing_monitors->description
+msgid "Apply when the number of monitors changes"
+msgstr "S'aplica quan el número de monitors canvia"
+
+#. 6.4->settings-schema.json->brightness_up_shortcut->description
+msgid "Hotkey to Increase brightness"
+msgstr "Drecera del teclat per a incrementar la brillantor"
+
+#. 6.4->settings-schema.json->brightness_down_shortcut->description
+msgid "Hotkey to Decrease brightness"
+msgstr "Drecera del teclat per a disminuir la brillantor"
+
+#. 6.4->settings-schema.json->preset_label->description
+msgid ""
+"You can define or modify presets below, which can then be accessed via the "
+"applet's context menu.\n"
+"Only the first Start at Sunrise and Start at Sunset checked boxes are taken "
+"into account."
+msgstr ""
+"Podeu definir o modificar predefinicions a sota, a les quals pot accedir-se "
+"des del menú contextual de la miniaplicació.\n"
+"Només es tenen en compte les primeres caselles d'inici amb la sortida i/o la "
+"posta del sol."
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid "Name"
+msgstr "Nom"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Show\n"
+"in menu"
+msgstr ""
+"Mostra\n"
+"al menú"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Gamma\n"
+"Red"
+msgstr ""
+"Gamma\n"
+"Vermella"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Gamma\n"
+"Green"
+msgstr ""
+"Gamma\n"
+"Verda"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Gamma\n"
+"Blue"
+msgstr ""
+"Gamma\n"
+"Blava"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Start at\n"
+"Sunrise"
+msgstr ""
+"Comença\n"
+"En sortir el sol"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Start at\n"
+"Sunset"
+msgstr ""
+"Comença\n"
+"En posta de sol"
+
+#. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
+msgid "Set Sunrise and Sunset times"
+msgstr "Estableix horaris de sortida i posta del sol"
+
+#. 6.4->settings-schema.json->preset_reload->description
+msgid "Apply all changes"
+msgstr "Aplica tots els canvis"

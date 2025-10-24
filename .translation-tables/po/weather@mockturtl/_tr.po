@@ -1,0 +1,43 @@
+# Turkish translation for gnome-shell-extension-weather
+# Türkçe çeviri gnome-hava durumu-kabuk-eklentisi-için
+# Traductions françaises du paquet gnome-shell-extension-weather.
+# Copyright (C) 2011
+# Telif hakkı (C) 2011
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# Bu dosya, gnome-shell-extension-weather paketi ile aynı lisans altında dağıtılmaktadır.
+# Simon Claessens <gagalago@gmail.com>, 2011.
+# ecyrbe <ecyrbe@gmail.com>, 2011.
+# Serdar Sağlam <teknomobil@yandex.com>, 2018.
+# Serkan ÖNDER <serkanonder@outlook.com>, 2021,2022,2023.2024.2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 3.2.8\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-28 09:12+0100\n"
+"PO-Revision-Date: 2025-06-16 18:55+0300\n"
+"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 3.8/weather-applet.js:8425
+msgid "Low"
+msgstr ""
+
+#. 3.8/weather-applet.js:8431
+msgid "High"
+msgstr ""
+
+#. 3.8/weather-applet.js:8434
+msgid "Very High"
+msgstr ""
+
+#. 3.8/weather-applet.js:8437
+msgid "Extreme"
+msgstr ""

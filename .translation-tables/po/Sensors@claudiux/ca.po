@@ -1,0 +1,949 @@
+# SENSORS MONITOR
+# This file is put in the public domain.
+# claudiux, 2020
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sensors@claudiux 3.7.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-30 14:17+0200\n"
+"PO-Revision-Date: 2025-09-28 16:06+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. metadata.json->name
+#. applet.js:225 applet_OLD.js:235
+msgid "Sensors Monitor"
+msgstr "Monitor de sensors"
+
+#. applet.js:465 applet_OLD.js:418
+msgid "Suspended"
+msgstr "Suspès"
+
+#. applet.js:732 applet.js:773 applet_OLD.js:638 applet_OLD.js:682
+msgid "high:"
+msgstr "alt:"
+
+#. applet.js:732 applet.js:735 applet.js:773 applet.js:775 applet.js:816
+#. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
+#. applet_OLD.js:726
+msgid "n/a"
+msgstr "n/a"
+
+#. applet.js:735 applet.js:775 applet_OLD.js:642 applet_OLD.js:684
+msgid "crit:"
+msgstr "crít:"
+
+#. applet.js:816 applet.js:860 applet_OLD.js:726 applet_OLD.js:770
+msgid "min:"
+msgstr "mín:"
+
+#. applet.js:862 applet_OLD.js:772
+msgid "max:"
+msgstr "màx:"
+
+#. applet.js:891 applet_OLD.js:801
+msgid "No intrusion detected"
+msgstr "No s'ha detectat intrusió"
+
+#. applet.js:891 applet_OLD.js:801
+msgid "INTRUSION DETECTED!"
+msgstr "INTRUSIÓ DETECTADA!"
+
+#. applet.js:911 applet_OLD.js:821
+msgid "Must be configured!"
+msgstr "S'ha de configurar!"
+
+#. applet.js:1275 applet_OLD.js:1208
+msgid "Settings"
+msgstr "Opcions"
+
+#. applet.js:1275 applet_OLD.js:1208
+msgid ":"
+msgstr ":"
+
+#. settings-schema.json->page_General->title
+#. applet.js:1282 applet_OLD.js:1215
+msgid "⚙ General"
+msgstr "⚙ General"
+
+#. applet.js:1298 applet_OLD.js:1231
+#, javascript-format
+msgid "%s Temperature sensors"
+msgstr "%s Sensors de temperatura"
+
+#. applet.js:1314 applet_OLD.js:1247
+#, javascript-format
+msgid "%s Fan sensors"
+msgstr "%s Sensors de ventilador"
+
+#. applet.js:1330 applet_OLD.js:1263
+#, javascript-format
+msgid "%s Voltage sensors"
+msgstr "%s Sensors de voltatge"
+
+#. applet.js:1346 applet_OLD.js:1279
+#, javascript-format
+msgid "%s Intrusion sensors"
+msgstr "%s Sensors d'intrusió"
+
+#. settings-schema.json->xsensors->description
+#. applet.js:1365 applet_OLD.js:1306
+msgid "Run xsensors"
+msgstr "Executar xsensors"
+
+#. applet.js:1374 applet_OLD.js:1315
+msgid "Suspend Sensors"
+msgstr "Suspendre sensors"
+
+#. applet.js:1385 applet_OLD.js:1326
+msgid "Reload this applet"
+msgstr "Refresca aquesta miniaplicació"
+
+#. applet.js:1707 applet_OLD.js:1656
+#, javascript-format
+msgid "Are you sure you want to remove '%s'?"
+msgstr "Segur que voleu eliminar '%s'?"
+
+#. lib/checkDependencies.js:353
+#, javascript-format
+msgid "The applet %s is fully functional."
+msgstr "La miniaplicació %s funciona correctament."
+
+#. lib/checkDependencies.js:354
+msgid "All dependencies are installed"
+msgstr "Totes les dependències estan instal·lades"
+
+#. lib/checkDependencies.js:383
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Sembla que us falta instal·lar alguns paquets necessaris perquè aquesta "
+"miniaplicació funcioni de manera completa."
+
+#. lib/checkDependencies.js:385
+msgid "Please install these packages:"
+msgstr "Si us plau, instal·leu els paquets següents:"
+
+#. lib/checkDependencies.js:389 lib/checkDependencies.js:399
+msgid "Some dependencies are not installed!"
+msgstr "Algunes dependències no estan instal·lades!"
+
+#. lib/checkDependencies.js:401
+msgid "Install these packages now"
+msgstr "Instal·leu aquests paquets ara"
+
+#. lib/util.js:244
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr "L'execució de '%s' ha fallat:"
+
+#. scripts/xs.py:206
+msgid "Previous instance"
+msgstr "Instància prèvia"
+
+#. scripts/xs.py:210
+msgid "Next instance"
+msgstr "Següent instància"
+
+#. scripts/xs.py:219
+msgid "More options"
+msgstr "Més opcions"
+
+#. scripts/xs.py:225
+msgid "Import from a file"
+msgstr "Importar des d'un fitxer"
+
+#. scripts/xs.py:230
+msgid "Export to a file"
+msgstr "Exportar a un fitxer"
+
+#. scripts/xs.py:235
+msgid "Reset to defaults"
+msgstr "Restablir valors per defecte"
+
+#. scripts/xs.py:244
+#, python-format
+msgid "Reload %s"
+msgstr "Refrescar %s"
+
+#. scripts/xs.py:425
+#, python-format
+msgid "Settings for %s"
+msgstr "Configuració de %s"
+
+#. scripts/xs.py:517
+msgid "Select or enter file to export to"
+msgstr "Seleccioneu o introduïu el fitxer a exportar"
+
+#. scripts/xs.py:525 scripts/xs.py:546
+msgid "JSON files"
+msgstr "Fitxers JSON"
+
+#. scripts/xs.py:539
+msgid "Select a JSON file to import"
+msgstr "Seleccioneu un fitxer JSON per a importar"
+
+#. metadata.json->description
+msgid ""
+"Displays the values of many computer sensors concerning Temperatures (CPU - "
+"GPU - Power Supply), Fan Speed, Voltages, Intrusions. Notifies you with "
+"color changes when a value reaches or exceeds its limit."
+msgstr ""
+"Mostra els valors de molts sensors de l'ordinador relatius a Temperatures "
+"(CPU - GPU - Font d'alimentació), Velocitat del Ventilador, Voltatges, "
+"Intrusions. Mostra una notificació mitjançant canvis de color quan un valor "
+"arriba o supera el seu límit."
+
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr "claudiux: Autor. JEleniel: suport per a targetes gràfiques Nvidia."
+
+#. settings-schema.json->page_Temperatures->title
+msgid "⦿ Temperature"
+msgstr "⦿ Temperatura"
+
+#. settings-schema.json->page_Fans->title
+msgid "𖣘 Fan"
+msgstr "🤂 Ventilador"
+
+#. settings-schema.json->page_Voltages->title
+msgid "🗲 Voltage"
+msgstr "🗲 Voltatge"
+
+#. settings-schema.json->page_Intrusion->title
+msgid "⮿ Intrusion"
+msgstr "⮿ Intrusió"
+
+#. settings-schema.json->page_Custom->title
+msgid "⛓ Custom"
+msgstr "⛓ Personalitzat"
+
+#. settings-schema.json->section_Display->title
+#. settings-schema.json->section_tempOptions->title
+#. settings-schema.json->section_fanOptions->title
+#. settings-schema.json->section_voltOptions->title
+#. settings-schema.json->section_intrusionOptions->title
+msgid "Options"
+msgstr "Opcions"
+
+#. settings-schema.json->section_Tooltip->title
+msgid "Tooltip"
+msgstr "Informació sobre eines"
+
+#. settings-schema.json->section_Report->title
+msgid "Sensors values"
+msgstr "Valors dels sensors"
+
+#. settings-schema.json->section_remove_incompatible_xlets->title
+msgid "Remove from panels certain applets that also use sensors"
+msgstr ""
+"Eliminar dels panells certes miniaplicacions que també utilitzen sensors"
+
+#. settings-schema.json->section_tempDisktemp->title
+msgid "For the time being, disk temperature can only be read by root."
+msgstr "Ara mateix, la temperatura del disc només pot ser llegida per root."
+
+#. settings-schema.json->section_tempDisplay->title
+#. settings-schema.json->section_fanDisplay->title
+#. settings-schema.json->section_voltDisplay->title
+#. settings-schema.json->section_intrusionDisplay->title
+#. settings-schema.json->section_customDisplay->title
+msgid "Display"
+msgstr "Visualització"
+
+#. settings-schema.json->section_tempSensors->title
+msgid "Temperature sensors"
+msgstr "Sensors de temperatura"
+
+#. settings-schema.json->section_tempDisks->title
+msgid "Disk temperature sensors"
+msgstr "Sensors de temperatura del disc"
+
+#. settings-schema.json->section_fanSensors->title
+msgid "Fan sensors"
+msgstr "Sensors de ventilador"
+
+#. settings-schema.json->section_voltSensors->title
+msgid "Voltage sensors"
+msgstr "Sensors de voltatge"
+
+#. settings-schema.json->section_intrusionSensors->title
+msgid "Intrusion sensors"
+msgstr "Sensors d'intrusió"
+
+#. settings-schema.json->section_customDisclaimer->title
+msgid "Disclaimer"
+msgstr "Avís"
+
+#. settings-schema.json->section_customSensors->title
+msgid "Custom sensors"
+msgstr "Sensors personalitzats"
+
+#. settings-schema.json->interval->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->interval->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->interval->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->interval->options
+msgid "4"
+msgstr "4"
+
+#. settings-schema.json->interval->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->interval->options
+msgid "6"
+msgstr "6"
+
+#. settings-schema.json->interval->options
+msgid "7"
+msgstr "7"
+
+#. settings-schema.json->interval->options
+msgid "8"
+msgstr "8"
+
+#. settings-schema.json->interval->options
+msgid "9"
+msgstr "9"
+
+#. settings-schema.json->interval->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->interval->options
+msgid "12"
+msgstr "12"
+
+#. settings-schema.json->interval->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->interval->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->interval->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->interval->options
+msgid "1 minute"
+msgstr "1 minut"
+
+#. settings-schema.json->interval->options
+msgid "2 minutes"
+msgstr "2 minuts"
+
+#. settings-schema.json->interval->options
+msgid "3 minutes"
+msgstr "3 minuts"
+
+#. settings-schema.json->interval->options
+msgid "4 minutes"
+msgstr "4 minuts"
+
+#. settings-schema.json->interval->options
+msgid "5 minutes"
+msgstr "5 minuts"
+
+#. settings-schema.json->interval->options
+msgid "10 minutes"
+msgstr "10 minuts"
+
+#. settings-schema.json->interval->options
+msgid "15 minutes"
+msgstr "15 minuts"
+
+#. settings-schema.json->interval->options
+msgid "30 minutes"
+msgstr "30 minuts"
+
+#. settings-schema.json->interval->options
+msgid "1 hour"
+msgstr "1 hora"
+
+#. settings-schema.json->interval->description
+msgid "Refresh interval (seconds)"
+msgstr "Interval de refresc (segons)"
+
+#. settings-schema.json->keep_size->description
+msgid "Avoid size changes"
+msgstr "Evitar els canvis de mida"
+
+#. settings-schema.json->keep_size->tooltip
+msgid ""
+"Checked: The size of this applet remains constant, once all your preferences "
+"have been defined.\n"
+"Unchecked: The size of this applet is optimized, but it may change."
+msgstr ""
+"Marcat: La mida d'aquesta miniaplicació romandrà constant una vegada les "
+"vostres preferències hagin estat definides.\n"
+"Desmarcat: La mida d'aquesta miniaplicació està optimitzada, però pot variar."
+
+#. settings-schema.json->char_size->description
+msgid "Character size (% of standard size)"
+msgstr "Mida de caràcter (% de la mida estandard)"
+
+#. settings-schema.json->horizontal_width->description
+msgid "Display width (pixels) for horizontal panels"
+msgstr "Amplada (píxels) dels taulers horitzontals a mostrar"
+
+#. settings-schema.json->horizontal_width->tooltip
+msgid "0 means automatic. This value does not include border."
+msgstr "0 significa automàtic. Aquest valor no inclou vores."
+
+#. settings-schema.json->separator_type->options
+msgid "(none)"
+msgstr "(cap)"
+
+#. settings-schema.json->separator_type->options
+msgid "blank"
+msgstr "buit"
+
+#. settings-schema.json->separator_type->options
+msgid "bar"
+msgstr "barra"
+
+#. settings-schema.json->separator_type->description
+msgid "Separator"
+msgstr "Separador"
+
+#. settings-schema.json->char_color_customized->description
+msgid "Customize Text Color"
+msgstr "Personalitzar el color del text"
+
+#. settings-schema.json->char_color->description
+msgid "Text Color"
+msgstr "Color del text"
+
+#. settings-schema.json->crit_color->description
+msgid "Critical Value Color"
+msgstr "Color del valor crític"
+
+#. settings-schema.json->high_color->description
+msgid "High Value Color"
+msgstr "Color del valor alt"
+
+#. settings-schema.json->remove_border->description
+msgid "Remove border line"
+msgstr "Eliminar la vora"
+
+#. settings-schema.json->remove_border->tooltip
+msgid "Whether or not to remove the border line around this applet."
+msgstr "Trieu si eliminar o no la línia que voreja aquesta miniaplicació."
+
+#. settings-schema.json->remove_icons->description
+msgid "Remove icons"
+msgstr "Eliminar les icones"
+
+#. settings-schema.json->remove_icons->tooltip
+msgid "Whether or not to remove icons in panel."
+msgstr "Trieu si eliminar o no les icones del panell."
+
+#. settings-schema.json->show_tooltip->description
+msgid "Display a tooltip on mouseover"
+msgstr "Mostrar informació sobre les eines al passar-hi el cursor per sobre"
+
+#. settings-schema.json->bold_values->description
+msgid "Show values in bold in the tooltip"
+msgstr "Mostrar valors en negreta a la finestra emergent"
+
+#. settings-schema.json->bold_values->tooltip
+msgid "Whether or not to show values in bold in the tooltip."
+msgstr ""
+"Especifica si els valors de la finestra emergent es mostren o no en negreta."
+
+#. settings-schema.json->bold_italics_main_sensors->description
+msgid "Show main sensors in bold italics in the tooltip"
+msgstr ""
+"Mostrar els sensors principals en negreta i cursiva a la finestra emergent"
+
+#. settings-schema.json->bold_italics_main_sensors->tooltip
+msgid ""
+"Whether or not to display the names of the main sensors (those displayed in "
+"the panel) in bold italics in the tooltip."
+msgstr ""
+"Trieu si els sensors principals es mostraran o no en negreta i cursiva a la "
+"finestra emergent."
+
+#. settings-schema.json->restart_in_menu->description
+msgid "Show in menu the action: Restart this applet"
+msgstr "Mostrar l'acció 'Reiniciar aquesta miniaplicació' al menú"
+
+#. settings-schema.json->restart_in_menu->tooltip
+msgid "Whether or not to display in menu the action: Restart this applet."
+msgstr ""
+"Trieu si la opció 'Reiniciar aquesta miniaplicaicó' és present al menú."
+
+#. settings-schema.json->make_disktemp_readable_by_user->description
+msgid "Make disk temperature user-readable"
+msgstr "Fer que la temperatura del disc sigui llegible per l'usuari"
+
+#. settings-schema.json->show_temp->description
+#. settings-schema.json->show_fan->description
+#. settings-schema.json->show_volt->description
+#. settings-schema.json->show_intrusion->description
+#. settings-schema.json->show_custom->description
+msgid "Display the values of these selected sensors"
+msgstr "Mostrar els valors dels sensors seleccionats"
+
+#. settings-schema.json->show_temp->tooltip
+#. settings-schema.json->show_fan->tooltip
+#. settings-schema.json->show_volt->tooltip
+#. settings-schema.json->show_intrusion->tooltip
+#. settings-schema.json->show_custom->tooltip
+msgid ""
+"Whether or not to display the values of the sensors selected in the list "
+"below."
+msgstr ""
+"Trieu si mostrar o no els valors dels sensors seleccionats a la llista de "
+"sota."
+
+#. settings-schema.json->show_temp_name->description
+#. settings-schema.json->show_fan_name->description
+#. settings-schema.json->show_volt_name->description
+#. settings-schema.json->show_intrusion_name->description
+#. settings-schema.json->show_custom_name->description
+msgid "Display the 'Shown name' of each of these selected sensors"
+msgstr "Visualitzar el nom de cadascun dels sensors seleccionats"
+
+#. settings-schema.json->show_temp_name->tooltip
+#. settings-schema.json->show_fan_name->tooltip
+#. settings-schema.json->show_volt_name->tooltip
+msgid ""
+"Whether or not to display into this applet label the 'Shown name' of the "
+"sensors selected in the list below. Without effect in vertical panels."
+msgstr ""
+"Trieu si l'etiqueta de la miniaplicació mostrarà el nom dels sensors "
+"seleccionats de la llista de sota. No té cap efecte en panells verticals."
+
+#. settings-schema.json->chars_temp->tooltip
+msgid "The first emoji in this list is used for temperature"
+msgstr "El primer emoji de la llista s'utilitzarà per ala temperatura"
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr "Emoji"
+
+#. settings-schema.json->strictly_positive_temp->description
+#. settings-schema.json->strictly_positive_volt->description
+msgid "Show only strictly positive values"
+msgstr "Mostrar només valors estrictament positius"
+
+#. settings-schema.json->use_fahrenheit->description
+msgid "Show temperature in Fahrenheit"
+msgstr "Mostrar la temperatura en Farenheit"
+
+#. settings-schema.json->only_integer_part->description
+msgid "Display integer values"
+msgstr "Mostrar valors enters"
+
+#. settings-schema.json->only_integer_part->tooltip
+msgid "Whether or not to round the values."
+msgstr "Trieu si els valors a mostrar s'arrodoneixen o no."
+
+#. settings-schema.json->show_unit->description
+#. settings-schema.json->show_fan_unit->description
+#. settings-schema.json->show_volt_unit->description
+msgid "Show unit"
+msgstr "Mostrar unitat"
+
+#. settings-schema.json->show_unit->tooltip
+#. settings-schema.json->show_fan_unit->tooltip
+#. settings-schema.json->show_volt_unit->tooltip
+msgid "Whether or not to show the unit after the value."
+msgstr "Trieu si es mostrarà o no la unitat després del valor."
+
+#. settings-schema.json->show_unit_letter->description
+msgid "Show unit character"
+msgstr "Mostrar caràcter d'unitat"
+
+#. settings-schema.json->show_unit_letter->tooltip
+msgid "Whether or not to show the unit character (C or F)."
+msgstr "Trieu si es mostrarà o no el caràcter de la unitat (C o F)"
+
+#. settings-schema.json->always_show_unit_in_line->description
+msgid "Vertical panel: Temperature value and °C / °F on one line"
+msgstr "Panell vertical: valor de temperatura i ºC / ºF en una línia"
+
+#. settings-schema.json->always_show_unit_in_line->tooltip
+msgid ""
+"Whether or not to show, in a vertical panel, °C or °F on the same line as "
+"the temperature value."
+msgstr ""
+"Trieu si mostrar o no en una única línia el valor i la unitat de temperatura "
+"al panell vertical."
+
+#. settings-schema.json->journalize_temp->description
+msgid "Log high and critical temperatures"
+msgstr "Guarda un registre de temperatures altes o crítiques"
+
+#. settings-schema.json->journalize_temp->tooltip
+msgid ""
+"When this option is checked, temperatures exceeding the high or critical "
+"limit are recorded in the system journal."
+msgstr ""
+"Si es marca aquesta opció, les temperatures excessivament altes queden "
+"registrades al system journal."
+
+#. settings-schema.json->btn_renew_temp_sensors_list->description
+#. settings-schema.json->btn_renew_fan_sensors_list->description
+#. settings-schema.json->btn_renew_volt_sensors_list->description
+#. settings-schema.json->btn_renew_intrusion_sensors_list->description
+msgid "Renew the list of sensors"
+msgstr "Renovar la llista de sensors"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+msgid ""
+"Sensor name\n"
+"(Do not modify!)"
+msgstr ""
+"Nom del sensor\n"
+"(No modificar!)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"Show\n"
+"in panel"
+msgstr ""
+"Mostrar\n"
+"al panell"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"Show\n"
+"in tooltip"
+msgstr ""
+"Mostrar\n"
+"a la finestra emergent"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+msgid "Shown name"
+msgstr "Nom mostrat"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+msgid ""
+"High\n"
+"(°C)"
+msgstr ""
+"Alta\n"
+"(ºC)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+msgid ""
+"Critical\n"
+"(°C)"
+msgstr ""
+"Crítica\n"
+"(ºC)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Formula"
+msgstr "Fòrmula"
+
+#. settings-schema.json->temp_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'High', 'Critical' or "
+"'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'High' and 'Critical' (optional) must be valid numbers.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Feu doble clic en una línia per a canviar 'Nom Mostrat', 'Alta', 'Crítica' o "
+"'Fòrmula'.\n"
+"Per a restablir 'Nom mostrat', copieu i enganxeu el 'Nom del sensor'.\n"
+"'Alta' i 'Crítica' (opcional) han de ser números vàlids.\n"
+"'Formula' (opcional):\n"
+"  Utilitzeu $ pel valor mostrat pel sensor.\n"
+"  Podeu usar les quatre operacions (+-*/) i parèntesis.\n"
+"  Exemple: $*1.1+0.5"
+
+#. settings-schema.json->btn_renew_disks_list->description
+msgid "Renew the list of known disks"
+msgstr "Renovar la llista de discs coneguts"
+
+#. settings-schema.json->temp_disks->columns->title
+msgid "Disk name"
+msgstr "Nom del disc"
+
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+msgid ""
+"Shown\n"
+"name"
+msgstr ""
+"Nom\n"
+"mostrat"
+
+#. settings-schema.json->temp_disks->tooltip
+msgid ""
+"Disk name: The name of the disk, as returned by the 'lsblk' command. Please "
+"see help.\n"
+"High and Critical values: Cf. technical manual of your disk."
+msgstr ""
+"Nom del disc: El nom del disc retornat per l'ordre 'lsblk'. Vegeu l'ajuda.\n"
+"Per a valors alts o crítics, consulteu el manual del vostre disc."
+
+#. settings-schema.json->chars_fan->tooltip
+msgid "The first emoji in this list is used for fan"
+msgstr "El primer emoji de la llista s'utilitzarà pels ventiladors"
+
+#. settings-schema.json->strictly_positive_fan->description
+msgid "Show only positive or zero values"
+msgstr "Mostrar només valors positius o zero"
+
+#. settings-schema.json->fan_unit->description
+msgid "Abbreviation of \"Rotations per minute\""
+msgstr "Abreviació de \"Rotacions per minut\""
+
+#. settings-schema.json->journalize_fan->description
+msgid "Log critical fan speeds"
+msgstr "Registra velocitats crítiques dels ventiladors"
+
+#. settings-schema.json->journalize_fan->tooltip
+msgid ""
+"When this option is checked, fan speeds below the critical limit are "
+"recorded in the system log."
+msgstr ""
+"En estar marcat, les velocitats del ventilador excessives es registraran al "
+"log del sistema."
+
+#. settings-schema.json->fan_sensors->columns->title
+msgid ""
+"Min\n"
+"(rpm)"
+msgstr ""
+"Mín\n"
+"(rpm)"
+
+#. settings-schema.json->fan_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'Min' or 'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'Min' (optional) must be valid number.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Feu doble clic a una línia per canviar 'Nom mostrat', 'Mín' o 'Fòrmula'.\n"
+"Per restablir un 'Nom mostrat', copieu i enganxeu el 'Nom del sensor'.\n"
+"'Mín' (opcional) ha de ser un número vàlid.\n"
+"'Fòrmula' (opcional):\n"
+"  Utilitzeu $ pel valor mostrat pel sensor.\n"
+"  Podeu utilitzar les quatre operacions (+-*/) i parèntesis.\n"
+"  Exemple: $*1.1+0.5"
+
+#. settings-schema.json->chars_volt->tooltip
+msgid "The first emoji in this list is used for voltage"
+msgstr "El primer emoji de la llista s'utilitzarà pel voltatge"
+
+#. settings-schema.json->volt_unit->description
+msgid "Voltage unit"
+msgstr "Unitat de voltatge"
+
+#. settings-schema.json->volt_unit->options
+msgid "Most appropriate (V or mV)"
+msgstr "La més apropiada (V o mV)"
+
+#. settings-schema.json->volt_unit->options
+msgid "V only"
+msgstr "Només V"
+
+#. settings-schema.json->volt_unit->options
+msgid "mV only"
+msgstr "només mV"
+
+#. settings-schema.json->journalize_volt->description
+msgid "Log critical voltages"
+msgstr "Registra voltatges crítics"
+
+#. settings-schema.json->journalize_volt->tooltip
+msgid ""
+"When this option is checked, voltages below the minimum limit or above the "
+"maximum limit are recorded in the system log."
+msgstr ""
+"Quan està marcada, els voltatges per sota del límit mínim o per sobre del "
+"límit màxim es guarden al registre del sistema."
+
+#. settings-schema.json->volt_sensors->columns->title
+msgid ""
+"Min\n"
+"(V)"
+msgstr ""
+"Mín\n"
+"(V)"
+
+#. settings-schema.json->volt_sensors->columns->title
+msgid ""
+"Max\n"
+"(V)"
+msgstr ""
+"Màx\n"
+"(V)"
+
+#. settings-schema.json->volt_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'Min', 'Max' or 'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'Min' and 'Max' (optional) must be valid numbers.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Feu doble clic a una línia per canviar 'Nom mostrat', 'Mín', 'Màx' o "
+"'Fòrmula'.\n"
+"Per restablir un 'Nom mostrat', copieu i enganxeu el 'Nom del Sensor'.\n"
+"'Mín' i 'Màx' (opcional) han de ser números vàlids.\n"
+"'Fòrmula' (opcional):\n"
+"  Utilitzeu $ pel valor mostrat pel sensor.\n"
+"  Podeu utilitzar les quatre operacions (+-*/) i parèntesis.\n"
+"  Exemple: $*1.1+0.5"
+
+#. settings-schema.json->show_intrusion_name->tooltip
+#. settings-schema.json->show_custom_name->tooltip
+msgid ""
+" Whether or not to display into this applet label the 'Shown name' of the "
+"sensors selected in the list below. Without effect in vertical panels."
+msgstr ""
+" Indica si es mostrarà o no l'etiqueta 'Nom mostrat' dels sensors "
+"seleccionats a la llista de sota. No té efecte en panells verticals."
+
+#. settings-schema.json->chars_intrusion->tooltip
+msgid "The first emoji in this list is used for intrusion"
+msgstr "El primer emoji de la llista s'utilitzarà per a intrusions"
+
+#. settings-schema.json->strictly_positive_intrusion->description
+msgid "Show in the panel only when an intrusion was detected"
+msgstr "Mostrar al panell només quan es detecti una intrusió"
+
+#. settings-schema.json->journalize_intrusion->description
+msgid "Log intrusions"
+msgstr "⮿ Intrusió"
+
+#. settings-schema.json->journalize_intrusion->tooltip
+msgid "When this option is checked, intrusions are recorded in the system log."
+msgstr "En estar marcat, les intrusions es registren al log del sistema."
+
+#. settings-schema.json->intrusion_sensors->tooltip
+msgid ""
+"Double-click on a line to change Shown name.\n"
+"To reset a Shown name, copy/paste the Sensor name."
+msgstr ""
+"Feu doble clic a una línia per canviar 'Nom mostrat'.\n"
+"Per restablir un 'Nom mostrat', copieu i enganxeu el nom del sensor."
+
+#. settings-schema.json->custom_disclaimer->description
+msgid ""
+"These settings are for advanced users only!\n"
+"Please refer to the README file."
+msgstr ""
+"Aquestes opcions són només per a usuaris avançats!\n"
+"Si us plau, consulteu el README."
+
+#. settings-schema.json->custom_openREADME->description
+msgid "Open the README file"
+msgstr "Obrir el fitxer README"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Type"
+msgstr "Tipus"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Name"
+msgstr "Nom"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"File to\n"
+"monitor"
+msgstr ""
+"Fitxer a\n"
+"monitorar"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"High\n"
+"value"
+msgstr ""
+"Valor\n"
+"alt"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"Critical\n"
+"value"
+msgstr ""
+"Valor\n"
+"crític"
+
+#. settings-schema.json->custom_sensors->tooltip
+msgid ""
+"Add a line by custom sensor to set the type, the name and the path of the "
+"file to monitor (/sys/class/...)."
+msgstr ""
+"Afegiu una línia de sensor personalitzat per a establir el tipus, el nom i "
+"la ruta del fitxer a monitorar (/sys/class/...)."
+
+#. settings-schema.json->report->description
+#. scripts/show_sensor_values.sh:5
+msgid "Example of sensor values from this computer"
+msgstr "Exemple de valors de sensor d'aquest ordinador"
+
+#. settings-schema.json->report->tooltip
+msgid "Useful for reporting an issue."
+msgstr "Útil per a informar sobre un problema."
+
+#. settings-schema.json->update_display->description
+msgid "Update display"
+msgstr "Actualitzar el monitor"
+
+#. settings-schema.json->remove_temperatureATfevimu->description
+msgid "Remove from panel the temperature@fevimu applet"
+msgstr "Elimineu la miniaplicació temperature@fevimu del panell"

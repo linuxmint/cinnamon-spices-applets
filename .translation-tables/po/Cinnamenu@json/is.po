@@ -1,0 +1,1565 @@
+# CINNAMENU
+# This file is put in the public domain.
+# jaszhix, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-06 22:42-0400\n"
+"PO-Revision-Date: 2024-11-26 12:36-0500\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#: 5.8/applet.js:59 3.2/applet.js:157 4.0/applet.js:60
+msgid "Initializing"
+msgstr "Frumstilli"
+
+#: 5.8/applet.js:75 4.0/applet.js:78
+msgid "Find files..."
+msgstr "Finna skrár..."
+
+#: 5.8/applet.js:283 4.0/applet.js:281
+msgid "Please wait..."
+msgstr "Hinkraðu aðeins..."
+
+#: 5.8/applet.js:909 5.8/applet.js:1124 4.0/applet.js:884
+msgid "Applications"
+msgstr "Forrit"
+
+#: 5.8/applet.js:913 4.0/applet.js:888
+msgid "Documents"
+msgstr "Skjöl"
+
+#: 5.8/applet.js:917 4.0/applet.js:892
+msgid "Videos"
+msgstr "Myndskeið"
+
+#: 5.8/applet.js:921 4.0/applet.js:896
+msgid "Images"
+msgstr "Myndir"
+
+#: 5.8/applet.js:925 4.0/applet.js:900
+msgid "Music"
+msgstr "Tónlist"
+
+#: 5.8/applet.js:934 4.0/applet.js:909
+msgid "No recent Items"
+msgstr "Engin nýleg atriði"
+
+#: 5.8/applet.js:981 4.0/applet.js:956
+msgid "Settings"
+msgstr "Stillingar"
+
+#: 5.8/applet.js:1127
+msgid "files"
+msgstr "skrár"
+
+#: 5.8/applet.js:1130 4.0/applet.js:1097
+msgid "Other search results"
+msgstr "Aðrar leitarniðurstöður"
+
+#: 5.8/applet.js:1133 4.0/applet.js:1100
+msgid "Browser bookmarks"
+msgstr "Bókamerki vafra"
+
+#: 5.8/applet.js:1136 4.0/applet.js:1103
+msgid "Browser history"
+msgstr "Vafurferill"
+
+#: 5.8/applet.js:1139 5.8/categoriesview.js:306 4.0/applet.js:1106
+#: 4.0/categoriesview.js:305
+msgid "Emoji"
+msgstr "Tjáningartákn"
+
+#: 5.8/applet.js:1197 5.8/applet.js:1333 5.8/applet.js:1817 4.0/applet.js:1164
+#: 4.0/applet.js:1299 4.0/applet.js:1786
+msgid "Click to copy"
+msgstr "Smelltu til að afrita"
+
+#: 5.8/applet.js:1634 3.2/applet.js:1416 4.0/applet.js:1600
+msgid "Clear List"
+msgstr "Hreinsa lista"
+
+#: 5.8/applet.js:1668 5.8/applet.js:1669 4.0/applet.js:1634 4.0/applet.js:1635
+msgid "Trash"
+msgstr "Rusl"
+
+#: 5.8/applet.js:1678 5.8/applet.js:1679 3.2/placeDisplay.js:220
+#: 4.0/applet.js:1644 4.0/applet.js:1645
+msgid "Computer"
+msgstr "Tölva"
+
+#: 5.8/appsview.js:295 5.8/sidebar.js:111 4.0/appsview.js:295
+#: 4.0/sidebar.js:111
+msgid "Error while opening file:"
+msgstr "Villa við að opna skrá:"
+
+#: 5.8/appsview.js:441 4.0/appsview.js:440
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Of margar færslur - sýnir aðeins fyrstu 1000 færslurnar"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:284 3.2/applet.js:978 4.0/categoriesview.js:283
+msgid "All applications"
+msgstr "Öll forrit"
+
+#: 5.8/categoriesview.js:302 4.0/categoriesview.js:301
+msgid "Favorites"
+msgstr "Eftirlæti"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:303 3.2/applet.js:1016 4.0/categoriesview.js:302
+msgid "Places"
+msgstr "Staðir"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:304 4.0/categoriesview.js:303
+msgid "Recent"
+msgstr "Nýleg"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:305 3.2/applet.js:1019 4.0/categoriesview.js:304
+msgid "Favorite apps"
+msgstr "Eftirlætisforrit"
+
+#: 5.8/contextmenu.js:111 4.0/contextmenu.js:111
+msgid "light skin tone"
+msgstr "ljós tónn skinns"
+
+#: 5.8/contextmenu.js:112 4.0/contextmenu.js:112
+msgid "medium-light skin tone"
+msgstr "meðalljós tónn skinns"
+
+#: 5.8/contextmenu.js:113 4.0/contextmenu.js:113
+msgid "medium skin tone"
+msgstr "meðaltónn skinns"
+
+#: 5.8/contextmenu.js:114 4.0/contextmenu.js:114
+msgid "medium-dark skin tone"
+msgstr "meðaldökkur tónn skinns"
+
+#: 5.8/contextmenu.js:115 4.0/contextmenu.js:115
+msgid "dark skin tone"
+msgstr "dökkur tónn skinns"
+
+#: 5.8/contextmenu.js:134 4.0/contextmenu.js:134
+msgid "Remove category"
+msgstr "Fjarlægja flokk"
+
+#. 3.2->settings-schema.json->resetCategoryOrder-button->description
+#: 5.8/contextmenu.js:147 4.0/contextmenu.js:147
+msgid "Reset category order"
+msgstr "Endurstilla flokkaröð"
+
+#: 5.8/contextmenu.js:167 4.0/contextmenu.js:167
+msgid "List settings apps separately"
+msgstr "Telja sér upp stillingaforrit"
+
+#: 5.8/contextmenu.js:174 4.0/contextmenu.js:174
+msgid "Single list style"
+msgstr "Stíll með einföldum lista"
+
+#: 5.8/contextmenu.js:183 4.0/contextmenu.js:183
+msgid "Hide hidden files"
+msgstr "Fela faldar skrár"
+
+#. 5.8->settings-schema.json->show-hidden-files->description
+#. 4.0->settings-schema.json->show-hidden-files->description
+#: 5.8/contextmenu.js:190 4.0/contextmenu.js:190
+msgid "Show hidden files"
+msgstr "Sýna faldar skrár"
+
+#: 5.8/contextmenu.js:246 3.2/buttons.js:1045 3.2/buttons.js:1047
+#: 4.0/contextmenu.js:246 4.0/contextmenu.js:254
+msgid "Run with NVIDIA GPU"
+msgstr "Keyra með NVIDIA GPU"
+
+#: 5.8/contextmenu.js:256 3.2/buttons.js:1049 4.0/contextmenu.js:260
+msgid "Add to panel"
+msgstr "Bæta á skjástiku"
+
+#: 5.8/contextmenu.js:275 3.2/buttons.js:1051 4.0/contextmenu.js:279
+msgid "Add to desktop"
+msgstr "Bæta á skjáborð"
+
+#: 5.8/contextmenu.js:289 5.8/contextmenu.js:364 3.2/buttons.js:1054
+#: 4.0/contextmenu.js:293 4.0/contextmenu.js:369
+msgid "Remove from favorites"
+msgstr "Fjarlægja úr eftirlætum"
+
+#: 5.8/contextmenu.js:293 5.8/contextmenu.js:369 3.2/buttons.js:1056
+#: 4.0/contextmenu.js:297 4.0/contextmenu.js:374
+msgid "Add to favorites"
+msgstr "Bæta í eftirlæti"
+
+#: 5.8/contextmenu.js:300 3.2/buttons.js:1059 4.0/contextmenu.js:304
+msgid "Uninstall"
+msgstr "Fjarlægja"
+
+#: 5.8/contextmenu.js:308 4.0/contextmenu.js:312
+msgid "App Info"
+msgstr "Upplýsingar um forrit"
+
+#: 5.8/contextmenu.js:324 4.0/contextmenu.js:328
+msgid "This file is no longer available"
+msgstr "Þessi skrá er ekki lengur tiltæk"
+
+#: 5.8/contextmenu.js:332 4.0/contextmenu.js:336
+msgid "Open with"
+msgstr "Opna með"
+
+#: 5.8/contextmenu.js:347 4.0/contextmenu.js:351
+msgid "Other application..."
+msgstr "Annað forrit..."
+
+#: 5.8/contextmenu.js:384 4.0/contextmenu.js:390
+msgid "Add folder as category"
+msgstr "Bæta möppu við sem flokki"
+
+#: 5.8/contextmenu.js:400 4.0/contextmenu.js:406 5.8/search.py:48
+#: 4.0/search.py:48
+msgid "Open containing folder"
+msgstr "Opna umlykjandi möppu"
+
+#: 5.8/contextmenu.js:415 5.8/contextmenu.js:427 4.0/contextmenu.js:421
+#: 4.0/contextmenu.js:433
+msgid "Move to trash"
+msgstr "Henda í ruslið"
+
+#: 5.8/contextmenu.js:421 4.0/contextmenu.js:427
+msgid "Error while moving file to trash:"
+msgstr "Villa við að flytja skrá í ruslið:"
+
+#: 5.8/emoji.js:8 4.0/emoji.js:7739
+msgid "Smileys & Emotion"
+msgstr "Broskallar og tilfinningar"
+
+#: 5.8/emoji.js:685 4.0/emoji.js:7740
+msgid "People & Body"
+msgstr "Fólk og líkami"
+
+#: 5.8/emoji.js:2245 4.0/emoji.js:7741
+msgid "Animals & Nature"
+msgstr "Dýr og náttúra"
+
+#: 5.8/emoji.js:2861 4.0/emoji.js:7742
+msgid "Food & Drink"
+msgstr "Mat og drykkur"
+
+#: 5.8/emoji.js:3405 4.0/emoji.js:7743
+msgid "Travel & Places"
+msgstr "Ferðalög og staðir"
+
+#: 5.8/emoji.js:4281 4.0/emoji.js:7744
+msgid "Activities"
+msgstr "Athafnir"
+
+#: 5.8/emoji.js:4625 4.0/emoji.js:7745
+msgid "Objects"
+msgstr "Hlutir"
+
+#: 5.8/emoji.js:5677 4.0/emoji.js:7746
+msgid "Symbols"
+msgstr "Tákn"
+
+#: 5.8/emoji.js:6573 4.0/emoji.js:7747
+msgid "Flags"
+msgstr "Fánar"
+
+#: 5.8/sidebar.js:252 3.2/applet.js:2323 4.0/sidebar.js:251
+msgid "Quit"
+msgstr "Hætta"
+
+#: 5.8/sidebar.js:253 3.2/applet.js:2324 4.0/sidebar.js:252
+msgid "Shutdown the computer"
+msgstr "Slökkva á tölvunni"
+
+#: 5.8/sidebar.js:261 3.2/applet.js:2315 4.0/sidebar.js:260
+msgid "Logout"
+msgstr "Útskráning"
+
+#: 5.8/sidebar.js:262 3.2/applet.js:2316 4.0/sidebar.js:261
+msgid "Leave the session"
+msgstr "Hætta í setu"
+
+#: 5.8/sidebar.js:270 3.2/applet.js:2293 4.0/sidebar.js:269
+msgid "Lock screen"
+msgstr "Læsa skjá"
+
+#: 5.8/sidebar.js:271 3.2/applet.js:2294 4.0/sidebar.js:270
+msgid "Lock the screen"
+msgstr "Læsa skjánum"
+
+#: 3.2/applet.js:92
+msgid "Type to search..."
+msgstr "Skrifaðu til að leita..."
+
+#: 3.2/applet.js:284
+msgid "No description available"
+msgstr "Lýsing ekki tiltæk"
+
+#: 3.2/applet.js:1017
+msgid "Recent files"
+msgstr "Nýlegar skrár"
+
+#: 3.2/applet.js:1018
+msgid "Bookmarks"
+msgstr "Bókamerki"
+
+#: 3.2/applet.js:1352
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr ""
+"gir1.2-gda-5.0 pakkinn er nauðsynlegur fyrir Firefox og Midori-bókamerki."
+
+#: 3.2/applet.js:1427
+msgid "No recent files"
+msgstr "Engar nýlegar skrár"
+
+#: 3.2/applet.js:2279
+msgid "Account details"
+msgstr "Nánar um notanda"
+
+#: 3.2/applet.js:2286 3.2/buttons.js:1260
+msgid "Grid View"
+msgstr "Reitasýn"
+
+#: 3.2/applet.js:2286 3.2/buttons.js:1254
+msgid "List View"
+msgstr "Listasýn"
+
+#: 3.2/applet.js:2287 3.2/buttons.js:1261
+msgid "Switch to grid view"
+msgstr "Skipta yfir í reitasýn"
+
+#: 3.2/applet.js:2287 3.2/buttons.js:1255
+msgid "Switch to list view"
+msgstr "Skipta yfir í listasýn"
+
+#: 3.2/placeDisplay.js:146
+msgid "Home"
+msgstr "Heim"
+
+#: 3.2/placeDisplay.js:224
+msgid "Browse network"
+msgstr "Skoða netkerfið"
+
+#: 4.0/applet.js:1094
+msgid "Applications and files"
+msgstr "Forrit og skrár"
+
+#: 5.8/search.py:43 4.0/search.py:43
+msgid "Open"
+msgstr "Opna"
+
+#. 5.8->settings-schema.json->search->title
+#. 5.8->settings-schema.json->search-search->title
+#. 4.0->settings-schema.json->search->title
+#. 4.0->settings-schema.json->search-search->title
+#: 5.8/search.py:85 4.0/search.py:85
+msgid "Search"
+msgstr "Leita"
+
+#: 5.8/search.py:106 4.0/search.py:106
+msgid "Start in"
+msgstr "Byrja í"
+
+#: 5.8/search.py:107 4.0/search.py:107
+msgid "Select a folder"
+msgstr "Veldu möppu"
+
+#: 5.8/search.py:113 4.0/search.py:113
+msgid "Follow symlinks"
+msgstr "Fylgja tákntengjum"
+
+#: 5.8/search.py:117 4.0/search.py:117
+msgid "Search hidden"
+msgstr "Leita að földu"
+
+#: 5.8/search.py:121 4.0/search.py:121
+msgid "Use regular expressions"
+msgstr "Nota reglulegar segðir"
+
+#: 5.8/search.py:125 4.0/search.py:125
+msgid "Stop"
+msgstr "Stöðva"
+
+#: 5.8/search.py:140 4.0/search.py:140
+msgid "File"
+msgstr "Skrá"
+
+#: 5.8/search.py:156 4.0/search.py:156
+msgid "Path"
+msgstr "Slóð"
+
+#: 5.8/search.py:184 4.0/search.py:184
+msgid "Searching..."
+msgstr "Leita..."
+
+#: 5.8/search.py:198 5.8/search.py:199 4.0/search.py:198 4.0/search.py:199
+msgid "Search Stopped"
+msgstr "Leit hætt"
+
+#: 5.8/search.py:215 4.0/search.py:215
+msgid "Searching: "
+msgstr "Leita: "
+
+#: 5.8/search.py:220 4.0/search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Villa: Ónógar heimildir til að lesa möppu "
+
+#: 5.8/search.py:252 4.0/search.py:252
+msgid "Search Completed"
+msgstr "Leit lokið"
+
+#: 5.8/search.py:259 4.0/search.py:259
+msgid "Skipping"
+msgstr "Sleppi"
+
+#: 5.8/search.py:259 4.0/search.py:259
+msgid " - directory already searched"
+msgstr " - möppu sem þegar er leitað í"
+
+#: 4.0/mint-remove-application.py:34
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Þetta valmyndaratriði er ekki tengt neinum pakka. Viltu samt fjarlægja það "
+"úr valmyndinni?"
+
+#: 4.0/mint-remove-application.py:75
+msgid "The following packages will be removed:"
+msgstr "Eftirfarandi pakkar verða fjarlægðir:"
+
+#: 4.0/mint-remove-application.py:82
+msgid "Packages to be removed"
+msgstr "Pakkar sem á að fjarlægja"
+
+#: 4.0/mint-remove-application.py:143
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr ""
+"Ekki er hægt að fjarlægja pakkann %s þar sem hans er krafist af öðrum pakka."
+
+#: 4.0/mint-remove-application.py:149
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Pakkans %s er krafist fyrir eftirfarandi pakka:"
+
+#. metadata.json->name
+#. 3.2->settings-schema.json->cinnamenuProvidersSection->title
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Sveigjanleg valmynd með möguleika á framsetningu sem reitum eða lista; "
+"innifelur skráarvafra og emoji-táknaleit."
+
+#. 5.8->settings-schema.json->layout->title
+#. 5.8->settings-schema.json->menu-layout->title
+#. 3.2->settings-schema.json->menu->title
+#. 3.2->settings-schema.json->menu-layout->title
+#. 4.0->settings-schema.json->layout->title
+#. 4.0->settings-schema.json->menu-layout->title
+msgid "Layout"
+msgstr "Framsetning"
+
+#. 5.8->settings-schema.json->behaviour->title
+#. 3.2->settings-schema.json->panel->title
+#. 4.0->settings-schema.json->behaviour->title
+msgid "Behavior"
+msgstr "Hegðun"
+
+#. 5.8->settings-schema.json->appearance->title
+#. 3.2->settings-schema.json->appearance->title
+#. 4.0->settings-schema.json->appearance->title
+msgid "Appearance"
+msgstr "Útlit"
+
+#. 5.8->settings-schema.json->tips->title
+#. 5.8->settings-schema.json->tips-section->title
+#. 4.0->settings-schema.json->tips->title
+#. 4.0->settings-schema.json->tips-section->title
+msgid "Tips"
+msgstr "Ábendingar"
+
+#. 5.8->settings-schema.json->menu-content->title
+#. 3.2->settings-schema.json->menu-content->title
+#. 4.0->settings-schema.json->menu-content->title
+msgid "Content"
+msgstr "Efni"
+
+#. 5.8->settings-schema.json->panel-behave->title
+#. 5.8->settings-schema.json->panel-appear->title
+#. 3.2->settings-schema.json->panel-appear->title
+#. 3.2->settings-schema.json->panel-behave->title
+#. 4.0->settings-schema.json->panel-behave->title
+#. 4.0->settings-schema.json->panel-appear->title
+msgid "Panel"
+msgstr "Spjald"
+
+#. 5.8->settings-schema.json->menu-behave->title
+#. 5.8->settings-schema.json->menu-icons->title
+#. 3.2->settings-schema.json->menu-behave->title
+#. 3.2->settings-schema.json->menu-icons->title
+#. 4.0->settings-schema.json->menu-behave->title
+#. 4.0->settings-schema.json->menu-icons->title
+msgid "Menu"
+msgstr "Valmynd"
+
+#. 5.8->settings-schema.json->applications-view-mode->description
+#. 4.0->settings-schema.json->applications-view-mode->description
+msgid "Applications view mode"
+msgstr "Skoðunarhamur forrita"
+
+#. 5.8->settings-schema.json->applications-view-mode->options
+#. 3.2->settings-schema.json->startup-view-mode->options
+#. 4.0->settings-schema.json->applications-view-mode->options
+msgid "List"
+msgstr "Listi"
+
+#. 5.8->settings-schema.json->applications-view-mode->options
+#. 3.2->settings-schema.json->startup-view-mode->options
+#. 4.0->settings-schema.json->applications-view-mode->options
+msgid "Grid"
+msgstr "Reitir"
+
+#. 5.8->settings-schema.json->applications-view-mode->tooltip
+#. 4.0->settings-schema.json->applications-view-mode->tooltip
+msgid "View applications as list or grid"
+msgstr "Skoða forrit sem lista eða reiti"
+
+#. 5.8->settings-schema.json->show-sidebar->description
+#. 4.0->settings-schema.json->show-sidebar->description
+msgid "Show sidebar"
+msgstr "Birta hliðarspjald"
+
+#. 5.8->settings-schema.json->show-sidebar->tooltip
+#. 4.0->settings-schema.json->show-sidebar->tooltip
+msgid "Show the sidebar in the menu"
+msgstr "Sýna hliðarspjald í valmyndinni"
+
+#. 5.8->settings-schema.json->sidebar-placement->description
+#. 4.0->settings-schema.json->sidebar-placement->description
+msgid "Sidebar location"
+msgstr "Staðsetning hliðarspjalds"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Top"
+msgstr "Efst"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Bottom"
+msgstr "Neðst"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Left"
+msgstr "Vinstri"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Right"
+msgstr "Hægri"
+
+#. 5.8->settings-schema.json->sidebar-placement->tooltip
+#. 4.0->settings-schema.json->sidebar-placement->tooltip
+msgid "Choose where to show the sidebar"
+msgstr "Veldu hvar á að sýna hliðarspjaldið"
+
+#. 5.8->settings-schema.json->sidebar-favorites->description
+#. 4.0->settings-schema.json->sidebar-favorites->description
+msgid "Show favorites on sidebar"
+msgstr "Sýna eftirlæti á hliðarspjaldinu"
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->description-placement->options
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "None"
+msgstr "Ekkert"
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+msgid "Apps only"
+msgstr "Einungis forrit"
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+msgid "Files only"
+msgstr "Einungis skrár"
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+msgid "Apps and files"
+msgstr "Forrit og skrár"
+
+#. 5.8->settings-schema.json->sidebar-favorites->tooltip
+#. 4.0->settings-schema.json->sidebar-favorites->tooltip
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "Sýna uppáhaldsforritin þín og skráatákn á hliðarspjaldinu"
+
+#. 5.8->settings-schema.json->description-placement->description
+#. 4.0->settings-schema.json->description-placement->description
+msgid "Application description placement"
+msgstr "Staðsetning lýsingar á forriti"
+
+#. 5.8->settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->description-placement->options
+msgid "Tooltips"
+msgstr "Vísbendingar verkfæra"
+
+#. 5.8->settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->description-placement->options
+msgid "Under titles"
+msgstr "Undir titlum"
+
+#. 5.8->settings-schema.json->description-placement->tooltip
+#. 4.0->settings-schema.json->description-placement->tooltip
+msgid "Choose where to show application descriptions"
+msgstr "Veldu hvar á að birta lýsingar forrita"
+
+#. 5.8->settings-schema.json->show-categories->description
+#. 4.0->settings-schema.json->show-categories->description
+msgid "Show categories"
+msgstr "Sýna flokka"
+
+#. 5.8->settings-schema.json->show-categories->tooltip
+#. 4.0->settings-schema.json->show-categories->tooltip
+msgid "Show list of application categories"
+msgstr "Sýna lista yfir forritaflokka"
+
+#. 5.8->settings-schema.json->show-places-category->description
+#. 3.2->settings-schema.json->show-places->description
+#. 4.0->settings-schema.json->show-places-category->description
+msgid "Show bookmarks and places"
+msgstr "Sýna bókamerki og staði"
+
+#. 5.8->settings-schema.json->show-places-category->tooltip
+#. 3.2->settings-schema.json->show-places->tooltip
+#. 4.0->settings-schema.json->show-places-category->tooltip
+msgid "Show bookmarks and places category in the menu"
+msgstr "Sýna flokk fyrir bókamerki og staðsetningar í valmyndinni"
+
+#. 5.8->settings-schema.json->show-recents-category->description
+#. 4.0->settings-schema.json->show-recents-category->description
+msgid "Show recent items"
+msgstr "Sýna nýleg atriði"
+
+#. 5.8->settings-schema.json->show-recents-category->tooltip
+#. 4.0->settings-schema.json->show-recents-category->tooltip
+msgid "Show recent items category in the menu"
+msgstr "Sýna flokk nýlegra atriða í valmyndinni"
+
+#. 5.8->settings-schema.json->show-favorite-apps-category->description
+#. 4.0->settings-schema.json->show-favorite-apps-category->description
+msgid "Show favorite apps category"
+msgstr "Sýna flokk fyrir eftirlætisforrit"
+
+#. 5.8->settings-schema.json->show-favorite-apps-category->tooltip
+#. 4.0->settings-schema.json->show-favorite-apps-category->tooltip
+msgid "Show your favorite apps category in the menu"
+msgstr "Sýna flokk fyrir eftirlætisforritin þín í valmyndinni"
+
+#. 5.8->settings-schema.json->show-home-folder-category->description
+#. 4.0->settings-schema.json->show-home-folder-category->description
+msgid "Show home folder"
+msgstr "Sýna heimamöppu"
+
+#. 5.8->settings-schema.json->show-home-folder-category->tooltip
+#. 4.0->settings-schema.json->show-home-folder-category->tooltip
+msgid "Show home folder category in the menu"
+msgstr "Sýna flokk fyrir heimamöppu í valmyndinni"
+
+#. 5.8->settings-schema.json->show-emoji-category->description
+#. 4.0->settings-schema.json->show-emoji-category->description
+msgid "Show emoji category"
+msgstr "Sýna flokk fyrir tjáningartákn"
+
+#. 5.8->settings-schema.json->show-emoji-category->tooltip
+#. 4.0->settings-schema.json->show-emoji-category->tooltip
+msgid "Show emoji category in the menu"
+msgstr "Sýna flokk fyrir tjáningartákn í valmyndinni"
+
+#. 5.8->settings-schema.json->menu-editor-button->description
+#. 3.2->settings-schema.json->menu-editor-button->description
+#. 4.0->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Opna valmyndaritilinn"
+
+#. 5.8->settings-schema.json->overlay-key->description
+#. 3.2->settings-schema.json->overlay-key->description
+#. 4.0->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Flýtilyklar til að opna og loka valmyndinni"
+
+#. 5.8->settings-schema.json->activate-on-hover->description
+#. 3.2->settings-schema.json->activate-on-hover->description
+#. 4.0->settings-schema.json->activate-on-hover->description
+msgid "Open menu on hover"
+msgstr "við yfirsvifá sveimi"
+
+#. 5.8->settings-schema.json->activate-on-hover->tooltip
+#. 3.2->settings-schema.json->activate-on-hover->tooltip
+#. 4.0->settings-schema.json->activate-on-hover->tooltip
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Opna valmyndina þegar músarbendillinn svífur yfir táknmyndinni"
+
+#. 5.8->settings-schema.json->hover-delay->units
+#. 3.2->settings-schema.json->hover-delay->units
+#. 3.2->settings-schema.json->tooltip-delay->units
+#. 4.0->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "millisekúndur"
+
+#. 5.8->settings-schema.json->hover-delay->description
+#. 3.2->settings-schema.json->hover-delay->description
+#. 4.0->settings-schema.json->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Töf við svif bendils yfir valmynd"
+
+#. 5.8->settings-schema.json->enable-animation->description
+#. 3.2->settings-schema.json->enable-animation->description
+#. 4.0->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Nota hreyfingar í valmyndum"
+
+#. 5.8->settings-schema.json->enable-animation->tooltip
+#. 3.2->settings-schema.json->enable-animation->tooltip
+#. 4.0->settings-schema.json->enable-animation->tooltip
+msgid "Animate the menu on open and close"
+msgstr "Leyfa valmynd að hreyfast við opnun og lokun"
+
+#. 5.8->settings-schema.json->category-click->description
+#. 3.2->settings-schema.json->category-click->description
+#. 4.0->settings-schema.json->category-click->description
+msgid "Activate categories on click"
+msgstr "Virkja flokka með því að smella"
+
+#. 5.8->settings-schema.json->category-click->tooltip
+#. 3.2->settings-schema.json->category-click->tooltip
+#. 4.0->settings-schema.json->category-click->tooltip
+msgid "Activate categories on click instead of on hover"
+msgstr "Virkja flokka með því að smella í stað yfirsvifs"
+
+#. 5.8->settings-schema.json->open-on-category->description
+#. 3.2->settings-schema.json->startup-view-mode->description
+#. 4.0->settings-schema.json->open-on-category->description
+msgid "Open menu on category:"
+msgstr "Opna valmynd fyrir flokk:"
+
+#. 5.8->settings-schema.json->open-on-category->tooltip
+#. 3.2->settings-schema.json->startup-view-mode->tooltip
+#. 4.0->settings-schema.json->open-on-category->tooltip
+msgid "Always open the menu with this category selected"
+msgstr "Opna alltaf valmyndina með þennan flokk valinn"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+msgid "Last used category"
+msgstr "Síðast notaði flokkur"
+
+#. 5.8->settings-schema.json->enable-autoscroll->description
+#. 3.2->settings-schema.json->enable-autoscroll->description
+#. 4.0->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr "Virkja sjálfvirkt skrun"
+
+#. 5.8->settings-schema.json->enable-autoscroll->tooltip
+#. 4.0->settings-schema.json->enable-autoscroll->tooltip
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Skruna sjálfkrafa um forritalistann við yfirsvif músarbendils"
+
+#. 5.8->settings-schema.json->show-hidden-files->tooltip
+#. 4.0->settings-schema.json->show-hidden-files->tooltip
+msgid "Show hidden files in folder view"
+msgstr "Sýna faldar skrár í möppusýn"
+
+#. 5.8->settings-schema.json->enable-emoji-search->description
+#. 4.0->settings-schema.json->enable-emoji-search->description
+msgid "Emoji search"
+msgstr "Leita að emoji-táknum"
+
+#. 5.8->settings-schema.json->enable-emoji-search->tooltip
+#. 4.0->settings-schema.json->enable-emoji-search->tooltip
+msgid "Show emojis in search results"
+msgstr "Sýna emoji-tákn í leitarniðurstöðum"
+
+#. 5.8->settings-schema.json->web-search-option->description
+#. 4.0->settings-schema.json->web-search-option->description
+msgid "Web search option"
+msgstr "Vefleitarkostur"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Google"
+msgstr "Google"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Bing"
+msgstr "Bing"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Baidu"
+msgstr "Baidu"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Yahoo"
+msgstr "Yahoo"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Yandex"
+msgstr "Yandex"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Ask"
+msgstr "Ask"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Ecosia"
+msgstr "Ecosia"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "AOL"
+msgstr "AOL"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Startpage"
+msgstr "Startpage"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Brave"
+msgstr "Brave"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Qwant"
+msgstr "Qwant"
+
+#. 5.8->settings-schema.json->web-search-option->tooltip
+#. 4.0->settings-schema.json->web-search-option->tooltip
+msgid "Show an internet search option in search results"
+msgstr "Sýna internetleitarkosti í leitarniðurstöðum"
+
+#. 5.8->settings-schema.json->web-suggestions->description
+#. 4.0->settings-schema.json->web-suggestions->description
+msgid "Web search suggestions"
+msgstr "Tillögur af vefnum í leit"
+
+#. 5.8->settings-schema.json->web-suggestions->tooltip
+#. 4.0->settings-schema.json->web-suggestions->tooltip
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+"Þegar vefleit er virk, sýna þá einnig tillögur í leit. (Athugaðu: "
+"Leitartillögur eru í boði DuckDuckGo)"
+
+#. 5.8->settings-schema.json->enable-home-folder-search->description
+#. 4.0->settings-schema.json->enable-home-folder-search->description
+msgid "Search home folder"
+msgstr "Leita í heimamöppu"
+
+#. 5.8->settings-schema.json->enable-home-folder-search->tooltip
+#. 4.0->settings-schema.json->enable-home-folder-search->tooltip
+msgid "When searching, also search my home folder for files"
+msgstr "Við leit skal líka leita í heimamöppunni minni að skrám"
+
+#. 5.8->settings-schema.json->enable-web-history-search->description
+#. 4.0->settings-schema.json->enable-web-history-search->description
+msgid "Web history search"
+msgstr "Leit í vafurferli"
+
+#. 5.8->settings-schema.json->enable-web-history-search->tooltip
+#. 4.0->settings-schema.json->enable-web-history-search->tooltip
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Við leit skal einnig leita í ferli vafrans míns (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Athugaðu: Firefox-ferill er ekki studdur eins og er."
+
+#. 5.8->settings-schema.json->enable-web-bookmarks-search->description
+#. 4.0->settings-schema.json->enable-web-bookmarks-search->description
+msgid "Web bookmarks search"
+msgstr "Leit í vefbókamerkjum"
+
+#. 5.8->settings-schema.json->enable-web-bookmarks-search->tooltip
+#. 4.0->settings-schema.json->enable-web-bookmarks-search->tooltip
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Við leit skal líka leita í bókamerkjum vafrans míns (Google Chrome, Firefox, "
+"Chromium, Opera, Vivaldi, Brave)\n"
+"Athugaðu: Til að leita í Firefox-bókamerkjum þarf að setja upp pakkann "
+"gir1.2-gda-5.0 (Debian-afleiddar dreifingar, þar með talið Ubuntu og Linux "
+"Mint) eða pakkann libgda (Arch-afleiddar dreifingar) og endurræsa síðan "
+"tölvuna þína."
+
+#. 5.8->settings-schema.json->enable-wikipedia-search->description
+#. 4.0->settings-schema.json->enable-wikipedia-search->description
+msgid "Wikipedia search"
+msgstr "Wikipedia-leit"
+
+#. 5.8->settings-schema.json->enable-wikipedia-search->tooltip
+#. 4.0->settings-schema.json->enable-wikipedia-search->tooltip
+msgid "Show some Wikipedia results"
+msgstr "Sýna nokkrar niðurstöður af Wikipedia"
+
+#. 5.8->settings-schema.json->wikipedia-language->description
+#. 5.8->settings-schema.json->wikipedia-language->tooltip
+#. 4.0->settings-schema.json->wikipedia-language->description
+#. 4.0->settings-schema.json->wikipedia-language->tooltip
+msgid "Wikipedia language"
+msgstr "Tungumál Wikipediu"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "English"
+msgstr "Enska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Sinugboanong Binisaya"
+msgstr "Sinugboanong Binisaya"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Svenska"
+msgstr "Sænska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Deutsch"
+msgstr "Þýska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Français"
+msgstr "Franska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Nederlands"
+msgstr "Hollenska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Русский"
+msgstr "Rússneska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Italiano"
+msgstr "Ítalska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Español"
+msgstr "Spænska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Polski"
+msgstr "Pólska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "مصرى (Maṣri)"
+msgstr "مصرى (Maṣri)"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "日本語"
+msgstr "Japanska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Tiếng Việt"
+msgstr "Tiếng Việt"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Winaray"
+msgstr "Winaray"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "中文"
+msgstr "中文"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "العربية"
+msgstr "العربية (ar)"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Українська"
+msgstr "Українська"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Português"
+msgstr "Portúgalska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "فارسی"
+msgstr "فارسی"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Català"
+msgstr "Katalónska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Српски / Srpski"
+msgstr "Српски / Srpski"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Bahasa Indonesia"
+msgstr "Bahasa Indonesia"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Norsk (Bokmål)"
+msgstr "Norska (bókmál))"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "한국어"
+msgstr "한국어"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Suomi"
+msgstr "Finnska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Magyar"
+msgstr "Ungverska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Čeština"
+msgstr "Tékkneska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Srpskohrvatski / Српскохрватски"
+msgstr "Srpskohrvatski / Српскохрватски"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Bân-lâm-gú"
+msgstr "Bân-lâm-gú"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Türkçe"
+msgstr "Tyrkneska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Română"
+msgstr "Română"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Нохчийн"
+msgstr "Нохчийн"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Euskara"
+msgstr "Baskneska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Bahasa Melayu"
+msgstr "Bahasa Melayu"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Tatarça / Татарча"
+msgstr "Tatarça / Татарча"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Esperanto"
+msgstr "Esperantó"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "עברית"
+msgstr "עברית"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Հայերեն"
+msgstr "Հայերեն"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Български"
+msgstr "Български"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Dansk"
+msgstr "Danska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "تۆرکجه"
+msgstr "تۆرکجه"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Slovenčina"
+msgstr "Slovenčina"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Қазақша"
+msgstr "Қазақша"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Minangkabau"
+msgstr "Minangkabau"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Eesti"
+msgstr "Eistneska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Hrvatski"
+msgstr "Króatíska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Беларуская"
+msgstr "Беларуская"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Lietuvių"
+msgstr "Lietuvių"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Ελληνικά"
+msgstr "Gríska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Simple English"
+msgstr "Einföld enska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Azərbaycanca"
+msgstr "Azərbaycanca"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Galego"
+msgstr "Galego"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Slovenščina"
+msgstr "Slovenščina"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "اردو"
+msgstr "اردو"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Nynorsk"
+msgstr "Nýnorska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "ქართული"
+msgstr "ქართული"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "हिन्दी"
+msgstr "हिन्दी"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "தமிழ்"
+msgstr "தமிழ்"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "ไทย"
+msgstr "ไทย"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "O‘zbek"
+msgstr "O‘zbek"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Latina"
+msgstr "Latina"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Cymraeg"
+msgstr "Cymraeg"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Asturianu"
+msgstr "Asturianu"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Volapük"
+msgstr "Volapük"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "粵語"
+msgstr "粵語"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Македонски"
+msgstr "Македонски"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "বাংলা"
+msgstr "বাংলা"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Latviešu"
+msgstr "Latviešu"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Тоҷикӣ"
+msgstr "Тоҷикӣ"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "မြန်မာဘာသာ"
+msgstr "မြန်မာဘာသာ"
+
+#. 5.8->settings-schema.json->search-help->description
+#. 4.0->settings-schema.json->search-help->description
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Athugið: Suma leitarvalkosti er samt hægt að nota jafnvel þó að þú hafir "
+"ekki virkjað þá hér með því að setja leitarorðið þitt forskot.\n"
+"Til dæmis: til að leita að emoji skaltu slá inn 'e heart' til að finna "
+"hjarta-emoji. Notaðu sömuleiðis forskeyti 'f ' fyrir skráaleit, 'h ' fyrir "
+"vefferil og 'b ' fyrir vefbókamerkjaleit.\n"
+
+#. 5.8->settings-schema.json->menu-icon-custom->description
+#. 3.2->settings-schema.json->menu-icon-custom->description
+#. 4.0->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Nota sérsniðna táknmynd"
+
+#. 5.8->settings-schema.json->menu-icon-custom->tooltip
+#. 3.2->settings-schema.json->menu-icon-custom->tooltip
+#. 4.0->settings-schema.json->menu-icon-custom->tooltip
+msgid "Use a custom icon in the panel"
+msgstr "Nota sérsniðnar táknmyndir á spjaldið"
+
+#. 5.8->settings-schema.json->menu-icon->description
+#. 5.8->settings-schema.json->menu-icon->tooltip
+#. 3.2->settings-schema.json->menu-icon->description
+#. 3.2->settings-schema.json->menu-icon->tooltip
+#. 4.0->settings-schema.json->menu-icon->description
+#. 4.0->settings-schema.json->menu-icon->tooltip
+msgid "Panel icon"
+msgstr "Tákn spjalds"
+
+#. 5.8->settings-schema.json->menu-icon-size-custom->description
+#. 4.0->settings-schema.json->menu-icon-size-custom->description
+msgid "Use a custom icon size"
+msgstr "Nota sérsniðna táknstærð"
+
+#. 5.8->settings-schema.json->menu-icon-size-custom->tooltip
+#. 4.0->settings-schema.json->menu-icon-size-custom->tooltip
+msgid "Use a custom size for the panel icon"
+msgstr "Nota sérsniðna stærð fyrir spjaldtáknið"
+
+#. 5.8->settings-schema.json->menu-icon-size->description
+#. 4.0->settings-schema.json->menu-icon-size->description
+msgid "Panel icon size (pixels)"
+msgstr "Stærð spjaldstákns (mynddílar)"
+
+#. 5.8->settings-schema.json->menu-icon-size->tooltip
+#. 4.0->settings-schema.json->menu-icon-size->tooltip
+msgid "Choose a custom size for the panel icon"
+msgstr "Veldu sérsniðna stærð fyrir tákn spjalds"
+
+#. 5.8->settings-schema.json->menu-label->description
+#. 3.2->settings-schema.json->menu-label->description
+#. 4.0->settings-schema.json->menu-label->description
+msgid "Panel text"
+msgstr "Texti spjalds"
+
+#. 5.8->settings-schema.json->menu-label->tooltip
+#. 3.2->settings-schema.json->menu-label->tooltip
+#. 4.0->settings-schema.json->menu-label->tooltip
+msgid "Text to show beside the panel icon"
+msgstr "Texti til að sýna við hlið táknmyndar spjalds"
+
+#. 5.8->settings-schema.json->category-icon-size->description
+#. 5.8->settings-schema.json->category-icon-size->tooltip
+#. 3.2->settings-schema.json->category-icon-size->description
+#. 3.2->settings-schema.json->category-icon-size->tooltip
+#. 4.0->settings-schema.json->category-icon-size->description
+#. 4.0->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size (pixels)"
+msgstr "Stærð flokkatákns (mynddílar)"
+
+#. 5.8->settings-schema.json->apps-list-icon-size->description
+#. 5.8->settings-schema.json->apps-list-icon-size->tooltip
+#. 3.2->settings-schema.json->apps-list-icon-size->description
+#. 3.2->settings-schema.json->apps-list-icon-size->tooltip
+#. 4.0->settings-schema.json->apps-list-icon-size->description
+#. 4.0->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size (pixels)"
+msgstr "Stærð forritalistatákns (mynddílar)"
+
+#. 5.8->settings-schema.json->apps-grid-icon-size->description
+#. 5.8->settings-schema.json->apps-grid-icon-size->tooltip
+#. 3.2->settings-schema.json->apps-grid-icon-size->description
+#. 3.2->settings-schema.json->apps-grid-icon-size->tooltip
+#. 4.0->settings-schema.json->apps-grid-icon-size->description
+#. 4.0->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size (pixels)"
+msgstr "Stærð forritareitatákns (mynddílar)"
+
+#. 5.8->settings-schema.json->sidebar-icon-size->description
+#. 5.8->settings-schema.json->sidebar-icon-size->tooltip
+#. 4.0->settings-schema.json->sidebar-icon-size->description
+#. 4.0->settings-schema.json->sidebar-icon-size->tooltip
+msgid "Sidebar icon size (pixels)"
+msgstr "Stærð tákna á hliðarspjaldi (mynddílar)"
+
+#. 5.8->settings-schema.json->use-box-style->description
+#. 4.0->settings-schema.json->use-box-style->description
+msgid "Use sidebar box style"
+msgstr "Nota kassastíl hliðarspjalds"
+
+#. 5.8->settings-schema.json->use-box-style->tooltip
+#. 4.0->settings-schema.json->use-box-style->tooltip
+msgid "Use a sidebar box style"
+msgstr "Nota kassastíl á hliðarspjald"
+
+#. 5.8->settings-schema.json->use-tile-style->description
+#. 4.0->settings-schema.json->use-tile-style->description
+msgid "Use tile style"
+msgstr "Nota flísastíl"
+
+#. 5.8->settings-schema.json->use-tile-style->tooltip
+#. 4.0->settings-schema.json->use-tile-style->tooltip
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Nota flísastíl fyrir forritahnappana (athugaðu: virkar kannski ekki í sumum "
+"þemum)"
+
+#. 5.8->settings-schema.json->info1->description
+#. 4.0->settings-schema.json->info1->description
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"• Dragðu til jaðrana til að breyta stærð valmyndarinnar."
+
+#. 5.8->settings-schema.json->info2->description
+#. 4.0->settings-schema.json->info2->description
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"• Dragðu og slepptu forritaflokkum til að breyta röðun þeirra."
+
+#. 5.8->settings-schema.json->info3->description
+#. 4.0->settings-schema.json->info3->description
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+"\n"
+"• Hægt er að setja möppur upp og fjarlægja sem valmyndarflokka með því að "
+"hægri-smella á þær."
+
+#. 5.8->settings-schema.json->info4->description
+#. 4.0->settings-schema.json->info4->description
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+"\n"
+"• Aðrir valkostir með lyklum:\n"
+"ctrl-p — Opna eiginleikaglugga ræsis fyrir valið forrit.\n"
+"ctrl-d — Opna .desktop skrá valins forrits í sjálfgefnum textaritli.\n"
+
+#. 3.2->settings-schema.json->providers->title
+msgid "Search Providers"
+msgstr "Leitarþjónustur"
+
+#. 3.2->settings-schema.json->extensionProvidersSection->title
+msgid "No search provider extensions found"
+msgstr "Engar viðbætur fyrir leitarþjónustur fundust"
+
+#. 3.2->settings-schema.json->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "Stillingar fyrir nýlegar skrár"
+
+#. 3.2->settings-schema.json->enable-autoscroll->tooltip
+msgid "Enable autoscrolling in application list"
+msgstr "Virkja sjálfvirkt skrun í forritalista"
+
+#. 3.2->settings-schema.json->enable-bookmarks->description
+msgid "Show web bookmarks"
+msgstr "Sýna vefbókamerki"
+
+#. 3.2->settings-schema.json->enable-bookmarks->tooltip
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Sýna vefbókamerki vafrans þíns í valmyndinni.\n"
+"Athugaðu: Settu upp pakkann gir1.2-gda-5.0 til að lesa Firefox-bókamerki."
+
+#. 3.2->settings-schema.json->enable-windows->description
+msgid "Enable searching of open windows"
+msgstr "Virkja leit í opnum gluggum"
+
+#. 3.2->settings-schema.json->enable-search-providers->description
+msgid "Enable search providers"
+msgstr "Virkja leitarþjónustur"
+
+#. 3.2->settings-schema.json->enable-search-providers->tooltip
+msgid "Include search provider results in searches"
+msgstr "Láta niðurstöður leitarþjónustu fylgja með í leitum"
+
+#. 3.2->settings-schema.json->get-providers->description
+msgid "Example Search Providers"
+msgstr "Dæmi um leitarþjónustur"
+
+#. 3.2->settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr "dálkar"
+
+#. 3.2->settings-schema.json->apps-grid-column-count->description
+#. 3.2->settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Fjöldi dálka í forritareitum"
+
+#. 3.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->tooltip
+msgid "Show application icons"
+msgstr "Birta táknmyndir forrita"
+
+#. 3.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->tooltip
+msgid "Show category icons"
+msgstr "Birta tákn fyrir flokka"
+
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
+msgid "Show application descriptions under titles"
+msgstr "Birta lýsingar forrita undir titlum"
+
+#. 3.2->settings-schema.json->show-tooltips->description
+#. 3.2->settings-schema.json->show-tooltips->tooltip
+msgid "Show tooltips"
+msgstr "Sýna vísbendingar verkfæra"
+
+#. 3.2->settings-schema.json->tooltip-delay->description
+#. 3.2->settings-schema.json->tooltip-delay->tooltip
+msgid "Tooltip delay"
+msgstr "Töf vísbendinga"
+
+#. 3.2->settings-schema.json->enable-custom-menu-height->description
+#. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
+msgid "Use a custom menu height"
+msgstr "Nota sérsniðna hæð valmyndar"
+
+#. 3.2->settings-schema.json->custom-menu-height->description
+#. 3.2->settings-schema.json->custom-menu-height->tooltip
+msgid "Custom menu height (pixels)"
+msgstr "Sérsniðin hæð valmyndar (mynddílar)"

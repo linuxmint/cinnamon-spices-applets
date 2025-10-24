@@ -1,0 +1,253 @@
+# MULTI-CORE SYSTEM MONITOR
+# This file is put in the public domain.
+# ccadeptic23, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: multicore-sys-monitor@ccadeptic23 1.9.5\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-05 10:06+0200\n"
+"PO-Revision-Date: 2025-08-03 20:47+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
+
+#. 6.4/applet.js:43
+msgid "Core 128:"
+msgstr ""
+
+#. 6.4/applet.js:44
+msgid "Unrecoverable:"
+msgstr ""
+
+#. 6.4/applet.js:45
+msgid "Recoverable:"
+msgstr ""
+
+#. 6.4/applet.js:422 6.4/applet.js:427
+msgid "Configure..."
+msgstr ""
+
+#. 6.4->settings-schema.json->pageDiskUsage->title
+#. 6.4/applet.js:433
+msgid "Disk Usage"
+msgstr ""
+
+#. 6.4/applet.js:958 6.4/applet.js:1488 6.4/applet.js:1568 6.4/applet.js:1658
+#. 6.4/applet.js:1660
+msgid "Disks"
+msgstr ""
+
+#. 6.4/applet.js:1181
+msgid "Buffers/Cache/Shared"
+msgstr ""
+
+#. 6.4/applet.js:1209 6.4/applet.js:1313 6.4/applet.js:1637
+msgid ":"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_colorCache->description
+#. 6.4/applet.js:1211
+msgid "Cache"
+msgstr ""
+
+#. 6.4/applet.js:1211
+msgid "Shared"
+msgstr ""
+
+#. 6.4/applet.js:1309
+msgid "CPUs"
+msgstr ""
+
+#. 6.4/applet.js:1436
+msgid "Networks"
+msgstr ""
+
+#. 6.4/applet.js:1632
+msgid "Usage"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionTooltip->title
+msgid "Tooltip"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionDiskUsagePaths->title
+msgid "Paths"
+msgstr ""
+
+#. 6.4->settings-schema.json->borderOn->description
+msgid "Add a border to each graph"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphSpacing->description
+msgid "Graph spacing"
+msgstr ""
+
+#. 6.4->settings-schema.json->borderColor->description
+msgid "Border Color"
+msgstr ""
+
+#. 6.4->settings-schema.json->percentAtEndOfLine->description
+msgid "Place % at the very end of the line"
+msgstr ""
+
+#. 6.4->settings-schema.json->removeEnlightenment->description
+msgid "Remove Enlightenment of this applet"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_labelOn->description
+#. 6.4->settings-schema.json->Mem_labelOn->description
+#. 6.4->settings-schema.json->Net_labelOn->description
+#. 6.4->settings-schema.json->Disk_labelOn->description
+#. 6.4->settings-schema.json->DiskUsage_labelOn->description
+msgid "Label"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_squared->description
+#. 6.4->settings-schema.json->Mem_squared->description
+#. 6.4->settings-schema.json->Net_squared->description
+#. 6.4->settings-schema.json->Disk_squared->description
+#. 6.4->settings-schema.json->DiskUsage_squared->description
+msgid "Square view"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_mergeAll->description
+#. 6.4->settings-schema.json->Net_mergeAll->description
+#. 6.4->settings-schema.json->Disk_mergeAll->description
+#. 6.4->settings-schema.json->DiskUsage_mergeAll->description
+msgid "Merge all"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_startAt12Oclock->description
+msgid "Origin at 12 o'clock"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_colorBuffers->description
+msgid "Buffers"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_swapWidth->description
+msgid "Relative width for Swap graph"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_swapWidth->options
+msgid "100%"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_swapWidth->options
+msgid "25%, left side"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_swapWidth->options
+msgid "None"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_swapWidth->tooltip
+msgid ""
+"100%: The Swap graph is a bar that spans the entire width of the graph, "
+"behind the circle.\n"
+"10%: The Swap graph is a bar that occupies 10% of the graph width, to the "
+"left of the circle.\n"
+"None: No Swap bar."
+msgstr ""
+
+#. 6.4->settings-schema.json->DiskUsage_chartType->description
+msgid "Type of chart"
+msgstr ""
+
+#. 6.4->settings-schema.json->DiskUsage_chartType->options
+msgid "Bar"
+msgstr ""
+
+#. 6.4->settings-schema.json->DiskUsage_chartType->options
+msgid "Pie"
+msgstr ""
+
+#. 6.4->settings-schema.json->DiskUsage_colorAlert->description
+msgid "Alert"
+msgstr ""
+
+#. 6.4->settings-schema.json->DiskUsage_getpathlist_btn->description
+msgid "Update this path list"
+msgstr ""
+
+#. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
+msgid ""
+"Alert when\n"
+"value (in %)\n"
+"reaches"
+msgstr ""
+
+#. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
+msgid "Path"
+msgstr ""
+
+#. 6.4->settings-schema.json->color16->description
+msgid "Color #16"
+msgstr ""
+
+#. 6.4->settings-schema.json->color17->description
+msgid "Color #17"
+msgstr ""
+
+#. 6.4->settings-schema.json->color18->description
+msgid "Color #18"
+msgstr ""
+
+#. 6.4->settings-schema.json->color19->description
+msgid "Color #19"
+msgstr ""
+
+#. 6.4->settings-schema.json->color20->description
+msgid "Color #20"
+msgstr ""
+
+#. 6.4->settings-schema.json->color21->description
+msgid "Color #21"
+msgstr ""
+
+#. 6.4->settings-schema.json->color22->description
+msgid "Color #22"
+msgstr ""
+
+#. 6.4->settings-schema.json->color23->description
+msgid "Color #23"
+msgstr ""
+
+#. 6.4->settings-schema.json->color24->description
+msgid "Color #24"
+msgstr ""
+
+#. 6.4->settings-schema.json->color25->description
+msgid "Color #25"
+msgstr ""
+
+#. 6.4->settings-schema.json->color26->description
+msgid "Color #26"
+msgstr ""
+
+#. 6.4->settings-schema.json->color27->description
+msgid "Color #27"
+msgstr ""
+
+#. 6.4->settings-schema.json->color28->description
+msgid "Color #28"
+msgstr ""
+
+#. 6.4->settings-schema.json->color29->description
+msgid "Color #29"
+msgstr ""
+
+#. 6.4->settings-schema.json->color30->description
+msgid "Color #30"
+msgstr ""
+
+#. 6.4->settings-schema.json->color31->description
+msgid "Color #31"
+msgstr ""

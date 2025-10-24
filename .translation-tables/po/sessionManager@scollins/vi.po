@@ -1,0 +1,155 @@
+# SESSION MANAGER
+# This file is put in the public domain.
+# collinss, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sessionManager@scollins 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-27 10:12+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:154
+msgid "Session"
+msgstr "Phiên làm việc"
+
+#. applet.js:240
+msgid "Lock Screen"
+msgstr "Khóa màn hình"
+
+#. applet.js:246
+msgid "Switch User"
+msgstr "Chuyển người dùng"
+
+#. applet.js:252
+msgid "Guest Session"
+msgstr "Phiên khách"
+
+#. applet.js:258
+msgid "Log Off"
+msgstr "Đăng xuất"
+
+#. applet.js:269
+msgid "Suspend"
+msgstr "Tạm ngưng"
+
+#. applet.js:275
+msgid "Sleep"
+msgstr "Ngủ"
+
+#. applet.js:281
+msgid "Hibernate"
+msgstr "Ngủ đông"
+
+#. applet.js:292
+msgid "Restart"
+msgstr "Khởi động lại"
+
+#. applet.js:298
+msgid "Shut Down"
+msgstr "Tắt máy"
+
+#. metadata.json->name
+msgid "Session Manager"
+msgstr "Trình quản lý phiên làm việc"
+
+#. metadata.json->description
+msgid "Provides easy access to shut down, restart, etc"
+msgstr "Cung cấp quyền truy cập nhanh để tắt máy, khởi động lại, v.v."
+
+#. metadata.json->comments
+msgid ""
+"Session Manager is an applet that provides easy access to session controls "
+"such as shut down, restart, log off, switch user, etc. It has been tested in "
+"Arch, Fedora and Linux Mint, and supports a wide variety of software "
+"configurations. If your particular configuration is not supported, please "
+"submit a feature request on github, and I will add it at my earliest "
+"convenience."
+msgstr ""
+"Session Manager là applet cung cấp quyền truy cập nhanh tới các điều khiển "
+"phiên như tắt máy, khởi động lại, đăng xuất, chuyển người dùng, v.v. Applet "
+"này đã được kiểm tra trên Arch, Fedora và Linux Mint, hỗ trợ nhiều cấu hình "
+"phần mềm khác nhau. Nếu cấu hình của bạn chưa được hỗ trợ, vui lòng gửi yêu "
+"cầu tính năng trên GitHub, tác giả sẽ bổ sung sớm nhất có thể."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Tác giả"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Cài đặt chung"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr "Biểu tượng trên bảng"
+
+#. settings-schema.json->panelText->description
+msgid "Panel Text"
+msgstr "Văn bản trên bảng"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Icon Size"
+msgstr "Kích thước biểu tượng"
+
+#. settings-schema.json->symbolicMenuIcons->description
+msgid "Symbolic icons in menu"
+msgstr "Biểu tượng dạng ký hiệu trong menu"
+
+#. settings-schema.json->menuOptions->description
+msgid "Menu Options"
+msgstr ""
+
+#. settings-schema.json->showLockScreen->description
+#, fuzzy
+msgid "Show Lock Screen option"
+msgstr "Khóa màn hình"
+
+#. settings-schema.json->showSwitchUser->description
+#, fuzzy
+msgid "Show Switch User option"
+msgstr "Chuyển người dùng"
+
+#. settings-schema.json->showGuestSession->description
+#, fuzzy
+msgid "Show Guest Session option"
+msgstr "Phiên khách"
+
+#. settings-schema.json->showLogOff->description
+msgid "Show Log Off option"
+msgstr ""
+
+#. settings-schema.json->showSuspend->description
+msgid "Show Suspend option"
+msgstr ""
+
+#. settings-schema.json->showSleep->description
+msgid "Show Sleep option"
+msgstr ""
+
+#. settings-schema.json->showHibernate->description
+#, fuzzy
+msgid "Show Hibernate option"
+msgstr "Ngủ đông"
+
+#. settings-schema.json->showRestart->description
+msgid "Show Restart option"
+msgstr ""
+
+#. settings-schema.json->showShutDown->description
+#, fuzzy
+msgid "Show Shut Down option"
+msgstr "Tắt máy"

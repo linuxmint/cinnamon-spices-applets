@@ -1,0 +1,43 @@
+# Power Profiles Applet
+# Copyright (C) 2023
+# Rick Calixte <10281587+rcalixte@users.noreply.github.com>, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-15 02:11-0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 5.4->settings-schema.json->section0->description
+msgid "General"
+msgstr ""
+
+#. 5.4->settings-schema.json->cycleProfiles->description
+msgid "Cycle through profiles when using keyboard shortcuts or scroll wheel"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->description
+msgid "Scroll wheel behavior"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Nothing"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles (reversed)"
+msgstr ""

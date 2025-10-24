@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 21:57+0800\n"
+"PO-Revision-Date: 2025-10-11 23:47+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. CommandRunner@appdevsw->metadata.json->name
+#: applet.js:47
+msgid "CommandRunner"
+msgstr "CommandRunner"
+
+#: applet.js:102
+msgid "<no text>"
+msgstr "<không có nội dung>"
+
+#: applet.js:136
+msgid "starting..."
+msgstr "đang khởi động..."
+
+#: appletgui.js:142
+msgid "Compare error "
+msgstr "Lỗi so sánh "
+
+#: appletgui.js:255 appletgui.js:283
+msgid "XML/JSON error: missing tag "
+msgstr "Lỗi XML/JSON: thiếu thẻ "
+
+#: appletgui.js:291
+msgid "xml error:"
+msgstr "lỗi xml:"
+
+#: appletgui.js:316 appletgui.js:325
+msgid "property not found "
+msgstr "không tìm thấy thuộc tính "
+
+#: cmdrunner.js:51
+msgid "undefined command!"
+msgstr "lệnh không xác định!"
+
+#: cmdrunner.js:143
+msgid "cannot execute command!"
+msgstr "không thể thực thi lệnh!"
+
+#: simplexml.js:259
+msgid "xml parse error at pos "
+msgstr "lỗi phân tích xml tại vị trí "
+
+#: simplexml.js:259
+msgid ", level "
+msgstr ", mức "
+
+#: simplexml.js:259
+msgid ", inside tag "
+msgstr ", trong thẻ "
+
+#. CommandRunner@appdevsw->metadata.json->description
+msgid ""
+"Applet runs script or application periodically and displays its output on "
+"the taskbar"
+msgstr ""
+"Applet chạy script hoặc ứng dụng theo chu kỳ và hiển thị kết quả trên thanh "
+"tác vụ"
+
+#. CommandRunner@appdevsw->settings-
+#. schema.json->form_interval_unit->description
+msgid "Unit"
+msgstr "Đơn vị"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval_unit->tooltip
+msgid "Unit of the interval: seconds or milliseconds"
+msgstr "Đơn vị khoảng thời gian: giây hoặc mili giây"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval_unit->options
+msgid " milliseconds"
+msgstr " mili giây"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval_unit->options
+msgid " seconds"
+msgstr " giây"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval->description
+msgid "Run interval"
+msgstr "Khoảng thời gian chạy"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval->tooltip
+msgid "Specifies how often the command is run"
+msgstr "Xác định tần suất chạy lệnh"
+
+#. CommandRunner@appdevsw->settings-schema.json->head_title->description
+msgid "CommandRunner settings"
+msgstr "Cài đặt CommandRunner"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_suffix->description
+msgid "Suffix"
+msgstr "Hậu tố"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_suffix->tooltip
+msgid ""
+"Text or character displayed at the end of the command result (in text mode "
+"only)."
+msgstr ""
+"Văn bản hoặc ký tự hiển thị ở cuối kết quả lệnh (chỉ trong chế độ văn bản)."
+
+#. CommandRunner@appdevsw->settings-schema.json->form_command->description
+msgid "Command"
+msgstr "Lệnh"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_command->tooltip
+msgid ""
+"Command or script or applitaction to run.\n"
+"e.g.\n"
+" /home/user/myscript.sh\n"
+" echo Hello\n"
+"\n"
+"The command should print the result to the standard output, which will be "
+"displayed on the taskbar.\n"
+"\n"
+"You can use predefined parameters:\n"
+" $counter$ - number of command executions\n"
+" $appletdir$ - applet directory\n"
+"\n"
+"  e.g. echo \"I was executed $counter$ times\""
+msgstr ""
+"Lệnh, script hoặc ứng dụng cần chạy.\n"
+"Ví dụ:\n"
+" /home/user/myscript.sh\n"
+" echo Hello\n"
+"\n"
+"Lệnh cần in kết quả ra đầu ra chuẩn để hiển thị trên thanh tác vụ.\n"
+"\n"
+"Có thể dùng các tham số định sẵn:\n"
+" $counter$ - số lần chạy lệnh\n"
+" $appletdir$ - thư mục applet\n"
+"\n"
+"  Ví dụ: echo \"Tôi đã được chạy $counter$ lần\""
+
+#. CommandRunner@appdevsw->settings-schema.json->form_prefix->description
+msgid "Prefix"
+msgstr "Tiền tố"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_prefix->tooltip
+msgid ""
+"Text or character displayed at the beginning of the command result (in text "
+"mode only)."
+msgstr ""
+"Văn bản hoặc ký tự hiển thị ở đầu kết quả lệnh (chỉ trong chế độ văn bản)."
+
+#. CommandRunner@appdevsw->settings-schema.json->apply->description
+msgid "Apply"
+msgstr "Áp dụng"
+
+#. CommandRunner@appdevsw->settings-schema.json->apply->tooltip
+msgid "Apply changes"
+msgstr "Áp dụng thay đổi"
