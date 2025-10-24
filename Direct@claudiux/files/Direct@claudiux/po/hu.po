@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-07 19:25+0200\n"
+"POT-Creation-Date: 2025-10-23 12:55+0200\n"
 "PO-Revision-Date: 2024-07-28 07:58-0400\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -18,15 +18,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:38 applet.js:487
+#. applet.js:38 applet.js:495
 msgid "SYSTEM"
 msgstr "RENDSZER"
 
-#. applet.js:38 applet.js:522
+#. applet.js:38 applet.js:530
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:38 applet.js:546
+#. applet.js:38 applet.js:554
 msgid "RECENT DOCUMENTS"
 msgstr "MOSTANÁBAN MEGNYITOTT DOKUMENTUMOK"
 
@@ -35,39 +35,39 @@ msgid "(Right click to open folder)"
 msgstr "(Jobb egérgomb a mappa megnyitásához)"
 
 #. metadata.json->name
-#. applet.js:226
+#. applet.js:263
 msgid "Direct"
 msgstr "Közvetlen"
 
-#. applet.js:463
+#. applet.js:471
 msgid "Search Home Folder"
 msgstr "Saját mappában keresés"
 
-#. applet.js:496
+#. applet.js:504
 msgid "Search File System"
 msgstr "Fájlrendszerben keresés"
 
-#. applet.js:560
+#. applet.js:568
 msgid "Clear"
 msgstr "Törlés"
 
-#. applet.js:567
+#. applet.js:575
 msgid "Recent"
 msgstr "Friss"
 
-#. applet.js:615
+#. applet.js:623
 msgid "Computer"
 msgstr "Számítógép"
 
-#. applet.js:621
+#. applet.js:629
 msgid "File System"
 msgstr "Fájlrendszer"
 
-#. applet.js:638
+#. applet.js:646
 msgid "Network"
 msgstr "Hálózat"
 
-#. applet.js:860
+#. applet.js:868
 msgid "Trash"
 msgstr "Kuka"
 
@@ -259,6 +259,11 @@ msgstr "Görgő kattintásra megnyitás"
 #. settings-schema.json->middleClickPath->tooltip
 msgid "Leave blank to disable"
 msgstr "Hagyja üresen a letiltáshoz"
+
+#. settings-schema.json->dontDisplayTooltip->description
+#, fuzzy
+msgid "Do not display the tooltip"
+msgstr "Teljes útvonal megjelenítése az eszköztippekben"
 
 #. settings-schema.json->showUserSection->description
 #, fuzzy

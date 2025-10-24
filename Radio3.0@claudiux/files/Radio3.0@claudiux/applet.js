@@ -1984,13 +1984,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     let file = file_new_for_path(MPV_TITLE_FILE);
 
-    if (file.query_exists(null)) {
-      try {
-        this.titleMonitor = file.monitor_file(FileMonitorFlags.NONE, new Cancellable());
-        this.titleMonitorId = this.titleMonitor.connect('changed', () => { this._on_mpv_title_changed() });
-      } catch(e) {
-        logError("Unable to monitor %s!".format(MPV_TITLE_FILE), e)
-      }
+    try {
+      this.titleMonitor = file.monitor_file(FileMonitorFlags.NONE, new Cancellable());
+      this.titleMonitorId = this.titleMonitor.connect('changed', () => { this._on_mpv_title_changed() });
+    } catch(e) {
+      logError("Unable to monitor %s!".format(MPV_TITLE_FILE), e)
     }
   }
 
@@ -2723,9 +2721,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
       if (this.menu) {
         if (this.menuItemsConnectActivateIds.length > 0) {
-          for (let i=0; i<this.menuItemsConnectActivateIds.length; i++)
-            if (this.menuItems[i])
-              this.menuItems[i].disconnect(this.menuItemsConnectActivateIds[i]);
+          for (let i=0; i<this.menuItemsConnectActivateIds.length; i++) {
+            if (this.menuItems[i] && this.menuItemsConnectActivateIds[i]) {
+              try {
+                this.menuItems[i].disconnect(this.menuItemsConnectActivateIds[i]);
+              } catch (e) {}
+            }
+          }
         }
         this.menu.removeAll();
       } else {

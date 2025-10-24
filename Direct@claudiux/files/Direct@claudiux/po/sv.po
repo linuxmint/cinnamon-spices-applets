@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-07 19:25+0200\n"
+"POT-Creation-Date: 2025-10-23 12:55+0200\n"
 "PO-Revision-Date: 2022-10-29 15:32+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -19,15 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.1.1\n"
 
-#. applet.js:38 applet.js:487
+#. applet.js:38 applet.js:495
 msgid "SYSTEM"
 msgstr "SYSTEM"
 
-#. applet.js:38 applet.js:522
+#. applet.js:38 applet.js:530
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:38 applet.js:546
+#. applet.js:38 applet.js:554
 msgid "RECENT DOCUMENTS"
 msgstr "TIDIGARE DOKUMENT"
 
@@ -36,39 +36,39 @@ msgid "(Right click to open folder)"
 msgstr "(Högerklicka för att öppna mapp)"
 
 #. metadata.json->name
-#. applet.js:226
+#. applet.js:263
 msgid "Direct"
 msgstr "Direkt"
 
-#. applet.js:463
+#. applet.js:471
 msgid "Search Home Folder"
 msgstr "Sök i hemkatalogen"
 
-#. applet.js:496
+#. applet.js:504
 msgid "Search File System"
 msgstr "Sök i filsystemet"
 
-#. applet.js:560
+#. applet.js:568
 msgid "Clear"
 msgstr "Rensa"
 
-#. applet.js:567
+#. applet.js:575
 msgid "Recent"
 msgstr ""
 
-#. applet.js:615
+#. applet.js:623
 msgid "Computer"
 msgstr "Dator"
 
-#. applet.js:621
+#. applet.js:629
 msgid "File System"
 msgstr "Filsystem"
 
-#. applet.js:638
+#. applet.js:646
 msgid "Network"
 msgstr "Nätverk"
 
-#. applet.js:860
+#. applet.js:868
 msgid "Trash"
 msgstr "Papperskorg"
 
@@ -260,6 +260,10 @@ msgstr "Öppna på mushjulsklick"
 #. settings-schema.json->middleClickPath->tooltip
 msgid "Leave blank to disable"
 msgstr "Lämnas tom för inaktivering"
+
+#. settings-schema.json->dontDisplayTooltip->description
+msgid "Do not display the tooltip"
+msgstr ""
 
 #. settings-schema.json->showUserSection->description
 #, fuzzy

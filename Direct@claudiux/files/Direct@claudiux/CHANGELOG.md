@@ -1,3 +1,6 @@
+### v1.1.2~20251022
+* Adds option *Do not display the tooltip*.
+
 ### v1.1.1~20251016
 * Do not display the Favorites section when the number of favorites is zero.
 

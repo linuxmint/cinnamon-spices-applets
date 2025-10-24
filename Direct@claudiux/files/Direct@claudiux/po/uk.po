@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-07 19:25+0200\n"
+"POT-Creation-Date: 2025-10-23 12:55+0200\n"
 "PO-Revision-Date: 2023-08-24 12:12+0300\n"
 "Last-Translator: DmytroVoytko <Dmytro.Voytko@gmail.com>\n"
 "Language-Team: \n"
@@ -18,15 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.3.2\n"
 
-#. applet.js:38 applet.js:487
+#. applet.js:38 applet.js:495
 msgid "SYSTEM"
 msgstr "СИСТЕМА"
 
-#. applet.js:38 applet.js:522
+#. applet.js:38 applet.js:530
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:38 applet.js:546
+#. applet.js:38 applet.js:554
 msgid "RECENT DOCUMENTS"
 msgstr "ОСТАННІ ДОКУМЕНТИ"
 
@@ -35,39 +35,39 @@ msgid "(Right click to open folder)"
 msgstr "(Клацніть правою кнопкою миші, щоб відкрити папку)"
 
 #. metadata.json->name
-#. applet.js:226
+#. applet.js:263
 msgid "Direct"
 msgstr "Прямий"
 
-#. applet.js:463
+#. applet.js:471
 msgid "Search Home Folder"
 msgstr "Пошук у домашній папці"
 
-#. applet.js:496
+#. applet.js:504
 msgid "Search File System"
 msgstr "Пошук у файловій системі"
 
-#. applet.js:560
+#. applet.js:568
 msgid "Clear"
 msgstr "Очистити"
 
-#. applet.js:567
+#. applet.js:575
 msgid "Recent"
 msgstr ""
 
-#. applet.js:615
+#. applet.js:623
 msgid "Computer"
 msgstr "Комп'ютер"
 
-#. applet.js:621
+#. applet.js:629
 msgid "File System"
 msgstr "Файлова система"
 
-#. applet.js:638
+#. applet.js:646
 msgid "Network"
 msgstr "Мережа"
 
-#. applet.js:860
+#. applet.js:868
 msgid "Trash"
 msgstr "Смітник"
 
@@ -260,6 +260,10 @@ msgstr "Відкрити клацанням середньою кнопкою м
 #. settings-schema.json->middleClickPath->tooltip
 msgid "Leave blank to disable"
 msgstr "Залиште порожнім, щоб вимкнути"
+
+#. settings-schema.json->dontDisplayTooltip->description
+msgid "Do not display the tooltip"
+msgstr ""
 
 #. settings-schema.json->showUserSection->description
 #, fuzzy

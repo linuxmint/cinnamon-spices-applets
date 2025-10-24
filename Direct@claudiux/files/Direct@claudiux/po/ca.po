@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-07 19:25+0200\n"
+"POT-Creation-Date: 2025-10-23 12:55+0200\n"
 "PO-Revision-Date: 2025-10-06 21:22+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,15 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.6\n"
 
-#. applet.js:38 applet.js:487
+#. applet.js:38 applet.js:495
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:38 applet.js:522
+#. applet.js:38 applet.js:530
 msgid "FAVORITES"
 msgstr "PREFERITS"
 
-#. applet.js:38 applet.js:546
+#. applet.js:38 applet.js:554
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTS RECENTS"
 
@@ -35,39 +35,39 @@ msgid "(Right click to open folder)"
 msgstr "(Clic dret per obrir la carpeta)"
 
 #. metadata.json->name
-#. applet.js:226
+#. applet.js:263
 msgid "Direct"
 msgstr "Directe"
 
-#. applet.js:463
+#. applet.js:471
 msgid "Search Home Folder"
 msgstr "Buscar al directori Home"
 
-#. applet.js:496
+#. applet.js:504
 msgid "Search File System"
 msgstr "Buscar al sistema de fitxers"
 
-#. applet.js:560
+#. applet.js:568
 msgid "Clear"
 msgstr "Netejar"
 
-#. applet.js:567
+#. applet.js:575
 msgid "Recent"
 msgstr "Recent"
 
-#. applet.js:615
+#. applet.js:623
 msgid "Computer"
 msgstr "Ordinador"
 
-#. applet.js:621
+#. applet.js:629
 msgid "File System"
 msgstr "Sistema de fitxers"
 
-#. applet.js:638
+#. applet.js:646
 msgid "Network"
 msgstr "Xarxa"
 
-#. applet.js:860
+#. applet.js:868
 msgid "Trash"
 msgstr "Paperera"
 
@@ -263,6 +263,11 @@ msgstr "Obrir en fer clic del mig"
 #. settings-schema.json->middleClickPath->tooltip
 msgid "Leave blank to disable"
 msgstr "Deixeu-ho buit per a desactivar-ho"
+
+#. settings-schema.json->dontDisplayTooltip->description
+#, fuzzy
+msgid "Do not display the tooltip"
+msgstr "Mostrar la ruta completa als tooltips"
 
 #. settings-schema.json->showUserSection->description
 msgid "Show User section"
