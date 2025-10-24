@@ -1,0 +1,783 @@
+# SENSORS MONITOR
+# 此文件在公共领域发布。
+# claudiux, 2020
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. metadata.json->name
+#. applet.js:225 applet_OLD.js:235
+msgid "Sensors Monitor"
+msgstr "传感器监测"
+
+#. applet.js:465 applet_OLD.js:418
+msgid "Suspended"
+msgstr "悬浮"
+
+#. applet.js:732 applet.js:773 applet_OLD.js:638 applet_OLD.js:682
+msgid "high:"
+msgstr "高:"
+
+#. applet.js:732 applet.js:735 applet.js:773 applet.js:775 applet.js:816
+#. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
+#. applet_OLD.js:726
+msgid "n/a"
+msgstr "n/a"
+
+#. applet.js:735 applet.js:775 applet_OLD.js:642 applet_OLD.js:684
+msgid "crit:"
+msgstr "crit:"
+
+#. applet.js:816 applet.js:860 applet_OLD.js:726 applet_OLD.js:770
+msgid "min:"
+msgstr "分钟:"
+
+#. applet.js:862 applet_OLD.js:772
+msgid "max:"
+msgstr "最大:"
+
+#. applet.js:891 applet_OLD.js:801
+msgid "No intrusion detected"
+msgstr "未检测到入侵"
+
+#. applet.js:891 applet_OLD.js:801
+msgid "INTRUSION DETECTED!"
+msgstr "检测到入侵！"
+
+#. applet.js:911 applet_OLD.js:821
+msgid "Must be configured!"
+msgstr "必须配置！"
+
+#. applet.js:1275 applet_OLD.js:1208
+msgid "Settings"
+msgstr "设置"
+
+#. applet.js:1275 applet_OLD.js:1208
+msgid ":"
+msgstr ":"
+
+#. settings-schema.json->page_General->title
+#. applet.js:1282 applet_OLD.js:1215
+msgid "⚙ General"
+msgstr "⚙ 通用"
+
+#. applet.js:1298 applet_OLD.js:1231
+#, javascript-format
+msgid "%s Temperature sensors"
+msgstr "%s 温度传感器"
+
+#. applet.js:1314 applet_OLD.js:1247
+#, javascript-format
+msgid "%s Fan sensors"
+msgstr "%s 风扇传感器"
+
+#. applet.js:1330 applet_OLD.js:1263
+#, javascript-format
+msgid "%s Voltage sensors"
+msgstr "%s 电压传感器"
+
+#. applet.js:1346 applet_OLD.js:1279
+#, javascript-format
+msgid "%s Intrusion sensors"
+msgstr "%s 入侵传感器"
+
+#. settings-schema.json->xsensors->description
+#. applet.js:1365 applet_OLD.js:1306
+msgid "Run xsensors"
+msgstr "运行xsensors"
+
+#. applet.js:1374 applet_OLD.js:1315
+msgid "Suspend Sensors"
+msgstr "悬挂传感器"
+
+#. applet.js:1385 applet_OLD.js:1326
+msgid "Reload this applet"
+msgstr "重新加载此小程序"
+
+#. applet.js:1707 applet_OLD.js:1656
+#, javascript-format
+msgid "Are you sure you want to remove '%s'?"
+msgstr "您确定要删除吗'%s'?"
+
+#. lib/checkDependencies.js:353
+#, javascript-format
+msgid "The applet %s is fully functional."
+msgstr "小程序%s功能齐全。"
+
+#. lib/checkDependencies.js:354
+msgid "All dependencies are installed"
+msgstr "所有依赖项均已安装"
+
+#. lib/checkDependencies.js:383
+msgid "You appear to be missing some of the programs required for this applet to have all its features."
+msgstr "您似乎缺少此小程序具有所有功能所需的一些程序。"
+
+#. lib/checkDependencies.js:385
+msgid "Please install these packages:"
+msgstr "请安装这些软件包："
+
+#. lib/checkDependencies.js:389 lib/checkDependencies.js:399
+msgid "Some dependencies are not installed!"
+msgstr "某些依赖项尚未安装！"
+
+#. lib/checkDependencies.js:401
+msgid "Install these packages now"
+msgstr "立即安装这些软件包"
+
+#. lib/util.js:244
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr "执行“%s”失败:"
+
+#. scripts/xs.py:206
+msgid "Previous instance"
+msgstr "上一个实例"
+
+#. scripts/xs.py:210
+msgid "Next instance"
+msgstr "下一个实例"
+
+#. scripts/xs.py:219
+msgid "More options"
+msgstr "更多选项"
+
+#. scripts/xs.py:225
+msgid "Import from a file"
+msgstr "从文件导入"
+
+#. scripts/xs.py:230
+msgid "Export to a file"
+msgstr "导出到文件"
+
+#. scripts/xs.py:235
+msgid "Reset to defaults"
+msgstr "恢复默认设置"
+
+#. scripts/xs.py:244
+#, python-format
+msgid "Reload %s"
+msgstr "重新加载 %s"
+
+#. scripts/xs.py:425
+#, python-format
+msgid "Settings for %s"
+msgstr "设置 %s"
+
+#. scripts/xs.py:517
+msgid "Select or enter file to export to"
+msgstr "选择或输入要导出到的文件"
+
+#. scripts/xs.py:525 scripts/xs.py:546
+msgid "JSON files"
+msgstr "JSON文件"
+
+#. scripts/xs.py:539
+msgid "Select a JSON file to import"
+msgstr "选择要导入的JSON文件"
+
+#. metadata.json->description
+msgid "Displays the values of many computer sensors concerning Temperatures (CPU - GPU - Power Supply), Fan Speed, Voltages, Intrusions. Notifies you with color changes when a value reaches or exceeds its limit."
+msgstr "显示许多计算机传感器的温度(CPU-GPU-电源）、风扇速度、电压、侵入值。当值达到或超过其限制时，会通知您颜色变化。"
+
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr "克劳迪奥:作者。JEleniel:支持NVidia视频卡。"
+
+#. settings-schema.json->page_Temperatures->title
+msgid "⦿ Temperature"
+msgstr "⦿ 温度"
+
+#. settings-schema.json->page_Fans->title
+msgid "𖣘 Fan"
+msgstr "𖣘 风扇"
+
+#. settings-schema.json->page_Voltages->title
+msgid "🗲 Voltage"
+msgstr "🗲 电压"
+
+#. settings-schema.json->page_Intrusion->title
+msgid "⮿ Intrusion"
+msgstr "⮿ 入侵"
+
+#. settings-schema.json->page_Custom->title
+msgid "⛓ Custom"
+msgstr "⛓ 自定义"
+
+#. settings-schema.json->section_Display->title
+#. settings-schema.json->section_tempOptions->title
+#. settings-schema.json->section_fanOptions->title
+#. settings-schema.json->section_voltOptions->title
+#. settings-schema.json->section_intrusionOptions->title
+msgid "Options"
+msgstr "选项"
+
+#. settings-schema.json->section_Tooltip->title
+msgid "Tooltip"
+msgstr "工具提示"
+
+#. settings-schema.json->section_Report->title
+msgid "Sensors values"
+msgstr "传感器值"
+
+#. settings-schema.json->section_remove_incompatible_xlets->title
+msgid "Remove from panels certain applets that also use sensors"
+msgstr "从面板中删除某些也使用传感器的小程序"
+
+#. settings-schema.json->section_tempDisktemp->title
+msgid "For the time being, disk temperature can only be read by root."
+msgstr "目前,磁盘温度只能由root读取。"
+
+#. settings-schema.json->section_tempDisplay->title
+#. settings-schema.json->section_fanDisplay->title
+#. settings-schema.json->section_voltDisplay->title
+#. settings-schema.json->section_intrusionDisplay->title
+#. settings-schema.json->section_customDisplay->title
+msgid "Display"
+msgstr "显示"
+
+#. settings-schema.json->section_tempSensors->title
+msgid "Temperature sensors"
+msgstr "温度传感器"
+
+#. settings-schema.json->section_tempDisks->title
+msgid "Disk temperature sensors"
+msgstr "磁盘温度传感器"
+
+#. settings-schema.json->section_fanSensors->title
+msgid "Fan sensors"
+msgstr "风扇传感器"
+
+#. settings-schema.json->section_voltSensors->title
+msgid "Voltage sensors"
+msgstr "电压传感器"
+
+#. settings-schema.json->section_intrusionSensors->title
+msgid "Intrusion sensors"
+msgstr "入侵传感器"
+
+#. settings-schema.json->section_customDisclaimer->title
+msgid "Disclaimer"
+msgstr "免责声明"
+
+#. settings-schema.json->section_customSensors->title
+msgid "Custom sensors"
+msgstr "自定义传感器"
+
+#. settings-schema.json->interval->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->interval->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->interval->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->interval->options
+msgid "4"
+msgstr "4"
+
+#. settings-schema.json->interval->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->interval->options
+msgid "6"
+msgstr "6"
+
+#. settings-schema.json->interval->options
+msgid "7"
+msgstr "7"
+
+#. settings-schema.json->interval->options
+msgid "8"
+msgstr "8"
+
+#. settings-schema.json->interval->options
+msgid "9"
+msgstr "9"
+
+#. settings-schema.json->interval->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->interval->options
+msgid "12"
+msgstr "12"
+
+#. settings-schema.json->interval->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->interval->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->interval->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->interval->options
+msgid "1 minute"
+msgstr "1 分钟"
+
+#. settings-schema.json->interval->options
+msgid "2 minutes"
+msgstr "2 分钟"
+
+#. settings-schema.json->interval->options
+msgid "3 minutes"
+msgstr "3 分钟"
+
+#. settings-schema.json->interval->options
+msgid "4 minutes"
+msgstr "4 分钟"
+
+#. settings-schema.json->interval->options
+msgid "5 minutes"
+msgstr "5 分钟"
+
+#. settings-schema.json->interval->options
+msgid "10 minutes"
+msgstr "10 分钟"
+
+#. settings-schema.json->interval->options
+msgid "15 minutes"
+msgstr "15 分钟"
+
+#. settings-schema.json->interval->options
+msgid "30 minutes"
+msgstr "30 分钟"
+
+#. settings-schema.json->interval->options
+msgid "1 hour"
+msgstr "1 小时"
+
+#. settings-schema.json->interval->description
+msgid "Refresh interval (seconds)"
+msgstr "刷新间隔（秒）"
+
+#. settings-schema.json->keep_size->description
+msgid "Avoid size changes"
+msgstr "避免尺寸变化"
+
+#. settings-schema.json->keep_size->tooltip
+msgid "Checked: The size of this applet remains constant, once all your preferences have been defined.\\nUnchecked: The size of this applet is optimized, but it may change."
+msgstr "选中：一旦定义了所有首选项，此小程序的大小将保持不变。\\未备份：此小程序的大小已优化，但可能会发生变化。"
+
+#. settings-schema.json->char_size->description
+msgid "Character size (% of standard size)"
+msgstr "字符大小（标准大小的%)"
+
+#. settings-schema.json->horizontal_width->description
+msgid "Display width (pixels) for horizontal panels"
+msgstr "水平面板的显示宽度（像素）"
+
+#. settings-schema.json->horizontal_width->tooltip
+msgid "0 means automatic. This value does not include border."
+msgstr "0表示自动。此值不包括边框。"
+
+#. settings-schema.json->separator_type->options
+msgid "(none)"
+msgstr "（无）"
+
+#. settings-schema.json->separator_type->options
+msgid "blank"
+msgstr "空白"
+
+#. settings-schema.json->separator_type->options
+msgid "bar"
+msgstr "条"
+
+#. settings-schema.json->separator_type->description
+msgid "Separator"
+msgstr "分隔符"
+
+#. settings-schema.json->char_color_customized->description
+msgid "Customize Text Color"
+msgstr "自定义文本颜色"
+
+#. settings-schema.json->char_color->description
+msgid "Text Color"
+msgstr "文本颜色"
+
+#. settings-schema.json->crit_color->description
+msgid "Critical Value Color"
+msgstr "临界值颜色"
+
+#. settings-schema.json->high_color->description
+msgid "High Value Color"
+msgstr "高亮颜色"
+
+#. settings-schema.json->remove_border->description
+msgid "Remove border line"
+msgstr "删除边界线"
+
+#. settings-schema.json->remove_border->tooltip
+msgid "Whether or not to remove the border line around this applet."
+msgstr "是否删除此小程序周围的边框线。"
+
+#. settings-schema.json->remove_icons->description
+msgid "Remove icons"
+msgstr "删除图标"
+
+#. settings-schema.json->remove_icons->tooltip
+msgid "Whether or not to remove icons in panel."
+msgstr "是否删除面板中的图标。"
+
+#. settings-schema.json->show_tooltip->description
+msgid "Display a tooltip on mouseover"
+msgstr "鼠标悬停时显示工具提示"
+
+#. settings-schema.json->bold_values->description
+msgid "Show values in bold in the tooltip"
+msgstr "在工具提示中以粗体显示值"
+
+#. settings-schema.json->bold_values->tooltip
+msgid "Whether or not to show values in bold in the tooltip."
+msgstr "是否在工具提示中以粗体显示值。"
+
+#. settings-schema.json->bold_italics_main_sensors->description
+msgid "Show main sensors in bold italics in the tooltip"
+msgstr "在工具提示中以粗体斜体显示主要传感器"
+
+#. settings-schema.json->bold_italics_main_sensors->tooltip
+msgid "Whether or not to display the names of the main sensors (those displayed in the panel) in bold italics in the tooltip."
+msgstr "是否在工具提示中以粗体斜体显示主要传感器（面板中显示的传感器）的名称。"
+
+#. settings-schema.json->restart_in_menu->description
+msgid "Show in menu the action: Restart this applet"
+msgstr "在菜单中显示操作：重新启动此小程序"
+
+#. settings-schema.json->restart_in_menu->tooltip
+msgid "Whether or not to display in menu the action: Restart this applet."
+msgstr "是否在菜单中显示操作：重新启动此小程序。"
+
+#. settings-schema.json->make_disktemp_readable_by_user->description
+msgid "Make disk temperature user-readable"
+msgstr "使磁盘温度用户可读"
+
+#. settings-schema.json->show_temp->description
+#. settings-schema.json->show_fan->description
+#. settings-schema.json->show_volt->description
+#. settings-schema.json->show_intrusion->description
+#. settings-schema.json->show_custom->description
+msgid "Display the values of these selected sensors"
+msgstr "显示这些选定的传感器值"
+
+#. settings-schema.json->show_temp->tooltip
+#. settings-schema.json->show_fan->tooltip
+#. settings-schema.json->show_volt->tooltip
+#. settings-schema.json->show_intrusion->tooltip
+#. settings-schema.json->show_custom->tooltip
+msgid "Whether or not to display the values of the sensors selected in the list below."
+msgstr "是否显示在下方列表中选择的传感器值。"
+
+#. settings-schema.json->show_temp_name->description
+#. settings-schema.json->show_fan_name->description
+#. settings-schema.json->show_volt_name->description
+#. settings-schema.json->show_intrusion_name->description
+#. settings-schema.json->show_custom_name->description
+msgid "Display the 'Shown name' of each of these selected sensors"
+msgstr "显示每个选定传感器的“显示名称”"
+
+#. settings-schema.json->show_temp_name->tooltip
+#. settings-schema.json->show_fan_name->tooltip
+#. settings-schema.json->show_volt_name->tooltip
+msgid "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels."
+msgstr "是否在此小程序标签中显示以下列表中选择的传感器的“显示名称”。在垂直面板中没有效果。"
+
+#. settings-schema.json->chars_temp->tooltip
+msgid "The first emoji in this list is used for temperature"
+msgstr "此列表中的第一个表情符号用于表示温度"
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr "表情符号"
+
+#. settings-schema.json->strictly_positive_temp->description
+#. settings-schema.json->strictly_positive_volt->description
+msgid "Show only strictly positive values"
+msgstr "仅显示严格正值"
+
+#. settings-schema.json->use_fahrenheit->description
+msgid "Show temperature in Fahrenheit"
+msgstr "以华氏度显示温度"
+
+#. settings-schema.json->only_integer_part->description
+msgid "Display integer values"
+msgstr "显示整数值"
+
+#. settings-schema.json->only_integer_part->tooltip
+msgid "Whether or not to round the values."
+msgstr "是否对数值进行四舍五入。"
+
+#. settings-schema.json->show_unit->description
+#. settings-schema.json->show_fan_unit->description
+#. settings-schema.json->show_volt_unit->description
+msgid "Show unit"
+msgstr "显示单位"
+
+#. settings-schema.json->show_unit->tooltip
+#. settings-schema.json->show_fan_unit->tooltip
+#. settings-schema.json->show_volt_unit->tooltip
+msgid "Whether or not to show the unit after the value."
+msgstr "是否在数值后显示单位。"
+
+#. settings-schema.json->show_unit_letter->description
+msgid "Show unit character"
+msgstr "显示单位字符"
+
+#. settings-schema.json->show_unit_letter->tooltip
+msgid "Whether or not to show the unit character (C or F)."
+msgstr "是否显示单位字符(C 或 F)。"
+
+#. settings-schema.json->always_show_unit_in_line->description
+msgid "Vertical panel: Temperature value and °C / °F on one line"
+msgstr "垂直面板：温度值和 °C / °F 在一行上"
+
+#. settings-schema.json->always_show_unit_in_line->tooltip
+msgid "Whether or not to show, in a vertical panel, °C or °F on the same line as the temperature value."
+msgstr "是否在垂直面板中将 °C 或 °F 与温度值显示在同一行上。"
+
+#. settings-schema.json->journalize_temp->description
+msgid "Log high and critical temperatures"
+msgstr "记录高、临界温度"
+
+#. settings-schema.json->journalize_temp->tooltip
+msgid "When this option is checked, temperatures exceeding the high or critical limit are recorded in the system journal."
+msgstr "选中此选项后，超过高或临界限制的温度将记录在系统日志中。"
+
+#. settings-schema.json->btn_renew_temp_sensors_list->description
+#. settings-schema.json->btn_renew_fan_sensors_list->description
+#. settings-schema.json->btn_renew_volt_sensors_list->description
+#. settings-schema.json->btn_renew_intrusion_sensors_list->description
+msgid "Renew the list of sensors"
+msgstr "更新传感器列表"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+msgid "Sensor name\\n(Do not modify!)"
+msgstr "传感器名称\\n(请勿修改！)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Show\\nin panel"
+msgstr "在面板中\\n显示"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Show\\nin tooltip"
+msgstr "在工具提示中\\n显示"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+msgid "Shown name"
+msgstr "显示名称"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+msgid "High\\n(°C)"
+msgstr "高\\n(°C)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+msgid "Critical\\n(°C)"
+msgstr "临界\\n(°C)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Formula"
+msgstr "公式"
+
+#. settings-schema.json->temp_sensors->tooltip
+msgid "Double-click on a line to change 'Shown name', 'High', 'Critical' or 'Formula'.\\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\\n'High' and 'Critical' (optional) must be valid numbers.\\n'Formula' (optional):\\n  Use $ as the value returned by the sensor.\\n  You can use the 4 operations (+-*/) and parentheses.\\n  Example: $*1.1+0.5"
+msgstr "双击一行以更改“显示名称”、“高”、“关键”或“公式”。\\n要重置“显示的名称”,请复制/粘贴“传感器名称”。\\“High”和“Critical”(可选）必须是有效数字。\\'Formula'（可选）：\\n使用$作为传感器返回的值。\\n您可以使用4个操作(+-*/）和括号。\\n示例:$*1.1+0.5"
+
+#. settings-schema.json->btn_renew_disks_list->description
+msgid "Renew the list of known disks"
+msgstr "更新已知磁盘列表"
+
+#. settings-schema.json->temp_disks->columns->title
+msgid "Disk name"
+msgstr "磁盘名称"
+
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+msgid "Shown\\nname"
+msgstr "显示\\n名称"
+
+#. settings-schema.json->temp_disks->tooltip
+msgid "Disk name: The name of the disk, as returned by the 'lsblk' command. Please see help.\\nHigh and Critical values: Cf. technical manual of your disk."
+msgstr "磁盘名称:磁盘的名称,由“lsblk”命令返回。请查看帮助。\\n高值和临界值:请参阅磁盘技术手册。"
+
+#. settings-schema.json->chars_fan->tooltip
+msgid "The first emoji in this list is used for fan"
+msgstr "此列表中的第一个表情符号用于风扇"
+
+#. settings-schema.json->strictly_positive_fan->description
+msgid "Show only positive or zero values"
+msgstr "仅显示正值或零值"
+
+#. settings-schema.json->fan_unit->description
+msgid "Abbreviation of \\\"Rotations per minute\\\""
+msgstr "“每分钟转数”的缩写"
+
+#. settings-schema.json->journalize_fan->description
+msgid "Log critical fan speeds"
+msgstr "记录关键风扇转速"
+
+#. settings-schema.json->journalize_fan->tooltip
+msgid "When this option is checked, fan speeds below the critical limit are recorded in the system log."
+msgstr "选中此选项后，低于临界限制的风扇转速将记录在系统日志中。"
+
+#. settings-schema.json->fan_sensors->columns->title
+msgid "Min\\n(rpm)"
+msgstr "最小\\n(rpm)"
+
+#. settings-schema.json->fan_sensors->tooltip
+msgid "Double-click on a line to change 'Shown name', 'Min' or 'Formula'.\\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\\n'Min' (optional) must be valid number.\\n'Formula' (optional):\\n  Use $ as the value returned by the sensor.\\n  You can use the 4 operations (+-*/) and parentheses.\\n  Example: $*1.1+0.5"
+msgstr "双击一行以更改“显示名称”、“最小值”或“公式”。\\n要重置“显示的名称”,请复制/粘贴“传感器名称”。\\'Min'（可选）必须是有效数字。\\'Formula'（可选）：\\n使用$作为传感器返回的值。\\n您可以使用4个操作(+-*/）和括号。\\n示例:$*1.1+0.5"
+
+#. settings-schema.json->chars_volt->tooltip
+msgid "The first emoji in this list is used for voltage"
+msgstr "此列表中的第一个表情符号用于电压"
+
+#. settings-schema.json->volt_unit->description
+msgid "Voltage unit"
+msgstr "电压单位"
+
+#. settings-schema.json->volt_unit->options
+msgid "Most appropriate (V or mV)"
+msgstr "最合适的(V 或 mV)"
+
+#. settings-schema.json->volt_unit->options
+msgid "V only"
+msgstr "仅 V"
+
+#. settings-schema.json->volt_unit->options
+msgid "mV only"
+msgstr "仅 mV"
+
+#. settings-schema.json->journalize_volt->description
+msgid "Log critical voltages"
+msgstr "记录关键电压"
+
+#. settings-schema.json->journalize_volt->tooltip
+msgid "When this option is checked, voltages below the minimum limit or above the maximum limit are recorded in the system log."
+msgstr "选中此选项后，低于最小限制或高于最大限制的电压将记录在系统日志中。"
+
+#. settings-schema.json->volt_sensors->columns->title
+msgid "Min\\n(V)"
+msgstr "最小\\n(V)"
+
+#. settings-schema.json->volt_sensors->columns->title
+msgid "Max\\n(V)"
+msgstr "最大\\n(V)"
+
+#. settings-schema.json->volt_sensors->tooltip
+msgid "Double-click on a line to change 'Shown name', 'Min', 'Max' or 'Formula'.\\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\\n'Min' and 'Max' (optional) must be valid numbers.\\n'Formula' (optional):\\n  Use $ as the value returned by the sensor.\\n  You can use the 4 operations (+-*/) and parentheses.\\n  Example: $*1.1+0.5"
+msgstr "双击一行以更改“显示名称”、“最小值”、“最大值”或“公式”。\\n要重置“显示的名称”,请复制/粘贴“传感器名称”。\\'Min'和'Max'（可选）必须是有效数字。\\'Formula'（可选）：\\n使用$作为传感器返回的值。\\n您可以使用4个操作(+-*/）和括号。\\n示例:$*1.1+0.5"
+
+#. settings-schema.json->show_intrusion_name->tooltip
+#. settings-schema.json->show_custom_name->tooltip
+msgid " Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels."
+msgstr "是否在此小程序标签中显示以下列表中选择的传感器的“显示名称”。在垂直面板中没有效果。"
+
+#. settings-schema.json->chars_intrusion->tooltip
+msgid "The first emoji in this list is used for intrusion"
+msgstr "此列表中的第一个表情符号用于入侵"
+
+#. settings-schema.json->strictly_positive_intrusion->description
+msgid "Show in the panel only when an intrusion was detected"
+msgstr "仅在检测到入侵时在面板中显示"
+
+#. settings-schema.json->journalize_intrusion->description
+msgid "Log intrusions"
+msgstr "记录入侵"
+
+#. settings-schema.json->journalize_intrusion->tooltip
+msgid "When this option is checked, intrusions are recorded in the system log."
+msgstr "选中此选项后，入侵将记录在系统日志中。"
+
+#. settings-schema.json->intrusion_sensors->tooltip
+msgid "Double-click on a line to change Shown name.\\nTo reset a Shown name, copy/paste the Sensor name."
+msgstr "双击一行以更改显示的名称。\\n要重置显示的名称,请复制/粘贴传感器名称。"
+
+#. settings-schema.json->custom_disclaimer->description
+msgid "These settings are for advanced users only!\\nPlease refer to the README file."
+msgstr "这些设置仅适用于高级用户！\\n请参阅README文件。"
+
+#. settings-schema.json->custom_openREADME->description
+msgid "Open the README file"
+msgstr "打开 README 文件"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Type"
+msgstr "类型"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Name"
+msgstr "名称"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "File to\\nmonitor"
+msgstr "要\\n监视的文件"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "High\\nvalue"
+msgstr "高\\n值"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Critical\\nvalue"
+msgstr "临界\\n值"
+
+#. settings-schema.json->custom_sensors->tooltip
+msgid "Add a line by custom sensor to set the type, the name and the path of the file to monitor (/sys/class/...). "
+msgstr "按自定义传感器添加一行，以设置要监视的文件的类型、名称和路径（/sys/class/…）。"
+
+#. settings-schema.json->report->description
+#. scripts/show_sensor_values.sh:5
+msgid "Example of sensor values from this computer"
+msgstr "此计算机的传感器值示例"
+
+#. settings-schema.json->report->tooltip
+msgid "Useful for reporting an issue."
+msgstr "可用于报告问题。"
+
+#. settings-schema.json->update_display->description
+msgid "Update display"
+msgstr "更新显示"
+
+#. settings-schema.json->remove_temperatureATfevimu->description
+msgid "Remove from panel the temperature@fevimu applet"
+msgstr "从面板中删除 temperature@fevimu 小程序"
