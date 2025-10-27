@@ -754,7 +754,8 @@ class Sound150Applet extends Applet.TextIconApplet {
             clearTimeout(_to);
             if (this.context_menu_item_configDesklet)
                 this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
-            this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
+            if (this.context_menu_item_showDesklet)
+                this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
         }, 300);
     } // End of _on_context_menu_item_showDesklet_toggled
 
@@ -1120,15 +1121,15 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.volume_near_icon();
 
         let to = setTimeout(() => {
-                this._setKeybinding();
                 clearTimeout(to);
+                this._setKeybinding();
             },
             2100
         );
 
         let _to = setTimeout(() => {
-                this.startingUp = false;
                 clearTimeout(_to);
+                this.startingUp = false;
             },
             (this.actor.get_stage() != null) ? 2100 : 20000
         );

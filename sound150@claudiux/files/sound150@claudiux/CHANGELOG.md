@@ -1,3 +1,6 @@
+### v13.3.2~20251027
+  * Improves the display of album covers.
+
 ### v13.3.1~20250925
   * Minor bugfixes (importing modules).
 

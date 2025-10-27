@@ -919,7 +919,7 @@ class Player extends PopupMenu.PopupMenuSection {
         // (and move the player controls as a result).
         //~ log("actor size (wxh): "+actor.width+"x"+actor.height);
         //~ actor.set_margin_bottom(Math.max(0, Math.trunc(300 * global.ui_scale - actor.height)));
-        let mb = (this._applet.viewFullAlbumArt) ? 100 : 50;
+        let mb = (this._applet.viewFullAlbumArt) ? 110 : 55;
         actor.set_margin_bottom(mb);
 
         actor.set_margin_left(Math.max(0, Math.trunc(300 * global.ui_scale - actor.width)));
@@ -1051,9 +1051,9 @@ class Seeker extends Slider.Slider {
 
         this.actor.connect("leave-event", (event) => {
             let id = setTimeout(() => {
+                clearTimeout(id);
                 if (this.tooltip)
                     this.tooltip.hide();
-                clearTimeout(id);
             }, 100);
         });
 
@@ -1097,9 +1097,9 @@ class Seeker extends Slider.Slider {
             this.tooltip.show();
         }
         let id = setTimeout(() => {
+            clearTimeout(id);
             if (this.tooltip)
                 this.tooltip.hide();
-            clearTimeout(id);
         }, this.seekerTooltipDelay);
     }
 
