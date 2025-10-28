@@ -1,3 +1,6 @@
+### v13.3.3~20251028
+  * Avoids menu shaking.
+
 ### v13.3.2~20251027
   * Improves the display of album covers.
 

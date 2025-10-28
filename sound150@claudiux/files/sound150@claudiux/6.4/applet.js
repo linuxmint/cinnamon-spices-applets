@@ -430,6 +430,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
+        this.menu.actor.set_width(450);
 
         this.set_applet_icon_symbolic_name("audio-x-generic");
 

@@ -922,8 +922,7 @@ class Player extends PopupMenu.PopupMenuSection {
         let mb = (this._applet.viewFullAlbumArt) ? 110 : 55;
         actor.set_margin_bottom(mb);
 
-        actor.set_margin_left(Math.max(0, Math.trunc(300 * global.ui_scale - actor.width)));
-        //~ actor.set_margin_left(""+Math.max(0, Math.trunc(300 * global.ui_scale - actor.width))+"px");
+        actor.set_margin_left(Math.max(0, Math.round(300 * global.ui_scale - actor.width * global.ui_scale)));
 
         this.cover = actor;
 
