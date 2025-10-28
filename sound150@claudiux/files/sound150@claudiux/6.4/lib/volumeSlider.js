@@ -62,13 +62,13 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             this.icon = new St.Icon({
                 icon_name: this.iconName,
                 icon_type: St.IconType.SYMBOLIC,
-                icon_size: Math.trunc(16 * global.ui_scale)
+                icon_size: Math.trunc(16 * this.applet.real_ui_scale)
             });
         } else {
             this.icon = new St.Icon({
                 icon_name: this.app_icon,
                 icon_type: St.IconType.FULLCOLOR,
-                icon_size: Math.trunc(16 * global.ui_scale)
+                icon_size: Math.trunc(16 * this.applet.real_ui_scale)
             });
         }
 
