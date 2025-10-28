@@ -198,7 +198,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instanceId) {
         super(orientation, panel_height, instanceId);
 
-        Util.spawnCommandLineAsync("/usr/bin/env bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
+        Util.spawnCommandLineAsync("/usr/bin/env bash -c 'cd %s && chmod 755 *.sh *.py'".format(PATH2SCRIPTS));
         Util.spawnCommandLineAsync("/usr/bin/env bash -c '[[ -d %s ]] || mkdir -p %s'".format(ALBUMART_PICS_DIR, ALBUMART_PICS_DIR));
         Util.spawnCommandLineAsync("/usr/bin/env bash -c '[[ -d %s ]] || mkdir -p %s'".format(ICONDIR, ICONDIR));
         Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/rm_tmp_files.sh'");
@@ -208,6 +208,13 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         this.metadata = metadata;
+
+        this.real_ui_scale = 1.0;
+        Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-real-scale.py", (stdout, stderr, exitCode) => {
+            if (exitCode === 0) {
+                this.real_ui_scale = parseFloat(stdout);
+            }
+        }, {});
 
         this.players_without_seek_support = original_players_without_seek_support;
         this.players_with_seek_support = original_players_with_seek_support;
@@ -430,7 +437,6 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
-        this.menu.actor.set_width(450);
 
         this.set_applet_icon_symbolic_name("audio-x-generic");
 
@@ -1073,6 +1079,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_applet_added_to_panel() {
+        this.menu.actor.set_width(Math.round(450 * this.real_ui_scale));
         this.title_text_old = "";
         this.startingUp = true;
         if (this._playerctl)
