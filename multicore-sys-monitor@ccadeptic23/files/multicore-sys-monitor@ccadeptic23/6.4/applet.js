@@ -298,8 +298,6 @@ class MCSM extends Applet.IconApplet {
         this.graphArea.width = 1;
         this.graphArea.height = this.panelHeight * global.ui_scale;
 
-        this.graphArea.connect('repaint', (area) => this.onGraphRepaint(area));
-
         this.multiCpuGraph = new Graphs.GraphVBars(this.graphArea, this);
         this.memoryGraph = new Graphs.GraphPieChart(this.graphArea, this);
         this.swapGraph = new Graphs.GraphVBars(this.graphArea, this);
@@ -319,6 +317,7 @@ class MCSM extends Applet.IconApplet {
             this.diskUsageGraph = new Graphs.GraphPieChart(this.graphArea, this);
 
         this.actor.add_actor(this.graphArea);
+        this.graphArea.connect('repaint', (area) => this.onGraphRepaint(area));
     }
 
     set_panelHeight() {
