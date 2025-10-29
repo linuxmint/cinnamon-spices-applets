@@ -46,6 +46,8 @@ const {
     timeout_add_seconds,
     setTimeout,
     clearTimeout,
+    setInterval,
+    clearInterval,
     source_remove,
     remove_all_sources
 } = require("./lib/mainloopTools");
@@ -532,9 +534,13 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.keypressEventId = this.actor.connect("key-press-event", (...args) => this._onKeyPressEvent(...args));
         this.enterEventId = this.actor.connect("enter-event", (actor, event) => this.on_enter_event(actor, event));
         this.leaveEventId = this.actor.connect("leave-event", (actor, event) => this.on_leave_event(actor, event));
-        this.notifyHoverId = this.actor.connect('notify::hover', () => {
-            this._applet_tooltip.show();
-        });
+        //~ this.notifyHoverId = this.actor.connect('notify::hover', () => {
+            //~ if (this.actor.hover) {
+                //~ this._applet_tooltip.show()
+            //~ } else {
+                //~ //this._applet_tooltip.hide()
+            //~ }
+        //~ });
 
         this._outputApplicationsMenu = new PopupMenu.PopupSubMenuMenuItem(_("Applications"));
         this._selectOutputDeviceItem = new PopupMenu.PopupSubMenuMenuItem(_("Output device"));
@@ -668,9 +674,8 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_enter_event(actor, event) {
+        this.isActorEntered = true;
         this.on_icon_dir_changed();
-        this.setAppletTooltip();
-        this._applet_tooltip.show();
         if (this.context_menu_item_configDesklet)
             this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
         if (this.context_menu_item_showDesklet)
@@ -699,15 +704,36 @@ class Sound150Applet extends Applet.TextIconApplet {
             else
                 this._selectInputDeviceItem.menu.close();
         }
+
+        this.onEnterEventInterval = setInterval( () => {
+            this.setAppletTooltip();
+            //~ this.setAppletTooltip();
+            this._applet_tooltip.show();
+
+            return this.isActorEntered;
+            },
+            3000
+        );
     }
 
     on_leave_event(actor, event) {
+        this.isActorEntered = false;
         if (this.playerControl && this._activePlayer)
             this.setAppletTextIcon(this._players[this._activePlayer], true);
         else
             this.setAppletTextIcon();
 
-        this.set_applet_tooltip("");
+
+        if (this.onEnterEventInterval != null) {
+            clearInterval(this.onEnterEventInterval);
+            this.onEnterEventInterval = false;
+        }
+        this.isActorEntered = false;
+        //~ this._applet_tooltip.hide();
+        //~ let _to = setTimeout( () => {
+            //~ clearTimeout(_to);
+            //~ this.set_applet_tooltip("");
+        //~ }, 1000);
     }
 
     _on_context_menu_item_showDesklet_toggled() {
@@ -920,12 +946,14 @@ class Sound150Applet extends Applet.TextIconApplet {
         });
 
         Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => {
-            this.set_applet_tooltip("");
+            //~ this.set_applet_tooltip("");
             this._volumeChange(Clutter.ScrollDirection.UP);
+            this.setAppletTooltip();
         });
         Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => {
-            this.set_applet_tooltip("");
+            //~ this.set_applet_tooltip("");
             this._volumeChange(Clutter.ScrollDirection.DOWN);
+            this.setAppletTooltip();
         });
         Main.keybindingManager.addHotKey("volume-mute-" + this.instance_id, "AudioMute", () => this._toggle_out_mute());
         Main.keybindingManager.addHotKey("pause-" + this.instance_id, "AudioPlay", () => this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote());
@@ -1214,13 +1242,13 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.actor.disconnect(this.enterEventId);
         if (this.leaveEventId)
             this.actor.disconnect(this.leaveEventId);
-        if (this.notifyHoverId)
-            this.actor.disconnect(this.notifyHoverId);
+        //~ if (this.notifyHoverId)
+            //~ this.actor.disconnect(this.notifyHoverId);
         this.scrollEventId = null;
         this.keypressEventId = null;
         this.enterEventId = null;
         this.leaveEventId = null;
-        this.notifyHoverId = null;
+        //~ this.notifyHoverId = null;
 
         this.settings.setValue("volume", old_volume);
         remove_all_sources();
@@ -1344,7 +1372,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _onScrollEvent(actor, event) {
-        this._applet_tooltip.show();
+        //~ this._applet_tooltip.show();
         let _event = event;
         let modifiers = Cinnamon.get_event_state(event);
         let shiftPressed = (modifiers & Clutter.ModifierType.SHIFT_MASK);
@@ -1353,7 +1381,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._inputVolumeSection._onScrollEvent(this._inputVolumeSection.actor, _event);
             return
         }
-        this._applet_tooltip.show();
+        //~ this._applet_tooltip.show();
         let direction = event.get_scroll_direction();
         if (this.reverseScrolling) {
             if (direction == Clutter.ScrollDirection.DOWN)
@@ -1367,7 +1395,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
 
         this._volumeChange(direction);
-        this.volume_near_icon()
+        //~ this.volume_near_icon()
     }
 
     _volumeChange(direction) {
@@ -1480,8 +1508,8 @@ class Sound150Applet extends Applet.TextIconApplet {
             intervalId = setTimeout(() => {
                 clearTimeout(intervalId);
                 this.allowChangeArt = true;
-                if (this._applet_tooltip)
-                    this._applet_tooltip.hide();
+                //~ if (this._applet_tooltip)
+                    //~ this._applet_tooltip.hide();
                 if (this.playerControl && this._activePlayer)  {
                     let dir = Gio.file_new_for_path(ALBUMART_PICS_DIR);
                     let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
@@ -1497,11 +1525,13 @@ class Sound150Applet extends Applet.TextIconApplet {
                 }
             }, 1000 * this.showalbumDelay);
         } else {
-            if (this._applet_tooltip)
-                this._applet_tooltip.hide();
+
+            //~ if (this._applet_tooltip)
+                //~ this._applet_tooltip.hide();
         }
 
         this.volume_near_icon();
+        this.setAppletTooltip();
     }
 
     _onButtonPressEvent(actor, event) {
@@ -1778,9 +1808,9 @@ class Sound150Applet extends Applet.TextIconApplet {
             tooltips.push(_("Please select 'Install imagemagick' in this menu"));
         }
 
-        this.set_applet_tooltip(this._clean_str(tooltips.join("\n")), true);
-        this._applet_tooltip.preventShow = false;
+        //~ this._applet_tooltip.preventShow = false;
         this.volume_near_icon();
+        this.set_applet_tooltip(this._clean_str(tooltips.join("\n")), true);
     }
 
     _clean_str(str) {
