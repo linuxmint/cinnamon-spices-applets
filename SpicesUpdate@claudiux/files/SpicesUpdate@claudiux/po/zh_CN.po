@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-10-12 18:05+0200\n"
-"PO-Revision-Date: 2025-10-26 15:37+0800\n"
+"PO-Revision-Date: 2025-10-30 11:06+0800\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -96,7 +96,7 @@ msgstr "某些参数需要您注意：有些可能已经被修改，有些是新
 msgid ""
 "Please check your settings using the menu of the SpicesUpdate applet or the "
 "button below."
-msgstr "请使用插件更新小程序的菜单或下方的按钮检查您的设置。"
+msgstr "请使用插件更新面板小工具的菜单或下方的按钮检查您的设置。"
 
 #. 4.2/applet.js:301 4.8/applet.js:366 6.0/applet.js:470 6.0/applet_OLD.js:324
 #. 4.6/applet.js:367 6.4/applet.js:477 5.6/applet.js:364
@@ -174,7 +174,7 @@ msgstr "当有详情的时候会在这里显示。"
 #. 4.6/constants.js:140 2.8/applet.js:105 2.8/applet.js:730 6.4/applet.js:1122
 #. 6.4/constants.js:150 5.6/applet.js:954 5.6/constants.js:134
 msgid "One applet needs update:"
-msgstr "有一个小程序需要更新："
+msgstr "有一个面板小工具需要更新："
 
 #. 4.2/applet.js:809 4.8/applet.js:947 6.0/applet.js:1109 6.0/applet_OLD.js:908
 #. 3.8/applet.js:848 4.6/applet.js:946 2.8/applet.js:730 6.4/applet.js:1125
@@ -200,7 +200,7 @@ msgstr "所有的依赖项都已安装"
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
-msgstr "您似乎缺少一些这个小程序所需要的组件，导致其有些功能不可用。"
+msgstr "您似乎缺少一些这个面板小工具所需要的组件，导致其有些功能不可用。"
 
 #. 4.2/applet.js:1105 4.8/applet.js:1260 6.0/applet.js:1574
 #. 6.0/applet_OLD.js:1227 3.8/applet.js:1200 4.6/applet.js:1254
@@ -270,7 +270,7 @@ msgstr "常规"
 #. cs/4.2/modules/cs_applets.py:34 cs/3.8/modules/cs_applets.py:34
 #. cs/4.6/modules/cs_applets.py:35 cs/4.0/modules/cs_applets.py:34
 msgid "Applets"
-msgstr "小程序"
+msgstr "面板小工具"
 
 #. 4.2->settings-schema.json->Desklets->title
 #. 4.8->settings-schema.json->Desklets->title
@@ -351,7 +351,7 @@ msgstr "单击鼠标中键以打开有帮助的 Cinnamon 设置"
 #. 3.8/applet.js:137 4.6/constants.js:131 2.8/applet.js:96 6.4/constants.js:140
 #. 5.6/constants.js:125
 msgid "Applet"
-msgstr "小程序"
+msgstr "面板小工具"
 
 #. 4.2/constants.js:125 4.8/constants.js:132 6.0/constants.js:141
 #. 3.8/applet.js:138 4.6/constants.js:132 2.8/applet.js:97 6.4/constants.js:141
@@ -399,7 +399,7 @@ msgstr "有一些桌面小工具需要更新："
 #. 3.8/applet.js:150 4.6/constants.js:144 2.8/applet.js:109
 #. 6.4/constants.js:155 5.6/constants.js:138
 msgid "Some applets need update:"
-msgstr "有一些小程序需要更新："
+msgstr "有一些面板小工具需要更新："
 
 #. 4.2/constants.js:138 4.8/constants.js:145 6.0/constants.js:156
 #. 3.8/applet.js:151 4.6/constants.js:145 2.8/applet.js:110
@@ -423,7 +423,7 @@ msgstr "有新的桌面小工具可用："
 #. 3.8/applet.js:154 4.6/constants.js:148 2.8/applet.js:113
 #. 6.4/constants.js:160 5.6/constants.js:142
 msgid "New applet available:"
-msgstr "有新的小程序可用："
+msgstr "有新的面板小工具可用："
 
 #. 4.2/constants.js:142 4.8/constants.js:149 6.0/constants.js:161
 #. 3.8/applet.js:155 4.6/constants.js:149 2.8/applet.js:114
@@ -447,7 +447,7 @@ msgstr "有新的桌面小工具可用："
 #. 3.8/applet.js:158 4.6/constants.js:152 2.8/applet.js:117
 #. 6.4/constants.js:165 5.6/constants.js:146
 msgid "New applets available:"
-msgstr "有新的小程序可用："
+msgstr "有新的面板小工具可用："
 
 #. 4.2/constants.js:146 4.8/constants.js:153 6.0/constants.js:166
 #. 3.8/applet.js:159 4.6/constants.js:153 2.8/applet.js:118
@@ -464,7 +464,7 @@ msgstr "有新的主题可用："
 #. 4.2/constants.js:151 4.8/constants.js:158 6.0/constants.js:172
 #. 4.6/constants.js:158 6.4/constants.js:172 5.6/constants.js:152
 msgid "If you do not want an applet to be checked, uncheck its first box."
-msgstr "如果您不希望检查某个小程序，请取消勾选它的第一个选框。"
+msgstr "如果您不希望检查某个面板小工具，请取消勾选它的第一个选框。"
 
 #. 4.2/constants.js:152 4.8/constants.js:159 6.0/constants.js:173
 #. 4.6/constants.js:159 6.4/constants.js:173 5.6/constants.js:153
@@ -485,7 +485,7 @@ msgstr "如果您不希望检查某个主题，请取消勾选它的第一个选
 #. 4.6/constants.js:165 6.4/constants.js:180 5.6/constants.js:159
 msgid ""
 "If you want to get the latest version of an applet now, check both boxes."
-msgstr "如果您想获取某个小程序的最新版本，请将两个选框全部勾选。"
+msgstr "如果您想获取某个面板小工具的最新版本，请将两个选框全部勾选。"
 
 #. 4.2/constants.js:159 4.8/constants.js:166 6.0/constants.js:181
 #. 4.6/constants.js:166 6.4/constants.js:181 5.6/constants.js:160
@@ -545,12 +545,12 @@ msgstr "有新的动作可用："
 
 #. 6.0/constants.js:176 6.4/constants.js:176
 msgid "If you do not want a nemo action to be checked, uncheck its first box."
-msgstr "如果你不想选中nemo动作，请取消选中它的第一个框。"
+msgstr "如果你不想选中右键动作，请取消选中它的第一个框。"
 
 #. 6.0/constants.js:184 6.4/constants.js:184
 msgid ""
 "If you want to get the latest version of a nemo action now, check both boxes."
-msgstr "如果你想现在获得nemo动作的最新版本，请选中这两个框。"
+msgstr "如果你想现在获得右键动作的最新版本，请选中这两个框。"
 
 #. 6.0/constants.js:187 6.4/constants.js:187
 msgid "For private Spices, both boxes will be considered unchecked."
@@ -559,7 +559,7 @@ msgstr "对于私人插件，这两个盒子都将被视为未经检查。"
 #. 3.8/applet.js:80
 msgid ""
 "If you do not want an applet to be checked, set its first switch to FALSE."
-msgstr "如果您不希望检查某个小程序，请将第一个开关设置为 FALSE。"
+msgstr "如果您不希望检查某个面板小工具，请将第一个开关设置为 FALSE。"
 
 #. 3.8/applet.js:81
 msgid ""
@@ -580,7 +580,7 @@ msgstr "如果您不希望检查某个主题，请将第一个开关设置为 FA
 msgid ""
 "If you want to get the latest version of an applet now, set its two switches "
 "to TRUE."
-msgstr "如果您想获取某个小程序的最新版本，请将两个开关都设置为 TRUE。"
+msgstr "如果您想获取某个面板小工具的最新版本，请将两个开关都设置为 TRUE。"
 
 #. 3.8/applet.js:88
 msgid ""
@@ -939,7 +939,7 @@ msgstr "安装%s时出错。请向其开发人员报告此事件。"
 #. cs/4.2/modules/cs_applets.py:13 cs/3.8/modules/cs_applets.py:13
 #. cs/4.6/modules/cs_applets.py:14 cs/4.0/modules/cs_applets.py:13
 msgid "Manage Cinnamon applets"
-msgstr "管理Cinnamon小程序"
+msgstr "管理Cinnamon面板小工具"
 
 #. cs/4.4/modules/cs_applets.py:33 cs/6.0_FUTURE/modules/cs_applets.py:33
 #. cs/4.2/modules/cs_applets.py:32 cs/3.8/modules/cs_applets.py:32
@@ -952,7 +952,7 @@ msgstr "您可以通过上下文菜单在面板编辑模式下删除特定实例
 #. cs/4.2/modules/cs_applets.py:34 cs/3.8/modules/cs_applets.py:34
 #. cs/4.6/modules/cs_applets.py:35 cs/4.0/modules/cs_applets.py:34
 msgid "applet"
-msgstr "小程序"
+msgstr "面板小工具"
 
 #. cs/4.4/modules/cs_applets.py:47 cs/4.4/modules/cs_desklets.py:45
 #. cs/4.4/modules/cs_extensions.py:45 cs/6.0_FUTURE/modules/cs_actions.py:48
@@ -986,7 +986,7 @@ msgstr "下载"
 #. cs/4.2/modules/cs_applets.py:54 cs/3.8/modules/cs_applets.py:54
 #. cs/4.6/modules/cs_applets.py:55 cs/4.0/modules/cs_applets.py:54
 msgid "Installed applets"
-msgstr "已安装的小程序"
+msgstr "已安装的面板小工具"
 
 #. cs/4.4/modules/cs_applets.py:56 cs/4.4/modules/cs_desklets.py:76
 #. cs/6.0_FUTURE/modules/cs_applets.py:56
@@ -1042,7 +1042,7 @@ msgstr "管理您的Cinnamon桌面小工具"
 msgid ""
 "You can remove specific instances from the desktop via that desklet's "
 "context menu"
-msgstr "您可以通过桌面的上下文菜单从桌面删除特定实例"
+msgstr "您可以通过桌面小工具的上下文菜单从桌面删除特定实例"
 
 #. cs/4.4/modules/cs_desklets.py:31 cs/6.0_FUTURE/modules/cs_desklets.py:31
 #. cs/4.2/modules/cs_desklets.py:30 cs/3.8/modules/cs_desklets.py:30
@@ -1090,7 +1090,7 @@ msgstr "桌面小工具"
 #. cs/4.2/modules/cs_desklets.py:59 cs/3.8/modules/cs_desklets.py:59
 #. cs/4.6/modules/cs_desklets.py:60 cs/4.0/modules/cs_desklets.py:59
 msgid "Note: Some desklets require the border/header to be always present"
-msgstr "注意：某些桌面要求边框/标题始终存在"
+msgstr "注意：某些桌面小工具要求边框/标题始终存在"
 
 #. cs/4.4/modules/cs_desklets.py:64 cs/6.0_FUTURE/modules/cs_desklets.py:64
 #. cs/4.2/modules/cs_desklets.py:63 cs/3.8/modules/cs_desklets.py:63
@@ -1102,13 +1102,13 @@ msgstr "此类要求会覆盖此处选择的设置"
 #. cs/4.2/modules/cs_desklets.py:68 cs/3.8/modules/cs_desklets.py:68
 #. cs/4.6/modules/cs_desklets.py:69 cs/4.0/modules/cs_desklets.py:68
 msgid "Snap desklets to grid"
-msgstr "将桌面与网格对齐"
+msgstr "将桌面小工具与网格对齐"
 
 #. cs/4.4/modules/cs_desklets.py:70 cs/6.0_FUTURE/modules/cs_desklets.py:70
 #. cs/4.2/modules/cs_desklets.py:69 cs/3.8/modules/cs_desklets.py:69
 #. cs/4.6/modules/cs_desklets.py:70 cs/4.0/modules/cs_desklets.py:69
 msgid "Width of desklet snap grid"
-msgstr "桌面捕捉网格的宽度"
+msgstr "桌面小工具捕捉网格的宽度"
 
 #. cs/4.4/modules/cs_desklets.py:75 cs/6.0_FUTURE/modules/cs_desklets.py:75
 #. cs/4.2/modules/cs_desklets.py:74 cs/3.8/modules/cs_desklets.py:74
@@ -1300,7 +1300,7 @@ msgstr "尝试访问服务器时出错。请稍后再试。"
 msgid ""
 "Something went wrong with the spices download. Please try refreshing the "
 "list again."
-msgstr "spices下载出现了问题。请再次尝试刷新列表。"
+msgstr "插件下载出现了问题。请再次尝试刷新列表。"
 
 #. cs/6.0_FUTURE/bin/Spices.py:601
 msgid "Refreshing the cache"
@@ -1334,15 +1334,15 @@ msgstr ""
 
 #. cs/6.0_FUTURE/modules/cs_actions.py:11
 msgid "Manage your actions"
-msgstr "管理您的操作"
+msgstr "管理您的动作"
 
 #. cs/6.0_FUTURE/modules/cs_actions.py:33
 msgid "action"
-msgstr "行动"
+msgstr "动作"
 
 #. cs/6.0_FUTURE/modules/cs_actions.py:59
 msgid "Installed actions"
-msgstr "已安装的操作"
+msgstr "已安装的动作"
 
 #. 4.8->settings-schema.json->section_general4->title
 #. 6.0->settings-schema.json->section_general4->title
@@ -1361,11 +1361,11 @@ msgstr "显示器，屏幕，监视器，布局，分辨率，双，lcd"
 
 #. cs/4.2/bin/SUExtensionCore.py:247
 msgid "This is a system applet. It cannot be removed."
-msgstr "这是一个系统小程序。它不能被删除。"
+msgstr "这是一个系统面板小工具。它不能被删除。"
 
 #. cs/4.2/bin/SUExtensionCore.py:249
 msgid "This is a system desklet. It cannot be removed."
-msgstr "这是一个系统桌面。它不能被删除。"
+msgstr "这是一个系统桌面小工具。它不能被删除。"
 
 #. cs/4.2/bin/SUExtensionCore.py:251
 msgid "This is a system extension. It cannot be removed."
@@ -1373,7 +1373,7 @@ msgstr "这是一个系统扩展。它不能被删除。"
 
 #. cs/4.2/bin/SUExtensionCore.py:302
 msgid "This applet is currently enabled"
-msgstr "这个小程序当前已启用"
+msgstr "这个面板小工具当前已启用"
 
 #. cs/4.2/bin/SUExtensionCore.py:304
 msgid "This desklet is currently enabled"
@@ -1389,8 +1389,8 @@ msgid ""
 "crash or freeze. If you are experiencing crashes or freezing, please try "
 "removing it."
 msgstr ""
-"此小程序包含可能导致Cinnamon崩溃或冻结的函数调用。如果您遇到崩溃或冻结，请尝"
-"试将其删除。"
+"此面板小工具包含可能导致Cinnamon崩溃或冻结的函数调用。如果您遇到崩溃或冻结，"
+"请尝试将其删除。"
 
 #. cs/4.2/bin/SUExtensionCore.py:347
 msgid ""
@@ -1398,8 +1398,8 @@ msgid ""
 "to crash or freeze. If you are experiencing crashes or freezing, please try "
 "removing it."
 msgstr ""
-"此桌面包含可能导致Cinnamon崩溃或冻结的函数调用。如果您遇到崩溃或冻结，请尝试"
-"将其删除。"
+"此桌面小工具包含可能导致Cinnamon崩溃或冻结的函数调用。如果您遇到崩溃或冻结，"
+"请尝试将其删除。"
 
 #. cs/4.2/bin/SUExtensionCore.py:349
 msgid ""
@@ -1438,13 +1438,13 @@ msgstr "是否确实要完全删除 %s?"
 msgid ""
 "This will restore the default set of enabled applets. Are you sure you want "
 "to do this?"
-msgstr "这将恢复默认的已启用小程序集。你确定要这样做吗？"
+msgstr "这将恢复默认的已启用面板小工具。你确定要这样做吗？"
 
 #. cs/4.2/bin/SUExtensionCore.py:546
 msgid ""
 "This will restore the default set of enabled desklets. Are you sure you want "
 "to do this?"
-msgstr "这将恢复默认的已启用桌面集。你确定要这样做吗？"
+msgstr "这将恢复默认的已启用桌面小工具。你确定要这样做吗？"
 
 #. cs/4.2/bin/SUExtensionCore.py:548
 msgid ""
@@ -1517,8 +1517,8 @@ msgid ""
 "Warns you when installed Spices (actions, applets, desklets, extensions, "
 "themes) require an update or new Spices are available."
 msgstr ""
-"当已安装的插件 (小程序、桌面小工具、扩展、主题) 需要更新或有新的插件可用时提"
-"醒您。"
+"当已安装的插件 (面板小工具、桌面小工具、扩展、主题) 需要更新或有新的插件可用"
+"时提醒您。"
 
 #. 4.2->settings-schema.json->section_applets1->title
 #. 4.2->settings-schema.json->section_desklets1->title
@@ -1629,7 +1629,7 @@ msgstr "显示类型"
 #. 6.4->settings-schema.json->check_applets->description
 #. 5.6->settings-schema.json->check_applets->description
 msgid "Check regularly whether your applets are up to date"
-msgstr "定期检查您的小程序是否为最新版本"
+msgstr "定期检查您的面板小工具是否为最新版本"
 
 #. 4.2->settings-schema.json->check_applets->tooltip
 #. 4.8->settings-schema.json->check_applets->tooltip
@@ -1640,7 +1640,7 @@ msgstr "定期检查您的小程序是否为最新版本"
 #. 6.4->settings-schema.json->check_applets->tooltip
 #. 5.6->settings-schema.json->check_applets->tooltip
 msgid "If applets updates do not concern you, uncheck this box."
-msgstr "如果您不关心小程序更新，请取消勾选此项。"
+msgstr "如果您不关心面板小工具更新，请取消勾选此项。"
 
 #. 4.2->settings-schema.json->check_new_applets->description
 #. 4.8->settings-schema.json->check_new_applets->description
@@ -1651,7 +1651,7 @@ msgstr "如果您不关心小程序更新，请取消勾选此项。"
 #. 6.4->settings-schema.json->check_new_applets->description
 #. 5.6->settings-schema.json->check_new_applets->description
 msgid "Check regularly whether new applets are available"
-msgstr "定期检查是否有新的小程序可用"
+msgstr "定期检查是否有新的面板小工具可用"
 
 #. 4.2->settings-schema.json->check_new_applets->tooltip
 #. 4.8->settings-schema.json->check_new_applets->tooltip
@@ -1662,7 +1662,7 @@ msgstr "定期检查是否有新的小程序可用"
 #. 6.4->settings-schema.json->check_new_applets->tooltip
 #. 5.6->settings-schema.json->check_new_applets->tooltip
 msgid "If new applets do not concern you, uncheck this box."
-msgstr "如果您不关心新的小程序，请取消勾选此项。"
+msgstr "如果您不关心新的面板小工具，请取消勾选此项。"
 
 #. 4.2->settings-schema.json->unprotected_applets->description
 #. 4.8->settings-schema.json->unprotected_applets->description
@@ -1672,7 +1672,7 @@ msgstr "如果您不关心新的小程序，请取消勾选此项。"
 #. 6.4->settings-schema.json->unprotected_applets->description
 #. 5.6->settings-schema.json->unprotected_applets->description
 msgid "Update these applets:"
-msgstr "更新这些小程序："
+msgstr "更新这些面板小工具："
 
 #. 4.2->settings-schema.json->unprotected_applets->columns->title
 #. 4.8->settings-schema.json->unprotected_applets->columns->title
@@ -1682,7 +1682,7 @@ msgstr "更新这些小程序："
 #. 6.4->settings-schema.json->unprotected_applets->columns->title
 #. 5.6->settings-schema.json->unprotected_applets->columns->title
 msgid "Your Applets"
-msgstr "您的小程序"
+msgstr "您的面板小工具"
 
 #. 4.2->settings-schema.json->unprotected_applets->columns->title
 #. 4.2->settings-schema.json->unprotected_desklets->columns->title
@@ -1759,7 +1759,7 @@ msgstr "获取最新版本"
 #. 6.4->settings-schema.json->btn_cs_applets->description
 #. 5.6->settings-schema.json->btn_cs_applets->description
 msgid "Open Cinnamon Settings to manage all the Applets"
-msgstr "打开 Cinnamon 设置以管理所有小程序"
+msgstr "打开 Cinnamon 设置以管理所有面板小工具"
 
 #. 4.2->settings-schema.json->check_desklets->description
 #. 4.8->settings-schema.json->check_desklets->description
@@ -2031,7 +2031,7 @@ msgstr "启动后一分钟进行第一次检查"
 msgid ""
 "By checking this box, the first check will take place one minute after "
 "starting this applet."
-msgstr "勾选此项，第一次检查将在启动此小程序一分钟后进行。"
+msgstr "勾选此项，第一次检查将在启动此面板小工具一分钟后进行。"
 
 #. 4.2->settings-schema.json->general_warning->description
 #. 4.8->settings-schema.json->general_warning->description
@@ -2056,7 +2056,8 @@ msgid ""
 "By checking this box, you allow this applet to modify its icon to warn you "
 "when at least one of the Spices requires an update."
 msgstr ""
-"勾选此项，将允许此小程序修改其图标，以便在至少有一个插件需要更新时通知您。"
+"勾选此项，将允许此面板小工具修改其图标，以便在至少有一个插件需要更新时通知"
+"您。"
 
 #. 4.2->settings-schema.json->events_color->description
 #. 4.8->settings-schema.json->events_color->description
@@ -2104,7 +2105,7 @@ msgstr "显示有关插件更新的通知信息"
 msgid ""
 "By checking this box, you allow this applet to display messages about Spices "
 "updates in notifications viewer."
-msgstr "勾选此项，将允许此小程序在通知中显示有关插件更新的信息。"
+msgstr "勾选此项，将允许此面板小工具在通知中显示有关插件更新的信息。"
 
 #. 4.2->settings-schema.json->general_details_requested->description
 #. 4.8->settings-schema.json->general_details_requested->description
@@ -2151,7 +2152,7 @@ msgstr "精简 (仅文本)"
 #. 6.4->settings-schema.json->general_type_notif->options
 #. 5.6->settings-schema.json->general_type_notif->options
 msgid "With action buttons"
-msgstr "带操作按钮"
+msgstr "带动作按钮"
 
 #. 4.2->settings-schema.json->general_type_notif->options
 #. 4.8->settings-schema.json->general_type_notif->options
@@ -2160,7 +2161,7 @@ msgstr "带操作按钮"
 #. 6.4->settings-schema.json->general_type_notif->options
 #. 5.6->settings-schema.json->general_type_notif->options
 msgid "With action buttons as icons"
-msgstr "带图标形式的操作按钮"
+msgstr "带图标形式的动作按钮"
 
 #. 4.2->settings-schema.json->general_type_notif->description
 #. 4.8->settings-schema.json->general_type_notif->description
@@ -2194,7 +2195,7 @@ msgid ""
 msgstr ""
 "精简：\n"
 "\t显示简短的通知。\n"
-"带操作按钮：\n"
+"带动作按钮：\n"
 "\t通知还包含拥有以下功能的按钮：\n"
 "\t\t最左边的按钮打开系统设置中相关插件类型的下载选项卡，并按日期排序 (最近的"
 "在前)，所以您可以更新您想要的插件；\n"
@@ -2289,8 +2290,8 @@ msgid ""
 "By checking this box, as long as nothing is to report the icon of Spices "
 "Update does not appear on the panel."
 msgstr ""
-"勾选此项，只要没有什么需要报告的，面板上就不会出现 Spices Update 小程序的图"
-"标。"
+"勾选此项，只要没有什么需要报告的，面板上就不会出现 Spices Update 面板小工具的"
+"图标。"
 
 #. 4.8->settings-schema.json->tooltip_max_width_screen_percentage->units
 #. 6.0->settings-schema.json->tooltip_max_width_screen_percentage->units
@@ -2334,37 +2335,37 @@ msgstr "勾选所有第一个框，然后刷新"
 #. 6.0->settings-schema.json->check_actions->description
 #. 6.4->settings-schema.json->check_actions->description
 msgid "Check regularly whether your nemo actions are up to date"
-msgstr "定期检查您的nemo操作是否是最新的"
+msgstr "定期检查您的右键动作是否是最新的"
 
 #. 6.0->settings-schema.json->check_actions->tooltip
 #. 6.4->settings-schema.json->check_actions->tooltip
 msgid "If nemo actions updates do not concern you, uncheck this box."
-msgstr "如果nemo操作更新与您无关，请取消选中此框。"
+msgstr "如果右键动作更新与您无关，请取消选中此框。"
 
 #. 6.0->settings-schema.json->check_new_actions->description
 #. 6.4->settings-schema.json->check_new_actions->description
 msgid "Check regularly whether new nemo actions are available"
-msgstr "定期检查新的nemo操作是否可用"
+msgstr "定期检查新的右键动作是否可用"
 
 #. 6.0->settings-schema.json->check_new_actions->tooltip
 #. 6.4->settings-schema.json->check_new_actions->tooltip
 msgid "If new nemo actions do not concern you, uncheck this box."
-msgstr "如果新的nemo操作与您无关，请取消选中此框。"
+msgstr "如果新的右键动作与您无关，请取消选中此框。"
 
 #. 6.0->settings-schema.json->unprotected_actions->description
 #. 6.4->settings-schema.json->unprotected_actions->description
 msgid "Update these nemo actions:"
-msgstr "更新这些nemo动作："
+msgstr "更新这些右键动作："
 
 #. 6.0->settings-schema.json->unprotected_actions->columns->title
 #. 6.4->settings-schema.json->unprotected_actions->columns->title
 msgid "Your nemo actions"
-msgstr "你的nemo动作"
+msgstr "你的右键动作"
 
 #. 6.0->settings-schema.json->btn_cs_actions->description
 #. 6.4->settings-schema.json->btn_cs_actions->description
 msgid "Open Cinnamon Settings to manage all the nemo actions"
-msgstr "打开Cinnamon设置来管理所有nemo动作"
+msgstr "打开Cinnamon设置来管理所有右键动作"
 
 #. 6.0->settings-schema.json->processing_color->description
 #. 6.4->settings-schema.json->processing_color->description
@@ -2381,7 +2382,7 @@ msgstr "两次检查之间的时间间隔 (小时)"
 msgid ""
 "Please note that the first check will take place one minute after starting "
 "this applet."
-msgstr "请注意，第一次检查将在启动该小程序的一分钟后进行。"
+msgstr "请注意，第一次检查将在启动该面板小工具的一分钟后进行。"
 
 #. 3.8->settings-schema.json->general_force_notifications->description
 #. 2.8->settings-schema.json->general_force_notifications->description
