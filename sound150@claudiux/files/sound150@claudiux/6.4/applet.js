@@ -399,6 +399,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("audio-prev", "audio_prev", () => {
             this._setKeybinding()
         });
+        this.settings.bind("mic-mute", "mic_mute", () => {
+            this._setKeybinding()
+        });
 
         this.settings.bind("VOLUME_ADJUSTMENT_STEP", "VOLUME_ADJUSTMENT_STEP");
 
@@ -1002,6 +1005,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         Main.keybindingManager.removeHotKey("audio-next");
         Main.keybindingManager.removeHotKey("audio-prev");
+        Main.keybindingManager.removeHotKey("mic-mute");
 
         if (this.audio_stop.length > 2)
             Main.keybindingManager.addHotKey("audio-stop", this.audio_stop,
@@ -1041,6 +1045,10 @@ class Sound150Applet extends Applet.TextIconApplet {
                 } else {
                     this._players[this._activePlayer]._mediaServerPlayer.PreviousRemote()
                 }
+            });
+        if (this.mic_mute.length > 2)
+            Main.keybindingManager.addHotKey("mic-mute", this.mic_mute, () => {
+                this._toggle_in_mute()
             });
     } // End of _setKeybinding
 
@@ -2094,7 +2102,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _changeActivePlayer(player) {
-        if (this._activePlayer)
+        if (this._activePlayer && this._players[this._activePlayer])
             this.menu.box.remove_actor(this._players[this._activePlayer].actor);
 
         this._activePlayer = player;
@@ -2524,6 +2532,9 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         const audio_prev = s.get_strv("previous");
         this.audio_prev = audio_prev.join("::");
+
+        const mic_mute = s.get_strv("mic-mute");
+        this.mic_mute = mic_mute.join("::");
     }
 
     install_OSD150() {

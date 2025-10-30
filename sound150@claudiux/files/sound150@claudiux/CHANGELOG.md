@@ -1,3 +1,6 @@
+### v13.5.0~20251030
+  * Adds the 'mic-mute' shortcut. See the FAQ in README to implement it.
+
 ### v13.4.1~20251030
   * Fixes a bug when the current player is undefined.
 
