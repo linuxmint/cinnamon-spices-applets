@@ -193,7 +193,8 @@
         "volume-up",
         "volume-down",
         "audio-next",
-        "audio-prev"
+        "audio-prev",
+        "mic-mute"
       ]
     },
     "sectionCommands": {
@@ -607,6 +608,12 @@
     "dependency": "redefine-volume-keybindings",
     "default": "::",
     "description": "Previous Track"
+  },
+  "mic-mute": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Microphone Mute"
   },
   "custom-commands-label": {
     "type": "label",
