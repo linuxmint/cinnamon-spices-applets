@@ -1,3 +1,17 @@
+### v13.4.0~20251029
+  * Improves tooltip duration.
+  * Fixes [#7922](https://github.com/linuxmint/cinnamon-spices-applets/issues/7922)
+
+### v13.3.4~20251028
+  * Gets real ui_scale, when scaling is set to other values than 100% or 200%.
+  * Uses "font-family: 'Digital Numbers',monospace" to display counters in menu.
+
+### v13.3.3~20251028
+  * Avoids menu shaking.
+
+### v13.3.2~20251027
+  * Improves the display of album covers.
+
 ### v13.3.1~20250925
   * Minor bugfixes (importing modules).
 

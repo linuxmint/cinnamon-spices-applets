@@ -244,7 +244,7 @@ class Player extends PopupMenu.PopupMenuSection {
         // Cover art
         this.cover = new St.Icon({
             icon_name: "media-optical",
-            icon_size: Math.trunc(300 * global.ui_scale),
+            icon_size: Math.trunc(300 * this._applet.real_ui_scale),
             //icon_type: St.IconType.FULLCOLOR
             icon_type: St.IconType.SYMBOLIC
         });
@@ -819,7 +819,7 @@ class Player extends PopupMenu.PopupMenuSection {
                 style_class: "sound-player-generic-coverart",
                 important: true,
                 icon_name: "media-optical",
-                icon_size: Math.trunc(300 * global.ui_scale),
+                icon_size: Math.trunc(300 * this._applet.real_ui_scale),
                 //icon_type: St.IconType.FULLCOLOR
                 icon_type: St.IconType.SYMBOLIC
             });
@@ -849,8 +849,8 @@ class Player extends PopupMenu.PopupMenuSection {
             this._applet.setAppletIcon(this._applet.player, cover_path); // Added
             this._cover_load_handle = St.TextureCache.get_default().load_image_from_file_async(
                 cover_path,
-                Math.trunc(300 * global.ui_scale),
-                Math.trunc(300 * global.ui_scale),
+                Math.trunc(300 * this._applet.real_ui_scale),
+                Math.trunc(300 * this._applet.real_ui_scale),
                 (cache, handle, actor) => {
                     this._on_cover_loaded(cache, handle, actor)
                 }
@@ -862,8 +862,8 @@ class Player extends PopupMenu.PopupMenuSection {
             try {
                 let pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
                     this._cover_path,
-                    Math.trunc(300 * global.ui_scale),
-                    Math.trunc(300 * global.ui_scale)
+                    Math.trunc(300 * this._applet.real_ui_scale),
+                    Math.trunc(300 * this._applet.real_ui_scale)
                 );
                 if (pixbuf) {
                     let image = new Clutter.Image();
@@ -879,7 +879,7 @@ class Player extends PopupMenu.PopupMenuSection {
                 if (this._applet.keepAlbumAspectRatio) {
                     //TODO: Replace Texture by Image.
                     this.cover = new Clutter.Texture({
-                        width: Math.trunc(300 * global.ui_scale),
+                        width: Math.trunc(300 * this._applet.real_ui_scale),
                         keep_aspect_ratio: true,
                         //filter_quality: 2,
                         filter_quality: Clutter.Texture.QUALITY_HIGH,
@@ -888,8 +888,8 @@ class Player extends PopupMenu.PopupMenuSection {
                 } else {
                     //TODO: Replace Texture by Image.
                     this.cover = new Clutter.Texture({
-                        width: Math.trunc(300 * global.ui_scale),
-                        height: Math.trunc(300 * global.ui_scale),
+                        width: Math.trunc(300 * this._applet.real_ui_scale),
+                        height: Math.trunc(300 * this._applet.real_ui_scale),
                         keep_aspect_ratio: false,
                         filter_quality: Clutter.Texture.QUALITY_HIGH,
                         filename: cover_path
@@ -919,11 +919,33 @@ class Player extends PopupMenu.PopupMenuSection {
         // (and move the player controls as a result).
         //~ log("actor size (wxh): "+actor.width+"x"+actor.height);
         //~ actor.set_margin_bottom(Math.max(0, Math.trunc(300 * global.ui_scale - actor.height)));
-        let mb = (this._applet.viewFullAlbumArt) ? 100 : 50;
+        let mb = 55;
+        if (this._applet.viewFullAlbumArt) {
+            switch (this._applet.real_ui_scale) {
+                case 0.75:
+                    mb = 100;
+                    break;
+                case 1.0:
+                    mb = 110;
+                    break;
+                case 1.25:
+                    mb = 140;
+                    break;
+                case 1.5:
+                    mb = 165;
+                    break;
+                case 1.75:
+                    mb = 195;
+                    break;
+                default:
+                    mb = 220;
+            }
+        }
+        //~ let mb = (this._applet.viewFullAlbumArt) ? 110 : 55;
+        //~ mb = Math.round(mb * this._applet.real_ui_scale);
         actor.set_margin_bottom(mb);
 
-        actor.set_margin_left(Math.max(0, Math.trunc(300 * global.ui_scale - actor.width)));
-        //~ actor.set_margin_left(""+Math.max(0, Math.trunc(300 * global.ui_scale - actor.width))+"px");
+        actor.set_margin_left(Math.max(0, Math.round(300 * this._applet.real_ui_scale - actor.width)));
 
         this.cover = actor;
 
@@ -1004,7 +1026,8 @@ class Seeker extends Slider.Slider {
 
 
         this.posLabel = new St.Label({
-            text: " 00:00 "
+            text: " 00:00 ",
+            style: "font-family: 'Digital Numbers',monospace; "
         });
         this.posLabel.x_align = St.Align.START;
         //~ logDebug("this.posLabel: "+this.posLabel);
@@ -1012,7 +1035,8 @@ class Seeker extends Slider.Slider {
         //~ this.posLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
         //~ this.posLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
         this.durLabel = new St.Label({
-            text: " 00:00 "
+            text: " 00:00 ",
+            style: "font-family: 'Digital Numbers',monospace; "
         });
         this.durLabel.x_align = St.Align.END;
         //~ logDebug("this.durLabel: "+this.durLabel);
@@ -1051,9 +1075,9 @@ class Seeker extends Slider.Slider {
 
         this.actor.connect("leave-event", (event) => {
             let id = setTimeout(() => {
+                clearTimeout(id);
                 if (this.tooltip)
                     this.tooltip.hide();
-                clearTimeout(id);
             }, 100);
         });
 
@@ -1097,9 +1121,9 @@ class Seeker extends Slider.Slider {
             this.tooltip.show();
         }
         let id = setTimeout(() => {
+            clearTimeout(id);
             if (this.tooltip)
                 this.tooltip.hide();
-            clearTimeout(id);
         }, this.seekerTooltipDelay);
     }
 
