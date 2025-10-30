@@ -1,3 +1,6 @@
+### v13.4.1~20251030
+  * Fixes a bug when the current player is undefined.
+
 ### v13.4.0~20251029
   * Improves tooltip duration.
   * Fixes [#7922](https://github.com/linuxmint/cinnamon-spices-applets/issues/7922)

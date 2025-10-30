@@ -1562,7 +1562,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                     this._toggle_out_mute();
                 else if (this.middleClickAction === "in_mute")
                     this._toggle_in_mute();
-                else if (this.middleClickAction === "player")
+                else if (this.middleClickAction === "player" && this._players[this._activePlayer])
                     this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote();
             }
         } else if (buttonId === 8) { // previous and next track on mouse buttons 4 and 5 (8 and 9 by X11 numbering)
