@@ -4670,7 +4670,7 @@ class Workspace {
          appButton.updateView();
       }
     }
-    this.actor.queue_relayout();
+    try{this.actor.queue_relayout();} catch(e) {}
   }
 
   _updateFocus() {
