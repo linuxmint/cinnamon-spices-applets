@@ -1475,7 +1475,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           this.percentage = value;
           if (this.context_menu_item_slider != null) {
             this.context_menu_item_slider.slider._value = value / 100;
-            this.context_menu_item_slider.slider._slider.queue_repaint();
+            try { this.context_menu_item_slider.slider._slider.queue_repaint() } catch(e) {};
             this.context_menu_item_slider.slider.emit('value-changed', value / 100);
           }
           if (value >= vol_end) {
@@ -1592,7 +1592,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       let value = this.percentage / 100;
       if (this.context_menu_item_slider != null) {
         this.context_menu_item_slider.slider._value = value;
-        this.context_menu_item_slider.slider._slider.queue_repaint();
+        try { this.context_menu_item_slider.slider._slider.queue_repaint() } catch(e) {};
         this.context_menu_item_slider.slider.emit('value-changed', value);
       }
     });
@@ -1603,7 +1603,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       let value = this.percentage / 100;
       if (this.context_menu_item_slider != null) {
         this.context_menu_item_slider.slider._value = value;
-        this.context_menu_item_slider.slider._slider.queue_repaint();
+        try { this.context_menu_item_slider.slider._slider.queue_repaint() } catch(e) {};
         this.context_menu_item_slider.slider.emit('value-changed', value);
       }
     });
@@ -1620,7 +1620,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         else value = (this.old_percentage) ? this.old_percentage / 100 : volume_at_startup / 100;
 
         this.context_menu_item_slider.slider._value = value;
-        this.context_menu_item_slider.slider._slider.queue_repaint();
+        try { this.context_menu_item_slider.slider._slider.queue_repaint() } catch(e) {};
         this.context_menu_item_slider.slider.emit('value-changed', value);
       }
     });
@@ -4042,7 +4042,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       let value = volume_at_startup / 100;
       if (this.context_menu_item_slider != null) {
         this.context_menu_item_slider.slider._value = value;
-        this.context_menu_item_slider.slider._slider.queue_repaint();
+        try { this.context_menu_item_slider.slider._slider.queue_repaint() } catch(e) {};
         this.context_menu_item_slider.slider.emit('value-changed', value);
       }
     }

@@ -1,3 +1,6 @@
+### v13.5.2~20251031
+  * Avoids 'paint' errors.
+
 ### v13.5.1~20251031
   * Avoids 'destroy' errors.
 
