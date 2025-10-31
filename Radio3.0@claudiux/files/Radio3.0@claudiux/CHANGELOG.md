@@ -1,3 +1,6 @@
+### v3.8.4~20251031
+  * Avoids paint() errors.
+
 ### v3.8.3~20251023
   * Fixes error opening menu.
   * Fixes [#7907](https://github.com/linuxmint/cinnamon-spices-applets/issues/7907).

@@ -222,7 +222,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         }
 
         if (this._slider)
-            this._slider.queue_repaint();
+            try { this._slider.queue_repaint() } catch(e) {};
         if (this.tooltip)
             this.tooltip.show();
         this.emit("value-changed", this._value);
@@ -242,7 +242,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             } else {
                 this._value = Math.min(1, this._value + delta / this.applet._volumeMax * this.applet._volumeNorm);
             }
-            this._slider.queue_repaint();
+            try { this._slider.queue_repaint() } catch(e) {};
             this.emit("value-changed", this._value);
             return true;
         }
