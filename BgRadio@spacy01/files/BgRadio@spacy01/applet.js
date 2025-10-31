@@ -56,7 +56,7 @@ MyApplet.prototype = {
         var radiostation2 = _("bTV Radio");
         this.RadioItem.menu.addAction(radiostation2, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("mpv http://live.btvradio.bg/btv-radio.mp3 &");
+            Util.spawnCommandLine("mpv https://cdn.bweb.bg/radio/btv-radio.mp3 &");
             Main.notify(_("Listening %s").format(radiostation2));
         });
 
@@ -72,7 +72,7 @@ MyApplet.prototype = {
         var radiostation4 = _("Classic FM");
         this.RadioItem.menu.addAction(radiostation4, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("mpv http://live.btvradio.bg/classic-fm.mp3");
+            Util.spawnCommandLine("mpv 	https://cdn.bweb.bg/radio/classic-fm.mp3");
             Main.notify(_("Listening %s").format(radiostation4));
         });
 
@@ -80,7 +80,7 @@ MyApplet.prototype = {
         var radiostation5 = _("Darik");
         this.RadioItem.menu.addAction(radiostation5, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("mpv http://darikradio.by.host.bg:8000/S2-128");
+            Util.spawnCommandLine("mpv --vid=no https://euc13.playlist.ttvnw.net/v1/playlist/CroGbwFwTBfCY0guxc80vtInr5nykiYOZWZ6_nBg6ir45NrXpX0eja3EcdO4eOHktCS_JMS03VoOG4yFGWl7fNtVtQAmoO8zqBfvn9xaTHUJqXNLw75qIZ0VE47kqtb_vAm5rgWZc3pjIRGJ6aiPPZv-c83ThvQs_sh8k8wOar4sWA_Wh8sCUhcFPB-NXJAXNQg53_ya2P0GXUXxid4WGCh_3AwF72TAjakCIsqm94XzKvpGe5os4JrPXTmWMF1P_bP0SWTRU7ebtZEyOUTXCczPci93XjLd9wxLmzVAx0E0ZGpJSWcuL4JBkH0vgk3iYikd7wJUjtVOrPliuTTZ__I8V9T7B-4K86HXx7-Ad0TK4KvvLOiPqfelhaObyckdB-EvDddRqFBrrjLWlKMRqZDgspLIRzFxDd4hGLWc57oeWg9HaFhd05rY-udzAfu_K9smk8OkjPkaZvWrHPI_ypvxr1MOddT5G-OOceFUMc4fe5fe8jIXHx0GQmyXz2BoXVlfn3MwSvfgQgsJxKPHlpazUK7gn1uKv059RYN4RqujlqqOVOSJqeEhgnGgYW5kkAsJm3bcYuVwPtCJeMJhabshh5LIBLNMVTGnTtycL_45D9nqRUE_jEkFu-UkV0f8w6tEBg8sP01rXG-60JzVf6VPrTjOPnmNmjtzARTq99AGRN0_yYy7GcrwAysZxDUOJfA_fvYcfjGOdX-dqkOQYRbOVAU4qqmvA4IwqXlrtL2PNsDZyvKnQjdZQCrtqoB9-9A8d_gi5ITSyjWNBgxbkC3gTkxbsic9aZpUdvLFBb5ygEm8Pxos0XwOnTUkIrLnV9sFBI6_MudTq5-fLfbY-LpWo3Jz7b72YToszHQu0YHKMkuRglNTWFbrMq0iWT1ZGhe7hCOV8mEKgbZaHfeJu53PVhJ2WljTkDNXIeisHwIAnnDGz7AsHx4ieCjVUfqoSMnNxOuXKQOsLCT5kEdLaYjulxyvXQ5Y7pT2q_U9qXFAjZW4MxWjvd-Xd9IQYL6CUUjK7urYM-G6ODH_Neb4M_1sNmSEUoojD6GR-yicfdyjingfz4VwTZAjsozGZbwt-LFOfZU34ej6DuQVVxoMHqhldHOfOluoQWeoIAEqCWV1LXdlc3QtMjDMDQ.m3u8");
             Main.notify(_("Listening %s").format(radiostation5));
         });
 
@@ -88,7 +88,7 @@ MyApplet.prototype = {
         var radiostation6 = _("Darik Nostalgie");
         this.RadioItem.menu.addAction(radiostation6, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("mpv http://darikradio.by.host.bg:8000/Nostalgie");
+            Util.spawnCommandLine("mpv https://a10.asurahosting.com:7600/radio.mp3");
             Main.notify(_("Listening %s").format(radiostation6));
         });
 
@@ -120,7 +120,7 @@ MyApplet.prototype = {
         var radiostation10 = _("Jazz FM");
         this.RadioItem.menu.addAction(radiostation10, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("mpv http://live.btvradio.bg/jazz-fm.mp3");
+            Util.spawnCommandLine("mpv https://cdn.bweb.bg/radio/jazz-fm.mp3");
             Main.notify(_("Listening %s").format(radiostation10));
         });
 
@@ -128,7 +128,7 @@ MyApplet.prototype = {
         var radiostation11 = _("K2");
         this.RadioItem.menu.addAction(radiostation11, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("mpv http://stream.radiok2.bg:8000/rk2-high");
+            Util.spawnCommandLine("mpv http://stream.radiok2.bg:8000/rk2");
             Main.notify(_("Listening %s").format(radiostation11));
         });
 
@@ -144,7 +144,7 @@ MyApplet.prototype = {
         var radiostation13 = _("N-Joy");
         this.RadioItem.menu.addAction(radiostation13, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("mpv http://live.btvradio.bg/njoy.mp3");
+            Util.spawnCommandLine("mpv https://cdn.bweb.bg/radio/njoy.mp3");
             Main.notify(_("Listening %s").format(radiostation13));
         });
 
@@ -176,7 +176,7 @@ MyApplet.prototype = {
         var radiostation17 = _("The Voice Radio");
         this.RadioItem.menu.addAction(radiostation17, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("mpv rtsp://31.13.217.76:1935/rtplive/thevoiceradio_live.stream");
+            Util.spawnCommandLine("mpv https://nova-radio.neterra.tv/thevoice");
             Main.notify(_("Listening %s").format(radiostation17));
         });
 
@@ -184,7 +184,7 @@ MyApplet.prototype = {
         var radiostation18 = _("Z-Rock");
         this.RadioItem.menu.addAction(radiostation18, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("mpv http://live.btvradio.bg/z-rock.mp3");
+            Util.spawnCommandLine("mpv https://cdn.bweb.bg/radio/z-rock.mp3");
             Main.notify(_("Listening %s").format(radiostation18));
         });
 
@@ -199,7 +199,7 @@ MyApplet.prototype = {
         var tvstation1 = _("BNT");
         this.TvItem.menu.addAction(tvstation1, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("bash -c \"wget -r -l1 -H -Dcdn.bg -O '/tmp/bnt.txt' 'http://tv.bnt.bg/bnt1/16x9/'; grep playlist.m3u8 '/tmp/bnt.txt' | cut -c27-115 > '/tmp/bnt1.txt'; mpv --title=BNT --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv $(cat /tmp/bnt1.txt); rm /tmp/bnt.txt /tmp/bnt1.txt \"");
+            Util.spawnCommandLine("mpv https://cdn3.glebul.com:8443/dvr/hd-bnt-1-hd/tracks-v1a1/index.m3u8?token=418f6aaa58bed4a09cb11d863a5057b7bb04155d-33fd8c7a49fb2b6804894f25f1d1099e-1761871845-1761861045 --title=BNT --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv");
             Main.notify(_("Watching %s").format(tvstation1));
         });
 
@@ -207,23 +207,23 @@ MyApplet.prototype = {
         var tvstation2 = _("BNT 2");
         this.TvItem.menu.addAction(tvstation2, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("bash -c \"wget -r -l1 -H -Dcdn.bg -O '/tmp/bnt.txt' 'http://tv.bnt.bg/bnt2/16x9/'; grep playlist.m3u8 '/tmp/bnt.txt' | cut -c27-115 > '/tmp/bnt1.txt'; mpv --title='BNT 2' --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv $(cat /tmp/bnt1.txt); rm /tmp/bnt.txt /tmp/bnt1.txt\"");
+            Util.spawnCommandLine("mpv https://cdn4.glebul.com:8443/dvr/bnt-2/tracks-v1a1/index.m3u8?token=1e15fd311994bad7f16603e9f6a868045b92bd4c-866cf3a238e254d45e7240c81ab5e765-1761872030-1761861230 --title='BNT 2' --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv");
             Main.notify(_("Watching %s").format(tvstation2));
         });
-
-        //bnthd
-        var tvstation3 = _("BNT HD");
+        
+        //bnt3
+        var tvstation3 = _("BNT 3");
         this.TvItem.menu.addAction(tvstation3, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("bash -c \"wget -r -l1 -H -Dcdn.bg -O '/tmp/bnt.txt' 'http://tv.bnt.bg/bnthd/'; grep playlist.m3u8 '/tmp/bnt.txt' | cut -c27-116 > '/tmp/bnt1.txt'; mpv --title='BNT HD' --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv $(cat /tmp/bnt1.txt); rm /tmp/bnt.txt /tmp/bnt1.txt\"");
+            Util.spawnCommandLine("mpv https://cdn4.glebul.com:8443/dvr/hd-bnt-3-hd/tracks-v1a1/index.m3u8?token=a5d3c2481ec148b33e85f9c8214e1a1c86a8f3a1-df66aec7911cc438622e9d7a7449a5b6-1761872182-1761861382 --title='BNT 3' --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv");
             Main.notify(_("Watching %s").format(tvstation3));
         });
-
-        //bntsat
-        var tvstation4 = _("BNT World");
+        
+         //bnt4
+        var tvstation4 = _("BNT 4");
         this.TvItem.menu.addAction(tvstation4, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("bash -c \"wget -r -l1 -H -Dcdn.bg -O '/tmp/bnt.txt' 'http://tv.bnt.bg/bntworld/'; grep playlist.m3u8 '/tmp/bnt.txt' | cut -c27-115 > '/tmp/bnt1.txt'; mpv --title='BNT World' --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv $(cat /tmp/bnt1.txt); rm /tmp/bnt.txt /tmp/bnt1.txt\"");
+            Util.spawnCommandLine("mpv https://cdn4.glebul.com:8443/dvr/bnt-4/tracks-v1a1/index.m3u8?token=5e0f442bbfb59b4bfd55fba3cba6767cf6abd77b-91dcd2e112e6af82269be62413175560-1761872554-1761861754 --title='BNT 4' --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv");
             Main.notify(_("Watching %s").format(tvstation4));
         });
 
@@ -231,23 +231,15 @@ MyApplet.prototype = {
         var tvstation5 = _("bTV");
         this.TvItem.menu.addAction(tvstation5, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("bash -c \"mpv 'http://46.10.150.111/alpha/alpha/playlist.m3u8' --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='bTV'\"");
+            Util.spawnCommandLine("mpv 'https://cdn4.glebul.com:8443/dvr/hd-btv-hd/tracks-v1a1/index.m3u8?token=00e22310c81f99ea073943ed581ca7be6f7522dc-72e1efdb57f63d8021481bd91ab918f3-1761871677-1761860877' --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='bTV'");
             Main.notify(_("Watching %s").format(tvstation5));
-        });
-
-        //bit
-        var tvstation6 = _("BIT");
-        this.TvItem.menu.addAction(tvstation6, () => {
-            Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("bash -c \"mpv 'http://hls.cdn.bg:2103/fls/bit_2.stream/playlist.m3u8' --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='BIT'\"");
-            Main.notify(_("Watching %s").format(tvstation6));
         });
 
         //city
         var tvstation7 = _("City");
         this.TvItem.menu.addAction(tvstation7, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("bash -c \"rtmpdump -r 'rtmp://nodeb.gocaster.net:1935/CGL/_definst_/' -W 'http://iphone.fmstreams.com/jwplayer/player.swf' -p 'http://city.bg/live/' -y 'mp4:TODAYFM_TEST2' -b '0' | mpv --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='City' -\"");
+            Util.spawnCommandLine("mpv --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='City' https://tv.city.bg/play/tshls/citytv/3.m3u8");
             Main.notify(_("Watching %s").format(tvstation7));
         });
 
@@ -255,7 +247,7 @@ MyApplet.prototype = {
         var tvstation8 = _("Kanal 3");
         this.TvItem.menu.addAction(tvstation8, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("bash -c \"rtmpdump -r 'rtmp://edge4.cdn.bg:2017/fls' -a 'fls/' -W 'http://i.cdn.bg/flash/jwplayer510/player.swf' -f 'WIN 18,0,0,232' -p 'http://i.cdn.bg/live/Atki7GnEae' -y 'kanal3.stream?at=b0d1270b39e08ad9c78dc53f43a1ba5c' | mpv --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='Kanal 3' -\"");
+            Util.spawnCommandLine("mpv --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='Kanal 3' 'https://cdn2.invivo.bg/k3artfrwbsitfrnglpvlv/tracks-v1/index.fmp4.m3u8' --audio-file='https://cdn2.invivo.bg/k3artfrwbsitfrnglpvlv/tracks-a1/index.fmp4.m3u8'");
             Main.notify(_("Watching %s").format(tvstation8));
         });
 
@@ -263,7 +255,7 @@ MyApplet.prototype = {
         var tvstation9 = _("Nova");
         this.TvItem.menu.addAction(tvstation9, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("bash -c \"rtmpdump -r 'rtmp://e1.cdn.bg:2060/fls' -T 'N0v4TV6#2' -a 'fls' -f 'WIN 18,0,0,232' -W 'http://i.cdn.bg/eflash/jwNTV/player.swf' -p 'http://i.cdn.bg/live/0OmMKJ4SgY' -y 'ntv_1.stream' | mpv --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='NOVA' -\"");
+            Util.spawnCommandLine("mpv --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='NOVA' https://e121-ts.cdn.bg/ntv/fls/ntv_2.stream/at=O0M9MjEzLjEzMC43OS4xNjM7RT0xNzYxODc2OTYzO0E9MTtLPTM7UD0wMTExMDtTPTlmNWM0M2UxZTQwM2JmOTBiY2ZiYTM4OTJmNTQ3NDFjNjU4YzZlZjY=/chunklist.m3u8");
             Main.notify(_("Watching %s").format(tvstation9));
         });
 
@@ -271,7 +263,7 @@ MyApplet.prototype = {
         var tvstation10 = _("On Air");
         this.TvItem.menu.addAction(tvstation10, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("bash -c \"mpv 'http://ios.cdn.bg:2006/fls/bonair.stream/playlist.m3u8' --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='On Air' \"");
+            Util.spawnCommandLine("mpv 'https://e112-ts.cdn.bg/mnet/fls/bonair.stream/at=O0M9MjEzLjEzMC43OS4xNjM7RT0xNzYxODc2Nzg4O0E9MTtLPTM7UD0wMTExMDtTPTM1NmQyYWU3MzgyM2NhNzMyNjJlNmJjMzFjMTQyZDhlYmUwMTdiZjM=/chunklist.m3u8' --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='On Air' \"");
             Main.notify(_("Watching %s").format(tvstation10));
         });
 
@@ -279,7 +271,7 @@ MyApplet.prototype = {
         var tvstation11 = _("The Voice");
         this.TvItem.menu.addAction(tvstation11, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("bash -c \"rtmpdump -r 'rtmp://31.13.217.76/rtplive' -W 'http://www.thevoice.bg/js/thevoice_videostreem.swf' -p 'http://www.thevoice.bg/' -y 'thevoice_live.stream' -b '0' | mpv --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='The Voice' -\"");
+            Util.spawnCommandLine("mpv --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='The Voice' https://bss1.neterra.tv/thevoice/stream_0.m3u8");
             Main.notify(_("Watching %s").format(tvstation11));
         });
 
@@ -287,7 +279,7 @@ MyApplet.prototype = {
         var tvstation12 = _("Magic TV");
         this.TvItem.menu.addAction(tvstation12, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("bash -c \"rtmpdump -r 'rtmp://31.13.217.76:1935/magictv' -W 'http://www.thevoice.bg/js/thevoice_videostreem.swf' -p 'http://www.thevoice.bg/' -y 'magictv_live.stream' -b '0' | mpv --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='Magic TV' -\"");
+            Util.spawnCommandLine("mpv --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='Magic TV' https://bss1.neterra.tv/magictv/stream_0.m3u8");
             Main.notify(_("Watching %s").format(tvstation12));
         });
 
