@@ -908,9 +908,9 @@ class Player extends PopupMenu.PopupMenuSection {
         }
 
         try {
-            if (this.coverBox && this.cover) {
+            if (this.coverBox != null && this.cover != null) {
                 let coverBoxChildren = this.coverBox.get_children();
-                if (coverBoxChildren.indexOf(this.cover) > -1)
+                if (coverBoxChildren.length > 0 && coverBoxChildren.indexOf(this.cover) > -1)
                     this.coverBox.remove_child(this.cover);
             }
         } catch (e) {}

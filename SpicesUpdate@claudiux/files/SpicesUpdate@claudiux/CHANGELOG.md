@@ -1,3 +1,6 @@
+### v7.9.5~20251031
+  * Avoids 'destroy' errors.
+
 ### v7.9.4~20251012
   * Improves access to settings.
   * Adds Apply button to settings about Spices.
