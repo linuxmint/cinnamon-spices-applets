@@ -94,7 +94,7 @@ class LGSsliderItem extends PopupMenu.PopupSliderMenuItem {
             this._value = Math.min(1, this._value + SLIDER_SCROLL_STEP);
         }
 
-        this._slider.queue_repaint();
+        try{ this._slider.queue_repaint() } catch(e) {};
         this.emit('value-changed', this._value);
     }
 }
