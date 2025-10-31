@@ -762,7 +762,7 @@ class SpicesUpdate extends IconApplet {
     let badgeSize = (fontSize + 1) * global.ui_scale;
     let iconSize = this.getPanelIconSize(IconType.SYMBOLIC);
 
-    if (this.badge != null) {
+    if (this.actor.get_stage() != null && this.badge != null) {
       this.actor.remove_child(this.badge);
       this.badge = null;
     }
