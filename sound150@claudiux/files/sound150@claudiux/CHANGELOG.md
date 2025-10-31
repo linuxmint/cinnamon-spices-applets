@@ -1,3 +1,6 @@
+### v13.5.1~20251031
+  * Avoids 'destroy' errors.
+
 ### v13.5.0~20251030
   * Adds the 'mic-mute' shortcut. See the FAQ in README to implement it.
 
