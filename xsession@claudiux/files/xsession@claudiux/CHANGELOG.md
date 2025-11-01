@@ -1,3 +1,6 @@
+### v5.1.2~20251101
+  * Increase stability.
+
 ### v5.1.1~20251031
   * Avoids paint() errors.
 

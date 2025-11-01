@@ -1,3 +1,6 @@
+### v5.5.2~20251101
+  * Increase stability.
+
 ### v5.5.1~20250925
   * Updated README.
   * Minor changes in menu about new commits.
