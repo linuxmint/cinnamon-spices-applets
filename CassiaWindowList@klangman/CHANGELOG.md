@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.5
+
+* Avoids 'destroy()' errors.
+
 ## 2.4.4
 
 * Fix an exception when the "Automatic focus change when leaving the panel" option is enabled. You could get a exception if you leave the panel while hovering an idle pinned button.  Thanks to [claudiux](https://github.com/claudiux) for reporting the problem!
