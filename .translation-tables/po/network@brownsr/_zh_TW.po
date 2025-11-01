@@ -1,0 +1,15 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#. metadata.json->name
+#: applet.js:20
+msgid "Network"
+msgstr ""
+
+#. metadata.json->description
+msgid "Show network"
+msgstr ""

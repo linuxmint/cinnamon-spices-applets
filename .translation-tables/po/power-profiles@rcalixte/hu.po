@@ -1,0 +1,188 @@
+# Power Profiles Applet
+# Copyright (C) 2023
+# Rick Calixte <10281587+rcalixte@users.noreply.github.com>, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-15 02:11-0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 5.4/applet.js:28
+msgid "Power Saver"
+msgstr "Energiatakarékos"
+
+#. 5.4/applet.js:29
+msgid "Balanced"
+msgstr "Kiegyensúlyozott"
+
+#. 5.4/applet.js:30
+msgid "Performance"
+msgstr "Teljesítmény"
+
+#. 5.4/applet.js:63 5.4/applet.js:70
+msgid ""
+"Please make sure the power-profiles-daemon package is installed and the "
+"service is running."
+msgstr ""
+"Győződjön meg arról, hogy telepítve van a power-profiles-daemon csomag, és "
+"hogy a szolgáltatás fut."
+
+#. 5.4/applet.js:64
+msgid "exception:"
+msgstr "kivétel:"
+
+#. 5.4/applet.js:117
+msgid "Power Profiles Applet Error"
+msgstr "Teljesítményprofilok kisalkalmazás hiba"
+
+#. 5.4/applet.js:118
+msgid ""
+"The system package 'power-profiles-daemon' is not installed.\n"
+"\n"
+"Please install it and reload the applet."
+msgstr ""
+"A „power-profiles-daemon” rendszercsomag nincs telepítve.\n"
+"\n"
+"Telepítse és töltse be újra a kisalkalmazást."
+
+#. 5.4/applet.js:120
+msgid "Open README"
+msgstr "README megnyitása"
+
+#. 5.4/applet.js:121
+msgid "Open Website"
+msgstr "Webhely megnyitása"
+
+#. 5.4/applet.js:151
+msgid "Current Profile:"
+msgstr "Aktuális profil:"
+
+#. 5.4/applet.js:156
+msgid "Performance Degraded:"
+msgstr "Csökkent teljesítmény:"
+
+#. 5.4/applet.js:167
+msgid "Active Profile Holds:"
+msgstr "Aktív profil megtartása:"
+
+#. metadata.json->description
+msgid ""
+"An applet to modify the current system power profile as determined by power-"
+"profiles-daemon"
+msgstr ""
+"Kisalkalmazás, amely lehetővé teszi a jelenlegi rendszer a power-profiles-"
+"daemon által meghatározott energiaprofil módosítását"
+
+#. metadata.json->name
+msgid "Power Profiles"
+msgstr "Teljesítményprofilok"
+
+#. 5.4->settings-schema.json->section0->description
+msgid "General"
+msgstr ""
+
+#. 5.4->settings-schema.json->cycleProfiles->description
+#, fuzzy
+msgid "Cycle through profiles when using keyboard shortcuts or scroll wheel"
+msgstr "Profilok közötti váltás gyorsbillentyű használatakor"
+
+#. 5.4->settings-schema.json->cycleProfiles->tooltip
+msgid ""
+"If enabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the next profile would be 'Performance' "
+"(or 'Balanced' on some systems).\n"
+"\n"
+"If disabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the profile would not change."
+msgstr ""
+"Ha engedélyezve van, és a jelenleg az „Energiatakarékos” profil van "
+"használatban, továbbá a „Korábbi profil” gyorsbillentyű kerül használatra, "
+"akkor a következő „Teljesítmény” profil lesz (vagy „Kiegyensúlyozott” néven "
+"elérhető néhány rendszeren).\n"
+"\n"
+"Ha le van tiltva, és a jelenlegi „Energiatakarékos” profil, valamint a "
+"„Korábbi profil” gyorsbillentyű kerül használatra, akkor a profil nem fog "
+"változni."
+
+#. 5.4->settings-schema.json->scrollBehavior->description
+msgid "Scroll wheel behavior"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Nothing"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+#, fuzzy
+msgid "Switch profiles"
+msgstr "Következő profil"
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles (reversed)"
+msgstr ""
+
+#. 5.4->settings-schema.json->section1->description
+msgid "Keyboard Shortcuts"
+msgstr "Gyorsbillentyűk"
+
+#. 5.4->settings-schema.json->previousProfileKey->description
+msgid "Previous profile"
+msgstr "Korábbi profil"
+
+#. 5.4->settings-schema.json->previousProfileKey->tooltip
+msgid "Set keybinding(s) to switch to previous power profile."
+msgstr "Gyorsbillentyű beállítása a korábbi energiaprofilra történő váltáshoz."
+
+#. 5.4->settings-schema.json->nextProfileKey->description
+msgid "Next profile"
+msgstr "Következő profil"
+
+#. 5.4->settings-schema.json->nextProfileKey->tooltip
+msgid "Set keybinding(s) to switch to next power profile."
+msgstr ""
+"Gyorsbillentyű beállítása a következő energiaprofilra történő váltáshoz."
+
+#. 5.4->settings-schema.json->showOSD->description
+msgid "On-screen display for keyboard shortcuts"
+msgstr "Gyorsbillentyűk megjelenítése a képernyőn"
+
+#. 5.4->settings-schema.json->showOSD->tooltip
+msgid ""
+"Show on-screen display of the new profile when using the keyboard shortcuts"
+msgstr ""
+"Képernyőn az új profil megjelenítése a gyorsbillentyűvel történő váltáskor"
+
+#. 5.4->settings-schema.json->section2->description
+msgid "Appearance"
+msgstr "Megjelenítés"
+
+#. 5.4->settings-schema.json->iconStyle->description
+msgid "Icon Style"
+msgstr "Ikon stílus"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Classic"
+msgstr "Klasszikus"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Papirus"
+msgstr "Papirusz"
+
+#. 5.4->settings-schema.json->iconStyle->tooltip
+msgid ""
+"Choose the style of the applet's icon. This is used for the panel and the on-"
+"screen display."
+msgstr ""
+"Válassza ki az kisalkalmazás ikonjának stílusát. Ez a panel és a képernyő-"
+"kijelző használatára szolgál."

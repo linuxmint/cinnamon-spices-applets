@@ -1,0 +1,86 @@
+# ENHANCED SOUND APPLET
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2018
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux v2.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-30 20:26+0100\n"
+"PO-Revision-Date: 2025-04-04 16:43+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 6.4/applet.js:1815
+msgid "The 'imagemagick' package is required!"
+msgstr ""
+
+#. 6.4/applet.js:1816
+msgid "Please select 'Install imagemagick' in this menu"
+msgstr ""
+
+#. 6.4/applet.js:2031
+msgid "Install imagemagick"
+msgstr ""
+
+#. 6.4->settings-schema.json->page_menus->title
+msgid "Menus"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionMenu2->title
+msgid "Context Menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->dontShowAnyImageInMenu->description
+msgid "Do not show any cover art in the menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->viewFullAlbumArt->description
+msgid "View Full Album Art"
+msgstr ""
+
+#. 6.4->settings-schema.json->viewFullAlbumArt->tooltip
+msgid ""
+"When unchecked, Album Art in the menu may be partially covered by Artist and "
+"Title."
+msgstr ""
+
+#. 6.4->settings-schema.json->keepAppListOpen->description
+msgid "Keep the App selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepOutputListOpen->description
+msgid "Keep the Output Device selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepInputListOpen->description
+msgid "Keep the Input Device selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepCommandListOpen->description
+msgid "Keep the Command selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->toolongchars->description
+msgid "If the title is too long, end it with:"
+msgstr ""
+
+#. 6.4->settings-schema.json->toolongchars->tooltip
+msgid "Emoji accepted"
+msgstr ""
+
+#. 6.4->settings-schema.json->showalbumDelay->description
+msgid "Delay between icon and album art display (seconds)"
+msgstr ""
+
+#. 6.4->settings-schema.json->mic-mute->description
+msgid "Microphone Mute"
+msgstr ""

@@ -1,0 +1,414 @@
+# DIRECT
+# This file is put in the public domain.
+# claudiux, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Direct@claudiux 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:38 applet.js:495
+msgid "SYSTEM"
+msgstr "HỆ THỐNG"
+
+#. applet.js:38 applet.js:530
+msgid "FAVORITES"
+msgstr "YÊU THÍCH"
+
+#. applet.js:38 applet.js:554
+msgid "RECENT DOCUMENTS"
+msgstr "TÀI LIỆU GẦN ĐÂY"
+
+#. applet.js:160
+msgid "(Right click to open folder)"
+msgstr "(Nhấn chuột phải để mở thư mục)"
+
+#. metadata.json->name
+#. applet.js:263
+msgid "Direct"
+msgstr "Truy Cập Nhanh"
+
+#. applet.js:471
+msgid "Search Home Folder"
+msgstr "Tìm trong Thư mục Cá nhân"
+
+#. applet.js:504
+msgid "Search File System"
+msgstr "Tìm trong Hệ thống tập tin"
+
+#. applet.js:568
+msgid "Clear"
+msgstr "Xóa"
+
+#. applet.js:575
+msgid "Recent"
+msgstr "Gần đây"
+
+#. applet.js:623
+msgid "Computer"
+msgstr "Máy tính"
+
+#. applet.js:629
+msgid "File System"
+msgstr "Hệ thống tập tin"
+
+#. applet.js:646
+msgid "Network"
+msgstr "Mạng"
+
+#. applet.js:868
+msgid "Trash"
+msgstr "Thùng rác"
+
+#. search.py:43
+msgid "Open..."
+msgstr "Mở..."
+
+#. search.py:48
+msgid "Open Containing Folder..."
+msgstr "Mở thư mục chứa..."
+
+#. search.py:85
+msgid "Search"
+msgstr "Tìm kiếm"
+
+#. search.py:106
+msgid "Start in"
+msgstr "Bắt đầu tại"
+
+#. search.py:107
+msgid "Select a folder"
+msgstr "Chọn thư mục"
+
+#. search.py:113
+msgid "Follow symlinks"
+msgstr "Theo liên kết tượng trưng"
+
+#. search.py:117
+msgid "Search hidden"
+msgstr "Tìm các tập tin ẩn"
+
+#. search.py:121
+msgid "Use regular expressions"
+msgstr "Sử dụng biểu thức chính quy"
+
+#. search.py:125
+msgid "Stop"
+msgstr "Dừng"
+
+#. search.py:140
+msgid "File"
+msgstr "Tập tin"
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. search.py:156
+msgid "Path"
+msgstr "Đường dẫn"
+
+#. search.py:184
+msgid "Searching..."
+msgstr "Đang tìm kiếm..."
+
+#. search.py:198 search.py:199
+msgid "Search Stopped"
+msgstr "Đã dừng tìm kiếm"
+
+#. search.py:215
+msgid "Searching: "
+msgstr "Đang tìm kiếm: "
+
+#. search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Lỗi: không đủ quyền đọc thư mục "
+
+#. search.py:252
+msgid "Search Completed"
+msgstr "Hoàn tất tìm kiếm"
+
+#. search.py:259
+msgid "Skipping"
+msgstr "Bỏ qua"
+
+#. search.py:259
+msgid " - directory already searched"
+msgstr " - thư mục đã được tìm kiếm"
+
+#. metadata.json->description
+msgid ""
+"Provides direct and easy access to your Directories, Favorites, Recent "
+"documents and System locations"
+msgstr ""
+"Cung cấp truy cập trực tiếp và dễ dàng đến Thư mục, Mục yêu thích, Tài liệu "
+"gần đây và các vị trí Hệ thống"
+
+#. metadata.json->comments
+msgid ""
+"The Direct@claudiux applet is a fork from the placesCenter@scollins applet, "
+"with improvements."
+msgstr ""
+"Applet Direct@claudiux là phiên bản phát triển từ placesCenter@scollins với "
+"các cải tiến."
+
+#. settings-schema.json->generalPage->title
+msgid "General"
+msgstr "Chung"
+
+#. settings-schema.json->userPage->title
+msgid "User"
+msgstr "Người dùng"
+
+#. settings-schema.json->systemPage->title
+msgid "System"
+msgstr "Hệ thống"
+
+#. settings-schema.json->favoritesPage->title
+msgid "Favorites"
+msgstr "Yêu thích"
+
+#. settings-schema.json->recentPage->title
+#. settings-schema.json->recentSection->title
+msgid "Recent documents"
+msgstr "Tài liệu gần đây"
+
+#. settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr "Cài đặt Thanh panel"
+
+#. settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr "Cài đặt Menu"
+
+#. settings-schema.json->userSection->title
+msgid "User section"
+msgstr "Phần Người dùng"
+
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+msgid "Custom places"
+msgstr "Thư mục tùy chỉnh"
+
+#. settings-schema.json->systemSection->title
+msgid "System section"
+msgstr "Phần Hệ thống"
+
+#. settings-schema.json->favoritesSection->title
+msgid "Favorite documents"
+msgstr "Tài liệu yêu thích"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Biểu tượng trên Thanh panel"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr ""
+"Chấp nhận tên biểu tượng hoặc đường dẫn trực tiếp (hỗ trợ biểu tượng ký hiệu)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Văn bản trên Thanh panel"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr "Phím tắt mở Menu"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Kích thước biểu tượng Menu"
+
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr "Di chuyển các phần này để sắp xếp lại Menu:"
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Name"
+msgstr "Tên"
+
+#. settings-schema.json->displayOrder->description
+msgid "Display order in the menu"
+msgstr "Thứ tự hiển thị trong Menu"
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr "Áp dụng"
+
+#. settings-schema.json->noIconOnPanel->description
+msgid "No icon on panel"
+msgstr "Không hiển thị biểu tượng trên Thanh panel"
+
+#. settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "Mở khi nhấn chuột giữa"
+
+#. settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "Để trống để vô hiệu hóa"
+
+#. settings-schema.json->dontDisplayTooltip->description
+#, fuzzy
+msgid "Do not display the tooltip"
+msgstr "Hiển thị đường dẫn đầy đủ trong gợi ý"
+
+#. settings-schema.json->showUserSection->description
+msgid "Show User section"
+msgstr "Hiển thị phần Người dùng"
+
+#. settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "Hiển thị Màn hình nền"
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
+msgstr "URI"
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr "Tên Biểu tượng"
+
+#. settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "Hiển thị Thùng rác"
+
+#. settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "Không bao giờ"
+
+#. settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "Luôn luôn"
+
+#. settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "Khi có nội dung"
+
+#. settings-schema.json->showSystemSection->description
+msgid "Show System section"
+msgstr "Hiển thị phần Hệ thống"
+
+#. settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "Hiển thị Máy tính"
+
+#. settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "Hiển thị Hệ thống tập tin"
+
+#. settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "Hiển thị các ổ đĩa"
+
+#. settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr "Chỉ hiển thị ổ đĩa đã gắn kết"
+
+#. settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "Hiển thị Mạng"
+
+#. settings-schema.json->showFavorites->description
+msgid "Show favorite documents"
+msgstr "Hiển thị Tài liệu yêu thích"
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr "Thời gian thêm"
+
+#. settings-schema.json->favoriteSortingMethod->description
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr "Phương pháp sắp xếp"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->favoriteSizeLimit->options
+msgid "All Favorite Documents"
+msgstr "Tất cả Tài liệu Yêu thích"
+
+#. settings-schema.json->favoriteSizeLimit->description
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Số lượng hiển thị"
+
+#. settings-schema.json->favoriteShowUri->description
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr "Hiển thị đường dẫn đầy đủ trong gợi ý"
+
+#. settings-schema.json->favoriteIconIsStar->description
+msgid "Replace icons with stars"
+msgstr "Thay biểu tượng bằng hình sao"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Hiển thị Tài liệu gần đây"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr "Thời gian truy cập"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr "Thời gian chỉnh sửa"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "All Recent Documents"
+msgstr "Tất cả Tài liệu Gần đây"
+
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr "Quyền riêng tư"
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
+msgstr "Trình duyệt Biểu tượng"

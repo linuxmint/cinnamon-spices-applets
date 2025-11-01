@@ -1,0 +1,154 @@
+# EXIT
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-26 17:16+0200\n"
+"PO-Revision-Date: 2025-04-10 11:44+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. 6.4/applet.js:358 6.4/applet.js:360
+msgid "Screen On/Off"
+msgstr ""
+
+#. 6.4/applet.js:371 6.4/applet.js:373
+msgid "Screen On/Off with Lock feature"
+msgstr ""
+
+#. 6.4->settings-schema.json->page_General->title
+msgid "General"
+msgstr ""
+
+#. 6.4->settings-schema.json->page_Shortcuts->title
+msgid "Shortcuts"
+msgstr ""
+
+#. 6.4->settings-schema.json->page_Options->title
+msgid "Options"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionMaximize->title
+msgid "Vertical maximization"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionMenuOthers->title
+msgid "System-managed menu options"
+msgstr ""
+
+#. 6.4->settings-schema.json->section_DontShowShortcutsInMenu->title
+msgid "Menu appearance"
+msgstr ""
+
+#. 6.4->settings-schema.json->section_Shortcuts->title
+msgid "Keybindings"
+msgstr ""
+
+#. 6.4->settings-schema.json->section_MenuKeys->title
+msgid "Keys used to select certain options in the open menu."
+msgstr ""
+
+#. 6.4->settings-schema.json->screenOffUsesXset->description
+msgid "Use the hardware method to turn On/Off the screen"
+msgstr ""
+
+#. 6.4->settings-schema.json->screenOffUsesXset->tooltip
+msgid ""
+"The hardware method does not always work correctly.\n"
+"In this case, disable this option to use only a software method."
+msgstr ""
+
+#. 6.4->settings-schema.json->dontShowShortcutsInMenu->description
+msgid "Do not show any shortcut in the menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->kbToggleMenu->description
+msgid "Toggle menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->kbWakeUpMonitor->description
+msgid "Turn screen On/Off"
+msgstr ""
+
+#. 6.4->settings-schema.json->kbWakeUpMonitorWithLock->description
+msgid "Turn screen On/Off with Lock feature"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkShutdown->description
+msgid "Key to select Power Off"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkShutdown->tooltip
+msgid "Single key. Default is U"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkRestart->description
+msgid "Key to select Restart"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkRestart->tooltip
+msgid "Single key. Default is R"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkHibernate->description
+msgid "Key to select Hibernate"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkHibernate->tooltip
+msgid "Single key. Default is H"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkSuspend->description
+msgid "Key to select Suspend"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkSuspend->tooltip
+msgid "Single key. Default is S"
+msgstr ""
+
+#. 6.4->settings-schema.json->buttonApplyMenuKeys->description
+msgid "Apply these keys to the menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->buttonDefaultMenuKeys->description
+msgid "Reset to default keys"
+msgstr ""
+
+#. 6.4->settings-schema.json->alertMenuKeys->description
+msgid ""
+"Several keys are identical.\n"
+"Please correct this and reapply the changes."
+msgstr ""
+
+#. 6.4->settings-schema.json->alreadyUsedKeys->description
+msgid "Already used keys (for your information only)"
+msgstr ""
+
+#. 6.4->settings-schema.json->alreadyUsedKeys->tooltip
+msgid "There is no point in changing this."
+msgstr ""
+
+#. 6.4->settings-schema.json->maximizeSettingsWindow->description
+msgid "Vertically maximize this Settings window"
+msgstr ""
+
+#. 6.4->settings-schema.json->maximizeSettingsWindow->tooltip
+msgid ""
+"This option will only be taken into account the next times this Settings "
+"window is opened. "
+msgstr ""
+
+#. 6.4->settings-schema.json->labelSeparator->description
+msgid "────────────────────────────────────────────────────────────────"
+msgstr ""

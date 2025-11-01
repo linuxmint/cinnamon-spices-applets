@@ -1,0 +1,3032 @@
+# Chinese translation for gnome-shell-extension-weather
+# simon 軟體包的正體中文翻譯。
+# Copyright (C) 2011
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# bill <bill_zt@sina.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: simon 04-gnome-shell-extension-weather-452bcfe\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-28 09:12+0100\n"
+"PO-Revision-Date: 2011-12-02 14:44+0800\n"
+"Last-Translator: Wenjie Huang\n"
+"Language-Team: Chinese (Traditional)\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
+#. 3.8/weather-applet.js:19744
+msgid "Error"
+msgstr "錯誤"
+
+#. 3.0/applet.js:167 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:174
+#. 3.0/applet.js:177 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
+#. 3.8/weather-applet.js:19745 3.8/weather-applet.js:19747
+#. 3.8/weather-applet.js:19749 3.8/weather-applet.js:19752
+#. 3.8/weather-applet.js:19755 3.8/weather-applet.js:19756
+#. 3.8/weather-applet.js:19757 3.8/weather-applet.js:19758
+msgid "Service Error"
+msgstr "服務錯誤"
+
+#. 3.0/applet.js:168 3.8/weather-applet.js:19746
+msgid "Incorrect API Key"
+msgstr "API 金鑰不正確"
+
+#. 3.0/applet.js:170 3.8/weather-applet.js:19748
+msgid "Incorrect Location Format"
+msgstr "位置格式不正確"
+
+#. 3.0/applet.js:172 3.8/weather-applet.js:19750
+msgid "Key Blocked"
+msgstr "金鑰已被封鎖"
+
+#. 3.0/applet.js:173 3.8/weather-applet.js:19751
+msgid "Can't find location"
+msgstr "找不到位置"
+
+#. 3.0/applet.js:175 3.8/weather-applet.js:19753
+msgid "No Api Key"
+msgstr "未提供 API 金鑰"
+
+#. 3.0/applet.js:176 3.8/weather-applet.js:19754
+msgid "No Location"
+msgstr "未設定位置"
+
+#. 3.0/applet.js:181 3.8/weather-applet.js:19759
+msgid "Missing Packages"
+msgstr "缺少套件"
+
+#. 3.0/applet.js:182 3.8/weather-applet.js:19760
+msgid "Location not covered"
+msgstr "位置不在涵蓋範圍內"
+
+#. 3.0/applet.js:193 3.0/applet.js:378 3.8/weather-applet.js:9049
+msgid "Weather Applet"
+msgstr "天氣小工具"
+
+#. 3.0/applet.js:217 3.8/weather-applet.js:20020
+msgid "..."
+msgstr "…"
+
+#. 3.0/applet.js:218 3.8/weather-applet.js:20021
+msgid "Click to open"
+msgstr "點選以開啟"
+
+#. 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:18417
+#. 3.8/weather-applet.js:20024
+msgid "Refresh"
+msgstr "重新整理"
+
+#. 3.0/applet.js:272
+msgid "API returned status code between 400 and 500"
+msgstr "API 回傳介於 400 到 500 的狀態碼"
+
+#. 3.0/applet.js:426 3.0/applet.js:2032 3.0/applet.js:2036 3.0/applet.js:2040
+#. 3.0/applet.js:2049 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
+#. 3.0/applet.js:2083 3.0/applet.js:2131 3.8/weather-applet.js:9221
+#. 3.8/weather-applet.js:9225
+msgid "Location Store"
+msgstr "位置儲存區"
+
+#. 3.0/applet.js:426
+msgid "You can't save a location obtained automatically, sorry"
+msgstr "抱歉，無法儲存自動取得的位置"
+
+#. 3.0/applet.js:601
+msgid "Could not get weather information"
+msgstr "無法取得天氣資訊"
+
+#. 3.0/applet.js:624 3.8/weather-applet.js:19852
+msgid ""
+"Unexpected Error While Refreshing Weather, please see log in Looking Glass"
+msgstr "重新整理天氣時發生未預期的錯誤，請檢視 Looking Glass 中的記錄"
+
+#. 3.0/applet.js:670 3.8/weather-applet.js:20103
+msgid ""
+"Could not update weather for a while...\n"
+"are you connected to the internet?"
+msgstr ""
+"已有一段時間無法更新天氣資訊…\n"
+"網路連線是否正常？"
+
+#. 3.0/applet.js:684
+msgid "Network Error, please check logs in Looking Glass"
+msgstr "網路錯誤，請檢視 Looking Glass 中的記錄"
+
+#. 3.0/applet.js:969 3.0/applet.js:1110
+msgid "As of"
+msgstr "截至"
+
+#. 3.0/applet.js:1108 3.8/weather-applet.js:19281
+msgid "Powered by"
+msgstr "資料來源"
+
+#. 3.0/applet.js:1113
+msgid "from you"
+msgstr "距離您"
+
+#. 3.0/applet.js:1132 3.8/weather-applet.js:19181
+msgid "mm"
+msgstr "毫米"
+
+#. 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:19181
+msgid "in"
+msgstr "英吋"
+
+#. 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:10075
+#. 3.8/weather-applet.js:19398
+msgid "mi"
+msgstr "英里"
+
+#. 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:10076
+#. 3.8/weather-applet.js:19399
+msgid "km"
+msgstr "公里"
+
+#. 3.0/applet.js:1227 3.8/weather-applet.js:19602
+msgid "Loading current weather ..."
+msgstr "正在載入目前天氣…"
+
+#. 3.0/applet.js:1230 3.8/weather-applet.js:19605
+msgid "Loading future weather ..."
+msgstr "正在載入未來天氣…"
+
+#. 3.0/applet.js:1280 3.8/weather-applet.js:18331
+msgid "Loading ..."
+msgstr "載入中…"
+
+#. 3.0/applet.js:1329 3.8/weather-applet.js:18368
+msgid "Temperature"
+msgstr "溫度"
+
+#. 3.0/applet.js:1330 3.8/weather-applet.js:18373
+msgid "Humidity"
+msgstr "濕度"
+
+#. 3.0/applet.js:1331 3.8/weather-applet.js:18378
+msgid "Pressure"
+msgstr "氣壓"
+
+#. 3.0/applet.js:1332 3.8/weather-applet.js:12516 3.8/weather-applet.js:12523
+#. 3.8/weather-applet.js:12524 3.8/weather-applet.js:12530
+#. 3.8/weather-applet.js:14882 3.8/weather-applet.js:14883
+#. 3.8/weather-applet.js:18190
+msgid "Wind"
+msgstr "風速"
+
+#. 3.0/applet.js:1639
+msgid "Make sure you entered a location or use Automatic location instead"
+msgstr "請確認您已輸入位置，或改用自動定位功能"
+
+#. 3.0/applet.js:1877 3.8/weather-applet.js:9688
+msgid "Could not find location based on address, please check if it's right"
+msgstr "無法根據地址找到位置，請檢查地址是否正確"
+
+#. 3.0/applet.js:1901 3.8/weather-applet.js:9708
+msgid "Failed to call Geolocation API, see Looking Glass for errors."
+msgstr "無法呼叫地理定位 API，請檢視 Looking Glass 的錯誤訊息。"
+
+#. 3.0/applet.js:2032 3.0/applet.js:2036 3.8/weather-applet.js:9221
+msgid "Warning"
+msgstr "警告"
+
+#. 3.0/applet.js:2032
+msgid "You can only save correct locations when the applet is not refreshing"
+msgstr "僅當小工具未重新整理時才能儲存正確的位置"
+
+#. 3.0/applet.js:2036 3.8/weather-applet.js:9221
+msgid "You can't save an incorrect location"
+msgstr "您無法儲存不正確的位置"
+
+#. 3.8->settings-schema.json->logLevel->options
+#. 3.0/applet.js:2040 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
+#. 3.8/weather-applet.js:9225
+msgid "Info"
+msgstr "資訊"
+
+#. 3.0/applet.js:2040 3.8/weather-applet.js:9225
+msgid "Location is already saved"
+msgstr "位置已儲存"
+
+#. 3.0/applet.js:2049 3.0/applet.js:2083
+msgid "Success"
+msgstr "成功"
+
+#. 3.0/applet.js:2049
+msgid "Location is saved to library"
+msgstr "位置已儲存到資料庫"
+
+#. 3.0/applet.js:2062
+msgid "You can't remove a location while the applet is refreshing"
+msgstr "小工具重新整理時無法移除位置"
+
+#. 3.0/applet.js:2066
+msgid "You can't remove an incorrect location"
+msgstr "您無法移除不正確的位置"
+
+#. 3.0/applet.js:2070
+msgid "Location is not in storage, can't delete"
+msgstr "位置不在儲存區中，無法刪除"
+
+#. 3.0/applet.js:2083
+msgid "Location is deleted from library"
+msgstr "已從資料庫刪除位置"
+
+#. 3.0/applet.js:2131
+msgid ""
+"Failed to load in data from location storage, please see the logs for more "
+"information"
+msgstr "無法從位置儲存區載入資料，請檢視記錄以取得更多資訊"
+
+#. 3.0/climacell.js:163 3.0/darkSky.js:143 3.0/openWeatherMap.js:129
+#. 3.0/us_weather.js:322 3.0/weatherbit.js:202 3.0/yahoo.js:141
+#. 3.8/weather-applet.js:10724 3.8/weather-applet.js:11764
+#. 3.8/weather-applet.js:12416 3.8/weather-applet.js:13155
+#. 3.8/weather-applet.js:13525 3.8/weather-applet.js:15070
+#. 3.8/weather-applet.js:15685
+msgid "Feels Like"
+msgstr "體感溫度"
+
+#. 3.0/climacell.js:174 3.0/darkSky.js:189 3.0/yahoo.js:166
+#. 3.8/weather-applet.js:15761
+msgid "Failed to Process Weather Info"
+msgstr "無法處理天氣資訊"
+
+#. 3.0/climacell.js:224
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://developer.climacell.co/sign-up"
+msgstr ""
+"請在設定中輸入 API 金鑰，\n"
+"或先至 https://developer.climacell.co/sign-up 取得"
+
+#. 3.0/climacell.js:239 3.0/darkSky.js:229 3.0/weatherbit.js:331
+#. 3.8/weather-applet.js:11956 3.8/weather-applet.js:15557
+msgid ""
+"Please Make sure you\n"
+"entered the API key correctly and your account is not locked"
+msgstr ""
+"請確認您已正確輸入 API 金鑰，\n"
+"且您的帳號未被鎖定"
+
+#. 3.0/climacell.js:248 3.8/weather-applet.js:12378
+msgid ""
+"Please Make sure you\n"
+"entered the API key that you have from Climacell"
+msgstr ""
+"請確認您已輸入\n"
+"從 Climacell 取得的 API 金鑰"
+
+#. 3.0/climacell.js:259 3.0/climacell.js:260 3.0/met_norway.js:308
+#. 3.0/met_norway.js:309 3.0/met_norway.js:315 3.0/met_norway.js:322
+#. 3.0/met_norway.js:329 3.0/met_uk.js:617 3.0/met_uk.js:624 3.0/met_uk.js:631
+#. 3.0/met_uk.js:632 3.8/weather-applet.js:10279 3.8/weather-applet.js:10286
+#. 3.8/weather-applet.js:10293 3.8/weather-applet.js:10294
+#. 3.8/weather-applet.js:11404 3.8/weather-applet.js:11405
+#. 3.8/weather-applet.js:11411 3.8/weather-applet.js:11418
+#. 3.8/weather-applet.js:11425 3.8/weather-applet.js:12056
+#. 3.8/weather-applet.js:12559 3.8/weather-applet.js:13704
+#. 3.8/weather-applet.js:16134
+msgid "Heavy rain"
+msgstr "豪雨"
+
+#. 3.0/climacell.js:266 3.0/climacell.js:267 3.0/met_norway.js:483
+#. 3.0/met_norway.js:484 3.0/met_norway.js:490 3.0/us_weather.js:484
+#. 3.0/us_weather.js:533 3.0/us_weather.js:534 3.0/us_weather.js:541
+#. 3.0/yahoo.js:448 3.8/weather-applet.js:10457 3.8/weather-applet.js:11579
+#. 3.8/weather-applet.js:11580 3.8/weather-applet.js:11586
+#. 3.8/weather-applet.js:11991 3.8/weather-applet.js:12544
+#. 3.8/weather-applet.js:12545 3.8/weather-applet.js:12551
+#. 3.8/weather-applet.js:12558 3.8/weather-applet.js:12600
+#. 3.8/weather-applet.js:12607 3.8/weather-applet.js:12614
+#. 3.8/weather-applet.js:13297 3.8/weather-applet.js:13346
+#. 3.8/weather-applet.js:13347 3.8/weather-applet.js:13354
+#. 3.8/weather-applet.js:13696 3.8/weather-applet.js:13977
+#. 3.8/weather-applet.js:13978 3.8/weather-applet.js:14019
+#. 3.8/weather-applet.js:14854 3.8/weather-applet.js:14855
+#. 3.8/weather-applet.js:15238 3.8/weather-applet.js:15239
+#. 3.8/weather-applet.js:16119 3.8/weather-applet.js:16126
+#. 3.8/weather-applet.js:16127 3.8/weather-applet.js:16133
+#. 3.8/weather-applet.js:16140 3.8/weather-applet.js:16147
+#. 3.8/weather-applet.js:16749 3.8/weather-applet.js:16750
+msgid "Rain"
+msgstr "雨"
+
+#. 3.0/climacell.js:273 3.0/climacell.js:274 3.0/met_norway.js:392
+#. 3.0/met_norway.js:393 3.0/met_norway.js:399 3.0/met_norway.js:406
+#. 3.0/met_norway.js:413 3.0/met_uk.js:589 3.0/met_uk.js:596 3.0/met_uk.js:610
+#. 3.0/met_uk.js:611 3.0/openWeatherMap.js:381 3.8/weather-applet.js:10251
+#. 3.8/weather-applet.js:10258 3.8/weather-applet.js:10272
+#. 3.8/weather-applet.js:10273 3.8/weather-applet.js:10528
+#. 3.8/weather-applet.js:11488 3.8/weather-applet.js:11489
+#. 3.8/weather-applet.js:11495 3.8/weather-applet.js:11502
+#. 3.8/weather-applet.js:11509 3.8/weather-applet.js:12052
+#. 3.8/weather-applet.js:12552 3.8/weather-applet.js:13706
+#. 3.8/weather-applet.js:16120
+msgid "Light rain"
+msgstr "小雨"
+
+#. 3.0/climacell.js:280 3.8/weather-applet.js:12615 3.8/weather-applet.js:13680
+msgid "Heavy freezing rain"
+msgstr "強烈凍雨"
+
+#. 3.0/climacell.js:281 3.0/climacell.js:287 3.0/climacell.js:288
+#. 3.0/climacell.js:295 3.0/openWeatherMap.js:386 3.0/us_weather.js:505
+#. 3.0/us_weather.js:506 3.0/us_weather.js:512 3.0/us_weather.js:513
+#. 3.0/us_weather.js:519 3.8/weather-applet.js:10538
+#. 3.8/weather-applet.js:12058 3.8/weather-applet.js:12601
+#. 3.8/weather-applet.js:13318 3.8/weather-applet.js:13319
+#. 3.8/weather-applet.js:13325 3.8/weather-applet.js:13326
+#. 3.8/weather-applet.js:13332 3.8/weather-applet.js:16148
+msgid "Freezing rain"
+msgstr "凍雨"
+
+#. 3.0/climacell.js:294 3.8/weather-applet.js:12608 3.8/weather-applet.js:13682
+#. 3.8/weather-applet.js:16141
+msgid "Light freezing rain"
+msgstr "輕微凍雨"
+
+#. 3.0/climacell.js:301 3.8/weather-applet.js:16106
+msgid "Light freezing drizzle"
+msgstr "輕微凍毛毛雨"
+
+#. 3.0/climacell.js:302 3.8/weather-applet.js:12594 3.8/weather-applet.js:16113
+msgid "Freezing drizzle"
+msgstr "凍毛毛雨"
+
+#. 3.0/climacell.js:308 3.0/climacell.js:309 3.8/weather-applet.js:12046
+#. 3.8/weather-applet.js:13662 3.8/weather-applet.js:16085
+msgid "Light drizzle"
+msgstr "輕微毛毛雨"
+
+#. 3.0/climacell.js:315 3.8/weather-applet.js:12629
+msgid "Heavy ice pellets"
+msgstr "強冰珠"
+
+#. 3.0/climacell.js:316 3.0/climacell.js:322 3.0/climacell.js:323
+#. 3.0/climacell.js:330 3.8/weather-applet.js:12621 3.8/weather-applet.js:12622
+#. 3.8/weather-applet.js:12628 3.8/weather-applet.js:12635
+msgid "Ice pellets"
+msgstr "冰珠"
+
+#. 3.0/climacell.js:329 3.8/weather-applet.js:12636
+msgid "Light ice pellets"
+msgstr "輕冰珠"
+
+#. 3.0/climacell.js:336 3.0/climacell.js:337 3.0/met_norway.js:364
+#. 3.0/met_norway.js:365 3.0/met_norway.js:371 3.0/met_norway.js:378
+#. 3.0/met_norway.js:385 3.0/met_uk.js:701 3.0/met_uk.js:708 3.0/met_uk.js:715
+#. 3.0/met_uk.js:716 3.0/openWeatherMap.js:393 3.8/weather-applet.js:10363
+#. 3.8/weather-applet.js:10370 3.8/weather-applet.js:10377
+#. 3.8/weather-applet.js:10378 3.8/weather-applet.js:10552
+#. 3.8/weather-applet.js:11460 3.8/weather-applet.js:11461
+#. 3.8/weather-applet.js:11467 3.8/weather-applet.js:11474
+#. 3.8/weather-applet.js:11481 3.8/weather-applet.js:12070
+#. 3.8/weather-applet.js:12587 3.8/weather-applet.js:13722
+#. 3.8/weather-applet.js:14054 3.8/weather-applet.js:16169
+msgid "Heavy snow"
+msgstr "大雪"
+
+#. 3.0/climacell.js:343 3.0/climacell.js:344 3.0/met_norway.js:539
+#. 3.0/met_norway.js:540 3.0/met_norway.js:546 3.0/openWeatherMap.js:392
+#. 3.0/us_weather.js:477 3.0/us_weather.js:478 3.0/yahoo.js:452
+#. 3.8/weather-applet.js:10459 3.8/weather-applet.js:10550
+#. 3.8/weather-applet.js:11635 3.8/weather-applet.js:11636
+#. 3.8/weather-applet.js:11642 3.8/weather-applet.js:11999
+#. 3.8/weather-applet.js:12068 3.8/weather-applet.js:12565
+#. 3.8/weather-applet.js:12566 3.8/weather-applet.js:12579
+#. 3.8/weather-applet.js:12586 3.8/weather-applet.js:13290
+#. 3.8/weather-applet.js:13291 3.8/weather-applet.js:13716
+#. 3.8/weather-applet.js:13963 3.8/weather-applet.js:14047
+#. 3.8/weather-applet.js:14868 3.8/weather-applet.js:14869
+#. 3.8/weather-applet.js:15266 3.8/weather-applet.js:15267
+#. 3.8/weather-applet.js:16154 3.8/weather-applet.js:16161
+#. 3.8/weather-applet.js:16162 3.8/weather-applet.js:16168
+#. 3.8/weather-applet.js:16175 3.8/weather-applet.js:16765
+#. 3.8/weather-applet.js:16766
+msgid "Snow"
+msgstr "雪"
+
+#. 3.0/climacell.js:350 3.0/climacell.js:351 3.0/met_norway.js:448
+#. 3.0/met_norway.js:449 3.0/met_norway.js:455 3.0/met_norway.js:462
+#. 3.0/met_norway.js:469 3.0/met_uk.js:680 3.0/met_uk.js:687 3.0/met_uk.js:694
+#. 3.0/met_uk.js:695 3.0/openWeatherMap.js:391 3.8/weather-applet.js:10342
+#. 3.8/weather-applet.js:10349 3.8/weather-applet.js:10356
+#. 3.8/weather-applet.js:10357 3.8/weather-applet.js:10548
+#. 3.8/weather-applet.js:11544 3.8/weather-applet.js:11545
+#. 3.8/weather-applet.js:11551 3.8/weather-applet.js:11558
+#. 3.8/weather-applet.js:11565 3.8/weather-applet.js:12066
+#. 3.8/weather-applet.js:12580 3.8/weather-applet.js:13724
+#. 3.8/weather-applet.js:16155
+msgid "Light snow"
+msgstr "小雪"
+
+#. 3.0/climacell.js:357 3.0/climacell.js:358 3.8/weather-applet.js:12078
+#. 3.8/weather-applet.js:12572 3.8/weather-applet.js:12573
+#. 3.8/weather-applet.js:15245 3.8/weather-applet.js:15246
+msgid "Flurries"
+msgstr "飄雪"
+
+#. 3.0/climacell.js:364 3.0/climacell.js:365 3.0/openWeatherMap.js:366
+#. 3.0/us_weather.js:550 3.0/us_weather.js:551 3.8/weather-applet.js:10453
+#. 3.8/weather-applet.js:10498 3.8/weather-applet.js:11979
+#. 3.8/weather-applet.js:12044 3.8/weather-applet.js:12642
+#. 3.8/weather-applet.js:12643 3.8/weather-applet.js:13363
+#. 3.8/weather-applet.js:13364 3.8/weather-applet.js:13728
+#. 3.8/weather-applet.js:14061 3.8/weather-applet.js:14062
+#. 3.8/weather-applet.js:14875 3.8/weather-applet.js:14876
+#. 3.8/weather-applet.js:16217 3.8/weather-applet.js:16218
+#. 3.8/weather-applet.js:16224 3.8/weather-applet.js:16231
+msgid "Thunderstorm"
+msgstr "雷雨"
+
+#. 3.0/climacell.js:371 3.0/climacell.js:372 3.8/weather-applet.js:12510
+msgid "Light fog"
+msgstr "輕霧"
+
+#. 3.0/climacell.js:378 3.0/climacell.js:379 3.0/met_norway.js:301
+#. 3.0/met_norway.js:302 3.0/met_uk.js:568 3.0/met_uk.js:569
+#. 3.0/openWeatherMap.js:405 3.0/us_weather.js:620 3.0/us_weather.js:621
+#. 3.8/weather-applet.js:10230 3.8/weather-applet.js:10231
+#. 3.8/weather-applet.js:10473 3.8/weather-applet.js:10578
+#. 3.8/weather-applet.js:11397 3.8/weather-applet.js:11398
+#. 3.8/weather-applet.js:12013 3.8/weather-applet.js:12092
+#. 3.8/weather-applet.js:12502 3.8/weather-applet.js:12503
+#. 3.8/weather-applet.js:12509 3.8/weather-applet.js:13433
+#. 3.8/weather-applet.js:13434 3.8/weather-applet.js:13670
+#. 3.8/weather-applet.js:14826 3.8/weather-applet.js:14827
+#. 3.8/weather-applet.js:15294 3.8/weather-applet.js:15295
+#. 3.8/weather-applet.js:16077 3.8/weather-applet.js:16078
+#. 3.8/weather-applet.js:16818 3.8/weather-applet.js:16819
+msgid "Fog"
+msgstr "濃霧"
+
+#. 3.0/climacell.js:385 3.0/climacell.js:386 3.0/met_norway.js:287
+#. 3.0/met_norway.js:288 3.0/met_uk.js:575 3.0/met_uk.js:576 3.0/yahoo.js:462
+#. 3.8/weather-applet.js:10237 3.8/weather-applet.js:10238
+#. 3.8/weather-applet.js:11383 3.8/weather-applet.js:11384
+#. 3.8/weather-applet.js:12474 3.8/weather-applet.js:12475
+#. 3.8/weather-applet.js:13956 3.8/weather-applet.js:13957
+#. 3.8/weather-applet.js:14819 3.8/weather-applet.js:14820
+#. 3.8/weather-applet.js:15336 3.8/weather-applet.js:15337
+#. 3.8/weather-applet.js:16581 3.8/weather-applet.js:16582
+msgid "Cloudy"
+msgstr "多雲"
+
+#. 3.0/climacell.js:392 3.0/climacell.js:393 3.0/us_weather.js:428
+#. 3.0/us_weather.js:429 3.0/us_weather.js:463 3.8/weather-applet.js:12495
+#. 3.8/weather-applet.js:12496 3.8/weather-applet.js:13241
+#. 3.8/weather-applet.js:13242 3.8/weather-applet.js:13276
+msgid "Mostly cloudy"
+msgstr "陰天"
+
+#. 3.0/climacell.js:399 3.0/climacell.js:400 3.0/met_norway.js:476
+#. 3.0/met_norway.js:477 3.0/met_uk.js:540 3.0/met_uk.js:541 3.0/met_uk.js:547
+#. 3.0/met_uk.js:548 3.0/us_weather.js:421 3.0/us_weather.js:422
+#. 3.0/us_weather.js:456 3.8/weather-applet.js:10202
+#. 3.8/weather-applet.js:10203 3.8/weather-applet.js:10209
+#. 3.8/weather-applet.js:10210 3.8/weather-applet.js:11572
+#. 3.8/weather-applet.js:11573 3.8/weather-applet.js:12488
+#. 3.8/weather-applet.js:12489 3.8/weather-applet.js:13234
+#. 3.8/weather-applet.js:13235 3.8/weather-applet.js:13269
+#. 3.8/weather-applet.js:13949 3.8/weather-applet.js:13950
+#. 3.8/weather-applet.js:16062 3.8/weather-applet.js:16063
+msgid "Partly cloudy"
+msgstr "部分多雲"
+
+#. 3.0/climacell.js:406 3.0/climacell.js:407 3.8/weather-applet.js:12481
+#. 3.8/weather-applet.js:12482
+msgid "Mostly clear"
+msgstr "大致晴朗"
+
+#. 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:526
+#. 3.0/met_uk.js:527 3.0/openWeatherMap.js:411 3.0/us_weather.js:407
+#. 3.0/us_weather.js:408 3.0/us_weather.js:442 3.0/yahoo.js:465
+#. 3.8/weather-applet.js:10188 3.8/weather-applet.js:10189
+#. 3.8/weather-applet.js:10461 3.8/weather-applet.js:12015
+#. 3.8/weather-applet.js:12096 3.8/weather-applet.js:12467
+#. 3.8/weather-applet.js:12468 3.8/weather-applet.js:13220
+#. 3.8/weather-applet.js:13221 3.8/weather-applet.js:13255
+#. 3.8/weather-applet.js:13740 3.8/weather-applet.js:13942
+#. 3.8/weather-applet.js:13943 3.8/weather-applet.js:14805
+#. 3.8/weather-applet.js:14806 3.8/weather-applet.js:14812
+#. 3.8/weather-applet.js:14813 3.8/weather-applet.js:15371
+#. 3.8/weather-applet.js:15372 3.8/weather-applet.js:16048
+#. 3.8/weather-applet.js:16524 3.8/weather-applet.js:16531
+msgid "Clear"
+msgstr "晴朗"
+
+#. 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:533
+#. 3.0/met_uk.js:534 3.0/yahoo.js:466 3.8/weather-applet.js:10195
+#. 3.8/weather-applet.js:10196 3.8/weather-applet.js:12467
+#. 3.8/weather-applet.js:12468 3.8/weather-applet.js:15378
+#. 3.8/weather-applet.js:15379
+msgid "Sunny"
+msgstr "陽光普照"
+
+#. 3.0/climacell.js:421 3.0/climacell.js:422 3.0/met_norway.js:568
+#. 3.0/met_norway.js:569 3.0/met_uk.js:519 3.0/met_uk.js:520 3.0/met_uk.js:554
+#. 3.0/met_uk.js:555 3.0/met_uk.js:743 3.0/met_uk.js:744 3.0/us_weather.js:627
+#. 3.0/us_weather.js:628 3.8/weather-applet.js:8393 3.8/weather-applet.js:10181
+#. 3.8/weather-applet.js:10182 3.8/weather-applet.js:10216
+#. 3.8/weather-applet.js:10217 3.8/weather-applet.js:10405
+#. 3.8/weather-applet.js:10406 3.8/weather-applet.js:11366
+#. 3.8/weather-applet.js:11367 3.8/weather-applet.js:11664
+#. 3.8/weather-applet.js:11665 3.8/weather-applet.js:12026
+#. 3.8/weather-applet.js:12107 3.8/weather-applet.js:12459
+#. 3.8/weather-applet.js:12460 3.8/weather-applet.js:13211
+#. 3.8/weather-applet.js:13212 3.8/weather-applet.js:13440
+#. 3.8/weather-applet.js:13441 3.8/weather-applet.js:14738
+#. 3.8/weather-applet.js:14739 3.8/weather-applet.js:14889
+#. 3.8/weather-applet.js:14890 3.8/weather-applet.js:15482
+#. 3.8/weather-applet.js:15484 3.8/weather-applet.js:16238
+#. 3.8/weather-applet.js:16239 3.8/weather-applet.js:16998
+#. 3.8/weather-applet.js:16999
+msgid "Unknown"
+msgstr "未知"
+
+#. 3.0/darkSky.js:71
+msgid "and"
+msgstr "及"
+
+#. 3.0/darkSky.js:71
+msgid "until"
+msgstr "直到"
+
+#. 3.0/darkSky.js:71
+msgid "Possible"
+msgstr "可能"
+
+#. 3.0/darkSky.js:211
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://darksky.net/dev/register"
+msgstr ""
+"請在設定中輸入 API 金鑰，\n"
+"或先至 https://darksky.net/dev/register 申請一個"
+
+#. 3.0/darkSky.js:238
+msgid ""
+"Please Make sure you\n"
+"entered the API key that you have from DarkSky"
+msgstr ""
+"請確認您已輸入\n"
+"從 DarkSky 取得的 API 金鑰"
+
+#. 3.0/ipApi.js:89 3.8/weather-applet.js:16033
+msgid "Could not obtain location"
+msgstr "無法取得位置"
+
+#. 3.0/ipApi.js:95
+msgid ""
+"Location Service responded with errors, please see the logs in Looking Glass"
+msgstr "位置服務回應發生錯誤，請檢視 Looking Glass 中的記錄"
+
+#. 3.0/met_norway.js:131 3.8/weather-applet.js:11225
+msgid "Cloudiness"
+msgstr "雲量"
+
+#. 3.0/met_norway.js:280 3.0/met_norway.js:281 3.0/openWeatherMap.js:412
+#. 3.8/weather-applet.js:10591 3.8/weather-applet.js:11376
+#. 3.8/weather-applet.js:11377 3.8/weather-applet.js:16049
+#. 3.8/weather-applet.js:16525 3.8/weather-applet.js:16532
+msgid "Clear sky"
+msgstr "晴空萬里"
+
+#. 3.0/met_norway.js:294 3.0/met_norway.js:295 3.0/yahoo.js:468
+#. 3.8/weather-applet.js:11390 3.8/weather-applet.js:11391
+msgid "Fair"
+msgstr "晴朗"
+
+#. 3.0/met_norway.js:316 3.8/weather-applet.js:11412
+msgid "Heavy rain and thunder"
+msgstr "大雷雨"
+
+#. 3.0/met_norway.js:323 3.8/weather-applet.js:11419
+msgid "Heavy rain showers"
+msgstr "強陣雨"
+
+#. 3.0/met_norway.js:330 3.8/weather-applet.js:11426
+msgid "Heavy rain showers and thunder"
+msgstr "強雷陣雨"
+
+#. 3.0/met_norway.js:336 3.0/met_norway.js:337 3.0/met_norway.js:343
+#. 3.0/met_norway.js:350 3.0/met_norway.js:357 3.8/weather-applet.js:11432
+#. 3.8/weather-applet.js:11433 3.8/weather-applet.js:11439
+#. 3.8/weather-applet.js:11446 3.8/weather-applet.js:11453
+#. 3.8/weather-applet.js:12082
+msgid "Heavy sleet"
+msgstr "大霙"
+
+#. 3.0/met_norway.js:344 3.8/weather-applet.js:11440
+msgid "Heavy sleet and thunder"
+msgstr "大霙伴隨雷"
+
+#. 3.0/met_norway.js:351 3.8/weather-applet.js:11447
+msgid "Heavy sleet showers"
+msgstr "大霙陣雨"
+
+#. 3.0/met_norway.js:358 3.8/weather-applet.js:11454
+msgid "Heavy sleet showers and thunder"
+msgstr "大霙陣雨伴隨雷"
+
+#. 3.0/met_norway.js:372 3.8/weather-applet.js:11468
+msgid "Heavy snow and thunder"
+msgstr "大雪伴隨雷雨"
+
+#. 3.0/met_norway.js:379 3.8/weather-applet.js:11475
+#. 3.8/weather-applet.js:14055
+msgid "Heavy snow showers"
+msgstr "強陣雪"
+
+#. 3.0/met_norway.js:386 3.8/weather-applet.js:11482
+msgid "Heavy snow showers and thunder"
+msgstr "強雷陣雪"
+
+#. 3.0/met_norway.js:400 3.8/weather-applet.js:11496
+msgid "Light rain and thunder"
+msgstr "小雷雨"
+
+#. 3.0/met_norway.js:407 3.8/weather-applet.js:11503
+msgid "Light rain showers"
+msgstr "小陣雨"
+
+#. 3.0/met_norway.js:414 3.8/weather-applet.js:11510
+msgid "Light rain showers and thunder"
+msgstr "小雷陣雨"
+
+#. 3.0/met_norway.js:420 3.0/met_norway.js:421 3.0/met_norway.js:427
+#. 3.0/met_norway.js:434 3.0/met_norway.js:441 3.8/weather-applet.js:11516
+#. 3.8/weather-applet.js:11517 3.8/weather-applet.js:11523
+#. 3.8/weather-applet.js:11530 3.8/weather-applet.js:11537
+msgid "Light sleet"
+msgstr "小霙"
+
+#. 3.0/met_norway.js:428 3.8/weather-applet.js:11524
+msgid "Light sleet and thunder"
+msgstr "小霙有雷"
+
+#. 3.0/met_norway.js:435 3.8/weather-applet.js:11531
+msgid "Light sleet showers"
+msgstr "小陣霙"
+
+#. 3.0/met_norway.js:442 3.8/weather-applet.js:11538
+msgid "Light sleet showers and thunder"
+msgstr "小陣霙有雷"
+
+#. 3.0/met_norway.js:456 3.8/weather-applet.js:11552
+msgid "Light snow and thunder"
+msgstr "小雪伴隨雷雨"
+
+#. 3.0/met_norway.js:463 3.8/weather-applet.js:11559
+#. 3.8/weather-applet.js:16204
+msgid "Light snow showers"
+msgstr "小陣雪"
+
+#. 3.0/met_norway.js:470 3.8/weather-applet.js:11566
+msgid "Light snow showers and thunder"
+msgstr "小雷陣雪"
+
+#. 3.0/met_norway.js:491 3.8/weather-applet.js:11587
+msgid "Rain and thunder"
+msgstr "雷雨"
+
+#. 3.0/met_norway.js:497 3.0/met_norway.js:498 3.0/met_norway.js:504
+#. 3.0/us_weather.js:542 3.8/weather-applet.js:11593
+#. 3.8/weather-applet.js:11594 3.8/weather-applet.js:11600
+#. 3.8/weather-applet.js:13355 3.8/weather-applet.js:13702
+#. 3.8/weather-applet.js:14020 3.8/weather-applet.js:14026
+msgid "Rain showers"
+msgstr "陣雨"
+
+#. 3.0/met_norway.js:505 3.8/weather-applet.js:11601
+msgid "Rain showers and thunder"
+msgstr "雷陣雨"
+
+#. 3.0/met_norway.js:511 3.0/met_norway.js:512 3.0/met_norway.js:518
+#. 3.0/met_norway.js:525 3.0/met_norway.js:532 3.0/met_uk.js:638
+#. 3.0/met_uk.js:645 3.0/met_uk.js:652 3.0/met_uk.js:653
+#. 3.0/openWeatherMap.js:394 3.0/us_weather.js:491 3.0/us_weather.js:492
+#. 3.0/us_weather.js:498 3.0/us_weather.js:499 3.0/us_weather.js:526
+#. 3.0/us_weather.js:527 3.0/yahoo.js:454 3.8/weather-applet.js:10300
+#. 3.8/weather-applet.js:10307 3.8/weather-applet.js:10314
+#. 3.8/weather-applet.js:10315 3.8/weather-applet.js:10554
+#. 3.8/weather-applet.js:11607 3.8/weather-applet.js:11608
+#. 3.8/weather-applet.js:11614 3.8/weather-applet.js:11621
+#. 3.8/weather-applet.js:11628 3.8/weather-applet.js:12002
+#. 3.8/weather-applet.js:12080 3.8/weather-applet.js:13304
+#. 3.8/weather-applet.js:13305 3.8/weather-applet.js:13311
+#. 3.8/weather-applet.js:13312 3.8/weather-applet.js:13339
+#. 3.8/weather-applet.js:13340 3.8/weather-applet.js:14861
+#. 3.8/weather-applet.js:14862 3.8/weather-applet.js:15280
+#. 3.8/weather-applet.js:15281 3.8/weather-applet.js:16644
+#. 3.8/weather-applet.js:16645 3.8/weather-applet.js:16651
+#. 3.8/weather-applet.js:16652 3.8/weather-applet.js:16757
+#. 3.8/weather-applet.js:16758
+msgid "Sleet"
+msgstr "霙"
+
+#. 3.0/met_norway.js:519 3.8/weather-applet.js:11615
+msgid "Sleet and thunder"
+msgstr "雷霙"
+
+#. 3.0/met_norway.js:526 3.8/weather-applet.js:11622
+msgid "Sleet showers"
+msgstr "陣霙"
+
+#. 3.0/met_norway.js:533 3.8/weather-applet.js:11629
+msgid "Sleet showers and thunder"
+msgstr "雷陣霙"
+
+#. 3.0/met_norway.js:547 3.8/weather-applet.js:11643
+msgid "Snow and thunder"
+msgstr "雪伴隨雷雨"
+
+#. 3.0/met_norway.js:553 3.0/met_norway.js:554 3.0/met_norway.js:560
+#. 3.8/weather-applet.js:11649 3.8/weather-applet.js:11650
+#. 3.8/weather-applet.js:11656 3.8/weather-applet.js:13720
+#. 3.8/weather-applet.js:14048 3.8/weather-applet.js:16203
+#. 3.8/weather-applet.js:16210 3.8/weather-applet.js:16211
+msgid "Snow showers"
+msgstr "陣雪"
+
+#. 3.0/met_norway.js:561 3.8/weather-applet.js:11657
+msgid "Snow showers and thunder"
+msgstr "陣雪伴隨雷雨"
+
+#. 3.0/met_uk.js:162 3.0/met_uk.js:192 3.0/met_uk.js:239 3.0/us_weather.js:151
+#. 3.0/us_weather.js:179
+msgid "Unexpected response from API"
+msgstr "API 回應異常"
+
+#. 3.0/met_uk.js:316 3.8/weather-applet.js:10000
+msgid "Visibility"
+msgstr "能見度"
+
+#. 3.0/met_uk.js:340 3.0/openWeatherMap.js:190 3.0/us_weather.js:334
+#. 3.0/weatherbit.js:212 3.8/weather-applet.js:10028
+#. 3.8/weather-applet.js:11776 3.8/weather-applet.js:13168
+msgid "Failed to Process Current Weather Info"
+msgstr "處理目前天氣資訊失敗"
+
+#. 3.0/met_uk.js:364 3.0/met_uk.js:400 3.0/us_weather.js:371
+#. 3.0/weatherbit.js:239 3.0/weatherbit.js:274 3.8/weather-applet.js:9797
+#. 3.8/weather-applet.js:9835 3.8/weather-applet.js:11802
+#. 3.8/weather-applet.js:11836 3.8/weather-applet.js:12946
+msgid "Failed to Process Forecast Info"
+msgstr "處理天氣預報資訊失敗"
+
+#. 3.0/met_uk.js:408
+msgid "Very poor - Less than"
+msgstr "非常差 - 低於"
+
+#. 3.0/met_uk.js:410
+msgid "Poor - Between"
+msgstr "差 - 介於"
+
+#. 3.0/met_uk.js:412
+msgid "Moderate - Between"
+msgstr "普通 - 介於"
+
+#. 3.0/met_uk.js:414
+msgid "Good - Between"
+msgstr "良好 - 介於"
+
+#. 3.0/met_uk.js:416
+msgid "Very good - Between"
+msgstr "非常好 - 介於"
+
+#. 3.0/met_uk.js:417
+msgid "Excellent - More than"
+msgstr "極佳 - 高於"
+
+#. 3.0/met_uk.js:561 3.0/met_uk.js:562 3.0/openWeatherMap.js:401
+#. 3.8/weather-applet.js:10223 3.8/weather-applet.js:10224
+#. 3.8/weather-applet.js:10465 3.8/weather-applet.js:10570
+#. 3.8/weather-applet.js:12004 3.8/weather-applet.js:12084
+#. 3.8/weather-applet.js:13692
+msgid "Mist"
+msgstr "薄霧"
+
+#. 3.0/met_uk.js:582 3.0/met_uk.js:583 3.0/us_weather.js:435
+#. 3.0/us_weather.js:436 3.0/us_weather.js:470 3.8/weather-applet.js:10244
+#. 3.8/weather-applet.js:10245 3.8/weather-applet.js:12023
+#. 3.8/weather-applet.js:12104 3.8/weather-applet.js:13248
+#. 3.8/weather-applet.js:13249 3.8/weather-applet.js:13283
+#. 3.8/weather-applet.js:13736 3.8/weather-applet.js:16069
+#. 3.8/weather-applet.js:16070 3.8/weather-applet.js:16566
+#. 3.8/weather-applet.js:16567 3.8/weather-applet.js:16573
+#. 3.8/weather-applet.js:16574
+msgid "Overcast"
+msgstr "陰天"
+
+#. 3.0/met_uk.js:590 3.0/met_uk.js:597 3.8/weather-applet.js:10252
+#. 3.8/weather-applet.js:10259
+msgid "Light rain shower"
+msgstr "小陣雨"
+
+#. 3.0/met_uk.js:603 3.0/met_uk.js:604 3.0/openWeatherMap.js:373
+#. 3.0/yahoo.js:445 3.8/weather-applet.js:10265 3.8/weather-applet.js:10266
+#. 3.8/weather-applet.js:10455 3.8/weather-applet.js:10512
+#. 3.8/weather-applet.js:11983 3.8/weather-applet.js:12048
+#. 3.8/weather-applet.js:12537 3.8/weather-applet.js:12538
+#. 3.8/weather-applet.js:12593 3.8/weather-applet.js:13658
+#. 3.8/weather-applet.js:15217 3.8/weather-applet.js:15218
+#. 3.8/weather-applet.js:16084 3.8/weather-applet.js:16091
+#. 3.8/weather-applet.js:16092 3.8/weather-applet.js:16098
+#. 3.8/weather-applet.js:16105 3.8/weather-applet.js:16112
+msgid "Drizzle"
+msgstr "毛毛雨"
+
+#. 3.0/met_uk.js:618 3.0/met_uk.js:625 3.8/weather-applet.js:10280
+#. 3.8/weather-applet.js:10287
+msgid "Heavy rain shower"
+msgstr "強陣雨"
+
+#. 3.0/met_uk.js:639 3.0/met_uk.js:646 3.8/weather-applet.js:10301
+#. 3.8/weather-applet.js:10308
+msgid "Sleet shower"
+msgstr "陣霙"
+
+#. 3.0/met_uk.js:659 3.0/met_uk.js:666 3.0/met_uk.js:673 3.0/met_uk.js:674
+#. 3.0/yahoo.js:453 3.8/weather-applet.js:10321 3.8/weather-applet.js:10328
+#. 3.8/weather-applet.js:10335 3.8/weather-applet.js:10336
+#. 3.8/weather-applet.js:13734 3.8/weather-applet.js:14833
+#. 3.8/weather-applet.js:14834 3.8/weather-applet.js:15273
+#. 3.8/weather-applet.js:15274
+msgid "Hail"
+msgstr "冰雹"
+
+#. 3.0/met_uk.js:660 3.0/met_uk.js:667 3.8/weather-applet.js:10322
+#. 3.8/weather-applet.js:10329
+msgid "Hail shower"
+msgstr "冰雹雨"
+
+#. 3.0/met_uk.js:681 3.0/met_uk.js:688 3.8/weather-applet.js:10343
+#. 3.8/weather-applet.js:10350
+msgid "Light snow shower"
+msgstr "小陣雪"
+
+#. 3.0/met_uk.js:702 3.0/met_uk.js:709 3.8/weather-applet.js:10364
+#. 3.8/weather-applet.js:10371 3.8/weather-applet.js:12076
+msgid "Heavy snow shower"
+msgstr "強陣雪"
+
+#. 3.0/met_uk.js:722 3.0/met_uk.js:729 3.0/met_uk.js:736 3.0/met_uk.js:737
+#. 3.8/weather-applet.js:10384 3.8/weather-applet.js:10391
+#. 3.8/weather-applet.js:10398 3.8/weather-applet.js:10399
+msgid "Thunder"
+msgstr "雷"
+
+#. 3.0/met_uk.js:723 3.0/met_uk.js:730 3.8/weather-applet.js:10385
+#. 3.8/weather-applet.js:10392
+msgid "Thunder shower"
+msgstr "雷陣雨"
+
+#. 3.0/openWeatherMap.js:238 3.8/weather-applet.js:10852
+msgid "Please make sure Location is in the correct format in the Settings"
+msgstr "請確認設定中的位置格式正確"
+
+#. 3.0/openWeatherMap.js:242 3.8/weather-applet.js:10856
+msgid "Make sure you entered the correct key in settings"
+msgstr "請確認您在設定中輸入了正確的金鑰"
+
+#. 3.0/openWeatherMap.js:246 3.0/openWeatherMap.js:266
+#. 3.8/weather-applet.js:10860
+msgid ""
+"Location not found, make sure location is available or it is in the correct "
+"format"
+msgstr "找不到位置，請確認該位置可用或格式正確"
+
+#. 3.0/openWeatherMap.js:250 3.8/weather-applet.js:10864
+msgid "If this problem persists, please contact the Author of this applet"
+msgstr "如果此問題持續發生，請聯絡此小工具的作者"
+
+#. 3.0/openWeatherMap.js:254 3.8/weather-applet.js:10868
+msgid "Unknown Error, please see the logs in Looking Glass"
+msgstr "未知錯誤，請檢視 Looking Glass 中的記錄"
+
+#. 3.0/openWeatherMap.js:362 3.8/weather-applet.js:10490
+#. 3.8/weather-applet.js:12032
+msgid "Thunderstorm with light rain"
+msgstr "雷雨伴隨小雨"
+
+#. 3.0/openWeatherMap.js:363 3.8/weather-applet.js:10492
+#. 3.8/weather-applet.js:12034
+msgid "Thunderstorm with rain"
+msgstr "雷雨伴隨雨"
+
+#. 3.0/openWeatherMap.js:364 3.8/weather-applet.js:10494
+#. 3.8/weather-applet.js:12036
+msgid "Thunderstorm with heavy rain"
+msgstr "雷雨伴隨大雨"
+
+#. 3.0/openWeatherMap.js:365 3.8/weather-applet.js:10496
+msgid "Light thunderstorm"
+msgstr "小雷雨"
+
+#. 3.0/openWeatherMap.js:367 3.8/weather-applet.js:10500
+msgid "Heavy thunderstorm"
+msgstr "強烈雷雨"
+
+#. 3.0/openWeatherMap.js:368 3.8/weather-applet.js:10502
+msgid "Ragged thunderstorm"
+msgstr "局部雷雨"
+
+#. 3.0/openWeatherMap.js:369 3.8/weather-applet.js:10504
+#. 3.8/weather-applet.js:12038
+msgid "Thunderstorm with light drizzle"
+msgstr "雷雨伴隨毛毛雨"
+
+#. 3.0/openWeatherMap.js:370 3.8/weather-applet.js:10506
+#. 3.8/weather-applet.js:12040
+msgid "Thunderstorm with drizzle"
+msgstr "雷雨伴隨毛毛雨"
+
+#. 3.0/openWeatherMap.js:371 3.8/weather-applet.js:10508
+#. 3.8/weather-applet.js:12042
+msgid "Thunderstorm with heavy drizzle"
+msgstr "雷雨伴隨大毛毛雨"
+
+#. 3.0/openWeatherMap.js:372 3.8/weather-applet.js:10510
+msgid "Light intensity drizzle"
+msgstr "輕微毛毛雨"
+
+#. 3.0/openWeatherMap.js:374 3.8/weather-applet.js:10514
+msgid "Heavy intensity drizzle"
+msgstr "強烈毛毛雨"
+
+#. 3.0/openWeatherMap.js:375 3.8/weather-applet.js:10516
+msgid "Light intensity drizzle rain"
+msgstr "輕微毛毛雨"
+
+#. 3.0/openWeatherMap.js:376 3.8/weather-applet.js:10518
+msgid "Drizzle rain"
+msgstr "毛毛雨"
+
+#. 3.0/openWeatherMap.js:377 3.8/weather-applet.js:10520
+msgid "Heavy intensity drizzle rain"
+msgstr "強烈毛毛雨"
+
+#. 3.0/openWeatherMap.js:378 3.8/weather-applet.js:10522
+msgid "Shower rain and drizzle"
+msgstr "陣雨及毛毛雨"
+
+#. 3.0/openWeatherMap.js:379 3.8/weather-applet.js:10524
+msgid "Heavy shower rain and drizzle"
+msgstr "強陣雨及毛毛雨"
+
+#. 3.0/openWeatherMap.js:380 3.8/weather-applet.js:10526
+msgid "Shower drizzle"
+msgstr "陣雨性毛毛雨"
+
+#. 3.0/openWeatherMap.js:382 3.8/weather-applet.js:10530
+#. 3.8/weather-applet.js:12054 3.8/weather-applet.js:13984
+#. 3.8/weather-applet.js:13985
+msgid "Moderate rain"
+msgstr "中雨"
+
+#. 3.0/openWeatherMap.js:383 3.8/weather-applet.js:10532
+msgid "Heavy intensity rain"
+msgstr "強降雨"
+
+#. 3.0/openWeatherMap.js:384 3.8/weather-applet.js:10534
+msgid "Very heavy rain"
+msgstr "豪雨"
+
+#. 3.0/openWeatherMap.js:385 3.8/weather-applet.js:10536
+msgid "Extreme rain"
+msgstr "極端降雨"
+
+#. 3.0/openWeatherMap.js:387 3.8/weather-applet.js:10540
+msgid "Light intensity shower rain"
+msgstr "輕微陣雨"
+
+#. 3.0/openWeatherMap.js:388 3.8/weather-applet.js:10542
+#. 3.8/weather-applet.js:12062
+msgid "Shower rain"
+msgstr "陣雨"
+
+#. 3.0/openWeatherMap.js:389 3.8/weather-applet.js:10544
+msgid "Heavy intensity shower rain"
+msgstr "強陣雨"
+
+#. 3.0/openWeatherMap.js:390 3.8/weather-applet.js:10546
+msgid "Ragged shower rain"
+msgstr "零星陣雨"
+
+#. 3.0/openWeatherMap.js:395 3.8/weather-applet.js:10558
+msgid "Shower sleet"
+msgstr "陣霙"
+
+#. 3.0/openWeatherMap.js:396 3.8/weather-applet.js:10560
+msgid "Light rain and snow"
+msgstr "小雨夾雪"
+
+#. 3.0/openWeatherMap.js:397 3.8/weather-applet.js:10562
+#. 3.8/weather-applet.js:13991 3.8/weather-applet.js:13992
+#. 3.8/weather-applet.js:13998 3.8/weather-applet.js:14033
+#. 3.8/weather-applet.js:14040
+msgid "Rain and snow"
+msgstr "雨夾雪"
+
+#. 3.0/openWeatherMap.js:398 3.8/weather-applet.js:10564
+msgid "Light shower snow"
+msgstr "小陣雪"
+
+#. 3.0/openWeatherMap.js:399 3.8/weather-applet.js:10566
+msgid "Shower snow"
+msgstr "陣雪"
+
+#. 3.0/openWeatherMap.js:400 3.8/weather-applet.js:10568
+msgid "Heavy shower snow"
+msgstr "強陣雪"
+
+#. 3.0/openWeatherMap.js:402 3.0/us_weather.js:585 3.0/us_weather.js:586
+#. 3.8/weather-applet.js:10467 3.8/weather-applet.js:10572
+#. 3.8/weather-applet.js:12006 3.8/weather-applet.js:12086
+#. 3.8/weather-applet.js:13398 3.8/weather-applet.js:13399
+#. 3.8/weather-applet.js:15308 3.8/weather-applet.js:15309
+msgid "Smoke"
+msgstr "煙霧"
+
+#. 3.0/openWeatherMap.js:403 3.0/us_weather.js:592 3.0/us_weather.js:593
+#. 3.0/yahoo.js:457 3.8/weather-applet.js:10469 3.8/weather-applet.js:10574
+#. 3.8/weather-applet.js:12008 3.8/weather-applet.js:12088
+#. 3.8/weather-applet.js:13405 3.8/weather-applet.js:13406
+#. 3.8/weather-applet.js:15301 3.8/weather-applet.js:15302
+msgid "Haze"
+msgstr "霾"
+
+#. 3.0/openWeatherMap.js:404 3.8/weather-applet.js:10576
+msgid "Sand, dust whirls"
+msgstr "沙塵捲"
+
+#. 3.0/openWeatherMap.js:406 3.8/weather-applet.js:10475
+#. 3.8/weather-applet.js:10580
+msgid "Sand"
+msgstr "沙塵"
+
+#. 3.0/openWeatherMap.js:407 3.0/us_weather.js:578 3.0/us_weather.js:579
+#. 3.0/yahoo.js:455 3.8/weather-applet.js:10471 3.8/weather-applet.js:10582
+#. 3.8/weather-applet.js:12010 3.8/weather-applet.js:12090
+#. 3.8/weather-applet.js:13391 3.8/weather-applet.js:13392
+#. 3.8/weather-applet.js:15287 3.8/weather-applet.js:15288
+msgid "Dust"
+msgstr "灰塵"
+
+#. 3.0/openWeatherMap.js:408 3.8/weather-applet.js:10584
+msgid "Volcanic ash"
+msgstr "火山灰"
+
+#. 3.0/openWeatherMap.js:409 3.8/weather-applet.js:10586
+#. 3.8/weather-applet.js:13726
+msgid "Squalls"
+msgstr "暴風"
+
+#. 3.0/openWeatherMap.js:410 3.0/us_weather.js:557 3.0/us_weather.js:558
+#. 3.0/yahoo.js:436 3.8/weather-applet.js:10481 3.8/weather-applet.js:10588
+#. 3.8/weather-applet.js:13370 3.8/weather-applet.js:13371
+#. 3.8/weather-applet.js:15160 3.8/weather-applet.js:15161
+msgid "Tornado"
+msgstr "龍捲風"
+
+#. 3.0/openWeatherMap.js:413
+msgid "Sky is clear"
+msgstr "晴空萬里"
+
+#. 3.0/openWeatherMap.js:414 3.8/weather-applet.js:10463
+msgid "Clouds"
+msgstr "多雲"
+
+#. 3.0/openWeatherMap.js:415 3.0/us_weather.js:414 3.0/us_weather.js:415
+#. 3.0/us_weather.js:449 3.8/weather-applet.js:10593
+#. 3.8/weather-applet.js:12017 3.8/weather-applet.js:12098
+#. 3.8/weather-applet.js:13227 3.8/weather-applet.js:13228
+#. 3.8/weather-applet.js:13262 3.8/weather-applet.js:16055
+#. 3.8/weather-applet.js:16056
+msgid "Few clouds"
+msgstr "少雲"
+
+#. 3.0/openWeatherMap.js:416 3.8/weather-applet.js:10595
+#. 3.8/weather-applet.js:12019 3.8/weather-applet.js:12100
+msgid "Scattered clouds"
+msgstr "散雲"
+
+#. 3.0/openWeatherMap.js:417 3.8/weather-applet.js:10597
+#. 3.8/weather-applet.js:12021 3.8/weather-applet.js:12102
+msgid "Broken clouds"
+msgstr "碎雲"
+
+#. 3.0/openWeatherMap.js:418 3.8/weather-applet.js:10599
+msgid "Overcast clouds"
+msgstr "陰天"
+
+#. 3.0/us_weather.js:120
+msgid "Could not get forecast for your area"
+msgstr "無法取得您所在地區的天氣預報"
+
+#. 3.0/us_weather.js:231 3.8/weather-applet.js:12903
+msgid "Location is outside US, please use a different provider."
+msgstr "位置在美國境外，請使用其他供應商。"
+
+#. 3.0/us_weather.js:394 3.8/weather-applet.js:12967
+msgid "Failed to Process Hourly Forecast Info"
+msgstr "處理每小時預報資訊失敗"
+
+#. 3.0/us_weather.js:443 3.8/weather-applet.js:13256
+msgid "Clear and windy"
+msgstr "晴朗有風"
+
+#. 3.0/us_weather.js:450 3.8/weather-applet.js:13263
+msgid "Few clouds and windy"
+msgstr "少雲有風"
+
+#. 3.0/us_weather.js:457 3.8/weather-applet.js:13270
+msgid "Partly cloudy and windy"
+msgstr "部分多雲有風"
+
+#. 3.0/us_weather.js:464 3.8/weather-applet.js:13277
+msgid "Mostly cloudy and windy"
+msgstr "大致多雲有風"
+
+#. 3.0/us_weather.js:471 3.8/weather-applet.js:13284
+msgid "Overcast and windy"
+msgstr "陰天有風"
+
+#. 3.0/us_weather.js:485 3.8/weather-applet.js:13298
+msgid "Snowy rain"
+msgstr "雨夾雪"
+
+#. 3.0/us_weather.js:520 3.8/weather-applet.js:13333
+msgid "Freezing rain and snow"
+msgstr "凍雨夾雪"
+
+#. 3.0/us_weather.js:564 3.0/us_weather.js:565 3.0/utils.js:336
+#. 3.0/yahoo.js:438 3.8/weather-applet.js:8610 3.8/weather-applet.js:13377
+#. 3.8/weather-applet.js:13378 3.8/weather-applet.js:15174
+#. 3.8/weather-applet.js:15175
+msgid "Hurricane"
+msgstr "颶風"
+
+#. 3.0/us_weather.js:571 3.0/utils.js:331 3.8/weather-applet.js:8605
+#. 3.8/weather-applet.js:13384
+msgid "Storm"
+msgstr "暴風雨"
+
+#. 3.0/us_weather.js:572 3.8/weather-applet.js:13385
+msgid "Tropical storm"
+msgstr "熱帶風暴"
+
+#. 3.0/us_weather.js:599 3.0/us_weather.js:600 3.0/yahoo.js:470
+#. 3.8/weather-applet.js:13412 3.8/weather-applet.js:13413
+#. 3.8/weather-applet.js:15406 3.8/weather-applet.js:15407
+msgid "Hot"
+msgstr "炎熱"
+
+#. 3.0/us_weather.js:606 3.0/us_weather.js:607 3.0/yahoo.js:461
+#. 3.8/weather-applet.js:13419 3.8/weather-applet.js:13420
+msgid "Cold"
+msgstr "寒冷"
+
+#. 3.0/us_weather.js:613 3.0/us_weather.js:614 3.0/yahoo.js:477
+#. 3.8/weather-applet.js:13426 3.8/weather-applet.js:13427
+#. 3.8/weather-applet.js:15455 3.8/weather-applet.js:15456
+msgid "Blizzard"
+msgstr "暴風雪"
+
+#. 3.0/utils.js:146 3.8/weather-applet.js:8489
+msgid "Today"
+msgstr "今天"
+
+#. 3.0/utils.js:148 3.8/weather-applet.js:8491
+msgid "Tomorrow"
+msgstr "明天"
+
+#. 3.0/utils.js:204
+msgid "Sunday"
+msgstr "星期日"
+
+#. 3.0/utils.js:204
+msgid "Monday"
+msgstr "星期一"
+
+#. 3.0/utils.js:204
+msgid "Tuesday"
+msgstr "星期二"
+
+#. 3.0/utils.js:204
+msgid "Wednesday"
+msgstr "星期三"
+
+#. 3.0/utils.js:204
+msgid "Thursday"
+msgstr "星期四"
+
+#. 3.0/utils.js:204
+msgid "Friday"
+msgstr "星期五"
+
+#. 3.0/utils.js:204
+msgid "Saturday"
+msgstr "星期六"
+
+#. 3.0/utils.js:301 3.8/weather-applet.js:8575
+msgid "Calm"
+msgstr "無風"
+
+#. 3.0/utils.js:304 3.8/weather-applet.js:8578
+msgid "Light air"
+msgstr "輕風"
+
+#. 3.0/utils.js:307 3.8/weather-applet.js:8581
+msgid "Light breeze"
+msgstr "微風"
+
+#. 3.0/utils.js:310 3.8/weather-applet.js:8584
+msgid "Gentle breeze"
+msgstr "和風"
+
+#. 3.0/utils.js:313 3.8/weather-applet.js:8587
+msgid "Moderate breeze"
+msgstr "中等風力"
+
+#. 3.0/utils.js:316 3.8/weather-applet.js:8590
+msgid "Fresh breeze"
+msgstr "清勁風"
+
+#. 3.0/utils.js:319 3.8/weather-applet.js:8593
+msgid "Strong breeze"
+msgstr "強風"
+
+#. 3.0/utils.js:322 3.8/weather-applet.js:8596
+msgid "Near gale"
+msgstr "近似暴風"
+
+#. 3.0/utils.js:325 3.8/weather-applet.js:8599
+msgid "Gale"
+msgstr "暴風"
+
+#. 3.0/utils.js:328 3.8/weather-applet.js:8602
+msgid "Strong gale"
+msgstr "強烈暴風"
+
+#. 3.0/utils.js:334 3.8/weather-applet.js:8608
+msgid "Violent storm"
+msgstr "劇烈風暴"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "N"
+msgstr "北"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "NE"
+msgstr "東北"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "E"
+msgstr "東"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "SE"
+msgstr "東南"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "S"
+msgstr "南"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "SW"
+msgstr "西南"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "W"
+msgstr "西"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "NW"
+msgstr "西北"
+
+#. 3.0/weatherbit.js:312
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://www.weatherbit.io/account/create"
+msgstr ""
+"請在設定中輸入 API 金鑰，\n"
+"或先至 https://www.weatherbit.io/account/create 申請一個"
+
+#. 3.0/yahoo.js:78
+msgid ""
+"Unknown Error happened while calling Yahoo bridge,\n"
+" see Looking Glass log for errors"
+msgstr ""
+"呼叫 Yahoo bridge 時發生未知錯誤，\n"
+"請檢視 Looking Glass 記錄以了解錯誤"
+
+#. 3.0/yahoo.js:91
+msgid ""
+"Yahoo bridge responded in bad format,\n"
+" see Looking Glass log for errors"
+msgstr ""
+"Yahoo bridge 回應格式錯誤，\n"
+"請檢視 Looking Glass 記錄以了解錯誤"
+
+#. 3.0/yahoo.js:177
+msgid "Missing package"
+msgstr "缺少套件"
+
+#. 3.0/yahoo.js:177 3.0/yahoo.js:179
+msgid "Please install '"
+msgstr "請安裝 '"
+
+#. 3.0/yahoo.js:177 3.0/yahoo.js:179
+msgid "', then refresh manually."
+msgstr "'，然後手動重新整理。"
+
+#. 3.0/yahoo.js:182
+msgid "Could not connect to Yahoo API."
+msgstr "無法連線至 Yahoo API。"
+
+#. 3.0/yahoo.js:186
+msgid ""
+"Unknown error happened while obtaining weather, see Looking Glass logs for "
+"more information"
+msgstr "取得天氣時發生未知錯誤，請檢視 Looking Glass 記錄以取得更多資訊"
+
+#. 3.0/yahoo.js:437 3.8/weather-applet.js:15167 3.8/weather-applet.js:15168
+msgid "Tropical Storm"
+msgstr "熱帶風暴"
+
+#. 3.0/yahoo.js:439
+msgid "Severe Thunderstorms"
+msgstr "強烈雷雨"
+
+#. 3.0/yahoo.js:440 3.8/weather-applet.js:15188 3.8/weather-applet.js:15189
+#. 3.8/weather-applet.js:16686 3.8/weather-applet.js:16687
+#. 3.8/weather-applet.js:16693 3.8/weather-applet.js:16694
+#. 3.8/weather-applet.js:16781 3.8/weather-applet.js:16782
+msgid "Thunderstorms"
+msgstr "雷雨"
+
+#. 3.0/yahoo.js:441
+msgid "Mixed Rain and Snow"
+msgstr "雨夾雪"
+
+#. 3.0/yahoo.js:442
+msgid "Mixed Rain and Sleet"
+msgstr "雨夾霙"
+
+#. 3.0/yahoo.js:443
+msgid "Mixed Snow and Sleet"
+msgstr "雪夾霙"
+
+#. 3.0/yahoo.js:444 3.8/weather-applet.js:15210 3.8/weather-applet.js:15211
+msgid "Freezing Drizzle"
+msgstr "凍毛毛雨"
+
+#. 3.0/yahoo.js:446 3.8/weather-applet.js:15224 3.8/weather-applet.js:15225
+msgid "Freezing Rain"
+msgstr "凍雨"
+
+#. 3.0/yahoo.js:447 3.8/weather-applet.js:15231 3.8/weather-applet.js:15232
+#. 3.8/weather-applet.js:16182 3.8/weather-applet.js:16189
+#. 3.8/weather-applet.js:16190 3.8/weather-applet.js:16196
+#. 3.8/weather-applet.js:16630 3.8/weather-applet.js:16631
+#. 3.8/weather-applet.js:16637 3.8/weather-applet.js:16638
+#. 3.8/weather-applet.js:16867 3.8/weather-applet.js:16868
+#. 3.8/weather-applet.js:16874 3.8/weather-applet.js:16875
+msgid "Showers"
+msgstr "陣雨"
+
+#. 3.0/yahoo.js:449
+msgid "Snow Flurries"
+msgstr "飄雪"
+
+#. 3.0/yahoo.js:450 3.8/weather-applet.js:16717 3.8/weather-applet.js:16718
+msgid "Light Snow Showers"
+msgstr "小陣雪"
+
+#. 3.0/yahoo.js:451 3.8/weather-applet.js:15259 3.8/weather-applet.js:15260
+msgid "Blowing Snow"
+msgstr "風雪"
+
+#. 3.0/yahoo.js:456 3.8/weather-applet.js:13970 3.8/weather-applet.js:13971
+msgid "Foggy"
+msgstr "起霧"
+
+#. 3.0/yahoo.js:458
+msgid "Smoky"
+msgstr "煙霧瀰漫"
+
+#. 3.0/yahoo.js:459
+msgid "Blustery"
+msgstr "狂風大作"
+
+#. 3.0/yahoo.js:460 3.8/weather-applet.js:15322 3.8/weather-applet.js:15323
+msgid "Windy"
+msgstr "有風"
+
+#. 3.0/yahoo.js:463 3.8/weather-applet.js:15343 3.8/weather-applet.js:15344
+#. 3.8/weather-applet.js:15350 3.8/weather-applet.js:15351
+#. 3.8/weather-applet.js:16552 3.8/weather-applet.js:16553
+#. 3.8/weather-applet.js:16559 3.8/weather-applet.js:16560
+msgid "Mostly Cloudy"
+msgstr "大致多雲"
+
+#. 3.0/yahoo.js:464 3.8/weather-applet.js:14840 3.8/weather-applet.js:14841
+#. 3.8/weather-applet.js:14847 3.8/weather-applet.js:14848
+#. 3.8/weather-applet.js:15357 3.8/weather-applet.js:15358
+#. 3.8/weather-applet.js:15364 3.8/weather-applet.js:15365
+#. 3.8/weather-applet.js:16538 3.8/weather-applet.js:16539
+#. 3.8/weather-applet.js:16545 3.8/weather-applet.js:16546
+msgid "Partly Cloudy"
+msgstr "晴時多雲"
+
+#. 3.0/yahoo.js:467 3.8/weather-applet.js:15392 3.8/weather-applet.js:15393
+msgid "Mostly Sunny"
+msgstr "晴時少雲"
+
+#. 3.0/yahoo.js:469 3.8/weather-applet.js:15399 3.8/weather-applet.js:15400
+msgid "Mixed Rain and Hail"
+msgstr "雨夾冰雹"
+
+#. 3.0/yahoo.js:471 3.8/weather-applet.js:15413 3.8/weather-applet.js:15414
+msgid "Isolated Thunderstorms"
+msgstr "局部雷雨"
+
+#. 3.0/yahoo.js:472 3.8/weather-applet.js:15420 3.8/weather-applet.js:15421
+#. 3.8/weather-applet.js:15476 3.8/weather-applet.js:15477
+msgid "Scattered Thunderstorms"
+msgstr "零星雷雨"
+
+#. 3.0/yahoo.js:473 3.8/weather-applet.js:15427 3.8/weather-applet.js:15428
+#. 3.8/weather-applet.js:15462 3.8/weather-applet.js:15463
+#. 3.8/weather-applet.js:16588 3.8/weather-applet.js:16589
+#. 3.8/weather-applet.js:16595 3.8/weather-applet.js:16596
+#. 3.8/weather-applet.js:16825 3.8/weather-applet.js:16826
+#. 3.8/weather-applet.js:16832 3.8/weather-applet.js:16833
+msgid "Scattered Showers"
+msgstr "零星陣雨"
+
+#. 3.0/yahoo.js:474 3.8/weather-applet.js:15434 3.8/weather-applet.js:15435
+#. 3.8/weather-applet.js:16881 3.8/weather-applet.js:16882
+#. 3.8/weather-applet.js:16888 3.8/weather-applet.js:16889
+msgid "Heavy Rain"
+msgstr "大雨"
+
+#. 3.0/yahoo.js:475 3.8/weather-applet.js:15441 3.8/weather-applet.js:15442
+#. 3.8/weather-applet.js:15469 3.8/weather-applet.js:15470
+#. 3.8/weather-applet.js:16839 3.8/weather-applet.js:16840
+#. 3.8/weather-applet.js:16846 3.8/weather-applet.js:16847
+msgid "Scattered Snow Showers"
+msgstr "零星陣雪"
+
+#. 3.0/yahoo.js:476 3.8/weather-applet.js:15448 3.8/weather-applet.js:15449
+#. 3.8/weather-applet.js:16895 3.8/weather-applet.js:16896
+#. 3.8/weather-applet.js:16902 3.8/weather-applet.js:16903
+msgid "Heavy Snow"
+msgstr "大雪"
+
+#. 3.0/yahoo.js:478
+msgid "Not Available"
+msgstr "無法使用"
+
+#. 3.0/yahoo.js:479
+msgid "Scattered Thundershowers"
+msgstr "零星雷陣雨"
+
+#. 3.8/weather-applet.js:766
+msgid ""
+"Could not retrieve logs, log file was not found under path\n"
+" {logFilePath}"
+msgstr ""
+"無法取得記錄，在此路徑下找不到記錄檔\n"
+" {logFilePath}"
+
+#. 3.8/weather-applet.js:770
+msgid ""
+"Could not get contents of log file under path\n"
+" {logFilePath}"
+msgstr ""
+"無法取得以下路徑記錄檔的內容：\n"
+" {logFilePath}"
+
+#. 3.8/weather-applet.js:8425
+msgid "Low"
+msgstr ""
+
+#. 3.8/weather-applet.js:8428 3.8/weather-applet.js:10055
+msgid "Moderate"
+msgstr "中等"
+
+#. 3.8/weather-applet.js:8431
+msgid "High"
+msgstr ""
+
+#. 3.8/weather-applet.js:8434
+#, fuzzy
+msgid "Very High"
+msgstr "非常好"
+
+#. 3.8/weather-applet.js:8437
+#, fuzzy
+msgid "Extreme"
+msgstr "極端降雨"
+
+#. 3.8/weather-applet.js:9661
+msgid ""
+"Address to location lookup service is blocked. You can try to change your "
+"User-Agent in help to see if it resolves the issue."
+msgstr ""
+"位置查詢服務的網址已被封鎖。您可以嘗試在說明中變更您的 User-Agent，看看是否能"
+"解決此問題。"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:9755
+msgid "Met Office UK"
+msgstr "英國氣象局"
+
+#. 3.8/weather-applet.js:9865
+msgid ""
+"MET Office UK only covers the UK, please make sure your location is in the "
+"country"
+msgstr "英國氣象局僅涵蓋英國，請確認您的位置在該國境內"
+
+#. 3.8/weather-applet.js:9959
+msgid "Data was not found for location"
+msgstr "找不到該位置的資料"
+
+#. 3.8/weather-applet.js:10041
+msgid "Very poor"
+msgstr "非常差"
+
+#. 3.8/weather-applet.js:10041
+msgid "Less than {distance} {distanceUnit}"
+msgstr "小於 {distance} {distanceUnit}"
+
+#. 3.8/weather-applet.js:10045
+msgid "Excellent"
+msgstr "極佳"
+
+#. 3.8/weather-applet.js:10045
+msgid "More than {distance} {distanceUnit}"
+msgstr "大於 {distance} {distanceUnit}"
+
+#. 3.8/weather-applet.js:10050
+msgid "Poor"
+msgstr "差"
+
+#. 3.8/weather-applet.js:10050 3.8/weather-applet.js:10055
+#. 3.8/weather-applet.js:10060 3.8/weather-applet.js:10065
+#. 3.8/weather-applet.js:10070
+msgid "Between {smallerDistance}-{biggerDistance} {distanceUnit}"
+msgstr "介於 {smallerDistance}-{biggerDistance} {distanceUnit} 之間"
+
+#. 3.8/weather-applet.js:10060
+msgid "Good"
+msgstr "良好"
+
+#. 3.8/weather-applet.js:10065 3.8/weather-applet.js:10070
+msgid "Very good"
+msgstr "非常好"
+
+#. 3.8/weather-applet.js:10477
+msgid "Ash"
+msgstr "灰燼"
+
+#. 3.8/weather-applet.js:10479
+msgid "Squall"
+msgstr "暴風"
+
+#. 3.8/weather-applet.js:10556
+msgid "Light shower sleet"
+msgstr "小陣霙"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:10829 3.8/weather-applet.js:16440
+msgid "OpenWeatherMap"
+msgstr "OpenWeatherMap"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:11116
+msgid "MET Norway"
+msgstr "挪威氣象局"
+
+#. 3.8/weather-applet.js:11683
+msgid "WeatherBit"
+msgstr "WeatherBit"
+
+#. 3.8/weather-applet.js:12050 3.8/weather-applet.js:13660
+#. 3.8/weather-applet.js:16099
+msgid "Heavy drizzle"
+msgstr "大毛毛雨"
+
+#. 3.8/weather-applet.js:12060
+msgid "Light shower rain"
+msgstr "小陣雨"
+
+#. 3.8/weather-applet.js:12064
+msgid "Heavy shower rain"
+msgstr "強陣雨"
+
+#. 3.8/weather-applet.js:12072
+msgid "Mix snow/rain"
+msgstr "雨夾雪"
+
+#. 3.8/weather-applet.js:12074
+msgid "Snow shower"
+msgstr "陣雪"
+
+#. 3.8/weather-applet.js:12094 3.8/weather-applet.js:13678
+msgid "Freezing fog"
+msgstr "凍霧"
+
+#. 3.8/weather-applet.js:12304
+msgid "Tomorrow.io"
+msgstr "Tomorrow.io"
+
+#. 3.8/weather-applet.js:12517
+msgid "Light wind"
+msgstr "輕風"
+
+#. 3.8/weather-applet.js:12531
+msgid "Strong wind"
+msgstr "強風"
+
+#. 3.8/weather-applet.js:12883
+msgid "US Weather"
+msgstr "美國天氣"
+
+#. 3.8/weather-applet.js:13461
+msgid "Visual Crossing"
+msgstr "Visual Crossing"
+
+#. 3.8/weather-applet.js:13656
+msgid "Blowing or drifting snow"
+msgstr "風雪或飄雪"
+
+#. 3.8/weather-applet.js:13664
+msgid "Heavy drizzle/rain"
+msgstr "大毛毛雨/雨"
+
+#. 3.8/weather-applet.js:13666
+msgid "Light drizzle/rain"
+msgstr "小毛毛雨/雨"
+
+#. 3.8/weather-applet.js:13668
+msgid "Dust Storm"
+msgstr "沙塵暴"
+
+#. 3.8/weather-applet.js:13672
+msgid "Freezing drizzle/freezing rain"
+msgstr "凍毛毛雨/凍雨"
+
+#. 3.8/weather-applet.js:13674
+msgid "Heavy freezing drizzle/freezing rain"
+msgstr "大凍毛毛雨/凍雨"
+
+#. 3.8/weather-applet.js:13676
+msgid "Light freezing drizzle/freezing rain"
+msgstr "小凍毛毛雨/凍雨"
+
+#. 3.8/weather-applet.js:13684
+msgid "Funnel cloud/tornado"
+msgstr "漏斗雲/龍捲風"
+
+#. 3.8/weather-applet.js:13686
+msgid "Hail showers"
+msgstr "冰雹雨"
+
+#. 3.8/weather-applet.js:13688
+msgid "Ice"
+msgstr "結冰"
+
+#. 3.8/weather-applet.js:13690
+msgid "Lightning without thunder"
+msgstr "有閃電無雷聲"
+
+#. 3.8/weather-applet.js:13694
+msgid "Precipitation in vicinity"
+msgstr "附近有降水"
+
+#. 3.8/weather-applet.js:13698 3.8/weather-applet.js:13999
+msgid "Heavy rain and snow"
+msgstr "大雨夾雪"
+
+#. 3.8/weather-applet.js:13700
+msgid "Light rain And snow"
+msgstr "小雨夾雪"
+
+#. 3.8/weather-applet.js:13708
+msgid "Sky coverage decreasing"
+msgstr "雲量減少中"
+
+#. 3.8/weather-applet.js:13710
+msgid "Sky coverage increasing"
+msgstr "雲量增加中"
+
+#. 3.8/weather-applet.js:13712
+msgid "Sky unchanged"
+msgstr "天空狀況無變化"
+
+#. 3.8/weather-applet.js:13714
+msgid "Smoke or haze"
+msgstr "煙霧或霾"
+
+#. 3.8/weather-applet.js:13718
+msgid "Snow and rain showers"
+msgstr "陣雨夾雪"
+
+#. 3.8/weather-applet.js:13730
+msgid "Thunderstorm without precipitation"
+msgstr "無降水雷雨"
+
+#. 3.8/weather-applet.js:13732
+msgid "Diamond dust"
+msgstr "冰晶"
+
+#. 3.8/weather-applet.js:13738
+msgid "Partially cloudy"
+msgstr "部分多雲"
+
+#. 3.8/weather-applet.js:13760
+msgid "Please make sure you entered the API key correctly"
+msgstr "請確認您已正確輸入 API 金鑰"
+
+#. 3.8->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:13778
+msgid "DMI Denmark"
+msgstr "丹麥氣象局"
+
+#. 3.8/weather-applet.js:13931 3.8/weather-applet.js:13932
+#. 3.8/weather-applet.js:14068 3.8/weather-applet.js:14069
+msgid "NOT FOUND"
+msgstr "未找到"
+
+#. 3.8/weather-applet.js:13964
+msgid "Blowing snow"
+msgstr "風雪"
+
+#. 3.8/weather-applet.js:14005 3.8/weather-applet.js:14006
+msgid "Slight snow"
+msgstr "小雪"
+
+#. 3.8/weather-applet.js:14012 3.8/weather-applet.js:14013
+msgid "Moderate snow"
+msgstr "中雪"
+
+#. 3.8/weather-applet.js:14027
+msgid "Moderate rain showers"
+msgstr "中度陣雨"
+
+#. 3.8/weather-applet.js:14034
+msgid "Mixed rain and snow"
+msgstr "雨夾雪"
+
+#. 3.8/weather-applet.js:14041
+msgid "Heavy mixed rain and snow"
+msgstr "大雨夾雪"
+
+#. 3.8/weather-applet.js:14141
+msgid "AccuWeather"
+msgstr "AccuWeather"
+
+#. 3.8/weather-applet.js:14599
+msgid "Deutscher Wetterdienst"
+msgstr "德國氣象局"
+
+#. 3.8/weather-applet.js:14612
+msgid "Please select a different provider or location"
+msgstr "請選擇其他供應商或位置"
+
+#. 3.8/weather-applet.js:14931
+msgid "Weather Underground"
+msgstr "Weather Underground"
+
+#. 3.8/weather-applet.js:15138
+msgid "The API key you provided is invalid."
+msgstr "您提供的 API 金鑰無效。"
+
+#. 3.8/weather-applet.js:15145
+msgid "The location you provided was not found."
+msgstr "找不到您提供的位置。"
+
+#. 3.8/weather-applet.js:15181 3.8/weather-applet.js:15182
+msgid "Strong Storm"
+msgstr "強烈風暴"
+
+#. 3.8/weather-applet.js:15196 3.8/weather-applet.js:15197
+msgid "Rain and Snow"
+msgstr "雨和雪"
+
+#. 3.8/weather-applet.js:15203 3.8/weather-applet.js:15204
+msgid "Rain and Sleet"
+msgstr "雨和霙"
+
+#. 3.8/weather-applet.js:15252 3.8/weather-applet.js:15253
+#. 3.8/weather-applet.js:16616 3.8/weather-applet.js:16617
+#. 3.8/weather-applet.js:16623 3.8/weather-applet.js:16624
+#. 3.8/weather-applet.js:16658 3.8/weather-applet.js:16659
+#. 3.8/weather-applet.js:16665 3.8/weather-applet.js:16666
+msgid "Snow Showers"
+msgstr "陣雪"
+
+#. 3.8/weather-applet.js:15315 3.8/weather-applet.js:15316
+msgid "Breezy"
+msgstr "微風"
+
+#. 3.8/weather-applet.js:15329 3.8/weather-applet.js:15330
+msgid "Frigid"
+msgstr "寒冷"
+
+#. 3.8/weather-applet.js:15385 3.8/weather-applet.js:15386
+msgid "Mostly Clear"
+msgstr "大致晴朗"
+
+#. 3.8/weather-applet.js:15540
+msgid "Pirate Weather"
+msgstr "Pirate Weather"
+
+#. 3.8/weather-applet.js:15567
+msgid ""
+"Please Make sure you\n"
+"entered the API key that you have from Pirate Weather"
+msgstr ""
+"請確認您已輸入\n"
+"從 Pirate Weather 取得的 API 金鑰"
+
+#. 3.8/weather-applet.js:16013
+msgid ""
+"Location Service couldn't find your location, please see the logs in Looking "
+"Glass"
+msgstr "位置服務找不到您的位置，請檢視 Looking Glass 中的記錄"
+
+#. 3.8/weather-applet.js:16176
+msgid "Snow grains"
+msgstr "雪粒"
+
+#. 3.8/weather-applet.js:16183
+msgid "Light showers"
+msgstr "小陣雨"
+
+#. 3.8/weather-applet.js:16197
+msgid "Heavy showers"
+msgstr "大陣雨"
+
+#. 3.8/weather-applet.js:16225
+msgid "Thunderstorm with slight hail"
+msgstr "雷雨伴隨輕微冰雹"
+
+#. 3.8/weather-applet.js:16232
+msgid "Thunderstorm with hail"
+msgstr "雷雨伴隨冰雹"
+
+#. 3.8/weather-applet.js:16259 3.8/weather-applet.js:16422
+msgid "Feels like"
+msgstr "體感溫度"
+
+#. 3.8->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:16329
+msgid "Open-Meteo"
+msgstr "Open-Meteo"
+
+#. 3.8/weather-applet.js:16602 3.8/weather-applet.js:16603
+#. 3.8/weather-applet.js:16609 3.8/weather-applet.js:16610
+#. 3.8/weather-applet.js:16853 3.8/weather-applet.js:16854
+#. 3.8/weather-applet.js:16860 3.8/weather-applet.js:16861
+msgid "Scattered Sleet"
+msgstr "零星霙"
+
+#. 3.8/weather-applet.js:16672 3.8/weather-applet.js:16673
+#. 3.8/weather-applet.js:16679 3.8/weather-applet.js:16680
+#. 3.8/weather-applet.js:16773 3.8/weather-applet.js:16774
+msgid "Chance of Thunderstorms"
+msgstr "可能有雷雨"
+
+#. 3.8/weather-applet.js:16701 3.8/weather-applet.js:16702
+msgid "Light Rain"
+msgstr "小雨"
+
+#. 3.8/weather-applet.js:16709 3.8/weather-applet.js:16710
+msgid "Light Sleet"
+msgstr "輕微霙"
+
+#. 3.8/weather-applet.js:16725 3.8/weather-applet.js:16726
+msgid "Intermittent Rain"
+msgstr "間歇性降雨"
+
+#. 3.8/weather-applet.js:16733 3.8/weather-applet.js:16734
+msgid "Intermittent Sleet"
+msgstr "間歇性霙"
+
+#. 3.8/weather-applet.js:16741 3.8/weather-applet.js:16742
+msgid "Intermittent Snow"
+msgstr "間歇性降雪"
+
+#. 3.8/weather-applet.js:16789 3.8/weather-applet.js:16790
+msgid "Frequent Thunderstorms"
+msgstr "頻繁雷雨"
+
+#. 3.8/weather-applet.js:16796 3.8/weather-applet.js:16797
+#. 3.8/weather-applet.js:16803 3.8/weather-applet.js:16804
+msgid "High Clouds"
+msgstr "高雲"
+
+#. 3.8/weather-applet.js:16811 3.8/weather-applet.js:16812
+msgid "Low Clouds"
+msgstr "低雲"
+
+#. 3.8/weather-applet.js:16910 3.8/weather-applet.js:16911
+msgid "Overcast and Dry"
+msgstr "陰天乾燥"
+
+#. 3.8/weather-applet.js:16917 3.8/weather-applet.js:16918
+#. 3.8/weather-applet.js:16924 3.8/weather-applet.js:16925
+#. 3.8/weather-applet.js:16974 3.8/weather-applet.js:16975
+#. 3.8/weather-applet.js:16982 3.8/weather-applet.js:16983
+msgid "Slightly Stormy"
+msgstr "輕微暴雨"
+
+#. 3.8/weather-applet.js:16931 3.8/weather-applet.js:16932
+#. 3.8/weather-applet.js:16938 3.8/weather-applet.js:16939
+msgid "Stormy Snow Showers"
+msgstr "暴風雪陣雨"
+
+#. 3.8/weather-applet.js:16945 3.8/weather-applet.js:16946
+#. 3.8/weather-applet.js:16952 3.8/weather-applet.js:16953
+msgid "Thundery Showers"
+msgstr "雷陣雨"
+
+#. 3.8/weather-applet.js:16959 3.8/weather-applet.js:16960
+#. 3.8/weather-applet.js:16966 3.8/weather-applet.js:16967
+#. 3.8/weather-applet.js:16990 3.8/weather-applet.js:16991
+msgid "Thundery Snow Showers"
+msgstr "雷雨雪陣雨"
+
+#. 3.8/weather-applet.js:17079
+msgid "Wind Warning"
+msgstr "強風警告"
+
+#. 3.8/weather-applet.js:17081
+msgid "Thunderstorm Warning"
+msgstr "雷雨警告"
+
+#. 3.8/weather-applet.js:17083
+msgid "Rain Warning"
+msgstr "降雨警告"
+
+#. 3.8/weather-applet.js:17085
+msgid "Snow Warning"
+msgstr "降雪警告"
+
+#. 3.8/weather-applet.js:17087
+msgid "Slippery Roads Warning"
+msgstr "路面濕滑警告"
+
+#. 3.8/weather-applet.js:17089
+msgid "Frost Warning"
+msgstr "霜凍警告"
+
+#. 3.8/weather-applet.js:17091
+msgid "Mass Movements Warning"
+msgstr "土石流警告"
+
+#. 3.8/weather-applet.js:17093
+msgid "Heat Warning"
+msgstr "高溫警告"
+
+#. 3.8/weather-applet.js:17095
+msgid "Avalanche Warning"
+msgstr "雪崩警告"
+
+#. 3.8/weather-applet.js:17097
+msgid "Earthquake Warning"
+msgstr "地震警告"
+
+#. 3.8/weather-applet.js:17099
+msgid "Forest Fire Warning"
+msgstr "森林火災警告"
+
+#. 3.8/weather-applet.js:17101
+msgid "Flood Warning"
+msgstr "洪水警告"
+
+#. 3.8/weather-applet.js:17122
+msgid "Swiss Météo"
+msgstr "瑞士氣象局"
+
+#. 3.8/weather-applet.js:17141
+msgid "For this provider, you need to use a postcode."
+msgstr "此供應商需要使用郵遞區號。"
+
+#. 3.8/weather-applet.js:17153
+msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
+msgstr "此供應商需要使用瑞士郵遞區號，範圍從 1000 到 9999。"
+
+#. 3.8/weather-applet.js:17175
+msgid "Switzerland"
+msgstr "瑞士"
+
+#. 3.8/weather-applet.js:17633
+msgid ""
+"Could not retrieve config, file was not found under paths\n"
+" {configFilePath}"
+msgstr ""
+"無法取得設定，在以下路徑找不到檔案\n"
+" {configFilePath}"
+
+#. 3.8/weather-applet.js:17640
+msgid ""
+"Could not get contents of config file under path\n"
+" {configFilePath}"
+msgstr ""
+"無法取得此路徑下設定檔的內容\n"
+" {configFilePath}"
+
+#. 3.8/weather-applet.js:17925
+msgid "Make sure you entered a location or use Automatic location instead."
+msgstr "請確認您已輸入位置或改用自動定位。"
+
+#. 3.8/weather-applet.js:17943
+msgid "This provider requires an API key to operate"
+msgstr "此供應商需要 API 金鑰才能使用"
+
+#. 3.8/weather-applet.js:18383
+msgid "Dew Point"
+msgstr "露點"
+
+#. 3.8/weather-applet.js:18466
+msgid "Precipitation will end in {precipEnd} minutes"
+msgstr "降水將在 {precipEnd} 分鐘後結束"
+
+#. 3.8/weather-applet.js:18468
+msgid "Precipitation won't end in within an hour"
+msgstr "降水在一小時內不會結束"
+
+#. 3.8/weather-applet.js:18471
+msgid "Precipitation will start within {precipStart} minutes"
+msgstr "降水將在 {precipStart} 分鐘內開始"
+
+#. 3.8/weather-applet.js:18569
+msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr ""
+
+#. 3.8/weather-applet.js:18573
+msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr ""
+
+#. 3.8/weather-applet.js:18577
+msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr ""
+
+#. 3.8/weather-applet.js:18581
+msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
+msgstr ""
+
+#. 3.8/weather-applet.js:18585
+msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr ""
+
+#. 3.8/weather-applet.js:18703
+msgid "Forecast parsing failed, see logs for more details."
+msgstr "天氣預報解析失敗，請檢視記錄以取得更多詳細資訊。"
+
+#. 3.8/weather-applet.js:19288 3.8/weather-applet.js:19896
+msgid "As of {lastUpdatedTime}"
+msgstr "更新於 {lastUpdatedTime}"
+
+#. 3.8/weather-applet.js:19294
+msgid "{distance} {distanceUnit} from you"
+msgstr "距離您 {distance} {distanceUnit}"
+
+#. 3.8/weather-applet.js:19298
+msgid "Station Name: {stationName}"
+msgstr "測站名稱：{stationName}"
+
+#. 3.8/weather-applet.js:19301
+msgid "Area: {stationArea}"
+msgstr "區域：{stationArea}"
+
+#. 3.8/weather-applet.js:19311
+msgid "{count} weather alert(s)"
+msgstr "{count} 個天氣警報"
+
+#. 3.8/weather-applet.js:19706 3.8/weather-applet.js:19716
+#. 3.8/weather-applet.js:19723
+msgid "Error Saving Debug Information"
+msgstr "儲存除錯資訊時發生錯誤"
+
+#. 3.8/weather-applet.js:19723
+msgid "Could not open file {filePath} for writing"
+msgstr "無法開啟檔案 {filePath} 進行寫入"
+
+#. 3.8/weather-applet.js:19732
+msgid "Debug Information saved successfully"
+msgstr "除錯資訊已成功儲存"
+
+#. 3.8/weather-applet.js:19732
+msgid "Saved to {filePath}"
+msgstr "已儲存至 {filePath}"
+
+#. 3.8/weather-applet.js:19761
+msgid "Location Service Blocked"
+msgstr "位置服務已被封鎖"
+
+#. 3.8/weather-applet.js:19936
+msgid "No Script Provided"
+msgstr "未提供指令稿"
+
+#. 3.8/weather-applet.js:19936
+msgid "You need to add a script first."
+msgstr "您需要先新增一個指令稿。"
+
+#. 3.8/weather-applet.js:19940
+msgid "No Weather Data"
+msgstr "無天氣資料"
+
+#. 3.8/weather-applet.js:19940
+msgid "No weather data to run script with"
+msgstr "沒有可供指令稿執行的天氣資料"
+
+#. 3.8/weather-applet.js:19948
+msgid "Script Executed Successfully"
+msgstr "指令稿已成功執行"
+
+#. 3.8/weather-applet.js:19948
+msgid "Your script has been executed successfully."
+msgstr "您的指令稿已成功執行。"
+
+#. 3.8/weather-applet.js:19951
+msgid "Error Running Script"
+msgstr "執行指令稿時發生錯誤"
+
+#. 3.8/weather-applet.js:19951
+msgid "Script returned error, see logs for more information"
+msgstr "指令稿傳回錯誤，請檢視記錄以取得更多資訊"
+
+#. 3.8/AlertsWindow.py:119
+msgid "Weather Applet Alerts"
+msgstr "天氣小工具警報"
+
+#. 3.8/LogSaver.py:16
+msgid "Save to File"
+msgstr "儲存至檔案"
+
+#. 3.8/LogSaver.py:29
+msgid "Select a destination"
+msgstr "選取目的地"
+
+#. metadata.json->name
+#. 3.8->settings-schema.json->providers->title
+msgid "Weather"
+msgstr "天氣"
+
+#. metadata.json->description
+msgid "View your local weather forecast"
+msgstr "檢視您當地天氣預報"
+
+#. 3.0->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 3.0+"
+msgstr "weather@mockturtl 3.0+ 的設定"
+
+#. 3.0->settings-schema.json->keybinding->description
+#. 3.8->settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "設定呼叫選單的快速鍵"
+
+#. 3.0->settings-schema.json->descriptions->description
+msgid "Weather service information"
+msgstr "天氣服務資訊"
+
+#. 3.0->settings-schema.json->moreInfo->description
+msgid "Click here for detailed description"
+msgstr "點選此處檢視詳細說明"
+
+#. 3.0->settings-schema.json->moreInfo->tooltip
+#. 3.0->settings-schema.json->getLocation->tooltip
+#. 3.8->settings-schema.json->getLocation->tooltip
+msgid "Opens webpage guide"
+msgstr "開啟網頁指南"
+
+#. 3.0->settings-schema.json->providerSettings->description
+#. 3.8->settings-schema.json->provider-options->title
+msgid "Weather Provider Options"
+msgstr "天氣供應商選項"
+
+#. 3.0->settings-schema.json->dataService->description
+#. 3.8->settings-schema.json->dataService->description
+msgid "Data service"
+msgstr "資料服務"
+
+#. 3.0->settings-schema.json->dataService->options
+msgid "DarkSky (key needed)"
+msgstr "DarkSky（需要金鑰）"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weatherbit (key needed)"
+msgstr "Weatherbit（需要金鑰）"
+
+#. 3.0->settings-schema.json->dataService->options
+msgid "Yahoo"
+msgstr "Yahoo"
+
+#. 3.0->settings-schema.json->dataService->options
+msgid "Climacell (key needed)"
+msgstr "Climacell（需要金鑰）"
+
+#. 3.0->settings-schema.json->apiKey->description
+#. 3.8->settings-schema.json->apiKey->description
+msgid "API Key"
+msgstr "API 金鑰"
+
+#. 3.0->settings-schema.json->apiKey->tooltip
+#. 3.8->settings-schema.json->apiKey->tooltip
+msgid "Copy this from your account of the used Data service and paste it here."
+msgstr "從您使用的資料服務帳號複製此金鑰並貼上於此。"
+
+#. 3.0->settings-schema.json->manualLocation->description
+#. 3.8->settings-schema.json->manualLocation->description
+msgid "Manual Location"
+msgstr "手動位置"
+
+#. 3.0->settings-schema.json->manualLocation->tooltip
+#. 3.8->settings-schema.json->manualLocation->tooltip
+msgid "Enable this if your location is not accurate"
+msgstr "如果您的位置不準確，請啟用此選項"
+
+#. 3.0->settings-schema.json->location->description
+msgid "Location - Coordinates"
+msgstr "位置 - 座標"
+
+#. 3.0->settings-schema.json->location->tooltip
+msgid ""
+"Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an "
+"address.\n"
+"Waits for 3 seconds after you stop typing before refreshes the weather."
+msgstr ""
+"可接受的輸入為「緯度,經度」（例如：68.1932,17.1426）或地址。\n"
+"在您停止輸入 3 秒後，將會重新整理天氣。"
+
+#. 3.0->settings-schema.json->getLocation->description
+msgid "Setup API Key and Location"
+msgstr "設定 API 金鑰與位置"
+
+#. 3.0->settings-schema.json->refreshInterval->units
+#. 3.8->settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr "分鐘"
+
+#. 3.0->settings-schema.json->refreshInterval->description
+#. 3.8->settings-schema.json->refreshInterval->description
+msgid "Update interval"
+msgstr "更新間隔"
+
+#. 3.0->settings-schema.json->forecastDays->units
+#. 3.8->settings-schema.json->forecastDays->units
+msgid "days"
+msgstr "天"
+
+#. 3.0->settings-schema.json->forecastDays->description
+#. 3.8->settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr "預報時長"
+
+#. 3.0->settings-schema.json->forecastHours->units
+#. 3.8->settings-schema.json->forecastHours->units
+msgid "hours"
+msgstr "小時"
+
+#. 3.0->settings-schema.json->forecastHours->description
+#. 3.8->settings-schema.json->forecastHours->description
+msgid "Hourly Forecast length"
+msgstr "每小時預報時長"
+
+#. 3.0->settings-schema.json->unitSettings->description
+msgid "Units"
+msgstr "單位"
+
+#. 3.0->settings-schema.json->temperatureUnit->description
+#. 3.8->settings-schema.json->temperatureUnit->description
+msgid "Temperature unit"
+msgstr "溫度單位"
+
+#. 3.0->settings-schema.json->temperatureUnit->options
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.0->settings-schema.json->distanceUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->distanceUnit->options
+msgid "Automatic"
+msgstr "自動"
+
+#. 3.0->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
+msgid "Celsius"
+msgstr "攝氏"
+
+#. 3.0->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
+msgid "Fahrenheit"
+msgstr "華氏"
+
+#. 3.0->settings-schema.json->temperatureUnit->tooltip
+#. 3.0->settings-schema.json->distanceUnit->tooltip
+#. 3.8->settings-schema.json->temperatureUnit->tooltip
+#. 3.8->settings-schema.json->distanceUnit->tooltip
+msgid ""
+"Automatic will try to guess your preference based your current display "
+"language."
+msgstr "自動選項將嘗試根據您目前的顯示語言猜測您的偏好。"
+
+#. 3.0->settings-schema.json->windSpeedUnit->description
+#. 3.8->settings-schema.json->windSpeedUnit->description
+msgid "Wind speed unit"
+msgstr "風速單位"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "kph"
+msgstr "公里/小時"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr "英里/小時"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "m/s"
+msgstr "公尺/秒"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "knots"
+msgstr "節"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "Beaufort"
+msgstr "蒲福風級"
+
+#. 3.0->settings-schema.json->pressureUnit->description
+#. 3.8->settings-schema.json->pressureUnit->description
+msgid "Atmospheric pressure unit"
+msgstr "大氣壓力單位"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "hPa"
+msgstr "百帕"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr "英吋汞柱"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr "毫米汞柱"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr "磅/平方英吋"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr "工程大氣壓"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr "標準大氣壓"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr "帕斯卡"
+
+#. 3.0->settings-schema.json->distanceUnit->description
+#. 3.8->settings-schema.json->distanceUnit->description
+msgid "Distance unit"
+msgstr "距離單位"
+
+#. 3.0->settings-schema.json->distanceUnit->options
+#. 3.8->settings-schema.json->distanceUnit->options
+msgid "Metric"
+msgstr "公制"
+
+#. 3.0->settings-schema.json->distanceUnit->options
+#. 3.8->settings-schema.json->distanceUnit->options
+msgid "Imperial"
+msgstr "英制"
+
+#. 3.0->settings-schema.json->panelSettings->description
+msgid "Panel options"
+msgstr "面板選項"
+
+#. 3.0->settings-schema.json->showTextInPanel->description
+#. 3.8->settings-schema.json->showTextInPanel->description
+msgid "Display current temperature in panel"
+msgstr "在面板上顯示目前溫度"
+
+#. 3.0->settings-schema.json->showCommentInPanel->description
+#. 3.8->settings-schema.json->showCommentInPanel->description
+msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+msgstr "在面板上顯示天氣狀況（例如「有風」、「晴朗」）"
+
+#. 3.0->settings-schema.json->showCommentInPanel->tooltip
+#. 3.8->settings-schema.json->showCommentInPanel->tooltip
+msgid "Only works with horizontal panels"
+msgstr "僅適用於水平面板"
+
+#. 3.0->settings-schema.json->tempTextOverride->description
+#. 3.8->settings-schema.json->tempTextOverride->description
+msgid "Override label on panel"
+msgstr "覆寫面板上的標籤"
+
+#. 3.0->settings-schema.json->tempTextOverride->tooltip
+msgid ""
+"Available values are: {c} is condition, {t} is temperature and {u} is unit.\n"
+"Can be used if label does not fit on vertical panel, among other smart "
+"things."
+msgstr ""
+"可用值為：{c} 是狀況，{t} 是溫度，{u} 是單位。\n"
+"可用於標籤不適用於垂直面板等情況。"
+
+#. 3.0->settings-schema.json->useCustomAppletIcons->tooltip
+#. 3.0->settings-schema.json->useCustomMenuIcons->tooltip
+#. 3.8->settings-schema.json->useCustomAppletIcons->tooltip
+#. 3.8->settings-schema.json->useCustomMenuIcons->tooltip
+msgid "Iconset is weather-icons by Erik Flowers"
+msgstr "圖示集為 Erik Flowers 的 weather-icons"
+
+#. 3.0->settings-schema.json->useCustomAppletIcons->description
+#. 3.8->settings-schema.json->useCustomAppletIcons->description
+msgid "Use custom icons on the panel"
+msgstr "在面板上使用自訂圖示"
+
+#. 3.0->settings-schema.json->displaySettings->description
+#. 3.8->settings-schema.json->presentation-section->title
+msgid "Presentation"
+msgstr "顯示方式"
+
+#. 3.0->settings-schema.json->verticalOrientation->description
+#. 3.8->settings-schema.json->verticalOrientation->description
+msgid "Show forecast vertically"
+msgstr "垂直顯示預報"
+
+#. 3.0->settings-schema.json->verticalOrientation->tooltip
+msgid "Displaying forecasts from top to bottom instead from left to right"
+msgstr "從上到下顯示預報，而非從左到右"
+
+#. 3.0->settings-schema.json->forecastColumns->units
+#. 3.8->settings-schema.json->forecastColumns->units
+msgid "columns"
+msgstr "欄"
+
+#. 3.0->settings-schema.json->forecastColumns->description
+#. 3.8->settings-schema.json->forecastColumns->description
+msgid "Maximum number of columns for forecast"
+msgstr "預報的最大欄數"
+
+#. 3.0->settings-schema.json->forecastRows->units
+#. 3.8->settings-schema.json->forecastRows->units
+msgid "rows"
+msgstr "列"
+
+#. 3.0->settings-schema.json->forecastRows->description
+#. 3.8->settings-schema.json->forecastRows->description
+msgid "Maximum number of rows for forecast"
+msgstr "預報的最大列數"
+
+#. 3.0->settings-schema.json->showSunrise->description
+#. 3.8->settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr "顯示日出/日落時間"
+
+#. 3.0->settings-schema.json->show24Hours->description
+#. 3.8->settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr "以 24 小時格式顯示時間"
+
+#. 3.0->settings-schema.json->shortHourlyTime->description
+#. 3.8->settings-schema.json->shortHourlyTime->description
+msgid "Only display hours for hourly forecast time"
+msgstr "每小時預報時間僅顯示小時"
+
+#. 3.0->settings-schema.json->shortHourlyTime->tooltip
+#. 3.8->settings-schema.json->shortHourlyTime->tooltip
+msgid "Instead of 15:00 or 3:00 pm it will show up as 15 or 3 pm"
+msgstr "不顯示為 15:00 或下午 3:00，而是顯示為 15 或下午 3"
+
+#. 3.0->settings-schema.json->showForecastDates->description
+#. 3.8->settings-schema.json->showForecastDates->description
+msgid "Display date for daily forecasts"
+msgstr "顯示每日預報的日期"
+
+#. 3.0->settings-schema.json->showForecastDates->tooltip
+#. 3.8->settings-schema.json->showForecastDates->tooltip
+msgid "Like \"Friday 15\""
+msgstr "例如「週五 15」"
+
+#. 3.0->settings-schema.json->temperatureHighFirst->description
+#. 3.8->settings-schema.json->temperatureHighFirst->description
+msgid "Show high temperature first in forecast"
+msgstr "在預報中優先顯示最高溫"
+
+#. 3.0->settings-schema.json->tempRussianStyle->description
+#. 3.8->settings-schema.json->tempRussianStyle->description
+msgid "Show temperature Russian style"
+msgstr "以俄羅斯風格顯示溫度"
+
+#. 3.0->settings-schema.json->locationLabelOverride->description
+#. 3.8->settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr "覆寫位置標籤"
+
+#. 3.0->settings-schema.json->conditionSettings->description
+#. 3.8->settings-schema.json->weather-conditions->title
+msgid "Weather conditions"
+msgstr "天氣狀況"
+
+#. 3.0->settings-schema.json->translateCondition->description
+msgid "Translate conditions"
+msgstr "翻譯天氣狀況"
+
+#. 3.0->settings-schema.json->shortConditions->description
+#. 3.8->settings-schema.json->shortConditions->description
+msgid "Less verbose conditions"
+msgstr "簡化天氣狀況描述"
+
+#. 3.0->settings-schema.json->iconSettings->description
+#. 3.8->settings-schema.json->icons->title
+msgid "Icons"
+msgstr "圖示"
+
+#. 3.0->settings-schema.json->useSymbolicIcons->description
+msgid "Use symbolic icons in the applet"
+msgstr "在小工具中使用符號圖示"
+
+#. 3.0->settings-schema.json->useCustomMenuIcons->description
+#. 3.8->settings-schema.json->useCustomMenuIcons->description
+msgid "Use custom icons in the popup menu"
+msgstr "在彈出式選單中使用自訂圖示"
+
+#. 3.8->settings-schema.json->locations-page->title
+#. 3.8->settings-schema.json->location->description
+msgid "Location"
+msgstr "位置"
+
+#. 3.8->settings-schema.json->units-page->title
+msgid "Other options"
+msgstr "其他選項"
+
+#. 3.8->settings-schema.json->info-section->title
+msgid "Help"
+msgstr "說明"
+
+#. 3.8->settings-schema.json->location-section->title
+msgid "Location settings"
+msgstr "位置設定"
+
+#. 3.8->settings-schema.json->technical-automation->title
+msgid "Technical and Automation"
+msgstr "技術與自動化"
+
+#. 3.8->settings-schema.json->location-store->title
+msgid "Saved Locations"
+msgstr "已儲存的位置"
+
+#. 3.8->settings-schema.json->panel-options->title
+msgid "Panel (Taskbar)"
+msgstr "面板（工作列）"
+
+#. 3.8->settings-schema.json->presentation->title
+msgid "Popup menu"
+msgstr "彈出式選單"
+
+#. 3.8->settings-schema.json->units-section->title
+msgid "Other Units"
+msgstr "其他單位"
+
+#. 3.8->settings-schema.json->temp-unit-section->title
+msgid "Temperature Unit"
+msgstr "溫度單位"
+
+#. 3.8->settings-schema.json->keybindings->title
+msgid "Keybindings"
+msgstr "快速鍵"
+
+#. 3.8->settings-schema.json->more-info->title
+msgid "More about the Weather applet"
+msgstr "關於天氣小工具的更多資訊"
+
+#. 3.8->settings-schema.json->submit-issue->title
+msgid "Report an issue"
+msgstr "回報問題"
+
+#. 3.8->settings-schema.json->debug-options->title
+#. 3.8->settings-schema.json->logLevel->options
+msgid "Debug"
+msgstr "除錯"
+
+#. 3.8->settings-schema.json->dataService->tooltip
+msgid ""
+"You can choose between several different weather forecast providers. Some "
+"providers require a API key to work, some have regional limits, differ in "
+"forecast length, and they all need a functional internet connection to work. "
+"The options are described in detail on the Cinnamon Spices Website which you "
+"can access with the button on the Help tab."
+msgstr ""
+"您可以從數個不同的天氣預報供應商中選擇。部分供應商需要 API 金鑰才能運作，部分"
+"有區域限制，預報時長也不同，且都需要可用的網際網路連線才能運作。這些選項在 "
+"Cinnamon Spices 網站上有詳細說明，您可以透過「說明」分頁中的按鈕前往該網站。"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Deutscher Wetterdienst (Germany only)"
+msgstr "德國氣象局（僅限德國）"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Met Office UK (UK only)"
+msgstr "英國氣象局（僅限英國）"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "US National Weather (US only)"
+msgstr "美國國家天氣服務（僅限美國）"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Swiss Météo (Switzerland only)"
+msgstr "瑞士氣象局（僅限瑞士）"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "OpenWeatherMap OneCall (key needed)"
+msgstr "OpenWeatherMap OneCall（需要金鑰）"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Pirate Weather (key needed)"
+msgstr "Pirate Weather（需要金鑰）"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Visual Crossing (key needed)"
+msgstr "Visual Crossing（需要金鑰）"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Tomorrow.io (key needed)"
+msgstr "Tomorrow.io（需要金鑰）"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "AccuWeather (key needed)"
+msgstr "AccuWeather（需要金鑰）"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weather Underground (key needed)"
+msgstr "Weather Underground（需要金鑰）"
+
+#. 3.8->settings-schema.json->location->tooltip
+msgid ""
+"You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
+"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
+"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
+"the format. After 3 seconds without typing the address you entered is "
+"replaced automatically for validating your choice. Powered by "
+"nominatim.openstreetmap.org."
+msgstr ""
+"您可以輸入座標「緯度,經度」（例如 51.5085,-0.1257）或使用「城市,國家代碼」"
+"（例如 Taipei,TW）或試著輸入 {門牌號碼} {街道} {城市/鎮} {郵遞區號} {國家}。"
+"搜尋演算法對格式相當有彈性。在您停止輸入地址 3 秒後，系統會自動替換以驗證您的"
+"選擇。由 nominatim.openstreetmap.org 提供支援。"
+
+#. 3.8->settings-schema.json->locationDescription->description
+msgid ""
+"If the location field matches a saved location's 'Search Entry' field, the "
+"saved location will be used instead."
+msgstr "如果位置欄位與已儲存位置的「搜尋項目」欄位相符，將會使用已儲存的位置。"
+
+#. 3.8->settings-schema.json->saveLocation->description
+msgid "Save current location to storage"
+msgstr "將目前位置儲存至儲存空間"
+
+#. 3.8->settings-schema.json->saveLocation->tooltip
+msgid ""
+"Saves location information to file so you can switch between them with "
+"buttons in the applet, which will appear if you have more than one."
+msgstr ""
+"將位置資訊儲存至檔案，以便您可以使用小工具中的按鈕在多個位置之間切換（若您儲"
+"存了多個位置，按鈕即會出現）。"
+
+#. 3.8->settings-schema.json->getLocation->description
+msgid "Weather Applet at Cinnamon Spices Website"
+msgstr "Cinnamon Spices 網站上的天氣小工具"
+
+#. 3.8->settings-schema.json->refreshInterval->tooltip
+msgid ""
+"If you are using a provider with API keys set it to an interval you won't "
+"run out of your quota with."
+msgstr "如果您使用需要 API 金鑰的供應商，請設定一個不會超出配額的更新間隔。"
+
+#. 3.8->settings-schema.json->forecastDays->tooltip
+msgid ""
+"Maximum number of days that can be displayed, available number of data, "
+"maximum rows and columns setting in the Presentation tab will affect the "
+"final number."
+msgstr ""
+"可顯示的最大天數，可用的資料數量、顯示方式分頁中的最大列數和欄數設定都會影響"
+"最終顯示的天數。"
+
+#. 3.8->settings-schema.json->forecastHours->tooltip
+msgid ""
+"Maximum number of hours that can be displayed, available numbers of data "
+"will affect the final number."
+msgstr "可顯示的最大小時數，可用的資料數量會影響最終顯示的小時數。"
+
+#. 3.8->settings-schema.json->immediatePrecip->description
+msgid "Enable minutely precipitation forecast"
+msgstr "啟用分鐘級降水預報"
+
+#. 3.8->settings-schema.json->immediatePrecip->tooltip
+msgid ""
+"If you'd like to use this make sure you use your exact coordinates/address "
+"as location to help its accuracy. See Feature map on website on support for "
+"your provider"
+msgstr ""
+"如果您想使用此功能，請確保使用精確的座標/地址作為位置以提高準確性。請參閱網站"
+"上的功能地圖以了解您的供應商是否支援。"
+
+#. 3.8->settings-schema.json->showAlerts->description
+msgid "Enable displaying weather alerts"
+msgstr "啟用天氣警報顯示"
+
+#. 3.8->settings-schema.json->showAlerts->tooltip
+msgid ""
+"Alerts button will be visible in the popup menu if there are any active "
+"alerts for your location."
+msgstr "如果您所在位置有任何活動警報，警報按鈕會顯示在彈出選單中。"
+
+#. 3.8->settings-schema.json->showBothTempUnits->description
+msgid "Show both temperature units at the same time"
+msgstr "同時顯示兩種溫度單位"
+
+#. 3.8->settings-schema.json->tempTextOverride->tooltip
+msgid ""
+"Some of the available values are: {c} is condition, {t} is temperature and "
+"{u} is unit.\n"
+"Can be used if label does not fit on vertical panel, among other smart "
+"things."
+msgstr ""
+"一些可用的值包括：{c} 為天氣狀況，{t} 為溫度，{u} 為單位。\n"
+"當標籤不適合垂直面板時可以使用，也可用於其他巧妙的用途。"
+
+#. 3.8->settings-schema.json->tooltipTextOverride->description
+msgid "Override tooltip on panel"
+msgstr "覆寫面板上的工具提示"
+
+#. 3.8->settings-schema.json->tooltipTextOverride->tooltip
+msgid ""
+"Has the same behavior and available values as 'Override label on panel'."
+msgstr "具有與「覆寫面板上的標籤」相同的行為和可用值。"
+
+#. 3.8->settings-schema.json->alwaysShowHourlyWeather->description
+msgid "Always show Hourly Weather"
+msgstr "永遠顯示每小時天氣"
+
+#. 3.8->settings-schema.json->alwaysShowHourlyWeather->tooltip
+msgid ""
+"Hide/Show button will be hidden and Hourly weather will be permanently "
+"visible."
+msgstr "隱藏/顯示按鈕將被隱藏，且每小時天氣將永久顯示。"
+
+#. 3.8->settings-schema.json->verticalOrientation->tooltip
+msgid "Displaying forecasts from top to bottom instead from left to right."
+msgstr "從上到下顯示預報，而非從左到右。"
+
+#. 3.8->settings-schema.json->locationList->description
+msgid "Your saved locations"
+msgstr "您已儲存的位置"
+
+#. 3.8->settings-schema.json->locationList->tooltip
+msgid ""
+"You have to make sure the Search entry field is unique and your Timezone is "
+"in the IANA time zone format (e.g. 'Europe/London')"
+msgstr ""
+"您必須確保搜尋項目欄位是唯一的，且您的時區使用 IANA 時區格式（例如「Asia/"
+"Taipei」）"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "Latitude"
+msgstr "緯度"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "Longitude"
+msgstr "經度"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "City"
+msgstr "城市"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "Country"
+msgstr "國家"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "Timezone"
+msgstr "時區"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "Search entry"
+msgstr "搜尋項目"
+
+#. 3.8->settings-schema.json->displayWindAsText->description
+msgid "Display wind direction as text"
+msgstr "以文字顯示風向"
+
+#. 3.8->settings-schema.json->displayWindAsText->tooltip
+msgid "Like SE, N instead of direction icons."
+msgstr "例如使用 東南、北 等文字，而非方向圖示。"
+
+#. 3.8->settings-schema.json->translateCondition->description
+msgid "Provider should translate conditions if available"
+msgstr "若供應商支援，應由供應商翻譯天氣狀況"
+
+#. 3.8->settings-schema.json->translateCondition->tooltip
+msgid ""
+"Should your provider translate the conditions to your language if your "
+"locale is supported by the provider. Otherwise the applet will use it's own "
+"translation system."
+msgstr ""
+"若您的語言環境受供應商支援，供應商應將天氣狀況翻譯成您的語言。否則，小工具將"
+"使用其自身的翻譯系統。"
+
+#. 3.8->settings-schema.json->useSymbolicIcons->tooltip
+msgid "Does not apply to custom iconset, that is symbolic by default"
+msgstr "不適用於自訂圖示集，該圖示集預設即為符號化。"
+
+#. 3.8->settings-schema.json->useSymbolicIcons->description
+msgid "Use symbolic icons throughout the applet"
+msgstr "在整個小工具中使用符號圖示"
+
+#. 3.8->settings-schema.json->more-info-label->description
+msgid ""
+"For detailed information about the applet please go to the Spices Website to "
+"find info about known issues, troubleshooting, changelog and more by "
+"clicking the button below. Here you can ask questions etc in the comment "
+"section by logging in with your Github account."
+msgstr ""
+"關於此小工具的詳細資訊，請點選下方按鈕前往 Spices 網站，以尋找已知問題、疑難"
+"排解、更新日誌等資訊。您可以使用 GitHub 帳號登入並在留言區提問等。"
+
+#. 3.8->settings-schema.json->submitIssue->description
+msgid "Submit an Issue"
+msgstr "提交問題"
+
+#. 3.8->settings-schema.json->submitIssue->tooltip
+msgid ""
+"Opens webpage where you can fill out a new issue for the applet, needs a "
+"GitHub account.\n"
+" Please make sure that the issue is not already submitted."
+msgstr ""
+"開啟網頁讓您填寫小工具的新問題回報，需要 GitHub 帳號。\n"
+"請確認該問題尚未被提交。"
+
+#. 3.8->settings-schema.json->maintainer->description
+msgid "Current maintainer: Gr3q"
+msgstr "目前維護者：Gr3q"
+
+#. 3.8->settings-schema.json->issue-reporting-explanation->description
+msgid ""
+"If you find an issue with this applet please make a report by clicking on "
+"the button below and login in with your Github account.\n"
+"\n"
+"Before you start writing please make sure that the issue is not already "
+"submitted in the issues section and review your prefilled details in the "
+"issue description. Don't forget to add a short description in the top Title "
+"field next to the applet's name to make it easier for everyone to know what "
+"the issue is about. Logs with Debug level (which can be saved to a file "
+"below) are also appreciated."
+msgstr ""
+"如果您發現此小工具有問題，請點選下方按鈕並使用您的 GitHub 帳號登入以提交報"
+"告。\n"
+"\n"
+"在開始撰寫之前，請確認該問題尚未在「Issues」區段中提交，並檢閱問題描述中的預"
+"填詳細資訊。請別忘了在靠近小工具名稱的頂端「Title」欄位中加入簡短描述，讓大家"
+"更容易了解問題內容。我們也希望能附上除錯層級的記錄（可透過下方選項儲存至檔"
+"案）。"
+
+#. 3.8->settings-schema.json->loc-info->description
+msgid ""
+"Your location in most cases work automatically but you can enter it manually "
+"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
+"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
+"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
+"the format. After 3 seconds without typing the address you entered is "
+"replaced automatically for validating your choice."
+msgstr ""
+"在大多數情況下，您的位置可以自動運作，但您也可以手動輸入座標「緯度,經度」（例"
+"如 25.0478,121.5319）或使用「城市,國家代碼」（例如 Taipei,TW）或試著輸入 {門"
+"牌號碼} {街道} {城市/鎮} {郵遞區號} {國家}。搜尋演算法對格式相當有彈性。在您"
+"停止輸入地址 3 秒後，系統會自動替換以驗證您的選擇。"
+
+#. 3.8->settings-schema.json->logLevel->description
+msgid "Log Level"
+msgstr "記錄等級"
+
+#. 3.8->settings-schema.json->logLevel->tooltip
+msgid ""
+"Info is the regular logging, Debug is debug, and Verbose also logs network "
+"request payloads. Changing this will only be effective on future logs. Only "
+"change it you are instructed or you know what you are doing."
+msgstr ""
+"Info 是一般記錄，Debug 是除錯記錄，而 Verbose 還會記錄網路請求的內容。更改此"
+"設定只會影響未來的記錄。除非您被指示或了解這麼做的後果，否則請勿更改。"
+
+#. 3.8->settings-schema.json->logLevel->options
+msgid "Verbose"
+msgstr "詳細"
+
+#. 3.8->settings-schema.json->fileSelect->description
+msgid "Click Save to save debug information to a file"
+msgstr "點選「儲存」以將除錯資訊儲存至檔案"
+
+#. 3.8->settings-schema.json->fileSelect->tooltip
+msgid ""
+"This includes logs for the applet and the current settings with your API key "
+"redacted."
+msgstr "這包括小工具的記錄和目前的設定（您的 API 金鑰會被遮蔽）。"
+
+#. 3.8->settings-schema.json->selectedLogPath->description
+msgid "Selected path to save Logs"
+msgstr "選取的記錄儲存路徑"
+
+#. 3.8->settings-schema.json->userAgentStringOverride->description
+msgid "User Agent String Override"
+msgstr "使用者代理字串覆寫"
+
+#. 3.8->settings-schema.json->userAgentStringOverride->tooltip
+msgid ""
+"If you have issues with the applet not working properly and you know the "
+"User Agent string is the problem you can try to override it. Only change it "
+"if you know what you are doing. This is a string that is sent to the server "
+"when the applet tries to get the weather data."
+msgstr ""
+"如果小工具無法正常運作，且您知道問題出在使用者代理字串，您可以嘗試覆寫它。只"
+"有在您了解自己在做什麼時才變更此設定。這是小工具嘗試取得天氣資料時傳送給伺服"
+"器的字串。"
+
+#. 3.8->settings-schema.json->runScript->description
+msgid "Run a command when the weather info changes"
+msgstr "當天氣資訊變更時執行指令"
+
+#. 3.8->settings-schema.json->runScript->tooltip
+msgid ""
+"The applet will run the command you provide every time the weather data is "
+"updated. The command will be interpolated with the same values with the same "
+"format you can get in any of the overrides, in addition you get {full_data} "
+"which is the full current weather data. Interpolation with single brackets "
+"{xxx} will not be escaped, with double brackets {{xxxx}} they are wrapped in "
+"single quotes (') and all other single quotes are escaped inside. You can "
+"use this to integrate the weather data with other parts of your system. You "
+"can look up the full weather data structure via the link in the README.\n"
+"\n"
+"Example: 'notify-send \"The weather is {c} and the temperature is {t}{u}\"' "
+"will show a notification with the current weather condition and "
+"temperature.\n"
+"\n"
+"Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
+"data to a file in /tmp."
+msgstr ""
+"小工具會在每次天氣資料更新時執行您提供的指令。該指令將使用與任何覆寫中相同的"
+"值與格式進行內插，此外您還可以取得 {full_data}，即完整的目前天氣資料。使用單"
+"大括號 {xxx} 的內插不會進行跳脫處理，使用雙大括號 {{xxxx}} 的內插會以單引號 "
+"(') 包裹，且內部的所有其他單引號都會進行跳脫處理。您可以使用此功能將天氣資料"
+"與系統的其他部分整合。您可以透過 README 中的連結查詢完整的天氣資料結構。\n"
+"\n"
+"範例：'notify-send \"目前天氣為 {c}，溫度為 {t}{u}\"' 將顯示包含目前天氣狀況"
+"與溫度的通知。\n"
+"\n"
+"範例：'echo {{full_data}} > /tmp/weather_data' 將會把完整的天氣資料儲存到 /"
+"tmp 中的檔案。"
+
+#. 3.8->settings-schema.json->testRunScript->description
+msgid "Test your command"
+msgstr "測試您的指令"
+
+#. 3.8->settings-schema.json->uvIndex->description
+#, fuzzy
+msgid "Enable displaying UV Index"
+msgstr "啟用天氣警報顯示"
+
+#. 3.8->settings-schema.json->uvIndex->tooltip
+msgid ""
+"If your provider supports it, the UV index will be shown in the popup menu "
+"next to sunrise/sunset times. It will not show if the UV index is low risk "
+"(0-2)."
+msgstr ""

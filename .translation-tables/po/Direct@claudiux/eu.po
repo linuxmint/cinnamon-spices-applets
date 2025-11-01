@@ -1,0 +1,418 @@
+# DIRECT
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"PO-Revision-Date: 2022-12-12 16:33+0100\n"
+"Last-Translator: Inigo Gebara <igebara@disroot.org>\n"
+"Language-Team: \n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. applet.js:38 applet.js:495
+msgid "SYSTEM"
+msgstr "SISTEMA"
+
+#. applet.js:38 applet.js:530
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:38 applet.js:554
+msgid "RECENT DOCUMENTS"
+msgstr "DUELA GUTXIKO DOKUMENTUAK"
+
+#. applet.js:160
+msgid "(Right click to open folder)"
+msgstr ""
+
+#. metadata.json->name
+#. applet.js:263
+msgid "Direct"
+msgstr "Zuzenean"
+
+#. applet.js:471
+msgid "Search Home Folder"
+msgstr "Bilatu karpeta nagusian"
+
+#. applet.js:504
+msgid "Search File System"
+msgstr "Bilatu fitxategi-sisteman"
+
+#. applet.js:568
+msgid "Clear"
+msgstr "Garbitu"
+
+#. applet.js:575
+msgid "Recent"
+msgstr ""
+
+#. applet.js:623
+msgid "Computer"
+msgstr "Ordenagailua"
+
+#. applet.js:629
+msgid "File System"
+msgstr "Fitxategi-sistema"
+
+#. applet.js:646
+msgid "Network"
+msgstr "Sarea"
+
+#. applet.js:868
+msgid "Trash"
+msgstr "Zakarrontzia"
+
+#. search.py:43
+msgid "Open..."
+msgstr "Ireki..."
+
+#. search.py:48
+msgid "Open Containing Folder..."
+msgstr "Ireki Edukiaren karpeta..."
+
+#. search.py:85
+msgid "Search"
+msgstr "Bilatu"
+
+#. search.py:106
+msgid "Start in"
+msgstr "Hasi hemen"
+
+#. search.py:107
+msgid "Select a folder"
+msgstr "Hautatu karpeta"
+
+#. search.py:113
+msgid "Follow symlinks"
+msgstr "Jarraitu esteka sinbolikoak"
+
+#. search.py:117
+msgid "Search hidden"
+msgstr "Bilatu ezkutukoak"
+
+#. search.py:121
+msgid "Use regular expressions"
+msgstr "Erabili espresio erregularrak"
+
+#. search.py:125
+msgid "Stop"
+msgstr "Gelditu"
+
+#. search.py:140
+msgid "File"
+msgstr "Fitxategia"
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. search.py:156
+msgid "Path"
+msgstr "Bidea"
+
+#. search.py:184
+msgid "Searching..."
+msgstr "Bilatzen..."
+
+#. search.py:198 search.py:199
+msgid "Search Stopped"
+msgstr "Bilaketa gelditu Da"
+
+#. search.py:215
+msgid "Searching: "
+msgstr "Bilatzen: "
+
+#. search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Errorea: ez dituzu nahiko baimen karpeta irakurtzeko "
+
+#. search.py:252
+msgid "Search Completed"
+msgstr "Bilaketa burutu da"
+
+#. search.py:259
+msgid "Skipping"
+msgstr "Saltatzen"
+
+#. search.py:259
+#, fuzzy
+msgid " - directory already searched"
+msgstr " - dagoeneko bilatutako karpeta"
+
+#. metadata.json->description
+msgid ""
+"Provides direct and easy access to your Directories, Favorites, Recent "
+"documents and System locations"
+msgstr ""
+
+#. metadata.json->comments
+msgid ""
+"The Direct@claudiux applet is a fork from the placesCenter@scollins applet, "
+"with improvements."
+msgstr ""
+
+#. settings-schema.json->generalPage->title
+msgid "General"
+msgstr "Orokorra"
+
+#. settings-schema.json->userPage->title
+msgid "User"
+msgstr "Erabiltzailea"
+
+#. settings-schema.json->systemPage->title
+msgid "System"
+msgstr "Sistema"
+
+#. settings-schema.json->favoritesPage->title
+msgid "Favorites"
+msgstr ""
+
+#. settings-schema.json->recentPage->title
+#. settings-schema.json->recentSection->title
+msgid "Recent documents"
+msgstr "Duela gutxiko dokumentuak"
+
+#. settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr "Panelaren ezarpenak"
+
+#. settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr "Menuaren ezarpenak"
+
+#. settings-schema.json->userSection->title
+msgid "User section"
+msgstr "Erabiltzailearen atala"
+
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+msgid "Custom places"
+msgstr "Leku pertsonalizatuak"
+
+#. settings-schema.json->systemSection->title
+msgid "System section"
+msgstr "Sistemaren atala"
+
+#. settings-schema.json->favoritesSection->title
+#, fuzzy
+msgid "Favorite documents"
+msgstr "Erakutsi duela gutxiko dokumentuak"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Panelaren ikonoa"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr ""
+"Ikono izena edo bide zuzena onartzen du (ikono sinbolikoak onartzen ditu)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Panelaren testua"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr "Menuaren lasterbide-tekla"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Ikonoen tamaina"
+
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr ""
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->displayOrder->description
+msgid "Display order in the menu"
+msgstr ""
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
+#. settings-schema.json->noIconOnPanel->description
+msgid "No icon on panel"
+msgstr ""
+
+#. settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "Ireki saguaren erdiko botoia sakatuz"
+
+#. settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "Utzi hutsik ezgaitzeko"
+
+#. settings-schema.json->dontDisplayTooltip->description
+#, fuzzy
+msgid "Do not display the tooltip"
+msgstr "Erakutsi ibilbide osoa tresna-aholkuetan"
+
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "Erabiltzailearen atala"
+
+#. settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "Erakutsi mahaigaina"
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr ""
+
+#. settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "Erakutsi zakarrontzia"
+
+#. settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "Inoiz ez"
+
+#. settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "Beti"
+
+#. settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "Hutsik ez dagoenean"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "Sistemaren atala"
+
+#. settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "Erakutsi ordenagailua"
+
+#. settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "Erakutsu fitxategi-sistema"
+
+#. settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "Erakutsi bolumenak"
+
+#. settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr "Bakarrik muntatutako unitateak erakutsi"
+
+#. settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "Erakutsi sarea"
+
+#. settings-schema.json->showFavorites->description
+#, fuzzy
+msgid "Show favorite documents"
+msgstr "Erakutsi duela gutxiko dokumentuak"
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->description
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#, fuzzy
+msgid "All Favorite Documents"
+msgstr "Duela gutxiko dokumentuak"
+
+#. settings-schema.json->favoriteSizeLimit->description
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Erakusteko zenbakia"
+
+#. settings-schema.json->favoriteShowUri->description
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr "Erakutsi ibilbide osoa tresna-aholkuetan"
+
+#. settings-schema.json->favoriteIconIsStar->description
+msgid "Replace icons with stars"
+msgstr ""
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Erakutsi duela gutxiko dokumentuak"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+#, fuzzy
+msgid "All Recent Documents"
+msgstr "Duela gutxiko dokumentuak"
+
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr "Pribatutasuna"
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
+msgstr ""

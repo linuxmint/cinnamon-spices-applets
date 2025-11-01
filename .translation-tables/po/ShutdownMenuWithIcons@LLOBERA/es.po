@@ -1,0 +1,199 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-08 15:58-0500\n"
+"PO-Revision-Date: 2021-12-21 22:26-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. metadata.json->name
+#: applet.js:42
+msgid "Shutdown Menu With Icons"
+msgstr "Menú de apagado con iconos"
+
+#: applet.js:143
+msgid "Quit"
+msgstr "Apagar"
+
+#: applet.js:146
+msgid "Suspend"
+msgstr "Suspender"
+
+#: applet.js:149
+msgid "Hibernate"
+msgstr "Hibernar"
+
+#: applet.js:152
+msgid "Hybrid sleep"
+msgstr "Suspensión híbrida"
+
+#: applet.js:155
+msgid "Restart"
+msgstr "Reiniciar"
+
+#. settings-schema.json->switch_users_label->description
+#: applet.js:160
+msgid "Switch users"
+msgstr "Cambiar de usuario"
+
+#. settings-schema.json->log_out_label->description
+#: applet.js:163
+msgid "Log out"
+msgstr "Cerrar sesión"
+
+#: applet.js:166
+msgid "Screen Lock"
+msgstr "Bloqueo de pantalla"
+
+#: applet.js:185
+msgid "Settings"
+msgstr "Configuración"
+
+#: applet.js:190
+msgid "Help"
+msgstr "Ayuda"
+
+#: applet.js:195
+msgid "About"
+msgstr "Acerca de"
+
+#. metadata.json->description
+msgid ""
+"An applet to help you shutdown, restart and suspend your system with single "
+"click"
+msgstr ""
+"Un applet que le ayuda a apagar, reiniciar y suspender su sistema con un "
+"solo clic"
+
+#. settings-schema.json->quit_label->description
+msgid "Quit: shut down and power-off the system"
+msgstr "Salir: apagar y desconectar el sistema"
+
+#. settings-schema.json->quit->description
+msgid "Add quit to the menu"
+msgstr "Añadir apagar al menú"
+
+#. settings-schema.json->quit_icon->description
+msgid "The quit icon "
+msgstr "Icono de apagar "
+
+#. settings-schema.json->quit_cmd->description
+msgid "The quit command "
+msgstr "Comando de apagar "
+
+#. settings-schema.json->suspend_label->description
+msgid "Suspend: suspend the system"
+msgstr "Suspender: suspender el sistema"
+
+#. settings-schema.json->suspend->description
+msgid "Add suspend to the menu"
+msgstr "Añadir la suspensión al menú"
+
+#. settings-schema.json->suspend_icon->description
+msgid "The suspend icon "
+msgstr "Icono de suspensión "
+
+#. settings-schema.json->suspend_cmd->description
+msgid "The suspend command "
+msgstr "Comando de suspensión "
+
+#. settings-schema.json->hibernate_label->description
+msgid "Hibernate: hibernate the system"
+msgstr "Hibernar: hibernar el sistema"
+
+#. settings-schema.json->hibernate->description
+msgid "Add hibernate to the menu"
+msgstr "Añadir hibernar al menú"
+
+#. settings-schema.json->hibernate_icon->description
+msgid "The hibernate icon "
+msgstr "Icono de hibernación "
+
+#. settings-schema.json->hibernate_cmd->description
+msgid "The hibernate command "
+msgstr "Comando de hibernación "
+
+#. settings-schema.json->hybrid_sleep_label->description
+msgid "Hybrid sleep: hibernate and suspend the system"
+msgstr "Suspensión híbrida: hibernar y suspender el sistema"
+
+#. settings-schema.json->hybrid_sleep->description
+msgid "Add hybrid sleep to the menu"
+msgstr "Añadir suspensión híbrida al menú"
+
+#. settings-schema.json->hybrid_sleep_icon->description
+msgid "The hybrid sleep icon "
+msgstr "Icono de suspensión híbrida "
+
+#. settings-schema.json->hybrid_sleep_cmd->description
+msgid "The hybrid sleep command "
+msgstr "Comando de suspensión híbrida "
+
+#. settings-schema.json->restart_label->description
+msgid "Restart: shut down and reboot the system"
+msgstr "Reiniciar: apagar y reiniciar el sistema"
+
+#. settings-schema.json->restart->description
+msgid "Add restart to the menu"
+msgstr "Añadir reiniciar al menú"
+
+#. settings-schema.json->restart_icon->description
+msgid "The restart icon "
+msgstr "Icono de reiniciar "
+
+#. settings-schema.json->restart_cmd->description
+msgid "The restart command "
+msgstr "Comando de reinicio "
+
+#. settings-schema.json->switch_users->description
+msgid "Add switch users to the menu"
+msgstr "Añadir cierre de sesión al menú"
+
+#. settings-schema.json->switch_users_icon->description
+msgid "The switch users icon"
+msgstr "Icono de cambiar de usuario"
+
+#. settings-schema.json->switch_users_cmd->description
+msgid "The switch users command"
+msgstr "Comando de cambio de usuario"
+
+#. settings-schema.json->log_out->description
+msgid "Add log out to the menu"
+msgstr "Añadir el cierre de sesión al menú"
+
+#. settings-schema.json->log_out_icon->description
+msgid "The log out icon "
+msgstr "Icono de cierre de sesión "
+
+#. settings-schema.json->log_out_cmd->description
+msgid "The log out command "
+msgstr "Comando de cierre de sesión "
+
+#. settings-schema.json->screen_lock_label->description
+msgid "Screen lock: lock the screen"
+msgstr "Bloqueo de la pantalla: bloquear la pantalla"
+
+#. settings-schema.json->screen_lock->description
+msgid "Add screen lock to the menu"
+msgstr "Añadir el bloqueo de pantalla al menú"
+
+#. settings-schema.json->screen_lock_icon->description
+msgid "The screen lock icon "
+msgstr "Icono de bloqueo de pantalla al menú "
+
+#. settings-schema.json->screen_lock_cmd->description
+msgid "The screen lock command "
+msgstr "Comando de bloquear la pantalla "

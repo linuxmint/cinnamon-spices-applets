@@ -1,0 +1,523 @@
+# sound150@claudiux Applet POT File.
+# Copyright (C) 2018 Claudiux <claude.clerc@gmail.com>
+# This file is distributed under the same license as the cinnamon package.
+# FIRST AUTHOR Claudiux <claude.clerc@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux v1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-30 20:26+0100\n"
+"PO-Revision-Date: 2023-12-25 11:24+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. 6.2/applet.js:277 5.4/applet.js:264 6.4/lib/volumeSlider.js:77
+msgid "Mute"
+msgstr ""
+
+#. 6.2/applet.js:1018 6.4/lib/s150PopupMenu.js:129
+msgid "Videos"
+msgstr ""
+
+#. 6.2/applet.js:2057 5.4/applet.js:1979 6.4/applet.js:570
+msgid "Easy Effects"
+msgstr ""
+
+#. 6.2/applet.js:2064 5.4/applet.js:1986 6.4/applet.js:579
+msgid "Pulse Effects"
+msgstr ""
+
+#. 6.2/applet.js:2116 5.4/applet.js:2030 6.4/applet.js:860 6.4/applet.js:883
+#, javascript-format
+msgid "Are you sure you want to remove '%s'?"
+msgstr ""
+
+#. 6.2/applet.js:2970 5.4/applet.js:2758 6.4/applet.js:1810
+msgid "The 'playerctl' package is required!"
+msgstr ""
+
+#. 6.2/applet.js:2971 5.4/applet.js:2759 6.4/applet.js:1811
+msgid "Please select 'Install playerctl' in this menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->button-reload-applet->description
+#. 6.2/applet.js:3135 5.4/applet.js:2915 6.4/applet.js:155
+msgid "Reload this applet"
+msgstr ""
+
+#. 6.2/applet.js:3141 5.4/applet.js:2921 6.4/applet.js:2006
+msgid "Remove sound applet"
+msgstr ""
+
+#. 6.2/applet.js:3150 5.4/applet.js:2930 6.4/applet.js:2026
+msgid "Install playerctl"
+msgstr ""
+
+#. 6.4/applet.js:223 6.4/applet.js:265 6.4/applet.js:267
+msgid "%"
+msgstr ""
+
+#. 6.4->settings-schema.json->custom-commands-list->description
+#. 6.4/applet.js:588
+msgid "Commands"
+msgstr ""
+
+#. 6.4/applet.js:598
+msgid "Album Art desklet settings"
+msgstr ""
+
+#. 6.4/applet.js:605
+msgid "Show Album Art on desktop"
+msgstr ""
+
+#. 6.4/applet.js:751
+msgid "You need the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. 6.4/applet.js:752
+msgid ""
+"You can install it by clicking on the first button and then searching for "
+"Album."
+msgstr ""
+
+#. 6.4/applet.js:753 6.4/applet.js:771
+msgid "Desklets"
+msgstr ""
+
+#. 6.4/applet.js:754 6.4/applet.js:772 6.4/applet.js:803
+msgid "Cancel"
+msgstr ""
+
+#. 6.4/applet.js:769
+msgid "You need to activate the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. 6.4/applet.js:770
+msgid ""
+"You can activate it by clicking on the first button, then searching for "
+"Album and adding it with button [+]."
+msgstr ""
+
+#. metadata.json->name
+#. 6.4/applet.js:804
+msgid "Enhanced Sound applet"
+msgstr ""
+
+#. 6.4/applet.js:807
+msgid "Enable the OSD150 extension"
+msgstr ""
+
+#. 6.4/applet.js:808
+msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
+msgstr ""
+
+#. 6.4/applet.js:824
+msgid "Download the OSD150 extension"
+msgstr ""
+
+#. 6.4/applet.js:825
+msgid ""
+"To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
+"Click on the Download button then search for OSD150 and select the ⬇ button."
+msgstr ""
+
+#. 6.4/applet.js:1815
+msgid "The 'imagemagick' package is required!"
+msgstr ""
+
+#. 6.4/applet.js:1816
+msgid "Please select 'Install imagemagick' in this menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
+#. 6.4/applet.js:2014
+msgid "Remove the OsdWithNumber extension"
+msgstr ""
+
+#. 6.4/applet.js:2031
+msgid "Install imagemagick"
+msgstr ""
+
+#. metadata.json->description
+msgid "Enhanced sound applet"
+msgstr ""
+
+#. 6.2->settings-schema.json->page_behavior->title
+#. 5.4->settings-schema.json->page_behavior->title
+#. 6.4->settings-schema.json->page_behavior->title
+msgid "Behavior"
+msgstr ""
+
+#. 6.2->settings-schema.json->page_sound->title
+#. 5.4->settings-schema.json->page_sound->title
+#. 6.4->settings-schema.json->page_sound->title
+msgid "Sound"
+msgstr ""
+
+#. 6.2->settings-schema.json->page_shortcuts->title
+#. 6.2->settings-schema.json->sectionShortcuts1->title
+#. 5.4->settings-schema.json->page_shortcuts->title
+#. 5.4->settings-schema.json->sectionShortcuts1->title
+#. 6.4->settings-schema.json->page_shortcuts->title
+#. 6.4->settings-schema.json->sectionShortcuts1->title
+msgid "Shortcuts"
+msgstr ""
+
+#. 6.2->settings-schema.json->sectionSound2->title
+#. 5.4->settings-schema.json->sectionSound2->title
+#. 6.4->settings-schema.json->sectionSound2->title
+msgid "OSD"
+msgstr ""
+
+#. 6.2->settings-schema.json->sectionSound3->title
+#. 5.4->settings-schema.json->sectionSound3->title
+#. 6.4->settings-schema.json->sectionSound3->title
+msgid "Sounds"
+msgstr ""
+
+#. 6.2->settings-schema.json->sectionSound4->title
+#. 5.4->settings-schema.json->sectionSound4->title
+#. 6.4->settings-schema.json->sectionSound4->title
+msgid "Remove incompatible applets"
+msgstr ""
+
+#. 6.2->settings-schema.json->keepPlayerListOpen->description
+#. 5.4->settings-schema.json->keepPlayerListOpen->description
+#. 6.4->settings-schema.json->keepPlayerListOpen->description
+msgid "Keep the player list open"
+msgstr ""
+
+#. 6.2->settings-schema.json->keepChoosePlayerOpen->description
+#. 5.4->settings-schema.json->keepChoosePlayerOpen->description
+#. 6.4->settings-schema.json->keepChoosePlayerOpen->description
+msgid "Keep the player controller selector open"
+msgstr ""
+
+#. 6.2->settings-schema.json->avoidTwice->description
+#. 5.4->settings-schema.json->avoidTwice->description
+#. 6.4->settings-schema.json->avoidTwice->description
+msgid "Avoid displaying controllers twice"
+msgstr ""
+
+#. 6.2->settings-schema.json->seekerTooltipDelay->units
+#. 5.4->settings-schema.json->seekerTooltipDelay->units
+msgid "ms"
+msgstr ""
+
+#. 6.2->settings-schema.json->seekerTooltipDelay->description
+#. 5.4->settings-schema.json->seekerTooltipDelay->description
+msgid "Seeker tooltip: time to disappear"
+msgstr ""
+
+#. 6.2->settings-schema.json->keySwitchPlayer->description
+#. 5.4->settings-schema.json->keySwitchPlayer->description
+#. 6.4->settings-schema.json->keySwitchPlayer->description
+msgid "Switch to next player"
+msgstr ""
+
+#. 6.2->settings-schema.json->keySwitchPlayer->tooltip
+#. 5.4->settings-schema.json->keySwitchPlayer->tooltip
+#. 6.4->settings-schema.json->keySwitchPlayer->tooltip
+msgid "Set keybinding(s) to switch to the next player if it exists."
+msgstr ""
+
+#. 6.2->settings-schema.json->showMicMutedOnIcon->description
+#. 5.4->settings-schema.json->showMicMutedOnIcon->description
+#. 6.4->settings-schema.json->showMicMutedOnIcon->description
+msgid "Display icon indicating that the microphone is muted, if applicable"
+msgstr ""
+
+#. 6.2->settings-schema.json->showMicUnmutedOnIcon->description
+#. 5.4->settings-schema.json->showMicUnmutedOnIcon->description
+#. 6.4->settings-schema.json->showMicUnmutedOnIcon->description
+msgid "Display icon indicating that the microphone is activated, if applicable"
+msgstr ""
+
+#. 6.2->settings-schema.json->openSystemSoundSettings->description
+#. 6.4->settings-schema.json->openSystemSoundSettings->description
+msgid "System Sound Settings"
+msgstr ""
+
+#. 6.2->settings-schema.json->maxVolume->description
+#. 6.4->settings-schema.json->maxVolume->description
+msgid "Maximum volume (%)"
+msgstr ""
+
+#. 6.2->settings-schema.json->startupVolume->description
+#. 6.4->settings-schema.json->startupVolume->description
+msgid "Volume at start-up (%)"
+msgstr ""
+
+#. 6.2->settings-schema.json->startupVolume->tooltip
+#. 6.4->settings-schema.json->startupVolume->tooltip
+msgid "Value -1 means \"No change\""
+msgstr ""
+
+#. 6.2->settings-schema.json->magnetic25On->description
+#. 5.4->settings-schema.json->magnetic25On->description
+#. 6.4->settings-schema.json->magnetic25On->description
+msgid "Magnetize all multiples of 25%"
+msgstr ""
+
+#. 6.2->settings-schema.json->color0_100->description
+msgid "Icon color: 0%-100%"
+msgstr ""
+
+#. 6.2->settings-schema.json->color101_115->description
+#. 5.4->settings-schema.json->color101_115->description
+#. 6.4->settings-schema.json->color101_115->description
+msgid "Icon color: 101%-115%"
+msgstr ""
+
+#. 6.2->settings-schema.json->color116_130->description
+#. 5.4->settings-schema.json->color116_130->description
+#. 6.4->settings-schema.json->color116_130->description
+msgid "Icon color: 116%-130%"
+msgstr ""
+
+#. 6.2->settings-schema.json->color131_150->description
+#. 5.4->settings-schema.json->color131_150->description
+#. 6.4->settings-schema.json->color131_150->description
+msgid "Icon color: 131%-150%"
+msgstr ""
+
+#. 6.2->settings-schema.json->resetColorsButton->description
+#. 5.4->settings-schema.json->resetColorsButton->description
+#. 6.4->settings-schema.json->resetColorsButton->description
+msgid "Set colors to default values (yellow, orange, red)"
+msgstr ""
+
+#. 6.2->settings-schema.json->muteSoundOnClosing->description
+#. 6.4->settings-schema.json->muteSoundOnClosing->description
+msgid "Mute sound on closing"
+msgstr ""
+
+#. 6.2->settings-schema.json->muteSoundOnClosing->tooltip
+#. 6.4->settings-schema.json->muteSoundOnClosing->tooltip
+msgid ""
+"If you notice an unpleasant noise on closing, check this box.\n"
+"You'll need to restore the sound at startup, by middle-clicking on this "
+"applet's icon.\n"
+"It is NOT recommended to check this box."
+msgstr ""
+
+#. 6.2->settings-schema.json->showMediaKeysOSD->options
+#. 5.4->settings-schema.json->showMediaKeysOSD->options
+msgid "disabled"
+msgstr ""
+
+#. 6.2->settings-schema.json->showMediaKeysOSD->options
+#. 5.4->settings-schema.json->showMediaKeysOSD->options
+msgid "small"
+msgstr ""
+
+#. 6.2->settings-schema.json->showMediaKeysOSD->options
+#. 5.4->settings-schema.json->showMediaKeysOSD->options
+msgid "medium"
+msgstr ""
+
+#. 6.2->settings-schema.json->showMediaKeysOSD->options
+#. 5.4->settings-schema.json->showMediaKeysOSD->options
+msgid "large"
+msgstr ""
+
+#. 6.2->settings-schema.json->showMediaKeysOSD->description
+#. 5.4->settings-schema.json->showMediaKeysOSD->description
+msgid "Whether the media keys OSD is disabled or its relative display size"
+msgstr ""
+
+#. 6.2->settings-schema.json->showOSDonStartup->description
+#. 5.4->settings-schema.json->showOSDonStartup->description
+#. 6.4->settings-schema.json->showOSDonStartup->description
+msgid "Show volume level in OSD on startup"
+msgstr ""
+
+#. 6.2->settings-schema.json->volumeSoundFile->description
+#. 5.4->settings-schema.json->volumeSoundFile->description
+#. 6.4->settings-schema.json->volumeSoundFile->description
+msgid "Which sound to play when the volume is changed"
+msgstr ""
+
+#. 6.2->settings-schema.json->volumeSoundEnabled->description
+#. 5.4->settings-schema.json->volumeSoundEnabled->description
+#. 6.4->settings-schema.json->volumeSoundEnabled->description
+msgid "Whether to play a sound when the volume is changed"
+msgstr ""
+
+#. 6.2->settings-schema.json->redefine-volume-keybindings->description
+#. 5.4->settings-schema.json->redefine-volume-keybindings->description
+#. 6.4->settings-schema.json->redefine-volume-keybindings->description
+msgid "Redefine Multimedia Keyboard Shortcuts"
+msgstr ""
+
+#. 6.2->settings-schema.json->button-set-to-default-keybindings->description
+#. 5.4->settings-schema.json->button-set-to-default-keybindings->description
+#. 6.4->settings-schema.json->button-set-to-default-keybindings->description
+msgid "Use the same shortcuts as those defined by Cinnamon"
+msgstr ""
+
+#. 6.2->settings-schema.json->pause-on-off->description
+#. 5.4->settings-schema.json->pause-on-off->description
+#. 6.4->settings-schema.json->pause-on-off->description
+msgid "Pause/Play toggle"
+msgstr ""
+
+#. 6.2->settings-schema.json->volume-mute->description
+#. 5.4->settings-schema.json->volume-mute->description
+#. 6.4->settings-schema.json->volume-mute->description
+msgid "Volume Mute"
+msgstr ""
+
+#. 6.2->settings-schema.json->volume-up->description
+#. 5.4->settings-schema.json->volume-up->description
+#. 6.4->settings-schema.json->volume-up->description
+msgid "Volume Up"
+msgstr ""
+
+#. 6.2->settings-schema.json->volume-down->description
+#. 5.4->settings-schema.json->volume-down->description
+#. 6.4->settings-schema.json->volume-down->description
+msgid "Volume Down"
+msgstr ""
+
+#. 6.2->settings-schema.json->audio-next->description
+#. 5.4->settings-schema.json->audio-next->description
+#. 6.4->settings-schema.json->audio-next->description
+msgid "Next Track"
+msgstr ""
+
+#. 6.2->settings-schema.json->audio-prev->description
+#. 5.4->settings-schema.json->audio-prev->description
+#. 6.4->settings-schema.json->audio-prev->description
+msgid "Previous Track"
+msgstr ""
+
+#. 6.2->settings-schema.json->remove_soundATcinnamonDOTorg->description
+#. 5.4->settings-schema.json->remove_soundATcinnamonDOTorg->description
+#. 6.4->settings-schema.json->remove_soundATcinnamonDOTorg->description
+msgid "Remove from panel the sound@cinnamon.org applet"
+msgstr ""
+
+#. 6.4->settings-schema.json->page_menus->title
+msgid "Menus"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionMenu2->title
+msgid "Context Menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionIcon1->title
+msgid "Icon appearance"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionIcon2->title
+msgid "Icon colors"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionIcon3->title
+msgid "Scrolling"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionSound5->title
+msgid "Remove incompatible extensions"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionCommands->title
+msgid "Custom commands"
+msgstr ""
+
+#. 6.4->settings-schema.json->dontShowAnyImageInMenu->description
+msgid "Do not show any cover art in the menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->showMediaOptical->description
+msgid "Show Media-Optical icon"
+msgstr ""
+
+#. 6.4->settings-schema.json->viewFullAlbumArt->description
+msgid "View Full Album Art"
+msgstr ""
+
+#. 6.4->settings-schema.json->viewFullAlbumArt->tooltip
+msgid ""
+"When unchecked, Album Art in the menu may be partially covered by Artist and "
+"Title."
+msgstr ""
+
+#. 6.4->settings-schema.json->keepAppListOpen->description
+msgid "Keep the App selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepOutputListOpen->description
+msgid "Keep the Output Device selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepInputListOpen->description
+msgid "Keep the Input Device selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepCommandListOpen->description
+msgid "Keep the Command selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->toolongchars->description
+msgid "If the title is too long, end it with:"
+msgstr ""
+
+#. 6.4->settings-schema.json->toolongchars->tooltip
+msgid "Emoji accepted"
+msgstr ""
+
+#. 6.4->settings-schema.json->showalbumDelay->description
+msgid "Delay between icon and album art display (seconds)"
+msgstr ""
+
+#. 6.4->settings-schema.json->reverseScrolling->description
+msgid "Reverse scrolling effect"
+msgstr ""
+
+#. 6.4->settings-schema.json->showMediaKeysOSD->description
+msgid "Whether or not to show the media keys OSD"
+msgstr ""
+
+#. 6.4->settings-schema.json->showVolumeValue->description
+msgid "Show volume level in OSD"
+msgstr ""
+
+#. 6.4->settings-schema.json->showPercent->description
+msgid "Show '%' in OSD"
+msgstr ""
+
+#. 6.4->settings-schema.json->OSDhorizontal->description
+msgid "Show horizontal OSD"
+msgstr ""
+
+#. 6.4->settings-schema.json->showBarLevel->description
+msgid "Show bar level in OSD"
+msgstr ""
+
+#. 6.4->settings-schema.json->mic-mute->description
+msgid "Microphone Mute"
+msgstr ""
+
+#. 6.4->settings-schema.json->custom-commands-label->description
+msgid ""
+"These commands will appear in the context menu once you've reloaded this "
+"applet."
+msgstr ""
+
+#. 6.4->settings-schema.json->custom-commands-list->columns->title
+msgid "Title"
+msgstr ""
+
+#. 6.4->settings-schema.json->custom-commands-list->columns->title
+msgid "Command"
+msgstr ""

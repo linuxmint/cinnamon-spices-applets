@@ -1,0 +1,66 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: jalalicalendar@mohammad-sn 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-05-01 13:13-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:90
+msgid "Date and Time Settings"
+msgstr "Configuración de fecha y hora"
+
+#: applet.js:103
+msgid "%B %e, %Y"
+msgstr "%B %e, %Y"
+
+#: jalalicalendar.js:507
+msgid "calendar:MY"
+msgstr "calendario:MA"
+
+#. metadata.json->description
+msgid "The Cinnamon Jalali (Iranian) calendar applet"
+msgstr "El applet de calendario Cinnamon Jalali (iraní)"
+
+#. metadata.json->name
+msgid "Taghvim"
+msgstr "Taghvim"
+
+#. settings-schema.json->use-custom-format->description
+msgid "Use a custom date format"
+msgstr "Utilizar un formato de fecha personalizado"
+
+#. settings-schema.json->use-custom-format->tooltip
+msgid ""
+"Check this to define a custom format for the date in the calendar applet."
+msgstr ""
+"Marque esta opción para definir un formato personalizado para la fecha en "
+"el applet de calendario."
+
+#. settings-schema.json->custom-format->description
+msgid "Date format:"
+msgstr "Formato de la fecha:"
+
+#. settings-schema.json->custom-format->tooltip
+msgid "Set your custom format here."
+msgstr "Establezca aquí su formato personalizado."
+
+#. settings-schema.json->format-button->description
+msgid "Show information on date format syntax"
+msgstr "Mostrar información sobre la sintaxis del formato de fecha"
+
+#. settings-schema.json->format-button->tooltip
+msgid "Click this button to know more about the syntax for date formats."
+msgstr ""
+"Pulse este botón para saber más sobre la sintaxis de los formatos de fecha."

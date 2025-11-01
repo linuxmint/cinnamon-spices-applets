@@ -1,0 +1,10 @@
+# ENHANCED SOUND APPLET
+# This file is put in the public domain.
+# claudiux, 2018
+#
+msgid ""
+msgstr ""
+
+#. 6.4->settings-schema.json->mic-mute->description
+msgid "Microphone Mute"
+msgstr ""

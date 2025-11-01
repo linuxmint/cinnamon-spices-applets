@@ -1,0 +1,248 @@
+# DIRECT
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Places Center 2.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"PO-Revision-Date: 2017-02-26 21:10+0100\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. applet.js:38 applet.js:530
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:160
+msgid "(Right click to open folder)"
+msgstr ""
+
+#. applet.js:575
+msgid "Recent"
+msgstr ""
+
+#. search.py:43
+msgid "Open..."
+msgstr ""
+
+#. search.py:48
+msgid "Open Containing Folder..."
+msgstr ""
+
+#. search.py:85
+msgid "Search"
+msgstr ""
+
+#. search.py:106
+msgid "Start in"
+msgstr ""
+
+#. search.py:107
+msgid "Select a folder"
+msgstr ""
+
+#. search.py:113
+msgid "Follow symlinks"
+msgstr ""
+
+#. search.py:117
+msgid "Search hidden"
+msgstr ""
+
+#. search.py:121
+msgid "Use regular expressions"
+msgstr ""
+
+#. search.py:125
+msgid "Stop"
+msgstr ""
+
+#. search.py:140
+msgid "File"
+msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. search.py:156
+msgid "Path"
+msgstr ""
+
+#. search.py:184
+msgid "Searching..."
+msgstr ""
+
+#. search.py:198 search.py:199
+msgid "Search Stopped"
+msgstr ""
+
+#. search.py:215
+msgid "Searching: "
+msgstr ""
+
+#. search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+#. search.py:252
+msgid "Search Completed"
+msgstr ""
+
+#. search.py:259
+msgid "Skipping"
+msgstr ""
+
+#. search.py:259
+msgid " - directory already searched"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Provides direct and easy access to your Directories, Favorites, Recent "
+"documents and System locations"
+msgstr ""
+
+#. metadata.json->comments
+msgid ""
+"The Direct@claudiux applet is a fork from the placesCenter@scollins applet, "
+"with improvements."
+msgstr ""
+
+#. settings-schema.json->favoritesPage->title
+msgid "Favorites"
+msgstr ""
+
+#. settings-schema.json->favoritesSection->title
+msgid "Favorite documents"
+msgstr ""
+
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr ""
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->displayOrder->description
+msgid "Display order in the menu"
+msgstr ""
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
+#. settings-schema.json->noIconOnPanel->description
+msgid "No icon on panel"
+msgstr ""
+
+#. settings-schema.json->dontDisplayTooltip->description
+msgid "Do not display the tooltip"
+msgstr ""
+
+#. settings-schema.json->showUserSection->description
+msgid "Show User section"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr ""
+
+#. settings-schema.json->showSystemSection->description
+msgid "Show System section"
+msgstr ""
+
+#. settings-schema.json->showFavorites->description
+msgid "Show favorite documents"
+msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->description
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+msgid "All Favorite Documents"
+msgstr ""
+
+#. settings-schema.json->favoriteShowUri->description
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr ""
+
+#. settings-schema.json->favoriteIconIsStar->description
+msgid "Replace icons with stars"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "All Recent Documents"
+msgstr ""
+
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr ""
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
+msgstr ""
