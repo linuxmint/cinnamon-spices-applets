@@ -1,3 +1,6 @@
+### v13.6.0~20251102
+  * Improves menu stability.
+
 ### v13.5.2~20251031
   * Avoids 'paint' errors.
 
