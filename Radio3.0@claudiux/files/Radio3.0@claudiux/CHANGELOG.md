@@ -1,3 +1,6 @@
+### v3.9.4~20251102
+  * Improves stability.
+
 ### v3.8.4~20251031
   * Avoids paint() errors.
 
