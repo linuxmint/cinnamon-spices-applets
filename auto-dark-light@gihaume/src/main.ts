@@ -5,7 +5,6 @@ import { initialize_globals, logger } from './globals';
 import { initialize_handlers } from './app/handlers/initialize_handlers';
 import { initialize_applet_settings } from './app/initialize_applet_settings';
 
-//! @preserve
 function main(
     metadata: imports.ui.applet.AppletMetadata,
     orientation: imports.gi.St.Side,

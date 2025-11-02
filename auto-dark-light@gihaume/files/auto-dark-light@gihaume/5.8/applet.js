@@ -5413,7 +5413,6 @@ function initialize_applet_settings(uuid, instance_id) {
   return settings2;
 }
 const { IconApplet } = imports.ui.applet;
-//! @preserve
 function main(metadata2, orientation, panel_height, instance_id) {
   initialize_globals(metadata2);
   const applet = new IconApplet(
