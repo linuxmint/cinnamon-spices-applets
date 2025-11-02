@@ -50,11 +50,13 @@ const COVERBOX_LAYOUT_MANAGER = new Clutter.BinLayout({
 
 // playerctld:
 function run_playerctld() {
-    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
+    //~ Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
+    Util.spawnCommandLine("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
 }
 
 function kill_playerctld() {
-    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
+    //~ Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
+    Util.spawnCommandLine("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
 }
 
 
@@ -277,6 +279,7 @@ class Player extends PopupMenu.PopupMenuSection {
         this.trackInfo = new St.BoxLayout({
             style_class: "sound-player-overlay",
             //~ style: "min-height: 6em;", // replaces "height: auto;" REMOVED: DEPRECATED!
+            style: "height: 6em;",
             important: true,
             vertical: true
         });
@@ -644,7 +647,8 @@ class Player extends PopupMenu.PopupMenuSection {
 
         if (old_title != this._title) {
             del_song_arts();
-            Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            //~ Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
         }
 
         this.titleLabel.set_text(this._title);
@@ -658,7 +662,8 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._trackCoverFile = artUrl;
                     change = true;
                 }
-                Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+                //~ Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+                Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
             }
         } else if (metadata["xesam:url"]) {
             if (this._oldTitle != this._title) {
@@ -692,7 +697,8 @@ class Player extends PopupMenu.PopupMenuSection {
                 });
             }
         } else {
-            Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            //~ Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
             if (this._trackCoverFile != false) {
                 this._trackCoverFile = false;
                 change = true;
@@ -829,14 +835,16 @@ class Player extends PopupMenu.PopupMenuSection {
             let dir = Gio.file_new_for_path(ALBUMART_PICS_DIR);
             let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
             if ((dir_children.next_file(null)) == null) { // dir does not contain any file.
-                Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
+                //~ Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
+                Util.spawnCommandLine("cp -a %s %s/R3SongArt%s".format(
                     cover_path,
                     ALBUMART_PICS_DIR,
                     randomIntegerInInterval(0, superRND).toString()
                 ));
             } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
                 del_song_arts();
-                Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
+                //~ Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
+                Util.spawnCommandLine("cp -a %s %s/R3SongArt%s".format(
                     cover_path,
                     ALBUMART_PICS_DIR,
                     randomIntegerInInterval(0, superRND).toString()

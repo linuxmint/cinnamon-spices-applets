@@ -1047,13 +1047,17 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.DB_SERVERS = DEFAULT_DB_SERVERS;
     }
 
-    spawnCommandLineAsync("bash -c '%s/stop-mpv-else-recordings.sh'".format(SCRIPTS_DIR));
-    spawnCommandLineAsync("bash -c '%s/create-db-server-list.sh'".format(SCRIPTS_DIR));
+    //~ spawnCommandLineAsync("bash -c '%s/stop-mpv-else-recordings.sh'".format(SCRIPTS_DIR));
+    //~ spawnCommandLineAsync("bash -c '%s/create-db-server-list.sh'".format(SCRIPTS_DIR));
+    spawnCommandLine("/usr/bin/env bash -c '%s/stop-mpv-else-recordings.sh'".format(SCRIPTS_DIR));
+    spawnCommandLine("/usr/bin/env bash -c '%s/create-db-server-list.sh'".format(SCRIPTS_DIR));
 
     file_set_contents(MPV_TITLE_FILE, "");
     // Ensure right permissions and structure:
-    spawnCommandLineAsync("bash -c 'cd "+ SCRIPTS_DIR + " && chmod 755 *.sh *.py'");
-    spawnCommandLineAsync("bash -c 'cd "+ SCRIPTS_DIR + " && chmod 700 *.lua'");
+    //~ spawnCommandLineAsync("/usr/bin/env bash -c 'cd "+ SCRIPTS_DIR + " && chmod 755 *.sh *.py'");
+    //~ spawnCommandLineAsync("/usr/bin/env bash -c 'cd "+ SCRIPTS_DIR + " && chmod 700 *.lua'");
+    spawnCommandLine("/usr/bin/env bash -c 'cd "+ SCRIPTS_DIR + " && chmod 755 *.sh *.py'");
+    spawnCommandLine("/usr/bin/env bash -c 'cd "+ SCRIPTS_DIR + " && chmod 700 *.lua'");
 
     if (!file_test(RADIO30_CACHE, FileTest.EXISTS))
       mkdir_with_parents(RADIO30_CACHE, 0o755);
@@ -1067,9 +1071,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       mkdir_with_parents(SONG_ART_DIR, 0o755);
     if (!file_test(ALBUMART_PICS_DIR, FileTest.EXISTS))
       mkdir_with_parents(ALBUMART_PICS_DIR, 0o755);
-    spawnCommandLineAsync("bash -c 'cp -a "+ APPLET_DIR +"/stations/Radio3.0_*.json "+ RADIO_LISTS_DIR +"/'");
+    //~ spawnCommandLineAsync("/usr/bin/env bash -c 'cp -a "+ APPLET_DIR +"/stations/Radio3.0_*.json "+ RADIO_LISTS_DIR +"/'");
+    spawnCommandLine("/usr/bin/env bash -c 'cp -a "+ APPLET_DIR +"/stations/Radio3.0_*.json "+ RADIO_LISTS_DIR +"/'");
     if (!file_test(DOT_CONFIG_DIR +"/icon.svg", FileTest.EXISTS)) {
-      spawnCommandLineAsync("bash -c 'cp -a "+ APPLET_ICON +" "+ DOT_CONFIG_DIR +"/'")
+      //~ spawnCommandLineAsync("/usr/bin/env bash -c 'cp -a "+ APPLET_ICON +" "+ DOT_CONFIG_DIR +"/'")
+      spawnCommandLine("/usr/bin/env bash -c 'cp -a "+ APPLET_ICON +" "+ DOT_CONFIG_DIR +"/'")
     }
 
     this.set_folders_icon();
@@ -2778,13 +2784,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         brainz_item.label.clutterText.line_wrap_mode = WrapMode.WORD_CHAR;
         brainz_item.label.clutterText.ellipsize = EllipsizeMode.NONE;
         brainz_item.connect('activate', () => {
-          spawnCommandLineAsync("xdg-open " + brainz_link);
+          spawnCommandLine("xdg-open " + brainz_link);
         });
         this.menu.addMenuItem(brainz_item);
 
         let yt_watch_item  = new PopupIconMenuItem(formatTextWrap(_("Watch on YT"), WRAP_LENGTH), "media-playback-start", IconType.SYMBOLIC, { reactive: true });
         yt_watch_item.connect('activate', () => {
-          spawnCommandLineAsync("xdg-open " + yt_watch_link);
+          spawnCommandLine("xdg-open " + yt_watch_link);
         });
         this.menu.addMenuItem(yt_watch_item);
 
@@ -2861,7 +2867,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             item_homepage = null;
             if (homepage && homepage != 'null' && homepage.length > 0) {
               item_homepage = new PopupIconMenuItem(formatTextWrap(_("Visit the home page of this station"), WRAP_LENGTH), "web-browser", IconType.SYMBOLIC, { reactive: true });
-              item_homepage.connect('activate', () => { spawnCommandLineAsync(`xdg-open ${homepage}`) });
+              item_homepage.connect('activate', () => { spawnCommandLine(`xdg-open ${homepage}`) });
             }
           }
 
@@ -3160,7 +3166,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     );
 
     if (file_test(yt_dl_proc_dir, FileTest.EXISTS)) {
-      let progress_pid = spawnCommandLineAsync("bash -c '%s/progress.sh %s'".format(
+      let progress_pid = spawnCommandLine("/usr/bin/env bash -c '%s/progress.sh %s'".format(
         SCRIPTS_DIR,
         ""+yt_dl_pid
       ));
@@ -3280,7 +3286,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
               ""+title,
               [ _("Open the recordings folder"),
                 "callback",
-                () => {spawnCommandLineAsync(`bash -c 'xdg-open "%s"'`.format(dir))}
+                () => {spawnCommandLine(`/usr/bin/env bash -c 'xdg-open "%s"'`.format(dir))}
               ]
             )
           } else {
@@ -3289,7 +3295,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
               _("Please check this record.") + "\n" + yt_dl_errMsg.trim(),
               [ _("Open the recordings folder"),
                 "callback",
-                () => {spawnCommandLineAsync(`bash -c 'xdg-open "%s"'`.format(RADIO30_MUSIC_DIR))}
+                () => {spawnCommandLine(`/usr/bin/env bash -c 'xdg-open "%s"'`.format(RADIO30_MUSIC_DIR))}
               ]
             )
           }
@@ -3297,8 +3303,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           finished();
           this.settings.setValue("recordings-extract-update", 0.0);
           this.settings.setValue("show-recordings-extract-update", false);
-          spawnCommandLine(`bash -c "kill -15 %s"`.format(""+progress_pid));
-          spawnCommandLine(`bash -c "rm -f %s"`.format(progress_filepath.replace("progress", "*")));
+          spawnCommandLine(`/usr/bin/env bash -c "kill -15 %s"`.format(""+progress_pid));
+          spawnCommandLine(`/usr/bin/env bash -c "rm -f %s"`.format(progress_filepath.replace("progress", "*")));
           if (this.yt_downloads.indexOf(title) > -1) {
             let index = this.yt_downloads.indexOf(title);
             this.yt_downloads.splice(index, 1);
@@ -3307,7 +3313,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           if (this.yt_downloads.length === 0) {
             // No more download to do.
             // Empty cache directory to avoid future 'HTTP Error 403: Forbidden':
-            spawnCommandLineAsync(`bash -c "sleep 0.5 && %s --rm-cache-dir"`.format(YTDL_PROGRAM()))
+            //~ spawnCommandLineAsync(`bash -c "sleep 0.5 && %s --rm-cache-dir"`.format(YTDL_PROGRAM()))
+            spawnCommandLine(`/usr/bin/env bash -c "sleep 0.5 && %s --rm-cache-dir"`.format(YTDL_PROGRAM()))
           }
           return false
         }
@@ -3451,7 +3458,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (!file_test(XDG_RUNTIME_DIR+"/mpv_radio_PID", FileTest.EXISTS)) return;
 
     let command = `${SCRIPTS_DIR}/get_song_art.sh "${title}" "${res}" &`;
-    spawnCommandLineAsync(command);
+    //~ spawnCommandLineAsync(command);
+    spawnCommandLine(command);
     timeout_add_seconds(30, () => {
       let dir = file_new_for_path(ALBUMART_PICS_DIR);
       let children = dir.enumerate_children("standard::*", FileQueryInfoFlags.NONE, null);
@@ -4083,7 +4091,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (!are_translations_installed()) install_translations();
 
     this.del_song_arts();
-    spawnCommandLineAsync("bash -c '%s/fix-desklet-translations.sh'".format(SCRIPTS_DIR));
+    //~ spawnCommandLineAsync("bash -c '%s/fix-desklet-translations.sh'".format(SCRIPTS_DIR));
+    spawnCommandLine("/usr/bin/env bash -c '%s/fix-desklet-translations.sh'".format(SCRIPTS_DIR));
 
     let color;
     try {
@@ -4273,7 +4282,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   on_sound_settings() {
-    spawnCommandLineAsync("cinnamon-settings sound");
+    //~ spawnCommandLineAsync("cinnamon-settings sound");
+    spawnCommandLine("cinnamon-settings sound");
   }
 
   on_button_radios_save_clicked() {
@@ -4370,7 +4380,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   on_button_radios_open_folder_clicked() {
     let appOpeningFolders = app_info_get_default_for_type('inode/directory', false).get_executable(); // usually returns: nemo
     let command = `%s "%s"`.format(appOpeningFolders, RADIO_LISTS_DIR);
-    spawnCommandLineAsync(command);
+    //~ spawnCommandLineAsync(command);
+    spawnCommandLine(command);
   }
 
   async on_button_radios_update_clicked() {
@@ -4757,7 +4768,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             _("Please check this record.") + "\n" + errors.join("\n"),
             [ _("Open the recordings folder"),
               "callback",
-              () => {spawnCommandLineAsync(`bash -c 'xdg-open "%s"'`.format(RADIO30_MUSIC_DIR))}
+              () => {spawnCommandLine(`/usr/bin/env bash -c 'xdg-open "%s"'`.format(RADIO30_MUSIC_DIR))}
             ]
           );
         } else if (exitCode !== 0) {
@@ -4766,7 +4777,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             _("Please check this record.") + "\nExitCode: " + exitCode,
             [ _("Open the recordings folder"),
               "callback",
-              () => {spawnCommandLineAsync(`bash -c 'xdg-open "%s"'`.format(RADIO30_MUSIC_DIR))}
+              () => {spawnCommandLine(`/usr/bin/env bash -c 'xdg-open "%s"'`.format(RADIO30_MUSIC_DIR))}
             ]
           );
         } else if (out == null) {
@@ -4775,7 +4786,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             _("Please check this record.") + "\nOutput is null!",
             [ _("Open the recordings folder"),
               "callback",
-              () => {spawnCommandLineAsync(`bash -c 'xdg-open "%s"'`.format(RADIO30_MUSIC_DIR))}
+              () => {spawnCommandLine(`/usr/bin/env bash -c 'xdg-open "%s"'`.format(RADIO30_MUSIC_DIR))}
             ]
           );
         }
@@ -4882,7 +4893,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             (stdout, stderr, exitCode) => {
               if (exitCode === 0) {
                   if (stdout.startsWith("opt1")) {
-                    spawnCommandLineAsync("cinnamon-settings extensions -t download");
+                    //~ spawnCommandLineAsync("cinnamon-settings extensions -t download");
+                    spawnCommandLine("cinnamon-settings extensions -t download");
                   } else {
                     this.OSDhorizontal = false;
                   }
@@ -4919,7 +4931,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   on_button_YT_open_dir() {
-    spawnCommandLineAsync(`bash -c 'xdg-open "%s/%s"'`.format(
+    //~ spawnCommandLineAsync(`bash -c 'xdg-open "%s/%s"'`.format(
+    spawnCommandLine(`/usr/bin/env bash -c 'xdg-open "%s/%s"'`.format(
       RADIO30_MUSIC_DIR,
       this.settings.getValue("recordings-subdirectory")
     ))
@@ -5360,7 +5373,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   open_rec_folder() {
-    spawnCommandLineAsync(app_info_get_default_for_type('inode/directory', false).get_executable() + " " + this.rec_folder);
+    //~ spawnCommandLineAsync(app_info_get_default_for_type('inode/directory', false).get_executable() + " " + this.rec_folder);
+    spawnCommandLine(app_info_get_default_for_type('inode/directory', false).get_executable() + " " + this.rec_folder);
   }
 
   _onStreamAdded(control, id) {
@@ -5598,7 +5612,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   openManual() {
-    spawnCommandLineAsync('xdg-open "%s"'.format(MANUAL_HTML))
+    //~ spawnCommandLineAsync('xdg-open "%s"'.format(MANUAL_HTML))
+    spawnCommandLine('xdg-open "%s"'.format(MANUAL_HTML))
   }
 
   configureApplet(tab=0) {
@@ -5809,7 +5824,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   on_button_import_shoutcast_clicked() {
-    spawnCommandLineAsync("xdg-open https://directory.shoutcast.com/")
+    //~ spawnCommandLineAsync("xdg-open https://directory.shoutcast.com/")
+    spawnCommandLine("xdg-open https://directory.shoutcast.com/")
   }
 
   on_button_import_file_clicked() {
@@ -6267,7 +6283,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   // Behavior:
 
   on_desklet_open_settings_button_clicked() {
-    spawnCommandLineAsync("cinnamon-settings desklets "+DESKLET_UUID);
+    //~ spawnCommandLineAsync("cinnamon-settings desklets "+DESKLET_UUID);
+    spawnCommandLine("cinnamon-settings desklets "+DESKLET_UUID);
   }
 
   _is_desklet_activated() {
