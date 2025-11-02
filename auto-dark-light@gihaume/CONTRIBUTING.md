@@ -25,7 +25,7 @@
 
 ## Development
 
-- Create a symbolic link pointing to this repository and add it in your user applets folder:
+- Create a symbolic link pointing to this folder and add it in your user applets folder:
   ```bash
   ln -s \
       <path_to_this_folder>/files/auto-dark-light@gihaume \
@@ -55,22 +55,21 @@
 
 Before any commit:
 
-- The `applet.js` has to be built via a minification single run with:
+- It is advisable to build `applet.js` in a single run with:
   ```bash
   pnpm build
   ```
-  - Then it is advisable to E2E test the change again.
-  - Note that it produces an `applet.js.sha256sum` file using GNU's `sha256sum` command for reproducible integrity verification by a reviewer.
+  - then E2E test again.
 - The change has to be documented as an incremented version in `CHANGELOG.md` accordingly.
   - The version number has to be modified in `files/metadata.json` accordingly.
-- If some call to gettext `_("…")` has been added or modified, the following command must be run from the root of the repository to update the `.pot` translation template file:
+- If some call to gettext `_("…")` has been added or modified, the following command must be run from the root of the cinnamon spices repository to update the `.pot` translation template file:
   ```bash
   ./cinnamon-spices-makepot auto-dark-light@gihaume
   ```
 
 ## Documentation
 
-Check the [`doc/README.md`](./doc/README.md) file.
+Check [`doc/README.md`](./doc/README.md).
 
 ## Linting for Python widgets (experimental)
 

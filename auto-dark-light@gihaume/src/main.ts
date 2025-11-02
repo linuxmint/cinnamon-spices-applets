@@ -34,4 +34,4 @@ function main(
     return applet;
 }
 
-(globalThis as any)[import.meta.env.VITE_KEEP_MAIN_FUNCTION_SENTINEL] = main; // Prevents transpilation tree-shaking
+(globalThis as any).__auto_dark_light__ = main; // Prevents transpilation tree-shaking

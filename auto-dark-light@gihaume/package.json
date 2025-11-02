@@ -1,7 +1,7 @@
 {
     "scripts": {
         "dev": "vite build --watch",
-        "build": "vite build --mode=final",
+        "build": "vite build",
         "test": "vitest"
     },
     "dependencies": {
