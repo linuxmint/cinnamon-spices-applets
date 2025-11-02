@@ -2,7 +2,7 @@
 
 The format adheres to [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) and [SemVer 2.0.0](https://semver.org/spec/v2.0.0.html)
 
-## [2.0.0] - 2025-11-02 - [#?](https://github.com/linuxmint/cinnamon-spices-applets/pull/?)
+## [2.0.0] - 2025-11-02 - [#7939](https://github.com/linuxmint/cinnamon-spices-applets/pull/7939)
 
 Extensive rewrite to enable new features – some bugs may have been introduced.
 
