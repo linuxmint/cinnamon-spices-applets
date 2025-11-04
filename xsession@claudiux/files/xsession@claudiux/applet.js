@@ -94,7 +94,7 @@ class LGSsliderItem extends PopupMenu.PopupSliderMenuItem {
             this._value = Math.min(1, this._value + SLIDER_SCROLL_STEP);
         }
 
-        this._slider.queue_repaint();
+        try{ this._slider.queue_repaint() } catch(e) {};
         this.emit('value-changed', this._value);
     }
 }
@@ -119,18 +119,12 @@ class ReloadAllMenuItem extends PopupMenu.PopupBaseMenuItem {
     let icon_file = Gio.file_new_for_path(icon_path);
     let icon, gicon;
 
-    //~ let icon = new St.Icon({ icon_name: type+"-symbolic", icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
-
     gicon = Gio.icon_new_for_string(icon_path);
-    //~ icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.FULLCOLOR, icon_size: this.parent.icon_size });
-    //~ icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size, });
-    //~ icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.SYMBOLIC, });
     icon = new St.Icon();
     icon.set_icon_size(this.parent.icon_size);
     icon.set_icon_type(St.IconType.SYMBOLIC);
     icon.set_gicon(gicon);
 
-    //~ let icon = new St.Icon({ icon_name: ICONS_DIR + "/" + type+"-symbolic", icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
     try {
       icon_box.add_actor(icon);
     } catch(e) {
@@ -157,40 +151,29 @@ class LGSMenuItem extends PopupMenu.PopupBaseMenuItem {
         let label = new St.Label({ style: "spacing: .25em;" , x_align: St.Align.START, x_expand: true, text: uuid, reactive: true, track_hover: true });
 
         let icon_box = new St.BoxLayout({ style: "spacing: .25em;" , x_align: St.Align.START, x_expand: false, reactive: true, track_hover: true });
-        let icon_path = HOME_DIR+"/.cache/cinnamon/spices/"+type.slice(0,-1)+"/"+uuid+".png";
-        let icon_file = Gio.file_new_for_path(icon_path);
+        let icon_path, icon_file;
         let icon, gicon;
 
+        icon_path = SPICES_DIR + "/" + type + "/" + uuid + "/icon.png";
+        icon_file = Gio.file_new_for_path(icon_path);
         if (icon_file.query_exists(null)) {
             gicon = Gio.icon_new_for_string(icon_path);
             icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.FULLCOLOR, icon_size: this.parent.icon_size });
-            //~ icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.FULLCOLOR, });
         } else {
-            icon_path = SPICES_DIR + "/" + type + "/" + uuid + "/icon.png";
-            icon_file = Gio.file_new_for_path(icon_path);
-            if (icon_file.query_exists(null)) {
-                gicon = Gio.icon_new_for_string(icon_path);
-                icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.FULLCOLOR, icon_size: this.parent.icon_size });
-                //~ icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.FULLCOLOR, });
-            } else {
-                let metadataJson_path = SPICES_DIR + "/" + type + "/" + uuid + "/metadata.json";
-                let metadataJson_file = Gio.file_new_for_path(metadataJson_path);
-                if (metadataJson_file.query_exists(null)) {
-                    let [success, array_chars] = GLib.file_get_contents(metadataJson_path);
-                    let contents = to_string(array_chars);
-                    let metadata = JSON.parse(contents);
-                    if (metadata["icon"]) {
-                        icon = new St.Icon({ icon_name: metadata["icon"], icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
-                        //~ icon = new St.Icon({ icon_name: metadata["icon"], icon_type: St.IconType.SYMBOLIC, });
-                    } else {
-                        icon = new St.Icon({ icon_name: type+"-symbolic", icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
-                        //~ icon = new St.Icon({ icon_name: type+"-symbolic", icon_type: St.IconType.SYMBOLIC, });
-                    }
-                    GLib.free(array_chars);
+            let metadataJson_path = SPICES_DIR + "/" + type + "/" + uuid + "/metadata.json";
+            let metadataJson_file = Gio.file_new_for_path(metadataJson_path);
+            if (metadataJson_file.query_exists(null)) {
+                let [success, array_chars] = GLib.file_get_contents(metadataJson_path);
+                let contents = to_string(array_chars);
+                let metadata = JSON.parse(contents);
+                if (metadata["icon"]) {
+                    icon = new St.Icon({ icon_name: metadata["icon"], icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
                 } else {
                     icon = new St.Icon({ icon_name: type+"-symbolic", icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
-                    //~ icon = new St.Icon({ icon_name: type+"-symbolic", icon_type: St.IconType.SYMBOLIC, });
                 }
+                GLib.free(array_chars);
+            } else {
+                icon = new St.Icon({ icon_name: type+"-symbolic", icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
             }
         }
 
@@ -387,7 +370,6 @@ class LGS extends Applet.IconApplet {
         sectionReload.addMenuItem(subMenuReloadApplets);
 
         if (this.show_reload_all) {
-          //~ let itemReloadAllApplets = new PopupMenu.PopupMenuItem(_("RELOAD ALL"), {style_class: "menu-selected-app-title"}); // make it bold.
           let itemReloadAllApplets = new ReloadAllMenuItem(this, "applets", {});
           itemReloadAllApplets.connect(
             "activate",
@@ -414,7 +396,6 @@ class LGS extends Applet.IconApplet {
         sectionReload.addMenuItem(subMenuReloadDesklets);
 
         if (this.show_reload_all) {
-          //~ let itemReloadAllDesklets = new PopupMenu.PopupMenuItem(_("RELOAD ALL"), {style_class: "menu-selected-app-title"}); // make it bold.
           let itemReloadAllDesklets = new ReloadAllMenuItem(this, "desklets", {});
           itemReloadAllDesklets.connect(
             "activate",

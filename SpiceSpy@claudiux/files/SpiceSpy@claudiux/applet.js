@@ -656,8 +656,12 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.update_issues();
       this.update_comments();
 
-      this.settings.setValue("spices_to_spy", this.spices_to_spy);
-      this.settings.setValue("old_spices_to_spy", this.old_spices_to_spy);
+      let spices_to_spy = this.spices_to_spy;
+      this.settings.setValue("spices_to_spy", spices_to_spy);
+      let old_spices_to_spy = this.old_spices_to_spy;
+      this.settings.setValue("old_spices_to_spy", old_spices_to_spy);
+      spices_to_spy = null;
+      old_spices_to_spy = null;
     }
     this.fistTime = false;
     this.set_applet_tooltip(this.metadata.name);
@@ -988,10 +992,12 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of on_applet_added_to_panel
 
   on_applet_clicked() {
-    this.settings.setValue("spices_to_spy", this.spices_to_spy);
+    let spices_to_spy = this.spices_to_spy;
+    this.settings.setValue("spices_to_spy", spices_to_spy);
     if (!this.menu || (this.menu && !this.menu.isOpen))
       this.make_menu();
     if (this.menu) this.menu.toggle();
+    spices_to_spy = null;
   } // End of on_applet_clicked
 
   on_applet_removed_from_panel() {

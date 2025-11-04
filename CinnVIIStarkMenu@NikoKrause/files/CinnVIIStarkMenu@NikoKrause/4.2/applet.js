@@ -542,10 +542,6 @@ class TransientButton extends SimpleMenuItem {
     }
 }
 
-String.prototype.replaceAt=function(index, character) {
-    return this.substr(0, index) + character + this.substr(index+character.length);
-};
-
 function TooltipCustom(actor, string, multiline) {
     this._init(actor, string, multiline);
 }
@@ -562,7 +558,7 @@ TooltipCustom.prototype = {
 
             for (let i = 0; i < tooltipLines; i++) {
                 lastSpacePos = formatString.lastIndexOf(" ", lastSpacePos + tooltipWidth);
-                formatString = formatString.replaceAt(lastSpacePos, "\n");
+                formatString = formatString.substring(0, lastSpacePos) + "\n" + formatString.substring(lastSpacePos + 1);
             }
         }
 
@@ -624,6 +620,7 @@ class ApplicationButton extends GenericApplicationButton {
     _onDragEnd() {
         this.applet.favoritesBox._delegate._clearDragPlaceholder();
     }
+
     destroy() {
         delete this._draggable;
         super.destroy();
@@ -2497,7 +2494,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     toggleContextMenu(button) {
         if (!button.withMenu)
             return;
-
+        
         if (!this.contextMenu) {
             let menu = new PopupMenu.PopupSubMenu(null); // hack: creating without actor
             menu.actor.set_style_class_name('menu-context-menu');
@@ -3294,6 +3291,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     _refreshFavs() {
         //Remove all favorites
         this.favoritesBox.destroy_all_children();
+        this.contextMenu = null;
 
         //Load favorites again
         this._favoritesButtons = [];

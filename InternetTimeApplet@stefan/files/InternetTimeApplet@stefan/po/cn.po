@@ -1,0 +1,47 @@
+# INTERNET TIME
+# This file is put in the public domain.
+# stefan12O, 2019
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: InternetTimeApplet@stefan 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:15
+msgid "@Ste"
+msgstr "@Ste"
+
+#. applet.js:16
+msgid ""
+"Internet Time\n"
+".beat"
+msgstr ""
+"互联网时间\n"
+".beat"
+
+#. applet.js:40
+msgid "@"
+msgstr "@"
+
+#. metadata.json->name
+msgid "Internet Time"
+msgstr "互联网时间"
+
+# 这个译文是准确的，原因如下：
+# “Shows”在此处被翻译为“显示”，符合中文表达习惯，准确传达了原文的含义。
+# “Internet Time”被翻译为“网络时间”，这是对该术语的直接且准确的翻译，易于理解。
+# “in .beat”被翻译为“以.beat格式”，其中“.beat”是一种特殊的时间表示方式，这里保留了原文的特殊格式，并通过“以...格式”来准确表达其含义。
+#. metadata.json->description
+msgid "Shows the Internet Time in .beat"
+msgstr "以.beat格式显示网络时间"

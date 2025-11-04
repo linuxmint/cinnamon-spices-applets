@@ -1,3 +1,7 @@
+### v3.1.5~20251029
+  * Avoids freeze at startup.
+  * Fixes [#7898](https://github.com/linuxmint/cinnamon-spices-applets/issues/7898)
+
 ### v3.1.4~20251021
   * Avoids random freezes.
   * Fixes [#7898](https://github.com/linuxmint/cinnamon-spices-applets/issues/7898)
