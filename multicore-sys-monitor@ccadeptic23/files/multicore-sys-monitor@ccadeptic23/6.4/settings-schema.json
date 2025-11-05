@@ -7,6 +7,7 @@
       "pageMem",
       "pageNetwork",
       "pageDisk",
+      "pageDiskUsage",
       "pageColors"
     ],
     "pageGeneral": {
@@ -14,7 +15,8 @@
       "title": "General",
       "sections": [
         "sectionGeneralOptions",
-        "sectionGeneralColors"
+        "sectionGeneralColors",
+        "sectionTooltip"
       ]
     },
     "pageCPU": {
@@ -52,6 +54,15 @@
         "sectionDiskDevices"
       ]
     },
+    "pageDiskUsage": {
+      "type": "page",
+      "title": "Disk Usage",
+      "sections": [
+        "sectionDiskUsageOptions",
+        "sectionDiskUsageColors",
+        "sectionDiskUsagePaths"
+      ]
+    },
     "pageColors": {
       "type": "page",
       "title": "Colors",
@@ -63,7 +74,10 @@
       "type": "section",
       "title": "Options",
       "keys": [
+        "removeEnlightenment",
         "labelsOn",
+        "borderOn",
+        "graphSpacing",
         "thickness",
         "useIconSize",
         "refreshRate"
@@ -74,7 +88,15 @@
       "title": "Colors",
       "keys": [
         "labelColor",
+        "borderColor",
         "backgroundColor"
+      ]
+    },
+    "sectionTooltip": {
+      "type": "section",
+      "title": "Tooltip",
+      "keys": [
+        "percentAtEndOfLine"
       ]
     },
     "sectionCPUOptions": {
@@ -130,8 +152,11 @@
       "title": "Colors",
       "keys": [
         "Mem_colorUsedup",
+        "Mem_colorCache",
+        "Mem_colorBuffers",
         "Mem_colorFree",
-        "Mem_colorSwap"
+        "Mem_colorSwap",
+        "Mem_swapWidth"
       ]
     },
     "sectionNetworkOptions": {
@@ -160,7 +185,8 @@
         "labelWarning",
         "Net_getdevlist_btn",
         "Net_devicesList",
-        "Net_cleardevlist_btn"
+        "Net_cleardevlist_btn",
+        "RefreshAll_btn"
       ]
     },
     "sectionDiskOptions": {
@@ -189,7 +215,36 @@
         "labelWarning",
         "Disk_getdevlist_btn",
         "Disk_devicesList",
-        "Disk_cleardevlist_btn"
+        "Disk_cleardevlist_btn",
+        "RefreshAll_btn"
+      ]
+    },
+    "sectionDiskUsageOptions": {
+      "type": "section",
+      "title": "Options",
+      "keys": [
+        "DiskUsage_enabled",
+        "DiskUsage_labelOn",
+        "DiskUsage_squared",
+        "DiskUsage_width",
+        "DiskUsage_mergeAll"
+      ]
+    },
+    "sectionDiskUsageColors": {
+      "type": "section",
+      "title": "Colors",
+      "keys": [
+        "DiskUsage_colorUsed",
+        "DiskUsage_colorFree",
+        "DiskUsage_colorAlert"
+      ]
+    },
+    "sectionDiskUsagePaths": {
+      "type": "section",
+      "title": "Paths",
+      "keys": [
+        "DiskUsage_getpathlist_btn",
+        "DiskUsage_pathList"
       ]
     },
     "sectionColors": {
@@ -236,6 +291,20 @@
     "default": true,
     "description": "Labels"
   },
+  "borderOn": {
+    "type": "switch",
+    "default": false,
+    "description": "Add a border to each graph"
+  },
+  "graphSpacing": {
+    "type": "scale",
+    "default": 1,
+    "description": "Graph spacing",
+    "min": -1,
+    "max": 10,
+    "step": 1,
+    "show-value": true
+  },
   "thickness": {
     "type": "scale",
     "default": 1,
@@ -252,9 +321,9 @@
   },
   "refreshRate": {
     "type": "scale",
-    "default": 1000,
+    "default": 1250,
     "description": "Refresh Rate (ms)",
-    "min": 1000,
+    "min": 500,
     "max": 3000,
     "step": 50,
     "show-value": true
@@ -264,10 +333,27 @@
     "default": "rgba(238, 238, 236, 1)",
     "description": "Label Color"
   },
+  "borderColor": {
+    "type": "colorchooser",
+    "default": "rgba(238, 238, 236, 1)",
+    "description": "Border Color",
+    "dependency": "borderOn"
+  },
   "backgroundColor": {
     "type": "colorchooser",
     "default": "rgba(48, 48, 48, 0.1)",
     "description": "Background Color"
+  },
+  "percentAtEndOfLine": {
+    "type": "switch",
+    "default": false,
+    "description": "Place % at the very end of the line"
+  },
+  "removeEnlightenment": {
+    "type": "button",
+    "dependency": "isHighlighted",
+    "callback": "_removeEnlightenment",
+    "description": "Remove Enlightenment of this applet"
   },
   "CPU_enabled": {
     "type": "switch",
@@ -396,6 +482,16 @@
     "default": "rgba(255, 255, 255, 1)",
     "description": "Usedup"
   },
+  "Mem_colorCache": {
+    "type": "colorchooser",
+    "default": "rgba(148, 114, 219, 1)",
+    "description": "Cache"
+  },
+  "Mem_colorBuffers": {
+    "type": "colorchooser",
+    "default": "rgba(254, 140, 2, 1)",
+    "description": "Buffers"
+  },
   "Mem_colorFree": {
     "type": "colorchooser",
     "default": "rgba(230, 230, 230, 0.1)",
@@ -405,6 +501,17 @@
     "type": "colorchooser",
     "default": "rgba(255, 255, 255, 0.15)",
     "description": "Swap"
+  },
+  "Mem_swapWidth": {
+    "type": "combobox",
+    "default": 100,
+    "description": "Relative width for Swap graph",
+    "options": {
+      "100%": 100,
+      "25%, left side": 25,
+      "None": 0
+    },
+    "tooltip": "100%: The Swap graph is a bar that spans the entire width of the graph, behind the circle.\n10%: The Swap graph is a bar that occupies 10% of the graph width, to the left of the circle.\nNone: No Swap bar."
   },
   "Net_enabled": {
     "type": "switch",
@@ -750,6 +857,105 @@
     "description": "Clear this device list",
     "callback": "on_Disk_cleardevlist_btn_clicked"
   },
+  "DiskUsage_enabled": {
+    "type": "switch",
+    "default": false,
+    "description": "Enable"
+  },
+  "DiskUsage_labelOn": {
+    "type": "switch",
+    "default": true,
+    "description": "Label",
+    "dependency": "labelsOn"
+  },
+  "DiskUsage_squared": {
+    "type": "switch",
+    "default": false,
+    "description": "Square view"
+  },
+  "DiskUsage_width": {
+    "type": "scale",
+    "default": 64,
+    "description": "Width",
+    "min": 16,
+    "max": 320,
+    "step": 16,
+    "show-value": true,
+    "dependency": "!DiskUsage_squared"
+  },
+  "DiskUsage_mergeAll": {
+    "type": "switch",
+    "default": false,
+    "description": "Merge all"
+  },
+  "DiskUsage_chartType": {
+    "type": "combobox",
+    "default": "bar",
+    "description": "Type of chart",
+    "options": {
+      "Bar": "bar",
+      "Pie": "pie"
+    }
+  },
+  "DiskUsage_colorUsed": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 1)",
+    "description": "Usedup"
+  },
+  "DiskUsage_colorFree": {
+    "type": "colorchooser",
+    "default": "rgba(230, 230, 230, 0.1)",
+    "description": "Free"
+  },
+  "DiskUsage_colorAlert": {
+    "type": "colorchooser",
+    "default": "rgba(255, 0, 0, 1)",
+    "description": "Alert"
+  },
+  "DiskUsage_getpathlist_btn": {
+    "type": "button",
+    "description": "Update this path list",
+    "callback": "on_DiskUsage_getpathlist_btn_clicked"
+  },
+  "DiskUsage_pathList": {
+    "type": "list",
+    "default": [
+
+    ],
+    "columns": [
+      {
+        "id": "enabled",
+        "title": "Enabled",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "maxvalue",
+        "title": "Alert when\nvalue (in %)\nreaches",
+        "type": "integer",
+        "default": 80,
+        "min": 0,
+        "max": 100,
+        "align": 0.5
+      },
+      {
+        "id": "name",
+        "title": "Name",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      },
+      {
+        "id": "path",
+        "title": "Path",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      }
+    ],
+    "show-buttons": true
+  },
   "color0": {
     "type": "colorchooser",
     "default": "rgba(0,255,0,0.5)",
@@ -913,5 +1119,14 @@
   "labelWarning": {
     "type": "label",
     "description": "Data marked with ⚠️ must not be changed!"
+  },
+  "RefreshAll_btn": {
+    "type": "button",
+    "description": "Refresh All",
+    "callback": "refreshAll"
+  },
+  "isHighlighted": {
+    "type": "generic",
+    "default": false
   }
 }

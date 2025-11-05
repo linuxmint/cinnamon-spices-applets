@@ -6,7 +6,7 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import type { Config } from "../config";
+import { Services, type Config } from "../config";
 import type { DistanceUnits } from "../config";
 import { Logger } from "../lib/services/logger";
 import { getTimes } from "suncalc";
@@ -24,7 +24,7 @@ export class MetUk extends BaseProvider {
 	//  Properties
 	//--------------------------------------------------------
 	public readonly prettyName = _("Met Office UK");
-	public readonly name = "Met Office UK";
+	public readonly name = Services.MetOfficeUK;
 	public readonly maxForecastSupport = 5;
 	public readonly website = "https://www.metoffice.gov.uk/";
 	public readonly maxHourlyForecastSupport = 36;

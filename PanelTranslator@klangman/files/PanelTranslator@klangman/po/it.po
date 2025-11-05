@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-02 12:30-0500\n"
-"PO-Revision-Date: 2024-06-18 14:49+0200\n"
+"PO-Revision-Date: 2025-08-27 17:46+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:108 applet.js:345 applet.js:347
 msgid "Translator"
@@ -32,7 +32,7 @@ msgstr "Comando \"trans\" richiesto non trovato, installare Translate-Shell"
 
 #. applet.js:288
 msgid "Error, the \"trans\" command returned an exit code of "
-msgstr "Errore, il comando \"trans\" ha restituito un codice di uscita di"
+msgstr "Errore, il comando \"trans\" ha restituito un codice di uscita di "
 
 #. applet.js:368
 msgid "Swap Languages"
@@ -92,7 +92,7 @@ msgstr ""
 
 #. settings-schema.json->general-page->title
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 #. settings-schema.json->hotkey-page->title
 msgid "Hotkeys"
@@ -107,9 +107,8 @@ msgid "Panel Button Actions"
 msgstr "Azioni dei pulsanti del pannello"
 
 #. settings-schema.json->hotkey-settings->title
-#, fuzzy
 msgid "Translation action hotkeys"
-msgstr "Motore di traduzione"
+msgstr "Tasti di scelta rapida per le azioni di traduzione"
 
 #. settings-schema.json->translate-engine->options
 msgid "Apertium"
@@ -170,20 +169,18 @@ msgid "Clipboard"
 msgstr "Clipboard"
 
 #. settings-schema.json->left-auto-paste->description
-#, fuzzy
 msgid "Automatically translate on left click"
-msgstr "Incolla e traduci automaticamente con il clic sinistro"
+msgstr "Traduci automaticamente con il clic sinistro"
 
 #. settings-schema.json->left-auto-paste->tooltip
-#, fuzzy
 msgid ""
 "Automatically translate the selection/clipboard contents when opening the "
 "Panel Translator popup window using a left click on the Panel Translator "
 "button"
 msgstr ""
-"Incolla automaticamente la selezione corrente/il contenuto degli appunti e "
-"traducilo quando si apre la finestra popup facendo clic con il pulsante "
-"sinistro del mouse sul pulsante del pannello del traduttore"
+"Traduce automaticamente il contenuto della selezione/appunti quando si apre "
+"la finestra popup del Panel Translator facendo clic con il tasto sinistro "
+"del mouse sul pulsante Traduttore sul pannello"
 
 #. settings-schema.json->left-auto-play->description
 msgid "Automatically play the translation on left click"

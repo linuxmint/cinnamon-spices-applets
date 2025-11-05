@@ -1,0 +1,122 @@
+# DIRECTORY MENU
+# This file is put in the public domain.
+# torchipeppo, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: directory-menu@torchipeppo 0.9.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-12 01:04+0700\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. popup_menu.py:95
+msgid "Open Folder"
+msgstr "Mở Thư mục"
+
+#. popup_menu.py:100
+msgid "Open in Terminal"
+msgstr "Mở trong Terminal"
+
+#. metadata.json->name
+msgid "Directory Menu"
+msgstr "Menu Thư mục"
+
+#. metadata.json->description
+msgid ""
+"Quickly navigate through directories on your system using a dropdown menu."
+msgstr "Điều hướng nhanh qua các thư mục trên hệ thống bằng menu thả xuống."
+
+#. settings-schema.json->starting-uri->description
+msgid "Base Directory"
+msgstr "Thư mục gốc"
+
+#. settings-schema.json->appearance-section->description
+msgid "Appearance"
+msgstr "Giao diện"
+
+#. settings-schema.json->icon-name->description
+msgid "Icon (hover here for info!)"
+msgstr "Biểu tượng (di chuột để xem thông tin!)"
+
+#. settings-schema.json->icon-name->tooltip
+msgid "Must be an icon name (no path), and should be symbolic."
+msgstr "Phải là tên biểu tượng (không dùng đường dẫn) và nên là biểu tượng ký hiệu."
+
+#. settings-schema.json->tooltip->description
+msgid "Tooltip Text"
+msgstr "Văn bản gợi ý"
+
+#. settings-schema.json->label->description
+msgid "Panel Text"
+msgstr "Văn bản trên Thanh panel"
+
+#. settings-schema.json->visibility-section->description
+msgid "Visibility"
+msgstr "Hiển thị"
+
+#. settings-schema.json->show-header->description
+msgid "Include \"Open Folder\" and \"Open in Terminal\""
+msgstr "Bao gồm \"Mở Thư mục\" và \"Mở trong Terminal\""
+
+#. settings-schema.json->show-hidden->description
+msgid "Include hidden files"
+msgstr "Bao gồm các tập tin ẩn"
+
+#. settings-schema.json->limit-characters->description
+msgid "Limit the Maximum Number of Characters in the Submenus"
+msgstr "Giới hạn số ký tự tối đa trong các menu con"
+
+#. settings-schema.json->character-limit->description
+msgid "Character Limit"
+msgstr "Giới hạn ký tự"
+
+#. settings-schema.json->character-limit->tooltip
+msgid ""
+"(Approximately) Limit the number of characters of each entry.\n"
+"Useful if you think the menu is too wide."
+msgstr "(Xấp xỉ) Giới hạn số ký tự của mỗi mục.\nHữu ích nếu bạn thấy menu quá rộng."
+
+#. settings-schema.json->ordering-section->description
+msgid "Ordering"
+msgstr "Sắp xếp"
+
+#. settings-schema.json->order-by->options
+msgid "Name"
+msgstr "Tên"
+
+#. settings-schema.json->order-by->options
+msgid "Date modified"
+msgstr "Ngày chỉnh sửa"
+
+#. settings-schema.json->order-by->description
+msgid "Order by..."
+msgstr "Sắp xếp theo..."
+
+#. settings-schema.json->favorites-first->description
+msgid "Show favorite items first"
+msgstr "Hiển thị mục yêu thích trước"
+
+#. settings-schema.json->pinned-first->description
+msgid "Show pinned items first"
+msgstr "Hiển thị mục ghim trước"
+
+#. settings-schema.json->keybindings-section->description
+msgid "Keybindings"
+msgstr "Phím tắt"
+
+#. settings-schema.json->show-menu->description
+msgid "Show menu"
+msgstr "Hiển thị menu"
+
+#. settings-schema.json->show-menu->tooltip
+msgid "Set keybinding(s) to show the menu."
+msgstr "Thiết lập phím tắt để hiển thị menu."

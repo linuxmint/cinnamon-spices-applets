@@ -1,3 +1,16 @@
+### v5.5.2~20251101
+  * Increase stability.
+
+### v5.5.1~20250925
+  * Updated README.
+  * Minor changes in menu about new commits.
+
+### v5.5.0~20250925
+  * Also reports new commits.
+
+### v5.4.0~20250829
+  * Alerts also on issues related to spices.
+
 ### v5.3.3~20250701
   * Improves updates.
 

@@ -106,6 +106,10 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.gamma_red = this.maximum_gamma;
         this.gamma_green = this.maximum_gamma;
         this.gamma_blue = this.maximum_gamma;
+        this.target_brightness = this.maximum_brightness;
+        this.target_gamma_red = this.maximum_gamma;
+        this.target_gamma_green = this.maximum_gamma;
+        this.target_gamma_blue = this.maximum_gamma;
         this.save_every = this.default_save_every;
         this.update_scroll = true;
         this.scroll_step = 5;
@@ -338,6 +342,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ["disable_nightmode", this._run_apply_values_running],
                         //~ ["numberOfMonitors", null],
                         ["apply_asynchronously", null],
+                        ["smooth_duration", null],
                         ["apply_startup", null],
                         ["apply_every", null],
                         ["apply_changing_monitors", null],
@@ -557,6 +562,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
 
     // Override
     on_applet_clicked(event) {
+        this.menu_sliders._init_items_presets();
         this.menu_sliders.toggle();
     }
 
@@ -744,17 +750,44 @@ class BrightnessAndGamma extends Applet.IconApplet {
         for (let preset of this.preset_list) {
             if (preset.show) {
                 let menuItem = this.menu_item_presets.menu.addAction(preset["name"], () => {
-                    this.brightness = Math.max(preset["brightness"], this.minimum_brightness);
-                    this.gamma_red = Math.max(preset["gamma_red"], this.minimum_gamma);
-                    this.gamma_green = Math.max(preset["gamma_green"], this.minimum_gamma);
-                    this.gamma_blue = Math.max(preset["gamma_blue"], this.minimum_gamma);
-                    this.menu_sliders.update_items_brightness();
-                    this.menu_sliders.update_items_gamma_red();
-                    this.menu_sliders.update_items_gamma_green();
-                    this.menu_sliders.update_items_gamma_blue();
-                    this.update_xrandr();
-                    this.update_tooltip();
-                    this._init_menu_item_presets();
+                    this.target_brightness = Math.max(preset["brightness"], this.minimum_brightness);
+                    this.target_gamma_red = Math.max(preset["gamma_red"], this.minimum_gamma);
+                    this.target_gamma_green = Math.max(preset["gamma_green"], this.minimum_gamma);
+                    this.target_gamma_blue = Math.max(preset["gamma_blue"], this.minimum_gamma);
+                    let _interval = setInterval( () => {
+                        if (this.target_brightness === this.brightness &&
+                            this.target_gamma_red ===  this.gamma_red &&
+                            this.target_gamma_green === this.gamma_green &&
+                            this.target_gamma_blue === this.gamma_blue
+                        ) {
+                            clearInterval(_interval);
+                        }
+
+                        this.brightness += Math.sign(this.target_brightness - this.brightness);
+                        this.gamma_red += Math.sign(this.target_gamma_red - this.gamma_red);
+                        this.gamma_green += Math.sign(this.target_gamma_green - this.gamma_green);
+                        this.gamma_blue += Math.sign(this.target_gamma_blue - this.gamma_blue);
+
+                        //~ this.menu_sliders.update_items_brightness();
+                        //~ this.menu_sliders.update_items_gamma_red();
+                        //~ this.menu_sliders.update_items_gamma_green();
+                        //~ this.menu_sliders.update_items_gamma_blue();
+                        //~ this.update_xrandr();
+                        //~ this.update_tooltip();
+                        //~ this._init_menu_item_presets();
+                        this._needed_updates();
+                        if (menuItem) {
+                            if (this.brightness == preset["brightness"] &&
+                                this.gamma_red == preset["gamma_red"] &&
+                                this.gamma_green == preset["gamma_green"] &&
+                                this.gamma_blue == preset["gamma_blue"]) {
+                                    menuItem.setOrnament(PopupMenu.OrnamentType.DOT, true);
+                            } else {
+                                    menuItem.setOrnament(PopupMenu.OrnamentType.DOT, false);
+                            }
+                        }
+                    }, this.smooth_duration);
+
                 });
                 if (this.brightness == preset["brightness"] &&
                     this.gamma_red == preset["gamma_red"] &&
@@ -766,6 +799,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                 }
             }
         }
+
         this._applet_context_menu.addMenuItem(this.menu_item_presets, this.menu_item_presets_position);
     }
 
@@ -929,6 +963,16 @@ class BrightnessAndGamma extends Applet.IconApplet {
         tips.push(" ".repeat(MAX_TR_LENGTH - TR_SUNRISE.length) + str_sunrise);
         let str_sunset = _("Sunset") + " " + this.frac_to_h_m(this.sunset);
         tips.push(" ".repeat(MAX_TR_LENGTH - TR_SUNSET.length) + str_sunset);
+        for (let preset of this.preset_list) {
+            if (this.brightness == preset["brightness"] &&
+                this.gamma_red == preset["gamma_red"] &&
+                this.gamma_green == preset["gamma_green"] &&
+                this.gamma_blue == preset["gamma_blue"]
+            ) {
+                tips.unshift("—".repeat(MAX_TR_LENGTH + 6));
+                tips.unshift(preset["name"]);
+            }
+        }
         this.set_applet_tooltip(tips.join("\n"), true);
     }
 
@@ -1155,11 +1199,27 @@ class BrightnessAndGamma extends Applet.IconApplet {
     _use_first_sunrise_preset() {
         for (let preset of this.preset_list) {
             if (preset.show && preset.start_at_sunrise) {
-                this.brightness = preset.brightness;
-                this.gamma_blue = preset.gamma_blue;
-                this.gamma_green = preset.gamma_green;
-                this.gamma_red = preset.gamma_red;
-                this._needed_updates();
+                this.target_brightness = preset.brightness;
+                this.target_gamma_blue = preset.gamma_blue;
+                this.target_gamma_green = preset.gamma_green;
+                this.target_gamma_red = preset.gamma_red;
+
+                let _interval = setInterval( () => {
+                    if (this.target_brightness === this.brightness &&
+                        this.target_gamma_red ===  this.gamma_red &&
+                        this.target_gamma_green === this.gamma_green &&
+                        this.target_gamma_blue === this.gamma_blue
+                    ) {
+                        clearInterval(_interval);
+                    }
+
+                    this.brightness += Math.sign(this.target_brightness - this.brightness);
+                    this.gamma_red += Math.sign(this.target_gamma_red - this.gamma_red);
+                    this.gamma_green += Math.sign(this.target_gamma_green - this.gamma_green);
+                    this.gamma_blue += Math.sign(this.target_gamma_blue - this.gamma_blue);
+
+                    this._needed_updates();
+                }, this.smooth_duration);
                 break;
             }
         }
@@ -1168,11 +1228,27 @@ class BrightnessAndGamma extends Applet.IconApplet {
     _use_first_sunset_preset() {
         for (let preset of this.preset_list) {
             if (preset.show && preset.start_at_sunset) {
-                this.brightness = preset.brightness;
-                this.gamma_blue = preset.gamma_blue;
-                this.gamma_green = preset.gamma_green;
-                this.gamma_red = preset.gamma_red;
-                this._needed_updates();
+                this.target_brightness = preset.brightness;
+                this.target_gamma_blue = preset.gamma_blue;
+                this.target_gamma_green = preset.gamma_green;
+                this.target_gamma_red = preset.gamma_red;
+
+                let _interval = setInterval( () => {
+                    if (this.target_brightness === this.brightness &&
+                        this.target_gamma_red ===  this.gamma_red &&
+                        this.target_gamma_green === this.gamma_green &&
+                        this.target_gamma_blue === this.gamma_blue
+                    ) {
+                        clearInterval(_interval);
+                    }
+
+                    this.brightness += Math.sign(this.target_brightness - this.brightness);
+                    this.gamma_red += Math.sign(this.target_gamma_red - this.gamma_red);
+                    this.gamma_green += Math.sign(this.target_gamma_green - this.gamma_green);
+                    this.gamma_blue += Math.sign(this.target_gamma_blue - this.gamma_blue);
+
+                    this._needed_updates();
+                }, this.smooth_duration);
                 break;
             }
         }

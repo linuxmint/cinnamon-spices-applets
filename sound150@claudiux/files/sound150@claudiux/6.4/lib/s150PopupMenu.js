@@ -50,11 +50,13 @@ const COVERBOX_LAYOUT_MANAGER = new Clutter.BinLayout({
 
 // playerctld:
 function run_playerctld() {
-    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
+    //~ Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
+    Util.spawnCommandLine("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
 }
 
 function kill_playerctld() {
-    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
+    //~ Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
+    Util.spawnCommandLine("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
 }
 
 
@@ -244,7 +246,7 @@ class Player extends PopupMenu.PopupMenuSection {
         // Cover art
         this.cover = new St.Icon({
             icon_name: "media-optical",
-            icon_size: Math.trunc(300 * global.ui_scale),
+            icon_size: Math.trunc(300 * this._applet.real_ui_scale),
             //icon_type: St.IconType.FULLCOLOR
             icon_type: St.IconType.SYMBOLIC
         });
@@ -277,6 +279,7 @@ class Player extends PopupMenu.PopupMenuSection {
         this.trackInfo = new St.BoxLayout({
             style_class: "sound-player-overlay",
             //~ style: "min-height: 6em;", // replaces "height: auto;" REMOVED: DEPRECATED!
+            style: "height: 6em;",
             important: true,
             vertical: true
         });
@@ -644,7 +647,8 @@ class Player extends PopupMenu.PopupMenuSection {
 
         if (old_title != this._title) {
             del_song_arts();
-            Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            //~ Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
         }
 
         this.titleLabel.set_text(this._title);
@@ -658,7 +662,8 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._trackCoverFile = artUrl;
                     change = true;
                 }
-                Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+                //~ Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+                Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
             }
         } else if (metadata["xesam:url"]) {
             if (this._oldTitle != this._title) {
@@ -692,7 +697,8 @@ class Player extends PopupMenu.PopupMenuSection {
                 });
             }
         } else {
-            Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            //~ Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
             if (this._trackCoverFile != false) {
                 this._trackCoverFile = false;
                 change = true;
@@ -819,7 +825,7 @@ class Player extends PopupMenu.PopupMenuSection {
                 style_class: "sound-player-generic-coverart",
                 important: true,
                 icon_name: "media-optical",
-                icon_size: Math.trunc(300 * global.ui_scale),
+                icon_size: Math.trunc(300 * this._applet.real_ui_scale),
                 //icon_type: St.IconType.FULLCOLOR
                 icon_type: St.IconType.SYMBOLIC
             });
@@ -829,14 +835,16 @@ class Player extends PopupMenu.PopupMenuSection {
             let dir = Gio.file_new_for_path(ALBUMART_PICS_DIR);
             let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
             if ((dir_children.next_file(null)) == null) { // dir does not contain any file.
-                Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
+                //~ Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
+                Util.spawnCommandLine("cp -a %s %s/R3SongArt%s".format(
                     cover_path,
                     ALBUMART_PICS_DIR,
                     randomIntegerInInterval(0, superRND).toString()
                 ));
             } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
-                Util.spawnCommandLineAsync("rm -f %s/R3SongArt* ; sleep 1 ; cp -a %s %s/R3SongArt%s".format(
-                    ALBUMART_PICS_DIR,
+                del_song_arts();
+                //~ Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
+                Util.spawnCommandLine("cp -a %s %s/R3SongArt%s".format(
                     cover_path,
                     ALBUMART_PICS_DIR,
                     randomIntegerInInterval(0, superRND).toString()
@@ -849,8 +857,8 @@ class Player extends PopupMenu.PopupMenuSection {
             this._applet.setAppletIcon(this._applet.player, cover_path); // Added
             this._cover_load_handle = St.TextureCache.get_default().load_image_from_file_async(
                 cover_path,
-                Math.trunc(300 * global.ui_scale),
-                Math.trunc(300 * global.ui_scale),
+                Math.trunc(300 * this._applet.real_ui_scale),
+                Math.trunc(300 * this._applet.real_ui_scale),
                 (cache, handle, actor) => {
                     this._on_cover_loaded(cache, handle, actor)
                 }
@@ -862,8 +870,8 @@ class Player extends PopupMenu.PopupMenuSection {
             try {
                 let pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
                     this._cover_path,
-                    Math.trunc(300 * global.ui_scale),
-                    Math.trunc(300 * global.ui_scale)
+                    Math.trunc(300 * this._applet.real_ui_scale),
+                    Math.trunc(300 * this._applet.real_ui_scale)
                 );
                 if (pixbuf) {
                     let image = new Clutter.Image();
@@ -879,7 +887,7 @@ class Player extends PopupMenu.PopupMenuSection {
                 if (this._applet.keepAlbumAspectRatio) {
                     //TODO: Replace Texture by Image.
                     this.cover = new Clutter.Texture({
-                        width: Math.trunc(300 * global.ui_scale),
+                        width: Math.trunc(300 * this._applet.real_ui_scale),
                         keep_aspect_ratio: true,
                         //filter_quality: 2,
                         filter_quality: Clutter.Texture.QUALITY_HIGH,
@@ -888,8 +896,8 @@ class Player extends PopupMenu.PopupMenuSection {
                 } else {
                     //TODO: Replace Texture by Image.
                     this.cover = new Clutter.Texture({
-                        width: Math.trunc(300 * global.ui_scale),
-                        height: Math.trunc(300 * global.ui_scale),
+                        width: Math.trunc(300 * this._applet.real_ui_scale),
+                        height: Math.trunc(300 * this._applet.real_ui_scale),
                         keep_aspect_ratio: false,
                         filter_quality: Clutter.Texture.QUALITY_HIGH,
                         filename: cover_path
@@ -908,29 +916,58 @@ class Player extends PopupMenu.PopupMenuSection {
         }
 
         try {
-            if (this.coverBox && this.cover)
-                this.coverBox.remove_actor(this.cover);
+            if (this.coverBox != null && this.cover != null) {
+                let coverBoxChildren = this.coverBox.get_children();
+                if (coverBoxChildren.length > 0 && coverBoxChildren.indexOf(this.cover) > -1)
+                    this.coverBox.remove_child(this.cover);
+            }
         } catch (e) {}
 
         // Make sure any oddly-shaped album art doesn't affect the height of the applet popup
         // (and move the player controls as a result).
         //~ log("actor size (wxh): "+actor.width+"x"+actor.height);
         //~ actor.set_margin_bottom(Math.max(0, Math.trunc(300 * global.ui_scale - actor.height)));
-        let mb = (this._applet.viewFullAlbumArt) ? 100 : 50;
+        let mb = 55;
+        if (this._applet.viewFullAlbumArt) {
+            switch (this._applet.real_ui_scale) {
+                case 0.75:
+                    mb = 100;
+                    break;
+                case 1.0:
+                    mb = 110;
+                    break;
+                case 1.25:
+                    mb = 140;
+                    break;
+                case 1.5:
+                    mb = 165;
+                    break;
+                case 1.75:
+                    mb = 195;
+                    break;
+                default:
+                    mb = 220;
+            }
+        }
+        //~ let mb = (this._applet.viewFullAlbumArt) ? 110 : 55;
+        //~ mb = Math.round(mb * this._applet.real_ui_scale);
         actor.set_margin_bottom(mb);
 
-        actor.set_margin_left(Math.max(0, Math.trunc(300 * global.ui_scale - actor.width)));
-        //~ actor.set_margin_left(""+Math.max(0, Math.trunc(300 * global.ui_scale - actor.width))+"px");
+        actor.set_margin_left(Math.max(0, Math.round(300 * this._applet.real_ui_scale - actor.width)));
 
         this.cover = actor;
-        if (this.coverBox)
-            this.coverBox.add_actor(this.cover);
-        //~ this.coverBox.set_reactive = true;
-        //~ this.coverBox.connect("button-press-event", (event) => Util.spawnCommandLineAsync("xdg-open "+this._cover_path));
 
         try {
-            if (this.coverBox && this.cover)
-                this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);
+            if (this.coverBox) {
+                if (this.cover && !this._applet.dontShowAnyImageInMenu) {
+                    this.coverBox.add_actor(this.cover);
+                    //~ this.coverBox.set_reactive = true;
+                    //~ this.coverBox.connect("button-press-event", (event) => Util.spawnCommandLineAsync("xdg-open "+this._cover_path));
+                    this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);
+                } else {
+                    this.coverBox.set_child_below_sibling(this.trackInfo, null);
+                }
+            }
         } catch (e) {}
 
         this._applet.setAppletTextIcon(this, this._cover_path);
@@ -997,7 +1034,8 @@ class Seeker extends Slider.Slider {
 
 
         this.posLabel = new St.Label({
-            text: " 00:00 "
+            text: " 00:00 ",
+            style: "font-family: 'Digital Numbers',monospace; "
         });
         this.posLabel.x_align = St.Align.START;
         //~ logDebug("this.posLabel: "+this.posLabel);
@@ -1005,7 +1043,8 @@ class Seeker extends Slider.Slider {
         //~ this.posLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
         //~ this.posLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
         this.durLabel = new St.Label({
-            text: " 00:00 "
+            text: " 00:00 ",
+            style: "font-family: 'Digital Numbers',monospace; "
         });
         this.durLabel.x_align = St.Align.END;
         //~ logDebug("this.durLabel: "+this.durLabel);
@@ -1044,9 +1083,9 @@ class Seeker extends Slider.Slider {
 
         this.actor.connect("leave-event", (event) => {
             let id = setTimeout(() => {
+                clearTimeout(id);
                 if (this.tooltip)
                     this.tooltip.hide();
-                clearTimeout(id);
             }, 100);
         });
 
@@ -1090,9 +1129,9 @@ class Seeker extends Slider.Slider {
             this.tooltip.show();
         }
         let id = setTimeout(() => {
+            clearTimeout(id);
             if (this.tooltip)
                 this.tooltip.hide();
-            clearTimeout(id);
         }, this.seekerTooltipDelay);
     }
 
@@ -1437,4 +1476,11 @@ class MediaPlayerLauncher extends PopupMenu.PopupBaseMenuItem {
         let _time = event.time;
         this._app.activate_full(-1, _time);
     }
+}
+
+module.exports = {
+    StreamMenuSection,
+    Player,
+    MediaPlayerLauncher,
+    Seeker
 }

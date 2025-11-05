@@ -32,3 +32,7 @@ const stringFromUTF8Array = function(data) {
 
   return str;
 }
+
+module.exports = {
+  to_string
+}

@@ -1,0 +1,415 @@
+# Direct
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Direct@claudiux\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"PO-Revision-Date: 2025-10-23 12:52+0200\n"
+"Last-Translator: claudiux\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:38 applet.js:495
+msgid "SYSTEM"
+msgstr "SYSTÈME"
+
+#. applet.js:38 applet.js:530
+msgid "FAVORITES"
+msgstr "FAVORIS"
+
+#. applet.js:38 applet.js:554
+msgid "RECENT DOCUMENTS"
+msgstr "DOCUMENTS RÉCENTS"
+
+#. applet.js:160
+msgid "(Right click to open folder)"
+msgstr "(Clic droit pour ouvrir son dossier)"
+
+#. metadata.json->name
+#. applet.js:263
+msgid "Direct"
+msgstr "Direct"
+
+#. applet.js:471
+msgid "Search Home Folder"
+msgstr "Rechercher dans mon dossier personnel"
+
+#. applet.js:504
+msgid "Search File System"
+msgstr "Rechercher dans le système de fichiers"
+
+#. applet.js:568
+msgid "Clear"
+msgstr "Effacer"
+
+#. applet.js:575
+msgid "Recent"
+msgstr "Récents"
+
+#. applet.js:623
+msgid "Computer"
+msgstr "Ordinateur"
+
+#. applet.js:629
+msgid "File System"
+msgstr "Système de fichiers"
+
+#. applet.js:646
+msgid "Network"
+msgstr "Réseau"
+
+#. applet.js:868
+msgid "Trash"
+msgstr "Corbeille"
+
+#. search.py:43
+msgid "Open..."
+msgstr "Ouvrir..."
+
+#. search.py:48
+msgid "Open Containing Folder..."
+msgstr "Ouvrir le dossier contenant..."
+
+#. search.py:85
+msgid "Search"
+msgstr "Rechercher"
+
+#. search.py:106
+msgid "Start in"
+msgstr "À partir de"
+
+#. search.py:107
+msgid "Select a folder"
+msgstr "Choisir un dossier"
+
+#. search.py:113
+msgid "Follow symlinks"
+msgstr "Suivre les liens symboliques"
+
+#. search.py:117
+msgid "Search hidden"
+msgstr "Rechercher également les fichiers cachés"
+
+#. search.py:121
+msgid "Use regular expressions"
+msgstr "Utiliser des expressions régulières"
+
+#. search.py:125
+msgid "Stop"
+msgstr "Arrêter"
+
+#. search.py:140
+msgid "File"
+msgstr "Fichier"
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. search.py:156
+msgid "Path"
+msgstr "Chemin"
+
+#. search.py:184
+msgid "Searching..."
+msgstr "Recherche en cours..."
+
+#. search.py:198 search.py:199
+msgid "Search Stopped"
+msgstr "Recherche interrompue"
+
+#. search.py:215
+msgid "Searching: "
+msgstr "Recherche : "
+
+#. search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Erreur : permissions insuffisantes pour lire le dossier "
+
+#. search.py:252
+msgid "Search Completed"
+msgstr "Recherche terminée"
+
+#. search.py:259
+msgid "Skipping"
+msgstr "Ignoré"
+
+#. search.py:259
+msgid " - directory already searched"
+msgstr " - dossier déjà parcouru"
+
+#. metadata.json->description
+msgid ""
+"Provides direct and easy access to your Directories, Favorites, Recent "
+"documents and System locations"
+msgstr ""
+"Permet d'accéder directement et facilement à vos répertoires, favoris, "
+"documents récents et emplacements système"
+
+#. metadata.json->comments
+msgid ""
+"The Direct@claudiux applet is a fork from the placesCenter@scollins applet, "
+"with improvements."
+msgstr ""
+"L'applet Direct@claudiux est une dérivation de l'applet "
+"placesCenter@scollins, avec des améliorations et des ajouts."
+
+#. settings-schema.json->generalPage->title
+msgid "General"
+msgstr "Général"
+
+#. settings-schema.json->userPage->title
+msgid "User"
+msgstr "Utilisateur"
+
+#. settings-schema.json->systemPage->title
+msgid "System"
+msgstr "Système"
+
+#. settings-schema.json->favoritesPage->title
+msgid "Favorites"
+msgstr "Favoris"
+
+#. settings-schema.json->recentPage->title
+#. settings-schema.json->recentSection->title
+msgid "Recent documents"
+msgstr "Documents récents"
+
+#. settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr "Paramètres du tableau de bord"
+
+#. settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr "Paramètres du menu"
+
+#. settings-schema.json->userSection->title
+msgid "User section"
+msgstr "Section Utilisateur"
+
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+msgid "Custom places"
+msgstr "Emplacements personnels"
+
+#. settings-schema.json->systemSection->title
+msgid "System section"
+msgstr "Section Système"
+
+#. settings-schema.json->favoritesSection->title
+msgid "Favorite documents"
+msgstr "Documents Favoris"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Icône sur le tableau de bord"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr ""
+"Accepte le nom d'une icône ou le chemin complet vers celle-ci (l'icône peut "
+"être symbolique)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Texte sur le tableau de bord"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr "Raccourci-clavier pour afficher le menu"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Taille des icônes dans le menu"
+
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr "Déplacer ces sections pour réorganiser le menu :"
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Name"
+msgstr "Nom"
+
+#. settings-schema.json->displayOrder->description
+msgid "Display order in the menu"
+msgstr "Ordre d'affichage dans le menu"
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr "Appliquer"
+
+#. settings-schema.json->noIconOnPanel->description
+msgid "No icon on panel"
+msgstr "Pas d'icône sur le panneau"
+
+#. settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "Ouvrir d'un clic central (clic molette)"
+
+#. settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "Laisser vide pour l'ignorer"
+
+#. settings-schema.json->dontDisplayTooltip->description
+msgid "Do not display the tooltip"
+msgstr "Ne pas afficher d'infobulle"
+
+#. settings-schema.json->showUserSection->description
+msgid "Show User section"
+msgstr "Afficher la Section Utilisateur"
+
+#. settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "Montrer le Bureau"
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
+msgstr "URI"
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr "Nom de l'icône"
+
+#. settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "Montrer la Corbeille"
+
+#. settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "Jamais"
+
+#. settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "Toujours"
+
+#. settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "Quand elle n'est pas vide"
+
+#. settings-schema.json->showSystemSection->description
+msgid "Show System section"
+msgstr "Afficher la Section Système"
+
+#. settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "Montrer l'Ordinateur"
+
+#. settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "Montrer le Système de fichiers"
+
+#. settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "Montrer les Disques"
+
+#. settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr "Montrer seulement les disques montés"
+
+#. settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "Montrer le Réseau"
+
+#. settings-schema.json->showFavorites->description
+msgid "Show favorite documents"
+msgstr "Afficher les Documents Favoris"
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr "Date d'ajout"
+
+#. settings-schema.json->favoriteSortingMethod->description
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr "Méthode de tri"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr "30"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->favoriteSizeLimit->options
+msgid "All Favorite Documents"
+msgstr "Tous les documents favoris"
+
+#. settings-schema.json->favoriteSizeLimit->description
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Nombre de documents à afficher"
+
+#. settings-schema.json->favoriteShowUri->description
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr "Afficher le chemin complet dans les infobulles"
+
+#. settings-schema.json->favoriteIconIsStar->description
+msgid "Replace icons with stars"
+msgstr "Remplacer les icônes par des étoiles"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Afficher les Documents Récents"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr "Date d'accès"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr "Date de modification"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "All Recent Documents"
+msgstr "Tous les documents récents"
+
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr "Confidentialité"
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
+msgstr "Navigateur d'icônes"

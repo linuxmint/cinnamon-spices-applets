@@ -20,7 +20,8 @@
         "sectionStationsList",
         "sectionStationsMove",
         "sectionStationsSaveRestore",
-        "sectionStationsUpdate"
+        "sectionStationsUpdate",
+        "sectionBlacklist"
       ]
     },
     "pageImport": {
@@ -72,7 +73,8 @@
       "sections": [
         "sectionRecordingRecordings",
         "sectionRecordingLimits",
-        "sectionRecordingIcon"
+        "sectionRecordingIcon",
+        "sectionRecordingCache"
       ]
     },
     "pageYT": {
@@ -149,6 +151,13 @@
         "scale-update"
       ]
     },
+    "sectionBlacklist": {
+      "type": "section",
+      "title": "Unwanted (blacklist)",
+      "keys": [
+        "blacklist"
+      ]
+    },
     "sectionImportRadiopp": {
       "type": "section",
       "dependency": "radiopp-is-here",
@@ -181,6 +190,7 @@
         "import-list-play-button",
         "import-list-button",
         "import-remove-from-list-button",
+        "import-blacklist-button",
         "import-select-all",
         "import-unselect-all"
       ]
@@ -374,10 +384,8 @@
       "title": "Cache",
       "keys": [
         "cache-no-cache",
-        "cache-mins",
+        "cache-minutes",
         "cache-on-disk",
-        "cache-dir",
-        "cache-dir-open",
         "cache-stream-size"
       ]
     },
@@ -624,7 +632,8 @@
     "description": "Category to which to move the selected stations:",
     "default": "",
     "options": {
-      "(Undefined)": ""
+      "(Undefined)": "",
+      "(Blacklist)": "R30BLACKLIST"
     }
   },
   "button-moving": {
@@ -684,6 +693,19 @@
     "default": 0,
     "description": "%",
     "dependency": "show-scale-update"
+  },
+  "blacklist": {
+    "type": "list",
+    "columns": [
+      {
+        "id": "url",
+        "title": "Blacklisted URL",
+        "type": "string",
+        "expand-width": true,
+        "default": ""
+      }
+    ],
+    "default": []
   },
   "show-scale-update": {
     "type": "generic",
@@ -782,6 +804,11 @@
     "type": "button",
     "description": "Remove selected items from this list",
     "callback": "on_button_import_remove_clicked"
+  },
+  "import-blacklist-button": {
+    "type": "button",
+    "description": "Blacklist selected items from this list",
+    "callback": "on_button_import_blacklist_clicked"
   },
   "import-select-all": {
     "type": "button",
@@ -1217,7 +1244,7 @@
     "description": "No cache",
     "tooltip": "Checking this option limits memory usage, but no longer allows the user to rewind the cache (using the sound150@claudiux applet)."
   },
-  "cache-mins": {
+  "cache-minutes": {
     "type": "scale",
     "default": 0.0,
     "dependency": "!cache-no-cache",
@@ -1233,25 +1260,12 @@
     "default": false,
     "description": "Cache on disk\n(Write packet data to a temporary file, instead of keeping them in memory.)"
   },
-  "cache-dir": {
-    "type": "filechooser",
-    "select-dir": true,
-    "dependency": "cache-on-disk",
-    "default": "file:///tmp",
-    "description": "Directory used for data caching\n(Use with caution on SSD disks. Prefer a directory stored in RAM, with sufficient free space.)"
-  },
-  "cache-dir-open": {
-    "type": "button",
-    "dependency": "cache-on-disk",
-    "description": "Open cache directory",
-    "callback": "_on_open_cache_dir"
-  },
   "cache-stream-size": {
     "type": "combobox",
     "default": "10MiB",
     "dependency": "!cache-no-cache",
     "description": "Stream cache size",
-    "tooltip": "The amount of stream cache. Default: 1 MiB.\nBeware, setting this to a large value can reduce performance.",
+    "tooltip": "The amount of stream cache. Default: 10 MiB.\nBeware, setting this to a large value can reduce performance.",
     "options": {
       "No limit": "0",
       "64 KiB": "64KiB",
@@ -1264,7 +1278,11 @@
       "4 MiB": "4MiB",
       "5 MiB": "5MiB",
       "10 MiB": "10MiB",
-      "20 MiB": "20MiB"
+      "20 MiB": "20MiB",
+      "30 MiB": "30MiB",
+      "40 MiB": "40MiB",
+      "50 MiB": "50MiB",
+      "100 MiB": "100MiB"
     }
   },
   "recording-path": {
@@ -1938,12 +1956,6 @@
     "type": "generic",
     "default": ""
   },
-  "storedRadios": {
-    "type": "generic",
-    "default": [
-
-    ]
-  },
   "recentRadios": {
     "type": "generic",
     "default": [
@@ -2222,6 +2234,10 @@
     "default": false
   },
   "radiopp-is-here": {
+    "type": "generic",
+    "default": false
+  },
+  "restart-after-reloading": {
     "type": "generic",
     "default": false
   }

@@ -1,3 +1,41 @@
+### v3.9.0~20251102
+  * Improves stability.
+
+### v3.8.4~20251031
+  * Avoids paint() errors.
+
+### v3.8.3~20251023
+  * Fixes error opening menu.
+  * Fixes [#7907](https://github.com/linuxmint/cinnamon-spices-applets/issues/7907).
+
+### v3.8.2~20251022
+  * Improves file monitoring.
+
+### v3.8.1~20251019
+  * Improves stability.
+
+### v3.8.0~20251011
+  * Management of cache from the Recordings tab of this applet settings.
+
+### v3.7.3~20250922
+  * Minor bugfix.
+
+### v3.7.2~20250920
+  * Monitors certain files only when necessary, to avoid errors.
+  * Updates the server list.
+
+### v3.7.1~20250915
+  * Menu bugfix.
+
+### v3.7.0~20250910
+  * Added Blacklist management.
+
+### v3.6.2~20250908
+  * Better memory management.
+
+### v3.6.1~20250820
+  * Restarts listening to the current station when the applet is restarted (except when it is Cinnamon that is reloaded).
+
 ### v3.6.0~20250808
   * Improved speed.
   * Code cleanup.

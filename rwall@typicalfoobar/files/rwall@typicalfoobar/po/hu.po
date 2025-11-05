@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-28 19:32+0800\n"
-"PO-Revision-Date: 2021-04-03 10:40+0200\n"
+"PO-Revision-Date: 2025-08-07 19:29+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: applet.js:89
 msgid "Use Cron"
@@ -35,7 +35,7 @@ msgid ""
 "Version: 1.0.1"
 msgstr ""
 "Véletlenszerű háttérkép váltó\n"
-"Verzió. 1.0.1"
+"Verzió: 1.0.1"
 
 #. rwall@typicalfoobar->metadata.json->name
 msgid "rwall"
@@ -69,13 +69,11 @@ msgstr ""
 #. rwall@typicalfoobar->settings-schema.json->cron-frequency-
 #. string->description
 msgid "Change Frequency (cron syntax):"
-msgstr "Frekvencia módosítása (cron szintaxis):"
+msgstr "Időzítés módosítása (cron szintaxis):"
 
 #. rwall@typicalfoobar->settings-schema.json->update-cron-button->description
 msgid "Update Cron (click here if you modified the Change Frequency)"
-msgstr ""
-"Cron frissítése (kattintson ide, ha változtatott a Frekvencia "
-"módosításán)"
+msgstr "Cron frissítése (kattintson ide, ha változtatott az időzítésen)"
 
 #. rwall@typicalfoobar->settings-schema.json->update-cron-button->tooltip
 msgid "Update the cron job with these settings"

@@ -221,6 +221,9 @@ class SensorsApplet extends Applet.Applet {
     this.dependencies = new Dependencies();
     //this.depCount = 0;
 
+    spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh 1 &");
+    //~ spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh 1 all &");
+
     // Applet tooltip:
     this.set_applet_tooltip(_('Sensors Monitor'));
     if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
@@ -244,6 +247,9 @@ class SensorsApplet extends Applet.Applet {
     // get settings defined in settings-schema.json:
     this.get_user_settings();
     this._variables();
+
+    // Run DisksDaemon:
+    this._on_temp_disks_modified();
 
     // Applet default UI:
     this.set_default_UI();
@@ -328,7 +334,7 @@ class SensorsApplet extends Applet.Applet {
     this.s.bind("always_show_unit_in_line", "always_show_unit_in_line", () => { this.updateUI() });
     this.s.bind("temp_sensors", "temp_sensors");
     this.s.bind("numberOfTempSensors", "numberOfTempSensors");
-    this.s.bind("temp_disks", "temp_disks");
+    this.s.bind("temp_disks", "temp_disks", this._on_temp_disks_modified.bind(this));
     this.s.bind("journalize_temp", "journalize_temp");
 
     // Fan tab
@@ -417,20 +423,51 @@ class SensorsApplet extends Applet.Applet {
     this.set_default_UI();
   }
 
+  _on_temp_disks_modified() {
+    const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
+    const SENSORS_DISKSWITNESS=`${SENSORS_DIR}/DisksWitness`;
+    var checkDisks = false;
+    let disks = this.s.getValue('temp_disks');
+    if (!disks) return;
+
+    var disksToCheck = [];
+    for (let disk of disks) {
+      if (disk["show_in_panel"] === true || disk["show_in_tooltip"] === true) {
+        checkDisks = true;
+        disksToCheck.push(disk["disk"])
+      }
+    }
+    if (checkDisks) {
+      spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " " + disksToCheck.join(",") + " &");
+    } else {
+      let diskwitness = Gio.file_new_for_path(SENSORS_DISKSWITNESS);
+      if (diskwitness.query_exists(null))
+        diskwitness.delete(null);
+      diskwitness = null;
+    }
+    checkDisks = null;
+  }
+
   is_disktemp_user_readable() {
     var ret = false;
-    const sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
+    var sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
+    if (GLib.find_program_in_path("/usr/bin/dnf") || GLib.find_program_in_path("/usr/bin/pacman")) {
+      // Distro is Fedora or Arch based.
+      sudoers_smartctl_path = "/etc/sudoersSensors.d/smartctl";
+    }
     const sudoers_smartctl_file = Gio.file_new_for_path(sudoers_smartctl_path);
     if (sudoers_smartctl_file.query_exists(null)) {
-    try {
+      try {
         let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
-        if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL:"))
+        if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL:")) {
           ret = true;
+        }
+        GLib.free(contents);
       } catch (e) {
-      ret = false
+        ret = false
+      }
     }
-    }
-    log("is_disktemp_user_readable: "+ret);
+    //~ log("is_disktemp_user_readable: "+ret);
     return ret
   }
 
@@ -539,6 +576,7 @@ class SensorsApplet extends Applet.Applet {
     var _known_keys = [];
 
     for (let k of this.sensors_list[type].get_value()) {
+      //~ let _sensor = k["sensor"].trim();
       let _sensor = k["sensor"];
 
       _known_keys.push(_sensor);
@@ -546,7 +584,8 @@ class SensorsApplet extends Applet.Applet {
       if (k["shown_name"].length > 0) {
         //if (this.custom_names[_sensor]) log("custom_names: \"" + this.custom_names[_sensor] + "\"", true);
 
-        if (this.custom_names[_sensor] && (_sensor.toString() === k["shown_name"].toString())) {
+        //~ if (this.custom_names[_sensor] && (_sensor.toString() === k["shown_name"].toString())) {
+        if (this.custom_names[_sensor] && (_sensor === k["shown_name"])) {
           delete this.custom_names[_sensor];
           k["shown_name"] = ""
         } else {
@@ -564,7 +603,9 @@ class SensorsApplet extends Applet.Applet {
     this.number_of_sensors[type].set_value(_sensors.length);
 
     for (let sensor of _sensors) {
-      name = sensor.toString().trim();
+      //~ name = sensor.toString().trim();
+      //~ name = sensor.trim();
+      name = sensor;
       toPush = {};
       index = _known_keys.indexOf(name);
       if (type === "temps") this.minimumIntegerDigitsTemp = 2;
@@ -603,10 +644,8 @@ class SensorsApplet extends Applet.Applet {
         this.sensors_list[type].set_value(ret);
         this.updateUI();
       }
-      //unref(ret);
       ret = null;
       _known_keys = null;
-      //unref(toPush);
       toPush = null;
       name = null;
       modified = null;
@@ -619,6 +658,51 @@ class SensorsApplet extends Applet.Applet {
   }
 
   read_disk_temps() {
+    if (!this.show_temp || this.temp_disks.length === 0) return;
+    const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
+    const _disks_temp_file_path = `${SENSORS_DIR}/disks.txt`;
+    const _disks_temp_file = Gio.file_new_for_path(_disks_temp_file_path);
+    var lines = [];
+    var temps = {};
+    if (_disks_temp_file.query_exists(null)) {
+      let [success, contents] = GLib.file_get_contents(_disks_temp_file_path);
+      if (success) {
+        if (typeof contents === "object")
+          lines = to_string(contents).split("\n");
+        else
+          lines = (""+contents).split("\n");
+
+        for (let line of lines) {
+          if (line.length === 0) continue;
+          let [name, temp] = line.trim().split(" ");
+          if (name.length > 0)
+            temps[name] = 1.0 * parseInt(temp);
+        }
+      }
+
+      for (let disk of this.temp_disks) {
+        if (!disk["show_in_tooltip"] && !disk["show_in_panel"]) continue;
+
+        let _disk_name = disk["disk"].trim();
+        var _temp = temps[_disk_name];
+        if (!isNaN(_temp)) {
+          if (disk["user_formula"] && disk["user_formula"].length > 0) {
+            let _user_formula = disk["user_formula"].replace(/\$/g, _temp);
+            _temp = 1.0 * eval(_user_formula)
+          }
+        }
+        if (typeof _temp === "number") {
+          disk["value"] = _temp;
+          this._temp[_disk_name] = _temp;
+        }
+      }
+      GLib.free(contents);
+    } else {
+      this.read_disk_temps_slow();
+    }
+  }
+
+  read_disk_temps_slow() {
     if (this.show_temp && this.temp_disks.length > 0) {
       for (let disk of this.temp_disks) {
         if (!disk["show_in_tooltip"] && !disk["show_in_panel"]) continue;
@@ -660,7 +744,8 @@ class SensorsApplet extends Applet.Applet {
     var temp_disks = this.temp_disks;
     let subProcess = spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
       if (exitCode === 0) {
-        let out = stdout.trim();
+        //~ let out = stdout.trim();
+        let out = stdout;
         let disks = out.split(" ");
         for (let d of disks) {
           var found = false;
@@ -715,7 +800,8 @@ class SensorsApplet extends Applet.Applet {
         for (let t of this.temp_sensors) {
           if (this.data["temps"][t["sensor"]] !== undefined) {
             if (t["show_in_tooltip"]) {
-              if (t["shown_name"] && t["sensor"].toString() === t["shown_name"].toString()) {
+              //~ if (t["shown_name"] && t["sensor"].toString() === t["shown_name"].toString()) {
+              if (t["shown_name"] && t["sensor"] === t["shown_name"]) {
                 if (this.custom_names[t["sensor"]]) delete this.custom_names[t["sensor"]];
                 t["shown_name"] = ""
               }
@@ -745,7 +831,8 @@ class SensorsApplet extends Applet.Applet {
 
       if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks.length > 0) {
         for (let disk of this.temp_disks) {
-          let _disk_name = disk["disk"].trim();
+          //~ let _disk_name = disk["disk"].trim();
+          let _disk_name = disk["disk"];
           if (disk["show_in_tooltip"]) {
             if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
             let _temp;
@@ -822,7 +909,7 @@ class SensorsApplet extends Applet.Applet {
           }
         }
       }
-      if (_tooltip !== "") {
+      if (_tooltip.length > 0) {
         _tooltip = C_FAN + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
@@ -867,7 +954,7 @@ class SensorsApplet extends Applet.Applet {
           }
         }
       }
-      if (_tooltip !== "") {
+      if (_tooltip.length > 0) {
         _tooltip = C_VOLT + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
@@ -900,7 +987,7 @@ class SensorsApplet extends Applet.Applet {
           }
         }
       }
-      if (_tooltip !== "") {
+      if (_tooltip.length > 0) {
         _tooltip = C_INTRU + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
@@ -915,7 +1002,7 @@ class SensorsApplet extends Applet.Applet {
     if (this._applet_tooltip.set_markup === undefined)
       this.set_applet_tooltip(_tooltip);
     else
-      this._applet_tooltip.set_markup(_tooltip);
+      this.set_applet_tooltip(_tooltip, true);
 
     _tooltip = null;
     _tooltips = null
@@ -958,35 +1045,35 @@ class SensorsApplet extends Applet.Applet {
     this.data = this.reaper.get_sensors_data();
 
     // Customs:
-    if (this.custom_sensors.length !== 0) {
-      for (let cs of this.custom_sensors) {
-        let cs_sensor = "CUSTOM: "+cs.shown_name;
-        switch (cs.sensor_type) {
-          case "temperature":
-            if (!this.data["temps"][cs_sensor]) continue;
-            let dict = {};
-            dict["sensor"] = cs_sensor;
-            dict["shown_name"] = cs.shown_name;
-            dict["show_in_panel"] = cs.show_in_panel;
-            dict["show_in_tooltip"] = cs.show_in_tooltip;
-            dict["high_by_user"] = cs.high_by_user;
-            dict["crit_by_user"] = cs.crit_by_user;
-            dict["user_formula"] = cs.user_formula;
-            dict["input"] = this.data["temps"][cs_sensor]["input"];
-            this.temp_sensors[cs_sensor] = dict;
-            break;
-          case "fan":
+    //~ if (this.custom_sensors.length !== 0) {
+      //~ for (let cs of this.custom_sensors) {
+        //~ let cs_sensor = "CUSTOM: "+cs.shown_name;
+        //~ switch (cs.sensor_type) {
+          //~ case "temperature":
+            //~ if (!this.data["temps"][cs_sensor]) continue;
+            //~ let dict = {};
+            //~ dict["sensor"] = cs_sensor;
+            //~ dict["shown_name"] = cs.shown_name;
+            //~ dict["show_in_panel"] = cs.show_in_panel;
+            //~ dict["show_in_tooltip"] = cs.show_in_tooltip;
+            //~ dict["high_by_user"] = cs.high_by_user;
+            //~ dict["crit_by_user"] = cs.crit_by_user;
+            //~ dict["user_formula"] = cs.user_formula;
+            //~ dict["input"] = this.data["temps"][cs_sensor]["input"];
+            //~ this.temp_sensors[cs_sensor] = dict;
+            //~ break;
+          //~ case "fan":
 
-            break;
-          case "voltage":
+            //~ break;
+          //~ case "voltage":
 
-            break;
-          case "intrusion":
+            //~ break;
+          //~ case "intrusion":
 
-            break;
-        }
-      }
-    }
+            //~ break;
+        //~ }
+      //~ }
+    //~ }
 
     // Temperatures:
     var nbr_already_shown = 0;
@@ -1039,7 +1126,8 @@ class SensorsApplet extends Applet.Applet {
     }
     if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks && !this.nothingToShow(this.temp_disks)) {
       for (let disk of this.temp_disks) {
-        let _disk_name = disk["disk"].trim();
+        //~ let _disk_name = disk["disk"].trim();
+        let _disk_name = disk["disk"];
         if (disk["show_in_panel"] && _disk_name.length > 0) {
           if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
           if (disk["value"]) this._temp[_disk_name] = disk["value"];
@@ -1215,22 +1303,26 @@ class SensorsApplet extends Applet.Applet {
     } else {
       _appletLabel = this.label_parts.join(sep);
       if (!this.keep_size) {
-        while (_appletLabel.includes("  ")) {
-          _appletLabel = _appletLabel.replace(/  /g, " ");
-        }
+        //~ while (_appletLabel.includes("  ")) {
+          //~ _appletLabel = _appletLabel.replace(/  /g, " ");
+        _appletLabel = _appletLabel.replace(/\ +/g, " ");
+        //~ }
       }
 
-      while (_appletLabel.includes("\n\n")) {
-        _appletLabel = _appletLabel.replace(/\n\n/g, "\n");
-      }
+      //~ while (_appletLabel.includes("\n\n")) {
+        //~ _appletLabel = _appletLabel.replace(/\n\n/g, "\n");
+      _appletLabel = _appletLabel.replace(/\n+/g, "\n");
+      //~ }
       var sep_twice = "" + this.separator.trim() + " " + this.separator.trim();
       if (sep_twice.length > 1) {
+        //~ _appletLabel = _appletLabel.replace(/${sep_twice}/g, this.separator.trim());
         while (_appletLabel.indexOf(sep_twice) > -1) {
           _appletLabel = _appletLabel.replace(sep_twice, this.separator.trim());
         }
       }
       sep_twice = "" + this.separator + this.separator;
       if (sep_twice.length > 1) {
+        //~ _appletLabel = _appletLabel.replace(/${sep_twice}/g, this.separator);
         while (_appletLabel.includes(sep_twice)) {
           _appletLabel = _appletLabel.replace(sep_twice, this.separator);
         }
@@ -1572,6 +1664,8 @@ class SensorsApplet extends Applet.Applet {
         this.loopId = null;
     }
     this.detect_markup();
+    spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval + " &");
+    this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
     this.isLooping = true;
     this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
   }
@@ -1615,6 +1709,19 @@ class SensorsApplet extends Applet.Applet {
   }
 
   on_applet_removed_from_panel() {
+    //~ const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
+    const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
+    const SENSORS_WITNESS=`${SENSORS_DIR}/witness`;
+    const SENSORS_DISKSWITNESS=`${SENSORS_DIR}/DisksWitness`;
+    let witness = Gio.file_new_for_path(SENSORS_WITNESS);
+    if (witness.query_exists(null))
+      witness.delete(null);
+    witness = null;
+    let diskwitness = Gio.file_new_for_path(SENSORS_DISKSWITNESS);
+    if (diskwitness.query_exists(null))
+      diskwitness.delete(null);
+    diskwitness = null;
+
     this.on_applet_reloaded();
     remove_all_sources();
   }
@@ -1624,6 +1731,8 @@ class SensorsApplet extends Applet.Applet {
     this.checkDepInterval = null;
     if (this.dependencies.areDepMet()) {
       // All dependencies are installed. Now, run the loop!:
+      spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
+      this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
       this.isLooping = true;
       this.reap_sensors();
     } else {

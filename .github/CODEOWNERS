@@ -12,6 +12,7 @@ Cinnamenu@json/**                                  @fredcw
 CustomApplicationsMenu@LLOBERA/**                  @Nicolas01
 CustomPlaces@Nicolas01/**                          @Nicolas01
 Exit@claudiux/**                                   @claudiux
+Gears@claudiux/**                                  @claudiux
 IntelTurboBoost@wsmenezes/**                       @wsmenezes
 InternetTimeApplet@stefan/**                       @stefan12O
 Mint-Unsplash-Background@omidmaldar/**             @omidmaldar
@@ -45,7 +46,7 @@ bible@nodeengineer.com/**                          @nodeengineer
 bing-wallpaper@starcross.dev/**                    @Starcross
 bluetooth-battery@zamszowy/**                      @zamszowy
 bose@tuuxx/**                                      @tuuxx
-brightness-and-gamma-applet@cardsurf/**            @cardsurf
+brightness-and-gamma-applet@cardsurf/**            @claudiux
 bumblebee@pdcurtis/**                              @pdcurtis
 c-eyes@anaximeno/**                                @anaximeno
 calc-js@ptandler/**                                @ptandler
@@ -76,6 +77,7 @@ directory-menu@torchipeppo/**                      @torchipeppo
 disk-read-and-write-speed@cardsurf/**              @cardsurf
 download-and-upload-speed@cardsurf/**              @cardsurf
 duolingo-helper@nodeengineer.com/**                @nodeengineer
+envycontrol@zamszowy/**                            @zamszowy
 expressvpn@Hukuta/**                               @Hukuta
 feeds@jonbrettdev.wordpress.com/**                 @jake1164
 fish@kriegcc/**                                    @kriegcc
@@ -103,6 +105,7 @@ mediacontrols@rbfraphael/**                        @rbfraphael
 mem-monitor-text@datanom.net/**                    @icarter09
 mic-level@zamszowy/**                              @zamszowy
 moonphase@techi-freki/**                           @Techi-Freki
+mouse-keys-shortcut@GabrielCamara3526/**           @GabrielCamara3526
 multicore-sys-monitor@ccadeptic23/**               @claudiux
 mybookmarks@markbokil.com/**                       @Centurix
 mylauncher@markbokil.com/**                        @Centurix
@@ -127,6 +130,7 @@ pomodoro@gregfreeman.org/**                        @gfreeau
 power-profiles@rcalixte/**                         @rcalixte
 printers@linux-man/**                              @linux-man
 profile-switcher@pixunil/**                        @pixunil
+proxy-mode@yrtimid/**                              @yrtimiD
 ptt@thbemme/**                                     @thbemme
 qredshift@quintao/**                               @raphaelquintao
 rancher@centurix/**                                @centurix
@@ -173,6 +177,7 @@ trilium-api@beatlink/**                            @BeatLink
 turn-off-monitor@zablotski/**                      @zablotski
 tzclock@lhriley/**                                 @lhriley
 uiscaler@joka42/**                                 @joka42
+updates-notifier@zamszowy/**                       @zamszowy
 vboxlauncher@mockturtl/**                          @mockturtl
 vnstat@linuxmint.com/**                            @pdcurtis
 vpnLookOut@claudiux/**                             @claudiux

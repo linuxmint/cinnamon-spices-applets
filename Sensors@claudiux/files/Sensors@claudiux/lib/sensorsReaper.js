@@ -161,18 +161,29 @@ class SensorsReaper {
     this.hide_zero_fan = hide_zero_fan;
     this.hide_zero_voltage = hide_zero_voltage;
     //if (this.in_fahrenheit)
-      //command += "f"; // The -f option of sensors is full of bugs !!!
-    if (this.sensors_command != undefined) {
-      let subProcess = Util.spawnCommandLineAsyncIO(this.sensors_command, (stdout, stderr, exitCode) => {
-        if (exitCode === 0) {
-          if (this.sensors_is_json_compatible)
-            this._sensors_reaped(stdout);
-          else
-            this._sensors_reaped(convert_to_json(stdout));
-        }
-        //Util.unref(subProcess);
-        subProcess.send_signal(9);
-      });
+      //command += " -f"; // The -f option of sensors is full of bugs !!!
+
+    const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
+    const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
+    const SENSORS_DATA=`${SENSORS_DIR}/sensors.txt`;
+    if (GLib.file_test(SENSORS_DATA, GLib.FileTest.EXISTS)) {
+      let [success, contents] = GLib.file_get_contents(SENSORS_DATA);
+      if (success) {
+        this._sensors_reaped(to_string(contents));
+      }
+      GLib.free(contents);
+    } else {
+        if (this.sensors_command != undefined) {
+        let subProcess = Util.spawnCommandLineAsyncIO(this.sensors_command, (stdout, stderr, exitCode) => {
+          if (exitCode === 0) {
+            if (this.sensors_is_json_compatible)
+              this._sensors_reaped(stdout);
+            else
+              this._sensors_reaped(convert_to_json(stdout));
+          }
+          subProcess.send_signal(9);
+        });
+      }
     }
 
   }
@@ -301,7 +312,7 @@ class SensorsReaper {
           subfeature_name = subfeat.substring(subfeature.indexOf("_")+1);
 
           if (subfeat.startsWith("fan")) {
-            if  (type_of_feature === "" &&
+            if  (type_of_feature.length === 0 &&
                 (!this.hide_zero_fan ||
                   (subfeat.endsWith("input") && this.raw_data[chip][feature][subfeat] >= 0)
                 )
@@ -309,7 +320,7 @@ class SensorsReaper {
               type_of_feature = "fans";
             }
           } else if (subfeat.startsWith("temp")) {
-            if  (type_of_feature === "" &&
+            if  (type_of_feature.length === 0 &&
                 (!this.hide_zero_temp ||
                   (subfeat.endsWith("input") && this.raw_data[chip][feature][subfeat] > 0)
                 )
@@ -317,11 +328,11 @@ class SensorsReaper {
               type_of_feature = "temps";
             }
           } else if (subfeat.startsWith("intrusion")) {
-            if  (type_of_feature === "") {
+            if  (type_of_feature.length === 0) {
               type_of_feature = "intrusions";
             }
           } else if (subfeat.startsWith("in")) {
-            if  (type_of_feature === "" &&
+            if  (type_of_feature.length === 0 &&
                 (!this.hide_zero_voltage ||
                   (subfeat.endsWith("input") && this.raw_data[chip][feature][subfeat] > 0)
                 )
@@ -329,7 +340,7 @@ class SensorsReaper {
               type_of_feature = "voltages";
             }
           } else if (subfeat.startsWith("curr")) {
-            if  (type_of_feature === "" &&
+            if  (type_of_feature.length === 0 &&
                 (!this.hide_zero_voltage ||
                   (subfeat.endsWith("input") && this.raw_data[chip][feature][subfeat] > 0)
                 )
@@ -344,10 +355,9 @@ class SensorsReaper {
             feature_dico[subfeature_name] = this.raw_data[chip][feature][subfeat];
         }
 
-        //Util.unref(subfeatures);
         subfeatures = null;
 
-        if (type_of_feature !== "") {
+        if (type_of_feature.length > 0) {
           LOCAL_DATA[type_of_feature][complete_name + ": " + feature] = feature_dico;
           type_of_feature = null;
           feature_dico = null;
@@ -361,7 +371,6 @@ class SensorsReaper {
     //~ log("LOCAL_DATA[temps]: " + JSON.stringify(LOCAL_DATA["temps"], null, "\t"), true);
     this.data = LOCAL_DATA;
     //~ LOCAL_DATA = null;
-    //Util.unref(chips);
     chips = null;
     adapter = null;
     this.isRunning = false;
@@ -406,12 +415,13 @@ function convert_to_json(raw) {
   var feature = "";
   //~ var subfeature_numbers = {};
   for (let line of lines) {
-    if (line.trim() == "") {
+    if (line.trim().length === 0) {
       new_chip = true;
       continue;
     }
     if (new_chip) {
-      chip = line.trim();
+      //~ chip = line.trim();
+      chip = line;
       ret[chip] = {};
       new_chip = false;
       continue;
@@ -421,14 +431,8 @@ function convert_to_json(raw) {
       continue;
     }
     if (line.startsWith("  ")) {
-      let [subfeature, value] = line.trim().split(": ");
-      //~ let sf_keys = Object.keys(subfeature_numbers);
-      //~ if (sf_keys.indexOf(subfeature) > -1) {
-        //~ subfeature_numbers[subfeature] = subfeature_numbers[subfeature] + 1;
-        //~ subfeature = subfeature + " - " + subfeature_numbers[subfeature];
-      //~ } else {
-        //~ subfeature_numbers[subfeature] = 0
-      //~ }
+      //~ let [subfeature, value] = line.trim().split(": ");
+      let [subfeature, value] = line.split(": ");
       ret[chip][feature][subfeature] = (value*1000/1000).toFixed(3);
       continue;
     }

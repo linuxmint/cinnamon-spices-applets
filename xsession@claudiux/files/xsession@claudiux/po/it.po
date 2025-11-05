@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-17 13:58+0200\n"
-"PO-Revision-Date: 2025-01-03 15:35+0100\n"
+"POT-Creation-Date: 2025-10-03 18:30+0200\n"
+"PO-Revision-Date: 2025-08-27 19:26+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -45,87 +45,90 @@ msgstr "Estensioni"
 
 #. applet.js:112
 msgid "RELOAD ALL"
-msgstr ""
+msgstr "RICARICA TUTTO"
 
-#. applet.js:241
+#. applet.js:248
 msgid "Middle-click: \n"
 msgstr "Clic-centrale: \n"
 
-#. applet.js:241 applet.js:317
+#. applet.js:248 applet.js:327
 msgid "Show .xsession-errors"
 msgstr "Mostra .xsession-errors"
 
-#. applet.js:242
-#, fuzzy
+#. applet.js:249
 msgid "Ctrl + Middle-click: \n"
-msgstr "Clic-centrale: \n"
+msgstr "Ctrl + Clic-centrale: \n"
 
-#. applet.js:242 applet.js:331
+#. applet.js:249 applet.js:341
 msgid "Show latest messages"
-msgstr ""
+msgstr "Mostra ultimi messaggi"
 
-#. applet.js:295 applet.js:537
+#. applet.js:311 applet.js:553
 #, javascript-format
 msgid "%s latest messages"
-msgstr ""
+msgstr "%s ultimi messaggi"
 
-#. applet.js:295 applet.js:537
+#. applet.js:311 applet.js:553
 msgid "min: 10. max: 250."
-msgstr ""
+msgstr "min: 10. max: 250."
 
-#. applet.js:348
+#. applet.js:358
 msgid "Restart Cinnamon"
 msgstr "Riavvia Cinnamon"
 
-#. applet.js:364
+#. applet.js:376
+msgid "Repeat last action"
+msgstr ""
+
+#. applet.js:380
 msgid "--- Reload Spices ---"
 msgstr "--- Ricarica Spice ---"
 
-#. applet.js:370
+#. applet.js:386
 msgid "Reload Applet:"
 msgstr "Ricarica Applet:"
 
-#. applet.js:397
+#. applet.js:413
 msgid "Reload Desklet:"
 msgstr "Ricarica Desklet:"
 
-#. applet.js:424
+#. applet.js:440
 msgid "Reload Extension:"
 msgstr "Ricarica Estensione:"
 
-#. applet.js:450
+#. applet.js:466
 msgid "Reload Current Theme"
-msgstr ""
+msgstr "Ricarica Tema Corrente"
 
-#. applet.js:464
+#. applet.js:480
 msgid "--- Settings for ---"
 msgstr "--- Impostazioni di ---"
 
-#. applet.js:470
+#. applet.js:486
 msgid "Applet:"
 msgstr "Applet:"
 
-#. applet.js:479
+#. applet.js:495
 msgid "Desklet:"
 msgstr "Desklet:"
 
-#. applet.js:488
+#. applet.js:504
 msgid "Extension:"
 msgstr "Estensione:"
 
-#. applet.js:497
+#. applet.js:513
 msgid "--- View Code ---"
 msgstr "--- Mostra Codice ---"
 
-#. applet.js:503
+#. applet.js:519
 msgid "View Applet Code for:"
 msgstr "Mostra Codice Applet di:"
 
-#. applet.js:512
+#. applet.js:528
 msgid "View Desklet Code for:"
 msgstr "Mostra Codice Desklet di:"
 
-#. applet.js:521
+#. applet.js:537
 msgid "View Extension Code for:"
 msgstr "Mostra Codice Estensione di:"
 
@@ -145,68 +148,70 @@ msgstr ""
 
 #. settings-schema.json->section1->description
 msgid "Icon size"
-msgstr ""
+msgstr "Dimensione icona"
 
 #. settings-schema.json->icon_size->description
 msgid "Size (in pixels) of menu icons"
-msgstr ""
+msgstr "Dimensioni (in pixel) delle icone del menù"
 
 #. settings-schema.json->icon_size->options
 msgid "16"
-msgstr ""
+msgstr "16"
 
 #. settings-schema.json->icon_size->options
 msgid "22"
-msgstr ""
+msgstr "22"
 
 #. settings-schema.json->icon_size->options
 msgid "24"
-msgstr ""
+msgstr "24"
 
 #. settings-schema.json->icon_size->options
 msgid "32"
-msgstr ""
+msgstr "32"
 
 #. settings-schema.json->icon_size->options
 msgid "48"
-msgstr ""
+msgstr "48"
 
 #. settings-schema.json->icon_size->options
 msgid "64"
-msgstr ""
+msgstr "64"
 
 #. settings-schema.json->icon_size->options
 msgid "96"
-msgstr ""
+msgstr "96"
 
 #. settings-schema.json->icon_size->options
 msgid "128"
-msgstr ""
+msgstr "128"
 
 #. settings-schema.json->section2->description
 msgid "RELOAD ALL option"
-msgstr ""
+msgstr "Opzione RICARICA TUTTO"
 
 #. settings-schema.json->show_reload_all->description
 msgid "Show the RELOAD ALL option in submenus"
-msgstr ""
+msgstr "Mostra l'opzione RICARICA TUTTO nei sottomenù"
 
 #. settings-schema.json->show_reload_all->tooltip
 msgid "Caution! Reloading all spices of a given type may lead to errors."
 msgstr ""
+"Attenzione! Ricaricare tutte le Spice di un determinato tipo può causare "
+"errori."
 
 #. settings-schema.json->section3->description
 msgid "Latest messages"
-msgstr ""
+msgstr "Ultimi messaggi"
 
 #. settings-schema.json->number_latest->description
 msgid "Number of latest messages to show"
-msgstr ""
+msgstr "Numero di messaggi più recenti da mostrare"
 
 #. settings-schema.json->number_latest->tooltip
 msgid "(Including empty lines.)"
-msgstr ""
+msgstr "(Incluse le righe vuote.)"
 
 #. scripts/watch-xse-latest.sh:10 scripts/watch-xse.sh:8
 msgid "-d"
-msgstr ""
+msgstr "-d"

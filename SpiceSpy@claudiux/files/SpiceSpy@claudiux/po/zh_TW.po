@@ -1,0 +1,241 @@
+# SPICESPY
+# This file is put in the public domain.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SpiceSpy@claudiux 5.3.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-25 23:34+0200\n"
+"PO-Revision-Date: 2025-08-31 23:32+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:201
+msgid "score"
+msgstr "評分"
+
+#. applet.js:213
+msgid "comments"
+msgstr "留言"
+
+#. applet.js:225
+msgid "recent issues"
+msgstr "最近議題"
+
+#. applet.js:237
+msgid "translations"
+msgstr "翻譯"
+
+#. applet.js:312
+msgid "Reload icons"
+msgstr "重新載入圖示"
+
+#. applet.js:318
+msgid "Visit website"
+msgstr "造訪網站"
+
+#. applet.js:826
+msgid "Spices"
+msgstr "Spices"
+
+#. applet.js:915
+msgid "Mark all as read"
+msgstr "全部標記為已讀"
+
+#. applet.js:926
+msgid "Refresh"
+msgstr "重新整理"
+
+#. applet.js:938
+msgid "Refreshing in progress"
+msgstr "正在重新整理"
+
+#. applet.js:949
+msgid "Configure..."
+msgstr "設定..."
+
+#. metadata.json->name
+msgid "SpiceSpy"
+msgstr "SpiceSpy"
+
+#. metadata.json->description
+msgid ""
+"Notifies you when there's a change to your favorite Spices on the website."
+msgstr "當您最愛的 Spices 在網站上有異動時通知您。"
+
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr "一般"
+
+#. settings-schema.json->pageOptions->title
+#. settings-schema.json->section1->title
+msgid "Options"
+msgstr "選項"
+
+#. settings-schema.json->section2->title
+msgid "List of authors of the Spices you are interested in"
+msgstr "感興趣的 Spices 作者清單"
+
+#. settings-schema.json->section3->title
+msgid "List of specific Spices you are interested in"
+msgstr "感興趣的特定 Spices 清單"
+
+#. settings-schema.json->update-interval-hours->description
+msgid "Update interval"
+msgstr "更新間隔"
+
+#. settings-schema.json->update-interval-hours->units
+msgid "hours"
+msgstr "小時"
+
+#. settings-schema.json->standard-opacity->description
+msgid "Opacity in absence of change"
+msgstr "無變動時的不透明度"
+
+#. settings-schema.json->color-on-change->description
+msgid "Color on change"
+msgstr "有變動時的顏色"
+
+#. settings-schema.json->show-icon-in-menu->description
+msgid "Show each Spice icon in the menu"
+msgstr "在選單中顯示每個 Spice 的圖示"
+
+#. settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "圖示大小"
+
+#. settings-schema.json->icon-size->options
+msgid "16"
+msgstr "16"
+
+#. settings-schema.json->icon-size->options
+msgid "22"
+msgstr "22"
+
+#. settings-schema.json->icon-size->options
+msgid "24"
+msgstr "24"
+
+#. settings-schema.json->icon-size->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->icon-size->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->icon-size->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->icon-size->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->icon-size->options
+msgid "128"
+msgstr "128"
+
+#. settings-schema.json->show-translations->description
+msgid "Show number of translations in the menu"
+msgstr "在選單中顯示翻譯數量"
+
+#. settings-schema.json->show-commits->description
+#, fuzzy
+msgid "Show available updates in the menu"
+msgstr "在選單中顯示議題數量"
+
+#. settings-schema.json->show-issues->description
+msgid "Show number of issues in the menu"
+msgstr "在選單中顯示議題數量"
+
+#. settings-schema.json->sort-by->description
+msgid "Sort by"
+msgstr "排序依據"
+
+#. settings-schema.json->sort-by->options
+msgid "Translated name"
+msgstr "已翻譯名稱"
+
+#. settings-schema.json->sort-by->options
+msgid "Original name"
+msgstr "原始名稱"
+
+#. settings-schema.json->sort-by->options
+#. settings-schema.json->uuid-list->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. settings-schema.json->sort-by->options
+msgid "Score (bottom-up)"
+msgstr "評分（由低到高）"
+
+#. settings-schema.json->sort-by->options
+msgid "Score (top-down)"
+msgstr "評分（由高到低）"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of comments (bottom-up)"
+msgstr "留言數（由少到多）"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of comments (top-down)"
+msgstr "留言數（由多到少）"
+
+#. settings-schema.json->show-uuid->description
+msgid "Show UUID instead of name"
+msgstr "顯示 UUID 而非名稱"
+
+#. settings-schema.json->translate-name->description
+msgid "Show translated name if available"
+msgstr "若有翻譯則顯示翻譯後的名稱"
+
+#. settings-schema.json->display-on-panel->description
+msgid "If there is nothing new"
+msgstr "若無新內容"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Show icon and label"
+msgstr "顯示圖示與標籤"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Show icon only"
+msgstr "僅顯示圖示"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Do not show anything"
+msgstr "不顯示任何內容"
+
+#. settings-schema.json->useful-only->description
+msgid "Show only non-zero values in panel"
+msgstr "僅在面板上顯示非零值"
+
+#. settings-schema.json->author-list->columns->title
+msgid "GitHub user name"
+msgstr "GitHub 使用者名稱"
+
+#. settings-schema.json->button-my-spices->description
+msgid "Add all the Spices I use"
+msgstr "加入目前使用的所有 Spices"
+
+#. settings-schema.json->label-reload->description
+msgid ""
+"There's no need to include Spices maintained by members of the Authors list "
+"in the UUID list.\n"
+"Once your lists are correct, you can reload this applet to speed up the "
+"process.\n"
+"Just don't do it too often."
+msgstr ""
+"無須將「作者清單」成員維護的 Spices 納入 UUID 清單。\n"
+"清單無誤後，請重新載入這個小程式，可加快處理流程。\n"
+"但請不要太頻繁地操作。"
+
+#. settings-schema.json->button-reload->description
+msgid "Reload this applet"
+msgstr "重新載入這個小程式"

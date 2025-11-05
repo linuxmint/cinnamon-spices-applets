@@ -52,6 +52,15 @@ IconLabel.prototype = {
         this.actor.add(this.label);
     },
 
+    set_icon_visible: function (visible) {
+        if (visible) {
+            this.icon.show();
+        }
+        else {
+            this.icon.hide();
+        }
+    },
+
     set_gicon: function(file_icon) {
         this.icon.set_gicon(file_icon);
     },
@@ -150,6 +159,11 @@ GuiSpeed.prototype = {
         this.actor.add(this.iconlabel_received.actor);
     },
 
+    set_icons_visible: function (visible) {
+        this.iconlabel_received.set_icon_visible(visible);
+        this.iconlabel_sent.set_icon_visible(visible);
+    },
+
     set_reveived_icon: function(icon_path) {
         this._set_icon(this.iconlabel_received, icon_path);
     },
@@ -183,12 +197,18 @@ GuiSpeed.prototype = {
     },
 
     set_text_style: function(css_style) {
-        css_style = this.add_font_size(css_style);
-        for(let iconlabel of [this.iconlabel_received, this.iconlabel_sent]){
-            iconlabel.set_label_style(css_style);
-        }
+        this.set_received_text_style(css_style);
+        this.set_sent_text_style(css_style);
 
-        this._resize_gui_elements_to_match_text(css_style);
+        this._resize_gui_elements_to_match_text(this.add_font_size(css_style));
+    },
+
+    set_received_text_style: function(css_style) {
+        this.iconlabel_received.set_label_style(this.add_font_size(css_style));
+    },
+
+    set_sent_text_style: function(css_style) {
+        this.iconlabel_sent.set_label_style(this.add_font_size(css_style));
     },
 
     add_font_size: function(css_style) {

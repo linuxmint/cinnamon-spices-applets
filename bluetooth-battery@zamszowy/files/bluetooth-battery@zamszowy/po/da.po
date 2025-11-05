@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# BLUETOOTH BATTERY
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# zamszowy, 2022
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-08 00:30+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-29 21:28+0200\n"
 "PO-Revision-Date: 2023-12-28 10:36+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -18,9 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:77
+#. applet.js:84
 msgid "Show devices battery levels"
 msgstr "Vis enheders batteriniveau"
+
+#. settings-schema.json->notification-warn-demo->description
+#. settings-schema.json->notification-crit-demo->description
+#. applet.js:161 applet.js:166
+msgid "Test notification"
+msgstr "Test underretning"
+
+#. applet.js:161 applet.js:166 applet.js:257 applet.js:267
+msgid "Battery dropped below %d%"
+msgstr ""
 
 #. metadata.json->name
 msgid "Bluetooth battery"
@@ -60,8 +71,8 @@ msgid ""
 "device.\n"
 "Comment starts with '#'"
 msgstr ""
-"Deaktivér overvågning af udvalgte enheder. Du kan bruge enhedens model "
-"eller serienummer.\n"
+"Deaktivér overvågning af udvalgte enheder. Du kan bruge enhedens model eller "
+"serienummer.\n"
 "Kommentar starter med “#”"
 
 #. settings-schema.json->section4->title
@@ -116,6 +127,22 @@ msgstr "Ikon"
 msgid "Text"
 msgstr "Tekst"
 
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr ""
+
 #. settings-schema.json->blacklist->tooltip
 msgid "tooltip"
 msgstr "Værktøjstip"
@@ -150,11 +177,6 @@ msgstr "Aktivér underretning om lavt batteriniveau"
 #. settings-schema.json->notification-crit-level->description
 msgid "Notify when battery below [%]"
 msgstr "Underret, når batteriet er under [%]"
-
-#. settings-schema.json->notification-warn-demo->description
-#. settings-schema.json->notification-crit-demo->description
-msgid "Test notification"
-msgstr "Test underretning"
 
 #. settings-schema.json->notification-crit-enable->description
 msgid "Enable notification for battery critical level"

@@ -53,7 +53,9 @@
                 "preset_label",
                 "preset_list",
                 "preset_sunrise_sunset_button",
-                "preset_reload"
+                "preset_reload",
+                "smooth_duration-label",
+                "smooth_duration"
             ]
         }
     },
@@ -84,6 +86,19 @@
         "default" : true,
         "description": "Apply asynchronously",
         "tooltip": "Apply values in a background process"
+    },
+    "smooth_duration-label" : {
+        "type": "label",
+        "description": "The changes are made step by step.\nHere you define the duration (in milliseconds) of each step in which the values are changed by one unit, if necessary.\n0 means instantaneous changes.\nRecommended value: between 200 and 300."
+    },
+    "smooth_duration" : {
+        "type" : "scale",
+        "default" : 200,
+        "min": 0,
+        "max": 1000,
+        "step": 50,
+        "show-value": true,
+        "description": "Step duration (ms)"
     },
     "apply_changing_monitors" : {
         "type" : "switch",
@@ -196,10 +211,10 @@
         "columns" : [
             {"id": "name", "title": "Name", "type": "string", "expand-width": true},
             {"id": "show", "title": "Show\nin menu", "type": "boolean", "align": 0.5},
-            {"id": "brightness", "title": "Brightness", "type": "integer", "align": 0.5, "min": 0, "max": 100},
-            {"id": "gamma_red", "title": "Gamma\nRed", "type": "integer", "align": 0.5, "min": 0, "max": 100},
-            {"id": "gamma_green", "title": "Gamma\nGreen", "type": "integer", "align": 0.5, "min": 0, "max": 100},
-            {"id": "gamma_blue", "title": "Gamma\nBlue", "type": "integer", "align": 0.5, "min": 0, "max": 100},
+            {"id": "brightness", "title": "Brightness", "type": "integer", "align": 0.5, "min": 0, "max": 200},
+            {"id": "gamma_red", "title": "Gamma\nRed", "type": "integer", "align": 0.5, "min": 0, "max": 200},
+            {"id": "gamma_green", "title": "Gamma\nGreen", "type": "integer", "align": 0.5, "min": 0, "max": 200},
+            {"id": "gamma_blue", "title": "Gamma\nBlue", "type": "integer", "align": 0.5, "min": 0, "max": 200},
             {"id": "start_at_sunrise", "title": "Start at\nSunrise", "type": "boolean", "align": 0.5},
             {"id": "start_at_sunset", "title": "Start at\nSunset", "type": "boolean", "align": 0.5}
         ],

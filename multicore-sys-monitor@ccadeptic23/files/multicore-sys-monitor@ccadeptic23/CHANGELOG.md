@@ -1,3 +1,86 @@
+### v3.1.5~20251029
+  * Avoids freeze at startup.
+  * Fixes [#7898](https://github.com/linuxmint/cinnamon-spices-applets/issues/7898)
+
+### v3.1.4~20251021
+  * Avoids random freezes.
+  * Fixes [#7898](https://github.com/linuxmint/cinnamon-spices-applets/issues/7898)
+
+### v3.1.3~20251013
+  * Support for encrypted partitions.
+  * Fixes [#7880](https://github.com/linuxmint/cinnamon-spices-applets/issues/7880)
+  * Special thanks to [chrisstavrou](https://github.com/chrisstavrou).
+
+### v3.1.2~20251005
+  * The values are formatted to the local locale, in tooltip.
+  * Fixes [#7854](https://github.com/linuxmint/cinnamon-spices-applets/issues/7854)
+
+### v3.1.1~20251005
+  * Adds the option "Place % at the very end of the line" in the General tab of this applet tooltip.
+
+### v3.1.0~20251004
+  * Improved tooltip.
+  * Fixes [#7849](https://github.com/linuxmint/cinnamon-spices-applets/issues/7849)
+
+### v3.0.1~20250922
+  * Improved network management regarding status changes and data readings.
+
+### v3.0.0~20250831
+  * The different colors for cache and buffer memory in the RAM graph are back!
+  * Code cleanup.
+
+### v2.9.1~20250829
+  * Code cleanup.
+
+### v2.9.0~20250829
+  * Reduces data recovery time by a factor of 50!
+
+### v2.8.4~20250826
+  * Improves context menu to access to settings.
+  * Middle-click opens settings.
+
+### v2.8.3~20250826
+  * Fixes [#7559](https://github.com/linuxmint/cinnamon-spices-applets/issues/7559)
+
+
+### v2.8.2~20250825
+  * Try to fix [#7559](https://github.com/linuxmint/cinnamon-spices-applets/issues/7559)
+  * Improves the Disk Usage chart.
+
+### v2.8.1~20250825
+  * Disk usage: the user can set a maximum value (in %) for each defined path.
+  * When the value reaches this maximum, the alert color is used in the bar chart and this value is highlighted in bold in the tooltip.
+
+### v2.8.0~20250825
+  * From now, can display disk usage.
+  * Fixes [#7546](https://github.com/linuxmint/cinnamon-spices-applets/issues/7546)
+
+### v2.7.2~20250819
+  * Improved loops.
+  * Changed to_string method.
+  * Code cleanup.
+
+### v2.7.1~20250814
+  * Improved Graph Border options.
+
+### v2.7.0~20250814
+  * Added Border options.
+
+### v2.6.3~20250813
+  * Updated the `get-disk-info.sh` script.
+
+### v2.6.2~20250813
+  * New options for Swap in the Memory graph.
+
+### v2.6.1~20250813
+  * Improved memory measurement speed.
+
+### v2.6.0~20250813
+  * Improved processor measurement speed.
+
+### v2.5.2~20250811
+  * Speed improvement.
+
 ### v2.5.1~20250810
   * Adds the amounts of Buffer memory, Cache, and Shared memory to the tooltip.
   * Improved tooltip display.

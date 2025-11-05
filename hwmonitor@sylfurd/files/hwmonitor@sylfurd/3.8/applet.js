@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License along
 with Foobar. If not, see http://www.gnu.org/licenses/.
 */
 
-// 2019-10-15 : I added a version to metadata.json, please increase that 
+// 2019-10-15 : I added a version to metadata.json, please increase that
 // when making changes to this applet
 
 const Applet = imports.ui.applet;
@@ -31,6 +31,7 @@ const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
 const GUdev = imports.gi.GUdev;
 const Settings = imports.ui.settings;
+const Util = imports.misc.util;
 const UUID = "hwmonitor@sylfurd";
 
 let gtopFailed = false;
@@ -54,7 +55,7 @@ function _(str) {
 }
 
 let debug_once = true;
-function debug_message_once(message) {    
+function debug_message_once(message) {
     if (debug_once)
         global.logError("HWMONITOR : " + message);
     debug_once = false;
@@ -73,7 +74,7 @@ GraphicalHWMonitorApplet.prototype = {
 
     _init: function (metadata, orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
-        
+
         this.getOrientation(orientation); // Initialise for panel orientation
         this.panel_height = panel_height;
         this.graphs = [];
@@ -84,21 +85,21 @@ GraphicalHWMonitorApplet.prototype = {
             return;
         }
 
-        this.itemOpenSysMon = new PopupMenu.PopupMenuItem(_("Open System Monitor"));        
+        this.itemOpenSysMon = new PopupMenu.PopupMenuItem(_("Open System Monitor"));
         this.itemOpenSysMon.connect('activate', Lang.bind(this, this._runSysMonActivate));
         this._applet_context_menu.addMenuItem(this.itemOpenSysMon);
 
-        this.itemReset = new PopupMenu.PopupMenuItem(_("Restart 'Graphical hardware monitor'"));        
+        this.itemReset = new PopupMenu.PopupMenuItem(_("Restart 'Graphical hardware monitor'"));
         this.itemReset.connect('activate', Lang.bind(this, this.restartGHW));
         this._applet_context_menu.addMenuItem(this.itemReset);
 
 
-        // Setup the applet settings 
+        // Setup the applet settings
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         // General settings
         this.settings.bind("frequency", "frequency", this.settingsChanged);
         this.settings.bind("graph_line_mode", "graph_line_mode", this.settingsChanged);
-        
+
         this.settings.bind("theme", "theme", this.settingsChanged);
         this.settings.bind("border_color", "border_color", this.settingsChanged);
         this.settings.bind("background_color1", "background_color1", this.settingsChanged);
@@ -202,7 +203,7 @@ GraphicalHWMonitorApplet.prototype = {
             let memProvider =  new Providers.MemDataProvider();
             this.graphs.push(new Graph.Graph(memProvider, memGraphArea, this.theme_object, this.mem_show_detail_label));
         }
-                
+
         // Add NET IN Graph
         if (this.netin_enable_graph) {
             let netInGraphArea = null;
@@ -213,8 +214,8 @@ GraphicalHWMonitorApplet.prototype = {
 
             let netInProvider =  new Providers.NetDataProvider(this.frequency, true, this.netin_linlog, this.netin_speed);
             this.graphs.push(new Graph.Graph(netInProvider, netInGraphArea, this.theme_object, this.netin_show_detail_label));
-        }    
-                
+        }
+
         // Add NET OUT Graph
         if (this.netout_enable_graph) {
             let netOutGraphArea = null;
@@ -225,8 +226,8 @@ GraphicalHWMonitorApplet.prototype = {
 
             let netOutProvider =  new Providers.NetDataProvider(this.frequency, false, this.netout_linlog, this.netout_speed);
             this.graphs.push(new Graph.Graph(netOutProvider, netOutGraphArea, this.theme_object, this.netout_show_detail_label));
-        }    
-                
+        }
+
         // Add DISK READ Graph
         if (this.diskread_enable_graph) {
             let diskReadGraphArea = null;
@@ -237,10 +238,10 @@ GraphicalHWMonitorApplet.prototype = {
 
             let diskReadProvider =  new Providers.DiskDataProvider(this.frequency, this.diskread_size, true, this.diskread_device_name);
             this.graphs.push(new Graph.Graph(diskReadProvider, diskReadGraphArea, this.theme_object, this.diskread_show_detail_label));
-        }    
-                
+        }
+
         // Add DISK WRITE Graph
-        if (this.diskwrite_enable_graph) { 
+        if (this.diskwrite_enable_graph) {
             let diskWriteGraphArea = null;
             if (this.isHorizontal)
                 diskWriteGraphArea = this.appletArea.addGraph(this.diskwrite_size, this.panel_height);
@@ -249,10 +250,10 @@ GraphicalHWMonitorApplet.prototype = {
 
             let diskWriteProvider =  new Providers.DiskDataProvider(this.frequency, this.diskwrite_size, false, this.diskwrite_device_name);
             this.graphs.push(new Graph.Graph(diskWriteProvider, diskWriteGraphArea, this.theme_object, this.diskwrite_show_detail_label));
-        }    
+        }
 
         // Add BAT Graph
-        if (this.bat_enable_graph) { 
+        if (this.bat_enable_graph) {
             let batGraphArea = null;
             if (this.isHorizontal)
                 batGraphArea = this.appletArea.addGraph(this.bat_size, this.panel_height);
@@ -261,11 +262,11 @@ GraphicalHWMonitorApplet.prototype = {
 
             let batProvider =  new Providers.BatteryProvider();
             this.graphs.push(new Graph.Graph(batProvider, batGraphArea, this.theme_object, this.bat_show_detail_label));
-        }    
-        
+        }
+
         this.appletArea.createDrawingArea();
 
-        this.appletArea.drawingArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));        
+        this.appletArea.drawingArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));
         this.actor.add_actor(this.appletArea.drawingArea);
     },
 
@@ -281,9 +282,9 @@ GraphicalHWMonitorApplet.prototype = {
     getOrientation: function (orientation) {
         this.orientation = orientation;
         if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){
-            if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {                 
+            if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
                 this.isHorizontal = false;  // vertical
-            } else {                 
+            } else {
                 this.isHorizontal = true;   // horizontal
             }
         } else {
@@ -296,7 +297,7 @@ GraphicalHWMonitorApplet.prototype = {
         this.updateAppletArea();
     },
 
-    on_panel_height_changed: function() {  
+    on_panel_height_changed: function() {
         this.panel_height = this._panelHeight
         this.updateAppletArea();
         this._update();
@@ -332,7 +333,7 @@ GraphicalHWMonitorApplet.prototype = {
     },
 
     _update: function() {
-    	for (let i = 0; i < this.graphs.length; i++) {
+        for (let i = 0; i < this.graphs.length; i++) {
             this.graphs[i].refreshData();
         }
         this.appletArea.drawingArea.queue_repaint();
@@ -353,7 +354,7 @@ GraphicalHWMonitorApplet.prototype = {
             if (this.isHorizontal)
                 width = this.appletArea.graphArea[index].width
             else
-                height = this.appletArea.graphArea[index].height;            
+                height = this.appletArea.graphArea[index].height;
         }
     },
 
@@ -376,7 +377,7 @@ GraphicalHWMonitorApplet.prototype = {
     getAvailableDisks: function() {
         let devices_options = {};
         let block_devices = new GUdev.Client().query_by_subsystem("block");
-        
+
         for (var n = 0; n < block_devices.length; n++) {
             let options_labels = [];
 
@@ -386,7 +387,7 @@ GraphicalHWMonitorApplet.prototype = {
             let format = new Providers.Tools();
             let capacity = format.formatBytes(block_devices[n].get_sysfs_attr("size") * 512);
             options_labels.push(`[${capacity}]`);
-            
+
             let id_fs_label = block_devices[n].get_property("ID_FS_LABEL");
             options_labels.length < 3 && id_fs_label != null ? options_labels.push(id_fs_label.toString()) : {};
 
@@ -408,7 +409,7 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings.setOptions("diskwrite_device_name", ordered_devices_options);
 
         if (this.diskread_device_name == "none" || this.diskwrite_device_name == "none") {
-            
+
             this.diskread_device_name = ordered_devices_options[Object.keys(ordered_devices_options)[0]];
             this.diskwrite_device_name = ordered_devices_options[Object.keys(ordered_devices_options)[0]];
         }
@@ -458,15 +459,18 @@ GraphicalHWMonitorApplet.prototype = {
     },
 
     _runSysMon: function() {
-    	let _appSys = Cinnamon.AppSystem.get_default();
-    	let _gsmApp = _appSys.lookup_app('gnome-system-monitor.desktop');
-    	_gsmApp.activate();
+        let _appSys = Cinnamon.AppSystem.get_default();
+        let _gsmApp = _appSys.lookup_app('gnome-system-monitor.desktop');
+        if (_gsmApp != null)
+            _gsmApp.activate();
+        else if (GLib.find_program_in_path("gnome-system-monitor"))
+            Util.spawnCommandLineAsync("gnome-system-monitor");
     },
-    
+
     _runSysMonActivate: function() {
         this._runSysMon();
     },
-    
+
     // Compare two version numbers (strings) based on code by Alexey Bass (albass)
     // Takes account of many variations of version numers including cinnamon.
     versionCompare: function(left, right) {

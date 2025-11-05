@@ -1,0 +1,417 @@
+# DIRECT
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"PO-Revision-Date: 2017-12-20 20:20+0200\n"
+"Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
+"Language-Team: \n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:38 applet.js:495
+msgid "SYSTEM"
+msgstr "СИСТЕМА"
+
+#. applet.js:38 applet.js:530
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:38 applet.js:554
+msgid "RECENT DOCUMENTS"
+msgstr "ПОСЛЕДНИ ДОКУМЕНТИ"
+
+#. applet.js:160
+msgid "(Right click to open folder)"
+msgstr ""
+
+#. metadata.json->name
+#. applet.js:263
+msgid "Direct"
+msgstr "Директно"
+
+#. applet.js:471
+msgid "Search Home Folder"
+msgstr "Търси в домашната папка"
+
+#. applet.js:504
+msgid "Search File System"
+msgstr "Търси във файловата система"
+
+#. applet.js:568
+msgid "Clear"
+msgstr "Изчисти"
+
+#. applet.js:575
+msgid "Recent"
+msgstr ""
+
+#. applet.js:623
+msgid "Computer"
+msgstr "Компютър"
+
+#. applet.js:629
+msgid "File System"
+msgstr "Файлова система"
+
+#. applet.js:646
+msgid "Network"
+msgstr "Мрежа"
+
+#. applet.js:868
+msgid "Trash"
+msgstr "Кошче"
+
+#. search.py:43
+msgid "Open..."
+msgstr "Отваряне..."
+
+#. search.py:48
+msgid "Open Containing Folder..."
+msgstr "Отваряне на съдържащата папка..."
+
+#. search.py:85
+msgid "Search"
+msgstr "Търсене"
+
+#. search.py:106
+msgid "Start in"
+msgstr "Стартирай в"
+
+#. search.py:107
+msgid "Select a folder"
+msgstr "Избор на папка"
+
+#. search.py:113
+msgid "Follow symlinks"
+msgstr "Следвай символните връзки"
+
+#. search.py:117
+msgid "Search hidden"
+msgstr "Търси в скритите"
+
+#. search.py:121
+msgid "Use regular expressions"
+msgstr "Използване на регулярни изрази"
+
+#. search.py:125
+msgid "Stop"
+msgstr "Спри"
+
+#. search.py:140
+msgid "File"
+msgstr "Файл"
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. search.py:156
+msgid "Path"
+msgstr "Път"
+
+#. search.py:184
+msgid "Searching..."
+msgstr "Търсене..."
+
+#. search.py:198 search.py:199
+msgid "Search Stopped"
+msgstr "Търсенето е спряно"
+
+#. search.py:215
+msgid "Searching: "
+msgstr "Търсене: "
+
+#. search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Грешка: недостатъчно права за прочитане на папката"
+
+#. search.py:252
+msgid "Search Completed"
+msgstr "Търсенето завърши"
+
+#. search.py:259
+msgid "Skipping"
+msgstr "Пропускане"
+
+#. search.py:259
+#, fuzzy
+msgid " - directory already searched"
+msgstr " - директорията е вече претърсена"
+
+#. metadata.json->description
+msgid ""
+"Provides direct and easy access to your Directories, Favorites, Recent "
+"documents and System locations"
+msgstr ""
+
+#. metadata.json->comments
+msgid ""
+"The Direct@claudiux applet is a fork from the placesCenter@scollins applet, "
+"with improvements."
+msgstr ""
+
+#. settings-schema.json->generalPage->title
+msgid "General"
+msgstr "Общи"
+
+#. settings-schema.json->userPage->title
+msgid "User"
+msgstr "Потребител"
+
+#. settings-schema.json->systemPage->title
+msgid "System"
+msgstr "Система"
+
+#. settings-schema.json->favoritesPage->title
+msgid "Favorites"
+msgstr ""
+
+#. settings-schema.json->recentPage->title
+#. settings-schema.json->recentSection->title
+msgid "Recent documents"
+msgstr "Последни документи"
+
+#. settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr "Настройки на панела"
+
+#. settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr "Настройки на менюто"
+
+#. settings-schema.json->userSection->title
+msgid "User section"
+msgstr "Секция потребител"
+
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+msgid "Custom places"
+msgstr "Допълнителни места"
+
+#. settings-schema.json->systemSection->title
+msgid "System section"
+msgstr "Секция система"
+
+#. settings-schema.json->favoritesSection->title
+#, fuzzy
+msgid "Favorite documents"
+msgstr "Показване на последните документи"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Иконка в панела"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr ""
+"Приемат се имена на иконки или директен път (поддържат се символни иконки)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Текст в панела"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr "Пряк път за меню"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "пкс"
+
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Размер на иконките в менюто"
+
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr ""
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->displayOrder->description
+msgid "Display order in the menu"
+msgstr ""
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
+#. settings-schema.json->noIconOnPanel->description
+msgid "No icon on panel"
+msgstr ""
+
+#. settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "Отвори при клик с колелцето"
+
+#. settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "Остави празно за изключване"
+
+#. settings-schema.json->dontDisplayTooltip->description
+msgid "Do not display the tooltip"
+msgstr ""
+
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "Секция потребител"
+
+#. settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "Показване на работния плот"
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr ""
+
+#. settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "Показване на кошчето"
+
+#. settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "Никога"
+
+#. settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "Винаги"
+
+#. settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "Когато не е празно"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "Секция система"
+
+#. settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "Покажи компютър"
+
+#. settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "Покажи фаловата система"
+
+#. settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "Показвай устройства"
+
+#. settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr "Показвай само монтираните устройства"
+
+#. settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "Показвай мрежа"
+
+#. settings-schema.json->showFavorites->description
+#, fuzzy
+msgid "Show favorite documents"
+msgstr "Показване на последните документи"
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->description
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#, fuzzy
+msgid "All Favorite Documents"
+msgstr "Последни документи"
+
+#. settings-schema.json->favoriteSizeLimit->description
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Брой за показване"
+
+#. settings-schema.json->favoriteShowUri->description
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr ""
+
+#. settings-schema.json->favoriteIconIsStar->description
+msgid "Replace icons with stars"
+msgstr ""
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Показване на последните документи"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+#, fuzzy
+msgid "All Recent Documents"
+msgstr "Последни документи"
+
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr ""
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
+msgstr ""

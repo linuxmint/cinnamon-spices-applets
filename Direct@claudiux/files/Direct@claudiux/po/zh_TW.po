@@ -1,0 +1,412 @@
+# Direct@claudiux zh_TW translation
+# This file is put in the public domain.
+# Peter Dave Hello <hsu@peterdavehello.org>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Direct@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"PO-Revision-Date: 2025-08-04 00:13+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:38 applet.js:495
+msgid "SYSTEM"
+msgstr "系統"
+
+#. applet.js:38 applet.js:530
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:38 applet.js:554
+msgid "RECENT DOCUMENTS"
+msgstr "最近的文件"
+
+#. applet.js:160
+msgid "(Right click to open folder)"
+msgstr "（點選滑鼠右鍵開啟資料夾）"
+
+#. metadata.json->name
+#. applet.js:263
+msgid "Direct"
+msgstr "直接"
+
+#. applet.js:471
+msgid "Search Home Folder"
+msgstr "搜尋家目錄"
+
+#. applet.js:504
+msgid "Search File System"
+msgstr "搜尋檔案系統"
+
+#. applet.js:568
+msgid "Clear"
+msgstr "清除"
+
+#. applet.js:575
+msgid "Recent"
+msgstr "最近使用"
+
+#. applet.js:623
+msgid "Computer"
+msgstr "電腦"
+
+#. applet.js:629
+msgid "File System"
+msgstr "檔案系統"
+
+#. applet.js:646
+msgid "Network"
+msgstr "網路"
+
+#. applet.js:868
+msgid "Trash"
+msgstr "資源回收筒"
+
+#. search.py:43
+msgid "Open..."
+msgstr "開啟..."
+
+#. search.py:48
+msgid "Open Containing Folder..."
+msgstr "開啟檔案所在資料夾..."
+
+#. search.py:85
+msgid "Search"
+msgstr "搜尋"
+
+#. search.py:106
+msgid "Start in"
+msgstr "開始於"
+
+#. search.py:107
+msgid "Select a folder"
+msgstr "選擇資料夾"
+
+#. search.py:113
+msgid "Follow symlinks"
+msgstr "跟隨符號連結"
+
+#. search.py:117
+msgid "Search hidden"
+msgstr "搜尋隱藏項目"
+
+#. search.py:121
+msgid "Use regular expressions"
+msgstr "使用正規表示式"
+
+#. search.py:125
+msgid "Stop"
+msgstr "停止"
+
+#. search.py:140
+msgid "File"
+msgstr "檔案"
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. search.py:156
+msgid "Path"
+msgstr "路徑"
+
+#. search.py:184
+msgid "Searching..."
+msgstr "搜尋中..."
+
+#. search.py:198 search.py:199
+msgid "Search Stopped"
+msgstr "搜尋已停止"
+
+#. search.py:215
+msgid "Searching: "
+msgstr "搜尋中："
+
+#. search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "錯誤：讀取資料夾的權限不足 "
+
+#. search.py:252
+msgid "Search Completed"
+msgstr "搜尋完成"
+
+#. search.py:259
+msgid "Skipping"
+msgstr "略過"
+
+#. search.py:259
+msgid " - directory already searched"
+msgstr " - 目錄已搜尋過"
+
+#. metadata.json->description
+msgid ""
+"Provides direct and easy access to your Directories, Favorites, Recent "
+"documents and System locations"
+msgstr ""
+
+#. metadata.json->comments
+msgid ""
+"The Direct@claudiux applet is a fork from the placesCenter@scollins applet, "
+"with improvements."
+msgstr ""
+
+#. settings-schema.json->generalPage->title
+msgid "General"
+msgstr "一般"
+
+#. settings-schema.json->userPage->title
+msgid "User"
+msgstr "使用者"
+
+#. settings-schema.json->systemPage->title
+msgid "System"
+msgstr "系統"
+
+#. settings-schema.json->favoritesPage->title
+msgid "Favorites"
+msgstr ""
+
+#. settings-schema.json->recentPage->title
+#. settings-schema.json->recentSection->title
+msgid "Recent documents"
+msgstr "最近的文件"
+
+#. settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr "面板設定"
+
+#. settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr "選單設定"
+
+#. settings-schema.json->userSection->title
+msgid "User section"
+msgstr "使用者區段"
+
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+msgid "Custom places"
+msgstr "自訂位置"
+
+#. settings-schema.json->systemSection->title
+msgid "System section"
+msgstr "系統區段"
+
+#. settings-schema.json->favoritesSection->title
+#, fuzzy
+msgid "Favorite documents"
+msgstr "顯示最近的文件"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "面板圖示"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr "可輸入圖示名稱或直接路徑（支援符號圖示）"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "面板文字"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr "選單快捷鍵"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "選單圖示大小"
+
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr ""
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->displayOrder->description
+msgid "Display order in the menu"
+msgstr ""
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
+#. settings-schema.json->noIconOnPanel->description
+msgid "No icon on panel"
+msgstr ""
+
+#. settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "中鍵點選時開啟"
+
+#. settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "留空以停用"
+
+#. settings-schema.json->dontDisplayTooltip->description
+#, fuzzy
+msgid "Do not display the tooltip"
+msgstr "在工具提示中顯示完整路徑"
+
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "使用者區段"
+
+#. settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "顯示桌面"
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr ""
+
+#. settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "顯示資源回收筒"
+
+#. settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "一律不要"
+
+#. settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "一律"
+
+#. settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "不為空時"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "系統區段"
+
+#. settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "顯示電腦"
+
+#. settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "顯示檔案系統"
+
+#. settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "顯示磁碟區"
+
+#. settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr "僅顯示已掛載的磁碟機"
+
+#. settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "顯示網路"
+
+#. settings-schema.json->showFavorites->description
+#, fuzzy
+msgid "Show favorite documents"
+msgstr "顯示最近的文件"
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->description
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#, fuzzy
+msgid "All Favorite Documents"
+msgstr "所有最近的文件"
+
+#. settings-schema.json->favoriteSizeLimit->description
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "要顯示的數量"
+
+#. settings-schema.json->favoriteShowUri->description
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr "在工具提示中顯示完整路徑"
+
+#. settings-schema.json->favoriteIconIsStar->description
+msgid "Replace icons with stars"
+msgstr ""
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "顯示最近的文件"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "All Recent Documents"
+msgstr "所有最近的文件"
+
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr "隱私"
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
+msgstr ""

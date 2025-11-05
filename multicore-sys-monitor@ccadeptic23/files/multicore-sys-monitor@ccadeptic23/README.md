@@ -1,6 +1,6 @@
 # Multi-Core System Monitor
 
-This applet displays real-time CPU usage for each core/processor as well as overall memory and disk usage.
+This applet displays real-time CPU usage for each core/processor as well as overall memory and disk usage (including encrypted partitions).
 
 ## Dependencies
 

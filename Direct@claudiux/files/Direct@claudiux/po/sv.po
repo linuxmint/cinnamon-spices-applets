@@ -1,0 +1,414 @@
+# Swedish translation for Dir@claudiux.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017-2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Direct@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"PO-Revision-Date: 2022-10-29 15:32+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#. applet.js:38 applet.js:495
+msgid "SYSTEM"
+msgstr "SYSTEM"
+
+#. applet.js:38 applet.js:530
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:38 applet.js:554
+msgid "RECENT DOCUMENTS"
+msgstr "TIDIGARE DOKUMENT"
+
+#. applet.js:160
+msgid "(Right click to open folder)"
+msgstr "(Högerklicka för att öppna mapp)"
+
+#. metadata.json->name
+#. applet.js:263
+msgid "Direct"
+msgstr "Direkt"
+
+#. applet.js:471
+msgid "Search Home Folder"
+msgstr "Sök i hemkatalogen"
+
+#. applet.js:504
+msgid "Search File System"
+msgstr "Sök i filsystemet"
+
+#. applet.js:568
+msgid "Clear"
+msgstr "Rensa"
+
+#. applet.js:575
+msgid "Recent"
+msgstr ""
+
+#. applet.js:623
+msgid "Computer"
+msgstr "Dator"
+
+#. applet.js:629
+msgid "File System"
+msgstr "Filsystem"
+
+#. applet.js:646
+msgid "Network"
+msgstr "Nätverk"
+
+#. applet.js:868
+msgid "Trash"
+msgstr "Papperskorg"
+
+#. search.py:43
+msgid "Open..."
+msgstr "Öppna..."
+
+#. search.py:48
+msgid "Open Containing Folder..."
+msgstr "Öppna målmappen..."
+
+#. search.py:85
+msgid "Search"
+msgstr "Sök"
+
+#. search.py:106
+msgid "Start in"
+msgstr "Starta i"
+
+#. search.py:107
+msgid "Select a folder"
+msgstr "Välj en mapp"
+
+#. search.py:113
+msgid "Follow symlinks"
+msgstr "Följ symboliska länkar"
+
+#. search.py:117
+msgid "Search hidden"
+msgstr "Sök dolda"
+
+#. search.py:121
+msgid "Use regular expressions"
+msgstr "Använd Regular Expressions"
+
+#. search.py:125
+msgid "Stop"
+msgstr "Stopp"
+
+#. search.py:140
+msgid "File"
+msgstr "Fil"
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. search.py:156
+msgid "Path"
+msgstr "Sökväg"
+
+#. search.py:184
+msgid "Searching..."
+msgstr "Söker..."
+
+#. search.py:198 search.py:199
+msgid "Search Stopped"
+msgstr "Sökning stoppad"
+
+#. search.py:215
+msgid "Searching: "
+msgstr "Söker: "
+
+#. search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Fel: Otillräckliga rättigheter för att läsa mappen "
+
+#. search.py:252
+msgid "Search Completed"
+msgstr "Sökning slutförd"
+
+#. search.py:259
+msgid "Skipping"
+msgstr "Undantar"
+
+#. search.py:259
+msgid " - directory already searched"
+msgstr "  - mappen redan genomsökt"
+
+#. metadata.json->description
+msgid ""
+"Provides direct and easy access to your Directories, Favorites, Recent "
+"documents and System locations"
+msgstr ""
+
+#. metadata.json->comments
+msgid ""
+"The Direct@claudiux applet is a fork from the placesCenter@scollins applet, "
+"with improvements."
+msgstr ""
+
+#. settings-schema.json->generalPage->title
+msgid "General"
+msgstr "Allmänt"
+
+#. settings-schema.json->userPage->title
+msgid "User"
+msgstr "Användare"
+
+#. settings-schema.json->systemPage->title
+msgid "System"
+msgstr "System"
+
+#. settings-schema.json->favoritesPage->title
+msgid "Favorites"
+msgstr ""
+
+#. settings-schema.json->recentPage->title
+#. settings-schema.json->recentSection->title
+msgid "Recent documents"
+msgstr "Tidigare dokument"
+
+#. settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr "Panelinställningar"
+
+#. settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr "Menyinställningar"
+
+#. settings-schema.json->userSection->title
+msgid "User section"
+msgstr "Användarsektion"
+
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+msgid "Custom places"
+msgstr "Anpassade platser"
+
+#. settings-schema.json->systemSection->title
+msgid "System section"
+msgstr "Systemsektion"
+
+#. settings-schema.json->favoritesSection->title
+#, fuzzy
+msgid "Favorite documents"
+msgstr "Visa tidigare dokument"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Panelikon"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr "Accepterar ikonnamn eller direkt sökväg (stöder symboliska ikoner)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Paneltext"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr "Menysnabbtangent"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Menyikonstorlek"
+
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr ""
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->displayOrder->description
+msgid "Display order in the menu"
+msgstr ""
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
+#. settings-schema.json->noIconOnPanel->description
+msgid "No icon on panel"
+msgstr ""
+
+#. settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "Öppna på mushjulsklick"
+
+#. settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "Lämnas tom för inaktivering"
+
+#. settings-schema.json->dontDisplayTooltip->description
+msgid "Do not display the tooltip"
+msgstr ""
+
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "Användarsektion"
+
+#. settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "Visa Skrivbord"
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr ""
+
+#. settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "Visa Papperskorgen"
+
+#. settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "Aldrig"
+
+#. settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "Alltid"
+
+#. settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "Om inte tom"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "Systemsektion"
+
+#. settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "Visa Dator"
+
+#. settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "Visa filsystem"
+
+#. settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "Visa volymer"
+
+#. settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr "Visa endast monterade diskar"
+
+#. settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "Visa nätverk"
+
+#. settings-schema.json->showFavorites->description
+#, fuzzy
+msgid "Show favorite documents"
+msgstr "Visa tidigare dokument"
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->description
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#, fuzzy
+msgid "All Favorite Documents"
+msgstr "Alla tidigare dokument"
+
+#. settings-schema.json->favoriteSizeLimit->description
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Antal att visa"
+
+#. settings-schema.json->favoriteShowUri->description
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr ""
+
+#. settings-schema.json->favoriteIconIsStar->description
+msgid "Replace icons with stars"
+msgstr ""
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Visa tidigare dokument"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "All Recent Documents"
+msgstr "Alla tidigare dokument"
+
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr "Sekretess"
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
+msgstr ""

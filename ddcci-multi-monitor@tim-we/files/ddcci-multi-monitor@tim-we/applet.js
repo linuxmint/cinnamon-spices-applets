@@ -8,6 +8,7 @@ const ModalDialog = imports.ui.modalDialog;
 const Clutter = imports.gi.Clutter;
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
+const Settings = imports.ui.settings;
 
 // l10n/translation support
 const UUID = "ddcci-multi-monitor@tim-we";
@@ -18,7 +19,6 @@ function _(str) {
 }
 
 const DEFAULT_TOOLTIP = _("Adjust monitor brightness via DDC/CI");
-const BRIGHTNESS_ADJUSTMENT_STEP = 5; /* Brightness adjustment step in % */
 
 function log(message, type = "debug") {
     const finalLogMessage = `[${UUID}] ${message}`;
@@ -34,7 +34,7 @@ function log(message, type = "debug") {
 
 class Monitor {
     #promises;
-    constructor(index, name, bus, brightnessFeatureFlag) {
+    constructor(index, name, bus, brightnessFeatureFlag, showBusNumber=false, isActive=false, showCheckbox=false) {
         this.index = index;
         this.name = name;
         this.brightness = 50;
@@ -43,8 +43,27 @@ class Monitor {
         this.bus = bus;
         this.menuLabel = null;
         this.menuSlider = null;
+        this.menuCheckbox = null;
         this.brightnessFeatureFlag = brightnessFeatureFlag;
+        this.showBusNumber = showBusNumber;
+        this.isActive = isActive;
+        this.showCheckbox = showCheckbox;
         this.#promises = Promise.resolve();
+    }
+
+    setShowBusNumber(showBusNumber) {
+        this.showBusNumber = showBusNumber;
+    }
+
+    setShowCheckbox(showCheckbox) {
+        this.showCheckbox = showCheckbox;
+    }
+
+    setActive(value) {
+        this.isActive = value;
+        if (this.menuCheckbox) {
+            this.menuCheckbox.setToggleState(value);
+        }
     }
 
     updateBrightness() {
@@ -75,7 +94,11 @@ class Monitor {
     }
 
     updateLabel() {
-        this.menuLabel.setLabel(`${this.name}  (${this.brightness}%)`);
+        if (this.showBusNumber) {
+            this.menuLabel.setLabel(`${this.name} (bus ${this.bus})  (${this.brightness}%)`);
+        } else {
+            this.menuLabel.setLabel(`${this.name}  (${this.brightness}%)`);
+        }
     }
 
     updateMenu() {
@@ -117,7 +140,7 @@ class Monitor {
         }
     }
 
-    addToMenu(menu) {
+    addToMenu(menu, saveActiveStateCallback) {
         // create & add label
         const menuLabel = new PopupMenu.PopupMenuItem(this.name, {
             reactive: false,
@@ -140,15 +163,35 @@ class Monitor {
         });
 
         menu.addMenuItem(menuSlider);
+
+        // checkbox to mark active monitor
+        if (this.showCheckbox) {
+            const menuCheckbox = new PopupMenu.PopupSwitchMenuItem(_("Use for scroll/click"), this.isActive);
+            this.menuCheckbox = menuCheckbox;
+            menu.addMenuItem(menuCheckbox);
+
+            menuCheckbox.connect("toggled", (item, state) => {
+                this.isActive = state;
+                saveActiveStateCallback(this.bus, state); // use bus number as key
+            });
+        }
     }
 }
 
-class DDCMultiMonitor extends Applet.IconApplet {
+class DDCMultiMonitor extends Applet.TextIconApplet {
 
     constructor(metadata, orientation, panelHeight, instance_id) {
         super(orientation, panelHeight, instance_id);
+
+        this.settings = new Settings.AppletSettings(this, UUID, instance_id);
+        this._bind_settings();
+
+        // load persistent settings for custom monitor selection
+        this.activeMonitors = this._loadActiveMonitors();
+
         this.detecting = false;
         this.set_applet_icon_symbolic_name("display-brightness");
+        this._updateAppletLabel();
         this.set_applet_tooltip(DEFAULT_TOOLTIP);
         this.actor.connect('scroll-event', (...args) => this._onScrollEvent(...args));
         this.lastTooltipTimeoutID = null;
@@ -158,6 +201,49 @@ class DDCMultiMonitor extends Applet.IconApplet {
         this.menuManager.addMenu(this.menu);
 
         this.updateMonitors();
+        this._initTogglePoints();
+    }
+
+    _bind_settings() {
+        // appearance
+        this.settings.bind("entry_applet-label", "appletLabel", this._updateAppletLabel.bind(this));
+        this.settings.bind("switch_show-bus-number", "showBusNumber", this._updateMonitorSettings.bind(this));
+        // scrolling
+        this.settings.bind("combobox_scroll-step", "brightnessAdjustmentStep", null);
+        // toggle points
+        this.settings.bind("switch_use-toggle-points", "useTogglePoints", this._initTogglePoints.bind(this));
+        this.settings.bind("spinbutton_num-of-toggle-points", "numOfTogglePoints", this._initTogglePoints.bind(this));
+        this.settings.bind("scale_toggle_point_1", "togglePoint1", this._initTogglePoints.bind(this));
+        this.settings.bind("scale_toggle_point_2", "togglePoint2", this._initTogglePoints.bind(this));
+        this.settings.bind("scale_toggle_point_3", "togglePoint3", this._initTogglePoints.bind(this));
+        // single monitor
+        this.settings.bind("switch_manual-select-monitors", "manualSelectMonitors", () => {
+            this._updateMonitorSettings();
+            this.updateMenu();
+        });
+        // retry detection
+        this.settings.bind("switch_enable-retry-detection", "enableRetryDetection", null);
+        this.settings.bind("spinbutton_target-monitor-count", "targetMonitorCount", null);
+        this.settings.bind("spinbutton_max-retry-attempts", "maxRetryAttempts", null);
+        this.settings.bind("spinbutton_retry-delay", "retryDelay", null);
+    }
+
+    _loadActiveMonitors() {
+        try {
+            const s = this.settings.getValue("string_active-monitors") || "{}";
+            return JSON.parse(s);
+        } catch (e) {
+            log("active-monitors parse failed, resetting to {}", "warning");
+            return {};
+        }
+    }
+
+    _saveActiveMonitors() {
+        try {
+            this.settings.setValue("string_active-monitors", JSON.stringify(this.activeMonitors));
+        } catch (e) {
+            log("active-monitors save failed: " + e, "error");
+        }
     }
 
     on_applet_clicked() {
@@ -167,17 +253,45 @@ class DDCMultiMonitor extends Applet.IconApplet {
         this.menu.toggle();
     }
 
+    on_applet_middle_clicked() {
+        if (this.useTogglePoints) {
+            this._toggleBrightnessForMonitors();
+        }
+    }
+
     on_applet_added_to_panel() {
         if(!this.detecting) {
             this.updateMonitors();
         }
     }
 
+    _updateAppletLabel() {
+        this.set_applet_label(this.appletLabel.length > 0 ? this.appletLabel : "");
+    }
+
+    _updateMonitorSettings() {
+        this.monitors.forEach((monitor) => {
+            monitor.setShowBusNumber(this.showBusNumber);
+            monitor.setShowCheckbox(this.manualSelectMonitors);
+        });
+    }
+
     updateMenu() {
         this.menu.removeAll();
 
         this.monitors.forEach((monitor) => {
-            monitor.addToMenu(this.menu);
+            // Pass a callback to save checkbox state
+            monitor.addToMenu(this.menu, (bus, state) => {
+                const key = String(bus);
+                this.activeMonitors[key] = state;
+                this._saveActiveMonitors();
+            });
+
+            const saved = this.activeMonitors[String(monitor.bus)];
+            if (saved !== undefined) {
+                monitor.setActive(!!saved);
+            }
+
         });
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -206,12 +320,44 @@ class DDCMultiMonitor extends Applet.IconApplet {
         });
     }
 
-    async updateMonitors(init = true) {
+    async updateMonitors(init = true, retryCount = 0) {
         this.detecting = true;
-        log("Detecting displays...");
-        this.monitors = (await getDisplays()).map(
-            (d) => new Monitor(d.index, d.name, d.bus, d.brightnessFeatureFlag)
-        );
+        
+        if (!this.enableRetryDetection) {
+            log("Detecting displays...");
+        } else {
+            log(`Detecting displays... (attempt ${retryCount + 1})`);
+        }
+        
+        this.monitors = (await getDisplays()).map((d) => {
+            const isActive = !!this.activeMonitors[String(d.bus)];
+            return new Monitor(d.index, d.name, d.bus, d.brightnessFeatureFlag, this.showBusNumber, isActive, this.manualSelectMonitors);
+        });
+
+        // RETRY LOGIC
+        const foundMonitors = this.monitors.length;
+        const targetMonitors = this.enableRetryDetection ? this.targetMonitorCount : foundMonitors;
+        const shouldRetry = this.enableRetryDetection && 
+                        foundMonitors < targetMonitors && 
+                        retryCount < this.maxRetryAttempts;
+
+        if (this.enableRetryDetection) {
+            log(`Found ${foundMonitors}/${targetMonitors} monitors`);
+        }
+
+        // If we should retry, schedule it and return early
+        if (shouldRetry) {
+            const delayMs = this.retryDelay * 1000;
+            log(`Retrying detection in ${this.retryDelay} seconds... (${foundMonitors}/${targetMonitors} monitors found)`);
+            
+            this.detecting = false;
+            setTimeout(() => {
+                this.updateMonitors(false, retryCount + 1);
+            }, delayMs);
+            
+            return;
+        }
+        // END RETRY LOGIC
 
         if (this.monitors.length === 0) {
             log("Could not find any ddc/ci displays.", "warning");
@@ -229,7 +375,31 @@ class DDCMultiMonitor extends Applet.IconApplet {
         this.detecting = false;
         if (!init) {
             this.updateMenu();
+            
+            // Log completion message
+            if (this.enableRetryDetection) {
+                const message = foundMonitors >= targetMonitors ? 
+                            `Found all ${foundMonitors} expected monitors` :
+                            `Found only ${foundMonitors}/${targetMonitors} monitors after ${retryCount + 1} attempts`;
+                log(message);
+            }
         }
+    }
+
+    _initTogglePoints() {
+        this._togglePoints = [];
+        if (this.numOfTogglePoints >= 1) this._togglePoints.push(this.togglePoint1);
+        if (this.numOfTogglePoints >= 2) this._togglePoints.push(this.togglePoint2);
+        if (this.numOfTogglePoints >= 3) this._togglePoints.push(this.togglePoint3);
+        this._currentToggleIndex = -1;
+    }
+
+    _toggleBrightnessForMonitors() {
+        if (!this._togglePoints || this._togglePoints.length === 0) return;
+        // Cycle through toggle points
+        this._currentToggleIndex = (this._currentToggleIndex + 1) % this._togglePoints.length;
+        let brightness = this._togglePoints[this._currentToggleIndex];
+        this._setBrightnessForMonitors(brightness);
     }
 
     // Change the brightness when scrolling on the icon
@@ -240,36 +410,54 @@ class DDCMultiMonitor extends Applet.IconApplet {
         }
 
         if (direction == Clutter.ScrollDirection.DOWN) {
-            clearTimeout(this.lastTooltipTimeoutID);
-            let tooltipMessage = this.monitors.map(monitor => {
-                monitor.brightness = Math.max(0, monitor.brightness - BRIGHTNESS_ADJUSTMENT_STEP);
-                monitor.setBrightness(monitor.brightness);
-                return `${monitor.name}: ${monitor.brightness}%`;
-            }).join("\n");
-
-            this.set_applet_tooltip(tooltipMessage);
-            this._applet_tooltip.show();
-            this.lastTooltipTimeoutID = setTimeout(() => {
-                this._applet_tooltip.hide();
-                this.set_applet_tooltip(DEFAULT_TOOLTIP);
-            }, 2500);
-            
+            this._incrementBrightnessForMonitors(this.brightnessAdjustmentStep, false);
         }
         else if (direction == Clutter.ScrollDirection.UP) {
-            clearTimeout(this.lastTooltipTimeoutID);
-            let tooltipMessage = this.monitors.map(monitor => {
-                monitor.brightness = Math.min(100, monitor.brightness + BRIGHTNESS_ADJUSTMENT_STEP);
-                monitor.setBrightness(monitor.brightness);
-                return `${monitor.name}: ${monitor.brightness}%`;
-            }).join("\n");
+            this._incrementBrightnessForMonitors(this.brightnessAdjustmentStep, true);
+        }
+    }
 
-            this.set_applet_tooltip(tooltipMessage);
-            this._applet_tooltip.show();
-            this.lastTooltipTimeoutID = setTimeout(() => {
-                this._applet_tooltip.hide();
-                this.set_applet_tooltip(DEFAULT_TOOLTIP);
-            }, 2500);
-        } 
+    _incrementBrightnessForMonitors(amount, isAdd) {
+
+        let monitorsToUpdate = this._getMonitorsToUpdate();
+
+        clearTimeout(this.lastTooltipTimeoutID);
+        let tooltipMessage = monitorsToUpdate.map(monitor => {
+            let newBrightness = isAdd
+                ? Math.min(100, monitor.brightness + amount)
+                : Math.max(0, monitor.brightness - amount);
+            monitor.setBrightness(newBrightness);
+            return `${monitor.name}: ${newBrightness}%`;
+        }).join("\n");
+
+        this.set_applet_tooltip(tooltipMessage);
+        this._applet_tooltip.show();
+        this.lastTooltipTimeoutID = setTimeout(() => {
+            this._applet_tooltip.hide();
+            this.set_applet_tooltip(DEFAULT_TOOLTIP);
+        }, 2500);
+    }
+
+    _setBrightnessForMonitors(brightness) {
+
+        let monitorsToUpdate = this._getMonitorsToUpdate();
+
+        clearTimeout(this.lastTooltipTimeoutID);
+        let tooltipMessage = monitorsToUpdate.map(monitor => {
+            monitor.setBrightness(brightness);
+            return `${monitor.name}: ${brightness}%`;
+        }).join("\n");
+
+        this.set_applet_tooltip(tooltipMessage);
+        this._applet_tooltip.show();
+        this.lastTooltipTimeoutID = setTimeout(() => {
+            this._applet_tooltip.hide();
+            this.set_applet_tooltip(DEFAULT_TOOLTIP);
+        }, 2500);
+    }
+
+    _getMonitorsToUpdate() {
+        return this.manualSelectMonitors ? this.monitors.filter(monitor => monitor.isActive) : this.monitors;
     }
 }
 

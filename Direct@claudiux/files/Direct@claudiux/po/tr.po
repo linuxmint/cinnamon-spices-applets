@@ -1,0 +1,417 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Gökhan Gökkaya <gokhanlnx@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"PO-Revision-Date: 2018-11-05 00:37+0300\n"
+"Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
+"Language-Team: Linux Mint Türkiye <gokhanlnx@gmail.com>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"\"MIME-Version: 1.0\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:38 applet.js:495
+msgid "SYSTEM"
+msgstr "SİSTEM"
+
+#. applet.js:38 applet.js:530
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:38 applet.js:554
+msgid "RECENT DOCUMENTS"
+msgstr "SON BELGELER"
+
+#. applet.js:160
+msgid "(Right click to open folder)"
+msgstr ""
+
+#. metadata.json->name
+#. applet.js:263
+msgid "Direct"
+msgstr "Doğrudan"
+
+#. applet.js:471
+msgid "Search Home Folder"
+msgstr "Ev Dizinini Ara"
+
+#. applet.js:504
+msgid "Search File System"
+msgstr "Dosya Sistemi Ara"
+
+#. applet.js:568
+msgid "Clear"
+msgstr "Temizle"
+
+#. applet.js:575
+msgid "Recent"
+msgstr ""
+
+#. applet.js:623
+msgid "Computer"
+msgstr "Bilgiayar"
+
+#. applet.js:629
+msgid "File System"
+msgstr "Dosya Sistemi"
+
+#. applet.js:646
+msgid "Network"
+msgstr "Ağ"
+
+#. applet.js:868
+msgid "Trash"
+msgstr "Çöp"
+
+#. search.py:43
+msgid "Open..."
+msgstr "Aç..."
+
+#. search.py:48
+msgid "Open Containing Folder..."
+msgstr "İçeren Dizini Aç..."
+
+#. search.py:85
+msgid "Search"
+msgstr "Ara"
+
+#. search.py:106
+msgid "Start in"
+msgstr "İçinde başlat"
+
+#. search.py:107
+msgid "Select a folder"
+msgstr "Bir dizin seç"
+
+#. search.py:113
+msgid "Follow symlinks"
+msgstr "Sembolik bağlantıyı izle"
+
+#. search.py:117
+msgid "Search hidden"
+msgstr "Gizlileri ara"
+
+#. search.py:121
+msgid "Use regular expressions"
+msgstr "Düzenli ifadeler kullan"
+
+#. search.py:125
+msgid "Stop"
+msgstr "Dur"
+
+#. search.py:140
+msgid "File"
+msgstr "Dosya"
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. search.py:156
+msgid "Path"
+msgstr "Hedef"
+
+#. search.py:184
+msgid "Searching..."
+msgstr "Arıyor..."
+
+#. search.py:198 search.py:199
+msgid "Search Stopped"
+msgstr "Ara Durdu"
+
+#. search.py:215
+msgid "Searching: "
+msgstr "Aranıyor: "
+
+#. search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Hata: dizini okumak için izinler yetersiz "
+
+#. search.py:252
+msgid "Search Completed"
+msgstr "Arama Tamamlandı"
+
+#. search.py:259
+msgid "Skipping"
+msgstr "Atlanıyor"
+
+#. search.py:259
+#, fuzzy
+msgid " - directory already searched"
+msgstr " - dizin zaten arandı"
+
+#. metadata.json->description
+msgid ""
+"Provides direct and easy access to your Directories, Favorites, Recent "
+"documents and System locations"
+msgstr ""
+
+#. metadata.json->comments
+msgid ""
+"The Direct@claudiux applet is a fork from the placesCenter@scollins applet, "
+"with improvements."
+msgstr ""
+
+#. settings-schema.json->generalPage->title
+msgid "General"
+msgstr "Genel"
+
+#. settings-schema.json->userPage->title
+msgid "User"
+msgstr "Kullanıcı"
+
+#. settings-schema.json->systemPage->title
+msgid "System"
+msgstr "Sistem"
+
+#. settings-schema.json->favoritesPage->title
+msgid "Favorites"
+msgstr ""
+
+#. settings-schema.json->recentPage->title
+#. settings-schema.json->recentSection->title
+msgid "Recent documents"
+msgstr "Son belgeler"
+
+#. settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr "Panel ayarları"
+
+#. settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr "Menü ayarları"
+
+#. settings-schema.json->userSection->title
+msgid "User section"
+msgstr "Kullanıcı bölümü"
+
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+msgid "Custom places"
+msgstr "Özel konumlar"
+
+#. settings-schema.json->systemSection->title
+msgid "System section"
+msgstr "Sistem bölümü"
+
+#. settings-schema.json->favoritesSection->title
+#, fuzzy
+msgid "Favorite documents"
+msgstr "Son belgeleri göster"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Panel simgesi"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr ""
+"Simge adını veya doğrudan hedefini kabul eder (sembolik simgeleri destekler)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Panel metni"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr "Menü kısayol tuşu"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "piksel"
+
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Menü simge boyutu"
+
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr ""
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->displayOrder->description
+msgid "Display order in the menu"
+msgstr ""
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
+#. settings-schema.json->noIconOnPanel->description
+msgid "No icon on panel"
+msgstr ""
+
+#. settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "Orta tıklama ile açılacak konum"
+
+#. settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "Pasifleştirmek için boş bırakın"
+
+#. settings-schema.json->dontDisplayTooltip->description
+msgid "Do not display the tooltip"
+msgstr ""
+
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "Kullanıcı bölümü"
+
+#. settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "Masaüstünü göster"
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "URI"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+msgid "Icon Name"
+msgstr ""
+
+#. settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "Çöpü göster"
+
+#. settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "Asla"
+
+#. settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "Daima"
+
+#. settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "Boş olmadığında"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "Sistem bölümü"
+
+#. settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "Bilgisayar göster"
+
+#. settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "Dosya sistemi göster"
+
+#. settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "Disk bölümlerini"
+
+#. settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr "Sadece bağlı sürücüleri göster"
+
+#. settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "Ağı göster"
+
+#. settings-schema.json->showFavorites->description
+#, fuzzy
+msgid "Show favorite documents"
+msgstr "Son belgeleri göster"
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->description
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#, fuzzy
+msgid "All Favorite Documents"
+msgstr "Son belgeler"
+
+#. settings-schema.json->favoriteSizeLimit->description
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Sayı göster"
+
+#. settings-schema.json->favoriteShowUri->description
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr ""
+
+#. settings-schema.json->favoriteIconIsStar->description
+msgid "Replace icons with stars"
+msgstr ""
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Son belgeleri göster"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+#, fuzzy
+msgid "All Recent Documents"
+msgstr "Son belgeler"
+
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr ""
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
+msgstr ""

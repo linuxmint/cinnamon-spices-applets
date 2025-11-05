@@ -36,8 +36,6 @@ const TYPES = ["actions", "applets", "desklets", "extensions", "themes"];
 const SPICES_URL = "https://cinnamon-spices.linuxmint.com";
 const HTML_COUNT_ID = "count";
 
-// <h3 class="cs-comments-amount"><span id="count">173</span> Comments</h3>
-//~ const COMMENTS_REGEX = new RegExp(`<[a-z]+ id="${HTML_COUNT_ID}">([0-9]+)</[a-z]+>`);
 const COMMENTS_REGEX = new RegExp(`<span id="${HTML_COUNT_ID}">([0-9]+)</span>`);
 const ISSUES_REGEX = new RegExp(`([0-9]+) Open`);
 
@@ -50,7 +48,6 @@ const DIR_MAP = {
 }
 
 const Gettext = imports.gettext;
-//~ Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
 
 function _(str, uuid=UUID) {
   if (str == null) return "";
@@ -65,9 +62,9 @@ function _(str, uuid=UUID) {
 const DEBUG = false;
 /**
  * Usage of log and logError:
- * log("Any message here") to log the message only if DEBUG() returns true.
- * log("Any message here", true) to log the message even if DEBUG() returns false.
- * logError("Any error message") to log the error message regardless of the DEBUG() return.
+ * log("Any message here") to log the message only if DEBUG is set to true.
+ * log("Any message here", true) to log the message even if DEBUG is set to false.
+ * logError("Any error message") to log the error message regardless of the DEBUG value.
  */
 function log(message, alwaysLog=false) {
   if (DEBUG || alwaysLog) Main._logInfo("[" + UUID + "]: " + message);
@@ -89,12 +86,10 @@ var SpiceSpyPopupSubMenuMenuItem = class SpiceSpyPopupSubMenuMenuItem extends Po
     this.needScrollbar = needScrollbar;
 
     let icon_box = new St.BoxLayout({ style: 'spacing: .25em;' });
-    //~ logDebug("icon_box: "+icon_box);
 
     let cinnamon_icon = new St.Icon({ icon_name: 'cinnamon-symbolic', icon_type: St.IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
     icon_box.add_actor(cinnamon_icon);
     this.addActor(icon_box, { expand: false, span: 1, align: St.Align.MIDDLE });
-    //~ this.addActor(icon_box);
 
     this._triangle = null;
 
@@ -105,8 +100,6 @@ var SpiceSpyPopupSubMenuMenuItem = class SpiceSpyPopupSubMenuMenuItem extends Po
       this.label = new St.Label({ text: text,
                                   y_expand: true,
                                   y_align: Clutter.ActorAlign.CENTER });
-      //~ this.label = new St.Label({ text: text });
-      //~ this.addActor(this.label);
       this.addActor(this.label, { expand: true,
                                          span: 0,
                                          align: St.Align.START });
@@ -123,7 +116,6 @@ var SpiceSpyPopupSubMenuMenuItem = class SpiceSpyPopupSubMenuMenuItem extends Po
     }
 
     this.menu = new PopupMenu.PopupSubMenu(this.actor, this._triangle);
-    //~ this._signals.connect(this.menu, 'open-state-changed', Lang.bind(this, this._subMenuOpenStateChanged));
     this._signals.connect(this.menu, 'open-state-changed', () => { this._subMenuOpenStateChanged(); });
   }
 
@@ -171,13 +163,14 @@ var SpiceSpyPopupSubMenuMenuItem = class SpiceSpyPopupSubMenuMenuItem extends Po
 }
 
 var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
-  constructor(parent, spice, new_stars, new_comments, new_translations, params) {
+  constructor(parent, spice, new_stars, new_comments, new_translations, new_commits, params) {
     super(params);
     this.parent = parent;
     this.spice = spice;
     this.new_stars = new_stars; // boolean
     this.new_comments = new_comments; // boolean
     this.new_translations = new_translations; // boolean
+    this.new_commits = new_commits; // boolean
     this.url = this.spice.url;
 
     let label_text;
@@ -189,13 +182,17 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
       else
         label_text = spice.name;
     }
+    if (this.new_commits && this.parent.show_commits)
+      label_text = COMMIT_CHAR + " " + label_text;
+
     let label = new St.Label({ text: label_text, reactive: true, track_hover: true });
 
     let label_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true });
     label_box.add_actor(label);
     label_box.connect("enter-event", () => { this.url = this.spice.url });
     this.addActor(label_box);
-
+    label_box.opacity = (this.new_commits && this.parent.show_commits) ? 255 : this.parent.standard_opacity;
+    if (this.new_commits && this.parent.show_commits) label_box.set_style("color: %s;".format(this.parent.color_on_change));
 
 
     let stars_box = new St.BoxLayout({ style: "spacing: .25em;" , reactive: true, track_hover: true, can_focus: true });
@@ -216,7 +213,6 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
     this.comments_box.add_actor(comments_icon);
     this.comments_box.add_actor(this.comments_label);
     let comments_tooltip = new Tooltips.Tooltip(this.comments_box, _("comments"));
-    //~ this.comments_box.track_hover = true;
     this.comments_box.connect("enter-event", () => { this.url = this.spice.url+"#count" });
     this.addActor(this.comments_box);
     this.comments_box.opacity = (this.new_comments) ? 255 : this.parent.standard_opacity;
@@ -266,7 +262,6 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
         icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.FULLCOLOR, icon_size: this.parent.icon_size });
       } else {
         let icon_name = "spices-"+spice.type;
-        //~ icon_file = Gio.file_new_for_path(icon_path);
         icon = new St.Icon({ icon_name, icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
       }
       icon_box.add_actor(icon);
@@ -306,30 +301,33 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
     _boxGetPreferredHeight (actor, forWidth, alloc) {
         [alloc.min_size, alloc.natural_size] = this.box.get_preferred_height(forWidth || 0);
     }
-
-  //~ destroy() {
-    //~ this.comments_label = null;
-    //~ this.comments_box = null;
-    //~ super.destroy();
-  //~ }
 };
 
 class TitleSeparatorMenuItem extends PopupMenu.PopupBaseMenuItem {
-  constructor(title, icon_name) {
-    super({ reactive: false });
+  constructor(type, title, icon_name) {
+    super({ reactive: true });
     if (typeof icon_name === "string") {
+      let icon_box = new St.BoxLayout({ style: 'spacing: .25em;', reactive: true, track_hover: true, can_focus: true });
       let icon = new St.Icon({ icon_name, icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
-      //~ this.addActor(icon, { span: 0 });
-      this.addActor(icon);
+      icon_box.add_actor(icon);
+      this.addActor(icon_box);
+      new Tooltips.Tooltip(icon_box, _("Reload icons"));
+      icon_box.connect("button-press-event", () => { Util.spawnCommandLineAsync(`/usr/bin/env bash -c 'cinnamon-settings ${type} -t 1 -s 4'`) });
     }
+    let label_box = new St.BoxLayout({ style: 'spacing: .25em;', reactive: true, track_hover: true, can_focus: true });
     this.label = new St.Label({ text: title, style_class: "popup-subtitle-menu-item" });
-    this.addActor(this.label);
+    label_box.add_actor(this.label);
+    new Tooltips.Tooltip(label_box, _("Visit website"));
+    this.addActor(label_box);
+    label_box.connect("button-press-event", () => { Util.spawnCommandLineAsync(`xdg-open "https://cinnamon-spices.linuxmint.com/${type}/"`) });
   }
 }
 
 const STAR_CHAR = "★";
 const MESSAGE_CHAR = "✉";
 const FLAG_CHAR = "⚑";
+const ISSUE_CHAR = " ⚠"; //ⓘ: too strong!
+const COMMIT_CHAR = "↻";
 
 class SpiceSpy extends Applet.TextIconApplet {
   constructor(metadata, orientation, panel_height, instance_id) {
@@ -342,7 +340,6 @@ class SpiceSpy extends Applet.TextIconApplet {
 
     this.menuManager = new PopupMenu.PopupMenuManager(this);
     this.menu = new Applet.AppletPopupMenu(this, orientation);
-    //~ this.menu = new PopupMenu.PopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
 
     this.issuesJsonLoopId = null;
@@ -368,23 +365,17 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.update_interval = 0.5 * Math.round(this.settings.getValue("update-interval") / 30);
       this.settings.setValue("update-interval", -1);
     }
-    //~ this.settings.bind("standard-opacity", "standard_opacity", this.make_menu.bind(this));
     this.settings.bind("standard-opacity", "standard_opacity");
-    //~ this.settings.bind("color-on-change", "color_on_change", this.make_menu.bind(this));
     this.settings.bind("color-on-change", "color_on_change", () => { this.make_menu() });
-    //~ this.settings.bind("show-icon-in-menu", "show_icon_in_menu");
     this.show_icon_in_menu = true;
     this.settings.bind("icon-size", "icon_size");
-    //~ this.settings.bind("show-translations", "show_translations");
-    this.show_translations = true;
-    this.settings.bind("show-issues", "show_issues");
-    this.show_issues = true;
+    this.settings.bind("show-translations", "show_translations", () => { this._reload_this_applet() });
+    this.settings.bind("show-commits", "show_commits", () => { this._reload_this_applet() });
+    this.settings.bind("show-issues", "show_issues", () => { this._reload_this_applet() });
     this.settings.bind("sort-by", "sort_by");
     this.settings.bind("show-uuid", "show_uuid");
     this.settings.bind("translate-name", "translate_name");
-    //~ this.settings.bind("display-on-panel", "display_on_panel", this.make_menu.bind(this));
     this.settings.bind("display-on-panel", "display_on_panel");
-    //~ this.settings.bind("useful-only", "useful_only", this.make_menu.bind(this));
     this.settings.bind("useful-only", "useful_only", () => { this.make_menu() });
     this.settings.bind("author-list", "author_list", () => { this.update_authors() });
     this.settings.bind("uuid-list", "uuid_list", () => { this.update_uuids() });
@@ -393,7 +384,6 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of get_user_settings
 
   update_interval_value() {
-    //~ this.update_interval = 0.5 * Math.round(this.update_interval * 2);
     const sec = Math.round(this.update_interval * 3600); // From hours to seconds.
     if (this.loopId != null) {
       let id = this.loopId;
@@ -485,20 +475,44 @@ class SpiceSpy extends Applet.TextIconApplet {
     return (keys_spices_to_spy.length < 5);
   } // End of is_empty
 
-  updateUI(score=0, comments=0, translations=0) {
-    let _label;
-    //~ if (this.show_translations)
-      //~ _label = "%s %s\n%s %s\n%s %s".format(STAR_CHAR, score.toString(), MESSAGE_CHAR, comments.toString(), FLAG_CHAR, translations.toString());
-    //~ else
-      //~ _label = "%s %s\n%s %s".format(STAR_CHAR, score.toString(), MESSAGE_CHAR, comments.toString());
-    //~ this.set_applet_label(_label);
-    if (score==0 && comments==0 && translations==0) {
+  updateUI(score=0, comments=0, issues=0, translations=0, commits=0) {
+    var _label = "";
+    var _labels = [];
+    if (score==0 && comments==0 && issues==0 && translations==0  && commits==0) {
       if (this.display_on_panel === "normal") {
         this.actor.show();
-        if (!this.useful_only)
+        if (!this.useful_only) {
+          _labels = [`${STAR_CHAR} 0`, `${MESSAGE_CHAR} 0`];
+          if (this.show_issues)
+            _labels.push(`${ISSUE_CHAR} 0`);
+          if (this.show_translations)
+            _labels.push(`${FLAG_CHAR} 0`);
+          if (this.show_commits)
+            _labels.push(`${COMMIT_CHAR} 0`);
+
+          if (this.is_vertical) {
+            _label = ""+_labels.join("\n");
+          } else {
+            if (_labels.length * 20 <= this._panelHeight) {
+              _label = ""+_labels.join("\n");
+            } else if (_labels.length * 20 <= 2 * this._panelHeight) {
+              for (let i=0, len=_labels.length; i<len; i++) {
+                _label += ""+_labels[i];
+                if (i == 1)
+                  _label += "\n";
+                else
+                  _label += "  ";
+              }
+            } else {
+              _label = ""+_labels.join("  ");
+            }
+          }
+          this.set_applet_label(_label);
+          this.actor.show();
           this.showLabel();
-        else
+        } else {
           this.hideLabel();
+        }
       } else if (this.display_on_panel === "icon") {
         this.actor.show();
         this.hideLabel();
@@ -509,17 +523,27 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.actor.set_style(null);
       this._applet_label.set_style(null);
     } else {
-      let _labels = [];
       if (!this.useful_only || score!=0) _labels.push("%s %s".format(STAR_CHAR, score.toString()));
       if (!this.useful_only || comments!=0) _labels.push("%s %s".format(MESSAGE_CHAR, comments.toString()));
+      if (!this.useful_only || (this.show_issues && issues!=0)) _labels.push("%s %s".format(ISSUE_CHAR, issues.toString()));
       if (!this.useful_only || (this.show_translations && translations!=0)) _labels.push("%s %s".format(FLAG_CHAR, translations.toString()));
+      if (!this.useful_only || (this.show_commits && commits!=0)) _labels.push("%s %s".format(COMMIT_CHAR, commits.toString()));
       if (this.is_vertical) {
         _label = ""+_labels.join("\n");
       } else {
-        if (_labels.length * 20 <= this._panelHeight)
+        if (_labels.length * 20 <= this._panelHeight) {
           _label = ""+_labels.join("\n");
-        else
+        }else if (_labels.length * 20 <= 2 * this._panelHeight) {
+          for (let i=0, len=_labels.length; i<len; i++) {
+            _label += ""+_labels[i];
+            if (i == 1)
+              _label += "\n";
+            else
+              _label += "  ";
+          }
+        } else {
           _label = ""+_labels.join("  ");
+        }
       }
       this.set_applet_label(_label);
       this.actor.show();
@@ -527,11 +551,9 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.actor.set_style("color: %s;".format(this.color_on_change));
       this._applet_label.set_style("color: %s;".format(this.color_on_change));
     }
-
   } // End of updateUI
 
   issuesJobs_loop() {
-    //~ logDebug("issuesJobs_loop()\n");
     if (this.issuesJobsList.length > 0) {
       const [type, uuid] = this.issuesJobsList.shift();
       this.do_issuesJob(type, uuid);
@@ -543,41 +565,38 @@ class SpiceSpy extends Applet.TextIconApplet {
     const jsonFile = Gio.file_new_for_path(jsonFilePath);
     if (!jsonFile.query_exists(null)) return;
 
-    const [success, jsonFileContents] = GLib.file_get_contents(jsonFilePath);
-    if (!success) return;
+    let [success, jsonFileContents] = GLib.file_get_contents(jsonFilePath);
+    if (!success) {
+      GLib.free(jsonFileContents);
+      return;
+    }
 
-    //~ const data = JSON.parse(JSON.stringify(jsonFileContents, null, "\t"));
     const data = eval(to_string(jsonFileContents).replace(/\n/g, "")); //.replace(/\}\]\[\{/g, "},{"));
     const fullName = uuid;
-    //~ const nickName = fullName.split("@")[0];
     var issuesNumber = 0;
 
     for (let d of data) {
-      //~ logDebug("do_issuesJob 434: "+d["title"]);
       if ((d["title"] && d["title"].includes(fullName)) || (d["body"] && d["body"].includes(fullName))) {
         issuesNumber += 1;
       }
     }
-    //~ logDebug("do_issuesJob: "+type+" "+uuid+": "+issuesNumber+" issues.");
     if (this.spices_to_spy[type][uuid])
       this.spices_to_spy[type][uuid]["issues"] = issuesNumber;
+    GLib.free(jsonFileContents);
     this.make_menu();
   } // End of do_issuesJob
 
   do_issuesJob_OLD(type, spice, command) {
-    //~ logDebug("do_issuesJob type: "+type+" spice: "+spice+" command: "+command);
     if (!this.spices_to_spy[type] || !this.spices_to_spy[type][spice]) {
       this.issuesJobsList.push([type, spice, command]);
       return
     }
     let subProcess = Util.spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
       if (exitCode == 0) {
-        //~ logDebug("exitCode: 0");
         let _nb_issues = parseInt(stdout);
         if (_nb_issues == null || isNaN(_nb_issues)) _nb_issues = 0;
         this.spices_to_spy[type][spice]['issues'] = _nb_issues
       } else if (exitCode == 1) {
-        //~ logDebug("exitCode: 1");
         this.spices_to_spy[type][spice]['issues'] = 0;
       }
       this.make_menu(); //???
@@ -586,52 +605,35 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of do_issuesJob_OLD
 
   commentsJobs_loop() {
-    //~ if (!this.is_looping) {
-      //~ this.commentsJobsList = [];
-      //~ return false;
-    //~ }
-
     if (this.commentsJobsList.length > 0) {
       const [type, spice, page] = this.commentsJobsList.shift();
       this.do_commentsJob(type, spice, page);
     }
-
-    //~ return this.is_looping;
   } // End of commentsJobs_loop
 
   async do_commentsJob(type, spice, page) {
-    //~ logDebug(`do_commentsJob(${type}, ${spice}, ${page})`);
     if (!this.spices_to_spy[type] || !this.spices_to_spy[type][spice]) {
       this.commentsJobsList.push([type, spice, page]);
-      //~ logDebug("Re-inserted at the end of the list.")
       return
     }
     var http = new HttpLib();
     let response = await http.LoadAsync(page.slice(0, -6));
     if (response.Success) {
-      //~ logDebug("Success");
       let result = COMMENTS_REGEX.exec(response.Data);
-      //~ logDebug("result: "+result);
       if (result && result[1]) {
         let count = parseInt(result[1]);
-        //~ logDebug("count: "+count);
         this.spices_to_spy[type][spice]['comments'] = count;
-        //~ this.make_menu();
       } else {
         global.logWarning(spices[spice]['uuid'] + ": This spice is cached in the "
         + ".json file but doesn't actually exist in the "
         + "Spices now OR the Cinnamon Spices changed the ID "
         + "(please report if there are 0 items)");
       }
-    } else {
-      //~ logDebug("Check and mate");
     }
     this.make_menu();
   } // End of do_commentsJob
 
   loop() {
-    //~ logDebug("loop() this.fistTime:"+this.fistTime+" this.is_looping:"+this.is_looping);
-    //~ if (!this.is_looping) return false;
     let id;
     if (this.loopId != null ) {
       id = this.loopId;
@@ -642,7 +644,6 @@ class SpiceSpy extends Applet.TextIconApplet {
     // Initialization (first time this applet is launched):
     const old_keys = Object.keys(this.old_spices_to_spy);
     if (old_keys.length < 5) {
-      //~ this.settings.setValue("old_spices_to_spy", this.spices_to_spy);
       this.old_spices_to_spy = this.spices_to_spy;
     }
 
@@ -655,8 +656,12 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.update_issues();
       this.update_comments();
 
-      this.settings.setValue("spices_to_spy", this.spices_to_spy);
-      this.settings.setValue("old_spices_to_spy", this.old_spices_to_spy);
+      let spices_to_spy = this.spices_to_spy;
+      this.settings.setValue("spices_to_spy", spices_to_spy);
+      let old_spices_to_spy = this.old_spices_to_spy;
+      this.settings.setValue("old_spices_to_spy", old_spices_to_spy);
+      spices_to_spy = null;
+      old_spices_to_spy = null;
     }
     this.fistTime = false;
     this.set_applet_tooltip(this.metadata.name);
@@ -761,13 +766,14 @@ class SpiceSpy extends Applet.TextIconApplet {
                               this.spices_to_spy[type][""+spices[spice]["uuid"]] &&
                               this.spices_to_spy[type][""+spices[spice]["uuid"]]["issues"] != null
                             ) ? this.spices_to_spy[type][""+spices[spice]["uuid"]]["issues"] : 0,
+                "last_commit": spices[spice]["last_commit"],
               }
             }
           }
         }
+        GLib.free(array_chars);
       }
     }
-    //~ this.settings.setValue("spices_to_spy", _spices_to_spy);
     this.spices_to_spy = _spices_to_spy;
   } // End of get_spices_to_spy
 
@@ -795,35 +801,16 @@ class SpiceSpy extends Applet.TextIconApplet {
         this.issuesJobsList.push([type, uuid]);
       }
     }
-    //~ logDebug("update_issues() this.issuesJobsList: "+this.issuesJobsList.join("\n"));
   } // End of update_issues
 
   update_issues_OLD() {
     const GET_ISSUES_SCRIPT = SCRIPTS_DIR+"/get-issues.sh"
     const interval = 5000; //ms = 5 seconds.
-    //~ var index = 0;
     for (let type of TYPES) {
       let spices = this.spices_to_spy[type];
       for (let spice of Object.keys(spices)) {
-        //~ let id = setTimeout( () => { //old: async () => {
-          //~ clearTimeout(id);
-          let command = ""+GET_ISSUES_SCRIPT+" "+type+" "+spices[spice]['uuid'];
-          this.issuesJobsList.push(type, spice, command);
-          //~ let subProcess = Util.spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
-            //~ if (exitCode == 0) {
-              //~ let _nb_issues = parseInt(stdout);
-
-              //~ if (_nb_issues == null || isNaN(_nb_issues)) _nb_issues = 0;
-              //~ this.spices_to_spy[type][spice]['issues'] = _nb_issues;
-              //~ this.make_menu();
-            //~ } else if (exitCode == 1) {
-              //~ this.spices_to_spy[type][spice]['issues'] = 0;
-              //~ this.make_menu();
-            //~ }
-            //~ subProcess.send_signal(9);
-          //~ }));
-        //~ }, index*interval);
-        //~ index += 1;
+        let command = ""+GET_ISSUES_SCRIPT+" "+type+" "+spices[spice]['uuid'];
+        this.issuesJobsList.push(type, spice, command);
       }
     }
   } // End of update_issues_OLD
@@ -832,55 +819,47 @@ class SpiceSpy extends Applet.TextIconApplet {
     var total_diff_score = 0;
     var total_diff_comments = 0;
     var total_diff_translations = 0;
-
-    //~ if (this.nothing_to_spy())
-      //~ this.set_applet_tooltip(_("No Spice to spy.\nPlease configure me!"));
-    //~ else if (this.is_empty())
-      //~ this.set_applet_tooltip(_("Please wait..."));
-    //~ else
-      //~ this.set_applet_tooltip(this.metadata.name);
-    //~ this.fistTime = true;
+    var total_diff_issues = 0;
+    var total_diff_commits  = 0;
 
     if (this.menu) {
       this.menu.removeAll();
     } else {
       this.menu = new Applet.AppletPopupMenu(this, this.orientation);
-      //~ this.menu = new PopupMenu.PopupMenu(this, this.orientation);
       this.menuManager.addMenu(this.menu);
     }
 
-    //~ this.spicesSection = new PopupMenu.PopupSubMenuMenuItem(_("Spices"));
     this.spicesSection = new SpiceSpyPopupSubMenuMenuItem(_("Spices"));
-    //~ this.spicesSection = new PopupMenu.PopupSubMenu(this.actor, null);
     this.spicesSection.menu.actor.vscrollbar_policy = St.PolicyType.ALLWAYS;
     this.spicesSection.menu.actor.hscrollbar_policy = St.PolicyType.NEVER;
     this.spicesSection.menu._needsScrollbar = function() {
       return true;
     }
-    //~ logDebug("global.screen_height: "+global.screen_height);
-    //~ this.spicesSection.actor.style = "height: %spx;width: %spx;spacing: 0px;padding:0px;expand: true;".format((1*global.screen_height - 240).toString(), (560+this.icon_size-24).toString());
     this.spicesSection.actor.style = "width: %spx;spacing: 0px;padding:0px;expand: false;".format((560+this.icon_size-24).toString());
-    //~ this.spicesSection.menu.open();
-
-    //~ this.spicesSection.box.set_vertical(true);
 
     this.menu.addMenuItem(this.spicesSection);
 
     if (this.spices_to_spy) {
       for (let type of TYPES) {
-        //if (!this.spices_to_spy || !this.spices_to_spy[type]) continue;
         var menuItems = [];
         const uuids = (this.spices_to_spy[type]) ? Object.keys(this.spices_to_spy[type]) : [];
         if (uuids.length > 0) {
           let title = type[0].toUpperCase() + type.substring(1);
-          //this.menu.addMenuItem(new TitleSeparatorMenuItem(_(title), `spices-${type}-symbolic`));
-          this.spicesSection.menu.addMenuItem(new TitleSeparatorMenuItem(_(title), `spices-${type}-symbolic`));
+          this.spicesSection.menu.addMenuItem(new TitleSeparatorMenuItem(type, _(title), `spices-${type}-symbolic`));
           for (let uuid of uuids) {
             let spice = this.spices_to_spy[type][uuid];
             let diff_comments = 0;
             let diff_stars = 0;
             let diff_translations = 0;
+            let diff_issues = 0;
+            let diff_commits = 0;
             if (this.old_spices_to_spy[type][uuid]) {
+              if (this.old_spices_to_spy[type][uuid]["last_commit"] != null && this.old_spices_to_spy[type][uuid]["last_commit"].length > 0) {
+                if (this.old_spices_to_spy[type][uuid]["last_commit"] != spice["last_commit"])
+                  diff_commits = 1;
+              } else {
+                this.old_spices_to_spy[type][uuid]["last_commit"] = spice["last_commit"];
+              }
               diff_comments = this.spices_to_spy[type][uuid]["comments"] - this.old_spices_to_spy[type][uuid]["comments"];
               if (diff_comments < 0) {
                 diff_comments = 0;
@@ -890,17 +869,23 @@ class SpiceSpy extends Applet.TextIconApplet {
               diff_translations = this.spices_to_spy[type][uuid]["translations"] - this.old_spices_to_spy[type][uuid]["translations"];
               if (isNaN(diff_translations))
                 diff_translations = this.spices_to_spy[type][uuid]["translations"];
+              diff_issues = this.spices_to_spy[type][uuid]["issues"] - this.old_spices_to_spy[type][uuid]["issues"];;
+              if (isNaN(diff_issues))
+                diff_issues = this.spices_to_spy[type][uuid]["issues"];
             }
             else {
               diff_comments = this.spices_to_spy[type][uuid]["comments"];
               diff_stars = this.spices_to_spy[type][uuid]["score"];
               diff_translations = this.spices_to_spy[type][uuid]["translations"];
+              diff_issues = this.spices_to_spy[type][uuid]["issues"];
+              //~ diff_commits = this.spices_to_spy[type][uuid]["last_commit"];
             }
             total_diff_score += diff_stars;
             total_diff_comments += diff_comments;
             total_diff_translations += diff_translations;
-            //~ spice.comments = diff_comments;
-            let menuItem = new SpiceMenuItem(this, spice, diff_stars != 0, diff_comments != 0, diff_translations != 0);
+            total_diff_issues += diff_issues;
+            total_diff_commits += diff_commits;
+            let menuItem = new SpiceMenuItem(this, spice, diff_stars != 0, diff_comments != 0, diff_translations != 0, diff_commits != 0);
             menuItems.push(menuItem);
           }
           if (menuItems.length > 0) {
@@ -928,12 +913,10 @@ class SpiceSpy extends Applet.TextIconApplet {
             }
 
             for(let item of menuItems)
-              this.spicesSection.menu.addMenuItem(item);//this.menu.addMenuItem(item);
+              this.spicesSection.menu.addMenuItem(item);
           }
         }
       }
-      //~ setTimeout( () => { this.spicesSection.menu.open() }, 0);
-      //~ this.spicesSection.menu.open();
 
       let read_all = new PopupMenu.PopupIconMenuItem(_("Mark all as read"), "object-select", St.IconType.SYMBOLIC);
       read_all.connect("activate",
@@ -978,54 +961,43 @@ class SpiceSpy extends Applet.TextIconApplet {
     );
     this.menu.addMenuItem(config_button);
 
-    //~ this.spicesSection.menu.open();
     this.spicesSection.menu.toggle();
-    //~ this.spicesSection.menu.close();
 
-    this.updateUI(total_diff_score, total_diff_comments, total_diff_translations);
+    this.updateUI(total_diff_score, total_diff_comments, total_diff_issues, total_diff_translations, total_diff_commits);
   } // End of make_menu
 
   mark_all_as_read() {
-    //~ this.settings.setValue("old_spices_to_spy", this.spices_to_spy);
     this.old_spices_to_spy = this.spices_to_spy;
-    //~ this.make_menu();
+    this.updateUI();
   } // End of mark_all_as_read
 
   mark_as_read(spice) {
     if (!spice) return;
     this.old_spices_to_spy[spice.type][spice.uuid] = this.spices_to_spy[spice.type][spice.uuid];
-    //~ this.settings.setValue("old_spices_to_spy", this.old_spices_to_spy);
     this.make_menu();
+    this.updateUI();
   } // End of mark_as_read
 
   on_applet_added_to_panel() {
-    //~ logDebug("on_applet_added_to_panel()");
     this.is_looping = true;
     this.get_user_settings();
 
     this.renew_caches();
-    //~ this.update_authors();
-    //~ this.update_uuids();
-    //~ this.get_spices_to_spy();
-    //~ this.update_issues();
-    //~ this.update_comments();
 
     this.loopId = timeout_add_seconds(60, () => { this.loop() });
     this.jobsLoopId = timeout_add_seconds(15, () => { this.commentsJobs_loop(); return this.is_looping; });
 
     this.update_issues_json();
-    //~ this.make_menu();
     this.updateUI();
   } // End of on_applet_added_to_panel
 
   on_applet_clicked() {
-    this.settings.setValue("spices_to_spy", this.spices_to_spy);
+    let spices_to_spy = this.spices_to_spy;
+    this.settings.setValue("spices_to_spy", spices_to_spy);
     if (!this.menu || (this.menu && !this.menu.isOpen))
       this.make_menu();
     if (this.menu) this.menu.toggle();
-    //~ try {
-      //~ if (this.spicesSection) this.spicesSection.menu.toggle();
-    //~ } catch(e) {}
+    spices_to_spy = null;
   } // End of on_applet_clicked
 
   on_applet_removed_from_panel() {

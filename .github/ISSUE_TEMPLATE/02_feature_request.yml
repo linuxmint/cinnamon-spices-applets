@@ -33,7 +33,7 @@ body:
     - bluetooth-battery@zamszowy @zamszowy
     - bose@tuuxx @tuuxx
     - Bps@claudiux @claudiux
-    - brightness-and-gamma-applet@cardsurf @cardsurf
+    - brightness-and-gamma-applet@cardsurf @claudiux
     - bumblebee@pdcurtis @pdcurtis
     - c-eyes@anaximeno @anaximeno
     - calc-js@ptandler @ptandler
@@ -75,6 +75,7 @@ body:
     - disk-read-and-write-speed@cardsurf @cardsurf
     - download-and-upload-speed@cardsurf @cardsurf
     - duolingo-helper@nodeengineer.com @nodeengineer
+    - envycontrol@zamszowy @zamszowy
     - Exit@claudiux @claudiux
     - expressvpn@Hukuta @Hukuta
     - feeds@jonbrettdev.wordpress.com @jake1164
@@ -82,6 +83,7 @@ body:
     - force-quit@cinnamon.org
     - fw_fanctrl@juleskreuer.eu @not-a-feature
     - gamemode@axel358 @axel358
+    - Gears@claudiux @claudiux
     - github-projects@morgan-design.com @jamesmorgan
     - gmail@lauritsriple @lauritsriple
     - gnote@brett-smith @brett-smith
@@ -117,6 +119,7 @@ body:
     - Mint-Unsplash-Background@omidmaldar @omidmaldar
     - MonitorInputSource@klangman @klangman
     - moonphase@techi-freki @Techi-Freki
+    - mouse-keys-shortcut@GabrielCamara3526 @GabrielCamara3526
     - multicore-sys-monitor@ccadeptic23 @claudiux
     - MuteToggler@jebeaudet.com @jebeaudet
     - mybookmarks@markbokil.com @Centurix
@@ -150,6 +153,7 @@ body:
     - printers@linux-man @linux-man
     - ProcessMemoryMonitor@claudiux @claudiux
     - profile-switcher@pixunil @pixunil
+    - proxy-mode@yrtimid @yrtimiD
     - ptt@thbemme @thbemme
     - qredshift@quintao @raphaelquintao
     - Radio3.0@claudiux @claudiux
@@ -217,6 +221,7 @@ body:
     - turn-off-monitor@zablotski @zablotski
     - tzclock@lhriley @lhriley
     - uiscaler@joka42 @joka42
+    - updates-notifier@zamszowy @zamszowy
     - uptime@vatanuki.kun
     - vboxlauncher@mockturtl @mockturtl
     - vnstat@linuxmint.com @pdcurtis

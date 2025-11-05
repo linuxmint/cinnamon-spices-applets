@@ -1,3 +1,15 @@
+### v2.3.2~20251022
+* Displays the currently used preset in the tooltip.
+
+### v2.3.1~20251013
+* Allows you to set maximum values up to 200 in presets.
+
+### v2.3.0~20250926
+* The changes can now be applied smoothly.
+
+### v2.2.0~20250902
+* Presets are now accessible via the menu.
+
 ### v2.1.3~20250810
 * Fixes [#7510](https://github.com/linuxmint/cinnamon-spices-applets/issues/7510)
 * Return of option in General tab: "Apply when the number of monitors changes".

@@ -58,15 +58,14 @@ msgid "Critical error"
 msgstr "Errore critico"
 
 #. 5.8/lib/time_change_listener/time_change_listener.js:28
-#, fuzzy
 msgid ""
 "Missing dependencies `make` and/or `g++`. Install them, in e.g. on Debian-"
 "based system with `sudo apt install make g++`, then reload the applet in "
 "restarting Cinnamon."
 msgstr ""
-"Dipendenze mancanti `make` e `gcc`. Installarle, ad esempio su un sistema "
-"basato su Debian con `sudo apt install build-essential`, quindi ricaricare "
-"l'applet (ad esempio riavviando Cinnamon)."
+"Dipendenze mancanti `make` e/o `g++`. Installarle, ad esempio su un sistema "
+"basato su Debian, con `sudo apt install make g++`, quindi ricaricare "
+"l'applet riavviando Cinnamon."
 
 #. 5.8/lib/time_change_listener/time_change_listener.js:41
 msgid "Compilation of"
@@ -103,20 +102,19 @@ msgstr "a causa di un formato errato"
 #. 5.8/lib/commands_launcher/commands_launcher.js:44
 #. 5.8/lib/commands_launcher/commands_launcher.js:50
 msgid "Detail"
-msgstr ""
+msgstr "Dettagli"
 
 #. 5.8/lib/commands_launcher/commands_launcher.js:42
 msgid "due to time expiration"
 msgstr "a causa della scadenza del tempo"
 
 #. 5.8/lib/commands_launcher/commands_launcher.js:48
-#, fuzzy
 msgid "due to an error"
-msgstr "a causa di un formato errato"
+msgstr "a causa di un errore"
 
 #. 2.2/applet.js:20
 msgid "this applet is only supported by"
-msgstr ""
+msgstr "questa applet è solo supportata da"
 
 #. metadata.json->name
 msgid "Automatic dark/light themes"
@@ -238,9 +236,8 @@ msgstr "Longitudine geografica in gradi decimali"
 
 #. 5.8->settings-schema.json->settings_location_button_show-twilight-
 #. times->description
-#, fuzzy
 msgid "Show switch times in a notification"
-msgstr "Controlla gli orari di cambio di oggi in una notifica"
+msgstr "Mostra gli orari di cambio in una notifica"
 
 #. 5.8->settings-schema.json->settings_location_button_show-twilight-
 #. times->tooltip
@@ -319,9 +316,8 @@ msgstr "Nome del tema del desktop (tema Cinnamon)"
 #. 5.8->settings-schema.json->light-mode_background_button_apply->description
 #. 5.8->settings-schema.json->dark-mode_themes_button_apply->description
 #. 5.8->settings-schema.json->dark-mode_background_button_apply->description
-#, fuzzy
 msgid "Test applying to the system"
-msgstr "Applica al sistema"
+msgstr "Testa applicando al sistema"
 
 #. 5.8->settings-schema.json->light-mode_themes_button_apply->tooltip
 msgid "Apply the light mode themes to the system manually"
@@ -431,7 +427,6 @@ msgid "Command"
 msgstr "Comando"
 
 #. 5.8->settings-schema.json->light-mode_commands_list->tooltip
-#, fuzzy
 msgid ""
 "List of commands to be executed when switching to this mode\n"
 "\n"
@@ -445,25 +440,24 @@ msgid ""
 msgstr ""
 "Elenco dei comandi da eseguire quando si passa a questa modalità\n"
 "\n"
-"Nota:\n"
-"- lo scopo del nome è per i messaggi di errore\n"
-"- il tempo di scadenza uccide il processo del comando\n"
+"Note:\n"
+"- il nome serve per i messaggi di errore\n"
+"- il tempo di scadenza termina anticipatamente il processo del comando\n"
 "- una scadenza di 0 secondi significa mai\n"
-"- nessun processo figlio potrà scadere\n"
-"- il percorso è nella directory ~\n"
-"- i messaggi di errore segnalano stderr quando lo stato di ritorno non è 0 e "
-"appariranno in una notifica"
+"- un processo che rifiuta di terminare 10 secondi dopo la scadenza viene "
+"terminato\n"
+"- il percorso si trova nella directory home dell'utente (~/)\n"
+"- i messaggi di errore vengono visualizzati in una notifica e riportano "
+"stderr"
 
 #. 5.8->settings-schema.json->light-mode_commands_button_launch->description
 #. 5.8->settings-schema.json->dark-mode_commands_button_launch->description
-#, fuzzy
 msgid "Test commands launch"
-msgstr "Comandi personalizzati"
+msgstr "Avvia i comandi di prova"
 
 #. 5.8->settings-schema.json->light-mode_commands_button_launch->tooltip
-#, fuzzy
 msgid "Test launching the commands set for the light mode"
-msgstr "Avvia i comandi impostati per la modalità chiara"
+msgstr "Prova ad avviare i comandi impostati per la modalità chiara"
 
 #. 5.8->settings-schema.json->dark-mode_themes_button_detect->tooltip
 msgid ""
@@ -520,6 +514,5 @@ msgstr ""
 "appariranno in una notifica"
 
 #. 5.8->settings-schema.json->dark-mode_commands_button_launch->tooltip
-#, fuzzy
 msgid "Test launching the commands set for the dark mode"
-msgstr "Avvia i comandi impostati per la modalità scura"
+msgstr "Prova ad avviare i comandi impostati per la modalità scura"

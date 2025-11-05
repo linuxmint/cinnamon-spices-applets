@@ -10,14 +10,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-05-18 11:37+0200\n"
-"PO-Revision-Date: 2024-10-28 02:52+0100\n"
+"PO-Revision-Date: 2025-09-28 16:17+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. 5.8/applet.js:33
 msgid "Click: toggle dark/light mode"
@@ -59,15 +59,14 @@ msgid "Critical error"
 msgstr "Error crític"
 
 #. 5.8/lib/time_change_listener/time_change_listener.js:28
-#, fuzzy
 msgid ""
 "Missing dependencies `make` and/or `g++`. Install them, in e.g. on Debian-"
 "based system with `sudo apt install make g++`, then reload the applet in "
 "restarting Cinnamon."
 msgstr ""
-"Falten les dependències `make` i `gcc`. Instal·leu-les, per exemple, en "
-"sistemes basats en Debian, amb `sudo apt install build-essential` i "
-"recarregueu la miniaplicació (per exemple, reiniciant Cinnamon)."
+"Falten les dependències `make` i/o `g++`. Instal·leu-les, per exemple, en "
+"sistemes basats en Debian, amb `sudo apt install make g++` i recarregueu la "
+"miniaplicació reiniciant Cinnamon."
 
 #. 5.8/lib/time_change_listener/time_change_listener.js:41
 msgid "Compilation of"
@@ -104,20 +103,19 @@ msgstr "degut a un format invàlid"
 #. 5.8/lib/commands_launcher/commands_launcher.js:44
 #. 5.8/lib/commands_launcher/commands_launcher.js:50
 msgid "Detail"
-msgstr ""
+msgstr "Detall"
 
 #. 5.8/lib/commands_launcher/commands_launcher.js:42
 msgid "due to time expiration"
 msgstr "degut a l'esgotament del temps"
 
 #. 5.8/lib/commands_launcher/commands_launcher.js:48
-#, fuzzy
 msgid "due to an error"
-msgstr "degut a un format invàlid"
+msgstr "per culpa d'un error"
 
 #. 2.2/applet.js:20
 msgid "this applet is only supported by"
-msgstr ""
+msgstr "aquesta miniaplicació només és suportada per"
 
 #. metadata.json->name
 msgid "Automatic dark/light themes"
@@ -238,9 +236,8 @@ msgstr "Longitud geogràfica en graus decimals"
 
 #. 5.8->settings-schema.json->settings_location_button_show-twilight-
 #. times->description
-#, fuzzy
 msgid "Show switch times in a notification"
-msgstr "Revisa els horaris de canvi d'avui en una notificació"
+msgstr "Mostra els horaris de canvi en una notificació"
 
 #. 5.8->settings-schema.json->settings_location_button_show-twilight-
 #. times->tooltip
@@ -318,9 +315,8 @@ msgstr "Nom del tema de l'escriptori (tema Cinnamon)"
 #. 5.8->settings-schema.json->light-mode_background_button_apply->description
 #. 5.8->settings-schema.json->dark-mode_themes_button_apply->description
 #. 5.8->settings-schema.json->dark-mode_background_button_apply->description
-#, fuzzy
 msgid "Test applying to the system"
-msgstr "Aplica al sistema"
+msgstr "Prova d'aplicar al sistema"
 
 #. 5.8->settings-schema.json->light-mode_themes_button_apply->tooltip
 msgid "Apply the light mode themes to the system manually"
@@ -425,7 +421,6 @@ msgid "Command"
 msgstr "Ordre"
 
 #. 5.8->settings-schema.json->light-mode_commands_list->tooltip
-#, fuzzy
 msgid ""
 "List of commands to be executed when switching to this mode\n"
 "\n"
@@ -443,21 +438,18 @@ msgstr ""
 "- La finalitat del nom és facilitar la identificació de missatges d'error\n"
 "- El temps d'esgotament interromp el procés d'execució de l'ordre\n"
 "- Un temps d'esgotament de 0 segons significa mai\n"
-"- Qualsevol procés fill no serà aturat\n"
-"- La ruta és al directori ~\n"
-"- Els missatges d'error reporten stderr quan l'estat del retorn no és 0 i "
-"apareixeran en una notificació"
+"- Un procés que no acabi en 10 segons serà finalitzat\n"
+"- La ruta és al directori de l'usuari (~/)\n"
+"- Els missatges d'error reporten a stderr i apareixeran en una notificació"
 
 #. 5.8->settings-schema.json->light-mode_commands_button_launch->description
 #. 5.8->settings-schema.json->dark-mode_commands_button_launch->description
-#, fuzzy
 msgid "Test commands launch"
-msgstr "Ordres personalitzades"
+msgstr "Inicia la prova d'ordres"
 
 #. 5.8->settings-schema.json->light-mode_commands_button_launch->tooltip
-#, fuzzy
 msgid "Test launching the commands set for the light mode"
-msgstr "Llançar ordres establertes pel mode clar"
+msgstr "Prova a executar les ordres assignades pel mode clar"
 
 #. 5.8->settings-schema.json->dark-mode_themes_button_detect->tooltip
 msgid ""
@@ -510,6 +502,5 @@ msgstr ""
 "apareixeran en una notificació"
 
 #. 5.8->settings-schema.json->dark-mode_commands_button_launch->tooltip
-#, fuzzy
 msgid "Test launching the commands set for the dark mode"
-msgstr "Llançar ordres establertes pel mode fosc"
+msgstr "Prova a executar les ordres assignades pel mode fosc"
