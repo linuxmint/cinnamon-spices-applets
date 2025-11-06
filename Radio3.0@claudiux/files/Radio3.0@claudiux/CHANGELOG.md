@@ -1,3 +1,6 @@
+### v3.9.1~20251106
+  * Improves stability.
+
 ### v3.9.0~20251102
   * Improves stability.
 
