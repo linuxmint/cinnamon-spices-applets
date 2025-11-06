@@ -881,23 +881,22 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
             this.emit('activate', menuItem, true); //keepMenu replaced with true
         });
         this._signals.connect(menuItem, 'destroy', () => {
-            if (menuItem && menuItem.menu) {
-              if (this._signals.isConnected('activate', menuItem.menu))
-                this._signals.disconnect('activate', menuItem.menu);
-              if (this._signals.isConnected('active-changed', menuItem.menu))
-                this._signals.disconnect('active-changed', menuItem.menu);
-              if (this._signals.isConnected('open-state-changed', menuItem.menu))
-                this._signals.disconnect('open-state-changed', menuItem.menu);
-                //~ this._signals.disconnect('open-state-changed', this);
-            }
-            if (menuItem) {
-              if (this._signals.isConnected('activate', menuItem))
-                this._signals.disconnect('activate', menuItem);
-              if (this._signals.isConnected('active-changed', menuItem))
-                this._signals.disconnect('active-changed', menuItem);
-               if (this._signals.isConnected('sensitive-changed', menuItem))
-              this._signals.disconnect('sensitive-changed', menuItem);
-            }
+            //~ if (menuItem && menuItem.menu) {
+              //~ if (this._signals.isConnected('activate', menuItem.menu))
+                //~ this._signals.disconnect('activate', menuItem.menu);
+              //~ if (this._signals.isConnected('active-changed', menuItem.menu))
+                //~ this._signals.disconnect('active-changed', menuItem.menu);
+              //~ if (this._signals.isConnected('open-state-changed', menuItem.menu))
+                //~ this._signals.disconnect('open-state-changed', menuItem.menu);
+            //~ }
+            //~ if (menuItem) {
+              //~ if (this._signals.isConnected('activate', menuItem))
+                //~ this._signals.disconnect('activate', menuItem);
+              //~ if (this._signals.isConnected('active-changed', menuItem))
+                //~ this._signals.disconnect('active-changed', menuItem);
+               //~ if (this._signals.isConnected('sensitive-changed', menuItem))
+              //~ this._signals.disconnect('sensitive-changed', menuItem);
+            //~ }
 
             if (menuItem == this._activeMenuItem)
                 this._activeMenuItem = null;
@@ -920,12 +919,14 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
         if (menuItem instanceof PopupMenuSection) {
             this._connectSubMenuSignals(menuItem, menuItem);
             this._signals.connect(menuItem, 'destroy', () => {
-              if (this._signals.isConnected('activate', menuItem))
-                this._signals.disconnect('activate', menuItem);
-              if (this._signals.isConnected('active-changed', menuItem))
-                this._signals.disconnect('active-changed', menuItem);
+              //~ if (this._signals.isConnected('activate', menuItem)) {
+                //~ try {this._signals.disconnect('activate', menuItem)} catch(e) {};
+              //~ }
+              //~ if (this._signals.isConnected('active-changed', menuItem)) {
+                //~ try {this._signals.disconnect('active-changed', menuItem)} catch(e) {};
+              //~ }
 
-                this.length--;
+              this.length--;
             });
         } else if (menuItem instanceof PopupSubMenuMenuItem) {
             if (before_item == null)
