@@ -1,3 +1,6 @@
+### v13.6.1~20251106
+  * Improved stability.
+
 ### v13.6.0~20251102
   * Improves menu stability.
 

@@ -216,6 +216,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         this.metadata = metadata;
+        this.instanceId = instanceId;
 
         this.real_ui_scale = 1.0;
         Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-real-scale.py", (stdout, stderr, exitCode) => {
@@ -237,12 +238,31 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.startingUp = true;
 
+        this.context_menu_item_configDesklet = null;
+        this.context_menu_item_showDesklet = null;
+        this.context_menu_item_easyEffects = null;
+        this.context_menu_item_pulseEffects = null;
+        this.commands_menu_item = null;
+        this.context_menu_item_configDesklet = null;
+        this.context_menu_item_showDesklet = null;
+        this._selectOutputDeviceItem = null;
+        this._selectInputDeviceItem = null;
+        this._launchPlayerItem = null;
+        this._chooseActivePlayerItem = null;
+        this.mute_out_switch = null;
+        this.mute_in_switch = null;
+        this._remove_OsdWithNumberATJosephMcc_button = null;
+
+        this.constructor_continuation();
+    }
+
+    constructor_continuation() {
         // The launch player list
         this._launchPlayerItem = new PopupMenu.PopupSubMenuMenuItem(_("Launch player"));
         // The list to use when switching between active players
         this._chooseActivePlayerItem = new PopupMenu.PopupSubMenuMenuItem(_("Choose player controls"));
 
-        this.settings = new Settings.AppletSettings(this, UUID, instanceId);
+        this.settings = new Settings.AppletSettings(this, UUID, this.instanceId);
         this.settings.bind("showMediaOptical", "showMediaOptical", () => {
             SHOW_MEDIA_OPTICAL = this.showMediaOptical;
             this._on_reload_this_applet_pressed();
@@ -446,7 +466,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         });
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
-        this.menu = new Applet.AppletPopupMenu(this, orientation);
+        this.menu = new Applet.AppletPopupMenu(this, this.orientation);
         this.menuManager.addMenu(this.menu);
 
         this.set_applet_icon_symbolic_name("audio-x-generic");
@@ -601,14 +621,14 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._applet_context_menu.addMenuItem(this.commands_menu_item);
         }
 
-        if (!this.context_menu_item_configDesklet) { // 'Album Art desklet settings'
+        if (this.context_menu_item_configDesklet == null) { // 'Album Art desklet settings'
             this.context_menu_item_configDesklet = new PopupMenu.PopupIconMenuItem(_("Album Art desklet settings"), "system-run", St.IconType.SYMBOLIC);
             this.context_menu_item_configDesklet.connect('activate', () => {
                 this.on_desklet_open_settings_button_clicked()
             });
         }
 
-        if (!this.context_menu_item_showDesklet) { // switch 'Show AlbumArt3.0 desklet'
+        if (this.context_menu_item_showDesklet == null) { // switch 'Show AlbumArt3.0 desklet'
             this.context_menu_item_showDesklet = new PopupMenu.PopupSwitchMenuItem(_("Show Album Art on desktop"),
                 this.show_desklet,
                 null);
@@ -686,29 +706,29 @@ class Sound150Applet extends Applet.TextIconApplet {
     on_enter_event(actor, event) {
         this.isActorEntered = true;
         this.on_icon_dir_changed();
-        if (this.context_menu_item_configDesklet)
+        if (this.context_menu_item_configDesklet != null)
             this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
-        if (this.context_menu_item_showDesklet)
+        if (this.context_menu_item_showDesklet != null)
             this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
-        if (this._outputApplicationsMenu) {
+        if (this._outputApplicationsMenu != null) {
             if (this.keepAppListOpen)
                 this._outputApplicationsMenu.menu.open();
             else
                 this._outputApplicationsMenu.menu.close();
         }
-        if (this.commands_menu_item) {
+        if (this.commands_menu_item != null) {
             if (this.keepCommandListOpen)
                 this.commands_menu_item.menu.open();
             else
                 this.commands_menu_item.menu.close();
         }
-        if (this._selectOutputDeviceItem) {
+        if (this._selectOutputDeviceItem != null) {
             if (this.keepOutputListOpen)
                 this._selectOutputDeviceItem.menu.open();
             else
                 this._selectOutputDeviceItem.menu.close();
         }
-        if (this._selectInputDeviceItem) {
+        if (this._selectInputDeviceItem != null) {
             if (this.keepInputListOpen)
                 this._selectInputDeviceItem.menu.open();
             else
@@ -739,11 +759,12 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.onEnterEventInterval = false;
         }
         this.isActorEntered = false;
-        //~ this._applet_tooltip.hide();
-        //~ let _to = setTimeout( () => {
-            //~ clearTimeout(_to);
+
+        let _to = setTimeout( () => {
+            clearTimeout(_to);
+            this._applet_tooltip.hide();
             //~ this.set_applet_tooltip("");
-        //~ }, 1000);
+        }, 3000);
     }
 
     _on_context_menu_item_showDesklet_toggled() {
@@ -795,9 +816,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
         let _to = setTimeout( () => {
             clearTimeout(_to);
-            if (this.context_menu_item_configDesklet)
+            if (this.context_menu_item_configDesklet != null)
                 this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
-            if (this.context_menu_item_showDesklet)
+            if (this.context_menu_item_showDesklet != null)
                 this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
         }, 300);
     } // End of _on_context_menu_item_showDesklet_toggled
@@ -1279,9 +1300,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._openMenu();
         if (!this.menu.isOpen) return;
         let kplo = this.settings.getValue("keepPlayerListOpen");
-        if (this._chooseActivePlayerItem && !this._chooseActivePlayerItemActorIsHidden && this.settings.getValue("keepChoosePlayerOpen"))
+        if (this._chooseActivePlayerItem != null && !this._chooseActivePlayerItemActorIsHidden && this.settings.getValue("keepChoosePlayerOpen"))
             this._chooseActivePlayerItem.menu.open();
-        if (this._launchPlayerItem && !this._launchPlayerItemActorIsHidden && kplo)
+        if (this._launchPlayerItem != null && !this._launchPlayerItemActorIsHidden && kplo)
             this._launchPlayerItem.menu.open();
         if (this.OsdWithNumberATJosephMcc_is_loaded_internal)
             this._remove_OsdWithNumberATJosephMcc_button.actor.show();
@@ -1611,7 +1632,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 this._playerIcon = [icon, source === "player-path"];
         }
 
-        if (this.playerControl && this._activePlayer && this._playerIcon[0]) {
+        if (this.playerControl && this._activePlayer && this._playerIcon && this._playerIcon[0]) {
             if (source === "output") {
                 // if we have an active player, but are changing the volume, show the output icon and after three seconds change back to the player icon
                 this.set_applet_icon_symbolic_name(this._outputIcon);
@@ -1624,7 +1645,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 }
             } else {
                 // if we have an active player and want to change the icon, change it immediately
-                if (this._playerIcon[1]) {
+                if (this._playerIcon && this._playerIcon[1]) {
                     //CHANGE the icon!
                     if (this._playerIcon[0] != this.oldPlayerIcon0 || !this._iconTimeoutId || force) {
                         //CHANGE the icon!
@@ -1633,7 +1654,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                     }
                 } else {
                     //DON'T change the icon:
-                    if (this._playerIcon[0] != this.oldPlayerIcon0 || !this._iconTimeoutId) {
+                    if (this._playerIcon && this._playerIcon[0] != this.oldPlayerIcon0 || !this._iconTimeoutId) {
                         this.set_applet_icon_symbolic_name(this._playerIcon[0]);
                         this.oldPlayerIcon0 = this._playerIcon[0];
                     }
