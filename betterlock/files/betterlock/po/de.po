@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# LOCK KEYS INDICATOR WITH NOTIFICATIONS
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# entelechy, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-31 04:22-0400\n"
+"POT-Creation-Date: 2025-11-06 23:21-0500\n"
 "PO-Revision-Date: 2024-11-20 18:50+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,43 +19,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:105
+#. applet.js:108
 msgid "Scr Lock"
 msgstr "Scr-Lock-Taste"
 
-#: applet.js:109
+#. applet.js:112
 msgid "Num Lock"
 msgstr "Num-Lock-Taste"
 
-#: applet.js:113
+#. applet.js:116
 msgid "Caps Lock"
 msgstr "Feststelltaste"
 
-#: applet.js:148
+#. applet.js:153
 msgid "Lock Keys"
 msgstr "Lock-Tasten"
 
-#: applet.js:208
+#. applet.js:217
 msgid "Scr lock on"
 msgstr "Scr-Lock-Taste ein"
 
-#: applet.js:211
+#. applet.js:220
 msgid "Scr lock off"
 msgstr "Scr-Lock-Taste aus"
 
-#: applet.js:220
+#. applet.js:229
 msgid "Num lock on"
 msgstr "Num-Lock-Taste ein"
 
-#: applet.js:223
+#. applet.js:232
 msgid "Num lock off"
 msgstr "Num-Lock-Taste aus"
 
-#: applet.js:232
+#. applet.js:241
 msgid "Caps lock on"
 msgstr "Feststelltaste ein"
 
-#: applet.js:235
+#. applet.js:244
 msgid "Caps lock off"
 msgstr "Feststelltaste aus"
 
@@ -71,8 +71,14 @@ msgstr ""
 msgid "Lock keys indicator with notifications"
 msgstr "Sperrtastenanzeige mit Benachrichtigungen"
 
-#. settings-schema.json->show-notifications->description
-msgid "Show notifications"
+#. settings-schema.json->show-toast-notifications->description
+#, fuzzy
+msgid "Show toast notifications"
+msgstr "Benachrichtigungen anzeigen"
+
+#. settings-schema.json->show-osd-notifications->description
+#, fuzzy
+msgid "Show OSD notifications"
 msgstr "Benachrichtigungen anzeigen"
 
 #. settings-schema.json->show-silent-notifications->description
