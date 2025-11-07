@@ -1,6 +1,7 @@
 const Applet = imports.ui.applet;
 const St = imports.gi.St;
 const Gdk = imports.gi.Gdk;
+const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Keymap = Gdk.Keymap.get_default();
 const Caribou = imports.gi.Caribou;
@@ -9,6 +10,7 @@ const Lang = imports.lang;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 const Settings = imports.ui.settings;
+const ModalDialog = imports.ui.modalDialog;
 
 const UUID = "betterlock";
 const ICON_SIZE = 18;
@@ -37,7 +39,8 @@ MyApplet.prototype = {
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         global.log(this.settings.settings);
-        this.settings.bind("show-notifications", "showNotifications", null);
+        this.settings.bind("show-toast-notifications", "showToastNotifications", null);
+        this.settings.bind("show-osd-notifications", "showOSDNotifications", null);
         this.settings.bind("show-silent-notifications", "showSilentNotifications", null)
         this.settings.bind("show-caps-lock-indicator", "showCapsLockIndicator", this._updateIconVisibility);
         this.settings.bind("show-num-lock-indicator", "showNumLockIndicator", this._updateIconVisibility);
@@ -133,28 +136,34 @@ MyApplet.prototype = {
     },
 
     _notifyMessage: function(iconName, text) {
-        if (this._notification)
-            this._notification.destroy();
+        // Toast or OSD?
+        if (this.showToastNotifications) {
+            if (this._notification)
+                this._notification.destroy();
 
-        /* must call after destroying previous notification,
-         * or this._source will be cleared */
-        this._ensureSource();
+            /* must call after destroying previous notification,
+            * or this._source will be cleared */
+            this._ensureSource();
 
-        let icon = new St.Icon({
-            icon_name: iconName,
-            icon_type: St.IconType.SYMBOLIC,
-            icon_size: ICON_SIZE
-        });
-        this._notification = new MessageTray.Notification(this._source, _("Lock Keys"), text, {
-            icon: icon,
-            silent: this.showSilentNotifications
-        });
-        this._notification.setUrgency(MessageTray.Urgency.NORMAL);
-        this._notification.setTransient(true);
-        this._notification.connect('destroy', Lang.bind(this, function() {
-            this._notification = null;
-        }));
-        this._source.notify(this._notification);
+            let icon = new St.Icon({
+                icon_name: iconName,
+                icon_type: St.IconType.SYMBOLIC,
+                icon_size: ICON_SIZE
+            });
+            this._notification = new MessageTray.Notification(this._source, _("Lock Keys"), text, {
+                icon: icon,
+                silent: this.showSilentNotifications
+            });
+            this._notification.setUrgency(MessageTray.Urgency.NORMAL);
+            this._notification.setTransient(true);
+            this._notification.connect('destroy', Lang.bind(this, function() {
+                this._notification = null;
+            }));
+            this._source.notify(this._notification);
+        }
+        if (this.showOSDNotifications) {
+            Main.osdWindowManager.show(-1, Gio.Icon.new_for_string(iconName), text, null);
+        }
     },
 
     _updateIconVisibility: function() {
@@ -211,7 +220,7 @@ MyApplet.prototype = {
                 msg = _("Scr lock off");
                 icon_name = 'scr-off';
             }
-            if (this.showNotifications && this.showScrLockIndicator) {
+            if (this.showScrLockIndicator) {
                 this._notifyMessage(icon_name, msg);
             }
         }
@@ -223,7 +232,7 @@ MyApplet.prototype = {
                 msg = _("Num lock off");
                 icon_name = 'num-off';
             }
-            if (this.showNotifications && this.showNumLockIndicator) {
+            if (this.showNumLockIndicator) {
                 this._notifyMessage(icon_name, msg);
             }
         }
@@ -235,7 +244,7 @@ MyApplet.prototype = {
                 msg = _("Caps lock off");
                 icon_name = 'caps-off';
             }
-            if (this.showNotifications && this.showCapsLockIndicator) {
+            if (this.showCapsLockIndicator) {
                 this._notifyMessage(icon_name, msg);
             }
         }
