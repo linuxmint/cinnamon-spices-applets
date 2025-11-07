@@ -12,7 +12,8 @@ const {
   remove_all_sources
 } = require("./lib/mainloopTools");
 
-const UUID = 'Bps@claudiux';
+const UUID = "Bps@claudiux";
+const APPLET_NAME = _("Bps: Instant Network Speed");
 const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = `${HOME_DIR}/.local/share/cinnamon/applets/${UUID}`;
 const ICONS_DIR = `${APPLET_DIR}/icons`;
@@ -22,7 +23,7 @@ const ICON_FORBIDDEN = `${ICONS_DIR}/forbidden-symbolic.svg`;
 const SCRIPTS_DIR = `${APPLET_DIR}/scripts`;
 const DATA_SCRIPT = `${SCRIPTS_DIR}/get-network-data.sh`;
 
-const AppletGui = require('./lib/appletGui');
+const AppletGui = require("./lib/appletGui");
 
 const _KI = Math.pow(2, 10);
 const _MI = Math.pow(2, 20);
@@ -60,15 +61,14 @@ class Bps extends Applet.Applet {
         this.orientation = orientation;
         this.instanceId = instance_id;
         this.applet_version = metadata.version;
-        this.applet_name = metadata.name;
 
         this.setAllowedLayout(Applet.AllowedLayout.HORIZONTAL);
 
         if (this.is_vertical) {
-            this.set_applet_tooltip(_(this.applet_name) + "\n<b>" + _("Does not work on vertical panel!") + "</b>", true);
+            this.set_applet_tooltip(APPLET_NAME + "\n<b>" + _("Does not work on vertical panel!") + "</b>", true);
             this.is_running = false;
         } else {
-            this.set_applet_tooltip(_(this.applet_name));
+            this.set_applet_tooltip(APPLET_NAME);
             this.is_running = true;
         }
 
@@ -171,11 +171,13 @@ class Bps extends Applet.Applet {
                         already_treated.push(d[0]);
                         let rx, tx;
                         if (isNaN(d[1])) {
+                            if (this.network_data[d[0]] == undefined) continue;
                             rx = this.network_data[d[0]]["rx"];
                         } else {
                             rx = parseInt(d[1])
                         }
                         if (isNaN(d[2])) {
+                            if (this.network_data[d[0]] == undefined) continue;
                             tx = this.network_data[d[0]]["tx"];
                         } else {
                             tx = parseInt(d[2]);
