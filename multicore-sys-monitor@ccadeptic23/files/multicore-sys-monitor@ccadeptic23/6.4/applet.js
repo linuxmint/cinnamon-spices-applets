@@ -38,7 +38,7 @@ const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
 const NETWORK_DEVICES_STATUS_PATH = XDG_RUNTIME_DIR + "/network_devices";
 
 const rate = _('/s');
-var spaces = 14;
+var spaces = 15;
 const translated_strings = [
     _("Core 128:"),
     _("Unrecoverable:"),
@@ -89,14 +89,14 @@ const formatNumber = (value, decimals=2) => {
     if (typeof(value) === "string")
         value = parseFloat(value, decimals);
     if (typeof(value) === "number") {
-        if (_get_lang() === "C") return ""+value;
+        if (_get_lang() === "C") return ""+value.toFixed(decimals);
 
         return ""+new Intl.NumberFormat(
             _get_lang(),
             { minimumIntegerDigits: 1, minimumFractionDigits: decimals, maximumFractionDigits: decimals },
-        ).format(value);
+        ).format(value.toFixed(decimals));
     } else {
-        return ""+value;
+        return ""+value.toFixed(decimals);
     }
 }
 
@@ -282,7 +282,7 @@ class MCSM extends Applet.IconApplet {
             }
         });
 
-        this.isRunning = true;
+        this.isRunning = false;
 
         this.memoryProvider = new MemDataProvider(this);
         this.multiCpuProvider = new MultiCpuDataProvider(this);
@@ -343,7 +343,10 @@ class MCSM extends Applet.IconApplet {
             this.get_disk_usage();
             this._setTooltip();
             try {
-                this.graphArea.queue_repaint();
+                if (this.graphArea && this.graphArea.queue_repaint)
+                    this.graphArea.queue_repaint();
+                else
+                    this.refreshAll();
             } catch(e) {
                 this.refreshAll();
             }
@@ -1243,7 +1246,10 @@ class BufferCacheSharedDataProvider {
         for (let i=0, len=attributes.length; i<len; i++) {
             let [value, unit] = formatBytesValueUnit(Math.round(this.currentReadings[i]), 2, false);
             value = formatNumber(parseFloat(value).toFixed(2), 2);
-            toolTipString += attributes[i].padStart(spaces - lenColon, ' ') + colon + "\t" + " " + value.padStart(6, ' ') + " " + unit.padStart(6, ' ') + '\n';
+            if ((""+value).length < 7)
+                toolTipString += attributes[i].padStart(spaces - lenColon, ' ') + colon + "\t" + " " + value.padStart(6, ' ') + " " + unit.padStart(6, ' ') + '\n';
+            else
+                toolTipString += attributes[i].padStart(spaces - lenColon, ' ') + colon + "\t" + "" + value.padStart(5, ' ') + " " + unit.padStart(6, ' ') + '\n';
         }
         return toolTipString;
     }
@@ -1490,8 +1496,14 @@ class NetDataProvider {
             }
             let name = (this.currentReadings[i]['name'].length === 0) ? this.currentReadings[i].id : this.currentReadings[i].name;
             toolTipString += name.padEnd(22) + '\n';
-            toolTipString += _('Down:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + down_value.padStart(6) + " " + down_unit.padStart(6, ' ') + '\n';
-            toolTipString += _('Up:').split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + " " + up_value.padStart(6) + " " + up_unit.padStart(6, ' ') + '\n';
+            if ((""+down_value).length < 7)
+                toolTipString += _('Down:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + down_value.padStart(6) + " " + down_unit.padStart(6, ' ') + '\n';
+            else
+                toolTipString += _('Down:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + down_value.padStart(5) + "" + down_unit.padStart(6, ' ') + '\n';
+            if ((""+up_value).length < 7)
+                toolTipString += _('Up:').split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + " " + up_value.padStart(6) + " " + up_unit.padStart(6, ' ') + '\n';
+            else
+                toolTipString += _('Up:').split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + "" + up_value.padStart(5) + " " + up_unit.padStart(6, ' ') + '\n';
         }
         return toolTipString;
     }
@@ -1624,8 +1636,14 @@ class DiskDataProvider {
                 toolTipString += this.currentReadings[i].name.padStart(1, " ").padEnd(title.length - this.currentReadings[i].id.length - 1, " ") + this.currentReadings[i].id + '\n';
             else
                 toolTipString += this.currentReadings[i].name.padEnd(22) + '\n';
-            toolTipString += _('Read:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + read.padStart(6, " ") + " " + read_unit.padStart(6, " ") + '\n';
-            toolTipString += _('Write:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + write.padStart(6, " ") + " " + write_unit.padStart(6, " ") + '\n';
+            if ((""+read).length < 7)
+                toolTipString += _('Read:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + read.padStart(6, " ") + " " + read_unit.padStart(6, " ") + '\n';
+            else
+                toolTipString += _('Read:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + read.padStart(5, " ") + " " + read_unit.padStart(6, " ") + '\n';
+            if ((""+write).length < 7)
+                toolTipString += _('Write:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + write.padStart(6, " ") + " " + write_unit.padStart(6, " ") + '\n';
+            else
+                toolTipString += _('Write:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + write.padStart(5, " ") + " " + write_unit.padStart(6, " ") + '\n';
         }
         return toolTipString;
     }

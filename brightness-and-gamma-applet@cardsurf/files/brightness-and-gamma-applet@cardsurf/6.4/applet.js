@@ -7,10 +7,12 @@ const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Main = imports.ui.main;
+const Meta = imports.gi.Meta;
 const Gettext = imports.gettext;
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const Extension = imports.ui.extension;
+const windowTracker = imports.gi.Cinnamon.WindowTracker.get_default();
 
 const uuid = "brightness-and-gamma-applet@cardsurf";
 
@@ -737,7 +739,18 @@ class BrightnessAndGamma extends Applet.IconApplet {
             children[this.menu_item_configure_presets_position].destroy();
         }
         this.menu_item_configure_presets = this._applet_context_menu.addAction(_("Configure Presets"), () => {
-            Util.spawnCommandLineAsync(`cinnamon-settings applets ${uuid} -t1`);
+            let pid = Util.spawnCommandLine(`cinnamon-settings applets ${uuid} -t1`);
+            var app = null;
+            var intervalId = null;
+            intervalId = setTimeout(() => {
+                clearTimeout(intervalId);
+                app = windowTracker.get_app_from_pid(pid);
+                if (app != null) {
+                    let window = app.get_windows()[0];
+                    window.maximize(Meta.MaximizeFlags.VERTICAL);
+                    window.activate(300);
+                }
+            }, 600);
         });
     }
 

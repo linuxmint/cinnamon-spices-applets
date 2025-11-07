@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# LOCK KEYS INDICATOR WITH NOTIFICATIONS
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# entelechy, 2016
 #
 #, fuzzy
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: betterlock 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-31 04:22-0400\n"
+"POT-Creation-Date: 2025-11-06 23:21-0500\n"
 "PO-Revision-Date: 2025-10-08 21:24+0700\n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -18,43 +18,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:105
+#. applet.js:108
 msgid "Scr Lock"
 msgstr "Khóa màn hình"
 
-#: applet.js:109
+#. applet.js:112
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#: applet.js:113
+#. applet.js:116
 msgid "Caps Lock"
 msgstr "Caps lock"
 
-#: applet.js:148
+#. applet.js:153
 msgid "Lock Keys"
 msgstr "Lock Keys"
 
-#: applet.js:208
+#. applet.js:217
 msgid "Scr lock on"
 msgstr "Khóa màn hình đang bật"
 
-#: applet.js:211
+#. applet.js:220
 msgid "Scr lock off"
 msgstr "Khóa màn hình đang tắt"
 
-#: applet.js:220
+#. applet.js:229
 msgid "Num lock on"
 msgstr "Num Lock đang bật"
 
-#: applet.js:223
+#. applet.js:232
 msgid "Num lock off"
 msgstr "Num Lock đang tắt"
 
-#: applet.js:232
+#. applet.js:241
 msgid "Caps lock on"
 msgstr "Caps lock đang bật"
 
-#: applet.js:235
+#. applet.js:244
 msgid "Caps lock off"
 msgstr "Caps lock đang tắt"
 
@@ -62,14 +62,22 @@ msgstr "Caps lock đang tắt"
 msgid ""
 "Shows whether caps lock/num lock/scr lock is on, and displays a notification "
 "when these change."
-msgstr "Hiển thị trạng thái bật/tắt của Lock Keys (caps lock/num lock/scr lock) và thông báo khi chúng thay đổi."
+msgstr ""
+"Hiển thị trạng thái bật/tắt của Lock Keys (caps lock/num lock/scr lock) và "
+"thông báo khi chúng thay đổi."
 
 #. metadata.json->name
 msgid "Lock keys indicator with notifications"
 msgstr "Chỉ báo phím khóa kèm thông báo"
 
-#. settings-schema.json->show-notifications->description
-msgid "Show notifications"
+#. settings-schema.json->show-toast-notifications->description
+#, fuzzy
+msgid "Show toast notifications"
+msgstr "Hiển thị thông báo"
+
+#. settings-schema.json->show-osd-notifications->description
+#, fuzzy
+msgid "Show OSD notifications"
 msgstr "Hiển thị thông báo"
 
 #. settings-schema.json->show-silent-notifications->description

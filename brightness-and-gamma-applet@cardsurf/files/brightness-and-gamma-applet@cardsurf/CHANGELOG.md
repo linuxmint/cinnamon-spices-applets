@@ -1,3 +1,6 @@
+### v2.3.3~20251106
+* Improved stability.
+
 ### v2.3.2~20251022
 * Displays the currently used preset in the tooltip.
 
