@@ -5,12 +5,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Project-Id-Version: betterlock 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2025-11-06 23:21-0500\n"
-"PO-Revision-Date: 2024-09-28 20:27+0200\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"PO-Revision-Date: 2025-11-07 08:50+0100\n"
+"Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -73,14 +72,12 @@ msgid "Lock keys indicator with notifications"
 msgstr "Indicateur de touches de verrouillage avec notifications"
 
 #. settings-schema.json->show-toast-notifications->description
-#, fuzzy
 msgid "Show toast notifications"
-msgstr "Afficher les notifications"
+msgstr "Afficher les notifications d'application"
 
 #. settings-schema.json->show-osd-notifications->description
-#, fuzzy
 msgid "Show OSD notifications"
-msgstr "Afficher les notifications"
+msgstr "Afficher les notifications OSD"
 
 #. settings-schema.json->show-silent-notifications->description
 msgid "Silence system notification sound"
