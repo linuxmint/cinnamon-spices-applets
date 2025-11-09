@@ -28,9 +28,11 @@ const UUID = "SpiceSpy@claudiux";
 const HOME_DIR = GLib.get_home_dir();
 
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+const SPICES_ICONS_DIR = HOME_DIR + "/.config/cinnamon/spices/" + UUID + "/icons";
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const CACHE_UPDATER = SCRIPTS_DIR + "/spices-cache-updater.py";
 const CACHE_INIT = SCRIPTS_DIR + "/spices-cache-init.sh";
+const COPY_PNG_SCRIPT = `${SCRIPTS_DIR}/copy-png-files.sh`;
 
 const TYPES = ["actions", "applets", "desklets", "extensions", "themes"];
 const SPICES_URL = "https://cinnamon-spices.linuxmint.com";
@@ -254,7 +256,8 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
 
     if (this.parent.show_icon_in_menu) {
       let icon_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true });
-      let icon_path = HOME_DIR+"/.cache/cinnamon/spices/"+spice.type.slice(0,-1)+"/"+spice.uuid+".png";
+      //~ let icon_path = HOME_DIR+"/.cache/cinnamon/spices/"+spice.type.slice(0,-1)+"/"+spice.uuid+".png";
+      let icon_path = SPICES_ICONS_DIR+"/"+spice.uuid+".png";
       let icon_file = Gio.file_new_for_path(icon_path);
       let icon;
       if (icon_file.query_exists(null)) {
@@ -337,6 +340,10 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.set_applet_icon_symbolic_name("cinnamon");
     this.set_applet_label("");
     this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+
+    Util.spawnCommandLine("/usr/bin/env bash -c 'cd "+ SCRIPTS_DIR + " && chmod 755 *.sh'");
+    Util.spawnCommandLine(COPY_PNG_SCRIPT);
+
 
     this.menuManager = new PopupMenu.PopupMenuManager(this);
     this.menu = new Applet.AppletPopupMenu(this, orientation);
