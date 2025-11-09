@@ -1824,6 +1824,28 @@ function main(metadata, orientation, panel_height, instanceId) {
     return new CinnamonSoundApplet(metadata, orientation, panel_height, instanceId);
 }
 
+/**
+ * Helper function for getting the theme accent color. I haven't found a better way to get this... HELP!
+ * @returns {string}
+ */
+function getThemeAccentColor() {
+    try {
+        let themeName = new Gio.Settings({schema_id: 'org.cinnamon.theme'}).get_string('name').replace(/^'|'$/g, '');
+        let path = `/usr/share/themes/${themeName}/cinnamon/cinnamon.css`;
+        let file = Gio.file_new_for_path(path);
+        if (file.query_exists(null)) {
+            let match = Cinnamon.get_file_contents_utf8_sync(path).match(/selection-background-color\s*:\s*#([0-9a-fA-F]{3,6})/i);
+            if (match && match[1]) {
+                let hex = match[1].toLowerCase();
+                return hex.length === 3 ? `#${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}` : `#${hex}`;
+            }
+        }
+    } catch (e) {
+        log("Error getting accent color: " + e);
+    }
+    return "#710ec5";
+}
+
 class DeviceMenuItem extends PopupMenu.PopupBaseMenuItem {
     /**
      * @param {Object} appletObj - The applet instance that contains the rules.
@@ -1834,17 +1856,7 @@ class DeviceMenuItem extends PopupMenu.PopupBaseMenuItem {
         super({reactive: true});
         this.actor.set_height(40);
 
-        // Get accent color from system
-        let accentColor = "#246264";
-        try {
-            let interfaceSettings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.interface'});
-            let keys = interfaceSettings.list_keys();
-            if (keys.includes("accent-color")) {
-                accentColor = interfaceSettings.get_string("accent-color");
-            }
-        } catch (e) {
-            log("Error getting accent color: " + e);
-        }
+        let accentColor = getThemeAccentColor();
 
         this.actor.set_style(`padding-left: 20px; background-color: ${showIcon ? accentColor : "transparent"}; border-radius: 8px; padding: 4px;`);
 
