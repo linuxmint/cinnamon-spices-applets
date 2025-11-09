@@ -831,24 +831,29 @@ class Player extends PopupMenu.PopupMenuSection {
             });
             cover_path = null;
         } else {
-
             let dir = Gio.file_new_for_path(ALBUMART_PICS_DIR);
             let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
             if ((dir_children.next_file(null)) == null) { // dir does not contain any file.
-                //~ Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
-                Util.spawnCommandLine("cp -a %s %s/R3SongArt%s".format(
-                    cover_path,
-                    ALBUMART_PICS_DIR,
-                    randomIntegerInInterval(0, superRND).toString()
-                ));
+                if (GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
+                    Util.spawnCommandLine("cp -a %s %s/R3SongArt%s".format(
+                        cover_path,
+                        ALBUMART_PICS_DIR,
+                        randomIntegerInInterval(0, superRND).toString()
+                    ));
+                } else {
+                    cover_path = null;
+                }
             } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
                 del_song_arts();
-                //~ Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
-                Util.spawnCommandLine("cp -a %s %s/R3SongArt%s".format(
-                    cover_path,
-                    ALBUMART_PICS_DIR,
-                    randomIntegerInInterval(0, superRND).toString()
-                ));
+                if (GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
+                    Util.spawnCommandLine("cp -a %s %s/R3SongArt%s".format(
+                        cover_path,
+                        ALBUMART_PICS_DIR,
+                        randomIntegerInInterval(0, superRND).toString()
+                    ));
+                } else {
+                    cover_path = null;
+                }
             }
             dir_children.close(null);
 
