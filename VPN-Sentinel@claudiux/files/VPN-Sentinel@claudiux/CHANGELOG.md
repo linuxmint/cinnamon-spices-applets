@@ -1,3 +1,6 @@
+### v2.4.2~20251109
+  * Updates loop management.
+
 ### v2.4.1~20250413
   * Uses mainloopTools.
   * Updates checkDependencies.js.
