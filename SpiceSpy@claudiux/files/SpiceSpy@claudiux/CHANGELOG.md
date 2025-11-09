@@ -1,3 +1,6 @@
+### v5.6.0~20251108
+  * Ensures loading of icons.
+
 ### v5.5.2~20251101
   * Increase stability.
 
