@@ -1165,7 +1165,7 @@ class CinnamonSoundApplet extends Applet.TextIconApplet {
 
     on_applet_clicked(event) {
 
-        this._populateOutputDeviceList(); // Refresca la lista antes de abrir el menú
+        this._populateOutputDeviceList();
         this._openMenu();
     }
 
@@ -1525,14 +1525,13 @@ class CinnamonSoundApplet extends Applet.TextIconApplet {
 
         this.menu.addSettingsAction(_("Sound Settings"), 'sound');
 
-        // --- NUEVO: Lista de dispositivos de salida ---
+        // --- Output device list ---
         this._outputDeviceItems = [];
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
 
         this._populateOutputDeviceList();
 
-        // Escuchar eventos de cambio de dispositivos de salida
         this._control.connect('output-added', () => this._refreshOutputDeviceList());
         this._control.connect('output-removed', () => this._refreshOutputDeviceList());
         this._control.connect('active-output-update', () => this._refreshOutputDeviceList());
@@ -1541,42 +1540,31 @@ class CinnamonSoundApplet extends Applet.TextIconApplet {
     _populateOutputDeviceList() {
 
 
-        // Limpiar la lista antes de actualizarla.
+        // Clear the list before updating it.
         this._outputDeviceItems.forEach(item => item.destroy());
         this._outputDeviceItems = [];
 
         let devices = this._control.get_sinks();
-        // Obtén el dispositivo de salida por defecto.
         let defaultSink = this._control.get_default_sink();
-
-        console.log("----------------------")
-        console.log("----------------------")
-        console.log("----------------------")
-        console.log("----------------------")
-        console.log("----------------------")
 
         devices.forEach(device => {
             console.log(device)
-            // Filtrado: si la regla iconRulesFilterList está definida y no vacía.
+            // Filtering: if the iconRulesFilterList rule is defined and not empty.
             if (this.iconRulesFilterList) {
                 let filterList = this.iconRulesFilterList
                     .split(",")
                     .map(s => s.trim().toLowerCase())
                     .filter(s => s !== "");
                 let desc = (device.description || "").toLowerCase();
-                // Si alguno de los términos aparece en la descripción, omitimos este dispositivo.
                 if (filterList.some(term => desc.includes(term))) {
-                    return; // Salta este dispositivo.
+                    return; // Skip this device.
                 }
             }
 
-            // Determina si este dispositivo es el default (para aplicar el fondo, etc.)
             let showIcon = (device === defaultSink);
 
-            // Crea el item pasando la instancia (this) para acceder a las reglas.
             let item = new DeviceMenuItem(this, device, showIcon);
 
-            // Al activar el item se cambia el dispositivo de salida y se refresca la lista.
             item.connect('activate', () => {
                 this._control.set_default_sink(device);
                 this._refreshOutputDeviceList();
@@ -1838,15 +1826,15 @@ function main(metadata, orientation, panel_height, instanceId) {
 
 class DeviceMenuItem extends PopupMenu.PopupBaseMenuItem {
     /**
-     * @param {Object} appletObj - La instancia del applet que contiene las reglas.
-     * @param {Object} device - El objeto del dispositivo.
-     * @param {Boolean} showIcon - Si es true, se aplicará el fondo de acento a la fila.
+     * @param {Object} appletObj - The applet instance that contains the rules.
+     * @param {Object} device - The device object.
+     * @param {Boolean} showIcon - If true, the accent background will be applied to the row.
      */
     constructor(appletObj, device, showIcon) {
         super({reactive: true});
         this.actor.set_height(40);
 
-        // Obtener color de acento del sistema
+        // Get accent color from system
         let accentColor = "#246264";
         try {
             let interfaceSettings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.interface'});
@@ -1855,20 +1843,18 @@ class DeviceMenuItem extends PopupMenu.PopupBaseMenuItem {
                 accentColor = interfaceSettings.get_string("accent-color");
             }
         } catch (e) {
-            log("Error al obtener el color de acento: " + e);
+            log("Error getting accent color: " + e);
         }
 
-        // Aplicar estilo basado en showIcon
         this.actor.set_style(`padding-left: 20px; background-color: ${showIcon ? accentColor : "transparent"}; border-radius: 8px; padding: 4px;`);
 
-        // Crear un contenedor horizontal para el icono y la etiqueta
+        // Create a horizontal container for the icon and label
         let hbox = new St.BoxLayout({
             vertical: false,
             x_expand: true,
             y_align: Clutter.ActorAlign.CENTER
         });
 
-        // Contenedor para el icono
         let iconContainer = new St.Bin({
             width: 32,
             height: 32,
@@ -1876,10 +1862,9 @@ class DeviceMenuItem extends PopupMenu.PopupBaseMenuItem {
         });
 
         let chosenIcon = "audio-volume-high-symbolic";
-        let chosenName = device.description; // Usamos la descripción original por defecto
+        let chosenName = device.description;
         let desc = (device.description || "").toLowerCase();
 
-        // Aplicar reglas de icono y nombre personalizados según las configuraciones
         for (let i = 1; i <= 8; i++) {
             let ruleKey = `iconRules${i}Rule`;
             let iconKey = `iconRules${i}Icon`;
@@ -1892,7 +1877,7 @@ class DeviceMenuItem extends PopupMenu.PopupBaseMenuItem {
             }
         }
 
-        // Crear el icono
+        // Create the icon
         let icon = new St.Icon({
             icon_name: chosenIcon,
             icon_type: St.IconType.FULLCOLOR,
@@ -1902,7 +1887,7 @@ class DeviceMenuItem extends PopupMenu.PopupBaseMenuItem {
         iconContainer.set_child(icon);
         hbox.add_actor(iconContainer);
 
-        // Crear la etiqueta con el nombre personalizado si se aplica alguna regla
+        // Create the label with the custom name if any rule is applied
         let label = new St.Label({
             text: chosenName,
             x_expand: true,
