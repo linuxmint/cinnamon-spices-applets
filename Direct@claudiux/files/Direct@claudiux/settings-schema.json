@@ -109,6 +109,8 @@
         "columns":  [
             {"id": "id", "title": "Name", "type": "string", "expand-width": true}
         ],
+        "show-buttons": true,
+        "hidden-buttons": ["+", "-", "edit"],
         "description": "Display order in the menu"
     },
 

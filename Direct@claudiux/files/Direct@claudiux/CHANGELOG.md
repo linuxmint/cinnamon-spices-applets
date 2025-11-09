@@ -1,3 +1,6 @@
+### v1.2.0~20251109
+* Anticipates likely future configurations for Cinnamon.
+
 ### v1.1.2~20251022
 * Adds option *Do not display the tooltip*.
 
