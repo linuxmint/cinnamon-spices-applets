@@ -1,3 +1,6 @@
+### v13.6.2~20251109
+  * Avoid error loading image.
+
 ### v13.6.1~20251106
   * Improved stability.
 
