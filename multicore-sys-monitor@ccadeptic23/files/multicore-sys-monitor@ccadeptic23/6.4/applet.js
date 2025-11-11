@@ -161,6 +161,8 @@ class MCSM extends Applet.IconApplet {
         this.netMonitor = null;
         this.isCurrentlyCheckingStatus = false;
 
+        this.mainLoopId = null;
+
         this.settings = new AppletSettings(this, UUID, this.instance_id);
         this.settings.bind("isHighlighted", "isHighlighted");
         this.settings.bind("CPU_useProgressiveColors", "CPU_useProgressiveColors");
@@ -232,8 +234,6 @@ class MCSM extends Applet.IconApplet {
 
         if (this.refreshRate < 500)
             this.refreshRate = 500;
-
-        this.mainLoopId = null;
 
         this.on_color_changed();
         this.useSymbolicIcon = true;
@@ -331,10 +331,11 @@ class MCSM extends Applet.IconApplet {
     run_main_loop() {
         if (this.mainLoopId != null && source_exists(this.mainLoopId)) {
             this.isRunning = false;
-            source_remove(this.mainLoopId);
+            if (source_exists(this.mainLoopId))
+                source_remove(this.mainLoopId);
             this.mainLoopId = null;
-            this.isRunning = true;
         }
+        this.isRunning = true;
         this.mainLoopId = timeout_add(this.refreshRate, () => {
             this.get_mem_info();
             this.get_cpu_info();
