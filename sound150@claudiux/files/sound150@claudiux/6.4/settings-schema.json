@@ -63,7 +63,8 @@
         "avoidTwice",
         "dontShowAnyImageInMenu",
         "showMediaOptical",
-        "viewFullAlbumArt"
+        "viewFullAlbumArt",
+        "doNotUsePlayerctld"
       ]
     },
     "sectionMenu2": {
@@ -251,6 +252,12 @@
     "default": false,
     "description": "View Full Album Art",
     "tooltip": "When unchecked, Album Art in the menu may be partially covered by Artist and Title."
+  },
+  "doNotUsePlayerctld": {
+    "type": "switch",
+    "default": false,
+    "description": "Do not use playerctl",
+    "tooltip": "When this option is checked, which is not recommended, playerctl installation is not required; playerctl will not be used, so this applet will run in degraded mode (artist, title or album art)."
   },
   "keepAppListOpen": {
     "type": "switch",
