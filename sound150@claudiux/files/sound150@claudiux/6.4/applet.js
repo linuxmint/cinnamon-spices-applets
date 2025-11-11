@@ -278,6 +278,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("viewFullAlbumArt", "viewFullAlbumArt", () => {
             this._on_reload_this_applet_pressed();
         });
+        this.settings.bind("doNotUsePlayerctld", "doNotUsePlayerctld", () => {
+            this._on_reload_this_applet_pressed();
+        });
 
         this.settings.bind("keepAppListOpen", "keepAppListOpen");
         this.settings.bind("keepOutputListOpen", "keepOutputListOpen");
@@ -1703,7 +1706,8 @@ class Sound150Applet extends Applet.TextIconApplet {
             Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
             //~ Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
 
-        if (!this._playerctl || this.title_text_old == this.title_text) {
+        //~ if (!this._playerctl || this.title_text_old == this.title_text) {
+        if (this.title_text_old == this.title_text) {
             this._loopArtId = timeout_add_seconds(10, () => {
                 this.loopArt();
             });
@@ -1835,7 +1839,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             }
             this.setAppletText(this.player);
         }
-        if (!this._playerctl) {
+        if (!this.doNotUsePlayerctld && !this._playerctl) {
             if (tooltips.length != 0) tooltips.push("");
             tooltips.push(_("The 'playerctl' package is required!"));
             tooltips.push(_("Please select 'Install playerctl' in this menu"));
@@ -2052,7 +2056,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._remove_OsdWithNumberATJosephMcc_button.actor.hide();
 
         //button Install playerctl (when it isn't installed)
-        if (this._playerctl === null) {
+        if (this._playerctl === null && !this.doNotUsePlayerctld) {
             let _install_playerctl_button = this.menu.addAction(_("Install playerctl"), () => {
                 //~ Util.spawnCommandLineAsync("/usr/bin/env bash -C '%s/install_playerctl.sh'".format(PATH2SCRIPTS));
                 Util.spawnCommandLine("/usr/bin/env bash -C '%s/install_playerctl.sh'".format(PATH2SCRIPTS));
@@ -2399,7 +2403,8 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (this._recordingAppsNum++ === 0) {
                 this._inputSection.actor.show();
                 if (this.mute_in_switch) this.mute_in_switch.actor.show();
-                run_playerctld();
+                if (!this.doNotUsePlayerctld)
+                    run_playerctld();
             }
         }
     }
@@ -2617,7 +2622,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     get _playerctl() {
-        return GLib.find_program_in_path("playerctl");
+        return !this.doNotUsePlayerctld && GLib.find_program_in_path("playerctl");
     }
 
     get _imagemagick() {
