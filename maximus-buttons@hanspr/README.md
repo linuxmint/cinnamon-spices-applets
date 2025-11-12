@@ -23,3 +23,4 @@ This applet is desinged to work in pair with:
 
 # Errors
 * Please report any errors in github `https://github.com/linuxmint/cinnamon-spices-applets/issues`
+* Add `@hanspr` at the beggining of your comment to be notified of your request
