@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-11-12 00:33+0100\n"
-"PO-Revision-Date: 2025-10-31 10:40-0300\n"
+"PO-Revision-Date: 2025-11-11 21:12-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1126,9 +1126,8 @@ msgstr ""
 "parcialmente cubierta por el artista y el título."
 
 #. 6.4->settings-schema.json->doNotUsePlayerctld->description
-#, fuzzy
 msgid "Do not use playerctl"
-msgstr "Elegir los controles del reproductor"
+msgstr "No usar playerctl"
 
 #. 6.4->settings-schema.json->doNotUsePlayerctld->tooltip
 msgid ""
@@ -1136,6 +1135,9 @@ msgid ""
 "installation is not required; playerctl will not be used, so this applet "
 "will run in degraded mode (artist, title or album art)."
 msgstr ""
+"Cuando esta opción está marcada, lo cual no es recomendable, no es necesario "
+"instalar playerctl; playerctl no se utilizará, por lo que este applet se "
+"ejecutará en modo degradado (artista, título o carátula del álbum)."
 
 #. 6.4->settings-schema.json->keepAppListOpen->description
 msgid "Keep the App selector open"
