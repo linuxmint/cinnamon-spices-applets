@@ -26,6 +26,11 @@ This applet is desinged to work in pair with:
   * Default regex, removes prepended urls from firefox, chrome extensions like `keypass helper url`
 * Maximum title length
   * Truncate title length, so it fits better on your current panel width
+* Focused background color
+  * Allows to define a color when the window is focused (useful with multiple monitors)
+  * Setting: `#RRGGBBAA`
+  * `RRGGBB` : traditional red, green, blue combination of primary colors
+  * `AA` : Alpha channel. `FF` fully transparent , `00` or missing fully opaque.
 
 # Limitations
 * It will only work on top, bottom panels that have enough width to hold a window title
