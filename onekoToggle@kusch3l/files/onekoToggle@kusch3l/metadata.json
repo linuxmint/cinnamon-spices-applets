@@ -1,0 +1,7 @@
+{
+"uuid": "onekoToggle@kusch3l",
+"name": "Oneko",
+"description": "Click on the applet to toggle your favourite display cat",
+"icon": "running",
+"max-instances": "-1"
+}
