@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"POT-Creation-Date: 2025-11-13 01:47+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -18,56 +18,60 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:38 applet.js:495
+#. applet.js:42 applet.js:553
 msgid "SYSTEM"
 msgstr "HỆ THỐNG"
 
-#. applet.js:38 applet.js:530
+#. applet.js:42 applet.js:588
 msgid "FAVORITES"
 msgstr "YÊU THÍCH"
 
-#. applet.js:38 applet.js:554
+#. applet.js:42 applet.js:612
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:42 applet.js:636
 msgid "RECENT DOCUMENTS"
 msgstr "TÀI LIỆU GẦN ĐÂY"
 
-#. applet.js:160
+#. applet.js:164
 msgid "(Right click to open folder)"
 msgstr "(Nhấn chuột phải để mở thư mục)"
 
 #. metadata.json->name
-#. applet.js:263
+#. applet.js:289
 msgid "Direct"
 msgstr "Truy Cập Nhanh"
 
-#. applet.js:471
+#. applet.js:529
 msgid "Search Home Folder"
 msgstr "Tìm trong Thư mục Cá nhân"
 
-#. applet.js:504
+#. applet.js:562
 msgid "Search File System"
 msgstr "Tìm trong Hệ thống tập tin"
 
-#. applet.js:568
+#. applet.js:650
 msgid "Clear"
 msgstr "Xóa"
 
-#. applet.js:575
+#. applet.js:657
 msgid "Recent"
 msgstr "Gần đây"
 
-#. applet.js:623
+#. applet.js:705
 msgid "Computer"
 msgstr "Máy tính"
 
-#. applet.js:629
+#. applet.js:711
 msgid "File System"
 msgstr "Hệ thống tập tin"
 
-#. applet.js:646
+#. applet.js:728
 msgid "Network"
 msgstr "Mạng"
 
-#. applet.js:868
+#. applet.js:974
 msgid "Trash"
 msgstr "Thùng rác"
 
@@ -208,6 +212,11 @@ msgstr "Phần Hệ thống"
 msgid "Favorite documents"
 msgstr "Tài liệu yêu thích"
 
+#. settings-schema.json->favoriteAppsSection->title
+#, fuzzy
+msgid "Favorite apps"
+msgstr "Yêu thích"
+
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
 msgstr "Biểu tượng trên Thanh panel"
@@ -241,6 +250,7 @@ msgstr "Di chuyển các phần này để sắp xếp lại Menu:"
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->favApps->columns->title
 msgid "Name"
 msgstr "Tên"
 
@@ -388,6 +398,35 @@ msgstr "Hiển thị đường dẫn đầy đủ trong gợi ý"
 #. settings-schema.json->favoriteIconIsStar->description
 msgid "Replace icons with stars"
 msgstr "Thay biểu tượng bằng hình sao"
+
+#. settings-schema.json->showFavoriteApps->description
+#, fuzzy
+msgid "Show favorite apps"
+msgstr "Hiển thị Tài liệu yêu thích"
+
+#. settings-schema.json->favAppsLabel->description
+msgid ""
+"Below are the favorite applications displayed in the menu when checked.\n"
+"The Name can be changed.\n"
+"The Launcher must not be changed."
+msgstr ""
+
+#. settings-schema.json->favApps->description
+#, fuzzy
+msgid "Favorite apps shown"
+msgstr "Yêu thích"
+
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid "⚠️ Launcher"
+msgstr ""
+
+#. settings-schema.json->favAppsPopulateButton->description
+msgid "Add all your Favorite Apps"
+msgstr ""
 
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"

@@ -1,3 +1,6 @@
+### v1.3.0~20251112
+* Adds the Favorite Apps section.
+
 ### v1.2.0~20251109
 * Anticipates likely future configurations for Cinnamon.
 

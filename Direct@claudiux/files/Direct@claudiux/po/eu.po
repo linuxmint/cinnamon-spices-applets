@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"POT-Creation-Date: 2025-11-13 01:47+0100\n"
 "PO-Revision-Date: 2022-12-12 16:33+0100\n"
 "Last-Translator: Inigo Gebara <igebara@disroot.org>\n"
 "Language-Team: \n"
@@ -19,56 +19,60 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:38 applet.js:495
+#. applet.js:42 applet.js:553
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:38 applet.js:530
+#. applet.js:42 applet.js:588
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:38 applet.js:554
+#. applet.js:42 applet.js:612
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:42 applet.js:636
 msgid "RECENT DOCUMENTS"
 msgstr "DUELA GUTXIKO DOKUMENTUAK"
 
-#. applet.js:160
+#. applet.js:164
 msgid "(Right click to open folder)"
 msgstr ""
 
 #. metadata.json->name
-#. applet.js:263
+#. applet.js:289
 msgid "Direct"
 msgstr "Zuzenean"
 
-#. applet.js:471
+#. applet.js:529
 msgid "Search Home Folder"
 msgstr "Bilatu karpeta nagusian"
 
-#. applet.js:504
+#. applet.js:562
 msgid "Search File System"
 msgstr "Bilatu fitxategi-sisteman"
 
-#. applet.js:568
+#. applet.js:650
 msgid "Clear"
 msgstr "Garbitu"
 
-#. applet.js:575
+#. applet.js:657
 msgid "Recent"
 msgstr ""
 
-#. applet.js:623
+#. applet.js:705
 msgid "Computer"
 msgstr "Ordenagailua"
 
-#. applet.js:629
+#. applet.js:711
 msgid "File System"
 msgstr "Fitxategi-sistema"
 
-#. applet.js:646
+#. applet.js:728
 msgid "Network"
 msgstr "Sarea"
 
-#. applet.js:868
+#. applet.js:974
 msgid "Trash"
 msgstr "Zakarrontzia"
 
@@ -207,6 +211,11 @@ msgstr "Sistemaren atala"
 msgid "Favorite documents"
 msgstr "Erakutsi duela gutxiko dokumentuak"
 
+#. settings-schema.json->favoriteAppsSection->title
+#, fuzzy
+msgid "Favorite apps"
+msgstr "Erakutsi duela gutxiko dokumentuak"
+
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
 msgstr "Panelaren ikonoa"
@@ -240,6 +249,7 @@ msgstr ""
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->favApps->columns->title
 msgid "Name"
 msgstr ""
 
@@ -390,6 +400,34 @@ msgstr "Erakutsi ibilbide osoa tresna-aholkuetan"
 
 #. settings-schema.json->favoriteIconIsStar->description
 msgid "Replace icons with stars"
+msgstr ""
+
+#. settings-schema.json->showFavoriteApps->description
+#, fuzzy
+msgid "Show favorite apps"
+msgstr "Erakutsi duela gutxiko dokumentuak"
+
+#. settings-schema.json->favAppsLabel->description
+msgid ""
+"Below are the favorite applications displayed in the menu when checked.\n"
+"The Name can be changed.\n"
+"The Launcher must not be changed."
+msgstr ""
+
+#. settings-schema.json->favApps->description
+msgid "Favorite apps shown"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid "⚠️ Launcher"
+msgstr ""
+
+#. settings-schema.json->favAppsPopulateButton->description
+msgid "Add all your Favorite Apps"
 msgstr ""
 
 #. settings-schema.json->showRecentDocuments->description
