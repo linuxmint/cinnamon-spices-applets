@@ -10,13 +10,13 @@ This applet is desinged to work in pair with:
 
 # Features
 * It will show the minimize, maximize, close buttons on the panel when a window is maximized
-* It only make sense with Maximus extension, because you loose those buttons, after maximize
+* It only makes sense with Maximus extension, because you loose those buttons, after maximize
 
 # How to configure
 * Install the applet
 * Add applet with the plus sign
 * Edit the panel and reposition the applet at the far right or left of your panel.
-* It makes more sense when the panel is on the top, but it will work on bottom panels as well
+* It feels more natural when the panel is on the top, but it will work on bottom panels as well
 
 # Limitations
 * No consideration for vertical panels, it's been tested on horizontal panels only
