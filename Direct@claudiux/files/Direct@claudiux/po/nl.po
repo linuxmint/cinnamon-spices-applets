@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"POT-Creation-Date: 2025-11-13 01:47+0100\n"
 "PO-Revision-Date: 2024-07-24 10:12+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -17,56 +17,60 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:38 applet.js:495
+#. applet.js:42 applet.js:553
 msgid "SYSTEM"
 msgstr "SYSTEEM"
 
-#. applet.js:38 applet.js:530
+#. applet.js:42 applet.js:588
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:38 applet.js:554
+#. applet.js:42 applet.js:612
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:42 applet.js:636
 msgid "RECENT DOCUMENTS"
 msgstr "RECENTE DOCUMENTEN"
 
-#. applet.js:160
+#. applet.js:164
 msgid "(Right click to open folder)"
 msgstr "(Rechtsklik om map te openen)"
 
 #. metadata.json->name
-#. applet.js:263
+#. applet.js:289
 msgid "Direct"
 msgstr "Direct"
 
-#. applet.js:471
+#. applet.js:529
 msgid "Search Home Folder"
 msgstr "Zoeken in thuismap"
 
-#. applet.js:504
+#. applet.js:562
 msgid "Search File System"
 msgstr "Zoeken in bestandssysteem"
 
-#. applet.js:568
+#. applet.js:650
 msgid "Clear"
 msgstr "Wissen"
 
-#. applet.js:575
+#. applet.js:657
 msgid "Recent"
 msgstr "Recent"
 
-#. applet.js:623
+#. applet.js:705
 msgid "Computer"
 msgstr "Computer"
 
-#. applet.js:629
+#. applet.js:711
 msgid "File System"
 msgstr "Bestandssysteem"
 
-#. applet.js:646
+#. applet.js:728
 msgid "Network"
 msgstr "Netwerk"
 
-#. applet.js:868
+#. applet.js:974
 msgid "Trash"
 msgstr "Prullenbak"
 
@@ -204,6 +208,11 @@ msgstr "Systeemsectie"
 msgid "Favorite documents"
 msgstr "Recente documenten tonen"
 
+#. settings-schema.json->favoriteAppsSection->title
+#, fuzzy
+msgid "Favorite apps"
+msgstr "Recente documenten tonen"
+
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
 msgstr "Paneelpictogram"
@@ -238,6 +247,7 @@ msgstr ""
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->favApps->columns->title
 msgid "Name"
 msgstr ""
 
@@ -388,6 +398,34 @@ msgstr "Toon volledige path in tooltips"
 
 #. settings-schema.json->favoriteIconIsStar->description
 msgid "Replace icons with stars"
+msgstr ""
+
+#. settings-schema.json->showFavoriteApps->description
+#, fuzzy
+msgid "Show favorite apps"
+msgstr "Recente documenten tonen"
+
+#. settings-schema.json->favAppsLabel->description
+msgid ""
+"Below are the favorite applications displayed in the menu when checked.\n"
+"The Name can be changed.\n"
+"The Launcher must not be changed."
+msgstr ""
+
+#. settings-schema.json->favApps->description
+msgid "Favorite apps shown"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid "⚠️ Launcher"
+msgstr ""
+
+#. settings-schema.json->favAppsPopulateButton->description
+msgid "Add all your Favorite Apps"
 msgstr ""
 
 #. settings-schema.json->showRecentDocuments->description
