@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-11-14 14:58+0100\n"
-"PO-Revision-Date: 2025-11-11 21:12-0300\n"
+"PO-Revision-Date: 2025-11-14 11:34-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1126,32 +1126,31 @@ msgstr ""
 "parcialmente cubierta por el artista y el título."
 
 #. 6.4->settings-schema.json->shortenArtistTitle->description
-#, fuzzy
 msgid "Shorten Artist and Title"
-msgstr ""
-"Mostrar el artista y el título de la canción en la información sobre "
-"herramientas"
+msgstr "Acortar artista y título"
 
 #. 6.4->settings-schema.json->shortenArtistTitle->options
 msgid "None"
-msgstr ""
+msgstr "Ninguno"
 
 #. 6.4->settings-schema.json->shortenArtistTitle->options
 msgid "Start"
-msgstr ""
+msgstr "Inicio"
 
 #. 6.4->settings-schema.json->shortenArtistTitle->options
 msgid "Middle"
-msgstr ""
+msgstr "Medio"
 
 #. 6.4->settings-schema.json->shortenArtistTitle->options
 msgid "End"
-msgstr ""
+msgstr "Final"
 
 #. 6.4->settings-schema.json->shortenArtistTitle->tooltip
 msgid ""
 "When the artist name or title is too long, you can choose how to shorten it."
 msgstr ""
+"Cuando el nombre del artista o el título son demasiado largos, puedes elegir "
+"cómo acortarlos."
 
 #. 6.4->settings-schema.json->doNotUsePlayerctld->description
 msgid "Do not use playerctl"
