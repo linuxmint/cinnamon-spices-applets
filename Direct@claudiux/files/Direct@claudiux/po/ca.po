@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-13 01:47+0100\n"
+"POT-Creation-Date: 2025-11-15 14:49+0100\n"
 "PO-Revision-Date: 2025-10-06 21:22+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,19 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.6\n"
 
-#. applet.js:42 applet.js:553
+#. applet.js:42 applet.js:554
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:42 applet.js:588
+#. applet.js:42 applet.js:589
 msgid "FAVORITES"
 msgstr "PREFERITS"
 
-#. applet.js:42 applet.js:612
+#. applet.js:42 applet.js:613
 msgid "APPLICATIONS"
 msgstr ""
 
-#. applet.js:42 applet.js:636
+#. applet.js:42 applet.js:637
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTS RECENTS"
 
@@ -43,31 +43,31 @@ msgstr "(Clic dret per obrir la carpeta)"
 msgid "Direct"
 msgstr "Directe"
 
-#. applet.js:529
+#. applet.js:530
 msgid "Search Home Folder"
 msgstr "Buscar al directori Home"
 
-#. applet.js:562
+#. applet.js:563
 msgid "Search File System"
 msgstr "Buscar al sistema de fitxers"
 
-#. applet.js:650
+#. applet.js:651
 msgid "Clear"
 msgstr "Netejar"
 
-#. applet.js:657
+#. applet.js:658
 msgid "Recent"
 msgstr "Recent"
 
-#. applet.js:705
+#. applet.js:706
 msgid "Computer"
 msgstr "Ordinador"
 
-#. applet.js:711
+#. applet.js:712
 msgid "File System"
 msgstr "Sistema de fitxers"
 
-#. applet.js:728
+#. applet.js:729
 msgid "Network"
 msgstr "Xarxa"
 
@@ -229,6 +229,10 @@ msgstr ""
 #. settings-schema.json->panelText->description
 msgid "Panel text"
 msgstr "Text del tauler"
+
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr ""
 
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"

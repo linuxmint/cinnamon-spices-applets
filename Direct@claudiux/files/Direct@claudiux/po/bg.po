@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-13 01:47+0100\n"
+"POT-Creation-Date: 2025-11-15 14:49+0100\n"
 "PO-Revision-Date: 2017-12-20 20:20+0200\n"
 "Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
@@ -19,19 +19,19 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. applet.js:42 applet.js:553
+#. applet.js:42 applet.js:554
 msgid "SYSTEM"
 msgstr "СИСТЕМА"
 
-#. applet.js:42 applet.js:588
+#. applet.js:42 applet.js:589
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:42 applet.js:612
+#. applet.js:42 applet.js:613
 msgid "APPLICATIONS"
 msgstr ""
 
-#. applet.js:42 applet.js:636
+#. applet.js:42 applet.js:637
 msgid "RECENT DOCUMENTS"
 msgstr "ПОСЛЕДНИ ДОКУМЕНТИ"
 
@@ -44,31 +44,31 @@ msgstr ""
 msgid "Direct"
 msgstr "Директно"
 
-#. applet.js:529
+#. applet.js:530
 msgid "Search Home Folder"
 msgstr "Търси в домашната папка"
 
-#. applet.js:562
+#. applet.js:563
 msgid "Search File System"
 msgstr "Търси във файловата система"
 
-#. applet.js:650
+#. applet.js:651
 msgid "Clear"
 msgstr "Изчисти"
 
-#. applet.js:657
+#. applet.js:658
 msgid "Recent"
 msgstr ""
 
-#. applet.js:705
+#. applet.js:706
 msgid "Computer"
 msgstr "Компютър"
 
-#. applet.js:711
+#. applet.js:712
 msgid "File System"
 msgstr "Файлова система"
 
-#. applet.js:728
+#. applet.js:729
 msgid "Network"
 msgstr "Мрежа"
 
@@ -228,6 +228,10 @@ msgstr ""
 #. settings-schema.json->panelText->description
 msgid "Panel text"
 msgstr "Текст в панела"
+
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr ""
 
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"

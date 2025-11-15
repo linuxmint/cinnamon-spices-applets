@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-13 01:47+0100\n"
+"POT-Creation-Date: 2025-11-15 14:49+0100\n"
 "PO-Revision-Date: 2025-11-14 11:39-0300\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
@@ -19,19 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.8\n"
 
-#. applet.js:42 applet.js:553
+#. applet.js:42 applet.js:554
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:42 applet.js:588
+#. applet.js:42 applet.js:589
 msgid "FAVORITES"
 msgstr "FAVORITOS"
 
-#. applet.js:42 applet.js:612
+#. applet.js:42 applet.js:613
 msgid "APPLICATIONS"
 msgstr "APLICACIONES"
 
-#. applet.js:42 applet.js:636
+#. applet.js:42 applet.js:637
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTOS RECIENTES"
 
@@ -44,31 +44,31 @@ msgstr "(Haga clic con el botón derecho para abrir la carpeta)"
 msgid "Direct"
 msgstr "Directo"
 
-#. applet.js:529
+#. applet.js:530
 msgid "Search Home Folder"
 msgstr "Buscar en la carpeta personal"
 
-#. applet.js:562
+#. applet.js:563
 msgid "Search File System"
 msgstr "Buscar en el sistema de archivos"
 
-#. applet.js:650
+#. applet.js:651
 msgid "Clear"
 msgstr "Limpiar"
 
-#. applet.js:657
+#. applet.js:658
 msgid "Recent"
 msgstr "Recientes"
 
-#. applet.js:705
+#. applet.js:706
 msgid "Computer"
 msgstr "PC"
 
-#. applet.js:711
+#. applet.js:712
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#. applet.js:728
+#. applet.js:729
 msgid "Network"
 msgstr "Red"
 
@@ -228,6 +228,10 @@ msgstr "Se acepta nombre de icono o ruta directa (soporta iconos simbólicos)"
 #. settings-schema.json->panelText->description
 msgid "Panel text"
 msgstr "Texto del panel"
+
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr ""
 
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"

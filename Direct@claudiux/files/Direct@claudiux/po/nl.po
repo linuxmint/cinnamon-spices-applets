@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-13 01:47+0100\n"
+"POT-Creation-Date: 2025-11-15 14:49+0100\n"
 "PO-Revision-Date: 2024-07-24 10:12+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:42 applet.js:553
+#. applet.js:42 applet.js:554
 msgid "SYSTEM"
 msgstr "SYSTEEM"
 
-#. applet.js:42 applet.js:588
+#. applet.js:42 applet.js:589
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:42 applet.js:612
+#. applet.js:42 applet.js:613
 msgid "APPLICATIONS"
 msgstr ""
 
-#. applet.js:42 applet.js:636
+#. applet.js:42 applet.js:637
 msgid "RECENT DOCUMENTS"
 msgstr "RECENTE DOCUMENTEN"
 
@@ -42,31 +42,31 @@ msgstr "(Rechtsklik om map te openen)"
 msgid "Direct"
 msgstr "Direct"
 
-#. applet.js:529
+#. applet.js:530
 msgid "Search Home Folder"
 msgstr "Zoeken in thuismap"
 
-#. applet.js:562
+#. applet.js:563
 msgid "Search File System"
 msgstr "Zoeken in bestandssysteem"
 
-#. applet.js:650
+#. applet.js:651
 msgid "Clear"
 msgstr "Wissen"
 
-#. applet.js:657
+#. applet.js:658
 msgid "Recent"
 msgstr "Recent"
 
-#. applet.js:705
+#. applet.js:706
 msgid "Computer"
 msgstr "Computer"
 
-#. applet.js:711
+#. applet.js:712
 msgid "File System"
 msgstr "Bestandssysteem"
 
-#. applet.js:728
+#. applet.js:729
 msgid "Network"
 msgstr "Netwerk"
 
@@ -226,6 +226,10 @@ msgstr ""
 #. settings-schema.json->panelText->description
 msgid "Panel text"
 msgstr "Paneeltekst"
+
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr ""
 
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"

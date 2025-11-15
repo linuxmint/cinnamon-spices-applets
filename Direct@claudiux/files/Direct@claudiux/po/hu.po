@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-13 01:47+0100\n"
+"POT-Creation-Date: 2025-11-15 14:49+0100\n"
 "PO-Revision-Date: 2024-07-28 07:58-0400\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -18,19 +18,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:42 applet.js:553
+#. applet.js:42 applet.js:554
 msgid "SYSTEM"
 msgstr "RENDSZER"
 
-#. applet.js:42 applet.js:588
+#. applet.js:42 applet.js:589
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:42 applet.js:612
+#. applet.js:42 applet.js:613
 msgid "APPLICATIONS"
 msgstr ""
 
-#. applet.js:42 applet.js:636
+#. applet.js:42 applet.js:637
 msgid "RECENT DOCUMENTS"
 msgstr "MOSTANÁBAN MEGNYITOTT DOKUMENTUMOK"
 
@@ -43,31 +43,31 @@ msgstr "(Jobb egérgomb a mappa megnyitásához)"
 msgid "Direct"
 msgstr "Közvetlen"
 
-#. applet.js:529
+#. applet.js:530
 msgid "Search Home Folder"
 msgstr "Saját mappában keresés"
 
-#. applet.js:562
+#. applet.js:563
 msgid "Search File System"
 msgstr "Fájlrendszerben keresés"
 
-#. applet.js:650
+#. applet.js:651
 msgid "Clear"
 msgstr "Törlés"
 
-#. applet.js:657
+#. applet.js:658
 msgid "Recent"
 msgstr "Friss"
 
-#. applet.js:705
+#. applet.js:706
 msgid "Computer"
 msgstr "Számítógép"
 
-#. applet.js:711
+#. applet.js:712
 msgid "File System"
 msgstr "Fájlrendszer"
 
-#. applet.js:728
+#. applet.js:729
 msgid "Network"
 msgstr "Hálózat"
 
@@ -225,6 +225,10 @@ msgstr "Ikon név vagy direkt útvonal (szimbolikus ikonok támogatottak)"
 #. settings-schema.json->panelText->description
 msgid "Panel text"
 msgstr "Panel szöveg"
+
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr ""
 
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"
