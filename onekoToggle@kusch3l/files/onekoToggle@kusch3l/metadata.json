@@ -2,6 +2,5 @@
   "uuid": "onekoToggle@kusch3l",
   "name": "Oneko",
   "description": "Click on the applet to toggle your favourite display cat",
-  "max-instances": "-1",
-  "last-edited": 1763297346
+  "max-instances": "-1"
 }
