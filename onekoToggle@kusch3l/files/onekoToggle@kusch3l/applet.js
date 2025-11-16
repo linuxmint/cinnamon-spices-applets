@@ -1,56 +1,122 @@
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
 const St = imports.gi.St;
-let home = GLib.get_home_dir();
+const Util = imports.misc.util;
+const HOME = GLib.get_home_dir();
+const UUID = "onekoToggle@kusch3l";
+const APPLET_DIR = HOME + "/.local/share/cinnamon/applets/" + UUID;
+const ONEKO_SCRIPT = APPLET_DIR + "/oneko.sh";
+const GETSUDOERS_SCRIPT = APPLET_DIR + "/get-sudoers.sh";
+const DEBUG = false;
+const {
+    timeout_add,
+    timeout_add_seconds,
+    setTimeout,
+    clearTimeout,
+    setInterval,
+    clearInterval,
+    source_remove,
+    remove_all_sources
+} = require("./lib/mainloopTools");
+const { to_string } = require("./lib/to-string");
 
-function OnekoToggle(orientation, panelHeight, instanceId) {
-    this._init(orientation, panelHeight, instanceId);
+const Gettext = imports.gettext;
+Gettext.bindtextdomain(UUID, HOME + "/.local/share/locale");
+
+function _(str) {
+   let customTranslation = Gettext.dgettext(UUID, str);
+   if(customTranslation != str) {
+      return customTranslation;
+   }
+   return Gettext.gettext(str);
 }
 
-OnekoToggle.prototype = Object.create(Applet.TextIconApplet.prototype);
-OnekoToggle.prototype.constructor = OnekoToggle;
-
-OnekoToggle.prototype._init = function(orientation, panelHeight, instanceId) {
-    Applet.TextIconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
-    log("onekoToggle is initialised");
-    this.updateIcon();
-    this.set_applet_tooltip("Click to toggle Oneko");
-};
-
-OnekoToggle.prototype.on_applet_clicked = function(event) {
-    //log("onekoToggle is clicked");
-    GLib.spawn_command_line_async(home + "/.local/share/cinnamon/applets/onekoToggle@kusch3l/oneko.sh");
-    
-    // Delay update to allow process start/stop
-    GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
+class OnekoToggle extends Applet.IconApplet {
+    constructor(metadata, orientation, panel_height, instanceId) {
+        super(orientation, panel_height, instanceId);
+        if (DEBUG) global.log("onekoToggle is initialized");
+        this.orientation = orientation;
         this.updateIcon();
-        return GLib.SOURCE_REMOVE;
-    });
-};
+        this.set_applet_tooltip(_("Click to toggle Oneko"));
+        // make executable the script oneko.sh:
+        Util.spawnCommandLine(`/usr/bin/env bash -c 'chmod +x ${ONEKO_SCRIPT} ${GETSUDOERS_SCRIPT}'`);
+        this.is_sudoer = false;
+        var user = GLib.get_user_name();
+        let sudoersProcess = Util.spawnCommandLineAsyncIO(GETSUDOERS_SCRIPT, (stdout, stderr, exitCode) => {
+            if (exitCode == 0) {
+                let list = stdout.trim().split(",");
+                if (list.indexOf(user) > -1) {
+                    this.is_sudoer = true;
+                }
+            }
+            sudoersProcess.send_signal(9);
+        });
 
-OnekoToggle.prototype.checkIfProgramRunning = function(programName) {
-    // Runs pgrep synchronously, returns true/false
-    try {
-        let [ok, stdout, stderr, status] = GLib.spawn_command_line_sync(`pgrep -x ${programName}`);
-        if (ok && status === 0 && stdout.toString().trim() !== "") {
-            return true;
+    }
+
+    on_applet_clicked(event) {
+        //if (DEBUG) global.log(_("onekoToggle is clicked"));
+
+        if (GLib.find_program_in_path("oneko")) {
+            GLib.spawn_command_line_async(ONEKO_SCRIPT);
+        } else {
+            // oneko is not installed:
+            if (DEBUG) global.log(_("oneko is not installed!"));
+            if (this.is_sudoer && GLib.find_program_in_path("pkexec")) {
+                if (DEBUG) global.log(_("trying to install oneko"));
+                Util.spawnCommandLineAsync("pkexec pkcon -y install oneko");
+                timeout_add_seconds(10, () => {
+                    // waiting oneko installation:
+                    if (GLib.find_program_in_path("oneko")) {
+                        // install is ok:
+                        Extension.reloadExtension(UUID, Extension.Type.APPLET); // reload this applet
+                        return GLib.SOURCE_REMOVE; // stop loop
+                    } else {
+                        // wait again:
+                        return GLib.SOURCE_CONTINUE; // one more loop (10 seconds later)
+                    }
+                });
+            } else {
+                this.set_applet_tooltip(_("Please install oneko using root rights."));
+            }
         }
-    } catch (e) {
-        logError(e);
-    }
-    return false;
-};
 
-OnekoToggle.prototype.updateIcon = function() {
-    if (this.checkIfProgramRunning("oneko")) {
-        this.set_applet_icon_name("running");
-        log("oneko is running");
-    } else {
-        this.set_applet_icon_name("stopped");
-        log("oneko is stopped");
+
+        // Delay update to allow process start/stop
+        timeout_add( 250, () => {
+            this.updateIcon();
+            return GLib.SOURCE_REMOVE;
+        });
     }
-};
+
+    checkIfProgramRunning(programName) {
+        // Runs pgrep synchronously, returns true/false
+        try {
+            let [ok, stdout, stderr, status] = GLib.spawn_command_line_sync(`pgrep -x ${programName}`);
+            if (ok && status === 0 && to_string(stdout).trim().length > 0) {
+                return true;
+            }
+        } catch (e) {
+            global.logError(e);
+        }
+        return false;
+    }
+
+    updateIcon() {
+        if (this.checkIfProgramRunning("oneko")) {
+            this.set_applet_icon_name("running");
+            if (DEBUG) global.log("oneko is running");
+        } else {
+            this.set_applet_icon_name("stopped");
+            if (DEBUG) global.log("oneko is stopped");
+        }
+    }
+
+    on_applet_removed_from_panel(deleteconfig) {
+        remove_all_sources();
+    }
+}
 
 function main(metadata, orientation, panelHeight, instanceId) {
-    return new OnekoToggle(orientation, panelHeight, instanceId);
+    return new OnekoToggle(metadata, orientation, panelHeight, instanceId);
 }
