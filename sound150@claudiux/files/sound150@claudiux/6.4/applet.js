@@ -257,12 +257,25 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     constructor_continuation() {
+        // Mixer control:
+        this._control = new Cvc.MixerControl({
+            name: "Sound150 Volume Control"
+        });
+
         // The launch player list
         this._launchPlayerItem = new PopupMenu.PopupSubMenuMenuItem(_("Launch player"));
         // The list to use when switching between active players
         this._chooseActivePlayerItem = new PopupMenu.PopupSubMenuMenuItem(_("Choose player controls"));
 
         this.settings = new Settings.AppletSettings(this, UUID, this.instanceId);
+        this.settings.bind("shortenArtistTitle", "shortenArtistTitle");
+        this.settings.bind("doNotUsePlayerctld", "doNotUsePlayerctld", () => {
+            this._on_reload_this_applet_pressed();
+        });
+        if (this.doNotUsePlayerctld)
+            kill_playerctld();
+        else
+            run_playerctld();
         this.settings.bind("showMediaOptical", "showMediaOptical", () => {
             SHOW_MEDIA_OPTICAL = this.showMediaOptical;
             this._on_reload_this_applet_pressed();
@@ -276,9 +289,6 @@ class Sound150Applet extends Applet.TextIconApplet {
         SHOW_MEDIA_OPTICAL = this.showMediaOptical;
 
         this.settings.bind("viewFullAlbumArt", "viewFullAlbumArt", () => {
-            this._on_reload_this_applet_pressed();
-        });
-        this.settings.bind("doNotUsePlayerctld", "doNotUsePlayerctld", () => {
             this._on_reload_this_applet_pressed();
         });
 
@@ -523,10 +533,12 @@ class Sound150Applet extends Applet.TextIconApplet {
             );
         });
 
-        // Mixer control:
-        this._control = new Cvc.MixerControl({
-            name: "Sound150 Volume Control"
-        });
+        //~ // Mixer control:
+        //~ this._control = new Cvc.MixerControl({
+            //~ name: "Sound150 Volume Control"
+        //~ });
+
+        // Mixer control signals:
         this._control.connect("state-changed", (...args) => this._onControlStateChanged(...args));
 
         this._control.connect("output-added", (...args) => this._onDeviceAdded(...args, "output"));

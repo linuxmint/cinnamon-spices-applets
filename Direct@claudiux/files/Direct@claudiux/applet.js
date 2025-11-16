@@ -235,6 +235,8 @@ class DirectApplet extends Applet.TextIconApplet {
             this.appFavorites = getAppFavorites();
 
             this.enterEventId = null;
+            this.leaveEventId = null;
+            this.iconIsHovered = false;
             this.userSection = new PopupMenu.PopupMenuSection();
             this.systemSection = new PopupMenu.PopupMenuSection();
             this.devicesSection = new PopupMenu.PopupMenuSection();
@@ -306,13 +308,30 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     on_applet_added_to_panel() {
-        this.enterEventId = this.actor.connect("enter-event", (actor, event) => { this.controlDisplayOrder(); if ( ! this.menu.isOpen ) this.buildMenu(); } );
+        this.enterEventId = this.actor.connect("enter-event", (actor, event) => {
+            this.iconIsHovered = true;
+            this.controlDisplayOrder();
+            if ( ! this.menu.isOpen ) {
+                this.buildMenu();
+                if ( this.openHoveringOver ) {
+                    let _to = setTimeout( () => {
+                        clearTimeout(_to);
+                        if ( this.iconIsHovered )
+                            this.menu.open(true);
+
+                    }, 500);
+                }
+            }
+        });
+        this.leaveEventId = this.actor.connect("leave-event", (actor, event) => { this.iconIsHovered = false } );
         this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
     }
 
     on_applet_removed_from_panel() {
         if ( this.enterEventId )
             this.actor.disconnect(this.enterEventId); // "enter-event"
+        if ( this.leaveEventId )
+            this.actor.disconnect(this.leaveEventId); // "leave-event"
         if ( this.keyId ) {
             Main.keybindingManager.removeHotKey(this.keyId);
             this.keyId = null;
@@ -382,6 +401,7 @@ class DirectApplet extends Applet.TextIconApplet {
         this.settings.bind("favoriteIconIsStar", "favoriteIconIsStar");
         this.settings.bind("favoriteIconIsStar", "favoriteIconIsStar");
         this.settings.bind("favApps", "favApps");
+        this.settings.bind("openHoveringOver", "openHoveringOver");
         this.settings.bind("keyOpen", "keyOpen", this.setKeybinding);
         let recentSizeLimit = this.recentSizeLimit;
         if ( recentSizeLimit % 5 !== 0 ) this.recentSizeLimit = Math.ceil(recentSizeLimit / 5) * 5;

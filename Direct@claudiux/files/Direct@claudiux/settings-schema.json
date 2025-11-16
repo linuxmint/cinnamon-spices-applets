@@ -35,7 +35,7 @@
         "menu": {
             "type": "section",
             "title": "Menu settings",
-            "keys": ["keyOpen", "iconSize", "displayOrderLabel", "displayOrder", "displayOrderApply"]
+            "keys": ["openHoveringOver", "keyOpen", "iconSize", "displayOrderLabel", "displayOrder", "displayOrderApply"]
         },
         "userSection": {
             "type": "section",
@@ -84,7 +84,14 @@
     "panelText": {
         "type": "entry",
         "description": "Panel text",
+        "expand-width": true,
         "default": ""
+    },
+
+    "openHoveringOver": {
+        "type": "switch",
+        "default": false,
+        "description": "Open the menu by hovering over the icon"
     },
 
     "keyOpen": {

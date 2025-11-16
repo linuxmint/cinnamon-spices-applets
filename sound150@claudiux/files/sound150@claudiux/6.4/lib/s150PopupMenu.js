@@ -294,7 +294,19 @@ class Player extends PopupMenu.PopupMenuSection {
         });
         this.artistLabel.clutterText.line_wrap = true;
         this.artistLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
-        this.artistLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+        switch (this._applet.shortenArtistTitle) {
+            case "NONE":
+                this.artistLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+                break;
+            case "START":
+                this.artistLabel.clutterText.ellipsize = Pango.EllipsizeMode.START;
+                break;
+            case "MIDDLE":
+                this.artistLabel.clutterText.ellipsize = Pango.EllipsizeMode.MIDDLE;
+                break;
+            case "END":
+                this.artistLabel.clutterText.ellipsize = Pango.EllipsizeMode.END;
+        }
         artistInfo.add_actor(artistIcon);
         artistInfo.add_actor(this.artistLabel);
         let titleInfo = new St.BoxLayout();
@@ -309,7 +321,19 @@ class Player extends PopupMenu.PopupMenuSection {
 
         this.titleLabel.clutterText.line_wrap = true;
         this.titleLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
-        this.titleLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+        switch (this._applet.shortenArtistTitle) {
+            case "NONE":
+                this.titleLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+                break;
+            case "START":
+                this.titleLabel.clutterText.ellipsize = Pango.EllipsizeMode.START;
+                break;
+            case "MIDDLE":
+                this.titleLabel.clutterText.ellipsize = Pango.EllipsizeMode.MIDDLE;
+                break;
+            case "END":
+                this.titleLabel.clutterText.ellipsize = Pango.EllipsizeMode.END;
+        }
         titleInfo.add_actor(titleIcon);
         titleInfo.add_actor(this.titleLabel);
         //~ titleInfo.add_actor(this.display_cover_button.getActor());
@@ -920,13 +944,13 @@ class Player extends PopupMenu.PopupMenuSection {
             return;
         }
 
-        try {
-            if (this.coverBox != null && this.cover != null) {
-                let coverBoxChildren = this.coverBox.get_children();
-                if (coverBoxChildren.length > 0 && coverBoxChildren.indexOf(this.cover) > -1)
-                    this.coverBox.remove_child(this.cover);
-            }
-        } catch (e) {}
+        //~ try {
+        if (this.coverBox != null && this.cover != null) {
+            let coverBoxChildren = this.coverBox.get_children();
+            if (coverBoxChildren.length > 0 && coverBoxChildren.indexOf(this.cover) > -1)
+                try { this.coverBox.remove_child(this.cover) } catch(e) {}
+        }
+        //~ } catch (e) {}
 
         // Make sure any oddly-shaped album art doesn't affect the height of the applet popup
         // (and move the player controls as a result).

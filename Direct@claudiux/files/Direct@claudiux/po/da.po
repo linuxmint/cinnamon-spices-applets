@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-13 01:47+0100\n"
+"POT-Creation-Date: 2025-11-15 14:49+0100\n"
 "PO-Revision-Date: 2022-10-27 19:44+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -19,19 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:42 applet.js:553
+#. applet.js:42 applet.js:554
 msgid "SYSTEM"
 msgstr "SYSTEM"
 
-#. applet.js:42 applet.js:588
+#. applet.js:42 applet.js:589
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:42 applet.js:612
+#. applet.js:42 applet.js:613
 msgid "APPLICATIONS"
 msgstr ""
 
-#. applet.js:42 applet.js:636
+#. applet.js:42 applet.js:637
 msgid "RECENT DOCUMENTS"
 msgstr "SENESTE DOKUMENTER"
 
@@ -44,31 +44,31 @@ msgstr "(Højreklik for at åbne mappen)"
 msgid "Direct"
 msgstr "Direkte"
 
-#. applet.js:529
+#. applet.js:530
 msgid "Search Home Folder"
 msgstr "Søg i mappen Hjem"
 
-#. applet.js:562
+#. applet.js:563
 msgid "Search File System"
 msgstr "Søg i Filsystem"
 
-#. applet.js:650
+#. applet.js:651
 msgid "Clear"
 msgstr "Ryd"
 
-#. applet.js:657
+#. applet.js:658
 msgid "Recent"
 msgstr ""
 
-#. applet.js:705
+#. applet.js:706
 msgid "Computer"
 msgstr "Computer"
 
-#. applet.js:711
+#. applet.js:712
 msgid "File System"
 msgstr "Filsystem"
 
-#. applet.js:728
+#. applet.js:729
 msgid "Network"
 msgstr "Netværk"
 
@@ -226,6 +226,10 @@ msgstr "Godtager ikonnavn eller direkte sti (understøtter symbolske ikoner)"
 #. settings-schema.json->panelText->description
 msgid "Panel text"
 msgstr "Paneltekst"
+
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr ""
 
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"
