@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-10-12 18:05+0200\n"
-"PO-Revision-Date: 2025-08-03 18:13+0200\n"
+"PO-Revision-Date: 2025-11-17 12:41+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #. 4.2/SU_messageTray.js:1282 4.8/SU_messageTray.js:1282
 #. 4.6/SU_messageTray.js:1282 5.6/SU_messageTray.js:1282
@@ -2524,20 +2524,17 @@ msgstr ""
 "számára, a Spice-okat dátum szerint rendezve."
 
 #. 6.4->settings-schema.json->section_general5->title
-#, fuzzy
 msgid "Dependencies"
-msgstr "Függőségek ellenőrzése"
+msgstr "Függőségek"
 
 #. 6.4->settings-schema.json->btn_apply_applets->description
 #. 6.4->settings-schema.json->btn_apply_desklets->description
 #. 6.4->settings-schema.json->btn_apply_extensions->description
 #. 6.4->settings-schema.json->btn_apply_themes->description
 #. 6.4->settings-schema.json->btn_apply_actions->description
-#, fuzzy
 msgid "Apply"
-msgstr "Kisalkalmazás"
+msgstr "Alkalmaz"
 
 #. 6.4->settings-schema.json->dont_check_dependencies->description
-#, fuzzy
 msgid "Do not check dependencies"
-msgstr "Függőségek ellenőrzése"
+msgstr "Ne ellenőrizze a függőségeket"

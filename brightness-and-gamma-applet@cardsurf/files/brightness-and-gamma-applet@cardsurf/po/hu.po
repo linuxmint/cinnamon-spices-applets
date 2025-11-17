@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-26 20:09+0200\n"
-"PO-Revision-Date: 2025-08-03 18:18+0200\n"
+"PO-Revision-Date: 2025-11-17 12:46+0100\n"
 "Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #. applet.js:178 6.4/applet.js:265
 msgid "The following packages were not found:"
@@ -281,14 +281,19 @@ msgid ""
 "0 means instantaneous changes.\n"
 "Recommended value: between 200 and 300."
 msgstr ""
+"A változtatások lépésről lépésre történnek.\n"
+"Itt adhatja meg az egyes lépések időtartamát (milliszekundumban), amelyben "
+"az értékek szükség esetén egy egységgel változnak.\n"
+"A 0 azonnali változásokat jelent.\n"
+"Ajánlott érték: 200 és 300 között."
 
 #. 6.4->settings-schema.json->smooth_duration->description
 msgid "Step duration (ms)"
-msgstr ""
+msgstr "Lépés időtartama (ms)"
 
 #. 6.4->settings-schema.json->apply_changing_monitors->description
 msgid "Apply when the number of monitors changes"
-msgstr ""
+msgstr "Alkalmazza, amikor a monitorok száma megváltozik"
 
 #. 6.4->settings-schema.json->brightness_up_shortcut->description
 msgid "Hotkey to Increase brightness"

@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-27 10:12+0200\n"
-"PO-Revision-Date: 2021-04-03 20:32+0200\n"
+"PO-Revision-Date: 2025-11-17 15:03+0100\n"
 "Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.8\n"
 
 #. applet.js:154
 msgid "Session"
@@ -112,45 +112,40 @@ msgstr "Szimbolikus ikonok a menüben"
 
 #. settings-schema.json->menuOptions->description
 msgid "Menu Options"
-msgstr ""
+msgstr "Menü Beállítások"
 
 #. settings-schema.json->showLockScreen->description
-#, fuzzy
 msgid "Show Lock Screen option"
-msgstr "Zárolási képernyő"
+msgstr "Zárolási képernyő opció megjelenítése"
 
 #. settings-schema.json->showSwitchUser->description
-#, fuzzy
 msgid "Show Switch User option"
-msgstr "Felhasználóváltás"
+msgstr "Felhasználóváltás opció megjelenítése"
 
 #. settings-schema.json->showGuestSession->description
-#, fuzzy
 msgid "Show Guest Session option"
-msgstr "Vendég munkamenet"
+msgstr "Vendég munkamenet opció megjelenítése"
 
 #. settings-schema.json->showLogOff->description
 msgid "Show Log Off option"
-msgstr ""
+msgstr "Kijelentkezési opció megjelenítése"
 
 #. settings-schema.json->showSuspend->description
 msgid "Show Suspend option"
-msgstr ""
+msgstr "Felfüggesztési opció megjelenítése"
 
 #. settings-schema.json->showSleep->description
 msgid "Show Sleep option"
-msgstr ""
+msgstr "Alvás opció megjelenítése"
 
 #. settings-schema.json->showHibernate->description
-#, fuzzy
 msgid "Show Hibernate option"
-msgstr "Hibernálás"
+msgstr "Hibernált opció megjelenítése"
 
 #. settings-schema.json->showRestart->description
 msgid "Show Restart option"
-msgstr ""
+msgstr "Újraindítási opció megjelenítése"
 
 #. settings-schema.json->showShutDown->description
-#, fuzzy
 msgid "Show Shut Down option"
-msgstr "Leállítás"
+msgstr "Leállítási opció megjelenítése"
