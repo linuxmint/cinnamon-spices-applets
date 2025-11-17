@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-10-05 10:06+0200\n"
-"PO-Revision-Date: 2025-08-03 20:47+0200\n"
+"PO-Revision-Date: 2025-11-17 14:51+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #. 6.4->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
@@ -286,17 +286,16 @@ msgid "Execution of '%s' failed:"
 msgstr "A '%s' végrehajtása sikertelen:"
 
 #. 6.4/applet.js:43
-#, fuzzy
 msgid "Core 128:"
-msgstr "Mag"
+msgstr "Core 128:"
 
 #. 6.4/applet.js:44
 msgid "Unrecoverable:"
-msgstr ""
+msgstr "Helyreállíthatatlan:"
 
 #. 6.4/applet.js:45
 msgid "Recoverable:"
-msgstr ""
+msgstr "Helyreállítható:"
 
 #. 6.4->settings-schema.json->RefreshAll_btn->description
 #. 6.4/applet.js:385
@@ -305,7 +304,7 @@ msgstr "Összes frissítése"
 
 #. 6.4/applet.js:422 6.4/applet.js:427
 msgid "Configure..."
-msgstr ""
+msgstr "Beállítás..."
 
 #. 6.4->settings-schema.json->pageGeneral->title
 #. 6.4/applet.js:428 3.0/prefsui.glade:281 3.2/prefsui.glade:333
@@ -337,9 +336,8 @@ msgstr "Lemez IO"
 
 #. 6.4->settings-schema.json->pageDiskUsage->title
 #. 6.4/applet.js:433
-#, fuzzy
 msgid "Disk Usage"
-msgstr "Lemez IO"
+msgstr "Lemezhasználat"
 
 #. 6.4->settings-schema.json->pageColors->title
 #. 6.4->settings-schema.json->sectionGeneralColors->title
@@ -360,17 +358,16 @@ msgstr "root"
 
 #. 6.4/applet.js:958 6.4/applet.js:1488 6.4/applet.js:1568 6.4/applet.js:1658
 #. 6.4/applet.js:1660
-#, fuzzy
 msgid "Disks"
-msgstr "Lemez IO"
+msgstr "Lemezek"
 
 #. 6.4/applet.js:1181
 msgid "Buffers/Cache/Shared"
-msgstr ""
+msgstr "Pufferek/Gyorsítótár/Megosztott"
 
 #. 6.4/applet.js:1209 6.4/applet.js:1313 6.4/applet.js:1637
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #. 6.4/applet.js:1211 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 6.0/prefsui.glade:809 3.4/prefsui.glade:663 5.6/prefsui.glade:809
@@ -380,26 +377,24 @@ msgstr "Puffer"
 
 #. 6.4->settings-schema.json->Mem_colorCache->description
 #. 6.4/applet.js:1211
-#, fuzzy
 msgid "Cache"
-msgstr "Gyorsítótárazott"
+msgstr "Gyorsítótár"
 
 #. 6.4/applet.js:1211
 msgid "Shared"
-msgstr ""
+msgstr "Megosztott"
 
 #. 6.4/applet.js:1309
 msgid "CPUs"
-msgstr ""
+msgstr "CPU-k"
 
 #. 6.4/applet.js:1436
-#, fuzzy
 msgid "Networks"
-msgstr "Hálózat"
+msgstr "Hálózatok"
 
 #. 6.4/applet.js:1632
 msgid "Usage"
-msgstr ""
+msgstr "Használat"
 
 #. 3.4/applet.js:62
 msgid ""
@@ -438,7 +433,7 @@ msgstr "Opciók"
 
 #. 6.4->settings-schema.json->sectionTooltip->title
 msgid "Tooltip"
-msgstr ""
+msgstr "Eszköztipp"
 
 #. 6.4->settings-schema.json->sectionCPUColorsByActivity->title
 #. 6.0/prefsui.glade:538 5.6/prefsui.glade:538 4.0/prefsui.glade:538
@@ -465,7 +460,7 @@ msgstr "Eszközök"
 
 #. 6.4->settings-schema.json->sectionDiskUsagePaths->title
 msgid "Paths"
-msgstr ""
+msgstr "Ütvonalak"
 
 #. 6.4->settings-schema.json->sectionColors->title
 msgid "Your colors"
@@ -479,11 +474,11 @@ msgstr "Címkék"
 
 #. 6.4->settings-schema.json->borderOn->description
 msgid "Add a border to each graph"
-msgstr ""
+msgstr "Adjon hozzá egy szegélyt minden grafikonhoz"
 
 #. 6.4->settings-schema.json->graphSpacing->description
 msgid "Graph spacing"
-msgstr ""
+msgstr "Grafikon térköz"
 
 #. 6.4->settings-schema.json->thickness->description
 #. 6.0/prefsui.glade:168 5.6/prefsui.glade:168 4.0/prefsui.glade:168
@@ -507,9 +502,8 @@ msgid "Label Color"
 msgstr "Címke színe"
 
 #. 6.4->settings-schema.json->borderColor->description
-#, fuzzy
 msgid "Border Color"
-msgstr "Háttérszín"
+msgstr "Szegély színe"
 
 #. 6.4->settings-schema.json->backgroundColor->description
 #. 3.0/prefsui.glade:245 3.2/prefsui.glade:297 6.0/prefsui.glade:263
@@ -519,21 +513,19 @@ msgstr "Háttérszín"
 
 #. 6.4->settings-schema.json->percentAtEndOfLine->description
 msgid "Place % at the very end of the line"
-msgstr ""
+msgstr "Írd a % jelet a sor végére"
 
 #. 6.4->settings-schema.json->removeEnlightenment->description
-#, fuzzy
 msgid "Remove Enlightenment of this applet"
-msgstr "Kisalkalmazás újratöltése"
+msgstr "Kisalkalmazás megvilágosításának eltávolítása"
 
 #. 6.4->settings-schema.json->CPU_labelOn->description
 #. 6.4->settings-schema.json->Mem_labelOn->description
 #. 6.4->settings-schema.json->Net_labelOn->description
 #. 6.4->settings-schema.json->Disk_labelOn->description
 #. 6.4->settings-schema.json->DiskUsage_labelOn->description
-#, fuzzy
 msgid "Label"
-msgstr "Címkék"
+msgstr "Címke"
 
 #. 6.4->settings-schema.json->CPU_squared->description
 #. 6.4->settings-schema.json->Mem_squared->description
@@ -541,7 +533,7 @@ msgstr "Címkék"
 #. 6.4->settings-schema.json->Disk_squared->description
 #. 6.4->settings-schema.json->DiskUsage_squared->description
 msgid "Square view"
-msgstr ""
+msgstr "Négyzet alakú nézet"
 
 #. 6.4->settings-schema.json->CPU_width->description
 #. 6.4->settings-schema.json->Mem_width->description
@@ -564,7 +556,7 @@ msgstr "Szélesség"
 #. 6.4->settings-schema.json->Disk_mergeAll->description
 #. 6.4->settings-schema.json->DiskUsage_mergeAll->description
 msgid "Merge all"
-msgstr ""
+msgstr "Összes egyesítése"
 
 #. 6.4->settings-schema.json->CPU_byActivity->description
 #. 6.0/prefsui.glade:433 5.6/prefsui.glade:433 4.0/prefsui.glade:433
@@ -608,7 +600,7 @@ msgstr "0-20"
 
 #. 6.4->settings-schema.json->Mem_startAt12Oclock->description
 msgid "Origin at 12 o'clock"
-msgstr ""
+msgstr "Eredet 12 órakor"
 
 #. 6.4->settings-schema.json->Mem_colorUsedup->description
 #. 6.4->settings-schema.json->DiskUsage_colorUsed->description
@@ -618,9 +610,8 @@ msgid "Usedup"
 msgstr "Felhasznált"
 
 #. 6.4->settings-schema.json->Mem_colorBuffers->description
-#, fuzzy
 msgid "Buffers"
-msgstr "Puffer"
+msgstr "Pufferek"
 
 #. 6.4->settings-schema.json->Mem_colorFree->description
 #. 6.4->settings-schema.json->DiskUsage_colorFree->description
@@ -631,19 +622,19 @@ msgstr "Szabad"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->description
 msgid "Relative width for Swap graph"
-msgstr ""
+msgstr "Relatív szélesség a cserehely grafikonhoz"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->options
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->options
 msgid "25%, left side"
-msgstr ""
+msgstr "25%, bal oldal"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->options
 msgid "None"
-msgstr ""
+msgstr "Semmi"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->tooltip
 msgid ""
@@ -653,6 +644,11 @@ msgid ""
 "left of the circle.\n"
 "None: No Swap bar."
 msgstr ""
+"100%: A Cserediagram egy sáv, amely a grafikon teljes szélességét átfogja, a "
+"kör mögött.\n"
+"10%: A Cserediagram egy sáv, amely a grafikon szélességének 10%-át foglalja "
+"el, a körtől balra.\n"
+"Nincs: Nincs Cserediagram."
 
 #. 6.4->settings-schema.json->Net_autoscale->description
 #. 6.4->settings-schema.json->Disk_autoscale->description
@@ -724,24 +720,23 @@ msgstr "Szín Írás"
 
 #. 6.4->settings-schema.json->DiskUsage_chartType->description
 msgid "Type of chart"
-msgstr ""
+msgstr "Diagram típusa"
 
 #. 6.4->settings-schema.json->DiskUsage_chartType->options
 msgid "Bar"
-msgstr ""
+msgstr "Sáv"
 
 #. 6.4->settings-schema.json->DiskUsage_chartType->options
 msgid "Pie"
-msgstr ""
+msgstr "Kör"
 
 #. 6.4->settings-schema.json->DiskUsage_colorAlert->description
 msgid "Alert"
-msgstr ""
+msgstr "Riasztás"
 
 #. 6.4->settings-schema.json->DiskUsage_getpathlist_btn->description
-#, fuzzy
 msgid "Update this path list"
-msgstr "Eszközlista frissítése"
+msgstr "Frissítse ezt az elérési útlistát"
 
 #. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
 msgid ""
@@ -749,10 +744,13 @@ msgid ""
 "value (in %)\n"
 "reaches"
 msgstr ""
+"Riasztás, amikor\n"
+"az érték (%-ban)\n"
+"eléri a"
 
 #. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
 msgid "Path"
-msgstr ""
+msgstr "Útvonal"
 
 #. 6.4->settings-schema.json->color0->description
 msgid "Color #0"
@@ -819,84 +817,68 @@ msgid "Color #15"
 msgstr "Szín #15"
 
 #. 6.4->settings-schema.json->color16->description
-#, fuzzy
 msgid "Color #16"
-msgstr "Szín #1"
+msgstr "Szín #16"
 
 #. 6.4->settings-schema.json->color17->description
-#, fuzzy
 msgid "Color #17"
-msgstr "Szín #1"
+msgstr "Szín #17"
 
 #. 6.4->settings-schema.json->color18->description
-#, fuzzy
 msgid "Color #18"
-msgstr "Szín #1"
+msgstr "Szín #18"
 
 #. 6.4->settings-schema.json->color19->description
-#, fuzzy
 msgid "Color #19"
-msgstr "Szín #1"
+msgstr "Szín #19"
 
 #. 6.4->settings-schema.json->color20->description
-#, fuzzy
 msgid "Color #20"
-msgstr "Szín #2"
+msgstr "Szín #20"
 
 #. 6.4->settings-schema.json->color21->description
-#, fuzzy
 msgid "Color #21"
-msgstr "Szín #2"
+msgstr "Szín #21"
 
 #. 6.4->settings-schema.json->color22->description
-#, fuzzy
 msgid "Color #22"
-msgstr "Szín #2"
+msgstr "Szín #22"
 
 #. 6.4->settings-schema.json->color23->description
-#, fuzzy
 msgid "Color #23"
-msgstr "Szín #2"
+msgstr "Szín #23"
 
 #. 6.4->settings-schema.json->color24->description
-#, fuzzy
 msgid "Color #24"
-msgstr "Szín #2"
+msgstr "Szín #24"
 
 #. 6.4->settings-schema.json->color25->description
-#, fuzzy
 msgid "Color #25"
-msgstr "Szín #2"
+msgstr "Szín #25"
 
 #. 6.4->settings-schema.json->color26->description
-#, fuzzy
 msgid "Color #26"
-msgstr "Szín #2"
+msgstr "Szín #26"
 
 #. 6.4->settings-schema.json->color27->description
-#, fuzzy
 msgid "Color #27"
-msgstr "Szín #2"
+msgstr "Szín #27"
 
 #. 6.4->settings-schema.json->color28->description
-#, fuzzy
 msgid "Color #28"
-msgstr "Szín #2"
+msgstr "Szín #28"
 
 #. 6.4->settings-schema.json->color29->description
-#, fuzzy
 msgid "Color #29"
-msgstr "Szín #2"
+msgstr "Szín #29"
 
 #. 6.4->settings-schema.json->color30->description
-#, fuzzy
 msgid "Color #30"
-msgstr "Szín #3"
+msgstr "Szín #30"
 
 #. 6.4->settings-schema.json->color31->description
-#, fuzzy
 msgid "Color #31"
-msgstr "Szín #3"
+msgstr "Szín #31"
 
 #. 6.4->settings-schema.json->labelWarning->description
 msgid "Data marked with ⚠️ must not be changed!"

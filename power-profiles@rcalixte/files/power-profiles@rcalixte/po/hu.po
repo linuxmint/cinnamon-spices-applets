@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.8\n"
 
 #. 5.4/applet.js:28
 msgid "Power Saver"
@@ -90,12 +90,11 @@ msgstr "Teljesítményprofilok"
 
 #. 5.4->settings-schema.json->section0->description
 msgid "General"
-msgstr ""
+msgstr "Általános"
 
 #. 5.4->settings-schema.json->cycleProfiles->description
-#, fuzzy
 msgid "Cycle through profiles when using keyboard shortcuts or scroll wheel"
-msgstr "Profilok közötti váltás gyorsbillentyű használatakor"
+msgstr "Profilok közötti váltás billentyűparancsok vagy görgő használatakor"
 
 #. 5.4->settings-schema.json->cycleProfiles->tooltip
 msgid ""
@@ -117,20 +116,19 @@ msgstr ""
 
 #. 5.4->settings-schema.json->scrollBehavior->description
 msgid "Scroll wheel behavior"
-msgstr ""
+msgstr "Görgő viselkedése"
 
 #. 5.4->settings-schema.json->scrollBehavior->options
 msgid "Nothing"
-msgstr ""
+msgstr "Semmi"
 
 #. 5.4->settings-schema.json->scrollBehavior->options
-#, fuzzy
 msgid "Switch profiles"
-msgstr "Következő profil"
+msgstr "Profilok váltása"
 
 #. 5.4->settings-schema.json->scrollBehavior->options
 msgid "Switch profiles (reversed)"
-msgstr ""
+msgstr "Profilok váltása (fordítva)"
 
 #. 5.4->settings-schema.json->section1->description
 msgid "Keyboard Shortcuts"
