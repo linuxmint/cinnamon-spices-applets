@@ -6,7 +6,6 @@ const HOME = GLib.get_home_dir();
 const UUID = "onekoToggle@kusch3l";
 const APPLET_DIR = HOME + "/.local/share/cinnamon/applets/" + UUID;
 const ONEKO_SCRIPT = APPLET_DIR + "/oneko.sh";
-const GETSUDOERS_SCRIPT = APPLET_DIR + "/get-sudoers.sh";
 const DEBUG = false;
 const {
     timeout_add,
@@ -37,21 +36,9 @@ class OnekoToggle extends Applet.IconApplet {
         if (DEBUG) global.log("onekoToggle is initialized");
         this.orientation = orientation;
         this.updateIcon();
-        this.set_applet_tooltip(_("Click to toggle Oneko"));
+        this._tooltip_ok();
         // make executable the script oneko.sh:
-        Util.spawnCommandLine(`/usr/bin/env bash -c 'chmod +x ${ONEKO_SCRIPT} ${GETSUDOERS_SCRIPT}'`);
-        this.is_sudoer = false;
-        var user = GLib.get_user_name();
-        let sudoersProcess = Util.spawnCommandLineAsyncIO(GETSUDOERS_SCRIPT, (stdout, stderr, exitCode) => {
-            if (exitCode == 0) {
-                let list = stdout.trim().split(",");
-                if (list.indexOf(user) > -1) {
-                    this.is_sudoer = true;
-                }
-            }
-            sudoersProcess.send_signal(9);
-        });
-
+        Util.spawnCommandLine(`/usr/bin/env bash -c 'chmod +x ${ONEKO_SCRIPT}'`);
     }
 
     on_applet_clicked(event) {
@@ -62,22 +49,35 @@ class OnekoToggle extends Applet.IconApplet {
         } else {
             // oneko is not installed:
             if (DEBUG) global.log(_("oneko is not installed!"));
-            if (this.is_sudoer && GLib.find_program_in_path("pkexec")) {
+            if (GLib.find_program_in_path("pkexec")) {
                 if (DEBUG) global.log(_("trying to install oneko"));
-                Util.spawnCommandLineAsync("pkexec pkcon -y install oneko");
-                timeout_add_seconds(10, () => {
-                    // waiting oneko installation:
-                    if (GLib.find_program_in_path("oneko")) {
-                        // install is ok:
-                        Extension.reloadExtension(UUID, Extension.Type.APPLET); // reload this applet
-                        return GLib.SOURCE_REMOVE; // stop loop
-                    } else {
-                        // wait again:
-                        return GLib.SOURCE_CONTINUE; // one more loop (10 seconds later)
+                Util.spawnCommandLineAsync(
+                    "pkexec pkcon -y install oneko",
+                    () => {
+                        this._tooltip_ok();
+                        timeout_add_seconds(
+                            10,
+                            () => {
+                                //callback:
+                                // waiting oneko installation:
+                                if (GLib.find_program_in_path("oneko")) {
+                                    // install is ok:
+                                    this._tooltip_ok();
+                                    return GLib.SOURCE_REMOVE; // stop loop
+                                } else {
+                                    // wait again:
+                                    this._tooltip_need_install();
+                                    return GLib.SOURCE_CONTINUE; // one more loop (10 seconds later)
+                                }
+                            }
+                        )},
+                    () => {
+                        //errback:
+                        this._tooltip_need_install();
                     }
-                });
+                );
             } else {
-                this.set_applet_tooltip(_("Please install oneko using root rights."));
+                this._tooltip_need_install();
             }
         }
 
@@ -87,6 +87,14 @@ class OnekoToggle extends Applet.IconApplet {
             this.updateIcon();
             return GLib.SOURCE_REMOVE;
         });
+    }
+
+    _tooltip_ok() {
+        this.set_applet_tooltip(_("Click to toggle Oneko"));
+    }
+
+    _tooltip_need_install() {
+        this.set_applet_tooltip(_("Please install oneko using root rights."));
     }
 
     checkIfProgramRunning(programName) {
