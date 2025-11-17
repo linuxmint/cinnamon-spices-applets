@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-23 12:55+0200\n"
-"PO-Revision-Date: 2025-10-25 19:01-0300\n"
+"POT-Creation-Date: 2025-11-15 14:49+0100\n"
+"PO-Revision-Date: 2025-11-15 11:47-0300\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -19,56 +19,60 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.8\n"
 
-#. applet.js:38 applet.js:495
+#. applet.js:42 applet.js:554
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:38 applet.js:530
+#. applet.js:42 applet.js:589
 msgid "FAVORITES"
 msgstr "FAVORITOS"
 
-#. applet.js:38 applet.js:554
+#. applet.js:42 applet.js:613
+msgid "APPLICATIONS"
+msgstr "APLICACIONES"
+
+#. applet.js:42 applet.js:637
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTOS RECIENTES"
 
-#. applet.js:160
+#. applet.js:164
 msgid "(Right click to open folder)"
 msgstr "(Haga clic con el botón derecho para abrir la carpeta)"
 
 #. metadata.json->name
-#. applet.js:263
+#. applet.js:289
 msgid "Direct"
 msgstr "Directo"
 
-#. applet.js:471
+#. applet.js:530
 msgid "Search Home Folder"
 msgstr "Buscar en la carpeta personal"
 
-#. applet.js:504
+#. applet.js:563
 msgid "Search File System"
 msgstr "Buscar en el sistema de archivos"
 
-#. applet.js:568
+#. applet.js:651
 msgid "Clear"
 msgstr "Limpiar"
 
-#. applet.js:575
+#. applet.js:658
 msgid "Recent"
 msgstr "Recientes"
 
-#. applet.js:623
+#. applet.js:706
 msgid "Computer"
 msgstr "PC"
 
-#. applet.js:629
+#. applet.js:712
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#. applet.js:646
+#. applet.js:729
 msgid "Network"
 msgstr "Red"
 
-#. applet.js:868
+#. applet.js:974
 msgid "Trash"
 msgstr "Papelera"
 
@@ -209,6 +213,10 @@ msgstr "Sección del sistema"
 msgid "Favorite documents"
 msgstr "Documentos favoritos"
 
+#. settings-schema.json->favoriteAppsSection->title
+msgid "Favorite apps"
+msgstr "Aplicaciones favoritas"
+
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
 msgstr "Icono del panel"
@@ -220,6 +228,10 @@ msgstr "Se acepta nombre de icono o ruta directa (soporta iconos simbólicos)"
 #. settings-schema.json->panelText->description
 msgid "Panel text"
 msgstr "Texto del panel"
+
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr "Abrir el menú pasando el cursor sobre el icono."
 
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"
@@ -241,6 +253,7 @@ msgstr "Mover estas secciones para reorganizar el menú:"
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->favApps->columns->title
 msgid "Name"
 msgstr "Nombre"
 
@@ -262,7 +275,7 @@ msgstr "Abrir al hacer click central"
 
 #. settings-schema.json->middleClickPath->tooltip
 msgid "Leave blank to disable"
-msgstr "Dejar en blanco para deshabilitar"
+msgstr "Deje en blanco para deshabilitarlo"
 
 #. settings-schema.json->dontDisplayTooltip->description
 msgid "Do not display the tooltip"
@@ -274,7 +287,7 @@ msgstr "Mostrar sección de usuario"
 
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
-msgstr "Mostrar «Escritorio»"
+msgstr "Mostrar Escritorio"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
@@ -308,11 +321,11 @@ msgstr "Mostrar sección sistema"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"
-msgstr "Mostrar «PC»"
+msgstr "Mostrar PC"
 
 #. settings-schema.json->showRoot->description
 msgid "Show file system"
-msgstr "Mostrar «Sistema de archivos»"
+msgstr "Mostrar Sistema de archivos"
 
 #. settings-schema.json->showVolumes->description
 msgid "Show volumes"
@@ -324,7 +337,7 @@ msgstr "Sólo mostrar volúmenes montados"
 
 #. settings-schema.json->showNetwork->description
 msgid "Show network"
-msgstr "Mostrar «Red»"
+msgstr "Mostrar Red"
 
 #. settings-schema.json->showFavorites->description
 msgid "Show favorite documents"
@@ -387,6 +400,37 @@ msgstr "Mostrar la ruta completa en la información sobre herramientas"
 #. settings-schema.json->favoriteIconIsStar->description
 msgid "Replace icons with stars"
 msgstr "Reemplazar iconos con estrellas"
+
+#. settings-schema.json->showFavoriteApps->description
+msgid "Show favorite apps"
+msgstr "Mostrar aplicaciones favoritas"
+
+#. settings-schema.json->favAppsLabel->description
+msgid ""
+"Below are the favorite applications displayed in the menu when checked.\n"
+"The Name can be changed.\n"
+"The Launcher must not be changed."
+msgstr ""
+"A continuación se muestran las aplicaciones favoritas que aparecen en el "
+"menú cuando se marcan.\n"
+"El nombre se puede cambiar.\n"
+"El lanzador no se debe cambiar."
+
+#. settings-schema.json->favApps->description
+msgid "Favorite apps shown"
+msgstr "Aplicaciones favoritas mostradas"
+
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr "Menú"
+
+#. settings-schema.json->favApps->columns->title
+msgid "⚠️ Launcher"
+msgstr "⚠️ Lanzador"
+
+#. settings-schema.json->favAppsPopulateButton->description
+msgid "Add all your Favorite Apps"
+msgstr "Añade todas tus aplicaciones favoritas"
 
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"

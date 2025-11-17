@@ -63,7 +63,9 @@
         "avoidTwice",
         "dontShowAnyImageInMenu",
         "showMediaOptical",
-        "viewFullAlbumArt"
+        "viewFullAlbumArt",
+        "shortenArtistTitle",
+        "doNotUsePlayerctld"
       ]
     },
     "sectionMenu2": {
@@ -251,6 +253,24 @@
     "default": false,
     "description": "View Full Album Art",
     "tooltip": "When unchecked, Album Art in the menu may be partially covered by Artist and Title."
+  },
+  "shortenArtistTitle": {
+    "type": "combobox",
+    "description": "Shorten Artist and Title",
+    "default": "NONE",
+    "options": {
+      "None": "NONE",
+      "Start": "START",
+      "Middle": "MIDDLE",
+      "End": "END"
+    },
+    "tooltip": "When the artist name or title is too long, you can choose how to shorten it."
+  },
+  "doNotUsePlayerctld": {
+    "type": "switch",
+    "default": false,
+    "description": "Do not use playerctl",
+    "tooltip": "When this option is checked, which is not recommended, playerctl installation is not required; playerctl will not be used, so this applet will run in degraded mode (artist, title or album art)."
   },
   "keepAppListOpen": {
     "type": "switch",

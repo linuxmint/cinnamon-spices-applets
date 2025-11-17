@@ -20,7 +20,7 @@
         "favoritesPage": {
             "type": "page",
             "title": "Favorites",
-            "sections": ["favoritesSection"]
+            "sections": ["favoritesSection", "favoriteAppsSection"]
         },
         "recentPage": {
             "type": "page",
@@ -35,7 +35,7 @@
         "menu": {
             "type": "section",
             "title": "Menu settings",
-            "keys": ["keyOpen", "iconSize", "displayOrderLabel", "displayOrder", "displayOrderApply"]
+            "keys": ["openHoveringOver", "keyOpen", "iconSize", "displayOrderLabel", "displayOrder", "displayOrderApply"]
         },
         "userSection": {
             "type": "section",
@@ -62,6 +62,11 @@
             "title": "Favorite documents",
             "keys": ["showFavorites", "favoriteSortingMethod", "favoriteSizeLimit", "favoriteShowUri", "favoriteIconIsStar"]
         },
+        "favoriteAppsSection": {
+            "type": "section",
+            "title": "Favorite apps",
+            "keys": ["showFavoriteApps", "favAppsLabel", "favApps", "favAppsPopulateButton"]
+        },
         "recentSection": {
             "type": "section",
             "title": "Recent documents",
@@ -79,7 +84,14 @@
     "panelText": {
         "type": "entry",
         "description": "Panel text",
+        "expand-width": true,
         "default": ""
+    },
+
+    "openHoveringOver": {
+        "type": "switch",
+        "default": false,
+        "description": "Open the menu by hovering over the icon"
     },
 
     "keyOpen": {
@@ -281,6 +293,38 @@
         "description": "Replace icons with stars",
         "default": false,
         "dependency": "showFavorites"
+    },
+
+    "showFavoriteApps": {
+        "type": "switch",
+        "description": "Show favorite apps",
+        "default": true
+    },
+
+    "favAppsLabel": {
+        "type": "label",
+        "description": "Below are the favorite applications displayed in the menu when checked.\nThe Name can be changed.\nThe Launcher must not be changed.",
+        "dependency": "showFavoriteApps"
+    },
+
+    "favApps": {
+        "type": "list",
+        "description": "Favorite apps shown",
+        "default": [],
+        "columns":  [
+            {"id": "menu", "title": "Menu", "type": "boolean", "default": true},
+            {"id": "name", "title": "Name", "type": "string", "expand-width": true},
+            {"id": "id", "title": "⚠️ Launcher", "type": "string", "expand-width": true}
+        ],
+        "show-buttons": true,
+        "dependency": "showFavoriteApps"
+    },
+
+    "favAppsPopulateButton": {
+        "type": "button",
+        "description": "Add all your Favorite Apps",
+        "callback": "favAppsPopulateList",
+        "dependency": "showFavoriteApps"
     },
 
     "showRecentDocuments": {

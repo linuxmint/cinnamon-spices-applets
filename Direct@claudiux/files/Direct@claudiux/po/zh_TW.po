@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"POT-Creation-Date: 2025-11-15 14:49+0100\n"
 "PO-Revision-Date: 2025-08-04 00:13+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -16,56 +16,60 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:38 applet.js:495
+#. applet.js:42 applet.js:554
 msgid "SYSTEM"
 msgstr "系統"
 
-#. applet.js:38 applet.js:530
+#. applet.js:42 applet.js:589
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:38 applet.js:554
+#. applet.js:42 applet.js:613
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:42 applet.js:637
 msgid "RECENT DOCUMENTS"
 msgstr "最近的文件"
 
-#. applet.js:160
+#. applet.js:164
 msgid "(Right click to open folder)"
 msgstr "（點選滑鼠右鍵開啟資料夾）"
 
 #. metadata.json->name
-#. applet.js:263
+#. applet.js:289
 msgid "Direct"
 msgstr "直接"
 
-#. applet.js:471
+#. applet.js:530
 msgid "Search Home Folder"
 msgstr "搜尋家目錄"
 
-#. applet.js:504
+#. applet.js:563
 msgid "Search File System"
 msgstr "搜尋檔案系統"
 
-#. applet.js:568
+#. applet.js:651
 msgid "Clear"
 msgstr "清除"
 
-#. applet.js:575
+#. applet.js:658
 msgid "Recent"
 msgstr "最近使用"
 
-#. applet.js:623
+#. applet.js:706
 msgid "Computer"
 msgstr "電腦"
 
-#. applet.js:629
+#. applet.js:712
 msgid "File System"
 msgstr "檔案系統"
 
-#. applet.js:646
+#. applet.js:729
 msgid "Network"
 msgstr "網路"
 
-#. applet.js:868
+#. applet.js:974
 msgid "Trash"
 msgstr "資源回收筒"
 
@@ -203,6 +207,11 @@ msgstr "系統區段"
 msgid "Favorite documents"
 msgstr "顯示最近的文件"
 
+#. settings-schema.json->favoriteAppsSection->title
+#, fuzzy
+msgid "Favorite apps"
+msgstr "顯示最近的文件"
+
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
 msgstr "面板圖示"
@@ -214,6 +223,10 @@ msgstr "可輸入圖示名稱或直接路徑（支援符號圖示）"
 #. settings-schema.json->panelText->description
 msgid "Panel text"
 msgstr "面板文字"
+
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr ""
 
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"
@@ -235,6 +248,7 @@ msgstr ""
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->favApps->columns->title
 msgid "Name"
 msgstr ""
 
@@ -385,6 +399,34 @@ msgstr "在工具提示中顯示完整路徑"
 
 #. settings-schema.json->favoriteIconIsStar->description
 msgid "Replace icons with stars"
+msgstr ""
+
+#. settings-schema.json->showFavoriteApps->description
+#, fuzzy
+msgid "Show favorite apps"
+msgstr "顯示最近的文件"
+
+#. settings-schema.json->favAppsLabel->description
+msgid ""
+"Below are the favorite applications displayed in the menu when checked.\n"
+"The Name can be changed.\n"
+"The Launcher must not be changed."
+msgstr ""
+
+#. settings-schema.json->favApps->description
+msgid "Favorite apps shown"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid "⚠️ Launcher"
+msgstr ""
+
+#. settings-schema.json->favAppsPopulateButton->description
+msgid "Add all your Favorite Apps"
 msgstr ""
 
 #. settings-schema.json->showRecentDocuments->description

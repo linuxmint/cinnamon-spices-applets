@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"POT-Creation-Date: 2025-11-15 14:49+0100\n"
 "PO-Revision-Date: 2024-06-18 15:39+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -19,56 +19,60 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:38 applet.js:495
+#. applet.js:42 applet.js:554
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:38 applet.js:530
+#. applet.js:42 applet.js:589
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:38 applet.js:554
+#. applet.js:42 applet.js:613
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:42 applet.js:637
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTI RECENTI"
 
-#. applet.js:160
+#. applet.js:164
 msgid "(Right click to open folder)"
 msgstr "(Fare clic con il tasto destro per aprire la cartella)"
 
 #. metadata.json->name
-#. applet.js:263
+#. applet.js:289
 msgid "Direct"
 msgstr "Diretto"
 
-#. applet.js:471
+#. applet.js:530
 msgid "Search Home Folder"
 msgstr "Cerca nella cartella Home"
 
-#. applet.js:504
+#. applet.js:563
 msgid "Search File System"
 msgstr "Cerca nel File System"
 
-#. applet.js:568
+#. applet.js:651
 msgid "Clear"
 msgstr "Pulisci"
 
-#. applet.js:575
+#. applet.js:658
 msgid "Recent"
 msgstr "Recenti"
 
-#. applet.js:623
+#. applet.js:706
 msgid "Computer"
 msgstr "Computer"
 
-#. applet.js:629
+#. applet.js:712
 msgid "File System"
 msgstr "File System"
 
-#. applet.js:646
+#. applet.js:729
 msgid "Network"
 msgstr "Rete"
 
-#. applet.js:868
+#. applet.js:974
 msgid "Trash"
 msgstr "Cestino"
 
@@ -206,6 +210,11 @@ msgstr "Sezione sistema"
 msgid "Favorite documents"
 msgstr "Mostra documenti recenti"
 
+#. settings-schema.json->favoriteAppsSection->title
+#, fuzzy
+msgid "Favorite apps"
+msgstr "Mostra documenti recenti"
+
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
 msgstr "Icona pannello"
@@ -219,6 +228,10 @@ msgstr ""
 #. settings-schema.json->panelText->description
 msgid "Panel text"
 msgstr "Testo pannello"
+
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr ""
 
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"
@@ -240,6 +253,7 @@ msgstr ""
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->favApps->columns->title
 msgid "Name"
 msgstr ""
 
@@ -390,6 +404,34 @@ msgstr "Mostra il percorso completo nelle descrizioni comandi"
 
 #. settings-schema.json->favoriteIconIsStar->description
 msgid "Replace icons with stars"
+msgstr ""
+
+#. settings-schema.json->showFavoriteApps->description
+#, fuzzy
+msgid "Show favorite apps"
+msgstr "Mostra documenti recenti"
+
+#. settings-schema.json->favAppsLabel->description
+msgid ""
+"Below are the favorite applications displayed in the menu when checked.\n"
+"The Name can be changed.\n"
+"The Launcher must not be changed."
+msgstr ""
+
+#. settings-schema.json->favApps->description
+msgid "Favorite apps shown"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid "⚠️ Launcher"
+msgstr ""
+
+#. settings-schema.json->favAppsPopulateButton->description
+msgid "Add all your Favorite Apps"
 msgstr ""
 
 #. settings-schema.json->showRecentDocuments->description

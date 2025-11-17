@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-23 12:55+0200\n"
-"PO-Revision-Date: 2025-10-23 12:52+0200\n"
+"POT-Creation-Date: 2025-11-15 14:49+0100\n"
+"PO-Revision-Date: 2025-11-15 14:51+0100\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,56 +19,60 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:38 applet.js:495
+#. applet.js:42 applet.js:554
 msgid "SYSTEM"
 msgstr "SYSTÈME"
 
-#. applet.js:38 applet.js:530
+#. applet.js:42 applet.js:589
 msgid "FAVORITES"
 msgstr "FAVORIS"
 
-#. applet.js:38 applet.js:554
+#. applet.js:42 applet.js:613
+msgid "APPLICATIONS"
+msgstr "APPLICATIONS"
+
+#. applet.js:42 applet.js:637
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTS RÉCENTS"
 
-#. applet.js:160
+#. applet.js:164
 msgid "(Right click to open folder)"
 msgstr "(Clic droit pour ouvrir son dossier)"
 
 #. metadata.json->name
-#. applet.js:263
+#. applet.js:289
 msgid "Direct"
 msgstr "Direct"
 
-#. applet.js:471
+#. applet.js:530
 msgid "Search Home Folder"
 msgstr "Rechercher dans mon dossier personnel"
 
-#. applet.js:504
+#. applet.js:563
 msgid "Search File System"
 msgstr "Rechercher dans le système de fichiers"
 
-#. applet.js:568
+#. applet.js:651
 msgid "Clear"
 msgstr "Effacer"
 
-#. applet.js:575
+#. applet.js:658
 msgid "Recent"
 msgstr "Récents"
 
-#. applet.js:623
+#. applet.js:706
 msgid "Computer"
 msgstr "Ordinateur"
 
-#. applet.js:629
+#. applet.js:712
 msgid "File System"
 msgstr "Système de fichiers"
 
-#. applet.js:646
+#. applet.js:729
 msgid "Network"
 msgstr "Réseau"
 
-#. applet.js:868
+#. applet.js:974
 msgid "Trash"
 msgstr "Corbeille"
 
@@ -209,6 +213,10 @@ msgstr "Section Système"
 msgid "Favorite documents"
 msgstr "Documents Favoris"
 
+#. settings-schema.json->favoriteAppsSection->title
+msgid "Favorite apps"
+msgstr "Applications Favorites"
+
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
 msgstr "Icône sur le tableau de bord"
@@ -222,6 +230,10 @@ msgstr ""
 #. settings-schema.json->panelText->description
 msgid "Panel text"
 msgstr "Texte sur le tableau de bord"
+
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr "Ouvrir le menu en survolant l'icône"
 
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"
@@ -243,6 +255,7 @@ msgstr "Déplacer ces sections pour réorganiser le menu :"
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->favApps->columns->title
 msgid "Name"
 msgstr "Nom"
 
@@ -389,6 +402,37 @@ msgstr "Afficher le chemin complet dans les infobulles"
 #. settings-schema.json->favoriteIconIsStar->description
 msgid "Replace icons with stars"
 msgstr "Remplacer les icônes par des étoiles"
+
+#. settings-schema.json->showFavoriteApps->description
+msgid "Show favorite apps"
+msgstr "Afficher les Applications Favorites"
+
+#. settings-schema.json->favAppsLabel->description
+msgid ""
+"Below are the favorite applications displayed in the menu when checked.\n"
+"The Name can be changed.\n"
+"The Launcher must not be changed."
+msgstr ""
+"Voici les Applications Favorites affichées dans le menu lorsqu'elles sont "
+"cochées.\n"
+"Le Nom peut être modifié.\n"
+"Le Lanceur ne doit pas être modifié."
+
+#. settings-schema.json->favApps->description
+msgid "Favorite apps shown"
+msgstr "Applications Favorites affichées"
+
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr "Menu"
+
+#. settings-schema.json->favApps->columns->title
+msgid "⚠️ Launcher"
+msgstr "⚠️ Lanceur"
+
+#. settings-schema.json->favAppsPopulateButton->description
+msgid "Add all your Favorite Apps"
+msgstr "Ajouter toutes vos Applications Favorites"
 
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"

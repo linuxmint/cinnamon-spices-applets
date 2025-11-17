@@ -1,3 +1,12 @@
+### v13.7.1~20251114
+  * Adds option "Shorten Artist and Title". When the artist name or title is too long, you can choose how to shorten it.
+  * Fixes [#7966](https://github.com/linuxmint/cinnamon-spices-applets/issues/7966)
+
+### v13.7.0~20251111
+  * Adds option "Do not use playerctl". 
+  * Fixes [#7961](https://github.com/linuxmint/cinnamon-spices-applets/issues/7961)
+  * Improved stability. Several errors were fixed.
+
 ### v13.6.2~20251109
   * Avoid error loading image.
 

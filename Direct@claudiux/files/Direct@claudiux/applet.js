@@ -5,6 +5,10 @@ const Clutter = imports.gi.Clutter;
 const Pango = imports.gi.Pango;
 const St = imports.gi.St;
 
+const CMenu = imports.gi.CMenu;
+const Cinnamon = imports.gi.Cinnamon;
+const { getAppFavorites } = imports.ui.appFavorites;
+
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
 const ModalDialog = imports.ui.modalDialog;
@@ -35,8 +39,8 @@ function _(str) {
    return Gettext.gettext(str);
 }
 
-const orig_names = [GLib.get_user_name().toUpperCase(), _("SYSTEM"), _("FAVORITES"), _("RECENT DOCUMENTS")];
-const orig_sections = ["User", "System", "Favorites", "RecentDocuments"];
+const orig_names = [GLib.get_user_name().toUpperCase(), _("SYSTEM"), _("FAVORITES"), _("APPLICATIONS"), _("RECENT DOCUMENTS")];
+const orig_sections = ["User", "System", "Favorites", "FavoriteApps", "RecentDocuments"];
 
 function icon_exists( iconName ) {
     return Gtk.IconTheme.get_default().has_icon( iconName );
@@ -200,6 +204,24 @@ class FavoriteMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
 }
 
+class FavoriteAppMenuItem extends PopupMenu.PopupBaseMenuItem {
+    constructor(name, app, applet, params) {
+        super(params);
+        if (!app) return;
+        this.name = name;
+        this.app = app;
+        this.box = new St.BoxLayout({ style_class: 'popup-combobox-item', style: 'padding: 0px;' });
+        //~ let gicon = St.TextureCache.get_default().load_gicon(null, app.icon, applet.iconSize);
+        let gicon = app.create_icon_texture(applet.iconSize);
+        //~ let gicon = app.get_gicon();
+        this.box.add(gicon);
+        let label = new St.Label({ text: this.name, y_align: Clutter.ActorAlign.CENTER });
+        label.clutter_text.ellipsize = Pango.EllipsizeMode.END;
+        this.box.add(label);
+        this.addActor(this.box);
+    }
+}
+
 class DirectApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instanceId) {
         try {
@@ -209,12 +231,18 @@ class DirectApplet extends Applet.TextIconApplet {
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
             this.on_orientation_changed(orientation);
 
+            this.appSystem = Cinnamon.AppSystem.get_default();
+            this.appFavorites = getAppFavorites();
+
             this.enterEventId = null;
+            this.leaveEventId = null;
+            this.iconIsHovered = false;
             this.userSection = new PopupMenu.PopupMenuSection();
             this.systemSection = new PopupMenu.PopupMenuSection();
             this.devicesSection = new PopupMenu.PopupMenuSection();
             this.recentSection = new PopupMenu.PopupMenuSection();
             this.favoriteSection = new PopupMenu.PopupMenuSection();
+            this.favAppsSection = new PopupMenu.PopupMenuSection();
 
             //initiate settings
             this.settings = new Settings.AppletSettings(this, UUID, this.instanceId);
@@ -280,13 +308,30 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     on_applet_added_to_panel() {
-        this.enterEventId = this.actor.connect("enter-event", (actor, event) => { this.controlDisplayOrder(); if ( ! this.menu.isOpen ) this.buildMenu(); } );
+        this.enterEventId = this.actor.connect("enter-event", (actor, event) => {
+            this.iconIsHovered = true;
+            this.controlDisplayOrder();
+            if ( ! this.menu.isOpen ) {
+                this.buildMenu();
+                if ( this.openHoveringOver ) {
+                    let _to = setTimeout( () => {
+                        clearTimeout(_to);
+                        if ( this.iconIsHovered )
+                            this.menu.open(true);
+
+                    }, 500);
+                }
+            }
+        });
+        this.leaveEventId = this.actor.connect("leave-event", (actor, event) => { this.iconIsHovered = false } );
         this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
     }
 
     on_applet_removed_from_panel() {
         if ( this.enterEventId )
             this.actor.disconnect(this.enterEventId); // "enter-event"
+        if ( this.leaveEventId )
+            this.actor.disconnect(this.leaveEventId); // "leave-event"
         if ( this.keyId ) {
             Main.keybindingManager.removeHotKey(this.keyId);
             this.keyId = null;
@@ -344,6 +389,7 @@ class DirectApplet extends Applet.TextIconApplet {
         //~ this.settings.bind("showRecentDocuments", "showRecentDocuments", this.buildMenu);
         this.settings.bind("showRecentDocuments", "showRecentDocuments");
         this.settings.bind("showFavorites", "showFavorites");
+        this.settings.bind("showFavoriteApps", "showFavoriteApps");
         //~ this.settings.bind("recentSizeLimit", "recentSizeLimit", this.buildRecentDocumentsSection);
         this.settings.bind("recentSizeLimit", "recentSizeLimit");
         this.settings.bind("favoriteSizeLimit", "favoriteSizeLimit");
@@ -353,7 +399,9 @@ class DirectApplet extends Applet.TextIconApplet {
         this.settings.bind("recentShowUri", "recentShowUri");
         this.settings.bind("favoriteShowUri", "favoriteShowUri");
         this.settings.bind("favoriteIconIsStar", "favoriteIconIsStar");
-        this.settings.bind("iconBrowserIsPresent", "iconBrowserIsPresent");
+        this.settings.bind("favoriteIconIsStar", "favoriteIconIsStar");
+        this.settings.bind("favApps", "favApps");
+        this.settings.bind("openHoveringOver", "openHoveringOver");
         this.settings.bind("keyOpen", "keyOpen", this.setKeybinding);
         let recentSizeLimit = this.recentSizeLimit;
         if ( recentSizeLimit % 5 !== 0 ) this.recentSizeLimit = Math.ceil(recentSizeLimit / 5) * 5;
@@ -393,6 +441,29 @@ class DirectApplet extends Applet.TextIconApplet {
         Main.keybindingManager.addHotKey(this.keyId, this.keyOpen, Lang.bind(this, this.openMenu));
     }
 
+    favAppsPopulateList() {
+        var favApps = this.favApps;
+        var ids = [];
+        favApps.forEach(app => { ids.push(app["id"]) });
+
+        let favAppValues = this.appFavorites.getFavorites();
+        favAppValues.forEach(value => {
+                let name = value.get_name();
+                let id = value.get_id();
+                if (ids.indexOf(id) < 0) {
+                    favApps.push({"menu": true, "name": name, "id": id});
+                }
+            }
+        );
+
+        let _to = setTimeout(() => {
+                clearTimeout(_to);
+                this.settings.setValue("favApps", favApps);
+            },
+            2100
+        );
+    }
+
     buildMenu() {
         menu_item_icon_size = this.iconSize;
 
@@ -404,6 +475,7 @@ class DirectApplet extends Applet.TextIconApplet {
             this.devicesSection = new PopupMenu.PopupMenuSection();
             this.recentSection = new PopupMenu.PopupMenuSection();
             this.favoriteSection = new PopupMenu.PopupMenuSection();
+            this.favAppsSection = new PopupMenu.PopupMenuSection();
         } else return;
 
         let section = new PopupMenu.PopupMenuSection();
@@ -421,6 +493,7 @@ class DirectApplet extends Applet.TextIconApplet {
 
         let systemPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
         let favoritesPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
+        let favAppsPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
         let recentPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
 
         let order = [];
@@ -440,6 +513,11 @@ class DirectApplet extends Applet.TextIconApplet {
                     case "Favorites":
                         if (this.showFavorites) {
                             mainBox.add_actor(favoritesPaneBox);
+                        }
+                        break;
+                    case "FavoriteApps":
+                        if (this.showFavoriteApps) {
+                            mainBox.add_actor(favAppsPaneBox);
                         }
                         break;
                     case "RecentDocuments":
@@ -541,6 +619,30 @@ class DirectApplet extends Applet.TextIconApplet {
                 favoritesPane._connectSubMenuSignals(this.favoriteSection, this.favoriteSection);
 
                 this.buildFavoritesSection();
+            }
+
+            //favorite apps section
+            if ( this.showFavoriteApps && this.favApps.length > 0 ) {
+                //~ let favoritesPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
+                //~ mainBox.add_actor(favoritesPaneBox);
+                let favAppsPane = new PopupMenu.PopupMenuSection();
+                favAppsPaneBox.add_actor(favAppsPane.actor);
+                section._connectSubMenuSignals(favAppsPane, favAppsPane);
+
+                let favAppsTitle = new PopupMenu.PopupMenuItem(_("APPLICATIONS"), { style_class: "xCenter-title", reactive: false });
+                favAppsPane.addMenuItem(favAppsTitle);
+
+                let favAppsScrollBox = new St.ScrollView({ style_class: "xCenter-scrollBox", x_fill: true, y_fill: false, y_align: St.Align.START });
+                favAppsPane.actor.add_actor(favAppsScrollBox);
+                favAppsScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+                let favAppsVscroll = favAppsScrollBox.get_vscroll_bar();
+                favAppsVscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
+                favAppsVscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
+
+                favAppsScrollBox.add_actor(this.favAppsSection.actor);
+                favAppsPane._connectSubMenuSignals(this.favAppsSection, this.favAppsSection);
+
+                this.buildFavAppsSection();
             }
 
             //recent documents section
@@ -744,6 +846,29 @@ class DirectApplet extends Applet.TextIconApplet {
 
                 this._favoriteButtons.push(button);
                 this.favoriteSection.addMenuItem(button);
+            }
+        }
+    }
+
+    buildFavAppsSection() {
+        if ( !this.showFavoriteApps || this.favApps.length === 0 ) return;
+        if ( this.favAppsSection ) this.favAppsSection.removeAll();
+        else this.favAppsSection = new PopupMenu.PopupMenuSection();
+
+        let favAppValues = this.appFavorites.getFavorites();
+        //~ let appSys = Cinnamon.AppSystem.get_default();
+
+        for (let app of this.favApps) {
+            if (!app["menu"]) continue;
+            let _app = this.appSystem.lookup_app(app["id"]);
+            if (_app) {
+                let button = new FavoriteAppMenuItem(app["name"], _app, this);
+                button.connect("activate", (button, event)=> {
+                    button.app.activate();
+                    this.menu.toggle();
+                })
+
+                this.favAppsSection.addMenuItem(button);
             }
         }
     }

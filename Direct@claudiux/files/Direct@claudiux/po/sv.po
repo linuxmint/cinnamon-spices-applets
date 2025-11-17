@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"POT-Creation-Date: 2025-11-15 14:49+0100\n"
 "PO-Revision-Date: 2022-10-29 15:32+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -19,56 +19,60 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.1.1\n"
 
-#. applet.js:38 applet.js:495
+#. applet.js:42 applet.js:554
 msgid "SYSTEM"
 msgstr "SYSTEM"
 
-#. applet.js:38 applet.js:530
+#. applet.js:42 applet.js:589
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:38 applet.js:554
+#. applet.js:42 applet.js:613
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:42 applet.js:637
 msgid "RECENT DOCUMENTS"
 msgstr "TIDIGARE DOKUMENT"
 
-#. applet.js:160
+#. applet.js:164
 msgid "(Right click to open folder)"
 msgstr "(Högerklicka för att öppna mapp)"
 
 #. metadata.json->name
-#. applet.js:263
+#. applet.js:289
 msgid "Direct"
 msgstr "Direkt"
 
-#. applet.js:471
+#. applet.js:530
 msgid "Search Home Folder"
 msgstr "Sök i hemkatalogen"
 
-#. applet.js:504
+#. applet.js:563
 msgid "Search File System"
 msgstr "Sök i filsystemet"
 
-#. applet.js:568
+#. applet.js:651
 msgid "Clear"
 msgstr "Rensa"
 
-#. applet.js:575
+#. applet.js:658
 msgid "Recent"
 msgstr ""
 
-#. applet.js:623
+#. applet.js:706
 msgid "Computer"
 msgstr "Dator"
 
-#. applet.js:629
+#. applet.js:712
 msgid "File System"
 msgstr "Filsystem"
 
-#. applet.js:646
+#. applet.js:729
 msgid "Network"
 msgstr "Nätverk"
 
-#. applet.js:868
+#. applet.js:974
 msgid "Trash"
 msgstr "Papperskorg"
 
@@ -206,6 +210,11 @@ msgstr "Systemsektion"
 msgid "Favorite documents"
 msgstr "Visa tidigare dokument"
 
+#. settings-schema.json->favoriteAppsSection->title
+#, fuzzy
+msgid "Favorite apps"
+msgstr "Visa tidigare dokument"
+
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
 msgstr "Panelikon"
@@ -217,6 +226,10 @@ msgstr "Accepterar ikonnamn eller direkt sökväg (stöder symboliska ikoner)"
 #. settings-schema.json->panelText->description
 msgid "Panel text"
 msgstr "Paneltext"
+
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr ""
 
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"
@@ -238,6 +251,7 @@ msgstr ""
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->favApps->columns->title
 msgid "Name"
 msgstr ""
 
@@ -387,6 +401,34 @@ msgstr ""
 
 #. settings-schema.json->favoriteIconIsStar->description
 msgid "Replace icons with stars"
+msgstr ""
+
+#. settings-schema.json->showFavoriteApps->description
+#, fuzzy
+msgid "Show favorite apps"
+msgstr "Visa tidigare dokument"
+
+#. settings-schema.json->favAppsLabel->description
+msgid ""
+"Below are the favorite applications displayed in the menu when checked.\n"
+"The Name can be changed.\n"
+"The Launcher must not be changed."
+msgstr ""
+
+#. settings-schema.json->favApps->description
+msgid "Favorite apps shown"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid "⚠️ Launcher"
+msgstr ""
+
+#. settings-schema.json->favAppsPopulateButton->description
+msgid "Add all your Favorite Apps"
 msgstr ""
 
 #. settings-schema.json->showRecentDocuments->description
