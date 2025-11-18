@@ -216,7 +216,8 @@
             {"id": "gamma_green", "title": "Gamma\nGreen", "type": "integer", "align": 0.5, "min": 0, "max": 200},
             {"id": "gamma_blue", "title": "Gamma\nBlue", "type": "integer", "align": 0.5, "min": 0, "max": 200},
             {"id": "start_at_sunrise", "title": "Start at\nSunrise", "type": "boolean", "align": 0.5},
-            {"id": "start_at_sunset", "title": "Start at\nSunset", "type": "boolean", "align": 0.5}
+            {"id": "start_at_sunset", "title": "Start at\nSunset", "type": "boolean", "align": 0.5},
+            {"id": "shortcut", "title": "Hotkey", "type": "keybinding", "default": "::"}
         ],
         "default": [
             {
