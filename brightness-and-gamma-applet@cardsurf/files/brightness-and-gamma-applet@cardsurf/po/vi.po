@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: brightness-and-gamma-applet@cardsurf 2.3.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-26 20:09+0200\n"
+"POT-Creation-Date: 2025-11-18 23:35+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -18,59 +18,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:178 6.4/applet.js:265
+#. applet.js:178 6.4/applet.js:268
 msgid "The following packages were not found:"
 msgstr "Không tìm thấy các gói sau:"
 
-#. applet.js:179 6.4/applet.js:266
+#. applet.js:179 6.4/applet.js:269
 msgid "Please install the above packages to use the applet"
 msgstr "Vui lòng cài đặt các gói trên để sử dụng applet"
 
-#. applet.js:564 6.4/applet.js:808
+#. applet.js:564 6.4/applet.js:830
 msgid "Screen"
 msgstr "Màn hình"
 
-#. applet.js:647 6.4/applet.js:891
+#. applet.js:647 6.4/applet.js:913
 msgid "Outputs"
 msgstr "Đầu ra"
 
 #. settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->preset_list->columns->title
-#. appletGui.js:235 6.4/applet.js:41 6.4/lib/appletGui.js:212
+#. appletGui.js:235 6.4/applet.js:43 6.4/lib/appletGui.js:212
 msgid "Brightness"
 msgstr "Độ sáng"
 
-#. appletGui.js:236 6.4/applet.js:42 6.4/lib/appletGui.js:213
+#. appletGui.js:236 6.4/applet.js:44 6.4/lib/appletGui.js:213
 msgid "Red"
 msgstr "Đỏ"
 
-#. appletGui.js:237 6.4/applet.js:43 6.4/lib/appletGui.js:214
+#. appletGui.js:237 6.4/applet.js:45 6.4/lib/appletGui.js:214
 msgid "Green"
 msgstr "Xanh lá"
 
-#. appletGui.js:238 6.4/applet.js:44 6.4/lib/appletGui.js:215
+#. appletGui.js:238 6.4/applet.js:46 6.4/lib/appletGui.js:215
 msgid "Blue"
 msgstr "Xanh dương"
 
-#. 6.4/applet.js:45 6.4/applet.js:962
+#. 6.4/applet.js:47 6.4/applet.js:984
 msgid "Sunrise"
 msgstr "Bình minh"
 
-#. 6.4/applet.js:46 6.4/applet.js:964
+#. 6.4/applet.js:48 6.4/applet.js:986
 msgid "Sunset"
 msgstr "Hoàng hôn"
 
-#. 6.4/applet.js:729
+#. 6.4/applet.js:735
 msgid "Reload"
 msgstr "Tải lại"
 
-#. 6.4/applet.js:739
+#. 6.4/applet.js:745
 msgid "Configure Presets"
 msgstr "Cấu hình thiết lập trước"
 
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.4/applet.js:749
+#. 6.4/applet.js:799
 msgid "Presets"
 msgstr "Thiết lập trước"
 
@@ -281,8 +281,8 @@ msgid ""
 "Recommended value: between 200 and 300."
 msgstr ""
 "Các thay đổi được thực hiện từng bước.\n"
-"Tại đây bạn xác định thời lượng (tính bằng mili giây) của mỗi bước mà giá trị "
-"được thay đổi từng đơn vị nếu cần thiết.\n"
+"Tại đây bạn xác định thời lượng (tính bằng mili giây) của mỗi bước mà giá "
+"trị được thay đổi từng đơn vị nếu cần thiết.\n"
 "0 nghĩa là thay đổi tức thì.\n"
 "Giá trị khuyến nghị: từ 200 đến 300."
 
@@ -309,10 +309,10 @@ msgid ""
 "Only the first Start at Sunrise and Start at Sunset checked boxes are taken "
 "into account."
 msgstr ""
-"Bạn có thể định nghĩa hoặc chỉnh sửa các thiết lập trước bên dưới, sau đó truy "
-"cập qua menu ngữ cảnh của applet.\n"
-"Chỉ hộp kiểm 'Bắt đầu lúc Bình minh' và 'Bắt đầu lúc Hoàng hôn' đầu tiên được "
-"xét đến."
+"Bạn có thể định nghĩa hoặc chỉnh sửa các thiết lập trước bên dưới, sau đó "
+"truy cập qua menu ngữ cảnh của applet.\n"
+"Chỉ hộp kiểm 'Bắt đầu lúc Bình minh' và 'Bắt đầu lúc Hoàng hôn' đầu tiên "
+"được xét đến."
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Name"
@@ -366,6 +366,10 @@ msgstr ""
 "Bắt đầu lúc\n"
 "Hoàng hôn"
 
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid "Hotkey"
+msgstr ""
+
 #. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
 msgid "Set Sunrise and Sunset times"
 msgstr "Thiết lập thời gian Bình minh và Hoàng hôn"
@@ -373,4 +377,3 @@ msgstr "Thiết lập thời gian Bình minh và Hoàng hôn"
 #. 6.4->settings-schema.json->preset_reload->description
 msgid "Apply all changes"
 msgstr "Áp dụng tất cả thay đổi"
-

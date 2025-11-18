@@ -67,6 +67,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.applet_directory = this._get_applet_directory();
         this.is_running = true;
 
+        this.bagaShortcuts = [];
         this.screen_outputs = {};
         this.menu_item_screen_position = 0;
         this.menu_item_outputs_position = 1;
@@ -587,6 +588,9 @@ class BrightnessAndGamma extends Applet.IconApplet {
         try{
             Main.keybindingManager.removeHotKey("brightnessUp");
             Main.keybindingManager.removeHotKey("brightnessDn");
+            while (this.bagaShortcuts.length > 0) {
+                Main.keybindingManager.removeHotKey(this.bagaShortcuts.pop());
+            }
         } catch(e) {}
         this.is_running = false;
         remove_all_sources();
@@ -754,54 +758,59 @@ class BrightnessAndGamma extends Applet.IconApplet {
         });
     }
 
+    _up_to_preset(preset, menuItem) {
+        this.target_brightness = Math.max(preset["brightness"], this.minimum_brightness);
+        this.target_gamma_red = Math.max(preset["gamma_red"], this.minimum_gamma);
+        this.target_gamma_green = Math.max(preset["gamma_green"], this.minimum_gamma);
+        this.target_gamma_blue = Math.max(preset["gamma_blue"], this.minimum_gamma);
+        let _interval = setInterval( () => {
+            if (this.target_brightness === this.brightness &&
+                this.target_gamma_red ===  this.gamma_red &&
+                this.target_gamma_green === this.gamma_green &&
+                this.target_gamma_blue === this.gamma_blue
+            ) {
+                clearInterval(_interval);
+            }
+
+            this.brightness += Math.sign(this.target_brightness - this.brightness);
+            this.gamma_red += Math.sign(this.target_gamma_red - this.gamma_red);
+            this.gamma_green += Math.sign(this.target_gamma_green - this.gamma_green);
+            this.gamma_blue += Math.sign(this.target_gamma_blue - this.gamma_blue);
+
+            this._needed_updates();
+            if (menuItem) {
+                if (this.brightness == preset["brightness"] &&
+                    this.gamma_red == preset["gamma_red"] &&
+                    this.gamma_green == preset["gamma_green"] &&
+                    this.gamma_blue == preset["gamma_blue"]) {
+                        menuItem.setOrnament(PopupMenu.OrnamentType.DOT, true);
+                } else {
+                        menuItem.setOrnament(PopupMenu.OrnamentType.DOT, false);
+                }
+            }
+        }, this.smooth_duration);
+    }
+
     _init_menu_item_presets() {
         if (this.menu_item_presets) {
             let children = this._applet_context_menu._getMenuItems();
             children[this.menu_item_presets_position].destroy();
         }
         this.menu_item_presets = new PopupMenu.PopupSubMenuMenuItem(_("Presets"));
+        var counterShortcut = -1;
         for (let preset of this.preset_list) {
+            counterShortcut++;
             if (preset.show) {
                 let menuItem = this.menu_item_presets.menu.addAction(preset["name"], () => {
-                    this.target_brightness = Math.max(preset["brightness"], this.minimum_brightness);
-                    this.target_gamma_red = Math.max(preset["gamma_red"], this.minimum_gamma);
-                    this.target_gamma_green = Math.max(preset["gamma_green"], this.minimum_gamma);
-                    this.target_gamma_blue = Math.max(preset["gamma_blue"], this.minimum_gamma);
-                    let _interval = setInterval( () => {
-                        if (this.target_brightness === this.brightness &&
-                            this.target_gamma_red ===  this.gamma_red &&
-                            this.target_gamma_green === this.gamma_green &&
-                            this.target_gamma_blue === this.gamma_blue
-                        ) {
-                            clearInterval(_interval);
-                        }
-
-                        this.brightness += Math.sign(this.target_brightness - this.brightness);
-                        this.gamma_red += Math.sign(this.target_gamma_red - this.gamma_red);
-                        this.gamma_green += Math.sign(this.target_gamma_green - this.gamma_green);
-                        this.gamma_blue += Math.sign(this.target_gamma_blue - this.gamma_blue);
-
-                        //~ this.menu_sliders.update_items_brightness();
-                        //~ this.menu_sliders.update_items_gamma_red();
-                        //~ this.menu_sliders.update_items_gamma_green();
-                        //~ this.menu_sliders.update_items_gamma_blue();
-                        //~ this.update_xrandr();
-                        //~ this.update_tooltip();
-                        //~ this._init_menu_item_presets();
-                        this._needed_updates();
-                        if (menuItem) {
-                            if (this.brightness == preset["brightness"] &&
-                                this.gamma_red == preset["gamma_red"] &&
-                                this.gamma_green == preset["gamma_green"] &&
-                                this.gamma_blue == preset["gamma_blue"]) {
-                                    menuItem.setOrnament(PopupMenu.OrnamentType.DOT, true);
-                            } else {
-                                    menuItem.setOrnament(PopupMenu.OrnamentType.DOT, false);
-                            }
-                        }
-                    }, this.smooth_duration);
-
+                    this._up_to_preset(preset, menuItem);
                 });
+                if (preset["shortcut"] != null && preset["shortcut"].length > 2) {
+                    let nameShortcut = "baga-" + this.instance_id + "-" + counterShortcut;
+                    Main.keybindingManager.addHotKey(nameShortcut, preset["shortcut"], () => {
+                        this._up_to_preset(preset, menuItem);
+                    });
+                    this.bagaShortcuts.push(nameShortcut);
+                }
                 if (this.brightness == preset["brightness"] &&
                     this.gamma_red == preset["gamma_red"] &&
                     this.gamma_green == preset["gamma_green"] &&

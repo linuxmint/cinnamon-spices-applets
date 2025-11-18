@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-26 20:09+0200\n"
+"POT-Creation-Date: 2025-11-18 23:35+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: blogdron\n"
 "Language-Team: \n"
@@ -14,60 +14,60 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.1\n"
 
-#. applet.js:178 6.4/applet.js:265
+#. applet.js:178 6.4/applet.js:268
 msgid "The following packages were not found:"
 msgstr "Следующие пакеты небыли найдены:"
 
-#. applet.js:179 6.4/applet.js:266
+#. applet.js:179 6.4/applet.js:269
 msgid "Please install the above packages to use the applet"
 msgstr "Пожалуйста, установите недостающие пакеты, которые использует апплет"
 
-#. applet.js:564 6.4/applet.js:808
+#. applet.js:564 6.4/applet.js:830
 msgid "Screen"
 msgstr "Экран"
 
-#. applet.js:647 6.4/applet.js:891
+#. applet.js:647 6.4/applet.js:913
 msgid "Outputs"
 msgstr "Видеовыход"
 
 #. settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->preset_list->columns->title
-#. appletGui.js:235 6.4/applet.js:41 6.4/lib/appletGui.js:212
+#. appletGui.js:235 6.4/applet.js:43 6.4/lib/appletGui.js:212
 msgid "Brightness"
 msgstr "Яркость"
 
-#. appletGui.js:236 6.4/applet.js:42 6.4/lib/appletGui.js:213
+#. appletGui.js:236 6.4/applet.js:44 6.4/lib/appletGui.js:213
 msgid "Red"
 msgstr "Красный"
 
-#. appletGui.js:237 6.4/applet.js:43 6.4/lib/appletGui.js:214
+#. appletGui.js:237 6.4/applet.js:45 6.4/lib/appletGui.js:214
 msgid "Green"
 msgstr "Зелёный"
 
-#. appletGui.js:238 6.4/applet.js:44 6.4/lib/appletGui.js:215
+#. appletGui.js:238 6.4/applet.js:46 6.4/lib/appletGui.js:215
 msgid "Blue"
 msgstr "Синий"
 
-#. 6.4/applet.js:45 6.4/applet.js:962
+#. 6.4/applet.js:47 6.4/applet.js:984
 msgid "Sunrise"
 msgstr ""
 
-#. 6.4/applet.js:46 6.4/applet.js:964
+#. 6.4/applet.js:48 6.4/applet.js:986
 msgid "Sunset"
 msgstr ""
 
-#. 6.4/applet.js:729
+#. 6.4/applet.js:735
 msgid "Reload"
 msgstr ""
 
-#. 6.4/applet.js:739
+#. 6.4/applet.js:745
 #, fuzzy
 msgid "Configure Presets"
 msgstr "Конфигурация"
 
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.4/applet.js:749
+#. 6.4/applet.js:799
 msgid "Presets"
 msgstr ""
 
@@ -341,6 +341,10 @@ msgstr ""
 msgid ""
 "Start at\n"
 "Sunset"
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid "Hotkey"
 msgstr ""
 
 #. 6.4->settings-schema.json->preset_sunrise_sunset_button->description

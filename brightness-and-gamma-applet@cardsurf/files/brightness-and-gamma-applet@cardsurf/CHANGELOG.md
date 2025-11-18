@@ -1,3 +1,6 @@
+### V2.4.0~20251118
+* Ability to add a shortcut for each preset.
+
 ### v2.3.3~20251106
 * Improved stability.
 
