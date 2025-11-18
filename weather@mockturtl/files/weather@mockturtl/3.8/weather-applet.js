@@ -18808,6 +18808,7 @@ class UIForecasts {
 const { PolicyType } = imports.gi.Gtk;
 const { ScrollDirection } = imports.gi.Clutter;
 const { addTween } = imports.ui.tweener;
+const { Tooltip: uiHourlyForecasts_Tooltip } = imports.ui.tooltips;
 const { BoxLayout: uiHourlyForecasts_BoxLayout, Side, ScrollView, Icon: uiHourlyForecasts_Icon, Align: uiHourlyForecasts_Align } = imports.gi.St;
 class UIHourlyForecasts {
     get Toggled() {
@@ -18944,6 +18945,7 @@ class UIHourlyForecasts {
         }
     }
     Display(forecasts, config, tz) {
+        var _a;
         if (!forecasts || !this.hourlyForecasts)
             return true;
         if (this.hourlyForecasts.length > forecasts.length) {
@@ -18968,6 +18970,7 @@ class UIHourlyForecasts {
                 ui.Hour.text = GetHoursMinutes(hour.date, config._show24Hours, tz, config._shortHourlyTime);
             ui.Temperature.text = temp ? `${temp}°` : "";
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
+            (_a = ui.SummaryTooltip) === null || _a === void 0 ? void 0 : _a.set_text(hour.condition.main);
             ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation);
             ui.PrecipVolume.text = this.GeneratePrecipitationVolume(hour.precipitation, config);
         }
@@ -19081,11 +19084,10 @@ class UIHourlyForecasts {
             const iconWidth = ui.Icon.get_preferred_width(-1)[1];
             const percipVolumeWidth = ui.PrecipVolume.get_preferred_width(-1)[1];
             const percipChanceWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
-            const summaryWidth = ui.Summary.get_preferred_width(-1)[1];
             const temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
             const precipitationWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
             if (precipitationWidth == null || temperatureWidth == null ||
-                hourWidth == null || iconWidth == null || summaryWidth == null ||
+                hourWidth == null || iconWidth == null ||
                 percipVolumeWidth == null || percipChanceWidth == null)
                 continue;
             if (requiredWidth < hourWidth)
@@ -19119,7 +19121,7 @@ class UIHourlyForecasts {
         grid.attach(forecastContainer, 1, 1, 1, 1);
         this.container.add(gridActor, { expand: true, x_fill: true, y_fill: true });
         for (let index = 0; index < hours; index++) {
-            const box = new uiHourlyForecasts_BoxLayout({ vertical: true, style_class: "hourly-box-item" });
+            const box = new uiHourlyForecasts_BoxLayout({ vertical: true, style_class: "hourly-box-item", reactive: true });
             this.hourlyContainers.push(box);
             this.hourlyForecasts.push({
                 Hour: Label({
@@ -19132,9 +19134,9 @@ class UIHourlyForecasts {
                     icon_type: config.IconType,
                     icon_size: 24,
                     icon_name: APPLET_ICON,
-                    style_class: "hourly-icon"
+                    style_class: "hourly-icon",
+                    reactive: true
                 }),
-                Summary: Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
                 PrecipPercent: Label({
                     text: " ",
                     style_class: "hourly-data",
@@ -19154,14 +19156,16 @@ class UIHourlyForecasts {
                     x_align: imports.gi.Clutter.ActorAlign.CENTER,
                 })
             });
-            this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);
-            box.add_child(this.hourlyForecasts[index].Hour);
-            box.add_child(this.hourlyForecasts[index].Icon);
-            box.add_child(this.hourlyForecasts[index].Temperature);
+            const hourlySet = this.hourlyForecasts[index];
+            hourlySet.PrecipVolume.clutter_text.set_line_wrap(true);
+            box.add_child(hourlySet.Hour);
+            box.add_child(hourlySet.Icon);
+            box.add_child(hourlySet.Temperature);
             if ((_a = this.app.Provider) === null || _a === void 0 ? void 0 : _a.supportHourlyPrecipChance)
-                box.add_child(this.hourlyForecasts[index].PrecipPercent);
+                box.add_child(hourlySet.PrecipPercent);
             if ((_b = this.app.Provider) === null || _b === void 0 ? void 0 : _b.supportHourlyPrecipVolume)
-                box.add_child(this.hourlyForecasts[index].PrecipVolume);
+                box.add_child(hourlySet.PrecipVolume);
+            hourlySet.SummaryTooltip = new uiHourlyForecasts_Tooltip(hourlySet.Icon, _(ELLIPSIS));
             forecastContainer.add(box, {
                 x_fill: true,
                 x_align: uiHourlyForecasts_Align.MIDDLE,
