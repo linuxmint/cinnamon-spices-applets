@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: brightness-and-gamma-applet@cardsurf 2.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-18 23:35+0100\n"
+"POT-Creation-Date: 2025-11-19 22:16+0100\n"
 "PO-Revision-Date: 2025-09-02 03:23+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -16,19 +16,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:178 6.4/applet.js:268
+#. applet.js:178 6.4/applet.js:249
 msgid "The following packages were not found:"
 msgstr "找不到下列套件："
 
-#. applet.js:179 6.4/applet.js:269
+#. applet.js:179 6.4/applet.js:250
 msgid "Please install the above packages to use the applet"
 msgstr "請安裝上述套件以使用這個小程式"
 
-#. applet.js:564 6.4/applet.js:830
+#. applet.js:564 6.4/applet.js:831
 msgid "Screen"
 msgstr "螢幕"
 
-#. applet.js:647 6.4/applet.js:913
+#. applet.js:647 6.4/applet.js:914
 msgid "Outputs"
 msgstr "輸出裝置"
 
@@ -51,24 +51,24 @@ msgstr "綠色"
 msgid "Blue"
 msgstr "藍色"
 
-#. 6.4/applet.js:47 6.4/applet.js:984
+#. 6.4/applet.js:47 6.4/applet.js:985
 msgid "Sunrise"
 msgstr "日出"
 
-#. 6.4/applet.js:48 6.4/applet.js:986
+#. 6.4/applet.js:48 6.4/applet.js:987
 msgid "Sunset"
 msgstr "日落"
 
-#. 6.4/applet.js:735
+#. 6.4/applet.js:746
 msgid "Reload"
 msgstr "重新載入"
 
-#. 6.4/applet.js:745
+#. 6.4/applet.js:756
 msgid "Configure Presets"
 msgstr "設定預設組態"
 
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.4/applet.js:799
+#. 6.4/applet.js:800
 msgid "Presets"
 msgstr "預設組態"
 
@@ -238,11 +238,13 @@ msgstr "在使用者介面中顯示的數值"
 
 #. settings-schema.json->gui_icon_filepath->description
 #. 6.4->settings-schema.json->gui_icon_filepath->description
+#. 6.4->settings-schema.json->baga_icon->description
 msgid "Icon"
 msgstr "圖示"
 
 #. settings-schema.json->gui_icon_filepath->tooltip
 #. 6.4->settings-schema.json->gui_icon_filepath->tooltip
+#. 6.4->settings-schema.json->baga_icon->tooltip
 msgid "An icon displayed in a panel"
 msgstr "顯示在面板上的圖示"
 
@@ -293,6 +295,30 @@ msgstr "增加亮度的熱鍵"
 #. 6.4->settings-schema.json->brightness_down_shortcut->description
 msgid "Hotkey to Decrease brightness"
 msgstr "降低亮度的熱鍵"
+
+#. 6.4->settings-schema.json->toggle_on_off_shortcut->description
+msgid "Hotkey to Toggle On/Off this applet"
+msgstr ""
+
+#. 6.4->settings-schema.json->way_to_set_off->options
+msgid "No change"
+msgstr ""
+
+#. 6.4->settings-schema.json->way_to_set_off->options
+msgid "All values set to 100%"
+msgstr ""
+
+#. 6.4->settings-schema.json->way_to_set_off->description
+msgid "Way to set this applet off"
+msgstr ""
+
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Only sun"
+msgstr ""
+
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Screen with sun"
+msgstr ""
 
 #. 6.4->settings-schema.json->preset_label->description
 msgid ""
