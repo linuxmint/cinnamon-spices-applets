@@ -1,3 +1,7 @@
+### v2.5.0~20251119
+* Adds a shortcut to enable/disable this applet.
+* New way to select the panel icon.
+
 ### V2.4.0~20251118
 * Ability to add a shortcut for each preset.
 
