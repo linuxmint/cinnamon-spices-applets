@@ -67,6 +67,10 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.applet_directory = this._get_applet_directory();
         this.is_running = true;
 
+        this.baga_icon = "baga"; //"sun"; //"baga";
+        this.set_applet_icon_name(this.baga_icon + "-on");
+        this.settingsWindow = undefined;
+
         this.bagaShortcuts = [];
         this.screen_outputs = {};
         this.menu_item_screen_position = 0;
@@ -117,36 +121,14 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.update_scroll = true;
         this.scroll_step = 5;
         this.options_type = AppletConstants.OptionsType.ALL;
-        this.gui_icon_filepath = "";
         this.apply_startup = true;
         this.apply_every = 0;
         this.apply_asynchronously = true;
         this.gsettings = Gio.Settings.new("org.cinnamon.settings-daemon.plugins.color");
         this.sunrise_sunset();
-        //~ this.numberOfMonitors = 0;
 
         this._init_dependencies_satisfied();
     }
-
-    //~ check_number_of_monitors() {
-        //~ if (!this.apply_changing_monitors) return;
-        //~ let process = Util.spawnCommandLineAsyncIO(SCRIPT_NUMBER_OF_MONITORS, (stdout, stderr, exitCode) => {
-            //~ if (exitCode === 0) {
-                //~ let numberOfMonitors = parseInt(stdout.trim());
-                //~ if (numberOfMonitors !== this.numberOfMonitors) {
-                    //~ this.numberOfMonitors = numberOfMonitors;
-                    //~ this.on_number_of_monitors_changed();
-                    //~ global.log(uuid + " - this.numberOfMonitors: " + this.numberOfMonitors);
-                //~ }
-            //~ }
-            //~ process.send_signal(9);
-        //~ });
-    //~ }
-
-    //~ on_number_of_monitors_changed() {
-        //~ if (!this.apply_changing_monitors) return;
-        //~ this.on_preset_reload_button_clicked();
-    //~ }
 
     sunrise_sunset() {
         let schedule_mode = this.gsettings.get_string("night-light-schedule-mode");
@@ -179,7 +161,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
         }
         this.sunrise = Math.round(this.sunrise * 4)/4;
         this.sunset = Math.round(this.sunset * 4)/4;
-        //~ global.log("sunrise: " + this.sunrise + " - sunset: " + this.sunset);
         return [this.sunrise, this.sunset];
     }
 
@@ -343,8 +324,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
     _bind_settings() {
         for(let [property_name, callback] of [
                         ["disable_nightmode", this._run_apply_values_running],
-                        //~ ["numberOfMonitors", null],
-                        ["apply_asynchronously", null],
                         ["smooth_duration", null],
                         ["apply_startup", null],
                         ["apply_every", null],
@@ -354,13 +333,15 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ["scroll_step", null],
                         ["brightness_up_shortcut", this.on_shortcut_changed],
                         ["brightness_down_shortcut", this.on_shortcut_changed],
+                        ["toggle_on_off_shortcut", this.on_shortcut_changed],
+                        ["way_to_set_off", null],
                         ["minimum_brightness", this.on_brightness_range_changed],
                         ["maximum_brightness", this.on_brightness_range_changed],
                         ["minimum_gamma", this.on_gamma_range_changed],
                         ["maximum_gamma", this.on_gamma_range_changed],
                         ["options_type", this.on_options_type_changed],
                         ["preset_list", this.on_preset_list_changed],
-                        ["gui_icon_filepath", this.on_gui_icon_changed],
+                        ["baga_icon", this.on_gui_icon_changed],
                         ["last_values_string", null] ]) {
                 this.settings.bind(property_name, property_name, callback, null);
                 this.old_preset_list = this.preset_list;
@@ -485,11 +466,13 @@ class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     set_gui_icon() {
-        let path = this.remove_file_schema(this.gui_icon_filepath);
-        path = this.replace_tilde_with_home_directory(path);
-        let exists = this.file_exists(path);
-        if (exists) {
-            this.set_applet_icon_path(path);
+        this.set_applet_icon_name(this.baga_icon + "-on");
+        if (!this.is_running && this.way_to_set_off != null) {
+            if (this.way_to_set_off === "nochange") {
+                this.set_applet_icon_name(this.baga_icon + "-off");
+            } else {
+                this.set_applet_icon_name(this.baga_icon + "-full");
+            }
         }
     }
 
@@ -547,18 +530,47 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.update_brightness_scroll(value);
     }
 
+    toggle_on_off_applet() {
+        if (this.is_running) {
+            switch (this.way_to_set_off) {
+                case "nochange":
+                    this.is_running = false;
+                    this.set_applet_icon_name(this.baga_icon + "-off");
+                    this.update_xrandr();
+                    break;
+                case "all100":
+                    this.is_running = false;
+                    this.set_applet_icon_name(this.baga_icon + "-full");
+                    this.brightness = 100;
+                    this.gamma_red = 100;
+                    this.gamma_green = 100;
+                    this.gamma_blue = 100;
+                    this.update_xrandr();
+            }
+        } else {
+            this.is_running = true;
+            this.set_applet_icon_name(this.baga_icon + "-on");
+            this.on_applet_added_to_panel();
+        }
+        this.update_tooltip()
+    }
+
     /** Keybinding
    */
     on_shortcut_changed() {
         try{
             Main.keybindingManager.removeHotKey("brightnessUp");
             Main.keybindingManager.removeHotKey("brightnessDn");
+            Main.keybindingManager.removeHotKey("toggleDnOff");
         } catch(e) {}
         if (this.brightness_up_shortcut != null) {
             Main.keybindingManager.addHotKey("brightnessUp", this.brightness_up_shortcut, (event) => this.increase_brightness_scroll())
         }
         if (this.brightness_down_shortcut != null) {
             Main.keybindingManager.addHotKey("brightnessDn", this.brightness_down_shortcut, (event) => this.decrease_brightness_scroll())
+        }
+        if (this.toggle_on_off_shortcut != null) {
+            Main.keybindingManager.addHotKey("toggleDnOff", this.toggle_on_off_shortcut, (event) => this.toggle_on_off_applet())
         }
     }
 
@@ -578,7 +590,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this._check_sunrise_sunset(true);
         this.update_tooltip();
         timeout_add_seconds(900, () => { this._check_sunrise_sunset(); return this.is_running; });
-        //~ timeout_add_seconds(1, () => { this.check_number_of_monitors(); return this.is_running; });
         Main.layoutManager.connect('monitors-changed', () => { if (this.apply_changing_monitors) this.on_preset_reload_button_clicked(); });
     }
 
@@ -743,22 +754,12 @@ class BrightnessAndGamma extends Applet.IconApplet {
             children[this.menu_item_configure_presets_position].destroy();
         }
         this.menu_item_configure_presets = this._applet_context_menu.addAction(_("Configure Presets"), () => {
-            let pid = Util.spawnCommandLine(`cinnamon-settings applets ${uuid} -t1`);
-            var app = null;
-            var intervalId = null;
-            intervalId = setTimeout(() => {
-                clearTimeout(intervalId);
-                app = windowTracker.get_app_from_pid(pid);
-                if (app != null) {
-                    let window = app.get_windows()[0];
-                    window.maximize(Meta.MaximizeFlags.VERTICAL);
-                    window.activate(300);
-                }
-            }, 600);
+            this.configureApplet(1);
         });
     }
 
     _up_to_preset(preset, menuItem) {
+        if (!this.is_running) return;
         this.target_brightness = Math.max(preset["brightness"], this.minimum_brightness);
         this.target_gamma_red = Math.max(preset["gamma_red"], this.minimum_gamma);
         this.target_gamma_green = Math.max(preset["gamma_green"], this.minimum_gamma);
@@ -1157,8 +1158,8 @@ class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     _run_apply_values_running() {
-        this.on_disable_nightmode_changed();
         if(this.is_running) {
+            this.on_disable_nightmode_changed();
             this._apply_values();
         }
     }
@@ -1204,7 +1205,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
         let h = d.getHours();
         let fraction = h + m / 60;
         fraction = Math.round(fraction * 4) / 4;
-        //~ global.log(uuid + ": fraction " + fraction);
         if (starting === true) {
             if (fraction >= this.sunrise && fraction < this.sunset)
                 this._use_first_sunrise_preset();
@@ -1219,6 +1219,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     _use_first_sunrise_preset() {
+        if (!this.is_running) return;
         for (let preset of this.preset_list) {
             if (preset.show && preset.start_at_sunrise) {
                 this.target_brightness = preset.brightness;
@@ -1248,6 +1249,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     _use_first_sunset_preset() {
+        if (!this.is_running) return;
         for (let preset of this.preset_list) {
             if (preset.show && preset.start_at_sunset) {
                 this.target_brightness = preset.brightness;
@@ -1295,6 +1297,50 @@ class BrightnessAndGamma extends Applet.IconApplet {
             clearTimeout(to);
             Extension.reloadExtension(uuid, Extension.Type.APPLET);
         }, 1000);
+    }
+
+    closeSettingsWindow() {
+        if (this.settingsWindow != undefined) {
+            try {
+                this.settingsWindow.delete(300);
+            } catch(e) {}
+        }
+        this.settingsWindow = undefined;
+    }
+
+    configureApplet(tab=0) {
+        const maximize_vertically = true;
+        const VERTICAL = 2;
+        this._applet_context_menu.close(false);
+
+        this.closeSettingsWindow();
+
+        let pid = Util.spawnCommandLine(`cinnamon-settings applets ${uuid} -i ${this.instance_id} -t ${tab}`);
+
+        if (maximize_vertically) {
+          var app = null;
+          var intervalId = null;
+          intervalId = setTimeout(() => {
+                clearTimeout(intervalId);
+                app = windowTracker.get_app_from_pid(pid);
+                if (app != null) {
+                    let window = app.get_windows()[0];
+                    this.settingsTab = tab;
+
+                    window.maximize(VERTICAL);
+                    window.activate(300);
+                    this.settingsWindow = window;
+                    app.connect("windows-changed", () => { this.settingsWindow = undefined; });
+                    this._removeEnlightenment();
+                }
+            }, 600);
+        }
+        // Returns the pid:
+        return pid;
+    }
+
+    _removeEnlightenment() {
+        this.highlight(false);
     }
 };
 

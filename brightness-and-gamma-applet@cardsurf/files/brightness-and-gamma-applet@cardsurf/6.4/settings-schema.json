@@ -19,12 +19,13 @@
                 "disable_nightmode",
                 "apply_startup",
                 "apply_every",
-                "apply_asynchronously",
                 "apply_changing_monitors",
                 "update_scroll",
                 "scroll_step",
                 "brightness_up_shortcut",
-                "brightness_down_shortcut"
+                "brightness_down_shortcut",
+                "toggle_on_off_shortcut",
+                "way_to_set_off"
             ]
         },
         "section_values": {
@@ -43,7 +44,7 @@
             "title": "Gui",
             "keys": [
                 "options_type",
-                "gui_icon_filepath"
+                "baga_icon"
             ]
         },
         "section_presets": {
@@ -82,7 +83,7 @@
         "tooltip" : "How often to apply values. 0 means that values are not applied periodically."
     },
     "apply_asynchronously" : {
-        "type" : "switch",
+        "type" : "generic",
         "default" : true,
         "description": "Apply asynchronously",
         "tooltip": "Apply values in a background process"
@@ -130,6 +131,21 @@
         "type": "keybinding",
         "default": "::",
         "description": "Hotkey to Decrease brightness"
+    },
+    "toggle_on_off_shortcut": {
+        "type": "keybinding",
+        "default": "::",
+        "description": "Hotkey to Toggle On/Off this applet"
+    },
+    "way_to_set_off": {
+        "type": "combobox",
+        "default": "nochange",
+        "options": {
+            "No change": "nochange",
+            "All values set to 100%": "all100"
+        },
+        "description": "Way to set this applet off",
+        "dependency": "toggle_on_off_shortcut!=::"
     },
 
     "minimum_brightness": {
@@ -195,8 +211,18 @@
         "tooltip" : "Values shown in user interface"
     },
     "gui_icon_filepath" : {
-        "type" : "filechooser",
+        "type" : "generic",
         "default" : "~/.local/share/cinnamon/applets/brightness-and-gamma-applet@cardsurf/icons/sun.svg",
+        "description" : "Icon",
+        "tooltip": "An icon displayed in a panel"
+    },
+    "baga_icon" : {
+        "type" : "combobox",
+        "default" : "sun",
+        "options": {
+            "Only sun": "sun",
+            "Screen with sun": "baga"
+        },
         "description" : "Icon",
         "tooltip": "An icon displayed in a panel"
     },
