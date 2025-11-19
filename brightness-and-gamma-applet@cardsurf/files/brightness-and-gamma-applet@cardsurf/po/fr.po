@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-18 23:35+0100\n"
-"PO-Revision-Date: 2025-11-18 23:36+0100\n"
+"POT-Creation-Date: 2025-11-19 22:16+0100\n"
+"PO-Revision-Date: 2025-11-19 22:20+0100\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,20 +19,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:178 6.4/applet.js:268
+#. applet.js:178 6.4/applet.js:249
 msgid "The following packages were not found:"
 msgstr "Les paquets suivants ne sont pas installés :"
 
-#. applet.js:179 6.4/applet.js:269
+#. applet.js:179 6.4/applet.js:250
 msgid "Please install the above packages to use the applet"
 msgstr ""
 "Veuillez installer les paquets ci-dessus pour pouvoir utiliser cette applet"
 
-#. applet.js:564 6.4/applet.js:830
+#. applet.js:564 6.4/applet.js:831
 msgid "Screen"
 msgstr "Écran"
 
-#. applet.js:647 6.4/applet.js:913
+#. applet.js:647 6.4/applet.js:914
 msgid "Outputs"
 msgstr "Sorties"
 
@@ -55,24 +55,24 @@ msgstr "Vert"
 msgid "Blue"
 msgstr "Bleu"
 
-#. 6.4/applet.js:47 6.4/applet.js:984
+#. 6.4/applet.js:47 6.4/applet.js:985
 msgid "Sunrise"
 msgstr "Aube"
 
-#. 6.4/applet.js:48 6.4/applet.js:986
+#. 6.4/applet.js:48 6.4/applet.js:987
 msgid "Sunset"
 msgstr "Crépuscule"
 
-#. 6.4/applet.js:735
+#. 6.4/applet.js:746
 msgid "Reload"
 msgstr "Relancer"
 
-#. 6.4/applet.js:745
+#. 6.4/applet.js:756
 msgid "Configure Presets"
 msgstr "Configurer les pré-réglages"
 
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.4/applet.js:799
+#. 6.4/applet.js:800
 msgid "Presets"
 msgstr "Pré-réglages"
 
@@ -252,11 +252,13 @@ msgstr "Paramètres affichés dans le menu"
 
 #. settings-schema.json->gui_icon_filepath->description
 #. 6.4->settings-schema.json->gui_icon_filepath->description
+#. 6.4->settings-schema.json->baga_icon->description
 msgid "Icon"
 msgstr "Icône"
 
 #. settings-schema.json->gui_icon_filepath->tooltip
 #. 6.4->settings-schema.json->gui_icon_filepath->tooltip
+#. 6.4->settings-schema.json->baga_icon->tooltip
 msgid "An icon displayed in a panel"
 msgstr "Icône sur le panneau"
 
@@ -314,6 +316,30 @@ msgstr "Raccourci clavier pour augmenter la luminosité"
 #. 6.4->settings-schema.json->brightness_down_shortcut->description
 msgid "Hotkey to Decrease brightness"
 msgstr "Raccourci clavier pour réduire la luminosité"
+
+#. 6.4->settings-schema.json->toggle_on_off_shortcut->description
+msgid "Hotkey to Toggle On/Off this applet"
+msgstr "Raccourci clavier pour activer / désactiver cette applet"
+
+#. 6.4->settings-schema.json->way_to_set_off->options
+msgid "No change"
+msgstr "Aucun changement"
+
+#. 6.4->settings-schema.json->way_to_set_off->options
+msgid "All values set to 100%"
+msgstr "Tout à 100%"
+
+#. 6.4->settings-schema.json->way_to_set_off->description
+msgid "Way to set this applet off"
+msgstr "Comment désactiver cette applet"
+
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Only sun"
+msgstr "Soleil uniquement"
+
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Screen with sun"
+msgstr "Écran avec un Soleil"
 
 #. 6.4->settings-schema.json->preset_label->description
 msgid ""

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-18 23:35+0100\n"
+"POT-Creation-Date: 2025-11-19 22:16+0100\n"
 "PO-Revision-Date: 2017-11-18 22:47+0200\n"
 "Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
@@ -19,19 +19,19 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. applet.js:178 6.4/applet.js:268
+#. applet.js:178 6.4/applet.js:249
 msgid "The following packages were not found:"
 msgstr "Следните пакети не са намерени:"
 
-#. applet.js:179 6.4/applet.js:269
+#. applet.js:179 6.4/applet.js:250
 msgid "Please install the above packages to use the applet"
 msgstr "Моля инсталирайте посочените пакети, за да използвате аплета"
 
-#. applet.js:564 6.4/applet.js:830
+#. applet.js:564 6.4/applet.js:831
 msgid "Screen"
 msgstr "Екран"
 
-#. applet.js:647 6.4/applet.js:913
+#. applet.js:647 6.4/applet.js:914
 msgid "Outputs"
 msgstr "Изходи:"
 
@@ -54,24 +54,24 @@ msgstr "Зелено"
 msgid "Blue"
 msgstr "Синьо"
 
-#. 6.4/applet.js:47 6.4/applet.js:984
+#. 6.4/applet.js:47 6.4/applet.js:985
 msgid "Sunrise"
 msgstr ""
 
-#. 6.4/applet.js:48 6.4/applet.js:986
+#. 6.4/applet.js:48 6.4/applet.js:987
 msgid "Sunset"
 msgstr ""
 
-#. 6.4/applet.js:735
+#. 6.4/applet.js:746
 msgid "Reload"
 msgstr ""
 
-#. 6.4/applet.js:745
+#. 6.4/applet.js:756
 msgid "Configure Presets"
 msgstr ""
 
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.4/applet.js:799
+#. 6.4/applet.js:800
 msgid "Presets"
 msgstr ""
 
@@ -243,11 +243,13 @@ msgstr "Стойности, които да се показват в потре�
 
 #. settings-schema.json->gui_icon_filepath->description
 #. 6.4->settings-schema.json->gui_icon_filepath->description
+#. 6.4->settings-schema.json->baga_icon->description
 msgid "Icon"
 msgstr "Иконка"
 
 #. settings-schema.json->gui_icon_filepath->tooltip
 #. 6.4->settings-schema.json->gui_icon_filepath->tooltip
+#. 6.4->settings-schema.json->baga_icon->tooltip
 msgid "An icon displayed in a panel"
 msgstr "Иконка, която да се показва в панела"
 
@@ -294,6 +296,30 @@ msgstr ""
 
 #. 6.4->settings-schema.json->brightness_down_shortcut->description
 msgid "Hotkey to Decrease brightness"
+msgstr ""
+
+#. 6.4->settings-schema.json->toggle_on_off_shortcut->description
+msgid "Hotkey to Toggle On/Off this applet"
+msgstr ""
+
+#. 6.4->settings-schema.json->way_to_set_off->options
+msgid "No change"
+msgstr ""
+
+#. 6.4->settings-schema.json->way_to_set_off->options
+msgid "All values set to 100%"
+msgstr ""
+
+#. 6.4->settings-schema.json->way_to_set_off->description
+msgid "Way to set this applet off"
+msgstr ""
+
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Only sun"
+msgstr ""
+
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Screen with sun"
 msgstr ""
 
 #. 6.4->settings-schema.json->preset_label->description
