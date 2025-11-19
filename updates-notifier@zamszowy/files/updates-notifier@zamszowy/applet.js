@@ -178,7 +178,7 @@ UpdatesNotifier.prototype = {
 
     _apply_applet_icon: function (icon_name) {
         let full_icon_name = icon_name + "-";
-        if (this.hasFirmwareUpdates) {
+        if (this.showFirmware && this.hasFirmwareUpdates) {
             full_icon_name += "fw-";
         }
         if (this.icon_style == "dark") {
