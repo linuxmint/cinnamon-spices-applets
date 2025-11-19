@@ -91,7 +91,7 @@ UpdatesNotifier.prototype = {
         this.settings.bind("level-2", "level2", this._update, null);
 
         this.settings.bind("refresh-when-no-updates", "refreshWhenNoUpdates", this._update, null);
-        this.settings.bind("show-firmware", "showFirmware", () => this._refreshUpdatesInfo(), null);
+        this.settings.bind("show-firmware", "showFirmware", () => this._refreshUpdatesInfo(RefreshMode.UPDATES, true), null);
         this.settings.bind("show-window-on-click", "showWindowOnClick", this._update, null);
         this.settings.bind("commandUpdate-show", "commandUpdateShow", this._update, null);
         this.settings.bind("commandUpgrade", "commandUpgrade", null, null);
@@ -178,7 +178,7 @@ UpdatesNotifier.prototype = {
 
     _apply_applet_icon: function (icon_name) {
         let full_icon_name = icon_name + "-";
-        if (this.hasFirmwareUpdates) {
+        if (this.showFirmware && this.hasFirmwareUpdates) {
             full_icon_name += "fw-";
         }
         if (this.icon_style == "dark") {
@@ -339,11 +339,11 @@ UpdatesNotifier.prototype = {
         }
     },
 
-    _refreshUpdatesInfo: function (refreshMode = RefreshMode.UPDATES) {
+    _refreshUpdatesInfo: function (refreshMode = RefreshMode.UPDATES, force = false) {
         if (this.checkingInProgress) {
             return;
         }
-        if (this.lastRefreshTime && ((GLib.get_monotonic_time() - this.lastRefreshTime) < 5 * GLib.USEC_PER_SEC)) {
+        if (!force && this.lastRefreshTime && ((GLib.get_monotonic_time() - this.lastRefreshTime) < 5 * GLib.USEC_PER_SEC)) {
             global.log(`${UUID}: Skipping refresh, too frequent`);
             return;
         }
