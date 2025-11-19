@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-11-19 22:16+0100\n"
-"PO-Revision-Date: 2025-11-18 22:34-0300\n"
+"PO-Revision-Date: 2025-11-19 18:57-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -310,27 +310,27 @@ msgstr "Tecla rápida para reducir el brillo"
 
 #. 6.4->settings-schema.json->toggle_on_off_shortcut->description
 msgid "Hotkey to Toggle On/Off this applet"
-msgstr ""
+msgstr "Tecla de acceso rápido para activar/desactivar este applet"
 
 #. 6.4->settings-schema.json->way_to_set_off->options
 msgid "No change"
-msgstr ""
+msgstr "Sin cambios"
 
 #. 6.4->settings-schema.json->way_to_set_off->options
 msgid "All values set to 100%"
-msgstr ""
+msgstr "Todos los valores establecidos al 100%"
 
 #. 6.4->settings-schema.json->way_to_set_off->description
 msgid "Way to set this applet off"
-msgstr ""
+msgstr "Cómo activar este applet"
 
 #. 6.4->settings-schema.json->baga_icon->options
 msgid "Only sun"
-msgstr ""
+msgstr "Solo sol"
 
 #. 6.4->settings-schema.json->baga_icon->options
 msgid "Screen with sun"
-msgstr ""
+msgstr "Pantalla con sol"
 
 #. 6.4->settings-schema.json->preset_label->description
 msgid ""
