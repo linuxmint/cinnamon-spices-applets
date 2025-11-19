@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "EditorConfig.EditorConfig",
+        "ms-python.python",
+        "vitest.explorer"
+    ]
+}

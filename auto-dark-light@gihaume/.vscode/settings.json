@@ -1,0 +1,7 @@
+{
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "python.analysis.extraPaths": [
+        "/usr/share/cinnamon/cinnamon-settings/bin"
+    ],
+    "C_Cpp.default.cppStandard": "c++20"
+}
