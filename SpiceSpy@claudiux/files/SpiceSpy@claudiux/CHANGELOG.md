@@ -1,3 +1,6 @@
+### v5.6.1~20251121
+  * Updates to-string() function.
+
 ### v5.6.0~20251108
   * Ensures loading of icons.
 

@@ -1,3 +1,6 @@
+### v3.9.3~20251121
+  * Updates to-string() function.
+
 ### v3.9.2~20251121
   * Improves file monitoring.
 

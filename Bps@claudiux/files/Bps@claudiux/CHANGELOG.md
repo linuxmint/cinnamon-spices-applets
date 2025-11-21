@@ -1,3 +1,6 @@
+### v1.3.4~20251121
+  * Updates to-string() function.
+
 ### v1.3.3~20251106
   * Avoid errors when disconnecting from a network interface.
 
