@@ -1,6 +1,6 @@
 # Simple Timer
 
-A simple timer that notifies you when it's finished.
+A timer applet that offers a compact, minimal interface.
 
 ## Features
 
