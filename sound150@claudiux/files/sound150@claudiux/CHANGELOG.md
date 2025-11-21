@@ -1,3 +1,6 @@
+### v13.7.2~20251121
+  * Functional improvements.
+
 ### v13.7.1~20251114
   * Adds option "Shorten Artist and Title". When the artist name or title is too long, you can choose how to shorten it.
   * Fixes [#7966](https://github.com/linuxmint/cinnamon-spices-applets/issues/7966)

@@ -763,10 +763,10 @@ class SpicesUpdate extends IconApplet {
     let iconSize = this.getPanelIconSize(IconType.SYMBOLIC);
 
     if (this.actor.get_stage() != null && this.badge != null) {
-      this.actor.remove_child(this.badge);
-      this.badge = null;
+      try { this.actor.remove_child(this.badge); } catch(e) {}
     }
 
+    this.badge = null;
     this.badge = new BoxLayout({
       style_class: "grouped-window-list-badge",
       important: true,
@@ -1670,7 +1670,11 @@ class SpicesUpdate extends IconApplet {
 
   _get_last_edited_from_cache(type, uuid) {
     var cacheParser = new Json.Parser();
-    cacheParser.load_from_data(this.cache[type], -1);
+    try {
+      cacheParser.load_from_data(this.cache[type], -1);
+    } catch(e) {
+      return null;
+    }
     var ok = false;
     var lastEdited = null;
     try {
@@ -2674,7 +2678,12 @@ class SpicesUpdate extends IconApplet {
     var monitor, Id;
     for (let tuple of this.monitors) {
       [monitor, Id] = tuple;
-      monitor.disconnect(Id);
+      try {
+        monitor.disconnect(Id);
+      } catch(e) {
+      } finally {
+        monitor = null;
+      }
     }
     this.monitors = [];
     this.alreadyMonitored = [];

@@ -1,3 +1,6 @@
+### v7.9.6~20251121
+  * Improves file monitoring.
+
 ### v7.9.5~20251031
   * Avoids 'destroy' errors.
 

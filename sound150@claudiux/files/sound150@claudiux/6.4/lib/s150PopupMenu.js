@@ -1016,10 +1016,10 @@ class Player extends PopupMenu.PopupMenuSection {
         //~ if (this._seeker)
         //~ this._seeker.destroy();
         if (this._prop && this._propChangedId)
-            this._prop.disconnectSignal(this._propChangedId);
+            try { this._prop.disconnectSignal(this._propChangedId) } catch(e) {};
 
         if (this._seeker)
-            this._seeker.destroy();
+            try { this._seeker.destroy() } catch(e) {};
 
         //FIXME!!! Error when a media is playing:
         try {

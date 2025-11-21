@@ -130,8 +130,8 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             let volumeId = this.stream.connect("notify::volume", () => this._update());
             this.connect("destroy", () => {
                 //~ logDebug('VolumeSlider.connectWithStream.destroy');
-                this.stream.disconnect(mutedId);
-                this.stream.disconnect(volumeId);
+                try { this.stream.disconnect(volumeId) } catch(e) {};
+                try { this.stream.disconnect(mutedId) } catch(e) {};
             });
         }
 
