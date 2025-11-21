@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-19 22:16+0100\n"
+"POT-Creation-Date: 2025-11-21 04:02+0100\n"
 "PO-Revision-Date: 2025-08-26 08:39+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -17,20 +17,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:178 6.4/applet.js:249
+#. applet.js:178 6.4/applet.js:250
 msgid "The following packages were not found:"
 msgstr "De volgende pakketten werden niet gevonden:"
 
-#. applet.js:179 6.4/applet.js:250
+#. applet.js:179 6.4/applet.js:251
 msgid "Please install the above packages to use the applet"
 msgstr ""
 "Installeer alstublieft de bovenstaande pakketten om de applet te gebruiken"
 
-#. applet.js:564 6.4/applet.js:831
+#. applet.js:564 6.4/applet.js:855
 msgid "Screen"
 msgstr "Scherm"
 
-#. applet.js:647 6.4/applet.js:914
+#. applet.js:647 6.4/applet.js:938
 msgid "Outputs"
 msgstr "Uitgangen"
 
@@ -53,24 +53,28 @@ msgstr "Groen"
 msgid "Blue"
 msgstr "Blauw"
 
-#. 6.4/applet.js:47 6.4/applet.js:985
+#. 6.4/applet.js:47 6.4/applet.js:1009
 msgid "Sunrise"
 msgstr "Zonsopgang"
 
-#. 6.4/applet.js:48 6.4/applet.js:987
+#. 6.4/applet.js:48 6.4/applet.js:1011
 msgid "Sunset"
 msgstr "Zonsondergang"
 
-#. 6.4/applet.js:746
+#. 6.4/applet.js:760
+msgid "Toggle On / Off"
+msgstr ""
+
+#. 6.4/applet.js:770
 msgid "Reload"
 msgstr "Herladen"
 
-#. 6.4/applet.js:756
+#. 6.4/applet.js:780
 msgid "Configure Presets"
 msgstr "Voorinstellingen configureren"
 
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.4/applet.js:800
+#. 6.4/applet.js:824
 msgid "Presets"
 msgstr "Voorinstellingen"
 
@@ -245,13 +249,11 @@ msgid "Values shown in user interface"
 msgstr "Waarden weergegeven in de gebruikersinterface"
 
 #. settings-schema.json->gui_icon_filepath->description
-#. 6.4->settings-schema.json->gui_icon_filepath->description
 #. 6.4->settings-schema.json->baga_icon->description
 msgid "Icon"
 msgstr "Pictogram"
 
 #. settings-schema.json->gui_icon_filepath->tooltip
-#. 6.4->settings-schema.json->gui_icon_filepath->tooltip
 #. 6.4->settings-schema.json->baga_icon->tooltip
 msgid "An icon displayed in a panel"
 msgstr "Een pictogram weergegeven in een paneel"
@@ -327,6 +329,10 @@ msgstr ""
 
 #. 6.4->settings-schema.json->baga_icon->options
 msgid "Screen with sun"
+msgstr ""
+
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Symbolic"
 msgstr ""
 
 #. 6.4->settings-schema.json->preset_label->description

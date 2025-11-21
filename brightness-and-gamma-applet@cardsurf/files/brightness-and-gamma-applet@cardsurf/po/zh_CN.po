@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-19 22:16+0100\n"
+"POT-Creation-Date: 2025-11-21 04:02+0100\n"
 "PO-Revision-Date: 2023-02-10 21:09+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
@@ -19,19 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.2.2\n"
 
-#. applet.js:178 6.4/applet.js:249
+#. applet.js:178 6.4/applet.js:250
 msgid "The following packages were not found:"
 msgstr "未找到以下软件包："
 
-#. applet.js:179 6.4/applet.js:250
+#. applet.js:179 6.4/applet.js:251
 msgid "Please install the above packages to use the applet"
 msgstr "请安装以上软件包才能使用小程序。"
 
-#. applet.js:564 6.4/applet.js:831
+#. applet.js:564 6.4/applet.js:855
 msgid "Screen"
 msgstr "屏幕"
 
-#. applet.js:647 6.4/applet.js:914
+#. applet.js:647 6.4/applet.js:938
 msgid "Outputs"
 msgstr "输出"
 
@@ -54,24 +54,28 @@ msgstr "绿色"
 msgid "Blue"
 msgstr "蓝色"
 
-#. 6.4/applet.js:47 6.4/applet.js:985
+#. 6.4/applet.js:47 6.4/applet.js:1009
 msgid "Sunrise"
 msgstr ""
 
-#. 6.4/applet.js:48 6.4/applet.js:987
+#. 6.4/applet.js:48 6.4/applet.js:1011
 msgid "Sunset"
 msgstr ""
 
-#. 6.4/applet.js:746
+#. 6.4/applet.js:760
+msgid "Toggle On / Off"
+msgstr ""
+
+#. 6.4/applet.js:770
 msgid "Reload"
 msgstr ""
 
-#. 6.4/applet.js:756
+#. 6.4/applet.js:780
 msgid "Configure Presets"
 msgstr ""
 
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.4/applet.js:800
+#. 6.4/applet.js:824
 msgid "Presets"
 msgstr ""
 
@@ -240,13 +244,11 @@ msgid "Values shown in user interface"
 msgstr "显示在面板中的值"
 
 #. settings-schema.json->gui_icon_filepath->description
-#. 6.4->settings-schema.json->gui_icon_filepath->description
 #. 6.4->settings-schema.json->baga_icon->description
 msgid "Icon"
 msgstr "图标"
 
 #. settings-schema.json->gui_icon_filepath->tooltip
-#. 6.4->settings-schema.json->gui_icon_filepath->tooltip
 #. 6.4->settings-schema.json->baga_icon->tooltip
 msgid "An icon displayed in a panel"
 msgstr "显示在面板中的图标"
@@ -318,6 +320,10 @@ msgstr ""
 
 #. 6.4->settings-schema.json->baga_icon->options
 msgid "Screen with sun"
+msgstr ""
+
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Symbolic"
 msgstr ""
 
 #. 6.4->settings-schema.json->preset_label->description
