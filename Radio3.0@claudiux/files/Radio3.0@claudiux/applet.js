@@ -1995,6 +1995,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.titleMonitor = file.monitor_file(FileMonitorFlags.NONE, new Cancellable());
       this.titleMonitorId = this.titleMonitor.connect('changed', () => { this._on_mpv_title_changed() });
     } catch(e) {
+      this.titleMonitor = null;
       logError("Unable to monitor %s!".format(MPV_TITLE_FILE), e)
     }
   }
@@ -2008,6 +2009,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.r30stopMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, new Cancellable());
       this.r30stopMonitorId = this.r30stopMonitor.connect('changed', () => { this._on_r30stop_changed() });
     } catch(e) {
+      this.r30stopMonitor = null;
       logError("Unable to monitor %s!".format(R30STOP), e)
     }
   }
@@ -2021,6 +2023,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.r30nextMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, new Cancellable());
       this.r30nextMonitorId = this.r30nextMonitor.connect('changed', (event) => { this.on_next_event(event) });
     } catch(e) {
+      this.r30nextMonitor = null;
       logError("Unable to monitor %s!".format(R30NEXT), e)
     }
   }
@@ -2036,6 +2039,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.r30previousMonitorId = this.r30previousMonitor.connect('changed', (event) => { this.on_previous_event(event) });
 
     } catch(e) {
+      this.r30previousMonitor = null;
       logError("Unable to monitor %s!".format(R30PREVIOUS), e)
     }
   }
@@ -3558,10 +3562,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.progress = 10/REFRESH_INTERVAL;
     this.interval = setInterval(() => { this.on_progress_change(); }, 100);  // 100 ms.
 
-    this.monitor_mpv_title();
-    this.monitor_r30stop();
-    this.monitor_r30next();
-    this.monitor_r30previous();
+    timeout_add_seconds(1, () => { this.monitor_mpv_title(); return this.titleMonitor == null });
+    timeout_add_seconds(1, () => { this.monitor_r30stop(); return this.r30stopMonitor == null });
+    timeout_add_seconds(1, () => { this.monitor_r30next(); return this.r30nextMonitor == null });
+    timeout_add_seconds(1, () => { this.monitor_r30previous(); return this.r30previousMonitor == null });
+
     this.set_MPV_ALIAS();
     spawnCommandLine("%s %s".format(this.MPV_ALIAS, _id));
     this.mpvStatus = "PLAY";

@@ -1,3 +1,6 @@
+### v3.9.2~20251121
+  * Improves file monitoring.
+
 ### v3.9.1~20251106
   * Improves stability.
 

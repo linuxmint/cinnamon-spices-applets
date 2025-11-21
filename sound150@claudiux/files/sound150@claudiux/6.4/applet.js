@@ -1277,9 +1277,11 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._ownerChangedId = null;
         }
 
-        for (let i in this._players)
-            if (this._players[i])
-                this._players[i].destroy();
+        for (let i in this._players) {
+            if (this._players[i]) {
+                try { this._players[i].destroy() } catch(e) {}
+            }
+        }
 
         if (this._control)
             this._control.close();
@@ -1964,7 +1966,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         for (let i = 0, l = this._playerItems.length; i < l; ++i) {
             let playerItem = this._playerItems[i];
             if (playerItem.player._owner === owner) {
-                playerItem.item.destroy();
+                try { playerItem.item.destroy() } catch(e) {};
                 this._playerItems.splice(i, 1);
                 break;
             }
@@ -2364,7 +2366,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (this._devices[i].type === type && this._devices[i].id === id) {
                 let device = this._devices[i];
                 if (device.item) {
-                    device.item.destroy();
+                    try { device.item.destroy() } catch(e) {}
                 }
 
                 // hide submenu if showing them is unnecessary
@@ -2426,7 +2428,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (this._streams[i].id === id) {
                 let stream = this._streams[i];
                 if (stream.item) {
-                    stream.item.destroy();
+                    try { stream.item.destroy() } catch(e) {}
                 }
 
                 // hide submenus or sections if showing them is unnecessary
@@ -2446,7 +2448,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                     kill_playerctld();
                 }
                 if (this._seeker) {
-                    this._seeker.destroy();
+                    try { this._seeker.destroy() } catch(e) {}
                 }
                 this._seeker = null;
                 kill_playerctld();
@@ -2460,7 +2462,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         for (let i = 0, l = this._streams.length; i < l; ++i) {
             let stream = this._streams[i];
             if (stream.item) {
-                stream.item.destroy();
+                try { stream.item.destroy() } catch(e) {}
             }
 
             // hide submenus or sections if showing them is unnecessary
@@ -2481,7 +2483,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._streams.splice(i, 1);
         }
         if (this._seeker) {
-            this._seeker.destroy();
+            try { this._seeker.destroy() } catch(e) {}
         }
         this._seeker = null;
         kill_playerctld();
