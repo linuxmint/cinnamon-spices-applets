@@ -1,0 +1,64 @@
+{
+    "show-elapsed": {
+        "type": "switch",
+        "default": false,
+        "description": "Show time elapsed",
+        "tooltip": "Show time elapsed instead of remaining"
+    },
+    "width": {
+        "type": "spinbutton",
+        "default": 12,
+        "min": 5,
+        "max": 150,
+        "step": 1,
+        "description": "Width",
+        "tooltip": "Width of the indicator"
+    },
+    "height": {
+        "type": "spinbutton",
+        "default": 11,
+        "min": 5,
+        "max": 50,
+        "step": 1,
+        "description": "Height",
+        "tooltip": "Height of the indicator"
+    },
+    "style": {
+        "type": "combobox",
+        "default": 0,
+        "description": "Style",
+        "tooltip": "Visual style of the indicator",
+        "options": {
+            "Pie": 0,
+            "Pie (no border)": 1
+        }
+    },
+    "start-time-header": {
+        "type": "header",
+        "description": "Start time"
+    },
+    "start-hour": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 23,
+        "step": 1,
+        "units": "hours",
+        "description": "Start hour",
+        "tooltip": "Hour at which the indicator starts"
+    },
+    "end-time-header": {
+        "type": "header",
+        "description": "End time"
+    },
+    "end-hour": {
+        "type": "spinbutton",
+        "default": 23,
+        "min": 0,
+        "max": 23,
+        "step": 1,
+        "units": "hours",
+        "description": "End hour",
+        "tooltip": "Hour at which the indicator ends"
+    }
+}
