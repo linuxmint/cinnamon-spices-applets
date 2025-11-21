@@ -210,18 +210,13 @@
         },
         "tooltip" : "Values shown in user interface"
     },
-    "gui_icon_filepath" : {
-        "type" : "generic",
-        "default" : "~/.local/share/cinnamon/applets/brightness-and-gamma-applet@cardsurf/icons/sun.svg",
-        "description" : "Icon",
-        "tooltip": "An icon displayed in a panel"
-    },
     "baga_icon" : {
         "type" : "combobox",
         "default" : "sun",
         "options": {
             "Only sun": "sun",
-            "Screen with sun": "baga"
+            "Screen with sun": "baga",
+            "Symbolic": "yaru"
         },
         "description" : "Icon",
         "tooltip": "An icon displayed in a panel"

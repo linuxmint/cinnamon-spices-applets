@@ -78,6 +78,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.menu_item_presets_position = 2;
         this.menu_item_configure_presets_position = 3;
         this.menu_item_reload_applet_position = 4;
+        this.menu_item_toggle_applet_position = 5;
         this.menu_item_screen = null;
         this.menu_item_outputs = null;
         this.menu_sliders = null;
@@ -466,12 +467,21 @@ class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     set_gui_icon() {
-        this.set_applet_icon_name(this.baga_icon + "-on");
+        if (this.baga_icon === "yaru")
+            this.set_applet_icon_symbolic_name(this.baga_icon + "-on");
+        else
+            this.set_applet_icon_name(this.baga_icon + "-on");
         if (!this.is_running && this.way_to_set_off != null) {
             if (this.way_to_set_off === "nochange") {
-                this.set_applet_icon_name(this.baga_icon + "-off");
+                if (this.baga_icon === "yaru")
+                    this.set_applet_icon_symbolic_name(this.baga_icon + "-off");
+                else
+                    this.set_applet_icon_name(this.baga_icon + "-off");
             } else {
-                this.set_applet_icon_name(this.baga_icon + "-full");
+                if (this.baga_icon === "yaru")
+                    this.set_applet_icon_symbolic_name(this.baga_icon + "-full");
+                else
+                    this.set_applet_icon_name(this.baga_icon + "-full");
             }
         }
     }
@@ -583,6 +593,9 @@ class BrightnessAndGamma extends Applet.IconApplet {
 
     // Override
     on_applet_added_to_panel() {
+        //~ this.themeNode = this.actor.get_theme_node();
+        //~ this.actor.style = "color: " + this.themeNode.get_foreground_color() + ";";
+        //~ this.actor.style = "color: white;";
         this.on_shortcut_changed();
         this.on_disable_nightmode_changed();
         this.set_MAX_TR_LENGTH();
@@ -736,6 +749,17 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this._init_menu_item_presets();
         this._init_menu_item_configure_presets();
         this._init_menu_item_reload_applet();
+        this._init_menu_item_toggle_applet();
+    }
+
+    _init_menu_item_toggle_applet() {
+        if (this.menu_item_toggle_applet) {
+            let children = this._applet_context_menu._getMenuItems();
+            children[this.menu_item_toggle_applet_position].destroy();
+        }
+        this.menu_item_toggle_applet = this._applet_context_menu.addAction(_("Toggle On / Off"), () => {
+            this.toggle_on_off_applet();
+        });
     }
 
     _init_menu_item_reload_applet() {

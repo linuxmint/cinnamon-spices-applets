@@ -1,3 +1,7 @@
+### v2.5.1~20251121
+* Adds a symbolic icon.
+* Adds in context menu the option "Toggle On/Off".
+
 ### v2.5.0~20251119
 * Adds a shortcut to enable/disable this applet.
 * New way to select the panel icon.
