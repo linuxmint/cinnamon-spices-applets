@@ -1,3 +1,6 @@
+### v7.9.7~20251121
+  * Updates to-string() function.
+
 ### v7.9.6~20251121
   * Improves file monitoring.
 

@@ -1,3 +1,6 @@
+### v2.4.3~20251121
+  * Updates to-string() function.
+
 ### v2.4.2~20251109
   * Updates loop management.
 

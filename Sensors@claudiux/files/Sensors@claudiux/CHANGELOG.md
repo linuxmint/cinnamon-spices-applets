@@ -1,3 +1,6 @@
+### v5.9.3~20251121
+  * Updates to-string() function.
+
 ### v5.9.2~20250919
   * Fixes [#7761](https://github.com/linuxmint/cinnamon-spices-applets/issues/7761)
 

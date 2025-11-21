@@ -1,14 +1,16 @@
-const Gio = imports.gi.Gio;
 const ByteArray = imports.byteArray;
 
 const to_string = function(data) {
-  if (ByteArray.toString) {
-    return ByteArray.toString(data);
+  if (ByteArray.hasOwnProperty("toString")) {
+    return ""+ByteArray.toString(data);
   } else {
-    return ""+data;
+    return ""+data.toString();
   }
-  //~ return stringFromUTF8Array(data);
 }
+
+//~ const to_string = function(data) {
+  //~ return stringFromUTF8Array(data);
+//~ }
 
 //~ const stringFromUTF8Array = function(data) {
   //~ const extraByteMap = [ 1, 1, 1, 1, 2, 2, 3, 0 ];
@@ -40,3 +42,7 @@ const to_string = function(data) {
 
   //~ return str;
 //~ }
+
+module.exports = {
+  to_string
+}
