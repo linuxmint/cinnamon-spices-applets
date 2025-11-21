@@ -1,0 +1,3366 @@
+# RADIO3.0
+# This file is put in the public domain.
+# claudiux, 2022
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Radio3.0@claudiux 3.8.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-11 12:31+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:286
+msgid "unassigned"
+msgstr "chưa gán"
+
+#. applet.js:287
+msgid "Display Album Art at full size"
+msgstr "Hiển thị ảnh bìa album ở kích thước đầy đủ"
+
+#. applet.js:389
+msgid "This is your own list of Categories and Radio Stations."
+msgstr "Đây là danh sách các thể loại và đài phát thanh của bạn."
+
+#. applet.js:390
+msgid "You can add more using the [+] button."
+msgstr "Bạn có thể thêm bằng nút [+]."
+
+#. applet.js:391
+msgid "For a category, fill in only its name; leave the other fields empty."
+msgstr "Với thể loại, chỉ điền tên; để trống các trường khác."
+
+#. applet.js:392
+msgid "For a radio station, enter only its name and its streaming URL."
+msgstr "Với đài phát thanh, chỉ nhập tên và URL streaming."
+
+#. applet.js:393
+msgid ""
+"You can order the rows by dragging and dropping or by using the buttons and "
+"tools below the list."
+msgstr ""
+"Bạn có thể sắp xếp các dòng bằng kéo thả hoặc dùng các nút và công cụ bên "
+"dưới danh sách."
+
+#. applet.js:394
+msgid ""
+"The buttons on the right below the list allow you to navigate page by page "
+"or category by category."
+msgstr ""
+"Các nút bên phải dưới danh sách cho phép duyệt theo trang hoặc theo thể loại."
+
+#. applet.js:395
+msgid ""
+"To search for one of your stations, click on the list and start writing its "
+"name."
+msgstr "Để tìm đài, bấm vào danh sách và bắt đầu nhập tên."
+
+#. applet.js:396
+msgid ""
+"To easily add stations to your list, use the following 2 tabs: Search and "
+"Import."
+msgstr "Để dễ thêm đài, dùng 2 tab sau: Tìm kiếm và Nhập khẩu."
+
+#. applet.js:397
+msgid "Check its 'Menu' box to display a station or category in the menu."
+msgstr "Chọn hộp 'Menu' để hiển thị đài hoặc thể loại trong menu."
+
+#. applet.js:398
+msgid ""
+"Check its '♪/➟' box to listen to the station or move it to another category "
+"using the tools below the list."
+msgstr ""
+"Chọn hộp '♪/➟' để nghe đài hoặc di chuyển nó sang thể loại khác bằng công cụ "
+"bên dưới."
+
+#. applet.js:400
+msgid "You can have your list of stations checked by internet databases."
+msgstr "Bạn có thể kiểm tra danh sách đài của mình qua cơ sở dữ liệu internet."
+
+#. applet.js:401
+msgid ""
+"Any station recognized by one of these databases will receive a Universal "
+"Unique Identifier (UUID) provided by this database."
+msgstr ""
+"Bất kỳ đài nào được cơ sở dữ liệu nhận diện sẽ nhận UUID (Mã định danh duy "
+"nhất toàn cầu) từ cơ sở dữ liệu đó."
+
+#. applet.js:402
+msgid ""
+"So, if a streaming URL was changed, a next check would update it and you can "
+"continue to listen to the affected station."
+msgstr ""
+"Nếu URL streaming thay đổi, lần kiểm tra tiếp theo sẽ cập nhật và bạn có thể "
+"tiếp tục nghe đài đó."
+
+#. applet.js:404
+msgid ""
+"Here you can search for other stations in a free radio database accessible "
+"via the Internet."
+msgstr ""
+"Bạn có thể tìm các đài khác trong cơ sở dữ liệu radio miễn phí qua Internet."
+
+#. applet.js:405
+msgid ""
+"Fill in at least a few fields of the form below then click on the "
+"'Search ...' button."
+msgstr ""
+"Điền ít nhất vài trường trong form dưới đây rồi bấm nút 'Tìm kiếm ...'."
+
+#. applet.js:406
+msgid ""
+"Each time this button is clicked, a new results page is displayed in the "
+"second part of this page, where you can test certain stations and include "
+"them in the menu."
+msgstr ""
+"Mỗi lần bấm nút này, một trang kết quả mới hiển thị ở phần hai của trang, "
+"nơi bạn có thể thử một số đài và thêm vào menu."
+
+#. applet.js:407
+msgid ""
+"A station already in your menu will only appear in search results if its "
+"streaming URL has changed."
+msgstr ""
+"Đài đã có trong menu chỉ xuất hiện trong kết quả tìm kiếm nếu URL streaming "
+"của nó thay đổi."
+
+#. applet.js:408
+msgid ""
+"When no new page appears, it means that all results matching your search "
+"criteria have been displayed."
+msgstr ""
+"Khi không xuất hiện trang mới, nghĩa là tất cả kết quả phù hợp với tiêu chí "
+"tìm kiếm đã hiển thị."
+
+#. applet.js:410
+msgid ""
+"You can import a file containing the name and streaming URL of at least one "
+"radio station."
+msgstr ""
+"Bạn có thể nhập một file chứa tên và URL streaming của ít nhất một đài."
+
+#. applet.js:411
+msgid ""
+"These radio stations are displayed in the list below. You can test them by "
+"checking their ♪ box."
+msgstr ""
+"Các đài này hiển thị trong danh sách dưới. Bạn có thể thử bằng cách chọn hộp "
+"♪ của chúng."
+
+#. applet.js:412
+msgid "Then manage this list with the buttons at the bottom of this tab."
+msgstr "Sau đó quản lý danh sách này bằng các nút ở dưới tab này."
+
+#. applet.js:414
+msgid ""
+"In the Shoutcast directory, click the download button to the left of the "
+"station name."
+msgstr "Trong thư mục Shoutcast, bấm nút tải về bên trái tên đài."
+
+#. applet.js:415
+msgid ""
+"Select the open format (.XSPF) and save the file giving it the same name as "
+"the station."
+msgstr "Chọn định dạng mở (.XSPF) và lưu file với tên giống tên đài."
+
+#. applet.js:416
+msgid "This file can then be imported here."
+msgstr "File này sau đó có thể được nhập vào đây."
+
+#. applet.js:418
+#, javascript-format
+msgid "%s bytes = %s GB = %s GiB"
+msgstr "%s byte = %s GB = %s GiB"
+
+#. applet.js:420
+msgid "Sun."
+msgstr "CN."
+
+#. applet.js:420
+msgid "Mon."
+msgstr "T2."
+
+#. applet.js:420
+msgid "Tue."
+msgstr "T3."
+
+#. applet.js:420
+msgid "Wed."
+msgstr "T4."
+
+#. applet.js:420
+msgid "Thu."
+msgstr "T5."
+
+#. applet.js:420
+msgid "Fri."
+msgstr "T6."
+
+#. applet.js:420
+msgid "Sat."
+msgstr "T7."
+
+#. settings-schema.json->category-to-move->options
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->sched-radio->options
+#. settings-schema.json->search-country->options
+#. settings-schema.json->search-codec->options
+#. settings-schema.json->search-order->options
+#. settings-schema.json->alarm-clock-working-days-radio->options
+#. settings-schema.json->alarm-clock-workoff-days-radio->options
+#. applet.js:586 applet.js:604 applet.js:5511 applet.js:5527
+msgid "(Undefined)"
+msgstr "(Chưa xác định)"
+
+#. settings-schema.json->category-to-move->options
+#. applet.js:587 applet.js:5528
+msgid "(Blacklist)"
+msgstr "(Danh sách đen)"
+
+#. applet.js:2263
+msgid "Start"
+msgstr "Bắt đầu"
+
+#. applet.js:2271 applet.js:3014
+msgid "Stop"
+msgstr "Dừng"
+
+#. applet.js:2545
+msgid "Volume: %s%"
+msgstr "Âm lượng: %s%"
+
+#. applet.js:2550
+msgid "Middle-Click: Stop Recording"
+msgstr "Nhấp giữa: Dừng ghi âm"
+
+#. applet.js:2552
+msgid "Middle-click: ON/OFF"
+msgstr "Nhấp giữa: BẬT/TẮT"
+
+#. applet.js:2554
+msgid "Click: Select another station"
+msgstr "Nhấp: Chọn đài khác"
+
+#. applet.js:2555
+msgid "Scroll wheel: volume change"
+msgstr "Cuộn chuột: thay đổi âm lượng"
+
+#. applet.js:2558
+msgid "Click to select a station"
+msgstr "Nhấp để chọn đài"
+
+#. applet.js:2564
+msgid "Wake Up"
+msgstr "Đánh thức"
+
+#. applet.js:2642 applet.js:3032 applet.js:5023
+msgid "Configure..."
+msgstr "Cấu hình..."
+
+#. applet.js:2646 applet.js:3024
+msgid "Search for new stations..."
+msgstr "Tìm đài mới..."
+
+#. applet.js:2652
+msgid "Load a sample station list"
+msgstr "Tải danh sách đài mẫu"
+
+#. applet.js:2699 applet.js:3036 applet.js:5093
+msgid "Sound Settings"
+msgstr "Cài đặt âm thanh"
+
+#. applet.js:2770
+msgid "Watch on YT"
+msgstr "Xem trên YT"
+
+#. applet.js:2777
+msgid "Try to download it from YT (unsafe)"
+msgstr "Thử tải từ YT (không an toàn)"
+
+#. applet.js:2797
+msgid "Recently Played Stations:"
+msgstr "Đài đã nghe gần đây:"
+
+#. applet.js:2848
+msgid "Visit the home page of this station"
+msgstr "Truy cập trang chủ đài này"
+
+#. applet.js:2897
+msgid "Categories"
+msgstr "Thể loại"
+
+#. applet.js:2900
+msgid "Radio Stations"
+msgstr "Đài phát thanh"
+
+#. applet.js:2911
+msgid "All Categories"
+msgstr "Tất cả thể loại"
+
+#. applet.js:2956
+msgid "My Radio Stations"
+msgstr "Đài của tôi"
+
+#. applet.js:3156
+msgid "Downloading..."
+msgstr "Đang tải về..."
+
+#. applet.js:3158
+msgid "Stop downloading"
+msgstr "Dừng tải về"
+
+#. applet.js:3264
+msgid "Download complete"
+msgstr "Tải xong"
+
+#. settings-schema.json->button-open-rec-folder->description
+#. settings-schema.json->recordings-open-folder->description
+#. applet.js:3266 applet.js:3275 applet.js:4743 applet.js:4752 applet.js:4761
+#. applet.js:5056
+msgid "Open the recordings folder"
+msgstr "Mở thư mục ghi âm"
+
+#. applet.js:3273 applet.js:4740 applet.js:4750 applet.js:4759
+msgid "An error seems to have occurred during recording!"
+msgstr "Có vẻ đã xảy ra lỗi trong quá trình ghi âm!"
+
+#. applet.js:3274 applet.js:4742 applet.js:4751 applet.js:4760
+msgid "Please check this record."
+msgstr "Vui lòng kiểm tra bản ghi này."
+
+#. applet.js:3381 applet.js:3415
+msgid "Record from now"
+msgstr "Ghi âm từ bây giờ"
+
+#. applet.js:3399 applet.js:5413
+msgid "Stop Current Recording"
+msgstr "Dừng ghi âm hiện tại"
+
+#. applet.js:3548
+#, javascript-format
+msgid "Playing %s%s"
+msgstr "Đang phát %s%s"
+
+#. applet.js:3602
+msgid "Radio OFF"
+msgstr "Radio TẮT"
+
+#. applet.js:3730
+msgid "Unable to record anything!"
+msgstr "Không thể ghi âm!"
+
+#. applet.js:3730 applet.js:5073 applet.js:5232
+msgid "Insufficient space"
+msgstr "Không đủ dung lượng"
+
+#. applet.js:3730
+msgid "The limit you set has been reached."
+msgstr "Giới hạn bạn đặt đã đạt."
+
+#. applet.js:4131
+msgid "Please Log Out then Log In"
+msgstr "Vui lòng đăng xuất rồi đăng nhập lại"
+
+#. applet.js:4131
+msgid "to finalize yt-dlp update"
+msgstr "để hoàn tất cập nhật yt-dlp"
+
+#. applet.js:4266
+msgid "Nothing to save."
+msgstr "Không có gì để lưu."
+
+#. applet.js:4279
+msgid "List of saved radio stations"
+msgstr "Danh sách các đài đã lưu"
+
+#. applet.js:4297
+msgid "This will replace all current radio stations."
+msgstr "Hành động này sẽ thay thế tất cả các đài hiện có."
+
+#. applet.js:4298
+msgid "Are you sure you want to continue?"
+msgstr "Bạn có chắc muốn tiếp tục không?"
+
+#. applet.js:4362
+msgid "Update in progress"
+msgstr "Đang cập nhật"
+
+#. applet.js:4362
+msgid "It may take a while ... Please wait."
+msgstr "Quá trình có thể mất một lúc ... Vui lòng chờ."
+
+#. applet.js:4454
+msgid "Update completed successfully"
+msgstr "Cập nhật hoàn tất thành công"
+
+#. applet.js:4625 applet.js:4681
+msgid "ERROR: Invalid YT video URL!"
+msgstr "LỖI: URL video YT không hợp lệ!"
+
+#. applet.js:4650
+msgid "Unable to extract a single soundtrack"
+msgstr "Không thể trích xuất nhạc nền đơn lẻ"
+
+#. applet.js:4650
+msgid "Maybe it's a playlist?"
+msgstr "Có thể đây là một danh sách phát?"
+
+#. applet.js:4683
+msgid "Close"
+msgstr "Đóng"
+
+#. applet.js:4841 applet.js:5300 applet.js:5318
+msgid "Cancel"
+msgstr "Hủy"
+
+#. applet.js:4842
+msgid "Radio3.0 applet"
+msgstr "Applet Radio 3.0"
+
+#. applet.js:4845
+msgid "Enable the OSD150 extension"
+msgstr "Bật tiện ích mở rộng OSD150"
+
+#. applet.js:4846
+msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
+msgstr "Để có OSD ngang, bạn cần bật tiện ích mở rộng OSD150."
+
+#. applet.js:4863
+msgid "Download the OSD150 extension"
+msgstr "Tải tiện ích mở rộng OSD150"
+
+#. applet.js:4864
+msgid ""
+"To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
+"Click on the Download button then search for OSD150 and select the ⬇ button."
+msgstr ""
+"Để có OSD ngang, bạn cần tải tiện ích mở rộng OSD150.\n"
+"Nhấp nút Tải về, tìm OSD150 và chọn nút ⬇."
+
+#. applet.js:4995
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Xóa '%s'"
+
+#. applet.js:5003
+msgid "About..."
+msgstr "Giới thiệu..."
+
+#. applet.js:5010
+msgid "Manual..."
+msgstr "Hướng dẫn..."
+
+#. applet.js:5017
+msgid "Reload this applet"
+msgstr "Tải lại applet này"
+
+#. applet.js:5034
+msgid "Schedule a background record..."
+msgstr "Lên lịch ghi âm nền..."
+
+#. applet.js:5041
+msgid "Configure the Alarm Clock..."
+msgstr "Cấu hình Đồng hồ báo thức..."
+
+#. applet.js:5048
+msgid "Extract soundtrack from YouTube video..."
+msgstr "Trích xuất nhạc nền từ video YouTube..."
+
+#. applet.js:5070 applet.js:5229
+msgid "(auto)"
+msgstr "(tự động)"
+
+#. applet.js:5070 applet.js:5229
+msgid "(manual)"
+msgstr "(thủ công)"
+
+#. applet.js:5073 applet.js:5232 applet.js:5460
+msgid "Stop Recording"
+msgstr "Dừng ghi âm"
+
+#. applet.js:5073 applet.js:5232
+msgid "Start Recording"
+msgstr "Bắt đầu ghi âm"
+
+#. applet.js:5089
+msgid "Cancel downloads from YT"
+msgstr "Hủy tải từ YT"
+
+#. applet.js:5098
+msgid "Pulse Effects"
+msgstr "Hiệu ứng nhịp"
+
+#. applet.js:5103
+msgid "Easy Effects"
+msgstr "Hiệu ứng đơn giản"
+
+#. applet.js:5108
+msgid "Radio ON at startup"
+msgstr "Bật Radio khi khởi động"
+
+#. applet.js:5117
+msgid "Display Station Logo"
+msgstr "Hiển thị Logo Đài"
+
+#. applet.js:5127
+msgid "Album Art desklet settings"
+msgstr "Cài đặt desklet Album Art"
+
+#. settings-schema.json->alarm-clock-wake-me-up->description
+#. applet.js:5132
+msgid "Wake me up!"
+msgstr "Đánh thức tôi!"
+
+#. applet.js:5141
+msgid "Show Album Art on desktop"
+msgstr "Hiển thị Album Art trên màn hình"
+
+#. settings-schema.json->dont-check-dependencies->description
+#. applet.js:5150
+msgid "Do not check about dependencies"
+msgstr "Không kiểm tra các phụ thuộc"
+
+#. settings-schema.json->show-volume-level-near-icon->description
+#. applet.js:5160
+msgid "Display volume level near icon"
+msgstr "Hiển thị mức âm lượng gần biểu tượng"
+
+#. applet.js:5297
+msgid "You need the 'Album Art 3.0' desklet"
+msgstr "Bạn cần desklet 'Album Art 3.0'"
+
+#. applet.js:5298
+msgid ""
+"You can install it by clicking on the first button and then searching for "
+"Album."
+msgstr "Bạn có thể cài đặt bằng cách nhấp nút đầu tiên rồi tìm 'Album'."
+
+#. applet.js:5299 applet.js:5317
+msgid "Desklets"
+msgstr "Desklet"
+
+#. applet.js:5315
+msgid "You need to activate the 'Album Art 3.0' desklet"
+msgstr "Bạn cần kích hoạt desklet 'Album Art 3.0'"
+
+#. applet.js:5316
+msgid ""
+"You can activate it by clicking on the first button, then searching for "
+"Album and adding it with button [+]."
+msgstr ""
+"Bạn có thể kích hoạt bằng cách nhấp nút đầu tiên, tìm 'Album' và thêm bằng "
+"nút [+]."
+
+#. applet.js:5461
+msgid "Close without stopping recording"
+msgstr "Đóng mà không dừng ghi âm"
+
+#. applet.js:5676
+#, javascript-format
+msgid "Starting recording from %s:%s to %s:%s"
+msgstr "Bắt đầu ghi âm từ %s:%s đến %s:%s"
+
+#. applet.js:5688
+msgid "Recording completed"
+msgstr "Ghi âm hoàn tất"
+
+#. applet.js:5813
+msgid "This will import a new file containing radio stations."
+msgstr "Hành động này sẽ nhập một tập tin mới chứa các đài radio."
+
+#. applet.js:5814
+msgid "Do you want to continue?"
+msgstr "Bạn có muốn tiếp tục không?"
+
+#. applet.js:5891
+msgid "No new radio in your list."
+msgstr "Không có đài mới trong danh sách của bạn."
+
+#. applet.js:5893
+msgid "One more radio in your list."
+msgstr "Thêm một đài mới vào danh sách của bạn."
+
+#. applet.js:5895
+#, javascript-format
+msgid "%s more radios in your list."
+msgstr "%s đài nữa trong danh sách của bạn."
+
+#. applet.js:6154
+msgid "There are no new stations to add to the Radio3.0 applet menu"
+msgstr "Không có đài mới nào để thêm vào menu applet Radio3.0"
+
+#. applet.js:6156
+msgid "A new station has been added to the Radio3.0 applet menu"
+msgstr "Một đài mới đã được thêm vào menu applet Radio3.0"
+
+#. applet.js:6158
+#, javascript-format
+msgid "%s new stations have been added to the Radio3.0 applet menu"
+msgstr "%s đài mới đã được thêm vào menu applet Radio3.0"
+
+#. applet.js:6383
+#, javascript-format
+msgid "%s kbps"
+msgstr "%s kbps"
+
+#. lib/checkDependencies.js:399
+#, javascript-format
+msgid "The applet %s is fully functional."
+msgstr "Applet %s hoạt động đầy đủ."
+
+#. lib/checkDependencies.js:400
+msgid "All dependencies are installed"
+msgstr "Tất cả các phụ thuộc đã được cài đặt"
+
+#. lib/checkDependencies.js:430
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Có vẻ bạn thiếu một số chương trình cần thiết để applet này hoạt động đầy đủ."
+
+#. lib/checkDependencies.js:431
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr "Vui lòng thực thi các lệnh trong terminal vừa mở:"
+
+#. lib/checkDependencies.js:432
+msgid "Some dependencies are not installed!"
+msgstr "Một số phụ thuộc chưa được cài đặt!"
+
+#. lib/checkTranslations.js:109
+msgid "To finalize the translation installation, please restart Cinnamon"
+msgstr "Để hoàn tất cài đặt bản dịch, vui lòng khởi động lại Cinnamon"
+
+#. lib/util.js:245
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr "Thực thi '%s' thất bại:"
+
+#. settings-schema.json->scale-update->description
+#. settings-schema.json->recordings-extract-update->description
+#. lib/volumeslider.js:188
+msgid "%"
+msgstr "%"
+
+#. xs/xlet-settings.py:214
+msgid "Previous instance"
+msgstr "Phiên trước"
+
+#. xs/xlet-settings.py:218
+msgid "Next instance"
+msgstr "Phiên tiếp theo"
+
+#. xs/xlet-settings.py:227
+msgid "More options"
+msgstr "Thêm tùy chọn"
+
+#. xs/xlet-settings.py:233
+msgid "Import from a file"
+msgstr "Nhập từ tập tin"
+
+#. xs/xlet-settings.py:238
+msgid "Export to a file"
+msgstr "Xuất ra tập tin"
+
+#. xs/xlet-settings.py:243
+msgid "Reset to defaults"
+msgstr "Đặt về mặc định"
+
+#. xs/xlet-settings.py:252
+#, python-format
+msgid "Reload %s"
+msgstr "Tải lại %s"
+
+#. xs/xlet-settings.py:441
+#, python-format
+msgid "Settings for %s"
+msgstr "Cài đặt cho %s"
+
+#. xs/xlet-settings.py:533
+msgid "Select or enter file to export to"
+msgstr "Chọn hoặc nhập tập tin để xuất ra"
+
+#. xs/xlet-settings.py:541 xs/xlet-settings.py:562
+msgid "JSON files"
+msgstr "Tập tin JSON"
+
+#. xs/xlet-settings.py:555
+msgid "Select a JSON file to import"
+msgstr "Chọn tập tin JSON để nhập"
+
+#. xs/bin/R3TreeListWidgets.py:278 xs/bin/R3TreeListWidgets.py:501
+msgid "Add new entry"
+msgstr "Thêm mục mới"
+
+#. xs/bin/R3TreeListWidgets.py:282
+msgid "Remove selected entry"
+msgstr "Xóa mục đã chọn"
+
+#. xs/bin/R3TreeListWidgets.py:287
+msgid "Edit selected entry"
+msgstr "Chỉnh sửa mục đã chọn"
+
+#. xs/bin/R3TreeListWidgets.py:292
+msgid "Unselect the selected row"
+msgstr "Bỏ chọn hàng đã chọn"
+
+#. xs/bin/R3TreeListWidgets.py:297
+msgid "Move selected entry up"
+msgstr "Di chuyển mục đã chọn lên trên"
+
+#. xs/bin/R3TreeListWidgets.py:302
+msgid "Move selected entry down"
+msgstr "Di chuyển mục đã chọn xuống dưới"
+
+#. xs/bin/R3TreeListWidgets.py:325
+msgid "Go to bottom"
+msgstr "Chuyển xuống cuối"
+
+#. xs/bin/R3TreeListWidgets.py:331
+msgid "Go to next page"
+msgstr "Chuyển sang trang tiếp theo"
+
+#. xs/bin/R3TreeListWidgets.py:337
+msgid "Go to previous page"
+msgstr "Quay về trang trước"
+
+#. xs/bin/R3TreeListWidgets.py:342
+msgid "Go to top"
+msgstr "Chuyển lên đầu"
+
+#. xs/bin/R3TreeListWidgets.py:356
+msgid "Go to next category"
+msgstr "Chuyển sang mục tiếp theo"
+
+#. xs/bin/R3TreeListWidgets.py:366
+msgid "Go to previous category"
+msgstr "Quay về mục trước"
+
+#. xs/bin/R3TreeListWidgets.py:503
+msgid "Edit entry"
+msgstr "Chỉnh sửa mục"
+
+#. metadata.json->description
+msgid "The Ultimate Internet Radio Receiver & Recorder for Cinnamon"
+msgstr "Máy thu & ghi đài Internet tối ưu cho Cinnamon"
+
+#. metadata.json->name
+msgid "Radio3.0"
+msgstr "Radio3.0"
+
+#. settings-schema.json->pageStations->title
+#. settings-schema.json->import-list->description
+#. settings-schema.json->search-list->description
+msgid "Radios"
+msgstr "Đài"
+
+#. settings-schema.json->pageImport->title
+msgid "Import"
+msgstr "Nhập"
+
+#. settings-schema.json->pageSearch->title
+msgid "Search"
+msgstr "Tìm kiếm"
+
+#. settings-schema.json->pageMenu->title
+#. settings-schema.json->sectionMenuMenu->title
+#. settings-schema.json->radios->columns->title
+msgid "Menu"
+msgstr "Menu"
+
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr "Hành vi"
+
+#. settings-schema.json->pageRecording->title
+msgid "Recording"
+msgstr "Ghi âm"
+
+#. settings-schema.json->pageYT->title
+msgid "YT"
+msgstr "YT"
+
+#. settings-schema.json->pageScheduling->title
+msgid "Scheduling"
+msgstr "Lên lịch"
+
+#. settings-schema.json->pageNetwork->title
+msgid "Network"
+msgstr "Mạng"
+
+#. settings-schema.json->pageAlarmClock->title
+msgid "Alarm Clock"
+msgstr "Đồng hồ báo thức"
+
+#. settings-schema.json->sectionStationsList->title
+msgid "Stations and Categories on the menu"
+msgstr "Các đài và mục trên menu"
+
+#. settings-schema.json->sectionStationsMove->title
+msgid "Moving selected stations"
+msgstr "Di chuyển đài đã chọn"
+
+#. settings-schema.json->sectionStationsSaveRestore->title
+msgid "Save and Restore"
+msgstr "Lưu & Phục hồi"
+
+#. settings-schema.json->sectionStationsUpdate->title
+msgid "Update this station list"
+msgstr "Cập nhật danh sách đài này"
+
+#. settings-schema.json->sectionBlacklist->title
+msgid "Unwanted (blacklist)"
+msgstr "Không mong muốn (danh sách đen)"
+
+#. settings-schema.json->sectionImportRadiopp->title
+msgid "Only for Radio++ users"
+msgstr "Chỉ dành cho người dùng Radio++"
+
+#. settings-schema.json->sectionImportShoutcast->title
+msgid "Get files on Shoutcast to import here"
+msgstr "Lấy tập tin từ Shoutcast để nhập vào đây"
+
+#. settings-schema.json->sectionImportFile->title
+msgid "File to import"
+msgstr "Tập tin cần nhập"
+
+#. settings-schema.json->sectionImportList->title
+msgid "File contents"
+msgstr "Nội dung tập tin"
+
+#. settings-schema.json->sectionSearchOptions->title
+msgid "Search for Radio Stations"
+msgstr "Tìm đài radio"
+
+#. settings-schema.json->sectionSearchResults->title
+msgid "Search results"
+msgstr "Kết quả tìm kiếm"
+
+#. settings-schema.json->sectionBehaviorSettingsWindow->title
+msgid "Settings Window"
+msgstr "Cửa sổ Cài đặt"
+
+#. settings-schema.json->sectionBehaviorStartUp->title
+msgid "Start-up"
+msgstr "Khởi động"
+
+#. settings-schema.json->sectionBehaviorVolumeStep->title
+msgid "Volume step"
+msgstr "Bước âm lượng"
+
+#. settings-schema.json->sectionBehaviorOSD->title
+msgid "OSD"
+msgstr "OSD"
+
+#. settings-schema.json->sectionBehaviorTooltip->title
+msgid "Show Help"
+msgstr "Hiển thị trợ giúp"
+
+#. settings-schema.json->sectionMenuPrivacy->title
+msgid "Privacy"
+msgstr "Quyền riêng tư"
+
+#. settings-schema.json->sectionMenuContextual->title
+msgid "Contextual Menu"
+msgstr "Menu ngữ cảnh"
+
+#. settings-schema.json->sectionMenuShortcuts->title
+msgid "Keyboard shortcuts"
+msgstr "Phím tắt bàn phím"
+
+#. settings-schema.json->sectionBehaviorNotifications->title
+msgid "Notifications"
+msgstr "Thông báo"
+
+#. settings-schema.json->sectionBehaviorBitrate->title
+msgid "Codec and Bitrate"
+msgstr "Codec và tốc độ bit"
+
+#. settings-schema.json->sectionBehaviorSymbolicIconColor->title
+#. settings-schema.json->sectionRecordingIcon->title
+#. settings-schema.json->sectionYTIcon->title
+msgid "Icon"
+msgstr "Biểu tượng"
+
+#. settings-schema.json->sectionBehaviorHorizontalPanel->title
+msgid "Only on horizontal panels"
+msgstr "Chỉ trên thanh ngang"
+
+#. settings-schema.json->sectionNetworkQuality->title
+msgid "Quality"
+msgstr "Chất lượng"
+
+#. settings-schema.json->sectionNetworkMonitoring->title
+msgid "Monitoring"
+msgstr "Giám sát"
+
+#. settings-schema.json->sectionNetworkProxy->title
+msgid "Proxy"
+msgstr "Proxy"
+
+#. settings-schema.json->sectionNetworkDatabase->title
+msgid "Database Info"
+msgstr "Thông tin cơ sở dữ liệu"
+
+#. settings-schema.json->sectionExperimental->title
+msgid "EXPERIMENTAL"
+msgstr "THỬ NGHIỆM"
+
+#. settings-schema.json->sectionRecordingCache->title
+msgid "Cache"
+msgstr "Bộ nhớ đệm"
+
+#. settings-schema.json->sectionRecordingRecordings->title
+#. settings-schema.json->sectionYTFormat->title
+msgid "Recordings"
+msgstr "Bản ghi"
+
+#. settings-schema.json->sectionRecordingLimits->title
+msgid "Preservation of hard disk space"
+msgstr "Bảo vệ dung lượng ổ cứng"
+
+#. settings-schema.json->sectionYTIgnore->title
+msgid "Ignore YT"
+msgstr "Bỏ qua YT"
+
+#. settings-schema.json->sectionYTExtract->title
+msgid "Extract soundtrack from YouTube video"
+msgstr "Trích âm thanh từ video YouTube"
+
+#. settings-schema.json->sectionRecordingScheduleARecording->title
+msgid "Schedule a background recording"
+msgstr "Lên lịch ghi âm nền"
+
+#. settings-schema.json->sectionRecordingUnableToScheduleARecording->title
+msgid "Unable to schedule a background recording"
+msgstr "Không thể lên lịch ghi âm nền"
+
+#. settings-schema.json->sectionRecordingScheduledRecordings->title
+#. settings-schema.json->sched-recordings->description
+msgid "Scheduled recordings"
+msgstr "Các bản ghi đã lên lịch"
+
+#. settings-schema.json->sectionWakeMeUp->title
+msgid "Options"
+msgstr "Tùy chọn"
+
+#. settings-schema.json->sectionWorkingDays->title
+msgid "Working Days"
+msgstr "Ngày làm việc"
+
+#. settings-schema.json->sectionWorkOffDays->title
+msgid "Work-Off Days"
+msgstr "Ngày nghỉ làm"
+
+#. settings-schema.json->show-help-in-tabs->description
+msgid "Show help labels in each tab of this Settings window"
+msgstr "Hiển thị nhãn trợ giúp ở mỗi tab của cửa sổ Cài đặt này"
+
+#. settings-schema.json->show-help-in-tabs->tooltip
+msgid ""
+"You can uncheck this option when you are familiar with all of these settings."
+msgstr "Bạn có thể bỏ chọn tùy chọn này khi đã quen với tất cả các cài đặt."
+
+#. settings-schema.json->stations-help->description
+#. settings-schema.json->button-update-help->description
+#. settings-schema.json->import-shoutcast-help->description
+#. settings-schema.json->import-help->description
+#. settings-schema.json->search-help->description
+msgid "Help"
+msgstr "Trợ giúp"
+
+#. settings-schema.json->radios->description
+msgid "List of stations"
+msgstr "Danh sách đài"
+
+#. settings-schema.json->radios->columns->title
+msgid "♥︎"
+msgstr "♥︎"
+
+#. settings-schema.json->radios->columns->title
+msgid "♪/➟"
+msgstr "♪/➟"
+
+#. settings-schema.json->radios->columns->title
+msgid "Station or Category"
+msgstr "Đài hoặc Thể loại"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid ""
+"Bitrate\n"
+"(kbps)"
+msgstr ""
+"Tốc độ bit\n"
+"(kbps)"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+#. settings-schema.json->search-codec->description
+msgid "Codec"
+msgstr "Codec"
+
+#. settings-schema.json->radios->columns->title
+msgid "Streaming URL (empty for a category)"
+msgstr "URL phát trực tuyến (để trống nếu là thể loại)"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Unique identifier"
+msgstr "Mã định danh duy nhất"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Home page"
+msgstr "Trang chủ"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Tags"
+msgstr "Thẻ"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Favicon"
+msgstr "Favicon"
+
+#. settings-schema.json->radios->columns->title
+msgid "Artist/Title swap"
+msgstr "Đổi Artist/Title"
+
+#. settings-schema.json->stations-list-play-button->description
+#. settings-schema.json->import-list-play-button->description
+#. settings-schema.json->search-list-play-button->description
+msgid "♪ Play the next station to test"
+msgstr "♪ Phát đài tiếp theo để kiểm tra"
+
+#. settings-schema.json->category-to-move->description
+msgid "Category to which to move the selected stations:"
+msgstr "Thể loại để di chuyển các đài đã chọn:"
+
+#. settings-schema.json->button-moving->description
+msgid "➟ Move selected stations to this category"
+msgstr "➟ Di chuyển các đài đã chọn vào thể loại này"
+
+#. settings-schema.json->button_go_to_category->description
+msgid "Go to this category"
+msgstr "Đi tới thể loại này"
+
+#. settings-schema.json->button-show-all->description
+msgid "Show all stations and categories in the menu"
+msgstr "Hiển thị tất cả đài và thể loại trong menu"
+
+#. settings-schema.json->button-hide-all->description
+msgid "Hide all stations and categories (so the menu becomes empty)"
+msgstr "Ẩn tất cả đài và thể loại (menu sẽ trống)"
+
+#. settings-schema.json->button-save->description
+msgid "Save this list of stations"
+msgstr "Lưu danh sách đài này"
+
+#. settings-schema.json->button-restore->description
+msgid "Restore a list of stations"
+msgstr "Phục hồi danh sách đài"
+
+#. settings-schema.json->button_open_folder->description
+msgid "Open the folder containing these lists"
+msgstr "Mở thư mục chứa các danh sách này"
+
+#. settings-schema.json->button-update->description
+msgid "Update my station list with the Radio Database data"
+msgstr "Cập nhật danh sách đài của tôi bằng dữ liệu từ cơ sở Radio"
+
+#. settings-schema.json->blacklist->columns->title
+msgid "Blacklisted URL"
+msgstr "URL bị chặn"
+
+#. settings-schema.json->import-radiopp-button->description
+msgid "Import your stations from Radio++"
+msgstr "Nhập đài từ Radio++ của bạn"
+
+#. settings-schema.json->import-shoutcast-button->description
+msgid "Open the Shoutcast directory"
+msgstr "Mở thư mục Shoutcast"
+
+#. settings-schema.json->import-file-button->description
+msgid "Import a .csv, .m3u, .pls, .xspf or .json file"
+msgstr "Nhập tập tin .csv, .m3u, .pls, .xspf hoặc .json"
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Select"
+msgstr "Chọn"
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "♪"
+msgstr "♪"
+
+#. settings-schema.json->import-list->columns->title
+msgid "Title"
+msgstr "Tiêu đề"
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Streaming URL"
+msgstr "URL phát trực tuyến"
+
+#. settings-schema.json->import-list-button->description
+#. settings-schema.json->search-list-button->description
+msgid "Import the selected stations into my own list"
+msgstr "Nhập các đài đã chọn vào danh sách của tôi"
+
+#. settings-schema.json->import-remove-from-list-button->description
+#. settings-schema.json->search-remove-from-list-button->description
+msgid "Remove selected items from this list"
+msgstr "Xóa các mục đã chọn khỏi danh sách này"
+
+#. settings-schema.json->import-blacklist-button->description
+msgid "Blacklist selected items from this list"
+msgstr "Đưa các mục đã chọn vào danh sách đen"
+
+#. settings-schema.json->import-select-all->description
+#. settings-schema.json->search-select-all->description
+msgid "Select all items"
+msgstr "Chọn tất cả mục"
+
+#. settings-schema.json->import-unselect-all->description
+#. settings-schema.json->search-unselect-all->description
+msgid "Unselect all items"
+msgstr "Bỏ chọn tất cả mục"
+
+#. settings-schema.json->search-list->columns->title
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Station"
+msgstr "Đài"
+
+#. settings-schema.json->search-list->columns->title
+msgid ""
+"Country\n"
+"Code"
+msgstr ""
+"Quốc gia\n"
+"Mã"
+
+#. settings-schema.json->search-list->columns->title
+#. settings-schema.json->search-country->description
+msgid "Country"
+msgstr "Quốc gia"
+
+#. settings-schema.json->search-list-page-label->description
+msgid "Page:"
+msgstr "Trang:"
+
+#. settings-schema.json->maximize-vertically->description
+msgid "Vertical maximization"
+msgstr "Mở rộng chiều dọc"
+
+#. settings-schema.json->maximize-vertically->tooltip
+msgid ""
+"When this option is checked, this Settings Window will be maximized "
+"vertically the next time it is opened."
+msgstr ""
+"Khi tùy chọn này được chọn, cửa sổ Cài đặt sẽ được mở rộng theo chiều dọc "
+"lần tiếp theo mở."
+
+#. settings-schema.json->switch-on-last-station-at-start-up->description
+msgid "Turn on the radio when Cinnamon starts up"
+msgstr "Bật radio khi Cinnamon khởi động"
+
+#. settings-schema.json->switch-on-last-station-at-start-up->tooltip
+msgid ""
+"The selected radio will be the last you listened to, even if you stopped "
+"it.\n"
+"\n"
+"VPN users: By checking this, the radio broadcast could use your VPN link in "
+"the event that this one is active before the start of this applet."
+msgstr ""
+"Đài được chọn sẽ là đài bạn nghe gần nhất, ngay cả khi bạn đã dừng.\n"
+"\n"
+"Người dùng VPN: Khi chọn tùy chọn này, phát sóng radio có thể sử dụng đường "
+"dẫn VPN nếu nó đang hoạt động trước khi applet này bắt đầu."
+
+#. settings-schema.json->volume-at-startup->description
+msgid "Volume level starting a new radio (%)"
+msgstr "Mức âm lượng khi khởi động đài mới (%)"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-minimalBitrate->options
+msgid "0"
+msgstr "0"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-limit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "35"
+msgstr "35"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "40"
+msgstr "40"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "45"
+msgstr "45"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->yt-progress-interval->options
+#. settings-schema.json->search-limit->options
+msgid "50"
+msgstr "50"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "55"
+msgstr "55"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "60"
+msgstr "60"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "65"
+msgstr "65"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "70"
+msgstr "70"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "75"
+msgstr "75"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "80"
+msgstr "80"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "85"
+msgstr "85"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "90"
+msgstr "90"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "95"
+msgstr "95"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->yt-progress-interval->options
+#. settings-schema.json->search-limit->options
+msgid "100"
+msgstr "100"
+
+#. settings-schema.json->volume-at-startup->tooltip
+msgid ""
+"If set, then this will change the volume level starting a new radio, in "
+"percentage of the general volume level.\n"
+"Default is (Undefined): The volume level remains unchanged.\n"
+"\n"
+"Please note that you can change the volume level scrolling on this applet "
+"icon, or using the slider in the context menu."
+msgstr ""
+"Nếu được đặt, mức âm lượng khi khởi động đài mới sẽ thay đổi theo tỷ lệ phần "
+"trăm của mức âm lượng tổng thể.\n"
+"Mặc định là (Không xác định): Mức âm lượng không thay đổi.\n"
+"\n"
+"Lưu ý: Bạn có thể thay đổi mức âm lượng bằng cách cuộn trên biểu tượng "
+"applet hoặc dùng thanh trượt trong menu ngữ cảnh."
+
+#. settings-schema.json->volume-step->description
+msgid "Volume step scrolling on icon"
+msgstr "Bước thay đổi âm lượng khi cuộn trên biểu tượng"
+
+#. settings-schema.json->volume-step->options
+msgid "±0%"
+msgstr "±0%"
+
+#. settings-schema.json->volume-step->options
+msgid "±1%"
+msgstr "±1%"
+
+#. settings-schema.json->volume-step->options
+msgid "±2%"
+msgstr "±2%"
+
+#. settings-schema.json->volume-step->options
+msgid "±3%"
+msgstr "±3%"
+
+#. settings-schema.json->volume-step->options
+msgid "±4%"
+msgstr "±4%"
+
+#. settings-schema.json->volume-step->options
+msgid "±5%"
+msgstr "±5%"
+
+#. settings-schema.json->volume-step->tooltip
+msgid ""
+"By how much increase or decrease the volume using the mouse scroll wheel on "
+"the icon."
+msgstr ""
+"Tăng hoặc giảm âm lượng bao nhiêu khi dùng bánh xe chuột trên biểu tượng."
+
+#. settings-schema.json->volume-magnetic-on->description
+msgid "Magnetize all multiples of 25%"
+msgstr "Gắn chặt mọi bội số của 25%"
+
+#. settings-schema.json->volume-show-osd->description
+msgid "Show OSD while changing volume"
+msgstr "Hiển thị OSD khi thay đổi âm lượng"
+
+#. settings-schema.json->volume-show-osd->tooltip
+msgid "Should OSD (On-Screen Display) be displayed when changing volume?"
+msgstr "Có hiển thị OSD (Trên màn hình) khi thay đổi âm lượng không?"
+
+#. settings-schema.json->volume-show-osd-starting-radio->description
+msgid "Show volume OSD when changing radio station"
+msgstr "Hiển thị OSD âm lượng khi đổi đài"
+
+#. settings-schema.json->show-percent-char-in-osd->description
+msgid "Show '%' in OSD"
+msgstr "Hiển thị ký tự '%' trong OSD"
+
+#. settings-schema.json->show-horizontal-osd->description
+msgid "Show horizontal OSD"
+msgstr "Hiển thị OSD ngang"
+
+#. settings-schema.json->show-title-and-version->description
+msgid "Show the name and the version of this applet in the menu"
+msgstr "Hiển thị tên và phiên bản applet trong menu"
+
+#. settings-schema.json->recent-number->description
+msgid "Number of Recently Played Stations in menu"
+msgstr "Số đài đã nghe gần đây trong menu"
+
+#. settings-schema.json->recent-number->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->recent-number->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->recent-number->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->recent-number->options
+msgid "4"
+msgstr "4"
+
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-limit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->recent-number->options
+msgid "6"
+msgstr "6"
+
+#. settings-schema.json->recent-number->options
+msgid "7"
+msgstr "7"
+
+#. settings-schema.json->recent-number->options
+msgid "8"
+msgstr "8"
+
+#. settings-schema.json->recent-number->options
+msgid "9"
+msgstr "9"
+
+#. settings-schema.json->recent-number->tooltip
+msgid "How many recently listened stations do you want to display in the menu?"
+msgstr "Bạn muốn hiển thị bao nhiêu đài đã nghe gần đây trong menu?"
+
+#. settings-schema.json->reset-recents->description
+msgid "Empty your Recently Played Stations list at startup"
+msgstr "Xóa danh sách đài đã nghe gần đây khi khởi động"
+
+#. settings-schema.json->button-reset-recents->description
+msgid "Empty your Recently Played Stations list now"
+msgstr "Xóa ngay danh sách đài đã nghe gần đây"
+
+#. settings-schema.json->show-by-category->description
+msgid "Display the Station list beside the Category list"
+msgstr "Hiển thị danh sách đài bên cạnh danh sách thể loại"
+
+#. settings-schema.json->show-by-category->tooltip
+msgid ""
+"Checked: Hover (without clicking) over a Category to display its list of "
+"Stations; then select your station.\n"
+"Unchecked: Single list containing each category followed by its stations."
+msgstr ""
+"Chọn: Di chuột (không nhấp) lên Thể loại để hiển thị danh sách đài; sau đó "
+"chọn đài của bạn.\n"
+"Bỏ chọn: Danh sách đơn gồm từng thể loại kèm các đài bên dưới."
+
+#. settings-schema.json->show-system-items->description
+msgid "Show system items in the menu"
+msgstr "Hiển thị các mục hệ thống trong menu"
+
+#. settings-schema.json->show-system-items->tooltip
+msgid ""
+"Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
+msgstr ""
+"Bạn có muốn hiển thị các mục 'Cấu hình...' và 'Cài đặt âm thanh' trong menu "
+"không?"
+
+#. settings-schema.json->show-reload->description
+msgid "Show the 'Reload this applet' item in the contextual menu"
+msgstr "Hiển thị mục 'Tải lại applet này' trong menu ngữ cảnh"
+
+#. settings-schema.json->show-reload->tooltip
+msgid "For developers only"
+msgstr "Chỉ dành cho nhà phát triển"
+
+#. settings-schema.json->shortcut-volume-up->description
+msgid "Increase Volume"
+msgstr "Tăng âm lượng"
+
+#. settings-schema.json->shortcut-volume-down->description
+msgid "Decrease Volume"
+msgstr "Giảm âm lượng"
+
+#. settings-schema.json->shortcut-volume-cut->description
+msgid "Mute"
+msgstr "Tắt tiếng"
+
+#. settings-schema.json->shortcut-radio-on-off->description
+msgid "Radio ON/OFF"
+msgstr "Bật/Tắt radio"
+
+#. settings-schema.json->shortcut-next-recent-radio->description
+msgid "Next station"
+msgstr "Đài tiếp theo"
+
+#. settings-schema.json->shortcut-next-recent-radio->tooltip
+msgid "Next station recently listened to"
+msgstr "Đài đã nghe gần đây tiếp theo"
+
+#. settings-schema.json->shortcut-previous-recent-radio->description
+msgid "Previous station"
+msgstr "Đài trước"
+
+#. settings-schema.json->shortcut-previous-recent-radio->tooltip
+msgid "Previous station recently listened to"
+msgstr "Đài đã nghe gần đây trước đó"
+
+#. settings-schema.json->show-help-in-tooltip->description
+msgid "Show help for mouse actions in the tooltip"
+msgstr "Hiển thị trợ giúp cho các hành động chuột trong tooltip"
+
+#. settings-schema.json->show-help-in-tooltip->tooltip
+msgid "You can uncheck this option when you are familiar with all mouse roles."
+msgstr "Bạn có thể bỏ chọn nếu đã quen với tất cả chức năng chuột."
+
+#. settings-schema.json->notif-station-change->description
+msgid "Change of radio"
+msgstr "Thay đổi đài"
+
+#. settings-schema.json->notif-song-change->description
+msgid "Change of song or program"
+msgstr "Thay đổi bài hát hoặc chương trình"
+
+#. settings-schema.json->notif-song-change->tooltip
+msgid ""
+"Please note that some radios do not notify you of a song or program change."
+msgstr "Lưu ý: Một số đài không thông báo thay đổi bài hát hoặc chương trình."
+
+#. settings-schema.json->notif-song-duration->units
+msgid "seconds"
+msgstr "giây"
+
+#. settings-schema.json->notif-song-duration->description
+msgid "Duration of a song or program change notification"
+msgstr "Thời lượng thông báo thay đổi bài hát hoặc chương trình"
+
+#. settings-schema.json->notif-buttons-allowed->description
+msgid "Show in notifications the buttons to start and stop recordings"
+msgstr "Hiển thị nút bắt đầu và dừng ghi âm trong thông báo"
+
+#. settings-schema.json->notif-buttons-allowed->tooltip
+msgid ""
+"Please note that this will have no effect if you do not wish to be notified "
+"of a song or program change."
+msgstr ""
+"Lưu ý: Thao tác này sẽ không có hiệu lực nếu bạn không muốn nhận thông báo "
+"thay đổi bài hát hoặc chương trình."
+
+#. settings-schema.json->show-codec->description
+msgid "Show codec"
+msgstr "Hiển thị codec"
+
+#. settings-schema.json->show-bitrate->description
+msgid "Show bit rate"
+msgstr "Hiển thị tốc độ bit"
+
+#. settings-schema.json->show-bitrate->tooltip
+msgid ""
+"Unit: kbps (kilobit per second).\n"
+"The higher this bit rate, the better the sound quality of the stream."
+msgstr ""
+"Đơn vị: kbps (kilobit mỗi giây).\n"
+"Tốc độ bit cao hơn thì chất lượng âm thanh của luồng càng tốt."
+
+#. settings-schema.json->color-on->description
+msgid "Color of the symbolic icon while the radio is on"
+msgstr "Màu của biểu tượng khi radio đang bật"
+
+#. settings-schema.json->color-recording->description
+msgid "Color of the symbolic icon while recording"
+msgstr "Màu của biểu tượng khi đang ghi âm"
+
+#. settings-schema.json->show-favicon->description
+msgid "Display the logo of the radio station listened to"
+msgstr "Hiển thị logo của đài đang nghe"
+
+#. settings-schema.json->show-favicon->tooltip
+msgid "Replace this applet icon with the radio station logo, if it exists."
+msgstr "Thay biểu tượng applet này bằng logo đài nếu có."
+
+#. settings-schema.json->network-quality->description
+msgid "Network Quality"
+msgstr "Chất lượng mạng"
+
+#. settings-schema.json->network-quality->options
+msgid "High"
+msgstr "Cao"
+
+#. settings-schema.json->network-quality->options
+msgid "Low"
+msgstr "Thấp"
+
+#. settings-schema.json->network-quality->tooltip
+msgid ""
+"High Quality: The recordings you make while listening to the radio will "
+"double the bit rate usually required to just listen to the radio. Thus, the "
+"recordings will not be disturbed by extraneous sounds or by a change in the "
+"volume of the radio.\n"
+"\n"
+"Low Quality: These recordings come directly from the sound card, which "
+"relieves the network but risks polluting them with extraneous sounds (system "
+"sounds for example). The volume of the radio will be set to 100% in order to "
+"obtain the best possible quality."
+msgstr ""
+"Chất lượng cao: Các bản ghi khi nghe radio sẽ có tốc độ bit gấp đôi so với "
+"chỉ nghe radio. Do đó, các bản ghi sẽ không bị nhiễu bởi tiếng động bên "
+"ngoài hoặc thay đổi âm lượng.\n"
+"\n"
+"Chất lượng thấp: Các bản ghi này lấy trực tiếp từ card âm thanh, giảm tải "
+"mạng nhưng có nguy cơ bị nhiễu bởi âm thanh bên ngoài (ví dụ âm thanh hệ "
+"thống). Âm lượng radio sẽ được đặt 100% để có chất lượng tốt nhất."
+
+#. settings-schema.json->image-resolution->description
+msgid "Quality of downloaded Album Art"
+msgstr "Chất lượng Album Art tải về"
+
+#. settings-schema.json->image-resolution->options
+msgid "Max Resolution"
+msgstr "Độ phân giải tối đa"
+
+#. settings-schema.json->image-resolution->options
+msgid "High Quality"
+msgstr "Chất lượng cao"
+
+#. settings-schema.json->image-resolution->options
+msgid "Medium"
+msgstr "Trung bình"
+
+#. settings-schema.json->image-resolution->options
+msgid "Standard"
+msgstr "Tiêu chuẩn"
+
+#. settings-schema.json->image-resolution->tooltip
+msgid ""
+"Default: High Quality. Choose a value corresponding to your Network Quality."
+msgstr ""
+"Mặc định: Chất lượng cao. Chọn giá trị tương ứng với chất lượng mạng của bạn."
+
+#. settings-schema.json->network-monitoring->description
+msgid "Monitor the network"
+msgstr "Giám sát mạng"
+
+#. settings-schema.json->network-monitoring->tooltip
+msgid ""
+"Whether or not to restart the radio when the network becomes active again "
+"after an interruption.\n"
+"\n"
+"VPN users: By checking this, the radio broadcast may use your VPN link."
+msgstr ""
+"Khởi động lại radio khi mạng hoạt động trở lại sau gián đoạn.\n"
+"\n"
+"Người dùng VPN: Nếu chọn, phát sóng radio có thể sử dụng đường kết nối VPN "
+"của bạn."
+
+#. settings-schema.json->http-proxy->description
+msgid "HTTP Proxy"
+msgstr "HTTP Proxy"
+
+#. settings-schema.json->http-proxy->tooltip
+msgid ""
+"Format: http://[user:pass@]URL[:port]\n"
+"Default: empty.\n"
+"If empty, the environment variables http_proxy and ALL_PROXY will be used if "
+"present.\n"
+"If set, this proxy will not be used for https requests."
+msgstr ""
+"Định dạng: http://[user:pass@]URL[:port]\n"
+"Mặc định: trống.\n"
+"Nếu trống, các biến môi trường http_proxy và ALL_PROXY sẽ được sử dụng nếu "
+"có.\n"
+"Nếu đặt, proxy này sẽ không dùng cho các yêu cầu https."
+
+#. settings-schema.json->apply-http-proxy->description
+msgid "Apply HTTP Proxy"
+msgstr "Áp dụng HTTP Proxy"
+
+#. settings-schema.json->database-favorite->description
+msgid "Your favorite database:"
+msgstr "Cơ sở dữ liệu ưa thích của bạn:"
+
+#. settings-schema.json->database-favorite->options
+msgid "Random"
+msgstr "Ngẫu nhiên"
+
+#. settings-schema.json->database-url->description
+msgid "Database URL"
+msgstr "URL cơ sở dữ liệu"
+
+#. settings-schema.json->cache-no-cache->description
+msgid "No cache"
+msgstr "Không dùng cache"
+
+#. settings-schema.json->cache-no-cache->tooltip
+msgid ""
+"Checking this option limits memory usage, but no longer allows the user to "
+"rewind the cache (using the sound150@claudiux applet)."
+msgstr ""
+"Chọn tùy chọn này giới hạn việc sử dụng bộ nhớ, nhưng không còn cho phép tua "
+"lại cache (sử dụng applet sound150@claudiux)."
+
+#. settings-schema.json->cache-minutes->description
+msgid ""
+"Minutes to cache\n"
+"0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
+msgstr ""
+"Số phút lưu cache\n"
+"0 nghĩa là không giới hạn (mặc định). 1 giờ = 60 phút. 24 giờ = 1440 phút."
+
+#. settings-schema.json->cache-on-disk->description
+msgid ""
+"Cache on disk\n"
+"(Write packet data to a temporary file, instead of keeping them in memory.)"
+msgstr ""
+"Lưu cache trên đĩa\n"
+"(Ghi dữ liệu gói vào tệp tạm, thay vì giữ trong bộ nhớ.)"
+
+#. settings-schema.json->cache-stream-size->description
+msgid "Stream cache size"
+msgstr "Kích thước cache luồng"
+
+#. settings-schema.json->cache-stream-size->tooltip
+msgid ""
+"The amount of stream cache. Default: 10 MiB.\n"
+"Beware, setting this to a large value can reduce performance."
+msgstr ""
+"Dung lượng cache luồng. Mặc định: 10 MiB.\n"
+"Lưu ý: đặt giá trị lớn có thể làm giảm hiệu năng."
+
+#. settings-schema.json->cache-stream-size->options
+msgid "No limit"
+msgstr "Không giới hạn"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "64 KiB"
+msgstr "64 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "128 KiB"
+msgstr "128 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "256 KiB"
+msgstr "256 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "512 KiB"
+msgstr "512 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "1 MiB"
+msgstr "1 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "2 Mib"
+msgstr "2 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "3 MiB"
+msgstr "3 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "4 MiB"
+msgstr "4 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "5 MiB"
+msgstr "5 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "10 MiB"
+msgstr "10 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "20 MiB"
+msgstr "20 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "30 MiB"
+msgstr "30 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "40 MiB"
+msgstr "40 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "50 MiB"
+msgstr "50 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "100 MiB"
+msgstr "100 MiB"
+
+#. settings-schema.json->recording-path->description
+msgid "Path to the folder that will contain your future recordings"
+msgstr "Đường dẫn đến thư mục chứa các bản ghi trong tương lai"
+
+#. settings-schema.json->button-rec-path-to-default->description
+msgid "Set this path to default one"
+msgstr "Đặt đường dẫn này về mặc định"
+
+#. settings-schema.json->recording-format->description
+msgid "Recording format"
+msgstr "Định dạng ghi âm"
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "FLAC"
+msgstr "FLAC"
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "MP3"
+msgstr "MP3"
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "OGG"
+msgstr "OGG"
+
+#. settings-schema.json->recording-format->options
+msgid "RAW"
+msgstr "RAW"
+
+#. settings-schema.json->recording-format->options
+msgid "WAV"
+msgstr "WAV"
+
+#. settings-schema.json->recording-format->tooltip
+#. settings-schema.json->recording-ends-auto->tooltip
+msgid ""
+"Please note that this choice will have no effect on any current recording, "
+"but on subsequent ones."
+msgstr ""
+"Lưu ý: Lựa chọn này sẽ không ảnh hưởng đến bản ghi hiện tại mà chỉ áp dụng "
+"cho các bản ghi tiếp theo."
+
+#. settings-schema.json->recording-ends-auto->description
+msgid "Way to stop recording"
+msgstr "Cách dừng ghi âm"
+
+#. settings-schema.json->recording-ends-auto->options
+msgid "automatically, when the current song ends"
+msgstr "tự động khi bài hát hiện tại kết thúc"
+
+#. settings-schema.json->recording-ends-auto->options
+msgid "manually; thus, several recordings can follow one another"
+msgstr "thủ công; cho phép nhiều bản ghi nối tiếp nhau"
+
+#. settings-schema.json->limits-hd-space-left-label->description
+msgid "Space remaining on disk when opening this window:"
+msgstr "Dung lượng còn lại trên đĩa khi mở cửa sổ này:"
+
+#. settings-schema.json->limits-hd-size-prefixes->description
+msgid ""
+"Disk space unit as defined in Nemo's display preferences (File size prefixes)"
+msgstr ""
+"Đơn vị dung lượng đĩa theo cài đặt hiển thị của Nemo (tiền tố kích thước tệp)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GB (decimal)"
+msgstr "GB (thập phân)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GB (decimal long)"
+msgstr "GB (thập phân đầy đủ)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GiB (binary)"
+msgstr "GiB (nhị phân)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GiB (binary long)"
+msgstr "GiB (nhị phân đầy đủ)"
+
+#. settings-schema.json->limits-hd-size-prefixes->tooltip
+msgid "Changing this also changes Nemo's file size prefixes."
+msgstr "Thay đổi điều này cũng sẽ thay đổi tiền tố kích thước tệp của Nemo."
+
+#. settings-schema.json->limits-hd-value->units
+msgid "Units: As defined above"
+msgstr "Đơn vị: Theo định nghĩa ở trên"
+
+#. settings-schema.json->limits-hd-value->description
+msgid "Space to be left free on the hard disk"
+msgstr "Dung lượng để trống trên ổ cứng"
+
+#. settings-schema.json->highlight-icon-while-background-
+#. recording->description
+msgid "Highlight this applet icon during background recording"
+msgstr "Làm nổi bật biểu tượng applet trong khi ghi âm nền"
+
+#. settings-schema.json->ignoreYT->description
+msgid "Ignore Youtube features"
+msgstr "Bỏ qua các tính năng của Youtube"
+
+#. settings-schema.json->ignoreYT->tooltip
+msgid ""
+"Ignoring Youtube features reduces CPU load. But loading album art becomes "
+"impossible."
+msgstr ""
+"Bỏ qua các tính năng của Youtube giảm tải CPU, nhưng việc tải ảnh bìa album "
+"sẽ không khả thi."
+
+#. settings-schema.json->yt-cookies-from->description
+msgid "Use cookies from"
+msgstr "Sử dụng cookie từ"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "(None)"
+msgstr "(Không có)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Brave"
+msgstr "Brave"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chrome"
+msgstr "Chrome"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium"
+msgstr "Chromium"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (basictext)"
+msgstr "Chromium (basictext)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (gnomekeyring)"
+msgstr "Chromium (gnomekeyring)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (kwallet)"
+msgstr "Chromium (kwallet)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Firefox"
+msgstr "Firefox"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Opera"
+msgstr "Opera"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Vivaldi"
+msgstr "Vivaldi"
+
+#. settings-schema.json->yt-cookies-from->tooltip
+msgid ""
+"Cookies are used by YouTube to determine which videos you may watch. For "
+"Chromium, you can select the method (in parentheses) you chose to save "
+"cookies."
+msgstr ""
+"Cookie được YouTube sử dụng để xác định video bạn có thể xem. Với Chromium, "
+"bạn có thể chọn phương pháp (trong ngoặc) bạn đã dùng để lưu cookie."
+
+#. settings-schema.json->show-yt-progress->description
+msgid "Display, under the icon, the progress of downloads from YT."
+msgstr "Hiển thị tiến trình tải xuống từ YT dưới biểu tượng."
+
+#. settings-schema.json->yt-progress-interval->description
+msgid "Progression interval (ms)"
+msgstr "Khoảng thời gian cập nhật tiến trình (ms)"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "Depending on network quality"
+msgstr "Tùy theo chất lượng mạng"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "150"
+msgstr "150"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "200"
+msgstr "200"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "300"
+msgstr "300"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "400"
+msgstr "400"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "500"
+msgstr "500"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "600"
+msgstr "600"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "750"
+msgstr "750"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "1000"
+msgstr "1000"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "2000"
+msgstr "2000"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "3000"
+msgstr "3000"
+
+#. settings-schema.json->recordings-extract-url->description
+msgid "YouTube video link"
+msgstr "Liên kết video YouTube"
+
+#. settings-schema.json->recordings-paste-button->description
+msgid "Paste above the YouTube link you copied"
+msgstr "Dán liên kết YouTube bạn đã sao chép vào đây"
+
+#. settings-schema.json->recordings-yesno-playlist->description
+msgid "In case of playlist"
+msgstr "Trong trường hợp danh sách phát"
+
+#. settings-schema.json->recordings-yesno-playlist->options
+msgid "Extract single soundtrack"
+msgstr "Trích xuất một bài hát duy nhất"
+
+#. settings-schema.json->recordings-yesno-playlist->options
+msgid "Extract whole playlist"
+msgstr "Trích xuất toàn bộ danh sách phát"
+
+#. settings-schema.json->recordings-keep-video->description
+msgid "Keep video (slower)"
+msgstr "Giữ video (chậm hơn)"
+
+#. settings-schema.json->recordings-keep-video->tooltip
+msgid ""
+"Whether or not to keep the intermediate video file on disk after post-"
+"processing"
+msgstr "Có giữ tệp video trung gian trên đĩa sau khi xử lý hay không"
+
+#. settings-schema.json->recordings-subdirectory->description
+msgid "Record in subdirectory"
+msgstr "Ghi vào thư mục con"
+
+#. settings-schema.json->recordings-subdirectory->tooltip
+msgid "(without leading or trailing slash)"
+msgstr "(không có dấu gạch chéo đầu hoặc cuối)"
+
+#. settings-schema.json->recordings-extract-button->description
+msgid "Extract soundtrack"
+msgstr "Trích xuất nhạc nền"
+
+#. settings-schema.json->sched-radio->description
+#. settings-schema.json->alarm-clock-working-days-radio->description
+#. settings-schema.json->alarm-clock-workoff-days-radio->description
+msgid "Radio"
+msgstr "Radio"
+
+#. settings-schema.json->sched-begin-date->description
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Date"
+msgstr "Ngày"
+
+#. settings-schema.json->sched-begin-time->description
+msgid "Time"
+msgstr "Giờ"
+
+#. settings-schema.json->sched-begin-time->tooltip
+#. settings-schema.json->sched-duration->tooltip
+msgid "Seconds will be ignored."
+msgstr "Giây sẽ bị bỏ qua."
+
+#. settings-schema.json->sched-duration->description
+msgid "Duration"
+msgstr "Thời lượng"
+
+#. settings-schema.json->sched-button->description
+msgid "Schedule this recording"
+msgstr "Lên lịch ghi âm này"
+
+#. settings-schema.json->sched-alert-no-space->description
+msgid "You are running out of disk space. See in the Recording tab."
+msgstr "Dung lượng ổ đĩa sắp hết. Xem trong tab Ghi âm."
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Remove?"
+msgstr "Xóa?"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "In progress"
+msgstr "Đang thực hiện"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Action"
+msgstr "Hành động"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Identifier"
+msgstr "Định danh"
+
+#. settings-schema.json->sched-recordings->tooltip
+msgid "Do not modify anything in this list, except in the \"Remove?\" column"
+msgstr "Không chỉnh sửa gì trong danh sách này, trừ cột \"Xóa?\""
+
+#. settings-schema.json->search-name->description
+msgid "Station Name"
+msgstr "Tên Đài"
+
+#. settings-schema.json->search-name->tooltip
+msgid "OPTIONAL. Name (or part of the name) of the radio station."
+msgstr "TÙY CHỌN. Tên (hoặc một phần tên) của đài phát thanh."
+
+#. settings-schema.json->search-country->options
+msgid "(My Country)"
+msgstr "(Quốc gia của tôi)"
+
+#. settings-schema.json->search-country->options
+msgid "Afghanistan - AF"
+msgstr "Afghanistan - AF"
+
+#. settings-schema.json->search-country->options
+msgid "Åland Islands - AX"
+msgstr "Quần đảo Åland - AX"
+
+#. settings-schema.json->search-country->options
+msgid "Albania - AL"
+msgstr "Albania - AL"
+
+#. settings-schema.json->search-country->options
+msgid "Algeria - DZ"
+msgstr "Algeria - DZ"
+
+#. settings-schema.json->search-country->options
+msgid "American Samoa - AS"
+msgstr "Samoa thuộc Mỹ - AS"
+
+#. settings-schema.json->search-country->options
+msgid "Andorra - AD"
+msgstr "Andorra - AD"
+
+#. settings-schema.json->search-country->options
+msgid "Angola - AO"
+msgstr "Angola - AO"
+
+#. settings-schema.json->search-country->options
+msgid "Anguilla - AI"
+msgstr "Anguilla - AI"
+
+#. settings-schema.json->search-country->options
+msgid "Antarctica - AQ"
+msgstr "Nam Cực - AQ"
+
+#. settings-schema.json->search-country->options
+msgid "Antigua And Barbuda - AG"
+msgstr "Antigua và Barbuda - AG"
+
+#. settings-schema.json->search-country->options
+msgid "Argentina - AR"
+msgstr "Argentina - AR"
+
+#. settings-schema.json->search-country->options
+msgid "Armenia - AM"
+msgstr "Armenia - AM"
+
+#. settings-schema.json->search-country->options
+msgid "Aruba - AW"
+msgstr "Aruba - AW"
+
+#. settings-schema.json->search-country->options
+msgid "Australia - AU"
+msgstr "Úc - AU"
+
+#. settings-schema.json->search-country->options
+msgid "Austria - AT"
+msgstr "Áo - AT"
+
+#. settings-schema.json->search-country->options
+msgid "Azerbaijan - AZ"
+msgstr "Azerbaijan - AZ"
+
+#. settings-schema.json->search-country->options
+msgid "Bahamas - BS"
+msgstr "Bahamas - BS"
+
+#. settings-schema.json->search-country->options
+msgid "Bahrain - BH"
+msgstr "Bahrain - BH"
+
+#. settings-schema.json->search-country->options
+msgid "Bangladesh - BD"
+msgstr "Bangladesh - BD"
+
+#. settings-schema.json->search-country->options
+msgid "Barbados - BB"
+msgstr "Barbados - BB"
+
+#. settings-schema.json->search-country->options
+msgid "Belarus - BY"
+msgstr "Belarus - BY"
+
+#. settings-schema.json->search-country->options
+msgid "Belgium - BE"
+msgstr "Bỉ - BE"
+
+#. settings-schema.json->search-country->options
+msgid "Belize - BZ"
+msgstr "Belize - BZ"
+
+#. settings-schema.json->search-country->options
+msgid "Benin - BJ"
+msgstr "Benin - BJ"
+
+#. settings-schema.json->search-country->options
+msgid "Bermuda - BM"
+msgstr "Bermuda - BM"
+
+#. settings-schema.json->search-country->options
+msgid "Bhutan - BT"
+msgstr "Bhutan - BT"
+
+#. settings-schema.json->search-country->options
+msgid "Bolivia (Plurinational State Of) - BO"
+msgstr "Bolivia (Nhà nước đa dân tộc) - BO"
+
+#. settings-schema.json->search-country->options
+msgid "Bonaire (Sint Eustatius And Saba) - BQ"
+msgstr "Bonaire (Sint Eustatius và Saba) - BQ"
+
+#. settings-schema.json->search-country->options
+msgid "Bosnia And Herzegovina - BA"
+msgstr "Bosnia và Herzegovina - BA"
+
+#. settings-schema.json->search-country->options
+msgid "Botswana - BW"
+msgstr "Botswana - BW"
+
+#. settings-schema.json->search-country->options
+msgid "Bouvet Island - BV"
+msgstr "Đảo Bouvet - BV"
+
+#. settings-schema.json->search-country->options
+msgid "Brazil - BR"
+msgstr "Brazil - BR"
+
+#. settings-schema.json->search-country->options
+msgid "British Indian Ocean Territory - IO"
+msgstr "Lãnh thổ Ấn Độ Dương thuộc Anh - IO"
+
+#. settings-schema.json->search-country->options
+msgid "Brunei Darussalam - BN"
+msgstr "Brunei Darussalam - BN"
+
+#. settings-schema.json->search-country->options
+msgid "Bulgaria - BG"
+msgstr "Bulgaria - BG"
+
+#. settings-schema.json->search-country->options
+msgid "Burkina Faso - BF"
+msgstr "Burkina Faso - BF"
+
+#. settings-schema.json->search-country->options
+msgid "Burundi - BI"
+msgstr "Burundi - BI"
+
+#. settings-schema.json->search-country->options
+msgid "Cambodia - KH"
+msgstr "Campuchia - KH"
+
+#. settings-schema.json->search-country->options
+msgid "Cameroon - CM"
+msgstr "Cameroon - CM"
+
+#. settings-schema.json->search-country->options
+msgid "Canada - CA"
+msgstr "Canada - CA"
+
+#. settings-schema.json->search-country->options
+msgid "Cape Verde - CV"
+msgstr "Cape Verde - CV"
+
+#. settings-schema.json->search-country->options
+msgid "Cayman Islands - KY"
+msgstr "Quần đảo Cayman - KY"
+
+#. settings-schema.json->search-country->options
+msgid "Central African Republic - CF"
+msgstr "Cộng hòa Trung Phi - CF"
+
+#. settings-schema.json->search-country->options
+msgid "Chad - TD"
+msgstr "Chad - TD"
+
+#. settings-schema.json->search-country->options
+msgid "Chile - CL"
+msgstr "Chile - CL"
+
+#. settings-schema.json->search-country->options
+msgid "China - CN"
+msgstr "Trung Quốc - CN"
+
+#. settings-schema.json->search-country->options
+msgid "Christmas Island - CX"
+msgstr "Đảo Christmas - CX"
+
+#. settings-schema.json->search-country->options
+msgid "Cocos (Keeling) Islands - CC"
+msgstr "Đảo Cocos (Keeling) - CC"
+
+#. settings-schema.json->search-country->options
+msgid "Colombia - CO"
+msgstr "Colombia - CO"
+
+#. settings-schema.json->search-country->options
+msgid "Comoros - KM"
+msgstr "Comoros - KM"
+
+#. settings-schema.json->search-country->options
+msgid "Congo - CG"
+msgstr "Cộng hòa Congo - CG"
+
+#. settings-schema.json->search-country->options
+msgid "Congo (The Democratic Republic Of The) - CD"
+msgstr "Congo (Cộng hòa Dân chủ) - CD"
+
+#. settings-schema.json->search-country->options
+msgid "Cook Islands - CK"
+msgstr "Quần đảo Cook - CK"
+
+#. settings-schema.json->search-country->options
+msgid "Costa Rica - CR"
+msgstr "Costa Rica - CR"
+
+#. settings-schema.json->search-country->options
+msgid "Côte D'Ivoire - CI"
+msgstr "Bờ Biển Ngà - CI"
+
+#. settings-schema.json->search-country->options
+msgid "Croatia - HR"
+msgstr "Croatia - HR"
+
+#. settings-schema.json->search-country->options
+msgid "Cuba - CU"
+msgstr "Cuba - CU"
+
+#. settings-schema.json->search-country->options
+msgid "Curaçao - CW"
+msgstr "Curaçao - CW"
+
+#. settings-schema.json->search-country->options
+msgid "Cyprus - CY"
+msgstr "Síp - CY"
+
+#. settings-schema.json->search-country->options
+msgid "Czech Republic - CZ"
+msgstr "Cộng hòa Séc - CZ"
+
+#. settings-schema.json->search-country->options
+msgid "Denmark - DK"
+msgstr "Đan Mạch - DK"
+
+#. settings-schema.json->search-country->options
+msgid "Djibouti - DJ"
+msgstr "Djibouti - DJ"
+
+#. settings-schema.json->search-country->options
+msgid "Dominica - DM"
+msgstr "Dominica - DM"
+
+#. settings-schema.json->search-country->options
+msgid "Dominican Republic - DO"
+msgstr "Cộng hòa Dominica - DO"
+
+#. settings-schema.json->search-country->options
+msgid "Ecuador - EC"
+msgstr "Ecuador - EC"
+
+#. settings-schema.json->search-country->options
+msgid "Egypt - EG"
+msgstr "Ai Cập - EG"
+
+#. settings-schema.json->search-country->options
+msgid "El Salvador - SV"
+msgstr "El Salvador - SV"
+
+#. settings-schema.json->search-country->options
+msgid "Equatorial Guinea - GQ"
+msgstr "Guinea Xích Đạo - GQ"
+
+#. settings-schema.json->search-country->options
+msgid "Eritrea - ER"
+msgstr "Eritrea - ER"
+
+#. settings-schema.json->search-country->options
+msgid "Estonia - EE"
+msgstr "Estonia - EE"
+
+#. settings-schema.json->search-country->options
+msgid "Ethiopia - ET"
+msgstr "Ethiopia - ET"
+
+#. settings-schema.json->search-country->options
+msgid "Falkland Islands (Malvinas) - FK"
+msgstr "Quần đảo Falkland (Malvinas) - FK"
+
+#. settings-schema.json->search-country->options
+msgid "Faroe Islands - FO"
+msgstr "Quần đảo Faroe - FO"
+
+#. settings-schema.json->search-country->options
+msgid "Fiji - FJ"
+msgstr "Fiji - FJ"
+
+#. settings-schema.json->search-country->options
+msgid "Finland - FI"
+msgstr "Phần Lan - FI"
+
+#. settings-schema.json->search-country->options
+msgid "France - FR"
+msgstr "Pháp - FR"
+
+#. settings-schema.json->search-country->options
+msgid "French Guiana - GF"
+msgstr "Guiana thuộc Pháp - GF"
+
+#. settings-schema.json->search-country->options
+msgid "French Polynesia - PF"
+msgstr "Polynesia thuộc Pháp - PF"
+
+#. settings-schema.json->search-country->options
+msgid "French Southern Territories - TF"
+msgstr "Lãnh thổ Nam Cực và phía Nam Pháp - TF"
+
+#. settings-schema.json->search-country->options
+msgid "Gabon - GA"
+msgstr "Gabon - GA"
+
+#. settings-schema.json->search-country->options
+msgid "Gambia - GM"
+msgstr "Gambia - GM"
+
+#. settings-schema.json->search-country->options
+msgid "Georgia - GE"
+msgstr "Georgia - GE"
+
+#. settings-schema.json->search-country->options
+msgid "Germany - DE"
+msgstr "Đức - DE"
+
+#. settings-schema.json->search-country->options
+msgid "Ghana - GH"
+msgstr "Ghana - GH"
+
+#. settings-schema.json->search-country->options
+msgid "Gibraltar - GI"
+msgstr "Gibraltar - GI"
+
+#. settings-schema.json->search-country->options
+msgid "Greece - GR"
+msgstr "Hy Lạp - GR"
+
+#. settings-schema.json->search-country->options
+msgid "Greenland - GL"
+msgstr "Greenland - GL"
+
+#. settings-schema.json->search-country->options
+msgid "Grenada - GD"
+msgstr "Grenada - GD"
+
+#. settings-schema.json->search-country->options
+msgid "Guadeloupe - GP"
+msgstr "Guadeloupe - GP"
+
+#. settings-schema.json->search-country->options
+msgid "Guam - GU"
+msgstr "Guam - GU"
+
+#. settings-schema.json->search-country->options
+msgid "Guatemala - GT"
+msgstr "Guatemala - GT"
+
+#. settings-schema.json->search-country->options
+msgid "Guernsey - GG"
+msgstr "Guernsey - GG"
+
+#. settings-schema.json->search-country->options
+msgid "Guinea - GN"
+msgstr "Guinea - GN"
+
+#. settings-schema.json->search-country->options
+msgid "Guinea-Bissau - GW"
+msgstr "Guinea-Bissau - GW"
+
+#. settings-schema.json->search-country->options
+msgid "Guyana - GY"
+msgstr "Guyana - GY"
+
+#. settings-schema.json->search-country->options
+msgid "Haiti - HT"
+msgstr "Haiti - HT"
+
+#. settings-schema.json->search-country->options
+msgid "Heard Island And Mcdonald Islands - HM"
+msgstr "Đảo Heard và McDonald - HM"
+
+#. settings-schema.json->search-country->options
+msgid "Holy See (Vatican City State) - VA"
+msgstr "Vatican (Thành phố Vatican) - VA"
+
+#. settings-schema.json->search-country->options
+msgid "Honduras - HN"
+msgstr "Honduras - HN"
+
+#. settings-schema.json->search-country->options
+msgid "Hong Kong - HK"
+msgstr "Hồng Kông - HK"
+
+#. settings-schema.json->search-country->options
+msgid "Hungary - HU"
+msgstr "Hungary - HU"
+
+#. settings-schema.json->search-country->options
+msgid "Iceland - IS"
+msgstr "Iceland - IS"
+
+#. settings-schema.json->search-country->options
+msgid "India - IN"
+msgstr "Ấn Độ - IN"
+
+#. settings-schema.json->search-country->options
+msgid "Indonesia - ID"
+msgstr "Indonesia - ID"
+
+#. settings-schema.json->search-country->options
+msgid "Iran (Islamic Republic Of) - IR"
+msgstr "Iran (Cộng hòa Hồi giáo) - IR"
+
+#. settings-schema.json->search-country->options
+msgid "Iraq - IQ"
+msgstr "Iraq - IQ"
+
+#. settings-schema.json->search-country->options
+msgid "Ireland - IE"
+msgstr "Ireland - IE"
+
+#. settings-schema.json->search-country->options
+msgid "Isle Of Man - IM"
+msgstr "Đảo Man - IM"
+
+#. settings-schema.json->search-country->options
+msgid "Israel - IL"
+msgstr "Israel - IL"
+
+#. settings-schema.json->search-country->options
+msgid "Italy - IT"
+msgstr "Ý - IT"
+
+#. settings-schema.json->search-country->options
+msgid "Jamaica - JM"
+msgstr "Jamaica - JM"
+
+#. settings-schema.json->search-country->options
+msgid "Japan - JP"
+msgstr "Nhật Bản - JP"
+
+#. settings-schema.json->search-country->options
+msgid "Jersey - JE"
+msgstr "Jersey - JE"
+
+#. settings-schema.json->search-country->options
+msgid "Jordan - JO"
+msgstr "Jordan - JO"
+
+#. settings-schema.json->search-country->options
+msgid "Kazakhstan - KZ"
+msgstr "Kazakhstan - KZ"
+
+#. settings-schema.json->search-country->options
+msgid "Kenya - KE"
+msgstr "Kenya - KE"
+
+#. settings-schema.json->search-country->options
+msgid "Kiribati - KI"
+msgstr "Kiribati - KI"
+
+#. settings-schema.json->search-country->options
+msgid "Korea (Democratic People'S Republic Of) - KP"
+msgstr "Triều Tiên - KP"
+
+#. settings-schema.json->search-country->options
+msgid "Korea (Republic Of) - KR"
+msgstr "Hàn Quốc - KR"
+
+#. settings-schema.json->search-country->options
+msgid "Kuwait - KW"
+msgstr "Kuwait - KW"
+
+#. settings-schema.json->search-country->options
+msgid "Kyrgyzstan - KG"
+msgstr "Kyrgyzstan - KG"
+
+#. settings-schema.json->search-country->options
+msgid "Lao People'S Democratic Republic - LA"
+msgstr "Lào - LA"
+
+#. settings-schema.json->search-country->options
+msgid "Latvia - LV"
+msgstr "Latvia - LV"
+
+#. settings-schema.json->search-country->options
+msgid "Lebanon - LB"
+msgstr "Li-băng - LB"
+
+#. settings-schema.json->search-country->options
+msgid "Lesotho - LS"
+msgstr "Lesotho - LS"
+
+#. settings-schema.json->search-country->options
+msgid "Liberia - LR"
+msgstr "Liberia - LR"
+
+#. settings-schema.json->search-country->options
+msgid "Libya - LY"
+msgstr "Libya - LY"
+
+#. settings-schema.json->search-country->options
+msgid "Liechtenstein - LI"
+msgstr "Liechtenstein - LI"
+
+#. settings-schema.json->search-country->options
+msgid "Lithuania - LT"
+msgstr "Litva - LT"
+
+#. settings-schema.json->search-country->options
+msgid "Luxembourg - LU"
+msgstr "Luxembourg - LU"
+
+#. settings-schema.json->search-country->options
+msgid "Macao - MO"
+msgstr "Ma Cao - MO"
+
+#. settings-schema.json->search-country->options
+msgid "Macedonia (The Former Yugoslav Republic Of) - MK"
+msgstr "Bắc Macedonia - MK"
+
+#. settings-schema.json->search-country->options
+msgid "Madagascar - MG"
+msgstr "Madagascar - MG"
+
+#. settings-schema.json->search-country->options
+msgid "Malawi - MW"
+msgstr "Malawi - MW"
+
+#. settings-schema.json->search-country->options
+msgid "Malaysia - MY"
+msgstr "Malaysia - MY"
+
+#. settings-schema.json->search-country->options
+msgid "Maldives - MV"
+msgstr "Maldives - MV"
+
+#. settings-schema.json->search-country->options
+msgid "Mali - ML"
+msgstr "Mali - ML"
+
+#. settings-schema.json->search-country->options
+msgid "Malta - MT"
+msgstr "Malta - MT"
+
+#. settings-schema.json->search-country->options
+msgid "Marshall Islands - MH"
+msgstr "Quần đảo Marshall - MH"
+
+#. settings-schema.json->search-country->options
+msgid "Martinique - MQ"
+msgstr "Martinique - MQ"
+
+#. settings-schema.json->search-country->options
+msgid "Mauritania - MR"
+msgstr "Mauritania - MR"
+
+#. settings-schema.json->search-country->options
+msgid "Mauritius - MU"
+msgstr "Mauritius - MU"
+
+#. settings-schema.json->search-country->options
+msgid "Mayotte - YT"
+msgstr "Mayotte - YT"
+
+#. settings-schema.json->search-country->options
+msgid "Mexico - MX"
+msgstr "Mexico - MX"
+
+#. settings-schema.json->search-country->options
+msgid "Micronesia (Federated States Of) - FM"
+msgstr "Micronesia (Liên bang) - FM"
+
+#. settings-schema.json->search-country->options
+msgid "Moldova (Republic Of) - MD"
+msgstr "Moldova - MD"
+
+#. settings-schema.json->search-country->options
+msgid "Monaco - MC"
+msgstr "Monaco - MC"
+
+#. settings-schema.json->search-country->options
+msgid "Mongolia - MN"
+msgstr "Mông Cổ - MN"
+
+#. settings-schema.json->search-country->options
+msgid "Montenegro - ME"
+msgstr "Montenegro - ME"
+
+#. settings-schema.json->search-country->options
+msgid "Montserrat - MS"
+msgstr "Montserrat - MS"
+
+#. settings-schema.json->search-country->options
+msgid "Morocco - MA"
+msgstr "Maroc - MA"
+
+#. settings-schema.json->search-country->options
+msgid "Mozambique - MZ"
+msgstr "Mozambique - MZ"
+
+#. settings-schema.json->search-country->options
+msgid "Myanmar - MM"
+msgstr "Myanmar - MM"
+
+#. settings-schema.json->search-country->options
+msgid "Namibia - NA"
+msgstr "Namibia - NA"
+
+#. settings-schema.json->search-country->options
+msgid "Nauru - NR"
+msgstr "Nauru - NR"
+
+#. settings-schema.json->search-country->options
+msgid "Nepal - NP"
+msgstr "Nepal - NP"
+
+#. settings-schema.json->search-country->options
+msgid "Netherlands - NL"
+msgstr "Hà Lan - NL"
+
+#. settings-schema.json->search-country->options
+msgid "New Caledonia - NC"
+msgstr "Tân Caledonia - NC"
+
+#. settings-schema.json->search-country->options
+msgid "New Zealand - NZ"
+msgstr "New Zealand - NZ"
+
+#. settings-schema.json->search-country->options
+msgid "Nicaragua - NI"
+msgstr "Nicaragua - NI"
+
+#. settings-schema.json->search-country->options
+msgid "Niger - NE"
+msgstr "Niger - NE"
+
+# #. settings-schema.json->search-country->options
+#. settings-schema.json->search-country->options
+msgid "Nigeria - NG"
+msgstr "Nigeria - NG"
+
+#. settings-schema.json->search-country->options
+msgid "Niue - NU"
+msgstr "Niue - NU"
+
+#. settings-schema.json->search-country->options
+msgid "Norfolk Island - NF"
+msgstr "Đảo Norfolk - NF"
+
+#. settings-schema.json->search-country->options
+msgid "Northern Mariana Islands - MP"
+msgstr "Quần đảo Bắc Mariana - MP"
+
+#. settings-schema.json->search-country->options
+msgid "Norway - NO"
+msgstr "Na Uy - NO"
+
+#. settings-schema.json->search-country->options
+msgid "Oman - OM"
+msgstr "Oman - OM"
+
+#. settings-schema.json->search-country->options
+msgid "Pakistan - PK"
+msgstr "Pakistan - PK"
+
+#. settings-schema.json->search-country->options
+msgid "Palau - PW"
+msgstr "Palau - PW"
+
+#. settings-schema.json->search-country->options
+msgid "Palestine (State Of) - PS"
+msgstr "Palestine - PS"
+
+#. settings-schema.json->search-country->options
+msgid "Panama - PA"
+msgstr "Panama - PA"
+
+#. settings-schema.json->search-country->options
+msgid "Papua New Guinea - PG"
+msgstr "Papua New Guinea - PG"
+
+#. settings-schema.json->search-country->options
+msgid "Paraguay - PY"
+msgstr "Paraguay - PY"
+
+#. settings-schema.json->search-country->options
+msgid "Peru - PE"
+msgstr "Peru - PE"
+
+#. settings-schema.json->search-country->options
+msgid "Philippines - PH"
+msgstr "Philippines - PH"
+
+#. settings-schema.json->search-country->options
+msgid "Pitcairn - PN"
+msgstr "Pitcairn - PN"
+
+#. settings-schema.json->search-country->options
+msgid "Poland - PL"
+msgstr "Ba Lan - PL"
+
+#. settings-schema.json->search-country->options
+msgid "Portugal - PT"
+msgstr "Bồ Đào Nha - PT"
+
+#. settings-schema.json->search-country->options
+msgid "Puerto Rico - PR"
+msgstr "Puerto Rico - PR"
+
+#. settings-schema.json->search-country->options
+msgid "Qatar - QA"
+msgstr "Qatar - QA"
+
+#. settings-schema.json->search-country->options
+msgid "Réunion - RE"
+msgstr "Réunion - RE"
+
+#. settings-schema.json->search-country->options
+msgid "Romania - RO"
+msgstr "Romania - RO"
+
+#. settings-schema.json->search-country->options
+msgid "Russian Federation - RU"
+msgstr "Liên bang Nga - RU"
+
+#. settings-schema.json->search-country->options
+msgid "Rwanda - RW"
+msgstr "Rwanda - RW"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Barthélemy - BL"
+msgstr "Saint Barthélemy - BL"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Helena (Ascension And Tristan Da Cunha) - SH"
+msgstr "Saint Helena - SH"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Kitts And Nevis - KN"
+msgstr "Saint Kitts và Nevis - KN"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Lucia - LC"
+msgstr "Saint Lucia - LC"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Martin (French Part) - MF"
+msgstr "Saint Martin (Phần Pháp) - MF"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Pierre And Miquelon - PM"
+msgstr "Saint Pierre và Miquelon - PM"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Vincent And The Grenadines - VC"
+msgstr "Saint Vincent và Grenadines - VC"
+
+#. settings-schema.json->search-country->options
+msgid "Samoa - WS"
+msgstr "Samoa - WS"
+
+#. settings-schema.json->search-country->options
+msgid "San Marino - SM"
+msgstr "San Marino - SM"
+
+#. settings-schema.json->search-country->options
+msgid "Sao Tome And Principe - ST"
+msgstr "Sao Tome và Principe - ST"
+
+#. settings-schema.json->search-country->options
+msgid "Saudi Arabia - SA"
+msgstr "Ả Rập Saudi - SA"
+
+#. settings-schema.json->search-country->options
+msgid "Senegal - SN"
+msgstr "Senegal - SN"
+
+#. settings-schema.json->search-country->options
+msgid "Serbia - RS"
+msgstr "Serbia - RS"
+
+#. settings-schema.json->search-country->options
+msgid "Seychelles - SC"
+msgstr "Seychelles - SC"
+
+#. settings-schema.json->search-country->options
+msgid "Sierra Leone - SL"
+msgstr "Sierra Leone - SL"
+
+#. settings-schema.json->search-country->options
+msgid "Singapore - SG"
+msgstr "Singapore - SG"
+
+#. settings-schema.json->search-country->options
+msgid "Sint Maarten (Dutch Part) - SX"
+msgstr "Sint Maarten (Phần Hà Lan) - SX"
+
+#. settings-schema.json->search-country->options
+msgid "Slovakia - SK"
+msgstr "Slovakia - SK"
+
+#. settings-schema.json->search-country->options
+msgid "Slovenia - SI"
+msgstr "Slovenia - SI"
+
+#. settings-schema.json->search-country->options
+msgid "Solomon Islands - SB"
+msgstr "Quần đảo Solomon - SB"
+
+#. settings-schema.json->search-country->options
+msgid "Somalia - SO"
+msgstr "Somalia - SO"
+
+#. settings-schema.json->search-country->options
+msgid "South Africa - ZA"
+msgstr "Nam Phi - ZA"
+
+#. settings-schema.json->search-country->options
+msgid "South Georgia And The South Sandwich Islands - GS"
+msgstr "Nam Georgia và Quần đảo Nam Sandwich - GS"
+
+#. settings-schema.json->search-country->options
+msgid "South Sudan - SS"
+msgstr "Nam Sudan - SS"
+
+#. settings-schema.json->search-country->options
+msgid "Spain - ES"
+msgstr "Tây Ban Nha - ES"
+
+#. settings-schema.json->search-country->options
+msgid "Sri Lanka - LK"
+msgstr "Sri Lanka - LK"
+
+#. settings-schema.json->search-country->options
+msgid "Sudan - SD"
+msgstr "Sudan - SD"
+
+#. settings-schema.json->search-country->options
+msgid "Suriname - SR"
+msgstr "Suriname - SR"
+
+#. settings-schema.json->search-country->options
+msgid "Svalbard And Jan Mayen - SJ"
+msgstr "Svalbard và Jan Mayen - SJ"
+
+#. settings-schema.json->search-country->options
+msgid "Swaziland - SZ"
+msgstr "Eswatini - SZ"
+
+#. settings-schema.json->search-country->options
+msgid "Sweden - SE"
+msgstr "Thụy Điển - SE"
+
+#. settings-schema.json->search-country->options
+msgid "Switzerland - CH"
+msgstr "Thụy Sĩ - CH"
+
+#. settings-schema.json->search-country->options
+msgid "Syrian Arab Republic - SY"
+msgstr "Cộng hòa Ả Rập Syria - SY"
+
+#. settings-schema.json->search-country->options
+msgid "Taiwan (Province Of China) - TW"
+msgstr "Đài Loan - TW"
+
+#. settings-schema.json->search-country->options
+msgid "Tajikistan - TJ"
+msgstr "Tajikistan - TJ"
+
+#. settings-schema.json->search-country->options
+msgid "Tanzania (United Republic Of) - TZ"
+msgstr "Tanzania - TZ"
+
+#. settings-schema.json->search-country->options
+msgid "Thailand - TH"
+msgstr "Thái Lan - TH"
+
+#. settings-schema.json->search-country->options
+msgid "Timor-Leste - TL"
+msgstr "Timor-Leste - TL"
+
+#. settings-schema.json->search-country->options
+msgid "Togo - TG"
+msgstr "Togo - TG"
+
+#. settings-schema.json->search-country->options
+msgid "Tokelau - TK"
+msgstr "Tokelau - TK"
+
+#. settings-schema.json->search-country->options
+msgid "Tonga - TO"
+msgstr "Tonga - TO"
+
+#. settings-schema.json->search-country->options
+msgid "Trinidad And Tobago - TT"
+msgstr "Trinidad và Tobago - TT"
+
+#. settings-schema.json->search-country->options
+msgid "Tunisia - TN"
+msgstr "Tunisia - TN"
+
+#. settings-schema.json->search-country->options
+msgid "Turkey - TR"
+msgstr "Thổ Nhĩ Kỳ - TR"
+
+#. settings-schema.json->search-country->options
+msgid "Turkmenistan - TM"
+msgstr "Turkmenistan - TM"
+
+#. settings-schema.json->search-country->options
+msgid "Turks And Caicos Islands - TC"
+msgstr "Quần đảo Turks và Caicos - TC"
+
+#. settings-schema.json->search-country->options
+msgid "Tuvalu - TV"
+msgstr "Tuvalu - TV"
+
+#. settings-schema.json->search-country->options
+msgid "Uganda - UG"
+msgstr "Uganda - UG"
+
+#. settings-schema.json->search-country->options
+msgid "Ukraine - UA"
+msgstr "Ukraine - UA"
+
+#. settings-schema.json->search-country->options
+msgid "United Arab Emirates - AE"
+msgstr "Các Tiểu vương quốc Ả Rập Thống nhất - AE"
+
+#. settings-schema.json->search-country->options
+msgid "United Kingdom - GB"
+msgstr "Vương quốc Anh - GB"
+
+#. settings-schema.json->search-country->options
+msgid "United States - US"
+msgstr "Hoa Kỳ - US"
+
+#. settings-schema.json->search-country->options
+msgid "United States Minor Outlying Islands - UM"
+msgstr "Các đảo xa của Hoa Kỳ - UM"
+
+#. settings-schema.json->search-country->options
+msgid "Uruguay - UY"
+msgstr "Uruguay - UY"
+
+#. settings-schema.json->search-country->options
+msgid "Uzbekistan - UZ"
+msgstr "Uzbekistan - UZ"
+
+#. settings-schema.json->search-country->options
+msgid "Vanuatu - VU"
+msgstr "Vanuatu - VU"
+
+#. settings-schema.json->search-country->options
+msgid "Venezuela (Bolivarian Republic Of) - VE"
+msgstr "Venezuela - VE"
+
+#. settings-schema.json->search-country->options
+msgid "Viet Nam - VN"
+msgstr "Việt Nam - VN"
+
+#. settings-schema.json->search-country->options
+msgid "Virgin Islands (British) - VG"
+msgstr "Quần đảo Virgin (Anh) - VG"
+
+#. settings-schema.json->search-country->options
+msgid "Virgin Islands (U.S.) - VI"
+msgstr "Quần đảo Virgin (Mỹ) - VI"
+
+#. settings-schema.json->search-country->options
+msgid "Wallis And Futuna - WF"
+msgstr "Wallis và Futuna - WF"
+
+#. settings-schema.json->search-country->options
+msgid "Western Sahara - EH"
+msgstr "Sahara Tây - EH"
+
+#. settings-schema.json->search-country->options
+msgid "Yemen - YE"
+msgstr "Yemen - YE"
+
+#. settings-schema.json->search-country->options
+msgid "Zambia - ZM"
+msgstr "Zambia - ZM"
+
+#. settings-schema.json->search-country->options
+msgid "Zimbabwe - ZW"
+msgstr "Zimbabwe - ZW"
+
+#. settings-schema.json->search-country->tooltip
+msgid "OPTIONAL. Choose a country."
+msgstr "TÙY CHỌN. Chọn một quốc gia."
+
+#. settings-schema.json->search-tag->description
+msgid "Tag"
+msgstr "Thẻ"
+
+#. settings-schema.json->search-tag->tooltip
+msgid "OPTIONAL. Only one word, as blues or jazz or rock or talk or..."
+msgstr "TÙY CHỌN. Chỉ một từ, ví dụ blues, jazz, rock, talk..."
+
+#. settings-schema.json->search-codec->options
+msgid "AAC"
+msgstr "AAC"
+
+#. settings-schema.json->search-codec->options
+msgid "AAC+"
+msgstr "AAC+"
+
+#. settings-schema.json->search-codec->options
+msgid "FLV"
+msgstr "FLV"
+
+#. settings-schema.json->search-codec->options
+msgid "AAC,H.264"
+msgstr "AAC,H.264"
+
+#. settings-schema.json->search-codec->options
+msgid "AAC+,H.264"
+msgstr "AAC+,H.264"
+
+#. settings-schema.json->search-codec->options
+msgid "MP3,H.264"
+msgstr "MP3,H.264"
+
+#. settings-schema.json->search-codec->options
+msgid "Unknown"
+msgstr "Không xác định"
+
+#. settings-schema.json->search-codec->options
+msgid "Unknown,H.264"
+msgstr "Không xác định,H.264"
+
+#. settings-schema.json->search-codec->tooltip
+msgid "OPTIONAL. Choose a codec."
+msgstr "TÙY CHỌN. Chọn một codec."
+
+#. settings-schema.json->search-minimalBitrate->description
+msgid "Minimal Bitrate"
+msgstr "Tốc độ bit tối thiểu"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "128"
+msgstr "128"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "192"
+msgstr "192"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "256"
+msgstr "256"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "320"
+msgstr "320"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "512"
+msgstr "512"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "640"
+msgstr "640"
+
+#. settings-schema.json->search-minimalBitrate->tooltip
+msgid "OPTIONAL. Choose a minimal bitrate (in kbps)."
+msgstr "TÙY CHỌN. Chọn tốc độ bit tối thiểu (kbps)."
+
+#. settings-schema.json->search-order->description
+msgid "Order"
+msgstr "Sắp xếp"
+
+#. settings-schema.json->search-order->options
+msgid "name"
+msgstr "tên"
+
+#. settings-schema.json->search-order->options
+msgid "url"
+msgstr "URL"
+
+#. settings-schema.json->search-order->options
+msgid "tags"
+msgstr "thẻ"
+
+#. settings-schema.json->search-order->options
+msgid "country"
+msgstr "quốc gia"
+
+#. settings-schema.json->search-order->options
+msgid "state"
+msgstr "bang"
+
+#. settings-schema.json->search-order->options
+msgid "language"
+msgstr "ngôn ngữ"
+
+#. settings-schema.json->search-order->options
+msgid "votes"
+msgstr "số phiếu"
+
+#. settings-schema.json->search-order->options
+msgid "codec"
+msgstr "codec"
+
+#. settings-schema.json->search-order->options
+msgid "bitrate"
+msgstr "tốc độ bit"
+
+#. settings-schema.json->search-order->options
+msgid "last check-time"
+msgstr "lần kiểm tra cuối"
+
+#. settings-schema.json->search-order->options
+msgid "click timestamp"
+msgstr "thời gian nhấp"
+
+#. settings-schema.json->search-order->options
+msgid "click count"
+msgstr "số lượt nhấp"
+
+#. settings-schema.json->search-order->options
+msgid "click trend"
+msgstr "xu hướng nhấp"
+
+#. settings-schema.json->search-order->options
+msgid "change timestamp"
+msgstr "thời gian thay đổi"
+
+#. settings-schema.json->search-order->options
+msgid "random"
+msgstr "ngẫu nhiên"
+
+#. settings-schema.json->search-order->tooltip
+msgid "OPTIONAL. Name of the attribute the result list will be sorted by."
+msgstr "TÙY CHỌN. Chọn thuộc tính để sắp xếp danh sách kết quả."
+
+#. settings-schema.json->search-limit->description
+msgid "Limit"
+msgstr "Giới hạn"
+
+#. settings-schema.json->search-limit->tooltip
+msgid "Maximum number of results per page."
+msgstr "Số kết quả tối đa trên mỗi trang."
+
+#. settings-schema.json->search-page->description
+msgid "Next page number"
+msgstr "Số trang tiếp theo"
+
+#. settings-schema.json->search-reset-button->description
+msgid "Reset"
+msgstr "Đặt lại"
+
+#. settings-schema.json->search-button->description
+msgid "Search..."
+msgstr "Tìm kiếm..."
+
+#. settings-schema.json->sched-rmbutton->description
+msgid "Remove selected items"
+msgstr "Xóa mục đã chọn"
+
+#. settings-schema.json->horizontal-show-name->description
+msgid "Display radio name"
+msgstr "Hiển thị tên radio"
+
+#. settings-schema.json->horizontal-show-title->description
+msgid "Display title"
+msgstr "Hiển thị tiêu đề"
+
+#. settings-schema.json->horizontal-max-title-length->description
+msgid "Maximum title length"
+msgstr "Độ dài tiêu đề tối đa"
+
+#. settings-schema.json->horizontal-max-title-length->tooltip
+msgid "0 means no maximum"
+msgstr "0 nghĩa là không giới hạn"
+
+#. settings-schema.json->alarm-clock-wake-me-softly->description
+msgid "Wake me up softly"
+msgstr "Đánh thức nhẹ nhàng"
+
+#. settings-schema.json->alarm-clock-wake-me-softly->tooltip
+msgid "By checking this box, the sound volume gradually increases."
+msgstr "Bật tùy chọn này, âm lượng sẽ tăng dần."
+
+#. settings-schema.json->alarm-clock-volume-begin->description
+msgid "Initial volume (%)"
+msgstr "Âm lượng ban đầu (%)"
+
+#. settings-schema.json->alarm-clock-volume-end->description
+msgid "Final volume (%)"
+msgstr "Âm lượng cuối (%)"
+
+#. settings-schema.json->alarm-clock-volume-end->tooltip
+msgid "The final volume must be greater than or equal to the initial volume."
+msgstr "Âm lượng cuối phải lớn hơn hoặc bằng âm lượng ban đầu."
+
+#. settings-schema.json->alarm-clock-volume-transition->description
+msgid "Transition duration (seconds)"
+msgstr "Thời gian chuyển đổi (giây)"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Sunday"
+msgstr "Chủ Nhật"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Monday"
+msgstr "Thứ Hai"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Tuesday"
+msgstr "Thứ Ba"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Wednesday"
+msgstr "Thứ Tư"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Thursday"
+msgstr "Thứ Năm"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Friday"
+msgstr "Thứ Sáu"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Saturday"
+msgstr "Thứ Bảy"
+
+#. settings-schema.json->alarm-clock-working-days-time->description
+#. settings-schema.json->alarm-clock-workoff-days-time->description
+msgid "Wake-Up Time"
+msgstr "Thời gian đánh thức"
+
+#. settings-schema.json->alarm-clock-working-days-radio-button->description
+#. settings-schema.json->alarm-clock-workoff-days-radio-button->description
+msgid "Last-listened-to radio station"
+msgstr "Đài radio nghe gần nhất"
+
+#. settings-schema.json->alarm-clock-tink-on->description
+msgid "Activate tink to ensure speakers are awake"
+msgstr "Bật âm thanh 'tink' để đảm bảo loa đã sẵn sàng"

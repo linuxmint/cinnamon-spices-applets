@@ -1,0 +1,1564 @@
+# CINNAMENU
+# This file is put in the public domain.
+# jaszhix, 2017
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Cinnamenu@json 5.4.14\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-06 22:42-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: 5.8/applet.js:59 3.2/applet.js:157 4.0/applet.js:60
+msgid "Initializing"
+msgstr "Khởi tạo"
+
+#: 5.8/applet.js:75 4.0/applet.js:78
+msgid "Find files..."
+msgstr "Tìm tập tin..."
+
+#: 5.8/applet.js:283 4.0/applet.js:281
+msgid "Please wait..."
+msgstr "Vui lòng chờ..."
+
+#: 5.8/applet.js:909 5.8/applet.js:1124 4.0/applet.js:884
+msgid "Applications"
+msgstr "Ứng dụng"
+
+#: 5.8/applet.js:913 4.0/applet.js:888
+msgid "Documents"
+msgstr "Tài liệu"
+
+#: 5.8/applet.js:917 4.0/applet.js:892
+msgid "Videos"
+msgstr "Video"
+
+#: 5.8/applet.js:921 4.0/applet.js:896
+msgid "Images"
+msgstr "Ảnh"
+
+#: 5.8/applet.js:925 4.0/applet.js:900
+msgid "Music"
+msgstr "Âm nhạc"
+
+#: 5.8/applet.js:934 4.0/applet.js:909
+msgid "No recent Items"
+msgstr "Không có mục gần đây"
+
+#: 5.8/applet.js:981 4.0/applet.js:956
+msgid "Settings"
+msgstr "Cài đặt"
+
+#: 5.8/applet.js:1127
+msgid "files"
+msgstr "tệp"
+
+#: 5.8/applet.js:1130 4.0/applet.js:1097
+msgid "Other search results"
+msgstr "Kết quả tìm kiếm khác"
+
+#: 5.8/applet.js:1133 4.0/applet.js:1100
+msgid "Browser bookmarks"
+msgstr "Dấu trang trình duyệt"
+
+#: 5.8/applet.js:1136 4.0/applet.js:1103
+msgid "Browser history"
+msgstr "Lịch sử trình duyệt"
+
+#: 5.8/applet.js:1139 5.8/categoriesview.js:306 4.0/applet.js:1106
+#: 4.0/categoriesview.js:305
+msgid "Emoji"
+msgstr "Biểu tượng cảm xúc"
+
+#: 5.8/applet.js:1197 5.8/applet.js:1333 5.8/applet.js:1817 4.0/applet.js:1164
+#: 4.0/applet.js:1299 4.0/applet.js:1786
+msgid "Click to copy"
+msgstr "Nhấp để sao chép"
+
+#: 5.8/applet.js:1634 3.2/applet.js:1416 4.0/applet.js:1600
+msgid "Clear List"
+msgstr "Xóa danh sách"
+
+#: 5.8/applet.js:1668 5.8/applet.js:1669 4.0/applet.js:1634 4.0/applet.js:1635
+msgid "Trash"
+msgstr "Thùng rác"
+
+#: 5.8/applet.js:1678 5.8/applet.js:1679 3.2/placeDisplay.js:220
+#: 4.0/applet.js:1644 4.0/applet.js:1645
+msgid "Computer"
+msgstr "Máy tính"
+
+#: 5.8/appsview.js:295 5.8/sidebar.js:111 4.0/appsview.js:295
+#: 4.0/sidebar.js:111
+msgid "Error while opening file:"
+msgstr "Lỗi khi mở tệp:"
+
+#: 5.8/appsview.js:441 4.0/appsview.js:440
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Quá nhiều mục nhập - chỉ hiển thị 1000 mục nhập đầu tiên"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:284 3.2/applet.js:978 4.0/categoriesview.js:283
+msgid "All applications"
+msgstr "Tất cả ứng dụng"
+
+#: 5.8/categoriesview.js:302 4.0/categoriesview.js:301
+msgid "Favorites"
+msgstr "Yêu thích"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:303 3.2/applet.js:1016 4.0/categoriesview.js:302
+msgid "Places"
+msgstr "Địa điểm"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:304 4.0/categoriesview.js:303
+msgid "Recent"
+msgstr "Gần đây"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:305 3.2/applet.js:1019 4.0/categoriesview.js:304
+msgid "Favorite apps"
+msgstr "Ứng dụng yêu thích"
+
+#: 5.8/contextmenu.js:111 4.0/contextmenu.js:111
+msgid "light skin tone"
+msgstr "tông màu da sáng"
+
+#: 5.8/contextmenu.js:112 4.0/contextmenu.js:112
+msgid "medium-light skin tone"
+msgstr "tông da sáng trung bình"
+
+#: 5.8/contextmenu.js:113 4.0/contextmenu.js:113
+msgid "medium skin tone"
+msgstr "tông da trung bình"
+
+#: 5.8/contextmenu.js:114 4.0/contextmenu.js:114
+msgid "medium-dark skin tone"
+msgstr "tông da trung bình tối"
+
+#: 5.8/contextmenu.js:115 4.0/contextmenu.js:115
+msgid "dark skin tone"
+msgstr "tông da tối"
+
+#: 5.8/contextmenu.js:134 4.0/contextmenu.js:134
+msgid "Remove category"
+msgstr "Xóa danh mục"
+
+#. 3.2->settings-schema.json->resetCategoryOrder-button->description
+#: 5.8/contextmenu.js:147 4.0/contextmenu.js:147
+msgid "Reset category order"
+msgstr "Đặt lại thứ tự danh mục"
+
+#: 5.8/contextmenu.js:167 4.0/contextmenu.js:167
+msgid "List settings apps separately"
+msgstr "Liệt kê các ứng dụng cài đặt riêng biệt"
+
+#: 5.8/contextmenu.js:174 4.0/contextmenu.js:174
+msgid "Single list style"
+msgstr "Kiểu danh sách đơn"
+
+#: 5.8/contextmenu.js:183 4.0/contextmenu.js:183
+msgid "Hide hidden files"
+msgstr "Ẩn các tập tin ẩn"
+
+#. 5.8->settings-schema.json->show-hidden-files->description
+#. 4.0->settings-schema.json->show-hidden-files->description
+#: 5.8/contextmenu.js:190 4.0/contextmenu.js:190
+msgid "Show hidden files"
+msgstr "Hiển thị các tập tin ẩn"
+
+#: 5.8/contextmenu.js:246 3.2/buttons.js:1045 3.2/buttons.js:1047
+#: 4.0/contextmenu.js:246 4.0/contextmenu.js:254
+msgid "Run with NVIDIA GPU"
+msgstr "Chạy với GPU NVIDIA"
+
+#: 5.8/contextmenu.js:256 3.2/buttons.js:1049 4.0/contextmenu.js:260
+msgid "Add to panel"
+msgstr "Thêm vào bảng điều khiển"
+
+#: 5.8/contextmenu.js:275 3.2/buttons.js:1051 4.0/contextmenu.js:279
+msgid "Add to desktop"
+msgstr "Thêm vào máy tính để bàn"
+
+#: 5.8/contextmenu.js:289 5.8/contextmenu.js:364 3.2/buttons.js:1054
+#: 4.0/contextmenu.js:293 4.0/contextmenu.js:369
+msgid "Remove from favorites"
+msgstr "Xóa khỏi mục yêu thích"
+
+#: 5.8/contextmenu.js:293 5.8/contextmenu.js:369 3.2/buttons.js:1056
+#: 4.0/contextmenu.js:297 4.0/contextmenu.js:374
+msgid "Add to favorites"
+msgstr "Thêm vào mục yêu thích"
+
+#: 5.8/contextmenu.js:300 3.2/buttons.js:1059 4.0/contextmenu.js:304
+msgid "Uninstall"
+msgstr "Gỡ cài đặt"
+
+#: 5.8/contextmenu.js:308 4.0/contextmenu.js:312
+msgid "App Info"
+msgstr "Thông tin ứng dụng"
+
+#: 5.8/contextmenu.js:324 4.0/contextmenu.js:328
+msgid "This file is no longer available"
+msgstr "Tập tin này không còn khả dụng nữa"
+
+#: 5.8/contextmenu.js:332 4.0/contextmenu.js:336
+msgid "Open with"
+msgstr "Mở bằng"
+
+#: 5.8/contextmenu.js:347 4.0/contextmenu.js:351
+msgid "Other application..."
+msgstr "Ứng dụng khác..."
+
+#: 5.8/contextmenu.js:384 4.0/contextmenu.js:390
+msgid "Add folder as category"
+msgstr "Thêm thư mục vào danh mục"
+
+#: 5.8/contextmenu.js:400 4.0/contextmenu.js:406 5.8/search.py:48
+#: 4.0/search.py:48
+msgid "Open containing folder"
+msgstr "Mở thư mục chứa"
+
+#: 5.8/contextmenu.js:415 5.8/contextmenu.js:427 4.0/contextmenu.js:421
+#: 4.0/contextmenu.js:433
+msgid "Move to trash"
+msgstr "Chuyển vào Thùng rác"
+
+#: 5.8/contextmenu.js:421 4.0/contextmenu.js:427
+msgid "Error while moving file to trash:"
+msgstr "Lỗi khi di chuyển tệp vào Thùng rác:"
+
+#: 5.8/emoji.js:8 4.0/emoji.js:7739
+msgid "Smileys & Emotion"
+msgstr "Biểu tượng mặt cười & Cảm xúc"
+
+#: 5.8/emoji.js:685 4.0/emoji.js:7740
+msgid "People & Body"
+msgstr "Con người & Cơ thể"
+
+#: 5.8/emoji.js:2245 4.0/emoji.js:7741
+msgid "Animals & Nature"
+msgstr "Động vật & Thiên nhiên"
+
+#: 5.8/emoji.js:2861 4.0/emoji.js:7742
+msgid "Food & Drink"
+msgstr "Đồ ăn & Thức uống"
+
+#: 5.8/emoji.js:3405 4.0/emoji.js:7743
+msgid "Travel & Places"
+msgstr "Du lịch & Địa điểm"
+
+#: 5.8/emoji.js:4281 4.0/emoji.js:7744
+msgid "Activities"
+msgstr "Hoạt động"
+
+#: 5.8/emoji.js:4625 4.0/emoji.js:7745
+msgid "Objects"
+msgstr "Đối tượng"
+
+#: 5.8/emoji.js:5677 4.0/emoji.js:7746
+msgid "Symbols"
+msgstr "Biểu tượng"
+
+#: 5.8/emoji.js:6573 4.0/emoji.js:7747
+msgid "Flags"
+msgstr "Cờ"
+
+#: 5.8/sidebar.js:252 3.2/applet.js:2323 4.0/sidebar.js:251
+msgid "Quit"
+msgstr "Thoát"
+
+#: 5.8/sidebar.js:253 3.2/applet.js:2324 4.0/sidebar.js:252
+msgid "Shutdown the computer"
+msgstr "Tắt máy tính"
+
+#: 5.8/sidebar.js:261 3.2/applet.js:2315 4.0/sidebar.js:260
+msgid "Logout"
+msgstr "Đăng xuất"
+
+#: 5.8/sidebar.js:262 3.2/applet.js:2316 4.0/sidebar.js:261
+msgid "Leave the session"
+msgstr "Thoát phiên"
+
+#: 5.8/sidebar.js:270 3.2/applet.js:2293 4.0/sidebar.js:269
+msgid "Lock screen"
+msgstr "Khóa màn hình"
+
+#: 5.8/sidebar.js:271 3.2/applet.js:2294 4.0/sidebar.js:270
+msgid "Lock the screen"
+msgstr "Khóa màn hình"
+
+#: 3.2/applet.js:92
+msgid "Type to search..."
+msgstr "Nhập để tìm kiếm..."
+
+#: 3.2/applet.js:284
+msgid "No description available"
+msgstr "Không có mô tả nào có sẵn"
+
+#: 3.2/applet.js:1017
+msgid "Recent files"
+msgstr "Tập tin gần đây"
+
+#: 3.2/applet.js:1018
+msgid "Bookmarks"
+msgstr "Dấu trang"
+
+#: 3.2/applet.js:1352
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Gói gir1.2-gda-5.0 là bắt buộc đối với dấu trang Firefox và Midori."
+
+#: 3.2/applet.js:1427
+msgid "No recent files"
+msgstr "Không có tập tin gần đây"
+
+#: 3.2/applet.js:2279
+msgid "Account details"
+msgstr "Chi tiết tài khoản"
+
+#: 3.2/applet.js:2286 3.2/buttons.js:1260
+msgid "Grid View"
+msgstr "Chế độ xem lưới"
+
+#: 3.2/applet.js:2286 3.2/buttons.js:1254
+msgid "List View"
+msgstr "Chế độ xem danh sách"
+
+#: 3.2/applet.js:2287 3.2/buttons.js:1261
+msgid "Switch to grid view"
+msgstr "Chuyển sang chế độ xem lưới"
+
+#: 3.2/applet.js:2287 3.2/buttons.js:1255
+msgid "Switch to list view"
+msgstr "Chuyển sang chế độ danh sách"
+
+#: 3.2/placeDisplay.js:146
+msgid "Home"
+msgstr "Nhà"
+
+#: 3.2/placeDisplay.js:224
+msgid "Browse network"
+msgstr "Duyệt mạng"
+
+#: 4.0/applet.js:1094
+msgid "Applications and files"
+msgstr "Ứng dụng và tập tin"
+
+#: 5.8/search.py:43 4.0/search.py:43
+msgid "Open"
+msgstr "Mở"
+
+#. 5.8->settings-schema.json->search->title
+#. 5.8->settings-schema.json->search-search->title
+#. 4.0->settings-schema.json->search->title
+#. 4.0->settings-schema.json->search-search->title
+#: 5.8/search.py:85 4.0/search.py:85
+msgid "Search"
+msgstr "Tìm kiến"
+
+#: 5.8/search.py:106 4.0/search.py:106
+msgid "Start in"
+msgstr "Bắt đầu với"
+
+#: 5.8/search.py:107 4.0/search.py:107
+msgid "Select a folder"
+msgstr "Chọn một thư mục"
+
+#: 5.8/search.py:113 4.0/search.py:113
+msgid "Follow symlinks"
+msgstr "Theo liên kết tượng trưng"
+
+#: 5.8/search.py:117 4.0/search.py:117
+msgid "Search hidden"
+msgstr "Tìm kiếm ẩn"
+
+#: 5.8/search.py:121 4.0/search.py:121
+msgid "Use regular expressions"
+msgstr "Sử dụng biểu thức chính quy"
+
+#: 5.8/search.py:125 4.0/search.py:125
+msgid "Stop"
+msgstr "Dừng"
+
+#: 5.8/search.py:140 4.0/search.py:140
+msgid "File"
+msgstr "Tập tin"
+
+#: 5.8/search.py:156 4.0/search.py:156
+msgid "Path"
+msgstr "Đường dẫn"
+
+#: 5.8/search.py:184 4.0/search.py:184
+msgid "Searching..."
+msgstr "Tìm kiếm..."
+
+#: 5.8/search.py:198 5.8/search.py:199 4.0/search.py:198 4.0/search.py:199
+msgid "Search Stopped"
+msgstr "Dừng tìm kiếm"
+
+#: 5.8/search.py:215 4.0/search.py:215
+msgid "Searching: "
+msgstr "TÌm kiếm: "
+
+#: 5.8/search.py:220 4.0/search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Lỗi: Không đủ quyền để đọc thư mục "
+
+#: 5.8/search.py:252 4.0/search.py:252
+msgid "Search Completed"
+msgstr "Tìm kiếm hoàn tất"
+
+#: 5.8/search.py:259 4.0/search.py:259
+msgid "Skipping"
+msgstr "Bỏ qua"
+
+#: 5.8/search.py:259 4.0/search.py:259
+msgid " - directory already searched"
+msgstr " = thư mục đã tìm kiếm rồi"
+
+#: 4.0/mint-remove-application.py:34
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Mục menu này không liên quan đến bất kỳ gói nào. Bạn có muốn xóa nó khỏi "
+"menu không?"
+
+#: 4.0/mint-remove-application.py:75
+msgid "The following packages will be removed:"
+msgstr "Các gói sau đây sẽ bị gỡ bỏ:"
+
+#: 4.0/mint-remove-application.py:82
+msgid "Packages to be removed"
+msgstr "Các gói cần gỡ bỏ"
+
+#: 4.0/mint-remove-application.py:143
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Không thể gỡ bỏ gói %s vì nó được các gói khác yêu cầu."
+
+#: 4.0/mint-remove-application.py:149
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Gói %s là gói phụ thuộc của các gói sau:"
+
+#. metadata.json->name
+#. 3.2->settings-schema.json->cinnamenuProvidersSection->title
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Menu linh hoạt với tùy chọn bố cục dạng lưới hoặc danh sách, trình duyệt "
+"tệp và tìm kiếm biểu tượng cảm xúc."
+
+#. 5.8->settings-schema.json->layout->title
+#. 5.8->settings-schema.json->menu-layout->title
+#. 3.2->settings-schema.json->menu->title
+#. 3.2->settings-schema.json->menu-layout->title
+#. 4.0->settings-schema.json->layout->title
+#. 4.0->settings-schema.json->menu-layout->title
+msgid "Layout"
+msgstr "Bố cục"
+
+#. 5.8->settings-schema.json->behaviour->title
+#. 3.2->settings-schema.json->panel->title
+#. 4.0->settings-schema.json->behaviour->title
+msgid "Behavior"
+msgstr "Hành vi"
+
+#. 5.8->settings-schema.json->appearance->title
+#. 3.2->settings-schema.json->appearance->title
+#. 4.0->settings-schema.json->appearance->title
+msgid "Appearance"
+msgstr "Giao diện"
+
+#. 5.8->settings-schema.json->tips->title
+#. 5.8->settings-schema.json->tips-section->title
+#. 4.0->settings-schema.json->tips->title
+#. 4.0->settings-schema.json->tips-section->title
+msgid "Tips"
+msgstr "Mẹo"
+
+#. 5.8->settings-schema.json->menu-content->title
+#. 3.2->settings-schema.json->menu-content->title
+#. 4.0->settings-schema.json->menu-content->title
+msgid "Content"
+msgstr "Nội dung"
+
+#. 5.8->settings-schema.json->panel-behave->title
+#. 5.8->settings-schema.json->panel-appear->title
+#. 3.2->settings-schema.json->panel-appear->title
+#. 3.2->settings-schema.json->panel-behave->title
+#. 4.0->settings-schema.json->panel-behave->title
+#. 4.0->settings-schema.json->panel-appear->title
+msgid "Panel"
+msgstr "Bảng điều khiển"
+
+#. 5.8->settings-schema.json->menu-behave->title
+#. 5.8->settings-schema.json->menu-icons->title
+#. 3.2->settings-schema.json->menu-behave->title
+#. 3.2->settings-schema.json->menu-icons->title
+#. 4.0->settings-schema.json->menu-behave->title
+#. 4.0->settings-schema.json->menu-icons->title
+msgid "Menu"
+msgstr "Menu"
+
+#. 5.8->settings-schema.json->applications-view-mode->description
+#. 4.0->settings-schema.json->applications-view-mode->description
+msgid "Applications view mode"
+msgstr "Chế độ xem ứng dụng"
+
+#. 5.8->settings-schema.json->applications-view-mode->options
+#. 3.2->settings-schema.json->startup-view-mode->options
+#. 4.0->settings-schema.json->applications-view-mode->options
+msgid "List"
+msgstr "Danh sách"
+
+#. 5.8->settings-schema.json->applications-view-mode->options
+#. 3.2->settings-schema.json->startup-view-mode->options
+#. 4.0->settings-schema.json->applications-view-mode->options
+msgid "Grid"
+msgstr "Lưới"
+
+#. 5.8->settings-schema.json->applications-view-mode->tooltip
+#. 4.0->settings-schema.json->applications-view-mode->tooltip
+msgid "View applications as list or grid"
+msgstr "Xem các ứng dụng dưới dạng danh sách hoặc lưới"
+
+#. 5.8->settings-schema.json->show-sidebar->description
+#. 4.0->settings-schema.json->show-sidebar->description
+msgid "Show sidebar"
+msgstr "Hiển thị thanh bên"
+
+#. 5.8->settings-schema.json->show-sidebar->tooltip
+#. 4.0->settings-schema.json->show-sidebar->tooltip
+msgid "Show the sidebar in the menu"
+msgstr "Hiển thị thanh bên trong menu"
+
+#. 5.8->settings-schema.json->sidebar-placement->description
+#. 4.0->settings-schema.json->sidebar-placement->description
+msgid "Sidebar location"
+msgstr "Vị trí thanh bên"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Top"
+msgstr "Trên"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Bottom"
+msgstr "Dưới"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Left"
+msgstr "Trái"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Right"
+msgstr "Phải"
+
+#. 5.8->settings-schema.json->sidebar-placement->tooltip
+#. 4.0->settings-schema.json->sidebar-placement->tooltip
+msgid "Choose where to show the sidebar"
+msgstr "Chọn nơi hiện thanh bên"
+
+#. 5.8->settings-schema.json->sidebar-favorites->description
+#. 4.0->settings-schema.json->sidebar-favorites->description
+msgid "Show favorites on sidebar"
+msgstr "Hiển thị mục yêu thích trên thanh bên"
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->description-placement->options
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "None"
+msgstr "Không"
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+msgid "Apps only"
+msgstr "Chỉ ứng dụng"
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+msgid "Files only"
+msgstr "Chỉ thư mục"
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+msgid "Apps and files"
+msgstr "Ứng dụng và thư mục"
+
+#. 5.8->settings-schema.json->sidebar-favorites->tooltip
+#. 4.0->settings-schema.json->sidebar-favorites->tooltip
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr ""
+"Hiển thị các ứng dụng và biểu tượng tệp yêu thích của bạn trên thanh bên"
+
+#. 5.8->settings-schema.json->description-placement->description
+#. 4.0->settings-schema.json->description-placement->description
+msgid "Application description placement"
+msgstr "Vị trí mô tả ứng dụng"
+
+#. 5.8->settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->description-placement->options
+msgid "Tooltips"
+msgstr "Chú giải công cụ"
+
+#. 5.8->settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->description-placement->options
+msgid "Under titles"
+msgstr "Dưới tiêu đề"
+
+#. 5.8->settings-schema.json->description-placement->tooltip
+#. 4.0->settings-schema.json->description-placement->tooltip
+msgid "Choose where to show application descriptions"
+msgstr "Chọn nơi hiện mô tả ứng dụng"
+
+#. 5.8->settings-schema.json->show-categories->description
+#. 4.0->settings-schema.json->show-categories->description
+msgid "Show categories"
+msgstr "Hiển thị danh mục"
+
+#. 5.8->settings-schema.json->show-categories->tooltip
+#. 4.0->settings-schema.json->show-categories->tooltip
+msgid "Show list of application categories"
+msgstr "HIển thị danh sách danh mục ứng dụng"
+
+#. 5.8->settings-schema.json->show-places-category->description
+#. 3.2->settings-schema.json->show-places->description
+#. 4.0->settings-schema.json->show-places-category->description
+msgid "Show bookmarks and places"
+msgstr "Hiển thị dấu trang và địa điểm"
+
+#. 5.8->settings-schema.json->show-places-category->tooltip
+#. 3.2->settings-schema.json->show-places->tooltip
+#. 4.0->settings-schema.json->show-places-category->tooltip
+msgid "Show bookmarks and places category in the menu"
+msgstr "Hiển thị danh mục dấu trang và địa điểm trong menu"
+
+#. 5.8->settings-schema.json->show-recents-category->description
+#. 4.0->settings-schema.json->show-recents-category->description
+msgid "Show recent items"
+msgstr "Hiển thị các mục gần đây"
+
+#. 5.8->settings-schema.json->show-recents-category->tooltip
+#. 4.0->settings-schema.json->show-recents-category->tooltip
+msgid "Show recent items category in the menu"
+msgstr "Hiển thị danh mục các mục gần đây trong menu"
+
+#. 5.8->settings-schema.json->show-favorite-apps-category->description
+#. 4.0->settings-schema.json->show-favorite-apps-category->description
+msgid "Show favorite apps category"
+msgstr "Hiển thị danh mục ứng dụng yêu thích"
+
+#. 5.8->settings-schema.json->show-favorite-apps-category->tooltip
+#. 4.0->settings-schema.json->show-favorite-apps-category->tooltip
+msgid "Show your favorite apps category in the menu"
+msgstr "Hiển thị danh mục ứng dụng yêu thích của bạn trong menu"
+
+#. 5.8->settings-schema.json->show-home-folder-category->description
+#. 4.0->settings-schema.json->show-home-folder-category->description
+msgid "Show home folder"
+msgstr "Hiển thị thư mục nhà"
+
+#. 5.8->settings-schema.json->show-home-folder-category->tooltip
+#. 4.0->settings-schema.json->show-home-folder-category->tooltip
+msgid "Show home folder category in the menu"
+msgstr "Hiển thị danh mục thư mục nhà trong menu"
+
+#. 5.8->settings-schema.json->show-emoji-category->description
+#. 4.0->settings-schema.json->show-emoji-category->description
+msgid "Show emoji category"
+msgstr "Hiển thị danh mục biểu tượng cảm xúc"
+
+#. 5.8->settings-schema.json->show-emoji-category->tooltip
+#. 4.0->settings-schema.json->show-emoji-category->tooltip
+msgid "Show emoji category in the menu"
+msgstr "Hiển thị danh mục biểu tượng cảm xúc trong menu"
+
+#. 5.8->settings-schema.json->menu-editor-button->description
+#. 3.2->settings-schema.json->menu-editor-button->description
+#. 4.0->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Mở trình soạn thảo menu"
+
+#. 5.8->settings-schema.json->overlay-key->description
+#. 3.2->settings-schema.json->overlay-key->description
+#. 4.0->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Phím tắt để mở và đóng menu"
+
+#. 5.8->settings-schema.json->activate-on-hover->description
+#. 3.2->settings-schema.json->activate-on-hover->description
+#. 4.0->settings-schema.json->activate-on-hover->description
+msgid "Open menu on hover"
+msgstr "Mở menu khi di chuột"
+
+#. 5.8->settings-schema.json->activate-on-hover->tooltip
+#. 3.2->settings-schema.json->activate-on-hover->tooltip
+#. 4.0->settings-schema.json->activate-on-hover->tooltip
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Mở menu khi tôi di chuyển chuột qua biểu tượng bảng điều khiển"
+
+#. 5.8->settings-schema.json->hover-delay->units
+#. 3.2->settings-schema.json->hover-delay->units
+#. 3.2->settings-schema.json->tooltip-delay->units
+#. 4.0->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "miligiây"
+
+#. 5.8->settings-schema.json->hover-delay->description
+#. 3.2->settings-schema.json->hover-delay->description
+#. 4.0->settings-schema.json->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Độ trễ khi di chuột qua menu"
+
+#. 5.8->settings-schema.json->enable-animation->description
+#. 3.2->settings-schema.json->enable-animation->description
+#. 4.0->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Sử dụng hình ảnh động menu"
+
+#. 5.8->settings-schema.json->enable-animation->tooltip
+#. 3.2->settings-schema.json->enable-animation->tooltip
+#. 4.0->settings-schema.json->enable-animation->tooltip
+msgid "Animate the menu on open and close"
+msgstr "Làm hoạt hình menu khi mở và đóng"
+
+#. 5.8->settings-schema.json->category-click->description
+#. 3.2->settings-schema.json->category-click->description
+#. 4.0->settings-schema.json->category-click->description
+msgid "Activate categories on click"
+msgstr "Kích hoạt danh mục khi nhấp chuột"
+
+#. 5.8->settings-schema.json->category-click->tooltip
+#. 3.2->settings-schema.json->category-click->tooltip
+#. 4.0->settings-schema.json->category-click->tooltip
+msgid "Activate categories on click instead of on hover"
+msgstr "Kích hoạt danh mục khi nhấp chuột thay vì khi di chuột"
+
+#. 5.8->settings-schema.json->open-on-category->description
+#. 3.2->settings-schema.json->startup-view-mode->description
+#. 4.0->settings-schema.json->open-on-category->description
+msgid "Open menu on category:"
+msgstr "Mở menu trên danh mục:"
+
+#. 5.8->settings-schema.json->open-on-category->tooltip
+#. 3.2->settings-schema.json->startup-view-mode->tooltip
+#. 4.0->settings-schema.json->open-on-category->tooltip
+msgid "Always open the menu with this category selected"
+msgstr "Luôn mở menu với danh mục này được chọn"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+msgid "Last used category"
+msgstr "Danh mục được sử dụng lần cuối"
+
+#. 5.8->settings-schema.json->enable-autoscroll->description
+#. 3.2->settings-schema.json->enable-autoscroll->description
+#. 4.0->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr "Bật tính năng cuộn tự động"
+
+#. 5.8->settings-schema.json->enable-autoscroll->tooltip
+#. 4.0->settings-schema.json->enable-autoscroll->tooltip
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Tự động cuộn danh sách ứng dụng khi di chuột"
+
+#. 5.8->settings-schema.json->show-hidden-files->tooltip
+#. 4.0->settings-schema.json->show-hidden-files->tooltip
+msgid "Show hidden files in folder view"
+msgstr "Hiển thị các tập tin ẩn trong chế độ xem thư mục"
+
+#. 5.8->settings-schema.json->enable-emoji-search->description
+#. 4.0->settings-schema.json->enable-emoji-search->description
+msgid "Emoji search"
+msgstr "Tìm kiếm biểu tượng cảm xúc"
+
+#. 5.8->settings-schema.json->enable-emoji-search->tooltip
+#. 4.0->settings-schema.json->enable-emoji-search->tooltip
+msgid "Show emojis in search results"
+msgstr "Hiển thị biểu tượng cảm xúc trong kết quả tìm kiếm"
+
+#. 5.8->settings-schema.json->web-search-option->description
+#. 4.0->settings-schema.json->web-search-option->description
+msgid "Web search option"
+msgstr "Tùy chọn tìm kiếm trên web"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Google"
+msgstr "Google"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Bing"
+msgstr "Bing"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Baidu"
+msgstr "Baidu"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Yahoo"
+msgstr "Yahoo"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Yandex"
+msgstr "Yandex"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Ask"
+msgstr "Ask"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Ecosia"
+msgstr "Ecosia"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "AOL"
+msgstr "AOL"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Startpage"
+msgstr "Startpage"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Brave"
+msgstr "Brave"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Qwant"
+msgstr "Qwant"
+
+#. 5.8->settings-schema.json->web-search-option->tooltip
+#. 4.0->settings-schema.json->web-search-option->tooltip
+msgid "Show an internet search option in search results"
+msgstr "Hiển thị tùy chọn tìm kiếm trên internet trong kết quả tìm kiếm"
+
+#. 5.8->settings-schema.json->web-suggestions->description
+#. 4.0->settings-schema.json->web-suggestions->description
+msgid "Web search suggestions"
+msgstr "Gợi ý tìm kiếm trên web"
+
+#. 5.8->settings-schema.json->web-suggestions->tooltip
+#. 4.0->settings-schema.json->web-suggestions->tooltip
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+"Với tùy chọn tìm kiếm trên web, bạn cũng có thể hiển thị các gợi ý tìm "
+"kiếm. (Lưu ý: Các gợi ý tìm kiếm được cung cấp bởi DuckDuckGo)"
+
+#. 5.8->settings-schema.json->enable-home-folder-search->description
+#. 4.0->settings-schema.json->enable-home-folder-search->description
+msgid "Search home folder"
+msgstr "Tìm kiếm thư mục nhà"
+
+#. 5.8->settings-schema.json->enable-home-folder-search->tooltip
+#. 4.0->settings-schema.json->enable-home-folder-search->tooltip
+msgid "When searching, also search my home folder for files"
+msgstr "Khi tìm kiếm, hãy tìm kiếm cả thư mục nhà của tôi để tìm tệp"
+
+#. 5.8->settings-schema.json->enable-web-history-search->description
+#. 4.0->settings-schema.json->enable-web-history-search->description
+msgid "Web history search"
+msgstr "Tìm kiếm lịch sử web"
+
+#. 5.8->settings-schema.json->enable-web-history-search->tooltip
+#. 4.0->settings-schema.json->enable-web-history-search->tooltip
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Khi tìm kiếm, hãy tìm kiếm cả lịch sử trình duyệt của tôi (Google Chrome, "
+"Chromium, Opera, Vivaldi, Brave).\n"
+"Lưu ý: Lịch sử Firefox hiện không được hỗ trợ."
+
+#. 5.8->settings-schema.json->enable-web-bookmarks-search->description
+#. 4.0->settings-schema.json->enable-web-bookmarks-search->description
+msgid "Web bookmarks search"
+msgstr "Tìm kiếm dấu trang web"
+
+#. 5.8->settings-schema.json->enable-web-bookmarks-search->tooltip
+#. 4.0->settings-schema.json->enable-web-bookmarks-search->tooltip
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Khi tìm kiếm, hãy tìm kiếm cả dấu trang web trên trình duyệt của tôi "
+"(Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave).\n"
+"Lưu ý: Để tìm kiếm dấu trang Firefox, bạn cần cài đặt gói gir1.2-gda-5.0 "
+"(các bản phân phối dựa trên Debian bao gồm Ubuntu & Linux Mint) hoặc gói "
+"libgda (các bản phân phối dựa trên Arch) và khởi động lại máy tính."
+
+#. 5.8->settings-schema.json->enable-wikipedia-search->description
+#. 4.0->settings-schema.json->enable-wikipedia-search->description
+msgid "Wikipedia search"
+msgstr "Tìm kiếm trên Wikipedia"
+
+#. 5.8->settings-schema.json->enable-wikipedia-search->tooltip
+#. 4.0->settings-schema.json->enable-wikipedia-search->tooltip
+msgid "Show some Wikipedia results"
+msgstr "Hiển thị một số kết quả Wikipedia"
+
+#. 5.8->settings-schema.json->wikipedia-language->description
+#. 5.8->settings-schema.json->wikipedia-language->tooltip
+#. 4.0->settings-schema.json->wikipedia-language->description
+#. 4.0->settings-schema.json->wikipedia-language->tooltip
+msgid "Wikipedia language"
+msgstr "Ngôn ngữ Wikipedia"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "English"
+msgstr "English"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Sinugboanong Binisaya"
+msgstr "Sinugboanong Binisaya"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Svenska"
+msgstr "Svenska"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Deutsch"
+msgstr "Deutsch"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Français"
+msgstr "Français"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Nederlands"
+msgstr "Nederlands"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Русский"
+msgstr "Русский"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Italiano"
+msgstr "Italiano"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Español"
+msgstr "Español"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Polski"
+msgstr "Polski"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "مصرى (Maṣri)"
+msgstr "مصرى (Maṣri)"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "日本語"
+msgstr "日本語"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Tiếng Việt"
+msgstr "Tiếng Việt"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Winaray"
+msgstr "Winaray"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "中文"
+msgstr "中文"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "العربية"
+msgstr "العربية"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Українська"
+msgstr "Українська"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Português"
+msgstr "Português"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "فارسی"
+msgstr "فارسی"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Català"
+msgstr "Català"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Српски / Srpski"
+msgstr "Српски / Srpski"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Bahasa Indonesia"
+msgstr "Bahasa Indonesia"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Norsk (Bokmål)"
+msgstr "Norsk (Bokmål)"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "한국어"
+msgstr "한국어"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Suomi"
+msgstr "Suomi"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Magyar"
+msgstr "Magyar"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Čeština"
+msgstr "Čeština"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Srpskohrvatski / Српскохрватски"
+msgstr "Srpskohrvatski / Српскохрватски"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Bân-lâm-gú"
+msgstr "Bân-lâm-gú"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Türkçe"
+msgstr "Türkçe"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Română"
+msgstr "Română"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Нохчийн"
+msgstr "Нохчийн"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Euskara"
+msgstr "Euskara"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Bahasa Melayu"
+msgstr "Bahasa Melayu"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Tatarça / Татарча"
+msgstr "Tatarça / Татарча"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Esperanto"
+msgstr "Esperanto"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "עברית"
+msgstr "עברית"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Հայերեն"
+msgstr "Հայերեն"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Български"
+msgstr "Български"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Dansk"
+msgstr "Dansk"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "تۆرکجه"
+msgstr "تۆرکجه"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Slovenčina"
+msgstr "Slovenčina"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Қазақша"
+msgstr "Қазақша"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Minangkabau"
+msgstr "Minangkabau"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Eesti"
+msgstr "Eesti"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Hrvatski"
+msgstr "Hrvatski"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Беларуская"
+msgstr "Беларуская"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Lietuvių"
+msgstr "Lietuvių"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Ελληνικά"
+msgstr "Ελληνικά"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Simple English"
+msgstr "Simple English"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Azərbaycanca"
+msgstr "Azərbaycanca"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Galego"
+msgstr "Galego"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Slovenščina"
+msgstr "Slovenščina"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "اردو"
+msgstr "اردو"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Nynorsk"
+msgstr "Nynorsk"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "ქართული"
+msgstr "ქართული"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "हिन्दी"
+msgstr "हिन्दी"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "தமிழ்"
+msgstr "தமிழ்"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "ไทย"
+msgstr "ไทย"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "O‘zbek"
+msgstr "O‘zbek"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Latina"
+msgstr "Latina"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Cymraeg"
+msgstr "Cymraeg"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Asturianu"
+msgstr "Asturianu"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Volapük"
+msgstr "Volapük"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "粵語"
+msgstr "粵語"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Македонски"
+msgstr "Македонски"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "বাংলা"
+msgstr "বাংলা"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Latviešu"
+msgstr "Latviešu"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Тоҷикӣ"
+msgstr "Тоҷикӣ"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "မြန်မာဘာသာ"
+msgstr "မြန်မာဘာသာ"
+
+#. 5.8->settings-schema.json->search-help->description
+#. 4.0->settings-schema.json->search-help->description
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Lưu ý: Một số tùy chọn tìm kiếm vẫn có thể được sử dụng ngay cả khi bạn "
+"chưa bật chúng bằng cách thêm tiền tố vào từ khóa tìm kiếm.\n"
+"Ví dụ: để tìm kiếm biểu tượng cảm xúc, hãy nhập 'e trái tim' để tìm biểu "
+"tượng cảm xúc trái tim. Tương tự, hãy sử dụng tiền tố 'f' để tìm kiếm tệp, "
+"'h' để tìm kiếm lịch sử web và 'b' để tìm kiếm dấu trang web.\n"
+
+#. 5.8->settings-schema.json->menu-icon-custom->description
+#. 3.2->settings-schema.json->menu-icon-custom->description
+#. 4.0->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Sử dụng biểu tượng tùy chỉnh"
+
+#. 5.8->settings-schema.json->menu-icon-custom->tooltip
+#. 3.2->settings-schema.json->menu-icon-custom->tooltip
+#. 4.0->settings-schema.json->menu-icon-custom->tooltip
+msgid "Use a custom icon in the panel"
+msgstr "Sử dụng biểu tượng tùy chỉnh trong bảng điều khiển"
+
+#. 5.8->settings-schema.json->menu-icon->description
+#. 5.8->settings-schema.json->menu-icon->tooltip
+#. 3.2->settings-schema.json->menu-icon->description
+#. 3.2->settings-schema.json->menu-icon->tooltip
+#. 4.0->settings-schema.json->menu-icon->description
+#. 4.0->settings-schema.json->menu-icon->tooltip
+msgid "Panel icon"
+msgstr "Biểu tượng bảng điều khiển"
+
+#. 5.8->settings-schema.json->menu-icon-size-custom->description
+#. 4.0->settings-schema.json->menu-icon-size-custom->description
+msgid "Use a custom icon size"
+msgstr "Sử dụng kích thước biểu tượng tùy chỉnh"
+
+#. 5.8->settings-schema.json->menu-icon-size-custom->tooltip
+#. 4.0->settings-schema.json->menu-icon-size-custom->tooltip
+msgid "Use a custom size for the panel icon"
+msgstr "Sử dụng kích thước tùy chỉnh cho biểu tượng bảng điều khiển"
+
+#. 5.8->settings-schema.json->menu-icon-size->description
+#. 4.0->settings-schema.json->menu-icon-size->description
+msgid "Panel icon size (pixels)"
+msgstr "Kích thước biểu tượng bảng điều khiển (pixel)"
+
+#. 5.8->settings-schema.json->menu-icon-size->tooltip
+#. 4.0->settings-schema.json->menu-icon-size->tooltip
+msgid "Choose a custom size for the panel icon"
+msgstr "Chọn kích thước tùy chỉnh cho biểu tượng bảng điều khiển"
+
+#. 5.8->settings-schema.json->menu-label->description
+#. 3.2->settings-schema.json->menu-label->description
+#. 4.0->settings-schema.json->menu-label->description
+msgid "Panel text"
+msgstr "Văn bản bảng điều khiển"
+
+#. 5.8->settings-schema.json->menu-label->tooltip
+#. 3.2->settings-schema.json->menu-label->tooltip
+#. 4.0->settings-schema.json->menu-label->tooltip
+msgid "Text to show beside the panel icon"
+msgstr "Văn bản hiển thị bên cạnh biểu tượng bảng điều khiển"
+
+#. 5.8->settings-schema.json->category-icon-size->description
+#. 5.8->settings-schema.json->category-icon-size->tooltip
+#. 3.2->settings-schema.json->category-icon-size->description
+#. 3.2->settings-schema.json->category-icon-size->tooltip
+#. 4.0->settings-schema.json->category-icon-size->description
+#. 4.0->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size (pixels)"
+msgstr "Kích thước biểu tượng danh mục (pixel)"
+
+#. 5.8->settings-schema.json->apps-list-icon-size->description
+#. 5.8->settings-schema.json->apps-list-icon-size->tooltip
+#. 3.2->settings-schema.json->apps-list-icon-size->description
+#. 3.2->settings-schema.json->apps-list-icon-size->tooltip
+#. 4.0->settings-schema.json->apps-list-icon-size->description
+#. 4.0->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size (pixels)"
+msgstr "Kích thước biểu tượng danh sách ứng dụng (pixel)"
+
+#. 5.8->settings-schema.json->apps-grid-icon-size->description
+#. 5.8->settings-schema.json->apps-grid-icon-size->tooltip
+#. 3.2->settings-schema.json->apps-grid-icon-size->description
+#. 3.2->settings-schema.json->apps-grid-icon-size->tooltip
+#. 4.0->settings-schema.json->apps-grid-icon-size->description
+#. 4.0->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size (pixels)"
+msgstr "Kích thước biểu tượng lưới ứng dụng (pixel)"
+
+#. 5.8->settings-schema.json->sidebar-icon-size->description
+#. 5.8->settings-schema.json->sidebar-icon-size->tooltip
+#. 4.0->settings-schema.json->sidebar-icon-size->description
+#. 4.0->settings-schema.json->sidebar-icon-size->tooltip
+msgid "Sidebar icon size (pixels)"
+msgstr "Kích thước biểu tượng thanh bên (pixel)"
+
+#. 5.8->settings-schema.json->use-box-style->description
+#. 4.0->settings-schema.json->use-box-style->description
+msgid "Use sidebar box style"
+msgstr "Sử dụng kiểu hộp thanh bên"
+
+#. 5.8->settings-schema.json->use-box-style->tooltip
+#. 4.0->settings-schema.json->use-box-style->tooltip
+msgid "Use a sidebar box style"
+msgstr "Sử dụng kiểu hộp thanh bên"
+
+#. 5.8->settings-schema.json->use-tile-style->description
+#. 4.0->settings-schema.json->use-tile-style->description
+msgid "Use tile style"
+msgstr "Sử dụng kiểu ô"
+
+#. 5.8->settings-schema.json->use-tile-style->tooltip
+#. 4.0->settings-schema.json->use-tile-style->tooltip
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Sử dụng kiểu ô cho các nút ứng dụng (Lưu ý: có thể không hoạt động trên một "
+"số chủ đề)"
+
+#. 5.8->settings-schema.json->info1->description
+#. 4.0->settings-schema.json->info1->description
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"• Kéo vào cạnh menu để thay đổi kích thước menu."
+
+#. 5.8->settings-schema.json->info2->description
+#. 4.0->settings-schema.json->info2->description
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"• Kéo và thả các danh mục menu để thay đổi thứ tự của chúng."
+
+#. 5.8->settings-schema.json->info3->description
+#. 4.0->settings-schema.json->info3->description
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+"\n"
+"• Có thể thiết lập và xóa các thư mục dưới dạng danh mục menu bằng cách "
+"nhấp chuột phải vào chúng."
+
+#. 5.8->settings-schema.json->info4->description
+#. 4.0->settings-schema.json->info4->description
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+"\n"
+"• Các tùy chọn phím bổ sung:\n"
+"ctrl-p — Mở hộp thoại thuộc tính trình khởi chạy của ứng dụng hiện đang "
+"được tô sáng.\n"
+"ctrl-d — Mở tệp .desktop của ứng dụng hiện đang được tô sáng trong trình "
+"soạn thảo văn bản mặc định.\n"
+
+#. 3.2->settings-schema.json->providers->title
+msgid "Search Providers"
+msgstr "Nhà cung cấp tìm kiếm"
+
+#. 3.2->settings-schema.json->extensionProvidersSection->title
+msgid "No search provider extensions found"
+msgstr "Không tìm thấy tiện ích mở rộng của nhà cung cấp tìm kiếm nào"
+
+#. 3.2->settings-schema.json->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "Cài đặt tệp gần đây"
+
+#. 3.2->settings-schema.json->enable-autoscroll->tooltip
+msgid "Enable autoscrolling in application list"
+msgstr "Bật tính năng tự động cuộn trong danh sách ứng dụng"
+
+#. 3.2->settings-schema.json->enable-bookmarks->description
+msgid "Show web bookmarks"
+msgstr "Hiển thị dấu trang web"
+
+#. 3.2->settings-schema.json->enable-bookmarks->tooltip
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Hiển thị dấu trang web của trình duyệt trong menu.\n"
+"Lưu ý: Cài đặt gói gir1.2-gda-5.0 để đọc dấu trang Firefox."
+
+#. 3.2->settings-schema.json->enable-windows->description
+msgid "Enable searching of open windows"
+msgstr "Cho phép tìm kiếm các cửa sổ đang mở"
+
+#. 3.2->settings-schema.json->enable-search-providers->description
+msgid "Enable search providers"
+msgstr "Cho phép nhà cung cấp tìm kiếm"
+
+#. 3.2->settings-schema.json->enable-search-providers->tooltip
+msgid "Include search provider results in searches"
+msgstr "Bao gồm kết quả của nhà cung cấp tìm kiếm trong tìm kiếm"
+
+#. 3.2->settings-schema.json->get-providers->description
+msgid "Example Search Providers"
+msgstr "Ví dụ nhà cung cấp dịch vụ tìm kiếm"
+
+#. 3.2->settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr "cột"
+
+#. 3.2->settings-schema.json->apps-grid-column-count->description
+#. 3.2->settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Số lượng cột trong lưới ứng dụng"
+
+#. 3.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->tooltip
+msgid "Show application icons"
+msgstr "Hiển thị biểu tượng ứng dụng"
+
+#. 3.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->tooltip
+msgid "Show category icons"
+msgstr "Hiển thị biểu tượng danh mục"
+
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
+msgid "Show application descriptions under titles"
+msgstr "Hiển thị mô tả ứng dụng dưới tiêu đề"
+
+#. 3.2->settings-schema.json->show-tooltips->description
+#. 3.2->settings-schema.json->show-tooltips->tooltip
+msgid "Show tooltips"
+msgstr "Hiển thị chú giải công cụ"
+
+#. 3.2->settings-schema.json->tooltip-delay->description
+#. 3.2->settings-schema.json->tooltip-delay->tooltip
+msgid "Tooltip delay"
+msgstr "Độ trễ của chú giải công cụ"
+
+#. 3.2->settings-schema.json->enable-custom-menu-height->description
+#. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
+msgid "Use a custom menu height"
+msgstr "Sử dụng chiều cao menu tùy chỉnh"
+
+#. 3.2->settings-schema.json->custom-menu-height->description
+#. 3.2->settings-schema.json->custom-menu-height->tooltip
+msgid "Custom menu height (pixels)"
+msgstr "Chiều cao menu tùy chỉnh (pixel)"

@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-12-24 12:01+0100\n"
+"PO-Revision-Date: 2023-12-24 12:12+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. metadata.json->name
+#: applet.js:51 applet.js:67 applet.js:110 applet.js:246 applet.js:260
+msgid "SSH Launcher"
+msgstr "SSH-Starter"
+
+#: applet.js:110
+msgid "No suitable icon found, falling back to custom icon"
+msgstr "Kein passendes Symbol gefunden. Falle zurück auf angepasstes Symbol"
+
+#: applet.js:116
+msgid "Force Update from SSH config"
+msgstr "Aktualisierung von SSH-Konfiguration erzwingen"
+
+#: applet.js:183
+msgid "Background (-fN)"
+msgstr "Hintergrund (-fN)"
+
+#: applet.js:186
+msgid "Forward X11 (-X)"
+msgstr "X11-Weiterleitung (-X)"
+
+#: applet.js:227
+msgid "ERROR. "
+msgstr "FEHLER."
+
+#: applet.js:230
+msgid "Edit SSH config"
+msgstr "SSH-Konfiguration bearbeiten"
+
+#: applet.js:246
+msgid ""
+"Error: I can't open the terminal.\n"
+"You need to set a default terminal first in Preferred Applications!\n"
+"\n"
+"(More help in Right Click->About->More Info)"
+msgstr ""
+"Fehler: Ich kann das Terminal nicht öffnen.\n"
+"Sie müssen zuerst ein Standardterminal in den Bevorzugten Anwendungen "
+"setzen.\n"
+"\n"
+"(Weitere Hilfe via Rechtsklick->Über->More Info)"
+
+#: applet.js:260
+msgid "Connection opened to "
+msgstr "Verbindung geöffnet zu "
+
+#: applet.js:260
+msgid " using "
+msgstr " unter Verwendung von "
+
+#. metadata.json->description
+msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
+msgstr ""
+"Ein Applet um sich mit SSH-Hosts zu verbinden, die in ~/.ssh/config "
+"konfiguriert wurden"
+
+#. settings-schema.json->headAppearance->description
+msgid "Appearance"
+msgstr "Erscheinungsbild"
+
+#. settings-schema.json->themeIcon->description
+msgid "Use icon from your icon theme"
+msgstr "Symbol vom Symbol-Thema verwenden"
+
+#. settings-schema.json->symbolicIcon->description
+msgid "Use symbolic icon"
+msgstr "Symbolisches Icon verwenden"
+
+#. settings-schema.json->headFunc->description
+msgid "Functionality"
+msgstr "Funktionalität"
+
+#. settings-schema.json->customCommand->description
+msgid "Use custom command for opening terminal"
+msgstr "Eigenen Befehl zum Öffnen des Terminals verwenden"
+
+#. settings-schema.json->customCommand->tooltip
+msgid ""
+"Usually it should end with -e so it will execute the supplied ssh command, "
+"check your chosen terminal's manual."
+msgstr ""
+"Für gewöhnlich sollte dieser mit -e enden, damit der gegebene SSH-Befehl "
+"ausgeführt wird. Konsultieren Sie die Dokumentation Ihres gewählten "
+"Terminals."

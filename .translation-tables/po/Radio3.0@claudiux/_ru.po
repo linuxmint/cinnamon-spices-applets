@@ -1,0 +1,1881 @@
+# RADIO3.0
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2022
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-11 12:31+0200\n"
+"PO-Revision-Date: 2023-03-26 11:24+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+#. applet.js:286
+msgid "unassigned"
+msgstr ""
+
+#. applet.js:287
+msgid "Display Album Art at full size"
+msgstr ""
+
+#. applet.js:420
+msgid "Sun."
+msgstr ""
+
+#. applet.js:420
+msgid "Mon."
+msgstr ""
+
+#. applet.js:420
+msgid "Tue."
+msgstr ""
+
+#. applet.js:420
+msgid "Wed."
+msgstr ""
+
+#. applet.js:420
+msgid "Thu."
+msgstr ""
+
+#. applet.js:420
+msgid "Fri."
+msgstr ""
+
+#. applet.js:420
+msgid "Sat."
+msgstr ""
+
+#. settings-schema.json->category-to-move->options
+#. applet.js:587 applet.js:5528
+msgid "(Blacklist)"
+msgstr ""
+
+#. applet.js:2564
+msgid "Wake Up"
+msgstr ""
+
+#. applet.js:2652
+msgid "Load a sample station list"
+msgstr ""
+
+#. applet.js:2897
+msgid "Categories"
+msgstr ""
+
+#. applet.js:2900
+msgid "Radio Stations"
+msgstr ""
+
+#. applet.js:2911
+msgid "All Categories"
+msgstr ""
+
+#. applet.js:4841 applet.js:5300 applet.js:5318
+msgid "Cancel"
+msgstr ""
+
+#. applet.js:4842
+msgid "Radio3.0 applet"
+msgstr ""
+
+#. applet.js:4845
+msgid "Enable the OSD150 extension"
+msgstr ""
+
+#. applet.js:4846
+msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
+msgstr ""
+
+#. applet.js:4863
+msgid "Download the OSD150 extension"
+msgstr ""
+
+#. applet.js:4864
+msgid ""
+"To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
+"Click on the Download button then search for OSD150 and select the ⬇ button."
+msgstr ""
+
+#. applet.js:5041
+msgid "Configure the Alarm Clock..."
+msgstr ""
+
+#. applet.js:5098
+msgid "Pulse Effects"
+msgstr ""
+
+#. applet.js:5103
+msgid "Easy Effects"
+msgstr ""
+
+#. applet.js:5117
+msgid "Display Station Logo"
+msgstr ""
+
+#. applet.js:5127
+msgid "Album Art desklet settings"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-wake-me-up->description
+#. applet.js:5132
+msgid "Wake me up!"
+msgstr ""
+
+#. applet.js:5141
+msgid "Show Album Art on desktop"
+msgstr ""
+
+#. settings-schema.json->show-volume-level-near-icon->description
+#. applet.js:5160
+msgid "Display volume level near icon"
+msgstr ""
+
+#. applet.js:5297
+msgid "You need the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. applet.js:5298
+msgid ""
+"You can install it by clicking on the first button and then searching for "
+"Album."
+msgstr ""
+
+#. applet.js:5299 applet.js:5317
+msgid "Desklets"
+msgstr ""
+
+#. applet.js:5315
+msgid "You need to activate the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. applet.js:5316
+msgid ""
+"You can activate it by clicking on the first button, then searching for "
+"Album and adding it with button [+]."
+msgstr ""
+
+#. lib/util.js:245
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr ""
+
+#. settings-schema.json->scale-update->description
+#. settings-schema.json->recordings-extract-update->description
+#. lib/volumeslider.js:188
+msgid "%"
+msgstr ""
+
+#. metadata.json->name
+msgid "Radio3.0"
+msgstr ""
+
+#. settings-schema.json->pageAlarmClock->title
+msgid "Alarm Clock"
+msgstr ""
+
+#. settings-schema.json->sectionBlacklist->title
+msgid "Unwanted (blacklist)"
+msgstr ""
+
+#. settings-schema.json->sectionImportRadiopp->title
+msgid "Only for Radio++ users"
+msgstr ""
+
+#. settings-schema.json->sectionBehaviorSettingsWindow->title
+msgid "Settings Window"
+msgstr ""
+
+#. settings-schema.json->sectionBehaviorOSD->title
+msgid "OSD"
+msgstr ""
+
+#. settings-schema.json->sectionBehaviorHorizontalPanel->title
+msgid "Only on horizontal panels"
+msgstr ""
+
+#. settings-schema.json->sectionNetworkProxy->title
+msgid "Proxy"
+msgstr ""
+
+#. settings-schema.json->sectionExperimental->title
+msgid "EXPERIMENTAL"
+msgstr ""
+
+#. settings-schema.json->sectionRecordingCache->title
+msgid "Cache"
+msgstr ""
+
+#. settings-schema.json->sectionYTIgnore->title
+msgid "Ignore YT"
+msgstr ""
+
+#. settings-schema.json->sectionWakeMeUp->title
+msgid "Options"
+msgstr ""
+
+#. settings-schema.json->sectionWorkingDays->title
+msgid "Working Days"
+msgstr ""
+
+#. settings-schema.json->sectionWorkOffDays->title
+msgid "Work-Off Days"
+msgstr ""
+
+#. settings-schema.json->radios->columns->title
+msgid "♥︎"
+msgstr ""
+
+#. settings-schema.json->radios->columns->title
+msgid "♪/➟"
+msgstr ""
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Favicon"
+msgstr ""
+
+#. settings-schema.json->radios->columns->title
+msgid "Artist/Title swap"
+msgstr ""
+
+#. settings-schema.json->blacklist->columns->title
+msgid "Blacklisted URL"
+msgstr ""
+
+#. settings-schema.json->import-radiopp-button->description
+msgid "Import your stations from Radio++"
+msgstr ""
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "♪"
+msgstr ""
+
+#. settings-schema.json->import-blacklist-button->description
+msgid "Blacklist selected items from this list"
+msgstr ""
+
+#. settings-schema.json->maximize-vertically->description
+msgid "Vertical maximization"
+msgstr ""
+
+#. settings-schema.json->maximize-vertically->tooltip
+msgid ""
+"When this option is checked, this Settings Window will be maximized "
+"vertically the next time it is opened."
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-minimalBitrate->options
+msgid "0"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-limit->options
+msgid "10"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "15"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "20"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "25"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "30"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+msgid "35"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "40"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+msgid "45"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->yt-progress-interval->options
+#. settings-schema.json->search-limit->options
+msgid "50"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+msgid "55"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+msgid "60"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+msgid "65"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+msgid "70"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+msgid "75"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+msgid "80"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+msgid "85"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+msgid "90"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+msgid "95"
+msgstr ""
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->yt-progress-interval->options
+#. settings-schema.json->search-limit->options
+msgid "100"
+msgstr ""
+
+#. settings-schema.json->volume-step->options
+msgid "±0%"
+msgstr ""
+
+#. settings-schema.json->volume-step->options
+msgid "±1%"
+msgstr ""
+
+#. settings-schema.json->volume-step->options
+msgid "±2%"
+msgstr ""
+
+#. settings-schema.json->volume-step->options
+msgid "±3%"
+msgstr ""
+
+#. settings-schema.json->volume-step->options
+msgid "±4%"
+msgstr ""
+
+#. settings-schema.json->volume-step->options
+msgid "±5%"
+msgstr ""
+
+#. settings-schema.json->volume-magnetic-on->description
+msgid "Magnetize all multiples of 25%"
+msgstr ""
+
+#. settings-schema.json->volume-show-osd->description
+msgid "Show OSD while changing volume"
+msgstr ""
+
+#. settings-schema.json->volume-show-osd->tooltip
+msgid "Should OSD (On-Screen Display) be displayed when changing volume?"
+msgstr ""
+
+#. settings-schema.json->volume-show-osd-starting-radio->description
+msgid "Show volume OSD when changing radio station"
+msgstr ""
+
+#. settings-schema.json->show-percent-char-in-osd->description
+msgid "Show '%' in OSD"
+msgstr ""
+
+#. settings-schema.json->show-horizontal-osd->description
+msgid "Show horizontal OSD"
+msgstr ""
+
+#. settings-schema.json->recent-number->options
+msgid "1"
+msgstr ""
+
+#. settings-schema.json->recent-number->options
+msgid "2"
+msgstr ""
+
+#. settings-schema.json->recent-number->options
+msgid "3"
+msgstr ""
+
+#. settings-schema.json->recent-number->options
+msgid "4"
+msgstr ""
+
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-limit->options
+msgid "5"
+msgstr ""
+
+#. settings-schema.json->recent-number->options
+msgid "6"
+msgstr ""
+
+#. settings-schema.json->recent-number->options
+msgid "7"
+msgstr ""
+
+#. settings-schema.json->recent-number->options
+msgid "8"
+msgstr ""
+
+#. settings-schema.json->recent-number->options
+msgid "9"
+msgstr ""
+
+#. settings-schema.json->show-by-category->description
+msgid "Display the Station list beside the Category list"
+msgstr ""
+
+#. settings-schema.json->show-by-category->tooltip
+msgid ""
+"Checked: Hover (without clicking) over a Category to display its list of "
+"Stations; then select your station.\n"
+"Unchecked: Single list containing each category followed by its stations."
+msgstr ""
+
+#. settings-schema.json->shortcut-radio-on-off->description
+msgid "Radio ON/OFF"
+msgstr ""
+
+#. settings-schema.json->shortcut-next-recent-radio->description
+msgid "Next station"
+msgstr ""
+
+#. settings-schema.json->shortcut-next-recent-radio->tooltip
+msgid "Next station recently listened to"
+msgstr ""
+
+#. settings-schema.json->shortcut-previous-recent-radio->description
+msgid "Previous station"
+msgstr ""
+
+#. settings-schema.json->shortcut-previous-recent-radio->tooltip
+msgid "Previous station recently listened to"
+msgstr ""
+
+#. settings-schema.json->show-favicon->description
+msgid "Display the logo of the radio station listened to"
+msgstr ""
+
+#. settings-schema.json->show-favicon->tooltip
+msgid "Replace this applet icon with the radio station logo, if it exists."
+msgstr ""
+
+#. settings-schema.json->image-resolution->description
+msgid "Quality of downloaded Album Art"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "Max Resolution"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "High Quality"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "Medium"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "Standard"
+msgstr ""
+
+#. settings-schema.json->image-resolution->tooltip
+msgid ""
+"Default: High Quality. Choose a value corresponding to your Network Quality."
+msgstr ""
+
+#. settings-schema.json->http-proxy->description
+msgid "HTTP Proxy"
+msgstr ""
+
+#. settings-schema.json->database-favorite->description
+msgid "Your favorite database:"
+msgstr ""
+
+#. settings-schema.json->database-favorite->options
+msgid "Random"
+msgstr ""
+
+#. settings-schema.json->cache-no-cache->description
+msgid "No cache"
+msgstr ""
+
+#. settings-schema.json->cache-no-cache->tooltip
+msgid ""
+"Checking this option limits memory usage, but no longer allows the user to "
+"rewind the cache (using the sound150@claudiux applet)."
+msgstr ""
+
+#. settings-schema.json->cache-minutes->description
+msgid ""
+"Minutes to cache\n"
+"0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
+msgstr ""
+
+#. settings-schema.json->cache-on-disk->description
+msgid ""
+"Cache on disk\n"
+"(Write packet data to a temporary file, instead of keeping them in memory.)"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->description
+msgid "Stream cache size"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->tooltip
+msgid ""
+"The amount of stream cache. Default: 10 MiB.\n"
+"Beware, setting this to a large value can reduce performance."
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "No limit"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "64 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "128 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "256 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "512 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "1 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "2 Mib"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "3 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "4 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "5 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "10 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "20 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "30 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "40 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "50 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "100 MiB"
+msgstr ""
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "FLAC"
+msgstr ""
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "MP3"
+msgstr ""
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "OGG"
+msgstr ""
+
+#. settings-schema.json->recording-format->options
+msgid "RAW"
+msgstr ""
+
+#. settings-schema.json->recording-format->options
+msgid "WAV"
+msgstr ""
+
+#. settings-schema.json->ignoreYT->description
+msgid "Ignore Youtube features"
+msgstr ""
+
+#. settings-schema.json->ignoreYT->tooltip
+msgid ""
+"Ignoring Youtube features reduces CPU load. But loading album art becomes "
+"impossible."
+msgstr ""
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Brave"
+msgstr ""
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chrome"
+msgstr ""
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium"
+msgstr ""
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (basictext)"
+msgstr ""
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (gnomekeyring)"
+msgstr ""
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (kwallet)"
+msgstr ""
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Firefox"
+msgstr ""
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Opera"
+msgstr ""
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Vivaldi"
+msgstr ""
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "150"
+msgstr ""
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "200"
+msgstr ""
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "300"
+msgstr ""
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "400"
+msgstr ""
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "500"
+msgstr ""
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "600"
+msgstr ""
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "750"
+msgstr ""
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "1000"
+msgstr ""
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "2000"
+msgstr ""
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "3000"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Afghanistan - AF"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Åland Islands - AX"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Albania - AL"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Algeria - DZ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "American Samoa - AS"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Andorra - AD"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Angola - AO"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Anguilla - AI"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Antarctica - AQ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Antigua And Barbuda - AG"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Argentina - AR"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Armenia - AM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Aruba - AW"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Australia - AU"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Austria - AT"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Azerbaijan - AZ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Bahamas - BS"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Bahrain - BH"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Bangladesh - BD"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Barbados - BB"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Belarus - BY"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Belgium - BE"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Belize - BZ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Benin - BJ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Bermuda - BM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Bhutan - BT"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Bolivia (Plurinational State Of) - BO"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Bonaire (Sint Eustatius And Saba) - BQ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Bosnia And Herzegovina - BA"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Botswana - BW"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Bouvet Island - BV"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Brazil - BR"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "British Indian Ocean Territory - IO"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Brunei Darussalam - BN"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Bulgaria - BG"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Burkina Faso - BF"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Burundi - BI"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Cambodia - KH"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Cameroon - CM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Canada - CA"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Cape Verde - CV"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Cayman Islands - KY"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Central African Republic - CF"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Chad - TD"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Chile - CL"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "China - CN"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Christmas Island - CX"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Cocos (Keeling) Islands - CC"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Colombia - CO"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Comoros - KM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Congo - CG"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Congo (The Democratic Republic Of The) - CD"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Cook Islands - CK"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Costa Rica - CR"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Côte D'Ivoire - CI"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Croatia - HR"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Cuba - CU"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Curaçao - CW"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Cyprus - CY"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Czech Republic - CZ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Denmark - DK"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Djibouti - DJ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Dominica - DM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Dominican Republic - DO"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Ecuador - EC"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Egypt - EG"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "El Salvador - SV"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Equatorial Guinea - GQ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Eritrea - ER"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Estonia - EE"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Ethiopia - ET"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Falkland Islands (Malvinas) - FK"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Faroe Islands - FO"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Fiji - FJ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Finland - FI"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "France - FR"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "French Guiana - GF"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "French Polynesia - PF"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "French Southern Territories - TF"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Gabon - GA"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Gambia - GM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Georgia - GE"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Germany - DE"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Ghana - GH"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Gibraltar - GI"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Greece - GR"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Greenland - GL"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Grenada - GD"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Guadeloupe - GP"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Guam - GU"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Guatemala - GT"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Guernsey - GG"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Guinea - GN"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Guinea-Bissau - GW"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Guyana - GY"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Haiti - HT"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Heard Island And Mcdonald Islands - HM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Holy See (Vatican City State) - VA"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Honduras - HN"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Hong Kong - HK"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Hungary - HU"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Iceland - IS"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "India - IN"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Indonesia - ID"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Iran (Islamic Republic Of) - IR"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Iraq - IQ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Ireland - IE"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Isle Of Man - IM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Israel - IL"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Italy - IT"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Jamaica - JM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Japan - JP"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Jersey - JE"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Jordan - JO"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Kazakhstan - KZ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Kenya - KE"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Kiribati - KI"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Korea (Democratic People'S Republic Of) - KP"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Korea (Republic Of) - KR"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Kuwait - KW"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Kyrgyzstan - KG"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Lao People'S Democratic Republic - LA"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Latvia - LV"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Lebanon - LB"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Lesotho - LS"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Liberia - LR"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Libya - LY"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Liechtenstein - LI"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Lithuania - LT"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Luxembourg - LU"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Macao - MO"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Macedonia (The Former Yugoslav Republic Of) - MK"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Madagascar - MG"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Malawi - MW"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Malaysia - MY"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Maldives - MV"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Mali - ML"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Malta - MT"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Marshall Islands - MH"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Martinique - MQ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Mauritania - MR"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Mauritius - MU"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Mayotte - YT"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Mexico - MX"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Micronesia (Federated States Of) - FM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Moldova (Republic Of) - MD"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Monaco - MC"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Mongolia - MN"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Montenegro - ME"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Montserrat - MS"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Morocco - MA"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Mozambique - MZ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Myanmar - MM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Namibia - NA"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Nauru - NR"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Nepal - NP"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Netherlands - NL"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "New Caledonia - NC"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "New Zealand - NZ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Nicaragua - NI"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Niger - NE"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Nigeria - NG"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Niue - NU"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Norfolk Island - NF"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Northern Mariana Islands - MP"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Norway - NO"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Oman - OM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Pakistan - PK"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Palau - PW"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Palestine (State Of) - PS"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Panama - PA"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Papua New Guinea - PG"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Paraguay - PY"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Peru - PE"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Philippines - PH"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Pitcairn - PN"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Poland - PL"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Portugal - PT"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Puerto Rico - PR"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Qatar - QA"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Réunion - RE"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Romania - RO"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Rwanda - RW"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Saint Barthélemy - BL"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Saint Helena (Ascension And Tristan Da Cunha) - SH"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Saint Kitts And Nevis - KN"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Saint Lucia - LC"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Saint Martin (French Part) - MF"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Saint Pierre And Miquelon - PM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Saint Vincent And The Grenadines - VC"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Samoa - WS"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "San Marino - SM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Sao Tome And Principe - ST"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Saudi Arabia - SA"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Senegal - SN"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Serbia - RS"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Seychelles - SC"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Sierra Leone - SL"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Singapore - SG"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Sint Maarten (Dutch Part) - SX"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Slovakia - SK"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Slovenia - SI"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Solomon Islands - SB"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Somalia - SO"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "South Africa - ZA"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "South Georgia And The South Sandwich Islands - GS"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "South Sudan - SS"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Spain - ES"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Sri Lanka - LK"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Sudan - SD"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Suriname - SR"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Svalbard And Jan Mayen - SJ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Swaziland - SZ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Sweden - SE"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Switzerland - CH"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Syrian Arab Republic - SY"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Taiwan (Province Of China) - TW"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Tajikistan - TJ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Tanzania (United Republic Of) - TZ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Thailand - TH"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Timor-Leste - TL"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Togo - TG"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Tokelau - TK"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Tonga - TO"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Trinidad And Tobago - TT"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Tunisia - TN"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Turkey - TR"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Turkmenistan - TM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Turks And Caicos Islands - TC"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Tuvalu - TV"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Uganda - UG"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Ukraine - UA"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "United Arab Emirates - AE"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "United Kingdom - GB"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "United States - US"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "United States Minor Outlying Islands - UM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Uruguay - UY"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Uzbekistan - UZ"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Vanuatu - VU"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Venezuela (Bolivarian Republic Of) - VE"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Viet Nam - VN"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Virgin Islands (British) - VG"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Virgin Islands (U.S.) - VI"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Wallis And Futuna - WF"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Western Sahara - EH"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Yemen - YE"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Zambia - ZM"
+msgstr ""
+
+#. settings-schema.json->search-country->options
+msgid "Zimbabwe - ZW"
+msgstr ""
+
+#. settings-schema.json->search-codec->options
+msgid "AAC"
+msgstr ""
+
+#. settings-schema.json->search-codec->options
+msgid "AAC+"
+msgstr ""
+
+#. settings-schema.json->search-codec->options
+msgid "FLV"
+msgstr ""
+
+#. settings-schema.json->search-codec->options
+msgid "AAC,H.264"
+msgstr ""
+
+#. settings-schema.json->search-codec->options
+msgid "AAC+,H.264"
+msgstr ""
+
+#. settings-schema.json->search-codec->options
+msgid "MP3,H.264"
+msgstr ""
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "32"
+msgstr ""
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "48"
+msgstr ""
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "64"
+msgstr ""
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "96"
+msgstr ""
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "128"
+msgstr ""
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "192"
+msgstr ""
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "256"
+msgstr ""
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "320"
+msgstr ""
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "512"
+msgstr ""
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "640"
+msgstr ""
+
+#. settings-schema.json->horizontal-show-name->description
+msgid "Display radio name"
+msgstr ""
+
+#. settings-schema.json->horizontal-show-title->description
+msgid "Display title"
+msgstr ""
+
+#. settings-schema.json->horizontal-max-title-length->description
+msgid "Maximum title length"
+msgstr ""
+
+#. settings-schema.json->horizontal-max-title-length->tooltip
+msgid "0 means no maximum"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-wake-me-softly->description
+msgid "Wake me up softly"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-wake-me-softly->tooltip
+msgid "By checking this box, the sound volume gradually increases."
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-begin->description
+msgid "Initial volume (%)"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-end->description
+msgid "Final volume (%)"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-end->tooltip
+msgid "The final volume must be greater than or equal to the initial volume."
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-transition->description
+msgid "Transition duration (seconds)"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Sunday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Monday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Tuesday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Wednesday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Thursday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Friday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Saturday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days-time->description
+#. settings-schema.json->alarm-clock-workoff-days-time->description
+msgid "Wake-Up Time"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days-radio-button->description
+#. settings-schema.json->alarm-clock-workoff-days-radio-button->description
+msgid "Last-listened-to radio station"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-tink-on->description
+msgid "Activate tink to ensure speakers are awake"
+msgstr ""

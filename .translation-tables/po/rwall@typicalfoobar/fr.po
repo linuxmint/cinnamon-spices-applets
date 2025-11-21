@@ -1,0 +1,83 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-28 19:32+0800\n"
+"PO-Revision-Date: 2023-04-27 16:21+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:89
+msgid "Use Cron"
+msgstr "Utiliser Cron"
+
+#: applet.js:94
+msgid "Next Wallpaper"
+msgstr "Fond d'écran suivant"
+
+#: applet.js:99
+msgid "Save Wallpaper"
+msgstr "Enregistrer le fond d'écran"
+
+#. rwall@typicalfoobar->metadata.json->description
+msgid ""
+"Random Wallpaper Changer\n"
+"Version: 1.0.1"
+msgstr ""
+"Changeur aléatoire de fonds d'écran\n"
+"Version : 1.0.1"
+
+#. rwall@typicalfoobar->metadata.json->name
+msgid "rwall"
+msgstr "rwall"
+
+#. rwall@typicalfoobar->settings-schema.json->head2->description
+msgid "Random Wallpaper Settings"
+msgstr "Préférences de Fonds d'écran aléatoires"
+
+#. rwall@typicalfoobar->settings-schema.json->head1->description
+msgid "Wallpaper Saving"
+msgstr "Sauvegarde du fond d'écran"
+
+#. rwall@typicalfoobar->settings-schema.json->resolution-string->description
+msgid "The resolution of the wallpaper:"
+msgstr "Résolution du fond d'écran :"
+
+#. rwall@typicalfoobar->settings-schema.json->query-string->description
+msgid "Word(s) to use when searching for wallpapers:"
+msgstr "Mot(s) à utiliser lors de la recherche de fonds d'écran :"
+
+#. rwall@typicalfoobar->settings-schema.json->wallpaper-save-
+#. directory->description
+msgid ""
+"The location to save wallpapers to when the \"Save Wallpaper\" button is "
+"clicked:"
+msgstr ""
+"Emplacement où enregistrer les fonds d'écran lorsque le bouton "
+"\"Enregistrer le fond d'écran\" est cliqué :"
+
+#. rwall@typicalfoobar->settings-schema.json->cron-frequency-
+#. string->description
+msgid "Change Frequency (cron syntax):"
+msgstr "Modifier la fréquence (syntaxe cron) :"
+
+#. rwall@typicalfoobar->settings-schema.json->update-cron-button->description
+msgid "Update Cron (click here if you modified the Change Frequency)"
+msgstr ""
+"Mettre à jour Cron (cliquez ici si vous avez modifié la fréquence de "
+"changement)"
+
+#. rwall@typicalfoobar->settings-schema.json->update-cron-button->tooltip
+msgid "Update the cron job with these settings"
+msgstr "Mettre à jour la tâche cron avec ces paramètres"

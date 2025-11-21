@@ -1,0 +1,246 @@
+# SPICESPY
+# This file is put in the public domain.
+# claudiux, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: SpiceSpy@claudiux 3.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-25 23:34+0200\n"
+"PO-Revision-Date: 2025-09-28 16:08+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:201
+msgid "score"
+msgstr "puntuació"
+
+#. applet.js:213
+msgid "comments"
+msgstr "comentaris"
+
+#. applet.js:225
+msgid "recent issues"
+msgstr "incidències recents"
+
+#. applet.js:237
+msgid "translations"
+msgstr "traduccions"
+
+#. applet.js:312
+msgid "Reload icons"
+msgstr "Recarregar icones"
+
+#. applet.js:318
+msgid "Visit website"
+msgstr "Visitar el lloc web"
+
+#. applet.js:826
+msgid "Spices"
+msgstr "Espècies"
+
+#. applet.js:915
+msgid "Mark all as read"
+msgstr "Marcar tots com llegits"
+
+#. applet.js:926
+msgid "Refresh"
+msgstr "Actualitzar"
+
+#. applet.js:938
+msgid "Refreshing in progress"
+msgstr "Recàrrega en procés"
+
+#. applet.js:949
+msgid "Configure..."
+msgstr "Configurar..."
+
+#. metadata.json->name
+msgid "SpiceSpy"
+msgstr "SpiceSpy"
+
+#. metadata.json->description
+msgid ""
+"Notifies you when there's a change to your favorite Spices on the website."
+msgstr ""
+"Us notifica quan hi ha algun canvi en les vostres Espècies preferides al "
+"lloc web."
+
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr "General"
+
+#. settings-schema.json->pageOptions->title
+#. settings-schema.json->section1->title
+msgid "Options"
+msgstr "Opcions"
+
+#. settings-schema.json->section2->title
+msgid "List of authors of the Spices you are interested in"
+msgstr "Llista d'autors de les Espècies que us interessen"
+
+#. settings-schema.json->section3->title
+msgid "List of specific Spices you are interested in"
+msgstr "Llista d'espècies específiques que us interessen"
+
+#. settings-schema.json->update-interval-hours->description
+msgid "Update interval"
+msgstr "Interval d'actualització"
+
+#. settings-schema.json->update-interval-hours->units
+msgid "hours"
+msgstr "hores"
+
+#. settings-schema.json->standard-opacity->description
+msgid "Opacity in absence of change"
+msgstr "Opacitat en absència de canvis"
+
+#. settings-schema.json->color-on-change->description
+msgid "Color on change"
+msgstr "Color en canviar"
+
+#. settings-schema.json->show-icon-in-menu->description
+msgid "Show each Spice icon in the menu"
+msgstr "Mostrar la icona de cada Espècia al menú"
+
+#. settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Mida de la icona"
+
+#. settings-schema.json->icon-size->options
+msgid "16"
+msgstr "16"
+
+#. settings-schema.json->icon-size->options
+msgid "22"
+msgstr "22"
+
+#. settings-schema.json->icon-size->options
+msgid "24"
+msgstr "24"
+
+#. settings-schema.json->icon-size->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->icon-size->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->icon-size->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->icon-size->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->icon-size->options
+msgid "128"
+msgstr "128"
+
+#. settings-schema.json->show-translations->description
+msgid "Show number of translations in the menu"
+msgstr "Mostrar el número de traduccions al menú"
+
+#. settings-schema.json->show-commits->description
+msgid "Show available updates in the menu"
+msgstr "Mostrar les actualitzacions disponibles al menú"
+
+#. settings-schema.json->show-issues->description
+msgid "Show number of issues in the menu"
+msgstr "Mostrar el número d'incidències al menú"
+
+#. settings-schema.json->sort-by->description
+msgid "Sort by"
+msgstr "Ordenar per"
+
+#. settings-schema.json->sort-by->options
+msgid "Translated name"
+msgstr "Nom traduit"
+
+#. settings-schema.json->sort-by->options
+msgid "Original name"
+msgstr "Nom original"
+
+#. settings-schema.json->sort-by->options
+#. settings-schema.json->uuid-list->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. settings-schema.json->sort-by->options
+msgid "Score (bottom-up)"
+msgstr "Puntuació (de menys a més)"
+
+#. settings-schema.json->sort-by->options
+msgid "Score (top-down)"
+msgstr "Puntuació (de més a menys)"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of comments (bottom-up)"
+msgstr "Número de comentaris (de menys a més)"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of comments (top-down)"
+msgstr "Número de comentaris (de més a menys)"
+
+#. settings-schema.json->show-uuid->description
+msgid "Show UUID instead of name"
+msgstr "Mostrar UUID en comptes del nom"
+
+#. settings-schema.json->translate-name->description
+msgid "Show translated name if available"
+msgstr "Mostrar el nom traduit si està disponible"
+
+#. settings-schema.json->display-on-panel->description
+msgid "If there is nothing new"
+msgstr "Si no hi ha res nou"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Show icon and label"
+msgstr "Mostrar la icona i l'etiqueta"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Show icon only"
+msgstr "Mostrar només la icona"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Do not show anything"
+msgstr "No mostrar res"
+
+#. settings-schema.json->useful-only->description
+msgid "Show only non-zero values in panel"
+msgstr "Mostrar només valors diferents de 0 al panell"
+
+#. settings-schema.json->author-list->columns->title
+msgid "GitHub user name"
+msgstr "Nom d'usuari de Github"
+
+#. settings-schema.json->button-my-spices->description
+msgid "Add all the Spices I use"
+msgstr "Afegir totes les Espècies en ús"
+
+#. settings-schema.json->label-reload->description
+msgid ""
+"There's no need to include Spices maintained by members of the Authors list "
+"in the UUID list.\n"
+"Once your lists are correct, you can reload this applet to speed up the "
+"process.\n"
+"Just don't do it too often."
+msgstr ""
+"No cal incloure espècies mantingudes per membres de la llista d'autors a la "
+"llista d'UUID.\n"
+"Quan les vostres llistes siguin correctes, podeu recarregar aquesta "
+"miniaplicació per a accelerar el procés.\n"
+"No és recomanable recarregar-la massa sovint."
+
+#. settings-schema.json->button-reload->description
+msgid "Reload this applet"
+msgstr "Recarregar aquesta miniaplicació"

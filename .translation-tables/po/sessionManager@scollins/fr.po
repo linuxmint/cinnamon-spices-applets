@@ -1,0 +1,153 @@
+# SESSION MANAGER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# collinss, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sessionManager@scollins 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-27 10:12+0200\n"
+"PO-Revision-Date: 2025-10-19 09:30+0200\n"
+"Last-Translator: FabRCT\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:154
+msgid "Session"
+msgstr "Session"
+
+#. applet.js:240
+msgid "Lock Screen"
+msgstr "Verrouiller l'écran"
+
+#. applet.js:246
+msgid "Switch User"
+msgstr "Changer d'utilisateur"
+
+#. applet.js:252
+msgid "Guest Session"
+msgstr "Session Invité"
+
+#. applet.js:258
+msgid "Log Off"
+msgstr "Fermer la session"
+
+#. applet.js:269
+msgid "Suspend"
+msgstr "Suspendre toute activité"
+
+#. applet.js:275
+msgid "Sleep"
+msgstr "Mettre en sommeil"
+
+#. applet.js:281
+msgid "Hibernate"
+msgstr "Mettre en hibernation"
+
+#. applet.js:292
+msgid "Restart"
+msgstr "Redémarrer"
+
+#. applet.js:298
+msgid "Shut Down"
+msgstr "Arrêter"
+
+#. metadata.json->name
+msgid "Session Manager"
+msgstr "Session Manager (Gestionnaire de session)"
+
+#. metadata.json->description
+msgid "Provides easy access to shut down, restart, etc"
+msgstr "Accès rapide aux fonctions Arrêter, Redémarrer, etc"
+
+#. metadata.json->comments
+msgid ""
+"Session Manager is an applet that provides easy access to session controls "
+"such as shut down, restart, log off, switch user, etc. It has been tested in "
+"Arch, Fedora and Linux Mint, and supports a wide variety of software "
+"configurations. If your particular configuration is not supported, please "
+"submit a feature request on github, and I will add it at my earliest "
+"convenience."
+msgstr ""
+"Session Manager (Gestionnaire de session) est une applet qui fournit un "
+"accès facile aux contrôles de session tels que l'arrêt, le redémarrage, la "
+"déconnexion, le changement d'utilisateur, etc. Il a été testé dans Arch, "
+"Fedora et Linux Mint et supporte une grande variété de configurations "
+"logicielles. Si votre configuration particulière n'est pas supportée, "
+"veuillez soumettre une demande de fonctionnalité sur Github, et je "
+"l'ajouterai dans les meilleurs délais."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Auteur"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Paramètres généraux"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr "Icône sur le panneau"
+
+#. settings-schema.json->panelText->description
+msgid "Panel Text"
+msgstr "Texte sur le panneau"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Icon Size"
+msgstr "Taille de l'icône"
+
+#. settings-schema.json->symbolicMenuIcons->description
+msgid "Symbolic icons in menu"
+msgstr "Icônes symboliques dans le menu"
+
+#. settings-schema.json->menuOptions->description
+msgid "Menu Options"
+msgstr "Options de menu"
+
+#. settings-schema.json->showLockScreen->description
+msgid "Show Lock Screen option"
+msgstr "Afficher l'option Verrouiller l'écran"
+
+#. settings-schema.json->showSwitchUser->description
+msgid "Show Switch User option"
+msgstr "Afficher l'option Écran de verrouillage"
+
+#. settings-schema.json->showGuestSession->description
+msgid "Show Guest Session option"
+msgstr "Afficher l'option Session Invité"
+
+#. settings-schema.json->showLogOff->description
+msgid "Show Log Off option"
+msgstr "Afficher l'option Déconnexion"
+
+#. settings-schema.json->showSuspend->description
+msgid "Show Suspend option"
+msgstr "Afficher l'option Suspendre toute activité"
+
+#. settings-schema.json->showSleep->description
+msgid "Show Sleep option"
+msgstr "Afficher l'option Mettre en sommeil"
+
+#. settings-schema.json->showHibernate->description
+msgid "Show Hibernate option"
+msgstr "Afficher l'option Mettre en hibernation"
+
+#. settings-schema.json->showRestart->description
+msgid "Show Restart option"
+msgstr "Afficher l'option Redémarrage"
+
+#. settings-schema.json->showShutDown->description
+msgid "Show Shut Down option"
+msgstr "Afficher l'option Arrêter"
