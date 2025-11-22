@@ -26,3 +26,18 @@ export type Command = {
 };
 
 export type Keybinding = `${string}::${'' | `${string}`}`;
+
+export interface Disposable {
+    /** Releases acquired resources */
+    dispose(): void;
+}
+
+export interface Observer extends Disposable {
+    callback: ((value: any) => void) | null;
+
+    /** Note: it doesn't do anything if already enabled. */
+    enable(): void;
+
+    /** Note: it doesn't do anything if already disabled. */
+    disable(): void;
+}

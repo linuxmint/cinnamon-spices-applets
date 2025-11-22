@@ -16,9 +16,9 @@ import { sleep } from '../../lib/utils';
 import { Sleep_events_listener } from '../../lib/sys/Sleep_events_listener/Sleep_events_listener';
 import { System_color_scheme } from '../../lib/sys/System_color_scheme';
 import { Themes_handler } from './Themes_handler';
-import { Time_change_listener } from '../../lib/sys/Time_change_listener';
 import { Time_of_day } from '../../lib/core/Time_of_day';
 import { Twilights_handler } from './Twilights_handler';
+import { Wall_clock_adjustment_monitor } from '../../lib/sys/Wall_clock_adjustment_monitor';
 
 const DURATION_TO_AWAIT_BEFORE_UPDATING_DERIVED_SETTING = 2000; // milliseconds (ms)
 
@@ -221,27 +221,24 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
         appearance_handler.manual_is_dark = appearance_handler.is_dark;
     });
 
-    const time_change_listener = new Time_change_listener( // Throws
-        () => mobx.runInAction(() => {
-            twilights_handler.update();
-            appearance_handler.update_time();
-            if (scheduler.is_set && scheduler.get_if_should_be_expired()) // TODO: need of the same logic at startup ?
-                appearance_handler.sync_is_dark();
-        })
-    );
+    const wall_clock_monitor = new Wall_clock_adjustment_monitor();
+    wall_clock_monitor.callback = () => mobx.runInAction(() => {
+        twilights_handler.update();
+        appearance_handler.update_time();
+        if (scheduler.is_set && scheduler.get_if_should_be_expired()) // TODO: need of the same logic at startup ?
+            appearance_handler.sync_is_dark();
+    });
 
     const sleep_events_listener = new Sleep_events_listener(
         // on sleep entries:
-        () => {
-            time_change_listener.disable();
-        },
+        () => wall_clock_monitor.disable(),
         // on wake-up unlocked:
         () => mobx.runInAction(() => {
             twilights_handler.update();
             appearance_handler.update_time();
             if (scheduler.is_set && scheduler.get_if_should_be_expired()) // TODO: need of the same logic at startup ?
                 appearance_handler.sync_is_dark();
-            time_change_listener.enable();
+            wall_clock_monitor.enable();
         })
     );
 
@@ -259,11 +256,11 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
             appearance_handler.update_time();
             appearance_handler.sync_is_dark();
             schedule_the_event();
-            time_change_listener.enable();
+            wall_clock_monitor.enable();
             sleep_events_listener.enable();
         } else {
             scheduler.unset_the_event();
-            time_change_listener.disable();
+            wall_clock_monitor.disable();
             sleep_events_listener.disable();
         }
     });
@@ -298,11 +295,11 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
         scheduler.dispose();
         sleep_events_listener.dispose();
         system_color_scheme.dispose();
-        time_change_listener.dispose();
+        wall_clock_monitor.dispose();
         settings.finalize();
     };
 
     system_color_scheme.enable();
-    time_change_listener.enable();
+    wall_clock_monitor.enable();
     sleep_events_listener.enable();
 }
