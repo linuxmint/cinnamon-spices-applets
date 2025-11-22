@@ -23,14 +23,15 @@ Extensive rewrite to enable new features – some bugs may have been introduced.
 - Themes fields to be read-only.
 - Timezone coordinates local database to be the same as the ones used by Cinnamon Settings Daemon's Night Light.
   - Note that there can still be a difference in the twilight times as their calculation is done differently.
-- Improved logging and notifications types for better look and clarity.
+- Improvement of logging and notifications types for better look and clarity.
 
 ### Changed (internal)
 
 - Use of MobX for scalable reactive state management.
 - Use of Vite transpilation for better imports handling, use of external libraries and bundling.
-- Use of TypeScript for better typing expressivity.
+- Use of TypeScript for more concise typing.
 - Use of Vitest for unit testing.
+- Replacement of the C++ wall-clock adjustment (passive) listener for a simpler JavaScript monitor counterpart (active polling).
 
 ## [1.2.6] - 2025-05-18 - [#7257](https://github.com/linuxmint/cinnamon-spices-applets/pull/7257)
 

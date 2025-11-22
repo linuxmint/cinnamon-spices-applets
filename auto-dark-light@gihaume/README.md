@@ -16,7 +16,7 @@ The appearance consists of:
 - Always sync instantaneously with system changes of color scheme (appearance), region/city and time (useful in e.g. after a sleep wake up).
 - Automatic appearance switch can be disabled.
 - Dark/light appearance can always be switched manually.
-- Everything is fully event-listening and scheduling based (no active polling).
+- Almost everything is fully event-listening and scheduling based (no active monitoring, except for wall-clock adjustment).
 
 ## Applet icons legend
 
@@ -40,10 +40,6 @@ The appearance consists of:
     <img src="https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/auto-dark-light@gihaume/files/auto-dark-light@gihaume/5.8/icons/on-error-symbolic.svg" alt="Error" width="75" height="75" style="margin-right: 20px;">
     The applet is in an error state and is not functional. A notification should have been shown giving more details about the error. If it has disappeared, it is possible to find it in the Looking Glass logs: press Alt+F2 and enter 'lg'.
 </div>
-
-## Dependencies
-
-`make` and `g++`, which can be installed on Debian-based system with `sudo apt install make g++`.
 
 ## Feedback
 

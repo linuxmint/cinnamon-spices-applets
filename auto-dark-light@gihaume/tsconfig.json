@@ -4,12 +4,16 @@
         "lib": ["ES2022"],
         "module": "es2022",
         "moduleResolution": "bundler",
+        "moduleDetection": "force",
+        "allowJs": true,
+        "checkJs":true,
         "strict": true,
 		"types": [
 			"@ci-types/cjs"
 		]
     },
     "include": [
-        "src/**/*.ts"
+        "src/**/*.ts",
+        "src/**/*.js"
     ]
 }

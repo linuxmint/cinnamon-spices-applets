@@ -4260,10 +4260,10 @@ class Appearance_handler {
     makeAutoObservable(this);
   }
 }
-const { Gio: Gio$8 } = imports.gi;
+const { Gio: Gio$7 } = imports.gi;
 const settings$2 = {
-  background: Gio$8.Settings.new("org.cinnamon.desktop.background"),
-  slideshow: Gio$8.Settings.new("org.cinnamon.desktop.background.slideshow")
+  background: Gio$7.Settings.new("org.cinnamon.desktop.background"),
+  slideshow: Gio$7.Settings.new("org.cinnamon.desktop.background.slideshow")
 };
 class System_background {
   static get is_slideshow() {
@@ -4339,7 +4339,7 @@ class Background_handler {
       System_background.picture_file = this._settings.dark_background_file;
   }
 }
-const { Gio: Gio$7, GLib: GLib$4 } = imports.gi;
+const { Gio: Gio$6, GLib: GLib$4 } = imports.gi;
 async function launch_command(name, expiry, command) {
   try {
     await _launch_command(command, expiry);
@@ -4351,13 +4351,13 @@ async function launch_command(name, expiry, command) {
 
 ${_("Detail")}${_(":")}
 ` + error.message;
-    else if (error instanceof Gio$7.IOErrorEnum) {
-      if (error.code === Gio$7.IOErrorEnum.TIMED_OUT)
+    else if (error instanceof Gio$6.IOErrorEnum) {
+      if (error.code === Gio$6.IOErrorEnum.TIMED_OUT)
         msg += ` ${_("due to timeout")}.
 
 ${_("Detail")}${_(":")}
 ` + error.message;
-      else if (error.code === Gio$7.IOErrorEnum.FAILED)
+      else if (error.code === Gio$6.IOErrorEnum.FAILED)
         msg += ` ${_("due to an error")}.
 
 ${_("Detail")}${_(":")}
@@ -4373,9 +4373,9 @@ const SIGKILL_TIMEOUT = 10;
 async function _launch_command(command, timeout = 10) {
   const wrapped_command = `timeout --kill-after=${SIGKILL_TIMEOUT} ${timeout}s sh -c ${GLib$4.shell_quote(command)}`;
   const [_ok, argvp] = GLib$4.shell_parse_argv(wrapped_command);
-  const process = new Gio$7.Subprocess({
+  const process = new Gio$6.Subprocess({
     argv: argvp,
-    flags: Gio$7.SubprocessFlags.STDERR_PIPE
+    flags: Gio$6.SubprocessFlags.STDERR_PIPE
   });
   const start_time = Date.now();
   process.init(null);
@@ -4402,25 +4402,25 @@ async function _launch_command(command, timeout = 10) {
     case 0:
       break;
     case TIMEOUT_EXIT_STATUS_SIGTERM:
-      throw new Gio$7.IOErrorEnum({
-        code: Gio$7.IOErrorEnum.TIMED_OUT,
+      throw new Gio$6.IOErrorEnum({
+        code: Gio$6.IOErrorEnum.TIMED_OUT,
         message: `may have been timed out by SIGTERM (GNU 'timeout' exit status ${TIMEOUT_EXIT_STATUS_SIGTERM})`
       });
     case TIMEOUT_EXIT_STATUS_SIGKILL:
-      throw new Gio$7.IOErrorEnum({
-        code: Gio$7.IOErrorEnum.TIMED_OUT,
+      throw new Gio$6.IOErrorEnum({
+        code: Gio$6.IOErrorEnum.TIMED_OUT,
         message: `probably killed by an external SIGKILL (GNU 'timeout' exit status ${TIMEOUT_EXIT_STATUS_SIGKILL})`
       });
     case 1:
       if (timeout > 0 && elapsed_time >= timeout + SIGKILL_TIMEOUT)
-        throw new Gio$7.IOErrorEnum({
-          code: Gio$7.IOErrorEnum.TIMED_OUT,
+        throw new Gio$6.IOErrorEnum({
+          code: Gio$6.IOErrorEnum.TIMED_OUT,
           message: `probably timed out by SIGKILL`
         });
     // no break, needs to stay directly above the default case
     default:
-      throw new Gio$7.IOErrorEnum({
-        code: Gio$7.IOErrorEnum.FAILED,
+      throw new Gio$6.IOErrorEnum({
+        code: Gio$6.IOErrorEnum.FAILED,
         message: stderr ? stderr.trim() : "exit status: " + exit_status
       });
   }
@@ -4525,7 +4525,7 @@ class Keybinding_handler {
     Main.keybindingManager.removeHotKey(this._name);
   }
 }
-const { Gio: Gio$6 } = imports.gi;
+const { Gio: Gio$5 } = imports.gi;
 class Timezone_change_listener {
   _callback_on_change;
   /** @param callback_on_change - The function to be executed when the system timezone changes. */
@@ -4546,7 +4546,7 @@ class Timezone_change_listener {
   _subscribe_to_changes(callback_when_changes) {
     if (this._signal_id)
       this._unsubscribe_to_changes();
-    this._signal_id = Gio$6.DBus.system.signal_subscribe(
+    this._signal_id = Gio$5.DBus.system.signal_subscribe(
       "org.freedesktop.timedate1",
       // sender
       "org.freedesktop.DBus.Properties",
@@ -4557,7 +4557,7 @@ class Timezone_change_listener {
       // object_path
       null,
       // arg0
-      Gio$6.DBusSignalFlags.NONE,
+      Gio$5.DBusSignalFlags.NONE,
       // flags
       (_1, _2, _3, _4, _5, parameters) => {
         const changed_properties = parameters.deep_unpack()[1];
@@ -4571,11 +4571,11 @@ class Timezone_change_listener {
   _unsubscribe_to_changes() {
     if (!this._signal_id)
       return;
-    Gio$6.DBus.system.signal_unsubscribe(this._signal_id);
+    Gio$5.DBus.system.signal_unsubscribe(this._signal_id);
     this._signal_id = void 0;
   }
 }
-const { Gio: Gio$5 } = imports.gi;
+const { Gio: Gio$4 } = imports.gi;
 class Timezone_location_finder {
   _database;
   /**
@@ -4584,7 +4584,7 @@ class Timezone_location_finder {
    */
   constructor(path) {
     const file_path = `${path}/database.json`;
-    const file = Gio$5.File.new_for_path(file_path);
+    const file = Gio$4.File.new_for_path(file_path);
     const [ok, file_content] = file.load_contents(null);
     if (!ok)
       throw new Error(`failed to load file/contents of '${file_path}'`);
@@ -4643,7 +4643,7 @@ class Location_handler {
 async function sleep(duration) {
   return new Promise((resolve) => setTimeout(resolve, duration));
 }
-const { Gio: Gio$4 } = imports.gi;
+const { Gio: Gio$3 } = imports.gi;
 class Screen_lock_checker {
   /**
    * Asynchronously tries now or postpones until the screen is unlocked to execute a procedure.
@@ -4675,7 +4675,7 @@ class Screen_lock_checker {
   _subscribe_to_changes(callback_when_changes) {
     if (this._signal_id)
       this._unsubscribe_to_changes();
-    this._signal_id = Gio$4.DBus.session.signal_subscribe(
+    this._signal_id = Gio$3.DBus.session.signal_subscribe(
       "org.cinnamon.ScreenSaver",
       // sender
       "org.cinnamon.ScreenSaver",
@@ -4686,7 +4686,7 @@ class Screen_lock_checker {
       // object_path
       null,
       // arg0
-      Gio$4.DBusSignalFlags.NONE,
+      Gio$3.DBusSignalFlags.NONE,
       // flags
       (_1, _2, _3, _4, _5, parameters) => {
         const is_locked = parameters.deep_unpack()[0];
@@ -4697,7 +4697,7 @@ class Screen_lock_checker {
   _unsubscribe_to_changes() {
     if (!this._signal_id)
       return;
-    Gio$4.DBus.session.signal_unsubscribe(this._signal_id);
+    Gio$3.DBus.session.signal_unsubscribe(this._signal_id);
     this._signal_id = void 0;
   }
   /**
@@ -4705,7 +4705,7 @@ class Screen_lock_checker {
    * @param callback_for_result - The callback object to handle the result.
    */
   static _get_state_async(callback_for_result) {
-    Gio$4.DBus.session.call(
+    Gio$3.DBus.session.call(
       "org.cinnamon.ScreenSaver",
       // bus_name
       "/org/cinnamon/ScreenSaver",
@@ -4718,7 +4718,7 @@ class Screen_lock_checker {
       // parameters
       null,
       // reply_type
-      Gio$4.DBusCallFlags.NONE,
+      Gio$3.DBusCallFlags.NONE,
       // flags
       -1,
       // timeout_msec
@@ -4732,7 +4732,7 @@ class Screen_lock_checker {
     );
   }
 }
-const { Gio: Gio$3 } = imports.gi;
+const { Gio: Gio$2 } = imports.gi;
 class Sleep_events_listener {
   _callback_when_sleep_entries;
   _callback_when_wakeup_unlocked;
@@ -4769,7 +4769,7 @@ class Sleep_events_listener {
   _subscribe_to_changes(callback) {
     if (this._signal_id)
       this._unsubscribe_to_changes();
-    this._signal_id = Gio$3.DBus.system.signal_subscribe(
+    this._signal_id = Gio$2.DBus.system.signal_subscribe(
       "org.freedesktop.login1",
       // sender
       "org.freedesktop.login1.Manager",
@@ -4780,7 +4780,7 @@ class Sleep_events_listener {
       // object_path
       null,
       // arg0
-      Gio$3.DBusSignalFlags.NONE,
+      Gio$2.DBusSignalFlags.NONE,
       // flags
       (_1, _2, _3, _4, _5, parameters) => {
         const is_sleeping = parameters.deep_unpack()[0];
@@ -4791,12 +4791,12 @@ class Sleep_events_listener {
   _unsubscribe_to_changes() {
     if (!this._signal_id)
       return;
-    Gio$3.DBus.system.signal_unsubscribe(this._signal_id);
+    Gio$2.DBus.system.signal_unsubscribe(this._signal_id);
     this._signal_id = void 0;
   }
 }
-const { Gio: Gio$2 } = imports.gi;
-const settings$1 = Gio$2.Settings.new("org.x.apps.portal");
+const { Gio: Gio$1 } = imports.gi;
+const settings$1 = Gio$1.Settings.new("org.x.apps.portal");
 class System_color_scheme {
   _callback_on_change;
   _signal_id = void 0;
@@ -4827,10 +4827,10 @@ class System_color_scheme {
     settings$1.set_string("color-scheme", value);
   }
 }
-const { Gio: Gio$1 } = imports.gi;
+const { Gio } = imports.gi;
 const settings = {
-  desktop: Gio$1.Settings.new("org.cinnamon.desktop.interface"),
-  cinnamon: Gio$1.Settings.new("org.cinnamon.theme")
+  desktop: Gio.Settings.new("org.cinnamon.desktop.interface"),
+  cinnamon: Gio.Settings.new("org.cinnamon.theme")
 };
 class System_themes {
   static get mouse() {
@@ -4894,120 +4894,6 @@ class Themes_handler {
     System_themes.icons = this._settings.getValue("dark_themes_icons");
     System_themes.desktop = this._settings.getValue("dark_themes_desktop");
     System_color_scheme.value = "prefer-dark";
-  }
-}
-const { Gio, GLib: GLib$1 } = imports.gi;
-const EXECUTABLE_NAME = "auto-dark-light-time-change-listener";
-const EXECUTABLE_TARGET_FOLDER_PATH = "Time_change_listener";
-class Time_change_listener {
-  _callback_when_changes;
-  /**
-   * @param callback_when_changes - The function to be called when the system time changes.
-   * @throws {Error} If the `make` or `g++` command is not found in the system.
-   * @throws {Error} If the compilation of the C++ program fails.
-   */
-  constructor(callback_when_changes) {
-    this._callback_when_changes = callback_when_changes;
-    const executable_folder_path = `${metadata.path}/${EXECUTABLE_TARGET_FOLDER_PATH}`;
-    const executable_path = `${executable_folder_path}/${EXECUTABLE_NAME}`;
-    if (!GLib$1.file_test(executable_path, GLib$1.FileTest.EXISTS))
-      Time_change_listener._compile(executable_folder_path);
-    this._run(executable_path);
-  }
-  static _compile(executable_folder_path) {
-    if (!GLib$1.find_program_in_path("make") || !GLib$1.find_program_in_path("g++"))
-      throw new Error(_("Missing dependencies 'make' and/or 'g++'. Install them, in e.g. on Debian-based system with 'sudo apt install make g++', then restart Cinnamon (Ctrl+Alt+Esc)."));
-    const process = new Gio.Subprocess({
-      argv: ["make", "-C", executable_folder_path],
-      flags: Gio.SubprocessFlags.STDERR_PIPE
-    });
-    process.init(null);
-    try {
-      const [_ok, _stdout, stderr] = process.communicate_utf8(null, null);
-      if (!process.get_successful())
-        throw new Error(stderr || _("Unknown compilation error"));
-    } catch (error) {
-      throw new Error(
-        `${_("Failed compilation of")} '${EXECUTABLE_NAME}'.
-
-` + error.message
-      );
-    } finally {
-      GLib$1.spawn_command_line_async(
-        `make -C ${executable_folder_path} clean`
-      );
-    }
-  }
-  _input;
-  _input_error;
-  _output;
-  _subprocess;
-  _should_run = true;
-  _run(executable_path) {
-    this._subprocess = new Gio.Subprocess({
-      argv: [executable_path],
-      flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDIN_PIPE | Gio.SubprocessFlags.STDERR_PIPE
-    });
-    this._subprocess.init(null);
-    this._output = this._subprocess.get_stdin_pipe();
-    this._input = new Gio.DataInputStream({
-      base_stream: this._subprocess.get_stdout_pipe()
-    });
-    this._input_error = new Gio.DataInputStream({
-      base_stream: this._subprocess.get_stderr_pipe()
-    });
-    this._listen_input();
-    this._listen_error();
-  }
-  async _listen_input() {
-    do {
-      await new Promise(
-        (resolve) => this._input.read_line_async(
-          GLib$1.PRIORITY_DEFAULT,
-          null,
-          resolve
-        )
-      );
-      this._callback_when_changes();
-    } while (this._should_run);
-  }
-  async _listen_error() {
-    do {
-      const [line, length] = await new Promise(
-        (resolve) => this._input_error.read_line_async(
-          GLib$1.PRIORITY_DEFAULT,
-          null,
-          (source, result) => {
-            try {
-              resolve(source.read_line_finish(result));
-            } catch (error) {
-              logger.warn(error);
-              resolve([null, 0]);
-            }
-          }
-        )
-      );
-      if (line !== null && length > 0)
-        logger.warn(
-          `${_("the subprocess")} \`${EXECUTABLE_NAME}\` ${_("has written on its error output")}${_(":")} ${line}`
-        );
-    } while (this._should_run);
-  }
-  /** Enables listening for the system time changes. */
-  enable() {
-    this._output.write("enable\n", null);
-  }
-  /** Disables listening for the system time changes. */
-  disable() {
-    this._output.write("disable\n", null);
-  }
-  /** Releases acquired resources */
-  dispose() {
-    this._callback_when_changes = () => {
-    };
-    this._should_run = false;
-    this._output.write("exit\n", null);
-    this._subprocess.wait(null);
   }
 }
 const { PI, sin, cos, asin, acos, round } = Math;
@@ -5104,6 +4990,82 @@ class Twilights_handler {
   constructor(initial_values) {
     Object.assign(this, initial_values);
     makeAutoObservable(this);
+  }
+}
+const { GLib: GLib$1 } = imports.gi;
+class Wall_clock_adjustment_monitor {
+  /** In seconds (s)
+   * @private */
+  _monitoring_interval = 10;
+  /** Check interval, in integer seconds (s) greater or equal to 1, defaults to 10
+   * @returns {number} */
+  get monitoring_interval() {
+    return this._monitoring_interval;
+  }
+  set monitoring_interval(value) {
+    value = Math.max(1, value);
+    value = Math.round(value);
+    this._monitoring_interval = value;
+    if (this._timeout_id) {
+      this.disable();
+      this.enable();
+    }
+  }
+  /** Function to call when the wall clock has been modified, defaults to null
+   * @type {(() => void) | null} */
+  callback = null;
+  /** @private @type {ReturnType<typeof GLib.timeout_add_seconds> | null} */
+  _timeout_id = null;
+  /** In microseconds (µs)
+   * @private */
+  _last_wall_clock_time = Number();
+  /** In microseconds (µs)
+   * @private */
+  _last_monotonic_time = Number();
+  enable() {
+    if (this._timeout_id)
+      return;
+    this._last_wall_clock_time = GLib$1.get_real_time();
+    this._last_monotonic_time = GLib$1.get_monotonic_time();
+    this._timeout_id = GLib$1.timeout_add_seconds(
+      GLib$1.PRIORITY_DEFAULT,
+      this._monitoring_interval,
+      this._timeout_function
+    );
+  }
+  /** In microseconds (µs)
+   * @private */
+  _time_difference_tolerance = 2e6;
+  /** Maximum for time difference between wall clock and monotonic times to not trigger the callback, in seconds (s) greater or equal to 1, defaults to 2
+   * @returns {number} */
+  get time_difference_tolerance() {
+    return this._time_difference_tolerance / 1e6;
+  }
+  set time_difference_tolerance(value) {
+    value *= 1e6;
+    value = Math.max(1, value);
+    this._time_difference_tolerance = value;
+  }
+  /** @private @type {Parameters<typeof GLib.timeout_add_seconds>[2]} */
+  _timeout_function = () => {
+    const wall_clock_time = GLib$1.get_real_time(), monotonic_time = GLib$1.get_monotonic_time();
+    const delta_wall_clock = wall_clock_time - this._last_wall_clock_time;
+    const delta_monotonic = monotonic_time - this._last_monotonic_time;
+    const difference = Math.abs(delta_wall_clock - delta_monotonic);
+    if (difference > this._time_difference_tolerance)
+      this.callback?.();
+    this._last_wall_clock_time = wall_clock_time;
+    this._last_monotonic_time = monotonic_time;
+    return GLib$1.SOURCE_CONTINUE;
+  };
+  disable() {
+    if (!this._timeout_id)
+      return;
+    GLib$1.source_remove(this._timeout_id);
+    this._timeout_id = null;
+  }
+  dispose() {
+    this.disable();
   }
 }
 const { GLib } = imports.gi;
@@ -5290,27 +5252,23 @@ function initialize_handlers(applet, settings2) {
       return;
     appearance_handler.manual_is_dark = appearance_handler.is_dark;
   });
-  const time_change_listener = new Time_change_listener(
-    // Throws
-    () => runInAction(() => {
-      twilights_handler.update();
-      appearance_handler.update_time();
-      if (scheduler.is_set && scheduler.get_if_should_be_expired())
-        appearance_handler.sync_is_dark();
-    })
-  );
+  const wall_clock_monitor = new Wall_clock_adjustment_monitor();
+  wall_clock_monitor.callback = () => runInAction(() => {
+    twilights_handler.update();
+    appearance_handler.update_time();
+    if (scheduler.is_set && scheduler.get_if_should_be_expired())
+      appearance_handler.sync_is_dark();
+  });
   const sleep_events_listener = new Sleep_events_listener(
     // on sleep entries:
-    () => {
-      time_change_listener.disable();
-    },
+    () => wall_clock_monitor.disable(),
     // on wake-up unlocked:
     () => runInAction(() => {
       twilights_handler.update();
       appearance_handler.update_time();
       if (scheduler.is_set && scheduler.get_if_should_be_expired())
         appearance_handler.sync_is_dark();
-      time_change_listener.enable();
+      wall_clock_monitor.enable();
     })
   );
   const scheduler = new Event_scheduler();
@@ -5326,11 +5284,11 @@ function initialize_handlers(applet, settings2) {
       appearance_handler.update_time();
       appearance_handler.sync_is_dark();
       schedule_the_event();
-      time_change_listener.enable();
+      wall_clock_monitor.enable();
       sleep_events_listener.enable();
     } else {
       scheduler.unset_the_event();
-      time_change_listener.disable();
+      wall_clock_monitor.disable();
       sleep_events_listener.disable();
     }
   });
@@ -5353,11 +5311,11 @@ function initialize_handlers(applet, settings2) {
     scheduler.dispose();
     sleep_events_listener.dispose();
     system_color_scheme.dispose();
-    time_change_listener.dispose();
+    wall_clock_monitor.dispose();
     settings2.finalize();
   };
   system_color_scheme.enable();
-  time_change_listener.enable();
+  wall_clock_monitor.enable();
   sleep_events_listener.enable();
 }
 const { AppletSettings } = imports.ui.settings;
