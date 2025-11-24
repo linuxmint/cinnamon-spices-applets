@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-15 14:49+0100\n"
-"PO-Revision-Date: 2025-11-15 14:51+0100\n"
+"POT-Creation-Date: 2025-11-24 23:49+0100\n"
+"PO-Revision-Date: 2025-11-24 23:50+0100\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,60 +19,64 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:42 applet.js:554
+#. applet.js:44 applet.js:578
 msgid "SYSTEM"
 msgstr "SYSTÈME"
 
-#. applet.js:42 applet.js:589
+#. applet.js:44 applet.js:621
 msgid "FAVORITES"
 msgstr "FAVORIS"
 
-#. applet.js:42 applet.js:613
+#. applet.js:44 applet.js:654
 msgid "APPLICATIONS"
 msgstr "APPLICATIONS"
 
-#. applet.js:42 applet.js:637
+#. applet.js:44 applet.js:687
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTS RÉCENTS"
 
-#. applet.js:164
+#. applet.js:167
 msgid "(Right click to open folder)"
 msgstr "(Clic droit pour ouvrir son dossier)"
 
 #. metadata.json->name
-#. applet.js:289
+#. applet.js:288
 msgid "Direct"
 msgstr "Direct"
 
-#. applet.js:530
+#. applet.js:548
 msgid "Search Home Folder"
 msgstr "Rechercher dans mon dossier personnel"
 
-#. applet.js:563
+#. applet.js:555 applet.js:596 applet.js:629 applet.js:662 applet.js:695
+msgid "Configure"
+msgstr "Configurer"
+
+#. applet.js:589
 msgid "Search File System"
 msgstr "Rechercher dans le système de fichiers"
 
-#. applet.js:651
+#. applet.js:709
 msgid "Clear"
 msgstr "Effacer"
 
-#. applet.js:658
+#. applet.js:716
 msgid "Recent"
 msgstr "Récents"
 
-#. applet.js:706
+#. applet.js:764
 msgid "Computer"
 msgstr "Ordinateur"
 
-#. applet.js:712
+#. applet.js:770
 msgid "File System"
 msgstr "Système de fichiers"
 
-#. applet.js:729
+#. applet.js:787
 msgid "Network"
 msgstr "Réseau"
 
-#. applet.js:974
+#. applet.js:1030
 msgid "Trash"
 msgstr "Corbeille"
 
@@ -286,6 +290,13 @@ msgstr "Ne pas afficher d'infobulle"
 #. settings-schema.json->showUserSection->description
 msgid "Show User section"
 msgstr "Afficher la Section Utilisateur"
+
+#. settings-schema.json->showUserSettingsAccessIcon->description
+#. settings-schema.json->showSystemSettingsAccessIcon->description
+#. settings-schema.json->showFavoritesSettingsAccessIcon->description
+#. settings-schema.json->showRecentSettingsAccessIcon->description
+msgid "Show the settings access icon"
+msgstr "Afficher l'icône d'accès aux paramètres"
 
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"

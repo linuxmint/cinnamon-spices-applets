@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Direct@claudiux 1.3.1\n"
+"Project-Id-Version: Direct@claudiux 1.3.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-15 14:49+0100\n"
+"POT-Creation-Date: 2025-11-24 23:49+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,60 +17,64 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:42 applet.js:554
+#. applet.js:44 applet.js:578
 msgid "SYSTEM"
 msgstr ""
 
-#. applet.js:42 applet.js:589
+#. applet.js:44 applet.js:621
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:42 applet.js:613
+#. applet.js:44 applet.js:654
 msgid "APPLICATIONS"
 msgstr ""
 
-#. applet.js:42 applet.js:637
+#. applet.js:44 applet.js:687
 msgid "RECENT DOCUMENTS"
 msgstr ""
 
-#. applet.js:164
+#. applet.js:167
 msgid "(Right click to open folder)"
 msgstr ""
 
 #. metadata.json->name
-#. applet.js:289
+#. applet.js:288
 msgid "Direct"
 msgstr ""
 
-#. applet.js:530
+#. applet.js:548
 msgid "Search Home Folder"
 msgstr ""
 
-#. applet.js:563
+#. applet.js:555 applet.js:596 applet.js:629 applet.js:662 applet.js:695
+msgid "Configure"
+msgstr ""
+
+#. applet.js:589
 msgid "Search File System"
 msgstr ""
 
-#. applet.js:651
+#. applet.js:709
 msgid "Clear"
 msgstr ""
 
-#. applet.js:658
+#. applet.js:716
 msgid "Recent"
 msgstr ""
 
-#. applet.js:706
+#. applet.js:764
 msgid "Computer"
 msgstr ""
 
-#. applet.js:712
+#. applet.js:770
 msgid "File System"
 msgstr ""
 
-#. applet.js:729
+#. applet.js:787
 msgid "Network"
 msgstr ""
 
-#. applet.js:974
+#. applet.js:1030
 msgid "Trash"
 msgstr ""
 
@@ -277,6 +281,13 @@ msgstr ""
 
 #. settings-schema.json->showUserSection->description
 msgid "Show User section"
+msgstr ""
+
+#. settings-schema.json->showUserSettingsAccessIcon->description
+#. settings-schema.json->showSystemSettingsAccessIcon->description
+#. settings-schema.json->showFavoritesSettingsAccessIcon->description
+#. settings-schema.json->showRecentSettingsAccessIcon->description
+msgid "Show the settings access icon"
 msgstr ""
 
 #. settings-schema.json->showDesktop->description
