@@ -910,7 +910,8 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
             this.box.add(menuItem.actor);
         } else {
             let items = this._getMenuItems();
-            if (position < items.length) {
+            //~ if (position < items.length) {
+            if (position < items.length - 1) {
                 before_item = items[position].actor;
                 this.box.insert_child_below(menuItem.actor, before_item);
             } else

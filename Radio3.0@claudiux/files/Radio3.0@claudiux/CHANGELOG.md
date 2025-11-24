@@ -1,3 +1,6 @@
+### v3.9.4~20251124
+  * Minor bugfix (menu).
+
 ### v3.9.3~20251121
   * Updates to-string() function.
 
