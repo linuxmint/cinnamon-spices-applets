@@ -1,3 +1,6 @@
+### v1.3.2~20251124
+* Adds an icon next to each section title to open the settings.
+
 ### v1.3.1~20251115
 * Adds option "Open the menu hovering over the icon".
 
