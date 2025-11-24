@@ -40,7 +40,7 @@
         "userSection": {
             "type": "section",
             "title": "User section",
-            "keys": ["showUserSection", "showDesktop", "showTrash"]
+            "keys": ["showUserSection", "showUserSettingsAccessIcon", "showDesktop", "showTrash"]
         },
         "userSectionCustomPlaces": {
             "type": "section",
@@ -50,7 +50,7 @@
         "systemSection": {
             "type": "section",
             "title": "System section",
-            "keys": ["showSystemSection", "showComputer", "showRoot", "showVolumes", "onlyShowMounted", "showNetwork"]
+            "keys": ["showSystemSection", "showSystemSettingsAccessIcon", "showComputer", "showRoot", "showVolumes", "onlyShowMounted", "showNetwork"]
         },
         "systemSectionCustomPlaces": {
             "type": "section",
@@ -60,8 +60,9 @@
         "favoritesSection": {
             "type": "section",
             "title": "Favorite documents",
-            "keys": ["showFavorites", "favoriteSortingMethod", "favoriteSizeLimit", "favoriteShowUri", "favoriteIconIsStar"]
+            "keys": ["showFavorites", "showFavoritesSettingsAccessIcon", "favoriteSortingMethod", "favoriteSizeLimit", "favoriteShowUri", "favoriteIconIsStar"]
         },
+        
         "favoriteAppsSection": {
             "type": "section",
             "title": "Favorite apps",
@@ -70,7 +71,7 @@
         "recentSection": {
             "type": "section",
             "title": "Recent documents",
-            "keys": ["showRecentDocuments", "sortingMethod", "recentSizeLimit", "recentShowUri", "btnPrivacy"]
+            "keys": ["showRecentDocuments", "showRecentSettingsAccessIcon", "sortingMethod", "recentSizeLimit", "recentShowUri", "btnPrivacy"]
         }
     },
 
@@ -158,6 +159,12 @@
         "description": "Show User section",
         "default": true
     },
+    
+    "showUserSettingsAccessIcon": {
+        "type": "switch",
+        "description": "Show the settings access icon",
+        "default": true
+    },
 
     "showDesktop": {
         "type": "switch",
@@ -195,6 +202,12 @@
     "showSystemSection": {
         "type": "switch",
         "description": "Show System section",
+        "default": true
+    },
+    
+    "showSystemSettingsAccessIcon": {
+        "type": "switch",
+        "description": "Show the settings access icon",
         "default": true
     },
 
@@ -249,6 +262,12 @@
     "showFavorites": {
         "type": "switch",
         "description": "Show favorite documents",
+        "default": true
+    },
+    
+    "showFavoritesSettingsAccessIcon": {
+        "type": "switch",
+        "description": "Show the settings access icon",
         "default": true
     },
 
@@ -330,6 +349,12 @@
     "showRecentDocuments": {
         "type": "switch",
         "description": "Show recent documents",
+        "default": true
+    },
+    
+    "showRecentSettingsAccessIcon": {
+        "type": "switch",
+        "description": "Show the settings access icon",
         "default": true
     },
 

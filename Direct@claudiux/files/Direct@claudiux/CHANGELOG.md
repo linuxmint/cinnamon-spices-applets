@@ -1,3 +1,7 @@
+### v1.3.3~20251124
+* Makes optional each icon-link to settings.
+* Fixes [#7996](https://github.com/linuxmint/cinnamon-spices-applets/issues/7996)
+
 ### v1.3.2~20251124
 * Adds an icon next to each section title to open the settings.
 
