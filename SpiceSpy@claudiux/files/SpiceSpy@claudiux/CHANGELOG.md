@@ -1,3 +1,6 @@
+### v5.6.2~20251125
+  * Highlights the number of new issues in the menu.
+
 ### v5.6.1~20251121
   * Updates to-string() function.
 

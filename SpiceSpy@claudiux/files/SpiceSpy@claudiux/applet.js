@@ -122,50 +122,29 @@ var SpiceSpyPopupSubMenuMenuItem = class SpiceSpyPopupSubMenuMenuItem extends Po
   }
 
   _subMenuOpenStateChanged(menu, open) {
-        if (this.actor.get_stage() == null) return;
-        this.actor.change_style_pseudo_class('open', open);
-    }
+	if (this.actor.get_stage() == null) return;
+    this.actor.change_style_pseudo_class('open', open);
+  }
 
   _needsScrollbar() {
     return this.needScrollbar;
-    //~ if (!this.needScrollbar) return false;
-
-    //~ let topMenu = this._getTopMenu();
-    //~ if(!topMenu)
-      //~ return false;
-    //~ if(!topMenu.actor)
-      //~ return false;
-    //~ if(!topMenu.actor.get_layout_manager())
-      //~ return false;
-    //~ let [topMinHeight, topNaturalHeight] = topMenu.actor.get_preferred_height(-1);
-    //~ let topThemeNode = null;
-
-    //~ try {
-      //~ topThemeNode = topMenu.actor.get_theme_node();
-    //~ } catch(e) {
-      //~ topThemeNode = null;
-    //~ }
-    //~ if (!topThemeNode) return false;
-
-    //~ let topMaxHeight = topThemeNode.get_max_height();
-    //~ return topMaxHeight >= 0 && topNaturalHeight >= topMaxHeight;
   }
 
   _boxGetPreferredWidth (actor, forHeight, alloc) {
-        let columnWidths = this.getColumnWidths();
-        this.setColumnWidths(columnWidths);
+	let columnWidths = this.getColumnWidths();
+	this.setColumnWidths(columnWidths);
 
-        // Now they will request the right sizes
-        [alloc.min_size, alloc.natural_size] = this.box.get_preferred_width(forHeight || 0);
-    }
+	// Now they will request the right sizes
+	[alloc.min_size, alloc.natural_size] = this.box.get_preferred_width(forHeight || 0);
+  }
 
-    _boxGetPreferredHeight (actor, forWidth, alloc) {
-        [alloc.min_size, alloc.natural_size] = this.box.get_preferred_height(forWidth || 0);
-    }
+  _boxGetPreferredHeight (actor, forWidth, alloc) {
+	[alloc.min_size, alloc.natural_size] = this.box.get_preferred_height(forWidth || 0);
+  }
 }
 
 var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
-  constructor(parent, spice, new_stars, new_comments, new_translations, new_commits, params) {
+  constructor(parent, spice, new_stars, new_comments, new_translations, new_commits, new_issues, params) {
     super(params);
     this.parent = parent;
     this.spice = spice;
@@ -173,6 +152,7 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
     this.new_comments = new_comments; // boolean
     this.new_translations = new_translations; // boolean
     this.new_commits = new_commits; // boolean
+    this.new_issues = new_issues; // boolean
     this.url = this.spice.url;
 
     let label_text;
@@ -230,6 +210,7 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
       issues_box.connect("enter-event", () => { this.url = "https://github.com/linuxmint/cinnamon-spices-"+this.spice.type+"/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+"+this.spice.uuid; });
       this.addActor(issues_box);
       issues_box.opacity = (parseInt(spice.issues) != 0) ? 255 : this.parent.standard_opacity;
+      if (this.new_issues) issues_box.set_style("color: %s;".format(this.parent.color_on_change));
     }
     let translations_box, translations_icon, translations_count;
     if (this.parent.show_translations && this.spice.type != "themes") {
@@ -256,7 +237,6 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
 
     if (this.parent.show_icon_in_menu) {
       let icon_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true });
-      //~ let icon_path = HOME_DIR+"/.cache/cinnamon/spices/"+spice.type.slice(0,-1)+"/"+spice.uuid+".png";
       let icon_path = SPICES_ICONS_DIR+"/"+spice.uuid+".png";
       let icon_file = Gio.file_new_for_path(icon_path);
       let icon;
@@ -885,14 +865,13 @@ class SpiceSpy extends Applet.TextIconApplet {
               diff_stars = this.spices_to_spy[type][uuid]["score"];
               diff_translations = this.spices_to_spy[type][uuid]["translations"];
               diff_issues = this.spices_to_spy[type][uuid]["issues"];
-              //~ diff_commits = this.spices_to_spy[type][uuid]["last_commit"];
             }
             total_diff_score += diff_stars;
             total_diff_comments += diff_comments;
             total_diff_translations += diff_translations;
             total_diff_issues += diff_issues;
             total_diff_commits += diff_commits;
-            let menuItem = new SpiceMenuItem(this, spice, diff_stars != 0, diff_comments != 0, diff_translations != 0, diff_commits != 0);
+            let menuItem = new SpiceMenuItem(this, spice, diff_stars != 0, diff_comments != 0, diff_translations != 0, diff_commits != 0, diff_issues != 0);
             menuItems.push(menuItem);
           }
           if (menuItems.length > 0) {
