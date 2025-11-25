@@ -32,6 +32,7 @@ function _(str) {
 
 const KEYS = {
   CUSTOM_COMMAND: 'customCommand',
+  SHOW_CONNECTION_NOTIFICATION: 'showConnectionNotification',
 };
 const CUSTOM_ICON_KEY = "themeIcon";
 const SYMBOLIC_ICON_KEY = "symbolicIcon";
@@ -255,7 +256,9 @@ MyApplet.prototype = {
     // to provide better feedback on issues
     Util.spawnCommandLine(command);
     if (DEBUG()) global.log("Terminal opened with command '" + command + "'");
-    this.sendNotification(_("SSH Launcher"), _("Connection opened to ") + hostname + _(" using ") + terminal);
+    if (this._showConnectionNotification) {
+      this.sendNotification(_("SSH Launcher"), _("Connection opened to ") + hostname + _(" using ") + terminal);
+    }
   },
 
   editConfig: function() {
