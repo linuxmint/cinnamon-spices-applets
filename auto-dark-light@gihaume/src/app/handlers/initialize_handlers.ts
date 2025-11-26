@@ -13,7 +13,7 @@ import { Location_handler } from './Location_handler';
 import { logger } from '../../globals';
 import type { Settings } from '../ui/Settings';
 import { sleep } from '../../lib/utils';
-import { Sleep_events_listener } from '../../lib/sys/Sleep_events_listener/Sleep_events_listener';
+import { Sleep_and_lock_handler } from '../../lib/sys/Sleep_and_lock_handler/Sleep_and_lock_handler';
 import { System_color_scheme } from '../../lib/sys/System_color_scheme';
 import { Themes_handler } from './Themes_handler';
 import { Time_of_day } from '../../lib/core/Time_of_day';
@@ -169,7 +169,7 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
 
     const themes_handler = new Themes_handler(applet, settings);
 
-    if (System_color_scheme.value === 'prefer-dark') { // TODO: clear this idea so the user if not confused
+    if (System_color_scheme.value === 'prefer-dark') { // TODO: clear this idea so the user is not confused
         if (settings.dark_themes_have_been_detected)
             themes_handler.detect_dark_themes();
     } else {
@@ -229,18 +229,19 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
             appearance_handler.sync_is_dark();
     });
 
-    const sleep_events_listener = new Sleep_events_listener(
-        // on sleep entries:
-        () => wall_clock_monitor.disable(),
-        // on wake-up unlocked:
-        () => mobx.runInAction(() => {
-            twilights_handler.update();
-            appearance_handler.update_time();
-            if (scheduler.is_set && scheduler.get_if_should_be_expired()) // TODO: need of the same logic at startup ?
-                appearance_handler.sync_is_dark();
-            wall_clock_monitor.enable();
-        })
-    );
+    const sleep_and_lock_handler = new Sleep_and_lock_handler();
+    sleep_and_lock_handler.callback = (is_sleeping: boolean) => {
+        if (is_sleeping)
+            wall_clock_monitor.disable();
+        else
+            mobx.runInAction(() => {
+                twilights_handler.update();
+                appearance_handler.update_time();
+                if (scheduler.is_set && scheduler.get_if_should_be_expired()) // TODO: need of the same logic at startup ?
+                    appearance_handler.sync_is_dark();
+                wall_clock_monitor.enable();
+            });
+    };
 
     const scheduler = new Event_scheduler();
     const schedule_the_event = () => {
@@ -257,11 +258,11 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
             appearance_handler.sync_is_dark();
             schedule_the_event();
             wall_clock_monitor.enable();
-            sleep_events_listener.enable();
+            sleep_and_lock_handler.enable();
         } else {
             scheduler.unset_the_event();
             wall_clock_monitor.disable();
-            sleep_events_listener.disable();
+            sleep_and_lock_handler.disable();
         }
     });
     mobx.reaction(() => appearance_handler.next_twilight, () => {
@@ -293,7 +294,7 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
         keybinding_handler.dispose();
         location_handler.dispose();
         scheduler.dispose();
-        sleep_events_listener.dispose();
+        sleep_and_lock_handler.dispose();
         system_color_scheme.dispose();
         wall_clock_monitor.dispose();
         settings.finalize();
@@ -301,5 +302,5 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
 
     system_color_scheme.enable();
     wall_clock_monitor.enable();
-    sleep_events_listener.enable();
+    sleep_and_lock_handler.enable();
 }

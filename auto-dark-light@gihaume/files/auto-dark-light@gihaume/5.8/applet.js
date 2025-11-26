@@ -4260,10 +4260,10 @@ class Appearance_handler {
     makeAutoObservable(this);
   }
 }
-const { Gio: Gio$7 } = imports.gi;
+const { Gio: Gio$6 } = imports.gi;
 const settings$2 = {
-  background: Gio$7.Settings.new("org.cinnamon.desktop.background"),
-  slideshow: Gio$7.Settings.new("org.cinnamon.desktop.background.slideshow")
+  background: Gio$6.Settings.new("org.cinnamon.desktop.background"),
+  slideshow: Gio$6.Settings.new("org.cinnamon.desktop.background.slideshow")
 };
 class System_background {
   static get is_slideshow() {
@@ -4339,7 +4339,7 @@ class Background_handler {
       System_background.picture_file = this._settings.dark_background_file;
   }
 }
-const { Gio: Gio$6, GLib: GLib$4 } = imports.gi;
+const { Gio: Gio$5, GLib: GLib$4 } = imports.gi;
 async function launch_command(name, expiry, command) {
   try {
     await _launch_command(command, expiry);
@@ -4351,13 +4351,13 @@ async function launch_command(name, expiry, command) {
 
 ${_("Detail")}${_(":")}
 ` + error.message;
-    else if (error instanceof Gio$6.IOErrorEnum) {
-      if (error.code === Gio$6.IOErrorEnum.TIMED_OUT)
+    else if (error instanceof Gio$5.IOErrorEnum) {
+      if (error.code === Gio$5.IOErrorEnum.TIMED_OUT)
         msg += ` ${_("due to timeout")}.
 
 ${_("Detail")}${_(":")}
 ` + error.message;
-      else if (error.code === Gio$6.IOErrorEnum.FAILED)
+      else if (error.code === Gio$5.IOErrorEnum.FAILED)
         msg += ` ${_("due to an error")}.
 
 ${_("Detail")}${_(":")}
@@ -4373,9 +4373,9 @@ const SIGKILL_TIMEOUT = 10;
 async function _launch_command(command, timeout = 10) {
   const wrapped_command = `timeout --kill-after=${SIGKILL_TIMEOUT} ${timeout}s sh -c ${GLib$4.shell_quote(command)}`;
   const [_ok, argvp] = GLib$4.shell_parse_argv(wrapped_command);
-  const process = new Gio$6.Subprocess({
+  const process = new Gio$5.Subprocess({
     argv: argvp,
-    flags: Gio$6.SubprocessFlags.STDERR_PIPE
+    flags: Gio$5.SubprocessFlags.STDERR_PIPE
   });
   const start_time = Date.now();
   process.init(null);
@@ -4402,25 +4402,25 @@ async function _launch_command(command, timeout = 10) {
     case 0:
       break;
     case TIMEOUT_EXIT_STATUS_SIGTERM:
-      throw new Gio$6.IOErrorEnum({
-        code: Gio$6.IOErrorEnum.TIMED_OUT,
+      throw new Gio$5.IOErrorEnum({
+        code: Gio$5.IOErrorEnum.TIMED_OUT,
         message: `may have been timed out by SIGTERM (GNU 'timeout' exit status ${TIMEOUT_EXIT_STATUS_SIGTERM})`
       });
     case TIMEOUT_EXIT_STATUS_SIGKILL:
-      throw new Gio$6.IOErrorEnum({
-        code: Gio$6.IOErrorEnum.TIMED_OUT,
+      throw new Gio$5.IOErrorEnum({
+        code: Gio$5.IOErrorEnum.TIMED_OUT,
         message: `probably killed by an external SIGKILL (GNU 'timeout' exit status ${TIMEOUT_EXIT_STATUS_SIGKILL})`
       });
     case 1:
       if (timeout > 0 && elapsed_time >= timeout + SIGKILL_TIMEOUT)
-        throw new Gio$6.IOErrorEnum({
-          code: Gio$6.IOErrorEnum.TIMED_OUT,
+        throw new Gio$5.IOErrorEnum({
+          code: Gio$5.IOErrorEnum.TIMED_OUT,
           message: `probably timed out by SIGKILL`
         });
     // no break, needs to stay directly above the default case
     default:
-      throw new Gio$6.IOErrorEnum({
-        code: Gio$6.IOErrorEnum.FAILED,
+      throw new Gio$5.IOErrorEnum({
+        code: Gio$5.IOErrorEnum.FAILED,
         message: stderr ? stderr.trim() : "exit status: " + exit_status
       });
   }
@@ -4525,7 +4525,7 @@ class Keybinding_handler {
     Main.keybindingManager.removeHotKey(this._name);
   }
 }
-const { Gio: Gio$5 } = imports.gi;
+const { Gio: Gio$4 } = imports.gi;
 class Timezone_change_listener {
   _callback_on_change;
   /** @param callback_on_change - The function to be executed when the system timezone changes. */
@@ -4546,7 +4546,7 @@ class Timezone_change_listener {
   _subscribe_to_changes(callback_when_changes) {
     if (this._signal_id)
       this._unsubscribe_to_changes();
-    this._signal_id = Gio$5.DBus.system.signal_subscribe(
+    this._signal_id = Gio$4.DBus.system.signal_subscribe(
       "org.freedesktop.timedate1",
       // sender
       "org.freedesktop.DBus.Properties",
@@ -4557,7 +4557,7 @@ class Timezone_change_listener {
       // object_path
       null,
       // arg0
-      Gio$5.DBusSignalFlags.NONE,
+      Gio$4.DBusSignalFlags.NONE,
       // flags
       (_1, _2, _3, _4, _5, parameters) => {
         const changed_properties = parameters.deep_unpack()[1];
@@ -4571,11 +4571,11 @@ class Timezone_change_listener {
   _unsubscribe_to_changes() {
     if (!this._signal_id)
       return;
-    Gio$5.DBus.system.signal_unsubscribe(this._signal_id);
+    Gio$4.DBus.system.signal_unsubscribe(this._signal_id);
     this._signal_id = void 0;
   }
 }
-const { Gio: Gio$4 } = imports.gi;
+const { Gio: Gio$3 } = imports.gi;
 class Timezone_location_finder {
   _database;
   /**
@@ -4584,7 +4584,7 @@ class Timezone_location_finder {
    */
   constructor(path) {
     const file_path = `${path}/database.json`;
-    const file = Gio$4.File.new_for_path(file_path);
+    const file = Gio$3.File.new_for_path(file_path);
     const [ok, file_content] = file.load_contents(null);
     if (!ok)
       throw new Error(`failed to load file/contents of '${file_path}'`);
@@ -4643,132 +4643,107 @@ class Location_handler {
 async function sleep(duration) {
   return new Promise((resolve) => setTimeout(resolve, duration));
 }
-const { Gio: Gio$3 } = imports.gi;
-class Screen_lock_checker {
-  /**
-   * Asynchronously tries now or postpones until the screen is unlocked to execute a procedure.
-   * @param callback_when_unlocked - The function to be executed when the screen is unlocked.
-   */
-  try_now_or_postpone_until_unlocked(callback_when_unlocked) {
-    Screen_lock_checker._get_state_async((is_locked) => {
-      if (!is_locked)
-        callback_when_unlocked();
-      else
-        this._subscribe_to_changes((is_locked2) => {
-          if (is_locked2)
-            return;
-          this._unsubscribe_to_changes();
-          callback_when_unlocked();
-        });
-    });
+const { ScreenSaverProxy } = imports.misc.screenSaver;
+class Screen_lock_change_listener {
+  /** @private @type {number | null} */
+  _signal_id = null;
+  /** @private @readonly @type {imports.gi.Gio.DBusProxy} */
+  _screen_saver_proxy = ScreenSaverProxy();
+  // /**
+  //  * Asynchronously tries now or postpones until the screen is unlocked to execute a procedure.
+  //  * @param {() => void} callback_when_unlocked - The function to be executed when the screen is unlocked.
+  //  */
+  // try_now_or_postpone_until_unlocked(callback_when_unlocked) {
+  //     if (!this.is_locked) {
+  //         callback_when_unlocked();
+  //     } else {
+  //         this._subscribe_to_changes(is_locked => {
+  //             if (is_locked)
+  //                 return;
+  //             this._unsubscribe_to_changes();
+  //             callback_when_unlocked();
+  //         });
+  //     }
+  // }
+  /** @returns {boolean} */
+  get is_locked() {
+    return this._screen_saver_proxy.screenSaverActive;
   }
-  /** Cancels the `try_now_or_postpone_until_unlocked` procedure. */
-  cancel() {
-    this._unsubscribe_to_changes();
-  }
-  /** Releases acquired resources */
-  dispose() {
-    this.cancel();
-  }
-  _signal_id = void 0;
-  /** @param callback_when_changes - The function to be executed when the screen lock state changes. */
-  _subscribe_to_changes(callback_when_changes) {
+  /** @type {((is_locked: boolean) => void) | null} */
+  callback = null;
+  enable() {
     if (this._signal_id)
-      this._unsubscribe_to_changes();
-    this._signal_id = Gio$3.DBus.session.signal_subscribe(
-      "org.cinnamon.ScreenSaver",
-      // sender
-      "org.cinnamon.ScreenSaver",
-      // interface_name
+      return;
+    this._signal_id = this._screen_saver_proxy.connectSignal(
       "ActiveChanged",
-      // member
-      "/org/cinnamon/ScreenSaver",
-      // object_path
-      null,
-      // arg0
-      Gio$3.DBusSignalFlags.NONE,
-      // flags
-      (_1, _2, _3, _4, _5, parameters) => {
-        const is_locked = parameters.deep_unpack()[0];
-        callback_when_changes(is_locked);
+      /**
+       * @param {any} _0
+       * @param {any} _1
+       * @param {[boolean]} params
+       */
+      (_0, _1, [screenSaverActive]) => {
+        this.callback?.(screenSaverActive);
       }
     );
   }
-  _unsubscribe_to_changes() {
+  disable() {
     if (!this._signal_id)
       return;
-    Gio$3.DBus.session.signal_unsubscribe(this._signal_id);
-    this._signal_id = void 0;
+    this._screen_saver_proxy.disconnectSignal(this._signal_id);
+    this._signal_id = null;
   }
-  /**
-   * Gets the current screen lock state asynchronously.
-   * @param callback_for_result - The callback object to handle the result.
-   */
-  static _get_state_async(callback_for_result) {
-    Gio$3.DBus.session.call(
-      "org.cinnamon.ScreenSaver",
-      // bus_name
-      "/org/cinnamon/ScreenSaver",
-      // object_path
-      "org.cinnamon.ScreenSaver",
-      // interface_name
-      "GetActive",
-      // method_name
-      null,
-      // parameters
-      null,
-      // reply_type
-      Gio$3.DBusCallFlags.NONE,
-      // flags
-      -1,
-      // timeout_msec
-      null,
-      // cancellable
-      (connection, result) => {
-        const reply = connection.call_finish(result);
-        const is_locked = reply.deep_unpack()[0];
-        callback_for_result(is_locked);
+  dispose() {
+    this.disable();
+  }
+}
+class Screen_unlock_waiter {
+  /** @private @readonly */
+  _screen_lock = new Screen_lock_change_listener();
+  /** @private @type {(() => void) | null} */
+  _unblock_wait_if_locked = null;
+  /** Waits until the screen is unlocked or returns immediately if it is already unlocked.
+   * @returns {Promise<void>} */
+  wait_if_locked() {
+    return new Promise((resolve) => {
+      if (!this._screen_lock.is_locked) {
+        resolve();
+        return;
       }
-    );
+      this._unblock_wait_if_locked = resolve;
+      this._screen_lock.callback = (is_locked) => {
+        if (is_locked)
+          return;
+        this._screen_lock.disable();
+        this._screen_lock.callback = null;
+        this._unblock_wait_if_locked = null;
+        resolve();
+      };
+      this._screen_lock.enable();
+    });
+  }
+  /** Note: it doesn't do anything if not currently waiting.
+   * @returns {void} */
+  unblock_wait_if_locked() {
+    if (!this._unblock_wait_if_locked)
+      return;
+    this._unblock_wait_if_locked();
+    this._unblock_wait_if_locked = null;
+  }
+  dispose() {
+    this.unblock_wait_if_locked();
+    this._screen_lock.dispose();
   }
 }
 const { Gio: Gio$2 } = imports.gi;
 class Sleep_events_listener {
-  _callback_when_sleep_entries;
-  _callback_when_wakeup_unlocked;
-  /**
-   * @param callback_when_sleep_entries - The function to be executed when the system goes to sleep. Will be called again even without unlock.
-   * @param callback_when_wakeup_unlocked - The function to be executed when the system wakes up and the screen is unlocked.
-   */
-  constructor(callback_when_sleep_entries, callback_when_wakeup_unlocked) {
-    this._callback_when_sleep_entries = callback_when_sleep_entries;
-    this._callback_when_wakeup_unlocked = callback_when_wakeup_unlocked;
-  }
-  _screen_lock_checker = new Screen_lock_checker();
+  /** @private @type {number | null} */
+  _signal_id = null;
+  /** The function to call when the system is entering sleep or has just wake up (`is_entering_sleep` at `false`).
+   * @type {((is_entering_sleep: boolean) => void) | null} */
+  callback = null;
   enable() {
-    this._subscribe_to_changes((is_sleeping) => {
-      if (is_sleeping)
-        this._callback_when_sleep_entries();
-      else
-        this._screen_lock_checker.try_now_or_postpone_until_unlocked(
-          () => this._callback_when_wakeup_unlocked()
-        );
-    });
-  }
-  disable() {
-    this._unsubscribe_to_changes();
-    this._screen_lock_checker.cancel();
-  }
-  /** Releases acquired resources */
-  dispose() {
-    this._unsubscribe_to_changes();
-    this._screen_lock_checker.dispose();
-  }
-  _signal_id = void 0;
-  /** @param callback - The function to be executed when the system sleep state changes. */
-  _subscribe_to_changes(callback) {
     if (this._signal_id)
-      this._unsubscribe_to_changes();
+      return;
     this._signal_id = Gio$2.DBus.system.signal_subscribe(
       "org.freedesktop.login1",
       // sender
@@ -4783,16 +4758,46 @@ class Sleep_events_listener {
       Gio$2.DBusSignalFlags.NONE,
       // flags
       (_1, _2, _3, _4, _5, parameters) => {
-        const is_sleeping = parameters.deep_unpack()[0];
-        callback(is_sleeping);
+        const is_entering_sleep = parameters.deep_unpack()[0];
+        this.callback?.(is_entering_sleep);
       }
     );
   }
-  _unsubscribe_to_changes() {
+  disable() {
     if (!this._signal_id)
       return;
     Gio$2.DBus.system.signal_unsubscribe(this._signal_id);
-    this._signal_id = void 0;
+    this._signal_id = null;
+  }
+  dispose() {
+    this.disable();
+  }
+}
+class Sleep_and_lock_handler {
+  /** @private @readonly */
+  _unlock_waiter = new Screen_unlock_waiter();
+  /** @private @readonly */
+  _sleep_events = new Sleep_events_listener();
+  /** The function to call when the system is entering sleep or has just wake up and is unlocked (`is_entering_sleep` at `false`).
+   * @type {((is_entering_sleep: boolean) => void) | null} */
+  callback = null;
+  constructor() {
+    this._sleep_events.callback = async (is_entering_sleep) => {
+      if (!is_entering_sleep)
+        await this._unlock_waiter.wait_if_locked();
+      this.callback?.(is_entering_sleep);
+    };
+  }
+  enable() {
+    this._sleep_events.enable();
+  }
+  disable() {
+    this._unlock_waiter.unblock_wait_if_locked();
+    this._sleep_events.disable();
+  }
+  dispose() {
+    this._unlock_waiter.dispose();
+    this._sleep_events.dispose();
   }
 }
 const { Gio: Gio$1 } = imports.gi;
@@ -5259,18 +5264,19 @@ function initialize_handlers(applet, settings2) {
     if (scheduler.is_set && scheduler.get_if_should_be_expired())
       appearance_handler.sync_is_dark();
   });
-  const sleep_events_listener = new Sleep_events_listener(
-    // on sleep entries:
-    () => wall_clock_monitor.disable(),
-    // on wake-up unlocked:
-    () => runInAction(() => {
-      twilights_handler.update();
-      appearance_handler.update_time();
-      if (scheduler.is_set && scheduler.get_if_should_be_expired())
-        appearance_handler.sync_is_dark();
-      wall_clock_monitor.enable();
-    })
-  );
+  const sleep_and_lock_handler = new Sleep_and_lock_handler();
+  sleep_and_lock_handler.callback = (is_sleeping) => {
+    if (is_sleeping)
+      wall_clock_monitor.disable();
+    else
+      runInAction(() => {
+        twilights_handler.update();
+        appearance_handler.update_time();
+        if (scheduler.is_set && scheduler.get_if_should_be_expired())
+          appearance_handler.sync_is_dark();
+        wall_clock_monitor.enable();
+      });
+  };
   const scheduler = new Event_scheduler();
   const schedule_the_event = () => {
     scheduler.set_the_event(appearance_handler.next_twilight, () => {
@@ -5285,11 +5291,11 @@ function initialize_handlers(applet, settings2) {
       appearance_handler.sync_is_dark();
       schedule_the_event();
       wall_clock_monitor.enable();
-      sleep_events_listener.enable();
+      sleep_and_lock_handler.enable();
     } else {
       scheduler.unset_the_event();
       wall_clock_monitor.disable();
-      sleep_events_listener.disable();
+      sleep_and_lock_handler.disable();
     }
   });
   reaction(() => appearance_handler.next_twilight, () => {
@@ -5309,14 +5315,14 @@ function initialize_handlers(applet, settings2) {
     keybinding_handler.dispose();
     location_handler.dispose();
     scheduler.dispose();
-    sleep_events_listener.dispose();
+    sleep_and_lock_handler.dispose();
     system_color_scheme.dispose();
     wall_clock_monitor.dispose();
     settings2.finalize();
   };
   system_color_scheme.enable();
   wall_clock_monitor.enable();
-  sleep_events_listener.enable();
+  sleep_and_lock_handler.enable();
 }
 const { AppletSettings } = imports.ui.settings;
 function initialize_applet_settings(uuid, instance_id) {
