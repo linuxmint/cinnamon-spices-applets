@@ -1,5 +1,6 @@
 const { GLib } = imports.gi;
 
+import type { Disposable } from "../../../../types";
 import * as system_time from "../system_time";
 import type { Time_of_day } from "../../../core/Time_of_day";
 import { Timer_absolute } from "./Timer_absolute";
@@ -11,7 +12,7 @@ import { Timer_absolute } from "./Timer_absolute";
  *
  * When the instance is not wanted anymore, `dispose` must be called.
  */
-export class Event_scheduler {
+export class Event_scheduler implements Disposable {
     private _event_id: number | undefined = undefined;
     private readonly _timer_absolute = new Timer_absolute();
 
@@ -56,8 +57,7 @@ export class Event_scheduler {
         this._timer_absolute.reset();
     }
 
-    /** Releases acquired resources */
-    dispose(): void {
+    dispose() {
         this.unset_the_event();
     }
 }

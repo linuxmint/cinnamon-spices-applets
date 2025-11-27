@@ -23,7 +23,7 @@ export class Screen_lock_change_listener {
     callback = null;
 
     enable() {
-        if (this._signal_id)
+        if (this._signal_id !== null)
             return;
         this._signal_id = this._screen_saver_proxy.connectSignal('ActiveChanged',
             /**
@@ -38,7 +38,7 @@ export class Screen_lock_change_listener {
     }
 
     disable() {
-        if (!this._signal_id)
+        if (this._signal_id === null)
             return;
         this._screen_saver_proxy.disconnectSignal(this._signal_id);
         this._signal_id = null;

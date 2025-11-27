@@ -16,7 +16,7 @@ export class Sleep_events_listener {
     callback = null;
 
     enable() {
-        if (this._signal_id)
+        if (this._signal_id !== null)
             return;
         this._signal_id = Gio.DBus.system.signal_subscribe(
             'org.freedesktop.login1',             // sender
@@ -33,7 +33,7 @@ export class Sleep_events_listener {
     }
 
     disable() {
-        if (!this._signal_id)
+        if (this._signal_id === null)
             return;
         Gio.DBus.system.signal_unsubscribe(this._signal_id);
         this._signal_id = null;

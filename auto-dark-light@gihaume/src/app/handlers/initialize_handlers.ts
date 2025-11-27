@@ -7,6 +7,7 @@ import { Appearance_handler } from './Appearance_handler';
 import type { Applet } from '../ui/Applet';
 import { Background_handler } from './Background_handler';
 import { Commands_handler } from './Commands_handler';
+import type { Disposable } from '../../types';
 import { Event_scheduler } from "../../lib/sys/gnome/Event_scheduler";
 import { Keybinding_handler } from '../../lib/sys/cinnamon/Keybinding_handler';
 import { Location_handler } from './Location_handler';
@@ -23,6 +24,12 @@ import { Wall_clock_adjustment_monitor } from '../../lib/sys/gnome/Wall_clock_ad
 const DURATION_TO_AWAIT_BEFORE_UPDATING_DERIVED_SETTING = 2000; // milliseconds (ms)
 
 export function initialize_handlers(applet: Applet, settings: Settings): void {
+    const disposables: Disposable[] = [];
+    applet.on_applet_removed_from_panel = () => {
+        disposables.forEach(element => element.dispose());
+        settings.finalize();
+    };
+
     const location_handler = new Location_handler({
         manual_location: {
             latitude: settings.manual_latitude,
@@ -30,6 +37,7 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
         },
         is_location_auto: settings.is_location_auto
     });
+    disposables.push(location_handler);
 
     // Controls
     settings.bind('manual_latitude', null, value => {
@@ -159,16 +167,15 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
         );
     });
 
-    const keybinding = new Keybinding_handler(
-        metadata.uuid, () => { appearance_handler.toggle_is_dark(); }
-    );
+    const keybinding = new Keybinding_handler(metadata.uuid);
+    disposables.push(keybinding);
+    keybinding.callback = () => { appearance_handler.toggle_is_dark(); };
     keybinding.set(settings.appearance_keybinding);
     settings.bind('appearance_keybinding', null, value => {
         keybinding.set(value);
     });
 
     const themes_handler = new Themes_handler(applet, settings);
-
     if (Color_scheme_handler.value === 'prefer-dark') { // TODO: clear this idea so the user is not confused
         if (settings.dark_themes_have_been_detected)
             themes_handler.detect_dark_themes();
@@ -176,12 +183,15 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
         if (settings.light_themes_have_been_detected)
             themes_handler.detect_light_themes();
     }
+
     const color_scheme = mobx.makeAutoObservable({
         value: Color_scheme_handler.value
     });
-    const color_scheme_handler = new Color_scheme_handler(new_color_scheme => {
+    const color_scheme_handler = new Color_scheme_handler()
+    disposables.push(color_scheme_handler);
+    color_scheme_handler.callback = new_color_scheme => {
         color_scheme.value = new_color_scheme;
-    });
+    };
     let is_update_from_system = false; // Temporary fix // TODO: improve the model
     mobx.autorun(() => {
         appearance_handler.manual_is_dark =
@@ -222,6 +232,7 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
     });
 
     const wall_clock_monitor = new Wall_clock_adjustment_monitor();
+    disposables.push(wall_clock_monitor);
     wall_clock_monitor.callback = () => mobx.runInAction(() => {
         twilights_handler.update();
         appearance_handler.update_time();
@@ -230,6 +241,7 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
     });
 
     const sleep_and_lock_handler = new Sleep_and_lock_handler();
+    disposables.push(sleep_and_lock_handler);
     sleep_and_lock_handler.callback = (is_sleeping: boolean) => {
         if (is_sleeping)
             wall_clock_monitor.disable();
@@ -244,6 +256,7 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
     };
 
     const scheduler = new Event_scheduler();
+    disposables.push(scheduler);
     const schedule_the_event = () => {
         // logger.info(`Next change at ${appearance_handler.next_twilight.get_as_string_hmmss()}`); // Debug
         scheduler.set_the_event(appearance_handler.next_twilight, () => {
@@ -289,16 +302,6 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
     // // @ts-ignore: wrong return type in @ci-types/cjs 6.0.2-5
     // applet.on_panel_height_changed = () => {};
     // applet.on_panel_icon_size_changed = () => {};
-
-    applet.on_applet_removed_from_panel = () => {
-        keybinding.dispose();
-        location_handler.dispose();
-        scheduler.dispose();
-        sleep_and_lock_handler.dispose();
-        color_scheme_handler.dispose();
-        wall_clock_monitor.dispose();
-        settings.finalize();
-    };
 
     color_scheme_handler.enable();
     wall_clock_monitor.enable();

@@ -4504,7 +4504,6 @@ class Event_scheduler {
     this._event_id = void 0;
     this._timer_absolute.reset();
   }
-  /** Releases acquired resources */
   dispose() {
     this.unset_the_event();
   }
@@ -4513,21 +4512,20 @@ const { keybindingManager } = imports.ui.main;
 class Keybinding_handler {
   _uuid;
   static _unicity_count = 0;
-  _callback;
-  /**
-   * @param unique_namespace - a specific enough id to avoid name collisions with any other system keybinding name, typically the application name
-   * @param callback - the function to be called when the keybinding has been pressed
-   */
-  constructor(unique_namespace, callback) {
+  /** @param unique_namespace - A specific enough id to avoid name collisions with any other system keybinding name, typically the application name. */
+  constructor(unique_namespace) {
     this._uuid = unique_namespace + Keybinding_handler._unicity_count++;
-    this._callback = callback;
   }
-  /** @param keybinding - the keybinding to set, in the format accepted by Cinnamon (e.g. '<Super>F1') */
+  /** The function to be called when the keybinding has been pressed */
+  callback = null;
+  /** @param keybinding - In the format accepted by Cinnamon (e.g. '<Super>F1'). */
   set(keybinding) {
     return keybindingManager.addHotKey(
       this._uuid,
       keybinding,
-      this._callback
+      () => {
+        this.callback?.();
+      }
     );
   }
   unset() {
@@ -4647,7 +4645,6 @@ class Location_handler {
     });
     this._timezone_change_listener.enable();
   }
-  /** Releases acquired resources */
   dispose() {
     this._timezone_change_listener.dispose();
   }
@@ -4668,7 +4665,7 @@ class Screen_lock_change_listener {
   /** @type {((is_locked: boolean) => void) | null} */
   callback = null;
   enable() {
-    if (this._signal_id)
+    if (this._signal_id !== null)
       return;
     this._signal_id = this._screen_saver_proxy.connectSignal(
       "ActiveChanged",
@@ -4683,7 +4680,7 @@ class Screen_lock_change_listener {
     );
   }
   disable() {
-    if (!this._signal_id)
+    if (this._signal_id === null)
       return;
     this._screen_saver_proxy.disconnectSignal(this._signal_id);
     this._signal_id = null;
@@ -4738,7 +4735,7 @@ class Sleep_events_listener {
    * @type {((is_entering_sleep: boolean) => void) | null} */
   callback = null;
   enable() {
-    if (this._signal_id)
+    if (this._signal_id !== null)
       return;
     this._signal_id = Gio$2.DBus.system.signal_subscribe(
       "org.freedesktop.login1",
@@ -4760,7 +4757,7 @@ class Sleep_events_listener {
     );
   }
   disable() {
-    if (!this._signal_id)
+    if (this._signal_id === null)
       return;
     Gio$2.DBus.system.signal_unsubscribe(this._signal_id);
     this._signal_id = null;
@@ -4799,25 +4796,22 @@ class Sleep_and_lock_handler {
 const { Gio: Gio$1 } = imports.gi;
 const settings$1 = Gio$1.Settings.new("org.x.apps.portal");
 class Color_scheme_handler {
-  _callback_on_change;
-  _signal_id = void 0;
-  /** @param callback_on_change - The function to be executed when the color scheme changes. */
-  constructor(callback_on_change) {
-    this._callback_on_change = callback_on_change;
-  }
+  /** The function to be called when the color scheme has changed */
+  callback = null;
+  _signal_id = null;
   enable() {
-    this.disable();
+    if (this._signal_id !== null)
+      return;
     this._signal_id = settings$1.connect("changed::color-scheme", () => {
-      this._callback_on_change(Color_scheme_handler.value);
+      this.callback?.(Color_scheme_handler.value);
     });
   }
   disable() {
-    if (this._signal_id === void 0)
+    if (this._signal_id === null)
       return;
     settings$1.disconnect(this._signal_id);
-    this._signal_id = void 0;
+    this._signal_id = null;
   }
-  /** Releases acquired resources */
   dispose() {
     this.disable();
   }
@@ -5072,6 +5066,11 @@ class Wall_clock_adjustment_monitor {
 const { GLib } = imports.gi;
 const DURATION_TO_AWAIT_BEFORE_UPDATING_DERIVED_SETTING = 2e3;
 function initialize_handlers(applet, settings2) {
+  const disposables = [];
+  applet.on_applet_removed_from_panel = () => {
+    disposables.forEach((element) => element.dispose());
+    settings2.finalize();
+  };
   const location_handler = new Location_handler({
     manual_location: {
       latitude: settings2.manual_latitude,
@@ -5079,6 +5078,7 @@ function initialize_handlers(applet, settings2) {
     },
     is_location_auto: settings2.is_location_auto
   });
+  disposables.push(location_handler);
   settings2.bind("manual_latitude", null, (value) => {
     location_handler.manual_location.latitude = value;
   });
@@ -5197,12 +5197,11 @@ function initialize_handlers(applet, settings2) {
       appearance_handler.is_auto ? appearance_handler.is_unsynced ? "auto-inverted-symbolic" : "auto-symbolic" : appearance_handler.manual_is_dark ? "dark-symbolic" : "light-symbolic"
     );
   });
-  const keybinding = new Keybinding_handler(
-    metadata.uuid,
-    () => {
-      appearance_handler.toggle_is_dark();
-    }
-  );
+  const keybinding = new Keybinding_handler(metadata.uuid);
+  disposables.push(keybinding);
+  keybinding.callback = () => {
+    appearance_handler.toggle_is_dark();
+  };
   keybinding.set(settings2.appearance_keybinding);
   settings2.bind("appearance_keybinding", null, (value) => {
     keybinding.set(value);
@@ -5218,9 +5217,11 @@ function initialize_handlers(applet, settings2) {
   const color_scheme = makeAutoObservable({
     value: Color_scheme_handler.value
   });
-  const color_scheme_handler = new Color_scheme_handler((new_color_scheme) => {
+  const color_scheme_handler = new Color_scheme_handler();
+  disposables.push(color_scheme_handler);
+  color_scheme_handler.callback = (new_color_scheme) => {
     color_scheme.value = new_color_scheme;
-  });
+  };
   let is_update_from_system = false;
   autorun(() => {
     appearance_handler.manual_is_dark = color_scheme.value === "prefer-dark";
@@ -5257,6 +5258,7 @@ function initialize_handlers(applet, settings2) {
     appearance_handler.manual_is_dark = appearance_handler.is_dark;
   });
   const wall_clock_monitor = new Wall_clock_adjustment_monitor();
+  disposables.push(wall_clock_monitor);
   wall_clock_monitor.callback = () => runInAction(() => {
     twilights_handler.update();
     appearance_handler.update_time();
@@ -5264,6 +5266,7 @@ function initialize_handlers(applet, settings2) {
       appearance_handler.sync_is_dark();
   });
   const sleep_and_lock_handler = new Sleep_and_lock_handler();
+  disposables.push(sleep_and_lock_handler);
   sleep_and_lock_handler.callback = (is_sleeping) => {
     if (is_sleeping)
       wall_clock_monitor.disable();
@@ -5277,6 +5280,7 @@ function initialize_handlers(applet, settings2) {
       });
   };
   const scheduler = new Event_scheduler();
+  disposables.push(scheduler);
   const schedule_the_event = () => {
     scheduler.set_the_event(appearance_handler.next_twilight, () => {
       twilights_handler.update();
@@ -5310,15 +5314,6 @@ function initialize_handlers(applet, settings2) {
   applet.on_button_open_os_timezone_settings = () => GLib.spawn_command_line_async("cinnamon-settings calendar");
   applet.on_button_open_os_themes_settings = () => GLib.spawn_command_line_async("cinnamon-settings themes");
   applet.on_button_open_os_background_settings = () => GLib.spawn_command_line_async("cinnamon-settings background");
-  applet.on_applet_removed_from_panel = () => {
-    keybinding.dispose();
-    location_handler.dispose();
-    scheduler.dispose();
-    sleep_and_lock_handler.dispose();
-    color_scheme_handler.dispose();
-    wall_clock_monitor.dispose();
-    settings2.finalize();
-  };
   color_scheme_handler.enable();
   wall_clock_monitor.enable();
   sleep_and_lock_handler.enable();
