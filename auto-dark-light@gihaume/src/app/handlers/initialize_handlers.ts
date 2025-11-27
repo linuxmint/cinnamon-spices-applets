@@ -2,7 +2,7 @@ const { GLib } = imports.gi;
 
 import * as mobx from 'mobx';
 
-import { _ } from '../../globals';
+import { _, metadata } from '../../globals';
 import { Appearance_handler } from './Appearance_handler';
 import type { Applet } from '../ui/Applet';
 import { Background_handler } from './Background_handler';
@@ -159,12 +159,12 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
         );
     });
 
-    const keybinding_handler = new Keybinding_handler(() => {
-        appearance_handler.toggle_is_dark();
-    });
-    keybinding_handler.keybinding = settings.appearance_keybinding;
+    const keybinding = new Keybinding_handler(
+        metadata.uuid, () => { appearance_handler.toggle_is_dark(); }
+    );
+    keybinding.set(settings.appearance_keybinding);
     settings.bind('appearance_keybinding', null, value => {
-        keybinding_handler.keybinding = value;
+        keybinding.set(value);
     });
 
     const themes_handler = new Themes_handler(applet, settings);
@@ -291,7 +291,7 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
     // applet.on_panel_icon_size_changed = () => {};
 
     applet.on_applet_removed_from_panel = () => {
-        keybinding_handler.dispose();
+        keybinding.dispose();
         location_handler.dispose();
         scheduler.dispose();
         sleep_and_lock_handler.dispose();

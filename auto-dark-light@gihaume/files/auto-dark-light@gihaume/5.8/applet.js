@@ -1,6 +1,6 @@
 const Gettext = imports.gettext;
 const { GLib: GLib$5 } = imports.gi;
-const Main$1 = imports.ui.main;
+const Main = imports.ui.main;
 const { St } = imports.gi;
 const metadata = {
   uuid: "",
@@ -33,15 +33,15 @@ const error_icon = new St.Icon({
 const logger = {
   info(msg) {
     global.log(translated_applet_name + `${_(":")} ` + msg);
-    Main$1.notify(translated_applet_name, msg);
+    Main.notify(translated_applet_name, msg);
   },
   warn(msg) {
     global.logWarning(translated_applet_name + `${_(":")} ` + msg);
-    Main$1.warningNotify(translated_applet_name, msg, warning_icon);
+    Main.warningNotify(translated_applet_name, msg, warning_icon);
   },
   error(msg) {
     global.logError(translated_applet_name + `${_(":")} ` + msg);
-    Main$1.criticalNotify(translated_applet_name, msg, error_icon);
+    Main.criticalNotify(translated_applet_name, msg, error_icon);
   }
 };
 function die(error) {
@@ -4509,20 +4509,32 @@ class Event_scheduler {
     this.unset_the_event();
   }
 }
-const Main = imports.ui.main;
-let counter = 0;
+const { keybindingManager } = imports.ui.main;
 class Keybinding_handler {
-  _name;
+  _uuid;
+  static _unicity_count = 0;
   _callback;
-  constructor(callback) {
-    this._name = metadata.uuid + counter++;
+  /**
+   * @param unique_namespace - a specific enough id to avoid name collisions with any other system keybinding name, typically the application name
+   * @param callback - the function to be called when the keybinding has been pressed
+   */
+  constructor(unique_namespace, callback) {
+    this._uuid = unique_namespace + Keybinding_handler._unicity_count++;
     this._callback = callback;
   }
-  set keybinding(value) {
-    Main.keybindingManager.addHotKey(this._name, value, this._callback);
+  /** @param keybinding - the keybinding to set, in the format accepted by Cinnamon (e.g. '<Super>F1') */
+  set(keybinding) {
+    return keybindingManager.addHotKey(
+      this._uuid,
+      keybinding,
+      this._callback
+    );
+  }
+  unset() {
+    keybindingManager.removeHotKey(this._uuid);
   }
   dispose() {
-    Main.keybindingManager.removeHotKey(this._name);
+    this.unset();
   }
 }
 const { Gio: Gio$4 } = imports.gi;
@@ -5201,12 +5213,15 @@ function initialize_handlers(applet, settings2) {
       appearance_handler.is_auto ? appearance_handler.is_unsynced ? "auto-inverted-symbolic" : "auto-symbolic" : appearance_handler.manual_is_dark ? "dark-symbolic" : "light-symbolic"
     );
   });
-  const keybinding_handler = new Keybinding_handler(() => {
-    appearance_handler.toggle_is_dark();
-  });
-  keybinding_handler.keybinding = settings2.appearance_keybinding;
+  const keybinding = new Keybinding_handler(
+    metadata.uuid,
+    () => {
+      appearance_handler.toggle_is_dark();
+    }
+  );
+  keybinding.set(settings2.appearance_keybinding);
   settings2.bind("appearance_keybinding", null, (value) => {
-    keybinding_handler.keybinding = value;
+    keybinding.set(value);
   });
   const themes_handler = new Themes_handler(applet, settings2);
   if (System_color_scheme.value === "prefer-dark") {
@@ -5312,7 +5327,7 @@ function initialize_handlers(applet, settings2) {
   applet.on_button_open_os_themes_settings = () => GLib.spawn_command_line_async("cinnamon-settings themes");
   applet.on_button_open_os_background_settings = () => GLib.spawn_command_line_async("cinnamon-settings background");
   applet.on_applet_removed_from_panel = () => {
-    keybinding_handler.dispose();
+    keybinding.dispose();
     location_handler.dispose();
     scheduler.dispose();
     sleep_and_lock_handler.dispose();
