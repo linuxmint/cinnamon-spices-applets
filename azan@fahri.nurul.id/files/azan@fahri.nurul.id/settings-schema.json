@@ -97,5 +97,20 @@
             "Shafi`i, Maliki, Ja`fari, Hanbali": "Standard",
             "Hanafi": "Hanafi"
         }
+    },
+    "reminder": {
+        "type": "header",
+        "description": "Reminder Settings"
+    },
+    "extra_reminder":{
+        "type": "combobox",
+        "description": "Extra reminder before prayer time",
+        "default": "0",
+        "options": {
+            "Off": "0",
+            "5 minutes": "5",
+            "10 minutes": "10",
+            "15 minutes": "15"
+        }
     }
 }
