@@ -9,12 +9,11 @@
     },
     "devDependencies": {
         "@ci-types/cjs": "6.0.2-5",
-        "@types/luxon": "^3.7.1",
+        "@types/luxon": "3.7.1",
         "luxon": "3.7.2",
-        "terser": "5.44.0",
         "typescript": "5.9.3",
-        "vite": "7.1.12",
-        "vitest": "^4.0.6"
+        "vite": "7.2.4",
+        "vitest": "4.0.14"
     },
     "pnpm": {
         "onlyBuiltDependencies": [
