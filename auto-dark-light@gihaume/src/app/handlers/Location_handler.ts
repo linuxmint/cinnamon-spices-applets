@@ -4,7 +4,7 @@ import * as mobx from "mobx";
 
 import type { Location } from "../../types";
 import { metadata } from '../../globals';
-import { Timezone_change_listener } from '../../lib/sys/Timezone_change_listener';
+import { Timezone_change_listener } from '../../lib/sys/gnome/Timezone_change_listener';
 import { Timezone_location_finder } from "../../lib/core/Timezone_location_finder/Timezone_location_finder";
 
 export class Location_handler {

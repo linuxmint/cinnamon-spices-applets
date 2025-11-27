@@ -1,5 +1,5 @@
 import type { Applet } from "../ui/Applet";
-import { launch_command } from "../../lib/sys/launch_command";
+import { launch_command } from "../../lib/sys/gnome/launch_command";
 import type { Settings } from "../ui/Settings";
 
 export class Commands_handler {

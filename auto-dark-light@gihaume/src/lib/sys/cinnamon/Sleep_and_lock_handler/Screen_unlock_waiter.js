@@ -1,4 +1,4 @@
-/** @typedef {import('../../../types').Disposable} Disposable */
+/** @typedef {import('../../../../types.js').Disposable} Disposable */
 import { Screen_lock_change_listener } from './Screen_lock_change_listener.js';
 
 /**

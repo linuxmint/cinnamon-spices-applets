@@ -1,7 +1,7 @@
 const { DateTime } = imports.gi.GLib; // Preferred over JS's `Date` to take into account timezone changes during runtime.
 
-import { Time_of_day } from "../core/Time_of_day";
-import type { Time_hms } from '../../types';
+import { Time_of_day } from "../../core/Time_of_day";
+import type { Time_hms } from '../../../types';
 
 /** @returns seconds (s) */
 export function get_now_as_unix(): number {

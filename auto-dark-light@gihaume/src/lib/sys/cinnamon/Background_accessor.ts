@@ -6,7 +6,7 @@ const settings = {
 } as const;
 
 /** An accessor to the Cinnamon system background settings. */
-export class System_background {
+export class Background_accessor {
     static get is_slideshow(): boolean {
         return settings.slideshow.get_boolean('slideshow-enabled');
     }

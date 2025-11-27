@@ -6,7 +6,7 @@ const settings = {
 } as const;
 
 /** An accessor to the Cinnamon system themes settings. */
-export class System_themes {
+export class Themes_accessor {
     static get mouse(): string {
         return settings.desktop.get_string('cursor-theme');
     }

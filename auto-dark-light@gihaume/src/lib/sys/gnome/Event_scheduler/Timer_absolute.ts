@@ -1,5 +1,5 @@
 import * as system_time from '../system_time';
-import type { Time_of_day } from '../../core/Time_of_day';
+import type { Time_of_day } from '../../../core/Time_of_day';
 
 /** A basic request-based absolute timer to be set for a next occurring time of day. */
 export class Timer_absolute {
