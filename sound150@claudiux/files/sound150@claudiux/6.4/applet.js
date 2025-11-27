@@ -118,6 +118,7 @@ function run_playerctld() {
 function kill_playerctld() {
     //~ Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
     Util.spawnCommandLine("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
+    del_song_arts(); //added
 }
 
 const superRND = (2**31-1)**2;

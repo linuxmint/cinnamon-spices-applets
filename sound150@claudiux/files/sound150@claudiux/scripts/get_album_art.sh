@@ -130,7 +130,7 @@ oldxesamurl=$(cat $OLDXESAMURLFILE)
 [[ "$XESAM_URL" == "$oldxesamurl" ]] && {
         for f in $(ls -1Aq $SONG_ART_DIR); do {
                 [[ $DEBUG == true ]] && echo "$SONG_ART_DIR/$f" >> $HOME/sound150.log # DEBUGGING
-                cp -af $SONG_ART_DIR/$f $ARTDIR/
+                cp -af "$SONG_ART_DIR/$f" $ARTDIR/
                 echo -n "$SONG_ART_DIR/$f"
                 break
         }; done
@@ -173,12 +173,12 @@ rm -f $HOME/mimetype.txt
         }
 }
 
-cp -a $PATHTOFILE $SONG_ART_DIR/$ARTFILE
+cp -a "$PATHTOFILE" $SONG_ART_DIR/$ARTFILE
 #~ mv $PATHTOFILE $SONG_ART_DIR/$ARTFILE
 [[ $DEBUG == true ]] && echo "" >> $HOME/sound150.log # DEBUGGING
 #~ $MAKEICON "$SONG_ART_DIR/$ARTFILE" &
 $MAKEICON "$SONG_ART_DIR/$ARTFILE"
 #~ sleep 0.5
 #~ echo -n $PATHTOFILE
-echo -n $SONG_ART_DIR/$ARTFILE
+echo -n "$SONG_ART_DIR/$ARTFILE"
 exit 0
