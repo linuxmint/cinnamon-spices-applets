@@ -1,34 +1,32 @@
 const { Gio } = imports.gi;
 
-import { Color_scheme } from "../../../types";
+import { Color_scheme, Observer } from "../../../types";
 
 const settings = Gio.Settings.new('org.x.apps.portal');
 
 /** A listener and accessor to the Cinnamon system color scheme setting. */
-export class Color_scheme_handler {
-    private readonly _callback_on_change: (color_scheme: Color_scheme) => void;
-    private _signal_id: number | undefined = undefined;
+export class Color_scheme_handler implements Observer {
 
-    /** @param callback_on_change - The function to be executed when the color scheme changes. */
-    constructor(callback_on_change: (color_scheme: Color_scheme) => void) {
-        this._callback_on_change = callback_on_change;
-    }
+    /** The function to be called when the color scheme has changed */
+    callback: ((color_scheme: Color_scheme) => void) | null = null;
+
+    private _signal_id: number | null = null;
 
     enable() {
-        this.disable(); // Ensures only one signal is connected
+        if (this._signal_id !== null)
+            return;
         this._signal_id = settings.connect('changed::color-scheme', () => {
-            this._callback_on_change(Color_scheme_handler.value);
+            this.callback?.(Color_scheme_handler.value);
         });
     }
 
     disable() {
-        if (this._signal_id === undefined)
+        if (this._signal_id === null)
             return;
         settings.disconnect(this._signal_id);
-        this._signal_id = undefined;
+        this._signal_id = null;
     }
 
-    /** Releases acquired resources */
     dispose() {
         this.disable();
     }

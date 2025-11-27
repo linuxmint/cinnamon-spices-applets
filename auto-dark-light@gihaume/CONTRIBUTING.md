@@ -4,7 +4,7 @@
 
 ### Global dependencies
 
-- [pnpm](https://pnpm.io/installation#on-posix-systems) (tested v10.20.0).
+- [pnpm](https://pnpm.io/installation#on-posix-systems) (tested v10.23.0).
 
 ### Local dependencies
 
