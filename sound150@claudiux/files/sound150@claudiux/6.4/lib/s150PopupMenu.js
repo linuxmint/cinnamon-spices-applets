@@ -844,7 +844,9 @@ class Player extends PopupMenu.PopupMenuSection {
     }
 
     _showCover(cover_path) {
+        let rnd;
         if (!cover_path || !GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
+            del_song_arts();
             this.cover = new St.Icon({
                 style_class: "sound-player-generic-coverart",
                 important: true,
@@ -859,22 +861,16 @@ class Player extends PopupMenu.PopupMenuSection {
             let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
             if ((dir_children.next_file(null)) == null) { // dir does not contain any file.
                 if (GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
-                    Util.spawnCommandLine("cp -a %s %s/R3SongArt%s".format(
-                        cover_path,
-                        ALBUMART_PICS_DIR,
-                        randomIntegerInInterval(0, superRND).toString()
-                    ));
+                    rnd = randomIntegerInInterval(0, superRND).toString();
+                    Util.spawnCommandLine(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
                 } else {
                     cover_path = null;
                 }
             } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
-                del_song_arts();
+                //del_song_arts();
                 if (GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
-                    Util.spawnCommandLine("cp -a %s %s/R3SongArt%s".format(
-                        cover_path,
-                        ALBUMART_PICS_DIR,
-                        randomIntegerInInterval(0, superRND).toString()
-                    ));
+                    rnd = randomIntegerInInterval(0, superRND).toString();
+                    Util.spawnCommandLine(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
                 } else {
                     cover_path = null;
                 }

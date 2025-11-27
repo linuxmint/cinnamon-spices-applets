@@ -1,3 +1,6 @@
+### v13.7.3~20251126
+  * Avoids treating apostrophes as quotes (artist and title).
+
 ### v13.7.2~20251121
   * Functional improvements.
 
