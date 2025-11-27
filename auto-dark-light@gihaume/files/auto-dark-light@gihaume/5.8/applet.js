@@ -4265,7 +4265,7 @@ const settings$2 = {
   background: Gio$6.Settings.new("org.cinnamon.desktop.background"),
   slideshow: Gio$6.Settings.new("org.cinnamon.desktop.background.slideshow")
 };
-class System_background {
+class Background_accessor {
   static get is_slideshow() {
     return settings$2.slideshow.get_boolean("slideshow-enabled");
   }
@@ -4299,44 +4299,44 @@ class Background_handler {
     applet.on_button_apply_background_dark = () => this.apply_dark_background();
   }
   detect_light_background() {
-    const is_slideshow = System_background.is_slideshow;
+    const is_slideshow = Background_accessor.is_slideshow;
     this._settings.light_background_is_slideshow = is_slideshow;
     if (is_slideshow)
-      this._settings.light_background_slideshow_folder = System_background.slideshow_folder.replace("directory://", "file://");
+      this._settings.light_background_slideshow_folder = Background_accessor.slideshow_folder.replace("directory://", "file://");
     else
-      this._settings.light_background_file = System_background.picture_file;
+      this._settings.light_background_file = Background_accessor.picture_file;
   }
   detect_dark_background() {
-    const is_slideshow = System_background.is_slideshow;
+    const is_slideshow = Background_accessor.is_slideshow;
     this._settings.dark_background_is_slideshow = is_slideshow;
     if (is_slideshow)
-      this._settings.dark_background_slideshow_folder = System_background.slideshow_folder.replace("directory://", "file://");
+      this._settings.dark_background_slideshow_folder = Background_accessor.slideshow_folder.replace("directory://", "file://");
     else
-      this._settings.dark_background_file = System_background.picture_file;
+      this._settings.dark_background_file = Background_accessor.picture_file;
   }
   apply_light_background() {
     const is_slideshow = this._settings.light_background_is_slideshow;
-    System_background.is_slideshow = is_slideshow;
+    Background_accessor.is_slideshow = is_slideshow;
     if (is_slideshow)
-      System_background.slideshow_folder = decodeURIComponent(
+      Background_accessor.slideshow_folder = decodeURIComponent(
         // If the folder was chosen via a filechooser, it may contain non-ASCII characters
         this._settings.light_background_slideshow_folder.replace("file://", "directory://")
         // https://github.com/linuxmint/cinnamon/issues/12374
       );
     else
-      System_background.picture_file = this._settings.light_background_file;
+      Background_accessor.picture_file = this._settings.light_background_file;
   }
   apply_dark_background() {
     const is_slideshow = this._settings.dark_background_is_slideshow;
-    System_background.is_slideshow = is_slideshow;
+    Background_accessor.is_slideshow = is_slideshow;
     if (is_slideshow)
-      System_background.slideshow_folder = decodeURIComponent(
+      Background_accessor.slideshow_folder = decodeURIComponent(
         // If the folder was chosen via a filechooser, it may contain non-ASCII characters
         this._settings.dark_background_slideshow_folder.replace("file://", "directory://")
         // https://github.com/linuxmint/cinnamon/issues/12374
       );
     else
-      System_background.picture_file = this._settings.dark_background_file;
+      Background_accessor.picture_file = this._settings.dark_background_file;
   }
 }
 const { Gio: Gio$5, GLib: GLib$4 } = imports.gi;
@@ -4661,22 +4661,6 @@ class Screen_lock_change_listener {
   _signal_id = null;
   /** @private @readonly @type {imports.gi.Gio.DBusProxy} */
   _screen_saver_proxy = ScreenSaverProxy();
-  // /**
-  //  * Asynchronously tries now or postpones until the screen is unlocked to execute a procedure.
-  //  * @param {() => void} callback_when_unlocked - The function to be executed when the screen is unlocked.
-  //  */
-  // try_now_or_postpone_until_unlocked(callback_when_unlocked) {
-  //     if (!this.is_locked) {
-  //         callback_when_unlocked();
-  //     } else {
-  //         this._subscribe_to_changes(is_locked => {
-  //             if (is_locked)
-  //                 return;
-  //             this._unsubscribe_to_changes();
-  //             callback_when_unlocked();
-  //         });
-  //     }
-  // }
   /** @returns {boolean} */
   get is_locked() {
     return this._screen_saver_proxy.screenSaverActive;
@@ -4814,7 +4798,7 @@ class Sleep_and_lock_handler {
 }
 const { Gio: Gio$1 } = imports.gi;
 const settings$1 = Gio$1.Settings.new("org.x.apps.portal");
-class System_color_scheme {
+class Color_scheme_handler {
   _callback_on_change;
   _signal_id = void 0;
   /** @param callback_on_change - The function to be executed when the color scheme changes. */
@@ -4824,7 +4808,7 @@ class System_color_scheme {
   enable() {
     this.disable();
     this._signal_id = settings$1.connect("changed::color-scheme", () => {
-      this._callback_on_change(System_color_scheme.value);
+      this._callback_on_change(Color_scheme_handler.value);
     });
   }
   disable() {
@@ -4849,7 +4833,7 @@ const settings = {
   desktop: Gio.Settings.new("org.cinnamon.desktop.interface"),
   cinnamon: Gio.Settings.new("org.cinnamon.theme")
 };
-class System_themes {
+class Themes_accessor {
   static get mouse() {
     return settings.desktop.get_string("cursor-theme");
   }
@@ -4885,32 +4869,32 @@ class Themes_handler {
     applet.on_button_apply_themes_dark = () => this.apply_dark_themes();
   }
   detect_light_themes() {
-    this._settings.setValue("light_themes_mouse", System_themes.mouse);
-    this._settings.setValue("light_themes_apps", System_themes.apps);
-    this._settings.setValue("light_themes_icons", System_themes.icons);
-    this._settings.setValue("light_themes_desktop", System_themes.desktop);
+    this._settings.setValue("light_themes_mouse", Themes_accessor.mouse);
+    this._settings.setValue("light_themes_apps", Themes_accessor.apps);
+    this._settings.setValue("light_themes_icons", Themes_accessor.icons);
+    this._settings.setValue("light_themes_desktop", Themes_accessor.desktop);
     this._settings.light_themes_have_been_detected = true;
   }
   detect_dark_themes() {
-    this._settings.setValue("dark_themes_mouse", System_themes.mouse);
-    this._settings.setValue("dark_themes_apps", System_themes.apps);
-    this._settings.setValue("dark_themes_icons", System_themes.icons);
-    this._settings.setValue("dark_themes_desktop", System_themes.desktop);
+    this._settings.setValue("dark_themes_mouse", Themes_accessor.mouse);
+    this._settings.setValue("dark_themes_apps", Themes_accessor.apps);
+    this._settings.setValue("dark_themes_icons", Themes_accessor.icons);
+    this._settings.setValue("dark_themes_desktop", Themes_accessor.desktop);
     this._settings.dark_themes_have_been_detected = true;
   }
   apply_light_themes() {
-    System_themes.mouse = this._settings.getValue("light_themes_mouse");
-    System_themes.apps = this._settings.getValue("light_themes_apps");
-    System_themes.icons = this._settings.getValue("light_themes_icons");
-    System_themes.desktop = this._settings.getValue("light_themes_desktop");
-    System_color_scheme.value = "prefer-light";
+    Themes_accessor.mouse = this._settings.getValue("light_themes_mouse");
+    Themes_accessor.apps = this._settings.getValue("light_themes_apps");
+    Themes_accessor.icons = this._settings.getValue("light_themes_icons");
+    Themes_accessor.desktop = this._settings.getValue("light_themes_desktop");
+    Color_scheme_handler.value = "prefer-light";
   }
   apply_dark_themes() {
-    System_themes.mouse = this._settings.getValue("dark_themes_mouse");
-    System_themes.apps = this._settings.getValue("dark_themes_apps");
-    System_themes.icons = this._settings.getValue("dark_themes_icons");
-    System_themes.desktop = this._settings.getValue("dark_themes_desktop");
-    System_color_scheme.value = "prefer-dark";
+    Themes_accessor.mouse = this._settings.getValue("dark_themes_mouse");
+    Themes_accessor.apps = this._settings.getValue("dark_themes_apps");
+    Themes_accessor.icons = this._settings.getValue("dark_themes_icons");
+    Themes_accessor.desktop = this._settings.getValue("dark_themes_desktop");
+    Color_scheme_handler.value = "prefer-dark";
   }
 }
 const { PI, sin, cos, asin, acos, round } = Math;
@@ -5167,7 +5151,7 @@ function initialize_handlers(applet, settings2) {
   }, { fireImmediately: true });
   const appearance_handler = new Appearance_handler({
     twilights: twilights_handler.twilights,
-    manual_is_dark: System_color_scheme.value === "prefer-dark",
+    manual_is_dark: Color_scheme_handler.value === "prefer-dark",
     is_auto: settings2.is_appearance_auto
   });
   autorun(() => {
@@ -5224,7 +5208,7 @@ function initialize_handlers(applet, settings2) {
     keybinding.set(value);
   });
   const themes_handler = new Themes_handler(applet, settings2);
-  if (System_color_scheme.value === "prefer-dark") {
+  if (Color_scheme_handler.value === "prefer-dark") {
     if (settings2.dark_themes_have_been_detected)
       themes_handler.detect_dark_themes();
   } else {
@@ -5232,9 +5216,9 @@ function initialize_handlers(applet, settings2) {
       themes_handler.detect_light_themes();
   }
   const color_scheme = makeAutoObservable({
-    value: System_color_scheme.value
+    value: Color_scheme_handler.value
   });
-  const system_color_scheme = new System_color_scheme((new_color_scheme) => {
+  const color_scheme_handler = new Color_scheme_handler((new_color_scheme) => {
     color_scheme.value = new_color_scheme;
   });
   let is_update_from_system = false;
@@ -5250,17 +5234,17 @@ function initialize_handlers(applet, settings2) {
       return;
     }
     if (appearance_handler.manual_is_dark) {
-      system_color_scheme.disable();
+      color_scheme_handler.disable();
       themes_handler.apply_dark_themes();
-      system_color_scheme.enable();
+      color_scheme_handler.enable();
       if (settings2.enable_background)
         background_handler.apply_dark_background();
       if (settings2.dark_commands_is_enabled)
         commands_handler.launch_dark_commands();
     } else {
-      system_color_scheme.disable();
+      color_scheme_handler.disable();
       themes_handler.apply_light_themes();
-      system_color_scheme.enable();
+      color_scheme_handler.enable();
       if (settings2.enable_background)
         background_handler.apply_light_background();
       if (settings2.light_commands_is_enabled)
@@ -5331,11 +5315,11 @@ function initialize_handlers(applet, settings2) {
     location_handler.dispose();
     scheduler.dispose();
     sleep_and_lock_handler.dispose();
-    system_color_scheme.dispose();
+    color_scheme_handler.dispose();
     wall_clock_monitor.dispose();
     settings2.finalize();
   };
-  system_color_scheme.enable();
+  color_scheme_handler.enable();
   wall_clock_monitor.enable();
   sleep_and_lock_handler.enable();
 }

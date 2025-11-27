@@ -1,6 +1,6 @@
 const { Gio } = imports.gi;
 
-/** @typedef {import('../../../types').Observer} Observer */
+/** @typedef {import('../../../../types').Observer} Observer */
 
 /**
  * An interface to listen to the sleep entering and waking events.

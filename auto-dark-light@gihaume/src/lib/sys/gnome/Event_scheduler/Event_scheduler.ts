@@ -1,7 +1,7 @@
 const { GLib } = imports.gi;
 
 import * as system_time from "../system_time";
-import type { Time_of_day } from "../../core/Time_of_day";
+import type { Time_of_day } from "../../../core/Time_of_day";
 import { Timer_absolute } from "./Timer_absolute";
 
 /**

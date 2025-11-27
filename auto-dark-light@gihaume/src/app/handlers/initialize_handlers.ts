@@ -7,18 +7,18 @@ import { Appearance_handler } from './Appearance_handler';
 import type { Applet } from '../ui/Applet';
 import { Background_handler } from './Background_handler';
 import { Commands_handler } from './Commands_handler';
-import { Event_scheduler } from "../../lib/sys/Event_scheduler/Event_scheduler";
-import { Keybinding_handler } from '../../lib/sys/Keybinding_handler';
+import { Event_scheduler } from "../../lib/sys/gnome/Event_scheduler";
+import { Keybinding_handler } from '../../lib/sys/cinnamon/Keybinding_handler';
 import { Location_handler } from './Location_handler';
 import { logger } from '../../globals';
 import type { Settings } from '../ui/Settings';
-import { sleep } from '../../lib/utils';
-import { Sleep_and_lock_handler } from '../../lib/sys/Sleep_and_lock_handler/Sleep_and_lock_handler';
-import { System_color_scheme } from '../../lib/sys/System_color_scheme';
+import { sleep } from '../../lib/core/utils';
+import { Sleep_and_lock_handler } from '../../lib/sys/cinnamon/Sleep_and_lock_handler';
+import { Color_scheme_handler } from '../../lib/sys/cinnamon/Color_scheme_handler';
 import { Themes_handler } from './Themes_handler';
 import { Time_of_day } from '../../lib/core/Time_of_day';
 import { Twilights_handler } from './Twilights_handler';
-import { Wall_clock_adjustment_monitor } from '../../lib/sys/Wall_clock_adjustment_monitor';
+import { Wall_clock_adjustment_monitor } from '../../lib/sys/gnome/Wall_clock_adjustment_monitor';
 
 const DURATION_TO_AWAIT_BEFORE_UPDATING_DERIVED_SETTING = 2000; // milliseconds (ms)
 
@@ -104,7 +104,7 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
 
     const appearance_handler = new Appearance_handler({
         twilights: twilights_handler.twilights,
-        manual_is_dark: System_color_scheme.value === 'prefer-dark',
+        manual_is_dark: Color_scheme_handler.value === 'prefer-dark',
         is_auto: settings.is_appearance_auto
     });
 
@@ -169,7 +169,7 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
 
     const themes_handler = new Themes_handler(applet, settings);
 
-    if (System_color_scheme.value === 'prefer-dark') { // TODO: clear this idea so the user is not confused
+    if (Color_scheme_handler.value === 'prefer-dark') { // TODO: clear this idea so the user is not confused
         if (settings.dark_themes_have_been_detected)
             themes_handler.detect_dark_themes();
     } else {
@@ -177,9 +177,9 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
             themes_handler.detect_light_themes();
     }
     const color_scheme = mobx.makeAutoObservable({
-        value: System_color_scheme.value
+        value: Color_scheme_handler.value
     });
-    const system_color_scheme = new System_color_scheme(new_color_scheme => {
+    const color_scheme_handler = new Color_scheme_handler(new_color_scheme => {
         color_scheme.value = new_color_scheme;
     });
     let is_update_from_system = false; // Temporary fix // TODO: improve the model
@@ -198,17 +198,17 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
             return;
         }
         if (appearance_handler.manual_is_dark) {
-            system_color_scheme.disable();
+            color_scheme_handler.disable();
             themes_handler.apply_dark_themes();
-            system_color_scheme.enable();
+            color_scheme_handler.enable();
             if (settings.enable_background)
                 background_handler.apply_dark_background();
             if (settings.dark_commands_is_enabled)
                 commands_handler.launch_dark_commands();
         } else {
-            system_color_scheme.disable();
+            color_scheme_handler.disable();
             themes_handler.apply_light_themes();
-            system_color_scheme.enable();
+            color_scheme_handler.enable();
             if (settings.enable_background)
                 background_handler.apply_light_background();
             if (settings.light_commands_is_enabled)
@@ -295,12 +295,12 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
         location_handler.dispose();
         scheduler.dispose();
         sleep_and_lock_handler.dispose();
-        system_color_scheme.dispose();
+        color_scheme_handler.dispose();
         wall_clock_monitor.dispose();
         settings.finalize();
     };
 
-    system_color_scheme.enable();
+    color_scheme_handler.enable();
     wall_clock_monitor.enable();
     sleep_and_lock_handler.enable();
 }

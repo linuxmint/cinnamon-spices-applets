@@ -1,4 +1,4 @@
-/** @typedef {import('../../../types').Observer} Observer */
+/** @typedef {import('../../../../types.js').Observer} Observer */
 import { Screen_unlock_waiter } from './Screen_unlock_waiter.js';
 import { Sleep_events_listener } from './Sleep_events_listener.js';
 

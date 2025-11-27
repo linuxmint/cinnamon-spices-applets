@@ -1,5 +1,5 @@
 const { Gio, GLib } = imports.gi;
-import { _, logger } from '../../globals';
+import { _, logger } from '../../../globals';
 
 export async function launch_command(
     name: string, expiry: number, command: string

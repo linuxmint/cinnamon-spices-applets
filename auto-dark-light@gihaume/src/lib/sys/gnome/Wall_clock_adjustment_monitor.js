@@ -1,6 +1,6 @@
 const { GLib } = imports.gi;
 
-/** @typedef {import('../../types').Observer} Observer */
+/** @typedef {import('../../../types').Observer} Observer */
 
 /** @implements {Observer} */
 export class Wall_clock_adjustment_monitor {
