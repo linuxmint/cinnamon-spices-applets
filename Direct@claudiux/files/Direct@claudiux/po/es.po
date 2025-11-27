@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-11-24 23:49+0100\n"
-"PO-Revision-Date: 2025-11-15 11:47-0300\n"
+"PO-Revision-Date: 2025-11-27 16:49-0300\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -50,7 +50,7 @@ msgstr "Buscar en la carpeta personal"
 
 #. applet.js:555 applet.js:596 applet.js:629 applet.js:662 applet.js:695
 msgid "Configure"
-msgstr ""
+msgstr "Configurar"
 
 #. applet.js:589
 msgid "Search File System"
@@ -235,7 +235,7 @@ msgstr "Texto del panel"
 
 #. settings-schema.json->openHoveringOver->description
 msgid "Open the menu by hovering over the icon"
-msgstr "Abrir el menú pasando el cursor sobre el icono."
+msgstr "Abrir el menú pasando el cursor sobre el icono"
 
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"
@@ -294,7 +294,7 @@ msgstr "Mostrar sección de usuario"
 #. settings-schema.json->showFavoritesSettingsAccessIcon->description
 #. settings-schema.json->showRecentSettingsAccessIcon->description
 msgid "Show the settings access icon"
-msgstr ""
+msgstr "Mostrar el icono de acceso a la configuración"
 
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
