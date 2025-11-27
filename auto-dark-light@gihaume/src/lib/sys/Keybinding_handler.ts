@@ -1,23 +1,34 @@
-const Main = imports.ui.main;
+const { keybindingManager } = imports.ui.main;
 
-import { metadata } from "../../globals";
+import { Disposable } from '../../types';
 
-let counter = 0;
-
-export class Keybinding_handler {
-    private readonly _name: string;
+/** A responsible handler to set a Cinnamon keybinding. */
+export class Keybinding_handler implements Disposable {
+    private readonly _uuid: string;
+    private static _unicity_count: number = 0;
     private readonly _callback: () => void;
 
-    constructor(callback: () => void) {
-        this._name = metadata.uuid + counter++;
+    /**
+     * @param unique_namespace - a specific enough id to avoid name collisions with any other system keybinding name, typically the application name
+     * @param callback - the function to be called when the keybinding has been pressed
+     */
+    constructor(unique_namespace: string, callback: () => void) {
+        this._uuid = unique_namespace + Keybinding_handler._unicity_count++;
         this._callback = callback;
     }
 
-    set keybinding(value: string) {
-        Main.keybindingManager.addHotKey(this._name, value, this._callback);
+    /** @param keybinding - the keybinding to set, in the format accepted by Cinnamon (e.g. '<Super>F1') */
+    set(keybinding: string): boolean {
+        return keybindingManager.addHotKey(
+            this._uuid, keybinding, this._callback
+        );
+    }
+
+    unset(): void {
+        keybindingManager.removeHotKey(this._uuid);
     }
 
     dispose() {
-        Main.keybindingManager.removeHotKey(this._name);
+        this.unset();
     }
 }
