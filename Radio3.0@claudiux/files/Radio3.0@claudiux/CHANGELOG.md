@@ -1,3 +1,6 @@
+### v3.9.5~20251129
+  * Better file monitoring.
+
 ### v3.9.4~20251124
   * Minor bugfix (menu).
 

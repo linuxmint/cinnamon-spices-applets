@@ -1384,9 +1384,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           while (file != null) {
             let name = file.get_name();
             if (name.startsWith("R3SongArt")) {
-                let f = file_new_for_path(dir_path+"/"+name);
-                if (f.query_exists(null))
-                  f.delete(null);
+            this.rm_file(`${dir_path}/${name}`);
+            //~ let f = file_new_for_path(dir_path+"/"+name);
+            //~ if (f.query_exists(null))
+              //~ f.delete(null);
             }
             file = dir_children.next_file(null);
           }
@@ -1997,6 +1998,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.titleMonitorId = this.titleMonitor.connect('changed', () => { this._on_mpv_title_changed() });
     } catch(e) {
       this.titleMonitor = null;
+      this.titleMonitorId = null;
       logError("Unable to monitor %s!".format(MPV_TITLE_FILE), e)
     }
   }
@@ -2052,10 +2054,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     try {
       this.titleMonitor.disconnect(this.titleMonitorId);
       this.titleMonitor.cancel();
-      this.titleMonitor = null;
-      this.titleMonitorId = null;
     } catch(e) {
       logError("Unable to unmonitor %s!".format(MPV_TITLE_FILE), e)
+    } finally {
+      this.titleMonitor = null;
+      this.titleMonitorId = null;
     }
   }
 
@@ -2065,10 +2068,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     try {
       this.r30stopMonitor.disconnect(this.r30stopMonitorId);
       this.r30stopMonitor.cancel();
-      this.r30stopMonitor = null;
-      this.r30stopMonitorId = null;
     } catch(e) {
       logError("Unable to unmonitor %s!".format(R30STOP), e)
+    } finally {
+      this.r30stopMonitor = null;
+      this.r30stopMonitorId = null;
     }
   }
 
@@ -2078,10 +2082,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     try {
       this.r30previousMonitor.disconnect(this.r30previousMonitorId);
       this.r30previousMonitor.cancel();
-      this.r30previousMonitor = null;
-      this.r30previousMonitorId = null;
     } catch(e) {
       logError("Unable to unmonitor %s!".format(R30PREVIOUS), e)
+    } finally {
+      this.r30previousMonitor = null;
+      this.r30previousMonitorId = null;
     }
   }
 
@@ -2091,10 +2096,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     try {
       this.r30nextMonitor.disconnect(this.r30nextMonitorId);
       this.r30nextMonitor.cancel();
-      this.r30nextMonitor = null;
-      this.r30nextMonitorId = null;
     } catch(e) {
       logError("Unable to unmonitor %s!".format(R30NEXT), e)
+    } finally {
+      this.r30nextMonitor = null;
+      this.r30nextMonitorId = null;
     }
   }
 
@@ -3562,8 +3568,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.progress = 10/REFRESH_INTERVAL;
     this.interval = setInterval(() => { this.on_progress_change(); }, 100);  // 100 ms.
+    
+    this.appletRunning = true;
 
-    timeout_add_seconds(1, () => { this.monitor_mpv_title(); return this.titleMonitor == null });
+    timeout_add_seconds(1, () => { 
+      this.monitor_mpv_title(); 
+      //~ return this.titleMonitor == null 
+      return this.appletRunning;
+    });
     timeout_add_seconds(1, () => { this.monitor_r30stop(); return this.r30stopMonitor == null });
     timeout_add_seconds(1, () => { this.monitor_r30next(); return this.r30nextMonitor == null });
     timeout_add_seconds(1, () => { this.monitor_r30previous(); return this.r30previousMonitor == null });
@@ -3586,7 +3598,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     _id = null;
     recentRadios = null;
 
-    this.appletRunning = true;
+    //~ this.appletRunning = true;
   }
 
   stop_mpv_radio(notify_user=true) {
@@ -4084,7 +4096,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   on_applet_added_to_panel() {
     // Run all monitors:
     this.on_network_monitoring_changed();
-    //~ this.monitor_mpv_title();
+    this.monitor_mpv_title();
     this.monitor_jobs_dir();
     this.monitor_rec_folder();
     //~ this.monitor_r30stop();
