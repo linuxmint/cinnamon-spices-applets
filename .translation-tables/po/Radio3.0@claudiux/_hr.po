@@ -1,0 +1,575 @@
+# RADIO3.0
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2022
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-11 12:31+0200\n"
+"PO-Revision-Date: 2023-01-12 15:17+0100\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: \n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. applet.js:286
+msgid "unassigned"
+msgstr ""
+
+#. applet.js:287
+msgid "Display Album Art at full size"
+msgstr ""
+
+#. applet.js:420
+msgid "Sun."
+msgstr ""
+
+#. applet.js:420
+msgid "Mon."
+msgstr ""
+
+#. applet.js:420
+msgid "Tue."
+msgstr ""
+
+#. applet.js:420
+msgid "Wed."
+msgstr ""
+
+#. applet.js:420
+msgid "Thu."
+msgstr ""
+
+#. applet.js:420
+msgid "Fri."
+msgstr ""
+
+#. applet.js:420
+msgid "Sat."
+msgstr ""
+
+#. settings-schema.json->category-to-move->options
+#. applet.js:587 applet.js:5528
+msgid "(Blacklist)"
+msgstr ""
+
+#. applet.js:2564
+msgid "Wake Up"
+msgstr ""
+
+#. applet.js:2652
+msgid "Load a sample station list"
+msgstr ""
+
+#. applet.js:2897
+msgid "Categories"
+msgstr ""
+
+#. applet.js:2900
+msgid "Radio Stations"
+msgstr ""
+
+#. applet.js:2911
+msgid "All Categories"
+msgstr ""
+
+#. applet.js:4131
+msgid "Please Log Out then Log In"
+msgstr ""
+
+#. applet.js:4131
+msgid "to finalize yt-dlp update"
+msgstr ""
+
+#. applet.js:4841 applet.js:5300 applet.js:5318
+msgid "Cancel"
+msgstr ""
+
+#. applet.js:4842
+msgid "Radio3.0 applet"
+msgstr ""
+
+#. applet.js:4845
+msgid "Enable the OSD150 extension"
+msgstr ""
+
+#. applet.js:4846
+msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
+msgstr ""
+
+#. applet.js:4863
+msgid "Download the OSD150 extension"
+msgstr ""
+
+#. applet.js:4864
+msgid ""
+"To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
+"Click on the Download button then search for OSD150 and select the ⬇ button."
+msgstr ""
+
+#. applet.js:5041
+msgid "Configure the Alarm Clock..."
+msgstr ""
+
+#. applet.js:5103
+msgid "Easy Effects"
+msgstr ""
+
+#. applet.js:5117
+msgid "Display Station Logo"
+msgstr ""
+
+#. applet.js:5127
+msgid "Album Art desklet settings"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-wake-me-up->description
+#. applet.js:5132
+msgid "Wake me up!"
+msgstr ""
+
+#. applet.js:5141
+msgid "Show Album Art on desktop"
+msgstr ""
+
+#. settings-schema.json->show-volume-level-near-icon->description
+#. applet.js:5160
+msgid "Display volume level near icon"
+msgstr ""
+
+#. applet.js:5297
+msgid "You need the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. applet.js:5298
+msgid ""
+"You can install it by clicking on the first button and then searching for "
+"Album."
+msgstr ""
+
+#. applet.js:5299 applet.js:5317
+msgid "Desklets"
+msgstr ""
+
+#. applet.js:5315
+msgid "You need to activate the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. applet.js:5316
+msgid ""
+"You can activate it by clicking on the first button, then searching for "
+"Album and adding it with button [+]."
+msgstr ""
+
+#. lib/util.js:245
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr ""
+
+#. settings-schema.json->pageAlarmClock->title
+msgid "Alarm Clock"
+msgstr ""
+
+#. settings-schema.json->sectionBlacklist->title
+msgid "Unwanted (blacklist)"
+msgstr ""
+
+#. settings-schema.json->sectionImportRadiopp->title
+msgid "Only for Radio++ users"
+msgstr ""
+
+#. settings-schema.json->sectionBehaviorSettingsWindow->title
+msgid "Settings Window"
+msgstr ""
+
+#. settings-schema.json->sectionBehaviorOSD->title
+msgid "OSD"
+msgstr ""
+
+#. settings-schema.json->sectionMenuShortcuts->title
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#. settings-schema.json->sectionBehaviorHorizontalPanel->title
+msgid "Only on horizontal panels"
+msgstr ""
+
+#. settings-schema.json->sectionExperimental->title
+msgid "EXPERIMENTAL"
+msgstr ""
+
+#. settings-schema.json->sectionRecordingCache->title
+msgid "Cache"
+msgstr ""
+
+#. settings-schema.json->sectionYTIgnore->title
+msgid "Ignore YT"
+msgstr ""
+
+#. settings-schema.json->sectionWakeMeUp->title
+msgid "Options"
+msgstr ""
+
+#. settings-schema.json->sectionWorkingDays->title
+msgid "Working Days"
+msgstr ""
+
+#. settings-schema.json->sectionWorkOffDays->title
+msgid "Work-Off Days"
+msgstr ""
+
+#. settings-schema.json->radios->columns->title
+msgid "♥︎"
+msgstr ""
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Favicon"
+msgstr ""
+
+#. settings-schema.json->radios->columns->title
+msgid "Artist/Title swap"
+msgstr ""
+
+#. settings-schema.json->blacklist->columns->title
+msgid "Blacklisted URL"
+msgstr ""
+
+#. settings-schema.json->import-radiopp-button->description
+msgid "Import your stations from Radio++"
+msgstr ""
+
+#. settings-schema.json->import-blacklist-button->description
+msgid "Blacklist selected items from this list"
+msgstr ""
+
+#. settings-schema.json->maximize-vertically->description
+msgid "Vertical maximization"
+msgstr ""
+
+#. settings-schema.json->maximize-vertically->tooltip
+msgid ""
+"When this option is checked, this Settings Window will be maximized "
+"vertically the next time it is opened."
+msgstr ""
+
+#. settings-schema.json->volume-magnetic-on->description
+msgid "Magnetize all multiples of 25%"
+msgstr ""
+
+#. settings-schema.json->volume-show-osd->description
+msgid "Show OSD while changing volume"
+msgstr ""
+
+#. settings-schema.json->volume-show-osd->tooltip
+msgid "Should OSD (On-Screen Display) be displayed when changing volume?"
+msgstr ""
+
+#. settings-schema.json->volume-show-osd-starting-radio->description
+msgid "Show volume OSD when changing radio station"
+msgstr ""
+
+#. settings-schema.json->show-percent-char-in-osd->description
+msgid "Show '%' in OSD"
+msgstr ""
+
+#. settings-schema.json->show-horizontal-osd->description
+msgid "Show horizontal OSD"
+msgstr ""
+
+#. settings-schema.json->show-by-category->description
+msgid "Display the Station list beside the Category list"
+msgstr ""
+
+#. settings-schema.json->show-by-category->tooltip
+msgid ""
+"Checked: Hover (without clicking) over a Category to display its list of "
+"Stations; then select your station.\n"
+"Unchecked: Single list containing each category followed by its stations."
+msgstr ""
+
+#. settings-schema.json->shortcut-volume-up->description
+msgid "Increase Volume"
+msgstr ""
+
+#. settings-schema.json->shortcut-volume-down->description
+msgid "Decrease Volume"
+msgstr ""
+
+#. settings-schema.json->shortcut-volume-cut->description
+msgid "Mute"
+msgstr ""
+
+#. settings-schema.json->shortcut-radio-on-off->description
+msgid "Radio ON/OFF"
+msgstr ""
+
+#. settings-schema.json->shortcut-next-recent-radio->description
+msgid "Next station"
+msgstr ""
+
+#. settings-schema.json->shortcut-next-recent-radio->tooltip
+msgid "Next station recently listened to"
+msgstr ""
+
+#. settings-schema.json->shortcut-previous-recent-radio->description
+msgid "Previous station"
+msgstr ""
+
+#. settings-schema.json->shortcut-previous-recent-radio->tooltip
+msgid "Previous station recently listened to"
+msgstr ""
+
+#. settings-schema.json->show-favicon->description
+msgid "Display the logo of the radio station listened to"
+msgstr ""
+
+#. settings-schema.json->show-favicon->tooltip
+msgid "Replace this applet icon with the radio station logo, if it exists."
+msgstr ""
+
+#. settings-schema.json->image-resolution->description
+msgid "Quality of downloaded Album Art"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "Max Resolution"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "High Quality"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "Medium"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "Standard"
+msgstr ""
+
+#. settings-schema.json->image-resolution->tooltip
+msgid ""
+"Default: High Quality. Choose a value corresponding to your Network Quality."
+msgstr ""
+
+#. settings-schema.json->database-favorite->description
+msgid "Your favorite database:"
+msgstr ""
+
+#. settings-schema.json->database-favorite->options
+msgid "Random"
+msgstr ""
+
+#. settings-schema.json->cache-no-cache->description
+msgid "No cache"
+msgstr ""
+
+#. settings-schema.json->cache-no-cache->tooltip
+msgid ""
+"Checking this option limits memory usage, but no longer allows the user to "
+"rewind the cache (using the sound150@claudiux applet)."
+msgstr ""
+
+#. settings-schema.json->cache-minutes->description
+msgid ""
+"Minutes to cache\n"
+"0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
+msgstr ""
+
+#. settings-schema.json->cache-on-disk->description
+msgid ""
+"Cache on disk\n"
+"(Write packet data to a temporary file, instead of keeping them in memory.)"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->description
+msgid "Stream cache size"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->tooltip
+msgid ""
+"The amount of stream cache. Default: 10 MiB.\n"
+"Beware, setting this to a large value can reduce performance."
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "No limit"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "64 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "128 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "256 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "512 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "1 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "2 Mib"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "3 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "4 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "5 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "10 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "20 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "30 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "40 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "50 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "100 MiB"
+msgstr ""
+
+#. settings-schema.json->ignoreYT->description
+msgid "Ignore Youtube features"
+msgstr ""
+
+#. settings-schema.json->ignoreYT->tooltip
+msgid ""
+"Ignoring Youtube features reduces CPU load. But loading album art becomes "
+"impossible."
+msgstr ""
+
+#. settings-schema.json->recordings-keep-video->description
+msgid "Keep video (slower)"
+msgstr ""
+
+#. settings-schema.json->recordings-keep-video->tooltip
+msgid ""
+"Whether or not to keep the intermediate video file on disk after post-"
+"processing"
+msgstr ""
+
+#. settings-schema.json->horizontal-show-name->description
+msgid "Display radio name"
+msgstr ""
+
+#. settings-schema.json->horizontal-show-title->description
+msgid "Display title"
+msgstr ""
+
+#. settings-schema.json->horizontal-max-title-length->description
+msgid "Maximum title length"
+msgstr ""
+
+#. settings-schema.json->horizontal-max-title-length->tooltip
+msgid "0 means no maximum"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-wake-me-softly->description
+msgid "Wake me up softly"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-wake-me-softly->tooltip
+msgid "By checking this box, the sound volume gradually increases."
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-begin->description
+msgid "Initial volume (%)"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-end->description
+msgid "Final volume (%)"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-end->tooltip
+msgid "The final volume must be greater than or equal to the initial volume."
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-transition->description
+msgid "Transition duration (seconds)"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Sunday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Monday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Tuesday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Wednesday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Thursday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Friday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Saturday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days-time->description
+#. settings-schema.json->alarm-clock-workoff-days-time->description
+msgid "Wake-Up Time"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days-radio-button->description
+#. settings-schema.json->alarm-clock-workoff-days-radio-button->description
+msgid "Last-listened-to radio station"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-tink-on->description
+msgid "Activate tink to ensure speakers are awake"
+msgstr ""

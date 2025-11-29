@@ -1,0 +1,166 @@
+# TIMER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Severga, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-11-29 10:30-0500\n"
+"PO-Revision-Date: 2023-03-13 15:43-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#. applet.js:45 applet.js:214 applet.js:241 applet.js:268 applet.js:329
+#. applet.js:459 applet.js:531
+msgid "Timer: inactive"
+msgstr "Temporizador: inactivo"
+
+#. applet.js:86 applet.js:232 applet.js:259 applet.js:532
+msgid "In:  00:00:00"
+msgstr "En: 00:00:00"
+
+#. applet.js:89 applet.js:233 applet.js:260 applet.js:281 applet.js:342
+#. applet.js:502 applet.js:534
+msgid "At:  --:--:--"
+msgstr "A las:  --:--:--"
+
+#. applet.js:92
+msgid "Turn off computer on timer"
+msgstr "Apagar el ordenador al finalizar el temporizador"
+
+#. settings-schema.json->openSubmenu->options
+#. applet.js:97
+msgid "Quick setup"
+msgstr "Configuración rápida"
+
+#. applet.js:98
+msgid "        Tip: set slider to zero to deactivate timer"
+msgstr ""
+"        Consejo: ponga el control deslizante a cero para desactivar el "
+"temporizador"
+
+#. applet.js:107
+msgid "     00:00:00"
+msgstr "     00:00:00"
+
+#. applet.js:114
+msgid "24:00:00     "
+msgstr "24:00:00     "
+
+#. settings-schema.json->openSubmenu->options
+#. applet.js:128
+msgid "Precise setup"
+msgstr "Configuración precisa"
+
+#. applet.js:138 applet.js:163 applet.js:188
+msgid "  +  "
+msgstr "  +  "
+
+#. applet.js:142 applet.js:167 applet.js:192
+msgid "00"
+msgstr "00"
+
+#. applet.js:147 applet.js:172 applet.js:197
+msgid "  -  "
+msgstr "  -  "
+
+#. applet.js:155 applet.js:180
+msgid "  :  "
+msgstr "  :  "
+
+#. applet.js:209
+msgid "Set time (today)"
+msgstr "Hora fijada (hoy)"
+
+#. applet.js:236
+msgid "Set time (tomorrow)"
+msgstr "Hora fijada (mañana)"
+
+#. applet.js:263
+msgid "Set period"
+msgstr "Fijar periodo"
+
+#. applet.js:284
+msgid "Add preset"
+msgstr "Añadir preselección"
+
+#. settings-schema.json->openSubmenu->options
+#. settings-schema.json->preset->description
+#. settings-schema.json->preset->tooltip
+#. applet.js:293
+msgid "Presets"
+msgstr "Preselección"
+
+#. applet.js:315
+msgid ""
+"        Tip: use 'Precise setup' to add preset and  [ × ]  button to remove "
+"preset"
+msgstr ""
+"        Consejo: utilice 'Configuración precisa' para añadir preajustes y el "
+"botón  [ × ]  para eliminarlos"
+
+#. applet.js:346
+msgid "[ × ]"
+msgstr "[ × ]"
+
+#. applet.js:492 applet.js:514
+msgid "In:  "
+msgstr "En:  "
+
+#. applet.js:498 applet.js:522
+msgid "At:  "
+msgstr "A las:  "
+
+#. applet.js:524
+msgid "Turn off in "
+msgstr "Apagar en "
+
+#. applet.js:524
+msgid "s"
+msgstr "seg"
+
+#. applet.js:526
+msgid "Timer: "
+msgstr "Temporizador: "
+
+#. metadata.json->name
+#. applet.js:555
+msgid "Timer"
+msgstr "Temporizador"
+
+#. applet.js:555
+msgid "Time's up!"
+msgstr "¡Se acabó el tiempo!"
+
+#. metadata.json->description
+msgid "A timer applet"
+msgstr "Un applet de temporizador"
+
+#. settings-schema.json->soundOn->description
+#. settings-schema.json->soundOn->tooltip
+msgid "Play sound on timer"
+msgstr "Reproducir sonido al finalizar el temporizador"
+
+#. settings-schema.json->soundPath->description
+#. settings-schema.json->soundPath->tooltip
+msgid "Soundclip file path"
+msgstr "Ruta de archivo del clip de sonido"
+
+#. settings-schema.json->showNotifications->description
+#. settings-schema.json->showNotifications->tooltip
+msgid "Show system notification on timer"
+msgstr "Mostrar notificación del sistema al finalizar el temporizador"
+
+#. settings-schema.json->openSubmenu->description
+#. settings-schema.json->openSubmenu->tooltip
+msgid "Submenu to open initially"
+msgstr "Submenú a abrir inicialmente"

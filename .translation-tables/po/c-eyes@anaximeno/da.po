@@ -1,0 +1,466 @@
+# CINNAMON EYES
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# anaximeno, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-22 04:46-0100\n"
+"PO-Revision-Date: 2023-12-29 08:19+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. 4.2/applet.js:56 5.4/applet.js:56
+msgid ""
+"📢 The click effects will be removed from this applet on the version 6.2 of "
+"Cinnamon\n"
+"and moved to a new extension named mouse-click-effects which can already be "
+"installed\n"
+"on the Cinnamon Extensions settings module for versions of Cinnamon >= 5.4"
+msgstr ""
+
+#. 4.2/applet.js:396 5.4/applet.js:393
+msgid "click to deactivate the eye"
+msgstr "klik for at deaktivere øjet"
+
+#. 4.2/applet.js:396 5.4/applet.js:393
+msgid "click to activate the eye"
+msgstr "klik for at aktivere øjet"
+
+#. 4.2/applet.js:397 5.4/applet.js:394
+msgid "TIP"
+msgstr "TIP"
+
+#. 6.2/applet.js:48
+msgid "Hey, I saw that!"
+msgstr ""
+
+#. metadata.json->name
+msgid "Cinnamon Eyes"
+msgstr "Cinnamon-øjne"
+
+#. metadata.json->description
+#, fuzzy
+msgid ""
+"An applet for Cinnamon that adds an eye to the panel bar that follows your "
+"cursor."
+msgstr ""
+"Tilføjer et øje til panelet, som følger markøren og viser klikanimationer."
+
+#. 4.2->settings-schema.json->eye->title
+#. 5.4->settings-schema.json->eye->title
+msgid "Eye"
+msgstr "Øje"
+
+#. 4.2->settings-schema.json->effects->title
+#. 5.4->settings-schema.json->effects->title
+msgid "Effects"
+msgstr "Effekter"
+
+#. 4.2->settings-schema.json->eye-generic->title
+#. 4.2->settings-schema.json->click-generic->title
+#. 5.4->settings-schema.json->eye-generic->title
+#. 5.4->settings-schema.json->click-generic->title
+#. 6.2->settings-schema.json->general-page->title
+#. 6.2->settings-schema.json->general-section->title
+msgid "General"
+msgstr "Generelt"
+
+#. 4.2->settings-schema.json->eye-colors->title
+#. 4.2->settings-schema.json->click-colors->title
+#. 5.4->settings-schema.json->eye-colors->title
+#. 5.4->settings-schema.json->click-colors->title
+#. 6.2->settings-schema.json->colors-section->title
+msgid "Colors"
+msgstr "Farver"
+
+#. 4.2->settings-schema.json->click-events->title
+#. 5.4->settings-schema.json->click-events->title
+msgid "Events"
+msgstr "Hændelser"
+
+#. 4.2->settings-schema.json->eye-mode->description
+#. 5.4->settings-schema.json->eye-mode->description
+msgid "Mode"
+msgstr "Tilstand"
+
+#. 4.2->settings-schema.json->eye-mode->options
+#. 5.4->settings-schema.json->eye-mode->options
+#. 6.2->settings-schema.json->mode->options
+msgid "Lids"
+msgstr "Mandelformet"
+
+#. 4.2->settings-schema.json->eye-mode->options
+#. 5.4->settings-schema.json->eye-mode->options
+#. 6.2->settings-schema.json->mode->options
+msgid "Bulb"
+msgstr "Rundt"
+
+#. 4.2->settings-schema.json->eye-line-width->description
+#. 5.4->settings-schema.json->eye-line-width->description
+#. 6.2->settings-schema.json->line-width->description
+msgid "Line Width"
+msgstr "Linjebredde"
+
+#. 4.2->settings-schema.json->eye-line-width->units
+#. 4.2->settings-schema.json->eye-margin->units
+#. 4.2->settings-schema.json->eye-vertical-padding->units
+#. 4.2->settings-schema.json->mouse-click-image-size->units
+#. 5.4->settings-schema.json->eye-line-width->units
+#. 5.4->settings-schema.json->eye-margin->units
+#. 5.4->settings-schema.json->eye-vertical-padding->units
+#. 5.4->settings-schema.json->mouse-click-image-size->units
+#. 6.2->settings-schema.json->line-width->units
+#. 6.2->settings-schema.json->margin->units
+#. 6.2->settings-schema.json->padding->units
+msgid "px"
+msgstr "px"
+
+#. 4.2->settings-schema.json->eye-margin->description
+#. 5.4->settings-schema.json->eye-margin->description
+#. 6.2->settings-schema.json->margin->description
+msgid "Margin"
+msgstr "Margen"
+
+#. 4.2->settings-schema.json->eye-vertical-padding->description
+#. 5.4->settings-schema.json->eye-vertical-padding->description
+#. 6.2->settings-schema.json->padding->description
+msgid "Padding"
+msgstr "Udfyldning"
+
+#. 4.2->settings-schema.json->eye-repaint-interval->units
+#. 4.2->settings-schema.json->fade-timeout->units
+#. 5.4->settings-schema.json->eye-repaint-interval->units
+#. 5.4->settings-schema.json->fade-timeout->units
+#. 6.2->settings-schema.json->repaint-interval->units
+msgid "ms"
+msgstr "ms"
+
+#. 4.2->settings-schema.json->eye-repaint-interval->description
+#. 5.4->settings-schema.json->eye-repaint-interval->description
+#. 6.2->settings-schema.json->repaint-interval->description
+#, fuzzy
+msgid "Eye Update Interval"
+msgstr "Genoptegningsinterval"
+
+#. 4.2->settings-schema.json->eye-repaint-interval->tooltip
+#. 5.4->settings-schema.json->eye-repaint-interval->tooltip
+#. 6.2->settings-schema.json->repaint-interval->tooltip
+msgid ""
+"This setting controls the time to redraw the eye again. Lower values "
+"(measured in miliseconds) result in smoother animation but require more "
+"processing power."
+msgstr ""
+
+#. 4.2->settings-schema.json->eye-repaint-angle->units
+#. 5.4->settings-schema.json->eye-repaint-angle->units
+#. 6.2->settings-schema.json->repaint-angle->units
+msgid "radians"
+msgstr ""
+
+#. 4.2->settings-schema.json->eye-repaint-angle->description
+#. 5.4->settings-schema.json->eye-repaint-angle->description
+#. 6.2->settings-schema.json->repaint-angle->description
+msgid "Eye Update Sensitivity"
+msgstr ""
+
+#. 4.2->settings-schema.json->eye-repaint-angle->tooltip
+#. 5.4->settings-schema.json->eye-repaint-angle->tooltip
+#. 6.2->settings-schema.json->repaint-angle->tooltip
+msgid ""
+"This setting controls the minimum angle change between mouse movements "
+"required to redraw the eye. Lower values (measured in radians) result in "
+"smoother animation but require more processing power."
+msgstr ""
+
+#. 4.2->settings-schema.json->eye-activate-by-default->description
+#. 5.4->settings-schema.json->eye-activate-by-default->description
+msgid "Start Activated"
+msgstr "Start aktiveret"
+
+#. 4.2->settings-schema.json->deactivate-on-fullscreen->description
+#. 4.2->settings-schema.json->deactivate-effects-on-fullscreen->description
+#. 5.4->settings-schema.json->deactivate-on-fullscreen->description
+#. 5.4->settings-schema.json->deactivate-effects-on-fullscreen->description
+#. 6.2->settings-schema.json->deactivate-on-fullscreen->description
+msgid "Deactivate On Fullscreen"
+msgstr "Deaktivér ved fuldskærm"
+
+#. 4.2->settings-schema.json->eye-clicked-color->description
+#. 5.4->settings-schema.json->eye-clicked-color->description
+msgid "Activated Base Color"
+msgstr "Aktiveret grundfarve"
+
+#. 4.2->settings-schema.json->iris-clicked-color->description
+#. 5.4->settings-schema.json->iris-clicked-color->description
+msgid "Activated Iris Color"
+msgstr "Aktiveret irisfarve"
+
+#. 4.2->settings-schema.json->pupil-clicked-color->description
+#. 5.4->settings-schema.json->pupil-clicked-color->description
+msgid "Activated Pupil Color"
+msgstr "Aktiveret pupilfarve"
+
+#. 4.2->settings-schema.json->fill-lids-color-painting->description
+#. 4.2->settings-schema.json->fill-bulb-color-painting->description
+#. 5.4->settings-schema.json->fill-lids-color-painting->description
+#. 5.4->settings-schema.json->fill-bulb-color-painting->description
+#. 6.2->settings-schema.json->fill-lids-color-painting->description
+#. 6.2->settings-schema.json->fill-bulb-color-painting->description
+msgid "Fill the Colors Inside the Eye"
+msgstr ""
+
+#. 4.2->settings-schema.json->mouse-click-enable->description
+#. 5.4->settings-schema.json->mouse-click-enable->description
+msgid "Enable Effects"
+msgstr "Aktivér effekter"
+
+#. 4.2->settings-schema.json->mouse-click-mode->description
+#. 5.4->settings-schema.json->mouse-click-mode->description
+msgid "Icon Mode"
+msgstr "Ikontilstand"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Simple"
+msgstr "Simpel"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Trigun"
+msgstr "Trigun"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Nublo"
+msgstr "Nublo"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Risco"
+msgstr "Risco"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Wolf"
+msgstr "Wolf"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Pincel"
+msgstr "Pincel"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Claw"
+msgstr "Claw"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Metropoli"
+msgstr "Metropoli"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Flowey"
+msgstr "Flowey"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Kusco"
+msgstr "Kusco"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Ouroboros"
+msgstr "Ouroboros"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Helix"
+msgstr "Helix"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Direction"
+msgstr "Direction"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Spinks"
+msgstr "Spinks"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Thatch"
+msgstr "Thatch"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Cotton"
+msgstr "Cotton"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Circle"
+msgstr "Circle"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Gear"
+msgstr "Gear"
+
+#. 4.2->settings-schema.json->mouse-click-image-size->description
+#. 5.4->settings-schema.json->mouse-click-image-size->description
+msgid "Icon Size"
+msgstr "Ikonstørrelse"
+
+#. 4.2->settings-schema.json->click-animation-mode->description
+#. 5.4->settings-schema.json->click-animation-mode->description
+msgid "Click Animation Mode"
+msgstr "Animationstilstand ved klik"
+
+#. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
+msgid "Blink"
+msgstr "Blink"
+
+#. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
+msgid "Bounce Back"
+msgstr "Hop tilbage"
+
+#. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
+msgid "Retract"
+msgstr "Træk tilbage"
+
+#. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
+msgid "Expand"
+msgstr "Udvid"
+
+#. 4.2->settings-schema.json->mouse-left-click-enable->description
+#. 5.4->settings-schema.json->mouse-left-click-enable->description
+msgid "Enable Left Click"
+msgstr "Aktivér venstreklik"
+
+#. 4.2->settings-schema.json->mouse-middle-click-enable->description
+#. 5.4->settings-schema.json->mouse-middle-click-enable->description
+msgid "Enable Middle Click"
+msgstr "Aktivér midterklik"
+
+#. 4.2->settings-schema.json->mouse-right-click-enable->description
+#. 5.4->settings-schema.json->mouse-right-click-enable->description
+msgid "Enable Right Click"
+msgstr "Aktivér højreklik"
+
+#. 4.2->settings-schema.json->fade-timeout->description
+#. 5.4->settings-schema.json->fade-timeout->description
+msgid "Fade Timeout"
+msgstr "Timeout for udtoning"
+
+#. 4.2->settings-schema.json->mouse-left-click-color->description
+#. 5.4->settings-schema.json->mouse-left-click-color->description
+msgid "Left Click Color"
+msgstr "Venstrekliksfarve"
+
+#. 4.2->settings-schema.json->mouse-middle-click-color->description
+#. 5.4->settings-schema.json->mouse-middle-click-color->description
+msgid "Middle Click Color"
+msgstr "Midterkliksfarve"
+
+#. 4.2->settings-schema.json->mouse-right-click-color->description
+#. 5.4->settings-schema.json->mouse-right-click-color->description
+msgid "Right Click Color"
+msgstr "Højrekliksfarve"
+
+#. 4.2->settings-schema.json->mouse-click-opacity->description
+#. 5.4->settings-schema.json->mouse-click-opacity->description
+msgid "General Opacity"
+msgstr "Generel uigennemsigtighed"
+
+#. 5.4->settings-schema.json->click-info->title
+msgid "Info"
+msgstr ""
+
+#. 5.4->settings-schema.json->click-effects-moved-on-
+#. cinnamon-6.2-info->description
+msgid ""
+"In Cinnamon versions 6.2 and later, the click effects have been removed from "
+"this applet and relocated to a new extension called 'mouse-click-effects,' "
+"which can be installed through the Cinnamon Extensions settings module."
+msgstr ""
+
+#. 6.2->settings-schema.json->style-page->title
+#. 6.2->settings-schema.json->styles-section->title
+msgid "Style"
+msgstr ""
+
+#. 6.2->settings-schema.json->optimization-section->title
+msgid "Optimizations"
+msgstr ""
+
+#. 6.2->settings-schema.json->mode->description
+#, fuzzy
+msgid "Eye Mode"
+msgstr "Tilstand"
+
+#. 6.2->settings-schema.json->tooltip-message->description
+msgid "Tooltip Message on Hover"
+msgstr ""
+
+#. 6.2->settings-schema.json->optimization-mode->description
+#, fuzzy
+msgid "Optimization Mode"
+msgstr "Animationstilstand ved klik"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Battery"
+msgstr ""
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Balanced"
+msgstr ""
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Performance"
+msgstr ""
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Manual"
+msgstr ""
+
+#. 6.2->settings-schema.json->use-alternative-colors->description
+msgid "Use Alternative Colors for the Eye"
+msgstr ""
+
+#. 6.2->settings-schema.json->use-alternative-colors->tooltip
+msgid ""
+"When disabled it will use the current system theme's default color for panel "
+"items."
+msgstr ""
+
+#. 6.2->settings-schema.json->base-color->description
+#, fuzzy
+msgid "Base Color"
+msgstr "Aktiveret grundfarve"
+
+#. 6.2->settings-schema.json->iris-color->description
+#, fuzzy
+msgid "Iris Color"
+msgstr "Aktiveret irisfarve"
+
+#. 6.2->settings-schema.json->pupil-color->description
+#, fuzzy
+msgid "Pupil Color"
+msgstr "Aktiveret pupilfarve"

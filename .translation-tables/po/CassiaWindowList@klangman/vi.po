@@ -1,0 +1,2510 @@
+# CASSIA WINDOW LIST
+# This file is put in the public domain.
+# klangman, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: CassiaWindowList@klangman 2.4.4\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-08-31 21:09-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 4.0/applet.js:611 6.0/applet.js:611 6.4/applet.js:589
+msgid "all buttons"
+msgstr "tất cả nút"
+
+#. 4.0/applet.js:1955 6.0/applet.js:1955 6.4/applet.js:1933
+msgid "windows in this group"
+msgstr "cửa sổ trong nhóm này"
+
+#. 4.0/applet.js:3342 6.0/applet.js:3342 6.4/applet.js:3314
+msgid "Applet Preferences"
+msgstr "Tùy chọn Applet"
+
+#. 4.0/applet.js:3346 6.0/applet.js:3346 6.4/applet.js:3318
+msgid "About..."
+msgstr "Giới thiệu..."
+
+#. 4.0/applet.js:3350 6.0/applet.js:3350 6.4/applet.js:3322
+msgid "Configure..."
+msgstr "Cấu hình..."
+
+#. 4.0/applet.js:3354 6.0/applet.js:3354 6.4/applet.js:3326
+msgid "Website"
+msgstr "Trang web"
+
+#. 4.0/applet.js:3358 6.0/applet.js:3358 6.4/applet.js:3330
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Xóa '%s'"
+
+#. 4.0/applet.js:3360 6.0/applet.js:3360 6.4/applet.js:3332
+msgid "Do you really want to remove this instance of CassiaWindowList?"
+msgstr "Bạn có thực sự muốn xóa phiên bản CassiaWindowList này không?"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+#. 4.0/applet.js:3369 6.0/applet.js:3369 6.4/applet.js:3341
+msgid "Open new window"
+msgstr "Mở cửa sổ mới"
+
+#. 4.0/applet.js:3377 6.0/applet.js:3377 6.4/applet.js:3349
+msgid "Remove from panel"
+msgstr "Xóa khỏi bảng điều khiển"
+
+#. 4.0/applet.js:3379 6.0/applet.js:3379 6.4/applet.js:3351
+msgid "Remove from this workspace"
+msgstr "Xóa khỏi không gian làm việc này"
+
+#. 4.0/applet.js:3385 6.0/applet.js:3385 6.4/applet.js:3357
+msgid "Pin to panel"
+msgstr "Ghim vào bảng điều khiển"
+
+#. 4.0/applet.js:3387 6.0/applet.js:3387 6.4/applet.js:3359
+msgid "Pin to this workspace"
+msgstr "Ghim vào không gian làm việc này"
+
+#. 4.0/applet.js:3428 6.0/applet.js:3428 6.4/applet.js:3400
+msgid "Pin to other workspaces"
+msgstr "Ghim vào các không gian làm việc khác"
+
+#. 4.0/applet.js:3449 6.0/applet.js:3449 6.4/applet.js:3421
+msgid "Pin to all workspaces"
+msgstr "Ghim vào tất cả không gian làm việc"
+
+#. 4.0/applet.js:3467 6.0/applet.js:3467 6.4/applet.js:3439
+msgid "Pin to launcher"
+msgstr "Ghim vào trình khởi chạy"
+
+#. 4.0/applet.js:3485 4.0/applet.js:3706 6.0/applet.js:3485 6.0/applet.js:3706
+#. 6.4/applet.js:3457 6.4/applet.js:3675
+msgid "Add new Hotkey for"
+msgstr "Thêm phím tắt mới cho"
+
+#. 4.0/applet.js:3499 6.0/applet.js:3499 6.4/applet.js:3471
+msgid "Recent files"
+msgstr "Tệp gần đây"
+
+#. 4.0/applet.js:3523 6.0/applet.js:3523 6.4/applet.js:3495
+msgid "Places"
+msgstr "Địa điểm"
+
+#. 4.0/applet.js:3562 6.0/applet.js:3562 6.4/applet.js:3534
+msgid "Prioritize window list position"
+msgstr "Ưu tiên vị trí danh sách cửa sổ"
+
+#. 4.0/applet.js:3582 6.0/applet.js:3582 6.4/applet.js:3554
+msgid "Always on top"
+msgstr "Luôn ở trên cùng"
+
+#. 4.0/applet.js:3594 6.0/applet.js:3594 6.4/applet.js:3566
+msgid "Only on this workspace"
+msgstr "Chỉ trên không gian làm việc này"
+
+#. 4.0/applet.js:3596 6.0/applet.js:3596 6.4/applet.js:3568
+msgid "Visible on all workspaces"
+msgstr "Hiển thị trên tất cả không gian làm việc"
+
+#. 4.0/applet.js:3597 6.0/applet.js:3597 6.4/applet.js:3569
+msgid "Move to another workspace"
+msgstr "Chuyển đến không gian làm việc khác"
+
+#. 4.0/applet.js:3606 6.0/applet.js:3606 6.4/applet.js:3578
+msgid " (this workspace)"
+msgstr " (không gian làm việc này)"
+
+#. 4.0/applet.js:3619 6.0/applet.js:3619 6.4/applet.js:3591
+msgid "Move to another monitor"
+msgstr "Chuyển đến màn hình khác"
+
+#. 4.0/applet.js:3627 6.0/applet.js:3627 6.4/applet.js:3599
+msgid "Monitor"
+msgstr "Màn hình"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+#. 4.0/applet.js:3644 6.0/applet.js:3644 6.4/applet.js:3613
+msgid "Move window here"
+msgstr "Di chuyển cửa sổ đến đây"
+
+#. 4.0/applet.js:3661 6.0/applet.js:3661 6.4/applet.js:3630
+msgid "unassigned"
+msgstr "chưa gán"
+
+#. 4.0/applet.js:3672 4.0/applet.js:3703 6.0/applet.js:3672 6.0/applet.js:3703
+#. 6.4/applet.js:3641 6.4/applet.js:3672
+msgid "Assign window to a hotkey"
+msgstr "Gán cửa sổ cho phím tắt"
+
+#. 4.0/applet.js:3726 6.0/applet.js:3726 6.4/applet.js:3695
+msgid "Change application label contents"
+msgstr "Thay đổi nội dung nhãn ứng dụng"
+
+#. 4.0/applet.js:3729 6.0/applet.js:3729 6.4/applet.js:3698
+msgid "Remove custom setting"
+msgstr "Xóa thiết lập tùy chỉnh"
+
+#. 4.0/applet.js:3736 6.0/applet.js:3736 6.4/applet.js:3705
+msgid "Use window title"
+msgstr "Dùng tiêu đề cửa sổ"
+
+#. 4.0/applet.js:3743 6.0/applet.js:3743 6.4/applet.js:3712
+msgid "Use application name"
+msgstr "Dùng tên ứng dụng"
+
+#. 4.0/applet.js:3750 6.0/applet.js:3750 6.4/applet.js:3719
+msgid "No label"
+msgstr "Không có nhãn"
+
+#. 4.0/applet.js:3765 6.0/applet.js:3765 6.4/applet.js:3734
+msgid "Ungroup application windows"
+msgstr "Bỏ nhóm cửa sổ ứng dụng"
+
+#. 4.0/applet.js:3773 6.0/applet.js:3773 6.4/applet.js:3742
+msgid "Group application windows"
+msgstr "Nhóm cửa sổ ứng dụng"
+
+#. 4.0/applet.js:3786 6.0/applet.js:3786 6.4/applet.js:3755
+msgid "Automatic grouping/ungrouping"
+msgstr "Tự động nhóm/bỏ nhóm"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+#. 4.0/applet.js:3814 6.0/applet.js:3814 6.4/applet.js:3783
+msgid "Move titlebar on to screen"
+msgstr "Di chuyển thanh tiêu đề lên màn hình"
+
+#. 4.0/applet.js:3819 6.0/applet.js:3819 6.4/applet.js:3788
+msgid "Restore"
+msgstr "Khôi phục"
+
+#. 4.0/applet.js:3823 6.0/applet.js:3823 6.4/applet.js:3792
+msgid "Minimize"
+msgstr "Thu nhỏ"
+
+#. 4.0/applet.js:3829 6.0/applet.js:3829 6.4/applet.js:3798
+msgid "Unmaximize"
+msgstr "Bỏ phóng to"
+
+#. 4.0/applet.js:3837 6.0/applet.js:3837 6.4/applet.js:3806
+msgid "Close others"
+msgstr "Đóng các cửa sổ khác"
+
+#. 4.0/applet.js:3839 6.0/applet.js:3839 6.4/applet.js:3808
+msgid "Close other windows for application"
+msgstr "Đóng các cửa sổ khác của ứng dụng"
+
+#. 4.0/applet.js:3860 6.0/applet.js:3860 6.4/applet.js:3829
+msgid "Close all"
+msgstr "Đóng tất cả"
+
+#. 4.0/applet.js:3862 6.0/applet.js:3862 6.4/applet.js:3831
+msgid "Close all windows for application"
+msgstr "Đóng tất cả cửa sổ của ứng dụng"
+
+#. 4.0/applet.js:3878 6.0/applet.js:3878 6.4/applet.js:3847
+msgid "Close"
+msgstr "Đóng"
+
+#. SetupWizard.py:188
+msgid "Exit"
+msgstr "Thoát"
+
+#. SetupWizard.py:210
+msgid "Next"
+msgstr "Tiếp theo"
+
+#. SetupWizard.py:283
+msgid "Backup file already exist. Do you want to overwrite it?"
+msgstr "Tệp sao lưu đã tồn tại. Bạn có muốn ghi đè lên không?"
+
+#. metadata.json->name
+msgid "Cassia Window List"
+msgstr "Danh sách cửa sổ Cassia"
+
+#. metadata.json->description
+msgid "A window list/panel launchers based on CobiWindowList with some additional features"
+msgstr "Danh sách cửa sổ/trình khởi chạy bảng điều khiển dựa trên CobiWindowList với một số tính năng bổ sung"
+
+#. 4.0->settings-schema.json->caption-page->title
+#. 6.0->settings-schema.json->caption-page->title
+#. 6.4->settings-schema.json->caption-page->title
+msgid "Labels"
+msgstr "Nhãn"
+
+#. 4.0->settings-schema.json->general-page->title
+#. 6.0->settings-schema.json->general-page->title
+#. 6.4->settings-schema.json->general-page->title
+msgid "General"
+msgstr "Chung"
+
+#. 4.0->settings-schema.json->mouse-page->title
+#. 6.0->settings-schema.json->mouse-page->title
+#. 6.4->settings-schema.json->mouse-page->title
+msgid "Mouse"
+msgstr "Chuột"
+
+#. 4.0->settings-schema.json->preview-page->title
+#. 6.0->settings-schema.json->preview-page->title
+#. 6.4->settings-schema.json->preview-page->title
+msgid "Thumbnails"
+msgstr "Hình thu nhỏ"
+
+#. 4.0->settings-schema.json->hotkey-page->title
+#. 6.0->settings-schema.json->hotkey-page->title
+#. 6.4->settings-schema.json->hotkey-page->title
+msgid "Hotkeys"
+msgstr "Phím tắt"
+
+#. 4.0->settings-schema.json->advanced-page->title
+#. 6.0->settings-schema.json->advanced-page->title
+#. 6.4->settings-schema.json->advanced-page->title
+msgid "Advanced"
+msgstr "Nâng cao"
+
+#. 4.0->settings-schema.json->caption-settings->title
+#. 6.0->settings-schema.json->caption-settings->title
+#. 6.4->settings-schema.json->caption-settings->title
+msgid "Window list button label settings"
+msgstr "Thiết lập nhãn nút danh sách cửa sổ"
+
+#. 4.0->settings-schema.json->caption-number-settings->title
+#. 6.0->settings-schema.json->caption-number-settings->title
+#. 6.4->settings-schema.json->caption-number-settings->title
+msgid "Icon overlay label settings"
+msgstr "Thiết lập nhãn phủ biểu tượng"
+
+#. 4.0->settings-schema.json->caption-progress-settings->title
+#. 6.0->settings-schema.json->caption-progress-settings->title
+#. 6.4->settings-schema.json->caption-progress-settings->title
+msgid "Progress settings"
+msgstr "Thiết lập tiến trình"
+
+#. 4.0->settings-schema.json->general-settings->title
+#. 6.0->settings-schema.json->general-settings->title
+#. 6.4->settings-schema.json->general-settings->title
+msgid "General window list settings"
+msgstr "Thiết lập danh sách cửa sổ chung"
+
+#. 4.0->settings-schema.json->general-mouse->title
+#. 6.0->settings-schema.json->general-mouse->title
+#. 6.4->settings-schema.json->general-mouse->title
+msgid "Window list mouse settings"
+msgstr "Thiết lập chuột danh sách cửa sổ"
+
+#. 4.0->settings-schema.json->preview-settings->title
+#. 6.0->settings-schema.json->preview-settings->title
+#. 6.4->settings-schema.json->preview-settings->title
+msgid "Thumbnails menu settings"
+msgstr "Thiết lập menu hình thu nhỏ"
+
+#. 4.0->settings-schema.json->preview-mouse-section->title
+#. 6.0->settings-schema.json->preview-mouse-section->title
+#. 6.4->settings-schema.json->preview-mouse-section->title
+msgid "Thumbnails menu mouse settings"
+msgstr "Thiết lập chuột menu hình thu nhỏ"
+
+#. 4.0->settings-schema.json->hotkey-settings->title
+#. 6.0->settings-schema.json->hotkey-settings->title
+#. 6.4->settings-schema.json->hotkey-settings->title
+msgid "Hotkey settings"
+msgstr "Thiết lập phím tắt"
+
+#. 4.0->settings-schema.json->adv-mouse-settings->title
+#. 4.0->settings-schema.json->adv-mouse-list->description
+#. 6.0->settings-schema.json->adv-mouse-settings->title
+#. 6.0->settings-schema.json->adv-mouse-list->description
+#. 6.4->settings-schema.json->adv-mouse-settings->title
+#. 6.4->settings-schema.json->adv-mouse-list->description
+msgid "Ctrl/Shift + mouse button actions"
+msgstr "Hành động nút chuột với Ctrl/Shift"
+
+#. 4.0->settings-schema.json->caption-type->options
+#. 6.0->settings-schema.json->caption-type->options
+#. 6.4->settings-schema.json->caption-type->options
+msgid "Application name"
+msgstr "Tên ứng dụng"
+
+#. 4.0->settings-schema.json->caption-type->options
+#. 6.0->settings-schema.json->caption-type->options
+#. 6.4->settings-schema.json->caption-type->options
+msgid "Window title"
+msgstr "Tiêu đề cửa sổ"
+
+#. 4.0->settings-schema.json->caption-type->description
+#. 6.0->settings-schema.json->caption-type->description
+#. 6.4->settings-schema.json->caption-type->description
+msgid "Label contents"
+msgstr "Nội dung nhãn"
+
+#. 4.0->settings-schema.json->caption-type->tooltip
+#. 6.0->settings-schema.json->caption-type->tooltip
+#. 6.4->settings-schema.json->caption-type->tooltip
+msgid "What the content of the label will be"
+msgstr "Nội dung của nhãn sẽ là gì"
+
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for-pined->options
+#. 6.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
+#. 6.4->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for-pined->options
+msgid "Never"
+msgstr "Không bao giờ"
+
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for-pined->options
+#. 6.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
+#. 6.4->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for-pined->options
+msgid "Always"
+msgstr "Luôn luôn"
+
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for-pined->options
+#. 6.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
+#. 6.4->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for-pined->options
+msgid "Focused"
+msgstr "Được chọn"
+
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for->options
+msgid "One per application pool"
+msgstr "Một cho mỗi nhóm ứng dụng"
+
+#. 4.0->settings-schema.json->display-caption-for->description
+#. 6.0->settings-schema.json->display-caption-for->description
+#. 6.4->settings-schema.json->display-caption-for->description
+msgid "Display labels for generic window list buttons"
+msgstr "Hiển thị nhãn cho nút danh sách cửa sổ chung"
+
+#. 4.0->settings-schema.json->display-caption-for->tooltip
+#. 6.0->settings-schema.json->display-caption-for->tooltip
+#. 6.4->settings-schema.json->display-caption-for->tooltip
+msgid ""
+"Never: No windows get labels\n"
+"Always: All windows get labels\n"
+"Focused: The window with focus will have a label\n"
+"One per application pool: Only one label for a set of adjacent application windows"
+msgstr ""
+"Không bao giờ: Không cửa sổ nào có nhãn\n"
+"Luôn luôn: Tất cả cửa sổ đều có nhãn\n"
+"Được chọn: Cửa sổ được chọn sẽ có nhãn\n"
+"Một cho mỗi nhóm ứng dụng: Chỉ một nhãn cho một nhóm cửa sổ ứng dụng liền kề"
+
+#. 4.0->settings-schema.json->display-caption-for-pined->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
+#. 6.4->settings-schema.json->display-caption-for-pined->options
+msgid "Running"
+msgstr "Đang chạy"
+
+#. 4.0->settings-schema.json->display-caption-for-pined->description
+#. 6.0->settings-schema.json->display-caption-for-pined->description
+#. 6.4->settings-schema.json->display-caption-for-pined->description
+msgid "Display labels for pinned buttons"
+msgstr "Hiển thị nhãn cho nút đã ghim"
+
+#. 4.0->settings-schema.json->display-caption-for-pined->tooltip
+#. 6.0->settings-schema.json->display-caption-for-pined->tooltip
+#. 6.4->settings-schema.json->display-caption-for-pined->tooltip
+msgid ""
+"Never: No pinned windows will have a label\n"
+"Always: All pinned windows will have labels\n"
+"Running: Only pinned windows that are running will have a label\n"
+"Focused: Only the pinned window with focus will have a label"
+msgstr ""
+"Không bao giờ: Không cửa sổ đã ghim nào có nhãn\n"
+"Luôn luôn: Tất cả cửa sổ đã ghim đều có nhãn\n"
+"Đang chạy: Chỉ cửa sổ đã ghim đang chạy mới có nhãn\n"
+"Được chọn: Chỉ cửa sổ đã ghim được chọn mới có nhãn"
+
+#. 4.0->settings-schema.json->hide-caption-for-minimized->options
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->hide-caption-for-minimized->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->hide-caption-for-minimized->options
+#. 6.4->settings-schema.json->display-indicators->options
+msgid "None"
+msgstr "Không"
+
+#. 4.0->settings-schema.json->hide-caption-for-minimized->options
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->hide-caption-for-minimized->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->hide-caption-for-minimized->options
+#. 6.4->settings-schema.json->display-indicators->options
+msgid "Minimized windows"
+msgstr "Cửa sổ đã thu nhỏ"
+
+#. 4.0->settings-schema.json->hide-caption-for-minimized->options
+#. 6.0->settings-schema.json->hide-caption-for-minimized->options
+#. 6.4->settings-schema.json->hide-caption-for-minimized->options
+msgid "Windows on other workspaces"
+msgstr "Cửa sổ trên không gian làm việc khác"
+
+#. 4.0->settings-schema.json->hide-caption-for-minimized->options
+#. 6.0->settings-schema.json->hide-caption-for-minimized->options
+#. 6.4->settings-schema.json->hide-caption-for-minimized->options
+msgid "Windows on other monitors"
+msgstr "Cửa sổ trên màn hình khác"
+
+#. 4.0->settings-schema.json->hide-caption-for-minimized->description
+#. 6.0->settings-schema.json->hide-caption-for-minimized->description
+#. 6.4->settings-schema.json->hide-caption-for-minimized->description
+msgid "Hide labels for"
+msgstr "Ẩn nhãn cho"
+
+#. 4.0->settings-schema.json->hide-caption-for-minimized->tooltip
+#. 6.0->settings-schema.json->hide-caption-for-minimized->tooltip
+#. 6.4->settings-schema.json->hide-caption-for-minimized->tooltip
+msgid "Select the type of window state for which window list button labels should be hidden. For application pools, the label will still show unless all application windows have the selected property"
+msgstr "Chọn loại trạng thái cửa sổ mà nhãn nút danh sách cửa sổ sẽ bị ẩn. Đối với nhóm ứng dụng, nhãn vẫn sẽ hiển thị trừ khi tất cả cửa sổ ứng dụng đều có thuộc tính đã chọn"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
+msgid "Pinned applications"
+msgstr "Ứng dụng đã ghim"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
+msgid "Minimized and pinned"
+msgstr "Đã thu nhỏ và đã ghim"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->number-type->options
+msgid "Application group window count"
+msgstr "Số lượng cửa sổ nhóm ứng dụng"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
+msgid "Application group indicator (⋮)"
+msgstr "Chỉ báo nhóm ứng dụng (⋮)"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
+msgid "Workspace number (smart)"
+msgstr "Số không gian làm việc (thông minh)"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
+msgid "Monitor number (smart)"
+msgstr "Số màn hình (thông minh)"
+
+#. 4.0->settings-schema.json->display-indicators->description
+#. 6.0->settings-schema.json->display-indicators->description
+#. 6.4->settings-schema.json->display-indicators->description
+msgid "Display status indicators"
+msgstr "Hiển thị chỉ báo trạng thái"
+
+#. 4.0->settings-schema.json->display-indicators->tooltip
+#. 6.0->settings-schema.json->display-indicators->tooltip
+#. 6.4->settings-schema.json->display-indicators->tooltip
+msgid "Controls what information is prepended to the button label text. On horizontal panels this data is shown even when the primary label contents are removed. Setting this to None will allow for the smallest button size. When on vertical panels this setting is ignored."
+msgstr "Kiểm soát thông tin nào sẽ được thêm vào trước nội dung nhãn nút. Trên bảng ngang, dữ liệu này vẫn hiển thị ngay cả khi nội dung nhãn chính bị loại bỏ. Đặt thành Không sẽ cho kích thước nút nhỏ nhất. Trên bảng dọc, thiết lập này sẽ bị bỏ qua."
+
+#. 4.0->settings-schema.json->auto-hide-indicators->description
+#. 6.0->settings-schema.json->auto-hide-indicators->description
+#. 6.4->settings-schema.json->auto-hide-indicators->description
+msgid "Hide status indicators when space is limited"
+msgstr "Ẩn chỉ báo trạng thái khi không gian bị hạn chế"
+
+#. 4.0->settings-schema.json->auto-hide-indicators->tooltip
+#. 6.0->settings-schema.json->auto-hide-indicators->tooltip
+#. 6.4->settings-schema.json->auto-hide-indicators->tooltip
+msgid "Hide status indicators when window list space is limited causing button labels to shrink"
+msgstr "Ẩn chỉ báo trạng thái khi không gian danh sách cửa sổ bị hạn chế khiến nhãn nút bị thu nhỏ"
+
+#. 4.0->settings-schema.json->trailing-pinned-behaviour->description
+#. 6.0->settings-schema.json->trailing-pinned-behaviour->description
+#. 6.4->settings-schema.json->trailing-pinned-behaviour->description
+msgid "Add new window buttons ahead of trailing pinned buttons"
+msgstr "Thêm nút cửa sổ mới phía trước các nút đã ghim ở cuối"
+
+#. 4.0->settings-schema.json->trailing-pinned-behaviour->tooltip
+#. 6.0->settings-schema.json->trailing-pinned-behaviour->tooltip
+#. 6.4->settings-schema.json->trailing-pinned-behaviour->tooltip
+msgid "When enabled, new windows will be added to the left of any pinned buttons currently placed on the right of the window list, effectively this allows you to keep pinned buttons at the end of the window list"
+msgstr "Khi bật, cửa sổ mới sẽ được thêm vào bên trái các nút đã ghim đang nằm bên phải danh sách cửa sổ, giúp bạn giữ các nút đã ghim ở cuối danh sách cửa sổ"
+
+#. 4.0->settings-schema.json->fade-animation-time->units
+#. 4.0->settings-schema.json->hover-peek-delay->units
+#. 4.0->settings-schema.json->label-animation-time->units
+#. 4.0->settings-schema.json->preview-timeout-show->units
+#. 4.0->settings-schema.json->preview-timeout-hide->units
+#. 6.0->settings-schema.json->fade-animation-time->units
+#. 6.0->settings-schema.json->hover-peek-delay->units
+#. 6.0->settings-schema.json->label-animation-time->units
+#. 6.0->settings-schema.json->preview-timeout-show->units
+#. 6.0->settings-schema.json->preview-timeout-hide->units
+#. 6.4->settings-schema.json->fade-animation-time->units
+#. 6.4->settings-schema.json->hover-peek-delay->units
+#. 6.4->settings-schema.json->label-animation-time->units
+#. 6.4->settings-schema.json->preview-timeout-show->units
+#. 6.4->settings-schema.json->preview-timeout-hide->units
+msgid "milliseconds"
+msgstr "mili giây"
+
+#. 4.0->settings-schema.json->fade-animation-time->description
+#. 6.0->settings-schema.json->fade-animation-time->description
+#. 6.4->settings-schema.json->fade-animation-time->description
+msgid "Fade animation effect duration"
+msgstr "Thời lượng hiệu ứng làm mờ"
+
+#. 4.0->settings-schema.json->fade-animation-time->tooltip
+#. 6.0->settings-schema.json->fade-animation-time->tooltip
+#. 6.4->settings-schema.json->fade-animation-time->tooltip
+msgid "This defines the duration of the fade-in/out animation effect. It applies to the Thumbnail menus and the full size window previews"
+msgstr "Thiết lập thời lượng hiệu ứng làm mờ xuất hiện/biến mất. Áp dụng cho menu hình thu nhỏ và cửa sổ xem trước kích thước đầy đủ"
+
+#. 4.0->settings-schema.json->hover-peek-delay->description
+#. 6.0->settings-schema.json->hover-peek-delay->description
+#. 6.4->settings-schema.json->hover-peek-delay->description
+msgid "Hover time before showing a full size window preview"
+msgstr "Thời gian di chuột trước khi hiển thị cửa sổ xem trước kích thước đầy đủ"
+
+#. 4.0->settings-schema.json->hover-peek-delay->tooltip
+#. 6.0->settings-schema.json->hover-peek-delay->tooltip
+#. 6.4->settings-schema.json->hover-peek-delay->tooltip
+msgid "This defines the mouse hover time before a full size window preview will appear. It applies when hovering over either window list buttons or thumbnail menu items (of course one of the full size window preview options must be enabled for this option to have any effect)"
+msgstr "Thiết lập thời gian di chuột trước khi cửa sổ xem trước kích thước đầy đủ xuất hiện. Áp dụng khi di chuột qua nút danh sách cửa sổ hoặc mục menu hình thu nhỏ (cần bật một trong các tùy chọn xem trước kích thước đầy đủ để tùy chọn này có hiệu lực)"
+
+#. 4.0->settings-schema.json->label-width->units
+#. 4.0->settings-schema.json->button-spacing->units
+#. 6.0->settings-schema.json->label-width->units
+#. 6.0->settings-schema.json->button-spacing->units
+#. 6.4->settings-schema.json->label-width->units
+#. 6.4->settings-schema.json->button-spacing->units
+msgid "pixels"
+msgstr "pixel"
+
+#. 4.0->settings-schema.json->label-width->description
+#. 6.0->settings-schema.json->label-width->description
+#. 6.4->settings-schema.json->label-width->description
+msgid "Label width"
+msgstr "Chiều rộng nhãn"
+
+#. 4.0->settings-schema.json->label-width->tooltip
+#. 6.0->settings-schema.json->label-width->tooltip
+#. 6.4->settings-schema.json->label-width->tooltip
+msgid "This defines the width of the label section of a window list button"
+msgstr "Thiết lập chiều rộng phần nhãn của nút danh sách cửa sổ"
+
+#. 4.0->settings-schema.json->label-animation->description
+#. 6.0->settings-schema.json->label-animation->description
+#. 6.4->settings-schema.json->label-animation->description
+msgid "Animate label"
+msgstr "Hiệu ứng động cho nhãn"
+
+#. 4.0->settings-schema.json->label-animation-time->description
+#. 6.0->settings-schema.json->label-animation-time->description
+#. 6.4->settings-schema.json->label-animation-time->description
+msgid "Label animation duration"
+msgstr "Thời lượng hiệu ứng động nhãn"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+msgid "Nothing"
+msgstr "Không có gì"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+msgid "Application group indicator (…)"
+msgstr "Chỉ báo nhóm ứng dụng (…)"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+msgid "Workspace number"
+msgstr "Số không gian làm việc"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+msgid "Monitor number"
+msgstr "Số màn hình"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+msgid "Two characters from the window title"
+msgstr "Hai ký tự từ tiêu đề cửa sổ"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+msgid "Minimized indicator"
+msgstr "Chỉ báo thu nhỏ"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+msgid "Pinned indicator"
+msgstr "Chỉ báo đã ghim"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+msgid "Minimized and pinned indicators"
+msgstr "Chỉ báo thu nhỏ và đã ghim"
+
+#. 4.0->settings-schema.json->number-type->description
+#. 6.0->settings-schema.json->number-type->description
+#. 6.4->settings-schema.json->number-type->description
+msgid "Icon overlay label contents"
+msgstr "Nội dung nhãn phủ biểu tượng"
+
+#. 4.0->settings-schema.json->display-number->description
+#. 6.0->settings-schema.json->display-number->description
+#. 6.4->settings-schema.json->display-number->description
+msgid "Only display label when needed"
+msgstr "Chỉ hiển thị nhãn khi cần thiết"
+
+#. 4.0->settings-schema.json->display-number->tooltip
+#. 6.0->settings-schema.json->display-number->tooltip
+#. 6.4->settings-schema.json->display-number->tooltip
+msgid "With this option enabled, the icon overlay label will only appear when it is appropriate depending on the label content (i.e. When there are two or more windows in a group, or when the windows workspace or monitor does not match the current one). When this option is disabled the label is always shown"
+msgstr "Khi bật tùy chọn này, nhãn phủ biểu tượng chỉ xuất hiện khi phù hợp tùy theo nội dung nhãn (ví dụ: khi có từ hai cửa sổ trở lên trong một nhóm, hoặc khi không gian làm việc hoặc màn hình của cửa sổ không khớp với hiện tại). Khi tắt tùy chọn này, nhãn luôn được hiển thị"
+
+#. 4.0->settings-schema.json->progress-display-type->options
+#. 4.0->settings-schema.json->display-pinned->options
+#. 6.0->settings-schema.json->progress-display-type->options
+#. 6.0->settings-schema.json->display-pinned->options
+#. 6.4->settings-schema.json->progress-display-type->options
+#. 6.4->settings-schema.json->display-pinned->options
+msgid "Disabled"
+msgstr "Tắt"
+
+#. 4.0->settings-schema.json->progress-display-type->options
+#. 6.0->settings-schema.json->progress-display-type->options
+#. 6.4->settings-schema.json->progress-display-type->options
+msgid "Using icon overlay label"
+msgstr "Dùng nhãn phủ biểu tượng"
+
+#. 4.0->settings-schema.json->progress-display-type->options
+#. 6.0->settings-schema.json->progress-display-type->options
+#. 6.4->settings-schema.json->progress-display-type->options
+msgid "Prepended to button label"
+msgstr "Thêm vào trước nhãn nút"
+
+#. 4.0->settings-schema.json->progress-display-type->description
+#. 6.0->settings-schema.json->progress-display-type->description
+#. 6.4->settings-schema.json->progress-display-type->description
+msgid "Display window progress information (%)"
+msgstr "Hiển thị thông tin tiến trình cửa sổ (%)"
+
+#. 4.0->settings-schema.json->progress-display-type->tooltip
+#. 6.0->settings-schema.json->progress-display-type->tooltip
+#. 6.4->settings-schema.json->progress-display-type->tooltip
+msgid "Controls how a windows progress information is presented on the window list (i.e copying in File Manager, downloading in Firefox, updating in Update Manager, etc.). When on vertical panels the \"Prepended to button label\" option will be ignored and icon overlay will be used in its place."
+msgstr "Kiểm soát cách thông tin tiến trình của cửa sổ được hiển thị trên danh sách cửa sổ (ví dụ: sao chép trong Trình quản lý tệp, tải xuống trong Firefox, cập nhật trong Trình cập nhật, v.v.). Trên bảng dọc, tùy chọn \"Thêm vào trước nhãn nút\" sẽ bị bỏ qua và dùng nhãn phủ biểu tượng thay thế."
+
+#. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
+#. 6.4->settings-schema.json->group-windows->options
+msgid "Grouped"
+msgstr "Nhóm"
+
+#. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
+#. 6.4->settings-schema.json->group-windows->options
+msgid "Pooled"
+msgstr "Gộp nhóm"
+
+#. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
+#. 6.4->settings-schema.json->group-windows->options
+msgid "Automatic"
+msgstr "Tự động"
+
+#. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
+#. 6.4->settings-schema.json->group-windows->options
+msgid "One to one"
+msgstr "Một-một"
+
+#. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
+#. 6.4->settings-schema.json->group-windows->options
+msgid "Launcher"
+msgstr "Trình khởi chạy"
+
+#. 4.0->settings-schema.json->group-windows->description
+#. 6.0->settings-schema.json->group-windows->description
+#. 6.4->settings-schema.json->group-windows->description
+msgid "Window list behavior style"
+msgstr "Kiểu hành vi danh sách cửa sổ"
+
+#. 4.0->settings-schema.json->group-windows->tooltip
+#. 6.0->settings-schema.json->group-windows->tooltip
+#. 6.4->settings-schema.json->group-windows->tooltip
+msgid ""
+"Grouped: All windows for an application are managed by one button,\n"
+"Pooled: All window list buttons for an application are pooled side by side,\n"
+"Automatic: Windows are pooled, and then grouped when space is limited,\n"
+"One to one: Each window gets their own button with no forced ordering,\n"
+"Launcher: Only pinned buttons are shown, behaves like a panel launcher."
+msgstr ""
+"Nhóm: Tất cả cửa sổ của một ứng dụng được quản lý bởi một nút,\n"
+"Gộp nhóm: Tất cả nút danh sách cửa sổ của một ứng dụng được gộp cạnh nhau,\n"
+"Tự động: Cửa sổ được gộp nhóm, sau đó nhóm lại khi không gian bị hạn chế,\n"
+"Một-một: Mỗi cửa sổ có nút riêng, không ép thứ tự,\n"
+"Trình khởi chạy: Chỉ hiển thị nút đã ghim, hoạt động như trình khởi chạy bảng."
+
+#. 4.0->settings-schema.json->display-pinned->options
+#. 6.0->settings-schema.json->display-pinned->options
+#. 6.4->settings-schema.json->display-pinned->options
+msgid "Unique for each workspace"
+msgstr "Riêng cho từng không gian làm việc"
+
+#. 4.0->settings-schema.json->display-pinned->options
+#. 6.0->settings-schema.json->display-pinned->options
+#. 6.4->settings-schema.json->display-pinned->options
+msgid "Common across workspaces"
+msgstr "Chung cho tất cả không gian làm việc"
+
+#. 4.0->settings-schema.json->display-pinned->description
+#. 6.0->settings-schema.json->display-pinned->description
+#. 6.4->settings-schema.json->display-pinned->description
+msgid "Pinning of window list buttons"
+msgstr "Ghim nút danh sách cửa sổ"
+
+#. 4.0->settings-schema.json->display-pinned->tooltip
+#. 6.0->settings-schema.json->display-pinned->tooltip
+#. 6.4->settings-schema.json->display-pinned->tooltip
+msgid "Controls whether window list buttons can be pinned, and whether each workspace has a unique set of pinned buttons or one common set shared across all workspaces. When in \"Common across workspaces\" mode the order of the pinned buttons is also maintained across workspaces."
+msgstr "Kiểm soát việc nút danh sách cửa sổ có thể được ghim hay không, và mỗi không gian làm việc có bộ nút ghim riêng hay dùng chung cho tất cả không gian làm việc. Khi ở chế độ \"Chung cho tất cả không gian làm việc\" thứ tự các nút ghim cũng được giữ nguyên trên mọi không gian làm việc."
+
+#. 4.0->settings-schema.json->synchronize-pinned->description
+#. 6.0->settings-schema.json->synchronize-pinned->description
+#. 6.4->settings-schema.json->synchronize-pinned->description
+msgid "Synchronize launcher buttons across all workspaces"
+msgstr "Đồng bộ nút trình khởi chạy trên tất cả không gian làm việc"
+
+#. 4.0->settings-schema.json->synchronize-pinned->tooltip
+#. 6.0->settings-schema.json->synchronize-pinned->tooltip
+#. 6.4->settings-schema.json->synchronize-pinned->tooltip
+msgid "If enabled, the number and order of launcher buttons on the panel will be synchronized across all workspaces."
+msgstr "Khi bật, số lượng và thứ tự nút trình khởi chạy trên bảng sẽ được đồng bộ trên tất cả không gian làm việc."
+
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->description
+#. 6.0->settings-schema.json->show-windows-for-current-monitor->description
+#. 6.4->settings-schema.json->show-windows-for-current-monitor->description
+msgid "Only show windows on the same monitor"
+msgstr "Chỉ hiển thị cửa sổ trên cùng màn hình"
+
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->tooltip
+#. 6.0->settings-schema.json->show-windows-for-current-monitor->tooltip
+#. 6.4->settings-schema.json->show-windows-for-current-monitor->tooltip
+msgid ""
+"If enabled, this applet instance only manages windows\n"
+"that are displayed on the same monitor"
+msgstr ""
+"Khi bật, phiên bản applet này chỉ quản lý các cửa sổ\n"
+"được hiển thị trên cùng màn hình"
+
+#. 4.0->settings-schema.json->show-windows-for-all-workspaces->description
+#. 6.0->settings-schema.json->show-windows-for-all-workspaces->description
+#. 6.4->settings-schema.json->show-windows-for-all-workspaces->description
+msgid "Include windows from all workspaces"
+msgstr "Bao gồm cửa sổ từ tất cả không gian làm việc"
+
+#. 4.0->settings-schema.json->remember-button-order->description
+#. 6.0->settings-schema.json->remember-button-order->description
+#. 6.4->settings-schema.json->remember-button-order->description
+msgid "Allow prioritizing window list button order"
+msgstr "Cho phép ưu tiên thứ tự nút danh sách cửa sổ"
+
+#. 4.0->settings-schema.json->remember-button-order->tooltip
+#. 6.0->settings-schema.json->remember-button-order->tooltip
+#. 6.4->settings-schema.json->remember-button-order->tooltip
+msgid ""
+"Enabling this option makes it easy for you to control where your favorite applications will appear on the window list. This is achieved by maintaining a persistent position priority order for applications. New Window list buttons for applications with priority will appear in priority order and ahead of applications without priority. Using drag-and-drop will automatically add to and reorder the priority list. The \"Prioritize window list position\" context menu option "
+"allows you to add and remove an application from the priority list."
+msgstr ""
+"Bật tùy chọn này giúp bạn dễ dàng kiểm soát vị trí xuất hiện của ứng dụng yêu thích trên danh sách cửa sổ. Việc này được thực hiện bằng cách duy trì thứ tự ưu tiên vị trí cho ứng dụng. Nút danh sách cửa sổ mới của ứng dụng có ưu tiên sẽ xuất hiện theo thứ tự ưu tiên và trước các ứng dụng không ưu tiên. Kéo-thả sẽ tự động thêm và sắp xếp lại danh sách ưu tiên. Tùy chọn menu ngữ cảnh \"Ưu tiên vị trí danh sách cửa sổ\" cho phép thêm hoặc xóa ứng dụng khỏi danh sách ưu tiên."
+
+#. 4.0->settings-schema.json->show-tooltips->description
+#. 6.0->settings-schema.json->show-tooltips->description
+#. 6.4->settings-schema.json->show-tooltips->description
+msgid "Show tooltips for window list buttons"
+msgstr "Hiển thị chú giải cho nút danh sách cửa sổ"
+
+#. 4.0->settings-schema.json->show-tooltips->tooltip
+#. 6.0->settings-schema.json->show-tooltips->tooltip
+#. 6.4->settings-schema.json->show-tooltips->tooltip
+msgid "Enable to show tooltips using window title or application name when hovering over window list buttons"
+msgstr "Bật để hiển thị chú giải bằng tiêu đề cửa sổ hoặc tên ứng dụng khi di chuột qua nút danh sách cửa sổ"
+
+#. 4.0->settings-schema.json->hide-panel-apps->description
+#. 6.0->settings-schema.json->hide-panel-apps->description
+#. 6.4->settings-schema.json->hide-panel-apps->description
+msgid "Hide buttons for applications on 'Launcher' instances of CassiaWindowList"
+msgstr "Ẩn nút cho ứng dụng trên phiên bản 'Trình khởi chạy' của CassiaWindowList"
+
+#. 4.0->settings-schema.json->hide-panel-apps->tooltip
+#. 6.0->settings-schema.json->hide-panel-apps->tooltip
+#. 6.4->settings-schema.json->hide-panel-apps->tooltip
+msgid "When enabled, windows for applications with pinned buttons on other 'Launcher' mode instances of the CassiaWindowList applet will not show up in this window list"
+msgstr "Khi bật, cửa sổ của ứng dụng có nút đã ghim trên các phiên bản CassiaWindowList ở chế độ 'Trình khởi chạy' khác sẽ không xuất hiện trong danh sách cửa sổ này"
+
+#. 4.0->settings-schema.json->button-spacing->description
+#. 6.0->settings-schema.json->button-spacing->description
+#. 6.4->settings-schema.json->button-spacing->description
+msgid "Spacing between buttons"
+msgstr "Khoảng cách giữa các nút"
+
+#. 4.0->settings-schema.json->button-spacing->tooltip
+#. 6.0->settings-schema.json->button-spacing->tooltip
+#. 6.4->settings-schema.json->button-spacing->tooltip
+msgid "This defines the spacing between the buttons, the value will be divided in half and added to the left of the icon and to the right of the label on horizontal panels or to the top and button of the icon on vertical panels"
+msgstr "Thiết lập khoảng cách giữa các nút, giá trị sẽ được chia đôi và thêm vào bên trái biểu tượng và bên phải nhãn trên bảng ngang hoặc phía trên và dưới biểu tượng trên bảng dọc"
+
+#. 4.0->settings-schema.json->hover-peek-windowlist->description
+#. 6.0->settings-schema.json->hover-peek-windowlist->description
+#. 6.4->settings-schema.json->hover-peek-windowlist->description
+msgid "Show a full size window preview when hovering over a button"
+msgstr "Hiển thị cửa sổ xem trước kích thước đầy đủ khi di chuột qua nút"
+
+#. 4.0->settings-schema.json->hover-peek-windowlist->tooltip
+#. 6.0->settings-schema.json->hover-peek-windowlist->tooltip
+#. 6.4->settings-schema.json->hover-peek-windowlist->tooltip
+msgid "If enabled, a full size preview window will appear when the mouse pointer is hovering over a window list button. The delay before the preview appears is controlled by an option under the Advanced tab"
+msgstr "Khi bật, cửa sổ xem trước kích thước đầy đủ sẽ xuất hiện khi con trỏ chuột di qua nút danh sách cửa sổ. Độ trễ trước khi xem trước xuất hiện được kiểm soát bởi một tùy chọn trong tab Nâng cao"
+
+#. 4.0->settings-schema.json->no-click-activate->description
+#. 6.0->settings-schema.json->no-click-activate->description
+#. 6.4->settings-schema.json->no-click-activate->description
+msgid "Automatic focus change when leaving the panel"
+msgstr "Tự động chuyển tiêu điểm khi rời khỏi bảng"
+
+#. 4.0->settings-schema.json->no-click-activate->tooltip
+#. 6.0->settings-schema.json->no-click-activate->tooltip
+#. 6.4->settings-schema.json->no-click-activate->tooltip
+msgid "If enabled, the current window for a window list button will get the focus when the mouse pointer leaves the panel. Leaving the window list with Ctrl or Shift held or while remaining on the panel will leave the focus unchanged. This option is typically used in conjunction with the preview hovering option above."
+msgstr "Khi bật, cửa sổ hiện tại của nút danh sách cửa sổ sẽ được chọn khi con trỏ chuột rời khỏi bảng. Rời khỏi danh sách cửa sổ khi giữ Ctrl hoặc Shift hoặc vẫn ở trên bảng sẽ giữ nguyên tiêu điểm. Tùy chọn này thường dùng cùng với tùy chọn xem trước khi di chuột ở trên."
+
+#. 4.0->settings-schema.json->menu-show-on-hover->description
+#. 6.0->settings-schema.json->menu-show-on-hover->description
+#. 6.4->settings-schema.json->menu-show-on-hover->description
+msgid "Show on hover"
+msgstr "Hiển thị khi di chuột"
+
+#. 4.0->settings-schema.json->menu-show-on-hover->tooltip
+#. 6.0->settings-schema.json->menu-show-on-hover->tooltip
+#. 6.4->settings-schema.json->menu-show-on-hover->tooltip
+msgid "If enabled, a popup menu with a list of current windows will show when hovering"
+msgstr "Khi bật, menu bật lên với danh sách cửa sổ hiện tại sẽ hiển thị khi di chuột"
+
+#. 4.0->settings-schema.json->show-previews->description
+#. 6.0->settings-schema.json->show-previews->description
+#. 6.4->settings-schema.json->show-previews->description
+msgid "Show window thumbnails in the popup window list menu"
+msgstr "Hiển thị hình thu nhỏ cửa sổ trong menu danh sách cửa sổ bật lên"
+
+#. 4.0->settings-schema.json->show-previews->tooltip
+#. 6.0->settings-schema.json->show-previews->tooltip
+#. 6.4->settings-schema.json->show-previews->tooltip
+msgid ""
+"If enabled, the popup menu will show window thumbnails,\n"
+"otherwise the menu will only show window titles\n"
+"(Always disabled when running Cinnamon in Software Rendering Mode)"
+msgstr ""
+"Nếu được bật, menu bật lên sẽ hiển thị hình thu nhỏ cửa sổ,\n"
+"ngược lại menu sẽ chỉ hiển thị tiêu đề cửa sổ\n"
+"(Luôn bị vô hiệu hóa khi chạy Cinnamon ở Chế độ Kết xuất Phần mềm)"
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->options
+msgid "Extra large"
+msgstr "Cực lớn"
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->options
+msgid "Large"
+msgstr "Lớn"
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->options
+msgid "Medium"
+msgstr "Trung bình"
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->options
+msgid "Small"
+msgstr "Nhỏ"
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->options
+msgid "Extra small"
+msgstr "Cực nhỏ"
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->description
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->description
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->description
+msgid "Default thumbnail window size"
+msgstr "Kích thước cửa sổ hình thu nhỏ mặc định"
+
+#. 4.0->settings-schema.json->menu-sort-groups->description
+#. 6.0->settings-schema.json->menu-sort-groups->description
+#. 6.4->settings-schema.json->menu-sort-groups->description
+msgid "Sort grouped button thumbnail menu items"
+msgstr "Sắp xếp các mục menu hình thu nhỏ nút được nhóm"
+
+#. 4.0->settings-schema.json->menu-sort-groups->tooltip
+#. 6.0->settings-schema.json->menu-sort-groups->tooltip
+#. 6.4->settings-schema.json->menu-sort-groups->tooltip
+msgid "If enabled, the thumbnail menu will be sorted first by workspace and then by monitor number for grouped buttons. Pooled windows can not be sorted since the order is the same as the order on the window list panel. With this option enabled, the thumbnail menu drag-and-drop reordering feature will be disabled for grouped button thumbnail menus."
+msgstr "Nếu được bật, menu hình thu nhỏ sẽ được sắp xếp đầu tiên theo không gian làm việc và sau đó theo số màn hình cho các nút được nhóm. Các cửa sổ được gộp nhóm không thể sắp xếp vì thứ tự giống với thứ tự trên bảng danh sách cửa sổ. Với tùy chọn này được bật, tính năng sắp xếp lại bằng kéo và thả cho menu hình thu nhỏ sẽ bị vô hiệu hóa đối với menu hình thu nhỏ nút được nhóm."
+
+#. 4.0->settings-schema.json->menu-all-windows-of-pool->description
+#. 4.0->settings-schema.json->menu-all-windows-of-auto->description
+#. 6.0->settings-schema.json->menu-all-windows-of-pool->description
+#. 6.0->settings-schema.json->menu-all-windows-of-auto->description
+#. 6.4->settings-schema.json->menu-all-windows-of-pool->description
+#. 6.4->settings-schema.json->menu-all-windows-of-auto->description
+msgid "Show thumbnails for all windows of an application pool"
+msgstr "Hiển thị hình thu nhỏ cho tất cả cửa sổ của một nhóm ứng dụng"
+
+#. 4.0->settings-schema.json->menu-all-windows-of-pool->tooltip
+#. 4.0->settings-schema.json->menu-all-windows-of-auto->tooltip
+#. 6.0->settings-schema.json->menu-all-windows-of-pool->tooltip
+#. 6.0->settings-schema.json->menu-all-windows-of-auto->tooltip
+#. 6.4->settings-schema.json->menu-all-windows-of-pool->tooltip
+#. 6.4->settings-schema.json->menu-all-windows-of-auto->tooltip
+msgid "If enabled, a popup menu will contain all the application windows in the application pool rather than just the selected window within the application pool"
+msgstr "Nếu được bật, một menu bật lên sẽ chứa tất cả các cửa sổ ứng dụng trong nhóm ứng dụng thay vì chỉ cửa sổ được chọn trong nhóm ứng dụng"
+
+#. 4.0->settings-schema.json->preview-timeout-show->description
+#. 6.0->settings-schema.json->preview-timeout-show->description
+#. 6.4->settings-schema.json->preview-timeout-show->description
+msgid "Hover time before showing menu"
+msgstr "Thời gian di chuột qua trước khi hiển thị menu"
+
+#. 4.0->settings-schema.json->preview-timeout-show->tooltip
+#. 6.0->settings-schema.json->preview-timeout-show->tooltip
+#. 6.4->settings-schema.json->preview-timeout-show->tooltip
+msgid ""
+"The waiting time before the thumbnail menu appears when hovering over a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"Thời gian chờ trước khi menu hình thu nhỏ xuất hiện khi di chuột qua một nút\n"
+"(Không được sử dụng khi di chuyển trực tiếp đến một nút khác trong danh sách)"
+
+#. 4.0->settings-schema.json->preview-timeout-hide->description
+#. 6.0->settings-schema.json->preview-timeout-hide->description
+#. 6.4->settings-schema.json->preview-timeout-hide->description
+msgid "Time before closing after pointer leaves the menu"
+msgstr "Thời gian trước khi đóng sau khi con trỏ rời khỏi menu"
+
+#. 4.0->settings-schema.json->preview-timeout-hide->tooltip
+#. 6.0->settings-schema.json->preview-timeout-hide->tooltip
+#. 6.4->settings-schema.json->preview-timeout-hide->tooltip
+msgid ""
+"The waiting time for the thumbnail menu to close when leaving a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"Thời gian chờ để menu hình thu nhỏ đóng khi rời khỏi một nút\n"
+"(Không được sử dụng khi di chuyển trực tiếp đến một nút khác trong danh sách)"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+msgid "Close thumbnail menu"
+msgstr "Đóng menu hình thu nhỏ"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Close window"
+msgstr "Đóng cửa sổ"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Minimize/Restore"
+msgstr "Thu nhỏ/Phục hồi"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Maximize/Restore"
+msgstr "Phóng to/Phục hồi"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Group/Ungroup windows"
+msgstr "Nhóm/Hủy nhóm cửa sổ"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Move to workspace 1"
+msgstr "Di chuyển đến không gian làm việc 1"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Move to workspace 2"
+msgstr "Di chuyển đến không gian làm việc 2"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Move to workspace 3"
+msgstr "Di chuyển đến không gian làm việc 3"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Move to workspace 4"
+msgstr "Di chuyển đến không gian làm việc 4"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Move to previous workspace"
+msgstr "Di chuyển đến không gian làm việc trước đó"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Move to next workspace"
+msgstr "Di chuyển đến không gian làm việc tiếp theo"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Move to this workspace"
+msgstr "Di chuyển đến không gian làm việc này"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Visible on this/all workspaces"
+msgstr "Hiển thị trên không gian làm việc này/tất cả"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Toggle always on top"
+msgstr "Bật/tắt luôn ở trên cùng"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Move to monitor 1"
+msgstr "Di chuyển đến màn hình 1"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Move to monitor 2"
+msgstr "Di chuyển đến màn hình 2"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Move to monitor 3"
+msgstr "Di chuyển đến màn hình 3"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Move to monitor 4"
+msgstr "Di chuyển đến màn hình 4"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Move to previous monitor"
+msgstr "Di chuyển đến màn hình trước đó"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Move to next monitor"
+msgstr "Di chuyển đến màn hình trước đó"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Move to current/next monitor"
+msgstr "Di chuyển đến màn hình hiện tại/tiếp theo"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Pin to panel toggle"
+msgstr "Ghim vào bảng điều khiển đóng/mở"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Tile left"
+msgstr "Xếp trái"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top left"
+msgstr "Xếp trên trái"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top"
+msgstr "Xếp trên"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top right"
+msgstr "Xếp trên phải"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Tile right"
+msgstr "Xếp phải"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom right"
+msgstr "Xếp dưới phải"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom"
+msgstr "Xếp dưới"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom left"
+msgstr "Xếp dưới trái"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Untile window"
+msgstr "Hủy xếp cửa sổ"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 4.0->settings-schema.json->mouse-action-scroll->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-scroll->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-scroll->options
+msgid "Do nothing"
+msgstr "Không làm gì cả"
+
+#. 4.0->settings-schema.json->preview-middle-click->description
+#. 6.0->settings-schema.json->preview-middle-click->description
+#. 6.4->settings-schema.json->preview-middle-click->description
+msgid "Thumbnail window middle button action"
+msgstr "Hành động nút chuột giữa cửa sổ hình thu nhỏ"
+
+#. 4.0->settings-schema.json->preview-back-click->description
+#. 6.0->settings-schema.json->preview-back-click->description
+#. 6.4->settings-schema.json->preview-back-click->description
+msgid "Thumbnail window back button action"
+msgstr "Hành động nút quay lại cửa sổ hình thu nhỏ"
+
+#. 4.0->settings-schema.json->preview-forward-click->description
+#. 6.0->settings-schema.json->preview-forward-click->description
+#. 6.4->settings-schema.json->preview-forward-click->description
+msgid "Thumbnail window forward button action"
+msgstr "Hành động nút chuyển tiếp cửa sổ hình thu nhỏ"
+
+#. 4.0->settings-schema.json->hover-peek-thumbnail->description
+#. 6.0->settings-schema.json->hover-peek-thumbnail->description
+#. 6.4->settings-schema.json->hover-peek-thumbnail->description
+msgid "Show a full size window preview when hovering over a Thumbnail"
+msgstr "Hiển thị bản xem trước cửa sổ kích thước đầy đủ khi di chuột qua Hình thu nhỏ"
+
+#. 4.0->settings-schema.json->hover-peek-thumbnail->tooltip
+#. 6.0->settings-schema.json->hover-peek-thumbnail->tooltip
+#. 6.4->settings-schema.json->hover-peek-thumbnail->tooltip
+msgid "If enabled, a full size preview window will appear when the mouse pointer is hovering over a Thumbnail menu item. The delay before the preview appears is controlled by an option under the Advanced tab"
+msgstr "Nếu được bật, cửa sổ xem trước kích thước đầy đủ sẽ xuất hiện khi con trỏ chuột di chuyển qua mục menu Hình thu nhỏ. Thời gian chờ trước khi bản xem trước xuất hiện được điều khiển bởi tùy chọn trong tab Nâng cao"
+
+#. 4.0->settings-schema.json->no-click-activate-thumbnail->description
+#. 6.0->settings-schema.json->no-click-activate-thumbnail->description
+#. 6.4->settings-schema.json->no-click-activate-thumbnail->description
+msgid "Automatic focus change when leaving the Thumbnail menu"
+msgstr "Tự động thay đổi tiêu điểm khi thoát khỏi menu Hình thu nhỏ"
+
+#. 4.0->settings-schema.json->no-click-activate-thumbnail->tooltip
+#. 6.0->settings-schema.json->no-click-activate-thumbnail->tooltip
+#. 6.4->settings-schema.json->no-click-activate-thumbnail->tooltip
+msgid "If enabled, the window associated with the Thumbnail menu item will get the focus when the mouse pointer leaves the menu. Leaving the menu with Ctrl or Shift held or leaving from either end of the menu will leave the focus unchanged. This option is typically used in conjunction with the preview hovering option above."
+msgstr "Nếu được bật, cửa sổ liên kết với mục menu Hình thu nhỏ sẽ được lấy nét khi con trỏ chuột rời khỏi menu. Giữ phím Ctrl hoặc Shift khi rời khỏi menu hoặc rời khỏi bất kỳ đầu nào của menu sẽ giữ nguyên tiêu điểm. Tùy chọn này thường được sử dụng kết hợp với tùy chọn xem trước khi di chuột ở trên."
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.4->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->options
+msgid "Restore/Minimize most recent window"
+msgstr "Khôi phục/Thu nhỏ cửa sổ gần đây nhất"
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.4->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->options
+msgid "Restore/Minimize 1st window in group"
+msgstr "Khôi phục/Thu nhỏ cửa sổ đầu tiên trong nhóm"
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.4->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->options
+msgid "Restore then cycle windows"
+msgstr "Khôi phục rồi tuần hoàn cửa sổ"
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.4->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->options
+msgid "Show thumbnail menu"
+msgstr "Hiển thị menu hình thu nhỏ"
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.4->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->options
+msgid "Restore or hold for thumbnail menu"
+msgstr "Khôi phục hoặc giữ cho menu hình thu nhỏ"
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->description
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->description
+#. 6.4->settings-schema.json->grouped-mouse-action-btn1->description
+msgid "Left button action for grouped buttons"
+msgstr "Hành động nút bên trái cho các nút được nhóm lại"
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->tooltip
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->tooltip
+#. 6.4->settings-schema.json->grouped-mouse-action-btn1->tooltip
+msgid "Action taken when using the left mouse button on a window list entry for a group of windows"
+msgstr "Hành động được thực hiện khi sử dụng nút chuột trái trên mục nhập danh sách cửa sổ cho một nhóm cửa sổ"
+
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->options
+msgid "New window or hold for thumbnail menu"
+msgstr "Cửa sổ mới hoặc giữ để mở menu hình thu nhỏ"
+
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->description
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->description
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->description
+msgid "Left button action (with running windows)"
+msgstr "Hành động nút chuột trái (khi có cửa sổ đang chạy)"
+
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->tooltip
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->tooltip
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->tooltip
+msgid "Action taken when using the left mouse button on a launcher button with one or more running windows"
+msgstr "Hành động được thực hiện khi sử dụng nút chuột trái trên nút khởi chạy có một hoặc nhiều cửa sổ đang chạy"
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Thumbnail menu toggle"
+msgstr "Chuyển đổi menu hình thu nhỏ"
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Thumbnail menu hold"
+msgstr "Giữ menu hình thu nhỏ"
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Restore most recent application window"
+msgstr "Khôi phục cửa sổ ứng dụng gần đây nhất"
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Restore/minimize 1st window in group"
+msgstr "Khôi phục/thu nhỏ cửa sổ thứ nhất trong nhóm"
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Restore/minimize 2nd window in group"
+msgstr "Khôi phục/thu nhỏ cửa sổ thứ 2 trong nhóm"
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Restore/minimize 3rd window in group"
+msgstr "Khôi phục/thu nhỏ cửa sổ thứ 3 trong nhóm"
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+msgid "Restore/minimize 4th window in group"
+msgstr "Khôi phục/thu nhỏ cửa sổ thứ 4 trong nhóm"
+
+#. 4.0->settings-schema.json->mouse-action-btn2->description
+#. 6.0->settings-schema.json->mouse-action-btn2->description
+#. 6.4->settings-schema.json->mouse-action-btn2->description
+msgid "Middle button action"
+msgstr "Hành động nút chuột giữa"
+
+#. 4.0->settings-schema.json->mouse-action-btn2->tooltip
+#. 6.0->settings-schema.json->mouse-action-btn2->tooltip
+#. 6.4->settings-schema.json->mouse-action-btn2->tooltip
+msgid "Action taken when using the middle mouse button on window list entries"
+msgstr "Hành động được thực hiện khi sử dụng nút chuột giữa trên các mục danh sách cửa sổ"
+
+#. 4.0->settings-schema.json->mouse-action-btn8->description
+#. 6.0->settings-schema.json->mouse-action-btn8->description
+#. 6.4->settings-schema.json->mouse-action-btn8->description
+msgid "Back button action"
+msgstr "Hành động nút quay lại"
+
+#. 4.0->settings-schema.json->mouse-action-btn8->tooltip
+#. 6.0->settings-schema.json->mouse-action-btn8->tooltip
+#. 6.4->settings-schema.json->mouse-action-btn8->tooltip
+msgid "Action taken when using the back mouse button on window list entries"
+msgstr "Hành động được thực hiện khi sử dụng nút chuột quay lại trên các mục danh sách cửa sổ"
+
+#. 4.0->settings-schema.json->mouse-action-btn9->description
+#. 6.0->settings-schema.json->mouse-action-btn9->description
+#. 6.4->settings-schema.json->mouse-action-btn9->description
+msgid "Forward button action"
+msgstr "Hành động nút chuyển tiếp"
+
+#. 4.0->settings-schema.json->mouse-action-btn9->tooltip
+#. 6.0->settings-schema.json->mouse-action-btn9->tooltip
+#. 6.4->settings-schema.json->mouse-action-btn9->tooltip
+msgid "Action taken when using the forward mouse button on window list entries"
+msgstr "Hành động được thực hiện khi sử dụng nút chuột chuyển tiếp trên các mục danh sách cửa sổ"
+
+#. 4.0->settings-schema.json->mouse-action-scroll->options
+#. 6.0->settings-schema.json->mouse-action-scroll->options
+#. 6.4->settings-schema.json->mouse-action-scroll->options
+msgid "Minimize/Restore/Maximize window"
+msgstr "Thu nhỏ/Khôi phục/Phóng to cửa sổ"
+
+#. 4.0->settings-schema.json->mouse-action-scroll->options
+#. 6.0->settings-schema.json->mouse-action-scroll->options
+#. 6.4->settings-schema.json->mouse-action-scroll->options
+msgid "Change windows workspace"
+msgstr "Thay đổi không gian làm việc của cửa sổ"
+
+#. 4.0->settings-schema.json->mouse-action-scroll->options
+#. 6.0->settings-schema.json->mouse-action-scroll->options
+#. 6.4->settings-schema.json->mouse-action-scroll->options
+msgid "Change windows monitor"
+msgstr "Thay đổi màn hình cửa sổ"
+
+#. 4.0->settings-schema.json->mouse-action-scroll->options
+#. 6.0->settings-schema.json->mouse-action-scroll->options
+#. 6.4->settings-schema.json->mouse-action-scroll->options
+msgid "Change window tiling"
+msgstr "Thay đổi xếp cửa sổ"
+
+#. 4.0->settings-schema.json->mouse-action-scroll->options
+#. 6.0->settings-schema.json->mouse-action-scroll->options
+#. 6.4->settings-schema.json->mouse-action-scroll->options
+msgid "Cycle all window list button windows"
+msgstr "Nút danh sách cửa sổ tuần hoàn tất cả các cửa sổ"
+
+#. 4.0->settings-schema.json->mouse-action-scroll->options
+#. 6.0->settings-schema.json->mouse-action-scroll->options
+#. 6.4->settings-schema.json->mouse-action-scroll->options
+msgid "Cycle grouped/pooled button windows"
+msgstr "Chu kỳ nhóm/gộp các cửa sổ nút"
+
+#. 4.0->settings-schema.json->mouse-action-scroll->description
+#. 6.0->settings-schema.json->mouse-action-scroll->description
+#. 6.4->settings-schema.json->mouse-action-scroll->description
+msgid "Scroll wheel action"
+msgstr "Hành động bánh xe cuộn"
+
+#. 4.0->settings-schema.json->mouse-action-scroll->tooltip
+#. 6.0->settings-schema.json->mouse-action-scroll->tooltip
+#. 6.4->settings-schema.json->mouse-action-scroll->tooltip
+msgid "Action taken when using the mouse scroll wheel on a window list button. This scroll wheel action will be disabled if the Thumbnail menu is currently open"
+msgstr "Thao tác được thực hiện khi sử dụng bánh xe cuộn chuột trên nút danh sách cửa sổ. Thao tác bánh xe cuộn này sẽ bị vô hiệu hóa nếu menu Hình thu nhỏ hiện đang mở"
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.4->settings-schema.json->wheel-adjusts-preview-size->options
+msgid "Off"
+msgstr "Tắt"
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.4->settings-schema.json->wheel-adjusts-preview-size->options
+msgid "On (temporary)"
+msgstr "Bật (tạm thời)"
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.4->settings-schema.json->wheel-adjusts-preview-size->options
+msgid "On (global default)"
+msgstr "Bật (mặc định toàn cục)"
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.4->settings-schema.json->wheel-adjusts-preview-size->options
+msgid "On (application default)"
+msgstr "Bật (mặc định ứng dụng)"
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->description
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->description
+#. 6.4->settings-schema.json->wheel-adjusts-preview-size->description
+msgid "Adjust the thumbnail window sizes using the scroll-wheel"
+msgstr "Điều chỉnh kích thước cửa sổ hình thu nhỏ bằng cách sử dụng cuộn chuột"
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->tooltip
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->tooltip
+#. 6.4->settings-schema.json->wheel-adjusts-preview-size->tooltip
+msgid "If enabled, the size of thumbnail windows will respond to the mouse scroll-wheel. The new size can have a temporary effect or persist on a global or per application basis"
+msgstr "Nếu được bật, kích thước của cửa sổ thu nhỏ sẽ phản hồi với bánh xe cuộn chuột. Kích thước mới có thể có hiệu lực tạm thời hoặc duy trì trên toàn hệ thống hoặc trên từng ứng dụng"
+
+#. 4.0->settings-schema.json->hotkey-bindings->description
+#. 6.0->settings-schema.json->hotkey-bindings->description
+#. 6.4->settings-schema.json->hotkey-bindings->description
+msgid "Hotkey binding available for assignment to a window"
+msgstr "Có thể gán phím tắt cho một cửa sổ"
+
+#. 4.0->settings-schema.json->hotkey-bindings->columns->title
+#. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.4->settings-schema.json->hotkey-bindings->columns->title
+#. 6.4->settings-schema.json->adv-mouse-list->columns->title
+msgid "Enabled"
+msgstr "Bật"
+
+#. 4.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.4->settings-schema.json->hotkey-bindings->columns->title
+msgid "Cycle application windows"
+msgstr "Cửa sổ ứng dụng chu kỳ"
+
+#. 4.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.4->settings-schema.json->hotkey-bindings->columns->title
+msgid "Key sequence"
+msgstr "Chuỗi khóa"
+
+#. 4.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.4->settings-schema.json->hotkey-bindings->columns->title
+msgid "Description"
+msgstr "Mô tả"
+
+#. 4.0->settings-schema.json->hotkey-bindings->tooltip
+#. 6.0->settings-schema.json->hotkey-bindings->tooltip
+#. 6.4->settings-schema.json->hotkey-bindings->tooltip
+msgid "Define a list of hotkeys used to bring to the foreground specific windows."
+msgstr "Xác định danh sách các phím tắt được sử dụng để đưa các cửa sổ cụ thể lên phía trước."
+
+#. 4.0->settings-schema.json->hotkey-minimize->description
+#. 6.0->settings-schema.json->hotkey-minimize->description
+#. 6.4->settings-schema.json->hotkey-minimize->description
+msgid "Minimize window when hotkey target is already in focus"
+msgstr "Thu nhỏ cửa sổ khi mục tiêu phím nóng đã được lấy nét"
+
+#. 4.0->settings-schema.json->hotkey-minimize->tooltip
+#. 6.0->settings-schema.json->hotkey-minimize->tooltip
+#. 6.4->settings-schema.json->hotkey-minimize->tooltip
+msgid "If enabled and application cycling is not enabled or there is only one window for the application, windows will be minimized if the window is already in focus"
+msgstr "Nếu được bật và tính năng tuần hoàn ứng dụng không được bật hoặc chỉ có một cửa sổ cho ứng dụng, các cửa sổ sẽ được thu nhỏ nếu cửa sổ đó đã được lấy nét"
+
+#. 4.0->settings-schema.json->hotkey-new->description
+#. 6.0->settings-schema.json->hotkey-new->description
+#. 6.4->settings-schema.json->hotkey-new->description
+msgid "Open a new window when the application is not running"
+msgstr "Mở một cửa sổ mới khi ứng dụng không chạy"
+
+#. 4.0->settings-schema.json->hotkey-new->tooltip
+#. 6.0->settings-schema.json->hotkey-new->tooltip
+#. 6.4->settings-schema.json->hotkey-new->tooltip
+msgid "Start a new window if no window is attached to a hotkey and the hotkey description is an exact match for the application name of a pinned button or a desktop file name"
+msgstr "Bắt đầu một cửa sổ mới nếu không có cửa sổ nào được đính kèm vào phím tắt và mô tả phím tắt khớp chính xác với tên ứng dụng của nút được ghim hoặc tên tệp trên màn hình"
+
+#. 4.0->settings-schema.json->hotkey-sequence->description
+#. 6.0->settings-schema.json->hotkey-sequence->description
+#. 6.4->settings-schema.json->hotkey-sequence->description
+msgid "Smart numeric hotkeys (using \"1\" automatically extends to 0-9)"
+msgstr "Phím tắt số thông minh (sử dụng \"1\" tự động mở rộng đến 0-9)"
+
+#. 4.0->settings-schema.json->hotkey-sequence->tooltip
+#. 6.0->settings-schema.json->hotkey-sequence->tooltip
+#. 6.4->settings-schema.json->hotkey-sequence->tooltip
+msgid "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will automatically create hotkeys 0 through 9 (i.e. Alt+0 through Alt+9). The first 10 windows of the assigned application, as ordered on the window list, will be activated by the 10 hotkeys. The 1st window is activated by hotkey 1 and 10th window is activated by hotkey 0"
+msgstr "Nếu được bật, các phím nóng kết thúc bằng phím \"1\" (ví dụ: Alt+1) sẽ tự động tạo các phím nóng từ 0 đến 9 (ví dụ: Alt+0 đến Alt+9). 10 cửa sổ đầu tiên của ứng dụng được chỉ định, theo thứ tự trong danh sách cửa sổ, sẽ được kích hoạt bằng 10 phím nóng đó. Cửa sổ thứ nhất được kích hoạt bằng phím nóng 1 và cửa sổ thứ 10 được kích hoạt bằng phím nóng 0"
+
+#. 4.0->settings-schema.json->hotkey-grave-help->description
+#. 6.0->settings-schema.json->hotkey-grave-help->description
+#. 6.4->settings-schema.json->hotkey-grave-help->description
+msgid "Use modifier(s) + ` hotkey to show hotkey hint bubbles"
+msgstr "Sử dụng phím tắt + phím tắt ` để hiển thị bong bóng gợi ý phím tắt"
+
+#. 4.0->settings-schema.json->hotkey-grave-help->tooltip
+#. 6.0->settings-schema.json->hotkey-grave-help->tooltip
+#. 6.4->settings-schema.json->hotkey-grave-help->tooltip
+msgid "If enabled, The hotkey modifier(s) + ` will be registered for each unique modifier set defined in the hotkey list. Using these hotkeys will temporarily show a hotkey hint bubble over the button icons."
+msgstr "Nếu được bật, bộ điều chỉnh phím tắt + ` sẽ được đăng ký cho mỗi bộ điều chỉnh duy nhất được xác định trong danh sách phím tắt. Sử dụng các phím tắt này sẽ tạm thời hiển thị bong bóng gợi ý phím nóng trên các biểu tượng nút."
+
+#. 4.0->settings-schema.json->hotkey-help->description
+#. 6.0->settings-schema.json->hotkey-help->description
+#. 6.4->settings-schema.json->hotkey-help->description
+msgid ""
+"Hotkeys can be assigned to a window in two ways:\n"
+"1) Manual: Use \"Assign window to a hotkey\" in the button context menu.\n"
+"2) Automatic:  Enter a \"Description\" matching an application name or desktop file.\n"
+"Note: 1) Hotkey not working? it's possible the key combination is already assigned elsewhere. 2) If you remove or rearrange hotkeys, manual hotkey assignments might need to be reassigned. 3) Hotkeys associated with desktop files can not be manually assigned."
+msgstr ""
+"Phím tắt có thể được gán cho một cửa sổ theo hai cách:\n"
+"1) Thủ công: Sử dụng \"Gán cửa sổ cho phím tắt\" trong menu ngữ cảnh nút.\n"
+"2) Tự động: Nhập \"Mô tả\" khớp với tên ứng dụng hoặc tệp màn hình nền.\n"
+"Lưu ý: 1) Phím tắt không hoạt động? Có thể tổ hợp phím đã được gán ở nơi khác. 2) Nếu bạn xóa hoặc sắp xếp lại các phím tắt, có thể cần phải gán lại các phím tắt thủ công. 3) Không thể gán thủ công các phím tắt liên quan đến tệp màn hình nền."
+
+#. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.4->settings-schema.json->adv-mouse-list->columns->title
+msgid "Key and mouse button"
+msgstr "Phím và nút chuột"
+
+#. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.4->settings-schema.json->adv-mouse-list->columns->title
+msgid "Mouse click context"
+msgstr "Ngữ cảnh nhấp chuột"
+
+#. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.4->settings-schema.json->adv-mouse-list->columns->title
+msgid "Action to perform"
+msgstr "Hành động để thực hiện"
+
+#. 4.0->settings-schema.json->adv-mouse-list->tooltip
+#. 6.0->settings-schema.json->adv-mouse-list->tooltip
+#. 6.4->settings-schema.json->adv-mouse-list->tooltip
+msgid "Define a set of mouse button actions when the Ctrl or Shift keys are pressed."
+msgstr "Xác định một tập hợp các hành động của nút chuột khi nhấn phím Ctrl hoặc Shift."
+
+#. 4.0->settings-schema.json->adv-mouse-help->description
+msgid ""
+"Note: The above list contents will be incorrectly displayed without this fix:\n"
+"https://github.com/linuxmint/cinnamon/pull/11908\n"
+"The edit dialog box values are the correct values and the ones that will take effect."
+msgstr ""
+"Lưu ý: Nội dung danh sách trên sẽ hiển thị không chính xác nếu không có bản sửa lỗi này:\n"
+"https://github.com/linuxmint/cinnamon/pull/11908\n"
+"Giá trị trong hộp thoại chỉnh sửa là giá trị chính xác và sẽ có hiệu lực."
+
+#. 4.0->settings-schema.json->animate-icon->description
+#. 6.0->settings-schema.json->animate-icon->description
+#. 6.4->settings-schema.json->animate-icon->description
+msgid "Icon animation when launching new windows"
+msgstr "Biểu tượng hoạt hình khi khởi chạy cửa sổ mới"
+
+#. 4.0->settings-schema.json->animate-icon->tooltip
+#. 6.0->settings-schema.json->animate-icon->tooltip
+#. 6.4->settings-schema.json->animate-icon->tooltip
+msgid "When enabled, the icon will animate when launching new windows for an application"
+msgstr "Khi được bật, biểu tượng sẽ hoạt hình khi khởi chạy cửa sổ mới cho một ứng dụng"
+
+#. 4.0->settings-schema.json->backup-file-name->description
+#. 6.0->settings-schema.json->backup-file-name->description
+#. 6.4->settings-schema.json->backup-file-name->description
+msgid "Settings backup name"
+msgstr "Tên sao lưu cài đặt"
+
+#. 4.0->settings-schema.json->backup-file-name->tooltip
+#. 6.0->settings-schema.json->backup-file-name->tooltip
+#. 6.4->settings-schema.json->backup-file-name->tooltip
+msgid "If a name is entered here, the configuration of this applet instance will be backed up under that name. Backups will be listed in the Setup Wizard restore page when adding a new instance of CassiaWindowList to a panel."
+msgstr "Nếu nhập tên ở đây, cấu hình của phiên bản applet này sẽ được sao lưu dưới tên đó. Các bản sao lưu sẽ được liệt kê trong trang khôi phục của Trình hướng dẫn Thiết lập khi thêm phiên bản CassiaWindowList mới vào bảng điều khiển."
+
+#. 4.0->settings-schema.json->icon-saturation->units
+#. 6.0->settings-schema.json->icon-saturation->units
+#. 6.4->settings-schema.json->icon-saturation->units
+msgid "percent"
+msgstr "phần trăm"
+
+#. 4.0->settings-schema.json->icon-saturation->description
+#. 6.0->settings-schema.json->icon-saturation->description
+#. 6.4->settings-schema.json->icon-saturation->description
+msgid "Icon color saturation"
+msgstr "Độ bão hòa màu biểu tượng"
+
+#. 4.0->settings-schema.json->icon-saturation->tooltip
+#. 6.0->settings-schema.json->icon-saturation->tooltip
+#. 6.4->settings-schema.json->icon-saturation->tooltip
+msgid "Sets the color saturation for icons from 0% (grayscale) to 100%, default is 100%"
+msgstr "Đặt độ bão hòa màu cho các biểu tượng từ 0% (thang độ xám) đến 100%, mặc định là 100%"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+#. 6.4->settings-schema.json->saturation-application->options
+msgid "All Buttons"
+msgstr "Tất cả các nút"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+#. 6.4->settings-schema.json->saturation-application->options
+msgid "Minimized buttons"
+msgstr "Các nút thu nhỏ"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+#. 6.4->settings-schema.json->saturation-application->options
+msgid "Idle pinned buttons"
+msgstr "Các nút ghim nhàn rỗi"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+#. 6.4->settings-schema.json->saturation-application->options
+msgid "Buttons for windows on other workspaces"
+msgstr "Các nút cho cửa sổ trên không gian làm việc khác"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+#. 6.4->settings-schema.json->saturation-application->options
+msgid "Buttons for windows on other monitors"
+msgstr "Các nút cho cửa sổ trên màn hình khác"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+#. 6.4->settings-schema.json->saturation-application->options
+msgid "All buttons except the focused window"
+msgstr "Tất cả các nút ngoại trừ cửa sổ được lấy nét"
+
+#. 4.0->settings-schema.json->saturation-application->description
+#. 6.0->settings-schema.json->saturation-application->description
+#. 6.4->settings-schema.json->saturation-application->description
+msgid "Where to apply the icon color saturation"
+msgstr "Nơi áp dụng độ bão hòa màu biểu tượng"
+
+#. 4.0->settings-schema.json->saturation-application->tooltip
+#. 6.0->settings-schema.json->saturation-application->tooltip
+#. 6.4->settings-schema.json->saturation-application->tooltip
+msgid ""
+"Which buttons will have the custom icon color saturation applied\n"
+"This option is only available when the saturation is not set to 100%"
+msgstr ""
+"Những nút nào sẽ được áp dụng độ bão hòa màu biểu tượng tùy chỉnh?\n"
+"Tùy chọn này chỉ khả dụng khi độ bão hòa không được đặt thành 100%"
+
+#. SetupWizard.ui:7
+msgid "CassiaWindowList Basic Setup Wizard"
+msgstr "Trình hướng dẫn thiết lập cơ bản CassiaWindowList"
+
+#. SetupWizard.ui:78
+msgid "Welcome to CassiaWindowList"
+msgstr "Chào mừng đến với CassiaWindowList"
+
+#. SetupWizard.ui:95
+msgid "How would you like this applet instance to behave?"
+msgstr "Bạn muốn phiên bản applet này hoạt động như thế nào?"
+
+#. SetupWizard.ui:105
+msgid ""
+"Window List (Task bar)\n"
+"Panel buttons for all running windows."
+msgstr ""
+"Danh sách cửa sổ (Thanh tác vụ)\n"
+"Các nút trên bảng điều khiển cho tất cả các cửa sổ đang chạy."
+
+#. SetupWizard.ui:125
+msgid ""
+"Panel Launcher (Quick launcher)\n"
+"Panel buttons only appear when you pin items\n"
+"to the panel, no labels are shown, only icons."
+msgstr ""
+"Trình khởi chạy bảng điều khiển (Trình khởi chạy nhanh)\n"
+"Các nút trên bảng điều khiển chỉ xuất hiện khi bạn ghim các mục\n"
+"vào bảng điều khiển, không có nhãn nào được hiển thị, chỉ có biểu tượng."
+
+#. SetupWizard.ui:146
+msgid ""
+"Restore configuration from an automatic\n"
+"backup"
+msgstr "Khôi phục cấu hình từ bản sao lưu tự động"
+
+#. SetupWizard.ui:178
+msgid "How do you want your Window List to operate?"
+msgstr "Bạn muốn Danh sách cửa sổ của mình hoạt động như thế nào?"
+
+#. SetupWizard.ui:192
+msgid ""
+"Basic  -  Quick window access\n"
+"Every window gets its own window list button.\n"
+"Button labels are window titles."
+msgstr ""
+"Cơ bản - Truy cập cửa sổ nhanh\n"
+"Mỗi cửa sổ đều có nút danh sách cửa sổ riêng.\n"
+"Nhãn nút chính là tiêu đề cửa sổ."
+
+#. SetupWizard.ui:213
+msgid ""
+"Grouping  -  Very compact\n"
+"One window list button per application.\n"
+"Thumbnail menus to select specific window.\n"
+"Button labels are window titles."
+msgstr ""
+"Nhóm - Rất gọn nhẹ\n"
+"Một nút danh sách cửa sổ cho mỗi ứng dụng.\n"
+"Menu thu nhỏ để chọn cửa sổ cụ thể.\n"
+"Nhãn nút là tiêu đề cửa sổ."
+
+#. SetupWizard.ui:236
+msgid ""
+"Pooling  -  Quick access & compact\n"
+"Every window gets its own window list button.\n"
+"Application buttons are pooled together.\n"
+"One button label per application pool.\n"
+"Button labels are application names."
+msgstr ""
+"Gộp chung - Truy cập nhanh & gọn nhẹ\n"
+"Mỗi cửa sổ đều có nút danh sách cửa sổ riêng.\n"
+"Các nút ứng dụng được gộp chung lại với nhau.\n"
+"Mỗi nhóm ứng dụng có một nhãn nút.\n"
+"Nhãn nút là tên ứng dụng."
+
+#. SetupWizard.ui:273
+msgid "Just a few more options to consider"
+msgstr "Chỉ còn một vài lựa chọn nữa để cân nhắc"
+
+#. SetupWizard.ui:287
+msgid "No Labels (icons only)"
+msgstr "Không có nhãn (chỉ có biểu tượng)"
+
+#. SetupWizard.ui:305
+msgid "No minimized window indicator character"
+msgstr "Không có ký tự chỉ báo cửa sổ thu nhỏ"
+
+#. SetupWizard.ui:323
+msgid "No Thumbnail window menu on mouse hover"
+msgstr "Không có menu cửa sổ hình thu nhỏ khi di chuột"
+
+#. SetupWizard.ui:354
+msgid "Panel Launcher Setup"
+msgstr "Thiết lập Trình khởi chạy Bảng điều khiển"
+
+#. SetupWizard.ui:370
+msgid ""
+"Unlike most Panel Launcher applets, this launcher keeps track of \n"
+"running windows and uses window Thumbnail menus.\n"
+"\n"
+"You can launch additional windows by clicking the 'Back' mouse \n"
+"button or using the Left mouse button while holding the Ctrl key.\n"
+"\n"
+"How would you like the Left mouse button to behave when \n"
+"windows already exist for a launcher button?"
+msgstr ""
+"Không giống như hầu hết các applet của Panel Launcher, trình khởi chạy này theo dõi\n"
+"các cửa sổ đang chạy và sử dụng menu hình thu nhỏ của cửa sổ.\n"
+"\\z\n"
+"Bạn có thể khởi chạy thêm cửa sổ bằng cách nhấp vào nút chuột 'Quay lại'\n"
+"hoặc sử dụng nút chuột trái trong khi giữ phím Ctrl.\n"
+"\n"
+"Bạn muốn nút chuột trái hoạt động như thế nào khi\n"
+"các cửa sổ đã tồn tại cho nút khởi chạy?"
+
+#. SetupWizard.ui:388
+msgid "Open new window / Hold for Thumbnail menu"
+msgstr "Mở cửa sổ mới / Giữ để xem menu hình thu nhỏ"
+
+#. SetupWizard.ui:407
+msgid "Restore most recent window / Cycle windows"
+msgstr "Khôi phục cửa sổ gần đây nhất / Cửa sổ chu kỳ"
+
+#. SetupWizard.ui:427
+msgid "Open the Thumbnail menu"
+msgstr "Mở menu Hình thu nhỏ"
+
+#. SetupWizard.ui:461
+msgid "Thumbnail window menu on mouse hover"
+msgstr "Menu cửa sổ hình thu nhỏ khi di chuột"
+
+#. SetupWizard.ui:492
+msgid "All done!"
+msgstr "Xong rồi!"
+
+#. SetupWizard.ui:508
+msgid ""
+"There are many more options and features to explore in the\n"
+"applet configurator and the window list button context menu,\n"
+"for example:\n"
+"\n"
+" • Hot-keys to launch / activate a specific window.\n"
+" • Customizable mouse button actions.\n"
+" • Customizable icon saturation (grayscale / vivid).\n"
+" • Customizable Ctrl/Shift + mouse button actions.\n"
+" • Application specific grouping and label settings.\n"
+" • Thumbnail window zooming using the scroll-wheel.\n"
+" • Automatic application grouping when space is limited.\n"
+" • And much more."
+msgstr ""
+"Có nhiều tùy chọn và tính năng khác để khám phá trong trình cấu hình applet và menu ngữ cảnh nút danh sách cửa sổ,\n"
+"ví dụ:\n"
+"\n"
+"• Phím nóng để khởi chạy/kích hoạt một cửa sổ cụ thể.\n"
+"• Tùy chỉnh các thao tác nút chuột.\n"
+"• Tùy chỉnh độ bão hòa biểu tượng (thang độ xám/sống động).\n"
+"• Tùy chỉnh các thao tác Ctrl/Shift + nút chuột.\n"
+"• Cài đặt nhóm và nhãn cụ thể cho ứng dụng.\n"
+"• Thu phóng cửa sổ hình thu nhỏ bằng bánh xe cuộn.\n"
+"• Tự động nhóm ứng dụng khi không gian bị giới hạn.\n"
+"• Và nhiều hơn nữa."
+
+#. SetupWizard.ui:530
+msgid "Exit and launch the applet configurator now"
+msgstr "Thoát và khởi chạy trình cấu hình applet ngay bây giờ"
+
+#. SetupWizard.ui:559
+msgid "Select a backup configuration to restore?"
+msgstr "Chọn cấu hình sao lưu để khôi phục?"
+
+#. SetupWizard.ui:602
+msgid "Configuration Backup?"
+msgstr "Sao lưu cấu hình?"
+
+#. SetupWizard.ui:618
+msgid ""
+"If you would like to maintain an automatic backup\n"
+"of this applet configuration then select or enter a\n"
+"backup file description below. All current and future\n"
+"configuration changes will be saved to this backup:"
+msgstr ""
+"Nếu bạn muốn duy trì bản sao lưu tự động\n"
+"của cấu hình applet này, hãy chọn hoặc nhập\n"
+"mô tả tệp sao lưu bên dưới. Tất cả các thay đổi cấu hình hiện tại và tương lai\n"
+"sẽ được lưu vào bản sao lưu này:"
+
+#. SetupWizard.ui:638
+msgid "MainWindowList"
+msgstr "MainWindowList"
+
+#. SetupWizard.ui:639
+msgid "MainPanelLauncher"
+msgstr "MainPanelLauncher"
+
+#. SetupWizard.ui:640
+msgid "Monitor1WindowList"
+msgstr "Monitor1WindowList"
+
+#. SetupWizard.ui:641
+msgid "Monitor2WindowList"
+msgstr "Monitor2WindowList"
+
+#. SetupWizard.ui:642
+msgid "Monitor1PanelLauncher"
+msgstr "Monitor1PanelLauncher"
+
+#. SetupWizard.ui:643
+msgid "Monitor2PanelLauncher"
+msgstr "Monitor2PanelLauncher"

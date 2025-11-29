@@ -1,0 +1,51 @@
+# RADIO3.0
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2022
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-11 12:31+0200\n"
+"PO-Revision-Date: 2025-10-11 12:35+0200\n"
+"Last-Translator: claudiux\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. settings-schema.json->category-to-move->options
+#. applet.js:587 applet.js:5528
+msgid "(Blacklist)"
+msgstr ""
+
+#. settings-schema.json->sectionBlacklist->title
+msgid "Unwanted (blacklist)"
+msgstr ""
+
+#. settings-schema.json->sectionYTIgnore->title
+msgid "Ignore YT"
+msgstr ""
+
+#. settings-schema.json->blacklist->columns->title
+msgid "Blacklisted URL"
+msgstr ""
+
+#. settings-schema.json->import-blacklist-button->description
+msgid "Blacklist selected items from this list"
+msgstr ""
+
+#. settings-schema.json->ignoreYT->description
+msgid "Ignore Youtube features"
+msgstr ""
+
+#. settings-schema.json->ignoreYT->tooltip
+msgid ""
+"Ignoring Youtube features reduces CPU load. But loading album art becomes "
+"impossible."
+msgstr ""

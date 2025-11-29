@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-22 01:28+0800\n"
+"PO-Revision-Date: 2024-11-22 19:08+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:46
+msgid "Y"
+msgstr "V"
+
+#: applet.js:48 applet.js:52
+msgid "D"
+msgstr "PV"
+
+#: applet.js:52
+msgid "h"
+msgstr "h"
+
+#. uptime@vatanuki.kun->metadata.json->description
+msgid "A simple applet that displays uptime."
+msgstr "Näyttää käyttöajan, joka on kulunut edellisestä käynnistyksestä."
+
+#. uptime@vatanuki.kun->metadata.json->name
+msgid "Up Time"
+msgstr "Up Time"
+
+#~ msgid "Uptime : Shows the time that have passed since last reboot."
+#~ msgstr ""
+#~ "Käyttöaika : Näyttää ajan, joka on kulunut edellisestä käynnistyksestä."
+
+#~ msgid "years"
+#~ msgstr "vuotta"
+
+#~ msgid "and"
+#~ msgstr "ja"
+
+#~ msgid "days"
+#~ msgstr "päivää"
+
+#~ msgid "hours"
+#~ msgstr "tuntia"
+
+#~ msgid "minutes"
+#~ msgstr "minuuttia"
+
+#~ msgid "Appearance"
+#~ msgstr "Ulkoasu"
+
+#~ msgid "Classic"
+#~ msgstr "Klassinen"
+
+#~ msgid "Simple"
+#~ msgstr "Vakio"
+
+#~ msgid "Complex"
+#~ msgstr "Pitkä"
+
+#~ msgid "Display mode"
+#~ msgstr "Näyttömoodi"
+
+#~ msgid ""
+#~ "Classic mode: The way the Uptime applet have always worked.\n"
+#~ "\n"
+#~ "Simple mode: The first two non-zero values of year,day,hour and minute.\n"
+#~ "\n"
+#~ "Complex mode: Use %y,%d,%h and %m to insert time values into the pattern "
+#~ "field. Use %H and %M to insert hours and minutes with a leading zero for "
+#~ "values less than ten."
+#~ msgstr ""
+#~ "Klassinen: tapa, jolla Uptime on aina toiminut.\n"
+#~ "\n"
+#~ "Vakio: Kaksi ensimmäistä nollasta poikkeavaa arvoa vuosi, päivä, tunti ja "
+#~ "minuutti.\n"
+#~ "\n"
+#~ "Pitkä: Käytä täydellisiä %y,%d,%h ja %m arvoja. Käytä %H ja %M tunnit ja "
+#~ "minuutit."
+
+#~ msgid "Minimal mode"
+#~ msgstr "Minimitila"
+
+#~ msgid "Just an icon, uptime in tooltip."
+#~ msgstr "Vihjeessä vain kuvake käyttöaika."
+
+#~ msgid "Show icon"
+#~ msgstr "Näytä kuvake"
+
+#~ msgid "Show or hide the icon. Not available in minimal mode."
+#~ msgstr "Näytä tai piilota kuvake. Ei minitilassa."
+
+#~ msgid "Prefix (all display modes)"
+#~ msgstr "Etuliite (kaikki näyttötavat)"
+
+#~ msgid "Text shown before the uptime text, for example 'Uptime :'."
+#~ msgstr "Ennen aikaa teksti, esimerkiksi \"Käyttöaika :\"."
+
+#~ msgid ""
+#~ "Use %y,%d,%h and %m to insert time values. Use %H and %M to insert hours "
+#~ "and minutes with a leading zero for values less than ten."
+#~ msgstr ""
+#~ "Käytä %y,%d,%h ja %m aika-arvojen lisäämiseen. Käytä %H ja %M lisätäksesi "
+#~ "tunnit ja minuutit."
+
+#~ msgid "Text CSS"
+#~ msgstr "Teksti CSS"
+
+#~ msgid "A CSS style applied to the text in the panel."
+#~ msgstr "Paneelin tekstiin käytetty CSS."

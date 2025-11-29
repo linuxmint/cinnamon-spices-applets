@@ -1,0 +1,1371 @@
+# CALENDAR WITH PUBLIC HOLIDAYS
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Serkan ÖNDER <serkanonder@outlook.com>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: calendar@ccprog 1.1.6\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-11-22 17:45-0500\n"
+"PO-Revision-Date: 2021-07-05 18:36+0300\n"
+"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. eventView.js:26 3.8/applet.js:22 5.2/applet.js:22 5.2/eventView.js:27
+msgid "%A, %B %-e, %Y"
+msgstr ""
+
+#. eventView.js:65 5.2/eventView.js:67
+msgid "Starting in a few minutes"
+msgstr "Bir kaç dakika içinde başlayacak"
+
+#. eventView.js:69 5.2/eventView.js:71
+#, javascript-format
+msgid "Starting in %d minutes"
+msgstr "%d dakika içinde başlayacak"
+
+#. eventView.js:79 5.2/eventView.js:81
+msgid "This evening"
+msgstr "Bu akşam"
+
+#. eventView.js:82 5.2/eventView.js:84
+msgid "Starting later today"
+msgstr "Bugün, gün içinde başlayacak"
+
+#. eventView.js:85 5.2/eventView.js:87
+#, javascript-format
+msgid "In %d hour"
+msgid_plural "In %d hours"
+msgstr[0] "%d saat içinde"
+msgstr[1] "%d saat içinde"
+
+#. eventView.js:664 5.2/eventView.js:693
+msgid "No Events"
+msgstr "Olay Yok"
+
+#. eventView.js:925 5.2/eventView.js:966
+msgid "In progress"
+msgstr "Devam ediyor"
+
+#. eventView.js:946 5.2/eventView.js:987
+msgid "All day"
+msgstr "Tüm gün"
+
+#. eventView.js:971 eventView.js:994 eventView.js:1032 eventView.js:1054
+#. 5.2/eventView.js:1014 5.2/eventView.js:1037 5.2/eventView.js:1075
+#. 5.2/eventView.js:1097
+msgid "Today"
+msgstr "Bugün"
+
+#. 3.8/applet.js:21 5.2/applet.js:21
+msgid "%B %-e, %Y"
+msgstr ""
+
+#. 3.8/applet.js:131 5.2/applet.js:138
+msgid "Date and Time Settings"
+msgstr "Tarih ve Zaman Ayarları"
+
+#. 3.8/settings_widgets.py:95 5.2/settings_widgets.py:95
+msgid "Add new entry"
+msgstr "Yeni girdi ekle"
+
+#. 3.8/settings_widgets.py:99 5.2/settings_widgets.py:99
+msgid "Edit entry"
+msgstr "Girdiyi düzenle"
+
+#. 3.8->settings-schema.json->region_aus->description
+#. 3.8->settings-schema.json->region_can->description
+#. 3.8->settings-schema.json->region_deu->description
+#. 3.8->settings-schema.json->region_esp->description
+#. 3.8->settings-schema.json->region_nzl->description
+#. 3.8->settings-schema.json->region_svk->description
+#. 3.8->settings-schema.json->region_che->description
+#. 3.8->settings-schema.json->region_gbr->description
+#. 3.8->settings-schema.json->region_usa->description
+#. 5.2->settings-schema.json->region_aus->description
+#. 5.2->settings-schema.json->region_bel->description
+#. 5.2->settings-schema.json->region_can->description
+#. 5.2->settings-schema.json->region_deu->description
+#. 5.2->settings-schema.json->region_esp->description
+#. 5.2->settings-schema.json->region_nzl->description
+#. 5.2->settings-schema.json->region_svk->description
+#. 5.2->settings-schema.json->region_che->description
+#. 5.2->settings-schema.json->region_gbr->description
+#. 5.2->settings-schema.json->region_usa->description
+#. 3.8/settings_widgets.py:122 5.2/settings_widgets.py:122
+msgid "Region"
+msgstr "Bölge"
+
+#. 3.8/settings_widgets.py:123 5.2/settings_widgets.py:123
+msgid "City"
+msgstr "Şehir"
+
+#. metadata.json->name
+msgid "Calendar with public Holidays"
+msgstr "Resmi Tatiller ile Takvim"
+
+#. metadata.json->description
+msgid "Calendar applet with public holiday data provided by Enrico service"
+msgstr ""
+"Enrico hizmeti tarafından sağlanan resmi tatil verileriyle takvim uygulaması"
+
+#. 3.8->settings-schema.json->page1->title
+#. 5.2->settings-schema.json->page1->title
+msgid "Calendar"
+msgstr "Takvim"
+
+#. 3.8->settings-schema.json->page2->title
+#. 3.8->settings-schema.json->worldclocks->description
+#. 5.2->settings-schema.json->page2->title
+#. 5.2->settings-schema.json->worldclocks->description
+msgid "World Clocks"
+msgstr "Dünya Saatleri"
+
+#. 3.8->settings-schema.json->section1->title
+#. 5.2->settings-schema.json->section1->title
+msgid "Display"
+msgstr "Görüntüleme"
+
+#. 3.8->settings-schema.json->section2->title
+#. 5.2->settings-schema.json->section2->title
+msgid "Get Public Holidays for"
+msgstr "Resmi Tatilleri Alın"
+
+#. 3.8->settings-schema.json->section3->title
+#. 5.2->settings-schema.json->section3->title
+msgid "Keyboard shortcuts"
+msgstr "Klavye Kısayolları"
+
+#. 3.8->settings-schema.json->section4->title
+#. 5.2->settings-schema.json->section4->title
+msgid "Show World Times"
+msgstr "Dünya Tarihlerini Göster"
+
+#. 3.8->settings-schema.json->show-events->description
+#. 5.2->settings-schema.json->show-events->description
+msgid "Show calendar events"
+msgstr "Takvim olaylarını göster"
+
+#. 3.8->settings-schema.json->show-events->tooltip
+#. 5.2->settings-schema.json->show-events->tooltip
+msgid "Check this to display events in the calendar."
+msgstr "Takvimdeki olayları görüntülemek için bunu etkinleştirin."
+
+#. 3.8->settings-schema.json->show-week-numbers->description
+#. 5.2->settings-schema.json->show-week-numbers->description
+msgid "Show week numbers in calendar"
+msgstr "Takvimde hafta numarasını göster"
+
+#. 3.8->settings-schema.json->show-week-numbers->tooltip
+#. 5.2->settings-schema.json->show-week-numbers->tooltip
+msgid "Check this to show week numbers in the calendar."
+msgstr "Takvimde hafta numarası gösterimi için burayı işaretleyiniz."
+
+#. 3.8->settings-schema.json->weekend-length->description
+#. 5.2->settings-schema.json->weekend-length->description
+msgid "Mark as weekend days"
+msgstr "Hafta sonu günleri olarak işaretle"
+
+#. 3.8->settings-schema.json->weekend-length->tooltip
+#. 5.2->settings-schema.json->weekend-length->tooltip
+msgid "Set how many days are marked as non-working days per week."
+msgstr "Haftada kaç günün çalışma dışı gün olarak işaretleneceğini ayarlayın."
+
+#. 3.8->settings-schema.json->weekend-length->options
+#. 5.2->settings-schema.json->weekend-length->options
+msgid "One day"
+msgstr "Bir gün"
+
+#. 3.8->settings-schema.json->weekend-length->options
+#. 5.2->settings-schema.json->weekend-length->options
+msgid "Two days"
+msgstr "İki gün"
+
+#. 3.8->settings-schema.json->use-custom-format->description
+#. 5.2->settings-schema.json->use-custom-format->description
+msgid "Use a custom date format"
+msgstr "Özel bir tarih biçimi kullan"
+
+#. 3.8->settings-schema.json->use-custom-format->tooltip
+#. 5.2->settings-schema.json->use-custom-format->tooltip
+msgid ""
+"Check this to define a custom format for the date in the calendar applet."
+msgstr ""
+"Takvim uygulamacığında, özel bir tarih biçimi tanımlamak için bunu kontrol "
+"edin."
+
+#. 3.8->settings-schema.json->custom-format->description
+#. 5.2->settings-schema.json->custom-format->description
+msgid "Date format"
+msgstr "Tarih biçimi"
+
+#. 3.8->settings-schema.json->custom-format->tooltip
+#. 5.2->settings-schema.json->custom-format->tooltip
+msgid "Set your custom format here."
+msgstr "Buradan özelleştirilmiş bir tarih biçimi ayarlayabilirsiniz."
+
+#. 3.8->settings-schema.json->format-button->description
+#. 5.2->settings-schema.json->format-button->description
+msgid "Show information on date format syntax"
+msgstr "Tarih biçimi sözdizimi için bilgi göster"
+
+#. 3.8->settings-schema.json->format-button->tooltip
+#. 5.2->settings-schema.json->format-button->tooltip
+msgid "Click this button to know more about the syntax for date formats."
+msgstr ""
+"Tarih formatı için sözdilimi hakkında daha fazla bilgi için bu düğmeyi "
+"tıklayınız."
+
+#. 3.8->settings-schema.json->country->description
+#. 5.2->settings-schema.json->country->description
+msgid "Country"
+msgstr "Ülke"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Angola"
+msgstr "Angola"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Australia"
+msgstr "Avustralya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Austria"
+msgstr "Avusturya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Belgium"
+msgstr "Belçika"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Bosnia and Herzegovina"
+msgstr "Bosna Hersek"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Belarus"
+msgstr ""
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Brazil"
+msgstr "Brezilya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Canada"
+msgstr "Kanada"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Chile"
+msgstr "Chile"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "China"
+msgstr "Çin"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Colombia"
+msgstr "Kolombiya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Croatia"
+msgstr "Hırvatistan"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Czech Republic"
+msgstr "Çek Cumhuriyeti"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Denmark"
+msgstr "Danimarka"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Estonia"
+msgstr "Estonya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Spain"
+msgstr ""
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Finland"
+msgstr "Finlandiya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "France"
+msgstr "Fransa"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Germany"
+msgstr "Almanya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Greece"
+msgstr "Yunanistan"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Hong Kong"
+msgstr "Hong Kong"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Hungary"
+msgstr "Macaristan"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Iceland"
+msgstr "İzlanda"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Ireland"
+msgstr "İrlanda"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Isle of Man"
+msgstr "Man Adası"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Israel"
+msgstr "İsrail"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Italy"
+msgstr "İtalya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Japan"
+msgstr "Japonya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Korea (South)"
+msgstr "Kore (Güney)"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "kosovo"
+msgstr ""
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Latvia"
+msgstr "Letonya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Lithuania"
+msgstr "Litvanya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Luxembourg"
+msgstr "Lüksemburg"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Macedonia"
+msgstr "Makedonya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Mexico"
+msgstr "Meksika"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Netherlands"
+msgstr "Hollanda"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "New Zealand"
+msgstr "Yeni Zelanda"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Norway"
+msgstr "Norveç"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Peru"
+msgstr "Peru"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Philippines"
+msgstr "Filipinler"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Poland"
+msgstr "Polonya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Portugal"
+msgstr "Portekiz"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Romania"
+msgstr "Romanya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Russian Federation"
+msgstr "Rusya Federasyonu"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Serbia"
+msgstr "Sırbistan"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Singapore"
+msgstr "Singapur"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Slovakia"
+msgstr "Slovakya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Slovenia"
+msgstr "Slovenya"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "South Africa"
+msgstr "Güney Afrika"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Sweden"
+msgstr "İsveç"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Switzerland"
+msgstr "İsviçre"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Turkey"
+msgstr "Türkiye"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Ukraine"
+msgstr "Ukrayna"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "United Kingdom"
+msgstr "Birleşik Kırallık"
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "United States of America"
+msgstr "Amerika Birleşik Devletleri"
+
+#. 3.8->settings-schema.json->region_aus->options
+#. 5.2->settings-schema.json->region_aus->options
+msgid "Australian Capital Territory"
+msgstr "Avustralya Başkent Bölgesi"
+
+#. 3.8->settings-schema.json->region_aus->options
+#. 5.2->settings-schema.json->region_aus->options
+msgid "Queensland"
+msgstr "Queensland"
+
+#. 3.8->settings-schema.json->region_aus->options
+#. 5.2->settings-schema.json->region_aus->options
+msgid "New South Wales"
+msgstr "Yeni Güney Galler"
+
+#. 3.8->settings-schema.json->region_aus->options
+#. 5.2->settings-schema.json->region_aus->options
+msgid "Northern Territory"
+msgstr "Kuzey Bölgesi"
+
+#. 3.8->settings-schema.json->region_aus->options
+#. 5.2->settings-schema.json->region_aus->options
+msgid "South Australia"
+msgstr "Güney Avustralya"
+
+#. 3.8->settings-schema.json->region_aus->options
+#. 5.2->settings-schema.json->region_aus->options
+msgid "Tasmania"
+msgstr "Tazmanya"
+
+#. 3.8->settings-schema.json->region_aus->options
+#. 5.2->settings-schema.json->region_aus->options
+msgid "Victoria"
+msgstr "Victoria"
+
+#. 3.8->settings-schema.json->region_aus->options
+#. 5.2->settings-schema.json->region_aus->options
+msgid "Western Australia"
+msgstr "Batı Avustralya"
+
+#. 3.8->settings-schema.json->region_can->options
+#. 5.2->settings-schema.json->region_can->options
+msgid "Alberta"
+msgstr "Alberta"
+
+#. 3.8->settings-schema.json->region_can->options
+#. 5.2->settings-schema.json->region_can->options
+msgid "British Columbia"
+msgstr "Britanya Kolombiyası"
+
+#. 3.8->settings-schema.json->region_can->options
+#. 5.2->settings-schema.json->region_can->options
+msgid "Manitoba"
+msgstr "Manitoba"
+
+#. 3.8->settings-schema.json->region_can->options
+#. 5.2->settings-schema.json->region_can->options
+msgid "New Brunswick"
+msgstr "Yeni brunswick"
+
+#. 3.8->settings-schema.json->region_can->options
+#. 5.2->settings-schema.json->region_can->options
+msgid "Newfoundland and Labrador"
+msgstr "Newfoundland ve Labrador"
+
+#. 3.8->settings-schema.json->region_can->options
+#. 5.2->settings-schema.json->region_can->options
+msgid "Northwest Territories"
+msgstr "Kuzeybatı bölgesi"
+
+#. 3.8->settings-schema.json->region_can->options
+#. 5.2->settings-schema.json->region_can->options
+msgid "Nova Scotia"
+msgstr "Nova Scotia"
+
+#. 3.8->settings-schema.json->region_can->options
+#. 5.2->settings-schema.json->region_can->options
+msgid "Nunavut"
+msgstr "Nunavut"
+
+#. 3.8->settings-schema.json->region_can->options
+#. 5.2->settings-schema.json->region_can->options
+msgid "Ontario"
+msgstr "Ontario"
+
+#. 3.8->settings-schema.json->region_can->options
+#. 5.2->settings-schema.json->region_can->options
+msgid "Prince Edward Island"
+msgstr "Prens Edward Adası"
+
+#. 3.8->settings-schema.json->region_can->options
+#. 5.2->settings-schema.json->region_can->options
+msgid "Quebec"
+msgstr "Quebec"
+
+#. 3.8->settings-schema.json->region_can->options
+#. 5.2->settings-schema.json->region_can->options
+msgid "Saskatchewan"
+msgstr "Saskatchewan"
+
+#. 3.8->settings-schema.json->region_can->options
+#. 5.2->settings-schema.json->region_can->options
+msgid "Yukon"
+msgstr "Yukon"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Baden-Württemberg"
+msgstr "Baden-Württemberg"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Bayern"
+msgstr "Bayern"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Berlin"
+msgstr "Berlin"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Brandenburg"
+msgstr "Brandenburg"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Bremen"
+msgstr "Bremen"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Hamburg"
+msgstr "Hamburg"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Hessen"
+msgstr "Hessen"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Niedersachsen"
+msgstr "Niedersachsen"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Mecklenburg-Vorpommern"
+msgstr "Mecklenburg-Vorpommern"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Nordrhein-Westfalen"
+msgstr "Nordrhein-Westfalen"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Rheinland-Pfalz"
+msgstr "Rheinland-Pfalz"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Saarland"
+msgstr "Saarland"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Sachsen"
+msgstr "Sachsen"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Sachsen-Anhalt"
+msgstr "Sachsen-Anhalt"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Schleswig-Holstein"
+msgstr "Schleswig-Holstein"
+
+#. 3.8->settings-schema.json->region_deu->options
+#. 5.2->settings-schema.json->region_deu->options
+msgid "Thüringen"
+msgstr "Thüringen"
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Andalucía"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Aragón"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Asturias"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Canarias"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Cantabria"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Castilla y León"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Castilla-La Mancha"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Cataluña"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Ceuta"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Extremadura"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Galicia"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Islas Baleares"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "La Rioja"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Madrid"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Melilla"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Murcia"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Navarra"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "País Vasco"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_esp->options
+#. 5.2->settings-schema.json->region_esp->options
+msgid "Valencia"
+msgstr ""
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Auckland"
+msgstr "Auckland"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Bay of Plenty"
+msgstr "Bay of Plenty"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Canterbury"
+msgstr "Canterbury"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Gisborne"
+msgstr "Gisborne"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Hawke's Bay"
+msgstr "Hawke's Bay"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Marlborough"
+msgstr "Marlborough"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Manawatu-Wanganui"
+msgstr "Manawatu-Wanganui"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Nelson"
+msgstr "Nelson"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Northland"
+msgstr "Kuzey bölgesi"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Otago"
+msgstr "Otago"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Southland"
+msgstr "Güney bölgesi"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Tasman"
+msgstr "Tasman"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Taranaki"
+msgstr "Taranaki"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Waikato"
+msgstr "Waikato"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Wellington"
+msgstr "Wellington"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "West Coast"
+msgstr "Batı Kıyısı"
+
+#. 3.8->settings-schema.json->region_nzl->options
+#. 5.2->settings-schema.json->region_nzl->options
+msgid "Chatham Islands Territory"
+msgstr "Chatham Adaları Bölgesi"
+
+#. 3.8->settings-schema.json->region_svk->options
+#. 5.2->settings-schema.json->region_svk->options
+msgid "Banskobystrický kraj"
+msgstr "Banska Bystrica Bölgesi"
+
+#. 3.8->settings-schema.json->region_svk->options
+#. 5.2->settings-schema.json->region_svk->options
+msgid "Bratislavský kraj"
+msgstr "Bratislava Bölgesi"
+
+#. 3.8->settings-schema.json->region_svk->options
+#. 5.2->settings-schema.json->region_svk->options
+msgid "Košický kraj"
+msgstr "Kösice bölgesi"
+
+#. 3.8->settings-schema.json->region_svk->options
+#. 5.2->settings-schema.json->region_svk->options
+msgid "Nitriansky kraj"
+msgstr "Nitra bölgesi"
+
+#. 3.8->settings-schema.json->region_svk->options
+#. 5.2->settings-schema.json->region_svk->options
+msgid "Prešovský kraj"
+msgstr "Prešov Bölgesi"
+
+#. 3.8->settings-schema.json->region_svk->options
+#. 5.2->settings-schema.json->region_svk->options
+msgid "Trnavský kraj"
+msgstr "Trnava bölgesi"
+
+#. 3.8->settings-schema.json->region_svk->options
+#. 5.2->settings-schema.json->region_svk->options
+msgid "Trenčiansky kraj"
+msgstr "Trencin Bölgesi"
+
+#. 3.8->settings-schema.json->region_svk->options
+#. 5.2->settings-schema.json->region_svk->options
+msgid "Žilinský kraj"
+msgstr "Žilina Bölgesi"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Aargau"
+msgstr "Aargau"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Appenzell Innerrhoden"
+msgstr "Appenzell Innerrhoden"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Appenzell Ausserrhoden"
+msgstr "Appenzell Ausserrhoden"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Basel-Landschaft"
+msgstr "Basel-Ülke"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Basel-Stadt"
+msgstr "Basel şehri"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Bern"
+msgstr "Bern"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Fribourg"
+msgstr "Fribourg"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Geneva"
+msgstr "Cenevre"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Glarus"
+msgstr "Glarus"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Grisons"
+msgstr "Grisons"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Jura"
+msgstr "Jura"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Luzern"
+msgstr "Luzern"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Neuchâtel"
+msgstr "Neuchâtel"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Nidwalden"
+msgstr "Nidwalden"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Obwalden"
+msgstr "Obwalden"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "St. Gallen"
+msgstr "Aziz Gallen"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Schaffhausen"
+msgstr "Schaffhausen"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Schwyz"
+msgstr "Schwyz"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Solothurn"
+msgstr "Solothurn"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Thurgau"
+msgstr "Thurgau"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Ticino"
+msgstr "Ticino"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Uri"
+msgstr "Uri"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Valais"
+msgstr "Valais"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Vaud"
+msgstr "Vaud"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Zug"
+msgstr "Zug"
+
+#. 3.8->settings-schema.json->region_che->options
+#. 5.2->settings-schema.json->region_che->options
+msgid "Zürich"
+msgstr "Zürih"
+
+#. 3.8->settings-schema.json->region_gbr->options
+#. 5.2->settings-schema.json->region_gbr->options
+msgid "England"
+msgstr "İngiltere"
+
+#. 3.8->settings-schema.json->region_gbr->options
+#. 5.2->settings-schema.json->region_gbr->options
+msgid "Northern Ireland"
+msgstr "Kuzey Irlanda"
+
+#. 3.8->settings-schema.json->region_gbr->options
+#. 5.2->settings-schema.json->region_gbr->options
+msgid "Scotland"
+msgstr "İskoçya"
+
+#. 3.8->settings-schema.json->region_gbr->options
+#. 5.2->settings-schema.json->region_gbr->options
+msgid "Wales"
+msgstr "Wales"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Alabama"
+msgstr "Alabama"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Alaska"
+msgstr "Alaska"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Arizona"
+msgstr "Arizona"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Arkansas"
+msgstr "Arkansas"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "California"
+msgstr "California"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Colorado"
+msgstr "Kolorado"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Connecticut"
+msgstr "Connecticut"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Delaware"
+msgstr "Delaware"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "District of Columbia"
+msgstr "Kolombia Bölgesi"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Florida"
+msgstr "Florida"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Georgia"
+msgstr "Gürcistan"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Hawaii"
+msgstr "Hawaii"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Idaho"
+msgstr "Idaho"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Illinois"
+msgstr "Illinois"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Indiana"
+msgstr "Hindistan"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Iowa"
+msgstr "Iowa"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Kansas"
+msgstr "Kansas"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Kentucky"
+msgstr "Kentucky"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Louisiana"
+msgstr "Louisiana"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Maine"
+msgstr "Maine"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Maryland"
+msgstr "Maryland"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Massachusetts"
+msgstr "Massachusetts"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Michigan"
+msgstr "Michigan"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Minnesota"
+msgstr "Minnesota"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Mississippi"
+msgstr "Mississippi"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Missouri"
+msgstr "Missouri"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Montana"
+msgstr "Montana"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Nebraska"
+msgstr "Nebraska"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Nevada"
+msgstr "Nevada"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "New Hampshire"
+msgstr "New Hampshire"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "New Jersey"
+msgstr "New Jersey"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "New Mexico"
+msgstr "New Mexico"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "New York"
+msgstr "New York"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "North Carolina"
+msgstr "Kuzey Carolina"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "North Dakota"
+msgstr "Kuzey Dakota"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Ohio"
+msgstr "Ohio"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Oklahoma"
+msgstr "Oklahoma"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Oregon"
+msgstr "Oregon"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Pennsylvania"
+msgstr "Pennsylvania"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Rhode Island"
+msgstr "Rodos Adası"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "South Carolina"
+msgstr "Güney Carolina"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "South Dakota"
+msgstr "Güney Dakota"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Tennessee"
+msgstr "Tennessee"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Texas"
+msgstr "Texas"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Utah"
+msgstr "Utah"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Vermont"
+msgstr "Vermont"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Virginia"
+msgstr "Virjinya"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Washington"
+msgstr "Washington"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "West Virginia"
+msgstr "Batı Virginia"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Wisconsin"
+msgstr "Wisconsin"
+
+#. 3.8->settings-schema.json->region_usa->options
+#. 5.2->settings-schema.json->region_usa->options
+msgid "Wyoming"
+msgstr "Wyoming"
+
+#. 3.8->settings-schema.json->keyOpen->description
+#. 5.2->settings-schema.json->keyOpen->description
+msgid "Show calendar"
+msgstr "Takvimi göster"
+
+#. 3.8->settings-schema.json->keyOpen->tooltip
+#. 5.2->settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the calendar."
+msgstr "Takvimi göstermek için tuş kısayolunu ayarlayın."
+
+#. 3.8->settings-schema.json->worldclocks->columns->title
+#. 5.2->settings-schema.json->worldclocks->columns->title
+msgid "Display name"
+msgstr "Görünüm Adı"
+
+#. 3.8->settings-schema.json->worldclocks->columns->title
+#. 5.2->settings-schema.json->worldclocks->columns->title
+msgid "Timezone"
+msgstr "Zaman dilimi"
+
+#. 5.2->settings-schema.json->custom-tooltip-format->description
+#, fuzzy
+msgid "Date format for tooltip"
+msgstr "Tarih biçimi"
+
+#. 5.2->settings-schema.json->custom-tooltip-format->tooltip
+#, fuzzy
+msgid "Set your custom tooltip format here."
+msgstr "Buradan özelleştirilmiş bir tarih biçimi ayarlayabilirsiniz."
+
+#. 5.2->settings-schema.json->country->options
+msgid "Cyprus"
+msgstr ""
+
+#. 5.2->settings-schema.json->country->options
+msgid "El Salvador"
+msgstr ""
+
+#. 5.2->settings-schema.json->country->options
+msgid "Montenegro"
+msgstr ""
+
+#. 5.2->settings-schema.json->region_bel->options
+msgid "Brussels"
+msgstr ""
+
+#. 5.2->settings-schema.json->region_bel->options
+#, fuzzy
+msgid "Flemish Region"
+msgstr "Bölge"
+
+#. 5.2->settings-schema.json->region_bel->options
+#, fuzzy
+msgid "Walloon Region"
+msgstr "Bölge"

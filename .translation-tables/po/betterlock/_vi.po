@@ -1,0 +1,14 @@
+# LOCK KEYS INDICATOR WITH NOTIFICATIONS
+# This file is put in the public domain.
+# entelechy, 2016
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->show-toast-notifications->description
+msgid "Show toast notifications"
+msgstr ""
+
+#. settings-schema.json->show-osd-notifications->description
+msgid "Show OSD notifications"
+msgstr ""

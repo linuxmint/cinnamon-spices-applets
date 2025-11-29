@@ -1,0 +1,1026 @@
+# MULTI-CORE SYSTEM MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# ccadeptic23, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-05 10:06+0200\n"
+"PO-Revision-Date: 2020-04-19 18:49+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
+
+#. 6.4->settings-schema.json->pageCPU->title
+#. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
+#. 3.2/prefs.js:187 6.0/DataProviders.js:60 6.0/prefs.js:303 6.4/applet.js:429
+#. 6.4/applet.js:1283 6.4/applet.js:1324 3.4/DataProviders.js:58
+#. 3.4/prefs.js:195 5.6/DataProviders.js:55 5.6/prefs.js:303
+#. 4.0/DataProviders.js:55 4.0/prefs.js:303 3.0/prefsui.glade:452
+#. 3.2/prefsui.glade:504 6.0/prefsui.glade:580 3.4/prefsui.glade:434
+#. 5.6/prefsui.glade:580 4.0/prefsui.glade:580
+msgid "CPU"
+msgstr "CPU"
+
+#. 3.0/DataProviders.js:113 3.2/DataProviders.js:113 6.0/DataProviders.js:128
+#. 3.4/DataProviders.js:126 5.6/DataProviders.js:123 4.0/DataProviders.js:123
+msgid "------------- CPU ------------"
+msgstr "------------- CPU ------------"
+
+#. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 6.0/DataProviders.js:131
+#. 6.4/applet.js:1326 3.4/DataProviders.js:129 5.6/DataProviders.js:126
+#. 4.0/DataProviders.js:126
+msgid "Core"
+msgstr "Nucleu"
+
+#. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 6.0/DataProviders.js:143
+#. 6.4/applet.js:1123 3.4/DataProviders.js:141 5.6/DataProviders.js:138
+#. 4.0/DataProviders.js:138
+msgid "MEM"
+msgstr "MEM"
+
+#. 3.0/DataProviders.js:163 3.2/DataProviders.js:163 6.0/DataProviders.js:163
+#. 3.4/DataProviders.js:161 5.6/DataProviders.js:158 4.0/DataProviders.js:158
+msgid "----------- Memory -----------"
+msgstr "----------- Memorie ----------"
+
+#. 3.0/DataProviders.js:164 3.2/DataProviders.js:164 6.4/applet.js:47
+msgid "Usedup:"
+msgstr "Utilizat:"
+
+#. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 6.0/DataProviders.js:164
+#. 6.4/applet.js:1159 3.4/DataProviders.js:162 5.6/DataProviders.js:159
+#. 4.0/DataProviders.js:159
+msgid "Cached:"
+msgstr "În cache:"
+
+#. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 6.0/DataProviders.js:164
+#. 6.4/applet.js:1159 3.4/DataProviders.js:162 5.6/DataProviders.js:159
+#. 4.0/DataProviders.js:159
+msgid "Buffer:"
+msgstr "Tampon:"
+
+#. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 6.0/DataProviders.js:164
+#. 6.4/applet.js:48 6.4/applet.js:1159 3.4/DataProviders.js:162
+#. 5.6/DataProviders.js:159 4.0/DataProviders.js:159
+msgid "Free:"
+msgstr "Liber:"
+
+#. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 6.0/DataProviders.js:178
+#. 6.4/applet.js:1233 3.4/DataProviders.js:176 5.6/DataProviders.js:173
+#. 4.0/DataProviders.js:173
+msgid "SWAP"
+msgstr "SWAP"
+
+#. 3.0/DataProviders.js:199 3.2/DataProviders.js:199 6.0/DataProviders.js:221
+#. 3.4/DataProviders.js:194 5.6/DataProviders.js:193 4.0/DataProviders.js:193
+msgid "------------ Swap ------------"
+msgstr "------------ Swap ------------"
+
+#. 6.4->settings-schema.json->Mem_colorSwap->description
+#. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 6.0/DataProviders.js:222
+#. 6.4/applet.js:49 6.4/applet.js:1259 3.4/DataProviders.js:195
+#. 5.6/DataProviders.js:194 4.0/DataProviders.js:194 3.0/prefsui.glade:785
+#. 3.2/prefsui.glade:837 6.0/prefsui.glade:907 3.4/prefsui.glade:761
+#. 5.6/prefsui.glade:907 4.0/prefsui.glade:907
+msgid "Swap"
+msgstr "Swap"
+
+#. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 6.0/DataProviders.js:232
+#. 6.4/applet.js:1349 3.4/DataProviders.js:205 5.6/DataProviders.js:204
+#. 4.0/DataProviders.js:204
+msgid "NET"
+msgstr "NET"
+
+#. 3.0/DataProviders.js:305 3.2/DataProviders.js:305 6.0/DataProviders.js:323
+#. 3.4/DataProviders.js:289 5.6/DataProviders.js:287 4.0/DataProviders.js:287
+msgid "---------- Networks ----------"
+msgstr "---------- Rețele ------------"
+
+#. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 6.0/DataProviders.js:334
+#. 6.4/applet.js:50 6.4/applet.js:1461 3.4/DataProviders.js:300
+#. 5.6/DataProviders.js:298 4.0/DataProviders.js:298
+msgid "Down:"
+msgstr "Descărcare:"
+
+#. 3.0/DataProviders.js:308 3.0/DataProviders.js:309 3.2/DataProviders.js:308
+#. 3.2/DataProviders.js:309
+msgid "(KiB/s)"
+msgstr "(KiB/s)"
+
+#. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 6.0/DataProviders.js:335
+#. 6.4/applet.js:51 6.4/applet.js:1462 3.4/DataProviders.js:301
+#. 5.6/DataProviders.js:299 4.0/DataProviders.js:299
+msgid "Up:"
+msgstr "Încărcare:"
+
+#. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 6.0/DataProviders.js:351
+#. 6.4/applet.js:1479 6.4/applet.js:1611 3.4/DataProviders.js:317
+#. 5.6/DataProviders.js:315 4.0/DataProviders.js:315
+msgid "DISK"
+msgstr "DISC"
+
+#. 3.0/DataProviders.js:408 3.2/DataProviders.js:408 6.0/DataProviders.js:412
+#. 3.4/DataProviders.js:378 5.6/DataProviders.js:376 4.0/DataProviders.js:376
+msgid "------------ Disks -----------"
+msgstr "------------ Discuri ---------"
+
+#. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 6.0/DataProviders.js:420
+#. 6.4/applet.js:52 6.4/applet.js:1593 3.4/DataProviders.js:386
+#. 5.6/DataProviders.js:384 4.0/DataProviders.js:384
+msgid "Read:"
+msgstr "Citire:"
+
+#. 3.0/DataProviders.js:411 3.0/DataProviders.js:412 3.2/DataProviders.js:411
+#. 3.2/DataProviders.js:412
+msgid "(MiB/s)"
+msgstr "(MiB/s)"
+
+#. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 6.0/DataProviders.js:421
+#. 6.4/applet.js:53 6.4/applet.js:1594 3.4/DataProviders.js:387
+#. 5.6/DataProviders.js:385 4.0/DataProviders.js:385
+msgid "Write:"
+msgstr "Scriere:"
+
+#. 3.0/ErrorApplet.js:28 3.0/ErrorApplet.js:34 3.2/ErrorApplet.js:28
+#. 3.2/ErrorApplet.js:34
+msgid "Multi-Core System Monitor Error."
+msgstr "Eroare în Multi-Core System Monitor."
+
+#. 3.0/applet.js:141 3.2/applet.js:139 6.0/applet.js:318 3.4/applet.js:264
+#. 5.6/applet.js:283 4.0/applet.js:275
+msgid "Preferences"
+msgstr "Preferințe"
+
+#. 3.0/applet.js:323 3.2/applet.js:334
+msgid "Please install \"gir1.2-gtop-2.0\" package."
+msgstr "Este necesară instalarea pachetului \"gir1.2-gtop-2.0\"."
+
+#. 3.0/applet.js:328 3.2/applet.js:339
+msgid "Reload this applet"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_enabled->description
+#. 6.4->settings-schema.json->Mem_enabled->description
+#. 6.4->settings-schema.json->Net_enabled->description
+#. 6.4->settings-schema.json->Disk_enabled->description
+#. 6.4->settings-schema.json->DiskUsage_enabled->description
+#. 3.0/prefs.js:279 3.0/prefs.js:393 3.2/prefs.js:283 3.2/prefs.js:398
+#. 6.0/prefs.js:483 6.0/prefs.js:619 3.4/prefs.js:327 3.4/prefs.js:463
+#. 5.6/prefs.js:483 5.6/prefs.js:619 4.0/prefs.js:483 4.0/prefs.js:619
+#. 3.0/prefsui.glade:304 3.0/prefsui.glade:476 3.0/prefsui.glade:856
+#. 3.0/prefsui.glade:1178 3.2/prefsui.glade:356 3.2/prefsui.glade:528
+#. 3.2/prefsui.glade:908 3.2/prefsui.glade:1230 6.0/prefsui.glade:321
+#. 6.0/prefsui.glade:603 6.0/prefsui.glade:977 6.0/prefsui.glade:1312
+#. 3.4/prefsui.glade:286 3.4/prefsui.glade:457 3.4/prefsui.glade:831
+#. 3.4/prefsui.glade:1166 5.6/prefsui.glade:321 5.6/prefsui.glade:603
+#. 5.6/prefsui.glade:977 5.6/prefsui.glade:1312 4.0/prefsui.glade:321
+#. 4.0/prefsui.glade:603 4.0/prefsui.glade:977 4.0/prefsui.glade:1312
+msgid "Enable"
+msgstr "Activează"
+
+#. 3.0/prefs.js:290 3.2/prefs.js:294 6.0/prefs.js:494 3.4/prefs.js:338
+#. 5.6/prefs.js:494 4.0/prefs.js:494
+msgid "Down"
+msgstr "Descărcare"
+
+#. 3.0/prefs.js:298 3.2/prefs.js:302 6.0/prefs.js:502 3.4/prefs.js:346
+#. 5.6/prefs.js:502 4.0/prefs.js:502
+msgid "Up"
+msgstr "Încărcare"
+
+#. 3.0/prefs.js:406 3.2/prefs.js:414 6.0/prefs.js:635 3.4/prefs.js:479
+#. 5.6/prefs.js:635 4.0/prefs.js:635
+msgid "Read"
+msgstr "Citire"
+
+#. 3.0/prefs.js:414 3.2/prefs.js:423 6.0/prefs.js:644 3.4/prefs.js:488
+#. 5.6/prefs.js:644 4.0/prefs.js:644
+msgid "Write"
+msgstr "Scriere"
+
+#. 3.0/prefs.js:530 3.2/prefs.js:540
+msgid "Error while saving file:"
+msgstr "Eroare la salvarea fișierului:"
+
+#. 6.0/DataProviders.js:52 6.4/applet.js:40 3.4/DataProviders.js:49
+#. 5.6/DataProviders.js:47 4.0/DataProviders.js:47
+msgid "/s"
+msgstr "/s"
+
+#. 6.0/DataProviders.js:164 6.4/applet.js:46 6.4/applet.js:1159
+#. 3.4/DataProviders.js:162 5.6/DataProviders.js:159 4.0/DataProviders.js:159
+msgid "Used:"
+msgstr "Utilizat:"
+
+#. 6.0/applet.js:72 3.4/applet.js:60 5.6/applet.js:70 4.0/applet.js:64
+msgid "Dependency missing"
+msgstr "Lipsește o dependință"
+
+#. 6.0/applet.js:74 5.6/applet.js:72 4.0/applet.js:66
+#, fuzzy
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"to use "
+msgstr ""
+"Este necesară instalarea pachetului GTop\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"pentru a folosi"
+
+#. 6.0/applet.js:321 5.6/applet.js:285 4.0/applet.js:277
+#, fuzzy
+msgid "Refresh graphs"
+msgstr "Rata de reîmprospătare (ms)"
+
+#. 6.0/applet.js:325 6.4/applet.js:395
+msgid "Without any graphics"
+msgstr ""
+
+#. 6.0/applet.js:331 6.4/applet.js:401
+msgid "With graphics"
+msgstr ""
+
+#. 6.0/applet.js:341 6.4/applet.js:412
+msgid "Drop Memory Cache (needs root rights)"
+msgstr ""
+
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "00-20"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_activity_20_40->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "20-40"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_activity_40_60->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "40-60"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_activity_60_80->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "60-80"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_activity_80_100->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "80-100"
+msgstr ""
+
+#. 6.0/util.js:244 5.6/util.js:244
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr ""
+
+#. 6.4/applet.js:43
+#, fuzzy
+msgid "Core 128:"
+msgstr "Nucleu"
+
+#. 6.4/applet.js:44
+msgid "Unrecoverable:"
+msgstr ""
+
+#. 6.4/applet.js:45
+msgid "Recoverable:"
+msgstr ""
+
+#. 6.4->settings-schema.json->RefreshAll_btn->description
+#. 6.4/applet.js:385
+#, fuzzy
+msgid "Refresh All"
+msgstr "Rata de reîmprospătare (ms)"
+
+#. 6.4/applet.js:422 6.4/applet.js:427
+msgid "Configure..."
+msgstr ""
+
+#. 6.4->settings-schema.json->pageGeneral->title
+#. 6.4/applet.js:428 3.0/prefsui.glade:281 3.2/prefsui.glade:333
+#. 6.0/prefsui.glade:299 3.4/prefsui.glade:264 5.6/prefsui.glade:299
+#. 4.0/prefsui.glade:299
+msgid "General"
+msgstr "General"
+
+#. 6.4->settings-schema.json->pageMem->title
+#. 6.4/applet.js:430 6.4/applet.js:1155 3.0/prefsui.glade:832
+#. 3.2/prefsui.glade:884 6.0/prefsui.glade:954 3.4/prefsui.glade:808
+#. 5.6/prefsui.glade:954 4.0/prefsui.glade:954
+msgid "Memory"
+msgstr "Memorie"
+
+#. 6.4->settings-schema.json->pageNetwork->title
+#. 6.4/applet.js:431 6.4/applet.js:899 6.4/applet.js:1356
+#. 3.0/prefsui.glade:1154 3.2/prefsui.glade:1206 6.0/prefsui.glade:1289
+#. 3.4/prefsui.glade:1143 5.6/prefsui.glade:1289 4.0/prefsui.glade:1289
+msgid "Network"
+msgstr "Rețea"
+
+#. 6.4->settings-schema.json->pageDisk->title
+#. 6.4/applet.js:432 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
+#. 6.0/prefsui.glade:1635 3.4/prefsui.glade:1489 5.6/prefsui.glade:1635
+#. 4.0/prefsui.glade:1635
+msgid "Disk IO"
+msgstr "Scriere/citire disc"
+
+#. 6.4->settings-schema.json->pageDiskUsage->title
+#. 6.4/applet.js:433
+#, fuzzy
+msgid "Disk Usage"
+msgstr "Scriere/citire disc"
+
+#. 6.4->settings-schema.json->pageColors->title
+#. 6.4->settings-schema.json->sectionGeneralColors->title
+#. 6.4->settings-schema.json->sectionCPUColors->title
+#. 6.4->settings-schema.json->sectionMemoryColors->title
+#. 6.4->settings-schema.json->sectionDiskUsageColors->title
+#. 6.4/applet.js:434 3.0/prefsui.glade:411 3.0/prefsui.glade:584
+#. 3.2/prefsui.glade:463 3.2/prefsui.glade:636 6.0/prefsui.glade:494
+#. 6.0/prefsui.glade:710 3.4/prefsui.glade:392 3.4/prefsui.glade:564
+#. 5.6/prefsui.glade:494 5.6/prefsui.glade:710 4.0/prefsui.glade:494
+#. 4.0/prefsui.glade:710
+msgid "Colors"
+msgstr "Culori"
+
+#. 6.4/applet.js:571 6.4/applet.js:614 6.4/applet.js:628
+msgid "root"
+msgstr ""
+
+#. 6.4/applet.js:958 6.4/applet.js:1488 6.4/applet.js:1568 6.4/applet.js:1658
+#. 6.4/applet.js:1660
+#, fuzzy
+msgid "Disks"
+msgstr "Scriere/citire disc"
+
+#. 6.4/applet.js:1181
+msgid "Buffers/Cache/Shared"
+msgstr ""
+
+#. 6.4/applet.js:1209 6.4/applet.js:1313 6.4/applet.js:1637
+msgid ":"
+msgstr ""
+
+#. 6.4/applet.js:1211 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 6.0/prefsui.glade:809 3.4/prefsui.glade:663 5.6/prefsui.glade:809
+#. 4.0/prefsui.glade:809
+msgid "Buffer"
+msgstr "Tampon"
+
+#. 6.4->settings-schema.json->Mem_colorCache->description
+#. 6.4/applet.js:1211
+#, fuzzy
+msgid "Cache"
+msgstr "În cache"
+
+#. 6.4/applet.js:1211
+msgid "Shared"
+msgstr ""
+
+#. 6.4/applet.js:1309
+msgid "CPUs"
+msgstr ""
+
+#. 6.4/applet.js:1436
+#, fuzzy
+msgid "Networks"
+msgstr "Rețea"
+
+#. 6.4/applet.js:1632
+msgid "Usage"
+msgstr ""
+
+#. 3.4/applet.js:62
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"to use "
+msgstr ""
+"Este necesară instalarea pachetului GTop\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"pentru a folosi"
+
+#. metadata.json->name
+#, fuzzy
+msgid "Multi-Core System Monitor"
+msgstr "Eroare în Multi-Core System Monitor."
+
+#. metadata.json->description
+msgid ""
+"Displays in realtime the cpu usage for each core/cpu and overall memory "
+"usage."
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionGeneralOptions->title
+#. 6.4->settings-schema.json->sectionCPUOptions->title
+#. 6.4->settings-schema.json->sectionMemoryOptions->title
+#. 6.4->settings-schema.json->sectionNetworkOptions->title
+#. 6.4->settings-schema.json->sectionDiskOptions->title
+#. 6.4->settings-schema.json->sectionDiskUsageOptions->title
+msgid "Options"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionTooltip->title
+msgid "Tooltip"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionCPUColorsByActivity->title
+#. 6.0/prefsui.glade:538 5.6/prefsui.glade:538 4.0/prefsui.glade:538
+msgid "by activity level (in %):"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionNetworkScaling->title
+#. 6.4->settings-schema.json->sectionDiskScaling->title
+#. 3.0/prefsui.glade:972 3.0/prefsui.glade:1305 3.2/prefsui.glade:1024
+#. 3.2/prefsui.glade:1357 6.0/prefsui.glade:1093 6.0/prefsui.glade:1439
+#. 3.4/prefsui.glade:947 3.4/prefsui.glade:1293 5.6/prefsui.glade:1093
+#. 5.6/prefsui.glade:1439 4.0/prefsui.glade:1093 4.0/prefsui.glade:1439
+msgid "Scaling"
+msgstr "Scalare"
+
+#. 6.4->settings-schema.json->sectionNetworkDevices->title
+#. 6.4->settings-schema.json->sectionDiskDevices->title
+#. 3.0/prefsui.glade:1110 3.0/prefsui.glade:1443 3.2/prefsui.glade:1162
+#. 3.2/prefsui.glade:1495 6.0/prefsui.glade:1228 6.0/prefsui.glade:1574
+#. 3.4/prefsui.glade:1082 3.4/prefsui.glade:1428 5.6/prefsui.glade:1228
+#. 5.6/prefsui.glade:1574 4.0/prefsui.glade:1228 4.0/prefsui.glade:1574
+msgid "Devices"
+msgstr "Dispozitive"
+
+#. 6.4->settings-schema.json->sectionDiskUsagePaths->title
+msgid "Paths"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionColors->title
+msgid "Your colors"
+msgstr ""
+
+#. 6.4->settings-schema.json->labelsOn->description
+#. 3.0/prefsui.glade:81 3.2/prefsui.glade:81 6.0/prefsui.glade:90
+#. 3.4/prefsui.glade:83 5.6/prefsui.glade:90 4.0/prefsui.glade:90
+msgid "Labels"
+msgstr "Etichete"
+
+#. 6.4->settings-schema.json->borderOn->description
+msgid "Add a border to each graph"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphSpacing->description
+msgid "Graph spacing"
+msgstr ""
+
+#. 6.4->settings-schema.json->thickness->description
+#. 6.0/prefsui.glade:168 5.6/prefsui.glade:168 4.0/prefsui.glade:168
+msgid "Curves thickness"
+msgstr ""
+
+#. 6.4->settings-schema.json->useIconSize->description
+msgid "Limit height to the size of a colored icon"
+msgstr ""
+
+#. 6.4->settings-schema.json->refreshRate->description
+#. 3.0/prefsui.glade:132 3.2/prefsui.glade:132 6.0/prefsui.glade:140
+#. 3.4/prefsui.glade:133 5.6/prefsui.glade:140 4.0/prefsui.glade:140
+msgid "Refresh Rate (ms)"
+msgstr "Rata de reîmprospătare (ms)"
+
+#. 6.4->settings-schema.json->labelColor->description
+#. 3.2/prefsui.glade:245 6.0/prefsui.glade:212 3.4/prefsui.glade:177
+#. 5.6/prefsui.glade:212 4.0/prefsui.glade:212
+msgid "Label Color"
+msgstr "Culoare etichete"
+
+#. 6.4->settings-schema.json->borderColor->description
+#, fuzzy
+msgid "Border Color"
+msgstr "Culoare de fundal"
+
+#. 6.4->settings-schema.json->backgroundColor->description
+#. 3.0/prefsui.glade:245 3.2/prefsui.glade:297 6.0/prefsui.glade:263
+#. 3.4/prefsui.glade:228 5.6/prefsui.glade:263 4.0/prefsui.glade:263
+msgid "Background Color"
+msgstr "Culoare de fundal"
+
+#. 6.4->settings-schema.json->percentAtEndOfLine->description
+msgid "Place % at the very end of the line"
+msgstr ""
+
+#. 6.4->settings-schema.json->removeEnlightenment->description
+msgid "Remove Enlightenment of this applet"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_labelOn->description
+#. 6.4->settings-schema.json->Mem_labelOn->description
+#. 6.4->settings-schema.json->Net_labelOn->description
+#. 6.4->settings-schema.json->Disk_labelOn->description
+#. 6.4->settings-schema.json->DiskUsage_labelOn->description
+#, fuzzy
+msgid "Label"
+msgstr "Etichete"
+
+#. 6.4->settings-schema.json->CPU_squared->description
+#. 6.4->settings-schema.json->Mem_squared->description
+#. 6.4->settings-schema.json->Net_squared->description
+#. 6.4->settings-schema.json->Disk_squared->description
+#. 6.4->settings-schema.json->DiskUsage_squared->description
+msgid "Square view"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_width->description
+#. 6.4->settings-schema.json->Mem_width->description
+#. 6.4->settings-schema.json->Net_width->description
+#. 6.4->settings-schema.json->Disk_width->description
+#. 6.4->settings-schema.json->DiskUsage_width->description
+#. 3.0/prefsui.glade:360 3.0/prefsui.glade:533 3.0/prefsui.glade:912
+#. 3.0/prefsui.glade:1245 3.2/prefsui.glade:412 3.2/prefsui.glade:585
+#. 3.2/prefsui.glade:964 3.2/prefsui.glade:1297 6.0/prefsui.glade:376
+#. 6.0/prefsui.glade:659 6.0/prefsui.glade:1032 6.0/prefsui.glade:1378
+#. 3.4/prefsui.glade:341 3.4/prefsui.glade:513 3.4/prefsui.glade:886
+#. 3.4/prefsui.glade:1232 5.6/prefsui.glade:376 5.6/prefsui.glade:659
+#. 5.6/prefsui.glade:1032 5.6/prefsui.glade:1378 4.0/prefsui.glade:376
+#. 4.0/prefsui.glade:659 4.0/prefsui.glade:1032 4.0/prefsui.glade:1378
+msgid "Width"
+msgstr "Lățime"
+
+#. 6.4->settings-schema.json->CPU_mergeAll->description
+#. 6.4->settings-schema.json->Net_mergeAll->description
+#. 6.4->settings-schema.json->Disk_mergeAll->description
+#. 6.4->settings-schema.json->DiskUsage_mergeAll->description
+msgid "Merge all"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_byActivity->description
+#. 6.0/prefsui.glade:433 5.6/prefsui.glade:433 4.0/prefsui.glade:433
+msgid "Color by activity level"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_useProgressiveColors->description
+#. 6.0/prefsui.glade:460 5.6/prefsui.glade:460 4.0/prefsui.glade:460
+msgid "Use automatic colors"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_colorExplanation->description
+msgid ""
+"The CPUs are colored in groups of four: CPU0, CPU1, CPU2, and CPU3.\n"
+"The fifth, named CPU4, will have the same color as CPU0; the sixth, CPU5, "
+"will have the same color as CPU1, and so on."
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_color0->description
+#, fuzzy
+msgid "CPU0 Color"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->CPU_color1->description
+#, fuzzy
+msgid "CPU1 Color"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->CPU_color2->description
+#, fuzzy
+msgid "CPU2 Color"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->CPU_color3->description
+#, fuzzy
+msgid "CPU3 Color"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->CPU_activity_0_20->description
+msgid "0-20"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_startAt12Oclock->description
+msgid "Origin at 12 o'clock"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_colorUsedup->description
+#. 6.4->settings-schema.json->DiskUsage_colorUsed->description
+#. 3.0/prefsui.glade:606 3.2/prefsui.glade:658 6.0/prefsui.glade:733
+#. 3.4/prefsui.glade:587 5.6/prefsui.glade:733 4.0/prefsui.glade:733
+msgid "Usedup"
+msgstr "Utilizat"
+
+#. 6.4->settings-schema.json->Mem_colorBuffers->description
+#, fuzzy
+msgid "Buffers"
+msgstr "Tampon"
+
+#. 6.4->settings-schema.json->Mem_colorFree->description
+#. 6.4->settings-schema.json->DiskUsage_colorFree->description
+#. 3.0/prefsui.glade:723 3.2/prefsui.glade:775 6.0/prefsui.glade:847
+#. 3.4/prefsui.glade:701 5.6/prefsui.glade:847 4.0/prefsui.glade:847
+msgid "Free"
+msgstr "Liber"
+
+#. 6.4->settings-schema.json->Mem_swapWidth->description
+msgid "Relative width for Swap graph"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_swapWidth->options
+msgid "100%"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_swapWidth->options
+msgid "25%, left side"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_swapWidth->options
+msgid "None"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_swapWidth->tooltip
+msgid ""
+"100%: The Swap graph is a bar that spans the entire width of the graph, "
+"behind the circle.\n"
+"10%: The Swap graph is a bar that occupies 10% of the graph width, to the "
+"left of the circle.\n"
+"None: No Swap bar."
+msgstr ""
+
+#. 6.4->settings-schema.json->Net_autoscale->description
+#. 6.4->settings-schema.json->Disk_autoscale->description
+#. 3.0/prefsui.glade:1019 3.0/prefsui.glade:1352 3.2/prefsui.glade:1071
+#. 3.2/prefsui.glade:1404 6.0/prefsui.glade:1139 6.0/prefsui.glade:1485
+#. 3.4/prefsui.glade:993 3.4/prefsui.glade:1339 5.6/prefsui.glade:1139
+#. 5.6/prefsui.glade:1485 4.0/prefsui.glade:1139 4.0/prefsui.glade:1485
+msgid "Auto Scale"
+msgstr "Scalare automată"
+
+#. 6.4->settings-schema.json->Net_logscale->description
+#. 6.4->settings-schema.json->Disk_logscale->description
+#. 3.0/prefsui.glade:1058 3.0/prefsui.glade:1391 3.2/prefsui.glade:1110
+#. 3.2/prefsui.glade:1443 6.0/prefsui.glade:1177 6.0/prefsui.glade:1523
+#. 3.4/prefsui.glade:1031 3.4/prefsui.glade:1377 5.6/prefsui.glade:1177
+#. 5.6/prefsui.glade:1523 4.0/prefsui.glade:1177 4.0/prefsui.glade:1523
+msgid "Logarithmic"
+msgstr "Logaritmică"
+
+#. 6.4->settings-schema.json->Net_getdevlist_btn->description
+#. 6.4->settings-schema.json->Disk_getdevlist_btn->description
+msgid "Update this device list"
+msgstr ""
+
+#. 6.4->settings-schema.json->Net_devicesList->columns->title
+#. 6.4->settings-schema.json->Disk_devicesList->columns->title
+#. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
+#, fuzzy
+msgid "Enabled"
+msgstr "Activează"
+
+#. 6.4->settings-schema.json->Net_devicesList->columns->title
+msgid "⚠️ Id️"
+msgstr ""
+
+#. 6.4->settings-schema.json->Net_devicesList->columns->title
+#. 6.4->settings-schema.json->Disk_devicesList->columns->title
+#. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
+msgid "Name"
+msgstr ""
+
+#. 6.4->settings-schema.json->Net_devicesList->columns->title
+#, fuzzy
+msgid "Color Down"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->Net_devicesList->columns->title
+#, fuzzy
+msgid "Color Up"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->Net_cleardevlist_btn->description
+#. 6.4->settings-schema.json->Disk_cleardevlist_btn->description
+msgid "Clear this device list"
+msgstr ""
+
+#. 6.4->settings-schema.json->Disk_devicesList->columns->title
+msgid "⚠️ Id"
+msgstr ""
+
+#. 6.4->settings-schema.json->Disk_devicesList->columns->title
+msgid "⚠️ Sector Size"
+msgstr ""
+
+#. 6.4->settings-schema.json->Disk_devicesList->columns->title
+#, fuzzy
+msgid "Color Read"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->Disk_devicesList->columns->title
+#, fuzzy
+msgid "Color Write"
+msgstr "Scriere"
+
+#. 6.4->settings-schema.json->DiskUsage_chartType->description
+msgid "Type of chart"
+msgstr ""
+
+#. 6.4->settings-schema.json->DiskUsage_chartType->options
+msgid "Bar"
+msgstr ""
+
+#. 6.4->settings-schema.json->DiskUsage_chartType->options
+msgid "Pie"
+msgstr ""
+
+#. 6.4->settings-schema.json->DiskUsage_colorAlert->description
+msgid "Alert"
+msgstr ""
+
+#. 6.4->settings-schema.json->DiskUsage_getpathlist_btn->description
+msgid "Update this path list"
+msgstr ""
+
+#. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
+msgid ""
+"Alert when\n"
+"value (in %)\n"
+"reaches"
+msgstr ""
+
+#. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
+msgid "Path"
+msgstr ""
+
+#. 6.4->settings-schema.json->color0->description
+#, fuzzy
+msgid "Color #0"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color1->description
+#, fuzzy
+msgid "Color #1"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color2->description
+#, fuzzy
+msgid "Color #2"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color3->description
+#, fuzzy
+msgid "Color #3"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color4->description
+#, fuzzy
+msgid "Color #4"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color5->description
+#, fuzzy
+msgid "Color #5"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color6->description
+#, fuzzy
+msgid "Color #6"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color7->description
+#, fuzzy
+msgid "Color #7"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color8->description
+#, fuzzy
+msgid "Color #8"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color9->description
+#, fuzzy
+msgid "Color #9"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color10->description
+#, fuzzy
+msgid "Color #10"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color11->description
+#, fuzzy
+msgid "Color #11"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color12->description
+#, fuzzy
+msgid "Color #12"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color13->description
+#, fuzzy
+msgid "Color #13"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color14->description
+#, fuzzy
+msgid "Color #14"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color15->description
+#, fuzzy
+msgid "Color #15"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color16->description
+#, fuzzy
+msgid "Color #16"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color17->description
+#, fuzzy
+msgid "Color #17"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color18->description
+#, fuzzy
+msgid "Color #18"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color19->description
+#, fuzzy
+msgid "Color #19"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color20->description
+#, fuzzy
+msgid "Color #20"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color21->description
+#, fuzzy
+msgid "Color #21"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color22->description
+#, fuzzy
+msgid "Color #22"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color23->description
+#, fuzzy
+msgid "Color #23"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color24->description
+#, fuzzy
+msgid "Color #24"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color25->description
+#, fuzzy
+msgid "Color #25"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color26->description
+#, fuzzy
+msgid "Color #26"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color27->description
+#, fuzzy
+msgid "Color #27"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color28->description
+#, fuzzy
+msgid "Color #28"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color29->description
+#, fuzzy
+msgid "Color #29"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color30->description
+#, fuzzy
+msgid "Color #30"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->color31->description
+#, fuzzy
+msgid "Color #31"
+msgstr "Culori"
+
+#. 6.4->settings-schema.json->labelWarning->description
+msgid "Data marked with ⚠️ must not be changed!"
+msgstr ""
+
+#. 3.0/prefsui.glade:49 3.2/prefsui.glade:49 6.0/prefsui.glade:56
+#. 3.4/prefsui.glade:49 5.6/prefsui.glade:56 4.0/prefsui.glade:56
+msgid "Multi-Core System Monitor Preferences"
+msgstr ""
+
+#. 3.0/prefsui.glade:189 3.2/prefsui.glade:189
+msgid "Height"
+msgstr "Înălțime"
+
+#. 3.0/prefsui.glade:645 3.2/prefsui.glade:697 6.0/prefsui.glade:771
+#. 3.4/prefsui.glade:625 5.6/prefsui.glade:771 4.0/prefsui.glade:771
+msgid "Cached"
+msgstr "În cache"
+
+#. 3.0/prefsui.glade:1550 3.2/prefsui.glade:1602 6.0/prefsui.glade:1695
+#. 3.4/prefsui.glade:1549 5.6/prefsui.glade:1695 4.0/prefsui.glade:1695
+msgid "Scaling Description"
+msgstr "Descriere scalare"
+
+#. 3.0/prefsui.glade:1562 3.2/prefsui.glade:1614 6.0/prefsui.glade:1710
+#. 3.4/prefsui.glade:1564 5.6/prefsui.glade:1710 4.0/prefsui.glade:1710
+msgid "Close"
+msgstr "Închide"
+
+#. 3.0/prefsui.glade:1592 3.2/prefsui.glade:1644 3.4/prefsui.glade:1594
+msgid ""
+"Auto Scaling:\n"
+"\tThis will scale the line graph by the largest reading within the\n"
+"\tdisplayed area. Once the largest reading is no longer displayed\n"
+"\tthe next largest becomes the new value by which the readings\n"
+"\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"\tHowever, it also means that if there is a large reading small readings\n"
+"\tmay become indistinguishable from 0. And if there are only small readings\n"
+"\tthen slightly larger readings may appear larger than they should.\n"
+"\tIf not enabled the largest value used will be the largest reading since\n"
+"\tcinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"\tThis transforms the readings so that they are displayed using a\n"
+"\tlogarithmic scale. If you are not familiar basically, it reduces the\n"
+"\tlarge values so that they dont dominate the smaller readings."
+msgstr ""
+"Scalare automată:\n"
+"\tSe va proporționa linia graficului după cea mai mare citire din\n"
+"\tsecțiunea afișată. După ce această citire nu mai este afișată, \n"
+"\turmătoarea cea mai mare devine citirea după care se proporționează\n"
+"\tcelelalte citiri. Astfel se permite graficului mărirea pentru a arăta "
+"detalii.\n"
+"\tÎnsă înseamnă și că dacă există o citire mare, citirile mici nu se pot\n"
+"\tdistinge de 0. Iar dacă sunt numai citiri mici, citirile cu puțin mai "
+"mari\n"
+"\tpot părea mai mari decât sunt. Dacă nu este activat, cea mai mare\n"
+"\tde la pornirea Cinnamon va fi folosită ca cea mai mare valoare.\n"
+"\n"
+"Scalare logaritmică:\n"
+"\tSe transformă citirile astfel încât sunt afișate folosind o scară\n"
+"\tlogaritmică. Pe scurt, se reduc valorile mari astfel încât să nu\n"
+"\tle domine pe cele mai mici."
+
+#. 6.0/prefsui.glade:508 5.6/prefsui.glade:508 4.0/prefsui.glade:508
+msgid "by CPU:"
+msgstr ""
+
+#. 6.0/prefsui.glade:1740 5.6/prefsui.glade:1740 4.0/prefsui.glade:1740
+#, fuzzy
+msgid ""
+"Auto Scaling:\n"
+"    This will scale the line graph by the largest reading within the\n"
+"    displayed area. Once the largest reading is no longer displayed\n"
+"    the next largest becomes the new value by which the readings\n"
+"    are scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"    However, it also means that if there is a large reading small readings\n"
+"    may become indistinguishable from 0. And if there are only small "
+"readings\n"
+"    then slightly larger readings may appear larger than they should.\n"
+"    If not enabled the largest value used will be the largest reading since\n"
+"    cinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"    This transforms the readings so that they are displayed using a\n"
+"    logarithmic scale. If you are not familiar basically, it reduces the\n"
+"    large values so that they dont dominate the smaller readings."
+msgstr ""
+"Scalare automată:\n"
+"\tSe va proporționa linia graficului după cea mai mare citire din\n"
+"\tsecțiunea afișată. După ce această citire nu mai este afișată, \n"
+"\turmătoarea cea mai mare devine citirea după care se proporționează\n"
+"\tcelelalte citiri. Astfel se permite graficului mărirea pentru a arăta "
+"detalii.\n"
+"\tÎnsă înseamnă și că dacă există o citire mare, citirile mici nu se pot\n"
+"\tdistinge de 0. Iar dacă sunt numai citiri mici, citirile cu puțin mai "
+"mari\n"
+"\tpot părea mai mari decât sunt. Dacă nu este activat, cea mai mare\n"
+"\tde la pornirea Cinnamon va fi folosită ca cea mai mare valoare.\n"
+"\n"
+"Scalare logaritmică:\n"
+"\tSe transformă citirile astfel încât sunt afișate folosind o scară\n"
+"\tlogaritmică. Pe scurt, se reduc valorile mari astfel încât să nu\n"
+"\tle domine pe cele mai mici."

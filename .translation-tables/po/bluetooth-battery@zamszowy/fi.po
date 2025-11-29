@@ -1,0 +1,211 @@
+# BLUETOOTH BATTERY
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# zamszowy, 2022
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-29 21:28+0200\n"
+"PO-Revision-Date: 2023-12-20 15:28+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:84
+msgid "Show devices battery levels"
+msgstr "Näytä laitteiden akun varaustasot"
+
+#. settings-schema.json->notification-warn-demo->description
+#. settings-schema.json->notification-crit-demo->description
+#. applet.js:161 applet.js:166
+msgid "Test notification"
+msgstr "Testi-ilmoitus"
+
+#. applet.js:161 applet.js:166 applet.js:257 applet.js:267
+msgid "Battery dropped below %d%"
+msgstr ""
+
+#. metadata.json->name
+msgid "Bluetooth battery"
+msgstr "Bluetooth akku"
+
+#. metadata.json->description
+msgid "Shows battery levels of different devices"
+msgstr "Näyttää eri laitteiden akun varaustason"
+
+#. settings-schema.json->page1->title
+msgid "Settings"
+msgstr "Asetukset"
+
+#. settings-schema.json->page2->title
+msgid "Notifications"
+msgstr "Ilmoitukset"
+
+#. settings-schema.json->page3->title
+msgid "Blacklist"
+msgstr "Mustalista"
+
+#. settings-schema.json->section0->title
+msgid "Enable battery monitoring for:"
+msgstr "Käytä akun valvontaa seuraaville:"
+
+#. settings-schema.json->section1->title
+msgid "Icon/Text:"
+msgstr "Kuvake/teksti:"
+
+#. settings-schema.json->section2->title
+msgid "Device to display"
+msgstr "Näytettävä laite"
+
+#. settings-schema.json->section3->title
+msgid ""
+"Disable monitoring for selected devices. You can use model or serial of the "
+"device.\n"
+"Comment starts with '#'"
+msgstr ""
+"Poista valvonta käytöstä valitulta laitteelta. Voit käyttää laitteen mallia "
+"tai sarjanumeroa.\n"
+"Kommentoi alkuun merkki \"#\""
+
+#. settings-schema.json->section4->title
+msgid "Warning notifications"
+msgstr "Varoitus ilmoitukset"
+
+#. settings-schema.json->section5->title
+msgid "Critical notifications"
+msgstr "Kriittiset ilmoitukset"
+
+#. settings-schema.json->section6->title
+msgid ""
+"Ignore small changes of battery levels - if device reports small battery "
+"changes back and forth, this setting would help"
+msgstr ""
+"Ohita pienet varaustason muutokset – jos laite raportoi vähäiset muutokset "
+"edestakaisin, tämä asetus auttaa"
+
+#. settings-schema.json->section7->title
+msgid "Showing of configured applet icon/text"
+msgstr "Näytetään kuvake/teksti"
+
+#. settings-schema.json->enable-keyboards->description
+msgid "Keyboards"
+msgstr "Näppäimistö"
+
+#. settings-schema.json->enable-mice->description
+msgid "Mice"
+msgstr "Hiiri"
+
+#. settings-schema.json->enable-headphones->description
+msgid "Headphones"
+msgstr "Kuulokkeet"
+
+#. settings-schema.json->enable-others->description
+msgid "Other devices"
+msgstr "Muut laitteet"
+
+#. settings-schema.json->applet-icon->description
+msgid "Display"
+msgstr "Näyttö"
+
+#. settings-schema.json->applet-icon->options
+msgid "Icon and Text"
+msgstr "Kuvake ja teksti"
+
+#. settings-schema.json->applet-icon->options
+msgid "Icon"
+msgstr "Kuvake"
+
+#. settings-schema.json->applet-icon->options
+msgid "Text"
+msgstr "Teksti"
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr ""
+
+#. settings-schema.json->blacklist->tooltip
+msgid "tooltip"
+msgstr "Vihje"
+
+#. settings-schema.json->blacklist-apply->description
+msgid "Apply"
+msgstr "Käytä"
+
+#. settings-schema.json->blacklist-apply->tooltip
+msgid "Apply changes"
+msgstr "Hyväksy muutokset"
+
+#. settings-schema.json->override-enable->description
+msgid ""
+"Manually select main device to display (instead of the one with lowest "
+"battery)"
+msgstr ""
+"Valitse näytettävä laite manuaalisesti (vähiten akkua sisältävän laitteen "
+"sijaan)"
+
+#. settings-schema.json->override-entry->description
+msgid "Selected device:"
+msgstr "Valittu laite:"
+
+#. settings-schema.json->override-select->description
+msgid "Select device to display"
+msgstr "Valitse laite näytöltä"
+
+#. settings-schema.json->notification-warn-enable->description
+msgid "Enable notification for battery warning level"
+msgstr "Akun varoitustason ilmoitus"
+
+#. settings-schema.json->notification-warn-level->description
+#. settings-schema.json->notification-crit-level->description
+msgid "Notify when battery below [%]"
+msgstr "Ilmoita, kun akku on alle [%]"
+
+#. settings-schema.json->notification-crit-enable->description
+msgid "Enable notification for battery critical level"
+msgstr "Akun kriittisen varaustason ilmoitus"
+
+#. settings-schema.json->notification-applet-icon->description
+msgid "Show icon/text only if:"
+msgstr "Näytä kuvake/teksti vain, jos:"
+
+#. settings-schema.json->notification-applet-icon->options
+msgid "show always"
+msgstr "näytä aina"
+
+#. settings-schema.json->notification-applet-icon->options
+msgid "battery below warning level"
+msgstr "akku on alle varoitustason"
+
+#. settings-schema.json->notification-applet-icon->options
+msgid "battery below critical level"
+msgstr "akku on alle kriittisen tason"
+
+#. settings-schema.json->notification-filter->description
+msgid ""
+"Notify again only if battery increased above configured level by at least: "
+msgstr ""
+"Ilmoita uudelleen vain, jos varaustaso on noussut määritetylle tasolle: "
+
+#. settings-schema.json->notification-filter->units
+msgid "%"
+msgstr "%"

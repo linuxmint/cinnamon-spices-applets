@@ -1,0 +1,112 @@
+# Swedish translation for printers@linux-man.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017,2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: printers@linux-man\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-10-08 19:45-0400\n"
+"PO-Revision-Date: 2019-11-18 16:05+0100\n"
+"Last-Translator: eson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. metadata.json->name
+#. applet.js:59 applet.js:173
+msgid "Printers"
+msgstr "Skrivare"
+
+#. applet.js:198
+msgid "Cancel all jobs"
+msgstr "Avbryt alla jobb"
+
+#. applet.js:225
+msgid "at"
+msgstr "på"
+
+#. settings-schema.json->send-to-front->description
+#. applet.js:239
+msgid "Send to front"
+msgstr "Lägg överst i listan"
+
+#. metadata.json->description
+msgid "Manage Jobs and Printers"
+msgstr "Hantera utskriftsjobb och skrivare"
+
+#. metadata.json->contributors
+msgid "Caldas Lopes"
+msgstr ""
+
+#. settings-schema.json->show-icon->description
+msgid "Show icon"
+msgstr "Visa ikon"
+
+#. settings-schema.json->show-icon->options
+msgid "Always"
+msgstr "Alltid"
+
+#. settings-schema.json->show-icon->options
+msgid "When printers exist"
+msgstr "När skrivare avslutas"
+
+#. settings-schema.json->show-icon->options
+msgid "When printing"
+msgstr "Vid utskrift"
+
+#. settings-schema.json->show-icon->tooltip
+msgid "When to show the icon"
+msgstr "När ikonen skall visas"
+
+#. settings-schema.json->show-error->description
+msgid "Printer errors"
+msgstr "Skrivarfel"
+
+#. settings-schema.json->show-error->tooltip
+msgid "Show printer error icon"
+msgstr "Visa ikon för skrivarfel"
+
+#. settings-schema.json->show-jobs->description
+msgid "Documents count"
+msgstr "Antal dokument"
+
+#. settings-schema.json->show-jobs->tooltip
+msgid "Show documents count next to icon"
+msgstr "Visa dokumenträknare bredvid ikonen"
+
+#. settings-schema.json->job-number->description
+msgid "Document number"
+msgstr "Dokumentnummer"
+
+#. settings-schema.json->job-number->tooltip
+msgid "Show each document number on print list"
+msgstr "Visa dokumentnummer i utskriftslistan"
+
+#. settings-schema.json->send-to-front->tooltip
+msgid "Documents can be sent to front"
+msgstr "Dokument kan flyttas överst i listan"
+
+#. settings-schema.json->symbolic-icons->description
+msgid "Symbolic icons"
+msgstr "Symboliska ikoner"
+
+#. settings-schema.json->symbolic-icons->tooltip
+msgid "Use symbolic icons"
+msgstr "Använd symboliska ikoner"
+
+#. settings-schema.json->reload-button->description
+#. settings-schema.json->reload-button->tooltip
+msgid "Reload Applet"
+msgstr "Läs in panelprogrammet igen"
+
+#. settings-schema.json->cups-button->description
+#. settings-schema.json->cups-button->tooltip
+msgid "Restart CUPS"
+msgstr "Starta om CUPS"

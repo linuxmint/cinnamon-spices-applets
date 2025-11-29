@@ -1,0 +1,62 @@
+# TAPO CONTROL PANEL
+# This file is put in the public domain.
+# stefanmiklosovic, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tapo@smiklosovic 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-27 12:46-0400\n"
+"PO-Revision-Date: 2025-09-18 03:01+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#. applet.js:85
+msgid "Tapo Control Panel"
+msgstr "Tapo 控制面板"
+
+#. applet.js:90
+msgid "Reload Applet"
+msgstr "重新載入小程式"
+
+#. applet.js:188
+msgid "All devices"
+msgstr "所有裝置"
+
+#. metadata.json->description
+msgid "Control Tapo Appliances"
+msgstr "控制 Tapo 裝置"
+
+#. settings-schema.json->device-names->description
+msgid "Device names"
+msgstr "裝置名稱"
+
+#. settings-schema.json->device-names->tooltip
+msgid ""
+"Device names, separated by comma. Names have to correspond to names in tapo-"
+"rest settings in devices object in the configuration file."
+msgstr ""
+"裝置名稱，以逗號分隔。名稱必須與 tapo-rest 設定中裝置物件的名稱對應。"
+
+#. settings-schema.json->service-url->description
+#. settings-schema.json->service-url->tooltip
+msgid "URL for tapo-rest service"
+msgstr "tapo-rest 服務的 URL"
+
+#. settings-schema.json->password->description
+msgid "Password for tapo-rest"
+msgstr "tapo-rest 的密碼"
+
+#. settings-schema.json->password->tooltip
+msgid "Enter password for tapo-rest service"
+msgstr "請輸入 tapo-rest 服務的密碼"
+
+#. settings-schema.json->perform-login->description
+msgid "Login to tapo-rest"
+msgstr "登入 tapo-rest"

@@ -1,0 +1,573 @@
+# KDE CONNECT APPLET
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# JoeJoeTV, 2020
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-28 05:49-0400\n"
+"PO-Revision-Date: 2024-07-17 01:29+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:574
+msgid "No Modules available"
+msgstr "No hi ha mòduls disponibles"
+
+#. applet.js:1065 applet.js:1068
+msgid "KDE Connect not available, make sure it's installed and running."
+msgstr ""
+"KDE Connect no està disponible, assegureu-vos que està instal·lat i en marxa."
+
+#. applet.js:1072 applet.js:1085 applet.js:1270
+msgid "Reload Applet"
+msgstr "Recarregar la miniaplicació"
+
+#. applet.js:1077
+msgid "Invalid KDE Connect version returned!"
+msgstr "S'ha retornat una versió invàlida de KDE Connect!"
+
+#. applet.js:1078 applet.js:1081
+msgid ""
+"The KDE Connect DBus service returned an invalid version, please try "
+"reloading the Applet!"
+msgstr ""
+"El servei DBus de KDE Connect ha retornat una versió invàlida. Intenteu "
+"recarregar la miniaplicació!"
+
+#. applet.js:1120
+msgid "No connected Devices!"
+msgstr "No hi ha dispositius connectats!"
+
+#. applet.js:1120
+msgid "Add them in the KDE Connect settings"
+msgstr "Afegiu-los a les opcions de KDE Connect"
+
+#. applet.js:1165
+msgid "Debug Stuff, don't touch!"
+msgstr "Contingut amb finalitats de debug, no tocar!"
+
+#. applet.js:1254
+msgid "KDE Connect Version: {version}"
+msgstr "Versió de KDE Connect: {version}"
+
+#. applet.js:1261
+msgid "Own ID: {own_id}"
+msgstr "ID pròpia: {own_id}"
+
+#. applet.js:1263
+msgid "own ID"
+msgstr "id pròpia"
+
+#. applet.js:1265
+msgid "Click to copy own ID"
+msgstr "Clic per a copiar la ID pròpia"
+
+#. applet.js:1275
+msgid "Configure KDE Connect"
+msgstr "Configurar KDE Connect"
+
+#. applet.js:1277
+msgid "Click to open KDE Connect Configuration"
+msgstr "Clic per a obrir la configuració de KDE Connect"
+
+#. applet.js:1321
+msgid "No available devices"
+msgstr "No hi ha dispositius disponibles"
+
+#. applet.js:1323
+msgid "{deviceCount} available device"
+msgstr "{deviceCount} dispositiu disponible"
+
+#. applet.js:1325
+msgid "{deviceCount} available devices"
+msgstr "{deviceCount} dispositius disponibles"
+
+#. js/commonUtils.js:223
+msgid "Copied {typestring} to the clipboard"
+msgstr "S'ha copiat {typestring} al porta-papers"
+
+#. js/modules.js:656
+msgid "Charging"
+msgstr "Carregant"
+
+#. js/modules.js:739
+msgid "ID: {id}"
+msgstr "ID: {id}"
+
+#. js/modules.js:743
+msgid "Device ID"
+msgstr "ID del dispositiu"
+
+#. js/modules.js:747
+msgid "Click to copy ID"
+msgstr "Clic per copiar la ID"
+
+#. js/modules.js:820
+msgid "No Signal"
+msgstr "No hi ha senyal"
+
+#. js/modules.js:823
+msgid "Low"
+msgstr "Baixa"
+
+#. js/modules.js:826
+msgid "Ok"
+msgstr "Ok"
+
+#. js/modules.js:829
+msgid "Good"
+msgstr "Bona"
+
+#. js/modules.js:832
+msgid "Excellent"
+msgstr "Excel·lent"
+
+#. js/modules.js:844
+msgid "Unknown"
+msgstr "Desconeguda"
+
+#. js/modules.js:898
+msgid "Ring device"
+msgstr "Trucar al dispositiu"
+
+#. js/modules.js:899
+msgid "Click to ring the device"
+msgstr "Clic per trucar al dispositiu"
+
+#. js/modules.js:978
+msgid "Photo received from '{deviceName}'"
+msgstr "Foto rebuda des de '{deviceName}'"
+
+#. js/modules.js:978 js/modules.js:1154
+msgid "Click to open in default application"
+msgstr "Clic per a obrir amb l'aplicació per defecte"
+
+#. js/modules.js:987
+msgid "Request Photo"
+msgstr "Sol·licitar foto"
+
+#. js/modules.js:988
+msgid "Click to request a photo from the device"
+msgstr "Clic per sol·licitar una foto del dispositiu"
+
+#. js/modules.js:1038
+msgid "Ping!"
+msgstr "Ping!"
+
+#. js/modules.js:1045
+msgid "Sent ping to device '{deviceName}'"
+msgstr "S'ha enviat un ping al dispositiu '{deviceName}'"
+
+#. js/modules.js:1051
+msgid "Ping Device"
+msgstr "Enviar ping al dispositiu"
+
+#. js/modules.js:1052
+msgid "Click to send a ping to the device"
+msgstr "Clic per a enviar l'ordre ping al dispositiu"
+
+#. js/modules.js:1154
+msgid "Share received from '{deviceName}'"
+msgstr "Fitxer compartit rebut de  '{deviceName}'"
+
+#. js/modules.js:1189
+msgid "Share"
+msgstr "Compartir"
+
+#. js/modules.js:1202
+msgid "Send URL"
+msgstr "Enviar URL"
+
+#. js/modules.js:1203
+msgid "Click to send a URL to the device"
+msgstr "Clic per enviar una URL al dispositiu"
+
+#. js/modules.js:1212
+msgid "Send Text"
+msgstr "Enviar Text"
+
+#. js/modules.js:1213 js/modules.js:1488
+msgid "Click to send text to the device"
+msgstr "Clic per enviar text al dispositiu"
+
+#. js/modules.js:1222
+msgid "Send File(s)"
+msgstr "Enviar Fitxer(s)"
+
+#. js/modules.js:1223
+msgid "Click to send file(s) to the device"
+msgstr "Clic per enviar fitxer(s) al dispositiu"
+
+#. js/modules.js:1279
+msgid "Unmount"
+msgstr "Desmuntar"
+
+#. js/modules.js:1281
+msgid "Mount"
+msgstr "Muntar"
+
+#. js/modules.js:1287
+msgid "Click to unmount"
+msgstr "Clic per desmuntar"
+
+#. js/modules.js:1289
+msgid "Click to mount"
+msgstr "Clic per muntar"
+
+#. js/modules.js:1362
+msgid "Click to browse files"
+msgstr "Clic per navegar pels fitxers"
+
+#. js/modules.js:1466
+msgid "SMS"
+msgstr "SMS"
+
+#. js/modules.js:1479
+msgid "Launch SMS App"
+msgstr "Iniciar l'aplicació d'SMS"
+
+#. js/modules.js:1480
+msgid "Click to open the KDE Connect SMS App"
+msgstr "Clic per obrir l'aplicació d'SMS de KDE Connect"
+
+#. js/modules.js:1487
+msgid "Send SMS"
+msgstr "Enviar SMS"
+
+#. settingsWidgets.py:153
+msgid "Move selected entry up"
+msgstr "Moure l'element seleccionat cap a dalt"
+
+#. settingsWidgets.py:160
+msgid "Move selected entry down"
+msgstr "Moure l'element seleccionat cap a baix"
+
+#. py/dialogs.py:40
+#, python-brace-format
+msgid "Send URL to '{device_name}'"
+msgstr "Enviar URL a '{device_name}'"
+
+#. py/dialogs.py:47 py/dialogs.py:103 py/dialogs.py:166
+msgid "Cancel"
+msgstr "Cancel·lar"
+
+#. py/dialogs.py:50 py/dialogs.py:106 py/dialogs.py:169
+msgid "Send"
+msgstr "Enviar"
+
+#. py/dialogs.py:57
+#, python-brace-format
+msgid "Enter a URL to send to '{device_name}'"
+msgstr "Introduïu una URL per enviar a '{device_name}'"
+
+#. py/dialogs.py:61
+msgid "URL"
+msgstr "URL"
+
+#. py/dialogs.py:96
+#, python-brace-format
+msgid "Send SMS using '{device_name}'"
+msgstr "Enviar SMS utilitzant '{device_name}'"
+
+#. py/dialogs.py:113
+msgid "Phone Number:"
+msgstr "Número de telèfon:"
+
+#. py/dialogs.py:117
+msgid "Phone Number"
+msgstr "Número de telèfon"
+
+#. py/dialogs.py:119
+msgid "Message:"
+msgstr "Missatge:"
+
+#. py/dialogs.py:159
+#, python-brace-format
+msgid "Send text to '{device_name}'"
+msgstr "Enviar text a '{device_name}'"
+
+#. py/dialogs.py:176
+msgid "Text to send:"
+msgstr "Text a enviar:"
+
+#. py/dialogs.py:222
+#, python-brace-format
+msgid "Select files to send to '{deviceName}'"
+msgstr "Seleccioneu fitxers per enviar a '{deviceName}'"
+
+#. py/dialogs.py:283
+#, python-brace-format
+msgid "Select where to save photo received from '{deviceName}'"
+msgstr "Seleccioneu on es guardarà la foto rebuda de '{deviceName}'"
+
+#. py/dialogs.py:287
+msgid "photo.jpg"
+msgstr "foto.jpg"
+
+#. py/dialogs.py:290
+msgid "JPEG Photo"
+msgstr "Foto JPEG"
+
+#. metadata.json->name
+msgid "KDE Connect Applet"
+msgstr "Miniaplicació KDE Connect"
+
+#. metadata.json->description
+msgid "Enables interacting with devices connected via KDE Connect"
+msgstr "Activa la interacció amb dispositius connectats via KDE Connect"
+
+#. metadata.json->comments
+msgid ""
+"KDE Connect Applet makes it easy to use the various features provided by KDE "
+"Connect to interact with connected devices, like sending files, sending SMS "
+"messages, browsing the storage of the device and more"
+msgstr ""
+"La miniaplicació KDE Connect facilita l'ús de funcionalitats d'interacció "
+"entre dispositius connectats via KDE Connect, com ara l'enviament de "
+"fitxers, SMS, o la navegació pels fitxers"
+
+#. metadata.json->contributors
+msgid "Johannes Schoeneberger - Author"
+msgstr "Autor - Johannes Schoeneberger"
+
+#. metadata.json->contributors
+msgid "Severga - Inspiration for the Applet"
+msgstr "Severga - Inspiració per la miniaplicació"
+
+#. settings-schema.json->page_general->title
+msgid "General"
+msgstr "General"
+
+#. settings-schema.json->page_modules->title
+msgid "Modules"
+msgstr "Mòduls"
+
+#. settings-schema.json->section_contextmenu->title
+msgid "Context Menu"
+msgstr "Menú contextual"
+
+#. settings-schema.json->section_panel->title
+msgid "Panel"
+msgstr "Tauler"
+
+#. settings-schema.json->section_devices->title
+msgid "Devices"
+msgstr "Dispositius"
+
+#. settings-schema.json->section_info-modules->title
+msgid "Info Modules"
+msgstr "Informació dels mòduls"
+
+#. settings-schema.json->section_action-modules->title
+msgid "Action Modules"
+msgstr "Mòduls d'acció"
+
+#. settings-schema.json->section_module_battery->title
+msgid "Battery Info Module"
+msgstr "Mòdul d'informació de bateria"
+
+#. settings-schema.json->section_module_deviceinfo->title
+msgid "Device-Info Info Module"
+msgstr "Mòdul d'informació dels dispositius"
+
+#. settings-schema.json->section_module_connectivity->title
+msgid "Connectivity Info Module"
+msgstr "Mòdul d'informació de connectivitat"
+
+#. settings-schema.json->section_module_findmyphone->title
+msgid "FindMyPhone Action Module"
+msgstr "Mòdul d'acció FindMyPhone"
+
+#. settings-schema.json->section_module_requestphoto->title
+msgid "Request-Photo Action Module"
+msgstr "Mòdul d'acció Request-Photo"
+
+#. settings-schema.json->section_module_ping->title
+msgid "Ping Action Module"
+msgstr "Mòdul d'acció Ping"
+
+#. settings-schema.json->section_module_share->title
+msgid "Share Action Module"
+msgstr "Mòdul d'acció Share"
+
+#. settings-schema.json->section_module_sftp->title
+msgid "SFTP Action Module"
+msgstr "Mòdul d'acció SFTP"
+
+#. settings-schema.json->section_module_sms->title
+msgid "SMS Action Module"
+msgstr "Mòdul d'acció SMS"
+
+#. settings-schema.json->switch_show-own-id->description
+msgid "Show own ID in the context menu of the applet"
+msgstr "Mostrar la ID pròpia al menú contextual de la miniaplicació"
+
+#. settings-schema.json->switch_show-kdec-version->description
+msgid "Show KDE Connect version in the context menu of the applet"
+msgstr ""
+"Mostrar la versió de KDE Connect al menú contextual de la miniaplicació"
+
+#. settings-schema.json->switch_show-device-count->description
+msgid "Show the number of connected devices next to the icon in the panel"
+msgstr ""
+"Mostrar el número de dispositius connectats al costat de la icona al tauler"
+
+#. settings-schema.json->switch_show-device-count-tooltip->description
+msgid "Show the device count in the tooltip of the applet"
+msgstr ""
+"Mostrar el número de dispositius a la informació d'eines de la miniaplicació"
+
+#. settings-schema.json->combobox_icon-type->description
+msgid "Icon type"
+msgstr "Tipus d'icona"
+
+#. settings-schema.json->combobox_icon-type->options
+msgid "Symbolic"
+msgstr "Simbòlica"
+
+#. settings-schema.json->combobox_icon-type->options
+msgid "Color"
+msgstr "Color"
+
+#. settings-schema.json->switch_use-custom-icon->description
+msgid "Use custom icon"
+msgstr "Utilitzar icona personalitzada"
+
+#. settings-schema.json->icon_custom-icon->description
+msgid "Custom icon to use"
+msgstr "Icona personalitzada a utilitzar"
+
+#. settings-schema.json->button_open-kdec-settings->description
+msgid "Open KDE Connect Configuration"
+msgstr "Obrir la configuració de KDE Connect"
+
+#. settings-schema.json->switch_expand-only-device->description
+msgid ""
+"Expand the device sub menu automatically, if only one device is available"
+msgstr ""
+"Expandir el menú de dispositius automàticament quan un dispositiu estigui "
+"disponible"
+
+#. settings-schema.json->orderlist_device-order->columns->title
+#. settings-schema.json->oderlist_info-modules->columns->title
+#. settings-schema.json->oderlist_action-modules->columns->title
+msgid "Name"
+msgstr "Nom"
+
+#. settings-schema.json->orderlist_device-order->columns->title
+msgid "Expand"
+msgstr "Expandir"
+
+#. settings-schema.json->orderlist_device-order->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. settings-schema.json->oderlist_info-modules->columns->title
+#. settings-schema.json->oderlist_action-modules->columns->title
+msgid "Enabled"
+msgstr "Activat"
+
+#. settings-schema.json->oderlist_info-modules->columns->title
+#. settings-schema.json->oderlist_action-modules->columns->title
+msgid "ID"
+msgstr "ID"
+
+#. settings-schema.json->module_battery_description->description
+msgid "Shows the current battery charge and charging status of the device"
+msgstr "Mostra l'estat actual de la bateria i si s'està carregant o no"
+
+#. settings-schema.json->module_deviceinfo_description->description
+msgid "Shows the device icon along with its ID"
+msgstr "Mostra la icona del dispositiu juntament amb la seva ID"
+
+#. settings-schema.json->module_connectivity_description->description
+msgid "Shows the current connectivity status and network type of the device"
+msgstr ""
+"Mostrar l'estat actual de la connectivitat i el tipus de xarxa del dispositiu"
+
+#. settings-schema.json->module_connectivity_showNetworkType->description
+msgid "Show the mobile network type"
+msgstr "Mostrar el tipus de xarxa mòbil"
+
+#. settings-schema.json->module_findmyphone_description->description
+msgid ""
+"Lets you make the device ring, so you can find it, if you have misplaced it"
+msgstr ""
+"Us permet trucar al dispositiu de manera que pugueu trobar-lo en cas d'haver-"
+"lo perdut de vista"
+
+#. settings-schema.json->module_requestphoto_description->description
+msgid ""
+"Lets you request a photo from the remote device and save it on this device"
+msgstr ""
+"Us permet sol·licitar una foto del dispositiu remot i guardar-la en aquest "
+"dispositiu"
+
+#. settings-schema.json->module_requestphoto_saveToDir->description
+msgid "Save received photos directly to directory"
+msgstr "Guardar les fotos rebudes directament al directori"
+
+#. settings-schema.json->module_requestphoto_saveDirectory->description
+msgid "The directory to save received photos to"
+msgstr "El directori on es guardaran les fotos rebutes"
+
+#. settings-schema.json->module_ping_description->description
+msgid "Lets you ping the the device to make sure it's connected"
+msgstr "Us permet fer ping al dispositiu per a confirmar que està connectat"
+
+#. settings-schema.json->module_ping_useCustomMessage->description
+msgid "Use custom message for ping"
+msgstr "Utilitzar un missatge personalitzat pel ping"
+
+#. settings-schema.json->module_ping_customMessage->description
+msgid "Custom message"
+msgstr "Missatge personalitzat"
+
+#. settings-schema.json->module_share_description->description
+msgid "Lets you share URLs, files or text to the device"
+msgstr "Us permet compartir URLs, fitxers o text amb el dispositiu"
+
+#. settings-schema.json->module_share_useSubMenu->description
+#. settings-schema.json->module_sms_useSubMenu->description
+msgid "Show menu items in sub menu"
+msgstr "Mostrar elements del menú al submenú"
+
+#. settings-schema.json->module_share_enableSendURL->description
+msgid "Enable the menu item to send a URL"
+msgstr "Activar l'element del menú per enviar una URL"
+
+#. settings-schema.json->module_share_enableSendText->description
+msgid "Enable the menu item to send some text"
+msgstr "Activar l'element del menú per enviar text"
+
+#. settings-schema.json->module_share_enableSendFiles->description
+msgid "Enable the menu item to send file(s)"
+msgstr "Activar l'element del menú per enviar fitxer(s)"
+
+#. settings-schema.json->module_sftp_description->description
+msgid "Lets you remotely browse the storage selected on the device"
+msgstr ""
+"Us permet navegar pel sistema de fitxers del dispositiu de manera remota"
+
+#. settings-schema.json->module_sms_description->description
+msgid "Lets you remotely send SMS messages from the device"
+msgstr "Us permet enviar SMS des del dispositiu de manera remota"
+
+#. settings-schema.json->module_sms_enableSendSMS->description
+msgid "Enable the menu item to send an SMS message"
+msgstr "Activar l'element del menú per enviar missatges SMS"
+
+#. settings-schema.json->module_sms_enableLaunchSMSApp->description
+msgid "Enable the menu item to launch the KDE Connect SMS app"
+msgstr ""
+"Activar l'element del menú per a iniciar l'aplicació d'SMS de KDE Connect"

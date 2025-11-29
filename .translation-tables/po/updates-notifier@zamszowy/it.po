@@ -1,0 +1,213 @@
+# UPDATES NOTIFIER
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: updates-notifier@zamszowy 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-29 10:49+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:79
+msgid "missing dependencies"
+msgstr "dipendenze mancanti"
+
+#. applet.js:229
+msgid "Check for new updates"
+msgstr "Cerca nuovi aggiornamenti"
+
+#. applet.js:243
+#, javascript-format
+msgid "View %s updates"
+msgstr "Visualizza %s aggiornamenti"
+
+#. applet.js:243
+msgid "No updates to view"
+msgstr "Nessun aggiornamento da visualizzare"
+
+#. applet.js:258
+#, javascript-format
+msgid "Upgrade %s packages"
+msgstr "Aggiorna %s pacchetti"
+
+#. applet.js:258
+msgid "No packages to upgrade"
+msgstr "Nessun pacchetto da aggiornare"
+
+#. applet.js:283
+#, javascript-format
+msgid "%s updates available"
+msgstr "%s aggiornamenti disponibili"
+
+#. applet.js:284
+msgid "No updates available"
+msgstr "Nessun aggiornamento disponibile"
+
+#. info-window.js:66 info-window.js:85
+msgid "No details available."
+msgstr ""
+
+#. info-window.js:68 info-window.js:87
+msgid ""
+"Error:\n"
+"{0}"
+msgstr ""
+
+#. info-window.js:72 info-window.js:91
+msgid ""
+"Failed to run command:\n"
+"{0}"
+msgstr ""
+
+#. info-window.js:108
+msgid "Loading update details…"
+msgstr ""
+
+#. info-window.js:173
+msgid "Updates"
+msgstr ""
+
+#. info-window.js:188
+msgid "Search updates…"
+msgstr ""
+
+#. info-window.js:223
+msgid "{0} updates"
+msgstr ""
+
+#. info-window.js:251
+msgid ""
+"Failed to read updates file:\n"
+"{0}"
+msgstr ""
+
+#. metadata.json->name
+msgid "Updates notifier"
+msgstr "Notificatore aggiornamenti"
+
+#. metadata.json->description
+msgid "Shows icons for pending update packages"
+msgstr "Mostra icone per i pacchetti di aggiornamento in sospeso"
+
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->pageAppearance->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->sectionSettings->title
+msgid "Settings"
+msgstr "Impostazioni"
+
+#. settings-schema.json->sectionIconLabel->title
+msgid "Icon/Label"
+msgstr ""
+
+#. settings-schema.json->sectionClick->title
+msgid "Applet click"
+msgstr ""
+
+#. settings-schema.json->sectionMenu->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->sectionTheme->title
+msgid "Theme"
+msgstr "Tema"
+
+#. settings-schema.json->update-refresh->description
+msgid "Minutes to wait before refreshing updates"
+msgstr ""
+
+#. settings-schema.json->show-firmware->description
+msgid "Show firmware updates"
+msgstr ""
+
+#. settings-schema.json->hide-applet->description
+msgid "Hide applet if there are no updates"
+msgstr "Nascondi l’applet se non ci sono aggiornamenti"
+
+#. settings-schema.json->different-levels->description
+msgid "Show different applet icon for different updgradeable packages count"
+msgstr ""
+"Mostra un’icona diversa dell’applet in base al numero di pacchetti "
+"aggiornabili"
+
+#. settings-schema.json->level-1->description
+msgid "Show low level icon when updates count is between 0 and this value "
+msgstr ""
+"Mostra l’icona di livello basso quando il numero di aggiornamenti è tra 0 e "
+"questo valore "
+
+#. settings-schema.json->level-2->description
+msgid ""
+"Show medium level icon when updates count is between low level value and "
+"this value. Show high level icon if it's higher than this value."
+msgstr ""
+"Mostra l’icona di livello medio quando il numero di aggiornamenti è tra il "
+"valore di livello basso e questo valore. Mostra l’icona di livello alto se è "
+"superiore a questo valore."
+
+#. settings-schema.json->show-label->description
+msgid "Show label with updates count"
+msgstr ""
+
+#. settings-schema.json->label-font-size->description
+msgid "Label font size"
+msgstr ""
+
+#. settings-schema.json->label-font-weight->description
+msgid "Label font weight"
+msgstr ""
+
+#. settings-schema.json->label-vertical-position->description
+msgid "Label vertical position"
+msgstr ""
+
+#. settings-schema.json->show-window-on-click->description
+msgid "Show updates window on left click and menu entries on right click"
+msgstr ""
+
+#. settings-schema.json->refresh-when-no-updates->description
+msgid "Refresh updates list on left click if there are no updates"
+msgstr ""
+
+#. settings-schema.json->commandUpdate-show->description
+msgid "Show \"Check for new updates\" command"
+msgstr ""
+
+#. settings-schema.json->commandUpgrade-show->description
+msgid "Show \"Upgrade packages\" command"
+msgstr ""
+
+#. settings-schema.json->commandUpgrade->description
+msgid "Upgrade packages command:"
+msgstr ""
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr "Stile icone"
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr "scura"
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr "chiara"
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr "simbolica"

@@ -1,0 +1,309 @@
+# Swedish localisation for cinnamon-timer@jake1164.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cinnamon-timer@jake1164\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-20 11:11-0400\n"
+"PO-Revision-Date: 2023-05-30 08:41+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#. 3.4/applet.js:218 3.4/applet.js:380 2.6/applet.js:88 2.6/applet.js:303
+#. 6.4/applet.js:209 6.4/applet.js:372
+msgid "Timer"
+msgstr "Tidur"
+
+#. 3.4->settings-schema.json->preset_time->columns->title
+#. 6.4->settings-schema.json->preset_time->columns->title
+#. 3.4/applet.js:224 3.4/applet.js:263 3.4/applet.js:357 2.6/applet.js:220
+#. 2.6/applet.js:301 6.4/applet.js:215 6.4/applet.js:255 6.4/applet.js:349
+msgid "Hours"
+msgstr "Timmar"
+
+#. 3.4->settings-schema.json->preset_time->columns->title
+#. 6.4->settings-schema.json->preset_time->columns->title
+#. 3.4/applet.js:224 3.4/applet.js:264 3.4/applet.js:357 2.6/applet.js:94
+#. 2.6/applet.js:221 2.6/applet.js:301 6.4/applet.js:215 6.4/applet.js:256
+#. 6.4/applet.js:349
+msgid "Minutes"
+msgstr "Minuter"
+
+#. 3.4/applet.js:224 3.4/applet.js:357 2.6/applet.js:301 6.4/applet.js:215
+#. 6.4/applet.js:349
+msgid "and"
+msgstr "och"
+
+#. 3.4->settings-schema.json->preset_time->columns->title
+#. 6.4->settings-schema.json->preset_time->columns->title
+#. 3.4/applet.js:224 3.4/applet.js:265 3.4/applet.js:357 2.6/applet.js:222
+#. 2.6/applet.js:301 6.4/applet.js:215 6.4/applet.js:257 6.4/applet.js:349
+msgid "Seconds"
+msgstr "Sekunder"
+
+#. 3.4/applet.js:241 2.6/applet.js:224 6.4/applet.js:233
+msgid "Reset"
+msgstr "Återställ"
+
+#. 3.4/applet.js:533 2.6/applet.js:450 6.4/applet.js:500
+msgid "Okay"
+msgstr "OK"
+
+#. 3.4/applet.js:551 2.6/applet.js:468 6.4/applet.js:518
+msgid "Cinnamon Timer"
+msgstr "Cinnamon tidur"
+
+#. metadata.json->name
+#, fuzzy
+msgid "Timer with notifications"
+msgstr "Tidur med avisering"
+
+#. metadata.json->description
+msgid "A timer app with visual and auditory notifications."
+msgstr "Ett tidur med visuell och auditiv avisering."
+
+#. 3.4->settings-schema.json->page1->title
+#. 6.4->settings-schema.json->page1->title
+msgid "General"
+msgstr "Allmänt"
+
+#. 3.4->settings-schema.json->page2->title
+#. 6.4->settings-schema.json->page2->title
+msgid "Sounds"
+msgstr "Ljud"
+
+#. 3.4->settings-schema.json->page3->title
+#. 3.4->settings-schema.json->section3->title
+#. 3.4->settings-schema.json->preset_time->description
+#. 6.4->settings-schema.json->page3->title
+#. 6.4->settings-schema.json->section3->title
+#. 6.4->settings-schema.json->preset_time->description
+msgid "Preset Times"
+msgstr "Förinställda tider"
+
+#. 3.4->settings-schema.json->page4->title
+#. 3.4->settings-schema.json->section4->title
+#. 3.4->settings-schema.json->slider_intervals->description
+#. 6.4->settings-schema.json->page4->title
+#. 6.4->settings-schema.json->section4->title
+#. 6.4->settings-schema.json->slider_intervals->description
+msgid "Slider Intervals"
+msgstr "Skjutreglageintervall"
+
+#. 3.4->settings-schema.json->section1->title
+#. 6.4->settings-schema.json->section1->title
+msgid "General Settings"
+msgstr "Allmänna inställningar"
+
+#. 3.4->settings-schema.json->section2->title
+#. 6.4->settings-schema.json->section2->title
+msgid "Sound Settings"
+msgstr "Ljudinsatällningar"
+
+#. 3.4->settings-schema.json->confirm-prompt-enable->description
+#. 2.6->settings-schema.json->confirm-prompt-enable->description
+#. 6.4->settings-schema.json->confirm-prompt-enable->description
+msgid "Check this to place a prompt on the window when time has elapsed."
+msgstr ""
+"Aktivera detta för att placera ett meddelande på skärmen när tiden har gått "
+"ut."
+
+#. 3.4->settings-schema.json->confirm-prompt-enable->tooltip
+#. 2.6->settings-schema.json->confirm-prompt-enable->tooltip
+#. 6.4->settings-schema.json->confirm-prompt-enable->tooltip
+msgid "Check this to place a prompt on the window when time has elapsed"
+msgstr ""
+"Aktivera detta för att placera ett meddelande på skärmen när tiden har gått "
+"ut"
+
+#. 3.4->settings-schema.json->message-prompt-enable->description
+#. 3.4->settings-schema.json->message-prompt-enable->tooltip
+#. 2.6->settings-schema.json->message-prompt-enable->description
+#. 2.6->settings-schema.json->message-prompt-enable->tooltip
+#. 6.4->settings-schema.json->message-prompt-enable->description
+#. 6.4->settings-schema.json->message-prompt-enable->tooltip
+msgid "Display a notification when time has elapsed"
+msgstr "Visa en systemavisering när tiden har gått ut"
+
+#. 3.4->settings-schema.json->display-message->description
+#. 3.4->settings-schema.json->display-message->tooltip
+#. 6.4->settings-schema.json->display-message->description
+#. 6.4->settings-schema.json->display-message->tooltip
+msgid ""
+"Global message displayed in notification windows unless defined in preset "
+"time."
+msgstr ""
+"Systemövergripande meddelande som visas i meddelandefönster om det inte har "
+"definierats i förinställd tid."
+
+#. 3.4->settings-schema.json->sound-prompt-enable->description
+#. 3.4->settings-schema.json->sound-prompt-enable->tooltip
+#. 2.6->settings-schema.json->sound-prompt-enable->description
+#. 2.6->settings-schema.json->sound-prompt-enable->tooltip
+#. 6.4->settings-schema.json->sound-prompt-enable->description
+#. 6.4->settings-schema.json->sound-prompt-enable->tooltip
+msgid "Play a sound when time is elapsed"
+msgstr "Spela upp ett ljud när tiden har gått ut"
+
+#. 3.4->settings-schema.json->sound-file->description
+#. 2.6->settings-schema.json->sound-file->description
+#. 6.4->settings-schema.json->sound-file->description
+msgid "Full path and filename of alert sound file"
+msgstr "Fullständig sökväg och filnamn för larmljudfilen"
+
+#. 3.4->settings-schema.json->sound-file->tooltip
+#. 2.6->settings-schema.json->sound-file->tooltip
+#. 6.4->settings-schema.json->sound-file->tooltip
+msgid "Must have Sox installed. Most sound file types supported"
+msgstr ""
+
+#. 3.4->settings-schema.json->sound-volume->description
+#. 3.4->settings-schema.json->sound-volume->tooltip
+#. 6.4->settings-schema.json->sound-volume->description
+#. 6.4->settings-schema.json->sound-volume->tooltip
+msgid "Specify the playback volume"
+msgstr "Specificera uppspelningsvolym"
+
+#. 3.4->settings-schema.json->display-menu-enable->description
+#. 3.4->settings-schema.json->display-menu-enable->tooltip
+#. 2.6->settings-schema.json->display-menu-enable->description
+#. 2.6->settings-schema.json->display-menu-enable->tooltip
+#. 6.4->settings-schema.json->display-menu-enable->description
+#. 6.4->settings-schema.json->display-menu-enable->tooltip
+msgid "Show the timer menu when time is elapsed"
+msgstr "Visa tidursmenyn när tiden har gått ut"
+
+#. 3.4->settings-schema.json->duration-display-enable->description
+#. 3.4->settings-schema.json->duration-display-enable->tooltip
+#. 2.6->settings-schema.json->time_display_enable->description
+#. 2.6->settings-schema.json->time_display_enable->tooltip
+#. 6.4->settings-schema.json->duration-display-enable->description
+#. 6.4->settings-schema.json->duration-display-enable->tooltip
+msgid "Display remaining time in panel"
+msgstr "Visa återstående tid i panelen"
+
+#. 3.4->settings-schema.json->alarmtime-display-enable->description
+#. 3.4->settings-schema.json->alarmtime-display-enable->tooltip
+#. 6.4->settings-schema.json->alarmtime-display-enable->description
+#. 6.4->settings-schema.json->alarmtime-display-enable->tooltip
+msgid "Display alarm time in panel"
+msgstr "Visa larmtid i panelen"
+
+#. 3.4->settings-schema.json->alarmtime-format-small->description
+#. 6.4->settings-schema.json->alarmtime-format-small->description
+msgid "Format used to display alarm time in the near future"
+msgstr "Format som används för att visa larmtid inom en snar framtid"
+
+#. 3.4->settings-schema.json->alarmtime-format-small->tooltip
+#. 6.4->settings-schema.json->alarmtime-format-small->tooltip
+msgid ""
+"If the alarm time is less than the minutes specified below away,\n"
+"the alarm time can be displayed with more details\n"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
+msgstr ""
+"Om larmtiden är kortare än de minuter som anges nedan,\n"
+"kan larmtiden visas mer detaljerat\n"
+"(se https://docs.gtk.org/glib/method.DateTime.format.html)"
+
+#. 3.4->settings-schema.json->alarmtime-format-large->description
+#. 6.4->settings-schema.json->alarmtime-format-large->description
+msgid "Format used to display alarm time in the not so near future"
+msgstr "Format som används för att visa larmtid inom en inte så nära framtid"
+
+#. 3.4->settings-schema.json->alarmtime-format-large->tooltip
+#. 6.4->settings-schema.json->alarmtime-format-large->tooltip
+msgid ""
+"If the alarm time is more than the minutes specified below away,\n"
+"the alarm time can be displayed with less details\n"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
+msgstr ""
+"Om larmtiden är längre än de minuter som anges nedan,\n"
+"kan larmtiden visas mindre detaljerat\n"
+"(se https://docs.gtk.org/glib/method.DateTime.format.html)"
+
+#. 3.4->settings-schema.json->alarmtime-format-switchover->units
+#. 6.4->settings-schema.json->alarmtime-format-switchover->units
+msgid "minutes"
+msgstr "minuter"
+
+#. 3.4->settings-schema.json->alarmtime-format-switchover->description
+#. 6.4->settings-schema.json->alarmtime-format-switchover->description
+msgid "Time when switching from small to large time format"
+msgstr "Tid för omställning från litet till stort tidsformat"
+
+#. 3.4->settings-schema.json->alarmtime-format-switchover->tooltip
+#. 6.4->settings-schema.json->alarmtime-format-switchover->tooltip
+msgid "Switch over time between the two formats specified above"
+msgstr "Växlingstid mellan de två format som anges ovan"
+
+#. 3.4->settings-schema.json->auto-loop-enable->description
+#. 3.4->settings-schema.json->auto-loop-enable->tooltip
+#. 6.4->settings-schema.json->auto-loop-enable->description
+#. 6.4->settings-schema.json->auto-loop-enable->tooltip
+msgid "Restart the timer automatically when time is elapsed"
+msgstr "Starta automatiskt om tiduret när tiden har löpt ut"
+
+#. 3.4->settings-schema.json->alarm_end->description
+#. 3.4->settings-schema.json->alarm_end->tooltip
+#. 3.4->settings-schema.json->alarm_start->description
+#. 3.4->settings-schema.json->alarm_start->tooltip
+#. 2.6->settings-schema.json->alarm_end->description
+#. 2.6->settings-schema.json->alarm_end->tooltip
+#. 2.6->settings-schema.json->alarm_start->description
+#. 2.6->settings-schema.json->alarm_start->tooltip
+#. 6.4->settings-schema.json->alarm_end->description
+#. 6.4->settings-schema.json->alarm_end->tooltip
+#. 6.4->settings-schema.json->alarm_start->description
+#. 6.4->settings-schema.json->alarm_start->tooltip
+msgid "Do not change, the time the alarm is set to expire"
+msgstr "Ändra inte, tiden larmet är inställt på att gå ut"
+
+#. 3.4->settings-schema.json->message->description
+#. 3.4->settings-schema.json->message->tooltip
+#. 6.4->settings-schema.json->message->description
+#. 6.4->settings-schema.json->message->tooltip
+msgid "Do not change, message being displayed when the current timer expires"
+msgstr "Ändra inte, meddelandet visas när den aktuella tiden löper ut"
+
+#. 3.4->settings-schema.json->slider_intervals->columns->title
+#. 6.4->settings-schema.json->slider_intervals->columns->title
+msgid "Minimum"
+msgstr "Min."
+
+#. 3.4->settings-schema.json->slider_intervals->columns->title
+#. 6.4->settings-schema.json->slider_intervals->columns->title
+msgid "Maximum"
+msgstr "Max."
+
+#. 3.4->settings-schema.json->slider_intervals->columns->title
+#. 6.4->settings-schema.json->slider_intervals->columns->title
+msgid "Step"
+msgstr "Steg"
+
+#. 3.4->settings-schema.json->preset_time->columns->title
+#. 6.4->settings-schema.json->preset_time->columns->title
+msgid "Label"
+msgstr "Etikett"
+
+#. 3.4->settings-schema.json->preset_time->columns->title
+#. 6.4->settings-schema.json->preset_time->columns->title
+msgid "Custom Message (overrides global message)"
+msgstr "Anpassat meddelande (åsidosätter systemmeddelande)"
+
+#. 2.6->settings-schema.json->display-message->description
+#. 2.6->settings-schema.json->display-message->tooltip
+#, fuzzy
+msgid "Message displayed in notification windows"
+msgstr ""
+"Systemövergripande meddelande som visas i meddelandefönster om det inte har "
+"definierats i förinställd tid."

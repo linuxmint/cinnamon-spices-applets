@@ -1,0 +1,215 @@
+# DDC/CI MULTI-MONITOR
+# This file is put in the public domain.
+# tim-we, 2021
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ddcci-multi-monitor@tim-we 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-28 19:03+0200\n"
+"PO-Revision-Date: 2025-09-29 10:59-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.7\n"
+
+#. metadata.json->description
+#. applet.js:21
+msgid "Adjust monitor brightness via DDC/CI"
+msgstr "Ajuste del brillo del monitor mediante DDC/CI"
+
+#. applet.js:169
+msgid "Use for scroll/click"
+msgstr "Uso para desplazamiento/clic"
+
+#. applet.js:300
+msgid "Detect displays"
+msgstr "Detectar pantallas"
+
+#. applet.js:312
+msgid "Detecting displays..."
+msgstr "Detectando pantallas..."
+
+#. applet.js:475
+msgid "Failed to detect displays."
+msgstr "No se han detectado pantallas."
+
+#. applet.js:476
+msgid "Make sure you have ddcutil installed and the correct permissions."
+msgstr "Asegúrese de que tiene ddcutil instalado y los permisos correctos."
+
+#. applet.js:477
+msgid "Error:"
+msgstr "Error:"
+
+#. metadata.json->name
+msgid "DDC/CI Multi-Monitor"
+msgstr "DDC/CI Multi-Monitor"
+
+#. settings-schema.json->page_general->title
+msgid "General"
+msgstr "General"
+
+#. settings-schema.json->page_retry_detection->title
+msgid "Detection"
+msgstr "Detección"
+
+#. settings-schema.json->section_appearance->title
+msgid "Appearance"
+msgstr "Apariencia"
+
+#. settings-schema.json->section_monitor->title
+msgid "Monitor Setup"
+msgstr "Configuración del monitor"
+
+#. settings-schema.json->section_scrolling->title
+msgid "Scrolling Settings"
+msgstr "Ajustes de desplazamiento"
+
+#. settings-schema.json->section_togglepoints->title
+msgid "Toggle Points"
+msgstr "Conmutar puntos"
+
+#. settings-schema.json->section_retry_detection->title
+msgid "Automatic Retry Detection"
+msgstr "Detección automática de reintentos"
+
+#. settings-schema.json->entry_applet-label->description
+msgid ""
+"Text shown next to the icon in the panel.\n"
+"Leave empty for no label."
+msgstr ""
+"Texto que aparece junto al icono en el panel.\n"
+"Dejar vacío para no tener etiqueta."
+
+#. settings-schema.json->switch_show-bus-number->description
+msgid "Show bus number next to the detected monitors."
+msgstr "Muestra el número de bus junto a los monitores detectados."
+
+#. settings-schema.json->switch_manual-select-monitors->description
+msgid ""
+"By default, scrolling & toggling adjusts brightness for all monitors.\n"
+"Switch to enable custom monitor selection.\n"
+"This will add checkbox options for each detected monitor."
+msgstr ""
+"Por defecto, el desplazamiento y la alternancia ajustan el brillo para todos "
+"los monitores.\n"
+"Active la selección personalizada de monitores.\n"
+"Esto añadirá opciones de casilla de verificación para cada monitor detectado."
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "4"
+msgstr "4"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "50"
+msgstr "50"
+
+#. settings-schema.json->combobox_scroll-step->description
+msgid "Adjustment step for brightness"
+msgstr "Paso de ajuste del brillo"
+
+#. settings-schema.json->switch_use-toggle-points->description
+msgid ""
+"Enable toggle points for brightness adjustment.\n"
+"(via mouse middle click)"
+msgstr ""
+"Habilitar puntos de conmutación para ajustar el brillo.\n"
+"(mediante el botón central del ratón)"
+
+#. settings-schema.json->spinbutton_num-of-toggle-points->description
+msgid ""
+"Number of toggle points for brightness adjustment\n"
+"(only the first N toggle points will be used)"
+msgstr ""
+"Número de puntos de conmutación para el ajuste del brillo\n"
+"(sólo se utilizarán los N primeros puntos de conmutación)"
+
+#. settings-schema.json->scale_toggle_point_1->description
+msgid "Brightness level for toggle point 1"
+msgstr "Nivel de brillo para el punto de conmutación 1"
+
+#. settings-schema.json->scale_toggle_point_2->description
+msgid "Brightness level for toggle point 2"
+msgstr "Nivel de brillo para el punto de conmutación 2"
+
+#. settings-schema.json->scale_toggle_point_3->description
+msgid "Brightness level for toggle point 3"
+msgstr "Nivel de brillo para el punto de conmutación 3"
+
+#. settings-schema.json->switch_enable-retry-detection->description
+msgid ""
+"Enable automatic retry detection during startup.\n"
+"Helps ensure all monitors are detected when DDC/CI buses take time to "
+"initialize."
+msgstr ""
+"Habilita la detección automática de reintentos durante el inicio.\n"
+"Ayuda a garantizar que se detecten todos los monitores cuando los buses DDC/"
+"CI tardan en inicializarse."
+
+#. settings-schema.json->spinbutton_target-monitor-count->description
+msgid ""
+"Expected number of monitors to detect.\n"
+"The applet will retry detection until this many monitors are found or max "
+"attempts reached."
+msgstr ""
+"Número previsto de monitores que se van a detectar.\n"
+"El applet volverá a intentar la detección hasta que se encuentren todos "
+"estos monitores o se alcance el número máximo de intentos."
+
+#. settings-schema.json->spinbutton_max-retry-attempts->description
+msgid ""
+"Maximum number of retry attempts.\n"
+"Limited to 5 attempts to prevent excessive startup delays."
+msgstr ""
+"Número máximo de intentos de reintento.\n"
+"Limitado a 5 intentos para evitar retrasos excesivos en el inicio."
+
+#. settings-schema.json->spinbutton_retry-delay->units
+msgid "seconds"
+msgstr "segundos"
+
+#. settings-schema.json->spinbutton_retry-delay->description
+msgid ""
+"Delay between detection attempts.\n"
+"Time to wait before retrying monitor detection (1-10 seconds)."
+msgstr ""
+"Retraso entre intentos de detección.\n"
+"Tiempo de espera antes de volver a intentar la detección del monitor (1-10 "
+"segundos)."
+
+#. settings-schema.json->string_active-monitors->description
+msgid ""
+"Stores which monitors are active for scroll/click functions.\n"
+"This is a JSON object where keys are bus numbers and values are true/false.\n"
+"Example: {\"1\":true,\"2\":false}"
+msgstr ""
+"Almacena qué monitores están activos para las funciones de desplazamiento/"
+"clic.\n"
+"Se trata de un objeto JSON en el que las claves son números de bus y los "
+"valores son verdadero/falso.\n"
+"Ejemplo: {\"1\":true, \"2\":false}"

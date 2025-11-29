@@ -1,0 +1,248 @@
+# SPICESPY
+# This file is put in the public domain.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SpiceSpy@claudiux 4.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-25 23:34+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:201
+msgid "score"
+msgstr "pistemäärä"
+
+#. applet.js:213
+msgid "comments"
+msgstr "kommentit"
+
+#. applet.js:225
+msgid "recent issues"
+msgstr "tunnetut ongelmat"
+
+#. applet.js:237
+msgid "translations"
+msgstr "käännökset"
+
+#. applet.js:312
+#, fuzzy
+msgid "Reload icons"
+msgstr "Virkistä tämä sovelma"
+
+#. applet.js:318
+msgid "Visit website"
+msgstr ""
+
+#. applet.js:826
+msgid "Spices"
+msgstr "Spices"
+
+#. applet.js:915
+msgid "Mark all as read"
+msgstr "Merkitse kaikki luetuiksi"
+
+#. applet.js:926
+msgid "Refresh"
+msgstr "Päivitä"
+
+#. applet.js:938
+msgid "Refreshing in progress"
+msgstr ""
+
+#. applet.js:949
+msgid "Configure..."
+msgstr "Asetukset..."
+
+#. metadata.json->name
+msgid "SpiceSpy"
+msgstr "SpiceSpy"
+
+#. metadata.json->description
+msgid ""
+"Notifies you when there's a change to your favorite Spices on the website."
+msgstr ""
+"Ilmoittaa kun verkossa tapahtuu muutoksia sinun suosimalle sovelmalle. "
+"Laajat mahdollisuudet seurata eri asioita."
+
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr "Yleinen"
+
+#. settings-schema.json->pageOptions->title
+#. settings-schema.json->section1->title
+msgid "Options"
+msgstr "Valinnat"
+
+#. settings-schema.json->section2->title
+msgid "List of authors of the Spices you are interested in"
+msgstr "Luettelo ohjelmoijista jotka kiinnostaa sinua"
+
+#. settings-schema.json->section3->title
+msgid "List of specific Spices you are interested in"
+msgstr "Luettelo sovelmista jotka kiinnostaa sinua"
+
+#. settings-schema.json->update-interval-hours->description
+msgid "Update interval"
+msgstr "Päivitysväli"
+
+#. settings-schema.json->update-interval-hours->units
+msgid "hours"
+msgstr "tuntia"
+
+#. settings-schema.json->standard-opacity->description
+msgid "Opacity in absence of change"
+msgstr "Peittävyys muutoksen puuttuessa"
+
+#. settings-schema.json->color-on-change->description
+msgid "Color on change"
+msgstr "Värin vaihtuessa"
+
+#. settings-schema.json->show-icon-in-menu->description
+msgid "Show each Spice icon in the menu"
+msgstr "Näytä sovelman kuvake valikossa"
+
+#. settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Kuvakekoko"
+
+#. settings-schema.json->icon-size->options
+msgid "16"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "22"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "24"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "32"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "48"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "64"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "96"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "128"
+msgstr ""
+
+#. settings-schema.json->show-translations->description
+msgid "Show number of translations in the menu"
+msgstr "Näytä kielipakettien määrä valikossa"
+
+#. settings-schema.json->show-commits->description
+#, fuzzy
+msgid "Show available updates in the menu"
+msgstr "Näytä ongelmien määrä valikossa"
+
+#. settings-schema.json->show-issues->description
+msgid "Show number of issues in the menu"
+msgstr "Näytä ongelmien määrä valikossa"
+
+#. settings-schema.json->sort-by->description
+msgid "Sort by"
+msgstr "Järjestä"
+
+#. settings-schema.json->sort-by->options
+msgid "Translated name"
+msgstr "Käännetty nimi"
+
+#. settings-schema.json->sort-by->options
+msgid "Original name"
+msgstr "Alkuperäinen nimi"
+
+#. settings-schema.json->sort-by->options
+#. settings-schema.json->uuid-list->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. settings-schema.json->sort-by->options
+msgid "Score (bottom-up)"
+msgstr "Tähdet (vähiten)"
+
+#. settings-schema.json->sort-by->options
+msgid "Score (top-down)"
+msgstr "Tähdet (eniten)"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of comments (bottom-up)"
+msgstr "Kommentit (vähiten)"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of comments (top-down)"
+msgstr "Kommentit (eniten)"
+
+#. settings-schema.json->show-uuid->description
+msgid "Show UUID instead of name"
+msgstr "Näytä UUID nimen sijaan"
+
+#. settings-schema.json->translate-name->description
+msgid "Show translated name if available"
+msgstr "Näytä käännetty nimi"
+
+#. settings-schema.json->display-on-panel->description
+msgid "If there is nothing new"
+msgstr "Jos ei ole mitään uutta"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Show icon and label"
+msgstr "Näytä kuvake ja nimi"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Show icon only"
+msgstr "Näytä vain kuvake"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Do not show anything"
+msgstr "Älä näytä mitään"
+
+#. settings-schema.json->useful-only->description
+msgid "Show only non-zero values in panel"
+msgstr "Näytä vain nollasta poikkeavat arvot paneelissa"
+
+#. settings-schema.json->author-list->columns->title
+msgid "GitHub user name"
+msgstr "GitHub käyttäjänimi"
+
+#. settings-schema.json->button-my-spices->description
+msgid "Add all the Spices I use"
+msgstr "Lisää kaikki mausteet joita käytän"
+
+#. settings-schema.json->label-reload->description
+msgid ""
+"There's no need to include Spices maintained by members of the Authors list "
+"in the UUID list.\n"
+"Once your lists are correct, you can reload this applet to speed up the "
+"process.\n"
+"Just don't do it too often."
+msgstr ""
+"Tekijät-luettelon jäsenten ylläpitämiä mausteita ei tarvitse lisätä UUID-"
+"luetteloon.\n"
+"Kun luettelosi on oikein, nopeuta prosessia virkistämällä sovelma "
+"uudelleen.\n"
+"Älä tee sitä liian usein."
+
+#. settings-schema.json->button-reload->description
+msgid "Reload this applet"
+msgstr "Virkistä tämä sovelma"

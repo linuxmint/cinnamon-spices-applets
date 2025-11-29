@@ -1,0 +1,246 @@
+# SPICESPY
+# This file is put in the public domain.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SpiceSpy@claudiux 3.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-25 23:34+0200\n"
+"PO-Revision-Date: 2025-05-13 14:32+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:201
+msgid "score"
+msgstr "score"
+
+#. applet.js:213
+msgid "comments"
+msgstr "opmerkingen"
+
+#. applet.js:225
+msgid "recent issues"
+msgstr "recente problemen"
+
+#. applet.js:237
+msgid "translations"
+msgstr "vertalingen"
+
+#. applet.js:312
+#, fuzzy
+msgid "Reload icons"
+msgstr "Herlaad deze applet"
+
+#. applet.js:318
+msgid "Visit website"
+msgstr ""
+
+#. applet.js:826
+msgid "Spices"
+msgstr "Spices"
+
+#. applet.js:915
+msgid "Mark all as read"
+msgstr "Markeer alles als gelezen"
+
+#. applet.js:926
+msgid "Refresh"
+msgstr "Vernieuw"
+
+#. applet.js:938
+msgid "Refreshing in progress"
+msgstr "Bezig met vernieuwen"
+
+#. applet.js:949
+msgid "Configure..."
+msgstr "Configureren..."
+
+#. metadata.json->name
+msgid "SpiceSpy"
+msgstr "SpiceSpion"
+
+#. metadata.json->description
+msgid ""
+"Notifies you when there's a change to your favorite Spices on the website."
+msgstr ""
+"Waarschuwt je wanneer er een wijziging is aan je favoriete Spice op de "
+"website."
+
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr "Algemeen"
+
+#. settings-schema.json->pageOptions->title
+#. settings-schema.json->section1->title
+msgid "Options"
+msgstr "Opties"
+
+#. settings-schema.json->section2->title
+msgid "List of authors of the Spices you are interested in"
+msgstr "Lijst van auteurs van de Spices waarin je geïnteresseerd bent"
+
+#. settings-schema.json->section3->title
+msgid "List of specific Spices you are interested in"
+msgstr "Lijst van specifieke Spices waarin je geïnteresseerd bent"
+
+#. settings-schema.json->update-interval-hours->description
+msgid "Update interval"
+msgstr "Update-interval"
+
+#. settings-schema.json->update-interval-hours->units
+msgid "hours"
+msgstr "uren"
+
+#. settings-schema.json->standard-opacity->description
+msgid "Opacity in absence of change"
+msgstr "Doorzichtigheid bij afwezigheid van wijziging"
+
+#. settings-schema.json->color-on-change->description
+msgid "Color on change"
+msgstr "Kleur bij wijziging"
+
+#. settings-schema.json->show-icon-in-menu->description
+msgid "Show each Spice icon in the menu"
+msgstr "Toon elk Spice-icoon in het menu"
+
+#. settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Icoon grootte"
+
+#. settings-schema.json->icon-size->options
+msgid "16"
+msgstr "16"
+
+#. settings-schema.json->icon-size->options
+msgid "22"
+msgstr "22"
+
+#. settings-schema.json->icon-size->options
+msgid "24"
+msgstr "24"
+
+#. settings-schema.json->icon-size->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->icon-size->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->icon-size->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->icon-size->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->icon-size->options
+msgid "128"
+msgstr "128"
+
+#. settings-schema.json->show-translations->description
+msgid "Show number of translations in the menu"
+msgstr "Toon aantal vertalingen in het menu"
+
+#. settings-schema.json->show-commits->description
+#, fuzzy
+msgid "Show available updates in the menu"
+msgstr "Toon aantal problemen in het menu"
+
+#. settings-schema.json->show-issues->description
+msgid "Show number of issues in the menu"
+msgstr "Toon aantal problemen in het menu"
+
+#. settings-schema.json->sort-by->description
+msgid "Sort by"
+msgstr "Sorteren op"
+
+#. settings-schema.json->sort-by->options
+msgid "Translated name"
+msgstr "Vertaalde naam"
+
+#. settings-schema.json->sort-by->options
+msgid "Original name"
+msgstr "Oorspronkelijke naam"
+
+#. settings-schema.json->sort-by->options
+#. settings-schema.json->uuid-list->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. settings-schema.json->sort-by->options
+msgid "Score (bottom-up)"
+msgstr "Score (oplopend)"
+
+#. settings-schema.json->sort-by->options
+msgid "Score (top-down)"
+msgstr "Score (aflopend)"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of comments (bottom-up)"
+msgstr "Aantal opmerkingen (oplopend)"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of comments (top-down)"
+msgstr "Aantal opmerkingen (aflopend)"
+
+#. settings-schema.json->show-uuid->description
+msgid "Show UUID instead of name"
+msgstr "Toon UUID in plaats van naam"
+
+#. settings-schema.json->translate-name->description
+msgid "Show translated name if available"
+msgstr "Toon vertaalde naam indien beschikbaar"
+
+#. settings-schema.json->display-on-panel->description
+msgid "If there is nothing new"
+msgstr "Als er niets nieuws is"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Show icon and label"
+msgstr "Toon icoon en label"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Show icon only"
+msgstr "Toon alleen icoon"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Do not show anything"
+msgstr "Toon niets"
+
+#. settings-schema.json->useful-only->description
+msgid "Show only non-zero values in panel"
+msgstr "Toon alleen niet-nul waarden in paneel"
+
+#. settings-schema.json->author-list->columns->title
+msgid "GitHub user name"
+msgstr "GitHub gebruikersnaam"
+
+#. settings-schema.json->button-my-spices->description
+msgid "Add all the Spices I use"
+msgstr "Voeg alle Spices toe die ik gebruik"
+
+#. settings-schema.json->label-reload->description
+msgid ""
+"There's no need to include Spices maintained by members of the Authors list "
+"in the UUID list.\n"
+"Once your lists are correct, you can reload this applet to speed up the "
+"process.\n"
+"Just don't do it too often."
+msgstr ""
+"Het is niet nodig om Spices die worden beheerd door leden van de "
+"auteurslijst in de UUID-lijst op te nemen.\n"
+"Zodra je lijsten correct zijn, kun je deze applet opnieuw laden om het "
+"proces te versnellen.\n"
+"Doe dit alleen niet te vaak."
+
+#. settings-schema.json->button-reload->description
+msgid "Reload this applet"
+msgstr "Herlaad deze applet"

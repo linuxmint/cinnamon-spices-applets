@@ -1,0 +1,86 @@
+# Czech translation for gnome-shell-extension-weather
+# Copyright (C) 2016
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# FIRST AUTHOR <mhladik@seznam.cz>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 3.6.4\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-28 09:12+0100\n"
+"PO-Revision-Date: 2025-01-08 19:12+0100\n"
+"Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
+"Language-Team: \n"
+"Language: cs_CZ\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 3.8/weather-applet.js:8425
+msgid "Low"
+msgstr ""
+
+#. 3.8/weather-applet.js:8431
+msgid "High"
+msgstr ""
+
+#. 3.8/weather-applet.js:8434
+msgid "Very High"
+msgstr ""
+
+#. 3.8/weather-applet.js:8437
+msgid "Extreme"
+msgstr ""
+
+#. 3.8/weather-applet.js:9661
+msgid ""
+"Address to location lookup service is blocked. You can try to change your "
+"User-Agent in help to see if it resolves the issue."
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:16329
+msgid "Open-Meteo"
+msgstr ""
+
+#. 3.8/weather-applet.js:17122
+msgid "Swiss Météo"
+msgstr ""
+
+#. 3.8/weather-applet.js:18569
+msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr ""
+
+#. 3.8/weather-applet.js:18573
+msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr ""
+
+#. 3.8/weather-applet.js:18577
+msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr ""
+
+#. 3.8/weather-applet.js:18581
+msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
+msgstr ""
+
+#. 3.8/weather-applet.js:18585
+msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Swiss Météo (Switzerland only)"
+msgstr ""
+
+#. 3.8->settings-schema.json->uvIndex->description
+msgid "Enable displaying UV Index"
+msgstr ""
+
+#. 3.8->settings-schema.json->uvIndex->tooltip
+msgid ""
+"If your provider supports it, the UV index will be shown in the popup menu "
+"next to sunrise/sunset times. It will not show if the UV index is low risk "
+"(0-2)."
+msgstr ""

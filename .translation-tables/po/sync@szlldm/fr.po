@@ -1,0 +1,38 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-14 01:34+0900\n"
+"PO-Revision-Date: 2023-11-21 01:47+0100\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:48
+msgid "Click to sync"
+msgstr "Cliquer pour synchroniser"
+
+#. metadata.json->description
+msgid ""
+"Monitor yet unwritten cached data. Click on the applet to sync (write out "
+"cached data). Useful when copying large files to slow removable medium(e.g. "
+"pendrive)."
+msgstr ""
+"Surveillez les données mises en cache non encore écrites. Cliquez sur "
+"l'applet pour synchroniser (écrire les données mises en cache). Utile pour "
+"copier des fichiers volumineux sur un support amovible lent (par exemple, "
+"une clé USB)."
+
+#. metadata.json->name
+msgid "Sync"
+msgstr "Sync"

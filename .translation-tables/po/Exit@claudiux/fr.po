@@ -1,0 +1,363 @@
+# System Controls Applet
+# Copyright (C) 2022
+# Rick Calixte <10281587+rcalixte@users.noreply.github.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.2.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-26 17:16+0200\n"
+"PO-Revision-Date: 2025-09-26 17:23+0200\n"
+"Last-Translator: claudiux\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 5.4/applet.js:140 6.4/applet.js:345
+msgid "Restart Cinnamon"
+msgstr "Redémarrer Cinnamon"
+
+#. 5.4/applet.js:152
+msgid "Screen Off"
+msgstr "Éteindre l'écran"
+
+#. 5.4/applet.js:177 6.4/applet.js:385
+msgid "Lock Screen"
+msgstr "Verrouiller l'écran"
+
+#. 5.4/applet.js:205 5.4/applet.js:215 5.4/applet.js:224 5.4/applet.js:233
+#. 6.4/applet.js:413 6.4/applet.js:423 6.4/applet.js:432 6.4/applet.js:441
+msgid "Switch User"
+msgstr "Changer d'utilisateur"
+
+#. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
+#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:444 6.4/applet.js:470
+#. 6.4/applet.js:495 6.4/applet.js:530 6.4/applet.js:555 6.4/applet.js:578
+msgid "Performing automatic updates"
+msgstr "Mises à jour automatiques en cours d'exécution"
+
+#. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
+#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:444 6.4/applet.js:470
+#. 6.4/applet.js:495 6.4/applet.js:530 6.4/applet.js:555 6.4/applet.js:578
+msgid "Please wait"
+msgstr "Veuillez patienter..."
+
+#. 5.4/applet.js:249 5.4/applet.js:256 6.4/applet.js:457 6.4/applet.js:467
+msgid "Log Out"
+msgstr "Se déconnecter"
+
+#. 5.4/applet.js:270 5.4/applet.js:277 6.4/applet.js:482 6.4/applet.js:484
+#. 6.4/applet.js:492
+msgid "Suspend"
+msgstr "Mettre en veille"
+
+#. 5.4/applet.js:288 5.4/applet.js:298 6.4/applet.js:504 6.4/applet.js:506
+#. 6.4/applet.js:527
+msgid "Hibernate"
+msgstr "Hiberner"
+
+#. 5.4/applet.js:312 5.4/applet.js:319 6.4/applet.js:542 6.4/applet.js:544
+#. 6.4/applet.js:552
+msgid "Restart"
+msgstr "Redémarrer l'ordinateur"
+
+#. 5.4/applet.js:330 5.4/applet.js:337 6.4/applet.js:564 6.4/applet.js:566
+#. 6.4/applet.js:575
+msgid "Power Off"
+msgstr "Arrêter l'ordinateur"
+
+#. 6.4/applet.js:358 6.4/applet.js:360
+msgid "Screen On/Off"
+msgstr "Éteindre/Allumer l'écran"
+
+#. 6.4/applet.js:371 6.4/applet.js:373
+msgid "Screen On/Off with Lock feature"
+msgstr "Éteindre/Allumer l'écran avec Verrouillage"
+
+#. metadata.json->description
+msgid ""
+"Restart Cinnamon, turn off the screen, lock the screen, switch users, log "
+"out, suspend, hibernate, reboot or shut down the computer"
+msgstr ""
+"Redémarrer Cinnamon, éteindre l'écran, verrouiller l'écran, changer "
+"d'utilisateur, se déconnecter, mettre en veille, hiberner, redémarrer ou "
+"arrêter l'ordinateur"
+
+#. metadata.json->name
+msgid "Exit"
+msgstr "Sortie"
+
+#. 5.4->settings-schema.json->sectionOSD->description
+#. 6.4->settings-schema.json->sectionOSD->title
+msgid "Cinnamon restart"
+msgstr "Redémarrage de Cinnamon"
+
+#. 5.4->settings-schema.json->showOSD->description
+#. 6.4->settings-schema.json->showOSD->description
+msgid "Show OSD while restarting Cinnamon"
+msgstr "Afficher un OSD pendant le redémarrage de Cinnamon"
+
+#. 5.4->settings-schema.json->showOSD->tooltip
+#. 6.4->settings-schema.json->showOSD->tooltip
+msgid "OSD: On Screen Display"
+msgstr "OSD: On Screen Display (Affichage à l'écran)"
+
+#. 5.4->settings-schema.json->sectionMenu->description
+#. 6.4->settings-schema.json->sectionMenu->title
+msgid "Menu options"
+msgstr "Options du menu"
+
+#. 5.4->settings-schema.json->showRestartCinnamon->description
+#. 6.4->settings-schema.json->showRestartCinnamon->description
+msgid "Show the Restart Cinnamon option"
+msgstr "Afficher l'option Redémarrer Cinnamon"
+
+#. 5.4->settings-schema.json->showSuspend->description
+#. 6.4->settings-schema.json->showSuspend->description
+msgid "Show the Suspend option"
+msgstr "Afficher l'option Mettre en veille"
+
+#. 5.4->settings-schema.json->showHibernate->description
+#. 6.4->settings-schema.json->showHibernate->description
+msgid "Show the Hibernate option"
+msgstr "Afficher l'option Hibernation"
+
+#. 5.4->settings-schema.json->hibernateNeedsSudo->description
+#. 6.4->settings-schema.json->hibernateNeedsSudo->description
+msgid "Hibernate needs root user rights (sudo)"
+msgstr "Hiberner nécessite les droits de l'utilisateur root (sudo)"
+
+#. 5.4->settings-schema.json->showRestart->description
+#. 6.4->settings-schema.json->showRestart->description
+msgid "Show the Restart option"
+msgstr "Afficher l'option Redémarrer"
+
+#. 5.4->settings-schema.json->showPowerOff->description
+#. 6.4->settings-schema.json->showPowerOff->description
+msgid "Show the Power Off option"
+msgstr "Afficher l'option Arrêter"
+
+#. 5.4->settings-schema.json->labelOthers->description
+#. 6.4->settings-schema.json->labelOthers->description
+msgid ""
+"All the menu options below may be managed by the system.\n"
+"If they are, you can't see them."
+msgstr ""
+"Toutes les options de menu ci-dessous peuvent être gérées par le système.\n"
+"Si c'est le cas, vous ne pouvez pas les voir."
+
+#. 5.4->settings-schema.json->showScreenOff->description
+#. 6.4->settings-schema.json->showScreenOff->description
+msgid "Show the Screen Off option"
+msgstr "Afficher l'option Éteindre l'écran"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->units
+#. 6.4->settings-schema.json->mouse-deactivation-duration->units
+msgid "seconds"
+msgstr " secondes"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->description
+#. 6.4->settings-schema.json->mouse-deactivation-duration->description
+msgid "Duration of deactivation of the mouse"
+msgstr "Durée de désactivation de la souris"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->tooltip
+#. 6.4->settings-schema.json->mouse-deactivation-duration->tooltip
+msgid ""
+"To prevent the monitor from turning on too soon after turning it off, the "
+"mouse will be disabled for the number of seconds set here."
+msgstr ""
+"Pour éviter que l'écran ne se rallume trop tôt après l'avoir éteint, la "
+"souris sera désactivée pendant le nombre de secondes défini ici."
+
+#. 5.4->settings-schema.json->showLockscreen->description
+#. 6.4->settings-schema.json->showLockscreen->description
+msgid "Show the Lock Screen option"
+msgstr "Afficher l'option Verrouiller l'écran"
+
+#. 5.4->settings-schema.json->showLockscreen->tooltip
+#. 5.4->settings-schema.json->showSwitchUser->tooltip
+#. 5.4->settings-schema.json->showLogout->tooltip
+#. 6.4->settings-schema.json->showLockscreen->tooltip
+#. 6.4->settings-schema.json->showSwitchUser->tooltip
+#. 6.4->settings-schema.json->showLogout->tooltip
+msgid "Managed by system"
+msgstr "Géré par le système"
+
+#. 5.4->settings-schema.json->showSwitchUser->description
+#. 6.4->settings-schema.json->showSwitchUser->description
+msgid "Show the Switch User option"
+msgstr "Afficher l'option Changer d'utilisateur"
+
+#. 5.4->settings-schema.json->showLogout->description
+#. 6.4->settings-schema.json->showLogout->description
+msgid "Show the Log Out option"
+msgstr "Afficher l'option Se déconnecter"
+
+#. 5.4->settings-schema.json->logoutMode->description
+#. 6.4->settings-schema.json->logoutMode->description
+msgid "Log Out Mode"
+msgstr "Mode de déconnexion"
+
+#. 5.4->settings-schema.json->logoutMode->options
+#. 6.4->settings-schema.json->logoutMode->options
+msgid "With confirmation"
+msgstr "Avec demande de confirmation"
+
+#. 5.4->settings-schema.json->logoutMode->options
+#. 6.4->settings-schema.json->logoutMode->options
+msgid "Without confirmation"
+msgstr "Sans confirmation"
+
+#. 5.4->settings-schema.json->logoutMode->options
+#. 6.4->settings-schema.json->logoutMode->options
+msgid "Force"
+msgstr "Forcer"
+
+#. 5.4->settings-schema.json->logoutMode->tooltip
+#. 6.4->settings-schema.json->logoutMode->tooltip
+msgid ""
+"The 'Force' option lets you log out while ignoring inhibitors. Useful when "
+"several sessions are open."
+msgstr ""
+"L'option \"Forcer\" vous permet de vous déconnecter tout en ignorant les "
+"inhibiteurs. Utile lorsque plusieurs sessions sont ouvertes."
+
+#. 6.4->settings-schema.json->page_General->title
+msgid "General"
+msgstr "Général"
+
+#. 6.4->settings-schema.json->page_Shortcuts->title
+msgid "Shortcuts"
+msgstr "Raccourcis"
+
+#. 6.4->settings-schema.json->page_Options->title
+msgid "Options"
+msgstr "Options"
+
+#. 6.4->settings-schema.json->sectionMaximize->title
+msgid "Vertical maximization"
+msgstr "Maximisation verticale"
+
+#. 6.4->settings-schema.json->sectionMenuOthers->title
+msgid "System-managed menu options"
+msgstr "Options du menu gérées par le système"
+
+#. 6.4->settings-schema.json->section_DontShowShortcutsInMenu->title
+msgid "Menu appearance"
+msgstr "Apparence du menu"
+
+#. 6.4->settings-schema.json->section_Shortcuts->title
+msgid "Keybindings"
+msgstr "Raccourcis clavier"
+
+#. 6.4->settings-schema.json->section_MenuKeys->title
+msgid "Keys used to select certain options in the open menu."
+msgstr ""
+"Touches utilisées pour sélectionner certaines options dans le menu ouvert."
+
+#. 6.4->settings-schema.json->screenOffUsesXset->description
+msgid "Use the hardware method to turn On/Off the screen"
+msgstr "Utilisez la méthode matérielle pour allumer/éteindre l'écran"
+
+#. 6.4->settings-schema.json->screenOffUsesXset->tooltip
+msgid ""
+"The hardware method does not always work correctly.\n"
+"In this case, disable this option to use only a software method."
+msgstr ""
+"La méthode matérielle ne fonctionne pas toujours correctement.\n"
+"Dans ce cas, désactivez cette option pour utiliser uniquement une méthode "
+"logicielle."
+
+#. 6.4->settings-schema.json->dontShowShortcutsInMenu->description
+msgid "Do not show any shortcut in the menu"
+msgstr "Ne pas afficher les raccourcis dans le menu"
+
+#. 6.4->settings-schema.json->kbToggleMenu->description
+msgid "Toggle menu"
+msgstr "Basculer le menu"
+
+#. 6.4->settings-schema.json->kbWakeUpMonitor->description
+msgid "Turn screen On/Off"
+msgstr "Éteindre/Allumer l'écran"
+
+#. 6.4->settings-schema.json->kbWakeUpMonitorWithLock->description
+msgid "Turn screen On/Off with Lock feature"
+msgstr "Éteindre/Allumer l'écran avec Verrouillage"
+
+#. 6.4->settings-schema.json->mkShutdown->description
+msgid "Key to select Power Off"
+msgstr "Touche pour sélectionner Arrêter l'ordinateur"
+
+#. 6.4->settings-schema.json->mkShutdown->tooltip
+msgid "Single key. Default is U"
+msgstr "Touche unique. U par défaut"
+
+#. 6.4->settings-schema.json->mkRestart->description
+msgid "Key to select Restart"
+msgstr "Touche pour sélectionner Redémarrer l'ordinateur"
+
+#. 6.4->settings-schema.json->mkRestart->tooltip
+msgid "Single key. Default is R"
+msgstr "Touche unique. R par défaut"
+
+#. 6.4->settings-schema.json->mkHibernate->description
+msgid "Key to select Hibernate"
+msgstr "Touche pour sélectionner Hiberner"
+
+#. 6.4->settings-schema.json->mkHibernate->tooltip
+msgid "Single key. Default is H"
+msgstr "Touche unique. H par défaut"
+
+#. 6.4->settings-schema.json->mkSuspend->description
+msgid "Key to select Suspend"
+msgstr "Touche pour sélectionner Mettre en veille"
+
+#. 6.4->settings-schema.json->mkSuspend->tooltip
+msgid "Single key. Default is S"
+msgstr "Touche unique. S par défaut"
+
+#. 6.4->settings-schema.json->buttonApplyMenuKeys->description
+msgid "Apply these keys to the menu"
+msgstr "Appliquer ces touches au menu"
+
+#. 6.4->settings-schema.json->buttonDefaultMenuKeys->description
+msgid "Reset to default keys"
+msgstr "Réinitialiser aux touches par défaut"
+
+#. 6.4->settings-schema.json->alertMenuKeys->description
+msgid ""
+"Several keys are identical.\n"
+"Please correct this and reapply the changes."
+msgstr ""
+"Plusieurs clés sont identiques.\n"
+"Veuillez les corriger puis ré-appliquer les changements."
+
+#. 6.4->settings-schema.json->alreadyUsedKeys->description
+msgid "Already used keys (for your information only)"
+msgstr "Touches déjà utilisées (pour info seulement)"
+
+#. 6.4->settings-schema.json->alreadyUsedKeys->tooltip
+msgid "There is no point in changing this."
+msgstr "Il est inutile de changer cela."
+
+#. 6.4->settings-schema.json->maximizeSettingsWindow->description
+msgid "Vertically maximize this Settings window"
+msgstr "Maximiser verticalement cette fenêtre de Paramètres"
+
+#. 6.4->settings-schema.json->maximizeSettingsWindow->tooltip
+msgid ""
+"This option will only be taken into account the next times this Settings "
+"window is opened. "
+msgstr ""
+"Cette option ne sera prise en compte que lors des prochaines ouvertures de "
+"cette fenêtre de Paramètres. "
+
+#. 6.4->settings-schema.json->labelSeparator->description
+msgid "────────────────────────────────────────────────────────────────"
+msgstr "────────────────────────────────────────────────────────────────"

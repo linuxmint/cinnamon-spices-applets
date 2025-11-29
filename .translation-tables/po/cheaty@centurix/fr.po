@@ -1,0 +1,89 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-04-27 13:15+0200\n"
+"PO-Revision-Date: 2023-04-27 13:19+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:87
+msgid "version"
+msgstr "version"
+
+#: applet.js:87
+msgid "Author:"
+msgstr "Auteur :"
+
+#: applet.js:87
+msgid "Email:"
+msgstr "e-mail :"
+
+#: applet.js:87
+msgid "Repository:"
+msgstr "Dépôt :"
+
+#: applet.js:157
+msgid "Cheaty: Easy access cheatsheets"
+msgstr "Cheaty : Feuilles de triche faciles d'accès"
+
+#: applet.js:307
+msgid "Configure..."
+msgstr "Configurer..."
+
+#: applet.js:321
+msgid "Code copied to the clipboard"
+msgstr "Code copié dans le presse-papiers"
+
+#. metadata.json->description
+msgid "An applet to provide quick access to a variety of cheat sheets."
+msgstr ""
+"Une applet pour fournir un accès rapide à une variété de feuilles de triche."
+
+#. metadata.json->name
+msgid "Cheaty - Cheatsheet keeper"
+msgstr "Cheaty - Bibliothèque de feuilles de triche"
+
+#. settings-schema.json->cheatsheetFolder->description
+msgid "cheatsheetFolder"
+msgstr "Dossier des feuilles de triche"
+
+#. settings-schema.json->keyOpen->description
+msgid "Show Cheaty popup menu"
+msgstr "Afficher le menu de Cheaty"
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the Cheaty popup menu."
+msgstr "Définissez le(s) raccourcis clavier pour afficher le menu de Cheaty."
+
+#. settings-schema.json->cheatsheets->description
+msgid "Cheat sheet selector"
+msgstr "Sélecteur de feuille de triche"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Enabled"
+msgstr "Activé"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Name"
+msgstr "Nom"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Description"
+msgstr "Description"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Author"
+msgstr "Auteur"

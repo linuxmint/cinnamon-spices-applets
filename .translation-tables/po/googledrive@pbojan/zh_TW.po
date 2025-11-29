@@ -1,0 +1,154 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: googledrive@pbojan 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-06-16 00:59+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "Google Drive"
+msgstr "Google Drive"
+
+#. metadata.json->description
+msgid ""
+"A simple applet to be able to sync Google Drive folders and files with just "
+"a few clicks."
+msgstr ""
+"一個簡單的小程式，只需點選幾下，即可同步 Google Drive 雲端硬碟中的資料夾與檔案。"
+
+#. settings-schema.json->pageConfiguration->title
+msgid "Configuration"
+msgstr "設定"
+
+#. settings-schema.json->pageHelp->title
+msgid "Help"
+msgstr "說明"
+
+#. settings-schema.json->sectionGeneralOptions->title
+msgid "Google Drive Options"
+msgstr "Google Drive 雲端硬碟選項"
+
+#. settings-schema.json->sectionWhitelist->title
+msgid "Whitelisted Folders"
+msgstr "允許同步的資料夾"
+
+#. settings-schema.json->sectionNote->title
+msgid "Important Message"
+msgstr "重要訊息"
+
+#. settings-schema.json->sectionHelp->title
+msgid "About/Help"
+msgstr "關於/說明"
+
+#. settings-schema.json->sectionIssues->title
+msgid "Bugs/Issues"
+msgstr "錯誤/問題回報"
+
+#. settings-schema.json->location->description
+msgid "Drive Sync Location"
+msgstr "雲端硬碟同步位置"
+
+#. settings-schema.json->location->tooltip
+msgid ""
+"Location to an empty folder where it will sync the Google Drive data to e.g. "
+"~/Documents/Drive."
+msgstr ""
+"請選擇一個空的資料夾，用來同步 Google Drive 雲端硬碟資料，"
+"例如：~/Documents/Drive"
+
+#. settings-schema.json->whitelistHelp->description
+msgid ""
+"Note: If you want to sync only specific folders please make sure to add them "
+"on the list above. Please enter the names exactly as they are named in your "
+"Drive! It is also possible to add subfolders e.g. Documents/Work/Projects."
+msgstr ""
+"注意：若只想同步特定資料夾，請務必將其加入上方清單中。"
+"請務必輸入與 Google 雲端硬碟中完全相同的資料夾名稱！"
+"也可以加入子資料夾，例如：Documents/Work/Projects"
+
+#. settings-schema.json->whitelist->columns->title
+msgid "Folder Name"
+msgstr "資料夾名稱"
+
+#. settings-schema.json->whitelist->description
+msgid "Whitelist Folders"
+msgstr "允許同步的資料夾"
+
+#. settings-schema.json->whitelist->tooltip
+msgid ""
+"Whitelist folders that will be sycned from Google Drive e.g. Documents, "
+"Photos"
+msgstr ""
+"允許從 Google Drive 雲端硬碟同步的資料夾，例如 Documents、Photos"
+
+#. settings-schema.json->note->description
+msgid ""
+"Note: This is a new release of this Applet, so your feedback and ideas are "
+"very important to make this applet better in the future. Please consider "
+"reporting any issues, bugs, instabilities, or ideas for general improvements "
+"on the links below! Thank you!"
+msgstr ""
+"注意：這是這個小程式的新版本，您的意見回饋與建議對未來改進非常重要。"
+"歡迎透過下方連結回報問題、錯誤、不穩定狀況或任何改進建議！感謝您的協助！"
+
+#. settings-schema.json->website->description
+msgid ""
+"To learn more about the applet please click the button below to visit the "
+"official repository for this applet."
+msgstr "想進一步瞭解這個小程式，請點選下方按鈕前往專案頁面。"
+
+#. settings-schema.json->websiteButton->description
+msgid "Visit GitHub website"
+msgstr "前往 GitHub 網站"
+
+#. settings-schema.json->websiteButton->tooltip
+msgid "Opens GitHub website to learn more about this applet."
+msgstr "開啟 GitHub 網站以瞭解更多有關這個小程式的資訊。"
+
+#. settings-schema.json->helpAbout->description
+msgid ""
+"To learn more about the applet please click the button below to visit the "
+"official Cinnamon Spices website for this applet. You can also leave "
+"feedback in the comment section below."
+msgstr ""
+"若需更多資訊，請點選下方按鈕前往 Cinnamon Spices 官方網站，也歡迎於下方留言區提供回饋。"
+
+
+#. settings-schema.json->helpAboutButton->description
+msgid "Visit Cinnamon Spices website"
+msgstr "前往 Cinnamon Spices 網站"
+
+#. settings-schema.json->helpAboutButton->tooltip
+msgid "Opens Cinnamon Spices website to learn more about this applet."
+msgstr "開啟 Cinnamon Spices 網站以瞭解更多有關這個小程式的資訊。"
+
+#. settings-schema.json->helpIssue->description
+msgid ""
+"If you find an issue with this applet please make a report on GitHub by "
+"clicking the button below. Please make sure that the issue doesn't already "
+"exists"
+msgstr ""
+"如果您發現這個小程式有任何問題，請點選下方按鈕於 GitHub 回報，"
+"並請在回報前先確認該問題尚未被回報過。"
+
+#. settings-schema.json->helpSubmitIssue->description
+msgid "Submit an Issue"
+msgstr "回報問題"
+
+#. settings-schema.json->helpSubmitIssue->tooltip
+msgid ""
+"Opens GitHub project page where you can submit a new issue for this applet."
+msgstr ""
+"開啟 GitHub 專案頁面，您可以在這邊回報問題。"

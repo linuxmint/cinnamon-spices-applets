@@ -1,0 +1,60 @@
+# DIRECT
+# This file is put in the public domain.
+# claudiux, 2025
+#
+msgid ""
+msgstr ""
+
+#. applet.js:44 applet.js:654
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:555 applet.js:596 applet.js:629 applet.js:662 applet.js:695
+msgid "Configure"
+msgstr ""
+
+#. settings-schema.json->favoriteAppsSection->title
+msgid "Favorite apps"
+msgstr ""
+
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr ""
+
+#. settings-schema.json->dontDisplayTooltip->description
+msgid "Do not display the tooltip"
+msgstr ""
+
+#. settings-schema.json->showUserSettingsAccessIcon->description
+#. settings-schema.json->showSystemSettingsAccessIcon->description
+#. settings-schema.json->showFavoritesSettingsAccessIcon->description
+#. settings-schema.json->showRecentSettingsAccessIcon->description
+msgid "Show the settings access icon"
+msgstr ""
+
+#. settings-schema.json->showFavoriteApps->description
+msgid "Show favorite apps"
+msgstr ""
+
+#. settings-schema.json->favAppsLabel->description
+msgid ""
+"Below are the favorite applications displayed in the menu when checked.\n"
+"The Name can be changed.\n"
+"The Launcher must not be changed."
+msgstr ""
+
+#. settings-schema.json->favApps->description
+msgid "Favorite apps shown"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid " Launcher"
+msgstr ""
+
+#. settings-schema.json->favAppsPopulateButton->description
+msgid "Add all your Favorite Apps"
+msgstr ""
