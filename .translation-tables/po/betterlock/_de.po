@@ -21,8 +21,8 @@ msgstr ""
 
 #. settings-schema.json->show-toast-notifications->description
 msgid "Show toast notifications"
-msgstr ""
+msgstr "Toast Benachrichtigungen anzeigen"
 
 #. settings-schema.json->show-osd-notifications->description
 msgid "Show OSD notifications"
-msgstr ""
+msgstr "OSD Benachrichtigungen nazeigen"
