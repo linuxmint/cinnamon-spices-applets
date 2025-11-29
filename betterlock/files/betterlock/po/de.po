@@ -21,7 +21,7 @@ msgstr ""
 
 #. applet.js:108
 msgid "Scr Lock"
-msgstr "Scr-Lock-Taste"
+msgstr "Rollen-Taste"
 
 #. applet.js:112
 msgid "Num Lock"
@@ -33,15 +33,15 @@ msgstr "Feststelltaste"
 
 #. applet.js:153
 msgid "Lock Keys"
-msgstr "Lock-Tasten"
+msgstr "Sperrtasten"
 
 #. applet.js:217
 msgid "Scr lock on"
-msgstr "Scr-Lock-Taste ein"
+msgstr "Rollen-Taste ein"
 
 #. applet.js:220
 msgid "Scr lock off"
-msgstr "Scr-Lock-Taste aus"
+msgstr "Rollen-Taste aus"
 
 #. applet.js:229
 msgid "Num lock on"
@@ -64,7 +64,7 @@ msgid ""
 "Shows whether caps lock/num lock/scr lock is on, and displays a notification "
 "when these change."
 msgstr ""
-"Zeigt an, ob die Feststelltaste/Num-Taste/Scr-Taste aktiviert ist, und zeigt "
+"Zeigt an, ob die Feststelltaste/Num-Taste/Rollen aktiviert ist, und zeigt "
 "eine Benachrichtigung an, wenn sich diese ändern."
 
 #. metadata.json->name
@@ -74,12 +74,12 @@ msgstr "Sperrtastenanzeige mit Benachrichtigungen"
 #. settings-schema.json->show-toast-notifications->description
 #, fuzzy
 msgid "Show toast notifications"
-msgstr "Benachrichtigungen anzeigen"
+msgstr "Systembenachrichtigungen anzeigen"
 
 #. settings-schema.json->show-osd-notifications->description
 #, fuzzy
 msgid "Show OSD notifications"
-msgstr "Benachrichtigungen anzeigen"
+msgstr "OSD Benachrichtigungen anzeigen"
 
 #. settings-schema.json->show-silent-notifications->description
 msgid "Silence system notification sound"
@@ -87,12 +87,12 @@ msgstr "Systembenachrichtigungston stummschalten"
 
 #. settings-schema.json->show-caps-lock-indicator->description
 msgid "Show caps lock indicator"
-msgstr "Zeigt die Feststelltaste an"
+msgstr "Feststelltaste-Indikator anzeigen"
 
 #. settings-schema.json->show-num-lock-indicator->description
 msgid "Show num lock indicator"
-msgstr "Num-Lock-Indikator anzeigen"
+msgstr "Num-Lock-Taste-Indikator anzeigen"
 
 #. settings-schema.json->show-scr-lock-indicator->description
 msgid "Show scr lock indicator"
-msgstr "Scr-Lock-Indikator anzeigen"
+msgstr "Rollen-Taste-Indikator anzeigen"
