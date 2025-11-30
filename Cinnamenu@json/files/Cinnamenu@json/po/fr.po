@@ -6,18 +6,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2025-11-30 00:16-0500\n"
-"PO-Revision-Date: 2024-10-02 21:41+0200\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"PO-Revision-Date: 2025-11-30 12:50+0100\n"
+"Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
 
 #. 5.8/applet.js:59 4.0/applet.js:60 3.2/applet.js:157
 msgid "Initializing"
@@ -880,21 +878,20 @@ msgstr "Qwant"
 
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Custom"
-msgstr ""
+msgstr "Personnalisée"
 
 #. 5.8->settings-schema.json->web-search-option->tooltip
 #. 4.0->settings-schema.json->web-search-option->tooltip
 msgid "Show an internet search option in search results"
-msgstr ""
-"Afficher une option de recherche Internet dans les résultats de recherche"
+msgstr "Afficher une option de recherche Internet dans les résultats de recherche"
 
 #. 5.8->settings-schema.json->web-search-custom-url->description
 msgid "URL for custom search"
-msgstr ""
+msgstr "URL pour la recherche personnalisée"
 
 #. 5.8->settings-schema.json->web-search-custom-url->tooltip
 msgid "Enter the URL that is prepended to the search query."
-msgstr ""
+msgstr "Saisissez l'URL à ajouter en tête de la requête de recherche."
 
 #. 5.8->settings-schema.json->web-suggestions->description
 #. 4.0->settings-schema.json->web-suggestions->description
