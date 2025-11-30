@@ -4,7 +4,6 @@ const { ScreenSaverProxy } = imports.misc.screenSaver;
 
 /**
  * An interface to read and listen to the screen locked state.
- *
  * @implements {Observer}
  */
 export class Screen_lock_change_listener {
