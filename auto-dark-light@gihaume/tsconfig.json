@@ -1,7 +1,10 @@
 {
     "compilerOptions": {
         "target": "es2022",
-        "lib": ["ES2022"],
+        "lib": [
+            "ES2022",
+            "DOM" // For `console` in JS tests
+        ],
         "module": "es2022",
         "moduleResolution": "bundler",
         "moduleDetection": "force",

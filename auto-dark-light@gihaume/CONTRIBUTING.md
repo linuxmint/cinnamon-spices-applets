@@ -1,12 +1,12 @@
 # Contributing
 
-## Prerequisites
+## Dependencies
 
-### Global dependencies
+### Global
 
-- [pnpm](https://pnpm.io/installation#on-posix-systems) (tested v10.23.0).
+- [pnpm](https://pnpm.io/installation#on-posix-systems) (tested v10.24.0).
 
-### Local dependencies
+### Local
 
 - Install dependencies:
   ```bash
@@ -23,7 +23,50 @@
       pnpm i --store-dir=.pnpm-store
       ```
 
-## Development
+### Optional
+
+- [Visual Studio Code](https://code.visualstudio.com)
+  - With the extensions in [`.vscode/extensions.json`](./.vscode/extensions.json).
+- `poedit` for translation:
+  - On Debian-based systems:
+    ```bash
+    sudo apt install poedit
+    ```
+
+## Conventions
+### Files organization
+
+- `doc`: applet development documentation
+- `src`: source files
+  - `app`: application specifics
+    - `core`: business logic
+    - `ui`: user interface bindings
+  - `lib`: reusable generic library
+    - `core`: business logic
+    - `sys`: system/OS interfacing
+      - `cinnamon`: Cinnamon desktop environment specifics
+      - `gnome`: GNOME desktop environment specifics
+
+Notes :
+- Nothing in `lib` depends on anything in `app`.
+- Some files in `sys` are not in TypeScript so they are more reusable and directly launchable by GnomeJS in order to test them.
+
+### Style
+
+- See [`.editorconfig`](./.editorconfig).
+- Variables names uses `snake_case`.
+- Classes names uses `Capitalized_snake_case`.
+- Where both single and double quotes are possible:
+  - single quotes means to reference to something existing,
+  - double quotes means to create something new.
+- Braces placement: [K&R](https://en.wikipedia.org/wiki/Indentation_style#K&R) but also for functions.
+- Brackets the same as braces as soon as their content is too big for one line.
+- When a list content or function arguments is too big for one line:
+  - A new line under can have all arguments if they fit in one line,
+  - As soon as they don't fit in one line: one argument per line.
+- All instructions are terminated by semicolons: ASI is considered a fallback and not a feature.
+
+## Development workflow
 
 - Create a symbolic link pointing to this folder and add it in your user applets folder:
   ```bash
@@ -43,18 +86,26 @@
       - `~/.xsession-errors` logs file.
   - Press `Ctrl`+`C` (`SIGINT`) to stop the continuous build.
 
-## Testing
+## Unit testing
 
-- Run all unit tests:
+### Core logic
+
+- Run all core logic automatic unit tests:
   ```bash
   pnpm test
   ```
   - The VS Code extension [Vitest](vscode:extension/vitest.explorer) can also be used.
 
+### System/OS interfacing
+
+Check `test *.js` files in various `tests` folders and run them manually according to their instructions in their headers.
+
 ## Committing
 
 Before any commit:
 
+- All core logic automatic unit tests must pass.
+- If any system/OS interfacing has been modified, related manual tests must be performed again carefully.
 - It is advisable to build `applet.js` in a single run with:
   ```bash
   pnpm build

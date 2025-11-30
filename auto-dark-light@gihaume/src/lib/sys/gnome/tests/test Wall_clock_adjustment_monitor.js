@@ -1,7 +1,7 @@
 /**
  * To be tested manually with `cjs -m <this file path>`.
  *
- * Criteria: changing the system wall clock time for more than `time_difference_tolerance` seconds must trigger the console log within `monitoring_interval` seconds.
+ * Changing the system wall clock time for more than `time_difference_tolerance` seconds must trigger the console log within `monitoring_interval` seconds.
  */
 
 import { Wall_clock_adjustment_monitor } from '../Wall_clock_adjustment_monitor.js';

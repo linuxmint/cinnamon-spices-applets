@@ -4,7 +4,6 @@ const { Gio } = imports.gi;
 
 /**
  * An interface to listen to the sleep entering and waking events.
- *
  * @implements {Observer}
  */
 export class Sleep_events_listener {
