@@ -1,7 +1,7 @@
 /**
  * To be tested manually with `cjs -m <this file path>`.
  *
- * Criteria: changing the screen lock state must trigger the console log at either the locking and unlocking events.
+ * Changing the screen lock state must trigger the console log at either the locking and unlocking events.
  */
 
 imports.searchPath.push('/usr/share/cinnamon/js');

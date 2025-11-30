@@ -1,7 +1,7 @@
 /**
  * To be tested manually with `cjs -m <this file path>`.
  *
- * Criteria: changing the sleeping state must trigger the console log at either the sleeping and waking events.
+ * Changing the sleeping state must trigger the console log at either the sleeping and waking events.
  */
 
 imports.searchPath.push('/usr/share/cinnamon/js');

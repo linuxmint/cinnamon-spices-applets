@@ -15,7 +15,7 @@ export class Keybinding_handler implements Disposable {
     /** The function to be called when the keybinding has been pressed */
     callback: (() => void) | null = null;
 
-    /** @param keybinding - In the format accepted by Cinnamon (e.g. '<Super>F1'). */
+    /** @param keybinding - In the format accepted by Cinnamon (e.g. '<Super>F1'), which can be multiple ones separated with `::`. */
     set(keybinding: string): boolean {
         return keybindingManager.addHotKey(
             this._uuid, keybinding, () => { this.callback?.(); }

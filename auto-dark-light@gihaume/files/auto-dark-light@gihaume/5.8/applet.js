@@ -1,5 +1,5 @@
 const Gettext = imports.gettext;
-const { GLib: GLib$5 } = imports.gi;
+const { GLib: GLib$6 } = imports.gi;
 const Main = imports.ui.main;
 const { St } = imports.gi;
 const metadata = {
@@ -15,7 +15,7 @@ function _(text) {
 let translated_applet_name = "";
 function initialize_globals(applet_metadata) {
   Object.assign(metadata, applet_metadata);
-  const translations_dir_path = GLib$5.get_home_dir() + "/.local/share/locale";
+  const translations_dir_path = GLib$6.get_home_dir() + "/.local/share/locale";
   Gettext.bindtextdomain(metadata.uuid, translations_dir_path);
   translated_applet_name = _(metadata.name);
 }
@@ -4339,90 +4339,95 @@ class Background_handler {
       Background_accessor.picture_file = this._settings.dark_background_file;
   }
 }
-const { Gio: Gio$5, GLib: GLib$4 } = imports.gi;
-async function launch_command(name, expiry, command) {
-  try {
-    await _launch_command(command, expiry);
-  } catch (error) {
-    const name_for_error = name !== "" ? name : command;
-    let msg = `${_("the command")} '${name_for_error}' ${_("has failed")}`;
-    if (error instanceof GLib$4.ShellError)
-      msg += ` ${_("due to a wrong format")}.
-
-${_("Detail")}${_(":")}
-` + error.message;
-    else if (error instanceof Gio$5.IOErrorEnum) {
-      if (error.code === Gio$5.IOErrorEnum.TIMED_OUT)
-        msg += ` ${_("due to timeout")}.
-
-${_("Detail")}${_(":")}
-` + error.message;
-      else if (error.code === Gio$5.IOErrorEnum.FAILED)
-        msg += ` ${_("due to an error")}.
-
-${_("Detail")}${_(":")}
-` + error.message;
-    } else
-      msg += `${_(":")} ${error}`;
-    logger.warn(msg);
-  }
+const { Gio: Gio$5, GLib: GLib$5 } = imports.gi;
+class Error_timed_out_by_sigterm extends Error {
 }
-const TIMEOUT_EXIT_STATUS_SIGTERM = 124;
-const TIMEOUT_EXIT_STATUS_SIGKILL = 137;
-const SIGKILL_TIMEOUT = 10;
-async function _launch_command(command, timeout = 10) {
-  const wrapped_command = `timeout --kill-after=${SIGKILL_TIMEOUT} ${timeout}s sh -c ${GLib$4.shell_quote(command)}`;
-  const [_ok, argvp] = GLib$4.shell_parse_argv(wrapped_command);
+class Error_timed_out_by_sigkill extends Error {
+}
+class Error_failed extends Error {
+}
+const GNU_TIMEOUT_EXIT_STATUS_WHEN_SIGTERM = 124;
+const GNU_TIMEOUT_EXIT_STATUS_WHEN_SIGKILL = 137;
+async function launch_command$1(command, sigterm_timeout = 0, sigkill_timeout = 10) {
+  const wrapped_command = `timeout --kill-after=${sigkill_timeout}s ${sigterm_timeout}s sh -c ${GLib$5.shell_quote(command)}`;
+  const [_ok, argvp] = GLib$5.shell_parse_argv(wrapped_command);
   const process = new Gio$5.Subprocess({
     argv: argvp,
     flags: Gio$5.SubprocessFlags.STDERR_PIPE
   });
   const start_time = Date.now();
   process.init(null);
-  const [_stdout, stderr] = await new Promise(
-    // Promisifies
-    (resolve, reject) => {
-      process.communicate_utf8_async(
-        null,
-        null,
-        (source, result) => {
-          try {
-            const [_ok2, stdout, stderr2] = source.communicate_utf8_finish(result);
-            resolve([stdout, stderr2]);
-          } catch (error) {
-            reject(error);
-          }
-        }
-      );
-    }
-  );
+  const [_stdout, stderr] = await new Promise((resolve, reject) => {
+    process.communicate_utf8_async(null, null, (source, result) => {
+      try {
+        const [_ok2, stdout, stderr2] = (
+          /** @type {imports.gi.Gio.Subprocess} */
+          source.communicate_utf8_finish(result)
+        );
+        resolve([stdout, stderr2]);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  });
   const elapsed_time = (Date.now() - start_time) / 1e3;
   const exit_status = process.get_exit_status();
   switch (exit_status) {
     case 0:
       break;
-    case TIMEOUT_EXIT_STATUS_SIGTERM:
-      throw new Gio$5.IOErrorEnum({
-        code: Gio$5.IOErrorEnum.TIMED_OUT,
-        message: `may have been timed out by SIGTERM (GNU 'timeout' exit status ${TIMEOUT_EXIT_STATUS_SIGTERM})`
-      });
-    case TIMEOUT_EXIT_STATUS_SIGKILL:
-      throw new Gio$5.IOErrorEnum({
-        code: Gio$5.IOErrorEnum.TIMED_OUT,
-        message: `probably killed by an external SIGKILL (GNU 'timeout' exit status ${TIMEOUT_EXIT_STATUS_SIGKILL})`
-      });
+    case GNU_TIMEOUT_EXIT_STATUS_WHEN_SIGTERM:
+      throw new Error_timed_out_by_sigterm(
+        "The command may have been timed out by SIGTERM"
+      );
+    case GNU_TIMEOUT_EXIT_STATUS_WHEN_SIGKILL:
+      throw new Error_timed_out_by_sigkill(
+        "The command was probably killed by an external SIGKILL"
+      );
     case 1:
-      if (timeout > 0 && elapsed_time >= timeout + SIGKILL_TIMEOUT)
-        throw new Gio$5.IOErrorEnum({
-          code: Gio$5.IOErrorEnum.TIMED_OUT,
-          message: `probably timed out by SIGKILL`
-        });
-    // no break, needs to stay directly above the default case
+      if (sigterm_timeout > 0 && elapsed_time >= sigterm_timeout + sigkill_timeout)
+        throw new Error_timed_out_by_sigkill(
+          "The command was probably timed out by SIGKILL"
+        );
+    // No break in order to fall through, and so also needs to stay directly above the default case
     default:
-      throw new Gio$5.IOErrorEnum({
-        code: Gio$5.IOErrorEnum.FAILED,
-        message: stderr ? stderr.trim() : "exit status: " + exit_status
-      });
+      throw new Error_failed(
+        stderr ? stderr.trim() : "exit status: " + exit_status
+      );
+  }
+}
+const { GLib: GLib$4 } = imports.gi;
+async function launch_command(name, expiry, command) {
+  try {
+    await launch_command$1(command, expiry);
+  } catch (error) {
+    const name_for_error = name !== "" ? name : command;
+    let msg = `${_("Failed to run command")} '${name_for_error}'.
+`;
+    if (error instanceof Error_failed)
+      msg += `${_("Reason")}${_(":")} ${_("command error")}.
+${_("Detail")}${_(":")} ${error.message}`;
+    else if (error instanceof Error_timed_out_by_sigterm)
+      msg += `${_("Reason")}${_(":")} ${_("command timeout")}.
+${_("Detail")}${_(":")} ${error.message}`;
+    else if (error instanceof Error_timed_out_by_sigkill)
+      msg += `${_("Reason")}${_(":")} ${_("command timeout (killed)")}.
+${_("Detail")}${_(":")} ${error.message}`;
+    else if (error instanceof GLib$4.Error)
+      msg += `${_("Reason")}${_(":")} GLib error.
+${_("Detail")}${_(":")}
+Domain: ${error.domain}
+Code: ${error.code}
+Message: ${error.message}`;
+    else if (error instanceof Error)
+      msg += `${_("Reason")}${_(":")} ${_("Other error")}
+${_("Detail")}${_(":")}
+Name: ${error.name}
+Message: ${error.message}
+Stack?:
+${error?.stack}`;
+    else
+      msg += `${_("Unknown error type")}${_(":")} ${error}`;
+    logger.warn(msg);
   }
 }
 class Commands_handler {
@@ -4447,37 +4452,47 @@ class Commands_handler {
   }
 }
 class Timer_absolute {
-  /** Unix time in seconds (s) */
+  /** @private Unix time in seconds (s) */
   _expiration_time = 0;
-  /** The next time of day the timer has to expire. */
+  /**
+   * The next time of day the timer has to expire.
+   * @param {Time_of_day} value
+   */
   set expiration_time(value) {
     const now = get_now_as_time_of_day();
     const due_delay = now.get_seconds_until_next_target(value);
     this._expiration_time = get_now_as_unix() + due_delay;
   }
+  /** @returns {boolean} */
   get_if_has_expired() {
     return get_now_as_unix() > this._expiration_time;
   }
-  /** Ensures `get_if_has_expired` returns `true` */
+  /**
+   * Ensures `get_if_has_expired` returns `true`
+   * @returns {void}
+   */
   reset() {
     this._expiration_time = 0;
   }
 }
 const { GLib: GLib$3 } = imports.gi;
 class Event_scheduler {
-  _event_id = void 0;
+  /** @private @type {number | null} */
+  _event_id = null;
+  /** @private @readonly */
   _timer_absolute = new Timer_absolute();
-  /** @returns `true` if the scheduled event should have already occurred, `false` otherwise. If the event is not set, `false` is returned. */
+  /** @returns {boolean} `true` if the scheduled event should have already occurred, `false` otherwise. If the event is not set, `false` is returned. */
   get_if_should_be_expired() {
     return this._timer_absolute.get_if_has_expired();
   }
   /**
    * Calls a function at a specific next time of day.
    *
-   * If the event is already scheduled, it will be replaced.
+   * Note: if the event is already scheduled, it will be replaced.
    *
-   * @param time - When the event should occur.
-   * @param callback_on_event - The function to be executed when the event occurs.
+   * @param {Time_of_day} time - When the event should occur.
+   * @param {() => void} callback_on_event - The function to be executed when the event occurs.
+   * @returns {void}
    */
   set_the_event(time, callback_on_event) {
     this.unset_the_event();
@@ -4493,15 +4508,19 @@ class Event_scheduler {
     );
     this._timer_absolute.expiration_time = time;
   }
+  /** @returns {boolean} `true` if an event is currently scheduled, `false` otherwise. */
   get is_set() {
-    return this._event_id !== void 0;
+    return this._event_id !== null;
   }
-  /** If the event is not already scheduled, nothing is done. */
+  /**
+   * Note: if the event is not already scheduled, nothing is done.
+   * @returns {void}
+   */
   unset_the_event() {
-    if (!this._event_id)
+    if (this._event_id === null)
       return;
     GLib$3.source_remove(this._event_id);
-    this._event_id = void 0;
+    this._event_id = null;
     this._timer_absolute.reset();
   }
   dispose() {
@@ -4518,7 +4537,7 @@ class Keybinding_handler {
   }
   /** The function to be called when the keybinding has been pressed */
   callback = null;
-  /** @param keybinding - In the format accepted by Cinnamon (e.g. '<Super>F1'). */
+  /** @param keybinding - In the format accepted by Cinnamon (e.g. '<Super>F1'), which can be multiple ones separated with `::`. */
   set(keybinding) {
     return keybindingManager.addHotKey(
       this._uuid,
@@ -4537,25 +4556,14 @@ class Keybinding_handler {
 }
 const { Gio: Gio$4 } = imports.gi;
 class Timezone_change_listener {
-  _callback_on_change;
-  /** @param callback_on_change - The function to be executed when the system timezone changes. */
-  constructor(callback_on_change) {
-    this._callback_on_change = callback_on_change;
-  }
+  /** @private @type {number | null} */
+  _signal_id = null;
+  /** The function to call when the system timezone changes.
+   * @type {((new_timezone: string) => void) | null} */
+  callback = null;
   enable() {
-    this._subscribe_to_changes(this._callback_on_change.bind(this));
-  }
-  disable() {
-    this._unsubscribe_to_changes();
-  }
-  /** Releases acquired resources */
-  dispose() {
-    this.disable();
-  }
-  _signal_id = void 0;
-  _subscribe_to_changes(callback_when_changes) {
-    if (this._signal_id)
-      this._unsubscribe_to_changes();
+    if (this._signal_id !== null)
+      return;
     this._signal_id = Gio$4.DBus.system.signal_subscribe(
       "org.freedesktop.timedate1",
       // sender
@@ -4573,16 +4581,19 @@ class Timezone_change_listener {
         const changed_properties = parameters.deep_unpack()[1];
         if (changed_properties["Timezone"]) {
           const new_timezone = changed_properties["Timezone"].deep_unpack();
-          callback_when_changes(new_timezone);
+          this.callback?.(new_timezone);
         }
       }
     );
   }
-  _unsubscribe_to_changes() {
-    if (!this._signal_id)
+  disable() {
+    if (this._signal_id === null)
       return;
     Gio$4.DBus.system.signal_unsubscribe(this._signal_id);
-    this._signal_id = void 0;
+    this._signal_id = null;
+  }
+  dispose() {
+    this.disable();
   }
 }
 const { Gio: Gio$3 } = imports.gi;

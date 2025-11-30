@@ -2,5 +2,7 @@
     "typescript.tsdk": "node_modules/typescript/lib",
     "python.analysis.extraPaths": [
         "/usr/share/cinnamon/cinnamon-settings/bin"
-    ]
+    ],
+    "javascript.preferences.quoteStyle": "single", // For imports autocompletion
+    "typescript.preferences.quoteStyle": "single" // For imports autocompletion
 }

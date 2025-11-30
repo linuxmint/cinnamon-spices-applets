@@ -1,7 +1,7 @@
 /**
  * To be tested manually with `cjs -m <this file path>`.
  *
- * Criteria: the second message must be logged only once the screen is unlocked.
+ * The second message must be logged only once the screen is unlocked.
  */
 
 imports.searchPath.push('/usr/share/cinnamon/js');
