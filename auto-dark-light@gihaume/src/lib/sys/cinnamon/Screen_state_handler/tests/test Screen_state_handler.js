@@ -6,14 +6,14 @@
 
 imports.searchPath.push('/usr/share/cinnamon/js');
 
-const { Sleep_and_lock_handler } = await import('../Sleep_and_lock_handler.js');
+const { Screen_state_handler } = await import('../Screen_state_handler.js');
 
-const sleep_events = new Sleep_and_lock_handler();
-sleep_events.callback = (/** @type {boolean} */ is_entering_sleep) => {
+const screen_state = new Screen_state_handler();
+screen_state.callback = (/** @type {boolean} */ is_present) => {
     console.log(
-        `Sleep state changed: ${is_entering_sleep ? 'entering sleep' : 'woke up unlocked'}`
+        `Sleep state changed: ${is_present ? 'woke up unlocked' : 'entering sleep or locking'}`
     );
 };
-sleep_events.enable();
+screen_state.enable();
 
 await new imports.gi.GLib.MainLoop(null, false).runAsync();
