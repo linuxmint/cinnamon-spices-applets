@@ -398,7 +398,7 @@ class GPasteApplet extends Applet.IconApplet {
                 }
 
                 this._historyItems.slice(0, results).forEach((item, index) => {
-                    item.setIndex(this._searchResults[index]);
+                    item.setUuid(this._searchResults[index]);
                 });
                 this._historyItems.slice(results, maxSize).forEach((item, index) => {
                     item.setIndex(-1);
