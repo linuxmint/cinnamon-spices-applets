@@ -1,3 +1,7 @@
+### v13.7.4~20251201
+  * Avoids deleting the cover art after modifying the volume or the workspace.
+  * Fixes [#8020](https://github.com/linuxmint/cinnamon-spices-applets/issues/8020)
+
 ### v13.7.3~20251126
   * Avoids treating apostrophes as quotes (artist and title).
 

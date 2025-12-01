@@ -987,6 +987,7 @@ class Player extends PopupMenu.PopupMenuSection {
                 if (this.cover && !this._applet.dontShowAnyImageInMenu) {
                     this.coverBox.add_actor(this.cover);
                     //~ this.coverBox.set_reactive = true;
+                    //~ this.coverBox.connect("click-event", (event) => Util.spawnCommandLineAsync("xdg-open "+this._cover_path));
                     //~ this.coverBox.connect("button-press-event", (event) => Util.spawnCommandLineAsync("xdg-open "+this._cover_path));
                     try {
                         this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);
