@@ -106,7 +106,7 @@ UpdatesNotifier.prototype = {
         this.rightMenuItemsIndexes = new Array();
 
         this.hide_applet_label(true);
-        this.set_applet_icon_name('configure');
+        this.set_applet_icon_name('update-notifier-settings');
 
         this.updates = new Updates();
         this.checkingInProgress = false;
@@ -349,7 +349,7 @@ UpdatesNotifier.prototype = {
         }
 
         global.log(`${UUID}: Refreshing ${refreshMode} info...`);
-        this.set_applet_icon_name('configure');
+        this.set_applet_icon_name('update-notifier-settings');
         this.hide_applet_label(true);
         this.updates = new Updates();
 
