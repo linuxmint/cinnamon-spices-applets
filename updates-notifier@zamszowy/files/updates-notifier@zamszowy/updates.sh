@@ -12,7 +12,13 @@ check)
     if [[ "$refreshMode" = "updates" ]]; then
         pkcon refresh &>/dev/null
     fi
-    pkcon get-updates &>/dev/null
+
+    if ! out=$(pkcon get-updates 2>&1); then
+        echo ERROR
+        echo "$out" > "$DIR/error"
+        exit 0
+    fi
+
     pkcon get-packages --filter installed &>/dev/null
 
     if command -v fwupdmgr &>/dev/null && command -v jq &>/dev/null; then
@@ -32,6 +38,9 @@ check)
     ;;
 view)
     /usr/bin/cjs "$DIR"/info-window.js "$DIR" "$DIR"/updates
+    ;;
+error)
+    /usr/bin/cjs "$DIR"/error-window.js "$DIR"/error
     ;;
 command)
     readonly cmd=$2
