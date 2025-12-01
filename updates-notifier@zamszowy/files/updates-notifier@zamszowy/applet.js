@@ -114,6 +114,7 @@ UpdatesNotifier.prototype = {
         this.lastRefreshTime = 0;
 
         this.hasFirmwareUpdates = false;
+        this.hasError = false;
 
         this.interval = null;
 
@@ -178,7 +179,7 @@ UpdatesNotifier.prototype = {
 
     _apply_applet_icon: function (icon_name) {
         let full_icon_name = icon_name + "-";
-        if (this.showFirmware && this.hasFirmwareUpdates) {
+        if (!this.hasError && (this.showFirmware && this.hasFirmwareUpdates)) {
             full_icon_name += "fw-";
         }
         if (this.icon_style == "dark") {
@@ -223,6 +224,20 @@ UpdatesNotifier.prototype = {
         if (!this.showWindowOnClick) {
             this._contentSection = new PopupMenu.PopupMenuSection();
             this.menu.addMenuItem(this._contentSection);
+        }
+
+        if (this.hasError) {
+            let iError = new PopupMenu.PopupIconMenuItem(_("View error details"), "dialog-error-symbolic", St.IconType.SYMBOLIC);
+            iError.connect('activate', () => {
+                Util.spawn_async(['/usr/bin/bash', this.applet_path + '/updates.sh', "error"]);
+            });
+
+            if (!this.showWindowOnClick) {
+                this.menu.addMenuItem(iError);
+            } else {
+                this._applet_context_menu.addMenuItem(iError, position);
+                this.rightMenuItemsIndexes.push(position++);
+            }
         }
 
         if (this.commandUpdateShow) {
@@ -277,6 +292,15 @@ UpdatesNotifier.prototype = {
 
     _update: function () {
         const count = this.updates.map.size;
+
+        if (this.hasError) {
+            this.set_applet_enabled(true);
+            this._apply_applet_icon('update-notifier-error');
+            this.set_applet_tooltip(_("Error checking for updates"));
+            this.hide_applet_label(true);
+            this._buildMenu(count);
+            return;
+        }
 
         this.set_applet_enabled(!this.hideApplet || count != 0);
         const tooltip = count > 0
@@ -352,10 +376,18 @@ UpdatesNotifier.prototype = {
         this.set_applet_icon_name('update-notifier-settings');
         this.hide_applet_label(true);
         this.updates = new Updates();
+        this.hasError = false;
 
         // accept updates changes only when originating from this applet
         this.checkingInProgress = true;
         Util.spawn_async(['/usr/bin/bash', this.applet_path + '/updates.sh', "check", refreshMode], (stdout) => {
+            if (stdout !== '') {
+                this.checkingInProgress = false;
+                global.logError(`${UUID}: pkcon get-updates failed`);
+                this.hasError = true;
+                this._update();
+            }
+
             this.lastRefreshTime = GLib.get_monotonic_time();
             if (this.showFirmware) {
                 let fwCount = 0;
