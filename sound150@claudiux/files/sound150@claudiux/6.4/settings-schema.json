@@ -380,7 +380,7 @@
   },
   "showalbumDelay": {
     "type": "scale",
-    "default": 5,
+    "default": 0,
     "min": 0,
     "max":10,
     "step": 1,
