@@ -21,7 +21,7 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation);
         
         try {        
-            this.set_applet_icon_name("cs-startup-programs");
+            this.set_applet_icon_symbolic_name("system-run-symbolic");
             this.set_applet_tooltip(_("Click here to add or remove programs to start with the session."));                                                
         }
         catch (e) {
