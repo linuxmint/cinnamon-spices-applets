@@ -231,7 +231,6 @@ MyApplet.prototype = {
     },
 
     on_applet_clicked: function(event) {
-        Util.spawnCommandLine("bash -c \" [ -f /usr/bin/rtmpdump ] || apturl apt://rtmpdump \"");
         Util.spawnCommandLine("bash -c \" [ -f /usr/bin/mpv ] || apturl apt://mpv \"");
         this.menu.toggle();
     }
