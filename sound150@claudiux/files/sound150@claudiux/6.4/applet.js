@@ -111,14 +111,11 @@ const IS_OSD150_INSTALLED = () => {
 }
 
 function run_playerctld() {
-    //~ Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
-    Util.spawnCommandLine("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
+    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
 }
 
 function kill_playerctld() {
-    //~ Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
-    Util.spawnCommandLine("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
-    del_song_arts(); //added
+    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
 }
 
 const superRND = (2**31-1)**2;
@@ -203,10 +200,6 @@ class Sound150Applet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instanceId) {
         super(orientation, panel_height, instanceId);
 
-        //~ Util.spawnCommandLineAsync("/usr/bin/env bash -c 'cd %s && chmod 755 *.sh *.py'".format(PATH2SCRIPTS));
-        //~ Util.spawnCommandLineAsync("/usr/bin/env bash -c '[[ -d %s ]] || mkdir -p %s'".format(ALBUMART_PICS_DIR, ALBUMART_PICS_DIR));
-        //~ Util.spawnCommandLineAsync("/usr/bin/env bash -c '[[ -d %s ]] || mkdir -p %s'".format(ICONDIR, ICONDIR));
-        //~ Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/rm_tmp_files.sh'");
         Util.spawnCommandLine("/usr/bin/env bash -c 'cd %s && chmod 755 *.sh *.py'".format(PATH2SCRIPTS));
         Util.spawnCommandLine("/usr/bin/env bash -c '[[ -d %s ]] || mkdir -p %s'".format(ALBUMART_PICS_DIR, ALBUMART_PICS_DIR));
         Util.spawnCommandLine("/usr/bin/env bash -c '[[ -d %s ]] || mkdir -p %s'".format(ICONDIR, ICONDIR));
@@ -269,6 +262,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._chooseActivePlayerItem = new PopupMenu.PopupSubMenuMenuItem(_("Choose player controls"));
 
         this.settings = new Settings.AppletSettings(this, UUID, this.instanceId);
+        this.settings.bind("runAsync", "runAsync");
         this.settings.bind("shortenArtistTitle", "shortenArtistTitle");
         this.settings.bind("doNotUsePlayerctld", "doNotUsePlayerctld", () => {
             this._on_reload_this_applet_pressed();
@@ -630,8 +624,10 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.commands_menu_item = new PopupMenu.PopupSubMenuMenuItem(_("Commands"));
             for (let c of this.custom_commands) {
                 this.commands_menu_item.menu.addAction(c["title"], () => {
-                    //~ Util.spawnCommandLineAsync(`${c["command"]}`)
-                    Util.spawnCommandLine(`${c["command"]}`)
+                    if (this.runAsync)
+                        Util.spawnCommandLineAsync(`${c["command"]}`);
+                    else
+                        Util.spawnCommandLine(`${c["command"]}`);
                 });
             }
             this._applet_context_menu.addMenuItem(this.commands_menu_item);
@@ -873,8 +869,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                         if (exitCode === 0) {
                             logDebug("stdout: " + stdout + " " + typeof stdout);
                             if (stdout.startsWith("opt1")) {
-                                //~ Util.spawnCommandLineAsync("cinnamon-settings extensions -t download");
-                                Util.spawnCommandLine("cinnamon-settings extensions -t download");
+                                Util.spawnCommandLineAsync("cinnamon-settings extensions -t download");
                             } else {
                                 this.OSDhorizontal = false;
                             }
@@ -1718,8 +1713,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (!this._artLooping) return;
 
         if (this._playerctl && this._imagemagick && this.is_empty(ALBUMART_PICS_DIR))
-            Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
-            //~ Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            if (this.runAsync)
+                Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            else
+                Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
 
         //~ if (!this._playerctl || this.title_text_old == this.title_text) {
         if (this.title_text_old == this.title_text) {
@@ -2073,14 +2070,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         //button Install playerctl (when it isn't installed)
         if (this._playerctl === null && !this.doNotUsePlayerctld) {
             let _install_playerctl_button = this.menu.addAction(_("Install playerctl"), () => {
-                //~ Util.spawnCommandLineAsync("/usr/bin/env bash -C '%s/install_playerctl.sh'".format(PATH2SCRIPTS));
-                Util.spawnCommandLine("/usr/bin/env bash -C '%s/install_playerctl.sh'".format(PATH2SCRIPTS));
+                Util.spawnCommandLineAsync("/usr/bin/env bash -C '%s/install_playerctl.sh'".format(PATH2SCRIPTS));
             });
         }
         if (!this._imagemagick) {
             let _install_imagemagick_button = this.menu.addAction(_("Install imagemagick"), () => {
-                //~ Util.spawnCommandLineAsync("/usr/bin/env bash -C '%s/install_imagemagick.sh'".format(PATH2SCRIPTS));
-                Util.spawnCommandLine("/usr/bin/env bash -C '%s/install_imagemagick.sh'".format(PATH2SCRIPTS));
+                Util.spawnCommandLineAsync("/usr/bin/env bash -C '%s/install_imagemagick.sh'".format(PATH2SCRIPTS));
             });
         }
     }
@@ -2517,9 +2512,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _onSystemSoundSettingsPressed() {
-        let command = "cinnamon-settings sound";
-        //~ Util.spawnCommandLineAsync(command);
-        Util.spawnCommandLine(command);
+        Util.spawnCommandLineAsync("cinnamon-settings sound");
     }
 
     volume_near_icon() {
@@ -2615,8 +2608,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_desklet_open_settings_button_clicked() {
-        //~ Util.spawnCommandLineAsync("cinnamon-settings desklets " + DESKLET_UUID);
-        Util.spawnCommandLine("cinnamon-settings desklets " + DESKLET_UUID);
+        Util.spawnCommandLineAsync("cinnamon-settings desklets " + DESKLET_UUID);
     }
 
     _is_desklet_activated() {

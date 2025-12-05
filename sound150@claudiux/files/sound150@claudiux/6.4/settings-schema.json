@@ -20,6 +20,7 @@
       "type": "page",
       "title": "Behavior",
       "sections": [
+        "sectionBehavior1",
         "sectionBehavior2",
         "sectionBehavior3"
       ]
@@ -76,6 +77,13 @@
         "keepOutputListOpen",
         "keepInputListOpen",
         "keepCommandListOpen"
+      ]
+    },
+    "sectionBehavior1": {
+      "type": "section",
+      "title": "External commands and scripts",
+      "keys": [
+        "runAsync"
       ]
     },
     "sectionBehavior2": {
@@ -321,6 +329,12 @@
       "LibreWolf"
     ]
   },
+  "runAsync": {
+    "type": "switch",
+    "default": true,
+    "description": "Execute asynchronously",
+    "tooltip": "Enabled by default (recommended).\nDisable this option if you encounter running issues (rare)."
+  },
   "showtrack": {
     "type": "switch",
     "default": false,
@@ -380,7 +394,7 @@
   },
   "showalbumDelay": {
     "type": "scale",
-    "default": 5,
+    "default": 0,
     "min": 0,
     "max":10,
     "step": 1,

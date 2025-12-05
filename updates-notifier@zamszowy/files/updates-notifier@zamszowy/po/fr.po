@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: updates-notifier@zamszowy 2.2.0\n"
+"Project-Id-Version: updates-notifier@zamszowy 2.3.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2025-09-29 10:49+0200\n"
-"PO-Revision-Date: 2025-10-18 10:00+0200\n"
+"POT-Creation-Date: 2025-12-01 10:57+0100\n"
+"PO-Revision-Date: 2025-12-02 09:47+0100\n"
 "Last-Translator: FabRCT\n"
 "Language-Team:\n"
 "Language: fr\n"
@@ -20,36 +20,52 @@ msgstr ""
 msgid "missing dependencies"
 msgstr "dépendances manquantes"
 
-#. applet.js:229
+#. applet.js:230
+msgid "View error details"
+msgstr "Afficher les détails de l'erreur"
+
+#. applet.js:244
 msgid "Check for new updates"
 msgstr "Rechercher de nouvelles mises à jour"
 
-#. applet.js:243
+#. applet.js:258
 #, javascript-format
 msgid "View %s updates"
 msgstr "Afficher %s mises à jour"
 
-#. applet.js:243
+#. applet.js:258
 msgid "No updates to view"
 msgstr "Aucune mise à jour à afficher"
 
-#. applet.js:258
+#. applet.js:273
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "Mettre à niveau %s paquets"
 
-#. applet.js:258
+#. applet.js:273
 msgid "No packages to upgrade"
 msgstr "Aucun package à mettre à niveau"
 
-#. applet.js:283
+#. applet.js:299
+msgid "Error checking for updates"
+msgstr "Erreur lors de la vérification des mises à jour"
+
+#. applet.js:307
 #, javascript-format
 msgid "%s updates available"
 msgstr "%s mises à jour disponibles"
 
-#. applet.js:284
+#. applet.js:308
 msgid "No updates available"
 msgstr "Aucune mise à jour disponible"
+
+#. error-window.js:16
+msgid "Error"
+msgstr "Erreur"
+
+#. error-window.js:39
+msgid "Error log file not found."
+msgstr "Fichier du journal d'erreurs introuvable."
 
 #. info-window.js:66 info-window.js:85
 msgid "No details available."

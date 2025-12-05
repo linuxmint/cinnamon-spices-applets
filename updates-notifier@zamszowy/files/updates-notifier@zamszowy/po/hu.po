@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 2.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-29 10:49+0200\n"
+"POT-Creation-Date: 2025-12-01 10:57+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,36 +22,52 @@ msgstr ""
 msgid "missing dependencies"
 msgstr "hiányzó függőségek"
 
-#. applet.js:229
+#. applet.js:230
+msgid "View error details"
+msgstr ""
+
+#. applet.js:244
 msgid "Check for new updates"
 msgstr "Új frissítések keresése"
 
-#. applet.js:243
+#. applet.js:258
 #, javascript-format
 msgid "View %s updates"
 msgstr "%s frissítések megtekintése"
 
-#. applet.js:243
+#. applet.js:258
 msgid "No updates to view"
 msgstr "Nincsenek megtekinthető frissítések"
 
-#. applet.js:258
+#. applet.js:273
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "%s csomag frissítése"
 
-#. applet.js:258
+#. applet.js:273
 msgid "No packages to upgrade"
 msgstr "Nincsenek frissítendő csomagok"
 
-#. applet.js:283
+#. applet.js:299
+msgid "Error checking for updates"
+msgstr ""
+
+#. applet.js:307
 #, javascript-format
 msgid "%s updates available"
 msgstr "%s frissítés érhető el"
 
-#. applet.js:284
+#. applet.js:308
 msgid "No updates available"
 msgstr "Nincsenek elérhető frissítések"
+
+#. error-window.js:16
+msgid "Error"
+msgstr "Hiba"
+
+#. error-window.js:39
+msgid "Error log file not found."
+msgstr ""
 
 #. info-window.js:66 info-window.js:85
 msgid "No details available."
@@ -148,23 +164,23 @@ msgstr "Rejtse el az kisalkalmazás, ha nincsenek frissítések"
 #. settings-schema.json->different-levels->description
 msgid "Show different applet icon for different updgradeable packages count"
 msgstr ""
-"Különböző kisalkalmazás ikonok megjelenítése a frissíthető csomagok "
-"számának függvényében"
+"Különböző kisalkalmazás ikonok megjelenítése a frissíthető csomagok számának "
+"függvényében"
 
 #. settings-schema.json->level-1->description
 msgid "Show low level icon when updates count is between 0 and this value "
 msgstr ""
-"Alacsony szintű ikon megjelenítése, ha a frissítések száma 0 és ez az "
-"érték között van "
+"Alacsony szintű ikon megjelenítése, ha a frissítések száma 0 és ez az érték "
+"között van "
 
 #. settings-schema.json->level-2->description
 msgid ""
 "Show medium level icon when updates count is between low level value and "
 "this value. Show high level icon if it's higher than this value."
 msgstr ""
-"Közepes szintű ikon megjelenítése, ha a frissítések száma az alacsony "
-"szintű érték és ez az érték között van. Magas szintű ikon megjelenítése, "
-"ha ennél az értéknél magasabb."
+"Közepes szintű ikon megjelenítése, ha a frissítések száma az alacsony szintű "
+"érték és ez az érték között van. Magas szintű ikon megjelenítése, ha ennél "
+"az értéknél magasabb."
 
 #. settings-schema.json->show-label->description
 msgid "Show label with updates count"
