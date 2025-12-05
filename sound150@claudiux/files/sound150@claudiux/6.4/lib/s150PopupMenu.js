@@ -639,12 +639,14 @@ class Player extends PopupMenu.PopupMenuSection {
                         //~ log("json_title: "+json_title, true);
                         //~ log("json_artist: "+json_artist, true);
                         if (json_title) {
-                            this._title = capitalize_each_word(json_title);
+                            //~ this._title = capitalize_each_word(json_title);
+                            this._title = json_title.capitalize();
                         } else {
                             this._title = _("Unknown Title");
                         }
                         if (json_artist) {
-                            this._artist = capitalize_each_word(json_artist);
+                            //~ this._artist = capitalize_each_word(json_artist);
+                            this._artist = json_artist.capitalize();
                             this.artistLabel.set_text(this._artist);
                         } else {
                             this._artist = _("Unknown Artist");

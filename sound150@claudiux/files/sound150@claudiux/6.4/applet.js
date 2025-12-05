@@ -679,7 +679,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.unmonitor_icon_dir();
         const icon_dir = Gio.file_new_for_path(ICONDIR);
         this.iconsMonitor = icon_dir.monitor_directory(Gio.FileMonitorFlags.WATCH_MOVES, new Gio.Cancellable());
-        this.iconsMonitor.set_rate_limit(5000);
+        //~ this.iconsMonitor.set_rate_limit(5000);
         this.iconsMonitorId = this.iconsMonitor.connect("changed", () => { this.on_icon_dir_changed() });
     }
 
@@ -1799,13 +1799,17 @@ class Sound150Applet extends Applet.TextIconApplet {
     setAppletText(player) {
         this.title_text = "";
         if (this.isHorizontal && this.showtrack && player && player._playerStatus != "Stopped") {
-            if (player._artist == _("Unknown Artist")) {
-                this.title_text = this._truncate(player._title);
+            let _playerArtist = _("Unknown Artist");
+            if (player._artist) _playerArtist = player._artist;
+            let _playerTitle = _("Unknown Title");
+            if (player._title) _playerTitle = player._title;
+            if (_playerArtist == _("Unknown Artist")) {
+                this.title_text = this._truncate(_playerTitle);
             } else {
                 if (this._panelHeight >= 40)
-                    this.title_text = this._truncate(player._artist) + "\n" + this._truncate(player._title);
+                    this.title_text = this._truncate(_playerArtist) + "\n" + this._truncate(_playerTitle);
                 else
-                    this.title_text = this._truncate(player._title + ' - ' + player._artist);
+                    this.title_text = this._truncate(_playerTitle + ' - ' + _playerArtist);
             }
         }
         if (this.title_text_old != this.title_text) {
@@ -1842,8 +1846,13 @@ class Sound150Applet extends Applet.TextIconApplet {
             }
             if (this.tooltipShowArtistTitle) {
                 if (tooltips.length != 0) tooltips.push("");
-                if (this.player._artist != _("Unknown Artist")) {
-                    tooltips.push("<b>" + this.player._artist.replace(/\&/g, "&amp;").replace(/\"/g, "") + "</b>");
+                if (!this.player._artist) {
+                    //~ tooltips.push("<b>" + _("Unknown Artist") + "</b>");
+                    tooltips.push(_("Unknown Artist"));
+                } else {
+                    if (this.player._artist != _("Unknown Artist")) {
+                        tooltips.push("<b>" + this.player._artist.replace(/\&/g, "&amp;").replace(/\"/g, "") + "</b>");
+                    }
                 }
                 if (this._title != _("Unknown Title")) {
                     tooltips.push(this.player._title.replace(/\&/g, "&amp;").replace(/\"/g, ""));

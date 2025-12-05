@@ -1,3 +1,6 @@
+### v13.7.6~20251205
+  * Bug fix: artist and title when the player does not provide them.
+
 ### v13.7.5~20251204
   * Improves execution speed.
   * Fixes [#8029](https://github.com/linuxmint/cinnamon-spices-applets/issues/8029)

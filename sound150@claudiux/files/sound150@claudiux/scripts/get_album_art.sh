@@ -3,7 +3,7 @@ DEBUG=false
 #~ DEBUG=true
 
 [[ $DEBUG == true ]] && echo "$(date) $(basename $0)" >> $HOME/sound150.log # DEBUGGING
-[[ $DEBUG == false ]] && rm -f $HOME/sound150.log # DEBUGGING
+[[ $DEBUG == false && -f $HOME/sound150.log ]] && rm -f $HOME/sound150.log # DEBUGGING
 
 function urldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
 
@@ -27,7 +27,6 @@ superRND=$((RANDOM*RANDOM))
         }; done
         cd $OLDPWD
 }
-
 
 [[ -f MPV_RADIO_PID ]] && {
         [[ -d $SONG_ART_DIR ]] && {
@@ -81,7 +80,6 @@ cd $OLDPWD
         for f in $(ls -At1 $SONG_ART_DIR); do {
                 [[ -z $f ]] || {
                         [[ $DEBUG == true ]] && echo "$SONG_ART_DIR/$f" >> $HOME/sound150.log # DEBUGGING
-                        #~ $MAKEICON "$SONG_ART_DIR/$f" &
                         $MAKEICON "$SONG_ART_DIR/$f"
                         echo -n "$SONG_ART_DIR/$f"
                         break
@@ -91,19 +89,12 @@ cd $OLDPWD
 }
 
 
-#~ [[ -d $SONG_ART_DIR ]] && [[ "${TITLE}" != "$OLDTITLE" ]] && rm -f $SONG_ART_DIR/*
-
 [[ -d $ARTDIR ]] && {
         [[ "${TITLE}" != "$OLDTITLE" ]] && rm -f $ARTDIR/*
 }
 
-#~ ARTFILE="albumArt-$superRND.png"
 ARTFILE="R3SongArt$superRND.png"
 PATHTOFILE="$ARTDIR/$ARTFILE"
-
-
-#~ [[ -d $SONG_ART_DIR ]] && rm -f $SONG_ART_DIR/*
-#~ [[ -d $ARTDIR ]] && rm -f $ARTDIR/*
 
 
 XESAM_URL=$(playerctl -a metadata "xesam:url")
@@ -154,7 +145,6 @@ echo -n $XESAM_URL > $OLDXESAMURLFILE
 } || [[ $XESAM_URL == file* ]] && {
         DECODED=$(urldecode "${XESAM_URL:7}") # Removes 7 first characters.
 } || {
-        #~ DECODED=$(urldecode "${XESAM_URL}")
         [[ $DEBUG == true ]] && echo "Invalid" >> $HOME/sound150.log # DEBUGGING
         exit 1
 }
@@ -174,11 +164,7 @@ rm -f $HOME/mimetype.txt
 }
 
 cp -a "$PATHTOFILE" $SONG_ART_DIR/$ARTFILE
-#~ mv $PATHTOFILE $SONG_ART_DIR/$ARTFILE
 [[ $DEBUG == true ]] && echo "" >> $HOME/sound150.log # DEBUGGING
-#~ $MAKEICON "$SONG_ART_DIR/$ARTFILE" &
 $MAKEICON "$SONG_ART_DIR/$ARTFILE"
-#~ sleep 0.5
-#~ echo -n $PATHTOFILE
 echo -n "$SONG_ART_DIR/$ARTFILE"
 exit 0
