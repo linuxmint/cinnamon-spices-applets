@@ -1,0 +1,9 @@
+{
+  "uuid": "combined-monitor@danipin",
+  "name": "Combined Monitor",
+  "description": "Ein kompakter und umfassender System-Monitor für Cinnamon. Zeigt CPU-, RAM- und SWAP-Auslastung in einem einzigen Panel-Element. Konfigurieren Sie Farben, Schwellwerte, Trennzeichen und die Reihenfolge der Metriken. Unterstützt die Anzeige von Text, Theme-Icons oder eigenen Symbolen zur perfekten Integration in Ihre Leiste.",
+  "icon": "icon.png",
+  "version": "1.0",
+  "author": "danniboy",
+  "max-instances": 1
+}

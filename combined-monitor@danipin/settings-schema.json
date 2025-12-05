@@ -1,0 +1,323 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": ["page-cpu", "page-ram", "page-swap", "page-general"],
+    "page-cpu": {
+      "type": "page",
+      "title": "CPU",
+      "sections": ["section-cpu-display", "section-cpu-thresholds", "section-cpu-colors"]
+    },
+    "page-ram": {
+      "type": "page", 
+      "title": "RAM",
+      "sections": ["section-ram-display", "section-ram-thresholds", "section-ram-colors"]
+    },
+    "page-swap": {
+      "type": "page",
+      "title": "SWAP", 
+      "sections": ["section-swap-display", "section-swap-thresholds", "section-swap-colors"]
+    },
+    "page-general": {
+      "type": "page",
+      "title": "Allgemein",
+      "sections": ["section-general"]
+    },
+    
+    "section-cpu-display": {
+      "type": "section",
+      "title": "Anzeige",
+      "keys": ["show-cpu", "cpu-label-text", "cpu-symbol"]
+    },
+    "section-cpu-thresholds": {
+      "type": "section",
+      "title": "Schwellwerte",
+      "keys": ["cpu-low", "cpu-med", "cpu-high"]
+    },
+    "section-cpu-colors": {
+      "type": "section",
+      "title": "Farben",
+      "keys": ["cpu-enable-colors", "cpu-color-low", "cpu-color-med", "cpu-color-high", "cpu-color-critical"]
+    },
+    
+    "section-ram-display": {
+      "type": "section",
+      "title": "Anzeige",
+      "keys": ["show-ram", "ram-label-text", "ram-symbol"]
+    },
+    "section-ram-thresholds": {
+      "type": "section",
+      "title": "Schwellwerte",
+      "keys": ["ram-low", "ram-med", "ram-high"]
+    },
+    "section-ram-colors": {
+      "type": "section",
+      "title": "Farben",
+      "keys": ["ram-enable-colors", "ram-color-low", "ram-color-med", "ram-color-high", "ram-color-critical"]
+    },
+    
+    "section-swap-display": {
+      "type": "section",
+      "title": "Anzeige",
+      "keys": ["show-swap", "swap-label-text", "swap-symbol", "swap-only-when-used"]
+    },
+    "section-swap-thresholds": {
+      "type": "section",
+      "title": "Schwellwerte",
+      "keys": ["swap-low", "swap-med", "swap-high"]
+    },
+    "section-swap-colors": {
+      "type": "section",
+      "title": "Farben",
+      "keys": ["swap-enable-colors", "swap-color-low", "swap-color-med", "swap-color-high", "swap-color-critical"]
+    },
+    
+    "section-general": {
+      "type": "section",
+      "title": "Einstellungen",
+      "keys": ["layout-variant", "update-interval", "enable-separator", "separator-text", "separator-color"]
+    }
+  },
+
+  "show-cpu": {
+    "type": "switch",
+    "default": true,
+    "description": "CPU anzeigen"
+  },
+  "cpu-label-text": {
+    "type": "entry",
+    "default": "CPU",
+    "description": "Text für CPU"
+  },
+  "cpu-symbol": {
+    "type": "entry",
+    "default": "",
+    "description": "Eigenes Symbol/Icon für CPU. Leer lassen für Textlabel."
+  },
+  "cpu-low": {
+    "type": "spinbutton",
+    "default": 50,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "description": "Schwelle LOW (%)",
+    "tooltip": "Unter diesem Wert wird die LOW-Farbe verwendet"
+  },
+  "cpu-med": {
+    "type": "spinbutton",
+    "default": 75,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "description": "Schwelle MED (%)",
+    "tooltip": "Zwischen LOW und MED wird die MED-Farbe verwendet"
+  },
+  "cpu-high": {
+    "type": "spinbutton",
+    "default": 85,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "description": "Schwelle HIGH (%)",
+    "tooltip": "Zwischen MED und HIGH wird die HIGH-Farbe verwendet"
+  },
+  "cpu-enable-colors": {
+    "type": "switch",
+    "default": true,
+    "description": "Farbwechsel für CPU aktivieren"
+  },
+  "cpu-color-low": {
+    "type": "colorchooser",
+    "default": "#ffffff",
+    "description": "Farbe LOW"
+  },
+  "cpu-color-med": {
+    "type": "colorchooser",
+    "default": "#ffff00",
+    "description": "Farbe MED"
+  },
+  "cpu-color-high": {
+    "type": "colorchooser",
+    "default": "#FFA500",
+    "description": "Farbe HIGH"
+  },
+  "cpu-color-critical": {
+    "type": "colorchooser",
+    "default": "#FF4500",
+    "description": "Farbe CRITICAL",
+    "tooltip": "Wird über der HIGH-Schwelle verwendet"
+  },
+
+  "show-ram": {
+    "type": "switch",
+    "default": true,
+    "description": "RAM anzeigen"
+  },
+  "ram-label-text": {
+    "type": "entry",
+    "default": "RAM",
+    "description": "Text für RAM"
+  },
+  "ram-symbol": {
+    "type": "entry",
+    "default": "",
+    "description": "Eigenes Symbol/Icon für RAM. Leer lassen für Textlabel."
+  },
+  "ram-low": {
+    "type": "spinbutton",
+    "default": 50,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "description": "Schwelle LOW (%)"
+  },
+  "ram-med": {
+    "type": "spinbutton",
+    "default": 75,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "description": "Schwelle MED (%)"
+  },
+  "ram-high": {
+    "type": "spinbutton",
+    "default": 85,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "description": "Schwelle HIGH (%)"
+  },
+  "ram-enable-colors": {
+    "type": "switch",
+    "default": true,
+    "description": "Farbwechsel für RAM aktivieren"
+  },
+  "ram-color-low": {
+    "type": "colorchooser",
+    "default": "#ffffff",
+    "description": "Farbe LOW"
+  },
+  "ram-color-med": {
+    "type": "colorchooser",
+    "default": "#ffff00",
+    "description": "Farbe MED"
+  },
+  "ram-color-high": {
+    "type": "colorchooser",
+    "default": "#FFA500",
+    "description": "Farbe HIGH"
+  },
+  "ram-color-critical": {
+    "type": "colorchooser",
+    "default": "#FF4500",
+    "description": "Farbe CRITICAL"
+  },
+
+  "show-swap": {
+    "type": "switch",
+    "default": true,
+    "description": "SWAP anzeigen"
+  },
+  "swap-label-text": {
+    "type": "entry",
+    "default": "SWAP",
+    "description": "Text für SWAP"
+  },
+  "swap-symbol": {
+    "type": "entry",
+    "default": "",
+    "description": "Eigenes Symbol/Icon für SWAP. Leer lassen für Textlabel."
+  },
+  "swap-only-when-used": {
+    "type": "switch",
+    "default": false,
+    "description": "SWAP nur anzeigen, wenn genutzt (> 0%)"
+  },
+  "swap-low": {
+    "type": "spinbutton",
+    "default": 30,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "description": "Schwelle LOW (%)"
+  },
+  "swap-med": {
+    "type": "spinbutton",
+    "default": 60,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "description": "Schwelle MED (%)"
+  },
+  "swap-high": {
+    "type": "spinbutton",
+    "default": 80,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "description": "Schwelle HIGH (%)"
+  },
+  "swap-enable-colors": {
+    "type": "switch",
+    "default": true,
+    "description": "Farbwechsel für SWAP aktivieren"
+  },
+  "swap-color-low": {
+    "type": "colorchooser",
+    "default": "#ffffff",
+    "description": "Farbe LOW"
+  },
+  "swap-color-med": {
+    "type": "colorchooser",
+    "default": "#ffff00",
+    "description": "Farbe MED"
+  },
+  "swap-color-high": {
+    "type": "colorchooser",
+    "default": "#FFA500",
+    "description": "Farbe HIGH"
+  },
+  "swap-color-critical": {
+    "type": "colorchooser",
+    "default": "#FF4500",
+    "description": "Farbe CRITICAL"
+  },
+
+  "layout-variant": {
+    "type": "spinbutton",
+    "default": 1,
+    "min": 1,
+    "max": 6,
+    "step": 1,
+    "description": "Layout-Variante (1–6)",
+    "tooltip": "Positionswechsel:\n1: CPU | RAM | SWAP\n2: CPU | SWAP | RAM\n3: RAM | CPU | SWAP\n4: RAM | SWAP | CPU\n5: SWAP | CPU | RAM\n6: SWAP | RAM | CPU"
+  },
+  "enable-separator": {
+    "type": "switch",
+    "default": true,
+    "description": "Trennzeichen anzeigen"
+  },
+  "separator-text": {
+    "type": "entry",
+    "default": "|",
+    "description": "Trennzeichen zwischen CPU, RAM und SWAP",
+    "tooltip": "Vorschläge:\n|  Standard\n/  Slash\n·  Punkt\n•  Bullet\n<leer> Kein Trennzeichen\n\n*Trennzeichen-Voreinstellungen können auch im Applet-Popup (Linksklick auf das Applet) gesetzt werden.",
+    "dependency": "enable-separator"
+  },
+  "separator-color": {
+    "type": "colorchooser",
+    "default": "#ffffff",
+    "description": "Farbe für Trennzeichen",
+    "tooltip": "Unabhängige Farbwahl für das Trennzeichen",
+    "dependency": "enable-separator"
+  },
+  "update-interval": {
+    "type": "spinbutton",
+    "default": 1000,
+    "min": 200,
+    "max": 5000,
+    "step": 100,
+    "units": "ms",
+    "description": "Aktualisierungsintervall",
+    "tooltip": "Wie oft die Werte aktualisiert werden sollen"
+  }
+}
