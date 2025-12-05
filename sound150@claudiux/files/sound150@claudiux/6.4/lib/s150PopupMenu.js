@@ -636,8 +636,8 @@ class Player extends PopupMenu.PopupMenuSection {
                         //~ log("ZettaLite data!!!", true);
                         let json_title = "" + json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Title"];
                         let json_artist = "" + json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Artist1"];
-                        log("json_title: "+json_title, true);
-                        log("json_artist: "+json_artist, true);
+                        //~ log("json_title: "+json_title, true);
+                        //~ log("json_artist: "+json_artist, true);
                         if (json_title) {
                             //~ this._title = capitalize_each_word(json_title);
                             this._title = json_title.capitalize();
