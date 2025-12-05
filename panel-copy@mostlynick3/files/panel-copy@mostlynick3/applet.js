@@ -125,10 +125,53 @@ MyApplet.prototype = {
         this.menu.toggle();
     },
     
+    _isMultipleInstanceApplet: function(uuid) {
+        try {
+            const AppletManager = imports.ui.appletManager;
+            
+            if (!AppletManager.appletMeta || !AppletManager.appletMeta[uuid]) {
+                return false;
+            }
+            
+            let appletPath = AppletManager.appletMeta[uuid].path;
+            let metadataFile = Gio.File.new_for_path(appletPath + '/metadata.json');
+            
+            if (!metadataFile.query_exists(null)) {
+                return false;
+            }
+            
+            let [success, contents] = metadataFile.load_contents(null);
+            if (!success) {
+                return false;
+            }
+            
+            let metadataStr = contents.toString();
+            let metadata = JSON.parse(metadataStr);
+            
+            if (!metadata.hasOwnProperty('max-instances')) {
+                return false;
+            }
+            
+            let maxInstances = metadata['max-instances'];
+            
+            if (typeof maxInstances === 'string') {
+                maxInstances = parseInt(maxInstances);
+            }
+            
+            return (maxInstances !== 1);
+            
+        } catch (e) {
+            global.log("Panel Copy: Error checking applet metadata for " + uuid + ": " + e.toString());
+            return false;
+        }
+    },
+    
     _copyPanel: function(sourcePanelId, targetMonitor, targetPosition) {
         this.menu.close();
         
         try {
+            this._cleanOrphanedApplets();
+            
             let panelSettings = new Gio.Settings({ schema_id: 'org.cinnamon' });
             let appletSettings = new Gio.Settings({ schema_id: 'org.cinnamon' });
             
@@ -166,23 +209,26 @@ MyApplet.prototype = {
             }
             
             let newApplets = [];
+            let skippedCount = 0;
+            
             for (let i = 0; i < sourceApplets.length; i++) {
                 let applet = sourceApplets[i];
                 let appletParts = applet.split(':');
                 let zone = appletParts[1];
                 let order = appletParts[2];
+                
                 let rest = appletParts.slice(3).join(':');
+                let lastColonIndex = rest.lastIndexOf(':');
+                let fullUuid = rest.substring(0, lastColonIndex);
                 
-                let atIndex = rest.lastIndexOf('@');
-                let uuid = rest.substring(0, atIndex);
-                let domainAndId = rest.substring(atIndex + 1);
-                
-                let colonIndex = domainAndId.lastIndexOf(':');
-                let domain = domainAndId.substring(0, colonIndex);
+                if (!this._isMultipleInstanceApplet(fullUuid)) {
+                    skippedCount++;
+                    continue;
+                }
                 
                 let newId = this._getNextAppletId(applets.concat(newApplets));
                 
-                let newApplet = 'panel' + newPanelId + ':' + zone + ':' + order + ':' + uuid + '@' + domain + ':' + newId;
+                let newApplet = 'panel' + newPanelId + ':' + zone + ':' + order + ':' + fullUuid + ':' + newId;
                 newApplets.push(newApplet);
             }
             
@@ -193,7 +239,11 @@ MyApplet.prototype = {
             panels.push(newPanelStr);
             panelSettings.set_strv('panels-enabled', panels);
             
-            Main.notify("Panel Copy Tool", "Panel copied.");
+            let message = "Panel copied.";
+            if (skippedCount > 0) {
+                message += " (" + skippedCount + " single-instance applet" + (skippedCount > 1 ? "s" : "") + " skipped)";
+            }
+            Main.notify("Panel Copy Tool", message);
             
         } catch (e) {
             Main.notify("Panel Copy Tool", "Error: " + e.toString());
