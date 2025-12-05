@@ -97,3 +97,11 @@ msgid ""
 msgstr ""
 "Обычно заканчивается на -e, чтобы выполнить указанную команду ssh, проверьте "
 "руководство по использованию выбранного терминала."
+
+#. settings-schema.json->showConnectionNotification->description
+msgid "Show notification when launching SSH connection"
+msgstr "Показывать уведомление при запуске SSH-соединения"
+
+#. settings-schema.json->showConnectionNotification->tooltip
+msgid "Display a notification message when SSH terminal is launched"
+msgstr "Отображать уведомление при запуске SSH-терминала"
