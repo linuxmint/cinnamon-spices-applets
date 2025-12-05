@@ -1,3 +1,7 @@
+### v13.7.5~20251204
+  * Improves execution speed.
+  * Fixes [#8029](https://github.com/linuxmint/cinnamon-spices-applets/issues/8029)
+
 ### v13.7.4~20251201
   * Avoids deleting the cover art after modifying the volume or the workspace.
   * Fixes [#8020](https://github.com/linuxmint/cinnamon-spices-applets/issues/8020)
