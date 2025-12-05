@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-11-30 00:16-0500\n"
-"PO-Revision-Date: 2025-12-03 11:24-0300\n"
+"PO-Revision-Date: 2025-12-03 19:15-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -874,7 +874,7 @@ msgstr "Qwant"
 
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Custom"
-msgstr ""
+msgstr "Personalizado"
 
 #. 5.8->settings-schema.json->web-search-option->tooltip
 #. 4.0->settings-schema.json->web-search-option->tooltip
