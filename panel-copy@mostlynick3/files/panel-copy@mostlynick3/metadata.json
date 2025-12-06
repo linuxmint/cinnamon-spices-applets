@@ -1,0 +1,8 @@
+{
+    "uuid": "panel-copy@mostlynick3",
+    "name": "Panel Copy Tool",
+    "description": "Copy panels to new locations and monitors",
+    "version": "1.0",
+	"author": "mostlynick3",
+    "max-instances": -1
+}
