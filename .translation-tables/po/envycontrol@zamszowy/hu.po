@@ -1,0 +1,230 @@
+# ENVYCONTROL GUI
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: envycontrol@zamszowy 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-30 22:00+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#. applet.js:40
+msgid "missing dependencies"
+msgstr "hiányzó függőségek"
+
+#. applet.js:70
+#, javascript-format
+msgid "Switch to %s"
+msgstr "Váltás erre: %s"
+
+#. applet.js:72
+#, javascript-format
+msgid "Switched to %s (pending reboot)"
+msgstr "Átváltva erre: %s (újraindítás függőben)"
+
+#. applet.js:74
+#, javascript-format
+msgid "Switch back to %s"
+msgstr "Válts vissza erre: %s"
+
+#. applet.js:100
+#, javascript-format
+msgid "Changing mode to %s"
+msgstr "Módváltás erre: %s"
+
+#. applet.js:102
+#, javascript-format
+msgid "Switching to %s mode in progress..."
+msgstr "Váltás %s módba folyamatban..."
+
+#. applet.js:106
+#, javascript-format
+msgid "Switched to %s mode"
+msgstr "%s módba váltott"
+
+#. applet.js:135
+msgid "Configuring..."
+msgstr "Konfigurálás..."
+
+#. applet.js:146
+msgid "Hybrid settings"
+msgstr "Hibrid beállítások"
+
+#. applet.js:149
+msgid "  Create cache"
+msgstr " Gyorsítótár létrehozása"
+
+#. applet.js:151
+msgid "successfully created cache"
+msgstr "sikeresen létrehozva a gyorsítótárat"
+
+#. applet.js:155
+msgid "  Delete cache"
+msgstr " Gyorsítótár törlése"
+
+#. applet.js:157
+msgid "successfully deleted cache"
+msgstr "sikeresen törölve a gyorsítótár"
+
+#. applet.js:161
+msgid "  Show cache"
+msgstr " Gyorsítótár megjelenítése"
+
+#. applet.js:169
+msgid "Show last switch log"
+msgstr "Utolsó kapcsolási napló megjelenítése"
+
+#. applet.js:179
+#, javascript-format
+msgid "Current mode: %s"
+msgstr "Jelenlegi mód: %s"
+
+#. applet.js:179
+#, javascript-format
+msgid "(pending switch to %s)"
+msgstr "(függőben lévő váltás erre: %s)"
+
+#. metadata.json->name
+msgid "EnvyControl GUI"
+msgstr "EnvyControl GUI"
+
+#. metadata.json->description
+msgid "Switches between between GPU modes on Nvidia Optimus systems."
+msgstr "Vált a GPU módok között Nvidia Optimus rendszereken."
+
+#. settings-schema.json->section1->description
+msgid "Nvidia Settings"
+msgstr "Nvidia beállítások"
+
+#. settings-schema.json->enable-coolbits->description
+msgid "Enable coolbits"
+msgstr "Coolbits engedélyezése"
+
+#. settings-schema.json->enable-coolbits->tooltip
+msgid "Allows overclocking (not recommended)"
+msgstr "Lehetővé teszi a túlhajtást (nem ajánlott)"
+
+#. settings-schema.json->coolbits->description
+msgid "Coolbits"
+msgstr "Coolbits"
+
+#. settings-schema.json->enable-forcecompositionpipeline->description
+msgid "Enable ForceCompositionPipeline"
+msgstr "ForceCompositionPipeline engedélyezése"
+
+#. settings-schema.json->enable-forcecompositionpipeline->tooltip
+msgid "Enable if facing screen tearing"
+msgstr "Engedélyezze, ha képernyőszakadással szembesül"
+
+#. settings-schema.json->override-dm->description
+msgid "Manually specify your Display Manager"
+msgstr "A Kijelzőkezelő manuális megadása"
+
+#. settings-schema.json->dm->description
+msgid "Display manager"
+msgstr "Kijelzőkezelő"
+
+#. settings-schema.json->dm->options
+msgid "gdm"
+msgstr "gdm"
+
+#. settings-schema.json->dm->options
+msgid "gdm3"
+msgstr "gdm3"
+
+#. settings-schema.json->dm->options
+msgid "sddm"
+msgstr "sddm"
+
+#. settings-schema.json->dm->options
+msgid "lightdm"
+msgstr "lightdm"
+
+#. settings-schema.json->use-nvidia-current->description
+msgid "Use nvidia-current instead of nvidia for kernel modules"
+msgstr ""
+"Kernel modulokhoz az nvidia-current parancsot használja az nvidia helyett."
+
+#. settings-schema.json->use-nvidia-current->tooltip
+msgid ""
+"If nvidia kernel module is named nvidia-current on Debian, use this flag to "
+"make EnvyControl use the correct module name"
+msgstr ""
+"Ha az nvidia kernel modul neve nvidia-current Debianon, akkor ezzel a "
+"flaggel beállítható, hogy az EnvyControl a helyes modulnevet használja."
+
+#. settings-schema.json->section2->description
+msgid "Hybrid Settings"
+msgstr "Hibrid Beállítások"
+
+#. settings-schema.json->enable-rtd3->description
+msgid "Setup PCI-Express Runtime D3 (RTD3) Power Management"
+msgstr "PCI-Express Runtime D3 (RTD3) energiagazdálkodás beállítása"
+
+#. settings-schema.json->enable-rtd3->tooltip
+msgid "RTD3 allows the dGPU to be dynamically turned off when not in use"
+msgstr ""
+"Az RTD3 lehetővé teszi a dGPU dinamikus kikapcsolását, ha nincs "
+"használatban."
+
+#. settings-schema.json->rtd3->description
+msgid "RTD3"
+msgstr "RTD3"
+
+#. settings-schema.json->rtd3->options
+msgid "0"
+msgstr "0"
+
+#. settings-schema.json->rtd3->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->rtd3->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->rtd3->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->rtd3->tooltip
+msgid ""
+"0 - disabled\n"
+"1 - coarse-grained\n"
+"2 - fine-grained\n"
+"3 - fine-grained for Ampere and later"
+msgstr ""
+"0 – letiltva\n"
+"1 – durvaszemcsés\n"
+"2 – finomszemcsés\n"
+"3 – finomszemcsés Ampere és újabb verziók esetén"
+
+#. settings-schema.json->section3->description
+msgid "Theme"
+msgstr "Téma"
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr "Ikon stílus"
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr "sötét"
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr "világos"
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr "szimbolikus"

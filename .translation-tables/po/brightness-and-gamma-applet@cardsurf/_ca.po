@@ -1,0 +1,43 @@
+# BRIGHTNESS AND GAMMA APPLET
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# cardsurf, 2017
+#
+msgid ""
+msgstr ""
+
+#. 6.4/applet.js:760
+msgid "Toggle On / Off"
+msgstr ""
+
+#. 6.4->settings-schema.json->toggle_on_off_shortcut->description
+msgid "Hotkey to Toggle On/Off this applet"
+msgstr ""
+
+#. 6.4->settings-schema.json->way_to_set_off->options
+msgid "No change"
+msgstr ""
+
+#. 6.4->settings-schema.json->way_to_set_off->options
+msgid "All values set to 100%"
+msgstr ""
+
+#. 6.4->settings-schema.json->way_to_set_off->description
+msgid "Way to set this applet off"
+msgstr ""
+
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Only sun"
+msgstr ""
+
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Screen with sun"
+msgstr ""
+
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Symbolic"
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid "Hotkey"
+msgstr ""

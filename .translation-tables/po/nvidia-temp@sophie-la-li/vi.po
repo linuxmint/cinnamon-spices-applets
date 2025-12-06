@@ -1,0 +1,75 @@
+# NVIDIA GPU TEMPERATURE INDICATOR
+# This file is put in the public domain.
+# sophie-la-li, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidia-temp@sophie-la-li 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-13 18:46+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:18
+msgid "GPU Temperature"
+msgstr "Nhiệt độ GPU"
+
+#. applet.js:34
+msgid "Nvidia GPU Temperature Indicator: Error"
+msgstr "Chỉ báo Nhiệt độ GPU Nvidia: Lỗi"
+
+#. applet.js:34
+msgid "It seems that nvidia-smi is not installed."
+msgstr "Có vẻ như nvidia-smi chưa được cài đặt."
+
+#. metadata.json->name
+msgid "Nvidia GPU Temperature Indicator"
+msgstr "Chỉ báo Nhiệt độ GPU Nvidia"
+
+#. metadata.json->description
+msgid "Shows Nvidia GPU Temperature"
+msgstr "Hiển thị nhiệt độ GPU Nvidia"
+
+#. settings-schema.json->interval->units
+msgid "ms"
+msgstr "ms"
+
+#. settings-schema.json->interval->description
+msgid "Update interval"
+msgstr "Khoảng thời gian cập nhật"
+
+#. settings-schema.json->interval->tooltip
+msgid "How often to update the temperature value."
+msgstr "Tần suất cập nhật giá trị nhiệt độ."
+
+#. settings-schema.json->use-fahrenheit->description
+msgid "Show temperature in Fahrenheit"
+msgstr "Hiển thị nhiệt độ bằng Fahrenheit"
+
+#. settings-schema.json->use-fahrenheit->tooltip
+msgid "Whether or not show the temperature in Fahrenheit instead of Celsius."
+msgstr "Hiển thị nhiệt độ bằng Fahrenheit thay vì Celsius."
+
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr "Hiển thị đơn vị"
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Whether or not show the unit after the temperature value."
+msgstr "Hiển thị đơn vị sau giá trị nhiệt độ hay không."
+
+#. settings-schema.json->show-unit-letter->description
+msgid "Show unit letter"
+msgstr "Hiển thị ký tự đơn vị"
+
+#. settings-schema.json->show-unit-letter->tooltip
+msgid "Whether or not show the unit letter (C or F)."
+msgstr "Hiển thị ký tự đơn vị (C hoặc F) hay không."

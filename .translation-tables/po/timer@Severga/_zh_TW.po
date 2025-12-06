@@ -1,0 +1,86 @@
+# TIMER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Severga, 2023
+#
+msgid ""
+msgstr ""
+
+#. applet.js:45 applet.js:214 applet.js:241 applet.js:268 applet.js:329
+#. applet.js:459 applet.js:531
+msgid "Timer: inactive"
+msgstr ""
+
+#. applet.js:92
+msgid "Turn off computer on timer"
+msgstr ""
+
+#. settings-schema.json->openSubmenu->options
+#. applet.js:97
+msgid "Quick setup"
+msgstr ""
+
+#. settings-schema.json->openSubmenu->options
+#. applet.js:128
+msgid "Precise setup"
+msgstr ""
+
+#. applet.js:263
+msgid "Set period"
+msgstr ""
+
+#. applet.js:284
+msgid "Add preset"
+msgstr ""
+
+#. settings-schema.json->openSubmenu->options
+#. settings-schema.json->preset->description
+#. settings-schema.json->preset->tooltip
+#. applet.js:293
+msgid "Presets"
+msgstr ""
+
+#. applet.js:492 applet.js:514
+msgid "In:  "
+msgstr ""
+
+#. applet.js:498 applet.js:522
+msgid "At:  "
+msgstr ""
+
+#. applet.js:526
+msgid "Timer: "
+msgstr ""
+
+#. metadata.json->name
+#. applet.js:555
+msgid "Timer"
+msgstr ""
+
+#. applet.js:555
+msgid "Time's up!"
+msgstr ""
+
+#. metadata.json->description
+msgid "A timer applet"
+msgstr ""
+
+#. settings-schema.json->soundOn->description
+#. settings-schema.json->soundOn->tooltip
+msgid "Play sound on timer"
+msgstr ""
+
+#. settings-schema.json->soundPath->description
+#. settings-schema.json->soundPath->tooltip
+msgid "Soundclip file path"
+msgstr ""
+
+#. settings-schema.json->showNotifications->description
+#. settings-schema.json->showNotifications->tooltip
+msgid "Show system notification on timer"
+msgstr ""
+
+#. settings-schema.json->openSubmenu->description
+#. settings-schema.json->openSubmenu->tooltip
+msgid "Submenu to open initially"
+msgstr ""

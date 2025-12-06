@@ -1,0 +1,77 @@
+# MULTI-CORE SYSTEM MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# ccadeptic23, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-05 10:06+0200\n"
+"PO-Revision-Date: 2025-10-06 08:09+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "00-20"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_activity_20_40->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "20-40"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_activity_40_60->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "40-60"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_activity_60_80->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "60-80"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_activity_80_100->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "80-100"
+msgstr ""
+
+#. 6.4/applet.js:44
+msgid "Unrecoverable:"
+msgstr ""
+
+#. 6.4/applet.js:45
+msgid "Recoverable:"
+msgstr ""
+
+#. 6.4/applet.js:422 6.4/applet.js:427
+msgid "Configure..."
+msgstr ""
+
+#. 6.4/applet.js:571 6.4/applet.js:614 6.4/applet.js:628
+msgid "root"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_colorCache->description
+#. 6.4/applet.js:1211
+msgid "Cache"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionTooltip->title
+msgid "Tooltip"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_activity_0_20->description
+msgid "0-20"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_colorBuffers->description
+msgid "Buffers"
+msgstr ""

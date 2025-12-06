@@ -1,0 +1,35 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: applet.js:90
+msgid "Date and Time Settings"
+msgstr ""
+
+#. settings-schema.json->use-custom-format->description
+msgid "Use a custom date format"
+msgstr ""
+
+#. settings-schema.json->use-custom-format->tooltip
+msgid ""
+"Check this to define a custom format for the date in the calendar applet."
+msgstr ""
+
+#. settings-schema.json->custom-format->description
+msgid "Date format:"
+msgstr ""
+
+#. settings-schema.json->custom-format->tooltip
+msgid "Set your custom format here."
+msgstr ""
+
+#. settings-schema.json->format-button->description
+msgid "Show information on date format syntax"
+msgstr ""
+
+#. settings-schema.json->format-button->tooltip
+msgid "Click this button to know more about the syntax for date formats."
+msgstr ""
