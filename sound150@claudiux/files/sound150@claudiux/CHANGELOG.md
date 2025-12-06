@@ -1,3 +1,6 @@
+### v13.7.7~20251206
+  * Bug fix: avoids errors about stream.
+
 ### v13.7.6~20251205
   * Bug fix: artist and title when the player does not provide them.
 

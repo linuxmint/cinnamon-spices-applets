@@ -1649,7 +1649,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (source === "output") {
                 // if we have an active player, but are changing the volume, show the output icon and after three seconds change back to the player icon
                 this.set_applet_icon_symbolic_name(this._outputIcon);
-                if (this.stream && !this.stream.is_muted) {
+                if (this._output && !this._output.is_muted) {
                     if (this._iconTimeoutId != null) source_remove(this._iconTimeoutId);
                     this._iconTimeoutId = timeout_add_seconds(OUTPUT_ICON_SHOW_TIME_SECONDS, () => {
                         this.setIcon();
