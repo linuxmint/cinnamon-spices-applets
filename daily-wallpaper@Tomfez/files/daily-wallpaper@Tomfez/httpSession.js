@@ -46,7 +46,7 @@ HttpSession.prototype = {
             });
         } else { //version 3
             _httpSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, (_httpSession, message) => {
-                if (request.get_status() === 200) {
+                if (request.get_status() === Soup.Status.OK) {
                     const bytes = _httpSession.send_and_read_finish(message);
                     callback(ByteArray.toString(bytes.get_data()));
                 } else {
@@ -102,7 +102,7 @@ HttpSession.prototype = {
             });
         } else { //version 3
             _httpSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, (_httpSession, message) => {
-                if (request.get_status() === 200) {
+                if (request.get_status() === Soup.Status.OK) {
                     const bytes = _httpSession.send_and_read_finish(message);
 
                     if (bytes && bytes.get_size() > 0) {

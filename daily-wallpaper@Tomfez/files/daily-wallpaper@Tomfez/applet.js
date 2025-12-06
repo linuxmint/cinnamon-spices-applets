@@ -75,13 +75,14 @@ DailyWallpaperApplet.prototype = {
         this.menuManager.addMenu(this.menu);
 
         this.initMenu();
+        this.setWallpaperDirectory();
 
         // Begin refresh loop
         this._refresh();
     },
 
     _bindSettings: function (metadata, instance_id) {
-        this._settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        this._settings = new Settings.AppletSettings(this, UUID, instance_id);
         this._settings.bindProperty(null, "wallpaperDir", "wallpaperDir", this.setWallpaperDirectory, null);
         this._settings.bindProperty(null, "saveWallpaper", "saveWallpaper", () => this._saveWallpaperToImageFolder, null);
         this._settings.bindProperty(null, "wallpaperNamePreferences", "wallpaperNamePreferences", null, null);
@@ -297,6 +298,7 @@ DailyWallpaperApplet.prototype = {
 
     setWallpaperDirectory: function () {
         this.wallpaperDir = Utils.formatFolderName(this.wallpaperDir);
+        Utils.log("Wallpaper directory: " + this.wallpaperDir);
     },
 
     _saveWallpaperToImageFolder: function () {

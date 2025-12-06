@@ -53,20 +53,26 @@ class Utils {
     }
 
     /**
-     * formatFolderName
-     * @param {string} wallpaperDir - Location of wallpaper
-     * @returns {string} Returns the wallpaper directory formated
-     */
+        * formatFolderName
+        * @param {string} wallpaperDir - Location of wallpaper
+        * @returns {string} Returns the wallpaper directory formated
+        */
     static formatFolderName(wallpaperDir) {
+        // Removes '%' and return a valid path with accents
+        wallpaperDir = decodeURIComponent(wallpaperDir).trim();
+
         if (wallpaperDir.startsWith("file://")) {
             wallpaperDir = wallpaperDir.slice("file://".length);
-        } else if (wallpaperDir.startsWith("~")) {
-            const homeDir = GLib.getenv("HOME");
-            wallpaperDir = wallpaperDir.replace("~", homeDir);
         }
 
-        // Removes '%' and return a valid path with accents
-        wallpaperDir = decodeURIComponent(wallpaperDir);
+        const homeDir = GLib.getenv("HOME");
+        if (wallpaperDir.startsWith("~")) {
+            wallpaperDir = wallpaperDir.replace("~", homeDir);
+        } else if (wallpaperDir.includes("~")) {
+            const tildeIdx = wallpaperDir.indexOf("~");
+            wallpaperDir = homeDir + wallpaperDir.substring(tildeIdx + 1);
+        }
+
         this.log("new wall dir: " + wallpaperDir);
 
         return wallpaperDir;
