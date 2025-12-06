@@ -33,6 +33,7 @@ function _(str) {
 const KEYS = {
   CUSTOM_COMMAND: 'customCommand',
   SHOW_CONNECTION_NOTIFICATION: 'showConnectionNotification',
+  OPEN_MENU_KEY: 'openMenuKey',
 };
 const CUSTOM_ICON_KEY = "themeIcon";
 const SYMBOLIC_ICON_KEY = "symbolicIcon";
@@ -92,6 +93,10 @@ MyApplet.prototype = {
     this.settings.connect("changed::" + SYMBOLIC_ICON_KEY, () => {
       this.setAppletIcon();
     });
+    this.settings.connect("changed::" + KEYS.OPEN_MENU_KEY, () => {
+      this._updateKeybinding();
+    });
+    this._updateKeybinding();
   },
 
   setAppletIcon: function() {
@@ -109,6 +114,12 @@ MyApplet.prototype = {
       this.sendNotification(_("SSH Launcher"), _("No suitable icon found, falling back to custom icon"));
     }
     this.set_applet_icon_path(AppletDir + "/icon.png");
+  },
+
+  _updateKeybinding: function() {
+    Main.keybindingManager.addHotKey("sshlauncher-open-menu-" + this.instance_id, this._openMenuKey, () => {
+      this.menu.toggle();
+    });
   },
 
   addRefreshButton: function() {
@@ -292,6 +303,10 @@ MyApplet.prototype = {
     if (!arr) return false;
     if (!item) return false;
     return (arr.indexOf(item) != -1);
+  },
+
+  on_applet_removed_from_panel: function() {
+    Main.keybindingManager.removeHotKey("sshlauncher-open-menu-" + this.instance_id);
   }
 };
 
