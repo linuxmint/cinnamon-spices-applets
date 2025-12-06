@@ -234,3 +234,25 @@ msgstr ""
 #. settings-schema.json->juristic->options
 msgid "Hanafi"
 msgstr ""
+
+#. settings-schema.json->reminder->description
+msgid "Reminder Settings"
+msgstr ""
+
+
+#. settings-schema.json->extra_reminder->description
+msgid "Extra reminder before prayer time"
+msgstr ""
+
+
+#. settings-schema.json->extra_reminder->options
+msgid "5 minutes"
+msgstr ""
+
+#. settings-schema.json->extra_reminder->options
+msgid "10 minutes"
+msgstr ""
+
+#. settings-schema.json->extra_reminder->options
+msgid "15 minutes"
+msgstr ""
