@@ -115,7 +115,7 @@ FeedApplet.prototype = {
                 vscrollbar_policy: St.PolicyType.AUTOMATIC,
                 hscrollbar_policy: St.PolicyType.NEVER
             });
-            scrollView.add_actor(menuSection.actor, { expand: true });
+            scrollView.add_actor(menuSection.actor);
             
             this.menu.box.add_child(scrollView);
             this.menuSection = menuSection;
@@ -426,14 +426,20 @@ FeedApplet.prototype = {
 
         // Check if a menu is already open
         if(this.open_menu != null){
-            // if matches requested feed and is not empty then exit, otherwise close the feed
-            if(feed_to_show != null && this.open_menu.feed_id == feed_to_show.feed_id && this.open_menu.unread_count > 0){
-                return;
+            // If the requested feed is the one already open
+            if(feed_to_show != null && this.open_menu.feed_id == feed_to_show.feed_id){
+                if(!auto_next){
+                    // User-triggered toggle: collapse the currently open feed
+                    this.open_menu.close_menu();
+                    this.open_menu = null;
+                    return;
+                }
+                // For auto-next flows, do not collapse here; proceed to auto handling below
+            } else {
+                // Different feed requested: close the currently open one first
+                this.open_menu.close_menu();
+                this.open_menu = null;
             }
-
-            // Close the last menu since we will be opening a new menu.
-            this.open_menu.close_menu();
-            this.open_menu = null;
         }
 
         if(auto_next && feed_to_show != null && feed_to_show.unread_count == 0){
