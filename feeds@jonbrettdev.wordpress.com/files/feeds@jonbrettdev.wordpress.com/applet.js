@@ -434,7 +434,12 @@ FeedApplet.prototype = {
                     this.open_menu = null;
                     return;
                 }
-                // For auto-next flows, do not collapse here; proceed to auto handling below
+                // Auto-next flow: if the current feed just became empty, collapse it
+                if(auto_next && feed_to_show.unread_count == 0){
+                    this.open_menu.close_menu();
+                    this.open_menu = null;
+                    // continue to auto-next selection below
+                }
             } else {
                 // Different feed requested: close the currently open one first
                 this.open_menu.close_menu();
