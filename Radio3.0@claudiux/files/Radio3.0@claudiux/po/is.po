@@ -1,0 +1,3422 @@
+# RADIO3.0
+# This file is put in the public domain.
+# claudiux, 2022
+#
+# SPDX-FileCopyrightText: 2024, 2025 Sveinn í Felli <sv1@fellsnet.is>
+msgid ""
+msgstr ""
+"Project-Id-Version: Radio3.0@claudiux 2.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-11 12:31+0200\n"
+"PO-Revision-Date: 2025-10-11 12:37+0200\n"
+"Last-Translator: claudiux\n"
+"Language-Team: Icelandic\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:286
+msgid "unassigned"
+msgstr "ekki úthlutað"
+
+#. applet.js:287
+msgid "Display Album Art at full size"
+msgstr "Birta umslagsmyndir í fullri stærð"
+
+#. applet.js:389
+msgid "This is your own list of Categories and Radio Stations."
+msgstr "Þetta er þinn eigin listi yfir flokka og útvarpsstöðvar."
+
+#. applet.js:390
+msgid "You can add more using the [+] button."
+msgstr "Þú getur bætt við fleiri með því að ýta á [+] hnappinn."
+
+#. applet.js:391
+msgid "For a category, fill in only its name; leave the other fields empty."
+msgstr ""
+"Fyrir flokk skaltu einungis setja inn heiti hans; skildu aðra reiti eftir "
+"auða."
+
+#. applet.js:392
+msgid "For a radio station, enter only its name and its streaming URL."
+msgstr ""
+"Fyrir útvarpsstöð skaltu setja aðeins in nafn hennar og slóð streymisins."
+
+#. applet.js:393
+msgid ""
+"You can order the rows by dragging and dropping or by using the buttons and "
+"tools below the list."
+msgstr ""
+"Þú getur raðað röðunum með því að draga og sleppa eða með hnöppunum hér "
+"fyrir neðan listann."
+
+#. applet.js:394
+msgid ""
+"The buttons on the right below the list allow you to navigate page by page "
+"or category by category."
+msgstr ""
+"Hnapparnir hægra megin neðan við listann gera þér kleift að flakka síðu "
+"fyrir síðu eða flokk fyrir flokk."
+
+#. applet.js:395
+msgid ""
+"To search for one of your stations, click on the list and start writing its "
+"name."
+msgstr ""
+"Til að leita að einhverri stöðvanna þinna, skaltu smella á listann og byrja "
+"að skrifa nafn hennar."
+
+#. applet.js:396
+msgid ""
+"To easily add stations to your list, use the following 2 tabs: Search and "
+"Import."
+msgstr ""
+"Til að bæta stöðvum á listann þinn á einfaldan máta, skaltu nota "
+"eftirfarandi 2 flipa: 'Leita' og 'Flytja inn'."
+
+#. applet.js:397
+msgid "Check its 'Menu' box to display a station or category in the menu."
+msgstr ""
+"Merktu í valmyndarreit færslu til að birta stöð eða flokk í valmyndinni."
+
+#. applet.js:398
+msgid ""
+"Check its '♪/➟' box to listen to the station or move it to another category "
+"using the tools below the list."
+msgstr ""
+"Merktu við '♪/➟' reit stöðvar til að hlusta á hana eða færðu hana yfir í "
+"annan flokk með verkfærunum fyrir neðan listann."
+
+#. applet.js:400
+msgid "You can have your list of stations checked by internet databases."
+msgstr "Þú getur látið gagnagrunna á internetinu fara yfir stöðvarnar þínar."
+
+#. applet.js:401
+msgid ""
+"Any station recognized by one of these databases will receive a Universal "
+"Unique Identifier (UUID) provided by this database."
+msgstr ""
+"Allar stöðvar sem einhver þessara gagnagrunna þekkir, mun fá einstakt "
+"auðkenni (Universal Unique Identifier - UUID) frá viðkomandi gagnagrunni."
+
+#. applet.js:402
+msgid ""
+"So, if a streaming URL was changed, a next check would update it and you can "
+"continue to listen to the affected station."
+msgstr ""
+"Þar af leiðandi, ef slóð streymis breytist fyrir einhverja stöðina, myndi "
+"næsta athugun uppfæra hana og þú getur áfram hlustað á viðkomandi "
+"útvarpsstöð."
+
+#. applet.js:404
+msgid ""
+"Here you can search for other stations in a free radio database accessible "
+"via the Internet."
+msgstr ""
+"Hér geturðu leitað að öðrum stöðvum í frjálsum netgagnagrunni yfir "
+"útvarpsstöðvar."
+
+#. applet.js:405
+msgid ""
+"Fill in at least a few fields of the form below then click on the "
+"'Search ...' button."
+msgstr ""
+"Fylltu inn helst nokkra reiti hér fyrir neðan og smelltu svo á 'Leita ...' "
+"hnappinn."
+
+#. applet.js:406
+msgid ""
+"Each time this button is clicked, a new results page is displayed in the "
+"second part of this page, where you can test certain stations and include "
+"them in the menu."
+msgstr ""
+"Í hvert skipti sem smellt er á hnappinn, birtist ný síða með "
+"leitarniðurstöðum á neðri hluta flipans, þar sem þú getur prófað tilteknar "
+"útvarpsstöðvar og fært þær svo inn í valmyndina þína."
+
+#. applet.js:407
+msgid ""
+"A station already in your menu will only appear in search results if its "
+"streaming URL has changed."
+msgstr ""
+"Stöðvar sem þegar eru í valmyndinni þinni munu aðeins birtast í "
+"leitarniðurstöðum ef slóð streymisins þeirra hefur breyst."
+
+#. applet.js:408
+msgid ""
+"When no new page appears, it means that all results matching your search "
+"criteria have been displayed."
+msgstr ""
+"Þegar engin ný síða birtist, táknar það að allar samsvarandi "
+"leitarniðurstöður hafa komið fram."
+
+#. applet.js:410
+msgid ""
+"You can import a file containing the name and streaming URL of at least one "
+"radio station."
+msgstr ""
+"Þú getur flutt inn skrá sem inniheldur nafn og streymisslóð a.m.k. einnar "
+"útvarpsstöðvar."
+
+#. applet.js:411
+msgid ""
+"These radio stations are displayed in the list below. You can test them by "
+"checking their ♪ box."
+msgstr ""
+"Þessar útvarpsstöðvar birtast á listanum hér fyrir neðan. Þú getur prófað "
+"þær með því að merkja í ♪ reit þeirra."
+
+#. applet.js:412
+msgid "Then manage this list with the buttons at the bottom of this tab."
+msgstr ""
+"Síðan geturðu sýslað með þennan lista með hnöppunum neðst á þessum flipa."
+
+#. applet.js:414
+msgid ""
+"In the Shoutcast directory, click the download button to the left of the "
+"station name."
+msgstr ""
+"Í Shoutcast-möppunni skaltu smella á niðurhalshnappinn vinstra megin við "
+"heiti útvarpsstöðvar."
+
+#. applet.js:415
+msgid ""
+"Select the open format (.XSPF) and save the file giving it the same name as "
+"the station."
+msgstr ""
+"Veldu opna sniðið (.XSPF) og vistaðu skrána með sama heiti og útvarpsstöðin "
+"ber."
+
+#. applet.js:416
+msgid "This file can then be imported here."
+msgstr "Þessa skrá er þá hægt að flytja inn hér."
+
+#. applet.js:418
+#, javascript-format
+msgid "%s bytes = %s GB = %s GiB"
+msgstr "%s bæti = %s GB = %s GiB"
+
+#. applet.js:420
+msgid "Sun."
+msgstr "Sun."
+
+#. applet.js:420
+msgid "Mon."
+msgstr "Mán."
+
+#. applet.js:420
+msgid "Tue."
+msgstr "Þri."
+
+#. applet.js:420
+msgid "Wed."
+msgstr "Mið."
+
+#. applet.js:420
+msgid "Thu."
+msgstr "Fim."
+
+#. applet.js:420
+msgid "Fri."
+msgstr "Fös."
+
+#. applet.js:420
+msgid "Sat."
+msgstr "Lau."
+
+#. settings-schema.json->category-to-move->options
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->sched-radio->options
+#. settings-schema.json->search-country->options
+#. settings-schema.json->search-codec->options
+#. settings-schema.json->search-order->options
+#. settings-schema.json->alarm-clock-working-days-radio->options
+#. settings-schema.json->alarm-clock-workoff-days-radio->options
+#. applet.js:586 applet.js:604 applet.js:5511 applet.js:5527
+msgid "(Undefined)"
+msgstr "(Óskilgreint)"
+
+#. settings-schema.json->category-to-move->options
+#. applet.js:587 applet.js:5528
+msgid "(Blacklist)"
+msgstr "(bannlisti)"
+
+#. applet.js:2263
+msgid "Start"
+msgstr "Byrja"
+
+#. applet.js:2271 applet.js:3014
+msgid "Stop"
+msgstr "Stöðva"
+
+#. applet.js:2545
+msgid "Volume: %s%"
+msgstr "Hljóðstyrkur: %s%"
+
+#. applet.js:2550
+msgid "Middle-Click: Stop Recording"
+msgstr "Miðjusmellur: Stöðva upptöku"
+
+#. applet.js:2552
+msgid "Middle-click: ON/OFF"
+msgstr "Miðjusmellur: KVEIKT/SLÖKKT"
+
+#. applet.js:2554
+msgid "Click: Select another station"
+msgstr "Smella: velja aðra stöð"
+
+#. applet.js:2555
+msgid "Scroll wheel: volume change"
+msgstr "Skrunhjól: breyting hljóðstyrks"
+
+#. applet.js:2558
+msgid "Click to select a station"
+msgstr "Smelltu til að velja stöð"
+
+#. applet.js:2564
+msgid "Wake Up"
+msgstr "Vekja"
+
+#. applet.js:2642 applet.js:3032 applet.js:5023
+msgid "Configure..."
+msgstr "Grunnstilla..."
+
+#. applet.js:2646 applet.js:3024
+msgid "Search for new stations..."
+msgstr "Leita að nýjum útvarpsstöðvum..."
+
+#. applet.js:2652
+msgid "Load a sample station list"
+msgstr "Hlaða inn sýnishorni stöðvalista"
+
+#. applet.js:2699 applet.js:3036 applet.js:5093
+msgid "Sound Settings"
+msgstr "Hljóðstillingar"
+
+#. applet.js:2770
+msgid "Watch on YT"
+msgstr "Skoða á YouTube"
+
+#. applet.js:2777
+msgid "Try to download it from YT (unsafe)"
+msgstr "Prófa að sækja þetta frá YouTube (óöruggt)"
+
+#. applet.js:2797
+msgid "Recently Played Stations:"
+msgstr "Nýlega spilaðar útvarpsstöðvar:"
+
+#. applet.js:2848
+msgid "Visit the home page of this station"
+msgstr "Fara á heimasíðu útvarpsstöðvarinnar"
+
+#. applet.js:2897
+msgid "Categories"
+msgstr "Flokkar"
+
+#. applet.js:2900
+msgid "Radio Stations"
+msgstr "Útvarpsstöðvar"
+
+#. applet.js:2911
+msgid "All Categories"
+msgstr "Allir flokkar"
+
+#. applet.js:2956
+msgid "My Radio Stations"
+msgstr "Útvarpsstöðvarnar mínar"
+
+#. applet.js:3156
+msgid "Downloading..."
+msgstr "Sæki..."
+
+#. applet.js:3158
+msgid "Stop downloading"
+msgstr "Hætta að sækja"
+
+#. applet.js:3264
+msgid "Download complete"
+msgstr "Niðurhali lokið"
+
+#. settings-schema.json->button-open-rec-folder->description
+#. settings-schema.json->recordings-open-folder->description
+#. applet.js:3266 applet.js:3275 applet.js:4743 applet.js:4752 applet.js:4761
+#. applet.js:5056
+msgid "Open the recordings folder"
+msgstr "Opna upptökumöppuna"
+
+#. applet.js:3273 applet.js:4740 applet.js:4750 applet.js:4759
+msgid "An error seems to have occurred during recording!"
+msgstr "Villa virðist hafa komið upp við upptöku!"
+
+#. applet.js:3274 applet.js:4742 applet.js:4751 applet.js:4760
+msgid "Please check this record."
+msgstr "Athugaðu þessa upptöku."
+
+#. applet.js:3381 applet.js:3415
+msgid "Record from now"
+msgstr "Taka upp héðan"
+
+#. applet.js:3399 applet.js:5413
+msgid "Stop Current Recording"
+msgstr "Stöðva fyrirliggjandi upptöku"
+
+#. applet.js:3548
+#, javascript-format
+msgid "Playing %s%s"
+msgstr "Spila %s%s"
+
+#. applet.js:3602
+msgid "Radio OFF"
+msgstr "Útvarp AF"
+
+#. applet.js:3730
+msgid "Unable to record anything!"
+msgstr "Mistókst að taka neitt upp!"
+
+#. applet.js:3730 applet.js:5073 applet.js:5232
+msgid "Insufficient space"
+msgstr "Ekki nóg diskpláss"
+
+#. applet.js:3730
+msgid "The limit you set has been reached."
+msgstr "Takmörkum sem þú settir hefur verið náð."
+
+#. applet.js:4131
+msgid "Please Log Out then Log In"
+msgstr "Skráðu þig út og svo inn aftur"
+
+#. applet.js:4131
+msgid "to finalize yt-dlp update"
+msgstr "til að ljúka uppfærslu á yt-dlp"
+
+#. applet.js:4266
+msgid "Nothing to save."
+msgstr "Ekkert til að vista."
+
+#. applet.js:4279
+msgid "List of saved radio stations"
+msgstr "Listi yfir vistaðar útvarpsstöðvar"
+
+#. applet.js:4297
+msgid "This will replace all current radio stations."
+msgstr "Þetta mun skipta út öllum fyrirliggjandi útvarpsstöðvum."
+
+#. applet.js:4298
+msgid "Are you sure you want to continue?"
+msgstr "Ertu viss um að þú viljir halda áfram?"
+
+#. applet.js:4362
+msgid "Update in progress"
+msgstr "Uppfærsla í gangi"
+
+#. applet.js:4362
+msgid "It may take a while ... Please wait."
+msgstr "Þetta getur tekið dálítinn tíma, sýndu smá þolinmæði."
+
+#. applet.js:4454
+msgid "Update completed successfully"
+msgstr "Tókst að ljúka uppfærslunni"
+
+#. applet.js:4625 applet.js:4681
+msgid "ERROR: Invalid YT video URL!"
+msgstr "Villa: Ógild slóð á YouTube-myndskeið!"
+
+#. applet.js:4650
+msgid "Unable to extract a single soundtrack"
+msgstr "Mistókst að ná í stakt hljóðspor"
+
+#. applet.js:4650
+msgid "Maybe it's a playlist?"
+msgstr "Er þetta kannski spilunarlisti?"
+
+#. applet.js:4683
+msgid "Close"
+msgstr "Loka"
+
+#. applet.js:4841 applet.js:5300 applet.js:5318
+msgid "Cancel"
+msgstr "Hætta við"
+
+#. applet.js:4842
+msgid "Radio3.0 applet"
+msgstr "Radio3.0 smáforritið"
+
+#. applet.js:4845
+msgid "Enable the OSD150 extension"
+msgstr "Virkjaðu OSD150 forritsaukann"
+
+#. applet.js:4846
+msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
+msgstr ""
+"Til að fá fram láréttan OSD-stjórntexta, þarftu að virkja OSD150 "
+"forritsaukann."
+
+#. applet.js:4863
+msgid "Download the OSD150 extension"
+msgstr "Sækja OSD150 forritsaukann"
+
+#. applet.js:4864
+msgid ""
+"To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
+"Click on the Download button then search for OSD150 and select the ⬇ button."
+msgstr ""
+"Til að fá fram láréttan OSD-stjórntexta, þarftu að sækja OSD150 "
+"forritsaukann.\n"
+"Smelltu á niðurhalshnappinn og leitaðu síðan að OSD150 og veldu svo ⬇ "
+"hnappinn."
+
+#. applet.js:4995
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Fjarlægja '%s'"
+
+#. applet.js:5003
+msgid "About..."
+msgstr "Um hugbúnaðinn..."
+
+#. applet.js:5010
+msgid "Manual..."
+msgstr "Handvirkt..."
+
+#. applet.js:5017
+msgid "Reload this applet"
+msgstr "Endurhlaða þessu smáforriti"
+
+#. applet.js:5034
+msgid "Schedule a background record..."
+msgstr "Áætla upptöku í bakgrunni..."
+
+#. applet.js:5041
+msgid "Configure the Alarm Clock..."
+msgstr "Grunnstilla vekjaraklukkuna..."
+
+#. applet.js:5048
+msgid "Extract soundtrack from YouTube video..."
+msgstr "Ná í hljóðspor úr YouTube-myndskeiði..."
+
+#. applet.js:5070 applet.js:5229
+msgid "(auto)"
+msgstr "(sjálfvirkt)"
+
+#. applet.js:5070 applet.js:5229
+msgid "(manual)"
+msgstr "(handvirkt)"
+
+#. applet.js:5073 applet.js:5232 applet.js:5460
+msgid "Stop Recording"
+msgstr "Stöðva upptöku"
+
+#. applet.js:5073 applet.js:5232
+msgid "Start Recording"
+msgstr "Hefja upptöku"
+
+#. applet.js:5089
+msgid "Cancel downloads from YT"
+msgstr "Hætta við niðurhal frá YT"
+
+#. applet.js:5098
+msgid "Pulse Effects"
+msgstr "Púls-áhrif"
+
+#. applet.js:5103
+msgid "Easy Effects"
+msgstr "Slökunar-áhrif"
+
+#. applet.js:5108
+msgid "Radio ON at startup"
+msgstr "Kveikt á útvarpi í ræsingu"
+
+#. applet.js:5117
+msgid "Display Station Logo"
+msgstr "Birta táknmerki stöðvar"
+
+#. applet.js:5127
+msgid "Album Art desklet settings"
+msgstr "Stillingar skjágræju fyrir umslagsmyndir"
+
+#. settings-schema.json->alarm-clock-wake-me-up->description
+#. applet.js:5132
+msgid "Wake me up!"
+msgstr "Vekja mig!"
+
+#. applet.js:5141
+msgid "Show Album Art on desktop"
+msgstr "Sýna umslagsmyndir á skjáborði"
+
+#. settings-schema.json->dont-check-dependencies->description
+#. applet.js:5150
+msgid "Do not check about dependencies"
+msgstr "Ekki skoða kerfiskröfur"
+
+#. settings-schema.json->show-volume-level-near-icon->description
+#. applet.js:5160
+msgid "Display volume level near icon"
+msgstr "Birta hljóðstyrk nálægt táknmynd"
+
+#. applet.js:5297
+msgid "You need the 'Album Art 3.0' desklet"
+msgstr "Þú þarft 'Album Art 3.0' skjágræjuna"
+
+#. applet.js:5298
+msgid ""
+"You can install it by clicking on the first button and then searching for "
+"Album."
+msgstr ""
+"Þú getur virkjað það með því að smella á fyrsta hnappinn og leita síðan að "
+"albúmi."
+
+#. applet.js:5299 applet.js:5317
+msgid "Desklets"
+msgstr "Skjágræjur (desklets)"
+
+#. applet.js:5315
+msgid "You need to activate the 'Album Art 3.0' desklet"
+msgstr "Þú þarft að virkja 'Album Art 3.0' skjágræjuna"
+
+#. applet.js:5316
+msgid ""
+"You can activate it by clicking on the first button, then searching for "
+"Album and adding it with button [+]."
+msgstr ""
+"Þú getur virkjað það með því að smella á fyrsta hnappinn, leita síðan að "
+"albúmi og bæta því við með [+] hnappnum."
+
+#. applet.js:5461
+msgid "Close without stopping recording"
+msgstr "Loka án þess að stöðva upptöku"
+
+#. applet.js:5676
+#, javascript-format
+msgid "Starting recording from %s:%s to %s:%s"
+msgstr "Hefja upptöku frá %s:%s til %s:%s"
+
+#. applet.js:5688
+msgid "Recording completed"
+msgstr "Upptöku lokið"
+
+#. applet.js:5813
+msgid "This will import a new file containing radio stations."
+msgstr "Þetta mun flytja inn nýja skrá sem inniheldur útvarpsstöðvar."
+
+#. applet.js:5814
+msgid "Do you want to continue?"
+msgstr "Viltu halda áfram?"
+
+#. applet.js:5891
+msgid "No new radio in your list."
+msgstr "Engin ný útvarpsstöð á listanum þínum."
+
+#. applet.js:5893
+msgid "One more radio in your list."
+msgstr "Ein ný útvarpsstöð á listanum þínum."
+
+#. applet.js:5895
+#, javascript-format
+msgid "%s more radios in your list."
+msgstr "%s nýjar útvarpsstöðvar á listanum þínum."
+
+#. applet.js:6154
+msgid "There are no new stations to add to the Radio3.0 applet menu"
+msgstr ""
+"Það eru engar nýjar útvarpsstöðvar til að bæta á valmynd Radio3.0 "
+"smáforritsins"
+
+#. applet.js:6156
+msgid "A new station has been added to the Radio3.0 applet menu"
+msgstr "Nýrri útvarpsstöð hefur verið bætt á valmynd Radio3.0 smáforritsins"
+
+#. applet.js:6158
+#, javascript-format
+msgid "%s new stations have been added to the Radio3.0 applet menu"
+msgstr ""
+"%s nýjum útvarpsstöðvum hefur verið bætt á valmynd Radio3.0 smáforritsins"
+
+#. applet.js:6383
+#, javascript-format
+msgid "%s kbps"
+msgstr "%s kb/sek"
+
+#. lib/checkDependencies.js:399
+#, javascript-format
+msgid "The applet %s is fully functional."
+msgstr "Smáforritið %s virkar að fullu."
+
+#. lib/checkDependencies.js:400
+msgid "All dependencies are installed"
+msgstr "Öll kerfisákvæði eru uppsett"
+
+#. lib/checkDependencies.js:430
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Það lítur út fyrir að þig vanti ýmis forrit sem nauðsynleg eru til að allir "
+"eiginleikar þessa smáforrits virki."
+
+#. lib/checkDependencies.js:431
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr ""
+"Þú skalt keyra eftirfarandi skipanir í skipanalínuglugganum sem opnaðist:"
+
+#. lib/checkDependencies.js:432
+msgid "Some dependencies are not installed!"
+msgstr "Sum kerfisákvæði eru ekki uppsett!"
+
+#. lib/checkTranslations.js:109
+msgid "To finalize the translation installation, please restart Cinnamon"
+msgstr "Til að ljúka uppsetningu þýðingarinnar skaltu endurræsa Cinnamon"
+
+#. lib/util.js:245
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr "Keyrsla '%s' mistókst:"
+
+#. settings-schema.json->scale-update->description
+#. settings-schema.json->recordings-extract-update->description
+#. lib/volumeslider.js:188
+msgid "%"
+msgstr "%"
+
+#. xs/xlet-settings.py:214
+msgid "Previous instance"
+msgstr "Fyrra tilvik"
+
+#. xs/xlet-settings.py:218
+msgid "Next instance"
+msgstr "Næsta tilvik"
+
+#. xs/xlet-settings.py:227
+msgid "More options"
+msgstr "Fleiri valkostir"
+
+#. xs/xlet-settings.py:233
+msgid "Import from a file"
+msgstr "Flytja inn úr skrá"
+
+#. xs/xlet-settings.py:238
+msgid "Export to a file"
+msgstr "Flytja út í skrá"
+
+#. xs/xlet-settings.py:243
+msgid "Reset to defaults"
+msgstr "Frumstilla á sjálfgefin gildi"
+
+#. xs/xlet-settings.py:252
+#, python-format
+msgid "Reload %s"
+msgstr "Endurlesa %s"
+
+#. xs/xlet-settings.py:441
+#, python-format
+msgid "Settings for %s"
+msgstr "Stillingar fyrir %s"
+
+#. xs/xlet-settings.py:533
+msgid "Select or enter file to export to"
+msgstr "Veldu eða settu inn heiti á skrá til að flytja út í"
+
+#. xs/xlet-settings.py:541 xs/xlet-settings.py:562
+msgid "JSON files"
+msgstr "JSON-skrár"
+
+#. xs/xlet-settings.py:555
+msgid "Select a JSON file to import"
+msgstr "Veldu JSON-skrá til að flytja inn"
+
+#. xs/bin/R3TreeListWidgets.py:278 xs/bin/R3TreeListWidgets.py:501
+msgid "Add new entry"
+msgstr "Bæta við nýrri færslu"
+
+#. xs/bin/R3TreeListWidgets.py:282
+msgid "Remove selected entry"
+msgstr "Fjarlægja valda færslu"
+
+#. xs/bin/R3TreeListWidgets.py:287
+msgid "Edit selected entry"
+msgstr "Breyta valinni færslu"
+
+#. xs/bin/R3TreeListWidgets.py:292
+msgid "Unselect the selected row"
+msgstr "Afvelja valda röð"
+
+#. xs/bin/R3TreeListWidgets.py:297
+msgid "Move selected entry up"
+msgstr "Flytja valda færslu upp"
+
+#. xs/bin/R3TreeListWidgets.py:302
+msgid "Move selected entry down"
+msgstr "Flytja valda færslu niður"
+
+#. xs/bin/R3TreeListWidgets.py:325
+msgid "Go to bottom"
+msgstr "Fara neðst"
+
+#. xs/bin/R3TreeListWidgets.py:331
+msgid "Go to next page"
+msgstr "Fara á næstu síðu"
+
+#. xs/bin/R3TreeListWidgets.py:337
+msgid "Go to previous page"
+msgstr "Fara á fyrri síðu"
+
+#. xs/bin/R3TreeListWidgets.py:342
+msgid "Go to top"
+msgstr "Fara efst"
+
+#. xs/bin/R3TreeListWidgets.py:356
+msgid "Go to next category"
+msgstr "Fara í næsta flokk"
+
+#. xs/bin/R3TreeListWidgets.py:366
+msgid "Go to previous category"
+msgstr "Fara í fyrri flokk"
+
+#. xs/bin/R3TreeListWidgets.py:503
+msgid "Edit entry"
+msgstr "Breyta færslu"
+
+#. metadata.json->description
+msgid "The Ultimate Internet Radio Receiver & Recorder for Cinnamon"
+msgstr "Einstakt netútvarpsforrit og upptökutæki fyrir Cinnamon"
+
+#. metadata.json->name
+msgid "Radio3.0"
+msgstr "Radio3.0"
+
+#. settings-schema.json->pageStations->title
+#. settings-schema.json->import-list->description
+#. settings-schema.json->search-list->description
+msgid "Radios"
+msgstr "Útvarpsstöðvar"
+
+#. settings-schema.json->pageImport->title
+msgid "Import"
+msgstr "Flytja inn"
+
+#. settings-schema.json->pageSearch->title
+msgid "Search"
+msgstr "Leita"
+
+#. settings-schema.json->pageMenu->title
+#. settings-schema.json->sectionMenuMenu->title
+#. settings-schema.json->radios->columns->title
+msgid "Menu"
+msgstr "Valmynd"
+
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr "Hegðun"
+
+#. settings-schema.json->pageRecording->title
+msgid "Recording"
+msgstr "Upptaka"
+
+#. settings-schema.json->pageYT->title
+msgid "YT"
+msgstr "YT"
+
+#. settings-schema.json->pageScheduling->title
+msgid "Scheduling"
+msgstr "Verkröðun"
+
+#. settings-schema.json->pageNetwork->title
+msgid "Network"
+msgstr "Netkerfi"
+
+#. settings-schema.json->pageAlarmClock->title
+msgid "Alarm Clock"
+msgstr "Vekjaraklukka"
+
+#. settings-schema.json->sectionStationsList->title
+msgid "Stations and Categories on the menu"
+msgstr "Útvarpsstöðvar og flokkar á valmyndinni"
+
+#. settings-schema.json->sectionStationsMove->title
+msgid "Moving selected stations"
+msgstr "Færi valdar stöðvar"
+
+#. settings-schema.json->sectionStationsSaveRestore->title
+msgid "Save and Restore"
+msgstr "Vista og endurheimta"
+
+#. settings-schema.json->sectionStationsUpdate->title
+msgid "Update this station list"
+msgstr "Uppfæra þennan stöðvalista"
+
+#. settings-schema.json->sectionBlacklist->title
+msgid "Unwanted (blacklist)"
+msgstr "Óvelkomið (bannlisti)"
+
+#. settings-schema.json->sectionImportRadiopp->title
+msgid "Only for Radio++ users"
+msgstr "Aðeins fyrir notendur Radio++"
+
+#. settings-schema.json->sectionImportShoutcast->title
+msgid "Get files on Shoutcast to import here"
+msgstr "Náðu í skrár á Shoutcast til að flytja hér inn"
+
+#. settings-schema.json->sectionImportFile->title
+msgid "File to import"
+msgstr "Skrá til að flytja inn"
+
+#. settings-schema.json->sectionImportList->title
+msgid "File contents"
+msgstr "Efni skráar"
+
+#. settings-schema.json->sectionSearchOptions->title
+msgid "Search for Radio Stations"
+msgstr "Leita að útvarpsstöðvum"
+
+#. settings-schema.json->sectionSearchResults->title
+msgid "Search results"
+msgstr "Leitarniðurstöður"
+
+#. settings-schema.json->sectionBehaviorSettingsWindow->title
+msgid "Settings Window"
+msgstr "Stillingagluggi"
+
+#. settings-schema.json->sectionBehaviorStartUp->title
+msgid "Start-up"
+msgstr "Í ræsingu"
+
+#. settings-schema.json->sectionBehaviorVolumeStep->title
+msgid "Volume step"
+msgstr "Þrep hljóðstyrks"
+
+#. settings-schema.json->sectionBehaviorOSD->title
+msgid "OSD"
+msgstr "OSD-stjórntexti"
+
+#. settings-schema.json->sectionBehaviorTooltip->title
+msgid "Show Help"
+msgstr "Birta hjálp"
+
+#. settings-schema.json->sectionMenuPrivacy->title
+msgid "Privacy"
+msgstr "Friðhelgi"
+
+#. settings-schema.json->sectionMenuContextual->title
+msgid "Contextual Menu"
+msgstr "Samhengisvalmynd"
+
+#. settings-schema.json->sectionMenuShortcuts->title
+msgid "Keyboard shortcuts"
+msgstr "Flýtilyklar"
+
+#. settings-schema.json->sectionBehaviorNotifications->title
+msgid "Notifications"
+msgstr "Tilkynningar"
+
+#. settings-schema.json->sectionBehaviorBitrate->title
+msgid "Codec and Bitrate"
+msgstr "Kóðunarlykill og bitahraði"
+
+#. settings-schema.json->sectionBehaviorSymbolicIconColor->title
+#. settings-schema.json->sectionRecordingIcon->title
+#. settings-schema.json->sectionYTIcon->title
+msgid "Icon"
+msgstr "Táknmynd"
+
+#. settings-schema.json->sectionBehaviorHorizontalPanel->title
+msgid "Only on horizontal panels"
+msgstr "Bara á láréttum skjástikum"
+
+#. settings-schema.json->sectionNetworkQuality->title
+msgid "Quality"
+msgstr "Gæði"
+
+#. settings-schema.json->sectionNetworkMonitoring->title
+msgid "Monitoring"
+msgstr "Vöktun"
+
+#. settings-schema.json->sectionNetworkProxy->title
+msgid "Proxy"
+msgstr "Milliþjónn"
+
+#. settings-schema.json->sectionNetworkDatabase->title
+msgid "Database Info"
+msgstr "Upplýsingar um gagnagrunn"
+
+#. settings-schema.json->sectionExperimental->title
+msgid "EXPERIMENTAL"
+msgstr "Á TILRAUNASTIGI"
+
+#. settings-schema.json->sectionRecordingCache->title
+msgid "Cache"
+msgstr "Biðminni"
+
+#. settings-schema.json->sectionRecordingRecordings->title
+#. settings-schema.json->sectionYTFormat->title
+msgid "Recordings"
+msgstr "Upptökur"
+
+#. settings-schema.json->sectionRecordingLimits->title
+msgid "Preservation of hard disk space"
+msgstr "Spara laust pláss á hörðum diskum"
+
+#. settings-schema.json->sectionYTIgnore->title
+msgid "Ignore YT"
+msgstr "Hunsa YT"
+
+#. settings-schema.json->sectionYTExtract->title
+msgid "Extract soundtrack from YouTube video"
+msgstr "Ná í hljóðspor úr YouTube-myndskeiði"
+
+#. settings-schema.json->sectionRecordingScheduleARecording->title
+msgid "Schedule a background recording"
+msgstr "Áætlaðu upptöku í bakgrunni"
+
+#. settings-schema.json->sectionRecordingUnableToScheduleARecording->title
+msgid "Unable to schedule a background recording"
+msgstr "Tókst ekki að áætla upptöku í bakgrunni"
+
+#. settings-schema.json->sectionRecordingScheduledRecordings->title
+#. settings-schema.json->sched-recordings->description
+msgid "Scheduled recordings"
+msgstr "Áætlaðar upptökur"
+
+#. settings-schema.json->sectionWakeMeUp->title
+msgid "Options"
+msgstr "Valkostir"
+
+#. settings-schema.json->sectionWorkingDays->title
+msgid "Working Days"
+msgstr "Virkir dagar"
+
+#. settings-schema.json->sectionWorkOffDays->title
+msgid "Work-Off Days"
+msgstr "Frídagar"
+
+#. settings-schema.json->show-help-in-tabs->description
+msgid "Show help labels in each tab of this Settings window"
+msgstr "Birta hjálparmerki í hverjum flipa stillingagluggans"
+
+#. settings-schema.json->show-help-in-tabs->tooltip
+msgid ""
+"You can uncheck this option when you are familiar with all of these settings."
+msgstr ""
+"Þú getur tekið merkið úr þessum valkosti þegar þú hefur kynnt þér allar "
+"þessar stillingar."
+
+#. settings-schema.json->stations-help->description
+#. settings-schema.json->button-update-help->description
+#. settings-schema.json->import-shoutcast-help->description
+#. settings-schema.json->import-help->description
+#. settings-schema.json->search-help->description
+msgid "Help"
+msgstr "Hjálp"
+
+#. settings-schema.json->radios->description
+msgid "List of stations"
+msgstr "Listi yfir útvarpsstöðvar"
+
+#. settings-schema.json->radios->columns->title
+msgid "♥︎"
+msgstr "♥︎"
+
+#. settings-schema.json->radios->columns->title
+msgid "♪/➟"
+msgstr "♪/➟"
+
+#. settings-schema.json->radios->columns->title
+msgid "Station or Category"
+msgstr "Útvarpsstöð eða flokkur"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid ""
+"Bitrate\n"
+"(kbps)"
+msgstr ""
+"Bitahraði\n"
+"(kb/sek)"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+#. settings-schema.json->search-codec->description
+msgid "Codec"
+msgstr "Kóðalykill (codec)"
+
+#. settings-schema.json->radios->columns->title
+msgid "Streaming URL (empty for a category)"
+msgstr "Slóð streymis (autt fyrir flokk)"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Unique identifier"
+msgstr "Sértækt auðkenni"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Home page"
+msgstr "Heimasíða"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Tags"
+msgstr "Merki"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Favicon"
+msgstr "Veftákn"
+
+#. settings-schema.json->radios->columns->title
+msgid "Artist/Title swap"
+msgstr "Víxla Flytjandi / Lagaheiti"
+
+#. settings-schema.json->stations-list-play-button->description
+#. settings-schema.json->import-list-play-button->description
+#. settings-schema.json->search-list-play-button->description
+msgid "♪ Play the next station to test"
+msgstr "♪ Spila næstu stöð til að prófa"
+
+#. settings-schema.json->category-to-move->description
+msgid "Category to which to move the selected stations:"
+msgstr "Flokkur sem færa á í valdar stöðvar:"
+
+#. settings-schema.json->button-moving->description
+msgid "➟ Move selected stations to this category"
+msgstr "➟ Færa valdar stöðvar í þennan flokk"
+
+#. settings-schema.json->button_go_to_category->description
+msgid "Go to this category"
+msgstr "Fara í þennan flokk"
+
+#. settings-schema.json->button-show-all->description
+msgid "Show all stations and categories in the menu"
+msgstr "Birta allar útvarpsstöðvar og flokka á valmyndinni"
+
+#. settings-schema.json->button-hide-all->description
+msgid "Hide all stations and categories (so the menu becomes empty)"
+msgstr "Fela allar útvarpsstöðvar og flokka (þannig að valmyndin tæmist)"
+
+#. settings-schema.json->button-save->description
+msgid "Save this list of stations"
+msgstr "Vista þennan lista yfir útvarpsstöðvar"
+
+#. settings-schema.json->button-restore->description
+msgid "Restore a list of stations"
+msgstr "Endurheimta lista yfir útvarpsstöðvar"
+
+#. settings-schema.json->button_open_folder->description
+msgid "Open the folder containing these lists"
+msgstr "Opna möppuna sem inniheldur þessa lista"
+
+#. settings-schema.json->button-update->description
+msgid "Update my station list with the Radio Database data"
+msgstr "Uppfæra útvarpsstöðvalistann minn með gögnum frá Radio Database"
+
+#. settings-schema.json->blacklist->columns->title
+msgid "Blacklisted URL"
+msgstr "Útilokaðar vefslóðir"
+
+#. settings-schema.json->import-radiopp-button->description
+msgid "Import your stations from Radio++"
+msgstr "Flyttu stöðvarnar þínar inn úr Radio++"
+
+#. settings-schema.json->import-shoutcast-button->description
+msgid "Open the Shoutcast directory"
+msgstr "Opna Shoutcast-möppuna"
+
+#. settings-schema.json->import-file-button->description
+msgid "Import a .csv, .m3u, .pls, .xspf or .json file"
+msgstr "Flytja inn .csv, .m3u, .pls, .xspf eða .json-skrá"
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Select"
+msgstr "Velja"
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "♪"
+msgstr "♪"
+
+#. settings-schema.json->import-list->columns->title
+msgid "Title"
+msgstr "Titill"
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Streaming URL"
+msgstr "Slóð streymis"
+
+#. settings-schema.json->import-list-button->description
+#. settings-schema.json->search-list-button->description
+msgid "Import the selected stations into my own list"
+msgstr "Flytja valdar stöðvar inn í minn eigin lista"
+
+#. settings-schema.json->import-remove-from-list-button->description
+#. settings-schema.json->search-remove-from-list-button->description
+msgid "Remove selected items from this list"
+msgstr "Fjarlægja valin atriði af þessum lista"
+
+#. settings-schema.json->import-blacklist-button->description
+msgid "Blacklist selected items from this list"
+msgstr "Loka á valin atriði af þessum lista"
+
+#. settings-schema.json->import-select-all->description
+#. settings-schema.json->search-select-all->description
+msgid "Select all items"
+msgstr "Velja öll atriði"
+
+#. settings-schema.json->import-unselect-all->description
+#. settings-schema.json->search-unselect-all->description
+msgid "Unselect all items"
+msgstr "Afvelja öll atriði"
+
+#. settings-schema.json->search-list->columns->title
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Station"
+msgstr "Útvarpsstöð"
+
+#. settings-schema.json->search-list->columns->title
+msgid ""
+"Country\n"
+"Code"
+msgstr ""
+"Lands\n"
+"númer"
+
+#. settings-schema.json->search-list->columns->title
+#. settings-schema.json->search-country->description
+msgid "Country"
+msgstr "Land"
+
+#. settings-schema.json->search-list-page-label->description
+msgid "Page:"
+msgstr "Síða:"
+
+#. settings-schema.json->maximize-vertically->description
+msgid "Vertical maximization"
+msgstr "Lóðrétt hámörkun"
+
+#. settings-schema.json->maximize-vertically->tooltip
+msgid ""
+"When this option is checked, this Settings Window will be maximized "
+"vertically the next time it is opened."
+msgstr ""
+"Þegar merkt er við þennan valkost, mun þessi stillingagluggi verða "
+"hámarkaður lóðrétt næst þegar hann er opnaður."
+
+#. settings-schema.json->switch-on-last-station-at-start-up->description
+msgid "Turn on the radio when Cinnamon starts up"
+msgstr "Kveikja á úvarpinu þegar Cinnamon ræsist"
+
+#. settings-schema.json->switch-on-last-station-at-start-up->tooltip
+msgid ""
+"The selected radio will be the last you listened to, even if you stopped "
+"it.\n"
+"\n"
+"VPN users: By checking this, the radio broadcast could use your VPN link in "
+"the event that this one is active before the start of this applet."
+msgstr ""
+"Valda útvarpsstöðin verður sú sem þú hlustaðir síðast á, jafnvel þótt þú "
+"hafir stöðvað hana.\n"
+"\n"
+"VPN-notendur: Með því að merkja við þetta gæti útvarpsútsendingin verið að "
+"nota VPN-tenginguna þína í þeim tilfellum sem að stöðin er virk áður en "
+"smáforritið ræsist."
+
+#. settings-schema.json->volume-at-startup->description
+msgid "Volume level starting a new radio (%)"
+msgstr "Hljóðstyrkur þegar kveikt er á nýrri útvarpsstöð (%)"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-minimalBitrate->options
+msgid "0"
+msgstr "0"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-limit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "35"
+msgstr "35"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "40"
+msgstr "40"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "45"
+msgstr "45"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->yt-progress-interval->options
+#. settings-schema.json->search-limit->options
+msgid "50"
+msgstr "50"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "55"
+msgstr "55"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "60"
+msgstr "60"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "65"
+msgstr "65"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "70"
+msgstr "70"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "75"
+msgstr "75"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "80"
+msgstr "80"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "85"
+msgstr "85"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "90"
+msgstr "90"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "95"
+msgstr "95"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->yt-progress-interval->options
+#. settings-schema.json->search-limit->options
+msgid "100"
+msgstr "100"
+
+#. settings-schema.json->volume-at-startup->tooltip
+msgid ""
+"If set, then this will change the volume level starting a new radio, in "
+"percentage of the general volume level.\n"
+"Default is (Undefined): The volume level remains unchanged.\n"
+"\n"
+"Please note that you can change the volume level scrolling on this applet "
+"icon, or using the slider in the context menu."
+msgstr ""
+"Ef þetta er stillt verður hljóðstyrk breytt þegar ný útvarpsstöð er sett í "
+"gang, í prósentum af almennum hljóðstyrk.\n"
+"Sjálfgefið er (óskilgreint): Hljóðstyrkur helst óbreyttur.\n"
+"\n"
+"Athugaðu að þú getur breytt skruni hljóðstyrks ofan á táknmynd smáforritsins "
+"eða notað sleðann í samhengisvalmyndinni."
+
+#. settings-schema.json->volume-step->description
+msgid "Volume step scrolling on icon"
+msgstr "Þrep hljóðstyrks við skrun yfir táknmynd"
+
+#. settings-schema.json->volume-step->options
+msgid "±0%"
+msgstr "±0%"
+
+#. settings-schema.json->volume-step->options
+msgid "±1%"
+msgstr "±1%"
+
+#. settings-schema.json->volume-step->options
+msgid "±2%"
+msgstr "±2%"
+
+#. settings-schema.json->volume-step->options
+msgid "±3%"
+msgstr "±3%"
+
+#. settings-schema.json->volume-step->options
+msgid "±4%"
+msgstr "±4%"
+
+#. settings-schema.json->volume-step->options
+msgid "±5%"
+msgstr "±5%"
+
+#. settings-schema.json->volume-step->tooltip
+msgid ""
+"By how much increase or decrease the volume using the mouse scroll wheel on "
+"the icon."
+msgstr ""
+"Hve mikið eigi að auka eða draga úr hljóðstyrk þegar skrunhjól músar er "
+"notað yfir táknmyndinni.."
+
+#. settings-schema.json->volume-magnetic-on->description
+msgid "Magnetize all multiples of 25%"
+msgstr "Grípa í öll margfeldi af 25%"
+
+#. settings-schema.json->volume-show-osd->description
+msgid "Show OSD while changing volume"
+msgstr "Birta OSD-stjórntæki þegar hljóðstyrk er breytt"
+
+#. settings-schema.json->volume-show-osd->tooltip
+msgid "Should OSD (On-Screen Display) be displayed when changing volume?"
+msgstr ""
+"Ætti að birta OSD-stjórntæki (On-Screen Display) þegar hljóðstyrk er breytt?"
+
+#. settings-schema.json->volume-show-osd-starting-radio->description
+msgid "Show volume OSD when changing radio station"
+msgstr "Birta OSD-stjórntæki fyrir hljóðstyrk þegar skipt er um stöð"
+
+#. settings-schema.json->show-percent-char-in-osd->description
+msgid "Show '%' in OSD"
+msgstr "Birta '%' í OSD-stjórntexta"
+
+#. settings-schema.json->show-horizontal-osd->description
+msgid "Show horizontal OSD"
+msgstr "Birta láréttan OSD-stjórntexta"
+
+#. settings-schema.json->show-title-and-version->description
+msgid "Show the name and the version of this applet in the menu"
+msgstr "Birta heiti og útgáfu smáforritsins í valmyndinni"
+
+#. settings-schema.json->recent-number->description
+msgid "Number of Recently Played Stations in menu"
+msgstr "Fjöldi nýlega spilaðra útvarpsstöðva í valmynd"
+
+#. settings-schema.json->recent-number->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->recent-number->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->recent-number->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->recent-number->options
+msgid "4"
+msgstr "4"
+
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-limit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->recent-number->options
+msgid "6"
+msgstr "6"
+
+#. settings-schema.json->recent-number->options
+msgid "7"
+msgstr "7"
+
+#. settings-schema.json->recent-number->options
+msgid "8"
+msgstr "8"
+
+#. settings-schema.json->recent-number->options
+msgid "9"
+msgstr "9"
+
+#. settings-schema.json->recent-number->tooltip
+msgid "How many recently listened stations do you want to display in the menu?"
+msgstr "Hve margar nýlega hlustaðar útvarpsstöðvar á að birta í valmyndinni?"
+
+#. settings-schema.json->reset-recents->description
+msgid "Empty your Recently Played Stations list at startup"
+msgstr "Tæma listann þinn yfir nýlega spilaðar útvarpsstöðvar í ræsingu"
+
+#. settings-schema.json->button-reset-recents->description
+msgid "Empty your Recently Played Stations list now"
+msgstr "Tæma núna listann þinn yfir nýlega spilaðar útvarpsstöðvar"
+
+#. settings-schema.json->show-by-category->description
+msgid "Display the Station list beside the Category list"
+msgstr "Birta stöðvalistann við hlið flokkalistans"
+
+#. settings-schema.json->show-by-category->tooltip
+msgid ""
+"Checked: Hover (without clicking) over a Category to display its list of "
+"Stations; then select your station.\n"
+"Unchecked: Single list containing each category followed by its stations."
+msgstr ""
+"Merkt: Svif bendils (án þess að smella) yfir flokki mun birta lista þeirra "
+"útvarpsstöðva sem hann inniheldur; veldu síðan stöðina sem þú óskar.\n"
+"Ómerkt: Einfaldur listi með hverju flokki, fylgt með viðkomandi "
+"útvarpsstöðvum."
+
+#. settings-schema.json->show-system-items->description
+msgid "Show system items in the menu"
+msgstr "Birta kerfisatriði í valmyndinni"
+
+#. settings-schema.json->show-system-items->tooltip
+msgid ""
+"Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
+msgstr ""
+"Viltu láta birta færslurnar 'Grunnstilla...' og 'Hljóðstillingar' í "
+"valmyndinni?"
+
+#. settings-schema.json->show-reload->description
+msgid "Show the 'Reload this applet' item in the contextual menu"
+msgstr "Birta færsluna \"Endurhlaða þessu smáforriti\" í samhengisvalmyndinni"
+
+#. settings-schema.json->show-reload->tooltip
+msgid "For developers only"
+msgstr "Aðeins fyrir forritara"
+
+#. settings-schema.json->shortcut-volume-up->description
+msgid "Increase Volume"
+msgstr "Auka hljóðstyrk"
+
+#. settings-schema.json->shortcut-volume-down->description
+msgid "Decrease Volume"
+msgstr "Minnka hljóðstyrk"
+
+#. settings-schema.json->shortcut-volume-cut->description
+msgid "Mute"
+msgstr "Þagga niður"
+
+#. settings-schema.json->shortcut-radio-on-off->description
+msgid "Radio ON/OFF"
+msgstr "Útvarp AF/Á"
+
+#. settings-schema.json->shortcut-next-recent-radio->description
+msgid "Next station"
+msgstr "Næsta stöð"
+
+#. settings-schema.json->shortcut-next-recent-radio->tooltip
+msgid "Next station recently listened to"
+msgstr "Næsta stöð sem nýlega var hlustað á"
+
+#. settings-schema.json->shortcut-previous-recent-radio->description
+msgid "Previous station"
+msgstr "Fyrri stöð"
+
+#. settings-schema.json->shortcut-previous-recent-radio->tooltip
+msgid "Previous station recently listened to"
+msgstr "Fyrri stöð sem nýlega var hlustað á"
+
+#. settings-schema.json->show-help-in-tooltip->description
+msgid "Show help for mouse actions in the tooltip"
+msgstr "Birta hjálp fyrir músaraðgerðir í vísbendingu"
+
+#. settings-schema.json->show-help-in-tooltip->tooltip
+msgid "You can uncheck this option when you are familiar with all mouse roles."
+msgstr ""
+"Þú getur tekið merkið úr þessum valkosti þegar þú hefur kynnt þér allar "
+"aðgerðir með músinni."
+
+#. settings-schema.json->notif-station-change->description
+msgid "Change of radio"
+msgstr "Skipt um stöð"
+
+#. settings-schema.json->notif-song-change->description
+msgid "Change of song or program"
+msgstr "Skipt um lag eða þátt"
+
+#. settings-schema.json->notif-song-change->tooltip
+msgid ""
+"Please note that some radios do not notify you of a song or program change."
+msgstr ""
+"Athugaðu að sumar útvarpsstöðvar láta ekki vita þegar skipt er um lag eða "
+"þátt."
+
+#. settings-schema.json->notif-song-duration->units
+msgid "seconds"
+msgstr "sekúndur"
+
+#. settings-schema.json->notif-song-duration->description
+msgid "Duration of a song or program change notification"
+msgstr "Tímalengd tilkynningar þegar skipt er um lag eða þátt"
+
+#. settings-schema.json->notif-buttons-allowed->description
+msgid "Show in notifications the buttons to start and stop recordings"
+msgstr "Birta í tilkynningum hnappana til að hefja og stöðva upptökur"
+
+#. settings-schema.json->notif-buttons-allowed->tooltip
+msgid ""
+"Please note that this will have no effect if you do not wish to be notified "
+"of a song or program change."
+msgstr ""
+"Athugaðu að þetta hefur engin áhrif ef þú vilt ekki fá tilkynningar þegar "
+"skipt er um lag eða þátt."
+
+#. settings-schema.json->show-codec->description
+msgid "Show codec"
+msgstr "Birta kóðunarlykil"
+
+#. settings-schema.json->show-bitrate->description
+msgid "Show bit rate"
+msgstr "Birta bitahraða"
+
+#. settings-schema.json->show-bitrate->tooltip
+msgid ""
+"Unit: kbps (kilobit per second).\n"
+"The higher this bit rate, the better the sound quality of the stream."
+msgstr ""
+"Eining: kb/sek (kílóbitar á sekúndu).\n"
+"Hærri bitahraði þýðir betri hljómgæði streymis."
+
+#. settings-schema.json->color-on->description
+msgid "Color of the symbolic icon while the radio is on"
+msgstr "Litur táknrænnar táknmyndar þegar útvarpsstöð er í spilun"
+
+#. settings-schema.json->color-recording->description
+msgid "Color of the symbolic icon while recording"
+msgstr "Litur táknrænnar táknmyndar við upptöku"
+
+#. settings-schema.json->show-favicon->description
+msgid "Display the logo of the radio station listened to"
+msgstr "Birta táknmerki stöðvar sem verið er að hlusta á"
+
+#. settings-schema.json->show-favicon->tooltip
+msgid "Replace this applet icon with the radio station logo, if it exists."
+msgstr ""
+"Skipta tákni smáforritsins út fyrir táknmerki útvarpsstöðvarinnar, ef það er "
+"til staðar."
+
+#. settings-schema.json->network-quality->description
+msgid "Network Quality"
+msgstr "Gæði netkerfis"
+
+#. settings-schema.json->network-quality->options
+msgid "High"
+msgstr "Mikil"
+
+#. settings-schema.json->network-quality->options
+msgid "Low"
+msgstr "Lítil"
+
+#. settings-schema.json->network-quality->tooltip
+msgid ""
+"High Quality: The recordings you make while listening to the radio will "
+"double the bit rate usually required to just listen to the radio. Thus, the "
+"recordings will not be disturbed by extraneous sounds or by a change in the "
+"volume of the radio.\n"
+"\n"
+"Low Quality: These recordings come directly from the sound card, which "
+"relieves the network but risks polluting them with extraneous sounds (system "
+"sounds for example). The volume of the radio will be set to 100% in order to "
+"obtain the best possible quality."
+msgstr ""
+"Mikil gæði: Upptökurnar sem þú gerir á meðan þú hlustar á útvarpið munu "
+"verða á tvöföldum bitahraða miðað við það sem þarf við venjulega hlustun á "
+"útvarp. Þannig verða þessar upptökur ekki fyrir truflunum af kerfishljóðum "
+"eða við breytingar á hljóðstyrk.\n"
+"\n"
+"Lítil gæði: Þessar upptökur koma beint frá hljóðkortinu, sem léttir á "
+"netkerfinu en eykur hættu á að þær mengist af aukahljóðum (t.d "
+"kerfishljóðum). Hljóðstyrkur útvarpsins verður stilltur á 100% til að ná "
+"fram sem bestum mögulegum gæðum."
+
+#. settings-schema.json->image-resolution->description
+msgid "Quality of downloaded Album Art"
+msgstr "Gæði sóttra umslagsmynda"
+
+#. settings-schema.json->image-resolution->options
+msgid "Max Resolution"
+msgstr "Hámarksupplausn"
+
+#. settings-schema.json->image-resolution->options
+msgid "High Quality"
+msgstr "Hágæða"
+
+#. settings-schema.json->image-resolution->options
+msgid "Medium"
+msgstr "Miðlungs"
+
+#. settings-schema.json->image-resolution->options
+msgid "Standard"
+msgstr "Venjuleg"
+
+#. settings-schema.json->image-resolution->tooltip
+msgid ""
+"Default: High Quality. Choose a value corresponding to your Network Quality."
+msgstr "Sjálfgefið: Hágæða. Veldu gildi sem hentar afköstum netkerfisins þíns."
+
+#. settings-schema.json->network-monitoring->description
+msgid "Monitor the network"
+msgstr "Fylgjast með netkerfi"
+
+#. settings-schema.json->network-monitoring->tooltip
+msgid ""
+"Whether or not to restart the radio when the network becomes active again "
+"after an interruption.\n"
+"\n"
+"VPN users: By checking this, the radio broadcast may use your VPN link."
+msgstr ""
+"Hvort eigi að endurræsa útvarpið þegar netið verður aftur virkt eftir "
+"truflun.\n"
+"\n"
+"VPN-notendur: Með því að merkja við þetta gæti útvarpsútsendingin verið að "
+"nota VPN-tenginguna þína."
+
+#. settings-schema.json->http-proxy->description
+msgid "HTTP Proxy"
+msgstr "HTTP-milliþjónn"
+
+#. settings-schema.json->http-proxy->tooltip
+msgid ""
+"Format: http://[user:pass@]URL[:port]\n"
+"Default: empty.\n"
+"If empty, the environment variables http_proxy and ALL_PROXY will be used if "
+"present.\n"
+"If set, this proxy will not be used for https requests."
+msgstr ""
+"Snið: http://[notandi:lykilorð@]URL[:gátt]\n"
+"Sjálfgefið: autt.\n"
+"Ef þetta er autt, verða umhverfisbreyturnar http_proxy og ALL_PROXY notaðar "
+"ef þær eru til staðar.\n"
+"Ef þetta er stillt, verður þessi milliþjónn ekki notaður fyrir https-beiðnir."
+
+#. settings-schema.json->apply-http-proxy->description
+msgid "Apply HTTP Proxy"
+msgstr "Virkja HTTP-milliþjón"
+
+#. settings-schema.json->database-favorite->description
+msgid "Your favorite database:"
+msgstr "Eftirlætis-gagnagrunnurinn þinn:"
+
+#. settings-schema.json->database-favorite->options
+msgid "Random"
+msgstr "Slembið"
+
+#. settings-schema.json->database-url->description
+msgid "Database URL"
+msgstr "Slóð á gagnagrunn"
+
+#. settings-schema.json->cache-no-cache->description
+msgid "No cache"
+msgstr "Ekkert biðminni"
+
+#. settings-schema.json->cache-no-cache->tooltip
+msgid ""
+"Checking this option limits memory usage, but no longer allows the user to "
+"rewind the cache (using the sound150@claudiux applet)."
+msgstr ""
+"Sé merkt við þetta er minnisnotkun lágmörkuð, en notandinn getur þá ekki "
+"lengur spólað til baka í biðminninu (með hjálp sound150@claudiux "
+"smáforritsins)."
+
+#. settings-schema.json->cache-minutes->description
+msgid ""
+"Minutes to cache\n"
+"0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
+msgstr ""
+"Mínútur í biðminni\n"
+"0 þýðir engin takmörk (sjálfgefið). 1 klukkustund = 60 mínútur. 24 "
+"klukkustundir = 1440 mínútur."
+
+#. settings-schema.json->cache-on-disk->description
+msgid ""
+"Cache on disk\n"
+"(Write packet data to a temporary file, instead of keeping them in memory.)"
+msgstr ""
+"Biðminni á diski\n"
+"(skrifar pakkagögn í bráðabirgðaskrá, í stað þess að halda þeim í "
+"vinnsluminni.)"
+
+#. settings-schema.json->cache-stream-size->description
+msgid "Stream cache size"
+msgstr "Stærð biðminnis fyrir streymi"
+
+#. settings-schema.json->cache-stream-size->tooltip
+msgid ""
+"The amount of stream cache. Default: 10 MiB.\n"
+"Beware, setting this to a large value can reduce performance."
+msgstr ""
+"Magn biðminnis fyrir streymi. Sjálfgefið: 10 MiB.\n"
+"Aðvörun, sé þetta sett á hátt gildi getur það komið niður á afköstum."
+
+#. settings-schema.json->cache-stream-size->options
+msgid "No limit"
+msgstr "Engin takmörk"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "64 KiB"
+msgstr "64 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "128 KiB"
+msgstr "128 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "256 KiB"
+msgstr "256 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "512 KiB"
+msgstr "512 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "1 MiB"
+msgstr "1 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "2 Mib"
+msgstr "2 Mib"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "3 MiB"
+msgstr "3 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "4 MiB"
+msgstr "4 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "5 MiB"
+msgstr "5 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "10 MiB"
+msgstr "10 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "20 MiB"
+msgstr "20 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "30 MiB"
+msgstr "30 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "40 MiB"
+msgstr "40 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "50 MiB"
+msgstr "50 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "100 MiB"
+msgstr "100 MiB"
+
+#. settings-schema.json->recording-path->description
+msgid "Path to the folder that will contain your future recordings"
+msgstr "Slóð á möppuna sem mun geyma upptökurnar þínar"
+
+#. settings-schema.json->button-rec-path-to-default->description
+msgid "Set this path to default one"
+msgstr "Setja þessa slóð á sjálfgefið gildi"
+
+#. settings-schema.json->recording-format->description
+msgid "Recording format"
+msgstr "Snið upptöku"
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "FLAC"
+msgstr "FLAC"
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "MP3"
+msgstr "MP3"
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "OGG"
+msgstr "OGG"
+
+#. settings-schema.json->recording-format->options
+msgid "RAW"
+msgstr "RAW"
+
+#. settings-schema.json->recording-format->options
+msgid "WAV"
+msgstr "WAV"
+
+#. settings-schema.json->recording-format->tooltip
+#. settings-schema.json->recording-ends-auto->tooltip
+msgid ""
+"Please note that this choice will have no effect on any current recording, "
+"but on subsequent ones."
+msgstr ""
+"Athugaðu að þetta hefur engin áhrif á upptöku sem er þegar í gangi, heldur "
+"aðeins á það sem verður tekið upp héðan í frá."
+
+#. settings-schema.json->recording-ends-auto->description
+msgid "Way to stop recording"
+msgstr "Leiðir til að stöðva upptöku"
+
+#. settings-schema.json->recording-ends-auto->options
+msgid "automatically, when the current song ends"
+msgstr "sjálfvirkt, þegar lagið sem er í spilun endar"
+
+#. settings-schema.json->recording-ends-auto->options
+msgid "manually; thus, several recordings can follow one another"
+msgstr "handvirkt, þannig að margar upptökur geta verið í röð"
+
+#. settings-schema.json->limits-hd-space-left-label->description
+msgid "Space remaining on disk when opening this window:"
+msgstr "Diskapláss sem eftir var þegar þessi gluggi var opnaður:"
+
+#. settings-schema.json->limits-hd-size-prefixes->description
+msgid ""
+"Disk space unit as defined in Nemo's display preferences (File size prefixes)"
+msgstr ""
+"Eining fyrir diskapláss ens og hún er skilgreind í birtingarstillingum Nemo "
+"(forskeyti skráastærða)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GB (decimal)"
+msgstr "GB (tugakerfis)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GB (decimal long)"
+msgstr "GB (tugakerfis, langt snið)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GiB (binary)"
+msgstr "GiB (tvíundakerfis)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GiB (binary long)"
+msgstr "GB (tvíundakerfis, langt snið)"
+
+#. settings-schema.json->limits-hd-size-prefixes->tooltip
+msgid "Changing this also changes Nemo's file size prefixes."
+msgstr "Breyting á þessu breytir einnig forskeytum skráastærða í Nemo."
+
+#. settings-schema.json->limits-hd-value->units
+msgid "Units: As defined above"
+msgstr "Einingar: Eins og skilgreint hér fyrir ofan"
+
+#. settings-schema.json->limits-hd-value->description
+msgid "Space to be left free on the hard disk"
+msgstr "Pláss sem á að halda eftir lausu á diskinum"
+
+#. settings-schema.json->highlight-icon-while-background-
+#. recording->description
+msgid "Highlight this applet icon during background recording"
+msgstr "Áherslulita táknmynd smáforritsins á meðan upptöku í bakgrunni stendur"
+
+#. settings-schema.json->ignoreYT->description
+msgid "Ignore Youtube features"
+msgstr "Hunsa YT-eiginleika"
+
+#. settings-schema.json->ignoreYT->tooltip
+msgid ""
+"Ignoring Youtube features reduces CPU load. But loading album art becomes "
+"impossible."
+msgstr ""
+"Hunsun á YT-eiginleikum minnkar álag á örgjörva. En þá er ekki hægt að hlaða "
+"inn myndefni myndskeiða."
+
+#. settings-schema.json->yt-cookies-from->description
+msgid "Use cookies from"
+msgstr "Nota vefkökur frá"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "(None)"
+msgstr "(Ekkert)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Brave"
+msgstr "Brave"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chrome"
+msgstr "Chrome"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium"
+msgstr "Chromium"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (basictext)"
+msgstr "Chromium (basictext)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (gnomekeyring)"
+msgstr "Chromium (gnomekeyring)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (kwallet)"
+msgstr "Chromium (kwallet)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Firefox"
+msgstr "Firefox"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Opera"
+msgstr "Opera"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Vivaldi"
+msgstr "Vivaldi"
+
+#. settings-schema.json->yt-cookies-from->tooltip
+msgid ""
+"Cookies are used by YouTube to determine which videos you may watch. For "
+"Chromium, you can select the method (in parentheses) you chose to save "
+"cookies."
+msgstr ""
+"Vefkökur eru notaðar af YouTube til að ákvarða hvaða myndskeið þú gætir "
+"verið að horfa á. Í Chromium geturðu valið aðferðina (innan sviga) sem þú "
+"velur til að vista vefkökur."
+
+#. settings-schema.json->show-yt-progress->description
+msgid "Display, under the icon, the progress of downloads from YT."
+msgstr "Birta framvindu niðurhals frá YouTube undir táknmyndinni."
+
+#. settings-schema.json->yt-progress-interval->description
+msgid "Progression interval (ms)"
+msgstr "Tímabil framvindu (ms)"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "Depending on network quality"
+msgstr "Er háð gæðum netkerfis"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "150"
+msgstr "150"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "200"
+msgstr "200"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "300"
+msgstr "300"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "400"
+msgstr "400"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "500"
+msgstr "500"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "600"
+msgstr "600"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "750"
+msgstr "750"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "1000"
+msgstr "1000"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "2000"
+msgstr "2000"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "3000"
+msgstr "3000"
+
+#. settings-schema.json->recordings-extract-url->description
+msgid "YouTube video link"
+msgstr "Tengill á YouTube-myndskeið"
+
+#. settings-schema.json->recordings-paste-button->description
+msgid "Paste above the YouTube link you copied"
+msgstr "Límdu hér fyrir ofan YouTube-slóðina sem þú afritaðir"
+
+#. settings-schema.json->recordings-yesno-playlist->description
+msgid "In case of playlist"
+msgstr "Sé um spilunarlista að ræða"
+
+#. settings-schema.json->recordings-yesno-playlist->options
+msgid "Extract single soundtrack"
+msgstr "Ná í stakt hljóðspor"
+
+#. settings-schema.json->recordings-yesno-playlist->options
+msgid "Extract whole playlist"
+msgstr "Ná í heilan spilunarlista"
+
+#. settings-schema.json->recordings-keep-video->description
+msgid "Keep video (slower)"
+msgstr "Halda myndmerki (hægvirkara)"
+
+#. settings-schema.json->recordings-keep-video->tooltip
+msgid ""
+"Whether or not to keep the intermediate video file on disk after post-"
+"processing"
+msgstr ""
+"Hvort eigi að halda millistigs-skránni á diski eftir að eftirvinnsla hefur "
+"farið fram"
+
+#. settings-schema.json->recordings-subdirectory->description
+msgid "Record in subdirectory"
+msgstr "Taka upp í undirmöppu"
+
+#. settings-schema.json->recordings-subdirectory->tooltip
+msgid "(without leading or trailing slash)"
+msgstr "(án skástriks á undan eða eftir)"
+
+#. settings-schema.json->recordings-extract-button->description
+msgid "Extract soundtrack"
+msgstr "Ná í hljóðspor"
+
+#. settings-schema.json->sched-radio->description
+#. settings-schema.json->alarm-clock-working-days-radio->description
+#. settings-schema.json->alarm-clock-workoff-days-radio->description
+msgid "Radio"
+msgstr "Útvarp"
+
+#. settings-schema.json->sched-begin-date->description
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Date"
+msgstr "Dagsetning"
+
+#. settings-schema.json->sched-begin-time->description
+msgid "Time"
+msgstr "Tími"
+
+#. settings-schema.json->sched-begin-time->tooltip
+#. settings-schema.json->sched-duration->tooltip
+msgid "Seconds will be ignored."
+msgstr "Sekúndur verða hunsaðar."
+
+#. settings-schema.json->sched-duration->description
+msgid "Duration"
+msgstr "Tímalengd"
+
+#. settings-schema.json->sched-button->description
+msgid "Schedule this recording"
+msgstr "Setja þessa upptöku á áætlun"
+
+#. settings-schema.json->sched-alert-no-space->description
+msgid "You are running out of disk space. See in the Recording tab."
+msgstr "Þú ert að verða uppiskroppa með diskpláss. Skoðaðu upptökuflipann."
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Remove?"
+msgstr "Fjarlægja?"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "In progress"
+msgstr "Í vinnslu"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Action"
+msgstr "Aðgerð"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Identifier"
+msgstr "Auðkenni"
+
+#. settings-schema.json->sched-recordings->tooltip
+msgid "Do not modify anything in this list, except in the \"Remove?\" column"
+msgstr "Ekki breyta neinu í þessum lista, nema í \"Fjarlægja?\" dálknum"
+
+#. settings-schema.json->search-name->description
+msgid "Station Name"
+msgstr "Nafn útvarpsstöðvar"
+
+#. settings-schema.json->search-name->tooltip
+msgid "OPTIONAL. Name (or part of the name) of the radio station."
+msgstr "VALKVÆTT. Nafn (eða hluti nafns) á útvarpsstöð."
+
+#. settings-schema.json->search-country->options
+msgid "(My Country)"
+msgstr "(Landið mitt)"
+
+#. settings-schema.json->search-country->options
+msgid "Afghanistan - AF"
+msgstr "Afganistan - AF"
+
+#. settings-schema.json->search-country->options
+msgid "Åland Islands - AX"
+msgstr "Álandseyjar - AX"
+
+#. settings-schema.json->search-country->options
+msgid "Albania - AL"
+msgstr "Albanía - AL"
+
+#. settings-schema.json->search-country->options
+msgid "Algeria - DZ"
+msgstr "Alsír - DZ"
+
+#. settings-schema.json->search-country->options
+msgid "American Samoa - AS"
+msgstr "Bandarísku Samóaeyjar - AS"
+
+#. settings-schema.json->search-country->options
+msgid "Andorra - AD"
+msgstr "Andorra - AD"
+
+#. settings-schema.json->search-country->options
+msgid "Angola - AO"
+msgstr "Angóla - AO"
+
+#. settings-schema.json->search-country->options
+msgid "Anguilla - AI"
+msgstr "Angvíla - AI"
+
+#. settings-schema.json->search-country->options
+msgid "Antarctica - AQ"
+msgstr "Suðurskautslandið - AQ"
+
+#. settings-schema.json->search-country->options
+msgid "Antigua And Barbuda - AG"
+msgstr "Antigúa og Barbúda - AG"
+
+#. settings-schema.json->search-country->options
+msgid "Argentina - AR"
+msgstr "Argentína - AR"
+
+#. settings-schema.json->search-country->options
+msgid "Armenia - AM"
+msgstr "Armenía - AM"
+
+#. settings-schema.json->search-country->options
+msgid "Aruba - AW"
+msgstr "Arúba - AW"
+
+#. settings-schema.json->search-country->options
+msgid "Australia - AU"
+msgstr "Ástralía - AU"
+
+#. settings-schema.json->search-country->options
+msgid "Austria - AT"
+msgstr "Austurríki - AT"
+
+#. settings-schema.json->search-country->options
+msgid "Azerbaijan - AZ"
+msgstr "Aserbaídsjan - AZ"
+
+#. settings-schema.json->search-country->options
+msgid "Bahamas - BS"
+msgstr "Bahamaeyjar - BS"
+
+#. settings-schema.json->search-country->options
+msgid "Bahrain - BH"
+msgstr "Barein - BH"
+
+#. settings-schema.json->search-country->options
+msgid "Bangladesh - BD"
+msgstr "Bangladess - BD"
+
+#. settings-schema.json->search-country->options
+msgid "Barbados - BB"
+msgstr "Barbados - BB"
+
+#. settings-schema.json->search-country->options
+msgid "Belarus - BY"
+msgstr "Belarús - BY"
+
+#. settings-schema.json->search-country->options
+msgid "Belgium - BE"
+msgstr "Belgía - BE"
+
+#. settings-schema.json->search-country->options
+msgid "Belize - BZ"
+msgstr "Belís - BZ"
+
+#. settings-schema.json->search-country->options
+msgid "Benin - BJ"
+msgstr "Benín - BJ"
+
+#. settings-schema.json->search-country->options
+msgid "Bermuda - BM"
+msgstr "Bermúda - BM"
+
+#. settings-schema.json->search-country->options
+msgid "Bhutan - BT"
+msgstr "Bútan - BT"
+
+#. settings-schema.json->search-country->options
+msgid "Bolivia (Plurinational State Of) - BO"
+msgstr "Bólivía (fjölþjóðaríkið) - BO"
+
+#. settings-schema.json->search-country->options
+msgid "Bonaire (Sint Eustatius And Saba) - BQ"
+msgstr "Bonaire (Sankti Eustatius og Saba) - BQ"
+
+#. settings-schema.json->search-country->options
+msgid "Bosnia And Herzegovina - BA"
+msgstr "Bosnía og Herzegóvína - BA"
+
+#. settings-schema.json->search-country->options
+msgid "Botswana - BW"
+msgstr "Botsvana - BW"
+
+#. settings-schema.json->search-country->options
+msgid "Bouvet Island - BV"
+msgstr "Bouvet-eyja - BV"
+
+#. settings-schema.json->search-country->options
+msgid "Brazil - BR"
+msgstr "Brasilía - BR"
+
+#. settings-schema.json->search-country->options
+msgid "British Indian Ocean Territory - IO"
+msgstr "Bresku Indlandshafseyjar - IO"
+
+#. settings-schema.json->search-country->options
+msgid "Brunei Darussalam - BN"
+msgstr "Brúnei Darussalam - BN"
+
+#. settings-schema.json->search-country->options
+msgid "Bulgaria - BG"
+msgstr "Búlgaría - BG"
+
+#. settings-schema.json->search-country->options
+msgid "Burkina Faso - BF"
+msgstr "Búrkína Fasó - BF"
+
+#. settings-schema.json->search-country->options
+msgid "Burundi - BI"
+msgstr "Búrúndí - BI"
+
+#. settings-schema.json->search-country->options
+msgid "Cambodia - KH"
+msgstr "Kambódía - KH"
+
+#. settings-schema.json->search-country->options
+msgid "Cameroon - CM"
+msgstr "Kamerún - CM"
+
+#. settings-schema.json->search-country->options
+msgid "Canada - CA"
+msgstr "Kanada - CA"
+
+#. settings-schema.json->search-country->options
+msgid "Cape Verde - CV"
+msgstr "Grænhöfðaeyjar - CV"
+
+#. settings-schema.json->search-country->options
+msgid "Cayman Islands - KY"
+msgstr "Cayman-eyjar - KY"
+
+#. settings-schema.json->search-country->options
+msgid "Central African Republic - CF"
+msgstr "Miðafríkulýðveldið - CF"
+
+#. settings-schema.json->search-country->options
+msgid "Chad - TD"
+msgstr "Tsjad - TD"
+
+#. settings-schema.json->search-country->options
+msgid "Chile - CL"
+msgstr "Síle - CL"
+
+#. settings-schema.json->search-country->options
+msgid "China - CN"
+msgstr "Kína - CN"
+
+#. settings-schema.json->search-country->options
+msgid "Christmas Island - CX"
+msgstr "Jólaeyja - CX"
+
+#. settings-schema.json->search-country->options
+msgid "Cocos (Keeling) Islands - CC"
+msgstr "Kókoseyjar (Keeling-eyjar) - CC"
+
+#. settings-schema.json->search-country->options
+msgid "Colombia - CO"
+msgstr "Kólumbía - CO"
+
+#. settings-schema.json->search-country->options
+msgid "Comoros - KM"
+msgstr "Kómoreyjar - KM"
+
+#. settings-schema.json->search-country->options
+msgid "Congo - CG"
+msgstr "Kongó - CG"
+
+#. settings-schema.json->search-country->options
+msgid "Congo (The Democratic Republic Of The) - CD"
+msgstr "Kongó (alþýðulýðveldið) - CD"
+
+#. settings-schema.json->search-country->options
+msgid "Cook Islands - CK"
+msgstr "Cook-eyjar - CK"
+
+#. settings-schema.json->search-country->options
+msgid "Costa Rica - CR"
+msgstr "Kosta Ríka - CR"
+
+#. settings-schema.json->search-country->options
+msgid "Côte D'Ivoire - CI"
+msgstr "Fílabeinsströndin - CI"
+
+#. settings-schema.json->search-country->options
+msgid "Croatia - HR"
+msgstr "Króatía - HR"
+
+#. settings-schema.json->search-country->options
+msgid "Cuba - CU"
+msgstr "Kúba - CU"
+
+#. settings-schema.json->search-country->options
+msgid "Curaçao - CW"
+msgstr "Curaçao - CW"
+
+#. settings-schema.json->search-country->options
+msgid "Cyprus - CY"
+msgstr "Kýpur - CY"
+
+#. settings-schema.json->search-country->options
+msgid "Czech Republic - CZ"
+msgstr "Tékkland - CZ"
+
+#. settings-schema.json->search-country->options
+msgid "Denmark - DK"
+msgstr "Danmörk - DK"
+
+#. settings-schema.json->search-country->options
+msgid "Djibouti - DJ"
+msgstr "Djíbútí - DJ"
+
+#. settings-schema.json->search-country->options
+msgid "Dominica - DM"
+msgstr "Dóminíka - DM"
+
+#. settings-schema.json->search-country->options
+msgid "Dominican Republic - DO"
+msgstr "Dóminíska lýðveldið - DO"
+
+#. settings-schema.json->search-country->options
+msgid "Ecuador - EC"
+msgstr "Ekvador - EC"
+
+#. settings-schema.json->search-country->options
+msgid "Egypt - EG"
+msgstr "Egyptaland - EG"
+
+#. settings-schema.json->search-country->options
+msgid "El Salvador - SV"
+msgstr "El Salvador - SV"
+
+#. settings-schema.json->search-country->options
+msgid "Equatorial Guinea - GQ"
+msgstr "Miðbaugs-Gínea - GQ"
+
+#. settings-schema.json->search-country->options
+msgid "Eritrea - ER"
+msgstr "Erítrea - ER"
+
+#. settings-schema.json->search-country->options
+msgid "Estonia - EE"
+msgstr "Eistland - EE"
+
+#. settings-schema.json->search-country->options
+msgid "Ethiopia - ET"
+msgstr "Eþíópía - ET"
+
+#. settings-schema.json->search-country->options
+msgid "Falkland Islands (Malvinas) - FK"
+msgstr "Falklandseyjar (Malvinaeyjar) - FK"
+
+#. settings-schema.json->search-country->options
+msgid "Faroe Islands - FO"
+msgstr "Færeyjar - FO"
+
+#. settings-schema.json->search-country->options
+msgid "Fiji - FJ"
+msgstr "Fídjieyjar - FJ"
+
+#. settings-schema.json->search-country->options
+msgid "Finland - FI"
+msgstr "Finnland - FI"
+
+#. settings-schema.json->search-country->options
+msgid "France - FR"
+msgstr "Frakkland - FR"
+
+#. settings-schema.json->search-country->options
+msgid "French Guiana - GF"
+msgstr "Franska Gvæjana - GF"
+
+#. settings-schema.json->search-country->options
+msgid "French Polynesia - PF"
+msgstr "Franska Pólýnesía - PF"
+
+#. settings-schema.json->search-country->options
+msgid "French Southern Territories - TF"
+msgstr "Frönsku suðurhafshéruðin - TF"
+
+#. settings-schema.json->search-country->options
+msgid "Gabon - GA"
+msgstr "Gabon - GA"
+
+#. settings-schema.json->search-country->options
+msgid "Gambia - GM"
+msgstr "Gambía - GM"
+
+#. settings-schema.json->search-country->options
+msgid "Georgia - GE"
+msgstr "Georgía - GE"
+
+#. settings-schema.json->search-country->options
+msgid "Germany - DE"
+msgstr "Þýskaland - DE"
+
+#. settings-schema.json->search-country->options
+msgid "Ghana - GH"
+msgstr "Gana - GH"
+
+#. settings-schema.json->search-country->options
+msgid "Gibraltar - GI"
+msgstr "Gibraltar - GI"
+
+#. settings-schema.json->search-country->options
+msgid "Greece - GR"
+msgstr "53 - GR"
+
+#. settings-schema.json->search-country->options
+msgid "Greenland - GL"
+msgstr "Grænland - GL"
+
+#. settings-schema.json->search-country->options
+msgid "Grenada - GD"
+msgstr "Grenada - GD"
+
+#. settings-schema.json->search-country->options
+msgid "Guadeloupe - GP"
+msgstr "Gvadalúp - GP"
+
+#. settings-schema.json->search-country->options
+msgid "Guam - GU"
+msgstr "Gvam - GU"
+
+#. settings-schema.json->search-country->options
+msgid "Guatemala - GT"
+msgstr "Gvatemala - GT"
+
+#. settings-schema.json->search-country->options
+msgid "Guernsey - GG"
+msgstr "Guernsey - GG"
+
+#. settings-schema.json->search-country->options
+msgid "Guinea - GN"
+msgstr "Gínea - GN"
+
+#. settings-schema.json->search-country->options
+msgid "Guinea-Bissau - GW"
+msgstr "Gínea-Bissá - GW"
+
+#. settings-schema.json->search-country->options
+msgid "Guyana - GY"
+msgstr "Gvæjana - GY"
+
+#. settings-schema.json->search-country->options
+msgid "Haiti - HT"
+msgstr "Haítí - HT"
+
+#. settings-schema.json->search-country->options
+msgid "Heard Island And Mcdonald Islands - HM"
+msgstr "Heard-eyja og McDonald-eyjar - HM"
+
+#. settings-schema.json->search-country->options
+msgid "Holy See (Vatican City State) - VA"
+msgstr "Vatíkanska borgríkið (Holy See) - VA"
+
+#. settings-schema.json->search-country->options
+msgid "Honduras - HN"
+msgstr "Hondúras - HN"
+
+#. settings-schema.json->search-country->options
+msgid "Hong Kong - HK"
+msgstr "Hong Kong - HK"
+
+#. settings-schema.json->search-country->options
+msgid "Hungary - HU"
+msgstr "Ungverjaland - HU"
+
+#. settings-schema.json->search-country->options
+msgid "Iceland - IS"
+msgstr "Ísland - IS"
+
+#. settings-schema.json->search-country->options
+msgid "India - IN"
+msgstr "Indland - IN"
+
+#. settings-schema.json->search-country->options
+msgid "Indonesia - ID"
+msgstr "Indónesía - ID"
+
+#. settings-schema.json->search-country->options
+msgid "Iran (Islamic Republic Of) - IR"
+msgstr "Íran (íslamska lýðveldið) - IR"
+
+#. settings-schema.json->search-country->options
+msgid "Iraq - IQ"
+msgstr "Írak - IQ"
+
+#. settings-schema.json->search-country->options
+msgid "Ireland - IE"
+msgstr "Írland - IE"
+
+#. settings-schema.json->search-country->options
+msgid "Isle Of Man - IM"
+msgstr "Eyjan Mön - IM"
+
+#. settings-schema.json->search-country->options
+msgid "Israel - IL"
+msgstr "Ísrael - IL"
+
+#. settings-schema.json->search-country->options
+msgid "Italy - IT"
+msgstr "Ítalía - IT"
+
+#. settings-schema.json->search-country->options
+msgid "Jamaica - JM"
+msgstr "Jamaíka - JM"
+
+#. settings-schema.json->search-country->options
+msgid "Japan - JP"
+msgstr "Japan - JP"
+
+#. settings-schema.json->search-country->options
+msgid "Jersey - JE"
+msgstr "Jersey - JE"
+
+#. settings-schema.json->search-country->options
+msgid "Jordan - JO"
+msgstr "Jórdanía - JO"
+
+#. settings-schema.json->search-country->options
+msgid "Kazakhstan - KZ"
+msgstr "Kasakstan - KZ"
+
+#. settings-schema.json->search-country->options
+msgid "Kenya - KE"
+msgstr "Kenía - KE"
+
+#. settings-schema.json->search-country->options
+msgid "Kiribati - KI"
+msgstr "Kíribatí - KI"
+
+#. settings-schema.json->search-country->options
+msgid "Korea (Democratic People'S Republic Of) - KP"
+msgstr "Norður-Kórea, (sambandsalþýðulýðveldið) - KP"
+
+#. settings-schema.json->search-country->options
+msgid "Korea (Republic Of) - KR"
+msgstr "Kórea (lýðveldið Suður-Kórea) - KR"
+
+#. settings-schema.json->search-country->options
+msgid "Kuwait - KW"
+msgstr "Kúveit - KW"
+
+#. settings-schema.json->search-country->options
+msgid "Kyrgyzstan - KG"
+msgstr "Kirgisistan - KG"
+
+#. settings-schema.json->search-country->options
+msgid "Lao People'S Democratic Republic - LA"
+msgstr "Alþýðulýðveldið Laó - LA"
+
+#. settings-schema.json->search-country->options
+msgid "Latvia - LV"
+msgstr "Lettland - LV"
+
+#. settings-schema.json->search-country->options
+msgid "Lebanon - LB"
+msgstr "Líbanon - LB"
+
+#. settings-schema.json->search-country->options
+msgid "Lesotho - LS"
+msgstr "Lesótó - LS"
+
+#. settings-schema.json->search-country->options
+msgid "Liberia - LR"
+msgstr "Líbería - LR"
+
+#. settings-schema.json->search-country->options
+msgid "Libya - LY"
+msgstr "Líbía - LY"
+
+#. settings-schema.json->search-country->options
+msgid "Liechtenstein - LI"
+msgstr "Liechtenstein - LI"
+
+#. settings-schema.json->search-country->options
+msgid "Lithuania - LT"
+msgstr "Litháen - LT"
+
+#. settings-schema.json->search-country->options
+msgid "Luxembourg - LU"
+msgstr "Lúxemborg - LU"
+
+#. settings-schema.json->search-country->options
+msgid "Macao - MO"
+msgstr "Makaó - MO"
+
+#. settings-schema.json->search-country->options
+msgid "Macedonia (The Former Yugoslav Republic Of) - MK"
+msgstr "Makedónía (fyrrum júgóslavíulýðveldið) - MK"
+
+#. settings-schema.json->search-country->options
+msgid "Madagascar - MG"
+msgstr "Madagaskar - MG"
+
+#. settings-schema.json->search-country->options
+msgid "Malawi - MW"
+msgstr "Malaví - MW"
+
+#. settings-schema.json->search-country->options
+msgid "Malaysia - MY"
+msgstr "Malasía - MY"
+
+#. settings-schema.json->search-country->options
+msgid "Maldives - MV"
+msgstr "Maldíveyjar - MV"
+
+#. settings-schema.json->search-country->options
+msgid "Mali - ML"
+msgstr "Malí - ML"
+
+#. settings-schema.json->search-country->options
+msgid "Malta - MT"
+msgstr "Malta - MT"
+
+#. settings-schema.json->search-country->options
+msgid "Marshall Islands - MH"
+msgstr "Marshalleyjar - MH"
+
+#. settings-schema.json->search-country->options
+msgid "Martinique - MQ"
+msgstr "Martiník - MQ"
+
+#. settings-schema.json->search-country->options
+msgid "Mauritania - MR"
+msgstr "Máritanía - MR"
+
+#. settings-schema.json->search-country->options
+msgid "Mauritius - MU"
+msgstr "Máritus - MU"
+
+#. settings-schema.json->search-country->options
+msgid "Mayotte - YT"
+msgstr "Mayott - YT"
+
+#. settings-schema.json->search-country->options
+msgid "Mexico - MX"
+msgstr "Mexíkó - MX"
+
+#. settings-schema.json->search-country->options
+msgid "Micronesia (Federated States Of) - FM"
+msgstr "Míkrónesía (sambandsríkið)"
+
+#. settings-schema.json->search-country->options
+msgid "Moldova (Republic Of) - MD"
+msgstr "Moldóvía (lýðveldið) - MD"
+
+#. settings-schema.json->search-country->options
+msgid "Monaco - MC"
+msgstr "Mónakó - MC"
+
+#. settings-schema.json->search-country->options
+msgid "Mongolia - MN"
+msgstr "Mongólía - MN"
+
+#. settings-schema.json->search-country->options
+msgid "Montenegro - ME"
+msgstr "Svartfjallaland - ME"
+
+#. settings-schema.json->search-country->options
+msgid "Montserrat - MS"
+msgstr "Montserrat - MS"
+
+#. settings-schema.json->search-country->options
+msgid "Morocco - MA"
+msgstr "Marokkó - MA"
+
+#. settings-schema.json->search-country->options
+msgid "Mozambique - MZ"
+msgstr "Mósambík - MZ"
+
+#. settings-schema.json->search-country->options
+msgid "Myanmar - MM"
+msgstr "Mjanmar - MM"
+
+#. settings-schema.json->search-country->options
+msgid "Namibia - NA"
+msgstr "Namibía - NA"
+
+#. settings-schema.json->search-country->options
+msgid "Nauru - NR"
+msgstr "Nárú - NR"
+
+#. settings-schema.json->search-country->options
+msgid "Nepal - NP"
+msgstr "Nepal - NP"
+
+#. settings-schema.json->search-country->options
+msgid "Netherlands - NL"
+msgstr "Holland - NL"
+
+#. settings-schema.json->search-country->options
+msgid "New Caledonia - NC"
+msgstr "Nýja-Kaledónía - NC"
+
+#. settings-schema.json->search-country->options
+msgid "New Zealand - NZ"
+msgstr "Nýja-Sjáland - NZ"
+
+#. settings-schema.json->search-country->options
+msgid "Nicaragua - NI"
+msgstr "Níkaragva - NI"
+
+#. settings-schema.json->search-country->options
+msgid "Niger - NE"
+msgstr "Níger - NE"
+
+#. settings-schema.json->search-country->options
+msgid "Nigeria - NG"
+msgstr "Nígería - NG"
+
+#. settings-schema.json->search-country->options
+msgid "Niue - NU"
+msgstr "Niue - NU"
+
+#. settings-schema.json->search-country->options
+msgid "Norfolk Island - NF"
+msgstr "Norfolkeyja - NF"
+
+#. settings-schema.json->search-country->options
+msgid "Northern Mariana Islands - MP"
+msgstr "Norður-Maríanaeyjar - MP"
+
+#. settings-schema.json->search-country->options
+msgid "Norway - NO"
+msgstr "Noregur - NO"
+
+#. settings-schema.json->search-country->options
+msgid "Oman - OM"
+msgstr "Óman - OM"
+
+#. settings-schema.json->search-country->options
+msgid "Pakistan - PK"
+msgstr "Pakistan - PK"
+
+#. settings-schema.json->search-country->options
+msgid "Palau - PW"
+msgstr "Palá - PW"
+
+#. settings-schema.json->search-country->options
+msgid "Palestine (State Of) - PS"
+msgstr "Palestína (ríkið) - PS"
+
+#. settings-schema.json->search-country->options
+msgid "Panama - PA"
+msgstr "Panama - PA"
+
+#. settings-schema.json->search-country->options
+msgid "Papua New Guinea - PG"
+msgstr "Papúa Nýja-Gínea - PG"
+
+#. settings-schema.json->search-country->options
+msgid "Paraguay - PY"
+msgstr "Paragvæ - PY"
+
+#. settings-schema.json->search-country->options
+msgid "Peru - PE"
+msgstr "Perú - PE"
+
+#. settings-schema.json->search-country->options
+msgid "Philippines - PH"
+msgstr "Filippseyjar - PH"
+
+#. settings-schema.json->search-country->options
+msgid "Pitcairn - PN"
+msgstr "Pitkairn-eyja - PN"
+
+#. settings-schema.json->search-country->options
+msgid "Poland - PL"
+msgstr "Pólland - PL"
+
+#. settings-schema.json->search-country->options
+msgid "Portugal - PT"
+msgstr "Portúgal - PT"
+
+#. settings-schema.json->search-country->options
+msgid "Puerto Rico - PR"
+msgstr "Púertó Ríkó - PR"
+
+#. settings-schema.json->search-country->options
+msgid "Qatar - QA"
+msgstr "Qatar - 28"
+
+#. settings-schema.json->search-country->options
+msgid "Réunion - RE"
+msgstr "Réunion - RE"
+
+#. settings-schema.json->search-country->options
+msgid "Romania - RO"
+msgstr "Rúmenía - RO"
+
+#. settings-schema.json->search-country->options
+msgid "Russian Federation - RU"
+msgstr "Rússneska sambandið - RU"
+
+#. settings-schema.json->search-country->options
+msgid "Rwanda - RW"
+msgstr "Rúanda - RW"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Barthélemy - BL"
+msgstr "Sankti Bartelemí - BL"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Helena (Ascension And Tristan Da Cunha) - SH"
+msgstr "Sankti Helena (Ascension og Tristan da Cunha) - SH"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Kitts And Nevis - KN"
+msgstr "Sankti Kitts og Neviseyjur - KN"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Lucia - LC"
+msgstr "Sankti Lúsía - LC"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Martin (French Part) - MF"
+msgstr "Sankti Martin (franski hluti) - MF"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Pierre And Miquelon - PM"
+msgstr "Sankti Pierre og Miquelon - PM"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Vincent And The Grenadines - VC"
+msgstr "Sankti Vincent og Grenadineeyjar - VC"
+
+#. settings-schema.json->search-country->options
+msgid "Samoa - WS"
+msgstr "Samóa - WS"
+
+#. settings-schema.json->search-country->options
+msgid "San Marino - SM"
+msgstr "San Marínó - SM"
+
+#. settings-schema.json->search-country->options
+msgid "Sao Tome And Principe - ST"
+msgstr "Saó Tóme og Prinsípe - ST"
+
+#. settings-schema.json->search-country->options
+msgid "Saudi Arabia - SA"
+msgstr "Sádí-Arabía - SA"
+
+#. settings-schema.json->search-country->options
+msgid "Senegal - SN"
+msgstr "Senegal - SN"
+
+#. settings-schema.json->search-country->options
+msgid "Serbia - RS"
+msgstr "Serbía - RS"
+
+#. settings-schema.json->search-country->options
+msgid "Seychelles - SC"
+msgstr "Seychelles-eyjar - SC"
+
+#. settings-schema.json->search-country->options
+msgid "Sierra Leone - SL"
+msgstr "Síerra Leóne - SL"
+
+#. settings-schema.json->search-country->options
+msgid "Singapore - SG"
+msgstr "Singapúr - SG"
+
+#. settings-schema.json->search-country->options
+msgid "Sint Maarten (Dutch Part) - SX"
+msgstr "Sankti Maarten (hollenski hluti) - SX"
+
+#. settings-schema.json->search-country->options
+msgid "Slovakia - SK"
+msgstr "Slóvakía - SK"
+
+#. settings-schema.json->search-country->options
+msgid "Slovenia - SI"
+msgstr "Slóvenía - SI"
+
+#. settings-schema.json->search-country->options
+msgid "Solomon Islands - SB"
+msgstr "Salómonseyjar - SB"
+
+#. settings-schema.json->search-country->options
+msgid "Somalia - SO"
+msgstr "Sómalía - SO"
+
+#. settings-schema.json->search-country->options
+msgid "South Africa - ZA"
+msgstr "Suður-Afríka - ZA"
+
+#. settings-schema.json->search-country->options
+msgid "South Georgia And The South Sandwich Islands - GS"
+msgstr "Suður-Georgía og Suður-Sandwich eyjar - GS"
+
+#. settings-schema.json->search-country->options
+msgid "South Sudan - SS"
+msgstr "Suður-Súdan - SS"
+
+#. settings-schema.json->search-country->options
+msgid "Spain - ES"
+msgstr "Spánn - ES"
+
+#. settings-schema.json->search-country->options
+msgid "Sri Lanka - LK"
+msgstr "Srí Lanka - LK"
+
+#. settings-schema.json->search-country->options
+msgid "Sudan - SD"
+msgstr "Súdan - SD"
+
+#. settings-schema.json->search-country->options
+msgid "Suriname - SR"
+msgstr "Súrínam - SR"
+
+#. settings-schema.json->search-country->options
+msgid "Svalbard And Jan Mayen - SJ"
+msgstr "Svalbarði og Jan Mayen - SJ"
+
+#. settings-schema.json->search-country->options
+msgid "Swaziland - SZ"
+msgstr "Svasíland - SZ"
+
+#. settings-schema.json->search-country->options
+msgid "Sweden - SE"
+msgstr "Svíþjóð - SE"
+
+#. settings-schema.json->search-country->options
+msgid "Switzerland - CH"
+msgstr "Sviss - CH"
+
+#. settings-schema.json->search-country->options
+msgid "Syrian Arab Republic - SY"
+msgstr "Sýrlenska arabalýðveldið - SY"
+
+#. settings-schema.json->search-country->options
+msgid "Taiwan (Province Of China) - TW"
+msgstr "Tævan (hérað í Kína) - TW"
+
+#. settings-schema.json->search-country->options
+msgid "Tajikistan - TJ"
+msgstr "Tadsjikistan - TJ"
+
+#. settings-schema.json->search-country->options
+msgid "Tanzania (United Republic Of) - TZ"
+msgstr "Tansanía (sameinaða lýðveldið) - TZ"
+
+#. settings-schema.json->search-country->options
+msgid "Thailand - TH"
+msgstr "Tæland - TH"
+
+#. settings-schema.json->search-country->options
+msgid "Timor-Leste - TL"
+msgstr "Tímor-Leste - TL"
+
+#. settings-schema.json->search-country->options
+msgid "Togo - TG"
+msgstr "Tógó - TG"
+
+#. settings-schema.json->search-country->options
+msgid "Tokelau - TK"
+msgstr "Tókelá - TK"
+
+#. settings-schema.json->search-country->options
+msgid "Tonga - TO"
+msgstr "Tonga - TO"
+
+#. settings-schema.json->search-country->options
+msgid "Trinidad And Tobago - TT"
+msgstr "Trínidad og Tóbagó - TT"
+
+#. settings-schema.json->search-country->options
+msgid "Tunisia - TN"
+msgstr "Túnis - TN"
+
+#. settings-schema.json->search-country->options
+msgid "Turkey - TR"
+msgstr "Tyrkland - TR"
+
+#. settings-schema.json->search-country->options
+msgid "Turkmenistan - TM"
+msgstr "Túrkmenistan - TM"
+
+#. settings-schema.json->search-country->options
+msgid "Turks And Caicos Islands - TC"
+msgstr "Turks og Kaikós eyjar - TC"
+
+#. settings-schema.json->search-country->options
+msgid "Tuvalu - TV"
+msgstr "Túvalú - TV"
+
+#. settings-schema.json->search-country->options
+msgid "Uganda - UG"
+msgstr "Úganda - UG"
+
+#. settings-schema.json->search-country->options
+msgid "Ukraine - UA"
+msgstr "Úkraína - UA"
+
+#. settings-schema.json->search-country->options
+msgid "United Arab Emirates - AE"
+msgstr "Sameinuðu arabísku furstadæmin - AE"
+
+#. settings-schema.json->search-country->options
+msgid "United Kingdom - GB"
+msgstr "Stóra Bretland - GB"
+
+#. settings-schema.json->search-country->options
+msgid "United States - US"
+msgstr "Bandaríki Norður Ameríku - US"
+
+#. settings-schema.json->search-country->options
+msgid "United States Minor Outlying Islands - UM"
+msgstr "Ytri-smáeyjar Bandaríkjanna - UM"
+
+#. settings-schema.json->search-country->options
+msgid "Uruguay - UY"
+msgstr "Úrúgvæ - UY"
+
+#. settings-schema.json->search-country->options
+msgid "Uzbekistan - UZ"
+msgstr "Úsbekistan - UZ"
+
+#. settings-schema.json->search-country->options
+msgid "Vanuatu - VU"
+msgstr "Vanuatú - VU"
+
+#. settings-schema.json->search-country->options
+msgid "Venezuela (Bolivarian Republic Of) - VE"
+msgstr "Venesúela (bólívaríska lýðveldið) - VE"
+
+#. settings-schema.json->search-country->options
+msgid "Viet Nam - VN"
+msgstr "Víetnam - VN"
+
+#. settings-schema.json->search-country->options
+msgid "Virgin Islands (British) - VG"
+msgstr "Jómfrúareyjar (bresku) - VG"
+
+#. settings-schema.json->search-country->options
+msgid "Virgin Islands (U.S.) - VI"
+msgstr "Jómfrúareyjar (BNA) - VI"
+
+#. settings-schema.json->search-country->options
+msgid "Wallis And Futuna - WF"
+msgstr "Wallis- og Fútúnaeyjar - WF"
+
+#. settings-schema.json->search-country->options
+msgid "Western Sahara - EH"
+msgstr "Vestur-Sahara - EH"
+
+#. settings-schema.json->search-country->options
+msgid "Yemen - YE"
+msgstr "Jemen - YE"
+
+#. settings-schema.json->search-country->options
+msgid "Zambia - ZM"
+msgstr "Sambía - ZM"
+
+#. settings-schema.json->search-country->options
+msgid "Zimbabwe - ZW"
+msgstr "Simbabve - ZW"
+
+#. settings-schema.json->search-country->tooltip
+msgid "OPTIONAL. Choose a country."
+msgstr "VALKVÆTT. Veldu land."
+
+#. settings-schema.json->search-tag->description
+msgid "Tag"
+msgstr "Merki"
+
+#. settings-schema.json->search-tag->tooltip
+msgid "OPTIONAL. Only one word, as blues or jazz or rock or talk or..."
+msgstr ""
+"VALKVÆTT. Aðeins eitt orð, eins og t.d. blús eða djass eða rokk eða tal "
+"eða..."
+
+#. settings-schema.json->search-codec->options
+msgid "AAC"
+msgstr "AAC"
+
+#. settings-schema.json->search-codec->options
+msgid "AAC+"
+msgstr "AAC+"
+
+#. settings-schema.json->search-codec->options
+msgid "FLV"
+msgstr "FLV"
+
+#. settings-schema.json->search-codec->options
+msgid "AAC,H.264"
+msgstr "AAC,H.264"
+
+#. settings-schema.json->search-codec->options
+msgid "AAC+,H.264"
+msgstr "AAC+,H.264"
+
+#. settings-schema.json->search-codec->options
+msgid "MP3,H.264"
+msgstr "MP3,H.264"
+
+#. settings-schema.json->search-codec->options
+msgid "Unknown"
+msgstr "Óþekkt"
+
+#. settings-schema.json->search-codec->options
+msgid "Unknown,H.264"
+msgstr "Óþekkt,H.264"
+
+#. settings-schema.json->search-codec->tooltip
+msgid "OPTIONAL. Choose a codec."
+msgstr "VALKVÆTT. Veldu kóðunarlyklun."
+
+#. settings-schema.json->search-minimalBitrate->description
+msgid "Minimal Bitrate"
+msgstr "Lágmarks bitahraði"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "128"
+msgstr "128"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "192"
+msgstr "192"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "256"
+msgstr "256"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "320"
+msgstr "320"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "512"
+msgstr "512"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "640"
+msgstr "640"
+
+#. settings-schema.json->search-minimalBitrate->tooltip
+msgid "OPTIONAL. Choose a minimal bitrate (in kbps)."
+msgstr "VALKVÆTT. Veldu lágmarks-bitahraða (í kb/sek)."
+
+#. settings-schema.json->search-order->description
+msgid "Order"
+msgstr "Röðun"
+
+#. settings-schema.json->search-order->options
+msgid "name"
+msgstr "heiti"
+
+#. settings-schema.json->search-order->options
+msgid "url"
+msgstr "slóð"
+
+#. settings-schema.json->search-order->options
+msgid "tags"
+msgstr "merki"
+
+#. settings-schema.json->search-order->options
+msgid "country"
+msgstr "land"
+
+#. settings-schema.json->search-order->options
+msgid "state"
+msgstr "staða"
+
+#. settings-schema.json->search-order->options
+msgid "language"
+msgstr "tungumál"
+
+#. settings-schema.json->search-order->options
+msgid "votes"
+msgstr "atkvæði"
+
+#. settings-schema.json->search-order->options
+msgid "codec"
+msgstr "kóðunarlykill"
+
+#. settings-schema.json->search-order->options
+msgid "bitrate"
+msgstr "bitahraði"
+
+#. settings-schema.json->search-order->options
+msgid "last check-time"
+msgstr "síðasti athugunartími"
+
+#. settings-schema.json->search-order->options
+msgid "click timestamp"
+msgstr "tímamerki smells"
+
+#. settings-schema.json->search-order->options
+msgid "click count"
+msgstr "fjöldi smella"
+
+#. settings-schema.json->search-order->options
+msgid "click trend"
+msgstr "tilhneiging smella"
+
+#. settings-schema.json->search-order->options
+msgid "change timestamp"
+msgstr "breyta tímamerki"
+
+#. settings-schema.json->search-order->options
+msgid "random"
+msgstr "slembið"
+
+#. settings-schema.json->search-order->tooltip
+msgid "OPTIONAL. Name of the attribute the result list will be sorted by."
+msgstr ""
+"VALKVÆTT. Heiti eigindisins sem listanum með niðurstöðum verður raðað eftir."
+
+#. settings-schema.json->search-limit->description
+msgid "Limit"
+msgstr "Takmörk"
+
+#. settings-schema.json->search-limit->tooltip
+msgid "Maximum number of results per page."
+msgstr "Há&marksfjöldi niðurstaðna á hverri síðu."
+
+#. settings-schema.json->search-page->description
+msgid "Next page number"
+msgstr "Næsta síðunúmer"
+
+#. settings-schema.json->search-reset-button->description
+msgid "Reset"
+msgstr "Endurstilla"
+
+#. settings-schema.json->search-button->description
+msgid "Search..."
+msgstr "Leita..."
+
+#. settings-schema.json->sched-rmbutton->description
+msgid "Remove selected items"
+msgstr "Fjarlægja valin atriði"
+
+#. settings-schema.json->horizontal-show-name->description
+msgid "Display radio name"
+msgstr "Birta nafn útvarpsstöðvar"
+
+#. settings-schema.json->horizontal-show-title->description
+msgid "Display title"
+msgstr "Birta titil"
+
+#. settings-schema.json->horizontal-max-title-length->description
+msgid "Maximum title length"
+msgstr "Hámarkslengd titils"
+
+#. settings-schema.json->horizontal-max-title-length->tooltip
+msgid "0 means no maximum"
+msgstr "0 þýðir ekkert hámark"
+
+#. settings-schema.json->alarm-clock-wake-me-softly->description
+msgid "Wake me up softly"
+msgstr "Vekja mig rólega"
+
+#. settings-schema.json->alarm-clock-wake-me-softly->tooltip
+msgid "By checking this box, the sound volume gradually increases."
+msgstr "Með því að merkja í þennan reit, eykst hljóðstyrkur jafnt og þétt."
+
+#. settings-schema.json->alarm-clock-volume-begin->description
+msgid "Initial volume (%)"
+msgstr "Upphafshljóðstyrkur (%)"
+
+#. settings-schema.json->alarm-clock-volume-end->description
+msgid "Final volume (%)"
+msgstr "Lokahljóðstyrkur (%)"
+
+#. settings-schema.json->alarm-clock-volume-end->tooltip
+msgid "The final volume must be greater than or equal to the initial volume."
+msgstr ""
+"Lokahljóðstyrkur verður að vera jafn eða meiri en upphafshljóðstyrkurinn."
+
+#. settings-schema.json->alarm-clock-volume-transition->description
+msgid "Transition duration (seconds)"
+msgstr "Tímalengd millifærslu (sekúndur)"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Sunday"
+msgstr "Sunnudagur"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Monday"
+msgstr "Mánudagur"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Tuesday"
+msgstr "Þriðjudagur"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Wednesday"
+msgstr "Miðvikudagur"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Thursday"
+msgstr "Fimmtudagur"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Friday"
+msgstr "Föstudagur"
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Saturday"
+msgstr "Laugardagur"
+
+#. settings-schema.json->alarm-clock-working-days-time->description
+#. settings-schema.json->alarm-clock-workoff-days-time->description
+msgid "Wake-Up Time"
+msgstr "Vöknunartími"
+
+#. settings-schema.json->alarm-clock-working-days-radio-button->description
+#. settings-schema.json->alarm-clock-workoff-days-radio-button->description
+msgid "Last-listened-to radio station"
+msgstr "Útvarpsstöð sem síðast var hlustað á"
+
+#. settings-schema.json->alarm-clock-tink-on->description
+msgid "Activate tink to ensure speakers are awake"
+msgstr "Virkjaðu 'tink' til að tryggja að hátalarar séu vakandi"

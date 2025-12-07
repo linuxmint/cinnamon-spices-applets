@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-03 15:24+0200\n"
-"PO-Revision-Date: 2024-09-04 16:09+0200\n"
+"POT-Creation-Date: 2025-03-30 14:17+0200\n"
+"PO-Revision-Date: 2025-02-22 20:29+0100\n"
 "Last-Translator: Michael Härtl <haertl.mike@gmail.com>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -20,107 +20,109 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
-#. applet.js:218
+#. applet.js:225 applet_OLD.js:235
 msgid "Sensors Monitor"
 msgstr "Sensorüberwachung"
 
-#. applet.js:399
+#. applet.js:465 applet_OLD.js:418
 msgid "Suspended"
 msgstr "Pausiert"
 
-#. applet.js:617 applet.js:659
+#. applet.js:732 applet.js:773 applet_OLD.js:638 applet_OLD.js:682
 msgid "high:"
 msgstr "hoch:"
 
-#. applet.js:617 applet.js:619 applet.js:659 applet.js:661 applet.js:703
+#. applet.js:732 applet.js:735 applet.js:773 applet.js:775 applet.js:816
+#. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
+#. applet_OLD.js:726
 msgid "n/a"
 msgstr "-"
 
-#. applet.js:619 applet.js:661
+#. applet.js:735 applet.js:775 applet_OLD.js:642 applet_OLD.js:684
 msgid "crit:"
 msgstr "krit:"
 
-#. applet.js:703 applet.js:747
+#. applet.js:816 applet.js:860 applet_OLD.js:726 applet_OLD.js:770
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:749
+#. applet.js:862 applet_OLD.js:772
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:778
+#. applet.js:891 applet_OLD.js:801
 msgid "No intrusion detected"
 msgstr "Kein Einbruch entdeckt"
 
-#. applet.js:778
+#. applet.js:891 applet_OLD.js:801
 msgid "INTRUSION DETECTED!"
 msgstr "EINBRUCH ENTDECKT!"
 
-#. applet.js:798
+#. applet.js:911 applet_OLD.js:821
 msgid "Must be configured!"
 msgstr "Muss konfiguriert werden!"
 
-#. applet.js:1185
+#. applet.js:1275 applet_OLD.js:1208
 msgid "Settings"
 msgstr "Einstellungen"
 
-#. applet.js:1185
+#. applet.js:1275 applet_OLD.js:1208
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1192
+#. applet.js:1282 applet_OLD.js:1215
 msgid "⚙ General"
 msgstr "⚙ Allgemein"
 
-#. applet.js:1202
+#. applet.js:1298 applet_OLD.js:1231
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Temperatursensoren"
 
-#. applet.js:1212
+#. applet.js:1314 applet_OLD.js:1247
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Lüftersensoren"
 
-#. applet.js:1222
+#. applet.js:1330 applet_OLD.js:1263
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Spannungssensoren"
 
-#. applet.js:1232
+#. applet.js:1346 applet_OLD.js:1279
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Einbruchsensoren"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1253
+#. applet.js:1365 applet_OLD.js:1306
 msgid "Run xsensors"
 msgstr "Xsensors starten"
 
-#. applet.js:1262
+#. applet.js:1374 applet_OLD.js:1315
 msgid "Suspend Sensors"
 msgstr "Sensoren pausieren"
 
-#. applet.js:1273
+#. applet.js:1385 applet_OLD.js:1326
 msgid "Reload this applet"
 msgstr "Applet neu laden"
 
-#. applet.js:1574
+#. applet.js:1707 applet_OLD.js:1656
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Sind Sie sicher, dass Sie \"%s\" entfernen wollen?"
 
-#. lib/checkDependencies.js:317
+#. lib/checkDependencies.js:353
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Das %s-Applet ist voll funktionsfähig."
 
-#. lib/checkDependencies.js:318
+#. lib/checkDependencies.js:354
 msgid "All dependencies are installed"
 msgstr "Alle Abhängigkeiten installiert"
 
-#. lib/checkDependencies.js:346
+#. lib/checkDependencies.js:383
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -128,14 +130,17 @@ msgstr ""
 "Es scheinen einige Programme zu fehlen, die dieses Applet für den vollen "
 "Funktionsumfang benötigt."
 
-#. lib/checkDependencies.js:347
-msgid "Please execute, in the just opened terminal, the commands:"
-msgstr ""
-"Bitte führen Sie im soeben geöffneten Terminalfenster folgende Befehle aus:"
+#. lib/checkDependencies.js:385
+msgid "Please install these packages:"
+msgstr "Bitte installieren Sie diese Pakete:"
 
-#. lib/checkDependencies.js:348
+#. lib/checkDependencies.js:389 lib/checkDependencies.js:399
 msgid "Some dependencies are not installed!"
 msgstr "Einige Abhängigkeiten sind nicht installiert!"
+
+#. lib/checkDependencies.js:401
+msgid "Install these packages now"
+msgstr "Installieren Sie diese Pakete jetzt"
 
 #. lib/util.js:244
 #, javascript-format
@@ -198,13 +203,17 @@ msgstr ""
 "Lüftergeschwindigkeit, Spannung und Einbrucherkennung. Signalisiert durch "
 "Farbänderung, wenn ein Wert ein Limit erreicht oder überschreitet."
 
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr "claudiux: Autor. JEleniel: Unterstützung für NVidia-Grafikkarten."
+
 #. settings-schema.json->page_Temperatures->title
 msgid "⦿ Temperature"
 msgstr "⦿ Temperatur"
 
 #. settings-schema.json->page_Fans->title
-msgid "🤂 Fan"
-msgstr "🤂 Lüfter"
+msgid "𖣘 Fan"
+msgstr "𖣘 Lüfter"
 
 #. settings-schema.json->page_Voltages->title
 msgid "🗲 Voltage"
@@ -392,49 +401,29 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Schriftgröße (% der Standardgröße)"
 
-#. settings-schema.json->vertical-align->options
-msgid "baseline"
-msgstr ""
+#. settings-schema.json->horizontal_width->description
+msgid "Display width (pixels) for horizontal panels"
+msgstr "Applet-Breite (Pixel) für horizontale Panels"
 
-#. settings-schema.json->vertical-align->options
-msgid "sub"
-msgstr ""
+#. settings-schema.json->horizontal_width->tooltip
+msgid "0 means automatic. This value does not include border."
+msgstr "0 für automatisch. Der Wert gilt ohne Rand."
 
-#. settings-schema.json->vertical-align->options
-msgid "super"
-msgstr ""
+#. settings-schema.json->separator_type->options
+msgid "(none)"
+msgstr "(keines)"
 
-#. settings-schema.json->vertical-align->options
-msgid "text-top"
-msgstr ""
+#. settings-schema.json->separator_type->options
+msgid "blank"
+msgstr "Leerzeichen"
 
-#. settings-schema.json->vertical-align->options
-msgid "text-bottom"
-msgstr ""
+#. settings-schema.json->separator_type->options
+msgid "bar"
+msgstr "Strich"
 
-#. settings-schema.json->vertical-align->options
-msgid "middle"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "top"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "bottom"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "unset"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "inherit"
-msgstr ""
-
-#. settings-schema.json->vertical-align->description
-msgid "Vertical alignment"
-msgstr "Vertikale Ausrichtung"
+#. settings-schema.json->separator_type->description
+msgid "Separator"
+msgstr "Trennzeichen"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
@@ -444,16 +433,13 @@ msgstr "Textfarbe anpassen"
 msgid "Text Color"
 msgstr "Textfarbe"
 
-#. settings-schema.json->separator->description
-msgid "Separator"
-msgstr "Trenner"
+#. settings-schema.json->crit_color->description
+msgid "Critical Value Color"
+msgstr "Farbe Kritischer Wert"
 
-#. settings-schema.json->separator->tooltip
-msgid ""
-"The string used to separate values in horizontal orientation. Default is '│'."
-msgstr ""
-"Die Zeichenkette zum Trennen von Werten in horizontaler Richtung. Vorgabe "
-"ist '|'."
+#. settings-schema.json->high_color->description
+msgid "High Value Color"
+msgstr "Farbe Hoher Wert"
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -543,8 +529,18 @@ msgstr ""
 "Verwendet den unten eingetragenen 'Angezeigter Name' für die ausgewählten "
 "Sensoren. Ohne Effekt bei vertikalen Panels."
 
+#. settings-schema.json->chars_temp->tooltip
+msgid "The first emoji in this list is used for temperature"
+msgstr "Das erste Emoji in dieser Liste wird für Temperatur verwendet"
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr "Emoji"
+
 #. settings-schema.json->strictly_positive_temp->description
-#. settings-schema.json->strictly_positive_fan->description
 #. settings-schema.json->strictly_positive_volt->description
 msgid "Show only strictly positive values"
 msgstr "Nur positive Werte anzeigen"
@@ -723,6 +719,14 @@ msgstr ""
 "Hoher und kritischer Wert: Konsultieren Sie die technischen Spezifikationen "
 "Ihres Laufwerks."
 
+#. settings-schema.json->chars_fan->tooltip
+msgid "The first emoji in this list is used for fan"
+msgstr "Das erste Emoji in dieser Liste wird für Lüfter verwendet"
+
+#. settings-schema.json->strictly_positive_fan->description
+msgid "Show only positive or zero values"
+msgstr "Nur positive oder Nullwerte anzeigen"
+
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
 msgstr "Abkürzung für \"Umdrehungen pro Minute\""
@@ -765,6 +769,10 @@ msgstr ""
 "  Verwenden Sie $ für den gegebenen Sensorwert.\n"
 "  Sie können die 4 Operatoren (+-*/) und Klammern verwenden.\n"
 "  Beispiel: $*1.1+0.5"
+
+#. settings-schema.json->chars_volt->tooltip
+msgid "The first emoji in this list is used for voltage"
+msgstr "Das erste Emoji in dieser Liste wird für Spannung verwendet"
 
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
@@ -837,6 +845,10 @@ msgid ""
 msgstr ""
 " Verwendet den unten eingetragenen 'Angezeigter Name' für die ausgewählten "
 "Sensoren. Ohne Effekt bei vertikalen Panels."
+
+#. settings-schema.json->chars_intrusion->tooltip
+msgid "The first emoji in this list is used for intrusion"
+msgstr "Das erste Emoji in dieser Liste wird für Einbruch verwendet"
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"
@@ -927,4 +939,4 @@ msgstr "Anzeige aktualisieren"
 
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
-msgstr "temperature@fevimu-Applet vom Panel entfernen"
+msgstr "Applet temperature@fevimu vom Panel entfernen"

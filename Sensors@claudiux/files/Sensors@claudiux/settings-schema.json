@@ -31,7 +31,7 @@
     },
     "page_Fans": {
       "type": "page",
-      "title": "🤂 Fan",
+      "title": "𖣘 Fan",
       "sections": [
         "section_fanDisplay",
         "section_fanOptions",
@@ -72,9 +72,12 @@
         "interval",
         "keep_size",
         "char_size",
+        "horizontal_width",
+        "separator_type",
         "char_color_customized",
         "char_color",
-        "separator",
+        "crit_color",
+        "high_color",
         "remove_border",
         "remove_icons",
         "restart_in_menu",
@@ -119,7 +122,8 @@
       "title": "Display",
       "keys": [
         "show_temp",
-        "show_temp_name"
+        "show_temp_name",
+        "chars_temp"
       ]
     },
     "section_tempOptions": {
@@ -159,14 +163,14 @@
       "title": "Display",
       "keys": [
         "show_fan",
-        "show_fan_name"
+        "show_fan_name",
+        "chars_fan"
       ]
     },
     "section_fanOptions": {
       "type": "section",
       "title": "Options",
       "keys": [
-        "strictly_positive_fan",
         "show_fan_unit",
         "fan_unit",
         "journalize_fan"
@@ -186,7 +190,8 @@
       "title": "Display",
       "keys": [
         "show_volt",
-        "show_volt_name"
+        "show_volt_name",
+        "chars_volt"
       ]
     },
     "section_voltOptions": {
@@ -213,7 +218,8 @@
       "title": "Display",
       "keys": [
         "show_intrusion",
-        "show_intrusion_name"
+        "show_intrusion_name",
+        "chars_intrusion"
       ]
     },
     "section_intrusionOptions": {
@@ -301,27 +307,33 @@
   "char_size": {
     "type": "scale",
     "default": 100,
-    "min": 80,
-    "max": 120,
+    "min": 60,
+    "max": 160,
     "step": 1,
     "description": "Character size (% of standard size)"
   },
-  "vertical-align": {
+  "horizontal_width": {
+    "type": "scale",
+    "default": 0,
+    "min": 0,
+    "max": 2000,
+    "step": 5,
+    "description": "Display width (pixels) for horizontal panels",
+    "tooltip": "0 means automatic. This value does not include border."
+  },
+  "separator_type": {
     "type": "combobox",
-    "default": "text-bottom",
+    "default": "bar",
     "options": {
-      "baseline": "baseline",
-      "sub": "sub",
-      "super": "super",
-      "text-top": "text-top",
-      "text-bottom": "text-bottom",
-      "middle": "middle",
-      "top": "top",
-      "bottom": "bottom",
-      "unset": "unset",
-      "inherit": "inherit"
+      "(none)": "none",
+      "blank": "blank",
+      "bar": "bar"
     },
-    "description": "Vertical alignment"
+    "description": "Separator"
+  },
+  "vertical-align": {
+    "type": "generic",
+    "default": "text-bottom"
   },
   "char_color_customized": {
     "type": "switch",
@@ -334,11 +346,15 @@
     "dependency": "char_color_customized",
     "description": "Text Color"
   },
-  "separator": {
-    "type": "entry",
-    "description": "Separator",
-    "default": "|",
-    "tooltip": "The string used to separate values in horizontal orientation. Default is '│'."
+  "crit_color": {
+    "type": "colorchooser",
+    "default": "FireBrick",
+    "description": "Critical Value Color"
+  },
+  "high_color": {
+    "type": "colorchooser",
+    "default": "DarkOrange",
+    "description": "High Value Color"
   },
   "remove_border": {
     "type": "switch",
@@ -394,6 +410,38 @@
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_temp"
+  },
+  "chars_temp": {
+    "type": "list",
+    "tooltip": "The first emoji in this list is used for temperature",
+    "columns": [
+      {
+        "id": "emoji",
+        "title": "Emoji",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "default": [
+      {
+        "emoji": "🌡️"
+      },
+      {
+          "emoji": "🔥"
+      },
+      {
+        "emoji": "♨️"
+      },
+      {
+        "emoji": "♨"
+      },
+      {
+        "emoji": "⦿"
+      },
+      {
+        "emoji": "🌡"
+      }
+    ]
   },
   "strictly_positive_temp": {
     "type": "switch",
@@ -578,10 +626,60 @@
     "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_fan"
   },
+  "chars_fan": {
+    "type": "list",
+    "tooltip": "The first emoji in this list is used for fan",
+    "columns": [
+      {
+        "id": "emoji",
+        "title": "Emoji",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "default": [
+      {
+        "emoji": "🌀"
+      },
+      {
+        "emoji": "💨"
+      },
+      {
+        "emoji": "☢️"
+      },
+      {
+        "emoji": "✇☢✇"
+      },
+      {
+        "emoji": "🌫"
+      },
+      {
+        "emoji": "✇🌫"
+      },
+      {
+        "emoji": "✇"
+      },
+      {
+        "emoji": "𖣘"
+      },
+      {
+        "emoji": "⚽︎"
+      },
+      {
+        "emoji": "꩜"
+      },
+      {
+        "emoji": "🤂"
+      },
+      {
+        "emoji": "༄.°"
+      }
+    ]
+  },
   "strictly_positive_fan": {
     "type": "switch",
     "default": false,
-    "description": "Show only strictly positive values"
+    "description": "Show only positive or zero values"
   },
   "show_fan_unit": {
     "type": "switch",
@@ -651,7 +749,7 @@
 
     ],
     "tooltip": "Double-click on a line to change 'Shown name', 'Min' or 'Formula'.\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\n'Min' (optional) must be valid number.\n'Formula' (optional):\n  Use $ as the value returned by the sensor.\n  You can use the 4 operations (+-*/) and parentheses.\n  Example: $*1.1+0.5",
-    "show-buttons": false
+    "show-buttons": true
   },
   "numberOfFanSensors": {
     "type": "generic",
@@ -669,6 +767,29 @@
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_volt"
+  },
+  "chars_volt": {
+    "type": "list",
+    "tooltip": "The first emoji in this list is used for voltage",
+    "columns": [
+      {
+        "id": "emoji",
+        "title": "Emoji",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "default": [
+      {
+        "emoji": "⚡"
+      },
+      {
+        "emoji": "🗲"
+      },
+      {
+        "emoji": "🔌"
+      }
+    ]
   },
   "strictly_positive_volt": {
     "type": "switch",
@@ -753,7 +874,7 @@
 
     ],
     "tooltip": "Double-click on a line to change 'Shown name', 'Min', 'Max' or 'Formula'.\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\n'Min' and 'Max' (optional) must be valid numbers.\n'Formula' (optional):\n  Use $ as the value returned by the sensor.\n  You can use the 4 operations (+-*/) and parentheses.\n  Example: $*1.1+0.5",
-    "show-buttons": false
+    "show-buttons": true
   },
   "numberOfVoltageSensors": {
     "type": "generic",
@@ -771,6 +892,50 @@
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": " Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_intrusion"
+  },
+  "chars_intrusion": {
+    "type": "list",
+    "tooltip": "The first emoji in this list is used for intrusion",
+    "columns": [
+      {
+        "id": "emoji",
+        "title": "Emoji",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "default": [
+      {
+        "emoji": "🔓"
+      },
+      {
+        "emoji": "🔑"
+      },
+      {
+        "emoji": "🎯"
+      },
+      {
+        "emoji": "❗"
+      },
+      {
+        "emoji": "‼️"
+      },
+      {
+        "emoji": "🛠️"
+      },
+      {
+        "emoji": "⚠️"
+      },
+      {
+        "emoji": "🔧"
+      },
+      {
+        "emoji": "⮿"
+      },
+      {
+        "emoji": "🪛"
+      }
+    ]
   },
   "strictly_positive_intrusion": {
     "type": "switch",
@@ -820,7 +985,7 @@
 
     ],
     "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor name.",
-    "show-buttons": false
+    "show-buttons": true
   },
   "numberOfIntrusionSensors": {
     "type": "generic",

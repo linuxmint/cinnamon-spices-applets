@@ -97,3 +97,11 @@ msgstr ""
 #. metadata.json->description
 msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
 msgstr "连接到 ~/.ssh/config 中配置的 SSH 主机的小程序"
+
+#. settings-schema.json->showConnectionNotification->description
+msgid "Show notification when launching SSH connection"
+msgstr "启动 SSH 连接时显示通知"
+
+#. settings-schema.json->showConnectionNotification->tooltip
+msgid "Display a notification message when SSH terminal is launched"
+msgstr "启动 SSH 终端时显示通知消息"

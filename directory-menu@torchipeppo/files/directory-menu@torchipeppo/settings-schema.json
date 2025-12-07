@@ -5,6 +5,11 @@
         "description": "Base Directory",
         "select-dir": true
     },
+
+    "appearance-section": {
+        "type": "section",
+        "description": "Appearance"
+    },
     "icon-name": {
         "type": "iconfilechooser",
         "default": "folder-symbolic",
@@ -21,16 +26,25 @@
         "default": "",
         "description": "Panel Text"
     },
-    "show-menu": {
-        "type": "keybinding",
-        "description": "Show menu",
-        "default": "",
-        "tooltip": "Set keybinding(s) to show the menu."
+
+    "visibility-section": {
+        "type": "section",
+        "description": "Visibility"
+    },
+    "show-header": {
+        "type": "switch",
+        "default": true,
+        "description": "Include \"Open Folder\" and \"Open in Terminal\""
+    },
+    "show-hidden": {
+        "type": "switch",
+        "default": false,
+        "description": "Include hidden files"
     },
     "limit-characters": {
         "type": "switch",
         "default": false,
-        "description": "Limit the Maximum Number of Characters on the Submenus"
+        "description": "Limit the Maximum Number of Characters in the Submenus"
     },
     "character-limit": {
         "type": "spinbutton",
@@ -42,9 +56,39 @@
         "tooltip": "(Approximately) Limit the number of characters of each entry.\nUseful if you think the menu is too wide.",
         "dependency": "limit-characters"
     },
-    "show-hidden": {
+
+    "ordering-section": {
+        "type": "section",
+        "description": "Ordering"
+    },
+    "order-by": {
+        "type": "combobox",
+        "default": 0,
+        "options": {
+            "Name": 0,
+            "Date modified": 1
+        },
+        "description": "Order by..."
+    },
+    "favorites-first": {
         "type": "switch",
         "default": false,
-        "description": "Include hidden files"
+        "description": "Show favorite items first"
+    },
+    "pinned-first": {
+        "type": "switch",
+        "default": false,
+        "description": "Show pinned items first"
+    },
+
+    "keybindings-section": {
+        "type": "section",
+        "description": "Keybindings"
+    },
+    "show-menu": {
+        "type": "keybinding",
+        "description": "Show menu",
+        "default": "",
+        "tooltip": "Set keybinding(s) to show the menu."
     }
 }

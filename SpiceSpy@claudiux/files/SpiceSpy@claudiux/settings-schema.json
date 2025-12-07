@@ -24,12 +24,13 @@
       "type": "section",
       "title": "Options",
       "keys": [
-        "update-interval",
+        "update-interval-hours",
         "standard-opacity",
         "color-on-change",
-        "show-icon-in-menu",
         "icon-size",
+        "show-issues",
         "show-translations",
+        "show-commits",
         "sort-by",
         "show-uuid",
         "translate-name",
@@ -49,13 +50,17 @@
     }
   },
   "update-interval": {
-    "type": "spinbutton",
+    "type": "generic",
+    "default": -1
+  },
+  "update-interval-hours": {
+    "type": "scale",
     "description": "Update interval",
-    "units": "minutes",
-    "default": 240,
-    "min": 15,
-    "max": 2880,
-    "step": 5
+    "units": "hours",
+    "default": 4.0,
+    "min": 0.5,
+    "max": 24.0,
+    "step": 0.5
   },
   "standard-opacity": {
     "type": "spinbutton",
@@ -73,22 +78,37 @@
   "show-icon-in-menu": {
     "type": "switch",
     "description": "Show each Spice icon in the menu",
-    "default": false
+    "default": true
   },
   "icon-size": {
-    "type": "spinbutton",
-    "dependency": "show-icon-in-menu",
+    "type": "combobox",
     "description": "Icon size",
-    "units": "pixels",
     "default": 24,
-    "min": 16,
-    "max": 64,
-    "step": 2
+    "options": {
+      "16": 16,
+      "22": 22,
+      "24": 24,
+      "32": 32,
+      "48": 48,
+      "64": 64,
+      "96": 96,
+      "128":128
+    }
   },
   "show-translations": {
     "type": "switch",
     "description": "Show number of translations in the menu",
-    "default": false
+    "default": true
+  },
+  "show-commits": {
+    "type": "switch",
+    "description": "Show available updates in the menu",
+    "default": true
+  },
+  "show-issues": {
+    "type": "switch",
+    "description": "Show number of issues in the menu",
+    "default": true
   },
   "sort-by": {
     "type": "combobox",
@@ -175,13 +195,21 @@
   "spices_to_spy": {
     "type": "generic",
     "default": {
-
+      "actions": {},
+      "applets": {},
+      "desklets": {},
+      "extensions": {},
+      "themes": {}
     }
   },
   "old_spices_to_spy": {
     "type": "generic",
     "default": {
-
+      "actions": {},
+      "applets": {},
+      "desklets": {},
+      "extensions": {},
+      "themes": {}
     }
   }
 }

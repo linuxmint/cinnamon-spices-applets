@@ -151,10 +151,10 @@ class CustomAppList(SettingsWidget):
         self.move_up_button.set_sensitive(selection_exists and self.tree_store.iter_previous(item_iter) is not None)
         self.move_down_button.set_sensitive(selection_exists and self.tree_store.iter_next(item_iter) is not None)
 
-    def on_add_item(self, *args):
-        ''' Handles the addition of a new item to the tree store
+    def _add_item_by_type(self, type):
+        ''' Handles the addition of a new item to the tree store by type
         '''
-        dialog = EditDialog('app', self.groups)
+        dialog = EditDialog(type, self.groups)
         dialog.set_transient_for(self.get_toplevel())
         data, new_group = dialog.run()
         if not data:
@@ -167,12 +167,22 @@ class CustomAppList(SettingsWidget):
         elif new_group:
             parent = self._create_group(new_group)
 
-        self.tree_store.append(parent, self._prepare_store_entry('app', data))
+        self.tree_store.append(parent, self._prepare_store_entry(type, data))
 
         if new_group and parent:
             self.tree_view.expand_row(self.tree_store.get_path(parent), True)
 
         self._configuration_changed(True)
+
+    def on_add_item(self, *args):
+        ''' Handles the addition of a new item to the tree store
+        '''
+        self._add_item_by_type('app')
+    
+    def on_add_separator(self, *args):
+        ''' Adds a new separator to the store with a user-chosen color
+        '''
+        self._add_item_by_type('separator')
 
     def _prepare_store_entry(self, entry_type, entry_data):
         ''' Creates a formatted store entry based on the entry type and provided data
@@ -205,50 +215,6 @@ class CustomAppList(SettingsWidget):
         item = self.tree_store.append(None, self._prepare_store_entry('group', data))
         self.groups[data["name"]] = item
         return item
-
-    def on_add_separator(self, *args):
-        ''' Adds a new separator to the store with a user-chosen color
-        '''
-        rgb = self._choose_separator_color()
-        if not rgb:
-            return
-
-        data = {
-            "name": '',
-            'icon': '',
-            "group": '',
-            "command": '',
-            "color": rgb
-        }
-        self.tree_store.append(None, self._prepare_store_entry('separator', data))
-
-        self._configuration_changed(True)
-
-    def _choose_separator_color(self, rgb=[127, 127, 127]):
-        ''' Opens a color chooser dialog and returns the selected color as an RGB list
-        '''
-        dialog = Gtk.ColorChooserDialog(
-            title=APP_NAME,
-            parent=self.get_toplevel(),
-            rgba=Gdk.RGBA(rgb[0] / 255, rgb[1] / 255, rgb[2] / 255)
-        )
-        dialog.set_type_hint(Gdk.WindowTypeHint.NORMAL)
-        dialog.set_skip_taskbar_hint(True)
-        dialog.set_deletable(False)
-        dialog.set_position(Gtk.WindowPosition.MOUSE)
-        dialog.set_use_alpha(False)
-
-        rgb = None
-        if dialog.run() == Gtk.ResponseType.OK:
-            color = dialog.get_rgba()
-            rgb = [
-                int(round(color.red * 255)),
-                int(round(color.green * 255)),
-                int(round(color.blue * 255))
-            ]
-        
-        dialog.destroy()
-        return rgb
 
     def on_remove_item(self, *args):
         ''' Handles the removal of a selected item from the tree store
@@ -286,13 +252,16 @@ class CustomAppList(SettingsWidget):
         index = self.tree_store.get_path(item_iter)[0]
         for child in self.tree_store[item_iter].iterchildren():
             data = {
-                "icon": child[1].to_string(),
-                "name": child[2],
-                "command": child[3],
-                "group": ''
+                "icon": child[1].to_string() if child[1] is not None else '',
+                "name": child[2] if child[2] is not None else '',
+                "command": child[3] if child[3] is not None else '',
+                "group": '',
+                "color": child[0]["color"] if child[0]["type"] == 'separator' else ''
             }
-            self.tree_store.insert(None, index, self._prepare_store_entry('app', data))
+            self.tree_store.insert(None, index, self._prepare_store_entry(child[0]["type"], data))
             index += 1
+
+        self.groups.pop(self.tree_store[item_iter][2], None)
         self.tree_store.remove(item_iter)
 
     def _remove_item_and_cleanup_parent(self, item_iter):
@@ -302,73 +271,88 @@ class CustomAppList(SettingsWidget):
         self.tree_store.remove(item_iter)
         
         if parent and not self.tree_store.iter_has_child(parent.iter):
+            self.groups.pop(self.tree_store[parent.iter][2], None)
             self.tree_store.remove(parent.iter)
 
     def on_edit_item(self, *args):
         tree_store, item_iter = self.tree_view.get_selection().get_selected()
         item_type = self.tree_store[item_iter][0]['type']
-        if item_type in ['app', 'group']:
-            dialog = EditDialog('edit', self.groups, self.tree_store[item_iter])
-            dialog.set_transient_for(self.get_toplevel())
-            data, new_group = dialog.run()
-            if not data:
-                return
-            
-            if new_group:
-                self._create_group(new_group)
 
-            # edit an application
-            if data["type"] == "app":
-                if data["group"] != self.tree_store[item_iter][0]["group"]:
-                    old_parent = self.tree_store[item_iter].get_parent()
+        dialog = EditDialog('edit', self.groups, self.tree_store[item_iter])
+        dialog.set_transient_for(self.get_toplevel())
+        data, new_group = dialog.run()
+        if not data:
+            return
+        
+        if new_group:
+            self._create_group(new_group)
 
-                    parent = None
-                    if data["group"] in self.groups:
-                        parent = self.groups[data["group"]]
-                    elif new_group:
-                        parent = self._create_group(new_group)
-                    
-                    self.tree_store.remove(item_iter)
-                    self.tree_store.append(parent, self._prepare_store_entry('app', data))
+        # edit an application
+        if data["type"] == "app":
+            if data["group"] != self.tree_store[item_iter][0]["group"]:
+                old_parent = self.tree_store[item_iter].get_parent()
 
-                    if new_group:
-                        self.tree_view.expand_row(self.tree_store.get_path(parent), True)
+                parent = None
+                if data["group"] in self.groups:
+                    parent = self.groups[data["group"]]
+                elif new_group:
+                    parent = self._create_group(new_group)
+                
+                self.tree_store.remove(item_iter)
+                self.tree_store.append(parent, self._prepare_store_entry('app', data))
 
-                    # delete old parent if there are no children left
-                    if old_parent:
-                        if not self.tree_store.iter_has_child(old_parent.iter):
-                            self.groups.pop(self.tree_store[old_parent.iter][2], None)
-                            self.tree_store.remove(old_parent.iter)
-                else:
-                    self.tree_store[item_iter][1] = Gio.Icon.new_for_string(
-                        data["icon"])
-                    self.tree_store[item_iter][2] = data["name"]
-                    self.tree_store[item_iter][3] = data["command"]
+                if new_group:
+                    self.tree_view.expand_row(self.tree_store.get_path(parent), True)
 
-            # edit a group
-            elif data["type"] == "group":
-                group_origin = self.tree_store[item_iter][2]
-
-                self.tree_store[item_iter][1] = Gio.Icon.new_for_string(data["icon"])
+                # delete old parent if there are no children left
+                if old_parent:
+                    if not self.tree_store.iter_has_child(old_parent.iter):
+                        self.groups.pop(self.tree_store[old_parent.iter][2], None)
+                        self.tree_store.remove(old_parent.iter)
+            else:
+                self.tree_store[item_iter][1] = Gio.Icon.new_for_string(
+                    data["icon"])
                 self.tree_store[item_iter][2] = data["name"]
-                for child in self.tree_store[item_iter].iterchildren():
-                    child[0]["group"] = data["name"]
-                self.groups[data["name"]] = self.groups.pop(
-                    group_origin, None)
-            
-            self._configuration_changed(True)
+                self.tree_store[item_iter][3] = data["command"]
+
+        # edit a group
+        elif data["type"] == "group":
+            group_origin = self.tree_store[item_iter][2]
+
+            self.tree_store[item_iter][1] = Gio.Icon.new_for_string(data["icon"])
+            self.tree_store[item_iter][2] = data["name"]
+            for child in self.tree_store[item_iter].iterchildren():
+                child[0]["group"] = data["name"]
+            self.groups[data["name"]] = self.groups.pop(
+                group_origin, None)
                 
         # edit a separator
-        elif item_type == 'separator':
-            current_color = self.tree_store[item_iter][0]['color']
-            rgb = self._choose_separator_color(current_color)
-            if not rgb:
-                return
-            
-            self.tree_store[item_iter][0]['color'] = rgb
-            self.tree_store[item_iter][2] = self._create_separator_markup(rgb)
+        elif data["type"] == "separator":
+            if data["group"] != self.tree_store[item_iter][0]["group"]:
+                old_parent = self.tree_store[item_iter].get_parent()
 
-            self._configuration_changed(True)
+                parent = None
+                if data["group"] in self.groups:
+                    parent = self.groups[data["group"]]
+                elif new_group:
+                    parent = self._create_group(new_group)
+                
+                self.tree_store.remove(item_iter)
+                self.tree_store.append(parent, self._prepare_store_entry('separator', data))
+
+                if new_group:
+                    self.tree_view.expand_row(self.tree_store.get_path(parent), True)
+
+                # delete old parent if there are no children left
+                if old_parent:
+                    if not self.tree_store.iter_has_child(old_parent.iter):
+                        self.groups.pop(self.tree_store[old_parent.iter][2], None)
+                        self.tree_store.remove(old_parent.iter)
+            else:
+                self.tree_store[item_iter][0]['color'] = data["color"]
+                self.tree_store[item_iter][2] = self._create_separator_markup(data["color"])
+
+        self._configuration_changed(True)
 
     def on_duplicate_item(self, *args):
         ''' Duplicates the currently selected item in the tree view
@@ -424,8 +408,8 @@ class CustomAppList(SettingsWidget):
         '''
         self.saved_configuration = not changed
         self.save_button.set_is_important(changed)
-        self.save_button.set_sensitive(changed)
-        self.cancel_button.set_sensitive(changed)
+        self.save_button.set_visible(changed)
+        self.cancel_button.set_visible(changed)
 
     def on_save_list(self, *args):
         ''' Handles the save event by calling the method to save the current configuration

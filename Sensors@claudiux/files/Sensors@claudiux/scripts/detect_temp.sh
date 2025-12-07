@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 OF="sensors_detected.json"
 echo "{" > $OF
 LHWMON=( $(ls -1 /sys/class/hwmon) )

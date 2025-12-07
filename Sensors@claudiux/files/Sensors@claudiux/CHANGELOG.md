@@ -1,3 +1,115 @@
+### v5.9.3~20251121
+  * Updates to-string() function.
+
+### v5.9.2~20250919
+  * Fixes [#7761](https://github.com/linuxmint/cinnamon-spices-applets/issues/7761)
+
+### v5.9.1~20250917
+  * Fixes [#7761](https://github.com/linuxmint/cinnamon-spices-applets/issues/7761)
+
+### v5.9.0~20250913
+  * Improves the reading of disk temperatures.
+
+### v5.8.2~20250911
+  * Avoids any unnecessary work.
+  * Fixes [#7714](https://github.com/linuxmint/cinnamon-spices-applets/issues/7714)
+
+
+### v5.8.1~20250908
+  * Avoids memory leaks.
+
+### v5.8.0~20250907
+  * Increases the speed at which disk temperatures are read.
+
+### v5.7.3~20250906
+  * Takes into account the "Refresh interval" value in the `SensorsDaemon.sh` script.
+
+### v5.7.2~20250906
+  * Improves stability.
+  * Fixes [#7670](https://github.com/linuxmint/cinnamon-spices-applets/issues/7670)
+
+### v5.7.0~20250905
+  * Increases speed.
+
+### v5.6.1~20250701
+  * Fixes bad data in json file.
+
+### v5.6.0~20250630
+  * Ignores invalid sensors.
+
+### v5.5.0~20250620
+  * Add Devuan support.
+
+### v5.4.2~20250401
+  * Minor changes about font size.
+  * Code cleanup in applet.js.
+
+### v5.4.1~20250330
+  * Minor changes about applet width.
+
+### v5.4.0~20250329
+  * Now applet width can be fixed by user (for horizontal panels).
+  * Fixes #7005.
+
+### v5.3.2~20250228
+  * Fixes scenario where special characters would appear next to temperatures on the panel.
+
+### v5.3.1~20250223
+  * Removed option "Only show positive values" for fans. (Value fixed to false.)
+  * Fixes #6845.
+
+### v5.3.0~20250222
+  * Users can now choose the type of separator.
+
+### v5.2.0~20250221
+  * Separator is coming back!
+
+### v5.1.0~20250221
+  * Font size can now be set from 60% to 120% of standard size (instead of 80% to 120%).
+  * Fixes #6896.
+
+### v5.0.0~20250220
+  * Individual High/Critical Value Indications.
+  * High/Critical Value Color can be selected.
+  * Custom emoji can be added/selected.
+  * Fixes #6846.
+
+### v4.2.1~20250215
+  * Fixes #6868.
+
+### v4.2.0~20250205
+  * Fixes several issues.
+  * Fixes #6845.
+  * Fixes #6766.
+  * Fixes #6842.
+
+### v4.1.0~20250130
+  * Improves dependency installation.
+  * Fixes #6809 and #6818.
+
+### v4.0.3~20250126
+  * Improved code. Greater stability.
+  * Change of Fan symbol.
+
+### v4.0.2~20250116
+  * mainloopTools library: improvements.
+
+### v4.0.1~20250114
+  * As long as the icon is hovered over, the sensors are checked every second.
+
+### v4.0.0~20250114
+  * Now uses mainloopTools to improve loop management.
+  * Fixes #6744.
+
+### v3.9.0~20241109
+  * Fixes #6076: Ignores 'empty' sensors (sensors not sending data).
+
+### v3.8.3~20241029
+  * Fixes #6541. Adds FAQ about Nvidia video card temperature readings. Thanks to @JEleniel!
+
+### v3.8.2~20241011
+  * Adds support for Nvidia SMI temperatures. Thanks to @JEleniel!
+
 ### v3.8.1~20240901
   * Fixes #6353. Repairs tooltip.
 

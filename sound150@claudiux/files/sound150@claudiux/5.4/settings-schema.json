@@ -99,8 +99,7 @@
         "stepVolume",
         "magneticOn",
         "magnetic25On",
-        "alwaysCanChangeMic",
-        "avoidCrackingAtShutdown"
+        "alwaysCanChangeMic"
       ]
     },
     "sectionSound2": {
@@ -247,7 +246,7 @@
   },
   "showalbum": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Show album art as icon",
     "dependency": "playerControl"
   },
@@ -279,7 +278,7 @@
   },
   "showVolumeLevelNearIcon": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display volume level near icon"
   },
   "showMicMutedOnIcon": {
@@ -362,11 +361,6 @@
     "tooltip": "Always show the 'Mute input' switch in the context menu.",
     "default": true
   },
-  "avoidCrackingAtShutdown": {
-    "type": "switch",
-    "description": "Try to avoid loud cracking sound at shutdown",
-    "default": true
-  },
   "showMediaKeysOSD": {
     "type": "combobox",
     "default": "medium",
@@ -376,7 +370,7 @@
       "medium": "medium",
       "large": "large"
     },
-    "description": "Whether the media keys osd is disabled or its relative display size"
+    "description": "Whether the media keys OSD is disabled or its relative display size"
   },
   "showOSDonStartup": {
     "type": "switch",

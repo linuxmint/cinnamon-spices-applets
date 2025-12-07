@@ -30,5 +30,64 @@
         "type": "checkbox",
         "description": "Symbolic icons in menu",
         "default": true
+    },
+    
+    "menuOptions": {
+        "type": "header",
+        "description": "Menu Options"
+    },
+    
+    "showLockScreen": {
+        "type": "checkbox",
+        "description": "Show Lock Screen option",
+        "default": true
+    },
+    
+    "showSwitchUser": {
+        "type": "checkbox",
+        "description": "Show Switch User option",
+        "default": true
+    },
+    
+    "showGuestSession": {
+        "type": "checkbox",
+        "description": "Show Guest Session option",
+        "default": true
+    },
+    
+    "showLogOff": {
+        "type": "checkbox",
+        "description": "Show Log Off option",
+        "default": true
+    },
+    
+    "showSuspend": {
+        "type": "checkbox",
+        "description": "Show Suspend option",
+        "default": true
+    },
+    
+    "showSleep": {
+        "type": "checkbox",
+        "description": "Show Sleep option",
+        "default": true
+    },
+    
+    "showHibernate": {
+        "type": "checkbox",
+        "description": "Show Hibernate option",
+        "default": true
+    },
+    
+    "showRestart": {
+        "type": "checkbox",
+        "description": "Show Restart option",
+        "default": true
+    },
+    
+    "showShutDown": {
+        "type": "checkbox",
+        "description": "Show Shut Down option",
+        "default": true
     }
 }

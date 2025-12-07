@@ -1,8 +1,13 @@
 {
-    "show-notifications": {
+    "show-toast-notifications": {
         "type": "switch",
         "default": false,
-        "description" : "Show notifications"
+        "description" : "Show toast notifications"
+    },
+    "show-osd-notifications": {
+        "type": "switch",
+        "default": false,
+        "description" : "Show OSD notifications"
     },
     "show-silent-notifications": {
         "type" : "switch",

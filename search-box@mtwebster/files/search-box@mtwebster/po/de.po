@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# INTERNET SEARCH BOX
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# mtwebster, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-05 20:02+0200\n"
+"POT-Creation-Date: 2025-05-25 21:36+0200\n"
 "PO-Revision-Date: 2018-02-13 12:55+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,24 +19,24 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:68 old/5.4/applet.js:63
+#. applet.js:66 old/5.4/applet.js:63
 msgid "Right-click to select or add your search engine"
 msgstr ""
 
-#: applet.js:87 old/applet.js:79 old/3.2/applet.js:73 old/5.4/applet.js:82
+#. applet.js:85 old/applet.js:79 old/5.4/applet.js:82 old/3.2/applet.js:73
 msgid "Type to search..."
 msgstr "Suchbegriff eingeben …"
 
-#: applet.js:117 old/5.4/applet.js:112
+#. applet.js:115 old/5.4/applet.js:112
 #, fuzzy
 msgid "Select your Search Engine:"
 msgstr "Einen Suchanbieter auswählen"
 
-#: old/applet.js:90
+#. old/applet.js:90
 msgid "Change default programs..."
 msgstr "Bevorzugte Anwendungen ändern …"
 
-#: old/applet.js:92
+#. old/applet.js:92
 msgid "Edit providers"
 msgstr "Anbieter bearbeiten"
 
@@ -61,27 +61,24 @@ msgstr "Anbieter bearbeiten"
 msgid "Options"
 msgstr ""
 
+#. settings-schema.json->section-keybinding->title
+msgid "Keyboard shortcuts"
+msgstr ""
+
 #. settings-schema.json->section-colors->title
-#. settings-schema.json->header-colors->description
 #. old->5.4->settings-schema.json->header-colors->description
 msgid "Search-box colors"
 msgstr ""
 
-#. settings-schema.json->header-provider->description
-#. old->3.2->settings-schema.json->header-provider->description
-#. old->5.4->settings-schema.json->header-provider->description
-msgid "Search Provider Settings"
-msgstr "Suchanbieter-Einstellungen"
-
 #. settings-schema.json->show-provider->description
-#. old->3.2->settings-schema.json->show-provider->description
 #. old->5.4->settings-schema.json->show-provider->description
+#. old->3.2->settings-schema.json->show-provider->description
 msgid "Show provider"
 msgstr "Anbieter anzeigen"
 
 #. settings-schema.json->show-provider->tooltip
-#. old->3.2->settings-schema.json->show-provider->tooltip
 #. old->5.4->settings-schema.json->show-provider->tooltip
+#. old->3.2->settings-schema.json->show-provider->tooltip
 msgid "Show selected provider in the panel"
 msgstr "Ausgewählten Anbieter in der Leiste anzeigen"
 
@@ -96,12 +93,6 @@ msgid ""
 "Reset query after search? This may not be useful if you want to be able to "
 "perform the same query on other search engines afterwards."
 msgstr ""
-
-#. settings-schema.json->header-providers->description
-#. old->5.4->settings-schema.json->header-providers->description
-#, fuzzy
-msgid "Search Engines"
-msgstr "Einen Suchanbieter auswählen"
 
 #. settings-schema.json->providers->columns->title
 #. old->5.4->settings-schema.json->providers->columns->title
@@ -142,15 +133,9 @@ msgid ""
 "If no provider is selected, the default provider is Google."
 msgstr ""
 
-#. settings-schema.json->header-keybinding->description
-#. old->3.2->settings-schema.json->header-keybinding->description
-#. old->5.4->settings-schema.json->header-keybinding->description
-msgid "Keybinding"
-msgstr "Tastenkombination"
-
 #. settings-schema.json->custom-keybinding->description
-#. old->3.2->settings-schema.json->custom-keybinding->description
 #. old->5.4->settings-schema.json->custom-keybinding->description
+#. old->3.2->settings-schema.json->custom-keybinding->description
 msgid "Keybinding, which opens the search box"
 msgstr "Tastenkombination, um das Suchfeld zu öffnen"
 
@@ -163,6 +148,21 @@ msgstr ""
 #. old->5.4->settings-schema.json->text-color->description
 msgid "Text color"
 msgstr ""
+
+#. old->5.4->settings-schema.json->header-provider->description
+#. old->3.2->settings-schema.json->header-provider->description
+msgid "Search Provider Settings"
+msgstr "Suchanbieter-Einstellungen"
+
+#. old->5.4->settings-schema.json->header-providers->description
+#, fuzzy
+msgid "Search Engines"
+msgstr "Einen Suchanbieter auswählen"
+
+#. old->5.4->settings-schema.json->header-keybinding->description
+#. old->3.2->settings-schema.json->header-keybinding->description
+msgid "Keybinding"
+msgstr "Tastenkombination"
 
 #. old->3.2->settings-schema.json->selected-provider->description
 msgid "Select provider"

@@ -21,14 +21,15 @@
     "showEmptyTray": {
         "type": "switch",
         "default":true,
-        "description": "Show empty tray",
-        "tooltip": "Check this to show the tray even when there are no new notifications."
+        "description": "Show notification tray",
+        "tooltip": "Check this to always show the notification tray."
     },
     "showDisturbIcon": {
         "type": "switch",
         "default":false,
-        "description": "Show 'Do not disturb' icon even when show empy tray option is disabled",
-        "tooltip": "Check this to show 'Do not disturb' icon on panel even when show empty tray option is disabled."
+        "dependency":"!showEmptyTray",
+        "description": "Always show 'Do Not Disturb' icon",
+        "tooltip": "Check this to show the 'Do Not Disturb icon' on the panel even when the 'Show notification tray' option is disabled."
     },
     "showNotificationSettings": {
         "type": "switch",
@@ -51,6 +52,12 @@
         "default": "<Shift><Super>c",
         "tooltip" : "Set keybinding(s) to clear all notifications."
    },
+    "keyMute": {
+        "type": "keybinding",
+        "description": "Enable or disable notifications",
+        "default": "<Shift><Super>m",
+        "tooltip": "Set keybinding(s) to enable or disable notifications."
+    },    
    "section4": {
         "type": "section",
         "description": ""

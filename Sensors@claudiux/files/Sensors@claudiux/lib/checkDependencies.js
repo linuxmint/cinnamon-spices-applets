@@ -65,6 +65,10 @@ const DEPENDENCIES = {
     ["sox", "/usr/bin/sox",  "sox"],
     ["", "/usr/share/doc/libsox-fmt-mp3/copyright", "libsox-fmt-mp3"]
   ],
+  "devuan": [
+    ["sox", "/usr/bin/sox",  "sox"],
+    ["", "/usr/share/doc/libsox-fmt-mp3/copyright", "libsox-fmt-mp3"]
+  ],
   "fedora": [
     ["sox", "/usr/bin/sox",  "sox"]
   ],
@@ -80,7 +84,8 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm-sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
-    ["smartctl", "/usr/sbin/smartctl", "smartmontools"]
+    ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
+    ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
   "arch": [
     ["sensors", "/usr/bin/sensors",  "lm_sensors"],
@@ -92,13 +97,22 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm-sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
-    ["smartctl", "/usr/sbin/smartctl", "smartmontools"]
+    ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
+    ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
+  ],
+  "devuan": [
+    ["sensors", "/usr/bin/sensors",  "lm-sensors"],
+    ["xsensors", "/usr/bin/xsensors", "xsensors"],
+    //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
+    ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
+    ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
   "fedora": [
     ["sensors", "/usr/bin/sensors",  "lm_sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
-    ["smartctl", "/usr/sbin/smartctl", "smartmontools"]
+    ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
+    ["", "/usr/share/fontconfig/conf.avail/66-google-noto-sans-bamum.conf", "google-noto-sans-bamum-fonts"]
   ],
   "openSUSE": [
     ["sensors", "/usr/bin/sensors",  "sensors"],
@@ -111,6 +125,7 @@ var DEPENDENCIES = {
 if (NEEDS_FONTS_SYMBOLA) {
   DEPENDENCIES["default"].push(["", "/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf", "fonts-symbola"]);
   DEPENDENCIES["debian"].push(["", "/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf", "fonts-symbola"]);
+  DEPENDENCIES["devuan"].push(["", "/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf", "fonts-symbola"]);
   DEPENDENCIES["fedora"].push(["", "/usr/share/fonts/gdouros-symbola/Symbola.ttf", "gdouros-symbola-fonts"]);
   DEPENDENCIES["openSUSE"].push(["", "/usr/share/fonts/truetype/Symbola.ttf", "gdouros-symbola-fonts"]);
 }
@@ -127,14 +142,17 @@ const UPDATE = {
   "default": "sudo apt-get update",
   "arch": "sudo pacman -Syu",
   "debian": "apt-get update",
+  "devuan": "apt-get update",
   "fedora": "sudo dnf update",
-  "openSUSE": ""
+  "openSUSE": ""//,
+  //"gentoo": "emerge --sync"
 }
 
 const INSTALL = {
   "default": "sudo apt-get install",
   "arch": "sudo pacman -S",
   "debian": "apt-get install",
+  "devuan": "apt-get install",
   "fedora": "sudo dnf install",
   "openSUSE": "sudo zypper --non-interactive install"
 }
@@ -162,12 +180,16 @@ const DISTRO = function() {
  * @details: Additional information
  */
 var messageTray = new MessageTray.MessageTray();
-function criticalNotify(msg, details, icon) {
+function criticalNotify(msg, details, icon, button=[]) {
   let source = new MessageTray.SystemNotificationSource();
   messageTray.add(source);
   let notification = new MessageTray.Notification(source, UUID + ": " + msg, details, { icon: icon });
   notification.setTransient(false);
   notification.setUrgency(MessageTray.Urgency.CRITICAL);
+  if (button.length === 2) {
+    notification.addButton("callback", button[0]); // button[0]: label
+    notification.connect("action-invoked", button[1]); // button[1]: callback
+  }
   source.notify(notification);
   return notification
 }
@@ -202,6 +224,21 @@ function get_default_terminal() {
   return "" + ret1;
 } // End of get_default_terminal
 
+function get_default_terminal_separator() {
+  let _SETTINGS_SCHEMA='org.cinnamon.desktop.default-applications.terminal';
+  //~ let _SETTINGS_KEY1 = 'exec'; // Ex: 'gnome-terminal'
+  let _SETTINGS_KEY2 = 'exec-arg'; // Ex: '-x'
+  let _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
+  //~ let ret1 = _interface_settings.get_string(_SETTINGS_KEY1);
+  let ret2 = _interface_settings.get_string(_SETTINGS_KEY2);
+  if (ret2 == null) {
+    //~ ret1 = get_terminal();
+    ret2 = '-e';
+  }
+  //return [ret1, ret2];
+  return " " + ret2 + " ";
+} // End of get_default_terminal_separator
+
 function isFedora() {
   return GLib.find_program_in_path("dnf")
 } // End of isFedora
@@ -211,21 +248,32 @@ function isArchLinux() {
 } // End of isArchLinux
 
 function isDebian() {
-  return DISTRO() === 'debian'
+  return DISTRO() === 'debian' || DISTRO() === 'devuan'
 } // End of isDebian
 
 function isOpenSUSE() {
   return GLib.find_program_in_path("zypper")
 }
 
-function is_apturl_present() {
-  return GLib.find_program_in_path("apturl")
-} // End of is_apturl_present
+function isGentoo() {
+  return Gio.file_new_for_path("/etc/gentoo-release").query_exists(null)
+} // End of isArchLinux
+
+
+function is_pkexec_present() {
+  return (GLib.find_program_in_path("pkexec") != null)
+} // End of is_pkexec_present
+
+function is_pkcon_present() {
+  //~ return GLib.find_program_in_path("apturl")
+  return (GLib.find_program_in_path("pkcon") != null && GLib.find_program_in_path("pkexec") != null)
+} // End of is_pkcon_present
 
 function get_distro() {
   let distro = DISTRO();
   switch (distro) {
     case "debian":
+    case "devuan":
     case "arch":
     case "fedora":
       return distro;
@@ -239,6 +287,8 @@ function get_distro() {
         return "fedora";
       } else if (isOpenSUSE()) {
         return "openSUSE"
+      } else if (isGentoo) {
+        return "gentoo"
       }
       return "default"; // linuxmint or ubuntu
   }
@@ -289,11 +339,12 @@ Dependencies.prototype = {
       Gio.file_new_for_path("/usr/share/fonts/TTF/Symbola.ttf").query_exists(null) ||
       Gio.file_new_for_path("/usr/share/fonts/gdouros-symbola/Symbola.ttf").query_exists(null) ||
       Gio.file_new_for_path("/usr/share/fonts/truetype/Symbola.ttf").query_exists(null) ||
+      Gio.file_new_for_path("/usr/share/fonts/ttf-ancient-fonts/Symbola_hint.ttf").query_exists(null) ||
       Gio.file_new_for_path("%s/.local/share/fonts/Symbola_Hinted.ttf".format(HOME_DIR)).query_exists(null) ||
       Gio.file_new_for_path("%s/.local/share/fonts/Symbola.ttf".format(HOME_DIR)).query_exists(null) ||
       Gio.file_new_for_path("%s/.local/share/fonts/Symbola.otf".format(HOME_DIR)).query_exists(null)
     )
-    if (!_fonts_installed && isArchLinux()) {
+    if (!_fonts_installed && (isArchLinux() || isGentoo())) {
       Util.spawnCommandLineAsync("/bin/sh -c \"%s/install_symbola_on_Arch.sh\"".format(SCRIPTS_DIR), null, null);
       _fonts_installed = true
     }
@@ -326,8 +377,9 @@ Dependencies.prototype = {
         icon_size: 32 });
       // Got a terminal used on this system:
       let terminal = get_default_terminal();
+      let separator = get_default_terminal_separator();
       // apturl is it present?
-      let _is_apturl_present = is_apturl_present();
+      let _is_pkcon_present = is_pkcon_present();
       // Detects the distrib in use and make adapted message and notification:
       let _isFedora = isFedora();
       let _isArchlinux = isArchLinux();
@@ -344,20 +396,29 @@ Dependencies.prototype = {
       let _apt_install = "%s %s".format(_install, _pkg_to_install.join(" "));
       //var _apt_install = _isFedora ? "sudo dnf install libnotify gdouros-symbola-fonts" : _isArchlinux ? "sudo pacman -Syu libnotify" : _isDebian ? "apt install libnotify-bin fonts-symbola" : "sudo apt install libnotify-bin fonts-symbola";
       let criticalMessagePart1 = _("You appear to be missing some of the programs required for this applet to have all its features.");
-      let criticalMessage = _is_apturl_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
-      this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
+      //~ let criticalMessage = _is_pkcon_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please install these packages:")+"\n "+ _pkg_to_install.join(" ") +"\n\n";
+      let criticalMessage = criticalMessagePart1+"\n\n" + _("Please install these packages:") +" "+ _pkg_to_install.join(" ") +"\n\n";
+      //~ this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
 
-      if (!_is_apturl_present) {
-        if (terminal != "") {
-          // TRANSLATORS: The next messages should not be translated.
-          if (_isDebian === true) {
-            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
-          } else {
-            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
-          }
-        }
+      if (!_is_pkcon_present) {
+        this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
+        //~ if (terminal != "") {
+          //~ // TRANSLATORS: The next messages should not be translated.
+          //~ if (_isDebian === true) {
+            //~ GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+          //~ } else {
+            //~ GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+          //~ }
+        //~ }
       } else {
-        Util.spawnCommandLine("apturl apt:%s".format(_pkg_to_install.join(",")));
+        this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon,
+          [
+            _("Install these packages now"),
+            () => { Util.spawnCommandLineAsync(terminal + separator + "pkexec pkcon -y install %s".format(_pkg_to_install.join(" "))) }
+          ]
+        );
+        //~ Util.spawnCommandLine("apturl apt:%s".format(_pkg_to_install.join(",")));
+
       }
       this.depAreMet = false;
     }

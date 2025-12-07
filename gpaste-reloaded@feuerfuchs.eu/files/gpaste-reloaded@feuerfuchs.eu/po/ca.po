@@ -1,15 +1,16 @@
-# SOME DESCRIPTIVE TITLE.
+# GPASTE RELOADED
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# feuerfuchs, 2016
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-23 23:31+0100\n"
-"PO-Revision-Date: 2024-07-19 03:06+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-12-27 14:39-0500\n"
+"PO-Revision-Date: 2025-02-13 21:09+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -18,75 +19,74 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: GPasteNewItemDialog.js:53
+#. GPasteNewItemDialog.js:53
 msgid "Please enter the text you want to add to the current history:"
-msgstr ""
-"Si us plau, introduïu el text que vulgueu afegir l'historial actual:"
+msgstr "Si us plau, introduïu el text que vulgueu afegir l'historial actual:"
 
-#: GPasteNewItemDialog.js:59 GPasteNotInstalledDialog.js:32
+#. GPasteNewItemDialog.js:59 GPasteNotInstalledDialog.js:32
 msgid "OK"
 msgstr "OK"
 
-#: GPasteNewItemDialog.js:63
+#. GPasteNewItemDialog.js:63
 msgid "Cancel"
 msgstr "Cancel·lar"
 
-#: GPasteNotInstalledDialog.js:27
+#. GPasteNotInstalledDialog.js:27
 msgid ""
 "GPaste is not installed. Please install the necessary packages and then "
 "restart Cinnamon for this applet to start working."
 msgstr ""
-"GPaste no està instal·lat. Instal·leu els paquets necessaris i "
-"reinicieu Cinnamon perquè aquesta miniaplicació comenci a funcionar."
+"GPaste no està instal·lat. Instal·leu els paquets necessaris i reinicieu "
+"Cinnamon perquè aquesta miniaplicació comenci a funcionar."
 
-#: GPasteSearchItem.js:34
+#. GPasteSearchItem.js:34
 msgid "Type to search..."
 msgstr "Escriviu per buscar..."
 
-#: applet.js:73
+#. applet.js:73
 msgid "[GPaste is not installed]"
 msgstr "[GPaste no està instal·lat]"
 
-#: applet.js:109
+#. applet.js:109
 msgid "GPaste clipboard"
 msgstr "Porta-papers de Gpaste"
 
 #. settings-schema.json->gpaste-settings->description
-#: applet.js:115 applet.js:153
+#. applet.js:115 applet.js:153
 msgid "GPaste Main Program"
 msgstr "Programa principal de Gpaste"
 
-#: applet.js:120
+#. applet.js:120
 msgid "Select History"
 msgstr "Seleccionar l'historial"
 
-#: applet.js:129
+#. applet.js:129
 msgid "Track clipboard changes"
 msgstr "Registrar canvis al porta-papers"
 
-#: applet.js:137
+#. applet.js:137
 msgid "(Empty)"
 msgstr "(Buit)"
 
-#: applet.js:140
+#. applet.js:140
 msgid "(No results)"
 msgstr "(No hi ha resultats)"
 
-#: applet.js:145
+#. applet.js:145
 msgid "New item"
 msgstr "Nou element"
 
-#: applet.js:148
+#. applet.js:148
 msgid "Empty history"
 msgstr "Netejar l'historial"
 
-#: applet.js:465
+#. applet.js:471
 msgid "Do you really want to empty the current history?"
 msgstr "Segur que voleu buidar l'historial actual?"
 
 #. metadata.json->description
-msgid "Instantly access and manage your clipboard history"
-msgstr "Accediu i gestioneu la història del vostre porta-papers"
+msgid "Instantly access and manage your clipboard history."
+msgstr "Accediu i gestioneu la història del vostre porta-retalls."
 
 #. metadata.json->name
 msgid "GPaste Reloaded"
@@ -95,6 +95,11 @@ msgstr "GPaste Reloaded"
 #. settings-schema.json->shown-entries->description
 msgid "Shown entries"
 msgstr "Elements mostrats"
+
+#. settings-schema.json->always-show-icon->description
+msgid "Show tray icon, even when the applet is not in use"
+msgstr ""
+"Mostra la icona al tauler encara que la miniaplicació no estigui en ús"
 
 #. settings-schema.json->display-track-switch->description
 msgid "Display 'Track clipboard changes'"

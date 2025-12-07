@@ -28,12 +28,12 @@ BatteryPowerApplet.prototype = {
 		this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval', () => this.on_settings_changed(), null);
 		this.UPowerRefreshed = false;
 
-		this.batFolder = "";
+		this.batDirectories = [];
 		for (let i = 0; i < 10; i++)
 		{
 			const statusFile = "/sys/class/power_supply/BAT" + i +"/status";
 			if (GLib.file_test(statusFile, 1 << 4)){
-				this.batFolder = "BAT" + i;
+				this.batDirectories.push("BAT" + i);
 			}
 		}
 
@@ -69,6 +69,8 @@ BatteryPowerApplet.prototype = {
 				this.set_applet_label(value + unit_string);
 				break;
 			case "unknown":
+			case "not charging":
+			case "full":
 				this.set_applet_tooltip('Battery is fully charged. AC is plugged in.');
 				this.set_applet_label(charging_indicator);
 				break;
@@ -80,8 +82,8 @@ BatteryPowerApplet.prototype = {
 	},
 
 	_getBatteryStatus: function () {
-		if (this.batFolder){
-			const statusFile = "/sys/class/power_supply/" + this.batFolder + "/status";
+		if (this.batDirectories.length) {
+			const statusFile = "/sys/class/power_supply/" + this.batDirectories[0] + "/status";
 			if (GLib.file_test(statusFile, 1 << 4)) {
 				try {
 					return String(GLib.file_get_contents(statusFile)[1]).trim();
@@ -91,7 +93,7 @@ BatteryPowerApplet.prototype = {
 			}
 		}
 
-		if (!this.UPowerRefreshed){
+		if (!this.UPowerRefreshed) {
 			Main.Util.spawnCommandLine(`python3 ${__meta.path}/update_upower.py`);
 			this.UPowerRefreshed = true;
 		}
@@ -115,27 +117,33 @@ BatteryPowerApplet.prototype = {
 		// If the files cannot be found, upower is used to update the power draw from the 
 		// battery.
 
-		if (this.batFolder) {
-			const powerDrawFile = "/sys/class/power_supply/" + this.batFolder + "/power_now";
-			if(GLib.file_test(powerDrawFile, 1 << 4)) {
-				try{
-					return parseInt(GLib.file_get_contents(powerDrawFile)[1]) / 1000000.0;
-				} catch (error) {
-					return 0.0;
+		if (this.batDirectories.length) {
+			let power = 0.0;
+			for (let i = 0; i < this.batDirectories.length; i++) {
+				const baseDirectory = "/sys/class/power_supply/" + this.batDirectories[i];
+
+				const powerDrawFile = baseDirectory + "/power_now";
+				if(GLib.file_test(powerDrawFile, 1 << 4)) {
+					try{
+						power += parseInt(GLib.file_get_contents(powerDrawFile)[1]) / 1000000.0;
+					} catch (error) {
+						// do nothing
+					}
+				}
+				
+				const currentDrawFile = baseDirectory + "/current_now";
+				const voltageDrawFile = baseDirectory + "/voltage_now";
+				if (GLib.file_test(currentDrawFile, 1 << 4) && GLib.file_test(voltageDrawFile, 1 << 4)) {
+					try {
+						const current = parseInt(GLib.file_get_contents(currentDrawFile)[1]) / 1000000.0;
+						const voltage = parseInt(GLib.file_get_contents(voltageDrawFile)[1]) / 1000000.0;
+						power += current * voltage;
+					} catch (error) {
+						// do nothing
+					}
 				}
 			}
-			
-			const currentDrawFile = "/sys/class/power_supply/" + this.batFolder + "/current_now";
-			const voltageDrawFile = "/sys/class/power_supply/" + this.batFolder + "/voltage_now";
-			if (GLib.file_test(currentDrawFile, 1 << 4) && GLib.file_test(voltageDrawFile, 1 << 4)) {
-				try {
-					const current = parseInt(GLib.file_get_contents(currentDrawFile)[1]) / 1000000.0;
-					const voltage = parseInt(GLib.file_get_contents(voltageDrawFile)[1]) / 1000000.0;
-					return current * voltage;
-				} catch (error) {
-					return 0.0;
-				}
-			}
+			return power
 		}
 
 		// If the files could not be used, we need to update upower information and use info

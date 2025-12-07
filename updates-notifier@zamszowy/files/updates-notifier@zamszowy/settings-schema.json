@@ -1,0 +1,173 @@
+{
+    "layout1": {
+        "type": "layout",
+        "pages": [
+            "pageBehavior",
+            "pageAppearance"
+        ],
+        "pageBehavior": {
+            "type": "page",
+            "title": "Behavior",
+            "sections": [
+                "sectionSettings",
+                "sectionClick",
+                "sectionMenu"
+            ]
+        },
+        "pageAppearance": {
+            "type": "page",
+            "title": "Appearance",
+            "sections": [
+                "sectionIconLabel",
+                "sectionTheme"
+            ]
+        },
+        "sectionSettings": {
+            "type": "section",
+            "title": "Settings",
+            "keys": [
+                "update-refresh",
+                "show-firmware"
+            ]
+        },
+        "sectionIconLabel": {
+            "type": "section",
+            "title": "Icon/Label",
+            "keys": [
+                "hide-applet",
+                "different-levels",
+                "level-1",
+                "level-2",
+                "show-label",
+                "label-font-size",
+                "label-font-weight",
+                "label-vertical-position"
+            ]
+        },
+        "sectionClick": {
+            "type": "section",
+            "title": "Applet click",
+            "keys": [
+                "show-window-on-click",
+                "refresh-when-no-updates"
+            ]
+        },
+        "sectionMenu": {
+            "type": "section",
+            "title": "Menu",
+            "keys": [
+                "commandUpdate-show",
+                "commandUpgrade-show",
+                "commandUpgrade"
+            ]
+        },
+        "sectionTheme": {
+            "type": "section",
+            "title": "Theme",
+            "keys": [
+                "icon-style"
+            ]
+        }
+    },
+    "update-refresh": {
+        "type": "entry",
+        "default": "60",
+        "description": "Minutes to wait before refreshing updates"
+    },
+    "show-firmware": {
+        "type": "switch",
+        "default": true,
+        "description": "Show firmware updates"
+    },
+    "hide-applet": {
+        "type": "switch",
+        "default": false,
+        "description": "Hide applet if there are no updates"
+    },
+    "different-levels": {
+        "type": "switch",
+        "default": true,
+        "description": "Show different applet icon for different updgradeable packages count"
+    },
+    "level-1": {
+        "type": "entry",
+        "default": "100",
+        "description": "Show low level icon when updates count is between 0 and this value ",
+        "dependency": "different-levels"
+    },
+    "level-2": {
+        "type": "entry",
+        "default": "200",
+        "description": "Show medium level icon when updates count is between low level value and this value. Show high level icon if it's higher than this value.",
+        "dependency": "different-levels"
+    },
+    "show-label": {
+        "type": "switch",
+        "default": false,
+        "description": "Show label with updates count"
+    },
+    "label-font-size": {
+        "type": "scale",
+        "default": 90,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "description": "Label font size",
+        "dependency": "show-label"
+    },
+    "label-font-weight": {
+        "type": "scale",
+        "default": 300,
+        "min": 1,
+        "max": 1000,
+        "step": 10,
+        "description": "Label font weight",
+        "dependency": "show-label"
+    },
+    "label-vertical-position": {
+        "type": "scale",
+        "default": 10,
+        "min": -20,
+        "max": 20,
+        "step": 1,
+        "description": "Label vertical position",
+        "dependency": "show-label"
+    },
+    "show-window-on-click": {
+        "type": "switch",
+        "default": false,
+        "description": "Show updates window on left click and menu entries on right click"
+    },
+    "refresh-when-no-updates": {
+        "type": "switch",
+        "default": true,
+        "description": "Refresh updates list on left click if there are no updates",
+        "dependency": "show-window-on-click"
+    },
+    "commandUpdate-show": {
+        "type": "switch",
+        "default": true,
+        "description": "Show \"Check for new updates\" command"
+    },
+    "commandUpgrade-show": {
+        "type": "switch",
+        "default": true,
+        "description": "Show \"Upgrade packages\" command"
+    },
+    "commandUpgrade": {
+        "type": "entry",
+        "default": "pkcon update; echo Done; read",
+        "description": "Upgrade packages command:",
+        "dependency": "commandUpgrade-show"
+    },
+    "icon-style": {
+        "type": "combobox",
+        "description": "Icon style",
+        "default": "light",
+        "options": {
+            "dark": "dark",
+            "light": "light",
+            "symbolic": "symbolic"
+        }
+    }
+}

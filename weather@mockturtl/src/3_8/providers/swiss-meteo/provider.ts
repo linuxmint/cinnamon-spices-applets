@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import type { Services } from "../../config";
+import { Services } from "../../config";
 import { HttpLib, type ErrorResponse } from "../../lib/httpLib";
 import { ErrorHandler } from "../../lib/services/error_handler";
 import type { LocationData, LocationType } from "../../types";
@@ -13,7 +13,7 @@ import { SwissMeteoWarningToAlertData } from "./payload/alerts";
 export class SwissMeteo extends BaseProvider {
 	public override needsApiKey: boolean = false;
 	public override prettyName: string = _("Swiss Météo");
-	public override name: Services = "Swiss Meteo";
+	public override name: Services = Services.SwissMeteo;
 	public override maxForecastSupport: number = 8;
 	public override maxHourlyForecastSupport: number = 192;
 	public override website: string = "https://www.meteoswiss.admin.ch/#tab=forecast-map";
@@ -74,10 +74,22 @@ export class SwissMeteo extends BaseProvider {
 				degree: result.graph.windDirection3h[0],
 			},
 			forecasts: result.forecast.map(day => SwissMeteoDayToForecastData(day)),
-			alerts: result.warnings.filter(x => {
-				return DateTime.fromMillis(x.validFrom) < DateTime.now() && (x.validTo ? DateTime.fromMillis(x.validTo) > DateTime.now() : true);
-			}).map(warning => SwissMeteoWarningToAlertData(warning)),
+			uvIndex: null
 		};
+
+		const alerts = result.warnings.filter(x => {
+			if (x.validTo && DateTime.fromMillis(x.validTo) < DateTime.now()) {
+				return false;
+			}
+
+			if (x.validFrom && DateTime.fromMillis(x.validFrom) > DateTime.now()) {
+				return false;
+			}
+
+			return true;
+		});
+
+		weather.alerts = alerts.map(warning => SwissMeteoWarningToAlertData(warning));
 
 
 

@@ -1,158 +1,190 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# RADIO3.0
+# This file is put in the public domain.
+# claudiux, 2022
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-13 11:40+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: Radio3.0@claudiux 3.8.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-11 12:31+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:236
+#. applet.js:286
 msgid "unassigned"
 msgstr ""
 
-#: applet.js:327
+#. applet.js:287
+msgid "Display Album Art at full size"
+msgstr ""
+
+#. applet.js:389
 msgid "This is your own list of Categories and Radio Stations."
 msgstr ""
 
-#: applet.js:328
+#. applet.js:390
 msgid "You can add more using the [+] button."
 msgstr ""
 
-#: applet.js:329
+#. applet.js:391
 msgid "For a category, fill in only its name; leave the other fields empty."
 msgstr ""
 
-#: applet.js:330
+#. applet.js:392
 msgid "For a radio station, enter only its name and its streaming URL."
 msgstr ""
 
-#: applet.js:331
+#. applet.js:393
 msgid ""
 "You can order the rows by dragging and dropping or by using the buttons and "
 "tools below the list."
 msgstr ""
 
-#: applet.js:332
+#. applet.js:394
 msgid ""
 "The buttons on the right below the list allow you to navigate page by page "
 "or category by category."
 msgstr ""
 
-#: applet.js:333
+#. applet.js:395
 msgid ""
 "To search for one of your stations, click on the list and start writing its "
 "name."
 msgstr ""
 
-#: applet.js:334
+#. applet.js:396
 msgid ""
 "To easily add stations to your list, use the following 2 tabs: Search and "
 "Import."
 msgstr ""
 
-#: applet.js:335
+#. applet.js:397
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr ""
 
-#: applet.js:336
+#. applet.js:398
 msgid ""
 "Check its '♪/➟' box to listen to the station or move it to another category "
 "using the tools below the list."
 msgstr ""
 
-#: applet.js:338
+#. applet.js:400
 msgid "You can have your list of stations checked by internet databases."
 msgstr ""
 
-#: applet.js:339
+#. applet.js:401
 msgid ""
 "Any station recognized by one of these databases will receive a Universal "
 "Unique Identifier (UUID) provided by this database."
 msgstr ""
 
-#: applet.js:340
+#. applet.js:402
 msgid ""
-"So, if a streaming URL was changed, a next check would update it and you can"
-" continue to listen to the affected station."
+"So, if a streaming URL was changed, a next check would update it and you can "
+"continue to listen to the affected station."
 msgstr ""
 
-#: applet.js:342
+#. applet.js:404
 msgid ""
 "Here you can search for other stations in a free radio database accessible "
 "via the Internet."
 msgstr ""
 
-#: applet.js:343
+#. applet.js:405
 msgid ""
-"Fill in at least a few fields of the form below then click on the 'Search "
-"...' button."
+"Fill in at least a few fields of the form below then click on the "
+"'Search ...' button."
 msgstr ""
 
-#: applet.js:344
+#. applet.js:406
 msgid ""
 "Each time this button is clicked, a new results page is displayed in the "
 "second part of this page, where you can test certain stations and include "
 "them in the menu."
 msgstr ""
 
-#: applet.js:345
+#. applet.js:407
 msgid ""
 "A station already in your menu will only appear in search results if its "
 "streaming URL has changed."
 msgstr ""
 
-#: applet.js:346
+#. applet.js:408
 msgid ""
 "When no new page appears, it means that all results matching your search "
 "criteria have been displayed."
 msgstr ""
 
-#: applet.js:348
+#. applet.js:410
 msgid ""
 "You can import a file containing the name and streaming URL of at least one "
 "radio station."
 msgstr ""
 
-#: applet.js:349
+#. applet.js:411
 msgid ""
 "These radio stations are displayed in the list below. You can test them by "
 "checking their ♪ box."
 msgstr ""
 
-#: applet.js:350
+#. applet.js:412
 msgid "Then manage this list with the buttons at the bottom of this tab."
 msgstr ""
 
-#: applet.js:352
+#. applet.js:414
 msgid ""
 "In the Shoutcast directory, click the download button to the left of the "
 "station name."
 msgstr ""
 
-#: applet.js:353
+#. applet.js:415
 msgid ""
 "Select the open format (.XSPF) and save the file giving it the same name as "
 "the station."
 msgstr ""
 
-#: applet.js:354
+#. applet.js:416
 msgid "This file can then be imported here."
 msgstr ""
 
-#: applet.js:356
+#. applet.js:418
 #, javascript-format
 msgid "%s bytes = %s GB = %s GiB"
+msgstr ""
+
+#. applet.js:420
+msgid "Sun."
+msgstr ""
+
+#. applet.js:420
+msgid "Mon."
+msgstr ""
+
+#. applet.js:420
+msgid "Tue."
+msgstr ""
+
+#. applet.js:420
+msgid "Wed."
+msgstr ""
+
+#. applet.js:420
+msgid "Thu."
+msgstr ""
+
+#. applet.js:420
+msgid "Fri."
+msgstr ""
+
+#. applet.js:420
+msgid "Sat."
 msgstr ""
 
 #. settings-schema.json->category-to-move->options
@@ -161,448 +193,532 @@ msgstr ""
 #. settings-schema.json->search-country->options
 #. settings-schema.json->search-codec->options
 #. settings-schema.json->search-order->options
-#: applet.js:522 applet.js:536 applet.js:5049 applet.js:5061
+#. settings-schema.json->alarm-clock-working-days-radio->options
+#. settings-schema.json->alarm-clock-workoff-days-radio->options
+#. applet.js:586 applet.js:604 applet.js:5511 applet.js:5527
 msgid "(Undefined)"
 msgstr ""
 
-#: applet.js:734
-msgid "Radio3.0 web page..."
+#. settings-schema.json->category-to-move->options
+#. applet.js:587 applet.js:5528
+msgid "(Blacklist)"
 msgstr ""
 
-#: applet.js:2058
+#. applet.js:2263
 msgid "Start"
 msgstr ""
 
-#: applet.js:2066 applet.js:2770
+#. applet.js:2271 applet.js:3014
 msgid "Stop"
 msgstr ""
 
-#: applet.js:2301 applet.js:2337 applet.js:2384
-msgid "Middle-Click: Stop Recording"
-msgstr ""
-
-#: applet.js:2333 applet.js:2380
+#. applet.js:2545
 msgid "Volume: %s%"
 msgstr ""
 
-#: applet.js:2339 applet.js:2386
+#. applet.js:2550
+msgid "Middle-Click: Stop Recording"
+msgstr ""
+
+#. applet.js:2552
 msgid "Middle-click: ON/OFF"
 msgstr ""
 
-#: applet.js:2341 applet.js:2388
+#. applet.js:2554
 msgid "Click: Select another station"
 msgstr ""
 
-#: applet.js:2354
-msgid "Click to select a station"
-msgstr ""
-
-#: applet.js:2390
+#. applet.js:2555
 msgid "Scroll wheel: volume change"
 msgstr ""
 
-#: applet.js:2440 applet.js:2788 applet.js:4665
+#. applet.js:2558
+msgid "Click to select a station"
+msgstr ""
+
+#. applet.js:2564
+msgid "Wake Up"
+msgstr ""
+
+#. applet.js:2642 applet.js:3032 applet.js:5023
 msgid "Configure..."
 msgstr ""
 
-#: applet.js:2444 applet.js:2780
+#. applet.js:2646 applet.js:3024
 msgid "Search for new stations..."
 msgstr ""
 
-#: applet.js:2450 applet.js:2792 applet.js:4702
+#. applet.js:2652
+msgid "Load a sample station list"
+msgstr ""
+
+#. applet.js:2699 applet.js:3036 applet.js:5093
 msgid "Sound Settings"
 msgstr ""
 
-#: applet.js:2520
+#. applet.js:2770
 msgid "Watch on YT"
 msgstr ""
 
-#: applet.js:2527
+#. applet.js:2777
 msgid "Try to download it from YT (unsafe)"
 msgstr ""
 
-#: applet.js:2590
+#. applet.js:2797
 msgid "Recently Played Stations:"
 msgstr ""
 
-#: applet.js:2632
+#. applet.js:2848
 msgid "Visit the home page of this station"
 msgstr ""
 
-#: applet.js:2671
+#. applet.js:2897
 msgid "Categories"
 msgstr ""
 
-#: applet.js:2673
+#. applet.js:2900
 msgid "Radio Stations"
 msgstr ""
 
-#: applet.js:2683
+#. applet.js:2911
 msgid "All Categories"
 msgstr ""
 
-#: applet.js:2713
+#. applet.js:2956
 msgid "My Radio Stations"
 msgstr ""
 
-#: applet.js:2912
+#. applet.js:3156
 msgid "Downloading..."
 msgstr ""
 
-#: applet.js:2914
+#. applet.js:3158
 msgid "Stop downloading"
 msgstr ""
 
-#: applet.js:3018
+#. applet.js:3264
 msgid "Download complete"
 msgstr ""
 
 #. settings-schema.json->button-open-rec-folder->description
 #. settings-schema.json->recordings-open-folder->description
-#: applet.js:3020 applet.js:3029 applet.js:4464 applet.js:4473 applet.js:4482
-#: applet.js:4792
+#. applet.js:3266 applet.js:3275 applet.js:4743 applet.js:4752 applet.js:4761
+#. applet.js:5056
 msgid "Open the recordings folder"
 msgstr ""
 
-#: applet.js:3027 applet.js:4461 applet.js:4471 applet.js:4480
+#. applet.js:3273 applet.js:4740 applet.js:4750 applet.js:4759
 msgid "An error seems to have occurred during recording!"
 msgstr ""
 
-#: applet.js:3028 applet.js:4463 applet.js:4472 applet.js:4481
+#. applet.js:3274 applet.js:4742 applet.js:4751 applet.js:4760
 msgid "Please check this record."
 msgstr ""
 
-#: applet.js:3135 applet.js:3169
+#. applet.js:3381 applet.js:3415
 msgid "Record from now"
 msgstr ""
 
-#: applet.js:3153 applet.js:4955
+#. applet.js:3399 applet.js:5413
 msgid "Stop Current Recording"
 msgstr ""
 
-#: applet.js:3281
+#. applet.js:3548
 #, javascript-format
 msgid "Playing %s%s"
 msgstr ""
 
-#: applet.js:3334
+#. applet.js:3602
 msgid "Radio OFF"
 msgstr ""
 
-#: applet.js:3462
+#. applet.js:3730
 msgid "Unable to record anything!"
 msgstr ""
 
-#: applet.js:3462 applet.js:4812
+#. applet.js:3730 applet.js:5073 applet.js:5232
 msgid "Insufficient space"
 msgstr ""
 
-#: applet.js:3462
+#. applet.js:3730
 msgid "The limit you set has been reached."
 msgstr ""
 
-#: applet.js:3848
+#. applet.js:4131
 msgid "Please Log Out then Log In"
 msgstr ""
 
-#: applet.js:3848
+#. applet.js:4131
 msgid "to finalize yt-dlp update"
 msgstr ""
 
-#: applet.js:3953
+#. applet.js:4266
 msgid "Nothing to save."
 msgstr ""
 
-#: applet.js:3966
+#. applet.js:4279
 msgid "List of saved radio stations"
 msgstr ""
 
-#: applet.js:3984
+#. applet.js:4297
 msgid "This will replace all current radio stations."
 msgstr ""
 
-#: applet.js:3985
+#. applet.js:4298
 msgid "Are you sure you want to continue?"
 msgstr ""
 
-#: applet.js:4045
+#. applet.js:4362
 msgid "Update in progress"
 msgstr ""
 
-#: applet.js:4045
+#. applet.js:4362
 msgid "It may take a while ... Please wait."
 msgstr ""
 
-#: applet.js:4135
+#. applet.js:4454
 msgid "Update completed successfully"
 msgstr ""
 
-#: applet.js:4345 applet.js:4401
+#. applet.js:4625 applet.js:4681
 msgid "ERROR: Invalid YT video URL!"
 msgstr ""
 
-#: applet.js:4370
+#. applet.js:4650
 msgid "Unable to extract a single soundtrack"
 msgstr ""
 
-#: applet.js:4370
+#. applet.js:4650
 msgid "Maybe it's a playlist?"
 msgstr ""
 
-#: applet.js:4403
+#. applet.js:4683
 msgid "Close"
 msgstr ""
 
-#: applet.js:4623
-msgid "About..."
+#. applet.js:4841 applet.js:5300 applet.js:5318
+msgid "Cancel"
 msgstr ""
 
-#: applet.js:4646
-msgid "Manual..."
+#. applet.js:4842
+msgid "Radio3.0 applet"
 msgstr ""
 
-#: applet.js:4678
-msgid "Schedule a background record..."
+#. applet.js:4845
+msgid "Enable the OSD150 extension"
 msgstr ""
 
-#: applet.js:4690
-msgid "Extract soundtrack from YouTube video..."
+#. applet.js:4846
+msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr ""
 
-#: applet.js:4711
-msgid "Pulse Effects"
+#. applet.js:4863
+msgid "Download the OSD150 extension"
 msgstr ""
 
-#: applet.js:4720
-msgid "Easy Effects"
+#. applet.js:4864
+msgid ""
+"To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
+"Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
 
-#: applet.js:4729
+#. applet.js:4995
 #, javascript-format
 msgid "Remove '%s'"
 msgstr ""
 
-#: applet.js:4742
-msgid "Radio ON at startup"
+#. applet.js:5003
+msgid "About..."
 msgstr ""
 
-#: applet.js:4756
-msgid "Display Station Logo"
+#. applet.js:5010
+msgid "Manual..."
 msgstr ""
 
-#. settings-schema.json->dont-check-dependencies->description
-#: applet.js:4770
-msgid "Do not check about dependencies"
-msgstr ""
-
-#: applet.js:4809
-msgid "(auto)"
-msgstr ""
-
-#: applet.js:4809
-msgid "(manual)"
-msgstr ""
-
-#: applet.js:4812 applet.js:5004
-msgid "Stop Recording"
-msgstr ""
-
-#: applet.js:4812
-msgid "Start Recording"
-msgstr ""
-
-#: applet.js:4833
+#. applet.js:5017
 msgid "Reload this applet"
 msgstr ""
 
-#. settings-schema.json->show-volume-level-near-icon->description
-#: applet.js:4849
-msgid "Display volume level near icon"
+#. applet.js:5034
+msgid "Schedule a background record..."
 msgstr ""
 
-#: applet.js:4867
+#. applet.js:5041
+msgid "Configure the Alarm Clock..."
+msgstr ""
+
+#. applet.js:5048
+msgid "Extract soundtrack from YouTube video..."
+msgstr ""
+
+#. applet.js:5070 applet.js:5229
+msgid "(auto)"
+msgstr ""
+
+#. applet.js:5070 applet.js:5229
+msgid "(manual)"
+msgstr ""
+
+#. applet.js:5073 applet.js:5232 applet.js:5460
+msgid "Stop Recording"
+msgstr ""
+
+#. applet.js:5073 applet.js:5232
+msgid "Start Recording"
+msgstr ""
+
+#. applet.js:5089
 msgid "Cancel downloads from YT"
 msgstr ""
 
-#: applet.js:5005
+#. applet.js:5098
+msgid "Pulse Effects"
+msgstr ""
+
+#. applet.js:5103
+msgid "Easy Effects"
+msgstr ""
+
+#. applet.js:5108
+msgid "Radio ON at startup"
+msgstr ""
+
+#. applet.js:5117
+msgid "Display Station Logo"
+msgstr ""
+
+#. applet.js:5127
+msgid "Album Art desklet settings"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-wake-me-up->description
+#. applet.js:5132
+msgid "Wake me up!"
+msgstr ""
+
+#. applet.js:5141
+msgid "Show Album Art on desktop"
+msgstr ""
+
+#. settings-schema.json->dont-check-dependencies->description
+#. applet.js:5150
+msgid "Do not check about dependencies"
+msgstr ""
+
+#. settings-schema.json->show-volume-level-near-icon->description
+#. applet.js:5160
+msgid "Display volume level near icon"
+msgstr ""
+
+#. applet.js:5297
+msgid "You need the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. applet.js:5298
+msgid ""
+"You can install it by clicking on the first button and then searching for "
+"Album."
+msgstr ""
+
+#. applet.js:5299 applet.js:5317
+msgid "Desklets"
+msgstr ""
+
+#. applet.js:5315
+msgid "You need to activate the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. applet.js:5316
+msgid ""
+"You can activate it by clicking on the first button, then searching for "
+"Album and adding it with button [+]."
+msgstr ""
+
+#. applet.js:5461
 msgid "Close without stopping recording"
 msgstr ""
 
-#: applet.js:5215
+#. applet.js:5676
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr ""
 
-#: applet.js:5227
+#. applet.js:5688
 msgid "Recording completed"
 msgstr ""
 
-#: applet.js:5322
+#. applet.js:5813
 msgid "This will import a new file containing radio stations."
 msgstr ""
 
-#: applet.js:5323
+#. applet.js:5814
 msgid "Do you want to continue?"
 msgstr ""
 
-#: applet.js:5394
+#. applet.js:5891
 msgid "No new radio in your list."
 msgstr ""
 
-#: applet.js:5396
+#. applet.js:5893
 msgid "One more radio in your list."
 msgstr ""
 
-#: applet.js:5398
+#. applet.js:5895
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr ""
 
-#: applet.js:5605
+#. applet.js:6154
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr ""
 
-#: applet.js:5607
+#. applet.js:6156
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr ""
 
-#: applet.js:5609
+#. applet.js:6158
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr ""
 
-#: applet.js:5810
+#. applet.js:6383
 #, javascript-format
 msgid "%s kbps"
 msgstr ""
 
-#: lib/checkDependencies.js:392
+#. lib/checkDependencies.js:399
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr ""
 
-#: lib/checkDependencies.js:393
+#. lib/checkDependencies.js:400
 msgid "All dependencies are installed"
 msgstr ""
 
-#: lib/checkDependencies.js:423
+#. lib/checkDependencies.js:430
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 
-#: lib/checkDependencies.js:424
+#. lib/checkDependencies.js:431
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 
-#: lib/checkDependencies.js:425
+#. lib/checkDependencies.js:432
 msgid "Some dependencies are not installed!"
 msgstr ""
 
-#: lib/checkTranslations.js:108
+#. lib/checkTranslations.js:109
 msgid "To finalize the translation installation, please restart Cinnamon"
 msgstr ""
 
-#: lib/util.js:245
+#. lib/util.js:245
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr ""
 
-#: xs/xlet-settings.py:214
+#. settings-schema.json->scale-update->description
+#. settings-schema.json->recordings-extract-update->description
+#. lib/volumeslider.js:188
+msgid "%"
+msgstr ""
+
+#. xs/xlet-settings.py:214
 msgid "Previous instance"
 msgstr ""
 
-#: xs/xlet-settings.py:218
+#. xs/xlet-settings.py:218
 msgid "Next instance"
 msgstr ""
 
-#: xs/xlet-settings.py:227
+#. xs/xlet-settings.py:227
 msgid "More options"
 msgstr ""
 
-#: xs/xlet-settings.py:233
+#. xs/xlet-settings.py:233
 msgid "Import from a file"
 msgstr ""
 
-#: xs/xlet-settings.py:238
+#. xs/xlet-settings.py:238
 msgid "Export to a file"
 msgstr ""
 
-#: xs/xlet-settings.py:243
+#. xs/xlet-settings.py:243
 msgid "Reset to defaults"
 msgstr ""
 
-#: xs/xlet-settings.py:252
+#. xs/xlet-settings.py:252
 #, python-format
 msgid "Reload %s"
 msgstr ""
 
-#: xs/xlet-settings.py:441
+#. xs/xlet-settings.py:441
 #, python-format
 msgid "Settings for %s"
 msgstr ""
 
-#: xs/xlet-settings.py:533
+#. xs/xlet-settings.py:533
 msgid "Select or enter file to export to"
 msgstr ""
 
-#: xs/xlet-settings.py:541 xs/xlet-settings.py:562
+#. xs/xlet-settings.py:541 xs/xlet-settings.py:562
 msgid "JSON files"
 msgstr ""
 
-#: xs/xlet-settings.py:555
+#. xs/xlet-settings.py:555
 msgid "Select a JSON file to import"
 msgstr ""
 
-#: xs/bin/R3TreeListWidgets.py:278 xs/bin/R3TreeListWidgets.py:501
+#. xs/bin/R3TreeListWidgets.py:278 xs/bin/R3TreeListWidgets.py:501
 msgid "Add new entry"
 msgstr ""
 
-#: xs/bin/R3TreeListWidgets.py:282
+#. xs/bin/R3TreeListWidgets.py:282
 msgid "Remove selected entry"
 msgstr ""
 
-#: xs/bin/R3TreeListWidgets.py:287
+#. xs/bin/R3TreeListWidgets.py:287
 msgid "Edit selected entry"
 msgstr ""
 
-#: xs/bin/R3TreeListWidgets.py:292
+#. xs/bin/R3TreeListWidgets.py:292
 msgid "Unselect the selected row"
 msgstr ""
 
-#: xs/bin/R3TreeListWidgets.py:297
+#. xs/bin/R3TreeListWidgets.py:297
 msgid "Move selected entry up"
 msgstr ""
 
-#: xs/bin/R3TreeListWidgets.py:302
+#. xs/bin/R3TreeListWidgets.py:302
 msgid "Move selected entry down"
 msgstr ""
 
-#: xs/bin/R3TreeListWidgets.py:325
+#. xs/bin/R3TreeListWidgets.py:325
 msgid "Go to bottom"
 msgstr ""
 
-#: xs/bin/R3TreeListWidgets.py:331
+#. xs/bin/R3TreeListWidgets.py:331
 msgid "Go to next page"
 msgstr ""
 
-#: xs/bin/R3TreeListWidgets.py:337
+#. xs/bin/R3TreeListWidgets.py:337
 msgid "Go to previous page"
 msgstr ""
 
-#: xs/bin/R3TreeListWidgets.py:342
+#. xs/bin/R3TreeListWidgets.py:342
 msgid "Go to top"
 msgstr ""
 
-#: xs/bin/R3TreeListWidgets.py:356
+#. xs/bin/R3TreeListWidgets.py:356
 msgid "Go to next category"
 msgstr ""
 
-#: xs/bin/R3TreeListWidgets.py:366
+#. xs/bin/R3TreeListWidgets.py:366
 msgid "Go to previous category"
 msgstr ""
 
-#: xs/bin/R3TreeListWidgets.py:503
+#. xs/bin/R3TreeListWidgets.py:503
 msgid "Edit entry"
 msgstr ""
 
@@ -654,6 +770,10 @@ msgstr ""
 msgid "Network"
 msgstr ""
 
+#. settings-schema.json->pageAlarmClock->title
+msgid "Alarm Clock"
+msgstr ""
+
 #. settings-schema.json->sectionStationsList->title
 msgid "Stations and Categories on the menu"
 msgstr ""
@@ -668,6 +788,14 @@ msgstr ""
 
 #. settings-schema.json->sectionStationsUpdate->title
 msgid "Update this station list"
+msgstr ""
+
+#. settings-schema.json->sectionBlacklist->title
+msgid "Unwanted (blacklist)"
+msgstr ""
+
+#. settings-schema.json->sectionImportRadiopp->title
+msgid "Only for Radio++ users"
 msgstr ""
 
 #. settings-schema.json->sectionImportShoutcast->title
@@ -690,12 +818,20 @@ msgstr ""
 msgid "Search results"
 msgstr ""
 
+#. settings-schema.json->sectionBehaviorSettingsWindow->title
+msgid "Settings Window"
+msgstr ""
+
 #. settings-schema.json->sectionBehaviorStartUp->title
 msgid "Start-up"
 msgstr ""
 
 #. settings-schema.json->sectionBehaviorVolumeStep->title
 msgid "Volume step"
+msgstr ""
+
+#. settings-schema.json->sectionBehaviorOSD->title
+msgid "OSD"
 msgstr ""
 
 #. settings-schema.json->sectionBehaviorTooltip->title
@@ -726,6 +862,10 @@ msgstr ""
 #. settings-schema.json->sectionRecordingIcon->title
 #. settings-schema.json->sectionYTIcon->title
 msgid "Icon"
+msgstr ""
+
+#. settings-schema.json->sectionBehaviorHorizontalPanel->title
+msgid "Only on horizontal panels"
 msgstr ""
 
 #. settings-schema.json->sectionNetworkQuality->title
@@ -761,6 +901,10 @@ msgstr ""
 msgid "Preservation of hard disk space"
 msgstr ""
 
+#. settings-schema.json->sectionYTIgnore->title
+msgid "Ignore YT"
+msgstr ""
+
 #. settings-schema.json->sectionYTExtract->title
 msgid "Extract soundtrack from YouTube video"
 msgstr ""
@@ -778,14 +922,25 @@ msgstr ""
 msgid "Scheduled recordings"
 msgstr ""
 
+#. settings-schema.json->sectionWakeMeUp->title
+msgid "Options"
+msgstr ""
+
+#. settings-schema.json->sectionWorkingDays->title
+msgid "Working Days"
+msgstr ""
+
+#. settings-schema.json->sectionWorkOffDays->title
+msgid "Work-Off Days"
+msgstr ""
+
 #. settings-schema.json->show-help-in-tabs->description
 msgid "Show help labels in each tab of this Settings window"
 msgstr ""
 
 #. settings-schema.json->show-help-in-tabs->tooltip
 msgid ""
-"You can uncheck this option when you are familiar with all of these "
-"settings."
+"You can uncheck this option when you are familiar with all of these settings."
 msgstr ""
 
 #. settings-schema.json->stations-help->description
@@ -798,6 +953,10 @@ msgstr ""
 
 #. settings-schema.json->radios->description
 msgid "List of stations"
+msgstr ""
+
+#. settings-schema.json->radios->columns->title
+msgid "♥︎"
 msgstr ""
 
 #. settings-schema.json->radios->columns->title
@@ -893,9 +1052,12 @@ msgstr ""
 msgid "Update my station list with the Radio Database data"
 msgstr ""
 
-#. settings-schema.json->scale-update->description
-#. settings-schema.json->recordings-extract-update->description
-msgid "%"
+#. settings-schema.json->blacklist->columns->title
+msgid "Blacklisted URL"
+msgstr ""
+
+#. settings-schema.json->import-radiopp-button->description
+msgid "Import your stations from Radio++"
 msgstr ""
 
 #. settings-schema.json->import-shoutcast-button->description
@@ -935,6 +1097,10 @@ msgstr ""
 msgid "Remove selected items from this list"
 msgstr ""
 
+#. settings-schema.json->import-blacklist-button->description
+msgid "Blacklist selected items from this list"
+msgstr ""
+
 #. settings-schema.json->import-select-all->description
 #. settings-schema.json->search-select-all->description
 msgid "Select all items"
@@ -965,15 +1131,27 @@ msgstr ""
 msgid "Page:"
 msgstr ""
 
+#. settings-schema.json->maximize-vertically->description
+msgid "Vertical maximization"
+msgstr ""
+
+#. settings-schema.json->maximize-vertically->tooltip
+msgid ""
+"When this option is checked, this Settings Window will be maximized "
+"vertically the next time it is opened."
+msgstr ""
+
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
 msgstr ""
 
 #. settings-schema.json->switch-on-last-station-at-start-up->tooltip
 msgid ""
-"The selected radio will be the last you listened to, even if you stopped it.\n"
+"The selected radio will be the last you listened to, even if you stopped "
+"it.\n"
 "\n"
-"VPN users: By checking this, the radio broadcast could use your VPN link in the event that this one is active before the start of this applet."
+"VPN users: By checking this, the radio broadcast could use your VPN link in "
+"the event that this one is active before the start of this applet."
 msgstr ""
 
 #. settings-schema.json->volume-at-startup->description
@@ -1075,10 +1253,12 @@ msgstr ""
 
 #. settings-schema.json->volume-at-startup->tooltip
 msgid ""
-"If set, then this will change the volume level starting a new radio, in percentage of the general volume level.\n"
+"If set, then this will change the volume level starting a new radio, in "
+"percentage of the general volume level.\n"
 "Default is (Undefined): The volume level remains unchanged.\n"
 "\n"
-"Please note that you can change the volume level scrolling on this applet icon, or using the slider in the context menu."
+"Please note that you can change the volume level scrolling on this applet "
+"icon, or using the slider in the context menu."
 msgstr ""
 
 #. settings-schema.json->volume-step->description
@@ -1131,6 +1311,14 @@ msgstr ""
 msgid "Show volume OSD when changing radio station"
 msgstr ""
 
+#. settings-schema.json->show-percent-char-in-osd->description
+msgid "Show '%' in OSD"
+msgstr ""
+
+#. settings-schema.json->show-horizontal-osd->description
+msgid "Show horizontal OSD"
+msgstr ""
+
 #. settings-schema.json->show-title-and-version->description
 msgid "Show the name and the version of this applet in the menu"
 msgstr ""
@@ -1177,8 +1365,7 @@ msgid "9"
 msgstr ""
 
 #. settings-schema.json->recent-number->tooltip
-msgid ""
-"How many recently listened stations do you want to display in the menu?"
+msgid "How many recently listened stations do you want to display in the menu?"
 msgstr ""
 
 #. settings-schema.json->reset-recents->description
@@ -1195,7 +1382,8 @@ msgstr ""
 
 #. settings-schema.json->show-by-category->tooltip
 msgid ""
-"Checked: Hover (without clicking) over a Category to display its list of Stations; then select your station.\n"
+"Checked: Hover (without clicking) over a Category to display its list of "
+"Stations; then select your station.\n"
 "Unchecked: Single list containing each category followed by its stations."
 msgstr ""
 
@@ -1253,8 +1441,7 @@ msgid "Show help for mouse actions in the tooltip"
 msgstr ""
 
 #. settings-schema.json->show-help-in-tooltip->tooltip
-msgid ""
-"You can uncheck this option when you are familiar with all mouse roles."
+msgid "You can uncheck this option when you are familiar with all mouse roles."
 msgstr ""
 
 #. settings-schema.json->notif-station-change->description
@@ -1306,10 +1493,6 @@ msgstr ""
 msgid "Color of the symbolic icon while the radio is on"
 msgstr ""
 
-#. settings-schema.json->color-off->description
-msgid "Color of the symbolic icon while the radio is off"
-msgstr ""
-
 #. settings-schema.json->color-recording->description
 msgid "Color of the symbolic icon while recording"
 msgstr ""
@@ -1336,9 +1519,40 @@ msgstr ""
 
 #. settings-schema.json->network-quality->tooltip
 msgid ""
-"High Quality: The recordings you make while listening to the radio will double the bit rate usually required to just listen to the radio. Thus, the recordings will not be disturbed by extraneous sounds or by a change in the volume of the radio.\n"
+"High Quality: The recordings you make while listening to the radio will "
+"double the bit rate usually required to just listen to the radio. Thus, the "
+"recordings will not be disturbed by extraneous sounds or by a change in the "
+"volume of the radio.\n"
 "\n"
-"Low Quality: These recordings come directly from the sound card, which relieves the network but risks polluting them with extraneous sounds (system sounds for example). The volume of the radio will be set to 100% in order to obtain the best possible quality."
+"Low Quality: These recordings come directly from the sound card, which "
+"relieves the network but risks polluting them with extraneous sounds (system "
+"sounds for example). The volume of the radio will be set to 100% in order to "
+"obtain the best possible quality."
+msgstr ""
+
+#. settings-schema.json->image-resolution->description
+msgid "Quality of downloaded Album Art"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "Max Resolution"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "High Quality"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "Medium"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "Standard"
+msgstr ""
+
+#. settings-schema.json->image-resolution->tooltip
+msgid ""
+"Default: High Quality. Choose a value corresponding to your Network Quality."
 msgstr ""
 
 #. settings-schema.json->network-monitoring->description
@@ -1347,7 +1561,8 @@ msgstr ""
 
 #. settings-schema.json->network-monitoring->tooltip
 msgid ""
-"Whether or not to restart the radio when the network becomes active again after an interruption.\n"
+"Whether or not to restart the radio when the network becomes active again "
+"after an interruption.\n"
 "\n"
 "VPN users: By checking this, the radio broadcast may use your VPN link."
 msgstr ""
@@ -1360,7 +1575,8 @@ msgstr ""
 msgid ""
 "Format: http://[user:pass@]URL[:port]\n"
 "Default: empty.\n"
-"If empty, the environment variables http_proxy and ALL_PROXY will be used if present.\n"
+"If empty, the environment variables http_proxy and ALL_PROXY will be used if "
+"present.\n"
 "If set, this proxy will not be used for https requests."
 msgstr ""
 
@@ -1390,7 +1606,7 @@ msgid ""
 "rewind the cache (using the sound150@claudiux applet)."
 msgstr ""
 
-#. settings-schema.json->cache-mins->description
+#. settings-schema.json->cache-minutes->description
 msgid ""
 "Minutes to cache\n"
 "0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
@@ -1402,23 +1618,13 @@ msgid ""
 "(Write packet data to a temporary file, instead of keeping them in memory.)"
 msgstr ""
 
-#. settings-schema.json->cache-dir->description
-msgid ""
-"Directory used for data caching\n"
-"(Use with caution on SSD disks. Prefer a directory stored in RAM, with sufficient free space.)"
-msgstr ""
-
-#. settings-schema.json->cache-dir-open->description
-msgid "Open cache directory"
-msgstr ""
-
 #. settings-schema.json->cache-stream-size->description
 msgid "Stream cache size"
 msgstr ""
 
 #. settings-schema.json->cache-stream-size->tooltip
 msgid ""
-"The amount of stream cache. Default: 1 MiB.\n"
+"The amount of stream cache. Default: 10 MiB.\n"
 "Beware, setting this to a large value can reduce performance."
 msgstr ""
 
@@ -1468,6 +1674,22 @@ msgstr ""
 
 #. settings-schema.json->cache-stream-size->options
 msgid "20 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "30 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "40 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "50 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "100 MiB"
 msgstr ""
 
 #. settings-schema.json->recording-path->description
@@ -1530,8 +1752,7 @@ msgstr ""
 
 #. settings-schema.json->limits-hd-size-prefixes->description
 msgid ""
-"Disk space unit as defined in Nemo's display preferences (File size "
-"prefixes)"
+"Disk space unit as defined in Nemo's display preferences (File size prefixes)"
 msgstr ""
 
 #. settings-schema.json->limits-hd-size-prefixes->options
@@ -1565,6 +1786,16 @@ msgstr ""
 #. settings-schema.json->highlight-icon-while-background-
 #. recording->description
 msgid "Highlight this applet icon during background recording"
+msgstr ""
+
+#. settings-schema.json->ignoreYT->description
+msgid "Ignore Youtube features"
+msgstr ""
+
+#. settings-schema.json->ignoreYT->tooltip
+msgid ""
+"Ignoring Youtube features reduces CPU load. But loading album art becomes "
+"impossible."
 msgstr ""
 
 #. settings-schema.json->yt-cookies-from->description
@@ -1713,6 +1944,8 @@ msgid "Extract soundtrack"
 msgstr ""
 
 #. settings-schema.json->sched-radio->description
+#. settings-schema.json->alarm-clock-working-days-radio->description
+#. settings-schema.json->alarm-clock-workoff-days-radio->description
 msgid "Radio"
 msgstr ""
 
@@ -2956,4 +3189,93 @@ msgstr ""
 
 #. settings-schema.json->sched-rmbutton->description
 msgid "Remove selected items"
+msgstr ""
+
+#. settings-schema.json->horizontal-show-name->description
+msgid "Display radio name"
+msgstr ""
+
+#. settings-schema.json->horizontal-show-title->description
+msgid "Display title"
+msgstr ""
+
+#. settings-schema.json->horizontal-max-title-length->description
+msgid "Maximum title length"
+msgstr ""
+
+#. settings-schema.json->horizontal-max-title-length->tooltip
+msgid "0 means no maximum"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-wake-me-softly->description
+msgid "Wake me up softly"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-wake-me-softly->tooltip
+msgid "By checking this box, the sound volume gradually increases."
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-begin->description
+msgid "Initial volume (%)"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-end->description
+msgid "Final volume (%)"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-end->tooltip
+msgid "The final volume must be greater than or equal to the initial volume."
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-transition->description
+msgid "Transition duration (seconds)"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Sunday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Monday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Tuesday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Wednesday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Thursday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Friday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Saturday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days-time->description
+#. settings-schema.json->alarm-clock-workoff-days-time->description
+msgid "Wake-Up Time"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days-radio-button->description
+#. settings-schema.json->alarm-clock-workoff-days-radio-button->description
+msgid "Last-listened-to radio station"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-tink-on->description
+msgid "Activate tink to ensure speakers are awake"
 msgstr ""

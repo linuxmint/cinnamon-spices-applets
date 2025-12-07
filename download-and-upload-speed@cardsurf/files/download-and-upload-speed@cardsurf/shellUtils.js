@@ -1,7 +1,6 @@
 
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
-const Lang = imports.lang;
 
 let Compatibility;
 if (typeof require !== 'undefined') {
@@ -211,7 +210,7 @@ BackgroundProcess.prototype = {
     _add_exit_callback: function() {
         GLib.child_watch_add(GLib.PRIORITY_DEFAULT_IDLE,
                              this.pid,
-                             Lang.bind(this, this._on_exit));
+                             (pid, status) => { this._on_exit(pid, status) });
     },
 
     _on_exit: function(pid, status) {
@@ -238,7 +237,7 @@ BackgroundProcess.prototype = {
         this.standard_output_data_stream.fill_async(this.fill_all_characters_buffer,
                                                     GLib.PRIORITY_DEFAULT,
                                                     this.standard_output_cancellable,
-                                                    Lang.bind(this, this._on_fill_async_standard_output));
+                                                    (s, f) => { this._on_fill_async_standard_output(s, f) });
    },
 
    _on_fill_async_standard_output: function(stream, fill_async_result) {
@@ -278,7 +277,7 @@ BackgroundProcess.prototype = {
         this.standard_error_data_stream.fill_async(this.fill_all_characters_buffer,
                                                    GLib.PRIORITY_DEFAULT,
                                                    this.standard_error_cancellable,
-                                                   Lang.bind(this, this._on_fill_async_standard_error));
+                                                   (s, f) => { this._on_fill_async_standard_error(s, f) });
    },
 
    _on_fill_async_standard_error: function(stream, fill_async_result) {

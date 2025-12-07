@@ -38,6 +38,10 @@ The highly configurable ** Spices Update ** applet can play these roles:
 | Network monitoring | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] | ![unchecked][unchecked] | ![unchecked][unchecked] |
 | Manage Actions for nemo | ![checked][checked] | ![unchecked][unchecked] | ![unchecked][unchecked] | ![unchecked][unchecked] | ![unchecked][unchecked] |
 
+### Cinnamon 6.4
+
+Do not check private Spices. A private Spice is a Spice that is not listed on the Cinnamon Spices website.
+
 ### Cinnamon 6.0
 
 Update all Spices from a category (Applets, Desklets...) using the Update button in Cinnamon settings for this category.
@@ -69,8 +73,9 @@ So you should not have to run any of the commands listed below.
 |Linux Mint, Ubuntu|`sudo apt install fonts-symbola`|`sudo apt install libnotify-bin`|
 |Debian (with root rights)|`apt install fonts-symbola`|`apt install libnotify-bin`|
 |openSUSE|`sudo yast2 --install gdouros-symbola-fonts`|`sudo yast2 --install libnotify-tools`|
+|Gentoo|`sudo emerge media-fonts/ttf-ancient-fonts::guru`|`sudo emerge x11-libs/libnotify`|
 
-**(*) Useless for Spices Update version 6.0.0 and more.**
+**(*) Not required for Spices Update version 6.0.0 and higher, except for Gentoo.**
 
 ## Settings
 

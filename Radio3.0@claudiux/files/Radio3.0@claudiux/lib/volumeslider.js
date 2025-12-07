@@ -5,6 +5,7 @@ const Cvc = imports.gi.Cvc;
 const Slider = imports.ui.slider;
 const Tooltips = imports.ui.tooltips;
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 const Main = imports.ui.main;
 const { get_home_dir,
   file_test,
@@ -16,7 +17,23 @@ const UUID = APPNAME + "@claudiux";
 
 const HOME_DIR = get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
-const DEBUG_FILE = APPLET_DIR + "/DEBUG"
+const DEBUG_FILE = APPLET_DIR + "/DEBUG";
+
+const ENABLED_EXTENSIONS_KEY = "enabled-extensions";
+const EXTENSION_UUID = "OSD150@claudiux";
+
+const IS_OSD150_ENABLED = () => {
+    var enabled = false;
+    const enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
+    for (let i = 0; i < enabledExtensions.length; i++) {
+        if (enabledExtensions[i] == EXTENSION_UUID) {
+            enabled = true;
+            break;
+        }
+    }
+    return enabled;
+}
+
 /**
  * DEBUG:
  * Returns whether or not the DEBUG file is present in this applet directory ($ touch DEBUG)
@@ -45,6 +62,36 @@ function logError(error) {
   global.logError("\n[" + UUID + "]: " + error + "\n")
 }
 
+function version_exceeds(version, min_version) {
+  let our_version = version.split(".");
+  let cmp_version = min_version.split(".");
+  let i;
+
+  for (i = 0; i < our_version.length && i < cmp_version.length; i++) {
+    let our_part = parseInt(our_version[i]);
+    let cmp_part = parseInt(cmp_version[i]);
+
+    if (isNaN(our_part) || isNaN(cmp_part)) {
+      return false;
+    }
+
+    if (our_part < cmp_part) {
+      return false;
+    } else
+    if (our_part > cmp_part) {
+      return true;
+    }
+  }
+
+  if (our_version.length < cmp_version.length) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+const CINNAMON_VERSION = ""+GLib.getenv("CINNAMON_VERSION");
+const IS_AT_LEAST_CINNAMON6DOT4 = version_exceeds(CINNAMON_VERSION, "6.4");
 
 /**
  * Class VolumeSlider
@@ -136,7 +183,17 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             let iconName = this._volumeToIcon(1.0*this.applet.percentage/100, "audio-volume-webradioreceiver-")+"-symbolic";
             let icon = Gio.Icon.new_for_string(iconName);
             try {
-                Main.osdWindowManager.show(-1, icon, ""+this.applet.percentage, null);
+                let _percentage_str = ""+this.applet.percentage;
+                if (this.applet.show_percent)
+                    _percentage_str += _("%");
+                if (IS_AT_LEAST_CINNAMON6DOT4) {
+                    if (IS_OSD150_ENABLED())
+                        Main.osdWindowManager.show(-1, icon, _percentage_str, parseInt(this.applet.percentage), 1, this.applet.OSDhorizontal);
+                    else
+                        Main.osdWindowManager.show(-1, icon, _percentage_str, parseInt(this.applet.percentage));
+                } else {
+                    Main.osdWindowManager.show(-1, icon, _percentage_str, null);
+                }
             } catch (e) {
                 // Do nothing
             }
@@ -219,7 +276,8 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
           this.applet.percentage = this.percentage;
 
         this.tooltip.set_text(this.tooltipText + this.percentage + "%");
-        this.applet.change_volume_in_radio_tooltip();
+        //~ this.applet.change_volume_in_radio_tooltip();
+        this.applet.set_radio_tooltip_to_default_one();
         if (this._dragging)
             this.tooltip.show();
 

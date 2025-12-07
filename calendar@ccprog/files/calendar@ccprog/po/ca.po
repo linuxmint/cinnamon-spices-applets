@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# CALENDAR WITH PUBLIC HOLIDAYS
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# ccprog, 2020
 #
 #, fuzzy
 msgid ""
@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: calendar@ccprog 1.2.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-05 14:47-0500\n"
-"PO-Revision-Date: 2024-07-08 17:20+0200\n"
+"POT-Creation-Date: 2024-11-22 17:45-0500\n"
+"PO-Revision-Date: 2025-02-13 20:56+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -19,65 +19,65 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: eventView.js:26 3.8/applet.js:22 5.2/applet.js:22 5.2/eventView.js:27
+#. eventView.js:26 3.8/applet.js:22 5.2/applet.js:22 5.2/eventView.js:27
 msgid "%A, %B %-e, %Y"
 msgstr "%A, %B %-e, %Y"
 
-#: eventView.js:65 5.2/eventView.js:67
+#. eventView.js:65 5.2/eventView.js:67
 msgid "Starting in a few minutes"
 msgstr "Començant d'aquí a uns minuts"
 
-#: eventView.js:69 5.2/eventView.js:71
+#. eventView.js:69 5.2/eventView.js:71
 #, javascript-format
 msgid "Starting in %d minutes"
 msgstr "Començant en %d minuts"
 
-#: eventView.js:79 5.2/eventView.js:81
+#. eventView.js:79 5.2/eventView.js:81
 msgid "This evening"
 msgstr "Aquesta tarda"
 
-#: eventView.js:82 5.2/eventView.js:84
+#. eventView.js:82 5.2/eventView.js:84
 msgid "Starting later today"
 msgstr "Començant avui"
 
-#: eventView.js:85 5.2/eventView.js:87
+#. eventView.js:85 5.2/eventView.js:87
 #, javascript-format
 msgid "In %d hour"
 msgid_plural "In %d hours"
 msgstr[0] "En %d hora"
 msgstr[1] "En %d hores"
 
-#: eventView.js:664 5.2/eventView.js:683
+#. eventView.js:664 5.2/eventView.js:693
 msgid "No Events"
 msgstr "No hi ha events"
 
-#: eventView.js:925 5.2/eventView.js:944
+#. eventView.js:925 5.2/eventView.js:966
 msgid "In progress"
 msgstr "En procés"
 
-#: eventView.js:946 5.2/eventView.js:965
+#. eventView.js:946 5.2/eventView.js:987
 msgid "All day"
 msgstr "Tot el dia"
 
-#: eventView.js:971 eventView.js:994 eventView.js:1032 eventView.js:1054
-#: 5.2/eventView.js:992 5.2/eventView.js:1015 5.2/eventView.js:1053
-#: 5.2/eventView.js:1075
+#. eventView.js:971 eventView.js:994 eventView.js:1032 eventView.js:1054
+#. 5.2/eventView.js:1014 5.2/eventView.js:1037 5.2/eventView.js:1075
+#. 5.2/eventView.js:1097
 msgid "Today"
 msgstr "Avui"
 
-#: 3.8/applet.js:21 5.2/applet.js:21
+#. 3.8/applet.js:21 5.2/applet.js:21
 msgid "%B %-e, %Y"
 msgstr "%B %-e, %Y"
 
-#: 3.8/applet.js:131 5.2/applet.js:137
+#. 3.8/applet.js:131 5.2/applet.js:138
 msgid "Date and Time Settings"
 msgstr "Configuració de data i hora"
 
-#: 3.8/settings_widgets.py:95 5.2/settings_widgets.py:95
+#. 3.8/settings_widgets.py:95 5.2/settings_widgets.py:95
 msgid "Add new entry"
 msgstr "Afegir una nova entrada"
 
-#: 3.8/settings_widgets.py:99 5.2/settings_widgets.py:99
+#. 3.8/settings_widgets.py:99 5.2/settings_widgets.py:99
 msgid "Edit entry"
 msgstr "Editar entrada"
 
@@ -91,6 +91,7 @@ msgstr "Editar entrada"
 #. 3.8->settings-schema.json->region_gbr->description
 #. 3.8->settings-schema.json->region_usa->description
 #. 5.2->settings-schema.json->region_aus->description
+#. 5.2->settings-schema.json->region_bel->description
 #. 5.2->settings-schema.json->region_can->description
 #. 5.2->settings-schema.json->region_deu->description
 #. 5.2->settings-schema.json->region_esp->description
@@ -99,11 +100,11 @@ msgstr "Editar entrada"
 #. 5.2->settings-schema.json->region_che->description
 #. 5.2->settings-schema.json->region_gbr->description
 #. 5.2->settings-schema.json->region_usa->description
-#: 3.8/settings_widgets.py:122 5.2/settings_widgets.py:122
+#. 3.8/settings_widgets.py:122 5.2/settings_widgets.py:122
 msgid "Region"
 msgstr "Regió"
 
-#: 3.8/settings_widgets.py:123 5.2/settings_widgets.py:123
+#. 3.8/settings_widgets.py:123 5.2/settings_widgets.py:123
 msgid "City"
 msgstr "Ciutat"
 
@@ -1331,3 +1332,35 @@ msgstr "Nom a mostrar"
 #. 5.2->settings-schema.json->worldclocks->columns->title
 msgid "Timezone"
 msgstr "Zona horària"
+
+#. 5.2->settings-schema.json->custom-tooltip-format->description
+msgid "Date format for tooltip"
+msgstr "Format de la data del consell informatiu"
+
+#. 5.2->settings-schema.json->custom-tooltip-format->tooltip
+msgid "Set your custom tooltip format here."
+msgstr "Assigneu el vostre format personalitzat aquí."
+
+#. 5.2->settings-schema.json->country->options
+msgid "Cyprus"
+msgstr "Xipre"
+
+#. 5.2->settings-schema.json->country->options
+msgid "El Salvador"
+msgstr "El Salvador"
+
+#. 5.2->settings-schema.json->country->options
+msgid "Montenegro"
+msgstr "Montenegro"
+
+#. 5.2->settings-schema.json->region_bel->options
+msgid "Brussels"
+msgstr "Brussel·les"
+
+#. 5.2->settings-schema.json->region_bel->options
+msgid "Flemish Region"
+msgstr "Regió Flamenca"
+
+#. 5.2->settings-schema.json->region_bel->options
+msgid "Walloon Region"
+msgstr "Regió Valona"

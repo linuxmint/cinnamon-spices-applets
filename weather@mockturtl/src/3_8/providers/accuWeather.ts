@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import type { Config, Services } from "../config";
+import { Services, type Config } from "../config";
 import type { ErrorResponse} from "../lib/httpLib";
 import { HttpLib } from "../lib/httpLib";
 import type { Condition, ForecastData, HourlyForecastData, Precipitation, WeatherData } from "../weather-data";
@@ -11,7 +11,7 @@ import { ErrorHandler } from "../lib/services/error_handler";
 export class AccuWeather extends BaseProvider {
     public readonly needsApiKey: boolean = true;
     public readonly prettyName: string = _("AccuWeather");
-    public readonly name: Services = "AccuWeather";
+    public readonly name: Services = Services.AccuWeather;
     public readonly maxForecastSupport: number = 12;
     public readonly maxHourlyForecastSupport: number = 120;
     public readonly website: string = "https://www.accuweather.com/";
@@ -159,6 +159,7 @@ export class AccuWeather extends BaseProvider {
                 main: current.WeatherText,
                 description: current.WeatherText
             },
+            uvIndex: current.UVIndex ?? hourly[0]?.UVIndex ?? null,
             hourlyForecasts: this.ParseHourly(hourly),
             forecasts: this.ParseDaily(daily)
         }

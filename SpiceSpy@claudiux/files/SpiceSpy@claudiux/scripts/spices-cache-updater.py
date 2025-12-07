@@ -8,35 +8,36 @@ import json
 
 class UpdateSpicesCache:
     def __init__(self):
-        parser = argparse.ArgumentParser(description='Cinnamon Spice Cache Updater',
-                                         epilog="spice-type should be 'applet', 'desklet', 'extension' or 'theme'.")
-        parser.add_argument("--update-all", dest="update_all_caches", action="store_const", const=True,
-                            help="Update all spice caches to their latest versions.")
+        # ~ parser = argparse.ArgumentParser(description='Cinnamon Spice Cache Updater',
+                                         # ~ epilog="spice-type should be 'applet', 'desklet', 'extension' or 'theme'.")
+        # ~ parser.add_argument("--update-all", dest="update_all_caches", action="store_const", const=True,
+                            # ~ help="Update all spice caches to their latest versions.")
 
-        choices = ["applet", "desklet", "extension", "theme", "actions"]
+        # ~ choices = ["applet", "desklet", "extension", "theme", "actions"]
 
-        ex_group = parser.add_mutually_exclusive_group()
-        ex_group.add_argument("--update", dest="update_spice_cache_of_type", action="store", choices=choices, metavar="<spice-type>",
-                            help="Update spices cache of a given type")
-        ex_group.add_argument("--list-simple", dest="list_simple_spice_type", action="store", choices=choices, metavar="<spice-type>",
-                            help="Simple list of UUIDs (or theme names) with available updates, for a given type")
-        ex_group.add_argument("--list-json", dest="list_json_spice_type", action="store", choices=choices, metavar="<spice-type>",
-                            help="Prints complete information on updates for spices of a given type, formatted as json.")
-        args = parser.parse_args()
+        # ~ ex_group = parser.add_mutually_exclusive_group()
+        # ~ ex_group.add_argument("--update", dest="update_spice_cache_of_type", action="store", choices=choices, metavar="<spice-type>",
+                            # ~ help="Update spices cache of a given type")
+        # ~ ex_group.add_argument("--list-simple", dest="list_simple_spice_type", action="store", choices=choices, metavar="<spice-type>",
+                            # ~ help="Simple list of UUIDs (or theme names) with available updates, for a given type")
+        # ~ ex_group.add_argument("--list-json", dest="list_json_spice_type", action="store", choices=choices, metavar="<spice-type>",
+                            # ~ help="Prints complete information on updates for spices of a given type, formatted as json.")
+        # ~ args = parser.parse_args()
 
-        if len(sys.argv) == 1:
-            parser.print_help()
-            exit(1)
+        # ~ if len(sys.argv) == 1:
+            # ~ parser.print_help()
+            # ~ exit(1)
 
         try:
             import cinnamon
             self.updater = cinnamon.UpdateManager()
-            if args.update_all_caches:
-                self.update_all_caches()
-            else:
-                self.update_spice_cache_of_type(args.update_spice_cache_of_type)
-                #self.list_simple(args.list_simple_spice_type)
-                #self.list_json(args.list_json_spice_type)
+            self.update_all_caches()
+            # ~ if args.update_all_caches:
+                # ~ self.update_all_caches()
+            # ~ else:
+                # ~ self.update_spice_cache_of_type(args.update_spice_cache_of_type)
+                # ~ #self.list_simple(args.list_simple_spice_type)
+                # ~ #self.list_json(args.list_json_spice_type)
         except Exception as e:
             print("Cinnamon updates failed: %s" % e)
 

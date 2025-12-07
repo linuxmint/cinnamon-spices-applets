@@ -25,14 +25,15 @@ When the score or number of comments changes, the differences are indicated in t
 
 The menu of the SpiceSpy applet contains:
 
-* A button "Mark all as read".
-* A button "Refresh"
 * The list of Spices with, for each Spice:
-    * its name or UUID, depending on your choice.
-    * its icon (optional)
-    * its score
-    * its number of comments
+    * its name or UUID, depending on your choice; this may be preceded by a symbol indicating that an update is available.
+    * its icon (optional).
+    * its score.
+    * its number of comments.
     * its number of available translations (optional).
+    * its number of open issues (optional).
+* A button "Mark all as read".
+* A button "Refresh" or a message "Refreshing in progress".
 * A button "Configure..."
 
 Please note:
@@ -40,6 +41,7 @@ Please note:
 * clicking on the Spice *name* (or *UUID*) or on its *icon* or on its *score* opens its web page, at the *top* of this page.
 * clicking on the Spice *comments* opens its web page, at the *comments section*.
 * clicking on the Spice *translations* opens the web page showing the *status of translations*.
+* clicking on the Spice *issues* opens the web page showing the *open issues*.
 
 ## Translations
 
@@ -63,9 +65,9 @@ To make a Spice type visible, simply open the Download tab for that Spice type f
 
 ### The number of comments is updated very slowly
 
-To avoid overloading the Cinnamon server, requests to it are spaced 13 seconds apart.
+To avoid overloading the Cinnamon server, requests to it are spaced 15 seconds apart.
 
-On first use, all comment numbers are initialized to zero. Then, every 13 seconds, a comment number is updated.
+On first use, all comment numbers are initialized to zero. Then, every 15 seconds, a comment number is updated.
 
 Once all comment numbers have been updated, you can use the *Mark all as read* menu option. The applet is then fully functional: you'll be notified of any score changes or new comments.
 

@@ -183,15 +183,16 @@ To determine the backward compatibility of a javascript feature, look at it's pa
 <tr><td colspan="1">19.1</td><td colspan="1">Tessa</td><td colspan="1">19 Dec 18</td><td colspan="1">4.0.9</td></tr>
 <tr><td colspan="1">19.2</td><td colspan="1">Tina</td><td colspan="1">2 Aug 19</td><td colspan="1">4.2.3</td></tr>
 <tr><td colspan="1">19.3</td><td colspan="1">Tricia</td><td colspan="1">18 Dec 19</td><td colspan="1">4.4.8</td></tr>
-<tr><td colspan="1">20*</td><td colspan="1">Ulyana</td><td colspan="1">27 Jun 20</td><td colspan="1">4.6.7</td></tr>
+<tr><td colspan="1">20</td><td colspan="1">Ulyana</td><td colspan="1">27 Jun 20</td><td colspan="1">4.6.7</td></tr>
 <tr><td colspan="1">20.1</td><td colspan="1">Ulyssa</td><td colspan="1">8 Jan 21</td><td colspan="1">4.8.6</td><td colspan="1" rowspan="5">78</td></tr>
 <tr><td colspan="1">20.2</td><td colspan="1">Uma</td><td colspan="1">8 Jul 21</td><td colspan="1">5.0.5</td></tr>
 <tr><td colspan="1">20.3</td><td colspan="1">Una</td><td colspan="1">7 Jan 22</td><td colspan="1">5.2.7</td></tr>
-<tr><td colspan="1">21*</td><td colspan="1">Vanessa</td><td colspan="1">31 Jul 22</td><td colspan="1">5.4.12</td></tr>
+<tr><td colspan="1">21</td><td colspan="1">Vanessa</td><td colspan="1">31 Jul 22</td><td colspan="1">5.4.12</td></tr>
 <tr><td colspan="1">21.1</td><td colspan="1">Vera</td><td colspan="1">20 Dec 22</td><td colspan="1">5.6.8</td></tr>
 <tr><td colspan="1">21.2</td><td colspan="1">Victoria</td><td colspan="1">16 Jul 23</td><td colspan="1">5.8.4</td><td colspan="1" rowspan="2">102</td></tr>
 <tr><td colspan="1">21.3</td><td colspan="1">Virginia</td><td colspan="1">12 Jan 24</td><td colspan="1">6.0.4</td></tr>
-<tr><td colspan="1">22</td><td colspan="1">Wilma</td><td colspan="1"></td><td colspan="1">6.2.x</td><td colspan="1" rowspan="1">115</td></tr>
+<tr><td colspan="1">22</td><td colspan="1">Wilma</td><td colspan="1">25 Jul 24</td><td colspan="1">6.2.9</td><td colspan="1" rowspan="2">115</td></tr>
+<tr><td colspan="1">22.1</td><td colspan="1">Xia</td><td colspan="1">16 Jan 25</td><td colspan="1">6.4.8</td>
 </table>
 
-*Mint 20 series is officially supported until Apr 2025, 21 series until Apr 2027. Earlier versions official support has ended.
+*Mint 20 series is officially supported until Apr 2025, 21 series until May 2027, and 22 series until Apr 2029. Earlier versions official support has ended.

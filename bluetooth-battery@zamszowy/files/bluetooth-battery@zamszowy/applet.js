@@ -4,6 +4,8 @@ const St = imports.gi.St;
 const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const Lang = imports.lang;
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
 
 const xml ='<node>\
    <interface name="org.freedesktop.UPower.Device">\
@@ -20,6 +22,11 @@ const { messageTray } = imports.ui.main;
 const { SystemNotificationSource, Notification, Urgency } = imports.ui.messageTray;
 
 var dbusCon;
+
+const UUID = "bluetooth-battery@zamszowy";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+function _(str) { return Gettext.dgettext(UUID, str); }
+
 
 function BtBattery(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
@@ -86,6 +93,7 @@ BtBattery.prototype = {
         this.settings.bind("enable-headphones", "enable_headphones", this._on_settings_change, null);
         this.settings.bind("enable-others", "enable_others", this._on_settings_change, null);
         this.settings.bind("applet-icon", "applet_icon", this._on_settings_change, null);
+        this.settings.bind("icon-style", "icon_style", this._on_settings_change, null);
         this.settings.bind("blacklist", "blacklist", null, null);
         this.settings.bind("override-entry", "override_entry", null, null);
         this.settings.bind("override-enable", "override_enabled", this.on_override_enable, null);
@@ -140,7 +148,7 @@ BtBattery.prototype = {
         }
 
         Util.spawn_async(args, Lang.bind(this, function(stdout) {
-            const trimmed_out = stdout.trim();
+            const trimmed_out = stdout.replace(/\n/g, '');
 
             if (trimmed_out != "") {
                 this.override_entry = trimmed_out;
@@ -150,12 +158,12 @@ BtBattery.prototype = {
     },
 
     _on_notification_warn_demo: function() {
-        this.notify("Test notification", "Battery dropped below " + this.notification_warn_level + "%",
+        this.notify(_("Test notification"), _("Battery dropped below %d%").format(this.notification_warn_level),
             this.get_device_batt_icon(UPower.DeviceKind.KEYBOARD, this.notification_warn_level), Urgency.NORMAL);
     },
 
     _on_notification_crit_demo: function() {
-        this.notify("Test notification", "Battery dropped below " + this.notification_crit_level + "%",
+        this.notify(_("Test notification"), _("Battery dropped below %d%").format(this.notification_crit_level),
             this.get_device_batt_icon(UPower.DeviceKind.MOUSE, this.notification_crit_level), Urgency.CRITICAL);
     },
 
@@ -166,7 +174,7 @@ BtBattery.prototype = {
         }
     },
 
-    on_applet_removed: function() {
+    on_applet_removed_from_panel: function() {
         this.settings.finalize();
     },
 
@@ -246,7 +254,7 @@ BtBattery.prototype = {
                 // device recharged, enable notification
                 notified_warn = false;
             } else if (this.notification_warn_enable && !notified_warn && device.percentage < this.notification_warn_level) {
-                this.notify(dev + " (" + device.percentage + "%)", "Battery dropped below " + this.notification_warn_level + "%",
+                this.notify(dev + " (" + device.percentage + "%)", _("Battery dropped below %d%").format(this.notification_warn_level),
                     this.get_device_batt_icon(device.kind, device.percentage));
 
                 notified_warn = true;
@@ -256,7 +264,7 @@ BtBattery.prototype = {
                 // device recharged, enable notification
                 notified_crit = false;
             } else if (this.notification_crit_enable && !notified_crit && device.percentage < this.notification_crit_level) {
-                this.notify(dev + " (" + device.percentage + "%)", "Battery dropped below " + this.notification_crit_level + "%",
+                this.notify(dev + " (" + device.percentage + "%)", _("Battery dropped below %d%").format(this.notification_crit_level),
                     this.get_device_batt_icon(device.kind, device.percentage));
 
                 notified_crit = true;
@@ -425,15 +433,31 @@ BtBattery.prototype = {
     },
 
     get_device_batt_icon: function(type, batt) {
+        let name = "unknown"
         if (type == UPower.DeviceKind.KEYBOARD) {
-            return "keyboard-" + this.perc_to_3_digit_str(this.perc_round_to_10(batt));
+            name = "keyboard";
         } else if (type == UPower.DeviceKind.MOUSE) {
-            return "mouse-" + this.perc_to_3_digit_str(this.perc_round_to_10(batt));
+            name = "mouse";
         } else if (type == UPower.DeviceKind.HEADPHONES || type == UPower.DeviceKind.HEADSET) {
-            return "headphones-" + this.perc_to_3_digit_str(this.perc_round_to_10(batt));
+            name = "headphones";
         } else {
-            return "battery-" + this.perc_to_3_digit_str(this.perc_round_to_10(batt));
+            name = "battery";
         }
+
+        const perc = this.perc_to_3_digit_str(this.perc_round_to_10(batt))
+
+        let style = "";
+        if (this.icon_style == "dark") {
+            style = "dark";
+        } else if (this.icon_style == "light") {
+            style = "light";
+        } else if (this.icon_style == "symbolic") {
+            style = "symbolic";
+        } else {
+            style = "light";
+        }
+
+        return "%s-%s-%s".format(name, perc, style);
     },
 
     perc_round_to_20: function(perc) {

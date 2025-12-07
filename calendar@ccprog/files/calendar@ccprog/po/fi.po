@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# CALENDAR WITH PUBLIC HOLIDAYS
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# ccprog, 2020
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2024-02-05 14:47-0500\n"
-"PO-Revision-Date: 2022-12-01 12:55+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-02 22:52+0300\n"
+"PO-Revision-Date: 2025-04-03 19:37+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: eventView.js:26 3.8/applet.js:22 5.2/applet.js:22 5.2/eventView.js:27
 msgid "%A, %B %-e, %Y"
@@ -46,21 +47,21 @@ msgid_plural "In %d hours"
 msgstr[0] "%d tunti"
 msgstr[1] "%d tuntia"
 
-#: eventView.js:664 5.2/eventView.js:683
+#: eventView.js:664 5.2/eventView.js:693
 msgid "No Events"
 msgstr "Ei tapahtumia"
 
-#: eventView.js:925 5.2/eventView.js:944
+#: eventView.js:925 5.2/eventView.js:966
 msgid "In progress"
 msgstr "Meneillään"
 
-#: eventView.js:946 5.2/eventView.js:965
+#: eventView.js:946 5.2/eventView.js:987
 msgid "All day"
 msgstr "Koko päivä"
 
 #: eventView.js:971 eventView.js:994 eventView.js:1032 eventView.js:1054
-#: 5.2/eventView.js:992 5.2/eventView.js:1015 5.2/eventView.js:1053
-#: 5.2/eventView.js:1075
+#: 5.2/eventView.js:1014 5.2/eventView.js:1037 5.2/eventView.js:1075
+#: 5.2/eventView.js:1097
 msgid "Today"
 msgstr "Tänään"
 
@@ -68,7 +69,7 @@ msgstr "Tänään"
 msgid "%B %-e, %Y"
 msgstr "%B %-e, %Y"
 
-#: 3.8/applet.js:131 5.2/applet.js:137
+#: 3.8/applet.js:131 5.2/applet.js:138
 msgid "Date and Time Settings"
 msgstr "Päivän ja ajan asetukset"
 
@@ -90,6 +91,7 @@ msgstr "Muokkaa merkintää"
 #. 3.8->settings-schema.json->region_gbr->description
 #. 3.8->settings-schema.json->region_usa->description
 #. 5.2->settings-schema.json->region_aus->description
+#. 5.2->settings-schema.json->region_bel->description
 #. 5.2->settings-schema.json->region_can->description
 #. 5.2->settings-schema.json->region_deu->description
 #. 5.2->settings-schema.json->region_esp->description
@@ -108,7 +110,7 @@ msgstr "Kaupunki"
 
 #. metadata.json->name
 msgid "Calendar with public Holidays"
-msgstr "Kalenteri yleisillä merkkipäivillä"
+msgstr "Kalenteri merkkipäivillä"
 
 #. metadata.json->description
 msgid "Calendar applet with public holiday data provided by Enrico service"
@@ -134,7 +136,7 @@ msgstr "Näyttö"
 #. 3.8->settings-schema.json->section2->title
 #. 5.2->settings-schema.json->section2->title
 msgid "Get Public Holidays for"
-msgstr "Hanki yleiset merkkipäivät"
+msgstr "Merkkipäivät"
 
 #. 3.8->settings-schema.json->section3->title
 #. 5.2->settings-schema.json->section3->title
@@ -144,12 +146,12 @@ msgstr "Pikanäppäimet"
 #. 3.8->settings-schema.json->section4->title
 #. 5.2->settings-schema.json->section4->title
 msgid "Show World Times"
-msgstr "Näytä maailman aikoja"
+msgstr "Maailman kellonajat"
 
 #. 3.8->settings-schema.json->show-events->description
 #. 5.2->settings-schema.json->show-events->description
 msgid "Show calendar events"
-msgstr "Näytä kalenteritapahtumat"
+msgstr "Kalenteritapahtumat"
 
 #. 3.8->settings-schema.json->show-events->tooltip
 #. 5.2->settings-schema.json->show-events->tooltip
@@ -159,7 +161,7 @@ msgstr "Valitse näyttääksesi tapahtumat kalenterissa."
 #. 3.8->settings-schema.json->show-week-numbers->description
 #. 5.2->settings-schema.json->show-week-numbers->description
 msgid "Show week numbers in calendar"
-msgstr "Näytä viikkonumerot kalenterissa"
+msgstr "Viikkonumerot"
 
 #. 3.8->settings-schema.json->show-week-numbers->tooltip
 #. 5.2->settings-schema.json->show-week-numbers->tooltip
@@ -169,7 +171,7 @@ msgstr "Valitse näyttääksesi viikkonumerot kalenterissa."
 #. 3.8->settings-schema.json->weekend-length->description
 #. 5.2->settings-schema.json->weekend-length->description
 msgid "Mark as weekend days"
-msgstr "Merkitse viikonloppuksi"
+msgstr "Viikonloppu"
 
 #. 3.8->settings-schema.json->weekend-length->tooltip
 #. 5.2->settings-schema.json->weekend-length->tooltip
@@ -189,17 +191,19 @@ msgstr "Kaksi päivää"
 #. 3.8->settings-schema.json->use-custom-format->description
 #. 5.2->settings-schema.json->use-custom-format->description
 msgid "Use a custom date format"
-msgstr "Käytä mukautettua päiväyksen muotoa"
+msgstr "Mukautettu päiväys"
 
 #. 3.8->settings-schema.json->use-custom-format->tooltip
 #. 5.2->settings-schema.json->use-custom-format->tooltip
-msgid "Check this to define a custom format for the date in the calendar applet."
-msgstr "Valitse jos haluat määrittää mukautetun muodon päivämäärälle kalenterissa."
+msgid ""
+"Check this to define a custom format for the date in the calendar applet."
+msgstr ""
+"Valitse jos haluat määrittää mukautetun muodon päivämäärälle kalenterissa."
 
 #. 3.8->settings-schema.json->custom-format->description
 #. 5.2->settings-schema.json->custom-format->description
 msgid "Date format"
-msgstr "Päiväyksen muoto"
+msgstr "Päiväyksen esitysmuoto"
 
 #. 3.8->settings-schema.json->custom-format->tooltip
 #. 5.2->settings-schema.json->custom-format->tooltip
@@ -209,12 +213,13 @@ msgstr "Aseta mukautettu muoto tässä."
 #. 3.8->settings-schema.json->format-button->description
 #. 5.2->settings-schema.json->format-button->description
 msgid "Show information on date format syntax"
-msgstr "Näytä tietoa päivämäärän muodon syntaksista"
+msgstr "Tietoa päivämäärän esitysmuodoista"
 
 #. 3.8->settings-schema.json->format-button->tooltip
 #. 5.2->settings-schema.json->format-button->tooltip
 msgid "Click this button to know more about the syntax for date formats."
-msgstr "Napsauta painiketta saadaksesi lisätietoja päivämäärämuotojen syntaksista."
+msgstr ""
+"Painikkeesta saat lisätietoja miten päivämäärään voi tehdä muutoksia."
 
 #. 3.8->settings-schema.json->country->description
 #. 5.2->settings-schema.json->country->description
@@ -369,7 +374,7 @@ msgstr "Korea (South)"
 #. 3.8->settings-schema.json->country->options
 #. 5.2->settings-schema.json->country->options
 msgid "kosovo"
-msgstr ""
+msgstr "Kosovo"
 
 #. 3.8->settings-schema.json->country->options
 #. 5.2->settings-schema.json->country->options
@@ -1325,3 +1330,35 @@ msgstr "Näyttönimi"
 #. 5.2->settings-schema.json->worldclocks->columns->title
 msgid "Timezone"
 msgstr "Aikavyöhyke"
+
+#. 5.2->settings-schema.json->custom-tooltip-format->description
+msgid "Date format for tooltip"
+msgstr "Työkaluvihjeen päivämäärä"
+
+#. 5.2->settings-schema.json->custom-tooltip-format->tooltip
+msgid "Set your custom tooltip format here."
+msgstr "Aseta työkaluvihjeen muoto tässä."
+
+#. 5.2->settings-schema.json->country->options
+msgid "Cyprus"
+msgstr "Kypros"
+
+#. 5.2->settings-schema.json->country->options
+msgid "El Salvador"
+msgstr "El Salvador"
+
+#. 5.2->settings-schema.json->country->options
+msgid "Montenegro"
+msgstr "Montenegro"
+
+#. 5.2->settings-schema.json->region_bel->options
+msgid "Brussels"
+msgstr "Bryssel"
+
+#. 5.2->settings-schema.json->region_bel->options
+msgid "Flemish Region"
+msgstr "Flanderi"
+
+#. 5.2->settings-schema.json->region_bel->options
+msgid "Walloon Region"
+msgstr "Vallonia"

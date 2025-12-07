@@ -533,7 +533,8 @@ TimerApplet.prototype = {
       this.sliderMenuItem.setValue(0);
       this.timeMenuItem.setLabel(_("At:  --:--:--"));
       if (this.turnOffSwitchMenuItem.state) {
-        Util.spawnCommandLine("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.RequestShutdown");
+        //~ Util.spawnCommandLine("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.RequestShutdown");
+        Util.spawnCommandLine("systemctl poweroff");
       }
       else {
         this.flashCount = 0;

@@ -2,11 +2,20 @@
   "layoutsound150": {
     "type": "layout",
     "pages": [
+      "page_menus",
       "page_behavior",
       "page_sound",
       "page_icon",
       "page_shortcuts"
     ],
+    "page_menus": {
+      "type": "page",
+      "title": "Menus",
+      "sections": [
+        "sectionMenu1",
+        "sectionMenu2"
+      ]
+    },
     "page_behavior": {
       "type": "page",
       "title": "Behavior",
@@ -20,7 +29,9 @@
       "type": "page",
       "title": "Icon",
       "sections": [
-        "sectionIcon1"
+        "sectionIcon1",
+        "sectionIcon2",
+        "sectionIcon3"
       ]
     },
     "page_sound": {
@@ -30,17 +41,19 @@
         "sectionSound1",
         "sectionSound2",
         "sectionSound3",
-        "sectionSound4"
+        "sectionSound4",
+        "sectionSound5"
       ]
     },
     "page_shortcuts": {
       "type": "page",
       "title": "Shortcuts",
       "sections": [
-        "sectionShortcuts1"
+        "sectionShortcuts1",
+        "sectionCommands"
       ]
     },
-    "sectionBehavior1": {
+    "sectionMenu1": {
       "type": "section",
       "title": "Menu",
       "keys": [
@@ -49,7 +62,28 @@
         "keepPlayerListOpen",
         "keepChoosePlayerOpen",
         "avoidTwice",
-        "seekerTooltipDelay"
+        "dontShowAnyImageInMenu",
+        "showMediaOptical",
+        "viewFullAlbumArt",
+        "shortenArtistTitle",
+        "doNotUsePlayerctld"
+      ]
+    },
+    "sectionMenu2": {
+      "type": "section",
+      "title": "Context Menu",
+      "keys": [
+        "keepAppListOpen",
+        "keepOutputListOpen",
+        "keepInputListOpen",
+        "keepCommandListOpen"
+      ]
+    },
+    "sectionBehavior1": {
+      "type": "section",
+      "title": "External commands and scripts",
+      "keys": [
+        "runAsync"
       ]
     },
     "sectionBehavior2": {
@@ -58,11 +92,11 @@
       "keys": [
         "showtrack",
         "truncatetext",
+        "toolongchars",
         "middleClickAction",
         "middleShiftClickAction",
         "horizontalScroll",
         "showalbum",
-        "keepAlbumAspectRatio",
         "hideSystray"
       ]
     },
@@ -77,19 +111,32 @@
     },
     "sectionIcon1": {
       "type": "section",
-      "title": "Icon",
+      "title": "Icon appearance",
       "keys": [
         "showalbum",
-        "keepAlbumAspectRatio",
+        "showalbumDelay",
         "showVolumeLevelNearIcon",
         "showMicMutedOnIcon",
-        "showMicUnmutedOnIcon",
+        "showMicUnmutedOnIcon"
+      ]
+    },
+    "sectionIcon2": {
+      "type": "section",
+      "title": "Icon colors",
+      "keys": [
         "adaptColor",
         "color0_100",
         "color101_115",
         "color116_130",
         "color131_150",
         "resetColorsButton"
+      ]
+    },
+    "sectionIcon3": {
+      "type": "section",
+      "title": "Scrolling",
+      "keys": [
+        "reverseScrolling"
       ]
     },
     "sectionSound1": {
@@ -99,10 +146,11 @@
         "openSystemSoundSettings",
         "maxVolume",
         "stepVolume",
+        "startupVolume",
         "magneticOn",
         "magnetic25On",
         "alwaysCanChangeMic",
-        "avoidCrackingAtShutdown"
+        "muteSoundOnClosing"
       ]
     },
     "sectionSound2": {
@@ -110,7 +158,11 @@
       "title": "OSD",
       "keys": [
         "showMediaKeysOSD",
-        "showOSDonStartup"
+        "showOSDonStartup",
+        "showVolumeValue",
+        "showPercent",
+        "OSDhorizontal",
+        "showBarLevel"
       ]
     },
     "sectionSound3": {
@@ -129,6 +181,14 @@
         "remove_soundATcinnamonDOTorg"
       ]
     },
+    "sectionSound5": {
+      "type": "section",
+      "dependency": "OsdWithNumberATJosephMcc_is_loaded",
+      "title": "Remove incompatible extensions",
+      "keys": [
+        "remove_OsdWithNumberATJosephMcc"
+      ]
+    },
     "sectionShortcuts1": {
       "type": "section",
       "title": "Shortcuts",
@@ -143,7 +203,17 @@
         "volume-up",
         "volume-down",
         "audio-next",
-        "audio-prev"
+        "audio-prev",
+        "mic-mute"
+      ]
+    },
+    "sectionCommands": {
+      "type": "section",
+      "title": "Custom commands",
+      "keys": [
+        "custom-commands-label",
+        "custom-commands-list",
+        "button-reload-applet"
       ]
     }
   },
@@ -174,14 +244,61 @@
     "default": false,
     "description": "Avoid displaying controllers twice"
   },
-  "seekerTooltipDelay": {
-    "type": "spinbutton",
-    "default": 400,
-    "units": "ms",
-    "min": 50,
-    "max": 1500,
-    "step": 50,
-    "description": "Seeker tooltip: time to disappear"
+  "dontShowAnyImageInMenu": {
+    "type": "switch",
+    "default": false,
+    "description": "Do not show any cover art in the menu"
+  },
+  "showMediaOptical": {
+    "type": "switch",
+    "dependency": "!dontShowAnyImageInMenu",
+    "default": true,
+    "description": "Show Media-Optical icon"
+  },
+  "viewFullAlbumArt": {
+    "type": "switch",
+    "dependency": "!dontShowAnyImageInMenu",
+    "default": false,
+    "description": "View Full Album Art",
+    "tooltip": "When unchecked, Album Art in the menu may be partially covered by Artist and Title."
+  },
+  "shortenArtistTitle": {
+    "type": "combobox",
+    "description": "Shorten Artist and Title",
+    "default": "NONE",
+    "options": {
+      "None": "NONE",
+      "Start": "START",
+      "Middle": "MIDDLE",
+      "End": "END"
+    },
+    "tooltip": "When the artist name or title is too long, you can choose how to shorten it."
+  },
+  "doNotUsePlayerctld": {
+    "type": "switch",
+    "default": false,
+    "description": "Do not use playerctl",
+    "tooltip": "When this option is checked, which is not recommended, playerctl installation is not required; playerctl will not be used, so this applet will run in degraded mode (artist, title or album art)."
+  },
+  "keepAppListOpen": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep the App selector open"
+  },
+  "keepOutputListOpen": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep the Output Device selector open"
+  },
+  "keepInputListOpen": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep the Input Device selector open"
+  },
+  "keepCommandListOpen": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep the Command selector open"
   },
   "keyOpen": {
     "type": "keybinding",
@@ -200,8 +317,23 @@
     "default": [
       "banshee",
       "vlc",
-      "rhythmbox"
+      "rhythmbox",
+      "mpv",
+      "io.github.celluloid_player.Celluloid",
+      "firefox",
+      "spotify",
+      "smplayer",
+      "org.gnome.Totem",
+      "mullvad browser",
+      "io.gitlab.librewolf-community",
+      "LibreWolf"
     ]
+  },
+  "runAsync": {
+    "type": "switch",
+    "default": true,
+    "description": "Execute asynchronously",
+    "tooltip": "Enabled by default (recommended).\nDisable this option if you encounter running issues (rare)."
   },
   "showtrack": {
     "type": "switch",
@@ -218,6 +350,13 @@
     "step": 1,
     "description": "Limit song information to",
     "dependency": "showtrack"
+  },
+  "toolongchars": {
+    "type": "entry",
+    "default": "...",
+    "description": "If the title is too long, end it with:",
+    "dependency": "showtrack",
+    "tooltip": "Emoji accepted"
   },
   "middleClickAction": {
     "type": "combobox",
@@ -249,8 +388,17 @@
   },
   "showalbum": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Show album art as icon",
+    "dependency": "playerControl"
+  },
+  "showalbumDelay": {
+    "type": "scale",
+    "default": 0,
+    "min": 0,
+    "max":10,
+    "step": 1,
+    "description": "Delay between icon and album art display (seconds)",
     "dependency": "playerControl"
   },
   "keepAlbumAspectRatio": {
@@ -281,7 +429,7 @@
   },
   "showVolumeLevelNearIcon": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display volume level near icon"
   },
   "showMicMutedOnIcon": {
@@ -300,12 +448,21 @@
     "callback": "_onSystemSoundSettingsPressed"
   },
   "maxVolume": {
-	"type": "scale",
-	"description": "Maximum volume (%)",
-	"default": 100,
-	"min": 30,
-	"max": 150,
-	"step": 5
+    "type": "scale",
+    "description": "Maximum volume (%)",
+    "default": 100,
+    "min": 30,
+    "max": 150,
+    "step": 5
+  },
+  "startupVolume": {
+    "type": "scale",
+    "description": "Volume at start-up (%)",
+    "default": -1,
+    "min": -1,
+    "max": 150,
+    "step": 1,
+    "tooltip": "Value -1 means \"No change\""
   },
   "stepVolume": {
     "type": "combobox",
@@ -343,10 +500,8 @@
     "default": true
   },
   "color0_100": {
-    "type": "colorchooser",
-    "dependency": "adaptColor",
-    "default": "#e4e4e4",
-    "description": "Icon color: 0%-100%"
+    "type": "generic",
+    "default": "rgba(225,225,225,255)"
   },
   "color101_115": {
     "type": "colorchooser",
@@ -372,32 +527,58 @@
     "description": "Set colors to default values (yellow, orange, red)",
     "callback": "_reset_colors"
   },
+  "reverseScrolling": {
+    "type": "switch",
+    "description": "Reverse scrolling effect",
+    "tooltip": "",
+    "default": false
+  },
   "alwaysCanChangeMic": {
     "type": "switch",
     "description": "Always allow microphone to be reactivated",
     "tooltip": "Always show the 'Mute input' switch in the context menu.",
     "default": true
   },
-  "avoidCrackingAtShutdown": {
+  "muteSoundOnClosing": {
     "type": "switch",
-    "description": "Try to avoid loud cracking sound at shutdown",
-    "default": true
+    "description": "Mute sound on closing",
+    "tooltip": "If you notice an unpleasant noise on closing, check this box.\nYou'll need to restore the sound at startup, by middle-clicking on this applet's icon.\nIt is NOT recommended to check this box.",
+    "default": false
   },
   "showMediaKeysOSD": {
-    "type": "combobox",
-    "default": "medium",
-    "options": {
-      "disabled": "disabled",
-      "small": "small",
-      "medium": "medium",
-      "large": "large"
-    },
-    "description": "Whether the media keys osd is disabled or its relative display size"
+    "type": "switch",
+    "default": true,
+    "description": "Whether or not to show the media keys OSD"
   },
   "showOSDonStartup": {
     "type": "switch",
+    "dependency": "showMediaKeysOSD",
     "description": "Show volume level in OSD on startup",
     "default": false
+  },
+  "showVolumeValue": {
+    "type": "switch",
+    "dependency": "showMediaKeysOSD",
+    "description": "Show volume level in OSD",
+    "default": true
+  },
+  "showPercent": {
+    "type": "switch",
+    "dependency": "showMediaKeysOSD",
+    "description": "Show '%' in OSD",
+    "default": false
+  },
+  "OSDhorizontal": {
+    "type": "switch",
+    "dependency": "showMediaKeysOSD",
+    "description": "Show horizontal OSD",
+    "default": false
+  },
+  "showBarLevel": {
+    "type": "switch",
+    "dependency": "showMediaKeysOSD",
+    "description": "Show bar level in OSD",
+    "default": true
   },
   "volumeSoundFile": {
     "type": "soundfilechooser",
@@ -462,6 +643,42 @@
     "default": "::",
     "description": "Previous Track"
   },
+  "mic-mute": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Microphone Mute"
+  },
+  "custom-commands-label": {
+    "type": "label",
+    "description": "These commands will appear in the context menu once you've reloaded this applet."
+  },
+  "custom-commands-list": {
+    "type": "list",
+    "description": "Commands",
+    "default": [],
+    "columns": [
+      {
+        "id": "title",
+        "title": "Title",
+        "type": "string",
+        "default": "",
+        "expand-width": false
+      },
+      {
+        "id": "command",
+        "title": "Command",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      }
+    ]
+  },
+  "button-reload-applet": {
+    "type": "button",
+    "description": "Reload this applet",
+    "callback": "_on_reload_this_applet_pressed"
+  },
   "volume": {
     "type": "generic",
     "default": "50%"
@@ -478,5 +695,18 @@
     "type": "button",
     "description": "Remove from panel the sound@cinnamon.org applet",
     "callback": "_on_remove_soundATcinnamonDOTorg_from_panels"
+  },
+  "OsdWithNumberATJosephMcc_is_loaded": {
+    "type": "generic",
+    "default": false
+  },
+  "remove_OsdWithNumberATJosephMcc": {
+    "type": "button",
+    "description": "Remove the OsdWithNumber extension",
+    "callback": "_on_remove_OsdWithNumber_from_extensions"
+  },
+  "VOLUME_ADJUSTMENT_STEP": {
+    "type": "generic",
+    "default": 0.05
   }
 }

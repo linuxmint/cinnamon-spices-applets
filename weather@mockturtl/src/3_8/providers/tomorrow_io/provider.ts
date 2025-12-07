@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import type { Config, Services } from "../../config";
+import { Services, type Config } from "../../config";
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import type { AlertData, Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../../weather-data";
@@ -14,7 +14,7 @@ export class ClimacellV4 extends BaseProvider {
 	public readonly remainingCalls: number | null = null;
 	public readonly needsApiKey: boolean = true;
 	public readonly prettyName: string = _("Tomorrow.io");
-	public readonly name: Services = "Tomorrow.io";
+	public readonly name: Services = Services.Tomorrow_IO;
 	public readonly maxForecastSupport: number = 15;
 	public readonly maxHourlyForecastSupport: number = 108;
 	public readonly website: string = "https://www.tomorrow.io/";
@@ -147,6 +147,7 @@ export class ClimacellV4 extends BaseProvider {
 				type: "temperature",
 				value: CelsiusToKelvin(current.values.temperatureApparent)
 			},
+			uvIndex: null,
 			forecasts: []
 		}
 

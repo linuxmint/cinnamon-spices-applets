@@ -23,6 +23,14 @@ let appSystem = Cinnamon.AppSystem.get_default();
 const UUID = 'app-launcher@mchilli';
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 
+// Define panel positions
+const PANEL = {
+    TOP : 0,
+    BOTTOM : 1,
+    LEFT : 2,
+    RIGHT : 3
+};
+
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
@@ -39,6 +47,9 @@ class MyApplet extends Applet.TextIconApplet {
             this.instanceId = instanceId;
             this.groupBuffer = [];
 
+            this.initialized = false; // some callbacks are triggered multiple times at startup without values been changed
+            this.mouseEntered = false;
+            this.subMenuClosedRecently = false;  // to prevent the menu from being closed after the submenus have collapsed
             this.dragging = false;
             this.dragPlaceholder = null;
             this.dragPlaceholderParent = null;
@@ -51,11 +62,14 @@ class MyApplet extends Applet.TextIconApplet {
             }
 
             this.bindSettings();
+            this.initWorkspaces();
             this.initMenu();
             this.connectSignals();
-            this.addHotkey();
+            this.updateHotKey();
             this.initIcons();
             this.initLabel();
+
+            setTimeout(() => {this.initialized = true}, 500);
         } catch (e) {
             global.logError(e);
         }
@@ -64,8 +78,12 @@ class MyApplet extends Applet.TextIconApplet {
     bindSettings() {
         this.settings = new Settings.AppletSettings(this, this.uuid, this.instanceId);
 
-        this.settings.bind('list-applications', 'listApplications', this.updateGroups);
-        this.settings.bind('list-groups', 'listGroups', this.updateMenu);
+        this.settings.bind('list-applications', 'listApplications', (event) => {
+            if (this.initialized) this.updateGroups();
+        });
+        this.settings.bind('list-groups', 'listGroups', (event) => {
+            if (this.initialized) this.updateMenu();
+        });
 
         this.settings.bind('visible-launcher-label', 'visibleLauncherLabel', this.initLabel);
         this.settings.bind('launcher-label', 'launcherLabel', this.initLabel);
@@ -73,7 +91,12 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.bind('launcher-icon', 'launcherIcon', this.initIcons);
         this.settings.bind('notification-enabled', 'notificationEnabled');
         this.settings.bind('notification-text', 'notificationText');
-        this.settings.bind('hotkey-binding', 'hotkeyBinding', this.addHotkey);
+        this.settings.bind('hotkeys-enabled', 'hotkeysEnabled', this.updateHotKey);
+        this.settings.bind('hotkey-bindings', 'hotkeyBindings', this.addHotKey);
+        this.settings.bind('menu-at-pointer', 'menuAtPointer');
+        this.settings.bind('open-by-hover', 'openByHover');
+        this.settings.bind('open-by-hover-delay', 'openByHoverDelay');
+        this.settings.bind('bind-to-workspace', 'bindToWorkspace', this.updateWorkspace);
 
         this.settings.bind('fixed-menu-width', 'fixedMenuWidth', this.updateMenu);
         this.settings.bind('visible-app-icons', 'visibleAppIcons', this.updateMenu);
@@ -84,12 +107,40 @@ class MyApplet extends Applet.TextIconApplet {
     connectSignals() {
         this.signalManager = new SignalManager.SignalManager(null);
 
-        this.signalManager.connect(
-            this.menu,
-            'open-state-changed',
-            this.on_menu_state_changed,
-            this
-        );
+        this.signalManager.connect(this.actor, 'enter-event', this.onMouseEnter, this);
+        this.signalManager.connect(this.actor, 'leave-event', this.onMouseLeave, this);
+
+        this.signalManager.connect(this.menu, 'open-state-changed', this.on_menu_state_changed, this);
+        this.signalManager.connect(global.window_manager, 'switch-workspace', this.updateWorkspace,this);
+        this.signalManager.connect(global.screen, 'workspace-added', this.initWorkspaces, this);
+        this.signalManager.connect(global.screen, 'workspace-removed', this.initWorkspaces, this);
+    }
+
+    updateWorkspace() {
+        let index = parseInt(this.bindToWorkspace);
+        let workspace = global.screen.get_active_workspace_index();
+        if (index === -1 || index > this.workspaces.length - 1) {
+            this.set_applet_enabled(true);
+        } else {
+            this.set_applet_enabled(workspace === index);
+        }
+    }
+
+    initWorkspaces() {
+        let options = {};
+        options[_('All workspaces')] = '-1';
+        this.workspaces = new Array(global.screen.get_n_workspaces());
+        for (let i = 0; i < this.workspaces.length; i++) {
+            let workspaceName = Main.getWorkspaceName(i)
+            this.workspaces[i] = workspaceName;
+            options[workspaceName] = '' + i;
+        }
+        this.settings.setOptions('bind-to-workspace', options);
+        if (this.bindToWorkspace !== '-1' && this.workspaces[parseInt(this.bindToWorkspace)] === undefined) {
+            this.settings.setValue('bind-to-workspace', '-1');
+        }
+
+        this.updateWorkspace();
     }
 
     initMenu() {
@@ -351,12 +402,24 @@ class MyApplet extends Applet.TextIconApplet {
         return icon;
     }
 
-    addHotkey() {
+    updateHotKey() {
+        if (this.hotkeysEnabled) {
+            this.addHotKey();
+        } else {
+            this.removeHotkey();
+        }
+    }
+
+    addHotKey() {
         Main.keybindingManager.addHotKey(
             `app-launcher-${this.instanceId}`,
-            this.hotkeyBinding,
+            this.hotkeyBindings,
             () => {
-                this.menu.toggle();
+                if (this.menuAtPointer) {
+                    this.menu.toggleOnPointer();
+                } else {
+                    this.menu.toggle();
+                }
             }
         );
     }
@@ -374,7 +437,7 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     on_applet_clicked(event) {
-        if (this.activeDrag()) {
+        if (this.dragging) {
             this.endDrag();
         }
         this.menu.toggle();
@@ -392,8 +455,51 @@ class MyApplet extends Applet.TextIconApplet {
 
     on_menu_state_changed(menu, isOpen, sourceActor) {
         this.toggleIcon();
-        if (!isOpen && this.menu.isContextOpen()) {
+        if (!isOpen && this.menu.isContextOpen) {
             this.menu.closeContext();
+        }
+    }
+
+    onMouseEnter(event) {
+        if (!this.openByHover) return
+        this.mouseEntered = true;
+        this.subMenuClosedRecently = false;
+
+        if (this.leaveTimeoutID) {
+            clearTimeout(this.leaveTimeoutID);
+            this.leaveTimeoutID = undefined;
+        }
+
+        if (!this.menu.isOpen && !this.hoverTimeoutID) {
+            this.hoverTimeoutID = setTimeout(() => {
+                if (!this._applet_context_menu.isOpen) {
+                    this.menu.open();
+                }
+            }, this.openByHoverDelay);
+        }
+    }
+
+    onMouseLeave(event) {
+        if (!this.openByHover) return
+        this.mouseEntered = false;
+
+        this.leaveTimeoutID = setTimeout(() => {
+            this.checkMouseEntered();
+        }, this.openByHoverDelay);
+
+        if (this.hoverTimeoutID) {
+            clearTimeout(this.hoverTimeoutID);
+            this.hoverTimeoutID = undefined;
+        }
+    }
+
+    checkMouseEntered() {
+        if (this.openByHover && 
+            this.menu.isOpen &&
+            !this.menu.isContextOpen &&
+            !this.mouseEntered && 
+            !this.subMenuClosedRecently) {
+                this.menu.close();
         }
     }
 
@@ -426,10 +532,6 @@ class MyApplet extends Applet.TextIconApplet {
         }
 
         this.dragging = false;
-    }
-
-    activeDrag() {
-        return this.dragging;
     }
 
     handleDrag(source, x, y, box, indent) {
@@ -522,13 +624,95 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
     _init(applet, orientation) {
         try {
             super._init(applet, orientation);
+            
             this.applet = applet;
             this._menuAppItems = [];
             this._menuGroupItems = [];
 
-            this.contextOpen = false;
+            this.isContextOpen = false;
+            this.hotkeyTriggered = false;
+            this.pointerX = 0;
+            this.pointerY = 0;
+            this.actorPlaced = false;
+
+            this._signals.connect(this.actor, 'enter-event', this.onMouseEnter, this);
+            this._signals.connect(this.actor, 'leave-event', this.onMouseLeave, this);
         } catch (error) {
-            global.log(error);
+            global.logError(error);
+        }
+    }
+
+    close(animate) {
+        this.hotkeyTriggered = false;
+        this.actorPlaced = false;
+        super.close(animate);
+    }
+
+    toggleOnPointer() {
+        if (this.isOpen) {
+            this.close();
+        } else {
+            this.hotkeyTriggered = true;
+            [this.pointerX, this.pointerY] = global.get_pointer();
+            this.open();
+            this.actor.set_position(this.pointerX, this.pointerY);
+        }
+    }
+
+    _allocationChanged (actor, pspec) {
+        if (this.hotkeyTriggered) {
+            let posX = this.pointerX;
+            let posY = this.pointerY;
+
+            // Find the monitor at the pointer position
+            const monitorIndex = Main.layoutManager.findMonitorIndexAt(posX, posY);
+            const monitor = Main.layoutManager.monitors[monitorIndex];
+
+            // Initialize panel heights for all sides of the monitor
+            const panelHeight = [0, 0, 0, 0];
+
+            // Get all visible panels for the current monitor and update their heights
+            const panels = Main.panelManager.getPanelsInMonitor(monitorIndex);
+            for (const panel of panels) {
+                if (!panel._hidden) {
+                    panelHeight[panel.panelPosition] = panel.height
+                }
+            }
+
+            if (this.actorPlaced) {
+                // // Ensure the actor fits within the monitor's width and height
+                posX = Math.min(posX, monitor.x + monitor.width - this.actor.width - panelHeight[PANEL.RIGHT]);
+                posY = Math.min(posY, monitor.y + monitor.height - this.actor.height - panelHeight[PANEL.BOTTOM]);
+            } else {
+                // Adjust X position to fit within the monitor, considering left and right panels
+                if (posX - monitor.x + this.actor.width > monitor.width - panelHeight[PANEL.RIGHT]) {
+                    posX -= this.actor.width;
+                }
+                if (posX < monitor.x + panelHeight[PANEL.LEFT]) {
+                    posX = monitor.x + panelHeight[PANEL.LEFT];
+                }
+
+                // Adjust Y position to fit within the monitor, considering top and bottom panels
+                if (posY - monitor.y + this.actor.height > monitor.height - panelHeight[PANEL.BOTTOM]) {
+                    posY -= this.actor.height;
+                }
+                if (posY < monitor.y + panelHeight[PANEL.TOP]) {
+                    posY = monitor.y + panelHeight[PANEL.TOP];
+                }
+
+                // Update pointer positions and mark menu as placed
+                this.pointerX = posX;
+                this.pointerY = posY;
+                this.actorPlaced = true
+            }
+
+            this.actor.set_position(posX, posY);
+            return
+        };
+        
+        if (!this.animating && !this.sourceActor.is_finalized() && this.sourceActor.get_stage() != null) {
+            let [xPos, yPos] = this._calculatePosition();
+            this.actor.set_position(xPos, yPos);
         }
     }
 
@@ -660,19 +844,35 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
     }
 
     openContext() {
-        this.contextOpen = true;
+        this.isContextOpen = true;
         this.expandMenu();
     }
 
     closeContext() {
-        this.contextOpen = false;
+        this.isContextOpen = false;
         this.unselectMenuItems();
         this.collapseMenu();
         this.actor.grab_key_focus(); // necessary to recalc the width
     }
 
-    isContextOpen() {
-        return this.contextOpen;
+    onMouseEnter(event) {
+        if (!this.applet.openByHover) return
+        this.applet.mouseEntered = true;
+        this.applet.subMenuClosedRecently = false;
+
+        if (this.leaveTimeoutID) {
+            clearTimeout(this.leaveTimeoutID);
+            this.leaveTimeoutID = undefined;
+        }
+    }
+
+    onMouseLeave(event) {
+        if (!this.applet.openByHover) return
+        this.applet.mouseEntered = false;
+
+        this.leaveTimeoutID = setTimeout(() => {
+            this.applet.checkMouseEntered();
+        }, this.applet.openByHoverDelay);
     }
 
     handleDragOver(source, actor, x, y, time) {
@@ -729,6 +929,11 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
             this.iconSize = iconSize;
             this.iconType = useSymbolicIcons ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR;
 
+            this._signals.connect(this.actor, 'enter-event', this.onMouseEnter, this);
+            this._signals.connect(this.actor, 'leave-event', this.onMouseLeave, this);
+            this._signals.connect(this.menu.actor, 'enter-event', this.onMouseEnter, this);
+            this._signals.connect(this.menu.actor, 'leave-event', this.onMouseLeave, this);
+
             this._menuItems = [];
 
             this.buttonDelete = this._createButton('delete');
@@ -754,7 +959,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
                 return this.acceptMenuDrop(source, actor, x, y, time);
             };
         } catch (error) {
-            global.log(error);
+            global.logError(error);
         }
     }
 
@@ -775,6 +980,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
 
         this._children.unshift(params);
         this._signals.connect(this.actor, 'destroy', this._removeChild.bind(this, this._icon));
+        
         this.actor.add_actor(this._icon);
     }
 
@@ -813,7 +1019,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
     _onItemClicked(button) {
         switch (button) {
             case 1:
-                if (this.applet.menu.isContextOpen()) {
+                if (this.applet.menu.isContextOpen) {
                     if (!this._selected) {
                         this.applet.menu.unselectMenuItems();
                         this.select();
@@ -823,7 +1029,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
                 }
                 break;
             case 3:
-                if (this.applet.menu.isContextOpen()) {
+                if (this.applet.menu.isContextOpen) {
                     if (!this._selected) {
                         this.applet.menu.unselectMenuItems();
                         this.select();
@@ -971,6 +1177,40 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
         this.applet.menu.closeContext();
     }
 
+    onMouseEnter(event) {
+        if (!this.applet.openByHover) return
+        
+        if (!this.menu.isOpen && !this.hoverTimeoutID) {
+            this.hoverTimeoutID = setTimeout(() => {
+                if (!this.applet.menu.isContextOpen) {
+                    this.applet.subMenuClosedRecently = true;
+                    this.applet.menu.closeMenuGroupItems();
+                    this.menu.open();
+                }
+            }, this.applet.openByHoverDelay);
+        } else if (this.leaveTimeoutID) {
+            clearTimeout(this.leaveTimeoutID);
+            this.leaveTimeoutID = undefined;
+        }
+    }
+
+    onMouseLeave(event) {
+        if (!this.applet.openByHover) return
+
+        if (this.hoverTimeoutID) {
+            clearTimeout(this.hoverTimeoutID);
+            this.hoverTimeoutID = undefined;
+        } else if (!this.applet.menu.isContextOpen) {
+            this.leaveTimeoutID = setTimeout(() => {
+                if (this.menu.isOpen && !this.applet.menu.isContextOpen) {
+                    this.applet.subMenuClosedRecently = true;
+                    this.applet.checkMouseEntered();
+                    this.menu.close();
+                }
+            }, this.applet.openByHoverDelay);
+        }
+    }
+
     handleMenuDragOver(source, actor, x, y, time) {
         this.applet.dragOverSubMenu = true;
 
@@ -1040,7 +1280,7 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
                 this._removeIcon();
             }
         } catch (error) {
-            global.log(error);
+            global.logError(error);
         }
     }
 
@@ -1092,7 +1332,7 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
     _onItemClicked(button) {
         switch (button) {
             case 1:
-                if (this.applet.menu.isContextOpen()) {
+                if (this.applet.menu.isContextOpen) {
                     if (!this._selected) {
                         this.applet.menu.unselectMenuItems();
                         this.select();
@@ -1103,12 +1343,12 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
                 }
                 break;
             case 2:
-                if (!this.applet.menu.isContextOpen()) {
+                if (!this.applet.menu.isContextOpen) {
                     this.applet.run(this.name, this.icon, this.command);
                 }
                 break;
             case 3:
-                if (this.applet.menu.isContextOpen()) {
+                if (this.applet.menu.isContextOpen) {
                     if (!this._selected) {
                         this.applet.menu.unselectMenuItems();
                         this.select();
@@ -1275,7 +1515,7 @@ class MyPopupSeparatorMenuItem extends PopupMenu.PopupBaseMenuItem {
             this.blue = blue;
             this.alpha = alpha;
         } catch (error) {
-            global.log(error);
+            global.logError(error);
         }
     }
 

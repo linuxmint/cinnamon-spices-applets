@@ -1,0 +1,123 @@
+## DRAWER (SHOW/HIDE APPLETS)
+# This file is put in the public domain.
+# mohammad-sn, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: show-hide-applets@mohammad-sn 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-11-20 06:07+0100\n"
+"PO-Revision-Date: 2025-06-10 23:50+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. applet.js:60 applet.js:231
+msgid "Autohide ON"
+msgstr "自動隱藏已啟用"
+
+#. applet.js:62 applet.js:233
+msgid "Autohide OFF"
+msgstr "自動隱藏已停用"
+
+#. applet.js:82
+msgid "Panel Edit mode"
+msgstr "面板編輯模式"
+
+#. applet.js:88
+msgid "Add applets to the panel"
+msgstr "將小程式新增至面板"
+
+#. settings-schema.json->autohide->description
+#. applet.js:96
+msgid "Autohide"
+msgstr "自動隱藏"
+
+#. metadata.json->description
+msgid ""
+"hide a few applet to have a neater panel, and make them show up again by a "
+"click"
+msgstr "隱藏部分小程式讓面板更整潔，點一下即可重新顯示"
+
+#. metadata.json->name
+msgid "Drawer (show/hide applets)"
+msgstr "Drawer（顯示/隱藏小程式）"
+
+#. settings-schema.json->head->description
+msgid "Settings for show-hide-applets@mohammad-sn"
+msgstr "show-hide-applets@mohammad-sn 設定"
+
+#. settings-schema.json->autohide->tooltip
+msgid ""
+"Check it if you want to hide applets automatically, unless you should click "
+"on applet to do so.\n"
+"Its status can be changed by middle-clicking on this applet."
+msgstr ""
+"勾選此選項會自動隱藏小程式，否則需要手動點選小程式來隱藏。\n"
+"可透過滑鼠中鍵點選此小程式來切換狀態。"
+
+#. settings-schema.json->statusintooltip->description
+msgid "Show Autohide status in tooltip"
+msgstr "在工具提示中顯示自動隱藏狀態"
+
+#. settings-schema.json->disablestarttimeautohide->description
+msgid "Disable start time autohide"
+msgstr "停用啟動時的自動隱藏"
+
+#. settings-schema.json->disablestarttimeautohide->tooltip
+msgid "if not in autohide mode"
+msgstr "如果未處於自動隱藏模式"
+
+#. settings-schema.json->hidetime->units
+#. settings-schema.json->autohiderstime->units
+msgid "seconds"
+msgstr "秒"
+
+#. settings-schema.json->hidetime->description
+msgid "Autohide after "
+msgstr "自動隱藏延遲時間 "
+
+#. settings-schema.json->hoveractivates->description
+msgid "Activate on hover"
+msgstr "滑鼠游標停留時啟用"
+
+#. settings-schema.json->hoveractivates->tooltip
+msgid "show applets on mouse hover"
+msgstr "滑鼠游標停留時顯示小程式"
+
+#. settings-schema.json->hoveractivateshide->description
+msgid "Hide on hovering again"
+msgstr "滑鼠游標再次停留時隱藏"
+
+#. settings-schema.json->hoveractivateshide->tooltip
+msgid "toggle visibility of applets on mouse hover"
+msgstr "滑鼠游標停留時切換小程式顯示/隱藏"
+
+#. settings-schema.json->hovertime->units
+msgid "miliseconds"
+msgstr "毫秒"
+
+#. settings-schema.json->hovertime->description
+msgid "Hover activates/hides after "
+msgstr "滑鼠游標停留後啟用/隱藏延遲時間 "
+
+#. settings-schema.json->autohiders->description
+msgid "Autohide reshowing applets"
+msgstr "自動隱藏重新顯示的小程式"
+
+#. settings-schema.json->autohiderstime->description
+msgid "Reshowers' autohide delay: "
+msgstr "重新顯示後的自動隱藏延遲時間 "
+
+#. settings-schema.json->hideuntilseparator->description
+msgid "Only hide until next separator"
+msgstr "僅隱藏至下一個分隔符號"
+
+#. settings-schema.json->hideuntilseparator->tooltip
+msgid "Only hide everything until the next separator element occurs."
+msgstr "僅隱藏所有內容直到下一個分隔符號元素出現為止。"

@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# NOTIFICATIONS ENHANCED
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Renan Lazarotto <renanlazarotto@gmail.com>, 2024.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: notifications-enhanced@hilyxx 1.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2024-07-23 12:54-0300\n"
-"PO-Revision-Date: 2024-07-23 13:49-0300\n"
+"Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-05 12:43+0200\n"
+"PO-Revision-Date: 2025-05-18 13:52+0200\n"
 "Last-Translator: Renan Lazarotto <renanlazarotto@gmail.com>\n"
 "Language-Team: Renan Lazarotto <renanlazarotto@gmail.com>\n"
 "Language: pt_BR\n"
@@ -17,54 +18,65 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:94
+#. applet.js:44
+#, fuzzy
+msgid "Notifications applet conflict"
+msgstr "Notificações desabilitadas"
+
+#. applet.js:45
+msgid ""
+"Conflict detected: notifications@cinnamon.org is active.\n"
+"Remove it and restart Cinnamon before using Notifications-Enhanced applet."
+msgstr ""
+
+#. applet.js:120
 msgid "Do not disturb"
 msgstr "Não perturbe"
 
-#: applet.js:99
+#. applet.js:126
 msgid "No notifications"
 msgstr "Sem notificações"
 
 #. settings-schema.json->keyClear->description
-#: applet.js:106
+#. applet.js:134
 msgid "Clear notifications"
 msgstr "Limpar notificações"
 
-#: applet.js:130
+#. applet.js:157
 msgid "Enable notifications"
 msgstr "Habilitar notificações"
 
-#: applet.js:142
+#. applet.js:168
 msgid "Notification Settings"
 msgstr "Configurações de notificação"
 
-#: applet.js:224 applet.js:406
+#. applet.js:257 applet.js:431
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d notificação"
 msgstr[1] "%d notificações"
 
-#: applet.js:254
+#. applet.js:287
 msgid "Notifications"
 msgstr "Notificações"
 
-#: applet.js:269
+#. applet.js:300
 msgid "Notifications disabled"
 msgstr "Notificações desabilitadas"
 
-#: applet.js:422
+#. applet.js:447
 msgid "just now"
 msgstr "agora"
 
-#: applet.js:425
+#. applet.js:450
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "há %d segundo"
 msgstr[1] "há %d segundos"
 
-#: applet.js:429
+#. applet.js:454
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -72,8 +84,9 @@ msgstr[0] "há %d minuto"
 msgstr[1] "há %d minutos"
 
 #. metadata.json->name
-msgid "Notifications Enhanced"
-msgstr ""
+#, fuzzy
+msgid "Notifications-Enhanced"
+msgstr "Notificações"
 
 #. metadata.json->description
 msgid "A notification applet but with more options"
@@ -100,22 +113,27 @@ msgid "Show the number of notifications"
 msgstr "Mostrar o número de notificações"
 
 #. settings-schema.json->showEmptyTray->description
-msgid "Show empty tray"
-msgstr "Mostrar a bandeja vazia"
+#, fuzzy
+msgid "Show notification tray"
+msgstr "Mostrar notificações"
 
 #. settings-schema.json->showEmptyTray->tooltip
-msgid "Check this to show the tray even when there are no new notifications."
-msgstr "Marque essa opção para mostrar a bandeja mesmo quando não houverem novas notificações."
+#, fuzzy
+msgid "Check this to always show the notification tray."
+msgstr "Marque essa opção para ignorar as notificações transitórias."
 
 #. settings-schema.json->showDisturbIcon->description
-msgid "Show 'Do not disturb' icon even when show empy tray option is disabled"
-msgstr "Mostrar o ícone 'Não perturbe' mesmo quando a opção 'Mostrar a bandeja vazia' estiver desabilitada"
+msgid "Always show 'Do Not Disturb' icon"
+msgstr ""
 
 #. settings-schema.json->showDisturbIcon->tooltip
+#, fuzzy
 msgid ""
-"Check this to show 'Do not disturb' icon on panel even when show empty tray "
-"option is disabled."
-msgstr "Marque essa opção para mostrar o ícone 'Não perturbe' no painel mesmo quando a opção 'Mostrar a bandeja vazia' estiver desabilitada."
+"Check this to show the 'Do Not Disturb icon' on the panel even when the "
+"'Show notification tray' option is disabled."
+msgstr ""
+"Marque essa opção para mostrar o ícone 'Não perturbe' no painel mesmo quando "
+"a opção 'Mostrar a bandeja vazia' estiver desabilitada."
 
 #. settings-schema.json->showNotificationSettings->description
 msgid "Show notification settings in the menu"
@@ -131,11 +149,23 @@ msgstr "Mostrar notificações"
 
 #. settings-schema.json->keyOpen->tooltip
 msgid "Set keybinding(s) to show the notification popup menu."
-msgstr "Definir combinações de tecla(s) para mostrar o menu pop-up de notificação."
+msgstr ""
+"Definir combinações de tecla(s) para mostrar o menu pop-up de notificação."
 
 #. settings-schema.json->keyClear->tooltip
 msgid "Set keybinding(s) to clear all notifications."
 msgstr "Definir combinações de tecla(s) para limpar todas as notificações."
+
+#. settings-schema.json->keyMute->description
+#, fuzzy
+msgid "Enable or disable notifications"
+msgstr "Habilitar notificações"
+
+#. settings-schema.json->keyMute->tooltip
+#, fuzzy
+msgid "Set keybinding(s) to enable or disable notifications."
+msgstr ""
+"Definir combinações de tecla(s) para ativar ou desativar as notificações."
 
 #. settings-schema.json->btnSystemSettings->description
 msgid "Open notification settings"

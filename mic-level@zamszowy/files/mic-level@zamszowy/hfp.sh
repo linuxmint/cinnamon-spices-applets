@@ -1,10 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -eu
 
-if pactl info | grep -q "Default Source: bluez_source.*.handsfree_head_unit"; then
-    echo "present"
-else
-    echo "absent"
-fi
+present=false
+for profile in $(pw-dump | jq --raw-output '.[].info.props | ."api.bluez5.profile" | select (.!=null)'); do
+    if [[ $profile == "headset-head-unit" ]]; then
+        present=true
+        break
+    fi
+done
 
+$present && echo "present" || echo "absent"

@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# NOTIFICATIONS ENHANCED
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# hilyxx, 2024
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: notifications-enhanced@hilyxx 1.0\n"
+"Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-21 15:31-0400\n"
-"PO-Revision-Date: 2024-07-28 09:01+0200\n"
+"POT-Creation-Date: 2025-08-05 12:43+0200\n"
+"PO-Revision-Date: 2025-11-17 14:55+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,56 +16,69 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.8\n"
 
-#: applet.js:94
+#. applet.js:44
+msgid "Notifications applet conflict"
+msgstr "Értesítések kisalkalmazás ütközés"
+
+#. applet.js:45
+msgid ""
+"Conflict detected: notifications@cinnamon.org is active.\n"
+"Remove it and restart Cinnamon before using Notifications-Enhanced applet."
+msgstr ""
+"Ütközés észlelve: a notifications@cinnamon.org aktív.\n"
+"Távolítsa el és indítsa újra a Cinnamon-t, mielőtt használná az Értesítések-"
+"Továbbfejlesztve kisalkalmazást."
+
+#. applet.js:120
 msgid "Do not disturb"
 msgstr "Ne zavarj"
 
-#: applet.js:99
+#. applet.js:126
 msgid "No notifications"
 msgstr "Nincsenek értesítések"
 
 #. settings-schema.json->keyClear->description
-#: applet.js:106
+#. applet.js:134
 msgid "Clear notifications"
 msgstr "Értesítések törlése"
 
-#: applet.js:130
+#. applet.js:157
 msgid "Enable notifications"
 msgstr "Értesítések engedélyezése"
 
-#: applet.js:142
+#. applet.js:168
 msgid "Notification Settings"
 msgstr "Értesítési beállítások"
 
-#: applet.js:224 applet.js:406
+#. applet.js:257 applet.js:431
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d értesítés"
 msgstr[1] "%d értesítések"
 
-#: applet.js:254
+#. applet.js:287
 msgid "Notifications"
 msgstr "Értesítések"
 
-#: applet.js:269
+#. applet.js:300
 msgid "Notifications disabled"
 msgstr "Értesítések letiltva"
 
-#: applet.js:422
+#. applet.js:447
 msgid "just now"
 msgstr "épp most"
 
-#: applet.js:425
+#. applet.js:450
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d másodperce"
 msgstr[1] "%d másodperce"
 
-#: applet.js:429
+#. applet.js:454
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -73,8 +86,8 @@ msgstr[0] "%d perce"
 msgstr[1] "%d perce"
 
 #. metadata.json->name
-msgid "Notifications Enhanced"
-msgstr "Értesítések továbbfejlesztve"
+msgid "Notifications-Enhanced"
+msgstr "Értesítések-Továbbfejlesztve"
 
 #. metadata.json->description
 msgid "A notification applet but with more options"
@@ -101,27 +114,27 @@ msgid "Show the number of notifications"
 msgstr "Az értesítések számának megjelenítése"
 
 #. settings-schema.json->showEmptyTray->description
-msgid "Show empty tray"
-msgstr "Üres tálca megjelenítése"
+msgid "Show notification tray"
+msgstr "Értesítési tálca megjelenítése"
 
 #. settings-schema.json->showEmptyTray->tooltip
-msgid "Check this to show the tray even when there are no new notifications."
+msgid "Check this to always show the notification tray."
 msgstr ""
-"Jelölje be, hogy a tálca akkor is megjelenjen, ha nincsenek új értesítések."
+"Jelölje be ezt a lehetőséget, ha azt szeretné, hogy az értesítési tálca "
+"mindig látszódjon."
 
 #. settings-schema.json->showDisturbIcon->description
-msgid "Show 'Do not disturb' icon even when show empy tray option is disabled"
-msgstr ""
-"A „Ne zavarjanak” ikon megjelenítése akkor is, ha az üres tálca "
-"megjelenítése opció le van tiltva"
+msgid "Always show 'Do Not Disturb' icon"
+msgstr "A „Ne zavarjanak” ikon mindig látható legyen"
 
 #. settings-schema.json->showDisturbIcon->tooltip
 msgid ""
-"Check this to show 'Do not disturb' icon on panel even when show empty tray "
-"option is disabled."
+"Check this to show the 'Do Not Disturb icon' on the panel even when the "
+"'Show notification tray' option is disabled."
 msgstr ""
-"Jelölje be a „Ne zavarjanak” ikon megjelenítéséhez a panelen akkor is, ha "
-"az üres tálca megjelenítése opció le van tiltva."
+"Jelölje be ezt a négyzetet, ha azt szeretné, hogy a „Ne zavarjanak” ikon "
+"akkor is megjelenjen a panelen, ha az „Értesítési tálca megjelenítése” opció "
+"le van tiltva."
 
 #. settings-schema.json->showNotificationSettings->description
 msgid "Show notification settings in the menu"
@@ -144,6 +157,16 @@ msgstr ""
 #. settings-schema.json->keyClear->tooltip
 msgid "Set keybinding(s) to clear all notifications."
 msgstr "Állítsa be a billentyűkombináció(ka)t az összes értesítés törléséhez."
+
+#. settings-schema.json->keyMute->description
+msgid "Enable or disable notifications"
+msgstr "Értesítések engedélyezése vagy letiltása"
+
+#. settings-schema.json->keyMute->tooltip
+msgid "Set keybinding(s) to enable or disable notifications."
+msgstr ""
+"Billentyűparancs(ok) beállítása az értesítések engedélyezéséhez vagy "
+"letiltásához."
 
 #. settings-schema.json->btnSystemSettings->description
 msgid "Open notification settings"

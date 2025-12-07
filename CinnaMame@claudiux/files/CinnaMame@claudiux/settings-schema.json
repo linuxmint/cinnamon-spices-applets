@@ -1,0 +1,130 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "pageRoms",
+      "pageGames",
+      "pageGeneral"
+    ],
+    "pageRoms": {
+      "type": "page",
+      "title": "Roms",
+      "sections": [
+        "sectionLink",
+        "sectionMameRoms",
+        "sectionTips"
+      ]
+    },
+    "pageGames": {
+      "type": "page",
+      "title": "Games to show",
+      "sections": [
+        "sectionGamesToShow",
+        "sectionGamesTips"
+      ]
+    },
+    "pageGeneral": {
+      "type": "page",
+      "title": "General",
+      "sections": [
+        "sectionIcon"
+      ]
+    },
+    "sectionLink": {
+      "type": "section",
+      "title": "Rom Library",
+      "keys": [
+        "linkURL",
+        "linkButton",
+        "linkReset"
+      ]
+    },
+    "sectionTips": {
+      "type": "section",
+      "title": "Tips",
+      "keys": [
+        "linkTips"
+      ]
+    },
+    "sectionMameRoms": {
+      "type": "section",
+      "title": "Local Mame Roms",
+      "keys": [
+        "mameRomsButton"
+      ]
+    },
+    "sectionGamesToShow": {
+      "type": "section",
+      "title": "Local Mame Roms",
+      "keys": [
+        "refreshGamesButton",
+        "gamesToShow"
+      ]
+    },
+    "sectionGamesTips": {
+      "type": "section",
+      "title": "Tips",
+      "keys": [
+        "gamesTips"
+      ]
+    },
+    "sectionIcon": {
+      "type": "section",
+      "title": "Icon",
+      "keys": [
+        "useSymbolicIcon"
+      ]
+    }
+  },
+  "linkURL": {
+    "type": "entry",
+    "default": "https://www.planetemu.net/",
+    "description": "URL of your Rom Library",
+    "expand-width": true
+  },
+  "linkButton": {
+    "type": "button",
+    "description": "Open your Rom Library",
+    "callback": "openRomLibrary"
+  },
+  "linkReset": {
+    "type": "button",
+    "description": "Reset Rom Library URL to default",
+    "callback": "resetRomLibrary"
+  },
+  "linkTips": {
+    "type": "textview",
+    "description": "",
+    "default": ""
+  },
+  "mameRomsButton": {
+    "type": "button",
+    "description": "Open Local Mame Roms",
+    "callback": "openLocalMameRoms"
+  },
+  "refreshGamesButton": {
+    "type": "button",
+    "description": "Refresh Games",
+    "callback": "refreshGames"
+  },
+  "gamesToShow": {
+    "type": "list",
+    "default": [],
+    "columns": [
+      {"id": "enabled", "title": "Enabled", "type": "boolean", "default": true, "align": 0.5},
+      {"id": "id", "title": "Id\nDo not change!", "type": "string", "default": ""},
+      {"id": "title", "title": "Title", "type": "string", "default": ""}
+    ],
+    "show-buttons": true
+  },
+  "gamesTips": {
+    "type": "textview",
+    "description": "",
+    "default": ""
+  },
+  "useSymbolicIcon": {
+    "type": "switch",
+    "default": false,
+    "description": "Use symbolic icon"
+  }
+}

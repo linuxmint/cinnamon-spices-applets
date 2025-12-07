@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# INTERNET SEARCH BOX
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# mtwebster, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: search-box@mtwebster 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-05 20:02+0200\n"
-"PO-Revision-Date: 2024-07-24 10:19+0200\n"
+"POT-Creation-Date: 2025-05-25 21:36+0200\n"
+"PO-Revision-Date: 2025-06-13 18:25+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -16,24 +16,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:68 old/5.4/applet.js:63
+#. applet.js:66 old/5.4/applet.js:63
 msgid "Right-click to select or add your search engine"
 msgstr ""
 "Klik met de rechtermuisknop om uw zoekmachine te selecteren of toe te voegen"
 
-#: applet.js:87 old/applet.js:79 old/3.2/applet.js:73 old/5.4/applet.js:82
+#. applet.js:85 old/applet.js:79 old/5.4/applet.js:82 old/3.2/applet.js:73
 msgid "Type to search..."
 msgstr "Typ om te zoeken..."
 
-#: applet.js:117 old/5.4/applet.js:112
+#. applet.js:115 old/5.4/applet.js:112
 msgid "Select your Search Engine:"
 msgstr "Selecteer uw zoekmachine:"
 
-#: old/applet.js:90
+#. old/applet.js:90
 msgid "Change default programs..."
 msgstr "Verander standaardprogramma's..."
 
-#: old/applet.js:92
+#. old/applet.js:92
 msgid "Edit providers"
 msgstr "Bewerk providers"
 
@@ -57,27 +57,24 @@ msgstr "Aanbieders"
 msgid "Options"
 msgstr "Opties"
 
+#. settings-schema.json->section-keybinding->title
+msgid "Keyboard shortcuts"
+msgstr "Sneltoetsen"
+
 #. settings-schema.json->section-colors->title
-#. settings-schema.json->header-colors->description
 #. old->5.4->settings-schema.json->header-colors->description
 msgid "Search-box colors"
 msgstr "Kleuren zoekvak"
 
-#. settings-schema.json->header-provider->description
-#. old->3.2->settings-schema.json->header-provider->description
-#. old->5.4->settings-schema.json->header-provider->description
-msgid "Search Provider Settings"
-msgstr "Instellingen voor zoekaanbieders"
-
 #. settings-schema.json->show-provider->description
-#. old->3.2->settings-schema.json->show-provider->description
 #. old->5.4->settings-schema.json->show-provider->description
+#. old->3.2->settings-schema.json->show-provider->description
 msgid "Show provider"
 msgstr "Toon aanbieder"
 
 #. settings-schema.json->show-provider->tooltip
-#. old->3.2->settings-schema.json->show-provider->tooltip
 #. old->5.4->settings-schema.json->show-provider->tooltip
+#. old->3.2->settings-schema.json->show-provider->tooltip
 msgid "Show selected provider in the panel"
 msgstr "Toon geselecteerde aanbieder in het paneel"
 
@@ -94,11 +91,6 @@ msgid ""
 msgstr ""
 "Zoekopdracht resetten na zoeken? Dit is misschien niet nuttig als u dezelfde "
 "zoekopdracht bij andere zoekmachines nadien wilt uitvoeren."
-
-#. settings-schema.json->header-providers->description
-#. old->5.4->settings-schema.json->header-providers->description
-msgid "Search Engines"
-msgstr "Zoekmachines"
 
 #. settings-schema.json->providers->columns->title
 #. old->5.4->settings-schema.json->providers->columns->title
@@ -149,15 +141,9 @@ msgstr ""
 "standaardaanbieder.\n"
 "Als er geen aanbieder is geselecteerd, is de standaardaanbieder Google."
 
-#. settings-schema.json->header-keybinding->description
-#. old->3.2->settings-schema.json->header-keybinding->description
-#. old->5.4->settings-schema.json->header-keybinding->description
-msgid "Keybinding"
-msgstr "Sneltoets"
-
 #. settings-schema.json->custom-keybinding->description
-#. old->3.2->settings-schema.json->custom-keybinding->description
 #. old->5.4->settings-schema.json->custom-keybinding->description
+#. old->3.2->settings-schema.json->custom-keybinding->description
 msgid "Keybinding, which opens the search box"
 msgstr "Sneltoets die het zoekvak opent"
 
@@ -170,6 +156,20 @@ msgstr "Achtergrondkleur"
 #. old->5.4->settings-schema.json->text-color->description
 msgid "Text color"
 msgstr "Tekstkleur"
+
+#. old->5.4->settings-schema.json->header-provider->description
+#. old->3.2->settings-schema.json->header-provider->description
+msgid "Search Provider Settings"
+msgstr "Instellingen voor zoekaanbieders"
+
+#. old->5.4->settings-schema.json->header-providers->description
+msgid "Search Engines"
+msgstr "Zoekmachines"
+
+#. old->5.4->settings-schema.json->header-keybinding->description
+#. old->3.2->settings-schema.json->header-keybinding->description
+msgid "Keybinding"
+msgstr "Sneltoets"
 
 #. old->3.2->settings-schema.json->selected-provider->description
 msgid "Select provider"

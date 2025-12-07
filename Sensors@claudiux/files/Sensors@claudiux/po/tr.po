@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 1.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-03 15:24+0200\n"
+"POT-Creation-Date: 2025-03-30 14:17+0200\n"
 "PO-Revision-Date: 2021-01-04 11:39+0300\n"
 "Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
@@ -20,108 +20,110 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. metadata.json->name
-#. applet.js:218
+#. applet.js:225 applet_OLD.js:235
 msgid "Sensors Monitor"
 msgstr "Sensörler Monitörü"
 
-#. applet.js:399
+#. applet.js:465 applet_OLD.js:418
 msgid "Suspended"
 msgstr ""
 
-#. applet.js:617 applet.js:659
+#. applet.js:732 applet.js:773 applet_OLD.js:638 applet_OLD.js:682
 msgid "high:"
 msgstr "yüksek:"
 
-#. applet.js:617 applet.js:619 applet.js:659 applet.js:661 applet.js:703
+#. applet.js:732 applet.js:735 applet.js:773 applet.js:775 applet.js:816
+#. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
+#. applet_OLD.js:726
 msgid "n/a"
 msgstr "d/y"
 
-#. applet.js:619 applet.js:661
+#. applet.js:735 applet.js:775 applet_OLD.js:642 applet_OLD.js:684
 msgid "crit:"
 msgstr "kritik:"
 
-#. applet.js:703 applet.js:747
+#. applet.js:816 applet.js:860 applet_OLD.js:726 applet_OLD.js:770
 msgid "min:"
 msgstr "asg:"
 
-#. applet.js:749
+#. applet.js:862 applet_OLD.js:772
 msgid "max:"
 msgstr "azm:"
 
-#. applet.js:778
+#. applet.js:891 applet_OLD.js:801
 msgid "No intrusion detected"
 msgstr "İzinsiz giriş tespit edilmedi"
 
-#. applet.js:778
+#. applet.js:891 applet_OLD.js:801
 msgid "INTRUSION DETECTED!"
 msgstr "GİRİŞ TESPİT EDİLDİ!"
 
-#. applet.js:798
+#. applet.js:911 applet_OLD.js:821
 msgid "Must be configured!"
 msgstr "Yapılandırılmalıdır!"
 
-#. applet.js:1185
+#. applet.js:1275 applet_OLD.js:1208
 msgid "Settings"
 msgstr "Ayarlar"
 
-#. applet.js:1185
+#. applet.js:1275 applet_OLD.js:1208
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1192
+#. applet.js:1282 applet_OLD.js:1215
 msgid "⚙ General"
 msgstr "⚙ Genel"
 
-#. applet.js:1202
+#. applet.js:1298 applet_OLD.js:1231
 #, fuzzy, javascript-format
 msgid "%s Temperature sensors"
 msgstr "Sıcaklık sensörleri"
 
-#. applet.js:1212
+#. applet.js:1314 applet_OLD.js:1247
 #, fuzzy, javascript-format
 msgid "%s Fan sensors"
 msgstr "Fan sensörleri"
 
-#. applet.js:1222
+#. applet.js:1330 applet_OLD.js:1263
 #, fuzzy, javascript-format
 msgid "%s Voltage sensors"
 msgstr "Voltaj sensörleri"
 
-#. applet.js:1232
+#. applet.js:1346 applet_OLD.js:1279
 #, fuzzy, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "İzinsiz giriş sensörleri"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1253
+#. applet.js:1365 applet_OLD.js:1306
 msgid "Run xsensors"
 msgstr "Xsensorleri çalıştır"
 
-#. applet.js:1262
+#. applet.js:1374 applet_OLD.js:1315
 #, fuzzy
 msgid "Suspend Sensors"
 msgstr "Xsensorleri çalıştır"
 
-#. applet.js:1273
+#. applet.js:1385 applet_OLD.js:1326
 msgid "Reload this applet"
 msgstr "Bu uygulamayı yeniden yükleyin"
 
-#. applet.js:1574
+#. applet.js:1707 applet_OLD.js:1656
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "'%s'yi kaldırmak istediğinizden emin misiniz?"
 
-#. lib/checkDependencies.js:317
+#. lib/checkDependencies.js:353
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "%s uygulaması tamamen işlevseldir."
 
-#. lib/checkDependencies.js:318
+#. lib/checkDependencies.js:354
 msgid "All dependencies are installed"
 msgstr "Tüm bağımlılıklar yüklü"
 
-#. lib/checkDependencies.js:346
+#. lib/checkDependencies.js:383
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -129,13 +131,17 @@ msgstr ""
 "Bu uygulamanın tüm özelliklerine sahip olması için gereken programlardan "
 "bazılarını kaçırıyorsunuz."
 
-#. lib/checkDependencies.js:347
-msgid "Please execute, in the just opened terminal, the commands:"
-msgstr "Lütfen yeni açılan terminalde komutları yürütün:"
+#. lib/checkDependencies.js:385
+msgid "Please install these packages:"
+msgstr ""
 
-#. lib/checkDependencies.js:348
+#. lib/checkDependencies.js:389 lib/checkDependencies.js:399
 msgid "Some dependencies are not installed!"
 msgstr "Bazı bağımlılıklar kurulu değil!"
+
+#. lib/checkDependencies.js:401
+msgid "Install these packages now"
+msgstr ""
 
 #. lib/util.js:244
 #, javascript-format
@@ -200,13 +206,18 @@ msgstr ""
 "sınırına ulaştığında veya sınırını aştığında renk değişiklikleri konusunda "
 "sizi bilgilendirir."
 
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr ""
+
 #. settings-schema.json->page_Temperatures->title
 #, fuzzy
 msgid "⦿ Temperature"
 msgstr "🌡Sıcaklık"
 
 #. settings-schema.json->page_Fans->title
-msgid "🤂 Fan"
+#, fuzzy
+msgid "𖣘 Fan"
 msgstr "🤂 Fan"
 
 #. settings-schema.json->page_Voltages->title
@@ -398,48 +409,28 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Karakter boyutu (standart boyutun % 'si)"
 
-#. settings-schema.json->vertical-align->options
-msgid "baseline"
+#. settings-schema.json->horizontal_width->description
+msgid "Display width (pixels) for horizontal panels"
 msgstr ""
 
-#. settings-schema.json->vertical-align->options
-msgid "sub"
+#. settings-schema.json->horizontal_width->tooltip
+msgid "0 means automatic. This value does not include border."
 msgstr ""
 
-#. settings-schema.json->vertical-align->options
-msgid "super"
+#. settings-schema.json->separator_type->options
+msgid "(none)"
 msgstr ""
 
-#. settings-schema.json->vertical-align->options
-msgid "text-top"
+#. settings-schema.json->separator_type->options
+msgid "blank"
 msgstr ""
 
-#. settings-schema.json->vertical-align->options
-msgid "text-bottom"
+#. settings-schema.json->separator_type->options
+msgid "bar"
 msgstr ""
 
-#. settings-schema.json->vertical-align->options
-msgid "middle"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "top"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "bottom"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "unset"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "inherit"
-msgstr ""
-
-#. settings-schema.json->vertical-align->description
-msgid "Vertical alignment"
+#. settings-schema.json->separator_type->description
+msgid "Separator"
 msgstr ""
 
 #. settings-schema.json->char_color_customized->description
@@ -450,13 +441,12 @@ msgstr ""
 msgid "Text Color"
 msgstr ""
 
-#. settings-schema.json->separator->description
-msgid "Separator"
+#. settings-schema.json->crit_color->description
+msgid "Critical Value Color"
 msgstr ""
 
-#. settings-schema.json->separator->tooltip
-msgid ""
-"The string used to separate values in horizontal orientation. Default is '│'."
+#. settings-schema.json->high_color->description
+msgid "High Value Color"
 msgstr ""
 
 #. settings-schema.json->remove_border->description
@@ -553,8 +543,18 @@ msgstr ""
 "Aşağıdaki listede seçilen sensörlerin değerlerinin gösterilip "
 "gösterilmeyeceği."
 
+#. settings-schema.json->chars_temp->tooltip
+msgid "The first emoji in this list is used for temperature"
+msgstr ""
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr ""
+
 #. settings-schema.json->strictly_positive_temp->description
-#. settings-schema.json->strictly_positive_fan->description
 #. settings-schema.json->strictly_positive_volt->description
 msgid "Show only strictly positive values"
 msgstr "Yalnızca kesinlikle pozitif değerleri göster"
@@ -722,6 +722,15 @@ msgid ""
 "High and Critical values: Cf. technical manual of your disk."
 msgstr ""
 
+#. settings-schema.json->chars_fan->tooltip
+msgid "The first emoji in this list is used for fan"
+msgstr ""
+
+#. settings-schema.json->strictly_positive_fan->description
+#, fuzzy
+msgid "Show only positive or zero values"
+msgstr "Yalnızca kesinlikle pozitif değerleri göster"
+
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
 msgstr "\"Dakikadaki devir sayısı\" nın kısaltması"
@@ -751,6 +760,10 @@ msgid ""
 "  Use $ as the value returned by the sensor.\n"
 "  You can use the 4 operations (+-*/) and parentheses.\n"
 "  Example: $*1.1+0.5"
+msgstr ""
+
+#. settings-schema.json->chars_volt->tooltip
+msgid "The first emoji in this list is used for voltage"
 msgstr ""
 
 #. settings-schema.json->volt_unit->description
@@ -811,6 +824,10 @@ msgid ""
 msgstr ""
 "Aşağıdaki listede seçilen sensörlerin değerlerinin gösterilip "
 "gösterilmeyeceği."
+
+#. settings-schema.json->chars_intrusion->tooltip
+msgid "The first emoji in this list is used for intrusion"
+msgstr ""
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"

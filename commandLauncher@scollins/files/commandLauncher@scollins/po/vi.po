@@ -1,0 +1,113 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: commandLauncher@scollins 1.4\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-10-11 23:46+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+#: applet.js:96 applet.js:149
+msgid "Command Launcher"
+msgstr "Trình khởi chạy lệnh"
+
+#: applet.js:96
+msgid "Process started"
+msgstr "Tiến trình đã khởi động"
+
+#. settings-schema.json->command->description
+#: applet.js:96 applet.js:149
+msgid "Command"
+msgstr "Lệnh"
+
+#: applet.js:97 applet.js:150
+msgid "Process Id"
+msgstr "ID tiến trình"
+
+#: applet.js:100
+#, javascript-format
+msgid "Error while trying to run \"%s\""
+msgstr "Lỗi khi chạy \"%s\""
+
+#: applet.js:149
+msgid "Process ended"
+msgstr "Tiến trình đã kết thúc"
+
+#. metadata.json->description
+msgid "Lets you to run command-line commands with the click of a button"
+msgstr "Cho phép bạn chạy lệnh dòng lệnh chỉ với một cú nhấp chuột"
+
+#. metadata.json->comments
+msgid ""
+"This is a simple multi-instance applet for Cinnamon which allows the user to "
+"launch commands as though from a command prompt with the click of a button. "
+"Unlike a program launcher, which typically uses a .desktop to launch a "
+"program, Command Launcher uses a direct command-line command. This means you "
+"can use any command you could use from a terminal (eg run a script, launch "
+"program with complicated command-line arguments, etc)."
+msgstr ""
+"Đây là applet đa phiên bản đơn giản cho Cinnamon, cho phép người dùng chạy "
+"lệnh như trong cửa sổ dòng lệnh chỉ bằng một cú nhấp chuột. Khác với trình "
+"khởi chạy chương trình (thường dùng tệp .desktop), Command Launcher sử dụng "
+"lệnh dòng lệnh trực tiếp. Nhờ đó bạn có thể chạy bất kỳ lệnh nào trong terminal "
+"(ví dụ: chạy script, khởi chạy chương trình với tham số phức tạp, v.v.)."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Tác giả"
+
+#. settings-schema.json->apearance->description
+msgid "Appearance and behavior"
+msgstr "Giao diện và hành vi"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr "Biểu tượng bảng"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid ""
+"Supports both icon name and icon path.\n"
+"To use a symbolic icon, include '-symbolic' (or '-symbolic.svg') at the end."
+msgstr ""
+"Hỗ trợ cả tên biểu tượng và đường dẫn biểu tượng.\n"
+"Để dùng biểu tượng dạng symbolic, thêm '-symbolic' (hoặc '-symbolic.svg') ở cuối."
+
+#. settings-schema.json->tooltipText->description
+msgid "Tooltip"
+msgstr "Chú giải"
+
+#. settings-schema.json->keyLaunch->description
+msgid "Keyboard shortcut"
+msgstr "Phím tắt"
+
+#. settings-schema.json->showNotifications->description
+msgid "Show notifications on completion"
+msgstr "Hiển thị thông báo khi hoàn tất"
+
+#. settings-schema.json->commandTitle->description
+msgid "Command settings"
+msgstr "Cài đặt lệnh"
+
+#. settings-schema.json->useRoot->description
+msgid "Run as root"
+msgstr "Chạy với quyền root"
+
+#. settings-schema.json->useAltEnv->description
+msgid "Run in alternate directory"
+msgstr "Chạy trong thư mục khác"
+
+#. settings-schema.json->altEnv->description
+msgid "Environment path"
+msgstr "Đường dẫn môi trường"

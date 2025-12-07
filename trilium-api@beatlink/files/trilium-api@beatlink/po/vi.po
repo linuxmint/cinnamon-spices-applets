@@ -1,0 +1,163 @@
+# TRILIUM API
+# This file is put in the public domain.
+# BeatLink, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: trilium-api@beatlink 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-23 15:43-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:83
+msgid "Toggle Reminders"
+msgstr "Bật/Tắt Nhắc nhở"
+
+#. metadata.json->description
+msgid "Applet for Displaying Text from a Trilium API Script"
+msgstr "Applet Hiển thị Văn bản từ Script API Trilium"
+
+#. metadata.json->name
+msgid "Trilium API"
+msgstr "API Trilium"
+
+#. settings-schema.json->page1->title
+msgid "Trilium Location"
+msgstr "Vị trí Trilium"
+
+#. settings-schema.json->page2->title
+msgid "API Settings"
+msgstr "Cài đặt API"
+
+#. settings-schema.json->page3->title
+msgid "Label Display"
+msgstr "Hiển thị Nhãn"
+
+#. settings-schema.json->page4->title
+msgid "Reminder Flash"
+msgstr "Nhấp nháy Nhắc nhở"
+
+#. settings-schema.json->page5->title
+msgid "Open On Click"
+msgstr "Mở khi Nhấp"
+
+#. settings-schema.json->api_location->description
+msgid "App Location"
+msgstr "Vị trí Ứng dụng"
+
+#. settings-schema.json->api_location->options
+msgid "This Computer"
+msgstr "Máy tính này"
+
+#. settings-schema.json->api_location->options
+msgid "Remote Server"
+msgstr "Máy chủ Từ xa"
+
+#. settings-schema.json->api_location->tooltip
+msgid ""
+"Please indicate whether this applet should point to the Trilium app "
+"installed locally or a remote URL"
+msgstr ""
+"Vui lòng chỉ định xem applet này nên trỏ đến ứng dụng Trilium được cài đặt "
+"cục bộ hay một URL từ xa"
+
+#. settings-schema.json->api_url->description
+msgid "Remote Server URL"
+msgstr "URL Máy chủ Từ xa"
+
+#. settings-schema.json->api_url->tooltip
+msgid ""
+"Enter the URL for the Trilium Server this app should connect to. (e.g "
+"https://trilium.example.com)"
+msgstr ""
+"Nhập URL cho Máy chủ Trilium mà ứng dụng này nên kết nối đến. (ví dụ: "
+"https://trilium.example.com)"
+
+#. settings-schema.json->api_endpoint->description
+msgid "API Endpoint"
+msgstr "Điểm cuối API"
+
+#. settings-schema.json->api_endpoint->tooltip
+msgid ""
+"The Trilium API Endpoint that requests are sent to (whatever comes after "
+"'custom/')"
+msgstr ""
+"Điểm cuối API Trilium mà các yêu cầu được gửi đến (bất cứ thứ gì sau "
+"'custom/')"
+
+#. settings-schema.json->api_key->description
+msgid "API Key"
+msgstr "Khóa API"
+
+#. settings-schema.json->api_key->tooltip
+msgid "The API Key used in Agenda Panel script"
+msgstr "Khóa API được sử dụng trong script Bảng kế hoạch"
+
+#. settings-schema.json->fetch_action->description
+msgid "Fetch Action"
+msgstr "Hành động Lấy dữ liệu"
+
+#. settings-schema.json->fetch_action->tooltip
+msgid "The action sent during fetch requests"
+msgstr "Hành động được gửi trong các yêu cầu lấy dữ liệu"
+
+#. settings-schema.json->click_action->description
+msgid "Click Action"
+msgstr "Hành động Nhấp"
+
+#. settings-schema.json->click_action->tooltip
+msgid "The  action sent when the applet is clicked"
+msgstr "Hành động được gửi khi applet được nhấp"
+
+#. settings-schema.json->api_polling_interval->description
+msgid "How often (in seconds) to check the API for new text."
+msgstr "Tần suất (tính bằng giây) kiểm tra API để tìm văn bản mới."
+
+#. settings-schema.json->prefix_string->description
+msgid "The text added to the beginning of every panel message"
+msgstr "Văn bản được thêm vào đầu mỗi tin nhắn panel"
+
+#. settings-schema.json->suffix_string->description
+msgid "The text added to the end of every panel message"
+msgstr "Văn bản được thêm vào cuối mỗi tin nhắn panel"
+
+#. settings-schema.json->text_width->description
+msgid "The width of the panel text in characters"
+msgstr "Độ rộng của văn bản panel tính bằng ký tự"
+
+#. settings-schema.json->reminder_enabled->description
+msgid "Sets whether the reminder flashes are enabled or not"
+msgstr "Đặt xem các nhấp nháy nhắc nhở có được bật hay không"
+
+#. settings-schema.json->reminder_delay->description
+msgid "How often (in seconds) to flash the applet periodically for reminders."
+msgstr "Tần suất (tính bằng giây) nhấp nháy applet định kỳ để nhắc nhở."
+
+#. settings-schema.json->reminder_time->description
+msgid ""
+"How long (in milliseconds) should the applet reminder color stay set. Set to "
+"0 for infinity"
+msgstr ""
+"Bao lâu (tính bằng mili giây) mà màu nhắc nhở applet nên được giữ. Đặt thành "
+"0 để vô hạn"
+
+#. settings-schema.json->reminder_color->description
+msgid "The color used when reminding"
+msgstr "Màu được sử dụng khi nhắc nhở"
+
+#. settings-schema.json->open_on_click_toggle->description
+msgid "Open Trilium when the applet is clicked"
+msgstr "Mở Trilium khi applet được nhấp"
+
+#. settings-schema.json->open_command->description
+msgid "The command to open Trilium"
+msgstr "Lệnh để mở Trilium"

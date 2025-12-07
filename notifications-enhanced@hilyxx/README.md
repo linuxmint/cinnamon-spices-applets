@@ -1,12 +1,14 @@
 Notifications Enhanced applet
 -------------------
+This applet is a fork of the original Notification applet developed for the Cinnamon Desktop, enhanced with additional options for easier notification management.
 
-This applet is similar to system notification applet but with more options to manage easily notifications.
 #### Features
-* Add a new icon to panel when "Do not disturb" mod is enabled
-* New menu label when "Do not disturb" mod is enabled
-* Add a toggle switch to easily enable/disable notifications
-* Add option to show or hide notification settings in menu
-* Add an option to show "do not disturb" icon on panel when show empty tray option is disabled
-* Tooltip now displays notification count
-#### Known issues
+
+* New panel icon when Do Not Disturb mode is enabled.
+* Updated menu label when Do Not Disturb mode is active.
+* Toggle switch in the menu to easily enable or disable notifications.
+* Tooltip now displays the number of notifications.
+* New keyboard shortcut to enable or disable notifications.
+* Middle-click on a notification to dismiss it.
+
+⚠️ To avoid code conflicts (as both applets share parts of the same code), please remove the vanilla Notification applet before installing Notifications Enhanced, then restart Cinnamon.

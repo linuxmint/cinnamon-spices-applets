@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# INTERNET SEARCH BOX
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# mtwebster, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: search-box@mtwebster 2.3.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-05 20:02+0200\n"
-"PO-Revision-Date: 2024-07-28 07:59-0400\n"
+"POT-Creation-Date: 2025-05-25 21:36+0200\n"
+"PO-Revision-Date: 2025-06-20 18:57+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,26 +16,26 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.6\n"
 
-#: applet.js:68 old/5.4/applet.js:63
+#. applet.js:66 old/5.4/applet.js:63
 msgid "Right-click to select or add your search engine"
 msgstr ""
 "Kattintson a jobb gombbal a keresőmotor kiválasztásához vagy hozzáadásához"
 
-#: applet.js:87 old/applet.js:79 old/3.2/applet.js:73 old/5.4/applet.js:82
+#. applet.js:85 old/applet.js:79 old/5.4/applet.js:82 old/3.2/applet.js:73
 msgid "Type to search..."
 msgstr "Gépeljen a kereséshez…"
 
-#: applet.js:117 old/5.4/applet.js:112
+#. applet.js:115 old/5.4/applet.js:112
 msgid "Select your Search Engine:"
 msgstr "Válassza ki keresőmotorját:"
 
-#: old/applet.js:90
+#. old/applet.js:90
 msgid "Change default programs..."
 msgstr "Alapértelmezett alkalmazás megváltoztatása."
 
-#: old/applet.js:92
+#. old/applet.js:92
 msgid "Edit providers"
 msgstr "Keresőszolgáltatás szerkesztése"
 
@@ -59,27 +59,24 @@ msgstr "Szolgáltatók"
 msgid "Options"
 msgstr "Beállítások"
 
+#. settings-schema.json->section-keybinding->title
+msgid "Keyboard shortcuts"
+msgstr "Billentyűparancsok"
+
 #. settings-schema.json->section-colors->title
-#. settings-schema.json->header-colors->description
 #. old->5.4->settings-schema.json->header-colors->description
 msgid "Search-box colors"
 msgstr "A keresőmező színei"
 
-#. settings-schema.json->header-provider->description
-#. old->3.2->settings-schema.json->header-provider->description
-#. old->5.4->settings-schema.json->header-provider->description
-msgid "Search Provider Settings"
-msgstr "Keresőszolgáltatás beállítások"
-
 #. settings-schema.json->show-provider->description
-#. old->3.2->settings-schema.json->show-provider->description
 #. old->5.4->settings-schema.json->show-provider->description
+#. old->3.2->settings-schema.json->show-provider->description
 msgid "Show provider"
 msgstr "Keresőszolgáltatás megjelenítése"
 
 #. settings-schema.json->show-provider->tooltip
-#. old->3.2->settings-schema.json->show-provider->tooltip
 #. old->5.4->settings-schema.json->show-provider->tooltip
+#. old->3.2->settings-schema.json->show-provider->tooltip
 msgid "Show selected provider in the panel"
 msgstr "Kiválasztott keresőszolgáltatás megjelenítése a Panelon"
 
@@ -97,11 +94,6 @@ msgstr ""
 "Visszaállítja a lekérdezést a keresés után? Ez nem biztos, hogy hasznos, ha "
 "azt szeretné, hogy utána ugyanazt a lekérdezést más keresőmotorokon is "
 "végrehajthassa."
-
-#. settings-schema.json->header-providers->description
-#. old->5.4->settings-schema.json->header-providers->description
-msgid "Search Engines"
-msgstr "Kereső motorok"
 
 #. settings-schema.json->providers->columns->title
 #. old->5.4->settings-schema.json->providers->columns->title
@@ -152,15 +144,9 @@ msgstr ""
 "kiválasztott lesz az alapértelmezett szolgáltató.\n"
 "Ha nincs kiválasztva szolgáltató, az alapértelmezett szolgáltató a Google."
 
-#. settings-schema.json->header-keybinding->description
-#. old->3.2->settings-schema.json->header-keybinding->description
-#. old->5.4->settings-schema.json->header-keybinding->description
-msgid "Keybinding"
-msgstr "Billentyűtársítás"
-
 #. settings-schema.json->custom-keybinding->description
-#. old->3.2->settings-schema.json->custom-keybinding->description
 #. old->5.4->settings-schema.json->custom-keybinding->description
+#. old->3.2->settings-schema.json->custom-keybinding->description
 msgid "Keybinding, which opens the search box"
 msgstr "Billentyűtársítás, amely megnyitja a keresési mezőt"
 
@@ -173,6 +159,20 @@ msgstr "Háttér színe"
 #. old->5.4->settings-schema.json->text-color->description
 msgid "Text color"
 msgstr "Szövegszín"
+
+#. old->5.4->settings-schema.json->header-provider->description
+#. old->3.2->settings-schema.json->header-provider->description
+msgid "Search Provider Settings"
+msgstr "Keresőszolgáltatás beállítások"
+
+#. old->5.4->settings-schema.json->header-providers->description
+msgid "Search Engines"
+msgstr "Kereső motorok"
+
+#. old->5.4->settings-schema.json->header-keybinding->description
+#. old->3.2->settings-schema.json->header-keybinding->description
+msgid "Keybinding"
+msgstr "Billentyűtársítás"
 
 #. old->3.2->settings-schema.json->selected-provider->description
 msgid "Select provider"

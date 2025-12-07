@@ -5,7 +5,7 @@
 .sensors-label {
     background: transparent;
     margin: 1px;
-    padding: 0 2px;
+    padding: 2px;
     border: 2px;
     border-radius: 10px;
     border-color: rgba(127,127,127,0.5);
@@ -15,7 +15,7 @@
 .sensors-high {
     background: DarkOrange;
     margin: 1px;
-    padding: 0 2px;
+    padding: 2px;
     border: 2px;
     border-radius: 10px;
     border-color: rgba(255,141,0,0.5);
@@ -25,7 +25,7 @@
 .sensors-critical {
     background: FireBrick;
     margin: 1px;
-    padding: 0 2px;
+    padding: 2px;
     border: 2px;
     border-radius: 10px;
     border-color: rgba(194,34,34,0.5);
@@ -35,7 +35,7 @@
 .sensors-label-noborder {
     background: transparent;
     margin: 1px;
-    padding: 0 2px;
+    padding: 2px;
     border: 0;
     text-align: center;
 }
@@ -43,7 +43,7 @@
 .sensors-high-noborder {
     background: DarkOrange;
     margin: 1px;
-    padding: 0 2px;
+    padding: 2px;
     border: 0;
     text-align: center;
 }
@@ -51,9 +51,89 @@
 .sensors-critical-noborder {
     background: FireBrick;
     margin: 1px;
-    padding: 0 2px;
+    padding: 2px;
     border: 0;
     text-align: center;
+}
+
+.sensors-size60 {
+    font-size: 60%;
+}
+
+.sensors-size61 {
+    font-size: 61%;
+}
+
+.sensors-size62 {
+    font-size: 62%;
+}
+
+.sensors-size63 {
+    font-size: 63%;
+}
+
+.sensors-size64 {
+    font-size: 64%;
+}
+
+.sensors-size65 {
+    font-size: 65%;
+}
+
+.sensors-size66 {
+    font-size: 66%;
+}
+
+.sensors-size67 {
+    font-size: 67%;
+}
+
+.sensors-size68 {
+    font-size: 68%;
+}
+
+.sensors-size69 {
+    font-size: 69%;
+}
+
+.sensors-size70 {
+    font-size: 70%;
+}
+
+.sensors-size71 {
+    font-size: 71%;
+}
+
+.sensors-size72 {
+    font-size: 72%;
+}
+
+.sensors-size73 {
+    font-size: 73%;
+}
+
+.sensors-size74 {
+    font-size: 74%;
+}
+
+.sensors-size75 {
+    font-size: 75%;
+}
+
+.sensors-size76 {
+    font-size: 76%;
+}
+
+.sensors-size77 {
+    font-size: 77%;
+}
+
+.sensors-size78 {
+    font-size: 78%;
+}
+
+.sensors-size79 {
+    font-size: 79%;
 }
 
 .sensors-size80 {
@@ -218,6 +298,161 @@
 
 .sensors-size120 {
     font-size: 120%;
+}
+.sensors-size121 {
+    font-size: 121%;
+}
+
+.sensors-size122 {
+    font-size: 122%;
+}
+
+.sensors-size123 {
+    font-size: 123%;
+}
+
+.sensors-size124 {
+    font-size: 124%;
+}
+
+.sensors-size125 {
+    font-size: 125%;
+}
+
+.sensors-size126 {
+    font-size: 126%;
+}
+
+.sensors-size127 {
+    font-size: 127%;
+}
+
+.sensors-size128 {
+    font-size: 128%;
+}
+
+.sensors-size129 {
+    font-size: 129%;
+}
+
+.sensors-size130 {
+    font-size: 130%;
+}
+.sensors-size131 {
+    font-size: 131%;
+}
+
+.sensors-size132 {
+    font-size: 132%;
+}
+
+.sensors-size133 {
+    font-size: 133%;
+}
+
+.sensors-size134 {
+    font-size: 134%;
+}
+
+.sensors-size135 {
+    font-size: 135%;
+}
+
+.sensors-size136 {
+    font-size: 136%;
+}
+
+.sensors-size137 {
+    font-size: 137%;
+}
+
+.sensors-size138 {
+    font-size: 138%;
+}
+
+.sensors-size139 {
+    font-size: 139%;
+}
+
+.sensors-size140 {
+    font-size: 140%;
+}
+.sensors-size141 {
+    font-size: 141%;
+}
+
+.sensors-size142 {
+    font-size: 142%;
+}
+
+.sensors-size143 {
+    font-size: 143%;
+}
+
+.sensors-size144 {
+    font-size: 144%;
+}
+
+.sensors-size145 {
+    font-size: 145%;
+}
+
+.sensors-size146 {
+    font-size: 146%;
+}
+
+.sensors-size147 {
+    font-size: 147%;
+}
+
+.sensors-size148 {
+    font-size: 148%;
+}
+
+.sensors-size149 {
+    font-size: 149%;
+}
+.sensors-size150 {
+    font-size: 150%;
+}
+.sensors-size151 {
+    font-size: 151%;
+}
+
+.sensors-size152 {
+    font-size: 152%;
+}
+
+.sensors-size153 {
+    font-size: 153%;
+}
+
+.sensors-size154 {
+    font-size: 154%;
+}
+
+.sensors-size155 {
+    font-size: 155%;
+}
+
+.sensors-size156 {
+    font-size: 156%;
+}
+
+.sensors-size157 {
+    font-size: 157%;
+}
+
+.sensors-size158 {
+    font-size: 158%;
+}
+
+.sensors-size159 {
+    font-size: 159%;
+}
+
+.sensors-size160 {
+    font-size: 160%;
 }
 
 .tcolorwhite {

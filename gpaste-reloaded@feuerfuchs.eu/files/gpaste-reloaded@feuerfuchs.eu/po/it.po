@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# GPASTE RELOADED
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# feuerfuchs, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-23 23:31+0100\n"
-"PO-Revision-Date: 2023-10-29 17:00+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-12-27 14:39-0500\n"
+"PO-Revision-Date: 2025-01-03 15:11+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -16,21 +17,21 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: GPasteNewItemDialog.js:53
+#. GPasteNewItemDialog.js:53
 msgid "Please enter the text you want to add to the current history:"
 msgstr "Inserisci il testo che desideri aggiungere alla cronologia corrente:"
 
-#: GPasteNewItemDialog.js:59 GPasteNotInstalledDialog.js:32
+#. GPasteNewItemDialog.js:59 GPasteNotInstalledDialog.js:32
 msgid "OK"
 msgstr "OK"
 
-#: GPasteNewItemDialog.js:63
+#. GPasteNewItemDialog.js:63
 msgid "Cancel"
 msgstr "Annulla"
 
-#: GPasteNotInstalledDialog.js:27
+#. GPasteNotInstalledDialog.js:27
 msgid ""
 "GPaste is not installed. Please install the necessary packages and then "
 "restart Cinnamon for this applet to start working."
@@ -38,54 +39,54 @@ msgstr ""
 "GPaste non è installato. Installa i pacchetti necessari e riavvia Cinnamon "
 "affinché questa applet inizi a funzionare."
 
-#: GPasteSearchItem.js:34
+#. GPasteSearchItem.js:34
 msgid "Type to search..."
 msgstr "Digita per cercare..."
 
-#: applet.js:73
+#. applet.js:73
 msgid "[GPaste is not installed]"
 msgstr "[GPaste non è installato]"
 
-#: applet.js:109
+#. applet.js:109
 msgid "GPaste clipboard"
 msgstr "GPaste Clipboard"
 
 #. settings-schema.json->gpaste-settings->description
-#: applet.js:115 applet.js:153
+#. applet.js:115 applet.js:153
 msgid "GPaste Main Program"
 msgstr "Programma Principale GPaste"
 
-#: applet.js:120
+#. applet.js:120
 msgid "Select History"
 msgstr "Seleziona Cronologia"
 
-#: applet.js:129
+#. applet.js:129
 msgid "Track clipboard changes"
 msgstr "Tieni traccia delle modifiche alla clipboard"
 
-#: applet.js:137
+#. applet.js:137
 msgid "(Empty)"
 msgstr "(Vuota)"
 
-#: applet.js:140
+#. applet.js:140
 msgid "(No results)"
 msgstr "(Nessun risultato)"
 
-#: applet.js:145
+#. applet.js:145
 msgid "New item"
 msgstr "Nuovo elemento"
 
-#: applet.js:148
+#. applet.js:148
 msgid "Empty history"
 msgstr "Svuota cronologia"
 
-#: applet.js:465
+#. applet.js:471
 msgid "Do you really want to empty the current history?"
 msgstr "Vuoi davvero svuotare la cronologia attuale?"
 
 #. metadata.json->description
-msgid "Instantly access and manage your clipboard history"
-msgstr "Accedi e gestisci istantaneamente la cronologia degli appunti"
+msgid "Instantly access and manage your clipboard history."
+msgstr "Accedi e gestisci all'istante la cronologia degli appunti."
 
 #. metadata.json->name
 msgid "GPaste Reloaded"
@@ -94,6 +95,12 @@ msgstr "GPaste Reloaded"
 #. settings-schema.json->shown-entries->description
 msgid "Shown entries"
 msgstr "Voci mostrate"
+
+#. settings-schema.json->always-show-icon->description
+msgid "Show tray icon, even when the applet is not in use"
+msgstr ""
+"Mostra l'icona della barra delle applicazioni, anche quando l'applet non è "
+"in uso"
 
 #. settings-schema.json->display-track-switch->description
 msgid "Display 'Track clipboard changes'"
@@ -126,9 +133,3 @@ msgstr "Mostra cronologia"
 #. settings-schema.json->other->description
 msgid "Other"
 msgstr "Altro"
-
-#~ msgid ""
-#~ "A complete rewrite of the GPaste applet based on the Gnome Shell extension"
-#~ msgstr ""
-#~ "Una riscrittura completa dell'applet GPaste basata sull'estensione Gnome "
-#~ "Shell"

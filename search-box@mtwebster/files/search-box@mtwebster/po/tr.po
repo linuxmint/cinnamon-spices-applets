@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+# INTERNET SEARCH BOX
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Gökhan Gökkaya <gokhanlnx@gmail.com>, 2019.
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-05 20:02+0200\n"
+"POT-Creation-Date: 2025-05-25 21:36+0200\n"
 "PO-Revision-Date: 2019-12-23 22:22+0300\n"
 "Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
 "Language-Team: \n"
@@ -19,24 +19,24 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:68 old/5.4/applet.js:63
+#. applet.js:66 old/5.4/applet.js:63
 msgid "Right-click to select or add your search engine"
 msgstr ""
 
-#: applet.js:87 old/applet.js:79 old/3.2/applet.js:73 old/5.4/applet.js:82
+#. applet.js:85 old/applet.js:79 old/5.4/applet.js:82 old/3.2/applet.js:73
 msgid "Type to search..."
 msgstr "Arama için yazın..."
 
-#: applet.js:117 old/5.4/applet.js:112
+#. applet.js:115 old/5.4/applet.js:112
 #, fuzzy
 msgid "Select your Search Engine:"
 msgstr "Bir arama sağlayıcı seçin"
 
-#: old/applet.js:90
+#. old/applet.js:90
 msgid "Change default programs..."
 msgstr "Varsayılan programları değiştir..."
 
-#: old/applet.js:92
+#. old/applet.js:92
 msgid "Edit providers"
 msgstr "Sağlayıcıları düzenle"
 
@@ -61,27 +61,24 @@ msgstr "Sağlayıcıları düzenle"
 msgid "Options"
 msgstr ""
 
+#. settings-schema.json->section-keybinding->title
+msgid "Keyboard shortcuts"
+msgstr ""
+
 #. settings-schema.json->section-colors->title
-#. settings-schema.json->header-colors->description
 #. old->5.4->settings-schema.json->header-colors->description
 msgid "Search-box colors"
 msgstr ""
 
-#. settings-schema.json->header-provider->description
-#. old->3.2->settings-schema.json->header-provider->description
-#. old->5.4->settings-schema.json->header-provider->description
-msgid "Search Provider Settings"
-msgstr "Arama Sağlayıcı Ayarları"
-
 #. settings-schema.json->show-provider->description
-#. old->3.2->settings-schema.json->show-provider->description
 #. old->5.4->settings-schema.json->show-provider->description
+#. old->3.2->settings-schema.json->show-provider->description
 msgid "Show provider"
 msgstr "Sağlayıcıyı göster"
 
 #. settings-schema.json->show-provider->tooltip
-#. old->3.2->settings-schema.json->show-provider->tooltip
 #. old->5.4->settings-schema.json->show-provider->tooltip
+#. old->3.2->settings-schema.json->show-provider->tooltip
 msgid "Show selected provider in the panel"
 msgstr "Seçilen sağlayıcıyı panelde göster"
 
@@ -96,12 +93,6 @@ msgid ""
 "Reset query after search? This may not be useful if you want to be able to "
 "perform the same query on other search engines afterwards."
 msgstr ""
-
-#. settings-schema.json->header-providers->description
-#. old->5.4->settings-schema.json->header-providers->description
-#, fuzzy
-msgid "Search Engines"
-msgstr "Bir arama sağlayıcı seçin"
 
 #. settings-schema.json->providers->columns->title
 #. old->5.4->settings-schema.json->providers->columns->title
@@ -142,15 +133,9 @@ msgid ""
 "If no provider is selected, the default provider is Google."
 msgstr ""
 
-#. settings-schema.json->header-keybinding->description
-#. old->3.2->settings-schema.json->header-keybinding->description
-#. old->5.4->settings-schema.json->header-keybinding->description
-msgid "Keybinding"
-msgstr "Kısayol"
-
 #. settings-schema.json->custom-keybinding->description
-#. old->3.2->settings-schema.json->custom-keybinding->description
 #. old->5.4->settings-schema.json->custom-keybinding->description
+#. old->3.2->settings-schema.json->custom-keybinding->description
 msgid "Keybinding, which opens the search box"
 msgstr "Arama kutusunu açmak için kısayol"
 
@@ -163,6 +148,21 @@ msgstr ""
 #. old->5.4->settings-schema.json->text-color->description
 msgid "Text color"
 msgstr ""
+
+#. old->5.4->settings-schema.json->header-provider->description
+#. old->3.2->settings-schema.json->header-provider->description
+msgid "Search Provider Settings"
+msgstr "Arama Sağlayıcı Ayarları"
+
+#. old->5.4->settings-schema.json->header-providers->description
+#, fuzzy
+msgid "Search Engines"
+msgstr "Bir arama sağlayıcı seçin"
+
+#. old->5.4->settings-schema.json->header-keybinding->description
+#. old->3.2->settings-schema.json->header-keybinding->description
+msgid "Keybinding"
+msgstr "Kısayol"
 
 #. old->3.2->settings-schema.json->selected-provider->description
 msgid "Select provider"

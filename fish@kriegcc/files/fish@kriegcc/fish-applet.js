@@ -3,7 +3,7 @@
 /*!
  * This file is part of the fish@kriegcc applet project for Cinnamon desktop.
  * 
- * Copyright (C) 2024 kriegcc
+ * Copyright (C) 2025 kriegcc
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -64,15 +64,21 @@ __webpack_require__.d(__webpack_exports__, {
   main: () => (/* binding */ main)
 });
 
-;// CONCATENATED MODULE: ./src/consts/common.ts
+;// ./src/consts/common.ts
 const UUID = "fish@kriegcc";
 const KNOWN_USEFUL_PROGRAMS = ["ps", "who", "uptime", "tail"];
 const FISH_APPLET_CINNAMON_SPICES_WEBSITE = "https://cinnamon-spices.linuxmint.com/applets/view/401";
 const REPORT_BUGS_INSTRUCTIONS_WEBSITE = "https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/CONTRIBUTING.md";
 
-;// CONCATENATED MODULE: ./src/utils/logging/Logger.ts
+;// ./src/utils/logging/Logger.ts
 
 const { isError } = imports.ui.main;
+function mapStringToLogLevel(logLevel) {
+    if (logLevel === "Info" || logLevel === "Debug" || logLevel === "Warning" || logLevel === "Error") {
+        return logLevel;
+    }
+    throw new Error(`Invalid log level value: ${logLevel}`);
+}
 const DEFAULT_LOG_LEVEL = "Info";
 const logLevelPriority = {
     Error: 1,
@@ -127,10 +133,10 @@ class Logger {
 }
 const logger = new Logger();
 
-;// CONCATENATED MODULE: ./src/utils/logging/index.ts
+;// ./src/utils/logging/index.ts
 
 
-;// CONCATENATED MODULE: ./src/utils/common/common.ts
+;// ./src/utils/common/common.ts
 
 const { St } = imports.gi;
 const { GLib } = imports.gi;
@@ -165,7 +171,7 @@ function isAnimationSpeedValid(speed) {
     return true;
 }
 
-;// CONCATENATED MODULE: ./src/utils/common/command.ts
+;// ./src/utils/common/command.ts
 const { spawnCommandLineAsyncIO, spawnCommandLine } = imports.misc.util;
 function runCommandAsyncIO(command, callback, errorCallback) {
     spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
@@ -183,7 +189,7 @@ function openWebsite(url) {
     runCommand("xdg-open " + url);
 }
 
-;// CONCATENATED MODULE: ./src/utils/common/foolsDay.ts
+;// ./src/utils/common/foolsDay.ts
 
 const { spawnCommandLineAsyncIO: foolsDay_spawnCommandLineAsyncIO } = imports.misc.util;
 async function isFoolsDay() {
@@ -259,7 +265,7 @@ function readFile(filePath) {
     });
 }
 
-;// CONCATENATED MODULE: ./src/utils/common/theme.ts
+;// ./src/utils/common/theme.ts
 function getThemeAppearance(className) {
     const theme = getThemeNodeOfClass(className);
     const color = theme.get_foreground_color();
@@ -297,14 +303,88 @@ function invertColor(color) {
     });
     return invertedColor;
 }
+function getMargin(className) {
+    const themeNode = getThemeNodeOfClass(className);
+    const margin = themeNode.get_horizontal_padding() +
+        themeNode.get_border_width(imports.gi.St.Side.TOP) +
+        themeNode.get_border_width(imports.gi.St.Side.BOTTOM);
+    return margin;
+}
 
-;// CONCATENATED MODULE: ./src/utils/common/index.ts
+;// ./src/utils/common/renderOptions.ts
+function mapStringToAnimationScalingMode(mode) {
+    if (mode === "AutoFit" || mode === "PreserveOriginal" || mode === "Custom") {
+        return mode;
+    }
+    throw new Error(`Invalid animation scaling mode value: ${mode}`);
+}
+function mapNumberToAnimationRotation(rotation) {
+    if (rotation === 0 || rotation === 90 || rotation === 180 || rotation === 270) {
+        return rotation;
+    }
+    throw new Error(`Invalid rotation value: ${rotation}`);
+}
+function determineRenderOptionsFromSettings(props) {
+    const { isInHorizontalPanel, panelHeight, scalingMode, margin, customHeight, customWidth, isPreserveAspectRatio, isFlipSidewaysOnVerticalPanel, rotation, } = props;
+    const adjustedRotation = isFlipSidewaysOnVerticalPanel ? getSidewaysFlippedRotation(rotation) : rotation;
+    const renderOptions = {
+        height: undefined,
+        width: undefined,
+        rotation: adjustedRotation,
+    };
+    switch (scalingMode) {
+        case "AutoFit":
+            {
+                const sizeLimit = panelHeight - margin;
+                applyAutoFit(renderOptions, sizeLimit, isInHorizontalPanel, adjustedRotation);
+            }
+            break;
+        case "PreserveOriginal":
+            applyPreserveAnimationOriginalDimensions(renderOptions);
+            break;
+        case "Custom":
+            applyCustomDimensions(renderOptions, customHeight, customWidth, isPreserveAspectRatio);
+            break;
+    }
+    return renderOptions;
+}
+function getSidewaysFlippedRotation(rotation) {
+    switch (rotation) {
+        case 0:
+            return 90;
+        case 180:
+            return 270;
+        case 90:
+        case 270:
+            return rotation;
+    }
+}
+function applyAutoFit(renderOptions, limit, isInHorizontalPanel, rotation) {
+    const isRotatedSideways = rotation === 90 || rotation === 270;
+    const isHeightConstrained = (isInHorizontalPanel && !isRotatedSideways) || (!isInHorizontalPanel && isRotatedSideways);
+    renderOptions.height = isHeightConstrained ? limit : undefined;
+    renderOptions.width = isHeightConstrained ? undefined : limit;
+}
+function applyPreserveAnimationOriginalDimensions(renderOptions) {
+    renderOptions.height = undefined;
+    renderOptions.width = undefined;
+}
+function applyCustomDimensions(renderOptions, customHeight, customWidth, isPreserveAspectRatio) {
+    renderOptions.height = customHeight;
+    renderOptions.width = customWidth;
+    if (isPreserveAspectRatio) {
+        renderOptions.width = undefined;
+    }
+}
+
+;// ./src/utils/common/index.ts
 
 
 
 
 
-;// CONCATENATED MODULE: ./src/AnimatedFish/AnimatedFish.ts
+
+;// ./src/AnimatedFish/AnimatedFish.ts
 
 
 
@@ -324,7 +404,6 @@ const AnimatedFish = GObject.registerClass(class AnimatedFish extends AnimatedFi
     }
     update(props) {
         this.props = props;
-        this.cleanUp();
         this.initAnimation();
     }
     updateImage(imagePath) {
@@ -446,7 +525,7 @@ const AnimatedFish = GObject.registerClass(class AnimatedFish extends AnimatedFi
     }
 });
 
-;// CONCATENATED MODULE: ./src/utils/pixbuf/image.ts
+;// ./src/utils/pixbuf/image.ts
 const { GdkPixbuf } = imports.gi;
 function getFrameSizeOfSlicedImage(file, frames) {
     if (!Number.isInteger(frames) || frames < 0) {
@@ -487,6 +566,12 @@ function getPixbufFromFileAtScale(file, width, height, preserveAspectRatio) {
     if (!filePath) {
         throw new Error(`File path is null.`);
     }
+    if (height !== -1 && height < 1) {
+        throw new Error(`Invalid image height value: ${height}`);
+    }
+    if (width !== -1 && width < 1) {
+        throw new Error(`Invalid image width value: ${width}`);
+    }
     const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filePath, width, height, preserveAspectRatio);
     if (!pixbuf) {
         throw new Error(`Failed to load image from file: ${file}`);
@@ -494,10 +579,10 @@ function getPixbufFromFileAtScale(file, width, height, preserveAspectRatio) {
     return pixbuf;
 }
 
-;// CONCATENATED MODULE: ./src/utils/pixbuf/index.ts
+;// ./src/utils/pixbuf/index.ts
 
 
-;// CONCATENATED MODULE: ./src/AnimatedFish/Animation/cairo-surface/Animation.ts
+;// ./src/AnimatedFish/Animation/cairo-surface/Animation.ts
 
 
 const { St: Animation_St, GLib: Animation_GLib, GObject: Animation_GObject, Gdk } = imports.gi;
@@ -695,11 +780,11 @@ function mapAnimationRotationToPixbufRotation(rotation) {
     }
 }
 
-;// CONCATENATED MODULE: ./src/AnimatedFish/index.ts
+;// ./src/AnimatedFish/index.ts
 
 
 
-;// CONCATENATED MODULE: ./src/PopupMenu/BasePopupMenu.ts
+;// ./src/PopupMenu/BasePopupMenu.ts
 const { AppletPopupMenu } = imports.ui.applet;
 class BasePopupMenu extends AppletPopupMenu {
     constructor(launcher, orientation) {
@@ -714,7 +799,7 @@ class BasePopupMenu extends AppletPopupMenu {
     }
 }
 
-;// CONCATENATED MODULE: ./src/utils/translation/translation.ts
+;// ./src/utils/translation/translation.ts
 
 const Gettext = imports.gettext;
 function _(text) {
@@ -725,10 +810,10 @@ function _(text) {
     return Gettext.gettext(text);
 }
 
-;// CONCATENATED MODULE: ./src/utils/translation/index.ts
+;// ./src/utils/translation/index.ts
 
 
-;// CONCATENATED MODULE: ./src/utils/icons/icons.ts
+;// ./src/utils/icons/icons.ts
 const { St: icons_St } = imports.gi;
 const ErrorIcon = (iconsSize = 24) => new icons_St.Icon({
     icon_name: "error",
@@ -741,10 +826,10 @@ const InfoIcon = (iconsSize = 24) => new icons_St.Icon({
     icon_size: iconsSize,
 });
 
-;// CONCATENATED MODULE: ./src/utils/icons/index.ts
+;// ./src/utils/icons/index.ts
 
 
-;// CONCATENATED MODULE: ./src/utils/notification/notification.ts
+;// ./src/utils/notification/notification.ts
 
 const { MessageTray, SystemNotificationSource, Notification, Urgency } = imports.ui.messageTray;
 const Main = imports.ui.main;
@@ -774,10 +859,10 @@ function showNotification(props) {
     }
 }
 
-;// CONCATENATED MODULE: ./src/utils/notification/index.ts
+;// ./src/utils/notification/index.ts
 
 
-;// CONCATENATED MODULE: ./src/PopupMenu/ErrorPopupMenu.ts
+;// ./src/PopupMenu/ErrorPopupMenu.ts
 
 
 
@@ -892,7 +977,7 @@ class ErrorPopupMenu extends BasePopupMenu {
     }
 }
 
-;// CONCATENATED MODULE: ./src/PopupMenu/FishMessagePopupMenu.ts
+;// ./src/PopupMenu/FishMessagePopupMenu.ts
 
 
 
@@ -1004,7 +1089,7 @@ class FishMessagePopupMenu extends BasePopupMenu {
     }
 }
 
-;// CONCATENATED MODULE: ./src/PopupMenu/FoolsDayPopupMenu.ts
+;// ./src/PopupMenu/FoolsDayPopupMenu.ts
 
 
 
@@ -1042,7 +1127,7 @@ class FoolsDayPopupMenu extends BasePopupMenu {
     }
 }
 
-;// CONCATENATED MODULE: ./src/PopupMenu/PopupMenuFactory.ts
+;// ./src/PopupMenu/PopupMenuFactory.ts
 
 
 
@@ -1070,14 +1155,14 @@ class PopupMenuFactory {
     }
 }
 
-;// CONCATENATED MODULE: ./src/PopupMenu/index.ts
+;// ./src/PopupMenu/index.ts
 
 
 
 
 
 
-;// CONCATENATED MODULE: ./src/FishApplet/ErrorManager/FishAppletErrorManager.ts
+;// ./src/FishApplet/ErrorManager/FishAppletErrorManager.ts
 class FishAppletErrorManager {
     constructor() {
         this.errors = {};
@@ -1116,7 +1201,7 @@ class FishAppletErrorManager {
     }
 }
 
-;// CONCATENATED MODULE: ./src/FishApplet/FishApplet.ts
+;// ./src/FishApplet/FishApplet.ts
 
 
 
@@ -1126,7 +1211,7 @@ class FishAppletErrorManager {
 
 
 
-const { Applet } = imports.ui.applet;
+const { Applet, AllowedLayout } = imports.ui.applet;
 const { AppletSettings } = imports.ui.settings;
 const { PopupMenuManager } = imports.ui.popupMenu;
 const { SignalManager } = imports.misc.signalManager;
@@ -1145,17 +1230,21 @@ class FishApplet extends Applet {
         this.orientation = orientation;
         this.panelHeight = panelHeight;
         this.instanceId = instanceId;
+        this.setAllowedLayout(AllowedLayout.BOTH);
         this.actor.add_style_class_name("fish-applet");
         this.isFoolsDay = false;
         this.foolsDayTimeoutId = 0;
         this.startPeriodicFoolsDayCheck();
         this.errorManager = new FishAppletErrorManager();
+        this.lastCommandOutput = "";
         this.bindSettings();
+        this.updateLogLevel();
         this.initApplet();
     }
     on_panel_height_changed() {
         this.panelHeight = this._panelHeight;
         this.initAnimation();
+        this.updateApplet();
     }
     on_applet_removed_from_panel() {
         var _a;
@@ -1168,8 +1257,8 @@ class FishApplet extends Applet {
     }
     on_orientation_changed(orientation) {
         this.orientation = orientation;
-        const isRotated = this.settingsObject.rotate;
-        this.updateRotate(isRotated);
+        const isFlipSidewaysOnVerticalPanel = this.settingsObject.flipSidewaysOnVerticalPanel;
+        this.updateFlipSidewaysOnVerticalPanel(isFlipSidewaysOnVerticalPanel);
     }
     initApplet() {
         const expandedPath = expandHomeDir(this.settings.getValue("keyImagePath"));
@@ -1178,6 +1267,7 @@ class FishApplet extends Applet {
         this.signalManager = new SignalManager();
         this.signalManager.connect(themeManager, "theme-set", this.changeTheme.bind(this), this);
         this.initAnimation();
+        this.menuManager = new PopupMenuManager(this);
         this.updateMessagePopup();
         this.updateName();
         this.updateCommand();
@@ -1211,6 +1301,7 @@ class FishApplet extends Applet {
                         launcher: this,
                         orientation: this.orientation,
                         name: this.settingsObject.name,
+                        message: this.lastCommandOutput,
                         onSpeakAgain: this.runCommand.bind(this),
                         onClose: () => this.messagePopup.close(true),
                     },
@@ -1249,15 +1340,12 @@ class FishApplet extends Applet {
                 styleClassName,
             };
         }
-        if (this.menuManager) {
-            this.menuManager.destroy();
+        if (this.messagePopup) {
+            this.menuManager.removeMenu(this.messagePopup);
+            this.messagePopup.destroy();
         }
-        this.menuManager = new PopupMenuManager(this);
         this.messagePopup = PopupMenuFactory.createPopupMenu(popupMenuProps);
         this.menuManager.addMenu(this.messagePopup);
-        if (popupMenuType === "FishMessage") {
-            this.runCommand();
-        }
     }
     isTargetPopupMenuAlreadyActive(targetPopupMenuTyp) {
         switch (targetPopupMenuTyp) {
@@ -1296,6 +1384,7 @@ class FishApplet extends Applet {
             if (this.messagePopup instanceof FishMessagePopupMenu) {
                 this.messagePopup.updateMessage(message);
             }
+            this.lastCommandOutput = message;
         }, (error) => {
             this.handleError(error, "commandExecution");
         });
@@ -1306,12 +1395,22 @@ class FishApplet extends Applet {
         this.settings.bind("keyCommand", "command", this.updateCommand.bind(this));
         this.settings.bind("keyFrames", "frames", this.updateAnimationFrames.bind(this));
         this.settings.bind("keyPausePerFrameInSeconds", "pausePerFrameInSeconds", this.updateAnimationPause.bind(this));
-        this.settings.bind("keyRotate", "rotate", this.updateRotate.bind(this));
+        this.settings.bind("keyFlipSidewaysOnVerticalPanel", "flipSidewaysOnVerticalPanel", this.updateFlipSidewaysOnVerticalPanel.bind(this));
         this.settings.connect("changed::keyImagePath", () => {
             const newValue = this.settings.getValue("keyImagePath");
             this.settingsObject.imagePath = newValue;
             this.updateAnimationImage(newValue);
         });
+        this.settings.bind("keyAnimationScalingMode", "animationScalingMode", this.updateAnimationScalingMode.bind(this));
+        this.settings.bind("keyAnimationAutoMargin", "autoAnimationMargin", this.updateAnimationAutoMargin.bind(this));
+        this.settings.bind("keyAnimationMargin", "customAnimationMargin", this.updateAnimationMargin.bind(this));
+        this.settings.bind("keyAnimationHeight", "customAnimationHeight", this.updateCustomAnimationHeight.bind(this));
+        this.settings.bind("keyAnimationWidth", "customAnimationWidth", this.updateCustomAnimationWidth.bind(this));
+        this.settings.bind("keyAnimationPreserveAspectRatio", "preserveAnimationAspectRatio", this.updatePreserveAnimationAspectRatio.bind(this));
+        this.settings.bind("keyAnimationRotation", "animationRotation", this.updateAnimationRotation.bind(this));
+        this.settings.bind("keyDeveloperOptionsEnabled", "developerOptionsEnabled");
+        this.settings.bind("keyLogLevel", "logLevel", this.updateLogLevel.bind(this));
+        this.settings.bind("keyForceFoolsDay", "forceFoolsDay", this.updateForceFoolsDay.bind(this));
     }
     openCinnamonSpicesWebsite() {
         openWebsite(FISH_APPLET_CINNAMON_SPICES_WEBSITE);
@@ -1376,55 +1475,28 @@ If you prefer not to install any additional packages, you can change the command
         }
     }
     determineAnimationRenderOptions() {
-        let isRotated = this.settingsObject.rotate;
-        if (isRotated && isHorizontalOriented(this.orientation)) {
-            isRotated = false;
-        }
-        let height = undefined;
-        let width = undefined;
-        let rotation = undefined;
-        const margin = this.getAppletMargin();
-        const isInHorizontalPanel = isHorizontalOriented(this.orientation);
-        if (isInHorizontalPanel) {
-            if (isRotated) {
-                width = this.panelHeight - margin;
-                height = undefined;
-            }
-            else {
-                width = undefined;
-                height = this.panelHeight - margin;
-            }
-        }
-        else {
-            if (isRotated) {
-                width = undefined;
-                height = this.panelHeight - margin;
-            }
-            else {
-                width = this.panelHeight - margin;
-                height = undefined;
-            }
-        }
-        if (isRotated) {
-            rotation = 90;
-        }
-        const renderOptions = {
-            height,
-            width,
-            rotation,
-        };
-        return renderOptions;
+        return determineRenderOptionsFromSettings({
+            isInHorizontalPanel: isHorizontalOriented(this.orientation),
+            panelHeight: this.panelHeight,
+            scalingMode: mapStringToAnimationScalingMode(this.settingsObject.animationScalingMode),
+            margin: this.getAppletMargin(),
+            customHeight: this.settingsObject.customAnimationHeight,
+            customWidth: this.settingsObject.customAnimationWidth,
+            isPreserveAspectRatio: this.settingsObject.preserveAnimationAspectRatio,
+            isFlipSidewaysOnVerticalPanel: this.settingsObject.flipSidewaysOnVerticalPanel,
+            rotation: mapNumberToAnimationRotation(this.settingsObject.animationRotation),
+        });
     }
     initAnimation() {
-        const configuration = {
-            imagePath: this.settingsObject.imagePath,
-            frames: this.settingsObject.frames,
-            pausePerFrameInMs: Math.floor(this.settingsObject.pausePerFrameInSeconds * 1000),
-            renderOptions: this.determineAnimationRenderOptions(),
-            isFoolsDay: this.isFoolsDay,
-        };
-        this.errorManager.deleteError("animation");
         try {
+            this.errorManager.deleteError("animation");
+            const configuration = {
+                imagePath: this.settingsObject.imagePath,
+                frames: this.settingsObject.frames,
+                pausePerFrameInMs: Math.floor(this.settingsObject.pausePerFrameInSeconds * 1000),
+                renderOptions: this.determineAnimationRenderOptions(),
+                isFoolsDay: this.isFoolsDay,
+            };
             if (this.animatedFish === undefined) {
                 this.animatedFish = new AnimatedFish(configuration);
             }
@@ -1482,9 +1554,9 @@ If you prefer not to install any additional packages, you can change the command
             this.handleError(error, "animation");
         }
     }
-    updateRotate(rotate) {
-        if (rotate && isHorizontalOriented(this.orientation)) {
-            logger.logWarning("Rotation works only when the applet is placed on a vertical panel.");
+    updateFlipSidewaysOnVerticalPanel(isFlipSidewaysOnVerticalPanel) {
+        if (isFlipSidewaysOnVerticalPanel && isHorizontalOriented(this.orientation)) {
+            logger.logWarning("Flip sideways option works only when the applet is placed on a vertical panel.");
             return;
         }
         this.errorManager.deleteError("animation");
@@ -1500,6 +1572,83 @@ If you prefer not to install any additional packages, you can change the command
         }
         catch (error) {
             this.handleError(error, "animation");
+        }
+    }
+    updateAnimationScalingMode() {
+        this.initAnimation();
+        this.updateApplet();
+    }
+    updateAnimationAutoMargin() {
+        const scalingMode = mapStringToAnimationScalingMode(this.settingsObject.animationScalingMode);
+        if (scalingMode !== "AutoFit") {
+            logger.logDebug("Margin options only apply when the 'auto-fit' animation scaling option is enabled.");
+        }
+        else {
+            this.initAnimation();
+            this.updateApplet();
+        }
+    }
+    updateAnimationMargin() {
+        const scalingMode = mapStringToAnimationScalingMode(this.settingsObject.animationScalingMode);
+        if (scalingMode !== "AutoFit") {
+            logger.logDebug("Margin options only apply when the 'auto-fit' animation scaling option is enabled.");
+        }
+        else if (this.settingsObject.autoAnimationMargin) {
+            logger.logDebug("The 'auto-margin' option is turned on, so the custom margin value is ignored.");
+        }
+        else {
+            this.initAnimation();
+            this.updateApplet();
+        }
+    }
+    updateCustomAnimationHeight() {
+        const scalingMode = mapStringToAnimationScalingMode(this.settingsObject.animationScalingMode);
+        if (scalingMode !== "Custom") {
+            logger.logDebug("Custom height options only apply when the 'custom' animation scaling option is enabled.");
+        }
+        else {
+            this.initAnimation();
+            this.updateApplet();
+        }
+    }
+    updateCustomAnimationWidth() {
+        const scalingMode = mapStringToAnimationScalingMode(this.settingsObject.animationScalingMode);
+        if (scalingMode !== "Custom") {
+            logger.logDebug("Custom width options only apply when the 'custom' animation scaling option is enabled.");
+        }
+        else {
+            this.initAnimation();
+            this.updateApplet();
+        }
+    }
+    updatePreserveAnimationAspectRatio() {
+        const scalingMode = mapStringToAnimationScalingMode(this.settingsObject.animationScalingMode);
+        if (scalingMode !== "Custom") {
+            logger.logDebug("The 'Preserve aspect ratio' option only apply when the 'custom' animation scaling option is used.");
+        }
+        else {
+            this.initAnimation();
+            this.updateApplet();
+        }
+    }
+    updateAnimationRotation() {
+        this.initAnimation();
+        this.updateApplet();
+    }
+    updateLogLevel() {
+        const logLevel = mapStringToLogLevel(this.settingsObject.logLevel);
+        logger.setLogLevel(logLevel);
+    }
+    updateForceFoolsDay() {
+        const isActivated = this.settingsObject.forceFoolsDay;
+        if (isActivated) {
+            this.stopPeriodicFoolsDayCheck();
+            this.isFoolsDay = true;
+            this.initAnimation();
+            this.updateApplet();
+        }
+        else {
+            this.startPeriodicFoolsDayCheck();
         }
     }
     updateApplet() {
@@ -1547,6 +1696,7 @@ If you prefer not to install any additional packages, you can change the command
         }
     }
     startPeriodicFoolsDayCheck() {
+        this.stopPeriodicFoolsDayCheck();
         this.checkIfFoolsDay();
         this.foolsDayTimeoutId = Mainloop.timeout_add(FOOLS_DAY_CHECK_INTERVAL_IN_MS, () => {
             this.checkIfFoolsDay();
@@ -1580,18 +1730,17 @@ If you prefer not to install any additional packages, you can change the command
         return getThemeAppearance(DEFAULT_APPLET_CLASS_NAME) === "Dark" ? true : false;
     }
     getAppletMargin() {
-        const themeNode = getThemeNodeOfClass(DEFAULT_APPLET_CLASS_NAME);
-        const margin = themeNode.get_horizontal_padding() +
-            themeNode.get_border_width(imports.gi.St.Side.TOP) +
-            themeNode.get_border_width(imports.gi.St.Side.BOTTOM);
-        return margin;
+        if (this.settingsObject.autoAnimationMargin) {
+            return getMargin(DEFAULT_APPLET_CLASS_NAME);
+        }
+        return this.settingsObject.customAnimationMargin;
     }
 }
 
-;// CONCATENATED MODULE: ./src/FishApplet/index.ts
+;// ./src/FishApplet/index.ts
 
 
-;// CONCATENATED MODULE: ./src/applet.ts
+;// ./src/applet.ts
 
 
 

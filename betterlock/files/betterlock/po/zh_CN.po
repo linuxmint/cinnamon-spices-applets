@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# LOCK KEYS INDICATOR WITH NOTIFICATIONS
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# entelechy, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-31 04:22-0400\n"
+"POT-Creation-Date: 2025-11-06 23:21-0500\n"
 "PO-Revision-Date: 2017-03-12 23:28+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,43 +19,43 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: applet.js:105
+#. applet.js:108
 msgid "Scr Lock"
 msgstr "Scr 锁"
 
-#: applet.js:109
+#. applet.js:112
 msgid "Num Lock"
 msgstr "数字锁定键"
 
-#: applet.js:113
+#. applet.js:116
 msgid "Caps Lock"
 msgstr "大写锁定键"
 
-#: applet.js:148
+#. applet.js:153
 msgid "Lock Keys"
 msgstr "锁定键"
 
-#: applet.js:208
+#. applet.js:217
 msgid "Scr lock on"
 msgstr "Scr 锁定开启"
 
-#: applet.js:211
+#. applet.js:220
 msgid "Scr lock off"
 msgstr "Scr 锁定关闭"
 
-#: applet.js:220
+#. applet.js:229
 msgid "Num lock on"
 msgstr "数字锁定键开"
 
-#: applet.js:223
+#. applet.js:232
 msgid "Num lock off"
 msgstr "数字锁定键关"
 
-#: applet.js:232
+#. applet.js:241
 msgid "Caps lock on"
 msgstr "大写锁定键开"
 
-#: applet.js:235
+#. applet.js:244
 msgid "Caps lock off"
 msgstr "大写锁定键关"
 
@@ -69,8 +69,14 @@ msgstr "显示 caps lock/num lock/scr lock 是否打开，并在这些更改时�
 msgid "Lock keys indicator with notifications"
 msgstr "带通知的锁定键指示器"
 
-#. settings-schema.json->show-notifications->description
-msgid "Show notifications"
+#. settings-schema.json->show-toast-notifications->description
+#, fuzzy
+msgid "Show toast notifications"
+msgstr "显示通知"
+
+#. settings-schema.json->show-osd-notifications->description
+#, fuzzy
+msgid "Show OSD notifications"
 msgstr "显示通知"
 
 #. settings-schema.json->show-silent-notifications->description
