@@ -194,7 +194,7 @@ class HijriApplet extends Applet.TextApplet {
     }
 
     _logError(message) {
-        global.logError(`hijri@mushi: ${message}`);
+        global.logError(`hijri@mubashirzamir: ${message}`);
     }
 
     // Manual refresh
