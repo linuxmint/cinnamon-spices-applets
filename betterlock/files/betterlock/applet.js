@@ -45,6 +45,8 @@ MyApplet.prototype = {
         this.settings.bind("show-caps-lock-indicator", "showCapsLockIndicator", this._updateIconVisibility);
         this.settings.bind("show-num-lock-indicator", "showNumLockIndicator", this._updateIconVisibility);
         this.settings.bind("show-scr-lock-indicator", "showScrLockIndicator", this._updateIconVisibility);
+        this.settings.bind("toggle-on-click", "toggleOnClick", null);
+
 
         this.binScr = new St.Bin({ reactive: true });
         this.binNum = new St.Bin({ reactive: true });
@@ -274,7 +276,9 @@ MyApplet.prototype = {
     },
 
     on_applet_clicked: function(event) {
-        if (this.showCapsLockIndicator && event.get_source() === this.binCaps) {
+        if (!this.toggleOnClick) {
+            return
+        } else if (this.showCapsLockIndicator && event.get_source() === this.binCaps) {
             this._onCapsChanged();
         } else if (this.showNumLockIndicator && event.get_source() === this.binNum) {
             this._onNumChanged();

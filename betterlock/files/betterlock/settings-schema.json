@@ -28,5 +28,10 @@
         "type": "switch",
         "default": false,
         "description" : "Show scr lock indicator"
+    },
+    "toggle-on-click": {
+        "type": "switch",
+        "default": true,
+        "description" : "Toggle state when clicked"
     }
 }
