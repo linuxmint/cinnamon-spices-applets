@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-06 23:21-0500\n"
+"POT-Creation-Date: 2025-12-10 13:28+0100\n"
 "PO-Revision-Date: 2024-07-31 18:06+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -19,43 +19,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:108
+#. applet.js:114
 msgid "Scr Lock"
 msgstr "Bloqueig de pantalla"
 
-#. applet.js:112
+#. applet.js:118
 msgid "Num Lock"
 msgstr "Bloqueig numèric"
 
-#. applet.js:116
+#. applet.js:122
 msgid "Caps Lock"
 msgstr "Bloqueig de majúscules"
 
-#. applet.js:153
+#. applet.js:164
 msgid "Lock Keys"
 msgstr "Tecles de bloqueig"
 
-#. applet.js:217
+#. applet.js:228
 msgid "Scr lock on"
 msgstr "Bloqueig de pantalla activat"
 
-#. applet.js:220
+#. applet.js:231
 msgid "Scr lock off"
 msgstr "Bloqueig de pantalla desactivat"
 
-#. applet.js:229
+#. applet.js:240
 msgid "Num lock on"
 msgstr "Bloqueig numèric activat"
 
-#. applet.js:232
+#. applet.js:243
 msgid "Num lock off"
 msgstr "Bloqueig numèric desactivat"
 
-#. applet.js:241
+#. applet.js:252
 msgid "Caps lock on"
 msgstr "Bloqueig de majúscules activat"
 
-#. applet.js:244
+#. applet.js:255
 msgid "Caps lock off"
 msgstr "Bloqueig de majúscules desactivat"
 
@@ -96,3 +96,7 @@ msgstr "Mostrar indicador del bloqueig numèric"
 #. settings-schema.json->show-scr-lock-indicator->description
 msgid "Show scr lock indicator"
 msgstr "Mostrat indicador del bloqueig de pantalla"
+
+#. settings-schema.json->toggle-on-click->description
+msgid "Toggle state when clicked"
+msgstr ""

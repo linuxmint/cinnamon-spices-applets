@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: betterlock 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-06 23:21-0500\n"
+"POT-Creation-Date: 2025-12-10 13:28+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,43 +17,43 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:108
+#. applet.js:114
 msgid "Scr Lock"
 msgstr ""
 
-#. applet.js:112
+#. applet.js:118
 msgid "Num Lock"
 msgstr ""
 
-#. applet.js:116
+#. applet.js:122
 msgid "Caps Lock"
 msgstr ""
 
-#. applet.js:153
+#. applet.js:164
 msgid "Lock Keys"
 msgstr ""
 
-#. applet.js:217
+#. applet.js:228
 msgid "Scr lock on"
 msgstr ""
 
-#. applet.js:220
+#. applet.js:231
 msgid "Scr lock off"
 msgstr ""
 
-#. applet.js:229
+#. applet.js:240
 msgid "Num lock on"
 msgstr ""
 
-#. applet.js:232
+#. applet.js:243
 msgid "Num lock off"
 msgstr ""
 
-#. applet.js:241
+#. applet.js:252
 msgid "Caps lock on"
 msgstr ""
 
-#. applet.js:244
+#. applet.js:255
 msgid "Caps lock off"
 msgstr ""
 
@@ -89,4 +89,8 @@ msgstr ""
 
 #. settings-schema.json->show-scr-lock-indicator->description
 msgid "Show scr lock indicator"
+msgstr ""
+
+#. settings-schema.json->toggle-on-click->description
+msgid "Toggle state when clicked"
 msgstr ""

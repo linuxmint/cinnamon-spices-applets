@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-06 23:21-0500\n"
+"POT-Creation-Date: 2025-12-10 13:28+0100\n"
 "PO-Revision-Date: 2025-11-07 12:48-0300\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
@@ -19,43 +19,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.8\n"
 
-#. applet.js:108
+#. applet.js:114
 msgid "Scr Lock"
 msgstr "Bloq Scr"
 
-#. applet.js:112
+#. applet.js:118
 msgid "Num Lock"
 msgstr "Bloq Num"
 
-#. applet.js:116
+#. applet.js:122
 msgid "Caps Lock"
 msgstr "Bloq Mayús"
 
-#. applet.js:153
+#. applet.js:164
 msgid "Lock Keys"
 msgstr "Teclas de bloqueo"
 
-#. applet.js:217
+#. applet.js:228
 msgid "Scr lock on"
 msgstr "Bloq Scr activado"
 
-#. applet.js:220
+#. applet.js:231
 msgid "Scr lock off"
 msgstr "Bloq Scr desactivado"
 
-#. applet.js:229
+#. applet.js:240
 msgid "Num lock on"
 msgstr "Bloq Num activado"
 
-#. applet.js:232
+#. applet.js:243
 msgid "Num lock off"
 msgstr "Bloq Num desactivado"
 
-#. applet.js:241
+#. applet.js:252
 msgid "Caps lock on"
 msgstr "Bloq Mayús activado"
 
-#. applet.js:244
+#. applet.js:255
 msgid "Caps lock off"
 msgstr "Bloq Mayús desactivado"
 
@@ -94,3 +94,7 @@ msgstr "Mostrar indicador de bloqueo numérico"
 #. settings-schema.json->show-scr-lock-indicator->description
 msgid "Show scr lock indicator"
 msgstr "Mostrar indicador de bloqueo scr"
+
+#. settings-schema.json->toggle-on-click->description
+msgid "Toggle state when clicked"
+msgstr ""

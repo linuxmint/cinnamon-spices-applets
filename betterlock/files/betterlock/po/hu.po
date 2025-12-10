@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-06 23:21-0500\n"
+"POT-Creation-Date: 2025-12-10 13:28+0100\n"
 "PO-Revision-Date: 2025-11-17 12:44+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,43 +19,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.8\n"
 
-#. applet.js:108
+#. applet.js:114
 msgid "Scr Lock"
 msgstr "Scr Lock"
 
-#. applet.js:112
+#. applet.js:118
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#. applet.js:116
+#. applet.js:122
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#. applet.js:153
+#. applet.js:164
 msgid "Lock Keys"
 msgstr "Zárógombok"
 
-#. applet.js:217
+#. applet.js:228
 msgid "Scr lock on"
 msgstr "Scr Lock be"
 
-#. applet.js:220
+#. applet.js:231
 msgid "Scr lock off"
 msgstr "Scr Lock ki"
 
-#. applet.js:229
+#. applet.js:240
 msgid "Num lock on"
 msgstr "Num Lock be"
 
-#. applet.js:232
+#. applet.js:243
 msgid "Num lock off"
 msgstr "Num Lock ki"
 
-#. applet.js:241
+#. applet.js:252
 msgid "Caps lock on"
 msgstr "Caps Lock be"
 
-#. applet.js:244
+#. applet.js:255
 msgid "Caps lock off"
 msgstr "Caps Lock ki"
 
@@ -94,3 +94,7 @@ msgstr "Num lock jelző megjelenítése"
 #. settings-schema.json->show-scr-lock-indicator->description
 msgid "Show scr lock indicator"
 msgstr "Scr zár jelzőjének megjelenítése"
+
+#. settings-schema.json->toggle-on-click->description
+msgid "Toggle state when clicked"
+msgstr ""
