@@ -1,18 +1,7 @@
 {
-    "show-toast-notifications": {
-        "type": "switch",
-        "default": false,
-        "description" : "Show toast notifications"
-    },
-    "show-osd-notifications": {
-        "type": "switch",
-        "default": false,
-        "description" : "Show OSD notifications"
-    },
-    "show-silent-notifications": {
-        "type" : "switch",
-        "default" : false,
-        "description" : "Silence system notification sound"
+    "section1": {
+        "type": "section",
+        "description": "Indicators"
     },
     "show-caps-lock-indicator": {
         "type": "switch",
@@ -33,5 +22,24 @@
         "type": "switch",
         "default": true,
         "description" : "Toggle state when clicked"
+    },
+    "section2": {
+        "type": "section",
+        "description": "Notifications"
+    },
+    "show-toast-notifications": {
+        "type": "switch",
+        "default": false,
+        "description" : "Show toast notifications"
+    },
+    "show-osd-notifications": {
+        "type": "switch",
+        "default": false,
+        "description" : "Show OSD notifications"
+    },
+    "show-silent-notifications": {
+        "type" : "switch",
+        "default" : false,
+        "description" : "Silence system notification sound"
     }
 }
