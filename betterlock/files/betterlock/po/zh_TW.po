@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: betterlock 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-10 13:35+0100\n"
+"POT-Creation-Date: 2025-12-10 17:32+0100\n"
 "PO-Revision-Date: 2025-05-05 01:11+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -68,19 +68,9 @@ msgstr "顯示大寫鎖定鍵、數字鎖定鍵、捲動鎖定鍵的狀態，並
 msgid "Lock keys indicator with notifications"
 msgstr "鎖定鍵指示器與通知"
 
-#. settings-schema.json->show-toast-notifications->description
-#, fuzzy
-msgid "Show toast notifications"
-msgstr "顯示通知"
-
-#. settings-schema.json->show-osd-notifications->description
-#, fuzzy
-msgid "Show OSD notifications"
-msgstr "顯示通知"
-
-#. settings-schema.json->show-silent-notifications->description
-msgid "Silence system notification sound"
-msgstr "關閉系統通知音效"
+#. settings-schema.json->section1->description
+msgid "Indicators"
+msgstr ""
 
 #. settings-schema.json->show-caps-lock-indicator->description
 msgid "Show caps lock indicator"
@@ -97,3 +87,22 @@ msgstr "顯示捲動鎖定指示器"
 #. settings-schema.json->toggle-on-click->description
 msgid "Toggle state when clicked"
 msgstr ""
+
+#. settings-schema.json->section2->description
+#, fuzzy
+msgid "Notifications"
+msgstr "顯示通知"
+
+#. settings-schema.json->show-toast-notifications->description
+#, fuzzy
+msgid "Show toast notifications"
+msgstr "顯示通知"
+
+#. settings-schema.json->show-osd-notifications->description
+#, fuzzy
+msgid "Show OSD notifications"
+msgstr "顯示通知"
+
+#. settings-schema.json->show-silent-notifications->description
+msgid "Silence system notification sound"
+msgstr "關閉系統通知音效"

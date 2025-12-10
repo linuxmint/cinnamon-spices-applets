@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-10 13:35+0100\n"
+"POT-Creation-Date: 2025-12-10 17:32+0100\n"
 "PO-Revision-Date: 2023-03-12 16:11+0200\n"
 "Last-Translator: Cássio Louzada Rizzi <clrizzi@gmail.com>\n"
 "Language-Team: \n"
@@ -71,18 +71,8 @@ msgstr ""
 msgid "Lock keys indicator with notifications"
 msgstr "Indicador de teclas de bloqueio com notificações"
 
-#. settings-schema.json->show-toast-notifications->description
-#, fuzzy
-msgid "Show toast notifications"
-msgstr "Exibir notificações"
-
-#. settings-schema.json->show-osd-notifications->description
-#, fuzzy
-msgid "Show OSD notifications"
-msgstr "Exibir notificações"
-
-#. settings-schema.json->show-silent-notifications->description
-msgid "Silence system notification sound"
+#. settings-schema.json->section1->description
+msgid "Indicators"
 msgstr ""
 
 #. settings-schema.json->show-caps-lock-indicator->description
@@ -99,4 +89,23 @@ msgstr "Exibir indicador de Scrool Lock"
 
 #. settings-schema.json->toggle-on-click->description
 msgid "Toggle state when clicked"
+msgstr ""
+
+#. settings-schema.json->section2->description
+#, fuzzy
+msgid "Notifications"
+msgstr "Exibir notificações"
+
+#. settings-schema.json->show-toast-notifications->description
+#, fuzzy
+msgid "Show toast notifications"
+msgstr "Exibir notificações"
+
+#. settings-schema.json->show-osd-notifications->description
+#, fuzzy
+msgid "Show OSD notifications"
+msgstr "Exibir notificações"
+
+#. settings-schema.json->show-silent-notifications->description
+msgid "Silence system notification sound"
 msgstr ""

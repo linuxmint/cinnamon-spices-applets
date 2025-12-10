@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: betterlock 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-10 13:35+0100\n"
+"POT-Creation-Date: 2025-12-10 17:32+0100\n"
 "PO-Revision-Date: 2025-10-08 21:24+0700\n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -70,19 +70,9 @@ msgstr ""
 msgid "Lock keys indicator with notifications"
 msgstr "Chỉ báo phím khóa kèm thông báo"
 
-#. settings-schema.json->show-toast-notifications->description
-#, fuzzy
-msgid "Show toast notifications"
-msgstr "Hiển thị thông báo"
-
-#. settings-schema.json->show-osd-notifications->description
-#, fuzzy
-msgid "Show OSD notifications"
-msgstr "Hiển thị thông báo"
-
-#. settings-schema.json->show-silent-notifications->description
-msgid "Silence system notification sound"
-msgstr "Tắt âm thanh thông báo hệ thống"
+#. settings-schema.json->section1->description
+msgid "Indicators"
+msgstr ""
 
 #. settings-schema.json->show-caps-lock-indicator->description
 msgid "Show caps lock indicator"
@@ -99,3 +89,22 @@ msgstr "Hiển thị chỉ báo khóa màn hình"
 #. settings-schema.json->toggle-on-click->description
 msgid "Toggle state when clicked"
 msgstr ""
+
+#. settings-schema.json->section2->description
+#, fuzzy
+msgid "Notifications"
+msgstr "Hiển thị thông báo"
+
+#. settings-schema.json->show-toast-notifications->description
+#, fuzzy
+msgid "Show toast notifications"
+msgstr "Hiển thị thông báo"
+
+#. settings-schema.json->show-osd-notifications->description
+#, fuzzy
+msgid "Show OSD notifications"
+msgstr "Hiển thị thông báo"
+
+#. settings-schema.json->show-silent-notifications->description
+msgid "Silence system notification sound"
+msgstr "Tắt âm thanh thông báo hệ thống"

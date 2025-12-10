@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-10 13:35+0100\n"
+"POT-Creation-Date: 2025-12-10 17:32+0100\n"
 "PO-Revision-Date: 2022-11-30 09:56+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -69,18 +69,8 @@ msgstr "Caps・Num・Scroll Lockキーのオン・オフを表示し、変更時
 msgid "Lock keys indicator with notifications"
 msgstr "通知付きキーボードインジケータ betterlock"
 
-#. settings-schema.json->show-toast-notifications->description
-#, fuzzy
-msgid "Show toast notifications"
-msgstr "通知を表示"
-
-#. settings-schema.json->show-osd-notifications->description
-#, fuzzy
-msgid "Show OSD notifications"
-msgstr "通知を表示"
-
-#. settings-schema.json->show-silent-notifications->description
-msgid "Silence system notification sound"
+#. settings-schema.json->section1->description
+msgid "Indicators"
 msgstr ""
 
 #. settings-schema.json->show-caps-lock-indicator->description
@@ -97,4 +87,23 @@ msgstr "Scroll Lockインジケータを使用"
 
 #. settings-schema.json->toggle-on-click->description
 msgid "Toggle state when clicked"
+msgstr ""
+
+#. settings-schema.json->section2->description
+#, fuzzy
+msgid "Notifications"
+msgstr "通知を表示"
+
+#. settings-schema.json->show-toast-notifications->description
+#, fuzzy
+msgid "Show toast notifications"
+msgstr "通知を表示"
+
+#. settings-schema.json->show-osd-notifications->description
+#, fuzzy
+msgid "Show OSD notifications"
+msgstr "通知を表示"
+
+#. settings-schema.json->show-silent-notifications->description
+msgid "Silence system notification sound"
 msgstr ""
