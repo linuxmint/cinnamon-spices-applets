@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# SSH LAUNCHER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# sumo, 2016
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-24 12:01+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-06 20:34+0100\n"
 "PO-Revision-Date: 2024-07-10 00:22+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -19,36 +20,36 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
-#: applet.js:51 applet.js:67 applet.js:110 applet.js:246 applet.js:260
+#. applet.js:51 applet.js:67 applet.js:114 applet.js:256 applet.js:271
 msgid "SSH Launcher"
 msgstr "Llançador SSH"
 
-#: applet.js:110
+#. applet.js:114
 msgid "No suitable icon found, falling back to custom icon"
 msgstr ""
 "No s'ha trobat una icona apropiada, revertint a la icona personalitzada"
 
-#: applet.js:116
+#. applet.js:126
 msgid "Force Update from SSH config"
 msgstr "Forçar actualització de la configuració SSH"
 
-#: applet.js:183
+#. applet.js:193
 msgid "Background (-fN)"
 msgstr "Background (-fN)"
 
-#: applet.js:186
+#. applet.js:196
 msgid "Forward X11 (-X)"
 msgstr "Forward X11 (-X)"
 
-#: applet.js:227
+#. applet.js:237
 msgid "ERROR. "
 msgstr "ERROR. "
 
-#: applet.js:230
+#. applet.js:240
 msgid "Edit SSH config"
 msgstr "Editar configuració SSH"
 
-#: applet.js:246
+#. applet.js:256
 msgid ""
 "Error: I can't open the terminal.\n"
 "You need to set a default terminal first in Preferred Applications!\n"
@@ -60,11 +61,11 @@ msgstr ""
 "\n"
 "(Per a més ajuda: Clic dret->Quant a->Més informació)"
 
-#: applet.js:260
+#. applet.js:271
 msgid "Connection opened to "
 msgstr "Connexió establerta amb "
 
-#: applet.js:260
+#. applet.js:271
 msgid " using "
 msgstr " utilitzant "
 
@@ -108,3 +109,11 @@ msgstr "Mostrar notificació en iniciar connexió SSH"
 #. settings-schema.json->showConnectionNotification->tooltip
 msgid "Display a notification message when SSH terminal is launched"
 msgstr "Mostrar un missatge de notificació quan s'inicia el terminal SSH"
+
+#. settings-schema.json->openMenuKey->description
+msgid "Keyboard shortcut to open the SSH menu"
+msgstr "Drecera de teclat per obrir el menú SSH"
+
+#. settings-schema.json->openMenuKey->tooltip
+msgid "Set a global keyboard shortcut to open the SSH launcher menu"
+msgstr "Definir una drecera de teclat global per obrir el menú SSH"
