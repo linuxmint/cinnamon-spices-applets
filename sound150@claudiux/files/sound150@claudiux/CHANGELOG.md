@@ -1,3 +1,73 @@
+### v13.7.7~20251206
+  * Bug fix: avoids errors about stream.
+
+### v13.7.6~20251205
+  * Bug fix: artist and title when the player does not provide them.
+
+### v13.7.5~20251204
+  * Improves execution speed.
+  * Fixes [#8029](https://github.com/linuxmint/cinnamon-spices-applets/issues/8029)
+
+### v13.7.4~20251201
+  * Avoids deleting the cover art after modifying the volume or the workspace.
+  * Fixes [#8020](https://github.com/linuxmint/cinnamon-spices-applets/issues/8020)
+
+### v13.7.3~20251126
+  * Avoids treating apostrophes as quotes (artist and title).
+
+### v13.7.2~20251121
+  * Functional improvements.
+
+### v13.7.1~20251114
+  * Adds option "Shorten Artist and Title". When the artist name or title is too long, you can choose how to shorten it.
+  * Fixes [#7966](https://github.com/linuxmint/cinnamon-spices-applets/issues/7966)
+
+### v13.7.0~20251111
+  * Adds option "Do not use playerctl". 
+  * Fixes [#7961](https://github.com/linuxmint/cinnamon-spices-applets/issues/7961)
+  * Improved stability. Several errors were fixed.
+
+### v13.6.2~20251109
+  * Avoid error loading image.
+
+### v13.6.1~20251106
+  * Improved stability.
+
+### v13.6.0~20251102
+  * Improves menu stability.
+
+### v13.5.2~20251031
+  * Avoids 'paint' errors.
+
+### v13.5.1~20251031
+  * Avoids 'destroy' errors.
+
+### v13.5.0~20251030
+  * Adds the 'mic-mute' shortcut. See the FAQ in README to implement it.
+
+### v13.4.1~20251030
+  * Fixes a bug when the current player is undefined.
+
+### v13.4.0~20251029
+  * Improves tooltip duration.
+  * Fixes [#7922](https://github.com/linuxmint/cinnamon-spices-applets/issues/7922)
+
+### v13.3.4~20251028
+  * Gets real ui_scale, when scaling is set to other values than 100% or 200%.
+  * Uses "font-family: 'Digital Numbers',monospace" to display counters in menu.
+
+### v13.3.3~20251028
+  * Avoids menu shaking.
+
+### v13.3.2~20251027
+  * Improves the display of album covers.
+
+### v13.3.1~20250925
+  * Minor bugfixes (importing modules).
+
+### v13.3.0~20250923
+  * Added option "Do not show any cover art in the menu" in the Menus tab of this applet settings.
+
 ### v13.2.2~20250814
   * Improved speed.
   * Code cleanup.

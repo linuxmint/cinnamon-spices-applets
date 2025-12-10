@@ -1,3 +1,8 @@
+### 1.3.1 - 20250928
+
+* Added (optional) retry logic to monitor detection process to handle intermittent detection issues.
+* Added setting to enable/disable retry logic and configure target monitor count.
+
 ### 1.3.0 - 20250822
 
 * Refactored applet to extend `TextIconApplet` for label support.

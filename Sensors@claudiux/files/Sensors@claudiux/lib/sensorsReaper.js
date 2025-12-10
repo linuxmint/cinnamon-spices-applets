@@ -355,7 +355,6 @@ class SensorsReaper {
             feature_dico[subfeature_name] = this.raw_data[chip][feature][subfeat];
         }
 
-        //Util.unref(subfeatures);
         subfeatures = null;
 
         if (type_of_feature.length > 0) {
@@ -372,7 +371,6 @@ class SensorsReaper {
     //~ log("LOCAL_DATA[temps]: " + JSON.stringify(LOCAL_DATA["temps"], null, "\t"), true);
     this.data = LOCAL_DATA;
     //~ LOCAL_DATA = null;
-    //Util.unref(chips);
     chips = null;
     adapter = null;
     this.isRunning = false;
@@ -422,7 +420,8 @@ function convert_to_json(raw) {
       continue;
     }
     if (new_chip) {
-      chip = line.trim();
+      //~ chip = line.trim();
+      chip = line;
       ret[chip] = {};
       new_chip = false;
       continue;
@@ -432,14 +431,8 @@ function convert_to_json(raw) {
       continue;
     }
     if (line.startsWith("  ")) {
-      let [subfeature, value] = line.trim().split(": ");
-      //~ let sf_keys = Object.keys(subfeature_numbers);
-      //~ if (sf_keys.indexOf(subfeature) > -1) {
-        //~ subfeature_numbers[subfeature] = subfeature_numbers[subfeature] + 1;
-        //~ subfeature = subfeature + " - " + subfeature_numbers[subfeature];
-      //~ } else {
-        //~ subfeature_numbers[subfeature] = 0
-      //~ }
+      //~ let [subfeature, value] = line.trim().split(": ");
+      let [subfeature, value] = line.split(": ");
       ret[chip][feature][subfeature] = (value*1000/1000).toFixed(3);
       continue;
     }

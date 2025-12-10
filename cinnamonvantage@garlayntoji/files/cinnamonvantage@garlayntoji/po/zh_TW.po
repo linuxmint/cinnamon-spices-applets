@@ -73,7 +73,7 @@ msgstr "此變更需重新啟動系統後才會生效。"
 
 #. metadata.json->description
 msgid "Displays information and togglables about Lenovo Legion hardware"
-msgstr "顯示 Lenovo Legion 硬體資訊與可切換項目"
+msgstr "顯示 Lenovo Legion 硬體資訊與可切換選項"
 
 #. settings-schema.json->panel->title
 msgid "Cinnamon Vantage settings"

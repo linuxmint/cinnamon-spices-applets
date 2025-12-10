@@ -1,3 +1,30 @@
+### v1.8.3~20250926
+* Adds the option "Screen On/Off with Lock feature" to the menu and its shortcut to the settings.
+* Fixes [#7816](https://github.com/linuxmint/cinnamon-spices-applets/issues/7816)
+
+### v1.8.2~20250920
+* Screen On/Off even with multiple monitors.
+* Make the display of shortcuts in the menu optional.
+
+### v1.8.1~20250919
+* Moving the mouse pointer turns On the screen when it is Off.
+
+### v1.8.0~20250918
+* Adds a software method to turn Off the screen.
+* Same shortcut to turn the screen On/Off.
+
+### v1.7.2~20250917
+* Better control of user rights regarding hibernation. Does the user have root rights using sudo?
+
+### v1.7.1~20250917
+* Optimization and code cleanup.
+* Improves the Shortcuts tab in this applet settings to help users avoid errors.
+
+### v1.7.0~20250916
+* Adds shortcuts to open the menu and to reactivate mouse and screen.
+* Adds keys to select certain options when the menu is open.
+
+
 ### v1.6.1~20250630
 * Takes screensaver into account.
 

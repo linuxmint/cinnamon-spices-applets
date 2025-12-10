@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: updates-notifier@zamszowy 1.2.0\n"
+"Project-Id-Version: updates-notifier@zamszowy 2.3.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-13 12:55+0200\n"
+"POT-Creation-Date: 2025-12-01 10:57+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,71 +17,93 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:37
+#. applet.js:79
 msgid "missing dependencies"
 msgstr ""
 
-#. applet.js:106
-#, javascript-format
-msgid "%s updates available"
+#. applet.js:230
+msgid "View error details"
 msgstr ""
 
-#. applet.js:107
-msgid "No updates available"
-msgstr ""
-
-#. applet.js:133
+#. applet.js:244
 msgid "Check for new updates"
 msgstr ""
 
-#. applet.js:144
+#. applet.js:258
 #, javascript-format
 msgid "View %s updates"
 msgstr ""
 
-#. applet.js:144
+#. applet.js:258
 msgid "No updates to view"
 msgstr ""
 
-#. applet.js:157
+#. applet.js:273
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr ""
 
-#. applet.js:157
+#. applet.js:273
 msgid "No packages to upgrade"
 msgstr ""
 
-#. info-window.js:118
-msgid "Loading update details…"
+#. applet.js:299
+msgid "Error checking for updates"
 msgstr ""
 
-#. info-window.js:170
+#. applet.js:307
+#, javascript-format
+msgid "%s updates available"
+msgstr ""
+
+#. applet.js:308
+msgid "No updates available"
+msgstr ""
+
+#. error-window.js:16
+msgid "Error"
+msgstr ""
+
+#. error-window.js:39
+msgid "Error log file not found."
+msgstr ""
+
+#. info-window.js:66 info-window.js:85
 msgid "No details available."
 msgstr ""
 
-#. info-window.js:172
+#. info-window.js:68 info-window.js:87
 msgid ""
 "Error:\n"
 "{0}"
 msgstr ""
 
-#. info-window.js:181
+#. info-window.js:72 info-window.js:91
 msgid ""
 "Failed to run command:\n"
 "{0}"
 msgstr ""
 
-#. info-window.js:191
+#. info-window.js:108
+msgid "Loading update details…"
+msgstr ""
+
+#. info-window.js:173
 msgid "Updates"
 msgstr ""
 
-#. info-window.js:206
+#. info-window.js:188
 msgid "Search updates…"
 msgstr ""
 
-#. info-window.js:238
+#. info-window.js:223
 msgid "{0} updates"
+msgstr ""
+
+#. info-window.js:251
+msgid ""
+"Failed to read updates file:\n"
+"{0}"
 msgstr ""
 
 #. metadata.json->name
@@ -92,12 +114,40 @@ msgstr ""
 msgid "Shows icons for pending update packages"
 msgstr ""
 
-#. settings-schema.json->section1->description
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->pageAppearance->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->sectionSettings->title
 msgid "Settings"
 msgstr ""
 
+#. settings-schema.json->sectionIconLabel->title
+msgid "Icon/Label"
+msgstr ""
+
+#. settings-schema.json->sectionClick->title
+msgid "Applet click"
+msgstr ""
+
+#. settings-schema.json->sectionMenu->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->sectionTheme->title
+msgid "Theme"
+msgstr ""
+
 #. settings-schema.json->update-refresh->description
-msgid "Minutes to wait before refreshing applet"
+msgid "Minutes to wait before refreshing updates"
+msgstr ""
+
+#. settings-schema.json->show-firmware->description
+msgid "Show firmware updates"
 msgstr ""
 
 #. settings-schema.json->hide-applet->description
@@ -118,16 +168,32 @@ msgid ""
 "this value. Show high level icon if it's higher than this value."
 msgstr ""
 
-#. settings-schema.json->section2->description
-msgid "Commands to execute in popup menu"
+#. settings-schema.json->show-label->description
+msgid "Show label with updates count"
+msgstr ""
+
+#. settings-schema.json->label-font-size->description
+msgid "Label font size"
+msgstr ""
+
+#. settings-schema.json->label-font-weight->description
+msgid "Label font weight"
+msgstr ""
+
+#. settings-schema.json->label-vertical-position->description
+msgid "Label vertical position"
+msgstr ""
+
+#. settings-schema.json->show-window-on-click->description
+msgid "Show updates window on left click and menu entries on right click"
+msgstr ""
+
+#. settings-schema.json->refresh-when-no-updates->description
+msgid "Refresh updates list on left click if there are no updates"
 msgstr ""
 
 #. settings-schema.json->commandUpdate-show->description
 msgid "Show \"Check for new updates\" command"
-msgstr ""
-
-#. settings-schema.json->commandUpdate->description
-msgid "Check for new updates:"
 msgstr ""
 
 #. settings-schema.json->commandUpgrade-show->description
@@ -135,11 +201,7 @@ msgid "Show \"Upgrade packages\" command"
 msgstr ""
 
 #. settings-schema.json->commandUpgrade->description
-msgid "Upgrade packages:"
-msgstr ""
-
-#. settings-schema.json->section3->description
-msgid "Theme"
+msgid "Upgrade packages command:"
 msgstr ""
 
 #. settings-schema.json->icon-style->description

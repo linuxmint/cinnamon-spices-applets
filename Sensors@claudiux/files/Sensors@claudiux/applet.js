@@ -222,7 +222,7 @@ class SensorsApplet extends Applet.Applet {
     //this.depCount = 0;
 
     spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh 1 &");
-    spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh 1 &");
+    //~ spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh 1 all &");
 
     // Applet tooltip:
     this.set_applet_tooltip(_('Sensors Monitor'));
@@ -247,6 +247,9 @@ class SensorsApplet extends Applet.Applet {
     // get settings defined in settings-schema.json:
     this.get_user_settings();
     this._variables();
+
+    // Run DisksDaemon:
+    this._on_temp_disks_modified();
 
     // Applet default UI:
     this.set_default_UI();
@@ -427,14 +430,15 @@ class SensorsApplet extends Applet.Applet {
     let disks = this.s.getValue('temp_disks');
     if (!disks) return;
 
+    var disksToCheck = [];
     for (let disk of disks) {
       if (disk["show_in_panel"] === true || disk["show_in_tooltip"] === true) {
         checkDisks = true;
-        break
+        disksToCheck.push(disk["disk"])
       }
     }
     if (checkDisks) {
-      spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
+      spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " " + disksToCheck.join(",") + " &");
     } else {
       let diskwitness = Gio.file_new_for_path(SENSORS_DISKSWITNESS);
       if (diskwitness.query_exists(null))
@@ -446,19 +450,24 @@ class SensorsApplet extends Applet.Applet {
 
   is_disktemp_user_readable() {
     var ret = false;
-    const sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
+    var sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
+    if (GLib.find_program_in_path("/usr/bin/dnf") || GLib.find_program_in_path("/usr/bin/pacman")) {
+      // Distro is Fedora or Arch based.
+      sudoers_smartctl_path = "/etc/sudoersSensors.d/smartctl";
+    }
     const sudoers_smartctl_file = Gio.file_new_for_path(sudoers_smartctl_path);
     if (sudoers_smartctl_file.query_exists(null)) {
-    try {
-      let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
-      if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL:"))
-        ret = true;
+      try {
+        let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
+        if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL:")) {
+          ret = true;
+        }
         GLib.free(contents);
       } catch (e) {
         ret = false
       }
     }
-    log("is_disktemp_user_readable: "+ret);
+    //~ log("is_disktemp_user_readable: "+ret);
     return ret
   }
 
@@ -567,6 +576,7 @@ class SensorsApplet extends Applet.Applet {
     var _known_keys = [];
 
     for (let k of this.sensors_list[type].get_value()) {
+      //~ let _sensor = k["sensor"].trim();
       let _sensor = k["sensor"];
 
       _known_keys.push(_sensor);
@@ -574,7 +584,8 @@ class SensorsApplet extends Applet.Applet {
       if (k["shown_name"].length > 0) {
         //if (this.custom_names[_sensor]) log("custom_names: \"" + this.custom_names[_sensor] + "\"", true);
 
-        if (this.custom_names[_sensor] && (_sensor.toString() === k["shown_name"].toString())) {
+        //~ if (this.custom_names[_sensor] && (_sensor.toString() === k["shown_name"].toString())) {
+        if (this.custom_names[_sensor] && (_sensor === k["shown_name"])) {
           delete this.custom_names[_sensor];
           k["shown_name"] = ""
         } else {
@@ -592,7 +603,9 @@ class SensorsApplet extends Applet.Applet {
     this.number_of_sensors[type].set_value(_sensors.length);
 
     for (let sensor of _sensors) {
-      name = sensor.toString().trim();
+      //~ name = sensor.toString().trim();
+      //~ name = sensor.trim();
+      name = sensor;
       toPush = {};
       index = _known_keys.indexOf(name);
       if (type === "temps") this.minimumIntegerDigitsTemp = 2;
@@ -631,10 +644,8 @@ class SensorsApplet extends Applet.Applet {
         this.sensors_list[type].set_value(ret);
         this.updateUI();
       }
-      //unref(ret);
       ret = null;
       _known_keys = null;
-      //unref(toPush);
       toPush = null;
       name = null;
       modified = null;
@@ -659,11 +670,11 @@ class SensorsApplet extends Applet.Applet {
         if (typeof contents === "object")
           lines = to_string(contents).split("\n");
         else
-          lines = ""+contents.split("\n");
+          lines = (""+contents).split("\n");
 
         for (let line of lines) {
           if (line.length === 0) continue;
-          let [name, temp] = line.split(" ");
+          let [name, temp] = line.trim().split(" ");
           if (name.length > 0)
             temps[name] = 1.0 * parseInt(temp);
         }
@@ -733,7 +744,8 @@ class SensorsApplet extends Applet.Applet {
     var temp_disks = this.temp_disks;
     let subProcess = spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
       if (exitCode === 0) {
-        let out = stdout.trim();
+        //~ let out = stdout.trim();
+        let out = stdout;
         let disks = out.split(" ");
         for (let d of disks) {
           var found = false;
@@ -788,7 +800,8 @@ class SensorsApplet extends Applet.Applet {
         for (let t of this.temp_sensors) {
           if (this.data["temps"][t["sensor"]] !== undefined) {
             if (t["show_in_tooltip"]) {
-              if (t["shown_name"] && t["sensor"].toString() === t["shown_name"].toString()) {
+              //~ if (t["shown_name"] && t["sensor"].toString() === t["shown_name"].toString()) {
+              if (t["shown_name"] && t["sensor"] === t["shown_name"]) {
                 if (this.custom_names[t["sensor"]]) delete this.custom_names[t["sensor"]];
                 t["shown_name"] = ""
               }
@@ -818,7 +831,8 @@ class SensorsApplet extends Applet.Applet {
 
       if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks.length > 0) {
         for (let disk of this.temp_disks) {
-          let _disk_name = disk["disk"].trim();
+          //~ let _disk_name = disk["disk"].trim();
+          let _disk_name = disk["disk"];
           if (disk["show_in_tooltip"]) {
             if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
             let _temp;
@@ -895,7 +909,7 @@ class SensorsApplet extends Applet.Applet {
           }
         }
       }
-      if (_tooltip !== "") {
+      if (_tooltip.length > 0) {
         _tooltip = C_FAN + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
@@ -940,7 +954,7 @@ class SensorsApplet extends Applet.Applet {
           }
         }
       }
-      if (_tooltip !== "") {
+      if (_tooltip.length > 0) {
         _tooltip = C_VOLT + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
@@ -973,7 +987,7 @@ class SensorsApplet extends Applet.Applet {
           }
         }
       }
-      if (_tooltip !== "") {
+      if (_tooltip.length > 0) {
         _tooltip = C_INTRU + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
@@ -1112,7 +1126,8 @@ class SensorsApplet extends Applet.Applet {
     }
     if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks && !this.nothingToShow(this.temp_disks)) {
       for (let disk of this.temp_disks) {
-        let _disk_name = disk["disk"].trim();
+        //~ let _disk_name = disk["disk"].trim();
+        let _disk_name = disk["disk"];
         if (disk["show_in_panel"] && _disk_name.length > 0) {
           if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
           if (disk["value"]) this._temp[_disk_name] = disk["value"];
@@ -1650,7 +1665,6 @@ class SensorsApplet extends Applet.Applet {
     }
     this.detect_markup();
     spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval + " &");
-    //~ spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
     this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
     this.isLooping = true;
     this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
@@ -1718,7 +1732,6 @@ class SensorsApplet extends Applet.Applet {
     if (this.dependencies.areDepMet()) {
       // All dependencies are installed. Now, run the loop!:
       spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
-      //~ spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
       this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
       this.isLooping = true;
       this.reap_sensors();

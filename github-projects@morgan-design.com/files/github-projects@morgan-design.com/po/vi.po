@@ -1,0 +1,191 @@
+# GITHUB EXPLORER
+# This file is put in the public domain.
+# jamesmorgan, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: github-projects@morgan-design.com 1.5\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:45 applet.js:46
+msgid "GitHub Explorer"
+msgstr "Trình Khám Phá GitHub"
+
+#. applet.js:45
+msgid "Attempting to Load your GitHub Repos"
+msgstr "Đang cố tải các kho GitHub của bạn"
+
+#. applet.js:46
+#, javascript-format
+msgid "Successfully Loaded GitHub Repos for user %s"
+msgstr "Tải thành công kho GitHub cho người dùng %s"
+
+#. applet.js:47
+msgid "ERROR:: GitHub Explorer ::ERROR"
+msgstr "LỖI:: Trình Khám Phá GitHub ::LỖI"
+
+#. applet.js:47
+msgid "Failed to load GitHub Repositories! Check applet Configuration"
+msgstr "Không tải được kho GitHub! Kiểm tra cấu hình applet"
+
+#. applet.js:166
+msgid "Settings"
+msgstr "Cài đặt"
+
+#. applet.js:177 applet.js:270
+msgid "Check Applet Configuration"
+msgstr "Kiểm tra cấu hình applet"
+
+#. applet.js:266
+msgid "API Rate Exceeded will try again once we are allowed"
+msgstr "Vượt giới hạn API, sẽ thử lại khi được phép"
+
+#. applet.js:281
+msgid "Click here to open GitHub"
+msgstr "Nhấp vào đây để mở GitHub"
+
+#. applet.js:331
+msgid "Open Repo In Browser"
+msgstr "Mở kho trong trình duyệt"
+
+#. applet.js:339
+msgid "Project Home"
+msgstr "Trang chính dự án"
+
+#. applet.js:346
+msgid "Details"
+msgstr "Chi tiết"
+
+#. applet.js:349
+msgid "Watchers"
+msgstr "Người theo dõi"
+
+#. applet.js:356
+msgid "Open Issues"
+msgstr "Vấn đề mở"
+
+#. applet.js:363
+msgid "Forks"
+msgstr "Forks"
+
+#. settings-schema.json->open-github-homepage-button->description
+#. applet.js:393
+msgid "Open GitHub Home"
+msgstr "Mở trang GitHub"
+
+#. applet.js:401
+msgid "Create A Gist"
+msgstr "Tạo Gist"
+
+#. metadata.json->name
+msgid "Github Explorer"
+msgstr "Trình Khám Phá GitHub"
+
+#. metadata.json->description
+msgid "Click on the applet to explore your Public Github repositories"
+msgstr "Nhấp vào applet để khám phá các kho GitHub công khai của bạn"
+
+#. settings-schema.json->head->description
+msgid "User Settings"
+msgstr "Cài đặt người dùng"
+
+#. settings-schema.json->username->description
+msgid "GitHub username:"
+msgstr "Tên người dùng GitHub:"
+
+#. settings-schema.json->username->tooltip
+msgid "Set a username which you want to display public repositories for"
+msgstr "Đặt tên người dùng để hiển thị các kho công khai của họ"
+
+#. settings-schema.json->head1->description
+msgid "Usage Settings"
+msgstr "Cài đặt sử dụng"
+
+#. settings-schema.json->enable-auto-refresh->description
+msgid "Check this to enable automatic refreshing"
+msgstr "Chọn để bật làm mới tự động"
+
+#. settings-schema.json->enable-auto-refresh->tooltip
+msgid ""
+"Checking this will mean the applet will update itself according to your "
+"refresh interval"
+msgstr "Chọn tùy chọn này để applet tự cập nhật theo khoảng thời gian làm mới của bạn"
+
+#. settings-schema.json->enable-verbose-logging->description
+msgid "Check this to enable lots of logging in Looking Glass"
+msgstr "Chọn để ghi nhiều nhật ký trong Looking Glass"
+
+#. settings-schema.json->enable-verbose-logging->tooltip
+msgid "Checking this will enable lots of logging"
+msgstr "Chọn để bật nhiều nhật ký"
+
+#. settings-schema.json->enable-github-change-notifications->description
+msgid ""
+"Check this to enable notifications about changes to Watchers, Forks and "
+"Issues"
+msgstr "Chọn để nhận thông báo về thay đổi của Người theo dõi, Forks và Vấn đề"
+
+#. settings-schema.json->enable-github-change-notifications->tooltip
+msgid "Checking this will enable more notification messages"
+msgstr "Chọn để bật nhiều thông báo hơn"
+
+#. settings-schema.json->show-issues-icon-on-repo-name->description
+msgid "Check this show the number of open issues next to the repository"
+msgstr "Chọn để hiển thị số lượng vấn đề mở bên cạnh kho"
+
+#. settings-schema.json->show-issues-icon-on-repo-name->tooltip
+msgid "Checking this show the number of issues next to each repository"
+msgstr "Chọn để hiển thị số vấn đề bên cạnh mỗi kho"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh Interval:"
+msgstr "Khoảng thời gian làm mới:"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid ""
+"Change the amount of time between checking GitHub for changes to your "
+"Repositories"
+msgstr "Thay đổi khoảng thời gian giữa các lần kiểm tra thay đổi trên GitHub cho các kho của bạn"
+
+#. settings-schema.json->head2->description
+msgid "Version Details"
+msgstr "Chi tiết phiên bản"
+
+#. settings-schema.json->applet-version->description
+msgid "Applet Version:"
+msgstr "Phiên bản Applet:"
+
+#. settings-schema.json->applet-version->tooltip
+msgid "Current version installed"
+msgstr "Phiên bản hiện tại đã cài đặt"
+
+#. settings-schema.json->open-cinnamon-homepage-button->description
+msgid "Visit Cinnamon Applet Home"
+msgstr "Truy cập trang chính Applet Cinnamon"
+
+#. settings-schema.json->open-cinnamon-homepage-button->tooltip
+msgid "Open cinnamon.com - rate the application"
+msgstr "Mở cinnamon.com - đánh giá ứng dụng"
+
+#. settings-schema.json->open-github-homepage-button->tooltip
+msgid "Open github.com - fork the code or add features"
+msgstr "Mở github.com - fork mã hoặc thêm tính năng"
+
+#. settings-schema.json->open-developer-homepage-button->description
+msgid "Open Developer Home"
+msgstr "Mở trang nhà phát triển"
+
+#. settings-schema.json->open-developer-homepage-button->tooltip
+msgid "Open morgan-design.com - my personal blog"
+msgstr "Mở morgan-design.com - blog cá nhân của tôi"

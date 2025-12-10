@@ -36,15 +36,20 @@ if (typeof require !== 'undefined') {
     Infos = AppletDirectory.infos;
 }
 
-const _KI = Math.pow(2, 10);
-const _MI = Math.pow(2, 20);
-const _GI = Math.pow(2, 30);
-const _TI = Math.pow(2, 40);
-
 function _(str) {
     return Gettext.dgettext(uuid, str);
 }
 
+function selectUnit(value, fixedIndex, sizes, units) {
+    if (fixedIndex != null) {
+        return [value / sizes[fixedIndex], units[fixedIndex]];
+    }
+    for (let i = sizes.length - 1; i >= 0; --i) {
+        if (value >= sizes[i])
+            return [value / sizes[i], units[i]];
+    }
+    return [value, units[0]];
+}
 
 
 
@@ -86,6 +91,7 @@ DownloadAndUploadSpeed.prototype = {
         this.settings_separator = ",";
 
         this.display_mode = AppletConstants.DisplayMode.SPEED;
+        this.unit = AppletConstants.Unit.AUTO;
         this.unit_type = AppletConstants.UnitType.BYTES;
         this.update_every = 1.0;
         this.update_available_interfaces_every = 5;
@@ -100,6 +106,9 @@ DownloadAndUploadSpeed.prototype = {
         this.data_limit_command = "";
         this.data_limit = 0;
         this.gui_text_css = "";
+        this.gui_enable_inactive_text_css = false;
+        this.gui_inactive_text_css = "";
+        this.gui_show_icons = true;
         this.gui_received_icon_filename = "";
         this.gui_symbolic_icon = false;
         this.gui_sent_icon_filename = "";
@@ -180,6 +189,7 @@ DownloadAndUploadSpeed.prototype = {
     _bind_settings: function () {
         for(let [binding, property_name, callback] of [
                         [Settings.BindingDirection.IN, "display_mode", null],
+                        [Settings.BindingDirection.IN, "unit", null],
                         [Settings.BindingDirection.IN, "unit_type", null],
                         [Settings.BindingDirection.IN, "is_binary", null],
                         [Settings.BindingDirection.IN, "update_every", null],
@@ -199,6 +209,9 @@ DownloadAndUploadSpeed.prototype = {
                         [Settings.BindingDirection.IN, "show_hover", this.on_show_hover_changed],
                         [Settings.BindingDirection.IN, "gui_data_limit_type", this.on_gui_data_limit_type_changed],
                         [Settings.BindingDirection.IN, "gui_text_css", this.on_gui_css_changed],
+                        [Settings.BindingDirection.IN, "gui_enable_inactive_text_css", null],
+                        [Settings.BindingDirection.IN, "gui_inactive_text_css", null],
+                        [Settings.BindingDirection.IN, "gui_show_icons", this.on_gui_icon_visible_changed],
                         [Settings.BindingDirection.IN, "gui_received_icon_filename", this.on_gui_icon_changed],
                         [Settings.BindingDirection.IN, "gui_sent_icon_filename", this.on_gui_icon_changed],
                         [Settings.BindingDirection.IN, "gui_symbolic_icon", this.on_gui_icon_style_change],
@@ -308,6 +321,10 @@ DownloadAndUploadSpeed.prototype = {
         else {
             this.hover_popup.disable();
         }
+    },
+
+    on_gui_icon_visible_changed: function () {
+        this.gui_speed.set_icons_visible(this.gui_show_icons);
     },
 
     on_gui_icon_changed: function () {
@@ -698,6 +715,7 @@ DownloadAndUploadSpeed.prototype = {
         this.actor.add(this.gui_speed.actor,
                       { x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE, y_fill: false });
         this.on_gui_icon_changed();
+        this.on_gui_icon_visible_changed();
         this.on_gui_css_changed();
     },
 
@@ -744,11 +762,13 @@ DownloadAndUploadSpeed.prototype = {
                 bytes_sent_total += info.bytes_sent_total;
             }
 
-            let received = this.get_bytes_received_iteration_string(bytes_received_iteration);
-            let sent = this.get_bytes_sent_iteration_string(bytes_sent_iteration);
+            let [received, is_received] = this.get_bytes_received_iteration_string(bytes_received_iteration);
+            let [sent, is_sent] = this.get_bytes_sent_iteration_string(bytes_sent_iteration);
             let received_total = this.convert_to_two_decimals_string(bytes_received_total);
             let sent_total = this.convert_to_two_decimals_string(bytes_sent_total);
 
+            this.gui_speed.set_received_text_style((is_received || !this.gui_enable_inactive_text_css) ? this.gui_text_css : this.gui_inactive_text_css);
+            this.gui_speed.set_sent_text_style((is_sent || !this.gui_enable_inactive_text_css) ? this.gui_text_css : this.gui_inactive_text_css);
             this.gui_speed.set_received_text(received);
             this.gui_speed.set_sent_text(sent);
             this.update_gui_data_limit(bytes_received_total, bytes_sent_total);
@@ -771,8 +791,7 @@ DownloadAndUploadSpeed.prototype = {
     get_bytes_received_iteration_string: function (bytes) {
         let received = this.replace_with_zero(bytes, this.minimum_bytes_received_to_display);
         received = this.scale(received);
-        received = this.convert_to_readable_string(received);
-        return received;
+        return this.convert_to_readable_string(received);
     },
 
     replace_with_zero: function (bytes, minimum) {
@@ -790,7 +809,7 @@ DownloadAndUploadSpeed.prototype = {
         }
 
         let output = number.toString() + unit;
-        return output;
+        return [output, parseFloat(number) !== 0];
     },
 
     convert_to_readable_unit: function (bytes) {
@@ -806,69 +825,21 @@ DownloadAndUploadSpeed.prototype = {
     },
 
     convert_bytes_to_readable_unit: function (bytes) {
-        if (this.is_binary === true) {
-            if(bytes >= _TI) {
-                return [bytes/_TI, _(" TiB")];
-            }
-            if(bytes >= _GI) {
-                return [bytes/_GI, _(" GiB")];
-            }
-            if(bytes >= _MI) {
-                return [bytes/_MI, _(" MiB")];
-            }
-            if(bytes >= _KI) {
-                return [bytes/_KI, _(" kiB")];
-            }
-            return [bytes, _("   B")];
-        }
-        if(bytes >= 1000000000000) {
-            return [bytes/1000000000000, _(" TB")];
-        }
-        if(bytes >= 1000000000) {
-            return [bytes/1000000000, _(" GB")];
-        }
-        if(bytes >= 1000000) {
-            return [bytes/1000000, _(" MB")];
-        }
-        if(bytes >= 1000) {
-            return [bytes/1000, _(" kB")];
-        }
-        return [bytes, _("  B")];
+        const fixed = (this.unit === AppletConstants.Unit.AUTO) ? null : (this.unit - 1); // Unit.B == 1 maps to index 0
+        const sizes = this.is_binary ? AppletConstants.SIZE_BIN : AppletConstants.SIZE_DEC;
+        const units = this.is_binary ? AppletConstants.BYTE_UNITS_BIN : AppletConstants.BYTE_UNITS_DEC;
+        return selectUnit(bytes, fixed, sizes, units);
+    },
+
+    convert_bits_to_readable_unit: function (bits) {
+        const fixed = (this.unit === AppletConstants.Unit.AUTO) ? null : (this.unit - 1);
+        const sizes = this.is_binary ? AppletConstants.SIZE_BIN : AppletConstants.SIZE_DEC;
+        const units = this.is_binary ? AppletConstants.BIT_UNITS_BIN : AppletConstants.BIT_UNITS_DEC;
+        return selectUnit(bits, fixed, sizes, units);
     },
 
     convert_to_bits: function (bytes) {
         return bytes * 8;
-    },
-
-    convert_bits_to_readable_unit: function (bits) {
-        if (this.is_binary === true) {
-            if(bits >= _TI) {
-                return [bits/_TI, _(" Tib")];
-            }
-            if(bits >= _GI) {
-                return [bits/_GI, _(" Gib")];
-            }
-            if(bits >= _MI) {
-                return [bits/_MI, _(" Mib")];
-            }
-            if(bits >= _KI) {
-                return [bits/_KI, _(" kib")];
-            }
-            return [bits, _("   b")];
-        }
-        if(bits >= 1000000000000) {
-            return [bits/1000000000000, _(" Tb")];
-        }
-        if(bits >= 1000000000) {
-            return [bits/1000000000, _(" Gb")];
-        }
-        if(bits >= 1000000) {
-            return [bits/1000000, _(" Mb")];
-        }
-        if(bits >= 1000) {
-            return [bits/1000, _(" kb")];
-        }
-        return [bits, _("  b")];
     },
 
     is_base: function (unit) {
@@ -894,8 +865,7 @@ DownloadAndUploadSpeed.prototype = {
     get_bytes_sent_iteration_string: function (bytes) {
         let sent = this.replace_with_zero(bytes, this.minimum_bytes_sent_to_display);
         sent = this.scale(sent);
-        sent = this.convert_to_readable_string(sent);
-        return sent;
+        return this.convert_to_readable_string(sent);
     },
 
     convert_to_two_decimals_string: function (bytes) {

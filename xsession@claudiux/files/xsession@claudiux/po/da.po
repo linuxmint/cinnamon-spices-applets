@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-17 13:58+0200\n"
+"POT-Creation-Date: 2025-10-03 18:30+0200\n"
 "PO-Revision-Date: 2023-12-28 08:51+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -47,88 +47,92 @@ msgstr "Udvidelser"
 msgid "RELOAD ALL"
 msgstr ""
 
-#. applet.js:241
+#. applet.js:248
 msgid "Middle-click: \n"
 msgstr "Midterklik: \n"
 
-#. applet.js:241 applet.js:317
+#. applet.js:248 applet.js:327
 msgid "Show .xsession-errors"
 msgstr "Vis .xsession-errors"
 
-#. applet.js:242
+#. applet.js:249
 #, fuzzy
 msgid "Ctrl + Middle-click: \n"
 msgstr "Midterklik: \n"
 
-#. applet.js:242 applet.js:331
+#. applet.js:249 applet.js:341
 msgid "Show latest messages"
 msgstr ""
 
-#. applet.js:295 applet.js:537
+#. applet.js:311 applet.js:553
 #, javascript-format
 msgid "%s latest messages"
 msgstr ""
 
-#. applet.js:295 applet.js:537
+#. applet.js:311 applet.js:553
 msgid "min: 10. max: 250."
 msgstr ""
 
-#. applet.js:348
+#. applet.js:358
 msgid "Restart Cinnamon"
 msgstr "Genstart Cinnamon"
 
-#. applet.js:364
+#. applet.js:376
+msgid "Repeat last action"
+msgstr ""
+
+#. applet.js:380
 msgid "--- Reload Spices ---"
 msgstr "--- Genindlæs Spices ---"
 
-#. applet.js:370
+#. applet.js:386
 msgid "Reload Applet:"
 msgstr "Genindlæs panelprogram:"
 
-#. applet.js:397
+#. applet.js:413
 msgid "Reload Desklet:"
 msgstr "Genindlæs skrivebordsprogram:"
 
-#. applet.js:424
+#. applet.js:440
 msgid "Reload Extension:"
 msgstr "Genindlæs udvidelse:"
 
-#. applet.js:450
+#. applet.js:466
 msgid "Reload Current Theme"
 msgstr ""
 
-#. applet.js:464
+#. applet.js:480
 msgid "--- Settings for ---"
 msgstr ""
 
-#. applet.js:470
+#. applet.js:486
 #, fuzzy
 msgid "Applet:"
 msgstr "Panelprogram"
 
-#. applet.js:479
+#. applet.js:495
 #, fuzzy
 msgid "Desklet:"
 msgstr "Skrivebordsprogram"
 
-#. applet.js:488
+#. applet.js:504
 #, fuzzy
 msgid "Extension:"
 msgstr "Udvidelse"
 
-#. applet.js:497
+#. applet.js:513
 msgid "--- View Code ---"
 msgstr "--- Vis kode ---"
 
-#. applet.js:503
+#. applet.js:519
 msgid "View Applet Code for:"
 msgstr "Vis koden for panelprogrammet:"
 
-#. applet.js:512
+#. applet.js:528
 msgid "View Desklet Code for:"
 msgstr "Vis koden for skrivebordsprogrammet:"
 
-#. applet.js:521
+#. applet.js:537
 msgid "View Extension Code for:"
 msgstr "Vis koden for udvidelsen:"
 

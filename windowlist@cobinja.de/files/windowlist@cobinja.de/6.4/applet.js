@@ -190,17 +190,6 @@ class CobiWindowListSettings extends Settings.AppletSettings {
     super(dummy, UUID, instanceId);
   }
   
-  _saveToFile() {
-    if (!this.monitorId) {
-      this.monitorId = this.monitor.connect("changed", Lang.bind(this, this._checkSettings));
-    }
-    let rawData = JSON.stringify(this.settingsData, null, 4);
-    let raw = this.file.replace(null, false, Gio.FileCreateFlags.NONE, null);
-    let out_file = Gio.BufferedOutputStream.new_sized(raw, 4096);
-    Cinnamon.write_string_to_stream(out_file, rawData);
-    out_file.close(null);
-  }
-  
   setValue(key, value) {
     if (!(key in this.settingsData)) {
       key_not_found_error(key, this.uuid);
@@ -2169,7 +2158,7 @@ class CobiWindowList extends Applet.Applet {
     this._signalManager.connect(global.screen, "workspace-removed", this._onWorkspaceRemoved, this);
     this._signalManager.connect(global.screen, "window-added", this._windowAdded, this);
     this._signalManager.connect(global.screen, "window-removed", this._windowRemoved, this);
-    this._signalManager.connect(global.screen, "window-monitor-changed", this.windowMonitorChanged, this);
+    this._signalManager.connect(global.screen.get_display(), "window-monitor-changed", this.windowMonitorChanged, this);
     this._signalManager.connect(Main.layoutManager, "monitors-changed", this._updateMonitor, this);
   }
   

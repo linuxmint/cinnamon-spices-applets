@@ -1,3 +1,38 @@
+### v3.1.7~20251111
+  * Loop improvement.
+
+### v3.1.6~20251106
+  * Fixes [#7898](https://github.com/linuxmint/cinnamon-spices-applets/issues/7898)
+  * Avoids freeze at startup.
+  * Improved tooltip.
+
+### v3.1.5~20251029
+  * Avoids freeze at startup.
+  * Fixes [#7898](https://github.com/linuxmint/cinnamon-spices-applets/issues/7898)
+
+### v3.1.4~20251021
+  * Avoids random freezes.
+  * Fixes [#7898](https://github.com/linuxmint/cinnamon-spices-applets/issues/7898)
+
+### v3.1.3~20251013
+  * Support for encrypted partitions.
+  * Fixes [#7880](https://github.com/linuxmint/cinnamon-spices-applets/issues/7880)
+  * Special thanks to [chrisstavrou](https://github.com/chrisstavrou).
+
+### v3.1.2~20251005
+  * The values are formatted to the local locale, in tooltip.
+  * Fixes [#7854](https://github.com/linuxmint/cinnamon-spices-applets/issues/7854)
+
+### v3.1.1~20251005
+  * Adds the option "Place % at the very end of the line" in the General tab of this applet tooltip.
+
+### v3.1.0~20251004
+  * Improved tooltip.
+  * Fixes [#7849](https://github.com/linuxmint/cinnamon-spices-applets/issues/7849)
+
+### v3.0.1~20250922
+  * Improved network management regarding status changes and data readings.
+
 ### v3.0.0~20250831
   * The different colors for cache and buffer memory in the RAM graph are back!
   * Code cleanup.

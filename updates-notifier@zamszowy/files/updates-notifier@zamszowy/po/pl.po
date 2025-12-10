@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 1.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-13 12:55+0200\n"
+"POT-Creation-Date: 2025-12-01 10:57+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,50 +18,62 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.7\n"
 
-#. applet.js:37
+#. applet.js:79
 msgid "missing dependencies"
 msgstr "brakujące zależności"
 
-#. applet.js:106
-#, javascript-format
-msgid "%s updates available"
-msgstr "%s dostępnych aktualizacji"
+#. applet.js:230
+msgid "View error details"
+msgstr ""
 
-#. applet.js:107
-msgid "No updates available"
-msgstr "Brak dostępnych aktualizacji"
-
-#. applet.js:133
+#. applet.js:244
 msgid "Check for new updates"
 msgstr "Sprawdź nowe aktualizacje"
 
-#. applet.js:144
+#. applet.js:258
 #, javascript-format
 msgid "View %s updates"
 msgstr "Zobacz %s aktualizacji"
 
-#. applet.js:144
+#. applet.js:258
 msgid "No updates to view"
 msgstr "Brak aktualizacji do wyświetlenia"
 
-#. applet.js:157
+#. applet.js:273
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "Zaktualizuj %s pakietów"
 
-#. applet.js:157
+#. applet.js:273
 msgid "No packages to upgrade"
 msgstr "Brak pakietów do zaktualizowania"
 
-#. info-window.js:118
-msgid "Loading update details…"
-msgstr "Ładowanie szczegółów aktualizacji…"
+#. applet.js:299
+msgid "Error checking for updates"
+msgstr ""
 
-#. info-window.js:170
+#. applet.js:307
+#, javascript-format
+msgid "%s updates available"
+msgstr "%s dostępnych aktualizacji"
+
+#. applet.js:308
+msgid "No updates available"
+msgstr "Brak dostępnych aktualizacji"
+
+#. error-window.js:16
+msgid "Error"
+msgstr "Błąd"
+
+#. error-window.js:39
+msgid "Error log file not found."
+msgstr ""
+
+#. info-window.js:66 info-window.js:85
 msgid "No details available."
 msgstr "Brak dostępnych szczegółów."
 
-#. info-window.js:172
+#. info-window.js:68 info-window.js:87
 msgid ""
 "Error:\n"
 "{0}"
@@ -69,7 +81,7 @@ msgstr ""
 "Błąd:\n"
 "{0}"
 
-#. info-window.js:181
+#. info-window.js:72 info-window.js:91
 msgid ""
 "Failed to run command:\n"
 "{0}"
@@ -77,17 +89,29 @@ msgstr ""
 "Nie udało się uruchomić polecenia:\n"
 "{0}"
 
-#. info-window.js:191
+#. info-window.js:108
+msgid "Loading update details…"
+msgstr "Ładowanie szczegółów aktualizacji…"
+
+#. info-window.js:173
 msgid "Updates"
 msgstr "Aktualizacje"
 
-#. info-window.js:206
+#. info-window.js:188
 msgid "Search updates…"
 msgstr "Szukaj w aktualizacjach…"
 
-#. info-window.js:238
+#. info-window.js:223
 msgid "{0} updates"
 msgstr ""
+
+#. info-window.js:251
+msgid ""
+"Failed to read updates file:\n"
+"{0}"
+msgstr ""
+"Nie udało się odczytać pliku z aktualizacjami:\n"
+"{0}"
 
 #. metadata.json->name
 msgid "Updates notifier"
@@ -97,13 +121,41 @@ msgstr "Powiadomienia o aktualizacjach"
 msgid "Shows icons for pending update packages"
 msgstr "Pokazuje ikony dla oczekujących pakietów aktualizacji"
 
-#. settings-schema.json->section1->description
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->pageAppearance->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->sectionSettings->title
 msgid "Settings"
 msgstr "Ustawienia"
 
+#. settings-schema.json->sectionIconLabel->title
+msgid "Icon/Label"
+msgstr ""
+
+#. settings-schema.json->sectionClick->title
+msgid "Applet click"
+msgstr ""
+
+#. settings-schema.json->sectionMenu->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->sectionTheme->title
+msgid "Theme"
+msgstr "Motyw"
+
 #. settings-schema.json->update-refresh->description
-msgid "Minutes to wait before refreshing applet"
-msgstr "Ile minut czekać przed odświeżeniem apletu"
+msgid "Minutes to wait before refreshing updates"
+msgstr "Ile minut czekać przed odświeżeniem aktualizacji"
+
+#. settings-schema.json->show-firmware->description
+msgid "Show firmware updates"
+msgstr "Pokazuj aktualizacje firmware'u"
 
 #. settings-schema.json->hide-applet->description
 msgid "Hide applet if there are no updates"
@@ -129,29 +181,43 @@ msgstr ""
 "wartością niskiego poziomu a tą wartością. Pokazuj ikonę wysokiego poziomu, "
 "jeśli jest wyższa niż ta wartość."
 
-#. settings-schema.json->section2->description
-msgid "Commands to execute in popup menu"
-msgstr "Polecenia do wykonania w menu podręcznym"
+#. settings-schema.json->show-label->description
+msgid "Show label with updates count"
+msgstr "Pokazuj etykietę z liczbą aktualizacji"
+
+#. settings-schema.json->label-font-size->description
+msgid "Label font size"
+msgstr ""
+
+#. settings-schema.json->label-font-weight->description
+msgid "Label font weight"
+msgstr ""
+
+#. settings-schema.json->label-vertical-position->description
+msgid "Label vertical position"
+msgstr ""
+
+#. settings-schema.json->show-window-on-click->description
+msgid "Show updates window on left click and menu entries on right click"
+msgstr ""
+
+#. settings-schema.json->refresh-when-no-updates->description
+msgid "Refresh updates list on left click if there are no updates"
+msgstr ""
+"Odśwież listę aktualizacji po kliknięciu lewym przyciskiem, jeśli nie ma "
+"aktualizacji"
 
 #. settings-schema.json->commandUpdate-show->description
 msgid "Show \"Check for new updates\" command"
 msgstr "Pokaż polecenie „Sprawdź nowe aktualizacje”"
-
-#. settings-schema.json->commandUpdate->description
-msgid "Check for new updates:"
-msgstr "Sprawdź nowe aktualizacje:"
 
 #. settings-schema.json->commandUpgrade-show->description
 msgid "Show \"Upgrade packages\" command"
 msgstr "Pokaż polecenie „Zaktualizuj pakiety”"
 
 #. settings-schema.json->commandUpgrade->description
-msgid "Upgrade packages:"
-msgstr "Zaktualizuj pakiety:"
-
-#. settings-schema.json->section3->description
-msgid "Theme"
-msgstr "Motyw"
+msgid "Upgrade packages command:"
+msgstr "Polecenie aktualizacji pakietów:"
 
 #. settings-schema.json->icon-style->description
 msgid "Icon style"

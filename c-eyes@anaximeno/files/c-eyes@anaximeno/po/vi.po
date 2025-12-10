@@ -1,0 +1,466 @@
+# CINNAMON EYES
+# This file is put in the public domain.
+# anaximeno, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: c-eyes@anaximeno 3.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-22 04:46-0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 4.2/applet.js:56 5.4/applet.js:56
+msgid ""
+"📢 The click effects will be removed from this applet on the version 6.2 of "
+"Cinnamon\n"
+"and moved to a new extension named mouse-click-effects which can already be "
+"installed\n"
+"on the Cinnamon Extensions settings module for versions of Cinnamon >= 5.4"
+msgstr ""
+"📢 Hiệu ứng nhấp chuột sẽ bị loại bỏ khỏi applet này ở phiên bản 6.2 của Cinnamon\n"
+"và được chuyển sang một tiện ích mở rộng mới có tên mouse-click-effects, hiện đã có thể cài đặt\n"
+"trong mô-đun cài đặt Tiện ích mở rộng Cinnamon cho các phiên bản Cinnamon >= 5.4"
+
+#. 4.2/applet.js:396 5.4/applet.js:393
+msgid "click to deactivate the eye"
+msgstr "nhấp để tắt mắt"
+
+#. 4.2/applet.js:396 5.4/applet.js:393
+msgid "click to activate the eye"
+msgstr "nhấp để bật mắt"
+
+#. 4.2/applet.js:397 5.4/applet.js:394
+msgid "TIP"
+msgstr "MẸO"
+
+#. 6.2/applet.js:48
+msgid "Hey, I saw that!"
+msgstr "Này, tôi đã thấy điều đó!"
+
+#. metadata.json->name
+msgid "Cinnamon Eyes"
+msgstr "Đôi mắt Cinnamon"
+
+#. metadata.json->description
+msgid ""
+"An applet for Cinnamon that adds an eye to the panel bar that follows your "
+"cursor."
+msgstr ""
+"Một applet cho Cinnamon thêm một con mắt vào thanh bảng điều khiển, theo dõi con trỏ của bạn."
+
+#. 4.2->settings-schema.json->eye->title
+#. 5.4->settings-schema.json->eye->title
+msgid "Eye"
+msgstr "Mắt"
+
+#. 4.2->settings-schema.json->effects->title
+#. 5.4->settings-schema.json->effects->title
+msgid "Effects"
+msgstr "Hiệu ứng"
+
+#. 4.2->settings-schema.json->eye-generic->title
+#. 4.2->settings-schema.json->click-generic->title
+#. 5.4->settings-schema.json->eye-generic->title
+#. 5.4->settings-schema.json->click-generic->title
+#. 6.2->settings-schema.json->general-page->title
+#. 6.2->settings-schema.json->general-section->title
+msgid "General"
+msgstr "Chung"
+
+#. 4.2->settings-schema.json->eye-colors->title
+#. 4.2->settings-schema.json->click-colors->title
+#. 5.4->settings-schema.json->eye-colors->title
+#. 5.4->settings-schema.json->click-colors->title
+#. 6.2->settings-schema.json->colors-section->title
+msgid "Colors"
+msgstr "Màu sắc"
+
+#. 4.2->settings-schema.json->click-events->title
+#. 5.4->settings-schema.json->click-events->title
+msgid "Events"
+msgstr "Sự kiện"
+
+#. 4.2->settings-schema.json->eye-mode->description
+#. 5.4->settings-schema.json->eye-mode->description
+msgid "Mode"
+msgstr "Chế độ"
+
+#. 4.2->settings-schema.json->eye-mode->options
+#. 5.4->settings-schema.json->eye-mode->options
+#. 6.2->settings-schema.json->mode->options
+msgid "Lids"
+msgstr "Mi mắt"
+
+#. 4.2->settings-schema.json->eye-mode->options
+#. 5.4->settings-schema.json->eye-mode->options
+#. 6.2->settings-schema.json->mode->options
+msgid "Bulb"
+msgstr "Cầu mắt"
+
+#. 4.2->settings-schema.json->eye-line-width->description
+#. 5.4->settings-schema.json->eye-line-width->description
+#. 6.2->settings-schema.json->line-width->description
+msgid "Line Width"
+msgstr "Độ rộng đường kẻ"
+
+#. 4.2->settings-schema.json->eye-line-width->units
+#. 4.2->settings-schema.json->eye-margin->units
+#. 4.2->settings-schema.json->eye-vertical-padding->units
+#. 4.2->settings-schema.json->mouse-click-image-size->units
+#. 5.4->settings-schema.json->eye-line-width->units
+#. 5.4->settings-schema.json->eye-margin->units
+#. 5.4->settings-schema.json->eye-vertical-padding->units
+#. 5.4->settings-schema.json->mouse-click-image-size->units
+#. 6.2->settings-schema.json->line-width->units
+#. 6.2->settings-schema.json->margin->units
+#. 6.2->settings-schema.json->padding->units
+msgid "px"
+msgstr "px"
+
+#. 4.2->settings-schema.json->eye-margin->description
+#. 5.4->settings-schema.json->eye-margin->description
+#. 6.2->settings-schema.json->margin->description
+msgid "Margin"
+msgstr "Lề"
+
+#. 4.2->settings-schema.json->eye-vertical-padding->description
+#. 5.4->settings-schema.json->eye-vertical-padding->description
+#. 6.2->settings-schema.json->padding->description
+msgid "Padding"
+msgstr "Đệm"
+
+#. 4.2->settings-schema.json->eye-repaint-interval->units
+#. 4.2->settings-schema.json->fade-timeout->units
+#. 5.4->settings-schema.json->eye-repaint-interval->units
+#. 5.4->settings-schema.json->fade-timeout->units
+#. 6.2->settings-schema.json->repaint-interval->units
+msgid "ms"
+msgstr "ms"
+
+#. 4.2->settings-schema.json->eye-repaint-interval->description
+#. 5.4->settings-schema.json->eye-repaint-interval->description
+#. 6.2->settings-schema.json->repaint-interval->description
+msgid "Eye Update Interval"
+msgstr "Khoảng thời gian cập nhật mắt"
+
+#. 4.2->settings-schema.json->eye-repaint-interval->tooltip
+#. 5.4->settings-schema.json->eye-repaint-interval->tooltip
+#. 6.2->settings-schema.json->repaint-interval->tooltip
+msgid ""
+"This setting controls the time to redraw the eye again. Lower values "
+"(measured in miliseconds) result in smoother animation but require more "
+"processing power."
+msgstr ""
+"Cài đặt này kiểm soát thời gian vẽ lại mắt. Giá trị thấp hơn (tính bằng mili giây) sẽ cho hoạt ảnh mượt hơn nhưng tốn nhiều tài nguyên xử lý hơn."
+
+#. 4.2->settings-schema.json->eye-repaint-angle->units
+#. 5.4->settings-schema.json->eye-repaint-angle->units
+#. 6.2->settings-schema.json->repaint-angle->units
+msgid "radians"
+msgstr "radian"
+
+#. 4.2->settings-schema.json->eye-repaint-angle->description
+#. 5.4->settings-schema.json->eye-repaint-angle->description
+#. 6.2->settings-schema.json->repaint-angle->description
+msgid "Eye Update Sensitivity"
+msgstr "Độ nhạy cập nhật mắt"
+
+#. 4.2->settings-schema.json->eye-repaint-angle->tooltip
+#. 5.4->settings-schema.json->eye-repaint-angle->tooltip
+#. 6.2->settings-schema.json->repaint-angle->tooltip
+msgid ""
+"This setting controls the minimum angle change between mouse movements "
+"required to redraw the eye. Lower values (measured in radians) result in "
+"smoother animation but require more processing power."
+msgstr ""
+"Cài đặt này kiểm soát thay đổi góc tối thiểu giữa các chuyển động chuột để vẽ lại mắt. Giá trị thấp hơn (tính bằng radian) sẽ cho hoạt ảnh mượt hơn nhưng tốn nhiều tài nguyên xử lý hơn."
+
+#. 4.2->settings-schema.json->eye-activate-by-default->description
+#. 5.4->settings-schema.json->eye-activate-by-default->description
+msgid "Start Activated"
+msgstr "Khởi động ở trạng thái bật"
+
+#. 4.2->settings-schema.json->deactivate-on-fullscreen->description
+#. 4.2->settings-schema.json->deactivate-effects-on-fullscreen->description
+#. 5.4->settings-schema.json->deactivate-on-fullscreen->description
+#. 5.4->settings-schema.json->deactivate-effects-on-fullscreen->description
+#. 6.2->settings-schema.json->deactivate-on-fullscreen->description
+msgid "Deactivate On Fullscreen"
+msgstr "Tắt khi toàn màn hình"
+
+#. 4.2->settings-schema.json->eye-clicked-color->description
+#. 5.4->settings-schema.json->eye-clicked-color->description
+msgid "Activated Base Color"
+msgstr "Màu nền khi bật"
+
+#. 4.2->settings-schema.json->iris-clicked-color->description
+#. 5.4->settings-schema.json->iris-clicked-color->description
+msgid "Activated Iris Color"
+msgstr "Màu mống mắt khi bật"
+
+#. 4.2->settings-schema.json->pupil-clicked-color->description
+#. 5.4->settings-schema.json->pupil-clicked-color->description
+msgid "Activated Pupil Color"
+msgstr "Màu con ngươi khi bật"
+
+#. 4.2->settings-schema.json->fill-lids-color-painting->description
+#. 4.2->settings-schema.json->fill-bulb-color-painting->description
+#. 5.4->settings-schema.json->fill-lids-color-painting->description
+#. 5.4->settings-schema.json->fill-bulb-color-painting->description
+#. 6.2->settings-schema.json->fill-lids-color-painting->description
+#. 6.2->settings-schema.json->fill-bulb-color-painting->description
+msgid "Fill the Colors Inside the Eye"
+msgstr "Tô màu bên trong mắt"
+
+#. 4.2->settings-schema.json->mouse-click-enable->description
+#. 5.4->settings-schema.json->mouse-click-enable->description
+msgid "Enable Effects"
+msgstr "Bật hiệu ứng"
+
+#. 4.2->settings-schema.json->mouse-click-mode->description
+#. 5.4->settings-schema.json->mouse-click-mode->description
+msgid "Icon Mode"
+msgstr "Chế độ biểu tượng"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Simple"
+msgstr "Đơn giản"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Trigun"
+msgstr "Trigun"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Nublo"
+msgstr "Nublo"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Risco"
+msgstr "Risco"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Wolf"
+msgstr "Wolf"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Pincel"
+msgstr "Pincel"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Claw"
+msgstr "Claw"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Metropoli"
+msgstr "Metropoli"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Flowey"
+msgstr "Flowey"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Kusco"
+msgstr "Kusco"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Ouroboros"
+msgstr "Ouroboros"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Helix"
+msgstr "Helix"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Direction"
+msgstr "Direction"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Spinks"
+msgstr "Spinks"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Thatch"
+msgstr "Thatch"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Cotton"
+msgstr "Cotton"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Circle"
+msgstr "Hình tròn"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Gear"
+msgstr "Bánh răng"
+
+#. 4.2->settings-schema.json->mouse-click-image-size->description
+#. 5.4->settings-schema.json->mouse-click-image-size->description
+msgid "Icon Size"
+msgstr "Kích thước biểu tượng"
+
+#. 4.2->settings-schema.json->click-animation-mode->description
+#. 5.4->settings-schema.json->click-animation-mode->description
+msgid "Click Animation Mode"
+msgstr "Chế độ hoạt ảnh khi nhấp"
+
+#. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
+msgid "Blink"
+msgstr "Nháy mắt"
+
+#. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
+msgid "Bounce Back"
+msgstr "Nảy lại"
+
+#. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
+msgid "Retract"
+msgstr "Thu lại"
+
+#. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
+msgid "Expand"
+msgstr "Mở rộng"
+
+#. 4.2->settings-schema.json->mouse-left-click-enable->description
+#. 5.4->settings-schema.json->mouse-left-click-enable->description
+msgid "Enable Left Click"
+msgstr "Bật nhấp chuột trái"
+
+#. 4.2->settings-schema.json->mouse-middle-click-enable->description
+#. 5.4->settings-schema.json->mouse-middle-click-enable->description
+msgid "Enable Middle Click"
+msgstr "Bật nhấp chuột giữa"
+
+#. 4.2->settings-schema.json->mouse-right-click-enable->description
+#. 5.4->settings-schema.json->mouse-right-click-enable->description
+msgid "Enable Right Click"
+msgstr "Bật nhấp chuột phải"
+
+#. 4.2->settings-schema.json->fade-timeout->description
+#. 5.4->settings-schema.json->fade-timeout->description
+msgid "Fade Timeout"
+msgstr "Thời gian mờ dần"
+
+#. 4.2->settings-schema.json->mouse-left-click-color->description
+#. 5.4->settings-schema.json->mouse-left-click-color->description
+msgid "Left Click Color"
+msgstr "Màu nhấp chuột trái"
+
+#. 4.2->settings-schema.json->mouse-middle-click-color->description
+#. 5.4->settings-schema.json->mouse-middle-click-color->description
+msgid "Middle Click Color"
+msgstr "Màu nhấp chuột giữa"
+
+#. 4.2->settings-schema.json->mouse-right-click-color->description
+#. 5.4->settings-schema.json->mouse-right-click-color->description
+msgid "Right Click Color"
+msgstr "Màu nhấp chuột phải"
+
+#. 4.2->settings-schema.json->mouse-click-opacity->description
+#. 5.4->settings-schema.json->mouse-click-opacity->description
+msgid "General Opacity"
+msgstr "Độ mờ chung"
+
+#. 5.4->settings-schema.json->click-info->title
+msgid "Info"
+msgstr "Thông tin"
+
+#. 5.4->settings-schema.json->click-effects-moved-on-
+#. cinnamon-6.2-info->description
+msgid ""
+"In Cinnamon versions 6.2 and later, the click effects have been removed from "
+"this applet and relocated to a new extension called 'mouse-click-effects,' "
+"which can be installed through the Cinnamon Extensions settings module."
+msgstr ""
+"Trong các phiên bản Cinnamon 6.2 trở lên, hiệu ứng nhấp chuột đã bị loại bỏ khỏi applet này và chuyển sang tiện ích mở rộng mới có tên 'mouse-click-effects', có thể cài đặt qua mô-đun cài đặt Tiện ích mở rộng Cinnamon."
+
+#. 6.2->settings-schema.json->style-page->title
+#. 6.2->settings-schema.json->styles-section->title
+msgid "Style"
+msgstr "Kiểu dáng"
+
+#. 6.2->settings-schema.json->optimization-section->title
+msgid "Optimizations"
+msgstr "Tối ưu hóa"
+
+#. 6.2->settings-schema.json->mode->description
+msgid "Eye Mode"
+msgstr "Chế độ mắt"
+
+#. 6.2->settings-schema.json->tooltip-message->description
+msgid "Tooltip Message on Hover"
+msgstr "Thông điệp chú giải khi di chuột"
+
+#. 6.2->settings-schema.json->optimization-mode->description
+msgid "Optimization Mode"
+msgstr "Chế độ tối ưu hóa"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Battery"
+msgstr "Pin"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Balanced"
+msgstr "Cân bằng"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Performance"
+msgstr "Hiệu năng"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Manual"
+msgstr "Thủ công"
+
+#. 6.2->settings-schema.json->use-alternative-colors->description
+msgid "Use Alternative Colors for the Eye"
+msgstr "Sử dụng màu thay thế cho mắt"
+
+#. 6.2->settings-schema.json->use-alternative-colors->tooltip
+msgid ""
+"When disabled it will use the current system theme's default color for panel "
+"items."
+msgstr ""
+"Khi tắt, nó sẽ sử dụng màu mặc định của chủ đề hệ thống hiện tại cho các mục trên bảng điều khiển."
+
+#. 6.2->settings-schema.json->base-color->description
+msgid "Base Color"
+msgstr "Màu nền"
+
+#. 6.2->settings-schema.json->iris-color->description
+msgid "Iris Color"
+msgstr "Màu mống mắt"
+
+#. 6.2->settings-schema.json->pupil-color->description
+msgid "Pupil Color"
+msgstr "Màu con ngươi"
+

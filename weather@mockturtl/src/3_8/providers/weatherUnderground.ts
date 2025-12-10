@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import { getTimes } from "suncalc";
 import type { Config} from "../config";
-import type { Services } from "../config";
+import { Services } from "../config";
 import type { ErrorResponse} from "../lib/httpLib";
 import { HttpLib } from "../lib/httpLib";
 import { Logger } from "../lib/services/logger";
@@ -24,7 +24,7 @@ const unitTypeMap: Record<string, UnitType> = {
 export class WeatherUnderground extends BaseProvider {
     public needsApiKey: boolean = true;
     public prettyName: string = _("Weather Underground");
-    public name: Services = "WeatherUnderground";
+    public name: Services = Services.WeatherUnderground;
     public maxForecastSupport: number = 6;
     public maxHourlyForecastSupport: number = 0;
     public website: string = "https://www.wunderground.com/";

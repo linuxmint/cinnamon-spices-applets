@@ -1,0 +1,414 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["generalPage", "userPage", "systemPage", "favoritesPage", "recentPage"],
+        "generalPage": {
+            "type": "page",
+            "title": "General",
+            "sections": ["panel", "menu"]
+        },
+        "userPage": {
+            "type": "page",
+            "title": "User",
+            "sections": ["userSection", "userSectionCustomPlaces"]
+        },
+        "systemPage": {
+            "type": "page",
+            "title": "System",
+            "sections": ["systemSection", "systemSectionCustomPlaces"]
+        },
+        "favoritesPage": {
+            "type": "page",
+            "title": "Favorites",
+            "sections": ["favoritesSection", "favoriteAppsSection"]
+        },
+        "recentPage": {
+            "type": "page",
+            "title": "Recent documents",
+            "sections": ["recentSection"]
+        },
+        "panel": {
+            "type": "section",
+            "title": "Panel settings",
+            "keys": ["panelIcon", "panelText", "noIconOnPanel", "middleClickPath", "dontDisplayTooltip"]
+        },
+        "menu": {
+            "type": "section",
+            "title": "Menu settings",
+            "keys": ["openHoveringOver", "keyOpen", "iconSize", "displayOrderLabel", "displayOrder", "displayOrderApply"]
+        },
+        "userSection": {
+            "type": "section",
+            "title": "User section",
+            "keys": ["showUserSection", "showUserSettingsAccessIcon", "showDesktop", "showTrash"]
+        },
+        "userSectionCustomPlaces": {
+            "type": "section",
+            "title": "Custom places",
+            "keys": ["listUserCustomPlaces", "btnIconBrowser"]
+        },
+        "systemSection": {
+            "type": "section",
+            "title": "System section",
+            "keys": ["showSystemSection", "showSystemSettingsAccessIcon", "showComputer", "showRoot", "showVolumes", "onlyShowMounted", "showNetwork"]
+        },
+        "systemSectionCustomPlaces": {
+            "type": "section",
+            "title": "Custom places",
+            "keys": ["listSystemCustomPlaces", "btnIconBrowser"]
+        },
+        "favoritesSection": {
+            "type": "section",
+            "title": "Favorite documents",
+            "keys": ["showFavorites", "showFavoritesSettingsAccessIcon", "favoriteSortingMethod", "favoriteSizeLimit", "favoriteShowUri", "favoriteIconIsStar"]
+        },
+        
+        "favoriteAppsSection": {
+            "type": "section",
+            "title": "Favorite apps",
+            "keys": ["showFavoriteApps", "favAppsLabel", "favApps", "favAppsPopulateButton"]
+        },
+        "recentSection": {
+            "type": "section",
+            "title": "Recent documents",
+            "keys": ["showRecentDocuments", "showRecentSettingsAccessIcon", "sortingMethod", "recentSizeLimit", "recentShowUri", "btnPrivacy"]
+        }
+    },
+
+    "panelIcon": {
+        "type": "iconfilechooser",
+        "description": "Panel icon",
+        "default": "folder-saved-search",
+        "tooltip": "Accepts icon name or direct path (supports symbolic icons)"
+    },
+
+    "panelText": {
+        "type": "entry",
+        "description": "Panel text",
+        "expand-width": true,
+        "default": ""
+    },
+
+    "openHoveringOver": {
+        "type": "switch",
+        "default": false,
+        "description": "Open the menu by hovering over the icon"
+    },
+
+    "keyOpen": {
+        "type": "keybinding",
+        "description": "Menu shortcut key",
+        "default": ""
+    },
+
+    "iconSize": {
+        "type": "spinbutton",
+        "default": 20,
+        "min": 10,
+        "max": 50,
+        "units": "px",
+        "step": 2,
+        "description": "Menu icon size"
+    },
+
+     "displayOrderLabel": {
+         "type": "label",
+         "description": "Move these sections to rearrange the menu:"
+     },
+
+    "displayOrder": {
+        "type": "list",
+        "default": [],
+        "columns":  [
+            {"id": "id", "title": "Name", "type": "string", "expand-width": true}
+        ],
+        "show-buttons": true,
+        "hidden-buttons": ["+", "-", "edit"],
+        "description": "Display order in the menu"
+    },
+
+    "displayOrderApply": {
+        "type": "button",
+        "description": "Apply",
+        "callback": "controlDisplayOrder"
+    },
+
+    "noIconOnPanel": {
+        "type": "switch",
+        "description": "No icon on panel",
+        "default": false,
+        "dependency": "panelText!="
+    },
+
+    "middleClickPath": {
+        "type": "filechooser",
+        "description": "Open on middle click",
+        "default": "~/",
+        "select-dir": true,
+        "tooltip": "Leave blank to disable"
+    },
+
+    "dontDisplayTooltip": {
+        "type": "switch",
+        "description": "Do not display the tooltip",
+        "default": false
+    },
+
+    "showUserSection": {
+        "type": "switch",
+        "description": "Show User section",
+        "default": true
+    },
+    
+    "showUserSettingsAccessIcon": {
+        "type": "switch",
+        "description": "Show the settings access icon",
+        "default": true
+    },
+
+    "showDesktop": {
+        "type": "switch",
+        "description": "Show desktop",
+        "default": true
+    },
+
+    "listUserCustomPlaces": {
+        "type": "list",
+        "description": "Custom places",
+        "default": [],
+        "columns" : [
+            {"id": "uri", "title": "URI", "type": "string", "expand-width": true},
+            {"id": "name", "title": "Name", "type": "string", "expand-width": true},
+            {"id": "icon", "title": "Icon Name", "type": "string", "expand-width": true}
+        ]
+    },
+
+    "userCustomPlaces": {
+        "type": "generic",
+        "default": ""
+    },
+
+    "showTrash": {
+        "type": "combobox",
+        "description": "Show trash",
+        "default": 2,
+        "options": {
+            "Never": 0,
+            "Always": 1,
+            "When not empty": 2
+        }
+    },
+
+    "showSystemSection": {
+        "type": "switch",
+        "description": "Show System section",
+        "default": true
+    },
+    
+    "showSystemSettingsAccessIcon": {
+        "type": "switch",
+        "description": "Show the settings access icon",
+        "default": true
+    },
+
+    "showComputer": {
+        "type": "switch",
+        "description": "Show computer",
+        "default": true
+    },
+
+    "showRoot": {
+        "type": "switch",
+        "description": "Show file system",
+        "default": true
+    },
+
+    "showVolumes": {
+        "type": "switch",
+        "description": "Show volumes",
+        "default": true
+    },
+
+    "onlyShowMounted": {
+        "type": "switch",
+        "description": "Only show mounted drives",
+        "default": false,
+        "indent": true,
+        "dependency": "showVolumes"
+    },
+
+    "showNetwork": {
+        "type": "switch",
+        "description": "Show network",
+        "default": true
+    },
+
+    "listSystemCustomPlaces": {
+        "type": "list",
+        "description": "Custom places",
+        "default": [],
+        "columns" : [
+            {"id": "uri", "title": "URI", "type": "string", "expand-width": true},
+            {"id": "name", "title": "Name", "type": "string", "expand-width": true},
+            {"id": "icon", "title": "Icon Name", "type": "string", "expand-width": true}
+        ]
+    },
+
+    "systemCustomPlaces": {
+        "type": "generic",
+        "default": ""
+    },
+
+    "showFavorites": {
+        "type": "switch",
+        "description": "Show favorite documents",
+        "default": true
+    },
+    
+    "showFavoritesSettingsAccessIcon": {
+        "type": "switch",
+        "description": "Show the settings access icon",
+        "default": true
+    },
+
+    "favoriteSortingMethod": {
+        "type": "combobox",
+        "default": "added",
+        "options": {
+            "Added time": "added",
+            "Name": "byName",
+            "Path": "byPath"
+        },
+        "description": "Sorting method",
+        "dependency": "showFavorites"
+    },
+
+    "favoriteSizeLimit": {
+        "type": "combobox",
+        "default": 0,
+        "options": {
+            "5": 5,
+            "10": 10,
+            "15": 15,
+            "20": 20,
+            "25": 25,
+            "30": 30,
+            "All Favorite Documents": 0
+        },
+        "description": "Number to show",
+        "indent": true,
+        "dependency": "showFavorites"
+    },
+
+    "favoriteShowUri": {
+        "type": "switch",
+        "description": "Show complete path in tooltips",
+        "default": true,
+        "dependency": "showFavorites"
+    },
+
+    "favoriteIconIsStar": {
+        "type": "switch",
+        "description": "Replace icons with stars",
+        "default": false,
+        "dependency": "showFavorites"
+    },
+
+    "showFavoriteApps": {
+        "type": "switch",
+        "description": "Show favorite apps",
+        "default": true
+    },
+
+    "favAppsLabel": {
+        "type": "label",
+        "description": "Below are the favorite applications displayed in the menu when checked.\nThe Name can be changed.\nThe Launcher must not be changed.",
+        "dependency": "showFavoriteApps"
+    },
+
+    "favApps": {
+        "type": "list",
+        "description": "Favorite apps shown",
+        "default": [],
+        "columns":  [
+            {"id": "menu", "title": "Menu", "type": "boolean", "default": true},
+            {"id": "name", "title": "Name", "type": "string", "expand-width": true},
+            {"id": "id", "title": "⚠️ Launcher", "type": "string", "expand-width": true}
+        ],
+        "show-buttons": true,
+        "dependency": "showFavoriteApps"
+    },
+
+    "favAppsPopulateButton": {
+        "type": "button",
+        "description": "Add all your Favorite Apps",
+        "callback": "favAppsPopulateList",
+        "dependency": "showFavoriteApps"
+    },
+
+    "showRecentDocuments": {
+        "type": "switch",
+        "description": "Show recent documents",
+        "default": true
+    },
+    
+    "showRecentSettingsAccessIcon": {
+        "type": "switch",
+        "description": "Show the settings access icon",
+        "default": true
+    },
+
+    "sortingMethod": {
+        "type": "combobox",
+        "default": "added",
+        "options": {
+            "Added time": "added",
+            "Access time": "access",
+            "Modification time": "modification"
+        },
+        "description": "Sorting method",
+        "dependency": "showRecentDocuments"
+    },
+
+    "recentSizeLimit": {
+        "type": "combobox",
+        "default": 10,
+        "options": {
+            "5": 5,
+            "10": 10,
+            "15": 15,
+            "20": 20,
+            "25": 25,
+            "30": 30,
+            "All Recent Documents": 0
+        },
+        "description": "Number to show",
+        "indent": true,
+        "dependency": "showRecentDocuments"
+    },
+
+    "recentShowUri": {
+        "type": "switch",
+        "description": "Show complete path in tooltips",
+        "default": true,
+        "dependency": "showRecentDocuments"
+    },
+
+    "btnPrivacy": {
+        "type": "button",
+        "description": "Privacy",
+        "callback": "on_btnPrivacy_pressed"
+    },
+
+    "iconBrowserIsPresent": {
+        "type": "generic",
+        "default": false
+    },
+
+    "btnIconBrowser": {
+        "type": "button",
+        "dependency": "iconBrowserIsPresent",
+        "description": "Icon browser",
+        "callback": "on_btnIconBrowser_pressed"
+    }
+}

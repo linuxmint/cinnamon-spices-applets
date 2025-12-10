@@ -74,6 +74,7 @@
       "keys": [
         "exp_applets",
         "unprotected_applets",
+        "btn_apply_applets",
         "btn_refresh_applets",
         "btn_tickallthenrefresh_applets",
         "btn_cs_applets"
@@ -93,6 +94,7 @@
       "keys": [
         "exp_desklets",
         "unprotected_desklets",
+        "btn_apply_desklets",
         "btn_refresh_desklets",
         "btn_tickallthenrefresh_desklets",
         "btn_cs_desklets"
@@ -112,6 +114,7 @@
       "keys": [
         "exp_extensions",
         "unprotected_extensions",
+        "btn_apply_extensions",
         "btn_refresh_extensions",
         "btn_tickallthenrefresh_extensions",
         "btn_cs_extensions"
@@ -131,6 +134,7 @@
       "keys": [
         "exp_themes",
         "unprotected_themes",
+        "btn_apply_themes",
         "btn_refresh_themes",
         "btn_tickallthenrefresh_themes",
         "btn_cs_themes"
@@ -150,6 +154,7 @@
       "keys": [
         "exp_actions",
         "unprotected_actions",
+        "btn_apply_actions",
         "btn_refresh_actions",
         "btn_tickallthenrefresh_actions",
         "btn_cs_actions"
@@ -220,6 +225,11 @@
     "description": "",
     "height": 100
   },
+  "btn_apply_applets": {
+    "type": "button",
+    "description": "Apply",
+    "callback": "_on_apply_pressed_applets"
+  },
   "btn_refresh_applets": {
     "type": "button",
     "description": "Refresh",
@@ -284,6 +294,11 @@
     "default": "",
     "description": "",
     "height": 100
+  },
+  "btn_apply_desklets": {
+    "type": "button",
+    "description": "Apply",
+    "callback": "_on_apply_pressed_desklets"
   },
   "btn_refresh_desklets": {
     "type": "button",
@@ -350,6 +365,11 @@
     "description": "",
     "height": 100
   },
+  "btn_apply_extensions": {
+    "type": "button",
+    "description": "Apply",
+    "callback": "_on_apply_pressed_extensions"
+  },
   "btn_refresh_extensions": {
     "type": "button",
     "description": "Refresh",
@@ -415,6 +435,11 @@
     "description": "",
     "height": 100
   },
+  "btn_apply_themes": {
+    "type": "button",
+    "description": "Apply",
+    "callback": "_on_apply_pressed_themes"
+  },
   "btn_refresh_themes": {
     "type": "button",
     "description": "Refresh",
@@ -479,6 +504,11 @@
     "default": "",
     "description": "",
     "height": 100
+  },
+  "btn_apply_actions": {
+    "type": "button",
+    "description": "Apply",
+    "callback": "_on_apply_pressed_actions"
   },
   "btn_refresh_actions": {
     "type": "button",

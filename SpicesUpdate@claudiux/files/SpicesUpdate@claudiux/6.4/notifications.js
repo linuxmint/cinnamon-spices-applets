@@ -133,3 +133,7 @@ class SU_Notification extends MessageTray.Notification {
         }
     }
 }
+
+module.exports = {
+    SU_Notification
+}

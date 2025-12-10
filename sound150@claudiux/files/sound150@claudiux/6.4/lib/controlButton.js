@@ -83,3 +83,7 @@ class ControlButton {
         }
     }
 }
+
+module.exports = {
+    ControlButton
+}
