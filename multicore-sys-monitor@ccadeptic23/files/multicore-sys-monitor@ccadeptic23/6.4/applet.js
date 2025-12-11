@@ -179,6 +179,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Disk_labelOn", "Disk_labelOn");
         this.settings.bind("thickness", "thickness");
         this.settings.bind("useIconSize", "useIconSize", () => { this.set_panelHeight(); });
+        this.settings.bind("graphHeight", "graphHeight", () => { this.set_panelHeight(); });
         this.settings.bind("refreshRate", "refreshRate", () => { this.run_main_loop(); });
         this.settings.bind("labelColor", "labelColor");
         this.settings.bind("borderColor", "borderColor");
@@ -324,6 +325,8 @@ class MCSM extends Applet.IconApplet {
         this.iconSize = this.getPanelIconSize(St.IconType.FULLCOLOR);
         if (this.useIconSize)
             this.panelHeight = this.iconSize;
+        else if (this.graphHeight)
+            this.panelHeight = this.graphHeight * global.ui_scale;
         else
             this.panelHeight = this._panelHeight;
     }
@@ -359,6 +362,7 @@ class MCSM extends Applet.IconApplet {
         this._isHighlighted;
         if (this.without_any_graph) return;
         let xOffset = 0;
+        let yOffset = Math.max(0, Math.floor((this._panelHeight - this.panelHeight) / 2));
         for (let i = 0, len = properties.length; i < len; i++) {
             if (properties[i].abbrev === 'Swap') {
                 continue;
@@ -366,7 +370,7 @@ class MCSM extends Applet.IconApplet {
             if (this[properties[i].provider].isEnabled) {
                 // translate origin to the new location for the graph
                 let areaContext = area.get_context();
-                areaContext.translate(xOffset, 0);
+                areaContext.translate(xOffset, yOffset);
                 let width = (this[`${properties[i].abbrev}_squared`] === true) ? this.panelHeight : this[`${properties[i].abbrev}_width`] * global.ui_scale;
                 if (properties[i].abbrev === 'Mem') {
                     // paint the "swap" backdrop
@@ -399,7 +403,7 @@ class MCSM extends Applet.IconApplet {
                     this[properties[i].provider].getColorList()
                 );
                 // return translation to origin
-                areaContext.translate(-xOffset, 0);
+                areaContext.translate(-xOffset, -yOffset);
                 // update xOffset for next translation
                 if (i === len - 1)
                     xOffset += width;
