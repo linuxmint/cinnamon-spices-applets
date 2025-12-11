@@ -490,7 +490,8 @@ class MCSM extends Applet.IconApplet {
 
         this.closeSettingsWindow();
 
-        let pid = Util.spawnCommandLine(`cinnamon-settings applets ${UUID} -i ${this.instance_id} -t ${tab}`);
+        //~ let pid = Util.spawnCommandLine(`cinnamon-settings applets ${UUID} -i ${this.instance_id} -t ${tab}`);
+        let pid = Util.spawnCommandLine(`xlet-settings -i ${this.instance_id} -t ${tab} applet ${UUID}`);
 
         if (maximize_vertically) {
           var app = null;
