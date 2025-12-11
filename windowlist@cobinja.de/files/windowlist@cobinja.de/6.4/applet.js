@@ -860,7 +860,6 @@ class CobiAppButton {
   }
   
   updateProgressSize() {
-    global.log("Progress: " + this.progress);
     this.progressActor.natural_height = this._applet._panelHeight;
     if (this.progress > 0.0) {
       this.progressActor.set_width(this.actor.get_width() * (this.progress / 100));
@@ -873,12 +872,14 @@ class CobiAppButton {
   _updateProgress(_) {
     let progress = 0.0;
     let numProgressWindows = 0;
-    this._windows.forEach((window) => {
-      if (window.progress > 0.0) {
-        progress += window.progress;
-        numProgressWindows++;
-      }
-    });
+    if (this._settings.getValue("show_progress-indicator")) {
+      this._windows.forEach((window) => {
+        if (window.progress > 0.0) {
+          progress += window.progress;
+          numProgressWindows++;
+        }
+      });
+    }
     if (progress > 0.0) {
       this.progress = progress / numProgressWindows;
     }
@@ -1432,7 +1433,7 @@ class CobiAppButton {
     subMenu.menu.addMenuItem(item);
     
     item = new PopupMenu.PopupIconMenuItem(_("Configure..."), "system-run", St.IconType.SYMBOLIC);
-    item.connect("activate", Lang.bind(this._applet, this._applet.configureApplet));
+    item.connect("activate", () => this._applet.configureApplet());
     subMenu.menu.addMenuItem(item);
     
     item = new PopupMenu.PopupIconMenuItem(_("Remove '%s'").format(_(this._applet._meta.name)), "edit-delete", St.IconType.SYMBOLIC);
