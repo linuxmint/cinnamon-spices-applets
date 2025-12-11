@@ -910,7 +910,6 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
             this.box.add(menuItem.actor);
         } else {
             let items = this._getMenuItems();
-            //~ if (position < items.length) {
             if (position < items.length - 1) {
                 before_item = items[position].actor;
                 this.box.insert_child_below(menuItem.actor, before_item);
@@ -4913,7 +4912,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
               if (exitCode === 0) {
                   if (stdout.startsWith("opt1")) {
                     //~ spawnCommandLineAsync("cinnamon-settings extensions -t download");
-                    spawnCommandLine("cinnamon-settings extensions -t download");
+                    spawnCommandLine("cinnamon-settings extensions -t 1");
                   } else {
                     this.OSDhorizontal = false;
                   }
@@ -5351,7 +5350,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             (stdout, stderr, exitCode) => {
               if (exitCode === 0) {
                 if (stdout.startsWith("opt1")) {
-                  spawn(["cinnamon-settings", "desklets", "-t", "download"]);
+                  spawn(["cinnamon-settings", "desklets", "-t", "1"]);
                 }
               }
             }
@@ -5649,6 +5648,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this._set_settings_options();
 
     let pid = spawnCommandLine(XS_PATH + " applet " + this._uuid + " -i " + this.instance_id + " -t " + tab);
+    //~ let pid = spawnCommandLine(XS_PATH + " -i " + this.instance_id + " -t " + tab + " applet " + this._uuid);
 
     if (maximize_vertically) {
       var app = null;
@@ -6302,8 +6302,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   // Behavior:
 
   on_desklet_open_settings_button_clicked() {
-    //~ spawnCommandLineAsync("cinnamon-settings desklets "+DESKLET_UUID);
-    spawnCommandLine("cinnamon-settings desklets "+DESKLET_UUID);
+    spawnCommandLine("xlet-settings desklet "+DESKLET_UUID);
   }
 
   _is_desklet_activated() {
