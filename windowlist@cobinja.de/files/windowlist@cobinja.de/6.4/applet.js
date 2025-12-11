@@ -760,12 +760,29 @@ class CobiAppButton {
     
     this._pinned = false;
     
-    this.actor = new St.BoxLayout({style_class: "grouped-window-list-item-box",
-                                   track_hover: true,
-                                   can_focus: true,
-                                   reactive: true
+    this.actor = new St.Widget({
+      style_class: "grouped-window-list-item-box",
+      track_hover: true,
+      can_focus: true,
+      reactive: true,
+      layout_manager: new Clutter.FixedLayout()
     });
     
+    this.progressBox = new St.BoxLayout();
+    this.progress = 0.0;
+    this.progressActor = new St.Widget({
+      style_class: "progress",
+      reactive: false,
+      track_hover: false,
+      can_focus: false,
+      important: true
+    });
+    this.actor.add_actor(this.progressBox);
+    this.progressBox.add_actor(this.progressActor);
+    this.updateProgressSize();
+    
+    this.contentActor = new St.BoxLayout();
+    this.actor.add_actor(this.contentActor);
     this._label = new St.Label();
     this._labelBox = new St.Bin({natural_width: 0, min_width: 0,
                                  x_align: St.Align.START});
@@ -775,8 +792,8 @@ class CobiAppButton {
     
     this.actor._delegate = this;
     this._iconBox = new St.Group();
-    this.actor.add_actor(this._iconBox);
-    this.actor.add_actor(this._labelBox);
+    this.contentActor.add_actor(this._iconBox);
+    this.contentActor.add_actor(this._labelBox);
     
     this._icon = null;
     this._iconBin = new St.Bin({name: "appMenuIcon"});
@@ -834,6 +851,41 @@ class CobiAppButton {
     this._draggable.connect("drag-end", Lang.bind(this, this._onDragEnd));
     
     this.isDraggableApp = true;
+  }
+  
+  onPanelHeightChanged() {
+    this.updateIcon();
+    this.updateProgressSize();
+    
+  }
+  
+  updateProgressSize() {
+    global.log("Progress: " + this.progress);
+    this.progressActor.natural_height = this._applet._panelHeight;
+    if (this.progress > 0.0) {
+      this.progressActor.set_width(this.actor.get_width() * (this.progress / 100));
+    }
+    else {
+      this.progressActor.set_width(0);
+    }
+  }
+  
+  _updateProgress(_) {
+    let progress = 0.0;
+    let numProgressWindows = 0;
+    this._windows.forEach((window) => {
+      if (window.progress > 0.0) {
+        progress += window.progress;
+        numProgressWindows++;
+      }
+    });
+    if (progress > 0.0) {
+      this.progress = progress / numProgressWindows;
+    }
+    else {
+      this.progress = 0.0;
+    }
+    this.updateProgressSize();
   }
   
   get_app_id() {
@@ -895,6 +947,7 @@ class CobiAppButton {
     this._updateCurrentWindow();
     this._updateNumber();
     this._updateLabel();
+    this._updateProgress(metaWindow);
     
     this._signalManager.connect(metaWindow, "notify::title", this._updateLabel, this);
     this._signalManager.connect(metaWindow, "notify::minimized", this._onMinimized, this);
@@ -904,6 +957,7 @@ class CobiAppButton {
     this._signalManager.connect(metaWindow, "notify::wm-class", this._onWmClassChanged, this);
     this._signalManager.connect(metaWindow, "workspace-changed", this._onWindowWorkspaceChanged, this);
     this._signalManager.connect(metaWindow, "notify::appears-focused", this._updateFocus, this);
+    this._signalManager.connect(metaWindow, "notify::progress", this._updateProgress, this);
     
     this.actor.add_style_pseudo_class("active");
     this._updateTooltip();
@@ -920,6 +974,7 @@ class CobiAppButton {
     this._signalManager.disconnect("notify::gtk-application-id", metaWindow);
     this._signalManager.disconnect("notify::wm-class", metaWindow);
     this._signalManager.disconnect("workspace-changed", metaWindow);
+    this._signalManager.disconnect("notify::progress", metaWindow);
     
     let arIndex = this._windows.indexOf(metaWindow);
     if (arIndex >= 0) {
@@ -940,6 +995,7 @@ class CobiAppButton {
     this._updateNumber();
     this._updateLabelVisibility();
     this._updateVisibility();
+    this._updateProgress();
   }
   
   _updateCurrentWindow() {
@@ -1135,6 +1191,7 @@ class CobiAppButton {
         this._inhibitLabel = false;
         break;
     }
+    this.updateProgressSize();
   }
   
   _flashButton() {
@@ -1663,6 +1720,7 @@ class CobiWorkspace {
   onPanelHeightChanged() {
     for (let i in this._appButtons) {
       this._appButtons[i].updateIcon();
+      this._appButtons[i].updateProgressSize();
     }
   }
   
