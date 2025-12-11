@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Sensors@claudiux Czech 3.9.0\n"
+"Project-Id-Version: Sensors@claudiux Czech 5.8.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-03-30 14:17+0200\n"
-"PO-Revision-Date: 2025-01-08 19:22+0100\n"
+"PO-Revision-Date: 2025-09-14 13:25+0200\n"
 "Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -127,7 +127,7 @@ msgstr ""
 
 #. lib/checkDependencies.js:385
 msgid "Please install these packages:"
-msgstr ""
+msgstr "Je nutné instalovat následující balíčky:"
 
 #. lib/checkDependencies.js:389 lib/checkDependencies.js:399
 msgid "Some dependencies are not installed!"
@@ -135,7 +135,7 @@ msgstr "Některé závislosti nejsou nainstalované!"
 
 #. lib/checkDependencies.js:401
 msgid "Install these packages now"
-msgstr ""
+msgstr "Balíčky nainstalovat nyní"
 
 #. lib/util.js:244
 #, javascript-format
@@ -201,16 +201,15 @@ msgstr ""
 
 #. metadata.json->contributors
 msgid "claudiux: Author. JEleniel: support for NVidia video cards."
-msgstr ""
+msgstr "claudiux: Autor. JEleniel: podpora grafických karet NVidia."
 
 #. settings-schema.json->page_Temperatures->title
 msgid "⦿ Temperature"
 msgstr "⦿  Teploty"
 
 #. settings-schema.json->page_Fans->title
-#, fuzzy
 msgid "𖣘 Fan"
-msgstr "🤂 Větráky"
+msgstr "𖣘 Větráky"
 
 #. settings-schema.json->page_Voltages->title
 msgid "🗲 Voltage"
@@ -400,27 +399,27 @@ msgstr "Velikost písma (% standardní velikosti)"
 
 #. settings-schema.json->horizontal_width->description
 msgid "Display width (pixels) for horizontal panels"
-msgstr ""
+msgstr "Šířka zobrazení (v pixelech) pro horizontální panely"
 
 #. settings-schema.json->horizontal_width->tooltip
 msgid "0 means automatic. This value does not include border."
-msgstr ""
+msgstr "0 znamená automaticky. Hodnota nezahrnuje okraj."
 
 #. settings-schema.json->separator_type->options
 msgid "(none)"
-msgstr ""
+msgstr "(žádný)"
 
 #. settings-schema.json->separator_type->options
 msgid "blank"
-msgstr ""
+msgstr "prázdný"
 
 #. settings-schema.json->separator_type->options
 msgid "bar"
-msgstr ""
+msgstr "příčka"
 
 #. settings-schema.json->separator_type->description
 msgid "Separator"
-msgstr ""
+msgstr "Oddělovač"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
@@ -431,18 +430,12 @@ msgid "Text Color"
 msgstr "Barva textu"
 
 #. settings-schema.json->crit_color->description
-#, fuzzy
 msgid "Critical Value Color"
-msgstr ""
-"Kritická\n"
-"hodnota"
+msgstr "Barva kritické hodnoty"
 
 #. settings-schema.json->high_color->description
-#, fuzzy
 msgid "High Value Color"
-msgstr ""
-"Vysoká\n"
-"hodnota"
+msgstr "Barva vysoké hodnoty"
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -454,7 +447,7 @@ msgstr "Určuje jestli údaje zobrazit s linkou kolem appletu či bez ní."
 
 #. settings-schema.json->remove_icons->description
 msgid "Remove icons"
-msgstr "Odstranit ikony"
+msgstr "Odebrat ikony"
 
 #. settings-schema.json->remove_icons->tooltip
 msgid "Whether or not to remove icons in panel."
@@ -521,7 +514,7 @@ msgstr ""
 #. settings-schema.json->show_intrusion_name->description
 #. settings-schema.json->show_custom_name->description
 msgid "Display the 'Shown name' of each of these selected sensors"
-msgstr "Zobrazovat se hodnotami vybraných senzorů i 'Zobrazované jméno'"
+msgstr "Zobrazovat 'Zobrazované jméno' každého z vybraných senzorů"
 
 #. settings-schema.json->show_temp_name->tooltip
 #. settings-schema.json->show_fan_name->tooltip
@@ -535,14 +528,14 @@ msgstr ""
 
 #. settings-schema.json->chars_temp->tooltip
 msgid "The first emoji in this list is used for temperature"
-msgstr ""
+msgstr "První emodži v seznamu je použité pro teplotu"
 
 #. settings-schema.json->chars_temp->columns->title
 #. settings-schema.json->chars_fan->columns->title
 #. settings-schema.json->chars_volt->columns->title
 #. settings-schema.json->chars_intrusion->columns->title
 msgid "Emoji"
-msgstr ""
+msgstr "Emodži"
 
 #. settings-schema.json->strictly_positive_temp->description
 #. settings-schema.json->strictly_positive_volt->description
@@ -731,12 +724,11 @@ msgstr ""
 
 #. settings-schema.json->chars_fan->tooltip
 msgid "The first emoji in this list is used for fan"
-msgstr ""
+msgstr "První emodži v tomto seznamu je použité pro větrák"
 
 #. settings-schema.json->strictly_positive_fan->description
-#, fuzzy
 msgid "Show only positive or zero values"
-msgstr "Zobrazovat výhradně kladné hodnoty"
+msgstr "Zobrazovat výhradně nulu a kladné hodnoty"
 
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
@@ -783,7 +775,7 @@ msgstr ""
 
 #. settings-schema.json->chars_volt->tooltip
 msgid "The first emoji in this list is used for voltage"
-msgstr ""
+msgstr "První emodži v seznamu je použité pro napětí"
 
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
@@ -859,7 +851,7 @@ msgstr ""
 
 #. settings-schema.json->chars_intrusion->tooltip
 msgid "The first emoji in this list is used for intrusion"
-msgstr ""
+msgstr "První emodži v seznamu je použité pro narušení"
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"

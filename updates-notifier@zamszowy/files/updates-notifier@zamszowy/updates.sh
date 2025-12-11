@@ -12,26 +12,35 @@ check)
     if [[ "$refreshMode" = "updates" ]]; then
         pkcon refresh &>/dev/null
     fi
-    pkcon get-updates &>/dev/null
+
+    if ! out=$(pkcon get-updates 2>&1); then
+        echo ERROR
+        echo "$out" > "$DIR/error"
+        exit 0
+    fi
+
     pkcon get-packages --filter installed &>/dev/null
 
-    if [[ "$refreshMode" = "updates" ]]; then
-        if command -v fwupdmgr &>/dev/null && command -v jq &>/dev/null; then
+    if command -v fwupdmgr &>/dev/null && command -v jq &>/dev/null; then
+        if [[ "$refreshMode" = "updates" ]]; then
             fwupdmgr refresh &>/dev/null
-            fwupdmgr get-updates --json 2>/dev/null | jq -r '
+        fi
+        fwupdmgr get-updates --no-authenticate --json 2>/dev/null | jq -r '
             .Devices[]
             | select(.Releases | length > 0)
             | . as $d
             | $d.Releases[]
             | "\($d.Name)#\($d.DeviceId)#\($d.Version)#\(.Version)#\($d.Summary)"
         ' 2>/dev/null
-        fi
     fi
 
     sleep 1 # give time for transaction to finish
     ;;
 view)
     /usr/bin/cjs "$DIR"/info-window.js "$DIR" "$DIR"/updates
+    ;;
+error)
+    /usr/bin/cjs "$DIR"/error-window.js "$DIR"/error
     ;;
 command)
     readonly cmd=$2

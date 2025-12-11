@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 2.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-24 18:34+0200\n"
+"POT-Creation-Date: 2025-12-01 10:57+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,40 +18,56 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.6\n"
 
-#. applet.js:76
+#. applet.js:79
 msgid "missing dependencies"
 msgstr "dependències no instal·lades"
 
-#. applet.js:202
+#. applet.js:230
+msgid "View error details"
+msgstr ""
+
+#. applet.js:244
 msgid "Check for new updates"
 msgstr "Comprova si hi ha actualitzacions"
 
-#. applet.js:216
+#. applet.js:258
 #, javascript-format
 msgid "View %s updates"
 msgstr "Veure %s actualitzacions"
 
-#. applet.js:216
+#. applet.js:258
 msgid "No updates to view"
 msgstr "No hi ha actualitzacions per a veure"
 
-#. applet.js:231
+#. applet.js:273
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "Actualitza %s paquets"
 
-#. applet.js:231
+#. applet.js:273
 msgid "No packages to upgrade"
 msgstr "No hi ha paquets a actualitzar"
 
-#. applet.js:256
+#. applet.js:299
+msgid "Error checking for updates"
+msgstr ""
+
+#. applet.js:307
 #, javascript-format
 msgid "%s updates available"
 msgstr "%s actualitzacions disponibles"
 
-#. applet.js:257
+#. applet.js:308
 msgid "No updates available"
 msgstr "No hi ha actualitzacions disponibles"
+
+#. error-window.js:16
+msgid "Error"
+msgstr "Error"
+
+#. error-window.js:39
+msgid "Error log file not found."
+msgstr ""
 
 #. info-window.js:66 info-window.js:85
 msgid "No details available."
@@ -75,7 +91,7 @@ msgstr ""
 
 #. info-window.js:108
 msgid "Loading update details…"
-msgstr "Carregant detalls de l'actualització..."
+msgstr "Carregant detalls de l'actualització…"
 
 #. info-window.js:173
 msgid "Updates"
@@ -83,7 +99,7 @@ msgstr "Actualitzacions"
 
 #. info-window.js:188
 msgid "Search updates…"
-msgstr "Busca actualitzacions..."
+msgstr "Busca actualitzacions.…"
 
 #. info-window.js:223
 msgid "{0} updates"
@@ -105,9 +121,33 @@ msgstr "Notificador d'actualitzacions"
 msgid "Shows icons for pending update packages"
 msgstr "Mostra icones per a actualitzacions de paquets pendents"
 
-#. settings-schema.json->section1->description
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr "Comportament"
+
+#. settings-schema.json->pageAppearance->title
+msgid "Appearance"
+msgstr "Aparença"
+
+#. settings-schema.json->sectionSettings->title
 msgid "Settings"
 msgstr "Opcions"
+
+#. settings-schema.json->sectionIconLabel->title
+msgid "Icon/Label"
+msgstr "Icona/Etiqueta"
+
+#. settings-schema.json->sectionClick->title
+msgid "Applet click"
+msgstr "Clic a la miniaplicació"
+
+#. settings-schema.json->sectionMenu->title
+msgid "Menu"
+msgstr "Menú"
+
+#. settings-schema.json->sectionTheme->title
+msgid "Theme"
+msgstr "Tema"
 
 #. settings-schema.json->update-refresh->description
 msgid "Minutes to wait before refreshing updates"
@@ -124,8 +164,8 @@ msgstr "Amaga la miniaplicació si no hi ha actualitzacions"
 #. settings-schema.json->different-levels->description
 msgid "Show different applet icon for different updgradeable packages count"
 msgstr ""
-"Mostra una icona de la miniaplicació diferent per números "
-"d'actualitzacions diferents"
+"Mostra una icona de la miniaplicació diferent per números d'actualitzacions "
+"diferents"
 
 #. settings-schema.json->level-1->description
 msgid "Show low level icon when updates count is between 0 and this value "
@@ -142,25 +182,33 @@ msgstr ""
 "entre 0 i aquest valor. Mostra la icona de comptador alt quan el número "
 "sigui major a aquest valor."
 
-#. settings-schema.json->section2->description
-msgid "Applet click"
-msgstr "Clic a la miniaplicació"
+#. settings-schema.json->show-label->description
+msgid "Show label with updates count"
+msgstr "Mostra una etiqueta amb un comptador d'actualitzacions"
+
+#. settings-schema.json->label-font-size->description
+msgid "Label font size"
+msgstr "Mida de la font de l'etiqueta"
+
+#. settings-schema.json->label-font-weight->description
+msgid "Label font weight"
+msgstr "Gruix de la font de l'etiqueta"
+
+#. settings-schema.json->label-vertical-position->description
+msgid "Label vertical position"
+msgstr "Posició vertical de l'etiqueta"
 
 #. settings-schema.json->show-window-on-click->description
 msgid "Show updates window on left click and menu entries on right click"
 msgstr ""
-"Mostra la finestra d'actualitzacions en fer clic esquerre i els elements "
-"del menú en fer clic dret"
+"Mostra la finestra d'actualitzacions en fer clic esquerre i els elements del "
+"menú en fer clic dret"
 
 #. settings-schema.json->refresh-when-no-updates->description
 msgid "Refresh updates list on left click if there are no updates"
 msgstr ""
 "Refresca la llista d'actualitzacions en fer clic esquerre si no hi ha "
 "actualitzacions"
-
-#. settings-schema.json->section3->description
-msgid "Menu"
-msgstr "Menú"
 
 #. settings-schema.json->commandUpdate-show->description
 msgid "Show \"Check for new updates\" command"
@@ -173,10 +221,6 @@ msgstr "Mostra l'ordre \"Actualitzar paquets\""
 #. settings-schema.json->commandUpgrade->description
 msgid "Upgrade packages command:"
 msgstr "Ordre d'actualitzar paquets:"
-
-#. settings-schema.json->section4->description
-msgid "Theme"
-msgstr "Tema"
 
 #. settings-schema.json->icon-style->description
 msgid "Icon style"

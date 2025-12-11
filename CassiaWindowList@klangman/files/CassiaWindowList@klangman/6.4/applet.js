@@ -618,12 +618,12 @@ function destroyHoverPeekClone(hoverClone, delayId, time, instant=false) {
          Mainloop.source_remove(delayId);
       }
    }
-   if (hoverClone) {
+   if (hoverClone != null) {
       if (!instant && time) {
-         Tweener.addTween(hoverClone, {time: time, transition: 'easeOutQuad', opacity: 0, onComplete: () => {global.overlay_group.remove_child(hoverClone); hoverClone.destroy();}});
+         Tweener.addTween(hoverClone, {time: time, transition: 'easeOutQuad', opacity: 0, onComplete: () => {global.overlay_group.remove_child(hoverClone); try { hoverClone.destroy(); } catch(e) {} }});
       } else {
          global.overlay_group.remove_child(hoverClone);
-         hoverClone.destroy();
+         try { hoverClone.destroy(); } catch(e) {}
       }
    }
    return null;
@@ -1036,7 +1036,7 @@ class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
              this.actor.hide();
              this.actor.set_width(-1);
              this._menu._inHiding = false;
-             this.destroy();
+             try {this.destroy();} catch(e) {}
            })
          });
        } else {
@@ -1051,14 +1051,14 @@ class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
              this.actor.hide();
              this.actor.set_width(-1);
              this._menu._inHiding = false;
-             this.destroy();
+             try {this.destroy();} catch(e) {}
            })
          });
        }
     } else {
       this.actor.hide();
       this._menu._inHiding = false;
-      this.destroy();
+      try {this.destroy();} catch(e) {}
     }
   }
 
@@ -1236,7 +1236,7 @@ class ThumbnailMenu extends PopupMenu.PopupMenu {
 
   _clearDragPlaceholder() {
     if (this._dragPlaceholder) {
-      this._dragPlaceholder.actor.destroy();
+      try{this._dragPlaceholder.actor.destroy();} catch(e) {}
       this._dragPlaceholder = undefined;
       this._dragPlaceholderPos = undefined;
     }
@@ -1477,6 +1477,8 @@ class WindowListButton {
                                    track_hover: false, can_focus: true, reactive: true});
     this.actor._delegate = this;
 
+    this._labelNumberBox = new St.BoxLayout();
+
     this._shrukenLabel = false;
     this._minLabelSize = -1;
     this._lableWidth = 0;
@@ -1502,7 +1504,7 @@ class WindowListButton {
     this._iconBin._delegate = this;
     this._iconBox.add_actor(this._iconBin);
 
-    this._labelNumberBox = new St.BoxLayout();
+    //~ this._labelNumberBox = new St.BoxLayout();
     this._labelNumberBin = new St.Bin({
       important: true, style_class: "grouped-window-list-badge", x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE});
     this._labelNumber = new St.Label({style_class: "grouped-window-list-number-label"});
@@ -4252,7 +4254,7 @@ class Workspace {
     let index = this._appButtons.indexOf(appButton);
     if (index >= 0) {
        this._appButtons.splice(index, 1);
-       appButton.destroy();
+       try{appButton.destroy();} catch(e) {}
     }
   }
 
@@ -4668,7 +4670,7 @@ class Workspace {
          appButton.updateView();
       }
     }
-    this.actor.queue_relayout();
+    try{this.actor.queue_relayout();} catch(e) {}
   }
 
   _updateFocus() {
@@ -4905,7 +4907,7 @@ class Workspace {
 
   _clearDragPlaceholder() {
     if (this._dragPlaceholder) {
-      this._dragPlaceholder.actor.destroy();
+      try{this._dragPlaceholder.actor.destroy();} catch(e) {};
       this._dragPlaceholder = undefined;
       this._dragPlaceholderPos = undefined;
     }
@@ -4986,10 +4988,10 @@ class Workspace {
     this._settings.setValue("pinned-apps", pinSetting);
 
     for (let i = this._appButtons.length - 1; i >= 0; i--) {
-      this._appButtons[i].destroy();
+      try{this._appButtons[i].destroy();} catch(e) {};
     }
     this._appButtons = null;
-    this.actor.destroy();
+    try{this.actor.destroy();} catch(e) {}
   }
 
   // Find the application with the most Buttons
@@ -5822,7 +5824,7 @@ class WindowList extends Applet.Applet {
      let window = global.display.get_focus_window();
      let currentWs = global.screen.get_active_workspace_index();
      //log( `Global, focus changed to ${window.get_title()} for ws ${currentWs}` );
-     this._workspaces[currentWs]._updateFocus();
+     try {this._workspaces[currentWs]._updateFocus();} catch(e) {}
   }
 
   on_applet_removed_from_panel() {
@@ -5911,7 +5913,7 @@ class WindowList extends Applet.Applet {
         this._workspaces[i]._wsNum = i;
       }
 
-      workspace.destroy();
+      try{workspace.destroy();} catch(e) {}
     }
   }
 

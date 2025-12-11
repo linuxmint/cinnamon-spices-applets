@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-15 16:04-0400\n"
+"POT-Creation-Date: 2025-10-15 02:11-0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -16,25 +16,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.8\n"
 
-#. 5.4/applet.js:25
+#. 5.4/applet.js:28
 msgid "Power Saver"
 msgstr "Energiatakarékos"
 
-#. 5.4/applet.js:26
+#. 5.4/applet.js:29
 msgid "Balanced"
 msgstr "Kiegyensúlyozott"
 
-#. 5.4/applet.js:27
+#. 5.4/applet.js:30
 msgid "Performance"
 msgstr "Teljesítmény"
 
-#. 5.4/applet.js:60
+#. 5.4/applet.js:63 5.4/applet.js:70
+msgid ""
+"Please make sure the power-profiles-daemon package is installed and the "
+"service is running."
+msgstr ""
+"Győződjön meg arról, hogy telepítve van a power-profiles-daemon csomag, és "
+"hogy a szolgáltatás fut."
+
+#. 5.4/applet.js:64
+msgid "exception:"
+msgstr "kivétel:"
+
+#. 5.4/applet.js:117
 msgid "Power Profiles Applet Error"
 msgstr "Teljesítményprofilok kisalkalmazás hiba"
 
-#. 5.4/applet.js:61
+#. 5.4/applet.js:118
 msgid ""
 "The system package 'power-profiles-daemon' is not installed.\n"
 "\n"
@@ -44,35 +56,23 @@ msgstr ""
 "\n"
 "Telepítse és töltse be újra a kisalkalmazást."
 
-#. 5.4/applet.js:63
+#. 5.4/applet.js:120
 msgid "Open README"
 msgstr "README megnyitása"
 
-#. 5.4/applet.js:64
+#. 5.4/applet.js:121
 msgid "Open Website"
 msgstr "Webhely megnyitása"
 
-#. 5.4/applet.js:88 5.4/applet.js:94
-msgid ""
-"Please make sure the power-profiles-daemon package is installed and the "
-"service is running."
-msgstr ""
-"Győződjön meg arról, hogy telepítve van a power-profiles-daemon csomag, és "
-"hogy a szolgáltatás fut."
-
-#. 5.4/applet.js:89
-msgid "exception:"
-msgstr "kivétel:"
-
-#. 5.4/applet.js:138
+#. 5.4/applet.js:151
 msgid "Current Profile:"
 msgstr "Aktuális profil:"
 
-#. 5.4/applet.js:143
+#. 5.4/applet.js:156
 msgid "Performance Degraded:"
 msgstr "Csökkent teljesítmény:"
 
-#. 5.4/applet.js:154
+#. 5.4/applet.js:167
 msgid "Active Profile Holds:"
 msgstr "Aktív profil megtartása:"
 
@@ -87,6 +87,48 @@ msgstr ""
 #. metadata.json->name
 msgid "Power Profiles"
 msgstr "Teljesítményprofilok"
+
+#. 5.4->settings-schema.json->section0->description
+msgid "General"
+msgstr "Általános"
+
+#. 5.4->settings-schema.json->cycleProfiles->description
+msgid "Cycle through profiles when using keyboard shortcuts or scroll wheel"
+msgstr "Profilok közötti váltás billentyűparancsok vagy görgő használatakor"
+
+#. 5.4->settings-schema.json->cycleProfiles->tooltip
+msgid ""
+"If enabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the next profile would be 'Performance' "
+"(or 'Balanced' on some systems).\n"
+"\n"
+"If disabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the profile would not change."
+msgstr ""
+"Ha engedélyezve van, és a jelenleg az „Energiatakarékos” profil van "
+"használatban, továbbá a „Korábbi profil” gyorsbillentyű kerül használatra, "
+"akkor a következő „Teljesítmény” profil lesz (vagy „Kiegyensúlyozott” néven "
+"elérhető néhány rendszeren).\n"
+"\n"
+"Ha le van tiltva, és a jelenlegi „Energiatakarékos” profil, valamint a "
+"„Korábbi profil” gyorsbillentyű kerül használatra, akkor a profil nem fog "
+"változni."
+
+#. 5.4->settings-schema.json->scrollBehavior->description
+msgid "Scroll wheel behavior"
+msgstr "Görgő viselkedése"
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Nothing"
+msgstr "Semmi"
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles"
+msgstr "Profilok váltása"
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles (reversed)"
+msgstr "Profilok váltása (fordítva)"
 
 #. 5.4->settings-schema.json->section1->description
 msgid "Keyboard Shortcuts"
@@ -108,28 +150,6 @@ msgstr "Következő profil"
 msgid "Set keybinding(s) to switch to next power profile."
 msgstr ""
 "Gyorsbillentyű beállítása a következő energiaprofilra történő váltáshoz."
-
-#. 5.4->settings-schema.json->cycleProfiles->description
-msgid "Cycle through profiles when using keyboard shortcuts"
-msgstr "Profilok közötti váltás gyorsbillentyű használatakor"
-
-#. 5.4->settings-schema.json->cycleProfiles->tooltip
-msgid ""
-"If enabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the next profile would be "
-"'Performance' (or 'Balanced' on some systems).\n"
-"\n"
-"If disabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the profile would not change."
-msgstr ""
-"Ha engedélyezve van, és a jelenleg az „Energiatakarékos” profil van "
-"használatban, továbbá a „Korábbi profil” gyorsbillentyű kerül használatra, "
-"akkor a következő „Teljesítmény” profil lesz (vagy „Kiegyensúlyozott” néven "
-"elérhető néhány rendszeren).\n"
-"\n"
-"Ha le van tiltva, és a jelenlegi „Energiatakarékos” profil, valamint a "
-"„Korábbi profil” gyorsbillentyű kerül használatra, akkor a profil nem fog "
-"változni."
 
 #. 5.4->settings-schema.json->showOSD->description
 msgid "On-screen display for keyboard shortcuts"

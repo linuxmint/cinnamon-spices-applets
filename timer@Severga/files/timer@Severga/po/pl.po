@@ -1,0 +1,163 @@
+# TIMER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Severga, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-11-29 10:30-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: szedar14 \n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:45 applet.js:214 applet.js:241 applet.js:268 applet.js:329
+#. applet.js:459 applet.js:531
+msgid "Timer: inactive"
+msgstr "Minutnik: nieaktywny"
+
+#. applet.js:86 applet.js:232 applet.js:259 applet.js:532
+msgid "In:  00:00:00"
+msgstr "Za: 00:00:00"
+
+#. applet.js:89 applet.js:233 applet.js:260 applet.js:281 applet.js:342
+#. applet.js:502 applet.js:534
+msgid "At:  --:--:--"
+msgstr "O: --:--:--"
+
+#. applet.js:92
+msgid "Turn off computer on timer"
+msgstr "Wyłącz komputer po zakończeniu odliczania"
+
+#. settings-schema.json->openSubmenu->options
+#. applet.js:97
+msgid "Quick setup"
+msgstr "Szybka konfiguracja"
+
+#. applet.js:98
+msgid "        Tip: set slider to zero to deactivate timer"
+msgstr "Wskazówka: ustaw suwak na zero, aby dezaktywować minutnik"
+
+#. applet.js:107
+msgid "     00:00:00"
+msgstr "     00:00:00"
+
+#. applet.js:114
+msgid "24:00:00     "
+msgstr "24:00:00     "
+
+#. settings-schema.json->openSubmenu->options
+#. applet.js:128
+msgid "Precise setup"
+msgstr "Dokładna konfiguracja"
+
+#. applet.js:138 applet.js:163 applet.js:188
+msgid "  +  "
+msgstr "  +  "
+
+#. applet.js:142 applet.js:167 applet.js:192
+msgid "00"
+msgstr "00"
+
+#. applet.js:147 applet.js:172 applet.js:197
+msgid "  -  "
+msgstr "  -  "
+
+#. applet.js:155 applet.js:180
+msgid "  :  "
+msgstr "  :  "
+
+#. applet.js:209
+msgid "Set time (today)"
+msgstr "Ustaw godzinę (dzisiaj)"
+
+#. applet.js:236
+msgid "Set time (tomorrow)"
+msgstr "Ustaw godzinę (jutro)"
+
+#. applet.js:263
+msgid "Set period"
+msgstr "Ustaw okres"
+
+#. applet.js:284
+msgid "Add preset"
+msgstr "Dodaj gotowe ustawienie"
+
+#. settings-schema.json->openSubmenu->options
+#. settings-schema.json->preset->description
+#. settings-schema.json->preset->tooltip
+#. applet.js:293
+msgid "Presets"
+msgstr "Gotowe ustawienia"
+
+#. applet.js:315
+msgid ""
+"        Tip: use 'Precise setup' to add preset and  [ × ]  button to remove "
+"preset"
+msgstr ""
+"Wskazówka: użyj „Dokładnej konfiguracji”, aby dodać ustawienie i przycisku "
+"[ × ], aby je usunąć"
+
+#. applet.js:346
+msgid "[ × ]"
+msgstr "[ × ]"
+
+#. applet.js:492 applet.js:514
+msgid "In:  "
+msgstr "Za: "
+
+#. applet.js:498 applet.js:522
+msgid "At:  "
+msgstr "O: "
+
+#. applet.js:524
+msgid "Turn off in "
+msgstr "Wyłącz za "
+
+#. applet.js:524
+msgid "s"
+msgstr "s"
+
+#. applet.js:526
+msgid "Timer: "
+msgstr "Minutnik: "
+
+#. metadata.json->name
+#. applet.js:555
+msgid "Timer"
+msgstr "Minutnik"
+
+#. applet.js:555
+msgid "Time's up!"
+msgstr "Koniec czasu!"
+
+#. metadata.json->description
+msgid "A timer applet"
+msgstr "Aplet minutnika"
+
+#. settings-schema.json->soundOn->description
+#. settings-schema.json->soundOn->tooltip
+msgid "Play sound on timer"
+msgstr "Odtwórz dźwięk po zakończeniu odliczania"
+
+#. settings-schema.json->soundPath->description
+#. settings-schema.json->soundPath->tooltip
+msgid "Soundclip file path"
+msgstr "Ścieżka do pliku dźwiękowego"
+
+#. settings-schema.json->showNotifications->description
+#. settings-schema.json->showNotifications->tooltip
+msgid "Show system notification on timer"
+msgstr "Pokaż powiadomienie systemowe po zakończeniu odliczania"
+
+#. settings-schema.json->openSubmenu->description
+#. settings-schema.json->openSubmenu->tooltip
+msgid "Submenu to open initially"
+msgstr "Podmenu otwierane domyślnie"

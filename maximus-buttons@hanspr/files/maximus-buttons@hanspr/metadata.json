@@ -1,0 +1,10 @@
+{
+    "max-instances": -1,
+    "description": "Maximus buttons",
+    "uuid": "maximus-buttons@hanspr",
+    "name": "Maximus Buttons",
+    "website": "https://github.com/linuxmint/cinnamon-spices-applets",
+    "version": "0.0.1",
+    "author": "hanspr",
+    "contributors": "Hans Peyrot"
+}

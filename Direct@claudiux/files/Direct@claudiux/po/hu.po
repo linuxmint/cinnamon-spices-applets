@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-01 21:18+0200\n"
-"PO-Revision-Date: 2024-07-28 07:58-0400\n"
+"POT-Creation-Date: 2025-11-24 23:49+0100\n"
+"PO-Revision-Date: 2025-11-17 10:08+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,58 +16,66 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.8\n"
 
-#. applet.js:157
+#. applet.js:44 applet.js:578
+msgid "SYSTEM"
+msgstr "RENDSZER"
+
+#. applet.js:44 applet.js:621
+msgid "FAVORITES"
+msgstr "KEDVENCEK"
+
+#. applet.js:44 applet.js:654
+msgid "APPLICATIONS"
+msgstr "ALKALMAZÁSOK"
+
+#. applet.js:44 applet.js:687
+msgid "RECENT DOCUMENTS"
+msgstr "MOSTANÁBAN MEGNYITOTT DOKUMENTUMOK"
+
+#. applet.js:167
 msgid "(Right click to open folder)"
 msgstr "(Jobb egérgomb a mappa megnyitásához)"
 
 #. metadata.json->name
-#. applet.js:222
+#. applet.js:288
 msgid "Direct"
 msgstr "Közvetlen"
 
-#. applet.js:428
+#. applet.js:548
 msgid "Search Home Folder"
 msgstr "Saját mappában keresés"
 
-#. applet.js:455
-msgid "SYSTEM"
-msgstr "RENDSZER"
+#. applet.js:555 applet.js:596 applet.js:629 applet.js:662 applet.js:695
+msgid "Configure"
+msgstr ""
 
-#. applet.js:464
+#. applet.js:589
 msgid "Search File System"
 msgstr "Fájlrendszerben keresés"
 
-#. applet.js:490
-msgid "FAVORITES"
-msgstr ""
-
-#. applet.js:514
-msgid "RECENT DOCUMENTS"
-msgstr "MOSTANÁBAN MEGNYITOTT DOKUMENTUMOK"
-
-#. applet.js:528
+#. applet.js:709
 msgid "Clear"
 msgstr "Törlés"
 
-#. applet.js:535
+#. applet.js:716
 msgid "Recent"
 msgstr "Friss"
 
-#. applet.js:581
+#. applet.js:764
 msgid "Computer"
 msgstr "Számítógép"
 
-#. applet.js:587
+#. applet.js:770
 msgid "File System"
 msgstr "Fájlrendszer"
 
-#. applet.js:604
+#. applet.js:787
 msgid "Network"
 msgstr "Hálózat"
 
-#. applet.js:826
+#. applet.js:1030
 msgid "Trash"
 msgstr "Kuka"
 
@@ -149,12 +157,16 @@ msgid ""
 "Provides direct and easy access to your Directories, Favorites, Recent "
 "documents and System locations"
 msgstr ""
+"Közvetlen és egyszerű hozzáférést biztosít a könyvtárakhoz, kedvencekhez, "
+"legutóbbi dokumentumokhoz és rendszerhelyekhez"
 
 #. metadata.json->comments
 msgid ""
 "The Direct@claudiux applet is a fork from the placesCenter@scollins applet, "
 "with improvements."
 msgstr ""
+"A Direct@claudiux kisalkalmazás a placesCenter@scollins kisalkalmazás egy "
+"továbbfejlesztésekkel bővített elágazása."
 
 #. settings-schema.json->generalPage->title
 msgid "General"
@@ -170,7 +182,7 @@ msgstr "Rendszer"
 
 #. settings-schema.json->favoritesPage->title
 msgid "Favorites"
-msgstr ""
+msgstr "Kedvencek"
 
 #. settings-schema.json->recentPage->title
 #. settings-schema.json->recentSection->title
@@ -201,9 +213,12 @@ msgid "System section"
 msgstr "Rendszer szekció"
 
 #. settings-schema.json->favoritesSection->title
-#, fuzzy
 msgid "Favorite documents"
-msgstr "Mostanában megnyitott dokumentumok mutatása"
+msgstr "Kedvenc dokumentumok"
+
+#. settings-schema.json->favoriteAppsSection->title
+msgid "Favorite apps"
+msgstr "Kedvenc alkalmazások"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -217,6 +232,10 @@ msgstr "Ikon név vagy direkt útvonal (szimbolikus ikonok támogatottak)"
 msgid "Panel text"
 msgstr "Panel szöveg"
 
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr "Nyissa meg a menüt az ikon fölé húzva az egérmutatót"
+
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"
 msgstr "Menü gyorsgomb"
@@ -229,9 +248,29 @@ msgstr "px"
 msgid "Menu icon size"
 msgstr "Menü ikon méret"
 
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr "A menü átrendezéséhez mozgassa ezeket a szakaszokat:"
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->favApps->columns->title
+msgid "Name"
+msgstr "Név"
+
+#. settings-schema.json->displayOrder->description
+msgid "Display order in the menu"
+msgstr "Megjelenítési sorrend a menüben"
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr "Alkalmaz"
+
 #. settings-schema.json->noIconOnPanel->description
 msgid "No icon on panel"
-msgstr ""
+msgstr "Nincs ikon a panelen"
 
 #. settings-schema.json->middleClickPath->description
 msgid "Open on middle click"
@@ -241,10 +280,20 @@ msgstr "Görgő kattintásra megnyitás"
 msgid "Leave blank to disable"
 msgstr "Hagyja üresen a letiltáshoz"
 
+#. settings-schema.json->dontDisplayTooltip->description
+msgid "Do not display the tooltip"
+msgstr "Ne jelenítse meg az eszköztippet"
+
 #. settings-schema.json->showUserSection->description
-#, fuzzy
 msgid "Show User section"
-msgstr "Felhasználó szekció"
+msgstr "Felhasználói szakasz megjelenítése"
+
+#. settings-schema.json->showUserSettingsAccessIcon->description
+#. settings-schema.json->showSystemSettingsAccessIcon->description
+#. settings-schema.json->showFavoritesSettingsAccessIcon->description
+#. settings-schema.json->showRecentSettingsAccessIcon->description
+msgid "Show the settings access icon"
+msgstr ""
 
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
@@ -253,18 +302,12 @@ msgstr "Asztal mutatása"
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 msgid "URI"
-msgstr ""
-
-#. settings-schema.json->listUserCustomPlaces->columns->title
-#. settings-schema.json->listSystemCustomPlaces->columns->title
-#. settings-schema.json->favoriteSortingMethod->options
-msgid "Name"
-msgstr ""
+msgstr "URI"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 msgid "Icon Name"
-msgstr ""
+msgstr "Ikon neve"
 
 #. settings-schema.json->showTrash->description
 msgid "Show trash"
@@ -283,9 +326,8 @@ msgid "When not empty"
 msgstr "Amikor nem üres"
 
 #. settings-schema.json->showSystemSection->description
-#, fuzzy
 msgid "Show System section"
-msgstr "Rendszer szekció"
+msgstr "Rendszer szakasz megjelenítése"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"
@@ -308,19 +350,18 @@ msgid "Show network"
 msgstr "Hálózat mutatása"
 
 #. settings-schema.json->showFavorites->description
-#, fuzzy
 msgid "Show favorite documents"
-msgstr "Mostanában megnyitott dokumentumok mutatása"
+msgstr "Kedvenc dokumentumok megjelenítése"
 
 #. settings-schema.json->favoriteSortingMethod->options
 #. settings-schema.json->sortingMethod->options
 msgid "Added time"
-msgstr ""
+msgstr "Hozzáadott idő"
 
 #. settings-schema.json->favoriteSortingMethod->description
 #. settings-schema.json->sortingMethod->description
 msgid "Sorting method"
-msgstr ""
+msgstr "Rendezési módszer"
 
 #. settings-schema.json->favoriteSizeLimit->options
 #. settings-schema.json->recentSizeLimit->options
@@ -353,9 +394,8 @@ msgid "30"
 msgstr "30"
 
 #. settings-schema.json->favoriteSizeLimit->options
-#, fuzzy
 msgid "All Favorite Documents"
-msgstr "Minden mostanában megnyitott dokumentum"
+msgstr "Minden kedvenc dokumentum"
 
 #. settings-schema.json->favoriteSizeLimit->description
 #. settings-schema.json->recentSizeLimit->description
@@ -367,17 +407,52 @@ msgstr "Megjelenítendő darabszám"
 msgid "Show complete path in tooltips"
 msgstr "Teljes útvonal megjelenítése az eszköztippekben"
 
+#. settings-schema.json->favoriteIconIsStar->description
+msgid "Replace icons with stars"
+msgstr "Cserélje le az ikonokat csillagokra"
+
+#. settings-schema.json->showFavoriteApps->description
+msgid "Show favorite apps"
+msgstr "Kedvenc alkalmazások megjelenítése"
+
+#. settings-schema.json->favAppsLabel->description
+msgid ""
+"Below are the favorite applications displayed in the menu when checked.\n"
+"The Name can be changed.\n"
+"The Launcher must not be changed."
+msgstr ""
+"Az alábbiakban a menüben megjelenő kedvenc alkalmazások láthatók, ha be "
+"vannak jelölve.\n"
+"A név módosítható.\n"
+"Az Indítót nem szabad módosítani."
+
+#. settings-schema.json->favApps->description
+msgid "Favorite apps shown"
+msgstr "Kedvenc alkalmazások megjelenítése"
+
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr "Menü"
+
+#. settings-schema.json->favApps->columns->title
+msgid "⚠️ Launcher"
+msgstr "⚠️ Indító"
+
+#. settings-schema.json->favAppsPopulateButton->description
+msgid "Add all your Favorite Apps"
+msgstr "Add hozzá az összes kedvenc alkalmazásodat"
+
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
 msgstr "Mostanában megnyitott dokumentumok mutatása"
 
 #. settings-schema.json->sortingMethod->options
 msgid "Access time"
-msgstr ""
+msgstr "Hozzáférési idő"
 
 #. settings-schema.json->sortingMethod->options
 msgid "Modification time"
-msgstr ""
+msgstr "Módosítási idő"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "All Recent Documents"
@@ -389,4 +464,4 @@ msgstr "Titoktartás"
 
 #. settings-schema.json->btnIconBrowser->description
 msgid "Icon browser"
-msgstr ""
+msgstr "Ikonböngésző"

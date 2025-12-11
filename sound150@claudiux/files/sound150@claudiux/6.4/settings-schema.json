@@ -20,6 +20,7 @@
       "type": "page",
       "title": "Behavior",
       "sections": [
+        "sectionBehavior1",
         "sectionBehavior2",
         "sectionBehavior3"
       ]
@@ -63,7 +64,9 @@
         "avoidTwice",
         "dontShowAnyImageInMenu",
         "showMediaOptical",
-        "viewFullAlbumArt"
+        "viewFullAlbumArt",
+        "shortenArtistTitle",
+        "doNotUsePlayerctld"
       ]
     },
     "sectionMenu2": {
@@ -74,6 +77,13 @@
         "keepOutputListOpen",
         "keepInputListOpen",
         "keepCommandListOpen"
+      ]
+    },
+    "sectionBehavior1": {
+      "type": "section",
+      "title": "External commands and scripts",
+      "keys": [
+        "runAsync"
       ]
     },
     "sectionBehavior2": {
@@ -193,7 +203,8 @@
         "volume-up",
         "volume-down",
         "audio-next",
-        "audio-prev"
+        "audio-prev",
+        "mic-mute"
       ]
     },
     "sectionCommands": {
@@ -251,6 +262,24 @@
     "description": "View Full Album Art",
     "tooltip": "When unchecked, Album Art in the menu may be partially covered by Artist and Title."
   },
+  "shortenArtistTitle": {
+    "type": "combobox",
+    "description": "Shorten Artist and Title",
+    "default": "NONE",
+    "options": {
+      "None": "NONE",
+      "Start": "START",
+      "Middle": "MIDDLE",
+      "End": "END"
+    },
+    "tooltip": "When the artist name or title is too long, you can choose how to shorten it."
+  },
+  "doNotUsePlayerctld": {
+    "type": "switch",
+    "default": false,
+    "description": "Do not use playerctl",
+    "tooltip": "When this option is checked, which is not recommended, playerctl installation is not required; playerctl will not be used, so this applet will run in degraded mode (artist, title or album art)."
+  },
   "keepAppListOpen": {
     "type": "switch",
     "default": false,
@@ -299,6 +328,12 @@
       "io.gitlab.librewolf-community",
       "LibreWolf"
     ]
+  },
+  "runAsync": {
+    "type": "switch",
+    "default": true,
+    "description": "Execute asynchronously",
+    "tooltip": "Enabled by default (recommended).\nDisable this option if you encounter running issues (rare)."
   },
   "showtrack": {
     "type": "switch",
@@ -359,7 +394,7 @@
   },
   "showalbumDelay": {
     "type": "scale",
-    "default": 5,
+    "default": 0,
     "min": 0,
     "max":10,
     "step": 1,
@@ -607,6 +642,12 @@
     "dependency": "redefine-volume-keybindings",
     "default": "::",
     "description": "Previous Track"
+  },
+  "mic-mute": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Microphone Mute"
   },
   "custom-commands-label": {
     "type": "label",

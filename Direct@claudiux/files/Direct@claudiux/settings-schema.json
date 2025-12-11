@@ -20,7 +20,7 @@
         "favoritesPage": {
             "type": "page",
             "title": "Favorites",
-            "sections": ["favoritesSection"]
+            "sections": ["favoritesSection", "favoriteAppsSection"]
         },
         "recentPage": {
             "type": "page",
@@ -30,17 +30,17 @@
         "panel": {
             "type": "section",
             "title": "Panel settings",
-            "keys": ["panelIcon", "panelText", "noIconOnPanel", "middleClickPath"]
+            "keys": ["panelIcon", "panelText", "noIconOnPanel", "middleClickPath", "dontDisplayTooltip"]
         },
         "menu": {
             "type": "section",
             "title": "Menu settings",
-            "keys": ["keyOpen", "iconSize"]
+            "keys": ["openHoveringOver", "keyOpen", "iconSize", "displayOrderLabel", "displayOrder", "displayOrderApply"]
         },
         "userSection": {
             "type": "section",
             "title": "User section",
-            "keys": ["showUserSection", "showDesktop", "showTrash"]
+            "keys": ["showUserSection", "showUserSettingsAccessIcon", "showDesktop", "showTrash"]
         },
         "userSectionCustomPlaces": {
             "type": "section",
@@ -50,7 +50,7 @@
         "systemSection": {
             "type": "section",
             "title": "System section",
-            "keys": ["showSystemSection", "showComputer", "showRoot", "showVolumes", "onlyShowMounted", "showNetwork"]
+            "keys": ["showSystemSection", "showSystemSettingsAccessIcon", "showComputer", "showRoot", "showVolumes", "onlyShowMounted", "showNetwork"]
         },
         "systemSectionCustomPlaces": {
             "type": "section",
@@ -60,12 +60,18 @@
         "favoritesSection": {
             "type": "section",
             "title": "Favorite documents",
-            "keys": ["showFavorites", "favoriteSortingMethod", "favoriteSizeLimit", "favoriteShowUri"]
+            "keys": ["showFavorites", "showFavoritesSettingsAccessIcon", "favoriteSortingMethod", "favoriteSizeLimit", "favoriteShowUri", "favoriteIconIsStar"]
+        },
+        
+        "favoriteAppsSection": {
+            "type": "section",
+            "title": "Favorite apps",
+            "keys": ["showFavoriteApps", "favAppsLabel", "favApps", "favAppsPopulateButton"]
         },
         "recentSection": {
             "type": "section",
             "title": "Recent documents",
-            "keys": ["showRecentDocuments", "sortingMethod", "recentSizeLimit", "recentShowUri", "btnPrivacy"]
+            "keys": ["showRecentDocuments", "showRecentSettingsAccessIcon", "sortingMethod", "recentSizeLimit", "recentShowUri", "btnPrivacy"]
         }
     },
 
@@ -79,7 +85,14 @@
     "panelText": {
         "type": "entry",
         "description": "Panel text",
+        "expand-width": true,
         "default": ""
+    },
+
+    "openHoveringOver": {
+        "type": "switch",
+        "default": false,
+        "description": "Open the menu by hovering over the icon"
     },
 
     "keyOpen": {
@@ -98,8 +111,30 @@
         "description": "Menu icon size"
     },
 
+     "displayOrderLabel": {
+         "type": "label",
+         "description": "Move these sections to rearrange the menu:"
+     },
+
+    "displayOrder": {
+        "type": "list",
+        "default": [],
+        "columns":  [
+            {"id": "id", "title": "Name", "type": "string", "expand-width": true}
+        ],
+        "show-buttons": true,
+        "hidden-buttons": ["+", "-", "edit"],
+        "description": "Display order in the menu"
+    },
+
+    "displayOrderApply": {
+        "type": "button",
+        "description": "Apply",
+        "callback": "controlDisplayOrder"
+    },
+
     "noIconOnPanel": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "No icon on panel",
         "default": false,
         "dependency": "panelText!="
@@ -113,14 +148,26 @@
         "tooltip": "Leave blank to disable"
     },
 
+    "dontDisplayTooltip": {
+        "type": "switch",
+        "description": "Do not display the tooltip",
+        "default": false
+    },
+
     "showUserSection": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show User section",
+        "default": true
+    },
+    
+    "showUserSettingsAccessIcon": {
+        "type": "switch",
+        "description": "Show the settings access icon",
         "default": true
     },
 
     "showDesktop": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show desktop",
         "default": true
     },
@@ -153,31 +200,37 @@
     },
 
     "showSystemSection": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show System section",
+        "default": true
+    },
+    
+    "showSystemSettingsAccessIcon": {
+        "type": "switch",
+        "description": "Show the settings access icon",
         "default": true
     },
 
     "showComputer": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show computer",
         "default": true
     },
 
     "showRoot": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show file system",
         "default": true
     },
 
     "showVolumes": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show volumes",
         "default": true
     },
 
     "onlyShowMounted": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Only show mounted drives",
         "default": false,
         "indent": true,
@@ -185,7 +238,7 @@
     },
 
     "showNetwork": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show network",
         "default": true
     },
@@ -207,8 +260,14 @@
     },
 
     "showFavorites": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show favorite documents",
+        "default": true
+    },
+    
+    "showFavoritesSettingsAccessIcon": {
+        "type": "switch",
+        "description": "Show the settings access icon",
         "default": true
     },
 
@@ -242,15 +301,60 @@
     },
 
     "favoriteShowUri": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show complete path in tooltips",
         "default": true,
         "dependency": "showFavorites"
     },
 
+    "favoriteIconIsStar": {
+        "type": "switch",
+        "description": "Replace icons with stars",
+        "default": false,
+        "dependency": "showFavorites"
+    },
+
+    "showFavoriteApps": {
+        "type": "switch",
+        "description": "Show favorite apps",
+        "default": true
+    },
+
+    "favAppsLabel": {
+        "type": "label",
+        "description": "Below are the favorite applications displayed in the menu when checked.\nThe Name can be changed.\nThe Launcher must not be changed.",
+        "dependency": "showFavoriteApps"
+    },
+
+    "favApps": {
+        "type": "list",
+        "description": "Favorite apps shown",
+        "default": [],
+        "columns":  [
+            {"id": "menu", "title": "Menu", "type": "boolean", "default": true},
+            {"id": "name", "title": "Name", "type": "string", "expand-width": true},
+            {"id": "id", "title": "⚠️ Launcher", "type": "string", "expand-width": true}
+        ],
+        "show-buttons": true,
+        "dependency": "showFavoriteApps"
+    },
+
+    "favAppsPopulateButton": {
+        "type": "button",
+        "description": "Add all your Favorite Apps",
+        "callback": "favAppsPopulateList",
+        "dependency": "showFavoriteApps"
+    },
+
     "showRecentDocuments": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show recent documents",
+        "default": true
+    },
+    
+    "showRecentSettingsAccessIcon": {
+        "type": "switch",
+        "description": "Show the settings access icon",
         "default": true
     },
 
@@ -284,7 +388,7 @@
     },
 
     "recentShowUri": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show complete path in tooltips",
         "default": true,
         "dependency": "showRecentDocuments"

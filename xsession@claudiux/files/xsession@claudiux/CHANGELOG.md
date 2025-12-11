@@ -1,3 +1,15 @@
+### v5.1.4~20251121
+  * Updates to-string() function.
+
+### v5.1.3~20251121
+  * Minor improvements.
+
+### v5.1.2~20251101
+  * Increase stability.
+
+### v5.1.1~20251031
+  * Avoids paint() errors.
+
 ### v5.1.0~20251003
 Developers often have to repeat the same action several times (reloading a Spice or opening its settings).
 

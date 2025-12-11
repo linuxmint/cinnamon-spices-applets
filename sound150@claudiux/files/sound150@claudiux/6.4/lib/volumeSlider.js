@@ -62,13 +62,13 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             this.icon = new St.Icon({
                 icon_name: this.iconName,
                 icon_type: St.IconType.SYMBOLIC,
-                icon_size: Math.trunc(16 * global.ui_scale)
+                icon_size: Math.trunc(16 * this.applet.real_ui_scale)
             });
         } else {
             this.icon = new St.Icon({
                 icon_name: this.app_icon,
                 icon_type: St.IconType.FULLCOLOR,
-                icon_size: Math.trunc(16 * global.ui_scale)
+                icon_size: Math.trunc(16 * this.applet.real_ui_scale)
             });
         }
 
@@ -130,8 +130,8 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             let volumeId = this.stream.connect("notify::volume", () => this._update());
             this.connect("destroy", () => {
                 //~ logDebug('VolumeSlider.connectWithStream.destroy');
-                this.stream.disconnect(mutedId);
-                this.stream.disconnect(volumeId);
+                try { this.stream.disconnect(volumeId) } catch(e) {};
+                try { this.stream.disconnect(mutedId) } catch(e) {};
             });
         }
 
@@ -222,7 +222,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         }
 
         if (this._slider)
-            this._slider.queue_repaint();
+            try { this._slider.queue_repaint() } catch(e) {};
         if (this.tooltip)
             this.tooltip.show();
         this.emit("value-changed", this._value);
@@ -242,7 +242,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             } else {
                 this._value = Math.min(1, this._value + delta / this.applet._volumeMax * this.applet._volumeNorm);
             }
-            this._slider.queue_repaint();
+            try { this._slider.queue_repaint() } catch(e) {};
             this.emit("value-changed", this._value);
             return true;
         }

@@ -1,3 +1,15 @@
+### v5.6.2~20251125
+  * Highlights the number of new issues in the menu.
+
+### v5.6.1~20251121
+  * Updates to-string() function.
+
+### v5.6.0~20251108
+  * Ensures loading of icons.
+
+### v5.5.2~20251101
+  * Increase stability.
+
 ### v5.5.1~20250925
   * Updated README.
   * Minor changes in menu about new commits.
