@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.1] - 2025-12-11
+
+### Changed
+- Renamed the shared `.label` style to `.day-progress-label` to avoid clashing with Cinnamon themes or other xlets.
+- Translated the remaining Spanish source comments to English for consistency across the codebase.
+
 ## [1.0] - 2025-10-03
 
 ### Added

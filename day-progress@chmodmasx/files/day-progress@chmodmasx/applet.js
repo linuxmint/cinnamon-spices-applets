@@ -94,7 +94,7 @@ Pie.prototype = {
             cr.fill();
         }
         
-        // Dibujar borde exterior
+        // Draw outer border
         if (this._outerBorder) {
             cr.arc(0, 0, radius - borderWidth, startAngle, startAngle + 2 * Math.PI);
             cr.setLineWidth(borderWidth);
@@ -108,7 +108,7 @@ Pie.prototype = {
     }
 };
 
-// Applet principal
+// Main applet
 function DayProgressApplet(metadata, orientation, panelHeight, instanceId) {
     this._init(metadata, orientation, panelHeight, instanceId);
 }
@@ -122,7 +122,7 @@ DayProgressApplet.prototype = {
         this.metadata = metadata;
         this.instanceId = instanceId;
         
-        // Configuración
+        // Configuration
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
         
         this.settings.bind("show-elapsed", "showElapsed", Lang.bind(this, this.updateBar));
@@ -136,7 +136,7 @@ DayProgressApplet.prototype = {
         this.startMinute = 0;
         this.endMinute = 0;
 
-        // Crear UI
+        // Build UI
         this.box = new St.BoxLayout({
             xAlign: Clutter.ActorAlign.CENTER,
             yAlign: Clutter.ActorAlign.CENTER
@@ -147,18 +147,18 @@ DayProgressApplet.prototype = {
         this.box.add_child(this.pie.actor);
         this.actor.add_actor(this.box);
 
-        // Menú
+        // Menu
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
 
-        // Elementos del menú
+        // Menu items
         this.menuElapsedContainer = new PopupMenu.PopupBaseMenuItem({ reactive: false });
         this.elapsedLabel = new St.Label({
             text: _("Elapsed"),
             x_align: Clutter.ActorAlign.START,
             x_expand: true,
-            style_class: 'label'
+            style_class: 'day-progress-label'
         });
         this.elapsedValue = new St.Label({ text: '' });
         this.menuElapsedContainer.addActor(this.elapsedLabel);
@@ -169,7 +169,7 @@ DayProgressApplet.prototype = {
             text: _("Remaining"),
             x_align: Clutter.ActorAlign.START,
             x_expand: true,
-            style_class: 'label'
+            style_class: 'day-progress-label'
         });
         this.remainingValue = new St.Label({ text: '' });
         this.menuRemainingContainer.addActor(this.remainingLabel);
@@ -188,13 +188,13 @@ DayProgressApplet.prototype = {
         }));
         this.menu.addMenuItem(settingsItem);
 
-        // Inicializar estilos y valores
+        // Initialize styles and values
         this.calculateStyles();
         
-        // Actualizar inmediatamente para poblar los valores del menú
+        // Update immediately to populate the menu values
         this.updateBar();
 
-        // Timer para actualizar cada 10 segundos
+        // Timer to update every 10 seconds
         this.timerID = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 10, Lang.bind(this, function() {
             this.updateBar();
             return GLib.SOURCE_CONTINUE;
