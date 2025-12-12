@@ -1,3 +1,6 @@
+### v2.5.0~20251212
+  * Use xlet-settings instead of cinnamon-settings to configure applet.
+
 ### v2.4.3~20251121
   * Updates to-string() function.
 

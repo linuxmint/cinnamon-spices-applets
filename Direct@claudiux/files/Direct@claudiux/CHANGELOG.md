@@ -1,3 +1,6 @@
+### v1.4.0~20251212
+* Use xlet-settings instead of cinnamon-settings to configure applet.
+
 ### v1.3.3~20251124
 * Makes optional each icon-link to settings.
 * Fixes [#7996](https://github.com/linuxmint/cinnamon-spices-applets/issues/7996)
