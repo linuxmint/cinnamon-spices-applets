@@ -1,0 +1,32 @@
+# ENHANCED SOUND APPLET
+# This file is put in the public domain.
+# claudiux, 2018
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux 13.3.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-04 03:32+0100\n"
+"PO-Revision-Date: 2025-11-19 00:06+0900\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. 6.4->settings-schema.json->sectionBehavior1->title
+msgid "External commands and scripts"
+msgstr ""
+
+#. 6.4->settings-schema.json->runAsync->description
+msgid "Execute asynchronously"
+msgstr ""
+
+#. 6.4->settings-schema.json->runAsync->tooltip
+msgid ""
+"Enabled by default (recommended).\n"
+"Disable this option if you encounter running issues (rare)."
+msgstr ""

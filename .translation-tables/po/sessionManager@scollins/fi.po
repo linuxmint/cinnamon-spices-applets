@@ -1,0 +1,156 @@
+# SESSION MANAGER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# collinss, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-27 10:12+0200\n"
+"PO-Revision-Date: 2022-11-28 20:38+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:154
+msgid "Session"
+msgstr "Istunto"
+
+#. applet.js:240
+msgid "Lock Screen"
+msgstr "Lukitusnäyttö"
+
+#. applet.js:246
+msgid "Switch User"
+msgstr "Vaihda käyttäjä"
+
+#. applet.js:252
+msgid "Guest Session"
+msgstr "Vierailu istunto"
+
+#. applet.js:258
+msgid "Log Off"
+msgstr "Kirjaudu ulos"
+
+#. applet.js:269
+msgid "Suspend"
+msgstr "Keskeytä"
+
+#. applet.js:275
+msgid "Sleep"
+msgstr "Lepotila"
+
+#. applet.js:281
+msgid "Hibernate"
+msgstr "Horrostila"
+
+#. applet.js:292
+msgid "Restart"
+msgstr "Käynnistä"
+
+#. applet.js:298
+msgid "Shut Down"
+msgstr "Sammuta"
+
+#. metadata.json->name
+msgid "Session Manager"
+msgstr "Session Manager"
+
+#. metadata.json->description
+msgid "Provides easy access to shut down, restart, etc"
+msgstr "Tarjoaa helpon tavan tietokoneen sammuttamiseen, käynnistykseen jne"
+
+#. metadata.json->comments
+msgid ""
+"Session Manager is an applet that provides easy access to session controls "
+"such as shut down, restart, log off, switch user, etc. It has been tested in "
+"Arch, Fedora and Linux Mint, and supports a wide variety of software "
+"configurations. If your particular configuration is not supported, please "
+"submit a feature request on github, and I will add it at my earliest "
+"convenience."
+msgstr ""
+"Session Manager on sovelma, joka tarjoaa helpon pääsyn istunnon ohjauksiin, "
+"kuten sammutus, käynnistys, kirjautuminen, käyttäjän vaihtaminen jne. "
+"Testattu Arch, Fedora ja Linux Mint, sekä tukee monenlaisia ohjelmiston "
+"kokoonpanoja. Jos tiettyä määritystäsi ei tueta, lähetä ominaisuuden pyyntö "
+"github:ssa, niin lisään sen mahdollisimman pian."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Tekijä - Stephen Collins"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Yleiset asetukset"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr "Paneelin kuvake"
+
+#. settings-schema.json->panelText->description
+msgid "Panel Text"
+msgstr "Paneelin teksti"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Icon Size"
+msgstr "Kuvakkeen koko"
+
+#. settings-schema.json->symbolicMenuIcons->description
+msgid "Symbolic icons in menu"
+msgstr "Symboliset kuvakkeet valikossa"
+
+#. settings-schema.json->menuOptions->description
+msgid "Menu Options"
+msgstr ""
+
+#. settings-schema.json->showLockScreen->description
+#, fuzzy
+msgid "Show Lock Screen option"
+msgstr "Lukitusnäyttö"
+
+#. settings-schema.json->showSwitchUser->description
+#, fuzzy
+msgid "Show Switch User option"
+msgstr "Vaihda käyttäjä"
+
+#. settings-schema.json->showGuestSession->description
+#, fuzzy
+msgid "Show Guest Session option"
+msgstr "Vierailu istunto"
+
+#. settings-schema.json->showLogOff->description
+msgid "Show Log Off option"
+msgstr ""
+
+#. settings-schema.json->showSuspend->description
+msgid "Show Suspend option"
+msgstr ""
+
+#. settings-schema.json->showSleep->description
+msgid "Show Sleep option"
+msgstr ""
+
+#. settings-schema.json->showHibernate->description
+#, fuzzy
+msgid "Show Hibernate option"
+msgstr "Horrostila"
+
+#. settings-schema.json->showRestart->description
+msgid "Show Restart option"
+msgstr ""
+
+#. settings-schema.json->showShutDown->description
+#, fuzzy
+msgid "Show Shut Down option"
+msgstr "Sammuta"
