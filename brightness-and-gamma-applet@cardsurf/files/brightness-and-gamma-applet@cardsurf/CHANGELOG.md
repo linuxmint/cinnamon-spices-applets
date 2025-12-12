@@ -1,3 +1,6 @@
+### v2.6.0~20251212
+* Use xlet-settings instead of cinnamon-settings to configure applet.
+
 ### v2.5.1~20251121
 * Adds a symbolic icon.
 * Adds in context menu the option "Toggle On/Off".
