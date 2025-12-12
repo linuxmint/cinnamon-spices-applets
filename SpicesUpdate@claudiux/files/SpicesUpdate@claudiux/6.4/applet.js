@@ -2286,7 +2286,7 @@ class SpicesUpdate extends IconApplet {
 
     this.closeSettingsWindow();
 
-    let pid = spawnCommandLine(`xlet-settings -i ${this.instance_id} -t ${tab} applet ${UUID}`);
+    let pid = spawnCommandLine(`xlet-settings applet ${UUID} -i ${this.instance_id} -t ${tab}`);
 
     if (maximize_vertically) {
       var app = null;

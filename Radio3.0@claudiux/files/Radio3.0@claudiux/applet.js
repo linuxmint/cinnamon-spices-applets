@@ -5648,7 +5648,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this._set_settings_options();
 
     let pid = spawnCommandLine(XS_PATH + " applet " + this._uuid + " -i " + this.instance_id + " -t " + tab);
-    //~ let pid = spawnCommandLine(XS_PATH + " -i " + this.instance_id + " -t " + tab + " applet " + this._uuid);
 
     if (maximize_vertically) {
       var app = null;

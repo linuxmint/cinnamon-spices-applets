@@ -684,7 +684,7 @@ class ExitApplet extends Applet.IconApplet {
     }
 
     configureApplet(tab=0) {
-        let pid = Util.spawnCommandLine("xlet-settings applet " + this._uuid + " -i " + this.instance_id + " -t " + tab);
+        let pid = Util.spawnCommandLine(`xlet-settings applet ${UUID} -i ${this.instanceId} -t ${tab}`);
         if (this.maximizeSettingsWindow) {
             const VERTICAL = 2;
             const tracker = imports.gi.Cinnamon.WindowTracker.get_default();
