@@ -457,9 +457,11 @@ class MCSM extends Applet.IconApplet {
         let menuChildren = this._applet_context_menu._getMenuItems();
         var posConfigure = -1;
         for (let i=0; i<menuChildren.length; i++) {
-            if ((""+menuChildren[i]).includes(_("Configure...")))
+            if (menuChildren[i] == this.context_menu_item_configure) {
                 posConfigure = i;
+            }
         }
+        global.log("posConfigure: " + posConfigure);
         if (posConfigure != -1) {
             menuChildren[posConfigure].destroy();
             let context_menu_item_configure = new PopupMenu.PopupSubMenuMenuItem(_("Configure..."));
@@ -490,8 +492,7 @@ class MCSM extends Applet.IconApplet {
 
         this.closeSettingsWindow();
 
-        //~ let pid = Util.spawnCommandLine(`cinnamon-settings applets ${UUID} -i ${this.instance_id} -t ${tab}`);
-        let pid = Util.spawnCommandLine(`xlet-settings -i ${this.instance_id} -t ${tab} applet ${UUID}`);
+        let pid = Util.spawnCommandLine(`xlet-settings applet ${UUID} -i ${this.instance_id} -t ${tab}`);
 
         if (maximize_vertically) {
           var app = null;

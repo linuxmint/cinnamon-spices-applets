@@ -1039,7 +1039,7 @@ class VPNSentinel extends Applet.TextIconApplet {
     let id = setTimeout( () => {
       clearTimeout(id);
       //~ Util.spawnCommandLine("cinnamon-settings applets %s -t %s %s".format(UUID, ""+tabFlags, ""+instanceId));
-      Util.spawnCommandLine(`xlet-settings -t ${tabFlags} -i ${instanceId} applet ${UUID}`);
+      Util.spawnCommandLine(`xlet-settings applet ${UUID} -t ${tabFlags} -i ${instanceId}`);
     }, 500); // 500 ms
   } // End of sort_flaglist
 
@@ -1159,7 +1159,7 @@ class VPNSentinel extends Applet.TextIconApplet {
     let configure1 = new PopupMenu.PopupIconMenuItem(_("VPN Policy") + "...", "system-run", St.IconType.SYMBOLIC);
     configure1.connect("activate", () => {
       //~ Util.spawnCommandLine("cinnamon-settings applets %s -t %s %s".format(UUID, ""+this.tabNumberOfVPNPolicy, ""+this.instanceId));
-      Util.spawnCommandLine(`xlet-settings -t ${this.tabNumberOfVPNPolicy} -i ${this.instanceId} applet ${UUID}`);
+      Util.spawnCommandLine(`xlet-settings applet ${UUID} -t ${this.tabNumberOfVPNPolicy} -i ${this.instanceId}`);
     });
     this.menu.addMenuItem(configure1);
 
@@ -1167,7 +1167,7 @@ class VPNSentinel extends Applet.TextIconApplet {
     let configure2 = new PopupMenu.PopupIconMenuItem(_("Internet Apps Manager") + "...", "system-run", St.IconType.SYMBOLIC);
     configure2.connect("activate", () => {
       //~ Util.spawnCommandLine("cinnamon-settings applets %s -t %s %s".format(UUID, ""+this.tabNumberOfInternetPolicy, ""+this.instanceId));
-      Util.spawnCommandLine(`xlet-settings -t ${this.tabNumberOfInternetPolicy} -i ${this.instanceId} applet ${UUID}`);
+      Util.spawnCommandLine(`xlet-settings applet ${UUID} -t ${this.tabNumberOfInternetPolicy} -i ${this.instanceId}`);
     });
     this.menu.addMenuItem(configure2);
 

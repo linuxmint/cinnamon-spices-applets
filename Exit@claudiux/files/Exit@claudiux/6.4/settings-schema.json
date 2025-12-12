@@ -18,7 +18,7 @@
       "type": "page",
       "title": "Shortcuts",
       "sections": [
-      "section_DontShowShortcutsInMenu",
+        "section_DontShowShortcutsInMenu",
         "section_Shortcuts",
         "section_MenuKeys"
       ]
@@ -291,7 +291,7 @@
     "tooltip": "This option will only be taken into account the next times this Settings window is opened. "
   },
   "labelSeparator": {
-     "type": "label",
+    "type": "label",
     "description": "────────────────────────────────────────────────────────────────"
   },
   "displayLockScreenSetting": {

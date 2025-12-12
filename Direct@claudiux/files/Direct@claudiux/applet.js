@@ -1122,7 +1122,7 @@ class DirectApplet extends Applet.TextIconApplet {
 
         this.closeSettingsWindow();
 
-        let pid = Util.spawnCommandLine(`xlet-settings -i ${this.instanceId} -t ${tab} applet ${UUID}`);
+        let pid = Util.spawnCommandLine(`xlet-settings applet ${UUID} -i ${this.instanceId} -t ${tab}`);
 
         if (maximize_vertically) {
           var app = null;
