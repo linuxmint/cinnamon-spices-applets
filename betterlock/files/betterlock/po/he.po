@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-10 17:32+0100\n"
+"POT-Creation-Date: 2025-12-13 11:28+0100\n"
 "PO-Revision-Date: 2022-05-20 13:58+0300\n"
 "Last-Translator: Avi Markovitz <avi.markovitz@gmail.com>\n"
 "Language-Team: Avi Markovitz <avi.markovitz@gmail.com>\n"
@@ -20,43 +20,43 @@ msgstr ""
 "2 : 3);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:114
+#. applet.js:116
 msgid "Scr Lock"
 msgstr "נעילת גלילה"
 
-#. applet.js:118
+#. applet.js:120
 msgid "Num Lock"
 msgstr "נעילת לוח מקשי הספרות"
 
-#. applet.js:122
+#. applet.js:124
 msgid "Caps Lock"
 msgstr "נעילת רישיות"
 
-#. applet.js:164
+#. applet.js:166
 msgid "Lock Keys"
 msgstr "מקשי נעילה"
 
-#. applet.js:228
+#. applet.js:233
 msgid "Scr lock on"
 msgstr "נעילת גלילה מופעלת"
 
-#. applet.js:231
+#. applet.js:236
 msgid "Scr lock off"
 msgstr "נעילת גלילה מושבתת"
 
-#. applet.js:240
+#. applet.js:245
 msgid "Num lock on"
 msgstr "נעילת לוח מקשי הספרות מופעלת"
 
-#. applet.js:243
+#. applet.js:248
 msgid "Num lock off"
 msgstr "נעילת לוח מקשי הספרות מושבתת"
 
-#. applet.js:252
+#. applet.js:257
 msgid "Caps lock on"
 msgstr "נעילת רישיות מופעלת"
 
-#. applet.js:255
+#. applet.js:260
 msgid "Caps lock off"
 msgstr "נעילת רישיות מושבתת"
 
@@ -87,6 +87,10 @@ msgstr "הצגת חיווי נעילת לוח מקשי הספרות"
 #. settings-schema.json->show-scr-lock-indicator->description
 msgid "Show scr lock indicator"
 msgstr "הצגת חיווי נעילת גלילה"
+
+#. settings-schema.json->hide-inactive-indicators->description
+msgid "Hide inactive indicators"
+msgstr ""
 
 #. settings-schema.json->toggle-on-click->description
 msgid "Toggle state when clicked"

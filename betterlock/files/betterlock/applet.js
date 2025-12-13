@@ -45,6 +45,8 @@ MyApplet.prototype = {
         this.settings.bind("show-caps-lock-indicator", "showCapsLockIndicator", this._updateIconVisibility);
         this.settings.bind("show-num-lock-indicator", "showNumLockIndicator", this._updateIconVisibility);
         this.settings.bind("show-scr-lock-indicator", "showScrLockIndicator", this._updateIconVisibility);
+        this.settings.bind("hide-inactive-indicators", "hideInactiveIndicators", this._updateIconVisibility);
+
         this.settings.bind("toggle-on-click", "toggleOnClick", null);
 
 
@@ -179,17 +181,20 @@ MyApplet.prototype = {
     },
 
     _updateIconVisibility: function() {
-        if (this.showCapsLockIndicator) {
+        if (this.showCapsLockIndicator &&
+                !(this.hideInactiveIndicators && !this.capslock_state)) {
             this.binCaps.show();
         } else {
             this.binCaps.hide();
         }
-        if (this.showNumLockIndicator) {
+        if (this.showNumLockIndicator &&
+                !(this.hideInactiveIndicators && !this.numlock_state)) {
             this.binNum.show();
         } else {
             this.binNum.hide();
         }
-        if (this.showScrLockIndicator) {
+        if (this.showScrLockIndicator &&
+                !(this.hideInactiveIndicators && !this.scrlock_state_state)) {
             this.binScr.show();
         } else {
             this.binScr.hide();
@@ -260,6 +265,11 @@ MyApplet.prototype = {
                 this._notifyMessage(icon_name, msg);
             }
         }
+
+        if (this.hideInactiveIndicators) {
+            this._updateIconVisibility();
+        }
+
         this._firstRun = false;
     },
 

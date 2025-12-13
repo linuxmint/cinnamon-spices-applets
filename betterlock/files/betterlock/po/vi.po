@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: betterlock 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-10 17:32+0100\n"
+"POT-Creation-Date: 2025-12-13 11:28+0100\n"
 "PO-Revision-Date: 2025-10-08 21:24+0700\n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -18,43 +18,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:114
+#. applet.js:116
 msgid "Scr Lock"
 msgstr "Khóa màn hình"
 
-#. applet.js:118
+#. applet.js:120
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#. applet.js:122
+#. applet.js:124
 msgid "Caps Lock"
 msgstr "Caps lock"
 
-#. applet.js:164
+#. applet.js:166
 msgid "Lock Keys"
 msgstr "Lock Keys"
 
-#. applet.js:228
+#. applet.js:233
 msgid "Scr lock on"
 msgstr "Khóa màn hình đang bật"
 
-#. applet.js:231
+#. applet.js:236
 msgid "Scr lock off"
 msgstr "Khóa màn hình đang tắt"
 
-#. applet.js:240
+#. applet.js:245
 msgid "Num lock on"
 msgstr "Num Lock đang bật"
 
-#. applet.js:243
+#. applet.js:248
 msgid "Num lock off"
 msgstr "Num Lock đang tắt"
 
-#. applet.js:252
+#. applet.js:257
 msgid "Caps lock on"
 msgstr "Caps lock đang bật"
 
-#. applet.js:255
+#. applet.js:260
 msgid "Caps lock off"
 msgstr "Caps lock đang tắt"
 
@@ -85,6 +85,10 @@ msgstr "Hiển thị chỉ báo Num Lock"
 #. settings-schema.json->show-scr-lock-indicator->description
 msgid "Show scr lock indicator"
 msgstr "Hiển thị chỉ báo khóa màn hình"
+
+#. settings-schema.json->hide-inactive-indicators->description
+msgid "Hide inactive indicators"
+msgstr ""
 
 #. settings-schema.json->toggle-on-click->description
 msgid "Toggle state when clicked"

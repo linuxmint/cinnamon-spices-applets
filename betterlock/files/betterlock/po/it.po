@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-10 17:32+0100\n"
+"POT-Creation-Date: 2025-12-13 11:28+0100\n"
 "PO-Revision-Date: 2025-01-03 15:06+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -19,43 +19,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:114
+#. applet.js:116
 msgid "Scr Lock"
 msgstr "Bloc Scorr"
 
-#. applet.js:118
+#. applet.js:120
 msgid "Num Lock"
 msgstr "Bloc Num"
 
-#. applet.js:122
+#. applet.js:124
 msgid "Caps Lock"
 msgstr "Bloc Maiusc"
 
-#. applet.js:164
+#. applet.js:166
 msgid "Lock Keys"
 msgstr "Tasti di Blocco"
 
-#. applet.js:228
+#. applet.js:233
 msgid "Scr lock on"
 msgstr "Bloc Scorr attivo"
 
-#. applet.js:231
+#. applet.js:236
 msgid "Scr lock off"
 msgstr "Bloc Scorr disattivo"
 
-#. applet.js:240
+#. applet.js:245
 msgid "Num lock on"
 msgstr "Bloc Num attivo"
 
-#. applet.js:243
+#. applet.js:248
 msgid "Num lock off"
 msgstr "Bloc Num disattivo"
 
-#. applet.js:252
+#. applet.js:257
 msgid "Caps lock on"
 msgstr "Bloc Maiusc attivo"
 
-#. applet.js:255
+#. applet.js:260
 msgid "Caps lock off"
 msgstr "Bloc Maiusc disattivo"
 
@@ -86,6 +86,10 @@ msgstr "Mostra l'indicatore di blocco numerico"
 #. settings-schema.json->show-scr-lock-indicator->description
 msgid "Show scr lock indicator"
 msgstr "Mostra l'indicatore di blocco scorrimento"
+
+#. settings-schema.json->hide-inactive-indicators->description
+msgid "Hide inactive indicators"
+msgstr ""
 
 #. settings-schema.json->toggle-on-click->description
 msgid "Toggle state when clicked"

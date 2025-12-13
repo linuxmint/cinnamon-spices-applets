@@ -18,6 +18,11 @@
         "default": false,
         "description" : "Show scr lock indicator"
     },
+    "hide-inactive-indicators": {
+        "type": "switch",
+        "default": false,
+        "description" : "Hide inactive indicators"
+    },
     "toggle-on-click": {
         "type": "switch",
         "default": true,
