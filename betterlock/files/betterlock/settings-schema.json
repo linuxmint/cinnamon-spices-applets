@@ -5,12 +5,12 @@
     },
     "show-caps-lock-indicator": {
         "type": "switch",
-        "default": false,
+        "default": true,
         "description" : "Show caps lock indicator"
     },
     "show-num-lock-indicator": {
         "type": "switch",
-        "default": false,
+        "default": true,
         "description" : "Show num lock indicator"
     },
     "show-scr-lock-indicator": {
