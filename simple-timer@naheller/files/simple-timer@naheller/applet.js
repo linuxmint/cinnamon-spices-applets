@@ -6,8 +6,10 @@ const Tooltips = imports.ui.tooltips;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const GLib = imports.gi.GLib;
+const Settings = imports.ui.settings;
 
 const {
+    UUID,
     TIMER_INTERVAL_MS,
     ONE_MIN_IN_SECONDS,
     ONE_HOUR_IN_SECONDS,
@@ -17,13 +19,11 @@ const {
     ICON_SIZE_LG,
     ICON_SIZE_SM,
     NOTIFICATION_TITLE,
-    NOTIFICATION_MSG,
     DIGIT_NAMES,
     CLOCK_INCREMENT,
     CLOCK_DECREMENT,
     CLOCK_STYLES,
     CONTROL_BUTTON_STYLE,
-    FONT_SIZE,
     APPLET_ICON_NAME,
     APPLET_ICON_GREEN,
     APPLET_ICON_TOOLTIP
@@ -41,6 +41,8 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 
         try {
+            this.bindSettings(instanceId);
+
             this.set_applet_icon_symbolic_name(APPLET_ICON_NAME);
             this.set_applet_tooltip(APPLET_ICON_TOOLTIP);
 
@@ -70,6 +72,17 @@ MyApplet.prototype = {
         if (!!this.timerId) {
             this.clearTimerInterval();
         }
+    },
+
+    bindSettings(instanceId) {
+        this.settings = new Settings.AppletSettings(this, UUID, instanceId);
+        this.settings.bindProperty(
+            Settings.BindingDirection.IN,
+            "notificationMessage",
+            "notificationMessage",
+            this.on_settings_changed,
+            null
+        );
     },
 
     buildPopupMenu() {
@@ -107,10 +120,10 @@ MyApplet.prototype = {
 
         clockBox.add_child(hourTensColumn);
         clockBox.add_child(hourOnesColumn);
-        clockBox.add_child(getClockDigit(':'));
+        clockBox.add_child(getClockDigit(':', CLOCK_STYLES.COLON));
         clockBox.add_child(minuteTensColumn);
         clockBox.add_child(minuteOnesColumn);
-        clockBox.add_child(getClockDigit(':'));
+        clockBox.add_child(getClockDigit(':', CLOCK_STYLES.COLON));
         clockBox.add_child(secondTensColumn);
         clockBox.add_child(secondOnesColumn);
 
@@ -176,9 +189,16 @@ MyApplet.prototype = {
         this[digitName] = getClockDigit(`${digitValue}`);
 
         const column = new St.BoxLayout({
+            name: `${DIGIT_NAMES[digitName]}_COL`,
+            reactive: true,
             vertical: true,
             y_align: Clutter.ActorAlign.CENTER,
         });
+
+        column.connect('scroll-event', (actor, event) => {
+            const scrollDirection = event.get_scroll_direction();
+            this.onScrollClockColumn(actor.name, scrollDirection);
+        })
 
         column.add_child(this[incrementButtonName]);
         column.add_child(this[digitName]);
@@ -271,7 +291,7 @@ MyApplet.prototype = {
                     this.tickTimer();
                 } else {
                     this.resetTimer();
-                    this.showNotification(NOTIFICATION_MSG);
+                    this.showNotification(this.notificationMessage);
                 }
             },
             TIMER_INTERVAL_MS
@@ -363,6 +383,18 @@ MyApplet.prototype = {
         this[SECOND_TENS].child.set_text(`${secondTens}`);
         this[SECOND_ONES].child.set_text(`${secondOnes}`);
 
+        /**
+         * Below is needed to force each clock digit's StLabel to recalculate its width on each tick.
+         * Without this, a label holding a narrow digit like "1" will not expand its width
+         * to hold a wider digit like "0", causing the wider digit to be partially cut off.
+         * 
+         * This is only needed while the menu is open.
+         **/
+        if (this.menu.isOpen) {
+            this.clock.hide();
+            this.clock.show();
+        }
+
         // Disable startPauseButton when timer is at 0
         this.startPauseButton.reactive = this.timerCurrentSec != 0;
     },
@@ -410,6 +442,24 @@ MyApplet.prototype = {
             this.appletIcon.style = `color: ${APPLET_ICON_GREEN};`;
         } else {
             this.appletIcon.style = null;
+        }
+    },
+
+    onScrollClockColumn(actorName, scrollDirection) {
+        // Ignore scroll while timer is running
+        if (!!this.timerId) return;
+
+        const digitName = actorName.replace('_COL', '');
+
+        switch (scrollDirection) {
+            case Clutter.ScrollDirection.UP:
+            case Clutter.ScrollDirection.LEFT:
+                this.adjustClockDigit(CLOCK_INCREMENT, digitName)
+                break;
+            case Clutter.ScrollDirection.DOWN:
+            case Clutter.ScrollDirection.RIGHT:
+                this.adjustClockDigit(CLOCK_DECREMENT, digitName)
+                break;
         }
     }
 };
@@ -541,27 +591,14 @@ function getButton(iconName, style = '', isToggle = false) {
     return button;
 }
 
-function getClockDigit(text) {
+function getClockDigit(text, style = '') {
     const label = new St.Label({
         text,
-        style: `font-size: ${FONT_SIZE};`
     });
 
     const bin = new St.Bin({
-        style: 'width: 15px;',
+        style
     });
-    bin.set_child(label);
-
-    return bin;
-}
-
-function getClockColon() {
-    const label = new St.Label({
-        text: ':',
-        style: `font-size: ${FONT_SIZE};`,
-    });
-
-    const bin = new St.Bin();
     bin.set_child(label);
 
     return bin;
