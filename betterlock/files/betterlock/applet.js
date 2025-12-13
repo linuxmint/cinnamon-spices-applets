@@ -81,16 +81,6 @@ MyApplet.prototype = {
             style_class: "system-status-icon"
         });
 
-        this._updateIconsSize = function() {
-            let size = this.getPanelIconSize(St.IconType.SYMBOLIC);
-            this.caps_on.icon_size = size;
-            this.caps_off.icon_size = size;
-            this.num_on.icon_size = size;
-            this.num_off.icon_size = size;
-            this.scr_on.icon_size = size;
-            this.scr_off.icon_size = size;
-        };
-
         this.binScr.child = this.scr_off;
         this.binNum.child = this.num_off;
         this.binCaps.child = this.caps_off;
@@ -173,6 +163,17 @@ MyApplet.prototype = {
         if (this.showOSDNotifications) {
             Main.osdWindowManager.show(-1, Gio.Icon.new_for_string(iconName), text, null);
         }
+    },
+
+
+    _updateIconsSize: function() {
+        let size = this.getPanelIconSize(St.IconType.SYMBOLIC);
+        this.caps_on.icon_size = size;
+        this.caps_off.icon_size = size;
+        this.num_on.icon_size = size;
+        this.num_off.icon_size = size;
+        this.scr_on.icon_size = size;
+        this.scr_off.icon_size = size;
     },
 
     _updateIconVisibility: function() {
