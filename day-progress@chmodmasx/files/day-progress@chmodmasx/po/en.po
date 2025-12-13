@@ -1,0 +1,102 @@
+# English translation for day-progress@chmodmasx.
+# Copyright (C) 2025
+# This file is distributed under the same license as the day-progress@chmodmasx package.
+# chmodmasx, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: day-progress@chmodmasx 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-03 12:00+0000\n"
+"PO-Revision-Date: 2025-10-03 12:00+0000\n"
+"Last-Translator: chmodmasx\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:149
+msgid "Elapsed"
+msgstr "Elapsed"
+
+#: applet.js:160
+msgid "Remaining"
+msgstr "Remaining"
+
+#: applet.js:173
+msgid "Settings"
+msgstr "Settings"
+
+#. day-progress@chmodmasx->settings-schema.json->show-elapsed->description
+msgid "Show time elapsed"
+msgstr "Show time elapsed"
+
+#. day-progress@chmodmasx->settings-schema.json->show-elapsed->tooltip
+msgid "Show time elapsed instead of remaining"
+msgstr "Show time elapsed instead of remaining"
+
+#. day-progress@chmodmasx->settings-schema.json->width->description
+msgid "Width"
+msgstr "Width"
+
+#. day-progress@chmodmasx->settings-schema.json->width->tooltip
+msgid "Width of the indicator"
+msgstr "Width of the indicator"
+
+#. day-progress@chmodmasx->settings-schema.json->height->description
+msgid "Height"
+msgstr "Height"
+
+#. day-progress@chmodmasx->settings-schema.json->height->tooltip
+msgid "Height of the indicator"
+msgstr "Height of the indicator"
+
+#. day-progress@chmodmasx->settings-schema.json->style->description
+msgid "Style"
+msgstr "Style"
+
+#. day-progress@chmodmasx->settings-schema.json->style->tooltip
+msgid "Visual style of the indicator"
+msgstr "Visual style of the indicator"
+
+#. day-progress@chmodmasx->settings-schema.json->style->options
+msgid "Pie"
+msgstr "Pie"
+
+#. day-progress@chmodmasx->settings-schema.json->style->options
+msgid "Pie (no border)"
+msgstr "Pie (no border)"
+
+#. day-progress@chmodmasx->settings-schema.json->start-time-header->description
+msgid "Start time"
+msgstr "Start time"
+
+#. day-progress@chmodmasx->settings-schema.json->start-hour->description
+msgid "Start hour"
+msgstr "Start hour"
+
+#. day-progress@chmodmasx->settings-schema.json->start-hour->tooltip
+msgid "Hour at which the indicator starts"
+msgstr "Hour at which the indicator starts"
+
+#. day-progress@chmodmasx->settings-schema.json->end-time-header->description
+msgid "End time"
+msgstr "End time"
+
+#. day-progress@chmodmasx->settings-schema.json->end-hour->description
+msgid "End hour"
+msgstr "End hour"
+
+#. day-progress@chmodmasx->settings-schema.json->end-hour->tooltip
+msgid "Hour at which the indicator ends"
+msgstr "Hour at which the indicator ends"
+
+#. metadata.json->description
+msgid "Displays a customizable progress pie chart in the panel to help you track your day time."
+msgstr "Displays a customizable progress pie chart in the panel to help you track your day time."
+
+#. metadata.json->name
+msgid "Day Progress"
+msgstr "Day Progress"
