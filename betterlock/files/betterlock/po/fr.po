@@ -90,7 +90,7 @@ msgstr "Afficher l'indicateur de verrouillage d'écran"
 
 #. settings-schema.json->hide-inactive-indicators->description
 msgid "Hide inactive indicators"
-msgstr ""
+msgstr "Masquer les indicateurs inactifs"
 
 #. settings-schema.json->toggle-on-click->description
 msgid "Toggle state when clicked"
