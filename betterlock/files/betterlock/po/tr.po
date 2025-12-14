@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-14 12:26+0100\n"
+"POT-Creation-Date: 2025-12-14 12:29+0100\n"
 "PO-Revision-Date: 2019-12-22 00:09+0300\n"
 "Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
 "Language-Team: \n"
@@ -100,14 +100,14 @@ msgstr ""
 msgid "Notifications"
 msgstr "Bildirim göster"
 
-#. settings-schema.json->show-toast-notifications->description
-#, fuzzy
-msgid "Show toast notifications"
-msgstr "Bildirim göster"
-
 #. settings-schema.json->show-osd-notifications->description
 #, fuzzy
 msgid "Show OSD notifications"
+msgstr "Bildirim göster"
+
+#. settings-schema.json->show-toast-notifications->description
+#, fuzzy
+msgid "Show toast notifications"
 msgstr "Bildirim göster"
 
 #. settings-schema.json->show-silent-notifications->description

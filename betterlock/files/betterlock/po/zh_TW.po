@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: betterlock 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-14 12:26+0100\n"
+"POT-Creation-Date: 2025-12-14 12:29+0100\n"
 "PO-Revision-Date: 2025-05-05 01:11+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -97,14 +97,14 @@ msgstr ""
 msgid "Notifications"
 msgstr "顯示通知"
 
-#. settings-schema.json->show-toast-notifications->description
-#, fuzzy
-msgid "Show toast notifications"
-msgstr "顯示通知"
-
 #. settings-schema.json->show-osd-notifications->description
 #, fuzzy
 msgid "Show OSD notifications"
+msgstr "顯示通知"
+
+#. settings-schema.json->show-toast-notifications->description
+#, fuzzy
+msgid "Show toast notifications"
 msgstr "顯示通知"
 
 #. settings-schema.json->show-silent-notifications->description

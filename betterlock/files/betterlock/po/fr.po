@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: betterlock 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-14 12:26+0100\n"
+"POT-Creation-Date: 2025-12-14 12:29+0100\n"
 "PO-Revision-Date: 2025-11-07 08:50+0100\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: \n"
@@ -101,13 +101,13 @@ msgstr "Changer l'état en cliquant sur l'indicateur"
 msgid "Notifications"
 msgstr "Notifications"
 
-#. settings-schema.json->show-toast-notifications->description
-msgid "Show toast notifications"
-msgstr "Afficher les notifications d'application"
-
 #. settings-schema.json->show-osd-notifications->description
 msgid "Show OSD notifications"
 msgstr "Afficher les notifications OSD"
+
+#. settings-schema.json->show-toast-notifications->description
+msgid "Show toast notifications"
+msgstr "Afficher les notifications d'application"
 
 #. settings-schema.json->show-silent-notifications->description
 msgid "Silence system notification sound"
