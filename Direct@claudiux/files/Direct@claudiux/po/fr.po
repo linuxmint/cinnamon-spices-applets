@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-24 23:49+0100\n"
-"PO-Revision-Date: 2025-11-24 23:50+0100\n"
+"POT-Creation-Date: 2025-12-14 20:56+0100\n"
+"PO-Revision-Date: 2025-12-14 20:59+0100\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,19 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:44 applet.js:578
+#. applet.js:44 applet.js:602
 msgid "SYSTEM"
 msgstr "SYSTÈME"
 
-#. applet.js:44 applet.js:621
+#. applet.js:44 applet.js:645
 msgid "FAVORITES"
 msgstr "FAVORIS"
 
-#. applet.js:44 applet.js:654
+#. applet.js:44 applet.js:678
 msgid "APPLICATIONS"
 msgstr "APPLICATIONS"
 
-#. applet.js:44 applet.js:687
+#. applet.js:44 applet.js:711
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTS RÉCENTS"
 
@@ -44,39 +44,39 @@ msgstr "(Clic droit pour ouvrir son dossier)"
 msgid "Direct"
 msgstr "Direct"
 
-#. applet.js:548
+#. applet.js:572
 msgid "Search Home Folder"
 msgstr "Rechercher dans mon dossier personnel"
 
-#. applet.js:555 applet.js:596 applet.js:629 applet.js:662 applet.js:695
+#. applet.js:579 applet.js:620 applet.js:653 applet.js:686 applet.js:719
 msgid "Configure"
 msgstr "Configurer"
 
-#. applet.js:589
+#. applet.js:613
 msgid "Search File System"
 msgstr "Rechercher dans le système de fichiers"
 
-#. applet.js:709
+#. applet.js:733
 msgid "Clear"
 msgstr "Effacer"
 
-#. applet.js:716
+#. applet.js:740
 msgid "Recent"
 msgstr "Récents"
 
-#. applet.js:764
+#. applet.js:788
 msgid "Computer"
 msgstr "Ordinateur"
 
-#. applet.js:770
+#. applet.js:794
 msgid "File System"
 msgstr "Système de fichiers"
 
-#. applet.js:787
+#. applet.js:811
 msgid "Network"
 msgstr "Réseau"
 
-#. applet.js:1030
+#. applet.js:1095
 msgid "Trash"
 msgstr "Corbeille"
 
@@ -264,6 +264,7 @@ msgid "Name"
 msgstr "Nom"
 
 #. settings-schema.json->displayOrder->description
+#. settings-schema.json->favoriteCustomList->description
 msgid "Display order in the menu"
 msgstr "Ordre d'affichage dans le menu"
 
@@ -361,10 +362,43 @@ msgstr "Afficher les Documents Favoris"
 msgid "Added time"
 msgstr "Date d'ajout"
 
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Custom Sort"
+msgstr "Tri personnalisé"
+
 #. settings-schema.json->favoriteSortingMethod->description
 #. settings-schema.json->sortingMethod->description
 msgid "Sorting method"
 msgstr "Méthode de tri"
+
+#. settings-schema.json->favoriteLabel->description
+msgid ""
+"Below are the favorite documents displayed in the menu when checked.\n"
+"The Name can be changed here, but is unchanged in menu.\n"
+"The URI must not be changed.\n"
+"Favorite documents can only be managed by nemo."
+msgstr ""
+"Voici vos documents favoris affichés dans le menu lorsqu'ils sont cochés.\n"
+"Le nom peut être modifié ici, mais reste inchangé dans le menu.\n"
+"L'URI ne doit pas être modifié.\n"
+"Les documents favoris ne peuvent être gérés que par nemo."
+
+#. settings-schema.json->favoriteCustomList->columns->title
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr "Menu"
+
+#. settings-schema.json->favoriteCustomList->columns->title
+msgid "⚠️ Name"
+msgstr "⚠️ Nom"
+
+#. settings-schema.json->favoriteCustomList->columns->title
+msgid "⚠️ URI"
+msgstr "⚠️ URI"
+
+#. settings-schema.json->favoritePopulateButton->description
+msgid "Add all your Favorite Documents"
+msgstr "Ajouter tous vos documents favoris"
 
 #. settings-schema.json->favoriteSizeLimit->options
 #. settings-schema.json->recentSizeLimit->options
@@ -432,10 +466,6 @@ msgstr ""
 #. settings-schema.json->favApps->description
 msgid "Favorite apps shown"
 msgstr "Applications Favorites affichées"
-
-#. settings-schema.json->favApps->columns->title
-msgid "Menu"
-msgstr "Menu"
 
 #. settings-schema.json->favApps->columns->title
 msgid "⚠️ Launcher"

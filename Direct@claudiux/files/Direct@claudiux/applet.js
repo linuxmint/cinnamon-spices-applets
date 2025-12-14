@@ -382,6 +382,12 @@ class DirectApplet extends Applet.TextIconApplet {
         this.settings.bind("favoriteSizeLimit", "favoriteSizeLimit");
         this.settings.bind("sortingMethod", "sortingMethod");
         this.settings.bind("favoriteSortingMethod", "favoriteSortingMethod");
+        //~ var favoriteSortingOptions = this.settings.getOptions("favoriteSortingMethod");
+        //~ var customOptionFound = false;
+        //~ for (let option of Object.values(favoriteSortingOptions)) {
+            //~ global.log(option);
+        //~ }
+        this.settings.bind("favoriteCustomList", "favoriteCustomList");
         this.settings.bind("recentShowUri", "recentShowUri");
         this.settings.bind("favoriteShowUri", "favoriteShowUri");
         this.settings.bind("favoriteIconIsStar", "favoriteIconIsStar");
@@ -426,6 +432,24 @@ class DirectApplet extends Applet.TextIconApplet {
         this.keyId = "Direct-open";
         //~ Main.keybindingManager.addHotKey(this.keyId, this.keyOpen, Lang.bind(this, this.openMenu));
         Main.keybindingManager.addHotKey(this.keyId, this.keyOpen, () => this.openMenu());
+    }
+    
+    favoritePopulateList() {
+        var infos = this.favorites.get_favorites(null);
+        var favoriteCustomList = this.favoriteCustomList;
+        var favoriteCustomURIs = [];
+        for (let fav of favoriteCustomList)
+                favoriteCustomURIs.push(fav.uri);
+        infos.forEach( (inf) => {
+            if (favoriteCustomURIs.indexOf(inf.uri) < 0) {
+                favoriteCustomList.push({"menu": true, "name": inf.display_name, "uri": inf.uri});
+                favoriteCustomURIs.push(inf.uri);
+            }
+        });
+        let _to = setTimeout(() => {
+            clearTimeout(_to);
+            this.settings.setValue("favoriteCustomList", favoriteCustomList);
+        }, 2100);
     }
 
     favAppsPopulateList() {
@@ -483,11 +507,11 @@ class DirectApplet extends Applet.TextIconApplet {
         let favAppsPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
         let recentPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
 
-		let userSettingsImage = new St.Icon({ icon_name: "system-settings", icon_size: 16, icon_type: St.IconType.SYMBOLIC });
-		let systemSettingsImage = new St.Icon({ icon_name: "system-settings", icon_size: 16, icon_type: St.IconType.SYMBOLIC });
-		let favoritesSettingsImage = new St.Icon({ icon_name: "system-settings", icon_size: 16, icon_type: St.IconType.SYMBOLIC });
-		let favAppsSettingsImage = new St.Icon({ icon_name: "system-settings", icon_size: 16, icon_type: St.IconType.SYMBOLIC });
-		let recentSettingsImage = new St.Icon({ icon_name: "system-settings", icon_size: 16, icon_type: St.IconType.SYMBOLIC });
+		let userSettingsImage = new St.Icon({ icon_name: "system-settings-symbolic", icon_size: this.iconSize, icon_type: St.IconType.SYMBOLIC });
+		let systemSettingsImage = new St.Icon({ icon_name: "system-settings-symbolic", icon_size: this.iconSize, icon_type: St.IconType.SYMBOLIC });
+		let favoritesSettingsImage = new St.Icon({ icon_name: "system-settings-symbolic", icon_size: this.iconSize, icon_type: St.IconType.SYMBOLIC });
+		let favAppsSettingsImage = new St.Icon({ icon_name: "system-settings-symbolic", icon_size: this.iconSize, icon_type: St.IconType.SYMBOLIC });
+		let recentSettingsImage = new St.Icon({ icon_name: "system-settings-symbolic", icon_size: this.iconSize, icon_type: St.IconType.SYMBOLIC });
         let userSettingsButton = new St.Button();
         let systemSettingsButton = new St.Button();
         let favoritesSettingsButton = new St.Button();
@@ -867,24 +891,65 @@ class DirectApplet extends Applet.TextIconApplet {
                     else return 0;
                 }
             );
+        } else if (this.favoriteSortingMethod === "customSort") {
+            var favoriteCustomURIs = [];
+            for (let fav of this.favoriteCustomList)
+                favoriteCustomURIs.push(fav.uri);
+            //~ global.log("favoriteCustomURIs: " + favoriteCustomURIs);
+            infos = infos.sort ( (a, b) => {
+                let aURI = a.uri;
+                let bURI = b.uri;
+                if (favoriteCustomURIs.indexOf(aURI) < favoriteCustomURIs.indexOf(bURI)) return -1;
+                if (favoriteCustomURIs.indexOf(aURI) > favoriteCustomURIs.indexOf(bURI)) return 1;
+                return 0;
+            });
         }
 
-        if ( this.favoriteSizeLimit !== 0 && this.favorites.get_n_favorites() > this.favoriteSizeLimit )
+        if ( this.favoriteSortingMethod !== "customSort" && this.favoriteSizeLimit !== 0 && this.favorites.get_n_favorites() > this.favoriteSizeLimit )
             infos = infos.slice( 0, this.favoriteSizeLimit );
 
-        if (infos.length > 0) {
-            for (let i = 0; i < infos.length; i++) {
-                let info = infos[i];
-
-                let button = new FavoriteMenuItem(info, this);
-
-                button.connect("activate", (button, event)=> {
-                    this.favorites.launch(button.info.uri, event.get_time());
-                    this.menu.toggle();
-                })
-
-                this._favoriteButtons.push(button);
-                this.favoriteSection.addMenuItem(button);
+        if (this.favoriteSortingMethod === "customSort") {
+            if (this.favoriteCustomList.length > 0) {
+                for (let i = 0; i < this.favoriteCustomList.length; i++) {
+                    let _info = this.favoriteCustomList[i];
+                    if (_info["menu"] == false) continue;
+    
+                    var info = null;
+                    for (let _inf of infos) {
+                        if (_inf.uri === _info["uri"]) {
+                            info = _inf;
+                            break
+                        }
+                    }
+                    
+                    if (info == null) continue;
+                    
+                    let button = new FavoriteMenuItem(info, this);
+    
+                    button.connect("activate", (button, event)=> {
+                        this.favorites.launch(button.info.uri, event.get_time());
+                        this.menu.toggle();
+                    })
+    
+                    this._favoriteButtons.push(button);
+                    this.favoriteSection.addMenuItem(button);
+                }
+            }
+        } else {
+            if (infos.length > 0) {
+                for (let i = 0; i < infos.length; i++) {
+                    let info = infos[i];
+    
+                    let button = new FavoriteMenuItem(info, this);
+    
+                    button.connect("activate", (button, event)=> {
+                        this.favorites.launch(button.info.uri, event.get_time());
+                        this.menu.toggle();
+                    })
+    
+                    this._favoriteButtons.push(button);
+                    this.favoriteSection.addMenuItem(button);
+                }
             }
         }
     }
