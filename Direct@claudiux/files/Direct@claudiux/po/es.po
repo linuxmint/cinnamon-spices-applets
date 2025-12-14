@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-12-14 20:56+0100\n"
-"PO-Revision-Date: 2025-11-27 16:49-0300\n"
+"PO-Revision-Date: 2025-12-14 19:32-0300\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -362,7 +362,7 @@ msgstr "Tiempo añadido"
 
 #. settings-schema.json->favoriteSortingMethod->options
 msgid "Custom Sort"
-msgstr ""
+msgstr "Clasificación personalizada"
 
 #. settings-schema.json->favoriteSortingMethod->description
 #. settings-schema.json->sortingMethod->description
@@ -370,17 +370,17 @@ msgid "Sorting method"
 msgstr "Método de clasificación"
 
 #. settings-schema.json->favoriteLabel->description
-#, fuzzy
 msgid ""
 "Below are the favorite documents displayed in the menu when checked.\n"
 "The Name can be changed here, but is unchanged in menu.\n"
 "The URI must not be changed.\n"
 "Favorite documents can only be managed by nemo."
 msgstr ""
-"A continuación se muestran las aplicaciones favoritas que aparecen en el "
-"menú cuando se marcan.\n"
-"El nombre se puede cambiar.\n"
-"El lanzador no se debe cambiar."
+"A continuación se muestran los documentos favoritos que aparecen en el menú "
+"cuando se marcan.\n"
+"El nombre se puede cambiar aquí, pero no se modifica en el menú.\n"
+"La URI no se debe cambiar.\n"
+"Los documentos favoritos solo se pueden gestionar con nemo."
 
 #. settings-schema.json->favoriteCustomList->columns->title
 #. settings-schema.json->favApps->columns->title
@@ -389,16 +389,15 @@ msgstr "Menú"
 
 #. settings-schema.json->favoriteCustomList->columns->title
 msgid "⚠️ Name"
-msgstr ""
+msgstr "⚠️ Nombre"
 
 #. settings-schema.json->favoriteCustomList->columns->title
 msgid "⚠️ URI"
-msgstr ""
+msgstr "⚠️ URI"
 
 #. settings-schema.json->favoritePopulateButton->description
-#, fuzzy
 msgid "Add all your Favorite Documents"
-msgstr "Todos los documentos favoritos"
+msgstr "Añade todos tus documentos favoritos"
 
 #. settings-schema.json->favoriteSizeLimit->options
 #. settings-schema.json->recentSizeLimit->options
