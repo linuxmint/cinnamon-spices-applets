@@ -150,7 +150,6 @@ class RecentFileMenuItem extends IconMenuItem {
 
         super(text, icon);
 
-        //~ this.connect("activate", Lang.bind(this, function(actor, event) {
         this.connect("activate", (actor, event) => {
             let button = event.get_button();
             if (button == 3) {
@@ -160,7 +159,6 @@ class RecentFileMenuItem extends IconMenuItem {
             } else {
                 Gio.app_info_launch_default_for_uri(uri, global.create_app_launch_context());
             }
-        //~ }));
         });
 
         let info = (showUri) ? decodeURIComponent(uri.replace("file://", "").replace(HOME_DIR, "~")) : text;
@@ -382,11 +380,6 @@ class DirectApplet extends Applet.TextIconApplet {
         this.settings.bind("favoriteSizeLimit", "favoriteSizeLimit");
         this.settings.bind("sortingMethod", "sortingMethod");
         this.settings.bind("favoriteSortingMethod", "favoriteSortingMethod");
-        //~ var favoriteSortingOptions = this.settings.getOptions("favoriteSortingMethod");
-        //~ var customOptionFound = false;
-        //~ for (let option of Object.values(favoriteSortingOptions)) {
-            //~ global.log(option);
-        //~ }
         this.settings.bind("favoriteCustomList", "favoriteCustomList");
         this.settings.bind("recentShowUri", "recentShowUri");
         this.settings.bind("favoriteShowUri", "favoriteShowUri");
@@ -430,7 +423,6 @@ class DirectApplet extends Applet.TextIconApplet {
         }
         if ( this.keyOpen.length === 0 ) return;
         this.keyId = "Direct-open";
-        //~ Main.keybindingManager.addHotKey(this.keyId, this.keyOpen, Lang.bind(this, this.openMenu));
         Main.keybindingManager.addHotKey(this.keyId, this.keyOpen, () => this.openMenu());
     }
     
@@ -567,7 +559,6 @@ class DirectApplet extends Applet.TextIconApplet {
                 userTitle.addActor(userSearchButton);
 
                 userSearchButton.add_actor(userSearchImage);
-                //~ userSearchButton.connect("clicked", Lang.bind(this, this.search, HOME_DIR));
                 userSearchButton.connect("clicked", (a, b) => this.search(a, b, HOME_DIR));
                 new Tooltips.Tooltip(userSearchButton, _("Search Home Folder"));
                 
@@ -608,7 +599,6 @@ class DirectApplet extends Applet.TextIconApplet {
                 systemTitle.addActor(systemSettingsButton);
                 let systemSearchImage = new St.Icon({ icon_name: "edit-find", icon_size: 16, icon_type: St.IconType.SYMBOLIC });
                 systemSearchButton.add_actor(systemSearchImage);
-                //~ systemSearchButton.connect("clicked", Lang.bind(this, this.search));
                 systemSearchButton.connect("clicked", (a, b) => this.search(a, b));
                 new Tooltips.Tooltip(systemSearchButton, _("Search File System"));
                 
@@ -625,8 +615,6 @@ class DirectApplet extends Applet.TextIconApplet {
                 systemPane.actor.add_actor(systemScrollBox);
                 systemScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
                 let systemVscroll = systemScrollBox.get_vscroll_bar();
-                //~ systemVscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
-                //~ systemVscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
                 systemVscroll.connect("scroll-start", () => { this.menu.passEvents = true; });
                 systemVscroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
 
@@ -658,8 +646,6 @@ class DirectApplet extends Applet.TextIconApplet {
                 favoritesPane.actor.add_actor(favoritesScrollBox);
                 favoritesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
                 let favVscroll = favoritesScrollBox.get_vscroll_bar();
-                //~ favVscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
-                //~ favVscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
                 favVscroll.connect("scroll-start", () => { this.menu.passEvents = true; });
                 favVscroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
 
@@ -691,8 +677,6 @@ class DirectApplet extends Applet.TextIconApplet {
                 favAppsPane.actor.add_actor(favAppsScrollBox);
                 favAppsScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
                 let favAppsVscroll = favAppsScrollBox.get_vscroll_bar();
-                //~ favAppsVscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
-                //~ favAppsVscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
                 favAppsVscroll.connect("scroll-start", () => { this.menu.passEvents = true; });
                 favAppsVscroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
 
@@ -895,7 +879,6 @@ class DirectApplet extends Applet.TextIconApplet {
             var favoriteCustomURIs = [];
             for (let fav of this.favoriteCustomList)
                 favoriteCustomURIs.push(fav.uri);
-            //~ global.log("favoriteCustomURIs: " + favoriteCustomURIs);
             infos = infos.sort ( (a, b) => {
                 let aURI = a.uri;
                 let bURI = b.uri;
