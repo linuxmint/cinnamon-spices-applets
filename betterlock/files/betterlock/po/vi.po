@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: betterlock 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-13 11:28+0100\n"
+"POT-Creation-Date: 2025-12-14 12:26+0100\n"
 "PO-Revision-Date: 2025-10-08 21:24+0700\n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -18,45 +18,45 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:116
+#. applet.js:104
 msgid "Scr Lock"
 msgstr "Khóa màn hình"
 
-#. applet.js:120
+#. applet.js:108
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#. applet.js:124
+#. applet.js:112
 msgid "Caps Lock"
 msgstr "Caps lock"
 
-#. applet.js:166
+#. applet.js:156
 msgid "Lock Keys"
 msgstr "Lock Keys"
 
-#. applet.js:233
-msgid "Scr lock on"
-msgstr "Khóa màn hình đang bật"
-
-#. applet.js:236
-msgid "Scr lock off"
-msgstr "Khóa màn hình đang tắt"
-
-#. applet.js:245
-msgid "Num lock on"
-msgstr "Num Lock đang bật"
-
-#. applet.js:248
-msgid "Num lock off"
-msgstr "Num Lock đang tắt"
-
-#. applet.js:257
+#. applet.js:232
 msgid "Caps lock on"
 msgstr "Caps lock đang bật"
 
-#. applet.js:260
+#. applet.js:234
 msgid "Caps lock off"
 msgstr "Caps lock đang tắt"
+
+#. applet.js:240
+msgid "Num lock on"
+msgstr "Num Lock đang bật"
+
+#. applet.js:242
+msgid "Num lock off"
+msgstr "Num Lock đang tắt"
+
+#. applet.js:248
+msgid "Scr lock on"
+msgstr "Khóa màn hình đang bật"
+
+#. applet.js:250
+msgid "Scr lock off"
+msgstr "Khóa màn hình đang tắt"
 
 #. metadata.json->description
 msgid ""

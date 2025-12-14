@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-13 11:28+0100\n"
+"POT-Creation-Date: 2025-12-14 12:26+0100\n"
 "PO-Revision-Date: 2024-11-11 20:35+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
@@ -19,45 +19,45 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. applet.js:116
+#. applet.js:104
 msgid "Scr Lock"
 msgstr "Scr Lock"
 
-#. applet.js:120
+#. applet.js:108
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#. applet.js:124
+#. applet.js:112
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#. applet.js:166
+#. applet.js:156
 msgid "Lock Keys"
 msgstr "Lukitusnäppäimet"
 
-#. applet.js:233
-msgid "Scr lock on"
-msgstr "Scr lock päällä"
-
-#. applet.js:236
-msgid "Scr lock off"
-msgstr "Scr lock pois"
-
-#. applet.js:245
-msgid "Num lock on"
-msgstr "Num lock päällä"
-
-#. applet.js:248
-msgid "Num lock off"
-msgstr "Num lock pois"
-
-#. applet.js:257
+#. applet.js:232
 msgid "Caps lock on"
 msgstr "Caps lock päällä"
 
-#. applet.js:260
+#. applet.js:234
 msgid "Caps lock off"
 msgstr "Caps lock pois"
+
+#. applet.js:240
+msgid "Num lock on"
+msgstr "Num lock päällä"
+
+#. applet.js:242
+msgid "Num lock off"
+msgstr "Num lock pois"
+
+#. applet.js:248
+msgid "Scr lock on"
+msgstr "Scr lock päällä"
+
+#. applet.js:250
+msgid "Scr lock off"
+msgstr "Scr lock pois"
 
 #. metadata.json->description
 msgid ""

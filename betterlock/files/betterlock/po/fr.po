@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: betterlock 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-13 11:28+0100\n"
+"POT-Creation-Date: 2025-12-14 12:26+0100\n"
 "PO-Revision-Date: 2025-11-07 08:50+0100\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: \n"
@@ -19,45 +19,45 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:116
+#. applet.js:104
 msgid "Scr Lock"
 msgstr "Verr écr"
 
-#. applet.js:120
+#. applet.js:108
 msgid "Num Lock"
 msgstr "Verr num"
 
-#. applet.js:124
+#. applet.js:112
 msgid "Caps Lock"
 msgstr "Verr maj"
 
-#. applet.js:166
+#. applet.js:156
 msgid "Lock Keys"
 msgstr "Touches verrouillées"
 
-#. applet.js:233
-msgid "Scr lock on"
-msgstr "Verr écr activé"
-
-#. applet.js:236
-msgid "Scr lock off"
-msgstr "Verr écr désactivé"
-
-#. applet.js:245
-msgid "Num lock on"
-msgstr "Verr écr activé"
-
-#. applet.js:248
-msgid "Num lock off"
-msgstr "Verr num désactivé"
-
-#. applet.js:257
+#. applet.js:232
 msgid "Caps lock on"
 msgstr "Verr maj activé"
 
-#. applet.js:260
+#. applet.js:234
 msgid "Caps lock off"
 msgstr "Verr maj désactivé"
+
+#. applet.js:240
+msgid "Num lock on"
+msgstr "Verr écr activé"
+
+#. applet.js:242
+msgid "Num lock off"
+msgstr "Verr num désactivé"
+
+#. applet.js:248
+msgid "Scr lock on"
+msgstr "Verr écr activé"
+
+#. applet.js:250
+msgid "Scr lock off"
+msgstr "Verr écr désactivé"
 
 #. metadata.json->description
 msgid ""

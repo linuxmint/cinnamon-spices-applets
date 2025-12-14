@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-13 11:28+0100\n"
+"POT-Creation-Date: 2025-12-14 12:26+0100\n"
 "PO-Revision-Date: 2023-03-12 16:11+0200\n"
 "Last-Translator: Cássio Louzada Rizzi <clrizzi@gmail.com>\n"
 "Language-Team: \n"
@@ -19,45 +19,45 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. applet.js:116
+#. applet.js:104
 msgid "Scr Lock"
 msgstr "Scrool Lock"
 
-#. applet.js:120
+#. applet.js:108
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#. applet.js:124
+#. applet.js:112
 msgid "Caps Lock"
 msgstr "CAPS Lock"
 
-#. applet.js:166
+#. applet.js:156
 msgid "Lock Keys"
 msgstr "Teclas de bloqueio"
 
-#. applet.js:233
-msgid "Scr lock on"
-msgstr "Scrool Lock ativado"
-
-#. applet.js:236
-msgid "Scr lock off"
-msgstr "Scrool Lock desativado"
-
-#. applet.js:245
-msgid "Num lock on"
-msgstr "Num Lock ativado"
-
-#. applet.js:248
-msgid "Num lock off"
-msgstr "Num Lock desativado"
-
-#. applet.js:257
+#. applet.js:232
 msgid "Caps lock on"
 msgstr "CAPS Lock ativado"
 
-#. applet.js:260
+#. applet.js:234
 msgid "Caps lock off"
 msgstr "CAPS Lock desativado"
+
+#. applet.js:240
+msgid "Num lock on"
+msgstr "Num Lock ativado"
+
+#. applet.js:242
+msgid "Num lock off"
+msgstr "Num Lock desativado"
+
+#. applet.js:248
+msgid "Scr lock on"
+msgstr "Scrool Lock ativado"
+
+#. applet.js:250
+msgid "Scr lock off"
+msgstr "Scrool Lock desativado"
 
 #. metadata.json->description
 msgid ""
