@@ -13,7 +13,7 @@ const Settings = imports.ui.settings;
 const ModalDialog = imports.ui.modalDialog;
 
 const UUID = "betterlock";
-const ICON_SIZE = 18;
+const NOTIF_ICON_SIZE = 18;
 
 // l10n/translation
 const GLib = imports.gi.GLib;
@@ -53,37 +53,31 @@ MyApplet.prototype = {
         this.caps_on = new St.Icon({
             icon_name: "caps-on",
             icon_type: St.IconType.SYMBOLIC,
-            icon_size: ICON_SIZE,
             style_class: "system-status-icon"
         });
         this.caps_off = new St.Icon({
             icon_name: "caps-off",
             icon_type: St.IconType.SYMBOLIC,
-            icon_size: ICON_SIZE,
             style_class: "system-status-icon"
         });
         this.num_on = new St.Icon({
             icon_name: "num-on",
             icon_type: St.IconType.SYMBOLIC,
-            icon_size: ICON_SIZE,
             style_class: "system-status-icon"
         });
         this.num_off = new St.Icon({
             icon_name: "num-off",
             icon_type: St.IconType.SYMBOLIC,
-            icon_size: ICON_SIZE,
             style_class: "system-status-icon"
         });
         this.scr_on = new St.Icon({
             icon_name: "scr-on",
             icon_type: St.IconType.SYMBOLIC,
-            icon_size: ICON_SIZE,
             style_class: "system-status-icon"
         });
         this.scr_off = new St.Icon({
             icon_name: "scr-off",
             icon_type: St.IconType.SYMBOLIC,
-            icon_size: ICON_SIZE,
             style_class: "system-status-icon"
         });
 
@@ -119,8 +113,13 @@ MyApplet.prototype = {
 
         this._keyboardStateChangedId = Keymap.connect('state-changed', Lang.bind(this, this._updateState));
         this._firstRun = true;
+        this._updateIconsSize();
         this._updateState();
         this._updateIconVisibility();
+    },
+
+    on_panel_icon_size_changed: function() {
+        this._updateIconsSize();
     },
 
     on_applet_removed_from_panel: function() {
@@ -148,7 +147,7 @@ MyApplet.prototype = {
             let icon = new St.Icon({
                 icon_name: iconName,
                 icon_type: St.IconType.SYMBOLIC,
-                icon_size: ICON_SIZE
+                icon_size: NOTIF_ICON_SIZE
             });
             this._notification = new MessageTray.Notification(this._source, _("Lock Keys"), text, {
                 icon: icon,
@@ -164,6 +163,17 @@ MyApplet.prototype = {
         if (this.showOSDNotifications) {
             Main.osdWindowManager.show(-1, Gio.Icon.new_for_string(iconName), text, null);
         }
+    },
+
+
+    _updateIconsSize: function() {
+        let size = this.getPanelIconSize(St.IconType.SYMBOLIC);
+        this.caps_on.icon_size = size;
+        this.caps_off.icon_size = size;
+        this.num_on.icon_size = size;
+        this.num_off.icon_size = size;
+        this.scr_on.icon_size = size;
+        this.scr_off.icon_size = size;
     },
 
     _updateIconVisibility: function() {
