@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-24 23:49+0100\n"
+"POT-Creation-Date: 2025-12-14 20:56+0100\n"
 "PO-Revision-Date: 2025-11-17 10:08+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -18,19 +18,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.8\n"
 
-#. applet.js:44 applet.js:578
+#. applet.js:44 applet.js:602
 msgid "SYSTEM"
 msgstr "RENDSZER"
 
-#. applet.js:44 applet.js:621
+#. applet.js:44 applet.js:645
 msgid "FAVORITES"
 msgstr "KEDVENCEK"
 
-#. applet.js:44 applet.js:654
+#. applet.js:44 applet.js:678
 msgid "APPLICATIONS"
 msgstr "ALKALMAZÁSOK"
 
-#. applet.js:44 applet.js:687
+#. applet.js:44 applet.js:711
 msgid "RECENT DOCUMENTS"
 msgstr "MOSTANÁBAN MEGNYITOTT DOKUMENTUMOK"
 
@@ -43,39 +43,39 @@ msgstr "(Jobb egérgomb a mappa megnyitásához)"
 msgid "Direct"
 msgstr "Közvetlen"
 
-#. applet.js:548
+#. applet.js:572
 msgid "Search Home Folder"
 msgstr "Saját mappában keresés"
 
-#. applet.js:555 applet.js:596 applet.js:629 applet.js:662 applet.js:695
+#. applet.js:579 applet.js:620 applet.js:653 applet.js:686 applet.js:719
 msgid "Configure"
 msgstr ""
 
-#. applet.js:589
+#. applet.js:613
 msgid "Search File System"
 msgstr "Fájlrendszerben keresés"
 
-#. applet.js:709
+#. applet.js:733
 msgid "Clear"
 msgstr "Törlés"
 
-#. applet.js:716
+#. applet.js:740
 msgid "Recent"
 msgstr "Friss"
 
-#. applet.js:764
+#. applet.js:788
 msgid "Computer"
 msgstr "Számítógép"
 
-#. applet.js:770
+#. applet.js:794
 msgid "File System"
 msgstr "Fájlrendszer"
 
-#. applet.js:787
+#. applet.js:811
 msgid "Network"
 msgstr "Hálózat"
 
-#. applet.js:1030
+#. applet.js:1095
 msgid "Trash"
 msgstr "Kuka"
 
@@ -261,6 +261,7 @@ msgid "Name"
 msgstr "Név"
 
 #. settings-schema.json->displayOrder->description
+#. settings-schema.json->favoriteCustomList->description
 msgid "Display order in the menu"
 msgstr "Megjelenítési sorrend a menüben"
 
@@ -358,10 +359,45 @@ msgstr "Kedvenc dokumentumok megjelenítése"
 msgid "Added time"
 msgstr "Hozzáadott idő"
 
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Custom Sort"
+msgstr ""
+
 #. settings-schema.json->favoriteSortingMethod->description
 #. settings-schema.json->sortingMethod->description
 msgid "Sorting method"
 msgstr "Rendezési módszer"
+
+#. settings-schema.json->favoriteLabel->description
+#, fuzzy
+msgid ""
+"Below are the favorite documents displayed in the menu when checked.\n"
+"The Name can be changed here, but is unchanged in menu.\n"
+"The URI must not be changed.\n"
+"Favorite documents can only be managed by nemo."
+msgstr ""
+"Az alábbiakban a menüben megjelenő kedvenc alkalmazások láthatók, ha be "
+"vannak jelölve.\n"
+"A név módosítható.\n"
+"Az Indítót nem szabad módosítani."
+
+#. settings-schema.json->favoriteCustomList->columns->title
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr "Menü"
+
+#. settings-schema.json->favoriteCustomList->columns->title
+msgid "⚠️ Name"
+msgstr ""
+
+#. settings-schema.json->favoriteCustomList->columns->title
+msgid "⚠️ URI"
+msgstr ""
+
+#. settings-schema.json->favoritePopulateButton->description
+#, fuzzy
+msgid "Add all your Favorite Documents"
+msgstr "Minden kedvenc dokumentum"
 
 #. settings-schema.json->favoriteSizeLimit->options
 #. settings-schema.json->recentSizeLimit->options
@@ -429,10 +465,6 @@ msgstr ""
 #. settings-schema.json->favApps->description
 msgid "Favorite apps shown"
 msgstr "Kedvenc alkalmazások megjelenítése"
-
-#. settings-schema.json->favApps->columns->title
-msgid "Menu"
-msgstr "Menü"
 
 #. settings-schema.json->favApps->columns->title
 msgid "⚠️ Launcher"

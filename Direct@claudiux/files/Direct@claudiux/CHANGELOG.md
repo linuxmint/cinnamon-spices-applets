@@ -1,3 +1,9 @@
+### v1.5.0~20251214
+* Now available: Custom sorting of favorite documents.
+* Fixes an issue with an icon when certain themes are in use.
+* Fixes [#8070](https://github.com/linuxmint/cinnamon-spices-applets/issues/8070).
+* Fixes [#8071](https://github.com/linuxmint/cinnamon-spices-applets/issues/8071).
+
 ### v1.4.0~20251212
 * Use xlet-settings instead of cinnamon-settings to configure applet.
 
