@@ -42,11 +42,10 @@ MyApplet.prototype = {
         this.settings.bind("show-toast-notifications", "showToastNotifications", null);
         this.settings.bind("show-osd-notifications", "showOSDNotifications", null);
         this.settings.bind("show-silent-notifications", "showSilentNotifications", null)
-        this.settings.bind("show-caps-lock-indicator", "showCapsLockIndicator", this._updateIconVisibility);
-        this.settings.bind("show-num-lock-indicator", "showNumLockIndicator", this._updateIconVisibility);
-        this.settings.bind("show-scr-lock-indicator", "showScrLockIndicator", this._updateIconVisibility);
-        this.settings.bind("hide-inactive-indicators", "hideInactiveIndicators", this._updateIconVisibility);
-
+        this.settings.bind("show-caps-lock-indicator", "showCapsLockIndicator", this._updateAllIndicators);
+        this.settings.bind("show-num-lock-indicator", "showNumLockIndicator", this._updateAllIndicators);
+        this.settings.bind("show-scr-lock-indicator", "showScrLockIndicator", this._updateAllIndicators);
+        this.settings.bind("hide-inactive-indicators", "hideInactiveIndicators", this._updateAllIndicators);
         this.settings.bind("toggle-on-click", "toggleOnClick", null);
 
 
@@ -102,7 +101,6 @@ MyApplet.prototype = {
         });
         this.actor.style = 'spacing: 2px';
 
-
         this.scrMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Scr Lock"), false);
         this.scrMenuItem.connect('activate', Lang.bind(this, this._onScrChanged));
         this._applet_context_menu.addMenuItem(this.scrMenuItem);
@@ -115,11 +113,13 @@ MyApplet.prototype = {
         this.capsMenuItem.connect('activate', Lang.bind(this, this._onCapsChanged));
         this._applet_context_menu.addMenuItem(this.capsMenuItem);
 
-        this._keyboardStateChangedId = Keymap.connect('state-changed', Lang.bind(this, this._updateState));
-        this._firstRun = true;
+        this.scrlock_state = this._getScrlockState();
+        this.numlock_state = this._getNumlockState();
+        this.capslock_state = this._getCapslockState();
+
+        this._keyboardStateChangedId = Keymap.connect('state-changed', Lang.bind(this, this._onAnyLockStateChanged));
         this._updateIconsSize();
-        this._updateState();
-        this._updateIconVisibility();
+        this._updateAllIndicators();
     },
 
     on_panel_icon_size_changed: function() {
@@ -169,7 +169,6 @@ MyApplet.prototype = {
         }
     },
 
-
     _updateIconsSize: function() {
         let size = this.getPanelIconSize(St.IconType.SYMBOLIC);
         this.caps_on.icon_size = size;
@@ -180,19 +179,34 @@ MyApplet.prototype = {
         this.scr_off.icon_size = size;
     },
 
-    _updateIconVisibility: function() {
+    _updateAllIndicators: function() {
+        this._updateCapsLockIcon();
+        this._updateCapsLockIndicatorVisibility();
+        this._updateNumLockIcon();
+        this._updateNumLockIndicatorVisibility();
+        this._updateScrLockIcon();
+        this._updateScrLockIndicatorVisibility();
+    },
+
+    _updateCapsLockIndicatorVisibility: function() {
         if (this.showCapsLockIndicator &&
                 !(this.hideInactiveIndicators && !this.capslock_state)) {
             this.binCaps.show();
         } else {
             this.binCaps.hide();
         }
+    },
+
+    _updateNumLockIndicatorVisibility: function() {
         if (this.showNumLockIndicator &&
                 !(this.hideInactiveIndicators && !this.numlock_state)) {
             this.binNum.show();
         } else {
             this.binNum.hide();
         }
+    },
+
+    _updateScrLockIndicatorVisibility: function() {
         if (this.showScrLockIndicator &&
                 !(this.hideInactiveIndicators && !this.scrlock_state_state)) {
             this.binScr.show();
@@ -201,76 +215,80 @@ MyApplet.prototype = {
         }
     },
 
-    _updateState: function() {
+    _updateCapsLockIcon: function() {
+        this.binCaps.child = this.capslock_state ? this.caps_on : this.caps_off;
+    },
+
+    _updateNumLockIcon: function() {
+        this.binNum.child = this.numlock_state ? this.num_on : this.num_off;
+    },
+
+    _updateScrLockIcon: function() {
+        this.binScr.child = this.scrlock_state ? this.scr_on : this.scr_off;
+    },
+
+    _notifyCapsLock: function() {
+        if (this.capslock_state) {
+            this._notifyMessage ('caps-on', _("Caps lock on"));
+        } else {
+            this._notifyMessage ('caps-off', _("Caps lock off"));
+        }
+    },
+
+    _notifyNumLock: function() {
+        if (this.capslock_state) {
+            this._notifyMessage ('num-on', _("Num lock on"));
+        } else {
+            this._notifyMessage ('num-off', _("Num lock off"));
+        }
+    },
+
+    _notifyScrLock: function() {
+        if (this.scrlock_state) {
+            this._notifyMessage ('scr-on', _("Scr lock on"));
+        } else {
+            this._notifyMessage ('scr-off', _("Scr lock off"));
+        }
+    },
+
+    _onAnyLockStateChanged: function() {
+        let scrlock_prev_state = this.scrlock_state;
+        let numlock_prev_state = this.numlock_state;
+        let capslock_prev_state = this.capslock_state;
+
         this.scrlock_state = this._getScrlockState();
         this.numlock_state = this._getNumlockState();
         this.capslock_state = this._getCapslockState();
 
-        let scrlock_prev = this.binScr.child;
-        let numlock_prev = this.binNum.child;
-        let capslock_prev = this.binCaps.child;
-        if (this.scrlock_state)
-            this.binScr.child = this.scr_on;
-        else
-            this.binScr.child = this.scr_off;
+        if (this.scrlock_state !== scrlock_prev_state) {
+            this.scrMenuItem.setToggleState(this.scrlock_state);
 
-        if (this.numlock_state)
-            this.binNum.child = this.num_on;
-        else
-            this.binNum.child = this.num_off;
-
-        if (this.capslock_state)
-            this.binCaps.child = this.caps_on;
-        else
-            this.binCaps.child = this.caps_off;
-
-        let msg, icon_name;
-
-        this.scrMenuItem.setToggleState(this.scrlock_state);
-        this.numMenuItem.setToggleState(this.numlock_state);
-        this.capsMenuItem.setToggleState(this.capslock_state);
-        if (scrlock_prev != this.binScr.child && !this._firstRun) {
-            if (this.binScr.child == this.scr_on) {
-                msg = _("Scr lock on");
-                icon_name = 'scr-on';
-            } else {this.indicatorType == "num-only"
-                msg = _("Scr lock off");
-                icon_name = 'scr-off';
-            }
             if (this.showScrLockIndicator) {
-                this._notifyMessage(icon_name, msg);
+                this._updateScrLockIcon();
+                this._updateScrLockIndicatorVisibility();
+                this._notifyScrLock();
             }
         }
-        if (numlock_prev != this.binNum.child && !this._firstRun) {
-            if (this.binNum.child == this.num_on) {
-                msg = _("Num lock on");
-                icon_name = 'num-on';
-            } else {
-                msg = _("Num lock off");
-                icon_name = 'num-off';
-            }
+
+        if (this.numlock_state !== numlock_prev_state) {
+            this.numMenuItem.setToggleState(this.numlock_state);
+
             if (this.showNumLockIndicator) {
-                this._notifyMessage(icon_name, msg);
+                this._updateNumLockIcon();
+                this._updateNumLockIndicatorVisibility();
+                this._notifyNumLock();
             }
         }
-        if (capslock_prev != this.binCaps.child && !this._firstRun) {
-            if (this.binCaps.child == this.caps_on) {
-                msg = _("Caps lock on");
-                icon_name = 'caps-on';
-            } else {
-                msg = _("Caps lock off");
-                icon_name = 'caps-off';
-            }
+
+        if (this.capslock_state !== capslock_prev_state) {
+            this.capsMenuItem.setToggleState(this.capslock_state);
+
             if (this.showCapsLockIndicator) {
-                this._notifyMessage(icon_name, msg);
+                this._updateCapsLockIcon();
+                this._updateCapsLockIndicatorVisibility();
+                this._notifyCapsLock();
             }
         }
-
-        if (this.hideInactiveIndicators) {
-            this._updateIconVisibility();
-        }
-
-        this._firstRun = false;
     },
 
     _getScrlockState: function() {
@@ -306,7 +324,7 @@ MyApplet.prototype = {
             Caribou.DisplayAdapter.get_default().keyval_press(keyval);
             Caribou.DisplayAdapter.get_default().keyval_release(keyval);
         }
-        this._updateState();
+        this._onLockStateChanged();
     },
 
     _onScrChanged: function(_actor, _event) {
