@@ -16,13 +16,37 @@ let AlarmService = null;
 let Time = null;
 
 function _playChime(onPid) {
-  try {
-    if (GLib.find_program_in_path("canberra-gtk-play")) {
-      const pid = Util.spawn(["canberra-gtk-play", "-i", "alarm-clock-elapsed"]);
+  const candidates = [
+    // Preferred: play a known system sound file directly (more reliable than sound-theme lookup).
+    {
+      cmd: "paplay",
+      argv: () => {
+        const paths = [
+          "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga",
+          "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.ogg",
+        ];
+        const soundPath = paths.find((p) => GLib.file_test(p, GLib.FileTest.EXISTS));
+        return soundPath ? ["paplay", soundPath] : null;
+      },
+    },
+    // Fallback: sound-theme lookup.
+    {
+      cmd: "canberra-gtk-play",
+      argv: () => ["canberra-gtk-play", "-i", "alarm-clock-elapsed"],
+    },
+  ];
+
+  for (const candidate of candidates) {
+    try {
+      if (!GLib.find_program_in_path(candidate.cmd)) continue;
+      const argv = candidate.argv();
+      if (!argv) continue;
+      const pid = Util.spawn(argv);
       if (onPid && pid) onPid(pid);
+      return;
+    } catch (e) {
+      // try next candidate
     }
-  } catch (e) {
-    // ignore
   }
 }
 
