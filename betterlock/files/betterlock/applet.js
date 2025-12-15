@@ -236,7 +236,7 @@ MyApplet.prototype = {
     },
 
     _notifyNumLock: function() {
-        if (this.capslock_state) {
+        if (this.numlock_state) {
             this._notifyMessage ('num-on', _("Num lock on"));
         } else {
             this._notifyMessage ('num-off', _("Num lock off"));
