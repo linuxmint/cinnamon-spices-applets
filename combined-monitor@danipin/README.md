@@ -1,45 +1,47 @@
-# Combined Monitor Applet für Cinnamon
-> Systemüberwachung von CPU, RAM und SWAP in einem einzigen, kompakten Panel-Element.
+# Combined Monitor Applet for Cinnamon
+> System monitoring of CPU, RAM, SWAP, and TEMP in a single, compact panel element.
 > UUID: combined-monitor@danipin
 
-## 🖥️ Funktionen
-Dieses Applet bietet eine umfassende Übersicht über die Systemauslastung direkt in Ihrer Cinnamon-Leiste.
+## 🖥️ Features
+This applet offers a comprehensive overview of system usage directly in your Cinnamon panel.
 
-* **Kompakte Anzeige:** Zeigt CPU-, RAM- und SWAP-Auslastung (%) in einem Element.
-* **Visuelle Schwellwerte:** Frei konfigurierbare Farbregeln (LOW, MED, HIGH, CRITICAL) zur visuellen Warnung.
-* **Anpassbares Layout:** Die Reihenfolge der Metriken (z.B. CPU | RAM | SWAP) kann über die Einstellungen oder durch Scrollen mit dem Mausrad über das Applet gewechselt werden.
-* **Flexibles Design:** Unterstützt Textlabels, Theme-Icons oder die Verwendung eigener SVG/PNG-Symbole, um das Applet perfekt in das Desktop-Theme zu integrieren.
-* **Einstellbares Trennzeichen:** Konfigurieren Sie das Trennzeichen und dessen Farbe (Standard ist `|`).
-* **SWAP-Option:** Kann so eingestellt werden, dass SWAP nur angezeigt wird, wenn es tatsächlich genutzt wird (> 0%).
+* **Compact Display:** Shows CPU, RAM, SWAP, and CPU temperature usage in one element.
+* **CPU Temperature (TEMP):** Displays the CPU temperature with configurable thresholds in Celsius or Fahrenheit. The function searches for the most reliable kernel sensors (`/sys/class/hwmon` or `/sys/class/thermal`).
+* **Profile Management:** Quickly save and load up to three complete configurations via the context menu.
+* **Visual Thresholds:** Freely configurable color rules (LOW, MED, HIGH, CRITICAL) for visual warning for all metrics.
+* **Customizable Layout:** The order of metrics (e.g., CPU | TEMP | RAM | SWAP) can be changed via settings or by scrolling the mouse wheel over the applet.
+* **Flexible Design:** Supports text labels, theme icons, or the use of custom SVG/PNG symbols.
+* **Configurable Separator:** Configure the separator and its color (default is `|`).
+* **SWAP Option:** Can be set so that SWAP is only displayed when actually in use (> 0%).
 
-## ⚙️ Installation
+## ⚠️ Important System Requirement for Temperature Display
 
-### 1. Manuelle Installation
+Since the temperature function reads sensor data directly from the Linux kernel, it relies on the correct detection of compatible thermal or hwmon sensors. In rare cases, the applet may not find the correct sensor path for your CPU/system, causing the temperature display to not work. This is a system-side issue that is typically only resolved by manually specifying the sensor path in the advanced settings.
 
-1.  Laden Sie das Applet-Archiv (z.B. von GitHub) herunter und entpacken Sie es. Der entstandene Ordner heißt z.B. `cinnamon-combined-monitor-main`.
+## ⬇️ Installation
 
-2.  **❗ WICHTIG – Ordner umbenennen ❗**
-    Der Ordner muss für Cinnamon **zwingend** in den Namen der Applet-UUID umbenannt werden: **`combined-monitor@danipin`**
+### 1. Manual Installation
 
-3.  Kopieren Sie den **umbenannten Ordner** in Ihr lokales Cinnamon-Applet-Verzeichnis:
+1. Download the applet archive (e.g., from GitHub) and unzip it. The resulting folder is named, e.g., `cinnamon-combined-monitor-main`.
+
+2. **❗ IMPORTANT – Rename Folder ❗**
+    The folder **must** be renamed for Cinnamon to the applet's UUID name: **`combined-monitor@danipin`**
+
+3. Copy the **renamed folder** to your local Cinnamon applet directory:
 
     ```bash
     cp -r combined-monitor@danipin ~/.local/share/cinnamon/applets/
     ```
 
-4.  **Cinnamon neu starten** (entweder durch Abmelden/Anmelden oder mit der Tastenkombination `Alt` + `F2`, gefolgt von `r` und `Enter`).
+4. **Restart Cinnamon** (either by logging out/in or using the key combination `Alt` + `F2`, followed by `r` and `Enter`).
 
-5.  Fügen Sie das Applet über die **Systemeinstellungen -> Applets** zur Leiste hinzu.
+5. Add the applet to the panel via **System Settings -> Applets**.
 
-### 2. Installation über Cinnamon Spices (Zukünftig)
+### 2. Installation via Cinnamon Spices (Future)
 
-Sobald das Applet von Cinnamon genehmigt wurde, können Sie es direkt über die Applet-Verwaltung in Ihren Systemeinstellungen installieren.
+Once the applet is approved by Cinnamon, you can install it directly via the Applet Management in your System Settings.
 
-## 🛠️ Benutzung & Konfiguration
+## 🛠️ Usage & Configuration
 
-* **Linksklick auf das Applet:** Öffnet ein Kontextmenü zur schnellen Auswahl von **Trennzeichen**-Voreinstellungen und **Symbol**-Icons (inklusive Vorschau).
-* **Mausrad über dem Applet:** Ändert schnell die **Layout-Variante** (z.B. von CPU | RAM | SWAP zu RAM | CPU | SWAP).
-* **Rechtsklick auf das Applet:** Öffnet das **Konfigurationsmenü** mit allen detaillierten Optionen.
-
-## 📜 Lizenz
-Dieses Applet ist unter der MIT-Lizenz veröffentlicht.
+* **Left-click on the Applet:** Opens a context menu for quick selection of **Separator** presets, **Symbol** icons (including preview), and **Profile Management** (Loading/Saving configurations).
+* **Mouse wheel over the Applet:** Quickly changes the **Layout Variant** (CPU, TEMP, RAM, SWAP) if multiple metrics are displayed.
