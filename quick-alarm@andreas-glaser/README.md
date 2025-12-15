@@ -2,6 +2,8 @@
 
 Queue alarms fast from your Cinnamon panel.
 
+![Screenshot](screenshot.png)
+
 Examples:
 - `in 10m tea`
 - `11:59am claude`
