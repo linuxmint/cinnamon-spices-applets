@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+
+msgid "Quick Alarm"
+msgstr "Quick Alarm"
+
+msgid "Alarm"
+msgstr "Alarma"
+
+msgid "No alarms queued"
+msgstr "No hay alarmas en cola"
+
+msgid "Something went wrong. Check Looking Glass logs."
+msgstr "Algo salió mal. Revisa los registros de Looking Glass."
+
+msgid "Enter a time."
+msgstr "Introduce una hora."
+
+msgid "Could not parse that."
+msgstr "No se pudo interpretar."
+
+msgid "That time already passed today."
+msgstr "Esa hora ya pasó hoy."
+
+msgid "Try one of these:"
+msgstr "Prueba uno de estos:"
+

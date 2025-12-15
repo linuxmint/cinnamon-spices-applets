@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <!-- Bolder symbolic icon (uses currentColor for theme-driven coloring) -->
+  <g fill="currentColor">
+    <!-- bells -->
+    <path d="M3.1 2.2a.9.9 0 0 1 1.3 0l1.2 1.2a.9.9 0 1 1-1.3 1.3L3.1 3.5a.9.9 0 0 1 0-1.3Z"/>
+    <path d="M12.9 2.2a.9.9 0 0 1 0 1.3l-1.2 1.2a.9.9 0 1 1-1.3-1.3l1.2-1.2a.9.9 0 0 1 1.3 0Z"/>
+
+    <!-- outer ring -->
+    <path fill-rule="evenodd" d="M8 3a5.5 5.5 0 1 0 0 11A5.5 5.5 0 0 0 8 3Zm0 1.8A3.7 3.7 0 1 0 8 12.2 3.7 3.7 0 0 0 8 4.8Z"/>
+
+    <!-- hands (thicker) -->
+    <path d="M7.1 5.3c0-.5.4-.9.9-.9s.9.4.9.9v3.1l2 1.2c.4.2.6.8.3 1.2-.2.4-.8.6-1.2.3L7.6 9.7a.9.9 0 0 1-.5-.8V5.3Z"/>
+  </g>
+</svg>

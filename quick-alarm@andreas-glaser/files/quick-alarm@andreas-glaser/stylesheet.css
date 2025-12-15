@@ -1,0 +1,134 @@
+.qa-entry {
+  padding: 6px 8px;
+  min-width: 240px;
+}
+
+.qa-theme-light .qa-entry {
+  selection-background-color: #2563eb;
+  selected-color: #ffffff;
+}
+
+.qa-theme-dark .qa-entry {
+  selection-background-color: #2563eb;
+  selected-color: #ffffff;
+}
+
+.qa-menu {
+  padding: 6px;
+}
+
+.qa-header-row {
+  padding: 6px 8px;
+  border-radius: 10px;
+}
+
+.qa-header-icon {
+  margin-right: 8px;
+}
+
+.qa-entry StLabel.hint-text {
+  opacity: 0.55;
+}
+
+.qa-header {
+  font-weight: 600;
+}
+
+.qa-gear {
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+
+.qa-entry-row {
+  padding: 6px 8px;
+  border-radius: 10px;
+}
+
+.qa-theme-light .qa-header,
+.qa-theme-light .qa-alarm-time,
+.qa-theme-light .qa-alarm-label,
+.qa-theme-light .qa-add,
+.qa-theme-light .qa-remove,
+.qa-theme-light .qa-entry,
+.qa-theme-light .qa-header-icon {
+  color: #111827;
+}
+
+.qa-theme-dark .qa-header,
+.qa-theme-dark .qa-alarm-time,
+.qa-theme-dark .qa-alarm-label,
+.qa-theme-dark .qa-add,
+.qa-theme-dark .qa-remove,
+.qa-theme-dark .qa-entry,
+.qa-theme-dark .qa-header-icon {
+  color: #f9fafb;
+}
+
+.qa-theme-light .qa-header-row,
+.qa-theme-light .qa-entry-row,
+.qa-theme-light .qa-alarm-box {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.qa-theme-dark .qa-header-row,
+.qa-theme-dark .qa-entry-row,
+.qa-theme-dark .qa-alarm-box {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.qa-theme-light .qa-entry StLabel.hint-text {
+  color: rgba(17, 24, 39, 0.45);
+  opacity: 1;
+}
+
+.qa-theme-dark .qa-entry StLabel.hint-text {
+  color: rgba(249, 250, 251, 0.45);
+  opacity: 1;
+}
+
+/* Panel icon colors are theme-derived via `.system-status-icon.warning` / `.error`. */
+
+.qa-add {
+  margin-left: 8px;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.qa-gear:hover,
+.qa-add:hover,
+.qa-remove:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.qa-theme-dark .qa-gear:hover,
+.qa-theme-dark .qa-add:hover,
+.qa-theme-dark .qa-remove:hover {
+  background-color: rgba(255, 255, 255, 0.10);
+}
+
+.qa-error {
+  padding: 4px 10px;
+  color: #ef4444;
+  font-weight: 600;
+  max-width: 360px;
+}
+
+.qa-alarm-box {
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.qa-alarm-time {
+  min-width: 56px;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.qa-alarm-label {
+  opacity: 0.9;
+}
+
+.qa-remove {
+  padding: 2px 6px;
+  border-radius: 8px;
+}
