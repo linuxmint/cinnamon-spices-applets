@@ -56,7 +56,7 @@ msgstr ""
 "Durant quan de temps cal enregistrar una mostra i informar del resultat"
 
 #. settings-schema.json->sleep-time->description
-msgid "How long to wait before recoring another sample"
+msgid "How long to wait before recording another sample"
 msgstr "Durant quan de temps cal esperar per enregistrar una altra mostra"
 
 #. settings-schema.json->enable-bt-only->description
