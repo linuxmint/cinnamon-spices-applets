@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-14 12:29+0100\n"
+"POT-Creation-Date: 2025-12-16 19:05+0100\n"
 "PO-Revision-Date: 2024-07-31 18:06+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -20,42 +20,42 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:104
-msgid "Scr Lock"
-msgstr "Bloqueig de pantalla"
-
-#. applet.js:108
 msgid "Num Lock"
 msgstr "Bloqueig numèric"
 
-#. applet.js:112
+#. applet.js:108
 msgid "Caps Lock"
 msgstr "Bloqueig de majúscules"
+
+#. applet.js:112
+msgid "Scr Lock"
+msgstr "Bloqueig de pantalla"
 
 #. applet.js:156
 msgid "Lock Keys"
 msgstr "Tecles de bloqueig"
 
-#. applet.js:232
-msgid "Caps lock on"
-msgstr "Bloqueig de majúscules activat"
-
-#. applet.js:234
-msgid "Caps lock off"
-msgstr "Bloqueig de majúscules desactivat"
-
-#. applet.js:240
+#. applet.js:231
 msgid "Num lock on"
 msgstr "Bloqueig numèric activat"
 
-#. applet.js:242
+#. applet.js:233
 msgid "Num lock off"
 msgstr "Bloqueig numèric desactivat"
 
-#. applet.js:248
+#. applet.js:239
+msgid "Caps lock on"
+msgstr "Bloqueig de majúscules activat"
+
+#. applet.js:241
+msgid "Caps lock off"
+msgstr "Bloqueig de majúscules desactivat"
+
+#. applet.js:247
 msgid "Scr lock on"
 msgstr "Bloqueig de pantalla activat"
 
-#. applet.js:250
+#. applet.js:249
 msgid "Scr lock off"
 msgstr "Bloqueig de pantalla desactivat"
 
@@ -75,13 +75,13 @@ msgstr "Indicador de tecles de bloqueig amb notificacions"
 msgid "Indicators"
 msgstr ""
 
-#. settings-schema.json->show-caps-lock-indicator->description
-msgid "Show caps lock indicator"
-msgstr "Mostrar indicador del bloqueig de majúscules"
-
 #. settings-schema.json->show-num-lock-indicator->description
 msgid "Show num lock indicator"
 msgstr "Mostrar indicador del bloqueig numèric"
+
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr "Mostrar indicador del bloqueig de majúscules"
 
 #. settings-schema.json->show-scr-lock-indicator->description
 msgid "Show scr lock indicator"

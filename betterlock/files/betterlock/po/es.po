@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-14 12:29+0100\n"
+"POT-Creation-Date: 2025-12-16 19:05+0100\n"
 "PO-Revision-Date: 2025-11-07 12:48-0300\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
@@ -20,42 +20,42 @@ msgstr ""
 "X-Generator: Poedit 3.8\n"
 
 #. applet.js:104
-msgid "Scr Lock"
-msgstr "Bloq Scr"
-
-#. applet.js:108
 msgid "Num Lock"
 msgstr "Bloq Num"
 
-#. applet.js:112
+#. applet.js:108
 msgid "Caps Lock"
 msgstr "Bloq Mayús"
+
+#. applet.js:112
+msgid "Scr Lock"
+msgstr "Bloq Scr"
 
 #. applet.js:156
 msgid "Lock Keys"
 msgstr "Teclas de bloqueo"
 
-#. applet.js:232
-msgid "Caps lock on"
-msgstr "Bloq Mayús activado"
-
-#. applet.js:234
-msgid "Caps lock off"
-msgstr "Bloq Mayús desactivado"
-
-#. applet.js:240
+#. applet.js:231
 msgid "Num lock on"
 msgstr "Bloq Num activado"
 
-#. applet.js:242
+#. applet.js:233
 msgid "Num lock off"
 msgstr "Bloq Num desactivado"
 
-#. applet.js:248
+#. applet.js:239
+msgid "Caps lock on"
+msgstr "Bloq Mayús activado"
+
+#. applet.js:241
+msgid "Caps lock off"
+msgstr "Bloq Mayús desactivado"
+
+#. applet.js:247
 msgid "Scr lock on"
 msgstr "Bloq Scr activado"
 
-#. applet.js:250
+#. applet.js:249
 msgid "Scr lock off"
 msgstr "Bloq Scr desactivado"
 
@@ -75,13 +75,13 @@ msgstr "Indicador de teclas de bloqueo con notificaciones"
 msgid "Indicators"
 msgstr ""
 
-#. settings-schema.json->show-caps-lock-indicator->description
-msgid "Show caps lock indicator"
-msgstr "Mostrar indicador de bloqueo de mayúsculas"
-
 #. settings-schema.json->show-num-lock-indicator->description
 msgid "Show num lock indicator"
 msgstr "Mostrar indicador de bloqueo numérico"
+
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr "Mostrar indicador de bloqueo de mayúsculas"
 
 #. settings-schema.json->show-scr-lock-indicator->description
 msgid "Show scr lock indicator"

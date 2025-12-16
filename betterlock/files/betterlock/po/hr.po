@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: betterlock\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-14 12:29+0100\n"
+"POT-Creation-Date: 2025-12-16 19:05+0100\n"
 "PO-Revision-Date: 2017-11-19 15:47+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -21,42 +21,42 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. applet.js:104
-msgid "Scr Lock"
-msgstr "Scr zaključavanje"
-
-#. applet.js:108
 msgid "Num Lock"
 msgstr "Brojčana tipkovnica"
 
-#. applet.js:112
+#. applet.js:108
 msgid "Caps Lock"
 msgstr "Velika slova"
+
+#. applet.js:112
+msgid "Scr Lock"
+msgstr "Scr zaključavanje"
 
 #. applet.js:156
 msgid "Lock Keys"
 msgstr "Tipke zaključavanja"
 
-#. applet.js:232
-msgid "Caps lock on"
-msgstr "Velika slova uključena"
-
-#. applet.js:234
-msgid "Caps lock off"
-msgstr "Velika slova isključena"
-
-#. applet.js:240
+#. applet.js:231
 msgid "Num lock on"
 msgstr "Brojčana tipkovnica uključena"
 
-#. applet.js:242
+#. applet.js:233
 msgid "Num lock off"
 msgstr "Brojčana tipkovnica isključena"
 
-#. applet.js:248
+#. applet.js:239
+msgid "Caps lock on"
+msgstr "Velika slova uključena"
+
+#. applet.js:241
+msgid "Caps lock off"
+msgstr "Velika slova isključena"
+
+#. applet.js:247
 msgid "Scr lock on"
 msgstr "Scr zaključavanje uključeno"
 
-#. applet.js:250
+#. applet.js:249
 msgid "Scr lock off"
 msgstr "Scr zaključavanje isključeno"
 
@@ -76,13 +76,13 @@ msgstr "Indikator zaključanih tipki s obavijestima"
 msgid "Indicators"
 msgstr ""
 
-#. settings-schema.json->show-caps-lock-indicator->description
-msgid "Show caps lock indicator"
-msgstr "Prikaži indikator velikih slova"
-
 #. settings-schema.json->show-num-lock-indicator->description
 msgid "Show num lock indicator"
 msgstr "Prikaži num lock indikator"
+
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr "Prikaži indikator velikih slova"
 
 #. settings-schema.json->show-scr-lock-indicator->description
 msgid "Show scr lock indicator"

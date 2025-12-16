@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-14 12:29+0100\n"
+"POT-Creation-Date: 2025-12-16 19:05+0100\n"
 "PO-Revision-Date: 2017-03-12 23:28+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,42 +20,42 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. applet.js:104
-msgid "Scr Lock"
-msgstr "Scr 锁"
-
-#. applet.js:108
 msgid "Num Lock"
 msgstr "数字锁定键"
 
-#. applet.js:112
+#. applet.js:108
 msgid "Caps Lock"
 msgstr "大写锁定键"
+
+#. applet.js:112
+msgid "Scr Lock"
+msgstr "Scr 锁"
 
 #. applet.js:156
 msgid "Lock Keys"
 msgstr "锁定键"
 
-#. applet.js:232
-msgid "Caps lock on"
-msgstr "大写锁定键开"
-
-#. applet.js:234
-msgid "Caps lock off"
-msgstr "大写锁定键关"
-
-#. applet.js:240
+#. applet.js:231
 msgid "Num lock on"
 msgstr "数字锁定键开"
 
-#. applet.js:242
+#. applet.js:233
 msgid "Num lock off"
 msgstr "数字锁定键关"
 
-#. applet.js:248
+#. applet.js:239
+msgid "Caps lock on"
+msgstr "大写锁定键开"
+
+#. applet.js:241
+msgid "Caps lock off"
+msgstr "大写锁定键关"
+
+#. applet.js:247
 msgid "Scr lock on"
 msgstr "Scr 锁定开启"
 
-#. applet.js:250
+#. applet.js:249
 msgid "Scr lock off"
 msgstr "Scr 锁定关闭"
 
@@ -73,13 +73,13 @@ msgstr "带通知的锁定键指示器"
 msgid "Indicators"
 msgstr ""
 
-#. settings-schema.json->show-caps-lock-indicator->description
-msgid "Show caps lock indicator"
-msgstr "显示大写锁定指示器"
-
 #. settings-schema.json->show-num-lock-indicator->description
 msgid "Show num lock indicator"
 msgstr "显示 num lock 指示器"
+
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr "显示大写锁定指示器"
 
 #. settings-schema.json->show-scr-lock-indicator->description
 msgid "Show scr lock indicator"

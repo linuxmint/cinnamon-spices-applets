@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-14 12:29+0100\n"
+"POT-Creation-Date: 2025-12-16 19:05+0100\n"
 "PO-Revision-Date: 2022-11-30 09:56+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,42 +20,42 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. applet.js:104
-msgid "Scr Lock"
-msgstr "Scroll Lock"
-
-#. applet.js:108
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#. applet.js:112
+#. applet.js:108
 msgid "Caps Lock"
 msgstr "Caps Lock"
+
+#. applet.js:112
+msgid "Scr Lock"
+msgstr "Scroll Lock"
 
 #. applet.js:156
 msgid "Lock Keys"
 msgstr "ロックキー"
 
-#. applet.js:232
-msgid "Caps lock on"
-msgstr "Caps Lock オン"
-
-#. applet.js:234
-msgid "Caps lock off"
-msgstr "Caps Lock オフ"
-
-#. applet.js:240
+#. applet.js:231
 msgid "Num lock on"
 msgstr "Num Lock オン"
 
-#. applet.js:242
+#. applet.js:233
 msgid "Num lock off"
 msgstr "Num Lock オフ"
 
-#. applet.js:248
+#. applet.js:239
+msgid "Caps lock on"
+msgstr "Caps Lock オン"
+
+#. applet.js:241
+msgid "Caps lock off"
+msgstr "Caps Lock オフ"
+
+#. applet.js:247
 msgid "Scr lock on"
 msgstr "Scroll Lock オン"
 
-#. applet.js:250
+#. applet.js:249
 msgid "Scr lock off"
 msgstr "Scroll Lock オフ"
 
@@ -73,13 +73,13 @@ msgstr "通知付きキーボードインジケータ betterlock"
 msgid "Indicators"
 msgstr ""
 
-#. settings-schema.json->show-caps-lock-indicator->description
-msgid "Show caps lock indicator"
-msgstr "Caps Lockインジケータを使用"
-
 #. settings-schema.json->show-num-lock-indicator->description
 msgid "Show num lock indicator"
 msgstr "Num Lockインジケータを使用"
+
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr "Caps Lockインジケータを使用"
 
 #. settings-schema.json->show-scr-lock-indicator->description
 msgid "Show scr lock indicator"

@@ -3,15 +3,15 @@
         "type": "section",
         "description": "Indicators"
     },
-    "show-caps-lock-indicator": {
-        "type": "switch",
-        "default": true,
-        "description" : "Show caps lock indicator"
-    },
     "show-num-lock-indicator": {
         "type": "switch",
         "default": true,
         "description" : "Show num lock indicator"
+    },
+    "show-caps-lock-indicator": {
+        "type": "switch",
+        "default": true,
+        "description" : "Show caps lock indicator"
     },
     "show-scr-lock-indicator": {
         "type": "switch",

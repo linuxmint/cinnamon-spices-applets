@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: betterlock 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-14 12:29+0100\n"
+"POT-Creation-Date: 2025-12-16 19:05+0100\n"
 "PO-Revision-Date: 2025-11-07 08:50+0100\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: \n"
@@ -20,42 +20,42 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:104
-msgid "Scr Lock"
-msgstr "Verr écr"
-
-#. applet.js:108
 msgid "Num Lock"
 msgstr "Verr num"
 
-#. applet.js:112
+#. applet.js:108
 msgid "Caps Lock"
 msgstr "Verr maj"
+
+#. applet.js:112
+msgid "Scr Lock"
+msgstr "Verr écr"
 
 #. applet.js:156
 msgid "Lock Keys"
 msgstr "Touches verrouillées"
 
-#. applet.js:232
-msgid "Caps lock on"
-msgstr "Verr maj activé"
-
-#. applet.js:234
-msgid "Caps lock off"
-msgstr "Verr maj désactivé"
-
-#. applet.js:240
+#. applet.js:231
 msgid "Num lock on"
 msgstr "Verr num activé"
 
-#. applet.js:242
+#. applet.js:233
 msgid "Num lock off"
 msgstr "Verr num désactivé"
 
-#. applet.js:248
+#. applet.js:239
+msgid "Caps lock on"
+msgstr "Verr maj activé"
+
+#. applet.js:241
+msgid "Caps lock off"
+msgstr "Verr maj désactivé"
+
+#. applet.js:247
 msgid "Scr lock on"
 msgstr "Verr écr activé"
 
-#. applet.js:250
+#. applet.js:249
 msgid "Scr lock off"
 msgstr "Verr écr désactivé"
 
@@ -76,13 +76,13 @@ msgstr "Indicateur de touches de verrouillage avec notifications"
 msgid "Indicators"
 msgstr "Indicateurs"
 
-#. settings-schema.json->show-caps-lock-indicator->description
-msgid "Show caps lock indicator"
-msgstr "Afficher l'indicateur de verrouillage des majuscules"
-
 #. settings-schema.json->show-num-lock-indicator->description
 msgid "Show num lock indicator"
 msgstr "Afficher l'indicateur de verrouillage numérique"
+
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr "Afficher l'indicateur de verrouillage des majuscules"
 
 #. settings-schema.json->show-scr-lock-indicator->description
 msgid "Show scr lock indicator"
