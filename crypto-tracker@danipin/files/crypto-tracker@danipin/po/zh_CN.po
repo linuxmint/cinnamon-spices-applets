@@ -1,0 +1,187 @@
+# Simplified Chinese translation for crypto-tracker@danipin.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the crypto-tracker@danipin package.
+# FIRST AUTHOR <sousm77@gmail.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: crypto-tracker@danipin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-15 10:20+0100\n"
+"PO-Revision-Date: 2025-12-15 10:43+0100\n"
+"Last-Translator: FULL NAME <sousm77@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# The following strings are extracted from metadata.json:
+msgctxt "name"
+msgid "Crypto Tracker"
+msgstr "加密货币追踪器"
+
+msgctxt "description"
+msgid "Displays real-time cryptocurrency prices on the panel (via CoinGecko API)."
+msgstr "在面板上显示实时加密货币价格（通过 CoinGecko API）。"
+
+# The following strings are extracted from settings-schema.json:
+msgid "Metric 1 (Primary)"
+msgstr "指标 1（主要）"
+
+msgid "Metric 2"
+msgstr "指标 2"
+
+msgid "Metric 3"
+msgstr "指标 3"
+
+msgid "Applet General Settings"
+msgstr "Applet 一般设置"
+
+msgid "Display and Activation"
+msgstr "显示与激活"
+
+msgid "Data Source (API)"
+msgstr "数据源 (API)"
+
+msgid "Color Settings"
+msgstr "颜色设置"
+
+msgid "Changes will activate on the next API update interval."
+msgstr "更改将在下一个 API 更新间隔生效。"
+
+msgid "General Applet Settings"
+msgstr "Applet 一般设置"
+
+msgid "Update Interval"
+msgstr "更新间隔"
+
+msgid "How often prices are fetched from CoinGecko."
+msgstr "从 CoinGecko 获取价格的频率。"
+
+msgid "15 Seconds (Minimum)"
+msgstr "15 秒 (最小)"
+
+msgid "30 Seconds"
+msgstr "30 秒"
+
+msgid "60 Seconds (1 Minute)"
+msgstr "60 秒 (1 分钟)"
+
+msgid "120 Seconds (2 Minutes)"
+msgstr "120 秒 (2 分钟)"
+
+msgid "300 Seconds (5 Minutes)"
+msgstr "300 秒 (5 分钟)"
+
+msgid "Color the Arrow Only"
+msgstr "仅为箭头着色"
+
+msgid "If active, the price text remains white."
+msgstr "如果激活，价格文本保持白色。"
+
+msgid "Show Currency Symbol (e.g. $ or €)"
+msgstr "显示货币符号（例如 $ 或 €）"
+
+msgid "Replaces the currency code with the symbol."
+msgstr "用符号替换货币代码。"
+
+msgid "Enabled"
+msgstr "已启用"
+
+msgid "Toggles the display of this metric on/off."
+msgstr "切换此指标的显示/隐藏。"
+
+msgid "Currency ID (CoinGecko)"
+msgstr "货币 ID (CoinGecko)"
+
+msgid "Select the cryptocurrency from the top list."
+msgstr "从顶部列表中选择加密货币。"
+
+msgid "The value in brackets (e.g. BTC) is the default symbol displayed on the panel."
+msgstr "括号中的值（例如 BTC）是面板上显示的默认符号。"
+
+msgid "Bitcoin (BTC)"
+msgstr "比特币 (BTC)"
+
+msgid "Ethereum (ETH)"
+msgstr "以太坊 (ETH)"
+
+msgid "Cardano (ADA)"
+msgstr "卡尔达诺 (ADA)"
+
+msgid "Solana (SOL)"
+msgstr "索拉纳 (SOL)"
+
+msgid "Polkadot (DOT)"
+msgstr "波卡 (DOT)"
+
+msgid "Custom Currency ID"
+msgstr "自定义货币 ID"
+
+msgid "CoinGecko ID (e.g. 'litecoin')"
+msgstr "CoinGecko ID (例如 'litecoin')"
+
+msgid "Enter the exact CoinGecko ID. This field overrides the dropdown selection and is preferred for unlisted coins."
+msgstr "输入精确的 CoinGecko ID。此字段会覆盖下拉选择，并推荐用于未列出的代币。"
+
+msgid "Comparison Currency"
+msgstr "比较货币"
+
+msgid "Select the currency for the price comparison."
+msgstr "选择用于价格比较的货币。"
+
+msgid "The API call uses the code in brackets (e.g. USD)."
+msgstr "API 调用使用括号中的代码（例如 USD）。"
+
+msgid "US Dollar (USD)"
+msgstr "美元 (USD)"
+
+msgid "Euro (EUR)"
+msgstr "欧元 (EUR)"
+
+msgid "Canadian Dollar (CAD)"
+msgstr "加拿大元 (CAD)"
+
+msgid "British Pound (GBP)"
+msgstr "英镑 (GBP)"
+
+msgid "Japanese Yen (JPY)"
+msgstr "日元 (JPY)"
+
+msgid "Swiss Franc (CHF)"
+msgstr "瑞士法郎 (CHF)"
+
+msgid "Australian Dollar (AUD)"
+msgstr "澳元 (AUD)"
+
+msgid "Display Symbol"
+msgstr "显示符号"
+
+msgid "The symbol displayed on the panel (e.g. BTC)."
+msgstr "面板上显示的符号（例如 BTC）。"
+
+msgid "Color for Rising Price (▲)"
+msgstr "价格上涨颜色 (▲)"
+
+msgid "Select the color for positive price movement."
+msgstr "选择价格上涨时的颜色。"
+
+msgid "Color for Falling Price (▼)"
+msgstr "价格下跌颜色 (▼)"
+
+msgid "Select the color for negative price movement."
+msgstr "选择价格下跌时的颜色。"
+
+# The following strings are extracted from applet.js:
+msgid "Loading..."
+msgstr "正在加载..."
+
+msgid "24H Price Change (%)"
+msgstr "24 小时价格变化 (%)"
+
+msgid "Waiting..."
+msgstr "正在等待..."
+
+msgid "No metrics enabled. Please enable them in settings."
+msgstr "未启用任何指标。请在设置中启用它们。"

@@ -1,0 +1,187 @@
+# Russian translation for crypto-tracker@danipin.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the crypto-tracker@danipin package.
+# FIRST AUTHOR <sousm77@gmail.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: crypto-tracker@danipin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-15 10:20+0100\n"
+"PO-Revision-Date: 2025-12-15 10:41+0100\n"
+"Last-Translator: FULL NAME <sousm77@gmail.com>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# The following strings are extracted from metadata.json:
+msgctxt "name"
+msgid "Crypto Tracker"
+msgstr "Крипто-трекер"
+
+msgctxt "description"
+msgid "Displays real-time cryptocurrency prices on the panel (via CoinGecko API)."
+msgstr "Отображает цены на криптовалюту в реальном времени на панели (через API CoinGecko)."
+
+# The following strings are extracted from settings-schema.json:
+msgid "Metric 1 (Primary)"
+msgstr "Метрика 1 (Основная)"
+
+msgid "Metric 2"
+msgstr "Метрика 2"
+
+msgid "Metric 3"
+msgstr "Метрика 3"
+
+msgid "Applet General Settings"
+msgstr "Общие Настройки Апплета"
+
+msgid "Display and Activation"
+msgstr "Отображение и Активация"
+
+msgid "Data Source (API)"
+msgstr "Источник Данных (API)"
+
+msgid "Color Settings"
+msgstr "Настройки Цвета"
+
+msgid "Changes will activate on the next API update interval."
+msgstr "Изменения будут активированы при следующем интервале обновления API."
+
+msgid "General Applet Settings"
+msgstr "Общие Настройки Апплета"
+
+msgid "Update Interval"
+msgstr "Интервал Обновления"
+
+msgid "How often prices are fetched from CoinGecko."
+msgstr "Как часто цены извлекаются из CoinGecko."
+
+msgid "15 Seconds (Minimum)"
+msgstr "15 Секунд (Минимум)"
+
+msgid "30 Seconds"
+msgstr "30 Секунд"
+
+msgid "60 Seconds (1 Minute)"
+msgstr "60 Секунд (1 Минута)"
+
+msgid "120 Seconds (2 Minutes)"
+msgstr "120 Секунд (2 Минуты)"
+
+msgid "300 Seconds (5 Minutes)"
+msgstr "300 Секунд (5 Минут)"
+
+msgid "Color the Arrow Only"
+msgstr "Красить Только Стрелку"
+
+msgid "If active, the price text remains white."
+msgstr "Если активно, текст цены остается белым."
+
+msgid "Show Currency Symbol (e.g. $ or €)"
+msgstr "Показать Символ Валюты (напр. $ или €)"
+
+msgid "Replaces the currency code with the symbol."
+msgstr "Заменяет код валюты символом."
+
+msgid "Enabled"
+msgstr "Включено"
+
+msgid "Toggles the display of this metric on/off."
+msgstr "Включает/выключает отображение этой метрики."
+
+msgid "Currency ID (CoinGecko)"
+msgstr "ID Валюты (CoinGecko)"
+
+msgid "Select the cryptocurrency from the top list."
+msgstr "Выберите криптовалюту из верхнего списка."
+
+msgid "The value in brackets (e.g. BTC) is the default symbol displayed on the panel."
+msgstr "Значение в скобках (напр. BTC) является символом по умолчанию, отображаемым на панели."
+
+msgid "Bitcoin (BTC)"
+msgstr "Биткойн (BTC)"
+
+msgid "Ethereum (ETH)"
+msgstr "Эфириум (ETH)"
+
+msgid "Cardano (ADA)"
+msgstr "Кардано (ADA)"
+
+msgid "Solana (SOL)"
+msgstr "Солана (SOL)"
+
+msgid "Polkadot (DOT)"
+msgstr "Полкадот (DOT)"
+
+msgid "Custom Currency ID"
+msgstr "Пользовательский ID Валюты"
+
+msgid "CoinGecko ID (e.g. 'litecoin')"
+msgstr "ID CoinGecko (напр. 'litecoin')"
+
+msgid "Enter the exact CoinGecko ID. This field overrides the dropdown selection and is preferred for unlisted coins."
+msgstr "Введите точный ID CoinGecko. Это поле переопределяет выбор из выпадающего списка и предпочтительно для неперечисленных монет."
+
+msgid "Comparison Currency"
+msgstr "Валюта Сравнения"
+
+msgid "Select the currency for the price comparison."
+msgstr "Выберите валюту для сравнения цен."
+
+msgid "The API call uses the code in brackets (e.g. USD)."
+msgstr "Вызов API использует код в скобках (напр. USD)."
+
+msgid "US Dollar (USD)"
+msgstr "Доллар США (USD)"
+
+msgid "Euro (EUR)"
+msgstr "Евро (EUR)"
+
+msgid "Canadian Dollar (CAD)"
+msgstr "Канадский Доллар (CAD)"
+
+msgid "British Pound (GBP)"
+msgstr "Британский Фунт (GBP)"
+
+msgid "Japanese Yen (JPY)"
+msgstr "Японская Иена (JPY)"
+
+msgid "Swiss Franc (CHF)"
+msgstr "Швейцарский Франк (CHF)"
+
+msgid "Australian Dollar (AUD)"
+msgstr "Австралийский Доллар (AUD)"
+
+msgid "Display Symbol"
+msgstr "Символ Отображения"
+
+msgid "The symbol displayed on the panel (e.g. BTC)."
+msgstr "Символ, отображаемый на панели (напр. BTC)."
+
+msgid "Color for Rising Price (▲)"
+msgstr "Цвет для Растущей Цены (▲)"
+
+msgid "Select the color for positive price movement."
+msgstr "Выберите цвет для положительного движения цены."
+
+msgid "Color for Falling Price (▼)"
+msgstr "Цвет для Падающей Цены (▼)"
+
+msgid "Select the color for negative price movement."
+msgstr "Выберите цвет для отрицательного движения цены."
+
+# The following strings are extracted from applet.js:
+msgid "Loading..."
+msgstr "Загрузка..."
+
+msgid "24H Price Change (%)"
+msgstr "Изменение Цены за 24ч (%)"
+
+msgid "Waiting..."
+msgstr "Ожидание..."
+
+msgid "No metrics enabled. Please enable them in settings."
+msgstr "Метрики не включены. Пожалуйста, включите их в настройках."
