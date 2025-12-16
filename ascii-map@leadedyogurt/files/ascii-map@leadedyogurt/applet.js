@@ -131,13 +131,14 @@ const Ascii = [
 //array that represents previously used chars
 //most used chars (first 5 in the list) will be shown in the 'hotbar'
 let hotlist = [ ["°", 0], ["™", 0], ["¢", 0], ["€", 0], ["©", 0] ];
+//array structure: Character, Use number
 
 class CM extends Applet.IconApplet {
     constructor (metadata, orientation, panelHeight, instance_id) {
         super(orientation, panelHeight, instance_id);
         //set icon and tooltip
         this.set_applet_tooltip("Search Special Ascii Characters");
-        this.set_applet_icon_symbolic_name("ascii-map-symbolic");
+        this.set_applet_icon_symbolic_name("accented-a-symbolic");
         
         //initialize menu building ui 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -163,7 +164,7 @@ class CM extends Applet.IconApplet {
         this.items.line = new PopupMenu.PopupBaseMenuItem({reactive: false});
         this.menu.addMenuItem(this.items.line);
 
-        this.actors.line = new St.BoxLayout({style_class: "line", vertical: true});
+        this.actors.line = new St.BoxLayout({style_class: "popup-menu-item:active && line", vertical: true});
         this.items.line.addActor(this.actors.line, {expand: true, span: -1});
 
         //search bar
@@ -171,7 +172,7 @@ class CM extends Applet.IconApplet {
         this.menu.addMenuItem(this.items.search);
 
         //add search bar actor
-        this.actors.searchBar = new St.Entry({style_class: "searchBar", name: "search", hint_text: _(" search")});
+        this.actors.searchBar = new St.Entry({style_class: "menu-application-button-selected && searchBar", name: "search", hint_text: _(" search")});
         //get search bar text
         let searchClutter = this.actors.searchBar.get_clutter_text();
         searchClutter.connect('activate', () => {
@@ -198,10 +199,11 @@ class CM extends Applet.IconApplet {
 
                 for (let g = 0; g < 5; g++) {
                     let currentChar = matches[i * 5 + g];
-                    this.actors.resultsButton = new St.Button({label: currentChar, style_class: "button"});
+                    this.actors.resultsButton = new St.Button({label: currentChar, style_class: "menu-application-button-selected && button"});
                     this.actors.resultsButton.connect("clicked", () => {
                         //copy char to clipboard (selection / middle click)
-                        Util.spawnCommandLineAsyncIO(`echo '${currentChar}' | xclip`);
+                        let clipboard = St.Clipboard.get_default();
+                        clipboard.set_text(St.ClipboardType.CLIPBOARD, currentChar);
 
                         this.insertCharHotlist(currentChar);
                         this.createHotbar();
@@ -215,7 +217,7 @@ class CM extends Applet.IconApplet {
         this.items.search.addActor(this.actors.searchBar, {expand: false, span: 0});
 
         //search icon
-        this.actors.searchIcon = new St.Icon({style_class: "icon", icon_name: "search-icon-symbolic", icon_size: "25"});
+        this.actors.searchIcon = new St.Icon({style_class: "applet-icon", icon_name: "search-icon-symbolic", icon_size: "25"});
         this.items.search.addActor(this.actors.searchIcon, {expand: false, span: 0});
 
         //section to contain the search results
@@ -234,9 +236,11 @@ class CM extends Applet.IconApplet {
         this.items.hotbarWrapper = new PopupMenu.PopupBaseMenuItem({reactive: false});
         this.items.hotbar.addMenuItem(this.items.hotbarWrapper);
         for (let i = 0; i < 5; i++) {
-            this.actors.hotButton = new St.Button({label: hotlist[i][0], style_class: "button"});
+            this.actors.hotButton = new St.Button({label: hotlist[i][0], style_class: "menu-application-button-selected && button"});
             this.actors.hotButton.connect("clicked", () => {
-                Util.spawnCommandLineAsyncIO(`echo '${hotlist[i][0]}' | xclip`);
+                let clipboard = St.Clipboard.get_default();
+                clipboard.set_text(St.ClipboardType.CLIPBOARD, currentChar);
+                
                 this.menu.toggle();
             });
             this.items.hotbarWrapper.addActor(this.actors.hotButton, {expand: false, span: 0});
@@ -245,29 +249,47 @@ class CM extends Applet.IconApplet {
 
     //function to re order the array that represents the previously used chars (hotlist)
     insertCharHotlist(currentChar) {
+        //search array for character inside of for loop to find its index and compare to other characters in front of it
         for (let z = 0; z < hotlist.length; z++) {
             if (hotlist[z][0] == currentChar) {
-                hotlist[z][1]++;
+                //increment the amount of times it has been used for the array
                 let index = z;
-                let useNumber = hotlist[index][1];
+                let useNumber = hotlist[index][1] + 1;
                 let spacesToMove = 0;
-                for (let x = 0;; x++) {
-                    if (hotlist[index + x][1] >= useNumber) {
+                for (let x = 1; x < hotlist.length; x++) {
+                    //find how many spaces the current char can move forward with its new use value
+                    if (index == 0) {
+                        break;
+                    }
+                    if (hotlist[index - x][1] <= useNumber) {
                         spacesToMove++;
                     } else {
-                        hotlist.splice(index, 1);
-                        hotlist.splice(index - spacesToMove, 0, [currentChar, useNumber]);
+                        //no point checking anything after the first greater entry
                         break;
                     }
                 }
+                //move item forward based on the loop
+                hotlist.splice(index, 1);
+                hotlist.splice(index - spacesToMove, 0, [currentChar, useNumber]);
                 break;
-            } else {
-                if (z == hotlist.length - 2) {
-                    hotlist.push([currentChar, 1]);
-                    break;
-                } else {
-                    continue;
+            } else if (z == hotlist.length - 1) {
+                let index = hotlist.length - 1;
+                let useNumber = 1;
+                let spacesToMove = 0;
+                for (let x = 1; x < hotlist.length; x++) {
+                    //find how many spaces the current char can move forward with its new use value
+                    if (index == 0) {
+                        break;
+                    }
+                    if (hotlist[index - x][1] <= useNumber) {
+                        spacesToMove++;
+                    } else {
+                        //no point checking anything after the first greater entry
+                        break;
+                    }
                 }
+                hotlist.splice(index - spacesToMove, 0, [currentChar, useNumber]);
+                return
             }
         }
     }

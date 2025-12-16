@@ -1,25 +1,17 @@
 .button {
-    padding-left: 3pt;
-    padding-right: 3pt;
-    font-size: x-large;
-    font-weight: 100;
+    padding: 0pt;
+    font-size: 16pt;
     width: 18pt;
-    border: 1.5pt solid white;
-    border-radius: 5pt;
     position: fixed;
-    color: white;
+    background-color: transparent;
 }
 .line {
-    height: 0pt;
-    border: 1pt solid white;
+    height: 1pt;
     width: 0pt;
 }
 .searchBar {
     width: 140pt;
     height: 20pt;
-    border: 1pt solid white;
-    border-radius: 5pt
-}
-.icon {
-    color: white;
+    font-size: 12pt;
+    font-weight: 50pt;
 }
