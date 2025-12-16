@@ -1,0 +1,9 @@
+{
+  "uuid": "combined-monitor@danipin",
+  "name": "Combined Monitor",
+  "description": "A compact and comprehensive system monitor for Cinnamon. Displays CPU, RAM, and SWAP usage in a single panel element. Configure colors, thresholds, separators, and the order of metrics. Supports displaying text, theme icons, or custom symbols for perfect integration into your panel.",
+  "icon": "icon.png",
+  "version": "1.0.5",
+  "author": "danniboy",
+  "max-instances": 1
+}
