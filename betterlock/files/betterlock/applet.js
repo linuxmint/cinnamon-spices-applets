@@ -208,7 +208,7 @@ MyApplet.prototype = {
 
     _updateScrLockIndicatorVisibility: function() {
         if (this.showScrLockIndicator &&
-                !(this.hideInactiveIndicators && !this.scrlock_state_state)) {
+                !(this.hideInactiveIndicators && !this.scrlock_state)) {
             this.binScr.show();
         } else {
             this.binScr.hide();
