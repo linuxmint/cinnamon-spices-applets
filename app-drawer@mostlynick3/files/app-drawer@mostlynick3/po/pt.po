@@ -1,26 +1,26 @@
 msgid "App Drawer"
-msgstr "Gaveta de Aplicações"
+msgstr "Gaveta de aplicações"
 
 msgid "Full-screen app launcher with animations, transparency, a search box, and more."
 msgstr "Lançador de aplicações em ecrã inteiro com animações, transparência, caixa de pesquisa e mais."
 
 msgid "Navigation Settings"
-msgstr "Definições de Navegação"
+msgstr "Definições de navegação"
 
 msgid "Navigation mode"
 msgstr "Modo de navegação"
 
 msgid "Button Navigation"
-msgstr "Navegação por Botões"
+msgstr "Navegação por botões"
 
 msgid "Scroll Horizontal"
-msgstr "Deslocamento Horizontal"
+msgstr "Deslocamento horizontal"
 
 msgid "Scroll Vertical"
-msgstr "Deslocamento Vertical"
+msgstr "Deslocamento vertical"
 
 msgid "Layout Settings"
-msgstr "Definições de Disposição"
+msgstr "Definições de disposição"
 
 msgid "Columns per page"
 msgstr "Colunas por página"
@@ -37,14 +37,17 @@ msgstr "Espaçamento (px)"
 msgid "Label font size (pt)"
 msgstr "Tamanho da fonte da etiqueta (pt)"
 
-msgid "Search Settings"
-msgstr "Definições de Pesquisa"
+msgid "Features"
+msgstr "Funcionalidades"
 
 msgid "Enable search bar"
 msgstr "Ativar barra de pesquisa"
 
+msgid "Enable favorites"
+msgstr "Ativar favoritos"
+
 msgid "Appearance Settings"
-msgstr "Definições de Aparência"
+msgstr "Definições de aparência"
 
 msgid "Background color"
 msgstr "Cor de fundo"
@@ -74,7 +77,7 @@ msgid "Box hover opacity"
 msgstr "Opacidade da caixa ao passar"
 
 msgid "Animation Settings"
-msgstr "Definições de Animação"
+msgstr "Definições de animação"
 
 msgid "Enable animations"
 msgstr "Ativar animações"
@@ -95,7 +98,7 @@ msgid "Scale"
 msgstr "Escalar"
 
 msgid "Slide Up"
-msgstr "Deslizar para Cima"
+msgstr "Deslizar para cima"
 
 msgid "Zoom"
 msgstr "Ampliar"
@@ -104,7 +107,7 @@ msgid "Close animation"
 msgstr "Animação de fecho"
 
 msgid "Slide Down"
-msgstr "Deslizar para Baixo"
+msgstr "Deslizar para baixo"
 
 msgid "Button navigation page animation"
 msgstr "Animação de página de navegação por botões"
@@ -113,4 +116,4 @@ msgid "Slide"
 msgstr "Deslizar"
 
 msgid "Crossfade"
-msgstr "Transição Cruzada"
+msgstr "Transição cruzada"

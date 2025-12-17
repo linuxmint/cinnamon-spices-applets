@@ -32,19 +32,22 @@ msgid "Icon size (px)"
 msgstr "Ikonstørrelse (px)"
 
 msgid "Padding (px)"
-msgstr "Mellomrom mellom elementer (px)"
+msgstr "Mellomrom (px)"
 
 msgid "Label font size (pt)"
 msgstr "Skriftstørrelse (pt)"
 
-msgid "Search Settings"
-msgstr "Søkeinnstillinger"
+msgid "Features"
+msgstr "Funksjoner"
 
 msgid "Enable search bar"
 msgstr "Aktiver søkefelt"
 
+msgid "Enable favorites"
+msgstr "Aktiver favoritter"
+
 msgid "Appearance Settings"
-msgstr "Designinnstilinger"
+msgstr "Designinnstillinger"
 
 msgid "Background color"
 msgstr "Bakgrunnsfarge"
@@ -56,22 +59,22 @@ msgid "Background opacity"
 msgstr "Bakgrunnens gjennomsiktighet"
 
 msgid "Container color"
-msgstr "Farge på app-seksjon"
+msgstr "Containerfarge"
 
 msgid "Container opacity"
-msgstr "Gjennomsiktighet på app-seksjon"
+msgstr "Containerens gjennomsiktighet"
 
 msgid "Box color"
-msgstr "Farge på app-bokser"
+msgstr "Boksfarge"
 
 msgid "Box opacity"
-msgstr "Gjennomsiktighet på app-bokser"
+msgstr "Boksens gjennomsiktighet"
 
 msgid "Box hover color"
-msgstr "Farge ved aktivering av boks"
+msgstr "Boksfarge ved aktivering"
 
 msgid "Box hover opacity"
-msgstr "Gjennomsiktighet ved aktivering av boks"
+msgstr "Boksens gjennomsiktighet ved aktivering"
 
 msgid "Animation Settings"
 msgstr "Animasjonsinnstillinger"
@@ -107,7 +110,7 @@ msgid "Slide Down"
 msgstr "Gli ned"
 
 msgid "Button navigation page animation"
-msgstr "Knappnavigeringsside animasjon"
+msgstr "Knappnavigeringssideanimasjon"
 
 msgid "Slide"
 msgstr "Gli"

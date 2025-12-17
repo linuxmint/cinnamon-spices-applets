@@ -1,26 +1,26 @@
 msgid "App Drawer"
-msgstr "Cajón de Aplicaciones"
+msgstr "Cajón de aplicaciones"
 
 msgid "Full-screen app launcher with animations, transparency, a search box, and more."
 msgstr "Lanzador de aplicaciones a pantalla completa con animaciones, transparencia, cuadro de búsqueda y más."
 
 msgid "Navigation Settings"
-msgstr "Configuración de Navegación"
+msgstr "Configuración de navegación"
 
 msgid "Navigation mode"
 msgstr "Modo de navegación"
 
 msgid "Button Navigation"
-msgstr "Navegación por Botones"
+msgstr "Navegación por botones"
 
 msgid "Scroll Horizontal"
-msgstr "Desplazamiento Horizontal"
+msgstr "Desplazamiento horizontal"
 
 msgid "Scroll Vertical"
-msgstr "Desplazamiento Vertical"
+msgstr "Desplazamiento vertical"
 
 msgid "Layout Settings"
-msgstr "Configuración de Diseño"
+msgstr "Configuración de diseño"
 
 msgid "Columns per page"
 msgstr "Columnas por página"
@@ -37,14 +37,17 @@ msgstr "Espaciado (px)"
 msgid "Label font size (pt)"
 msgstr "Tamaño de fuente de etiqueta (pt)"
 
-msgid "Search Settings"
-msgstr "Configuración de Búsqueda"
+msgid "Features"
+msgstr "Funciones"
 
 msgid "Enable search bar"
 msgstr "Habilitar barra de búsqueda"
 
+msgid "Enable favorites"
+msgstr "Habilitar favoritos"
+
 msgid "Appearance Settings"
-msgstr "Configuración de Apariencia"
+msgstr "Configuración de apariencia"
 
 msgid "Background color"
 msgstr "Color de fondo"
@@ -74,7 +77,7 @@ msgid "Box hover opacity"
 msgstr "Opacidad de cuadro al pasar"
 
 msgid "Animation Settings"
-msgstr "Configuración de Animaciones"
+msgstr "Configuración de animaciones"
 
 msgid "Enable animations"
 msgstr "Habilitar animaciones"
@@ -95,7 +98,7 @@ msgid "Scale"
 msgstr "Escalar"
 
 msgid "Slide Up"
-msgstr "Deslizar Arriba"
+msgstr "Deslizar arriba"
 
 msgid "Zoom"
 msgstr "Zoom"
@@ -104,7 +107,7 @@ msgid "Close animation"
 msgstr "Animación de cierre"
 
 msgid "Slide Down"
-msgstr "Deslizar Abajo"
+msgstr "Deslizar abajo"
 
 msgid "Button navigation page animation"
 msgstr "Animación de página de navegación por botones"
@@ -113,4 +116,4 @@ msgid "Slide"
 msgstr "Deslizar"
 
 msgid "Crossfade"
-msgstr "Fundido Cruzado"
+msgstr "Fundido cruzado"

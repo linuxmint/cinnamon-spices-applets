@@ -32,16 +32,19 @@ msgid "Icon size (px)"
 msgstr "Ikonstørrelse (px)"
 
 msgid "Padding (px)"
-msgstr "Mellemrum mellem elementer (px)"
+msgstr "Mellemrum (px)"
 
 msgid "Label font size (pt)"
 msgstr "Skriftstørrelse (pt)"
 
-msgid "Search Settings"
-msgstr "Søgeindstillinger"
+msgid "Features"
+msgstr "Funktioner"
 
 msgid "Enable search bar"
 msgstr "Aktivér søgefelt"
+
+msgid "Enable favorites"
+msgstr "Aktivér favoritter"
 
 msgid "Appearance Settings"
 msgstr "Designindstillinger"
@@ -53,25 +56,25 @@ msgid "%"
 msgstr "%"
 
 msgid "Background opacity"
-msgstr "Bagrundens gennemsigtighed"
+msgstr "Baggrundenes gennemsigtighed"
 
 msgid "Container color"
-msgstr "Farve på app-sektion"
+msgstr "Containerfarve"
 
 msgid "Container opacity"
-msgstr "Gennemsigtighed på app-sektion"
+msgstr "Containerens gennemsigtighed"
 
 msgid "Box color"
-msgstr "Farve på app-bokse"
+msgstr "Boksfarve"
 
 msgid "Box opacity"
-msgstr "Gennemsigtighed på app-bokse"
+msgstr "Boksens gennemsigtighed"
 
 msgid "Box hover color"
-msgstr "Farve ved aktivering af boks"
+msgstr "Boksfarve ved aktivering"
 
 msgid "Box hover opacity"
-msgstr "Gennemsigtighed ved aktivering af boks"
+msgstr "Boksens gennemsigtighed ved aktivering"
 
 msgid "Animation Settings"
 msgstr "Animationsindstillinger"
@@ -95,7 +98,7 @@ msgid "Scale"
 msgstr "Skaler"
 
 msgid "Slide Up"
-msgstr "Glid op"
+msgstr "Gli op"
 
 msgid "Zoom"
 msgstr "Zoom"
@@ -104,13 +107,13 @@ msgid "Close animation"
 msgstr "Lukningsanimation"
 
 msgid "Slide Down"
-msgstr "Glid ned"
+msgstr "Gli ned"
 
 msgid "Button navigation page animation"
-msgstr "Knapnavigeringsside animation"
+msgstr "Knapnavigeringssideanimation"
 
 msgid "Slide"
-msgstr "Glid"
+msgstr "Gli"
 
 msgid "Crossfade"
 msgstr "Krydstone"

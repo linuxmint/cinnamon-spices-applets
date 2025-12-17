@@ -2,7 +2,7 @@ msgid "App Drawer"
 msgstr "App-Schublade"
 
 msgid "Full-screen app launcher with animations, transparency, a search box, and more."
-msgstr "Vollbild App-Schublade mit Animationen, Transparenz, Suchfeld und mehr."
+msgstr "Vollbild-App-Schublade mit Animationen, Transparenz, Suchfeld und mehr."
 
 msgid "Navigation Settings"
 msgstr "Navigationseinstellungen"
@@ -32,16 +32,19 @@ msgid "Icon size (px)"
 msgstr "Symbolgröße (px)"
 
 msgid "Padding (px)"
-msgstr "Abstand zwischen Elementen (px)"
+msgstr "Abstand (px)"
 
 msgid "Label font size (pt)"
 msgstr "Schriftgröße (pt)"
 
-msgid "Search Settings"
-msgstr "Sucheinstellungen"
+msgid "Features"
+msgstr "Funktionen"
 
 msgid "Enable search bar"
 msgstr "Suchfeld aktivieren"
+
+msgid "Enable favorites"
+msgstr "Favoriten aktivieren"
 
 msgid "Appearance Settings"
 msgstr "Designeinstellungen"
@@ -56,22 +59,22 @@ msgid "Background opacity"
 msgstr "Transparenz des Hintergrunds"
 
 msgid "Container color"
-msgstr "Farbe der App-Sektion"
+msgstr "Containerfarbe"
 
 msgid "Container opacity"
-msgstr "Transparenz der App-Sektion"
+msgstr "Transparenz des Containers"
 
 msgid "Box color"
-msgstr "Farbe der App-Boxen"
+msgstr "Boxfarbe"
 
 msgid "Box opacity"
-msgstr "Transparenz der App-Boxen"
+msgstr "Transparenz der Box"
 
 msgid "Box hover color"
-msgstr "Farbe bei Aktivierung der Box"
+msgstr "Boxfarbe bei Aktivierung"
 
 msgid "Box hover opacity"
-msgstr "Transparenz bei Aktivierung der Box"
+msgstr "Transparenz der Box bei Aktivierung"
 
 msgid "Animation Settings"
 msgstr "Animationseinstellungen"
@@ -107,7 +110,7 @@ msgid "Slide Down"
 msgstr "Nach unten gleiten"
 
 msgid "Button navigation page animation"
-msgstr "Schaltflächennavigationsseiten-Animation"
+msgstr "Schaltflächennavigationsseitenanimation"
 
 msgid "Slide"
 msgstr "Gleiten"

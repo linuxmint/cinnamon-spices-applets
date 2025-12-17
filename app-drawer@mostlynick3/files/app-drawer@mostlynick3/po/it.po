@@ -1,26 +1,26 @@
 msgid "App Drawer"
-msgstr "Cassetto Applicazioni"
+msgstr "Cassetto applicazioni"
 
 msgid "Full-screen app launcher with animations, transparency, a search box, and more."
 msgstr "Lanciatore di applicazioni a schermo intero con animazioni, trasparenza, casella di ricerca e altro."
 
 msgid "Navigation Settings"
-msgstr "Impostazioni di Navigazione"
+msgstr "Impostazioni di navigazione"
 
 msgid "Navigation mode"
 msgstr "Modalità di navigazione"
 
 msgid "Button Navigation"
-msgstr "Navigazione a Pulsanti"
+msgstr "Navigazione a pulsanti"
 
 msgid "Scroll Horizontal"
-msgstr "Scorrimento Orizzontale"
+msgstr "Scorrimento orizzontale"
 
 msgid "Scroll Vertical"
-msgstr "Scorrimento Verticale"
+msgstr "Scorrimento verticale"
 
 msgid "Layout Settings"
-msgstr "Impostazioni Layout"
+msgstr "Impostazioni layout"
 
 msgid "Columns per page"
 msgstr "Colonne per pagina"
@@ -37,14 +37,17 @@ msgstr "Spaziatura (px)"
 msgid "Label font size (pt)"
 msgstr "Dimensione carattere etichetta (pt)"
 
-msgid "Search Settings"
-msgstr "Impostazioni Ricerca"
+msgid "Features"
+msgstr "Funzioni"
 
 msgid "Enable search bar"
 msgstr "Abilita barra di ricerca"
 
+msgid "Enable favorites"
+msgstr "Abilita preferiti"
+
 msgid "Appearance Settings"
-msgstr "Impostazioni Aspetto"
+msgstr "Impostazioni aspetto"
 
 msgid "Background color"
 msgstr "Colore sfondo"
@@ -74,7 +77,7 @@ msgid "Box hover opacity"
 msgstr "Opacità riquadro al passaggio"
 
 msgid "Animation Settings"
-msgstr "Impostazioni Animazioni"
+msgstr "Impostazioni animazioni"
 
 msgid "Enable animations"
 msgstr "Abilita animazioni"
@@ -95,7 +98,7 @@ msgid "Scale"
 msgstr "Scala"
 
 msgid "Slide Up"
-msgstr "Scorri Su"
+msgstr "Scorri su"
 
 msgid "Zoom"
 msgstr "Zoom"
@@ -104,7 +107,7 @@ msgid "Close animation"
 msgstr "Animazione chiusura"
 
 msgid "Slide Down"
-msgstr "Scorri Giù"
+msgstr "Scorri giù"
 
 msgid "Button navigation page animation"
 msgstr "Animazione pagina navigazione a pulsanti"
@@ -113,4 +116,4 @@ msgid "Slide"
 msgstr "Scorrimento"
 
 msgid "Crossfade"
-msgstr "Dissolvenza Incrociata"
+msgstr "Dissolvenza incrociata"
