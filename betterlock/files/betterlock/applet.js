@@ -99,7 +99,7 @@ MyApplet.prototype = {
             y_align: St.Align.MIDDLE,
             y_fill: false
         });
-        this.actor.style = 'spacing: 2px';
+        this.actor.style = 'spacing: 0px';
 
         this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false);
         this.numMenuItem.connect('activate', Lang.bind(this, this._onNumChanged));
