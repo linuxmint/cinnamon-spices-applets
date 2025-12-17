@@ -27,12 +27,12 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: applet.js:338
-msgid "It's time for "
-msgstr ""
-
 #: applet.js:311
 msgid " Minutes untill "
+msgstr ""
+
+#: applet.js:338
+msgid "It's time for "
 msgstr ""
 
 #: applet.js:339
