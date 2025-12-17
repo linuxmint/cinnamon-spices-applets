@@ -29,7 +29,7 @@ msgstr "Verr maj"
 
 #. applet.js:112
 msgid "Scr Lock"
-msgstr "Verr écr"
+msgstr "Arrêt défil"
 
 #. applet.js:156
 msgid "Lock Keys"
@@ -53,11 +53,11 @@ msgstr "Verr maj désactivé"
 
 #. applet.js:247
 msgid "Scr lock on"
-msgstr "Verr écr activé"
+msgstr "Arrêt défil activé"
 
 #. applet.js:249
 msgid "Scr lock off"
-msgstr "Verr écr désactivé"
+msgstr "Arrêt défil désactivé"
 
 #. metadata.json->description
 msgid ""
