@@ -1,0 +1,116 @@
+msgid "App Drawer"
+msgstr "App-Schublade"
+
+msgid "Full-screen app launcher with animations, transparency, a search box, and more."
+msgstr "Vollbild App-Schublade mit Animationen, Transparenz, Suchfeld und mehr."
+
+msgid "Navigation Settings"
+msgstr "Navigationseinstellungen"
+
+msgid "Navigation mode"
+msgstr "Navigationsmodus"
+
+msgid "Button Navigation"
+msgstr "Schaltflächennavigation"
+
+msgid "Scroll Horizontal"
+msgstr "Horizontales Scrollen"
+
+msgid "Scroll Vertical"
+msgstr "Vertikales Scrollen"
+
+msgid "Layout Settings"
+msgstr "Layouteinstellungen"
+
+msgid "Columns per page"
+msgstr "Spalten pro Seite"
+
+msgid "Rows per page"
+msgstr "Zeilen pro Seite"
+
+msgid "Icon size (px)"
+msgstr "Symbolgröße (px)"
+
+msgid "Padding (px)"
+msgstr "Abstand zwischen Elementen (px)"
+
+msgid "Label font size (pt)"
+msgstr "Schriftgröße (pt)"
+
+msgid "Search Settings"
+msgstr "Sucheinstellungen"
+
+msgid "Enable search bar"
+msgstr "Suchfeld aktivieren"
+
+msgid "Appearance Settings"
+msgstr "Designeinstellungen"
+
+msgid "Background color"
+msgstr "Hintergrundfarbe"
+
+msgid "%"
+msgstr "%"
+
+msgid "Background opacity"
+msgstr "Transparenz des Hintergrunds"
+
+msgid "Container color"
+msgstr "Farbe der App-Sektion"
+
+msgid "Container opacity"
+msgstr "Transparenz der App-Sektion"
+
+msgid "Box color"
+msgstr "Farbe der App-Boxen"
+
+msgid "Box opacity"
+msgstr "Transparenz der App-Boxen"
+
+msgid "Box hover color"
+msgstr "Farbe bei Aktivierung der Box"
+
+msgid "Box hover opacity"
+msgstr "Transparenz bei Aktivierung der Box"
+
+msgid "Animation Settings"
+msgstr "Animationseinstellungen"
+
+msgid "Enable animations"
+msgstr "Animationen aktivieren"
+
+msgid "ms"
+msgstr "ms"
+
+msgid "Animation duration"
+msgstr "Animationsdauer"
+
+msgid "Open animation"
+msgstr "Öffnungsanimation"
+
+msgid "Fade"
+msgstr "Einblenden"
+
+msgid "Scale"
+msgstr "Skalieren"
+
+msgid "Slide Up"
+msgstr "Nach oben gleiten"
+
+msgid "Zoom"
+msgstr "Zoom"
+
+msgid "Close animation"
+msgstr "Schließanimation"
+
+msgid "Slide Down"
+msgstr "Nach unten gleiten"
+
+msgid "Button navigation page animation"
+msgstr "Schaltflächennavigationsseiten-Animation"
+
+msgid "Slide"
+msgstr "Gleiten"
+
+msgid "Crossfade"
+msgstr "Überblendung"

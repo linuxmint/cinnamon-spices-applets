@@ -1,0 +1,839 @@
+const Applet = imports.ui.applet;
+const St = imports.gi.St;
+const Clutter = imports.gi.Clutter;
+const Gio = imports.gi.Gio;
+const Main = imports.ui.main;
+const Settings = imports.ui.settings;
+const Util = imports.misc.util;
+const Tweener = imports.ui.tweener;
+
+function MyApplet(metadata, orientation, panel_height, instance_id) {
+    this._init(metadata, orientation, panel_height, instance_id);
+}
+
+MyApplet.prototype = {
+    __proto__: Applet.IconApplet.prototype,
+
+    _init: function(metadata, orientation, panel_height, instance_id) {
+        Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
+        
+        this.set_applet_icon_symbolic_name("open-menu-symbolic");
+        this.set_applet_tooltip("App Drawer");
+        
+        this.metadata = metadata;
+        this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        this.settings.bind("navigationMode", "navigationMode", this._onSettingsChanged.bind(this));
+        this.settings.bind("columns", "columns", this._onSettingsChanged.bind(this));
+        this.settings.bind("rows", "rows", this._onSettingsChanged.bind(this));
+        this.settings.bind("iconSize", "iconSize", this._onSettingsChanged.bind(this));
+        this.settings.bind("padding", "padding", this._onSettingsChanged.bind(this));
+        this.settings.bind("fontSize", "fontSize", this._onSettingsChanged.bind(this));
+        
+        this.settings.bind("enableSearch", "enableSearch", this._onSettingsChanged.bind(this));
+        
+        this.settings.bind("bgColor", "bgColor", this._onSettingsChanged.bind(this));
+        this.settings.bind("bgOpacity", "bgOpacity", this._onSettingsChanged.bind(this));
+        this.settings.bind("containerColor", "containerColor", this._onSettingsChanged.bind(this));
+        this.settings.bind("containerOpacity", "containerOpacity", this._onSettingsChanged.bind(this));
+        this.settings.bind("boxColor", "boxColor", this._onSettingsChanged.bind(this));
+        this.settings.bind("boxOpacity", "boxOpacity", this._onSettingsChanged.bind(this));
+        this.settings.bind("boxHoverColor", "boxHoverColor", this._onSettingsChanged.bind(this));
+        this.settings.bind("boxHoverOpacity", "boxHoverOpacity", this._onSettingsChanged.bind(this));
+        
+        this.settings.bind("enableAnimations", "enableAnimations");
+        this.settings.bind("openAnimationType", "openAnimationType");
+        this.settings.bind("closeAnimationType", "closeAnimationType");
+        this.settings.bind("pageAnimationType", "pageAnimationType");
+        this.settings.bind("animationDuration", "animationDuration");
+        
+        this.modal = null;
+        this.apps = [];
+        this.filteredApps = [];
+        this.currentPage = 0;
+        this.isAnimating = false;
+        this.isSearchMode = false;
+        this.searchEntry = null;
+        this.scrollAdjustment = null;
+		this.isFirstOpen = true;
+    },
+
+    on_applet_clicked: function() {
+        if (this.isAnimating) return;
+        
+        if (this.modal) {
+            this._destroyModal();
+        } else {
+            this._showModal();
+        }
+    },
+
+    _onSettingsChanged: function() {
+        if (this.modal) {
+            this._destroyModal();
+            this._showModal();
+        }
+    },
+
+    _rgbToRgba: function(color, opacity) {
+        let match = color.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+        if (match) {
+            let r = match[1];
+            let g = match[2];
+            let b = match[3];
+            let a = opacity / 100;
+            return `rgba(${r}, ${g}, ${b}, ${a})`;
+        }
+        return color;
+    },
+
+    _loadApps: function() {
+        this.apps = [];
+        let appSystem = Gio.AppInfo.get_all();
+        
+        for (let i = 0; i < appSystem.length; i++) {
+            let app = appSystem[i];
+            if (app.should_show()) {
+                this.apps.push(app);
+            }
+        }
+        
+        this.apps.sort((a, b) => {
+            return a.get_display_name().toLowerCase().localeCompare(b.get_display_name().toLowerCase());
+        });
+        
+        this.filteredApps = this.apps.slice();
+    },
+
+	_showModal: function() {
+		let isFirstOpen = this.apps.length === 0;
+		
+		this._loadApps();
+		this.currentPage = 0;
+		this.isSearchMode = false;
+		
+		let bgColor = this._rgbToRgba(this.bgColor, this.bgOpacity);
+		
+		this.modal = new St.BoxLayout({
+			style_class: 'app-drawer-overlay',
+			vertical: true,
+			reactive: true,
+			style: 'background-color: ' + bgColor + '; backdrop-filter: blur(20px);'
+		});
+		
+		this.modal.set_position(0, 0);
+		this.modal.set_size(global.screen_width, global.screen_height);
+		
+		let containerColor = this._rgbToRgba(this.containerColor, this.containerOpacity);
+		
+		let container = new St.BoxLayout({
+			style_class: 'app-drawer-container',
+			vertical: true,
+			reactive: true,
+			x_align: Clutter.ActorAlign.CENTER,
+			y_align: Clutter.ActorAlign.CENTER,
+			x_expand: true,
+			y_expand: true,
+			style: 'background: ' + containerColor + '; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.18); backdrop-filter: blur(40px); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);'
+		});
+		
+		container.connect('button-press-event', (actor, event) => {
+			if (this.searchEntry && global.stage.get_key_focus() === this.searchEntry.clutter_text) {
+				global.stage.set_key_focus(this.modal);
+			}
+			return Clutter.EVENT_STOP;
+		});
+		
+		if (this.enableSearch) {
+			let searchBox = new St.BoxLayout({
+				x_align: Clutter.ActorAlign.CENTER,
+				style: 'padding: 24px 24px 12px 24px;'
+			});
+			
+			let searchIcon = new St.Icon({
+				icon_name: 'edit-find-symbolic',
+				icon_size: 16,
+				style: 'margin-right: 8px;'
+			});
+
+			this.searchEntry = new St.Entry({
+				track_hover: true,
+				can_focus: true,
+				style_class: 'app-drawer-search',
+				style: 'width: 400px; padding: 12px 16px 12px 40px; border-radius: 8px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; font-size: 14px;'
+			});
+
+			this.searchEntry.set_primary_icon(searchIcon);
+			
+			this.searchClearButton = new St.Icon({
+				icon_name: 'edit-clear-symbolic',
+				icon_size: 16,
+				style: 'color: rgba(255, 255, 255, 0.7); padding: 4px;',
+				reactive: true,
+				visible: false
+			});
+			
+			this.searchEntry.set_secondary_icon(this.searchClearButton);
+			
+			this.searchClearButton.connect('button-press-event', () => {
+				this._clearSearch();
+				return Clutter.EVENT_STOP;
+			});
+			
+			this.searchEntry.clutter_text.connect('text-changed', () => {
+				this.searchClearButton.visible = this.searchEntry.get_text().length > 0;
+				this._onSearchTextChanged();
+			});
+			
+			this.searchEntry.clutter_text.connect('key-press-event', (actor, event) => {
+				let symbol = event.get_key_symbol();
+				if (symbol === Clutter.KEY_Escape) {
+					if (this.searchEntry.get_text() !== '') {
+						this._clearSearch();
+					} else {
+						this.searchEntry.clutter_text.set_selection(0, 0);
+						global.stage.set_key_focus(this.modal);
+					}
+					return Clutter.EVENT_STOP;
+				}
+				return Clutter.EVENT_PROPAGATE;
+			});
+			
+			searchBox.add_actor(this.searchEntry);
+			container.add_actor(searchBox);
+		}
+
+		let boxSize = this.iconSize + 60;
+		let viewWidth = (boxSize + this.padding * 2) * this.columns + this.padding * 2;
+		let viewHeight = (boxSize + this.padding * 2) * this.rows + this.padding * 2;
+		
+		if (this.navigationMode === 'scroll-vertical') {
+			let scrollView = new St.ScrollView({
+				style: 'width: ' + viewWidth + 'px; height: ' + viewHeight + 'px;',
+				hscrollbar_policy: St.PolicyType.NEVER,
+				vscrollbar_policy: St.PolicyType.AUTOMATIC
+			});
+			
+			this.gridContainer = new St.BoxLayout({
+				vertical: true,
+				style: 'width: ' + (viewWidth - 20) + 'px;'
+			});
+			
+			scrollView.add_actor(this.gridContainer);
+			this.scrollAdjustment = scrollView.vscroll.adjustment;
+			
+			container.add_actor(scrollView);
+		} else if (this.navigationMode === 'scroll-horizontal') {
+			let scrollView = new St.ScrollView({
+				style: 'width: ' + viewWidth + 'px; height: ' + viewHeight + 'px;',
+				hscrollbar_policy: St.PolicyType.AUTOMATIC,
+				vscrollbar_policy: St.PolicyType.NEVER
+			});
+			
+			this.gridContainer = new St.BoxLayout({
+				vertical: false,
+				style: 'height: ' + (viewHeight - 20) + 'px;'
+			});
+			
+			scrollView.add_actor(this.gridContainer);
+			this.scrollAdjustment = scrollView.hscroll.adjustment;
+			
+			container.add_actor(scrollView);
+		} else {
+			this.gridContainer = new St.Widget();
+			container.add_actor(this.gridContainer);
+			
+			let navBox = new St.BoxLayout({
+				x_align: Clutter.ActorAlign.CENTER,
+				style: 'padding: 24px;'
+			});
+			
+			this.prevButton = new St.Button({
+				label: '←',
+				style: 'padding: 16px 32px; margin: 0 16px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2);'
+			});
+
+			this.nextButton = new St.Button({
+				label: '→',
+				style: 'padding: 16px 32px; margin: 0 16px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2);'
+			});
+			this.nextButton.connect('clicked', () => {
+				this._navigateRight();
+			});
+			
+			navBox.add_actor(this.prevButton);
+			navBox.add_actor(this.nextButton);
+			container.add_actor(navBox);
+		}
+		
+		this.modal.add_actor(container);
+		
+		this.modal.connect('button-press-event', (actor, event) => {
+			let button = event.get_button();
+			
+			if (button === 1) {
+				if (this.searchEntry && this.searchEntry.has_key_focus()) {
+					global.stage.set_key_focus(null);
+					return Clutter.EVENT_STOP;
+				}
+				
+				if (event.get_source() === this.modal) {
+					this._destroyModal();
+					return Clutter.EVENT_STOP;
+				}
+			}
+			
+			if (this.navigationMode === 'buttons') {
+				if (button === 8) {
+					this._navigateLeft();
+					return Clutter.EVENT_STOP;
+				}
+				
+				if (button === 9) {
+					this._navigateRight();
+					return Clutter.EVENT_STOP;
+				}
+			}
+			
+			return Clutter.EVENT_PROPAGATE;
+		});
+		
+		this.modal.connect('scroll-event', (actor, event) => {
+			if (this.navigationMode === 'buttons' && !this.isSearchMode) {
+				let direction = event.get_scroll_direction();
+				if (direction === Clutter.ScrollDirection.UP || direction === Clutter.ScrollDirection.LEFT) {
+					this._navigateLeft();
+					return Clutter.EVENT_STOP;
+				} else if (direction === Clutter.ScrollDirection.DOWN || direction === Clutter.ScrollDirection.RIGHT) {
+					this._navigateRight();
+					return Clutter.EVENT_STOP;
+				}
+			}
+			return Clutter.EVENT_PROPAGATE;
+		});
+		
+		this.modal.connect('key-press-event', (actor, event) => {
+			let symbol = event.get_key_symbol();
+			
+			if (symbol === Clutter.KEY_Escape) {
+				this._destroyModal();
+				return Clutter.EVENT_STOP;
+			}
+			
+			if (this.navigationMode === 'buttons') {
+				if (symbol === Clutter.KEY_Left) {
+					this._navigateLeft();
+					return Clutter.EVENT_STOP;
+				}
+				
+				if (symbol === Clutter.KEY_Right) {
+					this._navigateRight();
+					return Clutter.EVENT_STOP;
+				}
+			}
+			
+			return Clutter.EVENT_PROPAGATE;
+		});
+		
+		Main.pushModal(this.modal);
+		global.stage.add_actor(this.modal);
+		
+		this._updateGrid();
+
+		this.modal.opacity = 0;
+
+		let delay = this.isFirstOpen ? 50 : 0;
+		let isFirst = this.isFirstOpen;
+		this.isFirstOpen = false;
+
+		imports.mainloop.timeout_add(delay, () => {
+			if (!this.modal) return false;
+			
+			if (isFirst) {
+				Tweener.addTween(this.modal, {
+					opacity: 255,
+					time: this.animationDuration / 1000,
+					transition: 'easeOutQuad',
+					onComplete: () => {
+						if (this.enableAnimations) {
+							this._animateOpen(this.modal, container);
+						}
+					}
+				});
+			} else if (this.enableAnimations) {
+				this._animateOpen(this.modal, container);
+			} else {
+				this.modal.opacity = 255;
+			}
+			return false;
+		});
+	},
+
+	_updateGrid: function() {
+		let oldGrid = this.grid;
+		
+		let boxSize = this.iconSize + 60;
+		
+		if (this.navigationMode === 'scroll-vertical') {
+			this.grid = new St.Widget({
+				layout_manager: new Clutter.GridLayout({
+					orientation: Clutter.Orientation.VERTICAL
+				}),
+				style: 'padding: ' + this.padding + 'px;'
+			});
+			
+			let viewWidth = (boxSize + this.padding * 2) * this.columns;
+			this.grid.set_width(viewWidth);
+			
+			let layout = this.grid.layout_manager;
+			let col = 0;
+			let row = 0;
+			
+			for (let i = 0; i < this.filteredApps.length; i++) {
+				let app = this.filteredApps[i];
+				let button = this._createAppButton(app, boxSize);
+				layout.attach(button, col, row, 1, 1);
+				
+				col++;
+				if (col >= this.columns) {
+					col = 0;
+					row++;
+				}
+			}
+			
+			if (oldGrid) {
+				this.gridContainer.remove_actor(oldGrid);
+				oldGrid.destroy();
+			}
+			this.gridContainer.add_actor(this.grid);
+			
+		} else if (this.navigationMode === 'scroll-horizontal') {
+			this.grid = new St.Widget({
+				layout_manager: new Clutter.GridLayout({
+					orientation: Clutter.Orientation.HORIZONTAL
+				}),
+				style: 'padding: ' + this.padding + 'px;'
+			});
+			
+			let viewHeight = (boxSize + this.padding * 2) * this.rows;
+			this.grid.set_height(viewHeight);
+			
+			let layout = this.grid.layout_manager;
+			let col = 0;
+			let row = 0;
+			
+			for (let i = 0; i < this.filteredApps.length; i++) {
+				let app = this.filteredApps[i];
+				let button = this._createAppButton(app, boxSize);
+				layout.attach(button, col, row, 1, 1);
+				
+				row++;
+				if (row >= this.rows) {
+					row = 0;
+					col++;
+				}
+			}
+			
+			if (oldGrid) {
+				this.gridContainer.remove_actor(oldGrid);
+				oldGrid.destroy();
+			}
+			this.gridContainer.add_actor(this.grid);
+			
+		} else {
+			this.grid = new St.Widget({
+				layout_manager: new Clutter.GridLayout({
+					orientation: Clutter.Orientation.VERTICAL
+				}),
+				style: 'padding: ' + this.padding + 'px;'
+			});
+			
+			let totalWidth = (boxSize + this.padding * 2) * this.columns + this.padding * 2;
+			let totalHeight = (boxSize + this.padding * 2) * this.rows + this.padding * 2;
+			this.grid.set_width(totalWidth);
+			this.grid.set_height(totalHeight);
+			
+			let layout = this.grid.layout_manager;
+			let perPage = this.columns * this.rows;
+			let start = this.currentPage * perPage;
+			let end = Math.min(start + perPage, this.filteredApps.length);
+			
+			let col = 0;
+			let row = 0;
+			
+			for (let i = start; i < end; i++) {
+				let app = this.filteredApps[i];
+				let button = this._createAppButton(app, boxSize);
+				layout.attach(button, col, row, 1, 1);
+				
+				col++;
+				if (col >= this.columns) {
+					col = 0;
+					row++;
+				}
+			}
+			
+			let maxPage = Math.ceil(this.filteredApps.length / perPage) - 1;
+			
+			if (this.isSearchMode) {
+				this.prevButton.visible = false;
+				this.nextButton.visible = false;
+			} else {
+				this.prevButton.visible = this.currentPage > 0;
+				this.nextButton.visible = this.currentPage < maxPage;
+			}
+			
+			if (this.enableAnimations && oldGrid) {
+				this._animatePageTransition(oldGrid, this.grid);
+			} else {
+				if (oldGrid) {
+					this.gridContainer.remove_actor(oldGrid);
+					oldGrid.destroy();
+				}
+				this.gridContainer.add_actor(this.grid);
+			}
+		}
+	},
+
+    _navigateLeft: function() {
+        if (this.isSearchMode || this.isAnimating) return;
+        
+        if (this.currentPage > 0) {
+            this.currentPage--;
+            this._updateGrid();
+        }
+    },
+
+    _navigateRight: function() {
+        if (this.isSearchMode || this.isAnimating) return;
+        
+        let maxPage = Math.ceil(this.filteredApps.length / (this.columns * this.rows)) - 1;
+        if (this.currentPage < maxPage) {
+            this.currentPage++;
+            this._updateGrid();
+        }
+    },
+
+    _onSearchTextChanged: function() {
+        let searchText = this.searchEntry.get_text().toLowerCase().trim();
+        
+        if (searchText === '') {
+            this._clearSearch();
+            return;
+        }
+        
+        this.isSearchMode = true;
+        this.currentPage = 0;
+        
+        this.filteredApps = this.apps.filter(app => {
+            let name = app.get_display_name().toLowerCase();
+            let description = app.get_description();
+            let descText = description ? description.toLowerCase() : '';
+            
+            return name.includes(searchText) || descText.includes(searchText);
+        });
+        
+        this._updateGrid();
+    },
+
+    _clearSearch: function() {
+        if (this.searchEntry) {
+            this.searchEntry.set_text('');
+        }
+        this.isSearchMode = false;
+        this.currentPage = 0;
+        this.filteredApps = this.apps.slice();
+        this._updateGrid();
+    },
+
+	_animateOpen: function(modal, container) {
+		this.isAnimating = true;
+		let duration = this.animationDuration / 1000;
+		
+		switch(this.openAnimationType) {
+			case 'fade':
+				container.set_scale(1.0, 1.0);
+				container.translation_y = 0;
+				container.opacity = 255;
+				modal.opacity = 0;
+				Tweener.addTween(modal, {
+					opacity: 255,
+					time: duration,
+					transition: 'easeOutQuad',
+					onComplete: () => { this.isAnimating = false; }
+				});
+				break;
+				
+			case 'scale':
+				modal.opacity = 255;
+				container.translation_y = 0;
+				container.set_scale(0.8, 0.8);
+				container.opacity = 0;
+				Tweener.addTween(container, {
+					scale_x: 1.0,
+					scale_y: 1.0,
+					opacity: 255,
+					time: duration,
+					transition: 'easeOutBack',
+					onComplete: () => { this.isAnimating = false; }
+				});
+				break;
+				
+			case 'slide-up':
+				modal.opacity = 255;
+				container.set_scale(1.0, 1.0);
+				container.translation_y = 100;
+				container.opacity = 0;
+				Tweener.addTween(container, {
+					translation_y: 0,
+					opacity: 255,
+					time: duration,
+					transition: 'easeOutQuad',
+					onComplete: () => { this.isAnimating = false; }
+				});
+				break;
+				
+			case 'zoom':
+				container.translation_y = 0;
+				modal.opacity = 0;
+				container.set_scale(0.5, 0.5);
+				container.opacity = 255;
+				Tweener.addTween(modal, {
+					opacity: 255,
+					time: duration,
+					transition: 'easeOutQuad'
+				});
+				Tweener.addTween(container, {
+					scale_x: 1.0,
+					scale_y: 1.0,
+					time: duration,
+					transition: 'easeOutCubic',
+					onComplete: () => { this.isAnimating = false; }
+				});
+				break;
+				
+			default:
+				modal.opacity = 255;
+				container.opacity = 255;
+				this.isAnimating = false;
+		}
+	},
+
+    _animatePageTransition: function(oldGrid, newGrid) {
+        this.isAnimating = true;
+        let duration = this.animationDuration / 1000;
+        
+        this.gridContainer.add_actor(newGrid);
+        
+        switch(this.pageAnimationType) {
+            case 'fade':
+                newGrid.opacity = 0;
+                Tweener.addTween(oldGrid, {
+                    opacity: 0,
+                    time: duration / 2,
+                    transition: 'easeOutQuad',
+                    onComplete: () => {
+                        this.gridContainer.remove_actor(oldGrid);
+                        oldGrid.destroy();
+                    }
+                });
+                Tweener.addTween(newGrid, {
+                    opacity: 255,
+                    time: duration / 2,
+                    delay: duration / 2,
+                    transition: 'easeInQuad',
+                    onComplete: () => { this.isAnimating = false; }
+                });
+                break;
+                
+            case 'slide':
+                let direction = this.prevButton.visible && !this.nextButton.visible ? -1 : 1;
+                newGrid.translation_x = direction * 200;
+                newGrid.opacity = 0;
+                
+                Tweener.addTween(oldGrid, {
+                    translation_x: -direction * 200,
+                    opacity: 0,
+                    time: duration,
+                    transition: 'easeInOutQuad',
+                    onComplete: () => {
+                        this.gridContainer.remove_actor(oldGrid);
+                        oldGrid.destroy();
+                    }
+                });
+                Tweener.addTween(newGrid, {
+                    translation_x: 0,
+                    opacity: 255,
+                    time: duration,
+                    transition: 'easeInOutQuad',
+                    onComplete: () => { this.isAnimating = false; }
+                });
+                break;
+                
+            case 'crossfade':
+                newGrid.opacity = 0;
+                Tweener.addTween(oldGrid, {
+                    opacity: 0,
+                    time: duration,
+                    transition: 'easeInOutQuad',
+                    onComplete: () => {
+                        this.gridContainer.remove_actor(oldGrid);
+                        oldGrid.destroy();
+                    }
+                });
+                Tweener.addTween(newGrid, {
+                    opacity: 255,
+                    time: duration,
+                    transition: 'easeInOutQuad',
+                    onComplete: () => { this.isAnimating = false; }
+                });
+                break;
+                
+            default:
+                this.gridContainer.remove_actor(oldGrid);
+                oldGrid.destroy();
+                this.isAnimating = false;
+        }
+    },
+
+	_createAppButton: function(app, boxSize) {
+		let boxColor = this._rgbToRgba(this.boxColor, this.boxOpacity);
+		let boxHoverColor = this._rgbToRgba(this.boxHoverColor, this.boxHoverOpacity);
+		let spacing = Math.round(this.iconSize * 0.2);
+		
+		let box = new St.BoxLayout({
+			style_class: 'app-drawer-item',
+			vertical: true,
+			reactive: true,
+			track_hover: true,
+			width: boxSize,
+			height: boxSize,
+			x_align: Clutter.ActorAlign.CENTER,
+			y_align: Clutter.ActorAlign.CENTER,
+			style: 'margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; transition: all 0.2s; spacing: ' + spacing + 'px;'
+		});
+		
+		box.connect('enter-event', () => {
+			box.set_style('margin: ' + this.padding + 'px; background: ' + boxHoverColor + '; border-radius: 12px; box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3); spacing: ' + spacing + 'px;');
+		});
+		
+		box.connect('leave-event', () => {
+			box.set_style('margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; spacing: ' + spacing + 'px;');
+		});
+		
+		let icon = app.get_icon();
+		let iconActor = new St.Icon({
+			gicon: icon,
+			icon_size: this.iconSize,
+			x_align: Clutter.ActorAlign.CENTER,
+			y_align: Clutter.ActorAlign.CENTER
+		});
+		
+		let label = new St.Label({
+			text: app.get_display_name(),
+			style: 'font-size: ' + this.fontSize + 'pt; color: rgba(255, 255, 255, 0.95); text-align: center;',
+			x_align: Clutter.ActorAlign.CENTER
+		});
+		label.clutter_text.set_line_wrap(true);
+		label.clutter_text.set_ellipsize(3);
+		label.clutter_text.set_line_alignment(2);
+		
+		box.add_actor(iconActor);
+		box.add_actor(label);
+		
+		box.connect('button-press-event', () => {
+			app.launch([], null);
+			this._destroyModal();
+			return Clutter.EVENT_STOP;
+		});
+		
+		return box;
+	},
+
+    _destroyModal: function() {
+        if (this.modal && !this.isAnimating) {
+            if (this.enableAnimations) {
+                this._animateClose();
+            } else {
+                this._completeDestroy();
+            }
+        }
+    },
+
+    _animateClose: function() {
+        this.isAnimating = true;
+        let duration = this.animationDuration / 1000;
+        let container = this.modal.get_children()[0];
+        
+        switch(this.closeAnimationType) {
+            case 'fade':
+                Tweener.addTween(this.modal, {
+                    opacity: 0,
+                    time: duration,
+                    transition: 'easeOutQuad',
+                    onComplete: () => { this._completeDestroy(); }
+                });
+                break;
+                
+            case 'scale':
+                Tweener.addTween(container, {
+                    scale_x: 0.8,
+                    scale_y: 0.8,
+                    opacity: 0,
+                    time: duration,
+                    transition: 'easeInBack',
+                    onComplete: () => { this._completeDestroy(); }
+                });
+                break;
+                
+            case 'slide-down':
+                Tweener.addTween(container, {
+                    translation_y: 100,
+                    opacity: 0,
+                    time: duration,
+                    transition: 'easeInQuad',
+                    onComplete: () => { this._completeDestroy(); }
+                });
+                break;
+                
+            case 'zoom':
+                Tweener.addTween(this.modal, {
+                    opacity: 0,
+                    time: duration,
+                    transition: 'easeInQuad'
+                });
+                Tweener.addTween(container, {
+                    scale_x: 0.5,
+                    scale_y: 0.5,
+                    time: duration,
+                    transition: 'easeInCubic',
+                    onComplete: () => { this._completeDestroy(); }
+                });
+                break;
+                
+            default:
+                this._completeDestroy();
+        }
+    },
+
+    _completeDestroy: function() {
+        if (this.modal) {
+            Main.popModal(this.modal);
+            global.stage.remove_actor(this.modal);
+            this.modal.destroy();
+            this.modal = null;
+            this.searchEntry = null;
+            this.scrollAdjustment = null;
+        }
+        this.isAnimating = false;
+        this.isSearchMode = false;
+    },
+
+    on_applet_removed_from_panel: function() {
+        this.enableAnimations = false;
+        this._destroyModal();
+    }
+};
+
+function main(metadata, orientation, panel_height, instance_id) {
+    return new MyApplet(metadata, orientation, panel_height, instance_id);
+}

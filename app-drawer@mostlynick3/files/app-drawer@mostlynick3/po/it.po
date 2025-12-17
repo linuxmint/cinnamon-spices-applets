@@ -1,0 +1,116 @@
+msgid "App Drawer"
+msgstr "Cassetto Applicazioni"
+
+msgid "Full-screen app launcher with animations, transparency, a search box, and more."
+msgstr "Lanciatore di applicazioni a schermo intero con animazioni, trasparenza, casella di ricerca e altro."
+
+msgid "Navigation Settings"
+msgstr "Impostazioni di Navigazione"
+
+msgid "Navigation mode"
+msgstr "Modalità di navigazione"
+
+msgid "Button Navigation"
+msgstr "Navigazione a Pulsanti"
+
+msgid "Scroll Horizontal"
+msgstr "Scorrimento Orizzontale"
+
+msgid "Scroll Vertical"
+msgstr "Scorrimento Verticale"
+
+msgid "Layout Settings"
+msgstr "Impostazioni Layout"
+
+msgid "Columns per page"
+msgstr "Colonne per pagina"
+
+msgid "Rows per page"
+msgstr "Righe per pagina"
+
+msgid "Icon size (px)"
+msgstr "Dimensione icona (px)"
+
+msgid "Padding (px)"
+msgstr "Spaziatura (px)"
+
+msgid "Label font size (pt)"
+msgstr "Dimensione carattere etichetta (pt)"
+
+msgid "Search Settings"
+msgstr "Impostazioni Ricerca"
+
+msgid "Enable search bar"
+msgstr "Abilita barra di ricerca"
+
+msgid "Appearance Settings"
+msgstr "Impostazioni Aspetto"
+
+msgid "Background color"
+msgstr "Colore sfondo"
+
+msgid "%"
+msgstr "%"
+
+msgid "Background opacity"
+msgstr "Opacità sfondo"
+
+msgid "Container color"
+msgstr "Colore contenitore"
+
+msgid "Container opacity"
+msgstr "Opacità contenitore"
+
+msgid "Box color"
+msgstr "Colore riquadro"
+
+msgid "Box opacity"
+msgstr "Opacità riquadro"
+
+msgid "Box hover color"
+msgstr "Colore riquadro al passaggio"
+
+msgid "Box hover opacity"
+msgstr "Opacità riquadro al passaggio"
+
+msgid "Animation Settings"
+msgstr "Impostazioni Animazioni"
+
+msgid "Enable animations"
+msgstr "Abilita animazioni"
+
+msgid "ms"
+msgstr "ms"
+
+msgid "Animation duration"
+msgstr "Durata animazione"
+
+msgid "Open animation"
+msgstr "Animazione apertura"
+
+msgid "Fade"
+msgstr "Dissolvenza"
+
+msgid "Scale"
+msgstr "Scala"
+
+msgid "Slide Up"
+msgstr "Scorri Su"
+
+msgid "Zoom"
+msgstr "Zoom"
+
+msgid "Close animation"
+msgstr "Animazione chiusura"
+
+msgid "Slide Down"
+msgstr "Scorri Giù"
+
+msgid "Button navigation page animation"
+msgstr "Animazione pagina navigazione a pulsanti"
+
+msgid "Slide"
+msgstr "Scorrimento"
+
+msgid "Crossfade"
+msgstr "Dissolvenza Incrociata"

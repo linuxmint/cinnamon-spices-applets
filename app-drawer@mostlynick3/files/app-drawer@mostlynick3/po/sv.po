@@ -1,0 +1,116 @@
+msgid "App Drawer"
+msgstr "Applåda"
+
+msgid "Full-screen app launcher with animations, transparency, a search box, and more."
+msgstr "Helskärms applåda med animationer, genomskinlighet, sökruta och mer."
+
+msgid "Navigation Settings"
+msgstr "Navigeringsinställningar"
+
+msgid "Navigation mode"
+msgstr "Navigeringsläge"
+
+msgid "Button Navigation"
+msgstr "Knappnavigering"
+
+msgid "Scroll Horizontal"
+msgstr "Horisontell rullning"
+
+msgid "Scroll Vertical"
+msgstr "Vertikal rullning"
+
+msgid "Layout Settings"
+msgstr "Layoutinställningar"
+
+msgid "Columns per page"
+msgstr "Kolumner per sida"
+
+msgid "Rows per page"
+msgstr "Rader per sida"
+
+msgid "Icon size (px)"
+msgstr "Ikonstorlek (px)"
+
+msgid "Padding (px)"
+msgstr "Mellanrum mellan element (px)"
+
+msgid "Label font size (pt)"
+msgstr "Teckenstorlek (pt)"
+
+msgid "Search Settings"
+msgstr "Sökinställningar"
+
+msgid "Enable search bar"
+msgstr "Aktivera sökfält"
+
+msgid "Appearance Settings"
+msgstr "Designinställningar"
+
+msgid "Background color"
+msgstr "Bakgrundsfärg"
+
+msgid "%"
+msgstr "%"
+
+msgid "Background opacity"
+msgstr "Bakgrundens genomskinlighet"
+
+msgid "Container color"
+msgstr "Färg på app-sektion"
+
+msgid "Container opacity"
+msgstr "Genomskinlighet på app-sektion"
+
+msgid "Box color"
+msgstr "Färg på app-rutor"
+
+msgid "Box opacity"
+msgstr "Genomskinlighet på app-rutor"
+
+msgid "Box hover color"
+msgstr "Färg vid aktivering av ruta"
+
+msgid "Box hover opacity"
+msgstr "Genomskinlighet vid aktivering av ruta"
+
+msgid "Animation Settings"
+msgstr "Animationsinställningar"
+
+msgid "Enable animations"
+msgstr "Aktivera animationer"
+
+msgid "ms"
+msgstr "ms"
+
+msgid "Animation duration"
+msgstr "Animationsvaraktighet"
+
+msgid "Open animation"
+msgstr "Öppningsanimation"
+
+msgid "Fade"
+msgstr "Tona"
+
+msgid "Scale"
+msgstr "Skala"
+
+msgid "Slide Up"
+msgstr "Gli upp"
+
+msgid "Zoom"
+msgstr "Zoom"
+
+msgid "Close animation"
+msgstr "Stängningsanimation"
+
+msgid "Slide Down"
+msgstr "Gli ner"
+
+msgid "Button navigation page animation"
+msgstr "Knappnavigeringssida animation"
+
+msgid "Slide"
+msgstr "Gli"
+
+msgid "Crossfade"
+msgstr "Korstonning"

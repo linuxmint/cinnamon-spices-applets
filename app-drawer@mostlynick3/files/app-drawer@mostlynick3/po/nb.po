@@ -1,0 +1,116 @@
+msgid "App Drawer"
+msgstr "Appskuff"
+
+msgid "Full-screen app launcher with animations, transparency, a search box, and more."
+msgstr "Fullskjerms appskuff med animasjoner, gjennomsiktighet, søkeboks og mer."
+
+msgid "Navigation Settings"
+msgstr "Navigasjonsinnstillinger"
+
+msgid "Navigation mode"
+msgstr "Navigasjonsmodus"
+
+msgid "Button Navigation"
+msgstr "Knappnavigasjon"
+
+msgid "Scroll Horizontal"
+msgstr "Horisontal rulling"
+
+msgid "Scroll Vertical"
+msgstr "Vertikal rulling"
+
+msgid "Layout Settings"
+msgstr "Layoutinnstillinger"
+
+msgid "Columns per page"
+msgstr "Kolonner per side"
+
+msgid "Rows per page"
+msgstr "Rader per side"
+
+msgid "Icon size (px)"
+msgstr "Ikonstørrelse (px)"
+
+msgid "Padding (px)"
+msgstr "Mellomrom mellom elementer (px)"
+
+msgid "Label font size (pt)"
+msgstr "Skriftstørrelse (pt)"
+
+msgid "Search Settings"
+msgstr "Søkeinnstillinger"
+
+msgid "Enable search bar"
+msgstr "Aktiver søkefelt"
+
+msgid "Appearance Settings"
+msgstr "Designinnstilinger"
+
+msgid "Background color"
+msgstr "Bakgrunnsfarge"
+
+msgid "%"
+msgstr "%"
+
+msgid "Background opacity"
+msgstr "Bakgrunnens gjennomsiktighet"
+
+msgid "Container color"
+msgstr "Farge på app-seksjon"
+
+msgid "Container opacity"
+msgstr "Gjennomsiktighet på app-seksjon"
+
+msgid "Box color"
+msgstr "Farge på app-bokser"
+
+msgid "Box opacity"
+msgstr "Gjennomsiktighet på app-bokser"
+
+msgid "Box hover color"
+msgstr "Farge ved aktivering av boks"
+
+msgid "Box hover opacity"
+msgstr "Gjennomsiktighet ved aktivering av boks"
+
+msgid "Animation Settings"
+msgstr "Animasjonsinnstillinger"
+
+msgid "Enable animations"
+msgstr "Aktiver animasjoner"
+
+msgid "ms"
+msgstr "ms"
+
+msgid "Animation duration"
+msgstr "Animasjonsvarighet"
+
+msgid "Open animation"
+msgstr "Åpningsanimasjon"
+
+msgid "Fade"
+msgstr "Tone"
+
+msgid "Scale"
+msgstr "Skaler"
+
+msgid "Slide Up"
+msgstr "Gli opp"
+
+msgid "Zoom"
+msgstr "Zoom"
+
+msgid "Close animation"
+msgstr "Lukkingsanimasjon"
+
+msgid "Slide Down"
+msgstr "Gli ned"
+
+msgid "Button navigation page animation"
+msgstr "Knappnavigeringsside animasjon"
+
+msgid "Slide"
+msgstr "Gli"
+
+msgid "Crossfade"
+msgstr "Krysstone"
