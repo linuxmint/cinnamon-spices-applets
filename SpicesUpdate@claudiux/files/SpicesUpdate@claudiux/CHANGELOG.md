@@ -1,3 +1,6 @@
+### v7.11.1~20251217
+  * Animation improvements.
+
 ### v7.11.0~20251217
   * Uses better animation method.
 
