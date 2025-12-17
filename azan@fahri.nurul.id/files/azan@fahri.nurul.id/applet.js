@@ -55,7 +55,6 @@ AzanApplet.prototype = {
             this._settingsProvider = new Settings.AppletSettings(this, metadata.uuid, instanceId);
             this._bindSettings();
 
-
             this._dateFormatFull = _("%A %B %e, %Y");
 
             this._prayTimes = new PrayTimes.PrayTimes('ISNA');
