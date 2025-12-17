@@ -719,8 +719,8 @@ MyApplet.prototype = {
 			width: boxSize,
 			height: boxSize,
 			x_align: Clutter.ActorAlign.CENTER,
-			y_align: Clutter.ActorAlign.CENTER,
-			style: 'margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; transition: all 0.2s; spacing: ' + spacing + 'px;'
+			y_align: Clutter.ActorAlign.START,
+			style: 'margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; transition: all 0.2s; spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;'
 		});
 		
 		let description = app.get_description();
@@ -730,8 +730,8 @@ MyApplet.prototype = {
 		}
 		
 		box.connect('enter-event', () => {
-			box.set_style('margin: ' + this.padding + 'px; background: ' + boxHoverColor + '; border-radius: 12px; box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3); spacing: ' + spacing + 'px;');
-			
+			box.set_style('margin: ' + this.padding + 'px; background: ' + boxHoverColor + '; border-radius: 12px; box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3); spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;');
+
 			if (this.tooltipTimeout) {
 				imports.mainloop.source_remove(this.tooltipTimeout);
 			}
@@ -744,8 +744,8 @@ MyApplet.prototype = {
 		});
 		
 		box.connect('leave-event', () => {
-			box.set_style('margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; spacing: ' + spacing + 'px;');
-			
+			box.set_style('margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;');
+	
 			if (this.tooltipTimeout) {
 				imports.mainloop.source_remove(this.tooltipTimeout);
 				this.tooltipTimeout = null;
@@ -775,7 +775,8 @@ MyApplet.prototype = {
 			height: this.iconSize,
 			x_align: Clutter.ActorAlign.CENTER,
 			y_align: Clutter.ActorAlign.CENTER,
-			x_expand: true
+			x_expand: true,
+			y_expand: true
 		});
 		
 		iconWrapper.add_child(iconActor);
@@ -808,12 +809,14 @@ MyApplet.prototype = {
 		
 		box.add_actor(iconWrapper);
 		
+		let labelHeight = Math.round(this.fontSize * 2.5);
 		let label = new St.Label({
 			text: app.get_display_name(),
-			style: 'font-size: ' + this.fontSize + 'pt; color: rgba(255, 255, 255, 0.95); text-align: center;',
-			x_align: Clutter.ActorAlign.CENTER
+			style: 'font-size: ' + this.fontSize + 'pt; color: rgba(255, 255, 255, 0.95); text-align: center; padding-left: 8px; padding-right: 8px; height: ' + labelHeight + 'px;',
+			x_align: Clutter.ActorAlign.CENTER,
+			y_align: Clutter.ActorAlign.START
 		});
-		label.clutter_text.set_line_wrap(true);
+		label.clutter_text.set_line_wrap(false);
 		label.clutter_text.set_ellipsize(3);
 		label.clutter_text.set_line_alignment(2);
 		
