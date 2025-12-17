@@ -239,7 +239,7 @@ class CM extends Applet.IconApplet {
             this.actors.hotButton = new St.Button({label: hotlist[i][0], style_class: "menu-application-button-selected && button"});
             this.actors.hotButton.connect("clicked", () => {
                 let clipboard = St.Clipboard.get_default();
-                clipboard.set_text(St.ClipboardType.CLIPBOARD, currentChar);
+                clipboard.set_text(St.ClipboardType.CLIPBOARD, hotlist[i][0]);
                 
                 this.menu.toggle();
             });
