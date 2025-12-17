@@ -6,6 +6,7 @@ const Main = imports.ui.main;
 const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const Tweener = imports.ui.tweener;
+const Tooltips = imports.ui.tooltips;
 
 function MyApplet(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
@@ -30,7 +31,9 @@ MyApplet.prototype = {
         this.settings.bind("fontSize", "fontSize", this._onSettingsChanged.bind(this));
         
         this.settings.bind("enableSearch", "enableSearch", this._onSettingsChanged.bind(this));
-        
+        this.settings.bind("enableFavorites", "enableFavorites", this._onSettingsChanged.bind(this));
+		this.settings.bind("favoriteApps", "favoriteApps");
+
         this.settings.bind("bgColor", "bgColor", this._onSettingsChanged.bind(this));
         this.settings.bind("bgOpacity", "bgOpacity", this._onSettingsChanged.bind(this));
         this.settings.bind("containerColor", "containerColor", this._onSettingsChanged.bind(this));
@@ -55,6 +58,8 @@ MyApplet.prototype = {
         this.searchEntry = null;
         this.scrollAdjustment = null;
 		this.isFirstOpen = true;
+		this.activeTooltip = null;
+		this.tooltipTimeout = null;
     },
 
     on_applet_clicked: function() {
@@ -98,6 +103,12 @@ MyApplet.prototype = {
         }
         
         this.apps.sort((a, b) => {
+            if (this.enableFavorites && this.favoriteApps && Array.isArray(this.favoriteApps)) {
+                let aIsFav = this.favoriteApps.indexOf(a.get_id()) !== -1;
+                let bIsFav = this.favoriteApps.indexOf(b.get_id()) !== -1;
+                if (aIsFav && !bIsFav) return -1;
+                if (!aIsFav && bIsFav) return 1;
+            }
             return a.get_display_name().toLowerCase().localeCompare(b.get_display_name().toLowerCase());
         });
         
@@ -712,12 +723,42 @@ MyApplet.prototype = {
 			style: 'margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; transition: all 0.2s; spacing: ' + spacing + 'px;'
 		});
 		
+		let description = app.get_description();
+		let tooltipText = app.get_display_name();
+		if (description) {
+			tooltipText += '\n' + description;
+		}
+		
 		box.connect('enter-event', () => {
 			box.set_style('margin: ' + this.padding + 'px; background: ' + boxHoverColor + '; border-radius: 12px; box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3); spacing: ' + spacing + 'px;');
+			
+			if (this.tooltipTimeout) {
+				imports.mainloop.source_remove(this.tooltipTimeout);
+			}
+			
+			this.tooltipTimeout = imports.mainloop.timeout_add(300, () => {
+				this._showTooltip(tooltipText);
+				this.tooltipTimeout = null;
+				return false;
+			});
 		});
 		
 		box.connect('leave-event', () => {
 			box.set_style('margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; spacing: ' + spacing + 'px;');
+			
+			if (this.tooltipTimeout) {
+				imports.mainloop.source_remove(this.tooltipTimeout);
+				this.tooltipTimeout = null;
+			}
+			this._hideTooltip();
+		});
+		
+		box.connect('motion-event', (actor, event) => {
+			if (this.activeTooltip) {
+				let [x, y] = event.get_coords();
+				this.activeTooltip.set_position(x + 15, y + 15);
+			}
+			return Clutter.EVENT_PROPAGATE;
 		});
 		
 		let icon = app.get_icon();
@@ -728,6 +769,45 @@ MyApplet.prototype = {
 			y_align: Clutter.ActorAlign.CENTER
 		});
 		
+		let iconWrapper = new St.Widget({
+			layout_manager: new Clutter.FixedLayout(),
+			width: this.iconSize,
+			height: this.iconSize,
+			x_align: Clutter.ActorAlign.CENTER,
+			y_align: Clutter.ActorAlign.CENTER,
+			x_expand: true
+		});
+		
+		iconWrapper.add_child(iconActor);
+		
+		if (this.enableFavorites) {
+			if (!this.favoriteApps) this.favoriteApps = [];
+			let isFavorite = this.favoriteApps.indexOf(app.get_id()) !== -1;
+			
+			let starButton = new St.Button({
+				reactive: true,
+				track_hover: true,
+				style: 'padding: 2px; background: rgba(0, 0, 0, 0.7); border-radius: 10px;'
+			});
+			
+			let starIcon = new St.Icon({
+				icon_name: isFavorite ? 'starred-symbolic' : 'non-starred-symbolic',
+				icon_size: 16,
+				style: 'color: ' + (isFavorite ? '#FFD700' : 'rgba(255, 255, 255, 0.6)') + ';'
+			});
+			
+			starButton.set_child(starIcon);
+			starButton.connect('button-press-event', () => {
+				this._toggleFavorite(app);
+				return Clutter.EVENT_STOP;
+			});
+			
+			starButton.set_position(this.iconSize - 20, 0);
+			iconWrapper.add_child(starButton);
+		}
+		
+		box.add_actor(iconWrapper);
+		
 		let label = new St.Label({
 			text: app.get_display_name(),
 			style: 'font-size: ' + this.fontSize + 'pt; color: rgba(255, 255, 255, 0.95); text-align: center;',
@@ -737,10 +817,10 @@ MyApplet.prototype = {
 		label.clutter_text.set_ellipsize(3);
 		label.clutter_text.set_line_alignment(2);
 		
-		box.add_actor(iconActor);
 		box.add_actor(label);
 		
 		box.connect('button-press-event', () => {
+			this._hideTooltip();
 			app.launch([], null);
 			this._destroyModal();
 			return Clutter.EVENT_STOP;
@@ -749,15 +829,74 @@ MyApplet.prototype = {
 		return box;
 	},
 
-    _destroyModal: function() {
-        if (this.modal && !this.isAnimating) {
-            if (this.enableAnimations) {
-                this._animateClose();
-            } else {
-                this._completeDestroy();
-            }
-        }
-    },
+	_showTooltip: function(text) {
+		this._hideTooltip();
+		
+		let lines = text.split('\n');
+		let styledText = '<span weight="bold">' + lines[0] + '</span>';
+		if (lines.length > 1) {
+			styledText += '\n' + lines.slice(1).join('\n');
+		}
+		
+		this.activeTooltip = new St.Label({
+			style: 'background-color: rgba(0, 0, 0, 0.9); color: white; padding: 8px 12px; border-radius: 6px; font-size: ' + this.fontSize + 'pt; max-width: 300px;'
+		});
+		
+		this.activeTooltip.clutter_text.set_markup(styledText);
+		this.activeTooltip.clutter_text.set_line_wrap(true);
+		
+		global.stage.add_actor(this.activeTooltip);
+		
+		let [x, y] = global.get_pointer();
+		this.activeTooltip.set_position(x + 15, y + 15);
+	},
+
+	_hideTooltip: function() {
+		if (this.activeTooltip) {
+			global.stage.remove_actor(this.activeTooltip);
+			this.activeTooltip.destroy();
+			this.activeTooltip = null;
+		}
+	},
+
+	_toggleFavorite: function(app) {
+		if (!this.favoriteApps) this.favoriteApps = [];
+		let appId = app.get_id();
+		let index = this.favoriteApps.indexOf(appId);
+		
+		if (index === -1) {
+			this.favoriteApps.push(appId);
+		} else {
+			this.favoriteApps.splice(index, 1);
+		}
+		
+		this.settings.setValue("favoriteApps", this.favoriteApps);
+		
+		if (this.searchEntry && this.searchEntry.get_text() !== '') {
+			this.searchEntry.set_text('');
+			global.stage.set_key_focus(this.modal);
+			this.isSearchMode = false;
+		}
+		
+		this._loadApps();
+		this.currentPage = 0;
+		this._updateGrid();
+	},
+
+	_destroyModal: function() {
+		this._hideTooltip();
+		if (this.tooltipTimeout) {
+			imports.mainloop.source_remove(this.tooltipTimeout);
+			this.tooltipTimeout = null;
+		}
+		if (this.modal && !this.isAnimating) {
+			if (this.enableAnimations) {
+				this._animateClose();
+			} else {
+				this._completeDestroy();
+			}
+		}
+	},
 
     _animateClose: function() {
         this.isAnimating = true;
@@ -815,18 +954,23 @@ MyApplet.prototype = {
         }
     },
 
-    _completeDestroy: function() {
-        if (this.modal) {
-            Main.popModal(this.modal);
-            global.stage.remove_actor(this.modal);
-            this.modal.destroy();
-            this.modal = null;
-            this.searchEntry = null;
-            this.scrollAdjustment = null;
-        }
-        this.isAnimating = false;
-        this.isSearchMode = false;
-    },
+	_completeDestroy: function() {
+		this._hideTooltip();
+		if (this.tooltipTimeout) {
+			imports.mainloop.source_remove(this.tooltipTimeout);
+			this.tooltipTimeout = null;
+		}
+		if (this.modal) {
+			Main.popModal(this.modal);
+			global.stage.remove_actor(this.modal);
+			this.modal.destroy();
+			this.modal = null;
+			this.searchEntry = null;
+			this.scrollAdjustment = null;
+		}
+		this.isAnimating = false;
+		this.isSearchMode = false;
+	},
 
     on_applet_removed_from_panel: function() {
         this.enableAnimations = false;

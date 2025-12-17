@@ -57,14 +57,23 @@
         "step": 1,
         "description": "Label font size (pt)"
     },
-    "search": {
+    "features": {
         "type": "header",
-        "description": "Search Settings"
+        "description": "Features"
     },
     "enableSearch": {
         "type": "checkbox",
         "default": true,
         "description": "Enable search bar"
+    },
+    "enableFavorites": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Enable favorites"
+    },
+    "favoriteApps": {
+        "type": "generic",
+        "default": []
     },
     "appearance": {
         "type": "header",
