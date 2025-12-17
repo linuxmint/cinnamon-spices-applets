@@ -6,7 +6,8 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Tooltips = imports.ui.tooltips;
-const Tweener = imports.ui.tweener;
+//~ const Tweener = imports.ui.tweener;
+const Clutter = imports.gi.Clutter;
 
 const {
     UUID,
@@ -106,10 +107,15 @@ class SU_Notification extends MessageTray.Notification {
             // that banner to the content of the notification in _bannerBoxAllocate()
             // or the notification will have custom content.
             if (animate)
-                Tweener.addTween(this._bannerLabel,
-                                 { opacity: 0,
-                                   time: ANIMATION_TIME,
-                                   transition: 'easeOutQuad' });
+                //~ Tweener.addTween(this._bannerLabel,
+                                 //~ { opacity: 0,
+                                   //~ time: ANIMATION_TIME,
+                                   //~ transition: 'easeOutQuad' });
+                this._bannerLabel.ease({ 
+                    opacity: 0,
+                    duration: 1000,
+                    mode: Clutter.AnimationMode.EASE_OUT_QUAD
+                });
             else
                 this._bannerLabel.opacity = 0;
         }
