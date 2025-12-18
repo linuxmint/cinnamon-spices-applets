@@ -32,7 +32,7 @@ MyApplet.prototype = {
         
         this.settings.bind("enableSearch", "enableSearch", this._onSettingsChanged.bind(this));
         this.settings.bind("enableFavorites", "enableFavorites", this._onSettingsChanged.bind(this));
-		this.settings.bind("favoriteApps", "favoriteApps");
+        this.settings.bind("favoriteApps", "favoriteApps");
 
         this.settings.bind("bgColor", "bgColor", this._onSettingsChanged.bind(this));
         this.settings.bind("bgOpacity", "bgOpacity", this._onSettingsChanged.bind(this));
@@ -57,9 +57,9 @@ MyApplet.prototype = {
         this.isSearchMode = false;
         this.searchEntry = null;
         this.scrollAdjustment = null;
-		this.isFirstOpen = true;
-		this.activeTooltip = null;
-		this.tooltipTimeout = null;
+        this.isFirstOpen = true;
+        this.activeTooltip = null;
+        this.tooltipTimeout = null;
     },
 
     on_applet_clicked: function() {
@@ -115,395 +115,393 @@ MyApplet.prototype = {
         this.filteredApps = this.apps.slice();
     },
 
-	_showModal: function() {
-		let isFirstOpen = this.apps.length === 0;
-		
-		this._loadApps();
-		this.currentPage = 0;
-		this.isSearchMode = false;
-		
-		let bgColor = this._rgbToRgba(this.bgColor, this.bgOpacity);
-		
-		this.modal = new St.BoxLayout({
-			style_class: 'app-drawer-overlay',
-			vertical: true,
-			reactive: true,
-			style: 'background-color: ' + bgColor + '; backdrop-filter: blur(20px);'
-		});
-		
-		this.modal.set_position(0, 0);
-		this.modal.set_size(global.screen_width, global.screen_height);
-		
-		let containerColor = this._rgbToRgba(this.containerColor, this.containerOpacity);
-		
-		let container = new St.BoxLayout({
-			style_class: 'app-drawer-container',
-			vertical: true,
-			reactive: true,
-			x_align: Clutter.ActorAlign.CENTER,
-			y_align: Clutter.ActorAlign.CENTER,
-			x_expand: true,
-			y_expand: true,
-			style: 'background: ' + containerColor + '; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.18); backdrop-filter: blur(40px); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);'
-		});
-		
-		container.connect('button-press-event', (actor, event) => {
-			if (this.searchEntry && global.stage.get_key_focus() === this.searchEntry.clutter_text) {
-				global.stage.set_key_focus(this.modal);
-			}
-			return Clutter.EVENT_STOP;
-		});
-		
-		if (this.enableSearch) {
-			let searchBox = new St.BoxLayout({
-				x_align: Clutter.ActorAlign.CENTER,
-				style: 'padding: 24px 24px 12px 24px;'
-			});
-			
-			let searchIcon = new St.Icon({
-				icon_name: 'edit-find-symbolic',
-				icon_size: 16,
-				style: 'margin-right: 8px;'
-			});
+    _showModal: function() {
+        let isFirstOpen = this.apps.length === 0;
+        
+        this._loadApps();
+        this.currentPage = 0;
+        this.isSearchMode = false;
+        
+        let bgColor = this._rgbToRgba(this.bgColor, this.bgOpacity);
+        
+        this.modal = new St.BoxLayout({
+            style_class: 'app-drawer-overlay',
+            vertical: true,
+            reactive: true,
+            style: 'background-color: ' + bgColor + '; backdrop-filter: blur(20px);'
+        });
+        
+        this.modal.set_position(0, 0);
+        this.modal.set_size(global.screen_width, global.screen_height);
+        
+        let containerColor = this._rgbToRgba(this.containerColor, this.containerOpacity);
+        
+        let container = new St.BoxLayout({
+            style_class: 'app-drawer-container',
+            vertical: true,
+            reactive: true,
+            x_align: Clutter.ActorAlign.CENTER,
+            y_align: Clutter.ActorAlign.CENTER,
+            x_expand: true,
+            y_expand: true,
+            style: 'background: ' + containerColor + '; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.18); backdrop-filter: blur(40px); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);'
+        });
+        
+        container.connect('button-press-event', (actor, event) => {
+            if (this.searchEntry && global.stage.get_key_focus() === this.searchEntry.clutter_text) {
+                global.stage.set_key_focus(this.modal);
+            }
+            return Clutter.EVENT_STOP;
+        });
+        
+        if (this.enableSearch) {
+            let searchBox = new St.BoxLayout({
+                x_align: Clutter.ActorAlign.CENTER,
+                style: 'padding: 24px 24px 12px 24px;'
+            });
+            
+            let searchIcon = new St.Icon({
+                icon_name: 'edit-find-symbolic',
+                icon_size: 16,
+                style: 'margin-right: 8px;'
+            });
 
-			this.searchEntry = new St.Entry({
-				track_hover: true,
-				can_focus: true,
-				style_class: 'app-drawer-search',
-				style: 'width: 400px; padding: 12px 16px 12px 40px; border-radius: 8px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; font-size: 14px;'
-			});
+            this.searchEntry = new St.Entry({
+                track_hover: true,
+                can_focus: true,
+                style_class: 'app-drawer-search',
+                style: 'width: 400px; padding: 12px 16px 12px 40px; border-radius: 8px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; font-size: 14px;'
+            });
 
-			this.searchEntry.set_primary_icon(searchIcon);
-			
-			this.searchClearButton = new St.Icon({
-				icon_name: 'edit-clear-symbolic',
-				icon_size: 16,
-				style: 'color: rgba(255, 255, 255, 0.7); padding: 4px;',
-				reactive: true,
-				visible: false
-			});
-			
-			this.searchEntry.set_secondary_icon(this.searchClearButton);
-			
-			this.searchClearButton.connect('button-press-event', () => {
-				this._clearSearch();
-				return Clutter.EVENT_STOP;
-			});
-			
-			this.searchEntry.clutter_text.connect('text-changed', () => {
-				this.searchClearButton.visible = this.searchEntry.get_text().length > 0;
-				this._onSearchTextChanged();
-			});
-			
-			this.searchEntry.clutter_text.connect('key-press-event', (actor, event) => {
-				let symbol = event.get_key_symbol();
-				if (symbol === Clutter.KEY_Escape) {
-					if (this.searchEntry.get_text() !== '') {
-						this._clearSearch();
-					} else {
-						this.searchEntry.clutter_text.set_selection(0, 0);
-						global.stage.set_key_focus(this.modal);
-					}
-					return Clutter.EVENT_STOP;
-				}
-				return Clutter.EVENT_PROPAGATE;
-			});
-			
-			searchBox.add_actor(this.searchEntry);
-			container.add_actor(searchBox);
-		}
+            this.searchEntry.set_primary_icon(searchIcon);
+            
+            this.searchClearButton = new St.Icon({
+                icon_name: 'edit-clear-symbolic',
+                icon_size: 16,
+                style: 'color: rgba(255, 255, 255, 0.7); padding: 4px;',
+                reactive: true,
+                visible: false
+            });
+            
+            this.searchEntry.set_secondary_icon(this.searchClearButton);
+            
+            this.searchClearButton.connect('button-press-event', () => {
+                this._clearSearch();
+                return Clutter.EVENT_STOP;
+            });
+            
+            this.searchEntry.clutter_text.connect('text-changed', () => {
+                this.searchClearButton.visible = this.searchEntry.get_text().length > 0;
+                this._onSearchTextChanged();
+            });
+            
+            this.searchEntry.clutter_text.connect('key-press-event', (actor, event) => {
+                let symbol = event.get_key_symbol();
+                if (symbol === Clutter.KEY_Escape) {
+                    if (this.searchEntry.get_text() !== '') {
+                        this._clearSearch();
+                    } else {
+                        this.searchEntry.clutter_text.set_selection(0, 0);
+                        global.stage.set_key_focus(this.modal);
+                    }
+                    return Clutter.EVENT_STOP;
+                }
+                return Clutter.EVENT_PROPAGATE;
+            });
+            
+            searchBox.add_actor(this.searchEntry);
+            container.add_actor(searchBox);
+        }
 
-		let boxSize = this.iconSize + 60;
-		let viewWidth = (boxSize + this.padding * 2) * this.columns + this.padding * 2;
-		let viewHeight = (boxSize + this.padding * 2) * this.rows + this.padding * 2;
-		
-		if (this.navigationMode === 'scroll-vertical') {
-			let scrollView = new St.ScrollView({
-				style: 'width: ' + viewWidth + 'px; height: ' + viewHeight + 'px;',
-				hscrollbar_policy: St.PolicyType.NEVER,
-				vscrollbar_policy: St.PolicyType.AUTOMATIC
-			});
-			
-			this.gridContainer = new St.BoxLayout({
-				vertical: true,
-				style: 'width: ' + (viewWidth - 20) + 'px;'
-			});
-			
-			scrollView.add_actor(this.gridContainer);
-			this.scrollAdjustment = scrollView.vscroll.adjustment;
-			
-			container.add_actor(scrollView);
-		} else if (this.navigationMode === 'scroll-horizontal') {
-			let scrollView = new St.ScrollView({
-				style: 'width: ' + viewWidth + 'px; height: ' + viewHeight + 'px;',
-				hscrollbar_policy: St.PolicyType.AUTOMATIC,
-				vscrollbar_policy: St.PolicyType.NEVER
-			});
-			
-			this.gridContainer = new St.BoxLayout({
-				vertical: false,
-				style: 'height: ' + (viewHeight - 20) + 'px;'
-			});
-			
-			scrollView.add_actor(this.gridContainer);
-			this.scrollAdjustment = scrollView.hscroll.adjustment;
-			
-			container.add_actor(scrollView);
-		} else {
-			this.gridContainer = new St.Widget();
-			container.add_actor(this.gridContainer);
-			
-			let navBox = new St.BoxLayout({
-				x_align: Clutter.ActorAlign.CENTER,
-				style: 'padding: 24px;'
-			});
-			
-			this.prevButton = new St.Button({
-				label: '←',
-				style: 'padding: 16px 32px; margin: 0 16px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2);'
-			});
+        let boxSize = this.iconSize + 60;
+        let viewWidth = (boxSize + this.padding * 2) * this.columns + this.padding * 2;
+        let viewHeight = (boxSize + this.padding * 2) * this.rows + this.padding * 2;
+        
+        if (this.navigationMode === 'scroll-vertical') {
+            let scrollView = new St.ScrollView({
+                style: 'width: ' + viewWidth + 'px; height: ' + viewHeight + 'px;',
+                hscrollbar_policy: St.PolicyType.NEVER,
+                vscrollbar_policy: St.PolicyType.AUTOMATIC
+            });
+            
+            this.gridContainer = new St.BoxLayout({
+                vertical: true,
+                style: 'width: ' + (viewWidth - 20) + 'px;'
+            });
+            
+            scrollView.add_actor(this.gridContainer);
+            this.scrollAdjustment = scrollView.vscroll.adjustment;
+            
+            container.add_actor(scrollView);
+        } else if (this.navigationMode === 'scroll-horizontal') {
+            let scrollView = new St.ScrollView({
+                style: 'width: ' + viewWidth + 'px; height: ' + viewHeight + 'px;',
+                hscrollbar_policy: St.PolicyType.AUTOMATIC,
+                vscrollbar_policy: St.PolicyType.NEVER
+            });
+            
+            this.gridContainer = new St.BoxLayout({
+                vertical: false,
+                style: 'height: ' + (viewHeight - 20) + 'px;'
+            });
+            
+            scrollView.add_actor(this.gridContainer);
+            this.scrollAdjustment = scrollView.hscroll.adjustment;
+            
+            container.add_actor(scrollView);
+        } else {
+            this.gridContainer = new St.Widget();
+            container.add_actor(this.gridContainer);
+            
+            let navBox = new St.BoxLayout({
+                x_align: Clutter.ActorAlign.CENTER,
+                style: 'padding: 24px;'
+            });
+            
+            this.prevButton = new St.Button({
+                label: '←',
+                style: 'padding: 16px 32px; margin: 0 16px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2);'
+            });
 
-			this.nextButton = new St.Button({
-				label: '→',
-				style: 'padding: 16px 32px; margin: 0 16px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2);'
-			});
-			this.nextButton.connect('clicked', () => {
-				this._navigateRight();
-			});
-			
-			navBox.add_actor(this.prevButton);
-			navBox.add_actor(this.nextButton);
-			container.add_actor(navBox);
-		}
-		
-		this.modal.add_actor(container);
-		
-		this.modal.connect('button-press-event', (actor, event) => {
-			let button = event.get_button();
-			
-			if (button === 1) {
-				if (this.searchEntry && this.searchEntry.has_key_focus()) {
-					global.stage.set_key_focus(null);
-					return Clutter.EVENT_STOP;
-				}
-				
-				if (event.get_source() === this.modal) {
-					this._destroyModal();
-					return Clutter.EVENT_STOP;
-				}
-			}
-			
-			if (this.navigationMode === 'buttons') {
-				if (button === 8) {
-					this._navigateLeft();
-					return Clutter.EVENT_STOP;
-				}
-				
-				if (button === 9) {
-					this._navigateRight();
-					return Clutter.EVENT_STOP;
-				}
-			}
-			
-			return Clutter.EVENT_PROPAGATE;
-		});
-		
-		this.modal.connect('scroll-event', (actor, event) => {
-			if (this.navigationMode === 'buttons' && !this.isSearchMode) {
-				let direction = event.get_scroll_direction();
-				if (direction === Clutter.ScrollDirection.UP || direction === Clutter.ScrollDirection.LEFT) {
-					this._navigateLeft();
-					return Clutter.EVENT_STOP;
-				} else if (direction === Clutter.ScrollDirection.DOWN || direction === Clutter.ScrollDirection.RIGHT) {
-					this._navigateRight();
-					return Clutter.EVENT_STOP;
-				}
-			}
-			return Clutter.EVENT_PROPAGATE;
-		});
-		
-		this.modal.connect('key-press-event', (actor, event) => {
-			let symbol = event.get_key_symbol();
-			
-			if (symbol === Clutter.KEY_Escape) {
-				this._destroyModal();
-				return Clutter.EVENT_STOP;
-			}
-			
-			if (this.navigationMode === 'buttons') {
-				if (symbol === Clutter.KEY_Left) {
-					this._navigateLeft();
-					return Clutter.EVENT_STOP;
-				}
-				
-				if (symbol === Clutter.KEY_Right) {
-					this._navigateRight();
-					return Clutter.EVENT_STOP;
-				}
-			}
-			
-			return Clutter.EVENT_PROPAGATE;
-		});
-		
-		Main.pushModal(this.modal);
-		global.stage.add_actor(this.modal);
-		
-		this._updateGrid();
+            this.nextButton = new St.Button({
+                label: '→',
+                style: 'padding: 16px 32px; margin: 0 16px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2);'
+            });
+            this.nextButton.connect('clicked', () => {
+                this._navigateRight();
+            });
+            
+            navBox.add_actor(this.prevButton);
+            navBox.add_actor(this.nextButton);
+            container.add_actor(navBox);
+        }
+        
+        this.modal.add_actor(container);
+        
+        this.modal.connect('button-press-event', (actor, event) => {
+            let button = event.get_button();
+            
+            if (button === 1) {
+                if (this.searchEntry && this.searchEntry.has_key_focus()) {
+                    global.stage.set_key_focus(null);
+                    return Clutter.EVENT_STOP;
+                }
+                
+                if (event.get_source() === this.modal) {
+                    this._destroyModal();
+                    return Clutter.EVENT_STOP;
+                }
+            }
+            
+            if (this.navigationMode === 'buttons') {
+                if (button === 8) {
+                    this._navigateLeft();
+                    return Clutter.EVENT_STOP;
+                }
+                
+                if (button === 9) {
+                    this._navigateRight();
+                    return Clutter.EVENT_STOP;
+                }
+            }
+            
+            return Clutter.EVENT_PROPAGATE;
+        });
+        
+        this.modal.connect('scroll-event', (actor, event) => {
+            if (this.navigationMode === 'buttons' && !this.isSearchMode) {
+                let direction = event.get_scroll_direction();
+                if (direction === Clutter.ScrollDirection.UP || direction === Clutter.ScrollDirection.LEFT) {
+                    this._navigateLeft();
+                    return Clutter.EVENT_STOP;
+                } else if (direction === Clutter.ScrollDirection.DOWN || direction === Clutter.ScrollDirection.RIGHT) {
+                    this._navigateRight();
+                    return Clutter.EVENT_STOP;
+                }
+            }
+            return Clutter.EVENT_PROPAGATE;
+        });
+        
+        this.modal.connect('key-press-event', (actor, event) => {
+            let symbol = event.get_key_symbol();
+            
+            if (symbol === Clutter.KEY_Escape) {
+                this._destroyModal();
+                return Clutter.EVENT_STOP;
+            }
+            
+            if (this.navigationMode === 'buttons') {
+                if (symbol === Clutter.KEY_Left) {
+                    this._navigateLeft();
+                    return Clutter.EVENT_STOP;
+                }
+                
+                if (symbol === Clutter.KEY_Right) {
+                    this._navigateRight();
+                    return Clutter.EVENT_STOP;
+                }
+            }
+            
+            return Clutter.EVENT_PROPAGATE;
+        });
+        
+        Main.pushModal(this.modal);
+        global.stage.add_actor(this.modal);
+        
+        this._updateGrid();
 
-		this.modal.opacity = 0;
+        this.modal.opacity = 0;
 
-		let delay = this.isFirstOpen ? 50 : 0;
-		let isFirst = this.isFirstOpen;
-		this.isFirstOpen = false;
+        let delay = this.isFirstOpen ? 50 : 0;
+        let isFirst = this.isFirstOpen;
+        this.isFirstOpen = false;
 
-		imports.mainloop.timeout_add(delay, () => {
-			if (!this.modal) return false;
-			
-			if (isFirst) {
-				Tweener.addTween(this.modal, {
-					opacity: 255,
-					time: this.animationDuration / 1000,
-					transition: 'easeOutQuad',
-					onComplete: () => {
-						if (this.enableAnimations) {
-							this._animateOpen(this.modal, container);
-						}
-					}
-				});
-			} else if (this.enableAnimations) {
-				this._animateOpen(this.modal, container);
-			} else {
-				this.modal.opacity = 255;
-			}
-			return false;
-		});
-	},
+        imports.mainloop.timeout_add(delay, () => {
+            if (!this.modal) return false;
+            
+            if (isFirst) {
+                Tweener.addTween(this.modal, {
+                    opacity: 255,
+                    time: this.animationDuration / 1000,
+                    transition: 'easeOutQuad',
+                    onComplete: () => {
+                        if (this.enableAnimations) {
+                            this._animateOpen(this.modal, container);
+                        }
+                    }
+                });
+            } else if (this.enableAnimations) {
+                this._animateOpen(this.modal, container);
+            } else {
+                this.modal.opacity = 255;
+            }
+            return false;
+        });
+    },
 
-	_updateGrid: function() {
-		let oldGrid = this.grid;
-		
-		let boxSize = this.iconSize + 60;
-		
-		if (this.navigationMode === 'scroll-vertical') {
-			this.grid = new St.Widget({
-				layout_manager: new Clutter.GridLayout({
-					orientation: Clutter.Orientation.VERTICAL
-				}),
-				style: 'padding: ' + this.padding + 'px;'
-			});
-			
-			let viewWidth = (boxSize + this.padding * 2) * this.columns;
-			this.grid.set_width(viewWidth);
-			
-			let layout = this.grid.layout_manager;
-			let col = 0;
-			let row = 0;
-			
-			for (let i = 0; i < this.filteredApps.length; i++) {
-				let app = this.filteredApps[i];
-				let button = this._createAppButton(app, boxSize);
-				layout.attach(button, col, row, 1, 1);
-				
-				col++;
-				if (col >= this.columns) {
-					col = 0;
-					row++;
-				}
-			}
-			
-			if (oldGrid) {
-				this.gridContainer.remove_actor(oldGrid);
-				oldGrid.destroy();
-			}
-			this.gridContainer.add_actor(this.grid);
-			
-		} else if (this.navigationMode === 'scroll-horizontal') {
-			this.grid = new St.Widget({
-				layout_manager: new Clutter.GridLayout({
-					orientation: Clutter.Orientation.HORIZONTAL
-				}),
-				style: 'padding: ' + this.padding + 'px;'
-			});
-			
-			let viewHeight = (boxSize + this.padding * 2) * this.rows;
-			this.grid.set_height(viewHeight);
-			
-			let layout = this.grid.layout_manager;
-			let col = 0;
-			let row = 0;
-			
-			for (let i = 0; i < this.filteredApps.length; i++) {
-				let app = this.filteredApps[i];
-				let button = this._createAppButton(app, boxSize);
-				layout.attach(button, col, row, 1, 1);
-				
-				row++;
-				if (row >= this.rows) {
-					row = 0;
-					col++;
-				}
-			}
-			
-			if (oldGrid) {
-				this.gridContainer.remove_actor(oldGrid);
-				oldGrid.destroy();
-			}
-			this.gridContainer.add_actor(this.grid);
-			
-		} else {
-			this.grid = new St.Widget({
-				layout_manager: new Clutter.GridLayout({
-					orientation: Clutter.Orientation.VERTICAL
-				}),
-				style: 'padding: ' + this.padding + 'px;'
-			});
-			
-			let totalWidth = (boxSize + this.padding * 2) * this.columns + this.padding * 2;
-			let totalHeight = (boxSize + this.padding * 2) * this.rows + this.padding * 2;
-			this.grid.set_width(totalWidth);
-			this.grid.set_height(totalHeight);
-			
-			let layout = this.grid.layout_manager;
-			let perPage = this.columns * this.rows;
-			let start = this.currentPage * perPage;
-			let end = Math.min(start + perPage, this.filteredApps.length);
-			
-			let col = 0;
-			let row = 0;
-			
-			for (let i = start; i < end; i++) {
-				let app = this.filteredApps[i];
-				let button = this._createAppButton(app, boxSize);
-				layout.attach(button, col, row, 1, 1);
-				
-				col++;
-				if (col >= this.columns) {
-					col = 0;
-					row++;
-				}
-			}
-			
-			let maxPage = Math.ceil(this.filteredApps.length / perPage) - 1;
-			
-			if (this.isSearchMode) {
-				this.prevButton.visible = false;
-				this.nextButton.visible = false;
-			} else {
-				this.prevButton.visible = this.currentPage > 0;
-				this.nextButton.visible = this.currentPage < maxPage;
-			}
-			
-			if (this.enableAnimations && oldGrid) {
-				this._animatePageTransition(oldGrid, this.grid);
-			} else {
-				if (oldGrid) {
-					this.gridContainer.remove_actor(oldGrid);
-					oldGrid.destroy();
-				}
-				this.gridContainer.add_actor(this.grid);
-			}
-		}
-	},
+    _safeDestroyGrid: function(grid) {
+        if (!grid) return;
+        try {
+            grid.destroy();
+        } catch(e) {}
+    },
+
+    _updateGrid: function() {
+        let oldGrid = this.grid;
+        
+        let boxSize = this.iconSize + 60;
+        
+        if (this.navigationMode === 'scroll-vertical') {
+            this.grid = new St.Widget({
+                layout_manager: new Clutter.GridLayout({
+                    orientation: Clutter.Orientation.VERTICAL
+                }),
+                style: 'padding: ' + this.padding + 'px;'
+            });
+            
+            let viewWidth = (boxSize + this.padding * 2) * this.columns;
+            this.grid.set_width(viewWidth);
+            
+            let layout = this.grid.layout_manager;
+            let col = 0;
+            let row = 0;
+            
+            for (let i = 0; i < this.filteredApps.length; i++) {
+                let app = this.filteredApps[i];
+                let button = this._createAppButton(app, boxSize);
+                layout.attach(button, col, row, 1, 1);
+                
+                col++;
+                if (col >= this.columns) {
+                    col = 0;
+                    row++;
+                }
+            }
+            
+            this._safeDestroyGrid(oldGrid);
+            this.gridContainer.add_actor(this.grid);
+            
+        } else if (this.navigationMode === 'scroll-horizontal') {
+            this.grid = new St.Widget({
+                layout_manager: new Clutter.GridLayout({
+                    orientation: Clutter.Orientation.HORIZONTAL
+                }),
+                style: 'padding: ' + this.padding + 'px;'
+            });
+            
+            let viewHeight = (boxSize + this.padding * 2) * this.rows;
+            this.grid.set_height(viewHeight);
+            
+            let layout = this.grid.layout_manager;
+            let col = 0;
+            let row = 0;
+            
+            for (let i = 0; i < this.filteredApps.length; i++) {
+                let app = this.filteredApps[i];
+                let button = this._createAppButton(app, boxSize);
+                layout.attach(button, col, row, 1, 1);
+                
+                row++;
+                if (row >= this.rows) {
+                    row = 0;
+                    col++;
+                }
+            }
+            
+            this._safeDestroyGrid(oldGrid);
+            this.gridContainer.add_actor(this.grid);
+            
+        } else {
+            this.grid = new St.Widget({
+                layout_manager: new Clutter.GridLayout({
+                    orientation: Clutter.Orientation.VERTICAL
+                }),
+                style: 'padding: ' + this.padding + 'px;'
+            });
+            
+            let totalWidth = (boxSize + this.padding * 2) * this.columns + this.padding * 2;
+            let totalHeight = (boxSize + this.padding * 2) * this.rows + this.padding * 2;
+            this.grid.set_width(totalWidth);
+            this.grid.set_height(totalHeight);
+            
+            let layout = this.grid.layout_manager;
+            let perPage = this.columns * this.rows;
+            let start = this.currentPage * perPage;
+            let end = Math.min(start + perPage, this.filteredApps.length);
+            
+            let col = 0;
+            let row = 0;
+            
+            for (let i = start; i < end; i++) {
+                let app = this.filteredApps[i];
+                let button = this._createAppButton(app, boxSize);
+                layout.attach(button, col, row, 1, 1);
+                
+                col++;
+                if (col >= this.columns) {
+                    col = 0;
+                    row++;
+                }
+            }
+            
+            let maxPage = Math.ceil(this.filteredApps.length / perPage) - 1;
+            
+            if (this.isSearchMode) {
+                this.prevButton.visible = false;
+                this.nextButton.visible = false;
+            } else {
+                this.prevButton.visible = this.currentPage > 0;
+                this.nextButton.visible = this.currentPage < maxPage;
+            }
+            
+            if (this.enableAnimations && oldGrid) {
+                this._animatePageTransition(oldGrid, this.grid);
+            } else {
+                this._safeDestroyGrid(oldGrid);
+                this.gridContainer.add_actor(this.grid);
+            }
+        }
+    },
 
     _navigateLeft: function() {
         if (this.isSearchMode || this.isAnimating) return;
@@ -556,78 +554,78 @@ MyApplet.prototype = {
         this._updateGrid();
     },
 
-	_animateOpen: function(modal, container) {
-		this.isAnimating = true;
-		let duration = this.animationDuration / 1000;
-		
-		switch(this.openAnimationType) {
-			case 'fade':
-				container.set_scale(1.0, 1.0);
-				container.translation_y = 0;
-				container.opacity = 255;
-				modal.opacity = 0;
-				Tweener.addTween(modal, {
-					opacity: 255,
-					time: duration,
-					transition: 'easeOutQuad',
-					onComplete: () => { this.isAnimating = false; }
-				});
-				break;
-				
-			case 'scale':
-				modal.opacity = 255;
-				container.translation_y = 0;
-				container.set_scale(0.8, 0.8);
-				container.opacity = 0;
-				Tweener.addTween(container, {
-					scale_x: 1.0,
-					scale_y: 1.0,
-					opacity: 255,
-					time: duration,
-					transition: 'easeOutBack',
-					onComplete: () => { this.isAnimating = false; }
-				});
-				break;
-				
-			case 'slide-up':
-				modal.opacity = 255;
-				container.set_scale(1.0, 1.0);
-				container.translation_y = 100;
-				container.opacity = 0;
-				Tweener.addTween(container, {
-					translation_y: 0,
-					opacity: 255,
-					time: duration,
-					transition: 'easeOutQuad',
-					onComplete: () => { this.isAnimating = false; }
-				});
-				break;
-				
-			case 'zoom':
-				container.translation_y = 0;
-				modal.opacity = 0;
-				container.set_scale(0.5, 0.5);
-				container.opacity = 255;
-				Tweener.addTween(modal, {
-					opacity: 255,
-					time: duration,
-					transition: 'easeOutQuad'
-				});
-				Tweener.addTween(container, {
-					scale_x: 1.0,
-					scale_y: 1.0,
-					time: duration,
-					transition: 'easeOutCubic',
-					onComplete: () => { this.isAnimating = false; }
-				});
-				break;
-				
-			default:
-				modal.opacity = 255;
-				container.opacity = 255;
-				this.isAnimating = false;
-		}
-	},
+    _animateOpen: function(modal, container) {
+        this.isAnimating = true;
+        let duration = this.animationDuration / 1000;
+        
+        switch(this.openAnimationType) {
+            case 'fade':
+                container.set_scale(1.0, 1.0);
+                container.translation_y = 0;
+                container.opacity = 255;
+                modal.opacity = 0;
+                Tweener.addTween(modal, {
+                    opacity: 255,
+                    time: duration,
+                    transition: 'easeOutQuad',
+                    onComplete: () => { this.isAnimating = false; }
+                });
+                break;
+                
+            case 'scale':
+                modal.opacity = 255;
+                container.translation_y = 0;
+                container.set_scale(0.8, 0.8);
+                container.opacity = 0;
+                Tweener.addTween(container, {
+                    scale_x: 1.0,
+                    scale_y: 1.0,
+                    opacity: 255,
+                    time: duration,
+                    transition: 'easeOutQuad',
+                    onComplete: () => { this.isAnimating = false; }
+                });
+                break;
+                
+            case 'slide-up':
+                modal.opacity = 255;
+                container.set_scale(1.0, 1.0);
+                container.translation_y = 100;
+                container.opacity = 0;
+                Tweener.addTween(container, {
+                    translation_y: 0,
+                    opacity: 255,
+                    time: duration,
+                    transition: 'easeOutQuad',
+                    onComplete: () => { this.isAnimating = false; }
+                });
+                break;
+                
+            case 'zoom':
+                container.translation_y = 0;
+                modal.opacity = 0;
+                container.set_scale(0.5, 0.5);
+                container.opacity = 255;
+                Tweener.addTween(modal, {
+                    opacity: 255,
+                    time: duration,
+                    transition: 'easeOutQuad'
+                });
+                Tweener.addTween(container, {
+                    scale_x: 1.0,
+                    scale_y: 1.0,
+                    time: duration,
+                    transition: 'easeOutCubic',
+                    onComplete: () => { this.isAnimating = false; }
+                });
+                break;
+                
+            default:
+                modal.opacity = 255;
+                container.opacity = 255;
+                this.isAnimating = false;
+        }
+    },
 
     _animatePageTransition: function(oldGrid, newGrid) {
         this.isAnimating = true;
@@ -643,8 +641,7 @@ MyApplet.prototype = {
                     time: duration / 2,
                     transition: 'easeOutQuad',
                     onComplete: () => {
-                        this.gridContainer.remove_actor(oldGrid);
-                        oldGrid.destroy();
+                        this._safeDestroyGrid(oldGrid);
                     }
                 });
                 Tweener.addTween(newGrid, {
@@ -667,8 +664,7 @@ MyApplet.prototype = {
                     time: duration,
                     transition: 'easeInOutQuad',
                     onComplete: () => {
-                        this.gridContainer.remove_actor(oldGrid);
-                        oldGrid.destroy();
+                        this._safeDestroyGrid(oldGrid);
                     }
                 });
                 Tweener.addTween(newGrid, {
@@ -687,8 +683,7 @@ MyApplet.prototype = {
                     time: duration,
                     transition: 'easeInOutQuad',
                     onComplete: () => {
-                        this.gridContainer.remove_actor(oldGrid);
-                        oldGrid.destroy();
+                        this._safeDestroyGrid(oldGrid);
                     }
                 });
                 Tweener.addTween(newGrid, {
@@ -700,206 +695,205 @@ MyApplet.prototype = {
                 break;
                 
             default:
-                this.gridContainer.remove_actor(oldGrid);
-                oldGrid.destroy();
+                this._safeDestroyGrid(oldGrid);
                 this.isAnimating = false;
         }
     },
 
-	_createAppButton: function(app, boxSize) {
-		let boxColor = this._rgbToRgba(this.boxColor, this.boxOpacity);
-		let boxHoverColor = this._rgbToRgba(this.boxHoverColor, this.boxHoverOpacity);
-		let spacing = Math.round(this.iconSize * 0.2);
-		
-		let box = new St.BoxLayout({
-			style_class: 'app-drawer-item',
-			vertical: true,
-			reactive: true,
-			track_hover: true,
-			width: boxSize,
-			height: boxSize,
-			x_align: Clutter.ActorAlign.CENTER,
-			y_align: Clutter.ActorAlign.START,
-			style: 'margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; transition: all 0.2s; spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;'
-		});
-		
-		let description = app.get_description();
-		let tooltipText = app.get_display_name();
-		if (description) {
-			tooltipText += '\n' + description;
-		}
-		
-		box.connect('enter-event', () => {
-			box.set_style('margin: ' + this.padding + 'px; background: ' + boxHoverColor + '; border-radius: 12px; box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3); spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;');
+    _createAppButton: function(app, boxSize) {
+        let boxColor = this._rgbToRgba(this.boxColor, this.boxOpacity);
+        let boxHoverColor = this._rgbToRgba(this.boxHoverColor, this.boxHoverOpacity);
+        let spacing = Math.round(this.iconSize * 0.2);
+        
+        let box = new St.BoxLayout({
+            style_class: 'app-drawer-item',
+            vertical: true,
+            reactive: true,
+            track_hover: true,
+            width: boxSize,
+            height: boxSize,
+            x_align: Clutter.ActorAlign.CENTER,
+            y_align: Clutter.ActorAlign.START,
+            style: 'margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; transition: all 0.2s; spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;'
+        });
+        
+        let description = app.get_description();
+        let tooltipText = app.get_display_name();
+        if (description) {
+            tooltipText += '\n' + description;
+        }
+        
+        box.connect('enter-event', () => {
+            box.set_style('margin: ' + this.padding + 'px; background: ' + boxHoverColor + '; border-radius: 12px; box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3); spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;');
 
-			if (this.tooltipTimeout) {
-				imports.mainloop.source_remove(this.tooltipTimeout);
-			}
-			
-			this.tooltipTimeout = imports.mainloop.timeout_add(300, () => {
-				this._showTooltip(tooltipText);
-				this.tooltipTimeout = null;
-				return false;
-			});
-		});
-		
-		box.connect('leave-event', () => {
-			box.set_style('margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;');
-	
-			if (this.tooltipTimeout) {
-				imports.mainloop.source_remove(this.tooltipTimeout);
-				this.tooltipTimeout = null;
-			}
-			this._hideTooltip();
-		});
-		
-		box.connect('motion-event', (actor, event) => {
-			if (this.activeTooltip) {
-				let [x, y] = event.get_coords();
-				this.activeTooltip.set_position(x + 15, y + 15);
-			}
-			return Clutter.EVENT_PROPAGATE;
-		});
-		
-		let icon = app.get_icon();
-		let iconActor = new St.Icon({
-			gicon: icon,
-			icon_size: this.iconSize,
-			x_align: Clutter.ActorAlign.CENTER,
-			y_align: Clutter.ActorAlign.CENTER
-		});
-		
-		let iconWrapper = new St.Widget({
-			layout_manager: new Clutter.FixedLayout(),
-			width: this.iconSize,
-			height: this.iconSize,
-			x_align: Clutter.ActorAlign.CENTER,
-			y_align: Clutter.ActorAlign.CENTER,
-			x_expand: true,
-			y_expand: true
-		});
-		
-		iconWrapper.add_child(iconActor);
-		
-		if (this.enableFavorites) {
-			if (!this.favoriteApps) this.favoriteApps = [];
-			let isFavorite = this.favoriteApps.indexOf(app.get_id()) !== -1;
-			
-			let starButton = new St.Button({
-				reactive: true,
-				track_hover: true,
-				style: 'padding: 2px; background: rgba(0, 0, 0, 0.7); border-radius: 10px;'
-			});
-			
-			let starIcon = new St.Icon({
-				icon_name: isFavorite ? 'starred-symbolic' : 'non-starred-symbolic',
-				icon_size: 16,
-				style: 'color: ' + (isFavorite ? '#FFD700' : 'rgba(255, 255, 255, 0.6)') + ';'
-			});
-			
-			starButton.set_child(starIcon);
-			starButton.connect('button-press-event', () => {
-				this._toggleFavorite(app);
-				return Clutter.EVENT_STOP;
-			});
-			
-			starButton.set_position(this.iconSize - 20, 0);
-			iconWrapper.add_child(starButton);
-		}
-		
-		box.add_actor(iconWrapper);
-		
-		let labelHeight = Math.round(this.fontSize * 2.5);
-		let label = new St.Label({
-			text: app.get_display_name(),
-			style: 'font-size: ' + this.fontSize + 'pt; color: rgba(255, 255, 255, 0.95); text-align: center; padding-left: 8px; padding-right: 8px; height: ' + labelHeight + 'px;',
-			x_align: Clutter.ActorAlign.CENTER,
-			y_align: Clutter.ActorAlign.START
-		});
-		label.clutter_text.set_line_wrap(false);
-		label.clutter_text.set_ellipsize(3);
-		label.clutter_text.set_line_alignment(2);
-		
-		box.add_actor(label);
-		
-		box.connect('button-press-event', () => {
-			this._hideTooltip();
-			app.launch([], null);
-			this._destroyModal();
-			return Clutter.EVENT_STOP;
-		});
-		
-		return box;
-	},
+            if (this.tooltipTimeout) {
+                imports.mainloop.source_remove(this.tooltipTimeout);
+            }
+            
+            this.tooltipTimeout = imports.mainloop.timeout_add(300, () => {
+                this._showTooltip(tooltipText);
+                this.tooltipTimeout = null;
+                return false;
+            });
+        });
+        
+        box.connect('leave-event', () => {
+            box.set_style('margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;');
+    
+            if (this.tooltipTimeout) {
+                imports.mainloop.source_remove(this.tooltipTimeout);
+                this.tooltipTimeout = null;
+            }
+            this._hideTooltip();
+        });
+        
+        box.connect('motion-event', (actor, event) => {
+            if (this.activeTooltip) {
+                let [x, y] = event.get_coords();
+                this.activeTooltip.set_position(x + 15, y + 15);
+            }
+            return Clutter.EVENT_PROPAGATE;
+        });
+        
+        let icon = app.get_icon();
+        let iconActor = new St.Icon({
+            gicon: icon,
+            icon_size: this.iconSize,
+            x_align: Clutter.ActorAlign.CENTER,
+            y_align: Clutter.ActorAlign.CENTER
+        });
+        
+        let iconWrapper = new St.Widget({
+            layout_manager: new Clutter.FixedLayout(),
+            width: this.iconSize,
+            height: this.iconSize,
+            x_align: Clutter.ActorAlign.CENTER,
+            y_align: Clutter.ActorAlign.CENTER,
+            x_expand: true,
+            y_expand: true
+        });
+        
+        iconWrapper.add_child(iconActor);
+        
+        if (this.enableFavorites) {
+            if (!this.favoriteApps) this.favoriteApps = [];
+            let isFavorite = this.favoriteApps.indexOf(app.get_id()) !== -1;
+            
+            let starButton = new St.Button({
+                reactive: true,
+                track_hover: true,
+                style: 'padding: 2px; background: rgba(0, 0, 0, 0.7); border-radius: 10px;'
+            });
+            
+            let starIcon = new St.Icon({
+                icon_name: isFavorite ? 'starred-symbolic' : 'non-starred-symbolic',
+                icon_size: 16,
+                style: 'color: ' + (isFavorite ? '#FFD700' : 'rgba(255, 255, 255, 0.6)') + ';'
+            });
+            
+            starButton.set_child(starIcon);
+            starButton.connect('button-press-event', () => {
+                this._toggleFavorite(app);
+                return Clutter.EVENT_STOP;
+            });
+            
+            starButton.set_position(this.iconSize - 20, 0);
+            iconWrapper.add_child(starButton);
+        }
+        
+        box.add_actor(iconWrapper);
+        
+        let labelHeight = Math.round(this.fontSize * 2.5);
+        let label = new St.Label({
+            text: app.get_display_name(),
+            style: 'font-size: ' + this.fontSize + 'pt; color: rgba(255, 255, 255, 0.95); text-align: center; padding-left: 8px; padding-right: 8px; height: ' + labelHeight + 'px;',
+            x_align: Clutter.ActorAlign.CENTER,
+            y_align: Clutter.ActorAlign.START
+        });
+        label.clutter_text.set_line_wrap(false);
+        label.clutter_text.set_ellipsize(3);
+        label.clutter_text.set_line_alignment(2);
+        
+        box.add_actor(label);
+        
+        box.connect('button-press-event', () => {
+            this._hideTooltip();
+            app.launch([], null);
+            this._destroyModal();
+            return Clutter.EVENT_STOP;
+        });
+        
+        return box;
+    },
 
-	_showTooltip: function(text) {
-		this._hideTooltip();
-		
-		let lines = text.split('\n');
-		let styledText = '<span weight="bold">' + lines[0] + '</span>';
-		if (lines.length > 1) {
-			styledText += '\n' + lines.slice(1).join('\n');
-		}
-		
-		this.activeTooltip = new St.Label({
-			style: 'background-color: rgba(0, 0, 0, 0.9); color: white; padding: 8px 12px; border-radius: 6px; font-size: ' + this.fontSize + 'pt; max-width: 300px;'
-		});
-		
-		this.activeTooltip.clutter_text.set_markup(styledText);
-		this.activeTooltip.clutter_text.set_line_wrap(true);
-		
-		global.stage.add_actor(this.activeTooltip);
-		
-		let [x, y] = global.get_pointer();
-		this.activeTooltip.set_position(x + 15, y + 15);
-	},
+    _showTooltip: function(text) {
+        this._hideTooltip();
+        
+        let lines = text.split('\n');
+        let styledText = '<span weight="bold">' + lines[0] + '</span>';
+        if (lines.length > 1) {
+            styledText += '\n' + lines.slice(1).join('\n');
+        }
+        
+        this.activeTooltip = new St.Label({
+            style: 'background-color: rgba(0, 0, 0, 0.9); color: white; padding: 8px 12px; border-radius: 6px; font-size: ' + this.fontSize + 'pt; max-width: 300px;'
+        });
+        
+        this.activeTooltip.clutter_text.set_markup(styledText);
+        this.activeTooltip.clutter_text.set_line_wrap(true);
+        
+        global.stage.add_actor(this.activeTooltip);
+        
+        let [x, y] = global.get_pointer();
+        this.activeTooltip.set_position(x + 15, y + 15);
+    },
 
-	_hideTooltip: function() {
-		if (this.activeTooltip) {
-			global.stage.remove_actor(this.activeTooltip);
-			this.activeTooltip.destroy();
-			this.activeTooltip = null;
-		}
-	},
+    _hideTooltip: function() {
+        if (this.activeTooltip) {
+            global.stage.remove_actor(this.activeTooltip);
+            this.activeTooltip.destroy();
+            this.activeTooltip = null;
+        }
+    },
 
-	_toggleFavorite: function(app) {
-		if (!this.favoriteApps) this.favoriteApps = [];
-		let appId = app.get_id();
-		let index = this.favoriteApps.indexOf(appId);
-		
-		if (index === -1) {
-			this.favoriteApps.push(appId);
-		} else {
-			this.favoriteApps.splice(index, 1);
-		}
-		
-		this.settings.setValue("favoriteApps", this.favoriteApps);
-		
-		if (this.searchEntry && this.searchEntry.get_text() !== '') {
-			this.searchEntry.set_text('');
-			global.stage.set_key_focus(this.modal);
-			this.isSearchMode = false;
-		}
-		
-		this._loadApps();
-		this.currentPage = 0;
-		this._updateGrid();
-	},
+    _toggleFavorite: function(app) {
+        if (!this.favoriteApps) this.favoriteApps = [];
+        let appId = app.get_id();
+        let index = this.favoriteApps.indexOf(appId);
+        
+        if (index === -1) {
+            this.favoriteApps.push(appId);
+        } else {
+            this.favoriteApps.splice(index, 1);
+        }
+        
+        this.settings.setValue("favoriteApps", this.favoriteApps);
+        
+        if (this.searchEntry && this.searchEntry.get_text() !== '') {
+            this.searchEntry.set_text('');
+            global.stage.set_key_focus(this.modal);
+            this.isSearchMode = false;
+        }
+        
+        this._loadApps();
+        this.currentPage = 0;
+        this._updateGrid();
+    },
 
-	_destroyModal: function() {
-		this._hideTooltip();
-		if (this.tooltipTimeout) {
-			imports.mainloop.source_remove(this.tooltipTimeout);
-			this.tooltipTimeout = null;
-		}
-		if (this.modal && !this.isAnimating) {
-			if (this.enableAnimations) {
-				this._animateClose();
-			} else {
-				this._completeDestroy();
-			}
-		}
-	},
+    _destroyModal: function() {
+        this._hideTooltip();
+        if (this.tooltipTimeout) {
+            imports.mainloop.source_remove(this.tooltipTimeout);
+            this.tooltipTimeout = null;
+        }
+        if (this.modal && !this.isAnimating) {
+            if (this.enableAnimations) {
+                this._animateClose();
+            } else {
+                this._completeDestroy();
+            }
+        }
+    },
 
     _animateClose: function() {
         this.isAnimating = true;
@@ -957,23 +951,23 @@ MyApplet.prototype = {
         }
     },
 
-	_completeDestroy: function() {
-		this._hideTooltip();
-		if (this.tooltipTimeout) {
-			imports.mainloop.source_remove(this.tooltipTimeout);
-			this.tooltipTimeout = null;
-		}
-		if (this.modal) {
-			Main.popModal(this.modal);
-			global.stage.remove_actor(this.modal);
-			this.modal.destroy();
-			this.modal = null;
-			this.searchEntry = null;
-			this.scrollAdjustment = null;
-		}
-		this.isAnimating = false;
-		this.isSearchMode = false;
-	},
+    _completeDestroy: function() {
+        this._hideTooltip();
+        if (this.tooltipTimeout) {
+            imports.mainloop.source_remove(this.tooltipTimeout);
+            this.tooltipTimeout = null;
+        }
+        if (this.modal) {
+            Main.popModal(this.modal);
+            global.stage.remove_actor(this.modal);
+            this.modal.destroy();
+            this.modal = null;
+            this.searchEntry = null;
+            this.scrollAdjustment = null;
+        }
+        this.isAnimating = false;
+        this.isSearchMode = false;
+    },
 
     on_applet_removed_from_panel: function() {
         this.enableAnimations = false;
