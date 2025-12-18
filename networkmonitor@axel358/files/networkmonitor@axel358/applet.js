@@ -13,7 +13,7 @@ class NetworkUsageApplet extends Applet.TextApplet {
 
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
-        this.settings = new Settings.AppletSettings(this, "networkmonitor@axel358-dev", instance_id);
+        this.settings = new Settings.AppletSettings(this, "networkmonitor@axel358", instance_id);
 
         this.settings.bind("refresh-interval", "refresh_interval", this.on_settings_changed);
         this.settings.bind("decimal-places", "decimal_places", this.on_settings_changed);
