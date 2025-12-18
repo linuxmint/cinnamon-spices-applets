@@ -2,6 +2,7 @@ const Applet = imports.ui.applet;
 const Main = imports.ui.main;
 const Lang = imports.lang;
 const St = imports.gi.St;
+const Clutter = imports.gi.Clutter;
 const GTop = imports.gi.GTop;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
@@ -12,12 +13,14 @@ class NetworkUsageApplet extends Applet.TextApplet {
 
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
-        this.settings = new Settings.AppletSettings(this, "networkmonitor@axel358", instance_id);
+        this.settings = new Settings.AppletSettings(this, "networkmonitor@axel358-dev", instance_id);
 
         this.settings.bind("refresh-interval", "refresh_interval", this.on_settings_changed);
         this.settings.bind("decimal-places", "decimal_places", this.on_settings_changed);
         this.settings.bind("hide-umbral", "hide_umbral", this.on_settings_changed);
         this.settings.bind("display-style", "display_style", this.on_settings_changed);
+        this.settings.bind("display-width", "display_width", this.on_settings_changed);
+        this.settings.bind("display-padding", "display_padding", this.on_settings_changed);
 
         this.set_applet_tooltip("Click for more details");
 
@@ -42,12 +45,15 @@ class NetworkUsageApplet extends Applet.TextApplet {
             this.devices = GTop.glibtop.get_netlist(new GTop.glibtop_netlist()).filter(device => device !== "lo");
         }
 
+        this.applyLayout();
+
         this.update();
     }
 
     on_settings_changed() {
         //TODO: This causes performance issues
         //this.update();
+        this.applyLayout();
     }
 
     on_applet_clicked(event) {
@@ -116,6 +122,25 @@ class NetworkUsageApplet extends Applet.TextApplet {
         const index = Math.floor(Math.log(bytes) / Math.log(kilo));
 
         return parseFloat((bytes / Math.pow(kilo, index)).toFixed(decimals)) + " " + sizes[index];
+    }
+
+    applyLayout()
+    {
+        const width = Number(this.display_width) * global.ui_scale || 0;
+        const padding = Number(this.display_padding) * global.ui_scale || 0;
+        let width_style = "";
+        let padding_style = ""
+
+        if(width > 0)
+        {
+            width_style = "max-width: " + width + "em; min-width: " + width + "em; ";
+        }
+        if(padding > 0)
+        {
+            padding_style = "padding-right: " + padding + "em; padding-left: " + padding + "em;";
+        }
+
+        this._applet_label.set_style("font-variant-numeric: tabular-nums; " + width_style + padding_style);
     }
 
     on_applet_removed_from_panel() {
