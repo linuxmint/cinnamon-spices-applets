@@ -5,11 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: betterlock 1.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Project-Id-Version: betterlock 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2025-12-16 19:05+0100\n"
-"PO-Revision-Date: 2025-11-07 08:50+0100\n"
+"PO-Revision-Date: 2025-12-18 12:29+0100\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -17,7 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:104
 msgid "Num Lock"
@@ -97,7 +95,6 @@ msgid "Toggle state when clicked"
 msgstr "Changer l'état en cliquant sur l'indicateur"
 
 #. settings-schema.json->section2->description
-#, fuzzy
 msgid "Notifications"
 msgstr "Notifications"
 
