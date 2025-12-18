@@ -2,7 +2,6 @@ const Applet = imports.ui.applet;
 const Main = imports.ui.main;
 const Lang = imports.lang;
 const St = imports.gi.St;
-const Clutter = imports.gi.Clutter;
 const GTop = imports.gi.GTop;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
