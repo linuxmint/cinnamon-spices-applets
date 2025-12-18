@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-12-16 19:05+0100\n"
-"PO-Revision-Date: 2025-11-07 12:48-0300\n"
+"PO-Revision-Date: 2025-12-18 10:27-0300\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -73,7 +73,7 @@ msgstr "Indicador de teclas de bloqueo con notificaciones"
 
 #. settings-schema.json->section1->description
 msgid "Indicators"
-msgstr ""
+msgstr "Indicadores"
 
 #. settings-schema.json->show-num-lock-indicator->description
 msgid "Show num lock indicator"
@@ -89,16 +89,15 @@ msgstr "Mostrar indicador de bloqueo scr"
 
 #. settings-schema.json->hide-inactive-indicators->description
 msgid "Hide inactive indicators"
-msgstr ""
+msgstr "Ocultar indicadores inactivos"
 
 #. settings-schema.json->toggle-on-click->description
 msgid "Toggle state when clicked"
-msgstr ""
+msgstr "Cambiar estado al hacer clic"
 
 #. settings-schema.json->section2->description
-#, fuzzy
 msgid "Notifications"
-msgstr "Mostrar notificaciones OSD"
+msgstr "Notificaciones"
 
 #. settings-schema.json->show-osd-notifications->description
 msgid "Show OSD notifications"
