@@ -125,8 +125,8 @@ class NetworkUsageApplet extends Applet.TextApplet {
 
     applyLayout()
     {
-        const width = Number(this.display_width) * global.ui_scale || 0;
-        const padding = Number(this.display_padding) * global.ui_scale || 0;
+        const width = Number(this.display_width) || 0;
+        const padding = Number(this.display_padding) || 0;
         let width_style = "";
         let padding_style = ""
 
