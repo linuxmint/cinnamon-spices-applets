@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-29 10:30-0500\n"
+"POT-Creation-Date: 2025-12-19 13:41-0500\n"
 "PO-Revision-Date: 2023-02-25 18:07+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -19,87 +19,88 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:45 applet.js:214 applet.js:241 applet.js:268 applet.js:329
-#. applet.js:459 applet.js:531
+#. applet.js:45 applet.js:217 applet.js:244 applet.js:271 applet.js:335
+#. applet.js:465 applet.js:537
 msgid "Timer: inactive"
 msgstr "Minuterie : inactive"
 
-#. applet.js:86 applet.js:232 applet.js:259 applet.js:532
+#. applet.js:89 applet.js:235 applet.js:262 applet.js:538
 msgid "In:  00:00:00"
 msgstr "Dans :  00:00:00"
 
-#. applet.js:89 applet.js:233 applet.js:260 applet.js:281 applet.js:342
-#. applet.js:502 applet.js:534
+#. applet.js:92 applet.js:236 applet.js:263 applet.js:284 applet.js:348
+#. applet.js:508 applet.js:540
 msgid "At:  --:--:--"
 msgstr "   À :  --:--:--"
 
-#. applet.js:92
-msgid "Turn off computer on timer"
+#. applet.js:95
+#, fuzzy
+msgid "Run command | turn off computer on timer"
 msgstr "Arrêter l'ordinateur lorsque le temps est écoulé"
 
 #. settings-schema.json->openSubmenu->options
-#. applet.js:97
+#. applet.js:100
 msgid "Quick setup"
 msgstr "Configuration rapide"
 
-#. applet.js:98
+#. applet.js:101
 msgid "        Tip: set slider to zero to deactivate timer"
 msgstr ""
 "        Astuce : réglez le curseur sur zéro pour désactiver la minuterie"
 
-#. applet.js:107
+#. applet.js:110
 msgid "     00:00:00"
 msgstr "     00:00:00"
 
-#. applet.js:114
+#. applet.js:117
 msgid "24:00:00     "
 msgstr "24:00:00     "
 
 #. settings-schema.json->openSubmenu->options
-#. applet.js:128
+#. applet.js:131
 msgid "Precise setup"
 msgstr "Configuration précise"
 
-#. applet.js:138 applet.js:163 applet.js:188
+#. applet.js:141 applet.js:166 applet.js:191
 msgid "  +  "
 msgstr "  +  "
 
-#. applet.js:142 applet.js:167 applet.js:192
+#. applet.js:145 applet.js:170 applet.js:195
 msgid "00"
 msgstr "00"
 
-#. applet.js:147 applet.js:172 applet.js:197
+#. applet.js:150 applet.js:175 applet.js:200
 msgid "  -  "
 msgstr "  -  "
 
-#. applet.js:155 applet.js:180
+#. applet.js:158 applet.js:183
 msgid "  :  "
 msgstr "  :  "
 
-#. applet.js:209
+#. applet.js:212
 msgid "Set time (today)"
 msgstr "Régler l'heure (aujourd'hui)"
 
-#. applet.js:236
+#. applet.js:239
 msgid "Set time (tomorrow)"
 msgstr "Régler l'heure (demain)"
 
-#. applet.js:263
+#. applet.js:266
 msgid "Set period"
 msgstr "Définir la durée"
 
-#. applet.js:284
+#. applet.js:287
 msgid "Add preset"
 msgstr "Ajouter un préréglage"
 
 #. settings-schema.json->openSubmenu->options
 #. settings-schema.json->preset->description
 #. settings-schema.json->preset->tooltip
-#. applet.js:293
+#. applet.js:296
 msgid "Presets"
 msgstr "Préréglages"
 
-#. applet.js:315
+#. applet.js:321
 msgid ""
 "        Tip: use 'Precise setup' to add preset and  [ × ]  button to remove "
 "preset"
@@ -107,42 +108,61 @@ msgstr ""
 "        Astuce : utilisez « Configuration précise » pour ajouter un "
 "préréglage et le bouton [ × ] pour supprimer un préréglage"
 
-#. applet.js:346
+#. applet.js:352
 msgid "[ × ]"
 msgstr "[ × ]"
 
-#. applet.js:492 applet.js:514
+#. applet.js:498 applet.js:520
 msgid "In:  "
 msgstr "Dans :  "
 
-#. applet.js:498 applet.js:522
+#. applet.js:504 applet.js:528
 msgid "At:  "
 msgstr "   À :  "
 
-#. applet.js:524
+#. applet.js:530
 msgid "Turn off in "
 msgstr "Arrêt de l'ordinateur dans "
 
-#. applet.js:524
+#. applet.js:530
 msgid "s"
 msgstr "s"
 
-#. applet.js:526
+#. applet.js:532
 msgid "Timer: "
 msgstr "Minuterie : "
 
 #. metadata.json->name
-#. applet.js:555
+#. applet.js:568
 msgid "Timer"
 msgstr "Minuterie"
 
-#. applet.js:555
+#. applet.js:568
 msgid "Time's up!"
 msgstr "C'est l'heure !"
 
 #. metadata.json->description
 msgid "A timer applet"
 msgstr "Applet Minuterie"
+
+#. settings-schema.json->customCommand->description
+msgid "Command to run on timer (empty for turn off)"
+msgstr ""
+
+#. settings-schema.json->customCommand->tooltip
+msgid ""
+"Custom command to run on timer. Leave empty to turn off the computer on timer"
+msgstr ""
+
+#. settings-schema.json->cancelTurnOffOption->description
+msgid "Cancel run command (turn off) option"
+msgstr ""
+
+#. settings-schema.json->cancelTurnOffOption->tooltip
+msgid ""
+"Cancel the option to run command or turn off for subsequent use (triggers "
+"only at the moment count down finished)"
+msgstr ""
 
 #. settings-schema.json->soundOn->description
 #. settings-schema.json->soundOn->tooltip
@@ -157,6 +177,16 @@ msgstr "Chemin d'accès au fichier du son"
 #. settings-schema.json->showNotifications->description
 #. settings-schema.json->showNotifications->tooltip
 msgid "Show system notification on timer"
+msgstr "Notifier quand le temps est écoulé"
+
+#. settings-schema.json->customText->description
+#, fuzzy
+msgid "Custom notification text"
+msgstr "Notifier quand le temps est écoulé"
+
+#. settings-schema.json->customText->tooltip
+#, fuzzy
+msgid "Custom text of the system notification on timer"
 msgstr "Notifier quand le temps est écoulé"
 
 #. settings-schema.json->openSubmenu->description
