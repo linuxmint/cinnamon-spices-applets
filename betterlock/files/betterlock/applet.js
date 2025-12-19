@@ -4,7 +4,7 @@ const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Keymap = Gdk.Keymap.get_default();
-const Caribou = imports.gi.Caribou;
+const Clutter = imports.gi.Clutter;
 const PopupMenu = imports.ui.popupMenu;
 const Lang = imports.lang;
 const Main = imports.ui.main;
@@ -316,15 +316,20 @@ MyApplet.prototype = {
     },
 
     _onLockChanged: function(keyval) {
-        if (Caribou.XAdapter.get_default !== undefined) {
-            //caribou <= 0.4.11
-            Caribou.XAdapter.get_default().keyval_press(keyval);
-            Caribou.XAdapter.get_default().keyval_release(keyval);
-        } else {
-            Caribou.DisplayAdapter.get_default().keyval_press(keyval);
-            Caribou.DisplayAdapter.get_default().keyval_release(keyval);
-        }
-        this._onLockStateChanged();
+        let seat = Clutter.get_default_backend().get_default_seat();
+        let vk = seat.create_virtual_device(
+            Clutter.InputDeviceType.KEYBOARD_DEVICE
+        );
+        vk.notify_keyval(
+            Clutter.get_current_event_time(),
+            keyval,
+            Clutter.KeyState.PRESSED
+        );
+        vk.notify_keyval(
+            Clutter.get_current_event_time(),
+            keyval,
+            Clutter.KeyState.RELEASED
+        );
     },
     _onNumChanged: function(_actor, _event) {
         let keyval = Gdk.keyval_from_name("Num_Lock");
