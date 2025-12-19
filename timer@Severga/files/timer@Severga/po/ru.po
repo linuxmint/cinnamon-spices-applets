@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# TIMER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Severga, 2023
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-19 20:36+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-19 13:41-0500\n"
 "PO-Revision-Date: 2025-12-19 20:48+0300\n"
 "Last-Translator: Severga\n"
 "Language-Team: \n"
@@ -16,89 +17,89 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 
-#: applet.js:45 applet.js:217 applet.js:244 applet.js:271 applet.js:335
-#: applet.js:465 applet.js:537
+#. applet.js:45 applet.js:217 applet.js:244 applet.js:271 applet.js:335
+#. applet.js:465 applet.js:537
 msgid "Timer: inactive"
 msgstr "Таймер: выключен"
 
-#: applet.js:89 applet.js:235 applet.js:262 applet.js:538
+#. applet.js:89 applet.js:235 applet.js:262 applet.js:538
 msgid "In:  00:00:00"
 msgstr "Через:  00:00:00"
 
-#: applet.js:92 applet.js:236 applet.js:263 applet.js:284 applet.js:348
-#: applet.js:508 applet.js:540
+#. applet.js:92 applet.js:236 applet.js:263 applet.js:284 applet.js:348
+#. applet.js:508 applet.js:540
 msgid "At:  --:--:--"
 msgstr "    В:  --:--:--"
 
-#: applet.js:95
+#. applet.js:95
 msgid "Run command | turn off computer on timer"
 msgstr "Выполнить команду | выключить компьютер по таймеру"
 
 #. settings-schema.json->openSubmenu->options
-#: applet.js:100
+#. applet.js:100
 msgid "Quick setup"
 msgstr "Быстрая установка"
 
-#: applet.js:101
+#. applet.js:101
 msgid "        Tip: set slider to zero to deactivate timer"
 msgstr "        Совет: установите ползунок на ноль для выключения таймера"
 
-#: applet.js:110
+#. applet.js:110
 msgid "     00:00:00"
 msgstr "     00:00:00"
 
-#: applet.js:117
+#. applet.js:117
 msgid "24:00:00     "
 msgstr "24:00:00     "
 
 #. settings-schema.json->openSubmenu->options
-#: applet.js:131
+#. applet.js:131
 msgid "Precise setup"
 msgstr "Точная установка"
 
-#: applet.js:141 applet.js:166 applet.js:191
+#. applet.js:141 applet.js:166 applet.js:191
 msgid "  +  "
 msgstr "  +  "
 
-#: applet.js:145 applet.js:170 applet.js:195
+#. applet.js:145 applet.js:170 applet.js:195
 msgid "00"
 msgstr "00"
 
-#: applet.js:150 applet.js:175 applet.js:200
+#. applet.js:150 applet.js:175 applet.js:200
 msgid "  -  "
 msgstr "  -  "
 
-#: applet.js:158 applet.js:183
+#. applet.js:158 applet.js:183
 msgid "  :  "
 msgstr "  :  "
 
-#: applet.js:212
+#. applet.js:212
 msgid "Set time (today)"
 msgstr "Установить время (сегодня)"
 
-#: applet.js:239
+#. applet.js:239
 msgid "Set time (tomorrow)"
 msgstr "Установить время (завтра)"
 
-#: applet.js:266
+#. applet.js:266
 msgid "Set period"
 msgstr "Установить продолжительность"
 
-#: applet.js:287
+#. applet.js:287
 msgid "Add preset"
 msgstr "Добавить к предустановкам"
 
 #. settings-schema.json->openSubmenu->options
 #. settings-schema.json->preset->description
 #. settings-schema.json->preset->tooltip
-#: applet.js:296
+#. applet.js:296
 msgid "Presets"
 msgstr "Предустановки"
 
-#: applet.js:321
+#. applet.js:321
 msgid ""
 "        Tip: use 'Precise setup' to add preset and  [ × ]  button to remove "
 "preset"
@@ -106,36 +107,36 @@ msgstr ""
 "        Совет: используйте 'Точная установка' для добавления предустановки и "
 "кнопку  [ × ]  для удаления предустановок"
 
-#: applet.js:352
+#. applet.js:352
 msgid "[ × ]"
 msgstr "[ × ]"
 
-#: applet.js:498 applet.js:520
+#. applet.js:498 applet.js:520
 msgid "In:  "
 msgstr "Через:  "
 
-#: applet.js:504 applet.js:528
+#. applet.js:504 applet.js:528
 msgid "At:  "
 msgstr "    В:  "
 
-#: applet.js:530
+#. applet.js:530
 msgid "Turn off in "
 msgstr "Выключение через "
 
-#: applet.js:530
+#. applet.js:530
 msgid "s"
 msgstr "с"
 
-#: applet.js:532
+#. applet.js:532
 msgid "Timer: "
 msgstr "Таймер: "
 
 #. metadata.json->name
-#: applet.js:568
+#. applet.js:568
 msgid "Timer"
 msgstr "Таймер"
 
-#: applet.js:568
+#. applet.js:568
 msgid "Time's up!"
 msgstr "Время вышло!"
 
