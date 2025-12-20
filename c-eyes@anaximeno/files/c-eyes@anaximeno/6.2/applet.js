@@ -23,29 +23,23 @@ const Main = imports.ui.main;
 const Gettext = imports.gettext;
 const SignalManager = imports.misc.signalManager;
 const Util = imports.misc.util;
-const { GLib, St, Clutter } = imports.gi;
-const { EyeModeFactory } = require("./eyeModes.js");
-const {
-	AREA_DEFAULT_WIDTH,
-	WS_SWITCHED_UPDATE_TIMEOUT_MS,
-	UUID,
-	Optimizations,
-	MONITORS_CHANGED_UPDATE_TIMEOUT_MS,
-} = require("./constants.js");
-const { Debouncer } = require("./helpers.js");
+const GLib = imports.gi.GLib;
+const St = imports.gi.St;
+const Clutter = imports.gi.Clutter;
+const EyeModes = require("./eyeModes.js");
+const Configs = require("./configs.js");
+const Helpers = require("./helpers.js");
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
+Gettext.bindtextdomain(Configs.UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(text) {
-	let loc = Gettext.dgettext(UUID, text);
-	return loc != text ? loc : window._(text);
+	return Gettext.dgettext(Configs.UUID, text);
 }
 
-
-// Mark this for translation because it will
-// not be marked by the translation tool.
-const _t = _("Hey, I saw that!");
+// XXX: Mark this for translation because it will
+// not be marked by the translation tool from the settings-schema.
+_("Hey, I saw that!");
 
 
 class Eye extends Applet.Applet {
@@ -61,19 +55,19 @@ class Eye extends Applet.Applet {
 		this.area = new St.DrawingArea();
 		this.actor.add(this.area);
 
-		this.eyePainter = EyeModeFactory.createEyeMode(this.mode);
+		this.eyePainter = EyeModes.EyeModeFactory.createEyeMode(this.mode);
 		this.signals = new SignalManager.SignalManager(null);
 
 		this.signals.connect(global.screen, 'in-fullscreen-changed', this.on_fullscreen_changed, this);
 		this.signals.connect(Main.layoutManager, 'monitors-changed',
-			() => Util.setTimeout(this.on_property_updated.bind(this), MONITORS_CHANGED_UPDATE_TIMEOUT_MS),
+			() => Util.setTimeout(this.on_property_updated.bind(this), Configs.MONITORS_CHANGED_UPDATE_TIMEOUT_MS),
 			this);
 		this.signals.connect(global.screen, 'workspace-switched', () => {
-			// If the eye is refreshed exactly during the workspace switch process it's possible that the position
+			// XXX: If the eye is refreshed exactly during the workspace switch process it's possible that the position
 			// of the panel is not correctly accessed, so the position of the eye cannot be estimated correctly,
 			// resulting in the eye looking at the wrong direction, to avoid that we will give it some timeout and
 			// wait first for the switch process to complete.
-			Util.setTimeout(this.on_property_updated.bind(this), WS_SWITCHED_UPDATE_TIMEOUT_MS);
+			Util.setTimeout(this.on_property_updated.bind(this), Configs.WS_SWITCHED_UPDATE_TIMEOUT_MS);
 		}, this);
 
 		this.refresh_handler_id = 0;
@@ -93,9 +87,9 @@ class Eye extends Applet.Applet {
 	get repaint_interval() {
 		let repaint_interval = this._repaint_interval;
 
-		if (this.optimization_mode != "manual" && this.optimization_mode in Optimizations) {
-			let r = Optimizations[this.optimization_mode]["repaint_interval_ms"];
-			if (r != null || r != undefined) repaint_interval = r;
+		if (this.optimization_mode != "manual" && this.optimization_mode in Configs.Optimizations) {
+			let r = Configs.Optimizations[this.optimization_mode]["repaint_interval_ms"];
+			if (r != null) repaint_interval = r;
 		}
 
 		return repaint_interval;
@@ -104,16 +98,16 @@ class Eye extends Applet.Applet {
 	get repaint_angle() {
 		let repaint_angle = this._repaint_angle;
 
-		if (this.optimization_mode != "manual" && this.optimization_mode in Optimizations) {
-			let r = Optimizations[this.optimization_mode]["repaint_angle_rad"];
-			if (r != null || r != undefined) repaint_angle = r;
+		if (this.optimization_mode != "manual" && this.optimization_mode in Configs.Optimizations) {
+			let r = Configs.Optimizations[this.optimization_mode]["repaint_angle_rad"];
+			if (r != null) repaint_angle = r;
 		}
 
 		return repaint_angle;
 	}
 
 	_setup_settings(uuid, instanceId) {
-		const _d = new Debouncer();
+		const _d = new Helpers.Debouncer();
 
 		const bindings = [
 			{
@@ -255,8 +249,12 @@ class Eye extends Applet.Applet {
 	}
 
 	on_refresh_timeout() {
-		if (this.should_redraw() || true) { // XXX: force repaint for testing
-			// global.log(UUID, `repainting with ${this.repaint_interval}ms interval`);
+		// if the applet was disabled but the source hasn't
+		// been removed yet, stop the source.
+		if (!this.enabled) return GLib.SOURCE_REMOVE;
+
+		// only repaint when needed.
+		if (this.should_redraw()) {
 			this.area.queue_repaint();
 		}
 
@@ -265,13 +263,13 @@ class Eye extends Applet.Applet {
 
 	on_eye_mode_update() {
 		if (!this.eyePainter || this.eyePainter.mode != this.mode) {
-			this.eyePainter = EyeModeFactory.createEyeMode(this.mode);
+			this.eyePainter = EyeModes.EyeModeFactory.createEyeMode(this.mode);
 		}
 	}
 
 	on_optimization_mode_updated() {
 		this.set_active(this.enabled);
-		global.log(UUID, `optimizing to ${this.optimization_mode}`);
+		global.log(Configs.UUID, `optimizing to ${this.optimization_mode}`);
 	}
 
 	update_sizes() {
@@ -279,11 +277,11 @@ class Eye extends Applet.Applet {
 
 		if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
 			this.actor.set_style("padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;");
-			height = (AREA_DEFAULT_WIDTH + 2 * this.margin) * global.ui_scale;
+			height = (Configs.AREA_DEFAULT_WIDTH + 2 * this.margin) * global.ui_scale;
 			width = this.panel.height;
 		} else {
 			this.actor.set_style("padding-left: 0px; padding-right: 0px; margin-left: 0px; margin-right: 0px;");
-			width = (AREA_DEFAULT_WIDTH + 2 * this.margin) * global.ui_scale;
+			width = (Configs.AREA_DEFAULT_WIDTH + 2 * this.margin) * global.ui_scale;
 			height = this.panel.height;
 		}
 
@@ -310,11 +308,12 @@ class Eye extends Applet.Applet {
 			this.refresh_handler_id = GLib.timeout_add(
 				GLib.PRIORITY_DEFAULT,
 				this.repaint_interval,
-				this.on_refresh_timeout.bind(this));
+				this.on_refresh_timeout.bind(this),
+			);
 			this.on_property_updated();
 		}
 
-		global.log(UUID, `Eye/${this.instanceId} ${enabled ? "enabled" : "disabled"}`);
+		global.log(Configs.UUID, `Eye/${this.instanceId} ${enabled ? "enabled" : "disabled"}`);
 	}
 
 	destroy() {
@@ -345,9 +344,15 @@ class Eye extends Applet.Applet {
 			pupil_color = ok ? color : pupil_color;
 		}
 
+		// XXX
 		let blinkRate = this.settings.getValue("blink-rate");
 		blinkRate = Math.round(blinkRate * 10) / 10; // round to 1 decimal place
-		// global.log(UUID, `Eye/${this.instanceId} painting eye with blink rate ${blinkRate}`);
+
+		const padding = this.padding * global.ui_scale;
+		const line_width = this.line_width * global.ui_scale;
+		const is_vertical = this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT;
+		const lids_fill = this.fill_lids_color_painting && this.use_alternative_colors;
+		const bulb_fill = this.fill_bulb_color_painting && this.use_alternative_colors;
 
 		this.eyePainter.drawEye(
 			area,
@@ -360,11 +365,11 @@ class Eye extends Applet.Applet {
 				base_color: base_color,
 				iris_color: iris_color,
 				pupil_color: pupil_color,
-				padding: this.padding * global.ui_scale,
-				line_width: this.line_width * global.ui_scale,
-				is_vertical: this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT,
-				lids_fill: this.fill_lids_color_painting && this.use_alternative_colors,
-				bulb_fill: this.fill_bulb_color_painting && this.use_alternative_colors,
+				padding: padding,
+				line_width: line_width,
+				is_vertical: is_vertical,
+				lids_fill: lids_fill,
+				bulb_fill: bulb_fill,
 			},
 		);
 	}
