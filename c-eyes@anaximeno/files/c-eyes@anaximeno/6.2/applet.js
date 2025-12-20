@@ -377,9 +377,9 @@ class Eye extends Applet.Applet {
 			pupil_color = ok ? color : pupil_color;
 		}
 
-		if (this.blink_effect !== "none") {
-			global.log(Configs.UUID, `Eye/${this.instanceId} - blinking rate: ${this.blink_rate}`);
-		}
+		// if (this.blink_effect !== "none") {
+		// 	global.log(Configs.UUID, `Eye/${this.instanceId} - blinking rate: ${this.blink_rate}`);
+		// }
 
 		const padding = this.padding * global.ui_scale;
 		const line_width = this.line_width * global.ui_scale;
@@ -488,7 +488,7 @@ class Eye extends Applet.Applet {
 				this.last_blink_start = now;
 				this.last_blink_end = now + this.blink_period;
 				this.blink_rate = 0.00;
-				global.log(Configs.UUID, `Eye/${this.instanceId} - starting '${this.blink_effect}' blink`);
+				// global.log(Configs.UUID, `Eye/${this.instanceId} - starting '${this.blink_effect}' blink`);
 				return true;
 			} else if (this.last_blink_start <= now && now <= this.last_blink_end) {
 				let progress = (now - this.last_blink_start) / this.blink_period;
@@ -503,7 +503,7 @@ class Eye extends Applet.Applet {
 				return true;
 			} else if (this.blink_rate > 0.00) {
 				this.blink_rate = 0.00;
-				global.log(Configs.UUID, `Eye/${this.instanceId} - ending '${this.blink_effect}' blink`);
+				// global.log(Configs.UUID, `Eye/${this.instanceId} - ending '${this.blink_effect}' blink`);
 				return true;
 			}
 		}
