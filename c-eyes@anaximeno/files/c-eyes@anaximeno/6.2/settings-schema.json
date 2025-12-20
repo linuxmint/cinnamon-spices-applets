@@ -204,7 +204,7 @@
 	},
 	"blink-period": {
 		"type": "spinbutton",
-		"default": 1000,
+		"default": 600,
 		"min": 200,
 		"max": 5000,
 		"step": 100,
@@ -214,7 +214,7 @@
 	},
 	"blink-gap": {
 		"type": "spinbutton",
-		"default": 3000,
+		"default": 4500,
 		"min": 1000,
 		"max": 20000,
 		"step": 500,
