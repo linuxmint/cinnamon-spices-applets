@@ -28,10 +28,10 @@ class EyeMode {
     /**
      * Draws the eye on the panel
      * @param {St.DrawingArea} area The area on repaint
-     * @param {Number} blinkRate The blink rate (0.0 - 1.0) which can be used for animations
+     * @param {Number} blink_rate The blink rate (0.0 - 1.0) which can be used for animations
      * @param {Object} options Drawing options
      */
-    drawEye(area, blinkRate, options) {
+    drawEye(area, blink_rate, options) {
         // Implemented by sub-classes
     };
 
@@ -97,13 +97,13 @@ class EyeMode {
     /**
      * Upper-lid blink: clip to eye shape, then clear a top-down capsule mask.
      * @param {cairo.Context} cr
-     * @param {number} blinkRate 0..1 (1 = fully closed)
+     * @param {number} blink_rate 0..1 (1 = fully closed)
      * @param {number} eye_rad
      * @param {object} options
      * @param {Function} appendEyePath - must append the eye outline path in the *current* coordinate space
      */
-    _applyUpperLidBlink(cr, blinkRate, eye_rad, options, appendEyePath) {
-        const t0 = this._clamp01(blinkRate);
+    _applyUpperLidBlink(cr, blink_rate, eye_rad, options, appendEyePath) {
+        const t0 = this._clamp01(blink_rate);
         if (t0 <= 0) return;
 
         // Smoothstep keeps endpoints (0/1) but reduces “mechanical” motion around mid-blink.
@@ -165,7 +165,7 @@ class EyeMode {
 }
 
 class EyelidMode extends EyeMode {
-    drawEye(area, blinkRate, options) {
+    drawEye(area, blink_rate, options) {
         const [area_width, area_height] = area.allocation.get_size();
         const mouse_x = options.mouse_x - options.area_x - area_width / 2;
         const mouse_y = options.mouse_y - options.area_y - area_height / 2;
@@ -245,7 +245,7 @@ class EyelidMode extends EyeMode {
 
         // -- Blink overlay
         this._withEyeLocalCoords(cr, area_width, area_height, () => {
-            this._applyUpperLidBlink(cr, blinkRate, eye_rad, options, () => {
+            this._applyUpperLidBlink(cr, blink_rate, eye_rad, options, () => {
                 cr.newPath();
                 this._appendEyelidEyePath(cr, eye_rad, iris_rad, x_def, y_def, top_lid, bottom_lid);
             });
@@ -256,7 +256,7 @@ class EyelidMode extends EyeMode {
 }
 
 class BulbMode extends EyeMode {
-    drawEye(area, blinkRate, options) {
+    drawEye(area, blink_rate, options) {
         const [area_width, area_height] = area.allocation.get_size();
         const mouse_x = options.mouse_x - options.area_x - area_width / 2;
         const mouse_y = options.mouse_y - options.area_y - area_height / 2;
@@ -321,7 +321,7 @@ class BulbMode extends EyeMode {
 
         // -- Blink overlay
         this._withEyeLocalCoords(cr, area_width, area_height, () => {
-            this._applyUpperLidBlink(cr, blinkRate, eye_rad, options, () => {
+            this._applyUpperLidBlink(cr, blink_rate, eye_rad, options, () => {
                 cr.newPath();
                 cr.arc(0, 0, eye_rad, 0, 2 * Math.PI);
             });
