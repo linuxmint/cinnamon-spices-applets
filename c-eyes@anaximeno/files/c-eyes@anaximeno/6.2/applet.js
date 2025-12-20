@@ -81,9 +81,7 @@ class Eye extends Applet.Applet {
 
 		this.last_blink_start = null;
 		this.last_blink_end = null;
-
 		this.blink_rate = 0.00;
-		this.blink_period = 1000;
 
 		this.enabled = false;
 		this.set_active(true);
@@ -209,6 +207,16 @@ class Eye extends Applet.Applet {
 			{
 				key: "blink-effect",
 				value: "blink_effect",
+				cb: null
+			},
+			{
+				key: "blink-period",
+				value: "blink_period",
+				cb: null
+			},
+			{
+				key: "blink-gap",
+				value: "blink_gap",
 				cb: null
 			}
 		];
@@ -461,7 +469,7 @@ class Eye extends Applet.Applet {
 		if (this.blink_effect === "always") {
 			if (this.last_blink_start === null ||
 				this.last_blink_end === null ||
-				this.last_blink_end + 4 * this.blink_period < now
+				this.last_blink_end + this.blink_gap < now
 			) {
 				this.last_blink_start = now;
 				this.last_blink_end = now + this.blink_period;

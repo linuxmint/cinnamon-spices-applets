@@ -75,7 +75,9 @@
 			"type": "section",
 			"title": "General",
 			"keys": [
-				"blink-effect"
+				"blink-effect",
+				"blink-period",
+				"blink-gap"
 			]
 		}
 	},
@@ -198,5 +200,25 @@
 			"When Idle": "idle",
 			"Always": "always"
 		}
+	},
+	"blink-period": {
+		"type": "spinbutton",
+		"default": 1000,
+		"min": 200,
+		"max": 5000,
+		"step": 100,
+		"units": "ms",
+		"description": "Blink Period",
+		"tooltip": "This setting controls the duration of a full blink cycle (closing and opening). Measured in milliseconds."
+	},
+	"blink-gap": {
+		"type": "spinbutton",
+		"default": 3000,
+		"min": 1000,
+		"max": 20000,
+		"step": 500,
+		"units": "ms",
+		"description": "Blink Gap",
+		"tooltip": "This setting controls the time gap between two consecutive blinks. Measured in milliseconds."
 	}
 }
