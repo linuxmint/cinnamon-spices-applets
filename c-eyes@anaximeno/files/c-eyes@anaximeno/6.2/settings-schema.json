@@ -77,7 +77,8 @@
 			"keys": [
 				"blink-effect",
 				"blink-period",
-				"blink-gap"
+				"blink-gap",
+				"idle-delay"
 			]
 		}
 	},
@@ -220,5 +221,16 @@
 		"units": "ms",
 		"description": "Blink Gap",
 		"tooltip": "This setting controls the time gap between two consecutive blinks. Measured in milliseconds."
+	},
+	"idle-delay": {
+		"dependency": "blink-effect=idle",
+		"type": "spinbutton",
+		"default": 30000,
+		"min": 5000,
+		"max": 600000,
+		"step": 5000,
+		"units": "ms",
+		"description": "Idle Delay",
+		"tooltip": "This setting controls the time of inactivity (no mouse or keyboard input) after which the system is considered idle. Measured in milliseconds."
 	}
 }

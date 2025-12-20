@@ -79,6 +79,8 @@ class Eye extends Applet.Applet {
 		this._last_eye_x = null;
 		this._last_eye_y = null;
 
+		this.idle_monitor = new Helpers.IdleMonitor(this.idle_delay);
+
 		this.last_blink_start = null;
 		this.last_blink_end = null;
 		this.blink_rate = 0.00;
@@ -218,6 +220,16 @@ class Eye extends Applet.Applet {
 				key: "blink-gap",
 				value: "blink_gap",
 				cb: null
+			},
+			{
+				key: "idle-delay",
+				value: "idle_delay",
+				cb: _d.debounce((value) => {
+					if (this.idle_monitor) {
+						this.idle_monitor.destroy();
+					}
+					this.idle_monitor = new Helpers.IdleMonitor(value);
+				}, 300),
 			}
 		];
 
@@ -332,7 +344,7 @@ class Eye extends Applet.Applet {
 			this.on_property_updated();
 		}
 
-		global.log(Configs.UUID, `Eye/${this.instanceId} ${enabled ? "enabled" : "disabled"}`);
+		global.log(Configs.UUID, `Eye/${this.instanceId} - ${enabled ? "enabled" : "disabled"}`);
 	}
 
 	destroy() {
@@ -340,6 +352,8 @@ class Eye extends Applet.Applet {
 		this.signals.disconnectAllSignals();
 		this.area.destroy();
 		this.settings.finalize();
+		this.idle_monitor.destroy();
+		this.idle_monitor = null;
 	}
 
 	paint_eye(area) {
@@ -364,7 +378,7 @@ class Eye extends Applet.Applet {
 		}
 
 		if (this.blink_effect !== "none") {
-			global.log(Configs.UUID, `Eye/${this.instanceId} Blinking Rate: ${this.blink_rate}`);
+			global.log(Configs.UUID, `Eye/${this.instanceId} - blinking rate: ${this.blink_rate}`);
 		}
 
 		const padding = this.padding * global.ui_scale;
@@ -466,7 +480,7 @@ class Eye extends Applet.Applet {
 
 		const now = Date.now();
 
-		if (this.blink_effect === "always") {
+		if (this.blink_effect === "always" || (this.blink_effect === "idle" && this.idle_monitor.idle)) {
 			if (this.last_blink_start === null ||
 				this.last_blink_end === null ||
 				this.last_blink_end + this.blink_gap < now
@@ -474,6 +488,7 @@ class Eye extends Applet.Applet {
 				this.last_blink_start = now;
 				this.last_blink_end = now + this.blink_period;
 				this.blink_rate = 0.00;
+				global.log(Configs.UUID, `Eye/${this.instanceId} - starting '${this.blink_effect}' blink`);
 				return true;
 			} else if (this.last_blink_start <= now && now <= this.last_blink_end) {
 				let progress = (now - this.last_blink_start) / this.blink_period;
@@ -488,10 +503,9 @@ class Eye extends Applet.Applet {
 				return true;
 			} else if (this.blink_rate > 0.00) {
 				this.blink_rate = 0.00;
+				global.log(Configs.UUID, `Eye/${this.instanceId} - ending '${this.blink_effect}' blink`);
 				return true;
 			}
-		} else if (this.blink_effect === "idle") {
-			// TODO: implement idle-based blinking (using the idle monitor perhaps)
 		}
 
 		return false;
