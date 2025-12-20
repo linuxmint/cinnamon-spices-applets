@@ -48,7 +48,8 @@
 				"line-width",
 				"padding",
 				"margin",
-				"use-alternative-colors"
+				"use-alternative-colors",
+				"blink-rate"
 			]
 		},
 		"colors-section": {
@@ -173,5 +174,15 @@
 		"type": "checkbox",
 		"default": true,
 		"description": "Fill the Colors Inside the Eye"
+	},
+	"blink-rate": {
+		"type": "spinbutton",
+		"default": 1,
+		"min": 0,
+		"max": 1,
+		"step": 0.1,
+		"units": "rate",
+		"description": "Blink Rate",
+		"tooltip": "This setting controls how often (in seconds) the eye blinks."
 	}
 }

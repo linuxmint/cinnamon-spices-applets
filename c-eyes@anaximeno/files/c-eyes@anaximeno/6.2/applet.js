@@ -255,7 +255,7 @@ class Eye extends Applet.Applet {
 	}
 
 	on_refresh_timeout() {
-		if (this.should_redraw()) {
+		if (this.should_redraw() || true) { // XXX: force repaint for testing
 			// global.log(UUID, `repainting with ${this.repaint_interval}ms interval`);
 			this.area.queue_repaint();
 		}
@@ -345,20 +345,28 @@ class Eye extends Applet.Applet {
 			pupil_color = ok ? color : pupil_color;
 		}
 
-		this.eyePainter.drawEye(area, {
-			area_x: area_x,
-			area_y: area_y,
-			mouse_x: mouse_x,
-			mouse_y: mouse_y,
-			base_color: base_color,
-			iris_color: iris_color,
-			pupil_color: pupil_color,
-			padding: this.padding * global.ui_scale,
-			line_width: this.line_width * global.ui_scale,
-			is_vertical: this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT,
-			lids_fill: this.fill_lids_color_painting && this.use_alternative_colors,
-			bulb_fill: this.fill_bulb_color_painting && this.use_alternative_colors,
-		});
+		let blinkRate = this.settings.getValue("blink-rate");
+		blinkRate = Math.round(blinkRate * 10) / 10; // round to 1 decimal place
+		// global.log(UUID, `Eye/${this.instanceId} painting eye with blink rate ${blinkRate}`);
+
+		this.eyePainter.drawEye(
+			area,
+			blinkRate,
+			{
+				area_x: area_x,
+				area_y: area_y,
+				mouse_x: mouse_x,
+				mouse_y: mouse_y,
+				base_color: base_color,
+				iris_color: iris_color,
+				pupil_color: pupil_color,
+				padding: this.padding * global.ui_scale,
+				line_width: this.line_width * global.ui_scale,
+				is_vertical: this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT,
+				lids_fill: this.fill_lids_color_painting && this.use_alternative_colors,
+				bulb_fill: this.fill_bulb_color_painting && this.use_alternative_colors,
+			},
+		);
 	}
 
 	get_area_position() {
