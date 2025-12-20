@@ -74,10 +74,16 @@ class Eye extends Applet.Applet {
 
 		this.cos_repaint_angle = Math.cos(this.repaint_angle);
 
-		this._last_mouse_x = undefined;
-		this._last_mouse_y = undefined;
-		this._last_eye_x = undefined;
-		this._last_eye_y = undefined;
+		this._last_mouse_x = null;
+		this._last_mouse_y = null;
+		this._last_eye_x = null;
+		this._last_eye_y = null;
+
+		this.last_blink_start = null;
+		this.last_blink_end = null;
+
+		this.blink_rate = 0.00;
+		this.blink_period = 1000;
 
 		this.enabled = false;
 		this.set_active(true);
@@ -199,6 +205,11 @@ class Eye extends Applet.Applet {
 					this.on_optimization_mode_updated();
 					this.on_property_updated(value);
 				},
+			},
+			{
+				key: "blink-effect",
+				value: "blink_effect",
+				cb: null
 			}
 		];
 
@@ -344,9 +355,9 @@ class Eye extends Applet.Applet {
 			pupil_color = ok ? color : pupil_color;
 		}
 
-		// XXX
-		let blinkRate = this.settings.getValue("blink-rate");
-		blinkRate = Math.round(blinkRate * 10) / 10; // round to 1 decimal place
+		if (this.blink_effect !== "none") {
+			global.log(Configs.UUID, `Eye/${this.instanceId} Blinking Rate: ${this.blink_rate}`);
+		}
 
 		const padding = this.padding * global.ui_scale;
 		const line_width = this.line_width * global.ui_scale;
@@ -356,7 +367,7 @@ class Eye extends Applet.Applet {
 
 		this.eyePainter.drawEye(
 			area,
-			blinkRate,
+			this.blink_rate,
 			{
 				area_x: area_x,
 				area_y: area_y,
@@ -400,7 +411,9 @@ class Eye extends Applet.Applet {
 		const [ox, oy] = this.get_area_position();
 
 		let should_redraw = true;
-		if (this._last_mouse_x == mouse_x &&
+		if (this.check_blink_needed()) {
+			should_redraw = true;
+		} else if (this._last_mouse_x == mouse_x &&
 			this._last_mouse_y == mouse_y &&
 			this._last_eye_x == ox &&
 			this._last_eye_y == oy
@@ -436,6 +449,44 @@ class Eye extends Applet.Applet {
 		}
 
 		return should_redraw;
+	}
+
+	check_blink_needed() {
+		if (this.blink_effect === "none") {
+			return false;
+		}
+
+		const now = Date.now();
+
+		if (this.blink_effect === "always") {
+			if (this.last_blink_start === null ||
+				this.last_blink_end === null ||
+				this.last_blink_end + 4 * this.blink_period < now
+			) {
+				this.last_blink_start = now;
+				this.last_blink_end = now + this.blink_period;
+				this.blink_rate = 0.00;
+				return true;
+			} else if (this.last_blink_start <= now && now <= this.last_blink_end) {
+				let progress = (now - this.last_blink_start) / this.blink_period;
+
+				if (progress <= 0.5) {
+					this.blink_rate = progress * 2;
+				} else {
+					this.blink_rate = 2 - progress * 2;
+				}
+
+				this.blink_rate = Math.round(this.blink_rate * 100) / 100;
+				return true;
+			} else if (this.blink_rate > 0.00) {
+				this.blink_rate = 0.00;
+				return true;
+			}
+		} else if (this.blink_effect === "idle") {
+			// TODO: implement idle-based blinking (using the idle monitor perhaps)
+		}
+
+		return false;
 	}
 }
 
