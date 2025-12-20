@@ -214,7 +214,7 @@
 	},
 	"blink-gap": {
 		"type": "spinbutton",
-		"default": 4500,
+		"default": 8000,
 		"min": 1000,
 		"max": 20000,
 		"step": 500,
