@@ -1,0 +1,5 @@
+/* Example: increase text size */
+.applet-label {
+    font-weight: bold;
+    font-size: 12px;
+}

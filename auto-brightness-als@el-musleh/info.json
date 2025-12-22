@@ -1,0 +1,5 @@
+{
+  "name": "Auto Brightness (ALS)",
+  "description": "Automatically adjusts screen brightness based on ambient light sensor",
+  "author": "el-musleh"
+}
