@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-14 20:56+0100\n"
+"POT-Creation-Date: 2025-12-22 09:17+0100\n"
 "PO-Revision-Date: 2018-11-05 00:37+0300\n"
 "Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
 "Language-Team: Linux Mint Türkiye <gokhanlnx@gmail.com>\n"
@@ -19,64 +19,69 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. applet.js:44 applet.js:602
+#. applet.js:45 applet.js:636
 msgid "SYSTEM"
 msgstr "SİSTEM"
 
-#. applet.js:44 applet.js:645
+#. applet.js:45 applet.js:676
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:44 applet.js:678
+#. applet.js:45 applet.js:707
 msgid "APPLICATIONS"
 msgstr ""
 
-#. applet.js:44 applet.js:711
+#. applet.js:45 applet.js:738
 msgid "RECENT DOCUMENTS"
 msgstr "SON BELGELER"
 
-#. applet.js:167
+#. applet.js:45 applet.js:782
+msgid "CUSTOM"
+msgstr ""
+
+#. applet.js:185
 msgid "(Right click to open folder)"
 msgstr ""
 
 #. metadata.json->name
-#. applet.js:288
+#. applet.js:311
 msgid "Direct"
 msgstr "Doğrudan"
 
-#. applet.js:572
+#. applet.js:606
 msgid "Search Home Folder"
 msgstr "Ev Dizinini Ara"
 
-#. applet.js:579 applet.js:620 applet.js:653 applet.js:686 applet.js:719
+#. applet.js:613 applet.js:653 applet.js:684 applet.js:715 applet.js:746
+#. applet.js:790
 msgid "Configure"
 msgstr ""
 
-#. applet.js:613
+#. applet.js:646
 msgid "Search File System"
 msgstr "Dosya Sistemi Ara"
 
-#. applet.js:733
+#. applet.js:760
 msgid "Clear"
 msgstr "Temizle"
 
-#. applet.js:740
+#. applet.js:767
 msgid "Recent"
 msgstr ""
 
-#. applet.js:788
+#. applet.js:844
 msgid "Computer"
 msgstr "Bilgiayar"
 
-#. applet.js:794
+#. applet.js:850
 msgid "File System"
 msgstr "Dosya Sistemi"
 
-#. applet.js:811
+#. applet.js:867
 msgid "Network"
 msgstr "Ağ"
 
-#. applet.js:1095
+#. applet.js:1179
 msgid "Trash"
 msgstr "Çöp"
 
@@ -187,6 +192,11 @@ msgstr ""
 msgid "Recent documents"
 msgstr "Son belgeler"
 
+#. settings-schema.json->customPage->title
+#, fuzzy
+msgid "Custom"
+msgstr "Özel konumlar"
+
 #. settings-schema.json->panel->title
 msgid "Panel settings"
 msgstr "Panel ayarları"
@@ -203,6 +213,7 @@ msgstr "Kullanıcı bölümü"
 #. settings-schema.json->systemSectionCustomPlaces->title
 #. settings-schema.json->listUserCustomPlaces->description
 #. settings-schema.json->listSystemCustomPlaces->description
+#. settings-schema.json->listCustomDocuments->description
 msgid "Custom places"
 msgstr "Özel konumlar"
 
@@ -219,6 +230,11 @@ msgstr "Son belgeleri göster"
 #, fuzzy
 msgid "Favorite apps"
 msgstr "Son belgeleri göster"
+
+#. settings-schema.json->customSection->title
+#, fuzzy
+msgid "Custom documents"
+msgstr "Özel konumlar"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -242,12 +258,21 @@ msgid "Menu shortcut key"
 msgstr "Menü kısayol tuşu"
 
 #. settings-schema.json->iconSize->units
+#. settings-schema.json->textSize->units
 msgid "px"
 msgstr "piksel"
 
 #. settings-schema.json->iconSize->description
 msgid "Menu icon size"
 msgstr "Menü simge boyutu"
+
+#. settings-schema.json->textSize->description
+msgid "Text size (in pixels)"
+msgstr ""
+
+#. settings-schema.json->textSize->tooltip
+msgid "0 means automatic"
+msgstr ""
 
 #. settings-schema.json->displayOrderLabel->description
 msgid "Move these sections to rearrange the menu:"
@@ -258,6 +283,7 @@ msgstr ""
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
 #. settings-schema.json->favApps->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "Name"
 msgstr ""
 
@@ -295,6 +321,7 @@ msgstr "Kullanıcı bölümü"
 #. settings-schema.json->showSystemSettingsAccessIcon->description
 #. settings-schema.json->showFavoritesSettingsAccessIcon->description
 #. settings-schema.json->showRecentSettingsAccessIcon->description
+#. settings-schema.json->showCustomSettingsAccessIcon->description
 msgid "Show the settings access icon"
 msgstr ""
 
@@ -304,11 +331,13 @@ msgstr "Masaüstünü göster"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "URI"
 msgstr ""
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "Icon Name"
 msgstr ""
 
@@ -494,4 +523,17 @@ msgstr ""
 
 #. settings-schema.json->btnIconBrowser->description
 msgid "Icon browser"
+msgstr ""
+
+#. settings-schema.json->showCustomDocuments->description
+#, fuzzy
+msgid "Show Custom documents"
+msgstr "Son belgeleri göster"
+
+#. settings-schema.json->labelCustomDocuments->description
+msgid ""
+"URI: Enter the link to your custom document or application-name.desktop here "
+"(as in /usr/share/applications/).\n"
+"To separate them into categories, you can add a line without a URI, but with "
+"a name as the category title (no icon is necessary)."
 msgstr ""

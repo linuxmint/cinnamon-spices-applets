@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-14 20:56+0100\n"
+"POT-Creation-Date: 2025-12-22 09:17+0100\n"
 "PO-Revision-Date: 2022-10-27 19:44+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -19,64 +19,69 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:44 applet.js:602
+#. applet.js:45 applet.js:636
 msgid "SYSTEM"
 msgstr "SYSTEM"
 
-#. applet.js:44 applet.js:645
+#. applet.js:45 applet.js:676
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:44 applet.js:678
+#. applet.js:45 applet.js:707
 msgid "APPLICATIONS"
 msgstr ""
 
-#. applet.js:44 applet.js:711
+#. applet.js:45 applet.js:738
 msgid "RECENT DOCUMENTS"
 msgstr "SENESTE DOKUMENTER"
 
-#. applet.js:167
+#. applet.js:45 applet.js:782
+msgid "CUSTOM"
+msgstr ""
+
+#. applet.js:185
 msgid "(Right click to open folder)"
 msgstr "(Højreklik for at åbne mappen)"
 
 #. metadata.json->name
-#. applet.js:288
+#. applet.js:311
 msgid "Direct"
 msgstr "Direkte"
 
-#. applet.js:572
+#. applet.js:606
 msgid "Search Home Folder"
 msgstr "Søg i mappen Hjem"
 
-#. applet.js:579 applet.js:620 applet.js:653 applet.js:686 applet.js:719
+#. applet.js:613 applet.js:653 applet.js:684 applet.js:715 applet.js:746
+#. applet.js:790
 msgid "Configure"
 msgstr ""
 
-#. applet.js:613
+#. applet.js:646
 msgid "Search File System"
 msgstr "Søg i Filsystem"
 
-#. applet.js:733
+#. applet.js:760
 msgid "Clear"
 msgstr "Ryd"
 
-#. applet.js:740
+#. applet.js:767
 msgid "Recent"
 msgstr ""
 
-#. applet.js:788
+#. applet.js:844
 msgid "Computer"
 msgstr "Computer"
 
-#. applet.js:794
+#. applet.js:850
 msgid "File System"
 msgstr "Filsystem"
 
-#. applet.js:811
+#. applet.js:867
 msgid "Network"
 msgstr "Netværk"
 
-#. applet.js:1095
+#. applet.js:1179
 msgid "Trash"
 msgstr "Papirkurven"
 
@@ -186,6 +191,11 @@ msgstr ""
 msgid "Recent documents"
 msgstr "Seneste dokumenter"
 
+#. settings-schema.json->customPage->title
+#, fuzzy
+msgid "Custom"
+msgstr "Brugerdefinederede steder"
+
 #. settings-schema.json->panel->title
 msgid "Panel settings"
 msgstr "Panelindstillinger"
@@ -202,6 +212,7 @@ msgstr "Brugersektion"
 #. settings-schema.json->systemSectionCustomPlaces->title
 #. settings-schema.json->listUserCustomPlaces->description
 #. settings-schema.json->listSystemCustomPlaces->description
+#. settings-schema.json->listCustomDocuments->description
 msgid "Custom places"
 msgstr "Brugerdefinederede steder"
 
@@ -218,6 +229,11 @@ msgstr "Vis seneste dokumenter"
 #, fuzzy
 msgid "Favorite apps"
 msgstr "Vis seneste dokumenter"
+
+#. settings-schema.json->customSection->title
+#, fuzzy
+msgid "Custom documents"
+msgstr "Brugerdefinederede steder"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -240,12 +256,21 @@ msgid "Menu shortcut key"
 msgstr "Genvejstast til åbning af menuen"
 
 #. settings-schema.json->iconSize->units
+#. settings-schema.json->textSize->units
 msgid "px"
 msgstr "px"
 
 #. settings-schema.json->iconSize->description
 msgid "Menu icon size"
 msgstr "Menuens ikonstørrelse"
+
+#. settings-schema.json->textSize->description
+msgid "Text size (in pixels)"
+msgstr ""
+
+#. settings-schema.json->textSize->tooltip
+msgid "0 means automatic"
+msgstr ""
 
 #. settings-schema.json->displayOrderLabel->description
 msgid "Move these sections to rearrange the menu:"
@@ -256,6 +281,7 @@ msgstr ""
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
 #. settings-schema.json->favApps->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "Name"
 msgstr ""
 
@@ -293,6 +319,7 @@ msgstr "Brugersektion"
 #. settings-schema.json->showSystemSettingsAccessIcon->description
 #. settings-schema.json->showFavoritesSettingsAccessIcon->description
 #. settings-schema.json->showRecentSettingsAccessIcon->description
+#. settings-schema.json->showCustomSettingsAccessIcon->description
 msgid "Show the settings access icon"
 msgstr ""
 
@@ -302,11 +329,13 @@ msgstr "Vis skrivebord"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "URI"
 msgstr ""
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "Icon Name"
 msgstr ""
 
@@ -491,4 +520,17 @@ msgstr "Privatliv"
 
 #. settings-schema.json->btnIconBrowser->description
 msgid "Icon browser"
+msgstr ""
+
+#. settings-schema.json->showCustomDocuments->description
+#, fuzzy
+msgid "Show Custom documents"
+msgstr "Vis seneste dokumenter"
+
+#. settings-schema.json->labelCustomDocuments->description
+msgid ""
+"URI: Enter the link to your custom document or application-name.desktop here "
+"(as in /usr/share/applications/).\n"
+"To separate them into categories, you can add a line without a URI, but with "
+"a name as the category title (no icon is necessary)."
 msgstr ""
