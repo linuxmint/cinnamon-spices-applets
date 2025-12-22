@@ -29,6 +29,7 @@ const MENU_ITEM_TEXT_LENGTH = 25;
 
 const ICONBROWSER_PROGRAM = "yad-icon-browser";
 
+var TEXTSIZE = 0;
 var menu_item_icon_size;
 const UUID = "Direct@claudiux";
 Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
@@ -41,8 +42,8 @@ function _(str) {
    return Gettext.gettext(str);
 }
 
-const orig_names = [GLib.get_user_name().toUpperCase(), _("SYSTEM"), _("FAVORITES"), _("APPLICATIONS"), _("RECENT DOCUMENTS")];
-const orig_sections = ["User", "System", "Favorites", "FavoriteApps", "RecentDocuments"];
+const orig_names = [GLib.get_user_name().toUpperCase(), _("SYSTEM"), _("FAVORITES"), _("APPLICATIONS"), _("RECENT DOCUMENTS"), _("CUSTOM")];
+const orig_sections = ["User", "System", "Favorites", "FavoriteApps", "RecentDocuments", "CustomDocuments"];
 
 function icon_exists( iconName ) {
     return Gtk.IconTheme.get_default().has_icon( iconName );
@@ -62,6 +63,8 @@ class IconMenuItem extends PopupMenu.PopupBaseMenuItem {
 
         let label = new St.Label({ style_class: "xCenter-menuItemLabel", text: text });
         label.clutter_text.ellipsize = Pango.EllipsizeMode.END;
+        if (TEXTSIZE > 0)
+            label.clutter_text.width = Math.min(TEXTSIZE, label.clutter_text.get_width() * Pango.SCALE);
         this.addActor(label);
 
         let tooltip = new Tooltips.Tooltip(this.actor, text);
@@ -78,6 +81,8 @@ class FolderTypeMenuItem extends PopupMenu.PopupBaseMenuItem {
 
         let label = new St.Label({ style_class: "xCenter-menuItemLabel", text: text });
         label.clutter_text.ellipsize = Pango.EllipsizeMode.END;
+        if (TEXTSIZE > 0)
+            label.clutter_text.width = Math.min(TEXTSIZE, label.clutter_text.get_width() * Pango.SCALE);
         this.addActor(label);
 
         let tooltip = new Tooltips.Tooltip(this.actor, text);
@@ -118,9 +123,23 @@ class VolumeMenuItem extends IconMenuItem {
 
 class PlaceMenuItem extends FolderTypeMenuItem {
     constructor(uri, text, iconName) {
+        let icon;
+        if (uri == null) {
+            if ( iconName && icon_exists(iconName) ) {
+                icon = new St.Icon({icon_name: iconName, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
+            }
+            else {
+                icon = new St.Icon({icon_name: "window-minimize-symbolic", icon_size: menu_item_icon_size, icon_type: St.IconType.SYMBOLIC});
+            }
+            super(text, icon);
+            this.uri = null;
+            this.actor.style = "font-weight: bold;"
+            //~ this.actor.add_style_pseudo_class('highlighted');
+            return
+        }
         let fileInfo = Gio.File.new_for_uri(uri).query_info("*", 0, null);
 
-        let icon;
+        
         if ( iconName && icon_exists(iconName) ) {
             icon = new St.Icon({icon_name: iconName, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
         }
@@ -138,7 +157,8 @@ class PlaceMenuItem extends FolderTypeMenuItem {
     }
 
     launch(event) {
-        Gio.app_info_launch_default_for_uri(this.uri, global.create_app_launch_context());
+        if (this.uri != null)
+            Gio.app_info_launch_default_for_uri(this.uri, global.create_app_launch_context());
     }
 }
 
@@ -199,6 +219,8 @@ class FavoriteMenuItem extends PopupMenu.PopupBaseMenuItem {
 
         let label = new St.Label({ text: display_text, y_align: Clutter.ActorAlign.CENTER });
         label.clutter_text.ellipsize = Pango.EllipsizeMode.END;
+        if (TEXTSIZE > 0)
+            label.clutter_text.width = Math.min(TEXTSIZE, label.clutter_text.get_width() * Pango.SCALE);
 
         this.box.add(label);
         this.addActor(this.box);
@@ -208,6 +230,7 @@ class FavoriteMenuItem extends PopupMenu.PopupBaseMenuItem {
 class FavoriteAppMenuItem extends PopupMenu.PopupBaseMenuItem {
     constructor(name, app, applet, params) {
         super(params);
+        this.applet = applet;
         if (!app) return;
         this.name = name;
         this.app = app;
@@ -216,6 +239,8 @@ class FavoriteAppMenuItem extends PopupMenu.PopupBaseMenuItem {
         this.box.add(gicon);
         let label = new St.Label({ text: this.name, y_align: Clutter.ActorAlign.CENTER });
         label.clutter_text.ellipsize = Pango.EllipsizeMode.END;
+        if (TEXTSIZE > 0)
+            label.clutter_text.width = Math.min(TEXTSIZE, label.clutter_text.get_width() * Pango.SCALE);
         this.box.add(label);
         this.addActor(this.box);
     }
@@ -350,10 +375,13 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     bindSettings() {
+        this.settings.bind("iconBrowserIsPresent", "iconBrowserIsPresent");
         this.settings.bind("noIconOnPanel", "noIconOnPanel", this.setPanelIcon);
         this.settings.bind("panelIcon", "panelIcon", this.setPanelIcon);
         this.settings.bind("panelText", "panelText", this.setPanelText);
         this.settings.bind("iconSize", "iconSize");
+        this.settings.bind("textSize", "textSize", this.setPangoTextSize);
+        TEXTSIZE = this.textSize;
         this.settings.bind("middleClickPath", "middleClickPath");
         this.settings.bind("dontDisplayTooltip", "dontDisplayTooltip", this._setTooltip);
         this.settings.bind("displayOrder", "displayOrder");
@@ -386,6 +414,9 @@ class DirectApplet extends Applet.TextIconApplet {
         this.settings.bind("favoriteIconIsStar", "favoriteIconIsStar");
         this.settings.bind("favoriteIconIsStar", "favoriteIconIsStar");
         this.settings.bind("favApps", "favApps");
+        this.settings.bind("showCustomDocuments", "showCustomDocuments");
+        this.settings.bind("showCustomSettingsAccessIcon", "showCustomSettingsAccessIcon");
+        this.settings.bind("listCustomDocuments", "listCustomDocuments");
         this.settings.bind("openHoveringOver", "openHoveringOver");
         this.settings.bind("keyOpen", "keyOpen", this.setKeybinding);
         let recentSizeLimit = this.recentSizeLimit;
@@ -393,6 +424,10 @@ class DirectApplet extends Applet.TextIconApplet {
         let favoriteSizeLimit = this.favoriteSizeLimit;
         if ( favoriteSizeLimit % 5 !== 0 ) this.favoriteSizeLimit = Math.ceil(favoriteSizeLimit / 5) * 5;
         this.setKeybinding();
+    }
+    
+    setPangoTextSize() {
+        TEXTSIZE = this.textSize;
     }
 
     controlDisplayOrder() {
@@ -479,6 +514,7 @@ class DirectApplet extends Applet.TextIconApplet {
             this.recentSection = new PopupMenu.PopupMenuSection();
             this.favoriteSection = new PopupMenu.PopupMenuSection();
             this.favAppsSection = new PopupMenu.PopupMenuSection();
+            this.customSection = new PopupMenu.PopupMenuSection();
         } else return;
 
         let section = new PopupMenu.PopupMenuSection();
@@ -498,51 +534,58 @@ class DirectApplet extends Applet.TextIconApplet {
         let favoritesPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
         let favAppsPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
         let recentPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
+        let customPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
 
 		let userSettingsImage = new St.Icon({ icon_name: "system-settings-symbolic", icon_size: this.iconSize, icon_type: St.IconType.SYMBOLIC });
 		let systemSettingsImage = new St.Icon({ icon_name: "system-settings-symbolic", icon_size: this.iconSize, icon_type: St.IconType.SYMBOLIC });
 		let favoritesSettingsImage = new St.Icon({ icon_name: "system-settings-symbolic", icon_size: this.iconSize, icon_type: St.IconType.SYMBOLIC });
 		let favAppsSettingsImage = new St.Icon({ icon_name: "system-settings-symbolic", icon_size: this.iconSize, icon_type: St.IconType.SYMBOLIC });
 		let recentSettingsImage = new St.Icon({ icon_name: "system-settings-symbolic", icon_size: this.iconSize, icon_type: St.IconType.SYMBOLIC });
+		let customSettingsImage = new St.Icon({ icon_name: "system-settings-symbolic", icon_size: this.iconSize, icon_type: St.IconType.SYMBOLIC });
         let userSettingsButton = new St.Button();
         let systemSettingsButton = new St.Button();
         let favoritesSettingsButton = new St.Button();
         let favAppsSettingsButton = new St.Button();
         let recentSettingsButton = new St.Button();
+        let customSettingsButton = new St.Button();
         
         
         let order = [];
-            for (let d of this.displayOrder) order.push(d["id"]);
-            for (let o of order) {
-                switch(orig_sections[orig_names.indexOf(o)]) {
-                    case "User":
-                        if (this.showUserSection) {
-                            mainBox.add_actor(userPaneBox);
-                        }
-                        break;
-                    case "System":
-                        if (this.showSystemSection) {
-                            mainBox.add_actor(systemPaneBox);
-                        }
-                        break;
-                    case "Favorites":
-                        if (this.showFavorites) {
-                            mainBox.add_actor(favoritesPaneBox);
-                        }
-                        break;
-                    case "FavoriteApps":
-                        if (this.showFavoriteApps) {
-                            mainBox.add_actor(favAppsPaneBox);
-                        }
-                        break;
-                    case "RecentDocuments":
-                        if (this.showRecentDocuments) {
-                            mainBox.add_actor(recentPaneBox);
-                        }
-                        break;
-
-                }
+        for (let d of this.displayOrder) order.push(d["id"]);
+        for (let o of order) {
+            switch(orig_sections[orig_names.indexOf(o)]) {
+                case "User":
+                    if (this.showUserSection) {
+                        mainBox.add_actor(userPaneBox);
+                    }
+                    break;
+                case "System":
+                    if (this.showSystemSection) {
+                        mainBox.add_actor(systemPaneBox);
+                    }
+                    break;
+                case "Favorites":
+                    if (this.showFavorites) {
+                        mainBox.add_actor(favoritesPaneBox);
+                    }
+                    break;
+                case "FavoriteApps":
+                    if (this.showFavoriteApps) {
+                        mainBox.add_actor(favAppsPaneBox);
+                    }
+                    break;
+                case "RecentDocuments":
+                    if (this.showRecentDocuments) {
+                        mainBox.add_actor(recentPaneBox);
+                    }
+                    break;
+                case "CustomDocuments":
+                    if (this.showCustomDocuments) {
+                        mainBox.add_actor(customPaneBox);
+                    }
+                    break;
             }
+        }
 
 
         try {
@@ -730,7 +773,36 @@ class DirectApplet extends Applet.TextIconApplet {
                 this.buildRecentDocumentsSection();
             }
 
+            //custom documents section
+            if ( this.showCustomDocuments ) {
+                let customPane = new PopupMenu.PopupMenuSection();
+                customPaneBox.add_actor(customPane.actor);
+                section._connectSubMenuSignals(customPane, customPane);
 
+                let customTitle = new PopupMenu.PopupMenuItem(_("CUSTOM"), { style_class: "xCenter-title", reactive: false });
+                customPane.addMenuItem(customTitle);
+                
+                //add link to custom documents settings tab
+                if (this.showCustomSettingsAccessIcon) {
+					customTitle.addActor(customSettingsButton);
+					customSettingsButton.add_actor(customSettingsImage);
+					customSettingsButton.connect("clicked", () => { this.menu.toggle(); this.configureApplet(5); });
+					new Tooltips.Tooltip(customSettingsButton, _("Configure"));
+				}
+
+				// create a scrollbox for large custom documents section, if any
+                let customScrollBox = new St.ScrollView({ style_class: "xCenter-scrollBox", x_fill: true, y_fill: false, y_align: St.Align.START });
+                customPane.actor.add_actor(customScrollBox);
+                customScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+                let customVscroll = customScrollBox.get_vscroll_bar();
+                customVscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
+                customVscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
+
+                customScrollBox.add_actor(this.customSection.actor);
+                customPane._connectSubMenuSignals(this.customSection, this.customSection);
+
+                this.buildCustomSection();
+            }
         } catch(e) {
             global.logError("buildMenu(): " + e);
         }
@@ -805,18 +877,47 @@ class DirectApplet extends Applet.TextIconApplet {
             }
         }
     }
+    
+    buildCustomSection() {
+        if ( this.customSection ) this.customSection.removeAll();
+        else this.customSection = new PopupMenu.PopupMenuSection();
+        
+        //custom places
+        this.buildCustomPlaces(this.listCustomDocuments, this.customSection);
+    }
 
     buildCustomPlaces(list, container) {
         if ( list.length === 0 ) return;
         for (let item of list) {
+            let text, iconName;
             let place = item["uri"].trim();
-            if ( place.length === 0) continue;
+            if ( place.length === 0) {
+                text = item["name"].trim();
+                if (text.length === 0) continue;
+                //~ text = "<b>" + text + "</b>";
+                iconName = ( item["icon"].trim().length > 0 ) ? item["icon"] : null;
+                container.addMenuItem(new PlaceMenuItem(null, text, iconName));
+                continue;
+            }
+            if (place.endsWith(".desktop")) {
+                let _app = this.appSystem.lookup_app(place);
+                if (_app) {
+                    let button = new FavoriteAppMenuItem(item["name"], _app, this);
+                    button.connect("activate", (button, event)=> {
+                        button.app.activate();
+                        this.menu.toggle();
+                    })
+    
+                    container.addMenuItem(button);
+                }
+                continue;
+            }
             place = place.replace("~/", HOME_DIR + "/");
             if ( place.search("://") == -1 ) place = "file://" + place;
             let file = Gio.File.new_for_uri(place);
             if ( file.query_exists(null) ) {
-                let text = ( item["name"].trim().length > 0 ) ? item["name"] : GLib.basename( item["uri"].trim() );
-                let iconName = ( item["icon"].trim().length > 0 ) ? item["icon"] : null;
+                text = ( item["name"].trim().length > 0 ) ? item["name"] : GLib.basename( item["uri"].trim() );
+                iconName = ( item["icon"].trim().length > 0 ) ? item["icon"] : null;
                 let customPlace = new PlaceMenuItem(place, text, iconName);
                 container.addMenuItem(customPlace);
             }

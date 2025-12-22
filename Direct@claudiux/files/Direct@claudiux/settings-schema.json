@@ -6,7 +6,8 @@
       "userPage",
       "systemPage",
       "favoritesPage",
-      "recentPage"
+      "recentPage",
+      "customPage"
     ],
     "generalPage": {
       "type": "page",
@@ -47,6 +48,13 @@
         "recentSection"
       ]
     },
+    "customPage": {
+      "type": "page",
+      "title": "Custom",
+      "sections": [
+        "customSection"
+      ]
+    },
     "panel": {
       "type": "section",
       "title": "Panel settings",
@@ -65,6 +73,7 @@
         "openHoveringOver",
         "keyOpen",
         "iconSize",
+        "textSize",
         "displayOrderLabel",
         "displayOrder",
         "displayOrderApply"
@@ -145,6 +154,17 @@
         "recentShowUri",
         "btnPrivacy"
       ]
+    },
+    "customSection": {
+      "type": "section",
+      "title": "Custom documents",
+      "keys": [
+        "showCustomDocuments",
+        "showCustomSettingsAccessIcon",
+        "labelCustomDocuments",
+        "listCustomDocuments",
+        "btnIconBrowser"
+      ]
     }
   },
   "panelIcon": {
@@ -177,6 +197,16 @@
     "units": "px",
     "step": 2,
     "description": "Menu icon size"
+  },
+  "textSize": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 500,
+    "units": "px",
+    "step": 10,
+    "description": "Text size (in pixels)",
+    "tooltip": "0 means automatic"
   },
   "displayOrderLabel": {
     "type": "label",
@@ -546,5 +576,46 @@
     "dependency": "iconBrowserIsPresent",
     "description": "Icon browser",
     "callback": "on_btnIconBrowser_pressed"
+  },
+  "showCustomDocuments": {
+    "type": "switch",
+    "description": "Show Custom documents",
+    "default": false
+  },
+  "showCustomSettingsAccessIcon": {
+    "type": "switch",
+    "description": "Show the settings access icon",
+    "default": true
+  },
+  "labelCustomDocuments": {
+    "type": "label",
+    "description": "URI: Enter the link to your custom document or application-name.desktop here (as in /usr/share/applications/).\nTo separate them into categories, you can add a line without a URI, but with a name as the category title (no icon is necessary)."
+  },
+  "listCustomDocuments": {
+    "type": "list",
+    "description": "Custom places",
+    "default": [
+
+    ],
+    "columns": [
+      {
+        "id": "uri",
+        "title": "URI",
+        "type": "string",
+        "expand-width": true
+      },
+      {
+        "id": "name",
+        "title": "Name",
+        "type": "string",
+        "expand-width": true
+      },
+      {
+        "id": "icon",
+        "title": "Icon Name",
+        "type": "string",
+        "expand-width": true
+      }
+    ]
   }
 }

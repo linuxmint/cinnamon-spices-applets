@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-14 20:56+0100\n"
+"POT-Creation-Date: 2025-12-22 09:17+0100\n"
 "PO-Revision-Date: 2025-10-06 21:22+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,64 +18,69 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.6\n"
 
-#. applet.js:44 applet.js:602
+#. applet.js:45 applet.js:636
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:44 applet.js:645
+#. applet.js:45 applet.js:676
 msgid "FAVORITES"
 msgstr "PREFERITS"
 
-#. applet.js:44 applet.js:678
+#. applet.js:45 applet.js:707
 msgid "APPLICATIONS"
 msgstr ""
 
-#. applet.js:44 applet.js:711
+#. applet.js:45 applet.js:738
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTS RECENTS"
 
-#. applet.js:167
+#. applet.js:45 applet.js:782
+msgid "CUSTOM"
+msgstr ""
+
+#. applet.js:185
 msgid "(Right click to open folder)"
 msgstr "(Clic dret per obrir la carpeta)"
 
 #. metadata.json->name
-#. applet.js:288
+#. applet.js:311
 msgid "Direct"
 msgstr "Directe"
 
-#. applet.js:572
+#. applet.js:606
 msgid "Search Home Folder"
 msgstr "Buscar al directori Home"
 
-#. applet.js:579 applet.js:620 applet.js:653 applet.js:686 applet.js:719
+#. applet.js:613 applet.js:653 applet.js:684 applet.js:715 applet.js:746
+#. applet.js:790
 msgid "Configure"
 msgstr ""
 
-#. applet.js:613
+#. applet.js:646
 msgid "Search File System"
 msgstr "Buscar al sistema de fitxers"
 
-#. applet.js:733
+#. applet.js:760
 msgid "Clear"
 msgstr "Netejar"
 
-#. applet.js:740
+#. applet.js:767
 msgid "Recent"
 msgstr "Recent"
 
-#. applet.js:788
+#. applet.js:844
 msgid "Computer"
 msgstr "Ordinador"
 
-#. applet.js:794
+#. applet.js:850
 msgid "File System"
 msgstr "Sistema de fitxers"
 
-#. applet.js:811
+#. applet.js:867
 msgid "Network"
 msgstr "Xarxa"
 
-#. applet.js:1095
+#. applet.js:1179
 msgid "Trash"
 msgstr "Paperera"
 
@@ -189,6 +194,11 @@ msgstr "Preferits"
 msgid "Recent documents"
 msgstr "Documents recents"
 
+#. settings-schema.json->customPage->title
+#, fuzzy
+msgid "Custom"
+msgstr "Llocs personalitzats"
+
 #. settings-schema.json->panel->title
 msgid "Panel settings"
 msgstr "Configuració del tauler"
@@ -205,6 +215,7 @@ msgstr "Secció de l'usuari"
 #. settings-schema.json->systemSectionCustomPlaces->title
 #. settings-schema.json->listUserCustomPlaces->description
 #. settings-schema.json->listSystemCustomPlaces->description
+#. settings-schema.json->listCustomDocuments->description
 msgid "Custom places"
 msgstr "Llocs personalitzats"
 
@@ -220,6 +231,11 @@ msgstr "Documents preferits"
 #, fuzzy
 msgid "Favorite apps"
 msgstr "Preferits"
+
+#. settings-schema.json->customSection->title
+#, fuzzy
+msgid "Custom documents"
+msgstr "Llocs personalitzats"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -243,12 +259,21 @@ msgid "Menu shortcut key"
 msgstr "Drecera del menú"
 
 #. settings-schema.json->iconSize->units
+#. settings-schema.json->textSize->units
 msgid "px"
 msgstr "px"
 
 #. settings-schema.json->iconSize->description
 msgid "Menu icon size"
 msgstr "Mida de la icona del menú"
+
+#. settings-schema.json->textSize->description
+msgid "Text size (in pixels)"
+msgstr ""
+
+#. settings-schema.json->textSize->tooltip
+msgid "0 means automatic"
+msgstr ""
 
 #. settings-schema.json->displayOrderLabel->description
 msgid "Move these sections to rearrange the menu:"
@@ -259,6 +284,7 @@ msgstr ""
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
 #. settings-schema.json->favApps->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "Name"
 msgstr "Nom"
 
@@ -296,6 +322,7 @@ msgstr "Mostrar la secció de l'usuari"
 #. settings-schema.json->showSystemSettingsAccessIcon->description
 #. settings-schema.json->showFavoritesSettingsAccessIcon->description
 #. settings-schema.json->showRecentSettingsAccessIcon->description
+#. settings-schema.json->showCustomSettingsAccessIcon->description
 msgid "Show the settings access icon"
 msgstr ""
 
@@ -305,11 +332,13 @@ msgstr "Mostrar l'escriptori"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "URI"
 msgstr "URI"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "Icon Name"
 msgstr "Nom de la icona"
 
@@ -493,3 +522,16 @@ msgstr "Privadesa"
 #. settings-schema.json->btnIconBrowser->description
 msgid "Icon browser"
 msgstr "Navegador d'icones"
+
+#. settings-schema.json->showCustomDocuments->description
+#, fuzzy
+msgid "Show Custom documents"
+msgstr "Mostrar els documents recents"
+
+#. settings-schema.json->labelCustomDocuments->description
+msgid ""
+"URI: Enter the link to your custom document or application-name.desktop here "
+"(as in /usr/share/applications/).\n"
+"To separate them into categories, you can add a line without a URI, but with "
+"a name as the category title (no icon is necessary)."
+msgstr ""
