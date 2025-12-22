@@ -1,4 +1,4 @@
-# Auto Brightness (ALS) - Cinnamon Applet
+# Adaptive Brightness - Cinnamon Applet
 
 Automatically adjusts your laptop's screen brightness based on the ambient light sensor (ALS). Never manually adjust brightness again!
 
@@ -44,9 +44,38 @@ Then restart Cinnamon: `Alt + F2 → r → Enter`
   
 - **Hover** over the applet to see current ambient light level and brightness percentage
 
+## Setup Instructions
+
+### 1. Install Required Package
+```bash
+sudo apt install brightnessctl
+```
+
+### 2. Grant Permission (Choose ONE method):
+
+**Option A: Add user to video group (Recommended)**
+```bash
+sudo usermod -a -G video $USER
+# Then log out and back in
+```
+
+**Option B: Password-less sudo (For Cinnamon applet)**
+```bash
+echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/brightnessctl" | sudo tee /etc/sudoers.d/brightnessctl-applet
+```
+
+### 3. Reload Cinnamon
+Press `Alt+F2`, type `r`, press `Enter`
+
 ## Configuration
 
-Edit the constants in `applet.js` to customize:
+Right-click the applet icon and select "Open settings" to customize:
+
+- **Minimum Brightness** - Lowest brightness level (default: 10%)
+- **Maximum Brightness** - Highest brightness level (default: 100%)
+- **Smoothing Factor** - Transition smoothness (0=instant, 1=very smooth)
+- **Maximum Lux** - Reference light level for calculations
+- **Poll Interval** - How often to check sensor (100-60000ms)
 
 ```javascript
 const MIN_BRIGHTNESS = 10;    // Minimum brightness (%)

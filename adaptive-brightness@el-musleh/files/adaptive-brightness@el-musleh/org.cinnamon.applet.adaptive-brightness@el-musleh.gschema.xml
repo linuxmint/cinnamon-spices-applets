@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gsettings-schema>
+    <key type="i" name="min-brightness">
+        <default>10</default>
+        <summary>Minimum Brightness</summary>
+        <description>Minimum brightness level in percentage (1-100)</description>
+    </key>
+    
+    <key type="i" name="max-brightness">
+        <default>100</default>
+        <summary>Maximum Brightness</summary>
+        <description>Maximum brightness level in percentage (1-100)</description>
+    </key>
+    
+    <key type="d" name="smoothing-factor">
+        <default>0.2</default>
+        <summary>Smoothing Factor</summary>
+        <description>How smooth the brightness transitions are (0.0-1.0)</description>
+    </key>
+    
+    <key type="i" name="max-lux">
+        <default>10000</default>
+        <summary>Maximum Lux</summary>
+        <description>Maximum ambient light value (100-100000)</description>
+    </key>
+    
+    <key type="i" name="poll-interval">
+        <default>1000</default>
+        <summary>Poll Interval</summary>
+        <description>How often to check sensor in milliseconds (100-60000)</description>
+    </key>
+</gsettings-schema>

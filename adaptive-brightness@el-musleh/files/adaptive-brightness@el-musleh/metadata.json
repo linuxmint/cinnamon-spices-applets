@@ -1,6 +1,6 @@
 {
-  "uuid": "auto-brightness-als@el-musleh",
-  "name": "Auto Brightness (ALS)",
+  "uuid": "adaptive-brightness@el-musleh",
+  "name": "Adaptive Brightness",
   "description": "Automatically adjusts screen brightness based on ambient light sensor",
   "version": "1.0.0",
   "author": "el-musleh"
