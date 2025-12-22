@@ -1,3 +1,9 @@
+### v13.8.0~20251223
+  * Many improvements and several bug fixes.
+  * Fixes [#8052](https://github.com/linuxmint/cinnamon-spices-applets/issues/8052)
+  * Fixes [#8049](https://github.com/linuxmint/cinnamon-spices-applets/issues/8049)
+  * Fixes [#8029](https://github.com/linuxmint/cinnamon-spices-applets/issues/8029)
+
 ### v13.7.7~20251206
   * Bug fix: avoids errors about stream.
 
