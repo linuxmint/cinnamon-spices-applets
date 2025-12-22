@@ -5,19 +5,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Project-Id-Version: timer@Severga 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2025-12-19 13:41-0500\n"
-"PO-Revision-Date: 2023-02-25 18:07+0100\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"PO-Revision-Date: 2025-12-22 10:35+0100\n"
+"Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
 
 #. applet.js:45 applet.js:217 applet.js:244 applet.js:271 applet.js:335
 #. applet.js:465 applet.js:537
@@ -34,9 +32,8 @@ msgid "At:  --:--:--"
 msgstr "   À :  --:--:--"
 
 #. applet.js:95
-#, fuzzy
 msgid "Run command | turn off computer on timer"
-msgstr "Arrêter l'ordinateur lorsque le temps est écoulé"
+msgstr "Exécuter la commande | Éteindre l'ordinateur lorsque le temps est écoulé"
 
 #. settings-schema.json->openSubmenu->options
 #. applet.js:100
@@ -147,22 +144,26 @@ msgstr "Applet Minuterie"
 
 #. settings-schema.json->customCommand->description
 msgid "Command to run on timer (empty for turn off)"
-msgstr ""
+msgstr "Commande à exécuter à la fin de la minuterie (laisser vide pour éteindre)"
 
 #. settings-schema.json->customCommand->tooltip
 msgid ""
 "Custom command to run on timer. Leave empty to turn off the computer on timer"
 msgstr ""
+"Commande à exécuter automatiquement. Laisser vide pour éteindre\n"
+"l'ordinateur automatiquement."
 
 #. settings-schema.json->cancelTurnOffOption->description
 msgid "Cancel run command (turn off) option"
-msgstr ""
+msgstr "Annuler l'option de commande d'exécution (éteindre)"
 
 #. settings-schema.json->cancelTurnOffOption->tooltip
 msgid ""
 "Cancel the option to run command or turn off for subsequent use (triggers "
 "only at the moment count down finished)"
 msgstr ""
+"Annuler l'option d'exécution de la commande ou désactiver pour une utilisation\n"
+"ultérieure (déclenchement uniquement au moment où le compte à rebours est terminé)."
 
 #. settings-schema.json->soundOn->description
 #. settings-schema.json->soundOn->tooltip
@@ -180,14 +181,12 @@ msgid "Show system notification on timer"
 msgstr "Notifier quand le temps est écoulé"
 
 #. settings-schema.json->customText->description
-#, fuzzy
 msgid "Custom notification text"
-msgstr "Notifier quand le temps est écoulé"
+msgstr "Texte de notification personnalisé"
 
 #. settings-schema.json->customText->tooltip
-#, fuzzy
 msgid "Custom text of the system notification on timer"
-msgstr "Notifier quand le temps est écoulé"
+msgstr "Texte personnalisé du système de notification programmée"
 
 #. settings-schema.json->openSubmenu->description
 #. settings-schema.json->openSubmenu->tooltip
