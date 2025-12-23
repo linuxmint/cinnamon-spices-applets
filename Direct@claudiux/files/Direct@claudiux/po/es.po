@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-12-22 09:17+0100\n"
-"PO-Revision-Date: 2025-12-14 19:32-0300\n"
+"PO-Revision-Date: 2025-12-22 22:14-0300\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -37,7 +37,7 @@ msgstr "DOCUMENTOS RECIENTES"
 
 #. applet.js:45 applet.js:782
 msgid "CUSTOM"
-msgstr ""
+msgstr "PERSONALIZADO"
 
 #. applet.js:185
 msgid "(Right click to open folder)"
@@ -196,9 +196,8 @@ msgid "Recent documents"
 msgstr "Documentos recientes"
 
 #. settings-schema.json->customPage->title
-#, fuzzy
 msgid "Custom"
-msgstr "Clasificación personalizada"
+msgstr "Personalizado"
 
 #. settings-schema.json->panel->title
 msgid "Panel settings"
@@ -233,9 +232,8 @@ msgid "Favorite apps"
 msgstr "Aplicaciones favoritas"
 
 #. settings-schema.json->customSection->title
-#, fuzzy
 msgid "Custom documents"
-msgstr "Más lugares"
+msgstr "Documentos personalizados"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -268,11 +266,11 @@ msgstr "Tamaño de los iconos"
 
 #. settings-schema.json->textSize->description
 msgid "Text size (in pixels)"
-msgstr ""
+msgstr "Tamaño del texto (en píxeles)"
 
 #. settings-schema.json->textSize->tooltip
 msgid "0 means automatic"
-msgstr ""
+msgstr "0 significa automático"
 
 #. settings-schema.json->displayOrderLabel->description
 msgid "Move these sections to rearrange the menu:"
@@ -528,9 +526,8 @@ msgid "Icon browser"
 msgstr "Navegador de íconos"
 
 #. settings-schema.json->showCustomDocuments->description
-#, fuzzy
 msgid "Show Custom documents"
-msgstr "Mostrar documentos recientes"
+msgstr "Mostrar documentos personalizados"
 
 #. settings-schema.json->labelCustomDocuments->description
 msgid ""
@@ -539,3 +536,7 @@ msgid ""
 "To separate them into categories, you can add a line without a URI, but with "
 "a name as the category title (no icon is necessary)."
 msgstr ""
+"URI: Introduzca aquí el enlace a su documento personalizado o al nombre de "
+"la aplicación.desktop (como en /usr/share/applications/).\n"
+"Para separarlos en categorías, puede añadir una línea sin URI, pero con un "
+"nombre como título de la categoría (no es necesario ningún icono)."
