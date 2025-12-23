@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-12-19 13:41-0500\n"
-"PO-Revision-Date: 2023-03-13 15:43-0300\n"
+"PO-Revision-Date: 2025-12-22 22:29-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.8\n"
 
 #. applet.js:45 applet.js:217 applet.js:244 applet.js:271 applet.js:335
 #. applet.js:465 applet.js:537
@@ -34,9 +34,8 @@ msgid "At:  --:--:--"
 msgstr "A las:  --:--:--"
 
 #. applet.js:95
-#, fuzzy
 msgid "Run command | turn off computer on timer"
-msgstr "Apagar el ordenador al finalizar el temporizador"
+msgstr "Ejecutar comando | apagar el ordenador con temporizador"
 
 #. settings-schema.json->openSubmenu->options
 #. applet.js:100
@@ -148,22 +147,26 @@ msgstr "Un applet de temporizador"
 
 #. settings-schema.json->customCommand->description
 msgid "Command to run on timer (empty for turn off)"
-msgstr ""
+msgstr "Comando para ejecutar con temporizador (dejar vacío para desactivar)"
 
 #. settings-schema.json->customCommand->tooltip
 msgid ""
 "Custom command to run on timer. Leave empty to turn off the computer on timer"
 msgstr ""
+"Comando personalizado para ejecutar con temporizador. Déjelo vacío para "
+"apagar el ordenador con temporizador"
 
 #. settings-schema.json->cancelTurnOffOption->description
 msgid "Cancel run command (turn off) option"
-msgstr ""
+msgstr "Opción para cancelar el comando de ejecución (desactivar)"
 
 #. settings-schema.json->cancelTurnOffOption->tooltip
 msgid ""
 "Cancel the option to run command or turn off for subsequent use (triggers "
 "only at the moment count down finished)"
 msgstr ""
+"Cancelar la opción de ejecutar el comando o desactivarlo para su uso "
+"posterior (se activa solo cuando finaliza la cuenta atrás)"
 
 #. settings-schema.json->soundOn->description
 #. settings-schema.json->soundOn->tooltip
@@ -181,14 +184,13 @@ msgid "Show system notification on timer"
 msgstr "Mostrar notificación del sistema al finalizar el temporizador"
 
 #. settings-schema.json->customText->description
-#, fuzzy
 msgid "Custom notification text"
-msgstr "Mostrar notificación del sistema al finalizar el temporizador"
+msgstr "Texto de notificación personalizado"
 
 #. settings-schema.json->customText->tooltip
-#, fuzzy
 msgid "Custom text of the system notification on timer"
-msgstr "Mostrar notificación del sistema al finalizar el temporizador"
+msgstr ""
+"Texto personalizado de la notificación del sistema sobre el temporizador"
 
 #. settings-schema.json->openSubmenu->description
 #. settings-schema.json->openSubmenu->tooltip
