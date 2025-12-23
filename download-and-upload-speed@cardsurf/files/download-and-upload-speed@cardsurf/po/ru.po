@@ -40,7 +40,7 @@ msgstr "Сегодня"
 #. settings-schema.json->bytes_start_time->options
 #. applet.js:548
 msgid "Yesterday"
-msgstr "Gestern"
+msgstr "Вчера"
 
 #. settings-schema.json->bytes_start_time->options
 #. applet.js:549
