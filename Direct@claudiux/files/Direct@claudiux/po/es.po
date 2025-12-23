@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-23 12:55+0200\n"
-"PO-Revision-Date: 2025-10-25 19:01-0300\n"
+"POT-Creation-Date: 2025-12-22 09:17+0100\n"
+"PO-Revision-Date: 2025-12-22 22:14-0300\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -19,56 +19,69 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.8\n"
 
-#. applet.js:38 applet.js:495
+#. applet.js:45 applet.js:636
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:38 applet.js:530
+#. applet.js:45 applet.js:676
 msgid "FAVORITES"
 msgstr "FAVORITOS"
 
-#. applet.js:38 applet.js:554
+#. applet.js:45 applet.js:707
+msgid "APPLICATIONS"
+msgstr "APLICACIONES"
+
+#. applet.js:45 applet.js:738
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTOS RECIENTES"
 
-#. applet.js:160
+#. applet.js:45 applet.js:782
+msgid "CUSTOM"
+msgstr "PERSONALIZADO"
+
+#. applet.js:185
 msgid "(Right click to open folder)"
 msgstr "(Haga clic con el botón derecho para abrir la carpeta)"
 
 #. metadata.json->name
-#. applet.js:263
+#. applet.js:311
 msgid "Direct"
 msgstr "Directo"
 
-#. applet.js:471
+#. applet.js:606
 msgid "Search Home Folder"
 msgstr "Buscar en la carpeta personal"
 
-#. applet.js:504
+#. applet.js:613 applet.js:653 applet.js:684 applet.js:715 applet.js:746
+#. applet.js:790
+msgid "Configure"
+msgstr "Configurar"
+
+#. applet.js:646
 msgid "Search File System"
 msgstr "Buscar en el sistema de archivos"
 
-#. applet.js:568
+#. applet.js:760
 msgid "Clear"
 msgstr "Limpiar"
 
-#. applet.js:575
+#. applet.js:767
 msgid "Recent"
 msgstr "Recientes"
 
-#. applet.js:623
+#. applet.js:844
 msgid "Computer"
 msgstr "PC"
 
-#. applet.js:629
+#. applet.js:850
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#. applet.js:646
+#. applet.js:867
 msgid "Network"
 msgstr "Red"
 
-#. applet.js:868
+#. applet.js:1179
 msgid "Trash"
 msgstr "Papelera"
 
@@ -182,6 +195,10 @@ msgstr "Favoritos"
 msgid "Recent documents"
 msgstr "Documentos recientes"
 
+#. settings-schema.json->customPage->title
+msgid "Custom"
+msgstr "Personalizado"
+
 #. settings-schema.json->panel->title
 msgid "Panel settings"
 msgstr "Preferencias del panel"
@@ -198,6 +215,7 @@ msgstr "Sección del usuario"
 #. settings-schema.json->systemSectionCustomPlaces->title
 #. settings-schema.json->listUserCustomPlaces->description
 #. settings-schema.json->listSystemCustomPlaces->description
+#. settings-schema.json->listCustomDocuments->description
 msgid "Custom places"
 msgstr "Más lugares"
 
@@ -208,6 +226,14 @@ msgstr "Sección del sistema"
 #. settings-schema.json->favoritesSection->title
 msgid "Favorite documents"
 msgstr "Documentos favoritos"
+
+#. settings-schema.json->favoriteAppsSection->title
+msgid "Favorite apps"
+msgstr "Aplicaciones favoritas"
+
+#. settings-schema.json->customSection->title
+msgid "Custom documents"
+msgstr "Documentos personalizados"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -221,17 +247,30 @@ msgstr "Se acepta nombre de icono o ruta directa (soporta iconos simbólicos)"
 msgid "Panel text"
 msgstr "Texto del panel"
 
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr "Abrir el menú pasando el cursor sobre el icono"
+
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"
 msgstr "Atajo de teclado del menú"
 
 #. settings-schema.json->iconSize->units
+#. settings-schema.json->textSize->units
 msgid "px"
 msgstr "px"
 
 #. settings-schema.json->iconSize->description
 msgid "Menu icon size"
 msgstr "Tamaño de los iconos"
+
+#. settings-schema.json->textSize->description
+msgid "Text size (in pixels)"
+msgstr "Tamaño del texto (en píxeles)"
+
+#. settings-schema.json->textSize->tooltip
+msgid "0 means automatic"
+msgstr "0 significa automático"
 
 #. settings-schema.json->displayOrderLabel->description
 msgid "Move these sections to rearrange the menu:"
@@ -241,10 +280,13 @@ msgstr "Mover estas secciones para reorganizar el menú:"
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->favApps->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "Name"
 msgstr "Nombre"
 
 #. settings-schema.json->displayOrder->description
+#. settings-schema.json->favoriteCustomList->description
 msgid "Display order in the menu"
 msgstr "Orden de visualización en el menú"
 
@@ -262,7 +304,7 @@ msgstr "Abrir al hacer click central"
 
 #. settings-schema.json->middleClickPath->tooltip
 msgid "Leave blank to disable"
-msgstr "Dejar en blanco para deshabilitar"
+msgstr "Deje en blanco para deshabilitarlo"
 
 #. settings-schema.json->dontDisplayTooltip->description
 msgid "Do not display the tooltip"
@@ -272,17 +314,27 @@ msgstr "No mostrar la información sobre herramientas"
 msgid "Show User section"
 msgstr "Mostrar sección de usuario"
 
+#. settings-schema.json->showUserSettingsAccessIcon->description
+#. settings-schema.json->showSystemSettingsAccessIcon->description
+#. settings-schema.json->showFavoritesSettingsAccessIcon->description
+#. settings-schema.json->showRecentSettingsAccessIcon->description
+#. settings-schema.json->showCustomSettingsAccessIcon->description
+msgid "Show the settings access icon"
+msgstr "Mostrar el icono de acceso a la configuración"
+
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
-msgstr "Mostrar «Escritorio»"
+msgstr "Mostrar Escritorio"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "URI"
 msgstr "URI"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "Icon Name"
 msgstr "Nombre del ícono"
 
@@ -308,11 +360,11 @@ msgstr "Mostrar sección sistema"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"
-msgstr "Mostrar «PC»"
+msgstr "Mostrar PC"
 
 #. settings-schema.json->showRoot->description
 msgid "Show file system"
-msgstr "Mostrar «Sistema de archivos»"
+msgstr "Mostrar Sistema de archivos"
 
 #. settings-schema.json->showVolumes->description
 msgid "Show volumes"
@@ -324,7 +376,7 @@ msgstr "Sólo mostrar volúmenes montados"
 
 #. settings-schema.json->showNetwork->description
 msgid "Show network"
-msgstr "Mostrar «Red»"
+msgstr "Mostrar Red"
 
 #. settings-schema.json->showFavorites->description
 msgid "Show favorite documents"
@@ -335,10 +387,44 @@ msgstr "Mostrar documentos favoritos"
 msgid "Added time"
 msgstr "Tiempo añadido"
 
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Custom Sort"
+msgstr "Clasificación personalizada"
+
 #. settings-schema.json->favoriteSortingMethod->description
 #. settings-schema.json->sortingMethod->description
 msgid "Sorting method"
 msgstr "Método de clasificación"
+
+#. settings-schema.json->favoriteLabel->description
+msgid ""
+"Below are the favorite documents displayed in the menu when checked.\n"
+"The Name can be changed here, but is unchanged in menu.\n"
+"The URI must not be changed.\n"
+"Favorite documents can only be managed by nemo."
+msgstr ""
+"A continuación se muestran los documentos favoritos que aparecen en el menú "
+"cuando se marcan.\n"
+"El nombre se puede cambiar aquí, pero no se modifica en el menú.\n"
+"La URI no se debe cambiar.\n"
+"Los documentos favoritos solo se pueden gestionar con nemo."
+
+#. settings-schema.json->favoriteCustomList->columns->title
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr "Menú"
+
+#. settings-schema.json->favoriteCustomList->columns->title
+msgid "⚠️ Name"
+msgstr "⚠️ Nombre"
+
+#. settings-schema.json->favoriteCustomList->columns->title
+msgid "⚠️ URI"
+msgstr "⚠️ URI"
+
+#. settings-schema.json->favoritePopulateButton->description
+msgid "Add all your Favorite Documents"
+msgstr "Añade todos tus documentos favoritos"
 
 #. settings-schema.json->favoriteSizeLimit->options
 #. settings-schema.json->recentSizeLimit->options
@@ -388,6 +474,33 @@ msgstr "Mostrar la ruta completa en la información sobre herramientas"
 msgid "Replace icons with stars"
 msgstr "Reemplazar iconos con estrellas"
 
+#. settings-schema.json->showFavoriteApps->description
+msgid "Show favorite apps"
+msgstr "Mostrar aplicaciones favoritas"
+
+#. settings-schema.json->favAppsLabel->description
+msgid ""
+"Below are the favorite applications displayed in the menu when checked.\n"
+"The Name can be changed.\n"
+"The Launcher must not be changed."
+msgstr ""
+"A continuación se muestran las aplicaciones favoritas que aparecen en el "
+"menú cuando se marcan.\n"
+"El nombre se puede cambiar.\n"
+"El lanzador no se debe cambiar."
+
+#. settings-schema.json->favApps->description
+msgid "Favorite apps shown"
+msgstr "Aplicaciones favoritas mostradas"
+
+#. settings-schema.json->favApps->columns->title
+msgid "⚠️ Launcher"
+msgstr "⚠️ Lanzador"
+
+#. settings-schema.json->favAppsPopulateButton->description
+msgid "Add all your Favorite Apps"
+msgstr "Añade todas tus aplicaciones favoritas"
+
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
 msgstr "Mostrar documentos recientes"
@@ -411,3 +524,19 @@ msgstr "Privacidad"
 #. settings-schema.json->btnIconBrowser->description
 msgid "Icon browser"
 msgstr "Navegador de íconos"
+
+#. settings-schema.json->showCustomDocuments->description
+msgid "Show Custom documents"
+msgstr "Mostrar documentos personalizados"
+
+#. settings-schema.json->labelCustomDocuments->description
+msgid ""
+"URI: Enter the link to your custom document or application-name.desktop here "
+"(as in /usr/share/applications/).\n"
+"To separate them into categories, you can add a line without a URI, but with "
+"a name as the category title (no icon is necessary)."
+msgstr ""
+"URI: Introduzca aquí el enlace a su documento personalizado o al nombre de "
+"la aplicación.desktop (como en /usr/share/applications/).\n"
+"Para separarlos en categorías, puede añadir una línea sin URI, pero con un "
+"nombre como título de la categoría (no es necesario ningún icono)."

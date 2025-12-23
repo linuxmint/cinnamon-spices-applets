@@ -19,7 +19,7 @@ const {
   TextDirection,
 } = imports.gi.St;
 //Clutter:
-const { Image, Actor, Color, RotateAxis } = imports.gi.Clutter;
+const { Image, Actor, Color, RotateAxis, AnimationMode } = imports.gi.Clutter;
 //GdkPixbuf:
 const { Pixbuf } = imports.gi.GdkPixbuf;
 //Cogl:
@@ -88,7 +88,7 @@ const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 const Extension = imports.ui.extension;
 const Tooltips = imports.ui.tooltips;
-const Tweener = imports.ui.tweener;
+//~ const Tweener = imports.ui.tweener;
 const Json = imports.gi.Json;
 imports.gi.versions.Soup = "3.0";
 const Soup = imports.gi.Soup;
@@ -763,10 +763,10 @@ class SpicesUpdate extends IconApplet {
     let iconSize = this.getPanelIconSize(IconType.SYMBOLIC);
 
     if (this.actor.get_stage() != null && this.badge != null) {
-      this.actor.remove_child(this.badge);
-      this.badge = null;
+      try { this.actor.remove_child(this.badge); } catch(e) {}
     }
 
+    this.badge = null;
     this.badge = new BoxLayout({
       style_class: "grouped-window-list-badge",
       important: true,
@@ -1670,7 +1670,11 @@ class SpicesUpdate extends IconApplet {
 
   _get_last_edited_from_cache(type, uuid) {
     var cacheParser = new Json.Parser();
-    cacheParser.load_from_data(this.cache[type], -1);
+    try {
+      cacheParser.load_from_data(this.cache[type], -1);
+    } catch(e) {
+      return null;
+    }
     var ok = false;
     var lastEdited = null;
     try {
@@ -2282,7 +2286,7 @@ class SpicesUpdate extends IconApplet {
 
     this.closeSettingsWindow();
 
-    let pid = spawnCommandLine(`cinnamon-settings applets ${UUID} -i ${this.instance_id} -t ${tab}`);
+    let pid = spawnCommandLine(`xlet-settings applet ${UUID} -i ${this.instance_id} -t ${tab}`);
 
     if (maximize_vertically) {
       var app = null;
@@ -2674,7 +2678,12 @@ class SpicesUpdate extends IconApplet {
     var monitor, Id;
     for (let tuple of this.monitors) {
       [monitor, Id] = tuple;
-      monitor.disconnect(Id);
+      try {
+        monitor.disconnect(Id);
+      } catch(e) {
+      } finally {
+        monitor = null;
+      }
     }
     this.monitors = [];
     this.alreadyMonitored = [];
@@ -2735,10 +2744,13 @@ class SpicesUpdate extends IconApplet {
         }
       }
     }
-    Tweener.addTween(this.actor, {
+    //~ Tweener.addTween(this.actor, {
+    this.actor.ease({
       opacity: 255,
-      transition: "easeOutQuad", //"linear",
-      time: 1,
+      //~ transition: "easeOutQuad", //"linear",
+      mode: AnimationMode.EASE_OUT_QUAD,
+      //~ time: 1,
+      duration: 1000,
       onComplete: null,
     });
   } // End of set_icon_color
@@ -2864,11 +2876,14 @@ class SpicesUpdate extends IconApplet {
       this.interval != null &&
       this.actor.get_stage() != null
     ) {
-      Tweener.addTween(this.actor, {
+      //~ Tweener.addTween(this.actor, {
+      this.actor.ease({
         opacity: 255,
-        transition: "easeOutQuad", //"linear",
+        //~ transition: "easeOutQuad", //"linear",
+        mode: AnimationMode.EASE_OUT_QUAD,
         delay: 0,
-        time: 1,
+        //~ time: 1,
+        duration: 1000,
         rounded: true,
         onComplete: () => {
           if (this.interval != null && _sourceIds.indexOf(this.interval) > -1) {
@@ -2898,7 +2913,8 @@ class SpicesUpdate extends IconApplet {
     this.set_applet_icon_symbolic_name("spices-update");
     this.set_icon_color();
     this.do_rotation = false;
-    Tweener.removeTweens(this.actor);
+    //~ Tweener.removeTweens(this.actor);
+    this.actor.remove_all_transitions();
   }
 
   // This is the loop run at general_frequency rate to call updateUI() to update the display in the applet and tooltip
@@ -3235,7 +3251,8 @@ class SpicesUpdate extends IconApplet {
     //~ }
     //~ }
 
-    if (Tweener.getTweenCount(this.actor) > 0) Tweener.removeTweens(this.actor);
+    //~ if (Tweener.getTweenCount(this.actor) > 0) Tweener.removeTweens(this.actor);
+    this.actor.remove_all_transitions();
 
     remove_all_sources();
   } // End of on_applet_removed_from_panel

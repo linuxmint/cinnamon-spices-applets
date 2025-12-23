@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"POT-Creation-Date: 2025-12-22 09:17+0100\n"
 "PO-Revision-Date: 2017-12-20 20:20+0200\n"
 "Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
@@ -19,56 +19,69 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. applet.js:38 applet.js:495
+#. applet.js:45 applet.js:636
 msgid "SYSTEM"
 msgstr "СИСТЕМА"
 
-#. applet.js:38 applet.js:530
+#. applet.js:45 applet.js:676
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:38 applet.js:554
+#. applet.js:45 applet.js:707
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:45 applet.js:738
 msgid "RECENT DOCUMENTS"
 msgstr "ПОСЛЕДНИ ДОКУМЕНТИ"
 
-#. applet.js:160
+#. applet.js:45 applet.js:782
+msgid "CUSTOM"
+msgstr ""
+
+#. applet.js:185
 msgid "(Right click to open folder)"
 msgstr ""
 
 #. metadata.json->name
-#. applet.js:263
+#. applet.js:311
 msgid "Direct"
 msgstr "Директно"
 
-#. applet.js:471
+#. applet.js:606
 msgid "Search Home Folder"
 msgstr "Търси в домашната папка"
 
-#. applet.js:504
+#. applet.js:613 applet.js:653 applet.js:684 applet.js:715 applet.js:746
+#. applet.js:790
+msgid "Configure"
+msgstr ""
+
+#. applet.js:646
 msgid "Search File System"
 msgstr "Търси във файловата система"
 
-#. applet.js:568
+#. applet.js:760
 msgid "Clear"
 msgstr "Изчисти"
 
-#. applet.js:575
+#. applet.js:767
 msgid "Recent"
 msgstr ""
 
-#. applet.js:623
+#. applet.js:844
 msgid "Computer"
 msgstr "Компютър"
 
-#. applet.js:629
+#. applet.js:850
 msgid "File System"
 msgstr "Файлова система"
 
-#. applet.js:646
+#. applet.js:867
 msgid "Network"
 msgstr "Мрежа"
 
-#. applet.js:868
+#. applet.js:1179
 msgid "Trash"
 msgstr "Кошче"
 
@@ -179,6 +192,11 @@ msgstr ""
 msgid "Recent documents"
 msgstr "Последни документи"
 
+#. settings-schema.json->customPage->title
+#, fuzzy
+msgid "Custom"
+msgstr "Допълнителни места"
+
 #. settings-schema.json->panel->title
 msgid "Panel settings"
 msgstr "Настройки на панела"
@@ -195,6 +213,7 @@ msgstr "Секция потребител"
 #. settings-schema.json->systemSectionCustomPlaces->title
 #. settings-schema.json->listUserCustomPlaces->description
 #. settings-schema.json->listSystemCustomPlaces->description
+#. settings-schema.json->listCustomDocuments->description
 msgid "Custom places"
 msgstr "Допълнителни места"
 
@@ -206,6 +225,16 @@ msgstr "Секция система"
 #, fuzzy
 msgid "Favorite documents"
 msgstr "Показване на последните документи"
+
+#. settings-schema.json->favoriteAppsSection->title
+#, fuzzy
+msgid "Favorite apps"
+msgstr "Показване на последните документи"
+
+#. settings-schema.json->customSection->title
+#, fuzzy
+msgid "Custom documents"
+msgstr "Допълнителни места"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -220,17 +249,30 @@ msgstr ""
 msgid "Panel text"
 msgstr "Текст в панела"
 
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr ""
+
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"
 msgstr "Пряк път за меню"
 
 #. settings-schema.json->iconSize->units
+#. settings-schema.json->textSize->units
 msgid "px"
 msgstr "пкс"
 
 #. settings-schema.json->iconSize->description
 msgid "Menu icon size"
 msgstr "Размер на иконките в менюто"
+
+#. settings-schema.json->textSize->description
+msgid "Text size (in pixels)"
+msgstr ""
+
+#. settings-schema.json->textSize->tooltip
+msgid "0 means automatic"
+msgstr ""
 
 #. settings-schema.json->displayOrderLabel->description
 msgid "Move these sections to rearrange the menu:"
@@ -240,10 +282,13 @@ msgstr ""
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->favApps->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "Name"
 msgstr ""
 
 #. settings-schema.json->displayOrder->description
+#. settings-schema.json->favoriteCustomList->description
 msgid "Display order in the menu"
 msgstr ""
 
@@ -272,17 +317,27 @@ msgstr ""
 msgid "Show User section"
 msgstr "Секция потребител"
 
+#. settings-schema.json->showUserSettingsAccessIcon->description
+#. settings-schema.json->showSystemSettingsAccessIcon->description
+#. settings-schema.json->showFavoritesSettingsAccessIcon->description
+#. settings-schema.json->showRecentSettingsAccessIcon->description
+#. settings-schema.json->showCustomSettingsAccessIcon->description
+msgid "Show the settings access icon"
+msgstr ""
+
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
 msgstr "Показване на работния плот"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "URI"
 msgstr ""
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "Icon Name"
 msgstr ""
 
@@ -337,10 +392,40 @@ msgstr "Показване на последните документи"
 msgid "Added time"
 msgstr ""
 
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Custom Sort"
+msgstr ""
+
 #. settings-schema.json->favoriteSortingMethod->description
 #. settings-schema.json->sortingMethod->description
 msgid "Sorting method"
 msgstr ""
+
+#. settings-schema.json->favoriteLabel->description
+msgid ""
+"Below are the favorite documents displayed in the menu when checked.\n"
+"The Name can be changed here, but is unchanged in menu.\n"
+"The URI must not be changed.\n"
+"Favorite documents can only be managed by nemo."
+msgstr ""
+
+#. settings-schema.json->favoriteCustomList->columns->title
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->favoriteCustomList->columns->title
+msgid "⚠️ Name"
+msgstr ""
+
+#. settings-schema.json->favoriteCustomList->columns->title
+msgid "⚠️ URI"
+msgstr ""
+
+#. settings-schema.json->favoritePopulateButton->description
+#, fuzzy
+msgid "Add all your Favorite Documents"
+msgstr "Последни документи"
 
 #. settings-schema.json->favoriteSizeLimit->options
 #. settings-schema.json->recentSizeLimit->options
@@ -391,6 +476,30 @@ msgstr ""
 msgid "Replace icons with stars"
 msgstr ""
 
+#. settings-schema.json->showFavoriteApps->description
+#, fuzzy
+msgid "Show favorite apps"
+msgstr "Показване на последните документи"
+
+#. settings-schema.json->favAppsLabel->description
+msgid ""
+"Below are the favorite applications displayed in the menu when checked.\n"
+"The Name can be changed.\n"
+"The Launcher must not be changed."
+msgstr ""
+
+#. settings-schema.json->favApps->description
+msgid "Favorite apps shown"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid "⚠️ Launcher"
+msgstr ""
+
+#. settings-schema.json->favAppsPopulateButton->description
+msgid "Add all your Favorite Apps"
+msgstr ""
+
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
 msgstr "Показване на последните документи"
@@ -414,4 +523,17 @@ msgstr ""
 
 #. settings-schema.json->btnIconBrowser->description
 msgid "Icon browser"
+msgstr ""
+
+#. settings-schema.json->showCustomDocuments->description
+#, fuzzy
+msgid "Show Custom documents"
+msgstr "Показване на последните документи"
+
+#. settings-schema.json->labelCustomDocuments->description
+msgid ""
+"URI: Enter the link to your custom document or application-name.desktop here "
+"(as in /usr/share/applications/).\n"
+"To separate them into categories, you can add a line without a URI, but with "
+"a name as the category title (no icon is necessary)."
 msgstr ""

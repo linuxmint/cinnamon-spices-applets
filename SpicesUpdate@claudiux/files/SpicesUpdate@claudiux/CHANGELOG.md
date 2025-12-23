@@ -1,3 +1,18 @@
+### v7.11.1~20251217
+  * Animation improvements.
+
+### v7.11.0~20251217
+  * Uses better animation method.
+
+### v7.10.0~20251212
+  * Use xlet-settings instead of cinnamon-settings to configure applet.
+
+### v7.9.7~20251121
+  * Updates to-string() function.
+
+### v7.9.6~20251121
+  * Improves file monitoring.
+
 ### v7.9.5~20251031
   * Avoids 'destroy' errors.
 

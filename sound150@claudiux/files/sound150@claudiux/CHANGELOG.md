@@ -1,3 +1,44 @@
+### v13.8.0~20251223
+  * Many improvements and several bug fixes.
+  * Fixes [#8052](https://github.com/linuxmint/cinnamon-spices-applets/issues/8052)
+  * Fixes [#8049](https://github.com/linuxmint/cinnamon-spices-applets/issues/8049)
+  * Fixes [#8029](https://github.com/linuxmint/cinnamon-spices-applets/issues/8029)
+
+### v13.7.7~20251206
+  * Bug fix: avoids errors about stream.
+
+### v13.7.6~20251205
+  * Bug fix: artist and title when the player does not provide them.
+
+### v13.7.5~20251204
+  * Improves execution speed.
+  * Fixes [#8029](https://github.com/linuxmint/cinnamon-spices-applets/issues/8029)
+
+### v13.7.4~20251201
+  * Avoids deleting the cover art after modifying the volume or the workspace.
+  * Fixes [#8020](https://github.com/linuxmint/cinnamon-spices-applets/issues/8020)
+
+### v13.7.3~20251126
+  * Avoids treating apostrophes as quotes (artist and title).
+
+### v13.7.2~20251121
+  * Functional improvements.
+
+### v13.7.1~20251114
+  * Adds option "Shorten Artist and Title". When the artist name or title is too long, you can choose how to shorten it.
+  * Fixes [#7966](https://github.com/linuxmint/cinnamon-spices-applets/issues/7966)
+
+### v13.7.0~20251111
+  * Adds option "Do not use playerctl". 
+  * Fixes [#7961](https://github.com/linuxmint/cinnamon-spices-applets/issues/7961)
+  * Improved stability. Several errors were fixed.
+
+### v13.6.2~20251109
+  * Avoid error loading image.
+
+### v13.6.1~20251106
+  * Improved stability.
+
 ### v13.6.0~20251102
   * Improves menu stability.
 

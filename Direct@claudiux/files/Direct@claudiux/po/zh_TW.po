@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-10-23 12:55+0200\n"
+"POT-Creation-Date: 2025-12-22 09:17+0100\n"
 "PO-Revision-Date: 2025-08-04 00:13+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -16,56 +16,69 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:38 applet.js:495
+#. applet.js:45 applet.js:636
 msgid "SYSTEM"
 msgstr "系統"
 
-#. applet.js:38 applet.js:530
+#. applet.js:45 applet.js:676
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:38 applet.js:554
+#. applet.js:45 applet.js:707
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:45 applet.js:738
 msgid "RECENT DOCUMENTS"
 msgstr "最近的文件"
 
-#. applet.js:160
+#. applet.js:45 applet.js:782
+msgid "CUSTOM"
+msgstr ""
+
+#. applet.js:185
 msgid "(Right click to open folder)"
 msgstr "（點選滑鼠右鍵開啟資料夾）"
 
 #. metadata.json->name
-#. applet.js:263
+#. applet.js:311
 msgid "Direct"
 msgstr "直接"
 
-#. applet.js:471
+#. applet.js:606
 msgid "Search Home Folder"
 msgstr "搜尋家目錄"
 
-#. applet.js:504
+#. applet.js:613 applet.js:653 applet.js:684 applet.js:715 applet.js:746
+#. applet.js:790
+msgid "Configure"
+msgstr ""
+
+#. applet.js:646
 msgid "Search File System"
 msgstr "搜尋檔案系統"
 
-#. applet.js:568
+#. applet.js:760
 msgid "Clear"
 msgstr "清除"
 
-#. applet.js:575
+#. applet.js:767
 msgid "Recent"
 msgstr "最近使用"
 
-#. applet.js:623
+#. applet.js:844
 msgid "Computer"
 msgstr "電腦"
 
-#. applet.js:629
+#. applet.js:850
 msgid "File System"
 msgstr "檔案系統"
 
-#. applet.js:646
+#. applet.js:867
 msgid "Network"
 msgstr "網路"
 
-#. applet.js:868
+#. applet.js:1179
 msgid "Trash"
 msgstr "資源回收筒"
 
@@ -175,6 +188,11 @@ msgstr ""
 msgid "Recent documents"
 msgstr "最近的文件"
 
+#. settings-schema.json->customPage->title
+#, fuzzy
+msgid "Custom"
+msgstr "自訂位置"
+
 #. settings-schema.json->panel->title
 msgid "Panel settings"
 msgstr "面板設定"
@@ -191,6 +209,7 @@ msgstr "使用者區段"
 #. settings-schema.json->systemSectionCustomPlaces->title
 #. settings-schema.json->listUserCustomPlaces->description
 #. settings-schema.json->listSystemCustomPlaces->description
+#. settings-schema.json->listCustomDocuments->description
 msgid "Custom places"
 msgstr "自訂位置"
 
@@ -202,6 +221,16 @@ msgstr "系統區段"
 #, fuzzy
 msgid "Favorite documents"
 msgstr "顯示最近的文件"
+
+#. settings-schema.json->favoriteAppsSection->title
+#, fuzzy
+msgid "Favorite apps"
+msgstr "顯示最近的文件"
+
+#. settings-schema.json->customSection->title
+#, fuzzy
+msgid "Custom documents"
+msgstr "自訂位置"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -215,17 +244,30 @@ msgstr "可輸入圖示名稱或直接路徑（支援符號圖示）"
 msgid "Panel text"
 msgstr "面板文字"
 
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr ""
+
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"
 msgstr "選單快捷鍵"
 
 #. settings-schema.json->iconSize->units
+#. settings-schema.json->textSize->units
 msgid "px"
 msgstr "px"
 
 #. settings-schema.json->iconSize->description
 msgid "Menu icon size"
 msgstr "選單圖示大小"
+
+#. settings-schema.json->textSize->description
+msgid "Text size (in pixels)"
+msgstr ""
+
+#. settings-schema.json->textSize->tooltip
+msgid "0 means automatic"
+msgstr ""
 
 #. settings-schema.json->displayOrderLabel->description
 msgid "Move these sections to rearrange the menu:"
@@ -235,10 +277,13 @@ msgstr ""
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->favApps->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "Name"
 msgstr ""
 
 #. settings-schema.json->displayOrder->description
+#. settings-schema.json->favoriteCustomList->description
 msgid "Display order in the menu"
 msgstr ""
 
@@ -268,17 +313,27 @@ msgstr "在工具提示中顯示完整路徑"
 msgid "Show User section"
 msgstr "使用者區段"
 
+#. settings-schema.json->showUserSettingsAccessIcon->description
+#. settings-schema.json->showSystemSettingsAccessIcon->description
+#. settings-schema.json->showFavoritesSettingsAccessIcon->description
+#. settings-schema.json->showRecentSettingsAccessIcon->description
+#. settings-schema.json->showCustomSettingsAccessIcon->description
+msgid "Show the settings access icon"
+msgstr ""
+
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
 msgstr "顯示桌面"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "URI"
 msgstr ""
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
 msgid "Icon Name"
 msgstr ""
 
@@ -333,10 +388,40 @@ msgstr "顯示最近的文件"
 msgid "Added time"
 msgstr ""
 
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Custom Sort"
+msgstr ""
+
 #. settings-schema.json->favoriteSortingMethod->description
 #. settings-schema.json->sortingMethod->description
 msgid "Sorting method"
 msgstr ""
+
+#. settings-schema.json->favoriteLabel->description
+msgid ""
+"Below are the favorite documents displayed in the menu when checked.\n"
+"The Name can be changed here, but is unchanged in menu.\n"
+"The URI must not be changed.\n"
+"Favorite documents can only be managed by nemo."
+msgstr ""
+
+#. settings-schema.json->favoriteCustomList->columns->title
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->favoriteCustomList->columns->title
+msgid "⚠️ Name"
+msgstr ""
+
+#. settings-schema.json->favoriteCustomList->columns->title
+msgid "⚠️ URI"
+msgstr ""
+
+#. settings-schema.json->favoritePopulateButton->description
+#, fuzzy
+msgid "Add all your Favorite Documents"
+msgstr "所有最近的文件"
 
 #. settings-schema.json->favoriteSizeLimit->options
 #. settings-schema.json->recentSizeLimit->options
@@ -387,6 +472,30 @@ msgstr "在工具提示中顯示完整路徑"
 msgid "Replace icons with stars"
 msgstr ""
 
+#. settings-schema.json->showFavoriteApps->description
+#, fuzzy
+msgid "Show favorite apps"
+msgstr "顯示最近的文件"
+
+#. settings-schema.json->favAppsLabel->description
+msgid ""
+"Below are the favorite applications displayed in the menu when checked.\n"
+"The Name can be changed.\n"
+"The Launcher must not be changed."
+msgstr ""
+
+#. settings-schema.json->favApps->description
+msgid "Favorite apps shown"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid "⚠️ Launcher"
+msgstr ""
+
+#. settings-schema.json->favAppsPopulateButton->description
+msgid "Add all your Favorite Apps"
+msgstr ""
+
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
 msgstr "顯示最近的文件"
@@ -409,4 +518,17 @@ msgstr "隱私"
 
 #. settings-schema.json->btnIconBrowser->description
 msgid "Icon browser"
+msgstr ""
+
+#. settings-schema.json->showCustomDocuments->description
+#, fuzzy
+msgid "Show Custom documents"
+msgstr "顯示最近的文件"
+
+#. settings-schema.json->labelCustomDocuments->description
+msgid ""
+"URI: Enter the link to your custom document or application-name.desktop here "
+"(as in /usr/share/applications/).\n"
+"To separate them into categories, you can add a line without a URI, but with "
+"a name as the category title (no icon is necessary)."
 msgstr ""

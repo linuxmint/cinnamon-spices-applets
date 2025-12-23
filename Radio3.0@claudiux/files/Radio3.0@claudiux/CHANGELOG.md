@@ -1,3 +1,21 @@
+### v3.10.0~20251211
+  * Working well with Cinnamon 6.6.
+
+### v3.9.5~20251129
+  * Better file monitoring.
+
+### v3.9.4~20251124
+  * Minor bugfix (menu).
+
+### v3.9.3~20251121
+  * Updates to-string() function.
+
+### v3.9.2~20251121
+  * Improves file monitoring.
+
+### v3.9.1~20251106
+  * Improves stability.
+
 ### v3.9.0~20251102
   * Improves stability.
 

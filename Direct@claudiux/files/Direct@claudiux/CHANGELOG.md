@@ -1,3 +1,34 @@
+### v1.6.0~20251222
+* Add Custom section: You can now add your own local links and applications,also using categories.
+* You are now able to set the width of a section in the menu.
+* Fixes [#8069](https://github.com/linuxmint/cinnamon-spices-applets/issues/8069).
+
+
+### v1.5.0~20251214
+* Now available: Custom sorting of favorite documents.
+* Fixes an issue with an icon when certain themes are in use.
+* Fixes [#8070](https://github.com/linuxmint/cinnamon-spices-applets/issues/8070).
+* Fixes [#8071](https://github.com/linuxmint/cinnamon-spices-applets/issues/8071).
+
+### v1.4.0~20251212
+* Use xlet-settings instead of cinnamon-settings to configure applet.
+
+### v1.3.3~20251124
+* Makes optional each icon-link to settings.
+* Fixes [#7996](https://github.com/linuxmint/cinnamon-spices-applets/issues/7996)
+
+### v1.3.2~20251124
+* Adds an icon next to each section title to open the settings.
+
+### v1.3.1~20251115
+* Adds option "Open the menu hovering over the icon".
+
+### v1.3.0~20251112
+* Adds the Favorite Apps section.
+
+### v1.2.0~20251109
+* Anticipates likely future configurations for Cinnamon.
+
 ### v1.1.2~20251022
 * Adds option *Do not display the tooltip*.
 

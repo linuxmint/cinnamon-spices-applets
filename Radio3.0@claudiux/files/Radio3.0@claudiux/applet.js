@@ -881,23 +881,22 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
             this.emit('activate', menuItem, true); //keepMenu replaced with true
         });
         this._signals.connect(menuItem, 'destroy', () => {
-            if (menuItem && menuItem.menu) {
-              if (this._signals.isConnected('activate', menuItem.menu))
-                this._signals.disconnect('activate', menuItem.menu);
-              if (this._signals.isConnected('active-changed', menuItem.menu))
-                this._signals.disconnect('active-changed', menuItem.menu);
-              if (this._signals.isConnected('open-state-changed', menuItem.menu))
-                this._signals.disconnect('open-state-changed', menuItem.menu);
-                //~ this._signals.disconnect('open-state-changed', this);
-            }
-            if (menuItem) {
-              if (this._signals.isConnected('activate', menuItem))
-                this._signals.disconnect('activate', menuItem);
-              if (this._signals.isConnected('active-changed', menuItem))
-                this._signals.disconnect('active-changed', menuItem);
-               if (this._signals.isConnected('sensitive-changed', menuItem))
-              this._signals.disconnect('sensitive-changed', menuItem);
-            }
+            //~ if (menuItem && menuItem.menu) {
+              //~ if (this._signals.isConnected('activate', menuItem.menu))
+                //~ this._signals.disconnect('activate', menuItem.menu);
+              //~ if (this._signals.isConnected('active-changed', menuItem.menu))
+                //~ this._signals.disconnect('active-changed', menuItem.menu);
+              //~ if (this._signals.isConnected('open-state-changed', menuItem.menu))
+                //~ this._signals.disconnect('open-state-changed', menuItem.menu);
+            //~ }
+            //~ if (menuItem) {
+              //~ if (this._signals.isConnected('activate', menuItem))
+                //~ this._signals.disconnect('activate', menuItem);
+              //~ if (this._signals.isConnected('active-changed', menuItem))
+                //~ this._signals.disconnect('active-changed', menuItem);
+               //~ if (this._signals.isConnected('sensitive-changed', menuItem))
+              //~ this._signals.disconnect('sensitive-changed', menuItem);
+            //~ }
 
             if (menuItem == this._activeMenuItem)
                 this._activeMenuItem = null;
@@ -911,7 +910,7 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
             this.box.add(menuItem.actor);
         } else {
             let items = this._getMenuItems();
-            if (position < items.length) {
+            if (position < items.length - 1) {
                 before_item = items[position].actor;
                 this.box.insert_child_below(menuItem.actor, before_item);
             } else
@@ -920,12 +919,14 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
         if (menuItem instanceof PopupMenuSection) {
             this._connectSubMenuSignals(menuItem, menuItem);
             this._signals.connect(menuItem, 'destroy', () => {
-              if (this._signals.isConnected('activate', menuItem))
-                this._signals.disconnect('activate', menuItem);
-              if (this._signals.isConnected('active-changed', menuItem))
-                this._signals.disconnect('active-changed', menuItem);
+              //~ if (this._signals.isConnected('activate', menuItem)) {
+                //~ try {this._signals.disconnect('activate', menuItem)} catch(e) {};
+              //~ }
+              //~ if (this._signals.isConnected('active-changed', menuItem)) {
+                //~ try {this._signals.disconnect('active-changed', menuItem)} catch(e) {};
+              //~ }
 
-                this.length--;
+              this.length--;
             });
         } else if (menuItem instanceof PopupSubMenuMenuItem) {
             if (before_item == null)
@@ -1382,9 +1383,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           while (file != null) {
             let name = file.get_name();
             if (name.startsWith("R3SongArt")) {
-                let f = file_new_for_path(dir_path+"/"+name);
-                if (f.query_exists(null))
-                  f.delete(null);
+            this.rm_file(`${dir_path}/${name}`);
+            //~ let f = file_new_for_path(dir_path+"/"+name);
+            //~ if (f.query_exists(null))
+              //~ f.delete(null);
             }
             file = dir_children.next_file(null);
           }
@@ -1994,6 +1996,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.titleMonitor = file.monitor_file(FileMonitorFlags.NONE, new Cancellable());
       this.titleMonitorId = this.titleMonitor.connect('changed', () => { this._on_mpv_title_changed() });
     } catch(e) {
+      this.titleMonitor = null;
+      this.titleMonitorId = null;
       logError("Unable to monitor %s!".format(MPV_TITLE_FILE), e)
     }
   }
@@ -2007,6 +2011,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.r30stopMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, new Cancellable());
       this.r30stopMonitorId = this.r30stopMonitor.connect('changed', () => { this._on_r30stop_changed() });
     } catch(e) {
+      this.r30stopMonitor = null;
       logError("Unable to monitor %s!".format(R30STOP), e)
     }
   }
@@ -2020,6 +2025,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.r30nextMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, new Cancellable());
       this.r30nextMonitorId = this.r30nextMonitor.connect('changed', (event) => { this.on_next_event(event) });
     } catch(e) {
+      this.r30nextMonitor = null;
       logError("Unable to monitor %s!".format(R30NEXT), e)
     }
   }
@@ -2035,6 +2041,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.r30previousMonitorId = this.r30previousMonitor.connect('changed', (event) => { this.on_previous_event(event) });
 
     } catch(e) {
+      this.r30previousMonitor = null;
       logError("Unable to monitor %s!".format(R30PREVIOUS), e)
     }
   }
@@ -2046,10 +2053,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     try {
       this.titleMonitor.disconnect(this.titleMonitorId);
       this.titleMonitor.cancel();
-      this.titleMonitor = null;
-      this.titleMonitorId = null;
     } catch(e) {
       logError("Unable to unmonitor %s!".format(MPV_TITLE_FILE), e)
+    } finally {
+      this.titleMonitor = null;
+      this.titleMonitorId = null;
     }
   }
 
@@ -2059,10 +2067,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     try {
       this.r30stopMonitor.disconnect(this.r30stopMonitorId);
       this.r30stopMonitor.cancel();
-      this.r30stopMonitor = null;
-      this.r30stopMonitorId = null;
     } catch(e) {
       logError("Unable to unmonitor %s!".format(R30STOP), e)
+    } finally {
+      this.r30stopMonitor = null;
+      this.r30stopMonitorId = null;
     }
   }
 
@@ -2072,10 +2081,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     try {
       this.r30previousMonitor.disconnect(this.r30previousMonitorId);
       this.r30previousMonitor.cancel();
-      this.r30previousMonitor = null;
-      this.r30previousMonitorId = null;
     } catch(e) {
       logError("Unable to unmonitor %s!".format(R30PREVIOUS), e)
+    } finally {
+      this.r30previousMonitor = null;
+      this.r30previousMonitorId = null;
     }
   }
 
@@ -2085,10 +2095,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     try {
       this.r30nextMonitor.disconnect(this.r30nextMonitorId);
       this.r30nextMonitor.cancel();
-      this.r30nextMonitor = null;
-      this.r30nextMonitorId = null;
     } catch(e) {
       logError("Unable to unmonitor %s!".format(R30NEXT), e)
+    } finally {
+      this.r30nextMonitor = null;
+      this.r30nextMonitorId = null;
     }
   }
 
@@ -3556,11 +3567,18 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.progress = 10/REFRESH_INTERVAL;
     this.interval = setInterval(() => { this.on_progress_change(); }, 100);  // 100 ms.
+    
+    this.appletRunning = true;
 
-    this.monitor_mpv_title();
-    this.monitor_r30stop();
-    this.monitor_r30next();
-    this.monitor_r30previous();
+    timeout_add_seconds(1, () => { 
+      this.monitor_mpv_title(); 
+      //~ return this.titleMonitor == null 
+      return this.appletRunning;
+    });
+    timeout_add_seconds(1, () => { this.monitor_r30stop(); return this.r30stopMonitor == null });
+    timeout_add_seconds(1, () => { this.monitor_r30next(); return this.r30nextMonitor == null });
+    timeout_add_seconds(1, () => { this.monitor_r30previous(); return this.r30previousMonitor == null });
+
     this.set_MPV_ALIAS();
     spawnCommandLine("%s %s".format(this.MPV_ALIAS, _id));
     this.mpvStatus = "PLAY";
@@ -3579,7 +3597,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     _id = null;
     recentRadios = null;
 
-    this.appletRunning = true;
+    //~ this.appletRunning = true;
   }
 
   stop_mpv_radio(notify_user=true) {
@@ -4077,7 +4095,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   on_applet_added_to_panel() {
     // Run all monitors:
     this.on_network_monitoring_changed();
-    //~ this.monitor_mpv_title();
+    this.monitor_mpv_title();
     this.monitor_jobs_dir();
     this.monitor_rec_folder();
     //~ this.monitor_r30stop();
@@ -4894,7 +4912,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
               if (exitCode === 0) {
                   if (stdout.startsWith("opt1")) {
                     //~ spawnCommandLineAsync("cinnamon-settings extensions -t download");
-                    spawnCommandLine("cinnamon-settings extensions -t download");
+                    spawnCommandLine("cinnamon-settings extensions -t 1");
                   } else {
                     this.OSDhorizontal = false;
                   }
@@ -5332,7 +5350,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             (stdout, stderr, exitCode) => {
               if (exitCode === 0) {
                 if (stdout.startsWith("opt1")) {
-                  spawn(["cinnamon-settings", "desklets", "-t", "download"]);
+                  spawn(["cinnamon-settings", "desklets", "-t", "1"]);
                 }
               }
             }
@@ -6283,8 +6301,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   // Behavior:
 
   on_desklet_open_settings_button_clicked() {
-    //~ spawnCommandLineAsync("cinnamon-settings desklets "+DESKLET_UUID);
-    spawnCommandLine("cinnamon-settings desklets "+DESKLET_UUID);
+    spawnCommandLine("xlet-settings desklet "+DESKLET_UUID);
   }
 
   _is_desklet_activated() {

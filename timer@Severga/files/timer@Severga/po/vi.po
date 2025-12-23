@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# TIMER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Severga, 2023
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-17 13:45+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-19 13:41-0500\n"
 "PO-Revision-Date: 2025-10-12 16:49+0700\n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -18,86 +19,87 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:42 applet.js:207 applet.js:232 applet.js:257 applet.js:307
-#: applet.js:423 applet.js:493
+#. applet.js:45 applet.js:217 applet.js:244 applet.js:271 applet.js:335
+#. applet.js:465 applet.js:537
 msgid "Timer: inactive"
 msgstr "Hẹn giờ: không hoạt động"
 
-#: applet.js:80 applet.js:223 applet.js:248 applet.js:494
+#. applet.js:89 applet.js:235 applet.js:262 applet.js:538
 msgid "In:  00:00:00"
 msgstr "Trong:  00:00:00"
 
-#: applet.js:83 applet.js:224 applet.js:249 applet.js:266 applet.js:316
-#: applet.js:464 applet.js:496
+#. applet.js:92 applet.js:236 applet.js:263 applet.js:284 applet.js:348
+#. applet.js:508 applet.js:540
 msgid "At:  --:--:--"
 msgstr "Lúc:  --:--:--"
 
-#: applet.js:86
-msgid "Turn off computer on timer"
+#. applet.js:95
+#, fuzzy
+msgid "Run command | turn off computer on timer"
 msgstr "Tắt máy tính theo hẹn giờ"
 
 #. settings-schema.json->openSubmenu->options
-#: applet.js:90 applet.js:369
+#. applet.js:100
 msgid "Quick setup"
 msgstr "Thiết lập nhanh"
 
-#: applet.js:91
+#. applet.js:101
 msgid "        Tip: set slider to zero to deactivate timer"
 msgstr "        Mẹo: đặt thanh trượt về 0 để tắt hẹn giờ"
 
-#: applet.js:100
+#. applet.js:110
 msgid "     00:00:00"
 msgstr "     00:00:00"
 
-#: applet.js:107
+#. applet.js:117
 msgid "24:00:00     "
 msgstr "24:00:00     "
 
 #. settings-schema.json->openSubmenu->options
-#: applet.js:121 applet.js:370
+#. applet.js:131
 msgid "Precise setup"
 msgstr "Thiết lập chính xác"
 
-#: applet.js:131 applet.js:156 applet.js:181
+#. applet.js:141 applet.js:166 applet.js:191
 msgid "  +  "
 msgstr "  +  "
 
-#: applet.js:135 applet.js:160 applet.js:185
+#. applet.js:145 applet.js:170 applet.js:195
 msgid "00"
 msgstr "00"
 
-#: applet.js:140 applet.js:165 applet.js:190
+#. applet.js:150 applet.js:175 applet.js:200
 msgid "  -  "
 msgstr "  -  "
 
-#: applet.js:148 applet.js:173
+#. applet.js:158 applet.js:183
 msgid "  :  "
 msgstr "  :  "
 
-#: applet.js:202
+#. applet.js:212
 msgid "Set time (today)"
 msgstr "Đặt thời gian (hôm nay)"
 
-#: applet.js:227
+#. applet.js:239
 msgid "Set time (tomorrow)"
 msgstr "Đặt thời gian (ngày mai)"
 
-#: applet.js:252
+#. applet.js:266
 msgid "Set period"
 msgstr "Đặt khoảng thời gian"
 
-#: applet.js:268
+#. applet.js:287
 msgid "Add preset"
 msgstr "Thêm mẫu"
 
 #. settings-schema.json->openSubmenu->options
 #. settings-schema.json->preset->description
 #. settings-schema.json->preset->tooltip
-#: applet.js:277
+#. applet.js:296
 msgid "Presets"
 msgstr "Mẫu"
 
-#: applet.js:293
+#. applet.js:321
 msgid ""
 "        Tip: use 'Precise setup' to add preset and  [ × ]  button to remove "
 "preset"
@@ -105,42 +107,61 @@ msgstr ""
 "        Mẹo: sử dụng 'Thiết lập chính xác' để thêm mẫu và nút  [ × ]  để xóa "
 "mẫu"
 
-#: applet.js:319
+#. applet.js:352
 msgid "[ × ]"
 msgstr "[ × ]"
 
-#: applet.js:454 applet.js:476
+#. applet.js:498 applet.js:520
 msgid "In:  "
 msgstr "Trong:  "
 
-#: applet.js:460 applet.js:484
+#. applet.js:504 applet.js:528
 msgid "At:  "
 msgstr "Lúc:  "
 
-#: applet.js:486
+#. applet.js:530
 msgid "Turn off in "
 msgstr "Tắt máy sau "
 
-#: applet.js:486
+#. applet.js:530
 msgid "s"
 msgstr "s"
 
-#: applet.js:488
+#. applet.js:532
 msgid "Timer: "
 msgstr "Hẹn giờ: "
 
 #. metadata.json->name
-#: applet.js:512
+#. applet.js:568
 msgid "Timer"
 msgstr "Hẹn giờ"
 
-#: applet.js:512
+#. applet.js:568
 msgid "Time's up!"
 msgstr "Hết giờ!"
 
 #. metadata.json->description
 msgid "A timer applet"
 msgstr "Một applet hẹn giờ"
+
+#. settings-schema.json->customCommand->description
+msgid "Command to run on timer (empty for turn off)"
+msgstr ""
+
+#. settings-schema.json->customCommand->tooltip
+msgid ""
+"Custom command to run on timer. Leave empty to turn off the computer on timer"
+msgstr ""
+
+#. settings-schema.json->cancelTurnOffOption->description
+msgid "Cancel run command (turn off) option"
+msgstr ""
+
+#. settings-schema.json->cancelTurnOffOption->tooltip
+msgid ""
+"Cancel the option to run command or turn off for subsequent use (triggers "
+"only at the moment count down finished)"
+msgstr ""
 
 #. settings-schema.json->soundOn->description
 #. settings-schema.json->soundOn->tooltip
@@ -155,6 +176,16 @@ msgstr "Đường dẫn tập tin âm thanh"
 #. settings-schema.json->showNotifications->description
 #. settings-schema.json->showNotifications->tooltip
 msgid "Show system notification on timer"
+msgstr "Hiển thị thông báo hệ thống khi hết giờ"
+
+#. settings-schema.json->customText->description
+#, fuzzy
+msgid "Custom notification text"
+msgstr "Hiển thị thông báo hệ thống khi hết giờ"
+
+#. settings-schema.json->customText->tooltip
+#, fuzzy
+msgid "Custom text of the system notification on timer"
 msgstr "Hiển thị thông báo hệ thống khi hết giờ"
 
 #. settings-schema.json->openSubmenu->description

@@ -1,7 +1,7 @@
 {
     "uuid": "simple-timer@naheller",
     "name": "Simple Timer",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "naheller",
-    "description": "A simple timer that notifies you when it's finished"
+    "description": "A timer applet that offers a compact, minimal interface."
 }

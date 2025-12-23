@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-31 21:09-0400\n"
-"PO-Revision-Date: 2025-08-08 08:01+0200\n"
+"PO-Revision-Date: 2025-11-17 10:04+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.8\n"
 
 #. 4.0/applet.js:611 6.0/applet.js:611 6.4/applet.js:589
 msgid "all buttons"
@@ -115,9 +115,8 @@ msgid "Places"
 msgstr "Helyek"
 
 #. 4.0/applet.js:3562 6.0/applet.js:3562 6.4/applet.js:3534
-#, fuzzy
 msgid "Prioritize window list position"
-msgstr "Az ablaklista gombjainak rögzítése"
+msgstr "Ablaklista pozíciójának rangsorolása"
 
 #. 4.0/applet.js:3582 6.0/applet.js:3582 6.4/applet.js:3554
 msgid "Always on top"
@@ -303,7 +302,7 @@ msgstr "Általános"
 #. 6.0->settings-schema.json->mouse-page->title
 #. 6.4->settings-schema.json->mouse-page->title
 msgid "Mouse"
-msgstr ""
+msgstr "Egér"
 
 #. 4.0->settings-schema.json->preview-page->title
 #. 6.0->settings-schema.json->preview-page->title
@@ -531,7 +530,7 @@ msgstr ""
 "Válassza ki az ablak állapotának típusát, amelynél az ablaklista gombjainak "
 "címkéit el kell rejteni. Alkalmazáskészletek esetén a címke továbbra is "
 "megjelenik, kivéve, ha az összes alkalmazásablak rendelkezik a kiválasztott "
-"tulajdonsággal."
+"tulajdonsággal"
 
 #. 4.0->settings-schema.json->display-indicators->options
 #. 6.0->settings-schema.json->display-indicators->options
@@ -787,7 +786,7 @@ msgstr ""
 "jelenik meg, ha a címke tartalmától függően megfelelő (azaz ha két vagy több "
 "ablak van egy csoportban, vagy ha a Windows munkaterülete vagy monitora nem "
 "egyezik meg az aktuálissal). Ha ez az opció le van tiltva, a címke mindig "
-"látható."
+"látható"
 
 #. 4.0->settings-schema.json->progress-display-type->options
 #. 4.0->settings-schema.json->display-pinned->options
@@ -958,9 +957,8 @@ msgstr "Tartalmazzon ablakokat minden munkaterületről"
 #. 4.0->settings-schema.json->remember-button-order->description
 #. 6.0->settings-schema.json->remember-button-order->description
 #. 6.4->settings-schema.json->remember-button-order->description
-#, fuzzy
 msgid "Allow prioritizing window list button order"
-msgstr "Az ablaklista gombjainak rögzítése"
+msgstr "Ablaklista gombsorrendjének rangsorolásának engedélyezése"
 
 #. 4.0->settings-schema.json->remember-button-order->tooltip
 #. 6.0->settings-schema.json->remember-button-order->tooltip
@@ -975,6 +973,14 @@ msgid ""
 "list position\" context menu option allows you to add and remove an "
 "application from the priority list."
 msgstr ""
+"Ennek az opciónak az engedélyezésével könnyedén szabályozhatja, hogy kedvenc "
+"alkalmazásai hol jelenjenek meg az ablaklistában. Ez az alkalmazások állandó "
+"pozícióprioritási sorrendjének fenntartásával érhető el. A prioritással "
+"rendelkező alkalmazások új ablaklista gombjai prioritási sorrendben, a "
+"prioritás nélküli alkalmazások előtt jelennek meg. A húzással történő "
+"egérhasználat automatikusan hozzáadja és átrendezi a prioritási listát. Az "
+"„Ablaklista pozíciójának priorizálása” helyi menüopció lehetővé teszi egy "
+"alkalmazás hozzáadását és eltávolítását a prioritási listából."
 
 #. 4.0->settings-schema.json->show-tooltips->description
 #. 6.0->settings-schema.json->show-tooltips->description
@@ -1048,7 +1054,7 @@ msgid ""
 msgstr ""
 "Ha engedélyezve van, egy teljes méretű előnézeti ablak jelenik meg, amikor "
 "az egérmutatót egy ablaklista gomb fölé viszi. Az előnézet megjelenése "
-"előtti késleltetést a Speciális lapon található beállítás szabályozza."
+"előtti késleltetést a Speciális lapon található beállítás szabályozza"
 
 #. 4.0->settings-schema.json->no-click-activate->description
 #. 6.0->settings-schema.json->no-click-activate->description
@@ -2332,16 +2338,14 @@ msgstr ""
 #. 4.0->settings-schema.json->hotkey-sequence->description
 #. 6.0->settings-schema.json->hotkey-sequence->description
 #. 6.4->settings-schema.json->hotkey-sequence->description
-#, fuzzy
 msgid "Smart numeric hotkeys (using \"1\" automatically extends to 0-9)"
 msgstr ""
-"Intelligens numerikus gyorsbillentyűk (az „1” használata automatikusan 1-től "
-"9-ig terjed)"
+"Intelligens numerikus gyorsbillentyűk (az „1” használata automatikusan 0–9-"
+"re bővíti a billentyűket)"
 
 #. 4.0->settings-schema.json->hotkey-sequence->tooltip
 #. 6.0->settings-schema.json->hotkey-sequence->tooltip
 #. 6.4->settings-schema.json->hotkey-sequence->tooltip
-#, fuzzy
 msgid ""
 "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will "
 "automatically create hotkeys 0 through 9 (i.e. Alt+0 through Alt+9). The "
@@ -2350,9 +2354,10 @@ msgid ""
 "and 10th window is activated by hotkey 0"
 msgstr ""
 "Ha engedélyezve van, az „1”-es számra végződő gyorsbillentyűk (azaz Alt+1) "
-"automatikusan létrehozzák az 1–9. gyorsbillentyűket (azaz Alt+1-től Alt+9-"
-"ig). A hozzárendelt alkalmazás első 9 ablaka, az ablaklistán sorrendben, a 9 "
-"gyorsbillentyűvel aktiválódik."
+"automatikusan létrehozzák a 0–9-es gyorsbillentyűket (azaz Alt+0-tól Alt+9-"
+"ig). A hozzárendelt alkalmazás első 10 ablakát, az ablaklistán sorrendben, a "
+"10 gyorsbillentyű aktiválja. Az első ablakot az 1-es, a 10-es "
+"gyorsbillentyűt pedig a 0-s"
 
 #. 4.0->settings-schema.json->hotkey-grave-help->description
 #. 6.0->settings-schema.json->hotkey-grave-help->description

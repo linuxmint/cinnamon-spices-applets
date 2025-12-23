@@ -80,6 +80,7 @@
         "graphSpacing",
         "thickness",
         "useIconSize",
+        "graphHeight",
         "refreshRate"
       ]
     },
@@ -318,6 +319,16 @@
     "type": "switch",
     "default": false,
     "description": "Limit height to the size of a colored icon"
+  },
+  "graphHeight": {
+    "type": "scale",
+    "default": 40,
+    "description": "Graph height (pixels)",
+    "min": 16,
+    "max": 64,
+    "step": 4,
+    "show-value": true,
+    "dependency": "!useIconSize"
   },
   "refreshRate": {
     "type": "scale",

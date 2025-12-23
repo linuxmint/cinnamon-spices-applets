@@ -1,3 +1,15 @@
+### v3.2.0~20251211
+  * Added option "Graph height (pixels)". Many thanks to Alex Rock (@Pierstoval)!
+  * Now compatible with Cinnamon 6.6.
+
+### v3.1.7~20251111
+  * Loop improvement.
+
+### v3.1.6~20251106
+  * Fixes [#7898](https://github.com/linuxmint/cinnamon-spices-applets/issues/7898)
+  * Avoids freeze at startup.
+  * Improved tooltip.
+
 ### v3.1.5~20251029
   * Avoids freeze at startup.
   * Fixes [#7898](https://github.com/linuxmint/cinnamon-spices-applets/issues/7898)

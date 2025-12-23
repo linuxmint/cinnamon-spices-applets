@@ -97,3 +97,11 @@ msgid ""
 "Usually it should end with -e so it will execute the supplied ssh command, "
 "check your chosen terminal's manual."
 msgstr "Thông thường kết thúc bằng -e để thực thi lệnh ssh, kiểm tra hướng dẫn Terminal bạn chọn."
+
+#. settings-schema.json->showConnectionNotification->description
+msgid "Show notification when launching SSH connection"
+msgstr "Hiển thị thông báo khi khởi chạy kết nối SSH"
+
+#. settings-schema.json->showConnectionNotification->tooltip
+msgid "Display a notification message when SSH terminal is launched"
+msgstr "Hiển thị thông báo khi Terminal SSH được khởi chạy"

@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-10-11 12:31+0200\n"
-"PO-Revision-Date: 2025-10-11 12:37+0200\n"
+"PO-Revision-Date: 2025-11-17 12:39+0100\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.8\n"
 
 #. applet.js:286
 msgid "unassigned"
@@ -241,7 +241,7 @@ msgstr "(Nincs megadva)"
 #. settings-schema.json->category-to-move->options
 #. applet.js:587 applet.js:5528
 msgid "(Blacklist)"
-msgstr ""
+msgstr "(Tiltólista)"
 
 #. applet.js:2263
 msgid "Start"
@@ -421,7 +421,7 @@ msgstr "A frissítés sikeresen befejeződött"
 
 #. applet.js:4625 applet.js:4681
 msgid "ERROR: Invalid YT video URL!"
-msgstr "HIBA: Érvénytelen a YouTube-videó URL-címe"
+msgstr "HIBA: Érvénytelen a YouTube-videó URL-címe!"
 
 #. applet.js:4650
 msgid "Unable to extract a single soundtrack"
@@ -846,7 +846,7 @@ msgstr "Frissítse ezt az állomáslistát"
 
 #. settings-schema.json->sectionBlacklist->title
 msgid "Unwanted (blacklist)"
-msgstr ""
+msgstr "Nemkívánatos (tiltólista)"
 
 #. settings-schema.json->sectionImportRadiopp->title
 msgid "Only for Radio++ users"
@@ -1108,7 +1108,7 @@ msgstr "Frissítse az állomáslistámat a Radio Database adataival"
 
 #. settings-schema.json->blacklist->columns->title
 msgid "Blacklisted URL"
-msgstr ""
+msgstr "Tiltott URL"
 
 #. settings-schema.json->import-radiopp-button->description
 msgid "Import your stations from Radio++"
@@ -1152,9 +1152,8 @@ msgid "Remove selected items from this list"
 msgstr "A kiválasztott elemek eltávolítása a listáról"
 
 #. settings-schema.json->import-blacklist-button->description
-#, fuzzy
 msgid "Blacklist selected items from this list"
-msgstr "A kiválasztott elemek eltávolítása a listáról"
+msgstr "Kiválasztott elemek tiltólistára helyezése erről a listáról"
 
 #. settings-schema.json->import-select-all->description
 #. settings-schema.json->search-select-all->description

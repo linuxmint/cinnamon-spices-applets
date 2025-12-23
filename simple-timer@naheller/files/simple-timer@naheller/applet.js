@@ -1,4 +1,3 @@
-const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
@@ -7,61 +6,28 @@ const Tooltips = imports.ui.tooltips;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const GLib = imports.gi.GLib;
-const Gettext = imports.gettext;
-const UUID = 'simple-timer@naheller';
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
-
-function _(str) {
-    return Gettext.dgettext(UUID, str);
-}
-
-const TIMER_INTERVAL_MS = 1000;
-
-const ONE_MIN_IN_SECONDS = 60;
-const ONE_HOUR_IN_SECONDS = ONE_MIN_IN_SECONDS * 60;
-const ONE_DAY_IN_SECONDS = ONE_HOUR_IN_SECONDS * 24;
-
-const BUTTON_TOOLTIP_START = _('Start');
-const BUTTON_TOOLTIP_RESUME = _('Resume');
-const BUTTON_TOOLTIP_PAUSE = _('Pause');
-const BUTTON_TOOLTIP_RESET = _('Reset');
-const BUTTON_TOOLTIP_CLEAR = _('Clear');
-
-// Found in /usr/share/icons/<theme-name>/symbolic/
-const ICON_NAME_START = 'media-playback-start-symbolic';
-const ICON_NAME_PAUSE = 'media-playback-pause-symbolic';
-const ICON_NAME_STOP = 'media-playback-stop-symbolic';
-const ICON_NAME_INCR = 'go-up-symbolic';
-const ICON_NAME_DECR = 'go-down-symbolic';
-const ICON_NAME_RESET = 'object-rotate-right-symbolic';
-const ICON_NAME_CLEAR = 'user-trash-symbolic';
-
-const ICON_SIZE_LG = 20;
-const ICON_SIZE_SM = 12;
-
-const NOTIFICATION_TITLE = _('Timer');
-const NOTIFICATION_MSG = _('Your timer is finished');
-
-const DIGIT_NAMES = {
-    SECOND_TENS: 'SECOND_TENS',
-    SECOND_ONES: 'SECOND_ONES',
-    MINUTE_TENS: 'MINUTE_TENS',
-    MINUTE_ONES: 'MINUTE_ONES',
-    HOUR_TENS: 'HOUR_TENS',
-    HOUR_ONES: 'HOUR_ONES'
-};
-
-const CLOCK_INCREMENT = 'INCREMENT';
-const CLOCK_DECREMENT = 'DECREMENT';
-
-const CLOCK_STYLE = 'margin: 0 10px 10px 10px;'
-const CLOCK_STYLE_ACTIVE = 'margin: 10px 10px 20px 10px;';
-const CLOCK_DIGIT_STYLE = 'margin: 0 10px 10px 10px;'
-const CLOCK_DIGIT_STYLE_ACTIVE = 'margin: 10px 10px 20px 10px;';
-const CLOCK_BUTTON_STYLE = 'width: 20px; padding: 10px 0;';
-const CONTROL_BUTTON_STYLE = 'width: 40px; padding: 10px;';
-const FONT_SIZE = '22px';
+const {
+    TIMER_INTERVAL_MS,
+    ONE_MIN_IN_SECONDS,
+    ONE_HOUR_IN_SECONDS,
+    ONE_DAY_IN_SECONDS,
+    BUTTON_TOOLTIPS,
+    ICON_NAMES,
+    ICON_SIZE_LG,
+    ICON_SIZE_SM,
+    NOTIFICATION_TITLE,
+    NOTIFICATION_MSG,
+    DIGIT_NAMES,
+    CLOCK_INCREMENT,
+    CLOCK_DECREMENT,
+    CLOCK_STYLES,
+    CONTROL_BUTTON_STYLE,
+    FONT_SIZE,
+    APPLET_ICON_NAME,
+    APPLET_ICON_GREEN,
+    APPLET_ICON_TOOLTIP
+} = require('./constants.js');
 
 
 function MyApplet(metadata, orientation, panelHeight, instanceId) {
@@ -75,8 +41,13 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 
         try {
-            this.set_applet_icon_symbolic_name('alarm-white');
-            this.set_applet_tooltip(_('Simple Timer'));
+            this.set_applet_icon_symbolic_name(APPLET_ICON_NAME);
+            this.set_applet_tooltip(APPLET_ICON_TOOLTIP);
+
+            // Set applet icon on instance so its color can be changed later
+            this.appletIcon = this.actor.get_children()?.find(item => {
+                return item?.child?.['icon-name'] === APPLET_ICON_NAME;
+            });
 
             this.timerId = null;
             this.timerInitialSec = this.timerCurrentSec = 0;
@@ -112,7 +83,7 @@ MyApplet.prototype = {
         
         menuSection.actor.add_actor(this.clock);
         menuSection.actor.add_actor(this.controlBar);
-        
+
         this.menu.addMenuItem(menuSection);
 
         this.menuManager.addMenu(this.menu);
@@ -131,7 +102,7 @@ MyApplet.prototype = {
         const clockBox = new St.BoxLayout({
             name: 'clock',
             x_align: Clutter.ActorAlign.CENTER,
-            style: CLOCK_STYLE
+            style: CLOCK_STYLES.DEFAULT
         });
 
         clockBox.add_child(hourTensColumn);
@@ -184,19 +155,19 @@ MyApplet.prototype = {
 
     getClockColumn(digitName, digitValue) {
 
-        const iconIncrement = getIcon(ICON_NAME_INCR, ICON_SIZE_SM);
-        const iconDecrement = getIcon(ICON_NAME_DECR, ICON_SIZE_SM);
+        const iconIncrement = getIcon(ICON_NAMES.INCR, ICON_SIZE_SM);
+        const iconDecrement = getIcon(ICON_NAMES.DECR, ICON_SIZE_SM);
 
         const incrementButtonName = `${DIGIT_NAMES[digitName]}_INC`;
         const decrementButtonName = `${DIGIT_NAMES[digitName]}_DEC`;
 
         // Set buttons instance level so they can be shown/hidden later
-        this[incrementButtonName] = getButton(iconIncrement, CLOCK_BUTTON_STYLE);
+        this[incrementButtonName] = getButton(iconIncrement, CLOCK_STYLES.BUTTON);
         this[incrementButtonName].connect('clicked', () => {
             this.adjustClockDigit(CLOCK_INCREMENT, digitName);
         });
 
-        this[decrementButtonName] = getButton(iconDecrement, CLOCK_BUTTON_STYLE);
+        this[decrementButtonName] = getButton(iconDecrement, CLOCK_STYLES.BUTTON);
         this[decrementButtonName].connect('clicked', () => {
             this.adjustClockDigit(CLOCK_DECREMENT, digitName);
         });
@@ -217,11 +188,13 @@ MyApplet.prototype = {
     },
 
     getControlBar() {
-        const iconStart = getIcon(ICON_NAME_START, ICON_SIZE_LG);
-        const iconClear = getIcon(ICON_NAME_CLEAR, ICON_SIZE_LG);
-        const iconReset = getIcon(ICON_NAME_RESET, ICON_SIZE_LG);
+        const iconStart = getIcon(ICON_NAMES.START, ICON_SIZE_LG);
+        const iconClear = getIcon(ICON_NAMES.CLEAR, ICON_SIZE_LG);
+        const iconReset = getIcon(ICON_NAMES.RESET, ICON_SIZE_LG);
 
         this.startPauseButton = getButton(iconStart, CONTROL_BUTTON_STYLE, true);
+        this.startPauseButton.reactive = this.timerCurrentSec != 0;
+
         this.resetButton = getButton(iconReset, CONTROL_BUTTON_STYLE);
         this.clearButton = getButton(iconClear, CONTROL_BUTTON_STYLE);
 
@@ -246,13 +219,13 @@ MyApplet.prototype = {
         // Tooltips
 
         this.startPauseButton.tooltip = new Tooltips.Tooltip(this.startPauseButton)
-        this.startPauseButton.tooltip.set_text(BUTTON_TOOLTIP_START)
+        this.startPauseButton.tooltip.set_text(BUTTON_TOOLTIPS.START)
 
         this.resetButton.tooltip = new Tooltips.Tooltip(this.resetButton)
-        this.resetButton.tooltip.set_text(BUTTON_TOOLTIP_RESET)
+        this.resetButton.tooltip.set_text(BUTTON_TOOLTIPS.RESET)
 
         this.clearButton.tooltip = new Tooltips.Tooltip(this.clearButton)
-        this.clearButton.tooltip.set_text(BUTTON_TOOLTIP_CLEAR)
+        this.clearButton.tooltip.set_text(BUTTON_TOOLTIPS.CLEAR)
 
         const controlBar = new St.BoxLayout({
             x_align: Clutter.ActorAlign.CENTER
@@ -304,11 +277,13 @@ MyApplet.prototype = {
             TIMER_INTERVAL_MS
         );
 
-        this.startPauseButton.child.set_icon_name(ICON_NAME_PAUSE);
-        this.clock.set_style(CLOCK_STYLE_ACTIVE);
-        this.startPauseButton.tooltip.set_text(BUTTON_TOOLTIP_PAUSE);
+        this.clock.set_style(CLOCK_STYLES.ACTIVE);
+
+        this.startPauseButton.child.set_icon_name(ICON_NAMES.PAUSE);
+        this.startPauseButton.tooltip.set_text(BUTTON_TOOLTIPS.PAUSE);
+
         this.hideAllClockAdjustButtons();
-        this.set_applet_icon_symbolic_name('alarm-green');
+        this.updateAppletIconColor();
     },
 
     pauseTimer() {
@@ -317,11 +292,13 @@ MyApplet.prototype = {
         }
 
         this.clearTimerInterval();
-        this.startPauseButton.child.set_icon_name(ICON_NAME_START);
-        this.clock.set_style(CLOCK_STYLE)
+        this.clock.set_style(CLOCK_STYLES.DEFAULT);
+
+        this.startPauseButton.child.set_icon_name(ICON_NAMES.START);
+        this.startPauseButton.tooltip.set_text(BUTTON_TOOLTIPS.RESUME);
+
         this.showAllClockAdjustButtons();
-        this.startPauseButton.tooltip.set_text(BUTTON_TOOLTIP_RESUME)
-        this.set_applet_icon_symbolic_name('alarm-white');
+        this.updateAppletIconColor();
     },
 
     resetTimer() {
@@ -332,12 +309,14 @@ MyApplet.prototype = {
         this.timerCurrentSec = this.timerInitialSec;
 
         this.updateClockText();
+        this.clock.set_style(CLOCK_STYLES.DEFAULT);
+
         this.startPauseButton.set_checked(false);
-        this.startPauseButton.child.set_icon_name(ICON_NAME_START);
-        this.clock.set_style(CLOCK_STYLE)
+        this.startPauseButton.child.set_icon_name(ICON_NAMES.START);
+        this.startPauseButton.tooltip.set_text(BUTTON_TOOLTIPS.START);
+
         this.showAllClockAdjustButtons();
-        this.startPauseButton.tooltip.set_text(BUTTON_TOOLTIP_START)
-        this.set_applet_icon_symbolic_name('alarm-white');
+        this.updateAppletIconColor();
     },
 
     clearTimer() {
@@ -422,6 +401,16 @@ MyApplet.prototype = {
         }
 
         this.updateClockText();
+    },
+
+    updateAppletIconColor() {
+        if (!this.appletIcon) return;
+
+        if (!!this.timerId) {
+            this.appletIcon.style = `color: ${APPLET_ICON_GREEN};`;
+        } else {
+            this.appletIcon.style = null;
+        }
     }
 };
 
@@ -555,7 +544,7 @@ function getButton(iconName, style = '', isToggle = false) {
 function getClockDigit(text) {
     const label = new St.Label({
         text,
-        style: 'font-size: 22px;',
+        style: `font-size: ${FONT_SIZE};`
     });
 
     const bin = new St.Bin({
