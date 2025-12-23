@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-12-20 06:52-0100\n"
-"PO-Revision-Date: 2024-09-22 11:29-0300\n"
+"PO-Revision-Date: 2025-12-22 22:19-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.8\n"
 
 #. 4.2/applet.js:56 5.4/applet.js:56
 msgid ""
@@ -484,49 +484,54 @@ msgid "Pupil Color"
 msgstr "Color de pupila"
 
 #. 6.2->settings-schema.json->blink-effect->description
-#, fuzzy
 msgid "Blink Effect"
-msgstr "Efectos"
+msgstr "Efecto parpadeo"
 
 #. 6.2->settings-schema.json->blink-effect->options
 msgid "None"
-msgstr ""
+msgstr "Ninguno"
 
 #. 6.2->settings-schema.json->blink-effect->options
 msgid "When Idle"
-msgstr ""
+msgstr "Cuando está inactivo"
 
 #. 6.2->settings-schema.json->blink-effect->options
 msgid "Always"
-msgstr ""
+msgstr "Siempre"
 
 #. 6.2->settings-schema.json->blink-period->description
 msgid "Blink Period"
-msgstr ""
+msgstr "Período de parpadeo"
 
 #. 6.2->settings-schema.json->blink-period->tooltip
 msgid ""
 "This setting controls the duration of a full blink cycle (closing and "
 "opening). Measured in milliseconds."
 msgstr ""
+"Este ajuste controla la duración de un ciclo completo de parpadeo (cierre y "
+"apertura). Se mide en milisegundos."
 
 #. 6.2->settings-schema.json->blink-gap->description
-#, fuzzy
 msgid "Blink Gap"
-msgstr "Parpadeo"
+msgstr "Intervalo de parpadeo"
 
 #. 6.2->settings-schema.json->blink-gap->tooltip
 msgid ""
 "This setting controls the time gap between two consecutive blinks. Measured "
 "in milliseconds."
 msgstr ""
+"Esta configuración controla el intervalo de tiempo entre dos parpadeos "
+"consecutivos. Se mide en milisegundos."
 
 #. 6.2->settings-schema.json->idle-delay->description
 msgid "Idle Delay"
-msgstr ""
+msgstr "Retardo de inactividad"
 
 #. 6.2->settings-schema.json->idle-delay->tooltip
 msgid ""
 "This setting controls the time of inactivity (no mouse or keyboard input) "
 "after which the system is considered idle. Measured in milliseconds."
 msgstr ""
+"Esta configuración controla el tiempo de inactividad (sin entradas del ratón "
+"ni del teclado) tras el cual el sistema se considera inactivo. Se mide en "
+"milisegundos."
