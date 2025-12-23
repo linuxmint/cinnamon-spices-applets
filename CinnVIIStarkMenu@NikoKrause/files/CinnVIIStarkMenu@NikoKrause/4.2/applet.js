@@ -2257,7 +2257,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
 
             // Quicklauncher places icon
             let quicklauncher_places_icon = this.quicklauncher_places[i].icon;
-            if (quicklauncher_places_icon == "")
+            if (!quicklauncher_places_icon)
                 quicklauncher_places_icon = "folder";
 
             // Quicklauncher places button
@@ -2285,7 +2285,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
 
             // Quicklauncher apps icon
             let quicklauncher_apps_icon = this.quicklauncher_apps[i].icon;
-            if (quicklauncher_apps_icon == "")
+            if (!quicklauncher_apps_icon)
                 quicklauncher_apps_icon = "exec";
             else if (!Gtk.IconTheme.get_default().has_icon(quicklauncher_apps_icon))
                 quicklauncher_apps_icon = "image-missing";

@@ -1,0 +1,137 @@
+# Spanish translation for app-drawer
+# Copyright (C) 2025 mostlynick3
+# This file is distributed under the same license as the app-drawer package.
+# mostlynick3 <>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: app-drawer@mostlynick3 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-12-17 08:31+0100\n"
+"PO-Revision-Date: 2025-12-18 12:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "App Drawer"
+msgstr "Cajón de aplicaciones"
+
+msgid "Full-screen app launcher with animations, transparency, a search box, and more."
+msgstr "Lanzador de aplicaciones a pantalla completa con animaciones, transparencia, cuadro de búsqueda y más."
+
+msgid "Navigation Settings"
+msgstr "Configuración de navegación"
+
+msgid "Navigation mode"
+msgstr "Modo de navegación"
+
+msgid "Button Navigation"
+msgstr "Navegación por botones"
+
+msgid "Scroll Horizontal"
+msgstr "Desplazamiento horizontal"
+
+msgid "Scroll Vertical"
+msgstr "Desplazamiento vertical"
+
+msgid "Layout Settings"
+msgstr "Configuración de diseño"
+
+msgid "Columns per page"
+msgstr "Columnas por página"
+
+msgid "Rows per page"
+msgstr "Filas por página"
+
+msgid "Icon size (px)"
+msgstr "Tamaño de icono (px)"
+
+msgid "Padding (px)"
+msgstr "Espaciado (px)"
+
+msgid "Label font size (pt)"
+msgstr "Tamaño de fuente de etiqueta (pt)"
+
+msgid "Features"
+msgstr "Funciones"
+
+msgid "Enable search bar"
+msgstr "Habilitar barra de búsqueda"
+
+msgid "Enable favorites"
+msgstr "Habilitar favoritos"
+
+msgid "Appearance Settings"
+msgstr "Configuración de apariencia"
+
+msgid "Background color"
+msgstr "Color de fondo"
+
+msgid "%"
+msgstr "%"
+
+msgid "Background opacity"
+msgstr "Opacidad de fondo"
+
+msgid "Container color"
+msgstr "Color de contenedor"
+
+msgid "Container opacity"
+msgstr "Opacidad de contenedor"
+
+msgid "Box color"
+msgstr "Color de cuadro"
+
+msgid "Box opacity"
+msgstr "Opacidad de cuadro"
+
+msgid "Box hover color"
+msgstr "Color de cuadro al pasar"
+
+msgid "Box hover opacity"
+msgstr "Opacidad de cuadro al pasar"
+
+msgid "Animation Settings"
+msgstr "Configuración de animaciones"
+
+msgid "Enable animations"
+msgstr "Habilitar animaciones"
+
+msgid "ms"
+msgstr "ms"
+
+msgid "Animation duration"
+msgstr "Duración de animación"
+
+msgid "Open animation"
+msgstr "Animación de apertura"
+
+msgid "Fade"
+msgstr "Desvanecer"
+
+msgid "Scale"
+msgstr "Escalar"
+
+msgid "Slide Up"
+msgstr "Deslizar arriba"
+
+msgid "Zoom"
+msgstr "Zoom"
+
+msgid "Close animation"
+msgstr "Animación de cierre"
+
+msgid "Slide Down"
+msgstr "Deslizar abajo"
+
+msgid "Button navigation page animation"
+msgstr "Animación de página de navegación por botones"
+
+msgid "Slide"
+msgstr "Deslizar"
+
+msgid "Crossfade"
+msgstr "Fundido cruzado"

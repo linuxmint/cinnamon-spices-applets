@@ -91,7 +91,7 @@ const RUNTIME_DIR = GLib.get_user_runtime_dir();
 const R30MPVSOCKET = RUNTIME_DIR + "/mpvradiosocket";
 
 // how long to show the output icon when volume is adjusted during media playback.
-var OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
+//~ var OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
 
 const IS_OSD150_ENABLED = () => {
     var enabled = false;
@@ -213,9 +213,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.instanceId = instanceId;
 
         this.real_ui_scale = 1.0;
+        this.menuWidth = 450;
         Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-real-scale.py", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 this.real_ui_scale = parseFloat(stdout);
+                this.menuWidth = Math.round(450 * this.real_ui_scale);
             }
         }, {});
 
@@ -322,9 +324,15 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("showalbum", "showalbum", () => {
             this.on_settings_changed()
         });
-        this.settings.bind("showalbumDelay", "showalbumDelay", () => {
-            this.on_settings_changed()
+        this.settings.bind("keepAlbumArtIcon", "keepAlbumArtIcon", (value) => {
+            this.on_settings_changed();
+            if (value)
+                this._on_reload_this_applet_pressed();
         });
+        this.settings.bind("showalbumButForSites", "showalbumButForSites");
+        //~ this.settings.bind("showalbumDelay", "showalbumDelay", () => {
+            //~ this.on_settings_changed()
+        //~ });
         this.settings.bind("truncatetext", "truncatetext", () => {
             this.on_settings_changed()
         });
@@ -798,7 +806,8 @@ class Sound150Applet extends Applet.TextIconApplet {
                         (stdout, stderr, exitCode) => {
                         if (exitCode === 0) {
                             if (stdout.startsWith("opt1")) {
-                                Util.spawn(["cinnamon-settings", "desklets", "-t", "download"]);
+                                //~ Util.spawn(["cinnamon-settings", "desklets", "-t", "download"]);
+                                Util.spawn(["cinnamon-settings", "desklets", "-t", "1"]);
                             }
                         }
                     }
@@ -869,7 +878,8 @@ class Sound150Applet extends Applet.TextIconApplet {
                         if (exitCode === 0) {
                             logDebug("stdout: " + stdout + " " + typeof stdout);
                             if (stdout.startsWith("opt1")) {
-                                Util.spawnCommandLineAsync("cinnamon-settings extensions -t download");
+                                //~ Util.spawnCommandLineAsync("cinnamon-settings extensions -t download");
+                                Util.spawnCommandLineAsync("cinnamon-settings extensions -t 1");
                             } else {
                                 this.OSDhorizontal = false;
                             }
@@ -1136,9 +1146,9 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_settings_changed() {
-        OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
-        if (this.showalbum && this.showalbumDelay >= 3)
-            OUTPUT_ICON_SHOW_TIME_SECONDS = this.showalbumDelay - 1;
+        //~ OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
+        //~ if (this.showalbum && this.showalbumDelay >= 3)
+            //~ OUTPUT_ICON_SHOW_TIME_SECONDS = this.showalbumDelay - 1;
         if (this.playerControl && this._activePlayer)
             this.setAppletTextIcon(this._players[this._activePlayer], true);
         else
@@ -1152,10 +1162,11 @@ class Sound150Applet extends Applet.TextIconApplet {
                 this.mute_in_switch.actor.hide();
 
         this._changeActivePlayer(this._activePlayer);
+        this.setIcon();
     }
 
     on_applet_added_to_panel() {
-        this.menu.actor.set_width(Math.round(450 * this.real_ui_scale));
+        this.menu.actor.set_width(this.menuWidth);
         this.title_text_old = "";
         this.startingUp = true;
         if (this._playerctl)
@@ -1321,10 +1332,12 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._remove_OsdWithNumberATJosephMcc_button.actor.show();
         else
             this._remove_OsdWithNumberATJosephMcc_button.actor.hide();
+        this.menu.actor.set_width(this.menuWidth);
     }
 
     _openMenu() {
-        this.menu.toggle();
+        this.menu.actor.set_width(this.menuWidth);
+        this.menu.toggle(true);
     }
 
     _toggle_out_mute() {
@@ -1573,7 +1586,8 @@ class Sound150Applet extends Applet.TextIconApplet {
                 } else {
                     this.setAppletTextIcon();
                 }
-            }, 1000 * this.showalbumDelay);
+            }, 0);
+            //~ }, 1000 * this.showalbumDelay);
         } else {
 
             //~ if (this._applet_tooltip)
@@ -1644,17 +1658,26 @@ class Sound150Applet extends Applet.TextIconApplet {
             else
                 this._playerIcon = [icon, source === "player-path"];
         }
+        
+        if (! this.showalbum) this.keepAlbumArtIcon = false;
 
         if (this.playerControl && this._activePlayer && this._playerIcon && this._playerIcon[0]) {
             if (source === "output") {
                 // if we have an active player, but are changing the volume, show the output icon and after three seconds change back to the player icon
-                this.set_applet_icon_symbolic_name(this._outputIcon);
-                if (this._output && !this._output.is_muted) {
-                    if (this._iconTimeoutId != null) source_remove(this._iconTimeoutId);
-                    this._iconTimeoutId = timeout_add_seconds(OUTPUT_ICON_SHOW_TIME_SECONDS, () => {
-                        this.setIcon();
-                        return this._iconLooping;
-                    });
+                if (! this.keepAlbumArtIcon) {
+                //~ if (! this.showalbum) {
+                    this.set_applet_icon_symbolic_name(this._outputIcon);
+                    if (this._output && !this._output.is_muted) {
+                        if (this._iconTimeoutId != null) source_remove(this._iconTimeoutId);
+                        //~ this._iconTimeoutId = timeout_add_seconds(OUTPUT_ICON_SHOW_TIME_SECONDS, () => {
+                        this._iconTimeoutId = timeout_add_seconds(0, () => {
+                            this.setAppletTextIcon(this._players[this._activePlayer], true);
+                            //~ return false;
+                            return this._iconLooping;
+                        });
+                    }
+                } else {
+                    return this._iconLooping;
                 }
             } else {
                 // if we have an active player and want to change the icon, change it immediately
@@ -1711,7 +1734,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         source_remove(this._loopArtId);
         this._loopArtId = null;
         if (!this._artLooping) return;
-
+        
         if (this._playerctl && this._imagemagick && this.is_empty(ALBUMART_PICS_DIR))
             if (this.runAsync)
                 Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
@@ -1753,6 +1776,23 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._loopArtId = timeout_add_seconds(10, () => {
             this.loopArt();
         });
+    }
+    
+    get sitesNotDisplayingAlbumArt() {
+        var sites = [];
+        for (let s of this.showalbumButForSites) {
+            if (s.active && s["id"].length > 0)
+                sites.push(s["id"].toLowerCase());
+        }
+        return sites;
+    }
+    
+    get iconsWhenNotDisplayingAlbumArt() {
+        var icons = {};
+        for (let s of this.showalbumButForSites) {
+            icons[s["id"].toLowerCase()] = s["icon"].replace(/^~\//, HOME_DIR + "/").replace("file://", "");
+        }
+        return icons;
     }
 
     setAppletIcon(player, path) {
@@ -2617,7 +2657,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_desklet_open_settings_button_clicked() {
-        Util.spawnCommandLineAsync("cinnamon-settings desklets " + DESKLET_UUID);
+        Util.spawnCommandLineAsync("xlet-settings desklet " + DESKLET_UUID);
     }
 
     _is_desklet_activated() {

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-22 04:46-0100\n"
+"POT-Creation-Date: 2025-12-20 06:52-0100\n"
 "PO-Revision-Date: 2023-12-29 08:19+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -40,7 +40,7 @@ msgstr "klik for at aktivere øjet"
 msgid "TIP"
 msgstr "TIP"
 
-#. 6.2/applet.js:48
+#. 6.2/applet.js:42
 msgid "Hey, I saw that!"
 msgstr ""
 
@@ -63,6 +63,7 @@ msgstr "Øje"
 
 #. 4.2->settings-schema.json->effects->title
 #. 5.4->settings-schema.json->effects->title
+#. 6.2->settings-schema.json->effects-page->title
 msgid "Effects"
 msgstr "Effekter"
 
@@ -72,6 +73,7 @@ msgstr "Effekter"
 #. 5.4->settings-schema.json->click-generic->title
 #. 6.2->settings-schema.json->general-page->title
 #. 6.2->settings-schema.json->general-section->title
+#. 6.2->settings-schema.json->general-effects-section->title
 msgid "General"
 msgstr "Generelt"
 
@@ -142,6 +144,9 @@ msgstr "Udfyldning"
 #. 5.4->settings-schema.json->eye-repaint-interval->units
 #. 5.4->settings-schema.json->fade-timeout->units
 #. 6.2->settings-schema.json->repaint-interval->units
+#. 6.2->settings-schema.json->blink-period->units
+#. 6.2->settings-schema.json->blink-gap->units
+#. 6.2->settings-schema.json->idle-delay->units
 msgid "ms"
 msgstr "ms"
 
@@ -464,3 +469,51 @@ msgstr "Aktiveret irisfarve"
 #, fuzzy
 msgid "Pupil Color"
 msgstr "Aktiveret pupilfarve"
+
+#. 6.2->settings-schema.json->blink-effect->description
+#, fuzzy
+msgid "Blink Effect"
+msgstr "Effekter"
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "None"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "When Idle"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "Always"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-period->description
+msgid "Blink Period"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-period->tooltip
+msgid ""
+"This setting controls the duration of a full blink cycle (closing and "
+"opening). Measured in milliseconds."
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-gap->description
+#, fuzzy
+msgid "Blink Gap"
+msgstr "Blink"
+
+#. 6.2->settings-schema.json->blink-gap->tooltip
+msgid ""
+"This setting controls the time gap between two consecutive blinks. Measured "
+"in milliseconds."
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->description
+msgid "Idle Delay"
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->tooltip
+msgid ""
+"This setting controls the time of inactivity (no mouse or keyboard input) "
+"after which the system is considered idle. Measured in milliseconds."
+msgstr ""

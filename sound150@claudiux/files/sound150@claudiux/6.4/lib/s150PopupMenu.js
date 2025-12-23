@@ -679,6 +679,51 @@ class Player extends PopupMenu.PopupMenuSection {
 
         this.titleLabel.set_text(this._title);
         this._seeker.setTrack(trackid, trackLength, old_title != this._title);
+        
+        if (metadata["xesam:url"]) {
+            //~ global.log("xesam:url = " + metadata["xesam:url"].unpack());
+            let dontDisplayArtSites = this._applet.sitesNotDisplayingAlbumArt;
+            for (let site of dontDisplayArtSites) {
+                if (metadata["xesam:url"].unpack().toLowerCase().includes(site) ||
+                    metadata["mpris:artUrl"].unpack().toLowerCase().includes(site)) {
+                    if (this._applet.iconsWhenNotDisplayingAlbumArt[site].length > 0) {
+                        let siteIcon = this._applet.iconsWhenNotDisplayingAlbumArt[site];
+                        this._trackCoverFile = `file://${siteIcon}`;
+                        this._applet._icon_path = `${siteIcon}`;
+                        this._applet.setAppletIcon(true, true);
+                        return;
+                    } else {
+                        switch (site) {
+                            case "youtube": 
+                                this._trackCoverFile = `file://${APPLET_DIR}/6.4/icons/youtube.png`;
+                                this._applet._icon_path = `${APPLET_DIR}/6.4/icons/youtube.png`;
+                                this._applet.setAppletIcon(true, true);
+                                return;
+                            case "spotify": 
+                                this._trackCoverFile = `file://${APPLET_DIR}/6.4/icons/spotify.png`;
+                                this._applet._icon_path = `${APPLET_DIR}/6.4/icons/spotify.png`;
+                                this._applet.setAppletIcon(true, true);
+                                return;
+                            case "strawberry": 
+                                this._trackCoverFile = `file://${APPLET_DIR}/6.4/icons/strawberry.png`;
+                                this._applet._icon_path = `${APPLET_DIR}/6.4/icons/strawberry.png`;
+                                this._applet.setAppletIcon(true, true);
+                                return;
+                            default:
+                                this._applet._icon_path = null;
+                                this._trackCoverFile = null;
+                                this._applet.setAppletIcon(null, null);
+                                return;
+                        }
+                        //~ this._applet._icon_path = null;
+                        //~ this._trackCoverFile = null;
+                        //~ this._applet.setAppletIcon(null, null);
+                        //~ return;
+                    }
+                    
+                }
+            }
+        }
 
         let change = false;
         if (metadata["mpris:artUrl"]) {
@@ -969,7 +1014,7 @@ class Player extends PopupMenu.PopupMenuSection {
                     mb = 100;
                     break;
                 case 1.0:
-                    mb = 110;
+                    mb = 120;
                     break;
                 case 1.25:
                     mb = 140;

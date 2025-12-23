@@ -2,13 +2,12 @@
 # This file is put in the public domain.
 # anaximeno, 2023
 #
-
 msgid ""
 msgstr ""
 "Project-Id-Version: c-eyes@anaximeno 3.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-22 04:46-0100\n"
+"POT-Creation-Date: 2025-12-20 06:52-0100\n"
 "PO-Revision-Date: 2025-08-30 03:12+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -41,7 +40,7 @@ msgstr "點選以啟用眼睛"
 msgid "TIP"
 msgstr "小提示"
 
-#. 6.2/applet.js:48
+#. 6.2/applet.js:42
 msgid "Hey, I saw that!"
 msgstr "嘿，我看到囉！"
 
@@ -53,8 +52,7 @@ msgstr "Cinnamon Eyes"
 msgid ""
 "An applet for Cinnamon that adds an eye to the panel bar that follows your "
 "cursor."
-msgstr ""
-"一個會在 Cinnamon 面板上新增、並跟隨滑鼠游標移動的眼睛小程式。"
+msgstr "一個會在 Cinnamon 面板上新增、並跟隨滑鼠游標移動的眼睛小程式。"
 
 #. 4.2->settings-schema.json->eye->title
 #. 5.4->settings-schema.json->eye->title
@@ -63,6 +61,7 @@ msgstr "眼睛"
 
 #. 4.2->settings-schema.json->effects->title
 #. 5.4->settings-schema.json->effects->title
+#. 6.2->settings-schema.json->effects-page->title
 msgid "Effects"
 msgstr "特效"
 
@@ -72,6 +71,7 @@ msgstr "特效"
 #. 5.4->settings-schema.json->click-generic->title
 #. 6.2->settings-schema.json->general-page->title
 #. 6.2->settings-schema.json->general-section->title
+#. 6.2->settings-schema.json->general-effects-section->title
 msgid "General"
 msgstr "一般"
 
@@ -142,6 +142,9 @@ msgstr "內距"
 #. 5.4->settings-schema.json->eye-repaint-interval->units
 #. 5.4->settings-schema.json->fade-timeout->units
 #. 6.2->settings-schema.json->repaint-interval->units
+#. 6.2->settings-schema.json->blink-period->units
+#. 6.2->settings-schema.json->blink-gap->units
+#. 6.2->settings-schema.json->idle-delay->units
 msgid "ms"
 msgstr "毫秒"
 
@@ -159,8 +162,8 @@ msgid ""
 "(measured in miliseconds) result in smoother animation but require more "
 "processing power."
 msgstr ""
-"此設定用於控制重新繪製眼睛的時間間隔。"
-"數值越低（單位為毫秒），動畫越流暢，但會消耗更多運算資源。"
+"此設定用於控制重新繪製眼睛的時間間隔。數值越低（單位為毫秒），動畫越流暢，但"
+"會消耗更多運算資源。"
 
 #. 4.2->settings-schema.json->eye-repaint-angle->units
 #. 5.4->settings-schema.json->eye-repaint-angle->units
@@ -182,8 +185,8 @@ msgid ""
 "required to redraw the eye. Lower values (measured in radians) result in "
 "smoother animation but require more processing power."
 msgstr ""
-"此設定可控制滑鼠移動時，觸發眼睛重繪所需的最小角度變化。"
-"較低的數值（單位為弧度）會帶來更流暢的動畫，但會消耗較多的運算資源。"
+"此設定可控制滑鼠移動時，觸發眼睛重繪所需的最小角度變化。較低的數值（單位為弧"
+"度）會帶來更流暢的動畫，但會消耗較多的運算資源。"
 
 #. 4.2->settings-schema.json->eye-activate-by-default->description
 #. 5.4->settings-schema.json->eye-activate-by-default->description
@@ -403,9 +406,9 @@ msgid ""
 "this applet and relocated to a new extension called 'mouse-click-effects,' "
 "which can be installed through the Cinnamon Extensions settings module."
 msgstr ""
-"在 Cinnamon 6.2 版及後續版本中，點選特效已從本小程式移除，"
-"並移轉到名為「mouse-click-effects」的新擴充元件，"
-"您可以透過 Cinnamon 的擴充元件設定模組來安裝。"
+"在 Cinnamon 6.2 版及後續版本中，點選特效已從本小程式移除，並移轉到名為"
+"「mouse-click-effects」的新擴充元件，您可以透過 Cinnamon 的擴充元件設定模組來"
+"安裝。"
 
 #. 6.2->settings-schema.json->style-page->title
 #. 6.2->settings-schema.json->styles-section->title
@@ -452,8 +455,7 @@ msgstr "為眼睛使用替代顏色"
 msgid ""
 "When disabled it will use the current system theme's default color for panel "
 "items."
-msgstr ""
-"停用此選項後，小程式將採用目前系統佈景主題為面板元件設定的預設顏色。"
+msgstr "停用此選項後，小程式將採用目前系統佈景主題為面板元件設定的預設顏色。"
 
 #. 6.2->settings-schema.json->base-color->description
 msgid "Base Color"
@@ -466,3 +468,51 @@ msgstr "虹膜顏色"
 #. 6.2->settings-schema.json->pupil-color->description
 msgid "Pupil Color"
 msgstr "瞳孔顏色"
+
+#. 6.2->settings-schema.json->blink-effect->description
+#, fuzzy
+msgid "Blink Effect"
+msgstr "特效"
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "None"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "When Idle"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "Always"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-period->description
+msgid "Blink Period"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-period->tooltip
+msgid ""
+"This setting controls the duration of a full blink cycle (closing and "
+"opening). Measured in milliseconds."
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-gap->description
+#, fuzzy
+msgid "Blink Gap"
+msgstr "閃爍"
+
+#. 6.2->settings-schema.json->blink-gap->tooltip
+msgid ""
+"This setting controls the time gap between two consecutive blinks. Measured "
+"in milliseconds."
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->description
+msgid "Idle Delay"
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->tooltip
+msgid ""
+"This setting controls the time of inactivity (no mouse or keyboard input) "
+"after which the system is considered idle. Measured in milliseconds."
+msgstr ""

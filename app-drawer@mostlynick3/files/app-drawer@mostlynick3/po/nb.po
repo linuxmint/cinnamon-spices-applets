@@ -1,0 +1,137 @@
+# Norwegian Bokmål translation for app-drawer
+# Copyright (C) 2025 mostlynick3
+# This file is distributed under the same license as the app-drawer package.
+# mostlynick3 <>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: app-drawer@mostlynick3 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-12-17 08:31+0100\n"
+"PO-Revision-Date: 2025-12-18 12:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "App Drawer"
+msgstr "Appskuff"
+
+msgid "Full-screen app launcher with animations, transparency, a search box, and more."
+msgstr "Fullskjerms appskuff med animasjoner, gjennomsiktighet, søkeboks og mer."
+
+msgid "Navigation Settings"
+msgstr "Navigasjonsinnstillinger"
+
+msgid "Navigation mode"
+msgstr "Navigasjonsmodus"
+
+msgid "Button Navigation"
+msgstr "Knappnavigasjon"
+
+msgid "Scroll Horizontal"
+msgstr "Horisontal rulling"
+
+msgid "Scroll Vertical"
+msgstr "Vertikal rulling"
+
+msgid "Layout Settings"
+msgstr "Layoutinnstillinger"
+
+msgid "Columns per page"
+msgstr "Kolonner per side"
+
+msgid "Rows per page"
+msgstr "Rader per side"
+
+msgid "Icon size (px)"
+msgstr "Ikonstørrelse (px)"
+
+msgid "Padding (px)"
+msgstr "Mellomrom (px)"
+
+msgid "Label font size (pt)"
+msgstr "Skriftstørrelse (pt)"
+
+msgid "Features"
+msgstr "Funksjoner"
+
+msgid "Enable search bar"
+msgstr "Aktiver søkefelt"
+
+msgid "Enable favorites"
+msgstr "Aktiver favoritter"
+
+msgid "Appearance Settings"
+msgstr "Designinnstillinger"
+
+msgid "Background color"
+msgstr "Bakgrunnsfarge"
+
+msgid "%"
+msgstr "%"
+
+msgid "Background opacity"
+msgstr "Bakgrunnens gjennomsiktighet"
+
+msgid "Container color"
+msgstr "Containerfarge"
+
+msgid "Container opacity"
+msgstr "Containerens gjennomsiktighet"
+
+msgid "Box color"
+msgstr "Boksfarge"
+
+msgid "Box opacity"
+msgstr "Boksens gjennomsiktighet"
+
+msgid "Box hover color"
+msgstr "Boksfarge ved aktivering"
+
+msgid "Box hover opacity"
+msgstr "Boksens gjennomsiktighet ved aktivering"
+
+msgid "Animation Settings"
+msgstr "Animasjonsinnstillinger"
+
+msgid "Enable animations"
+msgstr "Aktiver animasjoner"
+
+msgid "ms"
+msgstr "ms"
+
+msgid "Animation duration"
+msgstr "Animasjonsvarighet"
+
+msgid "Open animation"
+msgstr "Åpningsanimasjon"
+
+msgid "Fade"
+msgstr "Tone"
+
+msgid "Scale"
+msgstr "Skaler"
+
+msgid "Slide Up"
+msgstr "Gli opp"
+
+msgid "Zoom"
+msgstr "Zoom"
+
+msgid "Close animation"
+msgstr "Lukkingsanimasjon"
+
+msgid "Slide Down"
+msgstr "Gli ned"
+
+msgid "Button navigation page animation"
+msgstr "Knappnavigeringssideanimasjon"
+
+msgid "Slide"
+msgstr "Gli"
+
+msgid "Crossfade"
+msgstr "Krysstone"

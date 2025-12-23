@@ -1,0 +1,137 @@
+# Swedish translation for app-drawer
+# Copyright (C) 2025 mostlynick3
+# This file is distributed under the same license as the app-drawer package.
+# mostlynick3 <>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: app-drawer@mostlynick3 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-12-17 08:31+0100\n"
+"PO-Revision-Date: 2025-12-18 12:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "App Drawer"
+msgstr "Applåda"
+
+msgid "Full-screen app launcher with animations, transparency, a search box, and more."
+msgstr "Helskärms applåda med animationer, genomskinlighet, sökruta och mer."
+
+msgid "Navigation Settings"
+msgstr "Navigeringsinställningar"
+
+msgid "Navigation mode"
+msgstr "Navigeringsläge"
+
+msgid "Button Navigation"
+msgstr "Knappnavigering"
+
+msgid "Scroll Horizontal"
+msgstr "Horisontell rullning"
+
+msgid "Scroll Vertical"
+msgstr "Vertikal rullning"
+
+msgid "Layout Settings"
+msgstr "Layoutinställningar"
+
+msgid "Columns per page"
+msgstr "Kolumner per sida"
+
+msgid "Rows per page"
+msgstr "Rader per sida"
+
+msgid "Icon size (px)"
+msgstr "Ikonstorlek (px)"
+
+msgid "Padding (px)"
+msgstr "Mellanrum (px)"
+
+msgid "Label font size (pt)"
+msgstr "Teckenstorlek (pt)"
+
+msgid "Features"
+msgstr "Funktioner"
+
+msgid "Enable search bar"
+msgstr "Aktivera sökfält"
+
+msgid "Enable favorites"
+msgstr "Aktivera favoriter"
+
+msgid "Appearance Settings"
+msgstr "Designinställningar"
+
+msgid "Background color"
+msgstr "Bakgrundsfärg"
+
+msgid "%"
+msgstr "%"
+
+msgid "Background opacity"
+msgstr "Bakgrundens genomskinlighet"
+
+msgid "Container color"
+msgstr "Containerfärg"
+
+msgid "Container opacity"
+msgstr "Containerens genomskinlighet"
+
+msgid "Box color"
+msgstr "Rutfärg"
+
+msgid "Box opacity"
+msgstr "Rutans genomskinlighet"
+
+msgid "Box hover color"
+msgstr "Rutfärg vid aktivering"
+
+msgid "Box hover opacity"
+msgstr "Rutans genomskinlighet vid aktivering"
+
+msgid "Animation Settings"
+msgstr "Animationsinställningar"
+
+msgid "Enable animations"
+msgstr "Aktivera animationer"
+
+msgid "ms"
+msgstr "ms"
+
+msgid "Animation duration"
+msgstr "Animationsvaraktighet"
+
+msgid "Open animation"
+msgstr "Öppningsanimation"
+
+msgid "Fade"
+msgstr "Tona"
+
+msgid "Scale"
+msgstr "Skala"
+
+msgid "Slide Up"
+msgstr "Gli upp"
+
+msgid "Zoom"
+msgstr "Zoom"
+
+msgid "Close animation"
+msgstr "Stängningsanimation"
+
+msgid "Slide Down"
+msgstr "Gli ner"
+
+msgid "Button navigation page animation"
+msgstr "Knappnavigeringssidanimation"
+
+msgid "Slide"
+msgstr "Gli"
+
+msgid "Crossfade"
+msgstr "Korstonning"
