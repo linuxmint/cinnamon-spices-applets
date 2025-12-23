@@ -1,3 +1,7 @@
+### v1.6.1~20251223
+* "Text size" becomes "Text width".
+* Changes the method to open the menu.
+
 ### v1.6.0~20251222
 * Add Custom section: You can now add your own local links and applications,also using categories.
 * You are now able to set the width of a section in the menu.

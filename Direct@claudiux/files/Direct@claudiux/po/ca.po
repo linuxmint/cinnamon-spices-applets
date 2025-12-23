@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-22 09:17+0100\n"
+"POT-Creation-Date: 2025-12-23 15:47+0100\n"
 "PO-Revision-Date: 2025-10-06 21:22+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,69 +18,69 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.6\n"
 
-#. applet.js:45 applet.js:636
+#. applet.js:45 applet.js:652
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:45 applet.js:676
+#. applet.js:45 applet.js:692
 msgid "FAVORITES"
 msgstr "PREFERITS"
 
-#. applet.js:45 applet.js:707
+#. applet.js:45 applet.js:723
 msgid "APPLICATIONS"
 msgstr ""
 
-#. applet.js:45 applet.js:738
+#. applet.js:45 applet.js:754
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTS RECENTS"
 
-#. applet.js:45 applet.js:782
+#. applet.js:45 applet.js:798
 msgid "CUSTOM"
 msgstr ""
 
-#. applet.js:185
+#. applet.js:188
 msgid "(Right click to open folder)"
 msgstr "(Clic dret per obrir la carpeta)"
 
 #. metadata.json->name
-#. applet.js:311
+#. applet.js:315
 msgid "Direct"
 msgstr "Directe"
 
-#. applet.js:606
+#. applet.js:622
 msgid "Search Home Folder"
 msgstr "Buscar al directori Home"
 
-#. applet.js:613 applet.js:653 applet.js:684 applet.js:715 applet.js:746
-#. applet.js:790
+#. applet.js:629 applet.js:669 applet.js:700 applet.js:731 applet.js:762
+#. applet.js:806
 msgid "Configure"
 msgstr ""
 
-#. applet.js:646
+#. applet.js:662
 msgid "Search File System"
 msgstr "Buscar al sistema de fitxers"
 
-#. applet.js:760
+#. applet.js:776
 msgid "Clear"
 msgstr "Netejar"
 
-#. applet.js:767
+#. applet.js:783
 msgid "Recent"
 msgstr "Recent"
 
-#. applet.js:844
+#. applet.js:860
 msgid "Computer"
 msgstr "Ordinador"
 
-#. applet.js:850
+#. applet.js:866
 msgid "File System"
 msgstr "Sistema de fitxers"
 
-#. applet.js:867
+#. applet.js:883
 msgid "Network"
 msgstr "Xarxa"
 
-#. applet.js:1179
+#. applet.js:1196
 msgid "Trash"
 msgstr "Paperera"
 
@@ -268,11 +268,11 @@ msgid "Menu icon size"
 msgstr "Mida de la icona del menú"
 
 #. settings-schema.json->textSize->description
-msgid "Text size (in pixels)"
+msgid "Text width"
 msgstr ""
 
 #. settings-schema.json->textSize->tooltip
-msgid "0 means automatic"
+msgid "0 means: automatic"
 msgstr ""
 
 #. settings-schema.json->displayOrderLabel->description

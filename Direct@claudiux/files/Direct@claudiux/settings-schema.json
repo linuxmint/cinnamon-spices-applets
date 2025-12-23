@@ -205,8 +205,8 @@
     "max": 500,
     "units": "px",
     "step": 10,
-    "description": "Text size (in pixels)",
-    "tooltip": "0 means automatic"
+    "description": "Text width",
+    "tooltip": "0 means: automatic"
   },
   "displayOrderLabel": {
     "type": "label",

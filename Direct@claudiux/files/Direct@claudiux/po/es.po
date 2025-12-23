@@ -8,80 +8,80 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-22 09:17+0100\n"
-"PO-Revision-Date: 2025-12-22 22:14-0300\n"
-"Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
+"POT-Creation-Date: 2025-12-23 15:47+0100\n"
+"PO-Revision-Date: 2025-12-23 15:50+0100\n"
+"Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:45 applet.js:636
+#. applet.js:45 applet.js:652
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:45 applet.js:676
+#. applet.js:45 applet.js:692
 msgid "FAVORITES"
 msgstr "FAVORITOS"
 
-#. applet.js:45 applet.js:707
+#. applet.js:45 applet.js:723
 msgid "APPLICATIONS"
 msgstr "APLICACIONES"
 
-#. applet.js:45 applet.js:738
+#. applet.js:45 applet.js:754
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTOS RECIENTES"
 
-#. applet.js:45 applet.js:782
+#. applet.js:45 applet.js:798
 msgid "CUSTOM"
 msgstr "PERSONALIZADO"
 
-#. applet.js:185
+#. applet.js:188
 msgid "(Right click to open folder)"
 msgstr "(Haga clic con el botón derecho para abrir la carpeta)"
 
 #. metadata.json->name
-#. applet.js:311
+#. applet.js:315
 msgid "Direct"
 msgstr "Directo"
 
-#. applet.js:606
+#. applet.js:622
 msgid "Search Home Folder"
 msgstr "Buscar en la carpeta personal"
 
-#. applet.js:613 applet.js:653 applet.js:684 applet.js:715 applet.js:746
-#. applet.js:790
+#. applet.js:629 applet.js:669 applet.js:700 applet.js:731 applet.js:762
+#. applet.js:806
 msgid "Configure"
 msgstr "Configurar"
 
-#. applet.js:646
+#. applet.js:662
 msgid "Search File System"
 msgstr "Buscar en el sistema de archivos"
 
-#. applet.js:760
+#. applet.js:776
 msgid "Clear"
 msgstr "Limpiar"
 
-#. applet.js:767
+#. applet.js:783
 msgid "Recent"
 msgstr "Recientes"
 
-#. applet.js:844
+#. applet.js:860
 msgid "Computer"
 msgstr "PC"
 
-#. applet.js:850
+#. applet.js:866
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#. applet.js:867
+#. applet.js:883
 msgid "Network"
 msgstr "Red"
 
-#. applet.js:1179
+#. applet.js:1196
 msgid "Trash"
 msgstr "Papelera"
 
@@ -265,12 +265,12 @@ msgid "Menu icon size"
 msgstr "Tamaño de los iconos"
 
 #. settings-schema.json->textSize->description
-msgid "Text size (in pixels)"
-msgstr "Tamaño del texto (en píxeles)"
+msgid "Text width"
+msgstr "Ancho del texto"
 
 #. settings-schema.json->textSize->tooltip
-msgid "0 means automatic"
-msgstr "0 significa automático"
+msgid "0 means: automatic"
+msgstr "0 significa: automático"
 
 #. settings-schema.json->displayOrderLabel->description
 msgid "Move these sections to rearrange the menu:"
