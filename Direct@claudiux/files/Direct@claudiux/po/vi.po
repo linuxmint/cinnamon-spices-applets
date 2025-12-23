@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-22 09:17+0100\n"
+"POT-Creation-Date: 2025-12-23 15:47+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -18,69 +18,69 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:45 applet.js:636
+#. applet.js:45 applet.js:652
 msgid "SYSTEM"
 msgstr "HỆ THỐNG"
 
-#. applet.js:45 applet.js:676
+#. applet.js:45 applet.js:692
 msgid "FAVORITES"
 msgstr "YÊU THÍCH"
 
-#. applet.js:45 applet.js:707
+#. applet.js:45 applet.js:723
 msgid "APPLICATIONS"
 msgstr ""
 
-#. applet.js:45 applet.js:738
+#. applet.js:45 applet.js:754
 msgid "RECENT DOCUMENTS"
 msgstr "TÀI LIỆU GẦN ĐÂY"
 
-#. applet.js:45 applet.js:782
+#. applet.js:45 applet.js:798
 msgid "CUSTOM"
 msgstr ""
 
-#. applet.js:185
+#. applet.js:188
 msgid "(Right click to open folder)"
 msgstr "(Nhấn chuột phải để mở thư mục)"
 
 #. metadata.json->name
-#. applet.js:311
+#. applet.js:315
 msgid "Direct"
 msgstr "Truy Cập Nhanh"
 
-#. applet.js:606
+#. applet.js:622
 msgid "Search Home Folder"
 msgstr "Tìm trong Thư mục Cá nhân"
 
-#. applet.js:613 applet.js:653 applet.js:684 applet.js:715 applet.js:746
-#. applet.js:790
+#. applet.js:629 applet.js:669 applet.js:700 applet.js:731 applet.js:762
+#. applet.js:806
 msgid "Configure"
 msgstr ""
 
-#. applet.js:646
+#. applet.js:662
 msgid "Search File System"
 msgstr "Tìm trong Hệ thống tập tin"
 
-#. applet.js:760
+#. applet.js:776
 msgid "Clear"
 msgstr "Xóa"
 
-#. applet.js:767
+#. applet.js:783
 msgid "Recent"
 msgstr "Gần đây"
 
-#. applet.js:844
+#. applet.js:860
 msgid "Computer"
 msgstr "Máy tính"
 
-#. applet.js:850
+#. applet.js:866
 msgid "File System"
 msgstr "Hệ thống tập tin"
 
-#. applet.js:867
+#. applet.js:883
 msgid "Network"
 msgstr "Mạng"
 
-#. applet.js:1179
+#. applet.js:1196
 msgid "Trash"
 msgstr "Thùng rác"
 
@@ -268,11 +268,11 @@ msgid "Menu icon size"
 msgstr "Kích thước biểu tượng Menu"
 
 #. settings-schema.json->textSize->description
-msgid "Text size (in pixels)"
+msgid "Text width"
 msgstr ""
 
 #. settings-schema.json->textSize->tooltip
-msgid "0 means automatic"
+msgid "0 means: automatic"
 msgstr ""
 
 #. settings-schema.json->displayOrderLabel->description

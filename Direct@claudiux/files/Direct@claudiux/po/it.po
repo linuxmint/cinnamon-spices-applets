@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-22 09:17+0100\n"
+"POT-Creation-Date: 2025-12-23 15:47+0100\n"
 "PO-Revision-Date: 2024-06-18 15:39+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -19,69 +19,69 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:45 applet.js:636
+#. applet.js:45 applet.js:652
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:45 applet.js:676
+#. applet.js:45 applet.js:692
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:45 applet.js:707
+#. applet.js:45 applet.js:723
 msgid "APPLICATIONS"
 msgstr ""
 
-#. applet.js:45 applet.js:738
+#. applet.js:45 applet.js:754
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTI RECENTI"
 
-#. applet.js:45 applet.js:782
+#. applet.js:45 applet.js:798
 msgid "CUSTOM"
 msgstr ""
 
-#. applet.js:185
+#. applet.js:188
 msgid "(Right click to open folder)"
 msgstr "(Fare clic con il tasto destro per aprire la cartella)"
 
 #. metadata.json->name
-#. applet.js:311
+#. applet.js:315
 msgid "Direct"
 msgstr "Diretto"
 
-#. applet.js:606
+#. applet.js:622
 msgid "Search Home Folder"
 msgstr "Cerca nella cartella Home"
 
-#. applet.js:613 applet.js:653 applet.js:684 applet.js:715 applet.js:746
-#. applet.js:790
+#. applet.js:629 applet.js:669 applet.js:700 applet.js:731 applet.js:762
+#. applet.js:806
 msgid "Configure"
 msgstr ""
 
-#. applet.js:646
+#. applet.js:662
 msgid "Search File System"
 msgstr "Cerca nel File System"
 
-#. applet.js:760
+#. applet.js:776
 msgid "Clear"
 msgstr "Pulisci"
 
-#. applet.js:767
+#. applet.js:783
 msgid "Recent"
 msgstr "Recenti"
 
-#. applet.js:844
+#. applet.js:860
 msgid "Computer"
 msgstr "Computer"
 
-#. applet.js:850
+#. applet.js:866
 msgid "File System"
 msgstr "File System"
 
-#. applet.js:867
+#. applet.js:883
 msgid "Network"
 msgstr "Rete"
 
-#. applet.js:1179
+#. applet.js:1196
 msgid "Trash"
 msgstr "Cestino"
 
@@ -267,11 +267,11 @@ msgid "Menu icon size"
 msgstr "Dimensione dell'icona del menù"
 
 #. settings-schema.json->textSize->description
-msgid "Text size (in pixels)"
+msgid "Text width"
 msgstr ""
 
 #. settings-schema.json->textSize->tooltip
-msgid "0 means automatic"
+msgid "0 means: automatic"
 msgstr ""
 
 #. settings-schema.json->displayOrderLabel->description
