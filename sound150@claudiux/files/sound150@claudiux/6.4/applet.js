@@ -1680,13 +1680,15 @@ class Sound150Applet extends Applet.TextIconApplet {
                         if (this._iconTimeoutId != null) source_remove(this._iconTimeoutId);
                         //~ this._iconTimeoutId = timeout_add_seconds(OUTPUT_ICON_SHOW_TIME_SECONDS, () => {
                         this._iconTimeoutId = timeout_add_seconds(0, () => {
-                            this.setAppletTextIcon(this._players[this._activePlayer], true);
+                            //~ this.setAppletTextIcon(this._players[this._activePlayer], true);
+                            this.setIcon();
                             return false;
                             //~ return this._iconLooping;
                         });
                     }
                 } else {
-                    return this._iconLooping;
+                    //~ return this._iconLooping;
+                    return false;
                 }
             } else {
                 // if we have an active player and want to change the icon, change it immediately
