@@ -1,3 +1,8 @@
+### v13.8.1~20251225
+  * Improves speed.
+  * Fixes [#8115](https://github.com/linuxmint/cinnamon-spices-applets/issues/8115)
+  * Transitional version. Some bugs need to be fixed, but it works.
+
 ### v13.8.0~20251223
   * Many improvements and several bug fixes.
   * Fixes [#8052](https://github.com/linuxmint/cinnamon-spices-applets/issues/8052)
