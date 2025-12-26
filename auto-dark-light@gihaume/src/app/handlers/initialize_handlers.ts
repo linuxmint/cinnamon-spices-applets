@@ -14,7 +14,7 @@ import { Location_handler } from './Location_handler';
 import { logger } from '../../globals';
 import type { Settings } from '../ui/Settings';
 import { sleep } from '../../lib/core/utils';
-import { Screen_state_handler } from '../../lib/sys/cinnamon/Screen_state_handler';
+import { Sleep_and_lock_handler } from '../../lib/sys/cinnamon/Sleep_and_lock_handler';
 import { Color_scheme_handler } from '../../lib/sys/cinnamon/Color_scheme_handler';
 import { Themes_handler } from './Themes_handler';
 import { Time_of_day } from '../../lib/core/Time_of_day';
@@ -240,9 +240,9 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
             appearance_handler.sync_is_dark();
     });
 
-    const screen_state_handler = new Screen_state_handler();
-    disposables.push(screen_state_handler);
-    screen_state_handler.callback = (is_sleeping: boolean) => {
+    const sleep_and_lock_handler = new Sleep_and_lock_handler();
+    disposables.push(sleep_and_lock_handler);
+    sleep_and_lock_handler.callback = (is_sleeping: boolean) => {
         if (is_sleeping)
             wall_clock_monitor.disable();
         else
@@ -271,11 +271,11 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
             appearance_handler.sync_is_dark();
             schedule_the_event();
             wall_clock_monitor.enable();
-            screen_state_handler.enable();
+            sleep_and_lock_handler.enable();
         } else {
             scheduler.unset_the_event();
             wall_clock_monitor.disable();
-            screen_state_handler.disable();
+            sleep_and_lock_handler.disable();
         }
     });
     mobx.reaction(() => appearance_handler.next_twilight, () => {
@@ -305,5 +305,5 @@ export function initialize_handlers(applet: Applet, settings: Settings): void {
 
     color_scheme_handler.enable();
     wall_clock_monitor.enable();
-    screen_state_handler.enable();
+    sleep_and_lock_handler.enable();
 }

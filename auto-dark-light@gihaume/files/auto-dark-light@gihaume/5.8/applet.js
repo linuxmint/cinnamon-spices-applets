@@ -4260,10 +4260,10 @@ class Appearance_handler {
     makeAutoObservable(this);
   }
 }
-const { Gio: Gio$5 } = imports.gi;
+const { Gio: Gio$6 } = imports.gi;
 const settings$2 = {
-  background: Gio$5.Settings.new("org.cinnamon.desktop.background"),
-  slideshow: Gio$5.Settings.new("org.cinnamon.desktop.background.slideshow")
+  background: Gio$6.Settings.new("org.cinnamon.desktop.background"),
+  slideshow: Gio$6.Settings.new("org.cinnamon.desktop.background.slideshow")
 };
 class Background_accessor {
   static get is_slideshow() {
@@ -4339,7 +4339,7 @@ class Background_handler {
       Background_accessor.picture_file = this._settings.dark_background_file;
   }
 }
-const { Gio: Gio$4, GLib: GLib$5 } = imports.gi;
+const { Gio: Gio$5, GLib: GLib$5 } = imports.gi;
 class Error_timed_out_by_sigterm extends Error {
 }
 class Error_timed_out_by_sigkill extends Error {
@@ -4351,9 +4351,9 @@ const GNU_TIMEOUT_EXIT_STATUS_WHEN_SIGKILL = 137;
 async function launch_command$1(command, sigterm_timeout = 0, sigkill_timeout = 10) {
   const wrapped_command = `timeout --kill-after=${sigkill_timeout}s ${sigterm_timeout}s sh -c ${GLib$5.shell_quote(command)}`;
   const [_ok, argvp] = GLib$5.shell_parse_argv(wrapped_command);
-  const process = new Gio$4.Subprocess({
+  const process = new Gio$5.Subprocess({
     argv: argvp,
-    flags: Gio$4.SubprocessFlags.STDERR_PIPE
+    flags: Gio$5.SubprocessFlags.STDERR_PIPE
   });
   const start_time = Date.now();
   process.init(null);
@@ -4554,7 +4554,7 @@ class Keybinding_handler {
     this.unset();
   }
 }
-const { Gio: Gio$3 } = imports.gi;
+const { Gio: Gio$4 } = imports.gi;
 class Timezone_change_listener {
   /** @private @type {number | null} */
   _signal_id = null;
@@ -4564,7 +4564,7 @@ class Timezone_change_listener {
   enable() {
     if (this._signal_id !== null)
       return;
-    this._signal_id = Gio$3.DBus.system.signal_subscribe(
+    this._signal_id = Gio$4.DBus.system.signal_subscribe(
       "org.freedesktop.timedate1",
       // sender
       "org.freedesktop.DBus.Properties",
@@ -4575,7 +4575,7 @@ class Timezone_change_listener {
       // object_path
       null,
       // arg0
-      Gio$3.DBusSignalFlags.NONE,
+      Gio$4.DBusSignalFlags.NONE,
       // flags
       (_1, _2, _3, _4, _5, parameters) => {
         const changed_properties = parameters.deep_unpack()[1];
@@ -4589,14 +4589,14 @@ class Timezone_change_listener {
   disable() {
     if (this._signal_id === null)
       return;
-    Gio$3.DBus.system.signal_unsubscribe(this._signal_id);
+    Gio$4.DBus.system.signal_unsubscribe(this._signal_id);
     this._signal_id = null;
   }
   dispose() {
     this.disable();
   }
 }
-const { Gio: Gio$2 } = imports.gi;
+const { Gio: Gio$3 } = imports.gi;
 class Timezone_location_finder {
   _database;
   /**
@@ -4605,7 +4605,7 @@ class Timezone_location_finder {
    */
   constructor(path) {
     const file_path = `${path}/database.json`;
-    const file = Gio$2.File.new_for_path(file_path);
+    const file = Gio$3.File.new_for_path(file_path);
     const [ok, file_content] = file.load_contents(null);
     if (!ok)
       throw new Error(`failed to load file/contents of '${file_path}'`);
@@ -4662,41 +4662,6 @@ class Location_handler {
 }
 async function sleep(duration) {
   return new Promise((resolve) => setTimeout(resolve, duration));
-}
-const { gnomeSession } = imports.misc;
-class Screen_presence_listener {
-  /** @private @type {number | null} */
-  _signal_id = null;
-  /** @private @readonly @type {imports.gi.Gio.DBusProxy} */
-  _presence_proxy = gnomeSession.Presence();
-  /** @type {((is_present: boolean) => void) | null} */
-  callback = null;
-  enable() {
-    if (this._signal_id !== null)
-      return;
-    this._signal_id = this._presence_proxy.connectSignal(
-      "StatusChanged",
-      /**
-       * @param {any} _0
-       * @param {any} _1
-       * @param {[number]} params
-       */
-      (_0, _1, [presenceStatus]) => {
-        this.callback?.(
-          presenceStatus === gnomeSession.PresenceStatus.AVAILABLE
-        );
-      }
-    );
-  }
-  disable() {
-    if (this._signal_id === null)
-      return;
-    this._presence_proxy.disconnectSignal(this._signal_id);
-    this._signal_id = null;
-  }
-  dispose() {
-    this.disable();
-  }
 }
 const { ScreenSaverProxy } = imports.misc.screenSaver;
 class Screen_lock_change_listener {
@@ -4773,31 +4738,70 @@ class Screen_unlock_waiter {
     this._screen_lock.dispose();
   }
 }
-class Screen_state_handler {
+const { Gio: Gio$2 } = imports.gi;
+class Sleep_events_listener {
+  /** @private @type {number | null} */
+  _signal_id = null;
+  /** The function to call when the system is entering sleep or has just wake up (`is_entering_sleep` at `false`).
+   * @type {((is_entering_sleep: boolean) => void) | null} */
+  callback = null;
+  enable() {
+    if (this._signal_id !== null)
+      return;
+    this._signal_id = Gio$2.DBus.system.signal_subscribe(
+      "org.freedesktop.login1",
+      // sender
+      "org.freedesktop.login1.Manager",
+      // interface_name
+      "PrepareForSleep",
+      // member
+      "/org/freedesktop/login1",
+      // object_path
+      null,
+      // arg0
+      Gio$2.DBusSignalFlags.NONE,
+      // flags
+      (_1, _2, _3, _4, _5, parameters) => {
+        const is_entering_sleep = parameters.deep_unpack()[0];
+        this.callback?.(is_entering_sleep);
+      }
+    );
+  }
+  disable() {
+    if (this._signal_id === null)
+      return;
+    Gio$2.DBus.system.signal_unsubscribe(this._signal_id);
+    this._signal_id = null;
+  }
+  dispose() {
+    this.disable();
+  }
+}
+class Sleep_and_lock_handler {
   /** @private @readonly */
   _unlock_waiter = new Screen_unlock_waiter();
   /** @private @readonly */
-  _presence_listener = new Screen_presence_listener();
-  /** The function to call when the system is entering sleep or has just wake up and is unlocked (`is_present` at `false`).
-   * @type {((is_present: boolean) => void) | null} */
+  _sleep_events = new Sleep_events_listener();
+  /** The function to call when the system is entering sleep or has just wake up and is unlocked (`is_entering_sleep` at `false`).
+   * @type {((is_entering_sleep: boolean) => void) | null} */
   callback = null;
   constructor() {
-    this._presence_listener.callback = async (is_present) => {
-      if (!is_present)
+    this._sleep_events.callback = async (is_entering_sleep) => {
+      if (!is_entering_sleep)
         await this._unlock_waiter.wait_if_locked();
-      this.callback?.(!is_present);
+      this.callback?.(is_entering_sleep);
     };
   }
   enable() {
-    this._presence_listener.enable();
+    this._sleep_events.enable();
   }
   disable() {
     this._unlock_waiter.unblock_wait_if_locked();
-    this._presence_listener.disable();
+    this._sleep_events.disable();
   }
   dispose() {
     this._unlock_waiter.dispose();
-    this._presence_listener.dispose();
+    this._sleep_events.dispose();
   }
 }
 const { Gio: Gio$1 } = imports.gi;
@@ -5272,9 +5276,9 @@ function initialize_handlers(applet, settings2) {
     if (scheduler.is_set && scheduler.get_if_should_be_expired())
       appearance_handler.sync_is_dark();
   });
-  const screen_state_handler = new Screen_state_handler();
-  disposables.push(screen_state_handler);
-  screen_state_handler.callback = (is_sleeping) => {
+  const sleep_and_lock_handler = new Sleep_and_lock_handler();
+  disposables.push(sleep_and_lock_handler);
+  sleep_and_lock_handler.callback = (is_sleeping) => {
     if (is_sleeping)
       wall_clock_monitor.disable();
     else
@@ -5301,11 +5305,11 @@ function initialize_handlers(applet, settings2) {
       appearance_handler.sync_is_dark();
       schedule_the_event();
       wall_clock_monitor.enable();
-      screen_state_handler.enable();
+      sleep_and_lock_handler.enable();
     } else {
       scheduler.unset_the_event();
       wall_clock_monitor.disable();
-      screen_state_handler.disable();
+      sleep_and_lock_handler.disable();
     }
   });
   reaction(() => appearance_handler.next_twilight, () => {
@@ -5323,7 +5327,7 @@ function initialize_handlers(applet, settings2) {
   applet.on_button_open_os_background_settings = () => GLib.spawn_command_line_async("cinnamon-settings background");
   color_scheme_handler.enable();
   wall_clock_monitor.enable();
-  screen_state_handler.enable();
+  sleep_and_lock_handler.enable();
 }
 const { AppletSettings } = imports.ui.settings;
 function initialize_applet_settings(uuid, instance_id) {
