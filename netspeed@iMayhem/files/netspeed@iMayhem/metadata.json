@@ -1,0 +1,6 @@
+{
+  "uuid": "netspeed@iMayhem",
+  "name": "netspeed",
+  "description": "A persistent, asynchronous network speed monitor for Linux Mint Cinnamon",
+  "max-instances": 1
+}
