@@ -1,6 +1,11 @@
+0.31
+===
+- Improved feed menu toggle behavior for more consistent open/close interactions.
+- Added a scrollbar to improve usability with long lists.
+
 0.30
- ===
- - Fixed a bug where adding a new feed via the "Manage your feeds" dialog would lock the dialog height and disable resizing. This is especially problematic when the dialog exceeds the screen height, as some buttons become inaccessible.
+===
+- Fixed a bug where adding a new feed via the "Manage your feeds" dialog would lock the dialog height and disable resizing. This is especially problematic when the dialog exceeds the screen height, as some buttons become inaccessible.
 
 0.29
  ===
