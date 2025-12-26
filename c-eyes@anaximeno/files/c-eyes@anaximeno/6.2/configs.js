@@ -2,8 +2,6 @@ const UUID = "c-eyes@anaximeno";
 
 const AREA_DEFAULT_WIDTH = 28;
 
-const IDLE_TIME = 1000;
-
 const MONITORS_CHANGED_UPDATE_TIMEOUT_MS = 100;
 
 const WS_SWITCHED_UPDATE_TIMEOUT_MS = 400;

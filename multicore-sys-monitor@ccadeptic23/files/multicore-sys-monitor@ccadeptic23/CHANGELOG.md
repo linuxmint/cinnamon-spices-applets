@@ -1,3 +1,7 @@
+### v3.2.0~20251211
+  * Added option "Graph height (pixels)". Many thanks to Alex Rock (@Pierstoval)!
+  * Now compatible with Cinnamon 6.6.
+
 ### v3.1.7~20251111
   * Loop improvement.
 

@@ -97,6 +97,9 @@
         "middleShiftClickAction",
         "horizontalScroll",
         "showalbum",
+        "keepAlbumArtIcon",
+        "showalbumButForSitesLabel",
+        "showalbumButForSites",
         "hideSystray"
       ]
     },
@@ -114,7 +117,9 @@
       "title": "Icon appearance",
       "keys": [
         "showalbum",
-        "showalbumDelay",
+        "keepAlbumArtIcon",
+        "showalbumButForSitesLabel",
+        "showalbumButForSites",
         "showVolumeLevelNearIcon",
         "showMicMutedOnIcon",
         "showMicUnmutedOnIcon"
@@ -392,11 +397,63 @@
     "description": "Show album art as icon",
     "dependency": "playerControl"
   },
+  "keepAlbumArtIcon": {
+    "type": "switch",
+    "default": true,
+    "description": "Keep the album art as an icon when adjusting the volume",
+    "dependency": "showalbum"
+  },
+  "showalbumButForSitesLabel": {
+    "type": "label",
+    "description": "Do not display album art from these sites:"
+  },
+  "showalbumButForSites": {
+    "type": "list",
+    "default": [
+      {
+        "active": false,
+        "id": "youtube",
+        "icon": "~/.local/share/cinnamon/applets/sound150@claudiux/6.4/icons/youtube.png"
+      },
+      {
+        "active": false,
+        "id": "spotify",
+        "icon": "~/.local/share/cinnamon/applets/sound150@claudiux/6.4/icons/spotify.png"
+      },
+      {
+        "active": false,
+        "id": "strawberry",
+        "icon": "~/.local/share/cinnamon/applets/sound150@claudiux/6.4/icons/strawberry.png"
+      }
+    ],
+    "columns": [
+      {
+        "id": "active",
+        "title": "Activate",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "id": "id",
+        "title": "Site name",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      },
+      {
+        "id": "icon",
+        "title": "Local path to icon",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "description": "Do not display album art from these sites:"
+  },
   "showalbumDelay": {
     "type": "scale",
     "default": 0,
     "min": 0,
-    "max":10,
+    "max": 10,
     "step": 1,
     "description": "Delay between icon and album art display (seconds)",
     "dependency": "playerControl"
@@ -656,7 +713,9 @@
   "custom-commands-list": {
     "type": "list",
     "description": "Commands",
-    "default": [],
+    "default": [
+
+    ],
     "columns": [
       {
         "id": "title",

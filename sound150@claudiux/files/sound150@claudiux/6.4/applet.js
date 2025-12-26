@@ -91,7 +91,7 @@ const RUNTIME_DIR = GLib.get_user_runtime_dir();
 const R30MPVSOCKET = RUNTIME_DIR + "/mpvradiosocket";
 
 // how long to show the output icon when volume is adjusted during media playback.
-var OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
+//~ var OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
 
 const IS_OSD150_ENABLED = () => {
     var enabled = false;
@@ -213,9 +213,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.instanceId = instanceId;
 
         this.real_ui_scale = 1.0;
+        this.menuWidth = 450;
         Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-real-scale.py", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 this.real_ui_scale = parseFloat(stdout);
+                this.menuWidth = Math.round(450 * this.real_ui_scale);
             }
         }, {});
 
@@ -322,9 +324,15 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("showalbum", "showalbum", () => {
             this.on_settings_changed()
         });
-        this.settings.bind("showalbumDelay", "showalbumDelay", () => {
-            this.on_settings_changed()
+        this.settings.bind("keepAlbumArtIcon", "keepAlbumArtIcon", (value) => {
+            this.on_settings_changed();
+            if (value)
+                this._on_reload_this_applet_pressed();
         });
+        this.settings.bind("showalbumButForSites", "showalbumButForSites");
+        //~ this.settings.bind("showalbumDelay", "showalbumDelay", () => {
+            //~ this.on_settings_changed()
+        //~ });
         this.settings.bind("truncatetext", "truncatetext", () => {
             this.on_settings_changed()
         });
@@ -760,7 +768,8 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     on_leave_event(actor, event) {
         this.isActorEntered = false;
-        if (this.playerControl && this._activePlayer)
+        //~ if (this.playerControl && this._activePlayer)
+        if (this._activePlayer && this._players[this._activePlayer])
             this.setAppletTextIcon(this._players[this._activePlayer], true);
         else
             this.setAppletTextIcon();
@@ -798,7 +807,8 @@ class Sound150Applet extends Applet.TextIconApplet {
                         (stdout, stderr, exitCode) => {
                         if (exitCode === 0) {
                             if (stdout.startsWith("opt1")) {
-                                Util.spawn(["cinnamon-settings", "desklets", "-t", "download"]);
+                                //~ Util.spawn(["cinnamon-settings", "desklets", "-t", "download"]);
+                                Util.spawn(["cinnamon-settings", "desklets", "-t", "1"]);
                             }
                         }
                     }
@@ -867,9 +877,10 @@ class Sound150Applet extends Applet.TextIconApplet {
                     `notify-send -u critical --icon="audio-volume-overamplified-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`,
                     (stdout, stderr, exitCode) => {
                         if (exitCode === 0) {
-                            logDebug("stdout: " + stdout + " " + typeof stdout);
+                            //~ logDebug("stdout: " + stdout + " " + typeof stdout);
                             if (stdout.startsWith("opt1")) {
-                                Util.spawnCommandLineAsync("cinnamon-settings extensions -t download");
+                                //~ Util.spawnCommandLineAsync("cinnamon-settings extensions -t download");
+                                Util.spawnCommandLineAsync("cinnamon-settings extensions -t 1");
                             } else {
                                 this.OSDhorizontal = false;
                             }
@@ -1106,7 +1117,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (!this._sound_settings.get_boolean(OVERAMPLIFICATION_KEY) && this.maxVolume > 100) {
             this.maxVolume = 100;
         }
-
+        
+        if (! this.showalbum) {
+            this.keepAlbumArtIcon = false;
+        }
+        this._iconLooping = this.showalbum;
+        
         this._volumeMax = this.maxVolume / 100 * this._volumeNorm;
         if (this.maxVolume > 100) {
             if (this._outputVolumeSection)
@@ -1136,9 +1152,9 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_settings_changed() {
-        OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
-        if (this.showalbum && this.showalbumDelay >= 3)
-            OUTPUT_ICON_SHOW_TIME_SECONDS = this.showalbumDelay - 1;
+        //~ OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
+        //~ if (this.showalbum && this.showalbumDelay >= 3)
+            //~ OUTPUT_ICON_SHOW_TIME_SECONDS = this.showalbumDelay - 1;
         if (this.playerControl && this._activePlayer)
             this.setAppletTextIcon(this._players[this._activePlayer], true);
         else
@@ -1152,10 +1168,11 @@ class Sound150Applet extends Applet.TextIconApplet {
                 this.mute_in_switch.actor.hide();
 
         this._changeActivePlayer(this._activePlayer);
+        this.setIcon();
     }
 
     on_applet_added_to_panel() {
-        this.menu.actor.set_width(Math.round(450 * this.real_ui_scale));
+        this.menu.actor.set_width(this.menuWidth);
         this.title_text_old = "";
         this.startingUp = true;
         if (this._playerctl)
@@ -1182,7 +1199,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
         this.color0_100 = color;
 
-        this._iconLooping = true;
+        this._iconLooping = this.showalbum;
 
         if (this._output && this._output.is_muted) {
             this.old_volume = this.volume;
@@ -1193,12 +1210,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._on_sound_settings_change();
 
         this._loopArtId = null;
-        this._artLooping = true;
+        this._artLooping = this.showalbum;
         this._loopArtId = timeout_add_seconds(10, () => {
             this.loopArt();
         });
 
-        this.iconsMonitor =null;
+        this.iconsMonitor = null;
         this.iconsMonitorId == null;
         this.monitor_icon_dir();
 
@@ -1321,10 +1338,12 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._remove_OsdWithNumberATJosephMcc_button.actor.show();
         else
             this._remove_OsdWithNumberATJosephMcc_button.actor.hide();
+        this.menu.actor.set_width(this.menuWidth);
     }
 
     _openMenu() {
-        this.menu.toggle();
+        this.menu.actor.set_width(this.menuWidth);
+        this.menu.toggle(true);
     }
 
     _toggle_out_mute() {
@@ -1573,7 +1592,8 @@ class Sound150Applet extends Applet.TextIconApplet {
                 } else {
                     this.setAppletTextIcon();
                 }
-            }, 1000 * this.showalbumDelay);
+            }, 0);
+            //~ }, 1000 * this.showalbumDelay);
         } else {
 
             //~ if (this._applet_tooltip)
@@ -1644,17 +1664,31 @@ class Sound150Applet extends Applet.TextIconApplet {
             else
                 this._playerIcon = [icon, source === "player-path"];
         }
+        
+        if (! this.showalbum) {
+            this.keepAlbumArtIcon = false;
+            this._iconLooping = false;
+        }
 
         if (this.playerControl && this._activePlayer && this._playerIcon && this._playerIcon[0]) {
             if (source === "output") {
                 // if we have an active player, but are changing the volume, show the output icon and after three seconds change back to the player icon
-                this.set_applet_icon_symbolic_name(this._outputIcon);
-                if (this._output && !this._output.is_muted) {
-                    if (this._iconTimeoutId != null) source_remove(this._iconTimeoutId);
-                    this._iconTimeoutId = timeout_add_seconds(OUTPUT_ICON_SHOW_TIME_SECONDS, () => {
-                        this.setIcon();
-                        return this._iconLooping;
-                    });
+                if (! this.keepAlbumArtIcon) {
+                //~ if (! this.showalbum) {
+                    this.set_applet_icon_symbolic_name(this._outputIcon);
+                    if (this._output && !this._output.is_muted) {
+                        if (this._iconTimeoutId != null) source_remove(this._iconTimeoutId);
+                        //~ this._iconTimeoutId = timeout_add_seconds(OUTPUT_ICON_SHOW_TIME_SECONDS, () => {
+                        this._iconTimeoutId = timeout_add_seconds(0, () => {
+                            //~ this.setAppletTextIcon(this._players[this._activePlayer], true);
+                            this.setIcon();
+                            return false;
+                            //~ return this._iconLooping;
+                        });
+                    }
+                } else {
+                    //~ return this._iconLooping;
+                    return false;
                 }
             } else {
                 // if we have an active player and want to change the icon, change it immediately
@@ -1708,10 +1742,10 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     loopArt() {
-        source_remove(this._loopArtId);
+        if (this._loopArtId != null) source_remove(this._loopArtId);
         this._loopArtId = null;
         if (!this._artLooping) return;
-
+        
         if (this._playerctl && this._imagemagick && this.is_empty(ALBUMART_PICS_DIR))
             if (this.runAsync)
                 Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
@@ -1754,6 +1788,23 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.loopArt();
         });
     }
+    
+    get sitesNotDisplayingAlbumArt() {
+        var sites = [];
+        for (let s of this.showalbumButForSites) {
+            if (s.active && s["id"].length > 0)
+                sites.push(s["id"].toLowerCase());
+        }
+        return sites;
+    }
+    
+    get iconsWhenNotDisplayingAlbumArt() {
+        var icons = {};
+        for (let s of this.showalbumButForSites) {
+            icons[s["id"].toLowerCase()] = s["icon"].replace(/^~\//, HOME_DIR + "/").replace("file://", "");
+        }
+        return icons;
+    }
 
     setAppletIcon(player, path) {
         if (this.volume === "0%") {
@@ -1773,6 +1824,14 @@ class Sound150Applet extends Applet.TextIconApplet {
             path = null;
         }
 
+        //~ if (this.old_player === player && this.old_path === path) return;
+        if ((this.old_player === player && 
+            (typeof(this.old_path) === "string" && typeof(path) === "string" && this.old_path.split("/").pop() === path.split("/").pop()))) 
+                return;
+        this.old_player = player;
+        this.old_path = path;
+        //~ logDebug("setAppletIcon(" + player + ", " + path +")");
+        
         if (!this.allowChangeArt) return;
 
         if (this.showalbum) {
@@ -2197,22 +2256,22 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _theme_set() {
-        logDebug("_theme_set()");
+        //~ logDebug("_theme_set()");
         let color = this.color0_100;
         try {
             if (!this.themeNode) {
-                logDebug("this.themeNode was not defined.");
+                //~ logDebug("this.themeNode was not defined.");
                 this.themeNode = this.actor.get_theme_node();
             }
             let defaultColor = this.themeNode.get_foreground_color();
-            logDebug("defaultColor: "+defaultColor.to_string());
+            //~ logDebug("defaultColor: "+defaultColor.to_string());
             color = defaultColor.to_string();
         } catch(e) {
             color = this.color0_100;
         }
         this.color0_100 = color;
         let _style = `color: ${color};`;
-        logDebug("_style: "+_style);
+        //~ logDebug("_style: "+_style);
         this.actor.style = _style;
         this._setStyle();
     }
@@ -2617,7 +2676,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_desklet_open_settings_button_clicked() {
-        Util.spawnCommandLineAsync("cinnamon-settings desklets " + DESKLET_UUID);
+        Util.spawnCommandLineAsync("xlet-settings desklet " + DESKLET_UUID);
     }
 
     _is_desklet_activated() {
