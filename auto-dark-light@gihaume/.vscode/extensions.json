@@ -3,6 +3,7 @@
         "EditorConfig.EditorConfig",
         "ms-python.python",
         "pkief.material-icon-theme",
+        "takumii.markdown-toc-num",
         "vitest.explorer"
     ]
 }
