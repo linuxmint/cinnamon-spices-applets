@@ -1,6 +1,6 @@
-import type { Applet } from "../ui/Applet";
+import type { Applet } from '../ui/Applet';
 import { launch_command } from '../launch_command';
-import type { Settings } from "../ui/Settings";
+import type { Settings } from '../ui/Settings';
 
 export class Commands_handler {
     private readonly _settings: Settings;

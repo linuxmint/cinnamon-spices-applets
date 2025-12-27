@@ -1,6 +1,6 @@
-import type { Applet } from "../ui/Applet";
-import type { Settings } from "../ui/Settings";
-import { Background_accessor as Background } from "../../lib/sys/cinnamon/Background_accessor";
+import type { Applet } from '../ui/Applet';
+import type { Settings } from '../ui/Settings';
+import { Background_accessor as Background } from '../../lib/sys/cinnamon/Background_accessor';
 
 export class Background_handler {
     private readonly _settings: Settings;

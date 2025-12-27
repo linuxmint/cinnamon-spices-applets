@@ -1,6 +1,6 @@
 const { GLib } = imports.gi;
 
-import * as mobx from "mobx";
+import * as mobx from 'mobx';
 
 import type { Disposable, Location } from "../../types";
 import { metadata } from '../../globals';

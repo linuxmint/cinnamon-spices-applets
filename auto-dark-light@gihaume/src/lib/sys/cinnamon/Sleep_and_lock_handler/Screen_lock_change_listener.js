@@ -25,7 +25,8 @@ export class Screen_lock_change_listener {
     enable() {
         if (this._signal_id !== null)
             return;
-        this._signal_id = this._screen_saver_proxy.connectSignal('ActiveChanged',
+        this._signal_id = this._screen_saver_proxy.connectSignal(
+            'ActiveChanged',
             /**
              * @param {any} _0
              * @param {any} _1

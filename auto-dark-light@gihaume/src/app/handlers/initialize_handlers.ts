@@ -8,7 +8,7 @@ import type { Applet } from '../ui/Applet';
 import { Background_handler } from './Background_handler';
 import { Commands_handler } from './Commands_handler';
 import type { Disposable } from '../../types';
-import { Event_scheduler } from "../../lib/sys/gnome/Event_scheduler";
+import { Event_scheduler } from '../../lib/sys/gnome/Event_scheduler';
 import { Keybinding_handler } from '../../lib/sys/cinnamon/Keybinding_handler';
 import { Location_handler } from './Location_handler';
 import { logger } from '../../globals';
