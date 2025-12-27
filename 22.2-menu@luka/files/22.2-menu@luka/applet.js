@@ -35,7 +35,7 @@ function _(str) {
     if (cinnamonTranslation !== str) {
         return cinnamonTranslation;
     }
-    return Gettext.dgettext('Cinnamenu@json', str);
+    return Gettext.dgettext('22.2-menu@luka', str);
 }
 
 
