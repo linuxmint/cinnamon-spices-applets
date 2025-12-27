@@ -1,0 +1,374 @@
+# 22.2-MENU
+# This file is put in the public domain.
+# Linux Mint, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 22.2-menu@luka 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-27 14:28+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:454
+msgid "Run with dedicated GPU"
+msgstr ""
+
+#. applet.js:458
+msgid "Add to panel"
+msgstr ""
+
+#. applet.js:462
+msgid "Add to desktop"
+msgstr ""
+
+#. applet.js:467
+msgid "Remove from favorites"
+msgstr ""
+
+#. applet.js:470
+msgid "Add to favorites"
+msgstr ""
+
+#. applet.js:477
+msgid "Properties"
+msgstr ""
+
+#. applet.js:482
+msgid "Uninstall"
+msgstr ""
+
+#. applet.js:740 applet.js:848
+msgid "This file is no longer available"
+msgstr ""
+
+#. applet.js:754 applet.js:862
+msgid "Open with"
+msgstr ""
+
+#. applet.js:800 applet.js:908
+msgid "Other application..."
+msgstr ""
+
+#. settings-schema.json->menu->title
+#. applet.js:1180
+msgid "Menu"
+msgstr ""
+
+#. applet.js:1185
+msgid "Edit menu"
+msgstr ""
+
+#. applet.js:2466
+msgid "Places"
+msgstr ""
+
+#. applet.js:2504
+msgid "Recent Files"
+msgstr ""
+
+#. applet.js:2519
+msgid "Clear list"
+msgstr ""
+
+#. applet.js:2520
+msgid "Clear all recent documents"
+msgstr ""
+
+#. applet.js:2539
+msgid "No recent documents"
+msgstr ""
+
+#. applet.js:2574
+msgid "Favorites"
+msgstr ""
+
+#. applet.js:2603
+msgid "All Applications"
+msgstr ""
+
+#. applet.js:2672
+msgid "Lock Screen"
+msgstr ""
+
+#. applet.js:2673
+msgid "Lock the screen"
+msgstr ""
+
+#. applet.js:2698
+msgid "Log Out"
+msgstr ""
+
+#. applet.js:2699
+msgid "Leave the session"
+msgstr ""
+
+#. applet.js:2712
+msgid "Shut Down"
+msgstr ""
+
+#. applet.js:2713
+msgid "Shut down the computer"
+msgstr ""
+
+#. metadata.json->name
+msgid "22.2-Menu"
+msgstr ""
+
+#. metadata.json->description
+msgid "Main Cinnamon menu from 22.2 with some updates"
+msgstr ""
+
+#. settings-schema.json->panel->title
+msgid "Panel"
+msgstr ""
+
+#. settings-schema.json->luka->title
+msgid "Luka"
+msgstr ""
+
+#. settings-schema.json->panel-appear->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->panel-behave->title
+#. settings-schema.json->menu-behave->title
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->menu-layout->title
+msgid "Layout and content"
+msgstr ""
+
+#. settings-schema.json->system-buttons->title
+msgid "System Buttons"
+msgstr ""
+
+#. settings-schema.json->menu-options->title
+msgid "Menu Options"
+msgstr ""
+
+#. settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr ""
+
+#. settings-schema.json->menu-custom->description
+msgid "Use a custom icon and label"
+msgstr ""
+
+#. settings-schema.json->menu-custom->tooltip
+msgid "Check this to specify a custom icon and label"
+msgstr ""
+
+#. settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr ""
+
+#. settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr ""
+
+#. settings-schema.json->menu-icon-size->units
+#. settings-schema.json->category-icon-size->units
+#. settings-schema.json->application-icon-size->units
+#. settings-schema.json->fav-icon-size->units
+msgid "px"
+msgstr ""
+
+#. settings-schema.json->menu-icon-size->description
+msgid "Icon size"
+msgstr ""
+
+#. settings-schema.json->menu-label->description
+msgid "Text"
+msgstr ""
+
+#. settings-schema.json->menu-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr ""
+
+#. settings-schema.json->show-category-icons->description
+msgid "Show category icons"
+msgstr ""
+
+#. settings-schema.json->show-category-icons->tooltip
+msgid "Choose whether or not to show icons on categories."
+msgstr ""
+
+#. settings-schema.json->category-icon-size->description
+msgid "Categories icon size"
+msgstr ""
+
+#. settings-schema.json->show-application-icons->description
+msgid "Show application icons"
+msgstr ""
+
+#. settings-schema.json->show-application-icons->tooltip
+msgid "Choose whether or not to show icons on applications."
+msgstr ""
+
+#. settings-schema.json->application-icon-size->description
+msgid "Applications icon size"
+msgstr ""
+
+#. settings-schema.json->favbox-show->description
+msgid "Show favorites and session buttons"
+msgstr ""
+
+#. settings-schema.json->favbox-show->tooltip
+msgid "Choose whether or not to show the left pane of the menu."
+msgstr ""
+
+#. settings-schema.json->fav-icon-size->description
+msgid "Favorites icon size"
+msgstr ""
+
+#. settings-schema.json->show-favorites->description
+msgid "Show favorites"
+msgstr ""
+
+#. settings-schema.json->show-favorites->tooltip
+msgid "Choose whether or not to show favorite files in the menu."
+msgstr ""
+
+#. settings-schema.json->show-places->description
+msgid "Show bookmarks and places"
+msgstr ""
+
+#. settings-schema.json->show-places->tooltip
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr ""
+
+#. settings-schema.json->show-recents->description
+msgid "Show recents"
+msgstr ""
+
+#. settings-schema.json->show-recents->tooltip
+msgid "Choose whether or not to show recents in the menu."
+msgstr ""
+
+#. settings-schema.json->category-hover->description
+msgid "Change categories on hover"
+msgstr ""
+
+#. settings-schema.json->category-hover->tooltip
+msgid "Choose whether or not to change categories by hovering."
+msgstr ""
+
+#. settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr ""
+
+#. settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
+
+#. settings-schema.json->search-filesystem->description
+msgid "Enable filesystem path entry in search box"
+msgstr ""
+
+#. settings-schema.json->search-filesystem->tooltip
+msgid "Allows path entry in the menu search box."
+msgstr ""
+
+#. settings-schema.json->force-show-panel->description
+msgid "Force the panel to be visible when opening the menu"
+msgstr ""
+
+#. settings-schema.json->force-show-panel->tooltip
+msgid ""
+"Opening the menu will also show the main panel (which may be auto-hidden)."
+msgstr ""
+
+#. settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr ""
+
+#. settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr ""
+
+#. settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr ""
+
+#. settings-schema.json->hover-delay->description
+msgid "Menu hover delay"
+msgstr ""
+
+#. settings-schema.json->hover-delay->tooltip
+msgid "Delay before the menu opens when hovered"
+msgstr ""
+
+#. settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr ""
+
+#. settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr ""
+
+#. settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr ""
+
+#. settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr ""
+
+#. settings-schema.json->reset-menu-size-button->description
+msgid "Restore the menu to its original size"
+msgstr ""
+
+#. settings-schema.json->show-lock->description
+msgid "Show lock screen button"
+msgstr ""
+
+#. settings-schema.json->show-logout->description
+msgid "Show logout button"
+msgstr ""
+
+#. settings-schema.json->show-quit->description
+msgid "Show quit button"
+msgstr ""
+
+#. settings-schema.json->show-name->description
+msgid "Show names"
+msgstr ""
+
+#. settings-schema.json->show-description->description
+msgid "Show descriptions"
+msgstr ""
+
+#. settings-schema.json->lock-size->description
+msgid "Lock the menu size"
+msgstr ""
+
+#. settings-schema.json->lock-size->tooltip
+msgid ""
+"needs cinnamon restart\n"
+"\n"
+"press ctrl+alt+esc to restart cinnamon\n"
+"\n"
+"or press the button below"
+msgstr ""
+
+#. settings-schema.json->inf-size->description
+msgid "infinitely resizable menu"
+msgstr ""
+
+#. settings-schema.json->luka-size->description
+msgid "Set the menu to my preffered size"
+msgstr ""
+
+#. settings-schema.json->restart-cinnamon->description
+msgid "Restart cinnamon"
+msgstr ""
