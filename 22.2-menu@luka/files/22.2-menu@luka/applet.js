@@ -25,6 +25,19 @@ const Pango = imports.gi.Pango;
 const SearchProviderManager = imports.ui.searchProviderManager;
 const SignalManager = imports.misc.signalManager;
 const Params = imports.misc.params;
+//translation stuff from fredcw
+const Gettext = imports.gettext;
+
+Gettext.bindtextdomain(__meta.uuid, GLib.get_home_dir() + '/.local/share/locale');
+
+function _(str) {
+    let cinnamonTranslation = Gettext.gettext(str);
+    if (cinnamonTranslation !== str) {
+        return cinnamonTranslation;
+    }
+    return Gettext.dgettext('Cinnamenu@json', str);
+}
+
 
 const INITIAL_BUTTON_LOAD = 30;
 

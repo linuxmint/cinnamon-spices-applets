@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 22.2-menu@luka 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-27 14:28+0100\n"
+"POT-Creation-Date: 2025-12-27 14:34+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,104 +17,104 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:454
+#. applet.js:467
 msgid "Run with dedicated GPU"
 msgstr ""
 
-#. applet.js:458
+#. applet.js:471
 msgid "Add to panel"
 msgstr ""
 
-#. applet.js:462
+#. applet.js:475
 msgid "Add to desktop"
 msgstr ""
 
-#. applet.js:467
+#. applet.js:480
 msgid "Remove from favorites"
 msgstr ""
 
-#. applet.js:470
+#. applet.js:483
 msgid "Add to favorites"
 msgstr ""
 
-#. applet.js:477
+#. applet.js:490
 msgid "Properties"
 msgstr ""
 
-#. applet.js:482
+#. applet.js:495
 msgid "Uninstall"
 msgstr ""
 
-#. applet.js:740 applet.js:848
+#. applet.js:753 applet.js:861
 msgid "This file is no longer available"
 msgstr ""
 
-#. applet.js:754 applet.js:862
+#. applet.js:767 applet.js:875
 msgid "Open with"
 msgstr ""
 
-#. applet.js:800 applet.js:908
+#. applet.js:813 applet.js:921
 msgid "Other application..."
 msgstr ""
 
 #. settings-schema.json->menu->title
-#. applet.js:1180
+#. applet.js:1193
 msgid "Menu"
 msgstr ""
 
-#. applet.js:1185
+#. applet.js:1198
 msgid "Edit menu"
 msgstr ""
 
-#. applet.js:2466
+#. applet.js:2479
 msgid "Places"
 msgstr ""
 
-#. applet.js:2504
+#. applet.js:2517
 msgid "Recent Files"
 msgstr ""
 
-#. applet.js:2519
+#. applet.js:2532
 msgid "Clear list"
 msgstr ""
 
-#. applet.js:2520
+#. applet.js:2533
 msgid "Clear all recent documents"
 msgstr ""
 
-#. applet.js:2539
+#. applet.js:2552
 msgid "No recent documents"
 msgstr ""
 
-#. applet.js:2574
+#. applet.js:2587
 msgid "Favorites"
 msgstr ""
 
-#. applet.js:2603
+#. applet.js:2616
 msgid "All Applications"
 msgstr ""
 
-#. applet.js:2672
+#. applet.js:2685
 msgid "Lock Screen"
 msgstr ""
 
-#. applet.js:2673
+#. applet.js:2686
 msgid "Lock the screen"
 msgstr ""
 
-#. applet.js:2698
+#. applet.js:2711
 msgid "Log Out"
 msgstr ""
 
-#. applet.js:2699
+#. applet.js:2712
 msgid "Leave the session"
 msgstr ""
 
-#. applet.js:2712
+#. applet.js:2725
 msgid "Shut Down"
 msgstr ""
 
-#. applet.js:2713
+#. applet.js:2726
 msgid "Shut down the computer"
 msgstr ""
 
