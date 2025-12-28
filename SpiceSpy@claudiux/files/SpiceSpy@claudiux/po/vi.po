@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 5.5.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-25 23:34+0200\n"
+"POT-Creation-Date: 2025-12-28 16:21+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -18,47 +18,52 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:201
+#. applet.js:185
 msgid "score"
 msgstr "điểm"
 
-#. applet.js:213
+#. applet.js:197
 msgid "comments"
 msgstr "bình luận"
 
-#. applet.js:225
+#. applet.js:209
 msgid "recent issues"
 msgstr "vấn đề gần đây"
 
-#. applet.js:237
+#. applet.js:222
 msgid "translations"
 msgstr "bản dịch"
 
-#. applet.js:312
+#. applet.js:297
 msgid "Reload icons"
 msgstr "Tải lại biểu tượng"
 
-#. applet.js:318
+#. applet.js:303
 msgid "Visit website"
 msgstr "Truy cập trang web"
 
-#. applet.js:826
+#. applet.js:831
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:915
+#. applet.js:919
 msgid "Mark all as read"
 msgstr "Đánh dấu tất cả là đã đọc"
 
-#. applet.js:926
+#. applet.js:930
 msgid "Refresh"
 msgstr "Làm mới"
 
-#. applet.js:938
+#. applet.js:944
+#, fuzzy
+msgid "Refreshing in progress - Click to stop"
+msgstr "Đang làm mới"
+
+#. applet.js:969
 msgid "Refreshing in progress"
 msgstr "Đang làm mới"
 
-#. applet.js:949
+#. applet.js:981
 msgid "Configure..."
 msgstr "Cấu hình..."
 
@@ -69,7 +74,8 @@ msgstr "SpiceSpy"
 #. metadata.json->description
 msgid ""
 "Notifies you when there's a change to your favorite Spices on the website."
-msgstr "Thông báo cho bạn khi có thay đổi trong các Spices yêu thích trên trang web."
+msgstr ""
+"Thông báo cho bạn khi có thay đổi trong các Spices yêu thích trên trang web."
 
 #. settings-schema.json->pageGeneral->title
 msgid "General"
@@ -95,6 +101,10 @@ msgstr "Khoảng thời gian cập nhật"
 #. settings-schema.json->update-interval-hours->units
 msgid "hours"
 msgstr "giờ"
+
+#. settings-schema.json->update-interruptible->description
+msgid "The update can be interrupted by the user"
+msgstr ""
 
 #. settings-schema.json->standard-opacity->description
 msgid "Opacity in absence of change"
@@ -217,6 +227,14 @@ msgstr "Không hiển thị gì cả"
 msgid "Show only non-zero values in panel"
 msgstr "Chỉ hiển thị các giá trị khác 0 trên bảng"
 
+#. settings-schema.json->coloredIcon->description
+msgid "Change icon color while refreshing"
+msgstr ""
+
+#. settings-schema.json->colorWhileRefreshing->description
+msgid "Icon color while refreshing"
+msgstr ""
+
 #. settings-schema.json->author-list->columns->title
 msgid "GitHub user name"
 msgstr "Tên người dùng GitHub"
@@ -233,9 +251,10 @@ msgid ""
 "process.\n"
 "Just don't do it too often."
 msgstr ""
-"Không cần thêm các Spices được duy trì bởi các thành viên trong danh sách Tác giả "
-"vào danh sách UUID.\n"
-"Khi danh sách của bạn đã chính xác, bạn có thể tải lại applet này để tăng tốc quá trình.\n"
+"Không cần thêm các Spices được duy trì bởi các thành viên trong danh sách "
+"Tác giả vào danh sách UUID.\n"
+"Khi danh sách của bạn đã chính xác, bạn có thể tải lại applet này để tăng "
+"tốc quá trình.\n"
 "Chỉ cần tránh thực hiện việc này quá thường xuyên."
 
 #. settings-schema.json->button-reload->description
