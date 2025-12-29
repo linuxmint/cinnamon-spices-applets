@@ -50,6 +50,9 @@ class NetSpeedApplet extends Applet.TextApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
 
+        // Use monospace font to prevent width jitter which can close the hover tooltip
+        this._applet_label.set_style("font-family: monospace;");
+
         this.metadata = metadata;
 
         // Expose instance for the helper function
