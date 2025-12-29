@@ -1,0 +1,322 @@
+# CLASSIC MENU
+# This file is put in the public domain.
+# fredcw, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: classic-menu@fredcw 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-29 14:23-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#. applet.js:16
+msgid "Classic Menu"
+msgstr ""
+
+#. applet.js:16
+msgid "Classic Menu is for cinnamon versions 6.6 and later only."
+msgstr ""
+
+#. 6.6/applet.js:397 6.6/applet.js:486
+msgid "Remove from favorites"
+msgstr ""
+
+#. 6.6/applet.js:404 6.6/applet.js:489
+msgid "Add to favorites"
+msgstr ""
+
+#. 6.6/applet.js:473
+msgid "Run with dedicated GPU"
+msgstr ""
+
+#. 6.6/applet.js:477
+msgid "Add to panel"
+msgstr ""
+
+#. 6.6/applet.js:481
+msgid "Add to desktop"
+msgstr ""
+
+#. 6.6/applet.js:496
+msgid "Properties"
+msgstr ""
+
+#. 6.6/applet.js:501
+msgid "Uninstall"
+msgstr ""
+
+#. 6.6/applet.js:759 6.6/applet.js:867
+msgid "This file is no longer available"
+msgstr ""
+
+#. 6.6/applet.js:773 6.6/applet.js:881
+msgid "Open with"
+msgstr ""
+
+#. 6.6/applet.js:819 6.6/applet.js:927
+msgid "Other application..."
+msgstr ""
+
+#. 6.6->settings-schema.json->menu->title
+#. 6.6/applet.js:1199
+msgid "Menu"
+msgstr ""
+
+#. 6.6/applet.js:1204
+msgid "Edit menu"
+msgstr ""
+
+#. 6.6/applet.js:2458
+msgid "Places"
+msgstr ""
+
+#. 6.6/applet.js:2496
+msgid "Recent Files"
+msgstr ""
+
+#. 6.6/applet.js:2511
+msgid "Clear list"
+msgstr ""
+
+#. 6.6/applet.js:2512
+msgid "Clear all recent documents"
+msgstr ""
+
+#. 6.6/applet.js:2531
+msgid "No recent documents"
+msgstr ""
+
+#. 6.6/applet.js:2566
+msgid "Favorites"
+msgstr ""
+
+#. 6.6/applet.js:2595
+msgid "All Applications"
+msgstr ""
+
+#. 6.6/applet.js:2663
+msgid "Lock Screen"
+msgstr ""
+
+#. 6.6/applet.js:2664
+msgid "Lock the screen"
+msgstr ""
+
+#. 6.6/applet.js:2688
+msgid "Log Out"
+msgstr ""
+
+#. 6.6/applet.js:2689
+msgid "Leave the session"
+msgstr ""
+
+#. 6.6/applet.js:2700
+msgid "Shut Down"
+msgstr ""
+
+#. 6.6/applet.js:2701
+msgid "Shut down the computer"
+msgstr ""
+
+#. metadata.json->description
+msgid "The classic Cinnamon menu for cinnamon 6.6 and later"
+msgstr ""
+
+#. 6.6->settings-schema.json->panel->title
+msgid "Panel"
+msgstr ""
+
+#. 6.6->settings-schema.json->panel-appear->title
+msgid "Appearance"
+msgstr ""
+
+#. 6.6->settings-schema.json->panel-behave->title
+#. 6.6->settings-schema.json->menu-behave->title
+msgid "Behavior"
+msgstr ""
+
+#. 6.6->settings-schema.json->menu-layout->title
+msgid "Layout and content"
+msgstr ""
+
+#. 6.6->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr ""
+
+#. 6.6->settings-schema.json->menu-custom->description
+msgid "Use a custom icon and label"
+msgstr ""
+
+#. 6.6->settings-schema.json->menu-custom->tooltip
+msgid "Check this to specify a custom icon and label"
+msgstr ""
+
+#. 6.6->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr ""
+
+#. 6.6->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr ""
+
+#. 6.6->settings-schema.json->menu-icon-size->units
+#. 6.6->settings-schema.json->category-icon-size->units
+#. 6.6->settings-schema.json->application-icon-size->units
+#. 6.6->settings-schema.json->fav-icon-size->units
+msgid "px"
+msgstr ""
+
+#. 6.6->settings-schema.json->menu-icon-size->description
+msgid "Icon size"
+msgstr ""
+
+#. 6.6->settings-schema.json->menu-label->description
+msgid "Text"
+msgstr ""
+
+#. 6.6->settings-schema.json->menu-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr ""
+
+#. 6.6->settings-schema.json->show-category-icons->description
+msgid "Show category icons"
+msgstr ""
+
+#. 6.6->settings-schema.json->show-category-icons->tooltip
+msgid "Choose whether or not to show icons on categories."
+msgstr ""
+
+#. 6.6->settings-schema.json->category-icon-size->description
+msgid "Categories icon size"
+msgstr ""
+
+#. 6.6->settings-schema.json->show-application-icons->description
+msgid "Show application icons"
+msgstr ""
+
+#. 6.6->settings-schema.json->show-application-icons->tooltip
+msgid "Choose whether or not to show icons on applications."
+msgstr ""
+
+#. 6.6->settings-schema.json->application-icon-size->description
+msgid "Applications icon size"
+msgstr ""
+
+#. 6.6->settings-schema.json->favbox-show->description
+msgid "Show favorites and session buttons"
+msgstr ""
+
+#. 6.6->settings-schema.json->favbox-show->tooltip
+msgid "Choose whether or not to show the left pane of the menu."
+msgstr ""
+
+#. 6.6->settings-schema.json->fav-icon-size->description
+msgid "Favorites icon size"
+msgstr ""
+
+#. 6.6->settings-schema.json->show-favorites->description
+msgid "Show favorites"
+msgstr ""
+
+#. 6.6->settings-schema.json->show-favorites->tooltip
+msgid "Choose whether or not to show favorite files in the menu."
+msgstr ""
+
+#. 6.6->settings-schema.json->show-places->description
+msgid "Show bookmarks and places"
+msgstr ""
+
+#. 6.6->settings-schema.json->show-places->tooltip
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr ""
+
+#. 6.6->settings-schema.json->show-recents->description
+msgid "Show recents"
+msgstr ""
+
+#. 6.6->settings-schema.json->show-recents->tooltip
+msgid "Choose whether or not to show recents in the menu."
+msgstr ""
+
+#. 6.6->settings-schema.json->category-hover->description
+msgid "Change categories on hover"
+msgstr ""
+
+#. 6.6->settings-schema.json->category-hover->tooltip
+msgid "Choose whether or not to change categories by hovering."
+msgstr ""
+
+#. 6.6->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr ""
+
+#. 6.6->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
+
+#. 6.6->settings-schema.json->search-filesystem->description
+msgid "Enable filesystem path entry in search box"
+msgstr ""
+
+#. 6.6->settings-schema.json->search-filesystem->tooltip
+msgid "Allows path entry in the menu search box."
+msgstr ""
+
+#. 6.6->settings-schema.json->force-show-panel->description
+msgid "Force the panel to be visible when opening the menu"
+msgstr ""
+
+#. 6.6->settings-schema.json->force-show-panel->tooltip
+msgid ""
+"Opening the menu will also show the main panel (which may be auto-hidden)."
+msgstr ""
+
+#. 6.6->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr ""
+
+#. 6.6->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr ""
+
+#. 6.6->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr ""
+
+#. 6.6->settings-schema.json->hover-delay->description
+msgid "Menu hover delay"
+msgstr ""
+
+#. 6.6->settings-schema.json->hover-delay->tooltip
+msgid "Delay before the menu opens when hovered"
+msgstr ""
+
+#. 6.6->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr ""
+
+#. 6.6->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr ""
+
+#. 6.6->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr ""
+
+#. 6.6->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr ""
+
+#. 6.6->settings-schema.json->reset-menu-size-button->description
+msgid "Restore the menu to its original size"
+msgstr ""
