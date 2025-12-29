@@ -4,6 +4,5 @@
   "description": "A persistent, asynchronous, text-only network speed monitor for Linux Mint Cinnamon",
   "max-instances": 1,
   "author": "iMayhem",
-  "version": 1,
-  "icon": "network-transmit-receive"
+  "version": 1
 }
