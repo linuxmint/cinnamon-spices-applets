@@ -75,7 +75,7 @@
 			"type": "section",
 			"title": "General",
 			"keys": [
-				"blink-effect",
+				"blink-effect-enabled",
 				"blink-period",
 				"blink-gap",
 				"idle-delay"
@@ -192,18 +192,14 @@
 		"default": true,
 		"description": "Fill the Colors Inside the Eye"
 	},
-	"blink-effect": {
-		"type": "combobox",
-		"default": "none",
-		"description": "Blink Effect",
-		"options": {
-			"None": "none",
-			"When Idle": "idle",
-			"Always": "always"
-		}
+	"blink-effect-enabled": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Blink Effect"
 	},
 	"blink-period": {
 		"type": "spinbutton",
+		"dependency": "blink-effect-enabled",
 		"default": 600,
 		"min": 200,
 		"max": 5000,
@@ -214,6 +210,7 @@
 	},
 	"blink-gap": {
 		"type": "spinbutton",
+		"dependency": "blink-effect-enabled",
 		"default": 8000,
 		"min": 1000,
 		"max": 20000,
@@ -223,7 +220,6 @@
 		"tooltip": "This setting controls the time gap between two consecutive blinks. Measured in milliseconds."
 	},
 	"idle-delay": {
-		"dependency": "blink-effect=idle",
 		"type": "spinbutton",
 		"default": 30000,
 		"min": 5000,

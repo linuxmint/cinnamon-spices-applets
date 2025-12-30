@@ -207,8 +207,8 @@ class Eye extends Applet.Applet {
 				},
 			},
 			{
-				key: "blink-effect",
-				value: "blink_effect",
+				key: "blink-effect-enabled",
+				value: "blink_effect_enabled",
 				cb: null
 			},
 			{
@@ -377,7 +377,7 @@ class Eye extends Applet.Applet {
 			pupil_color = ok ? color : pupil_color;
 		}
 
-		// if (this.blink_effect !== "none") {
+		// if (this.blink_effect_enabled) {
 		// 	global.log(Configs.UUID, `Eye/${this.instanceId} - blinking rate: ${this.blink_rate}`);
 		// }
 
@@ -474,38 +474,36 @@ class Eye extends Applet.Applet {
 	}
 
 	check_blink_needed() {
-		if (this.blink_effect === "none") {
+		if (!this.blink_effect_enabled) {
 			return false;
 		}
 
 		const now = Date.now();
 
-		if (this.blink_effect === "always" || (this.blink_effect === "idle" && this.idle_monitor.idle)) {
-			if (this.last_blink_start === null ||
-				this.last_blink_end === null ||
-				this.last_blink_end + this.blink_gap < now
-			) {
-				this.last_blink_start = now;
-				this.last_blink_end = now + this.blink_period;
-				this.blink_rate = 0.00;
-				// global.log(Configs.UUID, `Eye/${this.instanceId} - starting '${this.blink_effect}' blink`);
-				return true;
-			} else if (this.last_blink_start <= now && now <= this.last_blink_end) {
-				let progress = (now - this.last_blink_start) / this.blink_period;
+		if (this.last_blink_start === null ||
+			this.last_blink_end === null ||
+			this.last_blink_end + this.blink_gap < now
+		) {
+			this.last_blink_start = now;
+			this.last_blink_end = now + this.blink_period;
+			this.blink_rate = 0.00;
+			// global.log(Configs.UUID, `Eye/${this.instanceId} - starting blink`);
+			return true;
+		} else if (this.last_blink_start <= now && now <= this.last_blink_end) {
+			let progress = (now - this.last_blink_start) / this.blink_period;
 
-				if (progress <= 0.5) {
-					this.blink_rate = progress * 2;
-				} else {
-					this.blink_rate = 2 - progress * 2;
-				}
-
-				this.blink_rate = Math.round(this.blink_rate * 100) / 100;
-				return true;
-			} else if (this.blink_rate > 0.00) {
-				this.blink_rate = 0.00;
-				// global.log(Configs.UUID, `Eye/${this.instanceId} - ending '${this.blink_effect}' blink`);
-				return true;
+			if (progress <= 0.5) {
+				this.blink_rate = progress * 2;
+			} else {
+				this.blink_rate = 2 - progress * 2;
 			}
+
+			this.blink_rate = Math.round(this.blink_rate * 100) / 100;
+			return true;
+		} else if (this.blink_rate > 0.00) {
+			this.blink_rate = 0.00;
+			// global.log(Configs.UUID, `Eye/${this.instanceId} - ending blink`);
+			return true;
 		}
 
 		return false;
