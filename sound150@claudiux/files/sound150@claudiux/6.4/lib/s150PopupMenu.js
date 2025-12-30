@@ -685,7 +685,7 @@ class Player extends PopupMenu.PopupMenuSection {
             let dontDisplayArtSites = this._applet.sitesNotDisplayingAlbumArt;
             for (let site of dontDisplayArtSites) {
                 if (metadata["xesam:url"].unpack().toLowerCase().includes(site) ||
-                    metadata["mpris:artUrl"].unpack().toLowerCase().includes(site)) {
+                    (metadata["mpris:artUrl"] && metadata["mpris:artUrl"].unpack().toLowerCase().includes(site))) {
                     if (this._applet.iconsWhenNotDisplayingAlbumArt[site].length > 0) {
                         let siteIcon = this._applet.iconsWhenNotDisplayingAlbumArt[site];
                         this._trackCoverFile = `file://${siteIcon}`;

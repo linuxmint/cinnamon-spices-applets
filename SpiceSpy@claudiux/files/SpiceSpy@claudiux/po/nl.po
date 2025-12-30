@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 3.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-25 23:34+0200\n"
+"POT-Creation-Date: 2025-12-28 16:21+0100\n"
 "PO-Revision-Date: 2025-05-13 14:32+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -16,48 +16,53 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:201
+#. applet.js:185
 msgid "score"
 msgstr "score"
 
-#. applet.js:213
+#. applet.js:197
 msgid "comments"
 msgstr "opmerkingen"
 
-#. applet.js:225
+#. applet.js:209
 msgid "recent issues"
 msgstr "recente problemen"
 
-#. applet.js:237
+#. applet.js:222
 msgid "translations"
 msgstr "vertalingen"
 
-#. applet.js:312
+#. applet.js:297
 #, fuzzy
 msgid "Reload icons"
 msgstr "Herlaad deze applet"
 
-#. applet.js:318
+#. applet.js:303
 msgid "Visit website"
 msgstr ""
 
-#. applet.js:826
+#. applet.js:831
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:915
+#. applet.js:919
 msgid "Mark all as read"
 msgstr "Markeer alles als gelezen"
 
-#. applet.js:926
+#. applet.js:930
 msgid "Refresh"
 msgstr "Vernieuw"
 
-#. applet.js:938
+#. applet.js:944
+#, fuzzy
+msgid "Refreshing in progress - Click to stop"
+msgstr "Bezig met vernieuwen"
+
+#. applet.js:969
 msgid "Refreshing in progress"
 msgstr "Bezig met vernieuwen"
 
-#. applet.js:949
+#. applet.js:981
 msgid "Configure..."
 msgstr "Configureren..."
 
@@ -96,6 +101,10 @@ msgstr "Update-interval"
 #. settings-schema.json->update-interval-hours->units
 msgid "hours"
 msgstr "uren"
+
+#. settings-schema.json->update-interruptible->description
+msgid "The update can be interrupted by the user"
+msgstr ""
 
 #. settings-schema.json->standard-opacity->description
 msgid "Opacity in absence of change"
@@ -218,6 +227,14 @@ msgstr "Toon niets"
 #. settings-schema.json->useful-only->description
 msgid "Show only non-zero values in panel"
 msgstr "Toon alleen niet-nul waarden in paneel"
+
+#. settings-schema.json->coloredIcon->description
+msgid "Change icon color while refreshing"
+msgstr ""
+
+#. settings-schema.json->colorWhileRefreshing->description
+msgid "Icon color while refreshing"
+msgstr ""
 
 #. settings-schema.json->author-list->columns->title
 msgid "GitHub user name"
