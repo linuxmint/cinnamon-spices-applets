@@ -1378,7 +1378,7 @@ class SensorsApplet extends Applet.Applet {
         let _to = setTimeout( () => {
             clearTimeout(_to);
             if (this.menu.isOpen) this.menu.close();
-            this.pids.push(spawnCommandLine("/usr/bin/xlet-settings applet %s &".format(UUID)));
+            this.pids.push(spawnCommandLine("xlet-settings applet %s".format(UUID)));
           },
           300
         );
@@ -1394,7 +1394,7 @@ class SensorsApplet extends Applet.Applet {
         let _to = setTimeout( () => {
             clearTimeout(_to);
             if (this.menu.isOpen) this.menu.close();
-            this.pids.push(spawnCommandLineAsync("%s applet %s -t 1 &".format(XS_PATH, UUID)));
+            this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 1".format(UUID)));
           },
           300
         );
@@ -1410,7 +1410,7 @@ class SensorsApplet extends Applet.Applet {
         let _to = setTimeout( () => {
             clearTimeout(_to);
             if (this.menu.isOpen) this.menu.close();
-            this.pids.push(spawnCommandLine("%s applet %s -t 2 &".format(XS_PATH, UUID)));
+            this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 2".format(UUID)));
           },
           300
         );
@@ -1426,7 +1426,7 @@ class SensorsApplet extends Applet.Applet {
         let _to = setTimeout( () => {
             clearTimeout(_to);
             if (this.menu.isOpen) this.menu.close();
-            this.pids.push(spawnCommandLine("%s applet %s -t 3 &".format(XS_PATH, UUID)));
+            this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 3".format(UUID)));
           },
           300
         );
@@ -1442,7 +1442,7 @@ class SensorsApplet extends Applet.Applet {
         let _to = setTimeout( () => {
             clearTimeout(_to);
             if (this.menu.isOpen) this.menu.close();
-            this.pids.push(spawnCommandLine("%s applet %s -t 4 &".format(XS_PATH, UUID)));
+            this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 4".format(UUID)));
           },
           300
         );

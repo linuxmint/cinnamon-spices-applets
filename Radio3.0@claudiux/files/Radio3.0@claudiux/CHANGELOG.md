@@ -1,3 +1,6 @@
+### v3.10.0~20251211
+  * Working well with Cinnamon 6.6.
+
 ### v3.9.5~20251129
   * Better file monitoring.
 

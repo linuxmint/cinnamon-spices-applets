@@ -1,3 +1,11 @@
+### v5.7.1~20251230
+  * Minor bugfixes.
+
+### v5.7.0~20251228
+  * You can now interrupt a refresh.
+  * You can request to change the icon color when refreshing. You can choose this color.
+  * The menu should no longer close unexpectedly.
+
 ### v5.6.2~20251125
   * Highlights the number of new issues in the menu.
 

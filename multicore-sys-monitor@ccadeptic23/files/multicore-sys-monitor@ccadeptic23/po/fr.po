@@ -490,6 +490,10 @@ msgstr "Épaisseur des courbes"
 msgid "Limit height to the size of a colored icon"
 msgstr "Limiter la hauteur à la taille d'une icône colorée"
 
+#. 6.4->settings-schema.json->graphHeight->description
+msgid "Graph height (pixels)"
+msgstr "Hauteur des graphiques (pixels)"
+
 #. 6.4->settings-schema.json->refreshRate->description
 #. 3.0/prefsui.glade:132 3.2/prefsui.glade:132 6.0/prefsui.glade:140
 #. 3.4/prefsui.glade:133 5.6/prefsui.glade:140 4.0/prefsui.glade:140

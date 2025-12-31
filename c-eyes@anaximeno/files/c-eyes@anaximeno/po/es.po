@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-22 04:46-0100\n"
-"PO-Revision-Date: 2024-09-22 11:29-0300\n"
+"POT-Creation-Date: 2025-12-20 06:52-0100\n"
+"PO-Revision-Date: 2025-12-22 22:19-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.8\n"
 
 #. 4.2/applet.js:56 5.4/applet.js:56
 msgid ""
@@ -46,7 +46,7 @@ msgstr "haga clic para activar el ojo"
 msgid "TIP"
 msgstr "TIP"
 
-#. 6.2/applet.js:48
+#. 6.2/applet.js:42
 msgid "Hey, I saw that!"
 msgstr "¡Oye, vi eso!"
 
@@ -69,6 +69,7 @@ msgstr "Ojo"
 
 #. 4.2->settings-schema.json->effects->title
 #. 5.4->settings-schema.json->effects->title
+#. 6.2->settings-schema.json->effects-page->title
 msgid "Effects"
 msgstr "Efectos"
 
@@ -78,6 +79,7 @@ msgstr "Efectos"
 #. 5.4->settings-schema.json->click-generic->title
 #. 6.2->settings-schema.json->general-page->title
 #. 6.2->settings-schema.json->general-section->title
+#. 6.2->settings-schema.json->general-effects-section->title
 msgid "General"
 msgstr "General"
 
@@ -148,6 +150,9 @@ msgstr "Relleno"
 #. 5.4->settings-schema.json->eye-repaint-interval->units
 #. 5.4->settings-schema.json->fade-timeout->units
 #. 6.2->settings-schema.json->repaint-interval->units
+#. 6.2->settings-schema.json->blink-period->units
+#. 6.2->settings-schema.json->blink-gap->units
+#. 6.2->settings-schema.json->idle-delay->units
 msgid "ms"
 msgstr "ms"
 
@@ -477,3 +482,56 @@ msgstr "Color de iris"
 #. 6.2->settings-schema.json->pupil-color->description
 msgid "Pupil Color"
 msgstr "Color de pupila"
+
+#. 6.2->settings-schema.json->blink-effect->description
+msgid "Blink Effect"
+msgstr "Efecto parpadeo"
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "None"
+msgstr "Ninguno"
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "When Idle"
+msgstr "Cuando está inactivo"
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "Always"
+msgstr "Siempre"
+
+#. 6.2->settings-schema.json->blink-period->description
+msgid "Blink Period"
+msgstr "Período de parpadeo"
+
+#. 6.2->settings-schema.json->blink-period->tooltip
+msgid ""
+"This setting controls the duration of a full blink cycle (closing and "
+"opening). Measured in milliseconds."
+msgstr ""
+"Este ajuste controla la duración de un ciclo completo de parpadeo (cierre y "
+"apertura). Se mide en milisegundos."
+
+#. 6.2->settings-schema.json->blink-gap->description
+msgid "Blink Gap"
+msgstr "Intervalo de parpadeo"
+
+#. 6.2->settings-schema.json->blink-gap->tooltip
+msgid ""
+"This setting controls the time gap between two consecutive blinks. Measured "
+"in milliseconds."
+msgstr ""
+"Esta configuración controla el intervalo de tiempo entre dos parpadeos "
+"consecutivos. Se mide en milisegundos."
+
+#. 6.2->settings-schema.json->idle-delay->description
+msgid "Idle Delay"
+msgstr "Retardo de inactividad"
+
+#. 6.2->settings-schema.json->idle-delay->tooltip
+msgid ""
+"This setting controls the time of inactivity (no mouse or keyboard input) "
+"after which the system is considered idle. Measured in milliseconds."
+msgstr ""
+"Esta configuración controla el tiempo de inactividad (sin entradas del ratón "
+"ni del teclado) tras el cual el sistema se considera inactivo. Se mide en "
+"milisegundos."

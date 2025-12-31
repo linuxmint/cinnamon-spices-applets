@@ -1,5 +1,17 @@
 {
-	"soundOn" : {
+	"customCommand": {
+		"type": "entry",
+		"default": "",
+		"description": "Command to run on timer (empty for turn off)",
+		"tooltip": "Custom command to run on timer. Leave empty to turn off the computer on timer"
+	},
+	"cancelTurnOffOption": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Cancel run command (turn off) option",
+		"tooltip": "Cancel the option to run command or turn off for subsequent use (triggers only at the moment count down finished)"
+	},
+	"soundOn": {
 		"type": "checkbox",
 		"default": true,
 		"description": "Play sound on timer",
@@ -12,24 +24,30 @@
 		"description": "Soundclip file path",
 		"tooltip": "Soundclip file path"
 	},
-	"showNotifications" : {
+	"showNotifications": {
 		"type": "checkbox",
 		"default": true,
 		"description": "Show system notification on timer",
 		"tooltip": "Show system notification on timer"
 	},
-	"openSubmenu" : {
+	"customText": {
+		"type": "entry",
+		"default": "",
+		"description": "Custom notification text",
+		"tooltip": "Custom text of the system notification on timer"
+	},
+	"openSubmenu": {
 		"type": "combobox",
 		"default": "Quick setup",
 		"options": {
-			"Quick setup" : "Quick setup",
-			"Precise setup" : "Precise setup",
-			"Presets" : "Presets"
+			"Quick setup": "Quick setup",
+			"Precise setup": "Precise setup",
+			"Presets": "Presets"
 		},
 		"description": "Submenu to open initially",
 		"tooltip": "Submenu to open initially"
 	},
-	"preset" : {
+	"preset": {
 		"type": "generic",
 		"default": [
 			60,
@@ -42,17 +60,21 @@
 			1800,
 			2700,
 			3600,
-			7200
+			7200,
+			10800,
+			14400,
+			18000,
+			21600
 		],
 		"description": "Presets",
 		"tooltip": "Presets"
 	},
-        "saved_endTime": {
+	"saved_endTime": {
 		"type": "generic",
-                "default": 0
-        },
-        "turn_off": {
+		"default": 0
+	},
+	"turn_off": {
 		"type": "generic",
 		"default": false
-        }
+	}
 }
