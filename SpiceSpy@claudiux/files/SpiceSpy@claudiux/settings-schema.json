@@ -1,16 +1,74 @@
 {
-  "section1": {
-    "type": "section",
-    "description": "Options"
+  "SpiceSpyLayout": {
+    "type": "layout",
+    "pages": [
+      "pageGeneral",
+      "pageOptions"
+    ],
+    "pageGeneral": {
+      "type": "page",
+      "title": "General",
+      "sections": [
+        "section2",
+        "section3"
+      ]
+    },
+    "pageOptions": {
+      "type": "page",
+      "title": "Options",
+      "sections": [
+        "section1"
+      ]
+    },
+    "section1": {
+      "type": "section",
+      "title": "Options",
+      "keys": [
+        "update-interval-hours",
+        "update-interruptible",
+        "standard-opacity",
+        "color-on-change",
+        "icon-size",
+        "show-issues",
+        "show-translations",
+        "show-commits",
+        "sort-by",
+        "show-uuid",
+        "translate-name",
+        "display-on-panel",
+        "useful-only",
+        "coloredIcon",
+        "colorWhileRefreshing"
+      ]
+    },
+    "section2": {
+      "type": "section",
+      "title": "List of authors of the Spices you are interested in",
+      "keys": ["author-list"]
+    },
+    "section3": {
+      "type": "section",
+      "title": "List of specific Spices you are interested in",
+      "keys": ["uuid-list", "button-my-spices", "label-reload", "button-reload"]
+    }
   },
   "update-interval": {
-    "type": "spinbutton",
+    "type": "generic",
+    "default": -1
+  },
+  "update-interval-hours": {
+    "type": "scale",
     "description": "Update interval",
-    "units": "minutes",
-    "default": 240,
-    "min": 15,
-    "max": 2880,
-    "step": 5
+    "units": "hours",
+    "default": 4.0,
+    "min": 0.5,
+    "max": 24.0,
+    "step": 0.5
+  },
+  "update-interruptible": {
+    "type": "switch",
+    "description": "The update can be interrupted by the user",
+    "default": true
   },
   "standard-opacity": {
     "type": "spinbutton",
@@ -28,22 +86,37 @@
   "show-icon-in-menu": {
     "type": "switch",
     "description": "Show each Spice icon in the menu",
-    "default": false
+    "default": true
   },
   "icon-size": {
-    "type": "spinbutton",
-    "dependency": "show-icon-in-menu",
+    "type": "combobox",
     "description": "Icon size",
-    "units": "pixels",
     "default": 24,
-    "min": 16,
-    "max": 64,
-    "step": 2
+    "options": {
+      "16": 16,
+      "22": 22,
+      "24": 24,
+      "32": 32,
+      "48": 48,
+      "64": 64,
+      "96": 96,
+      "128":128
+    }
   },
   "show-translations": {
     "type": "switch",
     "description": "Show number of translations in the menu",
-    "default": false
+    "default": true
+  },
+  "show-commits": {
+    "type": "switch",
+    "description": "Show available updates in the menu",
+    "default": true
+  },
+  "show-issues": {
+    "type": "switch",
+    "description": "Show number of issues in the menu",
+    "default": true
   },
   "sort-by": {
     "type": "combobox",
@@ -83,11 +156,18 @@
   "useful-only": {
     "type": "switch",
     "description": "Show only non-zero values in panel",
-    "default": false
+    "default": true
   },
-  "section2": {
-    "type": "section",
-    "description": "List of authors of the Spices you are interested in"
+  "coloredIcon": {
+    "type": "switch",
+    "description": "Change icon color while refreshing",
+    "default": true
+  },
+  "colorWhileRefreshing": {
+    "type": "colorchooser",
+    "description": "Icon color while refreshing",
+    "default": "rgb(144,238,144)",
+    "dependency": "coloredIcon"
   },
   "author-list": {
     "type": "list",
@@ -103,10 +183,6 @@
 
     ]
   },
-  "section3": {
-    "type": "section",
-    "description": "List of specific Spices you are interested in"
-  },
   "uuid-list": {
     "type": "list",
     "columns": [
@@ -121,12 +197,38 @@
 
     ]
   },
+  "button-my-spices": {
+    "type": "button",
+    "description": "Add all the Spices I use",
+    "callback": "_add_user_Spices"
+  },
+  "label-reload": {
+    "type": "label",
+    "description": "There's no need to include Spices maintained by members of the Authors list in the UUID list.\nOnce your lists are correct, you can reload this applet to speed up the process.\nJust don't do it too often."
+  },
+  "button-reload": {
+    "type": "button",
+    "description": "Reload this applet",
+    "callback": "_reload_this_applet"
+  },
   "spices_to_spy": {
     "type": "generic",
-    "default": {}
+    "default": {
+      "actions": {},
+      "applets": {},
+      "desklets": {},
+      "extensions": {},
+      "themes": {}
+    }
   },
   "old_spices_to_spy": {
     "type": "generic",
-    "default": {}
+    "default": {
+      "actions": {},
+      "applets": {},
+      "desklets": {},
+      "extensions": {},
+      "themes": {}
+    }
   }
 }

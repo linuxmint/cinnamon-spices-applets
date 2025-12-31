@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { getTimes } from "suncalc";
-import type { Config, Services } from "../../config";
+import { Services, type Config } from "../../config";
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import type { Condition, ForecastData, HourlyForecastData, WeatherData, PrecipitationType, AlertData } from "../../weather-data";
@@ -8,12 +8,13 @@ import { _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider"
 import { GetDeutscherWetterdienstAlerts } from "./alert";
 import type { LocationData } from "../../types";
+import { ErrorHandler } from "../../lib/services/error_handler";
 
 
 export class DeutscherWetterdienst extends BaseProvider {
     public needsApiKey: boolean = false;
     public prettyName: string = _("Deutscher Wetterdienst");
-    public name: Services = "DeutscherWetterdienst";
+    public name: Services = Services.DeutscherWetterdienst;
     public maxForecastSupport: number = 10;
     public maxHourlyForecastSupport: number = 240;
     public website: string = "https://brightsky.dev/";
@@ -85,7 +86,8 @@ export class DeutscherWetterdienst extends BaseProvider {
             },
             forecasts: this.ParseForecast(current, hourly, loc),
             hourlyForecasts: this.ParseHourlyForecast(hourly, loc),
-			alerts: alerts
+            alerts: alerts,
+            uvIndex: null
         };
     }
 
@@ -338,7 +340,7 @@ export class DeutscherWetterdienst extends BaseProvider {
 
     private HandleErrors = (message: ErrorResponse): boolean => {
         if (message.ErrorData.code == 404) {
-            this.app.ShowError({
+            ErrorHandler.Instance.PostError({
                 detail: "location not covered",
                 message: _("Please select a different provider or location"),
                 userError: true,

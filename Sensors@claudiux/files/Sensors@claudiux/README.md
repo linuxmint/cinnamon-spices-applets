@@ -95,6 +95,19 @@ Alternatively, run the commands:
 
 Then, log out and log in your session.
 
+
+### How to display Nvidia video card temperature?
+
+The applet will now automatically detect the existence of the *nvidia-smi* tool version 550.107.02 or higher, test to ensure that the tool is compatible, and if so will present the **Nvidia GPU** temperature sensors. The applet will log an *info* entry if the tool is found and works, or an *error* entry if the tools is found and fails.
+
+The *nvidia-smi* tool is part of the Nvidia closed source drivers, and only supports ["NVIDIA's Tesla, Quadro, GRID and GeForce devices from Fermi and higher architecture families"](https://docs.nvidia.com/deploy/nvidia-smi/index.html). 
+
+(While the tool does report fan speed, it does so as a percentage so is not compatible with the fan speed features of the applet.)
+
+When requesting help with this feature, please include the output of `nvidia-smi -L` as well as any entries in the '~/.xsession-errors' file related to 'Nvidia SMI'.
+
+*Many thanks to @JEleniel for her contribution!*
+
 ### My PC has several temperature sensors and their values ​​are different. Why and which one to choose?
 
 Example:

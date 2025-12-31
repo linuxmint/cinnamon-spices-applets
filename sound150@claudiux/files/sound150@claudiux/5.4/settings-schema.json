@@ -218,7 +218,7 @@
   },
   "middleClickAction": {
     "type": "combobox",
-    "default": "mute",
+    "default": "out_mute",
     "options": {
       "Toggle Mute": "mute",
       "Toggle Mute output": "out_mute",
@@ -246,7 +246,7 @@
   },
   "showalbum": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Show album art as icon",
     "dependency": "playerControl"
   },
@@ -278,7 +278,7 @@
   },
   "showVolumeLevelNearIcon": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display volume level near icon"
   },
   "showMicMutedOnIcon": {
@@ -370,7 +370,7 @@
       "medium": "medium",
       "large": "large"
     },
-    "description": "Whether the media keys osd is disabled or its relative display size"
+    "description": "Whether the media keys OSD is disabled or its relative display size"
   },
   "showOSDonStartup": {
     "type": "switch",

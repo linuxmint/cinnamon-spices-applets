@@ -1,0 +1,112 @@
+# PRINTERS
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# linux-man, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-10-08 19:45-0400\n"
+"PO-Revision-Date: 2024-10-28 02:55+0100\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+#. applet.js:59 applet.js:173
+msgid "Printers"
+msgstr "Impressores"
+
+#. applet.js:198
+msgid "Cancel all jobs"
+msgstr "Cancel·lar totes les tasques"
+
+#. applet.js:225
+msgid "at"
+msgstr "a"
+
+#. settings-schema.json->send-to-front->description
+#. applet.js:239
+msgid "Send to front"
+msgstr "Enviar al capdavant"
+
+#. metadata.json->description
+msgid "Manage Jobs and Printers"
+msgstr "Gestioneu tasques i impressores"
+
+#. metadata.json->contributors
+msgid "Caldas Lopes"
+msgstr "Caldas Lopes"
+
+#. settings-schema.json->show-icon->description
+msgid "Show icon"
+msgstr "Mostrar la icona"
+
+#. settings-schema.json->show-icon->options
+msgid "Always"
+msgstr "Sempre"
+
+#. settings-schema.json->show-icon->options
+msgid "When printers exist"
+msgstr "Quan hi hagi impressores"
+
+#. settings-schema.json->show-icon->options
+msgid "When printing"
+msgstr "Quan s'estigui imprimint"
+
+#. settings-schema.json->show-icon->tooltip
+msgid "When to show the icon"
+msgstr "Quan mostrar la icona"
+
+#. settings-schema.json->show-error->description
+msgid "Printer errors"
+msgstr "Errors d'impressió"
+
+#. settings-schema.json->show-error->tooltip
+msgid "Show printer error icon"
+msgstr "Mostrar la icona d'errors d'impressió"
+
+#. settings-schema.json->show-jobs->description
+msgid "Documents count"
+msgstr "Comptador de documents"
+
+#. settings-schema.json->show-jobs->tooltip
+msgid "Show documents count next to icon"
+msgstr "Mostrar el comptador de documents al costat de la icona"
+
+#. settings-schema.json->job-number->description
+msgid "Document number"
+msgstr "Número de document"
+
+#. settings-schema.json->job-number->tooltip
+msgid "Show each document number on print list"
+msgstr "Mostrar el número de cada document a la cua d'impressió"
+
+#. settings-schema.json->send-to-front->tooltip
+msgid "Documents can be sent to front"
+msgstr "Els documents poden enviar-se al capdavant de la cua"
+
+#. settings-schema.json->symbolic-icons->description
+msgid "Symbolic icons"
+msgstr "Icones simbòliques"
+
+#. settings-schema.json->symbolic-icons->tooltip
+msgid "Use symbolic icons"
+msgstr "Utilitzar icones simbòliques"
+
+#. settings-schema.json->reload-button->description
+#. settings-schema.json->reload-button->tooltip
+msgid "Reload Applet"
+msgstr "Recarregar la miniaplicació"
+
+#. settings-schema.json->cups-button->description
+#. settings-schema.json->cups-button->tooltip
+msgid "Restart CUPS"
+msgstr "Reiniciar CUPS"

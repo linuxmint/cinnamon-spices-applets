@@ -1,9 +1,9 @@
 {
     "uuid": "ddcci-multi-monitor@tim-we",
     "name": "DDC/CI Multi-Monitor",
-    "version": "1.1.0",
+    "version": "1.3.1",
     "description": "Adjust monitor brightness via DDC/CI",
-    "author": "tim-we",
-    "hide-configuration": true,
-    "max-instances": "1"
+    "author": "GingerGigiCat",
+    "original_author": "tim-we",
+    "max-instances": "-1"
 }

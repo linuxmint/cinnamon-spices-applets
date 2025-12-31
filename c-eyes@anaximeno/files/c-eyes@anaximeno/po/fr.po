@@ -1,25 +1,23 @@
-# SOME DESCRIPTIVE TITLE.
+# CINNAMON EYES
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# anaximeno, 2023
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
-"POT-Creation-Date: 2024-06-15 16:50-0100\n"
-"PO-Revision-Date: 2024-06-27 16:55+0200\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Project-Id-Version: c-eyes@anaximeno 3.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-12-20 06:52-0100\n"
+"PO-Revision-Date: 2025-12-22 09:22+0100\n"
+"Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
 
-#: 4.2/applet.js:56 5.4/applet.js:55
+#. 4.2/applet.js:56 5.4/applet.js:56
 msgid ""
 "📢 The click effects will be removed from this applet on the version 6.2 of "
 "Cinnamon\n"
@@ -34,19 +32,19 @@ msgstr ""
 "dans le module de configuration des extensions Cinnamon pour les versions de "
 "Cinnamon >= 5.4"
 
-#: 4.2/applet.js:389 5.4/applet.js:385
+#. 4.2/applet.js:396 5.4/applet.js:393
 msgid "click to deactivate the eye"
 msgstr "cliquer pour désactiver l'œil"
 
-#: 4.2/applet.js:389 5.4/applet.js:385
+#. 4.2/applet.js:396 5.4/applet.js:393
 msgid "click to activate the eye"
 msgstr "cliquer pour activer l'œil"
 
-#: 4.2/applet.js:390 5.4/applet.js:386
+#. 4.2/applet.js:397 5.4/applet.js:394
 msgid "TIP"
 msgstr "Astuce"
 
-#: 6.2/applet.js:46
+#. 6.2/applet.js:42
 msgid "Hey, I saw that!"
 msgstr "J'ai vu ça !"
 
@@ -67,6 +65,7 @@ msgstr "Œil"
 
 #. 4.2->settings-schema.json->effects->title
 #. 5.4->settings-schema.json->effects->title
+#. 6.2->settings-schema.json->effects-page->title
 msgid "Effects"
 msgstr "Effets"
 
@@ -74,7 +73,9 @@ msgstr "Effets"
 #. 4.2->settings-schema.json->click-generic->title
 #. 5.4->settings-schema.json->eye-generic->title
 #. 5.4->settings-schema.json->click-generic->title
-#. 6.2->settings-schema.json->general->description
+#. 6.2->settings-schema.json->general-page->title
+#. 6.2->settings-schema.json->general-section->title
+#. 6.2->settings-schema.json->general-effects-section->title
 msgid "General"
 msgstr "Général"
 
@@ -82,7 +83,7 @@ msgstr "Général"
 #. 4.2->settings-schema.json->click-colors->title
 #. 5.4->settings-schema.json->eye-colors->title
 #. 5.4->settings-schema.json->click-colors->title
-#. 6.2->settings-schema.json->colors->description
+#. 6.2->settings-schema.json->colors-section->title
 msgid "Colors"
 msgstr "Couleurs"
 
@@ -93,7 +94,6 @@ msgstr "Événements"
 
 #. 4.2->settings-schema.json->eye-mode->description
 #. 5.4->settings-schema.json->eye-mode->description
-#. 6.2->settings-schema.json->mode->description
 msgid "Mode"
 msgstr "Mode"
 
@@ -146,6 +146,9 @@ msgstr "Rembourrage"
 #. 5.4->settings-schema.json->eye-repaint-interval->units
 #. 5.4->settings-schema.json->fade-timeout->units
 #. 6.2->settings-schema.json->repaint-interval->units
+#. 6.2->settings-schema.json->blink-period->units
+#. 6.2->settings-schema.json->blink-gap->units
+#. 6.2->settings-schema.json->idle-delay->units
 msgid "ms"
 msgstr "ms"
 
@@ -400,13 +403,11 @@ msgid "General Opacity"
 msgstr "Opacité générale"
 
 #. 5.4->settings-schema.json->click-info->title
-#. 6.2->settings-schema.json->info->description
 msgid "Info"
 msgstr "Info"
 
 #. 5.4->settings-schema.json->click-effects-moved-on-
 #. cinnamon-6.2-info->description
-#. 6.2->settings-schema.json->click-effects-moved-info->description
 msgid ""
 "In Cinnamon versions 6.2 and later, the click effects have been removed from "
 "this applet and relocated to a new extension called 'mouse-click-effects,' "
@@ -417,9 +418,42 @@ msgstr ""
 "\"mouse-click-effects\", qui peut être installée via le module de "
 "configuration des Extensions de Cinnamon."
 
+#. 6.2->settings-schema.json->style-page->title
+#. 6.2->settings-schema.json->styles-section->title
+msgid "Style"
+msgstr "Style"
+
+#. 6.2->settings-schema.json->optimization-section->title
+msgid "Optimizations"
+msgstr "Optimisations"
+
+#. 6.2->settings-schema.json->mode->description
+msgid "Eye Mode"
+msgstr "Type d’œil"
+
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
 msgstr "Afficher une info-bulle au survol"
+
+#. 6.2->settings-schema.json->optimization-mode->description
+msgid "Optimization Mode"
+msgstr "Type d'optimisation"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Battery"
+msgstr "Batterie"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Balanced"
+msgstr "Équilibré"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Performance"
+msgstr "Performance"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Manual"
+msgstr "Manuel"
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
@@ -444,3 +478,56 @@ msgstr "Couleur de l'iris"
 #. 6.2->settings-schema.json->pupil-color->description
 msgid "Pupil Color"
 msgstr "Couleur de la pupille"
+
+#. 6.2->settings-schema.json->blink-effect->description
+msgid "Blink Effect"
+msgstr "Effet de clignotement"
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "None"
+msgstr "Aucun"
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "When Idle"
+msgstr "Au repos"
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "Always"
+msgstr "Toujours"
+
+#. 6.2->settings-schema.json->blink-period->description
+msgid "Blink Period"
+msgstr "Période de clignement"
+
+#. 6.2->settings-schema.json->blink-period->tooltip
+msgid ""
+"This setting controls the duration of a full blink cycle (closing and "
+"opening). Measured in milliseconds."
+msgstr ""
+"Ce paramètre contrôle la durée d'un cycle de clignement complet\n"
+"(fermeture et ouverture). Mesurée en millisecondes."
+
+#. 6.2->settings-schema.json->blink-gap->description
+msgid "Blink Gap"
+msgstr "Écart de clignement"
+
+#. 6.2->settings-schema.json->blink-gap->tooltip
+msgid ""
+"This setting controls the time gap between two consecutive blinks. Measured "
+"in milliseconds."
+msgstr ""
+"Ce paramètre contrôle l'intervalle de temps entre deux clignements consécutifs.\n"
+"Mesuré en millisecondes."
+
+#. 6.2->settings-schema.json->idle-delay->description
+msgid "Idle Delay"
+msgstr "Délai d'inactivité"
+
+#. 6.2->settings-schema.json->idle-delay->tooltip
+msgid ""
+"This setting controls the time of inactivity (no mouse or keyboard input) "
+"after which the system is considered idle. Measured in milliseconds."
+msgstr ""
+"Ce paramètre détermine la durée d'inactivité (absence d'interaction avec la\n"
+"souris ou le clavier) après laquelle le système est considéré comme inactif.\n"
+"Mesurée en millisecondes."

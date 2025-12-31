@@ -68,7 +68,6 @@ var DEPENDENCIES = {
     ["wget", "/usr/bin/wget", "wget"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
     ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
-    ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
     ["sox", "/usr/bin/sox", "sox"],
     ["", "/usr/share/doc/libsox-fmt-all/copyright", "libsox-fmt-all"],
     ["at", "/usr/bin/at", "at"],
@@ -81,7 +80,7 @@ var DEPENDENCIES = {
   "arch": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
     ["wget", "/usr/bin/wget", "wget"],
-    ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
+    //["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
     ["sox", "/usr/bin/sox", "sox"],
     ["at", "/usr/bin/at", "at"],
     ["notify-send", "/usr/bin/notify-send", "libnotify"],
@@ -148,13 +147,19 @@ if (versionCompare(GLib.getenv("CINNAMON_VERSION"), "5.8") >= 0) {
   DEPENDENCIES["debian"].push(["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]);
   DEPENDENCIES["arch"].push(["", "/usr/lib/girepository-1.0/Soup-3.0.typelib", "libsoup3"]);
   DEPENDENCIES["fedora"].push(["", "/usr/share/licenses/libsoup3/COPYING", "libsoup3"]);
-  DEPENDENCIES["fedora"].push(["pipewire", "/usr/bin/pipewire", "pipewire"]);
+  //DEPENDENCIES["fedora"].push(["pipewire", "/usr/bin/pipewire", "pipewire"]);
   DEPENDENCIES["fedora"].push(["pw-cat", "/usr/bin/pw-cat", "pipewire-utils"]);
   DEPENDENCIES["fedora"].push(["pipewire-pulse", "/usr/bin/pipewire-pulseaudio", "pipewire-pulseaudio"]);
   DEPENDENCIES["openSUSE"].push(["", "/usr/share/licenses/libsoup-3_0-0/COPYING", "libsoup-3_0-0"]);
 } else {
-  DEPENDENCIES["debian"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
-  DEPENDENCIES["fedora"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
+  //DEPENDENCIES["debian"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
+  //DEPENDENCIES["fedora"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
+}
+
+if (GLib.find_program_in_path("pipewire") && versionCompare(GLib.getenv("CINNAMON_VERSION"), "6.2") >= 0) {
+  DEPENDENCIES["default"].push(["pipewire-pulse", "/usr/bin/pipewire-pulse", "pipewire-pulse"]);
+} else {
+  //DEPENDENCIES["default"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
 }
 
 // --- Do not modify from here --- //
@@ -209,7 +214,9 @@ const INSTALL = {
 const HOME_DIR = GLib.get_home_dir();
 
 const DISTRO = function() {
-  let osRelease = to_string(GLib.file_get_contents("/usr/lib/os-release")[1]);
+  let [, _osRelease] = GLib.file_get_contents("/usr/lib/os-release");
+  let osRelease = to_string(_osRelease);
+  GLib.free(_osRelease);
   let lines = osRelease.split("\n");
   var distro = "";
   for (let line of lines) {

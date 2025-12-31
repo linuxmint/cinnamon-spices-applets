@@ -215,6 +215,17 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelText", "panelText", this.setPanelText);
         this.settings.bindProperty(Settings.BindingDirection.IN, "iconSize", "iconSize", this.buildMenu);
         this.settings.bindProperty(Settings.BindingDirection.IN, "symbolicMenuIcons", "symbolicMenuIcons", this.buildMenu);
+        
+        // Bind menu option settings
+        this.settings.bindProperty(Settings.BindingDirection.IN, "showLockScreen", "showLockScreen", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "showSwitchUser", "showSwitchUser", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "showGuestSession", "showGuestSession", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "showLogOff", "showLogOff", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "showSuspend", "showSuspend", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "showSleep", "showSleep", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "showHibernate", "showHibernate", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "showRestart", "showRestart", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "showShutDown", "showShutDown", this.buildMenu);
     }
 
     buildMenu() {
@@ -225,48 +236,68 @@ class MyApplet extends Applet.TextIconApplet {
             use_symbolic_icons = this.symbolicMenuIcons;
 
             //lock
-            let lock = new CommandItem("lock", _("Lock Screen"));
-            this.menu.addMenuItem(lock);
+            if (this.showLockScreen) {
+                let lock = new CommandItem("lock", _("Lock Screen"));
+                this.menu.addMenuItem(lock);
+            }
 
             //switch user
-            let uSwitch = new CommandItem("uSwitch", _("Switch User"));
-            this.menu.addMenuItem(uSwitch);
+            if (this.showSwitchUser) {
+                let uSwitch = new CommandItem("uSwitch", _("Switch User"));
+                this.menu.addMenuItem(uSwitch);
+            }
 
             //guest
-            if ( display_manager == "lightdm" ) {
+            if (this.showGuestSession && display_manager == "lightdm") {
                 let guest = new CommandItem("guest", _("Guest Session"));
                 this.menu.addMenuItem(guest);
             }
 
             //log off
-            let logOff = new CommandItem("logOff", _("Log Off"));
-            this.menu.addMenuItem(logOff);
+            if (this.showLogOff) {
+                let logOff = new CommandItem("logOff", _("Log Off"));
+                this.menu.addMenuItem(logOff);
+            }
 
-            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            // Add separator if any of the above items are shown
+            if (this.showLockScreen || this.showSwitchUser || (this.showGuestSession && display_manager == "lightdm") || this.showLogOff) {
+                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            }
 
             //suspend
-            let suspend = new CommandItem("suspend", _("Suspend"));
-            this.menu.addMenuItem(suspend);
+            if (this.showSuspend) {
+                let suspend = new CommandItem("suspend", _("Suspend"));
+                this.menu.addMenuItem(suspend);
+            }
 
             //sleep
-            if ( has_systemd ) {
+            if (this.showSleep && has_systemd) {
                 let sleep = new CommandItem("sleep", _("Sleep"));
                 this.menu.addMenuItem(sleep);
             }
 
             //hibernate
-            let hibernate = new CommandItem("hibernate", _("Hibernate"));
-            this.menu.addMenuItem(hibernate);
+            if (this.showHibernate) {
+                let hibernate = new CommandItem("hibernate", _("Hibernate"));
+                this.menu.addMenuItem(hibernate);
+            }
 
-            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            // Add separator if any power management items are shown
+            if (this.showSuspend || (this.showSleep && has_systemd) || this.showHibernate) {
+                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            }
 
             //restart
-            let restart = new CommandItem("restart", _("Restart"));
-            this.menu.addMenuItem(restart);
+            if (this.showRestart) {
+                let restart = new CommandItem("restart", _("Restart"));
+                this.menu.addMenuItem(restart);
+            }
 
             //shut down
-            let shutDown = new CommandItem("shutDown", _("Shut Down"));
-            this.menu.addMenuItem(shutDown);
+            if (this.showShutDown) {
+                let shutDown = new CommandItem("shutDown", _("Shut Down"));
+                this.menu.addMenuItem(shutDown);
+            }
         } catch(e) {
             global.logError(e);
         }

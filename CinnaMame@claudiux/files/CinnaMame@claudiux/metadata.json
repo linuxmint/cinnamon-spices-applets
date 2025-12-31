@@ -1,0 +1,8 @@
+{
+  "description": "CinnaMame",
+  "uuid": "CinnaMame@claudiux",
+  "name": "CinnaMame",
+  "version": "1.0.0",
+  "max-instances": -1,
+  "author": "claudiux"
+}

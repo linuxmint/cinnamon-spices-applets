@@ -5,9 +5,11 @@ import type { WeatherData, ForecastData, HourlyForecastData, PrecipitationType, 
 import { _, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "../BaseProvider";
-import { PirateWeatherSummaryToTranslated, type PirateWeatherIcon, type PirateWeatherPayload, type PirateWeatherQueryUnits } from "./types/common";
+import type { PirateWeatherIcon, PirateWeatherPayload, PirateWeatherQueryUnits } from "./types/common";
 import { ALERT_LEVEL_ORDER } from "../../consts";
 import type { LocationData, SunTime } from "../../types";
+import { Services, type Config } from "../../config";
+import { ErrorHandler } from "../../lib/services/error_handler";
 
 export class PirateWeather extends BaseProvider {
 
@@ -15,7 +17,7 @@ export class PirateWeather extends BaseProvider {
 	//  Properties
 	//--------------------------------------------------------
 	public readonly prettyName = _("Pirate Weather");
-	public readonly name = "PirateWeather";
+	public readonly name = Services.PirateWeather;
 	public readonly maxForecastSupport = 7;
 	public readonly website = "http://pirateweather.net/en/latest/";
 	public readonly maxHourlyForecastSupport = 168;
@@ -36,13 +38,16 @@ export class PirateWeather extends BaseProvider {
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
-		const unit = this.GetQueryUnit();
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
+		const unit = this.GetQueryUnit(config);
 
 		const response = await HttpLib.Instance.LoadJsonAsync<PirateWeatherPayload>({
-			url: `${this.query}${this.app.config.ApiKey}/${loc.lat},${loc.lon}`,
+			url: `${this.query}${config.ApiKey}/${loc.lat},${loc.lon}`,
 			cancellable,
-			params: { units: this.GetQueryUnit()},
+			params: {
+				units: this.GetQueryUnit(config),
+				lang: (config._translateCondition && config.Language && this.supportedLanguages.includes(config.Language)) ? config.Language : "en",
+			},
 			HandleError: this.HandleError
 		});
 
@@ -79,8 +84,8 @@ export class PirateWeather extends BaseProvider {
 				humidity: json.currently.humidity * 100,
 				dewPoint: this.ToKelvin(json.currently.dewPoint, unit),
 				condition: {
-					main: PirateWeatherSummaryToTranslated(json.currently.summary),
-					description: PirateWeatherSummaryToTranslated(json.currently.summary),
+					main: json.currently.summary,
+					description: json.currently.summary,
 					icons: this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }),
 					customIcon: this.ResolveCustomIcon(json.currently.icon)
 				},
@@ -89,6 +94,7 @@ export class PirateWeather extends BaseProvider {
 					value: this.ToKelvin(json.currently.apparentTemperature, unit),
 					type: "temperature"
 				},
+				uvIndex: json.currently.uvIndex ?? json.hourly.data[0]?.uvIndex ?? json.daily.data[0]?.uvIndex ?? null,
 				forecasts: [],
 				hourlyForecasts: [],
 			}
@@ -100,8 +106,8 @@ export class PirateWeather extends BaseProvider {
 					temp_min: this.ToKelvin(day.temperatureLow, unit),
 					temp_max: this.ToKelvin(day.temperatureHigh, unit),
 					condition: {
-						main: PirateWeatherSummaryToTranslated(day.summary),
-						description: PirateWeatherSummaryToTranslated(day.summary),
+						main: day.summary,
+						description: day.summary,
 						icons: this.ResolveIcon(day.icon),
 						customIcon: this.ResolveCustomIcon(day.icon)
 					},
@@ -120,8 +126,8 @@ export class PirateWeather extends BaseProvider {
 					date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
 					temp: this.ToKelvin(hour.temperature, unit),
 					condition: {
-						main: PirateWeatherSummaryToTranslated(hour.summary),
-						description: PirateWeatherSummaryToTranslated(hour.summary),
+						main: hour.summary,
+						description: hour.summary,
 						icons: this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, DateTime.fromSeconds(hour.time, { zone: json.timezone })),
 						customIcon: this.ResolveCustomIcon(hour.icon)
 					},
@@ -175,7 +181,7 @@ export class PirateWeather extends BaseProvider {
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("Pirate Weather payload parsing error: " + e.message, e)
-			this.app.ShowError({ type: "soft", detail: "unusual payload", service: "pirate_weather", message: _("Failed to Process Weather Info") });
+			ErrorHandler.Instance.PostError({ type: "soft", detail: "unusual payload", service: "pirate_weather", message: _("Failed to Process Weather Info") });
 			return null;
 		}
 	};
@@ -202,7 +208,7 @@ export class PirateWeather extends BaseProvider {
 	 */
 	private HandleError = (message: ErrorResponse): boolean => {
 		if (message.ErrorData.code == 403) {
-			this.app.ShowError({
+			ErrorHandler.Instance.PostError({
 				type: "hard",
 				userError: true,
 				detail: "bad key",
@@ -212,7 +218,7 @@ export class PirateWeather extends BaseProvider {
 			return false;
 		}
 		else if (message.ErrorData.code == 401) {
-			this.app.ShowError({
+			ErrorHandler.Instance.PostError({
 				type: "hard",
 				userError: true,
 				detail: "no key",
@@ -278,9 +284,9 @@ export class PirateWeather extends BaseProvider {
 		}
 	}
 
-	private GetQueryUnit(): PirateWeatherQueryUnits {
-		if (this.app.config.TemperatureUnit == "celsius") {
-			if (this.app.config.WindSpeedUnit == "kph" || this.app.config.WindSpeedUnit == "m/s") {
+	private GetQueryUnit(config: Config): PirateWeatherQueryUnits {
+		if (config.TemperatureUnit == "celsius") {
+			if (config.WindSpeedUnit == "kph" || config.WindSpeedUnit == "m/s") {
 				return 'si';
 			}
 			else {
@@ -310,6 +316,66 @@ export class PirateWeather extends BaseProvider {
 			return MPHtoMPS(speed);
 		}
 	};
+
+	private supportedLanguages = [
+		"ar",
+		"az",
+		"be",
+		"bg",
+		"bn",
+		"bs",
+		"ca",
+		"cs",
+		"cy",
+		"da",
+		"de",
+		"el",
+		"en",
+		"eo",
+		"es",
+		"et",
+		"fa",
+		"fi",
+		"fr",
+		"ga",
+		"gd",
+		"he",
+		"hi",
+		"hr",
+		"hu",
+		"id",
+		"is",
+		"it",
+		"ja",
+		"ka",
+		"kn",
+		"ko",
+		"kw",
+		"lv",
+		"ml",
+		"mr",
+		"nl",
+		"no",
+		"pa",
+		"pl",
+		"pt",
+		"ro",
+		"ru",
+		"sk",
+		"sl",
+		"sr",
+		"sv",
+		"ta",
+		"te",
+		"`tet",
+		"tr",
+		"uk",
+		"ur",
+		"vi",
+		"x-pig-latin",
+		"zh",
+		"zh-tw",
+	]
 };
 
 

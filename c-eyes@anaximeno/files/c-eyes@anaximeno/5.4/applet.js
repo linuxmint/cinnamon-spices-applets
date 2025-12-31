@@ -24,6 +24,7 @@ const Settings = imports.ui.settings;
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
 const Gettext = imports.gettext;
+const Util = imports.misc.util;
 
 const SignalManager = imports.misc.signalManager;
 const { Atspi, GLib, Gio, St, Clutter } = imports.gi;
@@ -240,6 +241,13 @@ class Eye extends Applet.Applet {
 
 		this.signals = new SignalManager.SignalManager(null);
 		this.signals.connect(global.screen, 'in-fullscreen-changed', this.on_fullscreen_changed, this);
+		this.signals.connect(global.screen, 'workspace-switched', () => {
+			// If the eye is refreshed exactly during the workspace switch process it's possible that the position
+			// of the panel is not correctly accessed, so the position of the eye cannot be estimated correctly,
+			// resulting in the eye looking at the wrong direction, to avoid that we will give it some timeout and
+			// wait first for the switch process to complete.
+			Util.setTimeout(() => this.area.queue_repaint(), 400);
+		}, this);
 
 		Atspi.init();
 

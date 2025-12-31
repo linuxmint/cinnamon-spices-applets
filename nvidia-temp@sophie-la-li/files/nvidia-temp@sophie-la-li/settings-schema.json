@@ -1,0 +1,32 @@
+{
+  "interval": {
+    "type": "spinbutton",
+    "default": 5000,
+    "min": 2000,
+    "max": 30000,
+    "step": 100,
+    "units": "ms",
+    "description": "Update interval",
+    "tooltip": "How often to update the temperature value."
+  },
+  "use-fahrenheit": {
+    "type": "switch",
+    "default": false,
+    "description": "Show temperature in Fahrenheit",
+    "tooltip": "Whether or not show the temperature in Fahrenheit instead of Celsius."
+  },
+  "show-unit": {
+    "type": "switch",
+    "default": true,
+    "description": "Show unit",
+    "tooltip": "Whether or not show the unit after the temperature value."
+  },
+  "show-unit-letter": {
+    "type": "switch",
+    "default": false,
+    "description": "Show unit letter",
+    "tooltip": "Whether or not show the unit letter (C or F).",
+    "dependency": "show-unit"
+  }
+}
+

@@ -1,6 +1,16 @@
 /* Do not edit */
 
-.popup-subtitle-menu-item {
-   font-weight: bold;
-   min-width: 160px !important;
+.popup-tray-label {
+    color: #898989;
+    font-weight: 600;
+    min-width: 170px;
+}
+.popup-notif-label {
+    color: #4E9A06;
+    font-weight: 600;
+    min-width: 170px;
+}
+.popup-tray-icon StIcon {
+    icon-size: 1.25em;
+    color: #898989;
 }

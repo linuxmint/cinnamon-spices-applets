@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script is a part of the Radio3.0@claudiux applet.
 
 APP_NAME="Radio3.0"

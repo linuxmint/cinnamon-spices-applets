@@ -1,3 +1,247 @@
+### v3.10.0~20251211
+  * Working well with Cinnamon 6.6.
+
+### v3.9.5~20251129
+  * Better file monitoring.
+
+### v3.9.4~20251124
+  * Minor bugfix (menu).
+
+### v3.9.3~20251121
+  * Updates to-string() function.
+
+### v3.9.2~20251121
+  * Improves file monitoring.
+
+### v3.9.1~20251106
+  * Improves stability.
+
+### v3.9.0~20251102
+  * Improves stability.
+
+### v3.8.4~20251031
+  * Avoids paint() errors.
+
+### v3.8.3~20251023
+  * Fixes error opening menu.
+  * Fixes [#7907](https://github.com/linuxmint/cinnamon-spices-applets/issues/7907).
+
+### v3.8.2~20251022
+  * Improves file monitoring.
+
+### v3.8.1~20251019
+  * Improves stability.
+
+### v3.8.0~20251011
+  * Management of cache from the Recordings tab of this applet settings.
+
+### v3.7.3~20250922
+  * Minor bugfix.
+
+### v3.7.2~20250920
+  * Monitors certain files only when necessary, to avoid errors.
+  * Updates the server list.
+
+### v3.7.1~20250915
+  * Menu bugfix.
+
+### v3.7.0~20250910
+  * Added Blacklist management.
+
+### v3.6.2~20250908
+  * Better memory management.
+
+### v3.6.1~20250820
+  * Restarts listening to the current station when the applet is restarted (except when it is Cinnamon that is reloaded).
+
+### v3.6.0~20250808
+  * Improved speed.
+  * Code cleanup.
+
+### v3.5.0~20250629
+  * Add option: Ignore Youtube features.
+
+###  v3.4.4~20250422
+  * Bugfix: Fixes [#7074](https://github.com/linuxmint/cinnamon-spices-applets/issues/7074).
+
+### v3.4.3~20250419
+  * Improves responsiveness.
+
+### v3.4.2~20250416
+  * Bugfix: Fixes [#7074](https://github.com/linuxmint/cinnamon-spices-applets/issues/7074).
+
+### v3.4.1~20250415
+  * Make certain tasks asynchronous to avoid blockages.
+  * Context menu: Submenu 'Configure...' allowing direct access to each settings tab.
+
+### v3.4.0~20250415
+  * The default icon color is now determined by the theme used.
+  * Code cleanup.
+
+### v3.3.1~20250413
+  * The “Try to download it from YT” menu option works again.
+  * Fixes #7055.
+  
+
+### v3.3.0~20250408
+  * Improved album art download.
+
+### v3.2.0~20250403
+  * Can transfer Artist and Title to AlbumArt3.0 desklet.
+
+### v3.1.2~20250330
+  * Improved Alarm-Clock settings.
+  * Changes in server list.
+
+### v3.1.1~20250325
+  * Added 'Wake me up!' switch in context menu.
+
+### v3.1.0~20250321
+  * Wake up with Radio 3.0.
+  * New tab Alarm Clock in settings.
+  * New option "Configure the Alarm Clock..." in context menu.
+  * README.md file updated.
+  * New sentences to translate.
+
+### v3.0.0~20250313
+  * Now works with the version 2.0.0 of the AlbumArt3.0 applet.
+
+### v2.9.0~20250305
+  * Vertical maximization of the Settings Window becomes optional.
+  * Fixes #6955.
+
+### v2.8.3~20250302
+  * Improved tooltip management.
+
+### v2.8.2~20250218
+  * Improved tooltip layout.
+
+### v2.8.1~20250217
+  * Updates the sample station list.
+
+### v2.8.0~20250217
+  * New option to load a sample station list when there is no station in the list.
+  * Some minor changes.
+
+### v2.7.8~20250205
+  * Improves applet startup.
+
+### v2.7.7~20250204
+  * Code improvement.
+
+### v2.7.4~20250116
+  * mainloopTools library: improvements.
+
+### v2.7.3~20250114
+  * Increases the size of the stream buffer for improved listening comfort.
+  * Settings: Sets the default value for each multimedia key bind.
+
+### v2.7.2~20250112
+  * Now the desklet uses the mainloopTools library.
+  * Minor bugfixes.
+
+### v2.7.1~20250111
+  * Improved management of loops.
+  * Improved management of desklet.
+
+### v2.7.0~20250107
+  * You can choose the Quality of the downloaded album cover.
+  * Desklet AlbumArt3.0: New option in context menu to display the Album Art at full size. Middle-clicking on the desklet does the same.
+  * Bufixes in applet and in desklet.
+
+### v2.6.1~20250106
+  * Fixes desklet issue for Cinnamon 6.0.
+
+### v2.6.0~20250106
+  * Improved functioning (start-up).
+
+### v2.5.11~20250105
+  * Improved functioning.
+
+### v2.5.10~20250101
+  * Better monitoring of files and directories.
+
+### v2.5.9~20241231
+  * Album Art 3.0 becomes faster.
+  * Bugfixes.
+
+### v2.5.8~20241230
+  * Album Art 3.0 settings now accessible via the applet context menu.
+
+### v2.5.7~20241228
+  * New management of desklet displaying Album Art. Use context menu to show it.
+  * Better management of signals.
+  * No error reloading this applet.
+
+### v2.5.6~20241227
+  * No error at start-up. Fixes a nasty bug!
+
+### v2.5.5~20241226
+  * Minor bugfixes.
+
+### v2.5.4~20241225
+  * Fixed context menu bugs.
+  * Fixed desklet bugs.
+
+### v2.5.3~20241220
+  * Fixed menu bugs (when the Category list is beside the Radio Station list).
+
+
+### v2.5.2~20241219
+  * Improved menu behavior. The menu no longer closes when you switch from the station list to the category list.
+  * Some bugfixes, also in desklet.
+
+### v2.5.1~20241217
+  * Fixes #6689.
+  * Improved menu display.
+  * Reintroduces the "Display the Station list beside the Category list" option.
+  * If this option is not checked, the first category is not ♥︎.
+  * Favorite stations are marked with a ♥︎ in the menu.
+
+### v2.5.0~20241215
+  * You can now set/unset favorite radio stations by clicking on ♥︎ in the menu while listening to them.
+  * The first category you see is ♥︎.
+  * Stations are displayed beside their category. (Forced.)
+
+### v2.4.0~20241212
+  * You can now import your stations from Radio++ if you use it. See Import tab in settings.
+
+### v2.3.3~20241205
+  * Clicking on the Album Art desklet updates the image.
+
+### v2.3.2~20241203
+  * Redesigned context menu.
+
+### v2.3.1~20241201
+  * Adds an optional fade effect to the Album Art. See the Behavior tab of this applet settings.
+
+### v2.3.0~20241129
+  * Adds the ability to display on desktop the Album (or Song) Art.
+  * Solves the problem with pulseaudio/pipewire.
+
+### v2.2.3~20241119
+  * Fixes #6583: Remove dummy device.
+  * Updates version number.
+
+### v2.2.2~20241114
+  * Soup2/Soup3: better detection.
+
+### v2.2.1~20241109
+  * Fixes a dependency error about pulseaudio/pipewire on LM.
+
+### v2.2.0~20241107
+  * Now can display Radio name and Song title on horizontal panels.
+
+### v2.1.4~20241012
+  * Fixes an OSD error.
+
+### v2.1.3~20240913
+  * Now the "unassigned" word can be translated. See #6415.
+
+### v2.1.2~20240731
+  * Adds "Easy Effects" entry in context menu when easyeffects is present.
+  * To install easyeffects (for pipewire): `apt install easyeffects calf-plugins`
+
 ### v2.1.1~20240609
   * Prevents Cvc.MixerControl from being executed more than once.
 

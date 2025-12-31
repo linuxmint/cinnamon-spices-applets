@@ -1,7 +1,7 @@
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/services/logger";
 import type { WeatherApplet } from "../../main";
-import type { LocationData } from "../../types";
+import type { LocationServiceResult } from "../../types";
 import { _ } from "../../utils";
 import type { GeoIP } from "./base";
 
@@ -17,7 +17,7 @@ export class GeoIPLookupIO implements GeoIP {
 		this.app = app;
 	}
 
-	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
 		const json = await HttpLib.Instance.LoadJsonSimple<GeoIPLookupPayload | GeoIPLookupFailurePayload>({ url: this.query, cancellable });
 
 		if (!json) {
@@ -32,9 +32,9 @@ export class GeoIPLookupIO implements GeoIP {
 		return this.ParseInformation(json);
 	}
 
-	private ParseInformation(json: GeoIPLookupPayload): LocationData | null {
+	private ParseInformation(json: GeoIPLookupPayload): LocationServiceResult | null {
 		try {
-			const result: LocationData = {
+			const result: LocationServiceResult = {
 				lat: json.latitude,
 				lon: json.longitude,
 				city: json.city,

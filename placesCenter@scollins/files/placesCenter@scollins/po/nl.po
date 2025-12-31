@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-24 20:57+0100\n"
-"PO-Revision-Date: 2024-04-21 14:28+0200\n"
+"PO-Revision-Date: 2024-07-24 10:12+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -43,6 +43,10 @@ msgstr "RECENTE DOCUMENTEN"
 #: applet.js:355
 msgid "Clear"
 msgstr "Wissen"
+
+#: applet.js:364
+msgid "Recent"
+msgstr "Recent"
 
 #: applet.js:398
 msgid "Computer"
@@ -159,6 +163,10 @@ msgstr "Stephen Collins - Auteur"
 #. metadata.json->contributors
 msgid "kehugter - Added configurability to middle click"
 msgstr "kehugter - Toevoegen van configuratiemogelijkheden voor middenklik"
+
+#. metadata.json->contributors
+msgid "claudiux - Improvements to the 'Recent' section."
+msgstr "claudiux - Verbeteringen aan de sectie 'Recent'."
 
 #. settings-schema.json->generalPage->title
 msgid "General"
@@ -325,3 +333,7 @@ msgstr "Aantal te tonen"
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"
 msgstr "Privacy"
+
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr "Toon volledige path in tooltips"

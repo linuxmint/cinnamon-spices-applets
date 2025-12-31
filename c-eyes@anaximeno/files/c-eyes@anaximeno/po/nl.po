@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# CINNAMON EYES
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# anaximeno, 2023
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: c-eyes@anaximeno 1.14.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-15 16:50-0100\n"
-"PO-Revision-Date: 2024-04-22 11:56+0200\n"
+"POT-Creation-Date: 2025-12-20 06:52-0100\n"
+"PO-Revision-Date: 2024-11-28 17:16+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 4.2/applet.js:56 5.4/applet.js:55
+#. 4.2/applet.js:56 5.4/applet.js:56
 msgid ""
 "📢 The click effects will be removed from this applet on the version 6.2 of "
 "Cinnamon\n"
@@ -24,35 +24,40 @@ msgid ""
 "installed\n"
 "on the Cinnamon Extensions settings module for versions of Cinnamon >= 5.4"
 msgstr ""
+"📢 De klik-effecten worden verwijderd uit deze applet in versie 6.2 van "
+"Cinnamon\n"
+" en verplaatst naar een nieuwe extensie genaamd mouse-click-effects, die al "
+"geïnstalleerd kan worden\n"
+" in het instellingenmodule voor Cinnamon-extensies voor versies van Cinnamon "
+">= 5.4"
 
-#: 4.2/applet.js:389 5.4/applet.js:385
+#. 4.2/applet.js:396 5.4/applet.js:393
 msgid "click to deactivate the eye"
 msgstr "klik om het oog te deactiveren"
 
-#: 4.2/applet.js:389 5.4/applet.js:385
+#. 4.2/applet.js:396 5.4/applet.js:393
 msgid "click to activate the eye"
 msgstr "klik om het oog te activeren"
 
-#: 4.2/applet.js:390 5.4/applet.js:386
+#. 4.2/applet.js:397 5.4/applet.js:394
 msgid "TIP"
 msgstr "TIP"
 
-#: 6.2/applet.js:46
+#. 6.2/applet.js:42
 msgid "Hey, I saw that!"
-msgstr ""
+msgstr "Hé, dat heb ik gezien!"
 
 #. metadata.json->name
 msgid "Cinnamon Eyes"
 msgstr "Cinnamon Ogen"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "An applet for Cinnamon that adds an eye to the panel bar that follows your "
 "cursor."
 msgstr ""
-"Een applet voor Cinnamon dat een oog aan de paneelbalk toevoegt dat je "
-"cursor volgt en klikanimaties weergeeft."
+"Een applet voor Cinnamon die een oog toevoegt aan de paneelbalk die je "
+"cursor volgt."
 
 #. 4.2->settings-schema.json->eye->title
 #. 5.4->settings-schema.json->eye->title
@@ -61,6 +66,7 @@ msgstr "Oog"
 
 #. 4.2->settings-schema.json->effects->title
 #. 5.4->settings-schema.json->effects->title
+#. 6.2->settings-schema.json->effects-page->title
 msgid "Effects"
 msgstr "Effecten"
 
@@ -68,7 +74,9 @@ msgstr "Effecten"
 #. 4.2->settings-schema.json->click-generic->title
 #. 5.4->settings-schema.json->eye-generic->title
 #. 5.4->settings-schema.json->click-generic->title
-#. 6.2->settings-schema.json->general->description
+#. 6.2->settings-schema.json->general-page->title
+#. 6.2->settings-schema.json->general-section->title
+#. 6.2->settings-schema.json->general-effects-section->title
 msgid "General"
 msgstr "Algemeen"
 
@@ -76,7 +84,7 @@ msgstr "Algemeen"
 #. 4.2->settings-schema.json->click-colors->title
 #. 5.4->settings-schema.json->eye-colors->title
 #. 5.4->settings-schema.json->click-colors->title
-#. 6.2->settings-schema.json->colors->description
+#. 6.2->settings-schema.json->colors-section->title
 msgid "Colors"
 msgstr "Kleuren"
 
@@ -87,7 +95,6 @@ msgstr "Gebeurtenissen"
 
 #. 4.2->settings-schema.json->eye-mode->description
 #. 5.4->settings-schema.json->eye-mode->description
-#. 6.2->settings-schema.json->mode->description
 msgid "Mode"
 msgstr "Modus"
 
@@ -140,6 +147,9 @@ msgstr "Opvulling"
 #. 5.4->settings-schema.json->eye-repaint-interval->units
 #. 5.4->settings-schema.json->fade-timeout->units
 #. 6.2->settings-schema.json->repaint-interval->units
+#. 6.2->settings-schema.json->blink-period->units
+#. 6.2->settings-schema.json->blink-gap->units
+#. 6.2->settings-schema.json->idle-delay->units
 msgid "ms"
 msgstr "ms"
 
@@ -393,44 +403,126 @@ msgid "General Opacity"
 msgstr "Algemene ondoorzichtigheid"
 
 #. 5.4->settings-schema.json->click-info->title
-#. 6.2->settings-schema.json->info->description
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #. 5.4->settings-schema.json->click-effects-moved-on-
 #. cinnamon-6.2-info->description
-#. 6.2->settings-schema.json->click-effects-moved-info->description
 msgid ""
 "In Cinnamon versions 6.2 and later, the click effects have been removed from "
 "this applet and relocated to a new extension called 'mouse-click-effects,' "
 "which can be installed through the Cinnamon Extensions settings module."
 msgstr ""
+"In Cinnamon-versies 6.2 en later zijn de klik-effecten verwijderd uit deze "
+"applet en verplaatst naar een nieuwe extensie genaamd 'mouse-click-effects,' "
+"die kan worden geïnstalleerd via het instellingenmodule voor Cinnamon-"
+"extensies."
+
+#. 6.2->settings-schema.json->style-page->title
+#. 6.2->settings-schema.json->styles-section->title
+msgid "Style"
+msgstr "Stijl"
+
+#. 6.2->settings-schema.json->optimization-section->title
+msgid "Optimizations"
+msgstr "Optimalisaties"
+
+#. 6.2->settings-schema.json->mode->description
+msgid "Eye Mode"
+msgstr "Oogmodus"
 
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
-msgstr ""
+msgstr "Tooltip bericht bij zweven met de muis"
+
+#. 6.2->settings-schema.json->optimization-mode->description
+msgid "Optimization Mode"
+msgstr "Optimalisatiemodus"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Battery"
+msgstr "Batterij"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Balanced"
+msgstr "Gebalanceerd"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Performance"
+msgstr "Prestaties"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Manual"
+msgstr "Handmatig"
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
-msgstr ""
+msgstr "Gebruik alternatieve kleuren voor het oog"
 
 #. 6.2->settings-schema.json->use-alternative-colors->tooltip
 msgid ""
 "When disabled it will use the current system theme's default color for panel "
 "items."
 msgstr ""
+"Indien uitgeschakeld, zal het de standaardkleur van het huidige systeemthema "
+"voor paneelitems gebruiken."
 
 #. 6.2->settings-schema.json->base-color->description
-#, fuzzy
 msgid "Base Color"
-msgstr "Geactiveerde basiskleur"
+msgstr "Basiskleur"
 
 #. 6.2->settings-schema.json->iris-color->description
-#, fuzzy
 msgid "Iris Color"
-msgstr "Geactiveerde iriskleur"
+msgstr "Kleur van de iris"
 
 #. 6.2->settings-schema.json->pupil-color->description
-#, fuzzy
 msgid "Pupil Color"
-msgstr "Geactiveerde pupilkleur"
+msgstr "Kleur van de pupil"
+
+#. 6.2->settings-schema.json->blink-effect->description
+#, fuzzy
+msgid "Blink Effect"
+msgstr "Effecten"
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "None"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "When Idle"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "Always"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-period->description
+msgid "Blink Period"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-period->tooltip
+msgid ""
+"This setting controls the duration of a full blink cycle (closing and "
+"opening). Measured in milliseconds."
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-gap->description
+#, fuzzy
+msgid "Blink Gap"
+msgstr "Knipperen"
+
+#. 6.2->settings-schema.json->blink-gap->tooltip
+msgid ""
+"This setting controls the time gap between two consecutive blinks. Measured "
+"in milliseconds."
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->description
+msgid "Idle Delay"
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->tooltip
+msgid ""
+"This setting controls the time of inactivity (no mouse or keyboard input) "
+"after which the system is considered idle. Measured in milliseconds."
+msgstr ""

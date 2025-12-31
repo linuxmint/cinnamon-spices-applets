@@ -1,17 +1,18 @@
 import { DateTime } from "luxon";
-import type { Services } from "../../config";
+import { Services, type Config } from "../../config";
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import type { AlertData, Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../../weather-data";
-import { CelsiusToKelvin, IsLangSupported, _ } from "../../utils";
+import { CelsiusToKelvin, IsLangSupported, KPHtoMPS, _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
 import type { VisualCrossingAlert } from "./alerts";
 import type { LocationData } from "../../types";
+import { ErrorHandler } from "../../lib/services/error_handler";
 
 
 export class VisualCrossing extends BaseProvider {
 	readonly prettyName: string = _("Visual Crossing");
-	readonly name: Services = "Visual Crossing";
+	readonly name: Services = Services.VisualCrossing;
 	readonly maxForecastSupport: number = 15;
 	readonly maxHourlyForecastSupport: number = 336;
 	readonly website: string = "https://weather.visualcrossing.com/";
@@ -31,12 +32,12 @@ export class VisualCrossing extends BaseProvider {
 
 	private supportedLangs: string[] = ["en", "de", "fr", "es"]
 
-	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
 		if (loc == null) return null;
-		this.params['key'] = this.app.config.ApiKey;
+		this.params['key'] = config.ApiKey;
 		let translate = true;
-		if (IsLangSupported(this.app.config.Language, this.supportedLangs)) {
-			this.params['lang'] = this.app.config.Language;
+		if (IsLangSupported(config.Language, this.supportedLangs)) {
+			this.params['lang'] = config.Language;
 			translate = false;
 		}
 
@@ -71,7 +72,7 @@ export class VisualCrossing extends BaseProvider {
 			dewPoint: CelsiusToKelvin(weather.currentConditions.dew ?? currentHour?.dew),
 			wind: {
 				degree: weather.currentConditions.winddir ?? currentHour?.winddir,
-				speed: weather.currentConditions.windspeed ?? currentHour?.windspeed,
+				speed: KPHtoMPS(weather.currentConditions.windspeed ?? currentHour?.windspeed ?? null),
 			},
 			temperature: CelsiusToKelvin(weather.currentConditions.temp ?? currentHour?.temp),
 			sunrise: DateTime.fromSeconds(weather.currentConditions.sunriseEpoch, { zone: weather.timezone }),
@@ -83,6 +84,7 @@ export class VisualCrossing extends BaseProvider {
 				// use current hour instead, observations feels like doesn't seem to differ at all
 				value: CelsiusToKelvin(currentHour?.feelslike ?? weather.currentConditions.feelslike)
 			},
+			uvIndex: null,
 			forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
 			hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
 		}
@@ -327,7 +329,7 @@ export class VisualCrossing extends BaseProvider {
 
 	private HandleHttpError(error: ErrorResponse): boolean {
 		if (error?.ErrorData.code == 401) {
-			this.app.ShowError({
+			ErrorHandler.Instance.PostError({
 				type: "hard",
 				userError: true,
 				detail: "bad key",

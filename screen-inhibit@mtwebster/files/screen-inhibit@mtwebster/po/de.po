@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# SCREENSAVER INHIBITOR
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# mtwebster, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-24 00:19+0200\n"
+"POT-Creation-Date: 2024-10-01 18:55+0200\n"
 "PO-Revision-Date: 2017-09-22 04:46+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,20 +19,20 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:21
+#. applet.js:21
 msgid "Currently preventing screensaver"
 msgstr "Verhindert derzeit Bildschirmschoner"
 
-#: applet.js:22
+#. applet.js:22
 msgid "Currently allowing screensaver"
 msgstr "Ermöglicht derzeit Bildschirmschoner"
 
-#: applet.js:123
+#. applet.js:134
 msgid "Screensaver settings"
 msgstr "Bildschirmschonereinstellungen"
 
 #. settings-schema.json->inhibit-at-startup->description
-#: applet.js:127
+#. applet.js:138
 msgid "Inhibit screensaver at startup"
 msgstr ""
 
@@ -46,9 +46,56 @@ msgstr ""
 msgid "Screensaver Inhibitor"
 msgstr "Bildschirmschoner-Blockierer"
 
-#. settings-schema.json->head->description
+#. settings-schema.json->pGeneral->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->pIcons->title
+#. settings-schema.json->sectionIcons->title
 msgid "Icons"
 msgstr "Symbole"
+
+#. settings-schema.json->pKeybindings->title
+#. settings-schema.json->sectionKeybindings->title
+msgid "Keybinding"
+msgstr "Tastenbelegung"
+
+#. settings-schema.json->sectionStartup->title
+msgid "Startup"
+msgstr ""
+
+#. settings-schema.json->sectionDurationOrEndTime->title
+#, fuzzy
+msgid "Duration or End Time of screen saver inhibition"
+msgstr "Tastenbelegung zum Blockieren des Bildschirmschoners festlegen"
+
+#. settings-schema.json->sectionBlocking->title
+msgid "Way to block the screensaver"
+msgstr ""
+
+#. settings-schema.json->end-timechooser->description
+msgid "Time"
+msgstr ""
+
+#. settings-schema.json->end-timechooser->tooltip
+msgid "Seconds will be ignored."
+msgstr ""
+
+#. settings-schema.json->end-type->description
+msgid "The time shown above is"
+msgstr ""
+
+#. settings-schema.json->end-type->options
+msgid "to be disregarded"
+msgstr ""
+
+#. settings-schema.json->end-type->options
+msgid "the inhibit duration"
+msgstr ""
+
+#. settings-schema.json->end-type->options
+msgid "the inhibit end time"
+msgstr ""
 
 #. settings-schema.json->off-icon->description
 msgid "Power management allowed icon:"
@@ -69,21 +116,14 @@ msgstr "Symbol, wenn Bildschirmschoner verhindert"
 msgid "Reset to default icons"
 msgstr ""
 
-#. settings-schema.json->head1->description
-msgid "Keybinding"
-msgstr "Tastenbelegung"
-
 #. settings-schema.json->keybinding->description
 msgid "Set the keybinding for screensaver inhibit"
 msgstr "Tastenbelegung zum Blockieren des Bildschirmschoners festlegen"
 
-#. settings-schema.json->head2->description
-msgid "Startup"
-msgstr ""
-
-#. settings-schema.json->head3->description
-msgid "Way to block the screensaver"
-msgstr ""
+#. settings-schema.json->seconds-after-startup->description
+#, fuzzy
+msgid "Number of seconds before screensaver inhibition"
+msgstr "Tastenbelegung zum Blockieren des Bildschirmschoners festlegen"
 
 #. settings-schema.json->locklabel->description
 msgid "(Avoid using aggressive ways, if possible.)"

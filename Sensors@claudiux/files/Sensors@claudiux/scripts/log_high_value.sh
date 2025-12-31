@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 CATEGORY=$1
 SENSOR=$2
 SENSOR="${SENSOR//_/ }"

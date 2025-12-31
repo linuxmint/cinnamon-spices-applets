@@ -11,16 +11,20 @@ body:
     label: Applet name and maintainer
     options:
     - ''
+    - 1440@jvlianodorneles @jvlianodorneles
+    - AlwaysOn@krivetochka @Krivetochka
     - anime-wallpaper@flyflyan @fly206
+    - any-alarm@sophie-la-li @sophie-la-li
     - app-launcher@mchilli @mchilli
     - asl@santiago @SamBurgos
+    - auto-dark-light@gihaume @guillaume-mueller
     - AutostartPrograms@spacy01 @spacy01
     - azan@fahri.nurul.id
     - backgroundroll@Sokawaii25 @Sokawaii25
     - bash-sensors@pkkk
     - batterymonitor@pdcurtis @pdcurtis
     - batterypower@joka42 @joka42
-    - better-backgrounds@simonmicro @simonmicro
+    - better-backgrounds@simonmicro @fredcw
     - betterlock @Centurix
     - bettersettings@bownz
     - BgRadio@spacy01 @spacy01
@@ -29,7 +33,8 @@ body:
     - bing-wallpaper@starcross.dev @Starcross
     - bluetooth-battery@zamszowy @zamszowy
     - bose@tuuxx @tuuxx
-    - brightness-and-gamma-applet@cardsurf @cardsurf
+    - Bps@claudiux @claudiux
+    - brightness-and-gamma-applet@cardsurf @claudiux
     - bumblebee@pdcurtis @pdcurtis
     - c-eyes@anaximeno @anaximeno
     - calc-js@ptandler @ptandler
@@ -37,16 +42,20 @@ body:
     - calendar@simonwiles.net @simonwiles
     - CassiaWindowList@klangman @klangman
     - cheaty@centurix @centurix
+    - CinnaMame@claudiux @claudiux
     - Cinnamenu@json @fredcw
     - cinnamon-multi-line-taskbar-applet
     - cinnamon-timer@jake1164 @jake1164
+    - cinnamonvantage@garlayntoji @Garlayntoji
     - CinnVIIStarkMenu@NikoKrause @fredcw
     - clean-show-desktop@filipetorresbr @FilipeTorresBR
+    - click-clock@wernerstucky @wernerstucky
     - clipboard-eraser@Techcrafter @Techcrafter
     - clipboard-qr@wrouesnel @wrouesnel
     - collapsible-systray@feuerfuchs.eu @feuerfuchs
     - color-blind-filters@rcalixte @rcalixte
     - color-picker@fmete @icarter09
+    - combined-monitor@danipin @d-atoshi
     - commandLauncher@scollins @collinss
     - CommandRunner@appdevsw
     - computer@brownsr @brownsr
@@ -56,24 +65,29 @@ body:
     - ctrl4docker@hoffis-eck.de
     - CustomApplicationsMenu@LLOBERA @Nicolas01
     - CustomPlaces@Nicolas01 @Nicolas01
+    - daily-wallpaper@Tomfez @Tomfez
     - darkMode@linuxedo.com @slgobinath
     - ddcci-monitor-control@andr35 @andr35
-    - ddcci-multi-monitor@tim-we @tim-we
-    - desaturate-all@hkoosha @hkoosha
+    - ddcci-multi-monitor@tim-we @GingerGigiCat
+    - desaturate-all@hkoosha @klangman
     - devbar@ludvigbostrom @ludvigbostrom
     - devutils@fogl
     - dgs-bpivaty@gmail.com @bpivaty
     - diaspora-notif@douze12
+    - Direct@claudiux @claudiux
     - directory-menu@torchipeppo @torchipeppo
     - disk-read-and-write-speed@cardsurf @cardsurf
     - download-and-upload-speed@cardsurf @cardsurf
     - duolingo-helper@nodeengineer.com @nodeengineer
+    - envycontrol@zamszowy @zamszowy
     - Exit@claudiux @claudiux
     - expressvpn@Hukuta @Hukuta
-    - feeds@jonbrettdev.wordpress.com @jake1164
+    - feeds@jonbrettdev.wordpress.com @philipp-meier
+    - fish@kriegcc @kriegcc
     - force-quit@cinnamon.org
     - fw_fanctrl@juleskreuer.eu @not-a-feature
     - gamemode@axel358 @axel358
+    - Gears@claudiux @claudiux
     - github-projects@morgan-design.com @jamesmorgan
     - gmail@lauritsriple @lauritsriple
     - gnote@brett-smith @brett-smith
@@ -85,6 +99,7 @@ body:
     - hamster@projecthamster.wordpress.com
     - healthyeyes@ipolozov @GingerGigiCat
     - hideable-applets@cardsurf @cardsurf
+    - hijri@mubashirzamir @mubashirzamir
     - hwmonitor@sylfurd
     - ifstat@tagadan
     - IntelTurboBoost@wsmenezes @wsmenezes
@@ -101,12 +116,17 @@ body:
     - location-detection@heimdall
     - lorem@vxstorm
     - mailnagapplet@ozderya.net @hyOzd
+    - maximus-buttons@hanspr @hanspr
+    - maximus-title@hanspr @hanspr
+    - mediacontrols@rbfraphael @rbfraphael
     - mem-monitor-text@datanom.net @icarter09
     - menu@csknet.org
     - MessagingMenuV3@blub
+    - mic-level@zamszowy @zamszowy
     - Mint-Unsplash-Background@omidmaldar @omidmaldar
     - MonitorInputSource@klangman @klangman
     - moonphase@techi-freki @Techi-Freki
+    - mouse-keys-shortcut@GabrielCamara3526 @GabrielCamara3526
     - multicore-sys-monitor@ccadeptic23 @claudiux
     - MuteToggler@jebeaudet.com @jebeaudet
     - mybookmarks@markbokil.com @Centurix
@@ -116,24 +136,32 @@ body:
     - networkmonitor@axel358 @axel358
     - nextslide@yaya-cout @yaya-cout
     - nightlight@Severga @Severga
+    - NightLightSwitch@claudiux @claudiux
     - nightscout@ranneft @ImmRanneft
     - nordvpn-indicator@nickdurante @nickdurante
     - notification-mute@jgillula @jgillula
+    - notifications-enhanced@hilyxx @hilyxx
+    - nvidia-temp@sophie-la-li @sophie-la-li
     - nvidiaprime@pdcurtis @pdcurtis
     - octopussy@centurix @centurix
     - officeCenter@scollins @collinss
+    - onekoToggle@kusch3l @kusch3l
     - pa-equalizer@jschug.com
+    - panel-tweaks@anaximeno @anaximeno
     - paneldo@beatlink
     - PanelTranslator@klangman @klangman
     - password-generator@spencerlommel.com @SpencerLommel
     - PDFManager@cinnamon.org
+    - pin-unpin-panel@anaximeno @anaximeno
     - places-bookmarks@dmo60.de
     - places-with-terminal@mtwebster
     - placesCenter@scollins @collinss
     - pomodoro@gregfreeman.org @gfreeau
     - power-profiles@rcalixte @rcalixte
     - printers@linux-man @linux-man
+    - ProcessMemoryMonitor@claudiux @claudiux
     - profile-switcher@pixunil @pixunil
+    - proxy-mode@yrtimid @yrtimiD
     - ptt@thbemme @thbemme
     - qredshift@quintao @raphaelquintao
     - Radio3.0@claudiux @claudiux
@@ -142,6 +170,7 @@ body:
     - ratecurrency@magner @AleksiMagner
     - redshift@marvel4u @marvel4u
     - restart-cinnamon@kolle @icarter09
+    - rssNewsticker@KopfDesDaemons @KopfDesDaemons
     - rswitcher@nixdev.com @mindbeat
     - rust-menu@jerrywham @jerrywham
     - rwall@typicalfoobar
@@ -163,6 +192,8 @@ body:
     - shutdown-timer@webum.by
     - ShutdownApplet@DeathMD @icarter09
     - ShutdownMenuWithIcons@LLOBERA @Nicolas01
+    - signout@kayfo @kayfo
+    - simple-timer@naheller @naheller
     - skeuos-remix@benlazhar.com @NadhirBenLazhar
     - sleepTimer@JDatPNW @JDatPNW
     - smallcalc_applet@lerc.sds @lerc
@@ -182,10 +213,12 @@ body:
     - suspend@janax @klangman
     - SW++@mohammad-sn @mohammad-sn
     - sync@szlldm @szlldm
+    - sysmon@rohan @222rohan
     - sysmonitor@orcus @orcuscz
     - system-controls@rcalixte @rcalixte
     - system-monitor@spacy01 @spacy01
     - systray-collapsible@koutch
+    - tapo@smiklosovic @stefanmiklosovic
     - temperature@fevimu @claudiux
     - text-to-speech-applet@cardsurf @cardsurf
     - ThemeRefresh@JosephM
@@ -194,9 +227,11 @@ body:
     - timeshift-spy@nicog60 @nicog60
     - todo@threefi
     - tor-button@shatur @Shatur95
+    - trilium-api@beatlink @BeatLink
     - turn-off-monitor@zablotski @zablotski
     - tzclock@lhriley @lhriley
     - uiscaler@joka42 @joka42
+    - updates-notifier@zamszowy @zamszowy
     - uptime@vatanuki.kun
     - vboxlauncher@mockturtl @mockturtl
     - vnstat@linuxmint.com @pdcurtis
@@ -211,6 +246,7 @@ body:
     - window-list@sangorys @sangorys
     - window-list@zeripath.sdf-eu.org @zeripath
     - windowlist@cobinja.de @Cobinja
+    - wine-utils@elblake @elblake
     - wireguard@nicoulaj.net @nicoulaj
     - workspace-grid@hernejj @hernejj
     - workspace-name@willurd @willurd

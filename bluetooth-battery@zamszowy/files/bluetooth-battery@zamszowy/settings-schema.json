@@ -27,7 +27,7 @@
     "section1": {
       "type": "section",
       "title": "Icon/Text:",
-      "keys": ["applet-icon"]
+      "keys": ["applet-icon", "icon-style"]
     },
 
     "section2": {
@@ -100,6 +100,17 @@
       "Icon" : "icon",
       "Text" : "text"
     }
+  },
+
+  "icon-style": {
+      "type": "combobox",
+      "description": "Icon style",
+      "default": "light",
+      "options": {
+          "dark": "dark",
+          "light": "light",
+          "symbolic": "symbolic"
+      }
   },
 
   "blacklist": {

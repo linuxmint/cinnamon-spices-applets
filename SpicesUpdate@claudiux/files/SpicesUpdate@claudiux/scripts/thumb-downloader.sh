@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 THUMB=$1
 TYPE=$2
 DEST=$HOME/.cache/cinnamon/spices/$TYPE/
@@ -15,8 +15,8 @@ cd $DEST
 [[ -f $FILENAME ]] && rm -f $FILENAME
 
 #~ wget --wait=10 --random-wait -O $FILENAME $THUMB
-wget -O $FILENAME "$THUMB?time=${_SECONDS}"
+wget --wait=60 --random-wait -O $FILENAME "$THUMB?time=${_SECONDS}"
 
-cd $OLDDEST
+#~ cd $OLDDEST
 
 exit 0

@@ -1,0 +1,137 @@
+# Danish translation for app-drawer
+# Copyright (C) 2025 mostlynick3
+# This file is distributed under the same license as the app-drawer package.
+# mostlynick3 <>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: app-drawer@mostlynick3 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-12-17 08:31+0100\n"
+"PO-Revision-Date: 2025-12-18 12:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "App Drawer"
+msgstr "Appskuffe"
+
+msgid "Full-screen app launcher with animations, transparency, a search box, and more."
+msgstr "Fuldskærms appskuffe med animationer, gennemsigtighed, søgefelt og mere."
+
+msgid "Navigation Settings"
+msgstr "Navigationsindstillinger"
+
+msgid "Navigation mode"
+msgstr "Navigationstilstand"
+
+msgid "Button Navigation"
+msgstr "Knapnavigation"
+
+msgid "Scroll Horizontal"
+msgstr "Horisontal rulning"
+
+msgid "Scroll Vertical"
+msgstr "Vertikal rulning"
+
+msgid "Layout Settings"
+msgstr "Layoutindstillinger"
+
+msgid "Columns per page"
+msgstr "Kolonner per side"
+
+msgid "Rows per page"
+msgstr "Rækker per side"
+
+msgid "Icon size (px)"
+msgstr "Ikonstørrelse (px)"
+
+msgid "Padding (px)"
+msgstr "Mellemrum (px)"
+
+msgid "Label font size (pt)"
+msgstr "Skriftstørrelse (pt)"
+
+msgid "Features"
+msgstr "Funktioner"
+
+msgid "Enable search bar"
+msgstr "Aktivér søgefelt"
+
+msgid "Enable favorites"
+msgstr "Aktivér favoritter"
+
+msgid "Appearance Settings"
+msgstr "Designindstillinger"
+
+msgid "Background color"
+msgstr "Baggrundsfarve"
+
+msgid "%"
+msgstr "%"
+
+msgid "Background opacity"
+msgstr "Baggrundenes gennemsigtighed"
+
+msgid "Container color"
+msgstr "Containerfarve"
+
+msgid "Container opacity"
+msgstr "Containerens gennemsigtighed"
+
+msgid "Box color"
+msgstr "Boksfarve"
+
+msgid "Box opacity"
+msgstr "Boksens gennemsigtighed"
+
+msgid "Box hover color"
+msgstr "Boksfarve ved aktivering"
+
+msgid "Box hover opacity"
+msgstr "Boksens gennemsigtighed ved aktivering"
+
+msgid "Animation Settings"
+msgstr "Animationsindstillinger"
+
+msgid "Enable animations"
+msgstr "Aktivér animationer"
+
+msgid "ms"
+msgstr "ms"
+
+msgid "Animation duration"
+msgstr "Animationsvarighed"
+
+msgid "Open animation"
+msgstr "Åbningsanimation"
+
+msgid "Fade"
+msgstr "Tone"
+
+msgid "Scale"
+msgstr "Skaler"
+
+msgid "Slide Up"
+msgstr "Gli op"
+
+msgid "Zoom"
+msgstr "Zoom"
+
+msgid "Close animation"
+msgstr "Lukningsanimation"
+
+msgid "Slide Down"
+msgstr "Gli ned"
+
+msgid "Button navigation page animation"
+msgstr "Knapnavigeringssideanimation"
+
+msgid "Slide"
+msgstr "Gli"
+
+msgid "Crossfade"
+msgstr "Krydstone"

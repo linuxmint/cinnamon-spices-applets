@@ -1,36 +1,35 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: window-list@sangorys 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-09 14:22-0400\n"
-"PO-Revision-Date: 2021-09-11 11:02+0200\n"
+"PO-Revision-Date: 2024-07-28 08:02-0400\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:1273
 msgid "Window information"
-msgstr ""
+msgstr "Ablak információk"
 
 #: applet.js:1309
-#, fuzzy
 msgid "Move to the other monitor"
-msgstr "Áthelyezés a másik kijelzőre"
+msgstr "Áthelyezés a másik monitorra"
 
 #: applet.js:1319
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Move to monitor %d"
-msgstr "Áthelyezés a másik kijelzőre"
+msgstr "Áthelyezés a %d monitorra"
 
 #: applet.js:1330
 msgid "Only on this workspace"
@@ -57,9 +56,8 @@ msgid "Configure..."
 msgstr "Beállítások…"
 
 #: applet.js:1376
-#, fuzzy
 msgid "Remove 'Window list'"
-msgstr "Eltávolítás: „%s”"
+msgstr "\"Ablaklista\" eltávolítása"
 
 #: applet.js:1383
 msgid "Close all"
@@ -71,7 +69,7 @@ msgstr "Többi bezárása"
 
 #: applet.js:1406
 msgid "Restore to full opacity"
-msgstr ""
+msgstr "Állítsa vissza a teljes átlátszatlanságot"
 
 #: applet.js:1414
 msgid "Restore"
@@ -86,9 +84,8 @@ msgid "Unmaximize"
 msgstr "Eredeti méret"
 
 #: applet.js:1432
-#, fuzzy
 msgid "Maximize"
-msgstr "Eredeti méret"
+msgstr "Maximalizálás"
 
 #: applet.js:1440
 msgid "Close"
@@ -96,7 +93,7 @@ msgstr "Bezárás"
 
 #. metadata.json->name
 msgid "My perfect window-list applet"
-msgstr ""
+msgstr "Az én tökéletes ablaklista-kisalkalmazásom"
 
 #. metadata.json->description
 msgid ""
@@ -104,46 +101,50 @@ msgid ""
 "and restored. The next huge feature is to also group window like Google "
 "Chrome groups tab. This is my definition of a perfect window list applet"
 msgstr ""
+"Az eredeti Cinnamon ablaklista alapján az ablakok sorrendje memorizálódik "
+"és visszaáll. A következő hatalmas funkció az ablak csoportosítása, "
+"például a Google Chrome csoportok lapja. Ez az én definícióm a tökéletes "
+"ablaklista kisalkalmazásról"
 
 #. settings-schema.json->section1->description
 msgid "Behavior"
-msgstr ""
+msgstr "Viselkedés"
 
 #. settings-schema.json->show-all-workspaces->description
-#, fuzzy
 msgid "Show windows from all workspaces"
-msgstr "Minden munkaterületen látható"
+msgstr "Az összes munkaterület ablakának megjelenítése"
 
 #. settings-schema.json->enable-alerts->description
 msgid ""
 "Show an alert in the window list when a window from another workspace "
 "requires attention"
 msgstr ""
+"Figyelmeztetés megjelenítése az ablaklistában, ha egy másik "
+"munkaterületről származó ablak figyelmet igényel"
 
 #. settings-schema.json->enable-scrolling->description
 msgid "Enable mouse-wheel scrolling in the window list"
-msgstr ""
+msgstr "Engedélyezze az egérgörgetést az ablaklistában"
 
 #. settings-schema.json->reverse-scrolling->description
 msgid "Reverse the direction of mouse-wheel scrolling in the window list"
-msgstr ""
+msgstr "Fordítsa meg az egér görgőjének görgetési irányát az ablaklistában"
 
 #. settings-schema.json->left-click-minimize->description
 msgid "Left click to minimize window"
-msgstr ""
+msgstr "Kattintson a bal egérgombbal az ablak kicsinyítéséhez"
 
 #. settings-schema.json->middle-click-close->description
 msgid "Middle click to close window"
-msgstr ""
+msgstr "Az ablak bezárásához kattintson a középső gombra"
 
 #. settings-schema.json->section2->description
-#, fuzzy
 msgid "Display"
-msgstr "Kijelző sorozatszáma"
+msgstr "Megjelenítés"
 
 #. settings-schema.json->panel-show-label->description
 msgid "Show window names in the panel"
-msgstr ""
+msgstr "Az ablaknevek megjelenítése a panelen"
 
 #. settings-schema.json->button-width->units
 msgid "pixels"
@@ -151,37 +152,39 @@ msgstr "képpont"
 
 #. settings-schema.json->button-width->description
 msgid "Window button width in the panel"
-msgstr ""
+msgstr "Az ablakgomb szélessége a panelen"
 
 #. settings-schema.json->buttons-use-entire-space->description
 msgid ""
 "Window buttons can have different sizes and use the entire space available"
 msgstr ""
+"Az ablakgombok különböző méretűek lehetnek, és kihasználhatják a teljes "
+"rendelkezésre álló helyet"
 
 #. settings-schema.json->window-preview->description
 msgid "Show window thumbnails on hover"
-msgstr ""
+msgstr "Az ablak bélyegképeinek megjelenítése az egérmutatóval"
 
 #. settings-schema.json->window-preview-show-label->description
 msgid "Show title above thumbnail"
-msgstr ""
+msgstr "Cím megjelenítése az indexkép felett"
 
 #. settings-schema.json->window-preview-scale->description
 msgid "Thumbnail size"
-msgstr ""
+msgstr "Miniatűr méret"
 
 #. settings-schema.json->window-preview-scale->options
 msgid "Small"
-msgstr ""
+msgstr "Kicsi"
 
 #. settings-schema.json->window-preview-scale->options
 msgid "Medium"
-msgstr ""
+msgstr "Közepes"
 
 #. settings-schema.json->window-preview-scale->options
 msgid "Large"
-msgstr ""
+msgstr "Nagy"
 
 #. settings-schema.json->window-preview-scale->options
 msgid "Largest"
-msgstr ""
+msgstr "Legnagyobb"

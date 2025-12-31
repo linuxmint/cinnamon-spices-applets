@@ -1,3 +1,13 @@
+### v2.3.2~20250525
+  * User can now choose the keyboard shortcut to open the search box. Default: Ctrl+Alf+F
+  * Code cleanup.
+
+### v2.3.1~20250211
+  * Improved code: No Mainloop, no Lang.
+
+### v2.3.0~20240705
+  * Now considers the case where the default provider is not selected.
+
 ### v2.2.0~20240615
   * New settings layout.
   * Fixed a bug that prevented you from modifying the list of search engines.

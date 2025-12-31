@@ -15,8 +15,9 @@ import type { LocationData, correctGetTimes, SunTime } from "../../types";
 import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, OnSameDay } from "../../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "../BaseProvider";
-import type { Config } from "../../config";
+import { Services, type Config } from "../../config";
 import { GetUSWeatherAlerts } from "./alerts";
+import { ErrorHandler } from "../../lib/services/error_handler";
 
 export class USWeather extends BaseProvider {
 
@@ -24,7 +25,7 @@ export class USWeather extends BaseProvider {
 	//  Properties
 	//--------------------------------------------------------
 	public readonly prettyName = _("US Weather");
-	public readonly name = "US Weather";
+	public readonly name = Services.USWeather;
 	public readonly maxForecastSupport = 7;
 	public readonly website = "https://www.weather.gov/";
 	public readonly maxHourlyForecastSupport = 156;
@@ -168,7 +169,7 @@ export class USWeather extends BaseProvider {
 	private OnObtainingGridData = (message: ErrorResponse<{title: string}>): boolean => {
 		if (message.ErrorData.code == 404 && message?.Data != null) {
 			if (message.Data.title == "Data Unavailable For Requested Point") {
-				this.app.ShowError({
+				ErrorHandler.Instance.PostError({
 					type: "hard",
 					userError: true,
 					detail: "location not covered",
@@ -290,6 +291,7 @@ export class USWeather extends BaseProvider {
 				pressure: (observation.properties.barometricPressure.value == null) ? null : observation.properties.barometricPressure.value / 100, // from Pa to hPa
 				humidity: observation.properties.relativeHumidity.value,
 				dewPoint: CelsiusToKelvin(observation.properties.dewpoint.value),
+				uvIndex: null,
 				condition: this.ResolveCondition(observation.properties.icon, IsNight(suntimes)),
 				forecasts: []
 			};
@@ -309,7 +311,7 @@ export class USWeather extends BaseProvider {
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("US Weather Parsing error: " + e.message, e);
-			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
+			ErrorHandler.Instance.PostError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
 	};
@@ -395,7 +397,7 @@ export class USWeather extends BaseProvider {
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("US Weather Forecast Parsing error: " + e.message, e);
-			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
+			ErrorHandler.Instance.PostError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
 	};
@@ -419,7 +421,7 @@ export class USWeather extends BaseProvider {
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("US Weather service Forecast Parsing error: " + e.message, e);
-			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") })
+			ErrorHandler.Instance.PostError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") })
 			return null;
 		}
 	}

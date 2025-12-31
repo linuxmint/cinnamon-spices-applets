@@ -20,6 +20,7 @@ export function createControlBtn(args: Arguments) {
     const icon = new Icon({
         icon_type: IconType.SYMBOLIC,
         icon_name: iconName || '',
+        style: "icon-size:16px;",
         style_class: 'popup-menu-icon' // this specifies the icon-size
     })
 

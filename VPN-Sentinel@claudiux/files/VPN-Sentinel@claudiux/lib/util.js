@@ -13,7 +13,7 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const GObject = imports.gi.GObject;
 const Gir = imports.gi.GIRepository;
-const Mainloop = imports.mainloop;
+//~ const Mainloop = imports.mainloop;
 const Main = imports.ui.main;
 
 // http://daringfireball.net/2010/07/improved_regex_for_matching_urls
@@ -574,19 +574,19 @@ function tryFn(callback, errCallback) {
  *
  * Returns (number): The ID of the loop.
  */
-function setTimeout(callback, ms) {
-    let args = [];
-    if (arguments.length > 2) {
-        args = args.slice.call(arguments, 2);
-    }
+//~ function setTimeout(callback, ms) {
+    //~ let args = [];
+    //~ if (arguments.length > 2) {
+        //~ args = args.slice.call(arguments, 2);
+    //~ }
 
-    let id = Mainloop.timeout_add(ms, () => {
-        callback.call(null, ...args);
-        return false; // Stop repeating
-    }, null);
+    //~ let id = Mainloop.timeout_add(ms, () => {
+        //~ callback.call(null, ...args);
+        //~ return false; // Stop repeating
+    //~ }, null);
 
-    return id;
-};
+    //~ return id;
+//~ };
 
 /**
  * clearTimeout:
@@ -594,9 +594,9 @@ function setTimeout(callback, ms) {
  *
  * Convenience wrapper for Mainloop.source_remove.
  */
-function clearTimeout(id) {
-    if (id) Mainloop.source_remove(id);
-};
+//~ function clearTimeout(id) {
+    //~ if (id) Mainloop.source_remove(id);
+//~ };
 
 
 /**
@@ -609,19 +609,19 @@ function clearTimeout(id) {
  *
  * Returns (number): The ID of the loop.
  */
-function setInterval(callback, ms) {
-    let args = [];
-    if (arguments.length > 2) {
-        args = args.slice.call(arguments, 2);
-    }
+//~ function setInterval(callback, ms) {
+    //~ let args = [];
+    //~ if (arguments.length > 2) {
+        //~ args = args.slice.call(arguments, 2);
+    //~ }
 
-    let id = Mainloop.timeout_add(ms, () => {
-        callback.call(null, ...args);
-        return true; // Repeat
-    }, null);
+    //~ let id = Mainloop.timeout_add(ms, () => {
+        //~ callback.call(null, ...args);
+        //~ return true; // Repeat
+    //~ }, null);
 
-    return id;
-};
+    //~ return id;
+//~ };
 
 /**
  * clearInterval:
@@ -629,9 +629,9 @@ function setInterval(callback, ms) {
  *
  * Convenience wrapper for Mainloop.source_remove.
  */
-function clearInterval(id) {
-    if (id) Mainloop.source_remove(id);
-};
+//~ function clearInterval(id) {
+    //~ if (id) Mainloop.source_remove(id);
+//~ };
 
 /**
  * throttle:

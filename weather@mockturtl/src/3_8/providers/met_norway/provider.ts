@@ -11,12 +11,12 @@ import type { MetNorwayNowcastPayload } from "./types/nowcast";
 import { IsCovered } from "./types/nowcast";
 import type { MetNorwayForecastData, MetNorwayForecastPayload } from "./types/forecast";
 import { HttpLib } from "../../lib/httpLib";
-import type { Config } from "../../config";
+import { Services, type Config } from "../../config";
 import { GetMETNorwayAlerts } from "./alert";
 
 export class MetNorway extends BaseProvider {
 	public readonly prettyName = _("MET Norway");
-	public readonly name = "MetNorway";
+	public readonly name = Services.MetNorway;
 	public readonly maxForecastSupport = 10;
 	public readonly website = "https://www.met.no/en";
 	public readonly maxHourlyForecastSupport = 48;
@@ -152,6 +152,7 @@ export class MetNorway extends BaseProvider {
 				degree: current.data.instant.details.wind_from_direction,
 				speed: current.data.instant.details.wind_speed
 			},
+			uvIndex: current.data.instant.details.ultraviolet_index_clear_sky ?? null,
 			location: {
 				timeZone: loc.timeZone
 			},

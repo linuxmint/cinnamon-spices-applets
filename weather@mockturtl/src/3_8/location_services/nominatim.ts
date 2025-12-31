@@ -1,9 +1,8 @@
 import { Logger } from "../lib/services/logger";
-import type { LocationData } from "../types";
+import type { LocationServiceResult } from "../types";
 import { _ } from "../utils";
-import { HttpLib } from "../lib/httpLib";
+import { HttpLib, type ErrorResponse } from "../lib/httpLib";
 import { ErrorHandler } from "../lib/services/error_handler";
-import type { Config } from "../config";
 
 interface NominatimLocationItem {
 	place_id: number;
@@ -46,10 +45,10 @@ export class GeoLocation {
 	 * Finds location and rebuilds entryText so it can be looked up again
 	 * @param searchText
 	 */
-	public async GetLocation(searchText: string, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<LocationData | null> {
+	public async GetLocation(searchText: string, cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
 		try {
 			searchText = searchText.trim();
-			const cached = this.cache?.searchText;
+			const cached = this.cache[searchText];
 			if (cached != null) {
 				Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
 				return cached;
@@ -57,7 +56,8 @@ export class GeoLocation {
 
 			const locationData = await HttpLib.Instance.LoadJsonSimple<NominatimResponse>({
 				url: `${this.url}?q=${searchText}&${this.params}`,
-				cancellable
+				cancellable,
+				HandleError: this.HandleError
 			});
 
 			if (locationData == null)
@@ -72,12 +72,11 @@ export class GeoLocation {
 				return null;
 			}
 			Logger.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
-			const result: LocationData = {
+			const result: LocationServiceResult = {
 				lat: Number.parseFloat(locationData[0].lat),
 				lon: Number.parseFloat(locationData[0].lon),
 				city: locationData[0].address.city || locationData[0].address.town || locationData[0].address.village,
 				country: locationData[0].address.country,
-				timeZone: config.UserTimezone,
 				entryText: this.BuildEntryText(locationData[0]),
 			}
 			this.cache[searchText] = result;
@@ -91,6 +90,20 @@ export class GeoLocation {
 				message: _("Failed to call Geolocation API, see Looking Glass for errors.")
 			})
 			return null;
+		}
+	}
+
+	private HandleError = (error: ErrorResponse<unknown>): boolean => {
+		switch (error.ErrorData.code) {
+			case 403:
+				ErrorHandler.Instance.PostError({
+					type: "hard",
+					detail: "location service blocked",
+					message: _("Address to location lookup service is blocked. You can try to change your User-Agent in help to see if it resolves the issue.")
+				})
+				return false;
+			default:
+				return true;
 		}
 	}
 
@@ -122,5 +135,5 @@ export class GeoLocation {
 }
 
 type LocationCache = {
-	[key: string]: LocationData
+	[key: string]: LocationServiceResult
 }

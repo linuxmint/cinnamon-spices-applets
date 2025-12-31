@@ -1,0 +1,7 @@
+{
+  "uuid": "fish@kriegcc",
+  "name": "Fish",
+  "description": "Displays a small fish in your panel and does nothing useful whatsoever beyond that.",
+  "version": "0.2.0",
+  "max-instances": "-1"
+}

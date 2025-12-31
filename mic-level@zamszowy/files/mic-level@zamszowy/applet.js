@@ -1,13 +1,15 @@
 const Applet = imports.ui.applet;
-const PopupMenu = imports.ui.popupMenu;
-const St = imports.gi.St;
 const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
+const Gettext = imports.gettext;
 
+const UUID = "mic-level@zamszowy";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+function _(str) { return Gettext.dgettext(UUID, str); }
 
 function MicLevel(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
@@ -21,7 +23,7 @@ MicLevel.prototype = {
 
         Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
-        this.set_applet_icon_name("microphone-sensitivity-low");
+        this.set_applet_icon_name("mic-volume-muted");
 
         this.uuid = metadata.uuid;
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
@@ -39,11 +41,11 @@ MicLevel.prototype = {
         }));
 
         this.enabled = true;
-        this.run();
-
         this.bt_profile_watch_running = false;
         if (this.bt_only) {
             this.watch_bt_profile();
+        } else {
+            this.run();
         }
 
         this.tooltip_info = 0;
@@ -75,15 +77,15 @@ MicLevel.prototype = {
 
     set_tooltip_with: function(param) {
         let args = new Array();
-        args.push('/bin/bash');
+        args.push('/usr/bin/bash');
         args.push(this.applet_path + '/profile.sh');
         args.push(param);
         Util.spawn_async(args, Lang.bind(this, function(stdout){
             const out = stdout.trim();
             if (out == "a2dp") {
-                this.set_applet_tooltip("Click so switch to HFP profile");
+                this.set_applet_tooltip(_("Click so switch to HFP profile"));
             } else if (out == "hfp") {
-                this.set_applet_tooltip("Click so switch to A2DP profile");
+                this.set_applet_tooltip(_("Click so switch to A2DP profile"));
             }
         }));
     },
@@ -118,7 +120,7 @@ MicLevel.prototype = {
         this.bt_profile_watch_running = true;
 
         let args = new Array();
-        args.push('/bin/bash');
+        args.push('/usr/bin/bash');
         args.push(this.applet_path + '/hfp.sh');
         Util.spawn_async(args, Lang.bind(this, function(stdout){
             const out = stdout.trim();
@@ -152,8 +154,10 @@ MicLevel.prototype = {
         }
     },
 
-    on_applet_removed: function() {
-        Mainloop.source_remove(this.tooltip_info);
+    on_applet_removed_from_panel: function() {
+        if (this.tooltip_info) {
+            Mainloop.source_remove(this.tooltip_info);
+        }
         this.settings.finalize();
         this.enabled = false;
         this.bt_only = false;
@@ -165,14 +169,15 @@ MicLevel.prototype = {
         }
 
         let args = new Array();
-        args.push('/bin/bash');
+        args.push('/usr/bin/bash');
         args.push(this.applet_path + '/rec.sh');
         args.push(this.measure_time.toString());
 
         Util.spawn_async(args, Lang.bind(this, function(stdout){
-            const level = Math.round(parseFloat(stdout.trim()));
-            if (level == -1) {
-                this.set_applet_icon_name("microphone-sensitivity-muted");
+            const out = stdout.trim();
+            const level = Math.round(parseFloat(out));
+            if (out == "-1" || level == -1) {
+                this.set_applet_icon_name("mic-volume-muted");
                 this.hide_applet_label(true);
             } else {
                 if (level >= 0 && level < 33) {

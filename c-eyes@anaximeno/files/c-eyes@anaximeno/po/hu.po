@@ -1,24 +1,24 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# CINNAMON EYES
+# This file is put in the public domain.
+# anaximeno, 2023
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: c-eyes@anaximeno 2.1.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-15 16:50-0100\n"
-"PO-Revision-Date: 2023-12-14 09:05+0100\n"
+"POT-Creation-Date: 2025-12-20 06:52-0100\n"
+"PO-Revision-Date: 2025-08-09 19:01+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: 4.2/applet.js:56 5.4/applet.js:55
+#. 4.2/applet.js:56 5.4/applet.js:56
 msgid ""
 "📢 The click effects will be removed from this applet on the version 6.2 of "
 "Cinnamon\n"
@@ -26,35 +26,40 @@ msgid ""
 "installed\n"
 "on the Cinnamon Extensions settings module for versions of Cinnamon >= 5.4"
 msgstr ""
+"📢 A kattintási effektusok a Cinnamon 6.2-es verziójában eltűnnek erről a "
+"kisalkalmazásról\n"
+"és átkerült egy új, „mouse-click-effects” („egérkattintási effektusok”) nevű "
+"bővítményre, amely már telepíthető\n"
+"a Cinnamon Bővítmények beállítási modulban a legalább 5.4 verziójú Cinnamon "
+"asztali környezethez"
 
-#: 4.2/applet.js:389 5.4/applet.js:385
+#. 4.2/applet.js:396 5.4/applet.js:393
 msgid "click to deactivate the eye"
 msgstr "kattintson a szem kikapcsolásához"
 
-#: 4.2/applet.js:389 5.4/applet.js:385
+#. 4.2/applet.js:396 5.4/applet.js:393
 msgid "click to activate the eye"
 msgstr "kattintson a szem aktiválásához"
 
-#: 4.2/applet.js:390 5.4/applet.js:386
+#. 4.2/applet.js:397 5.4/applet.js:394
 msgid "TIP"
 msgstr "TIP"
 
-#: 6.2/applet.js:46
+#. 6.2/applet.js:42
 msgid "Hey, I saw that!"
-msgstr ""
+msgstr "Hé, ezt láttam!"
 
 #. metadata.json->name
 msgid "Cinnamon Eyes"
 msgstr "Cinnamon Szemek"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "An applet for Cinnamon that adds an eye to the panel bar that follows your "
 "cursor."
 msgstr ""
 "Egy Cinnamon kisalkalmazás, amely hozzáad egy szemet a panelhez, amely "
-"követi az egérmutatót és kattintás esetén animációkat jelenít meg."
+"követi az egérmutatót."
 
 #. 4.2->settings-schema.json->eye->title
 #. 5.4->settings-schema.json->eye->title
@@ -63,6 +68,7 @@ msgstr "Szem"
 
 #. 4.2->settings-schema.json->effects->title
 #. 5.4->settings-schema.json->effects->title
+#. 6.2->settings-schema.json->effects-page->title
 msgid "Effects"
 msgstr "Effektusok"
 
@@ -70,7 +76,9 @@ msgstr "Effektusok"
 #. 4.2->settings-schema.json->click-generic->title
 #. 5.4->settings-schema.json->eye-generic->title
 #. 5.4->settings-schema.json->click-generic->title
-#. 6.2->settings-schema.json->general->description
+#. 6.2->settings-schema.json->general-page->title
+#. 6.2->settings-schema.json->general-section->title
+#. 6.2->settings-schema.json->general-effects-section->title
 msgid "General"
 msgstr "Általános"
 
@@ -78,7 +86,7 @@ msgstr "Általános"
 #. 4.2->settings-schema.json->click-colors->title
 #. 5.4->settings-schema.json->eye-colors->title
 #. 5.4->settings-schema.json->click-colors->title
-#. 6.2->settings-schema.json->colors->description
+#. 6.2->settings-schema.json->colors-section->title
 msgid "Colors"
 msgstr "Színek"
 
@@ -89,7 +97,6 @@ msgstr "Események"
 
 #. 4.2->settings-schema.json->eye-mode->description
 #. 5.4->settings-schema.json->eye-mode->description
-#. 6.2->settings-schema.json->mode->description
 msgid "Mode"
 msgstr "Üzemmód"
 
@@ -142,15 +149,17 @@ msgstr "Térköz"
 #. 5.4->settings-schema.json->eye-repaint-interval->units
 #. 5.4->settings-schema.json->fade-timeout->units
 #. 6.2->settings-schema.json->repaint-interval->units
+#. 6.2->settings-schema.json->blink-period->units
+#. 6.2->settings-schema.json->blink-gap->units
+#. 6.2->settings-schema.json->idle-delay->units
 msgid "ms"
 msgstr "ms"
 
 #. 4.2->settings-schema.json->eye-repaint-interval->description
 #. 5.4->settings-schema.json->eye-repaint-interval->description
 #. 6.2->settings-schema.json->repaint-interval->description
-#, fuzzy
 msgid "Eye Update Interval"
-msgstr "Újrafestési időköz"
+msgstr "Szemfrissítési időköz"
 
 #. 4.2->settings-schema.json->eye-repaint-interval->tooltip
 #. 5.4->settings-schema.json->eye-repaint-interval->tooltip
@@ -160,18 +169,21 @@ msgid ""
 "(measured in miliseconds) result in smoother animation but require more "
 "processing power."
 msgstr ""
+"Ez a beállítás szabályozza a szem újrarajzolásának idejét. Az alacsonyabb "
+"értékek (ezredmásodpercben mérve) simább animációt eredményeznek, de nagyobb "
+"feldolgozási teljesítményt igényelnek."
 
 #. 4.2->settings-schema.json->eye-repaint-angle->units
 #. 5.4->settings-schema.json->eye-repaint-angle->units
 #. 6.2->settings-schema.json->repaint-angle->units
 msgid "radians"
-msgstr ""
+msgstr "radiánok"
 
 #. 4.2->settings-schema.json->eye-repaint-angle->description
 #. 5.4->settings-schema.json->eye-repaint-angle->description
 #. 6.2->settings-schema.json->repaint-angle->description
 msgid "Eye Update Sensitivity"
-msgstr ""
+msgstr "Szemfrissítési érzékenység"
 
 #. 4.2->settings-schema.json->eye-repaint-angle->tooltip
 #. 5.4->settings-schema.json->eye-repaint-angle->tooltip
@@ -181,6 +193,10 @@ msgid ""
 "required to redraw the eye. Lower values (measured in radians) result in "
 "smoother animation but require more processing power."
 msgstr ""
+"Ez a beállítás szabályozza a szem újrarajzolásához szükséges minimális "
+"szögváltozást az egérmozgások között. Az alacsonyabb értékek (radiánban "
+"mérve) simább animációt eredményeznek, de nagyobb feldolgozási teljesítményt "
+"igényelnek."
 
 #. 4.2->settings-schema.json->eye-activate-by-default->description
 #. 5.4->settings-schema.json->eye-activate-by-default->description
@@ -217,7 +233,7 @@ msgstr "Aktivált pupillaszín"
 #. 6.2->settings-schema.json->fill-lids-color-painting->description
 #. 6.2->settings-schema.json->fill-bulb-color-painting->description
 msgid "Fill the Colors Inside the Eye"
-msgstr ""
+msgstr "Töltse ki a színeket a szem belsejében"
 
 #. 4.2->settings-schema.json->mouse-click-enable->description
 #. 5.4->settings-schema.json->mouse-click-enable->description
@@ -390,44 +406,126 @@ msgid "General Opacity"
 msgstr "Általános átlátszatlanság"
 
 #. 5.4->settings-schema.json->click-info->title
-#. 6.2->settings-schema.json->info->description
 msgid "Info"
-msgstr ""
+msgstr "Információ"
 
 #. 5.4->settings-schema.json->click-effects-moved-on-
 #. cinnamon-6.2-info->description
-#. 6.2->settings-schema.json->click-effects-moved-info->description
 msgid ""
 "In Cinnamon versions 6.2 and later, the click effects have been removed from "
 "this applet and relocated to a new extension called 'mouse-click-effects,' "
 "which can be installed through the Cinnamon Extensions settings module."
 msgstr ""
+"A Cinnamon 6.2-es és újabb verzióiban a kattintási effektusokat "
+"eltávolították erről a kisalkalmazásról, és áthelyezték egy új „mouse-click-"
+"effects” („egérkattintási effektusok”) nevű bővítménybe, amely a Cinnamon "
+"Extensions beállítási modulján keresztül telepíthető."
+
+#. 6.2->settings-schema.json->style-page->title
+#. 6.2->settings-schema.json->styles-section->title
+msgid "Style"
+msgstr "Stílus"
+
+#. 6.2->settings-schema.json->optimization-section->title
+msgid "Optimizations"
+msgstr "Optimalizációk"
+
+#. 6.2->settings-schema.json->mode->description
+msgid "Eye Mode"
+msgstr "Szem mód"
 
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
-msgstr ""
+msgstr "Eszköztipp üzenet az egérmutatóval"
+
+#. 6.2->settings-schema.json->optimization-mode->description
+msgid "Optimization Mode"
+msgstr "Optimalizációs mód"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Battery"
+msgstr "Akkumulátor"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Balanced"
+msgstr "Kiegyensúlyozott"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Performance"
+msgstr "Teljesítmény"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Manual"
+msgstr "Kézi"
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
-msgstr ""
+msgstr "Használjon alternatív színeket a szem számára"
 
 #. 6.2->settings-schema.json->use-alternative-colors->tooltip
 msgid ""
 "When disabled it will use the current system theme's default color for panel "
 "items."
 msgstr ""
+"Ha letiltja, akkor az aktuális rendszertéma alapértelmezett színét fogja "
+"használni a panelelemekhez."
 
 #. 6.2->settings-schema.json->base-color->description
-#, fuzzy
 msgid "Base Color"
-msgstr "Aktivált alapszín"
+msgstr "Alapszín"
 
 #. 6.2->settings-schema.json->iris-color->description
-#, fuzzy
 msgid "Iris Color"
-msgstr "Aktivált írisz szín"
+msgstr "Írisz színe"
 
 #. 6.2->settings-schema.json->pupil-color->description
-#, fuzzy
 msgid "Pupil Color"
-msgstr "Aktivált pupillaszín"
+msgstr "Pupilla színe"
+
+#. 6.2->settings-schema.json->blink-effect->description
+#, fuzzy
+msgid "Blink Effect"
+msgstr "Effektusok"
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "None"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "When Idle"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-effect->options
+msgid "Always"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-period->description
+msgid "Blink Period"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-period->tooltip
+msgid ""
+"This setting controls the duration of a full blink cycle (closing and "
+"opening). Measured in milliseconds."
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-gap->description
+#, fuzzy
+msgid "Blink Gap"
+msgstr "Pislogás"
+
+#. 6.2->settings-schema.json->blink-gap->tooltip
+msgid ""
+"This setting controls the time gap between two consecutive blinks. Measured "
+"in milliseconds."
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->description
+msgid "Idle Delay"
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->tooltip
+msgid ""
+"This setting controls the time of inactivity (no mouse or keyboard input) "
+"after which the system is considered idle. Measured in milliseconds."
+msgstr ""

@@ -1,3 +1,122 @@
+### v7.11.1~20251217
+  * Animation improvements.
+
+### v7.11.0~20251217
+  * Uses better animation method.
+
+### v7.10.0~20251212
+  * Use xlet-settings instead of cinnamon-settings to configure applet.
+
+### v7.9.7~20251121
+  * Updates to-string() function.
+
+### v7.9.6~20251121
+  * Improves file monitoring.
+
+### v7.9.5~20251031
+  * Avoids 'destroy' errors.
+
+### v7.9.4~20251012
+  * Improves access to settings.
+  * Adds Apply button to settings about Spices.
+
+### v7.9.3~20251012
+  * Fixes a problem with a badge.
+
+### v7.9.2~20251012
+  * Fixes [#7090](https://github.com/linuxmint/cinnamon-spices-applets/issues/7090).
+
+### v7.9.1~20250908
+  * Better memory management.
+
+### v7.9.0
+  * Bugfix about themes.
+  * Added a “Check all the first boxes then refresh” button in each tab of this applet’s settings, except in the General tab.
+  * Please note: when certain boxes remain unchecked, it means that these spices are not included in the Cinnamon database.
+
+### v7.8.8~20250425
+  * Fixes [#7090](https://github.com/linuxmint/cinnamon-spices-applets/issues/7090).
+
+### v7.8.7~20250324
+  * Adapts constants.js for themes.
+  * Code cleanup.
+
+### v7.8.6~20250323
+  * Fixes #6992: Improves the appearance of the label in a horizontal panel.
+
+### v7.8.5~20250315
+  * BugFixes in a bash script.
+
+### v7.8.4~20250304
+  * Improved functioning.
+
+### v7.8.3~20250303
+  * Minor bugfix.
+
+### v7.8.2~20250303
+  * Does not try to translate null messages from other spices. This also helps avoid black screens.
+
+### v7.8.1~20250302
+  * Forces the use of 'cjs' even if 'gjs' is installed.
+  * Uses “try” for each “destroy” command.
+  * Fixes #6933.
+
+### v7.8.0~20250215
+  * Tooltip bug fixed.
+
+### v7.7.0~20250211
+  * Consider AlbumArt3.0@claudiux as a common desklet.
+
+### v7.6.7~20250204
+  * Avoids the use of Array.toString() in the code.
+
+### v7.6.6~20250203
+  * No more errors on restart.
+
+### v7.6.5~20250202
+  * Fixes #6776.
+  * Code: No 'bind(this)' calls anymore.
+
+### v7.6.4~20250131
+  * Improves directory and file management.
+  * Code clean-up.
+
+### v7.6.3~20250130
+  * Try to fix #6776.
+
+### v7.6.2~20250126
+  * Modification of the menu to fix #6781.
+
+### v7.6.1~20250120
+  * Fixes #6776.
+
+### v7.6.0~20250119
+  * Do not check private Spices. A private Spice is a Spice that is not listed on the Cinnamon Spices website.
+  * Code: Avoids using Lang.bind() in response to signals.
+
+### v7.5.3~20250116
+  * mainloopTools library: improvements.
+
+### v7.5.2~20250112
+  * Fixed minor bugs in animations.
+
+### v7.5.1~20250112
+  * Now use mainloopTools to optimize loop management.
+
+### v7.5.0~20250111
+  * Improved management of loops.
+
+### v7.4.7~20250105
+  * Now compatible with Cinnamon on Gentoo.
+  * Replaces apturl with xdg-open.
+  * Lets the user enter commands when dependencies are missing.
+
+### v7.4.6~20241230
+  * Spices not selected in the lists of settings are displayed first.
+
+### v7.4.5~20241114
+  * Soup2/Soup3: better detection.
+
 ### v7.4.4~20240602
   * Restarts httpLib when network interface status changes.
 

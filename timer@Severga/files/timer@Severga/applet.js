@@ -56,9 +56,12 @@ TimerApplet.prototype = {
     this.flashCount = 0;
     this.sliderDragging = false;
 
+    //this.customCommand = "";
+    //this.cancelTurnOffOption = true;
     //this.soundOn = true;
     //this.soundPath = "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga";
     //this.showNotifications = true;
+    //this.customText = "";
     //this.openSubmenu = "Quick setup";
     this.preset = [
       /*60,
@@ -89,7 +92,7 @@ TimerApplet.prototype = {
     this.timeMenuItem = new PopupMenu.PopupMenuItem(_("At:  --:--:--"), {reactive: false});
     this.timeMenuItem.actor.set_style("font-family: monospace; background: #6B8355; font-weight: bold");
     this.menu.addMenuItem(this.timeMenuItem);
-    this.turnOffSwitchMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Turn off computer on timer"));
+    this.turnOffSwitchMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Run command | turn off computer on timer"));
     this.turnOffSwitchMenuItem.actor.set_style("background: #6B8355");
     this.turnOffSwitchMenuItem.connect("toggled", Lang.bind(this, this._turn_off_toggled));
     this.menu.addMenuItem(this.turnOffSwitchMenuItem);
@@ -296,13 +299,16 @@ TimerApplet.prototype = {
   },
 
   _bind_settings: function() {
-    this.settings.bindProperty(Settings.BindingDirection.IN,      "soundOn",        "soundOn",        null, null);
-    this.settings.bindProperty(Settings.BindingDirection.IN,      "soundPath",      "soundPath",      null, null);
-    this.settings.bindProperty(Settings.BindingDirection.IN,      "showNotifications",  "showNotifications",  null, null);
-    this.settings.bindProperty(Settings.BindingDirection.IN,      "openSubmenu",      "openSubmenu",      null, null);
-    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "preset",       "preset",       null, null);
-    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "saved_endTime",  "saved_endTime",  null, null);
-    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "turn_off",       "turn_off",       null, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN,            "customCommand",       "customCommand",       null, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN,            "cancelTurnOffOption", "cancelTurnOffOption", null, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN,            "soundOn",             "soundOn",             null, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN,            "soundPath",           "soundPath",           null, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN,            "showNotifications",   "showNotifications",   null, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN,            "customText",          "customText",          null, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN,            "openSubmenu",         "openSubmenu",         null, null);
+    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "preset",              "preset",              null, null);
+    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "saved_endTime",       "saved_endTime",       null, null);
+    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "turn_off",            "turn_off",            null, null);
   },
 
   _turn_off_toggled: function() {
@@ -521,7 +527,7 @@ TimerApplet.prototype = {
       today.setSeconds(0);
       this.timeMenuItem.setLabel(_("At:  ") + (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s + (this.endTime.getTime() > today.getTime() + 86400000 ? " (tomorrow)" : ""));
       this._moveSlider();
-      if (this.turnOffSwitchMenuItem.state && this.period < 10) this.set_applet_label(_("Turn off in ") + this.periodS + _("s"));
+      if (this.turnOffSwitchMenuItem.state && this.customCommand.trim() == "" && this.period < 10) this.set_applet_label(_("Turn off in ") + this.periodS + _("s"));
       else this.set_applet_label(label);
       this.set_applet_tooltip(_("Timer: ") + label);
       this.timeout = Mainloop.timeout_add_seconds(1, () => this._tick());
@@ -533,7 +539,16 @@ TimerApplet.prototype = {
       this.sliderMenuItem.setValue(0);
       this.timeMenuItem.setLabel(_("At:  --:--:--"));
       if (this.turnOffSwitchMenuItem.state) {
-        Util.spawnCommandLine("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.RequestShutdown");
+        if (this.cancelTurnOffOption) {
+          this.turn_off = false;
+          this.turnOffSwitchMenuItem.setToggleState(false);
+        }
+        if (this.customCommand.trim() == "") Util.spawnCommandLine("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.RequestShutdown");
+        else {
+          try {
+            Util.spawnCommandLine(this.customCommand.trim());
+          } catch (e) { }
+        };
       }
       else {
         this.flashCount = 0;
@@ -548,10 +563,9 @@ TimerApplet.prototype = {
         }
         if (this.showNotifications) {
           //Util.spawnCommandLine('zenity --notification --text=\"Timer:  Time\'s up!\" --window-icon=clock');
-
           let source = new MessageTray.SystemNotificationSource();
           Main.messageTray.add(source);
-          let notification = new MessageTray.Notification(source, _("Timer"), _("Time's up!"));
+          let notification = new MessageTray.Notification(source, _("Timer"), (this.customText.trim() == "" ? _("Time's up!") : this.customText));
           notification.setTransient(false);
           notification.setUrgency(MessageTray.Urgency.NORMAL);
           source.notify(notification);

@@ -1,0 +1,287 @@
+# PROCESS MEMORY MONITOR
+# This file is put in the public domain.
+# claudiux, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ProcessMemoryMonitor@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-29 14:35+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:58
+msgid "Click to reset or reconnect to the process"
+msgstr "Nollaa tai muodosta yhteys prosessiin uudelleen painamalla"
+
+#. applet.js:62
+msgid "Variation:"
+msgstr "Variaatio:"
+
+#. applet.js:63
+msgid "Process:"
+msgstr "Prosessi:"
+
+#. applet.js:64
+msgid "PID:"
+msgstr "PID:"
+
+#. applet.js:65
+msgid "Elapsed:"
+msgstr "Kulunut:"
+
+#. applet.js:66
+msgid "Start:"
+msgstr "Alku:"
+
+#. applet.js:67
+msgid "Diff:"
+msgstr "Ero:"
+
+#. applet.js:68
+msgid "Max:"
+msgstr "Max:"
+
+#. applet.js:69
+msgid "Value:"
+msgstr "Arvo:"
+
+#. applet.js:70
+msgid "Min:"
+msgstr "Min:"
+
+#. applet.js:71
+msgid "Refresh interval:"
+msgstr "Päivitysväli:"
+
+#. applet.js:204
+msgid "MiB"
+msgstr "MiB"
+
+#. applet.js:206
+msgid "kiB/min"
+msgstr "kiB/min"
+
+#. applet.js:431
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Poista \"%s\""
+
+#. applet.js:439
+msgid "About..."
+msgstr "Tietoja..."
+
+#. applet.js:458
+msgid "Configure..."
+msgstr "Asetukset..."
+
+#. applet.js:475 applet.js:503
+#, javascript-format
+msgid "Refresh interval: %s seconds"
+msgstr "Virkistysväli: %s sekuntia"
+
+#. settings-schema.json->sysmon-button->description
+#. applet.js:480
+msgid "Open System Monitor"
+msgstr "Avaa Valvonta"
+
+#. metadata.json->description
+msgid "Monitors memory usage of Cinnamon or any other process"
+msgstr "Valvoo Cinnamonin tai minkä tahansa muun prosessin muistin käyttöä"
+
+#. metadata.json->name
+msgid "Process Memory Monitor"
+msgstr "Process Memory Monitor"
+
+#. settings-schema.json->page-process->title
+msgid "Process"
+msgstr "Prosessi"
+
+#. settings-schema.json->page-characters->title
+msgid "Characters"
+msgstr "Merkit"
+
+#. settings-schema.json->page-abbrev->title
+#. settings-schema.json->section-abbrev->title
+msgid "Abbreviations"
+msgstr "Lyhenteet"
+
+#. settings-schema.json->page-style->title
+#. settings-schema.json->section-style->title
+msgid "Style"
+msgstr "Tyyli"
+
+#. settings-schema.json->section-process->title
+msgid "Process to monitor"
+msgstr "Valvottava prosessi"
+
+#. settings-schema.json->section-sysmon->title
+msgid "System Monitor"
+msgstr "Valvonta"
+
+#. settings-schema.json->section-char-var->title
+msgid "Variation characters"
+msgstr "Variaatio merkit"
+
+#. settings-schema.json->process-name->description
+msgid ""
+"Name of process or PID to be monitored (by default, the Cinnamon process is "
+"used)"
+msgstr ""
+"Valvottavan prosessin nimi tai PID (Cinnamon-prosessia käytetään oletuksena)"
+
+#. settings-schema.json->process-name->tooltip
+msgid ""
+"Set the name of the process or PID you want to monitor here.\n"
+"Note that, for the moment, no consideration is given to multiple instances "
+"of the same program (undefined behavior).\n"
+"Open the system monitor to see all running processes."
+msgstr ""
+"Aseta tässä valvottavan prosessin tai PID:n nimi.\n"
+"Huomaa, että tällä hetkellä ei oteta huomioon saman ohjelman useita "
+"esiintymiä (määrittämätön toiminta).\n"
+"Avaa Valvonta kasoaksesi kaikki käynnissä olevat prosessit."
+
+#. settings-schema.json->pn-button->description
+msgid "Apply"
+msgstr "Käytä"
+
+#. settings-schema.json->reset-pn-button->description
+msgid "Reset to Cinnamon"
+msgstr "Käynnistä Cinnamon"
+
+#. settings-schema.json->char-max->description
+msgid "Max value exceeded ⬆"
+msgstr "Maksimi ylitetty ⬆"
+
+#. settings-schema.json->char-max->tooltip
+#. settings-schema.json->char-up->tooltip
+#. settings-schema.json->char-flat->tooltip
+#. settings-schema.json->char-down->tooltip
+#. settings-schema.json->char-min->tooltip
+msgid "Emoji accepted. Empty to return to the default value."
+msgstr "Emoji hyväksytty. Tyhjä palauttaa oletuksen."
+
+#. settings-schema.json->char-up->description
+msgid "Increasing ↗"
+msgstr "Kasvava ↗"
+
+#. settings-schema.json->char-flat->description
+msgid "Staying constant ➡"
+msgstr "Vakiotaso ➡"
+
+#. settings-schema.json->char-down->description
+msgid "Decreasing ↘"
+msgstr "Laskeva ↘"
+
+#. settings-schema.json->char-min->description
+msgid "Min value exceeded ⬇"
+msgstr "Minimi ylitetty ⬇"
+
+#. settings-schema.json->no-char-var->description
+msgid "Do not display any Variation character"
+msgstr "Älä näytä Variaatio-merkkejä"
+
+#. settings-schema.json->abbrev-MiB->description
+msgid "Abbreviation for mebibyte (default: MiB)"
+msgstr "Mebitavun lyhenne (oletus: MiB)"
+
+#. settings-schema.json->abbrev-MiB->tooltip
+msgid "1 MiB = 1024 kiB"
+msgstr "1 MiB = 1024 kiB"
+
+#. settings-schema.json->abbrev-kpm->description
+msgid "Abbreviation for kibibyte per minute (default: kiB/min)"
+msgstr "Kibitavua per min luhenne (oletus: kiB/min)"
+
+#. settings-schema.json->abbrev-kpm->tooltip
+msgid "1 kiB = 1024 B"
+msgstr "1 kiB = 1024 B"
+
+#. settings-schema.json->style-font-weight->description
+msgid "Font weight"
+msgstr "Fontin paksuus"
+
+#. settings-schema.json->style-font-weight->options
+msgid "normal"
+msgstr "normaali"
+
+#. settings-schema.json->style-font-weight->options
+msgid "bold"
+msgstr "vahva"
+
+#. settings-schema.json->style-font-family->description
+msgid "Font family"
+msgstr "Fonttiperhe"
+
+#. settings-schema.json->style-font-family->options
+msgid "monospace"
+msgstr "monospace"
+
+#. settings-schema.json->style-font-family->options
+msgid "sans-serif"
+msgstr "sans-serif"
+
+#. settings-schema.json->style-font-family->options
+msgid "serif"
+msgstr "serif"
+
+#. settings-schema.json->style-font-family->options
+msgid "cursive"
+msgstr "kursiivi"
+
+#. settings-schema.json->style-font-family->options
+msgid "fantasy"
+msgstr "fantasia"
+
+#. settings-schema.json->style-font-family->tooltip
+msgid "Select monospace to ensure display stability."
+msgstr "Valitsemalla monospace saat vakaan näytön."
+
+#. settings-schema.json->style-font-size->description
+msgid "Font size"
+msgstr "Fonttikoko"
+
+#. settings-schema.json->style-font-size->options
+msgid "xx-small"
+msgstr "xx-pienin"
+
+#. settings-schema.json->style-font-size->options
+msgid "x-small"
+msgstr "x-pieni"
+
+#. settings-schema.json->style-font-size->options
+msgid "small"
+msgstr "pieni"
+
+#. settings-schema.json->style-font-size->options
+msgid "medium"
+msgstr "keskikoko"
+
+#. settings-schema.json->style-font-size->options
+msgid "large"
+msgstr "suuri"
+
+#. settings-schema.json->style-font-size->options
+msgid "x-large"
+msgstr "x-suuri"
+
+#. settings-schema.json->style-font-size->options
+msgid "xx-large"
+msgstr "xx-suurin"
+
+#. settings-schema.json->style-customized-width->description
+msgid "Custom width"
+msgstr "Mukautettu leveys"
+
+#. settings-schema.json->style-label-width->description
+msgid "Label's width (pixels)"
+msgstr "Nimen leveys (pikseliä)"

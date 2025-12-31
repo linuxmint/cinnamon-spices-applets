@@ -6,6 +6,7 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+import { Services, type Config } from "../config";
 import type { DistanceUnits } from "../config";
 import { Logger } from "../lib/services/logger";
 import { getTimes } from "suncalc";
@@ -15,6 +16,7 @@ import { _, GetDistance, MPHtoMPS, CompassToDeg, CelsiusToKelvin, MetreToUserUni
 import { DateTime } from "luxon";
 import { BaseProvider } from "./BaseProvider";
 import { HttpLib } from "../lib/httpLib";
+import { ErrorHandler } from "../lib/services/error_handler";
 
 export class MetUk extends BaseProvider {
 
@@ -22,7 +24,7 @@ export class MetUk extends BaseProvider {
 	//  Properties
 	//--------------------------------------------------------
 	public readonly prettyName = _("Met Office UK");
-	public readonly name = "Met Office UK";
+	public readonly name = Services.MetOfficeUK;
 	public readonly maxForecastSupport = 5;
 	public readonly website = "https://www.metoffice.gov.uk/";
 	public readonly maxHourlyForecastSupport = 36;
@@ -52,7 +54,7 @@ export class MetUk extends BaseProvider {
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(newLoc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
+	public async GetWeather(newLoc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
 
 		const loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
 		// Get closest sites
@@ -78,7 +80,7 @@ export class MetUk extends BaseProvider {
 		if (this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
 			// TODO: Validate that this does not happen with uk locations
 			Logger.Error("User is probably not in UK, aborting");
-			this.app.ShowError({
+			ErrorHandler.Instance.PostError({
 				type: "hard",
 				userError: true,
 				detail: "location not covered",
@@ -94,14 +96,23 @@ export class MetUk extends BaseProvider {
 
 		// Get and Parse Observation data
 		const observations = await this.GetObservationData(this.observationSites, cancellable);
-		const currentResult = this.ParseCurrent(observations, newLoc);
-		if (!currentResult) return null;
+		const currentResult = this.ParseCurrent(observations, newLoc, config);
+		if (!currentResult)
+			return null;
+
 
 		// await for forecasts if not finished
 		const forecastResult = await forecastPromise;
 		currentResult.forecasts = forecastResult ?? [];
-		const threeHourlyForecast = await hourlyPayload;
-		currentResult.hourlyForecasts = threeHourlyForecast ?? [];
+		const threeHourlyResolved = await hourlyPayload;
+		if (threeHourlyResolved == null) {
+			currentResult.hourlyForecasts = [];
+			return null;
+		}
+
+		const [threeHourlyForecast, additionalData] = threeHourlyResolved;
+		currentResult.hourlyForecasts = threeHourlyForecast;
+		currentResult.uvIndex = additionalData?.uvIndex ?? null;
 		return currentResult;
 	};
 
@@ -167,7 +178,7 @@ export class MetUk extends BaseProvider {
 	 * @param baseUrl
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
-	private async GetData<T, R extends WeatherData | ForecastData[] | HourlyForecastData[]>(query: string, ParseFunction: (json: T, loc: LocationData) => R | null, loc: LocationData, cancellable: imports.gi.Gio.Cancellable) {
+	private async GetData<T, R>(query: string, ParseFunction: (json: T, loc: LocationData) => R | null, loc: LocationData, cancellable: imports.gi.Gio.Cancellable) {
 		if (query == null)
 			return null;
 
@@ -180,7 +191,7 @@ export class MetUk extends BaseProvider {
 		return ParseFunction(json as T, loc);
 	};
 
-	private ParseCurrent(json: METPayload<true>[], loc: LocationData): WeatherData | null {
+	private ParseCurrent(json: METPayload<true>[], loc: LocationData, config: Config): WeatherData | null {
 		const observation = this.MeshObservations(json, loc);
 		if (!observation) {
 			return null;
@@ -195,7 +206,7 @@ export class MetUk extends BaseProvider {
 		const filteredJson = json as unknown as METPayload<false>[];
 
 		if (dataIndex == -1) {
-			this.app.ShowError({
+			ErrorHandler.Instance.PostError({
 				detail: "no api response",
 				type: "hard",
 				message: _("Data was not found for location"),
@@ -222,7 +233,7 @@ export class MetUk extends BaseProvider {
 				},
 				stationInfo: {
 					distanceFrom: this.observationSites[dataIndex].dist,
-					name:  this.observationSites[dataIndex].name,
+					name: this.observationSites[dataIndex].name,
 					area: this.observationSites[dataIndex].unitaryAuthArea,
 					lat: Number.parseFloat(this.observationSites[dataIndex].latitude),
 					lon: Number.parseFloat(this.observationSites[dataIndex].longitude),
@@ -238,6 +249,7 @@ export class MetUk extends BaseProvider {
 				pressure: null,
 				humidity: null,
 				dewPoint: null,
+				uvIndex: null,
 				condition: this.ResolveCondition(observation?.W),
 				forecasts: []
 			};
@@ -245,7 +257,7 @@ export class MetUk extends BaseProvider {
 			if (observation?.V != null) {
 				weather.extra_field = {
 					name: _("Visibility"),
-					value: this.VisibilityToText(observation.V),
+					value: this.VisibilityToText(observation.V, config),
 					type: "string"
 				}
 			}
@@ -274,7 +286,7 @@ export class MetUk extends BaseProvider {
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("Met UK Weather Parsing error: " + e.message, e);
-			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
+			ErrorHandler.Instance.PostError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
 	};
@@ -303,18 +315,23 @@ export class MetUk extends BaseProvider {
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("MET UK Forecast Parsing error: " + e.message, e);
-			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
+			ErrorHandler.Instance.PostError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
 	};
 
-	private ParseHourlyForecast = (json: METPayload, loc: LocationData): HourlyForecastData[] | null => {
+	private ParseHourlyForecast = (json: METPayload, loc: LocationData): [HourlyForecastData[], { uvIndex: number | null }] | null => {
 		const forecasts: HourlyForecastData[] = [];
+		let uvIndex: number | null = null;
 		try {
 			for (const day of Array.isArray(json.SiteRep.DV.Location.Period) ? json.SiteRep.DV.Location.Period : [json.SiteRep.DV.Location.Period]) {
 				const date = DateTime.fromISO(this.PartialToISOString(day.value), { zone: loc.timeZone });
 				if (!Array.isArray(day.Rep))
 					continue;
+
+				uvIndex = ("U" in day.Rep[0]) ? Number.parseInt(day.Rep[0].U) : null;
+				if (Number.isNaN(uvIndex))
+					uvIndex = null;
 
 				for (const element of day.Rep) {
 					const hour = element as ThreeHourPayload;
@@ -338,20 +355,20 @@ export class MetUk extends BaseProvider {
 					forecasts.push(forecast);
 				}
 			}
-			return forecasts;
+			return [forecasts, { uvIndex }];
 		}
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("MET UK Forecast Parsing error: " + e.message, e);
-			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
+			ErrorHandler.Instance.PostError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
 	}
 
 	/** https://www.metoffice.gov.uk/services/data/datapoint/code-definitions */
-	private VisibilityToText(dist: string): string {
+	private VisibilityToText(dist: string, config: Config): string {
 		const distance = Number.parseInt(dist);
-		const unit = this.app.config.DistanceUnit;
+		const unit = config.DistanceUnit;
 		const stringFormat: Record<string, string> = {
 			distanceUnit: this.DistanceUnitFor(unit)
 		};

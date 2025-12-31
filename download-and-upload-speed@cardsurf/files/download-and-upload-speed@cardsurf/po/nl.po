@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# DOWNLOAD AND UPLOAD SPEED
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# cardsurf, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 00:05+0100\n"
-"PO-Revision-Date: 2024-04-22 13:55+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-02 19:43+0200\n"
+"PO-Revision-Date: 2024-11-28 17:28+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -16,88 +17,84 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:437
+#. applet.js:470
 msgid "Network interfaces"
 msgstr "Netwerkinterfaces"
 
-#: applet.js:506
+#. applet.js:539
 msgid "Total data start"
 msgstr "Totale gegevens start"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:513
+#. applet.js:546
 msgid "Launch of applet"
 msgstr "Start van applet"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:514
+#. applet.js:547
 msgid "Today"
 msgstr "Vandaag"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:515
+#. applet.js:548
 msgid "Yesterday"
 msgstr "Gisteren"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:516
+#. applet.js:549
 msgid "3 days ago"
 msgstr "3 dagen geleden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:517
+#. applet.js:550
 msgid "5 days ago"
 msgstr "5 dagen geleden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:518
+#. applet.js:551
 msgid "7 days ago"
 msgstr "7 dagen geleden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:519
+#. applet.js:552
 msgid "10 days ago"
 msgstr "10 dagen geleden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:520
+#. applet.js:553
 msgid "14 days ago"
 msgstr "14 dagen geleden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:521
+#. applet.js:554
 msgid "30 days ago"
 msgstr "30 dagen geleden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:522
+#. applet.js:555
 msgid "Custom date"
 msgstr "Aangepaste datum"
 
 #. settings-schema.json->gui_start->description
-#: applet.js:559
+#. applet.js:592
 msgid "Gui"
 msgstr "Grafische gebruikersinterface"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:559
+#. applet.js:592
 msgid "Compact"
 msgstr "Compact"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:559
+#. applet.js:592
 msgid "Large"
 msgstr "Groot"
 
-#: applet.js:825
-msgid "b"
-msgstr "b"
-
-#: appletGui.js:470
+#. appletGui.js:510
 msgid "Total download:"
 msgstr "Totaal gedownload:"
 
-#: appletGui.js:471
+#. appletGui.js:511
 msgid "Total upload:"
 msgstr "Totaal geüpload:"
 
@@ -129,9 +126,42 @@ msgstr "Hoeveelheid overgedragen gegevens"
 msgid "Values shown in the panel"
 msgstr "Waarden weergegeven in het paneel"
 
-#. settings-schema.json->unit_type->description
+#. settings-schema.json->unit->description
 msgid "Unit"
 msgstr "Eenheid"
+
+#. settings-schema.json->unit->options
+#. settings-schema.json->decimal_places->options
+msgid "Auto"
+msgstr "Auto"
+
+#. settings-schema.json->unit->options
+msgid "Bytes/Bits"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "KB/Kb/KiB"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "MB/Mb/MiB"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "GB/Gb/GiB"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "TB/Tb/TiB"
+msgstr ""
+
+#. settings-schema.json->unit->tooltip
+msgid "Use fixed unit for displaying, or automatically choose the best unit"
+msgstr ""
+
+#. settings-schema.json->unit_type->description
+msgid "Unit type"
+msgstr ""
 
 #. settings-schema.json->unit_type->options
 msgid "Bytes"
@@ -144,6 +174,26 @@ msgstr "Bits"
 #. settings-schema.json->unit_type->tooltip
 msgid "Base data unit shown in the panel"
 msgstr "Basisgegevenseenheid weergegeven in het paneel"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr "Decimaal of binair"
+
+#. settings-schema.json->is_binary->options
+msgid "Decimal"
+msgstr "Decimaal"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr "Binair"
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
+"Decimaal: k, M, G, T\n"
+"Binair: ki, Mi, Gi, Ti"
 
 #. settings-schema.json->update_every->units
 #. settings-schema.json->update_available_interfaces_every->units
@@ -202,10 +252,6 @@ msgid "Decimal places"
 msgstr "Decimalen"
 
 #. settings-schema.json->decimal_places->options
-msgid "Auto"
-msgstr "Auto"
-
-#. settings-schema.json->decimal_places->options
 msgid "0 "
 msgstr "0"
 
@@ -232,6 +278,24 @@ msgstr "Tekst CSS"
 #. settings-schema.json->gui_text_css->tooltip
 msgid "A CSS style applied to the text in the panel"
 msgstr "Een CSS-stijl toegepast op de tekst in het paneel"
+
+#. settings-schema.json->gui_enable_inactive_text_css->description
+msgid "Enable different style for inactive (0.00) text"
+msgstr ""
+
+#. settings-schema.json->gui_inactive_text_css->description
+msgid "Inactive text CSS"
+msgstr ""
+
+#. settings-schema.json->gui_inactive_text_css->tooltip
+msgid ""
+"A CSS style applied to the text in the panel when there is no network "
+"activity"
+msgstr ""
+
+#. settings-schema.json->gui_show_icons->description
+msgid "Show icons"
+msgstr ""
 
 #. settings-schema.json->gui_received_icon_filename->description
 msgid "Download icon"

@@ -17,15 +17,39 @@
         },
         "tooltip" : "Values shown in the panel"
     },
-    "unit_type" : {
+    "unit" : {
         "type": "combobox",
         "default" : 0,
         "description" : "Unit",
+        "options" : {
+            "Auto" : 0,
+            "Bytes/Bits" : 1,
+            "KB/Kb/KiB" : 2,
+            "MB/Mb/MiB" : 3,
+            "GB/Gb/GiB" : 4,
+            "TB/Tb/TiB" : 5
+        },
+        "tooltip" : "Use fixed unit for displaying, or automatically choose the best unit"
+    },
+    "unit_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Unit type",
         "options" : {
             "Bytes" : 0,
             "Bits" : 1
         },
         "tooltip" : "Base data unit shown in the panel"
+    },
+    "is_binary" : {
+        "type": "combobox",
+        "default": false,
+        "description" : "Decimal or binary",
+        "options" : {
+            "Decimal" : false,
+            "Binary" : true
+        },
+        "tooltip" : "Decimal: k, M, G, T\nBinary: ki, Mi, Gi, Ti"
     },
     "update_every": {
         "type": "spinbutton",
@@ -92,45 +116,69 @@
     },
     "gui_text_css": {
         "type": "entry",
-        "default": "font-weight: bold;",
+        "default": "font-weight: bold; font-size: 15px; text-align: right; font-family: monospace;",
         "description": "Text CSS",
-        "tooltip": "A CSS style applied to the text in the panel"
+        "tooltip": "A CSS style applied to the text in the panel",
+        "expand-width": true
+    },
+    "gui_enable_inactive_text_css" : {
+        "type" : "switch",
+        "default" : false,
+        "description": "Enable different style for inactive (0.00) text"
+    },
+    "gui_inactive_text_css": {
+        "type": "entry",
+        "default": "color: grey; font-weight: normal; font-size: 15px; text-align: right; font-family: monospace;",
+        "description": "Inactive text CSS",
+        "tooltip": "A CSS style applied to the text in the panel when there is no network activity",
+        "expand-width": true,
+        "dependency": "gui_enable_inactive_text_css"
+    },
+    "gui_show_icons" : {
+        "type" : "switch",
+        "default" : true,
+        "description": "Show icons"
     },
     "gui_received_icon_filename" : {
         "type" : "filechooser",
         "default" : "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_down_blue.svg",
         "description" : "Download icon",
-        "tooltip": "An icon displayed next to download speed in the panel.\nTo display a symbolic icon make sure its name ends with '-symbolic.svg'."
+        "tooltip": "An icon displayed next to download speed in the panel.\nTo display a symbolic icon make sure its name ends with '-symbolic.svg'.",
+        "dependency": "gui_show_icons"
     },
     "gui_sent_icon_filename" : {
         "type" : "filechooser",
         "default" : "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_up_red.svg",
         "description" : "Upload icon",
-        "tooltip": "An icon displayed next to upload speed in the panel.\nTo display a symbolic icon make sure its name ends with '-symbolic.svg'."
+        "tooltip": "An icon displayed next to upload speed in the panel.\nTo display a symbolic icon make sure its name ends with '-symbolic.svg'.",
+        "dependency": "gui_show_icons"
     },
     "gui_symbolic_icon" : {
-        "type" : "checkbox",
+        "type" : "switch",
         "default" : false,
-        "description": "Show a default set of symbolic icons"
+        "description": "Show a default set of symbolic icons",
+        "dependency": "gui_show_icons"
     },
     "hover_popup_text_css": {
         "type": "entry",
         "default": "font-size: 15px; padding: 5px; font-weight: normal;",
         "description": "Popup text CSS",
-        "tooltip": "A CSS style applied to the description text in the hover popup"
+        "tooltip": "A CSS style applied to the description text in the hover popup",
+        "expand-width": true
     },
     "hover_popup_numbers_css": {
         "type": "entry",
         "default": "font-size: 15px; padding: 5px; font-weight: bold;",
         "description": "Popup numbers CSS",
-        "tooltip": "A CSS style applied to numbers in the hover popup"
+        "tooltip": "A CSS style applied to numbers in the hover popup",
+        "expand-width": true
     },
     "minimum_bytes_received_to_display": {
         "type": "spinbutton",
         "default": 0,
         "min": 0,
         "max": 100000000,
-        "step": 100000,
+        "step": 1000,
         "units": "bytes",
         "description": "Minimum displayed download value",
         "tooltip" : "A minimum download value to display in the panel"
@@ -140,7 +188,7 @@
         "default": 0,
         "min": 0,
         "max": 100000000,
-        "step": 100000,
+        "step": 1000,
         "units": "bytes",
         "description": "Minimum displayed upload value",
         "tooltip" : "A minimum upload value to display in the panel"
@@ -156,7 +204,7 @@
         "description": "Total data"
     },
     "show_hover" : {
-        "type" : "checkbox",
+        "type" : "switch",
         "default" : true,
         "description": "Show total download and upload on hover",
         "tooltip": "Show the hover popup with total amount of data downloaded and uploaded"
@@ -183,7 +231,8 @@
         "type": "entry",
         "default": "2000-01-01",
         "description": "Custom date ",
-        "tooltip": "A custom date in YYYY-MM-DD format used as start time. The option is used if \"Custom date\" is selected in \"Start\" combobox."
+        "tooltip": "A custom date in YYYY-MM-DD format used as start time. The option is used if \"Custom date\" is selected in \"Start\" combobox.",
+        "expand-width": true
     },
     "write_every": {
         "type": "spinbutton",
@@ -227,7 +276,7 @@
         "tooltip" : "Show the percentage of data limit used in the panel"
     },
     "data_limit_command_enabled" : {
-        "type" : "checkbox",
+        "type" : "switch",
         "default" : false,
         "description": "Invoke command when data limit exceeded",
         "tooltip": "Invoke a command when amount of data downloaded and uploaded exceeded the limit"
@@ -236,7 +285,8 @@
         "type": "entry",
         "default": "echo \\\"Data limit exceeded. This terminal will close in 5 seconds.\\\"; sleep 5; exit 0;",
         "description": "Command",
-        "tooltip": "A command to invoke"
+        "tooltip": "A command to invoke",
+        "expand-width": true
     },
     "data_limit_end": {
         "type" : "separator"
@@ -249,7 +299,7 @@
         "description": "Connections"
     },
     "launch_terminal" : {
-        "type" : "checkbox",
+        "type" : "switch",
         "default" : true,
         "description": "List current Internet connections on left mouse click",
         "tooltip": "Open a terminal with a list of current connections on a left mouse click. The next click closes the terminal."
@@ -258,7 +308,8 @@
         "type": "entry",
         "default": "watch -n 1 lsof -i",
         "description": "Command ",
-        "tooltip": "A command used to list current Internet connections"
+        "tooltip": "A command used to list current Internet connections",
+        "expand-width": true
     },
     "connections_end": {
         "type" : "separator"

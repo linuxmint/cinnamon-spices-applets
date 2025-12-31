@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -eu
 
@@ -10,4 +10,4 @@ if amixer_out=$(amixer get Capture) && ! [[ $amixer_out =~ \[on\] ]]; then
     exit
 fi
 
-rec -n stat trim 0 "$rec_time" 2>&1 | awk '/^Maximum amplitude/ { $3 *= 100; print $3 }'
+timeout $((${rec_time%.*} + 1)) rec -n stat trim 0 "$rec_time" 2>&1 | awk '/^Maximum amplitude/ { $3 *= 100; print $3 }'

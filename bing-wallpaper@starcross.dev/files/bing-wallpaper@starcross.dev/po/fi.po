@@ -1,27 +1,32 @@
-# SOME DESCRIPTIVE TITLE.
+# BING DESKTOP WALLPAPER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Starcross, 2019
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-07 22:54+0000\n"
-"PO-Revision-Date: 2024-06-26 14:58+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-02-19 08:43-0500\n"
+"PO-Revision-Date: 2025-04-03 19:02+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
-"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: fi\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:50
+msgid "Refresh Now"
+msgstr "Virkistä"
 
 #. metadata.json->name
 msgid "Bing Desktop Wallpaper"
-msgstr "Bing taustakuvat"
+msgstr "Bing Desktop Wallpaper"
 
 #. metadata.json->description
 msgid "Download and apply Today's Bing Wallpaper to your desktop"
-msgstr "Lataa päivän Bing-taustakuva työpöydällesi"
+msgstr "Lataa Bing päivän taustakuva"

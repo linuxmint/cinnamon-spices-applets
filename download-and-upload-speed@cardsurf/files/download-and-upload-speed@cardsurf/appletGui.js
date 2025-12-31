@@ -2,12 +2,22 @@
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const Mainloop = imports.mainloop;
-const Lang = imports.lang;
 const PopupMenu = imports.ui.popupMenu;
 const Applet = imports.ui.applet;
 const Cairo = imports.cairo;
 const Gettext = imports.gettext;
+const {
+  _sourceIds,
+  timeout_add_seconds,
+  timeout_add,
+  setTimeout,
+  clearTimeout,
+  setInterval,
+  clearInterval,
+  source_exists,
+  source_remove,
+  remove_all_sources
+} = require("./mainloopTools");
 
 const uuid = 'download-and-upload-speed@cardsurf';
 let AppletConstants, CssStylization;
@@ -42,6 +52,15 @@ IconLabel.prototype = {
         this.actor.add(this.label);
     },
 
+    set_icon_visible: function (visible) {
+        if (visible) {
+            this.icon.show();
+        }
+        else {
+            this.icon.hide();
+        }
+    },
+
     set_gicon: function(file_icon) {
         this.icon.set_gicon(file_icon);
     },
@@ -67,7 +86,7 @@ IconLabel.prototype = {
     },
 
     set_label_fixed_width: function(fixed_width_text) {
-        Mainloop.timeout_add(1, Lang.bind(this, function() {
+        timeout_add_seconds(1, () => {
             this.set_label_to_preferred_width();
             this.set_label_text(fixed_width_text);
 
@@ -83,7 +102,7 @@ IconLabel.prototype = {
             }
 
             return false;
-        }));
+        });
     },
 
 };
@@ -95,19 +114,20 @@ IconLabel.prototype = {
 
 
 
-function GuiSpeed(panel_height, gui_speed_type, gui_value_order, decimal_places) {
-    this._init(panel_height, gui_speed_type, gui_value_order, decimal_places);
+function GuiSpeed(panel_height, gui_speed_type, gui_value_order, decimal_places, is_binary) {
+    this._init(panel_height, gui_speed_type, gui_value_order, decimal_places, is_binary);
 };
 
 GuiSpeed.prototype = {
 
-    _init: function(panel_height, gui_speed_type, gui_value_order, decimal_places) {
+    _init: function(panel_height, gui_speed_type, gui_value_order, decimal_places, is_binary=false) {
 
         this.panel_height = panel_height;
         this.gui_speed_type = gui_speed_type;
         this.gui_value_order = gui_value_order;
         this.decimal_places = decimal_places;
         this.text_spacing = 5;
+        this.is_binary = is_binary;
 
         this.actor = new St.BoxLayout();
         this.iconlabel_received = new IconLabel();
@@ -137,6 +157,11 @@ GuiSpeed.prototype = {
     _init_actor_upload_first: function(){
         this.actor.add(this.iconlabel_sent.actor);
         this.actor.add(this.iconlabel_received.actor);
+    },
+
+    set_icons_visible: function (visible) {
+        this.iconlabel_received.set_icon_visible(visible);
+        this.iconlabel_sent.set_icon_visible(visible);
     },
 
     set_reveived_icon: function(icon_path) {
@@ -172,12 +197,18 @@ GuiSpeed.prototype = {
     },
 
     set_text_style: function(css_style) {
-        css_style = this.add_font_size(css_style);
-        for(let iconlabel of [this.iconlabel_received, this.iconlabel_sent]){
-            iconlabel.set_label_style(css_style);
-        }
+        this.set_received_text_style(css_style);
+        this.set_sent_text_style(css_style);
 
-        this._resize_gui_elements_to_match_text(css_style);
+        this._resize_gui_elements_to_match_text(this.add_font_size(css_style));
+    },
+
+    set_received_text_style: function(css_style) {
+        this.iconlabel_received.set_label_style(this.add_font_size(css_style));
+    },
+
+    set_sent_text_style: function(css_style) {
+        this.iconlabel_sent.set_label_style(this.add_font_size(css_style));
     },
 
     add_font_size: function(css_style) {
@@ -235,10 +266,11 @@ GuiSpeed.prototype = {
     _get_fixed_width_text: function() {
         let text = "";
         if(this.decimal_places == AppletConstants.DecimalPlaces.AUTO) {
-            text = " 99.9MB";
+            text = (this.is_binary) ? " 999.9 MiB " : " 999.9 MB ";
         }
         else {
-            text = " 999." + this.repeat_string("9", this.decimal_places) + "MB";
+            text = " 999." + this.repeat_string("9", this.decimal_places);
+            text += (this.is_binary) ? " MiB " : " MB ";
         }
         return text;
     },
@@ -297,7 +329,7 @@ RadioMenuItem.prototype = {
     _add_options: function(option_names) {
         for(let option_name of option_names) {
              let option = new PopupMenu.PopupMenuItem(option_name, false);
-             option.connect('activate', Lang.bind(this, this._on_option_clicked));
+             option.connect('activate', (option, event) => { this._on_option_clicked(option, event) });
              this.menu.addMenuItem(option);
              this.options.push(option);
         }
@@ -404,7 +436,7 @@ CheckboxMenuItem.prototype = {
              let option_name = option_names[i];
              let option_checked = options_checked[i];
              let option = new PopupMenu.PopupSwitchMenuItem(option_name, option_checked);
-             option.connect('toggled', Lang.bind(this, this._on_option_toggled));
+             option.connect('toggled', (option, checked) => { this._on_option_toggled(option, checked) });
              this.options.push(option);
         }
     },
@@ -548,8 +580,8 @@ HoverMenuTotalBytes.prototype={
     _connect_hover_signals: function(){
         if(!this._hover_handlers_connected()) {
             let applet_actor = this.applet.actor;
-            this.enter_handler_id = applet_actor.connect("enter-event", Lang.bind(this, this._on_hover_enter));
-            this.leave_handler_id = applet_actor.connect("leave-event", Lang.bind(this, this._on_hover_leave));
+            this.enter_handler_id = applet_actor.connect("enter-event", () => { this._on_hover_enter() });
+            this.leave_handler_id = applet_actor.connect("leave-event", () => { this._on_hover_leave() });
         }
     },
 
@@ -697,7 +729,7 @@ PercentageCircle.prototype = {
     _init_actor: function() {
         this.actor.height = this.panel_height;
         this.actor.width = this.panel_height * 0.7;
-        this.actor.connect('repaint', Lang.bind(this, this.on_repaint));
+        this.actor.connect('repaint', (area) => { this.on_repaint(area) });
     },
 
     on_repaint: function(drawing_area) {

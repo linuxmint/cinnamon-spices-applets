@@ -1,7 +1,7 @@
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/services/logger";
 import type { WeatherApplet } from "../../main";
-import type { LocationData } from "../../types";
+import type { LocationServiceResult } from "../../types";
 import { _ } from "../../utils";
 import type { GeoIP } from "./base";
 
@@ -16,7 +16,7 @@ export class GeoJS implements GeoIP {
 		this.app = _app;
 	}
 
-	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
 		const json = await HttpLib.Instance.LoadJsonSimple<GeoJsPayload>({ url: this.query, cancellable });
 
 		if (!json) {
@@ -32,7 +32,7 @@ export class GeoJS implements GeoIP {
 
 	};
 
-	private ParseInformation(json: GeoJsPayload): LocationData | null {
+	private ParseInformation(json: GeoJsPayload): LocationServiceResult | null {
 		try {
 			const lat = Number.parseFloat(json.latitude);
 			const lon = Number.parseFloat(json.longitude);
@@ -41,7 +41,7 @@ export class GeoJS implements GeoIP {
 				return null;
 			}
 
-			const result: LocationData = {
+			const result: LocationServiceResult = {
 				lat: lat,
 				lon: lon,
 				city: json.city,

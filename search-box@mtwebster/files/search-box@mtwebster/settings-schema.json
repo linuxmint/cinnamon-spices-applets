@@ -10,27 +10,28 @@
     "page-options": {
       "type": "page",
       "title": "Options",
-      "sections": ["section-options", "section-colors"]
+      "sections": ["section-options", "section-keybinding", "section-colors"]
     },
     "section-providers": {
       "type": "section",
       "title": "Providers",
-      "keys": ["providers"]
+      "keys": ["providers", "providers-help"]
     },
     "section-options": {
       "type": "section",
       "title": "Options",
       "keys": ["show-provider", "reset-after-search"]
     },
+    "section-keybinding": {
+      "type": "section",
+      "title": "Keyboard shortcuts",
+      "keys": ["custom-keybinding"]
+    },
     "section-colors": {
       "type": "section",
       "title": "Search-box colors",
       "keys": ["background-color", "text-color"]
     }
-  },
-  "header-provider": {
-    "type": "header",
-    "description": "Search Provider Settings"
   },
   "show-provider": {
     "type": "switch",
@@ -43,10 +44,6 @@
     "default": true,
     "description": "Reset query after search",
     "tooltip": "Reset query after search? This may not be useful if you want to be able to perform the same query on other search engines afterwards."
-  },
-  "header-providers": {
-    "type": "header",
-    "description": "Search Engines"
   },
   "providers": {
     "type": "list",
@@ -161,6 +158,10 @@
     ],
     "tooltip": "If your query begins with the 3 letters of the short name, it will be processed by the relevant search engine.\nExample: ddg linux mint iso"
   },
+  "providers-help": {
+    "type": "label",
+    "description": "Only selected providers will be displayed in the context menu, so you can select your default provider.\nIf you deselect the default provider, the first selected becomes the default provider.\nIf no provider is selected, the default provider is Google."
+  },
   "selected-provider": {
     "type": "generic",
     "default": "Google"
@@ -177,18 +178,10 @@
     "type": "generic",
     "default": ""
   },
-  "header-keybinding": {
-    "type": "header",
-    "description": "Keybinding"
-  },
   "custom-keybinding": {
     "type": "keybinding",
     "description": "Keybinding, which opens the search box",
     "default": "<Primary><Alt>f"
-  },
-  "header-colors": {
-    "type": "header",
-    "description": "Search-box colors"
   },
   "background-color": {
     "type": "colorchooser",

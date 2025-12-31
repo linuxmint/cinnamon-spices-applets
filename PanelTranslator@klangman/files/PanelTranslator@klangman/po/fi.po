@@ -1,0 +1,261 @@
+# PANEL TRANSLATOR
+# This file is put in the public domain.
+# klangman, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PanelTranslator@klangman 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-02-02 12:30-0500\n"
+"PO-Revision-Date: 2025-04-04 12:43+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:108 applet.js:345 applet.js:347
+msgid "Translator"
+msgstr "Kääntäjä"
+
+#. applet.js:273
+msgid "Unable to query available languages from translate-shell"
+msgstr "Translate-shell ei voi tehdä kyselyitä tästä kielestä"
+
+#. applet.js:284
+msgid "Required \"trans\" command not found, please install translate-shell"
+msgstr ""
+"Vaadittua \"trans\"-komentoa ei löydy, asenna ohjelma translate-shell ensin"
+
+#. applet.js:288
+msgid "Error, the \"trans\" command returned an exit code of "
+msgstr "Virhe, \"trans\"-komento palautti virhekoodin "
+
+#. applet.js:368
+msgid "Swap Languages"
+msgstr "Vaihda kieltä"
+
+#. applet.js:411
+msgid "{Text to translate}"
+msgstr "{käännösteksti}"
+
+#. applet.js:422
+msgid "{Translated text}"
+msgstr "{käännetty teksti}"
+
+#. applet.js:436
+msgid "Configure"
+msgstr "Määritä"
+
+#. applet.js:437
+msgid "Help"
+msgstr "Ohje"
+
+#. applet.js:441
+msgid "Play"
+msgstr "Toista"
+
+#. applet.js:445
+msgid "Paste"
+msgstr "Liitä"
+
+#. applet.js:449
+msgid "Clear"
+msgstr "Tyhjennä"
+
+#. applet.js:453
+msgid "Translate"
+msgstr "Käännä"
+
+#. applet.js:458
+msgid "Copy"
+msgstr "Kopioi"
+
+#. applet.js:464
+msgid "Play Translation"
+msgstr "Puhu"
+
+#. metadata.json->name
+msgid "Panel Translator"
+msgstr "Panel Translator"
+
+#. metadata.json->description
+msgid ""
+"Translate text to other languages from the Cinnamon panel using Google, Bing "
+"and other translators"
+msgstr ""
+"Käännä tekstiä muille kielille Cinnamon-paneelista Googlen, Bingin ja muiden "
+"kääntäjien avulla. Asenna myös ohjelma translate-shell"
+
+#. settings-schema.json->general-page->title
+msgid "General"
+msgstr "Yleinen"
+
+#. settings-schema.json->hotkey-page->title
+msgid "Hotkeys"
+msgstr "Pikanäppäimet"
+
+#. settings-schema.json->engine-settings->title
+msgid "Translation Engine"
+msgstr "Käännöskone"
+
+#. settings-schema.json->action-settings->title
+msgid "Panel Button Actions"
+msgstr "Painikkeiden toiminta"
+
+#. settings-schema.json->hotkey-settings->title
+msgid "Translation action hotkeys"
+msgstr "Toiminto pikanäppäimelle"
+
+#. settings-schema.json->translate-engine->options
+msgid "Apertium"
+msgstr "Apertium"
+
+#. settings-schema.json->translate-engine->options
+msgid "Aspell"
+msgstr "Aspell"
+
+#. settings-schema.json->translate-engine->options
+msgid "Auto"
+msgstr "Auto"
+
+#. settings-schema.json->translate-engine->options
+msgid "Bing"
+msgstr "Bing"
+
+#. settings-schema.json->translate-engine->options
+msgid "Google"
+msgstr "Google"
+
+#. settings-schema.json->translate-engine->options
+msgid "Hunspell"
+msgstr "Hunspell"
+
+#. settings-schema.json->translate-engine->options
+msgid "Spell"
+msgstr "Spell"
+
+#. settings-schema.json->translate-engine->options
+msgid "Yandex"
+msgstr "Yandex"
+
+#. settings-schema.json->translate-engine->description
+msgid "Engine (Auto/Google recommended!)"
+msgstr "Käännöskone (Google/autom.)"
+
+#. settings-schema.json->translate-engine->tooltip
+msgid ""
+"Most engines don't support play back and some don't even translate, others "
+"just report HTTP errors. So it's best to use \"Auto\" and let translate-"
+"shell decide what translator to use."
+msgstr ""
+"Useimmat käännöskoneet eivät puhu tekstiä tai eivät käännä tai antavat "
+"virheen. Suositus käyttää \"Auto\" ja antaa translate-shell:in päättää."
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Disabled"
+msgstr "Pois käytöstä"
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Selection"
+msgstr "Valinta"
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Clipboard"
+msgstr "Leikepöytä"
+
+#. settings-schema.json->left-auto-paste->description
+msgid "Automatically translate on left click"
+msgstr "Käännä autom. vasemmalla painikkeella"
+
+#. settings-schema.json->left-auto-paste->tooltip
+msgid ""
+"Automatically translate the selection/clipboard contents when opening the "
+"Panel Translator popup window using a left click on the Panel Translator "
+"button"
+msgstr ""
+"Käännä valinta tai leikepöydän sisältö automaattisesti, kun avaat Panel "
+"Translator ikkunan hiiren vasemmalla painikkeella"
+
+#. settings-schema.json->left-auto-play->description
+msgid "Automatically play the translation on left click"
+msgstr "Toista puheena autom. hiiren vasemmalla painikkeella"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Do nothing"
+msgstr "Älä tee mitään"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-selection->description
+msgid "Show popup dialog and translate Selection"
+msgstr "Näytä ikkuna ja käännä valinta"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-clipboard->description
+msgid "Show popup dialog and translate Clipboard"
+msgstr "Näytä ikkuna ja käännä leikepöydältä"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-play-selection->description
+msgid "Show popup dialog, translate Selection and play"
+msgstr "Näytä ikkuna, käännä valinta ja puhu"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-play-clipboard->description
+msgid "Show popup dialog, translate Clipboard and play"
+msgstr "Näytä ikkuna, käännä leikepöydältä ja puhu"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-play-selection->description
+msgid "Play translation of Selection"
+msgstr "Puhu valinnasta"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-play-clipboard->description
+msgid "Play translation of Clipboard"
+msgstr "Puhu leikepöydältä"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-copy-selection->description
+msgid "Translate Selection and copy the translation"
+msgstr "Käännä valinta ja kopioi"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-copy-clipboard->description
+msgid "Translate Clipboard and copy the translation"
+msgstr "Käännä leikepöydältä ja kopioi"
+
+#. settings-schema.json->middle-button-action->description
+msgid "Middle button action"
+msgstr "Keskipainikkeen toiminta"
+
+#. settings-schema.json->middle-button-action->tooltip
+msgid ""
+"Select the action to take when using the middle mouse button to click on the "
+"translator panel button"
+msgstr "Toiminta suoritetaan kun painat keskipainiketta kääntäjäpaneelissa"
+
+#. settings-schema.json->ctrl-middle-button-action->description
+msgid "Ctrl + Middle button action"
+msgstr "Keskipainike + Ctrl"
+
+#. settings-schema.json->ctrl-middle-button-action->tooltip
+msgid ""
+"Select the action to take when holding the Ctrl key and using the middle "
+"mouse button to click on the translator panel button"
+msgstr ""
+"Toiminta suoritetaan, kun pidät Ctrl ja hiiren keskimmäinen painettuna "
+"kääntöpaneelissa"

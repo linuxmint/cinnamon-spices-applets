@@ -30,7 +30,7 @@ const UUID = "VPN-Sentinel@claudiux";
  *
  * Example: To install the executable 'sox' and the library 'libsox-fmt-mp3.so', we need to install two packages in
  * Debian and derivatives distros (default) and only one package (named sox) in Arch and Fedora distros.
-const DEPENDENCIES = {
+var DEPENDENCIES = {
   "default": [
     ["sox", "/usr/bin/sox",  "sox"],
     ["", "/usr/share/doc/libsox-fmt-mp3/copyright", "libsox-fmt-mp3"]
@@ -52,13 +52,12 @@ const DEPENDENCIES = {
 
 
  */
-
-const DEPENDENCIES = {
+var DEPENDENCIES = {
   "default": [
     ["sox", "/usr/bin/sox",  "sox"],
     ["", "/usr/share/doc/libsox-fmt-mp3/copyright", "libsox-fmt-mp3"],
     ["nmcli", "/usr/bin/nmcli", "network-manager"],
-    ["", "/usr/lib/NetworkManager/nm-openvpn-service", "network-manager-openvpn"],
+    ["", "/usr/lib/NetworkManager/VPN/nm-openvpn-service.name", "network-manager-openvpn"],
     ["", "/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf", "fonts-symbola"],
     ["yad", "/usr/bin/yad", "yad"],
     ["", "/usr/lib/python3/dist-packages/polib.py", "python3-polib"],
@@ -75,7 +74,7 @@ const DEPENDENCIES = {
     ["sox", "/usr/bin/sox",  "sox"],
     ["", "/usr/share/doc/libsox-fmt-mp3/copyright", "libsox-fmt-mp3"],
     ["nmcli", "/usr/bin/nmcli", "network-manager"],
-    ["", "/usr/lib/NetworkManager/nm-openvpn-service", "network-manager-openvpn"],
+    ["", "/usr/lib/NetworkManager/VPN/nm-openvpn-service.name", "network-manager-openvpn"],
     ["", "/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf", "fonts-symbola"],
     ["yad", "/usr/bin/yad", "yad"],
     ["", "/usr/lib/python3/dist-packages/polib.py", "python3-polib"],
@@ -211,6 +210,14 @@ function is_apturl_present() {
   return GLib.find_program_in_path("apturl")
 } // End of is_apturl_present
 
+function is_pkcon_present() {
+  return GLib.find_program_in_path("pkcon")
+}
+
+function is_pkexec_present() {
+  return GLib.find_program_in_path("pkexec")
+}
+
 function get_distro() {
   let distro = DISTRO();
   switch (distro) {
@@ -303,6 +310,8 @@ Dependencies.prototype = {
       let terminal = get_default_terminal();
       // apturl is it present?
       let _is_apturl_present = is_apturl_present();
+      let _is_pkcon_present = is_pkcon_present();
+      let _is_pkexec_present = is_pkexec_present();
       // Detects the distrib in use and make adapted message and notification:
       let _isFedora = isFedora();
       let _isArchlinux = isArchLinux();
@@ -322,13 +331,19 @@ Dependencies.prototype = {
       let criticalMessage = _is_apturl_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
       this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
 
+      if (_is_pkcon_present && _is_pkexec_present) {
+        GLib.spawn_command_line_async(terminal + " -e '/usr/bin/env sh -c \"echo VPN-Sentinel message: Some packages needed!; echo List of needed packages: %s; pkexec pkcon -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
+        this.depAreMet = false;
+        return
+      }
+
       if (!_is_apturl_present) {
         if (terminal != "") {
           // TRANSLATORS: The next messages should not be translated.
           if (_isDebian === true) {
-            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+            GLib.spawn_command_line_async(terminal + " -e '/usr/bin/env sh -c \"echo VPN-Sentinel message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
           } else {
-            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+            GLib.spawn_command_line_async(terminal + " -e '/usr/bin/env sh -c \"echo VPN-Sentinel message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
           }
         }
       } else {

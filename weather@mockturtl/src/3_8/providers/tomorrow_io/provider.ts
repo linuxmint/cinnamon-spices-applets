@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import type { Config, Services } from "../../config";
+import { Services, type Config } from "../../config";
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import type { AlertData, Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../../weather-data";
@@ -7,12 +7,14 @@ import { CelsiusToKelvin, IsNight, _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
 import type { TomorrowIoAlertsResponse } from "./alerts";
 import type { LocationData } from "../../types";
+import { ErrorHandler } from "../../lib/services/error_handler";
+import { PointInsidePolygon } from "../../lib/polygons";
 
 export class ClimacellV4 extends BaseProvider {
 	public readonly remainingCalls: number | null = null;
 	public readonly needsApiKey: boolean = true;
 	public readonly prettyName: string = _("Tomorrow.io");
-	public readonly name: Services = "Tomorrow.io";
+	public readonly name: Services = Services.Tomorrow_IO;
 	public readonly maxForecastSupport: number = 15;
 	public readonly maxHourlyForecastSupport: number = 108;
 	public readonly website: string = "https://www.tomorrow.io/";
@@ -33,7 +35,7 @@ export class ClimacellV4 extends BaseProvider {
 		if (loc == null)
 			return null;
 
-		this.params.apikey = this.app.config.ApiKey;
+		this.params.apikey = config.ApiKey;
 		this.params.location = loc.lat + "," + loc.lon;
 
 		const response = await HttpLib.Instance.LoadJsonSimple<ClimacellV4Payload>({
@@ -51,7 +53,7 @@ export class ClimacellV4 extends BaseProvider {
 			return null;
 
 		if (config._showAlerts) {
-			const alerts = await this.GetAlerts(loc, cancellable);
+			const alerts = await this.GetAlerts(loc, cancellable, config);
 			if (alerts != null)
 				weather.alerts = alerts;
 		}
@@ -59,12 +61,12 @@ export class ClimacellV4 extends BaseProvider {
 		return weather;
 	}
 
-	private async GetAlerts(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<AlertData[] | null> {
+	private async GetAlerts(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<AlertData[] | null> {
 		const response = await HttpLib.Instance.LoadJsonSimple<TomorrowIoAlertsResponse>({
 			url: "https://api.tomorrow.io/v4/events",
 			cancellable,
 			params: {
-				apikey: this.app.config.ApiKey,
+				apikey: config.ApiKey,
 				location: loc.lat + "," + loc.lon,
 				buffer: "1",
 				// This is a bit hacky, I should support this in httpLib
@@ -78,6 +80,9 @@ export class ClimacellV4 extends BaseProvider {
 
 		const alerts: AlertData[] = [];
 		for (const alert of response.data.events) {
+			if (!PointInsidePolygon([loc.lon, loc.lat], alert.eventValues.location.coordinates[0]))
+				continue;
+
 			alerts.push({
 				title: alert.eventValues.headline ?? alert.eventValues.title,
 				description: `${alert.eventValues.description}\n\n${alert.eventValues.response?.[0]?.instruction ?? ""}`,
@@ -91,7 +96,7 @@ export class ClimacellV4 extends BaseProvider {
 
 	private HandleHTTPError(message: ErrorResponse): boolean {
 		if (message.ErrorData.code == 401) {
-			this.app.ShowError({
+			ErrorHandler.Instance.PostError({
 				type: "hard",
 				userError: true,
 				detail: "no key",
@@ -142,6 +147,7 @@ export class ClimacellV4 extends BaseProvider {
 				type: "temperature",
 				value: CelsiusToKelvin(current.values.temperatureApparent)
 			},
+			uvIndex: null,
 			forecasts: []
 		}
 
@@ -151,7 +157,7 @@ export class ClimacellV4 extends BaseProvider {
 		for (const element of daily) {
 			const date = DateTime.fromISO(element.startTime, { zone: loc.timeZone });
 			days.push({
-				condition: this.ResolveCondition(element.values.weatherCode, IsNight({sunrise, sunset}, date)),
+				condition: this.ResolveCondition(element.values.weatherCode, false),
 				date,
 				temp_max: CelsiusToKelvin(element.values.temperatureMax),
 				temp_min: CelsiusToKelvin(element.values.temperatureMin)
