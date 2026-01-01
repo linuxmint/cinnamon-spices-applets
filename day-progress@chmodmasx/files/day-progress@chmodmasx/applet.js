@@ -182,7 +182,7 @@ DayProgressApplet.prototype = {
         let settingsItem = new PopupMenu.PopupMenuItem(_("Settings"));
         settingsItem.connect('activate', Lang.bind(this, function() {
             imports.gi.Gio.Subprocess.new(
-                ['cinnamon-settings', 'applets', this.metadata.uuid, this.instanceId.toString()],
+                ['xlet-settings', 'applet', this.metadata.uuid, '-i',  this.instanceId.toString()],
                 imports.gi.Gio.SubprocessFlags.NONE
             );
         }));
@@ -278,8 +278,24 @@ DayProgressApplet.prototype = {
         let remainingHours = Math.floor(percentRemainingOfPeriod * duration * 24);
         let remainingMinutes = Math.floor((percentRemainingOfPeriod * duration * 24 * 60) % 60);
         
+        if (elapsedHours < 10) elapsedHours = "0" + elapsedHours; else elapsedHours = "" + elapsedHours;
+        if (elapsedMinutes < 10) elapsedMinutes = "0" + elapsedMinutes; else elapsedMinutes = "" + elapsedMinutes;
+        if (remainingHours < 10) remainingHours = "0" + remainingHours; else remainingHours = "" + remainingHours;
+        if (remainingMinutes < 10) remainingMinutes = "0" + remainingMinutes; else remainingMinutes = "" + remainingMinutes;
+        
         this.elapsedValue.text = elapsedHours + 'h ' + elapsedMinutes + 'm | ' + Math.round(percentElapsedOfPeriod * 100) + '%';
         this.remainingValue.text = remainingHours + 'h ' + remainingMinutes + 'm | ' + Math.round(percentRemainingOfPeriod * 100) + '%';
+        
+        this._updateTooltip();
+    },
+    
+    _updateTooltip: function() {
+        let elapsedLength = _("Elapsed").length;
+        let remainingLength = _("Remaining").length;
+        let maxLength = Math.max(elapsedLength, remainingLength);
+        this.set_applet_tooltip(" ".repeat(maxLength - elapsedLength) + _("Elapsed") + " " + this.elapsedValue.text + 
+        "\n" + " ".repeat(maxLength - remainingLength) + _("Remaining") + " " + this.remainingValue.text);
+        this._applet_tooltip._tooltip.set_style("font-family: monospace; text-align: end; ");
     },
 
     mapNumber: function(number, inMin, inMax, outMin, outMax) {
