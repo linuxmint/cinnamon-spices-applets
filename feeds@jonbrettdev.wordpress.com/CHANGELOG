@@ -1,7 +1,7 @@
 0.31
 ===
-- Improved feed menu toggle behavior for more consistent open/close interactions.
-- Added a scrollbar to improve usability with long lists.
+- Added a scrollbar to the feed list for better navigation when content exceeds the screen height. This resolves an issue where feeds were previously unreadable or inaccessible when the list was too long.
+- Feeds can now be expanded or collapsed individually. Previously, at least one feed was required to remain expanded.
 
 0.30
 ===
@@ -31,7 +31,7 @@
 0.25
  ===
  - Updated interface to show when a feed has been redirected.
- - Added a button to allow users to permanetly redirect a feed.
+ - Added a button to allow users to permanently redirect a feed.
 
 0.24
  ====
@@ -54,7 +54,7 @@
 ====
 - Fixed issue with notifications remaining after app is removed. #68
 - Added new interface features. #85
-- * Added Highlighting, identifiying the selected feed.
+- * Added Highlighting, identifying the selected feed.
 - * Added hover shading to better identify what feed / item is being hovered over.
 - Changed right click to open the raw feed in browser. #84
 - Made the sub menus automatic and smarter. #83
