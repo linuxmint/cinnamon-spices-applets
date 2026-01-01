@@ -1,0 +1,67 @@
+/* On-screen Keyboard */
+
+$key_border_radius: $base_border_radius + 3px;
+
+$default_key_bg_color: $bg_color;
+$non_alpha_key_color: $light_bg_color;
+$shifted_key_color: $lightest_bg_color;
+
+#virtual-keyboard {
+  background-color: $panel_bg;
+}
+
+// the container for individual keys
+.vkeyboard-key-container {
+  padding: $base_margin;
+  spacing: $base_margin;
+}
+
+// the keys
+.vkeyboard-key {
+
+  @include button(normal);
+
+  &:focus { @include button(focus);}
+  &:hover, &:checked { @include button(hover);}
+  &:active { @include button(active); }
+
+  @include fontsize(20px);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: $key_border_radius;
+
+  background-color: $lighter_bg_color;
+
+  &.shift-key-lowercase, &.escape-key, &.hide-key, &.non-alpha-key {
+    background-color: $non_alpha_key_color;
+
+    &:focus { @include button(focus);}
+    &:hover, &:checked { @include button(hover);}
+    &:active { @include button(active); }
+
+  }
+
+  &.shift-key-uppercase { background-color: $shifted_key_color }
+  &.enter-key { background-color: $accent_bg_color }
+
+  StIcon { icon-size: 1.125em; }
+}
+
+// long press on a key popup
+.vkeyboard-subkeys {
+  color: $fg_color;
+  -arrow-border-radius: $base_border_radius;
+  -arrow-background-color: $bg_color;
+  -arrow-border-width: 1px;
+  -arrow-border-color: lighten($bg_color, 9%);
+  -arrow-base: 20px;
+  -arrow-rise: 10px;
+  -boxpointer-gap: $base_padding;
+}
+
+// suggestions
+.word-suggestions {
+  @include fontsize(18px);
+  spacing: 20px;
+  min-height: 20pt;
+}
