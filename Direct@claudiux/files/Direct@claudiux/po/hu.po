@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-12-23 15:47+0100\n"
-"PO-Revision-Date: 2025-11-17 10:08+0100\n"
+"PO-Revision-Date: 2026-01-01 22:02+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -36,7 +36,7 @@ msgstr "MOSTANÁBAN MEGNYITOTT DOKUMENTUMOK"
 
 #. applet.js:45 applet.js:798
 msgid "CUSTOM"
-msgstr ""
+msgstr "EGYÉNI"
 
 #. applet.js:188
 msgid "(Right click to open folder)"
@@ -45,7 +45,7 @@ msgstr "(Jobb egérgomb a mappa megnyitásához)"
 #. metadata.json->name
 #. applet.js:315
 msgid "Direct"
-msgstr "Közvetlen"
+msgstr "Direkt"
 
 #. applet.js:622
 msgid "Search Home Folder"
@@ -54,7 +54,7 @@ msgstr "Saját mappában keresés"
 #. applet.js:629 applet.js:669 applet.js:700 applet.js:731 applet.js:762
 #. applet.js:806
 msgid "Configure"
-msgstr ""
+msgstr "Konfigurálás"
 
 #. applet.js:662
 msgid "Search File System"
@@ -195,9 +195,8 @@ msgid "Recent documents"
 msgstr "Mostanában megnyitott dokumentumok"
 
 #. settings-schema.json->customPage->title
-#, fuzzy
 msgid "Custom"
-msgstr "Egyedi helyek"
+msgstr "Egyéni"
 
 #. settings-schema.json->panel->title
 msgid "Panel settings"
@@ -232,9 +231,8 @@ msgid "Favorite apps"
 msgstr "Kedvenc alkalmazások"
 
 #. settings-schema.json->customSection->title
-#, fuzzy
 msgid "Custom documents"
-msgstr "Egyedi helyek"
+msgstr "Egyedi dokumentumok"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
@@ -267,11 +265,11 @@ msgstr "Menü ikon méret"
 
 #. settings-schema.json->textSize->description
 msgid "Text width"
-msgstr ""
+msgstr "Szöveg szélessége"
 
 #. settings-schema.json->textSize->tooltip
 msgid "0 means: automatic"
-msgstr ""
+msgstr "0 jelentése: automatikus"
 
 #. settings-schema.json->displayOrderLabel->description
 msgid "Move these sections to rearrange the menu:"
@@ -321,7 +319,7 @@ msgstr "Felhasználói szakasz megjelenítése"
 #. settings-schema.json->showRecentSettingsAccessIcon->description
 #. settings-schema.json->showCustomSettingsAccessIcon->description
 msgid "Show the settings access icon"
-msgstr ""
+msgstr "Beállítások elérését jelző ikon megjelenítése"
 
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
@@ -390,7 +388,7 @@ msgstr "Hozzáadott idő"
 
 #. settings-schema.json->favoriteSortingMethod->options
 msgid "Custom Sort"
-msgstr ""
+msgstr "Egyéni rendezés"
 
 #. settings-schema.json->favoriteSortingMethod->description
 #. settings-schema.json->sortingMethod->description
@@ -398,17 +396,17 @@ msgid "Sorting method"
 msgstr "Rendezési módszer"
 
 #. settings-schema.json->favoriteLabel->description
-#, fuzzy
 msgid ""
 "Below are the favorite documents displayed in the menu when checked.\n"
 "The Name can be changed here, but is unchanged in menu.\n"
 "The URI must not be changed.\n"
 "Favorite documents can only be managed by nemo."
 msgstr ""
-"Az alábbiakban a menüben megjelenő kedvenc alkalmazások láthatók, ha be "
+"Az alábbiakban a menüben megjelenő kedvenc dokumentumok láthatók, ha be "
 "vannak jelölve.\n"
-"A név módosítható.\n"
-"Az Indítót nem szabad módosítani."
+"A név itt módosítható, de a menüben változatlan marad.\n"
+"Az URI-t nem szabad módosítani.\n"
+"A kedvenc dokumentumokat csak a nemo kezelheti."
 
 #. settings-schema.json->favoriteCustomList->columns->title
 #. settings-schema.json->favApps->columns->title
@@ -417,16 +415,15 @@ msgstr "Menü"
 
 #. settings-schema.json->favoriteCustomList->columns->title
 msgid "⚠️ Name"
-msgstr ""
+msgstr "⚠️ Név"
 
 #. settings-schema.json->favoriteCustomList->columns->title
 msgid "⚠️ URI"
-msgstr ""
+msgstr "⚠️ URI"
 
 #. settings-schema.json->favoritePopulateButton->description
-#, fuzzy
 msgid "Add all your Favorite Documents"
-msgstr "Minden kedvenc dokumentum"
+msgstr "Add hozzá az összes kedvenc dokumentumodat"
 
 #. settings-schema.json->favoriteSizeLimit->options
 #. settings-schema.json->recentSizeLimit->options
@@ -528,9 +525,8 @@ msgid "Icon browser"
 msgstr "Ikonböngésző"
 
 #. settings-schema.json->showCustomDocuments->description
-#, fuzzy
 msgid "Show Custom documents"
-msgstr "Mostanában megnyitott dokumentumok mutatása"
+msgstr "Egyéni dokumentumok megjelenítése"
 
 #. settings-schema.json->labelCustomDocuments->description
 msgid ""
@@ -539,3 +535,7 @@ msgid ""
 "To separate them into categories, you can add a line without a URI, but with "
 "a name as the category title (no icon is necessary)."
 msgstr ""
+"URI: Ide írd be az egyéni dokumentumodra vagy az application-name.desktop "
+"fájlra mutató linket (mint például a /usr/share/applications/ fájlban).\n"
+"Kategóriákba soroláshoz hozzáadhatsz egy sort URI nélkül, de a kategória "
+"címeként egy névvel (ikon nem szükséges)."

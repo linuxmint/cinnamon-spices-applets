@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-12-23 00:13+0100\n"
-"PO-Revision-Date: 2025-11-17 15:07+0100\n"
+"PO-Revision-Date: 2026-01-02 14:12+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -199,7 +199,7 @@ msgstr "Biztosan eltávolítja a következőt: „%s”?"
 
 #. 6.2/applet.js:2970 5.4/applet.js:2758 6.4/applet.js:1905
 msgid "The 'playerctl' package is required!"
-msgstr "A „playerctl” csomag telepítése szükséges."
+msgstr "A „playerctl” csomag telepítése szükséges!"
 
 #. 6.2/applet.js:2971 5.4/applet.js:2759 6.4/applet.js:1906
 msgid "Please select 'Install playerctl' in this menu"
@@ -1080,7 +1080,7 @@ msgstr "Helyi menü"
 
 #. 6.4->settings-schema.json->sectionBehavior1->title
 msgid "External commands and scripts"
-msgstr ""
+msgstr "Külső parancsok és szkriptek"
 
 #. 6.4->settings-schema.json->sectionIcon1->title
 msgid "Icon appearance"
@@ -1181,13 +1181,15 @@ msgstr "Tartsa nyitva a parancsválasztót"
 
 #. 6.4->settings-schema.json->runAsync->description
 msgid "Execute asynchronously"
-msgstr ""
+msgstr "Aszinkron végrehajtás"
 
 #. 6.4->settings-schema.json->runAsync->tooltip
 msgid ""
 "Enabled by default (recommended).\n"
 "Disable this option if you encounter running issues (rare)."
 msgstr ""
+"Alapértelmezés szerint engedélyezve (ajánlott).\n"
+"Tiltsa le ezt a beállítást, ha futási problémákba ütközik (ritka)."
 
 #. 6.4->settings-schema.json->toolongchars->description
 msgid "If the title is too long, end it with:"
@@ -1199,25 +1201,24 @@ msgstr "Emoji elfogadva"
 
 #. 6.4->settings-schema.json->keepAlbumArtIcon->description
 msgid "Keep the album art as an icon when adjusting the volume"
-msgstr ""
+msgstr "Az albumborító ikonként való megjelenítése a hangerő beállításakor"
 
 #. 6.4->settings-schema.json->showalbumButForSitesLabel->description
 #. 6.4->settings-schema.json->showalbumButForSites->description
 msgid "Do not display album art from these sites:"
-msgstr ""
+msgstr "Ne jelenítsen meg albumborítókat ezekről a webhelyekről:"
 
 #. 6.4->settings-schema.json->showalbumButForSites->columns->title
 msgid "Activate"
-msgstr ""
+msgstr "Aktív"
 
 #. 6.4->settings-schema.json->showalbumButForSites->columns->title
 msgid "Site name"
-msgstr ""
+msgstr "Oldal neve"
 
 #. 6.4->settings-schema.json->showalbumButForSites->columns->title
-#, fuzzy
 msgid "Local path to icon"
-msgstr "Borítókép megjelenítése ikonként"
+msgstr "Helyi elérési út az ikonhoz"
 
 #. 6.4->settings-schema.json->showalbumDelay->description
 msgid "Delay between icon and album art display (seconds)"

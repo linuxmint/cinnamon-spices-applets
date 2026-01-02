@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-12-19 13:41-0500\n"
-"PO-Revision-Date: 2023-03-13 14:59+0100\n"
+"PO-Revision-Date: 2026-01-02 14:14+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.8\n"
 
 #. applet.js:45 applet.js:217 applet.js:244 applet.js:271 applet.js:335
 #. applet.js:465 applet.js:537
@@ -33,9 +33,8 @@ msgid "At:  --:--:--"
 msgstr "Ekkor:  --:--:--"
 
 #. applet.js:95
-#, fuzzy
 msgid "Run command | turn off computer on timer"
-msgstr "Számítógép kikapcsolása az időzitéskor"
+msgstr "Parancs futtatása | számítógép kikapcsolása időzítőn"
 
 #. settings-schema.json->openSubmenu->options
 #. applet.js:100
@@ -145,22 +144,26 @@ msgstr "Időzítő kisalkalmazás"
 
 #. settings-schema.json->customCommand->description
 msgid "Command to run on timer (empty for turn off)"
-msgstr ""
+msgstr "Parancs az időzítőn való futtatáshoz (üres a kikapcsoláshoz)"
 
 #. settings-schema.json->customCommand->tooltip
 msgid ""
 "Custom command to run on timer. Leave empty to turn off the computer on timer"
 msgstr ""
+"Egyéni parancs időzítőn való futtatásához. Hagyja üresen, ha időzítőn "
+"szeretné kikapcsolni a számítógépet"
 
 #. settings-schema.json->cancelTurnOffOption->description
 msgid "Cancel run command (turn off) option"
-msgstr ""
+msgstr "Futtatási parancs visszavonása (kikapcsolás) opció"
 
 #. settings-schema.json->cancelTurnOffOption->tooltip
 msgid ""
 "Cancel the option to run command or turn off for subsequent use (triggers "
 "only at the moment count down finished)"
 msgstr ""
+"Parancs futtatásának visszavonása vagy kikapcsolása későbbi használatra "
+"(csak a visszaszámlálás befejeződésekor aktiválódik)"
 
 #. settings-schema.json->soundOn->description
 #. settings-schema.json->soundOn->tooltip
@@ -178,14 +181,12 @@ msgid "Show system notification on timer"
 msgstr "Értesítés megjelenítése az időzitéskor"
 
 #. settings-schema.json->customText->description
-#, fuzzy
 msgid "Custom notification text"
-msgstr "Értesítés megjelenítése az időzitéskor"
+msgstr "Egyéni értesítési szöveg"
 
 #. settings-schema.json->customText->tooltip
-#, fuzzy
 msgid "Custom text of the system notification on timer"
-msgstr "Értesítés megjelenítése az időzitéskor"
+msgstr "A rendszerértesítés egyéni szövege időzítőn"
 
 #. settings-schema.json->openSubmenu->description
 #. settings-schema.json->openSubmenu->tooltip
