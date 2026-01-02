@@ -278,10 +278,10 @@ DayProgressApplet.prototype = {
         let remainingHours = Math.floor(percentRemainingOfPeriod * duration * 24);
         let remainingMinutes = Math.floor((percentRemainingOfPeriod * duration * 24 * 60) % 60);
         
-        if (elapsedHours < 10) elapsedHours = "0" + elapsedHours; else elapsedHours = "" + elapsedHours;
-        if (elapsedMinutes < 10) elapsedMinutes = "0" + elapsedMinutes; else elapsedMinutes = "" + elapsedMinutes;
-        if (remainingHours < 10) remainingHours = "0" + remainingHours; else remainingHours = "" + remainingHours;
-        if (remainingMinutes < 10) remainingMinutes = "0" + remainingMinutes; else remainingMinutes = "" + remainingMinutes;
+        if (elapsedHours < 10) elapsedHours = " " + elapsedHours; else elapsedHours = "" + elapsedHours;
+        if (elapsedMinutes < 10) elapsedMinutes = " " + elapsedMinutes; else elapsedMinutes = "" + elapsedMinutes;
+        if (remainingHours < 10) remainingHours = " " + remainingHours; else remainingHours = "" + remainingHours;
+        if (remainingMinutes < 10) remainingMinutes = " " + remainingMinutes; else remainingMinutes = "" + remainingMinutes;
         
         this.elapsedValue.text = elapsedHours + 'h ' + elapsedMinutes + 'm | ' + Math.round(percentElapsedOfPeriod * 100) + '%';
         this.remainingValue.text = remainingHours + 'h ' + remainingMinutes + 'm | ' + Math.round(percentRemainingOfPeriod * 100) + '%';
