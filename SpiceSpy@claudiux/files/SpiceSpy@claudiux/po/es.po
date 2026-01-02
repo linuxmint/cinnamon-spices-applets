@@ -7,57 +7,61 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-25 23:34+0200\n"
-"PO-Revision-Date: 2025-09-27 20:11-0300\n"
+"POT-Creation-Date: 2025-12-28 16:21+0100\n"
+"PO-Revision-Date: 2025-12-30 14:13-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.8\n"
 
-#. applet.js:201
+#. applet.js:185
 msgid "score"
 msgstr "puntuación"
 
-#. applet.js:213
+#. applet.js:197
 msgid "comments"
 msgstr "comentarios"
 
-#. applet.js:225
+#. applet.js:209
 msgid "recent issues"
 msgstr "problemas recientes"
 
-#. applet.js:237
+#. applet.js:222
 msgid "translations"
 msgstr "traducciones"
 
-#. applet.js:312
+#. applet.js:297
 msgid "Reload icons"
 msgstr "Recargar iconos"
 
-#. applet.js:318
+#. applet.js:303
 msgid "Visit website"
 msgstr "Visitar el sitio web"
 
-#. applet.js:826
+#. applet.js:831
 msgid "Spices"
 msgstr "Especias"
 
-#. applet.js:915
+#. applet.js:919
 msgid "Mark all as read"
 msgstr "Marcar todos como leídos"
 
-#. applet.js:926
+#. applet.js:930
 msgid "Refresh"
 msgstr "Actualizar"
 
-#. applet.js:938
+#. applet.js:944
+msgid "Refreshing in progress - Click to stop"
+msgstr "Actualización en curso: haga clic para detenerla"
+
+#. applet.js:969
 msgid "Refreshing in progress"
 msgstr "Actualización en curso"
 
-#. applet.js:949
+#. applet.js:981
 msgid "Configure..."
 msgstr "Configurar..."
 
@@ -95,6 +99,10 @@ msgstr "Intervalo de actualización"
 #. settings-schema.json->update-interval-hours->units
 msgid "hours"
 msgstr "horas"
+
+#. settings-schema.json->update-interruptible->description
+msgid "The update can be interrupted by the user"
+msgstr "La actualización puede ser interrumpida por el usuario"
 
 #. settings-schema.json->standard-opacity->description
 msgid "Opacity in absence of change"
@@ -216,6 +224,14 @@ msgstr "No mostrar nada"
 #. settings-schema.json->useful-only->description
 msgid "Show only non-zero values in panel"
 msgstr "Mostrar sólo valores distintos de cero en el panel"
+
+#. settings-schema.json->coloredIcon->description
+msgid "Change icon color while refreshing"
+msgstr "Cambiar el color del icono al actualizar"
+
+#. settings-schema.json->colorWhileRefreshing->description
+msgid "Icon color while refreshing"
+msgstr "Color del icono durante la actualización"
 
 #. settings-schema.json->author-list->columns->title
 msgid "GitHub user name"
