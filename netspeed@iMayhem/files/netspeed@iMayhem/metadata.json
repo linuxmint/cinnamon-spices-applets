@@ -5,5 +5,11 @@
   "max-instances": 1,
   "author": "iMayhem",
   "version": 1,
-  "icon": "network-transmit-receive"
+  "icon": "network-transmit-receive",
+  "allowed-orientations": [
+    "top",
+    "bottom",
+    "left",
+    "right"
+  ]
 }

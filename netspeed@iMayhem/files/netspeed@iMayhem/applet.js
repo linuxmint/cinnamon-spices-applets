@@ -487,12 +487,14 @@ class NetSpeedApplet extends Applet.TextApplet {
 
         let [downIcon, upIcon] = this.getIndicators();
 
+        let isVertical = this._orientation === Applet.AllowedLayout.VERTICAL;
+
         // Handle View Modes
         if (this.viewMode === 0) { // Speed View
             let dStr = this.compactMode ? this.formatCompact(down) : this.format(down);
             let uStr = this.compactMode ? this.formatCompact(up) : this.format(up);
 
-            if (this.verticalLayout) {
+            if (this.verticalLayout || isVertical) {
                 // Vertical Stack with Padding for Alignment
                 // We pad start to ensuring similar width. 
                 // Note: Unless a monospace font is enforced by theme, this is an approximation.
