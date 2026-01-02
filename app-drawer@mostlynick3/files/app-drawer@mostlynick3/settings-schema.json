@@ -66,6 +66,12 @@
         "default": true,
         "description": "Enable search bar"
     },
+    "autoFocusSearch": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Auto-focus search bar when opened",
+        "dependency": "enableSearch"
+    },
     "enableFavorites": {
         "type": "checkbox",
         "default": true,
@@ -74,6 +80,11 @@
     "favoriteApps": {
         "type": "generic",
         "default": []
+    },
+    "overlay-keybinding": {
+        "type": "keybinding",
+        "default": "<Super>a",
+        "description": "Keyboard shortcut to toggle overlay"
     },
     "appearance": {
         "type": "header",
