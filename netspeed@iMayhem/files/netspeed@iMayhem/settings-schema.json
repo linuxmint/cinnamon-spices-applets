@@ -9,7 +9,9 @@
     "options": {
       "System Default": "SYSTEM",
       "English": "en",
-      "Spanish (Español)": "es"
+      "Spanish (Español)": "es",
+      "French (Français)": "fr",
+      "Hungarian (Magyar)": "hu"
     },
     "description": "Applet Language (Restart required)"
   },

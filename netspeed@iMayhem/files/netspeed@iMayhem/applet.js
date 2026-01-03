@@ -80,6 +80,21 @@ const MANUAL_TRANSLATIONS = {
         "Open Usage Log": "Protokoll öffnen",
         "Reset Session Stats": "Sitzung zurücksetzen",
         "Reset Today's Stats": "Heute zurücksetzen"
+    },
+    "hu": {
+        "Network Speed": "Hálózati Sebesség",
+        "Session": "Munkamenet",
+        "Today": "Ma",
+        "Latency": "Késleltetés",
+        "Daily": "Napi",
+        "Data Plan": "Adatkeret",
+        "Used": "Használt",
+        "(Click to switch views)": "(Kattintson a nézetek váltásához)",
+        "Usage History": "Használati előzmények",
+        "No history available": "Nincs elérhető előzmény",
+        "Open Usage Log": "Használati napló megnyitása",
+        "Reset Session Stats": "Munkamenet-statisztikák visszaállítása",
+        "Reset Today's Stats": "Ma visszaállítása"
     }
 };
 
@@ -435,11 +450,11 @@ class NetSpeedApplet extends Applet.TextApplet {
 
     formatBytes(bytes) {
         if (bytes >= 1073741824) { // >= 1 GB
-            return `${(bytes / 1073741824).toFixed(2)} GB`;
+            return `${(bytes / 1073741824).toFixed(2)} G`;
         } else if (bytes >= 1048576) { // >= 1 MB
-            return `${(bytes / 1048576).toFixed(1)} MB`;
+            return `${(bytes / 1048576).toFixed(1)} M`;
         } else if (bytes >= 1024) { // >= 1 KB
-            return `${(bytes / 1024).toFixed(0)} KB`;
+            return `${(bytes / 1024).toFixed(0)} K`;
         }
         return `${bytes} B`;
     }
@@ -585,15 +600,21 @@ class NetSpeedApplet extends Applet.TextApplet {
 
 
     format(value) {
-        return value >= 1024
-            ? `${(value / 1024).toFixed(1)} MB/s`
-            : `${value.toFixed(0)} KB/s`;
+        // value is in KB/s
+        if (value >= 1048576) { // >= 1 GB/s
+            return `${(value / 1048576).toFixed(1)} G/s`;
+        } else if (value >= 1024) { // >= 1 MB/s
+            return `${(value / 1024).toFixed(1)} M/s`;
+        } else {
+            return `${value.toFixed(0)} K/s`;
+        }
     }
 
     formatCompact(value) {
-        return value >= 1024
-            ? `${(value / 1024).toFixed(1)}M`
-            : `${value.toFixed(0)}K`;
+        // value is in KB/s
+        if (value >= 1048576) return `${(value / 1048576).toFixed(1)}G`;
+        if (value >= 1024) return `${(value / 1024).toFixed(1)}M`;
+        return `${value.toFixed(0)}K`;
     }
 
     getIndicators() {
@@ -623,19 +644,29 @@ class NetSpeedApplet extends Applet.TextApplet {
             let uStr = this.compactMode ? this.formatCompact(up) : this.format(up);
 
             if (this.verticalLayout || isVertical || this.compactMode) {
-                // Vertical Stack: Keep icons and values close, pad the end for alignment
-                let p = this.compactMode ? 6 : 9;
-                text = `${downIcon} ${dStr.padEnd(p)}\n${upIcon} ${uStr.padEnd(p)}`;
+                // Vertical Stack
+                text = `${downIcon}${dStr}\n${upIcon}${uStr}`;
             } else {
-                // Classic Side-by-Side: Reduced internal spacing, pad end to prevent jitter
-                text = `${downIcon} ${dStr.padEnd(8)} ${upIcon} ${uStr.padEnd(8)}`;
+                // Horizontal
+                text = `${downIcon}${dStr} ${upIcon}${uStr}`;
             }
 
         } else if (this.viewMode === 1) { // Session View
-            // Session/Daily always use single line as they are wide
-            text = `${_("Session")}: ${downIcon}${this.formatBytes(this.sessionRX)} ${upIcon}${this.formatBytes(this.sessionTX)}`;
+            let dStr = this.formatBytes(this.sessionRX);
+            let uStr = this.formatBytes(this.sessionTX);
+            if (this.compactMode || isVertical) {
+                text = `${downIcon}${dStr}\n${upIcon}${uStr}`;
+            } else {
+                text = `${_("Session")}: ${downIcon}${dStr} ${upIcon}${uStr}`;
+            }
         } else if (this.viewMode === 2) { // Daily View
-            text = `${_("Daily")}: ${downIcon}${this.formatBytes(this.dailyRX)} ${upIcon}${this.formatBytes(this.dailyTX)}`;
+            let dStr = this.formatBytes(this.dailyRX);
+            let uStr = this.formatBytes(this.dailyTX);
+            if (this.compactMode || isVertical) {
+                text = `${downIcon}${dStr}\n${upIcon}${uStr}`;
+            } else {
+                text = `${_("Daily")}: ${downIcon}${dStr} ${upIcon}${uStr}`;
+            }
         }
 
         // Apply Data Limit Alert
