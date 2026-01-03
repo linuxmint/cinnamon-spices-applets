@@ -190,6 +190,7 @@ DayProgressApplet.prototype = {
 
         // Initialize styles and values
         this.calculateStyles();
+        this._applet_tooltip._tooltip.set_style_class_name("day-progress-tooltip")
         
         // Update immediately to populate the menu values
         this.updateBar();
@@ -295,7 +296,6 @@ DayProgressApplet.prototype = {
         let maxLength = Math.max(elapsedLength, remainingLength);
         this.set_applet_tooltip(" ".repeat(maxLength - elapsedLength) + _("Elapsed") + " " + this.elapsedValue.text + 
         "\n" + " ".repeat(maxLength - remainingLength) + _("Remaining") + " " + this.remainingValue.text);
-        this._applet_tooltip._tooltip.set_style("font-family: monospace; text-align: end; ");
     },
 
     mapNumber: function(number, inMin, inMax, outMin, outMax) {
