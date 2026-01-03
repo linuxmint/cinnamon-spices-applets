@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-11-21 04:02+0100\n"
-"PO-Revision-Date: 2025-11-17 12:46+0100\n"
+"PO-Revision-Date: 2026-01-01 22:44+0100\n"
 "Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -63,7 +63,7 @@ msgstr "Napnyugta"
 
 #. 6.4/applet.js:760
 msgid "Toggle On / Off"
-msgstr ""
+msgstr "Be-/kikapcsolás"
 
 #. 6.4/applet.js:770
 msgid "Reload"
@@ -309,31 +309,31 @@ msgstr "Gyorsbillentyű a fényerő csökkentéséhez"
 
 #. 6.4->settings-schema.json->toggle_on_off_shortcut->description
 msgid "Hotkey to Toggle On/Off this applet"
-msgstr ""
+msgstr "Gyorsbillentyű a kisalkalmazás be- és kikapcsolásához"
 
 #. 6.4->settings-schema.json->way_to_set_off->options
 msgid "No change"
-msgstr ""
+msgstr "Nincs változás"
 
 #. 6.4->settings-schema.json->way_to_set_off->options
 msgid "All values set to 100%"
-msgstr ""
+msgstr "Minden érték 100%-ra van állítva"
 
 #. 6.4->settings-schema.json->way_to_set_off->description
 msgid "Way to set this applet off"
-msgstr ""
+msgstr "Hogyan lehet bekapcsolni ezt az appletet?"
 
 #. 6.4->settings-schema.json->baga_icon->options
 msgid "Only sun"
-msgstr ""
+msgstr "Csak nap"
 
 #. 6.4->settings-schema.json->baga_icon->options
 msgid "Screen with sun"
-msgstr ""
+msgstr "Képernyő a nappal"
 
 #. 6.4->settings-schema.json->baga_icon->options
 msgid "Symbolic"
-msgstr ""
+msgstr "Szimbolikus"
 
 #. 6.4->settings-schema.json->preset_label->description
 msgid ""
@@ -401,7 +401,7 @@ msgstr ""
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Hotkey"
-msgstr ""
+msgstr "Gyorsbillentyű"
 
 #. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
 msgid "Set Sunrise and Sunset times"
