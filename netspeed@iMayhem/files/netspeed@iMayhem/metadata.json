@@ -1,11 +1,36 @@
 {
   "uuid": "netspeed@iMayhem",
   "name": "Net Speed (Text Only)",
-  "description": "A persistent, asynchronous, text-only network speed monitor for Linux Mint Cinnamon",
+  "description": "A lightweight, text-only network speed indicator for Linux Mint Cinnamon",
   "max-instances": 1,
   "author": "iMayhem",
   "version": 1,
-  "icon": "network-transmit-receive",
+  "cinnamon-version": [
+    "2.2",
+    "2.4",
+    "2.6",
+    "2.8",
+    "3.0",
+    "3.2",
+    "3.4",
+    "3.6",
+    "3.8",
+    "4.0",
+    "4.2",
+    "4.4",
+    "4.6",
+    "4.8",
+    "5.0",
+    "5.2",
+    "5.4",
+    "5.6",
+    "5.8",
+    "6.0"
+  ],
+  "panel-types": [
+    "classic",
+    "symbolic"
+  ],
   "allowed-orientations": [
     "top",
     "bottom",

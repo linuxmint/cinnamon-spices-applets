@@ -495,15 +495,13 @@ class NetSpeedApplet extends Applet.TextApplet {
             let uStr = this.compactMode ? this.formatCompact(up) : this.format(up);
 
             if (this.verticalLayout || isVertical) {
-                // Vertical Stack with Padding for Alignment
-                // We pad start to ensuring similar width. 
-                // Note: Unless a monospace font is enforced by theme, this is an approximation.
-                text = `${downIcon} ${dStr.padStart(9)}\n${upIcon} ${uStr.padStart(9)}`;
+                // Vertical Stack: Keep icons and values close, pad the end for alignment
+                text = `${downIcon} ${dStr.padEnd(9)}\n${upIcon} ${uStr.padEnd(9)}`;
             } else {
-                // Classic Side-by-Side (Aligned)
+                // Classic Side-by-Side: Reduced internal spacing, pad end to prevent jitter
                 text = this.compactMode
-                    ? `${downIcon}${dStr.padStart(6)} ${upIcon}${uStr.padStart(6)}`
-                    : `${downIcon} ${dStr.padStart(9)}   ${upIcon} ${uStr.padStart(9)}`;
+                    ? `${downIcon}${dStr.padEnd(6)} ${upIcon}${uStr.padEnd(6)}`
+                    : `${downIcon} ${dStr.padEnd(10)}  ${upIcon} ${uStr.padEnd(10)}`;
             }
         } else if (this.viewMode === 1) { // Session View
             // Session/Daily always use single line as they are wide
