@@ -41,8 +41,53 @@ const Config = imports.misc.config;
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 // Localized String Helper
-// Uses manual translation dictionary if available, otherwise falls back to system gettext
+const MANUAL_TRANSLATIONS = {
+    "es": {
+        "Network Speed": "Velocidad de red",
+        "Session": "Sesión",
+        "Today": "Hoy",
+        "Latency": "Latencia",
+        "Data Plan": "Plan de datos",
+        "Used": "Usado",
+        "(Click to switch views)": "(Haga clic para cambiar de vista)",
+        "Daily": "Diario",
+        "Usage History": "Historial de uso",
+        "No history available": "No hay historial disponible",
+        "Open Usage Log": "Abrir registro de uso",
+        "Select Interface": "Seleccionar interfaz",
+        "Auto-Detect (Recommended)": "Auto-detectar (Recomendado)",
+        "Reset Session Stats": "Reiniciar estadísticas",
+        "Reset Today's Stats": "Reiniciar estadísticas de hoy"
+    },
+    "fr": {
+        "Network Speed": "Vitesse Réseau",
+        "Session": "Session",
+        "Today": "Aujourd'hui",
+        "Latency": "Latence",
+        "Daily": "Quotidien",
+        "Usage History": "Historique d'utilisation",
+        "Open Usage Log": "Ouvrir le journal",
+        "Reset Session Stats": "Réinitialiser la session",
+        "Reset Today's Stats": "Réinitialiser aujourd'hui"
+    },
+    "de": {
+        "Network Speed": "Netzwerkgeschwindigkeit",
+        "Session": "Sitzung",
+        "Today": "Heute",
+        "Latency": "Latenz",
+        "Daily": "Täglich",
+        "Usage History": "Verlauf",
+        "Open Usage Log": "Protokoll öffnen",
+        "Reset Session Stats": "Sitzung zurücksetzen",
+        "Reset Today's Stats": "Heute zurücksetzen"
+    }
+};
+
 function _(str) {
+    let lang = global.netSpeedAppletInstance ? global.netSpeedAppletInstance.appletLanguage : "SYSTEM";
+    if (lang !== "SYSTEM" && MANUAL_TRANSLATIONS[lang] && MANUAL_TRANSLATIONS[lang][str]) {
+        return MANUAL_TRANSLATIONS[lang][str];
+    }
     return Gettext.dgettext(UUID, str);
 }
 
@@ -76,6 +121,7 @@ class NetSpeedApplet extends Applet.TextApplet {
             this.settings.bind("ignoreLocalTraffic", "ignoreLocalTraffic", this.onSettingsChanged);
             this.settings.bind("showSessionStats", "showSessionStats", this.onSettingsChanged);
             this.settings.bind("dailyLogRetention", "dailyLogRetention", this.onSettingsChanged);
+            this.settings.bind("enableDailyLogging", "enableDailyLogging", this.onSettingsChanged);
 
             // Advanced Settings
             this.settings.bind("showPing", "showPing", this.onSettingsChanged);
@@ -86,6 +132,7 @@ class NetSpeedApplet extends Applet.TextApplet {
             this.settings.bind("dataLimitUnit", "dataLimitUnit", this.onSettingsChanged);
             this.settings.bind("alertPercentage", "alertPercentage", this.onSettingsChanged);
             this.settings.bind("overrideInterface", "overrideInterface", this.onSettingsChanged);
+            this.settings.bind("appletLanguage", "appletLanguage", this.onSettingsChanged);
             log("Settings bound successfully.");
         } catch (e) {
             logError("Failed to bind settings: " + e);
@@ -110,12 +157,27 @@ class NetSpeedApplet extends Applet.TextApplet {
         let item = new Applet.MenuItem(_("Reset Session Stats"), "view-refresh-symbolic", () => this.resetSessionCounters());
         this._applet_context_menu.addMenuItem(item);
 
+        let resetDailyItem = new Applet.MenuItem(_("Reset Today's Stats"), "edit-clear-all-symbolic", () => this.resetDailyStats());
+        this._applet_context_menu.addMenuItem(resetDailyItem);
+
 
 
         // Interface Selection Menu
         this.interfacesMenu = new PopupMenu.PopupSubMenuMenuItem(_("Select Interface"));
         this._applet_context_menu.addMenuItem(this.interfacesMenu);
         this.updateInterfacesMenu();
+
+        // History Menu
+        this.historyMenu = new PopupMenu.PopupSubMenuMenuItem(_("Usage History"));
+        this._applet_context_menu.addMenuItem(this.historyMenu);
+        this._applet_context_menu.connect('open-state-changed', (menu, open) => {
+            if (open) this.updateHistoryMenu();
+        });
+
+        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+        let openLogItem = new Applet.MenuItem(_("Open Usage Log"), "text-x-generic-symbolic", () => this.openUsageLog());
+        this._applet_context_menu.addMenuItem(openLogItem);
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -245,6 +307,50 @@ class NetSpeedApplet extends Applet.TextApplet {
         });
     }
 
+    updateHistoryMenu() {
+        this.saveDailyUsage(); // Ensure current stats are saved
+        this.historyMenu.menu.removeAll();
+
+        try {
+            if (!GLib.file_test(this.usageLogPath, GLib.FileTest.EXISTS)) {
+                this.historyMenu.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("No history available"), { reactive: false }));
+                return;
+            }
+
+            let [ok, contents] = GLib.file_get_contents(this.usageLogPath);
+            if (!ok) return;
+
+            let data = JSON.parse(contents.toString());
+            let dates = Object.keys(data).sort().reverse();
+
+            if (dates.length === 0) {
+                this.historyMenu.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("No history available"), { reactive: false }));
+                return;
+            }
+
+            // Show last 7 days
+            dates.slice(0, 7).forEach(date => {
+                let dayData = data[date];
+                // Convert MB back to bytes for formatBytes to work correctly
+                let download = (dayData.download || 0) * 1048576;
+                let upload = (dayData.upload || 0) * 1048576;
+                let label = `${date}: ↓${this.formatBytes(download)} ↑${this.formatBytes(upload)}`;
+                this.historyMenu.menu.addMenuItem(new PopupMenu.PopupMenuItem(label, { reactive: false }));
+            });
+        } catch (e) {
+            logError("Failed to update history menu: " + e);
+        }
+    }
+
+    openUsageLog() {
+        this.saveDailyUsage(); // Ensure file exists and is up to date
+        try {
+            GLib.spawn_command_line_async(`xdg-open ${this.usageLogPath}`);
+        } catch (e) {
+            logError("Failed to open usage log: " + e);
+        }
+    }
+
     isInterfaceActive(iface) {
         // Only filter if setting is enabled
         if (this.ignoreLocalTraffic) {
@@ -341,6 +447,14 @@ class NetSpeedApplet extends Applet.TextApplet {
     resetSessionCounters() {
         this.sessionRX = 0;
         this.sessionTX = 0;
+        this.update();
+    }
+
+    resetDailyStats() {
+        this.dailyRX = 0;
+        this.dailyTX = 0;
+        this.saveDailyUsage();
+        this.update();
     }
 
     checkDayRollover() {
@@ -373,8 +487,21 @@ class NetSpeedApplet extends Applet.TextApplet {
                     let today = this.currentDate;
 
                     if (data[today]) {
-                        this.dailyRX = data[today].download || 0;
-                        this.dailyTX = data[today].upload || 0;
+                        let rx = data[today].download || 0;
+                        let tx = data[today].upload || 0;
+
+                        // DATA MIGRATION HEURISTIC:
+                        // If values are astronomically high (e.g. > 1 million), they are likely legacy bytes.
+                        // If we treat 100,000,000 (bytes) as MB, it becomes ~100 TB.
+                        // We assume anything > 1,000,000 (1 TB as MB) is actually bytes from the old version.
+                        if (rx > 1000000 || tx > 1000000) {
+                            this.dailyRX = rx;
+                            this.dailyTX = tx;
+                        } else {
+                            // Assume MB (new format)
+                            this.dailyRX = rx * 1048576;
+                            this.dailyTX = tx * 1048576;
+                        }
                     }
                 }
             }
@@ -384,6 +511,7 @@ class NetSpeedApplet extends Applet.TextApplet {
     }
 
     saveDailyUsage() {
+        if (!this.enableDailyLogging) return;
         try {
             let data = {};
 
@@ -399,10 +527,10 @@ class NetSpeedApplet extends Applet.TextApplet {
                 }
             }
 
-            // Update today's data
+            // Update today's data (Store in MB for readability)
             data[this.currentDate] = {
-                download: this.dailyRX,
-                upload: this.dailyTX
+                download: parseFloat((this.dailyRX / 1048576).toFixed(2)),
+                upload: parseFloat((this.dailyTX / 1048576).toFixed(2))
             };
 
             // Clean up old entries
@@ -527,15 +655,25 @@ class NetSpeedApplet extends Applet.TextApplet {
     }
 
     update() {
-        // NOTE: We do NOT poll detectInterfaceAsync() here anymore.
-        // It is handled by NMClient signals ('notify::primary-connection').
-        // This saves massive CPU by not spawning 'ip route' every second.
+        if (!this.iface) {
+            this.detectInterfaceAsync();
+            this.startLoop();
+            return false;
+        }
 
         let now = Date.now();
         let rxNow = this.readRX();
         let txNow = this.readTX();
 
+        // Fix: If rxPrev was 0 (interface just appeared), initialize it 
+        // instead of adding the whole boot count to daily usage.
+        if (this.rxPrev === 0) {
+            this.rxPrev = rxNow;
+            this.txPrev = txNow;
+        }
+
         let dt = (now - this.lastTime) / 1000;
+
         if (dt <= 0) {
             this.startLoop();
             return false;
