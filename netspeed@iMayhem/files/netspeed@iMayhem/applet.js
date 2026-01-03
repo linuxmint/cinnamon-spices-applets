@@ -494,15 +494,15 @@ class NetSpeedApplet extends Applet.TextApplet {
             let dStr = this.compactMode ? this.formatCompact(down) : this.format(down);
             let uStr = this.compactMode ? this.formatCompact(up) : this.format(up);
 
-            if (this.verticalLayout || isVertical) {
+            if (this.verticalLayout || isVertical || this.compactMode) {
                 // Vertical Stack: Keep icons and values close, pad the end for alignment
-                text = `${downIcon} ${dStr.padEnd(9)}\n${upIcon} ${uStr.padEnd(9)}`;
+                let p = this.compactMode ? 6 : 9;
+                text = `${downIcon} ${dStr.padEnd(p)}\n${upIcon} ${uStr.padEnd(p)}`;
             } else {
                 // Classic Side-by-Side: Reduced internal spacing, pad end to prevent jitter
-                text = this.compactMode
-                    ? `${downIcon}${dStr.padEnd(6)} ${upIcon}${uStr.padEnd(6)}`
-                    : `${downIcon} ${dStr.padEnd(10)}  ${upIcon} ${uStr.padEnd(10)}`;
+                text = `${downIcon} ${dStr.padEnd(8)} ${upIcon} ${uStr.padEnd(8)}`;
             }
+
         } else if (this.viewMode === 1) { // Session View
             // Session/Daily always use single line as they are wide
             text = `${_("Session")}: ${downIcon}${this.formatBytes(this.sessionRX)} ${upIcon}${this.formatBytes(this.sessionTX)}`;
