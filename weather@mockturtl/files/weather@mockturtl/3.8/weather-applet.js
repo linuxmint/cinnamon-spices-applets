@@ -19997,14 +19997,18 @@ class UIHourlyForecasts {
             this.hourlyForecastDates.push(hour.date);
             this.hourlyForecastData.push(hour);
             const temp = TempToUserConfig(hour.temp, config, false);
-            if (hour.date.hour == 0)
+            if (hour.date.hour == 0) {
                 ui.Hour.text = GetDayName(hour.date, {
                     tz: tz,
                     useTodayTomorrow: false,
                     short: true
                 });
-            else
+                ui.Hour.style = "font-weight: bold;";
+            }
+            else {
                 ui.Hour.text = GetHoursMinutes(hour.date, config._show24Hours, tz, config._shortHourlyTime);
+                ui.Hour.style = "font-weight: regular;";
+            }
             ui.Temperature.text = temp ? `${temp}°` : "";
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
             ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation);
