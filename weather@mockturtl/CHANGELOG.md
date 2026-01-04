@@ -5,6 +5,7 @@
 * Fixes [Unit label kph should be km/h (SI unit) #8036](https://github.com/linuxmint/cinnamon-spices-applets/issues/8036)
 * Removed myself as  the maintainer of the weather@mockturtl applet and updated CODEOWNERS
 * Clean build instructions
+* Make hourly weather day (Mon, Tue, etc) text bold
 
 ## 3.6.8
 
