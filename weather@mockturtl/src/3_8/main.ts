@@ -7,7 +7,7 @@
 
 import { DateTime } from "luxon";
 import { type Config, ServiceClassMapping } from "./config";
-import type { RefreshOptions} from "./loop";
+import type { RefreshOptions } from "./loop";
 import { WeatherLoop } from "./loop";
 import type { WeatherData, CustomIcons, BuiltinIcons } from "./weather-data";
 import type { AppletError, NiceErrorDetail, Metadata, WeatherProvider, LocationData } from "./types";
@@ -87,7 +87,7 @@ export class WeatherApplet extends TextIconApplet {
 
 		void this.loop.Start();
 		// We need a full rebuild and refresh for these
-		this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({rebuild: true}));
+		this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({ rebuild: true }));
 
 		// We need a full rebuild without refresh for these
 		this.config.VerticalOrientationChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
@@ -108,7 +108,7 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.LocationChanged.Subscribe(() => this.loop.Refresh());
 
 		// Misc Triggers
-		this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Refresh({immediate: false}));
+		this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Refresh({ immediate: false }));
 
 		// Panel
 		this.config.ShowCommentInPanelChanged.Subscribe(this.RefreshLabel);
@@ -124,7 +124,7 @@ export class WeatherApplet extends TextIconApplet {
 
 		this.config.TooltipTextOverrideChanged.Subscribe(this.AfterRefresh((conf, val, data) => this.SetAppletTooltip(data, conf, val)));
 		this.config.TempTextOverrideChanged.Subscribe(this.RefreshLabel);
-		this.config.FontChanged.Subscribe(() => this.loop.Refresh({rebuild: true}));
+		this.config.FontChanged.Subscribe(() => this.loop.Refresh({ rebuild: true }));
 		this.config.HotkeyChanged.Subscribe(this.OnKeySettingsUpdated);
 		this.config.SelectedLogPathChanged.Subscribe(this.saveLog);
 		this.config.LocStore.CurrentLocationModified.Subscribe(() => this.loop.Refresh());
@@ -375,17 +375,17 @@ export class WeatherApplet extends TextIconApplet {
 		const vgaInfo = (await SpawnProcess(["lspci"])).Data?.split("\n").filter(x => x.includes("VGA"));
 
 		let body = "```\n";
-		body+= ` * Applet version - ${appletVersion}\n`;
-		body+= ` * Cinnamon version - ${cinnamonVersion}\n`;
-		body+= ` * Distribution - ${distribution}\n`;
-		body+= ` * Graphics hardware - ${vgaInfo.join(", ")}\n`;
-		body+= "```\n\n";
+		body += ` * Applet version - ${appletVersion}\n`;
+		body += ` * Cinnamon version - ${cinnamonVersion}\n`;
+		body += ` * Distribution - ${distribution}\n`;
+		body += ` * Graphics hardware - ${vgaInfo.join(", ")}\n`;
+		body += "```\n\n";
 
-		body+= `**Notify author of applet**\n@Gr3q\n\n`;
+		body += `**Notify author of applet**\n\n\n`;
 
-		body+= "**Issue**\n\n\n\n**Steps to reproduce**\n\n\n\n**Expected behaviour**\n\n\n\n**Other information**\n\n";
+		body += "**Issue**\n\n\n\n**Steps to reproduce**\n\n\n\n**Expected behaviour**\n\n\n\n**Other information**\n\n";
 
-		body+= `<details>
+		body += `<details>
 <summary>Relevant Logs</summary>
 
 \`\`\`
@@ -402,7 +402,7 @@ The contents of the file saved from the applet help page goes here
 		void this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
 	}
 
-	public saveLog = async(): Promise<void> => {
+	public saveLog = async (): Promise<void> => {
 		// Empty string, abort
 		if (!(this.config._selectedLogPath?.length > 0))
 			return;
@@ -411,7 +411,7 @@ The contents of the file saved from the applet help page goes here
 		try {
 			logLines = await Logger.GetAppletLogs();
 		}
-		catch(e) {
+		catch (e) {
 			if (e instanceof Error) {
 				NotificationService.Instance.Send(_("Error Saving Debug Information"), e.message);
 			}
@@ -422,7 +422,7 @@ The contents of the file saved from the applet help page goes here
 		try {
 			settings = await this.config.GetAppletConfigJson();
 		}
-		catch(e) {
+		catch (e) {
 			if (e instanceof Error) {
 				NotificationService.Instance.Send(_("Error Saving Debug Information"), e.message);
 			}
@@ -432,7 +432,7 @@ The contents of the file saved from the applet help page goes here
 		const appletLogFile = File.new_for_path(this.config._selectedLogPath);
 		const stream = await OverwriteAndGetIOStream(appletLogFile);
 		if (stream == null) {
-			NotificationService.Instance.Send(_("Error Saving Debug Information"), _("Could not open file {filePath} for writing", {filePath: this.config._selectedLogPath} ));
+			NotificationService.Instance.Send(_("Error Saving Debug Information"), _("Could not open file {filePath} for writing", { filePath: this.config._selectedLogPath }));
 			return;
 		}
 
@@ -444,7 +444,7 @@ The contents of the file saved from the applet help page goes here
 		}
 
 		await CloseStream(stream.get_output_stream());
-		NotificationService.Instance.Send(_("Debug Information saved successfully"), _("Saved to {filePath}", {filePath: this.config._selectedLogPath}));
+		NotificationService.Instance.Send(_("Debug Information saved successfully"), _("Saved to {filePath}", { filePath: this.config._selectedLogPath }));
 	}
 
 	private async SendCommand() {
@@ -522,7 +522,7 @@ The contents of the file saved from the applet help page goes here
 	/** Into right-click context menu */
 	private AddRefreshButton(): void {
 		const itemLabel = _("Refresh")
-		const refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.loop.Refresh({rebuild: true}));
+		const refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.loop.Refresh({ rebuild: true }));
 		this._applet_context_menu.addMenuItem(refreshMenuItem);
 	}
 

@@ -533,7 +533,7 @@
 	},
 	"maintainer": {
 		"type": "label",
-		"description": "Current maintainer: Gr3q"
+		"description": "Current maintainer: ---"
 	},
 	"issue-reporting-explanation": {
 		"type": "label",
@@ -554,19 +554,19 @@
 			"Verbose": "verbose"
 		}
 	},
-	"fileSelect" : {
-        "type" : "custom",
-        "file" : "LogSaver.py",
-        "widget" : "FileSaver",
-        "description" : "Click Save to save debug information to a file",
+	"fileSelect": {
+		"type": "custom",
+		"file": "LogSaver.py",
+		"widget": "FileSaver",
+		"description": "Click Save to save debug information to a file",
 		"tooltip": "This includes logs for the applet and the current settings with your API key redacted."
-    },
-	"selectedLogPath" : {
-        "type": "entry",
+	},
+	"selectedLogPath": {
+		"type": "entry",
 		"default": "",
 		"description": "Selected path to save Logs",
 		"value": ""
-    },
+	},
 	"userAgentStringOverride": {
 		"type": "entry",
 		"default": "",
