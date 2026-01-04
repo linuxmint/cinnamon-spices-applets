@@ -1,18 +1,29 @@
 # Build Guide
 
-The Source code is in typescript, You must compile it into js if you change it.
-the Build script helps to get them where they need to be in the correct
-format.
+Requires node/npm.
 
-Building requires Typescript installed (obviously).
-To install typescript run: "sudo npm install -g typescript"  (requires node...) or find it in your package manager
-
-Visual Studio Code has the best Typescript support, although you can use other Text editors.
+```bash
+npm ci
+```
 
 ## Build for 3.8
 
-Run `build.sh`, it will build for 3.8.  Alternatively, run `install.sh` to build and install, which checks for compile and lint errors before building, then installs the applet and restart Cinnamon.
+To build and watch for changes
+
+```bash
+npm run watch
+
+```
+
+To Test
+
+```bash
+# Will copy the built files into the correct folder and restart the applet - only the applet!
+./test.sh
+```
 
 ## Build for 3.0
 
-Note that 3.0 was deprecated in April 2021, but the src is kept for that version. can build it with `./build3_0.sh`.
+3.0 was deprecated in April 2021, but the src is kept for that version. can build it with `./src/3_0/build3_0.sh`.
+
+_Note: You won't be able to build it anymore unless you fix all type errors - the library declarations need `strict` and `exactOptionalPropertyTypes` enabled._

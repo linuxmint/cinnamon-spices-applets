@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.6.9
+
+
+
 ## 3.6.8
 
 * Fixes [weather@mockturtl - superwide popup Pirateweather](https://github.com/linuxmint/cinnamon-spices-applets/issues/7389)
