@@ -1,8 +1,8 @@
 import type { WeatherApplet } from "./main";
-import type { LocationData, LocationServiceResult, WeatherProvider} from "./types";
+import type { LocationData, LocationServiceResult, WeatherProvider } from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Logger } from "./lib/services/logger";
-import type { LogLevel} from "./consts";
+import type { LogLevel } from "./consts";
 import { distanceUnitLocales, fahrenheitCountries, UUID, windSpeedUnitLocales } from "./consts";
 import { LocationStore } from "./location_services/locationstore";
 import { GeoLocation } from "./location_services/nominatim";
@@ -271,7 +271,7 @@ export class Config {
 	/**
 	 * @returns Units, automatic is already resolved here
 	 */
-	public get WindSpeedUnit(): WeatherWindSpeedUnits {
+	public get WindSpeedUnit(): Exclude<WeatherWindSpeedUnits, "automatic"> {
 		if (this._windSpeedUnit == "automatic")
 			return this.GetLocaleWindSpeedUnit(this.UserTimezone);
 		return this._windSpeedUnit;
@@ -534,11 +534,11 @@ export class Config {
 		return "fahrenheit";
 	}
 
-	private GetLocaleWindSpeedUnit(code: string | null): WeatherWindSpeedUnits {
+	private GetLocaleWindSpeedUnit(code: string | null): Exclude<WeatherWindSpeedUnits, "automatic"> {
 		if (code == null)
 			return "kph";
 
-		let key: WeatherWindSpeedUnits;
+		let key: Exclude<WeatherWindSpeedUnits, "automatic">;
 		for (key in windSpeedUnitLocales) {
 			if (windSpeedUnitLocales[key]?.includes(code))
 				return key;
@@ -638,7 +638,7 @@ export class Config {
 /**
  * Keys matching the ones in settings-schema.json
  */
- const Keys = {
+const Keys = {
 	DATA_SERVICE: {
 		key: "dataService",
 		prop: "DataService"

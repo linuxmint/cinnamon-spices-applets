@@ -9584,6 +9584,20 @@ function ExtraFieldToUserUnits(extra_field, config, withUnit = false) {
             return _(extra_field.value);
     }
 }
+function WindSpeedUnitToText(unit) {
+    switch (unit) {
+        case "Beaufort":
+            return undefined;
+        case "mph":
+            return _("mph");
+        case "kph":
+            return _("km/h");
+        case "Knots":
+            return _("Knots");
+        case "m/s":
+            return _("m/s");
+    }
+}
 function MPStoUserUnits(mps, units) {
     switch (units) {
         case "mph":
@@ -19250,8 +19264,9 @@ class WindBox {
         else {
             this.labelText.text = MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
         }
-        if (this.app.config.WindSpeedUnit != "Beaufort")
-            this.labelText.text += " " + _(this.app.config.WindSpeedUnit);
+        const unitText = WindSpeedUnitToText(this.app.config.WindSpeedUnit);
+        if (unitText != null)
+            this.labelText.text += " " + unitText;
         this._caption.show();
         this._label.show();
     }

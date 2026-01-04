@@ -317,7 +317,7 @@
 		"description": "Wind speed unit",
 		"options": {
 			"Automatic": "automatic",
-			"kph": "kph",
+			"km/h": "kph",
 			"mph": "mph",
 			"m/s": "m/s",
 			"knots": "Knots",
