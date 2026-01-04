@@ -364,7 +364,7 @@
 		"type": "entry",
 		"default": "",
 		"description": "Override label on panel",
-		"tooltip": "Some of the available values are: {c} is condition, {t} is temperature and {u} is unit.\nCan be used if label does not fit on vertical panel, among other smart things."
+		"tooltip": "Some of the available values are: {c} is condition, {t} is temperature and {u} is unit. Full list of values are available on the Cinnamon spices website.\nCan be used if label does not fit on vertical panel, among other smart things."
 	},
 	"tooltipTextOverride": {
 		"type": "entry",
