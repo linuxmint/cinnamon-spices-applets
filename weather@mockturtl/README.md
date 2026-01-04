@@ -2,7 +2,7 @@
 
 Adaptation of Gnome Shell's [weather extension](https://github.com/simon04/gnome-shell-extension-weather) for the Cinnamon desktop.
 
-cinnamon-weather uses [Semantic Versioning](http://semver.org/).  For the current version number, see `metadata.json`.  
+cinnamon-weather uses [Semantic Versioning](http://semver.org/).  For the current version number, see `metadata.json`.
 
 ## Versions
 
@@ -24,7 +24,7 @@ The applet obtains the location automatically. If the automatic location not ade
 * **Coordinates** in Latitude, Longitude format (e.g. 37.77,122.41). You can use [OpenWeatherMap's finder](https://openweathermap.org/find) and paste the coordinates in from there.
 * or an **Address** (it can be just a city and country, it is pretty flexible). After 3 seconds, the applet will replace the text that you entered with the full address it finds so you can verify if it's correct. You can also get your exact address to enter from [OpenStreetMap's Nominatim search](https://nominatim.openstreetmap.org/), the service the applet uses.
 
-You can also save locations what you entered manually and switch between them in the applet *(arrows will appear on both sides of the location in the applet if you have more than two saved)*. 
+You can also save locations what you entered manually and switch between them in the applet *(arrows will appear on both sides of the location in the applet if you have more than two saved)*.
 
 ### Weather providers to choose from
 
@@ -119,7 +119,7 @@ Alerts are an US only feature as of May 2024.
 
 ### Visual Crossing
 
-Weather service from Visual Crossing Corporation founded in 2003 with headquarters in USA and Germany. [Visual Crossing Website](https://www.visualcrossing.com/). Read more about the service [here](https://www.visualcrossing.com/about). 
+Weather service from Visual Crossing Corporation founded in 2003 with headquarters in USA and Germany. [Visual Crossing Website](https://www.visualcrossing.com/). Read more about the service [here](https://www.visualcrossing.com/about).
 
 * Needs an API key, you can [Sign Up here](https://www.visualcrossing.com/weather/weather-data-services#/signup) and grab one
 
@@ -263,7 +263,7 @@ Today and Tomorrow: `{min} / {max} {u} {c} {t}{u}{br}{tmr_t} {tmr_c}`
 
 ## Language Translations
 
-If you want to update or change the translation in your language other than English, here are some steps to get you started. Keep in mind that your local changes will be overwritten when an update of the applets language is installed. Feel free to share your translation, which is very much appreciated, 
+If you want to update or change the translation in your language other than English, here are some steps to get you started. Keep in mind that your local changes will be overwritten when an update of the applets language is installed. Feel free to share your translation, which is very much appreciated,
 by making a PR (pull request) on Github or contact the current maintainer of the applet.
 
 1. Install the translation editor **poedit** with your package manager and download your language PO file e. g. *xx.po* where xx is your ISO language code, and the template POT file *[weather@mockturtl.pot](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/weather%40mockturtl/files/weather%40mockturtl/po/weather@mockturtl.pot)* from the *files/weather@mockturtl/po/* sub directory on the [Github website](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/weather%40mockturtl/files/weather%40mockturtl/po/)
@@ -286,7 +286,7 @@ by making a PR (pull request) on Github or contact the current maintainer of the
 
 ### Report a new issue
 
-You need a Github login to make a issue report. Please first check if the issue already is reported [here](https://github.com/linuxmint/cinnamon-spices-applets/issues?q=is%3Aissue+is%3Aopen+weather). You will find more information about reporting in the Configuration under the Help Tab, accessible by right clicking on the applet. Here you can save logs to file with debug level that is much appreciated. By using the *Submit an Issue* Button under this Tab, useful system information will be generated for your report form in your default web browser at Github.com. 
+You need a Github login to make a issue report. Please first check if the issue already is reported [here](https://github.com/linuxmint/cinnamon-spices-applets/issues?q=is%3Aissue+is%3Aopen+weather). You will find more information about reporting in the Configuration under the Help Tab, accessible by right clicking on the applet. Here you can save logs to file with debug level that is much appreciated. By using the *Submit an Issue* Button under this Tab, useful system information will be generated for your report form in your default web browser at Github.com.
 
 ### Troubleshooting
 
@@ -301,3 +301,66 @@ You can see Logs by opening the Cinnamon 'Looking Glass' debugger. You can open 
 Logs can be found under the ```Log``` Tab.
 
 [Changelog](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/weather%40mockturtl/CHANGELOG.md)
+
+## Developer instructions
+
+Instructions if you want to contribute/work on the applet.
+
+## Build Guide
+
+Requires Node 16+ and npm to build.
+
+```bash
+cd {repo}/weather@mockturtl
+npm ci
+```
+
+## Build for 3.8
+
+To build and watch for changes
+
+```bash
+# In applet directory
+npm run watch
+```
+
+To Test
+
+```bash
+# In applet directory
+# Will copy the built files into the correct folder and restart the applet - only the applet!
+./test.sh
+```
+
+## Build for 3.0
+
+3.0 was deprecated in April 2021, but the src is kept for that version. can build it with `./src/3_0/build3_0.sh`.
+
+*Note: You won't be able to build it anymore unless you fix all type errors - the library declarations need `strict` and `exactOptionalPropertyTypes` enabled.*
+
+## Development flow
+
+0. Make sure you have an **up-to-date** fork of [cinnamon-spices-applets](https://github.com/linuxmint/cinnamon-spices-applets) on Github. Work on your fork, start on `master`.
+1. Open the folder, in VS Code is `code {your_path}/cinnamon-spices-applets/weather@mockturtl` - replace `{your_path}` with the path you cloned the repository to.
+2. Install dependencies `npm ci` - you only do this once and every time when the `package-lock.json` changes.
+3. Start the build - `npm run watch`. It will rebuild on every change.
+4. Do your work, the relevant files are in
+    - `src/3_8` - actual code
+    - `files/weather@mockturtl/metadata.json` - if you want to update the version
+    - `files/weather@mockturtl/3.8/settings-schema.json` - settings schema you see when you click `Configure...`
+    - `files/weather@mockturtl/po/` - translations. I recommend POEdit to edit them
+    - `files/weather@mockturtl/{icons/arrow-icons}/` - custom svg icons
+5. Test your changes with `./test.sh`
+6. Once you are done
+    1. Regenerate translation template if you changed any code.
+
+       ```bash
+       # This needs to be ran from the repo root.
+       cd .. && ./cinnamon-spices-makepot weather@mockturtl && cd weather@mockturtl
+       ```
+
+    2. Don't forget to increment applet version in `metadata.json`
+    3. Run `npx eslint ./src/3_8/` and fix all errors
+    4. (Optional): Test your changes in the current oldest version of Linux Mint VM. Ideally you would test it in Linux Mint 19 if you can get a hold of it.
+
+    5. Open your PR in [cinnamon-spices-applets](https://github.com/linuxmint/cinnamon-spices-applets)
