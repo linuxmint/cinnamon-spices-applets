@@ -323,12 +323,14 @@ class MCSM extends Applet.IconApplet {
 
     set_panelHeight() {
         this.iconSize = this.getPanelIconSize(St.IconType.FULLCOLOR);
-        if (this.useIconSize)
+        if (this.useIconSize) {
             this.panelHeight = this.iconSize;
-        else if (this.graphHeight)
-            this.panelHeight = this.graphHeight * global.ui_scale;
-        else
+        } else if (this.graphHeight) {
+            if (this.graphHeight > this._panelHeight) this.graphHeight = this._panelHeight;
+            this.panelHeight = this.graphHeight; // * global.ui_scale;
+        } else {
             this.panelHeight = this._panelHeight;
+        }
     }
 
     run_main_loop() {
