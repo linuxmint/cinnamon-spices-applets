@@ -477,6 +477,9 @@ class NetSpeedApplet extends Applet.TextApplet {
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
+        let configureItem = new Applet.MenuItem(_("Configure..."), "system-run-symbolic", () => this.configureApplet());
+        this._applet_context_menu.addMenuItem(configureItem);
+
         let openUserGuideItem = new Applet.MenuItem(_("User Guide"), "system-help-symbolic", () => this.openUserGuide());
         this._applet_context_menu.addMenuItem(openUserGuideItem);
 
@@ -552,6 +555,9 @@ class NetSpeedApplet extends Applet.TextApplet {
         this._applet_context_menu.addMenuItem(this.historyMenu);
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+        let configureItem = new Applet.MenuItem(_("Configure..."), "system-run-symbolic", () => this.configureApplet());
+        this._applet_context_menu.addMenuItem(configureItem);
 
         let openUserGuideItem = new Applet.MenuItem(_("User Guide"), "system-help-symbolic", () => this.openUserGuide());
         this._applet_context_menu.addMenuItem(openUserGuideItem);
