@@ -327,7 +327,7 @@ class MCSM extends Applet.IconApplet {
             this.panelHeight = this.iconSize;
         } else if (this.graphHeight) {
             if (this.graphHeight > this._panelHeight) this.graphHeight = this._panelHeight;
-            this.panelHeight = this.graphHeight; // * global.ui_scale;
+            this.panelHeight = Math.ceil(this.graphHeight * global.ui_scale);
         } else {
             this.panelHeight = this._panelHeight;
         }
