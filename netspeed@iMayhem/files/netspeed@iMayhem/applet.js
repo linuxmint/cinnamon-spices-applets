@@ -319,6 +319,7 @@ class CustomTooltip {
             if (!this.applet.isHovering && !this.mouseIn) {
                 this.hide();
             }
+            return false;
         });
     }
 
@@ -447,6 +448,7 @@ class NetSpeedApplet extends Applet.TextApplet {
                 if (!this.isHovering && !this.customTooltip.mouseIn) {
                     this.customTooltip.hide();
                 }
+                return false;
             });
         });
 
