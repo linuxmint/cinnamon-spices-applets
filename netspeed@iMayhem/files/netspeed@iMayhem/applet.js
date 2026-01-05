@@ -12,98 +12,360 @@ const Settings = imports.ui.settings;
 const PopupMenu = imports.ui.popupMenu;
 const Gettext = imports.gettext;
 const NM = imports.gi.NM;
+const St = imports.gi.St;
+const Main = imports.ui.main;
+const Clutter = imports.gi.Clutter;
+const GObject = imports.gi.GObject;
+const ByteArray = imports.byteArray;
 const UUID = "netspeed@iMayhem";
 
 
 
-// Custom Logger (File + Global)
+// Custom Logger (Global only)
 function log(msg) {
-    let debugPath = GLib.get_home_dir() + "/netspeed_debug.log";
     let timestamp = new Date().toISOString();
-    let logMsg = `[${timestamp}] [${UUID}] ${msg}`;
-
-    global.log(logMsg);
-
-    // Append to file asynchronously using shell redirection (simple & effective for debug)
-    try {
-        GLib.spawn_command_line_async(`bash -c 'echo "${logMsg}" >> ${debugPath}'`);
-    } catch (e) {
-        global.logError("Failed to write to debug log: " + e);
-    }
+    global.log(`[${timestamp}] [${UUID}] ${msg}`);
 }
 function logError(msg) {
     log("ERROR: " + msg);
     global.logError(`[${UUID}] ERROR: ${msg}`);
 }
 
-const Config = imports.misc.config;
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
-// Localized String Helper
-const MANUAL_TRANSLATIONS = {
-    "es": {
-        "Network Speed": "Velocidad de red",
-        "Session": "Sesión",
-        "Today": "Hoy",
-        "Latency": "Latencia",
-        "Data Plan": "Plan de datos",
-        "Used": "Usado",
-        "(Click to switch views)": "(Haga clic para cambiar de vista)",
-        "Daily": "Diario",
-        "Usage History": "Historial de uso",
-        "No history available": "No hay historial disponible",
-        "Open Usage Log": "Abrir registro de uso",
-        "Select Interface": "Seleccionar interfaz",
-        "Auto-Detect (Recommended)": "Auto-detectar (Recomendado)",
-        "Reset Session Stats": "Reiniciar estadísticas",
-        "Reset Today's Stats": "Reiniciar estadísticas de hoy"
-    },
-    "fr": {
-        "Network Speed": "Vitesse Réseau",
-        "Session": "Session",
-        "Today": "Aujourd'hui",
-        "Latency": "Latence",
-        "Daily": "Quotidien",
-        "Usage History": "Historique d'utilisation",
-        "Open Usage Log": "Ouvrir le journal",
-        "Reset Session Stats": "Réinitialiser la session",
-        "Reset Today's Stats": "Réinitialiser aujourd'hui"
-    },
-    "de": {
-        "Network Speed": "Netzwerkgeschwindigkeit",
-        "Session": "Sitzung",
-        "Today": "Heute",
-        "Latency": "Latenz",
-        "Daily": "Täglich",
-        "Usage History": "Verlauf",
-        "Open Usage Log": "Protokoll öffnen",
-        "Reset Session Stats": "Sitzung zurücksetzen",
-        "Reset Today's Stats": "Heute zurücksetzen"
-    },
-    "hu": {
-        "Network Speed": "Hálózati Sebesség",
-        "Session": "Munkamenet",
-        "Today": "Ma",
-        "Latency": "Késleltetés",
-        "Daily": "Napi",
-        "Data Plan": "Adatkeret",
-        "Used": "Használt",
-        "(Click to switch views)": "(Kattintson a nézetek váltásához)",
-        "Usage History": "Használati előzmények",
-        "No history available": "Nincs elérhető előzmény",
-        "Open Usage Log": "Használati napló megnyitása",
-        "Reset Session Stats": "Munkamenet-statisztikák visszaállítása",
-        "Reset Today's Stats": "Ma visszaállítása"
-    }
-};
+const translationsCache = {};
+let currentLanguage = "SYSTEM";
 
 function _(str) {
-    let lang = global.netSpeedAppletInstance ? global.netSpeedAppletInstance.appletLanguage : "SYSTEM";
-    if (lang !== "SYSTEM" && MANUAL_TRANSLATIONS[lang] && MANUAL_TRANSLATIONS[lang][str]) {
-        return MANUAL_TRANSLATIONS[lang][str];
+    let lang = currentLanguage;
+
+    // Automatic System Language Detection fallback
+    if (lang === "SYSTEM") {
+        let systemLangs = GLib.get_language_names();
+        for (let sysLang of systemLangs) {
+            if (translationsCache[sysLang]) {
+                lang = sysLang;
+                break;
+            }
+            // Also try stripping encoding/country if needed (though get_language_names usually provides fallback variants)
+            let short = sysLang.split(/[._-]/)[0];
+            if (translationsCache[short]) {
+                lang = short;
+                break;
+            }
+        }
     }
+
+    if (lang === "en") return str; // Force English
+
+    if (translationsCache[lang]) {
+        let val = translationsCache[lang][str];
+        if (val) return val;
+    }
+
     return Gettext.dgettext(UUID, str);
+}
+
+class PoParser {
+    static parse(content) {
+        let translations = {};
+        let lines = content.split('\n');
+        let currentMsgid = null;
+        let readingMsgstr = false;
+
+        for (let line of lines) {
+            line = line.trim();
+            if (!line || line.startsWith('#')) continue;
+
+            if (line.startsWith('msgid "')) {
+                currentMsgid = line.substring(7, line.length - 1);
+                readingMsgstr = false;
+            } else if (line.startsWith('msgstr "')) {
+                let msgstr = line.substring(8, line.length - 1);
+                if (currentMsgid !== null && currentMsgid !== "") {
+                    translations[currentMsgid] = msgstr;
+                    readingMsgstr = true;
+                }
+            } else if (line.startsWith('"')) {
+                let str = line.substring(1, line.length - 1);
+                if (readingMsgstr) {
+                    if (currentMsgid !== null && currentMsgid !== "") {
+                        translations[currentMsgid] += str;
+                    }
+                } else {
+                    if (currentMsgid !== null) {
+                        currentMsgid += str;
+                    }
+                }
+            }
+        }
+        return translations;
+    }
+}
+
+
+class ProcessMonitor {
+    constructor() {
+        this.history = {}; // pid -> { rx, tx, time }
+        this.lastAlertTimes = {}; // name -> timestamp
+        this.topProcesses = [];
+        this.activeAppCount = 0;
+
+        // Settings from applet
+        this.enableHighUsageAlerts = false;
+        this.highUsageThreshold = 10; // MB/s
+    }
+
+    update(callback) {
+        try {
+            let proc = Gio.Subprocess.new(
+                ['ss', '-antuipOH'],
+                Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
+            );
+            proc.communicate_utf8_async(null, null, (proc, res) => {
+                try {
+                    let [, stdout] = proc.communicate_utf8_finish(res);
+                    if (stdout) {
+                        this.parseOutput(stdout);
+                        if (callback) callback();
+                    }
+                } catch (e) {
+                    // Command failed or interrupted
+                }
+            });
+        } catch (e) {
+            global.logError(e);
+        }
+    }
+
+    triggerAlert(name, speedMBs) {
+        let now = Date.now();
+        // Cooldown: 5 minutes (300,000 ms)
+        if (this.lastAlertTimes[name] && (now - this.lastAlertTimes[name] < 300000)) {
+            return;
+        }
+
+        this.lastAlertTimes[name] = now;
+        let title = _("High Network Usage Detected");
+        let body = _("Application '%s' is consuming %s MB/s").format(name, speedMBs.toFixed(1));
+
+        Main.notify(title, body);
+    }
+
+    parseOutput(stdout) {
+        let lines = stdout.split('\n');
+        let socketStats = {}; // pid_fd -> { rx, tx, name, pid }
+        let now = Date.now();
+
+        for (let line of lines) {
+            if (!line) continue;
+
+            // Extract process name, pid, and fd
+            let usersMatch = line.match(/users:\(\("([^"]+)",pid=(\d+),fd=(\d+)/);
+            if (!usersMatch) continue;
+
+            let name = usersMatch[1];
+            let pid = usersMatch[2];
+            let fd = usersMatch[3];
+            let key = `${pid}_${fd}`;
+
+            // Extract bytes
+            let sentMatch = line.match(/bytes_sent:(\d+)/);
+            let recvMatch = line.match(/bytes_received:(\d+)/);
+
+            let tx = sentMatch ? parseInt(sentMatch[1]) : 0;
+            let rx = recvMatch ? parseInt(recvMatch[1]) : 0;
+
+            socketStats[key] = { name: name, pid: pid, rx: rx, tx: tx };
+        }
+
+        let appSpeeds = {}; // pid -> { name, rx, tx }
+
+        for (let key in socketStats) {
+            let stats = socketStats[key];
+            let pid = stats.pid;
+
+            if (this.history[key]) {
+                let prev = this.history[key];
+                let dt = (now - prev.time) / 1000;
+                if (dt > 0) {
+                    let rxSpeed = Math.max(0, (stats.rx - prev.rx) / dt);
+                    let txSpeed = Math.max(0, (stats.tx - prev.tx) / dt);
+
+                    if (!appSpeeds[pid]) {
+                        appSpeeds[pid] = { name: stats.name, rx: 0, tx: 0 };
+                    }
+                    appSpeeds[pid].rx += rxSpeed;
+                    appSpeeds[pid].tx += txSpeed;
+                }
+            }
+            // Update history with current snapshot
+            this.history[key] = { rx: stats.rx, tx: stats.tx, time: now };
+        }
+
+        // Cleanup old history keys that are no longer active
+        for (let key in this.history) {
+            if (!socketStats[key]) {
+                delete this.history[key];
+            }
+        }
+
+        let deltas = [];
+        for (let pid in appSpeeds) {
+            let app = appSpeeds[pid];
+            if (app.rx > 0 || app.tx > 0) {
+                deltas.push({
+                    name: app.name,
+                    rx: app.rx,
+                    tx: app.tx,
+                    total: app.rx + app.tx
+                });
+            }
+        }
+
+        // Sort by total usage desc
+        deltas.sort((a, b) => b.total - a.total);
+
+        // Aggregate by name (multiple pids for same app)
+        let aggregated = {};
+        for (let d of deltas) {
+            if (!aggregated[d.name]) aggregated[d.name] = { name: d.name, rx: 0, tx: 0, total: 0 };
+            aggregated[d.name].rx += d.rx;
+            aggregated[d.name].tx += d.tx;
+            aggregated[d.name].total += d.total;
+
+            // High Usage Alert Logic
+            if (this.enableHighUsageAlerts) {
+                let totalMBs = (d.rx + d.tx) / (1024 * 1024);
+                if (totalMBs >= this.highUsageThreshold) {
+                    this.triggerAlert(d.name, totalMBs);
+                }
+            }
+        }
+
+        this.topProcesses = Object.values(aggregated)
+            .sort((a, b) => b.total - a.total);
+
+        this.activeAppCount = this.topProcesses.length;
+    }
+}
+
+class CustomTooltip {
+    constructor(applet) {
+        this.applet = applet;
+        this.actor = new St.BoxLayout({
+            vertical: true,
+            style_class: 'netspeed-popup',
+            track_hover: true,
+            reactive: true
+        });
+        this.actor.hide();
+        Main.uiGroup.add_actor(this.actor);
+
+        this.header = new St.BoxLayout({ x_align: St.Align.START });
+        this.actor.add(this.header, { x_fill: true });
+
+        this.title = new St.Label({ style_class: 'netspeed-title' });
+        this.header.add(this.title, { expand: true, x_align: St.Align.START });
+
+        this.scrollView = new St.ScrollView({
+            x_fill: true,
+            y_fill: true,
+            y_expand: true,
+            style_class: 'netspeed-scroll'
+        });
+
+        // Fix scroll hijacking: Capture ALL scroll events on the actor to stop them from leaking
+        // Fix scroll hijacking: Capture ALL scroll events on the actor to stop them from leaking
+        this.actor.connect('scroll-event', (actor, event) => {
+            return Clutter.EVENT_STOP;
+        });
+        this.scrollView.connect('scroll-event', (actor, event) => {
+            return Clutter.EVENT_STOP;
+        });
+
+        this.actor.add(this.scrollView, { expand: true, x_fill: true, y_fill: true });
+
+        let box = new St.BoxLayout({
+            vertical: true,
+            x_expand: true,
+            reactive: true // Make box reactive too
+        });
+        this.scrollView.add_actor(box);
+
+        // EXTRA scroll stop on the box itself
+        box.connect('scroll-event', () => Clutter.EVENT_STOP);
+        this.scrollView.connect('scroll-event', () => Clutter.EVENT_STOP);
+
+        this.content = new St.Label({ style_class: 'netspeed-label-mono' });
+        this.content.clutter_text.set_use_markup(true);
+        box.add_actor(this.content);
+
+        // Smart Hover logic for panel itself
+        this.mouseIn = false;
+        this.actor.set_reactive(true);
+        this.actor.connect('enter-event', () => {
+            this.mouseIn = true;
+        });
+        this.actor.connect('leave-event', () => {
+            this.mouseIn = false;
+            this.handleHoverChange();
+        });
+    }
+
+    handleHoverChange() {
+        Mainloop.timeout_add(500, () => {
+            if (!this.applet.isHovering && !this.mouseIn) {
+                this.hide();
+            }
+        });
+    }
+
+    setTitle(text) {
+        this.title.set_text(text);
+    }
+
+    setText(text) {
+        this.content.clutter_text.set_markup(text);
+    }
+
+    show() {
+        // Position relative to applet
+        let [x, y] = this.applet.actor.get_transformed_position();
+        let [w, h] = this.applet.actor.get_transformed_size();
+        let [tw, th] = this.actor.get_transformed_size();
+
+        let posX = x + (w / 2) - (tw / 2);
+        // POSITION: Ensure no gap. 
+        // We put it exactly against the applet actor to ensure a seamless transition for the mouse.
+        let posY = y - th;
+
+        // Keep on screen
+        posX = Math.max(0, Math.min(posX, global.screen_width - tw));
+
+        this.actor.set_position(posX, posY);
+        this.actor.set_opacity(0);
+        this.actor.show();
+        this.actor.ease({
+            opacity: 255,
+            duration: 200,
+            mode: Clutter.AnimationMode.EASE_OUT_QUAD
+        });
+    }
+
+    hide() {
+        this.actor.ease({
+            opacity: 0,
+            duration: 200,
+            mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+            onComplete: () => this.actor.hide()
+        });
+    }
+
+    destroy() {
+        this.actor.destroy();
+    }
 }
 
 class NetSpeedApplet extends Applet.TextApplet {
@@ -115,7 +377,14 @@ class NetSpeedApplet extends Applet.TextApplet {
 
         this.metadata = metadata;
 
-        // Expose instance for the helper function
+        // Load custom stylesheet
+        try {
+            Main.theme_context.get_theme().load_stylesheet(metadata.path + "/stylesheet.css");
+        } catch (e) {
+            global.logError("Failed to load stylesheet: " + e);
+        }
+
+        // Expose instance for the helper function (Manual override support)
         global.netSpeedAppletInstance = this;
 
         // Settings
@@ -137,6 +406,10 @@ class NetSpeedApplet extends Applet.TextApplet {
             this.settings.bind("showSessionStats", "showSessionStats", this.onSettingsChanged);
             this.settings.bind("dailyLogRetention", "dailyLogRetention", this.onSettingsChanged);
             this.settings.bind("enableDailyLogging", "enableDailyLogging", this.onSettingsChanged);
+            this.settings.bind("enablePerAppMonitor", "enablePerAppMonitor", this.onSettingsChanged);
+            this.settings.bind("enableHighUsageAlerts", "enableHighUsageAlerts", this.onSettingsChanged);
+            this.settings.bind("highUsageThreshold", "highUsageThreshold", this.onSettingsChanged);
+            this.settings.bind("appletLanguage", "appletLanguage", this.onLanguageSettingChanged);
 
             // Advanced Settings
             this.settings.bind("showPing", "showPing", this.onSettingsChanged);
@@ -147,25 +420,34 @@ class NetSpeedApplet extends Applet.TextApplet {
             this.settings.bind("dataLimitUnit", "dataLimitUnit", this.onSettingsChanged);
             this.settings.bind("alertPercentage", "alertPercentage", this.onSettingsChanged);
             this.settings.bind("overrideInterface", "overrideInterface", this.onSettingsChanged);
-            this.settings.bind("appletLanguage", "appletLanguage", this.onSettingsChanged);
-            log("Settings bound successfully.");
         } catch (e) {
             logError("Failed to bind settings: " + e);
         }
 
         // Feature Initialization
+        this.customTooltip = new CustomTooltip(this);
+        this.processMonitor = new ProcessMonitor();
         this.currentPing = 0;
+        this.curDown = 0;
+        this.curUp = 0;
         this.viewMode = 0; // 0: Speed, 1: Session, 2: Daily
         this.pingLoopId = null;
         this.isHovering = false;
 
-        // Smart Ping: Track Hover State
+        // Smart Tooltip: Track Hover State
         this.actor.connect('enter-event', () => {
             this.isHovering = true;
             this.updatePing(); // Immediate ping on hover
+            this.updateTooltip();
+            this.customTooltip.show();
         });
         this.actor.connect('leave-event', () => {
             this.isHovering = false;
+            Mainloop.timeout_add(500, () => {
+                if (!this.isHovering && !this.customTooltip.mouseIn) {
+                    this.customTooltip.hide();
+                }
+            });
         });
 
         // Context Menu
@@ -190,6 +472,13 @@ class NetSpeedApplet extends Applet.TextApplet {
         });
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+        this.discoverTranslations();
+
+        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+        let openUserGuideItem = new Applet.MenuItem(_("User Guide"), "system-help-symbolic", () => this.openUserGuide());
+        this._applet_context_menu.addMenuItem(openUserGuideItem);
 
         let openLogItem = new Applet.MenuItem(_("Open Usage Log"), "text-x-generic-symbolic", () => this.openUsageLog());
         this._applet_context_menu.addMenuItem(openLogItem);
@@ -239,6 +528,106 @@ class NetSpeedApplet extends Applet.TextApplet {
         this.update();
     }
 
+    onLanguageSettingChanged() {
+        currentLanguage = this.appletLanguage;
+        log(`Language changed to: ${currentLanguage}`);
+
+
+        // Save current menu state if needed, but here we just rebuild the whole static part
+        this._applet_context_menu.removeAll();
+
+        let resetItem = new Applet.MenuItem(_("Reset Session Stats"), "view-refresh-symbolic", () => this.resetSessionCounters());
+        this._applet_context_menu.addMenuItem(resetItem);
+
+        let resetDailyItem = new Applet.MenuItem(_("Reset Today's Stats"), "edit-clear-all-symbolic", () => this.resetDailyStats());
+        this._applet_context_menu.addMenuItem(resetDailyItem);
+
+        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+        this.interfacesMenu = new PopupMenu.PopupSubMenuMenuItem(_("Select Interface"));
+        this._applet_context_menu.addMenuItem(this.interfacesMenu);
+        this.updateInterfacesMenu();
+
+        this.historyMenu = new PopupMenu.PopupSubMenuMenuItem(_("Usage History"));
+        this._applet_context_menu.addMenuItem(this.historyMenu);
+
+        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+        let openUserGuideItem = new Applet.MenuItem(_("User Guide"), "system-help-symbolic", () => this.openUserGuide());
+        this._applet_context_menu.addMenuItem(openUserGuideItem);
+
+        let openLogItem = new Applet.MenuItem(_("Open Usage Log"), "text-x-generic-symbolic", () => this.openUsageLog());
+        this._applet_context_menu.addMenuItem(openLogItem);
+
+        this.update();
+        this.updateTooltip();
+    }
+
+    discoverTranslations() {
+        try {
+            let poDirPath = this.metadata.path + "/po";
+            let poDir = Gio.File.new_for_path(poDirPath);
+
+            if (!poDir.query_exists(null)) return;
+
+            let enumerator = poDir.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
+            let info;
+            while ((info = enumerator.next_file(null)) !== null) {
+                let file = info.get_name();
+                if (file.endsWith(".po")) {
+                    let langCode = file.replace(".po", "");
+                    let [ok, content] = GLib.file_get_contents(poDirPath + "/" + file);
+                    if (ok) {
+                        try {
+                            // Try modern TextDecoder
+                            let decoder = new TextDecoder();
+                            translationsCache[langCode] = PoParser.parse(decoder.decode(content));
+                            log(`Loaded ${Object.keys(translationsCache[langCode]).length} strings for ${langCode}`);
+                        } catch (e) {
+                            // Fallback to ByteArray for older GJS
+                            translationsCache[langCode] = PoParser.parse(ByteArray.toString(content));
+                            log(`Loaded (legacy) ${Object.keys(translationsCache[langCode]).length} strings for ${langCode}`);
+                        }
+                    }
+                }
+            }
+            currentLanguage = this.appletLanguage;
+        } catch (e) {
+            logError("Failed to discover translations: " + e);
+        }
+    }
+
+    updateLanguageMenu() {
+        this.languageMenu.menu.removeAll();
+
+        // System Default
+        let systemItem = new PopupMenu.PopupMenuItem(_("System Default"));
+        if (this.appletLanguage === "SYSTEM") systemItem.setShowDot(true);
+        systemItem.connect('activate', () => {
+            this.appletLanguage = "SYSTEM";
+        });
+        this.languageMenu.menu.addMenuItem(systemItem);
+        this.languageMenu.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+        // Discovered Languages
+        let languages = Object.keys(translationsCache).sort();
+        languages.forEach(lang => {
+            let label = lang.toUpperCase();
+            // Friendly names for common languages
+            if (lang === "es") label = "Español";
+            else if (lang === "fr") label = "Français";
+            else if (lang === "hu") label = "Magyar";
+            else if (lang === "de") label = "Deutsch";
+
+            let item = new PopupMenu.PopupMenuItem(label);
+            if (this.appletLanguage === lang) item.setShowDot(true);
+            item.connect('activate', () => {
+                this.appletLanguage = lang;
+            });
+            this.languageMenu.menu.addMenuItem(item);
+        });
+    }
+
     startLoop() {
         if (this.loopId) {
             Mainloop.source_remove(this.loopId);
@@ -272,14 +661,15 @@ class NetSpeedApplet extends Applet.TextApplet {
     getAvailableInterfaces() {
         let interfaces = [];
         try {
-            let dir = GLib.dir_open("/sys/class/net", 0);
-            let file;
-            while ((file = dir.read_name()) !== null) {
+            let dir = Gio.File.new_for_path("/sys/class/net");
+            let enumerator = dir.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
+            let info;
+            while ((info = enumerator.next_file(null)) !== null) {
+                let file = info.get_name();
                 if (file !== "lo") {
                     interfaces.push(file);
                 }
             }
-            dir.close();
             // Sort nicely: eth0, wlan0...
             interfaces.sort();
         } catch (e) {
@@ -354,6 +744,15 @@ class NetSpeedApplet extends Applet.TextApplet {
             });
         } catch (e) {
             logError("Failed to update history menu: " + e);
+        }
+    }
+
+    openUserGuide() {
+        let path = this.metadata.path + "/user_guide.txt";
+        try {
+            GLib.spawn_command_line_async(`xdg-open "${path}"`);
+        } catch (e) {
+            Main.notify(_("Error opening User Guide"), e.message);
         }
     }
 
@@ -457,6 +856,13 @@ class NetSpeedApplet extends Applet.TextApplet {
             return `${(bytes / 1024).toFixed(0)} K`;
         }
         return `${bytes} B`;
+    }
+
+    formatBytesFixed(bytes) {
+        if (bytes >= 1073741824) return `${(bytes / 1073741824).toFixed(1)} GB/s`;
+        if (bytes >= 1048576) return `${(bytes / 1048576).toFixed(1)} MB/s`;
+        if (bytes >= 1024) return `${(bytes / 1024).toFixed(1)} KB/s`;
+        return `${bytes.toFixed(0)} B/s`;
     }
 
     resetSessionCounters() {
@@ -568,34 +974,53 @@ class NetSpeedApplet extends Applet.TextApplet {
     }
 
     updateTooltip() {
-        let tooltip = _("Network Speed");
+        let title = "";
+        let content = "";
 
-        // Add Data Plan Status
-        if (this.dataLimitType !== "None") {
-            let totalUsage = this.dailyRX + this.dailyTX;
-            let limitBytes = this.dataLimitValue * (this.dataLimitUnit === "GB" ? 1073741824 : 1048576);
-            let percentage = (totalUsage / limitBytes) * 100;
-            tooltip += `\n\n${_("Data Plan")} (${this.dataLimitType}):`;
-            tooltip += `\n  ${_("Used")}: ${percentage.toFixed(1)}% (${this.formatBytes(totalUsage)} / ${this.dataLimitValue}${this.dataLimitUnit})`;
+        const dArrow = '<span color="#00ff00">↓</span>';
+        const uArrow = '<span color="#ffaa00">↑</span>';
+
+        if (this.viewMode === 0) { // Speed Mode
+            title = _("Real-time Speed");
+            content = `${dArrow} ${this.formatBytesFixed(this.curDown).padEnd(15, ' ')}\n${uArrow} ${this.formatBytesFixed(this.curUp)}`;
+            if (this.showPing && this.currentPing > 0) {
+                content += `\n\n<span color="#aaaaaa">${_("Latency")}:</span> ${this.currentPing.toFixed(1)} ms`;
+            }
+        }
+        else if (this.viewMode === 1) { // Session Mode
+            title = _("Session Usage");
+            content = `${_("Interface")}: ${this.iface}\n\n`;
+            content += `${dArrow} ${this.formatBytes(this.sessionRX).padEnd(12, ' ')}\n${uArrow} ${this.formatBytes(this.sessionTX)}`;
+        }
+        else if (this.viewMode === 2) { // Daily Mode
+            title = _("Daily Usage");
+            content = `${_("Date")}: ${this.currentDate}\n\n`;
+            content += `${dArrow} ${this.formatBytes(this.dailyRX).padEnd(12, ' ')}\n${uArrow} ${this.formatBytes(this.dailyTX)}`;
+
+            if (this.dataLimitType !== "None") {
+                let totalUsage = this.dailyRX + this.dailyTX;
+                let limitBytes = this.dataLimitValue * (this.dataLimitUnit === "GB" ? 1073741824 : 1048576);
+                let percentage = (totalUsage / limitBytes) * 100;
+                content += `\n\n<span color="#aaaaaa">${_("Data Plan")}:</span> ${percentage.toFixed(1)}%`;
+            }
+        }
+        else if (this.viewMode === 3) { // Applications Mode
+            title = _("Applications");
+            if (this.processMonitor.topProcesses.length > 0) {
+                this.processMonitor.topProcesses.forEach(p => {
+                    let safeName = GLib.markup_escape_text(p.name, -1);
+                    let name = safeName.substring(0, 8).padEnd(10, ' ');
+                    let dStr = this.formatBytesFixed(p.rx).padStart(10, ' ');
+                    let uStr = this.formatBytesFixed(p.tx).padStart(10, ' ');
+                    content += `\n${name} ${dArrow}${dStr} ${uArrow}${uStr}`;
+                });
+            } else {
+                content = `\n${_("No active apps")}`;
+            }
         }
 
-        if (this.showSessionStats && this.iface) {
-            tooltip += `\n\n${_("Session")} (${this.iface}):`;
-            tooltip += `\n  ↓ ${this.formatBytes(this.sessionRX)}`;
-            tooltip += `\n  ↑ ${this.formatBytes(this.sessionTX)}`;
-
-            tooltip += `\n\n${_("Today")} (${this.currentDate}):`;
-            tooltip += `\n  ↓ ${this.formatBytes(this.dailyRX)}`;
-            tooltip += `\n  ↑ ${this.formatBytes(this.dailyTX)}`;
-        }
-
-        if (this.showPing && this.currentPing > 0) {
-            tooltip += `\n\n${_("Latency")}: ${this.currentPing.toFixed(1)} ms`;
-        }
-
-        tooltip += `\n\n${_("(Click to switch views)")}`;
-
-        this.set_applet_tooltip(tooltip);
+        this.customTooltip.setTitle(title);
+        this.customTooltip.setText(content);
     }
 
 
@@ -667,7 +1092,11 @@ class NetSpeedApplet extends Applet.TextApplet {
             } else {
                 text = `${_("Daily")}: ${downIcon}${dStr} ${upIcon}${uStr}`;
             }
+        } else if (this.viewMode === 3) { // Applications Count View
+            let count = this.processMonitor.activeAppCount;
+            text = `${count} ${_("apps")}`;
         }
+
 
         // Apply Data Limit Alert
         if (this.dataLimitType !== "None") {
@@ -731,11 +1160,23 @@ class NetSpeedApplet extends Applet.TextApplet {
         // For simplicity, we call it here but it's async
         if (this.showPing) this.updatePing();
 
+        // Update Tip with process monitor
+        if (this.enablePerAppMonitor || this.viewMode === 3 || this.enableHighUsageAlerts) {
+            this.processMonitor.enableHighUsageAlerts = this.enableHighUsageAlerts;
+            this.processMonitor.highUsageThreshold = this.highUsageThreshold;
+            this.processMonitor.update(() => this.updateTooltip());
+        }
+
         // Update tooltip with new stats
         this.updateTooltip();
 
-        let down = rxDiff / dt / 1024;
-        let up = txDiff / dt / 1024;
+        let downRate = rxDiff / dt;
+        let upRate = txDiff / dt;
+        this.curDown = downRate;
+        this.curUp = upRate;
+
+        let down = downRate / 1024;
+        let up = upRate / 1024;
 
         this.updateLabel(down, up);
 
@@ -748,8 +1189,8 @@ class NetSpeedApplet extends Applet.TextApplet {
     }
 
     on_applet_clicked(event) {
-        // Toggle view mode: Speed -> Session -> Daily -> Speed
-        this.viewMode = (this.viewMode + 1) % 3;
+        // Toggle view mode: Speed -> Session -> Daily -> Apps -> Speed
+        this.viewMode = (this.viewMode + 1) % 4;
         // Immediate update to show change
         this.update();
     }
@@ -795,9 +1236,6 @@ class NetSpeedApplet extends Applet.TextApplet {
         log("Save Settings & Reload requested...");
         this.update();
 
-        // Force language reload locally
-        this.onLanguageChanged();
-
         // Reload the applet via DBus
         Mainloop.timeout_add(300, () => {
             try {
@@ -823,6 +1261,7 @@ class NetSpeedApplet extends Applet.TextApplet {
         if (this.loopId) {
             Mainloop.source_remove(this.loopId);
         }
+        this.customTooltip.destroy();
         this.saveDailyUsage();
         this.settings.finalize();
     }
