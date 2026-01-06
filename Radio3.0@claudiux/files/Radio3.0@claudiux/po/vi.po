@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Radio3.0@claudiux 3.8.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2025-10-11 12:31+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-06 00:15+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -17,140 +18,193 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:286
+#. applet.js:287
 msgid "unassigned"
 msgstr "chưa gán"
 
-#. applet.js:287
+#. applet.js:288
 msgid "Display Album Art at full size"
 msgstr "Hiển thị ảnh bìa album ở kích thước đầy đủ"
 
-#. applet.js:389
+#. applet.js:390
 msgid "This is your own list of Categories and Radio Stations."
 msgstr "Đây là danh sách các thể loại và đài phát thanh của bạn."
 
-#. applet.js:390
+#. applet.js:391
 msgid "You can add more using the [+] button."
 msgstr "Bạn có thể thêm bằng nút [+]."
 
-#. applet.js:391
+#. applet.js:392
 msgid "For a category, fill in only its name; leave the other fields empty."
 msgstr "Với thể loại, chỉ điền tên; để trống các trường khác."
 
-#. applet.js:392
+#. applet.js:393
 msgid "For a radio station, enter only its name and its streaming URL."
 msgstr "Với đài phát thanh, chỉ nhập tên và URL streaming."
 
-#. applet.js:393
-msgid "You can order the rows by dragging and dropping or by using the buttons and tools below the list."
-msgstr "Bạn có thể sắp xếp các dòng bằng kéo thả hoặc dùng các nút và công cụ bên dưới danh sách."
-
 #. applet.js:394
-msgid "The buttons on the right below the list allow you to navigate page by page or category by category."
-msgstr "Các nút bên phải dưới danh sách cho phép duyệt theo trang hoặc theo thể loại."
+msgid ""
+"You can order the rows by dragging and dropping or by using the buttons and "
+"tools below the list."
+msgstr ""
+"Bạn có thể sắp xếp các dòng bằng kéo thả hoặc dùng các nút và công cụ bên "
+"dưới danh sách."
 
 #. applet.js:395
-msgid "To search for one of your stations, click on the list and start writing its name."
-msgstr "Để tìm đài, bấm vào danh sách và bắt đầu nhập tên."
+msgid ""
+"The buttons on the right below the list allow you to navigate page by page "
+"or category by category."
+msgstr ""
+"Các nút bên phải dưới danh sách cho phép duyệt theo trang hoặc theo thể loại."
 
 #. applet.js:396
-msgid "To easily add stations to your list, use the following 2 tabs: Search and Import."
-msgstr "Để dễ thêm đài, dùng 2 tab sau: Tìm kiếm và Nhập khẩu."
+msgid ""
+"To search for one of your stations, click on the list and start writing its "
+"name."
+msgstr "Để tìm đài, bấm vào danh sách và bắt đầu nhập tên."
 
 #. applet.js:397
+msgid ""
+"To easily add stations to your list, use the following 2 tabs: Search and "
+"Import."
+msgstr "Để dễ thêm đài, dùng 2 tab sau: Tìm kiếm và Nhập khẩu."
+
+#. applet.js:398
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr "Chọn hộp 'Menu' để hiển thị đài hoặc thể loại trong menu."
 
-#. applet.js:398
-msgid "Check its '♪/➟' box to listen to the station or move it to another category using the tools below the list."
-msgstr "Chọn hộp '♪/➟' để nghe đài hoặc di chuyển nó sang thể loại khác bằng công cụ bên dưới."
+#. applet.js:399
+msgid ""
+"Check its '♪/➟' box to listen to the station or move it to another category "
+"using the tools below the list."
+msgstr ""
+"Chọn hộp '♪/➟' để nghe đài hoặc di chuyển nó sang thể loại khác bằng công cụ "
+"bên dưới."
 
-#. applet.js:400
+#. applet.js:401
 msgid "You can have your list of stations checked by internet databases."
 msgstr "Bạn có thể kiểm tra danh sách đài của mình qua cơ sở dữ liệu internet."
 
-#. applet.js:401
-msgid "Any station recognized by one of these databases will receive a Universal Unique Identifier (UUID) provided by this database."
-msgstr "Bất kỳ đài nào được cơ sở dữ liệu nhận diện sẽ nhận UUID (Mã định danh duy nhất toàn cầu) từ cơ sở dữ liệu đó."
-
 #. applet.js:402
-msgid "So, if a streaming URL was changed, a next check would update it and you can continue to listen to the affected station."
-msgstr "Nếu URL streaming thay đổi, lần kiểm tra tiếp theo sẽ cập nhật và bạn có thể tiếp tục nghe đài đó."
+msgid ""
+"Any station recognized by one of these databases will receive a Universal "
+"Unique Identifier (UUID) provided by this database."
+msgstr ""
+"Bất kỳ đài nào được cơ sở dữ liệu nhận diện sẽ nhận UUID (Mã định danh duy "
+"nhất toàn cầu) từ cơ sở dữ liệu đó."
 
-#. applet.js:404
-msgid "Here you can search for other stations in a free radio database accessible via the Internet."
-msgstr "Bạn có thể tìm các đài khác trong cơ sở dữ liệu radio miễn phí qua Internet."
+#. applet.js:403
+msgid ""
+"So, if a streaming URL was changed, a next check would update it and you can "
+"continue to listen to the affected station."
+msgstr ""
+"Nếu URL streaming thay đổi, lần kiểm tra tiếp theo sẽ cập nhật và bạn có thể "
+"tiếp tục nghe đài đó."
 
 #. applet.js:405
-msgid "Fill in at least a few fields of the form below then click on the 'Search ...' button."
-msgstr "Điền ít nhất vài trường trong form dưới đây rồi bấm nút 'Tìm kiếm ...'."
+msgid ""
+"Here you can search for other stations in a free radio database accessible "
+"via the Internet."
+msgstr ""
+"Bạn có thể tìm các đài khác trong cơ sở dữ liệu radio miễn phí qua Internet."
 
 #. applet.js:406
-msgid "Each time this button is clicked, a new results page is displayed in the second part of this page, where you can test certain stations and include them in the menu."
-msgstr "Mỗi lần bấm nút này, một trang kết quả mới hiển thị ở phần hai của trang, nơi bạn có thể thử một số đài và thêm vào menu."
+msgid ""
+"Fill in at least a few fields of the form below then click on the "
+"'Search ...' button."
+msgstr ""
+"Điền ít nhất vài trường trong form dưới đây rồi bấm nút 'Tìm kiếm ...'."
 
 #. applet.js:407
-msgid "A station already in your menu will only appear in search results if its streaming URL has changed."
-msgstr "Đài đã có trong menu chỉ xuất hiện trong kết quả tìm kiếm nếu URL streaming của nó thay đổi."
+msgid ""
+"Each time this button is clicked, a new results page is displayed in the "
+"second part of this page, where you can test certain stations and include "
+"them in the menu."
+msgstr ""
+"Mỗi lần bấm nút này, một trang kết quả mới hiển thị ở phần hai của trang, "
+"nơi bạn có thể thử một số đài và thêm vào menu."
 
 #. applet.js:408
-msgid "When no new page appears, it means that all results matching your search criteria have been displayed."
-msgstr "Khi không xuất hiện trang mới, nghĩa là tất cả kết quả phù hợp với tiêu chí tìm kiếm đã hiển thị."
+msgid ""
+"A station already in your menu will only appear in search results if its "
+"streaming URL has changed."
+msgstr ""
+"Đài đã có trong menu chỉ xuất hiện trong kết quả tìm kiếm nếu URL streaming "
+"của nó thay đổi."
 
-#. applet.js:410
-msgid "You can import a file containing the name and streaming URL of at least one radio station."
-msgstr "Bạn có thể nhập một file chứa tên và URL streaming của ít nhất một đài."
+#. applet.js:409
+msgid ""
+"When no new page appears, it means that all results matching your search "
+"criteria have been displayed."
+msgstr ""
+"Khi không xuất hiện trang mới, nghĩa là tất cả kết quả phù hợp với tiêu chí "
+"tìm kiếm đã hiển thị."
 
 #. applet.js:411
-msgid "These radio stations are displayed in the list below. You can test them by checking their ♪ box."
-msgstr "Các đài này hiển thị trong danh sách dưới. Bạn có thể thử bằng cách chọn hộp ♪ của chúng."
+msgid ""
+"You can import a file containing the name and streaming URL of at least one "
+"radio station."
+msgstr ""
+"Bạn có thể nhập một file chứa tên và URL streaming của ít nhất một đài."
 
 #. applet.js:412
+msgid ""
+"These radio stations are displayed in the list below. You can test them by "
+"checking their ♪ box."
+msgstr ""
+"Các đài này hiển thị trong danh sách dưới. Bạn có thể thử bằng cách chọn hộp "
+"♪ của chúng."
+
+#. applet.js:413
 msgid "Then manage this list with the buttons at the bottom of this tab."
 msgstr "Sau đó quản lý danh sách này bằng các nút ở dưới tab này."
 
-#. applet.js:414
-msgid "In the Shoutcast directory, click the download button to the left of the station name."
+#. applet.js:415
+msgid ""
+"In the Shoutcast directory, click the download button to the left of the "
+"station name."
 msgstr "Trong thư mục Shoutcast, bấm nút tải về bên trái tên đài."
 
-#. applet.js:415
-msgid "Select the open format (.XSPF) and save the file giving it the same name as the station."
+#. applet.js:416
+msgid ""
+"Select the open format (.XSPF) and save the file giving it the same name as "
+"the station."
 msgstr "Chọn định dạng mở (.XSPF) và lưu file với tên giống tên đài."
 
-#. applet.js:416
+#. applet.js:417
 msgid "This file can then be imported here."
 msgstr "File này sau đó có thể được nhập vào đây."
 
-#. applet.js:418
+#. applet.js:419
 #, javascript-format
 msgid "%s bytes = %s GB = %s GiB"
 msgstr "%s byte = %s GB = %s GiB"
 
-#. applet.js:420
+#. applet.js:421
 msgid "Sun."
 msgstr "CN."
 
-#. applet.js:420
+#. applet.js:421
 msgid "Mon."
 msgstr "T2."
 
-#. applet.js:420
+#. applet.js:421
 msgid "Tue."
 msgstr "T3."
 
-#. applet.js:420
+#. applet.js:421
 msgid "Wed."
 msgstr "T4."
 
-#. applet.js:420
+#. applet.js:421
 msgid "Thu."
 msgstr "T5."
 
-#. applet.js:420
+#. applet.js:421
 msgid "Fri."
 msgstr "T6."
 
-#. applet.js:420
+#. applet.js:421
 msgid "Sat."
 msgstr "T7."
 
@@ -162,228 +216,228 @@ msgstr "T7."
 #. settings-schema.json->search-order->options
 #. settings-schema.json->alarm-clock-working-days-radio->options
 #. settings-schema.json->alarm-clock-workoff-days-radio->options
-#. applet.js:586 applet.js:604 applet.js:5511 applet.js:5527
+#. applet.js:587 applet.js:605 applet.js:5563 applet.js:5579
 msgid "(Undefined)"
 msgstr "(Chưa xác định)"
 
 #. settings-schema.json->category-to-move->options
-#. applet.js:587 applet.js:5528
+#. applet.js:588 applet.js:5580
 msgid "(Blacklist)"
 msgstr "(Danh sách đen)"
 
-#. applet.js:2263
+#. applet.js:2286
 msgid "Start"
 msgstr "Bắt đầu"
 
-#. applet.js:2271 applet.js:3014
+#. applet.js:2294 applet.js:3053
 msgid "Stop"
 msgstr "Dừng"
 
-#. applet.js:2545
+#. applet.js:2568
 msgid "Volume: %s%"
 msgstr "Âm lượng: %s%"
 
-#. applet.js:2550
+#. applet.js:2573
 msgid "Middle-Click: Stop Recording"
 msgstr "Nhấp giữa: Dừng ghi âm"
 
-#. applet.js:2552
+#. applet.js:2575
 msgid "Middle-click: ON/OFF"
 msgstr "Nhấp giữa: BẬT/TẮT"
 
-#. applet.js:2554
+#. applet.js:2577
 msgid "Click: Select another station"
 msgstr "Nhấp: Chọn đài khác"
 
-#. applet.js:2555
+#. applet.js:2578
 msgid "Scroll wheel: volume change"
 msgstr "Cuộn chuột: thay đổi âm lượng"
 
-#. applet.js:2558
+#. applet.js:2581
 msgid "Click to select a station"
 msgstr "Nhấp để chọn đài"
 
-#. applet.js:2564
+#. applet.js:2587
 msgid "Wake Up"
 msgstr "Đánh thức"
 
-#. applet.js:2642 applet.js:3032 applet.js:5023
+#. applet.js:2671 applet.js:3071 applet.js:5076
 msgid "Configure..."
 msgstr "Cấu hình..."
 
-#. applet.js:2646 applet.js:3024
+#. applet.js:2675 applet.js:3063
 msgid "Search for new stations..."
 msgstr "Tìm đài mới..."
 
-#. applet.js:2652
+#. applet.js:2681
 msgid "Load a sample station list"
 msgstr "Tải danh sách đài mẫu"
 
-#. applet.js:2699 applet.js:3036 applet.js:5093
+#. applet.js:2728 applet.js:3075 applet.js:5146
 msgid "Sound Settings"
 msgstr "Cài đặt âm thanh"
 
-#. applet.js:2770
+#. applet.js:2809
 msgid "Watch on YT"
 msgstr "Xem trên YT"
 
-#. applet.js:2777
+#. applet.js:2816
 msgid "Try to download it from YT (unsafe)"
 msgstr "Thử tải từ YT (không an toàn)"
 
-#. applet.js:2797
+#. applet.js:2836
 msgid "Recently Played Stations:"
 msgstr "Đài đã nghe gần đây:"
 
-#. applet.js:2848
+#. applet.js:2887
 msgid "Visit the home page of this station"
 msgstr "Truy cập trang chủ đài này"
 
-#. applet.js:2897
+#. applet.js:2936
 msgid "Categories"
 msgstr "Thể loại"
 
-#. applet.js:2900
+#. applet.js:2939
 msgid "Radio Stations"
 msgstr "Đài phát thanh"
 
-#. applet.js:2911
+#. applet.js:2950
 msgid "All Categories"
 msgstr "Tất cả thể loại"
 
-#. applet.js:2956
+#. applet.js:2995
 msgid "My Radio Stations"
 msgstr "Đài của tôi"
 
-#. applet.js:3156
+#. applet.js:3195
 msgid "Downloading..."
 msgstr "Đang tải về..."
 
-#. applet.js:3158
+#. applet.js:3197
 msgid "Stop downloading"
 msgstr "Dừng tải về"
 
-#. applet.js:3264
+#. applet.js:3303
 msgid "Download complete"
 msgstr "Tải xong"
 
 #. settings-schema.json->button-open-rec-folder->description
 #. settings-schema.json->recordings-open-folder->description
-#. applet.js:3266 applet.js:3275 applet.js:4743 applet.js:4752 applet.js:4761
-#. applet.js:5056
+#. applet.js:3305 applet.js:3314 applet.js:4794 applet.js:4803 applet.js:4812
+#. applet.js:5109
 msgid "Open the recordings folder"
 msgstr "Mở thư mục ghi âm"
 
-#. applet.js:3273 applet.js:4740 applet.js:4750 applet.js:4759
+#. applet.js:3312 applet.js:4791 applet.js:4801 applet.js:4810
 msgid "An error seems to have occurred during recording!"
 msgstr "Có vẻ đã xảy ra lỗi trong quá trình ghi âm!"
 
-#. applet.js:3274 applet.js:4742 applet.js:4751 applet.js:4760
+#. applet.js:3313 applet.js:4793 applet.js:4802 applet.js:4811
 msgid "Please check this record."
 msgstr "Vui lòng kiểm tra bản ghi này."
 
-#. applet.js:3381 applet.js:3415
+#. applet.js:3421 applet.js:3455
 msgid "Record from now"
 msgstr "Ghi âm từ bây giờ"
 
-#. applet.js:3399 applet.js:5413
+#. applet.js:3439 applet.js:5465
 msgid "Stop Current Recording"
 msgstr "Dừng ghi âm hiện tại"
 
-#. applet.js:3548
+#. applet.js:3596
 #, javascript-format
 msgid "Playing %s%s"
 msgstr "Đang phát %s%s"
 
-#. applet.js:3602
+#. applet.js:3650
 msgid "Radio OFF"
 msgstr "Radio TẮT"
 
-#. applet.js:3730
+#. applet.js:3778
 msgid "Unable to record anything!"
 msgstr "Không thể ghi âm!"
 
-#. applet.js:3730 applet.js:5073 applet.js:5232
+#. applet.js:3778 applet.js:5126 applet.js:5285
 msgid "Insufficient space"
 msgstr "Không đủ dung lượng"
 
-#. applet.js:3730
+#. applet.js:3778
 msgid "The limit you set has been reached."
 msgstr "Giới hạn bạn đặt đã đạt."
 
-#. applet.js:4131
+#. applet.js:4180
 msgid "Please Log Out then Log In"
 msgstr "Vui lòng đăng xuất rồi đăng nhập lại"
 
-#. applet.js:4131
+#. applet.js:4180
 msgid "to finalize yt-dlp update"
 msgstr "để hoàn tất cập nhật yt-dlp"
 
-#. applet.js:4266
+#. applet.js:4316
 msgid "Nothing to save."
 msgstr "Không có gì để lưu."
 
-#. applet.js:4279
+#. applet.js:4329
 msgid "List of saved radio stations"
 msgstr "Danh sách các đài đã lưu"
 
-#. applet.js:4297
+#. applet.js:4347
 msgid "This will replace all current radio stations."
 msgstr "Hành động này sẽ thay thế tất cả các đài hiện có."
 
-#. applet.js:4298
+#. applet.js:4348
 msgid "Are you sure you want to continue?"
 msgstr "Bạn có chắc muốn tiếp tục không?"
 
-#. applet.js:4362
+#. applet.js:4413
 msgid "Update in progress"
 msgstr "Đang cập nhật"
 
-#. applet.js:4362
+#. applet.js:4413
 msgid "It may take a while ... Please wait."
 msgstr "Quá trình có thể mất một lúc ... Vui lòng chờ."
 
-#. applet.js:4454
+#. applet.js:4505
 msgid "Update completed successfully"
 msgstr "Cập nhật hoàn tất thành công"
 
-#. applet.js:4625 applet.js:4681
+#. applet.js:4676 applet.js:4732
 msgid "ERROR: Invalid YT video URL!"
 msgstr "LỖI: URL video YT không hợp lệ!"
 
-#. applet.js:4650
+#. applet.js:4701
 msgid "Unable to extract a single soundtrack"
 msgstr "Không thể trích xuất nhạc nền đơn lẻ"
 
-#. applet.js:4650
+#. applet.js:4701
 msgid "Maybe it's a playlist?"
 msgstr "Có thể đây là một danh sách phát?"
 
-#. applet.js:4683
+#. applet.js:4734
 msgid "Close"
 msgstr "Đóng"
 
-#. applet.js:4841 applet.js:5300 applet.js:5318
+#. applet.js:4892 applet.js:5353 applet.js:5371
 msgid "Cancel"
 msgstr "Hủy"
 
-#. applet.js:4842
+#. applet.js:4893
 msgid "Radio3.0 applet"
 msgstr "Applet Radio 3.0"
 
-#. applet.js:4845
+#. applet.js:4896
 msgid "Enable the OSD150 extension"
 msgstr "Bật tiện ích mở rộng OSD150"
 
-#. applet.js:4846
+#. applet.js:4897
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr "Để có OSD ngang, bạn cần bật tiện ích mở rộng OSD150."
 
-#. applet.js:4863
+#. applet.js:4914
 msgid "Download the OSD150 extension"
 msgstr "Tải tiện ích mở rộng OSD150"
 
-#. applet.js:4864
+#. applet.js:4915
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
@@ -391,162 +445,168 @@ msgstr ""
 "Để có OSD ngang, bạn cần tải tiện ích mở rộng OSD150.\n"
 "Nhấp nút Tải về, tìm OSD150 và chọn nút ⬇."
 
-#. applet.js:4995
+#. applet.js:5048
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Xóa '%s'"
 
-#. applet.js:5003
+#. applet.js:5056
 msgid "About..."
 msgstr "Giới thiệu..."
 
-#. applet.js:5010
+#. applet.js:5063
 msgid "Manual..."
 msgstr "Hướng dẫn..."
 
-#. applet.js:5017
+#. applet.js:5070
 msgid "Reload this applet"
 msgstr "Tải lại applet này"
 
-#. applet.js:5034
+#. applet.js:5087
 msgid "Schedule a background record..."
 msgstr "Lên lịch ghi âm nền..."
 
-#. applet.js:5041
+#. applet.js:5094
 msgid "Configure the Alarm Clock..."
 msgstr "Cấu hình Đồng hồ báo thức..."
 
-#. applet.js:5048
+#. applet.js:5101
 msgid "Extract soundtrack from YouTube video..."
 msgstr "Trích xuất nhạc nền từ video YouTube..."
 
-#. applet.js:5070 applet.js:5229
+#. applet.js:5123 applet.js:5282
 msgid "(auto)"
 msgstr "(tự động)"
 
-#. applet.js:5070 applet.js:5229
+#. applet.js:5123 applet.js:5282
 msgid "(manual)"
 msgstr "(thủ công)"
 
-#. applet.js:5073 applet.js:5232 applet.js:5460
+#. applet.js:5126 applet.js:5285 applet.js:5512
 msgid "Stop Recording"
 msgstr "Dừng ghi âm"
 
-#. applet.js:5073 applet.js:5232
+#. applet.js:5126 applet.js:5285
 msgid "Start Recording"
 msgstr "Bắt đầu ghi âm"
 
-#. applet.js:5089
+#. applet.js:5142
 msgid "Cancel downloads from YT"
 msgstr "Hủy tải từ YT"
 
-#. applet.js:5098
+#. applet.js:5151
 msgid "Pulse Effects"
 msgstr "Hiệu ứng nhịp"
 
-#. applet.js:5103
+#. applet.js:5156
 msgid "Easy Effects"
 msgstr "Hiệu ứng đơn giản"
 
-#. applet.js:5108
+#. applet.js:5161
 msgid "Radio ON at startup"
 msgstr "Bật Radio khi khởi động"
 
-#. applet.js:5117
+#. applet.js:5170
 msgid "Display Station Logo"
 msgstr "Hiển thị Logo Đài"
 
-#. applet.js:5127
+#. applet.js:5180
 msgid "Album Art desklet settings"
 msgstr "Cài đặt desklet Album Art"
 
 #. settings-schema.json->alarm-clock-wake-me-up->description
-#. applet.js:5132
+#. applet.js:5185
 msgid "Wake me up!"
 msgstr "Đánh thức tôi!"
 
-#. applet.js:5141
+#. applet.js:5194
 msgid "Show Album Art on desktop"
 msgstr "Hiển thị Album Art trên màn hình"
 
 #. settings-schema.json->dont-check-dependencies->description
-#. applet.js:5150
+#. applet.js:5203
 msgid "Do not check about dependencies"
 msgstr "Không kiểm tra các phụ thuộc"
 
 #. settings-schema.json->show-volume-level-near-icon->description
-#. applet.js:5160
+#. applet.js:5213
 msgid "Display volume level near icon"
 msgstr "Hiển thị mức âm lượng gần biểu tượng"
 
-#. applet.js:5297
+#. applet.js:5350
 msgid "You need the 'Album Art 3.0' desklet"
 msgstr "Bạn cần desklet 'Album Art 3.0'"
 
-#. applet.js:5298
-msgid "You can install it by clicking on the first button and then searching for Album."
+#. applet.js:5351
+msgid ""
+"You can install it by clicking on the first button and then searching for "
+"Album."
 msgstr "Bạn có thể cài đặt bằng cách nhấp nút đầu tiên rồi tìm 'Album'."
 
-#. applet.js:5299 applet.js:5317
+#. applet.js:5352 applet.js:5370
 msgid "Desklets"
 msgstr "Desklet"
 
-#. applet.js:5315
+#. applet.js:5368
 msgid "You need to activate the 'Album Art 3.0' desklet"
 msgstr "Bạn cần kích hoạt desklet 'Album Art 3.0'"
 
-#. applet.js:5316
-msgid "You can activate it by clicking on the first button, then searching for Album and adding it with button [+]."
-msgstr "Bạn có thể kích hoạt bằng cách nhấp nút đầu tiên, tìm 'Album' và thêm bằng nút [+]."
+#. applet.js:5369
+msgid ""
+"You can activate it by clicking on the first button, then searching for "
+"Album and adding it with button [+]."
+msgstr ""
+"Bạn có thể kích hoạt bằng cách nhấp nút đầu tiên, tìm 'Album' và thêm bằng "
+"nút [+]."
 
-#. applet.js:5461
+#. applet.js:5513
 msgid "Close without stopping recording"
 msgstr "Đóng mà không dừng ghi âm"
 
-#. applet.js:5676
+#. applet.js:5729
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr "Bắt đầu ghi âm từ %s:%s đến %s:%s"
 
-#. applet.js:5688
+#. applet.js:5741
 msgid "Recording completed"
 msgstr "Ghi âm hoàn tất"
 
-#. applet.js:5813
+#. applet.js:5867
 msgid "This will import a new file containing radio stations."
 msgstr "Hành động này sẽ nhập một tập tin mới chứa các đài radio."
 
-#. applet.js:5814
+#. applet.js:5868
 msgid "Do you want to continue?"
 msgstr "Bạn có muốn tiếp tục không?"
 
-#. applet.js:5891
+#. applet.js:5945
 msgid "No new radio in your list."
 msgstr "Không có đài mới trong danh sách của bạn."
 
-#. applet.js:5893
+#. applet.js:5947
 msgid "One more radio in your list."
 msgstr "Thêm một đài mới vào danh sách của bạn."
 
-#. applet.js:5895
+#. applet.js:5949
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr "%s đài nữa trong danh sách của bạn."
 
-#. applet.js:6154
+#. applet.js:6209
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr "Không có đài mới nào để thêm vào menu applet Radio3.0"
 
-#. applet.js:6156
+#. applet.js:6211
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr "Một đài mới đã được thêm vào menu applet Radio3.0"
 
-#. applet.js:6158
+#. applet.js:6213
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr "%s đài mới đã được thêm vào menu applet Radio3.0"
 
-#. applet.js:6383
+#. applet.js:6438
 #, javascript-format
 msgid "%s kbps"
 msgstr "%s kbps"
@@ -561,8 +621,11 @@ msgid "All dependencies are installed"
 msgstr "Tất cả các phụ thuộc đã được cài đặt"
 
 #. lib/checkDependencies.js:430
-msgid "You appear to be missing some of the programs required for this applet to have all its features."
-msgstr "Có vẻ bạn thiếu một số chương trình cần thiết để applet này hoạt động đầy đủ."
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Có vẻ bạn thiếu một số chương trình cần thiết để applet này hoạt động đầy đủ."
 
 #. lib/checkDependencies.js:431
 msgid "Please execute, in the just opened terminal, the commands:"
@@ -575,6 +638,10 @@ msgstr "Một số phụ thuộc chưa được cài đặt!"
 #. lib/checkTranslations.js:109
 msgid "To finalize the translation installation, please restart Cinnamon"
 msgstr "Để hoàn tất cài đặt bản dịch, vui lòng khởi động lại Cinnamon"
+
+#. lib/messageTray.js:1136
+msgid "System Information"
+msgstr ""
 
 #. lib/util.js:245
 #, javascript-format
@@ -633,55 +700,79 @@ msgstr "Tập tin JSON"
 msgid "Select a JSON file to import"
 msgstr "Chọn tập tin JSON để nhập"
 
-#. xs/bin/R3TreeListWidgets.py:278 xs/bin/R3TreeListWidgets.py:501
+#. xs/bin/R3SettingsWidgets.py:174
+#, fuzzy
+msgid "Checking dependencies"
+msgstr "Không kiểm tra các phụ thuộc"
+
+#. xs/bin/R3SettingsWidgets.py:175
+#, python-format
+msgid "Please install: %s"
+msgstr ""
+
+#. xs/bin/R3SettingsWidgets.py:374
+#, fuzzy
+msgid "_Cancel"
+msgstr "Hủy"
+
+#. xs/bin/R3SettingsWidgets.py:375
+msgid "_Open"
+msgstr ""
+
+#. xs/bin/R3SettingsWidgets.py:388
+#, fuzzy
+msgid "Sound files"
+msgstr "Tập tin JSON"
+
+#. xs/bin/R3TreeListWidgets.py:279 xs/bin/R3TreeListWidgets.py:502
 msgid "Add new entry"
 msgstr "Thêm mục mới"
 
-#. xs/bin/R3TreeListWidgets.py:282
+#. xs/bin/R3TreeListWidgets.py:283
 msgid "Remove selected entry"
 msgstr "Xóa mục đã chọn"
 
-#. xs/bin/R3TreeListWidgets.py:287
+#. xs/bin/R3TreeListWidgets.py:288
 msgid "Edit selected entry"
 msgstr "Chỉnh sửa mục đã chọn"
 
-#. xs/bin/R3TreeListWidgets.py:292
+#. xs/bin/R3TreeListWidgets.py:293
 msgid "Unselect the selected row"
 msgstr "Bỏ chọn hàng đã chọn"
 
-#. xs/bin/R3TreeListWidgets.py:297
+#. xs/bin/R3TreeListWidgets.py:298
 msgid "Move selected entry up"
 msgstr "Di chuyển mục đã chọn lên trên"
 
-#. xs/bin/R3TreeListWidgets.py:302
+#. xs/bin/R3TreeListWidgets.py:303
 msgid "Move selected entry down"
 msgstr "Di chuyển mục đã chọn xuống dưới"
 
-#. xs/bin/R3TreeListWidgets.py:325
+#. xs/bin/R3TreeListWidgets.py:326
 msgid "Go to bottom"
 msgstr "Chuyển xuống cuối"
 
-#. xs/bin/R3TreeListWidgets.py:331
+#. xs/bin/R3TreeListWidgets.py:332
 msgid "Go to next page"
 msgstr "Chuyển sang trang tiếp theo"
 
-#. xs/bin/R3TreeListWidgets.py:337
+#. xs/bin/R3TreeListWidgets.py:338
 msgid "Go to previous page"
 msgstr "Quay về trang trước"
 
-#. xs/bin/R3TreeListWidgets.py:342
+#. xs/bin/R3TreeListWidgets.py:343
 msgid "Go to top"
 msgstr "Chuyển lên đầu"
 
-#. xs/bin/R3TreeListWidgets.py:356
+#. xs/bin/R3TreeListWidgets.py:357
 msgid "Go to next category"
 msgstr "Chuyển sang mục tiếp theo"
 
-#. xs/bin/R3TreeListWidgets.py:366
+#. xs/bin/R3TreeListWidgets.py:367
 msgid "Go to previous category"
 msgstr "Quay về mục trước"
 
-#. xs/bin/R3TreeListWidgets.py:503
+#. xs/bin/R3TreeListWidgets.py:504
 msgid "Edit entry"
 msgstr "Chỉnh sửa mục"
 
@@ -902,7 +993,8 @@ msgid "Show help labels in each tab of this Settings window"
 msgstr "Hiển thị nhãn trợ giúp ở mỗi tab của cửa sổ Cài đặt này"
 
 #. settings-schema.json->show-help-in-tabs->tooltip
-msgid "You can uncheck this option when you are familiar with all of these settings."
+msgid ""
+"You can uncheck this option when you are familiar with all of these settings."
 msgstr "Bạn có thể bỏ chọn tùy chọn này khi đã quen với tất cả các cài đặt."
 
 #. settings-schema.json->stations-help->description
@@ -1102,8 +1194,12 @@ msgid "Vertical maximization"
 msgstr "Mở rộng chiều dọc"
 
 #. settings-schema.json->maximize-vertically->tooltip
-msgid "When this option is checked, this Settings Window will be maximized vertically the next time it is opened."
-msgstr "Khi tùy chọn này được chọn, cửa sổ Cài đặt sẽ được mở rộng theo chiều dọc lần tiếp theo mở."
+msgid ""
+"When this option is checked, this Settings Window will be maximized "
+"vertically the next time it is opened."
+msgstr ""
+"Khi tùy chọn này được chọn, cửa sổ Cài đặt sẽ được mở rộng theo chiều dọc "
+"lần tiếp theo mở."
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
@@ -1111,13 +1207,16 @@ msgstr "Bật radio khi Cinnamon khởi động"
 
 #. settings-schema.json->switch-on-last-station-at-start-up->tooltip
 msgid ""
-"The selected radio will be the last you listened to, even if you stopped it.\n"
+"The selected radio will be the last you listened to, even if you stopped "
+"it.\n"
 "\n"
-"VPN users: By checking this, the radio broadcast could use your VPN link in the event that this one is active before the start of this applet."
+"VPN users: By checking this, the radio broadcast could use your VPN link in "
+"the event that this one is active before the start of this applet."
 msgstr ""
 "Đài được chọn sẽ là đài bạn nghe gần nhất, ngay cả khi bạn đã dừng.\n"
 "\n"
-"Người dùng VPN: Khi chọn tùy chọn này, phát sóng radio có thể sử dụng đường dẫn VPN nếu nó đang hoạt động trước khi applet này bắt đầu."
+"Người dùng VPN: Khi chọn tùy chọn này, phát sóng radio có thể sử dụng đường "
+"dẫn VPN nếu nó đang hoạt động trước khi applet này bắt đầu."
 
 #. settings-schema.json->volume-at-startup->description
 msgid "Volume level starting a new radio (%)"
@@ -1218,15 +1317,19 @@ msgstr "100"
 
 #. settings-schema.json->volume-at-startup->tooltip
 msgid ""
-"If set, then this will change the volume level starting a new radio, in percentage of the general volume level.\n"
+"If set, then this will change the volume level starting a new radio, in "
+"percentage of the general volume level.\n"
 "Default is (Undefined): The volume level remains unchanged.\n"
 "\n"
-"Please note that you can change the volume level scrolling on this applet icon, or using the slider in the context menu."
+"Please note that you can change the volume level scrolling on this applet "
+"icon, or using the slider in the context menu."
 msgstr ""
-"Nếu được đặt, mức âm lượng khi khởi động đài mới sẽ thay đổi theo tỷ lệ phần trăm của mức âm lượng tổng thể.\n"
+"Nếu được đặt, mức âm lượng khi khởi động đài mới sẽ thay đổi theo tỷ lệ phần "
+"trăm của mức âm lượng tổng thể.\n"
 "Mặc định là (Không xác định): Mức âm lượng không thay đổi.\n"
 "\n"
-"Lưu ý: Bạn có thể thay đổi mức âm lượng bằng cách cuộn trên biểu tượng applet hoặc dùng thanh trượt trong menu ngữ cảnh."
+"Lưu ý: Bạn có thể thay đổi mức âm lượng bằng cách cuộn trên biểu tượng "
+"applet hoặc dùng thanh trượt trong menu ngữ cảnh."
 
 #. settings-schema.json->volume-step->description
 msgid "Volume step scrolling on icon"
@@ -1257,8 +1360,11 @@ msgid "±5%"
 msgstr "±5%"
 
 #. settings-schema.json->volume-step->tooltip
-msgid "By how much increase or decrease the volume using the mouse scroll wheel on the icon."
-msgstr "Tăng hoặc giảm âm lượng bao nhiêu khi dùng bánh xe chuột trên biểu tượng."
+msgid ""
+"By how much increase or decrease the volume using the mouse scroll wheel on "
+"the icon."
+msgstr ""
+"Tăng hoặc giảm âm lượng bao nhiêu khi dùng bánh xe chuột trên biểu tượng."
 
 #. settings-schema.json->volume-magnetic-on->description
 msgid "Magnetize all multiples of 25%"
@@ -1347,10 +1453,12 @@ msgstr "Hiển thị danh sách đài bên cạnh danh sách thể loại"
 
 #. settings-schema.json->show-by-category->tooltip
 msgid ""
-"Checked: Hover (without clicking) over a Category to display its list of Stations; then select your station.\n"
+"Checked: Hover (without clicking) over a Category to display its list of "
+"Stations; then select your station.\n"
 "Unchecked: Single list containing each category followed by its stations."
 msgstr ""
-"Chọn: Di chuột (không nhấp) lên Thể loại để hiển thị danh sách đài; sau đó chọn đài của bạn.\n"
+"Chọn: Di chuột (không nhấp) lên Thể loại để hiển thị danh sách đài; sau đó "
+"chọn đài của bạn.\n"
 "Bỏ chọn: Danh sách đơn gồm từng thể loại kèm các đài bên dưới."
 
 #. settings-schema.json->show-system-items->description
@@ -1358,8 +1466,11 @@ msgid "Show system items in the menu"
 msgstr "Hiển thị các mục hệ thống trong menu"
 
 #. settings-schema.json->show-system-items->tooltip
-msgid "Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
-msgstr "Bạn có muốn hiển thị các mục 'Cấu hình...' và 'Cài đặt âm thanh' trong menu không?"
+msgid ""
+"Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
+msgstr ""
+"Bạn có muốn hiển thị các mục 'Cấu hình...' và 'Cài đặt âm thanh' trong menu "
+"không?"
 
 #. settings-schema.json->show-reload->description
 msgid "Show the 'Reload this applet' item in the contextual menu"
@@ -1418,7 +1529,8 @@ msgid "Change of song or program"
 msgstr "Thay đổi bài hát hoặc chương trình"
 
 #. settings-schema.json->notif-song-change->tooltip
-msgid "Please note that some radios do not notify you of a song or program change."
+msgid ""
+"Please note that some radios do not notify you of a song or program change."
 msgstr "Lưu ý: Một số đài không thông báo thay đổi bài hát hoặc chương trình."
 
 #. settings-schema.json->notif-song-duration->units
@@ -1434,8 +1546,12 @@ msgid "Show in notifications the buttons to start and stop recordings"
 msgstr "Hiển thị nút bắt đầu và dừng ghi âm trong thông báo"
 
 #. settings-schema.json->notif-buttons-allowed->tooltip
-msgid "Please note that this will have no effect if you do not wish to be notified of a song or program change."
-msgstr "Lưu ý: Thao tác này sẽ không có hiệu lực nếu bạn không muốn nhận thông báo thay đổi bài hát hoặc chương trình."
+msgid ""
+"Please note that this will have no effect if you do not wish to be notified "
+"of a song or program change."
+msgstr ""
+"Lưu ý: Thao tác này sẽ không có hiệu lực nếu bạn không muốn nhận thông báo "
+"thay đổi bài hát hoặc chương trình."
 
 #. settings-schema.json->show-codec->description
 msgid "Show codec"
@@ -1483,13 +1599,23 @@ msgstr "Thấp"
 
 #. settings-schema.json->network-quality->tooltip
 msgid ""
-"High Quality: The recordings you make while listening to the radio will double the bit rate usually required to just listen to the radio. Thus, the recordings will not be disturbed by extraneous sounds or by a change in the volume of the radio.\n"
+"High Quality: The recordings you make while listening to the radio will "
+"double the bit rate usually required to just listen to the radio. Thus, the "
+"recordings will not be disturbed by extraneous sounds or by a change in the "
+"volume of the radio.\n"
 "\n"
-"Low Quality: These recordings come directly from the sound card, which relieves the network but risks polluting them with extraneous sounds (system sounds for example). The volume of the radio will be set to 100% in order to obtain the best possible quality."
+"Low Quality: These recordings come directly from the sound card, which "
+"relieves the network but risks polluting them with extraneous sounds (system "
+"sounds for example). The volume of the radio will be set to 100% in order to "
+"obtain the best possible quality."
 msgstr ""
-"Chất lượng cao: Các bản ghi khi nghe radio sẽ có tốc độ bit gấp đôi so với chỉ nghe radio. Do đó, các bản ghi sẽ không bị nhiễu bởi tiếng động bên ngoài hoặc thay đổi âm lượng.\n"
+"Chất lượng cao: Các bản ghi khi nghe radio sẽ có tốc độ bit gấp đôi so với "
+"chỉ nghe radio. Do đó, các bản ghi sẽ không bị nhiễu bởi tiếng động bên "
+"ngoài hoặc thay đổi âm lượng.\n"
 "\n"
-"Chất lượng thấp: Các bản ghi này lấy trực tiếp từ card âm thanh, giảm tải mạng nhưng có nguy cơ bị nhiễu bởi âm thanh bên ngoài (ví dụ âm thanh hệ thống). Âm lượng radio sẽ được đặt 100% để có chất lượng tốt nhất."
+"Chất lượng thấp: Các bản ghi này lấy trực tiếp từ card âm thanh, giảm tải "
+"mạng nhưng có nguy cơ bị nhiễu bởi âm thanh bên ngoài (ví dụ âm thanh hệ "
+"thống). Âm lượng radio sẽ được đặt 100% để có chất lượng tốt nhất."
 
 #. settings-schema.json->image-resolution->description
 msgid "Quality of downloaded Album Art"
@@ -1511,9 +1637,15 @@ msgstr "Trung bình"
 msgid "Standard"
 msgstr "Tiêu chuẩn"
 
+#. settings-schema.json->image-resolution->options
+msgid "Fastest"
+msgstr ""
+
 #. settings-schema.json->image-resolution->tooltip
-msgid "Default: High Quality. Choose a value corresponding to your Network Quality."
-msgstr "Mặc định: Chất lượng cao. Chọn giá trị tương ứng với chất lượng mạng của bạn."
+msgid ""
+"Default: High Quality. Choose a value corresponding to your Network Quality."
+msgstr ""
+"Mặc định: Chất lượng cao. Chọn giá trị tương ứng với chất lượng mạng của bạn."
 
 #. settings-schema.json->network-monitoring->description
 msgid "Monitor the network"
@@ -1521,13 +1653,15 @@ msgstr "Giám sát mạng"
 
 #. settings-schema.json->network-monitoring->tooltip
 msgid ""
-"Whether or not to restart the radio when the network becomes active again after an interruption.\n"
+"Whether or not to restart the radio when the network becomes active again "
+"after an interruption.\n"
 "\n"
 "VPN users: By checking this, the radio broadcast may use your VPN link."
 msgstr ""
 "Khởi động lại radio khi mạng hoạt động trở lại sau gián đoạn.\n"
 "\n"
-"Người dùng VPN: Nếu chọn, phát sóng radio có thể sử dụng đường kết nối VPN của bạn."
+"Người dùng VPN: Nếu chọn, phát sóng radio có thể sử dụng đường kết nối VPN "
+"của bạn."
 
 #. settings-schema.json->http-proxy->description
 msgid "HTTP Proxy"
@@ -1537,12 +1671,14 @@ msgstr "HTTP Proxy"
 msgid ""
 "Format: http://[user:pass@]URL[:port]\n"
 "Default: empty.\n"
-"If empty, the environment variables http_proxy and ALL_PROXY will be used if present.\n"
+"If empty, the environment variables http_proxy and ALL_PROXY will be used if "
+"present.\n"
 "If set, this proxy will not be used for https requests."
 msgstr ""
 "Định dạng: http://[user:pass@]URL[:port]\n"
 "Mặc định: trống.\n"
-"Nếu trống, các biến môi trường http_proxy và ALL_PROXY sẽ được sử dụng nếu có.\n"
+"Nếu trống, các biến môi trường http_proxy và ALL_PROXY sẽ được sử dụng nếu "
+"có.\n"
 "Nếu đặt, proxy này sẽ không dùng cho các yêu cầu https."
 
 #. settings-schema.json->apply-http-proxy->description
@@ -1566,8 +1702,12 @@ msgid "No cache"
 msgstr "Không dùng cache"
 
 #. settings-schema.json->cache-no-cache->tooltip
-msgid "Checking this option limits memory usage, but no longer allows the user to rewind the cache (using the sound150@claudiux applet)."
-msgstr "Chọn tùy chọn này giới hạn việc sử dụng bộ nhớ, nhưng không còn cho phép tua lại cache (sử dụng applet sound150@claudiux)."
+msgid ""
+"Checking this option limits memory usage, but no longer allows the user to "
+"rewind the cache (using the sound150@claudiux applet)."
+msgstr ""
+"Chọn tùy chọn này giới hạn việc sử dụng bộ nhớ, nhưng không còn cho phép tua "
+"lại cache (sử dụng applet sound150@claudiux)."
 
 #. settings-schema.json->cache-minutes->description
 msgid ""
@@ -1698,8 +1838,12 @@ msgstr "WAV"
 
 #. settings-schema.json->recording-format->tooltip
 #. settings-schema.json->recording-ends-auto->tooltip
-msgid "Please note that this choice will have no effect on any current recording, but on subsequent ones."
-msgstr "Lưu ý: Lựa chọn này sẽ không ảnh hưởng đến bản ghi hiện tại mà chỉ áp dụng cho các bản ghi tiếp theo."
+msgid ""
+"Please note that this choice will have no effect on any current recording, "
+"but on subsequent ones."
+msgstr ""
+"Lưu ý: Lựa chọn này sẽ không ảnh hưởng đến bản ghi hiện tại mà chỉ áp dụng "
+"cho các bản ghi tiếp theo."
 
 #. settings-schema.json->recording-ends-auto->description
 msgid "Way to stop recording"
@@ -1718,8 +1862,10 @@ msgid "Space remaining on disk when opening this window:"
 msgstr "Dung lượng còn lại trên đĩa khi mở cửa sổ này:"
 
 #. settings-schema.json->limits-hd-size-prefixes->description
-msgid "Disk space unit as defined in Nemo's display preferences (File size prefixes)"
-msgstr "Đơn vị dung lượng đĩa theo cài đặt hiển thị của Nemo (tiền tố kích thước tệp)"
+msgid ""
+"Disk space unit as defined in Nemo's display preferences (File size prefixes)"
+msgstr ""
+"Đơn vị dung lượng đĩa theo cài đặt hiển thị của Nemo (tiền tố kích thước tệp)"
 
 #. settings-schema.json->limits-hd-size-prefixes->options
 msgid "GB (decimal)"
@@ -1759,8 +1905,12 @@ msgid "Ignore Youtube features"
 msgstr "Bỏ qua các tính năng của Youtube"
 
 #. settings-schema.json->ignoreYT->tooltip
-msgid "Ignoring Youtube features reduces CPU load. But loading album art becomes impossible."
-msgstr "Bỏ qua các tính năng của Youtube giảm tải CPU, nhưng việc tải ảnh bìa album sẽ không khả thi."
+msgid ""
+"Ignoring Youtube features reduces CPU load. But loading album art becomes "
+"impossible."
+msgstr ""
+"Bỏ qua các tính năng của Youtube giảm tải CPU, nhưng việc tải ảnh bìa album "
+"sẽ không khả thi."
 
 #. settings-schema.json->yt-cookies-from->description
 msgid "Use cookies from"
@@ -1807,8 +1957,13 @@ msgid "Vivaldi"
 msgstr "Vivaldi"
 
 #. settings-schema.json->yt-cookies-from->tooltip
-msgid "Cookies are used by YouTube to determine which videos you may watch. For Chromium, you can select the method (in parentheses) you chose to save cookies."
-msgstr "Cookie được YouTube sử dụng để xác định video bạn có thể xem. Với Chromium, bạn có thể chọn phương pháp (trong ngoặc) bạn đã dùng để lưu cookie."
+msgid ""
+"Cookies are used by YouTube to determine which videos you may watch. For "
+"Chromium, you can select the method (in parentheses) you chose to save "
+"cookies."
+msgstr ""
+"Cookie được YouTube sử dụng để xác định video bạn có thể xem. Với Chromium, "
+"bạn có thể chọn phương pháp (trong ngoặc) bạn đã dùng để lưu cookie."
 
 #. settings-schema.json->show-yt-progress->description
 msgid "Display, under the icon, the progress of downloads from YT."
@@ -1887,7 +2042,9 @@ msgid "Keep video (slower)"
 msgstr "Giữ video (chậm hơn)"
 
 #. settings-schema.json->recordings-keep-video->tooltip
-msgid "Whether or not to keep the intermediate video file on disk after post-processing"
+msgid ""
+"Whether or not to keep the intermediate video file on disk after post-"
+"processing"
 msgstr "Có giữ tệp video trung gian trên đĩa sau khi xử lý hay không"
 
 #. settings-schema.json->recordings-subdirectory->description
@@ -2611,6 +2768,7 @@ msgid "Niger - NE"
 msgstr "Niger - NE"
 
 # #. settings-schema.json->search-country->options
+#. settings-schema.json->search-country->options
 msgid "Nigeria - NG"
 msgstr "Nigeria - NG"
 

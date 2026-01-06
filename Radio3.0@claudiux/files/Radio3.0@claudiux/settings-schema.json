@@ -1201,7 +1201,8 @@
       "Max Resolution": "maxres",
       "High Quality": "hq",
       "Medium": "mq",
-      "Standard": "sd"
+      "Standard": "sd",
+      "Fastest": "default"
     },
     "tooltip": "Default: High Quality. Choose a value corresponding to your Network Quality."
   },

@@ -1,3 +1,10 @@
+### v3.2.2~20260105
+  * Takes into account HiDPI display.
+
+### v3.2.1~20260104
+  * "Graph height (pixels)" cannot exceed the height of the panel.
+  * Fixes [#8148](https://github.com/linuxmint/cinnamon-spices-applets/issues/8148)
+
 ### v3.2.0~20251211
   * Added option "Graph height (pixels)". Many thanks to Alex Rock (@Pierstoval)!
   * Now compatible with Cinnamon 6.6.
