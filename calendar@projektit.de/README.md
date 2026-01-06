@@ -230,6 +230,9 @@ ln -s "$PWD/files/calendar@projektit.de" ~/.local/share/cinnamon/applets/
 - **Separation of Concerns:** Logic, UI, and data management in separate modules
 - **GJS Compatibility:** Uses native GLib/Gio instead of Node.js APIs
 
+![System Architecture](docs/images/architecture.svg)
+
+*Generated from [architecture.dot](docs/architecture.dot)*
 ---
 
 ## 📊 Holiday System
@@ -324,19 +327,18 @@ journalctl -f -o cat /usr/bin/cinnamon 2>&1 | grep -E "calendar@projektit|Calend
 
 ---
 
-## 🚀 Roadmap / TODO
-
-### Planned Features:
-- [ ] **ICS File Import** - Direct import of .ics calendar files
-- [ ] **Additional Holiday Regions** - More countries and regions
-- [ ] **Custom Holiday Definitions** - User-defined holidays
-- [ ] **Theme Integration** - Better Cinnamon theme compatibility
-- [ ] **Weather Integration** - Weather forecasts in day view
 
 ### Known Limitations:
-- ICS import requires file dialog implementation
-- Some calendar server features depend on Evolution configuration
-- Regional holiday coverage is currently Europe-focused
+### Updated Known Limitations & Roadmap
+
+#### ⚠️ Technical Limitations (EDS & GJS Bindings)
+
+* **Description Support (New Events):** Due to inconsistencies in the `libecal` GObject-Introspection (GIR) for JavaScript, adding descriptions to *newly created* events is currently disabled. The underlying API expects conflicting data types (Object vs. String) across different system versions, leading to instability and applet crashes.
+* **ICS Import (Status: Shelved):**
+    * **Reason:** The JavaScript bindings for the Evolution Data Server (EDS) are unreliable when handling complex iCalendar objects. While the C-based backend (Evolution/GNOME Calendar) works perfectly, the "bridge" to JavaScript (GJS) often fails to map properties like `DESCRIPTION` or `LOCATION` correctly when creating new objects.
+    * **Impact:** Attempting to import external `.ics` files would lead to frequent crashes. For reliability, this feature has been moved from "Planned" to "Unsupported" until the upstream GJS bindings improve.
+
+
 
 ---
 
