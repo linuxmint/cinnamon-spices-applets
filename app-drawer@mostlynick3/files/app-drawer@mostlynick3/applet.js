@@ -64,6 +64,7 @@ MyApplet.prototype = {
         this.isFirstOpen = true;
         this.activeTooltip = null;
         this.tooltipTimeout = null;
+        this.firstResultButton = null;
         
         this._setupKeybinding();
     },
@@ -247,6 +248,15 @@ MyApplet.prototype = {
                         global.stage.set_key_focus(this.modal);
                     }
                     return Clutter.EVENT_STOP;
+                }
+                if (symbol === Clutter.KEY_Return || symbol === Clutter.KEY_KP_Enter) {
+                    if (this.isSearchMode && this.filteredApps.length > 0) {
+                        let app = this.filteredApps[0];
+                        this._hideTooltip();
+                        app.launch([], null);
+                        this._destroyModal();
+                        return Clutter.EVENT_STOP;
+                    }
                 }
                 return Clutter.EVENT_PROPAGATE;
             });
@@ -490,6 +500,7 @@ MyApplet.prototype = {
 
     _updateGrid: function() {
         let oldGrid = this.grid;
+        this.firstResultButton = null;
         
         let boxSize = this.iconSize + 60;
         
@@ -510,7 +521,9 @@ MyApplet.prototype = {
             
             for (let i = 0; i < this.filteredApps.length; i++) {
                 let app = this.filteredApps[i];
-                let button = this._createAppButton(app, boxSize);
+                let isFirst = (i === 0 && this.isSearchMode);
+                let button = this._createAppButton(app, boxSize, isFirst);
+                if (isFirst) this.firstResultButton = button;
                 layout.attach(button, col, row, 1, 1);
                 
                 col++;
@@ -540,7 +553,9 @@ MyApplet.prototype = {
             
             for (let i = 0; i < this.filteredApps.length; i++) {
                 let app = this.filteredApps[i];
-                let button = this._createAppButton(app, boxSize);
+                let isFirst = (i === 0 && this.isSearchMode);
+                let button = this._createAppButton(app, boxSize, isFirst);
+                if (isFirst) this.firstResultButton = button;
                 layout.attach(button, col, row, 1, 1);
                 
                 row++;
@@ -576,7 +591,9 @@ MyApplet.prototype = {
             
             for (let i = start; i < end; i++) {
                 let app = this.filteredApps[i];
-                let button = this._createAppButton(app, boxSize);
+                let isFirst = (i === start && this.isSearchMode);
+                let button = this._createAppButton(app, boxSize, isFirst);
+                if (isFirst) this.firstResultButton = button;
                 layout.attach(button, col, row, 1, 1);
                 
                 col++;
@@ -624,6 +641,30 @@ MyApplet.prototype = {
         }
     },
 
+    _calculateMatchScore: function(app, searchText) {
+        let name = app.get_display_name().toLowerCase();
+        let description = app.get_description();
+        let descText = description ? description.toLowerCase() : '';
+        
+        let score = 0;
+        
+        if (name === searchText) {
+            score = 1000;
+        } else if (name.startsWith(searchText)) {
+            score = 500 + (100 - searchText.length);
+        } else if (name.includes(searchText)) {
+            let index = name.indexOf(searchText);
+            score = 200 - index;
+        } else if (descText.startsWith(searchText)) {
+            score = 100 + (50 - searchText.length);
+        } else if (descText.includes(searchText)) {
+            let index = descText.indexOf(searchText);
+            score = 50 - Math.min(index, 40);
+        }
+        
+        return score;
+    },
+
     _onSearchTextChanged: function() {
         let searchText = this.searchEntry.get_text().toLowerCase().trim();
         
@@ -635,13 +676,18 @@ MyApplet.prototype = {
         this.isSearchMode = true;
         this.currentPage = 0;
         
-        this.filteredApps = this.apps.filter(app => {
-            let name = app.get_display_name().toLowerCase();
-            let description = app.get_description();
-            let descText = description ? description.toLowerCase() : '';
-            
-            return name.includes(searchText) || descText.includes(searchText);
-        });
+        let matches = [];
+        for (let i = 0; i < this.apps.length; i++) {
+            let app = this.apps[i];
+            let score = this._calculateMatchScore(app, searchText);
+            if (score > 0) {
+                matches.push({ app: app, score: score });
+            }
+        }
+        
+        matches.sort((a, b) => b.score - a.score);
+        
+        this.filteredApps = matches.map(m => m.app);
         
         this._updateGrid();
     },
@@ -653,6 +699,7 @@ MyApplet.prototype = {
         this.isSearchMode = false;
         this.currentPage = 0;
         this.filteredApps = this.apps.slice();
+        this.firstResultButton = null;
         this._updateGrid();
     },
 
@@ -718,7 +765,7 @@ MyApplet.prototype = {
                     scale_y: 1.0,
                     time: duration,
                     transition: 'easeOutCubic',
-                    onComplete: () => { this.isAnimating = false; }
+                    onComplete: () => {this.isAnimating = false; }
                 });
                 break;
                 
@@ -802,10 +849,14 @@ MyApplet.prototype = {
         }
     },
 
-_createAppButton: function(app, boxSize) {
+_createAppButton: function(app, boxSize, isFirstResult) {
         let boxColor = this._rgbToRgba(this.boxColor, this.boxOpacity);
         let boxHoverColor = this._rgbToRgba(this.boxHoverColor, this.boxHoverOpacity);
         let spacing = Math.round(this.iconSize * 0.2);
+        
+        let baseStyle = 'margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; transition: all 0.2s; spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;';
+        let hoverStyle = 'margin: ' + this.padding + 'px; background: ' + boxHoverColor + '; border-radius: 12px; box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3); spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;';
+        let selectedStyle = 'margin: ' + this.padding + 'px; background: ' + boxHoverColor + '; border-radius: 12px; box-shadow: 0 0 20px 4px rgba(100, 150, 255, 0.6); border: 2px solid rgba(150, 200, 255, 0.8); spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;';
         
         let box = new St.BoxLayout({
             style_class: 'app-drawer-item',
@@ -816,7 +867,7 @@ _createAppButton: function(app, boxSize) {
             height: boxSize,
             x_align: Clutter.ActorAlign.CENTER,
             y_align: Clutter.ActorAlign.START,
-            style: 'margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; transition: all 0.2s; spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;'
+            style: isFirstResult ? selectedStyle : baseStyle
         });
         
         let description = app.get_description();
@@ -826,7 +877,9 @@ _createAppButton: function(app, boxSize) {
         }
         
         box.connect('enter-event', () => {
-            box.set_style('margin: ' + this.padding + 'px; background: ' + boxHoverColor + '; border-radius: 12px; box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3); spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;');
+            if (!isFirstResult) {
+                box.set_style(hoverStyle);
+            }
 
             if (this.tooltipTimeout) {
                 imports.mainloop.source_remove(this.tooltipTimeout);
@@ -840,7 +893,11 @@ _createAppButton: function(app, boxSize) {
         });
         
         box.connect('leave-event', () => {
-            box.set_style('margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;');
+            if (!isFirstResult) {
+                box.set_style(baseStyle);
+            } else {
+                box.set_style(selectedStyle);
+            }
     
             if (this.tooltipTimeout) {
                 imports.mainloop.source_remove(this.tooltipTimeout);
@@ -1069,6 +1126,7 @@ _createAppButton: function(app, boxSize) {
         }
         this.isAnimating = false;
         this.isSearchMode = false;
+        this.firstResultButton = null;
     },
 
     on_applet_removed_from_panel: function() {
