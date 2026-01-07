@@ -1,7 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-07 15:15-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -424,8 +426,12 @@ msgid " - directory already searched"
 msgstr " - katalogs jau tika meklēts"
 
 #. 4.0/mint-remove-application.py:34
-msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
-msgstr "Šis izvēlnes vienums nav saistīts ar nevienu pakotni. Vai tomēr vēlies to noņemt no izvēlnes?"
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Šis izvēlnes vienums nav saistīts ar nevienu pakotni. Vai tomēr vēlies to "
+"noņemt no izvēlnes?"
 
 #. 4.0/mint-remove-application.py:75
 msgid "The following packages will be removed:"
@@ -436,10 +442,12 @@ msgid "Packages to be removed"
 msgstr "Pakotnes, kas jānoņem"
 
 #. 4.0/mint-remove-application.py:143
+#, python-format
 msgid "Cannot remove package %s as it is required by other packages."
 msgstr "Nevar noņemt pakotni %s , jo to pieprasa citas pakotnes."
 
 #. 4.0/mint-remove-application.py:149
+#, python-format
 msgid "Package %s is a dependency of the following packages:"
 msgstr "Pakotne %s ir atkarīga no šādām pakotnēm:"
 
@@ -449,8 +457,12 @@ msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
 #. metadata.json->description
-msgid "A flexible menu with grid or list layout options, file browser and emoji search."
-msgstr "Elastīga izvēlne ar režģa vai saraksta izkārtojuma opcijām, failu pārlūkprogrammu un emocijzīmju meklēšanu."
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Elastīga izvēlne ar režģa vai saraksta izkārtojuma opcijām, failu "
+"pārlūkprogrammu un emocijzīmju meklēšanu."
 
 #. 5.8->settings-schema.json->layout->title
 #. 5.8->settings-schema.json->menu-layout->title
@@ -769,7 +781,8 @@ msgstr "Iespējot automātisko ritināšanu"
 #. 5.8->settings-schema.json->enable-autoscroll->tooltip
 #. 4.0->settings-schema.json->enable-autoscroll->tooltip
 msgid "Autoscroll the application list on mouse hover"
-msgstr "Automātiski ritināt lietojumprogrammu sarakstu, novietojot peles kursoru"
+msgstr ""
+"Automātiski ritināt lietojumprogrammu sarakstu, novietojot peles kursoru"
 
 #. 5.8->settings-schema.json->show-hidden-files->tooltip
 #. 4.0->settings-schema.json->show-hidden-files->tooltip
@@ -875,8 +888,12 @@ msgstr "Tīmekļa meklēšanas ieteikumi"
 
 #. 5.8->settings-schema.json->web-suggestions->tooltip
 #. 4.0->settings-schema.json->web-suggestions->tooltip
-msgid "With web search option, also show search suggestions. (Note: Search suggestions are provided by DuckDuckGo)"
-msgstr "Izmanto tīmekļa meklēšanas opciju, rādīt arī meklēšanas ieteikumus. (Piezīme: meklēšanas ieteikumus nodrošina DuckDuckGo)"
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+"Izmanto tīmekļa meklēšanas opciju, rādīt arī meklēšanas ieteikumus. "
+"(Piezīme: meklēšanas ieteikumus nodrošina DuckDuckGo)"
 
 #. 5.8->settings-schema.json->enable-home-folder-search->description
 #. 4.0->settings-schema.json->enable-home-folder-search->description
@@ -896,10 +913,12 @@ msgstr "Meklēšana tīmekļa vēsturē"
 #. 5.8->settings-schema.json->enable-web-history-search->tooltip
 #. 4.0->settings-schema.json->enable-web-history-search->tooltip
 msgid ""
-"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
 "Note: Firefox history is not currently supported."
 msgstr ""
-"Veicot meklēšanu, meklēt arī manas pārlūkprogrammas vēsturē (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Veicot meklēšanu, meklēt arī manas pārlūkprogrammas vēsturē (Google Chrome, "
+"Chromium, Opera, Vivaldi, Brave)\n"
 "Piezīme: Firefox vēsture pašlaik netiek atbalstīta."
 
 #. 5.8->settings-schema.json->enable-web-bookmarks-search->description
@@ -910,11 +929,17 @@ msgstr "Tīmekļa grāmatzīmju meklēšana"
 #. 5.8->settings-schema.json->enable-web-bookmarks-search->tooltip
 #. 4.0->settings-schema.json->enable-web-bookmarks-search->tooltip
 msgid ""
-"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
-"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
 msgstr ""
-"Veicot meklēšanu, meklēt arī mana pārlūka tīmekļa grāmatzīmēs (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
-"Piezīme: Lai meklētu Firefox grāmatzīmes tev būs jāinstalē pakotne gir1.2-gda-5.0 (Debian bāzēts izplatījums tostarp. Ubuntu un Linux Mint) vai pakotne libgda (Arch bāzēts izplatījums) un jārestartē dators."
+"Veicot meklēšanu, meklēt arī mana pārlūka tīmekļa grāmatzīmēs (Google "
+"Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Piezīme: Lai meklētu Firefox grāmatzīmes tev būs jāinstalē pakotne gir1.2-"
+"gda-5.0 (Debian bāzēts izplatījums tostarp. Ubuntu un Linux Mint) vai "
+"pakotne libgda (Arch bāzēts izplatījums) un jārestartē dators."
 
 #. 5.8->settings-schema.json->enable-wikipedia-search->description
 #. 4.0->settings-schema.json->enable-wikipedia-search->description
@@ -1287,12 +1312,18 @@ msgstr "Birmiešu"
 #. 4.0->settings-schema.json->search-help->description
 msgid ""
 "\n"
-"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
-"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
 msgstr ""
 "\n"
-"Piezīme: Dažas meklēšanas opcijas joprojām var izmantot, pat ja neesi tās šeit iespējojis, pievienojot prefiksu savam meklēšanas vaicājumam.\n"
-"Piemēram: lai meklētu emocijzīmi, ieraksti 'e heart', lai atrastu sirds emocijzīmes. Tāpat izmanto prefiksus 'f ' failu meklēšanai, 'h ' tīmekļa vēsturei un 'b ' tīmekļa grāmatzīmju meklēšanai.\n"
+"Piezīme: Dažas meklēšanas opcijas joprojām var izmantot, pat ja neesi tās "
+"šeit iespējojis, pievienojot prefiksu savam meklēšanas vaicājumam.\n"
+"Piemēram: lai meklētu emocijzīmi, ieraksti 'e heart', lai atrastu sirds "
+"emocijzīmes. Tāpat izmanto prefiksus 'f ' failu meklēšanai, 'h ' tīmekļa "
+"vēsturei un 'b ' tīmekļa grāmatzīmju meklēšanai.\n"
 
 #. 5.8->settings-schema.json->menu-icon-custom->description
 #. 4.0->settings-schema.json->menu-icon-custom->description
@@ -1398,8 +1429,12 @@ msgstr "Izmantot flīžu stilu"
 
 #. 5.8->settings-schema.json->use-tile-style->tooltip
 #. 4.0->settings-schema.json->use-tile-style->tooltip
-msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
-msgstr "Lietojumprogrammu pogām izmantot flīžu stilu (piezīme: var nedarboties ar dažiem motīviem)"
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Lietojumprogrammu pogām izmantot flīžu stilu (piezīme: var nedarboties ar "
+"dažiem motīviem)"
 
 #. 5.8->settings-schema.json->info1->description
 #. 4.0->settings-schema.json->info1->description
@@ -1423,23 +1458,29 @@ msgstr ""
 #. 4.0->settings-schema.json->info3->description
 msgid ""
 "\n"
-"• Folders can be set up and removed as menu categories by right-clicking on them."
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
 msgstr ""
 "\n"
-"• Mapes var iestatīt un noņemt kā izvēlnes kategorijas, uz tām noklikšķinot ar labo peles pogu."
+"• Mapes var iestatīt un noņemt kā izvēlnes kategorijas, uz tām noklikšķinot "
+"ar labo peles pogu."
 
 #. 5.8->settings-schema.json->info4->description
 #. 4.0->settings-schema.json->info4->description
 msgid ""
 "\n"
 "• Additional key options:\n"
-"ctrl-p — Open launcher properties dialogue of currently highlighted application.\n"
-"ctrl-d — Open .desktop file of currently highlighted app in default text editor.\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
 msgstr ""
 "\n"
 "• Papildu taustiņu iespējas:\n"
-"ctrl-p — Atvērt pašlaik iezīmētās lietotnes palaidēja rekvizītu dialoglodziņu.\n"
-"ctrl-d — Atvērt pašlaik iezīmētās lietotnes .desktop failu noklusējuma teksta redaktorā.\n"
+"ctrl-p — Atvērt pašlaik iezīmētās lietotnes palaidēja rekvizītu "
+"dialoglodziņu.\n"
+"ctrl-d — Atvērt pašlaik iezīmētās lietotnes .desktop failu noklusējuma "
+"teksta redaktorā.\n"
 
 #. 3.2->settings-schema.json->providers->title
 msgid "Search Providers"
