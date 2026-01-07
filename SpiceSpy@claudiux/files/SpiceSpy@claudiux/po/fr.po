@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-12-28 16:21+0100\n"
-"PO-Revision-Date: 2025-12-28 16:25+0100\n"
+"PO-Revision-Date: 2026-01-07 09:22+0100\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -229,11 +229,11 @@ msgstr "N'afficher que les valeurs non nulles dans le panneau"
 
 #. settings-schema.json->coloredIcon->description
 msgid "Change icon color while refreshing"
-msgstr "Changer la couleur de l'cône durant pendant l'actualisation"
+msgstr "Changer la couleur de l'cône durant l'actualisation"
 
 #. settings-schema.json->colorWhileRefreshing->description
 msgid "Icon color while refreshing"
-msgstr "Couleur de l'cône durant pendant l'actualisation"
+msgstr "Couleur de l'cône durant l'actualisation"
 
 #. settings-schema.json->author-list->columns->title
 msgid "GitHub user name"
