@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-23 15:47+0100\n"
+"POT-Creation-Date: 2026-01-07 23:43+0100\n"
 "PO-Revision-Date: 2025-12-23 15:50+0100\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
@@ -19,69 +19,77 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:45 applet.js:652
+#. applet.js:46 applet.js:654
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#. applet.js:45 applet.js:692
+#. applet.js:46 applet.js:694
 msgid "FAVORITES"
 msgstr "FAVORITOS"
 
-#. applet.js:45 applet.js:723
+#. applet.js:46 applet.js:725
 msgid "APPLICATIONS"
 msgstr "APLICACIONES"
 
-#. applet.js:45 applet.js:754
+#. applet.js:46 applet.js:756
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTOS RECIENTES"
 
-#. applet.js:45 applet.js:798
+#. applet.js:46 applet.js:800
 msgid "CUSTOM"
 msgstr "PERSONALIZADO"
 
-#. applet.js:188
+#. applet.js:189
 msgid "(Right click to open folder)"
 msgstr "(Haga clic con el botón derecho para abrir la carpeta)"
 
 #. metadata.json->name
-#. applet.js:315
+#. applet.js:317
 msgid "Direct"
 msgstr "Directo"
 
-#. applet.js:622
+#. applet.js:624
 msgid "Search Home Folder"
 msgstr "Buscar en la carpeta personal"
 
-#. applet.js:629 applet.js:669 applet.js:700 applet.js:731 applet.js:762
-#. applet.js:806
+#. applet.js:631 applet.js:671 applet.js:702 applet.js:733 applet.js:764
+#. applet.js:808
 msgid "Configure"
 msgstr "Configurar"
 
-#. applet.js:662
+#. applet.js:664
 msgid "Search File System"
 msgstr "Buscar en el sistema de archivos"
 
-#. applet.js:776
+#. applet.js:778
 msgid "Clear"
 msgstr "Limpiar"
 
-#. applet.js:783
+#. applet.js:785
 msgid "Recent"
 msgstr "Recientes"
 
-#. applet.js:860
+#. applet.js:862
 msgid "Computer"
 msgstr "PC"
 
-#. applet.js:866
+#. applet.js:868
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#. applet.js:883
+#. applet.js:885
 msgid "Network"
 msgstr "Red"
 
-#. applet.js:1196
+#. applet.js:900
+msgid "Logout"
+msgstr ""
+
+#. applet.js:907
+msgid "Quit"
+msgstr ""
+
+#. applet.js:1215
 msgid "Trash"
 msgstr "Papelera"
 
