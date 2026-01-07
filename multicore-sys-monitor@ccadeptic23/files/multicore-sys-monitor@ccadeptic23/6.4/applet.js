@@ -179,7 +179,8 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Disk_labelOn", "Disk_labelOn");
         this.settings.bind("thickness", "thickness");
         this.settings.bind("useIconSize", "useIconSize", () => { this.set_panelHeight(); });
-        this.settings.bind("graphHeight", "graphHeight", () => { this.set_panelHeight(); });
+        this.settings.bind("graphHeightPercent", "graphHeightPercent", () => { this.set_panelHeight(); });
+        this.settings.bind("graphHeight", "graphHeight");
         this.settings.bind("refreshRate", "refreshRate", () => { this.run_main_loop(); });
         this.settings.bind("labelColor", "labelColor");
         this.settings.bind("borderColor", "borderColor");
@@ -297,7 +298,8 @@ class MCSM extends Applet.IconApplet {
 
         this.graphArea = new St.DrawingArea();
         this.graphArea.width = 1;
-        this.graphArea.height = this.panelHeight * global.ui_scale;
+        //~ this.graphArea.height = this.panelHeight * global.ui_scale;
+        this.graphArea.height = this.panelHeight;
 
         this.multiCpuGraph = new Graphs.GraphVBars(this.graphArea, this);
         this.memoryGraph = new Graphs.GraphPieChart(this.graphArea, this);
@@ -323,13 +325,32 @@ class MCSM extends Applet.IconApplet {
 
     set_panelHeight() {
         this.iconSize = this.getPanelIconSize(St.IconType.FULLCOLOR);
+        //~ global.log("this.iconSize: " + this.iconSize);
         if (this.useIconSize) {
-            this.panelHeight = this.iconSize;
-        } else if (this.graphHeight) {
-            if (this.graphHeight > this._panelHeight) this.graphHeight = this._panelHeight;
-            this.panelHeight = Math.ceil(this.graphHeight * global.ui_scale);
+            //~ global.log("Case 1");
+            this.panelHeight = this.iconSize * global.ui_scale;
+        } else if (this.graphHeightPercent) {
+            //~ global.log("Case 2");
+            //~ global.log("this.graphHeight: " + this.graphHeight);
+            //~ global.log("this._panelHeight: " + this._panelHeight);
+            
+            //~ if (this.graphHeight > this._panelHeight) this.graphHeight = this._panelHeight;
+            this.graphHeight = Math.ceil(this._panelHeight * this.graphHeightPercent / 100);
+            
+            //~ this.panelHeight = Math.ceil(this.graphHeight); // * global.ui_scale
+            this.panelHeight = this.graphHeight; // * global.ui_scale
         } else {
+            //~ global.log("Case 3");
+            //~ global.log("this._panelHeight: " + this._panelHeight);
             this.panelHeight = this._panelHeight;
+        }
+        //~ global.log("Finally");
+        //~ global.log("this.panelHeight: " + this.panelHeight);
+        //~ global.log("this.panelHeight * global.ui_scale: " + this.panelHeight * global.ui_scale);
+        if (this.graphArea) {
+            //~ this.graphArea.height = this.panelHeight * global.ui_scale;
+            this.graphArea.height = this.panelHeight;
+            this.graphArea.queue_repaint();
         }
     }
 
@@ -463,18 +484,27 @@ class MCSM extends Applet.IconApplet {
                 posConfigure = i;
             }
         }
-        global.log("posConfigure: " + posConfigure);
+        //~ global.log("posConfigure: " + posConfigure);
         if (posConfigure != -1) {
             menuChildren[posConfigure].destroy();
-            let context_menu_item_configure = new PopupMenu.PopupSubMenuMenuItem(_("Configure..."));
-            context_menu_item_configure.menu.addAction(_("General"), () => { this.configureApplet(0) });
-            context_menu_item_configure.menu.addAction(_("CPU"), () => { this.configureApplet(1) });
-            context_menu_item_configure.menu.addAction(_("Memory"), () => { this.configureApplet(2) });
-            context_menu_item_configure.menu.addAction(_("Network"), () => { this.configureApplet(3) });
-            context_menu_item_configure.menu.addAction(_("Disk IO"), () => { this.configureApplet(4) });
-            context_menu_item_configure.menu.addAction(_("Disk Usage"), () => { this.configureApplet(5) });
-            context_menu_item_configure.menu.addAction(_("Colors"), () => { this.configureApplet(6) });
-            this._applet_context_menu.addMenuItem(context_menu_item_configure, posConfigure);
+            //~ let context_menu_item_configure = new PopupMenu.PopupSubMenuMenuItem(_("Configure..."));
+            this.context_menu_item_configure = new PopupMenu.PopupSubMenuMenuItem(_("Configure..."));
+            //~ context_menu_item_configure.menu.addAction(_("General"), () => { this.configureApplet(0) });
+            //~ context_menu_item_configure.menu.addAction(_("CPU"), () => { this.configureApplet(1) });
+            //~ context_menu_item_configure.menu.addAction(_("Memory"), () => { this.configureApplet(2) });
+            //~ context_menu_item_configure.menu.addAction(_("Network"), () => { this.configureApplet(3) });
+            //~ context_menu_item_configure.menu.addAction(_("Disk IO"), () => { this.configureApplet(4) });
+            //~ context_menu_item_configure.menu.addAction(_("Disk Usage"), () => { this.configureApplet(5) });
+            //~ context_menu_item_configure.menu.addAction(_("Colors"), () => { this.configureApplet(6) });
+            this.context_menu_item_configure.menu.addAction(_("General"), () => { this.configureApplet(0) });
+            this.context_menu_item_configure.menu.addAction(_("CPU"), () => { this.configureApplet(1) });
+            this.context_menu_item_configure.menu.addAction(_("Memory"), () => { this.configureApplet(2) });
+            this.context_menu_item_configure.menu.addAction(_("Network"), () => { this.configureApplet(3) });
+            this.context_menu_item_configure.menu.addAction(_("Disk IO"), () => { this.configureApplet(4) });
+            this.context_menu_item_configure.menu.addAction(_("Disk Usage"), () => { this.configureApplet(5) });
+            this.context_menu_item_configure.menu.addAction(_("Colors"), () => { this.configureApplet(6) });
+            //~ this._applet_context_menu.addMenuItem(context_menu_item_configure, posConfigure);
+            this._applet_context_menu.addMenuItem(this.context_menu_item_configure, posConfigure);
         }
     }
 
@@ -1134,6 +1164,35 @@ class MCSM extends Applet.IconApplet {
 
     on_applet_middle_clicked(event) {
         this.configureApplet(0);
+    }
+    
+    _onButtonPressEvent (actor, event) {
+        if (!this._applet_enabled) {
+            return false;
+        }
+
+        let button = event.get_button();
+        if (button < 3) {
+            if (!this._draggable.inhibit) {
+                return false;
+            } else {
+                if (this._applet_context_menu.isOpen) {
+                    this._applet_context_menu.toggle();
+                }
+            }
+        }
+
+        if (button === 1) {
+            this.on_applet_clicked(event);
+        } else if (button === 2) {
+            this.on_applet_middle_clicked(event);
+        } else if (button === 3) {
+            if (this._applet_context_menu._getMenuItems().length > 0) {
+                this._applet_context_menu.toggle();
+                this.context_menu_item_configure.menu.toggle();
+            }
+        }
+        return true;
     }
 
     on_applet_added_to_panel() {
