@@ -1,23 +1,15 @@
-# CINNAMENU
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# jaszhix, 2017
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
-"POT-Creation-Date: 2025-11-30 00:16-0500\n"
-"PO-Revision-Date: 2022-05-31 18:11+0100\n"
-"Last-Translator: Google translate\n"
+"Project-Id-Version: Cinnamenu\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.8\n"
 
 #. 5.8/applet.js:59 4.0/applet.js:60 3.2/applet.js:157
 msgid "Initializing"
@@ -29,7 +21,7 @@ msgstr "Atrast failus..."
 
 #. 5.8/applet.js:284 4.0/applet.js:281
 msgid "Please wait..."
-msgstr "Lūdzu uzgaidiet..."
+msgstr "Lūdzu uzgaidi..."
 
 #. 5.8/applet.js:910 5.8/applet.js:1125 4.0/applet.js:884
 msgid "Applications"
@@ -57,11 +49,11 @@ msgstr "Nav nesenu vienumu"
 
 #. 5.8/applet.js:982 4.0/applet.js:956
 msgid "Settings"
-msgstr ""
+msgstr "Iestatījumi"
 
 #. 5.8/applet.js:1128
 msgid "files"
-msgstr ""
+msgstr "faili"
 
 #. 5.8/applet.js:1131 4.0/applet.js:1097
 msgid "Other search results"
@@ -83,7 +75,7 @@ msgstr "Emocijzīme"
 #. 5.8/applet.js:1198 5.8/applet.js:1335 5.8/applet.js:1819 4.0/applet.js:1164
 #. 4.0/applet.js:1299 4.0/applet.js:1786
 msgid "Click to copy"
-msgstr "Noklikšķiniet, lai kopētu"
+msgstr "Noklikšķini, lai kopētu"
 
 #. 5.8/applet.js:1636 4.0/applet.js:1600 3.2/applet.js:1416
 msgid "Clear List"
@@ -105,7 +97,7 @@ msgstr "Kļūda, atverot failu:"
 
 #. 5.8/appsview.js:441 4.0/appsview.js:440
 msgid "Too many entries - showing first 1000 entries only"
-msgstr "Pārāk daudz ierakstu — tiek rādīti tikai pirmie 1000 ieraksti"
+msgstr "Pārāk daudz ierakstu - tiek rādīti tikai pirmie 1000 ieraksti"
 
 #. 5.8->settings-schema.json->open-on-category->options
 #. 4.0->settings-schema.json->open-on-category->options
@@ -137,28 +129,27 @@ msgstr "Iecienītākās lietotnes"
 
 #. 5.8/contextmenu.js:111 4.0/contextmenu.js:111
 msgid "light skin tone"
-msgstr "gaišs ādas tonis"
+msgstr "gaišs ādiņas tonis"
 
 #. 5.8/contextmenu.js:112 4.0/contextmenu.js:112
 msgid "medium-light skin tone"
-msgstr "vidēji gaišs ādas tonis"
+msgstr "vidēji gaišs ādiņas tonis"
 
 #. 5.8/contextmenu.js:113 4.0/contextmenu.js:113
 msgid "medium skin tone"
-msgstr "vidējs ādas tonis"
+msgstr "vidējs ādiņas tonis"
 
 #. 5.8/contextmenu.js:114 4.0/contextmenu.js:114
 msgid "medium-dark skin tone"
-msgstr "vidēji tumšs ādas tonis"
+msgstr "vidēji tumšs ādiņas tonis"
 
 #. 5.8/contextmenu.js:115 4.0/contextmenu.js:115
 msgid "dark skin tone"
-msgstr "tumšs ādas tonis"
+msgstr "tumšs ādiņas tonis"
 
 #. 5.8/contextmenu.js:134 4.0/contextmenu.js:134
-#, fuzzy
 msgid "Remove category"
-msgstr "Atiestatīt kategoriju secību"
+msgstr "Noņemt kategoriju"
 
 #. 3.2->settings-schema.json->resetCategoryOrder-button->description
 #. 5.8/contextmenu.js:147 4.0/contextmenu.js:147
@@ -167,16 +158,15 @@ msgstr "Atiestatīt kategoriju secību"
 
 #. 5.8/contextmenu.js:167 4.0/contextmenu.js:167
 msgid "List settings apps separately"
-msgstr ""
+msgstr "Rādīt iestatījumu lietotnes atsevišķi"
 
 #. 5.8/contextmenu.js:174 4.0/contextmenu.js:174
 msgid "Single list style"
-msgstr ""
+msgstr "Viena saraksta stils"
 
 #. 5.8/contextmenu.js:183 4.0/contextmenu.js:183
-#, fuzzy
 msgid "Hide hidden files"
-msgstr "Rādīt slēptos failus"
+msgstr "Slēpt slēptos failus"
 
 #. 5.8->settings-schema.json->show-hidden-files->description
 #. 4.0->settings-schema.json->show-hidden-files->description
@@ -213,7 +203,7 @@ msgstr "Atinstalēt"
 
 #. 5.8/contextmenu.js:308 4.0/contextmenu.js:312
 msgid "App Info"
-msgstr ""
+msgstr "Lietotnes informācija"
 
 #. 5.8/contextmenu.js:324 4.0/contextmenu.js:328
 msgid "This file is no longer available"
@@ -228,9 +218,8 @@ msgid "Other application..."
 msgstr "Cita lietojumprogramma..."
 
 #. 5.8/contextmenu.js:384 4.0/contextmenu.js:390
-#, fuzzy
 msgid "Add folder as category"
-msgstr "Rādīt iecienītāko lietotņu kategoriju"
+msgstr "Pievienot mapi kā kategoriju"
 
 #. 5.8/contextmenu.js:400 4.0/contextmenu.js:406 5.8/search.py:48
 #. 4.0/search.py:48
@@ -248,39 +237,39 @@ msgstr "Pārvietojot failu uz miskasti, radās kļūda:"
 
 #. 5.8/emoji.js:8 4.0/emoji.js:7739
 msgid "Smileys & Emotion"
-msgstr ""
+msgstr "Smaidiņi un emocijas"
 
 #. 5.8/emoji.js:685 4.0/emoji.js:7740
 msgid "People & Body"
-msgstr ""
+msgstr "Cilvēki un ķermenis"
 
 #. 5.8/emoji.js:2245 4.0/emoji.js:7741
 msgid "Animals & Nature"
-msgstr ""
+msgstr "Dzīvnieki un daba"
 
 #. 5.8/emoji.js:2861 4.0/emoji.js:7742
 msgid "Food & Drink"
-msgstr ""
+msgstr "Pārtika un dzērieni"
 
 #. 5.8/emoji.js:3405 4.0/emoji.js:7743
 msgid "Travel & Places"
-msgstr ""
+msgstr "Ceļošana un vietas"
 
 #. 5.8/emoji.js:4281 4.0/emoji.js:7744
 msgid "Activities"
-msgstr ""
+msgstr "Aktivitātes"
 
 #. 5.8/emoji.js:4625 4.0/emoji.js:7745
 msgid "Objects"
-msgstr ""
+msgstr "Objekti"
 
 #. 5.8/emoji.js:5677 4.0/emoji.js:7746
 msgid "Symbols"
-msgstr ""
+msgstr "Simboli"
 
 #. 5.8/emoji.js:6573 4.0/emoji.js:7747
 msgid "Flags"
-msgstr ""
+msgstr "Karogi"
 
 #. 5.8/sidebar.js:252 4.0/sidebar.js:251 3.2/applet.js:2323
 msgid "Quit"
@@ -288,7 +277,7 @@ msgstr "Beidz"
 
 #. 5.8/sidebar.js:253 4.0/sidebar.js:252 3.2/applet.js:2324
 msgid "Shutdown the computer"
-msgstr "Izslēdziet datoru"
+msgstr "Izslēdz datoru"
 
 #. 5.8/sidebar.js:261 4.0/sidebar.js:260 3.2/applet.js:2315
 msgid "Logout"
@@ -304,7 +293,7 @@ msgstr "Bloķēšanas ekrāns"
 
 #. 5.8/sidebar.js:271 4.0/sidebar.js:270 3.2/applet.js:2294
 msgid "Lock the screen"
-msgstr "Bloķējiet ekrānu"
+msgstr "Bloķē ekrānu"
 
 #. 4.0/applet.js:1094
 msgid "Applications and files"
@@ -312,7 +301,7 @@ msgstr "Lietojumprogrammas un faili"
 
 #. 3.2/applet.js:92
 msgid "Type to search..."
-msgstr "Ierakstiet, lai meklētu..."
+msgstr "Ieraksti, lai meklētu..."
 
 #. 3.2/applet.js:284
 msgid "No description available"
@@ -328,7 +317,7 @@ msgstr "Grāmatzīmes"
 
 #. 3.2/applet.js:1352
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "Firefox un Midori grāmatzīmēm nepieciešama pakotne gir1.2-gda-5.0."
+msgstr "gir1.2-gda-5.0 pakotne ir nepieciešama Firefox un Midori grāmatzīmēm."
 
 #. 3.2/applet.js:1427
 msgid "No recent files"
@@ -348,11 +337,11 @@ msgstr "Saraksta skats"
 
 #. 3.2/applet.js:2287 3.2/buttons.js:1261
 msgid "Switch to grid view"
-msgstr "Pārslēdzieties uz režģa skatu"
+msgstr "Pārslēdzies uz režģa skatu"
 
 #. 3.2/applet.js:2287 3.2/buttons.js:1255
 msgid "Switch to list view"
-msgstr "Pārslēdzieties uz saraksta skatu"
+msgstr "Pārslēdzies uz saraksta skatu"
 
 #. 3.2/placeDisplay.js:146
 msgid "Home"
@@ -376,15 +365,15 @@ msgstr "Meklēt"
 
 #. 5.8/search.py:106 4.0/search.py:106
 msgid "Start in"
-msgstr "Sāciet iekšā"
+msgstr "Sāc iekš"
 
 #. 5.8/search.py:107 4.0/search.py:107
 msgid "Select a folder"
-msgstr "Izvēlieties mapi"
+msgstr "Izvēlies mapi"
 
 #. 5.8/search.py:113 4.0/search.py:113
 msgid "Follow symlinks"
-msgstr "Sekojiet simbolu saitēm"
+msgstr "Seko simbolu saitēm"
 
 #. 5.8/search.py:117 4.0/search.py:117
 msgid "Search hidden"
@@ -392,7 +381,7 @@ msgstr "Meklēt paslēptu"
 
 #. 5.8/search.py:121 4.0/search.py:121
 msgid "Use regular expressions"
-msgstr "Izmantojiet regulāras izteiksmes"
+msgstr "Izmanto regulāras izteiksmes"
 
 #. 5.8/search.py:125 4.0/search.py:125
 msgid "Stop"
@@ -420,7 +409,7 @@ msgstr "Meklēšana: "
 
 #. 5.8/search.py:220 4.0/search.py:220
 msgid "Error: insufficient permissions to read folder "
-msgstr "Kļūda: nepietiek atļaujas, lai lasītu mapi "
+msgstr "Kļūda: nepietiek atļaujas, lai nolasītu mapi "
 
 #. 5.8/search.py:252 4.0/search.py:252
 msgid "Search Completed"
@@ -428,37 +417,31 @@ msgstr "Meklēšana pabeigta"
 
 #. 5.8/search.py:259 4.0/search.py:259
 msgid "Skipping"
-msgstr "Izlaižot"
+msgstr "Izlaižu"
 
 #. 5.8/search.py:259 4.0/search.py:259
 msgid " - directory already searched"
-msgstr " - katalogs jau ir meklēts"
+msgstr " - katalogs jau tika meklēts"
 
 #. 4.0/mint-remove-application.py:34
-msgid ""
-"This menu item is not associated to any package. Do you want to remove it "
-"from the menu anyway?"
-msgstr ""
-"Šis izvēlnes vienums nav saistīts ar nevienu pakotni. Vai tomēr vēlaties to "
-"noņemt no izvēlnes?"
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Šis izvēlnes vienums nav saistīts ar nevienu pakotni. Vai tomēr vēlies to noņemt no izvēlnes?"
 
 #. 4.0/mint-remove-application.py:75
 msgid "The following packages will be removed:"
-msgstr "Tiks noņemti šādi iepakojumi:"
+msgstr "Tiks noņemtas šādas pakotnes:"
 
 #. 4.0/mint-remove-application.py:82
 msgid "Packages to be removed"
-msgstr "Pakas, kas jāizņem"
+msgstr "Pakotnes, kas jānoņem"
 
 #. 4.0/mint-remove-application.py:143
-#, python-format
 msgid "Cannot remove package %s as it is required by other packages."
-msgstr "Nevar noņemt pakotni %s, jo to pieprasa citas pakotnes."
+msgstr "Nevar noņemt pakotni %s , jo to pieprasa citas pakotnes."
 
 #. 4.0/mint-remove-application.py:149
-#, python-format
 msgid "Package %s is a dependency of the following packages:"
-msgstr "Pakotne %s ir atkarība no šādām pakotnēm:"
+msgstr "Pakotne %s ir atkarīga no šādām pakotnēm:"
 
 #. metadata.json->name
 #. 3.2->settings-schema.json->cinnamenuProvidersSection->title
@@ -466,12 +449,8 @@ msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
 #. metadata.json->description
-msgid ""
-"A flexible menu with grid or list layout options, file browser and emoji "
-"search."
-msgstr ""
-"Elastīga izvēlne ar režģa vai saraksta izkārtojuma opcijām, failu "
-"pārlūkprogrammu un emocijzīmju meklēšanu."
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Elastīga izvēlne ar režģa vai saraksta izkārtojuma opcijām, failu pārlūkprogrammu un emocijzīmju meklēšanu."
 
 #. 5.8->settings-schema.json->layout->title
 #. 5.8->settings-schema.json->menu-layout->title
@@ -499,7 +478,7 @@ msgstr "Izskats"
 #. 4.0->settings-schema.json->tips->title
 #. 4.0->settings-schema.json->tips-section->title
 msgid "Tips"
-msgstr ""
+msgstr "Padomi"
 
 #. 5.8->settings-schema.json->menu-content->title
 #. 4.0->settings-schema.json->menu-content->title
@@ -545,19 +524,17 @@ msgstr "Režģis"
 #. 5.8->settings-schema.json->applications-view-mode->tooltip
 #. 4.0->settings-schema.json->applications-view-mode->tooltip
 msgid "View applications as list or grid"
-msgstr "Skatiet lietojumprogrammas kā sarakstu vai režģi"
+msgstr "Skati lietojumprogrammas kā sarakstu vai režģi"
 
 #. 5.8->settings-schema.json->show-sidebar->description
 #. 4.0->settings-schema.json->show-sidebar->description
-#, fuzzy
 msgid "Show sidebar"
-msgstr "Rādīt izlasi sānjoslā"
+msgstr "Rādīt sānu joslu"
 
 #. 5.8->settings-schema.json->show-sidebar->tooltip
 #. 4.0->settings-schema.json->show-sidebar->tooltip
-#, fuzzy
 msgid "Show the sidebar in the menu"
-msgstr "Rādīt izvēlnē mājas mapes kategoriju"
+msgstr "Rādīt sānu joslu izvēlnē"
 
 #. 5.8->settings-schema.json->sidebar-placement->description
 #. 4.0->settings-schema.json->sidebar-placement->description
@@ -587,7 +564,7 @@ msgstr "Pa labi"
 #. 5.8->settings-schema.json->sidebar-placement->tooltip
 #. 4.0->settings-schema.json->sidebar-placement->tooltip
 msgid "Choose where to show the sidebar"
-msgstr "Izvēlieties, kur rādīt sānjoslu"
+msgstr "Izvēlies, kur rādīt sānjoslu"
 
 #. 5.8->settings-schema.json->sidebar-favorites->description
 #. 4.0->settings-schema.json->sidebar-favorites->description
@@ -606,18 +583,17 @@ msgstr "Nav"
 #. 5.8->settings-schema.json->sidebar-favorites->options
 #. 4.0->settings-schema.json->sidebar-favorites->options
 msgid "Apps only"
-msgstr ""
+msgstr "Tikai lietotnes"
 
 #. 5.8->settings-schema.json->sidebar-favorites->options
 #. 4.0->settings-schema.json->sidebar-favorites->options
 msgid "Files only"
-msgstr ""
+msgstr "Tikai faili"
 
 #. 5.8->settings-schema.json->sidebar-favorites->options
 #. 4.0->settings-schema.json->sidebar-favorites->options
-#, fuzzy
 msgid "Apps and files"
-msgstr "Lietojumprogrammas un faili"
+msgstr "Programmas un faili"
 
 #. 5.8->settings-schema.json->sidebar-favorites->tooltip
 #. 4.0->settings-schema.json->sidebar-favorites->tooltip
@@ -642,19 +618,17 @@ msgstr "Zem nosaukumiem"
 #. 5.8->settings-schema.json->description-placement->tooltip
 #. 4.0->settings-schema.json->description-placement->tooltip
 msgid "Choose where to show application descriptions"
-msgstr "Izvēlieties, kur rādīt lietojumprogrammu aprakstus"
+msgstr "Izvēlies, kur rādīt lietojumprogrammu aprakstus"
 
 #. 5.8->settings-schema.json->show-categories->description
 #. 4.0->settings-schema.json->show-categories->description
-#, fuzzy
 msgid "Show categories"
-msgstr "Rādīt kategoriju ikonas"
+msgstr "Rādīt kategorijas"
 
 #. 5.8->settings-schema.json->show-categories->tooltip
 #. 4.0->settings-schema.json->show-categories->tooltip
-#, fuzzy
 msgid "Show list of application categories"
-msgstr "Rādīt lietojumprogrammu ikonas"
+msgstr "Rādīt lietojumprogrammu kategoriju sarakstu"
 
 #. 5.8->settings-schema.json->show-places-category->description
 #. 4.0->settings-schema.json->show-places-category->description
@@ -686,7 +660,7 @@ msgstr "Rādīt iecienītāko lietotņu kategoriju"
 #. 5.8->settings-schema.json->show-favorite-apps-category->tooltip
 #. 4.0->settings-schema.json->show-favorite-apps-category->tooltip
 msgid "Show your favorite apps category in the menu"
-msgstr "Parādiet izvēlnē savu iecienītāko lietotņu kategoriju"
+msgstr "Rādīt izvēlnē savu iecienītāko lietotņu kategoriju"
 
 #. 5.8->settings-schema.json->show-home-folder-category->description
 #. 4.0->settings-schema.json->show-home-folder-category->description
@@ -700,21 +674,19 @@ msgstr "Rādīt izvēlnē mājas mapes kategoriju"
 
 #. 5.8->settings-schema.json->show-emoji-category->description
 #. 4.0->settings-schema.json->show-emoji-category->description
-#, fuzzy
 msgid "Show emoji category"
-msgstr "Rādīt iecienītāko lietotņu kategoriju"
+msgstr "Rādīt emocijzīmju kategoriju"
 
 #. 5.8->settings-schema.json->show-emoji-category->tooltip
 #. 4.0->settings-schema.json->show-emoji-category->tooltip
-#, fuzzy
 msgid "Show emoji category in the menu"
-msgstr "Rādīt izvēlnē mājas mapes kategoriju"
+msgstr "Izvēlnē rādīt emocijzīmju kategoriju"
 
 #. 5.8->settings-schema.json->menu-editor-button->description
 #. 4.0->settings-schema.json->menu-editor-button->description
 #. 3.2->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
-msgstr "Atveriet izvēlnes redaktoru"
+msgstr "Atver izvēlnes redaktoru"
 
 #. 5.8->settings-schema.json->overlay-key->description
 #. 4.0->settings-schema.json->overlay-key->description
@@ -726,13 +698,13 @@ msgstr "Tastatūras īsinājumtaustiņš, lai atvērtu un aizvērtu izvēlni"
 #. 4.0->settings-schema.json->activate-on-hover->description
 #. 3.2->settings-schema.json->activate-on-hover->description
 msgid "Open menu on hover"
-msgstr "Atveriet izvēlni, novietojot kursoru"
+msgstr "Atver izvēlni, novietojot kursoru"
 
 #. 5.8->settings-schema.json->activate-on-hover->tooltip
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 msgid "Open the menu when I move my mouse over the panel icon"
-msgstr "Atveriet izvēlni, kad pārvietoju peles kursoru virs paneļa ikonas"
+msgstr "Atvērt izvēlni, kad es pārvietoju peles kursoru virs paneļa ikonas"
 
 #. 5.8->settings-schema.json->hover-delay->units
 #. 4.0->settings-schema.json->hover-delay->units
@@ -751,25 +723,25 @@ msgstr "Izvēlnes kursora aizkave"
 #. 4.0->settings-schema.json->enable-animation->description
 #. 3.2->settings-schema.json->enable-animation->description
 msgid "Use menu animations"
-msgstr "Izmantojiet izvēlnes animācijas"
+msgstr "Izmantot izvēlnes animācijas"
 
 #. 5.8->settings-schema.json->enable-animation->tooltip
 #. 4.0->settings-schema.json->enable-animation->tooltip
 #. 3.2->settings-schema.json->enable-animation->tooltip
 msgid "Animate the menu on open and close"
-msgstr "Animējiet izvēlni, atverot un aizverot"
+msgstr "Animēt izvēlni, atverot un aizverot"
 
 #. 5.8->settings-schema.json->category-click->description
 #. 4.0->settings-schema.json->category-click->description
 #. 3.2->settings-schema.json->category-click->description
 msgid "Activate categories on click"
-msgstr "Aktivizējiet kategorijas, noklikšķinot"
+msgstr "Aktivizēt kategorijas, noklikšķinot"
 
 #. 5.8->settings-schema.json->category-click->tooltip
 #. 4.0->settings-schema.json->category-click->tooltip
 #. 3.2->settings-schema.json->category-click->tooltip
 msgid "Activate categories on click instead of on hover"
-msgstr "Aktivizējiet kategorijas, noklikšķinot, nevis virzot kursoru"
+msgstr "Aktivizēt kategorijas, noklikšķinot, nevis virzot kursoru"
 
 #. 5.8->settings-schema.json->open-on-category->description
 #. 4.0->settings-schema.json->open-on-category->description
@@ -781,7 +753,7 @@ msgstr "Atvērt izvēlni kategorijā:"
 #. 4.0->settings-schema.json->open-on-category->tooltip
 #. 3.2->settings-schema.json->startup-view-mode->tooltip
 msgid "Always open the menu with this category selected"
-msgstr "Vienmēr atveriet izvēlni ar atlasītu šo kategoriju"
+msgstr "Vienmēr atvērt izvēlni ar atlasītu šo kategoriju"
 
 #. 5.8->settings-schema.json->open-on-category->options
 #. 4.0->settings-schema.json->open-on-category->options
@@ -797,8 +769,7 @@ msgstr "Iespējot automātisko ritināšanu"
 #. 5.8->settings-schema.json->enable-autoscroll->tooltip
 #. 4.0->settings-schema.json->enable-autoscroll->tooltip
 msgid "Autoscroll the application list on mouse hover"
-msgstr ""
-"Automātiski ritiniet lietojumprogrammu sarakstu, novietojot peles kursoru"
+msgstr "Automātiski ritināt lietojumprogrammu sarakstu, novietojot peles kursoru"
 
 #. 5.8->settings-schema.json->show-hidden-files->tooltip
 #. 4.0->settings-schema.json->show-hidden-files->tooltip
@@ -823,66 +794,66 @@ msgstr "Tīmekļa meklēšanas opcija"
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Google"
-msgstr ""
+msgstr "Google"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Bing"
-msgstr ""
+msgstr "Bing"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Baidu"
-msgstr ""
+msgstr "Baidu"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Yahoo"
-msgstr ""
+msgstr "Yahoo"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Yandex"
-msgstr ""
+msgstr "Yandex"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "DuckDuckGo"
-msgstr ""
+msgstr "DuckDuckGo"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Ask"
-msgstr ""
+msgstr "Ask"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Ecosia"
-msgstr ""
+msgstr "Ecosia"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "AOL"
-msgstr ""
+msgstr "AOL"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Startpage"
-msgstr ""
+msgstr "Startpage"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Brave"
-msgstr ""
+msgstr "Brave"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Qwant"
-msgstr ""
+msgstr "Qwant"
 
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Custom"
-msgstr ""
+msgstr "Pielāgota"
 
 #. 5.8->settings-schema.json->web-search-option->tooltip
 #. 4.0->settings-schema.json->web-search-option->tooltip
@@ -891,24 +862,21 @@ msgstr "Rādīt meklēšanas rezultātos interneta meklēšanas opciju"
 
 #. 5.8->settings-schema.json->web-search-custom-url->description
 msgid "URL for custom search"
-msgstr ""
+msgstr "Pielāgotās meklēšanas URL"
 
 #. 5.8->settings-schema.json->web-search-custom-url->tooltip
 msgid "Enter the URL that is prepended to the search query."
-msgstr ""
+msgstr "Ievadi URL, kas tiek pievienots meklēšanas vaicājuma sākumā."
 
 #. 5.8->settings-schema.json->web-suggestions->description
 #. 4.0->settings-schema.json->web-suggestions->description
-#, fuzzy
 msgid "Web search suggestions"
-msgstr "Tīmekļa meklēšanas opcija"
+msgstr "Tīmekļa meklēšanas ieteikumi"
 
 #. 5.8->settings-schema.json->web-suggestions->tooltip
 #. 4.0->settings-schema.json->web-suggestions->tooltip
-msgid ""
-"With web search option, also show search suggestions. (Note: Search "
-"suggestions are provided by DuckDuckGo)"
-msgstr ""
+msgid "With web search option, also show search suggestions. (Note: Search suggestions are provided by DuckDuckGo)"
+msgstr "Izmanto tīmekļa meklēšanas opciju, rādīt arī meklēšanas ieteikumus. (Piezīme: meklēšanas ieteikumus nodrošina DuckDuckGo)"
 
 #. 5.8->settings-schema.json->enable-home-folder-search->description
 #. 4.0->settings-schema.json->enable-home-folder-search->description
@@ -918,7 +886,7 @@ msgstr "Meklēt mājas mapē"
 #. 5.8->settings-schema.json->enable-home-folder-search->tooltip
 #. 4.0->settings-schema.json->enable-home-folder-search->tooltip
 msgid "When searching, also search my home folder for files"
-msgstr "Veicot meklēšanu, meklējiet failus arī manā mājas mapē"
+msgstr "Veicot meklēšanu, meklēt failus arī manā mājas mapē"
 
 #. 5.8->settings-schema.json->enable-web-history-search->description
 #. 4.0->settings-schema.json->enable-web-history-search->description
@@ -928,12 +896,10 @@ msgstr "Meklēšana tīmekļa vēsturē"
 #. 5.8->settings-schema.json->enable-web-history-search->tooltip
 #. 4.0->settings-schema.json->enable-web-history-search->tooltip
 msgid ""
-"When searching, also search my browser's history (Google Chrome, Chromium, "
-"Opera, Vivaldi, Brave)\n"
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
 "Note: Firefox history is not currently supported."
 msgstr ""
-"Veicot meklēšanu, meklējiet arī manas pārlūkprogrammas vēsturē (Google "
-"Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Veicot meklēšanu, meklēt arī manas pārlūkprogrammas vēsturē (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
 "Piezīme: Firefox vēsture pašlaik netiek atbalstīta."
 
 #. 5.8->settings-schema.json->enable-web-bookmarks-search->description
@@ -944,17 +910,11 @@ msgstr "Tīmekļa grāmatzīmju meklēšana"
 #. 5.8->settings-schema.json->enable-web-bookmarks-search->tooltip
 #. 4.0->settings-schema.json->enable-web-bookmarks-search->tooltip
 msgid ""
-"When searching, also search my browser's web bookmarks (Google Chrome, "
-"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
-"Note: To search Firefox bookmarks you will need to install package gir1.2-"
-"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
-"libgda (Arch based distributions) and restart your computer."
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
 msgstr ""
-"Veicot meklēšanu, meklējiet arī manas pārlūkprogrammas tīmekļa grāmatzīmes "
-"(Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
-"Piezīme. Lai meklētu Firefox grāmatzīmes, jums būs jāinstalē pakotne gir1.2-"
-"gda-5.0 (Debian balstīti izplatījumi, ieskaitot Ubuntu & Linux Mint) vai "
-"pakotnē libgda (arh balstīti izplatījumi) un restartējiet datoru."
+"Veicot meklēšanu, meklēt arī mana pārlūka tīmekļa grāmatzīmēs (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Piezīme: Lai meklētu Firefox grāmatzīmes tev būs jāinstalē pakotne gir1.2-gda-5.0 (Debian bāzēts izplatījums tostarp. Ubuntu un Linux Mint) vai pakotne libgda (Arch bāzēts izplatījums) un jārestartē dators."
 
 #. 5.8->settings-schema.json->enable-wikipedia-search->description
 #. 4.0->settings-schema.json->enable-wikipedia-search->description
@@ -964,7 +924,7 @@ msgstr "Wikipedia meklēšana"
 #. 5.8->settings-schema.json->enable-wikipedia-search->tooltip
 #. 4.0->settings-schema.json->enable-wikipedia-search->tooltip
 msgid "Show some Wikipedia results"
-msgstr "Parādiet dažus Wikipedia rezultātus"
+msgstr "Parādīt dažus Wikipedia rezultātus"
 
 #. 5.8->settings-schema.json->wikipedia-language->description
 #. 5.8->settings-schema.json->wikipedia-language->tooltip
@@ -976,381 +936,375 @@ msgstr "Vikipēdijas valoda"
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "English"
-msgstr ""
+msgstr "Angļu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Sinugboanong Binisaya"
-msgstr ""
+msgstr "Sebuāņu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Svenska"
-msgstr ""
+msgstr "Zviedru"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Deutsch"
-msgstr ""
+msgstr "Vācu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Français"
-msgstr ""
+msgstr "Franču"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Nederlands"
-msgstr ""
+msgstr "Nīderlandiešu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Русский"
-msgstr ""
+msgstr "Krievu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Italiano"
-msgstr ""
+msgstr "Itāļu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Español"
-msgstr ""
+msgstr "Spāņu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Polski"
-msgstr ""
+msgstr "Poļu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "مصرى (Maṣri)"
-msgstr ""
+msgstr "مصرى (Maṣri)"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "日本語"
-msgstr ""
+msgstr "Japāņu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Tiếng Việt"
-msgstr ""
+msgstr "Vjetnamiešu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Winaray"
-msgstr ""
+msgstr "Varaju"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "中文"
-msgstr ""
+msgstr "Ķīniešu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "العربية"
-msgstr ""
+msgstr "Arābu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Українська"
-msgstr ""
+msgstr "Ukraiņu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Português"
-msgstr ""
+msgstr "Portugāļu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "فارسی"
-msgstr ""
+msgstr "Persiešu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Català"
-msgstr ""
+msgstr "Katalāņu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Српски / Srpski"
-msgstr ""
+msgstr "Serbu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Bahasa Indonesia"
-msgstr ""
+msgstr "Indonēziešu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Norsk (Bokmål)"
-msgstr ""
+msgstr "Norvēģu (būkmols)"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "한국어"
-msgstr ""
+msgstr "Korejiešu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Suomi"
-msgstr ""
+msgstr "Somu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Magyar"
-msgstr ""
+msgstr "Ungāru"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Čeština"
-msgstr ""
+msgstr "Čehu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Srpskohrvatski / Српскохрватски"
-msgstr ""
+msgstr "Serbhruātu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Bân-lâm-gú"
-msgstr ""
+msgstr "Minnaņu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Türkçe"
-msgstr ""
+msgstr "Turku"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Română"
-msgstr ""
+msgstr "Rumāņu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Нохчийн"
-msgstr ""
+msgstr "Čečenu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Euskara"
-msgstr ""
+msgstr "Basu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Bahasa Melayu"
-msgstr ""
+msgstr "Malajiešu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Tatarça / Татарча"
-msgstr ""
+msgstr "Tatāru"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "עברית"
-msgstr ""
+msgstr "Ivrits"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Հայերեն"
-msgstr ""
+msgstr "Armēņu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Български"
-msgstr ""
+msgstr "Bulgāru"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Dansk"
-msgstr ""
+msgstr "Dāņu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "تۆرکجه"
-msgstr ""
+msgstr "Dienvidazerbaidžāņu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Slovenčina"
-msgstr ""
+msgstr "Slovāku"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Қазақша"
-msgstr ""
+msgstr "Kazahu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Minangkabau"
-msgstr ""
+msgstr "Minangkabavu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Eesti"
-msgstr ""
+msgstr "Igauņu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Hrvatski"
-msgstr ""
+msgstr "Horvātu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Беларуская"
-msgstr ""
+msgstr "Baltkrievu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Lietuvių"
-msgstr ""
+msgstr "Lietuviešu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Ελληνικά"
-msgstr ""
+msgstr "Grieķu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Simple English"
-msgstr ""
+msgstr "Vienkāršā angļu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Azərbaycanca"
-msgstr ""
+msgstr "Azerbaidžāņu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Galego"
-msgstr ""
+msgstr "Galisiešu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Slovenščina"
-msgstr ""
+msgstr "Slovēņu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "اردو"
-msgstr ""
+msgstr "Urdu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Nynorsk"
-msgstr ""
+msgstr "Jaunnorvēģu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "ქართული"
-msgstr ""
+msgstr "gruzīnu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "हिन्दी"
-msgstr ""
+msgstr "Hindi"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "தமிழ்"
-msgstr ""
+msgstr "Tamilu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "ไทย"
-msgstr ""
+msgstr "Taizemiešu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "O‘zbek"
-msgstr ""
+msgstr "Uzbeku"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Latina"
-msgstr ""
+msgstr "Latīņu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Cymraeg"
-msgstr ""
+msgstr "Velšiešu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Asturianu"
-msgstr ""
+msgstr "Astūriešu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Volapük"
-msgstr ""
+msgstr "Volapiks"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "粵語"
-msgstr ""
+msgstr "Kantoniešu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Македонски"
-msgstr ""
+msgstr "Maķedoniešu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "বাংলা"
-msgstr ""
+msgstr "Bengāļu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Latviešu"
-msgstr ""
+msgstr "Latviešu"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Тоҷикӣ"
-msgstr ""
+msgstr "Tadžiku"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "မြန်မာဘာသာ"
-msgstr ""
+msgstr "Birmiešu"
 
 #. 5.8->settings-schema.json->search-help->description
 #. 4.0->settings-schema.json->search-help->description
 msgid ""
 "\n"
-"Note: Some search options can still be used even if you have not enabled "
-"them here by prefixing your search term.\n"
-"For example: to search for an emoji, type 'e heart' to find heart emojis. "
-"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
-"for web bookmarks search.\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
 msgstr ""
 "\n"
-"Piezīme. Dažas meklēšanas opcijas joprojām var izmantot pat tad, ja neesat "
-"tās šeit iespējojis, pievienojot meklēšanas vienuma prefiksu.\n"
-"Piemēram: lai meklētu emocijzīmi, ierakstiet “e heart”, lai atrastu sirsniņu "
-"emocijzīmes. Tāpat izmantojiet prefiksus “f” failu meklēšanai, “h” tīmekļa "
-"vēsturei un “b” tīmekļa grāmatzīmju meklēšanai.\n"
+"Piezīme: Dažas meklēšanas opcijas joprojām var izmantot, pat ja neesi tās šeit iespējojis, pievienojot prefiksu savam meklēšanas vaicājumam.\n"
+"Piemēram: lai meklētu emocijzīmi, ieraksti 'e heart', lai atrastu sirds emocijzīmes. Tāpat izmanto prefiksus 'f ' failu meklēšanai, 'h ' tīmekļa vēsturei un 'b ' tīmekļa grāmatzīmju meklēšanai.\n"
 
 #. 5.8->settings-schema.json->menu-icon-custom->description
 #. 4.0->settings-schema.json->menu-icon-custom->description
 #. 3.2->settings-schema.json->menu-icon-custom->description
 msgid "Use a custom icon"
-msgstr "Izmantojiet pielāgotu ikonu"
+msgstr "Izmantot pielāgotu ikonu"
 
 #. 5.8->settings-schema.json->menu-icon-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-custom->tooltip
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
 msgid "Use a custom icon in the panel"
-msgstr "Izmantojiet pielāgotu ikonu panelī"
+msgstr "Izmantot pielāgotu ikonu panelī"
 
 #. 5.8->settings-schema.json->menu-icon->description
 #. 5.8->settings-schema.json->menu-icon->tooltip
@@ -1364,12 +1318,12 @@ msgstr "Paneļa ikona"
 #. 5.8->settings-schema.json->menu-icon-size-custom->description
 #. 4.0->settings-schema.json->menu-icon-size-custom->description
 msgid "Use a custom icon size"
-msgstr "Izmantojiet pielāgotu ikonas izmēru"
+msgstr "Izmantot pielāgotu ikonas izmēru"
 
 #. 5.8->settings-schema.json->menu-icon-size-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-size-custom->tooltip
 msgid "Use a custom size for the panel icon"
-msgstr "Izmantojiet pielāgotu izmēru paneļa ikonai"
+msgstr "Izmantot pielāgotu izmēru paneļa ikonai"
 
 #. 5.8->settings-schema.json->menu-icon-size->description
 #. 4.0->settings-schema.json->menu-icon-size->description
@@ -1379,7 +1333,7 @@ msgstr "Paneļa ikonas izmērs (pikseļos)"
 #. 5.8->settings-schema.json->menu-icon-size->tooltip
 #. 4.0->settings-schema.json->menu-icon-size->tooltip
 msgid "Choose a custom size for the panel icon"
-msgstr "Izvēlieties pielāgotu paneļa ikonas izmēru"
+msgstr "Izvēlēties pielāgotu paneļa ikonas izmēru"
 
 #. 5.8->settings-schema.json->menu-label->description
 #. 4.0->settings-schema.json->menu-label->description
@@ -1430,65 +1384,62 @@ msgstr "Sānjoslas ikonas izmērs (pikseļos)"
 #. 5.8->settings-schema.json->use-box-style->description
 #. 4.0->settings-schema.json->use-box-style->description
 msgid "Use sidebar box style"
-msgstr "Izmantojiet sānjoslas lodziņu stilu"
+msgstr "Izmantot sānjoslas lodziņu stilu"
 
 #. 5.8->settings-schema.json->use-box-style->tooltip
 #. 4.0->settings-schema.json->use-box-style->tooltip
 msgid "Use a sidebar box style"
-msgstr "Izmantojiet sānjoslas kastes stilu"
+msgstr "Izmantot sānjoslas kastes stilu"
 
 #. 5.8->settings-schema.json->use-tile-style->description
 #. 4.0->settings-schema.json->use-tile-style->description
 msgid "Use tile style"
-msgstr "Izmantojiet flīžu stilu"
+msgstr "Izmantot flīžu stilu"
 
 #. 5.8->settings-schema.json->use-tile-style->tooltip
 #. 4.0->settings-schema.json->use-tile-style->tooltip
-msgid ""
-"Use a tile style for the application buttons (Note: may not work on some "
-"themes)"
-msgstr ""
-"Lietojumprogrammu pogām izmantojiet flīžu stilu (piezīme: var nedarboties ar "
-"dažiem motīviem)"
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Lietojumprogrammu pogām izmantot flīžu stilu (piezīme: var nedarboties ar dažiem motīviem)"
 
 #. 5.8->settings-schema.json->info1->description
 #. 4.0->settings-schema.json->info1->description
-#, fuzzy
 msgid ""
 "\n"
 "• Drag on the menu edge to change the menu size."
 msgstr ""
 "\n"
-"Informācija/padoms: velciet uz izvēlnes malas, lai mainītu izvēlnes izmēru.\n"
+"• Velc uz izvēlnes malas, lai mainītu izvēlnes lielumu."
 
 #. 5.8->settings-schema.json->info2->description
 #. 4.0->settings-schema.json->info2->description
-#, fuzzy
 msgid ""
 "\n"
 "• Drag and drop menu categories to change their order."
 msgstr ""
 "\n"
-"Informācija/padoms: velciet uz izvēlnes malas, lai mainītu izvēlnes izmēru.\n"
+"• Velc un nomet izvēlnes kategorijas, lai mainītu to secību."
 
 #. 5.8->settings-schema.json->info3->description
 #. 4.0->settings-schema.json->info3->description
 msgid ""
 "\n"
-"• Folders can be set up and removed as menu categories by right-clicking on "
-"them."
+"• Folders can be set up and removed as menu categories by right-clicking on them."
 msgstr ""
+"\n"
+"• Mapes var iestatīt un noņemt kā izvēlnes kategorijas, uz tām noklikšķinot ar labo peles pogu."
 
 #. 5.8->settings-schema.json->info4->description
 #. 4.0->settings-schema.json->info4->description
 msgid ""
 "\n"
 "• Additional key options:\n"
-"ctrl-p — Open launcher properties dialogue of currently highlighted "
-"application.\n"
-"ctrl-d — Open .desktop file of currently highlighted app in default text "
-"editor.\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text editor.\n"
 msgstr ""
+"\n"
+"• Papildu taustiņu iespējas:\n"
+"ctrl-p — Atvērt pašlaik iezīmētās lietotnes palaidēja rekvizītu dialoglodziņu.\n"
+"ctrl-d — Atvērt pašlaik iezīmētās lietotnes .desktop failu noklusējuma teksta redaktorā.\n"
 
 #. 3.2->settings-schema.json->providers->title
 msgid "Search Providers"
@@ -1515,8 +1466,8 @@ msgid ""
 "Show your browser's web bookmarks in the menu.\n"
 "Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
-"Izvēlnē parādiet pārlūkprogrammas tīmekļa grāmatzīmes.\n"
-"Piezīme. Lai lasītu Firefox grāmatzīmes, instalējiet pakotni gir1.2-gda-5.0."
+"Izvēlnē rādīt pārlūkprogrammas tīmekļa grāmatzīmes.\n"
+"Piezīme: Instalēt pakotnes gir1.2-GDA-5.0, lai lasītu Firefox grāmatzīmes."
 
 #. 3.2->settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
@@ -1571,7 +1522,7 @@ msgstr "Rīka padoma aizkave"
 #. 3.2->settings-schema.json->enable-custom-menu-height->description
 #. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
 msgid "Use a custom menu height"
-msgstr "Izmantojiet pielāgotu izvēlnes augstumu"
+msgstr "Izmantot pielāgotu izvēlnes augstumu"
 
 #. 3.2->settings-schema.json->custom-menu-height->description
 #. 3.2->settings-schema.json->custom-menu-height->tooltip
