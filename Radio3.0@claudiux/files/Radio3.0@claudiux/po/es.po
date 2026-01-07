@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-01-06 00:15+0100\n"
-"PO-Revision-Date: 2025-10-11 12:34+0200\n"
+"PO-Revision-Date: 2026-01-06 21:54-0300\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.8\n"
 
 #. applet.js:287
 msgid "unassigned"
@@ -665,7 +665,7 @@ msgstr "Para finalizar la instalación de la traducción, reinicie Cinnamon"
 
 #. lib/messageTray.js:1136
 msgid "System Information"
-msgstr ""
+msgstr "Información del sistema"
 
 #. lib/util.js:245
 #, javascript-format
@@ -725,28 +725,25 @@ msgid "Select a JSON file to import"
 msgstr "Seleccione un archivo JSON para importar"
 
 #. xs/bin/R3SettingsWidgets.py:174
-#, fuzzy
 msgid "Checking dependencies"
-msgstr "No comprobar las dependencias"
+msgstr "Comprobando dependencias"
 
 #. xs/bin/R3SettingsWidgets.py:175
 #, python-format
 msgid "Please install: %s"
-msgstr ""
+msgstr "Por favor, instale: %s"
 
 #. xs/bin/R3SettingsWidgets.py:374
-#, fuzzy
 msgid "_Cancel"
-msgstr "Cancelar"
+msgstr "_Cancelar"
 
 #. xs/bin/R3SettingsWidgets.py:375
 msgid "_Open"
-msgstr ""
+msgstr "_Abrir"
 
 #. xs/bin/R3SettingsWidgets.py:388
-#, fuzzy
 msgid "Sound files"
-msgstr "Archivos JSON"
+msgstr "Archivos de sonido"
 
 #. xs/bin/R3TreeListWidgets.py:279 xs/bin/R3TreeListWidgets.py:502
 msgid "Add new entry"
@@ -1683,7 +1680,7 @@ msgstr "Estándar"
 
 #. settings-schema.json->image-resolution->options
 msgid "Fastest"
-msgstr ""
+msgstr "Más rápida"
 
 #. settings-schema.json->image-resolution->tooltip
 msgid ""
