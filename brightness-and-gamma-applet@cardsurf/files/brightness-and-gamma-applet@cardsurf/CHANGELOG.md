@@ -1,3 +1,7 @@
+### v2.7.0~20260107
+* For cinnamon 6.6: Does not use the shellUtils library, to avoid any problem with Gio.UnixOutputStream.
+* Thus, permanently fixes [#8111](https://github.com/linuxmint/cinnamon-spices-applets/issues/8111)
+
 ### v2.6.1~20251223
 * Solves a problem with Gio.UnixOutputStream.
 * Fixes [#8111](https://github.com/linuxmint/cinnamon-spices-applets/issues/8111)
