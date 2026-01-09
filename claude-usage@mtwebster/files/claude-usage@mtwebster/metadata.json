@@ -2,6 +2,6 @@
     "uuid": "claude-usage@mtwebster",
     "name": "Claude Usage Monitor",
     "description": "Display Claude API usage limits (5-hour and 7-day)",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "author": "mtwebster"
 }

@@ -213,9 +213,9 @@ ClaudeUsageApplet.prototype = {
     },
 
     getColorClassForPercent: function(percent) {
-        if (percent < 50) {
+        if (percent < 70) {
             return COLOR_GOOD;
-        } else if (percent < 80) {
+        } else if (percent < 85) {
             return COLOR_WARNING;
         } else {
             return COLOR_ERROR;
@@ -241,9 +241,16 @@ ClaudeUsageApplet.prototype = {
 
             const fiveHourUtil = data.five_hour.utilization || 0;
             const sevenDayUtil = data.seven_day.utilization || 0;
-
+            let fiveHourText;
+            if ((fiveHourUtil === 100 || sevenDayUtil === 100) && data.extra_usage?.is_enabled) {
+                fiveHourText = "+ ";
+                if (data.extra_usage?.used_credits) {
+                    fiveHourText += data.extra_usage.used_credits;
+                }
+            } else {
+                fiveHourText = fiveHourUtil.toFixed(0) + "%";
+            }
             // Format 5-hour label with time until reset if available
-            let fiveHourText = fiveHourUtil.toFixed(0) + "%";
             if (data.five_hour.resets_at) {
                 const resetTimeUTC = GLib.DateTime.new_from_iso8601(
                     data.five_hour.resets_at,
