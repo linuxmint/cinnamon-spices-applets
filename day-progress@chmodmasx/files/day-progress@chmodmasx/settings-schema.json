@@ -53,12 +53,12 @@
     },
     "end-hour": {
         "type": "spinbutton",
-        "default": 23,
+        "default": 0,
         "min": 0,
         "max": 23,
         "step": 1,
         "units": "hours",
         "description": "End hour",
-        "tooltip": "Hour at which the indicator ends"
+        "tooltip": "Hour at which the indicator ends.\nFor a duration of 24 hours, enter the same Start and End hours."
     }
 }

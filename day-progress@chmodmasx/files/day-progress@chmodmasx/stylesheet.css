@@ -8,3 +8,8 @@
     -pie-background-color: rgba(255, 255, 255, 0.2);
     -pie-border-width: 0.1em;
 }
+
+.day-progress-tooltip {
+    font-family: monospace; 
+    text-align: end;
+}
