@@ -1,5 +1,7 @@
 .day-progress-label {
     font-weight: bold;
+    font-family: monospace; 
+    text-align: end;
 }
 
 .pie {
