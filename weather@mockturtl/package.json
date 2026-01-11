@@ -20,6 +20,7 @@
     "@babel/preset-env": "7.16.4",
     "@ci-types/cjs": "^6.0.2-5",
     "@eslint/js": "^9.3.0",
+    "@types/geojson": "^7946.0.16",
     "@types/luxon": "3.2.1",
     "@types/suncalc": "1.9.0",
     "babel-loader": "8.2.2",

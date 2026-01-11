@@ -10782,687 +10782,12 @@ class GeoLocation {
     }
 }
 
-// EXTERNAL MODULE: ./node_modules/suncalc/suncalc.js
-var suncalc = __webpack_require__(969);
 ;// CONCATENATED MODULE: ./src/3_8/providers/BaseProvider.ts
 class BaseProvider {
     constructor() {
         this.locationType = "coordinates";
     }
 }
-
-;// CONCATENATED MODULE: ./src/3_8/providers/met_uk.ts
-
-
-
-
-
-
-
-
-class MetUk extends BaseProvider {
-    constructor() {
-        super(...arguments);
-        this.prettyName = _("Met Office UK");
-        this.name = Services.MetOfficeUK;
-        this.maxForecastSupport = 5;
-        this.website = "https://www.metoffice.gov.uk/";
-        this.maxHourlyForecastSupport = 36;
-        this.needsApiKey = false;
-        this.remainingCalls = null;
-        this.supportHourlyPrecipChance = true;
-        this.supportHourlyPrecipVolume = false;
-        this.baseUrl = "http://datapoint.metoffice.gov.uk/public/data/val/";
-        this.forecastPrefix = "wxfcs/all/json/";
-        this.threeHourlyUrl = "?res=3hourly";
-        this.dailyUrl = "?res=daily";
-        this.currentPrefix = "wxobs/all/json/";
-        this.sitesUrl = "sitelist";
-        this.key = "key=05de1ee8-de70-46aa-9b41-299d4cc60219";
-        this.forecastSite = null;
-        this.observationSites = [];
-        this.MAX_STATION_DIST = 50000;
-        this.ParseForecast = (json, loc) => {
-            var _a, _b, _c, _d, _e;
-            const forecasts = [];
-            try {
-                const period = (_c = (_b = (_a = json.SiteRep.DV) === null || _a === void 0 ? void 0 : _a.Location) === null || _b === void 0 ? void 0 : _b.Period) !== null && _c !== void 0 ? _c : [];
-                for (const element of Array.isArray(period) ? period : [period]) {
-                    if (!Array.isArray(element.Rep))
-                        continue;
-                    const day = element.Rep[0];
-                    const night = element.Rep[1];
-                    const forecast = {
-                        date: DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone }),
-                        temp_min: CelsiusToKelvin(Number.parseFloat((_d = night.Nm) !== null && _d !== void 0 ? _d : "0")),
-                        temp_max: CelsiusToKelvin(Number.parseFloat((_e = day.Dm) !== null && _e !== void 0 ? _e : "0")),
-                        condition: this.ResolveCondition(day.W),
-                    };
-                    forecasts.push(forecast);
-                }
-                return forecasts;
-            }
-            catch (e) {
-                if (e instanceof Error)
-                    logger_Logger.Error("MET UK Forecast Parsing error: " + e.message, e);
-                ErrorHandler.Instance.PostError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
-                return null;
-            }
-        };
-        this.ParseHourlyForecast = (json, loc) => {
-            const forecasts = [];
-            let uvIndex = null;
-            try {
-                for (const day of Array.isArray(json.SiteRep.DV.Location.Period) ? json.SiteRep.DV.Location.Period : [json.SiteRep.DV.Location.Period]) {
-                    const date = DateTime.fromISO(this.PartialToISOString(day.value), { zone: loc.timeZone });
-                    if (!Array.isArray(day.Rep))
-                        continue;
-                    uvIndex = ("U" in day.Rep[0]) ? Number.parseInt(day.Rep[0].U) : null;
-                    if (Number.isNaN(uvIndex))
-                        uvIndex = null;
-                    for (const element of day.Rep) {
-                        const hour = element;
-                        const timestamp = date.plus({ hours: Number.parseInt(hour.$) / 60 });
-                        const threshold = DateTime.utc().setZone(loc.timeZone).minus({ hours: 3 });
-                        if (timestamp < threshold)
-                            continue;
-                        const forecast = {
-                            date: timestamp,
-                            temp: CelsiusToKelvin(Number.parseFloat(hour.T)),
-                            condition: this.ResolveCondition(hour.W),
-                            precipitation: {
-                                type: "rain",
-                                chance: Number.parseFloat(hour.Pp)
-                            }
-                        };
-                        forecasts.push(forecast);
-                    }
-                }
-                return [forecasts, { uvIndex }];
-            }
-            catch (e) {
-                if (e instanceof Error)
-                    logger_Logger.Error("MET UK Forecast Parsing error: " + e.message, e);
-                ErrorHandler.Instance.PostError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
-                return null;
-            }
-        };
-    }
-    async GetWeather(newLoc, cancellable, config) {
-        var _a;
-        const loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
-        if (this.currentLocID == null || this.currentLocID != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
-            logger_Logger.Info("Downloading new site data");
-            this.currentLoc = newLoc;
-            this.currentLocID = loc;
-            const forecastSite = await this.GetClosestForecastSite(newLoc, cancellable);
-            if (forecastSite == null)
-                return null;
-            const observationSites = await this.GetObservationSitesInRange(newLoc, this.MAX_STATION_DIST, cancellable);
-            if (observationSites == null)
-                return null;
-            this.forecastSite = forecastSite;
-            this.observationSites = observationSites;
-        }
-        else {
-            logger_Logger.Debug("Site data downloading skipped");
-        }
-        if (this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
-            logger_Logger.Error("User is probably not in UK, aborting");
-            ErrorHandler.Instance.PostError({
-                type: "hard",
-                userError: true,
-                detail: "location not covered",
-                message: _("MET Office UK only covers the UK, please make sure your location is in the country"),
-                service: "met-uk"
-            });
-            return null;
-        }
-        const forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc, cancellable);
-        const hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc, cancellable);
-        const observations = await this.GetObservationData(this.observationSites, cancellable);
-        const currentResult = this.ParseCurrent(observations, newLoc, config);
-        if (!currentResult)
-            return null;
-        const forecastResult = await forecastPromise;
-        currentResult.forecasts = forecastResult !== null && forecastResult !== void 0 ? forecastResult : [];
-        const threeHourlyResolved = await hourlyPayload;
-        if (threeHourlyResolved == null) {
-            currentResult.hourlyForecasts = [];
-            return null;
-        }
-        const [threeHourlyForecast, additionalData] = threeHourlyResolved;
-        currentResult.hourlyForecasts = threeHourlyForecast;
-        currentResult.uvIndex = (_a = additionalData === null || additionalData === void 0 ? void 0 : additionalData.uvIndex) !== null && _a !== void 0 ? _a : null;
-        return currentResult;
-    }
-    ;
-    async GetClosestForecastSite(loc, cancellable) {
-        const forecastSitelist = await HttpLib.Instance.LoadJsonSimple({
-            url: this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key,
-            cancellable
-        });
-        if (forecastSitelist == null)
-            return null;
-        return this.GetClosestSite(forecastSitelist, loc);
-    }
-    async GetObservationSitesInRange(loc, range, cancellable) {
-        const observationSiteList = await HttpLib.Instance.LoadJsonSimple({
-            url: this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key,
-            cancellable
-        });
-        if (observationSiteList == null)
-            return null;
-        let observationSites = [];
-        for (const element of observationSiteList.Locations.Location) {
-            element.dist = GetDistance(Number.parseFloat(element.latitude), Number.parseFloat(element.longitude), loc.lat, loc.lon);
-            if (element.dist > range)
-                continue;
-            observationSites.push(element);
-        }
-        observationSites = this.SortObservationSites(observationSites);
-        logger_Logger.Debug("Observation sites found: " + JSON.stringify(observationSites, null, 2));
-        return observationSites;
-    }
-    async GetObservationData(observationSites, cancellable) {
-        const observations = [];
-        for (const element of observationSites) {
-            logger_Logger.Debug("Getting observation data from station: " + element.id);
-            const payload = await HttpLib.Instance.LoadJsonSimple({
-                url: this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key,
-                cancellable
-            });
-            if (payload)
-                observations.push(payload);
-            else {
-                logger_Logger.Debug("Failed to get observations from " + element.id);
-            }
-        }
-        return observations;
-    }
-    async GetData(query, ParseFunction, loc, cancellable) {
-        if (query == null)
-            return null;
-        logger_Logger.Debug("Query: " + query);
-        const json = await HttpLib.Instance.LoadJsonSimple({ url: query, cancellable });
-        if (json == null)
-            return null;
-        return ParseFunction(json, loc);
-    }
-    ;
-    ParseCurrent(json, loc, config) {
-        const observation = this.MeshObservations(json, loc);
-        if (!observation) {
-            return null;
-        }
-        let dataIndex = -1;
-        for (const [index, element] of json.entries()) {
-            if (element.SiteRep.DV.Location == null)
-                continue;
-            dataIndex = index;
-            break;
-        }
-        const filteredJson = json;
-        if (dataIndex == -1) {
-            ErrorHandler.Instance.PostError({
-                detail: "no api response",
-                type: "hard",
-                message: _("Data was not found for location"),
-                service: "met-uk",
-            });
-            return null;
-        }
-        const times = (0,suncalc.getTimes)(new Date(), Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat), Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon), Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.elevation));
-        try {
-            const weather = {
-                coord: {
-                    lat: Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat),
-                    lon: Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon)
-                },
-                location: {
-                    city: undefined,
-                    country: undefined,
-                    timeZone: loc.timeZone,
-                },
-                stationInfo: {
-                    distanceFrom: this.observationSites[dataIndex].dist,
-                    name: this.observationSites[dataIndex].name,
-                    area: this.observationSites[dataIndex].unitaryAuthArea,
-                    lat: Number.parseFloat(this.observationSites[dataIndex].latitude),
-                    lon: Number.parseFloat(this.observationSites[dataIndex].longitude),
-                },
-                date: DateTime.fromISO(json[dataIndex].SiteRep.DV.dataDate, { zone: loc.timeZone }),
-                sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),
-                sunset: DateTime.fromJSDate(times.sunset, { zone: loc.timeZone }),
-                wind: {
-                    speed: null,
-                    degree: null
-                },
-                temperature: null,
-                pressure: null,
-                humidity: null,
-                dewPoint: null,
-                uvIndex: null,
-                condition: this.ResolveCondition(observation === null || observation === void 0 ? void 0 : observation.W),
-                forecasts: []
-            };
-            if ((observation === null || observation === void 0 ? void 0 : observation.V) != null) {
-                weather.extra_field = {
-                    name: _("Visibility"),
-                    value: this.VisibilityToText(observation.V, config),
-                    type: "string"
-                };
-            }
-            if ((observation === null || observation === void 0 ? void 0 : observation.S) != null) {
-                weather.wind.speed = MPHtoMPS(Number.parseFloat(observation.S));
-            }
-            if ((observation === null || observation === void 0 ? void 0 : observation.D) != null) {
-                weather.wind.degree = CompassToDeg(observation.D);
-            }
-            if ((observation === null || observation === void 0 ? void 0 : observation.T) != null) {
-                weather.temperature = CelsiusToKelvin(Number.parseFloat(observation.T));
-            }
-            if ((observation === null || observation === void 0 ? void 0 : observation.P) != null) {
-                weather.pressure = Number.parseFloat(observation.P);
-            }
-            if ((observation === null || observation === void 0 ? void 0 : observation.H) != null) {
-                weather.humidity = Number.parseFloat(observation.H);
-            }
-            if ((observation === null || observation === void 0 ? void 0 : observation.Dp) != null) {
-                weather.dewPoint = CelsiusToKelvin(Number.parseFloat(observation.Dp));
-            }
-            return weather;
-        }
-        catch (e) {
-            if (e instanceof Error)
-                logger_Logger.Error("Met UK Weather Parsing error: " + e.message, e);
-            ErrorHandler.Instance.PostError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
-            return null;
-        }
-    }
-    ;
-    VisibilityToText(dist, config) {
-        const distance = Number.parseInt(dist);
-        const unit = config.DistanceUnit;
-        const stringFormat = {
-            distanceUnit: this.DistanceUnitFor(unit)
-        };
-        if (distance < 1000) {
-            stringFormat.distance = MetreToUserUnits(1000, unit).toString();
-            return `${_("Very poor")} - ${_("Less than {distance} {distanceUnit}", stringFormat)}`;
-        }
-        else if (distance >= 40000) {
-            stringFormat.distance = MetreToUserUnits(40000, unit).toString();
-            return `${_("Excellent")} - ${_("More than {distance} {distanceUnit}", stringFormat)}`;
-        }
-        else if (distance < 4000) {
-            stringFormat.smallerDistance = MetreToUserUnits(1000, unit).toString();
-            stringFormat.biggerDistance = MetreToUserUnits(4000, unit).toString();
-            return `${_("Poor")} - ${_("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
-        }
-        else if (distance < 10000) {
-            stringFormat.smallerDistance = MetreToUserUnits(4000, unit).toString();
-            stringFormat.biggerDistance = MetreToUserUnits(10000, unit).toString();
-            return `${_("Moderate")} - ${_("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
-        }
-        else if (distance < 20000) {
-            stringFormat.smallerDistance = MetreToUserUnits(10000, unit).toString();
-            stringFormat.biggerDistance = MetreToUserUnits(20000, unit).toString();
-            return `${_("Good")} - ${_("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
-        }
-        else if (distance < 40000) {
-            stringFormat.smallerDistance = MetreToUserUnits(20000, unit).toString();
-            stringFormat.biggerDistance = MetreToUserUnits(40000, unit).toString();
-            return `${_("Very good")} - ${_("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
-        }
-        else {
-            stringFormat.smallerDistance = MetreToUserUnits(20000, unit).toString();
-            stringFormat.biggerDistance = MetreToUserUnits(40000, unit).toString();
-            return `${_("Very good")} - ${_("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
-        }
-    }
-    DistanceUnitFor(unit) {
-        if (unit == "imperial")
-            return _("mi");
-        return _("km");
-    }
-    SortObservationSites(observations) {
-        observations = observations.sort((a, b) => {
-            if (a.dist < b.dist)
-                return -1;
-            if (a.dist == b.dist)
-                return 0;
-            return 1;
-        });
-        return observations;
-    }
-    MeshObservations(observations, loc) {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
-        if (!observations)
-            return null;
-        if (observations.length == 0)
-            return null;
-        const firstPeriod = (_e = (_d = (_c = (_b = (_a = observations[0]) === null || _a === void 0 ? void 0 : _a.SiteRep) === null || _b === void 0 ? void 0 : _b.DV) === null || _c === void 0 ? void 0 : _c.Location) === null || _d === void 0 ? void 0 : _d.Period) !== null && _e !== void 0 ? _e : [];
-        let result = this.GetLatestObservation(Array.isArray(firstPeriod) ? firstPeriod : [firstPeriod], DateTime.utc().setZone(loc.timeZone), loc);
-        if (observations.length == 1)
-            return result;
-        for (const [index, observation] of observations.entries()) {
-            if (((_h = (_g = (_f = observation === null || observation === void 0 ? void 0 : observation.SiteRep) === null || _f === void 0 ? void 0 : _f.DV) === null || _g === void 0 ? void 0 : _g.Location) === null || _h === void 0 ? void 0 : _h.Period) == null)
-                continue;
-            if (!Array.isArray(observation.SiteRep.DV.Location.Period))
-                observation.SiteRep.DV.Location.Period = [observation.SiteRep.DV.Location.Period];
-            const nextObservation = this.GetLatestObservation(observation.SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);
-            if (result == null)
-                result = nextObservation;
-            const debugText = " Observation data missing, plugged in from ID " +
-                observation.SiteRep.DV.Location.i + ", index " + index +
-                ", distance "
-                + Math.round(GetDistance(Number.parseFloat(observation.SiteRep.DV.Location.lat), Number.parseFloat(observation.SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon))
-                + " metres";
-            if (result != null) {
-                if ((result === null || result === void 0 ? void 0 : result.V) == null) {
-                    result.V = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.V;
-                    logger_Logger.Debug("Visibility" + debugText);
-                }
-                if ((result === null || result === void 0 ? void 0 : result.W) == null) {
-                    result.W = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.W;
-                    logger_Logger.Debug("Weather condition" + debugText);
-                }
-                if ((result === null || result === void 0 ? void 0 : result.S) == null) {
-                    result.S = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.S;
-                    logger_Logger.Debug("Wind Speed" + debugText);
-                }
-                if ((result === null || result === void 0 ? void 0 : result.D) == null) {
-                    result.D = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.D;
-                    logger_Logger.Debug("Wind degree" + debugText);
-                }
-                if ((result === null || result === void 0 ? void 0 : result.T) == null) {
-                    result.T = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.T;
-                    logger_Logger.Debug("Temperature" + debugText);
-                }
-                if ((result === null || result === void 0 ? void 0 : result.P) == null) {
-                    result.P = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.P;
-                    logger_Logger.Debug("Pressure" + debugText);
-                }
-                if ((result === null || result === void 0 ? void 0 : result.H) == null) {
-                    result.H = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.H;
-                    logger_Logger.Debug("Humidity" + debugText);
-                }
-                if ((result === null || result === void 0 ? void 0 : result.Dp) == null) {
-                    result.Dp = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.Dp;
-                    logger_Logger.Debug("Dew Point" + debugText);
-                }
-            }
-        }
-        return result;
-    }
-    GetLatestObservation(observations, day, loc) {
-        if (observations == null)
-            return null;
-        for (const element of observations) {
-            const date = DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone });
-            if (!OnSameDay(date, day))
-                continue;
-            if (Array.isArray(element.Rep))
-                return element.Rep[element.Rep.length - 1];
-            else
-                return element.Rep;
-        }
-        return null;
-    }
-    PartialToISOString(date) {
-        return (date.replace("Z", "")) + "T00:00:00Z";
-    }
-    GetClosestSite(siteList, loc) {
-        const sites = siteList.Locations.Location;
-        let closest = sites[0];
-        closest.dist = GetDistance(Number.parseFloat(closest.latitude), Number.parseFloat(closest.longitude), loc.lat, loc.lon);
-        for (const element of sites) {
-            element.dist = GetDistance(Number.parseFloat(element.latitude), Number.parseFloat(element.longitude), loc.lat, loc.lon);
-            if (element.dist < closest.dist) {
-                closest = element;
-            }
-        }
-        return closest;
-    }
-    ResolveCondition(icon) {
-        switch (icon) {
-            case "NA":
-                return {
-                    main: _("Unknown"),
-                    description: _("Unknown"),
-                    customIcon: "cloud-refresh-symbolic",
-                    icons: ["weather-severe-alert"]
-                };
-            case "0":
-                return {
-                    main: _("Clear"),
-                    description: _("Clear"),
-                    customIcon: "night-clear-symbolic",
-                    icons: ["weather-clear-night", "weather-severe-alert"]
-                };
-            case "1":
-                return {
-                    main: _("Sunny"),
-                    description: _("Sunny"),
-                    customIcon: "day-sunny-symbolic",
-                    icons: ["weather-clear", "weather-severe-alert"]
-                };
-            case "2":
-                return {
-                    main: _("Partly cloudy"),
-                    description: _("Partly cloudy"),
-                    customIcon: "night-alt-cloudy-symbolic",
-                    icons: ["weather-clouds-night", "weather-overcast", "weather-severe-alert"]
-                };
-            case "3":
-                return {
-                    main: _("Partly cloudy"),
-                    description: _("Partly cloudy"),
-                    customIcon: "day-cloudy-symbolic",
-                    icons: ["weather-clouds", "weather-overcast", "weather-severe-alert"]
-                };
-            case "4":
-                return {
-                    main: _("Unknown"),
-                    description: _("Unknown"),
-                    customIcon: "cloud-refresh-symbolic",
-                    icons: ["weather-severe-alert"]
-                };
-            case "5":
-                return {
-                    main: _("Mist"),
-                    description: _("Mist"),
-                    customIcon: "fog-symbolic",
-                    icons: ["weather-fog", "weather-severe-alert"]
-                };
-            case "6":
-                return {
-                    main: _("Fog"),
-                    description: _("Fog"),
-                    customIcon: "fog-symbolic",
-                    icons: ["weather-fog", "weather-severe-alert"]
-                };
-            case "7":
-                return {
-                    main: _("Cloudy"),
-                    description: _("Cloudy"),
-                    customIcon: "cloud-symbolic",
-                    icons: ["weather-overcast", "weather-many-clouds", "weather-severe-alert"]
-                };
-            case "8":
-                return {
-                    main: _("Overcast"),
-                    description: _("Overcast"),
-                    customIcon: "cloudy-symbolic",
-                    icons: ["weather-overcast", "weather-many-clouds", "weather-severe-alert"]
-                };
-            case "9":
-                return {
-                    main: _("Light rain"),
-                    description: _("Light rain shower"),
-                    customIcon: "night-alt-showers-symbolic",
-                    icons: ["weather-showers-scattered-night", "weather-showers-night", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"]
-                };
-            case "10":
-                return {
-                    main: _("Light rain"),
-                    description: _("Light rain shower"),
-                    customIcon: "day-showers-symbolic",
-                    icons: ["weather-showers-scattered-day", "weather-showers-day", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"]
-                };
-            case "11":
-                return {
-                    main: _("Drizzle"),
-                    description: _("Drizzle"),
-                    customIcon: "showers-symbolic",
-                    icons: ["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain", "weather-severe-alert"]
-                };
-            case "12":
-                return {
-                    main: _("Light rain"),
-                    description: _("Light rain"),
-                    customIcon: "showers-symbolic",
-                    icons: ["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain", "weather-severe-alert"]
-                };
-            case "13":
-                return {
-                    main: _("Heavy rain"),
-                    description: _("Heavy rain shower"),
-                    customIcon: "night-alt-rain-symbolic",
-                    icons: ["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"]
-                };
-            case "14":
-                return {
-                    main: _("Heavy rain"),
-                    description: _("Heavy rain shower"),
-                    customIcon: "day-rain-symbolic",
-                    icons: ["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"]
-                };
-            case "15":
-                return {
-                    main: _("Heavy rain"),
-                    description: _("Heavy rain"),
-                    customIcon: "rain-symbolic",
-                    icons: ["weather-showers", "weather-showers-scattered", "weather-severe-alert"]
-                };
-            case "16":
-                return {
-                    main: _("Sleet"),
-                    description: _("Sleet shower"),
-                    customIcon: "night-alt-rain-mix-symbolic",
-                    icons: ["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"]
-                };
-            case "17":
-                return {
-                    main: _("Sleet"),
-                    description: _("Sleet shower"),
-                    customIcon: "day-rain-mix-symbolic",
-                    icons: ["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"]
-                };
-            case "18":
-                return {
-                    main: _("Sleet"),
-                    description: _("Sleet"),
-                    customIcon: "rain-mix-symbolic",
-                    icons: ["weather-showers", "weather-showers-scattered", "weather-severe-alert"]
-                };
-            case "19":
-                return {
-                    main: _("Hail"),
-                    description: _("Hail shower"),
-                    customIcon: "night-alt-hail-symbolic",
-                    icons: ["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"]
-                };
-            case "20":
-                return {
-                    main: _("Hail"),
-                    description: _("Hail shower"),
-                    customIcon: "day-hail-symbolic",
-                    icons: ["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"]
-                };
-            case "21":
-                return {
-                    main: _("Hail"),
-                    description: _("Hail"),
-                    customIcon: "hail-symbolic",
-                    icons: ["weather-showers", "weather-showers-scattered", "weather-severe-alert"]
-                };
-            case "22":
-                return {
-                    main: _("Light snow"),
-                    description: _("Light snow shower"),
-                    customIcon: "night-alt-snow-symbolic",
-                    icons: ["weather-snow-scattered", "weather-snow", "weather-severe-alert"]
-                };
-            case "23":
-                return {
-                    main: _("Light snow"),
-                    description: _("Light snow shower"),
-                    customIcon: "day-snow-symbolic",
-                    icons: ["weather-snow-scattered", "weather-snow", "weather-severe-alert"]
-                };
-            case "24":
-                return {
-                    main: _("Light snow"),
-                    description: _("Light snow"),
-                    customIcon: "snow-symbolic",
-                    icons: ["weather-snow-scattered", "weather-snow", "weather-severe-alert"]
-                };
-            case "25":
-                return {
-                    main: _("Heavy snow"),
-                    description: _("Heavy snow shower"),
-                    customIcon: "night-alt-snow-symbolic",
-                    icons: ["weather-snow", "weather-snow-scattered", "weather-severe-alert"]
-                };
-            case "26":
-                return {
-                    main: _("Heavy snow"),
-                    description: _("Heavy snow shower"),
-                    customIcon: "day-snow-symbolic",
-                    icons: ["weather-snow", "weather-snow-scattered", "weather-severe-alert"]
-                };
-            case "27":
-                return {
-                    main: _("Heavy snow"),
-                    description: _("Heavy snow"),
-                    customIcon: "snow-symbolic",
-                    icons: ["weather-snow", "weather-snow-scattered", "weather-severe-alert"]
-                };
-            case "28":
-                return {
-                    main: _("Thunder"),
-                    description: _("Thunder shower"),
-                    customIcon: "day-storm-showers-symbolic",
-                    icons: ["weather-storm", "weather-severe-alert"]
-                };
-            case "29":
-                return {
-                    main: _("Thunder"),
-                    description: _("Thunder shower"),
-                    customIcon: "night-alt-storm-showers-symbolic",
-                    icons: ["weather-storm", "weather-severe-alert"]
-                };
-            case "30":
-                return {
-                    main: _("Thunder"),
-                    description: _("Thunder"),
-                    customIcon: "thunderstorm-symbolic",
-                    icons: ["weather-storm", "weather-severe-alert"]
-                };
-            default:
-                return {
-                    main: _("Unknown"),
-                    description: _("Unknown"),
-                    customIcon: "cloud-refresh-symbolic",
-                    icons: ["weather-severe-alert"]
-                };
-        }
-    }
-    ;
-}
-;
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/common.ts
 const OWM_SUPPORTED_LANGS = [
@@ -11967,6 +11292,8 @@ class OpenWeatherMapOneCall extends BaseProvider {
 }
 ;
 
+// EXTERNAL MODULE: ./node_modules/suncalc/suncalc.js
+var suncalc = __webpack_require__(969);
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/types/common.ts
 const conditionSeverity = {
     clearsky: 1,
@@ -18282,6 +17609,88 @@ class SwissMeteo extends BaseProvider {
         return postcodeNum >= this.VALID_MIN_PLZ && postcodeNum <= this.VALID_MAX_PLZ;
     }
 }
+
+;// CONCATENATED MODULE: ./src/3_8/providers/met_uk/provider.ts
+
+
+
+
+
+
+class MetUk extends BaseProvider {
+    constructor() {
+        super(...arguments);
+        this.prettyName = _("Met Office UK");
+        this.name = Services.MetOfficeUK;
+        this.website = "https://www.metoffice.gov.uk/";
+        this.needsApiKey = true;
+        this.maxHourlyForecastSupport = 48;
+        this.maxForecastSupport = 6;
+        this.remainingCalls = null;
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
+        this.baseUrl = "https://data.hub.api.metoffice.gov.uk/sitespecific/v0";
+        this.hourlyForecastUrl = `${this.baseUrl}/point/hourly`;
+        this.forecastUrl = `${this.baseUrl}/point/daily`;
+    }
+    async GetWeather(newLocation, cancellable, config) {
+        const params = Object.assign(Object.assign({}, MetUk.params), { latitude: newLocation.lat.toString(), longitude: newLocation.lon.toString() });
+        const res = await HttpLib.Instance.LoadJsonAsync({
+            url: this.hourlyForecastUrl,
+            headers: {
+                apiKey: config.ApiKey,
+            },
+            params: params,
+            cancellable: cancellable,
+        });
+        if (!res.Success) {
+            logger_Logger.Error(`MetUK: Failed to get data: ${JSON.stringify(res.ErrorData)}`);
+            return null;
+        }
+        const hourlyForecasts = res.Data.features[0];
+        if (!hourlyForecasts) {
+            logger_Logger.Error(`MetUK: No hourly forecast data found for location ${newLocation.lat}, ${newLocation.lon}`);
+            return null;
+        }
+        return {
+            condition: {
+                customIcon: "alien-symbolic",
+                description: "Sunny",
+                main: "Clear",
+                icons: []
+            },
+            coord: {
+                lat: newLocation.lat,
+                lon: newLocation.lon,
+            },
+            date: DateTime.fromISO(hourlyForecasts.properties.modelRunDate).setZone(MetUk.timezone),
+            wind: {
+                speed: 0,
+                degree: 0,
+            },
+            humidity: 0,
+            pressure: 0,
+            dewPoint: 0,
+            forecasts: [],
+            hourlyForecasts: this.GetHourlyForecasts(hourlyForecasts.properties),
+            sunrise: null,
+            sunset: null,
+            location: {
+                timeZone: MetUk.timezone,
+            },
+            temperature: 0,
+            uvIndex: null,
+            alerts: [],
+        };
+    }
+    GetHourlyForecasts(payload) {
+        return [];
+    }
+}
+MetUk.params = {
+    includeLocationName: "true",
+};
+MetUk.timezone = "Europe/London";
 
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
 

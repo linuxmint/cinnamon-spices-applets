@@ -8,7 +8,6 @@ import { LocationStore } from "./location_services/locationstore";
 import { GeoLocation } from "./location_services/nominatim";
 import { DateTime } from "luxon";
 import { FileExists, LoadContents } from "./lib/io_lib";
-import { MetUk } from "./providers/met_uk";
 import type { BaseProvider } from "./providers/BaseProvider";
 import { OpenWeatherMapOneCall } from "./providers/openweathermap/provider-closed";
 import { MetNorway } from "./providers/met_norway/provider";
@@ -31,6 +30,7 @@ import type settingsSchema from "../../files/weather@mockturtl/3.8/settings-sche
 import { soupLib } from "./lib/soupLib";
 import { GeoTimezone } from "./location_services/tz_lookup";
 import { SwissMeteo } from "./providers/swiss-meteo/provider";
+import { MetUk } from "./providers/met_uk/provider";
 
 const { get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
