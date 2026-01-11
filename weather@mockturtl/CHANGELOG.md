@@ -6,6 +6,7 @@
 * Removed myself as  the maintainer of the weather@mockturtl applet and updated CODEOWNERS
 * Clean build instructions
 * Make hourly weather day (Mon, Tue, etc) text bold
+* Fixes [Fixes [Security] ReDoS vulnerability in weather@mockturtl applet via luxon@3.2.0 (CVE-2023-22467) #8155](https://github.com/linuxmint/cinnamon-spices-applets/issues/8155)
 
 ## 3.6.8
 
