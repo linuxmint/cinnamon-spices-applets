@@ -241,7 +241,6 @@ class MyApplet extends Applet.TextIconApplet {
             if (app) {
                 let icon = tracker.get_window_app(activeWindow).create_icon_texture(20)
                 this.button["icon"].set_child(icon)
-                this.actor.add(this.button['icon'])
             } else {
                 let icon = new St.Icon({
                     icon_name: "video-display",
@@ -268,7 +267,8 @@ class MyApplet extends Applet.TextIconApplet {
             this.setButtons("hide")
             return
         }
-        if (w.get_window_type() >= 1) {
+        //console.log("WINDOW TYPE = ", w.get_window_type())
+        if (w.get_window_type() >= 5) {
             this.setButtons("hide")
             return
         }
@@ -279,7 +279,7 @@ class MyApplet extends Applet.TextIconApplet {
         if (this.onlyMaximized == true) {
             this.onlyMaximize(w)
         } else {
-            this.setButtons("show")
+            this.setButtons("show", w.get_window_type())
         }
     }
 
@@ -306,23 +306,30 @@ class MyApplet extends Applet.TextIconApplet {
     onlyMaximize(w) {
         let app = tracker.get_window_app(w)
         if (app && w.get_maximized()) {
-            this.setButtons("show")
+            this.setButtons("show", w.get_window_type())
         } else {
             this.setButtons("hide")
         }
     }
 
-    setButtons(what) {
+    setButtons(what, wtype) {
         let buttons = this.buttons_style.split(":")
         let skip = 0
         if (what == "show") {
             skip = 255
         }
+        if (wtype == undefined) {
+            wtype = 0
+        }
         for (let i = 0; i < buttons.length; ++i) {
-            if (buttons[i] == undefined || buttons[i] == "icon" || this.button[buttons[i]] == undefined || this.button[buttons[i]].opacity == skip) {
+            if (buttons[i] == undefined || buttons[i] == "icon" || this.button[buttons[i]] == undefined || (this.button[buttons[i]].opacity == skip && wtype == 0)) {
                 continue
             }
-            if (what == "show") {
+            let show = true
+            if (wtype > 0 && buttons[i] != "close") {
+                show = false
+            }
+            if (what == "show" && show) {
                 if (!this.hideButtons) {
                     this.button[buttons[i]].show()
                 }
