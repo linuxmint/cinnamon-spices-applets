@@ -13,6 +13,8 @@ const ALBUMART_ON = TMP_ALBUMART_DIR + "/ON";
 const ALBUMART_PICS_DIR = TMP_ALBUMART_DIR + "/song-art";
 const ALBUMART_TITLE_FILE = TMP_ALBUMART_DIR + "/title.txt";
 
+const ARTS_DIR = XDG_RUNTIME_DIR + "/sound150/arts";
+
 const MPV_RADIO_PID = XDG_RUNTIME_DIR + "/mpv_radio_PID";
 
 const PopupMenu = imports.ui.popupMenu;
@@ -119,6 +121,8 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
             iconName = "banshee";
         } else if (name === "Spotify") {
             iconName = "spotify";
+        } else if (name === "Strawberry") {
+            iconName = "strawberry";
         } else if (name === "VBox") {
             name = "Virtualbox";
             iconName = "virtualbox";
@@ -380,7 +384,8 @@ class Player extends PopupMenu.PopupMenuSection {
                 //~ Util.spawnCommandLine("/usr/bin/env bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
 
                 if (this._seeker) {
-                    if (this._seeker.status === "Playing" && this._seeker.posLabel) this._seeker.posLabel.set_text(" 00:00 ");
+                    if (this._seeker.status === "Playing" && this._seeker.posLabel) 
+                        this._seeker.posLabel.set_text(" 00:00:00 ");
                     this._seeker.startingDate = Date.now();
                     this._seeker._setPosition(0);
                 }
@@ -534,7 +539,8 @@ class Player extends PopupMenu.PopupMenuSection {
     }
 
     _setName(status) {
-        this.playerLabel.set_text(this._name + " - " + _(status));
+        if (this.playerLabel != null)
+            this.playerLabel.set_text(this._name + " - " + _(status));
     }
 
     _updateControls() {
@@ -615,7 +621,8 @@ class Player extends PopupMenu.PopupMenuSection {
         } else
             this._artist = _("Unknown Artist");
 
-        this.artistLabel.set_text(this._artist);
+        if (this.artistLabel != null)
+            this.artistLabel.set_text(this._artist);
 
         if (metadata["xesam:album"])
             this._album = metadata["xesam:album"].unpack();
@@ -647,7 +654,8 @@ class Player extends PopupMenu.PopupMenuSection {
                         if (json_artist) {
                             //~ this._artist = capitalize_each_word(json_artist);
                             this._artist = json_artist.capitalize();
-                            this.artistLabel.set_text(this._artist);
+                            if (this.artistLabel != null)
+                                this.artistLabel.set_text(this._artist);
                         } else {
                             this._artist = _("Unknown Artist");
                         }
@@ -659,7 +667,8 @@ class Player extends PopupMenu.PopupMenuSection {
                 }
             } else if (this._title.includes(" - ") && this._artist == _("Unknown Artist")) {
                 [this._artist, this._title] = this._title.split(" - ");
-                this.artistLabel.set_text(this._artist);
+                if (this.artistLabel != null)
+                    this.artistLabel.set_text(this._artist);
             }
         } else {
             this._title = _("Unknown Title");
@@ -677,7 +686,8 @@ class Player extends PopupMenu.PopupMenuSection {
                 Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
         }
 
-        this.titleLabel.set_text(this._title);
+        if (this.titleLabel != null)
+            this.titleLabel.set_text(this._title);
         this._seeker.setTrack(trackid, trackLength, old_title != this._title);
         
         if (metadata["xesam:url"]) {
@@ -840,7 +850,7 @@ class Player extends PopupMenu.PopupMenuSection {
             //~ this._applet.setAppletTextIcon(this, false);
             this._applet.setAppletTextIcon(this, true);
             this._seeker.pause();
-            this._applet.volume_near_icon();
+            this._applet.volume_near_icon("s150PopupMenu - seeker paused");
         } else if (status == "Stopped") {
             this._playButton.setData("media-playback-start", _("Play"));
             this.playerIcon.set_icon_name("media-playback-stop");
@@ -895,7 +905,7 @@ class Player extends PopupMenu.PopupMenuSection {
     }
 
     _showCover(cover_path) {
-        let rnd;
+        let rnd, baseName;
         if (!cover_path || !GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
             del_song_arts();
             this.cover = new St.Icon({
@@ -907,27 +917,49 @@ class Player extends PopupMenu.PopupMenuSection {
                 icon_type: St.IconType.SYMBOLIC
             });
             cover_path = null;
+            this._cover_path = null;
+            this._applet.setAppletTextIcon(this, null);
         } else {
-            let dir = Gio.file_new_for_path(ALBUMART_PICS_DIR);
+            //~ global.log("typeof(cover_path): " + typeof(cover_path) );
+            baseName = (typeof(cover_path) === "string") ? cover_path.split("/").pop() : "";
+            //~ let dir = Gio.file_new_for_path(ALBUMART_PICS_DIR);
+            let dir = Gio.file_new_for_path(ARTS_DIR);
             let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
             if ((dir_children.next_file(null)) == null) { // dir does not contain any file.
                 if (GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
-                    rnd = randomIntegerInInterval(0, superRND).toString();
-                    if (this._applet.runAsync)
-                        Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
-                    else
-                        Util.spawnCommandLine(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
+                    if (! baseName.startsWith("R3SongArt")) {
+                        rnd = randomIntegerInInterval(0, superRND).toString();
+                        if (this._applet.runAsync) {
+                            Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
+                            Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ARTS_DIR}/R3SongArt${rnd}`);
+                        } else {
+                            Util.spawnCommandLine(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
+                            Util.spawnCommandLine(`cp -a "${cover_path}" ${ARTS_DIR}/R3SongArt${rnd}`);
+                        }
+                        //~ cover_path = `${ALBUMART_PICS_DIR}/R3SongArt${rnd}`;
+                        //~ this._cover_path = `${ALBUMART_PICS_DIR}/R3SongArt${rnd}`;
+                        cover_path = `${ARTS_DIR}/R3SongArt${rnd}`;
+                        this._cover_path = `${ARTS_DIR}/R3SongArt${rnd}`;
+                    }
                 } else {
                     cover_path = null;
+                    this._cover_path = null;
                 }
             } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
                 //del_song_arts();
                 if (GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
-                    rnd = randomIntegerInInterval(0, superRND).toString();
-                    if (this._applet.runAsync)
-                        Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
-                    else
-                        Util.spawnCommandLine(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
+                    if (! baseName.startsWith("R3SongArt")) {
+                        rnd = randomIntegerInInterval(0, superRND).toString();
+                        if (this._applet.runAsync) {
+                            Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
+                            Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ARTS_DIR}/R3SongArt${rnd}`);
+                        } else {
+                            Util.spawnCommandLine(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
+                            Util.spawnCommandLine(`cp -a "${cover_path}" ${ARTS_DIR}/R3SongArt${rnd}`);
+                        }
+                        cover_path = `${ARTS_DIR}/R3SongArt${rnd}`;
+                        this._cover_path = `${ARTS_DIR}/R3SongArt${rnd}`;
+                    }
                 } else {
                     cover_path = null;
                 }
@@ -1094,7 +1126,7 @@ class Seeker extends Slider.Slider {
         this.actor.set_direction(St.TextDirection.LTR); // Do not invert on RTL layout
         //~ this.actor.expand = true;
         //~ this.actor.set_draw_value(true);
-        this.tooltipText = "00:00";
+        this.tooltipText = "00:00:00";
         this.tooltip = new Tooltips.Tooltip(this.actor, this.tooltipText);
 
         this.canSeek = true;
@@ -1122,7 +1154,7 @@ class Seeker extends Slider.Slider {
 
 
         this.posLabel = new St.Label({
-            text: " 00:00 ",
+            text: " 00:00:00 ",
             style: "font-family: 'Digital Numbers',monospace; "
         });
         this.posLabel.x_align = St.Align.START;
@@ -1131,7 +1163,7 @@ class Seeker extends Slider.Slider {
         //~ this.posLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
         //~ this.posLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
         this.durLabel = new St.Label({
-            text: " 00:00 ",
+            text: " 00:00:00 ",
             style: "font-family: 'Digital Numbers',monospace; "
         });
         this.durLabel.x_align = St.Align.END;
@@ -1230,12 +1262,8 @@ class Seeker extends Slider.Slider {
     time_for_label(sec) {
         let milliseconds = 1000 * sec;
         var date = new Date(milliseconds);
-        var timeString;
-        if (milliseconds < 3600000)
-            timeString = date.toISOString().substring(14, 19);
-        else
-            timeString = date.toISOString().substring(11, 19);
-        return " " + timeString + " ";
+        let timeString = date.toISOString().substring(11, 19);
+        return ` ${timeString} `;
     }
 
     play() {
@@ -1298,7 +1326,7 @@ class Seeker extends Slider.Slider {
             this._trackid = trackid;
         }
         this._length = length;
-        if (this.status !== "Stopped" && this.durLabel) this.durLabel.set_text(this.time_for_label(length));
+        if (this.status !== "Stopped" && this.durLabel != null) this.durLabel.set_text(this.time_for_label(length));
         this._wantedSeekValue = 0;
         this._updateValue();
     }
@@ -1314,15 +1342,16 @@ class Seeker extends Slider.Slider {
                 this.startingDate = Date.now() - this._wantedSeekValue * 1000;
                 this.setValue(this._wantedSeekValue / this._length);
                 this._currentTime = this._wantedSeekValue;
-                if (this.status === "Playing" && this.posLabel) this.posLabel.set_text(this.time_for_label(this._currentTime));
+                if (this.status === "Playing" && this.posLabel != null) this.posLabel.set_text(this.time_for_label(this._currentTime));
                 this._wantedSeekValue = 0;
             } else if (!this._dragging) {
                 if (this._length > 0 && this._currentTime > 0) {
-                    if (this.status === "Playing" && this.posLabel) this.posLabel.set_text(this.time_for_label(this._currentTime));
+                    if (this.status === "Playing" && this.posLabel != null) this.posLabel.set_text(this.time_for_label(this._currentTime));
                     this.setValue(this._currentTime / this._length);
                 } else {
                     this.setValue(0);
-                    if (this.status === "Playing" && this.posLabel) this.posLabel.set_text(" 00:00 ");
+                    if (this.status === "Playing" && this.posLabel != null) 
+                        this.posLabel.set_text(" 00:00:00 ");
                 }
             }
         } else {
@@ -1334,10 +1363,10 @@ class Seeker extends Slider.Slider {
                     this.startingDate = Date.now() - this._wantedSeekValue * 1000;
                     this.setValue(this._wantedSeekValue / this._length);
                     this._currentTime = this._wantedSeekValue;
-                    if (this.status === "Playing" && this.posLabel) this.posLabel.set_text(this.time_for_label(this._currentTime));
+                    if (this.status === "Playing" && this.posLabel != null) this.posLabel.set_text(this.time_for_label(this._currentTime));
                     this._wantedSeekValue = 0;
                 } else if (!this._dragging) {
-                    if (this.status === "Playing" && this.posLabel) this.posLabel.set_text(this.time_for_label(this._currentTime));
+                    if (this.status === "Playing" && this.posLabel != null) this.posLabel.set_text(this.time_for_label(this._currentTime));
                     this.setValue(this._currentTime / this._length);
                     if (this._timeoutId != null) {
                         source_remove(this._timeoutId);
@@ -1361,7 +1390,8 @@ class Seeker extends Slider.Slider {
                 }
             } else {
                 this.setValue(0);
-                if (!this.destroyed && this.status === "Playing" && this.posLabel) this.posLabel.set_text(" 00:00 ");
+                if (!this.destroyed && this.status === "Playing" && this.posLabel != null) 
+                    this.posLabel.set_text(" 00:00:00 ");
                 this.hideAll();
             }
         }

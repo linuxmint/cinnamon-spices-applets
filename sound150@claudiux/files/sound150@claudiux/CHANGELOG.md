@@ -1,3 +1,7 @@
+### v13.9.0~20251228
+  * Also displays OSD with commands like "pactl set-sink-volume ...".
+  * Fixes [#8045](https://github.com/linuxmint/cinnamon-spices-applets/issues/8045)
+
 ### v13.8.2~20251225
   * Fixes a nasty bug.
   * Fixes [#8115](https://github.com/linuxmint/cinnamon-spices-applets/issues/8115)
