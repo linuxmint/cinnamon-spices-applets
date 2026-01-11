@@ -5,7 +5,7 @@
     },
     "buttons-style": {
         "type": "entry",
-        "description": "Window Buttons Style  (Example: title:minimize:maximize:close:icon)",
+        "description": "Window Buttons Style  (Example: minimize:maximize:close:icon)",
         "default": "minimize:maximize:close"
     },
     
