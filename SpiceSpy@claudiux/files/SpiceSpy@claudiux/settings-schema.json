@@ -25,16 +25,20 @@
       "title": "Options",
       "keys": [
         "update-interval-hours",
+        "update-interruptible",
         "standard-opacity",
         "color-on-change",
+        "colorWhileRefreshing",
         "icon-size",
         "show-issues",
         "show-translations",
+        "show-commits",
         "sort-by",
         "show-uuid",
         "translate-name",
         "display-on-panel",
-        "useful-only"
+        "useful-only",
+        "coloredIcon"
       ]
     },
     "section2": {
@@ -60,6 +64,11 @@
     "min": 0.5,
     "max": 24.0,
     "step": 0.5
+  },
+  "update-interruptible": {
+    "type": "switch",
+    "description": "The update can be interrupted by the user",
+    "default": true
   },
   "standard-opacity": {
     "type": "spinbutton",
@@ -97,6 +106,11 @@
   "show-translations": {
     "type": "switch",
     "description": "Show number of translations in the menu",
+    "default": true
+  },
+  "show-commits": {
+    "type": "switch",
+    "description": "Show available updates in the menu",
     "default": true
   },
   "show-issues": {
@@ -142,7 +156,18 @@
   "useful-only": {
     "type": "switch",
     "description": "Show only non-zero values in panel",
-    "default": false
+    "default": true
+  },
+  "coloredIcon": {
+    "type": "switch",
+    "description": "Change icon color while refreshing",
+    "default": true
+  },
+  "colorWhileRefreshing": {
+    "type": "colorchooser",
+    "description": "Icon color while refreshing",
+    "default": "rgb(144,238,144)",
+    "dependency": "coloredIcon"
   },
   "author-list": {
     "type": "list",

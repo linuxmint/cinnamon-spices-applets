@@ -13,6 +13,8 @@ An applet that sets brightness and gamma levels of a screen for Linux Mint Cinna
  * From Cinnamon 6.4: set hotkeys to Increase/Decrease brightness
  * From Cinnamon 6.4: take into account sunrise and sunset times.
  * From Cinnamon 6.4: take into account the connection/disconnection of monitors.
+ * You can set *presets* with specific brightness and gamma values; you can also choose keyboard shortcuts to activate each preset.
+ * You can select the preset to use at sunrise and sunset.
 
 ## Installation
 1. Download the applet from *Cinnamon Settings -> Applets* or extract .zip archive to `~/.local/share/cinnamon/applets`
@@ -29,7 +31,7 @@ An applet that sets brightness and gamma levels of a screen for Linux Mint Cinna
 
 1. Right click on the applet
 2. Select "Configure Presets"
-3. In the window that has just opened, set your preferences. Only the first *Start at Sunrise* and *Start at Sunset* checked boxes are taken into account.
+3. In the window that has just opened, set your preferences. Only the first *Start at Sunrise* and *Start at Sunset* checked boxes are taken into account. You can choose which shortcut to use for each preset.
 
 ### To configure Sunrise and Sunset times:
 

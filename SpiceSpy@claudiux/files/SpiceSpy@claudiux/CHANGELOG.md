@@ -1,3 +1,30 @@
+### v5.7.1~20251230
+  * Minor bugfixes.
+
+### v5.7.0~20251228
+  * You can now interrupt a refresh.
+  * You can request to change the icon color when refreshing. You can choose this color.
+  * The menu should no longer close unexpectedly.
+
+### v5.6.2~20251125
+  * Highlights the number of new issues in the menu.
+
+### v5.6.1~20251121
+  * Updates to-string() function.
+
+### v5.6.0~20251108
+  * Ensures loading of icons.
+
+### v5.5.2~20251101
+  * Increase stability.
+
+### v5.5.1~20250925
+  * Updated README.
+  * Minor changes in menu about new commits.
+
+### v5.5.0~20250925
+  * Also reports new commits.
+
 ### v5.4.0~20250829
   * Alerts also on issues related to spices.
 

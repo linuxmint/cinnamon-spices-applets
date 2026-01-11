@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-06 01:31+0200\n"
-"PO-Revision-Date: 2025-08-06 01:33+0200\n"
+"POT-Creation-Date: 2025-11-21 04:02+0100\n"
+"PO-Revision-Date: 2025-11-21 04:04+0100\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,60 +19,64 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:178 6.4/applet.js:262
+#. applet.js:178 6.4/applet.js:250
 msgid "The following packages were not found:"
 msgstr "Les paquets suivants ne sont pas installés :"
 
-#. applet.js:179 6.4/applet.js:263
+#. applet.js:179 6.4/applet.js:251
 msgid "Please install the above packages to use the applet"
 msgstr ""
 "Veuillez installer les paquets ci-dessus pour pouvoir utiliser cette applet"
 
-#. applet.js:564 6.4/applet.js:773
+#. applet.js:564 6.4/applet.js:855
 msgid "Screen"
 msgstr "Écran"
 
-#. applet.js:647 6.4/applet.js:856
+#. applet.js:647 6.4/applet.js:938
 msgid "Outputs"
 msgstr "Sorties"
 
 #. settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->preset_list->columns->title
-#. appletGui.js:235 6.4/applet.js:42 6.4/lib/appletGui.js:211
+#. appletGui.js:235 6.4/applet.js:43 6.4/lib/appletGui.js:212
 msgid "Brightness"
 msgstr "Luminosité"
 
-#. appletGui.js:236 6.4/applet.js:43 6.4/lib/appletGui.js:212
+#. appletGui.js:236 6.4/applet.js:44 6.4/lib/appletGui.js:213
 msgid "Red"
 msgstr "Rouge"
 
-#. appletGui.js:237 6.4/applet.js:44 6.4/lib/appletGui.js:213
+#. appletGui.js:237 6.4/applet.js:45 6.4/lib/appletGui.js:214
 msgid "Green"
 msgstr "Vert"
 
-#. appletGui.js:238 6.4/applet.js:45 6.4/lib/appletGui.js:214
+#. appletGui.js:238 6.4/applet.js:46 6.4/lib/appletGui.js:215
 msgid "Blue"
 msgstr "Bleu"
 
-#. 6.4/applet.js:46 6.4/applet.js:927
+#. 6.4/applet.js:47 6.4/applet.js:1009
 msgid "Sunrise"
 msgstr "Aube"
 
-#. 6.4/applet.js:47 6.4/applet.js:929
+#. 6.4/applet.js:48 6.4/applet.js:1011
 msgid "Sunset"
 msgstr "Crépuscule"
 
-#. 6.4/applet.js:722
+#. 6.4/applet.js:760
+msgid "Toggle On / Off"
+msgstr "Activer / désactiver cette applet"
+
+#. 6.4/applet.js:770
 msgid "Reload"
 msgstr "Relancer"
 
-#. 6.4/applet.js:732
+#. 6.4/applet.js:780
 msgid "Configure Presets"
 msgstr "Configurer les pré-réglages"
 
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.4/applet.js:742
+#. 6.4/applet.js:824
 msgid "Presets"
 msgstr "Pré-réglages"
 
@@ -251,12 +255,12 @@ msgid "Values shown in user interface"
 msgstr "Paramètres affichés dans le menu"
 
 #. settings-schema.json->gui_icon_filepath->description
-#. 6.4->settings-schema.json->gui_icon_filepath->description
+#. 6.4->settings-schema.json->baga_icon->description
 msgid "Icon"
 msgstr "Icône"
 
 #. settings-schema.json->gui_icon_filepath->tooltip
-#. 6.4->settings-schema.json->gui_icon_filepath->tooltip
+#. 6.4->settings-schema.json->baga_icon->tooltip
 msgid "An icon displayed in a panel"
 msgstr "Icône sur le panneau"
 
@@ -285,6 +289,24 @@ msgstr ""
 "Le temps de réglage peut être jusqu'à deux fois le nombre de secondes "
 "indiqué ci-dessous."
 
+#. 6.4->settings-schema.json->smooth_duration-label->description
+msgid ""
+"The changes are made step by step.\n"
+"Here you define the duration (in milliseconds) of each step in which the "
+"values are changed by one unit, if necessary.\n"
+"0 means instantaneous changes.\n"
+"Recommended value: between 200 and 300."
+msgstr ""
+"Les modifications sont effectuées étape par étape.\n"
+"Vous définissez ici la durée (en millisecondes) de chaque étape au cours de "
+"laquelle les valeurs sont modifiées d'une unité, si nécessaire.\n"
+"0 signifie des modifications instantanées.\n"
+"Valeur recommandée : entre 200 et 300."
+
+#. 6.4->settings-schema.json->smooth_duration->description
+msgid "Step duration (ms)"
+msgstr "Durée d'une étape (ms)"
+
 #. 6.4->settings-schema.json->apply_changing_monitors->description
 msgid "Apply when the number of monitors changes"
 msgstr "Appliquer lorsque le nombre d'écrans change"
@@ -296,6 +318,34 @@ msgstr "Raccourci clavier pour augmenter la luminosité"
 #. 6.4->settings-schema.json->brightness_down_shortcut->description
 msgid "Hotkey to Decrease brightness"
 msgstr "Raccourci clavier pour réduire la luminosité"
+
+#. 6.4->settings-schema.json->toggle_on_off_shortcut->description
+msgid "Hotkey to Toggle On/Off this applet"
+msgstr "Raccourci clavier pour activer / désactiver cette applet"
+
+#. 6.4->settings-schema.json->way_to_set_off->options
+msgid "No change"
+msgstr "Aucun changement"
+
+#. 6.4->settings-schema.json->way_to_set_off->options
+msgid "All values set to 100%"
+msgstr "Tout à 100%"
+
+#. 6.4->settings-schema.json->way_to_set_off->description
+msgid "Way to set this applet off"
+msgstr "Comment désactiver cette applet"
+
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Only sun"
+msgstr "Soleil uniquement"
+
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Screen with sun"
+msgstr "Écran avec un Soleil"
+
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Symbolic"
+msgstr "Symbolique"
 
 #. 6.4->settings-schema.json->preset_label->description
 msgid ""
@@ -360,6 +410,10 @@ msgid ""
 msgstr ""
 "Démarrer au\n"
 "Crépuscule"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid "Hotkey"
+msgstr "Raccourci clavier"
 
 #. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
 msgid "Set Sunrise and Sunset times"

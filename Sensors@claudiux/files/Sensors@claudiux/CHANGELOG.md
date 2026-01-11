@@ -1,3 +1,18 @@
+### v5.10.0~20251212
+  * Use xlet-settings instead of cinnamon-settings to configure applet.
+
+### v5.9.3~20251121
+  * Updates to-string() function.
+
+### v5.9.2~20250919
+  * Fixes [#7761](https://github.com/linuxmint/cinnamon-spices-applets/issues/7761)
+
+### v5.9.1~20250917
+  * Fixes [#7761](https://github.com/linuxmint/cinnamon-spices-applets/issues/7761)
+
+### v5.9.0~20250913
+  * Improves the reading of disk temperatures.
+
 ### v5.8.2~20250911
   * Avoids any unnecessary work.
   * Fixes [#7714](https://github.com/linuxmint/cinnamon-spices-applets/issues/7714)

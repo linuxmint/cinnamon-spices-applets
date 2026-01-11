@@ -6,33 +6,33 @@
 // https://github.com/linuxmint/cinnamon/blob/master/files/usr/share/cinnamon/applets/settings-example%40cinnamon.org/settings-schema.json
 
 // Imports
-const Lang = imports.lang;
-const Applet = imports.ui.applet;
-const GLib = imports.gi.GLib;
-const Soup = imports.gi.Soup;
-const Util = imports.misc.util;
-const ByteArray = imports.byteArray;
-const Settings = imports.ui.settings;
-const PopupMenu = imports.ui.popupMenu;
-const Mainloop = imports.mainloop; 		// for repeated updating
+const Lang = imports.lang
+const Applet = imports.ui.applet
+const GLib = imports.gi.GLib
+const Soup = imports.gi.Soup
+const Util = imports.misc.util
+const ByteArray = imports.byteArray
+const Settings = imports.ui.settings
+const PopupMenu = imports.ui.popupMenu
+const Mainloop = imports.mainloop 		// for repeated updating
 
 // Constants
-const UUID = "trilium-api@beatlink";
+const UUID = "trilium-api@beatlink"
 
 // Helper function to send HTTP Requests ------------------------------------------------------------------------------
 function sendPostRequest(url, postData, callback) {
 	let encodedForm = Soup.form_encode_hash(postData)
-	let message = Soup.Message.new_from_encoded_form('POST', url, encodedForm);
-	let session = new Soup.Session();
+	let message = Soup.Message.new_from_encoded_form('POST', url, encodedForm)
+	let session = new Soup.Session()
 	session.send_and_read_async(message, GLib.PRIORITY_DEFAULT, null, (session, result) => {
 		try {
-			let responseBytes = session.send_and_read_finish(result);
-			let responseText = ByteArray.toString(ByteArray.fromGBytes(responseBytes));
-			callback(null, responseText);
+			let responseBytes = session.send_and_read_finish(result)
+			let responseText = ByteArray.toString(ByteArray.fromGBytes(responseBytes))
+			callback(null, responseText)
 		} catch (error) {
-			callback(error, null);
+			callback(error, null)
 		}
-	});
+	})
 }
 
 
@@ -49,18 +49,18 @@ class TriliumAPIAppletSettings {
 			"fetch_action",
 			"click_action",
 			"prefix_string",
-            "suffix_string",
-            "text_width",
+			"suffix_string",
+			"text_width",
 			"reminder_enabled",
-            "reminder_time",
-            "reminder_delay",
-            "reminder_color",
+			"reminder_time",
+			"reminder_delay",
+			"reminder_color",
 			"open_on_click_toggle",
 			"open_command"
-		];
-		this.settingsProvider = new Settings.AppletSettings(this, UUID, instanceId);
-		for (let setting of this._setting_keys){
-			this.settingsProvider.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, setting, setting, callback, null);
+		]
+		this.settingsProvider = new Settings.AppletSettings(this, UUID, instanceId)
+		for (let setting of this._setting_keys) {
+			this.settingsProvider.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, setting, setting, callback, null)
 		}
 	}
 }
@@ -69,8 +69,8 @@ class TriliumAPIAppletSettings {
 class TriliumAPIApplet extends Applet.TextIconApplet {
 
 	constructor(metadata, orientation, panelHeight, instanceId) {
-		super(orientation, panelHeight, instanceId);
-        this._metadata = metadata;
+		super(orientation, panelHeight, instanceId)
+		this._metadata = metadata
 
 		// Configure Settings
 		this.settings = new TriliumAPIAppletSettings(instanceId, this.settings_callback.bind(this))
@@ -80,9 +80,9 @@ class TriliumAPIApplet extends Applet.TextIconApplet {
 		this.full_url = `${this.base_url}:${this.port}/custom/${this.endpoint}`
 
 		// Setup menus
-		this.toggle_reminder_menu = new PopupMenu.PopupSwitchMenuItem(_("Toggle Reminders"), this.settings.reminder_enabled);
+		this.toggle_reminder_menu = new PopupMenu.PopupSwitchMenuItem(_("Toggle Reminders"), this.settings.reminder_enabled)
 		this.toggle_reminder_menu.connect('activate', this.toggle_reminder.bind(this))
-		this._applet_context_menu.addMenuItem(this.toggle_reminder_menu);
+		this._applet_context_menu.addMenuItem(this.toggle_reminder_menu)
 
 		// Setup data persistence
 		this.response_data = {
@@ -91,27 +91,27 @@ class TriliumAPIApplet extends Applet.TextIconApplet {
 		}
 
 		// Start Fetching Text and Updating Reminders																
-		try {																					
-			this.fetch();																	
-			this.update_reminder();
+		try {
+			this.fetch()
+			this.update_reminder()
 		} catch (e) {
-        	global.logError(e);
-        }
+			global.logError(e)
+		}
 	}
 
-	settings_callback(){
+	settings_callback() {
 		this.fetch()
-		this.toggle_reminder_menu.setToggleState(this.settings.reminder_enabled);
+		this.toggle_reminder_menu.setToggleState(this.settings.reminder_enabled)
 	}
 
 
 	// Panel Updating -------------------------------------------------------------------------------------------------
 	fetch() {
-		let body = { 
+		let body = {
 			api_key: this.settings.api_key,
 			action: this.settings.fetch_action,
 		}
-		sendPostRequest(this.full_url, body, Lang.bind(this, 
+		sendPostRequest(this.full_url, body, Lang.bind(this,
 			(err, response) => {
 				if (err) {
 					this.response_data = {
@@ -121,17 +121,39 @@ class TriliumAPIApplet extends Applet.TextIconApplet {
 				} else {
 					this.response_data = JSON.parse(response)
 				}
-				Mainloop.timeout_add(1000 * this.settings.api_polling_interval, Lang.bind(this, this.fetch));
+				Mainloop.timeout_add(1000 * this.settings.api_polling_interval, Lang.bind(this, this.fetch))
 				this.update_panel()
 			}
-		));
+		))
 	}
 
-	update_panel(){
-		if (this.response_data.text){
+	update_panel() {
+		if (this.response_data.text) {
+			// Save settings if settings override recieved from API
+			if (this.response_data.prefix_string) {
+				this.settings.prefix_string = this.response_data.prefix_string
+			}
+			if (this.response_data.suffix_string) {
+				this.settings.suffix_string = this.response_data.suffix_string
+			}
+			if (this.response_data.text_width) {
+				this.settings.text_width = this.response_data.text_width
+			}
+			if (this.response_data.reminder_enabled) {
+				this.settings.reminder_enabled = this.response_data.reminder_enabled
+			}
+			if (this.response_data.reminder_time) {
+				this.settings.reminder_time = this.response_data.reminder_time
+			}
+			if (this.response_data.reminder_delay) {
+				this.settings.reminder_delay = this.response_data.reminder_delay
+			}
+			if (this.response_data.reminder_color) {
+				this.settings.reminder_color = this.response_data.reminder_color
+			}
 			let prefix = this.settings.prefix_string
 			let suffix = this.settings.suffix_string
-			this.set_applet_label(prefix + this.response_data.text.replaceAll('"', "").substring(0, this.settings.text_width) + suffix);
+			this.set_applet_label(prefix + this.response_data.text.replaceAll('"', "").substring(0, this.settings.text_width) + suffix)
 		} else {
 			this.set_applet_label("")
 		}
@@ -143,42 +165,42 @@ class TriliumAPIApplet extends Applet.TextIconApplet {
 	}
 
 	update_reminder() {
-	    if (this.settings.reminder_enabled && this.response_data.text) {
-    		this.actor.style = "background-color:" + this.settings.reminder_color;
-			if (this.settings.reminder_time >= 100){
-				Mainloop.timeout_add(this.settings.reminder_time,  Lang.bind(this, this.cancel_reminder_background));
+		if (this.settings.reminder_enabled && this.response_data.text) {
+			this.actor.style = "background-color:" + this.settings.reminder_color
+			if (this.settings.reminder_time >= 100) {
+				Mainloop.timeout_add(this.settings.reminder_time, Lang.bind(this, this.cancel_reminder_background))
 			}
-    		Mainloop.timeout_add((this.settings.reminder_delay * 1000), Lang.bind(this, this.update_reminder));
-	    } else {
-			Mainloop.timeout_add(1000, Lang.bind(this, this.update_reminder));
+			Mainloop.timeout_add((this.settings.reminder_delay * 1000), Lang.bind(this, this.update_reminder))
+		} else {
+			Mainloop.timeout_add(1000, Lang.bind(this, this.update_reminder))
 		}
 	}
 
 	cancel_reminder_background() {
-		this.actor.style = "";
+		this.actor.style = ""
 	}
 
 	// Opening Trilium ------------------------------------------------------------------------------------------------
-	on_applet_clicked(){
+	on_applet_clicked() {
 		if (this.settings.open_on_click_toggle) {
 			let commandLine = this.settings.open_command
-			Util.spawnCommandLine(commandLine);				
+			Util.spawnCommandLine(commandLine)
 		}
-		let body = { 
+		let body = {
 			api_key: this.settings.api_key,
 			action: this.settings.click_action,
 			onclick_data: this.response_data.onclick_data
 		}
-		sendPostRequest(this.full_url, body, Lang.bind(this, 
+		sendPostRequest(this.full_url, body, Lang.bind(this,
 			(err, response) => {
 				if (err) {
-					global.logError("POST request failed: " + err.message);
+					global.logError("POST request failed: " + err.message)
 				}
 			}
-		));
+		))
 	}
 }
 
 function main(metadata, orientation, panel_height, instanceId) {
-	return new TriliumAPIApplet (metadata, orientation, panel_height, instanceId)
+	return new TriliumAPIApplet(metadata, orientation, panel_height, instanceId)
 }

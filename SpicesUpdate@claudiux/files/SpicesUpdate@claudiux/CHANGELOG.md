@@ -1,3 +1,31 @@
+### v7.11.1~20251217
+  * Animation improvements.
+
+### v7.11.0~20251217
+  * Uses better animation method.
+
+### v7.10.0~20251212
+  * Use xlet-settings instead of cinnamon-settings to configure applet.
+
+### v7.9.7~20251121
+  * Updates to-string() function.
+
+### v7.9.6~20251121
+  * Improves file monitoring.
+
+### v7.9.5~20251031
+  * Avoids 'destroy' errors.
+
+### v7.9.4~20251012
+  * Improves access to settings.
+  * Adds Apply button to settings about Spices.
+
+### v7.9.3~20251012
+  * Fixes a problem with a badge.
+
+### v7.9.2~20251012
+  * Fixes [#7090](https://github.com/linuxmint/cinnamon-spices-applets/issues/7090).
+
 ### v7.9.1~20250908
   * Better memory management.
 

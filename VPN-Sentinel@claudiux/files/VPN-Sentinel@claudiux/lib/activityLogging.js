@@ -1,8 +1,7 @@
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Cinnamon = imports.gi.Cinnamon;
-const Mainloop = imports.mainloop;
-const Lang = imports.lang;
+const { timeout_add, setTimeout, source_exists, source_remove, remove_all_sources } = require("./lib/mainloopTools");
 
 const NAME = "VPN-Sentinel";
 const UUID = NAME + "@claudiux";
@@ -57,7 +56,7 @@ class ActivityLogging {
     this.is_active = active;
     if (active) {
       // Run the loop!
-      Mainloop.timeout_add(600, Lang.bind(this, this.process_waiting_messages));
+      timeout_add(600, () => { return this.process_waiting_messages() });
     }
   } // End of set_active
 
@@ -82,7 +81,7 @@ class ActivityLogging {
     let limit = this._get_epoch(date)-this.lifetime;
 
     // Read file contents (async):
-    Cinnamon.get_file_contents_utf8(LOG_FILE_PATH, Lang.bind(this, (utf8_contents) => {
+    Cinnamon.get_file_contents_utf8(LOG_FILE_PATH, (utf8_contents) => {
       let contents = utf8_contents.split("\n");
       var epoch_date, new_contents = [];
       // keep recent lines:
@@ -104,7 +103,7 @@ class ActivityLogging {
         out.close(null);
       }
       contents = []; new_contents = [];
-    }));
+    });
     this.latest_messages_and_timestamps = {};
   } // End of truncate_log_file
 

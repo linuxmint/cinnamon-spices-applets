@@ -1,30 +1,31 @@
 # updates notifier
 
-This applet monitors if updates are available for systems using pkcon tool
-(part of packagekit package)
-It also allows viewing available updates and installing them through the popup
-menu.  
+This applet monitors and refreshes (via configurable timeout) available updates
+using pkcon tool and PackageKitGlib package.  
+It also allows refreshing updates, viewing available ones and installing them
+through the popup menu.  
 When viewing updates, all entries are clickable and will open the update
-details (on supported systems) if available.
-
-In order to have updates count refreshed, some external way to do this is
-needed (e.g. enabled automatic updates checking in `gnome-software` if such app
-is present, or in debian-based systems some way to periodically run `apt
-update`).
+details (on supported systems) if available. They are also searchable with
+'Ctrl+f'.
 
 ## Settings
 
 You can:
 
 - change refresh timeout
-- change default update/upgrade `pkcon` commands  to your own.
+- include firmware updates (if `fwupdmgr` and `jq` are installed), although
+they won't be installed with applet's default "upgrade command"
+- change default upgrade `pkcon` commands  to your own.
+- disable menu and open updates window when clicked on applet
 - enable showing three (configurable) levels of icon to show how many packages
 are waiting for the upgrades.
 - hide applet if there are no updates available
+- show label (with customized size/weight) with number of available updates
 
 ## Dependencies
 
-- `pkcon` (`packagekit`), gnome-terminal`
+- `pkcon`, `PackageKitGlib`,
+- optional `fwupdmgr` and `jq` for showing available firmware updates
 
 ## Icons
 

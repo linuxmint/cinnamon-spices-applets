@@ -4,6 +4,8 @@
 const { IconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet;
 //Settings:
 const { AppletSettings } = imports.ui.settings;
+//WindowTracker:
+const windowTracker = imports.gi.Cinnamon.WindowTracker.get_default();
 //St:
 const {
   Icon,
@@ -17,7 +19,7 @@ const {
   TextDirection,
 } = imports.gi.St;
 //Clutter:
-const { Image, Actor, Color, RotateAxis } = imports.gi.Clutter;
+const { Image, Actor, Color, RotateAxis, AnimationMode } = imports.gi.Clutter;
 //GdkPixbuf:
 const { Pixbuf } = imports.gi.GdkPixbuf;
 //Cogl:
@@ -67,7 +69,7 @@ const Gtk = imports.gi.Gtk; //  /!\ Gtk.Label != St.Label
 //Gdk:
 const { Display } = imports.gi.Gdk;
 //Util
-const { spawnCommandLineAsync } = imports.misc.util;
+const { spawnCommandLine, spawnCommandLineAsync } = imports.misc.util;
 //Mainloop:
 const {
   _sourceIds,
@@ -86,7 +88,7 @@ const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 const Extension = imports.ui.extension;
 const Tooltips = imports.ui.tooltips;
-const Tweener = imports.ui.tweener;
+//~ const Tweener = imports.ui.tweener;
 const Json = imports.gi.Json;
 imports.gi.versions.Soup = "3.0";
 const Soup = imports.gi.Soup;
@@ -760,8 +762,11 @@ class SpicesUpdate extends IconApplet {
     let badgeSize = (fontSize + 1) * global.ui_scale;
     let iconSize = this.getPanelIconSize(IconType.SYMBOLIC);
 
-    if (this.badge) this.actor.remove_child(this.badge);
+    if (this.actor.get_stage() != null && this.badge != null) {
+      try { this.actor.remove_child(this.badge); } catch(e) {}
+    }
 
+    this.badge = null;
     this.badge = new BoxLayout({
       style_class: "grouped-window-list-badge",
       important: true,
@@ -1665,7 +1670,11 @@ class SpicesUpdate extends IconApplet {
 
   _get_last_edited_from_cache(type, uuid) {
     var cacheParser = new Json.Parser();
-    cacheParser.load_from_data(this.cache[type], -1);
+    try {
+      cacheParser.load_from_data(this.cache[type], -1);
+    } catch(e) {
+      return null;
+    }
     var ok = false;
     var lastEdited = null;
     try {
@@ -2261,6 +2270,45 @@ class SpicesUpdate extends IconApplet {
     //~ logDebug("this.defaultColor: "+this.defaultColor);
   } // End of get_default_icon_color
 
+  closeSettingsWindow() {
+    if (this.settingsWindow) {
+      try {
+        this.settingsWindow.delete(300);
+      } catch(e) {}
+    }
+    this.settingsWindow = undefined;
+  }
+
+  configureApplet(tab=0) {
+    const maximize_vertically = true;
+    const VERTICAL = 2;
+    this._applet_context_menu.close(false);
+
+    this.closeSettingsWindow();
+
+    let pid = spawnCommandLine(`xlet-settings applet ${UUID} -i ${this.instance_id} -t ${tab}`);
+
+    if (maximize_vertically) {
+      var app = null;
+      var intervalId = null;
+      intervalId = setTimeout(() => {
+        clearTimeout(intervalId);
+        app = windowTracker.get_app_from_pid(pid);
+        if (app != null) {
+          let window = app.get_windows()[0];
+          this.settingsTab = tab;
+
+          window.maximize(VERTICAL);
+          window.activate(300);
+          this.settingsWindow = window;
+          app.connect("windows-changed", () => { this.settingsWindow = undefined; });
+        }
+      }, 600);
+    }
+    // Returns the pid:
+    return pid;
+  }
+
   makeMenu() {
     this.menu.removeAll();
 
@@ -2374,7 +2422,7 @@ class SpicesUpdate extends IconApplet {
         //~ ),
       //~ );
       _options[i].connect("activate", (event) => {
-        spawnCommandLineAsync(`/usr/bin/xlet-settings applet ${UUID} -i ${this.instanceId} -t ${i}`);
+        this.configureApplet(i);
       });
       this.menu.addMenuItem(_options[i]);
     }
@@ -2485,7 +2533,7 @@ class SpicesUpdate extends IconApplet {
   } // End of destroy_all_notifications
 
   _on_refresh_pressed(type = null) {
-    if (this.menu.isOpen) this.menu.toggle();
+    if (this.menu && this.menu.isOpen) this.menu.toggle();
 
     if (type != null) {
       this.populateSettingsUnprotectedSpices(type);
@@ -2504,8 +2552,38 @@ class SpicesUpdate extends IconApplet {
     }
   } // End of _on_refresh_pressed
 
+  _on_apply_pressed(type=null) {
+    if (this.menu && this.menu.isOpen) this.menu.toggle();
+
+    if (type != null) {
+      this.OKtoPopulateSettings[type] = true;
+      this.populateSettingsUnprotectedSpices(type);
+      //~ this.OKtoPopulateSettings[type] = false;
+    }
+  }
+
+  _on_apply_pressed_applets() {
+    this._on_apply_pressed("applets")
+  }
+
+  _on_apply_pressed_desklets() {
+    this._on_apply_pressed("desklets")
+  }
+
+  _on_apply_pressed_extensions() {
+    this._on_apply_pressed("extensions")
+  }
+
+  _on_apply_pressed_themes() {
+    this._on_apply_pressed("themes")
+  }
+
+  _on_apply_pressed_actions() {
+    this._on_apply_pressed("actions")
+  }
+
   _on_tickallthenrefresh_pressed(type = null) {
-    if (this.menu.isOpen) this.menu.toggle();
+    if (this.menu && this.menu.isOpen) this.menu.toggle();
 
     if (type != null) {
       this.populateSettingsUnprotectedSpices(type);
@@ -2600,7 +2678,12 @@ class SpicesUpdate extends IconApplet {
     var monitor, Id;
     for (let tuple of this.monitors) {
       [monitor, Id] = tuple;
-      monitor.disconnect(Id);
+      try {
+        monitor.disconnect(Id);
+      } catch(e) {
+      } finally {
+        monitor = null;
+      }
     }
     this.monitors = [];
     this.alreadyMonitored = [];
@@ -2661,10 +2744,13 @@ class SpicesUpdate extends IconApplet {
         }
       }
     }
-    Tweener.addTween(this.actor, {
+    //~ Tweener.addTween(this.actor, {
+    this.actor.ease({
       opacity: 255,
-      transition: "easeOutQuad", //"linear",
-      time: 1,
+      //~ transition: "easeOutQuad", //"linear",
+      mode: AnimationMode.EASE_OUT_QUAD,
+      //~ time: 1,
+      duration: 1000,
       onComplete: null,
     });
   } // End of set_icon_color
@@ -2790,11 +2876,14 @@ class SpicesUpdate extends IconApplet {
       this.interval != null &&
       this.actor.get_stage() != null
     ) {
-      Tweener.addTween(this.actor, {
+      //~ Tweener.addTween(this.actor, {
+      this.actor.ease({
         opacity: 255,
-        transition: "easeOutQuad", //"linear",
+        //~ transition: "easeOutQuad", //"linear",
+        mode: AnimationMode.EASE_OUT_QUAD,
         delay: 0,
-        time: 1,
+        //~ time: 1,
+        duration: 1000,
         rounded: true,
         onComplete: () => {
           if (this.interval != null && _sourceIds.indexOf(this.interval) > -1) {
@@ -2807,10 +2896,12 @@ class SpicesUpdate extends IconApplet {
     }
 
     if (this.numberLabel.text.length === 0) {
-      this.badge.hide();
+      if (this.badge != null)
+        this.badge.hide();
     } else {
       this.numberLabel.text += "  ";
-      this.badge.show();
+      if (this.badge != null)
+        this.badge.show();
     }
 
     this.isUpdatingUI = false;
@@ -2822,7 +2913,8 @@ class SpicesUpdate extends IconApplet {
     this.set_applet_icon_symbolic_name("spices-update");
     this.set_icon_color();
     this.do_rotation = false;
-    Tweener.removeTweens(this.actor);
+    //~ Tweener.removeTweens(this.actor);
+    this.actor.remove_all_transitions();
   }
 
   // This is the loop run at general_frequency rate to call updateUI() to update the display in the applet and tooltip
@@ -3081,7 +3173,7 @@ class SpicesUpdate extends IconApplet {
   } // End of on_generic_changed
 
   on_applet_added_to_panel() {
-    this.makeMenu();
+    //~ this.makeMenu();
     this.get_default_icon_color();
 
     // Run loop to refresh caches:
@@ -3159,7 +3251,8 @@ class SpicesUpdate extends IconApplet {
     //~ }
     //~ }
 
-    if (Tweener.getTweenCount(this.actor) > 0) Tweener.removeTweens(this.actor);
+    //~ if (Tweener.getTweenCount(this.actor) > 0) Tweener.removeTweens(this.actor);
+    this.actor.remove_all_transitions();
 
     remove_all_sources();
   } // End of on_applet_removed_from_panel

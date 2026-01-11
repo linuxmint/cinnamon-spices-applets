@@ -1,0 +1,147 @@
+# SCREENSAVER INHIBITOR
+# This file is put in the public domain.
+# mtwebster, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: screen-inhibit@mtwebster 2.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-10-01 18:55+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:21
+msgid "Currently preventing screensaver"
+msgstr "Đang ngăn trình bảo vệ màn hình"
+
+#. applet.js:22
+msgid "Currently allowing screensaver"
+msgstr "Đang cho phép trình bảo vệ màn hình"
+
+#. applet.js:134
+msgid "Screensaver settings"
+msgstr "Cài đặt trình bảo vệ màn hình"
+
+#. settings-schema.json->inhibit-at-startup->description
+#. applet.js:138
+msgid "Inhibit screensaver at startup"
+msgstr "Ngăn trình bảo vệ màn hình khi khởi động"
+
+#. metadata.json->description
+msgid "Click to inhibit the screensaver, click again to remove inhibition"
+msgstr "Nhấp để ngăn trình bảo vệ màn hình, nhấp lại để hủy ngăn"
+
+#. metadata.json->name
+msgid "Screensaver Inhibitor"
+msgstr "Bộ ngăn trình bảo vệ màn hình"
+
+#. settings-schema.json->pGeneral->title
+msgid "General"
+msgstr "Chung"
+
+#. settings-schema.json->pIcons->title
+#. settings-schema.json->sectionIcons->title
+msgid "Icons"
+msgstr "Biểu tượng"
+
+#. settings-schema.json->pKeybindings->title
+#. settings-schema.json->sectionKeybindings->title
+msgid "Keybinding"
+msgstr "Phím tắt"
+
+#. settings-schema.json->sectionStartup->title
+msgid "Startup"
+msgstr "Khởi động"
+
+#. settings-schema.json->sectionDurationOrEndTime->title
+msgid "Duration or End Time of screen saver inhibition"
+msgstr "Thời lượng hoặc thời điểm kết thúc ngăn trình bảo vệ màn hình"
+
+#. settings-schema.json->sectionBlocking->title
+msgid "Way to block the screensaver"
+msgstr "Cách chặn trình bảo vệ màn hình"
+
+#. settings-schema.json->end-timechooser->description
+msgid "Time"
+msgstr "Thời gian"
+
+#. settings-schema.json->end-timechooser->tooltip
+msgid "Seconds will be ignored."
+msgstr "Giây sẽ bị bỏ qua."
+
+#. settings-schema.json->end-type->description
+msgid "The time shown above is"
+msgstr "Thời gian hiển thị ở trên là"
+
+#. settings-schema.json->end-type->options
+msgid "to be disregarded"
+msgstr "bị bỏ qua"
+
+#. settings-schema.json->end-type->options
+msgid "the inhibit duration"
+msgstr "thời lượng ngăn"
+
+#. settings-schema.json->end-type->options
+msgid "the inhibit end time"
+msgstr "thời điểm kết thúc ngăn"
+
+#. settings-schema.json->off-icon->description
+msgid "Power management allowed icon:"
+msgstr "Biểu tượng cho phép quản lý năng lượng:"
+
+#. settings-schema.json->off-icon->tooltip
+#. settings-schema.json->on-icon->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr "Chọn tệp biểu tượng hoặc nhập tên biểu tượng vào ô nhập"
+
+#. settings-schema.json->on-icon->description
+msgid "Power management prevented icon:"
+msgstr "Biểu tượng ngăn quản lý năng lượng:"
+
+#. settings-schema.json->reset-icons->description
+msgid "Reset to default icons"
+msgstr "Đặt lại biểu tượng mặc định"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding for screensaver inhibit"
+msgstr "Đặt phím tắt để ngăn trình bảo vệ màn hình"
+
+#. settings-schema.json->seconds-after-startup->description
+msgid "Number of seconds before screensaver inhibition"
+msgstr "Số giây trước khi ngăn trình bảo vệ màn hình"
+
+#. settings-schema.json->locklabel->description
+msgid "(Avoid using aggressive ways, if possible.)"
+msgstr "(Tránh dùng phương thức mạnh nếu có thể.)"
+
+#. settings-schema.json->locktype->description
+msgid "Blocking mode"
+msgstr "Chế độ chặn"
+
+#. settings-schema.json->locktype->options
+msgid "Normal"
+msgstr "Bình thường"
+
+#. settings-schema.json->locktype->options
+msgid "Aggressive"
+msgstr "Mạnh"
+
+#. settings-schema.json->locktype->options
+msgid "Super aggressive"
+msgstr "Rất mạnh"
+
+#. settings-schema.json->lockinterval->description
+msgid "Blocking interval"
+msgstr "Khoảng thời gian chặn"
+
+#. settings-schema.json->lockinterval->units
+msgid "minutes"
+msgstr "phút"

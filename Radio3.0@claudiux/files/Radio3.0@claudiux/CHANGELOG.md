@@ -1,3 +1,54 @@
+### v3.10.1~20260105
+  * Repairs notifications.
+  * Add option "Fastest" for "Quality of downloaded Album Art".
+
+### v3.10.0~20251211
+  * Working well with Cinnamon 6.6.
+
+### v3.9.5~20251129
+  * Better file monitoring.
+
+### v3.9.4~20251124
+  * Minor bugfix (menu).
+
+### v3.9.3~20251121
+  * Updates to-string() function.
+
+### v3.9.2~20251121
+  * Improves file monitoring.
+
+### v3.9.1~20251106
+  * Improves stability.
+
+### v3.9.0~20251102
+  * Improves stability.
+
+### v3.8.4~20251031
+  * Avoids paint() errors.
+
+### v3.8.3~20251023
+  * Fixes error opening menu.
+  * Fixes [#7907](https://github.com/linuxmint/cinnamon-spices-applets/issues/7907).
+
+### v3.8.2~20251022
+  * Improves file monitoring.
+
+### v3.8.1~20251019
+  * Improves stability.
+
+### v3.8.0~20251011
+  * Management of cache from the Recordings tab of this applet settings.
+
+### v3.7.3~20250922
+  * Minor bugfix.
+
+### v3.7.2~20250920
+  * Monitors certain files only when necessary, to avoid errors.
+  * Updates the server list.
+
+### v3.7.1~20250915
+  * Menu bugfix.
+
 ### v3.7.0~20250910
   * Added Blacklist management.
 

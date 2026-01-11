@@ -1,3 +1,37 @@
+### v2.7.0~20260107
+* For cinnamon 6.6: Does not use the shellUtils library, to avoid any problem with Gio.UnixOutputStream.
+* Thus, permanently fixes [#8111](https://github.com/linuxmint/cinnamon-spices-applets/issues/8111)
+
+### v2.6.1~20251223
+* Solves a problem with Gio.UnixOutputStream.
+* Fixes [#8111](https://github.com/linuxmint/cinnamon-spices-applets/issues/8111)
+
+### v2.6.0~20251212
+* Use xlet-settings instead of cinnamon-settings to configure applet.
+
+### v2.5.1~20251121
+* Adds a symbolic icon.
+* Adds in context menu the option "Toggle On/Off".
+
+### v2.5.0~20251119
+* Adds a shortcut to enable/disable this applet.
+* New way to select the panel icon.
+
+### V2.4.0~20251118
+* Ability to add a shortcut for each preset.
+
+### v2.3.3~20251106
+* Improved stability.
+
+### v2.3.2~20251022
+* Displays the currently used preset in the tooltip.
+
+### v2.3.1~20251013
+* Allows you to set maximum values up to 200 in presets.
+
+### v2.3.0~20250926
+* The changes can now be applied smoothly.
+
 ### v2.2.0~20250902
 * Presets are now accessible via the menu.
 

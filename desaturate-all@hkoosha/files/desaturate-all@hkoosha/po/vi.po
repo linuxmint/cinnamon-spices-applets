@@ -1,0 +1,90 @@
+# DESATURATE ALL
+# This file is put in the public domain.
+# hkoosha, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: desaturate-all@hkoosha 1.1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-17 10:44-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:62
+msgid "Click to disable effect"
+msgstr "Nhấp để tắt hiệu ứng"
+
+#. applet.js:64
+msgid "Click to desaturate the desktop"
+msgstr "Nhấp để làm xám màn hình"
+
+#. applet.js:72
+msgid "Will automatically desaturate in"
+msgstr "Sẽ tự động làm xám sau"
+
+#. applet.js:74
+msgid "Will automatically disable in"
+msgstr "Sẽ tự động tắt sau"
+
+#. applet.js:76
+msgid "minutes"
+msgstr "phút"
+
+#. applet.js:79
+msgid "Will automatically desaturate at"
+msgstr "Sẽ tự động làm xám vào lúc"
+
+#. applet.js:81
+msgid "Will automatically disable at"
+msgstr "Sẽ tự động tắt vào lúc"
+
+#. metadata.json->name
+msgid "Desaturate All"
+msgstr "Làm xám tất cả"
+
+#. metadata.json->description
+msgid "Convert your screen to gray-scale."
+msgstr "Chuyển màn hình sang thang độ xám."
+
+#. settings-schema.json->saturation->description
+msgid "Color saturation"
+msgstr "Độ bão hòa màu"
+
+#. settings-schema.json->keybinding->description
+msgid "Shortcut to toggle desaturation effect"
+msgstr "Phím tắt để bật/tắt hiệu ứng làm xám"
+
+#. settings-schema.json->automatic->description
+msgid "Automatic"
+msgstr "Tự động"
+
+#. settings-schema.json->automatic->tooltip
+msgid ""
+"Automatically enable and disable the desaturation effect based on the time "
+"of day"
+msgstr "Tự động bật và tắt hiệu ứng làm xám dựa trên thời gian trong ngày"
+
+#. settings-schema.json->start-timechooser->description
+msgid "Time of day to automatically enable"
+msgstr "Thời gian trong ngày để tự động bật"
+
+#. settings-schema.json->end-timechooser->description
+msgid "Time of day to automatically disable"
+msgstr "Thời gian trong ngày để tự động tắt"
+
+#. settings-schema.json->resume-on-startup->description
+msgid "Restore desaturation effect state on startup"
+msgstr "Khôi phục trạng thái hiệu ứng làm xám khi khởi động"
+
+#. settings-schema.json->resume-on-startup->tooltip
+msgid "Restore the previously set desaturation state when cinnamon starts"
+msgstr "Khôi phục trạng thái làm xám đã đặt trước khi Cinnamon khởi động"
+

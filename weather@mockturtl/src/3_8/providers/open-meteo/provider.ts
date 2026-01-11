@@ -1,3 +1,4 @@
+import { Services } from "../../config";
 import { HttpLib } from "../../lib/httpLib";
 import type { LocationData } from "../../types";
 import { _ } from "../../utils";
@@ -9,7 +10,7 @@ import { OpenMeteoResponseToData } from "./payload/response";
 export class OpenMeteo extends BaseProvider {
 
 	public readonly prettyName = _("Open-Meteo");
-	public readonly name = "OpenMeteo";
+	public readonly name = Services.OpenMeteo;
 	public readonly maxForecastSupport = 16;
 	public readonly website = "https://open-meteo.com/";
 	public readonly maxHourlyForecastSupport = 24;

@@ -15,7 +15,8 @@
       "title": "General",
       "sections": [
         "sectionGeneralOptions",
-        "sectionGeneralColors"
+        "sectionGeneralColors",
+        "sectionTooltip"
       ]
     },
     "pageCPU": {
@@ -79,6 +80,7 @@
         "graphSpacing",
         "thickness",
         "useIconSize",
+        "graphHeightPercent",
         "refreshRate"
       ]
     },
@@ -89,6 +91,13 @@
         "labelColor",
         "borderColor",
         "backgroundColor"
+      ]
+    },
+    "sectionTooltip": {
+      "type": "section",
+      "title": "Tooltip",
+      "keys": [
+        "percentAtEndOfLine"
       ]
     },
     "sectionCPUOptions": {
@@ -311,6 +320,20 @@
     "default": false,
     "description": "Limit height to the size of a colored icon"
   },
+  "graphHeightPercent": {
+    "type": "scale",
+    "default": 100,
+    "description": "Graph height (% of panel height)",
+    "min": 40,
+    "max": 100,
+    "step": 1,
+    "show-value": true,
+    "dependency": "!useIconSize"
+  },
+  "graphHeight": {
+    "type": "generic",
+    "default": 40
+  },
   "refreshRate": {
     "type": "scale",
     "default": 1250,
@@ -335,6 +358,11 @@
     "type": "colorchooser",
     "default": "rgba(48, 48, 48, 0.1)",
     "description": "Background Color"
+  },
+  "percentAtEndOfLine": {
+    "type": "switch",
+    "default": false,
+    "description": "Place % at the very end of the line"
   },
   "removeEnlightenment": {
     "type": "button",

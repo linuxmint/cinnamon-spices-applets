@@ -1,0 +1,15 @@
+.day-progress-label {
+    font-weight: bold;
+}
+
+.pie {
+    -pie-border-color: rgba(255, 255, 255, 0.7);
+    -pie-color: rgba(255, 255, 255, 1);
+    -pie-background-color: rgba(255, 255, 255, 0.2);
+    -pie-border-width: 0.1em;
+}
+
+.day-progress-tooltip {
+    font-family: monospace; 
+    text-align: end;
+}

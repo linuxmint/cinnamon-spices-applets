@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import type { Services } from "../config";
+import { Services } from "../config";
 import type { HTTPParams} from "../lib/httpLib";
 import { HttpLib } from "../lib/httpLib";
 import type { Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../weather-data";
@@ -10,7 +10,7 @@ import type { LocationData } from "../types";
 export class DanishMI extends BaseProvider {
 	public readonly needsApiKey: boolean = false;
 	public readonly prettyName: string = _("DMI Denmark");
-	public readonly name: Services = "DanishMI";
+	public readonly name: Services = Services.DanishMI;
 	public readonly maxForecastSupport: number = 10;
 	public readonly maxHourlyForecastSupport: number = 48;
 	public readonly website: string = "https://www.dmi.dk/";

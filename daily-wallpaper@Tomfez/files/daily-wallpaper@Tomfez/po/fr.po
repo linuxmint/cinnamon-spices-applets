@@ -1,0 +1,380 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: daily-wallpaper@Tomfez\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-09-25 20:36+0200\n"
+"PO-Revision-Date: 2025-12-09 10:50+0100\n"
+"Last-Translator: FabRCT\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#. applet.js:47
+msgid "Daily desktop wallpaper"
+msgstr "Fond d'écran quotidien"
+
+#. applet.js:117
+msgid "Refresh"
+msgstr "Rafraîchir"
+
+#. applet.js:130
+msgid "Copy image URL to clipboard"
+msgstr "Copier l'URL de l'image vers le presse-papiers"
+
+#. applet.js:131
+msgid "Open image folder"
+msgstr "Ouvrir le répertoire de l'image"
+
+#. applet.js:133
+msgid "Settings"
+msgstr "Paramètres"
+
+#. applet.js:290
+msgid "Next refresh"
+msgstr "Prochaine actualisation"
+
+#. applet.js:336
+msgid "This is the most recent image."
+msgstr "L'image est déjà la plus récente."
+
+#. applet.js:344
+msgid "Last image. Unable to get more images."
+msgstr "Dernière image. Impossible d'obtenir plus d'images."
+
+#. applet.js:388
+msgid "Refresh deactivated"
+msgstr "Actualisation désactivée"
+
+#. applet.js:448 applet.js:475
+#, javascript-format
+msgid "Wallpaper of the day at %s for %s"
+msgstr "Fond d'écran du jour de %s du %s"
+
+#. source.js:83 source.js:102
+msgid "No image today."
+msgstr "Pas d'image aujourd'hui."
+
+#. utils.js:90 utils.js:93
+msgid "minutes"
+msgstr "minutes"
+
+#. utils.js:96
+msgid "days"
+msgstr "jours"
+
+#. utils.js:99
+msgid "hours"
+msgstr "heures"
+
+#. metadata.json->description
+msgid "Download and apply a daily wallpaper to your desktop"
+msgstr "Télécharge et applique un fond d'écran quotidiennement"
+
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr "Général"
+
+#. settings-schema.json->pageHelp->title
+msgid "Help"
+msgstr "Aide"
+
+#. settings-schema.json->sectionUpdatePreferences->title
+msgid "Update preferences"
+msgstr "Préférences de mise à jour"
+
+#. settings-schema.json->section1->title
+msgid "Image preferences"
+msgstr "Préférences de l'image"
+
+#. settings-schema.json->sectionDebug->title
+#. settings-schema.json->debugToggle->description
+msgid "Debug"
+msgstr "Debug"
+
+#. settings-schema.json->currentSource->description
+msgid "Source of images"
+msgstr "Source des images"
+
+#. settings-schema.json->currentSource->options
+msgid "Bing"
+msgstr "Bing"
+
+#. settings-schema.json->currentSource->options
+msgid "Wikimedia"
+msgstr "Wikimedia"
+
+#. settings-schema.json->currentSource->options
+msgid "APOD"
+msgstr "APOD"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Update interval to check new wallpaper"
+msgstr "Mettre à jour l'intervalle de recherche de nouveau fond d'écran"
+
+#. settings-schema.json->refreshInterval->units
+msgid "Minutes"
+msgstr "Minutes"
+
+#. settings-schema.json->saveWallpaper->description
+msgid "Save wallpaper to image directory"
+msgstr "Sauvegarder le fond d'écran dans le répertoire de l'image"
+
+#. settings-schema.json->wallpaperNamePreferences->description
+msgid "Name of the file when saved to the image directory"
+msgstr "Nom du fichier lorsqu'il est enregistré dans le dossier de l'image"
+
+#. settings-schema.json->wallpaperNamePreferences->tooltip
+msgid ""
+"Original: original file name.\n"
+"Custom: source name + date (ex: BingWallpaper_20240801.jpg)"
+msgstr ""
+"Original: nom du fichier original.\n"
+"Personnalisé: nom de la source + date (ex:BingWallpaper_20240801.jpg)"
+
+#. settings-schema.json->wallpaperNamePreferences->options
+msgid "Original"
+msgstr "Original"
+
+#. settings-schema.json->wallpaperNamePreferences->options
+msgid "Custom"
+msgstr "Personnalisé"
+
+#. settings-schema.json->wallpaperDir->description
+msgid "Image directory"
+msgstr "Répertoire de l'image"
+
+#. settings-schema.json->wallpaperDir->tooltip
+msgid "For example: /home/username/Pictures/wallpapers"
+msgstr "Par exemple: /home/username/Images/wallpapers"
+
+#. settings-schema.json->dailyRefreshState->description
+msgid "Enable daily refresh"
+msgstr "Activer l'actualisation quotidienne"
+
+#. settings-schema.json->selectedImagePreferences->description
+msgid "Selected image"
+msgstr "Image sélectionnée"
+
+#. settings-schema.json->selectedImagePreferences->options
+msgid "Most recent"
+msgstr "Plus récente"
+
+#. settings-schema.json->selectedImagePreferences->options
+msgid "Random"
+msgstr "Aléatoire"
+
+#. settings-schema.json->selectedImagePreferences->tooltip
+msgid ""
+"Select the most recent image or a random image when the applet is launched"
+msgstr ""
+"Sélectionner l'image la plus récente ou une image aléatoire lorsque l'applet "
+"est démarrée"
+
+#. settings-schema.json->market->description
+msgid "Bing locale"
+msgstr "Emplacement pour Bing"
+
+#. settings-schema.json->market->options
+msgid "auto-auto"
+msgstr "auto-auto"
+
+#. settings-schema.json->market->options
+msgid "da-DK, Denmark, Danish"
+msgstr "da-DK, Danemark, Danois"
+
+#. settings-schema.json->market->options
+msgid "de-AT, Austria, German"
+msgstr "de-AT, Autriche, Allemand"
+
+#. settings-schema.json->market->options
+msgid "de-CH, Switzerland, German"
+msgstr "de-CH, Suisse, Allemand"
+
+#. settings-schema.json->market->options
+msgid "de-DE, Germany, German"
+msgstr "de-DE, Allemagne, Allemand"
+
+#. settings-schema.json->market->options
+msgid "en-AU, Australia, English"
+msgstr "en-AU, Australie, Anglais"
+
+#. settings-schema.json->market->options
+msgid "en-CA, Canada, English"
+msgstr "en-CA, Canada, Anglais"
+
+#. settings-schema.json->market->options
+msgid "en-GB, United Kingdom, English"
+msgstr "en-GB, Royaume-Uni, Anglais"
+
+#. settings-schema.json->market->options
+msgid "en-ID, Indonesia, English"
+msgstr "en-ID, Indonésie, Anglais"
+
+#. settings-schema.json->market->options
+msgid "en-IN, India, English"
+msgstr "en-IN, Inde, Anglais"
+
+#. settings-schema.json->market->options
+msgid "en-MY, Malaysia, English"
+msgstr "en-MY, Malaisie, Anglais"
+
+#. settings-schema.json->market->options
+msgid "en-NZ, New Zealand, English"
+msgstr "en-NZ, Nouvelle-Zélande, Anglais"
+
+#. settings-schema.json->market->options
+msgid "en-PH, Republic of the Philippines, English"
+msgstr "en-PH, Philippines, Anglais"
+
+#. settings-schema.json->market->options
+msgid "en-US, United States, English"
+msgstr "en-US, États-Unis, Anglais"
+
+#. settings-schema.json->market->options
+msgid "en-ZA, South Africa, English"
+msgstr "en-ZA, Afrique du Sud, Anglais"
+
+#. settings-schema.json->market->options
+msgid "es-AR, Argentina, Spanish"
+msgstr "es-AR, Argentine, Espagnol"
+
+#. settings-schema.json->market->options
+msgid "es-CL, Chile, Spanish"
+msgstr "es-CL, Chili, Espagnol"
+
+#. settings-schema.json->market->options
+msgid "es-ES, Spain, Spanish"
+msgstr "es-ES, Espagne, Espagnol"
+
+#. settings-schema.json->market->options
+msgid "es-MX, Mexico, Spanish"
+msgstr "es-MX, Mexique, Espagnol"
+
+#. settings-schema.json->market->options
+msgid "es-US, United States, Spanish"
+msgstr "es-US, États-Unis, Espagnol"
+
+#. settings-schema.json->market->options
+msgid "fi-FI, Finland, Finnish"
+msgstr "fi-FI, Finlande, Finnois"
+
+#. settings-schema.json->market->options
+msgid "fr-BE, Belgium, French"
+msgstr "fr-BE, Belgique, Français"
+
+#. settings-schema.json->market->options
+msgid "fr-CA, Canada, French"
+msgstr "fr-CA, Canada, Français"
+
+#. settings-schema.json->market->options
+msgid "fr-CH, Switzerland, French"
+msgstr "fr-CH, Suisse, Français"
+
+#. settings-schema.json->market->options
+msgid "fr-FR, France, French"
+msgstr "fr-FR, France, Français"
+
+#. settings-schema.json->market->options
+msgid "it-IT, Italy, Italian"
+msgstr "it-IT, Italie, Italien"
+
+#. settings-schema.json->market->options
+msgid "ja-JP, Japan, Japanese"
+msgstr "ja-JP, Japon, Japonais"
+
+#. settings-schema.json->market->options
+msgid "ko-KR, Korea, Korean"
+msgstr "ko-KR, Corée, Coréen"
+
+#. settings-schema.json->market->options
+msgid "nl-BE, Belgium, Dutch"
+msgstr "nl-BE, Belgique, Néerlandais"
+
+#. settings-schema.json->market->options
+msgid "nl-NL, Netherlands, Dutch"
+msgstr "nl-NL, Pays-Bas, Néerlandais"
+
+#. settings-schema.json->market->options
+msgid "no-NO, Norway, Norwegian"
+msgstr "no-NO, Norvège, Norvégien"
+
+#. settings-schema.json->market->options
+msgid "pl-PL, Poland, Polish"
+msgstr "pl-PL, Pologne, Polonais"
+
+#. settings-schema.json->market->options
+msgid "pt-BR, Brazil, Portuguese"
+msgstr "pt-BR, Brésil, Portugais"
+
+#. settings-schema.json->market->options
+msgid "ru-RU, Russia, Russian"
+msgstr "ru-RU, Russie, Russe"
+
+#. settings-schema.json->market->options
+msgid "sv-SE, Sweden, Swedish"
+msgstr "sv-SE, Suède, Suédois"
+
+#. settings-schema.json->market->options
+msgid "tr-TR, Türkiye, Turkish"
+msgstr "tr-TR, Turquie, Turc"
+
+#. settings-schema.json->market->options
+msgid "zh-CN, People's republic of China, Chinese"
+msgstr "zh-CN, République populaire de Chine, Chinois"
+
+#. settings-schema.json->market->options
+msgid "zh-HK, Hong Kong SAR, Traditional Chinese"
+msgstr "zh-HK, Hong Kong RAS, Chinois traditionnel"
+
+#. settings-schema.json->market->options
+msgid "zh-TW, Taiwan, Traditional Chinese"
+msgstr "zh-TW, Taïwan, Chinois traditionnel"
+
+#. settings-schema.json->apiKey->description
+msgid "API key"
+msgstr "Clé API"
+
+#. settings-schema.json->apiKey->tooltip
+msgid ""
+"Set your API key for APOD API. The default API key is used for initially "
+"exploring APIs prior to signing up, but it has much lower rate limits."
+msgstr ""
+"Ajouter votre clé API pour l'APOD. La clé API par défaut est utilisée à des "
+"fins d'exploration des autres APIs avant l'inscription. Cependant les taux "
+"ont une limite bien plus faibles."
+
+#. settings-schema.json->image-aspect-options->description
+msgid "Image aspect"
+msgstr "Aspect de l'image"
+
+#. settings-schema.json->image-aspect-options->options
+msgid "Zoom"
+msgstr "Zoom"
+
+#. settings-schema.json->image-aspect-options->options
+msgid "Centered"
+msgstr "Centré"
+
+#. settings-schema.json->image-aspect-options->options
+msgid "Scaled"
+msgstr "Redimensionné"
+
+#. settings-schema.json->image-aspect-options->options
+msgid "Stretched"
+msgstr "Étiré"
+
+#. settings-schema.json->image-aspect-options->options
+msgid "Spanned"
+msgstr "Étendu"
+
+#. settings-schema.json->image-aspect-options->options
+msgid "Mosaic"
+msgstr "Mosaïque"

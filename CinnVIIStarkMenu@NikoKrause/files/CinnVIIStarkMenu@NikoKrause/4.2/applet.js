@@ -542,10 +542,6 @@ class TransientButton extends SimpleMenuItem {
     }
 }
 
-String.prototype.replaceAt=function(index, character) {
-    return this.substr(0, index) + character + this.substr(index+character.length);
-};
-
 function TooltipCustom(actor, string, multiline) {
     this._init(actor, string, multiline);
 }
@@ -562,7 +558,7 @@ TooltipCustom.prototype = {
 
             for (let i = 0; i < tooltipLines; i++) {
                 lastSpacePos = formatString.lastIndexOf(" ", lastSpacePos + tooltipWidth);
-                formatString = formatString.replaceAt(lastSpacePos, "\n");
+                formatString = formatString.substring(0, lastSpacePos) + "\n" + formatString.substring(lastSpacePos + 1);
             }
         }
 
@@ -624,6 +620,7 @@ class ApplicationButton extends GenericApplicationButton {
     _onDragEnd() {
         this.applet.favoritesBox._delegate._clearDragPlaceholder();
     }
+
     destroy() {
         delete this._draggable;
         super.destroy();
@@ -2260,7 +2257,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
 
             // Quicklauncher places icon
             let quicklauncher_places_icon = this.quicklauncher_places[i].icon;
-            if (quicklauncher_places_icon == "")
+            if (!quicklauncher_places_icon)
                 quicklauncher_places_icon = "folder";
 
             // Quicklauncher places button
@@ -2288,7 +2285,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
 
             // Quicklauncher apps icon
             let quicklauncher_apps_icon = this.quicklauncher_apps[i].icon;
-            if (quicklauncher_apps_icon == "")
+            if (!quicklauncher_apps_icon)
                 quicklauncher_apps_icon = "exec";
             else if (!Gtk.IconTheme.get_default().has_icon(quicklauncher_apps_icon))
                 quicklauncher_apps_icon = "image-missing";
@@ -2497,7 +2494,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     toggleContextMenu(button) {
         if (!button.withMenu)
             return;
-
+        
         if (!this.contextMenu) {
             let menu = new PopupMenu.PopupSubMenu(null); // hack: creating without actor
             menu.actor.set_style_class_name('menu-context-menu');
@@ -3294,6 +3291,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     _refreshFavs() {
         //Remove all favorites
         this.favoritesBox.destroy_all_children();
+        this.contextMenu = null;
 
         //Load favorites again
         this._favoritesButtons = [];

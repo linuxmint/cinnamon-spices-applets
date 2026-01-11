@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# LOCK KEYS INDICATOR WITH NOTIFICATIONS
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# entelechy, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-31 04:22-0400\n"
+"POT-Creation-Date: 2025-12-16 19:05+0100\n"
 "PO-Revision-Date: 2024-11-20 18:50+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,74 +19,97 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:105
-msgid "Scr Lock"
-msgstr "Scr-Lock-Taste"
-
-#: applet.js:109
+#. applet.js:104
 msgid "Num Lock"
 msgstr "Num-Lock-Taste"
 
-#: applet.js:113
+#. applet.js:108
 msgid "Caps Lock"
 msgstr "Feststelltaste"
 
-#: applet.js:148
+#. applet.js:112
+msgid "Scr Lock"
+msgstr "Rollen-Taste"
+
+#. applet.js:156
 msgid "Lock Keys"
-msgstr "Lock-Tasten"
+msgstr "Sperrtasten"
 
-#: applet.js:208
-msgid "Scr lock on"
-msgstr "Scr-Lock-Taste ein"
-
-#: applet.js:211
-msgid "Scr lock off"
-msgstr "Scr-Lock-Taste aus"
-
-#: applet.js:220
+#. applet.js:231
 msgid "Num lock on"
 msgstr "Num-Lock-Taste ein"
 
-#: applet.js:223
+#. applet.js:233
 msgid "Num lock off"
 msgstr "Num-Lock-Taste aus"
 
-#: applet.js:232
+#. applet.js:239
 msgid "Caps lock on"
 msgstr "Feststelltaste ein"
 
-#: applet.js:235
+#. applet.js:241
 msgid "Caps lock off"
 msgstr "Feststelltaste aus"
+
+#. applet.js:247
+msgid "Scr lock on"
+msgstr "Rollen-Taste ein"
+
+#. applet.js:249
+msgid "Scr lock off"
+msgstr "Rollen-Taste aus"
 
 #. metadata.json->description
 msgid ""
 "Shows whether caps lock/num lock/scr lock is on, and displays a notification "
 "when these change."
 msgstr ""
-"Zeigt an, ob die Feststelltaste/Num-Taste/Scr-Taste aktiviert ist, und zeigt "
+"Zeigt an, ob die Feststelltaste/Num-Taste/Rollen aktiviert ist, und zeigt "
 "eine Benachrichtigung an, wenn sich diese ändern."
 
 #. metadata.json->name
 msgid "Lock keys indicator with notifications"
 msgstr "Sperrtastenanzeige mit Benachrichtigungen"
 
-#. settings-schema.json->show-notifications->description
-msgid "Show notifications"
-msgstr "Benachrichtigungen anzeigen"
+#. settings-schema.json->section1->description
+msgid "Indicators"
+msgstr ""
+
+#. settings-schema.json->show-num-lock-indicator->description
+msgid "Show num lock indicator"
+msgstr "Num-Lock-Taste-Indikator anzeigen"
+
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr "Feststelltaste-Indikator anzeigen"
+
+#. settings-schema.json->show-scr-lock-indicator->description
+msgid "Show scr lock indicator"
+msgstr "Rollen-Taste-Indikator anzeigen"
+
+#. settings-schema.json->hide-inactive-indicators->description
+msgid "Hide inactive indicators"
+msgstr ""
+
+#. settings-schema.json->toggle-on-click->description
+msgid "Toggle state when clicked"
+msgstr ""
+
+#. settings-schema.json->section2->description
+#, fuzzy
+msgid "Notifications"
+msgstr "OSD Benachrichtigungen anzeigen"
+
+#. settings-schema.json->show-osd-notifications->description
+#, fuzzy
+msgid "Show OSD notifications"
+msgstr "OSD Benachrichtigungen anzeigen"
+
+#. settings-schema.json->show-toast-notifications->description
+#, fuzzy
+msgid "Show toast notifications"
+msgstr "Systembenachrichtigungen anzeigen"
 
 #. settings-schema.json->show-silent-notifications->description
 msgid "Silence system notification sound"
 msgstr "Systembenachrichtigungston stummschalten"
-
-#. settings-schema.json->show-caps-lock-indicator->description
-msgid "Show caps lock indicator"
-msgstr "Zeigt die Feststelltaste an"
-
-#. settings-schema.json->show-num-lock-indicator->description
-msgid "Show num lock indicator"
-msgstr "Num-Lock-Indikator anzeigen"
-
-#. settings-schema.json->show-scr-lock-indicator->description
-msgid "Show scr lock indicator"
-msgstr "Scr-Lock-Indikator anzeigen"

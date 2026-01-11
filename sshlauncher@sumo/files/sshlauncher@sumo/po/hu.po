@@ -95,6 +95,14 @@ msgstr ""
 "Általában -e legyen a végződés, így végrehajtja a mellékelt ssh parancsot, "
 "ellenőrizze az ön által használt terminál kézikönyvét."
 
+#. settings-schema.json->showConnectionNotification->description
+msgid "Show notification when launching SSH connection"
+msgstr "Értesítés megjelenítése SSH-kapcsolat indításakor"
+
+#. settings-schema.json->showConnectionNotification->tooltip
+msgid "Display a notification message when SSH terminal is launched"
+msgstr "Értesítési üzenet megjelenítése az SSH terminál indításakor"
+
 #. metadata.json->description
 msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
 msgstr ""

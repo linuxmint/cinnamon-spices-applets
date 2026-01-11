@@ -493,7 +493,7 @@ msgid ""
 msgstr ""
 "此清單將會自動完成。\n"
 "\n"
-"請確認含有正確資料的項目，以便立即顯示 VPN 伺服器所在國家的國旗。"
+"請確認每筆資料都正確，才能即時顯示 VPN 伺服器所在國家的國旗。"
 
 #. settings-schema.json->flagList->description
 msgid "Flag List"
@@ -507,7 +507,7 @@ msgstr "VPN 名稱"
 #. settings-schema.json->flagList->columns->title
 #. settings-schema.json->sortFlagListBy->options
 msgid "Country Code"
-msgstr "國家代碼"
+msgstr "國家代號"
 
 #. settings-schema.json->flagList->columns->title
 msgid "Confirmed"

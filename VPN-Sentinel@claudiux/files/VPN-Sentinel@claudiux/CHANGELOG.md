@@ -1,3 +1,12 @@
+### v2.5.0~20251212
+  * Use xlet-settings instead of cinnamon-settings to configure applet.
+
+### v2.4.3~20251121
+  * Updates to-string() function.
+
+### v2.4.2~20251109
+  * Updates loop management.
+
 ### v2.4.1~20250413
   * Uses mainloopTools.
   * Updates checkDependencies.js.

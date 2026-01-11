@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 4.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-29 19:08+0200\n"
+"POT-Creation-Date: 2025-12-28 16:21+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
@@ -18,48 +18,52 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:206
+#. applet.js:185
 msgid "score"
 msgstr "pistemäärä"
 
-#. applet.js:218
+#. applet.js:197
 msgid "comments"
 msgstr "kommentit"
 
-#. applet.js:231
+#. applet.js:209
 msgid "recent issues"
 msgstr "tunnetut ongelmat"
 
-#. applet.js:243
+#. applet.js:222
 msgid "translations"
 msgstr "käännökset"
 
-#. applet.js:326
+#. applet.js:297
 #, fuzzy
 msgid "Reload icons"
 msgstr "Virkistä tämä sovelma"
 
-#. applet.js:334
+#. applet.js:303
 msgid "Visit website"
 msgstr ""
 
-#. applet.js:895
+#. applet.js:831
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:986
+#. applet.js:919
 msgid "Mark all as read"
 msgstr "Merkitse kaikki luetuiksi"
 
-#. applet.js:997
+#. applet.js:930
 msgid "Refresh"
 msgstr "Päivitä"
 
-#. applet.js:1009
+#. applet.js:944
+msgid "Refreshing in progress - Click to stop"
+msgstr ""
+
+#. applet.js:969
 msgid "Refreshing in progress"
 msgstr ""
 
-#. applet.js:1020
+#. applet.js:981
 msgid "Configure..."
 msgstr "Asetukset..."
 
@@ -98,6 +102,10 @@ msgstr "Päivitysväli"
 #. settings-schema.json->update-interval-hours->units
 msgid "hours"
 msgstr "tuntia"
+
+#. settings-schema.json->update-interruptible->description
+msgid "The update can be interrupted by the user"
+msgstr ""
 
 #. settings-schema.json->standard-opacity->description
 msgid "Opacity in absence of change"
@@ -150,6 +158,11 @@ msgstr ""
 #. settings-schema.json->show-translations->description
 msgid "Show number of translations in the menu"
 msgstr "Näytä kielipakettien määrä valikossa"
+
+#. settings-schema.json->show-commits->description
+#, fuzzy
+msgid "Show available updates in the menu"
+msgstr "Näytä ongelmien määrä valikossa"
 
 #. settings-schema.json->show-issues->description
 msgid "Show number of issues in the menu"
@@ -215,6 +228,14 @@ msgstr "Älä näytä mitään"
 #. settings-schema.json->useful-only->description
 msgid "Show only non-zero values in panel"
 msgstr "Näytä vain nollasta poikkeavat arvot paneelissa"
+
+#. settings-schema.json->coloredIcon->description
+msgid "Change icon color while refreshing"
+msgstr ""
+
+#. settings-schema.json->colorWhileRefreshing->description
+msgid "Icon color while refreshing"
+msgstr ""
 
 #. settings-schema.json->author-list->columns->title
 msgid "GitHub user name"

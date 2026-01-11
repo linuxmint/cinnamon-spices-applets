@@ -116,19 +116,19 @@ msgstr ""
 
 #. settings-schema.json->launch_client_on_click->description
 msgid "Launch mail client on click"
-msgstr "點選時啟動郵件用戶端"
+msgstr "點選時啟動電子郵件應用程式"
 
 #. settings-schema.json->launch_client_on_click->tooltip
 msgid "Mail client is launched when clicked on a menu item."
-msgstr "點選選單項目時會啟動郵件用戶端。"
+msgstr "點選選單選項時會啟動電子郵件應用程式。"
 
 #. settings-schema.json->middle_click->description
 msgid "On middle click:"
-msgstr "中鍵點選時："
+msgstr "滑鼠中鍵點選時："
 
 #. settings-schema.json->middle_click->tooltip
 msgid "What to do when middle clicked on applet icon"
-msgstr "中鍵點選小程式圖示時的動作"
+msgstr "滑鼠中鍵點選小程式圖示時的動作"
 
 #. settings-schema.json->middle_click->options
 msgid "Mark all read"
@@ -136,7 +136,7 @@ msgstr "全部標示為已讀"
 
 #. settings-schema.json->middle_click->options
 msgid "Launch mail client"
-msgstr "啟動郵件用戶端"
+msgstr "啟動電子郵件應用程式"
 
 #. settings-schema.json->middle_click->options
 msgid "Do nothing"
@@ -152,11 +152,11 @@ msgstr "寄件者或主旨超過此長度將會被截斷"
 
 #. settings-schema.json->client->description
 msgid "Mail client to launch (or webpage)"
-msgstr "要啟動的郵件用戶端（或網頁）"
+msgstr "要啟動的電子郵件應用程式（或網頁）"
 
 #. settings-schema.json->client->tooltip
 msgid ""
 "Enter the command to launch your mail client here. You can also enter a web "
 "address that starts with 'http'."
 msgstr ""
-"請在此輸入啟動郵件用戶端的指令，也可輸入以 'http' 開頭的網頁網址。"
+"請在此輸入啟動電子郵件應用程式的指令，也可輸入以 'http' 開頭的網頁網址。"

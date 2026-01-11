@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 3.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-29 19:08+0200\n"
-"PO-Revision-Date: 2025-04-10 14:11+0200\n"
+"POT-Creation-Date: 2025-12-28 16:21+0100\n"
+"PO-Revision-Date: 2026-01-01 22:03+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,50 +16,53 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.8\n"
 
-#. applet.js:206
+#. applet.js:185
 msgid "score"
 msgstr "pontszám"
 
-#. applet.js:218
+#. applet.js:197
 msgid "comments"
 msgstr "megjegyzések"
 
-#. applet.js:231
+#. applet.js:209
 msgid "recent issues"
 msgstr "legutóbbi kiadások"
 
-#. applet.js:243
+#. applet.js:222
 msgid "translations"
 msgstr "fordítások"
 
-#. applet.js:326
-#, fuzzy
+#. applet.js:297
 msgid "Reload icons"
-msgstr "Kisalkalmazás újratöltése"
+msgstr "Ikonok újratöltése"
 
-#. applet.js:334
+#. applet.js:303
 msgid "Visit website"
-msgstr ""
+msgstr "Látogassa meg a weboldalt"
 
-#. applet.js:895
+#. applet.js:831
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:986
+#. applet.js:919
 msgid "Mark all as read"
 msgstr "Összes megjelölése olvasottként"
 
-#. applet.js:997
+#. applet.js:930
 msgid "Refresh"
 msgstr "Frissítés"
 
-#. applet.js:1009
+#. applet.js:944
+msgid "Refreshing in progress - Click to stop"
+msgstr "Frissítés folyamatban - Kattintson a leállításhoz"
+
+#. applet.js:969
 msgid "Refreshing in progress"
 msgstr "Frissítés folyamatban"
 
-#. applet.js:1020
+#. applet.js:981
 msgid "Configure..."
 msgstr "Beállítások…"
 
@@ -97,6 +100,10 @@ msgstr "Frissítési időköz"
 #. settings-schema.json->update-interval-hours->units
 msgid "hours"
 msgstr "óra"
+
+#. settings-schema.json->update-interruptible->description
+msgid "The update can be interrupted by the user"
+msgstr "A frissítést a felhasználó megszakíthatja"
 
 #. settings-schema.json->standard-opacity->description
 msgid "Opacity in absence of change"
@@ -149,6 +156,10 @@ msgstr "128"
 #. settings-schema.json->show-translations->description
 msgid "Show number of translations in the menu"
 msgstr "A fordítások számának megjelenítése a menüben"
+
+#. settings-schema.json->show-commits->description
+msgid "Show available updates in the menu"
+msgstr "Elérhető frissítések megjelenítése a menüben"
 
 #. settings-schema.json->show-issues->description
 msgid "Show number of issues in the menu"
@@ -214,6 +225,14 @@ msgstr "Ne mutasson semmit"
 #. settings-schema.json->useful-only->description
 msgid "Show only non-zero values in panel"
 msgstr "Csak a nem nulla értékek megjelenítése a panelen"
+
+#. settings-schema.json->coloredIcon->description
+msgid "Change icon color while refreshing"
+msgstr "Ikon színének módosítása frissítés közben"
+
+#. settings-schema.json->colorWhileRefreshing->description
+msgid "Icon color while refreshing"
+msgstr "Ikon színe frissítés közben"
 
 #. settings-schema.json->author-list->columns->title
 msgid "GitHub user name"
