@@ -49,7 +49,6 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.bind("buttons-theme", "buttonsTheme")
         this.settings.bind("only-maximized", "onlyMaximized", this.on_settings_changed)
         this.settings.bind("hide-buttons", "hideButtons", this.on_settings_changed)
-        this.settings.bind("on-desktop-shutdown", "onDesktopShutdown", this.on_settings_changed)
     }
 
     connectSignals() {
@@ -209,8 +208,6 @@ class MyApplet extends Applet.TextIconApplet {
             if (button == 1) {
                 this.closeWindow()
                 return true
-            } else if (button == 3) {
-                this._applet_context_menu.toggle()
             }
             return true
         })
@@ -223,12 +220,7 @@ class MyApplet extends Applet.TextIconApplet {
         let activeWindow = global.display.focus_window
         let app = tracker.get_window_app(activeWindow)
 
-        if (!app) {
-            if (this.onDesktopShutdown == true) {
-                this._session.ShutdownRemote()
-            }
-            return
-        } else {
+        if (app) {
             activeWindow.delete(global.get_current_time())
         }
 
@@ -268,7 +260,7 @@ class MyApplet extends Applet.TextIconApplet {
             return
         }
         //console.log("WINDOW TYPE = ", w.get_window_type())
-        if (w.get_window_type() >= 5) {
+        if (w.get_window_type() >= 5 || w.get_window_type() == 1) {
             this.setButtons("hide")
             return
         }

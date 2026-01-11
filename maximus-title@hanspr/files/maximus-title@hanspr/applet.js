@@ -15,7 +15,6 @@ class MyApplet extends Applet.TextIconApplet {
             this.regex = null
             this.bindSettings()
             this.connectSignals()
-            this.lastTitle = ""
             this.cssFocus = "background-color:;border-radius:5px;padding-right:10px;padding-left:5px;"
             this._regexChanged()
             this._bgChanged()
@@ -41,72 +40,74 @@ class MyApplet extends Applet.TextIconApplet {
             let w = global.display.focus_window
             if (w) {
                 this.signalManager.connect(w, 'notify::title', () => {
-                    this._onTitleChange(w.lastTitle, w.get_monitor())
+                    this._onTitleChange()
                 })
-                this._onTitleChange(w.lastTitle, w.get_monitor())
-            } else {
-                this._onTitleChange(undefined, 0)
             }
+            this._onTitleChange()
         }, this)
         this.signalManager.connect(global.screen, 'window-monitor-changed', () => {
             let w = global.display.focus_window
             if (w) {
-                this._onMonitorChange(w.lastTitle, w.get_monitor())
+                this._onMonitorChange(w.get_monitor())
             }
         }, this)
     }
 
-    _onMonitorChange(title, monitorIndex) {
+    _onMonitorChange(monitorIndex) {
         if (monitorIndex != this.panel.monitorIndex) {
-            let title = ""
-            const windows = global.get_window_actors();
-            for (let i = 0; i < windows.length; i++) {
-                if (this.panel.monitorIndex != windows[i].metaWindow.get_monitor() || windows[i].metaWindow.get_window_type() > 1) {
-                    continue
-                }
-                //console.log("pass :", i)
-                //console.log("title:", windows[i].metaWindow.title)
-                //console.log("type :", windows[i].metaWindow.get_window_type())
-                title = windows[i].metaWindow.title
-            }
-            this._onTitleChange(title, this.panel.monitorIndex)
-            this.actor.set_style("")
+            let title = this._getTopWindowFromMonitor(this.panel.monitorIndex)
+            this._setTitle(title, "")
             return
         }
-        this._onTitleChange(title, monitorIndex)
+        this._onTitleChange()
     }
 
-    _onTitleChange(title, monitorIndex) {
-        if (monitorIndex != this.panel.monitorIndex) {
-            this.actor.set_style("")
-            return
-        }
-        if (title == undefined) {
-            try {
-                title = global.display.focus_window.get_title()
-            } catch (e) {
-                return
+    _getTopWindowFromMonitor(monitorIndex) {
+        const panelMonitorIndex = this.panel.monitorIndex
+        const windows = global.get_window_actors();
+        for (let i = windows.length - 1; i > 0; i--) {
+            if (panelMonitorIndex != windows[i].metaWindow.get_monitor() || windows[i].metaWindow.get_window_type() > 10) {
+                continue
             }
+            //console.log("pass :", i)
+            //console.log("title:", windows[i].metaWindow.title)
+            //console.log("type :", windows[i].metaWindow.get_window_type())
+            return windows[i].metaWindow.title
         }
-        if (this.lastTitle == title) {
-            this.actor.set_style(this.cssFocus)
+        return ""
+    }
+
+    _onTitleChange() {
+        let w
+        try {
+            w = global.display.focus_window
+        } catch (e) {
             return
         }
-        this.lastTitle = title
+        if (w.get_monitor() != this.panel.monitorIndex) {
+            let title = this._getTopWindowFromMonitor(w.get_monitor())
+            this._setTitle(title, "")
+            return
+        }
+        this._setTitle(w.get_title(), this.cssFocus)
+    }
+
+    _setTitle(title, css) {
         if (this.regex != null) {
             title = title.replace(this.regex, "")
         }
         title = title.substring(0, this.titleLength)
         this.set_applet_label(title)
-        this.actor.set_style(this.cssFocus)
+        this.actor.set_style(css)
     }
 
     _lengthChanged() {
-        this._onTitleChange(this.lastTitle)
+        this._onTitleChange()
     }
 
     _bgChanged() {
         this.cssFocus = "background-color:" + this.titleBg + ";border-radius:5px;padding-right:10px;padding-left:5px;"
+        this._onTitleChange()
     }
 
     _regexChanged() {
@@ -116,11 +117,10 @@ class MyApplet extends Applet.TextIconApplet {
             try {
                 this.regex = new RegExp(this.titleRegex)
             } catch (e) {
-                console.log("Regex error:", e)
+                console.log("Maximus-title: user Regex error:", e)
                 this.regex = null
             }
         }
-        this.lastTitle = ""
         this._onTitleChange()
     }
 }
