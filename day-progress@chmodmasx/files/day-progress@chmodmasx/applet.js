@@ -182,7 +182,7 @@ DayProgressApplet.prototype = {
         let settingsItem = new PopupMenu.PopupMenuItem(_("Settings"));
         settingsItem.connect('activate', Lang.bind(this, function() {
             imports.gi.Gio.Subprocess.new(
-                ['cinnamon-settings', 'applets', this.metadata.uuid, this.instanceId.toString()],
+                ['xlet-settings', 'applet', this.metadata.uuid, '-i',  this.instanceId.toString()],
                 imports.gi.Gio.SubprocessFlags.NONE
             );
         }));
@@ -190,6 +190,7 @@ DayProgressApplet.prototype = {
 
         // Initialize styles and values
         this.calculateStyles();
+        this._applet_tooltip._tooltip.set_style_class_name("day-progress-tooltip")
         
         // Update immediately to populate the menu values
         this.updateBar();
@@ -278,8 +279,23 @@ DayProgressApplet.prototype = {
         let remainingHours = Math.floor(percentRemainingOfPeriod * duration * 24);
         let remainingMinutes = Math.floor((percentRemainingOfPeriod * duration * 24 * 60) % 60);
         
+        if (elapsedHours < 10) elapsedHours = " " + elapsedHours; else elapsedHours = "" + elapsedHours;
+        if (elapsedMinutes < 10) elapsedMinutes = " " + elapsedMinutes; else elapsedMinutes = "" + elapsedMinutes;
+        if (remainingHours < 10) remainingHours = " " + remainingHours; else remainingHours = "" + remainingHours;
+        if (remainingMinutes < 10) remainingMinutes = " " + remainingMinutes; else remainingMinutes = "" + remainingMinutes;
+        
         this.elapsedValue.text = elapsedHours + 'h ' + elapsedMinutes + 'm | ' + Math.round(percentElapsedOfPeriod * 100) + '%';
         this.remainingValue.text = remainingHours + 'h ' + remainingMinutes + 'm | ' + Math.round(percentRemainingOfPeriod * 100) + '%';
+        
+        this._updateTooltip();
+    },
+    
+    _updateTooltip: function() {
+        let elapsedLength = _("Elapsed").length;
+        let remainingLength = _("Remaining").length;
+        let maxLength = Math.max(elapsedLength, remainingLength);
+        this.set_applet_tooltip(" ".repeat(maxLength - elapsedLength) + _("Elapsed") + " " + this.elapsedValue.text + 
+        "\n" + " ".repeat(maxLength - remainingLength) + _("Remaining") + " " + this.remainingValue.text);
     },
 
     mapNumber: function(number, inMin, inMax, outMin, outMax) {

@@ -7,6 +7,7 @@ const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const Tweener = imports.ui.tweener;
 const Tooltips = imports.ui.tooltips;
+const Keybinding = imports.ui.appletManager.applets['panel-launchers@cinnamon.org'] ? imports.ui.settings : imports.ui.settings;
 
 function MyApplet(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
@@ -31,6 +32,7 @@ MyApplet.prototype = {
         this.settings.bind("fontSize", "fontSize", this._onSettingsChanged.bind(this));
         
         this.settings.bind("enableSearch", "enableSearch", this._onSettingsChanged.bind(this));
+        this.settings.bind("autoFocusSearch", "autoFocusSearch");
         this.settings.bind("enableFavorites", "enableFavorites", this._onSettingsChanged.bind(this));
         this.settings.bind("favoriteApps", "favoriteApps");
 
@@ -49,6 +51,8 @@ MyApplet.prototype = {
         this.settings.bind("pageAnimationType", "pageAnimationType");
         this.settings.bind("animationDuration", "animationDuration");
         
+        this.settings.bind("overlay-keybinding", "overlayKeybinding", this._onKeybindingChanged.bind(this));
+        
         this.modal = null;
         this.apps = [];
         this.filteredApps = [];
@@ -60,6 +64,28 @@ MyApplet.prototype = {
         this.isFirstOpen = true;
         this.activeTooltip = null;
         this.tooltipTimeout = null;
+        this.firstResultButton = null;
+        
+        this._setupKeybinding();
+    },
+
+    _setupKeybinding: function() {
+        Main.keybindingManager.addHotKey(
+            "overlay-keybinding-" + this.instance_id,
+            this.overlayKeybinding,
+            () => {
+                if (this.modal) {
+                    this._destroyModal();
+                } else {
+                    this._showModal();
+                }
+            }
+        );
+    },
+
+    _onKeybindingChanged: function() {
+        Main.keybindingManager.removeHotKey("overlay-keybinding-" + this.instance_id);
+        this._setupKeybinding();
     },
 
     on_applet_clicked: function() {
@@ -115,12 +141,28 @@ MyApplet.prototype = {
         this.filteredApps = this.apps.slice();
     },
 
+    _getMonitorGeometry: function() {
+        let [mouseX, mouseY] = global.get_pointer();
+        
+        for (let i = 0; i < Main.layoutManager.monitors.length; i++) {
+            let monitor = Main.layoutManager.monitors[i];
+            if (mouseX >= monitor.x && mouseX < monitor.x + monitor.width &&
+                mouseY >= monitor.y && mouseY < monitor.y + monitor.height) {
+                return monitor;
+            }
+        }
+        
+        return Main.layoutManager.primaryMonitor;
+    },
+
     _showModal: function() {
         let isFirstOpen = this.apps.length === 0;
         
         this._loadApps();
         this.currentPage = 0;
         this.isSearchMode = false;
+        
+        let monitor = this._getMonitorGeometry();
         
         let bgColor = this._rgbToRgba(this.bgColor, this.bgOpacity);
         
@@ -131,11 +173,11 @@ MyApplet.prototype = {
             style: 'background-color: ' + bgColor + '; backdrop-filter: blur(20px);'
         });
         
-        this.modal.set_position(0, 0);
-        this.modal.set_size(global.screen_width, global.screen_height);
+        this.modal.set_position(monitor.x, monitor.y);
+        this.modal.set_size(monitor.width, monitor.height);
         
         let containerColor = this._rgbToRgba(this.containerColor, this.containerOpacity);
-        
+
         let container = new St.BoxLayout({
             style_class: 'app-drawer-container',
             vertical: true,
@@ -144,9 +186,10 @@ MyApplet.prototype = {
             y_align: Clutter.ActorAlign.CENTER,
             x_expand: true,
             y_expand: true,
-            style: 'background: ' + containerColor + '; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.18); backdrop-filter: blur(40px); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);'
+            style: 'background: ' + containerColor + '; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.18); backdrop-filter: blur(40px); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);',
+            clip_to_allocation: true
         });
-        
+
         container.connect('button-press-event', (actor, event) => {
             if (this.searchEntry && global.stage.get_key_focus() === this.searchEntry.clutter_text) {
                 global.stage.set_key_focus(this.modal);
@@ -206,6 +249,15 @@ MyApplet.prototype = {
                     }
                     return Clutter.EVENT_STOP;
                 }
+                if (symbol === Clutter.KEY_Return || symbol === Clutter.KEY_KP_Enter) {
+                    if (this.isSearchMode && this.filteredApps.length > 0) {
+                        let app = this.filteredApps[0];
+                        this._hideTooltip();
+                        app.launch([], null);
+                        this._destroyModal();
+                        return Clutter.EVENT_STOP;
+                    }
+                }
                 return Clutter.EVENT_PROPAGATE;
             });
             
@@ -221,7 +273,8 @@ MyApplet.prototype = {
             let scrollView = new St.ScrollView({
                 style: 'width: ' + viewWidth + 'px; height: ' + viewHeight + 'px;',
                 hscrollbar_policy: St.PolicyType.NEVER,
-                vscrollbar_policy: St.PolicyType.AUTOMATIC
+                vscrollbar_policy: St.PolicyType.AUTOMATIC,
+                clip_to_allocation: true
             });
             
             this.gridContainer = new St.BoxLayout({
@@ -232,12 +285,37 @@ MyApplet.prototype = {
             scrollView.add_actor(this.gridContainer);
             this.scrollAdjustment = scrollView.vscroll.adjustment;
             
+            scrollView.connect('scroll-event', (actor, event) => {
+                let direction = event.get_scroll_direction();
+                if (direction === Clutter.ScrollDirection.UP || direction === Clutter.ScrollDirection.DOWN) {
+                    let adjustment = scrollView.vscroll.adjustment;
+                    let increment = adjustment.step_increment * 3;
+                    let targetValue;
+                    
+                    if (direction === Clutter.ScrollDirection.UP) {
+                        targetValue = Math.max(adjustment.lower, adjustment.value - increment);
+                    } else {
+                        targetValue = Math.min(adjustment.upper - adjustment.page_size, adjustment.value + increment);
+                    }
+                    
+                    Tweener.addTween(adjustment, {
+                        value: targetValue,
+                        time: 0.3,
+                        transition: 'easeOutQuad'
+                    });
+                    
+                    return Clutter.EVENT_STOP;
+                }
+                return Clutter.EVENT_PROPAGATE;
+            });
+            
             container.add_actor(scrollView);
         } else if (this.navigationMode === 'scroll-horizontal') {
             let scrollView = new St.ScrollView({
                 style: 'width: ' + viewWidth + 'px; height: ' + viewHeight + 'px;',
                 hscrollbar_policy: St.PolicyType.AUTOMATIC,
-                vscrollbar_policy: St.PolicyType.NEVER
+                vscrollbar_policy: St.PolicyType.NEVER,
+                clip_to_allocation: true
             });
             
             this.gridContainer = new St.BoxLayout({
@@ -248,9 +326,35 @@ MyApplet.prototype = {
             scrollView.add_actor(this.gridContainer);
             this.scrollAdjustment = scrollView.hscroll.adjustment;
             
+            scrollView.connect('scroll-event', (actor, event) => {
+                let direction = event.get_scroll_direction();
+                let adjustment = scrollView.hscroll.adjustment;
+                let increment = adjustment.step_increment * 3;
+                let targetValue;
+                
+                if (direction === Clutter.ScrollDirection.UP) {
+                    targetValue = Math.max(adjustment.lower, adjustment.value - increment);
+                } else if (direction === Clutter.ScrollDirection.DOWN) {
+                    targetValue = Math.min(adjustment.upper - adjustment.page_size, adjustment.value + increment);
+                }
+                
+                if (targetValue !== undefined) {
+                    Tweener.addTween(adjustment, {
+                        value: targetValue,
+                        time: 0.3,
+                        transition: 'easeOutQuad'
+                    });
+                    return Clutter.EVENT_STOP;
+                }
+                
+                return Clutter.EVENT_PROPAGATE;
+            });
+            
             container.add_actor(scrollView);
         } else {
-            this.gridContainer = new St.Widget();
+            this.gridContainer = new St.Widget({
+                clip_to_allocation: true
+            });
             container.add_actor(this.gridContainer);
             
             let navBox = new St.BoxLayout({
@@ -261,6 +365,10 @@ MyApplet.prototype = {
             this.prevButton = new St.Button({
                 label: '←',
                 style: 'padding: 16px 32px; margin: 0 16px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2);'
+            });
+
+            this.prevButton.connect('clicked', () => {
+                this._navigateLeft();
             });
 
             this.nextButton = new St.Button({
@@ -275,7 +383,7 @@ MyApplet.prototype = {
             navBox.add_actor(this.nextButton);
             container.add_actor(navBox);
         }
-        
+
         this.modal.add_actor(container);
         
         this.modal.connect('button-press-event', (actor, event) => {
@@ -359,6 +467,10 @@ MyApplet.prototype = {
         imports.mainloop.timeout_add(delay, () => {
             if (!this.modal) return false;
             
+            if (this.enableSearch && this.autoFocusSearch && this.searchEntry) {
+                global.stage.set_key_focus(this.searchEntry.clutter_text);
+            }
+            
             if (isFirst) {
                 Tweener.addTween(this.modal, {
                     opacity: 255,
@@ -388,6 +500,7 @@ MyApplet.prototype = {
 
     _updateGrid: function() {
         let oldGrid = this.grid;
+        this.firstResultButton = null;
         
         let boxSize = this.iconSize + 60;
         
@@ -408,7 +521,9 @@ MyApplet.prototype = {
             
             for (let i = 0; i < this.filteredApps.length; i++) {
                 let app = this.filteredApps[i];
-                let button = this._createAppButton(app, boxSize);
+                let isFirst = (i === 0 && this.isSearchMode);
+                let button = this._createAppButton(app, boxSize, isFirst);
+                if (isFirst) this.firstResultButton = button;
                 layout.attach(button, col, row, 1, 1);
                 
                 col++;
@@ -438,7 +553,9 @@ MyApplet.prototype = {
             
             for (let i = 0; i < this.filteredApps.length; i++) {
                 let app = this.filteredApps[i];
-                let button = this._createAppButton(app, boxSize);
+                let isFirst = (i === 0 && this.isSearchMode);
+                let button = this._createAppButton(app, boxSize, isFirst);
+                if (isFirst) this.firstResultButton = button;
                 layout.attach(button, col, row, 1, 1);
                 
                 row++;
@@ -474,7 +591,9 @@ MyApplet.prototype = {
             
             for (let i = start; i < end; i++) {
                 let app = this.filteredApps[i];
-                let button = this._createAppButton(app, boxSize);
+                let isFirst = (i === start && this.isSearchMode);
+                let button = this._createAppButton(app, boxSize, isFirst);
+                if (isFirst) this.firstResultButton = button;
                 layout.attach(button, col, row, 1, 1);
                 
                 col++;
@@ -522,6 +641,30 @@ MyApplet.prototype = {
         }
     },
 
+    _calculateMatchScore: function(app, searchText) {
+        let name = app.get_display_name().toLowerCase();
+        let description = app.get_description();
+        let descText = description ? description.toLowerCase() : '';
+        
+        let score = 0;
+        
+        if (name === searchText) {
+            score = 1000;
+        } else if (name.startsWith(searchText)) {
+            score = 500 + (100 - searchText.length);
+        } else if (name.includes(searchText)) {
+            let index = name.indexOf(searchText);
+            score = 200 - index;
+        } else if (descText.startsWith(searchText)) {
+            score = 100 + (50 - searchText.length);
+        } else if (descText.includes(searchText)) {
+            let index = descText.indexOf(searchText);
+            score = 50 - Math.min(index, 40);
+        }
+        
+        return score;
+    },
+
     _onSearchTextChanged: function() {
         let searchText = this.searchEntry.get_text().toLowerCase().trim();
         
@@ -533,13 +676,18 @@ MyApplet.prototype = {
         this.isSearchMode = true;
         this.currentPage = 0;
         
-        this.filteredApps = this.apps.filter(app => {
-            let name = app.get_display_name().toLowerCase();
-            let description = app.get_description();
-            let descText = description ? description.toLowerCase() : '';
-            
-            return name.includes(searchText) || descText.includes(searchText);
-        });
+        let matches = [];
+        for (let i = 0; i < this.apps.length; i++) {
+            let app = this.apps[i];
+            let score = this._calculateMatchScore(app, searchText);
+            if (score > 0) {
+                matches.push({ app: app, score: score });
+            }
+        }
+        
+        matches.sort((a, b) => b.score - a.score);
+        
+        this.filteredApps = matches.map(m => m.app);
         
         this._updateGrid();
     },
@@ -551,6 +699,7 @@ MyApplet.prototype = {
         this.isSearchMode = false;
         this.currentPage = 0;
         this.filteredApps = this.apps.slice();
+        this.firstResultButton = null;
         this._updateGrid();
     },
 
@@ -616,7 +765,7 @@ MyApplet.prototype = {
                     scale_y: 1.0,
                     time: duration,
                     transition: 'easeOutCubic',
-                    onComplete: () => { this.isAnimating = false; }
+                    onComplete: () => {this.isAnimating = false; }
                 });
                 break;
                 
@@ -700,10 +849,14 @@ MyApplet.prototype = {
         }
     },
 
-    _createAppButton: function(app, boxSize) {
+_createAppButton: function(app, boxSize, isFirstResult) {
         let boxColor = this._rgbToRgba(this.boxColor, this.boxOpacity);
         let boxHoverColor = this._rgbToRgba(this.boxHoverColor, this.boxHoverOpacity);
         let spacing = Math.round(this.iconSize * 0.2);
+        
+        let baseStyle = 'margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; transition: all 0.2s; spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;';
+        let hoverStyle = 'margin: ' + this.padding + 'px; background: ' + boxHoverColor + '; border-radius: 12px; box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3); spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;';
+        let selectedStyle = 'margin: ' + this.padding + 'px; background: ' + boxHoverColor + '; border-radius: 12px; box-shadow: 0 0 20px 4px rgba(100, 150, 255, 0.6); border: 2px solid rgba(150, 200, 255, 0.8); spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;';
         
         let box = new St.BoxLayout({
             style_class: 'app-drawer-item',
@@ -714,7 +867,7 @@ MyApplet.prototype = {
             height: boxSize,
             x_align: Clutter.ActorAlign.CENTER,
             y_align: Clutter.ActorAlign.START,
-            style: 'margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; transition: all 0.2s; spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;'
+            style: isFirstResult ? selectedStyle : baseStyle
         });
         
         let description = app.get_description();
@@ -724,7 +877,9 @@ MyApplet.prototype = {
         }
         
         box.connect('enter-event', () => {
-            box.set_style('margin: ' + this.padding + 'px; background: ' + boxHoverColor + '; border-radius: 12px; box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3); spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;');
+            if (!isFirstResult) {
+                box.set_style(hoverStyle);
+            }
 
             if (this.tooltipTimeout) {
                 imports.mainloop.source_remove(this.tooltipTimeout);
@@ -738,7 +893,11 @@ MyApplet.prototype = {
         });
         
         box.connect('leave-event', () => {
-            box.set_style('margin: ' + this.padding + 'px; background: ' + boxColor + '; border-radius: 12px; spacing: ' + spacing + 'px; padding-top: ' + Math.round(boxSize * 0.15) + 'px;');
+            if (!isFirstResult) {
+                box.set_style(baseStyle);
+            } else {
+                box.set_style(selectedStyle);
+            }
     
             if (this.tooltipTimeout) {
                 imports.mainloop.source_remove(this.tooltipTimeout);
@@ -967,9 +1126,11 @@ MyApplet.prototype = {
         }
         this.isAnimating = false;
         this.isSearchMode = false;
+        this.firstResultButton = null;
     },
 
     on_applet_removed_from_panel: function() {
+        Main.keybindingManager.removeHotKey("overlay-keybinding-" + this.instance_id);
         this.enableAnimations = false;
         this._destroyModal();
     }

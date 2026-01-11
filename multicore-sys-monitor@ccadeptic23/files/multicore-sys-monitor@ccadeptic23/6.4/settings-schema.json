@@ -80,7 +80,7 @@
         "graphSpacing",
         "thickness",
         "useIconSize",
-        "graphHeight",
+        "graphHeightPercent",
         "refreshRate"
       ]
     },
@@ -320,15 +320,19 @@
     "default": false,
     "description": "Limit height to the size of a colored icon"
   },
-  "graphHeight": {
+  "graphHeightPercent": {
     "type": "scale",
-    "default": 40,
-    "description": "Graph height (pixels)",
-    "min": 16,
-    "max": 64,
-    "step": 4,
+    "default": 100,
+    "description": "Graph height (% of panel height)",
+    "min": 40,
+    "max": 100,
+    "step": 1,
     "show-value": true,
     "dependency": "!useIconSize"
+  },
+  "graphHeight": {
+    "type": "generic",
+    "default": 40
   },
   "refreshRate": {
     "type": "scale",

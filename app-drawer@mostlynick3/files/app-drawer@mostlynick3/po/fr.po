@@ -5,8 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: app-drawer@mostlynick3 1.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2025-12-17 08:31+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-02 08:33+0100\n"
 "PO-Revision-Date: 2025-12-19 10:17+0100\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: none\n"
@@ -80,9 +81,17 @@ msgstr "Fonctionnalités"
 msgid "Enable search bar"
 msgstr "Activer la barre de recherche"
 
+#. settings-schema.json->autoFocusSearch->description
+msgid "Auto-focus search bar when opened"
+msgstr "Mise au point automatique de la barre de recherche à l'ouverture"
+
 #. settings-schema.json->enableFavorites->description
 msgid "Enable favorites"
 msgstr "Activer les favoris"
+
+#. settings-schema.json->overlay-keybinding->description
+msgid "Keyboard shortcut to toggle overlay"
+msgstr "Raccourci clavier pour basculer la superposition"
 
 #. settings-schema.json->appearance->description
 msgid "Appearance Settings"
