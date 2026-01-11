@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-01-06 00:15+0100\n"
-"PO-Revision-Date: 2025-11-17 12:39+0100\n"
+"PO-Revision-Date: 2026-01-11 08:26+0100\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:287
 msgid "unassigned"
@@ -667,7 +667,7 @@ msgstr ""
 
 #. lib/messageTray.js:1136
 msgid "System Information"
-msgstr ""
+msgstr "Redndszerinformáció"
 
 #. lib/util.js:245
 #, javascript-format
@@ -727,28 +727,25 @@ msgid "Select a JSON file to import"
 msgstr "Válassza ki az importálni kívánt JSON-fájlt"
 
 #. xs/bin/R3SettingsWidgets.py:174
-#, fuzzy
 msgid "Checking dependencies"
-msgstr "Ne ellenőrizze a függőségeket"
+msgstr "Függőségek ellenőrzése"
 
 #. xs/bin/R3SettingsWidgets.py:175
 #, python-format
 msgid "Please install: %s"
-msgstr ""
+msgstr "Kérjük, telepítse: %s"
 
 #. xs/bin/R3SettingsWidgets.py:374
-#, fuzzy
 msgid "_Cancel"
-msgstr "Mégse"
+msgstr "_Mégse"
 
 #. xs/bin/R3SettingsWidgets.py:375
 msgid "_Open"
-msgstr ""
+msgstr "_Megnyitás"
 
 #. xs/bin/R3SettingsWidgets.py:388
-#, fuzzy
 msgid "Sound files"
-msgstr "JSON-fájlok"
+msgstr "Hangfájlok"
 
 #. xs/bin/R3TreeListWidgets.py:279 xs/bin/R3TreeListWidgets.py:502
 msgid "Add new entry"
@@ -1676,7 +1673,7 @@ msgstr "Standard"
 
 #. settings-schema.json->image-resolution->options
 msgid "Fastest"
-msgstr ""
+msgstr "Leggyorsabb"
 
 #. settings-schema.json->image-resolution->tooltip
 msgid ""

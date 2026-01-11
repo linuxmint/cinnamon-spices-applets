@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-01-07 00:52+0100\n"
-"PO-Revision-Date: 2025-11-17 14:51+0100\n"
+"PO-Revision-Date: 2026-01-11 08:39+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 6.4->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
@@ -491,7 +491,7 @@ msgstr "A magasság korlátozása egy színes ikon méretére"
 
 #. 6.4->settings-schema.json->graphHeightPercent->description
 msgid "Graph height (% of panel height)"
-msgstr ""
+msgstr "Grafikon magassága (a panel magasságának %-ában)"
 
 #. 6.4->settings-schema.json->refreshRate->description
 #. 3.0/prefsui.glade:132 3.2/prefsui.glade:132 6.0/prefsui.glade:140
