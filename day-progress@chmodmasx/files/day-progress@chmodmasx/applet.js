@@ -153,7 +153,7 @@ DayProgressApplet.prototype = {
         this.menuManager.addMenu(this.menu);
 
         // Menu items
-        this.menuElapsedContainer = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        this.menuElapsedContainer = new PopupMenu.PopupBaseMenuItem({ reactive: false, style_class: "day-progress-label"});
         this.elapsedLabel = new St.Label({
             text: _("Elapsed"),
             x_align: Clutter.ActorAlign.START,
@@ -164,7 +164,7 @@ DayProgressApplet.prototype = {
         this.menuElapsedContainer.addActor(this.elapsedLabel);
         this.menuElapsedContainer.addActor(this.elapsedValue);
 
-        this.menuRemainingContainer = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        this.menuRemainingContainer = new PopupMenu.PopupBaseMenuItem({ reactive: false, style_class: "day-progress-label" });
         this.remainingLabel = new St.Label({
             text: _("Remaining"),
             x_align: Clutter.ActorAlign.START,
@@ -278,14 +278,18 @@ DayProgressApplet.prototype = {
         let elapsedMinutes = Math.floor((percentElapsedOfPeriod * duration * 24 * 60) % 60);
         let remainingHours = Math.floor(percentRemainingOfPeriod * duration * 24);
         let remainingMinutes = Math.floor((percentRemainingOfPeriod * duration * 24 * 60) % 60);
+        let percentElapsed = Math.round(percentElapsedOfPeriod * 100);
+        let percentRemaining = Math.round(percentRemainingOfPeriod * 100);
         
-        if (elapsedHours < 10) elapsedHours = " " + elapsedHours; else elapsedHours = "" + elapsedHours;
-        if (elapsedMinutes < 10) elapsedMinutes = " " + elapsedMinutes; else elapsedMinutes = "" + elapsedMinutes;
-        if (remainingHours < 10) remainingHours = " " + remainingHours; else remainingHours = "" + remainingHours;
-        if (remainingMinutes < 10) remainingMinutes = " " + remainingMinutes; else remainingMinutes = "" + remainingMinutes;
+        elapsedHours = " ".repeat((elapsedHours < 10) ? 1 : 0) + elapsedHours;
+        elapsedMinutes = " ".repeat((elapsedMinutes < 10) ? 1 : 0) + elapsedMinutes;
+        remainingHours = " ".repeat((remainingHours < 10) ? 1 : 0) + remainingHours;
+        remainingMinutes = " ".repeat((remainingMinutes < 10) ? 1 : 0) + remainingMinutes;
+        percentElapsed = " ".repeat((percentElapsed < 10) ? 1 : 0) + percentElapsed;
+        percentRemaining = " ".repeat((percentRemaining < 10) ? 1 : 0) + percentRemaining;
         
-        this.elapsedValue.text = elapsedHours + 'h ' + elapsedMinutes + 'm | ' + Math.round(percentElapsedOfPeriod * 100) + '%';
-        this.remainingValue.text = remainingHours + 'h ' + remainingMinutes + 'm | ' + Math.round(percentRemainingOfPeriod * 100) + '%';
+        this.elapsedValue.text = elapsedHours + 'h ' + elapsedMinutes + 'm | ' + percentElapsed + '%';
+        this.remainingValue.text = remainingHours + 'h ' + remainingMinutes + 'm | ' + percentRemaining + '%';
         
         this._updateTooltip();
     },
