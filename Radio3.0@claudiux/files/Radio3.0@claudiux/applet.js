@@ -226,7 +226,8 @@ if (  versionCompare(getenv("CINNAMON_VERSION"), "5.6") >= 0 &&
 }
 const RADIO30_SETTINGS_SCHEMA = APPLET_DIR + "/settings-schema.json";
 const DB_SERVERS_FILE = APPLET_DIR + "/radiodb/server-list.json";
-const XS_PATH = "%s/xs/xlet-settings.py".format(APPLET_DIR, );
+//~ const XS_PATH = "%s/xs/xlet-settings.py".format(APPLET_DIR, );
+const XS_PATH = `${APPLET_DIR}/xs/`;
 const APPLET_ICON = APPLET_DIR + "/icons/icon.svg";
 const ANIMATED_ICON = APPLET_DIR + "/icons/animated-symbolic.svg";
 var MANUAL_HTML = HELP_DIR + "/MANUAL.html";
@@ -1272,6 +1273,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   get_user_settings() {
     this.settings.bind("ignoreYT", "ignoreYT");
     this.settings.bind("maximize-vertically", "maximize_vertically");
+    this.settings.bind("window-width", "window_width");
     this.settings.bind("image-resolution", "res", () => { this.reload_songArt() });
     this.settings.bind("radiopp-is-here", "radiopp_is_here");
     this.radiopp_is_here = radioppConfigFilePath != null;
@@ -5640,8 +5642,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   configureApplet(tab=0) {
+    //~ logDebug("tab=" + tab);
     const VERTICAL = 2;
     let maximize_vertically = this.maximize_vertically;
+    let window_width = Math.min(this.window_width, global.screen_width);
+    this.window_width = window_width;
     this._applet_context_menu.close(false);
     this.closeSettingsWindow();
 
@@ -5652,7 +5657,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this._set_settings_options();
 
-    let pid = spawnCommandLine(XS_PATH + " applet " + this._uuid + " -i " + this.instance_id + " -t " + tab);
+    //~ let pid = spawnCommandLine(XS_PATH + " applet " + this._uuid + " -i " + this.instance_id + " -t " + tab);
+    //~ logDebug("command: " + XS_PATH + " applet " + this._uuid + " -i " + this.instance_id + " -t " + tab);
+    let pid = spawnCommandLine(XS_PATH + "/xlet-settings.py applet " + this._uuid + " -i " + this.instance_id + " -t " + tab);
+    //~ let pid = spawnCommandLine(SCRIPTS_DIR + "/configRadio3.0.sh " + this.instance_id + " " + tab);
 
     if (maximize_vertically) {
       var app = null;
@@ -5663,6 +5671,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         if (app != null) {
           let window = app.get_windows()[0];
           this.settingsTab = tab;
+          window.move_resize_frame(null, 0, 0, window_width, 800);
           window.maximize(VERTICAL);
           window.activate(300);
           this.settingsWindow = window;

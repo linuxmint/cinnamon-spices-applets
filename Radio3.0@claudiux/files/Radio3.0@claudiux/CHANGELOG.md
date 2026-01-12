@@ -1,3 +1,7 @@
+### v3.10.2~20260112
+  * Repairs the "Configure..." menu for Cinnamon 6.6.
+  * Adds the ability to set the width of the configuration window. See the Behavior tab.
+
 ### v3.10.1~20260105
   * Repairs notifications.
   * Add option "Fastest" for "Quality of downloaded Album Art".
