@@ -310,11 +310,8 @@ class MyApplet extends Applet.TextIconApplet {
             wtype = 0
         }
         for (let i = 0; i < buttons.length; ++i) {
-            if (buttons[i]) {
+            if (buttons[i] == undefined || buttons[i] == "icon" || this.button[buttons[i]] == undefined || (this.button[buttons[i]].opacity == skip && wtype == 0)) {
                 this.updateWindowIcon()
-                continue
-            }
-            if (buttons[i] == undefined || this.button[buttons[i]] == undefined || (this.button[buttons[i]].opacity == skip && wtype == 0)) {
                 continue
             }
             let show = true
