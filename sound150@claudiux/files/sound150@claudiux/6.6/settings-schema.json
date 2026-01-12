@@ -13,7 +13,9 @@
       "title": "Menus",
       "sections": [
         "sectionMenu1",
-        "sectionMenu2"
+        "sectionMenu2",
+        "sectionMenu3",
+        "sectionMenu4"
       ]
     },
     "page_behavior": {
@@ -57,6 +59,7 @@
       "type": "section",
       "title": "Menu",
       "keys": [
+        "userMenuWidth",
         "playerControl",
         "extendedPlayerControl",
         "keepPlayerListOpen",
@@ -77,6 +80,22 @@
         "keepOutputListOpen",
         "keepInputListOpen",
         "keepCommandListOpen"
+      ]
+    },
+    "sectionMenu3": {
+      "type": "section",
+      "title": "Output Devices Not Displayed In The Context Menu",
+      "keys": [
+        "labelIgnoredOutputDevices",
+        "ignoredOutputDevices"
+      ]
+    },
+    "sectionMenu4": {
+      "type": "section",
+      "title": "Input Devices Not Displayed In The Context Menu",
+      "keys": [
+        "labelIgnoredInputDevices",
+        "ignoredInputDevices"
       ]
     },
     "sectionBehavior1": {
@@ -222,6 +241,15 @@
       ]
     }
   },
+  "userMenuWidth": {
+    "type": "scale",
+    "default": 450,
+    "min": 450,
+    "max": 600,
+    "step": 10,
+    "description": "Menu width (in pixels)",
+    "show-value": true
+  },
   "playerControl": {
     "type": "switch",
     "default": true,
@@ -305,6 +333,42 @@
     "default": false,
     "description": "Keep the Command selector open"
   },
+  "labelIgnoredOutputDevices": {
+    "type": "label",
+    "description": "In the list below, add a line containing part of its name (case sensitive) for each unwanted device."
+  },
+  "ignoredOutputDevices": {
+     "type": "list",
+     "description": "Unwanted devices",
+     "default": [],
+     "columns": [
+      {
+        "id": "partOfName",
+        "title": "Part of the device name",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      }
+    ]
+  },
+  "labelIgnoredInputDevices": {
+    "type": "label",
+    "description": "In the list below, add a line containing part of its name (case sensitive) for each unwanted device."
+  },
+  "ignoredInputDevices": {
+     "type": "list",
+     "description": "Unwanted devices",
+     "default": [],
+     "columns": [
+      {
+        "id": "partOfName",
+        "title": "Part of the device name",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      }
+    ]
+  },
   "keyOpen": {
     "type": "keybinding",
     "description": "Show menu",
@@ -331,7 +395,8 @@
       "org.gnome.Totem",
       "mullvad browser",
       "io.gitlab.librewolf-community",
-      "LibreWolf"
+      "LibreWolf",
+      "org.strawberrymusicplayer.strawberry"
     ]
   },
   "runAsync": {

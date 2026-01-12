@@ -2,7 +2,7 @@
   "uuid": "day-progress@chmodmasx",
   "name": "Day Progress",
   "description": "Displays a customizable progress pie chart in the panel to help you track your day time.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "cinnamon-version": ["6.4"],
   "author": "chmodmasx"
 }
