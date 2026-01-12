@@ -97,12 +97,17 @@ class MyApplet extends Applet.TextIconApplet {
         const panelMonitorIndex = this.panel.monitorIndex
         const windows = global.get_window_actors();
         for (let i = windows.length - 1; i > 0; i--) {
-            if (panelMonitorIndex != windows[i].metaWindow.get_monitor() || windows[i].metaWindow.get_window_type() > 10) {
+            if (panelMonitorIndex != windows[i].metaWindow.get_monitor() || windows[i].metaWindow.get_window_type() > 10 || windows[i].metaWindow.get_window_type() == 1) {
                 continue
             }
             return tracker.get_window_app(windows[i].metaWindow).create_icon_texture(20)
         }
-        return undefined
+        const icon = new St.Icon({
+            icon_name: "video-display",
+            icon_type: St.IconType.SYMBOLIC,
+            style: "icon-size:20px;"
+        })
+        return icon
     }
 
     on_panel_edit_mode_changed() {
