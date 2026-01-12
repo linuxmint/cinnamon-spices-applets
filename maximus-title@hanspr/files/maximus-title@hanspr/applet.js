@@ -84,6 +84,9 @@ class MyApplet extends Applet.TextIconApplet {
         } catch (e) {
             return
         }
+        if (w == undefined) {
+            return
+        }
         if (w.get_monitor() != this.panel.monitorIndex) {
             let title = this._getTopWindowFromMonitor(w.get_monitor())
             this._setTitle(title, "")
