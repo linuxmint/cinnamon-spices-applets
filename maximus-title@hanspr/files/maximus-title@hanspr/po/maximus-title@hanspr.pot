@@ -30,7 +30,7 @@ msgid "Window Title Settings"
 msgstr ""
 
 #. settings-schema.json->title-len->description
-msgid "Maximum title lenght"
+msgid "Maximum title length"
 msgstr ""
 
 #. settings-schema.json->title-bg->description
