@@ -264,10 +264,6 @@ class MyApplet extends Applet.TextIconApplet {
             this.setButtons("hide")
             return
         }
-        let buttons = this.buttons_style.split(":")
-        if (this.checkButton(buttons, "icon")) {
-            this.updateWindowIcon()
-        }
         if (this.onlyMaximized == true) {
             this.onlyMaximize(w)
         } else {
@@ -314,7 +310,11 @@ class MyApplet extends Applet.TextIconApplet {
             wtype = 0
         }
         for (let i = 0; i < buttons.length; ++i) {
-            if (buttons[i] == undefined || buttons[i] == "icon" || this.button[buttons[i]] == undefined || (this.button[buttons[i]].opacity == skip && wtype == 0)) {
+            if (buttons[i]) {
+                this.updateWindowIcon()
+                continue
+            }
+            if (buttons[i] == undefined || this.button[buttons[i]] == undefined || (this.button[buttons[i]].opacity == skip && wtype == 0)) {
                 continue
             }
             let show = true
