@@ -4,10 +4,11 @@ import { Services } from "../../config";
 import { HttpLib } from "../../lib/httpLib";
 import type { LocationData } from "../../types";
 import { _, CelsiusToKelvin } from "../../utils";
-import type { Condition, HourlyForecastData, WeatherData } from "../../weather-data";
+import type { Condition, ForecastData, HourlyForecastData, WeatherData } from "../../weather-data";
 import { BaseProvider } from "../BaseProvider";
 import type { MetUkHourlyPayload, MetUkHourlyProperties } from "./payload/hourly";
 import { Logger } from "../../lib/services/logger";
+import type { MetUkDailyPayload, MetUkDailyProperties } from "./payload/daily";
 
 export class MetUk extends BaseProvider {
 	public readonly prettyName = _("Met Office UK");
@@ -39,30 +40,53 @@ export class MetUk extends BaseProvider {
 			longitude: newLocation.lon.toString(),
 		}
 
-		const res = await HttpLib.Instance.LoadJsonAsync<MetUkHourlyPayload>({
-			url: this.hourlyForecastUrl,
-			headers: {
-				apiKey: config.ApiKey,
-			},
-			params: params,
-			cancellable: cancellable,
-		});
+		const [hourlyRes, dailyRes] = await Promise.all([
+			HttpLib.Instance.LoadJsonAsync<MetUkHourlyPayload>({
+				url: this.hourlyForecastUrl,
+				headers: {
+					apiKey: config.ApiKey,
+				},
+				params: params,
+				cancellable: cancellable,
+			}),
+			HttpLib.Instance.LoadJsonAsync<MetUkDailyPayload>({
+				url: this.forecastUrl,
+				headers: {
+					apiKey: config.ApiKey,
+				},
+				params: params,
+				cancellable: cancellable,
+			}),
+		]);
 
-		if (!res.Success) {
-			Logger.Error(`MetUK: Failed to get data: ${JSON.stringify(res.ErrorData)}`);
+		if (!hourlyRes.Success) {
+			Logger.Error(`MetUK: Failed to get hourly data: ${JSON.stringify(hourlyRes.ErrorData)}`);
 			return null;
 		}
 
-		const hourlyForecasts = res.Data.features[0]?.properties;
+		if (!dailyRes.Success) {
+			Logger.Error(`MetUK: Failed to get daily data: ${JSON.stringify(dailyRes.ErrorData)}`);
+			return null;
+		}
+
+		const hourlyForecasts = hourlyRes.Data.features[0]?.properties;
 		if (!hourlyForecasts) {
 			Logger.Error(`MetUK: No hourly forecast data found for location ${newLocation.lat}, ${newLocation.lon}`);
 			return null;
 		}
 
+		const dailyForecasts = dailyRes.Data.features[0]?.properties;
+		if (!dailyForecasts) {
+			Logger.Error(`MetUK: No daily forecast data found for location ${newLocation.lat}, ${newLocation.lon}`);
+			return null;
+		}
+
 		const now = DateTime.now();
 		// The hourly item's end time must be in the future
-		const firstRelevantIndex = hourlyForecasts.timeSeries.findIndex(item => DateTime.fromISO(item.time).plus({ hours: 1 }) >= now);
-		hourlyForecasts.timeSeries = firstRelevantIndex === -1 ? [] : hourlyForecasts.timeSeries.slice(firstRelevantIndex);
+		const firstHourRelevantIndex = hourlyForecasts.timeSeries.findIndex(item => DateTime.fromISO(item.time).plus({ hours: 1 }) >= now);
+		hourlyForecasts.timeSeries = firstHourRelevantIndex === -1 ? [] : hourlyForecasts.timeSeries.slice(firstHourRelevantIndex);
+		const firstDayRelevantIndex = dailyForecasts.timeSeries.findIndex(item => DateTime.fromISO(item.time).set({ hour: 12, minute: 0, second: 0, millisecond: 0 }) >= now.set({ hour: 12, minute: 0, second: 0, millisecond: 0 }));
+		dailyForecasts.timeSeries = firstDayRelevantIndex === -1 ? [] : dailyForecasts.timeSeries.slice(firstDayRelevantIndex);
 
 		return {
 			condition: {
@@ -83,7 +107,7 @@ export class MetUk extends BaseProvider {
 			humidity: 0,
 			pressure: 0,
 			dewPoint: 0,
-			forecasts: [],
+			forecasts: this.GetDailyForecasts(dailyForecasts),
 			hourlyForecasts: this.GetHourlyForecasts(hourlyForecasts),
 			sunrise: null,
 			sunset: null,
@@ -106,11 +130,25 @@ export class MetUk extends BaseProvider {
 				date: DateTime.fromISO(item.time).setZone(MetUk.timezone),
 				temp: CelsiusToKelvin(item.screenTemperature),
 				condition: this.ResolveCondition(item.significantWeatherCode),
-				precipitation: item.probOfPrecipitation < 10 ? undefined : {
+				precipitation: item.probOfPrecipitation < 20 ? undefined : {
 					type: item.totalPrecipAmount > item.totalSnowAmount ? "rain" : "snow",
 					chance: item.probOfPrecipitation,
 					volume: item.precipitationRate,
 				},
+			})
+		}
+
+		return result;
+	}
+
+	private GetDailyForecasts(payload: MetUkDailyProperties): ForecastData[] {
+		const result: ForecastData[] = [];
+		for (const item of payload.timeSeries) {
+			result.push({
+				date: DateTime.fromISO(item.time).setZone(MetUk.timezone),
+				temp_min: CelsiusToKelvin(item.nightMinScreenTemperature),
+				temp_max: CelsiusToKelvin(item.dayMaxScreenTemperature),
+				condition: this.ResolveCondition(item.daySignificantWeatherCode ?? item.nightSignificantWeatherCode),
 			})
 		}
 
