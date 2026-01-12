@@ -1,3 +1,8 @@
+### v13.9.1~20260112
+  * Restore this applet for Cinnamon 6.4 (same as v13.8.2).
+  * Fixes [#8183](https://github.com/linuxmint/cinnamon-spices-applets/issues/8183)
+  * New features for Cinnamon 6.6.
+
 ### v13.9.0~20251228
   * Also displays OSD with commands like "pactl set-sink-volume ...".
   * Fixes [#8045](https://github.com/linuxmint/cinnamon-spices-applets/issues/8045)
