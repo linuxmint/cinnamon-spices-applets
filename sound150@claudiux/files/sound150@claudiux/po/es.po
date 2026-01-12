@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-01-11 20:15+0100\n"
-"PO-Revision-Date: 2025-12-22 22:25-0300\n"
+"PO-Revision-Date: 2026-01-11 22:12-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1087,11 +1087,11 @@ msgstr "Menú contextual"
 
 #. 6.4->settings-schema.json->sectionMenu3->title
 msgid "Output Devices Not Displayed In The Context Menu"
-msgstr ""
+msgstr "Dispositivos de salida que no se muestran en el menú contextual"
 
 #. 6.4->settings-schema.json->sectionMenu4->title
 msgid "Input Devices Not Displayed In The Context Menu"
-msgstr ""
+msgstr "Los dispositivos de entrada no se muestran en el menú contextual"
 
 #. 6.4->settings-schema.json->sectionBehavior1->title
 msgid "External commands and scripts"
@@ -1119,7 +1119,7 @@ msgstr "Comandos personalizados"
 
 #. 6.4->settings-schema.json->userMenuWidth->description
 msgid "Menu width (in pixels)"
-msgstr ""
+msgstr "Ancho del menú (en píxeles)"
 
 #. 6.4->settings-schema.json->dontShowAnyImageInMenu->description
 msgid "Do not show any cover art in the menu"
@@ -1204,17 +1204,19 @@ msgid ""
 "In the list below, add a line containing part of its name (case sensitive) "
 "for each unwanted device."
 msgstr ""
+"En la lista siguiente, añada una línea que contenga parte de su nombre "
+"(distinguiendo entre mayúsculas y minúsculas) para cada dispositivo no "
+"deseado."
 
 #. 6.4->settings-schema.json->ignoredOutputDevices->description
 #. 6.4->settings-schema.json->ignoredInputDevices->description
-#, fuzzy
 msgid "Unwanted devices"
-msgstr "Dispositivo de entrada"
+msgstr "Dispositivos no deseados"
 
 #. 6.4->settings-schema.json->ignoredOutputDevices->columns->title
 #. 6.4->settings-schema.json->ignoredInputDevices->columns->title
 msgid "Part of the device name"
-msgstr ""
+msgstr "Parte del nombre del dispositivo"
 
 #. 6.4->settings-schema.json->runAsync->description
 msgid "Execute asynchronously"
