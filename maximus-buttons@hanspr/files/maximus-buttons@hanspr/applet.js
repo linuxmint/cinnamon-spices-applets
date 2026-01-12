@@ -72,7 +72,7 @@ class MyApplet extends Applet.TextIconApplet {
         this.signalManager.connect(global.screen, 'window-monitor-changed', () => {
             let w = global.display.focus_window
             if (w) {
-                this._showButtons(w)
+                this._onMonitorChange(w, w.get_monitor)
             }
         }, this)
         this.signalManager.connect(global.screen, 'monitors-changed', () => {
@@ -83,6 +83,26 @@ class MyApplet extends Applet.TextIconApplet {
                 this._showButtons(w)
             }
         }, this)
+    }
+
+    _onMonitorChange(w, monitorIndex) {
+        if (monitorIndex != this.panel.monitorIndex) {
+            //console.log("set icon other monitor")
+            this.updateWindowIcon(this._getTopWindowFromMonitor(this.panel.monitorIndex))
+        }
+        this._showButtons(w)
+    }
+
+    _getTopWindowFromMonitor(monitorIndex) {
+        const panelMonitorIndex = this.panel.monitorIndex
+        const windows = global.get_window_actors();
+        for (let i = windows.length - 1; i > 0; i--) {
+            if (panelMonitorIndex != windows[i].metaWindow.get_monitor() || windows[i].metaWindow.get_window_type() > 10) {
+                continue
+            }
+            return tracker.get_window_app(windows[i].metaWindow).create_icon_texture(20)
+        }
+        return undefined
     }
 
     on_panel_edit_mode_changed() {
@@ -226,9 +246,16 @@ class MyApplet extends Applet.TextIconApplet {
 
     }
 
-    updateWindowIcon() {
+    updateWindowIcon(this_icon) {
+        if (this_icon != undefined) {
+            this.button["icon"].set_child(this_icon)
+            return
+        }
         let activeWindow = global.display.focus_window
         if (activeWindow) {
+            if (activeWindow.get_monitor() != this.panel.monitorIndex) {
+                return
+            }
             let app = tracker.get_window_app(activeWindow)
             if (app) {
                 let icon = tracker.get_window_app(activeWindow).create_icon_texture(20)
@@ -310,7 +337,7 @@ class MyApplet extends Applet.TextIconApplet {
             wtype = 0
         }
         for (let i = 0; i < buttons.length; ++i) {
-            if (buttons[i]) {
+            if (buttons[i] == "icon") {
                 this.updateWindowIcon()
                 continue
             }
