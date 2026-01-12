@@ -230,7 +230,8 @@
       "type": "section",
       "title": "Settings Window",
       "keys": [
-        "maximize-vertically"
+        "maximize-vertically",
+        "window-width"
       ]
     },
     "sectionBehaviorStartUp": {
@@ -950,6 +951,15 @@
     "default": true,
     "description": "Vertical maximization",
     "tooltip": "When this option is checked, this Settings Window will be maximized vertically the next time it is opened."
+  },
+  "window-width": {
+    "type": "scale",
+    "default": 1300,
+    "min": 1000,
+    "max": 6000,
+    "step": 10,
+    "description": "Width (in pixels)",
+    "tooltip": "Limited by the width of the screen.\nWill only be valid from the next time this window is opened."
   },
   "switch-on-last-station-at-start-up": {
     "type": "switch",

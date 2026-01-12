@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-01-06 00:15+0100\n"
+"POT-Creation-Date: 2026-01-13 00:07+0100\n"
 "PO-Revision-Date: 2025-10-11 12:36+0200\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
@@ -19,39 +19,39 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:287
+#. applet.js:288
 msgid "unassigned"
 msgstr "määrittämätön"
 
-#. applet.js:288
+#. applet.js:289
 msgid "Display Album Art at full size"
 msgstr "Näytä kansikuva täydessä koossa"
 
-#. applet.js:390
+#. applet.js:391
 msgid "This is your own list of Categories and Radio Stations."
 msgstr "Tämä on sinun oma lista radioasemista."
 
-#. applet.js:391
+#. applet.js:392
 msgid "You can add more using the [+] button."
 msgstr "Voit lisätä [+] painikkeella."
 
-#. applet.js:392
+#. applet.js:393
 msgid "For a category, fill in only its name; leave the other fields empty."
 msgstr ""
 "Jos haluat tietyn kategorian, täytä vain sen nimi; jätä muut kentät tyhjäksi."
 
-#. applet.js:393
+#. applet.js:394
 msgid "For a radio station, enter only its name and its streaming URL."
 msgstr "Anna vain radioasemalle sen nimi ja suoratoiston URL-osoite."
 
-#. applet.js:394
+#. applet.js:395
 msgid ""
 "You can order the rows by dragging and dropping or by using the buttons and "
 "tools below the list."
 msgstr ""
 "Järjestä rivit vedä ja pudota periaatteella tai käyttää nuolipainikkeita."
 
-#. applet.js:395
+#. applet.js:396
 msgid ""
 "The buttons on the right below the list allow you to navigate page by page "
 "or category by category."
@@ -59,26 +59,26 @@ msgstr ""
 "Oikealla olevilla painikkeilla voit selata sivu sivulta tai kategorian "
 "mukaan."
 
-#. applet.js:396
+#. applet.js:397
 msgid ""
 "To search for one of your stations, click on the list and start writing its "
 "name."
 msgstr ""
 "Jos haluat etsiä radioasemaa, paina radiolistaa ja kirjoita aseman nimi."
 
-#. applet.js:397
+#. applet.js:398
 msgid ""
 "To easily add stations to your list, use the following 2 tabs: Search and "
 "Import."
 msgstr ""
 "Voit lisätä radioasemia listallesi käyttämällä kahta välilehteä: Hae ja Tuo."
 
-#. applet.js:398
+#. applet.js:399
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr ""
 "Laita ruksi \"Valikko\" ruutuun ja radioasema tulee näkyviin valikossa."
 
-#. applet.js:399
+#. applet.js:400
 msgid ""
 "Check its '♪/➟' box to listen to the station or move it to another category "
 "using the tools below the list."
@@ -86,11 +86,11 @@ msgstr ""
 "Laita ruksi ruutuun \"♪/➟\" kuuntele asemaa tai siirrä se toiseen "
 "kategoriaan alla olevilla työkaluilla."
 
-#. applet.js:401
+#. applet.js:402
 msgid "You can have your list of stations checked by internet databases."
 msgstr "Voit tarkistaa radiolistan Internet-tietokantojen avulla."
 
-#. applet.js:402
+#. applet.js:403
 msgid ""
 "Any station recognized by one of these databases will receive a Universal "
 "Unique Identifier (UUID) provided by this database."
@@ -98,7 +98,7 @@ msgstr ""
 "Jokainen näistä tietokannan tunnistama asema saa tämän tietokannan tarjoaman "
 "UUID-tunnuksen (Universal Unique Identifier)."
 
-#. applet.js:403
+#. applet.js:404
 msgid ""
 "So, if a streaming URL was changed, a next check would update it and you can "
 "continue to listen to the affected station."
@@ -106,7 +106,7 @@ msgstr ""
 "Joten jos suoratoiston URL-osoitetta muutettiin, seuraava tarkistus "
 "päivittää sen ja voit jatkaa valitun aseman kuuntelemista."
 
-#. applet.js:405
+#. applet.js:406
 msgid ""
 "Here you can search for other stations in a free radio database accessible "
 "via the Internet."
@@ -114,7 +114,7 @@ msgstr ""
 "Voit etsiä asemia radiotietokannasta, joka on käytettävissä Internetin "
 "kautta."
 
-#. applet.js:406
+#. applet.js:407
 msgid ""
 "Fill in at least a few fields of the form below then click on the "
 "'Search ...' button."
@@ -122,7 +122,7 @@ msgstr ""
 "Täytä ainakin muutama kenttä alla olevasta lomakkeesta ja paina \"Hae...\" "
 "painiketta."
 
-#. applet.js:407
+#. applet.js:408
 msgid ""
 "Each time this button is clicked, a new results page is displayed in the "
 "second part of this page, where you can test certain stations and include "
@@ -131,7 +131,7 @@ msgstr ""
 "Kun hakua painetaan niin sivun alaosassa näkyy uusi hakutulos. Voit testata "
 "asemia ja lisätä sinun listalle."
 
-#. applet.js:408
+#. applet.js:409
 msgid ""
 "A station already in your menu will only appear in search results if its "
 "streaming URL has changed."
@@ -139,7 +139,7 @@ msgstr ""
 "Asema joka on jo listallasi näkyy haussa vain, jos sen suoratoiston URL on "
 "muuttunut."
 
-#. applet.js:409
+#. applet.js:410
 msgid ""
 "When no new page appears, it means that all results matching your search "
 "criteria have been displayed."
@@ -147,7 +147,7 @@ msgstr ""
 "Jos uutta tietoa ei ole se tarkoittaa, että kaikki hakuehtojasi vastaavat "
 "tulokset on näytetty."
 
-#. applet.js:411
+#. applet.js:412
 msgid ""
 "You can import a file containing the name and streaming URL of at least one "
 "radio station."
@@ -155,7 +155,7 @@ msgstr ""
 "Voit tuoda tiedoston, joka sisältää vähintään yhden radioaseman ja "
 "suoratoiston URL-osoitteen."
 
-#. applet.js:412
+#. applet.js:413
 msgid ""
 "These radio stations are displayed in the list below. You can test them by "
 "checking their ♪ box."
@@ -163,11 +163,11 @@ msgstr ""
 "Nämä radioasemat näkyvät alla olevassa listassa. Voit testata niitä "
 "valitsemalla ♪ ruudun."
 
-#. applet.js:413
+#. applet.js:414
 msgid "Then manage this list with the buttons at the bottom of this tab."
 msgstr "Hallinnoi listaa alareunassa olevilla painikkeilla."
 
-#. applet.js:415
+#. applet.js:416
 msgid ""
 "In the Shoutcast directory, click the download button to the left of the "
 "station name."
@@ -175,7 +175,7 @@ msgstr ""
 "Paina Shoutcast luettelossa aseman nimen vasemmalla puolella olevaa lataa-"
 "kuvaketta."
 
-#. applet.js:416
+#. applet.js:417
 msgid ""
 "Select the open format (.XSPF) and save the file giving it the same name as "
 "the station."
@@ -183,40 +183,40 @@ msgstr ""
 "Valitse avoimessa formaatissa (.XSPF) ja tallenna tiedosto samalla nimellä "
 "kuin asema on kirjoitettu."
 
-#. applet.js:417
+#. applet.js:418
 msgid "This file can then be imported here."
 msgstr "Tämä kyseinen tiedosto sitten voidaan tuoda tänne."
 
-#. applet.js:419
+#. applet.js:420
 #, javascript-format
 msgid "%s bytes = %s GB = %s GiB"
 msgstr "%s bytes = %s GB = %s GiB"
 
-#. applet.js:421
+#. applet.js:422
 msgid "Sun."
 msgstr "su"
 
-#. applet.js:421
+#. applet.js:422
 msgid "Mon."
 msgstr "ma"
 
-#. applet.js:421
+#. applet.js:422
 msgid "Tue."
 msgstr "ti"
 
-#. applet.js:421
+#. applet.js:422
 msgid "Wed."
 msgstr "ke"
 
-#. applet.js:421
+#. applet.js:422
 msgid "Thu."
 msgstr "to"
 
-#. applet.js:421
+#. applet.js:422
 msgid "Fri."
 msgstr "pe"
 
-#. applet.js:421
+#. applet.js:422
 msgid "Sat."
 msgstr "la"
 
@@ -228,228 +228,228 @@ msgstr "la"
 #. settings-schema.json->search-order->options
 #. settings-schema.json->alarm-clock-working-days-radio->options
 #. settings-schema.json->alarm-clock-workoff-days-radio->options
-#. applet.js:587 applet.js:605 applet.js:5563 applet.js:5579
+#. applet.js:588 applet.js:606 applet.js:5565 applet.js:5581
 msgid "(Undefined)"
 msgstr "(ei valintaa)"
 
 #. settings-schema.json->category-to-move->options
-#. applet.js:588 applet.js:5580
+#. applet.js:589 applet.js:5582
 msgid "(Blacklist)"
 msgstr ""
 
-#. applet.js:2286
+#. applet.js:2288
 msgid "Start"
 msgstr "Aloita"
 
-#. applet.js:2294 applet.js:3053
+#. applet.js:2296 applet.js:3055
 msgid "Stop"
 msgstr "Pysäytä"
 
-#. applet.js:2568
+#. applet.js:2570
 msgid "Volume: %s%"
 msgstr "Voimakkuus: %s%"
 
-#. applet.js:2573
+#. applet.js:2575
 msgid "Middle-Click: Stop Recording"
 msgstr "Keskipainike: Lopeta tallennus"
 
-#. applet.js:2575
+#. applet.js:2577
 msgid "Middle-click: ON/OFF"
 msgstr "Keskipainike: ON/OFF"
 
-#. applet.js:2577
+#. applet.js:2579
 msgid "Click: Select another station"
 msgstr "Painallus: Valitse toinen asema"
 
-#. applet.js:2578
+#. applet.js:2580
 msgid "Scroll wheel: volume change"
 msgstr "Rulla: voimakkuus muuttuu"
 
-#. applet.js:2581
+#. applet.js:2583
 msgid "Click to select a station"
 msgstr "Valitse asema painamalla"
 
-#. applet.js:2587
+#. applet.js:2589
 msgid "Wake Up"
 msgstr "Herätys"
 
-#. applet.js:2671 applet.js:3071 applet.js:5076
+#. applet.js:2673 applet.js:3073 applet.js:5078
 msgid "Configure..."
 msgstr "Asetukset..."
 
-#. applet.js:2675 applet.js:3063
+#. applet.js:2677 applet.js:3065
 msgid "Search for new stations..."
 msgstr "Hae asemia..."
 
-#. applet.js:2681
+#. applet.js:2683
 msgid "Load a sample station list"
 msgstr "Lataa näyteasemalista"
 
-#. applet.js:2728 applet.js:3075 applet.js:5146
+#. applet.js:2730 applet.js:3077 applet.js:5148
 msgid "Sound Settings"
 msgstr "Laitteet"
 
-#. applet.js:2809
+#. applet.js:2811
 msgid "Watch on YT"
 msgstr "Katso YT"
 
-#. applet.js:2816
+#. applet.js:2818
 msgid "Try to download it from YT (unsafe)"
 msgstr "Yritä ladata YT:n kautta (turvaton)"
 
-#. applet.js:2836
+#. applet.js:2838
 msgid "Recently Played Stations:"
 msgstr "Viimeiksi toistetut asemat:"
 
-#. applet.js:2887
+#. applet.js:2889
 msgid "Visit the home page of this station"
 msgstr "Vieraile aseman kotisivulla"
 
-#. applet.js:2936
+#. applet.js:2938
 msgid "Categories"
 msgstr "Kategoriat"
 
-#. applet.js:2939
+#. applet.js:2941
 msgid "Radio Stations"
 msgstr "Radioasemat"
 
-#. applet.js:2950
+#. applet.js:2952
 msgid "All Categories"
 msgstr "Kaikki kategoriat"
 
-#. applet.js:2995
+#. applet.js:2997
 msgid "My Radio Stations"
 msgstr "Minun asemat"
 
-#. applet.js:3195
+#. applet.js:3197
 msgid "Downloading..."
 msgstr "Ladataan..."
 
-#. applet.js:3197
+#. applet.js:3199
 msgid "Stop downloading"
 msgstr "Pysäytä lataaminen"
 
-#. applet.js:3303
+#. applet.js:3305
 msgid "Download complete"
 msgstr "Lataaminen valmis"
 
 #. settings-schema.json->button-open-rec-folder->description
 #. settings-schema.json->recordings-open-folder->description
-#. applet.js:3305 applet.js:3314 applet.js:4794 applet.js:4803 applet.js:4812
-#. applet.js:5109
+#. applet.js:3307 applet.js:3316 applet.js:4796 applet.js:4805 applet.js:4814
+#. applet.js:5111
 msgid "Open the recordings folder"
 msgstr "Avaa tallennuskansio"
 
-#. applet.js:3312 applet.js:4791 applet.js:4801 applet.js:4810
+#. applet.js:3314 applet.js:4793 applet.js:4803 applet.js:4812
 msgid "An error seems to have occurred during recording!"
 msgstr "Virhe tapahtui tallennuksen aikana!"
 
-#. applet.js:3313 applet.js:4793 applet.js:4802 applet.js:4811
+#. applet.js:3315 applet.js:4795 applet.js:4804 applet.js:4813
 msgid "Please check this record."
 msgstr "Tarkista tämä tallennus."
 
-#. applet.js:3421 applet.js:3455
+#. applet.js:3423 applet.js:3457
 msgid "Record from now"
 msgstr "Nauhoita tästä"
 
-#. applet.js:3439 applet.js:5465
+#. applet.js:3441 applet.js:5467
 msgid "Stop Current Recording"
 msgstr "Lopeta nykyinen tallennus"
 
-#. applet.js:3596
+#. applet.js:3598
 #, javascript-format
 msgid "Playing %s%s"
 msgstr "Nyt soi %s%s"
 
-#. applet.js:3650
+#. applet.js:3652
 msgid "Radio OFF"
 msgstr "Radio POIS"
 
-#. applet.js:3778
+#. applet.js:3780
 msgid "Unable to record anything!"
 msgstr "Ei voi tallentaa mitään!"
 
-#. applet.js:3778 applet.js:5126 applet.js:5285
+#. applet.js:3780 applet.js:5128 applet.js:5287
 msgid "Insufficient space"
 msgstr "Levytilaa ei ole riittävästi"
 
-#. applet.js:3778
+#. applet.js:3780
 msgid "The limit you set has been reached."
 msgstr "Asetamasi raja on saavutettu."
 
-#. applet.js:4180
+#. applet.js:4182
 msgid "Please Log Out then Log In"
 msgstr "Kirjaudu ulos ja sitten sisään"
 
-#. applet.js:4180
+#. applet.js:4182
 msgid "to finalize yt-dlp update"
 msgstr "yt-dlp päivityksen viimeistelemiseksi"
 
-#. applet.js:4316
+#. applet.js:4318
 msgid "Nothing to save."
 msgstr "Ei mitään tallennettavaa."
 
-#. applet.js:4329
+#. applet.js:4331
 msgid "List of saved radio stations"
 msgstr "Lista tallennetuista radioasemista"
 
-#. applet.js:4347
+#. applet.js:4349
 msgid "This will replace all current radio stations."
 msgstr "Tämä korvaa kaikki nykyiset radioasemat."
 
-#. applet.js:4348
+#. applet.js:4350
 msgid "Are you sure you want to continue?"
 msgstr "Haluatko varmasti jatkaa?"
 
-#. applet.js:4413
+#. applet.js:4415
 msgid "Update in progress"
 msgstr "Päivitys käynnissä"
 
-#. applet.js:4413
+#. applet.js:4415
 msgid "It may take a while ... Please wait."
 msgstr "Tämä voi kestää hetken... Odota."
 
-#. applet.js:4505
+#. applet.js:4507
 msgid "Update completed successfully"
 msgstr "Päivitys suoritettu onnistuneesti"
 
-#. applet.js:4676 applet.js:4732
+#. applet.js:4678 applet.js:4734
 msgid "ERROR: Invalid YT video URL!"
 msgstr "VIRHE: Virheellinen YT videon URL-osoite!"
 
-#. applet.js:4701
+#. applet.js:4703
 msgid "Unable to extract a single soundtrack"
 msgstr "Yksittäistä ääniraitaa ei voi purkaa"
 
-#. applet.js:4701
+#. applet.js:4703
 msgid "Maybe it's a playlist?"
 msgstr "Ehkä tämä on soittolista?"
 
-#. applet.js:4734
+#. applet.js:4736
 msgid "Close"
 msgstr "Sulje"
 
-#. applet.js:4892 applet.js:5353 applet.js:5371
+#. applet.js:4894 applet.js:5355 applet.js:5373
 msgid "Cancel"
 msgstr "Peru"
 
-#. applet.js:4893
+#. applet.js:4895
 msgid "Radio3.0 applet"
 msgstr "Radio3.0"
 
-#. applet.js:4896
+#. applet.js:4898
 msgid "Enable the OSD150 extension"
 msgstr "Ota OSD150 extension käyttöön"
 
-#. applet.js:4897
+#. applet.js:4899
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr "Vaakaruudun saamiseksi sinun on otettava OSD150-laajennus käyttöön."
 
-#. applet.js:4914
+#. applet.js:4916
 msgid "Download the OSD150 extension"
 msgstr "Lataa OSD150 extension"
 
-#. applet.js:4915
+#. applet.js:4917
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
@@ -457,99 +457,99 @@ msgstr ""
 "Vaakaruudun saamiseksi sinun on ladattava OSD150-laajennus.\n"
 "Paina Lataa-painiketta, etsi sitten hakusana OSD150 ja valitse ⬇-painike."
 
-#. applet.js:5048
+#. applet.js:5050
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Poista \"%s\""
 
-#. applet.js:5056
+#. applet.js:5058
 msgid "About..."
 msgstr "Tietoja..."
 
-#. applet.js:5063
+#. applet.js:5065
 msgid "Manual..."
 msgstr "Manuaali..."
 
-#. applet.js:5070
+#. applet.js:5072
 msgid "Reload this applet"
 msgstr "Lataa sovelma uudelleen"
 
-#. applet.js:5087
+#. applet.js:5089
 msgid "Schedule a background record..."
 msgstr "Ajasta tallennus taustalla..."
 
-#. applet.js:5094
+#. applet.js:5096
 msgid "Configure the Alarm Clock..."
 msgstr "Määritä herätyskello..."
 
-#. applet.js:5101
+#. applet.js:5103
 msgid "Extract soundtrack from YouTube video..."
 msgstr "Poimi ääniraita YouTube videosta..."
 
-#. applet.js:5123 applet.js:5282
+#. applet.js:5125 applet.js:5284
 msgid "(auto)"
 msgstr "(auto)"
 
-#. applet.js:5123 applet.js:5282
+#. applet.js:5125 applet.js:5284
 msgid "(manual)"
 msgstr "(manuaalinen)"
 
-#. applet.js:5126 applet.js:5285 applet.js:5512
+#. applet.js:5128 applet.js:5287 applet.js:5514
 msgid "Stop Recording"
 msgstr "Lopeta tallennus"
 
-#. applet.js:5126 applet.js:5285
+#. applet.js:5128 applet.js:5287
 msgid "Start Recording"
 msgstr "Aloita tallennus"
 
-#. applet.js:5142
+#. applet.js:5144
 msgid "Cancel downloads from YT"
 msgstr "Peruuta Youtube lataukset"
 
-#. applet.js:5151
+#. applet.js:5153
 msgid "Pulse Effects"
 msgstr "Pulse Effects"
 
-#. applet.js:5156
+#. applet.js:5158
 msgid "Easy Effects"
 msgstr "Easy Effects"
 
-#. applet.js:5161
+#. applet.js:5163
 msgid "Radio ON at startup"
 msgstr "Radio ON (kirjautuessa)"
 
-#. applet.js:5170
+#. applet.js:5172
 msgid "Display Station Logo"
 msgstr "Näytä aseman logo"
 
-#. applet.js:5180
+#. applet.js:5182
 msgid "Album Art desklet settings"
 msgstr "Album Art kasikuvien asetukset"
 
 #. settings-schema.json->alarm-clock-wake-me-up->description
-#. applet.js:5185
+#. applet.js:5187
 msgid "Wake me up!"
 msgstr "Herätä minut!"
 
-#. applet.js:5194
+#. applet.js:5196
 msgid "Show Album Art on desktop"
 msgstr "Näytä albumin kansi työpöydällä"
 
 #. settings-schema.json->dont-check-dependencies->description
-#. applet.js:5203
+#. applet.js:5205
 msgid "Do not check about dependencies"
 msgstr "Riippuvuuksia ei tarkisteta"
 
 #. settings-schema.json->show-volume-level-near-icon->description
-#. applet.js:5213
+#. applet.js:5215
 msgid "Display volume level near icon"
 msgstr "Näytä voimakkuus kuvakkeessa"
 
-#. applet.js:5350
+#. applet.js:5352
 msgid "You need the 'Album Art 3.0' desklet"
 msgstr "Sinä tarvitset \"Album Art 3.0\" sovelman työpydälle"
 
-#. applet.js:5351
+#. applet.js:5353
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
@@ -557,15 +557,15 @@ msgstr ""
 "Voit asentaa sen painamalla ensimmäistä painiketta ja sitten hakemalla Album "
 "hakusanalla."
 
-#. applet.js:5352 applet.js:5370
+#. applet.js:5354 applet.js:5372
 msgid "Desklets"
 msgstr "Sovelmia työpöydälle"
 
-#. applet.js:5368
+#. applet.js:5370
 msgid "You need to activate the 'Album Art 3.0' desklet"
 msgstr "Sinun on otettava käyttöön Album Art 3.0 työpöytäsovelma"
 
-#. applet.js:5369
+#. applet.js:5371
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
@@ -573,54 +573,54 @@ msgstr ""
 "Voit ottaa sen käyttöön painamalla ensimmäistä painiketta, hakemalla Album "
 "hakusanalla ja lisäämällä sen painikkeella [+]."
 
-#. applet.js:5513
+#. applet.js:5515
 msgid "Close without stopping recording"
 msgstr "Sulje lopettamatta tallennusta"
 
-#. applet.js:5729
+#. applet.js:5738
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr "Tallennus alkaa %s:%s - %s:%s"
 
-#. applet.js:5741
+#. applet.js:5750
 msgid "Recording completed"
 msgstr "Tallennus valmis"
 
-#. applet.js:5867
+#. applet.js:5876
 msgid "This will import a new file containing radio stations."
 msgstr "Tämä tuo uuden tiedoston, joka sisältää radioasemia."
 
-#. applet.js:5868
+#. applet.js:5877
 msgid "Do you want to continue?"
 msgstr "Haluatko jatkaa?"
 
-#. applet.js:5945
+#. applet.js:5954
 msgid "No new radio in your list."
 msgstr "Ei uutta radiota listallasi."
 
-#. applet.js:5947
+#. applet.js:5956
 msgid "One more radio in your list."
 msgstr "Yksi radio lisää listallasi."
 
-#. applet.js:5949
+#. applet.js:5958
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr "%s radiota lisää sinun listalla."
 
-#. applet.js:6209
+#. applet.js:6218
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr "Radio3.0 sovelman valikkoon ei ole lisättävää uutta asemaa"
 
-#. applet.js:6211
+#. applet.js:6220
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr "Radio3.0 sovelman valikkoon on lisätty uusi asema"
 
-#. applet.js:6213
+#. applet.js:6222
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr "%s uutta asemaa on lisätty Radio3.0 sovelman valikkoon"
 
-#. applet.js:6438
+#. applet.js:6447
 #, javascript-format
 msgid "%s kbps"
 msgstr "%s kbps"
@@ -669,49 +669,49 @@ msgstr "Kohteen \"%s\" suoritus epäonnistui:"
 msgid "%"
 msgstr "%"
 
-#. xs/xlet-settings.py:214
+#. xs/xlet-settings.py:215
 msgid "Previous instance"
 msgstr "Edellinen instanssi"
 
-#. xs/xlet-settings.py:218
+#. xs/xlet-settings.py:219
 msgid "Next instance"
 msgstr "Seuraava instanssi"
 
-#. xs/xlet-settings.py:227
+#. xs/xlet-settings.py:228
 msgid "More options"
 msgstr "Lisää valintoja"
 
-#. xs/xlet-settings.py:233
+#. xs/xlet-settings.py:234
 msgid "Import from a file"
 msgstr "Tuo tiedostosta"
 
-#. xs/xlet-settings.py:238
+#. xs/xlet-settings.py:239
 msgid "Export to a file"
 msgstr "Vie tiedostoon"
 
-#. xs/xlet-settings.py:243
+#. xs/xlet-settings.py:244
 msgid "Reset to defaults"
 msgstr "Palauta oletukset"
 
-#. xs/xlet-settings.py:252
+#. xs/xlet-settings.py:253
 #, python-format
 msgid "Reload %s"
 msgstr "Lataa %s uudelleen"
 
-#. xs/xlet-settings.py:441
+#. xs/xlet-settings.py:442
 #, python-format
 msgid "Settings for %s"
 msgstr "%s - asetukset"
 
-#. xs/xlet-settings.py:533
+#. xs/xlet-settings.py:534
 msgid "Select or enter file to export to"
 msgstr "Valitse tai kirjoita tiedostonimi, johon viedään"
 
-#. xs/xlet-settings.py:541 xs/xlet-settings.py:562
+#. xs/xlet-settings.py:542 xs/xlet-settings.py:563
 msgid "JSON files"
 msgstr "JSON-tiedostot"
 
-#. xs/xlet-settings.py:555
+#. xs/xlet-settings.py:556
 msgid "Select a JSON file to import"
 msgstr "Valitse tuotava JSON-tiedosto"
 
@@ -1212,6 +1212,16 @@ msgid ""
 msgstr ""
 "Kun valittuna ohjelman asetukset laajennetaan pystysuuntaisesti ja asetuksia "
 "on helpompi rullata hiirellä. Tulee voimaan kun avaat ensikerralla ikkunan."
+
+#. settings-schema.json->window-width->description
+msgid "Width (in pixels)"
+msgstr ""
+
+#. settings-schema.json->window-width->tooltip
+msgid ""
+"Limited by the width of the screen.\n"
+"Will only be valid from the next time this window is opened."
+msgstr ""
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
