@@ -252,6 +252,9 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     updateWindowIcon(this_icon) {
+        if (this.button["icon"] == undefined) {
+            return
+        }
         if (this_icon != undefined) {
             this.button["icon"].set_child(this_icon)
             return
