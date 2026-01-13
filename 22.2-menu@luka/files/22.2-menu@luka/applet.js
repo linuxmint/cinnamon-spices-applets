@@ -2715,9 +2715,8 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
 	            this.menu.close();
 	            this._session.LogoutRemote(0);
 	        };
+            this.systemButtonsBox.add(button.actor, { y_align: St.Align.END, y_fill: false });
 	    };
-
-        this.systemButtonsBox.add(button.actor, { y_align: St.Align.END, y_fill: false });
 
         //Shutdown button
         if (this.show_quit) {
