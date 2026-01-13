@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-01-13 00:07+0100\n"
-"PO-Revision-Date: 2026-01-06 21:54-0300\n"
+"PO-Revision-Date: 2026-01-13 13:55-0300\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1229,13 +1229,15 @@ msgstr ""
 
 #. settings-schema.json->window-width->description
 msgid "Width (in pixels)"
-msgstr ""
+msgstr "Ancho (en píxeles)"
 
 #. settings-schema.json->window-width->tooltip
 msgid ""
 "Limited by the width of the screen.\n"
 "Will only be valid from the next time this window is opened."
 msgstr ""
+"Limitado por el ancho de la pantalla.\n"
+"Solo será válido desde la próxima vez que se abra esta ventana."
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
