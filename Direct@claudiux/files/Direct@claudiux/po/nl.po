@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-23 15:47+0100\n"
+"POT-Creation-Date: 2026-01-07 23:43+0100\n"
 "PO-Revision-Date: 2024-07-24 10:12+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -17,69 +17,77 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:45 applet.js:652
+#. applet.js:46 applet.js:654
 msgid "SYSTEM"
 msgstr "SYSTEEM"
 
-#. applet.js:45 applet.js:692
+#. applet.js:46 applet.js:694
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:45 applet.js:723
+#. applet.js:46 applet.js:725
 msgid "APPLICATIONS"
 msgstr ""
 
-#. applet.js:45 applet.js:754
+#. applet.js:46 applet.js:756
 msgid "RECENT DOCUMENTS"
 msgstr "RECENTE DOCUMENTEN"
 
-#. applet.js:45 applet.js:798
+#. applet.js:46 applet.js:800
 msgid "CUSTOM"
 msgstr ""
 
-#. applet.js:188
+#. applet.js:189
 msgid "(Right click to open folder)"
 msgstr "(Rechtsklik om map te openen)"
 
 #. metadata.json->name
-#. applet.js:315
+#. applet.js:317
 msgid "Direct"
 msgstr "Direct"
 
-#. applet.js:622
+#. applet.js:624
 msgid "Search Home Folder"
 msgstr "Zoeken in thuismap"
 
-#. applet.js:629 applet.js:669 applet.js:700 applet.js:731 applet.js:762
-#. applet.js:806
+#. applet.js:631 applet.js:671 applet.js:702 applet.js:733 applet.js:764
+#. applet.js:808
 msgid "Configure"
 msgstr ""
 
-#. applet.js:662
+#. applet.js:664
 msgid "Search File System"
 msgstr "Zoeken in bestandssysteem"
 
-#. applet.js:776
+#. applet.js:778
 msgid "Clear"
 msgstr "Wissen"
 
-#. applet.js:783
+#. applet.js:785
 msgid "Recent"
 msgstr "Recent"
 
-#. applet.js:860
+#. applet.js:862
 msgid "Computer"
 msgstr "Computer"
 
-#. applet.js:866
+#. applet.js:868
 msgid "File System"
 msgstr "Bestandssysteem"
 
-#. applet.js:883
+#. applet.js:885
 msgid "Network"
 msgstr "Netwerk"
 
-#. applet.js:1196
+#. applet.js:900
+msgid "Logout"
+msgstr ""
+
+#. applet.js:907
+msgid "Quit"
+msgstr ""
+
+#. applet.js:1215
 msgid "Trash"
 msgstr "Prullenbak"
 

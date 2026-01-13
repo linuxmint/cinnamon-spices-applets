@@ -28,6 +28,7 @@
         "update-interruptible",
         "standard-opacity",
         "color-on-change",
+        "colorWhileRefreshing",
         "icon-size",
         "show-issues",
         "show-translations",
@@ -37,8 +38,7 @@
         "translate-name",
         "display-on-panel",
         "useful-only",
-        "coloredIcon",
-        "colorWhileRefreshing"
+        "coloredIcon"
       ]
     },
     "section2": {

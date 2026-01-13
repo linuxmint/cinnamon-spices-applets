@@ -49,7 +49,6 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.bind("buttons-theme", "buttonsTheme")
         this.settings.bind("only-maximized", "onlyMaximized", this.on_settings_changed)
         this.settings.bind("hide-buttons", "hideButtons", this.on_settings_changed)
-        this.settings.bind("on-desktop-shutdown", "onDesktopShutdown", this.on_settings_changed)
     }
 
     connectSignals() {
@@ -73,7 +72,7 @@ class MyApplet extends Applet.TextIconApplet {
         this.signalManager.connect(global.screen, 'window-monitor-changed', () => {
             let w = global.display.focus_window
             if (w) {
-                this._showButtons(w)
+                this._onMonitorChange(w, w.get_monitor)
             }
         }, this)
         this.signalManager.connect(global.screen, 'monitors-changed', () => {
@@ -84,6 +83,31 @@ class MyApplet extends Applet.TextIconApplet {
                 this._showButtons(w)
             }
         }, this)
+    }
+
+    _onMonitorChange(w, monitorIndex) {
+        if (monitorIndex != this.panel.monitorIndex) {
+            //console.log("set icon other monitor")
+            this.updateWindowIcon(this._getTopWindowFromMonitor(this.panel.monitorIndex))
+        }
+        this._showButtons(w)
+    }
+
+    _getTopWindowFromMonitor(monitorIndex) {
+        const panelMonitorIndex = this.panel.monitorIndex
+        const windows = global.get_window_actors();
+        for (let i = windows.length - 1; i > 0; i--) {
+            if (panelMonitorIndex != windows[i].metaWindow.get_monitor() || windows[i].metaWindow.get_window_type() > 10 || windows[i].metaWindow.get_window_type() == 1) {
+                continue
+            }
+            return tracker.get_window_app(windows[i].metaWindow).create_icon_texture(20)
+        }
+        const icon = new St.Icon({
+            icon_name: "video-display",
+            icon_type: St.IconType.SYMBOLIC,
+            style: "icon-size:20px;"
+        })
+        return icon
     }
 
     on_panel_edit_mode_changed() {
@@ -209,8 +233,6 @@ class MyApplet extends Applet.TextIconApplet {
             if (button == 1) {
                 this.closeWindow()
                 return true
-            } else if (button == 3) {
-                this._applet_context_menu.toggle()
             }
             return true
         })
@@ -223,25 +245,26 @@ class MyApplet extends Applet.TextIconApplet {
         let activeWindow = global.display.focus_window
         let app = tracker.get_window_app(activeWindow)
 
-        if (!app) {
-            if (this.onDesktopShutdown == true) {
-                this._session.ShutdownRemote()
-            }
-            return
-        } else {
+        if (app) {
             activeWindow.delete(global.get_current_time())
         }
 
     }
 
-    updateWindowIcon() {
+    updateWindowIcon(this_icon) {
+        if (this_icon != undefined) {
+            this.button["icon"].set_child(this_icon)
+            return
+        }
         let activeWindow = global.display.focus_window
         if (activeWindow) {
+            if (activeWindow.get_monitor() != this.panel.monitorIndex) {
+                return
+            }
             let app = tracker.get_window_app(activeWindow)
             if (app) {
                 let icon = tracker.get_window_app(activeWindow).create_icon_texture(20)
                 this.button["icon"].set_child(icon)
-                this.actor.add(this.button['icon'])
             } else {
                 let icon = new St.Icon({
                     icon_name: "video-display",
@@ -268,18 +291,15 @@ class MyApplet extends Applet.TextIconApplet {
             this.setButtons("hide")
             return
         }
-        if (w.get_window_type() >= 1) {
+        //console.log("WINDOW TYPE = ", w.get_window_type())
+        if (w.get_window_type() >= 5 || w.get_window_type() == 1) {
             this.setButtons("hide")
             return
-        }
-        let buttons = this.buttons_style.split(":")
-        if (this.checkButton(buttons, "icon")) {
-            this.updateWindowIcon()
         }
         if (this.onlyMaximized == true) {
             this.onlyMaximize(w)
         } else {
-            this.setButtons("show")
+            this.setButtons("show", w.get_window_type())
         }
     }
 
@@ -306,23 +326,34 @@ class MyApplet extends Applet.TextIconApplet {
     onlyMaximize(w) {
         let app = tracker.get_window_app(w)
         if (app && w.get_maximized()) {
-            this.setButtons("show")
+            this.setButtons("show", w.get_window_type())
         } else {
             this.setButtons("hide")
         }
     }
 
-    setButtons(what) {
+    setButtons(what, wtype) {
         let buttons = this.buttons_style.split(":")
         let skip = 0
         if (what == "show") {
             skip = 255
         }
+        if (wtype == undefined) {
+            wtype = 0
+        }
         for (let i = 0; i < buttons.length; ++i) {
-            if (buttons[i] == undefined || buttons[i] == "icon" || this.button[buttons[i]] == undefined || this.button[buttons[i]].opacity == skip) {
+            if (buttons[i] == "icon") {
+                this.updateWindowIcon()
                 continue
             }
-            if (what == "show") {
+            if (buttons[i] == undefined || this.button[buttons[i]] == undefined || (this.button[buttons[i]].opacity == skip && wtype == 0)) {
+                continue
+            }
+            let show = true
+            if (wtype > 0 && buttons[i] != "close") {
+                show = false
+            }
+            if (what == "show" && show) {
                 if (!this.hideButtons) {
                     this.button[buttons[i]].show()
                 }

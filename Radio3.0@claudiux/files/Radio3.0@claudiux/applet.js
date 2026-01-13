@@ -35,7 +35,8 @@ const { Icon, IconType, Button, Widget, ScrollView, Align, Label, BoxLayout, Bin
 //Tooltips:
 const { Tooltip } = imports.ui.tooltips;
 //MessageTray:
-const { Urgency, MessageTray, SystemNotificationSource, Notification } = imports.ui.messageTray;
+//~ const { Urgency, MessageTray, SystemNotificationSource, Notification } = imports.ui.messageTray;
+const { Urgency, MessageTray, SystemNotificationSource, Notification } = require("./lib/messageTray");
 
 const TABS = ["Radios", "Search", "Import", "Menu", "Behavior", "Network", "Recording", "YT", "Scheduling", "Alarm Clock"];
 var RADIO_NOTIFICATION_TIMEOUT = 2;
@@ -225,7 +226,8 @@ if (  versionCompare(getenv("CINNAMON_VERSION"), "5.6") >= 0 &&
 }
 const RADIO30_SETTINGS_SCHEMA = APPLET_DIR + "/settings-schema.json";
 const DB_SERVERS_FILE = APPLET_DIR + "/radiodb/server-list.json";
-const XS_PATH = "%s/xs/xlet-settings.py".format(APPLET_DIR, );
+//~ const XS_PATH = "%s/xs/xlet-settings.py".format(APPLET_DIR, );
+const XS_PATH = `${APPLET_DIR}/xs/`;
 const APPLET_ICON = APPLET_DIR + "/icons/icon.svg";
 const ANIMATED_ICON = APPLET_DIR + "/icons/animated-symbolic.svg";
 var MANUAL_HTML = HELP_DIR + "/MANUAL.html";
@@ -702,7 +704,8 @@ RadioMessageTray.prototype = {
 
     if (this._notification.urgency != Urgency.CRITICAL) {
       this._updateNotificationTimeout(RADIO_NOTIFICATION_TIMEOUT * 1000);
-    } else if (AppletManager.get_role_provider_exists(AppletManager.Roles.NOTIFICATIONS)) {
+    //~ } else if (AppletManager.get_role_provider_exists(AppletManager.Roles.NOTIFICATIONS)) {
+    } else {
       this._updateNotificationTimeout(RADIO_NOTIFICATION_CRITICAL_TIMEOUT_WITH_APPLET * 1000);
     }
   }
@@ -724,7 +727,11 @@ RadioNotificationSource.prototype = {
     if (this.notifications.length > 0) {
       for (let i = this.notifications.length - 1; i >= 0; i--) {
         if (this.notifications[i]) {
-          this.notifications[i].destroy();
+          try {
+            this.notifications[i].destroy();
+          } catch(e) {
+            logError("Unable to destroy notification number "+i+". "+e);
+          }
         } else {
           // Do nothing.
           logError("Unable to destroy notification number "+i);
@@ -738,8 +745,9 @@ RadioNotificationSource.prototype = {
 }
 
 const messageTray = new RadioMessageTray();
-const source = new RadioNotificationSource("Radio3.0");
-messageTray.add(source);
+//~ const SOURCE = new RadioNotificationSource("Radio3.0");
+const SOURCE = new RadioNotificationSource();
+messageTray.add(SOURCE);
 
 class TitleSeparatorMenuItem extends PopupBaseMenuItem {
   constructor(title, icon_name, reactive=false) {
@@ -1265,6 +1273,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   get_user_settings() {
     this.settings.bind("ignoreYT", "ignoreYT");
     this.settings.bind("maximize-vertically", "maximize_vertically");
+    this.settings.bind("window-width", "window_width");
     this.settings.bind("image-resolution", "res", () => { this.reload_songArt() });
     this.settings.bind("radiopp-is-here", "radiopp_is_here");
     this.radiopp_is_here = radioppConfigFilePath != null;
@@ -3354,7 +3363,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   on_song_changed(radio="", title="") {
     //log("on_song_changed");
-    source.destroyAllNotifications();
+    SOURCE.destroyAllNotifications();
     let pid = this.record_pid;
 
     let is_recording = pid != null;
@@ -3479,8 +3488,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         this.download_songArt(title, res);
       } else {
         let size = child.get_size();
-        if (size == 0 && res != "sd")
-          this.download_songArt(title, res="sd");
+        if (size == 0 && res != "default")
+          this.download_songArt(title, res="default");
       }
       children.close(null);
       return false;
@@ -3539,7 +3548,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   start_mpv_radio(id) {
     this.showOSD = this.volume_show_osd && this.showOSDonStartup;
-    source.destroyAllNotifications();
+    SOURCE.destroyAllNotifications();
     let _id = ""+id;
     //log("start_mpv_radio: " + _id);
     if (_id.length === 0) return;
@@ -3639,7 +3648,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.updateUI();
 
     if (notify_user) {
-      source.destroyAllNotifications();
+      SOURCE.destroyAllNotifications();
       this.radio_notify(_("Radio OFF"));
     }
 
@@ -5436,8 +5445,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   radio_notify(msg, submsg="", button=[]) {
-    //log("radio_notify:  msg:" + msg + " - submsg: " + submsg);
-
     RADIO_NOTIFICATION_TIMEOUT = 2;
 
     let icon = new Icon();
@@ -5445,7 +5452,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     icon.set_icon_type(IconType.SYMBOLIC);
     icon.set_icon_size(24);
 
-    let notification = new Notification(source, msg, submsg, { icon: icon, silent: true });
+    let notification = new Notification(SOURCE, msg, submsg, { icon: icon, silent: true });
     notification.setTransient(false);
 
     if (button.length === 3 && this.notif_buttons_allowed) {
@@ -5454,7 +5461,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       if (button[1] === "callback") {
         notification.addButton("callback", button[0]); // button[0]: label
         notification.connect("action-invoked", button[2]); // button[2]: callback
-        source.notify(notification);
+        SOURCE.notify(notification);
         return notification;
       } else if (this.record_pid != null && !this.get_recording_ends_auto() && button[1] !== "stop-recording") {
         notification.addButton("stop-recording", _("Stop Current Recording"));
@@ -5522,7 +5529,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       });
     }
 
-    source.notify(notification);
+    SOURCE.notify(notification);
     return notification;
   }
 
@@ -5635,8 +5642,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   configureApplet(tab=0) {
+    //~ logDebug("tab=" + tab);
     const VERTICAL = 2;
     let maximize_vertically = this.maximize_vertically;
+    let window_width = Math.min(this.window_width, global.screen_width);
+    this.window_width = window_width;
     this._applet_context_menu.close(false);
     this.closeSettingsWindow();
 
@@ -5647,7 +5657,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this._set_settings_options();
 
-    let pid = spawnCommandLine(XS_PATH + " applet " + this._uuid + " -i " + this.instance_id + " -t " + tab);
+    //~ let pid = spawnCommandLine(XS_PATH + " applet " + this._uuid + " -i " + this.instance_id + " -t " + tab);
+    //~ logDebug("command: " + XS_PATH + " applet " + this._uuid + " -i " + this.instance_id + " -t " + tab);
+    let pid = spawnCommandLine(XS_PATH + "/xlet-settings.py applet " + this._uuid + " -i " + this.instance_id + " -t " + tab);
+    //~ let pid = spawnCommandLine(SCRIPTS_DIR + "/configRadio3.0.sh " + this.instance_id + " " + tab);
 
     if (maximize_vertically) {
       var app = null;
@@ -5658,6 +5671,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         if (app != null) {
           let window = app.get_windows()[0];
           this.settingsTab = tab;
+          window.move_resize_frame(null, 0, 0, window_width, 800);
           window.maximize(VERTICAL);
           window.activate(300);
           this.settingsWindow = window;
