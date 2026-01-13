@@ -1,0 +1,267 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2019-08-12 12:09+0800\n"
+"PO-Revision-Date: 2022-12-02 14:08+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. cryptocoin@guantanamoe->metadata.json->description
+msgid "Monitor current price and trends of cryptocurrencies"
+msgstr "Seuraa kryptovaluuttojen hintoja ja trendejä"
+
+#. cryptocoin@guantanamoe->metadata.json->name
+msgid "Cryptocoin"
+msgstr "Cryptocoin"
+
+#. cryptocoin@guantanamoe->settings-schema.json->layout->general-page->title
+#. settings-schema.json->general-page->title
+msgid "General"
+msgstr "Yleinen"
+
+#. cryptocoin@guantanamoe->settings-schema.json->layout->graph-page->title
+#. cryptocoin@guantanamoe->settings-schema.json->layout->graph-section->title
+#. settings-schema.json->graph-page->title
+#. settings-schema.json->graph-section->title
+msgid "Graph"
+msgstr "Kaavio"
+
+#. cryptocoin@guantanamoe->settings-schema.json->layout->alerts-page->title
+#. cryptocoin@guantanamoe->settings-schema.json->layout->alerts-section->title
+#. settings-schema.json->alerts-page->title
+#. settings-schema.json->alerts-section->title
+msgid "Alerts"
+msgstr "Hälytykset"
+
+#. cryptocoin@guantanamoe->settings-schema.json->layout->currency-
+#. section->title
+#. cryptocoin@guantanamoe->settings-schema.json->currency->description
+#. settings-schema.json->currency-section->title
+#. settings-schema.json->advanced-currency-section->title
+msgid "Currency"
+msgstr "Rahayksikkö"
+
+#. cryptocoin@guantanamoe->settings-schema.json->layout->alerts-config->title
+#. settings-schema.json->alerts-config->title
+msgid "Config"
+msgstr "Määritys"
+
+#. cryptocoin@guantanamoe->settings-schema.json->layout->alerts-delta-
+#. section->title
+#. settings-schema.json->alerts-delta-section->title
+msgid "Delta Alerts"
+msgstr "Ilmoitus vaihteluista"
+
+#. cryptocoin@guantanamoe->settings-schema.json->currency->tooltip
+msgid "Set the currency you want coin value to be set in"
+msgstr "Aseta valuutta, jossa haluat näyttää kolikon arvon"
+
+#. cryptocoin@guantanamoe->settings-schema.json->ticker->description
+msgid "Ticker"
+msgstr "Valuutta"
+
+#. cryptocoin@guantanamoe->settings-schema.json->ticker->tooltip
+msgid "Set the crypto currency ticker"
+msgstr "Syötä valuutan tunnus"
+
+#. cryptocoin@guantanamoe->settings-schema.json->show-ticker-icon->description
+msgid "Ticker Icon"
+msgstr "Valuutan kuvake"
+
+#. cryptocoin@guantanamoe->settings-schema.json->show-ticker-name->description
+msgid "Ticker Name"
+msgstr "Valuutan nimi"
+
+#. cryptocoin@guantanamoe->settings-schema.json->show-currency->description
+msgid "Show Currency"
+msgstr "Näytä rahayksikkö"
+
+#. cryptocoin@guantanamoe->settings-schema.json->show-currency->options->Name
+msgid "name"
+msgstr "Nimi"
+
+#. cryptocoin@guantanamoe->settings-schema.json->show-
+#. currency->options->Symbol
+msgid "symbol"
+msgstr "Symboli"
+
+#. cryptocoin@guantanamoe->settings-schema.json->show-currency->options->None
+msgid "none"
+msgstr "Ei mitään"
+
+#. cryptocoin@guantanamoe->settings-schema.json->graph-unit->description
+msgid "Unit for Graph History"
+msgstr "Kaaviohistorian yksikkö"
+
+#. cryptocoin@guantanamoe->settings-schema.json->graph-unit->options
+#. cryptocoin@guantanamoe->settings-schema.json->alert-delta-unit->options
+msgid "Minutes"
+msgstr "Minuuttia"
+
+#. cryptocoin@guantanamoe->settings-schema.json->graph-unit->options
+#. cryptocoin@guantanamoe->settings-schema.json->alert-delta-unit->options
+msgid "Hours"
+msgstr "Tuntia"
+
+#. cryptocoin@guantanamoe->settings-schema.json->graph-unit->options
+#. cryptocoin@guantanamoe->settings-schema.json->alert-delta-unit->options
+msgid "Days"
+msgstr "Päivää"
+
+#. cryptocoin@guantanamoe->settings-schema.json->graph-length->description
+msgid "Graph History Length"
+msgstr "Kaaviohistorian pituus"
+
+#. cryptocoin@guantanamoe->settings-schema.json->graph-width->description
+msgid "Graph Popup Width"
+msgstr "Kuvaajan ikkunan leveys"
+
+#. cryptocoin@guantanamoe->settings-schema.json->graph-height->description
+msgid "Graph Popup Height"
+msgstr "Kuvaajan ikkunan korkeus"
+
+#. cryptocoin@guantanamoe->settings-schema.json->graph-color->description
+msgid "The Graph Foreground Color"
+msgstr "Kaavion etualan väri"
+
+#. cryptocoin@guantanamoe->settings-schema.json->alert-enable->description
+msgid "Enable alerts"
+msgstr "Hälytykset käyttöön"
+
+#. cryptocoin@guantanamoe->settings-schema.json->alert-any-change->description
+msgid "Any change"
+msgstr "Kaikki muutokset"
+
+#. cryptocoin@guantanamoe->settings-schema.json->alert-label-
+#. color->description
+msgid "Label color"
+msgstr "Merkin väri"
+
+#. cryptocoin@guantanamoe->settings-schema.json->alert-on-above->description
+msgid "Absolute maximum (money)"
+msgstr "Ehdoton maksimi (raha)"
+
+#. cryptocoin@guantanamoe->settings-schema.json->alert-on-above->tooltip
+msgid "Alert when current value is above this value"
+msgstr "Hälytys, kun nykyinen arvo on tämän arvon yläpuolella"
+
+#. cryptocoin@guantanamoe->settings-schema.json->alert-on-below->description
+msgid "Absolute minimum (money)"
+msgstr "Ehdoton minimi (raha)"
+
+#. cryptocoin@guantanamoe->settings-schema.json->alert-on-below->tooltip
+msgid "Alert when current value is below this value"
+msgstr "Hälytys, kun nykyinen arvo on tämän arvon alapuolella"
+
+#. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-
+#. above->description
+msgid "Increase variation (%)"
+msgstr "Suurenna vaihtelua (%)"
+
+#. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-above->tooltip
+msgid "Alert when value increase this delta %"
+msgstr "Hälytys, kun tämän arvo kasvaa %"
+
+#. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-
+#. below->description
+msgid "Decrease variation (%)"
+msgstr "Pienennä vaihtelua (%)"
+
+#. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-below->tooltip
+msgid "Alert when value decrease this delta %"
+msgstr "Hälytys, kun tämän arvo laskee %"
+
+#. cryptocoin@guantanamoe->settings-schema.json->alert-delta-
+#. length->description
+msgid "Delta interval"
+msgstr "Muutosväli"
+
+#. cryptocoin@guantanamoe->settings-schema.json->alert-delta-unit->description
+msgid "Unit of interval"
+msgstr "Aikavälin yksikkö"
+
+#. cryptocoin@guantanamoe->settings-schema.json->alert-delta-update-
+#. interval->description
+msgid "Update interval"
+msgstr "Päivitysväli"
+
+#. settings-schema.json->advanced-page->title
+msgid "Advanced"
+msgstr "Lisäasetukset"
+
+#. settings-schema.json->amount->description
+msgid "Amount"
+msgstr "Määrä"
+
+#. settings-schema.json->amount->tooltip
+msgid "Set the balance to multiply the price"
+msgstr "Aseta määrä niin hinta kerrotaan"
+
+#. settings-schema.json->show-currency->options
+msgid "Name"
+msgstr "Nimi"
+
+#. settings-schema.json->show-currency->options
+msgid "Symbol"
+msgstr "Symboli"
+
+#. settings-schema.json->show-currency->options
+msgid "None"
+msgstr "Ei mitään"
+
+#. settings-schema.json->rates-update-interval->description
+msgid "Rates update interval (in seconds)"
+msgstr "Hinnat päivitysväli (sekunteina)"
+
+#. settings-schema.json->rates-update-interval->tooltip
+msgid "Set the delay between each rates update."
+msgstr "Aseta viive kunkin hintapäivityksen välillä."
+
+#. settings-schema.json->graph-type->description
+msgid "Graph Type"
+msgstr "Kaavion tyyppi"
+
+#. settings-schema.json->graph-type->options
+msgid "Candlestick"
+msgstr "Pylväskuvio"
+
+#. settings-schema.json->graph-type->options
+msgid "Line"
+msgstr "Viiva"
+
+#. settings-schema.json->graph-color->description
+msgid "Graph Foreground Color"
+msgstr "Kaavion etualan väri"
+
+#. settings-schema.json->alert-delta-update-interval->units
+msgid "seconds"
+msgstr "sekuntia"
+
+#. settings-schema.json->currency-format-enable->description
+msgid "Custom format"
+msgstr "Mukautettu muoto"
+
+#. settings-schema.json->currency-format-symbol->description
+msgid "Currency symbol"
+msgstr "Rahayksikön symboli"
+
+#. settings-schema.json->currency-format-name->description
+msgid "Currency name"
+msgstr "Rahayksikön nimi"
+
+#. settings-schema.json->currency-format-precision->description
+msgid "Decimal places"
+msgstr "Desimaalit"

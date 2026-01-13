@@ -1,0 +1,330 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: placesCenter@scollins 2.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-15 02:01+0200\n"
+"PO-Revision-Date: 2025-10-12 12:15+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:150
+msgid "(Right click to open folder)"
+msgstr "(Nhấn phải để mở thư mục)"
+
+#: applet.js:172
+msgid "Places"
+msgstr "Vị trí"
+
+#: applet.js:287
+msgid "Search Home Folder"
+msgstr "Tìm kiếm Thư mục Nhà"
+
+#: applet.js:310
+msgid "SYSTEM"
+msgstr "HỆ THỐNG"
+
+#: applet.js:319
+msgid "Search File System"
+msgstr "Tìm kiếm Hệ thống Tệp"
+
+#: applet.js:344
+msgid "RECENT DOCUMENTS"
+msgstr "TÀI LIỆU GẦN ĐÂY"
+
+#: applet.js:358
+msgid "Clear"
+msgstr "Xóa"
+
+#: applet.js:364
+msgid "Recent"
+msgstr "Gần đây"
+
+#: applet.js:407
+msgid "Computer"
+msgstr "Máy tính"
+
+#: applet.js:413
+msgid "File System"
+msgstr "Hệ thống tệp"
+
+#: applet.js:429
+msgid "Network"
+msgstr "Mạng"
+
+#: applet.js:569
+msgid "Trash"
+msgstr "Thùng rác"
+
+#: search.py:43
+msgid "Open..."
+msgstr "Mở..."
+
+#: search.py:48
+msgid "Open Containing Folder..."
+msgstr "Mở Thư mục Chứa..."
+
+#: search.py:85
+msgid "Search"
+msgstr "Tìm kiếm"
+
+#: search.py:106
+msgid "Start in"
+msgstr "Bắt đầu tại"
+
+#: search.py:107
+msgid "Select a folder"
+msgstr "Chọn thư mục"
+
+#: search.py:113
+msgid "Follow symlinks"
+msgstr "Theo liên kết biểu tượng"
+
+#: search.py:117
+msgid "Search hidden"
+msgstr "Tìm các mục ẩn"
+
+#: search.py:121
+msgid "Use regular expressions"
+msgstr "Sử dụng biểu thức chính quy"
+
+#: search.py:125
+msgid "Stop"
+msgstr "Dừng"
+
+#: search.py:140
+msgid "File"
+msgstr "Tệp"
+
+#: search.py:156
+msgid "Path"
+msgstr "Đường dẫn"
+
+#: search.py:184
+msgid "Searching..."
+msgstr "Đang tìm kiếm..."
+
+#: search.py:198 search.py:199
+msgid "Search Stopped"
+msgstr "Tìm kiếm đã dừng"
+
+#: search.py:215
+msgid "Searching: "
+msgstr "Đang tìm kiếm: "
+
+#: search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Lỗi: không đủ quyền để đọc thư mục "
+
+#: search.py:252
+msgid "Search Completed"
+msgstr "Tìm kiếm hoàn tất"
+
+#: search.py:259
+msgid "Skipping"
+msgstr "Bỏ qua"
+
+#: search.py:259
+msgid " - directory already searched"
+msgstr " - thư mục đã được tìm kiếm"
+
+#. metadata.json->name
+msgid "Places Center"
+msgstr "Trung tâm Vị trí"
+
+#. metadata.json->description
+msgid "Provides an easy-to-read layout to access your places"
+msgstr "Cung cấp bố cục dễ đọc để truy cập các vị trí của bạn"
+
+#. metadata.json->comments
+msgid ""
+"Places Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy access to all of your most-used places. Feel free to "
+"contribute by submitting pull requests, bug reports and feature requests to "
+"my github repo."
+msgstr "Places Center là applet Cinnamon đa năng, đa nền tảng, giúp truy cập dễ dàng tất cả các vị trí bạn thường dùng. Bạn có thể đóng góp bằng cách gửi pull request, báo lỗi và yêu cầu tính năng tới kho github của tôi."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Tác giả"
+
+#. metadata.json->contributors
+msgid "kehugter - Added configurability to middle click"
+msgstr "kehugter - Thêm khả năng cấu hình cho nhấp giữa"
+
+#. metadata.json->contributors
+msgid "claudiux - Improvements to the 'Recent' section."
+msgstr "claudiux - Cải thiện phần 'Gần đây'"
+
+#. settings-schema.json->generalPage->title
+msgid "General"
+msgstr "Chung"
+
+#. settings-schema.json->userPage->title
+msgid "User"
+msgstr "Người dùng"
+
+#. settings-schema.json->systemPage->title
+msgid "System"
+msgstr "Hệ thống"
+
+#. settings-schema.json->recentPage->title
+#. settings-schema.json->recentSection->title
+msgid "Recent documents"
+msgstr "Tài liệu gần đây"
+
+#. settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr "Cài đặt thanh panel"
+
+#. settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr "Cài đặt menu"
+
+#. settings-schema.json->userSection->title
+msgid "User section"
+msgstr "Phần người dùng"
+
+#. settings-schema.json->systemSection->title
+msgid "System section"
+msgstr "Phần hệ thống"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Biểu tượng panel"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr "Nhận tên biểu tượng hoặc đường dẫn trực tiếp (hỗ trợ biểu tượng ký hiệu)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Văn bản panel"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr "Phím tắt menu"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Kích thước biểu tượng menu"
+
+#. settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "Mở khi nhấp giữa"
+
+#. settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "Để trống để vô hiệu hóa"
+
+#. settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "Hiển thị màn hình nền"
+
+#. settings-schema.json->userCustomPlaces->description
+#. settings-schema.json->systemCustomPlaces->description
+msgid "Custom places"
+msgstr "Vị trí tùy chỉnh"
+
+#. settings-schema.json->userCustomPlaces->tooltip
+#. settings-schema.json->systemCustomPlaces->tooltip
+msgid ""
+"List of uris/file paths to be included. Entries may be separated by either a "
+"comma(,) or by a new-line. You can set the name to be displayed by adding :"
+"customName after the location. You can likewise set an icon name by adding :"
+"iconName after the custom name."
+msgstr "Danh sách các URI/đường dẫn tệp được bao gồm. Các mục có thể được phân tách bằng dấu phẩy (,) hoặc xuống dòng. Bạn có thể đặt tên hiển thị bằng cách thêm :tênTùyChỉnh sau vị trí, và đặt tên biểu tượng bằng cách thêm :tênBiểuTượng sau tên tùy chỉnh."
+
+#. settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "Hiển thị thùng rác"
+
+#. settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "Không bao giờ"
+
+#. settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "Luôn luôn"
+
+#. settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "Khi không trống"
+
+#. settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "Hiển thị máy tính"
+
+#. settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "Hiển thị hệ thống tệp"
+
+#. settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "Hiển thị ổ đĩa"
+
+#. settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr "Chỉ hiển thị ổ đã gắn kết"
+
+#. settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "Hiển thị mạng"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Hiển thị tài liệu gần đây"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "All Recent Documents"
+msgstr "Tất cả tài liệu gần đây"
+
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Số lượng hiển thị"
+
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr "Hiển thị đường dẫn đầy đủ trong gợi ý công cụ"
+
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr "Quyền riêng tư"

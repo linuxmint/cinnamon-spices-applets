@@ -1,0 +1,30 @@
+# ENVYCONTROL GUI
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+msgid ""
+msgstr ""
+
+#. applet.js:146
+msgid "Hybrid settings"
+msgstr ""
+
+#. settings-schema.json->section3->description
+msgid "Theme"
+msgstr ""
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr ""

@@ -1,0 +1,31 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#. metadata.json->name
+msgid "Power Consumption Display"
+msgstr ""
+
+#. metadata.json->description
+msgid "Shows power consumption when in battery mode"
+msgstr ""
+
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr ""
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Show Watt symbol after the value."
+msgstr ""
+
+#. settings-schema.json->interval->units
+msgid "ms"
+msgstr ""
+
+#. settings-schema.json->interval->description
+msgid "Update interval"
+msgstr ""

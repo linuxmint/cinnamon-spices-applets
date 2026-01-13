@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: password-generator@spencerlommel.com 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-05-07 20:32-0500\n"
+"PO-Revision-Date: 2024-11-16 20:39+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:33
+msgid "Generate Random Password"
+msgstr "Luo arvottu salasana"
+
+#: applet.js:42
+msgid "Please enable at least one value in settings."
+msgstr "Ota asetuksissa käyttöön vähintään yksi arvo."
+
+#: applet.js:49
+msgid "Copy"
+msgstr "Kopioi"
+
+#. metadata.json->description
+msgid "Configurable Password Generator"
+msgstr "Muokattava salasanageneraattori"
+
+#. metadata.json->name
+msgid "Password Generator"
+msgstr "Password Generator"
+
+#. settings-schema.json->password-settings-header->description
+msgid "Password Settings"
+msgstr "Salasanan asetukset"
+
+#. settings-schema.json->password-length->units
+msgid "characters"
+msgstr "merkkiä"
+
+#. settings-schema.json->password-length->description
+msgid "Password Length"
+msgstr "Salasanan pituus"
+
+#. settings-schema.json->password-length->tooltip
+msgid "The password can be any length from 1 to 32 characters."
+msgstr "Salasanan pituus voi olla mikä tahansa 1-32 merkkiä."
+
+#. settings-schema.json->include-lowercase->description
+msgid "Include Lowercase Letters"
+msgstr "Sisältää pieniä kirjaimia"
+
+#. settings-schema.json->include-uppercase->description
+msgid "Include Uppercase Letters"
+msgstr "Sisältää suuria kirjaimia"
+
+#. settings-schema.json->include-numbers->description
+msgid "Include Numbers"
+msgstr "Sisältää numeroita"
+
+#. settings-schema.json->include-symbols->description
+msgid "Include Symbols"
+msgstr "Sisältää symboleja"
+
+#. settings-schema.json->copy-settings-header->description
+msgid "Copy Settings"
+msgstr "Kopioinnin asetukset"
+
+#. settings-schema.json->auto-copy->description
+msgid "Automatically Copy To Clipboard"
+msgstr "Kopioi automaattisesti leikepöydälle"
+
+#. settings-schema.json->auto-copy->tooltip
+msgid ""
+"When clicking the lock icon, instead of opening a window where the password "
+"can be copied it is instead automatically copied to your Clipboard."
+msgstr "Kun painat lukkokuvaketta se kopioidaan automaattisesti leikepöydälle."
+
+#. settings-schema.json->play-sound->description
+#. settings-schema.json->sound-file->description
+msgid "Play sound on copy"
+msgstr "Kopioi leikepöydälle ja anna äänimerkki"
+
+#. settings-schema.json->play-sound->tooltip
+msgid ""
+"Toggles whether or not a sound is played when the password is copied to the "
+"Clipboard"
+msgstr "Toistetaan äänimerkki kun salasana on kopioitu leikepöydälle"
+
+#. settings-schema.json->sound-file->tooltip
+msgid "Select a sound to play when the password is copied"
+msgstr "Valitse äänimerkki jota haluat käyttää"
+
+#~ msgid "Sound file"
+#~ msgstr "Äänitiedosto"

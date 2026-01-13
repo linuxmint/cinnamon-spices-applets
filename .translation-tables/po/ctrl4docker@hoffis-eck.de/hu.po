@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2021-03-27 11:16+0100\n"
+"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#: applet.js:93
+msgid "Checking status"
+msgstr "Állapot ellenőrzése"
+
+#. metadata.json->name
+msgid "Docker Control"
+msgstr "Dokkoló Vezérlés"
+
+#. metadata.json->description
+msgid "Activates/Deactivates Docker Container"
+msgstr "Bekapcsolja/kikapcsolja a dokkoló tárolót"
+
+#. settings-schema.json->image->description
+msgid "docker image"
+msgstr "dokkoló kép"
+
+#. settings-schema.json->container->description
+msgid "container name"
+msgstr "tároló név"
+
+#. settings-schema.json->parameter->description
+msgid "parameter for the container"
+msgstr "paraméter a tárolóhoz"
+
+#~ msgid "Container does not exist"
+#~ msgstr "Tároló nem létezik"
+
+#~ msgid "Containername is in use"
+#~ msgstr "A tároló neve használatban van"
+
+#~ msgid "Container is running"
+#~ msgstr "A tároló fut"
+
+#~ msgid "Container is paused"
+#~ msgstr "A tároló leállítva"
+
+#~ msgid "Container has an error"
+#~ msgstr "A tároló hibás"
+
+#~ msgid "Container is not running"
+#~ msgstr "A tároló nem fut"
+
+#~ msgid "Error, trying to set unknown status!"
+#~ msgstr "Hiba, ismeretlen állapot beállítása közben!"
+
+#~ msgid "Error, don't know what to do on unknown status!"
+#~ msgstr "Hiba, nem tudom, mit kell tenni ismeretlen állapotban!"

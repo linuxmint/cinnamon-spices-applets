@@ -1,0 +1,48 @@
+# ENHANCED SOUND APPLET
+# This file is put in the public domain.
+# claudiux, 2018
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux 6.16.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-11 20:15+0100\n"
+"PO-Revision-Date: 2026-01-02 14:12+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.8\n"
+
+#. 6.4->settings-schema.json->sectionMenu3->title
+msgid "Output Devices Not Displayed In The Context Menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionMenu4->title
+msgid "Input Devices Not Displayed In The Context Menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->userMenuWidth->description
+msgid "Menu width (in pixels)"
+msgstr ""
+
+#. 6.4->settings-schema.json->labelIgnoredOutputDevices->description
+#. 6.4->settings-schema.json->labelIgnoredInputDevices->description
+msgid ""
+"In the list below, add a line containing part of its name (case sensitive) "
+"for each unwanted device."
+msgstr ""
+
+#. 6.4->settings-schema.json->ignoredOutputDevices->description
+#. 6.4->settings-schema.json->ignoredInputDevices->description
+msgid "Unwanted devices"
+msgstr ""
+
+#. 6.4->settings-schema.json->ignoredOutputDevices->columns->title
+#. 6.4->settings-schema.json->ignoredInputDevices->columns->title
+msgid "Part of the device name"
+msgstr ""

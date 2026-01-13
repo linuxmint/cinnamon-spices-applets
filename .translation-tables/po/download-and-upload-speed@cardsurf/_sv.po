@@ -1,0 +1,151 @@
+# Swedish translation for download-and-upload-speed@cardsurf.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-02 19:43+0200\n"
+"PO-Revision-Date: 2017-04-29 14:01+0100\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:470
+msgid "Network interfaces"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "Bytes/Bits"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "KB/Kb/KiB"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "MB/Mb/MiB"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "GB/Gb/GiB"
+msgstr ""
+
+#. settings-schema.json->unit->options
+msgid "TB/Tb/TiB"
+msgstr ""
+
+#. settings-schema.json->unit->tooltip
+msgid "Use fixed unit for displaying, or automatically choose the best unit"
+msgstr ""
+
+#. settings-schema.json->unit_type->description
+msgid "Unit type"
+msgstr ""
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr ""
+
+#. settings-schema.json->is_binary->options
+msgid "Decimal"
+msgstr ""
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr ""
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
+
+#. settings-schema.json->update_available_interfaces_every->description
+msgid "Update available interfaces every"
+msgstr ""
+
+#. settings-schema.json->update_available_interfaces_every->tooltip
+msgid ""
+"How often to update list of available network interfaces. 0 means list of "
+"available network interfaces is not updated periodically."
+msgstr ""
+
+#. settings-schema.json->gui_value_order->description
+msgid "Value order"
+msgstr ""
+
+#. settings-schema.json->gui_value_order->options
+msgid "Download first"
+msgstr ""
+
+#. settings-schema.json->gui_value_order->options
+msgid "Upload first"
+msgstr ""
+
+#. settings-schema.json->gui_value_order->tooltip
+msgid "An order of values shown in the panel and in the hover popup"
+msgstr ""
+
+#. settings-schema.json->gui_enable_inactive_text_css->description
+msgid "Enable different style for inactive (0.00) text"
+msgstr ""
+
+#. settings-schema.json->gui_inactive_text_css->description
+msgid "Inactive text CSS"
+msgstr ""
+
+#. settings-schema.json->gui_inactive_text_css->tooltip
+msgid ""
+"A CSS style applied to the text in the panel when there is no network "
+"activity"
+msgstr ""
+
+#. settings-schema.json->gui_show_icons->description
+msgid "Show icons"
+msgstr ""
+
+#. settings-schema.json->gui_received_icon_filename->tooltip
+msgid ""
+"An icon displayed next to download speed in the panel.\n"
+"To display a symbolic icon make sure its name ends with '-symbolic.svg'."
+msgstr ""
+
+#. settings-schema.json->gui_sent_icon_filename->tooltip
+msgid ""
+"An icon displayed next to upload speed in the panel.\n"
+"To display a symbolic icon make sure its name ends with '-symbolic.svg'."
+msgstr ""
+
+#. settings-schema.json->gui_symbolic_icon->description
+msgid "Show a default set of symbolic icons"
+msgstr ""
+
+#. settings-schema.json->minimum_bytes_received_to_display->units
+#. settings-schema.json->minimum_bytes_sent_to_display->units
+msgid "bytes"
+msgstr ""
+
+#. settings-schema.json->minimum_bytes_received_to_display->description
+msgid "Minimum displayed download value"
+msgstr ""
+
+#. settings-schema.json->minimum_bytes_received_to_display->tooltip
+msgid "A minimum download value to display in the panel"
+msgstr ""
+
+#. settings-schema.json->minimum_bytes_sent_to_display->description
+msgid "Minimum displayed upload value"
+msgstr ""
+
+#. settings-schema.json->minimum_bytes_sent_to_display->tooltip
+msgid "A minimum upload value to display in the panel"
+msgstr ""

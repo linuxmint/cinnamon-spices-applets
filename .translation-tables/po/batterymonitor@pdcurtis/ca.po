@@ -1,0 +1,707 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: batterymonitor@pdcurtis 2.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-05 14:36-0500\n"
+"PO-Revision-Date: 2024-07-21 02:24+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: 5.4/applet.js:300 3.2/applet.js:130
+msgid "--%"
+msgstr "--%"
+
+#: 5.4/applet.js:301 3.2/applet.js:131
+msgid "Waiting"
+msgstr "Esperant"
+
+#: 5.4/applet.js:327
+msgid "Some dependencies not installed."
+msgstr "Algunes dependències no estan instal·lades."
+
+#: 5.4/applet.js:327
+msgid ""
+"Both 'sox' and 'zenity' are required for this applet to have all of its "
+"functionality including notifications and audible alerts.\n"
+"\n"
+"Please view the README for help on installing them.\n"
+msgstr ""
+"La miniaplicació necessita la instal·lació dels paquets 'sox' i 'zenity' per "
+"funcionar completa i correctament.\n"
+"\n"
+"Consulteu el fitxer README per ser assistits en la seva instal·lació.\n"
+
+#: 5.4/applet.js:337 3.2/applet.js:193
+msgid "Battery Monitor Applet"
+msgstr "Miniaplicació de Monitor de Bateria"
+
+#: 5.4/applet.js:337
+msgid ""
+"A user-defined sound file has been specified for Low Battery.\n"
+"\n"
+"Please ensure the volume is set sensibly in public places,\n"
+"especially if a long or loud file is specified.\n"
+msgstr ""
+"S'ha definit un fitxer de so per a indicar nivell de bateria baixa.\n"
+"\n"
+"Assegureu-vos que el volum estigui al nivell adequat,\n"
+"especialment si s'ha especificat un fitxer gran o de volum alt.\n"
+
+#: 5.4/applet.js:399 3.2/applet.js:307
+msgid "Open Power Statistics"
+msgstr "Obrir estadístiques d'energia"
+
+#: 5.4/applet.js:405 3.2/applet.js:313
+msgid "Open System Monitor"
+msgstr "Obrir el monitor del sistema"
+
+#: 5.4/applet.js:414
+msgid "Housekeeping and System Submenu"
+msgstr "Submenú de manteniment i sistema"
+
+#: 5.4/applet.js:417 3.2/applet.js:325
+msgid "View the Changelog"
+msgstr "Veure el registre de canvis"
+
+#: 5.4/applet.js:423
+msgid "Open the README"
+msgstr "Obrir el README"
+
+#: 5.4/applet.js:439 3.2/applet.js:358
+msgid "Waiting for battery information"
+msgstr "Esperant per la informació de la bateria"
+
+#: 5.4/applet.js:444
+msgid "Alert/Suspend:"
+msgstr "Avís/Suspensió:"
+
+#: 5.4/applet.js:549
+msgid "Battery Low - turn off or connect to power supply"
+msgstr "Bateria baixa - Apagueu l'equip o endolleu el carregador"
+
+#: 5.4/applet.js:555
+msgid ""
+"The battery level has fallen to your alert level.\n"
+"\n"
+"Either connect to a power source or save or close down\n"
+"your work and suspend or shutdown the machine.\n"
+msgstr ""
+"El nivell de bateria ha entrat al rang d'alerta.\n"
+"\n"
+"Connecteu el carregador o guardeu\n"
+"els vostres documents i suspeneu o apagueu l'equip.\n"
+
+#: 5.4/applet.js:570
+msgid "Battery Critical - will suspend unless connected to power supply"
+msgstr ""
+"Bateria crítica - Es suspendrà l'equip a no ser que s'endolli el carregador"
+
+#: 5.4/applet.js:589
+msgid "Time to Empty:"
+msgstr "Temps de bateria restant:"
+
+#: 5.4/applet.js:590
+msgid "Time to Full:"
+msgstr "Temps per la càrrega completa:"
+
+#: 5.4/applet.js:593 5.4/applet.js:640
+msgid "Current Charge:"
+msgstr "Nivell de càrrega actual:"
+
+#: 5.4/applet.js:593 3.2/applet.js:474
+msgid "Alert:"
+msgstr "Avís:"
+
+#: 5.4/applet.js:593 3.2/applet.js:474
+msgid "Suspend:"
+msgstr "Suspensió:"
+
+#: 5.4/applet.js:640 3.2/applet.js:522
+msgid "Alert at:"
+msgstr "Avisa al:"
+
+#: 5.4/applet.js:640 3.2/applet.js:522
+msgid "Suspend at:"
+msgstr "Suspèn al:"
+
+#: 5.4/applet.js:646
+msgid "The battery level has been recharged to"
+msgstr "El nivell de bateria ha estat recarregat a"
+
+#: 3.2/applet.js:160
+msgid "Some Dependencies not Installed"
+msgstr "Algunes dependències no estan instal·lades"
+
+#: 3.2/applet.js:160
+msgid ""
+"'upower', 'sox' and 'zenity' are required for this applet to have all its "
+"facilities including notifications and audible alerts .\n"
+"\n"
+"Please read the help file on how to install them."
+msgstr ""
+"Per tal que aquesta miniaplicació funcioni correctament, incloent les "
+"alertes auditives, instal·leu els paquets 'upower','sox' i 'zenity'.\n"
+"\n"
+"Consulteu el fitxer d'ajuda si no sabeu com instal·lar-los."
+
+#: 3.2/applet.js:193
+msgid ""
+"A User Defined Sound File has been Specified for Low Battery\n"
+"\n"
+"Please ensure the volume is set sensibly in public places\n"
+"especially if a long loud file is specifed\n"
+msgstr ""
+"S'ha definit un fitxer de so per a indicar nivell de bateria baixa.\n"
+"\n"
+"Assegureu-vos que el volum estigui al nivell adequat,\n"
+"especialment si s'ha especificat un fitxer gran o de volum alt.\n"
+
+#: 3.2/applet.js:322
+msgid "Housekeeping and System Sub Menu"
+msgstr "Submenú de manteniment i sistema"
+
+#: 3.2/applet.js:331
+msgid "Open the Help file"
+msgstr "Obrir el fitxer d'ajuda"
+
+#: 3.2/applet.js:337
+msgid "Open stylesheet.css (Advanced Function)"
+msgstr "Obrir stylesheet.css (Funció avançada)"
+
+#. metadata.json->name
+#: 3.2/applet.js:353
+msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
+msgstr "Miniaplicació de monitoratge del nivell de bateria i apagat"
+
+#: 3.2/applet.js:433
+msgid "Battery Low - turn off or connect to mains"
+msgstr "Bateria baixa - apagueu l'equip o connecteu el carregador"
+
+#: 3.2/applet.js:441
+msgid "Battery Monitor Applet Alert"
+msgstr "Miniaplicació de monitoratge i avís del nivell de bateria"
+
+#: 3.2/applet.js:441
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+"either reconnect to a power source,\n"
+"\n"
+"close down your work and suspend or shutdown the machine\n"
+"\n"
+msgstr ""
+"El nivell de bateria ha entrar al nivell d'avís\n"
+"\n"
+"connecteu-vos a la corrent o\n"
+"\n"
+"guardeu els vostres documents i suspeneu o apagueu l'equip\n"
+"\n"
+
+#: 3.2/applet.js:443
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+" either reconnect to a power source,\n"
+"\n"
+"close down your work and suspend or shutdown the machine\n"
+"\n"
+msgstr ""
+"El nivell de bateria ha entrar al nivell d'avís\n"
+"\n"
+"connecteu-vos a la corrent o\n"
+"\n"
+"guardeu els vostres documents i suspeneu o apagueu l'equip\n"
+"\n"
+
+#: 3.2/applet.js:459
+msgid "Battery Critical will Suspend unless connected to mains"
+msgstr ""
+"El nivell de bateria és crític. Es suspendrà l'equip a no ser que us "
+"connecteu a la corrent"
+
+#: 3.2/applet.js:474
+msgid "Charge:"
+msgstr "Càrrega:"
+
+#: 3.2/applet.js:522
+msgid "Percentage Charge:"
+msgstr "Percentatge de càrrega:"
+
+#. metadata.json->description
+msgid "Displays charge as percentage and allows alerts and actions"
+msgstr ""
+"Mostra el nivell de càrrega com a percentatge i permet avisos i accions"
+
+#. 5.4->settings-schema.json->General->title
+msgid "General"
+msgstr "General"
+
+#. 5.4->settings-schema.json->Style->title
+msgid "Style"
+msgstr "Estil"
+
+#. 5.4->settings-schema.json->general->title
+msgid "General Settings"
+msgstr "Opcions generals"
+
+#. 5.4->settings-schema.json->display_mode->title
+msgid "Display Options"
+msgstr "Opcions de visualització"
+
+#. 5.4->settings-schema.json->low_alert->title
+#. 3.2->settings-schema.json->head2->description
+msgid "Battery Low Alert Settings"
+msgstr "Configuració d'avisos de bateria baixa"
+
+#. 5.4->settings-schema.json->advanced->title
+msgid "Advanced"
+msgstr "Avançat"
+
+#. 5.4->settings-schema.json->bam_normal->title
+msgid "Normal"
+msgstr "Normal"
+
+#. 5.4->settings-schema.json->bam_discharging->title
+msgid "Discharging"
+msgstr "Descarregant"
+
+#. 5.4->settings-schema.json->bam_alert->title
+msgid "Alert"
+msgstr "Avís"
+
+#. 5.4->settings-schema.json->bam_alert_discharging->title
+msgid "Alert Discharging"
+msgstr "Avís de descàrrega"
+
+#. 5.4->settings-schema.json->bam_limit_exceeded->title
+msgid "Limit Exceeded"
+msgstr "S'ha excedit el límit"
+
+#. 5.4->settings-schema.json->bam_limit_exceeded2->title
+msgid "Limit Exceeded - Critical"
+msgstr "S'ha excedit el límit - Crític"
+
+#. 5.4->settings-schema.json->refreshInterval-spinner->units
+#. 3.2->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "segons"
+
+#. 5.4->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display"
+msgstr "Interval de refresc per les dades visualitzades"
+
+#. 5.4->settings-schema.json->refreshInterval-spinner->tooltip
+#. 3.2->settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine. This also governs the flash speed."
+msgstr "Utilitzeu un interval de refresc baix si el vostre equip és lent."
+
+#. 5.4->settings-schema.json->alertPercentage->units
+#. 5.4->settings-schema.json->recharged_alert_percentage->units
+#. 5.4->settings-schema.json->normal_font_size->units
+#. 5.4->settings-schema.json->discharging_font_size->units
+#. 5.4->settings-schema.json->alert_font_size->units
+#. 5.4->settings-schema.json->alert_discharging_font_size->units
+#. 5.4->settings-schema.json->limit_exceeded_font_size->units
+#. 5.4->settings-schema.json->limit_exceeded2_font_size->units
+msgid "%"
+msgstr "%"
+
+#. 5.4->settings-schema.json->alertPercentage->description
+#. 3.2->settings-schema.json->alertPercentage->description
+msgid "Percentage Battery Charge at which Alert Displayed"
+msgstr "Percentatge de càrrega de bateria en què es mostrarà un avís"
+
+#. 5.4->settings-schema.json->alertPercentage->tooltip
+#. 3.2->settings-schema.json->alertPercentage->tooltip
+msgid ""
+"Percentage of Battery Charge at which Orange Warning Background is displayed "
+"- It is also shown and can be adjusted in the Applet left click menu"
+msgstr ""
+"Percentatge de càrrega de bateria en què un fons de color taronja es "
+"mostrarà com a avís"
+
+#. 5.4->settings-schema.json->recharged_alert->description
+msgid "Visible Alert when Recharging"
+msgstr "Avís visible mentre s'està recarregant"
+
+#. 5.4->settings-schema.json->recharged_alert->tooltip
+msgid "Provide visible alert when battery is recharged to a certain threshold"
+msgstr "Mostra un avís visible quan la bateria s'ha recarregat un determinat %"
+
+#. 5.4->settings-schema.json->recharged_alert_percentage->description
+msgid "Percentage threshold for visible recharged alert"
+msgstr "Rang de percentatge per mostrar l'avís d'alerta"
+
+#. 5.4->settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Classic"
+msgstr "Clàssica"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Classic Plus"
+msgstr "Clàssica Plus"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Compact"
+msgstr "Compacta"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Compact Plus"
+msgstr "Compacta Plus"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Icon Only"
+msgstr "Només icona"
+
+#. 5.4->settings-schema.json->displayType->description
+msgid "Toolbar Display Type"
+msgstr "Tipus de visualització de la informació d'eines"
+
+#. 5.4->settings-schema.json->displayType->tooltip
+msgid ""
+"The following display options are available (including Compact, Compact "
+"Plus, and Icon Only for vertical panels):\n"
+"  Classic: Battery percentage with extended messages for horizontal panel\n"
+"  Classic Plus: Classic with the addition of a battery icon\n"
+"  Compact: Battery percentage without extended messages\n"
+"  Compact Plus: Compact with the addition of a battery icon\n"
+"  Icon Only: The battery icon on a colored background indicating the current "
+"status"
+msgstr ""
+"Les següents opcions de visualització estan disponibles: (incloent Compacta, "
+"Compacta Plus i Només Icona pels taulers verticals):\n"
+"  Clàssica: Percentatge de bateria amb missatges pels taulers horitzontals\n"
+"  Clàssica Plus: Clàssica + icona de bateria\n"
+"  Compacta: Percentatge de bateria sense missatges\n"
+"  Compacta Plus: Compacta + icona de bateria\n"
+"  Només icona: Icona de bateria que canvia de color en referència al seu "
+"estat"
+
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Light"
+msgstr "Yaru Clar"
+
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Dark"
+msgstr "Yaru Fosc"
+
+#. 5.4->settings-schema.json->iconTheme->description
+#. 5.4->settings-schema.json->iconTheme->tooltip
+msgid "Icon Theme"
+msgstr "Tema de la icona"
+
+#. 5.4->settings-schema.json->time_remaining_display->description
+msgid "Append estimated time remaining to chosen display type"
+msgstr ""
+"Afegeix el temps de bateria restant aproximat al tipus de visualització "
+"escollida"
+
+#. 5.4->settings-schema.json->time_remaining_display->tooltip
+msgid ""
+"This will append an estimate to the above option for time remaining based on "
+"the amount of remaining battery power"
+msgstr "Afegirà una aproximació del temps restant de la duració de la bateria"
+
+#. 5.4->settings-schema.json->time_remaining_toolbar->description
+msgid "Append estimated time remaining to toolbar menu"
+msgstr "Afegeix el temps de bateria restant aproximat al menú d'eines"
+
+#. 5.4->settings-schema.json->time_remaining_toolbar->tooltip
+msgid ""
+"This will append an estimate to the toolbar menu for time remaining based on "
+"the amount of remaining battery power"
+msgstr ""
+"Afegirà una aproximació del temps restant de la duració de la bateria al "
+"menú d'eines"
+
+#. 5.4->settings-schema.json->time_remaining_tooltip->description
+msgid "Append estimated time remaining to tooltip"
+msgstr "Afegeix el temps de bateria restant aproximat a la informació d'eines"
+
+#. 5.4->settings-schema.json->time_remaining_tooltip->tooltip
+msgid ""
+"This will append an estimate to the tooltip for time remaining based on the "
+"amount of remaining battery power"
+msgstr ""
+"Afegirà una aproximació del temps restant de la duració de la bateria a la "
+"informació d'eines"
+
+#. 5.4->settings-schema.json->useBatteryLowSound->description
+#. 3.2->settings-schema.json->useBatteryLowSound->description
+msgid "Provide audible alerts when Battery Low and at Shutdown Level"
+msgstr ""
+"Enviar avisos auditius quan la bateria sigui baixa o entri al nivell d'apagat"
+
+#. 5.4->settings-schema.json->useBatteryLowSound->tooltip
+msgid ""
+"Must have `sox` installed. Limited number of sound file types supported (."
+"oga and .wav)"
+msgstr "Cal tenir 'sox' instal·lat. Estan suportats els fitxers .oga i .wav"
+
+#. 5.4->settings-schema.json->chooseBatteryLowSound->description
+#. 3.2->settings-schema.json->chooseBatteryLowSound->description
+msgid ""
+"Allow choice of audible alert file when Battery Low and at Shutdown Level"
+msgstr ""
+"Permet la opció d'enviar avisos auditius quan la bateria arribi a nivell "
+"baix o d'apagat"
+
+#. 5.4->settings-schema.json->chooseBatteryLowSound->tooltip
+msgid ""
+"Must have `sox` installed. Limited number of sound file types supported in "
+"versions < 4.2"
+msgstr ""
+"Cal tenir 'sox' instal·lat. Els formats de fitxers de so suportats són "
+"limitats a les versions < 4.2"
+
+#. 5.4->settings-schema.json->batteryLowSound->description
+#. 3.2->settings-schema.json->batteryLowSound->description
+msgid "Choose sound file to use when Battery is Low"
+msgstr "Trieu un fitxer de so a utilitzar quan el nivell de bateria sigui baix"
+
+#. 5.4->settings-schema.json->batteryLowSound->tooltip
+msgid ""
+"Please ensure the volume is set sensibly in public places, especially if a "
+"long or loud file is specified"
+msgstr ""
+"Si us plau, assegureu-vos que el vostre nivell de volum respecti l'entorn on "
+"sou presents"
+
+#. 5.4->settings-schema.json->batteryShutdownSound->description
+msgid "Sound file to use when Battery is at Shutdown Level"
+msgstr ""
+"Fitxer de so a utilitzar quan el nivell de bateria sigui d'apagada imminent"
+
+#. 5.4->settings-schema.json->batteryShutdownSound->tooltip
+msgid ""
+"Please ensure the volume is set sensibly in public places - do not specify a "
+"long or loud file at Shutdown"
+msgstr ""
+"Si us plau, assegureu-vos que el vostre nivell de volum respecti l'entorn on "
+"sou presents"
+
+#. 5.4->settings-schema.json->notifyBatteryLowSound->description
+msgid ""
+"Provide notification when user specified sound file is in use (Recommended)"
+msgstr ""
+"Proveeix una notificació quan el fitxer de so proveït per l'usuari ja "
+"estigui en ús (Recomanat)"
+
+#. 5.4->settings-schema.json->notifyBatteryLowSound->tooltip
+msgid "To remind that the volume may need to be set sensibly in public places"
+msgstr ""
+"Per recordar que el nivell de volum establert sigui l'adequat per l'entorn "
+"de l'usuari"
+
+#. 5.4->settings-schema.json->customBatteryPath->description
+msgid "Path to battery capacity directory (device path)"
+msgstr "Ruta al directori de la capacitat de la bateria (ruta al dispositiu)"
+
+#. 5.4->settings-schema.json->customBatteryPath->tooltip
+msgid ""
+"Choose your own power_supply object e.g. for monitoring your secondary "
+"battery.\n"
+"\n"
+"Default:\n"
+"/sys/class/power_supply/BAT0"
+msgstr ""
+"Trieu la vostra pròpia font d'alimentació per monitorar la bateria "
+"secundària.\n"
+"\n"
+"Per defecte:\n"
+"/sys/class/power_supply/BAT0"
+
+#. 5.4->settings-schema.json->normal_background_color->description
+#. 5.4->settings-schema.json->discharging_background_color->description
+#. 5.4->settings-schema.json->alert_background_color->description
+#. 5.4->settings-schema.json->alert_discharging_background_color->description
+#. 5.4->settings-schema.json->limit_exceeded_background_color->description
+#. 5.4->settings-schema.json->limit_exceeded2_background_color->description
+msgid "Background Color"
+msgstr "Color de fons"
+
+#. 5.4->settings-schema.json->normal_background_color->tooltip
+#. 5.4->settings-schema.json->normal_border_color->tooltip
+#. 5.4->settings-schema.json->discharging_background_color->tooltip
+#. 5.4->settings-schema.json->discharging_border_color->tooltip
+#. 5.4->settings-schema.json->alert_background_color->tooltip
+#. 5.4->settings-schema.json->alert_border_color->tooltip
+#. 5.4->settings-schema.json->alert_discharging_background_color->tooltip
+#. 5.4->settings-schema.json->alert_discharging_border_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded_background_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded_border_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded2_background_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded2_border_color->tooltip
+msgid "RGB or RGBA"
+msgstr "RGB o RGBA"
+
+#. 5.4->settings-schema.json->normal_border_color->description
+#. 5.4->settings-schema.json->discharging_border_color->description
+#. 5.4->settings-schema.json->alert_border_color->description
+#. 5.4->settings-schema.json->alert_discharging_border_color->description
+#. 5.4->settings-schema.json->limit_exceeded_border_color->description
+#. 5.4->settings-schema.json->limit_exceeded2_border_color->description
+msgid "Border Color"
+msgstr "Color de les vores"
+
+#. 5.4->settings-schema.json->normal_font_size->description
+#. 5.4->settings-schema.json->discharging_font_size->description
+#. 5.4->settings-schema.json->alert_font_size->description
+#. 5.4->settings-schema.json->alert_discharging_font_size->description
+#. 5.4->settings-schema.json->limit_exceeded_font_size->description
+#. 5.4->settings-schema.json->limit_exceeded2_font_size->description
+msgid "Font Size"
+msgstr "Mida del text"
+
+#. 3.2->settings-schema.json->head->description
+msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
+msgstr "Configuració general per la miniaplicació del nivell de bateria"
+
+#. 3.2->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Interval de refresc per a les dades que es visualitzaran:"
+
+#. 3.2->settings-schema.json->head1->description
+msgid "Display Mode"
+msgstr "Mode de visualització"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid ""
+"Classic - Battery Percentage with extended messages for horizontal panel"
+msgstr ""
+"Clàssica - Percentatge del nivell de bateria amb missatges al tauler "
+"horitzontal"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Classic Plus - Classic with addition of Battery Icon"
+msgstr "Clàssica Plus - Clàssica+ icona de bateria"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Compact - Battery Percentage without extended messages"
+msgstr ""
+"Compacta - Percentatge del nivell de bateria sense missatges addicionals"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Compact Plus - Compact with addition of Battery Icon"
+msgstr "Compacta Plus - Compacta + icona de bateria"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Icon Only on coloured background indicating status"
+msgstr "Només icona amb color de fons indicador d'estat"
+
+#. 3.2->settings-schema.json->displayType->description
+msgid "Type of Display in Toolbar"
+msgstr "Tipus de visualització a la barra d'eines"
+
+#. 3.2->settings-schema.json->displayType->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional battery "
+"icon and some more compact displays suitable for a vertical panel "
+"(CompactCompact Plus and Icon Only)"
+msgstr ""
+"Aquesta opció permet la visualització clàssica amb icona i altres "
+"visualitzacions més compactes que encaixen amb un tauler vertical"
+
+#. 3.2->settings-schema.json->useBatteryLowSound->tooltip
+msgid ""
+"Must have Sox installed. Limited number of sound file types supported (.oga "
+"and .wav)"
+msgstr ""
+"Cal tenir Sox instal·lat. Els formats de fitxer de so suportats són .oga i ."
+"wav"
+
+#. 3.2->settings-schema.json->chooseBatteryLowSound->tooltip
+msgid ""
+"Must have Sox installed. Limited number of sound file types supported in "
+"versions < 4.2"
+msgstr ""
+"Cal tenir Sox instal·lat. El número de formats de fitxer de so suportats és "
+"limitat a les versions < 4.2"
+
+#. 3.2->settings-schema.json->batteryLowSound->tooltip
+msgid ""
+"Please ensure the volume is set sensibly in public places especially if a "
+"long loud file is specifed"
+msgstr ""
+"Si us plau, assegureu-vos que el nivell de volum és l'adequat per a l'entorn "
+"on sou"
+
+#. 3.2->settings-schema.json->batteryShutdownSound->description
+msgid "Choose sound file to use when Battery is at Shutdown Level"
+msgstr "Trieu un fitxer de so pel nivell d'apagat imminent de la bateria"
+
+#. 3.2->settings-schema.json->batteryShutdownSound->tooltip
+msgid ""
+"Please ensure the volume is set sensibly in public places - do not specify a "
+"long loud file at Shutdown"
+msgstr ""
+"Si us plau, assegureu-vos que el nivell de volum és l'adequat per a l'entorn "
+"on sou - no trieu un fitxer de so llarg per l'apagada"
+
+#. 3.2->settings-schema.json->notifyBatteryLowSound->description
+msgid ""
+"Provide Notification when user specified sound file is in use - Recommended"
+msgstr ""
+"Proveeix una notificació quan el so especificat per l'usuari estigui en ús - "
+"Recomanat"
+
+#. 3.2->settings-schema.json->notifyBatteryLowSound->tooltip
+msgid ""
+"To remind users that the volume may need to be set sensibly in public places"
+msgstr ""
+"Per recordar als usuaris que pot ser que calgui ajustar el nivell de volum "
+"en relació a l'entorn on es troben"
+
+#. 3.2->settings-schema.json->head3->description
+msgid "Household Tasks"
+msgstr "Tasques de manteniment"
+
+#. 3.2->settings-schema.json->deleteTempraryFiles->description
+msgid "Delete temporary files after upgrade to version 1.4"
+msgstr ""
+"Eliminar els fitxers temporals després de l'actualització a la versió 1.4"
+
+#. 3.2->settings-schema.json->deleteTempraryFiles->tooltip
+msgid ""
+"Versions prior to 1.4 used temporary files in the home directory. These are "
+"not needed any more and can be deleted."
+msgstr ""
+"Les versions anteriors a la 1.4 utilitzaven fitxers temporals al directori "
+"Home, que poden ser eliminats perquè ja no són necessaris."
+
+#: 5.4/suspendScript.sh:22
+msgid "WARNING: SUSPENDING SOON"
+msgstr "AVÍS: SUSPENSIÓ IMMINENT"
+
+#: 5.4/suspendScript.sh:23
+msgid "The battery level is critical. The machine will be suspended shortly."
+msgstr ""
+"El nivell de bateria és crític. L'equip se suspendrà de manera imminent."
+
+#: 5.4/suspendScript.sh:24
+msgid "Abort Suspension"
+msgstr "Cancel·lar la suspensió"
+
+#: 5.4/suspendScript.sh:25
+msgid "Suspend Immediately"
+msgstr "Suspendre immediatament"
+
+#: 5.4/suspendScript.sh:26
+msgid "The machine was suspended as the battery level was critical."
+msgstr "L'equip ha estat suspès perquè el nivell de bateria era crític."

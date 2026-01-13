@@ -1,0 +1,211 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2024-07-21 03:19+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:152
+msgid "Bumblebee program not installed"
+msgstr "Aplicació de Bumblebee no instal·lada"
+
+#. applet.js:152
+msgid ""
+"You appear to be missing some of the required programs for 'bumblebee' to "
+"switch graphics processors using NVIDIA Optimus."
+msgstr ""
+"Sembla que us falten alguns dels paquets necessaris perquè 'bumblebee' "
+"canviï de processador gràfic utilitzant NVIDIA Optimus."
+
+#. applet.js:152
+msgid "Please read the help file."
+msgstr "Si us plau, llegiu el fitxer d'ajuda."
+
+#. applet.js:172
+msgid "Waiting for Bumblebee"
+msgstr "Esperant a Bumblebee"
+
+#. applet.js:232
+msgid "Open nVidia Settings Program"
+msgstr "Obrir configuració d'Nvidia"
+
+#. applet.js:238
+msgid "Open Power Statistics"
+msgstr "Obrir estadístiques d'energia"
+
+#. applet.js:244
+msgid "Open System Monitor"
+msgstr "Obrir el monitor de sistema"
+
+#. applet.js:253
+msgid "Housekeeping and System Sub Menu"
+msgstr "Submenú de manteniment i sistema"
+
+#. applet.js:256
+msgid "View the Changelog"
+msgstr "Veure el registre de canvis"
+
+#. applet.js:262
+msgid "Open the Help file"
+msgstr "Obrir el fitxer d'ajuda"
+
+#. applet.js:278
+msgid "Launch programs using the nVidia Graphics Processor"
+msgstr "Iniciar programes utilitzant el processador gràfic d'Nvidia"
+
+#. applet.js:359
+msgid "NVidia based GPU is Off"
+msgstr "La GPU d'NVIDIA no està activa"
+
+#. applet.js:384
+msgid "NVidia based GPU is On and Core Temperature is"
+msgstr "LA GPU d'NVIDIA està activa i la temperatura del nucli és de"
+
+#. applet.js:392
+msgid "Err"
+msgstr "Error"
+
+#. applet.js:393
+msgid ""
+"Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia "
+"drivers installed?"
+msgstr ""
+"Bumblebee no està configurat correctament - teniu instal·lats els drivers "
+"d'nvidia i el paquet 'bbswitch'?"
+
+#. metadata.json->description
+msgid ""
+"Displays Status of Bumblebee and nVidia GPU Temperature with associated "
+"support functions including starting selected programs with optirun or "
+"primusrun"
+msgstr ""
+"Mostra l'estat de Bumblebee i la temperatura de la GPU nVidia amb "
+"funcionalitats de suport extra incloent l'execució de programes amb optirun "
+"o primusrun"
+
+#. metadata.json->name
+msgid "Bumblebee Status with NVidia Temperature Display"
+msgstr "Estat de Bumblebee amb Visualització de Temperatura d'nVidia"
+
+#. settings-schema.json->head->description
+msgid "General Settings for the nVidia Monitoring Applet"
+msgstr "Configuració general de la miniaplicació de monitoratge d'Nvidia"
+
+#. settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "segons"
+
+#. settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Interval de refresc per a les visualitzacions:"
+
+#. settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr "Utilitzeu un interval de temps lent si el vostre equip és lent"
+
+#. settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature as well as icon"
+msgstr "Mostrar la temperatura de la GPU a més de la icona"
+
+#. settings-schema.json->showGpuTemp->tooltip
+msgid ""
+"Available in Horizontal and Vertical Panels. Display is in Degrees "
+"Centigrade."
+msgstr ""
+"Disponible en taulers horitzontals i verticals. Es mostra en graus "
+"centígrads."
+
+#. settings-schema.json->head2->description
+msgid "Programs settings for Optimus"
+msgstr "Opcions de programes per Optimus"
+
+#. settings-schema.json->description1->description
+msgid "Display Name of Program 1 to be run using Optimus technology"
+msgstr ""
+"Nom de visualització del programa 1 per ser executat utilitzant tecnologia "
+"Optimus"
+
+#. settings-schema.json->description1->tooltip
+msgid ""
+"Put the name of the program here or null if you do not want it displayed"
+msgstr "Escriviu el nom del programa aquí o null si no voleu que es mostri"
+
+#. settings-schema.json->commandString1->description
+msgid "Command String for Program 1"
+msgstr "Ordre pel programa 1"
+
+#. settings-schema.json->commandString1->tooltip
+#. settings-schema.json->commandString2->tooltip
+#. settings-schema.json->commandString3->tooltip
+#. settings-schema.json->commandString4->tooltip
+#. settings-schema.json->commandString5->tooltip
+msgid ""
+"Put the command string to run the program here starting with optirun or "
+"primusrun"
+msgstr ""
+"Cadena de text de l'ordre per a executar el programa, començant per optirun "
+"o primusrun"
+
+#. settings-schema.json->description2->description
+msgid "Display Name of Program 2 to be run using Optimus technology"
+msgstr ""
+"Nom de visualització del programa 2 per ser executat utilitzant tecnologia "
+"Optimus"
+
+#. settings-schema.json->description2->tooltip
+#. settings-schema.json->description3->tooltip
+#. settings-schema.json->description4->tooltip
+#. settings-schema.json->description5->tooltip
+msgid ""
+"Put the name of the program here or none if you do not want it displayed"
+msgstr "Escriviu el nom del programa aquí o 'none' si no voleu que es mostri"
+
+#. settings-schema.json->commandString2->description
+msgid "Command String for Program 2"
+msgstr "Ordre pel programa 2"
+
+#. settings-schema.json->description3->description
+msgid "Display Name of Program 3 to be run using Optimus technology"
+msgstr ""
+"Nom de visualització del programa 3 per ser executat utilitzant tecnologia "
+"Optimus"
+
+#. settings-schema.json->commandString3->description
+msgid "Command String for Program 3"
+msgstr "Ordre pel programa 3"
+
+#. settings-schema.json->description4->description
+msgid "Display Name of Program 4 to be run using Optimus technology"
+msgstr ""
+"Nom de visualització del programa 4 per ser executat utilitzant tecnologia "
+"Optimus"
+
+#. settings-schema.json->commandString4->description
+msgid "Command String for Program 4"
+msgstr "Ordre pel programa 4"
+
+#. settings-schema.json->description5->description
+msgid "Display Name of Program 5 to be run using Optimus technology"
+msgstr ""
+"Nom de visualització del programa 5 per ser executat utilitzant tecnologia "
+"Optimus"
+
+#. settings-schema.json->commandString5->description
+msgid "Command String for Program 5"
+msgstr "Ordre pel programa 5"

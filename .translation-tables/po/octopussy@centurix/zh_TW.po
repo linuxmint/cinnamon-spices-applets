@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-05-23 00:07+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:132
+msgid "OctoPussy: OctoPrint manager."
+msgstr "OctoPussy：OctoPrint manager."
+
+#. applet.js:205
+msgid "Settings"
+msgstr "設定"
+
+#. applet.js:278 applet.js:351
+msgid "Time lapsed: "
+msgstr "經過時間："
+
+#. applet.js:282 applet.js:352
+msgid "Estimated: "
+msgstr "預估時間："
+
+#. applet.js:292 applet.js:353
+msgid "Total time: "
+msgstr "總時間："
+
+#. applet.js:355
+msgid "Pause current print"
+msgstr "暫停列印"
+
+#. applet.js:356
+msgid "Continue current print"
+msgstr "繼續列印"
+
+#. applet.js:358
+msgid "Change filament"
+msgstr "更換耗材"
+
+#. applet.js:359
+msgid "Camera monitor"
+msgstr "攝影機監控"
+
+#. applet.js:360
+msgid "Open OctoPrint web"
+msgstr "開啟 OctoPrint 網頁"
+
+#. applet.js:362
+msgid "Restart OctoPrint"
+msgstr "重新啟動 OctoPrint"
+
+#. applet.js:363
+msgid "Shutdown OctoPrint"
+msgstr "關閉 OctoPrint"
+
+#. applet.js:364
+msgid "Configure..."
+msgstr "設定..."
+
+#. applet.js:400
+msgid "Restart"
+msgstr ""
+
+#. applet.js:404 applet.js:430
+msgid "Cancel"
+msgstr ""
+
+#. applet.js:426
+#, fuzzy
+msgid "Shutdown"
+msgstr "關閉 OctoPrint"
+
+#. applet.js:474
+msgid "Please confirm your action!"
+msgstr ""
+
+#. metadata.json->description
+msgid "An applet to manage OctoPrint."
+msgstr "用於管理 OctoPrint 的面板小程式。"
+
+#. metadata.json->name
+msgid "OctoPrint manager"
+msgstr "OctoPrint manager"
+
+#. settings-schema.json->octoprintUrl->description
+#. settings-schema.json->octoprintUrl->tooltip
+msgid "OctoPrint API Address"
+msgstr "OctoPrint API 位址"
+
+#. settings-schema.json->octoprintApiKey->description
+msgid "OctoPrint API Key. Get an API key from the OctoPrint site settings."
+msgstr "OctoPrint API 金鑰。請從 OctoPrint 網站的設定頁面取得 API 金鑰。"
+
+#. settings-schema.json->octoprintInterval->units
+msgid "seconds"
+msgstr "秒"
+
+#. settings-schema.json->octoprintInterval->description
+msgid "Refresh Interval:"
+msgstr "更新間隔："
+
+#. settings-schema.json->octoprintInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"請調整此數值以更改更新間隔時間 — 如果您的電腦效能較慢，建議設定較長的間隔時間"
+
+#. settings-schema.json->octoprintVideoCommand->description
+msgid "Video command to use when showing the webcam. Defaults to vlc."
+msgstr "顯示網路攝影機影像時要使用的指令，預設為 vlc。"

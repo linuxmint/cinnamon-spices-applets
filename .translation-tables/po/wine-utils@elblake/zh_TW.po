@@ -1,0 +1,265 @@
+# WINE UTILS
+# This file is put in the public domain.
+# elblake, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: wine-utils@elblake 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-03 08:25-0400\n"
+"PO-Revision-Date: 2025-09-14 03:17+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:50
+msgid "Config"
+msgstr "設定"
+
+#. applet.js:51
+msgid "Control Panel"
+msgstr "控制台"
+
+#. applet.js:52
+msgid "Files"
+msgstr "檔案"
+
+#. applet.js:53
+msgid "Files (winefile)"
+msgstr "檔案 (winefile)"
+
+#. applet.js:54
+msgid "Registry Editor"
+msgstr "登錄檔編輯程式"
+
+#. applet.js:55
+msgid "Task Manager"
+msgstr "工作管理員"
+
+#. applet.js:58
+msgid "Bottles"
+msgstr "Bottles"
+
+#. applet.js:59
+msgid "Lutris"
+msgstr "Lutris"
+
+#. applet.js:60
+msgid "PlayOnLinux"
+msgstr "PlayOnLinux"
+
+#. applet.js:61
+msgid "Q4Wine"
+msgstr "Q4Wine"
+
+#. metadata.json->name
+#. applet.js:149
+msgid "Wine Utils"
+msgstr "Wine 工具程式"
+
+#. applet.js:326
+msgid "Prefixes"
+msgstr "前置目錄"
+
+#. applet.js:335
+msgid "Run Command..."
+msgstr "執行命令..."
+
+#. applet.js:343
+msgid "Command Prompt"
+msgstr "命令提示字元"
+
+#. applet.js:349
+msgid "Configuration"
+msgstr "組態"
+
+#. applet.js:354
+msgid "Programs"
+msgstr "程式"
+
+#. applet.js:483
+msgid "Default"
+msgstr "預設"
+
+#. metadata.json->description
+msgid "Easy access to Wine's utilities"
+msgstr "輕鬆存取 Wine 工具程式"
+
+#. settings-schema.json->head0->description
+msgid "Settings for wine-utils@elblake"
+msgstr "wine-utils@elblake 的設定"
+
+#. settings-schema.json->head1->description
+msgid "General"
+msgstr "一般"
+
+#. settings-schema.json->show-launchers->description
+msgid "Show Launchers"
+msgstr "顯示啟動器"
+
+#. settings-schema.json->show-launchers->tooltip
+msgid "Show some of the Wine launchers if they are installed."
+msgstr "若已安裝，則顯示部分 Wine 啟動器。"
+
+#. settings-schema.json->show-run-command->description
+msgid "Show 'Run Command...'"
+msgstr "顯示「執行命令...」"
+
+#. settings-schema.json->show-run-command->tooltip
+msgid "For running a Wine command."
+msgstr "用於執行 Wine 命令。"
+
+#. settings-schema.json->show-cmd->description
+msgid "Show 'Command Prompt'"
+msgstr "顯示「命令提示字元」"
+
+#. settings-schema.json->show-cmd->tooltip
+msgid "For easy access to the Wine command prompt."
+msgstr "輕鬆存取 Wine 命令提示字元。"
+
+#. settings-schema.json->show-admin-programs-menu->description
+msgid "Show the Configuration menu"
+msgstr "顯示組態選單"
+
+#. settings-schema.json->show-admin-programs-menu->tooltip
+msgid ""
+"Show a menu of useful Wine utilities that typically need to be accessed by "
+"CLI."
+msgstr ""
+"顯示實用 Wine 工具程式選單，通常需要透過命令列存取。"
+
+#. settings-schema.json->show-programs-menu->description
+msgid "Show the Programs menu"
+msgstr "顯示程式選單"
+
+#. settings-schema.json->show-programs-menu->tooltip
+msgid ""
+"Show a menu to access programs directly from Wine's installed program "
+"shortcuts."
+msgstr ""
+"顯示選單以直接從 Wine 已安裝程式捷徑存取程式。"
+
+#. settings-schema.json->use-dark-theme-icons->description
+msgid "Use dark theme icons when available."
+msgstr "可用時使用深色主題圖示。"
+
+#. settings-schema.json->icon-style->description
+msgid "Panel Icon Style"
+msgstr "面板圖示樣式"
+
+#. settings-schema.json->icon-style->options
+msgid "default"
+msgstr "預設"
+
+#. settings-schema.json->icon-style->options
+msgid "style 1"
+msgstr "樣式 1"
+
+#. settings-schema.json->icon-style->options
+msgid "style 2"
+msgstr "樣式 2"
+
+#. settings-schema.json->icon-style->options
+msgid "style 3"
+msgstr "樣式 3"
+
+#. settings-schema.json->specify-custom-icon->description
+msgid "Use custom panel icon"
+msgstr "使用自訂面板圖示"
+
+#. settings-schema.json->specify-custom-icon->tooltip
+msgid "Use a custom icon for the applet."
+msgstr "為此小程式使用自訂圖示。"
+
+#. settings-schema.json->custom-icon->description
+msgid "Custom icon"
+msgstr "自訂圖示"
+
+#. settings-schema.json->head2->description
+msgid "Advanced"
+msgstr "進階"
+
+#. settings-schema.json->prefix-file-list->description
+msgid "Path to prefix list"
+msgstr "前置目錄清單路徑"
+
+#. settings-schema.json->prefix-file-list->tooltip
+msgid ""
+"Select a text file, each line in the file should contain the full path of a "
+"wine prefix directory. You can add a name followed by a colon at the "
+"beginning of each line to give that prefix path a label."
+msgstr ""
+"選擇文字檔案，檔案中每一行應包含 Wine 前置目錄的完整路徑。您可以在每行開頭"
+"新增名稱後接冒號，為該前置目錄路徑指定標籤。"
+
+#. settings-schema.json->specify-wine-exec->description
+msgid "Specify the wine executable"
+msgstr "指定 Wine 執行檔"
+
+#. settings-schema.json->specify-wine-exec->tooltip
+msgid "Specify the wine executable, by default 'wine' is used."
+msgstr "指定 Wine 執行檔，預設使用 'wine'。"
+
+#. settings-schema.json->wine-exec->description
+msgid "Wine executable"
+msgstr "Wine 執行檔"
+
+#. settings-schema.json->wine-exec->tooltip
+msgid "The wine executable to use."
+msgstr "要使用的 Wine 執行檔。"
+
+#. settings-schema.json->wineconsole-exec->description
+msgid "Wine console executable"
+msgstr "Wine 主控台執行檔"
+
+#. settings-schema.json->wineconsole-exec->tooltip
+msgid "The wine console executable to use."
+msgstr "要使用的 Wine 主控台執行檔。"
+
+#. scripts/run-wine.sh:6
+msgid "Error running program:"
+msgstr "執行程式時發生錯誤："
+
+#. scripts/run-wine.sh:7 scripts/run-wine-start.sh:7
+msgid "Run Program Error"
+msgstr "執行程式錯誤"
+
+#. scripts/run-wine-start.sh:6
+msgid "Error starting"
+msgstr "啟動時發生錯誤"
+
+#. scripts/run-command.sh:6
+msgid "Command to run:"
+msgstr "要執行的命令："
+
+#. scripts/run-command.sh:7
+msgid "Run Command"
+msgstr "執行命令"
+
+#. scripts/run-command.sh:8
+msgid "Error running command:"
+msgstr "執行命令時發生錯誤："
+
+#. scripts/run-command.sh:9
+msgid "Run Command Error"
+msgstr "執行命令錯誤"
+
+#. scripts/use-cmd.sh:6
+msgid "Command Prompt Error"
+msgstr "命令提示字元錯誤"
+
+#. scripts/version.sh:3
+msgid "Wine could not be found, make sure Wine is installed correctly."
+msgstr "找不到 Wine，請確認 Wine 已正確安裝。"
+
+#. scripts/version.sh:4
+msgid "Wine Not Found"
+msgstr "找不到 Wine"
+
+#. scripts/version.sh:5
+msgid "Wine version: "
+msgstr "Wine 版本："

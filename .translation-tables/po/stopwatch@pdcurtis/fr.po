@@ -1,0 +1,224 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-05-03 21:11+0200\n"
+"Last-Translator: claudiux\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: 3.8/applet.js:205
+msgid "Name"
+msgstr "Nom"
+
+#: 3.8/applet.js:225
+msgid "Start   "
+msgstr "Démarrer   "
+
+#: 3.8/applet.js:233
+msgid "Pause   "
+msgstr "Pause   "
+
+#: 3.8/applet.js:241
+msgid "Reset   "
+msgstr "Réinitialiser   "
+
+#: 3.8/applet.js:249
+msgid "Continue  "
+msgstr "Poursuivre  "
+
+#: 3.8/applet.js:261
+msgid "Continue from Start"
+msgstr "Poursuivre depuis le début"
+
+#: 3.8/applet.js:337 3.0/applet.js:205
+msgid "Housekeeping and System Sub Menu"
+msgstr "Sous-menu Ménage et Système"
+
+#: 3.8/applet.js:340 3.0/applet.js:208
+msgid "View the Changelog"
+msgstr "Voir le récapitulatif des modifications (Changelog)"
+
+#: 3.8/applet.js:346 3.0/applet.js:214
+msgid "Open the Help file"
+msgstr "Ouvrir le fichier d'aide"
+
+#: 3.8/applet.js:353 3.0/applet.js:221
+msgid "Open stylesheet.css  (Advanced Function)"
+msgstr "Modifier la feuille de style (pour experts en css)"
+
+#: 3.8/applet.js:359 3.0/applet.js:227
+msgid "Open the gnome system monitor (Advanced testing function)"
+msgstr "Ouvrez le moniteur système de Gnome (fonction de test avancée)"
+
+#: 3.8/applet.js:368 3.0/applet.js:236
+msgid "Configure..."
+msgstr "Configurer..."
+
+#: 3.8/applet.js:413 3.0/applet.js:282
+msgid "days"
+msgstr "jours"
+
+#: 3.8/applet.js:416 3.0/applet.js:285
+msgid "hours"
+msgstr "heures"
+
+#: 3.8/applet.js:482 3.0/applet.js:340
+msgid "Running for"
+msgstr "En cours d'exécution"
+
+#: 3.8/applet.js:482 3.0/applet.js:340
+msgid "Click to Pause"
+msgstr "Cliquer pour mettre en pause"
+
+#: 3.8/applet.js:495 3.8/applet.js:497 3.0/applet.js:350 3.0/applet.js:352
+msgid "Paused at"
+msgstr "Mis en pause à"
+
+#: 3.8/applet.js:495 3.0/applet.js:350
+msgid "Click to Continue Counting"
+msgstr "Cliquer pour continuer à compter"
+
+#: 3.8/applet.js:497 3.0/applet.js:352
+msgid "Click to Reset"
+msgstr "Cliquer pour réinitialiser"
+
+#: 3.8/applet.js:508 3.0/applet.js:362
+msgid "Ready - Click to Start"
+msgstr "Prêt - Cliquer pour démarrer"
+
+#: 3.0/applet.js:159
+msgid "Start"
+msgstr "Démarrer"
+
+#: 3.0/applet.js:167
+msgid "Pause"
+msgstr "Pause"
+
+#: 3.0/applet.js:175
+msgid "Reset counter"
+msgstr "Remettre le compteur à zéro"
+
+#: 3.0/applet.js:182
+msgid "If paused, continue counting from now"
+msgstr "Si en pause, continuer à compter à partir de maintenant"
+
+#: 3.0/applet.js:193
+msgid "If paused, continue counting from original start time"
+msgstr "Si en pause, continuer à compter à partir du début"
+
+#. metadata.json->description
+msgid ""
+"Allows one to time activities such as the time online with multiple "
+"instances possible"
+msgstr ""
+"Permet de mesurer des activités ponctuelles telles que le temps passé en "
+"ligne (plusieurs instances possibles)"
+
+#. metadata.json->name
+msgid "Stopwatch for Cinnamon"
+msgstr "Chronomètre (Stopwatch) pour Cinnamon"
+
+#. 3.8->settings-schema.json->head->description
+#. 3.0->settings-schema.json->head->description
+msgid "General Settings for the Stopwatch Applet"
+msgstr "Paramètres généraux de l'applet Chronomètre"
+
+#. 3.8->settings-schema.json->refreshInterval-spinner->units
+#. 3.0->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "secondes"
+
+#. 3.8->settings-schema.json->refreshInterval-spinner->description
+#. 3.0->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Intervalle de rafraîchissement de l'affichage :"
+
+#. 3.8->settings-schema.json->refreshInterval-spinner->tooltip
+#. 3.0->settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have multiple active counters and/or a slow machine"
+msgstr ""
+"Augmentez ou diminuez cette valeur pour modifier l'intervalle "
+"d'actualisation - utilisez une actualisation lente si vous avez plusieurs "
+"compteurs actifs et/ou une machine lente"
+
+#. 3.8->settings-schema.json->counterTitle->description
+#. 3.0->settings-schema.json->counterTitle->description
+msgid "Provide a meaningful title to the counter"
+msgstr "Donnez un titre significatif au compteur"
+
+#. 3.8->settings-schema.json->counterTitle->tooltip
+#. 3.0->settings-schema.json->counterTitle->tooltip
+msgid ""
+"This forms the first part of the tooltip and is useful for identification if "
+"you have multiple instances of counters - default is Stopwatch"
+msgstr ""
+"Ceci forme la première partie de l'info-bulle et est utile pour "
+"l'identification si vous avez plusieurs instances de compteurs - la valeur "
+"par défaut est Chronomètre"
+
+#. 3.8->settings-schema.json->modeContinueCounting->description
+#. 3.0->settings-schema.json->modeContinueCounting->description
+msgid "Check box to continue counting on clicking applet when paused"
+msgstr ""
+"Case à cocher pour continuer à compter en cliquant sur l'applet quand elle "
+"est en pause"
+
+#. 3.8->settings-schema.json->modeContinueCounting->tooltip
+#. 3.0->settings-schema.json->modeContinueCounting->tooltip
+msgid ""
+"Normal sequence on clicking is 'start -> pause -> reset' this changes to "
+"'start -> pause -> continue -> pause -> continue etc'. In this mode one has "
+"to use the Right Click (Context) Menu to reset the counter"
+msgstr ""
+"La séquence normale en cliquant est 'démarrer -> pause -> réinitialiser' "
+"cela change en 'démarrer -> pause -> continuer -> pause -> continuer etc'. "
+"Dans ce mode, il faut utiliser le menu clic droit (contextuel) pour "
+"réinitialiser le compteur"
+
+#. 3.8->settings-schema.json->displayFullPanel->description
+msgid "Check box to Display Title in Panel"
+msgstr "Cocher pour afficher le titre dans le panneau"
+
+#. 3.8->settings-schema.json->displayFullPanel->tooltip
+msgid ""
+"This provides a more comprehensive panel display but may use more panel space"
+msgstr ""
+"Cela permet d'obtenir un affichage plus complet sur le panneau, mais peut "
+"nécessiter plus d'espace"
+
+#. 3.8->settings-schema.json->enableExperimentalFunctions->description
+msgid "Check box to enable some extra functions - Needs Cinnamon Restart"
+msgstr ""
+"Cocher cette case pour activer certaines fonctions supplémentaires - "
+"Nécessite le redémarrage de Cinnamon"
+
+#. 3.8->settings-schema.json->enableExperimentalFunctions->tooltip
+msgid "Provides extra functions requested by users"
+msgstr "Fournit des fonctions supplémentaires réclamées par les utilisateurs"
+
+#. 3.8->settings-schema.json->counterStatus->description
+#. 3.0->settings-schema.json->counterStatus->description
+msgid "Should not be changed"
+msgstr "Ne devrait pas être changé"
+
+#. 3.8->settings-schema.json->startTime->description
+#. 3.8->settings-schema.json->pausedAt->description
+#. 3.0->settings-schema.json->startTime->description
+#. 3.0->settings-schema.json->pausedAt->description
+msgid "Must not be changed"
+msgstr "Ne doit pas être changé"

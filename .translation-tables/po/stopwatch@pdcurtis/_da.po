@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2017-10-03 19:16+0200\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: 3.8/applet.js:205
+msgid "Name"
+msgstr ""
+
+#: 3.8/applet.js:225
+msgid "Start   "
+msgstr ""
+
+#: 3.8/applet.js:233
+msgid "Pause   "
+msgstr ""
+
+#: 3.8/applet.js:241
+msgid "Reset   "
+msgstr ""
+
+#: 3.8/applet.js:249
+msgid "Continue  "
+msgstr ""
+
+#: 3.8/applet.js:261
+msgid "Continue from Start"
+msgstr ""
+
+#. metadata.json->name
+msgid "Stopwatch for Cinnamon"
+msgstr ""
+
+#. 3.8->settings-schema.json->displayFullPanel->description
+msgid "Check box to Display Title in Panel"
+msgstr ""
+
+#. 3.8->settings-schema.json->displayFullPanel->tooltip
+msgid ""
+"This provides a more comprehensive panel display but may use more panel space"
+msgstr ""
+
+#. 3.8->settings-schema.json->enableExperimentalFunctions->description
+msgid "Check box to enable some extra functions - Needs Cinnamon Restart"
+msgstr ""
+
+#. 3.8->settings-schema.json->enableExperimentalFunctions->tooltip
+msgid "Provides extra functions requested by users"
+msgstr ""
