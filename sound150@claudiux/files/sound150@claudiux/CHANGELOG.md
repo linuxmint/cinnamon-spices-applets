@@ -1,3 +1,7 @@
+### v13.9.3~20260114
+  * User can set menu width (for Cinnamon 6.4).
+  * Fixes [#8175](https://github.com/linuxmint/cinnamon-spices-applets/issues/8175)
+
 ### v13.9.2~20260114
   * Improves menu display for Cinnamon 6.4.
   * Fixes [#8201](https://github.com/linuxmint/cinnamon-spices-applets/issues/8201)
