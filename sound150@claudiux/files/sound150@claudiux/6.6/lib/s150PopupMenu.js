@@ -1247,6 +1247,7 @@ class Seeker extends Slider.Slider {
         if (this.actor.get_stage() == null || this.destroyed) return;
         const [sliderX, sliderY] = this.actor.get_transformed_position();
         const width = this.actor.width;
+        //~ this.actor.width = width * this._applet.real_ui_scale; // ADDED
         let [x, y] = this.tooltip.mousePosition;
         if (this.tooltip) {
             this.tooltip.hide();

@@ -342,6 +342,86 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
 
         return this.isMic ? "microphone-sensitivity-" + icon + "-symbolic" : "audio-volume-" + icon + "-symbolic";
     }
+    
+    _sliderRepaint(area) {
+        const rtl = this.actor.get_direction() === St.TextDirection.RTL;
+
+        const cr = area.get_context();
+        const themeNode = area.get_theme_node();
+        var [width, height] = area.get_surface_size();
+        //~ width =  Math.trunc(width * this.applet.real_ui_scale);
+
+        const handleRadius = themeNode.get_length('-slider-handle-radius');
+
+        const sliderWidth = width - 2 * handleRadius;
+        const sliderHeight = themeNode.get_length('-slider-height');
+
+        const sliderBorderWidth = themeNode.get_length('-slider-border-width');
+        const sliderBorderRadius = Math.min(width, sliderHeight) / 2;
+
+        const sliderBorderColor = themeNode.get_color('-slider-border-color');
+        const sliderColor = themeNode.get_color('-slider-background-color');
+
+        const sliderActiveBorderColor = themeNode.get_color('-slider-active-border-color');
+        const sliderActiveColor = themeNode.get_color('-slider-active-background-color');
+
+        const TAU = Math.PI * 2;
+
+        const handleX = rtl ?
+            width - handleRadius - sliderWidth * this._value :
+            handleRadius + sliderWidth * this._value;
+        const handleY = height / 2;
+
+        let sliderLeftBorderColor = sliderActiveBorderColor;
+        let sliderLeftColor = sliderActiveColor;
+        let sliderRightBorderColor = sliderBorderColor;
+        let sliderRightColor = sliderColor;
+        if (rtl) {
+            sliderLeftColor = sliderColor;
+            sliderLeftBorderColor = sliderBorderColor;
+            sliderRightColor = sliderActiveColor;
+            sliderRightBorderColor = sliderActiveBorderColor;
+        }
+
+        cr.arc(sliderBorderRadius + sliderBorderWidth, handleY, sliderBorderRadius, TAU * 1/4, TAU * 3/4);
+        cr.lineTo(handleX, (height - sliderHeight) / 2);
+        cr.lineTo(handleX, (height + sliderHeight) / 2);
+        cr.lineTo(sliderBorderRadius + sliderBorderWidth, (height + sliderHeight) / 2);
+        Clutter.cairo_set_source_color(cr, sliderLeftColor);
+        cr.fillPreserve();
+        Clutter.cairo_set_source_color(cr, sliderLeftBorderColor);
+        cr.setLineWidth(sliderBorderWidth);
+        cr.stroke();
+
+        cr.arc(width - sliderBorderRadius - sliderBorderWidth, handleY, sliderBorderRadius, TAU * 3/4, TAU * 1/4);
+        cr.lineTo(handleX, (height + sliderHeight) / 2);
+        cr.lineTo(handleX, (height - sliderHeight) / 2);
+        cr.lineTo(width - sliderBorderRadius - sliderBorderWidth, (height - sliderHeight) / 2);
+        Clutter.cairo_set_source_color(cr, sliderRightColor);
+        cr.fillPreserve();
+        Clutter.cairo_set_source_color(cr, sliderRightBorderColor);
+        cr.setLineWidth(sliderBorderWidth);
+        cr.stroke();
+
+        const color = themeNode.get_foreground_color();
+        Clutter.cairo_set_source_color(cr, color);
+        cr.arc(handleX, handleY, handleRadius, 0, TAU);
+        cr.fill();
+
+        // Draw a mark to indicate a certain value
+        if (this._mark_position > 0) {
+            const markWidth = 2;
+            const markHeight = sliderHeight + 4;
+            const xMark = rtl ?
+                width - sliderWidth * this._mark_position - markWidth / 2 :
+                sliderWidth * this._mark_position + markWidth / 2;
+            const yMark = height / 2 - markHeight / 2;
+            cr.rectangle(xMark, yMark, markWidth, markHeight);
+            cr.fill();
+        }
+
+        cr.$dispose();
+    }
 }
 
 module.exports = {
