@@ -181,8 +181,8 @@ const original_players_with_seek_support = [
     "amarok", "xnoise", "gmusicbrowser",
     "vlc", "qmmp", "deadbeef",
     "audacious", "celluloid", "spotify", "mpv", "smplayer",
-    "LibreWolf"
-]; // Added: "smplayer", "LibreWolf"
+    "LibreWolf", "Strawberry"
+]; // Added: "smplayer", "LibreWolf", "Strawberry"
 var players_without_seek_support = original_players_without_seek_support;
 var players_with_seek_support = original_players_with_seek_support;
 
@@ -264,6 +264,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._chooseActivePlayerItem = new PopupMenu.PopupSubMenuMenuItem(_("Choose player controls"));
 
         this.settings = new Settings.AppletSettings(this, UUID, this.instanceId);
+        this.settings.bind("userMenuWidth", "userMenuWidth", (value) => {
+            this.menuWidth = Math.round(value * this.real_ui_scale);
+        });
+        this.menuWidth = Math.round(this.userMenuWidth * this.real_ui_scale);
         this.settings.bind("runAsync", "runAsync");
         this.settings.bind("shortenArtistTitle", "shortenArtistTitle");
         this.settings.bind("doNotUsePlayerctld", "doNotUsePlayerctld", () => {
