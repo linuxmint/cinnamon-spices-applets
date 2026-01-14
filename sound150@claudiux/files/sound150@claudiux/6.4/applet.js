@@ -213,11 +213,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.instanceId = instanceId;
 
         this.real_ui_scale = 1.0;
-        this.menuWidth = 450;
+        this.menuWidth = 520;
         Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-real-scale.py", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 this.real_ui_scale = parseFloat(stdout);
-                this.menuWidth = Math.round(450 * this.real_ui_scale);
+                this.menuWidth = Math.round(520 * this.real_ui_scale);
             }
         }, {});
 

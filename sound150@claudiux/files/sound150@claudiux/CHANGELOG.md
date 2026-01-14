@@ -1,3 +1,7 @@
+### v13.9.2~20260114
+  * Improves menu display for Cinnamon 6.4.
+  * Fixes [#8201](https://github.com/linuxmint/cinnamon-spices-applets/issues/8201)
+
 ### v13.9.1~20260112
   * Restore this applet for Cinnamon 6.4 (same as v13.8.2).
   * Fixes [#8183](https://github.com/linuxmint/cinnamon-spices-applets/issues/8183)
