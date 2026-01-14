@@ -5719,7 +5719,7 @@ function createUpdateStationsMenuItem() {
             self.setText("Updating Radio stations...");
             notify("Upating Radio stations... \n\nThis can take several minutes!");
             makeJsonHttpRequest({
-                url: "http://de1.api.radio-browser.info/json/stations",
+                url: "http://de1.api.radio-browser.info/json/stations?limit=100000&hidebroken=true",
                 onSuccess: (resp) => saveStations(resp),
                 onErr: (err) => {
                     notifyError(`Couldn't update the station list due to an error`, err.reason_phrase, { showInternetInfo: true });
