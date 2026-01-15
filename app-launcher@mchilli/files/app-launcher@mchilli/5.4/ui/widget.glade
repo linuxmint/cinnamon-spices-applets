@@ -26,7 +26,7 @@
             </child>
             <child>
               <object class="GtkTreeViewColumn">
-                <property name="title" translatable="yes">Icon</property>
+                <property name="title">Icon</property>
                 <child>
                   <object class="GtkCellRendererPixbuf"/>
                   <attributes>
@@ -37,7 +37,7 @@
             </child>
             <child>
               <object class="GtkTreeViewColumn">
-                <property name="title" translatable="yes">Name</property>
+                <property name="title">Name</property>
                 <child>
                   <object class="GtkCellRendererText"/>
                   <attributes>
@@ -48,7 +48,7 @@
             </child>
             <child>
               <object class="GtkTreeViewColumn">
-                <property name="title" translatable="yes">Command</property>
+                <property name="title">Command</property>
                 <child>
                   <object class="GtkCellRendererText">
                     <property name="style">italic</property>

@@ -57,6 +57,7 @@
       "type": "section",
       "title": "Menu",
       "keys": [
+        "userMenuWidth",
         "playerControl",
         "extendedPlayerControl",
         "keepPlayerListOpen",
@@ -222,6 +223,15 @@
       ]
     }
   },
+  "userMenuWidth": {
+    "type": "scale",
+    "default": 450,
+    "min": 450,
+    "max": 600,
+    "step": 10,
+    "description": "Menu width (in pixels)",
+    "show-value": true
+  },
   "playerControl": {
     "type": "switch",
     "default": true,
@@ -331,7 +341,8 @@
       "org.gnome.Totem",
       "mullvad browser",
       "io.gitlab.librewolf-community",
-      "LibreWolf"
+      "LibreWolf",
+      "org.strawberrymusicplayer.strawberry"
     ]
   },
   "runAsync": {
