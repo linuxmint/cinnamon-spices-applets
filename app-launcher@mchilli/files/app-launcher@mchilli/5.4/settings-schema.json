@@ -146,7 +146,7 @@
         "type": "spinbutton",
         "description": "Hover delay",
         "default": 300,
-        "min":0,
+        "min":50,
         "max":1000,
         "step":50,
         "units":"milliseconds",
