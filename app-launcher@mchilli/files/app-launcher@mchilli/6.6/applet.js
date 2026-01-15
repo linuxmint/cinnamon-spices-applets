@@ -25,10 +25,10 @@ Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 
 // Define panel positions
 const PANEL = {
-    TOP : 0,
-    BOTTOM : 1,
-    LEFT : 2,
-    RIGHT : 3
+    TOP: 0,
+    BOTTOM: 1,
+    LEFT: 2,
+    RIGHT: 3,
 };
 
 function _(str) {
@@ -49,7 +49,7 @@ class MyApplet extends Applet.TextIconApplet {
 
             this.initialized = false; // some callbacks are triggered multiple times at startup without values been changed
             this.mouseEntered = false;
-            this.subMenuClosedRecently = false;  // to prevent the menu from being closed after the submenus have collapsed
+            this.subMenuClosedRecently = false; // to prevent the menu from being closed after the submenus have collapsed
             this.dragging = false;
             this.dragPlaceholder = null;
             this.dragPlaceholderParent = null;
@@ -69,7 +69,9 @@ class MyApplet extends Applet.TextIconApplet {
             this.initIcons();
             this.initLabel();
 
-            setTimeout(() => {this.initialized = true}, 500);
+            setTimeout(() => {
+                this.initialized = true;
+            }, 500);
         } catch (e) {
             global.logError(e);
         }
@@ -110,8 +112,18 @@ class MyApplet extends Applet.TextIconApplet {
         this.signalManager.connect(this.actor, 'enter-event', this.onMouseEnter, this);
         this.signalManager.connect(this.actor, 'leave-event', this.onMouseLeave, this);
 
-        this.signalManager.connect(this.menu, 'open-state-changed', this.on_menu_state_changed, this);
-        this.signalManager.connect(global.window_manager, 'switch-workspace', this.updateWorkspace,this);
+        this.signalManager.connect(
+            this.menu,
+            'open-state-changed',
+            this.on_menu_state_changed,
+            this
+        );
+        this.signalManager.connect(
+            global.window_manager,
+            'switch-workspace',
+            this.updateWorkspace,
+            this
+        );
         this.signalManager.connect(global.screen, 'workspace-added', this.initWorkspaces, this);
         this.signalManager.connect(global.screen, 'workspace-removed', this.initWorkspaces, this);
     }
@@ -131,12 +143,15 @@ class MyApplet extends Applet.TextIconApplet {
         options[_('All workspaces')] = '-1';
         this.workspaces = new Array(global.screen.get_n_workspaces());
         for (let i = 0; i < this.workspaces.length; i++) {
-            let workspaceName = Main.getWorkspaceName(i)
+            let workspaceName = Main.getWorkspaceName(i);
             this.workspaces[i] = workspaceName;
             options[workspaceName] = '' + i;
         }
         this.settings.setOptions('bind-to-workspace', options);
-        if (this.bindToWorkspace !== '-1' && this.workspaces[parseInt(this.bindToWorkspace)] === undefined) {
+        if (
+            this.bindToWorkspace !== '-1' &&
+            this.workspaces[parseInt(this.bindToWorkspace)] === undefined
+        ) {
             this.settings.setValue('bind-to-workspace', '-1');
         }
 
@@ -360,6 +375,7 @@ class MyApplet extends Applet.TextIconApplet {
             }
         });
         this.settings.setValue('list-applications', newList);
+        this.updateGroups();
     }
 
     removeGroup(name) {
@@ -370,6 +386,7 @@ class MyApplet extends Applet.TextIconApplet {
             }
         });
         this.settings.setValue('list-applications', newList);
+        this.updateGroups();
     }
 
     addApp(name, icon, group, command, index = 0) {
@@ -381,6 +398,7 @@ class MyApplet extends Applet.TextIconApplet {
             command: command,
         });
         this.settings.setValue('list-applications', newList);
+        this.updateGroups();
     }
 
     removeApp(index, update = true) {
@@ -388,6 +406,7 @@ class MyApplet extends Applet.TextIconApplet {
         newList.splice(index, 1);
         if (update) {
             this.settings.setValue('list-applications', newList);
+            this.updateGroups();
         }
     }
 
@@ -411,21 +430,17 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     addHotKey() {
-        Main.keybindingManager.addHotKey(
-            `app-launcher-${this.instanceId}`,
-            this.hotkeyBindings,
-            () => {
-                if (this.menuAtPointer) {
-                    this.menu.toggleOnPointer();
-                } else {
-                    this.menu.toggle();
-                }
+        Main.keybindingManager.addXletHotKey(this, 'app-launcher', this.hotkeyBindings, () => {
+            if (this.menuAtPointer) {
+                this.menu.toggleOnPointer();
+            } else {
+                this.menu.toggle();
             }
-        );
+        });
     }
 
     removeHotkey() {
-        Main.keybindingManager.removeHotKey(`app-launcher-${this.instanceId}`);
+        Main.keybindingManager.removeXletHotKey(this, 'app-launcher');
     }
 
     run(name, icon, command) {
@@ -461,7 +476,7 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     onMouseEnter(event) {
-        if (!this.openByHover) return
+        if (!this.openByHover) return;
         this.mouseEntered = true;
         this.subMenuClosedRecently = false;
 
@@ -480,7 +495,7 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     onMouseLeave(event) {
-        if (!this.openByHover) return
+        if (!this.openByHover) return;
         this.mouseEntered = false;
 
         this.leaveTimeoutID = setTimeout(() => {
@@ -494,12 +509,14 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     checkMouseEntered() {
-        if (this.openByHover && 
+        if (
+            this.openByHover &&
             this.menu.isOpen &&
             !this.menu.isContextOpen &&
-            !this.mouseEntered && 
-            !this.subMenuClosedRecently) {
-                this.menu.close();
+            !this.mouseEntered &&
+            !this.subMenuClosedRecently
+        ) {
+            this.menu.close();
         }
     }
 
@@ -624,7 +641,7 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
     _init(applet, orientation) {
         try {
             super._init(applet, orientation);
-            
+
             this.applet = applet;
             this._menuAppItems = [];
             this._menuGroupItems = [];
@@ -659,7 +676,7 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
         }
     }
 
-    _allocationChanged (actor, pspec) {
+    _allocationChanged(actor, pspec) {
         if (this.hotkeyTriggered) {
             let posX = this.pointerX;
             let posY = this.pointerY;
@@ -675,17 +692,26 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
             const panels = Main.panelManager.getPanelsInMonitor(monitorIndex);
             for (const panel of panels) {
                 if (!panel._hidden) {
-                    panelHeight[panel.panelPosition] = panel.height
+                    panelHeight[panel.panelPosition] = panel.height;
                 }
             }
 
             if (this.actorPlaced) {
                 // // Ensure the actor fits within the monitor's width and height
-                posX = Math.min(posX, monitor.x + monitor.width - this.actor.width - panelHeight[PANEL.RIGHT]);
-                posY = Math.min(posY, monitor.y + monitor.height - this.actor.height - panelHeight[PANEL.BOTTOM]);
+                posX = Math.min(
+                    posX,
+                    monitor.x + monitor.width - this.actor.width - panelHeight[PANEL.RIGHT]
+                );
+                posY = Math.min(
+                    posY,
+                    monitor.y + monitor.height - this.actor.height - panelHeight[PANEL.BOTTOM]
+                );
             } else {
                 // Adjust X position to fit within the monitor, considering left and right panels
-                if (posX - monitor.x + this.actor.width > monitor.width - panelHeight[PANEL.RIGHT]) {
+                if (
+                    posX - monitor.x + this.actor.width >
+                    monitor.width - panelHeight[PANEL.RIGHT]
+                ) {
                     posX -= this.actor.width;
                 }
                 if (posX < monitor.x + panelHeight[PANEL.LEFT]) {
@@ -693,7 +719,10 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
                 }
 
                 // Adjust Y position to fit within the monitor, considering top and bottom panels
-                if (posY - monitor.y + this.actor.height > monitor.height - panelHeight[PANEL.BOTTOM]) {
+                if (
+                    posY - monitor.y + this.actor.height >
+                    monitor.height - panelHeight[PANEL.BOTTOM]
+                ) {
                     posY -= this.actor.height;
                 }
                 if (posY < monitor.y + panelHeight[PANEL.TOP]) {
@@ -703,14 +732,18 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
                 // Update pointer positions and mark menu as placed
                 this.pointerX = posX;
                 this.pointerY = posY;
-                this.actorPlaced = true
+                this.actorPlaced = true;
             }
 
             this.actor.set_position(posX, posY);
-            return
-        };
-        
-        if (!this.animating && !this.sourceActor.is_finalized() && this.sourceActor.get_stage() != null) {
+            return;
+        }
+
+        if (
+            !this.animating &&
+            !this.sourceActor.is_finalized() &&
+            this.sourceActor.get_stage() != null
+        ) {
             let [xPos, yPos] = this._calculatePosition();
             this.actor.set_position(xPos, yPos);
         }
@@ -856,7 +889,7 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
     }
 
     onMouseEnter(event) {
-        if (!this.applet.openByHover) return
+        if (!this.applet.openByHover) return;
         this.applet.mouseEntered = true;
         this.applet.subMenuClosedRecently = false;
 
@@ -867,7 +900,7 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
     }
 
     onMouseLeave(event) {
-        if (!this.applet.openByHover) return
+        if (!this.applet.openByHover) return;
         this.applet.mouseEntered = false;
 
         this.leaveTimeoutID = setTimeout(() => {
@@ -980,7 +1013,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
 
         this._children.unshift(params);
         this._signals.connect(this.actor, 'destroy', this._removeChild.bind(this, this._icon));
-        
+
         this.actor.add_actor(this._icon);
     }
 
@@ -1153,7 +1186,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
         let button = new St.Icon({
             name: name,
             gicon: Gio.Icon.new_for_string(
-                `${this.applet.metadata.path}/icons/${name}-symbolic.svg`
+                `${this.applet.metadata.path}/../icons/${name}-symbolic.svg`
             ),
             icon_size: this.iconSize,
             icon_type: St.IconType.SYMBOLIC,
@@ -1178,8 +1211,8 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
     }
 
     onMouseEnter(event) {
-        if (!this.applet.openByHover) return
-        
+        if (!this.applet.openByHover) return;
+
         if (!this.menu.isOpen && !this.hoverTimeoutID) {
             this.hoverTimeoutID = setTimeout(() => {
                 if (!this.applet.menu.isContextOpen) {
@@ -1195,7 +1228,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
     }
 
     onMouseLeave(event) {
-        if (!this.applet.openByHover) return
+        if (!this.applet.openByHover) return;
 
         if (this.hoverTimeoutID) {
             clearTimeout(this.hoverTimeoutID);
@@ -1466,7 +1499,7 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
         let button = new St.Icon({
             name: name,
             gicon: Gio.Icon.new_for_string(
-                `${this.applet.metadata.path}/icons/${name}-symbolic.svg`
+                `${this.applet.metadata.path}/../icons/${name}-symbolic.svg`
             ),
             icon_size: this.iconSize,
             icon_type: St.IconType.SYMBOLIC,
