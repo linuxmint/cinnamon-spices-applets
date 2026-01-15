@@ -17617,6 +17617,7 @@ class SwissMeteo extends BaseProvider {
 
 
 
+
 class MetUk extends BaseProvider {
     constructor() {
         super(...arguments);
@@ -17630,17 +17631,20 @@ class MetUk extends BaseProvider {
         this.supportHourlyPrecipChance = true;
         this.supportHourlyPrecipVolume = true;
         this.baseUrl = "https://data.hub.api.metoffice.gov.uk/sitespecific/v0";
+        this.observationBaseUrl = "https://data.hub.api.metoffice.gov.uk/observation-land/1";
+        this.observationUrl = `${this.observationBaseUrl}/nearest`;
         this.hourlyForecastUrl = `${this.baseUrl}/point/hourly`;
         this.forecastUrl = `${this.baseUrl}/point/daily`;
     }
     async GetWeather(newLocation, cancellable, config) {
-        var _a, _b;
+        var _a, _b, _c, _d, _e, _f, _g, _h;
+        const [forecastKey, observationKey] = config.ApiKey.split("+");
         const params = Object.assign(Object.assign({}, MetUk.params), { latitude: newLocation.lat.toString(), longitude: newLocation.lon.toString() });
-        const [hourlyRes, dailyRes] = await Promise.all([
+        const [hourlyRes, dailyRes, observationStationRes] = await Promise.all([
             HttpLib.Instance.LoadJsonAsync({
                 url: this.hourlyForecastUrl,
                 headers: {
-                    apiKey: config.ApiKey,
+                    apiKey: forecastKey,
                 },
                 params: params,
                 cancellable: cancellable,
@@ -17648,12 +17652,27 @@ class MetUk extends BaseProvider {
             HttpLib.Instance.LoadJsonAsync({
                 url: this.forecastUrl,
                 headers: {
-                    apiKey: config.ApiKey,
+                    apiKey: forecastKey,
                 },
                 params: params,
                 cancellable: cancellable,
             }),
+            HttpLib.Instance.LoadJsonAsync({
+                url: this.observationUrl,
+                headers: {
+                    apiKey: observationKey,
+                },
+                params: {
+                    lat: newLocation.lat.toFixed(2).toString(),
+                    lon: newLocation.lon.toFixed(2).toString(),
+                },
+                cancellable: cancellable,
+            }),
         ]);
+        if (!observationStationRes.Success) {
+            logger_Logger.Error(`MetUK: Failed to get observation station data: ${JSON.stringify(observationStationRes.ErrorData)}`);
+            return null;
+        }
         if (!hourlyRes.Success) {
             logger_Logger.Error(`MetUK: Failed to get hourly data: ${JSON.stringify(hourlyRes.ErrorData)}`);
             return null;
@@ -17672,50 +17691,77 @@ class MetUk extends BaseProvider {
             logger_Logger.Error(`MetUK: No daily forecast data found for location ${newLocation.lat}, ${newLocation.lon}`);
             return null;
         }
+        const observationStation = observationStationRes.Data[0];
+        if (!observationStation) {
+            logger_Logger.Error(`MetUK: No observation station data found for location ${newLocation.lat}, ${newLocation.lon}`);
+            return null;
+        }
+        const times = (0,suncalc.getTimes)(new Date(), newLocation.lat, newLocation.lon, hourlyRes.Data.features[0].geometry.coordinates[2]);
+        const observationRes = await HttpLib.Instance.LoadJsonAsync({
+            url: `${this.observationBaseUrl}/${observationStation.geohash}`,
+            headers: {
+                apiKey: observationKey,
+            },
+            cancellable: cancellable,
+        });
+        if (!observationRes.Success) {
+            logger_Logger.Error(`MetUK: Failed to get observation data: ${JSON.stringify(observationRes.ErrorData)}`);
+            return null;
+        }
         const now = DateTime.now();
         const firstHourRelevantIndex = hourlyForecasts.timeSeries.findIndex(item => DateTime.fromISO(item.time).plus({ hours: 1 }) >= now);
         hourlyForecasts.timeSeries = firstHourRelevantIndex === -1 ? [] : hourlyForecasts.timeSeries.slice(firstHourRelevantIndex);
         const firstDayRelevantIndex = dailyForecasts.timeSeries.findIndex(item => DateTime.fromISO(item.time).set({ hour: 12, minute: 0, second: 0, millisecond: 0 }) >= now.set({ hour: 12, minute: 0, second: 0, millisecond: 0 }));
         dailyForecasts.timeSeries = firstDayRelevantIndex === -1 ? [] : dailyForecasts.timeSeries.slice(firstDayRelevantIndex);
+        if (hourlyForecasts.timeSeries.length === 0) {
+            logger_Logger.Error(`MetUK: No relevant hourly forecast data found for location ${newLocation.lat}, ${newLocation.lon}`);
+            return null;
+        }
+        const observationLast = observationRes.Data.length > 0 ? observationRes.Data[observationRes.Data.length - 1] : null;
+        const hourlyForecastFirst = hourlyForecasts.timeSeries[0];
         return {
-            condition: {
-                customIcon: "alien-symbolic",
-                description: "Sunny",
-                main: "Clear",
-                icons: []
-            },
+            condition: this.ResolveCondition((_c = observationLast === null || observationLast === void 0 ? void 0 : observationLast.weather_code) !== null && _c !== void 0 ? _c : hourlyForecastFirst.significantWeatherCode),
             coord: {
                 lat: newLocation.lat,
                 lon: newLocation.lon,
             },
-            date: DateTime.fromISO(hourlyForecasts.modelRunDate).setZone(MetUk.timezone),
+            date: DateTime.fromISO(hourlyForecasts.modelRunDate).setZone(observationStation.olson_time_zone),
             wind: {
-                speed: 0,
-                degree: 0,
+                speed: (_d = observationLast === null || observationLast === void 0 ? void 0 : observationLast.wind_speed) !== null && _d !== void 0 ? _d : hourlyForecastFirst.windSpeed10m,
+                degree: (observationLast === null || observationLast === void 0 ? void 0 : observationLast.wind_direction) ? CompassToDeg(observationLast.wind_direction) : hourlyForecastFirst.windDirectionFrom10m,
             },
-            humidity: 0,
-            pressure: 0,
-            dewPoint: 0,
-            forecasts: this.GetDailyForecasts(dailyForecasts),
-            hourlyForecasts: this.GetHourlyForecasts(hourlyForecasts),
-            sunrise: null,
-            sunset: null,
+            humidity: (_e = observationLast === null || observationLast === void 0 ? void 0 : observationLast.humidity) !== null && _e !== void 0 ? _e : hourlyForecastFirst.screenRelativeHumidity,
+            pressure: (_f = observationLast === null || observationLast === void 0 ? void 0 : observationLast.mslp) !== null && _f !== void 0 ? _f : hourlyForecastFirst.mslp,
+            dewPoint: null,
+            forecasts: this.GetDailyForecasts(dailyForecasts, observationStation.olson_time_zone),
+            hourlyForecasts: this.GetHourlyForecasts(hourlyForecasts, observationStation.olson_time_zone),
+            sunrise: DateTime.fromJSDate(times.sunrise, { zone: observationStation.olson_time_zone }),
+            sunset: DateTime.fromJSDate(times.sunset, { zone: observationStation.olson_time_zone }),
             location: {
-                timeZone: MetUk.timezone,
+                timeZone: observationStation.olson_time_zone,
+                country: (_g = observationStation.country) !== null && _g !== void 0 ? _g : undefined,
             },
-            temperature: 0,
-            uvIndex: null,
+            temperature: CelsiusToKelvin((_h = observationLast === null || observationLast === void 0 ? void 0 : observationLast.temperature) !== null && _h !== void 0 ? _h : hourlyForecastFirst.screenTemperature),
+            uvIndex: hourlyForecastFirst.uvIndex,
             alerts: [],
             stationInfo: {
-                distanceFrom: hourlyForecasts.requestPointDistance
+                distanceFrom: hourlyForecasts.requestPointDistance,
+                name: hourlyForecasts.location.name,
+                lat: hourlyRes.Data.features[0].geometry.coordinates[1],
+                lon: hourlyRes.Data.features[0].geometry.coordinates[0],
+            },
+            extra_field: {
+                name: _("Feels Like"),
+                value: CelsiusToKelvin(hourlyForecastFirst.feelsLikeTemperature),
+                type: "temperature"
             }
         };
     }
-    GetHourlyForecasts(payload) {
+    GetHourlyForecasts(payload, timezone) {
         const result = [];
         for (const item of payload.timeSeries) {
             result.push({
-                date: DateTime.fromISO(item.time).setZone(MetUk.timezone),
+                date: DateTime.fromISO(item.time).setZone(timezone),
                 temp: CelsiusToKelvin(item.screenTemperature),
                 condition: this.ResolveCondition(item.significantWeatherCode),
                 precipitation: item.probOfPrecipitation < 20 ? undefined : {
@@ -17727,12 +17773,12 @@ class MetUk extends BaseProvider {
         }
         return result;
     }
-    GetDailyForecasts(payload) {
+    GetDailyForecasts(payload, timezone) {
         var _a;
         const result = [];
         for (const item of payload.timeSeries) {
             result.push({
-                date: DateTime.fromISO(item.time).setZone(MetUk.timezone),
+                date: DateTime.fromISO(item.time).setZone(timezone),
                 temp_min: CelsiusToKelvin(item.nightMinScreenTemperature),
                 temp_max: CelsiusToKelvin(item.dayMaxScreenTemperature),
                 condition: this.ResolveCondition((_a = item.daySignificantWeatherCode) !== null && _a !== void 0 ? _a : item.nightSignificantWeatherCode),
@@ -17980,7 +18026,6 @@ class MetUk extends BaseProvider {
 MetUk.params = {
     includeLocationName: "true",
 };
-MetUk.timezone = "Europe/London";
 
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
 
