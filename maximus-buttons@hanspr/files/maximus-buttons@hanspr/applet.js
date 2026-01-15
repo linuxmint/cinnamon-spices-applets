@@ -39,7 +39,7 @@ class MyApplet extends Applet.TextIconApplet {
         this.button = []
         this.createButtons(this.buttons_style)
         this.on_panel_edit_mode_changed
-        this._showButtons(global.display.focus_window)
+        this.setButtons("hide")
     }
 
     bindSettings() {
