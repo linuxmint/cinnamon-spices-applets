@@ -113,9 +113,11 @@ class EyeMode {
      * @param {number} line_width The width of the lines used in drawing
      * @param {number} area_width The width of the drawing area
      * @param {number} area_height The height of the drawing area
+     * @param {boolean} do_stroke Whether to stroke the blink layer (used when not filling)
+     * @param {Clutter.Color} stroke_color The color to use for the stroke
      * @param {Function} appendEyePath A function that appends the eye outline path to the context
      */
-    _applyUpperLidBlink(cr, blink_rate, eye_rad, line_width, area_width, area_height, appendEyePath) {
+    _applyUpperLidBlink(cr, blink_rate, eye_rad, line_width, area_width, area_height, do_stroke, stroke_color, appendEyePath) {
         if (blink_rate <= 0) return;
 
         const t0 = blink_rate > 1 ? 1 : (blink_rate < 0 ? 0 : blink_rate);
@@ -143,6 +145,15 @@ class EyeMode {
         cr.newPath();
         this._appendVerticalCapsulePath(cr, p.x, p.y, p.w, p.coverH, p.yRad);
         cr.fill();
+
+        if (do_stroke) {
+            cr.setOperator(Cairo.Operator.OVER);
+            Clutter.cairo_set_source_color(cr, stroke_color);
+            cr.setLineWidth(line_width);
+            cr.newPath();
+            this._appendVerticalCapsulePath(cr, p.x, p.y, p.w, p.coverH, p.yRad);
+            cr.stroke();
+        }
 
         cr.restore();
     }
@@ -253,7 +264,7 @@ class EyelidMode extends EyeMode {
         cr.arc(0, 0, 1.0, 0, TWO_PI);
         cr.fill();
 
-        this._applyUpperLidBlink(cr, blink_rate, eye_rad, options.line_width, area_width, area_height,
+        this._applyUpperLidBlink(cr, blink_rate, eye_rad, options.line_width, area_width, area_height, !options.lids_fill, options.base_color,
             (ctx) => this._appendEyelidEyePath(ctx, eye_rad, iris_rad, x_def, y_def, top_lid, bottom_lid)
         );
     }
@@ -325,7 +336,7 @@ class BulbMode extends EyeMode {
         cr.arc(0, 0, 1.0, 0, TWO_PI);
         cr.fill();
 
-        this._applyUpperLidBlink(cr, blink_rate, eye_rad, options.line_width, area_width, area_height,
+        this._applyUpperLidBlink(cr, blink_rate, eye_rad, options.line_width, area_width, area_height, !options.bulb_fill, options.base_color,
             (ctx) => { ctx.arc(0, 0, eye_rad, 0, TWO_PI); }
         );
     }
