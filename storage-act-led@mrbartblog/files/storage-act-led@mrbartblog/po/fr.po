@@ -20,10 +20,10 @@ msgstr ""
 
 #. metadata.json->name
 msgid "Storage activity LED indicator"
-msgstr "Voyant LED d'activité de Voyant LED d'activité de stockage"
+msgstr "Voyant LED d'activité de stockage"
 
 #. metadata.json->description
 msgid "Emulates HDD/SDD activity LED indicator, for computers without one"
 msgstr ""
 "Émule le voyant d'activité du disque dur/SSD pour les ordinateurs qui n'en "
-"sont pas équipés."
+"sont pas équipés"
