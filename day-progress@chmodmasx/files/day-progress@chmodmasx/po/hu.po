@@ -110,6 +110,3 @@ msgstr "Befejezési óra"
 #. settings-schema.json->end-hour->tooltip
 msgid "Hour at which the indicator ends"
 msgstr "Az óra, amikor a mutató véget ér"
-
-#~ msgid "Hour at which the indicator ends"
-#~ msgstr "Az óra, amikor a mutató véget ér"
