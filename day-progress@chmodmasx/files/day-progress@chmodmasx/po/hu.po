@@ -108,12 +108,5 @@ msgid "End hour"
 msgstr "Befejezési óra"
 
 #. settings-schema.json->end-hour->tooltip
-msgid ""
-"Hour at which the indicator ends.\n"
-"For a duration of 24 hours, enter the same Start and End hours."
-msgstr ""
-"Az az óra, amikor a jelző véget ér.\n"
-"24 órás időtartam esetén adja meg ugyanazt a kezdő és befejező órát."
-
-#~ msgid "Hour at which the indicator ends"
-#~ msgstr "Az óra, amikor a mutató véget ér"
+msgid "Hour at which the indicator ends"
+msgstr "Az óra, amikor a mutató véget ér"

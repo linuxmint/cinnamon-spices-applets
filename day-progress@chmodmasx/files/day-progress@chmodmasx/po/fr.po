@@ -109,9 +109,5 @@ msgid "End hour"
 msgstr "Heure de fin"
 
 #. settings-schema.json->end-hour->tooltip
-msgid ""
-"Hour at which the indicator ends.\n"
-"For a duration of 24 hours, enter the same Start and End hours."
-msgstr ""
-"Heure à laquelle l'indicateur finit.\n"
-"Pour une durée de 24 heures, indiquer la même heure de Début et de Fin."
+msgid "Hour at which the indicator ends"
+msgstr "Heure à laquelle l'indicateur finit"
