@@ -1,6 +1,7 @@
 const Applet = imports.ui.applet;
 const Mainloop = imports.mainloop;
 const GLib = imports.gi.GLib;
+const ByteArray = imports.byteArray;
 
 class MyApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instance_id) {
@@ -26,7 +27,7 @@ class MyApplet extends Applet.TextIconApplet {
 
             let total_r = 0;
             let total_w = 0;
-            let lines = content.toString().split('\n');
+            let lines = ByteArray.toString(content).split('\n');
 
             for (let line of lines) {
                 let parts = line.trim().split(/\s+/);
