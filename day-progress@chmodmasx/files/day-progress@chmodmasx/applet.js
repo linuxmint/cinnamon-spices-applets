@@ -235,12 +235,8 @@ DayProgressApplet.prototype = {
 
         let percentElapsedOfPeriod;
         
-        // If startHour and endHour are equal, consider it as a full 24-hour period
-        if (this.startHour === this.endHour && this.startMinute === this.endMinute) {
-            percentElapsedOfPeriod = currentTimeFraction;
-        }
         // No midnight wrap-around
-        else if (endTimeFraction > startTimeFraction) {
+        if (endTimeFraction > startTimeFraction) {
             percentElapsedOfPeriod = this.mapNumber(
                 this.clamp(currentTimeFraction, startTimeFraction, endTimeFraction),
                 startTimeFraction, endTimeFraction, 0, 1
@@ -266,9 +262,7 @@ DayProgressApplet.prototype = {
         this.pie.setAngle((this.showElapsed ? percentElapsedOfPeriod : percentRemainingOfPeriod) * (Math.PI * 2.0));
 
         let duration;
-        if (this.startHour === this.endHour && this.startMinute === this.endMinute) {
-            duration = 1; // Full 24 hours
-        } else if (endTimeFraction > startTimeFraction) {
+        if (endTimeFraction > startTimeFraction) {
             duration = (endTimeFraction - startTimeFraction);
         } else {
             duration = (1 - (startTimeFraction - endTimeFraction));
