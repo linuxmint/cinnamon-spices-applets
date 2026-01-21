@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-01-21 17:50+0100\n"
-"PO-Revision-Date: 2025-11-21 20:35-0300\n"
+"PO-Revision-Date: 2026-01-21 14:34-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -477,7 +477,7 @@ msgstr "Tecla de acceso rápido"
 
 #. 6.6->settings-schema.json->preset_selected_keybind->description
 msgid "Choose a shortcut to copy"
-msgstr ""
+msgstr "Elija un atajo para copiar"
 
 #. 6.6->settings-schema.json->preset_selected_keybind->tooltip
 msgid ""
@@ -486,10 +486,14 @@ msgid ""
 "Once selected, click on the button below, then edit the item to paste "
 "(Ctrl+V) this shortcut."
 msgstr ""
+"Le ayuda a seleccionar un atajo de teclado para utilizarlo en cualquiera de "
+"los elementos mencionados anteriormente.\n"
+"Una vez seleccionado, haga clic en el botón de abajo y, a continuación, "
+"edite el elemento para pegar (Ctrl+V) este atajo."
 
 #. 6.6->settings-schema.json->preset_copy_keybind->description
 msgid "Copy this shortcut to the clipboard"
-msgstr ""
+msgstr "Copiar este atajo de teclado al portapapeles"
 
 #. 6.6->settings-schema.json->preset_sunrise_sunset_button->description
 #. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
