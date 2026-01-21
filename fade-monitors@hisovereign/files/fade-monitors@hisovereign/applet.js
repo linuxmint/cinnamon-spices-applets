@@ -22,20 +22,20 @@ class FadeMonitorsApplet extends Applet.IconApplet {
         // Cache dimming state
         this._dimmingEnabled = this._isDimmingEnabled();
 
+        this._alreadyRunningNotified = false;
+
         // Build menu items and start script
         this._buildMenu();
         this._startScript();
     }
 
     on_applet_clicked() {
-        // Sync the toggle state every time menu opens
         this._dimmingEnabled = this._isDimmingEnabled();
         this._refreshToggleLabel();
         this.menu.toggle();
     }
 
     _buildMenu() {
-        // Dimming toggle item
         this.toggleItem = new PopupMenu.PopupMenuItem("", { reactive: true });
         this.menu.addMenuItem(this.toggleItem);
 
@@ -45,14 +45,12 @@ class FadeMonitorsApplet extends Applet.IconApplet {
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        // Settings item → opens the script
         let settingsItem = new PopupMenu.PopupMenuItem("Settings");
         settingsItem.connect("activate", () => {
             GLib.spawn_command_line_async(`xdg-open "${SCRIPT_PATH}"`);
         });
         this.menu.addMenuItem(settingsItem);
 
-        // Initial label update
         this._refreshToggleLabel();
     }
 
@@ -61,7 +59,7 @@ class FadeMonitorsApplet extends Applet.IconApplet {
     }
 
     _refreshToggleLabel() {
-        this.toggleItem.label.text = this._dimmingEnabled ? "Dimming: On" : "Dimming: Off";
+        this.toggleItem.label.text = this._dimmingEnabled ? "Dimming: On" : "Dimming: off";
     }
 
     _toggleDimming() {
@@ -71,19 +69,31 @@ class FadeMonitorsApplet extends Applet.IconApplet {
             GLib.file_set_contents(TOGGLE_FILE, "");
         }
 
-        // Flip state
         this._dimmingEnabled = !this._dimmingEnabled;
-
-        // Update menu label immediately
         this._refreshToggleLabel();
 
-        // Force repaint if menu is open
         if (this.menu.isOpen) {
             this.toggleItem.actor.queue_repaint();
         }
     }
 
+    // --- ADDITIVE: process detection ---
+    _isScriptRunning() {
+        try {
+            let [ok, stdout] = GLib.spawn_command_line_sync(
+                `pgrep -f "${SCRIPT_PATH}"`
+            );
+            return ok && stdout && stdout.toString().trim().length > 0;
+        } catch (e) {
+            return false;
+        }
+    }
+
     _startScript() {
+        if (this._isScriptRunning()) {
+            return;
+        }
+
         GLib.spawn_async(
             null,
             ["/usr/bin/bash", SCRIPT_PATH],
