@@ -1,6 +1,7 @@
 {
   "uuid": "fade-monitors@hisovereign",
   "name": "Fade Monitors",
-  "description": "See pull request description.",
-  "max-instances": 1
+  "description": "Toggle applet for Fade Monitors time-based script.",
+  "version": "1.0",
+  "author": "hisovereign" 
 }
