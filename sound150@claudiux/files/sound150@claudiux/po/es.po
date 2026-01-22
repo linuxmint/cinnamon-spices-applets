@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-01-21 23:25+0100\n"
-"PO-Revision-Date: 2026-01-11 22:12-0300\n"
+"PO-Revision-Date: 2026-01-21 21:15-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1411,15 +1411,15 @@ msgstr "Comando"
 
 #. 6.6->settings-schema.json->adv_avoid->description
 msgid "Try to avoid advertisement"
-msgstr ""
+msgstr "Intenta evitar la publicidad"
 
 #. 6.6->settings-schema.json->adv_volume->description
 msgid "Volume during advertisements"
-msgstr ""
+msgstr "Volumen durante los anuncios publicitarios"
 
 #. 6.6->settings-schema.json->adv_icon->description
 msgid "Symbolic icon displayed during advertisements"
-msgstr ""
+msgstr "Icono simbólico que se muestra durante los anuncios publicitarios"
 
 #. 6.6->settings-schema.json->adv_label->description
 msgid ""
@@ -1428,15 +1428,18 @@ msgid ""
 "the value indicated above.\n"
 "The volume is restored at the end of the advertisement."
 msgstr ""
+"Los anuncios se detectan mediante el título.\n"
+"Cuando un título contiene al menos una de estas palabras, el volumen se "
+"reduce al valor indicado anteriormente.\n"
+"El volumen se restablece al final del anuncio."
 
 #. 6.6->settings-schema.json->adv_list->description
 msgid "Advertisement list"
-msgstr ""
+msgstr "Lista de anuncios"
 
 #. 6.6->settings-schema.json->adv_list->columns->title
-#, fuzzy
 msgid "Part of title"
-msgstr "Parte del nombre del dispositivo"
+msgstr "Parte del título"
 
 #. 2.8->settings-schema.json->percentMaxVol->options
 #. 3.4->settings-schema.json->percentMaxVol->options
