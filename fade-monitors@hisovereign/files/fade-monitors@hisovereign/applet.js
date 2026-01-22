@@ -3,30 +3,36 @@ const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
 
 let UUID = "fade-monitors@hisovereign";
-let TOGGLE_FILE = GLib.get_home_dir() + "/.fade_mouse_enabled";
-let SCRIPT_PATH = GLib.get_home_dir() + "/.local/bin/fade-monitors-2d-time-based.sh";
+
+const HOME = GLib.get_home_dir();
+const TOGGLE_FILE = HOME + "/.fade_mouse_enabled";
+const STOP_FILE   = HOME + "/.fade_mouse_stopped";
+const SCRIPT_PATH = HOME + "/.local/bin/fade-monitors-2d-time-based.sh";
 
 class FadeMonitorsApplet extends Applet.IconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
 
-        // Set icon and tooltip
         this.set_applet_icon_symbolic_name("video-display-symbolic");
         this.set_applet_tooltip("Fade Monitors");
 
-        // Create the menu
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menuManager.addMenu(this.menu);
 
-        // Cache dimming state
         this._dimmingEnabled = this._isDimmingEnabled();
 
-        this._alreadyRunningNotified = false;
-
-        // Build menu items and start script
         this._buildMenu();
+    }
+
+    /* ---------------- Cinnamon lifecycle ---------------- */
+
+    on_applet_added_to_panel() {
         this._startScript();
+    }
+
+    on_applet_removed_from_panel() {
+        this._stopScript();
     }
 
     on_applet_clicked() {
@@ -35,8 +41,10 @@ class FadeMonitorsApplet extends Applet.IconApplet {
         this.menu.toggle();
     }
 
+    /* ---------------- Menu ---------------- */
+
     _buildMenu() {
-        this.toggleItem = new PopupMenu.PopupMenuItem("", { reactive: true });
+        this.toggleItem = new PopupMenu.PopupMenuItem("");
         this.menu.addMenuItem(this.toggleItem);
 
         this.toggleItem.connect("activate", () => {
@@ -45,7 +53,7 @@ class FadeMonitorsApplet extends Applet.IconApplet {
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        let settingsItem = new PopupMenu.PopupMenuItem("Settings");
+        let settingsItem = new PopupMenu.PopupMenuItem("Open Script");
         settingsItem.connect("activate", () => {
             GLib.spawn_command_line_async(`xdg-open "${SCRIPT_PATH}"`);
         });
@@ -54,45 +62,33 @@ class FadeMonitorsApplet extends Applet.IconApplet {
         this._refreshToggleLabel();
     }
 
+    /* ---------------- Toggle logic ---------------- */
+
     _isDimmingEnabled() {
         return GLib.file_test(TOGGLE_FILE, GLib.FileTest.EXISTS);
     }
 
     _refreshToggleLabel() {
-        this.toggleItem.label.text = this._dimmingEnabled ? "Dimming: On" : "Dimming: off";
+        this.toggleItem.label.text =
+            this._dimmingEnabled ? "Dimming: On" : "Dimming: off";
     }
 
     _toggleDimming() {
         if (this._dimmingEnabled) {
-            GLib.unlink(TOGGLE_FILE);
+            try { GLib.unlink(TOGGLE_FILE); } catch (e) {}
         } else {
             GLib.file_set_contents(TOGGLE_FILE, "");
         }
 
         this._dimmingEnabled = !this._dimmingEnabled;
         this._refreshToggleLabel();
-
-        if (this.menu.isOpen) {
-            this.toggleItem.actor.queue_repaint();
-        }
     }
 
-    // --- ADDITIVE: process detection ---
-    _isScriptRunning() {
-        try {
-            let [ok, stdout] = GLib.spawn_command_line_sync(
-                `pgrep -f "${SCRIPT_PATH}"`
-            );
-            return ok && stdout && stdout.toString().trim().length > 0;
-        } catch (e) {
-            return false;
-        }
-    }
+    /* ---------------- Script control ---------------- */
 
     _startScript() {
-        if (this._isScriptRunning()) {
-            return;
-        }
+        // Remove stop gate 
+        try { GLib.unlink(STOP_FILE); } catch (e) {}
 
         GLib.spawn_async(
             null,
@@ -101,6 +97,16 @@ class FadeMonitorsApplet extends Applet.IconApplet {
             GLib.SpawnFlags.DO_NOT_REAP_CHILD,
             null
         );
+    }
+
+    _stopScript() {
+        // Create stop gate
+        GLib.file_set_contents(STOP_FILE, "");
+
+        // Kill running instance
+        try {
+            GLib.spawn_command_line_async(`pkill -f "${SCRIPT_PATH}"`);
+        } catch (e) {}
     }
 }
 
