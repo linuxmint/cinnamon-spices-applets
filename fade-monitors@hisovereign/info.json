@@ -1,7 +1,8 @@
 {
   "uuid": "fade-monitors@hisovereign",
   "name": "Fade Monitors",
-  "description": "Toggle applet for Fade Monitors time-based script.",
+  "description": "Panel applet to toggle mouse-based monitor dimming and open Fade Monitors time-based script.",
   "version": "1.0",
-  "author": "hisovereign" 
+  "author": "hisovereign",
+  "license": "GPL-2.0+"
 }
