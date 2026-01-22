@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-01-21 23:25+0100\n"
-"PO-Revision-Date: 2026-01-21 21:15-0300\n"
+"PO-Revision-Date: 2026-01-22 13:22-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1172,7 +1172,7 @@ msgstr "Eliminar extensiones incompatibles"
 
 #. 6.6->settings-schema.json->sectionSound6->title
 msgid "Advertisement"
-msgstr ""
+msgstr "Anuncio"
 
 #. 6.6->settings-schema.json->sectionCommands->title
 #. 6.4->settings-schema.json->sectionCommands->title
