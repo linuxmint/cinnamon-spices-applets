@@ -44,7 +44,8 @@
         "sectionSound2",
         "sectionSound3",
         "sectionSound4",
-        "sectionSound5"
+        "sectionSound5",
+        "sectionSound6"
       ]
     },
     "page_shortcuts": {
@@ -213,6 +214,18 @@
         "remove_OsdWithNumberATJosephMcc"
       ]
     },
+    "sectionSound6": {
+      "type": "section",
+      "title": "Advertisement",
+      "keys": [
+        "adv_avoid",
+        "adv_volume",
+        "adv_old_volume",
+        "adv_icon",
+        "adv_label",
+        "adv_list"
+      ]
+    },
     "sectionShortcuts1": {
       "type": "section",
       "title": "Shortcuts",
@@ -244,8 +257,8 @@
   "userMenuWidth": {
     "type": "scale",
     "default": 450,
-    "min": 450,
-    "max": 600,
+    "min": 300,
+    "max": 6000,
     "step": 10,
     "description": "Menu width (in pixels)",
     "show-value": true
@@ -338,10 +351,12 @@
     "description": "In the list below, add a line containing part of its name (case sensitive) for each unwanted device."
   },
   "ignoredOutputDevices": {
-     "type": "list",
-     "description": "Unwanted devices",
-     "default": [],
-     "columns": [
+    "type": "list",
+    "description": "Unwanted devices",
+    "default": [
+
+    ],
+    "columns": [
       {
         "id": "partOfName",
         "title": "Part of the device name",
@@ -356,10 +371,12 @@
     "description": "In the list below, add a line containing part of its name (case sensitive) for each unwanted device."
   },
   "ignoredInputDevices": {
-     "type": "list",
-     "description": "Unwanted devices",
-     "default": [],
-     "columns": [
+    "type": "list",
+    "description": "Unwanted devices",
+    "default": [
+
+    ],
+    "columns": [
       {
         "id": "partOfName",
         "title": "Part of the device name",
@@ -828,6 +845,63 @@
     "type": "button",
     "description": "Remove the OsdWithNumber extension",
     "callback": "_on_remove_OsdWithNumber_from_extensions"
+  },
+  "adv_avoid": {
+    "type": "switch",
+    "description": "Try to avoid advertisement",
+    "default": false
+  },
+  "adv_volume": {
+    "type": "combobox",
+    "description": "Volume during advertisements",
+    "default": "1%",
+    "options": {
+      "1%": "1%",
+      "2%": "2%",
+      "3%": "3%",
+      "4%": "4%",
+      "5%": "5%",
+      "6%": "6%",
+      "7%": "7%",
+      "8%": "8%",
+      "9%": "9%",
+      "10%": "10%"
+    },
+    "tooltip": "% of nominal volume"
+  },
+  "adv_old_volume": {
+    "type": "generic",
+    "default": "50%"
+  },
+  "adv_icon": {
+    "type": "iconfilechooser",
+    "description": "Symbolic icon displayed during advertisements",
+    "default": "~/.local/share/cinnamon/applets/sound150@claudiux/6.6/icons/pause-large-symbolic.svg"
+  },
+  "adv_label": {
+    "type": "label",
+    "description": "Advertisements are detected using the title.\nWhen a title contains at least one of these words, the volume is reduced to the value indicated above.\nThe volume is restored at the end of the advertisement."
+  },
+  "adv_list": {
+    "type": "list",
+    "description": "Advertisement list",
+    "default": [
+      {
+        "adv": "Advert"
+      },
+      {
+        "adv": "Spot"
+      }
+    ],
+    "columns": [
+      {
+        "id": "adv",
+        "title": "Part of title",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      }
+    ]
   },
   "VOLUME_ADJUSTMENT_STEP": {
     "type": "generic",

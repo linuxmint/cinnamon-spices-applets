@@ -7,20 +7,20 @@
 
 function urldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
 
-SONG_ART_DIR=${XDG_RUNTIME_DIR}/AlbumArt/song-art
-ARTDIR=$XDG_RUNTIME_DIR/sound150/arts
-ICONDIR=$XDG_RUNTIME_DIR/sound150/icons
+ALBUMART_ART_DIR=${XDG_RUNTIME_DIR}/AlbumArt/song-art
+SOUND150_ART_DIR=$XDG_RUNTIME_DIR/sound150/arts
+SOUND150_ICON_DIR=$XDG_RUNTIME_DIR/sound150/icons
 MPV_RADIO_PID=${XDG_RUNTIME_DIR}/mpv_radio_PID
 MAKEICON=$HOME/.local/share/cinnamon/applets/sound150@claudiux/scripts/make_icon.sh
 superRND=$((RANDOM*RANDOM))
 
-[[ -d ${SONG_ART_DIR} ]] || mkdir -p ${SONG_ART_DIR}
-[[ -d ${ARTDIR} ]] || mkdir -p ${ARTDIR}
-[[ -d ${ICONDIR} ]] || mkdir -p ${ICONDIR}
+[[ -d ${ALBUMART_ART_DIR} ]] || mkdir -p ${ALBUMART_ART_DIR}
+[[ -d ${SOUND150_ART_DIR} ]] || mkdir -p ${SOUND150_ART_DIR}
+[[ -d ${SOUND150_ICON_DIR} ]] || mkdir -p ${SOUND150_ICON_DIR}
 
-[[ -d $ARTDIR ]] && {
+[[ -d $SOUND150_ART_DIR ]] && {
         OLDPWD=$PWD
-        cd $ARTDIR
+        cd $SOUND150_ART_DIR
         for f in $(ls -At1); do {
                 size=$(wc -c <"$f")
                 [[ $size -eq 0 ]] && rm -f "$f"
@@ -29,16 +29,17 @@ superRND=$((RANDOM*RANDOM))
 }
 
 [[ -f MPV_RADIO_PID ]] && {
-        [[ -d $SONG_ART_DIR ]] && {
-                RET=""
-                for f in $(ls -t1 $SONG_ART_DIR); do {
+        [[ -d $ALBUMART_ART_DIR ]] && {
+                #~ RET=""
+                for f in $(ls -t1 $ALBUMART_ART_DIR); do {
                         [[ -z $f ]] && {
                                 exit 1
                         } || {
-                                #~ [[ $DEBUG == true ]] && echo "$SONG_ART_DIR/$f" >> $HOME/sound150.log # DEBUGGING
-                                #~ $MAKEICON "$SONG_ART_DIR/$f" &
-                                $MAKEICON "$SONG_ART_DIR/$f"
-                                echo -n "$SONG_ART_DIR/$f"
+                                #~ [[ $DEBUG == true ]] && echo "$ALBUMART_ART_DIR/$f" >> $HOME/sound150.log # DEBUGGING
+                                #~ $MAKEICON "$ALBUMART_ART_DIR/$f" &
+                                [[ -f $SOUND150_ART_DIR/$f ]] || cp -f "$ALBUMART_ART_DIR/$f" "$SOUND150_ART_DIR/"
+                                $MAKEICON "$ALBUMART_ART_DIR/$f"
+                                echo -n "$ALBUMART_ART_DIR/$f"
                                 break
                                 exit 0
                         }
@@ -69,24 +70,25 @@ rm -f ${OLDTITLEFILE}
 echo -n "${TITLE}" > ${OLDTITLEFILE}
 
 OLDPWD=$PWD
-cd $SONG_ART_DIR
+cd $ALBUMART_ART_DIR
 nbr=$(ls -1qt | wc -l)
 [[ $nbr -gt 1 ]] && {
         ls -1qt | tail -n 1 | xargs -I {} rm {}
 }
 cd $OLDPWD
 
-[[ -d $SONG_ART_DIR ]] && {
+[[ -d $ALBUMART_ART_DIR ]] && {
         [[ "${TITLE}" != "$OLDTITLE" ]] && {
-                rm -f $SONG_ART_DIR/albumArt*
-                rm -f ${ICONDIR}/R*
+                rm -f $ALBUMART_ART_DIR/albumArt*
+                rm -f ${SOUND150_ICON_DIR}/R*
         }
-        RET=""
-        for f in $(ls -At1 $SONG_ART_DIR); do {
+        #~ RET=""
+        for f in $(ls -At1 $ALBUMART_ART_DIR); do {
                 [[ -z $f ]] || {
-                        #~ [[ $DEBUG == true ]] && echo "$SONG_ART_DIR/$f" >> $HOME/sound150.log # DEBUGGING
-                        $MAKEICON "$SONG_ART_DIR/$f"
-                        echo -n "$SONG_ART_DIR/$f"
+                        #~ [[ $DEBUG == true ]] && echo "$ALBUMART_ART_DIR/$f" >> $HOME/sound150.log # DEBUGGING
+                        $MAKEICON "$ALBUMART_ART_DIR/$f"
+                        [[ -f $SOUND150_ART_DIR/$f ]] || cp -f "$ALBUMART_ART_DIR/$f" "$SOUND150_ART_DIR/"
+                        echo -n "$ALBUMART_ART_DIR/$f"
                         break
                         exit 0
                 }
@@ -94,12 +96,12 @@ cd $OLDPWD
 }
 
 
-[[ -d $ARTDIR ]] && {
-        [[ "${TITLE}" != "$OLDTITLE" ]] && rm -f $ARTDIR/*
+[[ -d $SOUND150_ART_DIR ]] && {
+        [[ "${TITLE}" != "$OLDTITLE" ]] && rm -f $SOUND150_ART_DIR/*
 }
 
 ARTFILE="R3SongArt$superRND.png"
-PATHTOFILE="$ARTDIR/$ARTFILE"
+PATHTOFILE="$SOUND150_ART_DIR/$ARTFILE"
 
 
 XESAM_URL=$(playerctl -a metadata "xesam:url")
@@ -124,10 +126,10 @@ OLDXESAMURLFILE=$XDG_RUNTIME_DIR/sound150/oldxesamurl
 }
 oldxesamurl=$(cat $OLDXESAMURLFILE)
 [[ "$XESAM_URL" == "$oldxesamurl" ]] && {
-        for f in $(ls -1Aq $SONG_ART_DIR); do {
-                #~ [[ $DEBUG == true ]] && echo "$SONG_ART_DIR/$f" >> $HOME/sound150.log # DEBUGGING
-                cp -af "$SONG_ART_DIR/$f" $ARTDIR/
-                echo -n "$SONG_ART_DIR/$f"
+        for f in $(ls -1Aq $ALBUMART_ART_DIR); do {
+                #~ [[ $DEBUG == true ]] && echo "$ALBUMART_ART_DIR/$f" >> $HOME/sound150.log # DEBUGGING
+                cp -af "$ALBUMART_ART_DIR/$f" $SOUND150_ART_DIR/
+                echo -n "$ALBUMART_ART_DIR/$f"
                 break
         }; done
         exit 0
@@ -135,10 +137,10 @@ oldxesamurl=$(cat $OLDXESAMURLFILE)
 echo -n $XESAM_URL > $OLDXESAMURLFILE
 
 [[ ! -z "$OLDTITLE" && "$OLDTITLE"=="$TITLE" ]] && {
-        for f in $(ls -At1 $ARTDIR); do {
+        for f in $(ls -At1 $SOUND150_ART_DIR); do {
                 [[ -z $f ]] || {
-                        #~ [[ $DEBUG == true ]] && echo "$ARTDIR/$f" >> $HOME/sound150.log # DEBUGGING
-                        echo -n "$ARTDIR/$f"
+                        #~ [[ $DEBUG == true ]] && echo "$SOUND150_ART_DIR/$f" >> $HOME/sound150.log # DEBUGGING
+                        echo -n "$SOUND150_ART_DIR/$f"
                         exit 0
                 }
         }; done
@@ -168,8 +170,9 @@ rm -f $HOME/mimetype.txt
         }
 }
 
-cp -a "$PATHTOFILE" $SONG_ART_DIR/$ARTFILE
+cp -a "$PATHTOFILE" $ALBUMART_ART_DIR/$ARTFILE
 #~ [[ $DEBUG == true ]] && echo "" >> $HOME/sound150.log # DEBUGGING
-$MAKEICON "$SONG_ART_DIR/$ARTFILE"
-echo -n "$SONG_ART_DIR/$ARTFILE"
+$MAKEICON "$ALBUMART_ART_DIR/$ARTFILE"
+[[ -f $SOUND150_ART_DIR/$ARTFILE ]] || cp -a "$PATHTOFILE" $SOUND150_ART_DIR/$ARTFILE
+echo -n "$ALBUMART_ART_DIR/$ARTFILE"
 exit 0

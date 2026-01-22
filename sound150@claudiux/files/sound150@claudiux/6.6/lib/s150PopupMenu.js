@@ -24,6 +24,7 @@ const { ControlButton } = require("./lib/controlButton");
 const { VolumeSlider } = require("./lib/volumeSlider");
 const Interfaces = imports.misc.interfaces;
 const Clutter = imports.gi.Clutter;
+const GdkPixbuf = imports.gi.GdkPixbuf;
 const Slider = imports.ui.slider;
 const Gettext = imports.gettext;
 const Pango = imports.gi.Pango;
@@ -60,6 +61,19 @@ function kill_playerctld() {
     Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
 }
 
+function getImageAtScale(imageFileName, width, height) {
+  let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(imageFileName, width, height);
+  let image = new Clutter.Image();
+  image.set_data(
+    pixBuf.get_pixels(),
+    pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
+    width, height,
+    pixBuf.get_rowstride()
+  );
+  let actor = new Clutter.Actor({width: width, height: height});
+  actor.set_content(image);
+  return actor;
+}
 
 // Text wrapper
 const formatTextWrap = (text, maxLineLength) => {
@@ -951,7 +965,7 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._cover_path = null;
                 }
             } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
-                //del_song_arts();
+                //~ del_song_arts(); //FIXME: is it useless???
                 if (GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
                     if (! baseName.startsWith("R3SongArt")) {
                         rnd = randomIntegerInInterval(0, superRND).toString();
@@ -1022,6 +1036,7 @@ class Player extends PopupMenu.PopupMenuSection {
                         filename: cover_path
                     });
                 }
+                this.cover.icon_size = Math.trunc(300 * this._applet.real_ui_scale);
                 //~ this.display_cover_button.show();
             } catch (e) {}
         }
@@ -1051,19 +1066,19 @@ class Player extends PopupMenu.PopupMenuSection {
                     mb = 100;
                     break;
                 case 1.0:
-                    mb = 120;
+                    mb = 133; //120;
                     break;
                 case 1.25:
-                    mb = 140;
+                    mb = 167; //140;
                     break;
                 case 1.5:
-                    mb = 165;
+                    mb = 200; //165;
                     break;
                 case 1.75:
-                    mb = 195;
+                    mb = 233; //195;
                     break;
                 default:
-                    mb = 220;
+                    mb = 267; //220;
             }
         }
         actor.set_margin_bottom(mb);

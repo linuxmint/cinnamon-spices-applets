@@ -1,3 +1,6 @@
+### v13.10.0~20260121
+  * Try to avoid advertisements by detecting certain words in the title, defined by the user.
+
 ### v13.9.3~20260114
   * User can set menu width (for Cinnamon 6.4).
   * Fixes [#8175](https://github.com/linuxmint/cinnamon-spices-applets/issues/8175)

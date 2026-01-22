@@ -298,7 +298,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         if (this.app_icon == null) {
             this.icon.icon_name = iconNameWithoutMic;
             this.button.setIconName(iconNameWithoutMic);
-            if (this.isOutputSink)
+            if (this.isOutputSink && !this.applet.keepAlbumArtIcon)
                 this.applet.set_applet_icon_symbolic_name(iconName);
         }
         this.setValue(value);

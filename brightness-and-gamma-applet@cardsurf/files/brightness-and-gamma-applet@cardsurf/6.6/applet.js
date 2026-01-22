@@ -71,6 +71,8 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.baga_icon = "baga"; //"sun"; //"baga";
         this.set_applet_icon_name(this.baga_icon + "-on");
         this.settingsWindow = undefined;
+        
+        this._clipboard = St.Clipboard.get_default();
 
         this.bagaShortcuts = [];
         this.screen_outputs = {};
@@ -346,6 +348,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ["maximum_gamma", this.on_gamma_range_changed],
                         ["options_type", this.on_options_type_changed],
                         ["preset_list", this.on_preset_list_changed],
+                        ["preset_selected_keybind", null],
                         ["baga_icon", this.on_gui_icon_changed],
                         ["last_values_string", null] ]) {
                 this.settings.bind(property_name, property_name, callback, null);
@@ -1325,6 +1328,10 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.update_xrandr();
         this.update_tooltip();
         this._init_menu_item_presets();
+    }
+    
+    on_preset_copy_shortcut() {
+        this._clipboard.set_text(St.ClipboardType.CLIPBOARD, this.preset_selected_keybind);
     }
 
     on_preset_sunrise_sunset_button_clicked() {

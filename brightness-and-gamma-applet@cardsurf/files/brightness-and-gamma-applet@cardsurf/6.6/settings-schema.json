@@ -53,6 +53,8 @@
             "keys": [
                 "preset_label",
                 "preset_list",
+                "preset_selected_keybind",
+                "preset_copy_keybind",
                 "preset_sunrise_sunset_button",
                 "preset_reload",
                 "smooth_duration-label",
@@ -238,7 +240,7 @@
             {"id": "gamma_blue", "title": "Gamma\nBlue", "type": "integer", "align": 0.5, "min": 0, "max": 200},
             {"id": "start_at_sunrise", "title": "Start at\nSunrise", "type": "boolean", "align": 0.5},
             {"id": "start_at_sunset", "title": "Start at\nSunset", "type": "boolean", "align": 0.5},
-            {"id": "shortcut", "title": "Hotkey", "type": "keybinding", "default": "::"}
+            {"id": "shortcut", "title": "Hotkey", "type": "string", "default": "::"}
         ],
         "default": [
             {
@@ -272,6 +274,19 @@
                 "start_at_sunset": false
             }
         ]
+    },
+    
+    "preset_selected_keybind": {
+        "type": "keybinding",
+        "default": "::",
+        "description": "Choose a shortcut to copy",
+        "tooltip": "Helps you select a keyboard shortcut to use in any of the items listed above.\nOnce selected, click on the button below, then edit the item to paste (Ctrl+V) this shortcut."
+    },
+    
+    "preset_copy_keybind": {
+        "type": "button",
+        "description": "Copy this shortcut to the clipboard",
+        "callback": "on_preset_copy_shortcut"
     },
 
     "preset_sunrise_sunset_button": {
