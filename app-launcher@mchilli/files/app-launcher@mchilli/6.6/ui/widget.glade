@@ -2,46 +2,6 @@
 <!-- Generated with glade 3.40.0 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkImage" id="add">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-    <property name="pixbuf">../../icons/add-symbolic.svg</property>
-  </object>
-  <object class="GtkImage" id="cancel">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-    <property name="pixbuf">../../icons/undo-symbolic.svg</property>
-  </object>
-  <object class="GtkImage" id="copy">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-    <property name="pixbuf">../../icons/content_copy-symbolic.svg</property>
-  </object>
-  <object class="GtkImage" id="down">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-    <property name="pixbuf">../../icons/down-symbolic.svg</property>
-  </object>
-  <object class="GtkImage" id="edit">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-    <property name="pixbuf">../../icons/edit-symbolic.svg</property>
-  </object>
-  <object class="GtkImage" id="remove">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-    <property name="pixbuf">../../icons/remove-symbolic.svg</property>
-  </object>
-  <object class="GtkImage" id="save">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-    <property name="pixbuf">../../icons/save-symbolic.svg</property>
-  </object>
-  <object class="GtkImage" id="up">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-    <property name="pixbuf">../../icons/up-symbolic.svg</property>
-  </object>
   <object class="GtkBox" id="custom_widget">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
@@ -66,7 +26,7 @@
             </child>
             <child>
               <object class="GtkTreeViewColumn">
-                <property name="title">Icon</property>
+                <property name="title" translatable="yes">Icon</property>
                 <child>
                   <object class="GtkCellRendererPixbuf"/>
                   <attributes>
@@ -77,7 +37,7 @@
             </child>
             <child>
               <object class="GtkTreeViewColumn">
-                <property name="title">Name</property>
+                <property name="title" translatable="yes">Name</property>
                 <child>
                   <object class="GtkCellRendererText"/>
                   <attributes>
@@ -88,7 +48,7 @@
             </child>
             <child>
               <object class="GtkTreeViewColumn">
-                <property name="title">Command</property>
+                <property name="title" translatable="yes">Command</property>
                 <child>
                   <object class="GtkCellRendererText">
                     <property name="style">italic</property>
@@ -117,7 +77,7 @@
           <object class="GtkMenuToolButton" id="add_button">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="icon-widget">add</property>
+            <property name="icon-name">add-symbolic</property>
             <signal name="clicked" handler="on_add_item" swapped="no"/>
             <child type="menu">
               <object class="GtkMenu">
@@ -143,7 +103,7 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="icon-widget">edit</property>
+            <property name="icon-name">edit-symbolic</property>
             <signal name="clicked" handler="on_edit_item" swapped="no"/>
           </object>
           <packing>
@@ -156,7 +116,7 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="icon-widget">copy</property>
+            <property name="icon-name">duplicate-symbolic</property>
             <signal name="clicked" handler="on_duplicate_item" swapped="no"/>
           </object>
           <packing>
@@ -179,7 +139,7 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="icon-widget">up</property>
+            <property name="icon-name">up-symbolic</property>
             <signal name="clicked" handler="on_move_item_up" swapped="no"/>
           </object>
           <packing>
@@ -192,7 +152,7 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="icon-widget">down</property>
+            <property name="icon-name">down-symbolic</property>
             <signal name="clicked" handler="on_move_item_down" swapped="no"/>
           </object>
           <packing>
@@ -215,7 +175,7 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="icon-widget">remove</property>
+            <property name="icon-name">remove-symbolic</property>
             <signal name="clicked" handler="on_remove_item" swapped="no"/>
           </object>
           <packing>
@@ -237,7 +197,7 @@
           <object class="GtkToolButton" id="cancel_button">
             <property name="can-focus">False</property>
             <property name="use-underline">True</property>
-            <property name="icon-widget">cancel</property>
+            <property name="icon-name">undo-symbolic</property>
             <signal name="clicked" handler="on_cancel_changes" swapped="no"/>
           </object>
           <packing>
@@ -248,7 +208,7 @@
         <child>
           <object class="GtkToolButton" id="save_button">
             <property name="can-focus">False</property>
-            <property name="icon-widget">save</property>
+            <property name="icon-name">save-symbolic</property>
             <signal name="clicked" handler="on_save_list" swapped="no"/>
             <style>
               <class name="suggested-action"/>
