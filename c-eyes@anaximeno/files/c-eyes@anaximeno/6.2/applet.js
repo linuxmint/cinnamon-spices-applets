@@ -85,6 +85,10 @@ class Eye extends Applet.Applet {
 		this.last_blink_end = null;
 		this.blink_rate = 0.00;
 
+		this._cached_base_color = null;
+		this._cached_iris_color = null;
+		this._cached_pupil_color = null;
+
 		this.enabled = false;
 		this.set_active(true);
 		this.update_tooltip();
@@ -259,6 +263,18 @@ class Eye extends Applet.Applet {
 
 	on_property_updated(value = null) {
 		this.update_sizes();
+
+		if (this.use_alternative_colors) {
+			let [ok, color] = Clutter.Color.from_string(this.base_color);
+			this._cached_base_color = ok ? color : null;
+
+			[ok, color] = Clutter.Color.from_string(this.iris_color);
+			this._cached_iris_color = ok ? color : null;
+
+			[ok, color] = Clutter.Color.from_string(this.pupil_color);
+			this._cached_pupil_color = ok ? color : null;
+		}
+
 		this.area.queue_repaint();
 	}
 
@@ -367,14 +383,9 @@ class Eye extends Applet.Applet {
 		let pupil_color = theme_node.get_foreground_color();
 
 		if (this.use_alternative_colors) {
-			let [ok, color] = Clutter.Color.from_string(this.base_color);
-			base_color = ok ? color : base_color;
-
-			[ok, color] = Clutter.Color.from_string(this.iris_color);
-			iris_color = ok ? color : iris_color;
-
-			[ok, color] = Clutter.Color.from_string(this.pupil_color);
-			pupil_color = ok ? color : pupil_color;
+			if (this._cached_base_color) base_color = this._cached_base_color;
+			if (this._cached_iris_color) iris_color = this._cached_iris_color;
+			if (this._cached_pupil_color) pupil_color = this._cached_pupil_color;
 		}
 
 		// if (this.blink_effect_enabled) {
@@ -458,8 +469,12 @@ class Eye extends Applet.Applet {
 				should_redraw = true;
 			} else {
 				const dot_prod = current_x * last_x + current_y * last_y;
-				const cos_angle = dot_prod / Math.sqrt(last_sq_dist * current_sq_dist);
-				should_redraw = cos_angle <= this.cos_repaint_angle;
+				if (dot_prod < 0) {
+					should_redraw = true;
+				} else {
+					const limit_sq = this.cos_repaint_angle * this.cos_repaint_angle;
+					should_redraw = (dot_prod * dot_prod) <= (limit_sq * last_sq_dist * current_sq_dist);
+				}
 			}
 		}
 
