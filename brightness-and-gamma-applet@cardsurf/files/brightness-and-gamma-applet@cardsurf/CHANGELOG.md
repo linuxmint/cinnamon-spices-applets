@@ -1,3 +1,7 @@
+### v2.7.2~20260125
+* Improves the display of the menu.
+* Code cleanup.
+
 ### v2.7.1~20260121
 * Compatible with Cinnamon 6.6.
 * Allows users to edit / add presets.
