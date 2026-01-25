@@ -20,7 +20,6 @@ const uuid = "brightness-and-gamma-applet@cardsurf";
 const SunCalc = require('./lib/suncalc');
 const AppletGui = require('./lib/appletGui');
 const AppletConstants = require('./lib/appletConstants');
-//~ const ShellUtils = require('./lib/shellUtils');
 const Values = require('./lib/values');
 const {
   timeout_add_seconds,
@@ -210,24 +209,11 @@ class BrightnessAndGamma extends Applet.IconApplet {
 
     _xrandr_available() {
         return GLib.find_program_in_path(this.xrandr_name) != null;
-        //~ let process = new ShellUtils.ShellOutputProcess(["which", this.xrandr_name]);
-        //~ let output = process.spawn_sync_and_get_output();
-        //~ return output.length > 0;
     }
 
     _xrandr_version_satisfied() {
         return GLib.find_program_in_path(this.xrandr_name) != null;
-        //~ let lines = this._get_xrandr_version_lines();
-        //~ let line = this.get_line_or_empty_string(lines, this.xrandr_regex);
-        //~ return this._is_version_satisfied(line, MinXrandrVersion);
     }
-
-    //~ _get_xrandr_version_lines() {
-        //~ let process = new ShellUtils.ShellOutputProcess([this.xrandr_name, "--version"]);
-        //~ let output = process.spawn_sync_and_get_output();
-        //~ let lines = output.split('\n');
-        //~ return lines;
-    //~ }
 
     get_line_or_empty_string(lines, regex) {
         for(let line of lines) {
@@ -270,9 +256,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
 
     _randr_version_satisfied() {
         return GLib.find_program_in_path(this.randr_name) != null || GLib.find_program_in_path(this.xrandr_name) != null;
-        //~ let lines = this._get_xrandr_version_lines();
-        //~ let line = this.get_line_or_empty_string(lines, this.randr_regex);
-        //~ return this._is_version_satisfied(line, MinRandrVersion);
     }
 
 
@@ -600,9 +583,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
 
     // Override
     on_applet_added_to_panel() {
-        //~ this.themeNode = this.actor.get_theme_node();
-        //~ this.actor.style = "color: " + this.themeNode.get_foreground_color() + ";";
-        //~ this.actor.style = "color: white;";
         this.on_shortcut_changed();
         this.on_disable_nightmode_changed();
         this.set_MAX_TR_LENGTH();
@@ -650,8 +630,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
     list_screen_outputs() {
         let [success, output_content, error_content] = GLib.spawn_sync(null, [this.xrandr_name, "--query"], null, GLib.SpawnFlags.SEARCH_PATH, null);
         let output = "" + ByteArray.toString(output_content)
-        //~ let process = new ShellUtils.ShellOutputProcess([this.xrandr_name, "--query"]);
-        //~ let output = process.spawn_sync_and_get_output();
         return output;
     }
 
@@ -1103,9 +1081,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
 
     _get_screen_parameter() {
         let matches = this.number_regex.test(this.screen_name) ? this.screen_name.match(this.number_regex) : ["0"];
-        //~ let screen_index = matches.length > 0 ? matches[0] : "0";
-        //~ let parameter = screen_index.toString();
-        //~ return parameter;
         let screen_index = matches.length > 0 ? ""+matches[0] : "0";
         return screen_index;
     }
@@ -1153,14 +1128,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
         if (argv.length === 0) return;
         let command = argv.join(" ");
         Util.spawnCommandLineAsync(command);
-        //~ try {
-            //~ let xrandr_process = new ShellUtils.BackgroundProcess(argv, true);
-            //~ xrandr_process.set_callback_process_finished(this, this.on_xrandr_async_finished);
-            //~ xrandr_process.spawn_async();
-        //~ }
-        //~ catch(e) {
-            //~ global.log("Error while spawning asynchronously xrandr process: " + e.message);
-        //~ }
     }
 
     on_xrandr_async_finished(xrandr_process, pid, status) {
@@ -1180,13 +1147,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
         if (argv.length === 0) return;
         let command = argv.join(" ");
         Util.spawnCommandLine(command);
-        
-        //~ let xrandr_process = new ShellUtils.ShellOutputProcess(argv);
-        //~ let error = xrandr_process.spawn_sync_and_get_error();
-        //~ if(error.length > 0) {
-            //~ let error_message = "Error while updating brightness and gamma synchronously: " + error;
-            //~ this.log_process_error(error_message, xrandr_process.command_argv);
-        //~ }
     }
 
 
