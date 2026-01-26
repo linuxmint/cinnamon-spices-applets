@@ -1,155 +1,94 @@
 const Applet = imports.ui.applet;
-const Settings = imports.ui.settings;
-const Soup = imports.gi.Soup;
-const St = imports.gi.St;
-const Gio = imports.gi.Gio;
-const PopupMenu = imports.ui.popupMenu;
+const Lang = imports.lang;
 const Mainloop = imports.mainloop;
+const Gio = imports.gi.Gio;
+const St = imports.gi.St;
+const Settings = imports.ui.settings;
+const PopupMenu = imports.ui.popupMenu;
+const Soup = imports.gi.Soup;
 
-class MyApplet extends Applet.TextIconApplet {
-    constructor(metadata, orientation, panel_height, instance_id) {
-        super(orientation, panel_height, instance_id);
+function MyApplet(metadata, orientation, panel_height, instance_id) {
+    this._init(metadata, orientation, panel_height, instance_id);
+}
+
+MyApplet.prototype = {
+    __proto__: Applet.TextIconApplet.prototype,
+
+    _init: function (metadata, orientation, panel_height, instance_id) {
+        Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
         this.metadata = metadata;
-        this.instance_id = instance_id;
-
         this.set_applet_icon_path(this.metadata.path + "/icon.png");
-        if (this._applet_label) this._applet_label.hide();
+        this.set_applet_label(_("Loading Newsticker..."));
 
-        /* ===== DISPLAY BOX ===== */
-        this._display_bin = new St.Bin({
-            clip_to_allocation: true,
-            x_fill: true,
-            y_fill: true,
-            x_align: St.Align.START,
-            y_align: St.Align.MIDDLE
-        });
-        this.actor.add_actor(this._display_bin);
+        this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        this._setupSettings();
 
-        /* ===== SCROLL LABEL ===== */
-        this._scroll_label = new St.Label({
-            text: "",
-            style_class: "rss-label"
-        });
-        this._scroll_label.clutter_text.line_wrap = false;
-        this._display_bin.set_child(this._scroll_label);
+        this._allNews = [];
+        this._tickerText = "";
+        this._tickerPosition = 0;
+        this._error = false;
 
-        /* ===== STATE ===== */
-        this._scroll_x = 0;
-        this._content_width = 0;
-        this._ticker_id = 0;
-        this._all_news_items = [];
-        this._full_title = "Haberler yukleniyor...";
-
-        /* ===== MENU ===== */
+        // Menü
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
 
-        /* ===== SETTINGS ===== */
-        this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        this._updateFeed();
+        this._tickerLoop();
+        this._setWidth();
 
-        this.settings.bindProperty(
-            Settings.BindingDirection.IN,
-            "news_sources",
-            "news_sources",
-            this.update_news.bind(this),
-            null
-        );
+        // refresh every X seconds
+        this._refreshLoop = Mainloop.timeout_add_seconds(this.update_interval * 60, Lang.bind(this, this._updateFeed));
+    },
 
-        this.settings.bindProperty(
-            Settings.BindingDirection.IN,
-            "update_interval",
-            "update_interval",
-            this.update_news.bind(this),
-            null
-        );
+    _setupSettings: function () {
+        this.news_sources = this.settings.getValue("news_sources") || [];
+        this.tickerSeperator = "*******";
+        this.update_interval = this.settings.getValue("update_interval") || 15;
+        this.scroll_speed = this.settings.getValue("scroll_speed") || 30;
+        this.width_multiplier = this.settings.getValue("width_multiplier") || 8.5;
+        this.scroll_limit = this.settings.getValue("scroll_limit") || 30;
+        this.vertical_offset = this.settings.getValue("vertical_offset") || 5;
 
-        this.settings.bindProperty(
-            Settings.BindingDirection.IN,
-            "scroll_speed",
-            "scroll_speed",
-            null,
-            null
-        );
+        this.settings.bindProperty(Settings.BindingDirection.IN, 'news_sources', 'news_sources', this._updateFeed, null);
+        this.settings.bindProperty(Settings.BindingDirection.IN, 'update_interval', 'update_interval', this._updateFeed, null);
+        this.settings.bindProperty(Settings.BindingDirection.IN, 'scroll_speed', 'scroll_speed');
+        this.settings.bindProperty(Settings.BindingDirection.IN, 'width_multiplier', 'width_multiplier', this._setWidth, null);
+        this.settings.bindProperty(Settings.BindingDirection.IN, 'scroll_limit', 'scroll_limit');
+        this.settings.bindProperty(Settings.BindingDirection.IN, 'vertical_offset', 'vertical_offset', this._updateLabelStyle, null);
+    },
 
-        this.settings.bindProperty(
-            Settings.BindingDirection.IN,
-            "scroll_limit",
-            "scroll_limit",
-            this._set_width.bind(this),
-            null
-        );
+    _setWidth: function () {
+        let width_px = Math.round(this.width_multiplier * 15); // multiplier mantığı
+        this.actor.set_style("width: " + width_px + "px;");
+        this.actor.x_align = St.Align.MIDDLE;
+        this.tickerCharacters = Math.floor(width_px / 7);
+    },
 
-        this.settings.bindProperty(
-            Settings.BindingDirection.IN,
-            "width_multiplier",
-            "width_multiplier",
-            this._set_width.bind(this),
-            null
-        );
+    _updateLabelStyle: function () {
+        let offset = this.vertical_offset || 0;
+        this.actor.set_style(this.actor.get_style() + `margin-top: ${offset}px;`);
+    },
 
-        this.settings.bindProperty(
-            Settings.BindingDirection.IN,
-            "vertical_offset",
-            "vertical_offset",
-            this._on_vertical_offset_changed.bind(this),
-            null
-        );
+    _formatTime: function (date) {
+        let h = date.getHours().toString().padStart(2, "0");
+        let m = date.getMinutes().toString().padStart(2, "0");
+        return `[${h}:${m}]`;
+    },
 
-        this._set_width();
-        this._on_vertical_offset_changed();
-
-        Mainloop.timeout_add(1000, () => {
-            this.update_news();
-            this._run_ticker();
-        });
-    }
-
-    /* ===== WIDTH CONTROL (VISIBLE CHARACTERS) ===== */
-    _set_width() {
-        let chars = this.scroll_limit || 30;
-        let multiplier = this.width_multiplier || 8.5;
-
-        let width = Math.round(chars * multiplier);
-
-        this._display_bin.set_width(width);
-        this._display_bin.set_height(this._panelHeight);
-
-        // ticker reset
-        this._scroll_x = width;
-        this._content_width = 0;
-
-        global.logError(`[RSSDock] Box width: ${width}px (${chars} × ${multiplier})`);
-    }
-
-    _on_vertical_offset_changed() {
-        this._scroll_label.set_style(
-            "white-space: nowrap; margin-top: " + (this.vertical_offset || 0) + "px;"
-        );
-    }
-
-    _format_time(d) {
-        return `[${d.getHours().toString().padStart(2, "0")}:${d
-            .getMinutes()
-            .toString()
-            .padStart(2, "0")}]`;
-    }
-
-    /* ===== RSS UPDATE ===== */
-    update_news() {
-        if (this._updateLoopId) Mainloop.source_remove(this._updateLoopId);
-
+    _updateFeed: function () {
+        // Tüm kaynaklardan haberleri çek
+        this._allNews = [];
         let sources = this.news_sources || [];
         if (!sources.length) {
-            this._full_title = "RSS kaynagi eklenmedi";
-            this._apply_new_text();
+            this._tickerText = _("No RSS source configured");
+            this._buildMenu();
             return;
         }
 
-        this._all_news_items = [];
         let completed = 0;
-
+        let total = sources.length;
         sources.forEach(source => {
             let session = new Soup.Session();
             let msg = Soup.Message.new("GET", source.url.trim());
@@ -160,110 +99,121 @@ class MyApplet extends Applet.TextIconApplet {
                     if (!bytes) return;
 
                     let xml = new TextDecoder("utf-8").decode(bytes.get_data());
-                    let items = xml.match(/<(item|entry)[\s\S]*?>[\s\S]*?<\/\1>/gi) || [];
+                    let items = xml.match(/<item>([\s\S]*?)<\/item>/g) || [];
 
                     items.forEach(item => {
-                        let t = item.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
-                        let d =
-                            item.match(/<pubDate>([\s\S]*?)<\/pubDate>/i) ||
-                            item.match(/<updated>([\s\S]*?)<\/updated>/i);
+                        const title = item.match(/<title>(.*?)<\/title>/)?.[1] || "No Title";
+                        const link = item.match(/<link>(.*?)<\/link>/)?.[1] || "#";
+                        let pubDate = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || "";
+                        let dateObj = pubDate ? new Date(pubDate) : new Date();
 
-                        if (!t) return;
-
-                        let title = t[1]
-                            .replace(/<!\[CDATA\[|\]\]>/g, "")
-                            .replace(/<[^>]+>/g, "")
-                            .trim();
-
-                        let date = d ? new Date(d[1]) : new Date();
-
-                        this._all_news_items.push({
-                            title,
-                            date,
-                            source: source.label || "RSS",
-                            time: this._format_time(date)
+                        this._allNews.push({
+                            title: title,
+                            link: link,
+                            date: dateObj,
+                            source: source.label || "RSS"
                         });
                     });
                 } catch (e) {
-                    global.logError(e);
+                    global.logError("Error while loading RSS: " + e.message);
                 } finally {
                     completed++;
-                    if (completed === sources.length) this._rebuild_ui();
+                    if (completed === total) {
+                        // Tüm kaynaklar bittiğinde devam et
+                        this._allNews.sort((a, b) => b.date - a.date); // tarihe göre sırala (en yeni başta)
+                        this._buildMenu();
+                    }
                 }
             });
         });
+    },
 
-        this._updateLoopId = Mainloop.timeout_add_seconds(
-            (this.update_interval || 15) * 60,
-            this.update_news.bind(this)
-        );
-    }
-
-    /* ===== UI ===== */
-    _rebuild_ui() {
+    _buildMenu: function () {
         this.menu.removeAll();
 
-        let refresh = new PopupMenu.PopupMenuItem("🔄 Yenile");
-        refresh.connect("activate", this.update_news.bind(this));
-        this.menu.addMenuItem(refresh);
-        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        if (this._allNews.length === 0) return;
 
-        if (!this._all_news_items.length) {
-            this._full_title = "Haber bulunamadi";
-            this._apply_new_text();
-            return;
-        }
+        const menuSection = new PopupMenu.PopupMenuSection({ style_class: "popup-menu-section" });
 
-        this._all_news_items.sort((a, b) => b.date - a.date);
-        let top = this._all_news_items[0];
-
-        this._full_title = `${top.time}[${top.source}] ${top.title}`;
-        this._apply_new_text();
-
-        this._all_news_items.slice(0, 10).forEach(item => {
-            let txt = `${item.time}[${item.source}] ${item.title}`;
-            if (txt.length > 80) txt = txt.substring(0, 77) + "...";
-
-            let mi = new PopupMenu.PopupMenuItem(txt);
-            this.menu.addMenuItem(mi);
+        const scrollView = new St.ScrollView({
+            x_fill: true,
+            y_fill: true,
+            style_class: "scrollView",
+            clip_to_allocation: true
         });
-    }
+        scrollView.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);
 
-    _apply_new_text() {
-        this._scroll_label.set_text(this._full_title);
-        this._scroll_x = this._display_bin.width;
-        this._content_width = 0;
-    }
+        const menuContainer = new St.BoxLayout({ vertical: true, style_class: "menuBox" });
+        scrollView.add_actor(menuContainer);
 
-    /* ===== TICKER LOOP ===== */
-    _run_ticker() {
-        if (this._ticker_id) Mainloop.source_remove(this._ticker_id);
+        // En güncel 15 haber
+        this._allNews.slice(0, 15).forEach(item => {
+            let timeStr = this._formatTime(item.date);
+            let prefix = `${timeStr}[${item.source}] `;
 
-        if (this._content_width === 0) {
-            let [, natW] = this._scroll_label.get_preferred_width(-1);
-            if (natW > 10) this._content_width = natW;
+            let maxLen = 100;
+            let displayTitle = item.title;
+            if (displayTitle.length > maxLen) {
+                displayTitle = displayTitle.substring(0, maxLen) + "...";
+            }
+
+            let fullText = prefix + displayTitle;
+
+            let btn = new St.Button({ reactive: true, track_hover: true, style_class: "menuButton", x_align: St.Align.START });
+
+            let box = new St.BoxLayout({ vertical: false, style_class: "buttonBox" });
+
+            let icon = new St.Icon({
+                gicon: Gio.icon_new_for_string(this.metadata.path + "/icon.png"),
+                icon_size: 18,
+                style_class: "popup-menu-icon"
+            });
+            box.add_actor(icon);
+
+            let titleLabel = new St.Label({ text: fullText, style_class: "popup-menu-item-title" });
+            box.add_actor(titleLabel);
+
+            btn.add_actor(box);
+
+            btn.connect("clicked", () => { Gio.app_info_launch_default_for_uri(item.link, null); });
+
+            menuContainer.add_child(btn);
+        });
+
+        menuSection.actor.add_actor(scrollView);
+        this.menu.addMenuItem(menuSection);
+    },
+
+    _tickerLoop: function () {
+        // Ticker headline’ları güncel ve sıralı şekilde birleştir
+        if (this._allNews.length > 0) {
+            const chainedHeadlines = this._allNews
+                .slice(0, 15)
+                .map(item => `[${this._formatTime(item.date)}][${item.source}] ${item.title}`);
+            this._tickerText = chainedHeadlines.join(' ' + this.tickerSeperator + ' ');
         }
 
-        this._scroll_x -= 2;
+        const textWindow = this._tickerText.substring(this._tickerPosition, this._tickerPosition + this.scroll_limit);
 
-        if (this._scroll_x <= -this._content_width) {
-            this._scroll_x = this._display_bin.width;
+        this.set_applet_label(textWindow);
+
+        this._tickerPosition += 1;
+
+        if (this._tickerPosition >= this._tickerText.length) {
+            this._tickerPosition = 0;
         }
 
-        this._scroll_label.translation_x = this._scroll_x;
+        Mainloop.timeout_add(this.scroll_speed, Lang.bind(this, this._tickerLoop));
+    },
 
-        let speed = Math.max(16, this.scroll_speed || 30);
-        this._ticker_id = Mainloop.timeout_add(speed, () => this._run_ticker());
-    }
-
-    on_applet_clicked() {
+    on_applet_clicked: function () {
         this.menu.toggle();
-    }
+    },
 
-    on_panel_height_changed() {
-        this._set_width();
+    on_applet_removed_from_panel: function () {
+        Mainloop.source_remove(this._refreshLoop);
     }
-}
+};
 
 function main(metadata, orientation, panel_height, instance_id) {
     return new MyApplet(metadata, orientation, panel_height, instance_id);
