@@ -3,6 +3,7 @@ const Mainloop = imports.mainloop;
 const GLib = imports.gi.GLib;
 const ByteArray = imports.byteArray;
 
+// This function refuses to commit to github
 const to_string = function(data) {
     if (ByteArray.hasOwnProperty("toString")) {
         return "" + ByteArray.toString(data);
