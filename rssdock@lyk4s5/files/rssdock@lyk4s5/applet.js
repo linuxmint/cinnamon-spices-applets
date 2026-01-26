@@ -25,7 +25,7 @@ MyApplet.prototype = {
             let iconPath = this.metadata.path + "/rss.png";
             this.set_applet_icon_path(iconPath);
 
-            this._full_title = "Haberler taranıyor...";
+            this._full_title = "Loading...";
             this._scroll_x = 0;
             this._ticker_id = 0;
             this._all_news_items = [];
