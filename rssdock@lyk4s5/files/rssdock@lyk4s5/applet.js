@@ -5,7 +5,6 @@ const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const PopupMenu = imports.ui.popupMenu;
 const Mainloop = imports.mainloop;
-// Cinnamon 6.x için TextDecoder globaldir, import gerekmez ama GLib kullanılabilir
 const GLib = imports.gi.GLib; 
 
 class MyApplet extends Applet.TextIconApplet {
@@ -104,7 +103,7 @@ class MyApplet extends Applet.TextIconApplet {
         }
 
         this._all_news_items = [];
-        this._full_title = "Güncelleniyor...";
+        this._full_title = "Loading...";
         
         let completed_requests = 0;
         let total_sources = sources.length;
@@ -120,10 +119,9 @@ class MyApplet extends Applet.TextIconApplet {
             session.user_agent = "Mozilla/5.0 (X11; Linux x86_64) RSSDock/1.0"; 
             session.timeout = 10;
             
-            // TRT gibi siteler query parametresini sevmeyebilir, temiz URL deneyelim
+          
             let url = source.url.trim();
-            // let freshUrl = url + (url.includes("?") ? "&" : "?") + "cb=" + Date.now(); 
-            // Cache buster'ı kapattım, bazı sunucular 404 veriyor
+           
             
             let message = Soup.Message.new('GET', url);
             
@@ -131,7 +129,7 @@ class MyApplet extends Applet.TextIconApplet {
                 try {
                     let bytes = session.send_and_read_finish(result);
                     
-                    // --- KRİTİK DÜZELTME: TextDecoder ---
+                   
                     let decoder = new TextDecoder('utf-8');
                     let xml = decoder.decode(bytes.get_data()); // Byte'ı String'e çevir
                     
@@ -157,7 +155,7 @@ class MyApplet extends Applet.TextIconApplet {
                             }
                         });
                     } else {
-                        global.logError("[RSSDock] XML ayrıştırılamadı veya boş: " + url);
+                        global.logError("[RSSDock] XML error: " + url);
                     }
                 } catch (e) {
                     global.logError("[RSSDock] Fetch/Parse Error (" + url + "): " + e);
@@ -182,7 +180,7 @@ class MyApplet extends Applet.TextIconApplet {
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
             if (this._all_news_items.length > 0) {
-                // Karışık gelmemesi için sırala
+                
                 this._all_news_items.sort((a, b) => b.date - a.date);
                 
                 let top = this._all_news_items[0];
@@ -198,7 +196,7 @@ class MyApplet extends Applet.TextIconApplet {
                     this.menu.addMenuItem(menuItem);
                 }
             } else {
-                this._full_title = "Haber bulunamadı.";
+                this._full_title = "Not new news.";
             }
         } catch (err) {
             global.logError("[RSSDock] UI Error: " + err);
