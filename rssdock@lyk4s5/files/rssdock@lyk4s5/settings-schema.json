@@ -12,34 +12,34 @@
     },
     "update_interval": {
         "type": "spinbutton",
-        "default": 15,
+        "default": 2,
         "min": 1,
-        "max": 120,
+        "max": 1000,
         "step": 1,
         "units": "dakika",
         "description": "Update Frequency"
     },
     "scroll_limit": {
         "type": "spinbutton",
-        "default": 30,
+        "default": 50,
         "min": 10,
-        "max": 100,
+        "max": 10000,
         "step": 1,
         "description": "Visible Characters"
     },
     "width_multiplier": {
         "type": "spinbutton",
-        "default": 8.5,
+        "default": 22.3,
         "min": 5.0,
-        "max": 15.0,
+        "max": 1995.0,
         "step": 0.1,
         "description": "Width Multiplier"
     },
     "scroll_speed": {
         "type": "spinbutton",
-        "default": 30,
+        "default": 90,
         "min": 10,
-        "max": 100,
+        "max": 1000,
         "step": 2,
         "units": "ms",
         "description": "Speed (Low=Fast)"
@@ -47,12 +47,17 @@
 
     "vertical_offset": {
         "type": "spinbutton",
-        "default": 5,
+        "default": 1,
         "min": -20,
         "max": 30,
         "step": 1,
         "units": "px",
         "label": "Vertical Offset",
         "description": "Vertical Offset"
-    }
+    },
+    "sourceName": {
+    "type": "text",
+    "default": "NTV",
+    "description": "Kaynak adı (menüde başta gözükecek)"
+}
 }
