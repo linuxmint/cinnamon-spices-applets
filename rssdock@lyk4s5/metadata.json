@@ -1,0 +1,7 @@
+{
+    "uuid": "haberdock@mert",
+    "name": "HaberDock",
+    "description": "Multi-source RSS news ticker with smooth scrolling and time stamps.",
+    "icon": "rss",
+    "version": "1.0.0"
+}
