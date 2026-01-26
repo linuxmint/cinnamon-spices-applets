@@ -22,7 +22,7 @@ MyApplet.prototype = {
             Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
             
             // 1. İkon
-            let iconPath = this.metadata.path + "/icons/rss.png";
+            let iconPath = this.metadata.path + "/rss.png";
             this.set_applet_icon_path(iconPath);
 
             this._full_title = "Haberler taranıyor...";
