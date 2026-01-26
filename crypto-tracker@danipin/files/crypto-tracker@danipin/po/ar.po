@@ -1,0 +1,188 @@
+# Arabic translation for crypto-tracker@danipin.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the crypto-tracker@danipin package.
+# FIRST AUTHOR <sousm77@gmail.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: crypto-tracker@danipin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-15 10:20+0100\n"
+"PO-Revision-Date: 2025-12-15 10:55+0100\n"
+"Last-Translator: FULL NAME <sousm77@gmail.com>\n"
+"Language-Team: Arabic <ar@li.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+# The following strings are extracted from metadata.json:
+msgctxt "name"
+msgid "Crypto Tracker"
+msgstr "متعقب العملات المشفرة"
+
+msgctxt "description"
+msgid "Displays real-time cryptocurrency prices on the panel (via CoinGecko API)."
+msgstr "يعرض أسعار العملات المشفرة في الوقت الفعلي على اللوحة (عبر CoinGecko API)."
+
+# The following strings are extracted from settings-schema.json:
+msgid "Metric 1 (Primary)"
+msgstr "المقياس 1 (الأساسي)"
+
+msgid "Metric 2"
+msgstr "المقياس 2"
+
+msgid "Metric 3"
+msgstr "المقياس 3"
+
+msgid "Applet General Settings"
+msgstr "الإعدادات العامة للبريمج"
+
+msgid "Display and Activation"
+msgstr "العرض والتفعيل"
+
+msgid "Data Source (API)"
+msgstr "مصدر البيانات (API)"
+
+msgid "Color Settings"
+msgstr "إعدادات الألوان"
+
+msgid "Changes will activate on the next API update interval."
+msgstr "سيتم تفعيل التغييرات في الفاصل الزمني التالي لتحديث API."
+
+msgid "General Applet Settings"
+msgstr "الإعدادات العامة للبريمج"
+
+msgid "Update Interval"
+msgstr "فاصل التحديث"
+
+msgid "How often prices are fetched from CoinGecko."
+msgstr "كم مرة يتم جلب الأسعار من CoinGecko."
+
+msgid "15 Seconds (Minimum)"
+msgstr "15 ثانية (الحد الأدنى)"
+
+msgid "30 Seconds"
+msgstr "30 ثانية"
+
+msgid "60 Seconds (1 Minute)"
+msgstr "60 ثانية (1 دقيقة)"
+
+msgid "120 Seconds (2 Minutes)"
+msgstr "120 ثانية (2 دقيقة)"
+
+msgid "300 Seconds (5 Minutes)"
+msgstr "300 ثانية (5 دقائق)"
+
+msgid "Color the Arrow Only"
+msgstr "تلوين السهم فقط"
+
+msgid "If active, the price text remains white."
+msgstr "إذا كان فعالاً، سيبقى نص السعر أبيض."
+
+msgid "Show Currency Symbol (e.g. $ or €)"
+msgstr "إظهار رمز العملة (مثل $ أو €)"
+
+msgid "Replaces the currency code with the symbol."
+msgstr "يستبدل رمز العملة بالرمز."
+
+msgid "Enabled"
+msgstr "مفعل"
+
+msgid "Toggles the display of this metric on/off."
+msgstr "تشغيل/إيقاف عرض هذا المقياس."
+
+msgid "Currency ID (CoinGecko)"
+msgstr "معرف العملة (CoinGecko)"
+
+msgid "Select the cryptocurrency from the top list."
+msgstr "حدد العملة المشفرة من القائمة العلوية."
+
+msgid "The value in brackets (e.g. BTC) is the default symbol displayed on the panel."
+msgstr "القيمة بين قوسين (مثل BTC) هي الرمز الافتراضي المعروض على اللوحة."
+
+msgid "Bitcoin (BTC)"
+msgstr "بيتكوين (BTC)"
+
+msgid "Ethereum (ETH)"
+msgstr "إيثريوم (ETH)"
+
+msgid "Cardano (ADA)"
+msgstr "كاردانو (ADA)"
+
+msgid "Solana (SOL)"
+msgstr "سولانا (SOL)"
+
+msgid "Polkadot (DOT)"
+msgstr "بولكادوت (DOT)"
+
+msgid "Custom Currency ID"
+msgstr "معرف عملة مخصص"
+
+msgid "CoinGecko ID (e.g. 'litecoin')"
+msgstr "معرف CoinGecko (مثل 'litecoin')"
+
+msgid "Enter the exact CoinGecko ID. This field overrides the dropdown selection and is preferred for unlisted coins."
+msgstr "أدخل معرف CoinGecko الدقيق. يلغي هذا الحقل تحديد القائمة المنسدلة ويفضل للعملات غير المدرجة."
+
+msgid "Comparison Currency"
+msgstr "عملة المقارنة"
+
+msgid "Select the currency for the price comparison."
+msgstr "حدد العملة لمقارنة الأسعار."
+
+msgid "The API call uses the code in brackets (e.g. USD)."
+msgstr "يستخدم استدعاء API الرمز بين قوسين (مثل USD)."
+
+msgid "US Dollar (USD)"
+msgstr "الدولار الأمريكي (USD)"
+
+msgid "Euro (EUR)"
+msgstr "اليورو (EUR)"
+
+msgid "Canadian Dollar (CAD)"
+msgstr "الدولار الكندي (CAD)"
+
+msgid "British Pound (GBP)"
+msgstr "الجنيه الإسترليني (GBP)"
+
+msgid "Japanese Yen (JPY)"
+msgstr "الين الياباني (JPY)"
+
+msgid "Swiss Franc (CHF)"
+msgstr "الفرنك السويسري (CHF)"
+
+msgid "Australian Dollar (AUD)"
+msgstr "الدولار الأسترالي (AUD)"
+
+msgid "Display Symbol"
+msgstr "رمز العرض"
+
+msgid "The symbol displayed on the panel (e.g. BTC)."
+msgstr "الرمز المعروض على اللوحة (مثل BTC)."
+
+msgid "Color for Rising Price (▲)"
+msgstr "لون السعر المرتفع (▲)"
+
+msgid "Select the color for positive price movement."
+msgstr "اختر اللون لحركة السعر الإيجابية."
+
+msgid "Color for Falling Price (▼)"
+msgstr "لون السعر المنخفض (▼)"
+
+msgid "Select the color for negative price movement."
+msgstr "اختر اللون لحركة السعر السلبية."
+
+# The following strings are extracted from applet.js:
+msgid "Loading..."
+msgstr "جارٍ التحميل..."
+
+msgid "24H Price Change (%)"
+msgstr "تغير السعر خلال 24 ساعة (%)"
+
+msgid "Waiting..."
+msgstr "في انتظار..."
+
+msgid "No metrics enabled. Please enable them in settings."
+msgstr "لم يتم تفعيل أي مقاييس. يرجى تفعيلها في الإعدادات."

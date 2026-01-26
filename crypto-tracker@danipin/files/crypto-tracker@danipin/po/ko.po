@@ -1,0 +1,187 @@
+# Korean translation for crypto-tracker@danipin.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the crypto-tracker@danipin package.
+# FIRST AUTHOR <sousm77@gmail.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: crypto-tracker@danipin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-15 10:20+0100\n"
+"PO-Revision-Date: 2025-12-15 10:49+0100\n"
+"Last-Translator: FULL NAME <sousm77@gmail.com>\n"
+"Language-Team: Korean <ko@li.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# The following strings are extracted from metadata.json:
+msgctxt "name"
+msgid "Crypto Tracker"
+msgstr "암호화폐 트래커"
+
+msgctxt "description"
+msgid "Displays real-time cryptocurrency prices on the panel (via CoinGecko API)."
+msgstr "패널에 실시간 암호화폐 가격을 표시합니다 (CoinGecko API 경유)."
+
+# The following strings are extracted from settings-schema.json:
+msgid "Metric 1 (Primary)"
+msgstr "메트릭 1 (주요)"
+
+msgid "Metric 2"
+msgstr "메트릭 2"
+
+msgid "Metric 3"
+msgstr "메트릭 3"
+
+msgid "Applet General Settings"
+msgstr "애플릿 일반 설정"
+
+msgid "Display and Activation"
+msgstr "표시 및 활성화"
+
+msgid "Data Source (API)"
+msgstr "데이터 소스 (API)"
+
+msgid "Color Settings"
+msgstr "색상 설정"
+
+msgid "Changes will activate on the next API update interval."
+msgstr "변경 사항은 다음 API 업데이트 간격에 적용됩니다."
+
+msgid "General Applet Settings"
+msgstr "애플릿 일반 설정"
+
+msgid "Update Interval"
+msgstr "업데이트 간격"
+
+msgid "How often prices are fetched from CoinGecko."
+msgstr "CoinGecko에서 가격을 가져오는 빈도."
+
+msgid "15 Seconds (Minimum)"
+msgstr "15초 (최소)"
+
+msgid "30 Seconds"
+msgstr "30초"
+
+msgid "60 Seconds (1 Minute)"
+msgstr "60초 (1분)"
+
+msgid "120 Seconds (2 Minutes)"
+msgstr "120초 (2분)"
+
+msgid "300 Seconds (5 Minutes)"
+msgstr "300초 (5분)"
+
+msgid "Color the Arrow Only"
+msgstr "화살표만 색칠하기"
+
+msgid "If active, the price text remains white."
+msgstr "활성화된 경우, 가격 텍스트는 흰색으로 유지됩니다."
+
+msgid "Show Currency Symbol (e.g. $ or €)"
+msgstr "통화 기호 표시 (예: $ 또는 €)"
+
+msgid "Replaces the currency code with the symbol."
+msgstr "통화 코드를 기호로 대체합니다."
+
+msgid "Enabled"
+msgstr "활성화됨"
+
+msgid "Toggles the display of this metric on/off."
+msgstr "이 메트릭의 표시를 켜기/끄기로 전환합니다."
+
+msgid "Currency ID (CoinGecko)"
+msgstr "통화 ID (CoinGecko)"
+
+msgid "Select the cryptocurrency from the top list."
+msgstr "상단 목록에서 암호화폐를 선택하십시오."
+
+msgid "The value in brackets (e.g. BTC) is the default symbol displayed on the panel."
+msgstr "괄호 안의 값 (예: BTC)은 패널에 표시되는 기본 기호입니다."
+
+msgid "Bitcoin (BTC)"
+msgstr "비트코인 (BTC)"
+
+msgid "Ethereum (ETH)"
+msgstr "이더리움 (ETH)"
+
+msgid "Cardano (ADA)"
+msgstr "카르다노 (ADA)"
+
+msgid "Solana (SOL)"
+msgstr "솔라나 (SOL)"
+
+msgid "Polkadot (DOT)"
+msgstr "폴카닷 (DOT)"
+
+msgid "Custom Currency ID"
+msgstr "사용자 지정 통화 ID"
+
+msgid "CoinGecko ID (e.g. 'litecoin')"
+msgstr "CoinGecko ID (예: 'litecoin')"
+
+msgid "Enter the exact CoinGecko ID. This field overrides the dropdown selection and is preferred for unlisted coins."
+msgstr "정확한 CoinGecko ID를 입력하십시오. 이 필드는 드롭다운 선택을 재정의하며, 목록에 없는 코인에 선호됩니다."
+
+msgid "Comparison Currency"
+msgstr "비교 통화"
+
+msgid "Select the currency for the price comparison."
+msgstr "가격 비교를 위한 통화를 선택하십시오."
+
+msgid "The API call uses the code in brackets (e.g. USD)."
+msgstr "API 호출은 괄호 안의 코드 (예: USD)를 사용합니다."
+
+msgid "US Dollar (USD)"
+msgstr "미국 달러 (USD)"
+
+msgid "Euro (EUR)"
+msgstr "유로 (EUR)"
+
+msgid "Canadian Dollar (CAD)"
+msgstr "캐나다 달러 (CAD)"
+
+msgid "British Pound (GBP)"
+msgstr "영국 파운드 (GBP)"
+
+msgid "Japanese Yen (JPY)"
+msgstr "일본 엔 (JPY)"
+
+msgid "Swiss Franc (CHF)"
+msgstr "스위스 프랑 (CHF)"
+
+msgid "Australian Dollar (AUD)"
+msgstr "호주 달러 (AUD)"
+
+msgid "Display Symbol"
+msgstr "표시 기호"
+
+msgid "The symbol displayed on the panel (e.g. BTC)."
+msgstr "패널에 표시되는 기호 (예: BTC)."
+
+msgid "Color for Rising Price (▲)"
+msgstr "가격 상승 색상 (▲)"
+
+msgid "Select the color for positive price movement."
+msgstr "긍정적인 가격 변동에 사용할 색상을 선택하십시오."
+
+msgid "Color for Falling Price (▼)"
+msgstr "가격 하락 색상 (▼)"
+
+msgid "Select the color for negative price movement."
+msgstr "부정적인 가격 변동에 사용할 색상을 선택하십시오."
+
+# The following strings are extracted from applet.js:
+msgid "Loading..."
+msgstr "로딩 중..."
+
+msgid "24H Price Change (%)"
+msgstr "24시간 가격 변동률 (%)"
+
+msgid "Waiting..."
+msgstr "대기 중..."
+
+msgid "No metrics enabled. Please enable them in settings."
+msgstr "활성화된 메트릭이 없습니다. 설정에서 활성화하십시오."
