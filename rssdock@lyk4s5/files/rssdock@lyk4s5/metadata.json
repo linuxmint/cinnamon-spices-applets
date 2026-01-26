@@ -1,7 +1,6 @@
 {
     "uuid": "rssdock@lyk4s5",
-    "name": "RSSDock",
+    "name": "RSS Dock",
     "description": "Multi-source RSS news ticker with smooth scrolling and time stamps.",
-    "icon": "rss",
     "version": "1.0.0"
 }
