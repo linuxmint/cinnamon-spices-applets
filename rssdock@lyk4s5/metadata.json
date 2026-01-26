@@ -1,6 +1,6 @@
 {
-    "uuid": "haberdock@mert",
-    "name": "HaberDock",
+    "uuid": "rssdock@lyk4s5",
+    "name": "RSSDock",
     "description": "Multi-source RSS news ticker with smooth scrolling and time stamps.",
     "icon": "rss",
     "version": "1.0.0"
