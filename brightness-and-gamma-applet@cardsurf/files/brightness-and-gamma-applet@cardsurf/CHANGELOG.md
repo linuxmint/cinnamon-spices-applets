@@ -1,3 +1,12 @@
+### v2.7.2~20260125
+* Improves the display of the menu.
+* Code cleanup.
+
+### v2.7.1~20260121
+* Compatible with Cinnamon 6.6.
+* Allows users to edit / add presets.
+* Fixes [#8227](https://github.com/linuxmint/cinnamon-spices-applets/issues/8227)
+
 ### v2.7.0~20260107
 * For cinnamon 6.6: Does not use the shellUtils library, to avoid any problem with Gio.UnixOutputStream.
 * Thus, permanently fixes [#8111](https://github.com/linuxmint/cinnamon-spices-applets/issues/8111)

@@ -20,7 +20,6 @@ const uuid = "brightness-and-gamma-applet@cardsurf";
 const SunCalc = require('./lib/suncalc');
 const AppletGui = require('./lib/appletGui');
 const AppletConstants = require('./lib/appletConstants');
-//~ const ShellUtils = require('./lib/shellUtils');
 const Values = require('./lib/values');
 const {
   timeout_add_seconds,
@@ -71,6 +70,8 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.baga_icon = "baga"; //"sun"; //"baga";
         this.set_applet_icon_name(this.baga_icon + "-on");
         this.settingsWindow = undefined;
+        
+        this._clipboard = St.Clipboard.get_default();
 
         this.bagaShortcuts = [];
         this.screen_outputs = {};
@@ -208,24 +209,11 @@ class BrightnessAndGamma extends Applet.IconApplet {
 
     _xrandr_available() {
         return GLib.find_program_in_path(this.xrandr_name) != null;
-        //~ let process = new ShellUtils.ShellOutputProcess(["which", this.xrandr_name]);
-        //~ let output = process.spawn_sync_and_get_output();
-        //~ return output.length > 0;
     }
 
     _xrandr_version_satisfied() {
         return GLib.find_program_in_path(this.xrandr_name) != null;
-        //~ let lines = this._get_xrandr_version_lines();
-        //~ let line = this.get_line_or_empty_string(lines, this.xrandr_regex);
-        //~ return this._is_version_satisfied(line, MinXrandrVersion);
     }
-
-    //~ _get_xrandr_version_lines() {
-        //~ let process = new ShellUtils.ShellOutputProcess([this.xrandr_name, "--version"]);
-        //~ let output = process.spawn_sync_and_get_output();
-        //~ let lines = output.split('\n');
-        //~ return lines;
-    //~ }
 
     get_line_or_empty_string(lines, regex) {
         for(let line of lines) {
@@ -268,9 +256,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
 
     _randr_version_satisfied() {
         return GLib.find_program_in_path(this.randr_name) != null || GLib.find_program_in_path(this.xrandr_name) != null;
-        //~ let lines = this._get_xrandr_version_lines();
-        //~ let line = this.get_line_or_empty_string(lines, this.randr_regex);
-        //~ return this._is_version_satisfied(line, MinRandrVersion);
     }
 
 
@@ -346,6 +331,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ["maximum_gamma", this.on_gamma_range_changed],
                         ["options_type", this.on_options_type_changed],
                         ["preset_list", this.on_preset_list_changed],
+                        ["preset_selected_keybind", null],
                         ["baga_icon", this.on_gui_icon_changed],
                         ["last_values_string", null] ]) {
                 this.settings.bind(property_name, property_name, callback, null);
@@ -597,9 +583,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
 
     // Override
     on_applet_added_to_panel() {
-        //~ this.themeNode = this.actor.get_theme_node();
-        //~ this.actor.style = "color: " + this.themeNode.get_foreground_color() + ";";
-        //~ this.actor.style = "color: white;";
         this.on_shortcut_changed();
         this.on_disable_nightmode_changed();
         this.set_MAX_TR_LENGTH();
@@ -647,8 +630,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
     list_screen_outputs() {
         let [success, output_content, error_content] = GLib.spawn_sync(null, [this.xrandr_name, "--query"], null, GLib.SpawnFlags.SEARCH_PATH, null);
         let output = "" + ByteArray.toString(output_content)
-        //~ let process = new ShellUtils.ShellOutputProcess([this.xrandr_name, "--query"]);
-        //~ let output = process.spawn_sync_and_get_output();
         return output;
     }
 
@@ -1100,9 +1081,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
 
     _get_screen_parameter() {
         let matches = this.number_regex.test(this.screen_name) ? this.screen_name.match(this.number_regex) : ["0"];
-        //~ let screen_index = matches.length > 0 ? matches[0] : "0";
-        //~ let parameter = screen_index.toString();
-        //~ return parameter;
         let screen_index = matches.length > 0 ? ""+matches[0] : "0";
         return screen_index;
     }
@@ -1150,14 +1128,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
         if (argv.length === 0) return;
         let command = argv.join(" ");
         Util.spawnCommandLineAsync(command);
-        //~ try {
-            //~ let xrandr_process = new ShellUtils.BackgroundProcess(argv, true);
-            //~ xrandr_process.set_callback_process_finished(this, this.on_xrandr_async_finished);
-            //~ xrandr_process.spawn_async();
-        //~ }
-        //~ catch(e) {
-            //~ global.log("Error while spawning asynchronously xrandr process: " + e.message);
-        //~ }
     }
 
     on_xrandr_async_finished(xrandr_process, pid, status) {
@@ -1177,13 +1147,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
         if (argv.length === 0) return;
         let command = argv.join(" ");
         Util.spawnCommandLine(command);
-        
-        //~ let xrandr_process = new ShellUtils.ShellOutputProcess(argv);
-        //~ let error = xrandr_process.spawn_sync_and_get_error();
-        //~ if(error.length > 0) {
-            //~ let error_message = "Error while updating brightness and gamma synchronously: " + error;
-            //~ this.log_process_error(error_message, xrandr_process.command_argv);
-        //~ }
     }
 
 
@@ -1325,6 +1288,10 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.update_xrandr();
         this.update_tooltip();
         this._init_menu_item_presets();
+    }
+    
+    on_preset_copy_shortcut() {
+        this._clipboard.set_text(St.ClipboardType.CLIPBOARD, this.preset_selected_keybind);
     }
 
     on_preset_sunrise_sunset_button_clicked() {

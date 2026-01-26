@@ -3,6 +3,7 @@ const Lang = imports.lang;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
+const Pango = imports.gi.Pango;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Gettext = imports.gettext;
@@ -116,7 +117,7 @@ class RadioMenuItem extends PopupMenu.PopupSubMenuMenuItem {
     }
 
     get_option_name(option) {
-        return option.label.get_text();
+        return option.label.get_clutter_text();
     }
 
     get_active_option_index() {
@@ -178,7 +179,7 @@ class CheckboxMenuItem extends PopupMenu.PopupSubMenuMenuItem {
     }
 
     get_option_name(option) {
-        return option.label.get_text();
+        return option.label.get_clutter_text();
     }
 
     add_options(option_names) {
@@ -261,7 +262,6 @@ class MenuSliders {
                         this.applet.update_tooltip();
                         this.applet._init_menu_item_presets();
                     }, this.applet.smooth_duration);
-                    //~ menuItem.setOrnament(PopupMenu.OrnamentType.DOT, true);
                 });
                 if (this.applet.brightness == preset["brightness"] &&
                     this.applet.gamma_red == preset["gamma_red"] &&
@@ -304,7 +304,10 @@ class MenuSliders {
     set_label_text(key, value) {
         let label = this.labels[key];
         let text = this.get_description_text(key, value);
-        label.label.set_text(text);
+        label.label.clutter_text.set_markup(text);
+        let fontdesc = Pango.font_description_from_string('monospace');
+        label.label.clutter_text.set_font_description(fontdesc);
+        label.label.clutter_text.set_ellipsize(Pango.EllipsizeMode.NONE);
     }
 
     get_description_text(key, value) {
