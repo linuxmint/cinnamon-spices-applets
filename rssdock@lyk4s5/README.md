@@ -9,6 +9,6 @@ A lightweight, multi-source RSS news ticker for the Cinnamon Desktop environment
 - **Tooltips:** Hover over truncated titles to see the full headline.
 
 ## Installation
-1. Download the `rssdock@yourid` folder.
+1. Download the `rssdock@lyk4s5` folder.
 2. Copy it to `~/.local/share/cinnamon/applets/`.
 3. Enable it from the Cinnamon Applets settings.
