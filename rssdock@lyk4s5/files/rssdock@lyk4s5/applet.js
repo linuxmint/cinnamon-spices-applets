@@ -19,7 +19,7 @@ class MyApplet extends Applet.TextIconApplet {
             let iconPath = this.metadata.path + "/icon.png";
             this.set_applet_icon_path(iconPath);
 
-            this._full_title = "Haberler taranıyor...";
+            this._full_title = "Loading...";
             this._scroll_x = 0;
             this._ticker_id = 0;
             this._all_news_items = [];
@@ -97,7 +97,7 @@ class MyApplet extends Applet.TextIconApplet {
 
         let sources = this.news_sources;
         if (!sources || sources.length === 0) {
-            this._full_title = "Ayarlardan RSS kaynağı ekleyin!";
+            this._full_title = "Please Add RSS to Settings!";
             this._all_news_items = [];
             this._rebuild_ui();
             return;
