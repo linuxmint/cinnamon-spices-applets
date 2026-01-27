@@ -190,3 +190,62 @@ msgstr "Acciones"
 #. settings-schema.json->applySettings->description
 msgid "Save / Apply Settings"
 msgstr "Guardar / Aplicar configuración"
+msgid "Language"
+msgstr "Idioma"
+
+msgid "No history available"
+msgstr "No hay historial disponible"
+
+msgid "Open Usage Log"
+msgstr "Abrir registro de uso"
+
+msgid "System Default"
+msgstr "Predeterminado del sistema"
+
+msgid "Usage History"
+msgstr "Historial de uso"
+
+msgid "Enable Per-App Network Monitoring (Tooltip)"
+msgstr "Habilitar monitoreo de red por aplicación (Infobulle)"
+
+msgid "Applications"
+msgstr "Aplicaciones"
+
+msgid "apps"
+msgstr "apps"
+
+msgid "Real-time Speed"
+msgstr "Velocidad en tiempo real"
+
+msgid "Session Usage"
+msgstr "Uso de la sesión"
+
+msgid "Daily Usage"
+msgstr "Uso diario"
+
+msgid "Network Logger"
+msgstr "Registrador de red"
+
+msgid "Logger"
+msgstr "Registro"
+
+msgid "No active connections"
+msgstr "Sin conexiones activas"
+
+msgid "Interface"
+msgstr "Interfaz"
+
+msgid "Date"
+msgstr "Fecha"
+
+msgid "High Network Usage Detected"
+msgstr "Uso elevado de red detectado"
+
+msgid "Application '%s' is consuming %s MB/s"
+msgstr "La aplicación '%s' está consumiendo %s MB/s"
+
+msgid "Enable High-Usage App Notifications"
+msgstr "Habilitar notificaciones de uso elevado de aplicaciones"
+
+msgid "High-Usage Threshold"
+msgstr "Umbral de uso elevado"
