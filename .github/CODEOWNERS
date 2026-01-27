@@ -36,6 +36,7 @@ SpicesUpdate@claudiux/**                           @claudiux
 VPN-Sentinel@claudiux/**                           @claudiux
 anime-wallpaper@flyflyan/**                        @fly206
 any-alarm@sophie-la-li/**                          @sophie-la-li
+app-drawer@mostlynick3/**                          @mostlynick3
 app-launcher@mchilli/**                            @mchilli
 asl@santiago/**                                    @SamBurgos
 auto-dark-light@gihaume/**                         @guillaume-mueller
@@ -57,6 +58,8 @@ calendar@simonwiles.net/**                         @simonwiles
 cheaty@centurix/**                                 @centurix
 cinnamon-timer@jake1164/**                         @jake1164
 cinnamonvantage@garlayntoji/**                     @Garlayntoji
+classic-menu@fredcw/**                             @fredcw
+claude-usage@mtwebster/**                          @mtwebster
 clean-show-desktop@filipetorresbr/**               @FilipeTorresBR
 click-clock@wernerstucky/**                        @wernerstucky
 clipboard-eraser@Techcrafter/**                    @Techcrafter
@@ -72,6 +75,7 @@ cpufreq@mtwebster/**                               @yrtimiD
 cryptocoin@guantanamoe/**                          @imDeprecated
 daily-wallpaper@Tomfez/**                          @Tomfez
 darkMode@linuxedo.com/**                           @slgobinath
+day-progress@chmodmasx/**                          @chmodmasx
 ddcci-monitor-control@andr35/**                    @andr35
 ddcci-multi-monitor@tim-we/**                      @GingerGigiCat
 desaturate-all@hkoosha/**                          @klangman
@@ -116,6 +120,8 @@ mouse-keys-shortcut@GabrielCamara3526/**           @GabrielCamara3526
 multicore-sys-monitor@ccadeptic23/**               @claudiux
 mybookmarks@markbokil.com/**                       @Centurix
 mylauncher@markbokil.com/**                        @Centurix
+nepali-date@bishalacharya/**                       @everestbis
+netspeed@iMayhem/**                                @iMayhem
 netusagemonitor@pdcurtis/**                        @pdcurtis
 network@brownsr/**                                 @brownsr
 networkmonitor@axel358/**                          @axel358
@@ -194,7 +200,6 @@ vpnLookOut@claudiux/**                             @claudiux
 wakapidisplay@babico/**                            @babico
 wakatimedisplay@inventor96/**                      @inventor96
 wallpaper-slideshow@amaan-mohib/**                 @amaan-mohib
-weather@mockturtl/**                               @Gr3q
 website-notifier@cardsurf/**                       @cardsurf
 window-list@sangorys/**                            @sangorys
 window-list@zeripath.sdf-eu.org/**                 @zeripath
@@ -242,5 +247,6 @@ xsession@claudiux/**                               @claudiux
 # systray-collapsible@koutch
 # todo@threefi
 # uptime@vatanuki.kun
+# weather@mockturtl
 # web-developer-menu@infiniteshroom
 # xampp-panel@backids99

@@ -2,7 +2,7 @@
 
 Adaptation of Gnome Shell's [weather extension](https://github.com/simon04/gnome-shell-extension-weather) for the Cinnamon desktop.
 
-cinnamon-weather uses [Semantic Versioning](http://semver.org/).  For the current version number, see `metadata.json`.  
+cinnamon-weather uses [Semantic Versioning](http://semver.org/).  For the current version number, see `metadata.json`.
 
 ## Versions
 
@@ -21,10 +21,10 @@ Right-click to access `cinnamon-settings` -> *Applets -> Configure*.
 
 The applet obtains the location automatically. If the automatic location not adequate for you, you can use the **Manual Location** mode where the applet either accepts:
 
-* **Coordinates** in Latitude, Longitude format (e.g. 37.77,122.41). You can use [OpenWeatherMap's finder](https://openweathermap.org/find) and paste the coordinates in from there.
-* or an **Address** (it can be just a city and country, it is pretty flexible). After 3 seconds, the applet will replace the text that you entered with the full address it finds so you can verify if it's correct. You can also get your exact address to enter from [OpenStreetMap's Nominatim search](https://nominatim.openstreetmap.org/), the service the applet uses.
+- **Coordinates** in Latitude, Longitude format (e.g. 37.77,122.41). You can use [OpenWeatherMap's finder](https://openweathermap.org/find) and paste the coordinates in from there.
+- or an **Address** (it can be just a city and country, it is pretty flexible). After 3 seconds, the applet will replace the text that you entered with the full address it finds so you can verify if it's correct. You can also get your exact address to enter from [OpenStreetMap's Nominatim search](https://nominatim.openstreetmap.org/), the service the applet uses.
 
-You can also save locations what you entered manually and switch between them in the applet *(arrows will appear on both sides of the location in the applet if you have more than two saved)*. 
+You can also save locations what you entered manually and switch between them in the applet *(arrows will appear on both sides of the location in the applet if you have more than two saved)*.
 
 ### Weather providers to choose from
 
@@ -35,7 +35,7 @@ You can also save locations what you entered manually and switch between them in
 | **MET Norway**             | No            | 10                    | 48                     | Depends            | Depends | --                            |
 | **DMI Denmark**            | No            | 10                    | 48                     | No                 | No      | --                            |
 | **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | Yes     | --                            |
-| **Met Office UK**          | No            | 5                     | 36                     | No                 | No      | --                            |
+| **Met Office UK**          | Yes           | 6                     | 48                     | No                 | No      | --                            |
 | **US National Weather**    | No            | 7                     | 156                    | No                 | Yes     | --                            |
 | **OpenWeatherMap OneCall** | Yes           | 8                     | 48                     | Yes                | Alerts  | --                            |
 | **Pirate Weather**         | Yes           | 7                     | 168                    | Yes                | Depends | --                            |
@@ -53,61 +53,63 @@ You can also save locations what you entered manually and switch between them in
 
 Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with headquarters in London UK. [OpenWeatherMap Website](https://openweathermap.org/). Read more about the service [here](https://en.wikipedia.org/wiki/OpenWeatherMap).
 
-* This used to be the default provider until May 2024. Big Thanks to them supporting free open source projects, like this!
+- This used to be the default provider until May 2024. Big Thanks to them supporting free open source projects, like this!
 
 ### MET Norway
 
 Free meteorological data and forecasts from the Norwegian Meteorological Institute founded in 1866. [MET Norway Website](https://www.met.no/en). Read more about the institute [here](https://en.wikipedia.org/wiki/Norwegian_Meteorological_Institute).
 
-* Nowcast (Immediate precipitation and granular observations) is not available outside Norway. In that case, observations are shown for the next hour.
+- Nowcast (Immediate precipitation and granular observations) is not available outside Norway. In that case, observations are shown for the next hour.
 
-* Daily forecasts are generated from 6 hour forecasts (for every hour), so there is a possibility that they are inaccurate sometimes.
+- Daily forecasts are generated from 6 hour forecasts (for every hour), so there is a possibility that they are inaccurate sometimes.
 
-* Alerts are only available in Norway
+- Alerts are only available in Norway
 
 ### DMI Denmark
 
 The Danish Meteorological Institute formed in 1872 and makes weather forecasts and observations for Denmark, Greenland, and the Faroe Islands. [DMI Denmark Website](https://www.dmi.dk) Read more about the institute [here](https://en.wikipedia.org/wiki/Danish_Meteorological_Institute).
 
-* The service is global with open weather data.
+- The service is global with open weather data.
 
 ### Deutscher Wetterdienst
 
 German National Weather Provider. [Deutsche Wetterdienst Website](https://www.dwd.de/DE/Home/home_node.html). Read more about the institute [here](https://en.wikipedia.org/wiki/Deutscher_Wetterdienst).
 
-* **Only covers Germany**.
+- **Only covers Germany**.
 
 ### Met Office UK
 
-The Meteorological Office, abbreviated as the Met Office, is the UK's national weather service founded in 1854. [Met Office UK Website](https://www.metoffice.gov.uk/). Read more about the agency [here](https://en.wikipedia.org/wiki/Met_Office).
+The Meteorological Office, abbreviated as the Met Office, is the UK's national weather service founded in 1854. [Met Office UK Website](https://www.metoffice.gov.uk/). Read more about the agency [here](https://en.wikipedia.org/wiki/Met_Office). The Data is obtained via their new [DataHub API](https://datahub.metoffice.gov.uk/).
 
-* **Only covers the UK.**
+- You need 2 API keys in this format: `{forecastKey}+{observationKey}` in the API key field in settings
 
-* Sometimes it takes like 5-10 seconds to obtain weather, please be patient when it loads up the first time.
+- You only have 360 calls a day free, the applet uses 2 at a time so minimum of 15 minutes refresh time is recommended.
 
-* It uses the nearest forecast site and observation sites in an 50km area, it displays an error if it does not find any. Please open a new issue if this happens and you live in the UK! (There are much less observation sites than forecast sites.)
+- To get the API keys, register [here](https://datahub.metoffice.gov.uk/). Log in, then subscribe to
+  - Site Specific -> Global Spot Free plan. Note down the key you get (you will not see it again), this is your `forecastKey`.
+  - Observations -> Land Observations Free plan.  Note down the key you get (you will not see it again), this is your `observationKey`.
 
 ### US National Weather
 
 The National Weather Service in the USA is a federal government agency formed in 1861. [US National Weather Website](https://www.weather.gov/). Read more about the agency [here](https://en.wikipedia.org/wiki/National_Weather_Service).
 
-* **Only covers the US**
+- **Only covers the US**
 
-* Sometimes it takes 10-15 seconds to obtain weather, please be patient when it loads up the first time.
+- Sometimes it takes 10-15 seconds to obtain weather, please be patient when it loads up the first time.
 
-* Observations are quite spotty so it combines multiple observation stations if needed in a 50km area.
+- Observations are quite spotty so it combines multiple observation stations if needed in a 50km area.
 
 ### Swiss Météo
 
 Weather Forecast service in Switzerland run by [Federal Office of Meteorology and Climatology MeteoSwiss](https://www.meteoswiss.admin.ch/) since 2000 with history back to 1864. Read more about the agency [here](https://www.meteoswiss.admin.ch/about-us.html).
 
-* **Only covers Switzerland**
+- **Only covers Switzerland**
 
 ### OpenWeatherMap OneCall
 
 Version of OpenWeatherMap that supports more features (as before), but needs an API key. You can register for an API key [here](https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base). After that change your Call limit from 2000 to 1000 to make sure you are not charged.
 
-* Provides 1000 Free calls a day
+- Provides 1000 Free calls a day
 
 ### Pirate Weather
 
@@ -119,45 +121,45 @@ Alerts are an US only feature as of May 2024.
 
 ### Visual Crossing
 
-Weather service from Visual Crossing Corporation founded in 2003 with headquarters in USA and Germany. [Visual Crossing Website](https://www.visualcrossing.com/). Read more about the service [here](https://www.visualcrossing.com/about). 
+Weather service from Visual Crossing Corporation founded in 2003 with headquarters in USA and Germany. [Visual Crossing Website](https://www.visualcrossing.com/). Read more about the service [here](https://www.visualcrossing.com/about).
 
-* Needs an API key, you can [Sign Up here](https://www.visualcrossing.com/weather/weather-data-services#/signup) and grab one
+- Needs an API key, you can [Sign Up here](https://www.visualcrossing.com/weather/weather-data-services#/signup) and grab one
 
-* Provides 1000 Free calls a day
+- Provides 1000 Free calls a day
 
 ### Weatherbit.io
 
 Historical and Forecast Weather data service provided by Weatherbit LLC in the USA. [Weatherbit.io Website](https://www.weatherbit.io). Read more about the service [here](https://www.weatherbit.io/about).
 
-* To get an API key, go to [Weatherbit.io](https://www.weatherbit.io/account/create) and create an account. Then go your [Dashboard](https://www.weatherbit.io/account/dashboard) where you should find your secret key already created.
+- To get an API key, go to [Weatherbit.io](https://www.weatherbit.io/account/create) and create an account. Then go your [Dashboard](https://www.weatherbit.io/account/dashboard) where you should find your secret key already created.
 
-* At least 1 hour refresh rate is recommended, otherwise you might exceed you daily quota. The Free API subscription is limited to 50 calls per day.
+- At least 1 hour refresh rate is recommended, otherwise you might exceed you daily quota. The Free API subscription is limited to 50 calls per day.
 
-* **Hourly Weather forecast requires a non-free account
+- **Hourly Weather forecast requires a non-free account
 
-* *Using alerts will increase call usage by 33%.
+- *Using alerts will increase call usage by 33%.
 
 ### Tomorrow.io
 
 Meteorological data from American weather technology company with headquarters in Boston since 2016. Changed name from Climacell to Tomorrow.io in March 2021. [Tomorrow.io Website](https://www.tomowrrow.io/). Read more about the company [here](https://en.wikipedia.org/wiki/Tomorrow.io).
 
-* Please note that old ClimacellV4 keys are not working anymore. You need to re-register and get a new key.
+- Please note that old ClimacellV4 keys are not working anymore. You need to re-register and get a new key.
 
-* API key can be obtained [here](https://app.tomorrow.io/signup?planid=5fa4047f4acee993fbd7399d&vid=153ef940-c389-41d4-847e-d83d632059d0). Register and the API key will be shown in the [Develpment section](https://app.tomorrow.io/development/keys). Free plan comes with 1000 free calls per day.
+- API key can be obtained [here](https://app.tomorrow.io/signup?planid=5fa4047f4acee993fbd7399d&vid=153ef940-c389-41d4-847e-d83d632059d0). Register and the API key will be shown in the [Develpment section](https://app.tomorrow.io/development/keys). Free plan comes with 1000 free calls per day.
 
-* Alerts are available in the US and Canada. Seems to have repeated alerts.
+- Alerts are available in the US and Canada. Seems to have repeated alerts.
 
 ### AccuWeather
 
 Online Service from company AccuWeather Inc, founded in 1962 with headquarters in the US, provides a global weather source. [AccuWeather Website](https://www.accuweather.com/). Read more about the company [here](https://en.wikipedia.org/wiki/AccuWeather)
 
-* With the free plan, there are only a very limited number of calls for a day, which will be displayed in the applet menu. Please lower your Update interval setting in Configuration or you may run out of calls and then the service will stop with an error message until the next day.
+- With the free plan, there are only a very limited number of calls for a day, which will be displayed in the applet menu. Please lower your Update interval setting in Configuration or you may run out of calls and then the service will stop with an error message until the next day.
 
-* ***Number of available hours and days are specified for the free plan, [paid plans allow more](https://developer.accuweather.com/packages).
+- ***Number of available hours and days are specified for the free plan, [paid plans allow more](https://developer.accuweather.com/packages).
 
-* API keys can be obtained [here](https://developer.accuweather.com/user/register). Register, then you must add a new App. When it's created Click on the App and the key will be displayed.
+- API keys can be obtained [here](https://developer.accuweather.com/user/register). Register, then you must add a new App. When it's created Click on the App and the key will be displayed.
 
-* *Alerts are not provided in the Free or Standard plan as of May 2024 so it's not worth supporting in the applet.
+- *Alerts are not provided in the Free or Standard plan as of May 2024 so it's not worth supporting in the applet.
 
 ### Weather Underground
 
@@ -169,7 +171,6 @@ Weather Underground is a privately owned, web-based weather information company.
 - Disclaimer: Observations don't provide weather conditions so the forecast one for the day is used.
 
 ### Usage of "Override label on panel", "Override location label" and "Override tooltip on panel" setting
-
 
 The setting allows you to make the applet display basically anything in the form of text in the panel (and other places). In addition, it exposes a number of values for you to use as you like, these will be replaced with actual data values. The full text-to-value mapping can be found below.  Left-pad values with up to 3 zeros using `{humidity,3.0}`. Right-pad values with up to 4 spaces using `{t.4}` (or `{t.4. }`).  Some values have an overridable default padding.
 
@@ -239,9 +240,9 @@ Today and Tomorrow: `{min} / {max} {u} {c} {t}{u}{br}{tmr_t} {tmr_c}`
 
 ### Examples
 
-* `notify-send "The weather is {c} and the temperature is {t}{u}\"` will show a notification with the current weather condition and temperature.
+- `notify-send "The weather is {c} and the temperature is {t}{u}\"` will show a notification with the current weather condition and temperature.
 
-* `echo {{full_data}} > /tmp/weather_data` will save the full weather data to a file in `/tmp`.
+- `echo {{full_data}} > /tmp/weather_data` will save the full weather data to a file in `/tmp`.
 
 [Weather data structure you receive](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/weather%40mockturtl/src/3_8/weather-data.ts)
 
@@ -249,21 +250,21 @@ Today and Tomorrow: `{min} / {max} {u} {c} {t}{u}{br}{tmr_t} {tmr_c}`
 
 # Custom Overrides
 
-* Store more forecast variables such as Humidity and Pressure, and add more tags for changes in values
+- Store more forecast variables such as Humidity and Pressure, and add more tags for changes in values
 
-* Add support for minutely forecasts.
+- Add support for minutely forecasts.
 
-* Add ability to specify number of decimal places in values, e.g., `{t_h_diff,4. .1}` for 1 decimal place, left-padded with spaces to width of 4.  (This might be achievable by extracting float values then applying a default or specified precision to all numerical values.)
+- Add ability to specify number of decimal places in values, e.g., `{t_h_diff,4. .1}` for 1 decimal place, left-padded with spaces to width of 4.  (This might be achievable by extracting float values then applying a default or specified precision to all numerical values.)
 
-* Make tags that (or a way to) default to '' when no upcoming forecast changes in value to save panel space.
+- Make tags that (or a way to) default to '' when no upcoming forecast changes in value to save panel space.
 
-* Add options to use [different Unicode arrows](https://unicode-explorer.com/list/arrows) for wind direction and change in temp indicators.
+- Add options to use [different Unicode arrows](https://unicode-explorer.com/list/arrows) for wind direction and change in temp indicators.
 
-* Add presets.
+- Add presets.
 
 ## Language Translations
 
-If you want to update or change the translation in your language other than English, here are some steps to get you started. Keep in mind that your local changes will be overwritten when an update of the applets language is installed. Feel free to share your translation, which is very much appreciated, 
+If you want to update or change the translation in your language other than English, here are some steps to get you started. Keep in mind that your local changes will be overwritten when an update of the applets language is installed. Feel free to share your translation, which is very much appreciated,
 by making a PR (pull request) on Github or contact the current maintainer of the applet.
 
 1. Install the translation editor **poedit** with your package manager and download your language PO file e. g. *xx.po* where xx is your ISO language code, and the template POT file *[weather@mockturtl.pot](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/weather%40mockturtl/files/weather%40mockturtl/po/weather@mockturtl.pot)* from the *files/weather@mockturtl/po/* sub directory on the [Github website](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/weather%40mockturtl/files/weather%40mockturtl/po/)
@@ -274,19 +275,19 @@ by making a PR (pull request) on Github or contact the current maintainer of the
 
 ## Known Issues
 
-* Hourly forecast toggle button is not centered to the middle of the popup menu
+- Hourly forecast toggle button is not centered to the middle of the popup menu
 
-* Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location with some of the weather providers
+- Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location with some of the weather providers
 
-* On subsequent refreshes/relogins the popup menu's element's may lose all padding.
+- On subsequent refreshes/relogins the popup menu's element's may lose all padding.
 
-* If the popup menu is open while refreshing the current weather value row (Temp, Pressure, etc) might shrink so it can't display the values. Workaround: Manual refresh while the popup menu is closed.
+- If the popup menu is open while refreshing the current weather value row (Temp, Pressure, etc) might shrink so it can't display the values. Workaround: Manual refresh while the popup menu is closed.
 
-* New Breeze icons don't display properly. If you are using them or any icon theme that inherits from them they (mostly) will appear as white boxes. See [Symbolic icon rendering issues in Arch linux Cinnamon (#20) · Issues · Frameworks / Breeze Icons · GitLab](https://invent.kde.org/frameworks/breeze-icons/-/issues/20)
+- New Breeze icons don't display properly. If you are using them or any icon theme that inherits from them they (mostly) will appear as white boxes. See [Symbolic icon rendering issues in Arch linux Cinnamon (#20) · Issues · Frameworks / Breeze Icons · GitLab](https://invent.kde.org/frameworks/breeze-icons/-/issues/20)
 
 ### Report a new issue
 
-You need a Github login to make a issue report. Please first check if the issue already is reported [here](https://github.com/linuxmint/cinnamon-spices-applets/issues?q=is%3Aissue+is%3Aopen+weather). You will find more information about reporting in the Configuration under the Help Tab, accessible by right clicking on the applet. Here you can save logs to file with debug level that is much appreciated. By using the *Submit an Issue* Button under this Tab, useful system information will be generated for your report form in your default web browser at Github.com. 
+You need a Github login to make a issue report. Please first check if the issue already is reported [here](https://github.com/linuxmint/cinnamon-spices-applets/issues?q=is%3Aissue+is%3Aopen+weather). You will find more information about reporting in the Configuration under the Help Tab, accessible by right clicking on the applet. Here you can save logs to file with debug level that is much appreciated. By using the *Submit an Issue* Button under this Tab, useful system information will be generated for your report form in your default web browser at Github.com.
 
 ### Troubleshooting
 
@@ -301,3 +302,66 @@ You can see Logs by opening the Cinnamon 'Looking Glass' debugger. You can open 
 Logs can be found under the ```Log``` Tab.
 
 [Changelog](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/weather%40mockturtl/CHANGELOG.md)
+
+## Developer instructions
+
+Instructions if you want to contribute/work on the applet.
+
+## Build Guide
+
+Requires Node 16+ and npm to build.
+
+```bash
+cd {repo}/weather@mockturtl
+npm ci
+```
+
+## Build for 3.8
+
+To build and watch for changes
+
+```bash
+# In applet directory
+npm run watch
+```
+
+To Test
+
+```bash
+# In applet directory
+# Will copy the built files into the correct folder and restart the applet - only the applet!
+./test.sh
+```
+
+## Build for 3.0
+
+3.0 was deprecated in April 2021, but the src is kept for that version. can build it with `./src/3_0/build3_0.sh`.
+
+*Note: You won't be able to build it anymore unless you fix all type errors - the library declarations need `strict` and `exactOptionalPropertyTypes` enabled.*
+
+## Development flow
+
+0. Make sure you have an **up-to-date** fork of [cinnamon-spices-applets](https://github.com/linuxmint/cinnamon-spices-applets) on Github. Work on your fork, start on `master`.
+1. Open the folder, in VS Code is `code {your_path}/cinnamon-spices-applets/weather@mockturtl` - replace `{your_path}` with the path you cloned the repository to.
+2. Install dependencies `npm ci` - you only do this once and every time when the `package-lock.json` changes.
+3. Start the build - `npm run watch`. It will rebuild on every change.
+4. Do your work, the relevant files are in
+    - `src/3_8` - actual code
+    - `files/weather@mockturtl/metadata.json` - if you want to update the version
+    - `files/weather@mockturtl/3.8/settings-schema.json` - settings schema you see when you click `Configure...`
+    - `files/weather@mockturtl/po/` - translations. I recommend POEdit to edit them
+    - `files/weather@mockturtl/{icons/arrow-icons}/` - custom svg icons
+5. Test your changes with `./test.sh`
+6. Once you are done
+    1. Regenerate translation template if you changed any code.
+
+       ```bash
+       # This needs to be ran from the repo root.
+       cd .. && ./cinnamon-spices-makepot weather@mockturtl && cd weather@mockturtl
+       ```
+
+    2. Don't forget to increment applet version in `metadata.json`
+    3. Run `npx eslint ./src/3_8/` and fix all errors
+    4. (Optional): Test your changes in the current oldest version of Linux Mint VM. Ideally you would test it in Linux Mint 19 if you can get a hold of it.
+
+    5. Open your PR in [cinnamon-spices-applets](https://github.com/linuxmint/cinnamon-spices-applets)

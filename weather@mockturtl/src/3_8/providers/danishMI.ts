@@ -1,8 +1,8 @@
 import { DateTime } from "luxon";
 import { Services } from "../config";
-import type { HTTPParams} from "../lib/httpLib";
+import type { HTTPParams } from "../lib/httpLib";
 import { HttpLib } from "../lib/httpLib";
-import type { Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../weather-data";
+import type { Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData } from "../weather-data";
 import { CelsiusToKelvin, GetDistance, mode, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
 import type { LocationData } from "../types";
