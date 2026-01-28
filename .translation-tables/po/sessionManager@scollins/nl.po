@@ -1,0 +1,155 @@
+# SESSION MANAGER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# collinss, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-27 10:12+0200\n"
+"PO-Revision-Date: 2024-04-21 18:18+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:154
+msgid "Session"
+msgstr "Sessie"
+
+#. applet.js:240
+msgid "Lock Screen"
+msgstr "Scherm vergrendelen"
+
+#. applet.js:246
+msgid "Switch User"
+msgstr "Gebruiker wisselen"
+
+#. applet.js:252
+msgid "Guest Session"
+msgstr "Gastsessie"
+
+#. applet.js:258
+msgid "Log Off"
+msgstr "Afmelden"
+
+#. applet.js:269
+msgid "Suspend"
+msgstr "Sluimerstand"
+
+#. applet.js:275
+msgid "Sleep"
+msgstr "Slaapstand"
+
+#. applet.js:281
+msgid "Hibernate"
+msgstr "Slaapstand naar schijf"
+
+#. applet.js:292
+msgid "Restart"
+msgstr "Herstarten"
+
+#. applet.js:298
+msgid "Shut Down"
+msgstr "Afsluiten"
+
+#. metadata.json->name
+msgid "Session Manager"
+msgstr "Sessiebeheerder"
+
+#. metadata.json->description
+msgid "Provides easy access to shut down, restart, etc"
+msgstr "Biedt eenvoudige toegang tot afsluiten, herstarten, enz."
+
+#. metadata.json->comments
+msgid ""
+"Session Manager is an applet that provides easy access to session controls "
+"such as shut down, restart, log off, switch user, etc. It has been tested in "
+"Arch, Fedora and Linux Mint, and supports a wide variety of software "
+"configurations. If your particular configuration is not supported, please "
+"submit a feature request on github, and I will add it at my earliest "
+"convenience."
+msgstr ""
+"Sessiebeheerder is een applet die eenvoudige toegang biedt tot "
+"sessiebesturingen zoals afsluiten, herstarten, afmelden, van gebruiker "
+"wisselen, enz. Het is getest in Arch, Fedora en Linux Mint, en ondersteunt "
+"een breed scala aan softwareconfiguraties. Als uw specifieke configuratie "
+"niet wordt ondersteund, dien dan alstublieft een functieverzoek in op "
+"GitHub, en ik zal het zo snel mogelijk toevoegen."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Auteur"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Algemene instellingen"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr "Paneelpictogram"
+
+#. settings-schema.json->panelText->description
+msgid "Panel Text"
+msgstr "Paneeltekst"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Icon Size"
+msgstr "Pictogramgrootte"
+
+#. settings-schema.json->symbolicMenuIcons->description
+msgid "Symbolic icons in menu"
+msgstr "Symbolische pictogrammen in menu"
+
+#. settings-schema.json->menuOptions->description
+msgid "Menu Options"
+msgstr ""
+
+#. settings-schema.json->showLockScreen->description
+#, fuzzy
+msgid "Show Lock Screen option"
+msgstr "Scherm vergrendelen"
+
+#. settings-schema.json->showSwitchUser->description
+#, fuzzy
+msgid "Show Switch User option"
+msgstr "Gebruiker wisselen"
+
+#. settings-schema.json->showGuestSession->description
+#, fuzzy
+msgid "Show Guest Session option"
+msgstr "Gastsessie"
+
+#. settings-schema.json->showLogOff->description
+msgid "Show Log Off option"
+msgstr ""
+
+#. settings-schema.json->showSuspend->description
+msgid "Show Suspend option"
+msgstr ""
+
+#. settings-schema.json->showSleep->description
+msgid "Show Sleep option"
+msgstr ""
+
+#. settings-schema.json->showHibernate->description
+#, fuzzy
+msgid "Show Hibernate option"
+msgstr "Slaapstand naar schijf"
+
+#. settings-schema.json->showRestart->description
+msgid "Show Restart option"
+msgstr ""
+
+#. settings-schema.json->showShutDown->description
+#, fuzzy
+msgid "Show Shut Down option"
+msgstr "Afsluiten"

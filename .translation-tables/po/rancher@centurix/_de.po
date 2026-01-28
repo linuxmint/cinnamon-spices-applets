@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2017-02-10 14:43+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:248 applet.js:327 applet.js:330 applet.js:343 applet.js:397
+msgid "Refresh this menu"
+msgstr ""
+
+#. applet.js:284 applet.js:285
+msgid "Vagrant is out of date, please update."
+msgstr ""
+
+#. applet.js:317
+msgid "Rancher: Homestead not installed."
+msgstr ""
+
+#. applet.js:318 applet.js:325
+msgid "Homestead not installed"
+msgstr ""
+
+#. applet.js:326
+msgid "Click here for installation instructions"
+msgstr ""
+
+#. applet.js:329
+msgid "Homestead missing or not configured"
+msgstr ""
+
+#. applet.js:336
+msgid "Recompile Kernel Module."
+msgstr ""
+
+#. applet.js:341
+msgid "Vagrant is out of date for this version of Homestead, please update."
+msgstr ""
+
+#. applet.js:342
+msgid "Click here for the Vagrant download page."
+msgstr ""
+
+#. applet.js:347
+msgid "Status"
+msgstr ""
+
+#. applet.js:350
+msgid "Run provisioning"
+msgstr ""
+
+#. applet.js:351
+msgid "Suspend Homestead"
+msgstr ""
+
+#. applet.js:352
+msgid "SSH Terminal..."
+msgstr ""
+
+#. applet.js:356
+msgid "Destroy Homestead"
+msgstr ""
+
+#. applet.js:363
+msgid "Configuration"
+msgstr ""
+
+#. applet.js:364
+msgid "IP: "
+msgstr ""
+
+#. applet.js:365
+msgid "Memory: "
+msgstr ""
+
+#. applet.js:366
+msgid "CPU: "
+msgstr ""
+
+#. applet.js:367
+msgid "Provider: "
+msgstr ""
+
+#. applet.js:369
+msgid "Edit Homestead configuration..."
+msgstr ""
+
+#. applet.js:372
+msgid "Hosted Sites"
+msgstr ""
+
+#. applet.js:382
+msgid "Edit hosts file..."
+msgstr ""
+
+#. applet.js:385
+msgid "Hosted Databases"
+msgstr ""

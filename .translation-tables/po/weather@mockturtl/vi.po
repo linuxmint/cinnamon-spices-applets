@@ -1,0 +1,2894 @@
+# WEATHER
+# This file is put in the public domain.
+# mockturtl, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: weather@mockturtl 3.6.8\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-09-28 09:12+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
+#. 3.8/weather-applet.js:19744
+msgid "Error"
+msgstr "Lỗi"
+
+#. 3.0/applet.js:167 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:174
+#. 3.0/applet.js:177 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
+#. 3.8/weather-applet.js:19745 3.8/weather-applet.js:19747
+#. 3.8/weather-applet.js:19749 3.8/weather-applet.js:19752
+#. 3.8/weather-applet.js:19755 3.8/weather-applet.js:19756
+#. 3.8/weather-applet.js:19757 3.8/weather-applet.js:19758
+msgid "Service Error"
+msgstr "Lỗi Dịch vụ"
+
+#. 3.0/applet.js:168 3.8/weather-applet.js:19746
+msgid "Incorrect API Key"
+msgstr "Khóa API Không đúng"
+
+#. 3.0/applet.js:170 3.8/weather-applet.js:19748
+msgid "Incorrect Location Format"
+msgstr "Định dạng Vị trí Không đúng"
+
+#. 3.0/applet.js:172 3.8/weather-applet.js:19750
+msgid "Key Blocked"
+msgstr "Khóa Bị chặn"
+
+#. 3.0/applet.js:173 3.8/weather-applet.js:19751
+msgid "Can't find location"
+msgstr "Không thể tìm thấy vị trí"
+
+#. 3.0/applet.js:175 3.8/weather-applet.js:19753
+msgid "No Api Key"
+msgstr "Không có Khóa API"
+
+#. 3.0/applet.js:176 3.8/weather-applet.js:19754
+msgid "No Location"
+msgstr "Không có Vị trí"
+
+#. 3.0/applet.js:181 3.8/weather-applet.js:19759
+msgid "Missing Packages"
+msgstr "Thiếu Gói"
+
+#. 3.0/applet.js:182 3.8/weather-applet.js:19760
+msgid "Location not covered"
+msgstr "Vị trí không được hỗ trợ"
+
+#. 3.0/applet.js:193 3.0/applet.js:378 3.8/weather-applet.js:9049
+msgid "Weather Applet"
+msgstr "Applet Thời tiết"
+
+#. 3.0/applet.js:217 3.8/weather-applet.js:20020
+msgid "..."
+msgstr "..."
+
+#. 3.0/applet.js:218 3.8/weather-applet.js:20021
+msgid "Click to open"
+msgstr "Nhấp để mở"
+
+#. 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:18417
+#. 3.8/weather-applet.js:20024
+msgid "Refresh"
+msgstr "Làm mới"
+
+#. 3.0/applet.js:272
+msgid "API returned status code between 400 and 500"
+msgstr "API trả về mã trạng thái từ 400 đến 500"
+
+#. 3.0/applet.js:426 3.0/applet.js:2032 3.0/applet.js:2036 3.0/applet.js:2040
+#. 3.0/applet.js:2049 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
+#. 3.0/applet.js:2083 3.0/applet.js:2131 3.8/weather-applet.js:9221
+#. 3.8/weather-applet.js:9225
+msgid "Location Store"
+msgstr "Kho Vị trí"
+
+#. 3.0/applet.js:426
+msgid "You can't save a location obtained automatically, sorry"
+msgstr "Bạn không thể lưu vị trí thu được tự động, xin lỗi"
+
+#. 3.0/applet.js:601
+msgid "Could not get weather information"
+msgstr "Không thể lấy thông tin thời tiết"
+
+#. 3.0/applet.js:624 3.8/weather-applet.js:19852
+msgid "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
+msgstr "Lỗi Không mong muốn Khi Làm mới Thời tiết, vui lòng xem nhật ký trong Looking Glass"
+
+#. 3.0/applet.js:670 3.8/weather-applet.js:20103
+msgid ""
+"Could not update weather for a while...\n"
+"are you connected to the internet?"
+msgstr ""
+"Không thể cập nhật thời tiết một lúc...\n"
+"bạn có đang kết nối internet không?"
+
+#. 3.0/applet.js:684
+msgid "Network Error, please check logs in Looking Glass"
+msgstr "Lỗi Mạng, vui lòng kiểm tra nhật ký trong Looking Glass"
+
+#. 3.0/applet.js:969 3.0/applet.js:1110
+msgid "As of"
+msgstr "Tính đến"
+
+#. 3.0/applet.js:1108 3.8/weather-applet.js:19281
+msgid "Powered by"
+msgstr "Được cung cấp bởi"
+
+#. 3.0/applet.js:1113
+msgid "from you"
+msgstr "từ bạn"
+
+#. 3.0/applet.js:1132 3.8/weather-applet.js:19181
+msgid "mm"
+msgstr "mm"
+
+#. 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:19181
+msgid "in"
+msgstr "trong"
+
+#. 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:10075
+#. 3.8/weather-applet.js:19398
+msgid "mi"
+msgstr "dặm"
+
+#. 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:10076
+#. 3.8/weather-applet.js:19399
+msgid "km"
+msgstr "km"
+
+#. 3.0/applet.js:1227 3.8/weather-applet.js:19602
+msgid "Loading current weather ..."
+msgstr "Đang tải thời tiết hiện tại ..."
+
+#. 3.0/applet.js:1230 3.8/weather-applet.js:19605
+msgid "Loading future weather ..."
+msgstr "Đang tải thời tiết tương lai ..."
+
+#. 3.0/applet.js:1280 3.8/weather-applet.js:18331
+msgid "Loading ..."
+msgstr "Đang tải ..."
+
+#. 3.0/applet.js:1329 3.8/weather-applet.js:18368
+msgid "Temperature"
+msgstr "Nhiệt độ"
+
+#. 3.0/applet.js:1330 3.8/weather-applet.js:18373
+msgid "Humidity"
+msgstr "Độ ẩm"
+
+#. 3.0/applet.js:1331 3.8/weather-applet.js:18378
+msgid "Pressure"
+msgstr "Áp suất"
+
+#. 3.0/applet.js:1332 3.8/weather-applet.js:12516 3.8/weather-applet.js:12523
+#. 3.8/weather-applet.js:12524 3.8/weather-applet.js:12530
+#. 3.8/weather-applet.js:14882 3.8/weather-applet.js:14883
+#. 3.8/weather-applet.js:18190
+msgid "Wind"
+msgstr "Gió"
+
+#. 3.0/applet.js:1639
+msgid "Make sure you entered a location or use Automatic location instead"
+msgstr "Hãy đảm bảo bạn đã nhập vị trí hoặc sử dụng Vị trí Tự động thay thế"
+
+#. 3.0/applet.js:1877 3.8/weather-applet.js:9688
+msgid "Could not find location based on address, please check if it's right"
+msgstr "Không thể tìm thấy vị trí dựa trên địa chỉ, vui lòng kiểm tra xem nó có đúng không"
+
+#. 3.0/applet.js:1901 3.8/weather-applet.js:9708
+msgid "Failed to call Geolocation API, see Looking Glass for errors."
+msgstr "Không thể gọi API Định vị Địa lý, xem Looking Glass để biết lỗi."
+
+#. 3.0/applet.js:2032 3.0/applet.js:2036 3.8/weather-applet.js:9221
+msgid "Warning"
+msgstr "Cảnh báo"
+
+#. 3.0/applet.js:2032
+msgid "You can only save correct locations when the applet is not refreshing"
+msgstr "Bạn chỉ có thể lưu các vị trí chính xác khi applet không đang làm mới"
+
+#. 3.0/applet.js:2036 3.8/weather-applet.js:9221
+msgid "You can't save an incorrect location"
+msgstr "Bạn không thể lưu một vị trí không chính xác"
+
+#. 3.8->settings-schema.json->logLevel->options
+#. 3.0/applet.js:2040 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
+#. 3.8/weather-applet.js:9225
+msgid "Info"
+msgstr "Thông tin"
+
+#. 3.0/applet.js:2040 3.8/weather-applet.js:9225
+msgid "Location is already saved"
+msgstr "Vị trí đã được lưu"
+
+#. 3.0/applet.js:2049 3.0/applet.js:2083
+msgid "Success"
+msgstr "Thành công"
+
+#. 3.0/applet.js:2049
+msgid "Location is saved to library"
+msgstr "Vị trí đã được lưu vào thư viện"
+
+#. 3.0/applet.js:2062
+msgid "You can't remove a location while the applet is refreshing"
+msgstr "Bạn không thể xóa vị trí khi applet đang làm mới"
+
+#. 3.0/applet.js:2066
+msgid "You can't remove an incorrect location"
+msgstr "Bạn không thể xóa một vị trí không chính xác"
+
+#. 3.0/applet.js:2070
+msgid "Location is not in storage, can't delete"
+msgstr "Vị trí không có trong kho lưu trữ, không thể xóa"
+
+#. 3.0/applet.js:2083
+msgid "Location is deleted from library"
+msgstr "Vị trí đã bị xóa khỏi thư viện"
+
+#. 3.0/applet.js:2131
+msgid "Failed to load in data from location storage, please see the logs for more information"
+msgstr "Không thể tải dữ liệu từ kho lưu trữ vị trí, vui lòng xem nhật ký để biết thêm thông tin"
+
+#. 3.0/climacell.js:163 3.0/darkSky.js:143 3.0/openWeatherMap.js:129
+#. 3.0/us_weather.js:322 3.0/weatherbit.js:202 3.0/yahoo.js:141
+#. 3.8/weather-applet.js:10724 3.8/weather-applet.js:11764
+#. 3.8/weather-applet.js:12416 3.8/weather-applet.js:13155
+#. 3.8/weather-applet.js:13525 3.8/weather-applet.js:15070
+#. 3.8/weather-applet.js:15685
+msgid "Feels Like"
+msgstr "Cảm giác như"
+
+#. 3.0/climacell.js:174 3.0/darkSky.js:189 3.0/yahoo.js:166
+#. 3.8/weather-applet.js:15761
+msgid "Failed to Process Weather Info"
+msgstr "Không thể Xử lý Thông tin Thời tiết"
+
+#. 3.0/climacell.js:224
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://developer.climacell.co/sign-up"
+msgstr ""
+"Vui lòng nhập khóa API trong cài đặt,\n"
+"hoặc lấy một khóa trước trên https://developer.climacell.co/sign-up"
+
+#. 3.0/climacell.js:239 3.0/darkSky.js:229 3.0/weatherbit.js:331
+#. 3.8/weather-applet.js:11956 3.8/weather-applet.js:15557
+msgid ""
+"Please Make sure you\n"
+"entered the API key correctly and your account is not locked"
+msgstr ""
+"Vui lòng Đảm bảo bạn\n"
+"đã nhập khóa API chính xác và tài khoản của bạn không bị khóa"
+
+#. 3.0/climacell.js:248 3.8/weather-applet.js:12378
+msgid ""
+"Please Make sure you\n"
+"entered the API key that you have from Climacell"
+msgstr ""
+"Vui lòng Đảm bảo bạn\n"
+"đã nhập khóa API mà bạn có từ Climacell"
+
+#. 3.0/climacell.js:259 3.0/climacell.js:260 3.0/met_norway.js:308
+#. 3.0/met_norway.js:309 3.0/met_norway.js:315 3.0/met_norway.js:322
+#. 3.0/met_norway.js:329 3.0/met_uk.js:617 3.0/met_uk.js:624 3.0/met_uk.js:631
+#. 3.0/met_uk.js:632 3.8/weather-applet.js:10279 3.8/weather-applet.js:10286
+#. 3.8/weather-applet.js:10293 3.8/weather-applet.js:10294
+#. 3.8/weather-applet.js:11404 3.8/weather-applet.js:11405
+#. 3.8/weather-applet.js:11411 3.8/weather-applet.js:11418
+#. 3.8/weather-applet.js:11425 3.8/weather-applet.js:12056
+#. 3.8/weather-applet.js:12559 3.8/weather-applet.js:13704
+#. 3.8/weather-applet.js:16134
+msgid "Heavy rain"
+msgstr "Mưa lớn"
+
+#. 3.0/climacell.js:266 3.0/climacell.js:267 3.0/met_norway.js:483
+#. 3.0/met_norway.js:484 3.0/met_norway.js:490 3.0/us_weather.js:484
+#. 3.0/us_weather.js:533 3.0/us_weather.js:534 3.0/us_weather.js:541
+#. 3.0/yahoo.js:448 3.8/weather-applet.js:10457 3.8/weather-applet.js:11579
+#. 3.8/weather-applet.js:11580 3.8/weather-applet.js:11586
+#. 3.8/weather-applet.js:11991 3.8/weather-applet.js:12544
+#. 3.8/weather-applet.js:12545 3.8/weather-applet.js:12551
+#. 3.8/weather-applet.js:12558 3.8/weather-applet.js:12600
+#. 3.8/weather-applet.js:12607 3.8/weather-applet.js:12614
+#. 3.8/weather-applet.js:13297 3.8/weather-applet.js:13346
+#. 3.8/weather-applet.js:13347 3.8/weather-applet.js:13354
+#. 3.8/weather-applet.js:13696 3.8/weather-applet.js:13977
+#. 3.8/weather-applet.js:13978 3.8/weather-applet.js:14019
+#. 3.8/weather-applet.js:14854 3.8/weather-applet.js:14855
+#. 3.8/weather-applet.js:15238 3.8/weather-applet.js:15239
+#. 3.8/weather-applet.js:16119 3.8/weather-applet.js:16126
+#. 3.8/weather-applet.js:16127 3.8/weather-applet.js:16133
+#. 3.8/weather-applet.js:16140 3.8/weather-applet.js:16147
+#. 3.8/weather-applet.js:16749 3.8/weather-applet.js:16750
+msgid "Rain"
+msgstr "Mưa"
+
+#. 3.0/climacell.js:273 3.0/climacell.js:274 3.0/met_norway.js:392
+#. 3.0/met_norway.js:393 3.0/met_norway.js:399 3.0/met_norway.js:406
+#. 3.0/met_norway.js:413 3.0/met_uk.js:589 3.0/met_uk.js:596 3.0/met_uk.js:610
+#. 3.0/met_uk.js:611 3.0/openWeatherMap.js:381 3.8/weather-applet.js:10251
+#. 3.8/weather-applet.js:10258 3.8/weather-applet.js:10272
+#. 3.8/weather-applet.js:10273 3.8/weather-applet.js:10528
+#. 3.8/weather-applet.js:11488 3.8/weather-applet.js:11489
+#. 3.8/weather-applet.js:11495 3.8/weather-applet.js:11502
+#. 3.8/weather-applet.js:11509 3.8/weather-applet.js:12052
+#. 3.8/weather-applet.js:12552 3.8/weather-applet.js:13706
+#. 3.8/weather-applet.js:16120
+msgid "Light rain"
+msgstr "Mưa nhẹ"
+
+#. 3.0/climacell.js:280 3.8/weather-applet.js:12615 3.8/weather-applet.js:13680
+msgid "Heavy freezing rain"
+msgstr "Mưa đóng băng lớn"
+
+#. 3.0/climacell.js:281 3.0/climacell.js:287 3.0/climacell.js:288
+#. 3.0/climacell.js:295 3.0/openWeatherMap.js:386 3.0/us_weather.js:505
+#. 3.0/us_weather.js:506 3.0/us_weather.js:512 3.0/us_weather.js:513
+#. 3.0/us_weather.js:519 3.8/weather-applet.js:10538
+#. 3.8/weather-applet.js:12058 3.8/weather-applet.js:12601
+#. 3.8/weather-applet.js:13318 3.8/weather-applet.js:13319
+#. 3.8/weather-applet.js:13325 3.8/weather-applet.js:13326
+#. 3.8/weather-applet.js:13332 3.8/weather-applet.js:16148
+msgid "Freezing rain"
+msgstr "Mưa đóng băng"
+
+#. 3.0/climacell.js:294 3.8/weather-applet.js:12608 3.8/weather-applet.js:13682
+#. 3.8/weather-applet.js:16141
+msgid "Light freezing rain"
+msgstr "Mưa đóng băng nhẹ"
+
+#. 3.0/climacell.js:301 3.8/weather-applet.js:16106
+msgid "Light freezing drizzle"
+msgstr "Mưa phùn đóng băng nhẹ"
+
+#. 3.0/climacell.js:302 3.8/weather-applet.js:12594 3.8/weather-applet.js:16113
+msgid "Freezing drizzle"
+msgstr "Mưa phùn đóng băng"
+
+#. 3.0/climacell.js:308 3.0/climacell.js:309 3.8/weather-applet.js:12046
+#. 3.8/weather-applet.js:13662 3.8/weather-applet.js:16085
+msgid "Light drizzle"
+msgstr "Mưa phùn nhẹ"
+
+#. 3.0/climacell.js:315 3.8/weather-applet.js:12629
+msgid "Heavy ice pellets"
+msgstr "Hạt băng lớn"
+
+#. 3.0/climacell.js:316 3.0/climacell.js:322 3.0/climacell.js:323
+#. 3.0/climacell.js:330 3.8/weather-applet.js:12621 3.8/weather-applet.js:12622
+#. 3.8/weather-applet.js:12628 3.8/weather-applet.js:12635
+msgid "Ice pellets"
+msgstr "Hạt băng"
+
+#. 3.0/climacell.js:329 3.8/weather-applet.js:12636
+msgid "Light ice pellets"
+msgstr "Hạt băng nhẹ"
+
+#. 3.0/climacell.js:336 3.0/climacell.js:337 3.0/met_norway.js:364
+#. 3.0/met_norway.js:365 3.0/met_norway.js:371 3.0/met_norway.js:378
+#. 3.0/met_norway.js:385 3.0/met_uk.js:701 3.0/met_uk.js:708 3.0/met_uk.js:715
+#. 3.0/met_uk.js:716 3.0/openWeatherMap.js:393 3.8/weather-applet.js:10363
+#. 3.8/weather-applet.js:10370 3.8/weather-applet.js:10377
+#. 3.8/weather-applet.js:10378 3.8/weather-applet.js:10552
+#. 3.8/weather-applet.js:11460 3.8/weather-applet.js:11461
+#. 3.8/weather-applet.js:11467 3.8/weather-applet.js:11474
+#. 3.8/weather-applet.js:11481 3.8/weather-applet.js:12070
+#. 3.8/weather-applet.js:12587 3.8/weather-applet.js:13722
+#. 3.8/weather-applet.js:14054 3.8/weather-applet.js:16169
+msgid "Heavy snow"
+msgstr "Tuyết lớn"
+
+#. 3.0/climacell.js:343 3.0/climacell.js:344 3.0/met_norway.js:539
+#. 3.0/met_norway.js:540 3.0/met_norway.js:546 3.0/openWeatherMap.js:392
+#. 3.0/us_weather.js:477 3.0/us_weather.js:478 3.0/yahoo.js:452
+#. 3.8/weather-applet.js:10459 3.8/weather-applet.js:10550
+#. 3.8/weather-applet.js:11635 3.8/weather-applet.js:11636
+#. 3.8/weather-applet.js:11642 3.8/weather-applet.js:11999
+#. 3.8/weather-applet.js:12068 3.8/weather-applet.js:12565
+#. 3.8/weather-applet.js:12566 3.8/weather-applet.js:12579
+#. 3.8/weather-applet.js:12586 3.8/weather-applet.js:13290
+#. 3.8/weather-applet.js:13291 3.8/weather-applet.js:13716
+#. 3.8/weather-applet.js:13963 3.8/weather-applet.js:14047
+#. 3.8/weather-applet.js:14868 3.8/weather-applet.js:14869
+#. 3.8/weather-applet.js:15266 3.8/weather-applet.js:15267
+#. 3.8/weather-applet.js:16154 3.8/weather-applet.js:16161
+#. 3.8/weather-applet.js:16162 3.8/weather-applet.js:16168
+#. 3.8/weather-applet.js:16175 3.8/weather-applet.js:16765
+#. 3.8/weather-applet.js:16766
+msgid "Snow"
+msgstr "Tuyết"
+
+#. 3.0/climacell.js:350 3.0/climacell.js:351 3.0/met_norway.js:448
+#. 3.0/met_norway.js:449 3.0/met_norway.js:455 3.0/met_norway.js:462
+#. 3.0/met_norway.js:469 3.0/met_uk.js:680 3.0/met_uk.js:687 3.0/met_uk.js:694
+#. 3.0/met_uk.js:695 3.0/openWeatherMap.js:391 3.8/weather-applet.js:10342
+#. 3.8/weather-applet.js:10349 3.8/weather-applet.js:10356
+#. 3.8/weather-applet.js:10357 3.8/weather-applet.js:10548
+#. 3.8/weather-applet.js:11544 3.8/weather-applet.js:11545
+#. 3.8/weather-applet.js:11551 3.8/weather-applet.js:11558
+#. 3.8/weather-applet.js:11565 3.8/weather-applet.js:12066
+#. 3.8/weather-applet.js:12580 3.8/weather-applet.js:13724
+#. 3.8/weather-applet.js:16155
+msgid "Light snow"
+msgstr "Tuyết nhẹ"
+
+#. 3.0/climacell.js:357 3.0/climacell.js:358 3.8/weather-applet.js:12078
+#. 3.8/weather-applet.js:12572 3.8/weather-applet.js:12573
+#. 3.8/weather-applet.js:15245 3.8/weather-applet.js:15246
+msgid "Flurries"
+msgstr "Mưa tuyết rải rác"
+
+#. 3.0/climacell.js:364 3.0/climacell.js:365 3.0/openWeatherMap.js:366
+#. 3.0/us_weather.js:550 3.0/us_weather.js:551 3.8/weather-applet.js:10453
+#. 3.8/weather-applet.js:10498 3.8/weather-applet.js:11979
+#. 3.8/weather-applet.js:12044 3.8/weather-applet.js:12642
+#. 3.8/weather-applet.js:12643 3.8/weather-applet.js:13363
+#. 3.8/weather-applet.js:13364 3.8/weather-applet.js:13728
+#. 3.8/weather-applet.js:14061 3.8/weather-applet.js:14062
+#. 3.8/weather-applet.js:14875 3.8/weather-applet.js:14876
+#. 3.8/weather-applet.js:16217 3.8/weather-applet.js:16218
+#. 3.8/weather-applet.js:16224 3.8/weather-applet.js:16231
+msgid "Thunderstorm"
+msgstr "Giông bão"
+
+#. 3.0/climacell.js:371 3.0/climacell.js:372 3.8/weather-applet.js:12510
+msgid "Light fog"
+msgstr "Sương mù nhẹ"
+
+#. 3.0/climacell.js:378 3.0/climacell.js:379 3.0/met_norway.js:301
+#. 3.0/met_norway.js:302 3.0/met_uk.js:568 3.0/met_uk.js:569
+#. 3.0/openWeatherMap.js:405 3.0/us_weather.js:620 3.0/us_weather.js:621
+#. 3.8/weather-applet.js:10230 3.8/weather-applet.js:10231
+#. 3.8/weather-applet.js:10473 3.8/weather-applet.js:10578
+#. 3.8/weather-applet.js:11397 3.8/weather-applet.js:11398
+#. 3.8/weather-applet.js:12013 3.8/weather-applet.js:12092
+#. 3.8/weather-applet.js:12502 3.8/weather-applet.js:12503
+#. 3.8/weather-applet.js:12509 3.8/weather-applet.js:13433
+#. 3.8/weather-applet.js:13434 3.8/weather-applet.js:13670
+#. 3.8/weather-applet.js:14826 3.8/weather-applet.js:14827
+#. 3.8/weather-applet.js:15294 3.8/weather-applet.js:15295
+#. 3.8/weather-applet.js:16077 3.8/weather-applet.js:16078
+#. 3.8/weather-applet.js:16818 3.8/weather-applet.js:16819
+msgid "Fog"
+msgstr "Sương mù"
+
+#. 3.0/climacell.js:385 3.0/climacell.js:386 3.0/met_norway.js:287
+#. 3.0/met_norway.js:288 3.0/met_uk.js:575 3.0/met_uk.js:576 3.0/yahoo.js:462
+#. 3.8/weather-applet.js:10237 3.8/weather-applet.js:10238
+#. 3.8/weather-applet.js:11383 3.8/weather-applet.js:11384
+#. 3.8/weather-applet.js:12474 3.8/weather-applet.js:12475
+#. 3.8/weather-applet.js:13956 3.8/weather-applet.js:13957
+#. 3.8/weather-applet.js:14819 3.8/weather-applet.js:14820
+#. 3.8/weather-applet.js:15336 3.8/weather-applet.js:15337
+#. 3.8/weather-applet.js:16581 3.8/weather-applet.js:16582
+msgid "Cloudy"
+msgstr "Nhiều mây"
+
+#. 3.0/climacell.js:392 3.0/climacell.js:393 3.0/us_weather.js:428
+#. 3.0/us_weather.js:429 3.0/us_weather.js:463 3.8/weather-applet.js:12495
+#. 3.8/weather-applet.js:12496 3.8/weather-applet.js:13241
+#. 3.8/weather-applet.js:13242 3.8/weather-applet.js:13276
+msgid "Mostly cloudy"
+msgstr "Chủ yếu có mây"
+
+#. 3.0/climacell.js:399 3.0/climacell.js:400 3.0/met_norway.js:476
+#. 3.0/met_norway.js:477 3.0/met_uk.js:540 3.0/met_uk.js:541 3.0/met_uk.js:547
+#. 3.0/met_uk.js:548 3.0/us_weather.js:421 3.0/us_weather.js:422
+#. 3.0/us_weather.js:456 3.8/weather-applet.js:10202
+#. 3.8/weather-applet.js:10203 3.8/weather-applet.js:10209
+#. 3.8/weather-applet.js:10210 3.8/weather-applet.js:11572
+#. 3.8/weather-applet.js:11573 3.8/weather-applet.js:12488
+#. 3.8/weather-applet.js:12489 3.8/weather-applet.js:13234
+#. 3.8/weather-applet.js:13235 3.8/weather-applet.js:13269
+#. 3.8/weather-applet.js:13949 3.8/weather-applet.js:13950
+#. 3.8/weather-applet.js:16062 3.8/weather-applet.js:16063
+msgid "Partly cloudy"
+msgstr "Mây rải rác"
+
+#. 3.0/climacell.js:406 3.0/climacell.js:407 3.8/weather-applet.js:12481
+#. 3.8/weather-applet.js:12482
+msgid "Mostly clear"
+msgstr "Chủ yếu quang đãng"
+
+#. 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:526
+#. 3.0/met_uk.js:527 3.0/openWeatherMap.js:411 3.0/us_weather.js:407
+#. 3.0/us_weather.js:408 3.0/us_weather.js:442 3.0/yahoo.js:465
+#. 3.8/weather-applet.js:10188 3.8/weather-applet.js:10189
+#. 3.8/weather-applet.js:10461 3.8/weather-applet.js:12015
+#. 3.8/weather-applet.js:12096 3.8/weather-applet.js:12467
+#. 3.8/weather-applet.js:12468 3.8/weather-applet.js:13220
+#. 3.8/weather-applet.js:13221 3.8/weather-applet.js:13255
+#. 3.8/weather-applet.js:13740 3.8/weather-applet.js:13942
+#. 3.8/weather-applet.js:13943 3.8/weather-applet.js:14805
+#. 3.8/weather-applet.js:14806 3.8/weather-applet.js:14812
+#. 3.8/weather-applet.js:14813 3.8/weather-applet.js:15371
+#. 3.8/weather-applet.js:15372 3.8/weather-applet.js:16048
+#. 3.8/weather-applet.js:16524 3.8/weather-applet.js:16531
+msgid "Clear"
+msgstr "Quang đãng"
+
+#. 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:533
+#. 3.0/met_uk.js:534 3.0/yahoo.js:466 3.8/weather-applet.js:10195
+#. 3.8/weather-applet.js:10196 3.8/weather-applet.js:12467
+#. 3.8/weather-applet.js:12468 3.8/weather-applet.js:15378
+#. 3.8/weather-applet.js:15379
+msgid "Sunny"
+msgstr "Nắng"
+
+#. 3.0/climacell.js:421 3.0/climacell.js:422 3.0/met_norway.js:568
+#. 3.0/met_norway.js:569 3.0/met_uk.js:519 3.0/met_uk.js:520 3.0/met_uk.js:554
+#. 3.0/met_uk.js:555 3.0/met_uk.js:743 3.0/met_uk.js:744 3.0/us_weather.js:627
+#. 3.0/us_weather.js:628 3.8/weather-applet.js:8393 3.8/weather-applet.js:10181
+#. 3.8/weather-applet.js:10182 3.8/weather-applet.js:10216
+#. 3.8/weather-applet.js:10217 3.8/weather-applet.js:10405
+#. 3.8/weather-applet.js:10406 3.8/weather-applet.js:11366
+#. 3.8/weather-applet.js:11367 3.8/weather-applet.js:11664
+#. 3.8/weather-applet.js:11665 3.8/weather-applet.js:12026
+#. 3.8/weather-applet.js:12107 3.8/weather-applet.js:12459
+#. 3.8/weather-applet.js:12460 3.8/weather-applet.js:13211
+#. 3.8/weather-applet.js:13212 3.8/weather-applet.js:13440
+#. 3.8/weather-applet.js:13441 3.8/weather-applet.js:14738
+#. 3.8/weather-applet.js:14739 3.8/weather-applet.js:14889
+#. 3.8/weather-applet.js:14890 3.8/weather-applet.js:15482
+#. 3.8/weather-applet.js:15484 3.8/weather-applet.js:16238
+#. 3.8/weather-applet.js:16239 3.8/weather-applet.js:16998
+#. 3.8/weather-applet.js:16999
+msgid "Unknown"
+msgstr "Không xác định"
+
+#. 3.0/darkSky.js:71
+msgid "and"
+msgstr "và"
+
+#. 3.0/darkSky.js:71
+msgid "until"
+msgstr "cho đến"
+
+#. 3.0/darkSky.js:71
+msgid "Possible"
+msgstr "Có thể"
+
+#. 3.0/darkSky.js:211
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://darksky.net/dev/register"
+msgstr ""
+"Vui lòng nhập khóa API trong cài đặt,\n"
+"hoặc lấy một khóa trước trên https://darksky.net/dev/register"
+
+#. 3.0/darkSky.js:238
+msgid ""
+"Please Make sure you\n"
+"entered the API key that you have from DarkSky"
+msgstr ""
+"Vui lòng Đảm bảo bạn\n"
+"đã nhập khóa API mà bạn có từ DarkSky"
+
+#. 3.0/ipApi.js:89 3.8/weather-applet.js:16033
+msgid "Could not obtain location"
+msgstr "Không thể lấy vị trí"
+
+#. 3.0/ipApi.js:95
+msgid "Location Service responded with errors, please see the logs in Looking Glass"
+msgstr "Dịch vụ Vị trí phản hồi với lỗi, vui lòng xem nhật ký trong Looking Glass"
+
+#. 3.0/met_norway.js:131 3.8/weather-applet.js:11225
+msgid "Cloudiness"
+msgstr "Độ nhiều mây"
+
+#. 3.0/met_norway.js:280 3.0/met_norway.js:281 3.0/openWeatherMap.js:412
+#. 3.8/weather-applet.js:10591 3.8/weather-applet.js:11376
+#. 3.8/weather-applet.js:11377 3.8/weather-applet.js:16049
+#. 3.8/weather-applet.js:16525 3.8/weather-applet.js:16532
+msgid "Clear sky"
+msgstr "Bầu trời quang đãng"
+
+#. 3.0/met_norway.js:294 3.0/met_norway.js:295 3.0/yahoo.js:468
+#. 3.8/weather-applet.js:11390 3.8/weather-applet.js:11391
+msgid "Fair"
+msgstr "Tốt"
+
+#. 3.0/met_norway.js:316 3.8/weather-applet.js:11412
+msgid "Heavy rain and thunder"
+msgstr "Mưa lớn và sấm sét"
+
+#. 3.0/met_norway.js:323 3.8/weather-applet.js:11419
+msgid "Heavy rain showers"
+msgstr "Mưa rào lớn"
+
+#. 3.0/met_norway.js:330 3.8/weather-applet.js:11426
+msgid "Heavy rain showers and thunder"
+msgstr "Mưa rào lớn và sấm sét"
+
+#. 3.0/met_norway.js:336 3.0/met_norway.js:337 3.0/met_norway.js:343
+#. 3.0/met_norway.js:350 3.0/met_norway.js:357 3.8/weather-applet.js:11432
+#. 3.8/weather-applet.js:11433 3.8/weather-applet.js:11439
+#. 3.8/weather-applet.js:11446 3.8/weather-applet.js:11453
+#. 3.8/weather-applet.js:12082
+msgid "Heavy sleet"
+msgstr "Mưa tuyết lớn"
+
+#. 3.0/met_norway.js:344 3.8/weather-applet.js:11440
+msgid "Heavy sleet and thunder"
+msgstr "Mưa tuyết lớn và sấm sét"
+
+#. 3.0/met_norway.js:351 3.8/weather-applet.js:11447
+msgid "Heavy sleet showers"
+msgstr "Mưa tuyết rào lớn"
+
+#. 3.0/met_norway.js:358 3.8/weather-applet.js:11454
+msgid "Heavy sleet showers and thunder"
+msgstr "Mưa tuyết rào lớn và sấm sét"
+
+#. 3.0/met_norway.js:372 3.8/weather-applet.js:11468
+msgid "Heavy snow and thunder"
+msgstr "Tuyết lớn và sấm sét"
+
+#. 3.0/met_norway.js:379 3.8/weather-applet.js:11475
+#. 3.8/weather-applet.js:14055
+msgid "Heavy snow showers"
+msgstr "Tuyết rào lớn"
+
+#. 3.0/met_norway.js:386 3.8/weather-applet.js:11482
+msgid "Heavy snow showers and thunder"
+msgstr "Tuyết rào lớn và sấm sét"
+
+#. 3.0/met_norway.js:400 3.8/weather-applet.js:11496
+msgid "Light rain and thunder"
+msgstr "Mưa nhẹ và sấm sét"
+
+#. 3.0/met_norway.js:407 3.8/weather-applet.js:11503
+msgid "Light rain showers"
+msgstr "Mưa rào nhẹ"
+
+#. 3.0/met_norway.js:414 3.8/weather-applet.js:11510
+msgid "Light rain showers and thunder"
+msgstr "Mưa rào nhẹ và sấm sét"
+
+#. 3.0/met_norway.js:420 3.0/met_norway.js:421 3.0/met_norway.js:427
+#. 3.0/met_norway.js:434 3.0/met_norway.js:441 3.8/weather-applet.js:11516
+#. 3.8/weather-applet.js:11517 3.8/weather-applet.js:11523
+#. 3.8/weather-applet.js:11530 3.8/weather-applet.js:11537
+msgid "Light sleet"
+msgstr "Mưa tuyết nhẹ"
+
+#. 3.0/met_norway.js:428 3.8/weather-applet.js:11524
+msgid "Light sleet and thunder"
+msgstr "Mưa tuyết nhẹ và sấm sét"
+
+#. 3.0/met_norway.js:435 3.8/weather-applet.js:11531
+msgid "Light sleet showers"
+msgstr "Mưa tuyết rào nhẹ"
+
+#. 3.0/met_norway.js:442 3.8/weather-applet.js:11538
+msgid "Light sleet showers and thunder"
+msgstr "Mưa tuyết rào nhẹ và sấm sét"
+
+#. 3.0/met_norway.js:456 3.8/weather-applet.js:11552
+msgid "Light snow and thunder"
+msgstr "Tuyết nhẹ và sấm sét"
+
+#. 3.0/met_norway.js:463 3.8/weather-applet.js:11559
+#. 3.8/weather-applet.js:16204
+msgid "Light snow showers"
+msgstr "Tuyết rào nhẹ"
+
+#. 3.0/met_norway.js:470 3.8/weather-applet.js:11566
+msgid "Light snow showers and thunder"
+msgstr "Tuyết rào nhẹ và sấm sét"
+
+#. 3.0/met_norway.js:491 3.8/weather-applet.js:11587
+msgid "Rain and thunder"
+msgstr "Mưa và sấm sét"
+
+#. 3.0/met_norway.js:497 3.0/met_norway.js:498 3.0/met_norway.js:504
+#. 3.0/us_weather.js:542 3.8/weather-applet.js:11593
+#. 3.8/weather-applet.js:11594 3.8/weather-applet.js:11600
+#. 3.8/weather-applet.js:13355 3.8/weather-applet.js:13702
+#. 3.8/weather-applet.js:14020 3.8/weather-applet.js:14026
+msgid "Rain showers"
+msgstr "Mưa rào"
+
+#. 3.0/met_norway.js:505 3.8/weather-applet.js:11601
+msgid "Rain showers and thunder"
+msgstr "Mưa rào và sấm sét"
+
+#. 3.0/met_norway.js:511 3.0/met_norway.js:512 3.0/met_norway.js:518
+#. 3.0/met_norway.js:525 3.0/met_norway.js:532 3.0/met_uk.js:638
+#. 3.0/met_uk.js:645 3.0/met_uk.js:652 3.0/met_uk.js:653
+#. 3.0/openWeatherMap.js:394 3.0/us_weather.js:491 3.0/us_weather.js:492
+#. 3.0/us_weather.js:498 3.0/us_weather.js:499 3.0/us_weather.js:526
+#. 3.0/us_weather.js:527 3.0/yahoo.js:454 3.8/weather-applet.js:10300
+#. 3.8/weather-applet.js:10307 3.8/weather-applet.js:10314
+#. 3.8/weather-applet.js:10315 3.8/weather-applet.js:10554
+#. 3.8/weather-applet.js:11607 3.8/weather-applet.js:11608
+#. 3.8/weather-applet.js:11614 3.8/weather-applet.js:11621
+#. 3.8/weather-applet.js:11628 3.8/weather-applet.js:12002
+#. 3.8/weather-applet.js:12080 3.8/weather-applet.js:13304
+#. 3.8/weather-applet.js:13305 3.8/weather-applet.js:13311
+#. 3.8/weather-applet.js:13312 3.8/weather-applet.js:13339
+#. 3.8/weather-applet.js:13340 3.8/weather-applet.js:14861
+#. 3.8/weather-applet.js:14862 3.8/weather-applet.js:15280
+#. 3.8/weather-applet.js:15281 3.8/weather-applet.js:16644
+#. 3.8/weather-applet.js:16645 3.8/weather-applet.js:16651
+#. 3.8/weather-applet.js:16652 3.8/weather-applet.js:16757
+#. 3.8/weather-applet.js:16758
+msgid "Sleet"
+msgstr "Mưa tuyết"
+
+#. 3.0/met_norway.js:519 3.8/weather-applet.js:11615
+msgid "Sleet and thunder"
+msgstr "Mưa tuyết và sấm sét"
+
+#. 3.0/met_norway.js:526 3.8/weather-applet.js:11622
+msgid "Sleet showers"
+msgstr "Mưa tuyết rào"
+
+#. 3.0/met_norway.js:533 3.8/weather-applet.js:11629
+msgid "Sleet showers and thunder"
+msgstr "Mưa tuyết rào và sấm sét"
+
+#. 3.0/met_norway.js:547 3.8/weather-applet.js:11643
+msgid "Snow and thunder"
+msgstr "Tuyết và sấm sét"
+
+#. 3.0/met_norway.js:553 3.0/met_norway.js:554 3.0/met_norway.js:560
+#. 3.8/weather-applet.js:11649 3.8/weather-applet.js:11650
+#. 3.8/weather-applet.js:11656 3.8/weather-applet.js:13720
+#. 3.8/weather-applet.js:14048 3.8/weather-applet.js:16203
+#. 3.8/weather-applet.js:16210 3.8/weather-applet.js:16211
+msgid "Snow showers"
+msgstr "Tuyết rào"
+
+#. 3.0/met_norway.js:561 3.8/weather-applet.js:11657
+msgid "Snow showers and thunder"
+msgstr "Tuyết rào và sấm sét"
+
+#. 3.0/met_uk.js:162 3.0/met_uk.js:192 3.0/met_uk.js:239 3.0/us_weather.js:151
+#. 3.0/us_weather.js:179
+msgid "Unexpected response from API"
+msgstr "Phản hồi không mong đợi từ API"
+
+#. 3.0/met_uk.js:316 3.8/weather-applet.js:10000
+msgid "Visibility"
+msgstr "Tầm nhìn"
+
+#. 3.0/met_uk.js:340 3.0/openWeatherMap.js:190 3.0/us_weather.js:334
+#. 3.0/weatherbit.js:212 3.8/weather-applet.js:10028
+#. 3.8/weather-applet.js:11776 3.8/weather-applet.js:13168
+msgid "Failed to Process Current Weather Info"
+msgstr "Không thể Xử lý Thông tin Thời tiết Hiện tại"
+
+#. 3.0/met_uk.js:364 3.0/met_uk.js:400 3.0/us_weather.js:371
+#. 3.0/weatherbit.js:239 3.0/weatherbit.js:274 3.8/weather-applet.js:9797
+#. 3.8/weather-applet.js:9835 3.8/weather-applet.js:11802
+#. 3.8/weather-applet.js:11836 3.8/weather-applet.js:12946
+msgid "Failed to Process Forecast Info"
+msgstr "Không thể Xử lý Thông tin Dự báo"
+
+#. 3.0/met_uk.js:408
+msgid "Very poor - Less than"
+msgstr "Rất kém - Ít hơn"
+
+#. 3.0/met_uk.js:410
+msgid "Poor - Between"
+msgstr "Kém - Giữa"
+
+#. 3.0/met_uk.js:412
+msgid "Moderate - Between"
+msgstr "Trung bình - Giữa"
+
+#. 3.0/met_uk.js:414
+msgid "Good - Between"
+msgstr "Tốt - Giữa"
+
+#. 3.0/met_uk.js:416
+msgid "Very good - Between"
+msgstr "Rất tốt - Giữa"
+
+#. 3.0/met_uk.js:417
+msgid "Excellent - More than"
+msgstr "Tuyệt vời - Hơn"
+
+#. 3.0/met_uk.js:561 3.0/met_uk.js:562 3.0/openWeatherMap.js:401
+#. 3.8/weather-applet.js:10223 3.8/weather-applet.js:10224
+#. 3.8/weather-applet.js:10465 3.8/weather-applet.js:10570
+#. 3.8/weather-applet.js:12004 3.8/weather-applet.js:12084
+#. 3.8/weather-applet.js:13692
+msgid "Mist"
+msgstr "Sương mù"
+
+#. 3.0/met_uk.js:582 3.0/met_uk.js:583 3.0/us_weather.js:435
+#. 3.0/us_weather.js:436 3.0/us_weather.js:470 3.8/weather-applet.js:10244
+#. 3.8/weather-applet.js:10245 3.8/weather-applet.js:12023
+#. 3.8/weather-applet.js:12104 3.8/weather-applet.js:13248
+#. 3.8/weather-applet.js:13249 3.8/weather-applet.js:13283
+#. 3.8/weather-applet.js:13736 3.8/weather-applet.js:16069
+#. 3.8/weather-applet.js:16070 3.8/weather-applet.js:16566
+#. 3.8/weather-applet.js:16567 3.8/weather-applet.js:16573
+#. 3.8/weather-applet.js:16574
+msgid "Overcast"
+msgstr "U ám"
+
+#. 3.0/met_uk.js:590 3.0/met_uk.js:597 3.8/weather-applet.js:10252
+#. 3.8/weather-applet.js:10259
+msgid "Light rain shower"
+msgstr "Mưa rào nhẹ"
+
+#. 3.0/met_uk.js:603 3.0/met_uk.js:604 3.0/openWeatherMap.js:373
+#. 3.0/yahoo.js:445 3.8/weather-applet.js:10265 3.8/weather-applet.js:10266
+#. 3.8/weather-applet.js:10455 3.8/weather-applet.js:10512
+#. 3.8/weather-applet.js:11983 3.8/weather-applet.js:12048
+#. 3.8/weather-applet.js:12537 3.8/weather-applet.js:12538
+#. 3.8/weather-applet.js:12593 3.8/weather-applet.js:13658
+#. 3.8/weather-applet.js:15217 3.8/weather-applet.js:15218
+#. 3.8/weather-applet.js:16084 3.8/weather-applet.js:16091
+#. 3.8/weather-applet.js:16092 3.8/weather-applet.js:16098
+#. 3.8/weather-applet.js:16105 3.8/weather-applet.js:16112
+msgid "Drizzle"
+msgstr "Mưa phùn"
+
+#. 3.0/met_uk.js:618 3.0/met_uk.js:625 3.8/weather-applet.js:10280
+#. 3.8/weather-applet.js:10287
+msgid "Heavy rain shower"
+msgstr "Mưa rào nặng hạt"
+
+#. 3.0/met_uk.js:639 3.0/met_uk.js:646 3.8/weather-applet.js:10301
+#. 3.8/weather-applet.js:10308
+msgid "Sleet shower"
+msgstr "Mưa tuyết"
+
+#. 3.0/met_uk.js:659 3.0/met_uk.js:666 3.0/met_uk.js:673 3.0/met_uk.js:674
+#. 3.0/yahoo.js:453 3.8/weather-applet.js:10321 3.8/weather-applet.js:10328
+#. 3.8/weather-applet.js:10335 3.8/weather-applet.js:10336
+#. 3.8/weather-applet.js:13734 3.8/weather-applet.js:14833
+#. 3.8/weather-applet.js:14834 3.8/weather-applet.js:15273
+#. 3.8/weather-applet.js:15274
+msgid "Hail"
+msgstr "Mưa đá"
+
+#. 3.0/met_uk.js:660 3.0/met_uk.js:667 3.8/weather-applet.js:10322
+#. 3.8/weather-applet.js:10329
+msgid "Hail shower"
+msgstr "Mưa đá"
+
+#. 3.0/met_uk.js:681 3.0/met_uk.js:688 3.8/weather-applet.js:10343
+#. 3.8/weather-applet.js:10350
+msgid "Light snow shower"
+msgstr "Mưa tuyết nhẹ"
+
+#. 3.0/met_uk.js:702 3.0/met_uk.js:709 3.8/weather-applet.js:10364
+#. 3.8/weather-applet.js:10371 3.8/weather-applet.js:12076
+msgid "Heavy snow shower"
+msgstr "Mưa tuyết nặng"
+
+#. 3.0/met_uk.js:722 3.0/met_uk.js:729 3.0/met_uk.js:736 3.0/met_uk.js:737
+#. 3.8/weather-applet.js:10384 3.8/weather-applet.js:10391
+#. 3.8/weather-applet.js:10398 3.8/weather-applet.js:10399
+msgid "Thunder"
+msgstr "Sấm"
+
+#. 3.0/met_uk.js:723 3.0/met_uk.js:730 3.8/weather-applet.js:10385
+#. 3.8/weather-applet.js:10392
+msgid "Thunder shower"
+msgstr "Mưa giông"
+
+#. 3.0/openWeatherMap.js:238 3.8/weather-applet.js:10852
+msgid "Please make sure Location is in the correct format in the Settings"
+msgstr "Vui lòng đảm bảo Địa điểm có định dạng đúng trong Cài đặt"
+
+#. 3.0/openWeatherMap.js:242 3.8/weather-applet.js:10856
+msgid "Make sure you entered the correct key in settings"
+msgstr "Đảm bảo bạn đã nhập khóa chính xác trong cài đặt"
+
+#. 3.0/openWeatherMap.js:246 3.0/openWeatherMap.js:266
+#. 3.8/weather-applet.js:10860
+msgid "Location not found, make sure location is available or it is in the correct format"
+msgstr "Không tìm thấy địa điểm, hãy đảm bảo địa điểm có sẵn hoặc có định dạng đúng"
+
+#. 3.0/openWeatherMap.js:250 3.8/weather-applet.js:10864
+msgid "If this problem persists, please contact the Author of this applet"
+msgstr "Nếu sự cố này vẫn tiếp diễn, vui lòng liên hệ Tác giả của applet này"
+
+#. 3.0/openWeatherMap.js:254 3.8/weather-applet.js:10868
+msgid "Unknown Error, please see the logs in Looking Glass"
+msgstr "Lỗi không xác định, vui lòng xem nhật ký trong Looking Glass"
+
+#. 3.0/openWeatherMap.js:362 3.8/weather-applet.js:10490
+#. 3.8/weather-applet.js:12032
+msgid "Thunderstorm with light rain"
+msgstr "Giông bão với mưa nhẹ"
+
+#. 3.0/openWeatherMap.js:363 3.8/weather-applet.js:10492
+#. 3.8/weather-applet.js:12034
+msgid "Thunderstorm with rain"
+msgstr "Giông bão với mưa"
+
+#. 3.0/openWeatherMap.js:364 3.8/weather-applet.js:10494
+#. 3.8/weather-applet.js:12036
+msgid "Thunderstorm with heavy rain"
+msgstr "Giông bão với mưa lớn"
+
+#. 3.0/openWeatherMap.js:365 3.8/weather-applet.js:10496
+msgid "Light thunderstorm"
+msgstr "Giông bão nhẹ"
+
+#. 3.0/openWeatherMap.js:367 3.8/weather-applet.js:10500
+msgid "Heavy thunderstorm"
+msgstr "Giông bão mạnh"
+
+#. 3.0/openWeatherMap.js:368 3.8/weather-applet.js:10502
+msgid "Ragged thunderstorm"
+msgstr "Giông bão dữ dội"
+
+#. 3.0/openWeatherMap.js:369 3.8/weather-applet.js:10504
+#. 3.8/weather-applet.js:12038
+msgid "Thunderstorm with light drizzle"
+msgstr "Giông bão với mưa phùn nhẹ"
+
+#. 3.0/openWeatherMap.js:370 3.8/weather-applet.js:10506
+#. 3.8/weather-applet.js:12040
+msgid "Thunderstorm with drizzle"
+msgstr "Giông bão với mưa phùn"
+
+#. 3.0/openWeatherMap.js:371 3.8/weather-applet.js:10508
+#. 3.8/weather-applet.js:12042
+msgid "Thunderstorm with heavy drizzle"
+msgstr "Giông bão với mưa phùn nặng hạt"
+
+#. 3.0/openWeatherMap.js:372 3.8/weather-applet.js:10510
+msgid "Light intensity drizzle"
+msgstr "Mưa phùn cường độ nhẹ"
+
+#. 3.0/openWeatherMap.js:374 3.8/weather-applet.js:10514
+msgid "Heavy intensity drizzle"
+msgstr "Mưa phùn cường độ nặng"
+
+#. 3.0/openWeatherMap.js:375 3.8/weather-applet.js:10516
+msgid "Light intensity drizzle rain"
+msgstr "Mưa phùn cường độ nhẹ"
+
+#. 3.0/openWeatherMap.js:376 3.8/weather-applet.js:10518
+msgid "Drizzle rain"
+msgstr "Mưa phùn"
+
+#. 3.0/openWeatherMap.js:377 3.8/weather-applet.js:10520
+msgid "Heavy intensity drizzle rain"
+msgstr "Mưa phùn cường độ nặng"
+
+#. 3.0/openWeatherMap.js:378 3.8/weather-applet.js:10522
+msgid "Shower rain and drizzle"
+msgstr "Mưa rào và mưa phùn"
+
+#. 3.0/openWeatherMap.js:379 3.8/weather-applet.js:10524
+msgid "Heavy shower rain and drizzle"
+msgstr "Mưa rào nặng hạt và mưa phùn"
+
+#. 3.0/openWeatherMap.js:380 3.8/weather-applet.js:10526
+msgid "Shower drizzle"
+msgstr "Mưa phùn rào"
+
+#. 3.0/openWeatherMap.js:382 3.8/weather-applet.js:10530
+#. 3.8/weather-applet.js:12054 3.8/weather-applet.js:13984
+#. 3.8/weather-applet.js:13985
+msgid "Moderate rain"
+msgstr "Mưa vừa"
+
+#. 3.0/openWeatherMap.js:383 3.8/weather-applet.js:10532
+msgid "Heavy intensity rain"
+msgstr "Mưa cường độ nặng"
+
+#. 3.0/openWeatherMap.js:384 3.8/weather-applet.js:10534
+msgid "Very heavy rain"
+msgstr "Mưa rất lớn"
+
+#. 3.0/openWeatherMap.js:385 3.8/weather-applet.js:10536
+msgid "Extreme rain"
+msgstr "Mưa cực lớn"
+
+#. 3.0/openWeatherMap.js:387 3.8/weather-applet.js:10540
+msgid "Light intensity shower rain"
+msgstr "Mưa rào cường độ nhẹ"
+
+#. 3.0/openWeatherMap.js:388 3.8/weather-applet.js:10542
+#. 3.8/weather-applet.js:12062
+msgid "Shower rain"
+msgstr "Mưa rào"
+
+#. 3.0/openWeatherMap.js:389 3.8/weather-applet.js:10544
+msgid "Heavy intensity shower rain"
+msgstr "Mưa rào cường độ nặng"
+
+#. 3.0/openWeatherMap.js:390 3.8/weather-applet.js:10546
+msgid "Ragged shower rain"
+msgstr "Mưa rào dữ dội"
+
+#. 3.0/openWeatherMap.js:395 3.8/weather-applet.js:10558
+msgid "Shower sleet"
+msgstr "Mưa tuyết rào"
+
+#. 3.0/openWeatherMap.js:396 3.8/weather-applet.js:10560
+msgid "Light rain and snow"
+msgstr "Mưa và tuyết nhẹ"
+
+#. 3.0/openWeatherMap.js:397 3.8/weather-applet.js:10562
+#. 3.8/weather-applet.js:13991 3.8/weather-applet.js:13992
+#. 3.8/weather-applet.js:13998 3.8/weather-applet.js:14033
+#. 3.8/weather-applet.js:14040
+msgid "Rain and snow"
+msgstr "Mưa và tuyết"
+
+#. 3.0/openWeatherMap.js:398 3.8/weather-applet.js:10564
+msgid "Light shower snow"
+msgstr "Mưa tuyết nhẹ"
+
+#. 3.0/openWeatherMap.js:399 3.8/weather-applet.js:10566
+msgid "Shower snow"
+msgstr "Mưa tuyết"
+
+#. 3.0/openWeatherMap.js:400 3.8/weather-applet.js:10568
+msgid "Heavy shower snow"
+msgstr "Mưa tuyết nặng"
+
+#. 3.0/openWeatherMap.js:402 3.0/us_weather.js:585 3.0/us_weather.js:586
+#. 3.8/weather-applet.js:10467 3.8/weather-applet.js:10572
+#. 3.8/weather-applet.js:12006 3.8/weather-applet.js:12086
+#. 3.8/weather-applet.js:13398 3.8/weather-applet.js:13399
+#. 3.8/weather-applet.js:15308 3.8/weather-applet.js:15309
+msgid "Smoke"
+msgstr "Khói"
+
+#. 3.0/openWeatherMap.js:403 3.0/us_weather.js:592 3.0/us_weather.js:593
+#. 3.0/yahoo.js:457 3.8/weather-applet.js:10469 3.8/weather-applet.js:10574
+#. 3.8/weather-applet.js:12008 3.8/weather-applet.js:12088
+#. 3.8/weather-applet.js:13405 3.8/weather-applet.js:13406
+#. 3.8/weather-applet.js:15301 3.8/weather-applet.js:15302
+msgid "Haze"
+msgstr "Sương mù"
+
+#. 3.0/openWeatherMap.js:404 3.8/weather-applet.js:10576
+msgid "Sand, dust whirls"
+msgstr "Xoáy cát, bụi"
+
+#. 3.0/openWeatherMap.js:406 3.8/weather-applet.js:10475
+#. 3.8/weather-applet.js:10580
+msgid "Sand"
+msgstr "Cát"
+
+#. 3.0/openWeatherMap.js:407 3.0/us_weather.js:578 3.0/us_weather.js:579
+#. 3.0/yahoo.js:455 3.8/weather-applet.js:10471 3.8/weather-applet.js:10582
+#. 3.8/weather-applet.js:12010 3.8/weather-applet.js:12090
+#. 3.8/weather-applet.js:13391 3.8/weather-applet.js:13392
+#. 3.8/weather-applet.js:15287 3.8/weather-applet.js:15288
+msgid "Dust"
+msgstr "Bụi"
+
+#. 3.0/openWeatherMap.js:408 3.8/weather-applet.js:10584
+msgid "Volcanic ash"
+msgstr "Tro núi lửa"
+
+#. 3.0/openWeatherMap.js:409 3.8/weather-applet.js:10586
+#. 3.8/weather-applet.js:13726
+msgid "Squalls"
+msgstr "Gió giật"
+
+#. 3.0/openWeatherMap.js:410 3.0/us_weather.js:557 3.0/us_weather.js:558
+#. 3.0/yahoo.js:436 3.8/weather-applet.js:10481 3.8/weather-applet.js:10588
+#. 3.8/weather-applet.js:13370 3.8/weather-applet.js:13371
+#. 3.8/weather-applet.js:15160 3.8/weather-applet.js:15161
+msgid "Tornado"
+msgstr "Lốc xoáy"
+
+#. 3.0/openWeatherMap.js:413
+msgid "Sky is clear"
+msgstr "Trời quang"
+
+#. 3.0/openWeatherMap.js:414 3.8/weather-applet.js:10463
+msgid "Clouds"
+msgstr "Mây"
+
+#. 3.0/openWeatherMap.js:415 3.0/us_weather.js:414 3.0/us_weather.js:415
+#. 3.0/us_weather.js:449 3.8/weather-applet.js:10593
+#. 3.8/weather-applet.js:12017 3.8/weather-applet.js:12098
+#. 3.8/weather-applet.js:13227 3.8/weather-applet.js:13228
+#. 3.8/weather-applet.js:13262 3.8/weather-applet.js:16055
+#. 3.8/weather-applet.js:16056
+msgid "Few clouds"
+msgstr "Ít mây"
+
+#. 3.0/openWeatherMap.js:416 3.8/weather-applet.js:10595
+#. 3.8/weather-applet.js:12019 3.8/weather-applet.js:12100
+msgid "Scattered clouds"
+msgstr "Mây rải rác"
+
+#. 3.0/openWeatherMap.js:417 3.8/weather-applet.js:10597
+#. 3.8/weather-applet.js:12021 3.8/weather-applet.js:12102
+msgid "Broken clouds"
+msgstr "Mây cụm"
+
+#. 3.0/openWeatherMap.js:418 3.8/weather-applet.js:10599
+msgid "Overcast clouds"
+msgstr "Mây u ám"
+
+#. 3.0/us_weather.js:120
+msgid "Could not get forecast for your area"
+msgstr "Không thể lấy dự báo cho khu vực của bạn"
+
+#. 3.0/us_weather.js:231 3.8/weather-applet.js:12903
+msgid "Location is outside US, please use a different provider."
+msgstr "Địa điểm nằm ngoài Hoa Kỳ, vui lòng sử dụng nhà cung cấp khác."
+
+#. 3.0/us_weather.js:394 3.8/weather-applet.js:12967
+msgid "Failed to Process Hourly Forecast Info"
+msgstr "Không thể xử lý thông tin dự báo theo giờ"
+
+#. 3.0/us_weather.js:443 3.8/weather-applet.js:13256
+msgid "Clear and windy"
+msgstr "Quang đãng và có gió"
+
+#. 3.0/us_weather.js:450 3.8/weather-applet.js:13263
+msgid "Few clouds and windy"
+msgstr "Ít mây và có gió"
+
+#. 3.0/us_weather.js:457 3.8/weather-applet.js:13270
+msgid "Partly cloudy and windy"
+msgstr "Mây rải rác và có gió"
+
+#. 3.0/us_weather.js:464 3.8/weather-applet.js:13277
+msgid "Mostly cloudy and windy"
+msgstr "Nhiều mây và có gió"
+
+#. 3.0/us_weather.js:471 3.8/weather-applet.js:13284
+msgid "Overcast and windy"
+msgstr "U ám và có gió"
+
+#. 3.0/us_weather.js:485 3.8/weather-applet.js:13298
+msgid "Snowy rain"
+msgstr "Mưa tuyết"
+
+#. 3.0/us_weather.js:520 3.8/weather-applet.js:13333
+msgid "Freezing rain and snow"
+msgstr "Mưa đóng băng và tuyết"
+
+#. 3.0/us_weather.js:564 3.0/us_weather.js:565 3.0/utils.js:336
+#. 3.0/yahoo.js:438 3.8/weather-applet.js:8610 3.8/weather-applet.js:13377
+#. 3.8/weather-applet.js:13378 3.8/weather-applet.js:15174
+#. 3.8/weather-applet.js:15175
+msgid "Hurricane"
+msgstr "Bão"
+
+#. 3.0/us_weather.js:571 3.0/utils.js:331 3.8/weather-applet.js:8605
+#. 3.8/weather-applet.js:13384
+msgid "Storm"
+msgstr "Bão"
+
+#. 3.0/us_weather.js:572 3.8/weather-applet.js:13385
+msgid "Tropical storm"
+msgstr "Bão nhiệt đới"
+
+#. 3.0/us_weather.js:599 3.0/us_weather.js:600 3.0/yahoo.js:470
+#. 3.8/weather-applet.js:13412 3.8/weather-applet.js:13413
+#. 3.8/weather-applet.js:15406 3.8/weather-applet.js:15407
+msgid "Hot"
+msgstr "Nóng"
+
+#. 3.0/us_weather.js:606 3.0/us_weather.js:607 3.0/yahoo.js:461
+#. 3.8/weather-applet.js:13419 3.8/weather-applet.js:13420
+msgid "Cold"
+msgstr "Lạnh"
+
+#. 3.0/us_weather.js:613 3.0/us_weather.js:614 3.0/yahoo.js:477
+#. 3.8/weather-applet.js:13426 3.8/weather-applet.js:13427
+#. 3.8/weather-applet.js:15455 3.8/weather-applet.js:15456
+msgid "Blizzard"
+msgstr "Bão tuyết"
+
+#. 3.0/utils.js:146 3.8/weather-applet.js:8489
+msgid "Today"
+msgstr "Hôm nay"
+
+#. 3.0/utils.js:148 3.8/weather-applet.js:8491
+msgid "Tomorrow"
+msgstr "Ngày mai"
+
+#. 3.0/utils.js:204
+msgid "Sunday"
+msgstr "Chủ Nhật"
+
+#. 3.0/utils.js:204
+msgid "Monday"
+msgstr "Thứ Hai"
+
+#. 3.0/utils.js:204
+msgid "Tuesday"
+msgstr "Thứ Ba"
+
+#. 3.0/utils.js:204
+msgid "Wednesday"
+msgstr "Thứ Tư"
+
+#. 3.0/utils.js:204
+msgid "Thursday"
+msgstr "Thứ Năm"
+
+#. 3.0/utils.js:204
+msgid "Friday"
+msgstr "Thứ Sáu"
+
+#. 3.0/utils.js:204
+msgid "Saturday"
+msgstr "Thứ Bảy"
+
+#. 3.0/utils.js:301 3.8/weather-applet.js:8575
+msgid "Calm"
+msgstr "Lặng gió"
+
+#. 3.0/utils.js:304 3.8/weather-applet.js:8578
+msgid "Light air"
+msgstr "Gió nhẹ"
+
+#. 3.0/utils.js:307 3.8/weather-applet.js:8581
+msgid "Light breeze"
+msgstr "Gió nhẹ"
+
+#. 3.0/utils.js:310 3.8/weather-applet.js:8584
+msgid "Gentle breeze"
+msgstr "Gió nhẹ"
+
+#. 3.0/utils.js:313 3.8/weather-applet.js:8587
+msgid "Moderate breeze"
+msgstr "Gió vừa"
+
+#. 3.0/utils.js:316 3.8/weather-applet.js:8590
+msgid "Fresh breeze"
+msgstr "Gió nhẹ"
+
+#. 3.0/utils.js:319 3.8/weather-applet.js:8593
+msgid "Strong breeze"
+msgstr "Gió mạnh"
+
+#. 3.0/utils.js:322 3.8/weather-applet.js:8596
+msgid "Near gale"
+msgstr "Gần gió giật"
+
+#. 3.0/utils.js:325 3.8/weather-applet.js:8599
+msgid "Gale"
+msgstr "Gió giật"
+
+#. 3.0/utils.js:328 3.8/weather-applet.js:8602
+msgid "Strong gale"
+msgstr "Gió giật mạnh"
+
+#. 3.0/utils.js:334 3.8/weather-applet.js:8608
+msgid "Violent storm"
+msgstr "Bão dữ dội"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "N"
+msgstr "B"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "NE"
+msgstr "ĐB"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "E"
+msgstr "Đ"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "SE"
+msgstr "ĐN"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "S"
+msgstr "N"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "SW"
+msgstr "TN"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "W"
+msgstr "T"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8758
+msgid "NW"
+msgstr "TB"
+
+#. 3.0/weatherbit.js:312
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://www.weatherbit.io/account/create"
+msgstr ""
+"Vui lòng nhập khóa API trong cài đặt,\n"
+"hoặc lấy khóa trước trên https://www.weatherbit.io/account/create"
+
+#. 3.0/yahoo.js:78
+msgid ""
+"Unknown Error happened while calling Yahoo bridge,\n"
+" see Looking Glass log for errors"
+msgstr ""
+"Lỗi không xác định xảy ra khi gọi cầu nối Yahoo,\n"
+" xem nhật ký Looking Glass để biết chi tiết lỗi"
+
+#. 3.0/yahoo.js:91
+msgid ""
+"Yahoo bridge responded in bad format,\n"
+" see Looking Glass log for errors"
+msgstr ""
+"Cầu nối Yahoo phản hồi với định dạng lỗi,\n"
+" xem nhật ký Looking Glass để biết chi tiết lỗi"
+
+#. 3.0/yahoo.js:177
+msgid "Missing package"
+msgstr "Thiếu gói"
+
+#. 3.0/yahoo.js:177 3.0/yahoo.js:179
+msgid "Please install '"
+msgstr "Vui lòng cài đặt '"
+
+#. 3.0/yahoo.js:177 3.0/yahoo.js:179
+msgid "', then refresh manually."
+msgstr "', sau đó làm mới thủ công."
+
+#. 3.0/yahoo.js:182
+msgid "Could not connect to Yahoo API."
+msgstr "Không thể kết nối đến Yahoo API."
+
+#. 3.0/yahoo.js:186
+msgid "Unknown error happened while obtaining weather, see Looking Glass logs for more information"
+msgstr "Lỗi không xác định xảy ra khi lấy thông tin thời tiết, xem nhật ký Looking Glass để biết thêm thông tin"
+
+#. 3.0/yahoo.js:437 3.8/weather-applet.js:15167 3.8/weather-applet.js:15168
+msgid "Tropical Storm"
+msgstr "Bão nhiệt đới"
+
+#. 3.0/yahoo.js:439
+msgid "Severe Thunderstorms"
+msgstr "Giông bão nghiêm trọng"
+
+#. 3.0/yahoo.js:440 3.8/weather-applet.js:15188 3.8/weather-applet.js:15189
+#. 3.8/weather-applet.js:16686 3.8/weather-applet.js:16687
+#. 3.8/weather-applet.js:16693 3.8/weather-applet.js:16694
+#. 3.8/weather-applet.js:16781 3.8/weather-applet.js:16782
+msgid "Thunderstorms"
+msgstr "Giông bão"
+
+#. 3.0/yahoo.js:441
+msgid "Mixed Rain and Snow"
+msgstr "Mưa và tuyết"
+
+#. 3.0/yahoo.js:442
+msgid "Mixed Rain and Sleet"
+msgstr "Mưa và mưa tuyết"
+
+#. 3.0/yahoo.js:443
+msgid "Mixed Snow and Sleet"
+msgstr "Tuyết và mưa tuyết"
+
+#. 3.0/yahoo.js:444 3.8/weather-applet.js:15210 3.8/weather-applet.js:15211
+msgid "Freezing Drizzle"
+msgstr "Mưa phùn đóng băng"
+
+#. 3.0/yahoo.js:446 3.8/weather-applet.js:15224 3.8/weather-applet.js:15225
+msgid "Freezing Rain"
+msgstr "Mưa đóng băng"
+
+#. 3.0/yahoo.js:447 3.8/weather-applet.js:15231 3.8/weather-applet.js:15232
+#. 3.8/weather-applet.js:16182 3.8/weather-applet.js:16189
+#. 3.8/weather-applet.js:16190 3.8/weather-applet.js:16196
+#. 3.8/weather-applet.js:16630 3.8/weather-applet.js:16631
+#. 3.8/weather-applet.js:16637 3.8/weather-applet.js:16638
+#. 3.8/weather-applet.js:16867 3.8/weather-applet.js:16868
+#. 3.8/weather-applet.js:16874 3.8/weather-applet.js:16875
+msgid "Showers"
+msgstr "Mưa rào"
+
+#. 3.0/yahoo.js:449
+msgid "Snow Flurries"
+msgstr "Tuyết bay"
+
+#. 3.0/yahoo.js:450 3.8/weather-applet.js:16717 3.8/weather-applet.js:16718
+msgid "Light Snow Showers"
+msgstr "Mưa tuyết nhẹ"
+
+#. 3.0/yahoo.js:451 3.8/weather-applet.js:15259 3.8/weather-applet.js:15260
+msgid "Blowing Snow"
+msgstr "Tuyết bay"
+
+#. 3.0/yahoo.js:456 3.8/weather-applet.js:13970 3.8/weather-applet.js:13971
+msgid "Foggy"
+msgstr "Sương mù"
+
+#. 3.0/yahoo.js:458
+msgid "Smoky"
+msgstr "Khói mù"
+
+#. 3.0/yahoo.js:459
+msgid "Blustery"
+msgstr "Gió mạnh"
+
+#. 3.0/yahoo.js:460 3.8/weather-applet.js:15322 3.8/weather-applet.js:15323
+msgid "Windy"
+msgstr "Có gió"
+
+#. 3.0/yahoo.js:463 3.8/weather-applet.js:15343 3.8/weather-applet.js:15344
+#. 3.8/weather-applet.js:15350 3.8/weather-applet.js:15351
+#. 3.8/weather-applet.js:16552 3.8/weather-applet.js:16553
+#. 3.8/weather-applet.js:16559 3.8/weather-applet.js:16560
+msgid "Mostly Cloudy"
+msgstr "Nhiều mây"
+
+#. 3.0/yahoo.js:464 3.8/weather-applet.js:14840 3.8/weather-applet.js:14841
+#. 3.8/weather-applet.js:14847 3.8/weather-applet.js:14848
+#. 3.8/weather-applet.js:15357 3.8/weather-applet.js:15358
+#. 3.8/weather-applet.js:15364 3.8/weather-applet.js:15365
+#. 3.8/weather-applet.js:16538 3.8/weather-applet.js:16539
+#. 3.8/weather-applet.js:16545 3.8/weather-applet.js:16546
+msgid "Partly Cloudy"
+msgstr "Mây rải rác"
+
+#. 3.0/yahoo.js:467 3.8/weather-applet.js:15392 3.8/weather-applet.js:15393
+msgid "Mostly Sunny"
+msgstr "Nắng nhiều"
+
+#. 3.0/yahoo.js:469 3.8/weather-applet.js:15399 3.8/weather-applet.js:15400
+msgid "Mixed Rain and Hail"
+msgstr "Mưa và mưa đá"
+
+#. 3.0/yahoo.js:471 3.8/weather-applet.js:15413 3.8/weather-applet.js:15414
+msgid "Isolated Thunderstorms"
+msgstr "Giông bão cục bộ"
+
+#. 3.0/yahoo.js:472 3.8/weather-applet.js:15420 3.8/weather-applet.js:15421
+#. 3.8/weather-applet.js:15476 3.8/weather-applet.js:15477
+msgid "Scattered Thunderstorms"
+msgstr "Giông bão rải rác"
+
+#. 3.0/yahoo.js:473 3.8/weather-applet.js:15427 3.8/weather-applet.js:15428
+#. 3.8/weather-applet.js:15462 3.8/weather-applet.js:15463
+#. 3.8/weather-applet.js:16588 3.8/weather-applet.js:16589
+#. 3.8/weather-applet.js:16595 3.8/weather-applet.js:16596
+#. 3.8/weather-applet.js:16825 3.8/weather-applet.js:16826
+#. 3.8/weather-applet.js:16832 3.8/weather-applet.js:16833
+msgid "Scattered Showers"
+msgstr "Mưa rào rải rác"
+
+#. 3.0/yahoo.js:474 3.8/weather-applet.js:15434 3.8/weather-applet.js:15435
+#. 3.8/weather-applet.js:16881 3.8/weather-applet.js:16882
+#. 3.8/weather-applet.js:16888 3.8/weather-applet.js:16889
+msgid "Heavy Rain"
+msgstr "Mưa lớn"
+
+#. 3.0/yahoo.js:475 3.8/weather-applet.js:15441 3.8/weather-applet.js:15442
+#. 3.8/weather-applet.js:15469 3.8/weather-applet.js:15470
+#. 3.8/weather-applet.js:16839 3.8/weather-applet.js:16840
+#. 3.8/weather-applet.js:16846 3.8/weather-applet.js:16847
+msgid "Scattered Snow Showers"
+msgstr "Mưa tuyết rải rác"
+
+#. 3.0/yahoo.js:476 3.8/weather-applet.js:15448 3.8/weather-applet.js:15449
+#. 3.8/weather-applet.js:16895 3.8/weather-applet.js:16896
+#. 3.8/weather-applet.js:16902 3.8/weather-applet.js:16903
+msgid "Heavy Snow"
+msgstr "Tuyết dày"
+
+#. 3.0/yahoo.js:478
+msgid "Not Available"
+msgstr "Không có sẵn"
+
+#. 3.0/yahoo.js:479
+msgid "Scattered Thundershowers"
+msgstr "Mưa giông rải rác"
+
+#. 3.8/weather-applet.js:766
+msgid ""
+"Could not retrieve logs, log file was not found under path\n"
+" {logFilePath}"
+msgstr ""
+"Không thể truy xuất nhật ký, không tìm thấy tệp nhật ký theo đường dẫn\n"
+" {logFilePath}"
+
+#. 3.8/weather-applet.js:770
+msgid ""
+"Could not get contents of log file under path\n"
+" {logFilePath}"
+msgstr ""
+"Không thể lấy nội dung tệp nhật ký theo đường dẫn\n"
+" {logFilePath}"
+
+#. 3.8/weather-applet.js:8425
+msgid "Low"
+msgstr "Thấp"
+
+#. 3.8/weather-applet.js:8428 3.8/weather-applet.js:10055
+msgid "Moderate"
+msgstr "Trung bình"
+
+#. 3.8/weather-applet.js:8431
+msgid "High"
+msgstr "Cao"
+
+#. 3.8/weather-applet.js:8434
+msgid "Very High"
+msgstr "Rất cao"
+
+#. 3.8/weather-applet.js:8437
+msgid "Extreme"
+msgstr "Cực cao"
+
+#. 3.8/weather-applet.js:9661
+msgid "Address to location lookup service is blocked. You can try to change your User-Agent in help to see if it resolves the issue."
+msgstr "Dịch vụ tra cứu địa chỉ đến vị trí bị chặn. Bạn có thể thử thay đổi User-Agent trong phần trợ giúp để xem có khắc phục được sự cố không."
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:9755
+msgid "Met Office UK"
+msgstr "Met Office UK"
+
+#. 3.8/weather-applet.js:9865
+msgid "MET Office UK only covers the UK, please make sure your location is in the country"
+msgstr "MET Office UK chỉ bao phủ Vương quốc Anh, vui lòng đảm bảo vị trí của bạn nằm trong quốc gia này"
+
+#. 3.8/weather-applet.js:9959
+msgid "Data was not found for location"
+msgstr "Không tìm thấy dữ liệu cho vị trí"
+
+#. 3.8/weather-applet.js:10041
+msgid "Very poor"
+msgstr "Rất kém"
+
+#. 3.8/weather-applet.js:10041
+msgid "Less than {distance} {distanceUnit}"
+msgstr "Ít hơn {distance} {distanceUnit}"
+
+#. 3.8/weather-applet.js:10045
+msgid "Excellent"
+msgstr "Tuyệt vời"
+
+#. 3.8/weather-applet.js:10045
+msgid "More than {distance} {distanceUnit}"
+msgstr "Hơn {distance} {distanceUnit}"
+
+#. 3.8/weather-applet.js:10050
+msgid "Poor"
+msgstr "Kém"
+
+#. 3.8/weather-applet.js:10050 3.8/weather-applet.js:10055
+#. 3.8/weather-applet.js:10060 3.8/weather-applet.js:10065
+#. 3.8/weather-applet.js:10070
+msgid "Between {smallerDistance}-{biggerDistance} {distanceUnit}"
+msgstr "Từ {smallerDistance} đến {biggerDistance} {distanceUnit}"
+
+#. 3.8/weather-applet.js:10060
+msgid "Good"
+msgstr "Tốt"
+
+#. 3.8/weather-applet.js:10065 3.8/weather-applet.js:10070
+msgid "Very good"
+msgstr "Rất tốt"
+
+#. 3.8/weather-applet.js:10477
+msgid "Ash"
+msgstr "Tro bụi"
+
+#. 3.8/weather-applet.js:10479
+msgid "Squall"
+msgstr "Gió giật"
+
+#. 3.8/weather-applet.js:10556
+msgid "Light shower sleet"
+msgstr "Mưa tuyết nhẹ"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:10829 3.8/weather-applet.js:16440
+msgid "OpenWeatherMap"
+msgstr "OpenWeatherMap"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:11116
+msgid "MET Norway"
+msgstr "MET Norway"
+
+#. 3.8/weather-applet.js:11683
+msgid "WeatherBit"
+msgstr "WeatherBit"
+
+#. 3.8/weather-applet.js:12050 3.8/weather-applet.js:13660
+#. 3.8/weather-applet.js:16099
+msgid "Heavy drizzle"
+msgstr "Mưa phùn nặng hạt"
+
+#. 3.8/weather-applet.js:12060
+msgid "Light shower rain"
+msgstr "Mưa rào nhẹ"
+
+#. 3.8/weather-applet.js:12064
+msgid "Heavy shower rain"
+msgstr "Mưa rào nặng hạt"
+
+#. 3.8/weather-applet.js:12072
+msgid "Mix snow/rain"
+msgstr "Tuyết/mưa"
+
+#. 3.8/weather-applet.js:12074
+msgid "Snow shower"
+msgstr "Mưa tuyết"
+
+#. 3.8/weather-applet.js:12094 3.8/weather-applet.js:13678
+msgid "Freezing fog"
+msgstr "Sương mù đóng băng"
+
+#. 3.8/weather-applet.js:12304
+msgid "Tomorrow.io"
+msgstr "Tomorrow.io"
+
+#. 3.8/weather-applet.js:12517
+msgid "Light wind"
+msgstr "Gió nhẹ"
+
+#. 3.8/weather-applet.js:12531
+msgid "Strong wind"
+msgstr "Gió mạnh"
+
+#. 3.8/weather-applet.js:12883
+msgid "US Weather"
+msgstr "Thời tiết Hoa Kỳ"
+
+#. 3.8/weather-applet.js:13461
+msgid "Visual Crossing"
+msgstr "Visual Crossing"
+
+#. 3.8/weather-applet.js:13656
+msgid "Blowing or drifting snow"
+msgstr "Tuyết bay hoặc trôi"
+
+#. 3.8/weather-applet.js:13664
+msgid "Heavy drizzle/rain"
+msgstr "Mưa phùn/mưa nặng hạt"
+
+#. 3.8/weather-applet.js:13666
+msgid "Light drizzle/rain"
+msgstr "Mưa phùn/mưa nhẹ"
+
+#. 3.8/weather-applet.js:13668
+msgid "Dust Storm"
+msgstr "Bão bụi"
+
+#. 3.8/weather-applet.js:13672
+msgid "Freezing drizzle/freezing rain"
+msgstr "Mưa phùn đóng băng/mưa đóng băng"
+
+#. 3.8/weather-applet.js:13674
+msgid "Heavy freezing drizzle/freezing rain"
+msgstr "Mưa phùn đóng băng/mưa đóng băng nặng hạt"
+
+#. 3.8/weather-applet.js:13676
+msgid "Light freezing drizzle/freezing rain"
+msgstr "Mưa phùn đóng băng/mưa đóng băng nhẹ"
+
+#. 3.8/weather-applet.js:13684
+msgid "Funnel cloud/tornado"
+msgstr "Mây phễu/lốc xoáy"
+
+#. 3.8/weather-applet.js:13686
+msgid "Hail showers"
+msgstr "Mưa đá"
+
+#. 3.8/weather-applet.js:13688
+msgid "Ice"
+msgstr "Băng"
+
+#. 3.8/weather-applet.js:13690
+msgid "Lightning without thunder"
+msgstr "Chớp không sấm"
+
+#. 3.8/weather-applet.js:13694
+msgid "Precipitation in vicinity"
+msgstr "Lượng mưa trong khu vực"
+
+#. 3.8/weather-applet.js:13698 3.8/weather-applet.js:13999
+msgid "Heavy rain and snow"
+msgstr "Mưa và tuyết nặng hạt"
+
+#. 3.8/weather-applet.js:13700
+msgid "Light rain And snow"
+msgstr "Mưa và tuyết nhẹ"
+
+#. 3.8/weather-applet.js:13708
+msgid "Sky coverage decreasing"
+msgstr "Độ che phủ bầu trời giảm"
+
+#. 3.8/weather-applet.js:13710
+msgid "Sky coverage increasing"
+msgstr "Độ che phủ bầu trời tăng"
+
+#. 3.8/weather-applet.js:13712
+msgid "Sky unchanged"
+msgstr "Bầu trời không thay đổi"
+
+#. 3.8/weather-applet.js:13714
+msgid "Smoke or haze"
+msgstr "Khói hoặc sương mù"
+
+#. 3.8/weather-applet.js:13718
+msgid "Snow and rain showers"
+msgstr "Mưa tuyết và mưa rào"
+
+#. 3.8/weather-applet.js:13730
+msgid "Thunderstorm without precipitation"
+msgstr "Giông bão không có mưa"
+
+#. 3.8/weather-applet.js:13732
+msgid "Diamond dust"
+msgstr "Bụi kim cương"
+
+#. 3.8/weather-applet.js:13738
+msgid "Partially cloudy"
+msgstr "Mây rải rác"
+
+#. 3.8/weather-applet.js:13760
+msgid "Please make sure you entered the API key correctly"
+msgstr "Vui lòng đảm bảo bạn đã nhập khóa API chính xác"
+
+#. 3.8->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:13778
+msgid "DMI Denmark"
+msgstr "DMI Đan Mạch"
+
+#. 3.8/weather-applet.js:13931 3.8/weather-applet.js:13932
+#. 3.8/weather-applet.js:14068 3.8/weather-applet.js:14069
+msgid "NOT FOUND"
+msgstr "KHÔNG TÌM THẤY"
+
+#. 3.8/weather-applet.js:13964
+msgid "Blowing snow"
+msgstr "Tuyết bay"
+
+#. 3.8/weather-applet.js:14005 3.8/weather-applet.js:14006
+msgid "Slight snow"
+msgstr "Tuyết nhẹ"
+
+#. 3.8/weather-applet.js:14012 3.8/weather-applet.js:14013
+msgid "Moderate snow"
+msgstr "Tuyết vừa"
+
+#. 3.8/weather-applet.js:14027
+msgid "Moderate rain showers"
+msgstr "Mưa rào vừa"
+
+#. 3.8/weather-applet.js:14034
+msgid "Mixed rain and snow"
+msgstr "Mưa và tuyết"
+
+#. 3.8/weather-applet.js:14041
+msgid "Heavy mixed rain and snow"
+msgstr "Mưa và tuyết nặng hạt"
+
+#. 3.8/weather-applet.js:14141
+msgid "AccuWeather"
+msgstr "AccuWeather"
+
+#. 3.8/weather-applet.js:14599
+msgid "Deutscher Wetterdienst"
+msgstr "Deutscher Wetterdienst"
+
+#. 3.8/weather-applet.js:14612
+msgid "Please select a different provider or location"
+msgstr "Vui lòng chọn nhà cung cấp hoặc vị trí khác"
+
+#. 3.8/weather-applet.js:14931
+msgid "Weather Underground"
+msgstr "Weather Underground"
+
+#. 3.8/weather-applet.js:15138
+msgid "The API key you provided is invalid."
+msgstr "Khóa API bạn cung cấp không hợp lệ."
+
+#. 3.8/weather-applet.js:15145
+msgid "The location you provided was not found."
+msgstr "Không tìm thấy vị trí bạn cung cấp."
+
+#. 3.8/weather-applet.js:15181 3.8/weather-applet.js:15182
+msgid "Strong Storm"
+msgstr "Bão mạnh"
+
+#. 3.8/weather-applet.js:15196 3.8/weather-applet.js:15197
+msgid "Rain and Snow"
+msgstr "Mưa và tuyết"
+
+#. 3.8/weather-applet.js:15203 3.8/weather-applet.js:15204
+msgid "Rain and Sleet"
+msgstr "Mưa và mưa tuyết"
+
+#. 3.8/weather-applet.js:15252 3.8/weather-applet.js:15253
+#. 3.8/weather-applet.js:16616 3.8/weather-applet.js:16617
+#. 3.8/weather-applet.js:16623 3.8/weather-applet.js:16624
+#. 3.8/weather-applet.js:16658 3.8/weather-applet.js:16659
+#. 3.8/weather-applet.js:16665 3.8/weather-applet.js:16666
+msgid "Snow Showers"
+msgstr "Mưa tuyết"
+
+#. 3.8/weather-applet.js:15315 3.8/weather-applet.js:15316
+msgid "Breezy"
+msgstr "Gió nhẹ"
+
+#. 3.8/weather-applet.js:15329 3.8/weather-applet.js:15330
+msgid "Frigid"
+msgstr "Lạnh giá"
+
+#. 3.8/weather-applet.js:15385 3.8/weather-applet.js:15386
+msgid "Mostly Clear"
+msgstr "Hầu hết quang đãng"
+
+#. 3.8/weather-applet.js:15540
+msgid "Pirate Weather"
+msgstr "Pirate Weather"
+
+#. 3.8/weather-applet.js:15567
+msgid ""
+"Please Make sure you\n"
+"entered the API key that you have from Pirate Weather"
+msgstr ""
+"Vui lòng đảm bảo bạn\n"
+"đã nhập khóa API mà bạn có từ Pirate Weather"
+
+#. 3.8/weather-applet.js:16013
+msgid "Location Service couldn't find your location, please see the logs in Looking Glass"
+msgstr "Dịch vụ định vị không thể tìm thấy vị trí của bạn, vui lòng xem nhật ký trong Looking Glass"
+
+#. 3.8/weather-applet.js:16176
+msgid "Snow grains"
+msgstr "Hạt tuyết"
+
+#. 3.8/weather-applet.js:16183
+msgid "Light showers"
+msgstr "Mưa rào nhẹ"
+
+#. 3.8/weather-applet.js:16197
+msgid "Heavy showers"
+msgstr "Mưa rào nặng hạt"
+
+#. 3.8/weather-applet.js:16225
+msgid "Thunderstorm with slight hail"
+msgstr "Giông bão với mưa đá nhẹ"
+
+#. 3.8/weather-applet.js:16232
+msgid "Thunderstorm with hail"
+msgstr "Giông bão với mưa đá"
+
+#. 3.8/weather-applet.js:16259 3.8/weather-applet.js:16422
+msgid "Feels like"
+msgstr "Cảm giác như"
+
+#. 3.8->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:16329
+msgid "Open-Meteo"
+msgstr "Open-Meteo"
+
+#. 3.8/weather-applet.js:16602 3.8/weather-applet.js:16603
+#. 3.8/weather-applet.js:16609 3.8/weather-applet.js:16610
+#. 3.8/weather-applet.js:16853 3.8/weather-applet.js:16854
+#. 3.8/weather-applet.js:16860 3.8/weather-applet.js:16861
+msgid "Scattered Sleet"
+msgstr "Mưa tuyết rải rác"
+
+#. 3.8/weather-applet.js:16672 3.8/weather-applet.js:16673
+#. 3.8/weather-applet.js:16679 3.8/weather-applet.js:16680
+#. 3.8/weather-applet.js:16773 3.8/weather-applet.js:16774
+msgid "Chance of Thunderstorms"
+msgstr "Khả năng giông bão"
+
+#. 3.8/weather-applet.js:16701 3.8/weather-applet.js:16702
+msgid "Light Rain"
+msgstr "Mưa nhẹ"
+
+#. 3.8/weather-applet.js:16709 3.8/weather-applet.js:16710
+msgid "Light Sleet"
+msgstr "Mưa tuyết nhẹ"
+
+#. 3.8/weather-applet.js:16725 3.8/weather-applet.js:16726
+msgid "Intermittent Rain"
+msgstr "Mưa ngắt quãng"
+
+#. 3.8/weather-applet.js:16733 3.8/weather-applet.js:16734
+msgid "Intermittent Sleet"
+msgstr "Mưa tuyết ngắt quãng"
+
+#. 3.8/weather-applet.js:16741 3.8/weather-applet.js:16742
+msgid "Intermittent Snow"
+msgstr "Tuyết ngắt quãng"
+
+#. 3.8/weather-applet.js:16789 3.8/weather-applet.js:16790
+msgid "Frequent Thunderstorms"
+msgstr "Giông bão thường xuyên"
+
+#. 3.8/weather-applet.js:16796 3.8/weather-applet.js:16797
+#. 3.8/weather-applet.js:16803 3.8/weather-applet.js:16804
+msgid "High Clouds"
+msgstr "Mây cao"
+
+#. 3.8/weather-applet.js:16811 3.8/weather-applet.js:16812
+msgid "Low Clouds"
+msgstr "Mây thấp"
+
+#. 3.8/weather-applet.js:16910 3.8/weather-applet.js:16911
+msgid "Overcast and Dry"
+msgstr "U ám và khô"
+
+#. 3.8/weather-applet.js:16917 3.8/weather-applet.js:16918
+#. 3.8/weather-applet.js:16924 3.8/weather-applet.js:16925
+#. 3.8/weather-applet.js:16974 3.8/weather-applet.js:16975
+#. 3.8/weather-applet.js:16982 3.8/weather-applet.js:16983
+msgid "Slightly Stormy"
+msgstr "Hơi có bão"
+
+#. 3.8/weather-applet.js:16931 3.8/weather-applet.js:16932
+#. 3.8/weather-applet.js:16938 3.8/weather-applet.js:16939
+msgid "Stormy Snow Showers"
+msgstr "Mưa tuyết có bão"
+
+#. 3.8/weather-applet.js:16945 3.8/weather-applet.js:16946
+#. 3.8/weather-applet.js:16952 3.8/weather-applet.js:16953
+msgid "Thundery Showers"
+msgstr "Mưa giông"
+
+#. 3.8/weather-applet.js:16959 3.8/weather-applet.js:16960
+#. 3.8/weather-applet.js:16966 3.8/weather-applet.js:16967
+#. 3.8/weather-applet.js:16990 3.8/weather-applet.js:16991
+msgid "Thundery Snow Showers"
+msgstr "Mưa tuyết có giông"
+
+#. 3.8/weather-applet.js:17079
+msgid "Wind Warning"
+msgstr "Cảnh báo gió"
+
+#. 3.8/weather-applet.js:17081
+msgid "Thunderstorm Warning"
+msgstr "Cảnh báo giông bão"
+
+#. 3.8/weather-applet.js:17083
+msgid "Rain Warning"
+msgstr "Cảnh báo mưa"
+
+#. 3.8/weather-applet.js:17085
+msgid "Snow Warning"
+msgstr "Cảnh báo tuyết"
+
+#. 3.8/weather-applet.js:17087
+msgid "Slippery Roads Warning"
+msgstr "Cảnh báo đường trơn"
+
+#. 3.8/weather-applet.js:17089
+msgid "Frost Warning"
+msgstr "Cảnh báo sương giá"
+
+#. 3.8/weather-applet.js:17091
+msgid "Mass Movements Warning"
+msgstr "Cảnh báo dịch chuyển khối lượng lớn"
+
+#. 3.8/weather-applet.js:17093
+msgid "Heat Warning"
+msgstr "Cảnh báo nắng nóng"
+
+#. 3.8/weather-applet.js:17095
+msgid "Avalanche Warning"
+msgstr "Cảnh báo tuyết lở"
+
+#. 3.8/weather-applet.js:17097
+msgid "Earthquake Warning"
+msgstr "Cảnh báo động đất"
+
+#. 3.8/weather-applet.js:17099
+msgid "Forest Fire Warning"
+msgstr "Cảnh báo cháy rừng"
+
+#. 3.8/weather-applet.js:17101
+msgid "Flood Warning"
+msgstr "Cảnh báo lũ lụt"
+
+#. 3.8/weather-applet.js:17122
+msgid "Swiss Météo"
+msgstr "Swiss Météo"
+
+#. 3.8/weather-applet.js:17141
+msgid "For this provider, you need to use a postcode."
+msgstr "Đối với nhà cung cấp này, bạn cần sử dụng mã bưu điện."
+
+#. 3.8/weather-applet.js:17153
+msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
+msgstr "Đối với nhà cung cấp này, bạn cần sử dụng mã bưu điện Thụy Sĩ, từ 1000-9999."
+
+#. 3.8/weather-applet.js:17175
+msgid "Switzerland"
+msgstr "Thụy Sĩ"
+
+#. 3.8/weather-applet.js:17633
+msgid ""
+"Could not retrieve config, file was not found under paths\n"
+" {configFilePath}"
+msgstr ""
+"Không thể truy xuất cấu hình, không tìm thấy tệp theo đường dẫn\n"
+" {configFilePath}"
+
+#. 3.8/weather-applet.js:17640
+msgid ""
+"Could not get contents of config file under path\n"
+" {configFilePath}"
+msgstr ""
+"Không thể lấy nội dung tệp cấu hình theo đường dẫn\n"
+" {configFilePath}"
+
+#. 3.8/weather-applet.js:17925
+msgid "Make sure you entered a location or use Automatic location instead."
+msgstr "Đảm bảo bạn đã nhập vị trí hoặc sử dụng Vị trí tự động thay thế."
+
+#. 3.8/weather-applet.js:17943
+msgid "This provider requires an API key to operate"
+msgstr "Nhà cung cấp này yêu cầu khóa API để hoạt động"
+
+#. 3.8/weather-applet.js:18383
+msgid "Dew Point"
+msgstr "Điểm sương"
+
+#. 3.8/weather-applet.js:18466
+msgid "Precipitation will end in {precipEnd} minutes"
+msgstr "Lượng mưa sẽ kết thúc sau {precipEnd} phút"
+
+#. 3.8/weather-applet.js:18468
+msgid "Precipitation won't end in within an hour"
+msgstr "Lượng mưa sẽ không kết thúc trong vòng một giờ"
+
+#. 3.8/weather-applet.js:18471
+msgid "Precipitation will start within {precipStart} minutes"
+msgstr "Lượng mưa sẽ bắt đầu trong vòng {precipStart} phút"
+
+#. 3.8/weather-applet.js:18569
+msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr "Nguy cơ gây hại thấp từ tiếp xúc nắng, Chỉ số UV: {uvIndex}"
+
+#. 3.8/weather-applet.js:18573
+msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr "Nguy cơ gây hại trung bình từ tiếp xúc nắng, Chỉ số UV: {uvIndex}"
+
+#. 3.8/weather-applet.js:18577
+msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr "Nguy cơ gây hại cao từ tiếp xúc nắng, Chỉ số UV: {uvIndex}"
+
+#. 3.8/weather-applet.js:18581
+msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
+msgstr "Nguy cơ gây hại rất cao từ tiếp xúc nắng, Chỉ số UV: {uvIndex}"
+
+#. 3.8/weather-applet.js:18585
+msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
+msgstr "Nguy cơ gây hại cực cao từ tiếp xúc nắng, Chỉ số UV: {uvIndex}"
+
+#. 3.8/weather-applet.js:18703
+msgid "Forecast parsing failed, see logs for more details."
+msgstr "Phân tích dự báo thất bại, xem nhật ký để biết thêm chi tiết."
+
+#. 3.8/weather-applet.js:19288 3.8/weather-applet.js:19896
+msgid "As of {lastUpdatedTime}"
+msgstr "Tính đến {lastUpdatedTime}"
+
+#. 3.8/weather-applet.js:19294
+msgid "{distance} {distanceUnit} from you"
+msgstr "{distance} {distanceUnit} từ bạn"
+
+#. 3.8/weather-applet.js:19298
+msgid "Station Name: {stationName}"
+msgstr "Tên trạm: {stationName}"
+
+#. 3.8/weather-applet.js:19301
+msgid "Area: {stationArea}"
+msgstr "Khu vực: {stationArea}"
+
+#. 3.8/weather-applet.js:19311
+msgid "{count} weather alert(s)"
+msgstr "{count} cảnh báo thời tiết"
+
+#. 3.8/weather-applet.js:19706 3.8/weather-applet.js:19716
+#. 3.8/weather-applet.js:19723
+msgid "Error Saving Debug Information"
+msgstr "Lỗi Lưu Thông tin Gỡ lỗi"
+
+#. 3.8/weather-applet.js:19723
+msgid "Could not open file {filePath} for writing"
+msgstr "Không thể mở tệp {filePath} để ghi"
+
+#. 3.8/weather-applet.js:19732
+msgid "Debug Information saved successfully"
+msgstr "Đã lưu Thông tin Gỡ lỗi thành công"
+
+#. 3.8/weather-applet.js:19732
+msgid "Saved to {filePath}"
+msgstr "Đã lưu vào {filePath}"
+
+#. 3.8/weather-applet.js:19761
+msgid "Location Service Blocked"
+msgstr "Dịch vụ Định vị Bị chặn"
+
+#. 3.8/weather-applet.js:19936
+msgid "No Script Provided"
+msgstr "Chưa cung cấp Script"
+
+#. 3.8/weather-applet.js:19936
+msgid "You need to add a script first."
+msgstr "Bạn cần thêm script trước."
+
+#. 3.8/weather-applet.js:19940
+msgid "No Weather Data"
+msgstr "Không có Dữ liệu Thời tiết"
+
+#. 3.8/weather-applet.js:19940
+msgid "No weather data to run script with"
+msgstr "Không có dữ liệu thời tiết để chạy script"
+
+#. 3.8/weather-applet.js:19948
+msgid "Script Executed Successfully"
+msgstr "Đã thực thi Script thành công"
+
+#. 3.8/weather-applet.js:19948
+msgid "Your script has been executed successfully."
+msgstr "Script của bạn đã được thực thi thành công."
+
+#. 3.8/weather-applet.js:19951
+msgid "Error Running Script"
+msgstr "Lỗi Khi Chạy Script"
+
+#. 3.8/weather-applet.js:19951
+msgid "Script returned error, see logs for more information"
+msgstr "Script trả về lỗi, xem nhật ký để biết thêm thông tin"
+
+#. 3.8/AlertsWindow.py:119
+msgid "Weather Applet Alerts"
+msgstr "Cảnh báo Tiện ích Thời tiết"
+
+#. 3.8/LogSaver.py:16
+msgid "Save to File"
+msgstr "Lưu vào Tệp"
+
+#. 3.8/LogSaver.py:29
+msgid "Select a destination"
+msgstr "Chọn đích đến"
+
+#. metadata.json->name
+#. 3.8->settings-schema.json->providers->title
+msgid "Weather"
+msgstr "Thời tiết"
+
+#. metadata.json->description
+msgid "View your local weather forecast"
+msgstr "Xem dự báo thời tiết địa phương của bạn"
+
+#. 3.0->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 3.0+"
+msgstr "Cài đặt cho weather@mockturtl 3.0+"
+
+#. 3.0->settings-schema.json->keybinding->description
+#. 3.8->settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "Đặt phím tắt để gọi menu"
+
+#. 3.0->settings-schema.json->descriptions->description
+msgid "Weather service information"
+msgstr "Thông tin dịch vụ thời tiết"
+
+#. 3.0->settings-schema.json->moreInfo->description
+msgid "Click here for detailed description"
+msgstr "Nhấp vào đây để xem mô tả chi tiết"
+
+#. 3.0->settings-schema.json->moreInfo->tooltip
+#. 3.0->settings-schema.json->getLocation->tooltip
+#. 3.8->settings-schema.json->getLocation->tooltip
+msgid "Opens webpage guide"
+msgstr "Mở hướng dẫn trang web"
+
+#. 3.0->settings-schema.json->providerSettings->description
+#. 3.8->settings-schema.json->provider-options->title
+msgid "Weather Provider Options"
+msgstr "Tùy chọn Nhà cung cấp Thời tiết"
+
+#. 3.0->settings-schema.json->dataService->description
+#. 3.8->settings-schema.json->dataService->description
+msgid "Data service"
+msgstr "Dịch vụ dữ liệu"
+
+#. 3.0->settings-schema.json->dataService->options
+msgid "DarkSky (key needed)"
+msgstr "DarkSky (cần khóa)"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weatherbit (key needed)"
+msgstr "Weatherbit (cần khóa)"
+
+#. 3.0->settings-schema.json->dataService->options
+msgid "Yahoo"
+msgstr "Yahoo"
+
+#. 3.0->settings-schema.json->dataService->options
+msgid "Climacell (key needed)"
+msgstr "Climacell (cần khóa)"
+
+#. 3.0->settings-schema.json->apiKey->description
+#. 3.8->settings-schema.json->apiKey->description
+msgid "API Key"
+msgstr "Khóa API"
+
+#. 3.0->settings-schema.json->apiKey->tooltip
+#. 3.8->settings-schema.json->apiKey->tooltip
+msgid "Copy this from your account of the used Data service and paste it here."
+msgstr "Sao chép từ tài khoản của bạn trên Dịch vụ Dữ liệu đã sử dụng và dán vào đây."
+
+#. 3.0->settings-schema.json->manualLocation->description
+#. 3.8->settings-schema.json->manualLocation->description
+msgid "Manual Location"
+msgstr "Vị trí Thủ công"
+
+#. 3.0->settings-schema.json->manualLocation->tooltip
+#. 3.8->settings-schema.json->manualLocation->tooltip
+msgid "Enable this if your location is not accurate"
+msgstr "Bật tính năng này nếu vị trí của bạn không chính xác"
+
+#. 3.0->settings-schema.json->location->description
+msgid "Location - Coordinates"
+msgstr "Vị trí - Tọa độ"
+
+#. 3.0->settings-schema.json->location->tooltip
+msgid ""
+"Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an address.\n"
+"Waits for 3 seconds after you stop typing before refreshes the weather."
+msgstr ""
+"Đầu vào chấp nhận được là Vĩ độ,Kinh độ. Ví dụ: 68.1932,17.1426 hoặc địa chỉ.\n"
+"Chờ 3 giây sau khi bạn ngừng nhập trước khi làm mới thời tiết."
+
+#. 3.0->settings-schema.json->getLocation->description
+msgid "Setup API Key and Location"
+msgstr "Thiết lập Khóa API và Vị trí"
+
+#. 3.0->settings-schema.json->refreshInterval->units
+#. 3.8->settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr "phút"
+
+#. 3.0->settings-schema.json->refreshInterval->description
+#. 3.8->settings-schema.json->refreshInterval->description
+msgid "Update interval"
+msgstr "Khoảng thời gian cập nhật"
+
+#. 3.0->settings-schema.json->forecastDays->units
+#. 3.8->settings-schema.json->forecastDays->units
+msgid "days"
+msgstr "ngày"
+
+#. 3.0->settings-schema.json->forecastDays->description
+#. 3.8->settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr "Độ dài dự báo"
+
+#. 3.0->settings-schema.json->forecastHours->units
+#. 3.8->settings-schema.json->forecastHours->units
+msgid "hours"
+msgstr "giờ"
+
+#. 3.0->settings-schema.json->forecastHours->description
+#. 3.8->settings-schema.json->forecastHours->description
+msgid "Hourly Forecast length"
+msgstr "Độ dài Dự báo Theo giờ"
+
+#. 3.0->settings-schema.json->unitSettings->description
+msgid "Units"
+msgstr "Đơn vị"
+
+#. 3.0->settings-schema.json->temperatureUnit->description
+#. 3.8->settings-schema.json->temperatureUnit->description
+msgid "Temperature unit"
+msgstr "Đơn vị nhiệt độ"
+
+#. 3.0->settings-schema.json->temperatureUnit->options
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.0->settings-schema.json->distanceUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->distanceUnit->options
+msgid "Automatic"
+msgstr "Tự động"
+
+#. 3.0->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
+msgid "Celsius"
+msgstr "Celsius"
+
+#. 3.0->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
+msgid "Fahrenheit"
+msgstr "Fahrenheit"
+
+#. 3.0->settings-schema.json->temperatureUnit->tooltip
+#. 3.0->settings-schema.json->distanceUnit->tooltip
+#. 3.8->settings-schema.json->temperatureUnit->tooltip
+#. 3.8->settings-schema.json->distanceUnit->tooltip
+msgid "Automatic will try to guess your preference based your current display language."
+msgstr "Tự động sẽ đoán sở thích của bạn dựa trên ngôn ngữ hiển thị hiện tại."
+
+#. 3.0->settings-schema.json->windSpeedUnit->description
+#. 3.8->settings-schema.json->windSpeedUnit->description
+msgid "Wind speed unit"
+msgstr "Đơn vị tốc độ gió"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "kph"
+msgstr "km/h"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr "mph"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "m/s"
+msgstr "m/s"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "knots"
+msgstr "hải lý/h"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "Beaufort"
+msgstr "Beaufort"
+
+#. 3.0->settings-schema.json->pressureUnit->description
+#. 3.8->settings-schema.json->pressureUnit->description
+msgid "Atmospheric pressure unit"
+msgstr "Đơn vị áp suất khí quyển"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "hPa"
+msgstr "hPa"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr "in Hg"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr "mm Hg"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr "psi"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr "at"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr "atm"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr "Pa"
+
+#. 3.0->settings-schema.json->distanceUnit->description
+#. 3.8->settings-schema.json->distanceUnit->description
+msgid "Distance unit"
+msgstr "Đơn vị khoảng cách"
+
+#. 3.0->settings-schema.json->distanceUnit->options
+#. 3.8->settings-schema.json->distanceUnit->options
+msgid "Metric"
+msgstr "Hệ mét"
+
+#. 3.0->settings-schema.json->distanceUnit->options
+#. 3.8->settings-schema.json->distanceUnit->options
+msgid "Imperial"
+msgstr "Hệ Anh"
+
+#. 3.0->settings-schema.json->panelSettings->description
+msgid "Panel options"
+msgstr "Tùy chọn thanh panel"
+
+#. 3.0->settings-schema.json->showTextInPanel->description
+#. 3.8->settings-schema.json->showTextInPanel->description
+msgid "Display current temperature in panel"
+msgstr "Hiển thị nhiệt độ hiện tại trên panel"
+
+#. 3.0->settings-schema.json->showCommentInPanel->description
+#. 3.8->settings-schema.json->showCommentInPanel->description
+msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+msgstr "Hiển thị điều kiện thời tiết (ví dụ: \"Gió\", \"Quang đãng\") trên panel"
+
+#. 3.0->settings-schema.json->showCommentInPanel->tooltip
+#. 3.8->settings-schema.json->showCommentInPanel->tooltip
+msgid "Only works with horizontal panels"
+msgstr "Chỉ hoạt động với panel ngang"
+
+#. 3.0->settings-schema.json->tempTextOverride->description
+#. 3.8->settings-schema.json->tempTextOverride->description
+msgid "Override label on panel"
+msgstr "Ghi đè nhãn trên panel"
+
+#. 3.0->settings-schema.json->tempTextOverride->tooltip
+msgid ""
+"Available values are: {c} is condition, {t} is temperature and {u} is unit.\n"
+"Can be used if label does not fit on vertical panel, among other smart things."
+msgstr ""
+"Các giá trị có thể dùng: {c} là điều kiện, {t} là nhiệt độ, {u} là đơn vị.\n"
+"Có thể dùng nếu nhãn không vừa trên panel dọc, cùng các tính năng thông minh khác."
+
+#. 3.0->settings-schema.json->useCustomAppletIcons->tooltip
+#. 3.0->settings-schema.json->useCustomMenuIcons->tooltip
+#. 3.8->settings-schema.json->useCustomAppletIcons->tooltip
+#. 3.8->settings-schema.json->useCustomMenuIcons->tooltip
+msgid "Iconset is weather-icons by Erik Flowers"
+msgstr "Bộ biểu tượng là weather-icons của Erik Flowers"
+
+#. 3.0->settings-schema.json->useCustomAppletIcons->description
+#. 3.8->settings-schema.json->useCustomAppletIcons->description
+msgid "Use custom icons on the panel"
+msgstr "Dùng biểu tượng tùy chỉnh trên panel"
+
+#. 3.0->settings-schema.json->displaySettings->description
+#. 3.8->settings-schema.json->presentation-section->title
+msgid "Presentation"
+msgstr "Hiển thị"
+
+#. 3.0->settings-schema.json->verticalOrientation->description
+#. 3.8->settings-schema.json->verticalOrientation->description
+msgid "Show forecast vertically"
+msgstr "Hiển thị dự báo theo chiều dọc"
+
+#. 3.0->settings-schema.json->verticalOrientation->tooltip
+msgid "Displaying forecasts from top to bottom instead from left to right"
+msgstr "Hiển thị dự báo từ trên xuống dưới thay vì từ trái sang phải"
+
+#. 3.0->settings-schema.json->forecastColumns->units
+#. 3.8->settings-schema.json->forecastColumns->units
+msgid "columns"
+msgstr "cột"
+
+#. 3.0->settings-schema.json->forecastColumns->description
+#. 3.8->settings-schema.json->forecastColumns->description
+msgid "Maximum number of columns for forecast"
+msgstr "Số cột tối đa cho dự báo"
+
+#. 3.0->settings-schema.json->forecastRows->units
+#. 3.8->settings-schema.json->forecastRows->units
+msgid "rows"
+msgstr "hàng"
+
+#. 3.0->settings-schema.json->forecastRows->description
+#. 3.8->settings-schema.json->forecastRows->description
+msgid "Maximum number of rows for forecast"
+msgstr "Số hàng tối đa cho dự báo"
+
+#. 3.0->settings-schema.json->showSunrise->description
+#. 3.8->settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr "Hiển thị giờ mặt trời mọc/lặn"
+
+#. 3.0->settings-schema.json->show24Hours->description
+#. 3.8->settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr "Hiển thị thời gian theo định dạng 24 giờ"
+
+#. 3.0->settings-schema.json->shortHourlyTime->description
+#. 3.8->settings-schema.json->shortHourlyTime->description
+msgid "Only display hours for hourly forecast time"
+msgstr "Chỉ hiển thị giờ cho dự báo theo giờ"
+
+#. 3.0->settings-schema.json->shortHourlyTime->tooltip
+#. 3.8->settings-schema.json->shortHourlyTime->tooltip
+msgid "Instead of 15:00 or 3:00 pm it will show up as 15 or 3 pm"
+msgstr "Thay vì 15:00 hay 3:00 pm sẽ hiển thị 15 hoặc 3 pm"
+
+#. 3.0->settings-schema.json->showForecastDates->description
+#. 3.8->settings-schema.json->showForecastDates->description
+msgid "Display date for daily forecasts"
+msgstr "Hiển thị ngày cho dự báo hàng ngày"
+
+#. 3.0->settings-schema.json->showForecastDates->tooltip
+#. 3.8->settings-schema.json->showForecastDates->tooltip
+msgid "Like \"Friday 15\""
+msgstr "Ví dụ \"Thứ Sáu 15\""
+
+#. 3.0->settings-schema.json->temperatureHighFirst->description
+#. 3.8->settings-schema.json->temperatureHighFirst->description
+msgid "Show high temperature first in forecast"
+msgstr "Hiển thị nhiệt độ cao trước trong dự báo"
+
+#. 3.0->settings-schema.json->tempRussianStyle->description
+#. 3.8->settings-schema.json->tempRussianStyle->description
+msgid "Show temperature Russian style"
+msgstr "Hiển thị nhiệt độ kiểu Nga"
+
+#. 3.0->settings-schema.json->locationLabelOverride->description
+#. 3.8->settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr "Ghi đè nhãn vị trí"
+
+#. 3.0->settings-schema.json->conditionSettings->description
+#. 3.8->settings-schema.json->weather-conditions->title
+msgid "Weather conditions"
+msgstr "Điều kiện thời tiết"
+
+#. 3.0->settings-schema.json->translateCondition->description
+msgid "Translate conditions"
+msgstr "Dịch điều kiện"
+
+#. 3.0->settings-schema.json->shortConditions->description
+#. 3.8->settings-schema.json->shortConditions->description
+msgid "Less verbose conditions"
+msgstr "Điều kiện rút gọn"
+
+#. 3.0->settings-schema.json->iconSettings->description
+#. 3.8->settings-schema.json->icons->title
+msgid "Icons"
+msgstr "Biểu tượng"
+
+#. 3.0->settings-schema.json->useSymbolicIcons->description
+msgid "Use symbolic icons in the applet"
+msgstr "Dùng biểu tượng ký hiệu trong applet"
+
+#. 3.0->settings-schema.json->useCustomMenuIcons->description
+#. 3.8->settings-schema.json->useCustomMenuIcons->description
+msgid "Use custom icons in the popup menu"
+msgstr "Dùng biểu tượng tùy chỉnh trong menu bật lên"
+
+#. 3.8->settings-schema.json->locations-page->title
+#. 3.8->settings-schema.json->location->description
+msgid "Location"
+msgstr "Vị trí"
+
+#. 3.8->settings-schema.json->units-page->title
+msgid "Other options"
+msgstr "Tùy chọn khác"
+
+#. 3.8->settings-schema.json->info-section->title
+msgid "Help"
+msgstr "Trợ giúp"
+
+#. 3.8->settings-schema.json->location-section->title
+msgid "Location settings"
+msgstr "Cài đặt vị trí"
+
+#. 3.8->settings-schema.json->technical-automation->title
+msgid "Technical and Automation"
+msgstr "Kỹ thuật và Tự động hóa"
+
+#. 3.8->settings-schema.json->location-store->title
+msgid "Saved Locations"
+msgstr "Vị trí đã lưu"
+
+#. 3.8->settings-schema.json->panel-options->title
+msgid "Panel (Taskbar)"
+msgstr "Panel (Thanh tác vụ)"
+
+#. 3.8->settings-schema.json->presentation->title
+msgid "Popup menu"
+msgstr "Menu bật lên"
+
+#. 3.8->settings-schema.json->units-section->title
+msgid "Other Units"
+msgstr "Đơn vị khác"
+
+#. 3.8->settings-schema.json->temp-unit-section->title
+msgid "Temperature Unit"
+msgstr "Đơn vị nhiệt độ"
+
+#. 3.8->settings-schema.json->keybindings->title
+msgid "Keybindings"
+msgstr "Phím tắt"
+
+#. 3.8->settings-schema.json->more-info->title
+msgid "More about the Weather applet"
+msgstr "Thông tin thêm về applet Thời tiết"
+
+#. 3.8->settings-schema.json->submit-issue->title
+msgid "Report an issue"
+msgstr "Báo lỗi"
+
+#. 3.8->settings-schema.json->debug-options->title
+#. 3.8->settings-schema.json->logLevel->options
+msgid "Debug"
+msgstr "Gỡ lỗi"
+
+#. 3.8->settings-schema.json->dataService->tooltip
+msgid "You can choose between several different weather forecast providers. Some providers require a API key to work, some have regional limits, differ in forecast length, and they all need a functional internet connection to work. The options are described in detail on the Cinnamon Spices Website which you can access with the button on the Help tab."
+msgstr "Bạn có thể chọn giữa nhiều nhà cung cấp dự báo thời tiết khác nhau. Một số yêu cầu API key, một số có giới hạn theo vùng, khác nhau về độ dài dự báo và tất cả cần kết nối internet để hoạt động. Các tùy chọn được mô tả chi tiết trên trang Cinnamon Spices, truy cập qua nút trong tab Trợ giúp."
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Deutscher Wetterdienst (Germany only)"
+msgstr "Deutscher Wetterdienst (Chỉ Đức)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Met Office UK (UK only)"
+msgstr "Met Office UK (Chỉ Vương quốc Anh)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "US National Weather (US only)"
+msgstr "US National Weather (Chỉ Mỹ)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Swiss Météo (Switzerland only)"
+msgstr "Swiss Météo (Chỉ Thụy Sĩ)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "OpenWeatherMap OneCall (key needed)"
+msgstr "OpenWeatherMap OneCall (cần key)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Pirate Weather (key needed)"
+msgstr "Pirate Weather (cần key)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Visual Crossing (key needed)"
+msgstr "Visual Crossing (cần key)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Tomorrow.io (key needed)"
+msgstr "Tomorrow.io (cần key)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "AccuWeather (key needed)"
+msgstr "AccuWeather (cần key)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weather Underground (key needed)"
+msgstr "Weather Underground (cần key)"
+
+#. 3.8->settings-schema.json->location->tooltip
+msgid "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/Town} {Postcode} {Country}. The search algorithm is very flexible with the format. After 3 seconds without typing the address you entered is replaced automatically for validating your choice. Powered by nominatim.openstreetmap.org."
+msgstr "Bạn có thể nhập tọa độ 'Vĩ độ,Kinh độ' (ví dụ 51.5085,-0.1257) hoặc 'Thành phố,Mã quốc gia' (ví dụ London,UK) hoặc thử nhập {House number} {Street} {City/Town} {Postcode} {Country}. Thuật toán tìm kiếm rất linh hoạt với định dạng. Sau 3 giây không nhập, địa chỉ sẽ tự thay thế để xác nhận lựa chọn. Powered by nominatim.openstreetmap.org."
+
+#. 3.8->settings-schema.json->locationDescription->description
+msgid "If the location field matches a saved location's 'Search Entry' field, the saved location will be used instead."
+msgstr "Nếu trường vị trí trùng với 'Search Entry' của vị trí đã lưu, vị trí đã lưu sẽ được dùng."
+
+#. 3.8->settings-schema.json->saveLocation->description
+msgid "Save current location to storage"
+msgstr "Lưu vị trí hiện tại vào bộ nhớ"
+
+#. 3.8->settings-schema.json->saveLocation->tooltip
+msgid "Saves location information to file so you can switch between them with buttons in the applet, which will appear if you have more than one."
+msgstr "Lưu thông tin vị trí vào file để bạn có thể chuyển đổi giữa các vị trí bằng nút trong applet, sẽ xuất hiện nếu có nhiều hơn một vị trí."
+
+#. 3.8->settings-schema.json->getLocation->description
+msgid "Weather Applet at Cinnamon Spices Website"
+msgstr "Applet Thời tiết trên trang Cinnamon Spices"
+
+#. 3.8->settings-schema.json->refreshInterval->tooltip
+msgid "If you are using a provider with API keys set it to an interval you won't run out of your quota with."
+msgstr "Nếu dùng nhà cung cấp yêu cầu API key, đặt khoảng thời gian sao cho không vượt hạn mức của bạn."
+
+#. 3.8->settings-schema.json->forecastDays->tooltip
+msgid "Maximum number of days that can be displayed, available number of data, maximum rows and columns setting in the Presentation tab will affect the final number."
+msgstr "Số ngày tối đa có thể hiển thị; số dữ liệu có sẵn, số hàng và cột tối đa trong tab Hiển thị sẽ ảnh hưởng đến số cuối cùng."
+
+#. 3.8->settings-schema.json->forecastHours->tooltip
+msgid "Maximum number of hours that can be displayed, available numbers of data will affect the final number."
+msgstr "Số giờ tối đa có thể hiển thị; số dữ liệu có sẵn sẽ ảnh hưởng đến số cuối cùng."
+
+#. 3.8->settings-schema.json->immediatePrecip->description
+msgid "Enable minutely precipitation forecast"
+msgstr "Bật dự báo mưa theo phút"
+
+#. 3.8->settings-schema.json->immediatePrecip->tooltip
+msgid "If you'd like to use this make sure you use your exact coordinates/address as location to help its accuracy. See Feature map on website on support for your provider"
+msgstr "Nếu muốn dùng tính năng này, hãy dùng chính xác tọa độ/địa chỉ để tăng độ chính xác. Xem bản đồ tính năng trên website hỗ trợ nhà cung cấp của bạn"
+
+#. 3.8->settings-schema.json->showAlerts->description
+msgid "Enable displaying weather alerts"
+msgstr "Bật hiển thị cảnh báo thời tiết"
+
+#. 3.8->settings-schema.json->showAlerts->tooltip
+msgid "Alerts button will be visible in the popup menu if there are any active alerts for your location."
+msgstr "Nút cảnh báo sẽ hiển thị trong menu bật lên nếu có cảnh báo đang hoạt động cho vị trí của bạn."
+
+#. 3.8->settings-schema.json->showBothTempUnits->description
+msgid "Show both temperature units at the same time"
+msgstr "Hiển thị cả hai đơn vị nhiệt độ cùng lúc"
+
+#. 3.8->settings-schema.json->tempTextOverride->tooltip
+msgid ""
+"Some of the available values are: {c} is condition, {t} is temperature and {u} is unit.\n"
+"Can be used if label does not fit on vertical panel, among other smart things."
+msgstr ""
+"Một số giá trị có thể dùng: {c} là điều kiện, {t} là nhiệt độ, {u} là đơn vị.\n"
+"Có thể dùng nếu nhãn không vừa trên panel dọc, cùng các tính năng thông minh khác."
+
+#. 3.8->settings-schema.json->tooltipTextOverride->description
+msgid "Override tooltip on panel"
+msgstr "Ghi đè tooltip trên panel"
+
+#. 3.8->settings-schema.json->tooltipTextOverride->tooltip
+msgid "Has the same behavior and available values as 'Override label on panel'."
+msgstr "Có cùng cách hoạt động và các giá trị như 'Ghi đè nhãn trên panel'."
+
+#. 3.8->settings-schema.json->alwaysShowHourlyWeather->description
+msgid "Always show Hourly Weather"
+msgstr "Luôn hiển thị dự báo theo giờ"
+
+#. 3.8->settings-schema.json->alwaysShowHourlyWeather->tooltip
+msgid "Hide/Show button will be hidden and Hourly weather will be permanently visible."
+msgstr "Nút Ẩn/Hiện sẽ bị ẩn và dự báo theo giờ luôn hiển thị."
+
+#. 3.8->settings-schema.json->verticalOrientation->tooltip
+msgid "Displaying forecasts from top to bottom instead from left to right."
+msgstr "Hiển thị dự báo từ trên xuống dưới thay vì từ trái sang phải."
+
+#. 3.8->settings-schema.json->locationList->description
+msgid "Your saved locations"
+msgstr "Các vị trí đã lưu của bạn"
+
+#. 3.8->settings-schema.json->locationList->tooltip
+msgid "You have to make sure the Search entry field is unique and your Timezone is in the IANA time zone format (e.g. 'Europe/London')"
+msgstr "Bạn phải đảm bảo trường Search entry là duy nhất và Múi giờ ở định dạng IANA (ví dụ 'Europe/London')"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "Latitude"
+msgstr "Vĩ độ"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "Longitude"
+msgstr "Kinh độ"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "City"
+msgstr "Thành phố"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "Country"
+msgstr "Quốc gia"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "Timezone"
+msgstr "Múi giờ"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "Search entry"
+msgstr "Từ khóa tìm kiếm"
+
+#. 3.8->settings-schema.json->displayWindAsText->description
+msgid "Display wind direction as text"
+msgstr "Hiển thị hướng gió dưới dạng văn bản"
+
+#. 3.8->settings-schema.json->displayWindAsText->tooltip
+msgid "Like SE, N instead of direction icons."
+msgstr "Ví dụ SE, N thay vì biểu tượng hướng gió."
+
+#. 3.8->settings-schema.json->translateCondition->description
+msgid "Provider should translate conditions if available"
+msgstr "Nhà cung cấp sẽ dịch điều kiện nếu có"
+
+#. 3.8->settings-schema.json->translateCondition->tooltip
+msgid "Should your provider translate the conditions to your language if your locale is supported by the provider. Otherwise the applet will use it's own translation system."
+msgstr "Nhà cung cấp sẽ dịch điều kiện sang ngôn ngữ của bạn nếu được hỗ trợ. Nếu không, applet sẽ dùng hệ thống dịch của riêng nó."
+
+#. 3.8->settings-schema.json->useSymbolicIcons->tooltip
+msgid "Does not apply to custom iconset, that is symbolic by default"
+msgstr "Không áp dụng cho bộ biểu tượng tùy chỉnh, vốn đã là ký hiệu mặc định"
+
+#. 3.8->settings-schema.json->useSymbolicIcons->description
+msgid "Use symbolic icons throughout the applet"
+msgstr "Dùng biểu tượng ký hiệu cho toàn bộ applet"
+
+#. 3.8->settings-schema.json->more-info-label->description
+msgid "For detailed information about the applet please go to the Spices Website to find info about known issues, troubleshooting, changelog and more by clicking the button below. Here you can ask questions etc in the comment section by logging in with your Github account."
+msgstr "Để biết thông tin chi tiết về applet, hãy truy cập trang Spices để tìm các vấn đề đã biết, hướng dẫn khắc phục, nhật ký thay đổi và hơn thế nữa bằng cách nhấn nút bên dưới. Tại đây bạn có thể đặt câu hỏi trong phần bình luận bằng tài khoản Github của bạn."
+
+#. 3.8->settings-schema.json->submitIssue->description
+msgid "Submit an Issue"
+msgstr "Gửi báo cáo lỗi"
+
+#. 3.8->settings-schema.json->submitIssue->tooltip
+msgid ""
+"Opens webpage where you can fill out a new issue for the applet, needs a GitHub account.\n"
+" Please make sure that the issue is not already submitted."
+msgstr ""
+"Mở trang web để bạn gửi báo cáo lỗi mới cho applet, cần tài khoản GitHub.\n"
+"Hãy chắc chắn rằng vấn đề chưa được gửi trước đó."
+
+#. 3.8->settings-schema.json->maintainer->description
+msgid "Current maintainer: Gr3q"
+msgstr "Người duy trì hiện tại: Gr3q"
+
+#. 3.8->settings-schema.json->issue-reporting-explanation->description
+msgid ""
+"If you find an issue with this applet please make a report by clicking on the button below and login in with your Github account.\n"
+"\n"
+"Before you start writing please make sure that the issue is not already submitted in the issues section and review your prefilled details in the issue description. Don't forget to add a short description in the top Title field next to the applet's name to make it easier for everyone to know what the issue is about. Logs with Debug level (which can be saved to a file below) are also appreciated."
+msgstr ""
+"Nếu bạn phát hiện vấn đề với applet này, vui lòng báo cáo bằng cách nhấn nút bên dưới và đăng nhập bằng tài khoản Github.\n"
+"\n"
+"Trước khi viết, hãy chắc chắn rằng vấn đề chưa được gửi trong phần issues và kiểm tra các chi tiết đã điền sẵn. Đừng quên thêm mô tả ngắn ở trường Tiêu đề phía trên cạnh tên applet để mọi người dễ hiểu vấn đề. Nhật ký ở mức Gỡ lỗi (có thể lưu vào file dưới đây) cũng được hoan nghênh."
+
+#. 3.8->settings-schema.json->loc-info->description
+msgid "Your location in most cases work automatically but you can enter it manually by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/Town} {Postcode} {Country}. The search algorithm is very flexible with the format. After 3 seconds without typing the address you entered is replaced automatically for validating your choice."
+msgstr "Vị trí của bạn hầu hết tự động nhưng bạn có thể nhập thủ công bằng tọa độ 'Vĩ độ,Kinh độ' (ví dụ 51.5085,-0.1257) hoặc 'Thành phố,Mã quốc gia' (ví dụ London,UK) hoặc thử nhập {House number} {Street} {City/Town} {Postcode} {Country}. Thuật toán tìm kiếm rất linh hoạt với định dạng. Sau 3 giây không nhập, địa chỉ sẽ tự thay thế để xác nhận lựa chọn."
+
+#. 3.8->settings-schema.json->logLevel->description
+msgid "Log Level"
+msgstr "Mức nhật ký"
+
+#. 3.8->settings-schema.json->logLevel->tooltip
+msgid "Info is the regular logging, Debug is debug, and Verbose also logs network request payloads. Changing this will only be effective on future logs. Only change it you are instructed or you know what you are doing."
+msgstr "Info là ghi nhật ký thông thường, Debug là gỡ lỗi, Verbose còn ghi cả dữ liệu mạng. Thay đổi chỉ có hiệu lực trên các nhật ký tương lai. Chỉ thay đổi nếu bạn được hướng dẫn hoặc biết mình đang làm gì."
+
+#. 3.8->settings-schema.json->logLevel->options
+msgid "Verbose"
+msgstr "Chi tiết"
+
+#. 3.8->settings-schema.json->fileSelect->description
+msgid "Click Save to save debug information to a file"
+msgstr "Nhấn Lưu để lưu thông tin gỡ lỗi vào file"
+
+#. 3.8->settings-schema.json->fileSelect->tooltip
+msgid "This includes logs for the applet and the current settings with your API key redacted."
+msgstr "Bao gồm nhật ký của applet và các thiết lập hiện tại với API key đã ẩn."
+
+#. 3.8->settings-schema.json->selectedLogPath->description
+msgid "Selected path to save Logs"
+msgstr "Đường dẫn đã chọn để lưu nhật ký"
+
+#. 3.8->settings-schema.json->userAgentStringOverride->description
+msgid "User Agent String Override"
+msgstr "Ghi đè User Agent String"
+
+#. 3.8->settings-schema.json->userAgentStringOverride->tooltip
+msgid "If you have issues with the applet not working properly and you know the User Agent string is the problem you can try to override it. Only change it if you know what you are doing. This is a string that is sent to the server when the applet tries to get the weather data."
+msgstr "Nếu applet không hoạt động đúng và bạn biết User Agent là vấn đề, bạn có thể ghi đè nó. Chỉ thay đổi nếu bạn biết mình đang làm gì. Đây là chuỗi được gửi tới server khi applet lấy dữ liệu thời tiết."
+
+#. 3.8->settings-schema.json->runScript->description
+msgid "Run a command when the weather info changes"
+msgstr "Chạy lệnh khi thông tin thời tiết thay đổi"
+
+#. 3.8->settings-schema.json->runScript->tooltip
+msgid ""
+"The applet will run the command you provide every time the weather data is updated. The command will be interpolated with the same values with the same format you can get in any of the overrides, in addition you get {full_data} which is the full current weather data. Interpolation with single brackets {xxx} will not be escaped, with double brackets {{xxxx}} they are wrapped in single quotes (') and all other single quotes are escaped inside. You can use this to integrate the weather data with other parts of your system. You can look up the full weather data structure via the link in the README.\n"
+"\n"
+"Example: 'notify-send \"The weather is {c} and the temperature is {t}{u}\"' will show a notification with the current weather condition and temperature.\n"
+"\n"
+"Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather data to a file in /tmp."
+msgstr ""
+"Applet sẽ chạy lệnh bạn cung cấp mỗi khi dữ liệu thời tiết được cập nhật. Lệnh sẽ được nội suy với cùng các giá trị và định dạng trong các ghi đè, thêm {full_data} là toàn bộ dữ liệu thời tiết hiện tại. Nội suy với dấu {xxx} đơn sẽ không được escape, với {{xxxx}} đôi sẽ được bao trong dấu nháy đơn (') và các nháy đơn khác được escape. Bạn có thể dùng để tích hợp dữ liệu thời tiết với hệ thống khác. Xem cấu trúc dữ liệu đầy đủ qua link trong README.\n"
+"\n"
+"Ví dụ: 'notify-send \"Thời tiết {c}, nhiệt độ {t}{u}\"' sẽ hiển thị thông báo với điều kiện thời tiết và nhiệt độ hiện tại.\n"
+"\n"
+"Ví dụ: 'echo {{full_data}} > /tmp/weather_data' sẽ lưu toàn bộ dữ liệu thời tiết vào file /tmp."
+
+#. 3.8->settings-schema.json->testRunScript->description
+msgid "Test your command"
+msgstr "Kiểm thử lệnh của bạn"
+
+#. 3.8->settings-schema.json->uvIndex->description
+msgid "Enable displaying UV Index"
+msgstr "Bật hiển thị chỉ số UV"
+
+#. 3.8->settings-schema.json->uvIndex->tooltip
+msgid "If your provider supports it, the UV index will be shown in the popup menu next to sunrise/sunset times. It will not show if the UV index is low risk (0-2)."
+msgstr "Nếu nhà cung cấp hỗ trợ, chỉ số UV sẽ hiển thị trong menu bật lên cạnh thời gian mặt trời mọc/lặn. Sẽ không hiển thị nếu chỉ số UV ở mức thấp (0-2)."

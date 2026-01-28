@@ -1,0 +1,292 @@
+# PROCESS MEMORY MONITOR
+# This file is put in the public domain.
+# claudiux, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ProcessMemoryMonitor@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-29 14:35+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:58
+msgid "Click to reset or reconnect to the process"
+msgstr ""
+"Kattintson a visszaállításhoz vagy a folyamathoz való újbóli csatlakozáshoz"
+
+#. applet.js:62
+msgid "Variation:"
+msgstr "Variáció:"
+
+#. applet.js:63
+msgid "Process:"
+msgstr "Folyamat:"
+
+#. applet.js:64
+msgid "PID:"
+msgstr "PID:"
+
+#. applet.js:65
+msgid "Elapsed:"
+msgstr "Lejárt:"
+
+#. applet.js:66
+msgid "Start:"
+msgstr "Start:"
+
+#. applet.js:67
+msgid "Diff:"
+msgstr "Különbség:"
+
+#. applet.js:68
+msgid "Max:"
+msgstr "Max:"
+
+#. applet.js:69
+msgid "Value:"
+msgstr "Érték:"
+
+#. applet.js:70
+msgid "Min:"
+msgstr "Min:"
+
+#. applet.js:71
+msgid "Refresh interval:"
+msgstr "Frissítési időköz:"
+
+#. applet.js:204
+msgid "MiB"
+msgstr "MiB"
+
+#. applet.js:206
+msgid "kiB/min"
+msgstr "kiB/min"
+
+#. applet.js:431
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "'%s' eltávolítása"
+
+#. applet.js:439
+msgid "About..."
+msgstr "Névjegy…"
+
+#. applet.js:458
+msgid "Configure..."
+msgstr "Beállítás…"
+
+#. applet.js:475 applet.js:503
+#, javascript-format
+msgid "Refresh interval: %s seconds"
+msgstr "Frissítési időköz: %s másodperc"
+
+#. settings-schema.json->sysmon-button->description
+#. applet.js:480
+msgid "Open System Monitor"
+msgstr "Rendszerfigyelő megnyitása"
+
+#. metadata.json->description
+msgid "Monitors memory usage of Cinnamon or any other process"
+msgstr "Figyeli a Cinnamon vagy bármely más folyamat memóriahasználatát"
+
+#. metadata.json->name
+msgid "Process Memory Monitor"
+msgstr "Folyamat Memória Monitor"
+
+#. settings-schema.json->page-process->title
+msgid "Process"
+msgstr "Folyamat"
+
+#. settings-schema.json->page-characters->title
+msgid "Characters"
+msgstr "Karakter"
+
+#. settings-schema.json->page-abbrev->title
+#. settings-schema.json->section-abbrev->title
+msgid "Abbreviations"
+msgstr "Rövidítések"
+
+#. settings-schema.json->page-style->title
+#. settings-schema.json->section-style->title
+msgid "Style"
+msgstr "Stílus"
+
+#. settings-schema.json->section-process->title
+msgid "Process to monitor"
+msgstr "Felügyelni kívánt folyamat"
+
+#. settings-schema.json->section-sysmon->title
+msgid "System Monitor"
+msgstr "Rendszerfigyelő"
+
+#. settings-schema.json->section-char-var->title
+msgid "Variation characters"
+msgstr "Variációs karakterek"
+
+#. settings-schema.json->process-name->description
+msgid ""
+"Name of process or PID to be monitored (by default, the Cinnamon process is "
+"used)"
+msgstr ""
+"A megfigyelendő folyamat vagy PID neve (alapértelmezés szerint a Cinnamon "
+"folyamatot használja)"
+
+#. settings-schema.json->process-name->tooltip
+msgid ""
+"Set the name of the process or PID you want to monitor here.\n"
+"Note that, for the moment, no consideration is given to multiple instances "
+"of the same program (undefined behavior).\n"
+"Open the system monitor to see all running processes."
+msgstr ""
+"Itt adja meg a megfigyelni kívánt folyamat vagy PID nevét.\n"
+"Vegye figyelembe, hogy egyelőre nem veszi figyelembe ugyanazon program több "
+"példányát (meghatározatlan viselkedés).\n"
+"Nyissa meg a rendszermonitort, hogy láthassa az összes futó folyamatot."
+
+#. settings-schema.json->pn-button->description
+msgid "Apply"
+msgstr "Alkalmaz"
+
+#. settings-schema.json->reset-pn-button->description
+msgid "Reset to Cinnamon"
+msgstr "Cinnamon újraindítása"
+
+#. settings-schema.json->char-max->description
+msgid "Max value exceeded ⬆"
+msgstr "Maximális érték túllépve ⬆"
+
+#. settings-schema.json->char-max->tooltip
+#. settings-schema.json->char-up->tooltip
+#. settings-schema.json->char-flat->tooltip
+#. settings-schema.json->char-down->tooltip
+#. settings-schema.json->char-min->tooltip
+msgid "Emoji accepted. Empty to return to the default value."
+msgstr ""
+"Emoji elfogadva. Kiürítés az alapértelmezett értékre való visszatéréshez."
+
+#. settings-schema.json->char-up->description
+msgid "Increasing ↗"
+msgstr "Növekvő ↗"
+
+#. settings-schema.json->char-flat->description
+msgid "Staying constant ➡"
+msgstr "Állandó ➡"
+
+#. settings-schema.json->char-down->description
+msgid "Decreasing ↘"
+msgstr "Csökkenő ↘"
+
+#. settings-schema.json->char-min->description
+msgid "Min value exceeded ⬇"
+msgstr "Minimális érték túllépve ⬇"
+
+#. settings-schema.json->no-char-var->description
+msgid "Do not display any Variation character"
+msgstr "Ne jelenítsen meg semmilyen Variáció karaktert"
+
+#. settings-schema.json->abbrev-MiB->description
+msgid "Abbreviation for mebibyte (default: MiB)"
+msgstr "A mebibájt rövidítése (alapértelmezett: MiB)"
+
+#. settings-schema.json->abbrev-MiB->tooltip
+msgid "1 MiB = 1024 kiB"
+msgstr "1 MiB = 1024 kiB"
+
+#. settings-schema.json->abbrev-kpm->description
+msgid "Abbreviation for kibibyte per minute (default: kiB/min)"
+msgstr "A kibibájt/perc rövidítése (alapértelmezett: kiB/min)"
+
+#. settings-schema.json->abbrev-kpm->tooltip
+msgid "1 kiB = 1024 B"
+msgstr "1 kiB = 1024 B"
+
+#. settings-schema.json->style-font-weight->description
+msgid "Font weight"
+msgstr "Szöveg súly"
+
+#. settings-schema.json->style-font-weight->options
+msgid "normal"
+msgstr "normál"
+
+#. settings-schema.json->style-font-weight->options
+msgid "bold"
+msgstr "félkövér"
+
+#. settings-schema.json->style-font-family->description
+msgid "Font family"
+msgstr "Betű család"
+
+#. settings-schema.json->style-font-family->options
+msgid "monospace"
+msgstr "monospace"
+
+#. settings-schema.json->style-font-family->options
+msgid "sans-serif"
+msgstr "sans-serif"
+
+#. settings-schema.json->style-font-family->options
+msgid "serif"
+msgstr "serif"
+
+#. settings-schema.json->style-font-family->options
+msgid "cursive"
+msgstr "dőlt"
+
+#. settings-schema.json->style-font-family->options
+msgid "fantasy"
+msgstr "fantasy"
+
+#. settings-schema.json->style-font-family->tooltip
+msgid "Select monospace to ensure display stability."
+msgstr ""
+"A megjelenítés stabilitásának biztosítása érdekében válassza a monospace "
+"betűtípust."
+
+#. settings-schema.json->style-font-size->description
+msgid "Font size"
+msgstr "Betűméret"
+
+#. settings-schema.json->style-font-size->options
+msgid "xx-small"
+msgstr "xx-kicsi"
+
+#. settings-schema.json->style-font-size->options
+msgid "x-small"
+msgstr "x-kicsi"
+
+#. settings-schema.json->style-font-size->options
+msgid "small"
+msgstr "kicsi"
+
+#. settings-schema.json->style-font-size->options
+msgid "medium"
+msgstr "közepes"
+
+#. settings-schema.json->style-font-size->options
+msgid "large"
+msgstr "nagy"
+
+#. settings-schema.json->style-font-size->options
+msgid "x-large"
+msgstr "x-nagy"
+
+#. settings-schema.json->style-font-size->options
+msgid "xx-large"
+msgstr "xx-nagy"
+
+#. settings-schema.json->style-customized-width->description
+msgid "Custom width"
+msgstr "Egyéni szélesség"
+
+#. settings-schema.json->style-label-width->description
+msgid "Label's width (pixels)"
+msgstr "Címke szélessége (képpont)"

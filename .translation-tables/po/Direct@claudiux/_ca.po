@@ -1,0 +1,140 @@
+# Direct
+# This file is put in the public domain.
+# claudiux, 2016
+#
+msgid ""
+msgstr ""
+
+#. applet.js:46 applet.js:725
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:46 applet.js:800
+msgid "CUSTOM"
+msgstr ""
+
+#. applet.js:631 applet.js:671 applet.js:702 applet.js:733 applet.js:764
+#. applet.js:808
+msgid "Configure"
+msgstr ""
+
+#. applet.js:900
+msgid "Logout"
+msgstr ""
+
+#. applet.js:907
+msgid "Quit"
+msgstr ""
+
+#. settings-schema.json->customPage->title
+msgid "Custom"
+msgstr ""
+
+#. settings-schema.json->favoriteAppsSection->title
+msgid "Favorite apps"
+msgstr ""
+
+#. settings-schema.json->customSection->title
+msgid "Custom documents"
+msgstr ""
+
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr ""
+
+#. settings-schema.json->textSize->description
+msgid "Text width"
+msgstr ""
+
+#. settings-schema.json->textSize->tooltip
+msgid "0 means: automatic"
+msgstr ""
+
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr ""
+
+#. settings-schema.json->displayOrder->description
+#. settings-schema.json->favoriteCustomList->description
+msgid "Display order in the menu"
+msgstr ""
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
+#. settings-schema.json->dontDisplayTooltip->description
+msgid "Do not display the tooltip"
+msgstr ""
+
+#. settings-schema.json->showUserSettingsAccessIcon->description
+#. settings-schema.json->showSystemSettingsAccessIcon->description
+#. settings-schema.json->showFavoritesSettingsAccessIcon->description
+#. settings-schema.json->showRecentSettingsAccessIcon->description
+#. settings-schema.json->showCustomSettingsAccessIcon->description
+msgid "Show the settings access icon"
+msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Custom Sort"
+msgstr ""
+
+#. settings-schema.json->favoriteLabel->description
+msgid ""
+"Below are the favorite documents displayed in the menu when checked.\n"
+"The Name can be changed here, but is unchanged in menu.\n"
+"The URI must not be changed.\n"
+"Favorite documents can only be managed by nemo."
+msgstr ""
+
+#. settings-schema.json->favoriteCustomList->columns->title
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->favoriteCustomList->columns->title
+msgid " Name"
+msgstr ""
+
+#. settings-schema.json->favoriteCustomList->columns->title
+msgid " URI"
+msgstr ""
+
+#. settings-schema.json->favoritePopulateButton->description
+msgid "Add all your Favorite Documents"
+msgstr ""
+
+#. settings-schema.json->showFavoriteApps->description
+msgid "Show favorite apps"
+msgstr ""
+
+#. settings-schema.json->favAppsLabel->description
+msgid ""
+"Below are the favorite applications displayed in the menu when checked.\n"
+"The Name can be changed.\n"
+"The Launcher must not be changed."
+msgstr ""
+
+#. settings-schema.json->favApps->description
+msgid "Favorite apps shown"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid " Launcher"
+msgstr ""
+
+#. settings-schema.json->favAppsPopulateButton->description
+msgid "Add all your Favorite Apps"
+msgstr ""
+
+#. settings-schema.json->showCustomDocuments->description
+msgid "Show Custom documents"
+msgstr ""
+
+#. settings-schema.json->labelCustomDocuments->description
+msgid ""
+"URI: Enter the link to your custom document or application-name.desktop here "
+"(as in /usr/share/applications/).\n"
+"To separate them into categories, you can add a line without a URI, but with "
+"a name as the category title (no icon is necessary)."
+msgstr ""
