@@ -242,8 +242,8 @@ QuickAlarmApplet.prototype = {
     this.menuManager.addMenu(this.menu);
     this.menu.actor.add_style_class_name("qa-menu");
 
-    this._interfaceSettings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.interface" });
-    this._interfaceSettings.connect("changed::gtk-theme", () => this._applyThemeClass());
+    this._cinnamonThemeSettings = new Gio.Settings({ schema_id: "org.cinnamon.theme" });
+    this._cinnamonThemeSettings.connect("changed::name", () => this._applyThemeClass());
     this._applyThemeClass();
 
     const gearIcon = new St.Icon({
@@ -368,7 +368,7 @@ QuickAlarmApplet.prototype = {
   },
 
   _applyThemeClass() {
-    const theme = this._interfaceSettings.get_string("gtk-theme") || "";
+    const theme = this._cinnamonThemeSettings.get_string("name") || "";
     const isDark = /dark/i.test(theme);
     if (!this.menu || !this.menu.actor) return;
     this.menu.actor.remove_style_class_name("qa-theme-light");
