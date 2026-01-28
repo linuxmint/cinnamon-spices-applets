@@ -19,7 +19,7 @@ MyApplet.prototype = {
 
         this.metadata = metadata;
         this.set_applet_icon_path(this.metadata.path + "/icon.png");
-        this.set_applet_label(_("Loading Newsticker..."));
+        this.set_applet_label(_("Loading..."));
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this._setupSettings();
@@ -27,30 +27,21 @@ MyApplet.prototype = {
         this._allNews = [];
         this._tickerText = "";
         this._tickerPosition = 0;
-        this._error = false;
+        
+        this._refreshLoopId = null; // Güncelleme döngüsü ID'si
+        this._tickerLoopId = null;  // Kayma döngüsü ID'si
 
-        // Menü
+        // Menü kurulumu
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
 
-        this._updateFeed();
-        this._tickerLoop();
         this._setWidth();
-
-        // refresh every X seconds
-        this._refreshLoop = Mainloop.timeout_add_seconds(this.update_interval * 60, Lang.bind(this, this._updateFeed));
+        this._updateFeed(); // İlk veriyi çek ve döngüyü başlat
+        this._tickerLoop(); // Yazı kaydırmayı başlat
     },
 
     _setupSettings: function () {
-        this.news_sources = this.settings.getValue("news_sources") || [];
-        this.tickerSeperator = "*******";
-        this.update_interval = this.settings.getValue("update_interval") || 15;
-        this.scroll_speed = this.settings.getValue("scroll_speed") || 30;
-        this.width_multiplier = this.settings.getValue("width_multiplier") || 8.5;
-        this.scroll_limit = this.settings.getValue("scroll_limit") || 30;
-        this.vertical_offset = this.settings.getValue("vertical_offset") || 5;
-
         this.settings.bindProperty(Settings.BindingDirection.IN, 'news_sources', 'news_sources', this._updateFeed, null);
         this.settings.bindProperty(Settings.BindingDirection.IN, 'update_interval', 'update_interval', this._updateFeed, null);
         this.settings.bindProperty(Settings.BindingDirection.IN, 'scroll_speed', 'scroll_speed');
@@ -60,7 +51,7 @@ MyApplet.prototype = {
     },
 
     _setWidth: function () {
-        let width_px = Math.round(this.width_multiplier * 15); // multiplier mantığı
+        let width_px = Math.round(this.width_multiplier * 15);
         this.actor.set_style("width: " + width_px + "px;");
         this.actor.x_align = St.Align.MIDDLE;
         this.tickerCharacters = Math.floor(width_px / 7);
@@ -68,7 +59,9 @@ MyApplet.prototype = {
 
     _updateLabelStyle: function () {
         let offset = this.vertical_offset || 0;
-        this.actor.set_style(this.actor.get_style() + `margin-top: ${offset}px;`);
+        let currentStyle = this.actor.get_style() || "";
+        // Mevcut stilde margin varsa temizle ve yenisini ekle
+        this.actor.set_style(currentStyle.replace(/margin-top:[^;]+;?/g, "") + `margin-top: ${offset}px;`);
     },
 
     _formatTime: function (date) {
@@ -78,104 +71,96 @@ MyApplet.prototype = {
     },
 
     _updateFeed: function () {
-        // Tüm kaynaklardan haberleri çek
-        this._allNews = [];
+        // Eğer çalışan bir döngü varsa önce onu iptal et (Mükerrer çalışmayı önler)
+        if (this._refreshLoopId) {
+            Mainloop.source_remove(this._refreshLoopId);
+            this._refreshLoopId = null;
+        }
+
         let sources = this.news_sources || [];
-        if (!sources.length) {
-            this._tickerText = _("No RSS source configured");
+        if (sources.length === 0) {
+            this._tickerText = _("No RSS source");
+            this._allNews = [];
             this._buildMenu();
+            this._scheduleUpdate(); // Boş olsa da kontrol etmeye devam et
             return;
         }
 
         let completed = 0;
         let total = sources.length;
+        let newNewsStore = [];
+
         sources.forEach(source => {
             let session = new Soup.Session();
+            // Zaman aşımı ekleyelim ki asılı kalmasın
+            session.timeout = 10;
             let msg = Soup.Message.new("GET", source.url.trim());
 
             session.send_and_read_async(msg, 0, null, (s, res) => {
                 try {
                     let bytes = s.send_and_read_finish(res);
-                    if (!bytes) return;
+                    if (bytes) {
+                        let xml = new TextDecoder("utf-8").decode(bytes.get_data());
+                        let items = xml.match(/<item>([\s\S]*?)<\/item>/g) || [];
 
-                    let xml = new TextDecoder("utf-8").decode(bytes.get_data());
-                    let items = xml.match(/<item>([\s\S]*?)<\/item>/g) || [];
-
-                    items.forEach(item => {
-                        const title = item.match(/<title>(.*?)<\/title>/)?.[1] || "No Title";
-                        const link = item.match(/<link>(.*?)<\/link>/)?.[1] || "#";
-                        let pubDate = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || "";
-                        let dateObj = pubDate ? new Date(pubDate) : new Date();
-
-                        this._allNews.push({
-                            title: title,
-                            link: link,
-                            date: dateObj,
-                            source: source.label || "RSS"
+                        items.forEach(item => {
+                            const title = item.match(/<title>(.*?)<\/title>/)?.[1] || "No Title";
+                            // XML entity'lerini temizle (basitçe)
+                            let cleanTitle = title.replace(/<!\[CDATA\[(.*?)\]\]>/g, "$1").trim();
+                            const link = item.match(/<link>(.*?)<\/link>/)?.[1] || "#";
+                            let pubDate = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || "";
+                            
+                            newNewsStore.push({
+                                title: cleanTitle,
+                                link: link,
+                                date: pubDate ? new Date(pubDate) : new Date(),
+                                source: source.label || "RSS"
+                            });
                         });
-                    });
+                    }
                 } catch (e) {
-                    global.logError("Error while loading RSS: " + e.message);
+                    global.logError("RSS Fetch Error: " + e.message);
                 } finally {
                     completed++;
                     if (completed === total) {
-                        // Tüm kaynaklar bittiğinde devam et
-                        this._allNews.sort((a, b) => b.date - a.date); // tarihe göre sırala (en yeni başta)
+                        this._allNews = newNewsStore.sort((a, b) => b.date - a.date);
                         this._buildMenu();
+                        this._scheduleUpdate(); // Her şey bitince sonraki turu planla
                     }
                 }
             });
         });
     },
 
+    _scheduleUpdate: function() {
+        // update_interval dakika cinsinden, saniyeye çeviriyoruz
+        let interval = Math.max(1, this.update_interval || 5) * 60;
+        this._refreshLoopId = Mainloop.timeout_add_seconds(interval, Lang.bind(this, this._updateFeed));
+    },
+
     _buildMenu: function () {
         this.menu.removeAll();
-
         if (this._allNews.length === 0) return;
 
-        const menuSection = new PopupMenu.PopupMenuSection({ style_class: "popup-menu-section" });
-
-        const scrollView = new St.ScrollView({
-            x_fill: true,
-            y_fill: true,
-            style_class: "scrollView",
-            clip_to_allocation: true
-        });
+        const menuSection = new PopupMenu.PopupMenuSection();
+        const scrollView = new St.ScrollView({ x_fill: true, y_fill: true, style_class: "scrollView" });
         scrollView.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);
 
-        const menuContainer = new St.BoxLayout({ vertical: true, style_class: "menuBox" });
+        const menuContainer = new St.BoxLayout({ vertical: true });
         scrollView.add_actor(menuContainer);
 
-        // En güncel 15 haber
-        this._allNews.slice(0, 15).forEach(item => {
-            let timeStr = this._formatTime(item.date);
-            let prefix = `${timeStr}[${item.source}] `;
-
-            let maxLen = 100;
-            let displayTitle = item.title;
-            if (displayTitle.length > maxLen) {
-                displayTitle = displayTitle.substring(0, maxLen) + "...";
-            }
-
-            let fullText = prefix + displayTitle;
-
-            let btn = new St.Button({ reactive: true, track_hover: true, style_class: "menuButton", x_align: St.Align.START });
-
-            let box = new St.BoxLayout({ vertical: false, style_class: "buttonBox" });
-
-            let icon = new St.Icon({
-                gicon: Gio.icon_new_for_string(this.metadata.path + "/icon.png"),
-                icon_size: 18,
-                style_class: "popup-menu-icon"
+        this._allNews.slice(0, 20).forEach(item => {
+            let fullText = `${this._formatTime(item.date)} [${item.source}] ${item.title}`;
+            let btn = new St.Button({ 
+                label: fullText, 
+                style_class: "menu-category-button", // Standart tarza yakın durur
+                x_align: St.Align.START 
             });
-            box.add_actor(icon);
 
-            let titleLabel = new St.Label({ text: fullText, style_class: "popup-menu-item-title" });
-            box.add_actor(titleLabel);
-
-            btn.add_actor(box);
-
-            btn.connect("clicked", () => { Gio.app_info_launch_default_for_uri(item.link, null); });
+            btn.connect("clicked", () => { 
+                Gio.app_info_launch_default_for_uri(item.link, null);
+                this.menu.close();
+            });
 
             menuContainer.add_child(btn);
         });
@@ -185,25 +170,32 @@ MyApplet.prototype = {
     },
 
     _tickerLoop: function () {
-        // Ticker headline’ları güncel ve sıralı şekilde birleştir
         if (this._allNews.length > 0) {
             const chainedHeadlines = this._allNews
                 .slice(0, 15)
-                .map(item => `[${this._formatTime(item.date)}][${item.source}] ${item.title}`);
-            this._tickerText = chainedHeadlines.join(' ' + this.tickerSeperator + ' ');
+                .map(item => `[${item.source}] ${item.title}`);
+            this._tickerText = chainedHeadlines.join(' ' + this.tickerSeperator + ' ') + ' ' + this.tickerSeperator + ' ';
         }
 
-        const textWindow = this._tickerText.substring(this._tickerPosition, this._tickerPosition + this.scroll_limit);
-
-        this.set_applet_label(textWindow);
-
-        this._tickerPosition += 1;
-
-        if (this._tickerPosition >= this._tickerText.length) {
-            this._tickerPosition = 0;
+        if (this._tickerText.length > 0) {
+            let display = "";
+            if (this._tickerText.length <= this.scroll_limit) {
+                display = this._tickerText;
+            } else {
+                display = this._tickerText.substring(this._tickerPosition, this._tickerPosition + this.scroll_limit);
+                // Eğer sona yaklaştıysak başını ekle (kesintisiz döngü efekti)
+                if (display.length < this.scroll_limit) {
+                    display += this._tickerText.substring(0, this.scroll_limit - display.length);
+                }
+            }
+            this.set_applet_label(display);
+            this._tickerPosition++;
+            if (this._tickerPosition >= this._tickerText.length) this._tickerPosition = 0;
         }
 
-        Mainloop.timeout_add(this.scroll_speed, Lang.bind(this, this._tickerLoop));
+        // Ticker hızını koru
+        this._tickerLoopId = Mainloop.timeout_add(this.scroll_speed, Lang.bind(this, this._tickerLoop));
+        return false; // Loop'un kendi kendini tekrar etmesini Mainloop üzerinden kontrol ediyoruz
     },
 
     on_applet_clicked: function () {
@@ -211,7 +203,9 @@ MyApplet.prototype = {
     },
 
     on_applet_removed_from_panel: function () {
-        Mainloop.source_remove(this._refreshLoop);
+        if (this._refreshLoopId) Mainloop.source_remove(this._refreshLoopId);
+        if (this._tickerLoopId) Mainloop.source_remove(this._tickerLoopId);
+        this.settings.finalize();
     }
 };
 
