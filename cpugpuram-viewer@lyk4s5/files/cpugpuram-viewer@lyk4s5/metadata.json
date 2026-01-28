@@ -3,7 +3,6 @@
   "name": "CPU/GPU/RAM Viewer",
   "description": "Minimalist system monitor for CPU, GPU, and RAM usage.",
   "version": "1.0",
-  "icon": "icon",
   "role": "panellauncher",
   "author": "lyk4s5"
 }   
