@@ -1,7 +1,7 @@
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 
-const UUID = "directory-menu@torchipeppo";
+var UUID = "directory-menu@torchipeppo";
 
 /**
  * Normalize a URI path, converting ~ to home directory and ensuring file:// prefix
