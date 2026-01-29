@@ -6,9 +6,10 @@ const Gio = imports.gi.Gio;
 let UUID = "fade-monitors@hisovereign";
 
 const HOME = GLib.get_home_dir();
-const TOGGLE_FILE = HOME + "/.fade_mouse_enabled";
+const MOUSE_TOGGLE_FILE = HOME + "/.fade_mouse_enabled";
+const IDLE_TOGGLE_FILE = HOME + "/.idle_dim_enabled";
 const STOP_FILE = HOME + "/.fade_mouse_stopped";
-const SCRIPT_NAME = "fade-monitors-2d-time-based.sh";
+const SCRIPT_NAME = "fade-monitors-enhanced-dimming.sh";
 const SCRIPT_PATH = HOME + "/.local/bin/" + SCRIPT_NAME;
 const GITHUB_URL = "https://github.com/hisovereign/Fade-Monitors";
 
@@ -17,13 +18,14 @@ class FadeMonitorsApplet extends Applet.IconApplet {
         super(orientation, panelHeight, instanceId);
 
         this.set_applet_icon_symbolic_name("video-display-symbolic");
-        this.set_applet_tooltip("Fade Monitors");
+        this.set_applet_tooltip("Enhanced Fade Monitors");
 
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menuManager.addMenu(this.menu);
 
-        this._dimmingEnabled = this._isDimmingEnabled();
+        this._mouseDimmingEnabled = this._isMouseDimmingEnabled();
+        this._idleDimmingEnabled = this._isIdleDimmingEnabled();
 
         this._buildMenu();
     }
@@ -39,23 +41,32 @@ class FadeMonitorsApplet extends Applet.IconApplet {
     }
 
     on_applet_clicked() {
-        this._dimmingEnabled = this._isDimmingEnabled();
-        this._refreshToggleLabel();
+        this._mouseDimmingEnabled = this._isMouseDimmingEnabled();
+        this._idleDimmingEnabled = this._isIdleDimmingEnabled();
+        this._refreshMenuLabels();
         this.menu.toggle();
     }
 
     /* ---------------- Menu ---------------- */
 
     _buildMenu() {
-        this.toggleItem = new PopupMenu.PopupMenuItem("");
-        this.menu.addMenuItem(this.toggleItem);
+        // Mouse dimming toggle
+        this.mouseToggleItem = new PopupMenu.PopupMenuItem("");
+        this.menu.addMenuItem(this.mouseToggleItem);
+        this.mouseToggleItem.connect("activate", () => {
+            this._toggleMouseDimming();
+        });
 
-        this.toggleItem.connect("activate", () => {
-            this._toggleDimming();
+        // Idle dimming toggle
+        this.idleToggleItem = new PopupMenu.PopupMenuItem("");
+        this.menu.addMenuItem(this.idleToggleItem);
+        this.idleToggleItem.connect("activate", () => {
+            this._toggleIdleDimming();
         });
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
+        // Script control section
         let startItem = new PopupMenu.PopupMenuItem("Start Script");
         startItem.connect("activate", () => {
             this._startScript();
@@ -70,18 +81,32 @@ class FadeMonitorsApplet extends Applet.IconApplet {
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
+        // Configuration section
         let settingsItem = new PopupMenu.PopupMenuItem("Open Script");
         settingsItem.connect("activate", () => {
             this._openScriptFile();
         });
         this.menu.addMenuItem(settingsItem);
 
-        this._refreshToggleLabel();
+        let configItem = new PopupMenu.PopupMenuItem("Open Config Folder");
+        configItem.connect("activate", () => {
+            this._openConfigFolder();
+        });
+        this.menu.addMenuItem(configItem);
+
+        this._refreshMenuLabels();
     }
 
-    _refreshToggleLabel() {
-        this.toggleItem.label.text =
-            this._dimmingEnabled ? "Dimming: On" : "Dimming: off";
+    _refreshMenuLabels() {
+        this.mouseToggleItem.label.text = 
+            this._mouseDimmingEnabled ? 
+            "Mouse Dimming: On" : 
+            "Mouse Dimming: off";
+        
+        this.idleToggleItem.label.text = 
+            this._idleDimmingEnabled ? 
+            "Idle Dimming: On" : 
+            "Idle Dimming: off";
     }
 
     /* ---------------- File Operations ---------------- */
@@ -105,14 +130,29 @@ class FadeMonitorsApplet extends Applet.IconApplet {
         }
     }
 
+    _openConfigFolder() {
+        try {
+            let configDir = HOME + "/.local/bin/";
+            let file = Gio.File.new_for_path(configDir);
+            let launcher = Gio.AppInfo.create_from_commandline(
+                "xdg-open",
+                "xdg-open",
+                Gio.AppInfoCreateFlags.NONE
+            );
+            launcher.launch([file], null);
+        } catch (e) {
+            this._showError("Failed to open config folder: " + e.message);
+        }
+    }
+
     _showMissingScriptMessage() {
-        let message = "Missing Fade Monitors time-based script\n\n" +
+        let message = "Missing Enhanced Fade Monitors script\n\n" +
                       "Get it from:\n" + GITHUB_URL;
         
         let Main = imports.ui.main;
         Main.notify("Script Not Found", message);
         
-        // Optional: Copy URL to clipboard
+        // Copy URL to clipboard
         try {
             let St = imports.gi.St;
             let Clipboard = St.Clipboard.get_default();
@@ -129,21 +169,43 @@ class FadeMonitorsApplet extends Applet.IconApplet {
 
     /* ---------------- Toggle logic ---------------- */
 
-    _isDimmingEnabled() {
-        return GLib.file_test(TOGGLE_FILE, GLib.FileTest.EXISTS);
+    _isMouseDimmingEnabled() {
+        return GLib.file_test(MOUSE_TOGGLE_FILE, GLib.FileTest.EXISTS);
     }
 
-    _toggleDimming() {
+    _isIdleDimmingEnabled() {
+        // Note: In our script, idle dimming is ON when file DOESN'T exist
+        // (inverted logic: file exists = idle dimming OFF)
+        return !GLib.file_test(IDLE_TOGGLE_FILE, GLib.FileTest.EXISTS);
+    }
+
+    _toggleMouseDimming() {
         try {
-            if (this._dimmingEnabled) {
-                GLib.unlink(TOGGLE_FILE);
+            if (this._mouseDimmingEnabled) {
+                GLib.unlink(MOUSE_TOGGLE_FILE);
             } else {
-                GLib.file_set_contents(TOGGLE_FILE, "");
+                GLib.file_set_contents(MOUSE_TOGGLE_FILE, "");
             }
-            this._dimmingEnabled = !this._dimmingEnabled;
-            this._refreshToggleLabel();
+            this._mouseDimmingEnabled = !this._mouseDimmingEnabled;
+            this._refreshMenuLabels();
         } catch (e) {
-            this._showError("Failed to toggle dimming: " + e.message);
+            this._showError("Failed to toggle mouse dimming: " + e.message);
+        }
+    }
+
+    _toggleIdleDimming() {
+        try {
+            if (this._idleDimmingEnabled) {
+                // Enable idle dimming = remove the file
+                GLib.file_set_contents(IDLE_TOGGLE_FILE, "");
+            } else {
+                // Disable idle dimming = create the file
+                GLib.unlink(IDLE_TOGGLE_FILE);
+            }
+            this._idleDimmingEnabled = !this._idleDimmingEnabled;
+            this._refreshMenuLabels();
+        } catch (e) {
+            this._showError("Failed to toggle idle dimming: " + e.message);
         }
     }
 
@@ -151,7 +213,9 @@ class FadeMonitorsApplet extends Applet.IconApplet {
 
     _startScript() {
         // Remove stop gate
-        try { GLib.unlink(STOP_FILE); } catch (e) {}
+        try { 
+            GLib.unlink(STOP_FILE); 
+        } catch (e) {}
 
         // Check if script exists before starting
         if (!GLib.file_test(SCRIPT_PATH, GLib.FileTest.EXISTS)) {
@@ -164,7 +228,8 @@ class FadeMonitorsApplet extends Applet.IconApplet {
                 HOME,
                 ["bash", SCRIPT_PATH],
                 null,
-                GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+                GLib.SpawnFlags.SEARCH_PATH | 
+                GLib.SpawnFlags.DO_NOT_REAP_CHILD,
                 null
             );
         } catch (e) {
@@ -184,7 +249,7 @@ class FadeMonitorsApplet extends Applet.IconApplet {
         try {
             GLib.spawn_async(
                 null,
-                ["pkill", "-f", SCRIPT_NAME + "$"],  // $ ensures exact match
+                ["pkill", "-f", SCRIPT_NAME + "$"],
                 null,
                 GLib.SpawnFlags.SEARCH_PATH,
                 null
@@ -196,5 +261,10 @@ class FadeMonitorsApplet extends Applet.IconApplet {
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {
-    return new FadeMonitorsApplet(metadata, orientation, panelHeight, instanceId);
+    return new FadeMonitorsApplet(
+        metadata, 
+        orientation, 
+        panelHeight, 
+        instanceId
+    );
 }
