@@ -34,7 +34,7 @@
     },
     "icon-name": {
         "type": "iconfilechooser",
-        "default": "folder-symbolic",
+        "default": "xsi-folder-symbolic",
         "description": "Icon (hover here for info!)",
         "tooltip": "Must be an icon name (no path), and should be symbolic."
     },
