@@ -71,8 +71,8 @@
     "character-limit": {
         "type": "spinbutton",
         "default": 50,
-        "min": 5,
-        "max": 1000,
+        "min": 10,
+        "max": 255,
         "step": 5,
         "description": "Character Limit",
         "tooltip": "(Approximately) Limit the number of characters of each entry.\nUseful if you think the menu is too wide.",
