@@ -88,6 +88,13 @@ class FolderMenuItem extends PopupMenu.PopupBaseMenuItem {
 
     _onKeyPress(actor, event) {
         let symbol = event.get_key_symbol();
+        if (symbol === Clutter.KEY_Up) {
+            if (this._handler.isFirstItem(this) && this._handler.applet.show_header) {
+                this._handler.focusHeader();
+                return true;
+            }
+        }
+
         if (symbol === Clutter.KEY_Up || symbol === Clutter.KEY_Down) {
             Mainloop.idle_add(() => {
                 let focus = global.stage.get_key_focus();
@@ -161,6 +168,13 @@ class FileMenuItem extends PopupMenu.PopupBaseMenuItem {
 
     _onKeyPress(actor, event) {
         let symbol = event.get_key_symbol();
+        if (symbol === Clutter.KEY_Up) {
+            if (this._handler.isFirstItem(this) && this._handler.applet.show_header) {
+                this._handler.focusHeader();
+                return true;
+            }
+        }
+
         if (symbol === Clutter.KEY_Up || symbol === Clutter.KEY_Down) {
             Mainloop.idle_add(() => {
                 let focus = global.stage.get_key_focus();
@@ -263,7 +277,7 @@ var NativeCassettoneHandler = class NativeCassettoneHandler {
         });
 
         // Back Button
-        this.backButton = new St.Button({ style_class: 'popup-menu-item', style: 'padding: 4px;' });
+        this.backButton = new St.Button({ style_class: 'popup-menu-item', style: 'padding: 4px;', can_focus: true });
         let backIcon = new St.Icon({ icon_name: 'xsi-go-previous-symbolic', icon_type: St.IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
         this.backButton.set_child(backIcon);
         this.backButton.connect('clicked', () => this.goUp());
@@ -274,7 +288,7 @@ var NativeCassettoneHandler = class NativeCassettoneHandler {
         this.headerBox.add(this.headerLabel, { expand: true, y_align: Clutter.ActorAlign.CENTER });
 
         // Open Folder
-        this.openBtn = new St.Button({ style_class: 'popup-menu-item', style: 'padding: 4px 2px;' });
+        this.openBtn = new St.Button({ style_class: 'popup-menu-item', style: 'padding: 4px 2px;', can_focus: true });
         let openTooltip = new Tooltips.Tooltip(this.openBtn, _("Open Folder"));
         let openIcon = new St.Icon({ icon_name: 'xsi-folder-open-symbolic', icon_type: St.IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
         this.openBtn.set_child(openIcon);
@@ -282,14 +296,38 @@ var NativeCassettoneHandler = class NativeCassettoneHandler {
             Gio.app_info_launch_default_for_uri(this.currentDir.get_uri(), null);
             this.menu.close();
         });
+        this.openBtn.connect('key-press-event', (actor, event) => {
+            let symbol = event.get_key_symbol();
+            if (symbol === Clutter.KEY_Right || symbol === Clutter.KEY_Down) {
+                if (this.termBtn.visible) {
+                    this.termBtn.grab_key_focus();
+                    return true;
+                }
+            }
+            return false;
+        });
         this.headerBox.add(this.openBtn);
 
         // Open Terminal
-        this.termBtn = new St.Button({ style_class: 'popup-menu-item', style: 'padding: 4px 2px;' });
+        this.termBtn = new St.Button({ style_class: 'popup-menu-item', style: 'padding: 4px 2px;', can_focus: true });
         let termTooltip = new Tooltips.Tooltip(this.termBtn, _("Open in Terminal"));
         let termIcon = new St.Icon({ icon_name: 'xsi-utilities-terminal-symbolic', icon_type: St.IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
         this.termBtn.set_child(termIcon);
         this.termBtn.connect('clicked', () => this._openTerminal());
+        this.termBtn.connect('key-press-event', (actor, event) => {
+            let symbol = event.get_key_symbol();
+            if (symbol === Clutter.KEY_Down) {
+                this.focusFirstItem();
+                return true;
+            }
+            if (symbol === Clutter.KEY_Left || symbol === Clutter.KEY_Up) {
+                if (this.openBtn.visible) {
+                    this.openBtn.grab_key_focus();
+                    return true;
+                }
+            }
+            return false;
+        });
         this.headerBox.add(this.termBtn);
 
         this.menu.addActor(this.headerBox);
@@ -649,6 +687,29 @@ var NativeCassettoneHandler = class NativeCassettoneHandler {
     open() {
         this._scrollToTop();
         this.menu.toggle();
+    }
+
+    isFirstItem(item) {
+        if (!this._menuItems || this._menuItems.length === 0) return false;
+        return this._menuItems[0] === item;
+    }
+
+    focusHeader() {
+        if (this.termBtn && this.termBtn.visible) {
+            this.termBtn.grab_key_focus();
+        } else if (this.openBtn && this.openBtn.visible) {
+            this.openBtn.grab_key_focus();
+        }
+    }
+
+    focusFirstItem() {
+        if (this._menuItems && this._menuItems.length > 0) {
+            let first = this._menuItems[0];
+            if (first && first.actor && first.actor.visible) {
+                first.actor.grab_key_focus();
+                this._scrollItemIntoView(first.actor);
+            }
+        }
     }
 
     destroy() {
