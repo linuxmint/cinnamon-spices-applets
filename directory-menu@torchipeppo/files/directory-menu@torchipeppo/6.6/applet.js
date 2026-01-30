@@ -10,21 +10,21 @@
  * since a "Menu" is an already existing concept here, i.e. a dropdown menu object.
  */
 
-const Lang = imports.lang;
 const Main = imports.ui.main;
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
 const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
+const SignalManager = imports.misc.signalManager;
 
-const Helpers = require('./helpers');
+const { UUID } = require('./helpers');
 const { ClassicCassettoneHandler } = require('./cassettoneClassic');
 const { NativeCassettoneHandler } = require('./cassettoneNative');
 
-Gettext.bindtextdomain(Helpers.UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(text) {
-    let locText = Gettext.dgettext(Helpers.UUID, text);
+    let locText = Gettext.dgettext(UUID, text);
     if (locText == text) {
         locText = window._(text);
     }
@@ -39,7 +39,9 @@ class CassettoneApplet extends Applet.TextIconApplet {
         this.metadata = metadata;
         this._menuHandler = null;
 
-        this.settings = new Settings.AppletSettings(this, Helpers.UUID, this.instance_id);
+        this.signalManager = new SignalManager.SignalManager(null);
+
+        this.settings = new Settings.AppletSettings(this, UUID, this.instance_id);
         this.settings.bind("starting-uri", "starting_uri", this.on_settings_changed);
         this.settings.bind("menu-type", "menu_type", this.on_menu_type_changed);
         this.settings.bind("prefer-native-wayland", "prefer_native_wayland", this.on_menu_type_changed);
@@ -60,13 +62,13 @@ class CassettoneApplet extends Applet.TextIconApplet {
         this.set_show_label_in_vertical_panels(false);
         this.set_applet_label(this.label)
 
-        this.actor.connect('enter-event', Lang.bind(this, this.on_enter_event));
-        this.actor.connect('button-release-event', Lang.bind(this, this.on_button_release_event));
+        this.signalManager.connect(this.actor, 'enter-event', this.on_enter_event, this);
+        this.signalManager.connect(this.actor, 'button-release-event', this.on_button_release_event, this);
 
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
-        // Initialize menu handler
         this._initMenuHandler();
+
         this.set_keybinding();
     }
 
@@ -154,8 +156,7 @@ class CassettoneApplet extends Applet.TextIconApplet {
 
     set_keybinding() {
         Main.keybindingManager.addHotKey("show-directory-menu-" + this.instance_id,
-            this.show_menu,
-            Lang.bind(this, this.open_menu));
+            this.show_menu, this.open_menu.bind(this));
     }
 
     on_applet_removed_from_panel() {
@@ -165,6 +166,9 @@ class CassettoneApplet extends Applet.TextIconApplet {
             this._menuHandler.destroy();
             this._menuHandler = null;
         }
+
+        this.settings.finalize();
+        this.signalManager.disconnectAllSignals();
     }
 }
 
