@@ -60,24 +60,25 @@ class CinnamonApplet extends Applet.TextApplet {
         try {
             let parts = []; 
 
-            // 1. CPU
-            let cpuUsage = this.getCpuUsage();
-            parts.push(`CPU %${cpuUsage}`);
+        // 1. CPU
+        let cpuUsage = String(this.getCpuUsage()).padStart(4, ' '); 
+        parts.push(`CPU %${cpuUsage}`);
 
-            // 2. GPU (if there)
-            if (this.gpuProvider) {
-                let gpuUsage = this.getGpuUsage();
-                if (gpuUsage !== null) {
-                    parts.push(`GPU %${gpuUsage}`);
-                }
-            }
+        // 2. GPU (Eğer varsa)
+        if (this.gpuProvider) {
+            let gpuValue = this.getGpuUsage();
+            if (gpuValue !== null) {
+                let gpuUsage = String(gpuValue).padStart(4, ' ');
+                parts.push(`GPU %${gpuUsage}`);
+    }
+}
 
-            // 3. RAM
-            let ramUsage = this.getRamUsage();
-            parts.push(`RAM %${ramUsage}`);
+        // 3. RAM
+        let ramUsage = String(this.getRamUsage()).padStart(4, ' ');
+        parts.push(`RAM %${ramUsage}`);
 
             
-            this.set_applet_label(parts.join("  •  "));
+            this.set_applet_label(parts.join(" • "));
 
         } catch (e) {
             global.logError(e);
