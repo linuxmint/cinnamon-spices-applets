@@ -57,7 +57,7 @@ class FolderMenuItem extends PopupMenu.PopupBaseMenuItem {
         box.add(this.label, { expand: true, y_align: St.Align.CENTER });
 
         if (this._params.clipLimit && clipped !== fullName) {
-            new Tooltips.Tooltip(this.label, fullName);
+            new Tooltips.Tooltip(this.actor, fullName);
         }
 
         this._arrow = new St.Icon({
@@ -152,7 +152,7 @@ class FileMenuItem extends PopupMenu.PopupBaseMenuItem {
         box.add(this.label, { expand: true, y_align: St.Align.CENTER });
 
         if (this._params.clipLimit && clipped !== fullName) {
-            new Tooltips.Tooltip(this.label, fullName);
+            new Tooltips.Tooltip(this.actor, fullName);
         }
 
         this._keyPressId = this.actor.connect('key-press-event', Lang.bind(this, this._onKeyPress));
