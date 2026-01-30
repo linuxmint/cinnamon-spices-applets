@@ -306,6 +306,12 @@ class Cassettone:
             event
         )
 
+        # Make sure we quit the main loop if the menu is closed, there are cases where the menu is not mapped
+        # and then it remains running in the background like a zombie process. This is happening for example
+        # some times when the shortcut to open the menu is triggered, for some reason the menu is not mapped
+        # and if the shortcut is triggered again, another process is started, leading to multiple zombie processes.
+        GLib.timeout_add(200, lambda: Gtk.main_quit() if not self.main_menu.get_mapped() else False)
+
         Gtk.main()
         # this is a blocking call
 
