@@ -310,7 +310,9 @@ class Cassettone:
         # this is a blocking call
 
         window.destroy()
-        event.free()
+
+        # This shouldn't be necessary in python.
+        # event.free()
 
 
 # main
