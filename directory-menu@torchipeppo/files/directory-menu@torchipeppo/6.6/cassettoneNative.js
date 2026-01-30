@@ -1,6 +1,5 @@
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
-const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
@@ -319,7 +318,8 @@ var NativeCassettoneHandler = class NativeCassettoneHandler {
                 let [success, argv] = GLib.shell_parse_argv(exec);
                 if (success) {
                     if (argv[0] === "gnome-terminal") {
-                        Util.spawnCommandLine("gnome-terminal --working-directory=" + GLib.shell_quote(path));
+                        let newArgv = ['gnome-terminal', '--working-directory=' + path];
+                        GLib.spawn_async(null, newArgv, null, GLib.SpawnFlags.SEARCH_PATH, null);
                     } else {
                         GLib.spawn_async(path, argv, null, GLib.SpawnFlags.SEARCH_PATH, null);
                     }
@@ -331,7 +331,13 @@ var NativeCassettoneHandler = class NativeCassettoneHandler {
             global.logWarning(Helpers.UUID + ": Error opening default terminal: " + e);
         }
 
-        Util.spawnCommandLine("gnome-terminal --working-directory=" + GLib.shell_quote(path));
+        // Fallback if the default terminal fails
+        try {
+            let newArgv = ['gnome-terminal', '--working-directory=' + path];
+            GLib.spawn_async(null, newArgv, null, GLib.SpawnFlags.SEARCH_PATH, null);
+        } catch (e) {
+            global.logError(Helpers.UUID + ": Error opening fallback terminal: " + e);
+        }
         this.menu.close();
     }
 
