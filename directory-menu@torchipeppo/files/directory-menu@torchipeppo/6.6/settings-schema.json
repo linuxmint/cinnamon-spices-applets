@@ -24,7 +24,7 @@
         "type": "switch",
         "default": true,
         "description": "Prefer native menu type on Wayland",
-        "tooltip": "Automatically use the native menu implementation when running under Wayland. The classic GTK-based menu has limitations on Wayland due to restricted window positioning and focus handling in the protocol.",
+        "tooltip": "Automatically use the native menu implementation when running under Wayland. The classic GTK-based menu has limitations on Wayland sessions due to restricted window positioning and focus handling in the protocol.",
         "dependency": "menu-type=classic"
     },
     "icon-name": {
