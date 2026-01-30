@@ -6,9 +6,9 @@
         "select-dir": true
     },
 
-    "menu-type-section": {
+    "appearance-section": {
         "type": "section",
-        "description": "Menu Type"
+        "description": "Appearance"
     },
     "menu-type": {
         "type": "combobox",
@@ -17,20 +17,15 @@
             "Classic": "classic",
             "Native": "native"
         },
-        "description": "Menu implementation",
+        "description": "Menu type",
         "tooltip": "Classic uses a GTK-based menu, while Native uses Cinnamon's native popup menu."
     },
     "prefer-native-wayland": {
         "type": "switch",
         "default": true,
-        "description": "Prefer native menu on Wayland",
+        "description": "Prefer native menu type on Wayland",
         "tooltip": "Automatically use the native menu implementation when running under Wayland. The classic GTK-based menu has limitations on Wayland due to restricted window positioning and focus handling in the protocol.",
         "dependency": "menu-type=classic"
-    },
-
-    "appearance-section": {
-        "type": "section",
-        "description": "Appearance"
     },
     "icon-name": {
         "type": "iconfilechooser",
