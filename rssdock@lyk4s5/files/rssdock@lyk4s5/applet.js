@@ -6,6 +6,7 @@ const St = imports.gi.St;
 const Settings = imports.ui.settings;
 const PopupMenu = imports.ui.popupMenu;
 const Soup = imports.gi.Soup;
+let HtmlEncodeDecode = require('./lib/htmlEncodeDecode');
 
 function MyApplet(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
@@ -32,6 +33,7 @@ MyApplet.prototype = {
         this._tickerLoopId = null;  // Kayma döngüsü ID'si
 
         // Menü kurulumu
+        // Menu
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
@@ -52,6 +54,7 @@ MyApplet.prototype = {
 
     _setWidth: function () {
         let width_px = Math.round(this.width_multiplier * 15);
+        let width_px = Math.round(this.width_multiplier * 15); // multiplier logic
         this.actor.set_style("width: " + width_px + "px;");
         this.actor.x_align = St.Align.MIDDLE;
         this.tickerCharacters = Math.floor(width_px / 7);
@@ -77,6 +80,8 @@ MyApplet.prototype = {
             this._refreshLoopId = null;
         }
 
+        // Collect news from all sources
+        this._allNews = [];
         let sources = this.news_sources || [];
         if (sources.length === 0) {
             this._tickerText = _("No RSS source");
@@ -116,6 +121,23 @@ MyApplet.prototype = {
                                 date: pubDate ? new Date(pubDate) : new Date(),
                                 source: source.label || "RSS"
                             });
+                    if (!bytes) return;
+
+                    let xml = new TextDecoder("utf-8").decode(bytes.get_data());
+                    let items = xml.match(/<item>([\s\S]*?)<\/item>/g) || [];
+
+                    items.forEach(item => {
+                        let title = item.match(/<title>(.*?)<\/title>/)?.[1] || "No Title";
+                        title = HtmlEncodeDecode.decode(title);
+                        const link = item.match(/<link>(.*?)<\/link>/)?.[1] || "#";
+                        let pubDate = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || "";
+                        let dateObj = pubDate ? new Date(pubDate) : new Date();
+
+                        this._allNews.push({
+                            title: title,
+                            link: link,
+                            date: dateObj,
+                            source: source.label || "RSS"
                         });
                     }
                 } catch (e) {
@@ -124,6 +146,8 @@ MyApplet.prototype = {
                     completed++;
                     if (completed === total) {
                         this._allNews = newNewsStore.sort((a, b) => b.date - a.date);
+                        // Continue when all resources are used up
+                        this._allNews.sort((a, b) => b.date - a.date); // sort by date (newest first)
                         this._buildMenu();
                         this._scheduleUpdate(); // Her şey bitince sonraki turu planla
                     }
@@ -155,6 +179,27 @@ MyApplet.prototype = {
                 label: fullText, 
                 style_class: "menu-category-button", // Standart tarza yakın durur
                 x_align: St.Align.START 
+        // Latest 15 news
+        this._allNews.slice(0, 15).forEach(item => {
+            let timeStr = this._formatTime(item.date);
+            let prefix = `${timeStr}[${item.source}] `;
+
+            let maxLen = 100;
+            let displayTitle = HtmlEncodeDecode.decode(item.title);
+            if (displayTitle.length > maxLen) {
+                displayTitle = displayTitle.substring(0, maxLen) + "...";
+            }
+
+            let fullText = prefix + displayTitle;
+
+            let btn = new St.Button({ reactive: true, track_hover: true, style_class: "menuButton", x_align: St.Align.START });
+
+            let box = new St.BoxLayout({ vertical: false, style_class: "buttonBox" });
+
+            let icon = new St.Icon({
+                gicon: Gio.icon_new_for_string(this.metadata.path + "/icon.png"),
+                icon_size: 18,
+                style_class: "popup-menu-icon"
             });
 
             btn.connect("clicked", () => { 
@@ -170,6 +215,7 @@ MyApplet.prototype = {
     },
 
     _tickerLoop: function () {
+        // Combine ticker headlines in a current and sequential manner
         if (this._allNews.length > 0) {
             const chainedHeadlines = this._allNews
                 .slice(0, 15)
