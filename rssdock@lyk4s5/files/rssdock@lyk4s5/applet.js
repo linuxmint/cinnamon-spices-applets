@@ -128,6 +128,7 @@ MyApplet.prototype = {
                 }
             });
         });
+        return true;
     },
 
     _buildMenu: function () {
