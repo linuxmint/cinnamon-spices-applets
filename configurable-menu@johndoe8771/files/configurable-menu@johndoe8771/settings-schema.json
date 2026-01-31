@@ -1,0 +1,286 @@
+{
+    "layout1" : {
+        "type" : "layout",
+        "pages" : ["content", "appearance", "behavior"],
+        "content" : {
+            "type" : "page",
+            "title" : "Content",
+            "sections" : ["content-places", "content-content"]
+        },
+        "appearance" : {
+            "type" : "page",
+            "title" : "Appearance",
+            "sections" : ["appearance-menu", "appearance-panel"]
+        },
+        "behavior" : {
+            "type" : "page",
+            "title" : "Behavior",
+            "sections" : ["behavior-menu", "behavior-panel"]
+        },
+        "behavior-menu" : {
+            "type" : "section",
+            "title" : "Menu",
+            "keys" : ["category-hover", "enable-autoscroll"]
+        },
+        "behavior-panel" : {
+            "type" : "section",
+            "title" : "Panel",
+            "keys" : ["overlay-key", "activate-on-hover", "hover-delay", "enable-animation"]
+        },
+        "appearance-menu" : {
+            "type" : "section",
+            "title" : "Options",
+            "keys" : ["search-position", "system-position", "vertical-system-buttons", "show-description", "show-sidebar-names",
+                      "symbolic-category-icons", "symbolic-system-icons", "category-icon-size", "application-icon-size", "sidebar-icon-size",  
+                      "system-icon-size", "sidebar-max-width", "reset-menu-size-button"]
+        },
+        "appearance-panel" : {
+            "type" : "section",
+            "title" : "Panel",
+            "keys" : ["menu-custom", "menu-icon", "menu-icon-size", "menu-label"]
+        },
+        "content-places" : {
+            "type" : "section",
+            "title" : "Places",
+            "keys" : ["show-home", "show-desktop", "show-documents", "show-downloads", "show-music", "show-pictures", "show-videos", "show-bookmarks"]
+        },
+       "content-content" : {
+            "type" : "section",
+            "title" : "Content",
+            "keys" : ["show-sidebar", "show-avatar", "show-favorites", "show-recents", "menu-editor-button"]
+        }
+    },
+ "overlay-key" : {
+    "type" : "keybinding",
+    "description" : "Keyboard shortcut to open and close the menu",
+    "default" : "Super_L::Super_R"
+ },
+ "menu-custom" : {
+    "type" : "switch",
+    "default" : false,
+    "description" : "Use a custom icon and label"
+ },
+ "menu-icon" : {
+    "type" : "iconfilechooser",
+    "default" : "cinnamon-symbolic",
+    "description" : "Icon",
+    "default_icon" : "cinnamon-symbolic",
+    "dependency" : "menu-custom"
+ },
+ "menu-icon-size" : {
+    "type": "spinbutton",
+    "default" : 32,
+    "min" : 16,
+    "max" : 96,
+    "step" : 1,
+    "units" : "px",
+    "description" : "Icon size",
+    "dependency" : "menu-custom"
+ },
+ "menu-label" : {
+    "type" : "entry",
+    "default" : "Menu",
+    "description" : "Text",
+    "dependency" : "menu-custom"
+ },
+ "symbolic-category-icons" : {
+    "type" : "switch",
+    "default" : true,
+    "description" : "Use symbolic icons for categories"
+ },
+ "symbolic-system-icons" : {
+    "type" : "switch",
+    "default" : true,
+    "description" : "Use symbolic icons for system buttons"
+ },
+ "category-icon-size" : {
+    "type": "spinbutton",
+    "default" : 16,
+    "min" : 8,
+    "max" : 48,
+    "step" : 1,
+    "units" : "px",
+    "description" : "Categories icon size"
+ },
+ "application-icon-size" : {
+    "type": "spinbutton",
+    "default" : 30,
+    "min" : 8,
+    "max" : 48,
+    "step" : 1,
+    "units" : "px",
+    "description" : "Applications icon size"
+ },
+ "show-sidebar" : {
+    "type" : "switch",
+    "default" : true,
+    "description" : "Sidebar"
+ },
+ "show-avatar" : {
+    "type" : "switch",
+    "default" : true,
+    "description" : "Avatar"
+ },
+"show-home" : {
+    "type" : "switch",
+    "default" : false,
+    "description" : "Home"
+ },
+"show-desktop" : {
+    "type" : "switch",
+    "default" : false,
+    "description" : "Desktop"
+ },
+"show-documents" : {
+    "type" : "switch",
+    "default" : false,
+    "description" : "Documents"
+ },
+"show-downloads" : {
+    "type" : "switch",
+    "default" : false,
+    "description" : "Downloads"
+ },
+ "show-music" : {
+    "type" : "switch",
+    "default" : false,
+    "description" : "Music"
+ },
+"show-pictures" : {
+    "type" : "switch",
+    "default" : false,
+    "description" : "Pictures"
+ },
+ "show-videos" : {
+    "type" : "switch",
+    "default" : false,
+    "description" : "Videos"
+ },
+ "show-bookmarks" : {
+    "type" : "switch",
+    "default" : true,
+    "description" : "Other bookmarks"
+ },
+ "system-position" : {
+      "type": "combobox",
+      "default" : "sidebar",
+      "description" : "Position of the system buttons",
+      "options" : {
+          "In the sidebar" : "sidebar",
+          "Alongside the search bar" : "search"
+      }
+  },
+  "vertical-system-buttons" : {
+   "type" : "switch",
+   "default" : true,
+   "description": "Vertical system buttons in sidebar"
+ },
+ "system-icon-size" : {
+    "type": "spinbutton",
+    "default" : 32,
+    "min" : 8,
+    "max" : 64,
+    "step" : 1,
+    "units" : "px",
+    "description" : "System icon size"
+ },
+  "search-position" : {
+      "type": "combobox",
+      "default" : "top",
+      "description" : "Position of the search bar",
+      "options" : {
+          "At the top" : "top",
+          "At the bottom" : "bottom"
+      }
+  },
+ "sidebar-icon-size" : {
+    "type": "spinbutton",
+    "default" : 32,
+    "min" : 8,
+    "max" : 48,
+    "step" : 1,
+    "units" : "px",
+    "description" : "Sidebar icon size",
+    "dependency" : "show-sidebar"
+ },
+ "sidebar-max-width": {
+  "type": "spinbutton",
+  "default": 180,
+  "min": 80,
+  "max": 600,
+  "step": 1,
+  "description": "Maximum sidebar width (px)"
+ },
+ "show-favorites" : {
+   "type" : "switch",
+   "default" : true,
+   "description": "Favorites"
+ },
+ "show-recents" : {
+   "type" : "switch",
+   "default" : true,
+   "description": "Recents"
+ },
+ "show-sidebar-names" : {
+   "type" : "switch",
+   "default" : false,
+   "description": "Show the names of items in the sidebar"
+ },
+"show-description" : {
+   "type" : "switch",
+   "default" : true,
+   "description": "Show application descriptions"
+ },
+ "category-hover" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Change categories on hover"
+ },
+"enable-autoscroll" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Enable autoscrolling in application list"
+ },
+"activate-on-hover" : {
+    "type" : "switch",
+    "default" : false,
+    "description": "Open the menu when I move my mouse over it",
+    "tooltip": "Enable opening the menu when the mouse enters the applet"
+ },
+ "hover-delay" : {
+    "type": "spinbutton",
+    "default" : 0,
+    "min" : 0,
+    "max" : 1000,
+    "step" : 50,
+    "units" : "milliseconds",
+    "dependency" : "activate-on-hover",
+    "description" : "Menu hover delay",
+    "tooltip" : "Delay before the menu opens when hovered"
+ },
+ "enable-animation" : {
+    "type": "switch",
+    "default": false,
+    "description": "Use menu animations",
+    "tooltip": "Allow the menu to animate on open and close"
+ },
+  "menu-editor-button" : {
+    "type" : "button",
+    "description" : "Open the menu editor",
+    "callback" : "_launch_editor",
+    "tooltip" : "Press this button to customize your menu entries."
+ },
+ "popup-width" : {
+    "type" : "generic",
+    "default" : 550
+ },
+ "popup-height" : {
+    "type" : "generic",
+    "default" : 535
+ },
+ "reset-menu-size-button" : {
+    "type" : "button",
+    "description" : "Restore the menu to its original size",
+    "callback" : "_reset_menu_size"
+ }
+}
