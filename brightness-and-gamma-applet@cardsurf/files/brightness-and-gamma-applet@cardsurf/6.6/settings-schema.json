@@ -32,10 +32,14 @@
             "type": "section",
             "title": "Values",
             "keys": [
+                "gamma_or_temp",
+                "values_reload",
                 "minimum_brightness",
                 "maximum_brightness",
                 "minimum_gamma",
                 "maximum_gamma",
+                "minimum_temp",
+                "maximum_temp",
                 "save_every"
             ]
         },
@@ -53,6 +57,7 @@
             "keys": [
                 "preset_label",
                 "preset_list",
+                "preset_list_temp",
                 "preset_selected_keybind",
                 "preset_copy_keybind",
                 "preset_sunrise_sunset_button",
@@ -149,6 +154,17 @@
         "description": "Way to set this applet off",
         "dependency": "toggle_on_off_shortcut!=::"
     },
+    
+    "gamma_or_temp": {
+        "type": "combobox",
+        "default": "gamma",
+        "options": {
+            "Gamma Red-Green-Blue": "gamma",
+            "Screen Temperature (K)": "temp"
+        },
+        "description": "Setting Method",
+        "dependency": "xsct_is_present"
+    },
 
     "minimum_brightness": {
         "type": "spinbutton",
@@ -178,7 +194,8 @@
         "step": 1,
         "units": "%",
         "description": "Minimum gamma",
-        "tooltip": "A minimum value of gamma. Value from 10% to 50%."
+        "tooltip": "A minimum value of gamma. Value from 10% to 50%.",
+        "dependency": "gamma_or_temp=gamma"
     },
     "maximum_gamma": {
         "type": "spinbutton",
@@ -188,7 +205,30 @@
         "step": 1,
         "units": "%",
         "description": "Maximum gamma",
-        "tooltip": "A maximum value of gamma. Value from 51% to 200%."
+        "tooltip": "A maximum value of gamma. Value from 51% to 200%.",
+        "dependency": "gamma_or_temp=gamma"
+    },
+    "minimum_temp": {
+        "type": "spinbutton",
+        "default": 2700,
+        "min": 700,
+        "max": 6500,
+        "step": 100,
+        "units": "K",
+        "description": "Minimum temperature",
+        "tooltip": "A minimum value of temperature. Value from 700 K to 6500 K.",
+        "dependency": "gamma_or_temp=temp"
+    },
+    "maximum_temp": {
+        "type": "spinbutton",
+        "default": 20000,
+        "min": 6500,
+        "max": 22000,
+        "step": 100,
+        "units": "K",
+        "description": "Maximum temperature",
+        "tooltip": "A maximum value of temperature. Value from 6500 K to 22000 K.",
+        "dependency": "gamma_or_temp=temp"
     },
     "save_every": {
         "type": "spinbutton",
@@ -208,7 +248,7 @@
         "options" : {
             "All" : 0,
             "Brightness" : 1,
-            "Gamma" : 2
+            "Gamma / Temperature" : 2
         },
         "tooltip" : "Values shown in user interface"
     },
@@ -231,6 +271,7 @@
     "preset_list": {
         "type": "list",
         "description": "Your presets",
+        "dependency": "gamma_or_temp=gamma", 
         "columns" : [
             {"id": "name", "title": "Name", "type": "string", "expand-width": true},
             {"id": "show", "title": "Show\nin menu", "type": "boolean", "align": 0.5},
@@ -275,6 +316,46 @@
             }
         ]
     },
+    "preset_list_temp": {
+        "type": "list",
+        "description": "Your presets",
+        "dependency": "gamma_or_temp=temp", 
+        "columns" : [
+            {"id": "name", "title": "Name", "type": "string", "expand-width": true},
+            {"id": "show", "title": "Show\nin menu", "type": "boolean", "align": 0.5},
+            {"id": "brightness", "title": "Brightness", "type": "integer", "align": 0.5, "min": 0, "max": 100, "default": 100},
+            {"id": "temperature", "title": "Temperature", "type": "integer", "align": 0.5, "min": 700, "max": 20000, "default": 6500},
+            {"id": "start_at_sunrise", "title": "Start at\nSunrise", "type": "boolean", "align": 0.5},
+            {"id": "start_at_sunset", "title": "Start at\nSunset", "type": "boolean", "align": 0.5},
+            {"id": "shortcut", "title": "Hotkey", "type": "string", "default": "::"}
+        ],
+        "default": [
+            {
+                "name": "Standard values",
+                "show": true,
+                "brightness": 100,
+                "temperature": 6500,
+                "start_at_sunrise": false,
+                "start_at_sunset": false
+            },
+            {
+                "name": "Day-time comfort",
+                "show": true,
+                "brightness": 80,
+                "temperature": 4000,
+                "start_at_sunrise": false,
+                "start_at_sunset": false
+            },
+            {
+                "name": "Night-time comfort",
+                "show": true,
+                "brightness": 70,
+                "gamma_red": 2700,
+                "start_at_sunrise": false,
+                "start_at_sunset": false
+            }
+        ]
+    },
     
     "preset_selected_keybind": {
         "type": "keybinding",
@@ -300,6 +381,18 @@
         "description": "Apply all changes",
         "callback": "on_preset_reload_button_clicked"
     },
+    
+    "values_reload": {
+        "type": "button",
+        "description": "Apply the selected method",
+        "callback": "on_values_reload_button_clicked",
+        "dependency": "xsct_is_present"
+    },
+
+    "last_values_string_temp" : {
+        "type": "generic",
+        "default" : ""
+    },
 
     "last_values_string" : {
         "type": "generic",
@@ -309,5 +402,15 @@
     "numberOfMonitors" : {
         "type": "generic",
         "default" : 1
+    },
+    
+    "xsct_is_present" : {
+        "type": "generic",
+        "default" : false
+    },
+    
+    "screen_temp": {
+        "type": "generic",
+        "default" : 6500
     }
 }
