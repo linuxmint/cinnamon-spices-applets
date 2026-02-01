@@ -1,3 +1,7 @@
+### v3.0.0~20260201
+* The user can choose between using Red-Green-Blue Gamma or using the Screen Temperature (K).
+* To use the Screen Temperature, the user must install `xsct`.
+
 ### v2.7.2~20260125
 * Improves the display of the menu.
 * Code cleanup.

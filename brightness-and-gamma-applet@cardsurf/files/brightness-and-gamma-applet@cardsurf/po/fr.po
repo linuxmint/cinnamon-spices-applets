@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-01-21 17:50+0100\n"
-"PO-Revision-Date: 2026-01-21 17:52+0100\n"
+"POT-Creation-Date: 2026-02-01 21:29+0100\n"
+"PO-Revision-Date: 2026-02-01 21:37+0100\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,71 +19,93 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:178 6.6/applet.js:255 6.4/applet.js:250
+#. applet.js:178 6.6/applet.js:266 6.4/applet.js:250
 msgid "The following packages were not found:"
 msgstr "Les paquets suivants ne sont pas installés :"
 
-#. applet.js:179 6.6/applet.js:256 6.4/applet.js:251
+#. applet.js:179 6.6/applet.js:267 6.4/applet.js:251
 msgid "Please install the above packages to use the applet"
 msgstr ""
 "Veuillez installer les paquets ci-dessus pour pouvoir utiliser cette applet"
 
-#. applet.js:564 6.6/applet.js:864 6.4/applet.js:855
+#. applet.js:564 6.6/applet.js:962 6.4/applet.js:855
 msgid "Screen"
 msgstr "Écran"
 
-#. applet.js:647 6.6/applet.js:947 6.4/applet.js:938
+#. applet.js:647 6.6/applet.js:1045 6.4/applet.js:938
 msgid "Outputs"
 msgstr "Sorties"
 
 #. settings-schema.json->options_type->options
 #. 6.6->settings-schema.json->options_type->options
 #. 6.6->settings-schema.json->preset_list->columns->title
+#. 6.6->settings-schema.json->preset_list_temp->columns->title
 #. 6.4->settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->preset_list->columns->title
-#. appletGui.js:235 6.6/applet.js:44 6.6/lib/appletGui.js:212 6.4/applet.js:43
+#. appletGui.js:235 6.6/applet.js:44 6.6/lib/appletGui.js:214 6.4/applet.js:43
 #. 6.4/lib/appletGui.js:212
 msgid "Brightness"
 msgstr "Luminosité"
 
-#. appletGui.js:236 6.6/applet.js:45 6.6/lib/appletGui.js:213 6.4/applet.js:44
+#. appletGui.js:236 6.6/applet.js:45 6.6/lib/appletGui.js:215 6.4/applet.js:44
 #. 6.4/lib/appletGui.js:213
 msgid "Red"
 msgstr "Rouge"
 
-#. appletGui.js:237 6.6/applet.js:46 6.6/lib/appletGui.js:214 6.4/applet.js:45
+#. appletGui.js:237 6.6/applet.js:46 6.6/lib/appletGui.js:216 6.4/applet.js:45
 #. 6.4/lib/appletGui.js:214
 msgid "Green"
 msgstr "Vert"
 
-#. appletGui.js:238 6.6/applet.js:47 6.6/lib/appletGui.js:215 6.4/applet.js:46
+#. appletGui.js:238 6.6/applet.js:47 6.6/lib/appletGui.js:217 6.4/applet.js:46
 #. 6.4/lib/appletGui.js:215
 msgid "Blue"
 msgstr "Bleu"
 
-#. 6.6/applet.js:48 6.6/applet.js:1018 6.4/applet.js:47 6.4/applet.js:1009
+#. 6.6/applet.js:48 6.6/applet.js:1127 6.4/applet.js:47 6.4/applet.js:1009
 msgid "Sunrise"
 msgstr "Aube"
 
-#. 6.6/applet.js:49 6.6/applet.js:1020 6.4/applet.js:48 6.4/applet.js:1011
+#. 6.6/applet.js:49 6.6/applet.js:1129 6.4/applet.js:48 6.4/applet.js:1011
 msgid "Sunset"
 msgstr "Crépuscule"
 
-#. 6.6/applet.js:769 6.4/applet.js:760
+#. 6.6->settings-schema.json->preset_list_temp->columns->title
+#. 6.6/applet.js:50 6.6/lib/appletGui.js:218
+msgid "Temperature"
+msgstr "Température"
+
+#. 6.6/applet.js:52
+msgid "Standard values"
+msgstr "Valeurs standard"
+
+#. 6.6/applet.js:53
+msgid "Day-time comfort"
+msgstr "Confort Jour"
+
+#. 6.6/applet.js:54
+msgid "Night-time comfort"
+msgstr "Confort Nuit"
+
+#. 6.6/applet.js:55
+msgid "All values at maximum"
+msgstr "Tout à 100%"
+
+#. 6.6/applet.js:812 6.4/applet.js:760
 msgid "Toggle On / Off"
 msgstr "Activer / désactiver cette applet"
 
-#. 6.6/applet.js:779 6.4/applet.js:770
+#. 6.6/applet.js:822 6.4/applet.js:770
 msgid "Reload"
 msgstr "Relancer"
 
-#. 6.6/applet.js:789 6.4/applet.js:780
+#. 6.6/applet.js:832 6.4/applet.js:780
 msgid "Configure Presets"
 msgstr "Configurer les pré-réglages"
 
 #. 6.6->settings-schema.json->page_presets->title
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.6/applet.js:833 6.4/applet.js:824
+#. 6.6/applet.js:909 6.4/applet.js:824
 msgid "Presets"
 msgstr "Pré-réglages"
 
@@ -284,7 +306,6 @@ msgid "All"
 msgstr "Tous"
 
 #. settings-schema.json->options_type->options
-#. 6.6->settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->options_type->options
 msgid "Gamma"
 msgstr "Gamma"
@@ -314,6 +335,7 @@ msgstr "Général"
 
 #. 6.6->settings-schema.json->section_presets->title
 #. 6.6->settings-schema.json->preset_list->description
+#. 6.6->settings-schema.json->preset_list_temp->description
 #. 6.4->settings-schema.json->section_presets->title
 #. 6.4->settings-schema.json->preset_list->description
 msgid "Your presets"
@@ -392,6 +414,43 @@ msgstr "Tout à 100%"
 msgid "Way to set this applet off"
 msgstr "Comment désactiver cette applet"
 
+#. 6.6->settings-schema.json->gamma_or_temp->options
+msgid "Gamma Red-Green-Blue"
+msgstr "Gamma Rouge-Vert-Bleu"
+
+#. 6.6->settings-schema.json->gamma_or_temp->options
+msgid "Screen Temperature (K)"
+msgstr "Température de l'écran (K)"
+
+#. 6.6->settings-schema.json->gamma_or_temp->description
+msgid "Setting Method"
+msgstr "Méthode de paramétrage"
+
+#. 6.6->settings-schema.json->minimum_temp->units
+#. 6.6->settings-schema.json->maximum_temp->units
+msgid "K"
+msgstr "K"
+
+#. 6.6->settings-schema.json->minimum_temp->description
+msgid "Minimum temperature"
+msgstr "Température minimale"
+
+#. 6.6->settings-schema.json->minimum_temp->tooltip
+msgid "A minimum value of temperature. Value from 700 K to 6500 K."
+msgstr "La valeur minimale de température, comprise entre 700 K et 6500 K."
+
+#. 6.6->settings-schema.json->maximum_temp->description
+msgid "Maximum temperature"
+msgstr "Température maximale"
+
+#. 6.6->settings-schema.json->maximum_temp->tooltip
+msgid "A maximum value of temperature. Value from 6500 K to 22000 K."
+msgstr "La valeur maximale de température, comprise entre 6500 K et 22000 K."
+
+#. 6.6->settings-schema.json->options_type->options
+msgid "Gamma / Temperature"
+msgstr "Gamma / Température"
+
 #. 6.6->settings-schema.json->baga_icon->options
 #. 6.4->settings-schema.json->baga_icon->options
 msgid "Only sun"
@@ -421,11 +480,13 @@ msgstr ""
 "cochées seront prises en compte."
 
 #. 6.6->settings-schema.json->preset_list->columns->title
+#. 6.6->settings-schema.json->preset_list_temp->columns->title
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Name"
 msgstr "Nom"
 
 #. 6.6->settings-schema.json->preset_list->columns->title
+#. 6.6->settings-schema.json->preset_list_temp->columns->title
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid ""
 "Show\n"
@@ -462,6 +523,7 @@ msgstr ""
 "Bleu"
 
 #. 6.6->settings-schema.json->preset_list->columns->title
+#. 6.6->settings-schema.json->preset_list_temp->columns->title
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid ""
 "Start at\n"
@@ -471,6 +533,7 @@ msgstr ""
 "à l'Aube"
 
 #. 6.6->settings-schema.json->preset_list->columns->title
+#. 6.6->settings-schema.json->preset_list_temp->columns->title
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid ""
 "Start at\n"
@@ -480,6 +543,7 @@ msgstr ""
 "Crépuscule"
 
 #. 6.6->settings-schema.json->preset_list->columns->title
+#. 6.6->settings-schema.json->preset_list_temp->columns->title
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Hotkey"
 msgstr "Raccourci clavier"
@@ -513,3 +577,7 @@ msgstr "Définir les heures d'Aube et de Crépuscule"
 #. 6.4->settings-schema.json->preset_reload->description
 msgid "Apply all changes"
 msgstr "Appliquer les changements"
+
+#. 6.6->settings-schema.json->values_reload->description
+msgid "Apply the selected method"
+msgstr "Appliquer la méthode sélectionnée"

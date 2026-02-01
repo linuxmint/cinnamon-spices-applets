@@ -204,6 +204,7 @@ class MenuSliders {
     constructor(applet, orientation) {
         this.applet = applet;
         this.orientation = orientation;
+        this.useScreenTemp = applet.useScreenTemp;
 
         this.menu = new Applet.AppletPopupMenu(applet, this.orientation);
         this.section = new PopupMenu.PopupMenuSection();
@@ -214,6 +215,7 @@ class MenuSliders {
         this.gamma_red_key = _("Red");
         this.gamma_green_key = _("Green");
         this.gamma_blue_key = _("Blue");
+        this.temperature_key = _("Temperature");
 
         this._init_menu();
         this._init_items();
@@ -227,49 +229,89 @@ class MenuSliders {
 
     _init_items() {
         this._init_items_brightness_active();
-        this._init_items_gamma_active();
+        if (this.useScreenTemp)
+            this._init_items_temperature_active();
+        else
+            this._init_items_gamma_active();
         this._init_items_presets();
     }
 
     _init_items_presets() {
         this.section_choices.removeAll();
-        for (let preset of this.applet.preset_list) {
-            if (preset.show) {
-                let menuItem = this.section_choices.addAction(preset["name"], () => {
-                    this.applet.target_brightness = Math.max(preset["brightness"], this.applet.minimum_brightness);
-                    this.applet.target_gamma_red = Math.max(preset["gamma_red"], this.applet.minimum_gamma);
-                    this.applet.target_gamma_green = Math.max(preset["gamma_green"], this.applet.minimum_gamma);
-                    this.applet.target_gamma_blue = Math.max(preset["gamma_blue"], this.applet.minimum_gamma);
-                    let _interval = setInterval( () => {
-                        if (this.applet.target_brightness === this.applet.brightness &&
-                            this.applet.target_gamma_red ===  this.applet.gamma_red &&
-                            this.applet.target_gamma_green === this.applet.gamma_green &&
-                            this.applet.target_gamma_blue === this.applet.gamma_blue
-                        ) {
-                            clearInterval(_interval);
-                        }
-
-                        this.applet.brightness += Math.sign(this.applet.target_brightness - this.applet.brightness);
-                        this.applet.gamma_red += Math.sign(this.applet.target_gamma_red - this.applet.gamma_red);
-                        this.applet.gamma_green += Math.sign(this.applet.target_gamma_green - this.applet.gamma_green);
-                        this.applet.gamma_blue += Math.sign(this.applet.target_gamma_blue - this.applet.gamma_blue);
-
-                        this.update_items_brightness();
-                        this.update_items_gamma_red();
-                        this.update_items_gamma_green();
-                        this.update_items_gamma_blue();
-                        this.applet.update_xrandr();
-                        this.applet.update_tooltip();
-                        this.applet._init_menu_item_presets();
-                    }, this.applet.smooth_duration);
-                });
-                if (this.applet.brightness == preset["brightness"] &&
-                    this.applet.gamma_red == preset["gamma_red"] &&
-                    this.applet.gamma_green == preset["gamma_green"] &&
-                    this.applet.gamma_blue == preset["gamma_blue"]) {
-                        menuItem.setOrnament(PopupMenu.OrnamentType.DOT, true);
-                } else {
-                        menuItem.setOrnament(PopupMenu.OrnamentType.DOT, false);
+        if (this.applet.useScreenTemp) {
+            for (let preset of this.applet.preset_list_temp) {
+                if (preset.show) {
+                    let menuItem = this.section_choices.addAction(_(preset["name"]), () => {
+                        this.applet.target_brightness = Math.max(preset["brightness"], this.applet.minimum_brightness);
+                        this.applet.target_temperature = Math.max(preset["temperature"], this.applet.minimum_temp);
+                        let _interval = setInterval( () => {
+                            if (this.applet.target_brightness === this.applet.brightness &&
+                                this.applet.target_temperature ===  this.applet.screen_temp
+                            ) {
+                                clearInterval(_interval);
+                            }
+                            this.applet.brightness += Math.sign(this.applet.target_brightness - this.applet.brightness);
+                            let diff_temp = this.applet.target_temperature - this.applet.screen_temp;
+                            if (Math.abs(diff_temp) < 10)
+                                this.applet.screen_temp += Math.sign(diff_temp);
+                            else if (Math.abs(diff_temp) < 100)
+                                this.applet.screen_temp += 10 * Math.sign(diff_temp);
+                            else if (Math.abs(diff_temp) < 1000)
+                                this.applet.screen_temp += 100 * Math.sign(diff_temp);
+                            else
+                                this.applet.screen_temp += 1000 * Math.sign(diff_temp);
+                            
+                            this.update_items_brightness();
+                            this.update_items_temperature();
+                            this.applet.update_xsct();
+                            this.applet.update_tooltip();
+                            this.applet._init_menu_item_presets();
+                        }, this.applet.smooth_duration);
+                    });
+                    menuItem.setOrnament(
+                        PopupMenu.OrnamentType.DOT,
+                        this.applet.brightness == preset["brightness"] && this.applet.screen_temp == preset["temperature"]
+                    );
+                }
+            }
+        } else {
+            for (let preset of this.applet.preset_list) {
+                if (preset.show) {
+                    let menuItem = this.section_choices.addAction(_(preset["name"]), () => {
+                        this.applet.target_brightness = Math.max(preset["brightness"], this.applet.minimum_brightness);
+                        this.applet.target_gamma_red = Math.max(preset["gamma_red"], this.applet.minimum_gamma);
+                        this.applet.target_gamma_green = Math.max(preset["gamma_green"], this.applet.minimum_gamma);
+                        this.applet.target_gamma_blue = Math.max(preset["gamma_blue"], this.applet.minimum_gamma);
+                        let _interval = setInterval( () => {
+                            if (this.applet.target_brightness === this.applet.brightness &&
+                                this.applet.target_gamma_red ===  this.applet.gamma_red &&
+                                this.applet.target_gamma_green === this.applet.gamma_green &&
+                                this.applet.target_gamma_blue === this.applet.gamma_blue
+                            ) {
+                                clearInterval(_interval);
+                            }
+    
+                            this.applet.brightness += Math.sign(this.applet.target_brightness - this.applet.brightness);
+                            this.applet.gamma_red += Math.sign(this.applet.target_gamma_red - this.applet.gamma_red);
+                            this.applet.gamma_green += Math.sign(this.applet.target_gamma_green - this.applet.gamma_green);
+                            this.applet.gamma_blue += Math.sign(this.applet.target_gamma_blue - this.applet.gamma_blue);
+    
+                            this.update_items_brightness();
+                            this.update_items_gamma_red();
+                            this.update_items_gamma_green();
+                            this.update_items_gamma_blue();
+                            this.applet.update_xrandr();
+                            this.applet.update_tooltip();
+                            this.applet._init_menu_item_presets();
+                        }, this.applet.smooth_duration);
+                    });
+                    menuItem.setOrnament(
+                        PopupMenu.OrnamentType.DOT, 
+                        this.applet.brightness == preset["brightness"] &&
+                        this.applet.gamma_red == preset["gamma_red"] &&
+                        this.applet.gamma_green == preset["gamma_green"] &&
+                        this.applet.gamma_blue == preset["gamma_blue"]
+                    );
                 }
             }
         }
@@ -287,6 +329,7 @@ class MenuSliders {
         this._init_label(this.brightness_key, this.applet.brightness);
         this._init_slider(this.brightness_key, this.on_brightness_slider_changed, this.applet.minimum_brightness,
                           this.applet.maximum_brightness, this.applet.brightness);
+        this.sliders[this.brightness_key].set_mark((100 - this.applet.minimum_brightness) / (this.applet.maximum_brightness - this.applet.minimum_brightness));
     }
 
     _init_label(key, value) {
@@ -314,9 +357,9 @@ class MenuSliders {
         return key + ": " + + value;
     }
 
-    _init_slider(key, callback, min_value, max_value, value) {
+    _init_slider(key, callback, min_value, max_value, value, step=1) {
         let zero_one_range_value = this.get_zero_one_range_value(min_value, max_value, value);
-        let slider = this.add_slider(key, zero_one_range_value);
+        let slider = this.add_slider(key, zero_one_range_value, min_value, max_value, step);
         slider.connect('value-changed', Lang.bind(this, callback));
     }
 
@@ -339,7 +382,7 @@ class MenuSliders {
         return value;
     }
 
-    add_slider(key, zero_one_range_value) {
+    add_slider(key, zero_one_range_value, min_value, max_value, step) {
         let slider = new PopupMenu.PopupSliderMenuItem(zero_one_range_value);
         this.menu.addMenuItem(slider);
         this.sliders[key] = slider;
@@ -358,6 +401,27 @@ class MenuSliders {
         let value_zero_one_range = parseFloat(value);
         let mapped_value = Math.round(offset + value_zero_one_range * multiplier);
         return mapped_value;
+    }
+    
+    _init_items_temperature_active() {
+        let active = this.applet.useScreenTemp;
+        if(active) {
+            this._init_items_temperature();
+        }
+    }
+    
+    _init_items_temperature() {
+        this._init_label(this.temperature_key, this.applet.screen_temp);
+        this._init_slider(  this.temperature_key, this.on_temperature_slider_changed, this.applet.minimum_temp,
+                            this.applet.maximum_temp, this.applet.screen_temp, 100);
+        this.sliders[this.temperature_key].set_mark((6500 - this.applet.minimum_temp) / (this.applet.maximum_temp - this.applet.minimum_temp));
+    }
+    
+    on_temperature_slider_changed(source_event, value) {
+        let mapped_value = this.get_slider_value(this.applet.minimum_temp, this.applet.maximum_temp, value);
+        mapped_value = Math.round(mapped_value / 100) * 100;
+        this.set_label_text(this.temperature_key, mapped_value);
+        this.applet.update_temperature(mapped_value);
     }
 
     _init_items_gamma_active() {
@@ -413,6 +477,17 @@ class MenuSliders {
         this.menuManager = new PopupMenu.PopupMenuManager(this.applet);
         this.menuManager.addMenu(this.menu);
     }
+    
+    update_items_temperature() {
+        let active = this.applet.useScreenTemp;
+        if(active) {
+            let zero_one_range_value = this.get_zero_one_range_value(this.applet.minimum_temp,
+                                                                     this.applet.maximum_temp,
+                                                                     this.applet.screen_temp);
+            this.set_slider_value(this.temperature_key, zero_one_range_value);
+            this.set_label_text(this.temperature_key, this.applet.screen_temp);
+        }
+    }
 
     update_items_brightness() {
         let active = this.applet.is_brightness_active();
@@ -438,6 +513,7 @@ class MenuSliders {
                                                                      this.applet.gamma_red);
             this.set_slider_value(this.gamma_red_key, zero_one_range_value);
             this.set_label_text(this.gamma_red_key, this.applet.gamma_red);
+            this.sliders[this.gamma_red_key].set_mark((100 - this.applet.minimum_gamma) / (this.applet.maximum_gamma - this.applet.minimum_gamma));
         }
     }
 
@@ -449,6 +525,7 @@ class MenuSliders {
                                                                      this.applet.gamma_green);
             this.set_slider_value(this.gamma_green_key, zero_one_range_value);
             this.set_label_text(this.gamma_green_key, this.applet.gamma_green);
+            this.sliders[this.gamma_green_key].set_mark((100 - this.applet.minimum_gamma) / (this.applet.maximum_gamma - this.applet.minimum_gamma));
         }
     }
 
@@ -460,6 +537,7 @@ class MenuSliders {
                                                                      this.applet.gamma_blue);
             this.set_slider_value(this.gamma_blue_key, zero_one_range_value);
             this.set_label_text(this.gamma_blue_key, this.applet.gamma_blue);
+            this.sliders[this.gamma_blue_key].set_mark((100 - this.applet.minimum_gamma) / (this.applet.maximum_gamma - this.applet.minimum_gamma));
         }
     }
 
