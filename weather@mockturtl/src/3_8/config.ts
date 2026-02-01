@@ -432,11 +432,6 @@ export class Config {
 		return previousLoc;
 	}
 
-	public NoApiKey(): boolean {
-		const key = this._apiKey?.replace(" ", "");
-		return (!key || key == "");
-	};
-
 	public async GetLocation(cancellable: imports.gi.Gio.Cancellable, provider: WeatherProvider): Promise<LocationData | null> {
 		this.currentLocation = null;
 

@@ -1,6 +1,6 @@
 import { Services } from "../../config";
 import { HttpLib } from "../../lib/httpLib";
-import type { LocationData, WeatherProvider } from "../../types";
+import { ProviderErrorCode, type LocationData, type WeatherProvider } from "../../types";
 import { _ } from "../../utils";
 import type { WeatherData } from "../../weather-data";
 import type { OpenMeteoWeatherResponse } from "./payload/response";
@@ -45,5 +45,9 @@ export class OpenMeteo implements WeatherProvider<Services.OpenMeteo> {
 			return null;
 
 		return OpenMeteoResponseToData(result);
+	}
+
+	public ValidConfiguration(): ProviderErrorCode {
+		return ProviderErrorCode.OK;
 	}
 }

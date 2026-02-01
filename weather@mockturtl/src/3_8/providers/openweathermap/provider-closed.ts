@@ -9,7 +9,7 @@
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/services/logger";
-import type { AppletError, LocationData, WeatherProvider } from "../../types";
+import { ProviderErrorCode, type AppletError, type LocationData, type WeatherProvider } from "../../types";
 import { _, IsLangSupported } from "../../utils";
 import type { OpenWeatherMapError } from "./payload/common";
 import { ConvertLocaleToOWMLang, OWM_SUPPORTED_LANGS } from "./payload/common";
@@ -77,6 +77,13 @@ export class OpenWeatherMapOneCall implements WeatherProvider<Services.OpenWeath
 		json.id = cachedID ?? idPayload?.id;
 		return OWMOneCallToWeatherData(json, !!params.lang);
 	};
+
+	public ValidConfiguration(config: Config, customConfig: OpenWeatherOneCallOptions): ProviderErrorCode {
+		if (!customConfig.apiKey) {
+			return ProviderErrorCode.NO_KEY;
+		}
+		return ProviderErrorCode.OK;
+	}
 
 	private ConstructParams(loc: LocationData, key: string, config: Config): HTTPParams {
 		const params: HTTPParams = {

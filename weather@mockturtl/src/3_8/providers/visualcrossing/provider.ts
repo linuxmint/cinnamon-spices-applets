@@ -5,7 +5,7 @@ import { HttpLib } from "../../lib/httpLib";
 import type { AlertData, Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData } from "../../weather-data";
 import { CelsiusToKelvin, IsLangSupported, KPHtoMPS, _ } from "../../utils";
 import type { VisualCrossingAlert } from "./alerts";
-import type { LocationData, WeatherProvider } from "../../types";
+import { ProviderErrorCode, type LocationData, type WeatherProvider } from "../../types";
 import { ErrorHandler } from "../../lib/services/error_handler";
 
 export interface VisualCrossingOptions {
@@ -55,6 +55,13 @@ export class VisualCrossing implements WeatherProvider<Services.VisualCrossing, 
 		if (!json)
 			return null;
 		return this.ParseWeather(json, translate);
+	}
+
+	public ValidConfiguration(config: Config, customConfig: VisualCrossingOptions): ProviderErrorCode {
+		if (!customConfig.apiKey) {
+			return ProviderErrorCode.NO_KEY;
+		}
+		return ProviderErrorCode.OK;
 	}
 
 	private ParseWeather(weather: VisualCrossingPayload, translate: boolean): WeatherData {

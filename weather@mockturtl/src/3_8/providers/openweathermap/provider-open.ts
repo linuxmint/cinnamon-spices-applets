@@ -1,7 +1,7 @@
 import { Services, type Config } from "../../config";
 import type { HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
-import type { LocationData, WeatherProvider } from "../../types";
+import { ProviderErrorCode, type LocationData, type WeatherProvider } from "../../types";
 import { IsLangSupported, _ } from "../../utils";
 import type { WeatherData } from "../../weather-data";
 import { ConvertLocaleToOWMLang, OWM_SUPPORTED_LANGS } from "./payload/common";
@@ -44,6 +44,10 @@ export class OpenWeatherMapOpen implements WeatherProvider<Services.OpenWeatherM
 			...OWMWeatherToWeatherData(current, !!params.lang, loc.timeZone),
 			forecasts: OWMDailyForecastsToData(daily.list, !!params.lang, loc.timeZone)
 		};
+	}
+
+	public ValidConfiguration(): ProviderErrorCode {
+		return ProviderErrorCode.OK;
 	}
 
 	private ConstructParams(loc: LocationData, config: Config): HTTPParams {

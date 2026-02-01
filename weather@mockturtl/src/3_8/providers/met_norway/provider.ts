@@ -1,7 +1,7 @@
 import { Logger } from "../../lib/services/logger";
 import { getTimes } from "suncalc";
 import type { WeatherData, HourlyForecastData, ForecastData, Condition, ImmediatePrecipitation } from "../../weather-data";
-import type { LocationData, correctGetTimes, SunTime, WeatherProvider } from "../../types";
+import { type LocationData, type correctGetTimes, type SunTime, type WeatherProvider, ProviderErrorCode } from "../../types";
 import { CelsiusToKelvin, IsNight, OnSameDay, _ } from "../../utils";
 import { DateTime } from "luxon";
 import type { Conditions, TimeOfDay } from "./types/common";
@@ -97,6 +97,10 @@ export class MetNorway implements WeatherProvider<Services.MetNorway> {
 		}
 
 		return result;
+	}
+
+	public ValidConfiguration(): ProviderErrorCode {
+		return ProviderErrorCode.OK;
 	}
 
 	private RemoveEarlierElements(json: MetNorwayForecastPayload, loc: LocationData): MetNorwayForecastPayload {

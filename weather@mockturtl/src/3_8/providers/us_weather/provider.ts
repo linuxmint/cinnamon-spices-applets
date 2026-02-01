@@ -11,7 +11,7 @@ import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/services/logger";
 import { getTimes } from "suncalc";
 import type { WeatherData, ForecastData, HourlyForecastData, Condition } from "../../weather-data";
-import type { LocationData, correctGetTimes, SunTime, WeatherProvider } from "../../types";
+import { type LocationData, type correctGetTimes, type SunTime, type WeatherProvider, ProviderErrorCode } from "../../types";
 import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, OnSameDay } from "../../utils";
 import { DateTime } from "luxon";
 import { Services, type Config } from "../../config";
@@ -108,6 +108,10 @@ export class USWeather implements WeatherProvider<Services.USWeather> {
 
 		return weather;
 	};
+
+	public ValidConfiguration(): ProviderErrorCode {
+		return ProviderErrorCode.OK;
+	}
 
 	/**
 	 * Handles App errors internally

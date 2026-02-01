@@ -6,7 +6,7 @@ import { _, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../..
 import { DateTime } from "luxon";
 import type { PirateWeatherIcon, PirateWeatherPayload, PirateWeatherQueryUnits } from "./types/common";
 import { ALERT_LEVEL_ORDER } from "../../consts";
-import type { LocationData, SunTime, WeatherProvider } from "../../types";
+import { ProviderErrorCode, type LocationData, type SunTime, type WeatherProvider } from "../../types";
 import { Services, type Config } from "../../config";
 import { ErrorHandler } from "../../lib/services/error_handler";
 
@@ -61,6 +61,14 @@ export class PirateWeather implements WeatherProvider<Services.PirateWeather, Pi
 		// this.remainingQuota = Math.max(1000 - parseInt(response.ResponseHeaders["X-Forecast-API-Calls"]), 0);
 		return this.ParseWeather(response.Data, unit);
 	};
+
+	public ValidConfiguration(config: Config, customConfig: PirateWeatherOptions): ProviderErrorCode {
+		if (!customConfig.apiKey) {
+			return ProviderErrorCode.NO_KEY;
+		}
+
+		return ProviderErrorCode.OK;
+	}
 
 
 	private ParseWeather(json: PirateWeatherPayload, unit: PirateWeatherQueryUnits): WeatherData | null {

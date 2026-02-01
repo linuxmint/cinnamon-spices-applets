@@ -6,7 +6,7 @@ import { HttpLib } from "../../lib/httpLib";
 import type { Condition, ForecastData, HourlyForecastData, WeatherData, PrecipitationType, AlertData } from "../../weather-data";
 import { _ } from "../../utils";
 import { GetDeutscherWetterdienstAlerts } from "./alert";
-import type { LocationData, WeatherProvider } from "../../types";
+import { ProviderErrorCode, type LocationData, type WeatherProvider } from "../../types";
 import { ErrorHandler } from "../../lib/services/error_handler";
 
 
@@ -89,6 +89,10 @@ export class DeutscherWetterdienst implements WeatherProvider<Services.Deutscher
 			alerts: alerts,
 			uvIndex: null
 		};
+	}
+
+	public ValidConfiguration(): ProviderErrorCode {
+		return ProviderErrorCode.OK;
 	}
 
 	private ParseForecast(current: CurrentWeatherPayload, forecast: HourlyForecastPayload, loc: LocationData): ForecastData[] {

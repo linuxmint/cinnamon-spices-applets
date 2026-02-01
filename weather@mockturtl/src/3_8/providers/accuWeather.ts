@@ -4,7 +4,7 @@ import type { ErrorResponse } from "../lib/httpLib";
 import { HttpLib } from "../lib/httpLib";
 import type { Condition, ForecastData, HourlyForecastData, Precipitation, WeatherData } from "../weather-data";
 import { CelsiusToKelvin, KPHtoMPS, _ } from "../utils";
-import type { LocationData, WeatherProvider } from "../types";
+import { ProviderErrorCode, type LocationData, type WeatherProvider } from "../types";
 import { ErrorHandler } from "../lib/services/error_handler";
 
 export interface AccuWeatherOptions {
@@ -117,6 +117,13 @@ export class AccuWeather implements WeatherProvider<Services.AccuWeather, AccuWe
 		// Base
 		this.SetTier(Number.parseInt(current.ResponseHeaders["RateLimit-Limit"]));
 		return this.ParseWeather(current.Data[0], forecast.Data, hourly.Data, location);
+	}
+
+	public ValidConfiguration(config: Config, customConfig: AccuWeatherOptions): ProviderErrorCode {
+		if (!customConfig.apiKey) {
+			return ProviderErrorCode.NO_KEY;
+		}
+		return ProviderErrorCode.OK;
 	}
 
 	/**

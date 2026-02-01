@@ -19,6 +19,11 @@ export interface Metadata {
 
 export type LocationType = "coordinates" | "postcode";
 
+export enum ProviderErrorCode {
+	OK = 0,
+	NO_KEY = 1,
+}
+
 /**
  * A WeatherProvider must implement this interface.
  */
@@ -35,6 +40,8 @@ export interface WeatherProvider<Service extends Services = Services, Options = 
 	readonly locationType: LocationType;
 
 	GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config, customConfig: Options): Promise<WeatherData | null>;
+
+	ValidConfiguration(config: Config, customConfig: Options): ProviderErrorCode;
 }
 
 export const enum RefreshState {

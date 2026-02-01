@@ -10782,6 +10782,22 @@ class GeoLocation {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/types.ts
+var ProviderErrorCode;
+(function (ProviderErrorCode) {
+    ProviderErrorCode[ProviderErrorCode["OK"] = 0] = "OK";
+    ProviderErrorCode[ProviderErrorCode["NO_KEY"] = 1] = "NO_KEY";
+})(ProviderErrorCode || (ProviderErrorCode = {}));
+var RefreshState;
+(function (RefreshState) {
+    RefreshState["Success"] = "success";
+    RefreshState["Error"] = "error";
+    RefreshState["NoLocation"] = "no location";
+    RefreshState["NoWeather"] = "no weather";
+    RefreshState["NoKey"] = "no key";
+    RefreshState["DisplayFailure"] = "display failure";
+})(RefreshState || (RefreshState = {}));
+
 ;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/common.ts
 const OWM_SUPPORTED_LANGS = [
     "af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
@@ -11190,6 +11206,7 @@ function SanitizeAlertDescription(text) {
 
 
 
+
 const IDCache = {};
 class OpenWeatherMapOneCall {
     constructor() {
@@ -11263,6 +11280,12 @@ class OpenWeatherMapOneCall {
         return OWMOneCallToWeatherData(json, !!params.lang);
     }
     ;
+    ValidConfiguration(config, customConfig) {
+        if (!customConfig.apiKey) {
+            return ProviderErrorCode.NO_KEY;
+        }
+        return ProviderErrorCode.OK;
+    }
     ConstructParams(loc, key, config) {
         const params = {
             lat: loc.lat,
@@ -11479,6 +11502,7 @@ function EventToIcon(event) {
 
 
 
+
 class MetNorway {
     constructor() {
         this.prettyName = _("MET Norway");
@@ -11551,6 +11575,9 @@ class MetNorway {
             result.alerts = alerts;
         }
         return result;
+    }
+    ValidConfiguration() {
+        return ProviderErrorCode.OK;
     }
     RemoveEarlierElements(json, loc) {
         const now = DateTime.now().setZone(loc.timeZone);
@@ -12045,6 +12072,7 @@ class MetNorway {
 
 
 
+
 class Weatherbit {
     constructor() {
         this.prettyName = _("WeatherBit");
@@ -12231,6 +12259,12 @@ class Weatherbit {
         return currentResult;
     }
     ;
+    ValidConfiguration(config, options) {
+        if (!options.apiKey) {
+            return ProviderErrorCode.NO_KEY;
+        }
+        return ProviderErrorCode.OK;
+    }
     async GetData(baseUrl, loc, ParseFunction, cancellable, config, options) {
         const query = this.ConstructQuery(loc, config, options);
         if (query == null)
@@ -12663,6 +12697,7 @@ class Weatherbit {
 
 
 
+
 class ClimacellV4 {
     constructor() {
         this.remainingCalls = null;
@@ -12706,6 +12741,12 @@ class ClimacellV4 {
                 weather.alerts = alerts;
         }
         return weather;
+    }
+    ValidConfiguration(config, customConfig) {
+        if (!customConfig.apiKey) {
+            return ProviderErrorCode.NO_KEY;
+        }
+        return ProviderErrorCode.OK;
     }
     async GetAlerts(loc, cancellable, options) {
         var _a, _b, _c, _d;
@@ -13243,6 +13284,7 @@ function EventNameToIcon(event) {
 
 
 
+
 class USWeather {
     constructor() {
         this.prettyName = _("US Weather");
@@ -13384,6 +13426,9 @@ class USWeather {
         return weather;
     }
     ;
+    ValidConfiguration() {
+        return ProviderErrorCode.OK;
+    }
     async GetGridData(loc, cancellable) {
         const siteData = await HttpLib.Instance.LoadJsonSimple({
             url: this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(),
@@ -13820,6 +13865,7 @@ class USWeather {
 
 
 
+
 class VisualCrossing {
     constructor() {
         this.prettyName = _("Visual Crossing");
@@ -13860,6 +13906,12 @@ class VisualCrossing {
         if (!json)
             return null;
         return this.ParseWeather(json, translate);
+    }
+    ValidConfiguration(config, customConfig) {
+        if (!customConfig.apiKey) {
+            return ProviderErrorCode.NO_KEY;
+        }
+        return ProviderErrorCode.OK;
     }
     ParseWeather(weather, translate) {
         var _a, _b, _c, _d, _e, _f, _g, _h;
@@ -14135,6 +14187,7 @@ class VisualCrossing {
 
 
 
+
 class DanishMI {
     constructor() {
         this.needsApiKey = false;
@@ -14181,6 +14234,9 @@ class DanishMI {
         if (forecasts == null)
             return null;
         return this.ParseWeather(observations, forecasts, loc);
+    }
+    ValidConfiguration() {
+        return ProviderErrorCode.OK;
     }
     ParseWeather(observations, forecasts, loc) {
         var _a, _b, _c, _d, _e, _f;
@@ -14497,6 +14553,7 @@ class DanishMI {
 
 
 
+
 class AccuWeather {
     constructor() {
         this.needsApiKey = true;
@@ -14606,6 +14663,12 @@ class AccuWeather {
         this.remainingQuota = Math.min(Number.parseInt(current.ResponseHeaders["RateLimit-Remaining"]), Number.parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]), Number.parseInt(hourly.ResponseHeaders["RateLimit-Remaining"]));
         this.SetTier(Number.parseInt(current.ResponseHeaders["RateLimit-Limit"]));
         return this.ParseWeather(current.Data[0], forecast.Data, hourly.Data, location);
+    }
+    ValidConfiguration(config, customConfig) {
+        if (!customConfig.apiKey) {
+            return ProviderErrorCode.NO_KEY;
+        }
+        return ProviderErrorCode.OK;
     }
     SetTier(limit) {
         if (limit > 1800000)
@@ -14954,6 +15017,7 @@ function EventCodeToIcon(code) {
 
 
 
+
 class DeutscherWetterdienst {
     constructor() {
         this.needsApiKey = false;
@@ -15041,6 +15105,9 @@ class DeutscherWetterdienst {
             alerts: alerts,
             uvIndex: null
         };
+    }
+    ValidConfiguration() {
+        return ProviderErrorCode.OK;
     }
     ParseForecast(current, forecast, loc) {
         const result = [];
@@ -15272,6 +15339,7 @@ class DeutscherWetterdienst {
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/weatherUnderground.ts
+
 
 
 
@@ -15865,6 +15933,12 @@ class WeatherUnderground {
         else
             return (_a = unitTypeMap[config.countryCode.toLowerCase()]) !== null && _a !== void 0 ? _a : "m";
     }
+    ValidConfiguration(config, customConfig) {
+        if (!customConfig.apiKey) {
+            return ProviderErrorCode.NO_KEY;
+        }
+        return ProviderErrorCode.OK;
+    }
     ParseForecasts(loc, forecast, config) {
         var _a;
         const result = [];
@@ -15887,6 +15961,7 @@ class WeatherUnderground {
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/pirate_weather/pirateWeather.ts
+
 
 
 
@@ -16010,6 +16085,12 @@ class PirateWeather {
         return this.ParseWeather(response.Data, unit);
     }
     ;
+    ValidConfiguration(config, customConfig) {
+        if (!customConfig.apiKey) {
+            return ProviderErrorCode.NO_KEY;
+        }
+        return ProviderErrorCode.OK;
+    }
     ParseWeather(json, unit) {
         var _a, _b, _c, _d, _e;
         try {
@@ -16682,6 +16763,7 @@ function OpenMeteoResponseToData(payload) {
 
 
 
+
 class OpenMeteo {
     constructor() {
         this.prettyName = _("Open-Meteo");
@@ -16718,6 +16800,9 @@ class OpenMeteo {
         if (!result)
             return null;
         return OpenMeteoResponseToData(result);
+    }
+    ValidConfiguration() {
+        return ProviderErrorCode.OK;
     }
 }
 
@@ -16791,6 +16876,7 @@ function OWMWeatherToWeatherData(weather, conditionsTranslated, timezone) {
 
 
 
+
 class OpenWeatherMapOpen {
     constructor() {
         this.needsApiKey = false;
@@ -16820,6 +16906,9 @@ class OpenWeatherMapOpen {
             return null;
         }
         return Object.assign(Object.assign({}, OWMWeatherToWeatherData(current, !!params.lang, loc.timeZone)), { forecasts: OWMDailyForecastsToData(daily.list, !!params.lang, loc.timeZone) });
+    }
+    ValidConfiguration() {
+        return ProviderErrorCode.OK;
     }
     ConstructParams(loc, config) {
         const params = {
@@ -17472,6 +17561,7 @@ function SwissMeteoWarningTypeToTitle(type) {
 
 
 
+
 class SwissMeteo {
     constructor() {
         this.needsApiKey = false;
@@ -17579,6 +17669,9 @@ class SwissMeteo {
         weather.hourlyForecasts = hourlyForecasts;
         return weather;
     }
+    ValidConfiguration() {
+        return ProviderErrorCode.OK;
+    }
     ValidPostcode(postcode) {
         const postcodeNum = Number.parseInt(postcode);
         if (Number.isNaN(postcodeNum)) {
@@ -17589,6 +17682,7 @@ class SwissMeteo {
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_uk/provider.ts
+
 
 
 
@@ -17733,6 +17827,15 @@ class MetUk {
                 type: "temperature"
             }
         };
+    }
+    ValidConfiguration(config, options) {
+        if (!options.forecastKey) {
+            return ProviderErrorCode.NO_KEY;
+        }
+        if (!options.observationKey) {
+            return ProviderErrorCode.NO_KEY;
+        }
+        return ProviderErrorCode.OK;
     }
     GetHourlyForecasts(payload, timezone) {
         const result = [];
@@ -18312,12 +18415,6 @@ class Config {
         this.InjectLocationToConfig(previousLoc, true);
         return previousLoc;
     }
-    NoApiKey() {
-        var _a;
-        const key = (_a = this._apiKey) === null || _a === void 0 ? void 0 : _a.replace(" ", "");
-        return (!key || key == "");
-    }
-    ;
     async GetLocation(cancellable, provider) {
         var _a;
         this.currentLocation = null;
@@ -18706,17 +18803,6 @@ const Keys = {
         prop: "UV_Index"
     },
 };
-
-;// CONCATENATED MODULE: ./src/3_8/types.ts
-var RefreshState;
-(function (RefreshState) {
-    RefreshState["Success"] = "success";
-    RefreshState["Error"] = "error";
-    RefreshState["NoLocation"] = "no location";
-    RefreshState["NoWeather"] = "no weather";
-    RefreshState["NoKey"] = "no key";
-    RefreshState["DisplayFailure"] = "display failure";
-})(RefreshState || (RefreshState = {}));
 
 ;// CONCATENATED MODULE: ./src/3_8/loop.ts
 
@@ -20739,8 +20825,16 @@ class WeatherApplet extends TextIconApplet {
                     return RefreshState.NoLocation;
                 }
             }
-            if (this.provider.needsApiKey && this.config.NoApiKey()) {
-                return RefreshState.NoKey;
+            const validConfig = this.provider.ValidConfiguration(this.config, this.config.GetServiceConfig(this.provider.name));
+            switch (validConfig) {
+                case ProviderErrorCode.OK:
+                    break;
+                case ProviderErrorCode.NO_KEY:
+                    return RefreshState.NoKey;
+                default: {
+                    logger_Logger.Error(`Developer error: Unknown Provider configuration error: ${validConfig}`);
+                    return RefreshState.Error;
+                }
             }
             this.ui.ShowRefreshIcon();
             let weatherInfo = await this.provider.GetWeather(location, cancellable, this.config, this.config.GetServiceConfig(this.provider.name));

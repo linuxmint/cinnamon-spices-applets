@@ -4,7 +4,7 @@ import type { HTTPParams } from "../lib/httpLib";
 import { HttpLib } from "../lib/httpLib";
 import type { Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData } from "../weather-data";
 import { CelsiusToKelvin, GetDistance, mode, _ } from "../utils";
-import type { LocationData, WeatherProvider } from "../types";
+import { ProviderErrorCode, type LocationData, type WeatherProvider } from "../types";
 
 export class DanishMI implements WeatherProvider<Services.DanishMI> {
 	public readonly needsApiKey: boolean = false;
@@ -59,6 +59,10 @@ export class DanishMI implements WeatherProvider<Services.DanishMI> {
 			return null;
 
 		return this.ParseWeather(observations, forecasts, loc);
+	}
+
+	public ValidConfiguration(): ProviderErrorCode {
+		return ProviderErrorCode.OK;
 	}
 
 	private ParseWeather(observations: DanishObservationPayload[], forecasts: DanishMIPayload, loc: LocationData): WeatherData {

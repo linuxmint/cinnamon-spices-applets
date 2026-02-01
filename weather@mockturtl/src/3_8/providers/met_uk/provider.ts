@@ -2,7 +2,7 @@ import { DateTime } from "luxon";
 import type { Config } from "../../config";
 import { Services } from "../../config";
 import { HttpLib } from "../../lib/httpLib";
-import type { correctGetTimes, LocationData, WeatherProvider } from "../../types";
+import { ProviderErrorCode, type correctGetTimes, type LocationData, type WeatherProvider } from "../../types";
 import { _, CelsiusToKelvin, CompassToDeg } from "../../utils";
 import type { Condition, ForecastData, HourlyForecastData, WeatherData } from "../../weather-data";
 import type { MetUkHourlyPayload, MetUkHourlyProperties } from "./payload/hourly";
@@ -180,6 +180,18 @@ export class MetUk implements WeatherProvider<Services.MetOfficeUK, MetUKOptions
 				type: "temperature"
 			}
 		};
+	}
+
+	public ValidConfiguration(config: Config, options: MetUKOptions): ProviderErrorCode {
+		if (!options.forecastKey) {
+			return ProviderErrorCode.NO_KEY;
+		}
+
+		if (!options.observationKey) {
+			return ProviderErrorCode.NO_KEY;
+		}
+
+		return ProviderErrorCode.OK;
 	}
 
 	private GetHourlyForecasts(payload: MetUkHourlyProperties, timezone: string): HourlyForecastData[] {

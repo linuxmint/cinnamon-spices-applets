@@ -5,7 +5,7 @@ import { HttpLib } from "../../lib/httpLib";
 import type { AlertData, Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData } from "../../weather-data";
 import { CelsiusToKelvin, IsNight, _ } from "../../utils";
 import type { TomorrowIoAlertsResponse } from "./alerts";
-import type { LocationData, WeatherProvider } from "../../types";
+import { ProviderErrorCode, type LocationData, type WeatherProvider } from "../../types";
 import { ErrorHandler } from "../../lib/services/error_handler";
 import { PointInsidePolygon } from "../../lib/polygons";
 
@@ -63,6 +63,13 @@ export class ClimacellV4 implements WeatherProvider<Services.Tomorrow_IO, Climac
 		}
 
 		return weather;
+	}
+
+	public ValidConfiguration(config: Config, customConfig: ClimacellV4Options): ProviderErrorCode {
+		if (!customConfig.apiKey) {
+			return ProviderErrorCode.NO_KEY;
+		}
+		return ProviderErrorCode.OK;
 	}
 
 	private async GetAlerts(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, options: ClimacellV4Options): Promise<AlertData[] | null> {

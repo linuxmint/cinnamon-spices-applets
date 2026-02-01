@@ -11,7 +11,7 @@ import type { RefreshOptions } from "./loop";
 import { WeatherLoop } from "./loop";
 import type { WeatherData, CustomIcons, BuiltinIcons } from "./weather-data";
 import type { AppletError, NiceErrorDetail, Metadata, WeatherProvider, LocationData } from "./types";
-import { RefreshState } from "./types";
+import { ProviderErrorCode, RefreshState } from "./types";
 import { UI } from "./ui";
 import { AwareDateString, CapitalizeFirstLetter, GenerateLocationText, InjectValues, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
 import type { HttpError } from "./lib/httpLib";
@@ -204,9 +204,16 @@ export class WeatherApplet extends TextIconApplet {
 			}
 
 
-			// No key
-			if (this.provider.needsApiKey && this.config.NoApiKey()) {
-				return RefreshState.NoKey;
+			const validConfig = this.provider.ValidConfiguration(this.config, this.config.GetServiceConfig(this.provider.name));
+			switch (validConfig) {
+				case ProviderErrorCode.OK:
+					break;
+				case ProviderErrorCode.NO_KEY:
+					return RefreshState.NoKey;
+				default: {
+					Logger.Error(`Developer error: Unknown Provider configuration error: ${validConfig as number}`);
+					return RefreshState.Error;
+				}
 			}
 
 			this.ui.ShowRefreshIcon();

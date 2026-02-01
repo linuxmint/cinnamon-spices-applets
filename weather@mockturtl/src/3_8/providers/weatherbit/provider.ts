@@ -17,7 +17,7 @@ import type { WeatherbitAlertsResponse } from "./alerts";
 import type { WeatherBitCurrentWeatherData } from "./current";
 import type { WeatherBitDailyWeatherDataResponse } from "./daily";
 import type { WeatherBitHourlyWeatherDataResponse } from "./hourly";
-import type { LocationData, WeatherProvider } from "../../types";
+import { ProviderErrorCode, type LocationData, type WeatherProvider } from "../../types";
 import { ErrorHandler } from "../../lib/services/error_handler";
 
 export interface WeatherbitOptions {
@@ -80,6 +80,14 @@ export class Weatherbit implements WeatherProvider<Services.Weatherbit, Weatherb
 		}
 		return currentResult;
 	};
+
+	public ValidConfiguration(config: Config, options: WeatherbitOptions): ProviderErrorCode {
+		if (!options.apiKey) {
+			return ProviderErrorCode.NO_KEY;
+		}
+		return ProviderErrorCode.OK;
+	}
+
 
 	// A function as a function parameter 2 levels deep does not know
 	// about the top level object information, has to pass it in as a parameter

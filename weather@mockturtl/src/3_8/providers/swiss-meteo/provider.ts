@@ -2,7 +2,7 @@ import { DateTime } from "luxon";
 import { Services } from "../../config";
 import { HttpLib, type ErrorResponse } from "../../lib/httpLib";
 import { ErrorHandler } from "../../lib/services/error_handler";
-import type { LocationData, LocationType, WeatherProvider } from "../../types";
+import { ProviderErrorCode, type LocationData, type LocationType, type WeatherProvider } from "../../types";
 import { _, CelsiusToKelvin, KPHtoMPS } from "../../utils";
 import type { HourlyForecastData, WeatherData } from "../../weather-data";
 import { SwissMeteoIconToCondition, type SwissMeteoPayload } from "./payload/common";
@@ -119,6 +119,10 @@ export class SwissMeteo implements WeatherProvider<Services.SwissMeteo> {
 
 		weather.hourlyForecasts = hourlyForecasts;
 		return weather;
+	}
+
+	public ValidConfiguration(): ProviderErrorCode {
+		return ProviderErrorCode.OK;
 	}
 
 	private HandleError = (error: ErrorResponse<unknown>): boolean => {

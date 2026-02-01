@@ -6,7 +6,7 @@ import type { ErrorResponse } from "../lib/httpLib";
 import { HttpLib } from "../lib/httpLib";
 import { Logger } from "../lib/services/logger";
 import type { Condition, ForecastData, WeatherData } from "../weather-data";
-import type { LocationData, WeatherProvider } from "../types";
+import { ProviderErrorCode, type LocationData, type WeatherProvider } from "../types";
 import { CelsiusToKelvin, FahrenheitToKelvin, GetDistance, _ } from "../utils";
 import { ErrorHandler } from "../lib/services/error_handler";
 
@@ -110,6 +110,14 @@ export class WeatherUnderground implements WeatherProvider<Services.WeatherUnder
 		};
 	}
 
+	public ValidConfiguration(config: Config, customConfig: WeatherUndergroundOptions): ProviderErrorCode {
+		if (!customConfig.apiKey) {
+			return ProviderErrorCode.NO_KEY;
+		}
+
+		return ProviderErrorCode.OK;
+	}
+
 	private ParseForecasts(loc: LocationData, forecast: ForecastPayload, config: Config): ForecastData[] {
 		const result: ForecastData[] = [];
 		for (let index = 0; index < forecast.dayOfWeek.length; index++) {
@@ -170,7 +178,7 @@ export class WeatherUnderground implements WeatherProvider<Services.WeatherUnder
 	}
 
 	private GetObservations = async (stations: NearbyStation[], forecast: ForecastPayload, loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config, options: WeatherUndergroundOptions): Promise<ObservationInternalData> => {
-		const observationData: ObservationData[] = (await Promise.all(stations.map(v => this.GetObservation(v.stationId, cancellable, options)))).filter(v => v != null) as ObservationData[];
+		const observationData: ObservationData[] = (await Promise.all(stations.map(v => this.GetObservation(v.stationId, cancellable, options)))).filter(v => v != null);
 		const tz = loc.timeZone;
 
 		const result: ObservationInternalData = {
