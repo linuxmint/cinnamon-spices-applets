@@ -18,16 +18,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#. applet.js:59 applet.js:173
+#. applet.js:22 applet.js:132 applet.js:242
 msgid "Printers"
 msgstr ""
 
-#. applet.js:198
+#. applet.js:167
 msgid "Cancel all jobs"
 msgstr ""
 
-#. applet.js:225
+#. applet.js:193
 msgid "at"
+msgstr ""
+
+#. applet.js:193
+msgid "by"
 msgstr ""
 
 #. settings-schema.json->send-to-front->description
