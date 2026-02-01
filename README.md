@@ -191,8 +191,10 @@ To determine the backward compatibility of a javascript feature, look at it's pa
 <tr><td colspan="1">21.1</td><td colspan="1">Vera</td><td colspan="1">20 Dec 22</td><td colspan="1">5.6.8</td></tr>
 <tr><td colspan="1">21.2</td><td colspan="1">Victoria</td><td colspan="1">16 Jul 23</td><td colspan="1">5.8.4</td><td colspan="1" rowspan="2">102</td></tr>
 <tr><td colspan="1">21.3</td><td colspan="1">Virginia</td><td colspan="1">12 Jan 24</td><td colspan="1">6.0.4</td></tr>
-<tr><td colspan="1">22</td><td colspan="1">Wilma</td><td colspan="1">25 Jul 24</td><td colspan="1">6.2.9</td><td colspan="1" rowspan="2">115</td></tr>
-<tr><td colspan="1">22.1</td><td colspan="1">Xia</td><td colspan="1">16 Jan 25</td><td colspan="1">6.4.8</td>
+<tr><td colspan="1">22</td><td colspan="1">Wilma</td><td colspan="1">25 Jul 24</td><td colspan="1">6.2.9</td><td colspan="1" rowspan="4">115</td></tr>
+<tr><td colspan="1">22.1</td><td colspan="1">Xia</td><td colspan="1">16 Jan 25</td><td colspan="1" rowspan="2">6.4.8</td>
+<tr><td colspan="1">22.2</td><td colspan="1">Zara</td><td colspan="1">4 Sep 25</td>
+<tr><td colspan="1">22.3</td><td colspan="1">Zena</td><td colspan="1">13 Jan 26</td><td colspan="1">6.6.6</td>
 </table>
 
-*Mint 20 series is officially supported until Apr 2025, 21 series until May 2027, and 22 series until Apr 2029. Earlier versions official support has ended.
+*Mint 21 series is officially supported until May 2027, and 22 series until Apr 2029. Earlier versions official support has ended.
