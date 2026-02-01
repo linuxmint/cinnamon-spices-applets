@@ -1,29 +1,29 @@
 import { Services, type Config } from "../../config";
-import type { HTTPParams} from "../../lib/httpLib";
+import type { HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
-import type { LocationData } from "../../types";
+import type { LocationData, WeatherProvider } from "../../types";
 import { IsLangSupported, _ } from "../../utils";
 import type { WeatherData } from "../../weather-data";
-import { BaseProvider } from "../BaseProvider";
 import { ConvertLocaleToOWMLang, OWM_SUPPORTED_LANGS } from "./payload/common";
-import type { OWMDailyForecastResponse} from "./payload/forecast_daily";
+import type { OWMDailyForecastResponse } from "./payload/forecast_daily";
 import { OWMDailyForecastsToData } from "./payload/forecast_daily";
-import type { OWMWeatherResponse} from "./payload/weather";
+import type { OWMWeatherResponse } from "./payload/weather";
 import { OWMWeatherToWeatherData } from "./payload/weather";
 
-export class OpenWeatherMapOpen extends BaseProvider {
-	public override needsApiKey = false;
-	public override prettyName = _("OpenWeatherMap");
-	public override name: Services = Services.OpenWeatherMap_Open;
-	public override maxForecastSupport = 7;
-	public override maxHourlyForecastSupport = 0;
-	public override website = "https://openweathermap.org/";
-	public override remainingCalls = null;
-	public override supportHourlyPrecipChance = false;
-	public override supportHourlyPrecipVolume = false;
+export class OpenWeatherMapOpen implements WeatherProvider<Services.OpenWeatherMap_Open, null> {
+	public readonly needsApiKey = false;
+	public readonly prettyName = _("OpenWeatherMap");
+	public readonly name = Services.OpenWeatherMap_Open;
+	public readonly maxForecastSupport = 7;
+	public readonly maxHourlyForecastSupport = 0;
+	public readonly website = "https://openweathermap.org/";
+	public readonly remainingCalls = null;
+	public readonly supportHourlyPrecipChance = false;
+	public readonly supportHourlyPrecipVolume = false;
+	public readonly locationType = "coordinates";
 
 
-	public override async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
 		const params: HTTPParams = this.ConstructParams(loc, config);
 		const current = await HttpLib.Instance.LoadJsonSimple<OWMWeatherResponse>({
 			url: "https://api.openweathermap.org/data/2.5/weather",

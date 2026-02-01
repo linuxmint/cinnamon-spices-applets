@@ -81,7 +81,7 @@ German National Weather Provider. [Deutsche Wetterdienst Website](https://www.dw
 
 The Meteorological Office, abbreviated as the Met Office, is the UK's national weather service founded in 1854. [Met Office UK Website](https://www.metoffice.gov.uk/). Read more about the agency [here](https://en.wikipedia.org/wiki/Met_Office). The Data is obtained via their new [DataHub API](https://datahub.metoffice.gov.uk/).
 
-- You need 2 API keys in this format: `{forecastKey}+{observationKey}` in the API key field in settings
+- You need 2 API keys
 
 - You only have 360 calls a day free, the applet uses 2 at a time so minimum of 15 minutes refresh time is recommended.
 

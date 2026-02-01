@@ -1,13 +1,12 @@
 import { Services } from "../../config";
 import { HttpLib } from "../../lib/httpLib";
-import type { LocationData } from "../../types";
+import type { LocationData, WeatherProvider } from "../../types";
 import { _ } from "../../utils";
 import type { WeatherData } from "../../weather-data";
-import { BaseProvider } from "../BaseProvider";
 import type { OpenMeteoWeatherResponse } from "./payload/response";
 import { OpenMeteoResponseToData } from "./payload/response";
 
-export class OpenMeteo extends BaseProvider {
+export class OpenMeteo implements WeatherProvider<Services.OpenMeteo> {
 
 	public readonly prettyName = _("Open-Meteo");
 	public readonly name = Services.OpenMeteo;
@@ -17,6 +16,7 @@ export class OpenMeteo extends BaseProvider {
 	public readonly needsApiKey = false;
 	public readonly supportHourlyPrecipChance = true;
 	public readonly supportHourlyPrecipVolume = true;
+	public readonly locationType = "coordinates";
 
 	public get remainingCalls(): number | null {
 		return null;

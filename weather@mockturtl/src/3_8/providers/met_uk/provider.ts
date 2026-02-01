@@ -2,17 +2,21 @@ import { DateTime } from "luxon";
 import type { Config } from "../../config";
 import { Services } from "../../config";
 import { HttpLib } from "../../lib/httpLib";
-import type { correctGetTimes, LocationData } from "../../types";
+import type { correctGetTimes, LocationData, WeatherProvider } from "../../types";
 import { _, CelsiusToKelvin, CompassToDeg } from "../../utils";
 import type { Condition, ForecastData, HourlyForecastData, WeatherData } from "../../weather-data";
-import { BaseProvider } from "../BaseProvider";
 import type { MetUkHourlyPayload, MetUkHourlyProperties } from "./payload/hourly";
 import { Logger } from "../../lib/services/logger";
 import type { MetUkDailyPayload, MetUkDailyProperties } from "./payload/daily";
 import type { MetUkObservationData, MetUkObservationStation } from "./payload/observation";
 import { getTimes } from "suncalc";
 
-export class MetUk extends BaseProvider {
+export interface MetUKOptions {
+	forecastKey: string;
+	observationKey: string;
+}
+
+export class MetUk implements WeatherProvider<Services.MetOfficeUK, MetUKOptions> {
 	public readonly prettyName = _("Met Office UK");
 	public readonly name = Services.MetOfficeUK;
 	public readonly website = "https://www.metoffice.gov.uk/";
@@ -23,6 +27,7 @@ export class MetUk extends BaseProvider {
 	public readonly remainingCalls: number | null = null;
 	public readonly supportHourlyPrecipChance = true;
 	public readonly supportHourlyPrecipVolume = true;
+	public readonly locationType = "coordinates";
 
 	private baseUrl = "https://data.hub.api.metoffice.gov.uk/sitespecific/v0";
 	private observationBaseUrl = "https://data.hub.api.metoffice.gov.uk/observation-land/1";
@@ -36,8 +41,8 @@ export class MetUk extends BaseProvider {
 	private hourlyForecastUrl = `${this.baseUrl}/point/hourly`;
 	private forecastUrl = `${this.baseUrl}/point/daily`;
 
-	public async GetWeather(newLocation: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
-		const [forecastKey, observationKey] = config.ApiKey.split("+");
+	public async GetWeather(newLocation: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config, options: MetUKOptions): Promise<WeatherData | null> {
+		const { forecastKey, observationKey } = options;
 		const params: Record<string, string> = {
 			...MetUk.params,
 			latitude: newLocation.lat.toString(),

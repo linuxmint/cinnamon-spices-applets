@@ -132,7 +132,10 @@
     ],
     "typescript.tsdk": "${workspaceFolder:weather}/node_modules/typescript/lib",
     "eslint.experimental.useFlatConfig": true,
-    "eslint.workingDirectories": ["${workspaceFolder:weather}"],
+    "eslint.workingDirectories": [
+      "${workspaceFolder:weather}"
+    ],
+    "python.analysis.typeCheckingMode": "off",
   },
   "tasks": {
     "version": "2.0.0",

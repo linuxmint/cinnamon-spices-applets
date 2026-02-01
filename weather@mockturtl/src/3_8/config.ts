@@ -1,5 +1,5 @@
 import type { WeatherApplet } from "./main";
-import type { LocationData, LocationServiceResult, WeatherProvider } from "./types";
+import type { LocationData, LocationServiceResult, RemovePrefix, WeatherProvider } from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Logger } from "./lib/services/logger";
 import type { LogLevel } from "./consts";
@@ -8,7 +8,6 @@ import { LocationStore } from "./location_services/locationstore";
 import { GeoLocation } from "./location_services/nominatim";
 import { DateTime } from "luxon";
 import { FileExists, LoadContents } from "./lib/io_lib";
-import type { BaseProvider } from "./providers/BaseProvider";
 import { OpenWeatherMapOneCall } from "./providers/openweathermap/provider-closed";
 import { MetNorway } from "./providers/met_norway/provider";
 import { Weatherbit } from "./providers/weatherbit/provider";
@@ -75,7 +74,7 @@ export enum Services {
 	SwissMeteo = "Swiss Meteo"
 }
 
-export const ServiceClassMapping: ServiceClassMappingType = {
+export const ServiceClassMapping = {
 	[Services.OpenWeatherMap_Open]: () => new OpenWeatherMapOpen(),
 	[Services.OpenWeatherMap_OneCall]: () => new OpenWeatherMapOneCall(),
 	[Services.MetNorway]: () => new MetNorway(),
@@ -91,7 +90,10 @@ export const ServiceClassMapping: ServiceClassMappingType = {
 	[Services.PirateWeather]: () => new PirateWeather(),
 	[Services.OpenMeteo]: () => new OpenMeteo(),
 	[Services.SwissMeteo]: () => new SwissMeteo(),
-}
+} satisfies ServiceClassMappingType;
+
+type ServiceImplementation<T extends Services> = ReturnType<typeof ServiceClassMapping[T]>;
+type ServiceOption<T extends Services> = ServiceImplementation<T> extends WeatherProvider<T, infer U> ? U : never;
 
 export class Config {
 	private readonly WEATHER_LOCATION = "location";
@@ -102,7 +104,19 @@ export class Config {
 	private readonly _temperatureUnit!: WeatherUnits;
 	private readonly _windSpeedUnit!: WeatherWindSpeedUnits;
 	private readonly _distanceUnit!: DistanceUnits;
+	/**
+	 * @deprecated there are provider-specific api keys now, this is only kept for migration in configs
+	 */
 	private readonly _apiKey!: string;
+	private readonly _openweathermap_onecall_apikey!: string;
+	private readonly _metoffice_forecast_apikey!: string;
+	private readonly _metoffice_observations_apikey!: string;
+	private readonly _pirateweather_apikey!: string;
+	private readonly _visualcrossing_apikey!: string;
+	private readonly _weatherbit_apikey!: string;
+	private readonly _tomorrowio_apikey!: string;
+	private readonly _accuweather_apikey!: string;
+	private readonly _weatherunderground_apikey!: string;
 	private readonly _useSymbolicIcons!: boolean;
 	public readonly keybinding!: string;
 
@@ -151,6 +165,15 @@ export class Config {
 
 	public readonly DataServiceChanged = new Event<Config, Services>();
 	public readonly ApiKeyChanged = new Event<Config, string>();
+	public readonly OpenWeatherMapOneCallApiKeyChanged = new Event<Config, string>();
+	public readonly MetofficeForecastApiKeyChanged = new Event<Config, string>();
+	public readonly MetofficeObservationsApiKeyChanged = new Event<Config, string>();
+	public readonly PirateWeatherApiKeyChanged = new Event<Config, string>();
+	public readonly VisualCrossingApiKeyChanged = new Event<Config, string>();
+	public readonly WeatherbitApiKeyChanged = new Event<Config, string>();
+	public readonly TomorrowIOApiKeyChanged = new Event<Config, string>();
+	public readonly AccuWeatherApiKeyChanged = new Event<Config, string>();
+	public readonly WeatherUndergroundApiKeyChanged = new Event<Config, string>();
 	public readonly TemperatureUnitChanged = new Event<Config, WeatherUnits>();
 	public readonly TemperatureHighFirstChanged = new Event<Config, boolean>();
 	public readonly WindSpeedUnitChanged = new Event<Config, WeatherWindSpeedUnits>();
@@ -251,10 +274,6 @@ export class Config {
 		return this.currentLocation;
 	}
 
-	public get ApiKey(): string {
-		return this._apiKey.replace(" ", "");
-	}
-
 	public get Language(): string | null {
 		return this.GetLanguage(this.currentLocale);
 	}
@@ -305,6 +324,96 @@ export class Config {
 		return this._useSymbolicIcons ?
 			IconType.SYMBOLIC :
 			IconType.FULLCOLOR;
+	}
+
+	public GetServiceConfig<T extends Services>(service: T): ServiceOption<T> {
+		const oldApiKey = this._apiKey.trim();
+
+		// Migration once from old key to new key, key goes to selected provider
+		let newApiKeyField: RemovePrefix<keyof Config, "_"> | null = null;
+		switch (service) {
+			case Services.OpenWeatherMap_OneCall:
+				newApiKeyField = Keys.OPENWEATHERMAP_ONECALL_API_KEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.PirateWeather:
+				newApiKeyField = Keys.PIRATEWEATHER_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.VisualCrossing:
+				newApiKeyField = Keys.VISUALCROSSING_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.Weatherbit:
+				newApiKeyField = Keys.WEATHERBIT_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.Tomorrow_IO:
+				newApiKeyField = Keys.TOMORROW_IO_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.AccuWeather:
+				newApiKeyField = Keys.ACCUWEATHER_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.WeatherUnderground:
+				newApiKeyField = Keys.WEATHER_UNDERGROUND_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+		}
+
+		if (newApiKeyField != null && !this[`_${newApiKeyField}`] && !!oldApiKey) {
+			this.settings.setValue(newApiKeyField, oldApiKey);
+			this.settings.setValue(Keys.API_KEY.key, "");
+			Logger.Info(`Migrating old API key to new field for service ${service}`);
+		}
+
+		switch (service) {
+			case Services.OpenWeatherMap_OneCall: {
+				const result: ServiceOption<Services.OpenWeatherMap_OneCall> = {
+					apiKey: this._openweathermap_onecall_apikey.trim() || oldApiKey
+				}
+				return result as ServiceOption<T>;
+			}
+			case Services.Weatherbit: {
+				const result: ServiceOption<Services.Weatherbit> = {
+					apiKey: this._weatherbit_apikey.trim() || oldApiKey
+				}
+				return result as ServiceOption<T>;
+			}
+			case Services.Tomorrow_IO: {
+				return {
+					apiKey: this._tomorrowio_apikey.trim() || oldApiKey
+				} satisfies ServiceOption<Services.Tomorrow_IO> as ServiceOption<T>;
+			}
+			case Services.MetOfficeUK: {
+				return {
+					forecastKey: this._metoffice_forecast_apikey.trim(),
+					observationKey: this._metoffice_observations_apikey.trim()
+				} satisfies ServiceOption<Services.MetOfficeUK> as ServiceOption<T>;
+			}
+			case Services.VisualCrossing: {
+				return {
+					apiKey: this._visualcrossing_apikey.trim() || oldApiKey
+				} satisfies ServiceOption<Services.VisualCrossing> as ServiceOption<T>;
+			}
+			case Services.AccuWeather: {
+				return {
+					apiKey: this._accuweather_apikey.trim() || oldApiKey
+				} satisfies ServiceOption<Services.AccuWeather> as ServiceOption<T>;
+			}
+			case Services.WeatherUnderground: {
+				return {
+					apiKey: this._weatherunderground_apikey.trim() || oldApiKey
+				} satisfies ServiceOption<Services.WeatherUnderground> as ServiceOption<T>;
+			}
+			case Services.PirateWeather: {
+				return {
+					apiKey: this._pirateweather_apikey.trim() || oldApiKey
+				} satisfies ServiceOption<Services.PirateWeather> as ServiceOption<T>;
+			}
+			case Services.OpenWeatherMap_Open:
+			case Services.DeutscherWetterdienst:
+			case Services.MetNorway:
+			case Services.OpenMeteo:
+			case Services.SwissMeteo:
+			case Services.USWeather:
+			case Services.DanishMI:
+				return null as ServiceOption<T>;
+		}
 	}
 
 	/** Called when user changed manual locations, automatically switches to manual location mode. */
@@ -647,6 +756,42 @@ const Keys = {
 		key: "apiKey",
 		prop: "ApiKey"
 	},
+	OPENWEATHERMAP_ONECALL_API_KEY: {
+		key: "openweathermap_onecall_apikey",
+		prop: "OpenWeatherMapOneCallApiKey",
+	},
+	METOFFICE_FORECAST_APIKEY: {
+		key: "metoffice_forecast_apikey",
+		prop: "MetofficeForecastApiKey"
+	},
+	METOFFICE_OBSERVATIONS_APIKEY: {
+		key: "metoffice_observations_apikey",
+		prop: "MetofficeObservationsApiKey"
+	},
+	PIRATEWEATHER_APIKEY: {
+		key: "pirateweather_apikey",
+		prop: "PirateWeatherApiKey"
+	},
+	VISUALCROSSING_APIKEY: {
+		key: "visualcrossing_apikey",
+		prop: "VisualCrossingApiKey"
+	},
+	WEATHERBIT_APIKEY: {
+		key: "weatherbit_apikey",
+		prop: "WeatherbitApiKey"
+	},
+	TOMORROW_IO_APIKEY: {
+		key: "tomorrowio_apikey",
+		prop: "TomorrowIOApiKey"
+	},
+	ACCUWEATHER_APIKEY: {
+		key: "accuweather_apikey",
+		prop: "AccuWeatherApiKey"
+	},
+	WEATHER_UNDERGROUND_APIKEY: {
+		key: "weatherunderground_apikey",
+		prop: "WeatherUndergroundApiKey"
+	},
 	TEMPERATURE_UNIT_KEY: {
 		key: "temperatureUnit",
 		prop: "TemperatureUnit"
@@ -790,5 +935,6 @@ const Keys = {
 } as const;
 
 type ServiceClassMappingType = {
-	[key in Services]: (app: WeatherApplet) => BaseProvider;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	[key in Services]: (app: WeatherApplet) => WeatherProvider<any, any>;
 }

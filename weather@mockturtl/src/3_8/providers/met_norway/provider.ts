@@ -1,10 +1,9 @@
 import { Logger } from "../../lib/services/logger";
 import { getTimes } from "suncalc";
-import type { WeatherData, HourlyForecastData, ForecastData, Condition, ImmediatePrecipitation} from "../../weather-data";
-import type { LocationData, correctGetTimes, SunTime} from "../../types";
+import type { WeatherData, HourlyForecastData, ForecastData, Condition, ImmediatePrecipitation } from "../../weather-data";
+import type { LocationData, correctGetTimes, SunTime, WeatherProvider } from "../../types";
 import { CelsiusToKelvin, IsNight, OnSameDay, _ } from "../../utils";
 import { DateTime } from "luxon";
-import { BaseProvider } from "../BaseProvider";
 import type { Conditions, TimeOfDay } from "./types/common";
 import { conditionSeverity } from "./types/common";
 import type { MetNorwayNowcastPayload } from "./types/nowcast";
@@ -14,7 +13,7 @@ import { HttpLib } from "../../lib/httpLib";
 import { Services, type Config } from "../../config";
 import { GetMETNorwayAlerts } from "./alert";
 
-export class MetNorway extends BaseProvider {
+export class MetNorway implements WeatherProvider<Services.MetNorway> {
 	public readonly prettyName = _("MET Norway");
 	public readonly name = Services.MetNorway;
 	public readonly maxForecastSupport = 10;
@@ -24,6 +23,7 @@ export class MetNorway extends BaseProvider {
 	public readonly remainingCalls: number | null = null;
 	public readonly supportHourlyPrecipChance = false;
 	public readonly supportHourlyPrecipVolume = true;
+	public readonly locationType = "coordinates";
 
 	private baseUrl = "https://api.met.no/weatherapi";
 
@@ -32,12 +32,12 @@ export class MetNorway extends BaseProvider {
 			HttpLib.Instance.LoadJsonSimple<MetNorwayForecastPayload>({
 				url: `${this.baseUrl}/locationforecast/2.0/complete`,
 				cancellable,
-				params: {lat: loc.lat, lon: loc.lon}
+				params: { lat: loc.lat, lon: loc.lon }
 			}),
 			HttpLib.Instance.LoadJsonSimple<MetNorwayNowcastPayload>({
 				url: `${this.baseUrl}/nowcast/2.0/complete`,
 				cancellable,
-				params: {lat: loc.lat, lon: loc.lon},
+				params: { lat: loc.lat, lon: loc.lon },
 				HandleError: (e) => e.ErrorData.code != 422
 			}),
 		]);
@@ -66,7 +66,7 @@ export class MetNorway extends BaseProvider {
 
 					for (let i = 0; i < nowcast.properties.timeseries.length; i++) {
 						const element = nowcast.properties.timeseries[i];
-						const next = nowcast.properties.timeseries[i+1];
+						const next = nowcast.properties.timeseries[i + 1];
 						// Next element is already in the past, skip this one
 						if (next != null && DateTime.fromISO(next.time).diffNow().milliseconds < 0)
 							continue;

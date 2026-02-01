@@ -2,17 +2,19 @@ import { DateTime } from "luxon";
 import { Services, type Config } from "../../config";
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
-import type { AlertData, Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../../weather-data";
+import type { AlertData, Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData } from "../../weather-data";
 import { CelsiusToKelvin, IsLangSupported, KPHtoMPS, _ } from "../../utils";
-import { BaseProvider } from "../BaseProvider";
 import type { VisualCrossingAlert } from "./alerts";
-import type { LocationData } from "../../types";
+import type { LocationData, WeatherProvider } from "../../types";
 import { ErrorHandler } from "../../lib/services/error_handler";
 
+export interface VisualCrossingOptions {
+	apiKey: string;
+}
 
-export class VisualCrossing extends BaseProvider {
+export class VisualCrossing implements WeatherProvider<Services.VisualCrossing, VisualCrossingOptions> {
 	readonly prettyName: string = _("Visual Crossing");
-	readonly name: Services = Services.VisualCrossing;
+	readonly name = Services.VisualCrossing;
 	readonly maxForecastSupport: number = 15;
 	readonly maxHourlyForecastSupport: number = 336;
 	readonly website: string = "https://weather.visualcrossing.com/";
@@ -20,6 +22,7 @@ export class VisualCrossing extends BaseProvider {
 	public readonly remainingCalls: number | null = null;
 	public readonly supportHourlyPrecipChance = true;
 	public readonly supportHourlyPrecipVolume = true;
+	public readonly locationType = "coordinates";
 
 	private url: string = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
 	private params: HTTPParams = {
@@ -32,9 +35,9 @@ export class VisualCrossing extends BaseProvider {
 
 	private supportedLangs: string[] = ["en", "de", "fr", "es"]
 
-	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config, options: VisualCrossingOptions): Promise<WeatherData | null> {
 		if (loc == null) return null;
-		this.params['key'] = config.ApiKey;
+		this.params['key'] = options.apiKey;
 		let translate = true;
 		if (IsLangSupported(config.Language, this.supportedLangs)) {
 			this.params['lang'] = config.Language;

@@ -22,19 +22,19 @@ export type LocationType = "coordinates" | "postcode";
 /**
  * A WeatherProvider must implement this interface.
  */
-export interface WeatherProvider {
+export interface WeatherProvider<Service extends Services = Services, Options = unknown> {
 	readonly needsApiKey: boolean;
 	readonly prettyName: string;
-	readonly name: Services;
+	readonly name: Service;
 	readonly maxForecastSupport: number;
 	readonly maxHourlyForecastSupport: number;
 	readonly website: string;
 	readonly remainingCalls: number | null;
 	readonly supportHourlyPrecipChance: boolean;
-    readonly supportHourlyPrecipVolume: boolean;
+	readonly supportHourlyPrecipVolume: boolean;
 	readonly locationType: LocationType;
 
-	GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null>;
+	GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config, customConfig: Options): Promise<WeatherData | null>;
 }
 
 export const enum RefreshState {
@@ -106,3 +106,4 @@ export type ArrowIcons =
 	"south-west-arrow-weather-symbolic" |
 	"west-arrow-weather-symbolic";
 
+export type RemovePrefix<T extends string, Prefix extends string> = T extends `${Prefix}${infer R}` ? R : never;

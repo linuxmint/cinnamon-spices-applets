@@ -100,6 +100,15 @@ export class WeatherApplet extends TextIconApplet {
 
 		// We need a full refresh for these
 		this.config.ApiKeyChanged.Subscribe(() => this.loop.Refresh());
+		this.config.OpenWeatherMapOneCallApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.MetofficeForecastApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.MetofficeObservationsApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.PirateWeatherApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.VisualCrossingApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.WeatherbitApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.TomorrowIOApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.AccuWeatherApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.WeatherUndergroundApiKeyChanged.Subscribe(() => this.loop.Refresh())
 		// We change how we process data when this is changed
 		this.config.ShortConditionsChanged.Subscribe(() => this.loop.Refresh());
 		// Some translations come from the API we need a refresh
@@ -201,7 +210,7 @@ export class WeatherApplet extends TextIconApplet {
 			}
 
 			this.ui.ShowRefreshIcon();
-			let weatherInfo = await this.provider.GetWeather(location, cancellable, this.config);
+			let weatherInfo = await this.provider.GetWeather(location, cancellable, this.config, this.config.GetServiceConfig(this.provider.name));
 
 			if (weatherInfo == null) {
 				return RefreshState.NoWeather;
@@ -559,7 +568,7 @@ The contents of the file saved from the applet help page goes here
 	private EnsureProvider(force: boolean = false): void {
 		const currentName = this.provider?.name;
 		if (currentName != this.config._dataService || force)
-			this.provider = ServiceClassMapping[this.config._dataService](this);
+			this.provider = ServiceClassMapping[this.config._dataService]();
 	}
 
 	/** Fills in missing weather info from location Data

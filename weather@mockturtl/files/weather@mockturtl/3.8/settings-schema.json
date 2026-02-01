@@ -83,7 +83,30 @@
 			"title": "Weather Provider Options",
 			"keys": [
 				"dataService",
-				"apiKey",
+				"openmeteo_label",
+				"openweathermap_label",
+				"metnorway_label",
+				"dmidenmark_label",
+				"deutscherwetterdienst_label",
+				"usweather_label",
+				"swissmeteo_label",
+				"metoffice_label",
+				"openweathermap_onecall_label",
+				"pirateweather_label",
+				"visualcrossing_label",
+				"weatherbit_label",
+				"tomorrowio_label",
+				"accuweather_label",
+				"weatherunderground_label",
+				"openweathermap_onecall_apikey",
+				"metoffice_forecast_apikey",
+				"metoffice_observations_apikey",
+				"pirateweather_apikey",
+				"visualcrossing_apikey",
+				"weatherbit_apikey",
+				"tomorrowio_apikey",
+				"accuweather_apikey",
+				"weatherunderground_apikey",
 				"refreshInterval",
 				"forecastDays",
 				"forecastHours",
@@ -215,11 +238,148 @@
 			"Weather Underground (key needed)": "WeatherUnderground"
 		}
 	},
+	"openmeteo_label": {
+		"type": "label",
+		"description": "Open-Meteo is a free weather service that does not require an API key. It provides global weather data with various parameters and forecast lengths. More information can be found at open-meteo.com.",
+		"dependency": "dataService=OpenMeteo"
+	},
+	"openweathermap_label": {
+		"type": "label",
+		"description": "Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with headquarters in London UK. Read more about the service at openweathermap.org.",
+		"dependency": "dataService=OpenWeatherMap_Open"
+	},
+	"metnorway_label": {
+		"type": "label",
+		"description": "Free meteorological data and forecasts from the Norwegian Meteorological Institute founded in 1866. Read more about the service at www.met.no/en.\n\n - Nowcast (Immediate precipitation and granular observations) is not available outside Norway. In that case, observations are shown for the next hour.\n - Daily forecasts are generated from 6 hour forecasts (for every hour), so there is a possibility that they are inaccurate sometimes.\n - Alerts are only available in Norway",
+		"dependency": "dataService=MetNorway"
+	},
+	"dmidenmark_label": {
+		"type": "label",
+		"description": "The Danish Meteorological Institute formed in 1872 and makes weather forecasts and observations for Denmark, Greenland, and the Faroe Islands. Read more about the institute at www.dmi.dk.",
+		"dependency": "dataService=DanishMI"
+	},
+	"deutscherwetterdienst_label": {
+		"type": "label",
+		"description": "German National Weather Provider. Read more about the institute at www.dwd.de.",
+		"dependency": "dataService=DeutscherWetterdienst"
+	},
+	"usweather_label": {
+		"type": "label",
+		"description": "The National Weather Service in the USA is a federal government agency formed in 1861. Read more about the service at www.weather.gov.\n\n - Only covers the US\n - Sometimes it takes 10-15 seconds to obtain weather, please be patient when it loads up the first time\n - Observations are quite spotty so it combines multiple observation stations if needed in a 50km area",
+		"dependency": "dataService=US Weather"
+	},
+	"swissmeteo_label": {
+		"type": "label",
+		"description": "Swiss national weather service. Read more about the service at www.meteoswiss.admin.ch.\n\n - Only covers Switzerland\n - You need to use your post code instead of coordinates",
+		"dependency": "dataService=Swiss Meteo"
+	},
+	"metoffice_label": {
+		"type": "label",
+		"description": "The Meteorological Office, abbreviated as the Met Office, is the UK's national weather service founded in 1854. Read more about the service at www.metoffice.gov.uk.\n\n - You only have 360 calls a day free, the applet uses 2 at a time so minimum of 15 minutes refresh time is recommended.\n - To get API keys, register at datahub.metoffice.gov.uk",
+		"dependency": "dataService=Met Office UK"
+	},
+	"openweathermap_onecall_label": {
+		"type": "label",
+		"description": "Version of OpenWeatherMap that supports more features (as before), but needs an API key. Make sure your call limit is 1000 calls/day to avoid charges. Read more about the service at openweathermap.org/api/one-call-api.",
+		"dependency": "dataService=OpenWeatherMap_OneCall"
+	},
+	"pirateweather_label": {
+		"type": "label",
+		"description": "Pirate Weather is a free open source weather service that provides weather data that is compatible with the Dark Sky API. Read more about the service at pirateweather.net.",
+		"dependency": "dataService=PirateWeather"
+	},
+	"visualcrossing_label": {
+		"type": "label",
+		"description": "Weather service from Visual Crossing Corporation founded in 2003 with headquarters in USA and Germany. Read more about the service at visualcrossing.com.\n\n - Provides 1000 Free calls a day\n - Needs an API key",
+		"dependency": "dataService=Visual Crossing"
+	},
+	"weatherbit_label": {
+		"type": "label",
+		"description": "Historical and Forecast Weather data service provided by Weatherbit LLC in the USA.. Read more about the service at weatherbit.io.\n\n - At least 1 hour refresh rate is recommended, otherwise you might exceed you daily quota. The Free API subscription is limited to 50 calls per day.\n - Needs an API key\n - Using alerts will increase call usage by 33%\n - Hourly Weather forecast is supported but requires a non-free account.",
+		"dependency": "dataService=Weatherbit"
+	},
+	"tomorrowio_label": {
+		"type": "label",
+		"description": "Meteorological data from American weather technology company with headquarters in Boston since 2016. Read more about the service at tomorrow.io.\n\n - Free plan includes 1000 calls per day\n - Needs an API key",
+		"dependency": "dataService=Tomorrow.io"
+	},
+	"accuweather_label": {
+		"type": "label",
+		"description": "Online Service from company AccuWeather Inc, founded in 1962 with headquarters in the US, provides a global weather source. Read more about the service at accuweather.com.\n\n - With the free plan, there are only a very limited number of calls for a day, remaining number of calls are shown in the applet tooltip\n - Needs an API key",
+		"dependency": "dataService=AccuWeather"
+	},
+	"weatherunderground_label": {
+		"type": "label",
+		"description": "Weather Underground is a privately owned, web-based weather information company. It provides weather observations and forecasts in a large number of locations around the world. It's headquarters in Ann Arbor United States. Read more about the service at wunderground.com.\n\n - Only allows 1500 calls a day, so 15min refresh cycle is recommended\n - Needs an API key\n - Current weather condition come from forecast",
+		"dependency": "dataService=WeatherUnderground"
+	},
+	"metoffice_forecast_apikey": {
+		"type": "entry",
+		"default": "",
+		"description": "Forecasts API Key",
+		"dependency": "dataService=Met Office UK",
+		"tooltip": "Subscribe to 'Site Specific' -> 'Global Spot' Free plan to get this key."
+	},
+	"metoffice_observations_apikey": {
+		"type": "entry",
+		"default": "",
+		"description": "Observations API Key",
+		"dependency": "dataService=Met Office UK",
+		"tooltip": "Subscribe to 'Observations' -> 'Land Observations' Free plan to get this key."
+	},
+	"openweathermap_onecall_apikey": {
+		"type": "entry",
+		"default": "",
+		"description": "OpenWeatherMap OneCall API Key",
+		"dependency": "dataService=OpenWeatherMap_OneCall",
+		"tooltip": "Copy this from your account at openweathermap.org and paste it here."
+	},
+	"pirateweather_apikey": {
+		"type": "entry",
+		"default": "",
+		"description": "Pirate Weather API Key",
+		"dependency": "dataService=PirateWeather",
+		"tooltip": "Copy this from your account at pirateweather.net and paste it here."
+	},
+	"visualcrossing_apikey": {
+		"type": "entry",
+		"default": "",
+		"description": "Visual Crossing API Key",
+		"dependency": "dataService=Visual Crossing",
+		"tooltip": "Copy this from your account at visualcrossing.com and paste it here."
+	},
+	"weatherbit_apikey": {
+		"type": "entry",
+		"default": "",
+		"description": "Weatherbit API Key",
+		"dependency": "dataService=Weatherbit",
+		"tooltip": "Copy this from your account at weatherbit.io and paste it here."
+	},
+	"tomorrowio_apikey": {
+		"type": "entry",
+		"default": "",
+		"description": "Tomorrow.io API Key",
+		"dependency": "dataService=Tomorrow.io",
+		"tooltip": "Copy this from your account at tomorrow.io and paste it here."
+	},
+	"accuweather_apikey": {
+		"type": "entry",
+		"default": "",
+		"description": "AccuWeather API Key",
+		"dependency": "dataService=AccuWeather",
+		"tooltip": "Copy this from your account at developer.accuweather.com and paste it here."
+	},
+	"weatherunderground_apikey": {
+		"type": "entry",
+		"default": "",
+		"description": "Weather Underground API Key",
+		"dependency": "dataService=WeatherUnderground",
+		"tooltip": "Copy this from your account at www.wunderground.com/weather/api and paste it here."
+	},
 	"apiKey": {
 		"type": "entry",
 		"default": "",
-		"description": "API Key",
-		"tooltip": "Copy this from your account of the used Data service and paste it here."
+		"description": "API Key - Hidden, only for backwards compatibility"
 	},
 	"manualLocation": {
 		"type": "checkbox",

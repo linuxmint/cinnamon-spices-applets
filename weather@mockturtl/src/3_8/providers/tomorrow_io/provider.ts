@@ -2,24 +2,28 @@ import { DateTime } from "luxon";
 import { Services, type Config } from "../../config";
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
-import type { AlertData, Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../../weather-data";
+import type { AlertData, Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData } from "../../weather-data";
 import { CelsiusToKelvin, IsNight, _ } from "../../utils";
-import { BaseProvider } from "../BaseProvider";
 import type { TomorrowIoAlertsResponse } from "./alerts";
-import type { LocationData } from "../../types";
+import type { LocationData, WeatherProvider } from "../../types";
 import { ErrorHandler } from "../../lib/services/error_handler";
 import { PointInsidePolygon } from "../../lib/polygons";
 
-export class ClimacellV4 extends BaseProvider {
+export interface ClimacellV4Options {
+	apiKey: string;
+}
+
+export class ClimacellV4 implements WeatherProvider<Services.Tomorrow_IO, ClimacellV4Options> {
 	public readonly remainingCalls: number | null = null;
 	public readonly needsApiKey: boolean = true;
 	public readonly prettyName: string = _("Tomorrow.io");
-	public readonly name: Services = Services.Tomorrow_IO;
+	public readonly name = Services.Tomorrow_IO;
 	public readonly maxForecastSupport: number = 15;
 	public readonly maxHourlyForecastSupport: number = 108;
 	public readonly website: string = "https://www.tomorrow.io/";
 	public readonly supportHourlyPrecipChance = true;
 	public readonly supportHourlyPrecipVolume = true;
+	public readonly locationType = "coordinates";
 
 	private url = "https://data.climacell.co/v4/timelines";
 
@@ -31,11 +35,11 @@ export class ClimacellV4 extends BaseProvider {
 		fields: "temperature,temperatureMax,temperatureMin,pressureSurfaceLevel,weatherCode,sunsetTime,dewPoint,sunriseTime,precipitationType,precipitationProbability,precipitationIntensity,windDirection,windSpeed,humidity,temperatureApparent"
 	}
 
-	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config, options: ClimacellV4Options): Promise<WeatherData | null> {
 		if (loc == null)
 			return null;
 
-		this.params.apikey = config.ApiKey;
+		this.params.apikey = options.apiKey;
 		this.params.location = loc.lat + "," + loc.lon;
 
 		const response = await HttpLib.Instance.LoadJsonSimple<ClimacellV4Payload>({
@@ -53,7 +57,7 @@ export class ClimacellV4 extends BaseProvider {
 			return null;
 
 		if (config._showAlerts) {
-			const alerts = await this.GetAlerts(loc, cancellable, config);
+			const alerts = await this.GetAlerts(loc, cancellable, options);
 			if (alerts != null)
 				weather.alerts = alerts;
 		}
@@ -61,12 +65,12 @@ export class ClimacellV4 extends BaseProvider {
 		return weather;
 	}
 
-	private async GetAlerts(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<AlertData[] | null> {
+	private async GetAlerts(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, options: ClimacellV4Options): Promise<AlertData[] | null> {
 		const response = await HttpLib.Instance.LoadJsonSimple<TomorrowIoAlertsResponse>({
 			url: "https://api.tomorrow.io/v4/events",
 			cancellable,
 			params: {
-				apikey: config.ApiKey,
+				apikey: options.apiKey,
 				location: loc.lat + "," + loc.lon,
 				buffer: "1",
 				// This is a bit hacky, I should support this in httpLib
@@ -126,7 +130,7 @@ export class ClimacellV4 extends BaseProvider {
 				lon: loc.lon
 			},
 			date: DateTime.fromISO(current.startTime, { zone: loc.timeZone }),
-			condition: this.ResolveCondition(current.values.weatherCode, IsNight({sunrise, sunset}, now)),
+			condition: this.ResolveCondition(current.values.weatherCode, IsNight({ sunrise, sunset }, now)),
 			humidity: current.values.humidity,
 			pressure: current.values.pressureSurfaceLevel,
 			temperature: CelsiusToKelvin(current.values.temperature),
@@ -171,7 +175,7 @@ export class ClimacellV4 extends BaseProvider {
 			date = date.set({ minute: 0, second: 0, millisecond: 0 });
 
 			const hour: HourlyForecastData = {
-				condition: this.ResolveCondition(element.values.weatherCode, IsNight({sunrise, sunset}, date)),
+				condition: this.ResolveCondition(element.values.weatherCode, IsNight({ sunrise, sunset }, date)),
 				date,
 				temp: CelsiusToKelvin(element.values.temperature)
 			};

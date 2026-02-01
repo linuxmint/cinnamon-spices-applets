@@ -28,7 +28,7 @@
     "eslint-plugin-unicorn": "^53.0.0",
     "terser-webpack-plugin": "5.3.6",
     "ts-loader": "9.4.2",
-    "typescript": "5.4.5",
+    "typescript": "5.9.3",
     "typescript-eslint": "^7.10.0",
     "webpack": "5.75.0",
     "webpack-bundle-analyzer": "4.4.2",
