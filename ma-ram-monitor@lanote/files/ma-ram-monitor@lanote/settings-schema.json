@@ -1,0 +1,134 @@
+{
+  "layout_header": {
+    "type": "section",
+    "description": "General Settings"
+  },
+  "mem-label": {
+    "type": "entry",
+    "default": "RAM: ",
+    "description": "Text label",
+    "tooltip": "Enter custom text to show in the panel."
+  },
+  "frequency": {
+    "type": "combobox",
+    "default": "1.0",
+    "options": {
+      "0.5": "0.5",
+      "1.0": "1.0",
+      "2.0": "2.0",
+      "3.0": "3.0",
+      "4.0": "4.0",
+      "5.0": "5.0",
+      "10.0": "10.0"
+    },
+    "description": "Update frequency (seconds)",
+    "tooltip": "Determines how often the applet checks RAM usage data from the system."
+  },
+
+  "layout_display": {
+    "type": "section",
+    "description": "Visual Layout"
+  },
+  "show-mode": {
+    "type": "combobox",
+    "default": "used",
+    "description": "Display mode",
+    "tooltip": "Choose whether to monitor used memory or remaining available memory.",
+    "options": {
+      "Used RAM": "used",
+      "Available RAM": "available"
+    }
+  },
+  "show-value": {
+    "type": "switch",
+    "default": true,
+    "description": "Show current memory",
+    "tooltip": "Toggle whether to display actual memory amount on the panel."
+  },
+  "show-total": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show total memory",
+    "tooltip": "Toggle whether to display total RAM capacity next to the current usage.",
+    "dependency": "show-value"
+  },
+  "show-percent": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show current memory as percentage",
+    "tooltip": "Toggle whether to display memory usage as a percentage."
+  },
+  "unit-type": {
+    "type": "combobox",
+    "default": "GiB",
+    "description": "Unit type",
+    "tooltip": "Toggle whether to display memory usage in GB/GiB.",
+    "options": {
+      "GiB (binary: 1024)": "GiB",
+      "GB (decimal: 1000)": "GB"
+    },
+    "dependency": "show-value"
+  },
+  "use-monospace": {
+    "type": "switch",
+    "default": false,
+    "description": "Stable width (Monospace font)",
+    "tooltip": "Forces a fixed-width font and prevents text jumping."
+  },
+  "padding-size": {
+    "type": "spinbutton",
+    "default": 4,
+    "min": 1,
+    "max": 10,
+    "step": 1,
+    "units": "chars",
+    "description": "Reserved numeric spaces",
+    "tooltip": "How many characters to reserve for numbers (e.g. 4 for '99.9').",
+    "dependency": "use-monospace"
+  },
+
+  "layout_alerts": {
+    "type": "section",
+    "description": "Warnings"
+  },
+  "warning-usage": {
+    "type": "spinbutton",
+    "default": 90,
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Warning: usage above",
+    "tooltip": "Triggers a blinking visual alert when RAM usage exceeds this percentage.",
+    "dependency": "show-mode=used"
+  },
+  "warning-available": {
+    "type": "spinbutton",
+    "default": 10,
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Warning: available below",
+    "tooltip": "Triggers a blinking visual alert when available RAM falls below this percentage.",
+    "dependency": "show-mode=available"
+  },
+
+  "layout_interaction": {
+    "type": "section",
+    "description": "Interaction"
+  },
+  "enable-click-launch": {
+    "type": "switch",
+    "default": true,
+    "description": "Launch system monitor on click",
+    "tooltip": "Left-clicking the applet will open the default system monitor."
+  },
+  "custom-command": {
+    "type": "entry",
+    "default": "gnome-system-monitor",
+    "description": "System monitor command",
+    "tooltip": "Enter the command to be executed (e.g., gnome-system-monitor or xterm -e htop).",
+    "dependency": "enable-click-launch"
+  }
+}
