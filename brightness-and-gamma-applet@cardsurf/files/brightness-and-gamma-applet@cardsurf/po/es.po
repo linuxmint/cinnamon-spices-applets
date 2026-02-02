@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-01 21:29+0100\n"
-"PO-Revision-Date: 2026-01-21 14:34-0300\n"
+"PO-Revision-Date: 2026-02-01 21:16-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -72,24 +72,23 @@ msgstr "Atardecer"
 #. 6.6->settings-schema.json->preset_list_temp->columns->title
 #. 6.6/applet.js:50 6.6/lib/appletGui.js:218
 msgid "Temperature"
-msgstr ""
+msgstr "Temperatura"
 
 #. 6.6/applet.js:52
 msgid "Standard values"
-msgstr ""
+msgstr "Valores estándar"
 
 #. 6.6/applet.js:53
 msgid "Day-time comfort"
-msgstr ""
+msgstr "Comodidad durante el día"
 
 #. 6.6/applet.js:54
 msgid "Night-time comfort"
-msgstr ""
+msgstr "Comodidad nocturna"
 
 #. 6.6/applet.js:55
-#, fuzzy
 msgid "All values at maximum"
-msgstr "Todos los valores establecidos al 100%"
+msgstr "Todos los valores al máximo"
 
 #. 6.6/applet.js:812 6.4/applet.js:760
 msgid "Toggle On / Off"
@@ -407,48 +406,41 @@ msgid "Way to set this applet off"
 msgstr "Cómo activar este applet"
 
 #. 6.6->settings-schema.json->gamma_or_temp->options
-#, fuzzy
 msgid "Gamma Red-Green-Blue"
-msgstr ""
-"Gamma\n"
-"Verde"
+msgstr "Gamma Rojo-Verde-Azul"
 
 #. 6.6->settings-schema.json->gamma_or_temp->options
 msgid "Screen Temperature (K)"
-msgstr ""
+msgstr "Temperatura de la pantalla (K)"
 
 #. 6.6->settings-schema.json->gamma_or_temp->description
 msgid "Setting Method"
-msgstr ""
+msgstr "Método de configuración"
 
 #. 6.6->settings-schema.json->minimum_temp->units
 #. 6.6->settings-schema.json->maximum_temp->units
 msgid "K"
-msgstr ""
+msgstr "K"
 
 #. 6.6->settings-schema.json->minimum_temp->description
-#, fuzzy
 msgid "Minimum temperature"
-msgstr "Gama de colores mínima"
+msgstr "Temperatura mínima"
 
 #. 6.6->settings-schema.json->minimum_temp->tooltip
-#, fuzzy
 msgid "A minimum value of temperature. Value from 700 K to 6500 K."
-msgstr "El nivel mínimo de gamma de colores oscila entre el 10% y el 50%."
+msgstr "Valor mínimo de temperatura. Valor entre 700 K y 6500 K."
 
 #. 6.6->settings-schema.json->maximum_temp->description
-#, fuzzy
 msgid "Maximum temperature"
-msgstr "Gama máxima de colores"
+msgstr "Temperatura máxima"
 
 #. 6.6->settings-schema.json->maximum_temp->tooltip
-#, fuzzy
 msgid "A maximum value of temperature. Value from 6500 K to 22000 K."
-msgstr "El nivel máximo de gama de colores oscila entre el 51% y el 200%."
+msgstr "Valor máximo de temperatura. Valor entre 6500 K y 22000 K."
 
 #. 6.6->settings-schema.json->options_type->options
 msgid "Gamma / Temperature"
-msgstr ""
+msgstr "Gamma / Temperatura"
 
 #. 6.6->settings-schema.json->baga_icon->options
 #. 6.4->settings-schema.json->baga_icon->options
@@ -579,4 +571,4 @@ msgstr "Aplicar todos los cambios"
 
 #. 6.6->settings-schema.json->values_reload->description
 msgid "Apply the selected method"
-msgstr ""
+msgstr "Aplicar el método seleccionado"
