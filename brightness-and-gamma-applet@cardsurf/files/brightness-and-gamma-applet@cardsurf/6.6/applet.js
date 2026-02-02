@@ -364,6 +364,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ["preset_list_temp", this.on_preset_list_changed],
                         ["preset_selected_keybind", null],
                         ["baga_icon", this.on_gui_icon_changed],
+                        ["show_shortcuts_in_menu", null],
                         ["last_values_string_temp", null],
                         ["last_values_string", null] ]) {
                 this.settings.bind(property_name, property_name, callback, null);
@@ -912,7 +913,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
             for (let preset of this.preset_list_temp) {
                 counterShortcut++;
                 if (preset.show) {
-                    let menuItem = this.menu_item_presets.menu.addAction(preset["name"], () => {
+                    let menuItem = this.menu_item_presets.menu.addAction(_(preset["name"]), () => {
                         this._up_to_preset(preset, menuItem);
                     });
                     if (preset["shortcut"] != null && preset["shortcut"].length > 2) {
@@ -932,7 +933,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
             for (let preset of this.preset_list) {
                 counterShortcut++;
                 if (preset.show) {
-                    let menuItem = this.menu_item_presets.menu.addAction(preset["name"], () => {
+                    let menuItem = this.menu_item_presets.menu.addAction(_(preset["name"]), () => {
                         this._up_to_preset(preset, menuItem);
                     });
                     if (preset["shortcut"] != null && preset["shortcut"].length > 2) {
@@ -1135,7 +1136,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                     this.screen_temp == preset["temperature"]
                 ) {
                     tips.unshift("—".repeat(MAX_TR_LENGTH + 6));
-                    tips.unshift(preset["name"]);
+                    tips.unshift(_(preset["name"]));
                 }
             }
         } else {
@@ -1146,7 +1147,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                     this.gamma_blue == preset["gamma_blue"]
                 ) {
                     tips.unshift("—".repeat(MAX_TR_LENGTH + 6));
-                    tips.unshift(preset["name"]);
+                    tips.unshift(_(preset["name"]));
                 }
             }
         }

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-02-01 21:29+0100\n"
+"POT-Creation-Date: 2026-02-02 14:48+0100\n"
 "PO-Revision-Date: 2017-11-18 22:47+0200\n"
 "Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
@@ -27,11 +27,11 @@ msgstr "Следните пакети не са намерени:"
 msgid "Please install the above packages to use the applet"
 msgstr "Моля инсталирайте посочените пакети, за да използвате аплета"
 
-#. applet.js:564 6.6/applet.js:962 6.4/applet.js:855
+#. applet.js:564 6.6/applet.js:963 6.4/applet.js:855
 msgid "Screen"
 msgstr "Екран"
 
-#. applet.js:647 6.6/applet.js:1045 6.4/applet.js:938
+#. applet.js:647 6.6/applet.js:1046 6.4/applet.js:938
 msgid "Outputs"
 msgstr "Изходи:"
 
@@ -61,11 +61,11 @@ msgstr "Зелено"
 msgid "Blue"
 msgstr "Синьо"
 
-#. 6.6/applet.js:48 6.6/applet.js:1127 6.4/applet.js:47 6.4/applet.js:1009
+#. 6.6/applet.js:48 6.6/applet.js:1128 6.4/applet.js:47 6.4/applet.js:1009
 msgid "Sunrise"
 msgstr ""
 
-#. 6.6/applet.js:49 6.6/applet.js:1129 6.4/applet.js:48 6.4/applet.js:1011
+#. 6.6/applet.js:49 6.6/applet.js:1130 6.4/applet.js:48 6.4/applet.js:1011
 msgid "Sunset"
 msgstr ""
 
@@ -90,21 +90,21 @@ msgstr ""
 msgid "All values at maximum"
 msgstr ""
 
-#. 6.6/applet.js:812 6.4/applet.js:760
+#. 6.6/applet.js:813 6.4/applet.js:760
 msgid "Toggle On / Off"
 msgstr ""
 
-#. 6.6/applet.js:822 6.4/applet.js:770
+#. 6.6/applet.js:823 6.4/applet.js:770
 msgid "Reload"
 msgstr ""
 
-#. 6.6/applet.js:832 6.4/applet.js:780
+#. 6.6/applet.js:833 6.4/applet.js:780
 msgid "Configure Presets"
 msgstr ""
 
 #. 6.6->settings-schema.json->page_presets->title
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.6/applet.js:909 6.4/applet.js:824
+#. 6.6/applet.js:910 6.4/applet.js:824
 msgid "Presets"
 msgstr ""
 
@@ -519,6 +519,10 @@ msgstr ""
 #. 6.6->settings-schema.json->preset_list_temp->columns->title
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Hotkey"
+msgstr ""
+
+#. 6.6->settings-schema.json->show_shortcuts_in_menu->description
+msgid "Show shortcuts in the menu"
 msgstr ""
 
 #. 6.6->settings-schema.json->preset_selected_keybind->description

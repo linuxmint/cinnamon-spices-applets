@@ -47,6 +47,7 @@
             "type": "section",
             "title": "Gui",
             "keys": [
+                "show_shortcuts_in_menu",
                 "options_type",
                 "baga_icon"
             ]
@@ -58,6 +59,7 @@
                 "preset_label",
                 "preset_list",
                 "preset_list_temp",
+                "show_shortcuts_in_menu",
                 "preset_selected_keybind",
                 "preset_copy_keybind",
                 "preset_sunrise_sunset_button",
@@ -355,6 +357,12 @@
                 "start_at_sunset": false
             }
         ]
+    },
+    
+    "show_shortcuts_in_menu": {
+        "type": "switch",
+        "default": false,
+        "description": "Show shortcuts in the menu"
     },
     
     "preset_selected_keybind": {
