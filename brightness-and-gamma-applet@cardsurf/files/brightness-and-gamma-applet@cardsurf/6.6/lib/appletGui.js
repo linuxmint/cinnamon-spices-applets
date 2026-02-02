@@ -238,10 +238,17 @@ class MenuSliders {
 
     _init_items_presets() {
         this.section_choices.removeAll();
+        let displayShortcuts = this.applet.show_shortcuts_in_menu;
+        var shortcut = "";
         if (this.applet.useScreenTemp) {
             for (let preset of this.applet.preset_list_temp) {
                 if (preset.show) {
-                    let menuItem = this.section_choices.addAction(_(preset["name"]), () => {
+                    shortcut = "";
+                    if (displayShortcuts && preset["shortcut"].length > 2) {
+                        shortcut = preset["shortcut"].split("::")[0];
+                        if (shortcut.length > 0) shortcut = "\n " + shortcut;
+                    }
+                    let menuItem = this.section_choices.addAction(_(preset["name"]) + shortcut, () => {
                         this.applet.target_brightness = Math.max(preset["brightness"], this.applet.minimum_brightness);
                         this.applet.target_temperature = Math.max(preset["temperature"], this.applet.minimum_temp);
                         let _interval = setInterval( () => {
@@ -277,7 +284,12 @@ class MenuSliders {
         } else {
             for (let preset of this.applet.preset_list) {
                 if (preset.show) {
-                    let menuItem = this.section_choices.addAction(_(preset["name"]), () => {
+                    shortcut = "";
+                    if (displayShortcuts && preset["shortcut"].length > 2) {
+                        shortcut = preset["shortcut"].split("::")[0];
+                        if (shortcut.length > 0) shortcut = "\n " + shortcut;
+                    }
+                    let menuItem = this.section_choices.addAction(_(preset["name"]) + shortcut, () => {
                         this.applet.target_brightness = Math.max(preset["brightness"], this.applet.minimum_brightness);
                         this.applet.target_gamma_red = Math.max(preset["gamma_red"], this.applet.minimum_gamma);
                         this.applet.target_gamma_green = Math.max(preset["gamma_green"], this.applet.minimum_gamma);
