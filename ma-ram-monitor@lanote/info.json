@@ -2,6 +2,6 @@
   "uuid": "ma-ram-monitor@lanote",
   "name": "Moderately Advanced RAM Monitor",
   "description": "A customizable RAM monitor. Reads memory statistics directly from the kernel's virtual filesystem (/proc/meminfo) for maximum accuracy and low overhead.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "notoyeah" 
 }
