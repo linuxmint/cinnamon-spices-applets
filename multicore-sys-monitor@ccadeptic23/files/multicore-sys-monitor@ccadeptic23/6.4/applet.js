@@ -21,6 +21,7 @@ const {
 } = imports.ui.extension; //Extension
 
 const { to_string } = require("./lib/tostring");
+const { readFileAsync } = require("./lib/readFileAsync");
 const Graphs = require('./lib/Graphs');
 const {
   timeout_add,
@@ -484,18 +485,9 @@ class MCSM extends Applet.IconApplet {
                 posConfigure = i;
             }
         }
-        //~ global.log("posConfigure: " + posConfigure);
         if (posConfigure != -1) {
             menuChildren[posConfigure].destroy();
-            //~ let context_menu_item_configure = new PopupMenu.PopupSubMenuMenuItem(_("Configure..."));
             this.context_menu_item_configure = new PopupMenu.PopupSubMenuMenuItem(_("Configure..."));
-            //~ context_menu_item_configure.menu.addAction(_("General"), () => { this.configureApplet(0) });
-            //~ context_menu_item_configure.menu.addAction(_("CPU"), () => { this.configureApplet(1) });
-            //~ context_menu_item_configure.menu.addAction(_("Memory"), () => { this.configureApplet(2) });
-            //~ context_menu_item_configure.menu.addAction(_("Network"), () => { this.configureApplet(3) });
-            //~ context_menu_item_configure.menu.addAction(_("Disk IO"), () => { this.configureApplet(4) });
-            //~ context_menu_item_configure.menu.addAction(_("Disk Usage"), () => { this.configureApplet(5) });
-            //~ context_menu_item_configure.menu.addAction(_("Colors"), () => { this.configureApplet(6) });
             this.context_menu_item_configure.menu.addAction(_("General"), () => { this.configureApplet(0) });
             this.context_menu_item_configure.menu.addAction(_("CPU"), () => { this.configureApplet(1) });
             this.context_menu_item_configure.menu.addAction(_("Memory"), () => { this.configureApplet(2) });
@@ -503,7 +495,6 @@ class MCSM extends Applet.IconApplet {
             this.context_menu_item_configure.menu.addAction(_("Disk IO"), () => { this.configureApplet(4) });
             this.context_menu_item_configure.menu.addAction(_("Disk Usage"), () => { this.configureApplet(5) });
             this.context_menu_item_configure.menu.addAction(_("Colors"), () => { this.configureApplet(6) });
-            //~ this._applet_context_menu.addMenuItem(context_menu_item_configure, posConfigure);
             this._applet_context_menu.addMenuItem(this.context_menu_item_configure, posConfigure);
         }
     }
@@ -585,9 +576,9 @@ class MCSM extends Applet.IconApplet {
         }
         var ret = "";
         if (GLib.file_test(NETWORK_DEVICES_STATUS_PATH, GLib.FileTest.EXISTS)) {
-            let [succes, status] = GLib.file_get_contents(NETWORK_DEVICES_STATUS_PATH);
-            status = to_string(status).trim();
-            ret += status;
+            readFileAsync(NETWORK_DEVICES_STATUS_PATH).then((status) => {
+                ret += status;
+            });
         } else {
             const net_dir_path = "/sys/class/net";
             const net_dir = Gio.file_new_for_path(net_dir_path);
@@ -595,9 +586,11 @@ class MCSM extends Applet.IconApplet {
             for (let child of children) {
                 let name = child.get_name();
                 let operstate_file_path = `${net_dir_path}/${name}/operstate`;
-                let [net_success, net_status] = GLib.file_get_contents(operstate_file_path);
-                net_status = to_string(net_status).trim();
-                ret += `${name}:${net_status} `;
+                
+                readFileAsync(operstate_file_path).then( (net_status) => {
+                    net_status = net_status.trim();
+                    ret += `${name}:${net_status} `;
+                });
             }
         }
         var returnedDevices = ret.trim().split(" ");
@@ -756,10 +749,8 @@ class MCSM extends Applet.IconApplet {
         if (!this.Mem_enabled) return;
         let old, duration;
         if (DEBUG) old = Date.now();
-        var contents = "";
-        let [success, contents_array] = GLib.file_get_contents("/proc/meminfo");
-        if (success) {
-            contents = to_string(contents_array);
+        
+        readFileAsync("/proc/meminfo").then((contents) => {
             var data = [];
             const lines = contents.split("\n");
             const p = 1024;
@@ -798,7 +789,7 @@ class MCSM extends Applet.IconApplet {
                 duration = Date.now() - old;
                 global.log(UUID + " - get_mem_info Duration: " + duration + " ms.");
             }
-        }
+        });
     }
 
     get_cpu_info() {
@@ -806,10 +797,8 @@ class MCSM extends Applet.IconApplet {
         if (!this.CPU_enabled) return;
         let old, duration;
         if (DEBUG) old = Date.now();
-        var contents = "";
-        let [success, contents_array] = GLib.file_get_contents("/proc/stat");
-        if (success) {
-            contents = to_string(contents_array);
+        
+        readFileAsync("/proc/stat").then((contents) => {
             var data = [];
             const lines = contents.split("\n");
             var ret = "";
@@ -883,11 +872,12 @@ class MCSM extends Applet.IconApplet {
             this.oldCPUvalues = values;
 
             this.multiCpuProvider.setData(data);
-        }
-        if (DEBUG) {
-            duration = Date.now() - old;
-            global.log(UUID + " - get_cpu_info Duration: " + duration + " ms.");
-        }
+            
+            if (DEBUG) {
+                duration = Date.now() - old;
+                global.log(UUID + " - get_cpu_info Duration: " + duration + " ms.");
+            }
+        });
     }
 
     get_net_info() {
@@ -999,44 +989,47 @@ class MCSM extends Applet.IconApplet {
             deviceGrans[d["id"]] = d["discGran"];
         }
         var data = [];
-        let diskstats = (to_string(GLib.file_get_contents("/proc/diskstats")[1])).trim().split("\n");
-        var sum_read = 0;
-        var sum_write = 0;
-        for (let line of diskstats) {
-            if (line.includes("loop")) continue;
-            line = line.trim();
-            line = line.replace(/\ +/g, " ");
-            let infos = line.split(" ");
-            let _dev = infos[2];
-            if (usedDevices.indexOf(_dev) < 0) continue;
-            let discGran = 1 * deviceGrans[_dev];
-            let [_read, _write] = [1 * infos[5] * discGran, 1 * infos[9] * discGran];
+        readFileAsync("/proc/diskstats").then( (result) => {
+            let diskstats = result.trim().split("\n");
+            
+            var sum_read = 0;
+            var sum_write = 0;
+            for (let line of diskstats) {
+                if (line.includes("loop")) continue;
+                line = line.trim();
+                line = line.replace(/\ +/g, " ");
+                let infos = line.split(" ");
+                let _dev = infos[2];
+                if (usedDevices.indexOf(_dev) < 0) continue;
+                let discGran = 1 * deviceGrans[_dev];
+                let [_read, _write] = [1 * infos[5] * discGran, 1 * infos[9] * discGran];
+                if (this.Disk_mergeAll) {
+                    sum_read = 1 * sum_read + _read;
+                    sum_write = 1 * sum_write + _write;
+                } else {
+                    data.push({
+                        "id": _dev,
+                        "name": deviceNames[_dev],
+                        "read": _read,
+                        "write": _write
+                    });
+                }
+    
+            }
             if (this.Disk_mergeAll) {
-                sum_read = 1 * sum_read + _read;
-                sum_write = 1 * sum_write + _write;
-            } else {
                 data.push({
-                    "id": _dev,
-                    "name": deviceNames[_dev],
-                    "read": _read,
-                    "write": _write
+                    "id": "Disks",
+                    "name": _("Disks"),
+                    "read": sum_read,
+                    "write": sum_write
                 });
             }
-
-        }
-        if (this.Disk_mergeAll) {
-            data.push({
-                "id": "Disks",
-                "name": _("Disks"),
-                "read": sum_read,
-                "write": sum_write
-            });
-        }
-        this.diskProvider.setData(data);
-        if (DEBUG) {
-            duration = Date.now() - old;
-            global.log(UUID + " - get_disk_info Duration: " + duration + " ms.");
-        }
+            this.diskProvider.setData(data);
+            if (DEBUG) {
+                duration = Date.now() - old;
+                global.log(UUID + " - get_disk_info Duration: " + duration + " ms.");
+            }
+        });
     }
 
     get_disk_usage() {
