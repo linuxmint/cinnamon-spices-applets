@@ -1210,8 +1210,8 @@ class BrightnessAndGamma extends Applet.IconApplet {
     update_xsct() {
         let xsct_temp = this.screen_temp;
         let xsct_brightness = Math.min(this.brightness / 100, 1.0);
-        //~ Util.spawnCommandLineAsync(`/usr/bin/env sh -c "xsct ${xsct_temp} ${xsct_brightness}"`);
-        Util.spawnCommandLineAsync(`xsct ${xsct_temp} ${xsct_brightness}`);
+        Util.spawnCommandLineAsync(`/usr/bin/env sh -c "${this.xsct_name} ${xsct_temp} ${xsct_brightness}"`);
+        //~ Util.spawnCommandLineAsync(`xsct ${xsct_temp} ${xsct_brightness}`);
     }
 
     is_screen_output_valid(output_index) {
