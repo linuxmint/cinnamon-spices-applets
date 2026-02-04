@@ -1,3 +1,6 @@
+### v3.0.2~20260203
+* Asynchronously change of Screen Temperature.
+
 ### v3.0.1~20260202
 * Now can display shortcuts in the menu.
 * Improves translation.

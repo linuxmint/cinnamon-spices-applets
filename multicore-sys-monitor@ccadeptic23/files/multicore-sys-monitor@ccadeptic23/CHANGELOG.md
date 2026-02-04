@@ -1,3 +1,7 @@
+### v3.4.0~20260203
+  * Smoother reading of most system data.
+  * Uses readFileAsync module.
+
 ### v3.3.0~20260106
   * Better takes into account HiDPI display.
   * Changes graph height in pixels with % of panel height.
