@@ -1,1 +1,5 @@
-{ "author": "kalin91", "license": "GPL-3.0" }
+{
+  "author": "kalin91",
+  "license": "GPL-3.0",
+  "source_repo": "https://github.com/kalin91/nvidia-applet"
+}
