@@ -39,8 +39,8 @@ MyApplet.prototype = {
         this._tickerLoop();
         this._setWidth();
 
-        // refresh every X seconds
-        this._refreshLoop = Mainloop.timeout_add_seconds(this.update_interval * 60, Lang.bind(this, this._updateFeed));
+       
+        
     },
 
     _setupSettings: function () {
@@ -80,11 +80,13 @@ MyApplet.prototype = {
 
     _updateFeed: function () {
         // Collect news from all sources
+        if (this._refreshLoop) Mainloop.source_remove(this._refreshLoop);
         this._allNews = [];
         let sources = this.news_sources || [];
         if (!sources.length) {
             this._tickerText = _("No RSS source configured");
             this._buildMenu();
+            this._refreshLoop = Mainloop.timeout_add_seconds(60, Lang.bind(this, this._updateFeed));
             return;
         }
 
@@ -114,6 +116,7 @@ MyApplet.prototype = {
                             link: link,
                             date: dateObj,
                             source: source.label || "RSS"
+                            
                         });
                     });
                 } catch (e) {
@@ -128,10 +131,8 @@ MyApplet.prototype = {
                 }
             });
         });
-        this._refreshLoop = Mainloop.timeout_add_seconds(this.update_interval * 60, () => {
-    this._updateFeed();
-    return true;
-    });
+     let interval = Math.max(1, this.update_interval) * 60; // En az 1 dakika
+        this._refreshLoop = Mainloop.timeout_add_seconds(interval, Lang.bind(this, this._updateFeed));
     },
 
     _buildMenu: function () {
