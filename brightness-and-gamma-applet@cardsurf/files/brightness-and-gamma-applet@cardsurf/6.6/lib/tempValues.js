@@ -20,7 +20,7 @@ function to_last_values_row_temp(string) {
     let screen_name = values[TempLastValuesRow.ScreenNameColumnIndex];
     let output_indexes_string = values[TempLastValuesRow.OutputIndexesStringColumnIndex];
     let brightness = parseInt(values[TempLastValuesRow.BrightnessColumnIndex]);
-    let temperature = (values[TempLastValuesRow.TemperatureColumnIndex] != null) ? parseInt(values[LastValuesRow.TemperatureColumnIndex]) : 6500;
+    let temperature = (values[TempLastValuesRow.TemperatureColumnIndex] != null) ? parseInt(values[TempLastValuesRow.TemperatureColumnIndex]) : 6500;
     let row = new TempLastValuesRow(screen_name, output_indexes_string, brightness, temperature);
     return row;
 };

@@ -601,6 +601,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         this.gamma_blue = 100;
                         this.update_xrandr();
                     }
+                    this.save_last_values();
             }
         } else {
             this.is_running = true;
