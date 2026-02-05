@@ -40,6 +40,11 @@ def validate_xlet(uuid):
         if len(glob.glob("files/*/po/*.pot")) > 1:
             raise CheckError(f"[{uuid}] Too many .pot files!")
 
+        # Check if there are any improperly named file(s)
+        for file in glob.glob("files/*/po/*"):
+            if not (file.endswith(".po") or file.endswith(".pot")):
+                raise CheckError(f"[{uuid}] Invalid file found in translation directory: {file}")
+
         found = False
         for root, dirs, files in os.walk("files/%s" % uuid):
             if any(ext.endswith(".po") for ext in files) and not any(ext.endswith(".pot") for ext in files):
