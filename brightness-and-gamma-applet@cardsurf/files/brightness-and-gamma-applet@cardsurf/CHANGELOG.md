@@ -1,3 +1,9 @@
+### v3.0.3~20260204
+* Bug fix: xsct now launches correctly on certain platforms.
+
+### v3.0.2~20260203
+* Asynchronously change of Screen Temperature.
+
 ### v3.0.1~20260202
 * Now can display shortcuts in the menu.
 * Improves translation.
