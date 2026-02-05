@@ -128,7 +128,10 @@ MyApplet.prototype = {
                 }
             });
         });
-         return true;
+        this._refreshLoop = Mainloop.timeout_add_seconds(this.update_interval * 60, () => {
+    this._updateFeed();
+    return true;
+    });
     },
 
     _buildMenu: function () {
