@@ -1,3 +1,6 @@
+### v3.0.4~20260205
+* Minor bug fix.
+
 ### v3.0.3~20260204
 * Bug fix: xsct now launches correctly on certain platforms.
 
