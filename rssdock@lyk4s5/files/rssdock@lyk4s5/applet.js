@@ -131,7 +131,8 @@ MyApplet.prototype = {
                 }
             });
         });
-     let interval = Math.max(1, this.update_interval) * 60; // En az 1 dakika
+        // refresh every X seconds
+     let interval = Math.max(1, this.update_interval) * 60; 
         this._refreshLoop = Mainloop.timeout_add_seconds(interval, Lang.bind(this, this._updateFeed));
     },
 
