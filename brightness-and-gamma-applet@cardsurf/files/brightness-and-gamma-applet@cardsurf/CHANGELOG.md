@@ -1,3 +1,7 @@
+### v3.1.0~20260205
+* Corrects errors that occur when changing methods.
+* Corrects errors due to translations.
+
 ### v3.0.4~20260205
 * Minor bug fix.
 
