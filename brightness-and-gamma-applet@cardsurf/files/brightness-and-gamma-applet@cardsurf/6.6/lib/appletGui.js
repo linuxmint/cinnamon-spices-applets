@@ -244,18 +244,19 @@ class MenuSliders {
             for (let preset of this.applet.preset_list_temp) {
                 if (preset.show) {
                     shortcut = "";
-                    if (displayShortcuts && preset["shortcut"].length > 2) {
+                    if (displayShortcuts && preset["shortcut"] && preset["shortcut"].length > 2) {
                         shortcut = preset["shortcut"].split("::")[0];
                         if (shortcut.length > 0) shortcut = "\n " + shortcut;
                     }
-                    let menuItem = this.section_choices.addAction(_(preset["name"]) + shortcut, () => {
-                        this.applet.target_brightness = Math.max(preset["brightness"], this.applet.minimum_brightness);
-                        this.applet.target_temperature = Math.max(preset["temperature"], this.applet.minimum_temp);
+                    let menuItem = this.section_choices.addAction(preset["name"] + shortcut, () => {
+                        this.applet.target_brightness = Math.min(Math.max(preset["brightness"], this.applet.minimum_brightness), this.applet.maximum_brightness);
+                        this.applet.target_temperature = Math.min(Math.max(preset["temperature"], this.applet.minimum_temp), this.applet.maximum_temp);
                         let _interval = setInterval( () => {
                             if (this.applet.target_brightness === this.applet.brightness &&
                                 this.applet.target_temperature ===  this.applet.screen_temp
                             ) {
                                 clearInterval(_interval);
+                                this.save_last_values();
                             }
                             this.applet.brightness += Math.sign(this.applet.target_brightness - this.applet.brightness);
                             let diff_temp = this.applet.target_temperature - this.applet.screen_temp;
@@ -285,15 +286,15 @@ class MenuSliders {
             for (let preset of this.applet.preset_list) {
                 if (preset.show) {
                     shortcut = "";
-                    if (displayShortcuts && preset["shortcut"].length > 2) {
+                    if (displayShortcuts && preset["shortcut"] && preset["shortcut"].length > 2) {
                         shortcut = preset["shortcut"].split("::")[0];
                         if (shortcut.length > 0) shortcut = "\n " + shortcut;
                     }
-                    let menuItem = this.section_choices.addAction(_(preset["name"]) + shortcut, () => {
-                        this.applet.target_brightness = Math.max(preset["brightness"], this.applet.minimum_brightness);
-                        this.applet.target_gamma_red = Math.max(preset["gamma_red"], this.applet.minimum_gamma);
-                        this.applet.target_gamma_green = Math.max(preset["gamma_green"], this.applet.minimum_gamma);
-                        this.applet.target_gamma_blue = Math.max(preset["gamma_blue"], this.applet.minimum_gamma);
+                    let menuItem = this.section_choices.addAction(preset["name"] + shortcut, () => {
+                        this.applet.target_brightness = Math.min(Math.max(preset["brightness"], this.applet.minimum_brightness), this.applet.maximum_brightness);
+                        this.applet.target_gamma_red = Math.min(Math.max(preset["gamma_red"], this.applet.minimum_gamma), this.applet.maximum_gamma);
+                        this.applet.target_gamma_green = Math.min(Math.max(preset["gamma_green"], this.applet.minimum_gamma), this.applet.maximum_gamma);
+                        this.applet.target_gamma_blue = Math.min(Math.max(preset["gamma_blue"], this.applet.minimum_gamma), this.applet.maximum_gamma);
                         let _interval = setInterval( () => {
                             if (this.applet.target_brightness === this.applet.brightness &&
                                 this.applet.target_gamma_red ===  this.applet.gamma_red &&
@@ -301,6 +302,7 @@ class MenuSliders {
                                 this.applet.target_gamma_blue === this.applet.gamma_blue
                             ) {
                                 clearInterval(_interval);
+                                this.save_last_values();
                             }
     
                             this.applet.brightness += Math.sign(this.applet.target_brightness - this.applet.brightness);
@@ -504,6 +506,9 @@ class MenuSliders {
     update_items_brightness() {
         let active = this.applet.is_brightness_active();
         if(active) {
+            this.applet.brightness = this.applet.get_range_value(this.applet.minimum_brightness, 
+                                                                 this.applet.maximum_brightness, 
+                                                                 this.applet.brightness);
             let zero_one_range_value = this.get_zero_one_range_value(this.applet.minimum_brightness,
                                                                      this.applet.maximum_brightness,
                                                                      this.applet.brightness);

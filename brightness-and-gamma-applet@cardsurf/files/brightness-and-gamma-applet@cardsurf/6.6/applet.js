@@ -374,6 +374,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     on_preset_list_changed() {
+        this._translate_preset_names();
         this._init_menu_item_presets();
     }
 
@@ -639,6 +640,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
 
     // Override
     on_applet_added_to_panel() {
+        this._translate_preset_names();
         this.on_shortcut_changed();
         this.on_disable_nightmode_changed();
         this.set_MAX_TR_LENGTH();
@@ -902,6 +904,31 @@ class BrightnessAndGamma extends Applet.IconApplet {
             }, this.smooth_duration);
         }
     }
+    
+    _translate_preset_names() {
+        var new_preset_list = this.preset_list;
+        for (let i=0; i < new_preset_list.length; i++) {
+            let preset = new_preset_list[i];
+            let name = preset["name"];
+            global.log("name: " + name + "(" + name.length + ") -> " + _(name));
+            if (name.length > 0 && name != _(name)) {
+                global.log("Changing.");
+                new_preset_list[i]["name"] = _(name);
+            }
+        }
+        this.preset_list = new_preset_list;
+        new_preset_list = this.preset_list_temp;
+        for (let i=0; i < new_preset_list.length; i++) {
+            let preset = new_preset_list[i];
+            let name = preset["name"];
+            global.log("name: " + name + " -> " + _(name));
+            if (name.length > 0 && name != _(name)) {
+                global.log("Changing.");
+                new_preset_list[i]["name"] = _(name);
+            }
+        }
+        this.preset_list_temp = new_preset_list;
+    }
 
     _init_menu_item_presets() {
         if (this.menu_item_presets) {
@@ -914,7 +941,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
             for (let preset of this.preset_list_temp) {
                 counterShortcut++;
                 if (preset.show) {
-                    let menuItem = this.menu_item_presets.menu.addAction(_(preset["name"]), () => {
+                    let menuItem = this.menu_item_presets.menu.addAction(preset["name"], () => {
                         this._up_to_preset(preset, menuItem);
                     });
                     if (preset["shortcut"] != null && preset["shortcut"].length > 2) {
@@ -934,7 +961,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
             for (let preset of this.preset_list) {
                 counterShortcut++;
                 if (preset.show) {
-                    let menuItem = this.menu_item_presets.menu.addAction(_(preset["name"]), () => {
+                    let menuItem = this.menu_item_presets.menu.addAction(preset["name"], () => {
                         this._up_to_preset(preset, menuItem);
                     });
                     if (preset["shortcut"] != null && preset["shortcut"].length > 2) {
@@ -1137,7 +1164,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                     this.screen_temp == preset["temperature"]
                 ) {
                     tips.unshift("—".repeat(MAX_TR_LENGTH + 6));
-                    tips.unshift(_(preset["name"]));
+                    tips.unshift(preset["name"]);
                 }
             }
         } else {
@@ -1148,7 +1175,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                     this.gamma_blue == preset["gamma_blue"]
                 ) {
                     tips.unshift("—".repeat(MAX_TR_LENGTH + 6));
-                    tips.unshift(_(preset["name"]));
+                    tips.unshift(preset["name"]);
                 }
             }
         }
