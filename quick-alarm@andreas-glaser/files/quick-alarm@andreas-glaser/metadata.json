@@ -2,6 +2,6 @@
   "uuid": "quick-alarm@andreas-glaser",
   "name": "Quick Alarm",
   "description": "Queue alarms quickly.",
-  "version": 7,
+  "version": 8,
   "max-instances": 1
 }
