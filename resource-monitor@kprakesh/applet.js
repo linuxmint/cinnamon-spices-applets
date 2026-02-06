@@ -17,7 +17,7 @@ MyApplet.prototype = {
     _init: function(metadata, orientation, panel_height, instance_id) {
         Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
-        this.set_applet_tooltip("System Resource Usage");        
+        this.set_applet_tooltip("Resource Usage");        
         this.set_applet_icon_name("utilities-system-monitor-symbolic");
 
         // Initialize Settings (Defaulting to everything ON via schema)
