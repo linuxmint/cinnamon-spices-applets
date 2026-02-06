@@ -1,0 +1,6 @@
+{
+ "uuid": "best-menu@cinnamon.org",
+ "name": "Best Menu",
+ "description": "This is the Menu applet from Cinnamon 6.4.",
+ "max-instances": -1
+}

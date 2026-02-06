@@ -1,0 +1,41 @@
+{
+    "menu-custom" : {
+        "default" : true,
+        "override-props" : true
+    },
+    "menu-label" : {
+        "default" : "",
+        "override-props" : true
+    },
+    "menu-icon" : {
+        "icon_categories" : [{
+            "name" : "Linux Mint",
+            "icons" : [
+                "linuxmint-logo",
+                    "linuxmint-logo-badge",
+                    "linuxmint-logo-badge-symbolic",
+                    "linuxmint-logo-filled-badge",
+                    "linuxmint-logo-filled-leaf-badge",
+                    "linuxmint-logo-filled-leaf",
+                    "linuxmint-logo-filled-ring",
+                    "linuxmint-logo-leaf-badge",
+                    "linuxmint-logo-leaf-badge-symbolic",
+                    "linuxmint-logo-leaf",
+                    "linuxmint-logo-leaf-symbolic",
+                    "linuxmint-logo-neon",
+                    "linuxmint-logo-ring",
+                    "linuxmint-logo-ring-symbolic",
+                    "linuxmint-logo-simple",
+                    "linuxmint-logo-simple-symbolic",
+                    "cinnamon-symbolic",
+                    "emblem-favorite-symbolic",
+                    "user-bookmarks-symbolic",
+                    "start-here-symbolic"
+            ]
+        }],
+        "default_category" : "Linux Mint",
+        "default" : "linuxmint-logo-ring-symbolic",
+        "default_icon" : "linuxmint-logo-ring-symbolic",
+        "override-props" : true
+    }
+}
