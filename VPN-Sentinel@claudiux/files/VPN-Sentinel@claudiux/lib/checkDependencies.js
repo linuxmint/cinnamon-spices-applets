@@ -64,7 +64,7 @@ var DEPENDENCIES = {
     ["dig", "/usr/bin/dig", "bind9-dnsutils"]
   ],
   "arch": [
-    ["", "/usr/lib/sox/libsox_fmt_mp3.so", "sox"],
+    ["", "/usr/bin/sox", "sox"],
     ["nmcli", "/usr/bin/nmcli", "networkmanager"],
     ["", "/usr/lib/NetworkManager/libnm-vpn-plugin-openvpn.so", "networkmanager-openvpn"],
     ["yad", "/usr/bin/yad", "yad"],
