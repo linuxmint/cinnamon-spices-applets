@@ -853,7 +853,7 @@ Notification.prototype = {
         }
     },
 
-    _bannerBoxAllocate: function(actor, box, flags) {
+    _bannerBoxAllocate: function(actor, box) {
         let availWidth = box.x2 - box.x1;
 
         let [titleMinW, titleNatW] = this._titleLabel.get_preferred_width(-1);
@@ -889,9 +889,9 @@ Notification.prototype = {
             titleBox.y2 = titleNatH;
         }
 
-        this._titleLabel.allocate(titleBox, flags);
+        this._titleLabel.allocate(titleBox);
         if (this._inNotificationBin) {
-            this._timeLabel.allocate(timeBox, flags);
+            this._timeLabel.allocate(timeBox);
         }
         this._titleFitsInBannerMode = (titleNatW <= availWidth);
 
@@ -921,7 +921,7 @@ Notification.prototype = {
                 bannerBox.y1 = 0;
                 bannerBox.y2 = titleNatH;
             }
-            this._bannerLabel.allocate(bannerBox, flags);
+            this._bannerLabel.allocate(bannerBox);
 
             // Make _bannerLabel visible if the entire notification
             // fits on one line, or if the notification is currently
@@ -1085,9 +1085,9 @@ Source.prototype = {
         alloc.min_size = min; alloc.nat_size = nat;
     },
 
-    _allocate: function(actor, box, flags) {
+    _allocate: function(actor, box) {
         // the iconBin should fill our entire box
-        this._iconBin.allocate(box, flags);
+        this._iconBin.allocate(box);
 
         let childBox = new Clutter.ActorBox();
 
@@ -1107,7 +1107,7 @@ Source.prototype = {
         childBox.y1 = box.y2 - naturalHeight;
         childBox.y2 = box.y2;
 
-        this._counterBin.allocate(childBox, flags);
+        this._counterBin.allocate(childBox);
     },
 
     _setCount: function(count, visible) {
