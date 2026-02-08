@@ -182,7 +182,7 @@ class CassettoneApplet extends Applet.TextIconApplet {
             "show_header": this.show_header,
         }
 
-        Util.spawn_async(['python3', `${this.metadata.path}/popup_menu.py`, JSON.stringify(args)]);
+        Util.spawn_async(['python3', `${this.metadata.path}/../popup_menu.py`, JSON.stringify(args)]);
     }
 
     set_keybinding() {
