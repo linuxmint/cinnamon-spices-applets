@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-01-30 01:58-0100\n"
-"PO-Revision-Date: 2025-04-22 12:48-0400\n"
+"PO-Revision-Date: 2026-02-08 15:39-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.8\n"
 
 #. 6.6/cassettoneNative.js:292 popup_menu.py:95
 msgid "Open Folder"
@@ -28,11 +28,11 @@ msgstr "Abrir en el terminal"
 
 #. 6.6/cassettoneNative.js:540
 msgid "Empty or Access Denied"
-msgstr ""
+msgstr "Vacío o acceso denegado"
 
 #. 6.6/cassettoneNative.js:602
 msgid "Empty"
-msgstr ""
+msgstr "Vacío"
 
 #. metadata.json->name
 msgid "Directory Menu"
@@ -156,25 +156,27 @@ msgstr "Establezca la combinación de teclas para mostrar el menú."
 
 #. 6.6->settings-schema.json->menu-type->options
 msgid "Classic"
-msgstr ""
+msgstr "Clásico"
 
 #. 6.6->settings-schema.json->menu-type->options
 msgid "Native"
-msgstr ""
+msgstr "Nativo"
 
 #. 6.6->settings-schema.json->menu-type->description
 msgid "Menu type"
-msgstr ""
+msgstr "Tipo de menú"
 
 #. 6.6->settings-schema.json->menu-type->tooltip
 msgid ""
 "Classic uses a GTK-based menu, while Native uses Cinnamon's native popup "
 "menu."
 msgstr ""
+"Clásico utiliza un menú basado en GTK, mientras que Nativo utiliza el menú "
+"emergente nativo de Cinnamon."
 
 #. 6.6->settings-schema.json->prefer-native-wayland->description
 msgid "Prefer native menu type on Wayland"
-msgstr ""
+msgstr "Preferir el tipo de menú nativo en Wayland"
 
 #. 6.6->settings-schema.json->prefer-native-wayland->tooltip
 msgid ""
@@ -182,3 +184,7 @@ msgid ""
 "The classic GTK-based menu has limitations on Wayland sessions due to "
 "restricted window positioning and focus handling in the protocol."
 msgstr ""
+"Utiliza automáticamente la implementación del menú nativo cuando se ejecuta "
+"en Wayland. El menú clásico basado en GTK tiene limitaciones en las sesiones "
+"Wayland debido a las restricciones en el posicionamiento de las ventanas y "
+"el manejo del foco en el protocolo."
