@@ -19,7 +19,6 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="vexpand">True</property>
-            <signal name="draw" handler="on_draw" swapped="no"/>
           </object>
           <packing>
             <property name="expand">True</property>
