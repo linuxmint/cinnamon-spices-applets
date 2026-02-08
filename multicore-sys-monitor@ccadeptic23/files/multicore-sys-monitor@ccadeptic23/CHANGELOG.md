@@ -1,3 +1,7 @@
+### v3.4.1~20260208
+  * Smoother reading of all system data, even those related to networks.
+  * The box width can be adjusted in increments of 1, 2, 4, 8, 16, 32, and 64 pixels in the General tab of this applet's settings.
+
 ### v3.4.0~20260203
   * Smoother reading of most system data.
   * Uses readFileAsync module.

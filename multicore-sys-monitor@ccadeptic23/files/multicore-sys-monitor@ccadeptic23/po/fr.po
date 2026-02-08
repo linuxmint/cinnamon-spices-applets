@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-01-07 00:52+0100\n"
-"PO-Revision-Date: 2026-01-07 00:53+0100\n"
+"PO-Revision-Date: 2026-02-07 22:09+0100\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -475,7 +475,7 @@ msgstr "Étiquettes"
 
 #. 6.4->settings-schema.json->borderOn->description
 msgid "Add a border to each graph"
-msgstr "Ajouter une bordure à chaque grapique"
+msgstr "Ajouter une bordure à chaque graphique"
 
 #. 6.4->settings-schema.json->graphSpacing->description
 msgid "Graph spacing"
