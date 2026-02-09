@@ -158,17 +158,17 @@
 	},
 	"base-color": {
 		"type": "colorchooser",
-		"default": "#BBBBBB",
+		"default": "#BEBEBE",
 		"description": "Base Color"
 	},
 	"iris-color": {
 		"type": "colorchooser",
-		"default": "#634E34",
+		"default": "#9F5211",
 		"description": "Iris Color"
 	},
 	"pupil-color": {
 		"type": "colorchooser",
-		"default": "#130F0A",
+		"default": "#000000",
 		"description": "Pupil Color"
 	},
 	"blink-effect-enabled": {
