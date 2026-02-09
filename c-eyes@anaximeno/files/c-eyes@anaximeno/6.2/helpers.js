@@ -21,7 +21,7 @@ const Util = imports.misc.util;
 const Meta = imports.gi.Meta;
 
 
-class Debouncer {
+var Debouncer = class Debouncer {
     _sourceId;
 
     constructor() {
@@ -47,7 +47,7 @@ class Debouncer {
 }
 
 
-class IdleMonitor {
+var IdleMonitor = class IdleMonitor {
     constructor(idle_delay) {
         this.idle_delay = idle_delay;
 
@@ -55,7 +55,7 @@ class IdleMonitor {
         this._idle_watch_id = this.idle_monitor.add_idle_watch(this.idle_delay, this._handle_idle.bind(this));
         this.idle = this.idle_monitor.get_idletime() > this.idle_delay;
 
-        this._listener_counter = 0
+        this._listener_counter = 0;
         this._idle_listeners = new Map();
     }
 

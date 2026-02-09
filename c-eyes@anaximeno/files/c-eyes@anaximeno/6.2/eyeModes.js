@@ -183,7 +183,7 @@ class EyeMode {
     }
 }
 
-class EyelidMode extends EyeMode {
+var EyelidMode = class EyelidMode extends EyeMode {
     drawEye(area, blink_rate, options) {
         const [area_width, area_height] = area.allocation.get_size();
         const half_width = area_width * 0.5;
@@ -270,7 +270,7 @@ class EyelidMode extends EyeMode {
     }
 }
 
-class BulbMode extends EyeMode {
+var BulbMode = class BulbMode extends EyeMode {
     drawEye(area, blink_rate, options) {
         const [area_width, area_height] = area.allocation.get_size();
         const half_width = area_width * 0.5;
@@ -343,7 +343,7 @@ class BulbMode extends EyeMode {
 }
 
 
-class EyeModeFactory {
+var EyeModeFactory = class EyeModeFactory {
     /**
      * Returns an eye mode depending on the given name
      * @param {String} mode The eye mode name to create ("bulb" or "lids")
