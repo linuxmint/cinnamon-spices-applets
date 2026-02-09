@@ -1,3 +1,7 @@
+### v3.1.1~20260209
+* Added CSS file stylesheet.css.
+* Fixes [#8297](https://github.com/linuxmint/cinnamon-spices-applets/issues/8297)
+
 ### v3.1.0~20260205
 * Corrects errors that occur when changing methods.
 * Corrects errors due to translations.
