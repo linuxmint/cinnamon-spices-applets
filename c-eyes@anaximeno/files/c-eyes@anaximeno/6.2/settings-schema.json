@@ -66,9 +66,7 @@
 			"keys": [
 				"base-color",
 				"iris-color",
-				"pupil-color",
-				"fill-lids-color-painting",
-				"fill-bulb-color-painting"
+				"pupil-color"
 			]
 		},
 		"general-effects-section": {
@@ -179,18 +177,6 @@
 		"type": "colorchooser",
 		"default": "#130F0A",
 		"description": "Pupil Color"
-	},
-	"fill-lids-color-painting": {
-		"dependency": "mode=lids",
-		"type": "checkbox",
-		"default": true,
-		"description": "Fill the Colors Inside the Eye"
-	},
-	"fill-bulb-color-painting": {
-		"dependency": "mode=bulb",
-		"type": "checkbox",
-		"default": true,
-		"description": "Fill the Colors Inside the Eye"
 	},
 	"blink-effect-enabled": {
 		"type": "checkbox",

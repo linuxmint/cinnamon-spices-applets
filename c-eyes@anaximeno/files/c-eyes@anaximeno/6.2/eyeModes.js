@@ -231,7 +231,7 @@ class EyelidMode extends EyeMode {
 
         cr.newPath();
         this._appendEyelidEyePath(cr, eye_rad, iris_rad, x_def, y_def, top_lid, bottom_lid);
-        options.lids_fill ? cr.fill() : cr.stroke();
+        options.fill ? cr.fill() : cr.stroke();
 
         cr.newPath();
         this._appendEyelidEyePath(cr, eye_rad, iris_rad, x_def, y_def, top_lid, bottom_lid);
@@ -248,7 +248,7 @@ class EyelidMode extends EyeMode {
         cr.translate(iris_translate_x, 0);
         cr.scale(iris_scale_x, iris_rad);
         cr.arc(0, 0, 1.0, 0, TWO_PI);
-        options.lids_fill ? cr.fill() : cr.stroke();
+        options.fill ? cr.fill() : cr.stroke();
 
         cr.identityMatrix();
         cr.translate(half_width, half_height);
@@ -264,7 +264,7 @@ class EyelidMode extends EyeMode {
         cr.arc(0, 0, 1.0, 0, TWO_PI);
         cr.fill();
 
-        this._applyUpperLidBlink(cr, blink_rate, eye_rad, options.line_width, area_width, area_height, !options.lids_fill, options.base_color,
+        this._applyUpperLidBlink(cr, blink_rate, eye_rad, options.line_width, area_width, area_height, !options.fill, options.base_color,
             (ctx) => this._appendEyelidEyePath(ctx, eye_rad, iris_rad, x_def, y_def, top_lid, bottom_lid)
         );
     }
@@ -307,7 +307,7 @@ class BulbMode extends EyeMode {
         cr.translate(half_width, half_height);
         cr.setLineWidth(options.line_width);
         cr.arc(0, 0, eye_rad, 0, TWO_PI);
-        options.bulb_fill ? cr.fill() : cr.stroke();
+        options.fill ? cr.fill() : cr.stroke();
 
         cr.rotate(mouse_ang);
 
@@ -320,7 +320,7 @@ class BulbMode extends EyeMode {
         cr.translate(iris_translate_x, 0);
         cr.scale(iris_scale_x, iris_rad);
         cr.arc(0, 0, 1.0, 0, TWO_PI);
-        options.bulb_fill ? cr.fill() : cr.stroke();
+        options.fill ? cr.fill() : cr.stroke();
 
         cr.identityMatrix();
         cr.translate(half_width, half_height);
@@ -336,7 +336,7 @@ class BulbMode extends EyeMode {
         cr.arc(0, 0, 1.0, 0, TWO_PI);
         cr.fill();
 
-        this._applyUpperLidBlink(cr, blink_rate, eye_rad, options.line_width, area_width, area_height, !options.bulb_fill, options.base_color,
+        this._applyUpperLidBlink(cr, blink_rate, eye_rad, options.line_width, area_width, area_height, !options.fill, options.base_color,
             (ctx) => { ctx.arc(0, 0, eye_rad, 0, TWO_PI); }
         );
     }

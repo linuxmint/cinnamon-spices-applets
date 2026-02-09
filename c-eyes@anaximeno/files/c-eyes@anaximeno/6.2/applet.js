@@ -395,8 +395,6 @@ class Eye extends Applet.Applet {
 		const padding = this.padding * global.ui_scale;
 		const line_width = this.line_width * global.ui_scale;
 		const is_vertical = this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT;
-		const lids_fill = this.fill_lids_color_painting && this.use_alternative_colors;
-		const bulb_fill = this.fill_bulb_color_painting && this.use_alternative_colors;
 
 		this.eyePainter.drawEye(
 			area,
@@ -412,8 +410,7 @@ class Eye extends Applet.Applet {
 				padding: padding,
 				line_width: line_width,
 				is_vertical: is_vertical,
-				lids_fill: lids_fill,
-				bulb_fill: bulb_fill,
+				fill: this.use_alternative_colors,
 			},
 		);
 	}
