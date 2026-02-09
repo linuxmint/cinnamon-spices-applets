@@ -3,15 +3,15 @@
 		"type": "layout",
 		"pages": [
 			"general-page",
-			"style-page",
-			"effects-page"
+			"style-page"
 		],
 		"general-page": {
 			"type": "page",
 			"title": "General",
 			"sections": [
 				"general-section",
-				"optimization-section"
+				"optimization-section",
+				"effects-section"
 			]
 		},
 		"style-page": {
@@ -20,13 +20,6 @@
 			"sections": [
 				"styles-section",
 				"colors-section"
-			]
-		},
-		"effects-page": {
-			"type": "page",
-			"title": "Effects",
-			"sections": [
-				"general-effects-section"
 			]
 		},
 		"general-section": {
@@ -48,6 +41,16 @@
 				"repaint-angle"
 			]
 		},
+		"effects-section": {
+			"type": "section",
+			"title": "Effects",
+			"keys": [
+				"blink-effect-enabled",
+				"blink-period",
+				"blink-gap",
+				"idle-delay"
+			]
+		},
 		"styles-section": {
 			"type": "section",
 			"title": "Style",
@@ -67,16 +70,6 @@
 				"base-color",
 				"iris-color",
 				"pupil-color"
-			]
-		},
-		"general-effects-section": {
-			"type": "section",
-			"title": "General",
-			"keys": [
-				"blink-effect-enabled",
-				"blink-period",
-				"blink-gap",
-				"idle-delay"
 			]
 		}
 	},
