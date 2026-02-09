@@ -19,6 +19,12 @@
 
 const Util = imports.misc.util;
 const Meta = imports.gi.Meta;
+const Configs = require("./configs.js");
+
+
+var log = (instanceId, ...args) => {
+    global.log(`[${Configs.UUID}/${instanceId}]`, ...args);
+}
 
 
 var Debouncer = class Debouncer {

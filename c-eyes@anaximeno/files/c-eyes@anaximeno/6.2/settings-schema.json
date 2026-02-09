@@ -26,8 +26,8 @@
 			"type": "section",
 			"title": "General",
 			"keys": [
-				"tooltip-message",
 				"mode",
+				"tooltip-message",
 				"deactivate-on-fullscreen",
 				"optimization-mode"
 			]
@@ -48,6 +48,7 @@
 				"blink-effect-enabled",
 				"blink-period",
 				"blink-gap",
+				"sleep-effect-enabled",
 				"idle-delay"
 			]
 		},
@@ -152,7 +153,7 @@
 	},
 	"use-alternative-colors": {
 		"type": "switch",
-		"default": true,
+		"default": false,
 		"description": "Use Alternative Colors for the Eye",
 		"tooltip": "When disabled it will use the current system theme's default color for panel items."
 	},
@@ -198,7 +199,14 @@
 		"description": "Blink Gap",
 		"tooltip": "This setting controls the time gap between two consecutive blinks. Measured in milliseconds."
 	},
+	"sleep-effect-enabled": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Sleep Effect",
+		"tooltip": "When enabled, the eyes will slowly close when the system is idle and open again when activity is detected."
+	},
 	"idle-delay": {
+		"dependency": "sleep-effect-enabled",
 		"type": "spinbutton",
 		"default": 30000,
 		"min": 5000,
