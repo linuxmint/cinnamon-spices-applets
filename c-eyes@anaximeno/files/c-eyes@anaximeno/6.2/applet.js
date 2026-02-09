@@ -388,10 +388,6 @@ class Eye extends Applet.Applet {
 			if (this._cached_pupil_color) pupil_color = this._cached_pupil_color;
 		}
 
-		// if (this.blink_effect_enabled) {
-		// 	global.log(Configs.UUID, `Eye/${this.instanceId} - blinking rate: ${this.blink_rate}`);
-		// }
-
 		const padding = this.padding * global.ui_scale;
 		const line_width = this.line_width * global.ui_scale;
 		const is_vertical = this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT;
@@ -492,29 +488,19 @@ class Eye extends Applet.Applet {
 
 		const now = Date.now();
 
-		if (this.last_blink_start === null ||
-			this.last_blink_end === null ||
-			this.last_blink_end + this.blink_gap < now
-		) {
+		if (!this.last_blink_start || !this.last_blink_end ||
+			(this.last_blink_end + this.blink_gap) < now) {
+			// --
 			this.last_blink_start = now;
 			this.last_blink_end = now + this.blink_period;
 			this.blink_rate = 0.00;
-			// global.log(Configs.UUID, `Eye/${this.instanceId} - starting blink`);
 			return true;
 		} else if (this.last_blink_start <= now && now <= this.last_blink_end) {
-			let progress = (now - this.last_blink_start) / this.blink_period;
-
-			if (progress <= 0.5) {
-				this.blink_rate = progress * 2;
-			} else {
-				this.blink_rate = 2 - progress * 2;
-			}
-
-			this.blink_rate = Math.round(this.blink_rate * 100) / 100;
+			const progress = (now - this.last_blink_start) / this.blink_period;
+			this.blink_rate = Math.sin(progress * Math.PI);
 			return true;
 		} else if (this.blink_rate > 0.00) {
 			this.blink_rate = 0.00;
-			// global.log(Configs.UUID, `Eye/${this.instanceId} - ending blink`);
 			return true;
 		}
 
