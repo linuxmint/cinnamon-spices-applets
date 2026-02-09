@@ -213,7 +213,14 @@ class Eye extends Applet.Applet {
 			{
 				key: "blink-effect-enabled",
 				value: "blink_effect_enabled",
-				cb: null
+				cb: () => {
+					if (!this.blink_effect_enabled) {
+						this.last_blink_start = null;
+						this.last_blink_end = null;
+						this.blink_rate = 0.00;
+						this.on_property_updated();
+					}
+				},
 			},
 			{
 				key: "blink-period",
