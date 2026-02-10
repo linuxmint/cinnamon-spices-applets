@@ -79,7 +79,7 @@ class Eye extends Applet.Applet {
 		this._last_eye_x = null;
 		this._last_eye_y = null;
 
-		this.idle_monitor = new Helpers.IdleMonitor(this.idle_delay);
+		this.idle_monitor = new Helpers.IdleMonitor(this.idle_delay_ms);
 		this.idle_monitor.add_idle_listener(this.on_idle_state_change.bind(this));
 
 		this.last_blink_start = null;
@@ -232,7 +232,7 @@ class Eye extends Applet.Applet {
 				value: "idle_delay",
 				cb: _d.debounce((value) => {
 					if (this.idle_monitor) this.idle_monitor.destroy();
-					this.idle_monitor = new Helpers.IdleMonitor(value);
+					this.idle_monitor = new Helpers.IdleMonitor(this.idle_delay_ms);
 					this.idle_monitor.add_idle_listener(this.on_idle_state_change.bind(this));
 				}, 300),
 			}
@@ -247,6 +247,18 @@ class Eye extends Applet.Applet {
 		));
 
 		return settings;
+	}
+
+	get blink_period_ms() {
+		return this.blink_period * 1000;
+	}
+
+	get blink_gap_ms() {
+		return this.blink_gap * 1000;
+	}
+
+	get idle_delay_ms() {
+		return this.idle_delay * 60 * 1000;
 	}
 
 	on_orientation_changed(orientation) {
@@ -501,7 +513,7 @@ class Eye extends Applet.Applet {
 			this.last_blink_start <= now && now <= this.last_blink_end;
 
 		if (is_blinking) {
-			const progress = (now - this.last_blink_start) / this.blink_period;
+			const progress = (now - this.last_blink_start) / this.blink_period_ms;
 			this.blink_rate = Math.sin(progress * Math.PI);
 			return true;
 		}
@@ -513,7 +525,7 @@ class Eye extends Applet.Applet {
 					this.sleep_start_val = this.blink_rate;
 				}
 
-				const duration = (this.blink_period || 200) / 2;
+				const duration = (this.blink_period_ms || 200) / 2;
 				const progress = Math.min((now - this.sleep_start_time) / duration, 1.0);
 				// Animate from current val to 1.0
 				this.blink_rate = this.sleep_start_val + (1.0 - this.sleep_start_val) * Math.sin(progress * Math.PI / 2);
@@ -531,7 +543,7 @@ class Eye extends Applet.Applet {
 				this.wake_start_val = this.blink_rate;
 			}
 
-			const duration = (this.blink_period || 200) / 2;
+			const duration = (this.blink_period_ms || 200) / 2;
 			const progress = Math.min((now - this.wake_start_time) / duration, 1.0);
 			// Animate from current val to 0.0
 			this.blink_rate = this.wake_start_val * Math.cos(progress * Math.PI / 2);
@@ -547,10 +559,10 @@ class Eye extends Applet.Applet {
 		if (!this.blink_effect_enabled) return false;
 
 		if (!this.last_blink_start || !this.last_blink_end ||
-			(this.last_blink_end + this.blink_gap) < now) {
+			(this.last_blink_end + this.blink_gap_ms) < now) {
 			// --
 			this.last_blink_start = now;
-			this.last_blink_end = now + this.blink_period;
+			this.last_blink_end = now + this.blink_period_ms;
 			this.blink_rate = 0.00;
 			return true;
 		} else if (this.blink_rate > 0.00) {
