@@ -1,0 +1,8 @@
+{
+  "uuid": "crypto-tracker@danipin",
+  "name": "Crypto Tracker",
+  "description": "Displays real-time cryptocurrency prices on the panel (via CoinGecko API).",
+  "last_edited_time": "1734300000", 
+  "version": "1.0.0",
+  "author": "d-atoshi" 
+}

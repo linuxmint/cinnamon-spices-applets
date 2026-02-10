@@ -1,0 +1,10 @@
+{
+  "uuid": "crypto-tracker@danipin",
+  "name": "Crypto Tracker",
+  "description": "Displays real-time cryptocurrency prices on the panel (via CoinGecko API).",
+   "version": "1.0.0",
+  "author": "d-atoshi",
+  "max-instances": 1,
+  "cinnamon-version": [ "5.6", "5.8", "6.0", "6.2" ],
+  "max-cinnamon-version": "6.2"
+}

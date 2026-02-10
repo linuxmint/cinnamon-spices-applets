@@ -1,0 +1,187 @@
+# Japanese translation for crypto-tracker@danipin.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the crypto-tracker@danipin package.
+# FIRST AUTHOR <sousm77@gmail.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: crypto-tracker@danipin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-15 10:20+0100\n"
+"PO-Revision-Date: 2025-12-15 10:47+0100\n"
+"Last-Translator: FULL NAME <sousm77@gmail.com>\n"
+"Language-Team: Japanese <ja@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# The following strings are extracted from metadata.json:
+msgctxt "name"
+msgid "Crypto Tracker"
+msgstr "暗号通貨トラッカー"
+
+msgctxt "description"
+msgid "Displays real-time cryptocurrency prices on the panel (via CoinGecko API)."
+msgstr "リアルタイムの暗号通貨価格をパネルに表示します（CoinGecko API経由）。"
+
+# The following strings are extracted from settings-schema.json:
+msgid "Metric 1 (Primary)"
+msgstr "メトリック 1 (プライマリ)"
+
+msgid "Metric 2"
+msgstr "メトリック 2"
+
+msgid "Metric 3"
+msgstr "メトリック 3"
+
+msgid "Applet General Settings"
+msgstr "アプレット全般設定"
+
+msgid "Display and Activation"
+msgstr "表示と有効化"
+
+msgid "Data Source (API)"
+msgstr "データソース (API)"
+
+msgid "Color Settings"
+msgstr "色設定"
+
+msgid "Changes will activate on the next API update interval."
+msgstr "変更は次回の API 更新間隔で有効になります。"
+
+msgid "General Applet Settings"
+msgstr "アプレット全般設定"
+
+msgid "Update Interval"
+msgstr "更新間隔"
+
+msgid "How often prices are fetched from CoinGecko."
+msgstr "CoinGecko から価格が取得される頻度。"
+
+msgid "15 Seconds (Minimum)"
+msgstr "15秒 (最小)"
+
+msgid "30 Seconds"
+msgstr "30秒"
+
+msgid "60 Seconds (1 Minute)"
+msgstr "60秒 (1分)"
+
+msgid "120 Seconds (2 Minutes)"
+msgstr "120秒 (2分)"
+
+msgid "300 Seconds (5 Minutes)"
+msgstr "300秒 (5分)"
+
+msgid "Color the Arrow Only"
+msgstr "矢印のみ着色"
+
+msgid "If active, the price text remains white."
+msgstr "有効な場合、価格テキストは白色のままになります。"
+
+msgid "Show Currency Symbol (e.g. $ or €)"
+msgstr "通貨記号を表示（例：$ または €）"
+
+msgid "Replaces the currency code with the symbol."
+msgstr "通貨コードを記号に置き換えます。"
+
+msgid "Enabled"
+msgstr "有効"
+
+msgid "Toggles the display of this metric on/off."
+msgstr "このメトリックの表示を切り替えます（オン/オフ）。"
+
+msgid "Currency ID (CoinGecko)"
+msgstr "通貨 ID (CoinGecko)"
+
+msgid "Select the cryptocurrency from the top list."
+msgstr "上位リストから暗号通貨を選択してください。"
+
+msgid "The value in brackets (e.g. BTC) is the default symbol displayed on the panel."
+msgstr "括弧内の値（例：BTC）は、パネルに表示されるデフォルトの記号です。"
+
+msgid "Bitcoin (BTC)"
+msgstr "ビットコイン (BTC)"
+
+msgid "Ethereum (ETH)"
+msgstr "イーサリアム (ETH)"
+
+msgid "Cardano (ADA)"
+msgstr "カルダノ (ADA)"
+
+msgid "Solana (SOL)"
+msgstr "ソラナ (SOL)"
+
+msgid "Polkadot (DOT)"
+msgstr "ポルカドット (DOT)"
+
+msgid "Custom Currency ID"
+msgstr "カスタム通貨 ID"
+
+msgid "CoinGecko ID (e.g. 'litecoin')"
+msgstr "CoinGecko ID (例：'litecoin')"
+
+msgid "Enter the exact CoinGecko ID. This field overrides the dropdown selection and is preferred for unlisted coins."
+msgstr "正確な CoinGecko ID を入力してください。このフィールドはドロップダウンの選択を上書きし、リストにないコインに推奨されます。"
+
+msgid "Comparison Currency"
+msgstr "比較通貨"
+
+msgid "Select the currency for the price comparison."
+msgstr "価格比較に使用する通貨を選択してください。"
+
+msgid "The API call uses the code in brackets (e.g. USD)."
+msgstr "API 呼び出しは括弧内のコード（例：USD）を使用します。"
+
+msgid "US Dollar (USD)"
+msgstr "米ドル (USD)"
+
+msgid "Euro (EUR)"
+msgstr "ユーロ (EUR)"
+
+msgid "Canadian Dollar (CAD)"
+msgstr "カナダドル (CAD)"
+
+msgid "British Pound (GBP)"
+msgstr "英ポンド (GBP)"
+
+msgid "Japanese Yen (JPY)"
+msgstr "日本円 (JPY)"
+
+msgid "Swiss Franc (CHF)"
+msgstr "スイスフラン (CHF)"
+
+msgid "Australian Dollar (AUD)"
+msgstr "豪ドル (AUD)"
+
+msgid "Display Symbol"
+msgstr "表示記号"
+
+msgid "The symbol displayed on the panel (e.g. BTC)."
+msgstr "パネルに表示される記号（例：BTC）。"
+
+msgid "Color for Rising Price (▲)"
+msgstr "価格上昇時の色 (▲)"
+
+msgid "Select the color for positive price movement."
+msgstr "プラスの価格変動に使用する色を選択してください。"
+
+msgid "Color for Falling Price (▼)"
+msgstr "価格下降時の色 (▼)"
+
+msgid "Select the color for negative price movement."
+msgstr "マイナスの価格変動に使用する色を選択してください。"
+
+# The following strings are extracted from applet.js:
+msgid "Loading..."
+msgstr "読み込み中..."
+
+msgid "24H Price Change (%)"
+msgstr "24時間価格変動率 (%)"
+
+msgid "Waiting..."
+msgstr "待機中..."
+
+msgid "No metrics enabled. Please enable them in settings."
+msgstr "メトリックが有効になっていません。設定で有効にしてください。"
