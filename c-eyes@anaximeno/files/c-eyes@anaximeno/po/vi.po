@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: c-eyes@anaximeno 3.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-20 06:52-0100\n"
+"POT-Creation-Date: 2026-02-10 17:17-0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -33,15 +33,15 @@ msgstr ""
 "trong mô-đun cài đặt Tiện ích mở rộng Cinnamon cho các phiên bản Cinnamon >= "
 "5.4"
 
-#. 4.2/applet.js:396 5.4/applet.js:393
+#. 4.2/applet.js:396 5.4/applet.js:392
 msgid "click to deactivate the eye"
 msgstr "nhấp để tắt mắt"
 
-#. 4.2/applet.js:396 5.4/applet.js:393
+#. 4.2/applet.js:396 5.4/applet.js:392
 msgid "click to activate the eye"
 msgstr "nhấp để bật mắt"
 
-#. 4.2/applet.js:397 5.4/applet.js:394
+#. 4.2/applet.js:397 5.4/applet.js:393
 msgid "TIP"
 msgstr "MẸO"
 
@@ -68,7 +68,7 @@ msgstr "Mắt"
 
 #. 4.2->settings-schema.json->effects->title
 #. 5.4->settings-schema.json->effects->title
-#. 6.2->settings-schema.json->effects-page->title
+#. 6.2->settings-schema.json->effects-section->title
 msgid "Effects"
 msgstr "Hiệu ứng"
 
@@ -78,7 +78,6 @@ msgstr "Hiệu ứng"
 #. 5.4->settings-schema.json->click-generic->title
 #. 6.2->settings-schema.json->general-page->title
 #. 6.2->settings-schema.json->general-section->title
-#. 6.2->settings-schema.json->general-effects-section->title
 msgid "General"
 msgstr "Chung"
 
@@ -149,9 +148,6 @@ msgstr "Đệm"
 #. 5.4->settings-schema.json->eye-repaint-interval->units
 #. 5.4->settings-schema.json->fade-timeout->units
 #. 6.2->settings-schema.json->repaint-interval->units
-#. 6.2->settings-schema.json->blink-period->units
-#. 6.2->settings-schema.json->blink-gap->units
-#. 6.2->settings-schema.json->idle-delay->units
 msgid "ms"
 msgstr "ms"
 
@@ -228,8 +224,6 @@ msgstr "Màu con ngươi khi bật"
 #. 4.2->settings-schema.json->fill-bulb-color-painting->description
 #. 5.4->settings-schema.json->fill-lids-color-painting->description
 #. 5.4->settings-schema.json->fill-bulb-color-painting->description
-#. 6.2->settings-schema.json->fill-lids-color-painting->description
-#. 6.2->settings-schema.json->fill-bulb-color-painting->description
 msgid "Fill the Colors Inside the Eye"
 msgstr "Tô màu bên trong mắt"
 
@@ -479,21 +473,14 @@ msgstr "Màu mống mắt"
 msgid "Pupil Color"
 msgstr "Màu con ngươi"
 
-#. 6.2->settings-schema.json->blink-effect->description
+#. 6.2->settings-schema.json->blink-effect-enabled->description
 #, fuzzy
 msgid "Blink Effect"
 msgstr "Hiệu ứng"
 
-#. 6.2->settings-schema.json->blink-effect->options
-msgid "None"
-msgstr ""
-
-#. 6.2->settings-schema.json->blink-effect->options
-msgid "When Idle"
-msgstr ""
-
-#. 6.2->settings-schema.json->blink-effect->options
-msgid "Always"
+#. 6.2->settings-schema.json->blink-period->units
+#. 6.2->settings-schema.json->blink-gap->units
+msgid "seconds"
 msgstr ""
 
 #. 6.2->settings-schema.json->blink-period->description
@@ -503,7 +490,7 @@ msgstr ""
 #. 6.2->settings-schema.json->blink-period->tooltip
 msgid ""
 "This setting controls the duration of a full blink cycle (closing and "
-"opening). Measured in milliseconds."
+"opening)."
 msgstr ""
 
 #. 6.2->settings-schema.json->blink-gap->description
@@ -512,9 +499,22 @@ msgid "Blink Gap"
 msgstr "Nháy mắt"
 
 #. 6.2->settings-schema.json->blink-gap->tooltip
+msgid "This setting controls the time gap between two consecutive blinks."
+msgstr ""
+
+#. 6.2->settings-schema.json->sleep-effect-enabled->description
+#, fuzzy
+msgid "Sleep Effect"
+msgstr "Bật hiệu ứng"
+
+#. 6.2->settings-schema.json->sleep-effect-enabled->tooltip
 msgid ""
-"This setting controls the time gap between two consecutive blinks. Measured "
-"in milliseconds."
+"When enabled, the eyes will slowly close when the system is idle and open "
+"again when activity is detected."
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->units
+msgid "minutes"
 msgstr ""
 
 #. 6.2->settings-schema.json->idle-delay->description
@@ -524,5 +524,5 @@ msgstr ""
 #. 6.2->settings-schema.json->idle-delay->tooltip
 msgid ""
 "This setting controls the time of inactivity (no mouse or keyboard input) "
-"after which the system is considered idle. Measured in milliseconds."
+"after which the system is considered idle."
 msgstr ""

@@ -389,7 +389,6 @@ class Eye extends Applet.Applet {
 	}
 
 	update_tooltip() {
-		let message = _("")
 		let tip = this.eye_activated ? _("click to deactivate the eye") : _("click to activate the eye");
 		this.set_applet_tooltip(`<b>${_('TIP')}:</b> ` + tip + "\n" + UPDATE_CHANGE_MSG, true);
 	}
