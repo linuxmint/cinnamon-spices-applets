@@ -1,12 +1,12 @@
-const UUID = "c-eyes@anaximeno";
+var UUID = "c-eyes@anaximeno";
 
-const AREA_DEFAULT_WIDTH = 28;
+var AREA_DEFAULT_WIDTH = 28;
 
-const MONITORS_CHANGED_UPDATE_TIMEOUT_MS = 100;
+var MONITORS_CHANGED_UPDATE_TIMEOUT_MS = 100;
 
-const WS_SWITCHED_UPDATE_TIMEOUT_MS = 400;
+var WS_SWITCHED_UPDATE_TIMEOUT_MS = 400;
 
-const Optimizations = Object.freeze({
+var Optimizations = Object.freeze({
 	"battery": {
 		repaint_interval_ms: 120,
 		repaint_angle_rad: 0.09,
