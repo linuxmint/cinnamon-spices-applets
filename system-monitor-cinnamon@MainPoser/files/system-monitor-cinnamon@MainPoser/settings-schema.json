@@ -1,0 +1,35 @@
+{
+    "show_network": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show network speed"
+    },
+    "refresh_interval": {
+        "type": "spinbutton",
+        "default": 2,
+        "units": "seconds",
+        "step": 1,
+        "min": 1,
+        "max": 60,
+        "description": "Refresh interval"
+    },
+    "icon_theme": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Icon theme",
+        "options": {
+            "Follow system": "auto",
+            "White": "white",
+            "Black": "black"
+        }
+    },
+    "runner": {
+        "type": "combobox",
+        "default": "cat",
+        "description": "Animation icon",
+        "options": {
+            "Cat": "cat",
+            "Horse": "horse"
+        }
+    }
+}
