@@ -36,6 +36,7 @@ const Gettext = imports.gettext;
 const Extension = imports.ui.extension;
 const Pango = imports.gi.Pango;
 const ModalDialog = imports.ui.modalDialog;
+const Signals = imports.signals;
 
 
 let HtmlEncodeDecode = require("./lib/htmlEncodeDecode");
@@ -55,6 +56,7 @@ const {
 const { del_song_arts } = require("./lib/del_song_arts");
 
 const { VolumeSlider } = require("./lib/volumeSlider");
+const { BalanceSlider } = require("./lib/balanceSlider");
 const { ControlButton } = require("./lib/controlButton");
 const { StreamMenuSection, Player, MediaPlayerLauncher, Seeker } = require("./lib/s150PopupMenu");
 
@@ -379,6 +381,15 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("keySwitchPlayer", "keySwitchPlayer", () => {
             this._setKeybinding()
         });
+        this.settings.bind("keyBalanceLeft", "keyBalanceLeft", () => {
+            this._setKeybinding()
+        });
+        this.settings.bind("keyBalanceRight", "keyBalanceRight", () => {
+            this._setKeybinding()
+        });
+        this.settings.bind("keyBalanceCenter", "keyBalanceCenter", () => {
+            this._setKeybinding()
+        });
 
         this.settings.bind("magneticOn", "magneticOn", () => this._on_sound_settings_change());
         this.settings.bind("magnetic25On", "magnetic25On", () => this._on_sound_settings_change());
@@ -414,6 +425,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("volumeSoundEnabled", "volumeSoundEnabled", this.on_volumeSoundEnabled_changed);
         this.settings.bind("maxVolume", "maxVolume", (value) => this._on_maxVolume_changed(value));
 
+        this.settings.bind("balance", "balance");
         this.settings.bind("volume", "volume");
 
         this.old_volume = this.volume;
@@ -598,6 +610,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._output = null;
         this._outputMutedId = null;
         this._outputIcon = "audio-volume-muted-symbolic";
+        
+        this._channelMap = null;
 
         this._input = null;
         this._inputMutedId = null;
@@ -743,7 +757,8 @@ class Sound150Applet extends Applet.TextIconApplet {
      unmonitor_art_dir() {
         if (this.artsMonitor == null || this.artsMonitorId == null || this.artsMonitor.is_cancelled()) return;
         
-        this.artsMonitor.disconnect(this.iconsMonitorId);
+        //~ this.artsMonitor.disconnect(this.iconsMonitorId);
+        this.artsMonitor.disconnect(this.artsMonitorId);
         if (! this.artsMonitor.is_cancelled() )
             this.artsMonitor.cancel();
         this.artsMonitor = null;
@@ -1084,8 +1099,43 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
         return commandline;
     }
+    
+    _balanceLeft() {
+        let bal = this.balance;
+        this.balance = Math.max(
+            0,
+            bal - 0.05
+        );
+        if (this._channelMap)
+            this._channelMap.set_balance(2 * this.balance - 1);
+    }
+    
+    _balanceRight() {
+        let bal = this.balance;
+        this.balance = Math.min(
+            1,
+            bal + 0.05
+        );
+        if (this._channelMap)
+            this._channelMap.set_balance(2 * this.balance - 1);
+    }
+    
+    _balanceCenter() {
+        this.balance = 0.5;
+        if (this._channelMap)
+            this._channelMap.set_balance(0);
+    }
 
     _setKeybinding() {
+        Main.keybindingManager.addHotKey("balance-left-" + this.instance_id, this.keyBalanceLeft, () => {
+            this._balanceLeft()
+        });
+        Main.keybindingManager.addHotKey("balance-right-" + this.instance_id, this.keyBalanceRight, () => {
+            this._balanceRight()
+        });
+        Main.keybindingManager.addHotKey("balance-center-" + this.instance_id, this.keyBalanceCenter, () => {
+            this._balanceCenter()
+        });
         Main.keybindingManager.addHotKey("sound-open-" + this.instance_id, this.keyOpen, () => {
             this._openMenu()
         });
@@ -1359,6 +1409,9 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.volume = this.old_volume;
         }
 
+        Main.keybindingManager.removeHotKey("balance-left-" + this.instance_id);
+        Main.keybindingManager.removeHotKey("balance-right-" + this.instance_id);
+        Main.keybindingManager.removeHotKey("balance-center-" + this.instance_id);
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("switch-player-" + this.instance_id);
         try {
@@ -1440,6 +1493,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._remove_OsdWithNumberATJosephMcc_button.actor.show();
         else
             this._remove_OsdWithNumberATJosephMcc_button.actor.hide();
+        this._balanceSection._onValueInit();
         this.menu.actor.set_width(this.menuWidth);
     }
 
@@ -1670,7 +1724,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             icon_name += "-symbolic";
             this._outputIcon = icon_name;
             let icon = Gio.Icon.new_for_string(icon_name);
-            //~ if (! this.keepAlbumArtIcon) 
+            if (! this.keepAlbumArtIcon) // Is it enough????
                 this.set_applet_icon_symbolic_name(icon_name);
             let _bar_level = null;
             let _volume_str = "";
@@ -1840,8 +1894,8 @@ class Sound150Applet extends Applet.TextIconApplet {
                 } else {
                     //DON'T change the icon:
                     if (this._playerIcon && this._playerIcon[0] != this.oldPlayerIcon0 || !this._iconTimeoutId) {
-                        //~ if (! this.keepAlbumArtIcon) this.set_applet_icon_symbolic_name(this._playerIcon[0]);
-                        this.set_applet_icon_symbolic_name(this._playerIcon[0]);
+                        if (! this.keepAlbumArtIcon) this.set_applet_icon_symbolic_name(this._playerIcon[0]);
+                        //~ this.set_applet_icon_symbolic_name(this._playerIcon[0]);
                         this.oldPlayerIcon0 = this._playerIcon[0];
                     }
                 }
@@ -2308,6 +2362,11 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.menu.addMenuItem(this._outputVolumeSection);
         this.menu.addMenuItem(this._inputVolumeSection);
+        
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        
+        this._balanceSection = new BalanceSlider(this);
+        this.menu.addMenuItem(this._balanceSection);
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -2561,6 +2620,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
         this._output = this._control.get_default_sink();
         if (this._output) {
+            this._channelMap = this._output.get_channel_map();
             this._outputVolumeSection.connectWithStream(this._output);
             this._outputMutedId = this._output.connect("notify::is-muted", (...args) => this._mutedChanged(...args, "_output"));
             this._mutedChanged(null, null, "_output");
@@ -2748,6 +2808,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     _removeAllStreams() {
         for (let i = 0, l = this._streams.length; i < l; ++i) {
             let stream = this._streams[i];
+            if (! stream) continue;
             if (stream.item) {
                 try { stream.item.destroy() } catch(e) {}
             }
@@ -3015,6 +3076,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         return GLib.file_test(ALBUMART_ON, GLib.FileTest.EXISTS);
     }
 }
+Signals.addSignalMethods(Sound150Applet.prototype);
 
 function main(metadata, orientation, panel_height, instanceId) {
     return new Sound150Applet(metadata, orientation, panel_height, instanceId);
