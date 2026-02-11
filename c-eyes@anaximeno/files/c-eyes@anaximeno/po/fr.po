@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-10 17:17-0100\n"
-"PO-Revision-Date: 2025-12-22 09:22+0100\n"
+"PO-Revision-Date: 2026-02-11 08:29+0100\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -481,59 +481,52 @@ msgstr "Effet de clignotement"
 #. 6.2->settings-schema.json->blink-period->units
 #. 6.2->settings-schema.json->blink-gap->units
 msgid "seconds"
-msgstr ""
+msgstr "secondes"
 
 #. 6.2->settings-schema.json->blink-period->description
 msgid "Blink Period"
 msgstr "Période de clignement"
 
 #. 6.2->settings-schema.json->blink-period->tooltip
-#, fuzzy
 msgid ""
 "This setting controls the duration of a full blink cycle (closing and "
 "opening)."
 msgstr ""
 "Ce paramètre contrôle la durée d'un cycle de clignement complet\n"
-"(fermeture et ouverture). Mesurée en millisecondes."
+"(fermeture et ouverture)."
 
 #. 6.2->settings-schema.json->blink-gap->description
 msgid "Blink Gap"
 msgstr "Écart de clignement"
 
 #. 6.2->settings-schema.json->blink-gap->tooltip
-#, fuzzy
 msgid "This setting controls the time gap between two consecutive blinks."
-msgstr ""
-"Ce paramètre contrôle l'intervalle de temps entre deux clignements "
-"consécutifs.\n"
-"Mesuré en millisecondes."
+msgstr "Ce paramètre contrôle l'intervalle de temps entre deux clignements consécutifs."
 
 #. 6.2->settings-schema.json->sleep-effect-enabled->description
-#, fuzzy
 msgid "Sleep Effect"
-msgstr "Activer les effets"
+msgstr "Effet sommeil"
 
 #. 6.2->settings-schema.json->sleep-effect-enabled->tooltip
 msgid ""
 "When enabled, the eyes will slowly close when the system is idle and open "
 "again when activity is detected."
 msgstr ""
+"Une fois activé, les paupières se fermeront lentement lorsque le système\n"
+"est inactif et se rouvriront lorsqu'une activité sera détectée."
 
 #. 6.2->settings-schema.json->idle-delay->units
 msgid "minutes"
-msgstr ""
+msgstr "minutes"
 
 #. 6.2->settings-schema.json->idle-delay->description
 msgid "Idle Delay"
 msgstr "Délai d'inactivité"
 
 #. 6.2->settings-schema.json->idle-delay->tooltip
-#, fuzzy
 msgid ""
 "This setting controls the time of inactivity (no mouse or keyboard input) "
 "after which the system is considered idle."
 msgstr ""
 "Ce paramètre détermine la durée d'inactivité (absence d'interaction avec la\n"
-"souris ou le clavier) après laquelle le système est considéré comme "
-"inactif.\n"
-"Mesurée en millisecondes."
+"souris ou le clavier) après laquelle le système est considéré comme inactif."
