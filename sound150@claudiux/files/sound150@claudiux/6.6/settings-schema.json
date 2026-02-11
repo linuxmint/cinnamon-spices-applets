@@ -232,6 +232,9 @@
       "keys": [
         "keyOpen",
         "keySwitchPlayer",
+        "keyBalanceLeft",
+        "keyBalanceRight",
+        "keyBalanceCenter",
         "redefine-volume-keybindings",
         "button-set-to-default-keybindings",
         "audio-stop",
@@ -397,6 +400,24 @@
     "description": "Switch to next player",
     "default": "::",
     "tooltip": "Set keybinding(s) to switch to the next player if it exists."
+  },
+  "keyBalanceLeft": {
+    "type": "keybinding",
+    "description": "Balance: to the left",
+    "default": "::",
+    "tooltip": "Set keybinding(s) to increase the volume on the left side."
+  },
+  "keyBalanceRight": {
+    "type": "keybinding",
+    "description": "Balance: to the right",
+    "default": "::",
+    "tooltip": "Set keybinding(s) to increase the volume on the right side."
+  },
+  "keyBalanceCenter": {
+    "type": "keybinding",
+    "description": "Balance: re-init",
+    "default": "::",
+    "tooltip": "Set keybinding(s) to rebalance the volume between the left and right sides."
   },
   "_knownPlayers": {
     "type": "generic",
@@ -827,6 +848,10 @@
   "mic-level": {
     "type": "generic",
     "default": "50%"
+  },
+  "balance": {
+    "type": "generic",
+    "default": 0.5
   },
   "soundATcinnamonDOTorg_is_loaded": {
     "type": "generic",
