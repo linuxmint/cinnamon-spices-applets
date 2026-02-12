@@ -60,7 +60,6 @@
       "type": "section",
       "title": "Menu",
       "keys": [
-        "userMenuWidth",
         "playerControl",
         "extendedPlayerControl",
         "keepPlayerListOpen",
@@ -256,15 +255,6 @@
         "button-reload-applet"
       ]
     }
-  },
-  "userMenuWidth": {
-    "type": "scale",
-    "default": 450,
-    "min": 300,
-    "max": 6000,
-    "step": 10,
-    "description": "Menu width (in pixels)",
-    "show-value": true
   },
   "playerControl": {
     "type": "switch",
@@ -931,5 +921,13 @@
   "VOLUME_ADJUSTMENT_STEP": {
     "type": "generic",
     "default": 0.05
+  },
+  "userMenuWidth": {
+    "type": "generic",
+    "default": 450
+  },
+  "userMenuHeight": {
+    "type": "generic",
+    "default": 800
   }
 }

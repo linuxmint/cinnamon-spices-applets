@@ -222,11 +222,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.alreadyCalledBysetAppletTooltip = false;
 
         this.real_ui_scale = 1.0;
-        this.menuWidth = this.userMenuWidth; //520;
         Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-real-scale.py", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 this.real_ui_scale = parseFloat(stdout);
-                this.menuWidth = Math.round(this.userMenuWidth * this.real_ui_scale);
             }
         }, {});
 
@@ -275,10 +273,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._chooseActivePlayerItem = new PopupMenu.PopupSubMenuMenuItem(_("Choose player controls"));
 
         this.settings = new Settings.AppletSettings(this, UUID, this.instanceId);
-        this.settings.bind("userMenuWidth", "userMenuWidth", (value) => {
-            this.menuWidth = Math.round(value * this.real_ui_scale);
-        });
-        this.menuWidth = Math.round(this.userMenuWidth * this.real_ui_scale);
+        
+        this.settings.bind("userMenuWidth", "popup_width");
+        this.settings.bind("userMenuHeight", "popup_height");
+        
         this.settings.bind("ignoredInputDevices", "ignoredInputDevices", () => {this._on_reload_this_applet_pressed();});
         this.settings.bind("ignoredOutputDevices", "ignoredOutputDevices", () => {this._on_reload_this_applet_pressed();});
         this.settings.bind("runAsync", "runAsync");
@@ -519,6 +517,13 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, this.orientation);
         this.menuManager.addMenu(this.menu);
+        this._resizer = new Applet.PopupResizeHandler(
+            this.menu.actor,
+            () => this.orientation,
+            (w,h) => this._onBoxResized(w,h),
+            () => this.popup_width * this.real_ui_scale,
+            () => this.popup_height * this.real_ui_scale
+        );
 
         this.set_applet_icon_symbolic_name("audio-x-generic");
 
@@ -725,6 +730,17 @@ class Sound150Applet extends Applet.TextIconApplet {
         appsys.connect("installed-changed", () => this._updateLaunchPlayer());
 
         this._sound_settings.connect("changed::" + OVERAMPLIFICATION_KEY, () => this._on_sound_settings_change());
+    }
+    
+    _onBoxResized(width, height) {
+        this.menu.actor.set_width(width);
+        this.menu.actor.set_height(height);
+        if (!this._resizer.resizingInProgress) {
+           //~ this.settings.popup_width = width / this.real_ui_scale;
+           //~ this.settings.popup_height = height / this.real_ui_scale;
+           this.popup_width = Math.max( Math.round(width / this.real_ui_scale), 450 );
+           this.popup_height = Math.round(height / this.real_ui_scale);
+        }
     }
 
     monitor_icon_dir() {
@@ -1317,8 +1333,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     on_applet_added_to_panel() {
         this.themeNode = null;
-        //~ this.set_applet_label(this._applet_label.get_text());
-        this.menu.actor.set_width(this.menuWidth);
+        this.menu.actor.set_width(this.popup_width);
         this.title_text_old = "";
         this.startingUp = true;
         if (this._playerctl)
@@ -1494,11 +1509,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         else
             this._remove_OsdWithNumberATJosephMcc_button.actor.hide();
         this._balanceSection._onValueInit();
-        this.menu.actor.set_width(this.menuWidth);
+        this.menu.actor.set_width(this.popup_width);
     }
 
     _openMenu() {
-        this.menu.actor.set_width(this.menuWidth);
+        this.menu.actor.set_width(this.popup_width);
         this.menu.toggle(true);
     }
 
