@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-11 18:34+0100\n"
-"PO-Revision-Date: 2026-01-22 13:22-0300\n"
+"PO-Revision-Date: 2026-02-12 16:10-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -364,9 +364,8 @@ msgid "Install imagemagick"
 msgstr "Instalar imagemagick"
 
 #. 6.6/lib/balanceSlider.js:20
-#, fuzzy
 msgid "Balance"
-msgstr "Cancelar"
+msgstr "Equilibrio"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
@@ -1304,35 +1303,34 @@ msgstr "Parte del nombre del dispositivo"
 
 #. 6.6->settings-schema.json->keyBalanceLeft->description
 msgid "Balance: to the left"
-msgstr ""
+msgstr "Equilibrio: hacia la izquierda"
 
 #. 6.6->settings-schema.json->keyBalanceLeft->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to increase the volume on the left side."
 msgstr ""
-"Establece la combinación de teclas para mostrar el menú del applet de sonido."
+"Configura las teclas de acceso rápido para subir el volumen en el lado "
+"izquierdo."
 
 #. 6.6->settings-schema.json->keyBalanceRight->description
 msgid "Balance: to the right"
-msgstr ""
+msgstr "Equilibrio: hacia la derecha"
 
 #. 6.6->settings-schema.json->keyBalanceRight->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to increase the volume on the right side."
 msgstr ""
-"Establece la combinación de teclas para mostrar el menú del applet de sonido."
+"Configurar las teclas de acceso rápido para subir el volumen en el lado "
+"derecho."
 
 #. 6.6->settings-schema.json->keyBalanceCenter->description
 msgid "Balance: re-init"
-msgstr ""
+msgstr "Equilibrio: reiniciar"
 
 #. 6.6->settings-schema.json->keyBalanceCenter->tooltip
-#, fuzzy
 msgid ""
 "Set keybinding(s) to rebalance the volume between the left and right sides."
 msgstr ""
-"Configure combinaciones de teclas para cambiar al siguiente reproductor si "
-"existe."
+"Configura las combinaciones de teclas para reequilibrar el volumen entre los "
+"lados izquierdo y derecho."
 
 #. 6.6->settings-schema.json->runAsync->description
 #. 6.4->settings-schema.json->runAsync->description
