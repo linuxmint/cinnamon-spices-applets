@@ -153,7 +153,7 @@ DayProgressApplet.prototype = {
         this.menuManager.addMenu(this.menu);
 
         // Menu items
-        this.menuElapsedContainer = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        this.menuElapsedContainer = new PopupMenu.PopupBaseMenuItem({ reactive: false, style_class: "day-progress-label"});
         this.elapsedLabel = new St.Label({
             text: _("Elapsed"),
             x_align: Clutter.ActorAlign.START,
@@ -164,7 +164,7 @@ DayProgressApplet.prototype = {
         this.menuElapsedContainer.addActor(this.elapsedLabel);
         this.menuElapsedContainer.addActor(this.elapsedValue);
 
-        this.menuRemainingContainer = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        this.menuRemainingContainer = new PopupMenu.PopupBaseMenuItem({ reactive: false, style_class: "day-progress-label" });
         this.remainingLabel = new St.Label({
             text: _("Remaining"),
             x_align: Clutter.ActorAlign.START,
@@ -182,7 +182,7 @@ DayProgressApplet.prototype = {
         let settingsItem = new PopupMenu.PopupMenuItem(_("Settings"));
         settingsItem.connect('activate', Lang.bind(this, function() {
             imports.gi.Gio.Subprocess.new(
-                ['cinnamon-settings', 'applets', this.metadata.uuid, this.instanceId.toString()],
+                ['xlet-settings', 'applet', this.metadata.uuid, '-i',  this.instanceId.toString()],
                 imports.gi.Gio.SubprocessFlags.NONE
             );
         }));
@@ -190,6 +190,7 @@ DayProgressApplet.prototype = {
 
         // Initialize styles and values
         this.calculateStyles();
+        this._applet_tooltip._tooltip.set_style_class_name("day-progress-tooltip")
         
         // Update immediately to populate the menu values
         this.updateBar();
@@ -234,12 +235,8 @@ DayProgressApplet.prototype = {
 
         let percentElapsedOfPeriod;
         
-        // If startHour and endHour are equal, consider it as a full 24-hour period
-        if (this.startHour === this.endHour && this.startMinute === this.endMinute) {
-            percentElapsedOfPeriod = currentTimeFraction;
-        }
         // No midnight wrap-around
-        else if (endTimeFraction > startTimeFraction) {
+        if (endTimeFraction > startTimeFraction) {
             percentElapsedOfPeriod = this.mapNumber(
                 this.clamp(currentTimeFraction, startTimeFraction, endTimeFraction),
                 startTimeFraction, endTimeFraction, 0, 1
@@ -265,9 +262,7 @@ DayProgressApplet.prototype = {
         this.pie.setAngle((this.showElapsed ? percentElapsedOfPeriod : percentRemainingOfPeriod) * (Math.PI * 2.0));
 
         let duration;
-        if (this.startHour === this.endHour && this.startMinute === this.endMinute) {
-            duration = 1; // Full 24 hours
-        } else if (endTimeFraction > startTimeFraction) {
+        if (endTimeFraction > startTimeFraction) {
             duration = (endTimeFraction - startTimeFraction);
         } else {
             duration = (1 - (startTimeFraction - endTimeFraction));
@@ -277,9 +272,28 @@ DayProgressApplet.prototype = {
         let elapsedMinutes = Math.floor((percentElapsedOfPeriod * duration * 24 * 60) % 60);
         let remainingHours = Math.floor(percentRemainingOfPeriod * duration * 24);
         let remainingMinutes = Math.floor((percentRemainingOfPeriod * duration * 24 * 60) % 60);
+        let percentElapsed = Math.round(percentElapsedOfPeriod * 100);
+        let percentRemaining = Math.round(percentRemainingOfPeriod * 100);
         
-        this.elapsedValue.text = elapsedHours + 'h ' + elapsedMinutes + 'm | ' + Math.round(percentElapsedOfPeriod * 100) + '%';
-        this.remainingValue.text = remainingHours + 'h ' + remainingMinutes + 'm | ' + Math.round(percentRemainingOfPeriod * 100) + '%';
+        elapsedHours = " ".repeat((elapsedHours < 10) ? 1 : 0) + elapsedHours;
+        elapsedMinutes = " ".repeat((elapsedMinutes < 10) ? 1 : 0) + elapsedMinutes;
+        remainingHours = " ".repeat((remainingHours < 10) ? 1 : 0) + remainingHours;
+        remainingMinutes = " ".repeat((remainingMinutes < 10) ? 1 : 0) + remainingMinutes;
+        percentElapsed = " ".repeat((percentElapsed < 10) ? 1 : 0) + percentElapsed;
+        percentRemaining = " ".repeat((percentRemaining < 10) ? 1 : 0) + percentRemaining;
+        
+        this.elapsedValue.text = elapsedHours + 'h ' + elapsedMinutes + 'm | ' + percentElapsed + '%';
+        this.remainingValue.text = remainingHours + 'h ' + remainingMinutes + 'm | ' + percentRemaining + '%';
+        
+        this._updateTooltip();
+    },
+    
+    _updateTooltip: function() {
+        let elapsedLength = _("Elapsed").length;
+        let remainingLength = _("Remaining").length;
+        let maxLength = Math.max(elapsedLength, remainingLength);
+        this.set_applet_tooltip(" ".repeat(maxLength - elapsedLength) + _("Elapsed") + " " + this.elapsedValue.text + 
+        "\n" + " ".repeat(maxLength - remainingLength) + _("Remaining") + " " + this.remainingValue.text);
     },
 
     mapNumber: function(number, inMin, inMax, outMin, outMax) {

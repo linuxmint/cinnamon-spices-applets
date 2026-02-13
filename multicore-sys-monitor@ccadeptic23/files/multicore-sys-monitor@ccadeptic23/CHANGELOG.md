@@ -1,3 +1,24 @@
+### v3.4.1~20260208
+  * Smoother reading of all system data, even those related to networks.
+  * The box width can be adjusted in increments of 1, 2, 4, 8, 16, 32, and 64 pixels in the General tab of this applet's settings.
+
+### v3.4.0~20260203
+  * Smoother reading of most system data.
+  * Uses readFileAsync module.
+
+### v3.3.0~20260106
+  * Better takes into account HiDPI display.
+  * Changes graph height in pixels with % of panel height.
+  * Lets open the Configure submenu of context menu.
+  * Fixes [#8148](https://github.com/linuxmint/cinnamon-spices-applets/issues/8148)
+
+### v3.2.2~20260105
+  * Takes into account HiDPI display.
+
+### v3.2.1~20260104
+  * "Graph height (pixels)" cannot exceed the height of the panel.
+  * Fixes [#8148](https://github.com/linuxmint/cinnamon-spices-applets/issues/8148)
+
 ### v3.2.0~20251211
   * Added option "Graph height (pixels)". Many thanks to Alex Rock (@Pierstoval)!
   * Now compatible with Cinnamon 6.6.

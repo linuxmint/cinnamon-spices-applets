@@ -5,22 +5,24 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: day-progress@chmodmasx 1.0.1\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2025-12-30 23:07-0300\n"
-"PO-Revision-Date: 2025-12-31 12:55+0100\n"
-"Last-Translator: FabRCT\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-01 12:24+0100\n"
+"PO-Revision-Date: 2026-01-01 12:27+0100\n"
+"Last-Translator: claudiux\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:158
+#. applet.js:158 applet.js:293 applet.js:296
 msgid "Elapsed"
 msgstr "Écoulé"
 
-#. applet.js:169
+#. applet.js:169 applet.js:294 applet.js:297
 msgid "Remaining"
 msgstr "Restant"
 
@@ -37,7 +39,8 @@ msgid ""
 "Displays a customizable progress pie chart in the panel to help you track "
 "your day time."
 msgstr ""
-"Affiche dans le panneau un graphique circulaire de progression personnalisable\n"
+"Affiche dans le panneau un graphique circulaire de progression "
+"personnalisable\n"
 "pour vous aider à suivre votre temps de travail quotidien."
 
 #. settings-schema.json->show-elapsed->description
@@ -107,4 +110,4 @@ msgstr "Heure de fin"
 
 #. settings-schema.json->end-hour->tooltip
 msgid "Hour at which the indicator ends"
-msgstr "Heure à laquelle l'indicateur prend fin"
+msgstr "Heure à laquelle l'indicateur finit"

@@ -53,9 +53,9 @@
     },
     "end-hour": {
         "type": "spinbutton",
-        "default": 23,
+        "default": 24,
         "min": 0,
-        "max": 23,
+        "max": 24,
         "step": 1,
         "units": "hours",
         "description": "End hour",
