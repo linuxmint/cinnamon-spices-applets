@@ -32,8 +32,6 @@ const ConfigFilePath = GLib.get_home_dir() + '/.config/cinnamon/spices/' + UUID;
 const PropertiesFile = ConfigFilePath + '/mylauncher.properties';
 
 const SettingsJSON = GLib.build_filenamev([global.userdatadir, 'applets/mylauncher@markbokil.com/settings.js']);
-const HelpURL = "http://markbokil.com/downloads/mylauncher/help.php?appname=mylauncher&version=" + Version;
-const AboutURL = "http://markbokil.com/downloads/mylauncher/about.php?appname=mylauncher&version=" + Version;
 
 function PopupMenuItem(label, icon, callback) {
     this._init(label, icon, callback);
@@ -213,17 +211,6 @@ MyApplet.prototype = {
         
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem()); //separator
        
-        //help
-        this.help_menu_item = new Applet.MenuItem(_("Help"), Gtk.STOCK_HELP, 
-            Lang.bind(this, this._doHelp));     
-        this._applet_context_menu.addMenuItem(this.help_menu_item); 
-        //about
-        this.about_menu_item = new Applet.MenuItem(_("About"), Gtk.STOCK_ABOUT, 
-            Lang.bind(this, this._doAbout));     
-        this._applet_context_menu.addMenuItem(this.about_menu_item); 
-
-        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem()); //separator
-
         //tooltips
         this.toolTipsSwitch = new PopupMenu.PopupSwitchMenuItem(_("Tooltips"));
         this.toolTipsSwitch.connect('toggled', Lang.bind(this, this._doToolTips));
@@ -291,14 +278,6 @@ MyApplet.prototype = {
         this._createMenu();
     },
     
-    _doHelp: function () {
-        Util.spawnCommandLine(this._json.OpenFileCmd + " " + HelpURL);
-    },
-    
-    _doAbout: function () {
-        Util.spawnCommandLine(this._json.OpenFileCmd + " " + AboutURL);
-    },
-        
 };
 
 function main(metadata, orientation) {   
