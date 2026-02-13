@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-25 20:30+1000\n"
-"PO-Revision-Date: 2022-11-28 19:38+0200\n"
+"PO-Revision-Date: 2024-11-18 14:34+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -42,7 +42,7 @@ msgstr "Pomodoro alkaa"
 
 #: applet.js:407
 msgid "Let's go to work!"
-msgstr "Mennään töihin!"
+msgstr "Sitten töihin!"
 
 #: applet.js:425
 msgid "Take a short break"
@@ -79,7 +79,7 @@ msgstr "Nollaa laskurit ja ajastin"
 
 #: applet.js:787
 msgid "Skip To Next Timer"
-msgstr ""
+msgstr "Siirry seuraavaan aikaan"
 
 #: applet.js:794
 msgid "What is this?"
@@ -91,7 +91,7 @@ msgstr "Ei mitään"
 
 #: applet.js:851
 msgid "Switch Off Pomodoro"
-msgstr "Kytke Pomodoro päältä"
+msgstr "Pomodoro pois"
 
 #: applet.js:857
 msgid "Start a new Pomodoro"
@@ -107,7 +107,7 @@ msgstr "Pomodoro valmis, ansaitset tauon!"
 
 #: applet.js:884
 msgid "Your break is over, start another pomodoro!"
-msgstr "Taukosi on ohi, aloita uusi pomodoro!"
+msgstr "Tauko on ohi, aloita uusi pomodoro!"
 
 #: applet.js:890
 #, javascript-format
@@ -135,7 +135,7 @@ msgstr "%s ja %s"
 
 #: applet.js:920
 msgid "Continue Current Pomodoro"
-msgstr "Jatka nykyistä Pomodoroa"
+msgstr "Jatka Pomodoroa"
 
 #: applet.js:926 applet.js:959
 msgid "Pause Pomodoro"
@@ -143,17 +143,15 @@ msgstr "Pysäytä Pomodoro"
 
 #: applet.js:937
 msgid "Short break finished, ready to continue?"
-msgstr "Lyhyt tauko päättynyt, oletko valmis jatkamaan?"
+msgstr "Lyhyt tauko on päättynyt, oletko valmis jatkamaan?"
 
 #: applet.js:953
-#, fuzzy
 msgid "Start break"
-msgstr "Pidä lyhyt tauko"
+msgstr "Pidä tauko"
 
 #: applet.js:970
-#, fuzzy
 msgid "Pomodoro finished, ready to take a break?"
-msgstr "Pomodoro valmis, ansaitset tauon!"
+msgstr "Pomodoro on valmis, pidätkö tauon?"
 
 #. metadata.json->description
 msgid "Great tool for boosted productivity!"
@@ -165,7 +163,7 @@ msgstr "Kesto (minuuttia)"
 
 #. settings-schema.json->pomodoro_duration->description
 msgid "Pomodoro Duration:"
-msgstr "Pomodoro kesto:"
+msgstr "Pomodoron kesto:"
 
 #. settings-schema.json->short_break_duration->description
 msgid "Short Break Duration:"
@@ -177,49 +175,47 @@ msgstr "Pitkän tauon kesto:"
 
 #. settings-schema.json->pomodori_number->description
 msgid "Number of pomodori before long break:"
-msgstr "Määrä ennen pomodorin pitkää taukoa:"
+msgstr "Määrä ennen pitkää taukoa:"
 
 #. settings-schema.json->head_options->description
 msgid "Options"
 msgstr "Valinnat"
 
 #. settings-schema.json->start_automatically_on_load->description
-#, fuzzy
 msgid "Start the pomodoro timer as soon as the applet loads"
-msgstr "Näytä pomodoro ajastin paneelissa"
+msgstr "Käynnistä pomodoro heti, kun sovelma latautuu"
 
 #. settings-schema.json->show_dialog_messages->description
 msgid "Show Dialog Messages"
 msgstr "Näytä viestit ikkunassa"
 
 #. settings-schema.json->auto_start_after_pomodoro_ends->description
-#, fuzzy
 msgid "Auto start after a pomodoro ends"
-msgstr "Alkaa automaattisesti kun lyhyt tauko päättyy"
+msgstr "Aloita autom. päättymisen jälkeen"
 
 #. settings-schema.json->auto_start_after_short_break_ends->description
 msgid "Auto start after a short break ends"
-msgstr "Alkaa automaattisesti kun lyhyt tauko päättyy"
+msgstr "Aloita autom. kun lyhyt tauko päättyy"
 
 #. settings-schema.json->auto_start_after_break_ends->description
 msgid "Auto start a new pomodoro after a break ends"
-msgstr "Aloita uusi pomodoro automaattisesti tauon päätyttyä"
+msgstr "Aloita uusi autom. tauon päätyttyä"
 
 #. settings-schema.json->display_icon->description
 msgid "Display the pomodoro icon in the applet panel"
-msgstr "Näytä pomodoro kuvake paneelissa"
+msgstr "Näytä pomodoro kuvake"
 
 #. settings-schema.json->use_symbolic_icon->description
 msgid "Use a symbolic icon in the applet panel"
-msgstr "Käytä symbolista kuvaketta paneelissa"
+msgstr "Käytä symbolista kuvaketta"
 
 #. settings-schema.json->show_timer->description
 msgid "Show the pomodoro timer in the applet panel"
-msgstr "Näytä pomodoro ajastin paneelissa"
+msgstr "Näytä pomodoro ajastin"
 
 #. settings-schema.json->hotkey->description
 msgid "Set the keybinding to open the applet menu"
-msgstr ""
+msgstr "Näppäinyhdistelmä"
 
 #. settings-schema.json->head_sounds->description
 msgid "Sounds"
@@ -227,15 +223,15 @@ msgstr "Äänet"
 
 #. settings-schema.json->sox-info->description
 msgid "Please install 'sox' and restart Cinnamon to use the sound feature!"
-msgstr "Käyttääksesi ääntä, asenna \"sox\" ja käynnistä Cinnamon uudelleen!"
+msgstr "Käyttääksesi ääniä, asenna \"sox\" ja käynnistä Cinnamon uudelleen!"
 
 #. settings-schema.json->timer_sound->description
 msgid "Play Timer Sound"
-msgstr "Toista ajastimen ääni"
+msgstr "Soita äänimerkki"
 
 #. settings-schema.json->timer_sound_file->description
 msgid "Timer Sound File"
-msgstr "Ajastimen äänitiedosto"
+msgstr "Äänitiedosto"
 
 #. settings-schema.json->timer_sound_volume->description
 #. settings-schema.json->break_sound_volume->description
@@ -246,15 +242,15 @@ msgstr "Voimakkuus:"
 
 #. settings-schema.json->break_sound->description
 msgid "Play Break Sound"
-msgstr "Toista tauon ääni"
+msgstr "Soita tauko äänimerkki"
 
 #. settings-schema.json->break_sound_file->description
 msgid "Break Sound File"
-msgstr "Tauko äänitiedosto"
+msgstr "Äänitiedosto"
 
 #. settings-schema.json->warn_sound->description
 msgid "Play Warn Sound"
-msgstr "Toista varoitusääni"
+msgstr "Soita varoitus äänimerkki"
 
 #. settings-schema.json->warn_sound_delay->description
 msgid "Warn Delay (in secs):"
@@ -262,28 +258,28 @@ msgstr "Varoituksen viive (sekunneissa):"
 
 #. settings-schema.json->warn_sound_file->description
 msgid "Warn Sound File"
-msgstr "Varoituksen äänitiedosto"
+msgstr "Äänitiedosto"
 
 #. settings-schema.json->start_sound->description
 msgid "Play Start Sound"
-msgstr "Toista aloituksen ääni"
+msgstr "Soita aloitus äänimerkki"
 
 #. settings-schema.json->start_sound_file->description
 msgid "Start Sound File"
-msgstr "Aloituksen äänitiedosto"
+msgstr "Äänitiedosto"
 
 #. settings-schema.json->head_scripts->description
 msgid "Scripts"
-msgstr ""
+msgstr "Komennot"
 
 #. settings-schema.json->enable_scripts->description
 msgid "Enable scripts"
-msgstr ""
+msgstr "Käytä komentoja"
 
 #. settings-schema.json->custom_short_break_script->description
 msgid "Execute this custom script when a short break starts"
-msgstr ""
+msgstr "Suorita tämä komento kun lyhyt tauko alkaa"
 
 #. settings-schema.json->custom_long_break_script->description
 msgid "Execute this custom script when a long break starts"
-msgstr ""
+msgstr "Suorita tämä komento kun pitkä tauko alkaa"

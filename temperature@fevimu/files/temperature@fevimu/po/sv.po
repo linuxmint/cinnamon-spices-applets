@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: temperature@fevimu\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-26 04:16-0500\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-03 19:49+0200\n"
 "PO-Revision-Date: 2019-02-10 07:23+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -18,11 +19,15 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:55
+#: applet.js:81 applet.js:160
+msgid "Temperature"
+msgstr "Temperatur"
+
+#: applet.js:149
 msgid "Error"
 msgstr "Fel"
 
-#: applet.js:56
+#: applet.js:150
 msgid ""
 "Run sensors-detect as root. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -30,11 +35,11 @@ msgstr ""
 "Kör sensors-detect som root. Om inte det hjälper, klicka då här och "
 "rapportera med utdata från dina sensorer!"
 
-#: applet.js:58
+#: applet.js:152
 msgid "Warning"
 msgstr "Varning"
 
-#: applet.js:59
+#: applet.js:153
 msgid ""
 "Please install lm_sensors. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -42,23 +47,33 @@ msgstr ""
 "Installera lm_sensors. Om inte det hjälper, klicka då här och rapportera med "
 "utdata från dina sensorer!"
 
-#: applet.js:62 applet.js:89
-msgid "Temperature"
-msgstr "Temperatur"
+#: applet.js:229
+msgid "Thresholds Info"
+msgstr ""
 
-#: applet.js:144
+#: applet.js:230
+#, fuzzy
+msgid "High Temp"
+msgstr "Hög"
+
+#: applet.js:231
+#, fuzzy
+msgid "Crit. Temp"
+msgstr "Kritisk temperatur"
+
+#: applet.js:242
 msgid "Critical"
 msgstr "Kritisk"
 
-#: applet.js:146
+#: applet.js:245
 msgid "High"
 msgstr "Hög"
 
-#: applet.js:156
+#: applet.js:258
 msgid "Current Temperature"
 msgstr "Aktuell temperatur"
 
-#: applet.js:158
+#: applet.js:260
 msgid "Critical Temperature"
 msgstr "Kritisk temperatur"
 
@@ -78,6 +93,38 @@ msgstr "Visa temperatur i Fahrenheit"
 msgid "Use integer values for temperature"
 msgstr "Visa heltalsvärden för temperatur"
 
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr ""
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Whether or not show the unit after the temperature value."
+msgstr ""
+
+#. settings-schema.json->show-unit-letter->description
+msgid "Show unit letter"
+msgstr ""
+
+#. settings-schema.json->show-unit-letter->tooltip
+msgid "Whether or not show the unit letter (C or F)."
+msgstr ""
+
+#. settings-schema.json->show-label-prefix->description
+msgid "Show label prefix"
+msgstr ""
+
+#. settings-schema.json->show-label-prefix->tooltip
+msgid "Whether or not to add a label before the temperature value."
+msgstr ""
+
+#. settings-schema.json->label-prefix->description
+msgid "Label prefix"
+msgstr ""
+
+#. settings-schema.json->label-prefix->tooltip
+msgid "The label to be shown before the temperature value."
+msgstr ""
+
 #. settings-schema.json->interval->units
 msgid "ms"
 msgstr "ms"
@@ -85,3 +132,35 @@ msgstr "ms"
 #. settings-schema.json->interval->description
 msgid "Update interval"
 msgstr "Uppdateringsintervall"
+
+#. settings-schema.json->change-color->description
+msgid "Change color when the temperature becomes High or Critical"
+msgstr ""
+
+#. settings-schema.json->change-color->tooltip
+msgid ""
+"Selecting this option, this applet becomes\n"
+" orange when the High Temperature Threshold is reached,\n"
+" red when the Critical Temperature Threshold is reached."
+msgstr ""
+
+#. settings-schema.json->only-colors->description
+msgid "Only use colors to alert me"
+msgstr ""
+
+#. settings-schema.json->only-colors->tooltip
+msgid ""
+"Select this option to not display text alerts in horizontal panels.\n"
+"(No text alert is ever displayed on vertical panels.)"
+msgstr ""
+
+#. settings-schema.json->keep_size->description
+msgid "Avoid size changes"
+msgstr ""
+
+#. settings-schema.json->keep_size->tooltip
+msgid ""
+"Checked: The size of this applet remains constant, once all your preferences "
+"have been defined.\n"
+"Unchecked: The size of this applet is optimized, but it may change."
+msgstr ""

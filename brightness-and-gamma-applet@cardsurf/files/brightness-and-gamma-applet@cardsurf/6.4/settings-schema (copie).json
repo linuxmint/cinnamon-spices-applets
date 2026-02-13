@@ -1,0 +1,261 @@
+{
+    "BGAlayout" : {
+        "type": "layout",
+        "pages": ["page_general", "page_presets"],
+        "page_general": {
+            "type": "page",
+            "title" : "General",
+            "sections" : ["section_config", "section_values", "section_gui"]
+        },
+        "page_presets": {
+            "type": "page",
+            "title" : "Presets",
+            "sections" : ["section_presets"]
+        },
+        "section_config": {
+            "type": "section",
+            "title": "Configuration",
+            "keys": [
+                "disable_nightmode",
+                "apply_startup",
+                "apply_every",
+                "apply_asynchronously",
+                "apply_changing_monitors",
+                "update_scroll",
+                "scroll_step",
+                "brightness_up_shortcut",
+                "brightness_down_shortcut"
+            ]
+        },
+        "section_values": {
+            "type": "section",
+            "title": "Values",
+            "keys": [
+                "minimum_brightness",
+                "maximum_brightness",
+                "minimum_gamma",
+                "maximum_gamma",
+                "save_every"
+            ]
+        },
+        "section_gui": {
+            "type": "section",
+            "title": "Gui",
+            "keys": [
+                "options_type",
+                "gui_icon_filepath"
+            ]
+        },
+        "section_presets": {
+            "type": "section",
+            "title": "Your presets",
+            "keys": [
+                "preset_label",
+                "preset_list",
+                "preset_sunrise_sunset_button",
+                "preset_reload"
+            ]
+        }
+    },
+    "disable_nightmode" : {
+        "type" : "switch",
+        "default" : false,
+        "description": "Disable Night Mode",
+        "tooltip": "Disable Cinnamon Night Mode while this applet is running.\nThis prevents the screen from flickering.\nThe adjustment time can be up to twice the number of seconds indicated below."
+    },
+    "apply_startup" : {
+        "type" : "switch",
+        "default" : true,
+        "description": "Apply at startup",
+        "tooltip": "Apply values at applet startup"
+    },
+    "apply_every": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 604800,
+        "step": 1,
+        "units": "seconds",
+        "description": "Apply every",
+        "tooltip" : "How often to apply values. 0 means that values are not applied periodically."
+    },
+    "apply_asynchronously" : {
+        "type" : "switch",
+        "default" : true,
+        "description": "Apply asynchronously",
+        "tooltip": "Apply values in a background process"
+    },
+    "apply_changing_monitors" : {
+        "type" : "switch",
+        "default" : false,
+        "description": "Apply when the number of monitors changes"
+    },
+    "update_scroll" : {
+        "type" : "switch",
+        "default" : true,
+        "description": "Adjust brightness scroll",
+        "tooltip": "Allows to adjust a brightness value on a mouse scroll"
+    },
+    "scroll_step": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 0,
+        "max": 200,
+        "step": 1,
+        "units": "%",
+        "description": "Scroll step",
+        "tooltip" : "A percentage of a brightness value to adjust on a mouse scroll"
+    },
+    "brightness_up_shortcut": {
+        "type": "keybinding",
+        "default": "::",
+        "description": "Hotkey to Increase brightness"
+    },
+    "brightness_down_shortcut": {
+        "type": "keybinding",
+        "default": "::",
+        "description": "Hotkey to Decrease brightness"
+    },
+
+    "minimum_brightness": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 10,
+        "max": 50,
+        "step": 1,
+        "units": "%",
+        "description": "Minimum brightness",
+        "tooltip": "A minimum value of brightness. Value from 10% to 50%."
+    },
+    "maximum_brightness": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 51,
+        "max": 200,
+        "step": 1,
+        "units": "%",
+        "description": "Maximum brightness",
+        "tooltip": "A maximum value of brightness. Value from 51% to 200%."
+    },
+    "minimum_gamma": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 10,
+        "max": 50,
+        "step": 1,
+        "units": "%",
+        "description": "Minimum gamma",
+        "tooltip": "A minimum value of gamma. Value from 10% to 50%."
+    },
+    "maximum_gamma": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 51,
+        "max": 200,
+        "step": 1,
+        "units": "%",
+        "description": "Maximum gamma",
+        "tooltip": "A maximum value of gamma. Value from 51% to 200%."
+    },
+    "save_every": {
+        "type": "spinbutton",
+        "default": 60,
+        "min": 5,
+        "max": 86400,
+        "step": 1,
+        "units": "seconds",
+        "description": "Save every",
+        "tooltip" : "How often to save last used values"
+    },
+
+    "options_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Show",
+        "options" : {
+            "All" : 0,
+            "Brightness" : 1,
+            "Gamma" : 2
+        },
+        "tooltip" : "Values shown in user interface"
+    },
+    "gui_icon_filepath" : {
+        "type" : "filechooser",
+        "default" : "~/.local/share/cinnamon/applets/brightness-and-gamma-applet@cardsurf/icons/sun.svg",
+        "description" : "Icon",
+        "tooltip": "An icon displayed in a panel"
+    },
+
+    "preset_label": {
+        "type": "label",
+        "description": "You can define or modify presets below, which can then be accessed via the applet's context menu.\nOnly the first Start at Sunrise and Start at Sunset checked boxes are taken into account."
+    },
+    "preset_list": {
+        "type": "list",
+        "description": "Your presets",
+        "columns" : [
+            {"id": "name", "title": "Name", "type": "string", "expand-width": true},
+            {"id": "show", "title": "Show\nin menu", "type": "boolean", "align": 0.5},
+            {"id": "brightness", "title": "Brightness", "type": "integer", "align": 0.5, "min": 0, "max": 100},
+            {"id": "gamma_red", "title": "Gamma\nRed", "type": "integer", "align": 0.5, "min": 0, "max": 100},
+            {"id": "gamma_green", "title": "Gamma\nGreen", "type": "integer", "align": 0.5, "min": 0, "max": 100},
+            {"id": "gamma_blue", "title": "Gamma\nBlue", "type": "integer", "align": 0.5, "min": 0, "max": 100},
+            {"id": "start_at_sunrise", "title": "Start at\nSunrise", "type": "boolean", "align": 0.5},
+            {"id": "start_at_sunset", "title": "Start at\nSunset", "type": "boolean", "align": 0.5}
+        ],
+        "default": [
+            {
+                "name": "All values at maximum",
+                "show": true,
+                "brightness": 100,
+                "gamma_red": 100,
+                "gamma_green": 100,
+                "gamma_blue": 100,
+                "start_at_sunrise": false,
+                "start_at_sunset": false
+            },
+            {
+                "name": "Day-time comfort",
+                "show": true,
+                "brightness": 80,
+                "gamma_red": 100,
+                "gamma_green": 95,
+                "gamma_blue": 90,
+                "start_at_sunrise": false,
+                "start_at_sunset": false
+            },
+            {
+                "name": "Night-time comfort",
+                "show": true,
+                "brightness": 70,
+                "gamma_red": 100,
+                "gamma_green": 90,
+                "gamma_blue": 80,
+                "start_at_sunrise": false,
+                "start_at_sunset": false
+            }
+        ]
+    },
+
+    "preset_sunrise_sunset_button": {
+        "type": "button",
+        "description": "Set Sunrise and Sunset times",
+        "callback": "on_preset_sunrise_sunset_button_clicked"
+    },
+
+    "preset_reload": {
+        "type": "button",
+        "description": "Apply all changes",
+        "callback": "on_preset_reload_button_clicked"
+    },
+
+    "last_values_string" : {
+        "type": "generic",
+        "default" : ""
+    },
+
+    "numberOfMonitors" : {
+        "type": "generic",
+        "default" : 1
+    }
+}

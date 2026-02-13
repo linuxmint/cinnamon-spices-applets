@@ -1,96 +1,114 @@
 import { DateTime } from "luxon";
-import { Logger } from "../../lib/logger";
-import { WeatherApplet } from "../../main";
-import { LocationData } from "../../types";
-import { _ } from "../../utils";
-import { GeoIP } from "./base";
+import { Logger } from "../../lib/services/logger";
+import type { LocationData, LocationServiceResult } from "../../types";
+import type { GeoIP } from "./base";
+import { REQUEST_TIMEOUT_SECONDS } from "../../consts";
 
 let GeoClueLib: typeof imports.gi.Geoclue | undefined = undefined;
 let GeocodeGlib: typeof imports.gi.GeocodeGlib | undefined = undefined;
+const { Cancellable } = imports.gi.Gio;
 
-interface ExtendedLocationData extends LocationData {
+interface ExtendedLocationData extends LocationServiceResult {
 	accuracy: imports.gi.Geoclue.AccuracyLevel;
 	altitude: number;
 }
 
 export class GeoClue implements GeoIP {
-	private app: WeatherApplet;
 
-	constructor(_app: WeatherApplet) {
-		this.app = _app;
+	constructor() {
 		try {
 			GeoClueLib = imports.gi.Geoclue;
 			GeocodeGlib = imports.gi.GeocodeGlib;
+			// It seems `new_with_thresholds` is not available in some versions of GeoClue2, so we need to check for it.
+			// https://github.com/linuxmint/cinnamon-spices-applets/issues/6137
+			if (GeoClueLib.Simple.new_with_thresholds == null || GeocodeGlib.Reverse.new_for_location == null) {
+				throw new Error("GeoClue2 required functions are not available");
+			}
 		}
-		catch (e) {
+		catch {
 			Logger.Info("GeoClue2 not available, disabling it's use.");
+			GeoClueLib = undefined;
+			GeocodeGlib = undefined;
 		}
 	}
 
-	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
 		if (GeoClueLib == null || GeocodeGlib == null) {
 			return null;
 		}
 
-		const { AccuracyLevel, Simple: GeoClue } = GeoClueLib;
-		const res = await new Promise<ExtendedLocationData | null>((resolve, reject) => {
-			Logger.Debug("Requesting coordinates from GeoClue");
-			const start = DateTime.now();
-			GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, cancellable, (client, res) => {
-				Logger.Debug(`Getting GeoClue coordinates finished, took ${start.diffNow().negate().as("seconds")} seconds.`);
-				let simple: imports.gi.Geoclue.Simple | null = null;
-				try {
-					simple = GeoClue.new_finish(res);
-					const clientObj = simple.get_client();
-					if (clientObj == null || !clientObj.active) {
-						Logger.Debug("GeoGlue Geolocation disabled, skipping");
-						resolve(null);
-						return;
-					}
-				}
-				catch (e) {
-					Logger.Error("Error while fetching GeoClue coordinates: ", e);
-					resolve(null);
-					return;
-				}
-
-				const loc = simple.get_location();
-				if (loc == null) {
-					Logger.Debug("GeoGlue coordinates is not known.");
-					resolve(null);
-					return;
-				}
-
-				const result: ExtendedLocationData = {
-					lat: loc.latitude,
-					lon: loc.longitude,
-					city: undefined,
-					country: undefined,
-					timeZone: "",
-					entryText: loc.latitude + "," + loc.longitude,
-					altitude: loc.altitude,
-					accuracy: loc.accuracy,
-				}
-
-				Logger.Debug(`GeoClue coordinates received ${JSON.stringify(result)}`);
-				resolve(result);
-				return;
-			})
-		});
-
-		if (res == null) {
+		if (cancellable.is_cancelled()) {
 			return null;
 		}
 
-		const geoCodeRes = await this.GetGeoCodeData(cancellable, res.lat, res.lon, res.accuracy);
-		if (geoCodeRes == null) {
-			return res;
-		}
+		const finalCancellable = Cancellable.new();
+		// I allow third of the time for GeoClue of the whole refresh because it's really bad getting the location
+		// unless you have gps. Even then it might be too much if you combine it with a provider that is slow on it's own
+		const timeout = setTimeout(() => finalCancellable.cancel(), Math.round((REQUEST_TIMEOUT_SECONDS / 3) * 1000));
 
-		return {
-			...res,
-			...geoCodeRes,
-		};
+		const { AccuracyLevel, Simple: GeoClue } = GeoClueLib;
+		try {
+			const res = await new Promise<ExtendedLocationData | null>((resolve) => {
+				Logger.Debug("Requesting coordinates from GeoClue");
+				const start = DateTime.now();
+				GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, finalCancellable, (client, res) => {
+					Logger.Debug(`Getting GeoClue coordinates finished, took ${start.diffNow().negate().as("seconds")} seconds.`);
+					let simple: imports.gi.Geoclue.Simple | null = null;
+					try {
+						simple = GeoClue.new_finish(res);
+						const clientObj = simple.get_client();
+						if (clientObj == null || !clientObj.active) {
+							Logger.Debug("GeoGlue Geolocation disabled, skipping");
+							resolve(null);
+							return;
+						}
+					}
+					catch (e) {
+						Logger.Error("Error while fetching GeoClue coordinates: ", e);
+						resolve(null);
+						return;
+					}
+
+					const loc = simple.get_location();
+					if (loc == null) {
+						Logger.Debug("GeoGlue coordinates is not known.");
+						resolve(null);
+						return;
+					}
+
+					const result: ExtendedLocationData = {
+						lat: loc.latitude,
+						lon: loc.longitude,
+						city: undefined,
+						country: undefined,
+						entryText: loc.latitude + "," + loc.longitude,
+						altitude: loc.altitude,
+						accuracy: loc.accuracy,
+					}
+
+					Logger.Debug(`GeoClue coordinates received ${JSON.stringify(result)}`);
+					resolve(result);
+					return;
+				})
+			});
+
+			if (res == null) {
+				return null;
+			}
+
+			const geoCodeRes = await this.GetGeoCodeData(finalCancellable, res.lat, res.lon, res.accuracy);
+			if (geoCodeRes == null) {
+				return res;
+			}
+
+			return {
+				...res,
+				...geoCodeRes,
+			};
+		}
+		finally {
+			clearTimeout(timeout);
+		}
 	};
 
 	private async GetGeoCodeData(cancellable: imports.gi.Gio.Cancellable, lat: number, lon: number, accuracy: imports.gi.Geoclue.AccuracyLevel): Promise<Partial<LocationData> | null> {
@@ -108,7 +126,7 @@ export class GeoClue implements GeoIP {
 		// Gnome's default Nominatim instance is fucked, or Cinnamon misconfigures it but it's permanently not working.
 		// I set to OpenStreetMaps instance because that works.
 		geoCodeRes.set_backend(GeocodeGlib.Nominatim.new("https://nominatim.openstreetmap.org", "weatherapplet@gmail.com"))
-		return new Promise<Partial<LocationData> | null>((resolve, reject) => {
+		return new Promise<Partial<LocationData> | null>((resolve) => {
 			Logger.Debug("Requesting location data from GeoCode");
 			const start = DateTime.now();
 				geoCodeRes.resolve_async(cancellable, (obj, res) => {

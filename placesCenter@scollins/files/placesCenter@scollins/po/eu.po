@@ -335,8 +335,8 @@ msgstr "Erakusteko zenbakia"
 
 #. settings-schema.json->recentShowUri->description
 msgid "Show complete path in tooltips"
-msgstr ""
+msgstr "Erakutsi ibilbide osoa tresna-aholkuetan"
 
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"
-msgstr ""
+msgstr "Pribatutasuna"

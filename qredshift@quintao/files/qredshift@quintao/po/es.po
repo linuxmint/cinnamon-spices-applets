@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-16 03:29-0100\n"
-"PO-Revision-Date: 2024-01-16 13:17-0300\n"
+"PO-Revision-Date: 2024-06-28 19:26-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: applet.js:239
 msgid "Reload Applet"
@@ -179,8 +179,8 @@ msgid ""
 "Automatically disabled under Wayland due to redshift not being yet supported "
 "by Wayland"
 msgstr ""
-"Desactivado automáticamente en Wayland debido a que redshift aún no es "
-"compatible con Wayland"
+"Desactivado automáticamente en Wayland debido a que redshift aún no está "
+"soportado por Wayland"
 
 #. settings-schema.json->enableAtStartup->description
 msgid "Reactivate QRedshift as soon as Cinnamon starts up"
@@ -371,6 +371,40 @@ msgstr ""
 "Si te gusta y usas este applet tómate el tiempo de visitar su página en "
 "Cinnamon Spices y dale una estrella. Sólo necesitas una cuenta de github "
 "para hacerlo."
+
+#~ msgid "Generate .POT file"
+#~ msgstr "Generar archivo .POT"
+
+#~ msgid "Not supported on wayland!"
+#~ msgstr "¡No compatible con wayland!"
+
+#~ msgid "Something went wrong!"
+#~ msgstr "¡Algo salió mal!"
+
+#~ msgid "package can be removed."
+#~ msgstr "el paquete se puede eliminar."
+
+#~ msgid ""
+#~ "Old Redshift package is no longer required and can be safely removed."
+#~ msgstr ""
+#~ "El paquete antiguo Redshift ya no es necesario y se puede eliminar de "
+#~ "forma segura."
+
+#~ msgid ""
+#~ "Automatically disabled under Wayland due to cinnamon compositor not yet "
+#~ "support gamma ramps change."
+#~ msgstr ""
+#~ "Desactivado automáticamente en Wayland debido a que el compositor "
+#~ "cinnamon aún no soporta el cambio de rampas gamma."
+
+#~ msgid "Step"
+#~ msgstr "Avance"
+
+#~ msgid "Step when changing by shortcuts"
+#~ msgstr "Avance al cambiar por atajos"
+
+#~ msgid "Step when changing value by shortcuts"
+#~ msgstr "Avance al cambiar el valor mediante accesos directos"
 
 #~ msgid "(even if it has previously been deactivated)"
 #~ msgstr "(aunque se haya desactivado previamente)"

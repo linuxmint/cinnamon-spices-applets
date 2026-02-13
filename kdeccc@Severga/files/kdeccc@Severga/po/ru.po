@@ -40,7 +40,7 @@ msgstr "    Заставить устройство издать звук"
 
 #: applet.js:125
 msgid "    Send File to..."
-msgstr "    Отправить файл на устройство..."
+msgstr "    Отправить файлы на устройство..."
 
 #: applet.js:130
 msgid "    Send SMS via..."

@@ -1,14 +1,12 @@
-import { Config } from "../config";
+import type { Config } from "../config";
 import { Event } from "../lib/events";
-import { Logger } from "../lib/logger";
-import { WeatherApplet } from "../main";
+import { Logger } from "../lib/services/logger";
 import { NotificationService } from "../lib/notification_service";
-import { LocationData } from "../types";
+import type { LocationData } from "../types";
 import { ValidTimezone, _ } from "../utils";
 import { DateTime } from "luxon";
 export class LocationStore {
 	private locations: LocationData[] = [];
-	private app: WeatherApplet;
 	private config: Config;
 
 	/**
@@ -23,14 +21,32 @@ export class LocationStore {
 	 * event callback for applet when location storage is modified
 	 */
 	public readonly StoreChanged = new Event<LocationStore, number>();
+	public readonly CurrentLocationModified = new Event<LocationStore, void>();
 
-	constructor(app: WeatherApplet, config: Config) {
-		this.app = app;
+
+	constructor(config: Config) {
 		this.config = config;
 		this.locations = config._locationList;
 	}
 
-	public OnLocationChanged(locs: LocationData[]) {
+	private AreLocationsDifferent(old: LocationData[], newLocs: LocationData[]): boolean {
+		if (old.length != newLocs.length)
+			return true;
+
+		for (let i = 0; i < old.length; i++) {
+			if (!this.IsEqual(old[i], newLocs[i]))
+				return true;
+		}
+
+		return false;
+	}
+
+	public OnLocationChanged(locs: LocationData[]): void {
+		if (!this.AreLocationsDifferent(this.locations, locs)) {
+			Logger.Debug("Location store not changed, skipping update")
+			return;
+		}
+
 		// Ensure Entry text is not empty
 		for (let index = 0; index < locs.length; index++) {
 			const element = locs[index];
@@ -39,14 +55,14 @@ export class LocationStore {
 			}
 		}
 
-		let currentIndex = this.FindIndex(this.config.CurrentLocation);
-		let newIndex = this.FindIndex(this.config.CurrentLocation, locs);
+		const currentIndex = this.FindIndex(this.config.CurrentLocation);
+		const newIndex = this.FindIndex(this.config.CurrentLocation, locs);
 		let currentlyDisplayedChanged = false;
 		let currentlyDisplayedDeleted = false;
 		// no need to do anything, not using locationstore atm
 		if (newIndex == -1 && currentIndex == -1) {
-			let tmp: LocationData[] = [];
-			this.locations = locs.concat(tmp);
+			const tmp: LocationData[] = [];
+			this.locations = [...locs, ...tmp];
 			this.InvokeStorageChanged();
 			return;
 		}
@@ -60,12 +76,12 @@ export class LocationStore {
 		else if (newIndex != currentIndex)
 			this.currentIndex = newIndex
 
-		let tmp: LocationData[] = [];
-		this.locations = locs.concat(tmp);
+		const tmp: LocationData[] = [];
+		this.locations = [...locs, ...tmp];
 
 		if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
 			Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.")
-			this.app.Refresh();
+			this.CurrentLocationModified.Invoke(this);
 		}
 		this.InvokeStorageChanged();
 	}
@@ -200,11 +216,7 @@ export class LocationStore {
 			return false;
 	}
 
-	public async SaveCurrentLocation(loc: LocationData | null) {
-		// if (this.app.Locked()) {
-		// 	NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
-		// 	return;
-		// }
+	public SaveCurrentLocation(loc: LocationData | null): void {
 		if (loc == null) {
 			NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can't save an incorrect location"), true);
 			return;
@@ -213,9 +225,6 @@ export class LocationStore {
 			NotificationService.Instance.Send(_("Info") + " - " + _("Location Store"), _("Location is already saved"), true);
 			return;
 		}
-		// Save tz if it exists
-		if (this.app.config.Timezone)
-			loc.timeZone = this.app.config.Timezone;
 
 		this.locations.push(loc);
 		this.currentIndex = this.locations.length - 1; // head to saved location
@@ -257,7 +266,7 @@ export class LocationStore {
 		let key: keyof LocationData;
 		for (key in newLoc) {
 			if (oldLoc[key] != newLoc[key]) {
-				return false
+				return false;
 			}
 		}
 		return true;

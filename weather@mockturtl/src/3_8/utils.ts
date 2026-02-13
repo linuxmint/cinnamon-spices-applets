@@ -1,32 +1,38 @@
-import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
+import type { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
-import { Logger } from "./lib/logger";
-import { APIUniqueField, ArrowIcons, BuiltinIcons, SunTime, WeatherData } from "./types";
+import { Literal } from "./lib/commandRunner";
+import { Logger } from "./lib/services/logger";
+import type { ArrowIcons, SunTime } from "./types";
+import type { APIUniqueField, AlertLevel, BuiltinIcons, WeatherData } from "./weather-data";
 import { DateTime } from "luxon";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
+const { EllipsizeMode } = imports.gi.Pango;
 const { IconTheme } = imports.gi.Gtk;
 const { Object } = imports.gi.GObject;
+
+export function Label(options?: Partial<imports.gi.St.LabelInitOptions> | undefined): imports.gi.St.Label {
+	// eslint-disable-next-line no-restricted-syntax
+	const label = new imports.gi.St.Label(options);
+	label.clutter_text.ellipsize = EllipsizeMode.NONE;
+	return label;
+}
 
 // --------------------------------------------------------------
 // Text Generators
 
-export function _(str: string, args?: KeysValuePairs): string {
+export function _(str: string, args?: Record<string, string>): string {
 	let result = imports.gettext.dgettext(UUID, str);
 
 	if (result === str && result === "")
 		result = imports.gettext.gettext(str);
 
-	if (!!args)
+	if (args)
 		result = format(result, args);
 	return result;
 }
 
-interface KeysValuePairs {
-	[key: string]: any
-}
-
-export function format(str: string, args: KeysValuePairs) {
+export function format(str: string, args: Record<string, string>): string {
 	for (const key in args) {
 		str = str.replace(new RegExp("\\{" + key + "\\}"), args[key]);
 	}
@@ -41,7 +47,7 @@ export function UnitToUnicode(unit: Exclude<WeatherUnits, "automatic">): string 
 }
 
 /** Generates text for the LocationButton on to of the popup menu and tooltip */
-export function GenerateLocationText(weather: WeatherData, config: Config) {
+export function GenerateLocationText(weather: WeatherData, config: Config): string {
 	let location = "";
 	if (weather.location.city != null && weather.location.country != null) {
 		location = weather.location.city + ", " + weather.location.country;
@@ -57,24 +63,165 @@ export function GenerateLocationText(weather: WeatherData, config: Config) {
 	return location;
 }
 
-export function InjectValues(text: string, weather: WeatherData, config: Config): string {
-	const lastUpdatedTime = AwareDateString(weather.date, config._show24Hours, DateTime.local().zoneName);
-	return text.replace(/{t}/g, TempToUserConfig(weather.temperature, config, false) ?? "")
-			   .replace(/{u}/g, UnitToUnicode(config.TemperatureUnit))
-			   .replace(/{c}/g, weather.condition.main)
-			   .replace(/{c_long}/g, weather.condition.description)
-			   .replace(/{dew_point}/g, TempToUserConfig(weather.dewPoint, config, false) ?? "")
-			   .replace(/{humidity}/g, weather.humidity?.toString() ?? "")
-			   .replace(/{pressure}/g, weather.pressure != null ? PressToUserUnits(weather.pressure, config._pressureUnit).toString() : "")
-			   .replace(/{pressure_unit}/g, config._pressureUnit)
-			   .replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "")
-			   .replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
-			   .replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "")
-			   .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "")
-			   .replace(/{city}/g, weather.location.city ?? "")
-			   .replace(/{country}/g, weather.location.country ?? "")
-			   .replace(/{search_entry}/g, config.CurrentLocation?.entryText ?? "")
-			   .replace(/{last_updated}/g, lastUpdatedTime);
+interface TagOptions {
+	value: string; // Ensure value is always a string
+	padLength?: number; // Optional padding length
+	padRight?: boolean; // Optional flag for left or right padding
+	padChar?: string; // Optional character for padding
+	precision?: number; // Optional number of decimal places
+}
+
+export function InjectValues(text: string, weather: WeatherData, config: Config, inCommand: boolean = false): string {
+	const { date, temperature, condition, dewPoint, humidity, pressure, wind, location, forecasts, hourlyForecasts, sunrise, sunset, extra_field } = weather;
+	const { _show24Hours, TemperatureUnit, _pressureUnit, WindSpeedUnit, CurrentLocation } = config;
+
+	const currentZone = DateTime.local().zoneName;
+	const timeNow = DateTime.utc().setZone(currentZone);
+	const lastUpdatedTime = AwareDateString(date, _show24Hours, currentZone);
+	const temp = TempToUserConfig(temperature, config, false) ?? "";
+	const tempUnit = UnitToUnicode(TemperatureUnit);
+	const conditionMain = condition.main;
+	const conditionDescription = condition.description;
+	const dewPointVal = TempToUserConfig(dewPoint, config, false) ?? "";
+	const humidityVal = humidity?.toString() ?? "";
+	const pressureVal = pressure ? PressToUserUnits(pressure, _pressureUnit).toString() : "";
+	const extraValue = extra_field ? ExtraFieldToUserUnits(extra_field, config) : "";
+	const extraName = extra_field?.name ?? "";
+	const windSpeed = wind.speed ? MPStoUserUnits(wind.speed, WindSpeedUnit) : "";
+	const windDir = wind.degree ? CompassDirectionText(wind.degree) : "";
+	const windArrow = wind.degree ? CompassDirectionArrow(wind.degree) : "";
+	const windDegree = wind.degree?.toString() ?? "";
+	const city = location.city ?? "";
+	const country = location.country ?? "";
+	const searchEntry = CurrentLocation?.entryText ?? "";
+
+	// Forecast-related variables
+	const tmr = forecasts?.[1] ?? null;
+	const forecastHours = hourlyForecasts?.[2] ? hourlyForecasts : null;
+	const forecastHour = forecastHours?.[2] ?? null;
+	const tempHour = (forecastHour?.temp != null) ? TempToUserConfig(forecastHour.temp, config, false) ?? "" : "";
+	const tempHourDiff = (temperature != null && tempHour != null) ? ValueChange(Number(temp), Number(tempHour)) : "";
+	const conditionTomorrow = tmr?.condition.main ?? "";
+	const tempMin = tmr ? TempToUserConfig(forecasts[0].temp_min, config, false) ?? "" : "";
+	const tempMax = tmr ? TempToUserConfig(forecasts[0].temp_max, config, false) ?? "" : "";
+	const tempMinTomorrow = tmr ? TempToUserConfig(tmr.temp_min, config, false) ?? "" : "";
+	const tempMaxTomorrow = tmr ? TempToUserConfig(tmr.temp_max, config, false) ?? "" : "";
+	const tempsTomorrow = tmr ? TempRangeToUserConfig(tmr.temp_min, tmr.temp_max, config) : "";
+	const tmrMinTempChange = tempMinTomorrow && tempMin ? SignedNumber(Number(tempMinTomorrow) - Number(tempMin)) ?? "" : "";
+	const tmrMaxTempChange = tempMaxTomorrow && tempMax ? SignedNumber(Number(tempMaxTomorrow) - Number(tempMax)) ?? "" : "";
+	const tempsTomorrowWithDifferences = tmr ? `${tempsTomorrow} (${tmrMinTempChange} / ${tmrMaxTempChange})` : "";
+
+	// Sunrise and sunset calculations
+	const sunriseTime = sunrise ? GetHoursMinutes(sunrise, _show24Hours) ?? "" : "";
+	const sunsetTime = sunset ? GetHoursMinutes(sunset, _show24Hours) ?? "" : "";
+	const dayLengthVal = sunset && sunrise ? sunset.diff(sunrise) : "";
+	const dayLength = dayLengthVal ? dayLengthVal.toFormat("h:mm") : "";
+	const daylightRemainVal = sunrise && sunset ? sunset.diff(timeNow) : null;
+	const isDaylight = sunrise && sunset ? !IsNight({ sunrise: sunrise, sunset: sunset }) : false;
+	const daylightRemain = isDaylight && daylightRemainVal ? daylightRemainVal.toFormat("h:mm") : "";
+	const daylightRemainPct = sunrise && sunset && isDaylight
+		? Math.round((sunset.toMillis() - timeNow.toMillis()) * 100 / (sunset.toMillis() - sunrise.toMillis())).toString()
+		: "0";
+	const dayLengthLightRemain = `${dayLength}${daylightRemain !== "" ? ` (${daylightRemain})` : ""}`;
+	const uvIndex = weather.uvIndex != null ? (Math.round(weather.uvIndex * 10) / 10).toString() : "";
+
+	// Define values and their defaults for padding and formatting
+	const valuesPaddingDefaults: Record<string, TagOptions> = {
+		t: { value: temp.toString(), padLength: 3, padRight: true, padChar: ' ' },
+		u: { value: tempUnit.toString() },
+		c: { value: conditionMain.toString() },
+		c_long: { value: conditionDescription.toString() },
+		dew_point: { value: dewPointVal.toString() },
+		humidity: { value: humidityVal.toString(), padLength: 2, padRight: true },
+		pressure: { value: pressureVal.toString(), padLength: 6, padRight: true },
+		pressure_unit: { value: _pressureUnit.toString() },
+		extra_value: { value: extraValue.toString(), padLength: 3, padRight: true },
+		extra_name: { value: extraName.toString() },
+		city: { value: city.toString() },
+		country: { value: country.toString() },
+		search_entry: { value: searchEntry.toString() },
+		last_updated: { value: lastUpdatedTime.toString() },
+		wind_speed: { value: windSpeed.toString() },
+		wind_dir: { value: windDir.toString() },
+		wind_arrow: { value: windArrow.toString() },
+		wind_deg: { value: windDegree.toString() },
+		wind_unit: { value: WindSpeedUnit.toString() },
+		min: { value: tempMin.toString() },
+		max: { value: tempMax.toString() },
+		tmr_min: { value: tempMinTomorrow.toString() },
+		tmr_max: { value: tempMaxTomorrow.toString() },
+		tmr_min_diff: { value: tmrMinTempChange.toString() },
+		tmr_max_diff: { value: tmrMaxTempChange.toString() },
+		tmr_c: { value: conditionTomorrow.toString() },
+		tmr_t: { value: tempsTomorrow.toString(), padLength: 3, padRight: true },
+		tmr_td: { value: tempsTomorrowWithDifferences.toString() },
+		sunset: { value: sunsetTime.toString() },
+		sunrise: { value: sunriseTime.toString() },
+		day_length: { value: dayLength.toString() },
+		day_remain: { value: daylightRemain.toString() },
+		day_len_rem: { value: dayLengthLightRemain.toString() },
+		day_rem_pct: { value: daylightRemainPct.toString() },
+		t_h: { value: tempHour.toString() },
+		t_h_diff: { value: tempHourDiff.toString() },
+		br: { value: "\n" },
+		uv: { value: uvIndex },
+		uv_text: { value: weather.uvIndex != null ? UVIndexToText(weather.uvIndex) : _("Unknown") },
+	};
+
+	// Process text replacement for each tag
+	for (const tagName in valuesPaddingDefaults) {
+		const options = valuesPaddingDefaults[tagName];
+		const { value: tagValue, padLength = 0, padRight = true, padChar = ' ' } = options;
+
+		if (tagName == null || tagValue == null) continue;
+
+		const regexp = new RegExp(`(\\{{1,3})(\\b${EscapeRegex(tagName)}\\b)([,\\.]{0,1})(\\d{0,2})\\.{0,1}([^\\}]{0,1})(\\}{1,3})`, 'g');
+		let match: RegExpExecArray | null;
+
+		while ((match = regexp.exec(text)) !== null) {
+			const literalStart = match[1] || '';
+			const literalEnd = match[6] || '';
+
+			const paddingSpecifier = match[3] || undefined;
+			const paddingSize = match[4] || undefined;
+			const padCharMatch = match[5] || undefined;
+
+			const padLiteral = literalStart === "{{{" && literalEnd === "}}}";
+			const isLiteral = literalStart === "{{" && literalEnd === "}}";
+			const noPad = inCommand && !padLiteral;
+
+			const applyPadRight: boolean = (paddingSpecifier === '.' || (paddingSpecifier === undefined && padRight));
+			const applyPad: number = paddingSize ? Number(paddingSize) : padLength;
+			const charPad: string = padCharMatch || padChar;
+
+			let formattedValue: string = tagValue; // tagValue is guaranteed to be a string
+
+			if (!noPad) {
+				formattedValue = applyPadRight ? formattedValue.padEnd(applyPad, charPad) : formattedValue.padStart(applyPad, charPad);
+			}
+
+			text = text.replace(regexp, isLiteral || padLiteral ? Literal(formattedValue) : formattedValue);
+		}
+	}
+	return text;
+}
+
+export function UVIndexToText(uvIndex: number): string {
+	if (uvIndex < 3) {
+		return _("Low");
+	}
+	else if (uvIndex < 6) {
+		return _("Moderate");
+	}
+	else if (uvIndex < 8) {
+		return _("High");
+	}
+	else if (uvIndex < 11) {
+		return _("Very High");
+	}
+	else {
+		return _("Extreme");
+	}
 }
 
 export function CapitalizeFirstLetter(description: string): string {
@@ -137,7 +284,7 @@ export function GetDayName(date: DateTime, options: GetDayNameOptions = {}): str
 	let now = DateTime.utc();
 	let tomorrow = DateTime.utc().plus({ days: 1 });
 
-	if (!!tz) {
+	if (tz) {
 		now = now.setZone(tz);
 		tomorrow = tomorrow.setZone(tz);
 		date = date.setZone(tz);
@@ -145,8 +292,8 @@ export function GetDayName(date: DateTime, options: GetDayNameOptions = {}): str
 
 	// today or tomorrow, no need to include date
 	if (useTodayTomorrow) {
-	if (date.hasSame(now, "day") || date.hasSame(tomorrow, "day"))
-		delete params.weekday;
+		if (date.hasSame(now, "day") || date.hasSame(tomorrow, "day"))
+			delete params.weekday;
 	}
 
 	let dateString = date.toLocaleString(params);
@@ -170,7 +317,7 @@ export function GetHoursMinutes(date: DateTime, hours24Format: boolean, tz?: str
 
 	if (!onlyHours)
 		params.minute = "2-digit";
-	if (!!tz)
+	if (tz)
 		date = date.setZone(tz);
 	return date.toLocaleString(params);
 }
@@ -218,11 +365,8 @@ export function ValidTimezone(tz: string): boolean {
 // To UserConfig converters
 
 /** Capitalizes first letter and translates if needed */
-export function ProcessCondition(condition: string, shouldTranslate: boolean) {
-	condition = CapitalizeFirstLetter(condition);
-	if (shouldTranslate)
-		condition = _(condition);
-	return condition;
+export function ProcessCondition(condition: string): string {
+	return CapitalizeFirstLetter(condition);
 }
 
 export function LocalizedColon(locale: string | null): string {
@@ -494,8 +638,41 @@ export function CompassDirectionText(deg: number): string {
 	const directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
 	return directions[Math.round(deg / 45) % directions.length]
 }
+export function CompassDirectionArrow(deg: number): string {
+	const directions = ['↓', '↙', '←', '↖', '↑', '↗', '→', '↘'];
+	return directions[Math.round(deg / 45) % directions.length];
+}
+export function SignedNumber(number: number): string {
+	return number < 0 ? number.toString() : '+' + number;
+}
+export function EscapeRegex(string: string): string {
+	return string.replace(/[$()*+.?[\\\]^{|}]/g, '\\$&');
+}
+export function ValueChange(temp1: number, temp2: number, large_percent: number = 15): string {
+	const arrows = ['↡', '↓', '↔', '↑', '↟'];
+	const diff: number = Math.round((temp2 - temp1) * 10) / 10;
+	const absDiff: number = Math.abs(diff);
+	const drop: boolean = diff < 0;
+	const rise: boolean = diff > 0;
 
+	const percentageChange: number = (absDiff * 100 / Math.max(temp1, temp2));
+	const large: boolean = percentageChange >= large_percent;
 
+	let index: number;
+	if (drop && large) {
+		index = 0;
+	} else if (drop) {
+		index = 1;
+	} else if (diff == 0) {
+		index = 2;
+	} else if (rise && !large) {
+		index = 3;
+	} else {
+		index = 4;
+	}
+
+	return `${arrows[index]}${absDiff}`;
+}
 // -----------------------------------------------------------------
 // Testers
 
@@ -506,7 +683,7 @@ export function CompassDirectionText(deg: number): string {
  */
 export function IsNight(sunTimes: SunTime, date?: DateTime): boolean {
 	if (!sunTimes) return false;
-	const time = (!!date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
+	const time = (date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
 	const sunrise = MilitaryTime(sunTimes.sunrise);
 	const sunset = MilitaryTime(sunTimes.sunset);
 	if (time >= sunrise && time < sunset) return false;
@@ -533,21 +710,37 @@ export function IsLangSupported(lang: string | null, languages: Array<string>): 
 };
 
 function HasIcon(icon: string, icon_type: imports.gi.St.IconType): boolean {
-	return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''))
+	const iconName = icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : '');
+
+	const result = IconTheme.get_default().has_icon(iconName);
+
+	if (!result) {
+		Logger.Debug(`${iconName} not found`);
+	}
+	else {
+		const iconInfo = IconTheme.get_default().lookup_icon(iconName, 16, icon_type == IconType.SYMBOLIC ? imports.gi.Gtk.IconLookupFlags.FORCE_SYMBOLIC : imports.gi.Gtk.IconLookupFlags.FORCE_REGULAR);
+		Logger.Debug(`${iconName} found at ${iconInfo?.get_filename()} and is ${iconInfo?.is_symbolic() ? "symbolic" : "regular"}`);
+	}
+	return result;
 }
 
 // --------------------------------------------------------
 // ETC
 
-export function mode<T>(arr: T[]): T | null {
+/**
+ * Must be used with at leas 1 element array
+ * @param arr
+ * @returns
+ */
+export function mode<T extends number>(arr: T[]): T {
 	return arr.reduce(function (current, item) {
-		var val = current.numMapping[item] = (current.numMapping[item] || 0) + 1;
+		const val = current.numMapping[item] = (current.numMapping[item] || 0) + 1;
 		if (val > current.greatestFreq) {
 			current.greatestFreq = val;
 			current.mode = item;
 		}
 		return current;
-	}, { mode: null, greatestFreq: -Infinity, numMapping: {} as any } as { mode: T | null, greatestFreq: number, numMapping: any }).mode;
+	}, { mode: 0, greatestFreq: -Infinity, numMapping: {} } as { mode: T, greatestFreq: number, numMapping: Record<T, number> }).mode;
 };
 
 // Passing appropriate resolver function for the API, and the code
@@ -565,7 +758,7 @@ export function WeatherIconSafely(icons: BuiltinIcons[], icon_type: imports.gi.S
  * @param percent between -1.0 and 1.0
  */
 export function ShadeHexColor(color: string, percent: number): string {
-	var f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
+	const f = Number.parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
 	return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
 }
 
@@ -576,7 +769,7 @@ export function ShadeHexColor(color: string, percent: number): string {
 export function ConstructJsLocale(locales: string[]): string | null {
 	for (const locale of locales) {
 		// we only need lan_country section of locale, if we have space, @ or . we need to remove everything after
-		const jsLocale: string = locale.split(/[.\s@]/)[0].trim();
+		const jsLocale: string = locale.split(/[\s.@]/)[0].trim();
 		const tmp: string[] = jsLocale.split("_");
 
 		let result: string = "";
@@ -591,7 +784,7 @@ export function ConstructJsLocale(locales: string[]): string | null {
 		try {
 			new Date().toLocaleString(result);
 		}
-		catch(e) {
+		catch (e) {
 			Logger.Info(`Invalid locale: ${result}, not supported by JS, ignoring.`);
 			Logger.Debug(e?.toString() ?? "");
 			continue;
@@ -606,6 +799,33 @@ export function ConstructJsLocale(locales: string[]): string | null {
 	}
 
 	return null;
+}
+
+const lightAlertColors: Record<AlertLevel, string> = {
+	// Darker shade of darkAlertColors
+	"minor": "#7FCC00",
+	"moderate": "#FFC400",
+	"severe": "#FF6A00",
+	"extreme": "#FF0000",
+	"unknown": "#000000"
+
+}
+
+const darkAlertColors: Record<AlertLevel, string> = {
+	"minor": "#AAFF00",
+	"moderate": "#FFD700",
+	"severe": "#FFA500",
+	"extreme": "#FF0000",
+	"unknown": "#FFFFFF"
+}
+
+/**
+ * Returns hex string
+ * @param level
+ * @param lightTheme
+ */
+export function GetAlertColor(level: AlertLevel, lightTheme: boolean): string {
+	return lightTheme ? lightAlertColors[level] : darkAlertColors[level];
 }
 
 /**
@@ -631,25 +851,26 @@ export function GetDistance(lat1: number, lon1: number, lat2: number, lon2: numb
 	return R * c; // in metres
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function GetFuncName(func: Function): string {
 	return func.name;
 }
 
-export function Guid() {
+export function Guid(): string {
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-		var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+		const r = Math.trunc(Math.random() * 16), v = c == 'x' ? r : (r & 0x3 | 0x8);
 		return v.toString(16);
 	});
 }
 
-export const isFinalized = function (obj: any) {
-	return obj && Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
+export const isFinalized = function (obj: unknown): boolean {
+	return !!obj && Object.prototype.toString.call(obj).includes('FINALIZED');
 }
 
 interface CompareVersionOptions {
 	/**
 	 * Changes the result if one version string has less parts than the other. In
- 	 * this case the shorter string will be padded with "zero" parts instead of being considered smaller.
+	   * this case the shorter string will be padded with "zero" parts instead of being considered smaller.
 	 */
 	zeroExtend: boolean;
 }
@@ -664,7 +885,7 @@ interface CompareVersionOptions {
  *   - a positive integer iff v1 > v2
  *   - NaN if either version string is in the wrong format
  */
-export function CompareVersion(v1: string, v2: string, options?: CompareVersionOptions) {
+export function CompareVersion(v1: string, v2: string, options?: CompareVersionOptions): number {
 	const zeroExtend = options && options.zeroExtend,
 		v1parts = v1.split('.'),
 		v2parts = v2.split('.');
@@ -674,7 +895,7 @@ export function CompareVersion(v1: string, v2: string, options?: CompareVersionO
 	}
 
 	if (!v1parts.every(isValidPart) || !v2parts.every(isValidPart)) {
-		return NaN;
+		return Number.NaN;
 	}
 
 	if (zeroExtend) {
@@ -682,7 +903,7 @@ export function CompareVersion(v1: string, v2: string, options?: CompareVersionO
 		while (v2parts.length < v1parts.length) v2parts.push("0");
 	}
 
-	for (var i = 0; i < v1parts.length; ++i) {
+	for (let i = 0; i < v1parts.length; ++i) {
 		if (v2parts.length == i) {
 			return 1;
 		}
@@ -708,13 +929,16 @@ export function CompareVersion(v1: string, v2: string, options?: CompareVersionO
 // -----------------------------------------------------------
 // Timeout polyfill
 
-export function setTimeout(func: Function, ms: number) {
-	let args: any[] = [];
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function setTimeout(func: Function, ms: number): number {
+	let args: unknown[] = [];
 	if (arguments.length > 2) {
+		// eslint-disable-next-line prefer-rest-params
 		args = args.slice.call(arguments, 2);
 	}
 
 	const id = timeout_add(ms, () => {
+		// eslint-disable-next-line prefer-spread
 		func.apply(null, args);
 		return false; // Stop repeating
 	});
@@ -723,27 +947,48 @@ export function setTimeout(func: Function, ms: number) {
 };
 
 export async function delay(ms: number): Promise<void> {
-	return await new Promise((resolve, reject) => {
+	return await new Promise((resolve) => {
 		setTimeout(() => {
 			resolve();
 		}, ms);
 	});
 }
 
-export function clearTimeout(id: number) {
+export function clearTimeout(id: number): void {
 	source_remove(id);
 };
 
-export function setInterval(func: Function, ms: number) {
-	let args: any[] = [];
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function setInterval(func: Function, ms: number): number {
+	let args: unknown[] = [];
 	if (arguments.length > 2) {
+		// eslint-disable-next-line prefer-rest-params
 		args = args.slice.call(arguments, 2);
 	}
 
 	const id = timeout_add(ms, () => {
+		// eslint-disable-next-line prefer-spread
 		func.apply(null, args);
 		return true; // Repeat
 	});
 
 	return id;
 };
+
+/**
+ * Can have false negatives if the function cannot be initialised
+ * @param f 
+ * @returns 
+ */
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+export function isConstructor(f: any): boolean {
+	try {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+		new f();
+	}
+	catch {
+		// verify err is the expected error and then
+		return false;
+	}
+	return true;
+}

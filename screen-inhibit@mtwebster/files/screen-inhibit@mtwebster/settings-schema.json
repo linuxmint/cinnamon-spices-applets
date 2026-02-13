@@ -1,45 +1,170 @@
 {
- "head" : {
-    "type" : "header",
-    "description" : "Icons"
- },
- "off-icon": {
+  "layoutSI": {
+    "type": "layout",
+    "pages": [
+      "pGeneral",
+      "pIcons",
+      "pKeybindings"
+    ],
+    "pGeneral": {
+      "type": "page",
+      "title": "General",
+      "sections": [
+        "sectionStartup",
+        "sectionDurationOrEndTime",
+        "sectionBlocking"
+      ]
+    },
+    "pIcons": {
+      "type": "page",
+      "title": "Icons",
+      "sections": [
+        "sectionIcons"
+      ]
+    },
+    "pKeybindings": {
+      "type": "page",
+      "title": "Keybinding",
+      "sections": [
+        "sectionKeybindings"
+      ]
+    },
+    "sectionStartup": {
+      "type": "section",
+      "title": "Startup",
+      "keys": [
+        "inhibit-at-startup",
+        "seconds-after-startup"
+      ]
+    },
+    "sectionDurationOrEndTime": {
+      "type": "section",
+      "title": "Duration or End Time of screen saver inhibition",
+      "keys": [
+        "end-timechooser",
+        "end-type"
+      ]
+    },
+    "sectionBlocking": {
+      "type": "section",
+      "title": "Way to block the screensaver",
+      "keys": [
+        "locklabel",
+        "locktype",
+        "lockinterval"
+      ]
+    },
+    "sectionKeybindings": {
+      "type": "section",
+      "title": "Keybinding",
+      "keys": [
+        "keybinding"
+      ]
+    },
+    "sectionIcons": {
+      "type": "section",
+      "title": "Icons",
+      "keys": [
+        "off-icon",
+        "on-icon",
+        "reset-icons"
+      ]
+    }
+  },
+  "end-timechooser": {
+    "type": "timechooser",
+    "default": {
+      "h": 12,
+      "m": 0,
+      "s": 0
+    },
+    "description": "Time",
+    "tooltip": "Seconds will be ignored."
+  },
+  "end-type": {
+    "type": "combobox",
+    "default": 0,
+    "description": "The time shown above is",
+    "options": {
+      "to be disregarded": 0,
+      "the inhibit duration": 1,
+      "the inhibit end time": 2
+    }
+  },
+  "off-icon": {
     "type": "iconfilechooser",
-    "default" : "screen-inhibit-symbolic",
-    "description" : "Power management allowed icon:",
-    "tooltip" : "Select an icon file, or you can type an icon name into the entry box",
-    "indent" : true
- },
- "on-icon": {
+    "default": "screen-inhibit-symbolic",
+    "description": "Power management allowed icon:",
+    "tooltip": "Select an icon file, or you can type an icon name into the entry box",
+    "indent": true
+  },
+  "on-icon": {
     "type": "iconfilechooser",
-    "default" : "screen-inhibit-active-symbolic",
-    "description" : "Power management prevented icon:",
-    "tooltip" : "Select an icon file, or you can type an icon name into the entry box",
-    "indent" : true
- },
- "reset-icons": {
-     "type": "button",
-     "description" : "Reset to default icons",
-     "callback": "reset_to_default_icons"
- },
- "head1" : {
-    "type" : "header",
-    "description" : "Keybinding"
- },
- "keybinding" : {
-    "type" : "keybinding",
-    "description" : "Set the keybinding for screensaver inhibit",
-    "default" : "<Control>i",
+    "default": "screen-inhibit-active-symbolic",
+    "description": "Power management prevented icon:",
+    "tooltip": "Select an icon file, or you can type an icon name into the entry box",
     "indent": true
- },
- "head2" : {
-    "type" : "header",
-    "description" : "Startup"
- },
- "inhibit-at-startup" : {
-    "type" : "switch",
-    "default" : false,
-    "description" : "Inhibit screensaver at startup",
+  },
+  "reset-icons": {
+    "type": "button",
+    "description": "Reset to default icons",
+    "callback": "reset_to_default_icons"
+  },
+  "keybinding": {
+    "type": "keybinding",
+    "description": "Set the keybinding for screensaver inhibit",
+    "default": "<Control>i",
     "indent": true
- }
+  },
+  "inhibit-at-startup": {
+    "type": "switch",
+    "default": false,
+    "description": "Inhibit screensaver at startup",
+    "indent": true
+  },
+  "seconds-after-startup": {
+    "type": "scale",
+    "default": 0,
+    "min": 0,
+    "max": 60,
+    "step": 1,
+    "dependency": "inhibit-at-startup",
+    "description": "Number of seconds before screensaver inhibition"
+  },
+  "locklabel": {
+    "type": "label",
+    "description": "(Avoid using aggressive ways, if possible.)"
+  },
+  "locktype": {
+    "type": "combobox",
+    "default": "normal",
+    "description": "Blocking mode",
+    "options": {
+      "Normal": "normal",
+      "Aggressive": "aggressive1",
+      "Super aggressive": "aggressive2"
+    }
+  },
+  "lockinterval": {
+    "type": "spinbutton",
+    "dependency": "locktype!=normal",
+    "default": 5,
+    "description": "Blocking interval",
+    "min": 1,
+    "max": 60,
+    "step": 1,
+    "units": "minutes"
+  },
+  "old-sleep-display-ac": {
+    "type": "generic",
+    "default": 0
+  },
+  "old-sleep-inactive-ac-timeout": {
+    "type": "generic",
+    "default": 0
+  },
+  "starting-time-in-minutes": {
+    "type": "generic",
+    "default": 0
+  }
 }

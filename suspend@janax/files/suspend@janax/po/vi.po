@@ -1,0 +1,102 @@
+# SUSPEND COMPUTER
+# This file is put in the public domain.
+# janax, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: suspend@janax 2.0.4\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-29 20:37-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:48
+msgid "Suspend"
+msgstr "Ngủ đông"
+
+#. metadata.json->description
+msgid "Immediately suspends the computer"
+msgstr "Ngay lập tức đưa máy tính vào trạng thái ngủ đông"
+
+#. metadata.json->name
+msgid "Suspend computer"
+msgstr "Ngủ đông máy tính"
+
+#. settings-schema.json->suspend-header->description
+msgid "Suspend computer settings"
+msgstr "Cài đặt ngủ đông máy tính"
+
+#. settings-schema.json->suspend-on-double-click->description
+msgid "Double-click to suspend"
+msgstr "Nhấp đôi để ngủ đông"
+
+#. settings-schema.json->suspend-on-double-click->tooltip
+msgid ""
+"When enabled, a double-click will suspend the computer, otherwise the "
+"computer will suspend on a single click."
+msgstr ""
+"Khi được bật, nhấp đôi sẽ đưa máy tính vào trạng thái ngủ đông, ngược lại "
+"máy tính sẽ ngủ đông khi nhấp một lần."
+
+#. settings-schema.json->count-down->description
+msgid "Use a count down before suspending"
+msgstr "Sử dụng đếm ngược trước khi ngủ đông"
+
+#. settings-schema.json->count-down->tooltip
+msgid ""
+"When enabled, a count down will occurs before suspending the computer.\n"
+"Clicking again during the count down will cancel the suspend."
+msgstr ""
+"Khi được bật, một bộ đếm ngược sẽ xuất hiện trước khi đưa máy tính vào trạng "
+"thái ngủ đông.\n"
+"Nhấp lại trong khi đang đếm ngược sẽ hủy bỏ việc ngủ đông."
+
+#. settings-schema.json->count-down-duration->units
+msgid "seconds"
+msgstr "giây"
+
+#. settings-schema.json->count-down-duration->description
+msgid "Count down duration"
+msgstr "Thời lượng đếm ngược"
+
+#. settings-schema.json->ctrl-override-countdown->description
+msgid "Ctrl+Click to override the count down and suspend immediately"
+msgstr "Ctrl+Click để bỏ qua đếm ngược và ngủ đông ngay lập tức"
+
+#. settings-schema.json->ctrl-override-countdown->tooltip
+msgid ""
+"When enabled, using Ctrl+Click will suspend the computer immediately, "
+"without starting a count down or waiting for an existing count down to "
+"finish."
+msgstr ""
+"Khi được bật, sử dụng Ctrl+Click sẽ đưa máy tính vào trạng thái ngủ đông "
+"ngay lập tức, mà không bắt đầu đếm ngược hoặc chờ đợi bộ đếm ngược hiện có "
+"kết thúc."
+
+#. settings-schema.json->fullcolor-icon->description
+msgid "Use a full color icon"
+msgstr "Sử dụng biểu tượng đầy đủ màu sắc"
+
+#. settings-schema.json->fullcolor-icon->tooltip
+msgid ""
+"When enabled, a full color panel icon will be used, otherwise a symbolic "
+"icon will be used."
+msgstr ""
+"Khi được bật, một biểu tượng panel đầy đủ màu sắc sẽ được sử dụng, ngược lại "
+"một biểu tượng tượng trưng sẽ được sử dụng."
+
+#. settings-schema.json->system-suspend-header->description
+msgid "System suspend settings"
+msgstr "Cài đặt ngủ đông hệ thống"
+
+#. settings-schema.json->config-power->description
+msgid "Open Power Management Settings"
+msgstr "Mở Cài đặt Quản lý Nguồn"

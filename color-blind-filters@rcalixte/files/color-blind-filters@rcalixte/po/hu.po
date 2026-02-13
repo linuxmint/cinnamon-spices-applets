@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-11 13:32-0400\n"
+"POT-Creation-Date: 2024-08-20 21:06-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,97 +19,97 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. 5.4->settings-schema.json->category->options
-#: 5.4/applet.js:109
+#. 5.4/applet.js:109
 msgid "Color Blindness - Corrections"
 msgstr "Színvakság – korrekciók"
 
 #. 5.4->settings-schema.json->color_corrections->options
-#: 5.4/applet.js:112
+#. 5.4/applet.js:112
 msgid "Protanopia Correction"
 msgstr "Protanópia korrekció"
 
 #. 5.4->settings-schema.json->color_corrections->options
-#: 5.4/applet.js:118
+#. 5.4/applet.js:118
 msgid "Protanopia High Contrast"
 msgstr "Protanópia magas kontraszt"
 
 #. 5.4->settings-schema.json->color_corrections->options
-#: 5.4/applet.js:124
+#. 5.4/applet.js:124
 msgid "Deuteranopia Correction"
 msgstr "Deuteranópia korrekció"
 
 #. 5.4->settings-schema.json->color_corrections->options
-#: 5.4/applet.js:130
+#. 5.4/applet.js:130
 msgid "Deuteranopia High Contrast"
 msgstr "Deuteranópia magas kontraszt"
 
 #. 5.4->settings-schema.json->color_corrections->options
-#: 5.4/applet.js:136
+#. 5.4/applet.js:136
 msgid "Tritanopia Correction"
 msgstr "Tritanópia korrekció"
 
 #. 5.4->settings-schema.json->category->options
-#: 5.4/applet.js:142
+#. 5.4/applet.js:142
 msgid "Color Blindness - Simulations"
 msgstr "Színvakság – Szimulációk"
 
 #. 5.4->settings-schema.json->color_simulations->options
-#: 5.4/applet.js:145
+#. 5.4/applet.js:145
 msgid "Protanopia Simulation"
 msgstr "Protanópia Szimuláció"
 
 #. 5.4->settings-schema.json->color_simulations->options
-#: 5.4/applet.js:151
+#. 5.4/applet.js:151
 msgid "Deuteranopia Simulation"
 msgstr "Deuteranópia Szimuláció"
 
 #. 5.4->settings-schema.json->color_simulations->options
-#: 5.4/applet.js:157
+#. 5.4/applet.js:157
 msgid "Tritanopia Simulation"
 msgstr "Tritanópia Szimuláció"
 
 #. 5.4->settings-schema.json->category->options
 #. 5.4->settings-schema.json->inversions->description
-#: 5.4/applet.js:163
+#. 5.4/applet.js:163
 msgid "Inversions"
 msgstr "Inverziók"
 
 #. 5.4->settings-schema.json->inversions->options
-#: 5.4/applet.js:166
+#. 5.4/applet.js:166
 msgid "Lightness Inversion"
 msgstr "Világosság Inverzió"
 
 #. 5.4->settings-schema.json->inversions->options
-#: 5.4/applet.js:173
+#. 5.4/applet.js:173
 msgid "Color Inversion"
 msgstr "Szín Inverzió"
 
 #. 5.4->settings-schema.json->category->options
 #. 5.4->settings-schema.json->other->description
-#: 5.4/applet.js:178
+#. 5.4/applet.js:178
 msgid "Other Effects"
 msgstr "Más Effektusok"
 
 #. 5.4->settings-schema.json->other->options
-#: 5.4/applet.js:180
+#. 5.4/applet.js:180
 msgid "Desaturation"
 msgstr "Színtelenítés"
 
 #. 5.4->settings-schema.json->other->options
-#: 5.4/applet.js:185
+#. 5.4/applet.js:185
 msgid "Channel Mixer - GBR"
 msgstr "Csatorna Keverő - GBR"
 
 #. 5.4->settings-schema.json->other->options
-#: 5.4/applet.js:190
+#. 5.4/applet.js:190
 msgid "Channel Mixer - BRG"
 msgstr "Csatorna Keverő - BRG"
 
-#: 5.4/applet.js:375
+#. 5.4/applet.js:375
 msgid "Current filter:"
 msgstr "Aktuális szűrő:"
 
-#: 5.4/applet.js:380
+#. 5.4/applet.js:380
 msgid "Filters disabled."
 msgstr "Szűrők kikapcsolva."
 

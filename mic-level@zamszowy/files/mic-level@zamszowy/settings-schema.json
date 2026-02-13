@@ -1,0 +1,77 @@
+{
+    "layout1": {
+        "type": "layout",
+        "pages": ["page1"],
+        "page1": {
+            "type": "page",
+            "title": "Settings",
+            "sections": ["section0", "section1", "section2"]
+        },
+
+        "section0": {
+            "type": "section",
+            "title": "Timings (seconds)",
+            "keys": ["measure-time", "sleep-time"]
+        },
+
+        "section1": {
+            "type": "section",
+            "title": "Bluetooth devices",
+            "keys": ["enable-bt-only", "enable-click-to-switch-bt-profile"]
+        },
+
+        "section2": {
+            "type": "section",
+            "title": "Keybindings",
+            "keys": ["enable-keybind", "keybind-toggle"]
+        }
+    },
+
+    "measure-time" : {
+        "type" : "scale",
+        "default" : 0.1,
+        "min" : 0.01,
+        "max" : 1,
+        "step" : 0.01,
+        "show-value" : true,
+        "description" : "For how long to record a sample and report result"
+    },
+
+    "sleep-time" : {
+        "type" : "scale",
+        "default" : 0.1,
+        "min" : 0.01,
+        "max" : 1,
+        "step" : 0.01,
+        "show-value" : true,
+        "description" : "How long to wait before recoring another sample"
+    },
+
+    "enable-bt-only": {
+        "type": "switch",
+        "default": false,
+        "description": "Show applet only when BT device is active and has HFP profile enabled",
+        "tooltip": "This option disables keybinding, since it would interfere with the automatic detection of HFP profile"
+    },
+
+    "enable-click-to-switch-bt-profile": {
+        "type": "switch",
+        "default": false,
+        "description": "Enable click on applet to switch between HFP and A2DP profiles"
+    },
+
+    "enable-keybind": {
+        "type": "switch",
+        "default": true,
+        "description": "Enable keybind to enable/disable the applet",
+        "tooltip": "This option will not work if optoon to show applet only when BT device is on as it would interfere with the automatic detection of HFP profile"
+    },
+
+    "keybind-toggle" : {
+        "type" : "keybinding",
+        "description" : "Set key for toggling enable state of the applet",
+        "default": "<Super><Shift>w",
+        "dependency":"enable-keybind",
+        "tooltip": "This option will not work if optoon to show applet only when BT device is on as it would interfere with the automatic detection of HFP profile"
+    }
+}

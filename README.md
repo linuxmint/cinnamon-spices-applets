@@ -58,6 +58,30 @@ To check if a spice with UUID satifies those requirements run the `validate-spic
 ./validate-spice UUID
 ```
 
+## Development
+
+To facilitate easier testing of Applets locally, run the `test-spice` script in this repo:
+
+Validate and then copy a Spice with UUID:
+
+```bash
+./test-spice UUID
+```
+
+Skip validation (not recommended) and then copy a Spice with UUID:
+
+```bash
+./test-spice -s UUID
+```
+
+Remove all locally installed development copies of Spices:
+
+```bash
+./test-spice -r
+```
+
+NOTE: Local copies of Spices for development/testing purposes will have a `devtest-` prefix attached for easier identification and cleanup.
+
 # Rights and responsibility of the author
 
 The author is in charge of the development of the spice.
@@ -146,7 +170,7 @@ To ensure that these tables are always up-to-date, they are automatically regene
 ## (incomplete)
 To determine the backward compatibility of a javascript feature, look at it's page on [mdm web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript) to see in which version of Firefox it was introduced. Then compare with the table below.
 
-<table><tr><th colspan="1">Mint Version</th><th colspan="1">Codename</th><th colspan="1">Release Date</th><th colspan="1">Cinnamon<br/>Version</th><th colspan="2">Firefox version<br/>(CJS JS engine)</th></tr>
+<table><tr><th colspan="1">Mint<br/>Version</th><th colspan="1">Codename</th><th colspan="1">Release Date</th><th colspan="1">Cinnamon<br/>Version</th><th colspan="2">Firefox version<br/>(CJS JS engine)</th></tr>
 <tr><td colspan="1">17</td><td colspan="1">Qiana</td><td colspan="1">31 May 14</td><td colspan="1">2.2.14</td><td colspan="1"></td></tr>
 <tr><td colspan="1">17.1</td><td colspan="1">Rebecca</td><td colspan="1">29 Nov 14</td><td colspan="1">2.4.6</td><td colspan="1"></td></tr>
 <tr><td colspan="1">17.2</td><td colspan="1">Rafaela</td><td colspan="1">30 Jun 15</td><td colspan="1">2.6.13</td><td colspan="1"></td></tr>
@@ -167,4 +191,10 @@ To determine the backward compatibility of a javascript feature, look at it's pa
 <tr><td colspan="1">21.1</td><td colspan="1">Vera</td><td colspan="1">20 Dec 22</td><td colspan="1">5.6.8</td></tr>
 <tr><td colspan="1">21.2</td><td colspan="1">Victoria</td><td colspan="1">16 Jul 23</td><td colspan="1">5.8.4</td><td colspan="1" rowspan="2">102</td></tr>
 <tr><td colspan="1">21.3</td><td colspan="1">Virginia</td><td colspan="1">12 Jan 24</td><td colspan="1">6.0.4</td></tr>
+<tr><td colspan="1">22</td><td colspan="1">Wilma</td><td colspan="1">25 Jul 24</td><td colspan="1">6.2.9</td><td colspan="1" rowspan="4">115</td></tr>
+<tr><td colspan="1">22.1</td><td colspan="1">Xia</td><td colspan="1">16 Jan 25</td><td colspan="1" rowspan="2">6.4.8</td>
+<tr><td colspan="1">22.2</td><td colspan="1">Zara</td><td colspan="1">4 Sep 25</td>
+<tr><td colspan="1">22.3</td><td colspan="1">Zena</td><td colspan="1">13 Jan 26</td><td colspan="1">6.6.6</td>
 </table>
+
+*Mint 21 series is officially supported until May 2027, and 22 series until Apr 2029. Earlier versions official support has ended.

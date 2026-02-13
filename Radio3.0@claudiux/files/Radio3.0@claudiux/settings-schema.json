@@ -10,7 +10,8 @@
       "pageNetwork",
       "pageRecording",
       "pageYT",
-      "pageScheduling"
+      "pageScheduling",
+      "pageAlarmClock"
     ],
     "pageStations": {
       "type": "page",
@@ -19,13 +20,15 @@
         "sectionStationsList",
         "sectionStationsMove",
         "sectionStationsSaveRestore",
-        "sectionStationsUpdate"
+        "sectionStationsUpdate",
+        "sectionBlacklist"
       ]
     },
     "pageImport": {
       "type": "page",
       "title": "Import",
       "sections": [
+        "sectionImportRadiopp",
         "sectionImportShoutcast",
         "sectionImportFile",
         "sectionImportList"
@@ -53,12 +56,15 @@
       "type": "page",
       "title": "Behavior",
       "sections": [
+        "sectionBehaviorSettingsWindow",
         "sectionBehaviorStartUp",
         "sectionBehaviorVolumeStep",
+        "sectionBehaviorOSD",
         "sectionBehaviorTooltip",
         "sectionBehaviorNotifications",
         "sectionBehaviorBitrate",
-        "sectionBehaviorSymbolicIconColor"
+        "sectionBehaviorSymbolicIconColor",
+        "sectionBehaviorHorizontalPanel"
       ]
     },
     "pageRecording": {
@@ -67,13 +73,15 @@
       "sections": [
         "sectionRecordingRecordings",
         "sectionRecordingLimits",
-        "sectionRecordingIcon"
+        "sectionRecordingIcon",
+        "sectionRecordingCache"
       ]
     },
     "pageYT": {
       "type": "page",
       "title": "YT",
       "sections": [
+        "sectionYTIgnore",
         "sectionYTFormat",
         "sectionYTIcon",
         "sectionYTExtract"
@@ -96,6 +104,15 @@
         "sectionNetworkMonitoring",
         "sectionNetworkProxy",
         "sectionNetworkDatabase"
+      ]
+    },
+    "pageAlarmClock": {
+      "type": "page",
+      "title": "Alarm Clock",
+      "sections": [
+        "sectionWakeMeUp",
+        "sectionWorkingDays",
+        "sectionWorkOffDays"
       ]
     },
     "sectionStationsList": {
@@ -134,6 +151,21 @@
         "scale-update"
       ]
     },
+    "sectionBlacklist": {
+      "type": "section",
+      "title": "Unwanted (blacklist)",
+      "keys": [
+        "blacklist"
+      ]
+    },
+    "sectionImportRadiopp": {
+      "type": "section",
+      "dependency": "radiopp-is-here",
+      "title": "Only for Radio++ users",
+      "keys": [
+        "import-radiopp-button"
+      ]
+    },
     "sectionImportShoutcast": {
       "type": "section",
       "title": "Get files on Shoutcast to import here",
@@ -158,6 +190,7 @@
         "import-list-play-button",
         "import-list-button",
         "import-remove-from-list-button",
+        "import-blacklist-button",
         "import-select-all",
         "import-unselect-all"
       ]
@@ -193,6 +226,14 @@
         "search-unselect-all"
       ]
     },
+    "sectionBehaviorSettingsWindow": {
+      "type": "section",
+      "title": "Settings Window",
+      "keys": [
+        "maximize-vertically",
+        "window-width"
+      ]
+    },
     "sectionBehaviorStartUp": {
       "type": "section",
       "title": "Start-up",
@@ -206,9 +247,17 @@
       "title": "Volume step",
       "keys": [
         "volume-step",
-        "volume-magnetic-on",
+        "volume-magnetic-on"
+      ]
+    },
+    "sectionBehaviorOSD": {
+      "type": "section",
+      "title": "OSD",
+      "keys": [
         "volume-show-osd",
-        "volume-show-osd-starting-radio"
+        "volume-show-osd-starting-radio",
+        "show-percent-char-in-osd",
+        "show-horizontal-osd"
       ]
     },
     "sectionBehaviorTooltip": {
@@ -284,11 +333,21 @@
         "show-volume-level-near-icon"
       ]
     },
+    "sectionBehaviorHorizontalPanel": {
+      "type": "section",
+      "title": "Only on horizontal panels",
+      "keys": [
+        "horizontal-show-name",
+        "horizontal-show-title",
+        "horizontal-max-title-length"
+      ]
+    },
     "sectionNetworkQuality": {
       "type": "section",
       "title": "Quality",
       "keys": [
-        "network-quality"
+        "network-quality",
+        "image-resolution"
       ]
     },
     "sectionNetworkMonitoring": {
@@ -317,17 +376,17 @@
     "sectionExperimental": {
       "type": "section",
       "title": "EXPERIMENTAL",
-      "keys": []
+      "keys": [
+
+      ]
     },
     "sectionRecordingCache": {
       "type": "section",
       "title": "Cache",
       "keys": [
         "cache-no-cache",
-        "cache-mins",
+        "cache-minutes",
         "cache-on-disk",
-        "cache-dir",
-        "cache-dir-open",
         "cache-stream-size"
       ]
     },
@@ -356,6 +415,13 @@
       "title": "Icon",
       "keys": [
         "highlight-icon-while-background-recording"
+      ]
+    },
+    "sectionYTIgnore": {
+      "type": "section",
+      "title": "Ignore YT",
+      "keys": [
+        "ignoreYT"
       ]
     },
     "sectionYTFormat": {
@@ -414,6 +480,38 @@
         "sched-recordings",
         "sched-rmbutton"
       ]
+    },
+    "sectionWakeMeUp": {
+      "type": "section",
+      "title": "Options",
+      "keys": [
+        "alarm-clock-wake-me-up",
+        "alarm-clock-wake-me-softly",
+        "alarm-clock-volume-begin",
+        "alarm-clock-volume-end",
+        "alarm-clock-volume-transition",
+        "alarm-clock-tink-on"
+      ]
+    },
+    "sectionWorkingDays": {
+      "type": "section",
+      "title": "Working Days",
+      "keys": [
+        "alarm-clock-working-days",
+        "alarm-clock-working-days-time",
+        "alarm-clock-working-days-radio",
+        "alarm-clock-working-days-radio-button"
+      ]
+    },
+    "sectionWorkOffDays": {
+      "type": "section",
+      "title": "Work-Off Days",
+      "keys": [
+        "alarm-clock-workoff-days",
+        "alarm-clock-workoff-days-time",
+        "alarm-clock-workoff-days-radio",
+        "alarm-clock-workoff-days-radio-button"
+      ]
     }
   },
   "show-help-in-tabs": {
@@ -436,6 +534,13 @@
     "show-buttons": true,
     "reorderable": true,
     "columns": [
+      {
+        "id": "fav",
+        "title": "♥︎",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
       {
         "id": "inc",
         "title": "Menu",
@@ -528,7 +633,8 @@
     "description": "Category to which to move the selected stations:",
     "default": "",
     "options": {
-      "(Undefined)": ""
+      "(Undefined)": "",
+      "(Blacklist)": "R30BLACKLIST"
     }
   },
   "button-moving": {
@@ -589,6 +695,19 @@
     "description": "%",
     "dependency": "show-scale-update"
   },
+  "blacklist": {
+    "type": "list",
+    "columns": [
+      {
+        "id": "url",
+        "title": "Blacklisted URL",
+        "type": "string",
+        "expand-width": true,
+        "default": ""
+      }
+    ],
+    "default": []
+  },
   "show-scale-update": {
     "type": "generic",
     "default": false
@@ -599,6 +718,11 @@
     "description": "Help",
     "height": 100,
     "dependency": "show-help-in-tabs"
+  },
+  "import-radiopp-button": {
+    "type": "button",
+    "description": "Import your stations from Radio++",
+    "callback": "on_button_import_radiopp_clicked"
   },
   "import-shoutcast-button": {
     "type": "button",
@@ -681,6 +805,11 @@
     "type": "button",
     "description": "Remove selected items from this list",
     "callback": "on_button_import_remove_clicked"
+  },
+  "import-blacklist-button": {
+    "type": "button",
+    "description": "Blacklist selected items from this list",
+    "callback": "on_button_import_blacklist_clicked"
   },
   "import-select-all": {
     "type": "button",
@@ -817,6 +946,21 @@
     "description": "Unselect all items",
     "callback": "on_button_search_unselect_all_clicked"
   },
+  "maximize-vertically": {
+    "type": "switch",
+    "default": true,
+    "description": "Vertical maximization",
+    "tooltip": "When this option is checked, this Settings Window will be maximized vertically the next time it is opened."
+  },
+  "window-width": {
+    "type": "scale",
+    "default": 1300,
+    "min": 1000,
+    "max": 6000,
+    "step": 10,
+    "description": "Width (in pixels)",
+    "tooltip": "Limited by the width of the screen.\nWill only be valid from the next time this window is opened."
+  },
   "switch-on-last-station-at-start-up": {
     "type": "switch",
     "default": false,
@@ -888,6 +1032,18 @@
     "default": true,
     "description": "Show volume OSD when changing radio station"
   },
+  "show-percent-char-in-osd": {
+    "type": "switch",
+    "dependency": "volume-show-osd",
+    "default": false,
+    "description": "Show '%' in OSD"
+  },
+  "show-horizontal-osd": {
+    "type": "switch",
+    "dependency": "volume-show-osd",
+    "default": false,
+    "description": "Show horizontal OSD"
+  },
   "show-title-and-version": {
     "type": "switch",
     "default": true,
@@ -943,34 +1099,34 @@
   "shortcut-volume-up": {
     "type": "keybinding",
     "description": "Increase Volume",
-    "default": ""
+    "default": "<Alt>AudioRaiseVolume::"
   },
   "shortcut-volume-down": {
     "type": "keybinding",
     "description": "Decrease Volume",
-    "default": ""
+    "default": "<Alt>AudioLowerVolume::"
   },
   "shortcut-volume-cut": {
     "type": "keybinding",
     "description": "Mute",
-    "default": ""
+    "default": "<Alt>AudioPlay::"
   },
   "shortcut-radio-on-off": {
     "type": "keybinding",
     "description": "Radio ON/OFF",
-    "default": ""
+    "default": "<Alt>AudioStop::"
   },
   "shortcut-next-recent-radio": {
     "type": "keybinding",
     "description": "Next station",
     "tooltip": "Next station recently listened to",
-    "default": ""
+    "default": "<Alt>AudioNext::"
   },
   "shortcut-previous-recent-radio": {
     "type": "keybinding",
     "description": "Previous station",
     "tooltip": "Previous station recently listened to",
-    "default": ""
+    "default": "<Alt>AudioPrev::"
   },
   "show-help-in-tooltip": {
     "type": "switch",
@@ -1023,9 +1179,8 @@
     "description": "Color of the symbolic icon while the radio is on"
   },
   "color-off": {
-    "type": "colorchooser",
-    "default": "rgb(240,240,240)",
-    "description": "Color of the symbolic icon while the radio is off"
+    "type": "generic",
+    "default": "rgba(225,225,225,255)"
   },
   "color-recording": {
     "type": "colorchooser",
@@ -1047,6 +1202,19 @@
       "Low": "low"
     },
     "tooltip": "High Quality: The recordings you make while listening to the radio will double the bit rate usually required to just listen to the radio. Thus, the recordings will not be disturbed by extraneous sounds or by a change in the volume of the radio.\n\nLow Quality: These recordings come directly from the sound card, which relieves the network but risks polluting them with extraneous sounds (system sounds for example). The volume of the radio will be set to 100% in order to obtain the best possible quality."
+  },
+  "image-resolution": {
+    "type": "combobox",
+    "default": "hq",
+    "description": "Quality of downloaded Album Art",
+    "options": {
+      "Max Resolution": "maxres",
+      "High Quality": "hq",
+      "Medium": "mq",
+      "Standard": "sd",
+      "Fastest": "default"
+    },
+    "tooltip": "Default: High Quality. Choose a value corresponding to your Network Quality."
   },
   "network-monitoring": {
     "type": "switch",
@@ -1087,7 +1255,7 @@
     "description": "No cache",
     "tooltip": "Checking this option limits memory usage, but no longer allows the user to rewind the cache (using the sound150@claudiux applet)."
   },
-  "cache-mins": {
+  "cache-minutes": {
     "type": "scale",
     "default": 0.0,
     "dependency": "!cache-no-cache",
@@ -1103,25 +1271,12 @@
     "default": false,
     "description": "Cache on disk\n(Write packet data to a temporary file, instead of keeping them in memory.)"
   },
-  "cache-dir": {
-    "type": "filechooser",
-    "select-dir": true,
-    "dependency": "cache-on-disk",
-    "default": "file:///tmp",
-    "description": "Directory used for data caching\n(Use with caution on SSD disks. Prefer a directory stored in RAM, with sufficient free space.)"
-  },
-  "cache-dir-open": {
-    "type": "button",
-    "dependency": "cache-on-disk",
-    "description": "Open cache directory",
-    "callback": "_on_open_cache_dir"
-  },
   "cache-stream-size": {
     "type": "combobox",
-    "default": "1MiB",
+    "default": "10MiB",
     "dependency": "!cache-no-cache",
     "description": "Stream cache size",
-    "tooltip": "The amount of stream cache. Default: 1 MiB.\nBeware, setting this to a large value can reduce performance.",
+    "tooltip": "The amount of stream cache. Default: 10 MiB.\nBeware, setting this to a large value can reduce performance.",
     "options": {
       "No limit": "0",
       "64 KiB": "64KiB",
@@ -1134,7 +1289,11 @@
       "4 MiB": "4MiB",
       "5 MiB": "5MiB",
       "10 MiB": "10MiB",
-      "20 MiB": "20MiB"
+      "20 MiB": "20MiB",
+      "30 MiB": "30MiB",
+      "40 MiB": "40MiB",
+      "50 MiB": "50MiB",
+      "100 MiB": "100MiB"
     }
   },
   "recording-path": {
@@ -1208,6 +1367,12 @@
     "type": "switch",
     "default": true,
     "description": "Highlight this applet icon during background recording"
+  },
+  "ignoreYT": {
+    "type": "switch",
+    "default": false,
+    "description": "Ignore Youtube features",
+    "tooltip": "Ignoring Youtube features reduces CPU load. But loading album art becomes impossible."
   },
   "yt-cookies-from": {
     "type": "combobox",
@@ -1802,12 +1967,6 @@
     "type": "generic",
     "default": ""
   },
-  "storedRadios": {
-    "type": "generic",
-    "default": [
-
-    ]
-  },
   "recentRadios": {
     "type": "generic",
     "default": [
@@ -1844,5 +2003,253 @@
     "type": "switch",
     "description": "Display volume level near icon",
     "default": true
+  },
+  "horizontal-show-name": {
+    "type": "switch",
+    "description": "Display radio name",
+    "default": false
+  },
+  "horizontal-show-title": {
+    "type": "switch",
+    "description": "Display title",
+    "default": false
+  },
+  "horizontal-max-title-length": {
+    "type": "scale",
+    "dependency": "horizontal-show-title",
+    "default": 0,
+    "step": 1,
+    "min": 0,
+    "max": 255,
+    "description": "Maximum title length",
+    "tooltip": "0 means no maximum"
+  },
+  "alarm-clock-wake-me-up": {
+    "type": "switch",
+    "default": false,
+    "description": "Wake me up!"
+  },
+  "alarm-clock-wake-me-softly": {
+    "type": "switch",
+    "default": false,
+    "description": "Wake me up softly",
+    "dependency": "alarm-clock-wake-me-up",
+    "tooltip": "By checking this box, the sound volume gradually increases."
+  },
+  "alarm-clock-volume-begin": {
+      "type": "spinbutton",
+      "dependency": "alarm-clock-wake-me-softly",
+      "default": 30,
+      "min": 25,
+      "max": 80,
+      "step": 1,
+      "description": "Initial volume (%)"
+  },
+  "alarm-clock-volume-end": {
+      "type": "spinbutton",
+      "dependency": "alarm-clock-wake-me-softly",
+      "default": 60,
+      "min": 50,
+      "max": 100,
+      "step": 1,
+      "description": "Final volume (%)",
+      "tooltip": "The final volume must be greater than or equal to the initial volume."
+  },
+  "alarm-clock-volume-transition": {
+      "type": "scale",
+      "dependency": "alarm-clock-wake-me-softly",
+      "default": 30,
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "description": "Transition duration (seconds)"
+  },
+  "alarm-clock-working-days": {
+    "type": "list",
+    "show-buttons": false,
+    "height": 20,
+    "columns": [
+      {
+        "id": "day0",
+        "title": "Sunday",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
+      {
+        "id": "day1",
+        "title": "Monday",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "day2",
+        "title": "Tuesday",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "day3",
+        "title": "Wednesday",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "day4",
+        "title": "Thursday",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "day5",
+        "title": "Friday",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "day6",
+        "title": "Saturday",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      }
+    ],
+    "default": [
+        {
+            "day0": false,
+            "day1": true,
+            "day2": true,
+            "day3": true,
+            "day4": true,
+            "day5": true,
+            "day6": false
+        }
+    ]
+  },
+  "alarm-clock-workoff-days": {
+    "type": "list",
+    "show-buttons": false,
+    "height": 20,
+    "columns": [
+      {
+        "id": "day0",
+        "title": "Sunday",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "day1",
+        "title": "Monday",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
+      {
+        "id": "day2",
+        "title": "Tuesday",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
+      {
+        "id": "day3",
+        "title": "Wednesday",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
+      {
+        "id": "day4",
+        "title": "Thursday",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
+      {
+        "id": "day5",
+        "title": "Friday",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
+      {
+        "id": "day6",
+        "title": "Saturday",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      }
+    ],
+    "default": [
+        {
+            "day0": true,
+            "day1": false,
+            "day2": false,
+            "day3": false,
+            "day4": false,
+            "day5": false,
+            "day6": true
+        }
+    ]
+  },
+  "alarm-clock-working-days-time": {
+      "type": "timechooser",
+      "description": "Wake-Up Time",
+      "default": {"h": 6, "m": 0, "s": 0}
+  },
+  "alarm-clock-workoff-days-time": {
+      "type": "timechooser",
+      "description": "Wake-Up Time",
+      "default": {"h": 12, "m": 0, "s": 0}
+  },
+  "alarm-clock-working-days-radio": {
+    "type": "combobox",
+    "description": "Radio",
+    "default": "",
+    "options": {
+      "(Undefined)": ""
+    }
+  },
+  "alarm-clock-workoff-days-radio": {
+    "type": "combobox",
+    "description": "Radio",
+    "default": "",
+    "options": {
+      "(Undefined)": ""
+    }
+  },
+  "alarm-clock-working-days-radio-button": {
+    "type": "button",
+    "description": "Last-listened-to radio station",
+    "callback": "_on_working_days_radio_button_clicked"
+  },
+  "alarm-clock-workoff-days-radio-button": {
+    "type": "button",
+    "description": "Last-listened-to radio station",
+    "callback": "_on_workoff_days_radio_button_clicked"
+  },
+  "alarm-clock-tink-on": {
+      "type": "switch",
+      "default": true,
+      "dependency": "alarm-clock-wake-me-up",
+      "description": "Activate tink to ensure speakers are awake"
+  },
+  "desklet-is-activated": {
+    "type": "generic",
+    "default": false
+  },
+  "radiopp-is-here": {
+    "type": "generic",
+    "default": false
+  },
+  "restart-after-reloading": {
+    "type": "generic",
+    "default": false
   }
 }

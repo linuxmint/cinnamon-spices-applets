@@ -1,4 +1,5 @@
 const {
+  free,
   get_home_dir,
   file_get_contents
 } = imports.gi.GLib; //GLib
@@ -20,7 +21,9 @@ const DEFAULT_JSON_PATH = RADIO_LISTS_DIR + "/Radio3.0_EXAMPLES.json";
 class StationsFileJson {
   constructor (path = DEFAULT_JSON_PATH) {
     this.path = path;
-    this.contents = JSON.parse(to_string(file_get_contents(this.path)[1]));
+    let [, _contents] = file_get_contents(this.path);
+    this.contents = JSON.parse(to_string(_contents));
+    free(_contents);
   }
 
   get_all_unselected_json () {

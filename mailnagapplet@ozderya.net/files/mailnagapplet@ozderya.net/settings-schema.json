@@ -25,6 +25,17 @@
 		}
 	},
 
+    "max_length" : {
+        "type" : "spinbutton",
+        "default" : 32,
+        "min" : 0,
+        "max" : 256,
+        "step" : 1,
+        "unit" : "characters",
+        "description" : "Max sender / subject display length",
+        "tooltip" : "Sender or subject lines longer than this will be cropped"
+    },
+	
     "client" : {
         "type" : "entry",
         "default" : "thunderbird",

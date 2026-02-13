@@ -1,13 +1,10 @@
-import { Logger } from "./logger";
-import { ErrorDetail } from "../types";
-import { _ } from "../utils";
-import { soupLib, SoupResponse } from "./soupLib";
+import { Logger } from "./services/logger";
+import type { ErrorDetail } from "../types";
+import type { SoupLibSendOptions, SoupResponse } from "./soupLib";
+import { soupLib } from "./soupLib";
 import { Event } from "./events";
 
-export type LoadAsyncOptions = {
-	params?: HTTPParams;
-	headers?: HTTPHeaders;
-	method?: Method;
+export interface LoadAsyncOptions<T = unknown> extends SoupLibSendOptions {
 	url: string;
 	cancellable: imports.gi.Gio.Cancellable;
 	/**
@@ -15,13 +12,13 @@ export type LoadAsyncOptions = {
 	 *
 	 * If the function returns true, the error will be handled by the HttpLib.
 	 */
-	HandleError?: (message: ErrorResponse<any>) => boolean;
-};
+	HandleError?: (message: ErrorResponse<T>) => boolean;
+}
 
 export class HttpLib {
 	private static instance: HttpLib;
 	/** Single instance of log */
-	public static get Instance() {
+	public static get Instance(): HttpLib {
 		if (this.instance == null)
 			this.instance = new HttpLib();
 		return this.instance;
@@ -29,46 +26,59 @@ export class HttpLib {
 
 	public readonly UnhandledError: Event<HttpLib, HttpError> = new Event<HttpLib, HttpError>();
 
-	public async LoadJsonSimple<T>(options: LoadAsyncOptions): Promise<T | null> {
-		const response = await this.LoadJsonAsync<T>(options);
+	public async LoadJsonSimple<T, E = unknown>(options: LoadAsyncOptions<E>): Promise<T | null> {
+		const response = await this.LoadJsonAsync<T, E>(options);
 		return response.Success ? response.Data : null;
 	}
 
 	/**
 	 * Handles obtaining JSON over http.
 	 */
-	public async LoadJsonAsync<T, E = any>(
-		options: LoadAsyncOptions
+	public async LoadJsonAsync<T, E = unknown>(
+		options: LoadAsyncOptions<E>
 	): Promise<Response<T, E>> {
 		const {HandleError, ...rest} = options;
 
-		const response = await this.LoadAsync({
+		const response = await this.LoadAsync<E>({
 			...rest,
 			// we will handle error this level
 			HandleError: () => false
 		});
 
+		const result: Response<T, E> = {
+			...response,
+			Data: null as never
+		}
+
 		try {
-			const payload = JSON.parse(response.Data);
-			response.Data = payload;
+			const payload = JSON.parse(response.Data as unknown as string) as T | E;
+			result.Data = payload;
+			return result;
 		}
 		catch (e) { // Payload is not JSON
+			if (e instanceof Error)
+				Logger.Error("Error: API response is not JSON. The response: " + result.Data, e);
+
 			// Only care about JSON parse errors if the request was successful before
-			if (response.Success) {
-				if (e instanceof Error)
-				 	Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
-				(<GenericResponse>response).Success = false;
-				(<GenericResponse>response).ErrorData = {
+			if (!result.Success)
+				return result;
+
+			return {
+				Data: null as never,
+				ResponseHeaders: response.ResponseHeaders,
+				Success: false,
+				ErrorData: {
 					code: -1,
 					message: "bad api response - non json",
 					reason_phrase: "",
 				}
+			};
+		}
+		finally {
+			if (!result.Success && (!HandleError || HandleError(result))) {
+				this.UnhandledError.Invoke(this, result.ErrorData);
 			}
 		}
-
-		if (!response.Success && (!HandleError || HandleError(response)))
-			this.UnhandledError.Invoke(this, response.ErrorData);
-		return response as Response<T, E>;
 	}
 
 	public async LoadAsyncSimple(options: LoadAsyncOptions): Promise<string | null> {
@@ -79,8 +89,8 @@ export class HttpLib {
 	/**
 	 * Handles obtaining data over http.
 	 */
-	public async LoadAsync<E = any>(
-		options: LoadAsyncOptions
+	public async LoadAsync<E = unknown>(
+		options: LoadAsyncOptions<E>
 	): Promise<Response<string | null, E>> {
 		const {url, HandleError, ...rest} = options
 
@@ -141,10 +151,10 @@ export class HttpLib {
 		}
 
 		// check if caller wants
-		if (!result.Success && (!HandleError || HandleError(result as ErrorResponse<any>)))
+		if (!result.Success && (!HandleError || HandleError(result as ErrorResponse<E>)))
 			this.UnhandledError.Invoke(this, result.ErrorData);
 
-		return result;
+		return result as Response<string | null, E>;
 	}
 }
 
@@ -152,13 +162,13 @@ export class HttpLib {
 export type Method = "GET" | "POST" | "PUT" | "DELETE";
 export type NetworkError = "";
 
-export type Response<T, E = any> = SuccessResponse<T> | ErrorResponse<E>;
+export type Response<T, E = unknown> = SuccessResponse<T> | ErrorResponse<E>;
 
 export interface SuccessResponse<T> extends GenericSuccessResponse {
 	Data: T;
 }
 
-export interface ErrorResponse<E = any> extends GenericErrorResponse {
+export interface ErrorResponse<E = unknown> extends GenericErrorResponse {
 	Data: E;
 }
 
@@ -175,7 +185,7 @@ interface GenericSuccessResponse extends BaseGenericResponse {
 }
 
 interface BaseGenericResponse {
-	Data: any | undefined;
+	Data: unknown;
 	ResponseHeaders: Record<string, string>;
 }
 

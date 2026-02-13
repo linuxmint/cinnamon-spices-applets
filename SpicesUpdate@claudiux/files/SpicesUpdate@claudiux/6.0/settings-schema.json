@@ -74,6 +74,7 @@
         "exp_applets",
         "unprotected_applets",
         "btn_refresh_applets",
+        "btn_tickallthenrefresh_applets",
         "btn_cs_applets"
       ]
     },
@@ -92,6 +93,7 @@
         "exp_desklets",
         "unprotected_desklets",
         "btn_refresh_desklets",
+        "btn_tickallthenrefresh_desklets",
         "btn_cs_desklets"
       ]
     },
@@ -110,6 +112,7 @@
         "exp_extensions",
         "unprotected_extensions",
         "btn_refresh_extensions",
+        "btn_tickallthenrefresh_extensions",
         "btn_cs_extensions"
       ]
     },
@@ -128,6 +131,7 @@
         "exp_themes",
         "unprotected_themes",
         "btn_refresh_themes",
+        "btn_tickallthenrefresh_themes",
         "btn_cs_themes"
       ]
     },
@@ -146,6 +150,7 @@
         "exp_actions",
         "unprotected_actions",
         "btn_refresh_actions",
+        "btn_tickallthenrefresh_actions",
         "btn_cs_actions"
       ]
     },
@@ -205,12 +210,17 @@
     "type": "textview",
     "default": "",
     "description": "",
-    "height": 60
+    "height": 100
   },
   "btn_refresh_applets": {
     "type": "button",
     "description": "Refresh",
-    "callback": "_on_refresh_pressed"
+    "callback": "_on_refresh_pressed_applets"
+  },
+  "btn_tickallthenrefresh_applets": {
+    "type": "button",
+    "description": "Tick all the first boxes then refresh",
+    "callback": "_on_tickallthenrefresh_pressed_applets"
   },
   "unprotected_applets": {
     "type": "list",
@@ -246,7 +256,6 @@
   },
   "was_empty_applets":{
     "type": "generic",
-    "value": false,
     "default": false
   },
   "check_desklets": {
@@ -266,12 +275,17 @@
     "type": "textview",
     "default": "",
     "description": "",
-    "height": 60
+    "height": 100
   },
   "btn_refresh_desklets": {
     "type": "button",
     "description": "Refresh",
-    "callback": "_on_refresh_pressed"
+    "callback": "_on_refresh_pressed_desklets"
+  },
+  "btn_tickallthenrefresh_desklets": {
+    "type": "button",
+    "description": "Tick all the first boxes then refresh",
+    "callback": "_on_tickallthenrefresh_pressed_desklets"
   },
   "unprotected_desklets": {
     "type": "list",
@@ -307,7 +321,6 @@
   },
   "was_empty_desklets":{
     "type": "generic",
-    "value": false,
     "default": false
   },
   "check_extensions": {
@@ -327,12 +340,17 @@
     "type": "textview",
     "default": "",
     "description": "",
-    "height": 60
+    "height": 100
   },
   "btn_refresh_extensions": {
     "type": "button",
     "description": "Refresh",
-    "callback": "_on_refresh_pressed"
+    "callback": "_on_refresh_pressed_extensions"
+  },
+  "btn_tickallthenrefresh_extensions": {
+    "type": "button",
+    "description": "Tick all the first boxes then refresh",
+    "callback": "_on_tickallthenrefresh_pressed_extensions"
   },
   "unprotected_extensions": {
     "type": "list",
@@ -368,7 +386,6 @@
   },
   "was_empty_extensions":{
     "type": "generic",
-    "value": false,
     "default": false
   },
   "check_themes": {
@@ -388,12 +405,17 @@
     "type": "textview",
     "default": "",
     "description": "",
-    "height": 60
+    "height": 100
   },
   "btn_refresh_themes": {
     "type": "button",
     "description": "Refresh",
-    "callback": "_on_refresh_pressed"
+    "callback": "_on_refresh_pressed_themes"
+  },
+  "btn_tickallthenrefresh_themes": {
+    "type": "button",
+    "description": "Tick all the first boxes then refresh",
+    "callback": "_on_tickallthenrefresh_pressed_themes"
   },
   "unprotected_themes": {
     "type": "list",
@@ -429,7 +451,6 @@
   },
   "was_empty_themes":{
     "type": "generic",
-    "value": false,
     "default": false
   },
   "check_actions": {
@@ -449,12 +470,17 @@
     "type": "textview",
     "default": "",
     "description": "",
-    "height": 60
+    "height": 100
   },
   "btn_refresh_actions": {
     "type": "button",
     "description": "Refresh",
-    "callback": "_on_refresh_pressed"
+    "callback": "_on_refresh_pressed_actions"
+  },
+  "btn_tickallthenrefresh_actions": {
+    "type": "button",
+    "description": "Tick all the first boxes then refresh",
+    "callback": "_on_tickallthenrefresh_pressed_actions"
   },
   "unprotected_actions": {
     "type": "list",
@@ -490,7 +516,6 @@
   },
   "was_empty_actions":{
     "type": "generic",
-    "value": false,
     "default": false
   },
   "general_frequency": {
@@ -547,7 +572,6 @@
   },
   "general_force_notifications": {
     "type": "generic",
-    "value": false,
     "default": false
   },
   "general_type_notif": {
@@ -573,8 +597,7 @@
   },
   "displayType": {
     "type": "generic",
-    "default": "compact",
-    "value": "compact"
+    "default": "compact"
   },
   "general_hide": {
     "type": "switch",
@@ -594,7 +617,6 @@
   },
   "first_time": {
     "type": "generic",
-    "value": true,
     "default": true
   },
   "next_type": {

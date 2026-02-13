@@ -1,6 +1,7 @@
-import { PirateWeatherDailyPayload } from "./daily";
-import { PirateWeatherHourlyPayload } from "./hourly";
-import { PirateWeatherMinutelyPayload } from "./minutely";
+import type { PirateWeatherAlert } from "./alerts";
+import type { PirateWeatherDailyPayload } from "./daily";
+import type { PirateWeatherHourlyPayload } from "./hourly";
+import type { PirateWeatherMinutelyPayload } from "./minutely";
 
 /**
  * - 'si' returns meter/sec and Celsius
@@ -53,8 +54,12 @@ export interface PirateWeatherPayload {
 		icon: PirateWeatherIcon;
 		data: PirateWeatherDailyPayload[]
 	}
+	alerts?: PirateWeatherAlert[];
 }
 
+/**
+ * https://github.com/Pirate-Weather/pirateweather/blob/0b3823f8bf45de303e77affbabb358a243cda0f6/docs/API.md#icon
+ */
 export type PirateWeatherIcon =
 	"clear-day" |
 	"clear-night" |

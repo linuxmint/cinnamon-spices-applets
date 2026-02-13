@@ -1,0 +1,6 @@
+{
+    "uuid": "mic-level@zamszowy",
+    "name": "Microphone level monitor",
+    "description": "Monitors microphone level",
+    "version" : "1.1.1"
+}

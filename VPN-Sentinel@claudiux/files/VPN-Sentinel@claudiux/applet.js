@@ -28,10 +28,22 @@ const MessageTray = imports.ui.messageTray;
 const Util = require("./lib/util");
 const CMenu = imports.gi.CMenu;
 const Cinnamon = imports.gi.Cinnamon;
-const Mainloop = imports.mainloop;
+//~ const Mainloop = imports.mainloop;
 const Lang = imports.lang;
 
 const { to_string } = require("./lib/to-string");
+const {
+  _sourceIds,
+  timeout_add_seconds,
+  timeout_add,
+  setTimeout,
+  clearTimeout,
+  setInterval,
+  clearInterval,
+  source_exists,
+  source_remove,
+  remove_all_sources
+} = require("./lib/mainloopTools");
 
 /** Constants
  */
@@ -334,9 +346,9 @@ class VPNSentinel extends Applet.TextIconApplet {
 
     GLib.file_set_contents(DOMAINS_FILE, domains_to_bypass.join(" "));
 
-    let Id = Util.setTimeout( Lang.bind(this, () => {
+    let Id = setTimeout( () => {
       this.bypassTreatment = undefined
-    }), 5000); // 5 seconds
+    }, 5000); // 5 seconds
   } // End of on_bypass_list_changed
 
   /** Internet Apps
@@ -445,9 +457,9 @@ class VPNSentinel extends Applet.TextIconApplet {
         //app.request_quit();
     }
     this.s.setValue("clientsList", clientsList);
-    let id = Util.setTimeout( () => {
+    let id = setTimeout( () => {
+      clearTimeout(id);
       clientsList = null;
-      Util.clearTimeout(id)
     }, 300) // 300 ms
   }
 
@@ -570,7 +582,7 @@ class VPNSentinel extends Applet.TextIconApplet {
       log("VPN status: "+this.vpnStatus);
       if (this.vpnStatus === "on") {
         if (this.loopId > 0) {
-          Mainloop.source_remove(this.loopId);
+          source_remove(this.loopId);
           this.loopId = 0
         }
         for (let app of this.internetApps) {
@@ -583,12 +595,12 @@ class VPNSentinel extends Applet.TextIconApplet {
                 app.launch(5000, [], -1);
                 //app.activate_full(-1, 1000);
                 //app.activate();
-                let id = Util.setTimeout( Lang.bind(this, function() {
+                let id = setTimeout( () => {
+                  clearTimeout(id);
                   //~ let kw = this.keyword_for_pkill(app);
                   //~ log("app command: "+command, true);
                   this.activityLog.log(_("%s has just been launched.").format(""+client.name));
-                  Util.clearTimeout(id);
-                }), 2000); // 2000 ms
+                }, 2000); // 2000 ms
                 break
               }
             }
@@ -639,6 +651,15 @@ class VPNSentinel extends Applet.TextIconApplet {
 
   async super_kill(app) {
     let app_name = app.get_name();
+    let isFlatpak = app.get_is_flatpak();
+
+    if (isFlatpak) {
+      let flatpakId = app.get_flatpak_app_id();
+      Util.spawnCommandLineAsync("flatpak kill "+flatpakId);
+      this.activityLog.log(_("%s has just been stopped.").format(""+app_name));
+      return
+    }
+
     let kw = this.keyword_for_pkill(app);
     let result = killall(kw);
     if (result) {
@@ -650,7 +671,7 @@ class VPNSentinel extends Applet.TextIconApplet {
   monitor_vpn_only_apps() {
     if (!this.s.getValue("manageClients") || !this.applet_running) {
       if (this.loopId > 0) {
-        Mainloop.source_remove(this.loopId);
+        source_remove(this.loopId);
       }
       this.loopId = 0;
       return false;
@@ -675,7 +696,7 @@ class VPNSentinel extends Applet.TextIconApplet {
     }
 
     if (this.applet_running)
-      this.loopId = Mainloop.timeout_add_seconds(10, Lang.bind(this, this.monitor_vpn_only_apps));
+      this.loopId = timeout_add_seconds(10, () => { this.monitor_vpn_only_apps() });
 
     return false;
   } // End of monitor_vpn_only_apps
@@ -705,7 +726,7 @@ class VPNSentinel extends Applet.TextIconApplet {
 
     let command = `bash -c '%s/vpn_status_sentinel.sh'`.format(SCRIPTS_DIR);
 
-    let subProcess = Util.spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
+    let subProcess = Util.spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
       let out = (typeof stdout === "object") ? to_string(stdout) : stdout;
       let actives = out.trim().split(";");
       let data = actives[0].split(":");
@@ -735,7 +756,7 @@ class VPNSentinel extends Applet.TextIconApplet {
       }
       this.update_icon();
       subProcess.send_signal(9);
-    }));
+    });
 
     //this.update_icon();
   } // End of get_vpn_status
@@ -769,7 +790,7 @@ class VPNSentinel extends Applet.TextIconApplet {
     //log("command: "+command, true);
     this.activityLog.log(_("Connection to: ") + name);
     //~ GLib.spawn_command_line_async(""+command); // FIXME: analyze the return of this command!
-    let subProcess = Util.spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
+    let subProcess = Util.spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
       log("connect_vpn("+name+") - exitCode: "+exitCode, true);
       if (exitCode === 0) {
         this.disconnectedByUser = false;
@@ -777,7 +798,7 @@ class VPNSentinel extends Applet.TextIconApplet {
         this.activityLog.log(_("Connected to: ") + name);
       }
       subProcess.send_signal(9)
-    }))
+    })
   } // End of connect_vpn
 
   disconnect_vpn(name) {
@@ -787,10 +808,10 @@ class VPNSentinel extends Applet.TextIconApplet {
     //log("command: "+command, true);
     GLib.spawn_command_line_async(""+command);
     //~ this.vpnStatus = "off";
-    let id = Util.setTimeout( Lang.bind(this, function() {
+    let id = setTimeout( () => {
+      clearTimeout(id);
       this.activityLog.log(_("Disconnected from: ") + name);
-      Util.clearTimeout(id)
-    }), 1000); // 1000 ms
+    }, 1000); // 1000 ms
   } // End of disconnect_vpn
 
   change_connection(new_co) {
@@ -1015,10 +1036,11 @@ class VPNSentinel extends Applet.TextIconApplet {
 
     if (app) app.request_quit();
 
-    let id = Util.setTimeout( Lang.bind(this, () => {
-      Util.spawnCommandLine("cinnamon-settings applets %s -t %s %s".format(UUID, ""+tabFlags, ""+instanceId));
-      Util.clearTimeout(id);
-    }), 500); // 500 ms
+    let id = setTimeout( () => {
+      clearTimeout(id);
+      //~ Util.spawnCommandLine("cinnamon-settings applets %s -t %s %s".format(UUID, ""+tabFlags, ""+instanceId));
+      Util.spawnCommandLine(`xlet-settings applet ${UUID} -t ${tabFlags} -i ${instanceId}`);
+    }, 500); // 500 ms
   } // End of sort_flaglist
 
   /** Audible alert
@@ -1136,14 +1158,16 @@ class VPNSentinel extends Applet.TextIconApplet {
     // button VPN Policy...
     let configure1 = new PopupMenu.PopupIconMenuItem(_("VPN Policy") + "...", "system-run", St.IconType.SYMBOLIC);
     configure1.connect("activate", () => {
-      Util.spawnCommandLine("cinnamon-settings applets %s -t %s %s".format(UUID, ""+this.tabNumberOfVPNPolicy, ""+this.instanceId));
+      //~ Util.spawnCommandLine("cinnamon-settings applets %s -t %s %s".format(UUID, ""+this.tabNumberOfVPNPolicy, ""+this.instanceId));
+      Util.spawnCommandLine(`xlet-settings applet ${UUID} -t ${this.tabNumberOfVPNPolicy} -i ${this.instanceId}`);
     });
     this.menu.addMenuItem(configure1);
 
     // button Internet Apps Manager...
     let configure2 = new PopupMenu.PopupIconMenuItem(_("Internet Apps Manager") + "...", "system-run", St.IconType.SYMBOLIC);
     configure2.connect("activate", () => {
-      Util.spawnCommandLine("cinnamon-settings applets %s -t %s %s".format(UUID, ""+this.tabNumberOfInternetPolicy, ""+this.instanceId));
+      //~ Util.spawnCommandLine("cinnamon-settings applets %s -t %s %s".format(UUID, ""+this.tabNumberOfInternetPolicy, ""+this.instanceId));
+      Util.spawnCommandLine(`xlet-settings applet ${UUID} -t ${this.tabNumberOfInternetPolicy} -i ${this.instanceId}`);
     });
     this.menu.addMenuItem(configure2);
 
@@ -1238,10 +1262,10 @@ class VPNSentinel extends Applet.TextIconApplet {
 
   get_vpn_names() {
     let command = `bash -c '%s/vpn_names.sh'`.format(SCRIPTS_DIR);
-    let subProcess = Util.spawnCommandLineAsyncIO(command, Lang.bind(this, function (stdout, stderr, exitCode) {
+    let subProcess = Util.spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
       let out = (typeof stdout === "object") ? to_string(stdout) : stdout;
       let list_vpn_names=[];
-      if (stdout && exitCode == 0) {
+      if (out.length > 0 && exitCode == 0) {
         list_vpn_names=out.split(";");
       } else {
         if (this.vpnName.length !== 0) {
@@ -1250,7 +1274,7 @@ class VPNSentinel extends Applet.TextIconApplet {
       }
       this.vpnNames = list_vpn_names;
       subProcess.send_signal(9);
-    }));
+    });
   } // End of get_vpn_names
 
   //on_enter() {
@@ -1277,7 +1301,7 @@ class VPNSentinel extends Applet.TextIconApplet {
     this.applet_running = false;
 
     if (this.loopId > 0) {
-      Mainloop.source_remove(this.loopId);
+      source_remove(this.loopId);
     }
     this.loopId = 0;
 
@@ -1354,7 +1378,7 @@ class VPNSentinel extends Applet.TextIconApplet {
     this.disconnect_monitors();
 
     if (this.loopId > 0) {
-      Mainloop.source_remove(this.loopId);
+      source_remove(this.loopId);
     }
     this.loopId = 0;
 
@@ -1374,7 +1398,8 @@ class VPNSentinel extends Applet.TextIconApplet {
     } else {
       message=_("VPN/WIREGUARD Status: Transient.")
     }
-    this.activityLog.log(message)
+    this.activityLog.log(message);
+    remove_all_sources();
   } // End of on_applet_removed_from_panel
 
   on_applet_added_to_panel() {

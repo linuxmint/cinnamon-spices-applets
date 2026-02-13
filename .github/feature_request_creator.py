@@ -60,6 +60,7 @@ def main():
 
                 xlets_and_authors.append(f'{name}{author}')
     finally:
+        xlets_and_authors.append('')
         dropdown_list = sorted(sorted(xlets_and_authors), key=str.casefold)
         with open(os.path.join(repo_folder, '.github', 'ISSUE_TEMPLATE',
                                '02_feature_request.yml'), 'w',

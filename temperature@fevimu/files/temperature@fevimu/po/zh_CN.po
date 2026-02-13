@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-15 23:44+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-03 19:49+0200\n"
 "PO-Revision-Date: 2023-02-07 21:03+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
@@ -18,57 +19,57 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.2.2\n"
 
-#: applet.js:80 applet.js:159
+#: applet.js:81 applet.js:160
 msgid "Temperature"
 msgstr "温度"
 
-#: applet.js:148
+#: applet.js:149
 msgid "Error"
 msgstr "错误"
 
-#: applet.js:149
+#: applet.js:150
 msgid ""
 "Run sensors-detect as root. If it doesn't help, click here to report with "
 "your sensors output!"
 msgstr ""
-"请以 root 权限运行 sensors-detect。如果这不起作用，点击这里报告您的传感器"
-"输出！"
+"请以 root 权限运行 sensors-detect。如果这不起作用，点击这里报告您的传感器输"
+"出！"
 
-#: applet.js:151
+#: applet.js:152
 msgid "Warning"
 msgstr "警告"
 
-#: applet.js:152
+#: applet.js:153
 msgid ""
 "Please install lm_sensors. If it doesn't help, click here to report with "
 "your sensors output!"
 msgstr "请安装 lm_sensors。如果这不起作用，点击这里报告您的传感器输出！"
 
-#: applet.js:224
+#: applet.js:229
 msgid "Thresholds Info"
 msgstr "阈值信息"
 
-#: applet.js:225
+#: applet.js:230
 msgid "High Temp"
 msgstr "较高温度"
 
-#: applet.js:226
+#: applet.js:231
 msgid "Crit. Temp"
 msgstr "危险温度"
 
-#: applet.js:237
+#: applet.js:242
 msgid "Critical"
 msgstr "危险"
 
-#: applet.js:240
+#: applet.js:245
 msgid "High"
 msgstr "较高"
 
-#: applet.js:253
+#: applet.js:258
 msgid "Current Temperature"
 msgstr "当前温度"
 
-#: applet.js:255
+#: applet.js:260
 msgid "Critical Temperature"
 msgstr "危险温度"
 
@@ -153,3 +154,14 @@ msgid ""
 msgstr ""
 "选择这个选项可以不在水平面板上显示文字提示。\n"
 "(无论是否选择该选项，垂直面板上都不显示文字提示)"
+
+#. settings-schema.json->keep_size->description
+msgid "Avoid size changes"
+msgstr ""
+
+#. settings-schema.json->keep_size->tooltip
+msgid ""
+"Checked: The size of this applet remains constant, once all your preferences "
+"have been defined.\n"
+"Unchecked: The size of this applet is optimized, but it may change."
+msgstr ""

@@ -1,0 +1,7 @@
+{
+  "author": "kayfo",
+  "name": "Signout@kayfo",
+  "description": "Adds an easy Sign Out button to the panel. Usefull in public computing environments like libraries and computer labs.",
+  "uuid": "signout@kayfo",
+  "version": "1.0.0"
+}

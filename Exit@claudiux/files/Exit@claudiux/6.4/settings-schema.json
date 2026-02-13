@@ -1,0 +1,317 @@
+{
+  "layoutExit": {
+    "type": "layout",
+    "pages": [
+      "page_General",
+      "page_Shortcuts",
+      "page_Options"
+    ],
+    "page_General": {
+      "type": "page",
+      "title": "General",
+      "sections": [
+        "sectionMenu",
+        "sectionMenuOthers"
+      ]
+    },
+    "page_Shortcuts": {
+      "type": "page",
+      "title": "Shortcuts",
+      "sections": [
+        "section_DontShowShortcutsInMenu",
+        "section_Shortcuts",
+        "section_MenuKeys"
+      ]
+    },
+    "page_Options": {
+      "type": "page",
+      "title": "Options",
+      "sections": [
+        "sectionOSD",
+        "sectionMaximize"
+      ]
+    },
+    "sectionOSD": {
+      "type": "section",
+      "dependency": "displayRestartCinnamonSetting",
+      "title": "Cinnamon restart",
+      "keys": [
+        "showOSD"
+      ]
+    },
+    "sectionMaximize": {
+      "type": "section",
+      "title": "Vertical maximization",
+      "keys": [
+        "maximizeSettingsWindow"
+      ]
+    },
+    "sectionMenu": {
+      "type": "section",
+      "title": "Menu options",
+      "keys": [
+        "showRestartCinnamon",
+        "labelSeparator",
+        "showSuspend",
+        "showHibernate",
+        "hibernateNeedsSudo",
+        "labelSeparator",
+        "showRestart",
+        "showPowerOff"
+      ]
+    },
+    "sectionMenuOthers": {
+      "type": "section",
+      "title": "System-managed menu options",
+      "keys": [
+        "labelOthers",
+        "showScreenOff",
+        "screenOffUsesXset",
+        "mouse-deactivation-duration",
+        "labelSeparator",
+        "showLockscreen",
+        "labelSeparator",
+        "showSwitchUser",
+        "showLogout",
+        "logoutMode"
+      ]
+    },
+    "section_DontShowShortcutsInMenu": {
+      "type": "section",
+      "title": "Menu appearance",
+      "keys": [
+        "dontShowShortcutsInMenu"
+      ]
+    },
+    "section_Shortcuts": {
+      "type": "section",
+      "title": "Keybindings",
+      "keys": [
+        "kbToggleMenu",
+        "kbWakeUpMonitor",
+        "kbWakeUpMonitorWithLock"
+      ]
+    },
+    "section_MenuKeys": {
+      "type": "section",
+      "title": "Keys used to select certain options in the open menu.",
+      "keys": [
+        "mkSuspend",
+        "mkHibernate",
+        "mkRestart",
+        "mkShutdown",
+        "alertMenuKeys",
+        "alreadyUsedKeys",
+        "buttonApplyMenuKeys",
+        "buttonDefaultMenuKeys"
+      ]
+    }
+  },
+  "showOSD": {
+    "type": "switch",
+    "default": true,
+    "description": "Show OSD while restarting Cinnamon",
+    "tooltip": "OSD: On Screen Display"
+  },
+  "showRestartCinnamon": {
+    "type": "switch",
+    "dependency": "displayRestartCinnamonSetting",
+    "default": true,
+    "description": "Show the Restart Cinnamon option"
+  },
+  "showSuspend": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the Suspend option"
+  },
+  "showHibernate": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the Hibernate option"
+  },
+  "hibernateNeedsSudo": {
+    "type": "switch",
+    "default": false,
+    "dependency": "showHibernate",
+    "description": "Hibernate needs root user rights (sudo)"
+  },
+  "showRestart": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the Restart option"
+  },
+  "showPowerOff": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the Power Off option"
+  },
+  "labelOthers": {
+    "type": "label",
+    "description": "All the menu options below may be managed by the system.\nIf they are, you can't see them."
+  },
+  "showScreenOff": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the Screen Off option"
+  },
+  "screenOffUsesXset": {
+    "type": "switch",
+    "default": true,
+    "description": "Use the hardware method to turn On/Off the screen",
+    "dependency": "showScreenOff",
+    "tooltip": "The hardware method does not always work correctly.\nIn this case, disable this option to use only a software method."
+  },
+  "mouse-deactivation-duration": {
+    "type": "scale",
+    "dependency": "showScreenOff",
+    "default": 5,
+    "min": 1,
+    "max": 15,
+    "step": 1,
+    "units": "seconds",
+    "show-value": true,
+    "description": "Duration of deactivation of the mouse",
+    "tooltip": "To prevent the monitor from turning on too soon after turning it off, the mouse will be disabled for the number of seconds set here."
+  },
+  "showLockscreen": {
+    "type": "switch",
+    "dependency": "displayLockScreenSetting",
+    "default": true,
+    "description": "Show the Lock Screen option",
+    "tooltip": "Managed by system"
+  },
+  "showSwitchUser": {
+    "type": "switch",
+    "dependency": "displaySwitchUserSetting",
+    "default": true,
+    "description": "Show the Switch User option",
+    "tooltip": "Managed by system"
+  },
+  "showLogout": {
+    "type": "switch",
+    "dependency": "displayLogoutSetting",
+    "default": true,
+    "description": "Show the Log Out option",
+    "tooltip": "Managed by system"
+  },
+  "logoutMode": {
+    "type": "combobox",
+    "dependency": "displayLogoutSetting",
+    "default": "--no-prompt",
+    "description": "Log Out Mode",
+    "options": {
+      "With confirmation": "",
+      "Without confirmation": "--no-prompt",
+      "Force": "--force"
+    },
+    "tooltip": "The 'Force' option lets you log out while ignoring inhibitors. Useful when several sessions are open."
+  },
+  "dontShowShortcutsInMenu": {
+    "type": "switch",
+    "default": false,
+    "description": "Do not show any shortcut in the menu"
+  },
+  "kbToggleMenu": {
+    "type": "keybinding",
+    "default": "<Primary>Menu::",
+    "description": "Toggle menu"
+  },
+  "kbWakeUpMonitor": {
+    "type": "keybinding",
+    "default": "<Super>Pause::",
+    "description": "Turn screen On/Off"
+  },
+  "kbWakeUpMonitorWithLock": {
+    "type": "keybinding",
+    "default": "<Primary><Super>Pause::",
+    "description": "Turn screen On/Off with Lock feature"
+  },
+  "mkShutdown": {
+    "type": "entry",
+    "default": "U",
+    "width": 1,
+    "expand-width": false,
+    "description": "Key to select Power Off",
+    "tooltip": "Single key. Default is U",
+    "dependency": "showPowerOff"
+  },
+  "mkRestart": {
+    "type": "entry",
+    "default": "R",
+    "width": 1,
+    "expand-width": false,
+    "description": "Key to select Restart",
+    "tooltip": "Single key. Default is R",
+    "dependency": "showRestart"
+  },
+  "mkHibernate": {
+    "type": "entry",
+    "default": "H",
+    "width": 1,
+    "expand-width": false,
+    "description": "Key to select Hibernate",
+    "tooltip": "Single key. Default is H",
+    "dependency": "showHibernate"
+  },
+  "mkSuspend": {
+    "type": "entry",
+    "default": "S",
+    "width": 1,
+    "expand-width": false,
+    "description": "Key to select Suspend",
+    "tooltip": "Single key. Default is S",
+    "dependency": "showSuspend"
+  },
+  "buttonApplyMenuKeys": {
+    "type": "button",
+    "description": "Apply these keys to the menu",
+    "callback": "on_buttonApplyMenuKeys_pressed"
+  },
+  "buttonDefaultMenuKeys": {
+    "type": "button",
+    "description": "Reset to default keys",
+    "callback": "on_buttonDefaultMenuKeys_pressed"
+  },
+  "alertMenuKeys": {
+    "type": "label",
+    "description": "Several keys are identical.\nPlease correct this and reapply the changes.",
+    "dependency": "sameKeyTwice"
+  },
+  "alreadyUsedKeys": {
+    "type": "entry",
+    "default": "S H R U",
+    "expand-width": false,
+    "description": "Already used keys (for your information only)",
+    "tooltip": "There is no point in changing this."
+  },
+  "maximizeSettingsWindow": {
+    "type": "switch",
+    "default": true,
+    "description": "Vertically maximize this Settings window",
+    "tooltip": "This option will only be taken into account the next times this Settings window is opened. "
+  },
+  "labelSeparator": {
+    "type": "label",
+    "description": "────────────────────────────────────────────────────────────────"
+  },
+  "displayLockScreenSetting": {
+    "type": "generic",
+    "default": true
+  },
+  "displaySwitchUserSetting": {
+    "type": "generic",
+    "default": true
+  },
+  "displayLogoutSetting": {
+    "type": "generic",
+    "default": true
+  },
+  "displayRestartCinnamonSetting": {
+    "type": "generic",
+    "default": true
+  },
+  "sameKeyTwice": {
+    "type": "generic",
+    "default": false
+  }
+}

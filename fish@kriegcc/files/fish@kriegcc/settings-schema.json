@@ -1,0 +1,335 @@
+{
+  "layoutSettings": {
+    "type": "layout",
+    "pages": [
+      "pagePreferences",
+      "pageAdvancedSettings",
+      "pageHelp",
+      "pageAbout"
+    ],
+    "pagePreferences": {
+      "type": "page",
+      "title": "Preferences",
+      "sections": [
+        "sectionGeneral",
+        "sectionAnimation"
+      ]
+    },
+    "pageAdvancedSettings": {
+      "type": "page",
+      "title": "Advanced Settings",
+      "sections": [
+        "sectionAdvancedAnimationSettings",
+        "sectionAdvancedAnimationSettingsMargin",
+        "sectionAdvancedAnimationSettingsCustomDimension",
+        "sectionDeveloperOptions"
+      ]
+    },
+    "pageHelp": {
+      "type": "page",
+      "title": "Help",
+      "sections": [
+        "sectionInstruction",
+        "sectionReportIssue"
+      ]
+    },
+    "pageAbout": {
+      "type": "page",
+      "title": "About",
+      "sections": [
+        "sectionAbout",
+        "sectionVersion",
+        "sectionLicense",
+        "sectionCredits",
+        "sectionMaintainersAndContributors"
+      ]
+    },
+    "sectionGeneral": {
+      "type": "section",
+      "title": "General",
+      "keys": [
+        "keyNameOfFish",
+        "keyCommand"
+      ]
+    },
+    "sectionAnimation": {
+      "type": "section",
+      "title": "Animation",
+      "keys": [
+        "keyImagePath",
+        "keyFrames",
+        "keyPausePerFrameInSeconds",
+        "keyFlipSidewaysOnVerticalPanel"
+      ]
+    },
+    "sectionAdvancedAnimationSettings": {
+      "type": "section",
+      "title": "Animation Settings",
+      "keys": [
+        "keyAnimationScalingMode",
+        "keyAnimationRotationHint",
+        "keyAnimationRotation"
+      ]
+    },
+    "sectionAdvancedAnimationSettingsMargin": {
+      "type": "section",
+      "title": "Animation Margin",
+      "keys": [
+        "keyAnimationMarginHint",
+        "keyAnimationAutoMargin",
+        "keyAnimationMargin"
+      ],
+      "dependency": "keyAnimationScalingMode=AutoFit"
+    },
+    "sectionAdvancedAnimationSettingsCustomDimension": {
+      "type": "section",
+      "title": "Animation Custom Dimension",
+      "keys": [
+        "keyAnimationHeight",
+        "keyAnimationWidth",
+        "keyAnimationPreserveAspectRatio"
+      ],
+      "dependency": "keyAnimationScalingMode=Custom"
+    },
+    "sectionDeveloperOptions": {
+      "type": "section",
+      "title": "Developer Options",
+      "keys": [
+        "keyLogLevel",
+        "keyForceFoolsDay"
+      ],
+      "dependency": "keyDeveloperOptionsEnabled"
+    },
+    "sectionInstruction": {
+      "type": "section",
+      "title": "Manual",
+      "keys": [
+        "keyInstructionsText",
+        "keyButtonWebsite"
+      ]
+    },
+    "sectionReportIssue": {
+      "type": "section",
+      "title": "Report an Issue",
+      "keys": [
+        "keyReportIssueText",
+        "keyButtonReportIssueInstructions"
+      ]
+    },
+    "sectionAbout": {
+      "type": "section",
+      "title": "About Fish Applet",
+      "keys": [
+        "keyAboutText",
+        "keyButtonWebsite"
+      ]
+    },
+    "sectionVersion": {
+      "type": "section",
+      "title": "Version",
+      "keys": [
+        "keyVersion"
+      ]
+    },
+    "sectionLicense": {
+      "type": "section",
+      "title": "License",
+      "keys": [
+        "keyLicenseText"
+      ]
+    },
+    "sectionCredits": {
+      "type": "section",
+      "title": "Credits",
+      "keys": [
+        "keyCreditsText"
+      ]
+    },
+    "sectionMaintainersAndContributors": {
+      "type": "section",
+      "title": "Maintainer and Contributors",
+      "keys": [
+        "keyMaintainersAndContributorsText"
+      ]
+    }
+  },
+  "keyNameOfFish": {
+    "type": "entry",
+    "default": "Wanda",
+    "description": "Name of fish",
+    "tooltip": "Use this text box to specify the name of the fish."
+  },
+  "keyCommand": {
+    "type": "entry",
+    "default": "fortune",
+    "description": "Command to run when clicked",
+    "tooltip": "By default, Fish runs the 'fortune' command when you click on the applet. Use this text box to specify an alternative command to run."
+  },
+  "keyFrames": {
+    "type": "spinbutton",
+    "default": 8,
+    "min": 1,
+    "max": 120,
+    "step": 1,
+    "units": "frames",
+    "description": "Total frames in animation",
+    "tooltip": "Use this spin box to specify the number of frames in the animation."
+  },
+  "keyPausePerFrameInSeconds": {
+    "type": "spinbutton",
+    "default": 0.3,
+    "min": 0.1,
+    "max": 10,
+    "step": 0.1,
+    "units": "seconds",
+    "description": "Pause per frame",
+    "tooltip": "Use this spin box to specify the pause in seconds between each frame in the animation."
+  },
+  "keyFlipSidewaysOnVerticalPanel": {
+    "type": "switch",
+    "default": false,
+    "description": "Flip sideways on vertical panels",
+    "tooltip": "Select this option to rotate the applet image sideways when you add the applet to a vertical panel."
+  },
+  "keyImagePath": {
+    "type": "custom",
+    "file": "ImageChooser.py",
+    "widget": "ImageChooser",
+    "default": "~/.local/share/cinnamon/applets/fish@kriegcc/animations/wanda.svg",
+    "tooltip": "Use this field to select the image to display in the applet. You can select an image that is supplied with the applet or a personal image."
+  },
+  "keyAnimationScalingMode": {
+    "type": "radiogroup",
+    "default": "AutoFit",
+    "description": "Scaling Mode",
+    "options": {
+      "Auto-fit": "AutoFit",
+      "Preserve original size": "PreserveOriginal",
+      "Custom": "Custom"
+    },
+    "tooltip": "Select how the animation image in the panel should be scaled."
+  },
+  "keyAnimationMarginHint": {
+    "type": "label",
+    "description": "Margin options apply only when the 'auto-fit' option is enabled. For other settings, margins appear if the animation is smaller than the panel."
+  },
+  "keyAnimationAutoMargin": {
+    "type": "switch",
+    "default": true,
+    "description": "Auto-margin",
+    "tooltip": "Check this to use the default margin from theme."
+  },
+  "keyAnimationMargin": {
+    "type": "spinbutton",
+    "default": 8,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "px",
+    "description": "Margin around the animation frame",
+    "tooltip": "Use this spin box to specify the margin around the animation frame shown in the panel.",
+    "dependency": "!keyAnimationAutoMargin"
+  },
+  "keyAnimationHeight": {
+    "type": "spinbutton",
+    "default": 40,
+    "min": 1,
+    "max": 480,
+    "step": 1,
+    "units": "px",
+    "description": "Height",
+    "tooltip": "Use this spin box to specify a custom height for the animation frame."
+  },
+  "keyAnimationWidth": {
+    "type": "spinbutton",
+    "default": 40,
+    "min": 1,
+    "max": 480,
+    "step": 1,
+    "units": "px",
+    "description": "Width",
+    "tooltip": "Use this spin box to specify a custom width for the animation frame."
+  },
+  "keyAnimationPreserveAspectRatio": {
+    "type": "switch",
+    "default": true,
+    "description": "Preserve aspect ratio",
+    "tooltip": "Enable this option to maintain the original aspect ratio of the animation. If enabled, the specified width will be ignored."
+  },
+  "keyAnimationRotationHint": {
+    "type": "label",
+    "description": "If a rotation is selected, the image may also be flipped sideways depending on the 'Flip sideways on vertical panels' option."
+  },
+  "keyAnimationRotation": {
+    "type": "combobox",
+    "default": 0,
+    "description": "Rotation",
+    "options": {
+      "0°": 0,
+      "90°": 90,
+      "180°": 180,
+      "270°": 270
+    }
+  },
+  "keyDeveloperOptionsEnabled": {
+    "type": "generic",
+    "default": false
+  },
+  "keyLogLevel": {
+    "type": "combobox",
+    "default": "Info",
+    "description": "Log Level",
+    "options": {
+      "Info": "Info",
+      "Debug": "Debug",
+      "Warning": "Warning",
+      "Error": "Error"
+    }
+  },
+  "keyForceFoolsDay": {
+    "type": "switch",
+    "default": false,
+    "description": "Force Fool's Day",
+    "tooltip": "Enforces Fool's Day mode for debugging purposes. Simulates Fool's Day (April 1st) without modifying the system date."
+  },
+  "keyInstructionsText": {
+    "type": "label",
+    "description": "For instructions on how to use and configure this applet, please visit the applet's page on the Cinnamon Spices website."
+  },
+  "keyReportIssueText": {
+    "type": "label",
+    "description": "If you encounter a problem with this applet, please file an issue report on GitHub. Note that a GitHub account is required to submit an issue. Before doing so, check if the issue has already been submitted by someone else. Since this applet is part of Linux Mint's `cinnamon-spices-applets` repository, it's important to follow their guidelines for this process. Make sure that the applet name (fish@kriegcc) is included in the title when opening a new issue. Follow the provided template for the description and provide as much information as possible about the issue."
+  },
+  "keyButtonReportIssueInstructions": {
+    "type": "button",
+    "description": "Reporting Bugs Instructions of Cinnamon Spices applets",
+    "callback": "openReportBugsInstructions",
+    "tooltip": "Opens the contributions guidelines of the Cinnamon Spices applets repository on Github."
+  },
+  "keyAboutText": {
+    "type": "label",
+    "description": "The Fish applet displays a small fish, called Wanda, in the panel. Wanda does nothing useful. The applet has really no use what-so-ever. It only takes up disk space and compilation time, and if loaded it also takes up precious panel space and memory. Anybody found using it should be promptly sent for a psychiatric evaluation."
+  },
+  "keyButtonWebsite": {
+    "type": "button",
+    "description": "Fish Applet at Cinnamon Spices Website",
+    "callback": "openCinnamonSpicesWebsite",
+    "tooltip": "Opens the applet's page on Cinnamon Spices website."
+  },
+  "keyVersion": {
+    "type": "label",
+    "description": "v0.2.0"
+  },
+  "keyLicenseText": {
+    "type": "label",
+    "description": "GPL-3.0-or-later"
+  },
+  "keyCreditsText": {
+    "type": "label",
+    "description": "This project is an adaption of the Fish applet from GNOME and MATE desktops for Cinnamon desktop.\nThe original Fish applet is licensed under the GNU General Public License (GPL).\n\nOriginal Authors:\nGeorge Lebl\nMark McLoughlin\nVincent Untz\nStefano Karapetsas\n\nCopyright:\n(C) 1998-2002 Free Software Foundation, Inc.\n(C) 2002-2005 Vincent Untz\n(C) 2012-2021 MATE developers"
+  },
+  "keyMaintainersAndContributorsText": {
+    "type": "label",
+    "description": "Maintainer:\nkriegcc\n\nContributors:\n"
+  }
+}

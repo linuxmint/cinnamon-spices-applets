@@ -1,6 +1,8 @@
-import { Services } from "../config";
-import { WeatherApplet } from "../main";
-import { LocationData, WeatherData, WeatherProvider } from "../types";
+import type { Config, Services } from "../config";
+import type { LocationData, LocationType, WeatherProvider } from "../types";
+import type { WeatherData } from "../weather-data";
+
+
 
 /** Base Class for providers, mostly to enforce constructor signature */
 export abstract class BaseProvider implements WeatherProvider {
@@ -13,12 +15,7 @@ export abstract class BaseProvider implements WeatherProvider {
     public abstract readonly remainingCalls: number | null;
     public abstract readonly supportHourlyPrecipChance: boolean;
     public abstract readonly supportHourlyPrecipVolume: boolean;
+	public readonly locationType: LocationType = "coordinates";
 
-    protected readonly app: WeatherApplet;
-
-    public abstract GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null>;
-
-    public constructor(app: WeatherApplet) {
-        this.app = app;
-    }
+    public abstract GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null>;
 }

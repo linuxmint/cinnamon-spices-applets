@@ -1,36 +1,36 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SCREENSAVER INHIBITOR
+# This file is put in the public domain.
+# mtwebster, 2016
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-01 20:42+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: screen-inhibit@mtwebster 2.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-10-01 18:55+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:20
+#. applet.js:21
 msgid "Currently preventing screensaver"
 msgstr ""
 
-#: applet.js:21
+#. applet.js:22
 msgid "Currently allowing screensaver"
 msgstr ""
 
-#: applet.js:100
+#. applet.js:134
 msgid "Screensaver settings"
 msgstr ""
 
 #. settings-schema.json->inhibit-at-startup->description
-#: applet.js:104
+#. applet.js:138
 msgid "Inhibit screensaver at startup"
 msgstr ""
 
@@ -42,8 +42,54 @@ msgstr ""
 msgid "Screensaver Inhibitor"
 msgstr ""
 
-#. settings-schema.json->head->description
+#. settings-schema.json->pGeneral->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->pIcons->title
+#. settings-schema.json->sectionIcons->title
 msgid "Icons"
+msgstr ""
+
+#. settings-schema.json->pKeybindings->title
+#. settings-schema.json->sectionKeybindings->title
+msgid "Keybinding"
+msgstr ""
+
+#. settings-schema.json->sectionStartup->title
+msgid "Startup"
+msgstr ""
+
+#. settings-schema.json->sectionDurationOrEndTime->title
+msgid "Duration or End Time of screen saver inhibition"
+msgstr ""
+
+#. settings-schema.json->sectionBlocking->title
+msgid "Way to block the screensaver"
+msgstr ""
+
+#. settings-schema.json->end-timechooser->description
+msgid "Time"
+msgstr ""
+
+#. settings-schema.json->end-timechooser->tooltip
+msgid "Seconds will be ignored."
+msgstr ""
+
+#. settings-schema.json->end-type->description
+msgid "The time shown above is"
+msgstr ""
+
+#. settings-schema.json->end-type->options
+msgid "to be disregarded"
+msgstr ""
+
+#. settings-schema.json->end-type->options
+msgid "the inhibit duration"
+msgstr ""
+
+#. settings-schema.json->end-type->options
+msgid "the inhibit end time"
 msgstr ""
 
 #. settings-schema.json->off-icon->description
@@ -63,14 +109,38 @@ msgstr ""
 msgid "Reset to default icons"
 msgstr ""
 
-#. settings-schema.json->head1->description
-msgid "Keybinding"
-msgstr ""
-
 #. settings-schema.json->keybinding->description
 msgid "Set the keybinding for screensaver inhibit"
 msgstr ""
 
-#. settings-schema.json->head2->description
-msgid "Startup"
+#. settings-schema.json->seconds-after-startup->description
+msgid "Number of seconds before screensaver inhibition"
+msgstr ""
+
+#. settings-schema.json->locklabel->description
+msgid "(Avoid using aggressive ways, if possible.)"
+msgstr ""
+
+#. settings-schema.json->locktype->description
+msgid "Blocking mode"
+msgstr ""
+
+#. settings-schema.json->locktype->options
+msgid "Normal"
+msgstr ""
+
+#. settings-schema.json->locktype->options
+msgid "Aggressive"
+msgstr ""
+
+#. settings-schema.json->locktype->options
+msgid "Super aggressive"
+msgstr ""
+
+#. settings-schema.json->lockinterval->description
+msgid "Blocking interval"
+msgstr ""
+
+#. settings-schema.json->lockinterval->units
+msgid "minutes"
 msgstr ""

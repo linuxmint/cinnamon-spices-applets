@@ -359,6 +359,7 @@ class MyApplet extends Applet.TextIconApplet {
                 recentPane.addMenuItem(this.clearRecent);
                 this.clearRecent.connect("activate", Lang.bind(this, function() {
                     this.recentManager.purge_items();
+                    this.recentSection.removeAll();
                 }));
 
                 this.openRecent = new IconMenuItem(_("Recent"), "folder-recent");
@@ -429,12 +430,14 @@ class MyApplet extends Applet.TextIconApplet {
             let network = new PlaceMenuItem("network:///", _("Network"), "network-workgroup");
             this.systemSection.addMenuItem(network);
 
-            let bookmark = Main.placesManager.getDefaultPlaces()[2];
-            let connectToItem = new IconMenuItem(bookmark.name, bookmark.iconFactory(menu_item_icon_size));
-            this.systemSection.addMenuItem(connectToItem);
-            connectToItem.connect("activate", Lang.bind(this, function() {
-                bookmark.launch();
-            }));
+            if (Main.placesManager.getDefaultPlaces().length > 2) {
+                let bookmark = Main.placesManager.getDefaultPlaces()[2];
+                let connectToItem = new IconMenuItem(bookmark.name, bookmark.iconFactory(menu_item_icon_size));
+                this.systemSection.addMenuItem(connectToItem);
+                connectToItem.connect("activate", Lang.bind(this, function() {
+                    bookmark.launch();
+                }));
+            }
         }
     }
 

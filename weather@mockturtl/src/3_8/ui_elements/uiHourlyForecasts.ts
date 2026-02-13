@@ -1,15 +1,16 @@
-import { DateTime } from "luxon";
-import { Config } from "../config";
+import type { DateTime } from "luxon";
+import type { Config } from "../config";
 import { APPLET_ICON, ELLIPSIS } from "../consts";
-import { Logger } from "../lib/logger";
-import { WeatherApplet } from "../main";
-import { HourlyForecastData, Precipitation, WeatherData } from "../types";
-import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, OnSameDay, GetDayName } from "../utils";
+import { Logger } from "../lib/services/logger";
+import type { WeatherApplet } from "../main";
+import type { HourlyForecastData, Precipitation, WeatherData } from "../weather-data";
+import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, OnSameDay, GetDayName, Label, CompareVersion } from "../utils";
 
 const { PolicyType } = imports.gi.Gtk;
 const { ScrollDirection } = imports.gi.Clutter;
 const { addTween } = imports.ui.tweener;
-const { BoxLayout, Side, Label, ScrollView, Icon, Align } = imports.gi.St;
+const { Tooltip } = imports.ui.tooltips;
+const { BoxLayout, Side, ScrollView, Icon, Align } = imports.gi.St;
 
 export class UIHourlyForecasts {
 	private app: WeatherApplet;
@@ -32,7 +33,7 @@ export class UIHourlyForecasts {
 	private availableWidth: number | null = null;
 	private hourlyBoxHorizontalPadding: number = 10;
 
-	public get Toggled() {
+	public get Toggled(): boolean {
 		return this.hourlyToggled;
 	}
 
@@ -91,7 +92,7 @@ export class UIHourlyForecasts {
 	}
 
 	private OnShortHourlyTimeChanged = (config: Config, shortTime: boolean, data: WeatherData) => {
-		this.Display(data.hourlyForecasts, config, config.Timezone);
+		this.Display(data.hourlyForecasts, config, data.location.timeZone);
 	}
 
 	/**
@@ -122,7 +123,7 @@ export class UIHourlyForecasts {
 		return null;
 	}
 
-	public ScrollTo(index: number, animate: boolean = true) {
+	public ScrollTo(index: number, animate: boolean = true): void {
 		const adjustment = this.actor.get_hscroll_bar().get_adjustment();
 		const [, lower, upper, , , page_size] = adjustment.get_values();
 		index = Math.max(Math.min(index, upper - page_size), lower);
@@ -177,8 +178,8 @@ export class UIHourlyForecasts {
 				ui.Hour.text = GetHoursMinutes(hour.date, config._show24Hours, tz, config._shortHourlyTime);
 			ui.Temperature.text = temp ? `${temp}°` : "";
 			ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
-			// ui.Summary.text = hour.condition.main;
-			ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation, config);
+            ui.SummaryTooltip?.set_text(hour.condition.main);
+			ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation);
 			ui.PrecipVolume.text = this.GeneratePrecipitationVolume(hour.precipitation, config);
 		}
 
@@ -187,11 +188,12 @@ export class UIHourlyForecasts {
 		return !(max <= 0);
 	}
 
-	public ResetScroll() {
+	public ResetScroll(): void {
 		const hscroll = this.actor.get_hscroll_bar();
 		hscroll.get_adjustment().set_value(0);
 	}
 
+	private originalStyle: string | null | undefined = undefined;
 	public async Show(width: number, animate: boolean = true): Promise<void> {
 		// In some cases the preferred height is not calculated
 		// properly for the first time, so we work around by opening and closing it once
@@ -200,32 +202,34 @@ export class UIHourlyForecasts {
 
 		this.AdjustHourlyBoxItemWidth(width);
 
-		const [minHeight, naturalHeight] = this.actor.get_preferred_height(width);
+		const [, naturalHeight] = this.actor.get_preferred_height(width);
 
 		if (naturalHeight == null)
 			return;
 
-		Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
+		Logger.Debug(`hourlyScrollView requested height and is set to: ${naturalHeight}. Original style is ${this.actor.style}`);
+		if (this.originalStyle === undefined)
+			this.originalStyle = this.actor.style;
+
 		this.actor.show();
 		// When the scrollView is shown without animation and there is not enough vertical space
 		// (or cinnamon does not think there is enough), the text gets superimposed on top of
 		// each other.
 		// setting the min-height forces to draw with the view's requested height without
 		// interfering with animations.
-		this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
+		this.actor.style = (this.originalStyle ?? "") + "min-height: " + naturalHeight.toString() + "px;";
 		this.hourlyToggled = true;
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve) => {
 			if (naturalHeight == null)
 				return;
 
 			const height = naturalHeight;
-			if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
+			if (this.AnimateEnabled && animate) {
 				this.actor.height = 0;
 				addTween(this.actor,
 					{
 						height: height,
 						time: 0.25,
-						onUpdate: () => { },
 						onComplete: () => {
 							this.actor.set_height(height);
 							resolve();
@@ -243,21 +247,24 @@ export class UIHourlyForecasts {
 
 	public async Hide(animate: boolean = true): Promise<void> {
 		this.hourlyToggled = false;
-		return new Promise((resolve, reject) => {
-			if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
+		return new Promise((resolve) => {
+			if (this.AnimateEnabled && animate) {
 				// TODO: eliminate Clutter Warnings on collapse in logs
 				addTween(this.actor,
 					{
 						height: 0,
 						time: 0.25,
-						onUpdate: () => { },
 						onComplete: () => {
 							this.actor.set_height(-1);
 							// We must unset min-height style else
 							// we get issues with integer scaling
 							// when we request preferred height again
 							// See Issue : https://github.com/linuxmint/cinnamon-spices-applets/issues/3787
-							this.actor.style = "";
+							if (this.originalStyle !== undefined) {
+								this.actor.style = this.originalStyle as string;
+								this.originalStyle = undefined;
+								Logger.Debug("Hourly box original style is restored to: " + this.actor.style);
+							}
 							this.actor.hide();
 							// Scroll back to the start
 							this.ResetScroll();
@@ -267,13 +274,24 @@ export class UIHourlyForecasts {
 				);
 			}
 			else {
-				this.actor.style = "";
 				this.actor.set_height(-1);
+				if (this.originalStyle !== undefined) {
+					this.actor.style = this.originalStyle as string;
+					this.originalStyle = undefined;
+					Logger.Debug("Hourly box original style is restored to: " + this.actor.style);
+				}
 				this.ResetScroll();
 				this.actor.hide();
 				resolve();
 			}
 		});
+	}
+
+	private get AnimateEnabled(): boolean {
+		if (CompareVersion(imports.misc.config.PACKAGE_VERSION, "5.4.0") < 0)
+			return global.settings.get_boolean("desktop-effects-on-menus")
+		else
+			return global.settings.get_boolean("desktop-effects-on-menus") && global.settings.get_boolean("desktop-effects-workspace");
 	}
 
 	/** Sets the correct width for the hourly boxes, make
@@ -317,18 +335,16 @@ export class UIHourlyForecasts {
 			const iconWidth = ui.Icon.get_preferred_width(-1)[1];
 			const percipVolumeWidth = ui.PrecipVolume.get_preferred_width(-1)[1];
 			const percipChanceWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
-			const summaryWidth = ui.Summary.get_preferred_width(-1)[1];
 			const temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
 			const precipitationWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
 
 			if (precipitationWidth == null || temperatureWidth == null ||
-				hourWidth == null || iconWidth == null || summaryWidth == null ||
+                hourWidth == null || iconWidth == null ||
 				percipVolumeWidth == null || percipChanceWidth == null)
 				continue;
 
 			if (requiredWidth < hourWidth) requiredWidth = hourWidth;
 			if (requiredWidth < iconWidth) requiredWidth = iconWidth;
-			// if (requiredWidth < summaryWidth) requiredWidth = summaryWidth;
 			if (requiredWidth < temperatureWidth) requiredWidth = temperatureWidth;
 			if (requiredWidth < precipitationWidth) requiredWidth = precipitationWidth;
 		}
@@ -341,7 +357,7 @@ export class UIHourlyForecasts {
 			this.canvas?.disconnect(this.onPaintSignal);
 	}
 
-	public Rebuild(config: Config, textColorStyle: string, availableHours: number | null = null) {
+	public Rebuild(config: Config, textColorStyle: string, availableHours: number | null = null): void {
 		this.Destroy();
 		const hours = availableHours ?? this.app.GetMaxHourlyForecasts();
 		this.hourlyForecasts = [];
@@ -359,33 +375,56 @@ export class UIHourlyForecasts {
 		this.container.add(gridActor, {expand: true, x_fill: true, y_fill: true});
 
 		for (let index = 0; index < hours; index++) {
-			const box = new BoxLayout({ vertical: true, style_class: "hourly-box-item" });
+			const box = new BoxLayout({ vertical: true, style_class: "hourly-box-item", reactive: true });
 			this.hourlyContainers.push(box);
 
-			this.hourlyForecasts.push({
+            this.hourlyForecasts.push({
 				// Override color on light theme for grey text
-				Hour: new Label({ text: "Hour", style_class: "hourly-time", style: textColorStyle }),
+				Hour: Label({
+					text: "Hour",
+					style_class: "hourly-time",
+					style: textColorStyle,
+					x_align: imports.gi.Clutter.ActorAlign.CENTER,
+				}),
 				Icon: new Icon({
 					icon_type: config.IconType,
 					icon_size: 24,
 					icon_name: APPLET_ICON,
-					style_class: "hourly-icon"
+					style_class: "hourly-icon",
+                    reactive: true
 				}),
-				Summary: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
-				PrecipPercent: new Label({ text: " ", style_class: "hourly-data", style: "padding-top: 5px;" }),
-				PrecipVolume: new Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `font-size: 80%; min-width: ${this.volumeGraphWidth}px;` }),
-				Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `padding-top: ${this.tempGraphHeight}px`})
-			})
+				PrecipPercent: Label({
+					text: " ",
+					style_class: "hourly-data",
+					style: "padding-top: 5px;",
+					x_align: imports.gi.Clutter.ActorAlign.CENTER,
+				}),
+				PrecipVolume: Label({
+					text: _(ELLIPSIS),
+					style_class: "hourly-data",
+					style: `font-size: 80%; min-width: ${this.volumeGraphWidth}px;`,
+					x_align: imports.gi.Clutter.ActorAlign.CENTER,
+				}),
+				Temperature: Label({
+					text: _(ELLIPSIS),
+					style_class: "hourly-data",
+					style: `padding-top: ${this.tempGraphHeight}px`,
+					x_align: imports.gi.Clutter.ActorAlign.CENTER,
+				})
+			});
 
-			this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);
-			box.add_child(this.hourlyForecasts[index].Hour);
-			box.add_child(this.hourlyForecasts[index].Icon);
-			// box.add(this.hourlyForecasts[index].Summary, {expand: true, x_fill: true});
-			box.add_child(this.hourlyForecasts[index].Temperature);
+            const hourlySet = this.hourlyForecasts[index];
+
+			hourlySet.PrecipVolume.clutter_text.set_line_wrap(true);
+			box.add_child(hourlySet.Hour);
+			box.add_child(hourlySet.Icon,);
+			box.add_child(hourlySet.Temperature);
 			if (this.app.Provider?.supportHourlyPrecipChance)
-				box.add_child(this.hourlyForecasts[index].PrecipPercent);
+				box.add_child(hourlySet.PrecipPercent);
 			if (this.app.Provider?.supportHourlyPrecipVolume)
-				box.add_child(this.hourlyForecasts[index].PrecipVolume);
+				box.add_child(hourlySet.PrecipVolume);
+
+            hourlySet.SummaryTooltip = new Tooltip(hourlySet.Icon, _(ELLIPSIS))
 
 			forecastContainer.add(box, {
 				x_fill: true,
@@ -411,16 +450,15 @@ export class UIHourlyForecasts {
 		const maxPrecipVolume = this.hourlyForecastData.map(x => x.precipitation?.volume).reduce((p, c) => Math.max(p ?? 0, c ?? 0)) as number;
 		const totalHeight = this.hourlyContainers[0].height;
 		const itemWidth = this.hourlyContainers[0].width;
-		const totalWidth = this.hourlyContainers.length * itemWidth;
+		// const totalWidth = this.hourlyContainers.length * itemWidth;
 		const tempHeightOffset = this.hourlyForecasts[0].Hour.get_height() + this.hourlyForecasts[0].Icon.get_height();
 		const precipitationHeight = this.hourlyForecasts[0].PrecipPercent.get_height() + this.hourlyForecasts[0].PrecipVolume.get_height();
 		const tempPadding = 6;
 
-		let points: Array<{x: number, y: number}> = [];
-		let precipitation: number[] = []
+		const points: Array<{x: number, y: number}> = [];
+		const precipitation: number[] = []
 		for (let i = 0; i < this.hourlyContainers.length; i++) {
 			const data = this.hourlyForecastData[i];
-			const items = this.hourlyForecasts[i];
 
 			if (data.temp == null)
 				continue;
@@ -430,7 +468,7 @@ export class UIHourlyForecasts {
 			const height = this.tempGraphHeight - tempPadding - ratio + tempHeightOffset;
 
 			const midX = itemWidth * i + (itemWidth/2);
-			const midY = (totalHeight / 2);
+			// const midY = (totalHeight / 2);
 			points.push({x: midX, y: height});
 			precipitation.push((data.precipitation?.volume ?? 0))
 		}
@@ -477,13 +515,19 @@ export class UIHourlyForecasts {
 		return precipitationText;
 	}
 
-	private GeneratePrecipitationChance(precip: Precipitation | undefined, config: Config): string {
-		if (!precip) return "";
+	private GeneratePrecipitationChance(precip: Precipitation | undefined): string {
+		if (!precip)
+			return "";
+
+		// If we have a volume and it's 0, we don't need to show the chance
+		// if (precip.volume != null && precip.volume == 0)
+		// 	return "";
 
 		let precipitationText = "";
-		if (!!precip.chance) {
+		const chance = (Math.round((precip.chance ?? 0) / 10) * 10);
+		if (chance) {
 			precipitationText = (NotEmpty(precipitationText)) ? (precipitationText + ", ") : "";
-			precipitationText += ((Math.round(precip.chance / 10) * 10).toString() + "%")
+			precipitationText += (chance.toString() + "%");
 		}
 		return precipitationText;
 	}
@@ -526,7 +570,7 @@ export class UIHourlyForecasts {
 interface HourlyForecastUI {
 	Icon: imports.gi.St.Icon,
 	Hour: imports.gi.St.Label,
-	Summary: imports.gi.St.Label,
+	SummaryTooltip?: imports.ui.tooltips.Tooltip,
 	PrecipVolume: imports.gi.St.Label,
 	Temperature: imports.gi.St.Label,
 	PrecipPercent: imports.gi.St.Label

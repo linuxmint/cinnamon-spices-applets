@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# SCREENSAVER INHIBITOR
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# mtwebster, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-01 20:42+0100\n"
-"PO-Revision-Date: 2024-02-01 20:44+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-10-01 18:55+0200\n"
+"PO-Revision-Date: 2024-10-01 18:59+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -16,22 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:20
+#. applet.js:21
 msgid "Currently preventing screensaver"
 msgstr "L'économiseur d'écran ne s'activera pas"
 
-#: applet.js:21
+#. applet.js:22
 msgid "Currently allowing screensaver"
 msgstr "L'économiseur d'écran peut s'activer"
 
-#: applet.js:100
+#. applet.js:134
 msgid "Screensaver settings"
 msgstr "Paramètres de l'économiseur d'écran"
 
 #. settings-schema.json->inhibit-at-startup->description
-#: applet.js:104
+#. applet.js:138
 msgid "Inhibit screensaver at startup"
 msgstr "Inhiber l'économiseur d'écran au démarrage de l'applet"
 
@@ -45,9 +46,55 @@ msgstr ""
 msgid "Screensaver Inhibitor"
 msgstr "Inhibiteur d'économiseur d'écran"
 
-#. settings-schema.json->head->description
+#. settings-schema.json->pGeneral->title
+msgid "General"
+msgstr "Général"
+
+#. settings-schema.json->pIcons->title
+#. settings-schema.json->sectionIcons->title
 msgid "Icons"
 msgstr "Icônes"
+
+#. settings-schema.json->pKeybindings->title
+#. settings-schema.json->sectionKeybindings->title
+msgid "Keybinding"
+msgstr "Raccourci-clavier"
+
+#. settings-schema.json->sectionStartup->title
+msgid "Startup"
+msgstr "Démarrage"
+
+#. settings-schema.json->sectionDurationOrEndTime->title
+msgid "Duration or End Time of screen saver inhibition"
+msgstr "Durée ou Heure de fin de l'inhibition de l'économiseur d'écran"
+
+#. settings-schema.json->sectionBlocking->title
+msgid "Way to block the screensaver"
+msgstr "Façon de bloquer l'économiseur d'écran"
+
+#. settings-schema.json->end-timechooser->description
+msgid "Time"
+msgstr "Temps"
+
+#. settings-schema.json->end-timechooser->tooltip
+msgid "Seconds will be ignored."
+msgstr "Les secondes seront ignorées."
+
+#. settings-schema.json->end-type->description
+msgid "The time shown above is"
+msgstr "Le temps affiché ci-dessus est"
+
+#. settings-schema.json->end-type->options
+msgid "to be disregarded"
+msgstr "à ignorer"
+
+#. settings-schema.json->end-type->options
+msgid "the inhibit duration"
+msgstr "la durée de l'inhibition"
+
+#. settings-schema.json->end-type->options
+msgid "the inhibit end time"
+msgstr "l'heure de fin de l'inhibition"
 
 #. settings-schema.json->off-icon->description
 msgid "Power management allowed icon:"
@@ -68,22 +115,39 @@ msgstr "Icône signifiant que l'économiseur d'écran est inhibé :"
 msgid "Reset to default icons"
 msgstr "Rétablir les icônes par défaut"
 
-#. settings-schema.json->head1->description
-msgid "Keybinding"
-msgstr "Raccourci-clavier"
-
 #. settings-schema.json->keybinding->description
 msgid "Set the keybinding for screensaver inhibit"
 msgstr ""
 "Définir la combinaison de touches pour l'inhibition de l'économiseur d'écran"
 
-#. settings-schema.json->head2->description
-msgid "Startup"
-msgstr "Démarrage"
+#. settings-schema.json->seconds-after-startup->description
+msgid "Number of seconds before screensaver inhibition"
+msgstr "Nombre de secondes avant l'inhibition de l'économiseur d'écran"
 
-#~ msgid ""
-#~ "(More precisely, 10 seconds after startup, to ensure that the session is "
-#~ "correctly launched)."
-#~ msgstr ""
-#~ "(Plus précisément 10 secondes après le démarrage pour s'assurer que la "
-#~ "session est correctement lancée)."
+#. settings-schema.json->locklabel->description
+msgid "(Avoid using aggressive ways, if possible.)"
+msgstr "(Éviter d'utiliser des moyens agressifs, si possible.)"
+
+#. settings-schema.json->locktype->description
+msgid "Blocking mode"
+msgstr "Mode de blocage"
+
+#. settings-schema.json->locktype->options
+msgid "Normal"
+msgstr "Normal"
+
+#. settings-schema.json->locktype->options
+msgid "Aggressive"
+msgstr "Agressif"
+
+#. settings-schema.json->locktype->options
+msgid "Super aggressive"
+msgstr "Super agressif"
+
+#. settings-schema.json->lockinterval->description
+msgid "Blocking interval"
+msgstr "Intervalle entre deux blocages"
+
+#. settings-schema.json->lockinterval->units
+msgid "minutes"
+msgstr "minutes"

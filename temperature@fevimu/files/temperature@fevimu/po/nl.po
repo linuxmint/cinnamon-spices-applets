@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPU Temperature Indicator\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-15 23:44+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-03 19:49+0200\n"
 "PO-Revision-Date: 2024-04-21 21:05+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -17,15 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:80 applet.js:159
+#: applet.js:81 applet.js:160
 msgid "Temperature"
 msgstr "Temperatuur"
 
-#: applet.js:148
+#: applet.js:149
 msgid "Error"
 msgstr "Fout"
 
-#: applet.js:149
+#: applet.js:150
 msgid ""
 "Run sensors-detect as root. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -33,11 +34,11 @@ msgstr ""
 "Sensoren detecteren uitvoeren   als root. Als het niet helpt, klik dan hier "
 "om te rapporteren met uw sensoruitgang!"
 
-#: applet.js:151
+#: applet.js:152
 msgid "Warning"
 msgstr "Waarschuwing"
 
-#: applet.js:152
+#: applet.js:153
 msgid ""
 "Please install lm_sensors. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -45,31 +46,31 @@ msgstr ""
 "Installeer a.u.b lm_sensors. Als het niet helpt, klik dan hier om te "
 "rapporteren met uw sensoruitgang!"
 
-#: applet.js:224
+#: applet.js:229
 msgid "Thresholds Info"
 msgstr "Drempelwaarde Informatie"
 
-#: applet.js:225
+#: applet.js:230
 msgid "High Temp"
 msgstr "Hoge temperatuur"
 
-#: applet.js:226
+#: applet.js:231
 msgid "Crit. Temp"
 msgstr "Kritieke Temperatuur"
 
-#: applet.js:237
+#: applet.js:242
 msgid "Critical"
 msgstr "Kritiek"
 
-#: applet.js:240
+#: applet.js:245
 msgid "High"
 msgstr "Hoog"
 
-#: applet.js:253
+#: applet.js:258
 msgid "Current Temperature"
 msgstr "Huidige temperatuur"
 
-#: applet.js:255
+#: applet.js:260
 msgid "Critical Temperature"
 msgstr "Kritieke Temperatuur"
 

@@ -1,0 +1,518 @@
+# CINNAMON EYES
+# This file is put in the public domain.
+# anaximeno, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: c-eyes@anaximeno 3.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-02-10 17:17-0100\n"
+"PO-Revision-Date: 2025-08-30 03:12+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. 4.2/applet.js:56 5.4/applet.js:56
+msgid ""
+"📢 The click effects will be removed from this applet on the version 6.2 of "
+"Cinnamon\n"
+"and moved to a new extension named mouse-click-effects which can already be "
+"installed\n"
+"on the Cinnamon Extensions settings module for versions of Cinnamon >= 5.4"
+msgstr ""
+"📢 滑鼠點選特效將於 Cinnamon 6.2 版從此小程式中移除，\n"
+"並移至名為 mouse-click-effects 的新擴充元件，Cinnamon 5.4 以上的版本已可\n"
+"透過 Cinnamon 擴充元件設定模組進行安裝。"
+
+#. 4.2/applet.js:396 5.4/applet.js:392
+msgid "click to deactivate the eye"
+msgstr "點選以停用眼睛"
+
+#. 4.2/applet.js:396 5.4/applet.js:392
+msgid "click to activate the eye"
+msgstr "點選以啟用眼睛"
+
+#. 4.2/applet.js:397 5.4/applet.js:393
+msgid "TIP"
+msgstr "小提示"
+
+#. 6.2/applet.js:42
+msgid "Hey, I saw that!"
+msgstr "嘿，我看到囉！"
+
+#. metadata.json->name
+msgid "Cinnamon Eyes"
+msgstr "Cinnamon Eyes"
+
+#. metadata.json->description
+msgid ""
+"An applet for Cinnamon that adds an eye to the panel bar that follows your "
+"cursor."
+msgstr "一個會在 Cinnamon 面板上新增、並跟隨滑鼠游標移動的眼睛小程式。"
+
+#. 4.2->settings-schema.json->eye->title
+#. 5.4->settings-schema.json->eye->title
+msgid "Eye"
+msgstr "眼睛"
+
+#. 4.2->settings-schema.json->effects->title
+#. 5.4->settings-schema.json->effects->title
+#. 6.2->settings-schema.json->effects-section->title
+msgid "Effects"
+msgstr "特效"
+
+#. 4.2->settings-schema.json->eye-generic->title
+#. 4.2->settings-schema.json->click-generic->title
+#. 5.4->settings-schema.json->eye-generic->title
+#. 5.4->settings-schema.json->click-generic->title
+#. 6.2->settings-schema.json->general-page->title
+#. 6.2->settings-schema.json->general-section->title
+msgid "General"
+msgstr "一般"
+
+#. 4.2->settings-schema.json->eye-colors->title
+#. 4.2->settings-schema.json->click-colors->title
+#. 5.4->settings-schema.json->eye-colors->title
+#. 5.4->settings-schema.json->click-colors->title
+#. 6.2->settings-schema.json->colors-section->title
+msgid "Colors"
+msgstr "顏色"
+
+#. 4.2->settings-schema.json->click-events->title
+#. 5.4->settings-schema.json->click-events->title
+msgid "Events"
+msgstr "事件"
+
+#. 4.2->settings-schema.json->eye-mode->description
+#. 5.4->settings-schema.json->eye-mode->description
+msgid "Mode"
+msgstr "模式"
+
+#. 4.2->settings-schema.json->eye-mode->options
+#. 5.4->settings-schema.json->eye-mode->options
+#. 6.2->settings-schema.json->mode->options
+msgid "Lids"
+msgstr "眼皮"
+
+#. 4.2->settings-schema.json->eye-mode->options
+#. 5.4->settings-schema.json->eye-mode->options
+#. 6.2->settings-schema.json->mode->options
+msgid "Bulb"
+msgstr "眼球"
+
+#. 4.2->settings-schema.json->eye-line-width->description
+#. 5.4->settings-schema.json->eye-line-width->description
+#. 6.2->settings-schema.json->line-width->description
+msgid "Line Width"
+msgstr "線條寬度"
+
+#. 4.2->settings-schema.json->eye-line-width->units
+#. 4.2->settings-schema.json->eye-margin->units
+#. 4.2->settings-schema.json->eye-vertical-padding->units
+#. 4.2->settings-schema.json->mouse-click-image-size->units
+#. 5.4->settings-schema.json->eye-line-width->units
+#. 5.4->settings-schema.json->eye-margin->units
+#. 5.4->settings-schema.json->eye-vertical-padding->units
+#. 5.4->settings-schema.json->mouse-click-image-size->units
+#. 6.2->settings-schema.json->line-width->units
+#. 6.2->settings-schema.json->margin->units
+#. 6.2->settings-schema.json->padding->units
+msgid "px"
+msgstr "px"
+
+#. 4.2->settings-schema.json->eye-margin->description
+#. 5.4->settings-schema.json->eye-margin->description
+#. 6.2->settings-schema.json->margin->description
+msgid "Margin"
+msgstr "邊距"
+
+#. 4.2->settings-schema.json->eye-vertical-padding->description
+#. 5.4->settings-schema.json->eye-vertical-padding->description
+#. 6.2->settings-schema.json->padding->description
+msgid "Padding"
+msgstr "內距"
+
+#. 4.2->settings-schema.json->eye-repaint-interval->units
+#. 4.2->settings-schema.json->fade-timeout->units
+#. 5.4->settings-schema.json->eye-repaint-interval->units
+#. 5.4->settings-schema.json->fade-timeout->units
+#. 6.2->settings-schema.json->repaint-interval->units
+msgid "ms"
+msgstr "毫秒"
+
+#. 4.2->settings-schema.json->eye-repaint-interval->description
+#. 5.4->settings-schema.json->eye-repaint-interval->description
+#. 6.2->settings-schema.json->repaint-interval->description
+msgid "Eye Update Interval"
+msgstr "眼睛更新間隔"
+
+#. 4.2->settings-schema.json->eye-repaint-interval->tooltip
+#. 5.4->settings-schema.json->eye-repaint-interval->tooltip
+#. 6.2->settings-schema.json->repaint-interval->tooltip
+msgid ""
+"This setting controls the time to redraw the eye again. Lower values "
+"(measured in miliseconds) result in smoother animation but require more "
+"processing power."
+msgstr ""
+"此設定用於控制重新繪製眼睛的時間間隔。數值越低（單位為毫秒），動畫越流暢，但"
+"會消耗更多運算資源。"
+
+#. 4.2->settings-schema.json->eye-repaint-angle->units
+#. 5.4->settings-schema.json->eye-repaint-angle->units
+#. 6.2->settings-schema.json->repaint-angle->units
+msgid "radians"
+msgstr "弧度"
+
+#. 4.2->settings-schema.json->eye-repaint-angle->description
+#. 5.4->settings-schema.json->eye-repaint-angle->description
+#. 6.2->settings-schema.json->repaint-angle->description
+msgid "Eye Update Sensitivity"
+msgstr "眼睛更新靈敏度"
+
+#. 4.2->settings-schema.json->eye-repaint-angle->tooltip
+#. 5.4->settings-schema.json->eye-repaint-angle->tooltip
+#. 6.2->settings-schema.json->repaint-angle->tooltip
+msgid ""
+"This setting controls the minimum angle change between mouse movements "
+"required to redraw the eye. Lower values (measured in radians) result in "
+"smoother animation but require more processing power."
+msgstr ""
+"此設定可控制滑鼠移動時，觸發眼睛重繪所需的最小角度變化。較低的數值（單位為弧"
+"度）會帶來更流暢的動畫，但會消耗較多的運算資源。"
+
+#. 4.2->settings-schema.json->eye-activate-by-default->description
+#. 5.4->settings-schema.json->eye-activate-by-default->description
+msgid "Start Activated"
+msgstr "預設啟用"
+
+#. 4.2->settings-schema.json->deactivate-on-fullscreen->description
+#. 4.2->settings-schema.json->deactivate-effects-on-fullscreen->description
+#. 5.4->settings-schema.json->deactivate-on-fullscreen->description
+#. 5.4->settings-schema.json->deactivate-effects-on-fullscreen->description
+#. 6.2->settings-schema.json->deactivate-on-fullscreen->description
+msgid "Deactivate On Fullscreen"
+msgstr "全螢幕時停用"
+
+#. 4.2->settings-schema.json->eye-clicked-color->description
+#. 5.4->settings-schema.json->eye-clicked-color->description
+msgid "Activated Base Color"
+msgstr "啟用時的底色"
+
+#. 4.2->settings-schema.json->iris-clicked-color->description
+#. 5.4->settings-schema.json->iris-clicked-color->description
+msgid "Activated Iris Color"
+msgstr "啟用時的虹膜顏色"
+
+#. 4.2->settings-schema.json->pupil-clicked-color->description
+#. 5.4->settings-schema.json->pupil-clicked-color->description
+msgid "Activated Pupil Color"
+msgstr "啟用時的瞳孔顏色"
+
+#. 4.2->settings-schema.json->fill-lids-color-painting->description
+#. 4.2->settings-schema.json->fill-bulb-color-painting->description
+#. 5.4->settings-schema.json->fill-lids-color-painting->description
+#. 5.4->settings-schema.json->fill-bulb-color-painting->description
+msgid "Fill the Colors Inside the Eye"
+msgstr "填滿眼睛內部的顏色"
+
+#. 4.2->settings-schema.json->mouse-click-enable->description
+#. 5.4->settings-schema.json->mouse-click-enable->description
+msgid "Enable Effects"
+msgstr "啟用特效"
+
+#. 4.2->settings-schema.json->mouse-click-mode->description
+#. 5.4->settings-schema.json->mouse-click-mode->description
+msgid "Icon Mode"
+msgstr "圖示模式"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Simple"
+msgstr "簡單"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Trigun"
+msgstr "Trigun"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Nublo"
+msgstr "Nublo"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Risco"
+msgstr "Risco"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Wolf"
+msgstr "Wolf"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Pincel"
+msgstr "Pincel"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Claw"
+msgstr "Claw"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Metropoli"
+msgstr "Metropoli"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Flowey"
+msgstr "Flowey"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Kusco"
+msgstr "Kusco"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Ouroboros"
+msgstr "Ouroboros"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Helix"
+msgstr "Helix"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Direction"
+msgstr "Direction"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Spinks"
+msgstr "Spinks"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Thatch"
+msgstr "Thatch"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Cotton"
+msgstr "Cotton"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Circle"
+msgstr "Circle"
+
+#. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
+msgid "Gear"
+msgstr "Gear"
+
+#. 4.2->settings-schema.json->mouse-click-image-size->description
+#. 5.4->settings-schema.json->mouse-click-image-size->description
+msgid "Icon Size"
+msgstr "圖示大小"
+
+#. 4.2->settings-schema.json->click-animation-mode->description
+#. 5.4->settings-schema.json->click-animation-mode->description
+msgid "Click Animation Mode"
+msgstr "點選動畫模式"
+
+#. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
+msgid "Blink"
+msgstr "閃爍"
+
+#. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
+msgid "Bounce Back"
+msgstr "回彈"
+
+#. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
+msgid "Retract"
+msgstr "收回"
+
+#. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
+msgid "Expand"
+msgstr "展開"
+
+#. 4.2->settings-schema.json->mouse-left-click-enable->description
+#. 5.4->settings-schema.json->mouse-left-click-enable->description
+msgid "Enable Left Click"
+msgstr "啟用左鍵點選"
+
+#. 4.2->settings-schema.json->mouse-middle-click-enable->description
+#. 5.4->settings-schema.json->mouse-middle-click-enable->description
+msgid "Enable Middle Click"
+msgstr "啟用中鍵點選"
+
+#. 4.2->settings-schema.json->mouse-right-click-enable->description
+#. 5.4->settings-schema.json->mouse-right-click-enable->description
+msgid "Enable Right Click"
+msgstr "啟用右鍵點選"
+
+#. 4.2->settings-schema.json->fade-timeout->description
+#. 5.4->settings-schema.json->fade-timeout->description
+msgid "Fade Timeout"
+msgstr "淡出時間"
+
+#. 4.2->settings-schema.json->mouse-left-click-color->description
+#. 5.4->settings-schema.json->mouse-left-click-color->description
+msgid "Left Click Color"
+msgstr "左鍵點選顏色"
+
+#. 4.2->settings-schema.json->mouse-middle-click-color->description
+#. 5.4->settings-schema.json->mouse-middle-click-color->description
+msgid "Middle Click Color"
+msgstr "中鍵點選顏色"
+
+#. 4.2->settings-schema.json->mouse-right-click-color->description
+#. 5.4->settings-schema.json->mouse-right-click-color->description
+msgid "Right Click Color"
+msgstr "右鍵點選顏色"
+
+#. 4.2->settings-schema.json->mouse-click-opacity->description
+#. 5.4->settings-schema.json->mouse-click-opacity->description
+msgid "General Opacity"
+msgstr "整體透明度"
+
+#. 5.4->settings-schema.json->click-info->title
+msgid "Info"
+msgstr "資訊"
+
+#. 5.4->settings-schema.json->click-effects-moved-on-
+#. cinnamon-6.2-info->description
+msgid ""
+"In Cinnamon versions 6.2 and later, the click effects have been removed from "
+"this applet and relocated to a new extension called 'mouse-click-effects,' "
+"which can be installed through the Cinnamon Extensions settings module."
+msgstr ""
+"在 Cinnamon 6.2 版及後續版本中，點選特效已從本小程式移除，並移轉到名為"
+"「mouse-click-effects」的新擴充元件，您可以透過 Cinnamon 的擴充元件設定模組來"
+"安裝。"
+
+#. 6.2->settings-schema.json->style-page->title
+#. 6.2->settings-schema.json->styles-section->title
+msgid "Style"
+msgstr "樣式"
+
+#. 6.2->settings-schema.json->optimization-section->title
+msgid "Optimizations"
+msgstr "最佳化"
+
+#. 6.2->settings-schema.json->mode->description
+msgid "Eye Mode"
+msgstr "眼睛模式"
+
+#. 6.2->settings-schema.json->tooltip-message->description
+msgid "Tooltip Message on Hover"
+msgstr "滑鼠游標停留時的提示訊息"
+
+#. 6.2->settings-schema.json->optimization-mode->description
+msgid "Optimization Mode"
+msgstr "最佳化模式"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Battery"
+msgstr "省電"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Balanced"
+msgstr "平衡"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Performance"
+msgstr "效能"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Manual"
+msgstr "手動"
+
+#. 6.2->settings-schema.json->use-alternative-colors->description
+msgid "Use Alternative Colors for the Eye"
+msgstr "為眼睛使用替代顏色"
+
+#. 6.2->settings-schema.json->use-alternative-colors->tooltip
+msgid ""
+"When disabled it will use the current system theme's default color for panel "
+"items."
+msgstr "停用此選項後，小程式將採用目前系統佈景主題為面板元件設定的預設顏色。"
+
+#. 6.2->settings-schema.json->base-color->description
+msgid "Base Color"
+msgstr "基礎顏色"
+
+#. 6.2->settings-schema.json->iris-color->description
+msgid "Iris Color"
+msgstr "虹膜顏色"
+
+#. 6.2->settings-schema.json->pupil-color->description
+msgid "Pupil Color"
+msgstr "瞳孔顏色"
+
+#. 6.2->settings-schema.json->blink-effect-enabled->description
+#, fuzzy
+msgid "Blink Effect"
+msgstr "特效"
+
+#. 6.2->settings-schema.json->blink-period->units
+#. 6.2->settings-schema.json->blink-gap->units
+msgid "seconds"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-period->description
+msgid "Blink Period"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-period->tooltip
+msgid ""
+"This setting controls the duration of a full blink cycle (closing and "
+"opening)."
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-gap->description
+#, fuzzy
+msgid "Blink Gap"
+msgstr "閃爍"
+
+#. 6.2->settings-schema.json->blink-gap->tooltip
+msgid "This setting controls the time gap between two consecutive blinks."
+msgstr ""
+
+#. 6.2->settings-schema.json->sleep-effect-enabled->description
+#, fuzzy
+msgid "Sleep Effect"
+msgstr "啟用特效"
+
+#. 6.2->settings-schema.json->sleep-effect-enabled->tooltip
+msgid ""
+"When enabled, the eyes will slowly close when the system is idle and open "
+"again when activity is detected."
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->units
+msgid "minutes"
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->description
+msgid "Idle Delay"
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->tooltip
+msgid ""
+"This setting controls the time of inactivity (no mouse or keyboard input) "
+"after which the system is considered idle."
+msgstr ""

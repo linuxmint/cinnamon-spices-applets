@@ -1,5 +1,6 @@
 const Applet = imports.ui.applet;
 const {AppletSettings} = imports.ui.settings;
+const Util = imports.misc.util;
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
@@ -11,13 +12,40 @@ const St = imports.gi.St;
 const { restartCinnamon } = imports.ui.main;
 const Mainloop = imports.mainloop;
 
-// l10n/translation support
 const UUID = "Exit@claudiux";
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+const SCRIPTS_DIR = GLib.get_home_dir()+"/.local/share/cinnamon/applets/"+UUID+"/scripts";
+const CANSHUTDOWN_SCRIPT = SCRIPTS_DIR+"/can-shutdown.sh";
 
+// l10n/translation support
 function _(str) {
-    return Gettext.dgettext(UUID, str);
+    Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+    let _str = Gettext.dgettext(UUID, str);
+    if (_str != str)
+        return _str;
+    Gettext.bindtextdomain("lightdm", "/usr/share/locale");
+    _str = Gettext.dgettext("lightdm", str);
+    if (_str != str)
+        return _str;
+    Gettext.bindtextdomain("gnome-panel", "/usr/share/locale");
+    _str = Gettext.dgettext("gnome-panel", str);
+    if (_str != str)
+        return _str;
+    // If the text was not found locally then try with system-wide translations:
+    return Gettext.gettext(str);
 }
+
+/**
+ * Execute a function only once after a few seconds.
+ * @callback: function to execute.
+ * @s: number of seconds.
+ */
+function setTimeoutInSeconds(callback, s) {
+    return Mainloop.timeout_add_seconds(s, () => {
+        callback();
+        return false;
+    }, null);
+}
+
 
 class ExitApplet extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -29,6 +57,8 @@ class ExitApplet extends Applet.IconApplet {
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         this.isWaylandSession = Meta.is_wayland_compositor();
+
+        this.can_shutdown = false;
 
         this._screenSaverProxy = new ScreenSaver.ScreenSaverProxy();
 
@@ -56,8 +86,11 @@ class ExitApplet extends Applet.IconApplet {
         this.s.bind("showRestartCinnamon", "showRestartCinnamon");
         this.s.bind("showSuspend", "showSuspend");
         this.s.bind("showHibernate", "showHibernate");
+        this.s.bind("hibernateNeedsSudo", "hibernateNeedsSudo");
         this.s.bind("showRestart", "showRestart");
         this.s.bind("showPowerOff", "showPowerOff");
+        this.s.bind("showScreenOff", "showScreenOff");
+        this.s.bind("mouse-deactivation-duration", "mouseDeactivationDuration");
         this.s.bind("showLockscreen", "showLockscreen");
         this.s.bind("showSwitchUser", "showSwitchUser");
         this.s.bind("showLogout", "showLogout");
@@ -68,6 +101,17 @@ class ExitApplet extends Applet.IconApplet {
         this.displayLockScreenSetting = !this.lockdown_settings.get_boolean('disable-lock-screen') && !this.isWaylandSession;
         this.displaySwitchUserSetting = !this.lockdown_settings.get_boolean('disable-user-switching') && !this.isWaylandSession;
         this.displayLogoutSetting = !this.lockdown_settings.get_boolean('disable-log-out');
+
+        let subProcess =  Util.spawnCommandLineAsyncIO(CANSHUTDOWN_SCRIPT, Lang.bind(this,
+            function(stdout, stderr, exitCode) {
+                if (exitCode == 0) {
+                    this.can_shutdown = true;
+                } else {
+                    this.can_shutdown = false;
+                }
+                subProcess.send_signal(9);
+            })
+        );
 
         this.loop = Mainloop.timeout_add_seconds(1, () => this.check_system_managed_options());
         return false;
@@ -104,6 +148,31 @@ class ExitApplet extends Applet.IconApplet {
                 this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             }
 
+            if (this.showScreenOff) {
+                item = new PopupMenu.PopupIconMenuItem(_("Screen Off"), "preferences-desktop-screensaver-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    let duration = Math.trunc(this.mouseDeactivationDuration);
+                    Util.spawn_async(
+                        ['/bin/bash', '-c',
+                        'for m in $(xinput | grep -i Mouse | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
+                        xinput disable $m; done'],
+                        null
+                    );
+                    Util.spawnCommandLine('xset dpms force off');
+                    setTimeoutInSeconds(
+                        function () {
+                            Util.spawn_async(
+                                ['/bin/bash', '-c',
+                                'for m in $(xinput | grep -i Mouse | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
+                                xinput enable $m; done'],
+                                null);
+                            },
+                        duration
+                    );
+                }));
+                this.menu.addMenuItem(item);
+            }
+
             if (allow_lock_screen && this.showLockscreen) {
                 item = new PopupMenu.PopupIconMenuItem(_("Lock Screen"), "system-lock-screen-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', Lang.bind(this, function () {
@@ -125,33 +194,46 @@ class ExitApplet extends Applet.IconApplet {
                 this.menu.addMenuItem(item);
             }
 
+            if (this.showScreenOff || (allow_lock_screen && this.showLockscreen)) {
+                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            }
+
             if (allow_switch_user && this.showSwitchUser) {
-                if (GLib.getenv("XDG_SEAT_PATH")) {
-                    // LightDM
-                    item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
+                if (this.can_shutdown) {
+                    if (GLib.getenv("XDG_SEAT_PATH")) {
+                        // LightDM
+                        item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
+                        item.connect('activate', Lang.bind(this, function () {
+                            this.menu.close(true);
+                            launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
+                            launcher.spawnv(["dm-tool", "switch-to-greeter"]);
+                        }));
+                        this.menu.addMenuItem(item);
+                    }
+                    else if (GLib.file_test("/usr/bin/mdmflexiserver", GLib.FileTest.EXISTS)) {
+                        // MDM
+                        item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
+                        item.connect('activate', Lang.bind(this, function () {
+                            this.menu.close(true);
+                            launcher.spawnv(["mdmflexiserver"]);
+                        }));
+                        this.menu.addMenuItem(item);
+                    }
+                    else if (GLib.file_test("/usr/bin/gdmflexiserver", GLib.FileTest.EXISTS)) {
+                        // GDM
+                        item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
+                        item.connect('activate', Lang.bind(this, function () {
+                            this.menu.close(true);
+                            launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
+                            launcher.spawnv(["gdmflexiserver"]);
+                        }));
+                        this.menu.addMenuItem(item);
+                    }
+                } else {
+                    item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
                     item.connect('activate', Lang.bind(this, function () {
                         this.menu.close(true);
-                        launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
-                        launcher.spawnv(["dm-tool", "switch-to-greeter"]);
-                    }));
-                    this.menu.addMenuItem(item);
-                }
-                else if (GLib.file_test("/usr/bin/mdmflexiserver", GLib.FileTest.EXISTS)) {
-                    // MDM
-                    item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
-                    item.connect('activate', Lang.bind(this, function () {
-                        this.menu.close(true);
-                        launcher.spawnv(["mdmflexiserver"]);
-                    }));
-                    this.menu.addMenuItem(item);
-                }
-                else if (GLib.file_test("/usr/bin/gdmflexiserver", GLib.FileTest.EXISTS)) {
-                    // GDM
-                    item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
-                    item.connect('activate', Lang.bind(this, function () {
-                        this.menu.close(true);
-                        launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
-                        launcher.spawnv(["gdmflexiserver"]);
+                        launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
                     }));
                     this.menu.addMenuItem(item);
                 }
@@ -163,54 +245,102 @@ class ExitApplet extends Applet.IconApplet {
         }
 
         if (allow_log_out && this.showLogout) {
-            item = new PopupMenu.PopupIconMenuItem(_("Log Out"), "system-log-out-symbolic", St.IconType.SYMBOLIC);
-            item.connect('activate', Lang.bind(this, function () {
-                this.menu.close(true);
-                launcher.spawnv(["cinnamon-session-quit", "--logout", this.logoutMode]);
-            }));
-            this.menu.addMenuItem(item);
+            if (this.can_shutdown) {
+                item = new PopupMenu.PopupIconMenuItem(_("Log Out"), "system-log-out-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["cinnamon-session-quit", "--logout", this.logoutMode]);
+                }));
+                this.menu.addMenuItem(item);
+            } else {
+                item = new PopupMenu.PopupIconMenuItem(_("Log Out"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
+                }));
+                this.menu.addMenuItem(item);
+            }
         }
 
         if (allow_log_out || allow_lock_screen || allow_switch_user)
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         if (this.showSuspend) {
-            item = new PopupMenu.PopupIconMenuItem(_("Suspend"), "system-suspend", St.IconType.SYMBOLIC);
-            item.connect('activate', Lang.bind(this, function () {
-                this.menu.close(true);
-                launcher.spawnv(["systemctl", "suspend"]);
-            }));
-            this.menu.addMenuItem(item);
+            if (this.can_shutdown) {
+                item = new PopupMenu.PopupIconMenuItem(_("Suspend"), "system-suspend", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["systemctl", "suspend"]);
+                }));
+                this.menu.addMenuItem(item);
+            } else {
+                item = new PopupMenu.PopupIconMenuItem(_("Suspend"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
+                }));
+                this.menu.addMenuItem(item);
+            }
         }
 
         if (this.showHibernate) {
-            item = new PopupMenu.PopupIconMenuItem(_("Hibernate"), "system-suspend-hibernate", St.IconType.SYMBOLIC);
-            item.connect('activate', Lang.bind(this, function () {
-                this.menu.close(true);
-                launcher.spawnv(["systemctl", "hibernate"]);
-            }));
-            this.menu.addMenuItem(item);
+            if (this.can_shutdown) {
+                item = new PopupMenu.PopupIconMenuItem(_("Hibernate"), "system-suspend-hibernate", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    if (this.hibernateNeedsSudo)
+                        launcher.spawnv(["pkexec", "sudo", "systemctl", "hibernate"]);
+                    else
+                        launcher.spawnv(["systemctl", "hibernate"]);
+                }));
+                this.menu.addMenuItem(item);
+            } else {
+                item = new PopupMenu.PopupIconMenuItem(_("Hibernate"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
+                }));
+                this.menu.addMenuItem(item);
+            }
         }
 
         if (this.showSuspend || this.showHibernate)
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         if (this.showRestart) {
-            item = new PopupMenu.PopupIconMenuItem(_("Restart"), "view-refresh", St.IconType.SYMBOLIC);
-            item.connect('activate', Lang.bind(this, function () {
-                this.menu.close(true);
-                launcher.spawnv(["systemctl", "reboot"]);
-            }));
-            this.menu.addMenuItem(item);
+            if (this.can_shutdown) {
+                item = new PopupMenu.PopupIconMenuItem(_("Restart"), "view-refresh", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["systemctl", "reboot"]);
+                }));
+                this.menu.addMenuItem(item);
+            } else {
+                item = new PopupMenu.PopupIconMenuItem(_("Restart"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
+                }));
+                this.menu.addMenuItem(item);
+            }
         }
 
         if (this.showPowerOff) {
-            item = new PopupMenu.PopupIconMenuItem(_("Power Off"), "system-shutdown-symbolic", St.IconType.SYMBOLIC);
-            item.connect('activate', Lang.bind(this, function () {
-                this.menu.close(true);
-                launcher.spawnv(["systemctl", "poweroff"]);
-            }));
-            this.menu.addMenuItem(item);
+            if (this.can_shutdown) {
+                item = new PopupMenu.PopupIconMenuItem(_("Power Off"), "system-shutdown-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["systemctl", "poweroff"]);
+                }));
+                this.menu.addMenuItem(item);
+            } else {
+                item = new PopupMenu.PopupIconMenuItem(_("Power Off"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
+                }));
+                this.menu.addMenuItem(item);
+            }
         }
 
     }

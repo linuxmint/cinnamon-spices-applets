@@ -66,17 +66,20 @@ const cpu_dir = Gio.file_new_for_path(cpu_path);
 let height = 22;
 const DEC_WHITE = 16777215;
 
+const formatNumPanel = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 }).format;
+const formatNumMenu = new Intl.NumberFormat(undefined, { maximumFractionDigits: 1, minimumFractionDigits: 1 }).format;
+
 // Translation support
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
 
 function _(str) {
-  return Gettext.dgettext(UUID, str);
+    return Gettext.dgettext(UUID, str);
 }
 
 //basic functions
 
-function d2h(d) {return '#' + d.toString(16);}
-function h2d(h) {return parseInt(h.replace('#',''),16);}
+function d2h(d) { return '#' + d.toString(16); }
+function h2d(h) { return parseInt(h.replace('#', ''), 16); }
 
 function parseInts(strs) {
     let rec = [];
@@ -92,29 +95,43 @@ function rd_nums_frm_file(file) {
 }
 function num_to_freq_panel(num) {
     num = Math.round(num);
-    if (num < 1000)
-        return num + ' kHz';
-    if (num < 1000000)
-        return Math.round(num / 10) / 100 + ' MHz';
-    if (num < 1000000000)
-        return Math.round(num / 10000) / 100 + ' GHz';
-    return Math.round(num / 10000000) / 100 + ' THz';
+    let units;
+    if (num < 1000) {
+        units = 'kHz';
+    } else if (num < 1000000) {
+        num = Math.round(num / 10) / 100;
+        units = 'MHz';
+    } else if (num < 1000000000) {
+        num = Math.round(num / 10000) / 100;
+        units = 'GHz';
+    } else {
+        num = Math.round(num / 10000000) / 100;
+        units = 'THz';
+    }
+    return formatNumPanel(num) + ' ' + units;
 }
-function num_to_freq(num) {
+function num_to_freq_menu(num) {
     num = Math.round(num);
-    if (num < 1000)
-        return num + ' kHz';
-    if (num < 1000000)
-        return Math.round(num) / 1000 + ' MHz';
-    if (num < 1000000000)
-        return Math.round(num / 1000) / 1000 + ' GHz';
-    return Math.round(num / 1000000) / 1000 + ' THz';
+    let units;
+    if (num < 1000) {
+        units = 'kHz';
+    } else if (num < 1000000) {
+        num = Math.round(num) / 1000;
+        units = 'MHz';
+    } else if (num < 1000000000) {
+        num = Math.round(num / 1000) / 1000;
+        units = 'GHz';
+    } else {
+        num = Math.round(num / 1000000) / 1000;
+        units = 'THz';
+    }
+    return formatNumMenu(num) + ' ' + units;
 }
 function percent_to_hex(str, num) {
     return str.format(Math.min(Math.floor(num * 256), 255)).replace(' ', '0');
 }
 function num_to_color(num, lower, upper) {
-    if (num > upper )
+    if (num > upper)
         return hi_color;
     if (num < lower)
         return low_color;
@@ -129,7 +146,7 @@ Panel_Indicator.prototype = {
 
     _init: function(name, parent, orientation) {
         PanelMenu.Button.prototype._init.call(this);
-        if(orientation)
+        if (orientation)
             this.menu._orientation = orientation;
         this.name = name
         this._parent = parent;
@@ -145,7 +162,7 @@ Panel_Indicator.prototype = {
 
         this.digit = new St.Label({ style_class: 'cfs-panel-value' });
         this.digit.style = "font-size: 12px; padding: 0 2px 0 2px; color:" + text_color + ";";
-        this.graph = new St.DrawingArea({reactive: false});
+        this.graph = new St.DrawingArea({ reactive: false });
         this.graph.height = height;
         this.box = new St.BoxLayout();
         this.repaint_id = this.graph.connect('repaint', Lang.bind(this, this._draw));
@@ -165,9 +182,9 @@ Panel_Indicator.prototype = {
         this.actor.add_actor(this.box);
         this.add_menu_items();
 
-        this.set_digit = digit_type == 0 ? function () {
+        this.set_digit = digit_type == 0 ? function() {
             this.digit.text = ' ' + num_to_freq_panel(this._parent.avg_freq);
-        } : function () {
+        } : function() {
             this.digit.text = ' ' + Math.round(this._parent.avg_freq / this._parent.max * 100) + '%';
         };
 
@@ -178,7 +195,7 @@ Panel_Indicator.prototype = {
     _draw: function() {
         if ((this.graph.visible || this.box.visible) == false) {
             return;
-         }
+        }
         let [width, heigth] = this.graph.get_surface_size();
         let cr = this.graph.get_context();
         let value = this._parent.avg_freq / this._parent.max;
@@ -205,8 +222,8 @@ Panel_Indicator.prototype = {
     add_menu_items: function() {
         this.menu_items = [];
         for (let i in this._parent.avail_freqs) {
-            let menu_item = new PopupMenu.PopupBaseMenuItem(null, {reactive: true});
-            let val_label = new St.Label({ text: num_to_freq(this._parent.avail_freqs[i]) });
+            let menu_item = new PopupMenu.PopupBaseMenuItem(null, { reactive: true });
+            let val_label = new St.Label({ text: num_to_freq_menu(this._parent.avail_freqs[i]) });
             menu_item.id = i;
             menu_item.type = 'freq';
             menu_item.addActor(val_label);
@@ -216,7 +233,7 @@ Panel_Indicator.prototype = {
         this._parent.avail_freqs.length && this._parent.avail_governors.length &&
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         for (let i in this._parent.avail_governors) {
-            let menu_item = new PopupMenu.PopupBaseMenuItem(null, {reactive: true});
+            let menu_item = new PopupMenu.PopupBaseMenuItem(null, { reactive: true });
             let val_label = new St.Label({ text: this._parent.avail_governors[i] });
             menu_item.id = i;
             menu_item.type = 'governor'
@@ -226,7 +243,7 @@ Panel_Indicator.prototype = {
         }
         for (let i in this.menu_items) {
             this.menu_items[i].connect('activate', Lang.bind(this, function(item) {
-                this._parent.set(item.type ,item.id);
+                this._parent.set(item.type, item.id);
             }));
         }
     },
@@ -237,7 +254,7 @@ Panel_Indicator.prototype = {
             this.menu.setOrientation(St.Side.TOP);
         if (global.settings.get_boolean("panel-edit-mode"))
             return false;
-        if (event.get_button()==3){
+        if (event.get_button() == 3) {
             return false;
         }
         if (!this.menu.isOpen) {
@@ -269,7 +286,7 @@ function CpufreqSelectorBase() {
     this._init.apply(this, arguments);
 }
 CpufreqSelectorBase.prototype = {
-    arg: { governor: '-g', freq: '-f'},
+    arg: { governor: '-g', freq: '-f' },
     _init: function(cpu, orientation) {
         this.orientation = orientation;
         this.cpunum = cpu.replace(/cpu/, '');
@@ -278,7 +295,7 @@ CpufreqSelectorBase.prototype = {
         this.get_cur();
         this.indicator = new Panel_Indicator(cpu, this, orientation);
         // if ('timeout' in this)
-            // Mainloop.source_remove(this.timeout);
+        // Mainloop.source_remove(this.timeout);
         this.timeout = Mainloop.timeout_add(refresh_time, Lang.bind(this, this.update));
     },
 
@@ -293,12 +310,14 @@ CpufreqSelectorBase.prototype = {
             try {
                 this.avail_freqs = rd_nums_frm_file(this.cpufreq_path + '/scaling_available_frequencies');
             } catch (e) {
-                 this.avail_freqs = [];
+                this.avail_freqs = [];
             }
         } catch (e) {
-            let icon = new St.Icon({ icon_name: 'error',
-                             icon_type: St.IconType.FULLCOLOR,
-                             icon_size: 36 });
+            let icon = new St.Icon({
+                icon_name: 'error',
+                icon_type: St.IconType.FULLCOLOR,
+                icon_size: 36
+            });
             Main.criticalNotify(_("CPU frequency scaling unavailable"),
                                 _("Your system does not appear to support CPU frequency scaling.  Unfortunately this applet is of no use to you."),
                                 icon);
@@ -353,7 +372,7 @@ CpufreqSelector.prototype = {
         this.get_cur();
         this.indicator = new Panel_Indicator(cpu, this, orientation);
         // if ('timeout' in this)
-            // Mainloop.source_remove(this.timeout);
+        // Mainloop.source_remove(this.timeout);
         this.timeout = Mainloop.timeout_add(refresh_time, Lang.bind(this, this.update));
     },
 
@@ -419,207 +438,209 @@ function MyApplet(metadata, orientation, panel_height, instance_id) {
 }
 
 MyApplet.prototype = {
-        __proto__: Applet.Applet.prototype,
+    __proto__: Applet.Applet.prototype,
 
-        _init: function(metadata, orientation, panel_height, instance_id) {
-            Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id);
-            try {
-                    this.uuid = metadata['uuid'];
-                    this.orientation = orientation;
-                    this.instance_id = instance_id;
-
-                    this.cpu_ids = [];
-                    this.selectors = [];
-                    this.atomic = false;
-
-                    this.summary = null;
-                    this.main_box = null;
-
-                    this._initialize_settings();
-                    this.rebuild();
-                    Main.themeManager.connect('theme-set', Lang.bind(this, function() {
-                        Mainloop.timeout_add(500, Lang.bind(this, this.rebuild));
-                    }));
-
-                    if (!GLib.find_program_in_path("cpufreq-selector")) {
-                        let icon = new St.Icon({ icon_name: 'error',
-                                                 icon_type: St.IconType.FULLCOLOR,
-                                                 icon_size: 36 });
-                        Main.criticalNotify(_("CPU frequency switcher program not installed"),
-                                _("You appear to be missing the required program, 'cpufreq-selector.'  This program is needed to perform scaling or governor switching.\n\n") +
-                                _("This program is ordinarily provided by the package: gnome-applets\n\n") +
-                                _("If you're on Linux Mint or Ubuntu, you can install this using the following command:\n\n") +
-                                _("apt install --no-install-recommends gnome-applets"),
-                                icon);
-                    }
-            } catch (e) {
-                global.logError(e);
-            }
-        },
-
-        _initialize_settings: function() {
-            this.settings = new Settings.AppletSettings(this, this.uuid, this.instance_id);
-            this.settings.bindProperty(Settings.BindingDirection.IN,
-                                       "display-style",
-                                       "style",
-                                       this.rebuild,
-                                       null);
-            this.settings.bindProperty(Settings.BindingDirection.IN,
-                                       "digit-type",
-                                       "digit_type",
-                                       this.rebuild,
-                                       null);
-            this.settings.bindProperty(Settings.BindingDirection.IN,
-                                       "cpus-to-monitor",
-                                       "cpus",
-                                       this.rebuild,
-                                       null);
-            this.settings.bindProperty(Settings.BindingDirection.IN,
-                                       "refresh-rate",
-                                       "refresh_rate",
-                                       this.rebuild,
-                                       null);
-            this.settings.bindProperty(Settings.BindingDirection.IN,
-                                       "graph-width",
-                                       "graph_width",
-                                       this.rebuild,
-                                       null);
-            this.settings.bindProperty(Settings.BindingDirection.IN,
-                                       "lower-border",
-                                       "lower_border",
-                                       this.rebuild,
-                                       null);
-            this.settings.bindProperty(Settings.BindingDirection.IN,
-                                       "upper-border",
-                                       "upper_border",
-                                       this.rebuild,
-                                       null);
-            this.settings.bindProperty(Settings.BindingDirection.IN,
-                                       "background",
-                                       "background",
-                                       this.rebuild,
-                                       null);
-            this.settings.bindProperty(Settings.BindingDirection.IN,
-                                       "low-color",
-                                       "low_color",
-                                       this.rebuild,
-                                       null);
-            this.settings.bindProperty(Settings.BindingDirection.IN,
-                                       "med-color",
-                                       "med_color",
-                                       this.rebuild,
-                                       null);
-            this.settings.bindProperty(Settings.BindingDirection.IN,
-                                       "high-color",
-                                       "high_color",
-                                       this.rebuild,
-                                       null);
-            this.settings.bindProperty(Settings.BindingDirection.IN,
-                                       "text-color",
-                                       "text_color",
-                                       this.rebuild,
-                                       null);
-        },
-
-        rebuild: function() {
-            background = this.background;
-            cpus_to_monitor = this.cpus;
-            refresh_time = this.refresh_rate;
-            style = this.style;
-            graph_width = this.graph_width
-            lower_border = this.lower_border;
-            upper_border = this.upper_border;
-            digit_type = this.digit_type;
-            text_color = this.text_color;
-            low_color = this.low_color;
-            mid_color = this.med_color;
-            hi_color = this.high_color;
-
-            if (this.atomic)
-                return;
-
-            this.atomic = true; // hackity hack - make sure only one rebuild is happening at a time,
-            if (this.main_box) {
-                this.actor.remove_actor(this.main_box);
-            }
-
-            for (let i in this.selectors) {
-                this.selectors[i]._destroy();
-            }
-
-            if (this.summary) {
-                this.summary._destroy()
-            }
+    _init: function(metadata, orientation, panel_height, instance_id) {
+        Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id);
+        try {
+            this.uuid = metadata['uuid'];
+            this.orientation = orientation;
+            this.instance_id = instance_id;
 
             this.cpu_ids = [];
             this.selectors = [];
-
-            try {
-                if (this._panelHeight)
-                    height = Math.floor(this._panelHeight - (this._panelHeight * .05));
-
-                this.main_box = new St.BoxLayout({ pack_start: true });
-                this.actor.add(this.main_box);
-                FileUtils.listDirAsync(cpu_dir, Lang.bind(this, this.add_cpus_frm_files));
-            } catch (e) {
-                global.logError(e);
-            }
-        },
-
-        add_cpus_frm_files(cpu_child) {
-            try {
-                let pattern = /^cpu[0-9]+/
-                for (let i in cpu_child)
-                    if (pattern.test(cpu_child[i].get_name()))
-                        this.cpu_ids.push(cpu_child[i].get_name());
-                for (let i in this.cpu_ids) {
-                    this.selectors[i] = new CpufreqSelectorBase(this.cpu_ids[i],this.orientation);
-                    this.main_box.add_actor(this.selectors[i].indicator.actor);
-                    Main.panel._menus.addMenu(this.selectors[i].indicator.menu);
-                }
-                this.summary = new CpufreqSelector('cpu', this.orientation, this.selectors);
-                this.main_box.add_actor(this.summary.indicator.actor);
-                Main.panel._menus.addMenu(this.summary.indicator.menu);
-                let visible = [];
-                for (let i in this.selectors)
-                    visible[i] = true;
-                visible[-1] = true;
-                switch (cpus_to_monitor) {
-                    case 0:
-                        break;
-                    case 2:
-                        for (let i = 0; i < visible.length; i++) {
-                            visible[i] = false;
-                        }
-                        break;
-                    case 1:
-                        visible[-1] = false;
-                        break;
-                }
-                for (let i in this.selectors)
-                    this.selectors[i].indicator.actor.visible = visible[i];
-                this.summary.indicator.actor.visible = visible[-1];
-            } catch (e) {
-                global.logError(e);
-            }
             this.atomic = false;
-        },
 
-        on_panel_height_changed: function() {
+            this.summary = null;
+            this.main_box = null;
+
+            this._initialize_settings();
             this.rebuild();
-        },
+            Main.themeManager.connect('theme-set', Lang.bind(this, function() {
+                Mainloop.timeout_add(500, Lang.bind(this, this.rebuild));
+            }));
 
-        on_applet_removed_from_panel: function() {
-            if (this.main_box) {
-                this.actor.remove_actor(this.main_box);
+            if (!GLib.find_program_in_path("cpufreq-selector")) {
+                let icon = new St.Icon({
+                    icon_name: 'error',
+                    icon_type: St.IconType.FULLCOLOR,
+                    icon_size: 36
+                });
+                Main.criticalNotify(_("CPU frequency switcher program not installed"),
+                    _("You appear to be missing the required program, 'cpufreq-selector.'  This program is needed to perform scaling or governor switching.\n\n") +
+                    _("This program is ordinarily provided by the package: gnome-applets\n\n") +
+                    _("If you're on Linux Mint or Ubuntu, you can install this using the following command:\n\n") +
+                    _("apt install --no-install-recommends gnome-applets"),
+                    icon);
             }
-
-            for (let i in this.selectors) {
-                this.selectors[i]._destroy();
-            }
-
-            if (this.summary) {
-                this.summary._destroy()
-            }
+        } catch (e) {
+            global.logError(e);
         }
+    },
+
+    _initialize_settings: function() {
+        this.settings = new Settings.AppletSettings(this, this.uuid, this.instance_id);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "display-style",
+            "style",
+            this.rebuild,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "digit-type",
+            "digit_type",
+            this.rebuild,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "cpus-to-monitor",
+            "cpus",
+            this.rebuild,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "refresh-rate",
+            "refresh_rate",
+            this.rebuild,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "graph-width",
+            "graph_width",
+            this.rebuild,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "lower-border",
+            "lower_border",
+            this.rebuild,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "upper-border",
+            "upper_border",
+            this.rebuild,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "background",
+            "background",
+            this.rebuild,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "low-color",
+            "low_color",
+            this.rebuild,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "med-color",
+            "med_color",
+            this.rebuild,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "high-color",
+            "high_color",
+            this.rebuild,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "text-color",
+            "text_color",
+            this.rebuild,
+            null);
+    },
+
+    rebuild: function() {
+        background = this.background;
+        cpus_to_monitor = this.cpus;
+        refresh_time = this.refresh_rate;
+        style = this.style;
+        graph_width = this.graph_width
+        lower_border = this.lower_border;
+        upper_border = this.upper_border;
+        digit_type = this.digit_type;
+        text_color = this.text_color;
+        low_color = this.low_color;
+        mid_color = this.med_color;
+        hi_color = this.high_color;
+
+        if (this.atomic)
+            return;
+
+        this.atomic = true; // hackity hack - make sure only one rebuild is happening at a time,
+        if (this.main_box) {
+            this.actor.remove_actor(this.main_box);
+        }
+
+        for (let i in this.selectors) {
+            this.selectors[i]._destroy();
+        }
+
+        if (this.summary) {
+            this.summary._destroy()
+        }
+
+        this.cpu_ids = [];
+        this.selectors = [];
+
+        try {
+            if (this._panelHeight)
+                height = Math.floor(this._panelHeight - (this._panelHeight * .05));
+
+            this.main_box = new St.BoxLayout({ pack_start: true });
+            this.actor.add(this.main_box);
+            FileUtils.listDirAsync(cpu_dir, Lang.bind(this, this.add_cpus_frm_files));
+        } catch (e) {
+            global.logError(e);
+        }
+    },
+
+    add_cpus_frm_files(cpu_child) {
+        try {
+            let pattern = /^cpu[0-9]+/
+            for (let i in cpu_child)
+                if (pattern.test(cpu_child[i].get_name()))
+                    this.cpu_ids.push(cpu_child[i].get_name());
+            for (let i in this.cpu_ids) {
+                this.selectors[i] = new CpufreqSelectorBase(this.cpu_ids[i], this.orientation);
+                this.main_box.add_actor(this.selectors[i].indicator.actor);
+                Main.panel._menus.addMenu(this.selectors[i].indicator.menu);
+            }
+            this.summary = new CpufreqSelector('cpu', this.orientation, this.selectors);
+            this.main_box.add_actor(this.summary.indicator.actor);
+            Main.panel._menus.addMenu(this.summary.indicator.menu);
+            let visible = [];
+            for (let i in this.selectors)
+                visible[i] = true;
+            visible[-1] = true;
+            switch (cpus_to_monitor) {
+                case 0:
+                    break;
+                case 2:
+                    for (let i = 0; i < visible.length; i++) {
+                        visible[i] = false;
+                    }
+                    break;
+                case 1:
+                    visible[-1] = false;
+                    break;
+            }
+            for (let i in this.selectors)
+                this.selectors[i].indicator.actor.visible = visible[i];
+            this.summary.indicator.actor.visible = visible[-1];
+        } catch (e) {
+            global.logError(e);
+        }
+        this.atomic = false;
+    },
+
+    on_panel_height_changed: function() {
+        this.rebuild();
+    },
+
+    on_applet_removed_from_panel: function() {
+        if (this.main_box) {
+            this.actor.remove_actor(this.main_box);
+        }
+
+        for (let i in this.selectors) {
+            this.selectors[i]._destroy();
+        }
+
+        if (this.summary) {
+            this.summary._destroy()
+        }
+    }
 };

@@ -48,7 +48,8 @@
         "extendedPlayerControl",
         "keepPlayerListOpen",
         "keepChoosePlayerOpen",
-        "avoidTwice"
+        "avoidTwice",
+        "seekerTooltipDelay"
       ]
     },
     "sectionBehavior2": {
@@ -82,6 +83,7 @@
         "keepAlbumAspectRatio",
         "showVolumeLevelNearIcon",
         "showMicMutedOnIcon",
+        "showMicUnmutedOnIcon",
         "adaptColor",
         "color101_115",
         "color116_130",
@@ -131,6 +133,7 @@
         "keyOpen",
         "keySwitchPlayer",
         "redefine-volume-keybindings",
+        "button-set-to-default-keybindings",
         "audio-stop",
         "pause-on-off",
         "volume-mute",
@@ -167,6 +170,15 @@
     "type": "switch",
     "default": false,
     "description": "Avoid displaying controllers twice"
+  },
+  "seekerTooltipDelay": {
+    "type": "spinbutton",
+    "default": 400,
+    "units": "ms",
+    "min": 50,
+    "max": 1500,
+    "step": 50,
+    "description": "Seeker tooltip: time to disappear"
   },
   "keyOpen": {
     "type": "keybinding",
@@ -206,7 +218,7 @@
   },
   "middleClickAction": {
     "type": "combobox",
-    "default": "mute",
+    "default": "out_mute",
     "options": {
       "Toggle Mute": "mute",
       "Toggle Mute output": "out_mute",
@@ -234,7 +246,7 @@
   },
   "showalbum": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Show album art as icon",
     "dependency": "playerControl"
   },
@@ -266,13 +278,18 @@
   },
   "showVolumeLevelNearIcon": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display volume level near icon"
   },
   "showMicMutedOnIcon": {
     "type": "switch",
     "default": true,
     "description": "Display icon indicating that the microphone is muted, if applicable"
+  },
+  "showMicUnmutedOnIcon": {
+    "type": "switch",
+    "default": false,
+    "description": "Display icon indicating that the microphone is activated, if applicable"
   },
   "setAmplification": {
     "type": "button",
@@ -353,7 +370,7 @@
       "medium": "medium",
       "large": "large"
     },
-    "description": "Whether the media keys osd is disabled or its relative display size"
+    "description": "Whether the media keys OSD is disabled or its relative display size"
   },
   "showOSDonStartup": {
     "type": "switch",
@@ -374,6 +391,12 @@
     "type": "switch",
     "description": "Redefine Multimedia Keyboard Shortcuts",
     "default": false
+  },
+  "button-set-to-default-keybindings": {
+    "type": "button",
+    "dependency": "redefine-volume-keybindings",
+    "description": "Use the same shortcuts as those defined by Cinnamon",
+    "callback": "_set_shortcuts_as_default"
   },
   "pause-on-off": {
     "type": "keybinding",

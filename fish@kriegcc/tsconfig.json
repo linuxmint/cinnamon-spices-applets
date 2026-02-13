@@ -1,0 +1,61 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "lib": ["ES2019"],
+    // CommonJS module resolution is the only one that works with GJS
+    // TODO: still true?
+    // Setting should be avoided when using webpack?
+    // https://webpack.js.org/guides/typescript/
+    // "module": "CommonJS",
+    "strict": true,
+    // // const enums will be substituted to its values in transpiled code
+    // // in some cases normal enums don't work properly in GJS
+    // "preserveConstEnums": false,
+    // // needs to be disabled when "preserveConstEnums" is disabled
+    // "isolatedModules": false,
+    // Generates corresponding .d.ts declaration files for TypeScript files.
+    "declaration": false,
+    // sourceMap break the JS engine, never include them
+    // TODO: still true?
+    "sourceMap": false,
+    // This warns you for callbacks using this which might be not bound to the correct context.
+    "noImplicitThis": true,
+    "baseUrl": "./src",
+    // Cinnamon TypeScript declarations
+    "types": ["@ci-types/cjs"],
+    // misc:
+    "noImplicitAny": true,
+    "removeComments": true,
+    "noFallthroughCasesInSwitch": true,
+    // "noUnusedParameters": true,
+    // "noUnusedLocals": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    // ts webpack config file format
+    // see: https://webpack.js.org/configuration/configuration-languages/
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    // needed to make translations work (_("some text"))
+    "isolatedModules": true,
+
+    // support for import js file (like settings-schema.json)
+    "resolveJsonModule": true,
+    "moduleResolution": "node"
+  },
+  // necessary for webpack config in ts format, see:
+  // https://webpack.js.org/configuration/configuration-languages/
+  // https://www.npmjs.com/package/ts-node#err_unknown_file_extension
+  // https://www.npmjs.com/package/ts-node#module-type-overrides
+  "ts-node": {
+    "transpileOnly": true,
+    "moduleTypes": {
+      "webpack.config.ts": "cjs",
+      // Globs are also supported with the same behavior as tsconfig "include"
+      "webpack-config-scripts/**/*": "cjs"
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

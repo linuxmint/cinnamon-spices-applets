@@ -13,6 +13,10 @@
         "noImplicitReturns": true,
 		"noImplicitAny": true,
         "experimentalDecorators": true,
+		"verbatimModuleSyntax": true,
+		"isolatedModules": true,
+		"resolveJsonModule": true,
+		"moduleResolution": "Bundler",
 		"types": [
 			"@ci-types/cjs"
 		]

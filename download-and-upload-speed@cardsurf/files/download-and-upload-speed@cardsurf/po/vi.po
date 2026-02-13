@@ -1,0 +1,463 @@
+# DOWNLOAD AND UPLOAD SPEED
+# This file is put in the public domain.
+# cardsurf, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: download-and-upload-speed@cardsurf 1.7.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-10-02 19:43+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:470
+msgid "Network interfaces"
+msgstr "Giao diện mạng"
+
+#. applet.js:539
+msgid "Total data start"
+msgstr "Tổng dữ liệu từ"
+
+#. settings-schema.json->bytes_start_time->options
+#. applet.js:546
+msgid "Launch of applet"
+msgstr "Khi khởi chạy applet"
+
+#. settings-schema.json->bytes_start_time->options
+#. applet.js:547
+msgid "Today"
+msgstr "Hôm nay"
+
+#. settings-schema.json->bytes_start_time->options
+#. applet.js:548
+msgid "Yesterday"
+msgstr "Hôm qua"
+
+#. settings-schema.json->bytes_start_time->options
+#. applet.js:549
+msgid "3 days ago"
+msgstr "3 ngày trước"
+
+#. settings-schema.json->bytes_start_time->options
+#. applet.js:550
+msgid "5 days ago"
+msgstr "5 ngày trước"
+
+#. settings-schema.json->bytes_start_time->options
+#. applet.js:551
+msgid "7 days ago"
+msgstr "7 ngày trước"
+
+#. settings-schema.json->bytes_start_time->options
+#. applet.js:552
+msgid "10 days ago"
+msgstr "10 ngày trước"
+
+#. settings-schema.json->bytes_start_time->options
+#. applet.js:553
+msgid "14 days ago"
+msgstr "14 ngày trước"
+
+#. settings-schema.json->bytes_start_time->options
+#. applet.js:554
+msgid "30 days ago"
+msgstr "30 ngày trước"
+
+#. settings-schema.json->bytes_start_time->options
+#. applet.js:555
+msgid "Custom date"
+msgstr "Ngày tùy chỉnh"
+
+#. settings-schema.json->gui_start->description
+#. applet.js:592
+msgid "Gui"
+msgstr "Giao diện"
+
+#. settings-schema.json->gui_speed_type->options
+#. applet.js:592
+msgid "Compact"
+msgstr "Nhỏ gọn"
+
+#. settings-schema.json->gui_speed_type->options
+#. applet.js:592
+msgid "Large"
+msgstr "Lớn"
+
+#. appletGui.js:510
+msgid "Total download:"
+msgstr "Tổng tải xuống:"
+
+#. appletGui.js:511
+msgid "Total upload:"
+msgstr "Tổng tải lên:"
+
+#. metadata.json->description
+msgid "Shows usage of a network interface"
+msgstr "Hiển thị mức sử dụng của giao diện mạng"
+
+#. metadata.json->name
+msgid "Download and upload speed"
+msgstr "Tốc độ tải xuống và tải lên"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Cấu hình"
+
+#. settings-schema.json->display_mode->description
+msgid "Show"
+msgstr "Hiển thị"
+
+#. settings-schema.json->display_mode->options
+msgid "Average speed per second"
+msgstr "Tốc độ trung bình mỗi giây"
+
+#. settings-schema.json->display_mode->options
+msgid "Amount of data transferred"
+msgstr "Lượng dữ liệu truyền"
+
+#. settings-schema.json->display_mode->tooltip
+msgid "Values shown in the panel"
+msgstr "Các giá trị hiển thị trên panel"
+
+#. settings-schema.json->unit->description
+msgid "Unit"
+msgstr "Đơn vị"
+
+#. settings-schema.json->unit->options
+#. settings-schema.json->decimal_places->options
+msgid "Auto"
+msgstr "Tự động"
+
+#. settings-schema.json->unit->options
+msgid "Bytes/Bits"
+msgstr "Byte/Bít"
+
+#. settings-schema.json->unit->options
+msgid "KB/Kb/KiB"
+msgstr "KB/Kb/KiB"
+
+#. settings-schema.json->unit->options
+msgid "MB/Mb/MiB"
+msgstr "MB/Mb/MiB"
+
+#. settings-schema.json->unit->options
+msgid "GB/Gb/GiB"
+msgstr "GB/Gb/GiB"
+
+#. settings-schema.json->unit->options
+msgid "TB/Tb/TiB"
+msgstr "TB/Tb/TiB"
+
+#. settings-schema.json->unit->tooltip
+msgid "Use fixed unit for displaying, or automatically choose the best unit"
+msgstr "Sử dụng đơn vị cố định hoặc tự động chọn đơn vị phù hợp nhất"
+
+#. settings-schema.json->unit_type->description
+msgid "Unit type"
+msgstr "Loại đơn vị"
+
+#. settings-schema.json->unit_type->options
+msgid "Bytes"
+msgstr "Byte"
+
+#. settings-schema.json->unit_type->options
+msgid "Bits"
+msgstr "Bít"
+
+#. settings-schema.json->unit_type->tooltip
+msgid "Base data unit shown in the panel"
+msgstr "Đơn vị dữ liệu cơ bản hiển thị trên panel"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr "Hệ thập phân hay nhị phân"
+
+#. settings-schema.json->is_binary->options
+msgid "Decimal"
+msgstr "Thập phân"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr "Nhị phân"
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
+"Thập phân: k, M, G, T\n"
+"Nhị phân: ki, Mi, Gi, Ti"
+
+#. settings-schema.json->update_every->units
+#. settings-schema.json->update_available_interfaces_every->units
+#. settings-schema.json->write_every->units
+msgid "seconds"
+msgstr "giây"
+
+#. settings-schema.json->update_every->description
+msgid "Calculate every"
+msgstr "Tính toán mỗi"
+
+#. settings-schema.json->update_every->tooltip
+msgid "How often to calculate download and upload speed"
+msgstr "Tần suất tính toán tốc độ tải xuống và tải lên"
+
+#. settings-schema.json->update_available_interfaces_every->description
+msgid "Update available interfaces every"
+msgstr "Cập nhật các giao diện khả dụng mỗi"
+
+#. settings-schema.json->update_available_interfaces_every->tooltip
+msgid "How often to update list of available network interfaces. 0 means list of available network interfaces is not updated periodically."
+msgstr "Tần suất cập nhật danh sách các giao diện mạng khả dụng. 0 nghĩa là danh sách sẽ không được cập nhật định kỳ."
+
+#. settings-schema.json->gui_speed_type->description
+msgid "Type"
+msgstr "Loại"
+
+#. settings-schema.json->gui_speed_type->tooltip
+msgid "Applet Gui"
+msgstr "Giao diện applet"
+
+#. settings-schema.json->gui_value_order->description
+msgid "Value order"
+msgstr "Thứ tự giá trị"
+
+#. settings-schema.json->gui_value_order->options
+msgid "Download first"
+msgstr "Tải xuống trước"
+
+#. settings-schema.json->gui_value_order->options
+msgid "Upload first"
+msgstr "Tải lên trước"
+
+#. settings-schema.json->gui_value_order->tooltip
+msgid "An order of values shown in the panel and in the hover popup"
+msgstr "Thứ tự hiển thị các giá trị trên panel và trong popup khi di chuột"
+
+#. settings-schema.json->decimal_places->description
+msgid "Decimal places"
+msgstr "Số chữ số thập phân"
+
+#. settings-schema.json->decimal_places->options
+msgid "0 "
+msgstr "0 "
+
+#. settings-schema.json->decimal_places->options
+msgid "1 "
+msgstr "1 "
+
+#. settings-schema.json->decimal_places->options
+msgid "2 "
+msgstr "2 "
+
+#. settings-schema.json->decimal_places->options
+msgid "3 "
+msgstr "3 "
+
+#. settings-schema.json->decimal_places->tooltip
+msgid "Decimal places of download and upload speed shown in the panel"
+msgstr "Số chữ số thập phân hiển thị tốc độ tải xuống và tải lên trên panel"
+
+#. settings-schema.json->gui_text_css->description
+msgid "Text CSS"
+msgstr "CSS cho văn bản"
+
+#. settings-schema.json->gui_text_css->tooltip
+msgid "A CSS style applied to the text in the panel"
+msgstr "Một kiểu CSS áp dụng cho văn bản trên panel"
+
+#. settings-schema.json->gui_enable_inactive_text_css->description
+msgid "Enable different style for inactive (0.00) text"
+msgstr "Bật kiểu khác cho văn bản không hoạt động (0.00)"
+
+#. settings-schema.json->gui_inactive_text_css->description
+msgid "Inactive text CSS"
+msgstr "CSS cho văn bản không hoạt động"
+
+#. settings-schema.json->gui_inactive_text_css->tooltip
+msgid "A CSS style applied to the text in the panel when there is no network activity"
+msgstr "Một kiểu CSS áp dụng cho văn bản trên panel khi không có hoạt động mạng"
+
+#. settings-schema.json->gui_show_icons->description
+msgid "Show icons"
+msgstr "Hiển thị biểu tượng"
+
+#. settings-schema.json->gui_received_icon_filename->description
+msgid "Download icon"
+msgstr "Biểu tượng tải xuống"
+
+#. settings-schema.json->gui_received_icon_filename->tooltip
+msgid ""
+"An icon displayed next to download speed in the panel.\n"
+"To display a symbolic icon make sure its name ends with '-symbolic.svg'."
+msgstr ""
+"Biểu tượng hiển thị cạnh tốc độ tải xuống trên panel.\n"
+"Để hiển thị biểu tượng tượng trưng, đảm bảo tên kết thúc bằng '-symbolic.svg'."
+
+#. settings-schema.json->gui_sent_icon_filename->description
+msgid "Upload icon"
+msgstr "Biểu tượng tải lên"
+
+#. settings-schema.json->gui_sent_icon_filename->tooltip
+msgid ""
+"An icon displayed next to upload speed in the panel.\n"
+"To display a symbolic icon make sure its name ends with '-symbolic.svg'."
+msgstr ""
+"Biểu tượng hiển thị cạnh tốc độ tải lên trên panel.\n"
+"Để hiển thị biểu tượng tượng trưng, đảm bảo tên kết thúc bằng '-symbolic.svg'."
+
+#. settings-schema.json->gui_symbolic_icon->description
+msgid "Show a default set of symbolic icons"
+msgstr "Hiển thị bộ biểu tượng tượng trưng mặc định"
+
+#. settings-schema.json->hover_popup_text_css->description
+msgid "Popup text CSS"
+msgstr "CSS cho văn bản popup"
+
+#. settings-schema.json->hover_popup_text_css->tooltip
+msgid "A CSS style applied to the description text in the hover popup"
+msgstr "Một kiểu CSS áp dụng cho văn bản mô tả trong popup khi di chuột"
+
+#. settings-schema.json->hover_popup_numbers_css->description
+msgid "Popup numbers CSS"
+msgstr "CSS cho số trong popup"
+
+#. settings-schema.json->hover_popup_numbers_css->tooltip
+msgid "A CSS style applied to numbers in the hover popup"
+msgstr "Một kiểu CSS áp dụng cho các số trong popup khi di chuột"
+
+#. settings-schema.json->minimum_bytes_received_to_display->units
+#. settings-schema.json->minimum_bytes_sent_to_display->units
+msgid "bytes"
+msgstr "byte"
+
+#. settings-schema.json->minimum_bytes_received_to_display->description
+msgid "Minimum displayed download value"
+msgstr "Giá trị tải xuống tối thiểu hiển thị"
+
+#. settings-schema.json->minimum_bytes_received_to_display->tooltip
+msgid "A minimum download value to display in the panel"
+msgstr "Giá trị tải xuống tối thiểu để hiển thị trên panel"
+
+#. settings-schema.json->minimum_bytes_sent_to_display->description
+msgid "Minimum displayed upload value"
+msgstr "Giá trị tải lên tối thiểu hiển thị"
+
+#. settings-schema.json->minimum_bytes_sent_to_display->tooltip
+msgid "A minimum upload value to display in the panel"
+msgstr "Giá trị tải lên tối thiểu để hiển thị trên panel"
+
+#. settings-schema.json->total_data_start->description
+msgid "Total data"
+msgstr "Tổng dữ liệu"
+
+#. settings-schema.json->show_hover->description
+msgid "Show total download and upload on hover"
+msgstr "Hiển thị tổng tải xuống và tải lên khi di chuột"
+
+#. settings-schema.json->show_hover->tooltip
+msgid "Show the hover popup with total amount of data downloaded and uploaded"
+msgstr "Hiển thị popup khi di chuột với tổng dữ liệu đã tải xuống và tải lên"
+
+#. settings-schema.json->bytes_start_time->description
+msgid "Start"
+msgstr "Bắt đầu"
+
+#. settings-schema.json->bytes_start_time->tooltip
+msgid "Start time to count total amount of data downloaded and uploaded"
+msgstr "Thời điểm bắt đầu tính tổng dữ liệu đã tải xuống và tải lên"
+
+#. settings-schema.json->custom_start_date->description
+msgid "Custom date "
+msgstr "Ngày tùy chỉnh "
+
+#. settings-schema.json->custom_start_date->tooltip
+msgid "A custom date in YYYY-MM-DD format used as start time. The option is used if \"Custom date\" is selected in \"Start\" combobox."
+msgstr "Một ngày tùy chỉnh theo định dạng YYYY-MM-DD dùng làm thời điểm bắt đầu. Tùy chọn này được sử dụng nếu \"Ngày tùy chỉnh\" được chọn trong hộp chọn \"Bắt đầu\"."
+
+#. settings-schema.json->write_every->description
+msgid "Save every"
+msgstr "Lưu mỗi"
+
+#. settings-schema.json->write_every->tooltip
+msgid "How often to save total amount of data downloaded and uploaded to the file. 0 means no saving to the file."
+msgstr "Tần suất lưu tổng dữ liệu đã tải xuống và tải lên vào file. 0 nghĩa là không lưu vào file."
+
+#. settings-schema.json->data_limit_start->description
+msgid "Data limits"
+msgstr "Giới hạn dữ liệu"
+
+#. settings-schema.json->data_limit->units
+msgid "MB"
+msgstr "MB"
+
+#. settings-schema.json->data_limit->description
+msgid "Data limit"
+msgstr "Giới hạn dữ liệu"
+
+#. settings-schema.json->data_limit->tooltip
+msgid "The maximum amount of data to download and upload. 0 means no limits."
+msgstr "Lượng dữ liệu tối đa được tải xuống và tải lên. 0 nghĩa là không giới hạn."
+
+#. settings-schema.json->gui_data_limit_type->description
+msgid "Show data limit usage"
+msgstr "Hiển thị mức sử dụng giới hạn dữ liệu"
+
+#. settings-schema.json->gui_data_limit_type->options
+msgid "None"
+msgstr "Không"
+
+#. settings-schema.json->gui_data_limit_type->options
+msgid "Circle"
+msgstr "Hình tròn"
+
+#. settings-schema.json->gui_data_limit_type->options
+msgid "Text"
+msgstr "Văn bản"
+
+#. settings-schema.json->gui_data_limit_type->tooltip
+msgid "Show the percentage of data limit used in the panel"
+msgstr "Hiển thị phần trăm giới hạn dữ liệu đã sử dụng trên panel"
+
+#. settings-schema.json->data_limit_command_enabled->description
+msgid "Invoke command when data limit exceeded"
+msgstr "Thực thi lệnh khi vượt quá giới hạn dữ liệu"
+
+#. settings-schema.json->data_limit_command_enabled->tooltip
+msgid "Invoke a command when amount of data downloaded and uploaded exceeded the limit"
+msgstr "Thực thi một lệnh khi lượng dữ liệu đã tải xuống và tải lên vượt quá giới hạn"
+
+#. settings-schema.json->data_limit_command->description
+msgid "Command"
+msgstr "Lệnh"
+
+#. settings-schema.json->data_limit_command->tooltip
+msgid "A command to invoke"
+msgstr "Một lệnh để thực thi"
+
+#. settings-schema.json->connections_start->description
+msgid "Connections"
+msgstr "Kết nối"
+
+#. settings-schema.json->launch_terminal->description
+msgid "List current Internet connections on left mouse click"
+msgstr "Liệt kê các kết nối Internet hiện tại khi nhấn chuột trái"
+
+#. settings-schema.json->launch_terminal->tooltip
+msgid "Open a terminal with a list of current connections on a left mouse click. The next click closes the terminal."
+msgstr "Mở terminal với danh sách các kết nối hiện tại khi nhấn chuột trái. Lần nhấn tiếp theo sẽ đóng terminal."
+
+#. settings-schema.json->list_connections_command->description
+msgid "Command "
+msgstr "Lệnh "
+
+#. settings-schema.json->list_connections_command->tooltip
+msgid "A command used to list current Internet connections"
+msgstr "Một lệnh dùng để liệt kê các kết nối Internet hiện tại"

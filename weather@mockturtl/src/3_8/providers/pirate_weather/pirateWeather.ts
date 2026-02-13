@@ -1,11 +1,15 @@
-import { ErrorResponse, HttpError, HttpLib } from "../../lib/httpLib";
-import { Logger } from "../../lib/logger";
-import { WeatherApplet } from "../../main";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime, ImmediatePrecipitation } from "../../types";
-import { _, IsLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../../utils";
+import type { ErrorResponse} from "../../lib/httpLib";
+import { HttpLib } from "../../lib/httpLib";
+import { Logger } from "../../lib/services/logger";
+import type { WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, ImmediatePrecipitation, AlertData, AlertLevel } from "../../weather-data";
+import { _, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "../BaseProvider";
-import { PirateWeatherIcon, PirateWeatherPayload, PirateWeatherQueryUnits } from "./types/common";
+import type { PirateWeatherIcon, PirateWeatherPayload, PirateWeatherQueryUnits } from "./types/common";
+import { ALERT_LEVEL_ORDER } from "../../consts";
+import type { LocationData, SunTime } from "../../types";
+import { Services, type Config } from "../../config";
+import { ErrorHandler } from "../../lib/services/error_handler";
 
 export class PirateWeather extends BaseProvider {
 
@@ -13,7 +17,7 @@ export class PirateWeather extends BaseProvider {
 	//  Properties
 	//--------------------------------------------------------
 	public readonly prettyName = _("Pirate Weather");
-	public readonly name = "PirateWeather";
+	public readonly name = Services.PirateWeather;
 	public readonly maxForecastSupport = 7;
 	public readonly website = "http://pirateweather.net/en/latest/";
 	public readonly maxHourlyForecastSupport = 168;
@@ -31,20 +35,19 @@ export class PirateWeather extends BaseProvider {
 
 	private query = "https://api.pirateweather.net/forecast/";
 
-	constructor(_app: WeatherApplet) {
-		super(_app);
-	}
-
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
-		const unit = this.GetQueryUnit();
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
+		const unit = this.GetQueryUnit(config);
 
 		const response = await HttpLib.Instance.LoadJsonAsync<PirateWeatherPayload>({
-			url: `${this.query}${this.app.config.ApiKey}/${loc.lat},${loc.lon}`,
+			url: `${this.query}${config.ApiKey}/${loc.lat},${loc.lon}`,
 			cancellable,
-			params: { units: this.GetQueryUnit()},
+			params: {
+				units: this.GetQueryUnit(config),
+				lang: (config._translateCondition && config.Language && this.supportedLanguages.includes(config.Language)) ? config.Language : "en",
+			},
 			HandleError: this.HandleError
 		});
 
@@ -91,6 +94,7 @@ export class PirateWeather extends BaseProvider {
 					value: this.ToKelvin(json.currently.apparentTemperature, unit),
 					type: "temperature"
 				},
+				uvIndex: json.currently.uvIndex ?? json.hourly.data[0]?.uvIndex ?? json.daily.data[0]?.uvIndex ?? null,
 				forecasts: [],
 				hourlyForecasts: [],
 			}
@@ -158,15 +162,44 @@ export class PirateWeather extends BaseProvider {
 				result.immediatePrecipitation = immediate;
 			}
 
+			if (json.alerts != null) {
+				const alerts: AlertData[] = [];
+				for (const alert of json.alerts) {
+					alerts.push({
+						title: alert.title,
+						description: alert.description,
+						level: this.PirateWeatherAlertSeverityToAlertLevel(alert.severity),
+						sender_name: alert.uri,
+					});
+				};
+
+				result.alerts = alerts.sort((a, b) => ALERT_LEVEL_ORDER.indexOf(a.level) - ALERT_LEVEL_ORDER.indexOf(b.level));
+			}
+
 			return result;
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("Pirate Weather payload parsing error: " + e, e)
-			this.app.ShowError({ type: "soft", detail: "unusual payload", service: "pirate_weather", message: _("Failed to Process Weather Info") });
+				Logger.Error("Pirate Weather payload parsing error: " + e.message, e)
+			ErrorHandler.Instance.PostError({ type: "soft", detail: "unusual payload", service: "pirate_weather", message: _("Failed to Process Weather Info") });
 			return null;
 		}
 	};
+
+	private PirateWeatherAlertSeverityToAlertLevel(severity: 'Extreme' | 'Severe' | 'Moderate' | 'Minor' | "Unknown"): AlertLevel {
+		switch (severity) {
+			case "Extreme":
+				return "extreme";
+			case "Severe":
+				return "severe";
+			case "Moderate":
+				return "moderate";
+			case "Minor":
+				return "minor";
+			default:
+				return "unknown";
+		}
+	}
 
 	/**
 	 *
@@ -175,7 +208,7 @@ export class PirateWeather extends BaseProvider {
 	 */
 	private HandleError = (message: ErrorResponse): boolean => {
 		if (message.ErrorData.code == 403) {
-			this.app.ShowError({
+			ErrorHandler.Instance.PostError({
 				type: "hard",
 				userError: true,
 				detail: "bad key",
@@ -185,12 +218,12 @@ export class PirateWeather extends BaseProvider {
 			return false;
 		}
 		else if (message.ErrorData.code == 401) {
-			this.app.ShowError({
+			ErrorHandler.Instance.PostError({
 				type: "hard",
 				userError: true,
 				detail: "no key",
 				service: "pirate_weather",
-				message: _("Please Make sure you\nentered the API key that you have from DarkSky")
+				message: _("Please Make sure you\nentered the API key that you have from Pirate Weather")
 			});
 			return false;
 		}
@@ -251,9 +284,9 @@ export class PirateWeather extends BaseProvider {
 		}
 	}
 
-	private GetQueryUnit(): PirateWeatherQueryUnits {
-		if (this.app.config.TemperatureUnit == "celsius") {
-			if (this.app.config.WindSpeedUnit == "kph" || this.app.config.WindSpeedUnit == "m/s") {
+	private GetQueryUnit(config: Config): PirateWeatherQueryUnits {
+		if (config.TemperatureUnit == "celsius") {
+			if (config.WindSpeedUnit == "kph" || config.WindSpeedUnit == "m/s") {
 				return 'si';
 			}
 			else {
@@ -283,6 +316,66 @@ export class PirateWeather extends BaseProvider {
 			return MPHtoMPS(speed);
 		}
 	};
+
+	private supportedLanguages = [
+		"ar",
+		"az",
+		"be",
+		"bg",
+		"bn",
+		"bs",
+		"ca",
+		"cs",
+		"cy",
+		"da",
+		"de",
+		"el",
+		"en",
+		"eo",
+		"es",
+		"et",
+		"fa",
+		"fi",
+		"fr",
+		"ga",
+		"gd",
+		"he",
+		"hi",
+		"hr",
+		"hu",
+		"id",
+		"is",
+		"it",
+		"ja",
+		"ka",
+		"kn",
+		"ko",
+		"kw",
+		"lv",
+		"ml",
+		"mr",
+		"nl",
+		"no",
+		"pa",
+		"pl",
+		"pt",
+		"ro",
+		"ru",
+		"sk",
+		"sl",
+		"sr",
+		"sv",
+		"ta",
+		"te",
+		"`tet",
+		"tr",
+		"uk",
+		"ur",
+		"vi",
+		"x-pig-latin",
+		"zh",
+		"zh-tw",
+	]
 };
 
 

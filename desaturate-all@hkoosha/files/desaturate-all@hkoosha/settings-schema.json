@@ -1,0 +1,59 @@
+{
+    "saturation" : {
+        "type": "scale",
+        "description": "Color saturation",
+        "min": 0,
+        "max": 100,
+        "default": 0,
+        "step": 1
+    },
+
+    "keybinding" : {
+        "type" : "keybinding",
+        "description" : "Shortcut to toggle desaturation effect",
+        "default" : ""
+    },
+
+    "automatic" : {
+        "type": "switch",
+        "description": "Automatic",
+        "tooltip": "Automatically enable and disable the desaturation effect based on the time of day",
+        "default": false
+    },
+
+    "start-timechooser": {
+        "type": "timechooser",
+        "default": {
+            "h": 22,
+            "m": 0,
+            "s": 0
+        },
+        "description": "Time of day to automatically enable",
+        "dependency": "automatic"
+    },
+
+    "end-timechooser": {
+        "type": "timechooser",
+        "default": {
+            "h": 6,
+            "m": 0,
+            "s": 0
+        },
+        "description": "Time of day to automatically disable",
+        "dependency": "automatic"
+    },
+
+    "resume-on-startup": {
+        "type": "switch",
+        "default": false,
+        "description": "Restore desaturation effect state on startup",
+        "tooltip": "Restore the previously set desaturation state when cinnamon starts",
+        "dependency": "!automatic"
+    },
+
+    "state": {
+        "type": "generic",
+        "default": 0
+    }
+}
+

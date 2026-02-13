@@ -1,6 +1,6 @@
-import { WeatherApplet } from "../../main";
-import { LocationData } from "../../types";
+import type { Config } from "../../config";
+import type { LocationServiceResult } from "../../types";
 
 export interface GeoIP {
-	GetLocation: (cancellable: imports.gi.Gio.Cancellable) => Promise<LocationData | null>;
+	GetLocation: (cancellable: imports.gi.Gio.Cancellable, config: Config) => Promise<LocationServiceResult | null>;
 }

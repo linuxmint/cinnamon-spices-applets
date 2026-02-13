@@ -1,0 +1,9 @@
+{
+  "description": "A simple Cinnamon applet to activate/deactivate Night Light mode.",
+  "max-instances": "1",
+  "hide-configuration": true,
+  "uuid": "NightLightSwitch@claudiux",
+  "name": "Night Light Switch",
+  "author": "claudiux",
+  "version": "1.0.2"
+}

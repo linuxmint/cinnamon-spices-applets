@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-21 14:16-0400\n"
-"PO-Revision-Date: 2022-06-03 19:07+0200\n"
+"PO-Revision-Date: 2024-06-18 15:48+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:61
 msgid "Click here to create a OTP"
@@ -37,20 +37,20 @@ msgstr "Fare clic sull'applet per creare un OTP"
 
 #: ui/softyubikey.ui:27
 msgid "Public ID"
-msgstr ""
+msgstr "ID pubblico"
 
 #: ui/softyubikey.ui:40
 msgid "Private ID"
-msgstr ""
+msgstr "ID privato"
 
 #: ui/softyubikey.ui:53
 msgid "AES key"
-msgstr ""
+msgstr "Chiave AES"
 
 #: ui/softyubikey.ui:117
 msgid "Apply"
-msgstr ""
+msgstr "Applica"
 
 #: ui/softyubikey.ui:133
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"

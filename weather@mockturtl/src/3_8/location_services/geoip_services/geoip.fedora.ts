@@ -1,9 +1,9 @@
 import { HttpLib } from "../../lib/httpLib";
-import { Logger } from "../../lib/logger";
-import { WeatherApplet } from "../../main";
-import { LocationData } from "../../types";
+import { ErrorHandler } from "../../lib/services/error_handler";
+import { Logger } from "../../lib/services/logger";
+import type { LocationServiceResult } from "../../types";
 import { _ } from "../../utils";
-import { GeoIP } from "./base";
+import type { GeoIP } from "./base";
 
 
 /**
@@ -12,13 +12,7 @@ import { GeoIP } from "./base";
 export class GeoIPFedora implements GeoIP {
 	private readonly query = "https://geoip.fedoraproject.org/city";
 
-	private app: WeatherApplet;
-
-	constructor(app: WeatherApplet) {
-		this.app = app;
-	}
-
-	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
 		const json = await HttpLib.Instance.LoadJsonSimple<GeoIPFedoraPayload>({ url: this.query, cancellable });
 
 		if (!json) {
@@ -29,38 +23,35 @@ export class GeoIPFedora implements GeoIP {
 		return this.ParseInformation(json);
 	}
 
-	private ParseInformation(json: GeoIPFedoraPayload): LocationData | null {
+	private ParseInformation(json: GeoIPFedoraPayload): LocationServiceResult | null {
 		if (json.latitude === null || json.longitude === null) {
-			this.HandleErrorResponse(json);
+			ErrorHandler.Instance.PostError({
+				type: "hard",
+				detail: "bad api response",
+				message: _("Location Service couldn't find your location, please see the logs in Looking Glass"),
+				service: "geoip.fedoreproject"
+			})
 			return null;
 		}
 
 		try {
-			const result: LocationData = {
+			const result: LocationServiceResult = {
 				lat: json.latitude,
 				lon: json.longitude,
 				city: json.city ?? undefined,
 				country: json.country_name ?? undefined,
-				timeZone: json.time_zone ?? this.app.config.UserTimezone,
+				timeZone: json.time_zone ?? undefined,
 				entryText: json.latitude + "," + json.longitude,
 			}
 			Logger.Debug("Location obtained: " + json.latitude + "," + json.longitude);
 			return result;
 		}
 		catch (e) {
-			Logger.Error("geoip.fedoraproject parsing error: " + e);
-			this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
+			if (e instanceof Error)
+				Logger.Error("geoip.fedoraproject parsing error: " + e.message, e);
+			ErrorHandler.Instance.PostError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
 			return null;
 		}
-	};
-
-	private HandleErrorResponse(json: any): void {
-		this.app.ShowError({
-			type: "hard",
-			detail: "bad api response",
-			message: _("Location Service couldn't find your location, please see the logs in Looking Glass"),
-			service: "geoip.fedoreproject"
-		})
 	};
 }
 

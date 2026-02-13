@@ -1,9 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env sh
 export TEXTDOMAIN="Sensors@claudiux"
 export TEXTDOMAINDIR="${HOME}/.local/share/locale"
 ICON=$HOME/.local/share/cinnamon/applets/Sensors@claudiux/icon.png
 TITLE=$(gettext "Example of sensor values from this computer")
-FILE=$HOME/.local/share/cinnamon/applets/Sensors@claudiux/scripts/report.txt
+#~ FILE=$HOME/.local/share/cinnamon/applets/Sensors@claudiux/scripts/report.txt
+FILE=${XDG_RUNTIME_DIR}/Sensors_report.txt
 # From v4.0.0, zenity does not support anymore the --window-icon parameter;
 # using --icon instead:
 ZVERSION=$(zenity --version | cut -d"." -f1)

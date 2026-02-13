@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: internet-indicator@sangorys 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-05-09 23:59+08:00\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:121
+msgid "Initializing"
+msgstr "正在初始化"
+
+#: applet.js:244
+msgid "Testing Internet connexion in progress..."
+msgstr "正在測試網際網路連線..."
+
+#: applet.js:294
+msgid "Internet OK"
+msgstr "網際網路狀態正常"
+
+#: applet.js:312
+msgid "No Internet"
+msgstr "沒有網際網路"
+
+#. metadata.json->name
+msgid "Internet connection Indicator"
+msgstr "Internet connection Indicator"
+
+#. metadata.json->description
+msgid ""
+"Check your Internet connection (usefull to check if you are connected to "
+"Internet through a wifi hotspot. For instance when you are in a train)"
+msgstr ""
+"檢查網際網路連線狀態（適合用於確認透過 Wi-Fi 熱點連上網路的連線狀態，"
+"例如在火車等交通工具上時，此功能便相當實用）"
+
+#. settings-schema.json->update-interval-when-no-internet->units
+#. settings-schema.json->update-interval-when-internet->units
+msgid "s"
+msgstr "秒"
+
+#. settings-schema.json->update-interval-when-no-internet->description
+msgid "Update interval when no internet connection"
+msgstr "沒有網際網路連線時的更新間隔"
+
+#. settings-schema.json->update-interval-when-internet->description
+msgid "Update interval when internet is detected"
+msgstr "偵測到網際網路連線時的更新間隔"

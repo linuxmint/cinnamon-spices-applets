@@ -6,6 +6,7 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Settings = imports.ui.settings;
 const { PopupSwitchMenuItem, PopupSeparatorMenuItem } = imports.ui.popupMenu;
+const Mainloop = imports.mainloop;
 
 const UUID = 'screen-inhibit@mtwebster';
 const Gettext = imports.gettext;
@@ -48,6 +49,12 @@ function SessionManager(initCallback, cancellable) {
     return new SessionManagerProxy(Gio.DBus.session, 'org.gnome.SessionManager', '/org/gnome/SessionManager', initCallback, cancellable);
 }
 
+const POWER_SCHEMA = "org.cinnamon.settings-daemon.plugins.power";
+const SLEEP_DISPLAY_AC_KEY = "sleep-display-ac";
+const SLEEP_INACTIVE_AC_TIMEOUT_KEY = "sleep-inactive-ac-timeout";
+
+const SCREENSAVER_COMMAND = GLib.find_program_in_path("cinnamon-screensaver-command");
+
 class ScreenSaverInhibitor extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
@@ -55,6 +62,8 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
 
         this.icon_path_on = false;
         this.icon_path_off = false;
+
+        this.power_settings = new Gio.Settings({ schema_id: POWER_SCHEMA });
 
         try {
             this.settings = new Settings.AppletSettings(this, this.uuid, instance_id);
@@ -70,6 +79,27 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             this.settings.bind( "inhibit-at-startup",
                                 "inhibit_at_startup",
                                 this.on_inhibit_at_startup_changed);
+            this.settings.bind( "seconds-after-startup",
+                                "seconds_after_startup",
+                                null);
+            this.settings.bind( "end-timechooser",
+                                "end_time",
+                                this.on_endtime_changed);
+            this.settings.bind( "end-type",
+                                "end_type",
+                                this.on_endtime_changed);
+            this.settings.bind( "locktype",
+                                "locktype",
+                                this.loop);
+            this.settings.bind( "lockinterval",
+                                "lockinterval",
+                                this.loop);
+            this.settings.bind( "old-sleep-display-ac",
+                                "old_sleep_display_ac");
+            this.settings.bind( "old-sleep-inactive-ac-timeout",
+                                "old_sleep_inactive_ac_timeout");
+            this.settings.bind( "starting-time-in-minutes",
+                                "starting_time_in_minutes");
         } catch (e) {
             this.settings = null;
             this.off_icon = "screen-inhibit-symbolic"; // "video-display-symbolic";
@@ -77,6 +107,10 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             this.keybinding = null;
             this.icon_path_on = false;
             this.icon_path_off = false;
+            this.locktype = "normal";
+            this.lockinterval = 5;
+            this.old_sleep_display_ac = 0;
+            this.old_sleep_inactive_ac_timeout = 0;
         }
 
         try {
@@ -112,6 +146,60 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
         if (this.settings) {
             this.on_settings_changed();
         }
+
+        this.loopId = null;
+        this.loop();
+    }
+
+    loop() {
+        if (this.loopId) {
+            Mainloop.source_remove(this.loopId);
+            this.loopId = null;
+        }
+
+        if (this.inhibited) {
+            if (!this.is_end_time()) {
+                switch (this.locktype) {
+                    case "normal":
+                        this.lockinterval = 1;
+                        break;
+                    case "aggressive1":
+                        if (SCREENSAVER_COMMAND)
+                            Util.spawnCommandLineAsync(SCREENSAVER_COMMAND+" -d");
+                        break;
+                    case "aggressive2":
+                        if (SCREENSAVER_COMMAND)
+                            Util.spawnCommandLineAsync(SCREENSAVER_COMMAND+" -e");
+                }
+            } else {
+                this.starting_time_in_minutes = 0;
+                this.end_type = 0;
+                this.on_applet_clicked()
+            }
+        }
+
+        this.loopId = Mainloop.timeout_add(this.lockinterval * 60000, this.loop.bind(this));
+    }
+
+    is_end_time() {
+        if (this.end_type === 0)
+            return false;
+        const date = new Date;
+        const hour = date.getHours();
+        const minute = date.getMinutes();
+        if (this.end_type === 2 && (hour*60+minute >= this.end_time.h*60+this.end_time.m))
+            return true;
+        if (this.end_type === 1 && (hour*60+minute - this.starting_time_in_minutes <= this.end_time.h*60+this.end_time.m))
+            return true;
+        return false;
+    }
+
+    on_endtime_changed() {
+        const date = new Date;
+        const hour = date.getHours();
+        const minute = date.getMinutes();
+
+        this.starting_time_in_minutes = hour*60+minute;
     }
 
     on_inhibit_at_startup_changed() {
@@ -137,17 +225,27 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
 
     on_applet_clicked(event) {
         if (this._inhibit) {
+            this.sleep_display_ac = this.old_sleep_display_ac;
+            this.sleep_inactive_ac_timeout = this.old_sleep_inactive_ac_timeout;
             this._sessionProxy.UninhibitRemote(this._inhibit);
+            if (SCREENSAVER_COMMAND)
+                Util.spawnCommandLineAsync(SCREENSAVER_COMMAND+" -a; "+SCREENSAVER_COMMAND+" -d");
             this._inhibit = undefined;
             this.set_applet_tooltip(ALLOW_TT);
             this.inhibited = false;
         } else {
+            this.sleep_display_ac = 0;
+            this.sleep_inactive_ac_timeout = 0;
             try {
-                this._sessionProxy.InhibitRemote("inhibitor-screen-inhibit@mtwebster",
-                                                 0,
-                                                 "inhibit mode",
-                                                 9,
-                                                 Lang.bind(this, this._onInhibit));
+                this._sessionProxy.InhibitRemote(
+                    "inhibitor-screen-inhibit@mtwebster",
+                    0,
+                    "inhibit mode",
+                    9,
+                    Lang.bind(this, this._onInhibit)
+                );
+                if (SCREENSAVER_COMMAND)
+                    Util.spawnCommandLineAsync(SCREENSAVER_COMMAND+" -e");
                 this.set_applet_tooltip(INHIBIT_TT);
                 this.inhibited = true;
             } catch(e) {
@@ -190,19 +288,40 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
           Lang.bind(this, this._onInhibit)
         );
 
+        if (SCREENSAVER_COMMAND)
+            Util.spawnCommandLineAsync(SCREENSAVER_COMMAND+" -e");
+
         this.inhibited = true;
+        this.sleep_display_ac = 0;
+        this.sleep_inactive_ac_timeout = 0;
 
         this.update_icon();
     }
 
     on_applet_added_to_panel() {
+        if (this.sleep_display_ac != 0 && this.sleep_display_ac != this.old_sleep_display_ac)
+            this.old_sleep_display_ac = this.sleep_display_ac;
+
+        if (this.sleep_inactive_ac_timeout != 0 && this.sleep_inactive_ac_timeout != this.old_sleep_inactive_ac_timeout)
+            this.old_sleep_inactive_ac_timeout = this.sleep_inactive_ac_timeout;
+
         if (this.inhibit_at_startup && !this.inhibited) {
             let id = setInterval ( () => {
                 if (this._sessionProxy) { // Ensures that this._sessionProxy is defined.
-                    this.on_applet_clicked();
+                    if (!this.inhibited)
+                        this.on_applet_clicked();
                     clearTimeout(id);
                 }
-            }, 300);
+            }, (this.seconds_after_startup === 0) ? 300 : this.seconds_after_startup*1000);
+        }
+    }
+
+    on_applet_removed_from_panel() {
+        this.sleep_display_ac = this.old_sleep_display_ac;
+        this.sleep_inactive_ac_timeout = this.old_sleep_inactive_ac_timeout;
+        if (this.loopId) {
+            Mainloop.source_remove(this.loopId);
+            this.loopId = null;
         }
     }
 
@@ -210,6 +329,22 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
         this.off_icon = HOME_DIR + "/.local/share/cinnamon/applets/screen-inhibit@mtwebster/icons/screen-inhibit-symbolic.svg";
         this.on_icon = HOME_DIR + "/.local/share/cinnamon/applets/screen-inhibit@mtwebster/icons/screen-inhibit-active-symbolic.svg";
         this.on_settings_changed();
+    }
+
+    get sleep_display_ac() {
+        return this.power_settings.get_int(SLEEP_DISPLAY_AC_KEY);
+    }
+
+    set sleep_display_ac(value) {
+        this.power_settings.set_int(SLEEP_DISPLAY_AC_KEY, value);
+    }
+
+    get sleep_inactive_ac_timeout() {
+        return this.power_settings.get_int(SLEEP_INACTIVE_AC_TIMEOUT_KEY);
+    }
+
+    set sleep_inactive_ac_timeout(value) {
+        this.power_settings.set_int(SLEEP_INACTIVE_AC_TIMEOUT_KEY, value);
     }
 };
 

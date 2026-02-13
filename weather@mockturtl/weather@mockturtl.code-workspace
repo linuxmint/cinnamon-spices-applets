@@ -10,6 +10,8 @@
     }
   ],
   "settings": {
+    "eslint.nodePath": "${workspaceFolder:weather}/node_modules",
+    "eslint.lintTask.enable": true,
     "cSpell.ignoreWords": [
       "Adapta",
       "CONV",
@@ -128,7 +130,9 @@
     "cSpell.words": [
       "deallocated"
     ],
-    "typescript.tsdk": "weather/node_modules/typescript/lib"
+    "typescript.tsdk": "${workspaceFolder:weather}/node_modules/typescript/lib",
+    "eslint.experimental.useFlatConfig": true,
+    "eslint.workingDirectories": ["${workspaceFolder:weather}"],
   },
   "tasks": {
     "version": "2.0.0",
@@ -159,7 +163,8 @@
       "streetsidesoftware.code-spell-checker",
       "gruntfuggly.todo-tree",
       "eg2.vscode-npm-script",
-      "wix.vscode-import-cost"
+      "wix.vscode-import-cost",
+      "dbaeumer.vscode-eslint"
     ]
   }
 }

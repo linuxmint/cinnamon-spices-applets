@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 # Reload an applet.
 # Many thanks to hyOzd for this tip !
 # replace the EXTENSION_UUID with your extension/applet/desklet name

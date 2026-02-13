@@ -1,3 +1,351 @@
+### v14.1.0~20260212
+  * Resize the menu by grabbing its edges with the mouse.
+
+### v14.0.0~20260211
+  * Adds a Balance slider in the menu + keybindings.
+  * Fixes [#8052](https://github.com/linuxmint/cinnamon-spices-applets/issues/8052)
+
+### v13.10.0~20260121
+  * Try to avoid advertisements by detecting certain words in the title, defined by the user.
+
+### v13.9.3~20260114
+  * User can set menu width (for Cinnamon 6.4).
+  * Fixes [#8175](https://github.com/linuxmint/cinnamon-spices-applets/issues/8175)
+
+### v13.9.2~20260114
+  * Improves menu display for Cinnamon 6.4.
+  * Fixes [#8201](https://github.com/linuxmint/cinnamon-spices-applets/issues/8201)
+
+### v13.9.1~20260112
+  * Restore this applet for Cinnamon 6.4 (same as v13.8.2).
+  * Fixes [#8183](https://github.com/linuxmint/cinnamon-spices-applets/issues/8183)
+  * New features for Cinnamon 6.6.
+
+### v13.9.0~20251228
+  * Also displays OSD with commands like "pactl set-sink-volume ...".
+  * Fixes [#8045](https://github.com/linuxmint/cinnamon-spices-applets/issues/8045)
+
+### v13.8.2~20251225
+  * Fixes a nasty bug.
+  * Fixes [#8115](https://github.com/linuxmint/cinnamon-spices-applets/issues/8115)
+
+### v13.8.1~20251225
+  * Improves speed.
+  * Fixes [#8115](https://github.com/linuxmint/cinnamon-spices-applets/issues/8115)
+  * Transitional version. Some bugs need to be fixed, but it works.
+
+### v13.8.0~20251223
+  * Many improvements and several bug fixes.
+  * Fixes [#8052](https://github.com/linuxmint/cinnamon-spices-applets/issues/8052)
+  * Fixes [#8049](https://github.com/linuxmint/cinnamon-spices-applets/issues/8049)
+  * Fixes [#8029](https://github.com/linuxmint/cinnamon-spices-applets/issues/8029)
+
+### v13.7.7~20251206
+  * Bug fix: avoids errors about stream.
+
+### v13.7.6~20251205
+  * Bug fix: artist and title when the player does not provide them.
+
+### v13.7.5~20251204
+  * Improves execution speed.
+  * Fixes [#8029](https://github.com/linuxmint/cinnamon-spices-applets/issues/8029)
+
+### v13.7.4~20251201
+  * Avoids deleting the cover art after modifying the volume or the workspace.
+  * Fixes [#8020](https://github.com/linuxmint/cinnamon-spices-applets/issues/8020)
+
+### v13.7.3~20251126
+  * Avoids treating apostrophes as quotes (artist and title).
+
+### v13.7.2~20251121
+  * Functional improvements.
+
+### v13.7.1~20251114
+  * Adds option "Shorten Artist and Title". When the artist name or title is too long, you can choose how to shorten it.
+  * Fixes [#7966](https://github.com/linuxmint/cinnamon-spices-applets/issues/7966)
+
+### v13.7.0~20251111
+  * Adds option "Do not use playerctl". 
+  * Fixes [#7961](https://github.com/linuxmint/cinnamon-spices-applets/issues/7961)
+  * Improved stability. Several errors were fixed.
+
+### v13.6.2~20251109
+  * Avoid error loading image.
+
+### v13.6.1~20251106
+  * Improved stability.
+
+### v13.6.0~20251102
+  * Improves menu stability.
+
+### v13.5.2~20251031
+  * Avoids 'paint' errors.
+
+### v13.5.1~20251031
+  * Avoids 'destroy' errors.
+
+### v13.5.0~20251030
+  * Adds the 'mic-mute' shortcut. See the FAQ in README to implement it.
+
+### v13.4.1~20251030
+  * Fixes a bug when the current player is undefined.
+
+### v13.4.0~20251029
+  * Improves tooltip duration.
+  * Fixes [#7922](https://github.com/linuxmint/cinnamon-spices-applets/issues/7922)
+
+### v13.3.4~20251028
+  * Gets real ui_scale, when scaling is set to other values than 100% or 200%.
+  * Uses "font-family: 'Digital Numbers',monospace" to display counters in menu.
+
+### v13.3.3~20251028
+  * Avoids menu shaking.
+
+### v13.3.2~20251027
+  * Improves the display of album covers.
+
+### v13.3.1~20250925
+  * Minor bugfixes (importing modules).
+
+### v13.3.0~20250923
+  * Added option "Do not show any cover art in the menu" in the Menus tab of this applet settings.
+
+### v13.2.2~20250814
+  * Improved speed.
+  * Code cleanup.
+
+### v13.2.1~20250808
+  * Code cleanup.
+
+### v13.2.0~20250808
+  * Removes and replaces the use of the `del_song_arts.sh` script.
+  * Fixes [#7497](https://github.com/linuxmint/cinnamon-spices-applets/issues/7497)
+
+### v13.1.2~20250624
+  * Minor bugfix.
+
+### v13.1.1~20250605
+  * Improved option "View Full Album Art".
+
+### v13.1.0~20250605
+  * New option "View Full Album Art".
+
+### v13.0.1~20250523
+  * Minor bug fix.
+
+### v13.0.0~20250523
+  * Added the Menus tab in settings.
+  * Keeps certain context menu submenus open.
+
+### v12.0.4~20250519
+  * Do not play sound notification when the volume has reached its maximum limit.
+
+### v12.0.3~20250504
+  * Improved album art display.
+
+### v12.0.2~20250427
+  * Minor bugfix.
+
+### v12.0.1~20250424
+  * Removes DEBUG mode.
+
+### v12.0.0~20250424
+  * Produces square rendered images from album covers to display a more pleasing icon.
+  * Requires installation of imagemagick to obtain this result.
+
+### v11.5.2~20250416
+  * Bugfix related to [#7074](https://github.com/linuxmint/cinnamon-spices-applets/issues/7074)
+
+### v11.5.1~20250415
+  * Make certain tasks asynchronous to avoid blockages.
+
+### v11.5.0~20250415
+  * Best album cover change.
+  * Code: subdivision into libraries.
+
+### v11.4.0~20250408
+  * Improved album art display.
+
+### v11.3.0~20250405
+  * New option: Delay between icon and album art display.
+
+### v11.2.0~20250404
+  * Horizontal panel: keep title when paused.
+  * New option: "If the title is too long, end it with" (chosen characters).
+
+### v11.1.0~20250403
+  * Can transfer Artist and Title to AlbumArt3.0 desklet.
+
+### v11.0.0~20250313
+  * Works with the version 2.0.0 of the 'Album Art 3.0' desklet.
+
+### v10.2.1~20250302
+  * Improved tooltip management.
+
+### v10.2.0~20250227
+  * Do not display the tooltip when using the multimedia keys to change volume.
+  * Avoid unnecessary spaces in the tooltip.
+  * Code cleanup.
+
+### v10.1.1~20250218
+  * Improved tooltip layout.
+
+### v10.1.0~20250209
+  * Changes required by the Linux Mint - Cinnamon team.
+  * From now on, having a horizontal OSD requires the OSD150@claudiux extension.
+  * Notifications are available to help you install and enable the OSD150@claudiux extension.
+
+### v10.0.0~20250207
+  * OSD is now managed by an extension. (Cinnamon 6.4)
+  * This extension is named OSD150@claudiux and it is automatically installed by this applet.
+  * Added the ability to remove incompatible extensions. (See menu if they are installed. Nothing in menu? All is OK.)
+
+### v9.2.2~20250206
+  * Eliminates Cinnamon reload errors when a sound stream is playing.
+
+### v9.2.1~20250205
+  * Fixes #6854: Typo in settings.
+
+### v9.2.0~20250203
+  * Add custom commands (see Shortcuts tab in settings).
+  * Fixes #6847.
+
+### v9.1.0~20250203
+  * Functional improvement.
+  * When the volume step differs from 5, multimedia key shortcuts are automatically redefined.
+  * Code: Avoid using 'bind' calls.
+
+### v9.0.0~20250201
+  * Major changes for OSD and menu.
+  * OSD: Volume value can be displayed beside the volume bar.
+  * New option for the menu: Show Media-Optical icon. Don't show it to save space and visual comfort.
+  * Fixes #6830.
+
+### v8.0.3~20250130
+  * Improved OSD management.
+  * Fixes #6820.
+
+### v8.0.2~20250126
+  * Improved stability with Cinnamon 6.4: More tests on the existence of objects before acting on them.
+
+### v8.0.1~20250125
+  * Increases stability with Cinnamon 6.4: Removes Lang.bind() calls.
+
+### v8.0.0~20250119
+  * Major changes for OSD, icon scrolling and stability.
+  * Using mainloopTools library to manage loops.
+
+### v7.5.0~20250111
+  * Improved management of loops.
+
+### v7.4.5~20250108
+  * Improved seeker display in the menu.
+  * Duration calculation becomes faster. Note that many radio stations provide the total duration every 1 second, others every 5 seconds.
+
+### v7.4.4~20250105
+  * Improved functioning.
+
+### v7.4.3~20250104
+  * Fixes #6728: Corrects a regression in Cinnamon 6.2.
+
+### v7.4.2~20250104
+  * Fixes #6728: Corrects a regression in Cinnamon 6.2.
+  * Closes menu before restarting.
+
+### v7.4.1~20250103
+  * Fixes #6726: SMPlayer no longer freezes
+  * Displays the thumbnail of the video viewed with SMPlayer
+
+### v7.4.0~20241230
+  * Better compatibility with Cinnamon 6.4.
+  * Make optional suppressing unpleasant noise at computer shutdown. (See option in Sound tab of settings.)
+  * Improves management of objects and signals when restarting this applet.
+
+### v7.3.7~20241228
+  * Improved functionality (icons and album art)
+
+### v7.3.6~20241227
+  * No error at start-up. Fixes a nasty bug!
+
+### v7.3.5~20241226
+  * Bugfixes.
+
+### v7.3.4~20241221
+  * New option to fix volume at start-up. Value -1 means "No change". (Related to #6690.)
+
+### v7.3.3~20241212
+  * Improves compatibility with Cinnamon 6.4 removing "%" after volume level.
+
+### v7.3.2~20241206
+  * Fixes OSD problems.
+  * Fixes #6669.
+
+### v7.3.1~20241130
+  * Fixes #6655: The OSD is no longer displayed at startup if it is not required.
+
+
+### v7.3.0~20241128
+  * Add specific code for Cinnamon 6.2.
+
+
+### v7.2.4~20241116
+  * Fixes #6513: Always show mute icon when sound is muted.
+
+### v7.2.3~20241021
+  * Improvements to album art display.
+
+### v7.2.2~20241019
+  * Minor bug fix.
+
+### v7.2.1~20241018
+  * Some improvements to fix #6504.
+
+### v7.2.0~20241017
+  * Fixes #6504. (Improvements are planed.)
+
+### v7.1.1~20241016
+  * Avoids loud cracking sound at shutdown.
+  * Option removed. This is basic now.
+
+### v7.1.0~20241013
+  * Option to try to avoid loud cracking sound at shutdown.
+  * Fixes https://github.com/linuxmint/cinnamon/issues/12446.
+
+### v7.0.0~20241011
+  * Compatible with Cinnamon 6.4.
+
+### v6.18.1~20240907
+  * Fixes #6301.
+
+### v6.18.0~20240731
+  * Improves certain icons.
+  * Improved support for Pulse Effects and Easy Effects.
+
+### v6.17.3~20240702
+  * Fixes #6143.
+
+### v6.17.2~20240702
+  * Fixes #6143
+
+### v6.17.1~20240609
+  * Prevents Cvc.MixerControl from being executed more than once.
+
+### v6.17.0~20240608
+  * Regression fixed: track info can be displayed on the panel again.
+
+### v6.16.0~20240605
+  * Shortcuts tab of this applet settings: Added a button to define multimedia shortcuts identical to those in Cinnamon.
+
+### v6.15.0~20240523
+  * From now on, use Ctrl+wheel or Shift+wheel to control microphone volume.
+  * New option: "Display icon indicating that the microphone is activated, if applicable".
+  * New icons, with green microphone.
+  * Fixes FR #6026.
+  * Allows user to set the time to disappear for the seeker tooltip.
+
+### v6.14.0~20240520
+  * Displays above the seeker the time it will take to be in the track if clicked.
+
 ### v6.13.0~20240514
   * Fixes #6008: Added the option to avoid displaying controllers twice.
 

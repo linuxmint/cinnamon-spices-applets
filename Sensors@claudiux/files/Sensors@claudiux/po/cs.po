@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Sensors@claudiux Czech 3.5.2\n"
+"Project-Id-Version: Sensors@claudiux Czech 5.8.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-31 10:36+0200\n"
-"PO-Revision-Date: 2024-02-04 19:20+0100\n"
+"POT-Creation-Date: 2025-03-30 14:17+0200\n"
+"PO-Revision-Date: 2025-09-14 13:25+0200\n"
 "Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -12,169 +12,179 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Basepath: .\n"
 
 #. metadata.json->name
-#: applet.js:101
+#. applet.js:225 applet_OLD.js:235
 msgid "Sensors Monitor"
 msgstr "Sledování senzorů"
 
-#: applet.js:268
+#. applet.js:465 applet_OLD.js:418
 msgid "Suspended"
 msgstr "Zastaveno"
 
-#: applet.js:484 applet.js:526
+#. applet.js:732 applet.js:773 applet_OLD.js:638 applet_OLD.js:682
 msgid "high:"
 msgstr "vysoká:"
 
-#: applet.js:484 applet.js:486 applet.js:526 applet.js:528 applet.js:569
+#. applet.js:732 applet.js:735 applet.js:773 applet.js:775 applet.js:816
+#. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
+#. applet_OLD.js:726
 msgid "n/a"
 msgstr "n/a"
 
-#: applet.js:486 applet.js:528
+#. applet.js:735 applet.js:775 applet_OLD.js:642 applet_OLD.js:684
 msgid "crit:"
 msgstr "krit:"
 
-#: applet.js:569 applet.js:612
+#. applet.js:816 applet.js:860 applet_OLD.js:726 applet_OLD.js:770
 msgid "min:"
 msgstr "min:"
 
-#: applet.js:614
+#. applet.js:862 applet_OLD.js:772
 msgid "max:"
 msgstr "max:"
 
-#: applet.js:642
+#. applet.js:891 applet_OLD.js:801
 msgid "No intrusion detected"
 msgstr "Narušení nedetekováno"
 
-#: applet.js:642
+#. applet.js:891 applet_OLD.js:801
 msgid "INTRUSION DETECTED!"
 msgstr "DETEKOVÁNO NARUŠENÍ!"
 
-#: applet.js:662
+#. applet.js:911 applet_OLD.js:821
 msgid "Must be configured!"
 msgstr "Musí být nastaveno!"
 
-#: applet.js:925
+#. applet.js:1275 applet_OLD.js:1208
 msgid "Settings"
 msgstr "Předvolby"
 
-#: applet.js:925
+#. applet.js:1275 applet_OLD.js:1208
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#: applet.js:932
+#. applet.js:1282 applet_OLD.js:1215
 msgid "⚙ General"
 msgstr "⚙ Obecné"
 
-#: applet.js:942
-msgid "🌡 Temperature sensors"
-msgstr "🌡 Teplotní senzory"
+#. applet.js:1298 applet_OLD.js:1231
+#, javascript-format
+msgid "%s Temperature sensors"
+msgstr "%s Teplotní senzory"
 
-#: applet.js:952
-msgid "🤂 Fan sensors"
-msgstr "🤂 Senzory větráků"
+#. applet.js:1314 applet_OLD.js:1247
+#, javascript-format
+msgid "%s Fan sensors"
+msgstr "%s Senzory větráků"
 
-#: applet.js:962
-msgid "🗲 Voltage sensors"
-msgstr "🗲 Senzory napětí"
+#. applet.js:1330 applet_OLD.js:1263
+#, javascript-format
+msgid "%s Voltage sensors"
+msgstr "%s Napěťové senzory"
 
-#: applet.js:972
-msgid "⮿ Intrusion sensors"
-msgstr "⮿ Senzory narušení"
+#. applet.js:1346 applet_OLD.js:1279
+#, javascript-format
+msgid "%s Intrusion sensors"
+msgstr "%s Senzory narušení"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:983
+#. applet.js:1365 applet_OLD.js:1306
 msgid "Run xsensors"
 msgstr "Spustit xsensors"
 
-#: applet.js:992
+#. applet.js:1374 applet_OLD.js:1315
 msgid "Suspend Sensors"
 msgstr "Pozastavit Sledování senzorů"
 
-#: applet.js:1003
+#. applet.js:1385 applet_OLD.js:1326
 msgid "Reload this applet"
 msgstr "Znovunačíst tento applet"
 
-#: applet.js:1295
+#. applet.js:1707 applet_OLD.js:1656
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Opravdu odstranit '%s'?"
 
-#: lib/checkDependencies.js:317
+#. lib/checkDependencies.js:353
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Applet %s je plně funkční."
 
-#: lib/checkDependencies.js:318
+#. lib/checkDependencies.js:354
 msgid "All dependencies are installed"
 msgstr "Všechny závislosti jsou nainstalované"
 
-#: lib/checkDependencies.js:346
+#. lib/checkDependencies.js:383
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 "Zdá se, že chybí některé z programů vyžadovaných pro plnou funkčnost appletu."
 
-#: lib/checkDependencies.js:347
-msgid "Please execute, in the just opened terminal, the commands:"
-msgstr "V právě otevřeném okně terminálu prosím proveďte následující příkazy:"
+#. lib/checkDependencies.js:385
+msgid "Please install these packages:"
+msgstr "Je nutné instalovat následující balíčky:"
 
-#: lib/checkDependencies.js:348
+#. lib/checkDependencies.js:389 lib/checkDependencies.js:399
 msgid "Some dependencies are not installed!"
 msgstr "Některé závislosti nejsou nainstalované!"
 
-#: lib/util.js:244
+#. lib/checkDependencies.js:401
+msgid "Install these packages now"
+msgstr "Balíčky nainstalovat nyní"
+
+#. lib/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr "Spuštění '%s' selhalo:"
 
-#: scripts/xs.py:206
+#. scripts/xs.py:206
 msgid "Previous instance"
 msgstr "Předchozí instance"
 
-#: scripts/xs.py:210
+#. scripts/xs.py:210
 msgid "Next instance"
 msgstr "Následující instance"
 
-#: scripts/xs.py:219
+#. scripts/xs.py:219
 msgid "More options"
 msgstr "Více možností"
 
-#: scripts/xs.py:225
+#. scripts/xs.py:225
 msgid "Import from a file"
 msgstr "Importovat ze souboru"
 
-#: scripts/xs.py:230
+#. scripts/xs.py:230
 msgid "Export to a file"
 msgstr "Exportovat do souboru"
 
-#: scripts/xs.py:235
+#. scripts/xs.py:235
 msgid "Reset to defaults"
 msgstr "Resetovat do výchozích"
 
-#: scripts/xs.py:244
+#. scripts/xs.py:244
 #, python-format
 msgid "Reload %s"
 msgstr "Znovu načíst %s"
 
-#: scripts/xs.py:425
+#. scripts/xs.py:425
 #, python-format
 msgid "Settings for %s"
 msgstr "Předvolby pro %s"
 
-#: scripts/xs.py:517
+#. scripts/xs.py:517
 msgid "Select or enter file to export to"
 msgstr "Vybrat nebo zadat soubor pro export"
 
-#: scripts/xs.py:525 scripts/xs.py:546
+#. scripts/xs.py:525 scripts/xs.py:546
 msgid "JSON files"
 msgstr "Soubory JSON"
 
-#: scripts/xs.py:539
+#. scripts/xs.py:539
 msgid "Select a JSON file to import"
 msgstr "Vybrat soubor JSON k importování"
 
@@ -189,13 +199,17 @@ msgstr ""
 "narušení (otevření krytu). Upozorní barevnými změnami, pokud hodnoty "
 "dosáhnout nebo přesáhnou limity."
 
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr "claudiux: Autor. JEleniel: podpora grafických karet NVidia."
+
 #. settings-schema.json->page_Temperatures->title
-msgid "🌡 Temperature"
-msgstr "🌡 Teploty"
+msgid "⦿ Temperature"
+msgstr "⦿  Teploty"
 
 #. settings-schema.json->page_Fans->title
-msgid "🤂 Fan"
-msgstr "🤂 Větráky"
+msgid "𖣘 Fan"
+msgstr "𖣘 Větráky"
 
 #. settings-schema.json->page_Voltages->title
 msgid "🗲 Voltage"
@@ -204,6 +218,10 @@ msgstr "🗲 Napětí"
 #. settings-schema.json->page_Intrusion->title
 msgid "⮿ Intrusion"
 msgstr "⮿ Narušení"
+
+#. settings-schema.json->page_Custom->title
+msgid "⛓ Custom"
+msgstr "⛓ Vlastní"
 
 #. settings-schema.json->section_Display->title
 #. settings-schema.json->section_tempOptions->title
@@ -233,6 +251,7 @@ msgstr "V současné době mohou být hodnoty teplot disků čteny pouze rootem.
 #. settings-schema.json->section_fanDisplay->title
 #. settings-schema.json->section_voltDisplay->title
 #. settings-schema.json->section_intrusionDisplay->title
+#. settings-schema.json->section_customDisplay->title
 msgid "Display"
 msgstr "Zobrazení"
 
@@ -255,6 +274,14 @@ msgstr "Napěťové senzory"
 #. settings-schema.json->section_intrusionSensors->title
 msgid "Intrusion sensors"
 msgstr "Senzory narušení"
+
+#. settings-schema.json->section_customDisclaimer->title
+msgid "Disclaimer"
+msgstr "Zřeknutí se odpovědnosti"
+
+#. settings-schema.json->section_customSensors->title
+msgid "Custom sensors"
+msgstr "Vlastní senzory"
 
 #. settings-schema.json->interval->options
 msgid "1"
@@ -314,39 +341,39 @@ msgstr "30"
 
 #. settings-schema.json->interval->options
 msgid "1 minute"
-msgstr ""
+msgstr "1 minuta"
 
 #. settings-schema.json->interval->options
 msgid "2 minutes"
-msgstr ""
+msgstr "2 minuty"
 
 #. settings-schema.json->interval->options
 msgid "3 minutes"
-msgstr ""
+msgstr "3 minuty"
 
 #. settings-schema.json->interval->options
 msgid "4 minutes"
-msgstr ""
+msgstr "4 minuty"
 
 #. settings-schema.json->interval->options
 msgid "5 minutes"
-msgstr ""
+msgstr "5 minut"
 
 #. settings-schema.json->interval->options
 msgid "10 minutes"
-msgstr ""
+msgstr "10 minut"
 
 #. settings-schema.json->interval->options
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minut"
 
 #. settings-schema.json->interval->options
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minut"
 
 #. settings-schema.json->interval->options
 msgid "1 hour"
-msgstr ""
+msgstr "1 hodina"
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
@@ -370,24 +397,45 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Velikost písma (% standardní velikosti)"
 
+#. settings-schema.json->horizontal_width->description
+msgid "Display width (pixels) for horizontal panels"
+msgstr "Šířka zobrazení (v pixelech) pro horizontální panely"
+
+#. settings-schema.json->horizontal_width->tooltip
+msgid "0 means automatic. This value does not include border."
+msgstr "0 znamená automaticky. Hodnota nezahrnuje okraj."
+
+#. settings-schema.json->separator_type->options
+msgid "(none)"
+msgstr "(žádný)"
+
+#. settings-schema.json->separator_type->options
+msgid "blank"
+msgstr "prázdný"
+
+#. settings-schema.json->separator_type->options
+msgid "bar"
+msgstr "příčka"
+
+#. settings-schema.json->separator_type->description
+msgid "Separator"
+msgstr "Oddělovač"
+
 #. settings-schema.json->char_color_customized->description
-#, fuzzy
 msgid "Customize Text Color"
-msgstr "Barva textu"
+msgstr "Přizpůsobit barvu textu"
 
 #. settings-schema.json->char_color->description
 msgid "Text Color"
 msgstr "Barva textu"
 
-#. settings-schema.json->separator->description
-msgid "Separator"
-msgstr "Oddělovač"
+#. settings-schema.json->crit_color->description
+msgid "Critical Value Color"
+msgstr "Barva kritické hodnoty"
 
-#. settings-schema.json->separator->tooltip
-msgid ""
-"The string used to separate values in horizontal orientation. Default is '│'."
-msgstr ""
-"Znak použitý pro oddělení hodnot ve vertikálním uspořádání. Výchozí je  '│'."
+#. settings-schema.json->high_color->description
+msgid "High Value Color"
+msgstr "Barva vysoké hodnoty"
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -399,7 +447,7 @@ msgstr "Určuje jestli údaje zobrazit s linkou kolem appletu či bez ní."
 
 #. settings-schema.json->remove_icons->description
 msgid "Remove icons"
-msgstr "Odstranit ikony"
+msgstr "Odebrat ikony"
 
 #. settings-schema.json->remove_icons->tooltip
 msgid "Whether or not to remove icons in panel."
@@ -445,6 +493,7 @@ msgstr "Učinit hodnoty teploty disků čitelné uživatelem"
 #. settings-schema.json->show_fan->description
 #. settings-schema.json->show_volt->description
 #. settings-schema.json->show_intrusion->description
+#. settings-schema.json->show_custom->description
 msgid "Display the values of these selected sensors"
 msgstr "Zobrazovat hodnoty senzorů z této kategorie"
 
@@ -452,6 +501,7 @@ msgstr "Zobrazovat hodnoty senzorů z této kategorie"
 #. settings-schema.json->show_fan->tooltip
 #. settings-schema.json->show_volt->tooltip
 #. settings-schema.json->show_intrusion->tooltip
+#. settings-schema.json->show_custom->tooltip
 msgid ""
 "Whether or not to display the values of the sensors selected in the list "
 "below."
@@ -462,8 +512,9 @@ msgstr ""
 #. settings-schema.json->show_fan_name->description
 #. settings-schema.json->show_volt_name->description
 #. settings-schema.json->show_intrusion_name->description
+#. settings-schema.json->show_custom_name->description
 msgid "Display the 'Shown name' of each of these selected sensors"
-msgstr "Zobrazovat se hodnotami vybraných senzorů i 'Zobrazované jméno'"
+msgstr "Zobrazovat 'Zobrazované jméno' každého z vybraných senzorů"
 
 #. settings-schema.json->show_temp_name->tooltip
 #. settings-schema.json->show_fan_name->tooltip
@@ -475,8 +526,18 @@ msgstr ""
 "Určuje, jestli se u hodnot senzorů bude zobrazovat i jméno příslušného "
 "senzoru ze seznamu níže. Ve vertikálním umístění panelu bez účinku."
 
+#. settings-schema.json->chars_temp->tooltip
+msgid "The first emoji in this list is used for temperature"
+msgstr "První emodži v seznamu je použité pro teplotu"
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr "Emodži"
+
 #. settings-schema.json->strictly_positive_temp->description
-#. settings-schema.json->strictly_positive_fan->description
 #. settings-schema.json->strictly_positive_volt->description
 msgid "Show only strictly positive values"
 msgstr "Zobrazovat výhradně kladné hodnoty"
@@ -507,11 +568,11 @@ msgstr "Umožní připojit či odebrat zobrazení značky stupňů za hodnotou."
 
 #. settings-schema.json->show_unit_letter->description
 msgid "Show unit character"
-msgstr "Připojit jednotky"
+msgstr "Připojit symbol jednotky"
 
 #. settings-schema.json->show_unit_letter->tooltip
 msgid "Whether or not to show the unit character (C or F)."
-msgstr "Možnost zobrazení zkratky jednotky (C či F)."
+msgstr "Možnost zobrazení zkratky jednotky ( C či F)."
 
 #. settings-schema.json->always_show_unit_in_line->description
 msgid "Vertical panel: Temperature value and °C / °F on one line"
@@ -525,6 +586,18 @@ msgid ""
 msgstr ""
 "V případě používání panelu umístěného vertikálně lze zvolit, jestli hodnota "
 "a jednotka °C či °F budou na stejném řádku."
+
+#. settings-schema.json->journalize_temp->description
+msgid "Log high and critical temperatures"
+msgstr "Zaznamenat vysoké a kritické teploty"
+
+#. settings-schema.json->journalize_temp->tooltip
+msgid ""
+"When this option is checked, temperatures exceeding the high or critical "
+"limit are recorded in the system journal."
+msgstr ""
+"Pokud je tato volba aktivní, bude do systémového žurnálu zapsáno překročení "
+"teplotních limitů."
 
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description
@@ -549,6 +622,7 @@ msgstr ""
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
 msgid ""
 "Show\n"
 "in panel"
@@ -561,6 +635,7 @@ msgstr ""
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
 msgid ""
 "Show\n"
 "in tooltip"
@@ -595,6 +670,7 @@ msgstr ""
 #. settings-schema.json->temp_disks->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
 msgid "Formula"
 msgstr "Vzorec"
 
@@ -646,9 +722,29 @@ msgstr ""
 "Hodnoty Nejvyšší a Kritická konzultujte s technickým listem nebo manuálem "
 "vašeho konkrétního disku."
 
+#. settings-schema.json->chars_fan->tooltip
+msgid "The first emoji in this list is used for fan"
+msgstr "První emodži v tomto seznamu je použité pro větrák"
+
+#. settings-schema.json->strictly_positive_fan->description
+msgid "Show only positive or zero values"
+msgstr "Zobrazovat výhradně nulu a kladné hodnoty"
+
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
 msgstr "Zkratka pro \"otáčky za minutu\""
+
+#. settings-schema.json->journalize_fan->description
+msgid "Log critical fan speeds"
+msgstr "Zaznamenávat kritické otáčky větráku"
+
+#. settings-schema.json->journalize_fan->tooltip
+msgid ""
+"When this option is checked, fan speeds below the critical limit are "
+"recorded in the system log."
+msgstr ""
+"Pokud některý z větráků překročí kritické hodnoty , bude to zaznamenáno do "
+"systémového logu."
 
 #. settings-schema.json->fan_sensors->columns->title
 msgid ""
@@ -677,6 +773,10 @@ msgstr ""
 "\n"
 "Příklad?:  $*1.1+0.5"
 
+#. settings-schema.json->chars_volt->tooltip
+msgid "The first emoji in this list is used for voltage"
+msgstr "První emodži v seznamu je použité pro napětí"
+
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
 msgstr "Jednotka napětí"
@@ -692,6 +792,18 @@ msgstr "Pouze V"
 #. settings-schema.json->volt_unit->options
 msgid "mV only"
 msgstr "Pouze mV"
+
+#. settings-schema.json->journalize_volt->description
+msgid "Log critical voltages"
+msgstr "Zaznamenávat kritická napětí"
+
+#. settings-schema.json->journalize_volt->tooltip
+msgid ""
+"When this option is checked, voltages below the minimum limit or above the "
+"maximum limit are recorded in the system log."
+msgstr ""
+"Pokud bude zjištěno napětí pod nebo nad nastaveným limitem, bude tato "
+"skutečnost zaznamenána do systémového logu."
 
 #. settings-schema.json->volt_sensors->columns->title
 msgid ""
@@ -729,6 +841,7 @@ msgstr ""
 "Příklad?:  $*1.1+0.5"
 
 #. settings-schema.json->show_intrusion_name->tooltip
+#. settings-schema.json->show_custom_name->tooltip
 msgid ""
 " Whether or not to display into this applet label the 'Shown name' of the "
 "sensors selected in the list below. Without effect in vertical panels."
@@ -736,10 +849,24 @@ msgstr ""
 " Možnost zobrazit či zakázat u každé hodnoty senzoru i jeho \"Zobrazované "
 "jméno\" ze seznamu níže. Nemá účinek ve vertikálně orientovaném panelu."
 
+#. settings-schema.json->chars_intrusion->tooltip
+msgid "The first emoji in this list is used for intrusion"
+msgstr "První emodži v seznamu je použité pro narušení"
+
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"
 msgstr ""
 "Zobrazit na panelu upozornění na 'narušení' pouze v případě jeho detekování"
+
+#. settings-schema.json->journalize_intrusion->description
+msgid "Log intrusions"
+msgstr "Zaznamenávat narušení"
+
+#. settings-schema.json->journalize_intrusion->tooltip
+msgid "When this option is checked, intrusions are recorded in the system log."
+msgstr ""
+"Pokud bude zaznamenán pokus o proniknutí do skříně s počítačem, bude tato "
+"skutečnost zaznamenána do systémového logu."
 
 #. settings-schema.json->intrusion_sensors->tooltip
 msgid ""
@@ -749,8 +876,60 @@ msgstr ""
 "Dvoukliem na řádek je možné změnit zobrazovaný název jednotky.\n"
 "K obnovení původního názvu jej zkopírujte z položky Název senzoru."
 
+#. settings-schema.json->custom_disclaimer->description
+msgid ""
+"These settings are for advanced users only!\n"
+"Please refer to the README file."
+msgstr ""
+"Tato nastavení jsou určena pouze pro zkušené uživatele!\n"
+"Více v souboru README."
+
+#. settings-schema.json->custom_openREADME->description
+msgid "Open the README file"
+msgstr "Otevřít soubor README"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Type"
+msgstr "Typ"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Name"
+msgstr "Název"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"File to\n"
+"monitor"
+msgstr ""
+"Monitorovaný\n"
+"soubor"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"High\n"
+"value"
+msgstr ""
+"Vysoká\n"
+"hodnota"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"Critical\n"
+"value"
+msgstr ""
+"Kritická\n"
+"hodnota"
+
+#. settings-schema.json->custom_sensors->tooltip
+msgid ""
+"Add a line by custom sensor to set the type, the name and the path of the "
+"file to monitor (/sys/class/...)."
+msgstr ""
+"Vložit řádek vlastního vlastního senzor pro nastavení jeho typu, názvu a "
+"cesty pro jeho monitorování (/sys/class/...)."
+
 #. settings-schema.json->report->description
-#: scripts/show_sensor_values.sh:5
+#. scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr "Ukázka hodnot senzorů dostupných na tomto počítači"
 

@@ -1,71 +1,111 @@
-# SOME DESCRIPTIVE TITLE.
+# LOCK KEYS INDICATOR WITH NOTIFICATIONS
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# entelechy, 2016
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-15 21:34+0200\n"
-"PO-Revision-Date: 2020-01-25 22:15+0100\n"
-"Last-Translator: Anonymous <ano@nymo.us>\n"
+"Project-Id-Version: betterlock 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-12-16 19:05+0100\n"
+"PO-Revision-Date: 2025-12-18 12:29+0100\n"
+"Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Scr Lock"
-msgstr "Verrouillage Scr"
-
+#. applet.js:104
 msgid "Num Lock"
-msgstr "Verrouillage numérique"
+msgstr "Verr num"
 
+#. applet.js:108
 msgid "Caps Lock"
-msgstr "Verrouillage des majuscules"
+msgstr "Verr maj"
 
+#. applet.js:112
+msgid "Scr Lock"
+msgstr "Arrêt défil"
+
+#. applet.js:156
 msgid "Lock Keys"
 msgstr "Touches verrouillées"
 
-msgid "Scr lock on"
-msgstr "Verrouillage Scr activé"
-
-msgid "Scr lock off"
-msgstr "Verrouillage du Scr désactivé"
-
+#. applet.js:231
 msgid "Num lock on"
-msgstr "Verrouillage numérique activé"
+msgstr "Verr num activé"
 
+#. applet.js:233
 msgid "Num lock off"
-msgstr "Verrouillage numérique désactivé"
+msgstr "Verr num désactivé"
 
+#. applet.js:239
 msgid "Caps lock on"
-msgstr "Verrouillage des majuscules activé"
+msgstr "Verr maj activé"
 
+#. applet.js:241
 msgid "Caps lock off"
-msgstr "Verrouillage des majuscules désactivé"
+msgstr "Verr maj désactivé"
 
-msgid "Show notifications"
-msgstr "Afficher les notifications"
+#. applet.js:247
+msgid "Scr lock on"
+msgstr "Arrêt défil activé"
 
-msgid "Show caps lock indicator"
-msgstr "Afficher l'indicateur de verrouillage des majuscules"
+#. applet.js:249
+msgid "Scr lock off"
+msgstr "Arrêt défil désactivé"
 
+#. metadata.json->description
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification "
+"when these change."
+msgstr ""
+"Indique si le verrouillage des majuscules / le verrouillage numérique / le "
+"verrouillage des scr est activé et affiche une notification lorsque ceux-ci "
+"changent."
+
+#. metadata.json->name
+msgid "Lock keys indicator with notifications"
+msgstr "Indicateur de touches de verrouillage avec notifications"
+
+#. settings-schema.json->section1->description
+msgid "Indicators"
+msgstr "Indicateurs"
+
+#. settings-schema.json->show-num-lock-indicator->description
 msgid "Show num lock indicator"
 msgstr "Afficher l'indicateur de verrouillage numérique"
 
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr "Afficher l'indicateur de verrouillage des majuscules"
+
+#. settings-schema.json->show-scr-lock-indicator->description
 msgid "Show scr lock indicator"
-msgstr "Afficher l'indicateur de verrouillage du scr"
+msgstr "Afficher l'indicateur de verrouillage d'écran"
 
-msgid ""
-"Shows whether caps lock/num lock/scr lock is on, and displays a notification when "
-"these change."
-msgstr ""
-"Indique si le verrouillage des majuscules / le verrouillage numérique / le "
-"verrouillage des scr est activé et affiche une notification lorsque ceux-ci changent."
+#. settings-schema.json->hide-inactive-indicators->description
+msgid "Hide inactive indicators"
+msgstr "Masquer les indicateurs inactifs"
 
-msgid "Lock keys indicator with notifications"
-msgstr "Indicateur de touches de verrouillage avec notifications"
+#. settings-schema.json->toggle-on-click->description
+msgid "Toggle state when clicked"
+msgstr "Changer l'état en cliquant sur l'indicateur"
+
+#. settings-schema.json->section2->description
+msgid "Notifications"
+msgstr "Notifications"
+
+#. settings-schema.json->show-osd-notifications->description
+msgid "Show OSD notifications"
+msgstr "Afficher les notifications OSD"
+
+#. settings-schema.json->show-toast-notifications->description
+msgid "Show toast notifications"
+msgstr "Afficher les notifications d'application"
+
+#. settings-schema.json->show-silent-notifications->description
+msgid "Silence system notification sound"
+msgstr "Désactiver les notifications sonores du système"

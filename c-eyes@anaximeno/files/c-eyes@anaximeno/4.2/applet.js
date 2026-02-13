@@ -17,6 +17,8 @@
  */
 'use strict';
 
+// NOTE: this is frozen on the 1.15.x versions, and might only receive patch updates
+
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 const Applet = imports.ui.applet;
@@ -50,6 +52,12 @@ function _(text) {
 	return locText;
 }
 
+const UPDATE_CHANGE_MSG = _(
+	"📢 The click effects will be removed from this applet on the version 6.2 of Cinnamon\n" +
+	"and moved to a new extension named mouse-click-effects which can already be installed\n" +
+	"on the Cinnamon Extensions settings module for versions of Cinnamon >= 5.4"
+);
+
 class Eye extends Applet.Applet {
 	_get_icon_cached(dir, mode, click_type, color) {
 		let key = `${dir}${mode}${click_type}${color}`;
@@ -82,7 +90,7 @@ class Eye extends Applet.Applet {
 			{
 				key: "eye-repaint-interval",
 				value: "eye_repaint_interval",
-				cb: settingsDebouncer.debounce((e) => this.set_active(true), 400),
+				cb: settingsDebouncer.debounce((e) => this.set_active(true), 300),
 			},
 			{
 				key: "eye-repaint-angle",
@@ -92,7 +100,7 @@ class Eye extends Applet.Applet {
 			{
 				key: "fade-timeout",
 				value: "fade_timeout",
-				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 400),
+				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 300),
 			},
 			{
 				key: "eye-mode",
@@ -107,12 +115,12 @@ class Eye extends Applet.Applet {
 			{
 				key: "eye-line-width",
 				value: "eye_line_width",
-				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 400),
+				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 300),
 			},
 			{
 				key: "eye-margin",
 				value: "eye_margin",
-				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 400),
+				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 300),
 			},
 			{
 				key: "eye-clicked-color",
@@ -142,7 +150,7 @@ class Eye extends Applet.Applet {
 			{
 				key: "mouse-click-image-size",
 				value: "mouse_click_image_size",
-				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 400),
+				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 300),
 			},
 			{
 				key: "mouse-click-enable",
@@ -182,7 +190,7 @@ class Eye extends Applet.Applet {
 			{
 				key: "mouse-click-opacity",
 				value: "mouse_click_opacity",
-				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 400),
+				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 300),
 			},
 			{
 				key: "click-animation-mode",
@@ -197,19 +205,19 @@ class Eye extends Applet.Applet {
 			{
 				key: "deactivate-on-fullscreen",
 				value: "deactivate_on_fullscreen",
-				cb: null,
+				cb: this.on_fullscreen_changed.bind(this),
 			},
 			{
 				key: "eye-vertical-padding",
 				value: "eye_vertical_padding",
 				cb: settingsDebouncer.debounce(
 					(e) => this.on_property_updated(e,
-						{ eye_property_update: true, mouse_property_update: false })),
+						{ eye_property_update: true, mouse_property_update: false }), 300),
 			},
 			{
 				key: "deactivate-effects-on-fullscreen",
 				value: "deactivate_effects_on_fullscreen",
-				cb: null,
+				cb: this.on_fullscreen_changed.bind(this),
 			}
 		];
 
@@ -237,6 +245,13 @@ class Eye extends Applet.Applet {
 
 		this.signals = new SignalManager.SignalManager(null);
 		this.signals.connect(global.screen, 'in-fullscreen-changed', this.on_fullscreen_changed, this);
+		this.signals.connect(global.screen, 'workspace-switched', () => {
+			// If the eye is refreshed exactly during the workspace switch process it's possible that the position
+			// of the panel is not correctly accessed, so the position of the eye cannot be estimated correctly,
+			// resulting in the eye looking at the wrong direction, to avoid that we will give it some timeout and
+			// wait first for the switch process to complete.
+			Util.setTimeout(() => this.on_property_updated(), 400);
+		}, this);
 
 		Atspi.init();
 
@@ -309,14 +324,16 @@ class Eye extends Applet.Applet {
 			panelIsInCurrentMonitor = Util.find(panelsInMonitor, (value, i, arr) => this.panel === value) != null;
 		}
 
-		const shouldHideEye = monitorIsInFullscreen && panelIsInCurrentMonitor;
-
-		if (this.deactivate_on_fullscreen) {
-			this.set_active(!shouldHideEye);
+		if (this.deactivate_on_fullscreen && panelIsInCurrentMonitor) {
+			this.set_active(!monitorIsInFullscreen);
+		} else {
+			this.set_active(true);
 		}
 
 		if (this.deactivate_effects_on_fullscreen) {
-			this.set_mouse_circle_active(!shouldHideEye && this.mouse_click_show);
+			this.set_mouse_circle_active(!monitorIsInFullscreen && this.mouse_click_show);
+		} else {
+			this.set_mouse_circle_active(this.mouse_click_show);
 		}
 	}
 
@@ -377,7 +394,7 @@ class Eye extends Applet.Applet {
 
 	update_tooltip() {
 		let tip = this.eye_activated ? _("click to deactivate the eye") : _("click to activate the eye");
-		this.set_applet_tooltip(`${_('TIP')}: ` + tip, true);
+		this.set_applet_tooltip(`${_('TIP')}: ` + tip + "\n" + UPDATE_CHANGE_MSG, true);
 	}
 
 	_mouse_circle_create_data_icon(name, color, checkCache) {
@@ -442,11 +459,14 @@ class Eye extends Applet.Applet {
 
 	_eye_draw(area) {
 		const foreground_color = this.area.get_theme_node().get_foreground_color();
+		const [mouse_x, mouse_y, _] = global.get_pointer();
 		const [area_x, area_y] = this._eye_area_pos();
 
 		let options = {
 			area_x: area_x,
 			area_y: area_y,
+			mouse_x: mouse_x,
+			mouse_y: mouse_y,
 			eye_color: foreground_color,
 			iris_color: foreground_color,
 			pupil_color: foreground_color,

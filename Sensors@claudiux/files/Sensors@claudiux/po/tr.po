@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 1.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-31 10:36+0200\n"
+"POT-Creation-Date: 2025-03-30 14:17+0200\n"
 "PO-Revision-Date: 2021-01-04 11:39+0300\n"
 "Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
@@ -20,104 +20,110 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. metadata.json->name
-#: applet.js:101
+#. applet.js:225 applet_OLD.js:235
 msgid "Sensors Monitor"
 msgstr "Sensörler Monitörü"
 
-#: applet.js:268
+#. applet.js:465 applet_OLD.js:418
 msgid "Suspended"
 msgstr ""
 
-#: applet.js:484 applet.js:526
+#. applet.js:732 applet.js:773 applet_OLD.js:638 applet_OLD.js:682
 msgid "high:"
 msgstr "yüksek:"
 
-#: applet.js:484 applet.js:486 applet.js:526 applet.js:528 applet.js:569
+#. applet.js:732 applet.js:735 applet.js:773 applet.js:775 applet.js:816
+#. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
+#. applet_OLD.js:726
 msgid "n/a"
 msgstr "d/y"
 
-#: applet.js:486 applet.js:528
+#. applet.js:735 applet.js:775 applet_OLD.js:642 applet_OLD.js:684
 msgid "crit:"
 msgstr "kritik:"
 
-#: applet.js:569 applet.js:612
+#. applet.js:816 applet.js:860 applet_OLD.js:726 applet_OLD.js:770
 msgid "min:"
 msgstr "asg:"
 
-#: applet.js:614
+#. applet.js:862 applet_OLD.js:772
 msgid "max:"
 msgstr "azm:"
 
-#: applet.js:642
+#. applet.js:891 applet_OLD.js:801
 msgid "No intrusion detected"
 msgstr "İzinsiz giriş tespit edilmedi"
 
-#: applet.js:642
+#. applet.js:891 applet_OLD.js:801
 msgid "INTRUSION DETECTED!"
 msgstr "GİRİŞ TESPİT EDİLDİ!"
 
-#: applet.js:662
+#. applet.js:911 applet_OLD.js:821
 msgid "Must be configured!"
 msgstr "Yapılandırılmalıdır!"
 
-#: applet.js:925
+#. applet.js:1275 applet_OLD.js:1208
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: applet.js:925
+#. applet.js:1275 applet_OLD.js:1208
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#: applet.js:932
+#. applet.js:1282 applet_OLD.js:1215
 msgid "⚙ General"
 msgstr "⚙ Genel"
 
-#: applet.js:942
-msgid "🌡 Temperature sensors"
-msgstr "🌡 Sıcaklık sensörleri"
+#. applet.js:1298 applet_OLD.js:1231
+#, fuzzy, javascript-format
+msgid "%s Temperature sensors"
+msgstr "Sıcaklık sensörleri"
 
-#: applet.js:952
-msgid "🤂 Fan sensors"
-msgstr "🤂 Fan sensörleri"
+#. applet.js:1314 applet_OLD.js:1247
+#, fuzzy, javascript-format
+msgid "%s Fan sensors"
+msgstr "Fan sensörleri"
 
-#: applet.js:962
-msgid "🗲 Voltage sensors"
-msgstr "🗲 Voltaj sensörleri"
+#. applet.js:1330 applet_OLD.js:1263
+#, fuzzy, javascript-format
+msgid "%s Voltage sensors"
+msgstr "Voltaj sensörleri"
 
-#: applet.js:972
-msgid "⮿ Intrusion sensors"
-msgstr "⮿ İzinsiz giriş sensörleri"
+#. applet.js:1346 applet_OLD.js:1279
+#, fuzzy, javascript-format
+msgid "%s Intrusion sensors"
+msgstr "İzinsiz giriş sensörleri"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:983
+#. applet.js:1365 applet_OLD.js:1306
 msgid "Run xsensors"
 msgstr "Xsensorleri çalıştır"
 
-#: applet.js:992
+#. applet.js:1374 applet_OLD.js:1315
 #, fuzzy
 msgid "Suspend Sensors"
 msgstr "Xsensorleri çalıştır"
 
-#: applet.js:1003
+#. applet.js:1385 applet_OLD.js:1326
 msgid "Reload this applet"
 msgstr "Bu uygulamayı yeniden yükleyin"
 
-#: applet.js:1295
+#. applet.js:1707 applet_OLD.js:1656
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "'%s'yi kaldırmak istediğinizden emin misiniz?"
 
-#: lib/checkDependencies.js:317
+#. lib/checkDependencies.js:353
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "%s uygulaması tamamen işlevseldir."
 
-#: lib/checkDependencies.js:318
+#. lib/checkDependencies.js:354
 msgid "All dependencies are installed"
 msgstr "Tüm bağımlılıklar yüklü"
 
-#: lib/checkDependencies.js:346
+#. lib/checkDependencies.js:383
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -125,63 +131,67 @@ msgstr ""
 "Bu uygulamanın tüm özelliklerine sahip olması için gereken programlardan "
 "bazılarını kaçırıyorsunuz."
 
-#: lib/checkDependencies.js:347
-msgid "Please execute, in the just opened terminal, the commands:"
-msgstr "Lütfen yeni açılan terminalde komutları yürütün:"
+#. lib/checkDependencies.js:385
+msgid "Please install these packages:"
+msgstr ""
 
-#: lib/checkDependencies.js:348
+#. lib/checkDependencies.js:389 lib/checkDependencies.js:399
 msgid "Some dependencies are not installed!"
 msgstr "Bazı bağımlılıklar kurulu değil!"
 
-#: lib/util.js:244
+#. lib/checkDependencies.js:401
+msgid "Install these packages now"
+msgstr ""
+
+#. lib/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr ""
 
-#: scripts/xs.py:206
+#. scripts/xs.py:206
 msgid "Previous instance"
 msgstr ""
 
-#: scripts/xs.py:210
+#. scripts/xs.py:210
 msgid "Next instance"
 msgstr ""
 
-#: scripts/xs.py:219
+#. scripts/xs.py:219
 #, fuzzy
 msgid "More options"
 msgstr "Seçenekler"
 
-#: scripts/xs.py:225
+#. scripts/xs.py:225
 msgid "Import from a file"
 msgstr ""
 
-#: scripts/xs.py:230
+#. scripts/xs.py:230
 msgid "Export to a file"
 msgstr ""
 
-#: scripts/xs.py:235
+#. scripts/xs.py:235
 msgid "Reset to defaults"
 msgstr ""
 
-#: scripts/xs.py:244
+#. scripts/xs.py:244
 #, python-format
 msgid "Reload %s"
 msgstr ""
 
-#: scripts/xs.py:425
+#. scripts/xs.py:425
 #, fuzzy, python-format
 msgid "Settings for %s"
 msgstr "Ayarlar"
 
-#: scripts/xs.py:517
+#. scripts/xs.py:517
 msgid "Select or enter file to export to"
 msgstr ""
 
-#: scripts/xs.py:525 scripts/xs.py:546
+#. scripts/xs.py:525 scripts/xs.py:546
 msgid "JSON files"
 msgstr ""
 
-#: scripts/xs.py:539
+#. scripts/xs.py:539
 msgid "Select a JSON file to import"
 msgstr ""
 
@@ -196,12 +206,18 @@ msgstr ""
 "sınırına ulaştığında veya sınırını aştığında renk değişiklikleri konusunda "
 "sizi bilgilendirir."
 
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr ""
+
 #. settings-schema.json->page_Temperatures->title
-msgid "🌡 Temperature"
+#, fuzzy
+msgid "⦿ Temperature"
 msgstr "🌡Sıcaklık"
 
 #. settings-schema.json->page_Fans->title
-msgid "🤂 Fan"
+#, fuzzy
+msgid "𖣘 Fan"
 msgstr "🤂 Fan"
 
 #. settings-schema.json->page_Voltages->title
@@ -211,6 +227,10 @@ msgstr "🗲 Voltaj"
 #. settings-schema.json->page_Intrusion->title
 msgid "⮿ Intrusion"
 msgstr "⮿ İzinsiz giriş"
+
+#. settings-schema.json->page_Custom->title
+msgid "⛓ Custom"
+msgstr ""
 
 #. settings-schema.json->section_Display->title
 #. settings-schema.json->section_tempOptions->title
@@ -240,6 +260,7 @@ msgstr ""
 #. settings-schema.json->section_fanDisplay->title
 #. settings-schema.json->section_voltDisplay->title
 #. settings-schema.json->section_intrusionDisplay->title
+#. settings-schema.json->section_customDisplay->title
 msgid "Display"
 msgstr "Görüntüle"
 
@@ -262,6 +283,15 @@ msgstr "Voltaj sensörleri"
 
 #. settings-schema.json->section_intrusionSensors->title
 msgid "Intrusion sensors"
+msgstr "İzinsiz giriş sensörleri"
+
+#. settings-schema.json->section_customDisclaimer->title
+msgid "Disclaimer"
+msgstr ""
+
+#. settings-schema.json->section_customSensors->title
+#, fuzzy
+msgid "Custom sensors"
 msgstr "İzinsiz giriş sensörleri"
 
 #. settings-schema.json->interval->options
@@ -379,6 +409,30 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Karakter boyutu (standart boyutun % 'si)"
 
+#. settings-schema.json->horizontal_width->description
+msgid "Display width (pixels) for horizontal panels"
+msgstr ""
+
+#. settings-schema.json->horizontal_width->tooltip
+msgid "0 means automatic. This value does not include border."
+msgstr ""
+
+#. settings-schema.json->separator_type->options
+msgid "(none)"
+msgstr ""
+
+#. settings-schema.json->separator_type->options
+msgid "blank"
+msgstr ""
+
+#. settings-schema.json->separator_type->options
+msgid "bar"
+msgstr ""
+
+#. settings-schema.json->separator_type->description
+msgid "Separator"
+msgstr ""
+
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
 msgstr ""
@@ -387,13 +441,12 @@ msgstr ""
 msgid "Text Color"
 msgstr ""
 
-#. settings-schema.json->separator->description
-msgid "Separator"
+#. settings-schema.json->crit_color->description
+msgid "Critical Value Color"
 msgstr ""
 
-#. settings-schema.json->separator->tooltip
-msgid ""
-"The string used to separate values in horizontal orientation. Default is '│'."
+#. settings-schema.json->high_color->description
+msgid "High Value Color"
 msgstr ""
 
 #. settings-schema.json->remove_border->description
@@ -454,6 +507,7 @@ msgstr ""
 #. settings-schema.json->show_fan->description
 #. settings-schema.json->show_volt->description
 #. settings-schema.json->show_intrusion->description
+#. settings-schema.json->show_custom->description
 msgid "Display the values of these selected sensors"
 msgstr "Bu seçili sensörlerin değerlerini görüntüleyin"
 
@@ -461,6 +515,7 @@ msgstr "Bu seçili sensörlerin değerlerini görüntüleyin"
 #. settings-schema.json->show_fan->tooltip
 #. settings-schema.json->show_volt->tooltip
 #. settings-schema.json->show_intrusion->tooltip
+#. settings-schema.json->show_custom->tooltip
 msgid ""
 "Whether or not to display the values of the sensors selected in the list "
 "below."
@@ -472,6 +527,7 @@ msgstr ""
 #. settings-schema.json->show_fan_name->description
 #. settings-schema.json->show_volt_name->description
 #. settings-schema.json->show_intrusion_name->description
+#. settings-schema.json->show_custom_name->description
 #, fuzzy
 msgid "Display the 'Shown name' of each of these selected sensors"
 msgstr "Bu seçili sensörlerin değerlerini görüntüleyin"
@@ -487,8 +543,18 @@ msgstr ""
 "Aşağıdaki listede seçilen sensörlerin değerlerinin gösterilip "
 "gösterilmeyeceği."
 
+#. settings-schema.json->chars_temp->tooltip
+msgid "The first emoji in this list is used for temperature"
+msgstr ""
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr ""
+
 #. settings-schema.json->strictly_positive_temp->description
-#. settings-schema.json->strictly_positive_fan->description
 #. settings-schema.json->strictly_positive_volt->description
 msgid "Show only strictly positive values"
 msgstr "Yalnızca kesinlikle pozitif değerleri göster"
@@ -537,6 +603,16 @@ msgstr ""
 "Dikey panelde °C veya °F sıcaklık değeriyle aynı satırda gösterilip "
 "gösterilmeyeceği."
 
+#. settings-schema.json->journalize_temp->description
+msgid "Log high and critical temperatures"
+msgstr ""
+
+#. settings-schema.json->journalize_temp->tooltip
+msgid ""
+"When this option is checked, temperatures exceeding the high or critical "
+"limit are recorded in the system journal."
+msgstr ""
+
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description
 #. settings-schema.json->btn_renew_volt_sensors_list->description
@@ -561,6 +637,7 @@ msgstr ""
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
 msgid ""
 "Show\n"
 "in panel"
@@ -573,6 +650,7 @@ msgstr ""
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
 msgid ""
 "Show\n"
 "in tooltip"
@@ -603,6 +681,7 @@ msgstr ""
 #. settings-schema.json->temp_disks->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
 msgid "Formula"
 msgstr ""
 
@@ -643,9 +722,28 @@ msgid ""
 "High and Critical values: Cf. technical manual of your disk."
 msgstr ""
 
+#. settings-schema.json->chars_fan->tooltip
+msgid "The first emoji in this list is used for fan"
+msgstr ""
+
+#. settings-schema.json->strictly_positive_fan->description
+#, fuzzy
+msgid "Show only positive or zero values"
+msgstr "Yalnızca kesinlikle pozitif değerleri göster"
+
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
 msgstr "\"Dakikadaki devir sayısı\" nın kısaltması"
+
+#. settings-schema.json->journalize_fan->description
+msgid "Log critical fan speeds"
+msgstr ""
+
+#. settings-schema.json->journalize_fan->tooltip
+msgid ""
+"When this option is checked, fan speeds below the critical limit are "
+"recorded in the system log."
+msgstr ""
 
 #. settings-schema.json->fan_sensors->columns->title
 msgid ""
@@ -664,6 +762,10 @@ msgid ""
 "  Example: $*1.1+0.5"
 msgstr ""
 
+#. settings-schema.json->chars_volt->tooltip
+msgid "The first emoji in this list is used for voltage"
+msgstr ""
+
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
 msgstr "Voltaj birimi"
@@ -679,6 +781,16 @@ msgstr "sadece V"
 #. settings-schema.json->volt_unit->options
 msgid "mV only"
 msgstr "sadece mV"
+
+#. settings-schema.json->journalize_volt->description
+msgid "Log critical voltages"
+msgstr ""
+
+#. settings-schema.json->journalize_volt->tooltip
+msgid ""
+"When this option is checked, voltages below the minimum limit or above the "
+"maximum limit are recorded in the system log."
+msgstr ""
 
 #. settings-schema.json->volt_sensors->columns->title
 msgid ""
@@ -704,6 +816,7 @@ msgid ""
 msgstr ""
 
 #. settings-schema.json->show_intrusion_name->tooltip
+#. settings-schema.json->show_custom_name->tooltip
 #, fuzzy
 msgid ""
 " Whether or not to display into this applet label the 'Shown name' of the "
@@ -712,9 +825,22 @@ msgstr ""
 "Aşağıdaki listede seçilen sensörlerin değerlerinin gösterilip "
 "gösterilmeyeceği."
 
+#. settings-schema.json->chars_intrusion->tooltip
+msgid "The first emoji in this list is used for intrusion"
+msgstr ""
+
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"
 msgstr "Panelde yalnızca bir saldırı algılandığında göster"
+
+#. settings-schema.json->journalize_intrusion->description
+#, fuzzy
+msgid "Log intrusions"
+msgstr "⮿ İzinsiz giriş"
+
+#. settings-schema.json->journalize_intrusion->tooltip
+msgid "When this option is checked, intrusions are recorded in the system log."
+msgstr ""
 
 #. settings-schema.json->intrusion_sensors->tooltip
 msgid ""
@@ -724,8 +850,50 @@ msgstr ""
 "Gösterilen adı değiştirmek için bir çizgiye çift tıklayın.\n"
 "Gösterilen bir adı sıfırlamak için Sensör adını kopyalayıp/yapıştırın."
 
+#. settings-schema.json->custom_disclaimer->description
+msgid ""
+"These settings are for advanced users only!\n"
+"Please refer to the README file."
+msgstr ""
+
+#. settings-schema.json->custom_openREADME->description
+msgid "Open the README file"
+msgstr ""
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Type"
+msgstr ""
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"File to\n"
+"monitor"
+msgstr ""
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"High\n"
+"value"
+msgstr ""
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"Critical\n"
+"value"
+msgstr ""
+
+#. settings-schema.json->custom_sensors->tooltip
+msgid ""
+"Add a line by custom sensor to set the type, the name and the path of the "
+"file to monitor (/sys/class/...)."
+msgstr ""
+
 #. settings-schema.json->report->description
-#: scripts/show_sensor_values.sh:5
+#. scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr "Bu bilgisayardan alınan sensör değerleri örneği"
 

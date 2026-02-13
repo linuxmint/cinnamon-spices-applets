@@ -1,11 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ### Removes cover art files.
 
 rm -f /tmp/*.mediaplayer-cover
 #~ rm -f /tmp/audacious-temp-*
 
-ARTDIR="$HOME/.config/sound150/arts"
+ARTDIR="$XDG_RUNTIME_DIR/sound150/arts"
 [[ -d $ARTDIR ]] && rm -f $ARTDIR/*
+[[ -f "$XDG_RUNTIME_DIR/sound150/Title" ]] && rm -f "$XDG_RUNTIME_DIR/sound150/Title"
+ICONDIR="$XDG_RUNTIME_DIR/sound150/icons"
+[[ -d $ICONDIR ]] && rm -f $ICONDIR/*
+
 
 SCRIPTSPWD=$(pwd)
 VLCARTDIR="$HOME/.cache/vlc/art/arturl"

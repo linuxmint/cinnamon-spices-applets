@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-02 12:45+0100\n"
+"PO-Revision-Date: 2024-07-13 03:52+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:165
+msgid "Clear"
+msgstr "Netejar"
+
+#: applet.js:221
+msgid "Office"
+msgstr "Oficina"
+
+#: applet.js:301
+msgid "LAUNCHERS"
+msgstr "LLANÇADORS"
+
+#: applet.js:317
+msgid "DOCUMENTS"
+msgstr "DOCUMENTS"
+
+#: applet.js:328
+msgid "Open folder"
+msgstr "Obrir carpeta"
+
+#: applet.js:354
+msgid "RECENT DOCUMENTS"
+msgstr "DOCUMENTS RECENTS"
+
+#. officeCenter@scollins->settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Icona del tauler"
+
+#. officeCenter@scollins->settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr ""
+"Accepta un nom d'icona o una ruta al fitxer (suporta icones simbòliques)"
+
+#. officeCenter@scollins->settings-schema.json->documents->description
+msgid "Documents"
+msgstr "Documents"
+
+#. officeCenter@scollins->settings-schema.json->docMax->description
+msgid "Limit number of documents shown to"
+msgstr "Limitar el número de documents mostrats a"
+
+#. officeCenter@scollins->settings-schema.json->keyOpen->description
+msgid "Menu shorcut key"
+msgstr "Drecera del menú"
+
+#. officeCenter@scollins->settings-schema.json->iconSize->description
+msgid "Icon size"
+msgstr "Mida de la icona"
+
+#. officeCenter@scollins->settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. officeCenter@scollins->settings-schema.json->recurseDocuments->description
+msgid "Include subfolders"
+msgstr "Incloure subdirectoris"
+
+#. officeCenter@scollins->settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Número a mostrar"
+
+#. officeCenter@scollins->settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Opcions generals"
+
+#. officeCenter@scollins->settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Text del tauler"
+
+#. officeCenter@scollins->settings-schema.json->altDir->description
+msgid "Use alternate directory"
+msgstr "Utilitzar un directori alternatiu"
+
+#. officeCenter@scollins->settings-
+#. schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Mostrar els documents recents"
+
+#. officeCenter@scollins->settings-schema.json->showDocuments->description
+msgid "Show contents of documents folder"
+msgstr "Mostrar el contingut de la carpeta de documents"
+
+#. officeCenter@scollins->settings-schema.json->recent->description
+msgid "Recent Documents"
+msgstr "Documents recents"
+
+#. officeCenter@scollins->metadata.json->description
+msgid "Provides an easy and fast resource for all your office needs"
+msgstr ""
+"Proveeix recursos fàcils i ràpids per totes les vostres necessitats d'oficina"
+
+#. officeCenter@scollins->metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Autor - Stephen Collins"
+
+#. officeCenter@scollins->metadata.json->comments
+msgid ""
+"Office Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy aceess to all of your office programs and documents. Feel free "
+"to contribute by submitting pull requests, bug reports and feature requests "
+"to my github repo."
+msgstr ""
+"El Centre d'Oficina és una miniaplicació rica en funcionalitat i "
+"multiplataforma en entorns Cinnamon que proveeix accés a tots els vostres "
+"documents i programes d'oficina. Podeu contribuir-hi via pull requests, "
+"incidències o sol·licituds de funcionalitats a través del meu directori de "
+"Github."
+
+#. officeCenter@scollins->metadata.json->name
+msgid "Office Center"
+msgstr "Centre d'Oficina"

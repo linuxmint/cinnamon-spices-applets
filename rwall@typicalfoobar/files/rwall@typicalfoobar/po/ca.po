@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-28 19:32+0800\n"
+"PO-Revision-Date: 2024-07-11 04:04+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:89
+msgid "Use Cron"
+msgstr "Utilitzar Cron"
+
+#: applet.js:94
+msgid "Next Wallpaper"
+msgstr "Següent fons de pantalla"
+
+#: applet.js:99
+msgid "Save Wallpaper"
+msgstr "Guardar fons de pantalla"
+
+#. rwall@typicalfoobar->metadata.json->description
+msgid ""
+"Random Wallpaper Changer\n"
+"Version: 1.0.1"
+msgstr ""
+"Canviador de fons de pantalla aleatori\n"
+"Versió: 1.0.1"
+
+#. rwall@typicalfoobar->metadata.json->name
+msgid "rwall"
+msgstr "rwall"
+
+#. rwall@typicalfoobar->settings-schema.json->head2->description
+msgid "Random Wallpaper Settings"
+msgstr "Opcions de fons de pantalla aleatori"
+
+#. rwall@typicalfoobar->settings-schema.json->head1->description
+msgid "Wallpaper Saving"
+msgstr "Emmagatzematge de fons de pantalla"
+
+#. rwall@typicalfoobar->settings-schema.json->resolution-string->description
+msgid "The resolution of the wallpaper:"
+msgstr "Resolució del fons de pantalla:"
+
+#. rwall@typicalfoobar->settings-schema.json->query-string->description
+msgid "Word(s) to use when searching for wallpapers:"
+msgstr "Paraula(es) a utilitzar quan es busquin fons de pantalla:"
+
+#. rwall@typicalfoobar->settings-schema.json->wallpaper-save-
+#. directory->description
+msgid ""
+"The location to save wallpapers to when the \"Save Wallpaper\" button is "
+"clicked:"
+msgstr ""
+"El directori on es guardaran el fons de pantalla en clicar el botó "
+"\"Guardar fons de pantalla\":"
+
+#. rwall@typicalfoobar->settings-schema.json->cron-frequency-
+#. string->description
+msgid "Change Frequency (cron syntax):"
+msgstr "Canviar la freqüència (sintaxi de cron):"
+
+#. rwall@typicalfoobar->settings-schema.json->update-cron-button->description
+msgid "Update Cron (click here if you modified the Change Frequency)"
+msgstr "Actualitzar Cron (cliqueu aquí si heu modificat la freqüència)"
+
+#. rwall@typicalfoobar->settings-schema.json->update-cron-button->tooltip
+msgid "Update the cron job with these settings"
+msgstr "Actualitza la tasca cron amb aquests paràmetres"

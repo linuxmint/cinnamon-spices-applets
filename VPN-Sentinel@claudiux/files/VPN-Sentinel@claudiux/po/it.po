@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-30 21:56+0200\n"
-"PO-Revision-Date: 2023-10-30 13:29+0100\n"
+"POT-Creation-Date: 2024-02-03 15:53+0100\n"
+"PO-Revision-Date: 2024-06-18 15:10+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -23,15 +23,15 @@ msgstr ""
 msgid "VPN Sentinel"
 msgstr "VPN Sentinel"
 
-#: applet.js:68
+#: applet.js:71
 msgid "Timestamp"
 msgstr "Timestamp"
 
-#: applet.js:69
+#: applet.js:72
 msgid "Date and Time"
 msgstr "Data e ora"
 
-#: applet.js:70
+#: applet.js:73
 msgid "Message"
 msgstr "Messaggio"
 
@@ -64,95 +64,95 @@ msgstr "%s è stato appena avviato."
 msgid "%s has just been stopped."
 msgstr "%s è stato appena arrestato."
 
-#: applet.js:667
+#: applet.js:668
 #, javascript-format
 msgid "%s stopped because the VPN link is idle."
 msgstr "%s arrestato perché il collegamento VPN è inattivo."
 
-#: applet.js:759
+#: applet.js:760
 #, javascript-format
 msgid "Connection lost. Attempt to reconnect to: %s"
 msgstr "Connessione persa. Tentativo di riconnessione a: %s"
 
-#: applet.js:769
+#: applet.js:770
 msgid "Connection to: "
 msgstr "Connessione a: "
 
-#: applet.js:776
+#: applet.js:777
 msgid "Connected to: "
 msgstr "Connesso a: "
 
-#: applet.js:790
+#: applet.js:791
 msgid "Disconnected from: "
 msgstr "Disconnesso da: "
 
-#: applet.js:808
+#: applet.js:809
 msgid "Switching to: "
 msgstr "Passa a: "
 
-#: applet.js:865 applet.js:890 applet.js:949 applet.js:963
+#: applet.js:866 applet.js:891 applet.js:950 applet.js:964
 msgid "(None)"
 msgstr "(Nessuno)"
 
-#: applet.js:1058
+#: applet.js:1059
 msgid "ENABLED"
 msgstr "ATTIVATO"
 
-#: applet.js:1058
+#: applet.js:1059
 msgid "DISABLED"
 msgstr "DISATTIVATO"
 
-#: applet.js:1058
+#: applet.js:1059
 msgid "TRANSIENT"
 msgstr "TRANSITORIO"
 
-#: applet.js:1076
+#: applet.js:1077
 msgid "Other active VPN links (select to disable):"
 msgstr "Altri collegamenti VPN attivi (selezionare per disabilitare):"
 
-#: applet.js:1093
+#: applet.js:1094
 msgid "Connections"
 msgstr "Connessioni"
 
-#: applet.js:1119
+#: applet.js:1120
 msgid "Connect to VPN as soon as this applet starts."
 msgstr "Connettiti alla VPN non appena viene avviata l'applet."
 
 #. settings-schema.json->reconnect->description
-#: applet.js:1127
+#: applet.js:1128
 msgid "Try to reconnect to VPN when it shuts down incidentally."
 msgstr "Prova a riconnetterti alla VPN quando si spegne per inciso."
 
-#: applet.js:1136
+#: applet.js:1137
 msgid "VPN Policy"
 msgstr "Politica VPN"
 
 #. settings-schema.json->InternetPolicy->title
-#: applet.js:1143
+#: applet.js:1144
 msgid "Internet Apps Manager"
 msgstr "Gestore delle App Internet"
 
-#: applet.js:1151
+#: applet.js:1152
 msgid "Open Activity Logs"
 msgstr "Apri i Registri delle Attività"
 
-#: applet.js:1160
+#: applet.js:1161
 msgid "Reload Country Flag"
 msgstr "Ricarica Bandiera Nazionale"
 
-#: applet.js:1162
+#: applet.js:1163
 msgid "Confirm this Country Flag"
 msgstr "Conferma questa Bandiera Nazionale"
 
-#: applet.js:1178
+#: applet.js:1179
 msgid "Network Settings"
 msgstr "Impostazioni di rete"
 
-#: applet.js:1182
+#: applet.js:1183
 msgid "Network Connections"
 msgstr "Connessioni di rete"
 
-#: applet.js:1201
+#: applet.js:1202
 #, javascript-format
 msgid ""
 "VPN: %s\n"
@@ -163,7 +163,7 @@ msgstr ""
 " Dispositivo: %s\n"
 " Da: %s"
 
-#: applet.js:1207
+#: applet.js:1208
 #, javascript-format
 msgid ""
 "WIREGUARD: %s\n"
@@ -174,59 +174,59 @@ msgstr ""
 " Dispositivo: %s\n"
 " Da: %s"
 
-#: applet.js:1214
+#: applet.js:1215
 msgid "Disconnected"
 msgstr "Disconnesso"
 
-#: applet.js:1216
+#: applet.js:1217
 msgid "Transient"
 msgstr "Transitorio"
 
-#: applet.js:1218
+#: applet.js:1219
 msgid "Deactivated"
 msgstr "Disattivato"
 
-#: applet.js:1348
+#: applet.js:1349
 msgid "VPN-Sentinel re-loading requested."
 msgstr "Ricaricamento di VPN-Sentinel richiesto."
 
-#: applet.js:1361
+#: applet.js:1362
 msgid "VPN-Sentinel was stopped."
 msgstr "VPN-Sentinel è stata fermata."
 
-#: applet.js:1365
+#: applet.js:1366
 #, javascript-format
 msgid "Still connected to VPN: %s"
 msgstr "Ancora connesso alla VPN: %s"
 
-#: applet.js:1367
+#: applet.js:1368
 #, javascript-format
 msgid "Still connected to WIREGUARD: %s"
 msgstr "Ancora connesso al WIREGUARD: %s"
 
-#: applet.js:1369
+#: applet.js:1370
 #, javascript-format
 msgid "Still connected to: %s"
 msgstr "Ancora connesso a: %s"
 
-#: applet.js:1372
+#: applet.js:1373
 msgid "No VPN/WIREGUARD link."
 msgstr "Nessun collegamento VPN/WIREGUARD."
 
-#: applet.js:1374
+#: applet.js:1375
 msgid "VPN/WIREGUARD Status: Transient."
 msgstr "Stato VPN/WIREGUARD: Transitorio."
 
-#: lib/checkDependencies.js:267
+#: lib/checkDependencies.js:292
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "L'applet %s è totalmente funzionante."
 
-#: lib/checkDependencies.js:268
+#: lib/checkDependencies.js:293
 msgid "All dependencies are installed"
 msgstr "Tutte le dipendenze sono installate"
 
-#: lib/checkDependencies.js:293
+#: lib/checkDependencies.js:321
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -234,13 +234,18 @@ msgstr ""
 "Sembra che manchino alcuni dei programmi necessari affinché questa applet "
 "abbia tutte le sue funzionalità."
 
-#: lib/checkDependencies.js:294
+#: lib/checkDependencies.js:322
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Si prega di eseguire, nel terminale appena aperto, i comandi:"
 
-#: lib/checkDependencies.js:295
+#: lib/checkDependencies.js:323
 msgid "Some dependencies are not installed!"
 msgstr "Alcune dipendenze non sono installate!"
+
+#: lib/util.js:245
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr "Esecuzione di '%s' fallita:"
 
 #. metadata.json->description
 msgid ""
@@ -330,6 +335,10 @@ msgstr "Nessuna bandiera, ma lascia il suo posto"
 #. settings-schema.json->labelWhenVPNisOff->options
 msgid "Show my Country's Flag"
 msgstr "Mostra la Bandiera del mio Paese"
+
+#. settings-schema.json->labelWhenVPNisOff->tooltip
+msgid "(While VPN is OFF or in TRANSIENT mode)"
+msgstr "(Mentre la VPN è disattivata o in modalità TRANSIENTE)"
 
 #. settings-schema.json->useSoundAlert->description
 msgid "Emit an audible alert when VPN shuts down incidentally"

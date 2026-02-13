@@ -26,7 +26,7 @@ export function downloadWithYtDlp(
     }
 
     if (stdout) {
-      onSuccess();
+      onSuccess(downloadCommand);
       return;
     }
 
