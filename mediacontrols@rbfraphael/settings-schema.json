@@ -1,0 +1,35 @@
+{
+    "section1": {
+        "type": "section",
+        "description": "Options"
+    },
+
+    "showTrackInfo": {
+        "type": "combobox",
+        "default": "song_artist",
+        "options": {
+            "Song Name and Artist": "song_artist",
+            "Song Name Only": "song",
+            "App Name": "app_name",
+            "None": "none"
+        },
+        "description": "Information to show on the panel"
+    },
+
+    "truncateText": {
+        "type": "switch",
+        "description": "Limit information length",
+        "default": false
+    },
+    
+    "truncateLength": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 5,
+        "max": 512,
+        "units": "characters",
+        "step": 1,
+        "description": "Character limit",
+        "dependency": "truncateText"
+    }
+}
