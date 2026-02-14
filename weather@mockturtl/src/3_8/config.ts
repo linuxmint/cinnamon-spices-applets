@@ -528,33 +528,16 @@ export class Config {
 	 * it looks up coordinates via geolocation api
 	 */
 	private async EnsureLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
-		// Automatic location
 		if (!this._manualLocation) {
-			if (this._geoclue) {
-				Logger.Info("Obtaining auto location via GeoClue2.");
-				const geoClue = await this.geoClue.GetLocation(cancellable);
-				if (geoClue != null) {
-					return geoClue;
-				}
-			}
-
-			Logger.Info("Obtaining auto location via IP lookup.");
-			const location = await this.LocationProvider.GetLocation(cancellable, this);
-			// User facing errors handled by provider
-			if (!location)
-				return null;
-
-			return location;
+			return await this.GetLocationAutomatically(cancellable);
 		}
-
-		// Manual Location
 
 		let loc = this._location;
 		if (loc == undefined || loc.trim() == "") {  // No location
 			return null;
 		}
 
-		// Find location in storage
+		// Find location in storage, returning as is and switching to it
 		let location = this.LocStore.FindLocation(this._location);
 		if (location != null) {
 			Logger.Debug("Manual Location exist in Saved Locations, retrieve.");
@@ -562,8 +545,9 @@ export class Config {
 			this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
 			return location;
 		}
-		// location not in storage
-		else if (IsCoordinate(loc)) {
+
+		// Location is a coordinate, construct return object
+		if (IsCoordinate(loc)) {
 			// Get Location
 			loc = loc.replace(" ", "");
 			const latLong = loc.split(",");
@@ -576,15 +560,20 @@ export class Config {
 			return location;
 		}
 
+		// Reverse geocoding, location is text
 		Logger.Debug("Location is text, geo locating...")
 		const locationData = await this.geoLocationService.GetLocation(loc, cancellable);
 		// User facing errors are handled by service
-		if (locationData == null) return null;
+		if (locationData == null) {
+			return null;
+		}
+
 		if (locationData?.entryText) {
 			Logger.Debug("Coordinates are found via Reverse address search");
 		}
 
-		// Maybe location is in locationStore, first search
+		// Reverse geocoding might give back a different entry text than what was entered,
+		// so we need to look that up in our store too.
 		location = this.LocStore.FindLocation(locationData.entryText);
 		if (location != null) {
 			Logger.Debug("Entered location was found in Saved Location, switch to it instead.");
@@ -594,6 +583,25 @@ export class Config {
 		else {
 			return locationData;
 		}
+	}
+
+	private async GetLocationAutomatically(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
+		if (this._geoclue) {
+			Logger.Info("Obtaining auto location via GeoClue2.");
+			const geoClue = await this.geoClue.GetLocation(cancellable);
+			if (geoClue != null) {
+				return geoClue;
+			}
+		}
+
+		Logger.Info("Obtaining auto location via IP lookup.");
+		const location = await this.LocationProvider.GetLocation(cancellable, this);
+		// User facing errors handled by provider
+		if (!location) {
+			return null;
+		}
+
+		return location;
 	}
 
 	/** Attaches settings to functions */

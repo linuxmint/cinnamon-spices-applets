@@ -18672,18 +18672,7 @@ class Config {
     }
     async EnsureLocation(cancellable) {
         if (!this._manualLocation) {
-            if (this._geoclue) {
-                logger_Logger.Info("Obtaining auto location via GeoClue2.");
-                const geoClue = await this.geoClue.GetLocation(cancellable);
-                if (geoClue != null) {
-                    return geoClue;
-                }
-            }
-            logger_Logger.Info("Obtaining auto location via IP lookup.");
-            const location = await this.LocationProvider.GetLocation(cancellable, this);
-            if (!location)
-                return null;
-            return location;
+            return await this.GetLocationAutomatically(cancellable);
         }
         let loc = this._location;
         if (loc == undefined || loc.trim() == "") {
@@ -18696,7 +18685,7 @@ class Config {
             this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
             return location;
         }
-        else if (IsCoordinate(loc)) {
+        if (IsCoordinate(loc)) {
             loc = loc.replace(" ", "");
             const latLong = loc.split(",");
             const location = {
@@ -18709,8 +18698,9 @@ class Config {
         }
         logger_Logger.Debug("Location is text, geo locating...");
         const locationData = await this.geoLocationService.GetLocation(loc, cancellable);
-        if (locationData == null)
+        if (locationData == null) {
             return null;
+        }
         if (locationData === null || locationData === void 0 ? void 0 : locationData.entryText) {
             logger_Logger.Debug("Coordinates are found via Reverse address search");
         }
@@ -18723,6 +18713,21 @@ class Config {
         else {
             return locationData;
         }
+    }
+    async GetLocationAutomatically(cancellable) {
+        if (this._geoclue) {
+            logger_Logger.Info("Obtaining auto location via GeoClue2.");
+            const geoClue = await this.geoClue.GetLocation(cancellable);
+            if (geoClue != null) {
+                return geoClue;
+            }
+        }
+        logger_Logger.Info("Obtaining auto location via IP lookup.");
+        const location = await this.LocationProvider.GetLocation(cancellable, this);
+        if (!location) {
+            return null;
+        }
+        return location;
     }
     BindSettings() {
         let key;
