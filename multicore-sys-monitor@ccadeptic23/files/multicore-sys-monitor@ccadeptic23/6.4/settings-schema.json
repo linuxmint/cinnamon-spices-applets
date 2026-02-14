@@ -77,6 +77,7 @@
         "removeEnlightenment",
         "labelsOn",
         "borderOn",
+        "borderRadius",
         "graphStep",
         "graphSpacing",
         "thickness",
@@ -297,6 +298,15 @@
     "type": "switch",
     "default": false,
     "description": "Add a border to each graph"
+  },
+  "borderRadius": {
+    "type": "scale",
+    "default": 0,
+    "min": 0,
+    "max": 25,
+    "step": 1,
+    "description": "Radius of curvature in corners",
+    "dependency": "borderOn"
   },
   "graphStep": {
     "type": "combobox",
