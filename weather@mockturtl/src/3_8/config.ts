@@ -30,6 +30,9 @@ import { soupLib } from "./lib/soupLib";
 import { GeoTimezone } from "./location_services/tz_lookup";
 import { SwissMeteo } from "./providers/swiss-meteo/provider";
 import { MetUk } from "./providers/met_uk/provider";
+import { IpApi } from "./location_services/geoip_services/ipApi";
+import { GeoJS } from "./location_services/geoip_services/geojs.io";
+import { GeoIPLookupIO } from "./location_services/geoip_services/geoiplookup.io";
 
 const { get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -72,6 +75,14 @@ export enum Services {
 	OpenMeteo = "OpenMeteo",
 	OpenWeatherMap_OneCall = "OpenWeatherMap_OneCall",
 	SwissMeteo = "Swiss Meteo"
+}
+
+export enum LocationProvider {
+	FedoraGeoIP = "fedora",
+	IpApi = "ipapi",
+	GeoJS = "geojs",
+	GeoIPLookup = "geoiplookup",
+	GeoClue2 = "geoclue2"
 }
 
 export const ServiceClassMapping = {
@@ -154,6 +165,7 @@ export class Config {
 	public readonly _logLevel!: LogLevel;
 	public readonly _selectedLogPath!: string;
 	public readonly _geoclue!: boolean;
+	public readonly _autoloc_provider!: LocationProvider;
 	/**
 	 * Panel text override
 	 */
@@ -214,6 +226,7 @@ export class Config {
 	public readonly TempTextOverrideChanged = new Event<Config, string>();
 	public readonly UV_IndexChanged = new Event<Config, boolean>();
 	public readonly GeoClueChanged = new Event<Config, boolean>();
+	public readonly AutoLocProviderChanged = new Event<Config, LocationProvider>();
 
 	public readonly FontChanged = new Event<Config, void>();
 	public readonly HotkeyChanged = new Event<Config, void>();
@@ -239,7 +252,34 @@ export class Config {
 			return TimeZone.new_local().get_identifier();
 	}
 
-	private readonly autoLocProvider: GeoIP;
+	private autoLocProvider: GeoIP | null = null;
+
+	private get LocationProvider(): GeoIP {
+		if (this.autoLocProvider && this.autoLocProvider.provider === this._autoloc_provider) {
+			return this.autoLocProvider;
+		}
+
+		let provider;
+		switch (this._autoloc_provider) {
+			// GeoClue shouldn't show up here, so we return the default instead
+			case LocationProvider.GeoClue2:
+			case LocationProvider.FedoraGeoIP:
+				provider = new GeoIPFedora();
+				break;
+			case LocationProvider.IpApi:
+				provider = new IpApi();
+				break;
+			case LocationProvider.GeoJS:
+				provider = new GeoJS();
+				break;
+			case LocationProvider.GeoIPLookup:
+				provider = new GeoIPLookupIO();
+				break;
+		}
+
+		this.autoLocProvider = provider;
+		return provider;
+	}
 	private readonly geoClue: GeoClue;
 	private readonly geoLocationService: GeoLocation;
 	private readonly tzService = new GeoTimezone();
@@ -498,8 +538,8 @@ export class Config {
 				}
 			}
 
-			Logger.Info("Obtaining auto location via IP lookup instead.");
-			const location = await this.autoLocProvider.GetLocation(cancellable, this);
+			Logger.Info("Obtaining auto location via IP lookup.");
+			const location = await this.LocationProvider.GetLocation(cancellable, this);
 			// User facing errors handled by provider
 			if (!location)
 				return null;
@@ -935,6 +975,10 @@ const Keys = {
 		key: "geoclue",
 		prop: "GeoClue"
 	},
+	AUTOLOC_PROVIDER: {
+		key: "autoloc_provider",
+		prop: "AutoLocProvider"
+	}
 } as const;
 
 type ServiceClassMappingType = {

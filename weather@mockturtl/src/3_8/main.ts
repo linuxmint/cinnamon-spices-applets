@@ -138,6 +138,7 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.SelectedLogPathChanged.Subscribe(this.saveLog);
 		this.config.LocStore.CurrentLocationModified.Subscribe(() => this.loop.Refresh());
 		this.config.GeoClueChanged.Subscribe(() => this.loop.Refresh());
+		this.config.AutoLocProviderChanged.Subscribe(() => this.loop.Refresh());
 
 		keybindingManager.addHotKey(
 			UUID, this.config.keybinding, () => this.on_applet_clicked());

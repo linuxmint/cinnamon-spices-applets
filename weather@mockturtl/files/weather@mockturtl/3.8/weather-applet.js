@@ -16308,11 +16308,13 @@ class PirateWeather {
 
 
 
+
 let GeoClueLib = undefined;
 let GeocodeGlib = undefined;
 const { Cancellable: geoclue_Cancellable } = imports.gi.Gio;
 class GeoClue {
     constructor() {
+        this.provider = LocationProvider.GeoClue2;
         try {
             GeoClueLib = imports.gi.Geoclue;
             GeocodeGlib = imports.gi.GeocodeGlib;
@@ -16433,8 +16435,10 @@ class GeoClue {
 
 
 
+
 class GeoIPFedora {
     constructor() {
+        this.provider = LocationProvider.FedoraGeoIP;
         this.query = "https://geoip.fedoraproject.org/city";
     }
     async GetLocation(cancellable) {
@@ -16452,7 +16456,7 @@ class GeoIPFedora {
                 type: "hard",
                 detail: "bad api response",
                 message: _("Location Service couldn't find your location, please see the logs in Looking Glass"),
-                service: "geoip.fedoreproject"
+                service: "geoip.fedoraproject"
             });
             return null;
         }
@@ -18107,7 +18111,190 @@ MetUk.params = {
     includeLocationName: "true",
 };
 
+;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/ipApi.ts
+
+
+
+
+
+class IpApi {
+    constructor() {
+        this.provider = LocationProvider.IpApi;
+        this.query = "http://ip-api.com/json/?fields=status,message,country,countryCode,city,lat,lon,timezone,mobile,query";
+    }
+    async GetLocation(cancellable) {
+        const json = await HttpLib.Instance.LoadJsonSimple({ url: this.query, cancellable });
+        if (!json) {
+            return null;
+        }
+        if (json.status != "success") {
+            this.HandleErrorResponse(json);
+            return null;
+        }
+        return this.ParseInformation(json);
+    }
+    ;
+    ParseInformation(json) {
+        try {
+            const result = {
+                lat: json.lat,
+                lon: json.lon,
+                city: json.city,
+                country: json.country,
+                timeZone: json.timezone,
+                entryText: json.lat + "," + json.lon,
+            };
+            logger_Logger.Debug("Location obtained:" + json.lat + "," + json.lon);
+            return result;
+        }
+        catch (e) {
+            if (e instanceof Error)
+                logger_Logger.Error("ip-api parsing error: " + e.message, e);
+            ErrorHandler.Instance.PostError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
+            return null;
+        }
+    }
+    ;
+    HandleErrorResponse(json) {
+        var _a;
+        ErrorHandler.Instance.PostError({
+            type: "hard",
+            detail: "bad api response",
+            message: _("Location Service responded with errors, please see the logs in Looking Glass"),
+            service: this.provider
+        });
+        logger_Logger.Error("ip-api responds with Error: " + ((_a = json.message) !== null && _a !== void 0 ? _a : json.reason));
+    }
+    ;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geojs.io.ts
+
+
+
+
+
+class GeoJS {
+    constructor() {
+        this.provider = LocationProvider.GeoJS;
+        this.query = "https://get.geojs.io/v1/ip/geo.json";
+    }
+    async GetLocation(cancellable) {
+        const json = await HttpLib.Instance.LoadJsonSimple({ url: this.query, cancellable });
+        if (!json) {
+            return null;
+        }
+        return this.ParseInformation(json);
+    }
+    ;
+    ParseInformation(json) {
+        try {
+            const lat = Number.parseFloat(json.latitude);
+            const lon = Number.parseFloat(json.longitude);
+            if (Number.isNaN(lat) || Number.isNaN(lon)) {
+                this.HandleErrorResponse(json);
+                return null;
+            }
+            const result = {
+                lat: lat,
+                lon: lon,
+                city: json.city,
+                country: json.country,
+                timeZone: json.timezone,
+                entryText: lat + "," + lon,
+            };
+            logger_Logger.Debug("Location obtained:" + lat + "," + lon);
+            return result;
+        }
+        catch (e) {
+            if (e instanceof Error)
+                logger_Logger.Error("ip-api parsing error: " + e.message, e);
+            ErrorHandler.Instance.PostError({
+                type: "hard",
+                detail: "no location",
+                service: "ipapi",
+                message: _("Could not obtain location, please see the logs in Looking Glass")
+            });
+            return null;
+        }
+    }
+    ;
+    HandleErrorResponse(json) {
+        ErrorHandler.Instance.PostError({
+            type: "hard",
+            detail: "bad api response",
+            message: _("Location Service responded with errors, please see the logs in Looking Glass"),
+            service: "ipapi"
+        });
+        logger_Logger.Error("geojs.io responded with data: " + JSON.stringify(json));
+    }
+    ;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geoiplookup.io.ts
+
+
+
+
+
+class GeoIPLookupIO {
+    constructor() {
+        this.provider = LocationProvider.GeoIPLookup;
+        this.query = "https://json.geoiplookup.io/";
+    }
+    async GetLocation(cancellable) {
+        const json = await HttpLib.Instance.LoadJsonSimple({ url: this.query, cancellable });
+        if (!json) {
+            return null;
+        }
+        if (!json.success) {
+            this.HandleErrorResponse(json);
+            return null;
+        }
+        return this.ParseInformation(json);
+    }
+    ParseInformation(json) {
+        try {
+            const result = {
+                lat: json.latitude,
+                lon: json.longitude,
+                city: json.city,
+                country: json.country_name,
+                timeZone: json.timezone_name,
+                entryText: json.latitude + "," + json.longitude,
+            };
+            logger_Logger.Debug("Location obtained:" + json.latitude + "," + json.longitude);
+            return result;
+        }
+        catch (e) {
+            if (e instanceof Error)
+                logger_Logger.Error("geoiplookup.io parsing error: " + e.message, e);
+            ErrorHandler.Instance.PostError({
+                type: "hard",
+                detail: "no location",
+                service: this.provider,
+                message: _("Could not obtain location, please see the logs in Looking Glass")
+            });
+            return null;
+        }
+    }
+    ;
+    HandleErrorResponse(json) {
+        ErrorHandler.Instance.PostError({
+            type: "hard",
+            detail: "bad api response",
+            message: _("Location Service responded with errors, please see the logs in Looking Glass"),
+            service: this.provider
+        });
+        logger_Logger.Error("geoiplookup.io responded with data: " + JSON.stringify(json));
+    }
+    ;
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
+
+
+
 
 
 
@@ -18159,6 +18346,14 @@ var Services;
     Services["OpenWeatherMap_OneCall"] = "OpenWeatherMap_OneCall";
     Services["SwissMeteo"] = "Swiss Meteo";
 })(Services || (Services = {}));
+var LocationProvider;
+(function (LocationProvider) {
+    LocationProvider["FedoraGeoIP"] = "fedora";
+    LocationProvider["IpApi"] = "ipapi";
+    LocationProvider["GeoJS"] = "geojs";
+    LocationProvider["GeoIPLookup"] = "geoiplookup";
+    LocationProvider["GeoClue2"] = "geoclue2";
+})(LocationProvider || (LocationProvider = {}));
 const ServiceClassMapping = {
     [Services.OpenWeatherMap_Open]: () => new OpenWeatherMapOpen(),
     [Services.OpenWeatherMap_OneCall]: () => new OpenWeatherMapOneCall(),
@@ -18183,6 +18378,29 @@ class Config {
             return DateTime.now().zoneName;
         else
             return TimeZone.new_local().get_identifier();
+    }
+    get LocationProvider() {
+        if (this.autoLocProvider && this.autoLocProvider.provider === this._autoloc_provider) {
+            return this.autoLocProvider;
+        }
+        let provider;
+        switch (this._autoloc_provider) {
+            case LocationProvider.GeoClue2:
+            case LocationProvider.FedoraGeoIP:
+                provider = new GeoIPFedora();
+                break;
+            case LocationProvider.IpApi:
+                provider = new IpApi();
+                break;
+            case LocationProvider.GeoJS:
+                provider = new GeoJS();
+                break;
+            case LocationProvider.GeoIPLookup:
+                provider = new GeoIPLookupIO();
+                break;
+        }
+        this.autoLocProvider = provider;
+        return provider;
     }
     constructor(instanceID) {
         this.WEATHER_LOCATION = "location";
@@ -18234,6 +18452,7 @@ class Config {
         this.TempTextOverrideChanged = new Event();
         this.UV_IndexChanged = new Event();
         this.GeoClueChanged = new Event();
+        this.AutoLocProviderChanged = new Event();
         this.FontChanged = new Event();
         this.HotkeyChanged = new Event();
         this.SelectedLogPathChanged = new Event();
@@ -18242,6 +18461,7 @@ class Config {
         this.LocationChanged = new Event();
         this.textColorStyle = null;
         this.ForegroundColor = null;
+        this.autoLocProvider = null;
         this.tzService = new GeoTimezone();
         this.onLogLevelUpdated = () => {
             logger_Logger.ChangeLevel(this._logLevel);
@@ -18459,8 +18679,8 @@ class Config {
                     return geoClue;
                 }
             }
-            logger_Logger.Info("Obtaining auto location via IP lookup instead.");
-            const location = await this.autoLocProvider.GetLocation(cancellable, this);
+            logger_Logger.Info("Obtaining auto location via IP lookup.");
+            const location = await this.LocationProvider.GetLocation(cancellable, this);
             if (!location)
                 return null;
             return location;
@@ -18809,6 +19029,10 @@ const Keys = {
         key: "geoclue",
         prop: "GeoClue"
     },
+    AUTOLOC_PROVIDER: {
+        key: "autoloc_provider",
+        prop: "AutoLocProvider"
+    }
 };
 
 ;// CONCATENATED MODULE: ./src/3_8/loop.ts
@@ -20819,6 +21043,7 @@ class WeatherApplet extends TextIconApplet {
         this.config.SelectedLogPathChanged.Subscribe(this.saveLog);
         this.config.LocStore.CurrentLocationModified.Subscribe(() => this.loop.Refresh());
         this.config.GeoClueChanged.Subscribe(() => this.loop.Refresh());
+        this.config.AutoLocProviderChanged.Subscribe(() => this.loop.Refresh());
         keybindingManager.addHotKey(UUID, this.config.keybinding, () => this.on_applet_clicked());
     }
     async Refresh(options) {

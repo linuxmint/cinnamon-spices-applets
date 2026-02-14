@@ -58,6 +58,7 @@
 			"keys": [
 				"manualLocation",
 				"geoclue",
+				"autoloc_provider",
 				"location",
 				"locationDescription"
 			]
@@ -394,6 +395,19 @@
 		"description": "Prioritize GeoClue for location detection",
 		"tooltip": "Enable this to try to use GeoClue for automatic location detection first, if available. This may provide more accurate location information on devices with supporting hardware, but can be wildly inaccurate without. Will still fall back to IP-based location detection if GeoClue is not available or fails to provide location information.",
 		"dependency": "!manualLocation"
+	},
+	"autoloc_provider": {
+		"type": "combobox",
+		"default": "fedora",
+		"description": "IP-based automatic location provider",
+		"options": {
+			"geoip.fedoraproject.org": "fedora",
+			"ipapi.com": "ipapi",
+			"geojs.io": "geojs",
+			"geoiplookup.io": "geoiplookup"
+		},
+		"dependency": "!manualLocation",
+		"tooltip": "Usually this doesn't need changed, some users have reported better accuracy, corporate network support or various country-wide bans with one or other."
 	},
 	"location": {
 		"type": "entry",
