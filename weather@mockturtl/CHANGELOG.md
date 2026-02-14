@@ -10,6 +10,7 @@
 * Fixes [weather@mockturl - service error #8160](https://github.com/linuxmint/cinnamon-spices-applets/issues/8160)
 * To support new Met UK API provider-specific key fields are added (keys are remembered for each provider that needs it)
 * Make GeoClue optional for getting location automatically.
+* Make IP-based location detection provider configurable
 
 ## 3.6.8
 
