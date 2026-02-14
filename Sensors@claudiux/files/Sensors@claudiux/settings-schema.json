@@ -400,13 +400,13 @@
   },
   "show_temp": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_temp_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_temp"
@@ -615,13 +615,13 @@
   },
   "show_fan": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_fan_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_fan"
@@ -757,13 +757,13 @@
   },
   "show_volt": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_volt_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_volt"
@@ -882,13 +882,13 @@
   },
   "show_intrusion": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_intrusion_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": " Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_intrusion"

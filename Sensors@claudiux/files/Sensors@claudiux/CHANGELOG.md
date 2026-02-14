@@ -1,3 +1,6 @@
+### v5.10.2~20260214
+  * Fixes [#8316](https://github.com/linuxmint/cinnamon-spices-applets/issues/8316)
+
 ### v5.10.1~20260130
   * Ensures compatibility with several old versions of Cinnamon.
 
