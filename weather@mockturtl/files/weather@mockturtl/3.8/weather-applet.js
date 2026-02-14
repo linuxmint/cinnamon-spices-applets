@@ -19474,6 +19474,7 @@ const STYLE_ICONBOX = 'weather-current-iconbox';
 const STYLE_DATABOX_CAPTIONS = 'weather-current-databox-captions';
 const STYLE_DATABOX_VALUES = 'weather-current-databox-values';
 const STYLE_LOCATION_SELECTOR = 'location-selector';
+const STYLE_LOCATION = 'weather-current-location';
 class CurrentWeather {
     constructor(app) {
         this.OnLocationOverrideChanged = (config, label, data) => {
@@ -19636,7 +19637,13 @@ class CurrentWeather {
         return rightColumn;
     }
     BuildLocationSection() {
-        this.locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), x_expand: true, x_align: uiCurrentWeather_Align.MIDDLE });
+        this.locationButton = new WeatherButton({
+            reactive: true,
+            label: _('Refresh'),
+            x_expand: true,
+            x_align: uiCurrentWeather_Align.MIDDLE,
+            style_class: STYLE_LOCATION
+        });
         this.location = this.locationButton.actor;
         this.location.connect(SIGNAL_CLICKED, () => {
             if (this.app.encounteredError)
