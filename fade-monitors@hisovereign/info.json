@@ -1,0 +1,8 @@
+{
+  "uuid": "fade-monitors@hisovereign",
+  "name": "Fade Monitors",
+  "description": "Panel applet to toggle mouse-based, idle dim, start and stop the script, and open both config folder and the script.",
+  "version": "1.0",
+  "author": "hisovereign",
+  "license": "GPL-2.0+"
+}
