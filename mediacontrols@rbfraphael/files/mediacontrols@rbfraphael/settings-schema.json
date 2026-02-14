@@ -1,0 +1,52 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["general"],
+        "general": {
+            "type": "page",
+            "title": "General",
+            "sections": ["appearanceSection"]
+        },
+        "appearanceSection": {
+            "type": "section",
+            "title": "Appearance Settings",
+            "keys": [
+                "showPlayerIcon",
+                "showSongTitle",
+                "showPlayerSelect",
+                "hideControlsInactivePlayer",
+                "hoverBackgroundColor"
+            ]
+        }
+    },
+    "showPlayerIcon": {
+        "type": "switch",
+        "default": true,
+        "description": "Show Player icon",
+        "tooltip": "Shows the icon of the selected player"
+    },
+    "showSongTitle": {
+        "type": "switch",
+        "default": true,
+        "description": "Show Artist and Song title",
+        "tooltip": "Shows Artist and Song tilte"
+    },
+    "showPlayerSelect": {
+        "type": "switch",
+        "default": true,
+        "description": "Show icon to select player",
+        "tooltip": "Shows icon on the very right to switch player manually"
+    },
+    "hideControlsInactivePlayer": {
+        "type": "switch",
+        "default": false,
+        "description": "Hide control icons if no player is active",
+        "tooltip": "Hide control icons if no player is active"
+    },
+    "hoverBackgroundColor": {
+        "type": "colorchooser",
+        "default": "rgba(26, 95, 180, 1)",
+        "description": "Hover color",
+        "tooltip": "Select the background color to be displayed when hovering over the control buttons"
+    }
+}
