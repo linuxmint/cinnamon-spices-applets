@@ -57,6 +57,7 @@
 			"title": "Location settings",
 			"keys": [
 				"manualLocation",
+				"geoclue",
 				"location",
 				"locationDescription"
 			]
@@ -386,6 +387,13 @@
 		"default": false,
 		"description": "Manual Location",
 		"tooltip": "Enable this if your location is not accurate"
+	},
+	"geoclue": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Prioritize GeoClue for location detection",
+		"tooltip": "Enable this to try to use GeoClue for automatic location detection first, if available. This may provide more accurate location information on devices with supporting hardware, but can be wildly inaccurate without. Will still fall back to IP-based location detection if GeoClue is not available or fails to provide location information.",
+		"dependency": "!manualLocation"
 	},
 	"location": {
 		"type": "entry",

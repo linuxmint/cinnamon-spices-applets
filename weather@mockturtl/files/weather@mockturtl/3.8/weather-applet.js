@@ -18233,6 +18233,7 @@ class Config {
         this.RunScriptChanged = new Event();
         this.TempTextOverrideChanged = new Event();
         this.UV_IndexChanged = new Event();
+        this.GeoClueChanged = new Event();
         this.FontChanged = new Event();
         this.HotkeyChanged = new Event();
         this.SelectedLogPathChanged = new Event();
@@ -18451,10 +18452,12 @@ class Config {
     }
     async EnsureLocation(cancellable) {
         if (!this._manualLocation) {
-            logger_Logger.Info("Obtaining auto location via GeoClue2.");
-            const geoClue = await this.geoClue.GetLocation(cancellable);
-            if (geoClue != null) {
-                return geoClue;
+            if (this._geoclue) {
+                logger_Logger.Info("Obtaining auto location via GeoClue2.");
+                const geoClue = await this.geoClue.GetLocation(cancellable);
+                if (geoClue != null) {
+                    return geoClue;
+                }
             }
             logger_Logger.Info("Obtaining auto location via IP lookup instead.");
             const location = await this.autoLocProvider.GetLocation(cancellable, this);
@@ -18801,6 +18804,10 @@ const Keys = {
     UV_INDEX: {
         key: "uvIndex",
         prop: "UV_Index"
+    },
+    GEO_CLUE: {
+        key: "geoclue",
+        prop: "GeoClue"
     },
 };
 
@@ -20811,6 +20818,7 @@ class WeatherApplet extends TextIconApplet {
         this.config.HotkeyChanged.Subscribe(this.OnKeySettingsUpdated);
         this.config.SelectedLogPathChanged.Subscribe(this.saveLog);
         this.config.LocStore.CurrentLocationModified.Subscribe(() => this.loop.Refresh());
+        this.config.GeoClueChanged.Subscribe(() => this.loop.Refresh());
         keybindingManager.addHotKey(UUID, this.config.keybinding, () => this.on_applet_clicked());
     }
     async Refresh(options) {

@@ -153,6 +153,7 @@ export class Config {
 	public readonly _alwaysShowHourlyWeather!: boolean;
 	public readonly _logLevel!: LogLevel;
 	public readonly _selectedLogPath!: string;
+	public readonly _geoclue!: boolean;
 	/**
 	 * Panel text override
 	 */
@@ -212,6 +213,7 @@ export class Config {
 	public readonly RunScriptChanged = new Event<Config, boolean>();
 	public readonly TempTextOverrideChanged = new Event<Config, string>();
 	public readonly UV_IndexChanged = new Event<Config, boolean>();
+	public readonly GeoClueChanged = new Event<Config, boolean>();
 
 	public readonly FontChanged = new Event<Config, void>();
 	public readonly HotkeyChanged = new Event<Config, void>();
@@ -488,10 +490,12 @@ export class Config {
 	private async EnsureLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
 		// Automatic location
 		if (!this._manualLocation) {
-			Logger.Info("Obtaining auto location via GeoClue2.");
-			const geoClue = await this.geoClue.GetLocation(cancellable);
-			if (geoClue != null) {
-				return geoClue;
+			if (this._geoclue) {
+				Logger.Info("Obtaining auto location via GeoClue2.");
+				const geoClue = await this.geoClue.GetLocation(cancellable);
+				if (geoClue != null) {
+					return geoClue;
+				}
 			}
 
 			Logger.Info("Obtaining auto location via IP lookup instead.");
@@ -926,6 +930,10 @@ const Keys = {
 	UV_INDEX: {
 		key: "uvIndex",
 		prop: "UV_Index"
+	},
+	GEO_CLUE: {
+		key: "geoclue",
+		prop: "GeoClue"
 	},
 } as const;
 

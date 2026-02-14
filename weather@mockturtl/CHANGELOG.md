@@ -9,6 +9,7 @@
 * Fixes [[Security] ReDoS vulnerability in weather@mockturtl applet via luxon@3.2.0 (CVE-2023-22467) #8155](https://github.com/linuxmint/cinnamon-spices-applets/issues/8155)
 * Fixes [weather@mockturl - service error #8160](https://github.com/linuxmint/cinnamon-spices-applets/issues/8160)
 * To support new Met UK API provider-specific key fields are added (keys are remembered for each provider that needs it)
+* Make GeoClue optional for getting location automatically.
 
 ## 3.6.8
 
