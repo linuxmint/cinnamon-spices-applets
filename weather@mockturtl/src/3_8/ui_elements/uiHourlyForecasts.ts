@@ -74,7 +74,7 @@ export class UIHourlyForecasts {
 				((direction === ScrollDirection.UP) ? -adjustment.step_increment : (direction === ScrollDirection.DOWN) ? adjustment.step_increment : 0);
 
 			if (global.settings.get_boolean("desktop-effects-on-menus"))
-				addTween(adjustment, { value: newVal, time: 0.25});
+				addTween(adjustment, { value: newVal, time: 0.25 });
 			else
 				adjustment.set_value(newVal);
 			return false;
@@ -128,7 +128,7 @@ export class UIHourlyForecasts {
 		const [, lower, upper, , , page_size] = adjustment.get_values();
 		index = Math.max(Math.min(index, upper - page_size), lower);
 		if (global.settings.get_boolean("desktop-effects-on-menus") && animate)
-			addTween(adjustment, { value: index, time: 0.25});
+			addTween(adjustment, { value: index, time: 0.25 });
 		else
 			adjustment.set_value(index);
 	}
@@ -168,14 +168,18 @@ export class UIHourlyForecasts {
 
 			const temp = TempToUserConfig(hour.temp, config, false);
 
-			if (hour.date.hour == 0)
+			if (hour.date.hour == 0) {
 				ui.Hour.text = GetDayName(hour.date, {
 					tz: tz,
 					useTodayTomorrow: false,
 					short: true
 				});
-			else
+				ui.Hour.style = "font-weight: bold;";
+			}
+			else {
 				ui.Hour.text = GetHoursMinutes(hour.date, config._show24Hours, tz, config._shortHourlyTime);
+				ui.Hour.style = "font-weight: regular;";
+			}
 			ui.Temperature.text = temp ? `${temp}°` : "";
 			ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
             ui.SummaryTooltip?.set_text(hour.condition.main);
@@ -372,7 +376,7 @@ export class UIHourlyForecasts {
 		const forecastContainer = new BoxLayout();
 		grid.attach(forecastContainer, 1, 1, 1, 1);
 
-		this.container.add(gridActor, {expand: true, x_fill: true, y_fill: true});
+		this.container.add(gridActor, { expand: true, x_fill: true, y_fill: true });
 
 		for (let index = 0; index < hours; index++) {
 			const box = new BoxLayout({ vertical: true, style_class: "hourly-box-item", reactive: true });
@@ -455,7 +459,7 @@ export class UIHourlyForecasts {
 		const precipitationHeight = this.hourlyForecasts[0].PrecipPercent.get_height() + this.hourlyForecasts[0].PrecipVolume.get_height();
 		const tempPadding = 6;
 
-		const points: Array<{x: number, y: number}> = [];
+		const points: Array<{ x: number, y: number }> = [];
 		const precipitation: number[] = []
 		for (let i = 0; i < this.hourlyContainers.length; i++) {
 			const data = this.hourlyForecastData[i];
@@ -467,15 +471,15 @@ export class UIHourlyForecasts {
 
 			const height = this.tempGraphHeight - tempPadding - ratio + tempHeightOffset;
 
-			const midX = itemWidth * i + (itemWidth/2);
+			const midX = itemWidth * i + (itemWidth / 2);
 			// const midY = (totalHeight / 2);
-			points.push({x: midX, y: height});
+			points.push({ x: midX, y: height });
 			precipitation.push((data.precipitation?.volume ?? 0))
 		}
 
 		ctx.setLineWidth(3);
 		if (this.app.config.ForegroundColor == null)
-			ctx.setSourceRGBA(1,1,1,0.5);
+			ctx.setSourceRGBA(1, 1, 1, 0.5);
 		else
 			ctx.setSourceRGBA(this.app.config.ForegroundColor.red, this.app.config.ForegroundColor.green, this.app.config.ForegroundColor.blue, this.app.config.ForegroundColor.alpha);
 		ctx.moveTo(points[0].x, points[0].y);
@@ -485,7 +489,7 @@ export class UIHourlyForecasts {
 		}
 		ctx.stroke();
 
-		ctx.setSourceRGBA(0,0.5,1,0.5);
+		ctx.setSourceRGBA(0, 0.5, 1, 0.5);
 		for (let i = 0; i < precipitation.length; i++) {
 			const element = precipitation[i];
 			const point = points[i];

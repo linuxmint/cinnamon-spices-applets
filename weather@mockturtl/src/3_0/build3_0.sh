@@ -1,6 +1,7 @@
 #!/bin/bash
 # REQUIREMENTS:
 # - typescript installed
+# - sed
 
 # Getting bash script file location
 SOURCE="${BASH_SOURCE[0]}"
@@ -15,7 +16,13 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 path=${PWD}
 
 cd $DIR
-npx webpack
-cd ..
-./cinnamon-spices-makepot weather@mockturtl
-cd $PWD
+
+echo Building 3.0...
+cp promise-polyfill.js $DIR/../../files/weather@mockturtl/3.0/
+npx tsc -p tsconfig.json --skipLibCheck
+
+for f in ../../files/weather@mockturtl/3.0/*.js; do
+    sed -i '/export {};/d' "$f"
+done
+
+cd $path
