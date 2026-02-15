@@ -1,0 +1,31 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["page1"],
+        "page1": {
+            "type": "page",
+            "title": "Settings",
+            "sections": ["section1"]
+        },
+        "section1": {
+            "type": "section",
+            "title": "Display Options",
+            "keys": ["show-cpu", "show-ram", "show-swap"]
+        }
+    },
+    "show-cpu": {
+        "type": "switch",
+        "default": true,
+        "description": "Show CPU Usage"
+    },
+    "show-ram": {
+        "type": "switch",
+        "default": true,
+        "description": "Show RAM Usage"
+    },
+    "show-swap": {
+        "type": "switch",
+        "default": true,
+        "description": "Show Swap Usage"
+    }
+}
