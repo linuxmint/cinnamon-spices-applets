@@ -1,7 +1,7 @@
 # Dutch translation for cinnamon-weather (weather@mockturtl)
-# Copyright (C) 2025
+# Copyright (C) 2026
 # This file is distributed under the same license as the package cinnamon-weather (weather@mockturtl).
-# Pjotr <pjotrvertaalt@gmail.com>, 2013-2025.
+# Pjotr <pjotrvertaalt@gmail.com>, 2013-2026.
 # Jurien (French77) <Jurien@protonmail.com>, 2020-2021.
 #
 msgid ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-14 14:22+0000\n"
-"PO-Revision-Date: 2025-09-28 13:25+0200\n"
+"PO-Revision-Date: 2026-02-15 16:26+0100\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -1560,12 +1560,11 @@ msgstr "mijl/u"
 #. 3.8->settings-schema.json->windSpeedUnit->options
 #. 3.8/weather-applet.js:9607
 msgid "km/h"
-msgstr ""
+msgstr "km/u"
 
 #. 3.8/weather-applet.js:9609
-#, fuzzy
 msgid "Knots"
-msgstr "knopen"
+msgstr "Knopen"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
@@ -2029,7 +2028,6 @@ msgid "Met Office UK"
 msgstr "Met Office UK"
 
 #. 3.8/weather-applet.js:18216 3.8/weather-applet.js:18276
-#, fuzzy
 msgid "Could not obtain location, please see the logs in Looking Glass"
 msgstr ""
 "Locatiedienst kon uw locatie niet vinden, zie a.u.b. de logboeken in Looking "
@@ -2676,9 +2674,8 @@ msgid "Swiss Météo (Switzerland only)"
 msgstr "Swiss Météo (alleen Zwitserland)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "Met Office UK (key needed)"
-msgstr "Met Office UK (alleen voor het VK)"
+msgstr "Met Office UK (sleutel nodig)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "OpenWeatherMap OneCall (key needed)"
@@ -2709,13 +2706,13 @@ msgid ""
 "Open-Meteo is a free weather service that does not require an API key. It "
 "provides global weather data with various parameters and forecast lengths. "
 "More information can be found at open-meteo.com."
-msgstr ""
+msgstr "Gratis. API-sleutel niet nodig. Zie open-meteo.com."
 
 #. 3.8->settings-schema.json->openweathermap_label->description
 msgid ""
 "Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with "
 "headquarters in London UK. Read more about the service at openweathermap.org."
-msgstr ""
+msgstr "Gratis. Zie openweathermap.org."
 
 #. 3.8->settings-schema.json->metnorway_label->description
 msgid ""
@@ -2728,20 +2725,20 @@ msgid ""
 " - Daily forecasts are generated from 6 hour forecasts (for every hour), so "
 "there is a possibility that they are inaccurate sometimes.\n"
 " - Alerts are only available in Norway"
-msgstr ""
+msgstr "Gratis. Zie www.met.no/en."
 
 #. 3.8->settings-schema.json->dmidenmark_label->description
 msgid ""
 "The Danish Meteorological Institute formed in 1872 and makes weather "
 "forecasts and observations for Denmark, Greenland, and the Faroe Islands. "
 "Read more about the institute at www.dmi.dk."
-msgstr ""
+msgstr "Gratis. Zie www.dmi.dk."
 
 #. 3.8->settings-schema.json->deutscherwetterdienst_label->description
 msgid ""
-"German National Weather Provider. Read more about the institute at "
-"www.dwd.de."
-msgstr ""
+"German National Weather Provider. Read more about the institute at www.dwd."
+"de."
+msgstr "Zie www.dwd.de."
 
 #. 3.8->settings-schema.json->usweather_label->description
 msgid ""
@@ -2753,27 +2750,27 @@ msgid ""
 "when it loads up the first time\n"
 " - Observations are quite spotty so it combines multiple observation "
 "stations if needed in a 50km area"
-msgstr ""
+msgstr "Alleen voor de Verenigde Staten. Zie www.weather.gov."
 
 #. 3.8->settings-schema.json->swissmeteo_label->description
 msgid ""
-"Swiss national weather service. Read more about the service at "
-"www.meteoswiss.admin.ch.\n"
+"Swiss national weather service. Read more about the service at www."
+"meteoswiss.admin.ch.\n"
 "\n"
 " - Only covers Switzerland\n"
 " - You need to use your post code instead of coordinates"
-msgstr ""
+msgstr "Alleen voor Zwitserland. Zie www.meteoswiss.admin.ch."
 
 #. 3.8->settings-schema.json->metoffice_label->description
 msgid ""
 "The Meteorological Office, abbreviated as the Met Office, is the UK's "
-"national weather service founded in 1854. Read more about the service at "
-"www.metoffice.gov.uk.\n"
+"national weather service founded in 1854. Read more about the service at www."
+"metoffice.gov.uk.\n"
 "\n"
 " - You only have 360 calls a day free, the applet uses 2 at a time so "
 "minimum of 15 minutes refresh time is recommended.\n"
 " - To get API keys, register at datahub.metoffice.gov.uk"
-msgstr ""
+msgstr "Beperkt gratis. API-sleutel nodig. Zie www.metoffice.gov.uk."
 
 #. 3.8->settings-schema.json->openweathermap_onecall_label->description
 msgid ""
@@ -2781,13 +2778,17 @@ msgid ""
 "an API key. Make sure your call limit is 1000 calls/day to avoid charges. "
 "Read more about the service at openweathermap.org/api/one-call-api."
 msgstr ""
+"Versie van OpenWeatherMap die meer functies ondersteunt (als tevoren), maar "
+"wel met een API-sleutel. Zorg ervoor dat uw aanroepen de 1.000 per dag niet "
+"overschrijden, om kosten te vermijden. Zie openweathermap.org/api/one-call-"
+"api."
 
 #. 3.8->settings-schema.json->pirateweather_label->description
 msgid ""
 "Pirate Weather is a free open source weather service that provides weather "
 "data that is compatible with the Dark Sky API. Read more about the service "
 "at pirateweather.net."
-msgstr ""
+msgstr "Gratis. Zie pirateweather.net."
 
 #. 3.8->settings-schema.json->visualcrossing_label->description
 msgid ""
@@ -2797,7 +2798,7 @@ msgid ""
 "\n"
 " - Provides 1000 Free calls a day\n"
 " - Needs an API key"
-msgstr ""
+msgstr "Beperkt gratis. API-sleutel nodig. Zie visualcrossing.com."
 
 #. 3.8->settings-schema.json->weatherbit_label->description
 msgid ""
@@ -2809,17 +2810,17 @@ msgid ""
 " - Needs an API key\n"
 " - Using alerts will increase call usage by 33%\n"
 " - Hourly Weather forecast is supported but requires a non-free account."
-msgstr ""
+msgstr "Beperkt gratis. API-sleutel nodig. Zie weatherbit.io."
 
 #. 3.8->settings-schema.json->tomorrowio_label->description
 msgid ""
 "Meteorological data from American weather technology company with "
-"headquarters in Boston since 2016. Read more about the service at "
-"tomorrow.io.\n"
+"headquarters in Boston since 2016. Read more about the service at tomorrow."
+"io.\n"
 "\n"
 " - Free plan includes 1000 calls per day\n"
 " - Needs an API key"
-msgstr ""
+msgstr "Beperkt gratis. API-sleutel nodig. Zie tomorrow.io."
 
 #. 3.8->settings-schema.json->accuweather_label->description
 msgid ""
@@ -2830,7 +2831,7 @@ msgid ""
 " - With the free plan, there are only a very limited number of calls for a "
 "day, remaining number of calls are shown in the applet tooltip\n"
 " - Needs an API key"
-msgstr ""
+msgstr "Beperkt gratis. API-sleutel nodig. Zie accuweather.com."
 
 #. 3.8->settings-schema.json->weatherunderground_label->description
 msgid ""
@@ -2842,121 +2843,103 @@ msgid ""
 " - Only allows 1500 calls a day, so 15min refresh cycle is recommended\n"
 " - Needs an API key\n"
 " - Current weather condition come from forecast"
-msgstr ""
+msgstr "Beperkt gratis. API-sleutel nodig. Zie wunderground.com."
 
 #. 3.8->settings-schema.json->metoffice_forecast_apikey->description
-#, fuzzy
 msgid "Forecasts API Key"
-msgstr "Verkeerde API-sleutel"
+msgstr "API-sleutel voor Forecasts"
 
 #. 3.8->settings-schema.json->metoffice_forecast_apikey->tooltip
 msgid ""
 "Subscribe to 'Site Specific' -> 'Global Spot' Free plan to get this key."
 msgstr ""
+"Abonneer u op 'Site Specific' -> 'Global Spot' Free plan om deze sleutel te "
+"verkrijgen."
 
 #. 3.8->settings-schema.json->metoffice_observations_apikey->description
 msgid "Observations API Key"
-msgstr ""
+msgstr "API-sleutel voor Observations"
 
 #. 3.8->settings-schema.json->metoffice_observations_apikey->tooltip
 msgid ""
 "Subscribe to 'Observations' -> 'Land Observations' Free plan to get this key."
 msgstr ""
+"Abonneer u op 'Observations' -> 'Land Observations' Free plan om deze "
+"sleutel te verkrijgen."
 
 #. 3.8->settings-schema.json->openweathermap_onecall_apikey->description
-#, fuzzy
 msgid "OpenWeatherMap OneCall API Key"
-msgstr "OpenWeatherMap OneCall (sleutel nodig)"
+msgstr "API-sleutel voor OpenWeatherMap OneCall"
 
 #. 3.8->settings-schema.json->openweathermap_onecall_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at openweathermap.org and paste it here."
 msgstr ""
-"Kopieer deze vanuit uw account bij de gebruikte gegevensdienst en plak hem "
-"hier."
+"Kopieer deze vanuit uw account bij openweathermap.org en plak hem hier."
 
 #. 3.8->settings-schema.json->pirateweather_apikey->description
-#, fuzzy
 msgid "Pirate Weather API Key"
-msgstr "Pirate Weather"
+msgstr "API-sleutel voor Pirate Weather"
 
 #. 3.8->settings-schema.json->pirateweather_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at pirateweather.net and paste it here."
-msgstr ""
-"Kopieer deze vanuit uw account bij de gebruikte gegevensdienst en plak hem "
-"hier."
+msgstr "Kopieer deze vanuit uw account bij pirateweather.net en plak hem hier."
 
 #. 3.8->settings-schema.json->visualcrossing_apikey->description
-#, fuzzy
 msgid "Visual Crossing API Key"
-msgstr "Visual Crossing"
+msgstr "API-sleutel voor Visual Crossing"
 
 #. 3.8->settings-schema.json->visualcrossing_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at visualcrossing.com and paste it here."
 msgstr ""
-"Kopieer deze vanuit uw account bij de gebruikte gegevensdienst en plak hem "
-"hier."
+"Kopieer deze vanuit uw account bij visualcrossing.com en plak hem hier."
 
 #. 3.8->settings-schema.json->weatherbit_apikey->description
-#, fuzzy
 msgid "Weatherbit API Key"
-msgstr "WeatherBit"
+msgstr "API-sleutel voor WeatherBit"
 
 #. 3.8->settings-schema.json->weatherbit_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at weatherbit.io and paste it here."
-msgstr ""
-"Kopieer deze vanuit uw account bij de gebruikte gegevensdienst en plak hem "
-"hier."
+msgstr "Kopieer deze vanuit uw account bij weatherbit.io en plak hem hier."
 
 #. 3.8->settings-schema.json->tomorrowio_apikey->description
-#, fuzzy
 msgid "Tomorrow.io API Key"
-msgstr "Tomorrow.io"
+msgstr "API-sleutel voor Tomorrow.io"
 
 #. 3.8->settings-schema.json->tomorrowio_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at tomorrow.io and paste it here."
-msgstr ""
-"Kopieer deze vanuit uw account bij de gebruikte gegevensdienst en plak hem "
-"hier."
+msgstr "Kopieer deze vanuit uw account bij tomorrow.io en plak hem hier."
 
 #. 3.8->settings-schema.json->accuweather_apikey->description
-#, fuzzy
 msgid "AccuWeather API Key"
-msgstr "AccuWeather"
+msgstr "API-sleutel voor AccuWeather"
 
 #. 3.8->settings-schema.json->accuweather_apikey->tooltip
-#, fuzzy
 msgid ""
 "Copy this from your account at developer.accuweather.com and paste it here."
 msgstr ""
-"Kopieer deze vanuit uw account bij de gebruikte gegevensdienst en plak hem "
+"Kopieer deze vanuit uw account bij developer.accuweather.com en plak hem "
 "hier."
 
 #. 3.8->settings-schema.json->weatherunderground_apikey->description
-#, fuzzy
 msgid "Weather Underground API Key"
-msgstr "Weather Underground"
+msgstr "API-sleutel voor Weather Underground"
 
 #. 3.8->settings-schema.json->weatherunderground_apikey->tooltip
-#, fuzzy
 msgid ""
 "Copy this from your account at www.wunderground.com/weather/api and paste it "
 "here."
 msgstr ""
-"Kopieer deze vanuit uw account bij de gebruikte gegevensdienst en plak hem "
-"hier."
+"Kopieer deze vanuit uw account bij www.wunderground.com/weather/api en plak "
+"hem hier."
 
 #. 3.8->settings-schema.json->apiKey->description
 msgid "API Key - Hidden, only for backwards compatibility"
 msgstr ""
+"API-sleutel - verborgen, uitsluitend voor achterwaartse verenigbaarheid"
 
 #. 3.8->settings-schema.json->geoclue->description
 msgid "Prioritize GeoClue for location detection"
-msgstr ""
+msgstr "Geef voorrang aan GeoClue voor locatiedetectie"
 
 #. 3.8->settings-schema.json->geoclue->tooltip
 msgid ""
@@ -2966,32 +2949,38 @@ msgid ""
 "fall back to IP-based location detection if GeoClue is not available or "
 "fails to provide location information."
 msgstr ""
+"Schakel dit in om te trachten om eerst GeoClue te benutten voor automatische "
+"detectie, indien beschikbaar. Dit zou accuratere locatie-informatie kunnen "
+"opleveren op apparaten met apparatuur die dit ondersteunt, maar kan enorm "
+"inaccuraat zijn wanneer niet ondersteund. Zal nog steeds terugvallen op IP-"
+"gebaseerde locatiedetectie indien GeoClue niet bereikbaar is of geen locatie-"
+"informatie biedt."
 
 #. 3.8->settings-schema.json->autoloc_provider->description
 msgid "IP-based automatic location provider"
-msgstr ""
+msgstr "IP-gebaseerde automatische locatie-aanbieder"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geoip.fedoraproject.org"
-msgstr ""
+msgstr "geoip.fedoraproject.org"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "ipapi.com"
-msgstr ""
+msgstr "ipapi.com"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geojs.io"
-msgstr ""
+msgstr "geojs.io"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geoiplookup.io"
-msgstr ""
+msgstr "geoiplookup.io"
 
 #. 3.8->settings-schema.json->autoloc_provider->tooltip
 msgid ""
 "Usually this doesn't need changed, some users have reported better accuracy, "
 "corporate network support or various country-wide bans with one or other."
-msgstr ""
+msgstr "Gewoonlijk hoeft dit niet te worden veranderd."
 
 #. 3.8->settings-schema.json->location->tooltip
 msgid ""
@@ -2999,8 +2988,8 @@ msgid ""
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
 "{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
 "the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice. Powered by "
-"nominatim.openstreetmap.org."
+"replaced automatically for validating your choice. Powered by nominatim."
+"openstreetmap.org."
 msgstr ""
 "U kunt de coördinaten 'Breedtegraad,Lengtegraad' (bijv. 51,5085,-0,1257) "
 "invoeren of gebruik 'Stad,Landcode' (bijv. Oss,NL) of probeer {Huisnummer} "
@@ -3090,7 +3079,6 @@ msgid "Show both temperature units at the same time"
 msgstr "Toon beide temperatuureenheden tegelijkertijd"
 
 #. 3.8->settings-schema.json->tempTextOverride->tooltip
-#, fuzzy
 msgid ""
 "Some of the available values are: {c} is condition, {t} is temperature and "
 "{u} is unit. Full list of values are available on the Cinnamon spices "
@@ -3098,10 +3086,10 @@ msgid ""
 "Can be used if label does not fit on vertical panel, among other smart "
 "things."
 msgstr ""
-"Sommige van de beschikbare waarden zijn: {c} is voorwaarde, {t} is "
-"temperatuur en {u} is\n"
-"eenheid. Kan o.a. gebruikt worden als het etiket niet op de verticale "
-"werkbalk past."
+"Sommige van de beschikbare waarden zijn: {c} is conditie, {t} is temperatuur "
+"en {u} is eenheid. Volledige waardenlijst vindt u op de webstek van Cinnamon "
+"spices.\n"
+"Kan o.a. gebruikt worden als het etiket niet op de verticale werkbalk past."
 
 #. 3.8->settings-schema.json->tooltipTextOverride->description
 msgid "Override tooltip on panel"
@@ -3225,9 +3213,8 @@ msgstr ""
 "Kijk a.u.b. eerst na of het probleem niet al eerder is ingediend."
 
 #. 3.8->settings-schema.json->maintainer->description
-#, fuzzy
 msgid "Current maintainer: ---"
-msgstr "Huidige onderhouder: Gr3q"
+msgstr "Huidige onderhouder: ---"
 
 #. 3.8->settings-schema.json->issue-reporting-explanation->description
 msgid ""
@@ -3253,11 +3240,11 @@ msgstr ""
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
 "Your location in most cases work automatically but you can enter it manually "
-"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
-"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
-"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
-"the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice."
+"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,"
+"Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/"
+"Town} {Postcode} {Country}. The search algorithm is very flexible with the "
+"format. After 3 seconds without typing the address you entered is replaced "
+"automatically for validating your choice."
 msgstr ""
 "Uw locatie werkt in de meeste gevallen automatisch, maar u kunt deze ook "
 "handmatig invoeren met de coördinaten 'Breedtegraad,Lengtegraad' (bijv. "
