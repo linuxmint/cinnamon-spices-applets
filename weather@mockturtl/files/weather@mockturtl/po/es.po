@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-14 14:22+0000\n"
-"PO-Revision-Date: 2025-09-29 11:15-0300\n"
+"PO-Revision-Date: 2026-02-14 22:38-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.8\n"
 
 #. 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #. 3.8/weather-applet.js:20974
@@ -1563,12 +1563,11 @@ msgstr "mph"
 #. 3.8->settings-schema.json->windSpeedUnit->options
 #. 3.8/weather-applet.js:9607
 msgid "km/h"
-msgstr ""
+msgstr "km/h"
 
 #. 3.8/weather-applet.js:9609
-#, fuzzy
 msgid "Knots"
-msgstr "nudos"
+msgstr "Nudos"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
@@ -2032,11 +2031,9 @@ msgid "Met Office UK"
 msgstr "Met Office UK"
 
 #. 3.8/weather-applet.js:18216 3.8/weather-applet.js:18276
-#, fuzzy
 msgid "Could not obtain location, please see the logs in Looking Glass"
 msgstr ""
-"El Servicio de Localización no pudo encontrar su ubicación, por favor vea "
-"los registros en Looking Glass"
+"No se pudo obtener la ubicación, consulte los registros en Looking Glass"
 
 #. 3.8/weather-applet.js:18821
 msgid ""
@@ -2678,9 +2675,8 @@ msgid "Swiss Météo (Switzerland only)"
 msgstr "Swiss Météo (sólo Suiza)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "Met Office UK (key needed)"
-msgstr "Met Office UK (solo Reino Unido)"
+msgstr "Met Office UK (necesita clave)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "OpenWeatherMap OneCall (key needed)"
@@ -2712,12 +2708,18 @@ msgid ""
 "provides global weather data with various parameters and forecast lengths. "
 "More information can be found at open-meteo.com."
 msgstr ""
+"Open-Meteo es un servicio meteorológico gratuito que no requiere una clave "
+"API. Proporciona datos meteorológicos globales con diversos parámetros y "
+"plazos de previsión. Para más información, visite open-meteo.com."
 
 #. 3.8->settings-schema.json->openweathermap_label->description
 msgid ""
 "Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with "
 "headquarters in London UK. Read more about the service at openweathermap.org."
 msgstr ""
+"Servicio meteorológico online mundial de OpenWeather Ltd, fundado en 2012 y "
+"con sede en Londres, Reino Unido. Más información sobre el servicio en "
+"openweathermap.org."
 
 #. 3.8->settings-schema.json->metnorway_label->description
 msgid ""
@@ -2731,6 +2733,16 @@ msgid ""
 "there is a possibility that they are inaccurate sometimes.\n"
 " - Alerts are only available in Norway"
 msgstr ""
+"Datos meteorológicos y previsiones gratuitos del Instituto Meteorológico "
+"Noruego, fundado en 1866. Más información sobre el servicio en www.met.no/"
+"en.\n"
+"\n"
+" - Nowcast (precipitaciones inmediatas y observaciones granulares) no está "
+"disponible fuera de Noruega. En ese caso, se muestran las observaciones para "
+"la próxima hora.\n"
+" - Las previsiones diarias se generan a partir de previsiones de 6 horas "
+"(para cada hora), por lo que es posible que en ocasiones sean inexactas.\n"
+" - Las alertas solo están disponibles en Noruega."
 
 #. 3.8->settings-schema.json->dmidenmark_label->description
 msgid ""
@@ -2738,12 +2750,17 @@ msgid ""
 "forecasts and observations for Denmark, Greenland, and the Faroe Islands. "
 "Read more about the institute at www.dmi.dk."
 msgstr ""
+"El Instituto Meteorológico Danés se fundó en 1872 y realiza previsiones y "
+"observaciones meteorológicas para Dinamarca, Groenlandia y las Islas Feroe. "
+"Para más información sobre el instituto, visite www.dmi.dk."
 
 #. 3.8->settings-schema.json->deutscherwetterdienst_label->description
 msgid ""
 "German National Weather Provider. Read more about the institute at "
 "www.dwd.de."
 msgstr ""
+"Servicio Meteorológico Nacional Alemán. Para más información sobre el "
+"instituto, visite www.dwd.de."
 
 #. 3.8->settings-schema.json->usweather_label->description
 msgid ""
@@ -2756,6 +2773,16 @@ msgid ""
 " - Observations are quite spotty so it combines multiple observation "
 "stations if needed in a 50km area"
 msgstr ""
+"El Servicio Meteorológico Nacional de EE. UU. es una agencia del gobierno "
+"federal creada en 1861. Para obtener más información sobre el servicio, "
+"visite www.weather.gov.\n"
+"\n"
+"- Solo cubre EE. UU.\n"
+"- A veces se tarda entre 10 y 15 segundos en obtener la información "
+"meteorológica, por lo que le rogamos que tenga paciencia cuando se cargue "
+"por primera vez.\n"
+"- Las observaciones son bastante irregulares, por lo que se combinan varias "
+"estaciones de observación si es necesario en un área de 50 km."
 
 #. 3.8->settings-schema.json->swissmeteo_label->description
 msgid ""
@@ -2765,6 +2792,11 @@ msgid ""
 " - Only covers Switzerland\n"
 " - You need to use your post code instead of coordinates"
 msgstr ""
+"Servicio meteorológico nacional suizo. Más información sobre el servicio en "
+"www.meteoswiss.admin.ch.\n"
+"\n"
+"- Solo cubre Suiza\n"
+"- Debe utilizar su código postal en lugar de las coordenadas"
 
 #. 3.8->settings-schema.json->metoffice_label->description
 msgid ""
@@ -2776,6 +2808,14 @@ msgid ""
 "minimum of 15 minutes refresh time is recommended.\n"
 " - To get API keys, register at datahub.metoffice.gov.uk"
 msgstr ""
+"La Oficina Meteorológica, abreviada como Met Office, es el servicio "
+"meteorológico nacional del Reino Unido fundado en 1854. Para obtener más "
+"información sobre el servicio, visite www.metoffice.gov.uk.\n"
+"\n"
+"- Solo dispone de 360 llamadas gratuitas al día, la aplicación utiliza 2 a "
+"la vez, por lo que se recomienda un tiempo mínimo de actualización de 15 "
+"minutos.\n"
+"- Para obtener las claves API, regístrese en datahub.metoffice.gov.uk."
 
 #. 3.8->settings-schema.json->openweathermap_onecall_label->description
 msgid ""
@@ -2783,6 +2823,10 @@ msgid ""
 "an API key. Make sure your call limit is 1000 calls/day to avoid charges. "
 "Read more about the service at openweathermap.org/api/one-call-api."
 msgstr ""
+"Versión de OpenWeatherMap que admite más funciones (como antes), pero "
+"necesita una clave API. Asegúrate de que tu límite de llamadas sea de 1000 "
+"llamadas al día para evitar cargos. Obtén más información sobre el servicio "
+"en openweathermap.org/api/one-call-api."
 
 #. 3.8->settings-schema.json->pirateweather_label->description
 msgid ""
@@ -2790,6 +2834,9 @@ msgid ""
 "data that is compatible with the Dark Sky API. Read more about the service "
 "at pirateweather.net."
 msgstr ""
+"Pirate Weather es un servicio meteorológico gratuito y de código abierto que "
+"proporciona datos meteorológicos compatibles con la API de Dark Sky. Para "
+"obtener más información sobre el servicio, visite pirateweather.net."
 
 #. 3.8->settings-schema.json->visualcrossing_label->description
 msgid ""
@@ -2800,6 +2847,12 @@ msgid ""
 " - Provides 1000 Free calls a day\n"
 " - Needs an API key"
 msgstr ""
+"Servicio meteorológico de Visual Crossing Corporation, fundada en 2003 con "
+"sede en EE. UU. y Alemania. Más información sobre el servicio en "
+"visualcrossing.com.\n"
+"\n"
+"- Ofrece 1000 llamadas gratuitas al día.\n"
+"- Requiere una clave API."
 
 #. 3.8->settings-schema.json->weatherbit_label->description
 msgid ""
@@ -2812,6 +2865,17 @@ msgid ""
 " - Using alerts will increase call usage by 33%\n"
 " - Hourly Weather forecast is supported but requires a non-free account."
 msgstr ""
+"Servicio de datos meteorológicos históricos y previsiones proporcionado por "
+"Weatherbit LLC en EE. UU. Más información sobre el servicio en "
+"weatherbit.io.\n"
+"\n"
+" - Se recomienda una frecuencia de actualización de al menos 1 hora, ya que "
+"de lo contrario podría superar su cuota diaria. La suscripción gratuita a la "
+"API está limitada a 50 llamadas al día.\n"
+" - Se necesita una clave API.\n"
+" - El uso de alertas aumentará el uso de llamadas en un 33 %.\n"
+" - Se admite la previsión meteorológica por horas, pero requiere una cuenta "
+"de pago."
 
 #. 3.8->settings-schema.json->tomorrowio_label->description
 msgid ""
@@ -2822,6 +2886,12 @@ msgid ""
 " - Free plan includes 1000 calls per day\n"
 " - Needs an API key"
 msgstr ""
+"Datos meteorológicos de una empresa estadounidense de tecnología "
+"meteorológica con sede en Boston desde 2016. Más información sobre el "
+"servicio en tomorrow.io.\n"
+"\n"
+"- El plan gratuito incluye 1000 llamadas al día.\n"
+"- Requiere una clave API."
 
 #. 3.8->settings-schema.json->accuweather_label->description
 msgid ""
@@ -2833,6 +2903,14 @@ msgid ""
 "day, remaining number of calls are shown in the applet tooltip\n"
 " - Needs an API key"
 msgstr ""
+"El servicio en línea de la empresa AccuWeather Inc, fundada en 1962 y con "
+"sede en EE. UU., proporciona información meteorológica a nivel mundial. Para "
+"obtener más información sobre el servicio, visite accuweather.com.\n"
+"\n"
+"- Con el plan gratuito, solo hay un número muy limitado de llamadas al día; "
+"el número restante de llamadas se muestra en la información sobre "
+"herramientas del applet.\n"
+"- Se necesita una clave API."
 
 #. 3.8->settings-schema.json->weatherunderground_label->description
 msgid ""
@@ -2845,113 +2923,106 @@ msgid ""
 " - Needs an API key\n"
 " - Current weather condition come from forecast"
 msgstr ""
+"Weather Underground es una empresa privada de información meteorológica "
+"basada en la web. Proporciona observaciones y previsiones meteorológicas en "
+"un gran número de lugares de todo el mundo. Su sede se encuentra en Ann "
+"Arbor, Estados Unidos. Para más información sobre el servicio, visite "
+"wunderground.com.\n"
+"\n"
+"- Solo permite 1500 llamadas al día, por lo que se recomienda un ciclo de "
+"actualización de 15 minutos.\n"
+"- Necesita una clave API.\n"
+"- Las condiciones meteorológicas actuales provienen de la previsión."
 
 #. 3.8->settings-schema.json->metoffice_forecast_apikey->description
-#, fuzzy
 msgid "Forecasts API Key"
-msgstr "Clave de API incorrecta"
+msgstr "Clave API de pronósticos"
 
 #. 3.8->settings-schema.json->metoffice_forecast_apikey->tooltip
 msgid ""
 "Subscribe to 'Site Specific' -> 'Global Spot' Free plan to get this key."
 msgstr ""
+"Suscríbete al plan gratuito 'Site Specific' -> 'Global Spot' para obtener "
+"esta clave."
 
 #. 3.8->settings-schema.json->metoffice_observations_apikey->description
 msgid "Observations API Key"
-msgstr ""
+msgstr "Clave API de observaciones"
 
 #. 3.8->settings-schema.json->metoffice_observations_apikey->tooltip
 msgid ""
 "Subscribe to 'Observations' -> 'Land Observations' Free plan to get this key."
 msgstr ""
+"Suscríbete a 'Observaciones' -> 'Observaciones terrestres' Plan gratuito "
+"para obtener esta clave."
 
 #. 3.8->settings-schema.json->openweathermap_onecall_apikey->description
-#, fuzzy
 msgid "OpenWeatherMap OneCall API Key"
-msgstr "OpenWeatherMap OneCall (necesita clave)"
+msgstr "Clave API de OpenWeatherMap OneCall"
 
 #. 3.8->settings-schema.json->openweathermap_onecall_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at openweathermap.org and paste it here."
-msgstr ""
-"Copie esto desde su cuenta del proveedor de datos utilizado y péguelo aquí."
+msgstr "Copie esto de su cuenta en openweathermap.org y péguelo aquí."
 
 #. 3.8->settings-schema.json->pirateweather_apikey->description
-#, fuzzy
 msgid "Pirate Weather API Key"
-msgstr "Pirate Weather"
+msgstr "Clave API de Pirate Weather"
 
 #. 3.8->settings-schema.json->pirateweather_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at pirateweather.net and paste it here."
-msgstr ""
-"Copie esto desde su cuenta del proveedor de datos utilizado y péguelo aquí."
+msgstr "Copie esto de su cuenta en pirateweather.net y péguelo aquí."
 
 #. 3.8->settings-schema.json->visualcrossing_apikey->description
-#, fuzzy
 msgid "Visual Crossing API Key"
-msgstr "Visual Crossing"
+msgstr "Clave API de Visual Crossing"
 
 #. 3.8->settings-schema.json->visualcrossing_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at visualcrossing.com and paste it here."
-msgstr ""
-"Copie esto desde su cuenta del proveedor de datos utilizado y péguelo aquí."
+msgstr "Copie esto de su cuenta en visualcrossing.com y péguelo aquí."
 
 #. 3.8->settings-schema.json->weatherbit_apikey->description
-#, fuzzy
 msgid "Weatherbit API Key"
-msgstr "WeatherBit"
+msgstr "Clave API de Weatherbit"
 
 #. 3.8->settings-schema.json->weatherbit_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at weatherbit.io and paste it here."
-msgstr ""
-"Copie esto desde su cuenta del proveedor de datos utilizado y péguelo aquí."
+msgstr "Copie esto de su cuenta en weatherbit.io y péguelo aquí."
 
 #. 3.8->settings-schema.json->tomorrowio_apikey->description
-#, fuzzy
 msgid "Tomorrow.io API Key"
-msgstr "Tomorrow.io"
+msgstr "Clave API de Tomorrow.io"
 
 #. 3.8->settings-schema.json->tomorrowio_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at tomorrow.io and paste it here."
-msgstr ""
-"Copie esto desde su cuenta del proveedor de datos utilizado y péguelo aquí."
+msgstr "Copie esto de su cuenta en tomorrow.io y péguelo aquí."
 
 #. 3.8->settings-schema.json->accuweather_apikey->description
-#, fuzzy
 msgid "AccuWeather API Key"
-msgstr "AccuWeather"
+msgstr "Clave API de AccuWeather"
 
 #. 3.8->settings-schema.json->accuweather_apikey->tooltip
-#, fuzzy
 msgid ""
 "Copy this from your account at developer.accuweather.com and paste it here."
-msgstr ""
-"Copie esto desde su cuenta del proveedor de datos utilizado y péguelo aquí."
+msgstr "Copie esto de su cuenta en developer.accuweather.com y péguelo aquí."
 
 #. 3.8->settings-schema.json->weatherunderground_apikey->description
-#, fuzzy
 msgid "Weather Underground API Key"
-msgstr "Weather Underground"
+msgstr "Clave API de Weather Underground"
 
 #. 3.8->settings-schema.json->weatherunderground_apikey->tooltip
-#, fuzzy
 msgid ""
 "Copy this from your account at www.wunderground.com/weather/api and paste it "
 "here."
 msgstr ""
-"Copie esto desde su cuenta del proveedor de datos utilizado y péguelo aquí."
+"Copie esto de su cuenta en www.wunderground.com/weather/api y péguelo aquí."
 
 #. 3.8->settings-schema.json->apiKey->description
 msgid "API Key - Hidden, only for backwards compatibility"
-msgstr ""
+msgstr "Clave API: oculta, solo para compatibilidad con versiones anteriores"
 
 #. 3.8->settings-schema.json->geoclue->description
 msgid "Prioritize GeoClue for location detection"
-msgstr ""
+msgstr "Priorizar GeoClue para la detección de la ubicación"
 
 #. 3.8->settings-schema.json->geoclue->tooltip
 msgid ""
@@ -2961,32 +3032,41 @@ msgid ""
 "fall back to IP-based location detection if GeoClue is not available or "
 "fails to provide location information."
 msgstr ""
+"Habilite esta opción para intentar utilizar GeoClue para la detección "
+"automática de la ubicación en primer lugar, si está disponible. Esto puede "
+"proporcionar información de ubicación más precisa en dispositivos con "
+"hardware compatible, pero puede ser muy inexacto sin él. Se seguirá "
+"utilizando la detección de ubicación basada en IP si GeoClue no está "
+"disponible o no proporciona información de ubicación."
 
 #. 3.8->settings-schema.json->autoloc_provider->description
 msgid "IP-based automatic location provider"
-msgstr ""
+msgstr "Proveedor de localización automática basado en IP"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geoip.fedoraproject.org"
-msgstr ""
+msgstr "geoip.fedoraproject.org"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "ipapi.com"
-msgstr ""
+msgstr "ipapi.com"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geojs.io"
-msgstr ""
+msgstr "geojs.io"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geoiplookup.io"
-msgstr ""
+msgstr "geoiplookup.io"
 
 #. 3.8->settings-schema.json->autoloc_provider->tooltip
 msgid ""
 "Usually this doesn't need changed, some users have reported better accuracy, "
 "corporate network support or various country-wide bans with one or other."
 msgstr ""
+"Por lo general, no es necesario cambiarlo, pero algunos usuarios han "
+"informado de una mayor precisión, compatibilidad con redes corporativas o "
+"diversas prohibiciones a nivel nacional con uno u otro."
 
 #. 3.8->settings-schema.json->location->tooltip
 msgid ""
@@ -3085,7 +3165,6 @@ msgid "Show both temperature units at the same time"
 msgstr "Mostrar ambas unidades de temperatura"
 
 #. 3.8->settings-schema.json->tempTextOverride->tooltip
-#, fuzzy
 msgid ""
 "Some of the available values are: {c} is condition, {t} is temperature and "
 "{u} is unit. Full list of values are available on the Cinnamon spices "
@@ -3093,8 +3172,9 @@ msgid ""
 "Can be used if label does not fit on vertical panel, among other smart "
 "things."
 msgstr ""
-"Los valores disponibles son: {c} es la condición, {t} es la temperatura y "
-"{u} es la unidad.\n"
+"Algunos de los valores disponibles son: {c} es condición, {t} es temperatura "
+"y {u} es unidad. La lista completa de valores está disponible en el sitio "
+"web de Cinnamon spices.\n"
 "Se puede utilizar si la etiqueta no cabe en el panel vertical, entre otras "
 "cosas inteligentes."
 
@@ -3224,9 +3304,8 @@ msgstr ""
 " Por favor, asegúrese de que el problema no haya sido previamente enviado."
 
 #. 3.8->settings-schema.json->maintainer->description
-#, fuzzy
 msgid "Current maintainer: ---"
-msgstr "Responsable actual: Gr3q"
+msgstr "Responsable actual: ---"
 
 #. 3.8->settings-schema.json->issue-reporting-explanation->description
 msgid ""
