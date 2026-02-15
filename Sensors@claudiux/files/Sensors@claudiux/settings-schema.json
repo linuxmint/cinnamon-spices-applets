@@ -15,7 +15,8 @@
         "section_Display",
         "section_Tooltip",
         "section_Report",
-        "section_remove_incompatible_xlets"
+        "section_remove_incompatible_xlets",
+        "section_dependencies"
       ]
     },
     "page_Temperatures": {
@@ -107,6 +108,13 @@
       "title": "Remove from panels certain applets that also use sensors",
       "keys": [
         "remove_temperatureATfevimu"
+      ]
+    },
+    "section_dependencies": {
+      "type": "section",
+      "title": "Dependencies",
+      "keys": [
+        "do_not_check_dependencies"
       ]
     },
     "section_tempDisktemp": {
@@ -392,6 +400,12 @@
     "default": false,
     "description": "Show in menu the action: Restart this applet",
     "tooltip": "Whether or not to display in menu the action: Restart this applet."
+  },
+  "do_not_check_dependencies": {
+    "type": "switch",
+    "default": false,
+    "description": "Do not check dependencies",
+    "tooltip": "If you do not want to install certain dependencies (e.g., fonts), check this box. Be careful with dependencies that are necessary for this applet to function properly."
   },
   "make_disktemp_readable_by_user": {
     "type": "button",
