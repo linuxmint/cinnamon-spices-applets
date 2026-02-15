@@ -506,14 +506,14 @@ Note.prototype = {
         switchTypeMenuItem.connect("activate", Lang.bind(this, this.switchType));
     },
 
-    allocate: function(actor, box, flags) {
+    allocate: function(actor, box) {
         let childBox = new Clutter.ActorBox();
 
         childBox.x1 = box.x1;
         childBox.x2 = box.x2;
         childBox.y1 = box.y1;
         childBox.y2 = box.y2;
-        this.textBox.allocate(childBox, flags);
+        this.textBox.allocate(childBox);
     },
 
     getPreferedHeight: function(actor, forWidth, alloc) {
@@ -1072,7 +1072,7 @@ CheckListItem.prototype = {
         else this.entry.remove_style_pseudo_class("checked");
     },
 
-    allocate: function(actor, box, flags) {
+    allocate: function(actor, box) {
         let height = box.y2 - box.y1;
 
         let cbBox = new Clutter.ActorBox();
@@ -1103,8 +1103,8 @@ CheckListItem.prototype = {
             eBox.y2 = eBox.y1 + eHeight;
         }
 
-        this.checkBox.actor.allocate(cbBox, flags);
-        this.entry.allocate(eBox, flags);
+        this.checkBox.actor.allocate(cbBox);
+        this.entry.allocate(eBox);
     },
 
     getPreferedHeight: function(actor, forWidth, alloc) {
