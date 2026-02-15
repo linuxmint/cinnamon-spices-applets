@@ -1,0 +1,328 @@
+# CLASSIC MENU
+# This file is put in the public domain.
+# fredcw, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: classic-menu@fredcw 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-29 14:23-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#. metadata.json->name
+#. applet.js:16
+msgid "Classic Menu"
+msgstr "Klasszikus Menü"
+
+#. applet.js:16
+msgid "Classic Menu is for cinnamon versions 6.6 and later only."
+msgstr ""
+"A Klasszikus Menü csak a Cinnamon 6.6-os és újabb verzióihoz érhető el."
+
+#. 6.6/applet.js:397 6.6/applet.js:486
+msgid "Remove from favorites"
+msgstr "Eltávolítás a kedvencek közül"
+
+#. 6.6/applet.js:404 6.6/applet.js:489
+msgid "Add to favorites"
+msgstr "Hozzáadás a kedvencekhez"
+
+#. 6.6/applet.js:473
+msgid "Run with dedicated GPU"
+msgstr "Futtatás dedikált GPU-val"
+
+#. 6.6/applet.js:477
+msgid "Add to panel"
+msgstr "Hozzáadás a panelhez"
+
+#. 6.6/applet.js:481
+msgid "Add to desktop"
+msgstr "Hozzáadás az asztalhoz"
+
+#. 6.6/applet.js:496
+msgid "Properties"
+msgstr "Tulajdonságok"
+
+#. 6.6/applet.js:501
+msgid "Uninstall"
+msgstr "Eltávolítás"
+
+#. 6.6/applet.js:759 6.6/applet.js:867
+msgid "This file is no longer available"
+msgstr "Ez a fájl már nem érhető el"
+
+#. 6.6/applet.js:773 6.6/applet.js:881
+msgid "Open with"
+msgstr "Megnyitás ezzel:"
+
+#. 6.6/applet.js:819 6.6/applet.js:927
+msgid "Other application..."
+msgstr "Más alkalmazás..."
+
+#. 6.6->settings-schema.json->menu->title
+#. 6.6/applet.js:1199
+msgid "Menu"
+msgstr "Menü"
+
+#. 6.6/applet.js:1204
+msgid "Edit menu"
+msgstr "Menü szerkesztése"
+
+#. 6.6/applet.js:2458
+msgid "Places"
+msgstr "Helyek"
+
+#. 6.6/applet.js:2496
+msgid "Recent Files"
+msgstr "Legutóbbi fájlok"
+
+#. 6.6/applet.js:2511
+msgid "Clear list"
+msgstr "Lista törlése"
+
+#. 6.6/applet.js:2512
+msgid "Clear all recent documents"
+msgstr "Az összes legutóbbi dokumentum törlése"
+
+#. 6.6/applet.js:2531
+msgid "No recent documents"
+msgstr "Nincsenek friss dokumentumok"
+
+#. 6.6/applet.js:2566
+msgid "Favorites"
+msgstr "Kedvencek"
+
+#. 6.6/applet.js:2595
+msgid "All Applications"
+msgstr "Minden alkalmazás"
+
+#. 6.6/applet.js:2663
+msgid "Lock Screen"
+msgstr "Zárolási képernyő"
+
+#. 6.6/applet.js:2664
+msgid "Lock the screen"
+msgstr "A képernyő zárolása"
+
+#. 6.6/applet.js:2688
+msgid "Log Out"
+msgstr "Kijelentkezés"
+
+#. 6.6/applet.js:2689
+msgid "Leave the session"
+msgstr "Kilépés a munkamenetből"
+
+#. 6.6/applet.js:2700
+msgid "Shut Down"
+msgstr "Leállítás"
+
+#. 6.6/applet.js:2701
+msgid "Shut down the computer"
+msgstr "Kapcsold ki a számítógépet"
+
+#. metadata.json->description
+msgid "The classic Cinnamon menu for cinnamon 6.6 and later"
+msgstr "A klasszikus Cinnamon menü a Cinnamon 6.6-os és újabb verziókhoz"
+
+#. 6.6->settings-schema.json->panel->title
+msgid "Panel"
+msgstr "Panel"
+
+#. 6.6->settings-schema.json->panel-appear->title
+msgid "Appearance"
+msgstr "Megjelenés"
+
+#. 6.6->settings-schema.json->panel-behave->title
+#. 6.6->settings-schema.json->menu-behave->title
+msgid "Behavior"
+msgstr "Viselkedés"
+
+#. 6.6->settings-schema.json->menu-layout->title
+msgid "Layout and content"
+msgstr "Elrendezés és tartalom"
+
+#. 6.6->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Billentyűparancs a menü megnyitásához és bezárásához"
+
+#. 6.6->settings-schema.json->menu-custom->description
+msgid "Use a custom icon and label"
+msgstr "Használjon egyéni ikont és címkét"
+
+#. 6.6->settings-schema.json->menu-custom->tooltip
+msgid "Check this to specify a custom icon and label"
+msgstr "Jelölje be ezt az opciót egyéni ikon és címke megadásához"
+
+#. 6.6->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr "Ikon"
+
+#. 6.6->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "Válasszon ki egy ikont a panelen való megjelenítéshez."
+
+#. 6.6->settings-schema.json->menu-icon-size->units
+#. 6.6->settings-schema.json->category-icon-size->units
+#. 6.6->settings-schema.json->application-icon-size->units
+#. 6.6->settings-schema.json->fav-icon-size->units
+msgid "px"
+msgstr "px"
+
+#. 6.6->settings-schema.json->menu-icon-size->description
+msgid "Icon size"
+msgstr "Ikon mérete"
+
+#. 6.6->settings-schema.json->menu-label->description
+msgid "Text"
+msgstr "Szöveg"
+
+#. 6.6->settings-schema.json->menu-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "Írjon be egyéni szöveget a panelen való megjelenítéshez."
+
+#. 6.6->settings-schema.json->show-category-icons->description
+msgid "Show category icons"
+msgstr "Kategória ikonok megjelenítése"
+
+#. 6.6->settings-schema.json->show-category-icons->tooltip
+msgid "Choose whether or not to show icons on categories."
+msgstr "Válassza ki, hogy megjelenjenek-e ikonok a kategóriákban."
+
+#. 6.6->settings-schema.json->category-icon-size->description
+msgid "Categories icon size"
+msgstr "Kategóriák ikonmérete"
+
+#. 6.6->settings-schema.json->show-application-icons->description
+msgid "Show application icons"
+msgstr "Alkalmazásikonok megjelenítése"
+
+#. 6.6->settings-schema.json->show-application-icons->tooltip
+msgid "Choose whether or not to show icons on applications."
+msgstr "Válassza ki, hogy megjelenjenek-e az ikonok az alkalmazásokban."
+
+#. 6.6->settings-schema.json->application-icon-size->description
+msgid "Applications icon size"
+msgstr "Alkalmazások ikon mérete"
+
+#. 6.6->settings-schema.json->favbox-show->description
+msgid "Show favorites and session buttons"
+msgstr "Kedvencek és munkamenet-gombok megjelenítése"
+
+#. 6.6->settings-schema.json->favbox-show->tooltip
+msgid "Choose whether or not to show the left pane of the menu."
+msgstr "Válassza ki, hogy megjelenjen-e a menü bal oldali panelje."
+
+#. 6.6->settings-schema.json->fav-icon-size->description
+msgid "Favorites icon size"
+msgstr "Kedvencek ikon mérete"
+
+#. 6.6->settings-schema.json->show-favorites->description
+msgid "Show favorites"
+msgstr "Kedvencek megjelenítése"
+
+#. 6.6->settings-schema.json->show-favorites->tooltip
+msgid "Choose whether or not to show favorite files in the menu."
+msgstr "Válassza ki, hogy megjelenjenek-e a kedvenc fájlok a menüben."
+
+#. 6.6->settings-schema.json->show-places->description
+msgid "Show bookmarks and places"
+msgstr "Könyvjelzők és helyek megjelenítése"
+
+#. 6.6->settings-schema.json->show-places->tooltip
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "Válassza ki, hogy megjelenjenek-e a könyvjelzők és a helyek a menüben."
+
+#. 6.6->settings-schema.json->show-recents->description
+msgid "Show recents"
+msgstr "Legutóbbiak megjelenítése"
+
+#. 6.6->settings-schema.json->show-recents->tooltip
+msgid "Choose whether or not to show recents in the menu."
+msgstr "Válassza ki, hogy megjelenjenek-e a legutóbbiak a menüben."
+
+#. 6.6->settings-schema.json->category-hover->description
+msgid "Change categories on hover"
+msgstr "Kategóriák módosítása egérrel"
+
+#. 6.6->settings-schema.json->category-hover->tooltip
+msgid "Choose whether or not to change categories by hovering."
+msgstr "Válassza ki, hogy az egérrel módosítsa-e a kategóriákat."
+
+#. 6.6->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr "Automatikus görgetés engedélyezése az alkalmazáslistában"
+
+#. 6.6->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
+"Válassza ki, hogy engedélyezi-e a folyamatos automatikus görgetést az "
+"alkalmazáslistában."
+
+#. 6.6->settings-schema.json->search-filesystem->description
+msgid "Enable filesystem path entry in search box"
+msgstr "Fájlrendszer-útvonal megadásának engedélyezése a keresőmezőben"
+
+#. 6.6->settings-schema.json->search-filesystem->tooltip
+msgid "Allows path entry in the menu search box."
+msgstr "Lehetővé teszi az elérési út megadását a menü keresőmezőjében."
+
+#. 6.6->settings-schema.json->force-show-panel->description
+msgid "Force the panel to be visible when opening the menu"
+msgstr "A panel láthatóságának kényszerítése a menü megnyitásakor"
+
+#. 6.6->settings-schema.json->force-show-panel->tooltip
+msgid ""
+"Opening the menu will also show the main panel (which may be auto-hidden)."
+msgstr ""
+"A menü megnyitásakor a fő panel is megjelenik (ami lehet hogy automatikusan "
+"elrejtett)."
+
+#. 6.6->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr "Nyissa meg a menüt, amikor fölé viszem az egeret"
+
+#. 6.6->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr "Menü megnyitásának engedélyezése, amikor az egér belép az appletbe"
+
+#. 6.6->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "ezredmásodperc"
+
+#. 6.6->settings-schema.json->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Menübeli ráközelítés késleltetése"
+
+#. 6.6->settings-schema.json->hover-delay->tooltip
+msgid "Delay before the menu opens when hovered"
+msgstr "Késleltetés a menü megnyitása előtt, ha az egérmutatót ráhúzzuk"
+
+#. 6.6->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Menüanimációk használata"
+
+#. 6.6->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr "Engedélyezze a menü animációját megnyitáskor és bezáráskor"
+
+#. 6.6->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Nyissa meg a menüszerkesztőt"
+
+#. 6.6->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr "Nyomja meg ezt a gombot a menüpontok testreszabásához."
+
+#. 6.6->settings-schema.json->reset-menu-size-button->description
+msgid "Restore the menu to its original size"
+msgstr "Menü visszaállítása eredeti méretére"

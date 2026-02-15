@@ -1,0 +1,403 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Combined Monitor Applet 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-15 21:36+0100\n"
+"PO-Revision-Date: 2025-12-15 22:00+0100\n"
+"Last-Translator: Automated Translator <example@example.com>\n"
+"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# applet.js strings
+msgid "Slot 1 (Standard)"
+msgstr "插槽 1 (标准)"
+
+msgid "Slot 2 (Empty)"
+msgstr "插槽 2 (空)"
+
+msgid "Slot 3 (Empty)"
+msgstr "插槽 3 (空)"
+
+msgid "Separator"
+msgstr "分隔符"
+
+msgid "No Separator"
+msgstr "无分隔符"
+
+msgid "Symbols"
+msgstr "符号"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "Icon-White"
+msgstr "图标-白色"
+
+msgid "Icon-Dark"
+msgstr "图标-深色"
+
+msgid "No Symbol (Text Label)"
+msgstr "无符号 (文本标签)"
+
+msgid "TEMP"
+msgstr "温度"
+
+msgid "RAM"
+msgstr "内存"
+
+msgid "SWAP"
+msgstr "交换空间"
+
+msgid "Profile Management"
+msgstr "配置文件管理"
+
+msgid "Activate (Load)"
+msgstr "激活 (加载)"
+
+msgid "Save Current Settings"
+msgstr "保存当前设置"
+
+msgid "System Monitor"
+msgstr "系统监控器"
+
+msgid "Restart Cinnamon"
+msgstr "重启 Cinnamon"
+
+msgid "Profile Saved: %s"
+msgstr "配置文件已保存: %s"
+
+msgid "Active: %s"
+msgstr "当前激活: %s"
+
+msgid "N/A"
+msgstr "不适用"
+
+# settings-schema.json strings (Descriptions, Tooltips, Options)
+# Page Titles
+msgid "CPU Temperature"
+msgstr "CPU 温度"
+
+msgid "Profiles"
+msgstr "配置文件"
+
+msgid "General"
+msgstr "常规"
+
+# Section Titles
+msgid "Order of Metrics"
+msgstr "指标顺序"
+
+msgid "Display"
+msgstr "显示"
+
+msgid "Thresholds"
+msgstr "阈值"
+
+msgid "Colors"
+msgstr "颜色"
+
+msgid "Thresholds (in °C)"
+msgstr "阈值 (单位 °C)"
+
+msgid "Settings"
+msgstr "设置"
+
+msgid "Profiles (Slots 1 to 3)"
+msgstr "配置文件 (插槽 1 至 3)"
+
+msgid "Global"
+msgstr "全局"
+
+# CPU
+msgid "Show CPU"
+msgstr "显示 CPU"
+
+msgid "Text for CPU"
+msgstr "CPU 文本"
+
+msgid "Custom symbol/icon for CPU. Leave empty for text label."
+msgstr "CPU 的自定义符号/图标。留空则显示文本标签。"
+
+msgid "Show percentage sign (%) for CPU"
+msgstr "为 CPU 显示百分号 (%)"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed without the percentage "
+"sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in "
+"the 'General' tab acts as a master switch."
+msgstr ""
+"如果禁用，则仅显示值（例如 '45'），不带百分号（例如 '45%'）。'常规' 选项卡中"
+"的 '显示百分号 (%) (主开关)' 选项用作主开关。"
+
+msgid "Threshold LOW"
+msgstr "阈值 低"
+
+msgid "The LOW color is used below this value"
+msgstr "低于此值时使用 颜色 低"
+
+msgid "Threshold MED"
+msgstr "阈值 中"
+
+msgid "The MED color is used between LOW and MED"
+msgstr "在 低 和 中 之间使用 颜色 中"
+
+msgid "Threshold HIGH"
+msgstr "阈值 高"
+
+msgid "The HIGH color is used between MED and HIGH"
+msgstr "在 中 和 高 之间使用 颜色 高"
+
+msgid "Enable color change for CPU"
+msgstr "启用 CPU 颜色变化"
+
+msgid "Color LOW"
+msgstr "颜色 低"
+
+msgid "Color MED"
+msgstr "颜色 中"
+
+msgid "Color HIGH"
+msgstr "颜色 高"
+
+msgid "Color CRITICAL"
+msgstr "颜色 危险"
+
+msgid "Used above the HIGH threshold"
+msgstr "高于 高 阈值时使用"
+
+# TEMP
+msgid "Show Temperature"
+msgstr "显示温度"
+
+msgid ""
+"Enables the display of CPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Please refer to the "
+"instructions in the README.md."
+msgstr ""
+"启用 CPU 温度显示。**重要提示：** 在许多系统上，为了使此功能正常工作，需要安"
+"装 'lm-sensors' 包并运行 'sudo sensors-detect'。请参阅 README.md 中的说明。"
+
+msgid "Show °C symbol"
+msgstr "显示 °C 符号"
+
+msgid ""
+"Controls whether the Celsius symbol (°C or °F) should be displayed after the "
+"value."
+msgstr "控制值后是否显示摄氏度 (°C) 或华氏度 (°F) 符号。"
+
+msgid "Text for Temperature"
+msgstr "温度文本"
+
+msgid "Custom symbol/icon for Temperature. Leave empty for text label."
+msgstr "温度的自定义符号/图标。留空则显示文本标签。"
+
+msgid "Unit of Measurement"
+msgstr "计量单位"
+
+msgid "Celsius (°C)"
+msgstr "摄氏度 (°C)"
+
+msgid "Fahrenheit (°F)"
+msgstr "华氏度 (°F)"
+
+msgid ""
+"Choose whether the temperature should be displayed in Celsius or Fahrenheit. "
+"Threshold values must be adjusted accordingly."
+msgstr "选择温度是以摄氏度还是华氏度显示。阈值必须相应调整。"
+
+msgid "The LOW color is used below this value (applies to °C and °F)"
+msgstr "低于此值时使用 颜色 低 (适用于 °C 和 °F)"
+
+msgid "The MED color is used between LOW and MED (applies to °C and °F)"
+msgstr "在 低 和 中 之间使用 颜色 中 (适用于 °C 和 °F)"
+
+msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+msgstr "在 中 和 高 之间使用 颜色 高 (适用于 °C 和 °F)"
+
+msgid "Enable color change for TEMP"
+msgstr "启用温度颜色变化"
+
+msgid "Color LOW (Green)"
+msgstr "颜色 低 (绿色)"
+
+msgid "Color MED (Orange)"
+msgstr "颜色 中 (橙色)"
+
+msgid "Color HIGH (Red-Orange)"
+msgstr "颜色 高 (红橙色)"
+
+msgid "Color CRITICAL (Red)"
+msgstr "颜色 危险 (红色)"
+
+# RAM
+msgid "Show RAM"
+msgstr "显示内存"
+
+msgid "Text for RAM"
+msgstr "内存文本"
+
+msgid "Custom symbol/icon for RAM. Leave empty for text label."
+msgstr "内存的自定义符号/图标。留空则显示文本标签。"
+
+msgid "Show percentage sign (%) for RAM"
+msgstr "为内存显示百分号 (%)"
+
+msgid "Display Mode"
+msgstr "显示模式"
+
+msgid "Percentage Usage (%)"
+msgstr "百分比使用率 (%)"
+
+msgid "Used Memory (MB/GB)"
+msgstr "已用内存 (MB/GB)"
+
+msgid "Free Memory (MB/GB)"
+msgstr "可用内存 (MB/GB)"
+
+msgid ""
+"Choose whether percentage usage or used/free memory in MB/GB should be "
+"displayed."
+msgstr ""
+
+msgid "Enable color change for RAM"
+msgstr "启用内存颜色变化"
+
+# SWAP
+msgid "Show SWAP"
+msgstr "显示交换空间"
+
+msgid "Text for SWAP"
+msgstr "交换空间文本"
+
+msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+msgstr "交换空间的自定义符号/图标。留空则显示文本标签。"
+
+msgid "Only show SWAP when used"
+msgstr "仅在使用时显示交换空间"
+
+msgid "If active, it only shows SWAP when usage is greater than 0%."
+msgstr "如果启用，仅在占用率大于 0% 时显示交换空间。"
+
+msgid "Show percentage sign (%) for SWAP"
+msgstr "为交换空间显示百分号 (%)"
+
+msgid "Enable color change for SWAP"
+msgstr "启用交换空间颜色变化"
+
+msgid ""
+"If the value is less than or equal to the LOW threshold, the LOW color is "
+"used."
+msgstr "如果值小于或等于 阈值 低，则使用 颜色 低。"
+
+msgid ""
+"If the value is greater than LOW and less than or equal to the MED "
+"threshold, the MED color is used."
+msgstr "如果值大于 低 且小于或等于 阈值 中，则使用 颜色 中。"
+
+msgid ""
+"If the value is greater than MED and less than or equal to the HIGH "
+"threshold, the HIGH color is used."
+msgstr "如果值大于 中 且小于或等于 阈值 高，则使用 颜色 高。"
+
+# Order
+msgid "CPU Position"
+msgstr "CPU 位置"
+
+msgid "Position 1 (Left)"
+msgstr "位置 1 (左)"
+
+msgid "Position 2"
+msgstr "位置 2"
+
+msgid "Position 3"
+msgstr "位置 3"
+
+msgid "Position 4 (Right)"
+msgstr "位置 4 (右)"
+
+msgid ""
+"Defines the display position of CPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr "定义 CPU 的显示位置。该位置会自动与同一位置的指标进行互换。"
+
+msgid "TEMP Position"
+msgstr "温度 位置"
+
+msgid "RAM Position"
+msgstr "内存 位置"
+
+msgid "SWAP Position"
+msgstr "交换空间 位置"
+
+# General
+msgid "Update Interval (ms)"
+msgstr "更新间隔 (毫秒)"
+
+msgid "Show separator between metrics"
+msgstr "在指标之间显示分隔符"
+
+msgid "Separator Text"
+msgstr "分隔符文本"
+
+msgid "Separator Color"
+msgstr "分隔符颜色"
+
+msgid "Show percentage sign (%) (Master Switch)"
+msgstr "显示百分号 (%) (主开关)"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed for all percentage "
+"displays without the percentage sign (e.g., '45%'). Individual switches for "
+"CPU/RAM/SWAP must also be active."
+msgstr ""
+"如果禁用，则所有百分比显示都只显示值（例如 '45'），不带百分号（例如 '45%'）。"
+"CPU/RAM/SWAP 的单独开关也必须处于活动状态。"
+
+# Profiles
+msgid "Profile Message Duration (Seconds)"
+msgstr "配置文件消息持续时间 (秒)"
+
+msgid ""
+"How long should the message ('Profile saved', 'Profile active') be displayed "
+"in the panel."
+msgstr "消息（'配置文件已保存'、'配置文件已激活'）应在面板中显示多长时间。"
+
+msgid "Profile 1 Name"
+msgstr "配置文件 1 名称"
+
+msgid "Enter a custom profile name in the text field!"
+msgstr "在文本字段中输入自定义配置文件名称！"
+
+msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+msgstr "在弹出菜单中点击 '激活' 或 '保存' 配置文件 1。"
+
+msgid "Saved data for Profile 1 (internal)"
+msgstr "配置文件 1 的已保存数据 (内部)"
+
+msgid "Profile 2 Name"
+msgstr "配置文件 2 名称"
+
+msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+msgstr "在弹出菜单中点击 '激活' 或 '保存' 配置文件 2。"
+
+msgid "Saved data for Profile 2 (internal)"
+msgstr "配置文件 2 的已保存数据 (内部)"
+
+msgid "Profile 3 Name"
+msgstr "配置文件 3 名称"
+
+msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+msgstr "在弹出菜单中点击 '激活' 或 '保存' 配置文件 3。"
+
+msgid "Saved data for Profile 3 (internal)"
+msgstr "配置文件 3 的已保存数据 (内部)"
+
+#~ msgid "选择是显示百分比使用率还是已用/可用内存 (MB/GB)。"
+#~ msgstr ""
+#~ "Choose whether percentage usage or used/free memory in MB/GB should be "
+#~ "displayed."

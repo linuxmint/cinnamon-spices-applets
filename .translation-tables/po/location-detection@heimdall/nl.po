@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-26 17:55+0200\n"
+"PO-Revision-Date: 2024-04-21 12:31+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:56
+msgid "Your percieved location."
+msgstr "Uw waargenomen locatie."
+
+#: applet.js:104
+msgid "Your IPInfoDB account has been suspended."
+msgstr "Uw IPInfoDB-account is opgeschort."
+
+#: applet.js:104 applet.js:107
+msgid "Please set a valid API key in the applets settings."
+msgstr "Stel alstublieft een geldige API-sleutel in bij de appletinstellingen."
+
+#: applet.js:107
+msgid "Invalid API key."
+msgstr "Ongeldige API-sleutel."
+
+#: applet.js:119
+msgid "Something went Wrong!"
+msgstr "Er is iets misgegaan!"
+
+#. location-detection@heimdall->metadata.json->description
+msgid "Shows the geographic location of your public IP and country-flag."
+msgstr ""
+"Toont de geografische locatie van uw openbare IP-adres en vlag van het land."
+
+#. location-detection@heimdall->metadata.json->name
+msgid "Location Detection + Flags"
+msgstr "Locatiedetectie + vlaggen"
+
+#. location-detection@heimdall->settings-schema.json->register-
+#. ipinfodb->description
+msgid "Register on IPInfoDB to get an API key"
+msgstr "Registreer op IPInfoDB om een API-sleutel te krijgen"
+
+#. location-detection@heimdall->settings-schema.json->api-key->description
+msgid "API key from IPInfoDB"
+msgstr "API-sleutel van IPInfoDB"
+
+#. location-detection@heimdall->settings-schema.json->api-key->tooltip
+msgid "Get your API key from IPInfoDB and place it here."
+msgstr "Haal uw API-sleutel op van IPInfoDB en plaats deze hier."

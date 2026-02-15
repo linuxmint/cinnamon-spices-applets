@@ -1,0 +1,190 @@
+# ENHANCED SOUND APPLET
+# This file is put in the public domain.
+# claudiux, 2018
+#
+msgid ""
+msgstr ""
+
+#. 6.6/lib/balanceSlider.js:20
+msgid "Balance"
+msgstr ""
+
+#. 6.6->settings-schema.json->sectionMenu3->title
+msgid "Output Devices Not Displayed In The Context Menu"
+msgstr ""
+
+#. 6.6->settings-schema.json->sectionMenu4->title
+msgid "Input Devices Not Displayed In The Context Menu"
+msgstr ""
+
+#. 6.6->settings-schema.json->sectionBehavior1->title
+#. 6.4->settings-schema.json->sectionBehavior1->title
+msgid "External commands and scripts"
+msgstr ""
+
+#. 6.6->settings-schema.json->sectionSound6->title
+msgid "Advertisement"
+msgstr ""
+
+#. 6.6->settings-schema.json->userMenuWidth->description
+#. 6.4->settings-schema.json->userMenuWidth->description
+msgid "Menu width (in pixels)"
+msgstr ""
+
+#. 6.6->settings-schema.json->shortenArtistTitle->description
+#. 6.4->settings-schema.json->shortenArtistTitle->description
+msgid "Shorten Artist and Title"
+msgstr ""
+
+#. 6.6->settings-schema.json->shortenArtistTitle->options
+#. 6.4->settings-schema.json->shortenArtistTitle->options
+msgid "None"
+msgstr ""
+
+#. 6.6->settings-schema.json->shortenArtistTitle->options
+#. 6.4->settings-schema.json->shortenArtistTitle->options
+msgid "Start"
+msgstr ""
+
+#. 6.6->settings-schema.json->shortenArtistTitle->options
+#. 6.4->settings-schema.json->shortenArtistTitle->options
+msgid "Middle"
+msgstr ""
+
+#. 6.6->settings-schema.json->shortenArtistTitle->options
+#. 6.4->settings-schema.json->shortenArtistTitle->options
+msgid "End"
+msgstr ""
+
+#. 6.6->settings-schema.json->shortenArtistTitle->tooltip
+#. 6.4->settings-schema.json->shortenArtistTitle->tooltip
+msgid ""
+"When the artist name or title is too long, you can choose how to shorten it."
+msgstr ""
+
+#. 6.6->settings-schema.json->doNotUsePlayerctld->description
+#. 6.4->settings-schema.json->doNotUsePlayerctld->description
+msgid "Do not use playerctl"
+msgstr ""
+
+#. 6.6->settings-schema.json->doNotUsePlayerctld->tooltip
+#. 6.4->settings-schema.json->doNotUsePlayerctld->tooltip
+msgid ""
+"When this option is checked, which is not recommended, playerctl "
+"installation is not required; playerctl will not be used, so this applet "
+"will run in degraded mode (artist, title or album art)."
+msgstr ""
+
+#. 6.6->settings-schema.json->labelIgnoredOutputDevices->description
+#. 6.6->settings-schema.json->labelIgnoredInputDevices->description
+msgid ""
+"In the list below, add a line containing part of its name (case sensitive) "
+"for each unwanted device."
+msgstr ""
+
+#. 6.6->settings-schema.json->ignoredOutputDevices->description
+#. 6.6->settings-schema.json->ignoredInputDevices->description
+msgid "Unwanted devices"
+msgstr ""
+
+#. 6.6->settings-schema.json->ignoredOutputDevices->columns->title
+#. 6.6->settings-schema.json->ignoredInputDevices->columns->title
+msgid "Part of the device name"
+msgstr ""
+
+#. 6.6->settings-schema.json->keyBalanceLeft->description
+msgid "Balance: to the left"
+msgstr ""
+
+#. 6.6->settings-schema.json->keyBalanceLeft->tooltip
+msgid "Set keybinding(s) to increase the volume on the left side."
+msgstr ""
+
+#. 6.6->settings-schema.json->keyBalanceRight->description
+msgid "Balance: to the right"
+msgstr ""
+
+#. 6.6->settings-schema.json->keyBalanceRight->tooltip
+msgid "Set keybinding(s) to increase the volume on the right side."
+msgstr ""
+
+#. 6.6->settings-schema.json->keyBalanceCenter->description
+msgid "Balance: re-init"
+msgstr ""
+
+#. 6.6->settings-schema.json->keyBalanceCenter->tooltip
+msgid ""
+"Set keybinding(s) to rebalance the volume between the left and right sides."
+msgstr ""
+
+#. 6.6->settings-schema.json->runAsync->description
+#. 6.4->settings-schema.json->runAsync->description
+msgid "Execute asynchronously"
+msgstr ""
+
+#. 6.6->settings-schema.json->runAsync->tooltip
+#. 6.4->settings-schema.json->runAsync->tooltip
+msgid ""
+"Enabled by default (recommended).\n"
+"Disable this option if you encounter running issues (rare)."
+msgstr ""
+
+#. 6.6->settings-schema.json->keepAlbumArtIcon->description
+#. 6.4->settings-schema.json->keepAlbumArtIcon->description
+msgid "Keep the album art as an icon when adjusting the volume"
+msgstr ""
+
+#. 6.6->settings-schema.json->showalbumButForSitesLabel->description
+#. 6.6->settings-schema.json->showalbumButForSites->description
+#. 6.4->settings-schema.json->showalbumButForSitesLabel->description
+#. 6.4->settings-schema.json->showalbumButForSites->description
+msgid "Do not display album art from these sites:"
+msgstr ""
+
+#. 6.6->settings-schema.json->showalbumButForSites->columns->title
+#. 6.4->settings-schema.json->showalbumButForSites->columns->title
+msgid "Activate"
+msgstr ""
+
+#. 6.6->settings-schema.json->showalbumButForSites->columns->title
+#. 6.4->settings-schema.json->showalbumButForSites->columns->title
+msgid "Site name"
+msgstr ""
+
+#. 6.6->settings-schema.json->showalbumButForSites->columns->title
+#. 6.4->settings-schema.json->showalbumButForSites->columns->title
+msgid "Local path to icon"
+msgstr ""
+
+#. 6.6->settings-schema.json->mic-mute->description
+#. 6.4->settings-schema.json->mic-mute->description
+msgid "Microphone Mute"
+msgstr ""
+
+#. 6.6->settings-schema.json->adv_avoid->description
+msgid "Try to avoid advertisement"
+msgstr ""
+
+#. 6.6->settings-schema.json->adv_volume->description
+msgid "Volume during advertisements"
+msgstr ""
+
+#. 6.6->settings-schema.json->adv_icon->description
+msgid "Symbolic icon displayed during advertisements"
+msgstr ""
+
+#. 6.6->settings-schema.json->adv_label->description
+msgid ""
+"Advertisements are detected using the title.\n"
+"When a title contains at least one of these words, the volume is reduced to "
+"the value indicated above.\n"
+"The volume is restored at the end of the advertisement."
+msgstr ""
+
+#. 6.6->settings-schema.json->adv_list->description
+msgid "Advertisement list"
+msgstr ""
+
+#. 6.6->settings-schema.json->adv_list->columns->title
+msgid "Part of title"
+msgstr ""

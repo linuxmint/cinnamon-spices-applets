@@ -1,0 +1,76 @@
+# NVIDIA GPU TEMPERATURE INDICATOR
+# This file is put in the public domain.
+# sophie-la-li, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidia-temp@sophie-la-li 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-13 18:46+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:18
+msgid "GPU Temperature"
+msgstr "GPU hőmérséklet"
+
+#. applet.js:34
+msgid "Nvidia GPU Temperature Indicator: Error"
+msgstr "Nvidia GPU hőmérsékletjelző: Hiba"
+
+#. applet.js:34
+msgid "It seems that nvidia-smi is not installed."
+msgstr "Úgy tűnik, hogy az nvidia-smi nincs telepítve."
+
+#. metadata.json->name
+msgid "Nvidia GPU Temperature Indicator"
+msgstr "Nvidia GPU hőmérsékletjelző"
+
+#. metadata.json->description
+msgid "Shows Nvidia GPU Temperature"
+msgstr "Megjeleníti az Nvidia GPU hőmérsékletét"
+
+#. settings-schema.json->interval->units
+msgid "ms"
+msgstr "ms"
+
+#. settings-schema.json->interval->description
+msgid "Update interval"
+msgstr "Frissítési időköz"
+
+#. settings-schema.json->interval->tooltip
+msgid "How often to update the temperature value."
+msgstr "Milyen gyakran kell frissíteni a hőmérsékleti értéket."
+
+#. settings-schema.json->use-fahrenheit->description
+msgid "Show temperature in Fahrenheit"
+msgstr "Hőmérséklet megjelenítése Fahrenheitben"
+
+#. settings-schema.json->use-fahrenheit->tooltip
+msgid "Whether or not show the temperature in Fahrenheit instead of Celsius."
+msgstr ""
+"Azt jelzi, hogy a hőmérséklet Fahrenheitben vagy Celsiusban jelenik-e meg."
+
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr "Mértékegység megjelenítése"
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Whether or not show the unit after the temperature value."
+msgstr "Megjelenítheti-e a mértékegységet a hőmérsékletérték után."
+
+#. settings-schema.json->show-unit-letter->description
+msgid "Show unit letter"
+msgstr "Mértékegységbetű megjelenítése"
+
+#. settings-schema.json->show-unit-letter->tooltip
+msgid "Whether or not show the unit letter (C or F)."
+msgstr "Megjeleníti-e a mértékegység betűjelét (C vagy F)."

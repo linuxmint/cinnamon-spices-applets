@@ -1,0 +1,103 @@
+# XSESSION
+# This file is put in the public domain.
+# claudiux, 2022
+#
+msgid ""
+msgstr ""
+
+#. applet.js:112
+msgid "RELOAD ALL"
+msgstr ""
+
+#. applet.js:249
+msgid "Ctrl + Middle-click: \n"
+msgstr ""
+
+#. applet.js:249 applet.js:341
+msgid "Show latest messages"
+msgstr ""
+
+#. applet.js:311 applet.js:553
+#, javascript-format
+msgid "%s latest messages"
+msgstr ""
+
+#. applet.js:311 applet.js:553
+msgid "min: 10. max: 250."
+msgstr ""
+
+#. applet.js:376
+msgid "Repeat last action"
+msgstr ""
+
+#. applet.js:466
+msgid "Reload Current Theme"
+msgstr ""
+
+#. settings-schema.json->section1->description
+msgid "Icon size"
+msgstr ""
+
+#. settings-schema.json->icon_size->description
+msgid "Size (in pixels) of menu icons"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "16"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "22"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "24"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "32"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "48"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "64"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "96"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "128"
+msgstr ""
+
+#. settings-schema.json->section2->description
+msgid "RELOAD ALL option"
+msgstr ""
+
+#. settings-schema.json->show_reload_all->description
+msgid "Show the RELOAD ALL option in submenus"
+msgstr ""
+
+#. settings-schema.json->show_reload_all->tooltip
+msgid "Caution! Reloading all spices of a given type may lead to errors."
+msgstr ""
+
+#. settings-schema.json->section3->description
+msgid "Latest messages"
+msgstr ""
+
+#. settings-schema.json->number_latest->description
+msgid "Number of latest messages to show"
+msgstr ""
+
+#. settings-schema.json->number_latest->tooltip
+msgid "(Including empty lines.)"
+msgstr ""
+
+#. scripts/watch-xse-latest.sh:10 scripts/watch-xse.sh:8
+msgid "-d"
+msgstr ""

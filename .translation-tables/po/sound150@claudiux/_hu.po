@@ -1,0 +1,110 @@
+# ENHANCED SOUND APPLET
+# This file is put in the public domain.
+# claudiux, 2018
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux 6.16.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-02-11 18:34+0100\n"
+"PO-Revision-Date: 2026-01-02 14:12+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.8\n"
+
+#. 6.6/lib/balanceSlider.js:20
+msgid "Balance"
+msgstr ""
+
+#. 6.6->settings-schema.json->sectionMenu3->title
+msgid "Output Devices Not Displayed In The Context Menu"
+msgstr ""
+
+#. 6.6->settings-schema.json->sectionMenu4->title
+msgid "Input Devices Not Displayed In The Context Menu"
+msgstr ""
+
+#. 6.6->settings-schema.json->sectionSound6->title
+msgid "Advertisement"
+msgstr ""
+
+#. 6.6->settings-schema.json->userMenuWidth->description
+#. 6.4->settings-schema.json->userMenuWidth->description
+msgid "Menu width (in pixels)"
+msgstr ""
+
+#. 6.6->settings-schema.json->labelIgnoredOutputDevices->description
+#. 6.6->settings-schema.json->labelIgnoredInputDevices->description
+msgid ""
+"In the list below, add a line containing part of its name (case sensitive) "
+"for each unwanted device."
+msgstr ""
+
+#. 6.6->settings-schema.json->ignoredOutputDevices->description
+#. 6.6->settings-schema.json->ignoredInputDevices->description
+msgid "Unwanted devices"
+msgstr ""
+
+#. 6.6->settings-schema.json->ignoredOutputDevices->columns->title
+#. 6.6->settings-schema.json->ignoredInputDevices->columns->title
+msgid "Part of the device name"
+msgstr ""
+
+#. 6.6->settings-schema.json->keyBalanceLeft->description
+msgid "Balance: to the left"
+msgstr ""
+
+#. 6.6->settings-schema.json->keyBalanceLeft->tooltip
+msgid "Set keybinding(s) to increase the volume on the left side."
+msgstr ""
+
+#. 6.6->settings-schema.json->keyBalanceRight->description
+msgid "Balance: to the right"
+msgstr ""
+
+#. 6.6->settings-schema.json->keyBalanceRight->tooltip
+msgid "Set keybinding(s) to increase the volume on the right side."
+msgstr ""
+
+#. 6.6->settings-schema.json->keyBalanceCenter->description
+msgid "Balance: re-init"
+msgstr ""
+
+#. 6.6->settings-schema.json->keyBalanceCenter->tooltip
+msgid ""
+"Set keybinding(s) to rebalance the volume between the left and right sides."
+msgstr ""
+
+#. 6.6->settings-schema.json->adv_avoid->description
+msgid "Try to avoid advertisement"
+msgstr ""
+
+#. 6.6->settings-schema.json->adv_volume->description
+msgid "Volume during advertisements"
+msgstr ""
+
+#. 6.6->settings-schema.json->adv_icon->description
+msgid "Symbolic icon displayed during advertisements"
+msgstr ""
+
+#. 6.6->settings-schema.json->adv_label->description
+msgid ""
+"Advertisements are detected using the title.\n"
+"When a title contains at least one of these words, the volume is reduced to "
+"the value indicated above.\n"
+"The volume is restored at the end of the advertisement."
+msgstr ""
+
+#. 6.6->settings-schema.json->adv_list->description
+msgid "Advertisement list"
+msgstr ""
+
+#. 6.6->settings-schema.json->adv_list->columns->title
+msgid "Part of title"
+msgstr ""
