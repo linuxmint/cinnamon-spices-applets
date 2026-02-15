@@ -1,0 +1,10 @@
+{
+    "cinnamon-version": ["5.0"],
+    "uuid": "curtain@AdvaitaSoni",
+    "name": "curtain",
+    "description": "Tiles your windows using algorithm",
+    "version": "0.0.1",
+    "url": "https://github.com/AdvaitaSoni/curtain/tree/APPLET",
+    "author": "AdvaitaSoni",
+    "last-edited": 1760819814
+}
