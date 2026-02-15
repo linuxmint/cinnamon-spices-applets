@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux 5.4.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-03-30 14:17+0200\n"
+"POT-Creation-Date: 2026-02-16 00:47+0100\n"
 "PO-Revision-Date: 2025-08-31 23:55+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -17,123 +17,121 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#. applet.js:225 applet_OLD.js:235
+#. applet.js:228
 msgid "Sensors Monitor"
 msgstr "感測器監視器"
 
-#. applet.js:465 applet_OLD.js:418
+#. applet.js:503
 msgid "Suspended"
 msgstr "已暫停"
 
-#. applet.js:732 applet.js:773 applet_OLD.js:638 applet_OLD.js:682
+#. applet.js:819 applet.js:861
 msgid "high:"
 msgstr "高："
 
-#. applet.js:732 applet.js:735 applet.js:773 applet.js:775 applet.js:816
-#. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
-#. applet_OLD.js:726
+#. applet.js:819 applet.js:822 applet.js:861 applet.js:863 applet.js:904
 msgid "n/a"
 msgstr "無資料"
 
-#. applet.js:735 applet.js:775 applet_OLD.js:642 applet_OLD.js:684
+#. applet.js:822 applet.js:863
 msgid "crit:"
 msgstr "臨界："
 
-#. applet.js:816 applet.js:860 applet_OLD.js:726 applet_OLD.js:770
+#. applet.js:904 applet.js:948
 msgid "min:"
 msgstr "最低："
 
-#. applet.js:862 applet_OLD.js:772
+#. applet.js:950
 msgid "max:"
 msgstr "最高："
 
-#. applet.js:891 applet_OLD.js:801
+#. applet.js:979
 msgid "No intrusion detected"
 msgstr "未偵測到入侵"
 
-#. applet.js:891 applet_OLD.js:801
+#. applet.js:979
 msgid "INTRUSION DETECTED!"
 msgstr "偵測到入侵！"
 
-#. applet.js:911 applet_OLD.js:821
+#. applet.js:999
 msgid "Must be configured!"
 msgstr "必須進行設定！"
 
-#. applet.js:1275 applet_OLD.js:1208
+#. applet.js:1368
 msgid "Settings"
 msgstr "設定"
 
-#. applet.js:1275 applet_OLD.js:1208
+#. applet.js:1368
 msgid ":"
 msgstr "："
 
 #. settings-schema.json->page_General->title
-#. applet.js:1282 applet_OLD.js:1215
+#. applet.js:1375
 msgid "⚙ General"
 msgstr "⚙ 一般"
 
-#. applet.js:1298 applet_OLD.js:1231
+#. applet.js:1391
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s 個溫度感測器"
 
-#. applet.js:1314 applet_OLD.js:1247
+#. applet.js:1407
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s 個風扇感測器"
 
-#. applet.js:1330 applet_OLD.js:1263
+#. applet.js:1423
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s 個電壓感測器"
 
-#. applet.js:1346 applet_OLD.js:1279
+#. applet.js:1439
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s 個入侵感測器"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1365 applet_OLD.js:1306
+#. applet.js:1458
 msgid "Run xsensors"
 msgstr "執行 xsensors"
 
-#. applet.js:1374 applet_OLD.js:1315
+#. applet.js:1467
 msgid "Suspend Sensors"
 msgstr "暫停感測器"
 
-#. applet.js:1385 applet_OLD.js:1326
+#. applet.js:1478
 msgid "Reload this applet"
 msgstr "重新載入這個小程式"
 
-#. applet.js:1707 applet_OLD.js:1656
+#. applet.js:1825
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "確定要移除 '%s' 嗎？"
 
-#. lib/checkDependencies.js:353
+#. lib/checkDependencies.js:369
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "小程式 %s 功能完整。"
 
-#. lib/checkDependencies.js:354
+#. lib/checkDependencies.js:370
 msgid "All dependencies are installed"
 msgstr "所有相依性套件均已安裝"
 
-#. lib/checkDependencies.js:383
+#. lib/checkDependencies.js:399
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr "似乎缺少這個小程式完整功能所需的部分程式。"
 
-#. lib/checkDependencies.js:385
+#. lib/checkDependencies.js:401
 msgid "Please install these packages:"
 msgstr "請安裝下列套件："
 
-#. lib/checkDependencies.js:389 lib/checkDependencies.js:399
+#. lib/checkDependencies.js:405 lib/checkDependencies.js:415
 msgid "Some dependencies are not installed!"
 msgstr "部分相依性套件尚未安裝！"
 
-#. lib/checkDependencies.js:401
+#. lib/checkDependencies.js:417
 msgid "Install these packages now"
 msgstr "立即安裝這些套件"
 
@@ -240,6 +238,10 @@ msgstr "感測器數值"
 #. settings-schema.json->section_remove_incompatible_xlets->title
 msgid "Remove from panels certain applets that also use sensors"
 msgstr "從面板移除同時使用感測器的特定小程式"
+
+#. settings-schema.json->section_dependencies->title
+msgid "Dependencies"
+msgstr ""
 
 #. settings-schema.json->section_tempDisktemp->title
 msgid "For the time being, disk temperature can only be read by root."
@@ -480,6 +482,17 @@ msgstr "在選單中顯示操作：重新啟動這個小程式"
 msgid "Whether or not to display in menu the action: Restart this applet."
 msgstr "是否在選單中顯示操作：重新啟動這個小程式。"
 
+#. settings-schema.json->do_not_check_dependencies->description
+msgid "Do not check dependencies"
+msgstr ""
+
+#. settings-schema.json->do_not_check_dependencies->tooltip
+msgid ""
+"If you do not want to install certain dependencies (e.g., fonts), check this "
+"box. Be careful with dependencies that are necessary for this applet to "
+"function properly."
+msgstr ""
+
 #. settings-schema.json->make_disktemp_readable_by_user->description
 msgid "Make disk temperature user-readable"
 msgstr "讓使用者可讀取磁碟溫度"
@@ -517,8 +530,8 @@ msgid ""
 "Whether or not to display into this applet label the 'Shown name' of the "
 "sensors selected in the list below. Without effect in vertical panels."
 msgstr ""
-"是否在這個小程式標籤中顯示下方清單中所選感測器的「顯示名稱」，"
-"此設定在垂直面板中無效。"
+"是否在這個小程式標籤中顯示下方清單中所選感測器的「顯示名稱」，此設定在垂直面"
+"板中無效。"
 
 #. settings-schema.json->chars_temp->tooltip
 msgid "The first emoji in this list is used for temperature"
@@ -827,8 +840,8 @@ msgid ""
 " Whether or not to display into this applet label the 'Shown name' of the "
 "sensors selected in the list below. Without effect in vertical panels."
 msgstr ""
-"是否在這個小程式標籤中顯示下方清單中所選感測器的「顯示名稱」。"
-"此設定在垂直面板中無效。"
+"是否在這個小程式標籤中顯示下方清單中所選感測器的「顯示名稱」。此設定在垂直面"
+"板中無效。"
 
 #. settings-schema.json->chars_intrusion->tooltip
 msgid "The first emoji in this list is used for intrusion"
