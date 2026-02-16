@@ -88,12 +88,6 @@ class FadeMonitorsApplet extends Applet.IconApplet {
         });
         this.menu.addMenuItem(settingsItem);
 
-        let configItem = new PopupMenu.PopupMenuItem("Open Config Folder");
-        configItem.connect("activate", () => {
-            this._openConfigFolder();
-        });
-        this.menu.addMenuItem(configItem);
-
         this._refreshMenuLabels();
     }
 
