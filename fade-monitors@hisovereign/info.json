@@ -1,7 +1,7 @@
 {
   "uuid": "fade-monitors@hisovereign",
   "name": "Fade Monitors",
-  "description": "Panel applet to toggle mouse-based, idle dim, start and stop the script, and open both config folder and the script.",
+  "description": "This is only an applet for the Fade-Monitors enhanced-dimming script. It toggles mouse-based and idle monitor dimming and can also start, stop, and open the Fade-Monitors script. See: github.com/hisovereign/Fade-Monitors",
   "version": "1.0",
   "author": "hisovereign",
   "license": "GPL-2.0+"
