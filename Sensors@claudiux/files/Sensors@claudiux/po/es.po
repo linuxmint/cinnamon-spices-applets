@@ -6,10 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2026-02-16 00:47+0100\n"
-"PO-Revision-Date: 2025-03-30 11:30-0300\n"
+"PO-Revision-Date: 2026-02-15 22:00-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.8\n"
 
 #. metadata.json->name
 #. applet.js:228
@@ -121,12 +120,8 @@ msgid "All dependencies are installed"
 msgstr "Todas las dependencias están instaladas"
 
 #. lib/checkDependencies.js:399
-msgid ""
-"You appear to be missing some of the programs required for this applet to "
-"have all its features."
-msgstr ""
-"Parece que le faltan algunos de los programas necesarios para que este "
-"applet tenga todas sus características."
+msgid "You appear to be missing some of the programs required for this applet to have all its features."
+msgstr "Parece que le faltan algunos de los programas necesarios para que este applet tenga todas sus características."
 
 #. lib/checkDependencies.js:401
 msgid "Please install these packages:"
@@ -192,15 +187,8 @@ msgid "Select a JSON file to import"
 msgstr "Seleccione un archivo JSON para importar"
 
 #. metadata.json->description
-msgid ""
-"Displays the values of many computer sensors concerning Temperatures (CPU - "
-"GPU - Power Supply), Fan Speed, Voltages, Intrusions. Notifies you with "
-"color changes when a value reaches or exceeds its limit."
-msgstr ""
-"Muestra los valores de muchos sensores del ordenador relativos a "
-"Temperaturas (CPU - GPU - Fuente de Alimentación), Velocidad del Ventilador, "
-"Voltajes, Intrusiones. Le notifica con cambios de color cuando un valor "
-"alcanza o supera su límite."
+msgid "Displays the values of many computer sensors concerning Temperatures (CPU - GPU - Power Supply), Fan Speed, Voltages, Intrusions. Notifies you with color changes when a value reaches or exceeds its limit."
+msgstr "Muestra los valores de muchos sensores del ordenador relativos a Temperaturas (CPU - GPU - Fuente de Alimentación), Velocidad del Ventilador, Voltajes, Intrusiones. Le notifica con cambios de color cuando un valor alcanza o supera su límite."
 
 #. metadata.json->contributors
 msgid "claudiux: Author. JEleniel: support for NVidia video cards."
@@ -248,12 +236,11 @@ msgstr "Eliminar ciertas appletes que también usan sensors"
 
 #. settings-schema.json->section_dependencies->title
 msgid "Dependencies"
-msgstr ""
+msgstr "Dependencias"
 
 #. settings-schema.json->section_tempDisktemp->title
 msgid "For the time being, disk temperature can only be read by root."
-msgstr ""
-"Por el momento, la temperatura del disco sólo puede ser leída por root."
+msgstr "Por el momento, la temperatura del disco sólo puede ser leída por root."
 
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
@@ -393,12 +380,10 @@ msgstr "Evitar los cambios de tamaño"
 
 #. settings-schema.json->keep_size->tooltip
 msgid ""
-"Checked: The size of this applet remains constant, once all your preferences "
-"have been defined.\n"
+"Checked: The size of this applet remains constant, once all your preferences have been defined.\n"
 "Unchecked: The size of this applet is optimized, but it may change."
 msgstr ""
-"Marcado: el tamaño de esta applet permanece constante, una vez que se han "
-"establecido todas sus preferencias.\n"
+"Marcado: el tamaño de esta applet permanece constante, una vez que se han establecido todas sus preferencias.\n"
 "Sin marcar: el tamaño de esta applet está optimizado, pero puede cambiar."
 
 #. settings-schema.json->char_size->description
@@ -471,22 +456,15 @@ msgstr "Mostrar valores en negrita en la ventana emergente"
 
 #. settings-schema.json->bold_values->tooltip
 msgid "Whether or not to show values in bold in the tooltip."
-msgstr ""
-"Especifica si los valores se muestran o no en negrita en la ventana "
-"emergente."
+msgstr "Especifica si los valores se muestran o no en negrita en la ventana emergente."
 
 #. settings-schema.json->bold_italics_main_sensors->description
 msgid "Show main sensors in bold italics in the tooltip"
-msgstr ""
-"Mostrar los principales sensores en negrita y cursiva en la ventana emergente"
+msgstr "Mostrar los principales sensores en negrita y cursiva en la ventana emergente"
 
 #. settings-schema.json->bold_italics_main_sensors->tooltip
-msgid ""
-"Whether or not to display the names of the main sensors (those displayed in "
-"the panel) in bold italics in the tooltip."
-msgstr ""
-"Mostrar o no los nombres de los sensores principales (los que se muestran en "
-"el panel) en negrita y cursiva en la ventana emergente."
+msgid "Whether or not to display the names of the main sensors (those displayed in the panel) in bold italics in the tooltip."
+msgstr "Mostrar o no los nombres de los sensores principales (los que se muestran en el panel) en negrita y cursiva en la ventana emergente."
 
 #. settings-schema.json->restart_in_menu->description
 msgid "Show in menu the action: Restart this applet"
@@ -498,14 +476,11 @@ msgstr "Mostrar o no en el menú la acción: Reiniciar esta applet."
 
 #. settings-schema.json->do_not_check_dependencies->description
 msgid "Do not check dependencies"
-msgstr ""
+msgstr "No comprobar dependencias"
 
 #. settings-schema.json->do_not_check_dependencies->tooltip
-msgid ""
-"If you do not want to install certain dependencies (e.g., fonts), check this "
-"box. Be careful with dependencies that are necessary for this applet to "
-"function properly."
-msgstr ""
+msgid "If you do not want to install certain dependencies (e.g., fonts), check this box. Be careful with dependencies that are necessary for this applet to function properly."
+msgstr "Si no desea instalar ciertas dependencias (por ejemplo, fuentes), marque esta casilla. Tenga cuidado con las dependencias que son necesarias para que este applet funcione correctamente."
 
 #. settings-schema.json->make_disktemp_readable_by_user->description
 msgid "Make disk temperature user-readable"
@@ -524,11 +499,8 @@ msgstr "Mostrar los valores de estos sensores seleccionados"
 #. settings-schema.json->show_volt->tooltip
 #. settings-schema.json->show_intrusion->tooltip
 #. settings-schema.json->show_custom->tooltip
-msgid ""
-"Whether or not to display the values of the sensors selected in the list "
-"below."
-msgstr ""
-"Muestra o no los valores de los sensores seleccionados en la lista siguiente."
+msgid "Whether or not to display the values of the sensors selected in the list below."
+msgstr "Muestra o no los valores de los sensores seleccionados en la lista siguiente."
 
 #. settings-schema.json->show_temp_name->description
 #. settings-schema.json->show_fan_name->description
@@ -541,13 +513,8 @@ msgstr "Visualizar 'Mostrar nombre' de cada uno de los sensores seleccionados"
 #. settings-schema.json->show_temp_name->tooltip
 #. settings-schema.json->show_fan_name->tooltip
 #. settings-schema.json->show_volt_name->tooltip
-msgid ""
-"Whether or not to display into this applet label the 'Shown name' of the "
-"sensors selected in the list below. Without effect in vertical panels."
-msgstr ""
-"Visualizar o no en la etiqueta del applet el 'Mostrar nombre' de los "
-"sensores seleccionados en la lista a continuación. Sin efecto en paneles "
-"verticales."
+msgid "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels."
+msgstr "Visualizar o no en la etiqueta del applet el 'Mostrar nombre' de los sensores seleccionados en la lista a continuación. Sin efecto en paneles verticales."
 
 #. settings-schema.json->chars_temp->tooltip
 msgid "The first emoji in this list is used for temperature"
@@ -602,24 +569,16 @@ msgid "Vertical panel: Temperature value and °C / °F on one line"
 msgstr "Panel vertical: valor de temperatura y °C / °F en una línea"
 
 #. settings-schema.json->always_show_unit_in_line->tooltip
-msgid ""
-"Whether or not to show, in a vertical panel, °C or °F on the same line as "
-"the temperature value."
-msgstr ""
-"SMostrar o no, en un panel vertical, °C o °F en la misma línea que el valor "
-"de temperatura."
+msgid "Whether or not to show, in a vertical panel, °C or °F on the same line as the temperature value."
+msgstr "SMostrar o no, en un panel vertical, °C o °F en la misma línea que el valor de temperatura."
 
 #. settings-schema.json->journalize_temp->description
 msgid "Log high and critical temperatures"
 msgstr "Registrar temperaturas altas y críticas"
 
 #. settings-schema.json->journalize_temp->tooltip
-msgid ""
-"When this option is checked, temperatures exceeding the high or critical "
-"limit are recorded in the system journal."
-msgstr ""
-"Cuando se marca esta opción, las temperaturas que superan el límite alto o "
-"crítico se registran en el diario del sistema."
+msgid "When this option is checked, temperatures exceeding the high or critical limit are recorded in the system journal."
+msgstr "Cuando se marca esta opción, las temperaturas que superan el límite alto o crítico se registran en el diario del sistema."
 
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description
@@ -698,8 +657,7 @@ msgstr "Fórmula"
 
 #. settings-schema.json->temp_sensors->tooltip
 msgid ""
-"Double-click on a line to change 'Shown name', 'High', 'Critical' or "
-"'Formula'.\n"
+"Double-click on a line to change 'Shown name', 'High', 'Critical' or 'Formula'.\n"
 "To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
 "'High' and 'Critical' (optional) must be valid numbers.\n"
 "'Formula' (optional):\n"
@@ -707,10 +665,8 @@ msgid ""
 "  You can use the 4 operations (+-*/) and parentheses.\n"
 "  Example: $*1.1+0.5"
 msgstr ""
-"Haga doble clic en una línea para cambiar \"Nombre mostrado\", \"Alto\", "
-"\"Crítico\" o \"Fórmula\".\n"
-"Para restablecer un \"Nombre mostrado\", copie/pegue el \"Nombre del "
-"sensor\".\n"
+"Haga doble clic en una línea para cambiar \"Nombre mostrado\", \"Alto\", \"Crítico\" o \"Fórmula\".\n"
+"Para restablecer un \"Nombre mostrado\", copie/pegue el \"Nombre del sensor\".\n"
 "Alto\" y \"Crítico\" (opcional) deben ser números válidos.\n"
 "Fórmula' (opcional):\n"
 "  Utilice $ como valor devuelto por el sensor.\n"
@@ -737,12 +693,10 @@ msgstr ""
 
 #. settings-schema.json->temp_disks->tooltip
 msgid ""
-"Disk name: The name of the disk, as returned by the 'lsblk' command. Please "
-"see help.\n"
+"Disk name: The name of the disk, as returned by the 'lsblk' command. Please see help.\n"
 "High and Critical values: Cf. technical manual of your disk."
 msgstr ""
-"Nombre del disco: El nombre del disco, tal y como lo devuelve el comando "
-"'lsblk'. Consulte la ayuda.\n"
+"Nombre del disco: El nombre del disco, tal y como lo devuelve el comando 'lsblk'. Consulte la ayuda.\n"
 "Valores Alto y Crítico: Cf. manual técnico de su disco."
 
 #. settings-schema.json->chars_fan->tooltip
@@ -762,12 +716,8 @@ msgid "Log critical fan speeds"
 msgstr "Registrar las velocidades críticas de los ventiladores"
 
 #. settings-schema.json->journalize_fan->tooltip
-msgid ""
-"When this option is checked, fan speeds below the critical limit are "
-"recorded in the system log."
-msgstr ""
-"Cuando esta opción está marcada, las velocidades del ventilador por debajo "
-"del límite crítico se registran en el registro del sistema."
+msgid "When this option is checked, fan speeds below the critical limit are recorded in the system log."
+msgstr "Cuando esta opción está marcada, las velocidades del ventilador por debajo del límite crítico se registran en el registro del sistema."
 
 #. settings-schema.json->fan_sensors->columns->title
 msgid ""
@@ -787,8 +737,7 @@ msgid ""
 "  You can use the 4 operations (+-*/) and parentheses.\n"
 "  Example: $*1.1+0.5"
 msgstr ""
-"Haga doble clic en una línea para cambiar el \"Nombre mostrado\", el "
-"\"Mínimo\" o la \"Fórmula\".\n"
+"Haga doble clic en una línea para cambiar el \"Nombre mostrado\", el \"Mínimo\" o la \"Fórmula\".\n"
 "Para restablecer un 'Nombre mostrado', copie/pegue el 'Nombre del sensor'.\n"
 "Mínimo\" (opcional): debe ser un número válido.\n"
 "Fórmula\" (opcional):\n"
@@ -821,12 +770,8 @@ msgid "Log critical voltages"
 msgstr "Registrar las tensiones críticas"
 
 #. settings-schema.json->journalize_volt->tooltip
-msgid ""
-"When this option is checked, voltages below the minimum limit or above the "
-"maximum limit are recorded in the system log."
-msgstr ""
-"Cuando esta opción está marcada, las tensiones por debajo del límite mínimo "
-"o por encima del límite máximo se registran en el registro del sistema."
+msgid "When this option is checked, voltages below the minimum limit or above the maximum limit are recorded in the system log."
+msgstr "Cuando esta opción está marcada, las tensiones por debajo del límite mínimo o por encima del límite máximo se registran en el registro del sistema."
 
 #. settings-schema.json->volt_sensors->columns->title
 msgid ""
@@ -854,10 +799,8 @@ msgid ""
 "  You can use the 4 operations (+-*/) and parentheses.\n"
 "  Example: $*1.1+0.5"
 msgstr ""
-"Haga doble clic en una línea para cambiar \"Nombre mostrado\", \"Mín\", "
-"\"Máx\" o \"Fórmula\".\n"
-"Para restablecer un \"Nombre mostrado\", copie/pegue el \"Nombre del "
-"sensor\".\n"
+"Haga doble clic en una línea para cambiar \"Nombre mostrado\", \"Mín\", \"Máx\" o \"Fórmula\".\n"
+"Para restablecer un \"Nombre mostrado\", copie/pegue el \"Nombre del sensor\".\n"
 "Los valores \"Mín\" y \"Máx\" (opcionales) deben ser números válidos.\n"
 "Fórmula\" (opcional):\n"
 "  Utilice $ como valor devuelto por el sensor.\n"
@@ -866,12 +809,8 @@ msgstr ""
 
 #. settings-schema.json->show_intrusion_name->tooltip
 #. settings-schema.json->show_custom_name->tooltip
-msgid ""
-" Whether or not to display into this applet label the 'Shown name' of the "
-"sensors selected in the list below. Without effect in vertical panels."
-msgstr ""
-" Mostrar o no en la etiqueta del applet el 'Nombre mostrado' de los sensores "
-"seleccionados en la lista inferior. Sin efecto en paneles verticales."
+msgid " Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels."
+msgstr " Mostrar o no en la etiqueta del applet el 'Nombre mostrado' de los sensores seleccionados en la lista inferior. Sin efecto en paneles verticales."
 
 #. settings-schema.json->chars_intrusion->tooltip
 msgid "The first emoji in this list is used for intrusion"
@@ -887,9 +826,7 @@ msgstr "Registrar intrusiones"
 
 #. settings-schema.json->journalize_intrusion->tooltip
 msgid "When this option is checked, intrusions are recorded in the system log."
-msgstr ""
-"Cuando esta opción está marcada, las intrusiones se registran en el registro "
-"del sistema."
+msgstr "Cuando esta opción está marcada, las intrusiones se registran en el registro del sistema."
 
 #. settings-schema.json->intrusion_sensors->tooltip
 msgid ""
@@ -944,12 +881,8 @@ msgstr ""
 "crítico"
 
 #. settings-schema.json->custom_sensors->tooltip
-msgid ""
-"Add a line by custom sensor to set the type, the name and the path of the "
-"file to monitor (/sys/class/...)."
-msgstr ""
-"Añade una línea por sensor personalizado para establecer el tipo, el nombre "
-"y la ruta del fichero a monitorizar (/sys/class/...)."
+msgid "Add a line by custom sensor to set the type, the name and the path of the file to monitor (/sys/class/...)."
+msgstr "Añade una línea por sensor personalizado para establecer el tipo, el nombre y la ruta del fichero a monitorizar (/sys/class/...)."
 
 #. settings-schema.json->report->description
 #. scripts/show_sensor_values.sh:5
