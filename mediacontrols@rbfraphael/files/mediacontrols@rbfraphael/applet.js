@@ -1,9 +1,11 @@
 const Applet = imports.ui.applet;
+const { AppletSettings } = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Interfaces = imports.misc.interfaces;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 
+const UUID = 'mediacontrols@rbfraphael';
 const MEDIA_PLAYER_2_PATH = "/org/mpris/MediaPlayer2";
 const MEDIA_PLAYER_2_NAME = "org.mpris.MediaPlayer2";
 const MEDIA_PLAYER_2_PLAYER_NAME = "org.mpris.MediaPlayer2.Player";
@@ -11,6 +13,7 @@ const MEDIA_PLAYER_2_PLAYER_NAME = "org.mpris.MediaPlayer2.Player";
 class MediaPlayer {
     constructor(name, updateCallback = () => { }) {
         this.name = name;
+        this.identity = name;
 
         this.mediaServer = null;
         this.mediaServerPlayer = null;
@@ -40,7 +43,8 @@ class MediaPlayer {
                     this.appIcon = this.mediaServer.DesktopEntry;
                 }
 
-                this.menuItem.setLabel(this.mediaServer.Identity);
+                this.identity = this.mediaServer.Identity;
+                this.menuItem.setLabel(this.identity);
 
                 this.updateCallback();
             }
@@ -138,14 +142,42 @@ class MediaControlsApplet extends Applet.TextIconApplet {
         this._activePlayer = null;
         this._ownerChangedId = null;
 
+        this._initPrefs();
         this._buildUi();
         this._loadDBus();
+    }
+
+    _initPrefs() {
+        this.settings = new AppletSettings(this, UUID, this._appletInstanceId);
+
+        this.settings.bind("show_player_icon", "config_show_player_icon", this._rebuildUi.bind(this));
+        this.settings.bind("show_track_info", "config_show_track_info", this._rebuildUi.bind(this));
+        this.settings.bind("track_info", "config_track_info", this._rebuildUi.bind(this));
+        this.settings.bind("truncate_track_info", "config_truncate_track_info", this._rebuildUi.bind(this));
+        this.settings.bind("truncate_length", "config_truncate_length", this._rebuildUi.bind(this));
+        this.settings.bind("show_player_select_indicator", "config_show_player_select_indicator", this._rebuildUi.bind(this));
+        this.settings.bind("show_hover_color", "config_show_hover_color", this._updateStyles.bind(this));
+        this.settings.bind("hover_bg_color", "config_hover_bg_color", this._updateStyles.bind(this));
+    }
+
+    _onSettingsChanged() {
+        this._updateUi();
+    }
+
+    _rebuildUi() {
+        this.actor.get_children().forEach(child => {
+            this.actor.remove_child(child);
+        });
+
+        this._buildUi();
     }
 
     _buildUi() {
         // Menu Icon
         this.playerIcon = new St.Icon({ icon_name: "multimedia-audio-player-symbolic", icon_size: 16, icon_type: St.IconType.SYMBOLIC, style_class: "mediacontrols_rbfraphael-element" });
-        this.actor.add_child(this.playerIcon);
+        if(this.config_show_player_icon){
+            this.actor.add_child(this.playerIcon);
+        }
 
         // Previous Button
         this.previousButton = new St.Button({ style_class: "mediacontrols_rbfraphael-element" });
@@ -168,14 +200,22 @@ class MediaControlsApplet extends Applet.TextIconApplet {
         // Media Info
         this.mediaInfo = new St.Bin({ x_align: St.Align.START, y_align: St.Align.MIDDLE, style_class: "mediacontrols_rbfraphael-element" });
         this.mediaInfo.child = new St.Label({ text: "No player selected" });
-        this.actor.add_child(this.mediaInfo);
+        if(this.config_show_track_info){
+            this.actor.add_child(this.mediaInfo);
+        }
 
         // Menu Icon
         let menuIconName = ["pan-down-symbolic", "pan-left-symbolic", "pan-up-symbolic", "pan-right-symbolic"][this._appletOrientation];
-        this.menuIcon = new St.Icon({ icon_name: menuIconName, icon_size: 16, icon_type: St.IconType.SYMBOLIC })
-        this.actor.add_child(this.menuIcon);
+        this.menuIcon = new St.Icon({ icon_name: menuIconName, icon_size: 16, icon_type: St.IconType.SYMBOLIC });
+        this.playerSelectorButton = new St.Button({ style_class: "mediacontrols_rbfraphael-element" });
+        this.playerSelectorButton.child = this.menuIcon;
+        this.playerSelectorButton.connect("clicked", () => this.menu.toggle());
+        if(this.config_show_player_select_indicator){
+            this.actor.add_child(this.playerSelectorButton);
+        }
 
         this._updateUi();
+        this._updateStyles();
     }
 
     _buttonAction(action) {
@@ -212,6 +252,12 @@ class MediaControlsApplet extends Applet.TextIconApplet {
             if (this._activePlayer) {
                 this.playerIcon.icon_name = this._activePlayer.appIcon;
 
+                [this.previousButton, this.playPauseButton, this.nextButton].forEach(button => {
+                    button.show();
+                    button.reactive = true;
+                    button.opacity = 255;
+                });
+
                 if (this._activePlayer.isPlaying) {
                     this.playPauseButton.child.icon_name = "media-playback-pause-symbolic";
                 } else {
@@ -224,15 +270,70 @@ class MediaControlsApplet extends Applet.TextIconApplet {
                     songDescription += this._activePlayer.songArtist;
                 }
 
-                this.mediaInfo.child.text = songDescription;
+                this.set_applet_tooltip("Playing on " + this._activePlayer.identity + ": " + songDescription);
+
+                let trackInfo = "";
+                if(this.config_track_info == "app_name") { 
+                    trackInfo = this._activePlayer.identity;
+                } else if(this.config_track_info == "song_artist") {
+                    trackInfo = songDescription;
+                } else {
+                    trackInfo = this._activePlayer.songTitle;
+                }
+
+                if (this.config_truncate_track_info) {
+                    if(trackInfo.trim().length > this.config_truncate_length){
+                        trackInfo = trackInfo.substring(0, this.config_truncate_length - 3) + "...";
+                    }
+                }
+
+                this.mediaInfo.child.text = trackInfo;
             } else {
                 this.playerIcon.icon_name = "multimedia-audio-player-symbolic";
                 this.playPauseButton.child.icon_name = "media-playback-start-symbolic";
                 this.mediaInfo.child.text = "No player selected";
+                this.set_applet_tooltip("");
             }
         } catch (e) {
             global.logError(e);
             throw e;
+        }
+    }
+
+    _updateStyles() {
+        // set hover color of control buttons
+        if (this.previousButton) {
+            this._setHoverStyle(this.previousButton);
+        }
+        if (this.playPauseButton) {
+            this._setHoverStyle(this.playPauseButton);
+        }
+        if (this.nextButton) {
+            this._setHoverStyle(this.nextButton);
+        }
+        if(this.playerSelectorButton){
+            this._setHoverStyle(this.playerSelectorButton);
+        }
+    }
+
+    _setHoverStyle(button) {
+        // remove old event handlers, if there are any
+        if (button._enterEventId) {
+            button.disconnect(button._enterEventId);
+        }
+        if (button._leaveEventId) {
+            button.disconnect(button._leaveEventId);
+        }
+        
+        // add new event handlers
+        if(this.config_show_hover_color){
+            button._enterEventId = button.connect('enter-event', () => {
+                button.set_style(`background-color: ${this.config_hover_bg_color};`);
+            });
+            
+            button._leaveEventId = button.connect('leave-event', () => {
+                button.set_style('');
+            });
         }
     }
 
