@@ -1,4 +1,5 @@
 const Gio = imports.gi.Gio;
+const Utils = imports.utils.Utils;
 
 let _applet = null; // To hold a reference to the main applet instance
 
@@ -7,7 +8,7 @@ function init(appletInstance) {
 }
 
 function _getCallStatsFilePath() {
-    return _applet.metadata.path + "/call_stats.json";
+    return Utils.getUserDir() + "/call_stats.json";
 }
 
 function loadCallStats() {

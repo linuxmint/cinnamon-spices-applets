@@ -13,15 +13,6 @@ const Gettext = imports.gettext;
 const UUID = "crypto-tracker@danipin";
 
 function _(str) {
-  let forced = _applet ? _applet.forcedLocale : null;
-  if (forced && forced !== "system") {
-      let old = GLib.getenv("LANGUAGE");
-      GLib.setenv("LANGUAGE", forced, true);
-      let res = Gettext.dgettext(UUID, str);
-      if (old) GLib.setenv("LANGUAGE", old, true);
-      else GLib.unsetenv("LANGUAGE");
-      return res;
-  }
   return Gettext.dgettext(UUID, str);
 }
 

@@ -15,15 +15,6 @@ const Gettext = imports.gettext;
 const UUID = "crypto-tracker@danipin";
 
 function _(str) {
-  let forced = _applet ? _applet.forcedLocale : null;
-  if (forced && forced !== "system") {
-      let old = GLib.getenv("LANGUAGE");
-      GLib.setenv("LANGUAGE", forced, true);
-      let res = Gettext.dgettext(UUID, str);
-      if (old) GLib.setenv("LANGUAGE", old, true);
-      else GLib.unsetenv("LANGUAGE");
-      return res;
-  }
   return Gettext.dgettext(UUID, str);
 }
 
@@ -54,7 +45,7 @@ function init(applet) {
 }
 
 function getFilePath() {
-    return _applet.metadata.path + "/portfolio.json";
+    return Utils.getUserDir() + "/portfolio.json";
 }
 
 function loadHoldings() {
@@ -418,7 +409,7 @@ function addCoin(id, symbol, image_url) {
 function checkMissingMetadata() {
     // Prüft bei Start, ob Icons fehlen und lädt sie nach
     let missing = _holdings.filter(h => {
-        let iconPath = _applet.metadata.path + "/icons/" + h.id + ".png";
+        let iconPath = Utils.getCacheDir() + "/icons/" + h.id + ".png";
         return !Gio.file_new_for_path(iconPath).query_exists(null);
     });
 
@@ -943,7 +934,7 @@ function createPortfolioSection(maxHeight) {
             let iconPath = _applet.metadata.path + "/icons/" + iconName + "-symbolic.svg";
             
             // Check for downloaded icon first (id.png)
-            let cachedPath = _applet.metadata.path + "/icons/" + h.id + ".png";
+            let cachedPath = Utils.getCacheDir() + "/icons/" + h.id + ".png";
             let cachedFile = Gio.file_new_for_path(cachedPath);
             let iconFile = Gio.file_new_for_path(iconPath);
             
@@ -1448,6 +1439,13 @@ function closeCurrencySelector() {
     _isCurrencySelectorOpen = false;
 }
 
+function destroy() {
+    if (_searchTimeout) {
+        Mainloop.source_remove(_searchTimeout);
+        _searchTimeout = null;
+    }
+}
+
 var Portfolio = {
     init: init,
     createPortfolioSection: createPortfolioSection,
@@ -1458,5 +1456,6 @@ var Portfolio = {
     isSearchOpen: isSearchOpen,
     closeSearch: closeSearch,
     resetFilter: resetFilter,
-    closeCurrencySelector: closeCurrencySelector
+    closeCurrencySelector: closeCurrencySelector,
+    destroy: destroy
 };

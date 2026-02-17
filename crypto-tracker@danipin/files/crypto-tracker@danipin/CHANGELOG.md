@@ -2,6 +2,15 @@
 
 All notable changes to the "Crypto Tracker" applet will be documented in this file.
 
+## [1.1.1] - 2026-02-17
+
+### Fixed
+- **Review Feedback:** Removed forced locale logic affecting global environment.
+- **Review Feedback:** Removed direct settings file manipulation.
+- **Review Feedback:** Moved persistent data to user config directory.
+- **Review Feedback:** Improved translation string formatting.
+- **Review Feedback:** Added proper cleanup on applet removal.
+
 ## [1.1.0] - 2026-02-17
 
 ### Added

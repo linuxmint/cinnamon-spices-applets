@@ -36,7 +36,7 @@
         "section-devtools-options": {
             "type": "section",
             "title": "Developer Options",
-            "keys": ["dev-always-show-rocket", "dev-force-theme", "dev-force-language", "dev-show-frames", "dev-show-error-notifications", "dev-test-crash"]
+            "keys": ["dev-always-show-rocket", "dev-force-theme", "dev-show-frames", "dev-show-error-notifications", "dev-test-crash"]
         },
         
         "section-general-settings": {
@@ -324,42 +324,6 @@
         "options": { "Automatic (Date based)": "auto", "New Year": "newyear", "Christmas (General)": "xmas", "Christmas (Eve & Day)": "xmas_eve", "Halloween": "halloween", "Valentine's Day": "valentine", "Bitcoin Pizza Day": "pizza", "Easter": "easter" },
         "name": "Force Seasonal Theme",
         "description": "Override the date-based theme selection."
-    },
-
-    "dev-force-language": {
-        "type": "combobox",
-        "default": "system",
-        "options": {
-            "System Default": "system",
-            "English": "en",
-            "German (Deutsch)": "de",
-            "Arabic (العربية)": "ar",
-            "Czech (Čeština)": "cs",
-            "Danish (Dansk)": "da",
-            "Spanish (Español)": "es",
-            "French (Français)": "fr",
-            "Hindi (हिन्दी)": "hi",
-            "Hungarian (Magyar)": "hu",
-            "Indonesian (Bahasa Indonesia)": "id",
-            "Italian (Italiano)": "it",
-            "Japanese (日本語)": "ja",
-            "Korean (한국어)": "ko",
-            "Malay (Bahasa Melayu)": "ms",
-            "Dutch (Nederlands)": "nl",
-            "Polish (Polski)": "pl",
-            "Portuguese (Português)": "pt",
-            "Russian (Русский)": "ru",
-            "Swedish (Svenska)": "sv",
-            "Thai (ไทย)": "th",
-            "Filipino (Tagalog)": "tl",
-            "Turkish (Türkçe)": "tr",
-            "Ukrainian (Українська)": "uk",
-            "Vietnamese (Tiếng Việt)": "vi",
-            "Chinese Simplified (简体中文)": "zh_CN",
-            "Chinese Traditional (繁體中文)": "zh_TW"
-        },
-        "name": "Force Language (Debug)",
-        "description": "Force a specific language for testing translations."
     },
 
     "dev-show-frames": {

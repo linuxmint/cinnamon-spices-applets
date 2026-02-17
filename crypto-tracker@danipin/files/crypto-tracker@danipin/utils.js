@@ -9,15 +9,6 @@ const Gettext = imports.gettext;
 const UUID = "crypto-tracker@danipin";
 
 function _(str) {
-  let forced = _applet ? _applet.forcedLocale : null;
-  if (forced && forced !== "system") {
-      let old = GLib.getenv("LANGUAGE");
-      GLib.setenv("LANGUAGE", forced, true);
-      let res = Gettext.dgettext(UUID, str);
-      if (old) GLib.setenv("LANGUAGE", old, true);
-      else GLib.unsetenv("LANGUAGE");
-      return res;
-  }
   return Gettext.dgettext(UUID, str);
 }
 
@@ -27,6 +18,20 @@ function init(applet) {
     _applet = applet;
     // Creates file on start so you see logging works
     // logToErrorFile("System", "Session started. Logging active.");
+}
+
+function getUserDir() {
+    let dir = GLib.get_user_config_dir() + "/" + UUID;
+    let file = Gio.file_new_for_path(dir);
+    if (!file.query_exists(null)) file.make_directory_with_parents(null);
+    return dir;
+}
+
+function getCacheDir() {
+    let dir = GLib.get_user_cache_dir() + "/" + UUID;
+    let file = Gio.file_new_for_path(dir);
+    if (!file.query_exists(null)) file.make_directory_with_parents(null);
+    return dir;
 }
 
 function hexToCanvasRgb(colorStr, defaultColor) {
@@ -123,10 +128,10 @@ function formatPrice(price, idx, forceDetails = false) {
 
 function downloadIcon(id, url) {
     if (!url) return;
-    let iconDir = Gio.file_new_for_path(_applet.metadata.path + "/icons");
+    let iconDir = Gio.file_new_for_path(getCacheDir() + "/icons");
     if (!iconDir.query_exists(null)) iconDir.make_directory(null);
 
-    let destPath = _applet.metadata.path + "/icons/" + id + ".png";
+    let destPath = getCacheDir() + "/icons/" + id + ".png";
     let destFile = Gio.file_new_for_path(destPath);
     
     let needsDownload = true;
@@ -153,7 +158,7 @@ function downloadIcon(id, url) {
 }
 
 function cleanupUnusedIcons(activeIds) {
-    let iconDir = Gio.file_new_for_path(_applet.metadata.path + "/icons");
+    let iconDir = Gio.file_new_for_path(getCacheDir() + "/icons");
     if (!iconDir.query_exists(null)) return;
 
     try {
@@ -298,7 +303,7 @@ function addScrollArrows(scrollView) {
 function logToErrorFile(context, error) {
     if (!_applet || !_applet.metadata) return;
     try {
-        let path = _applet.metadata.path + "/error_log.txt";
+        let path = getCacheDir() + "/error_log.txt";
         let file = Gio.file_new_for_path(path);
         
         // FIX: Automatic rotation (delete) if larger than 1MB
@@ -344,7 +349,7 @@ function logToErrorFile(context, error) {
                     else if (errStr.includes("401") || errStr.includes("403")) hint = _(" (API Key invalid)");
                     else if (errStr.includes("network") || errStr.includes("resolve")) hint = _(" (Network)");
 
-                    sendNotification(_("Crypto-Tracker Error"), _("An error was intercepted") + hint + _(". See log."), "dialog-error.oga", "dialog-error-symbolic", "dialog-error");
+                    sendNotification(_("Crypto-Tracker Error"), _("An error was intercepted%s. See log.").format(hint), "dialog-error.oga", "dialog-error-symbolic", "dialog-error");
                 }
             }
         }
@@ -393,6 +398,8 @@ function safeRepaint(area, drawFunc) {
 
 var Utils = {
     init: init,
+    getUserDir: getUserDir,
+    getCacheDir: getCacheDir,
     hexToCanvasRgb: hexToCanvasRgb,
     parseColorString: parseColorString,
     sendNotification: sendNotification,

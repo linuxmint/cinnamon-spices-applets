@@ -38,17 +38,7 @@ const GLib = imports.gi.GLib;
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
-var _forcedLocale = null;
-
 function _(str) {
-  if (_forcedLocale && _forcedLocale !== "system") {
-      let old = GLib.getenv("LANGUAGE");
-      GLib.setenv("LANGUAGE", _forcedLocale, true);
-      let res = Gettext.dgettext(UUID, str);
-      if (old) GLib.setenv("LANGUAGE", old, true);
-      else GLib.unsetenv("LANGUAGE");
-      return res;
-  }
   return Gettext.dgettext(UUID, str);
 }
 
@@ -104,6 +94,7 @@ MyApplet.prototype = {
             Header.init(this);
             Footer.init(this);
             Donate.init(this);
+            this._loadCoinList(); // Load persisted coin options
             DataPersistence.loadCallStats();
             this.lastFetchTime = "Never";
             this.fiveMinutes = 300000;
@@ -240,14 +231,6 @@ MyApplet.prototype = {
             });
             bindSafe("dev-show-frames", () => this._buildMenu());
             bindSafe("dev-always-show-rocket", () => this._buildMenu());
-            bindSafe("dev-force-language", () => {
-                _forcedLocale = this.settings.getValue("dev-force-language");
-                this.forcedLocale = _forcedLocale;
-                this._updateThemeColors(true);
-                this.updateVisuals();
-            });
-            _forcedLocale = this.settings.getValue("dev-force-language");
-            this.forcedLocale = _forcedLocale;
             Seasonal.updateTheme();
 
             let visualKeys = [
@@ -744,7 +727,7 @@ MyApplet.prototype = {
                                 }
 
                                 if (shouldTrigger) {
-                                    Utils.sendNotification("Price Alarm: " + sym, "Target " + targetPrice + " reached! Price: " + price, "no-problem.oga", finalNotifyIcon, "complete");
+                                    Utils.sendNotification(_("Price Alarm: %s").format(sym), _("Target %s reached! Price: %s").format(targetPrice, price), "no-problem.oga", finalNotifyIcon, "complete");
                                     Alarm.markAsTriggered(item.id, 'price');
                                     
                                     if (this.menu.isOpen) {
@@ -756,8 +739,8 @@ MyApplet.prototype = {
                             // 2. Percent Alarm (Volatility)
                             if (targetPercent > 0 && lastAlertPercent !== targetPercent) {
                                 if (Math.abs(change) >= targetPercent) {
-                                    let dir = change >= 0 ? "risen" : "fallen";
-                                    Utils.sendNotification("Volatility Alarm: " + sym, sym + " has " + dir + " by " + change.toFixed(2) + "%", "just-saying.oga", finalNotifyIcon, "dialog-warning");
+                                    let dir = change >= 0 ? _("risen") : _("fallen");
+                                    Utils.sendNotification(_("Volatility Alarm: %s").format(sym), _("%s has %s by %s%%").format(sym, dir, change.toFixed(2)), "just-saying.oga", finalNotifyIcon, "dialog-warning");
                                     if (Alarm) Alarm.markAsTriggered(item.id, 'vol');
                                     m.last_alert_percent = targetPercent;
                                 }
@@ -871,7 +854,23 @@ MyApplet.prototype = {
         }
         this.updateVisuals();
         this._buildMenu();
-        Util.spawnCommandLine('notify-send "Crypto-Tracker" "' + _("Colors reset to default values.") + '" --icon=dialog-information');
+        Utils.sendNotification("Crypto-Tracker", _("Colors reset to default values."), "just-saying.oga", "dialog-information");
+    },
+
+    _loadCoinList: function() {
+        try {
+            let path = Utils.getUserDir() + "/coin_list.json";
+            let file = Gio.file_new_for_path(path);
+            if (file.query_exists(null)) {
+                let [success, content] = file.load_contents(null);
+                if (success) {
+                    let options = JSON.parse(content);
+                    this.settings.setOptions("metric1-id", options);
+                    this.settings.setOptions("metric2-id", options);
+                    this.settings.setOptions("metric3-id", options);
+                }
+            }
+        } catch(e) { global.logError("Error loading coin list: " + e); }
     },
 
     _updateCoinList: function(silent = false) {
@@ -900,25 +899,24 @@ MyApplet.prototype = {
                         newOptions[c.name + " (" + c.symbol.toUpperCase() + ")"] = c.id;
                     });
 
-                    let schemaPath = this.metadata.path + "/settings-schema.json";
-                    let file = Gio.file_new_for_path(schemaPath);
-                    let [success, content] = file.load_contents(null);
-                    
-                    if (success) {
-                        let schema = JSON.parse(content);
-                        if (schema["metric1-id"]) schema["metric1-id"].options = newOptions;
-                        if (schema["metric2-id"]) schema["metric2-id"].options = newOptions;
-                        if (schema["metric3-id"]) schema["metric3-id"].options = newOptions;
+                    // Use API to update options at runtime
+                    this.settings.setOptions("metric1-id", newOptions);
+                    this.settings.setOptions("metric2-id", newOptions);
+                    this.settings.setOptions("metric3-id", newOptions);
 
-                        let raw = JSON.stringify(schema, null, 4);
-                        let outStream = file.replace(null, false, Gio.FileCreateFlags.NONE, null);
-                        let outData = new Gio.DataOutputStream({ base_stream: outStream });
-                        outData.put_string(raw, null);
-                        outStream.close(null);
+                    // Persist to user config dir
+                    try {
+                        let path = Utils.getUserDir() + "/coin_list.json";
+                        let file = Gio.file_new_for_path(path);
+                        let out = file.replace(null, false, Gio.FileCreateFlags.NONE, null);
+                        let stream = new Gio.DataOutputStream({ base_stream: out });
+                        stream.put_string(JSON.stringify(newOptions), null);
+                        stream.close(null);
+
                         if (!silent) {
-                            Util.spawnCommandLine('notify-send "Crypto-Tracker" "' + _("List updated! Please reopen settings.") + '" --icon=emblem-refresh');
+                            Utils.sendNotification("Crypto-Tracker", _("List updated! Please reopen settings."), "cheerful.oga", "emblem-refresh");
                         }
-                    }
+                    } catch(e) { global.logError("Error saving coin list: " + e); }
                 }
             } catch (e) { 
                 global.logError("Update Coin List Error: " + e); 
@@ -1467,7 +1465,7 @@ MyApplet.prototype = {
                             rocketBin.connect('button-release-event', () => {
                                 // Send notification only once per menu opening
                                 if (!m.ath_notification_sent) {
-                                    Utils.sendNotification("Crypto-Tracker", "NEW ALL TIME HIGH 🚀", "complete.oga", "weather-clear-symbolic");
+                                    Utils.sendNotification("Crypto-Tracker", _("NEW ALL TIME HIGH 🚀"), "complete.oga", "weather-clear-symbolic");
                                     m.ath_notification_sent = true;
                                 }
                                 return true;
@@ -1937,6 +1935,35 @@ MyApplet.prototype = {
             throw new Error("This is a manual test error from settings!");
         }, "Settings Test-Button");
         testFunc();
+    },
+
+    on_applet_removed_from_panel: function() {
+        if (this._refreshId) {
+            Mainloop.source_remove(this._refreshId);
+            this._refreshId = null;
+        }
+        if (this._settingsChangedTimer) {
+            Mainloop.source_remove(this._settingsChangedTimer);
+            this._settingsChangedTimer = null;
+        }
+        if (this._nyMetricTimeout) {
+            Mainloop.source_remove(this._nyMetricTimeout);
+            this._nyMetricTimeout = null;
+        }
+        if (this._ghostTimer) {
+            Mainloop.source_remove(this._ghostTimer);
+            this._ghostTimer = null;
+        }
+        
+        if (ApiConfig && ApiConfig.destroy) ApiConfig.destroy();
+        if (Search && Search.destroy) Search.destroy();
+        if (Alarm && Alarm.destroy) Alarm.destroy();
+        if (Portfolio && Portfolio.destroy) Portfolio.destroy();
+
+        if (this.settings) {
+            this.settings.finalize();
+            this.settings = null;
+        }
     },
 
     _checkQuota: function() {

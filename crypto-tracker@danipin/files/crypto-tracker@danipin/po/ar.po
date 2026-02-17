@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: crypto-tracker@danipin 1.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-17 19:20+0200\n"
+"POT-Creation-Date: 2026-02-17 22:08+0200\n"
 "PO-Revision-Date: 2025-01-24 22:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: Arabic\n"
@@ -18,244 +18,257 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #. Row 2: Total Value
-#: applet.js:458 applet.js:461 applet.js:805 portfolio.js:708 utils.js:101
+#: applet.js:442 applet.js:445 applet.js:789 portfolio.js:699 utils.js:106
 msgid "Loading..."
 msgstr "جار التحميل..."
 
-#: applet.js:873
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Price Alarm: %s"
+msgstr "تنبيه السعر: "
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Target %s reached! Price: %s"
+msgstr " تم الوصول! السعر: "
+
+#: applet.js:742 alarm.js:336
+msgid "risen"
+msgstr "ارتفع"
+
+#: applet.js:742 alarm.js:336
+msgid "fallen"
+msgstr "انخفض"
+
+#: applet.js:743 alarm.js:337
+#, fuzzy, javascript-format
+msgid "Volatility Alarm: %s"
+msgstr "تنبيه التقلب: "
+
+#: applet.js:743 alarm.js:337
+#, javascript-format
+msgid "%s has %s by %s%%"
+msgstr ""
+
+#: applet.js:857
 msgid "Colors reset to default values."
 msgstr "تمت إعادة تعيين الألوان إلى القيم الافتراضية."
 
-#: applet.js:918
+#: applet.js:917
 msgid "List updated! Please reopen settings."
 msgstr "تم تحديث القائمة! يرجى إعادة فتح الإعدادات."
 
-#: applet.js:1949
+#: applet.js:1468
+msgid "NEW ALL TIME HIGH 🚀"
+msgstr "أعلى مستوى جديد على الإطلاق 🚀"
+
+#: applet.js:1977
 msgid "API Limit Reached"
 msgstr "تم الوصول إلى حد API"
 
-#: applet.js:1949
+#: applet.js:1977
 #, fuzzy, javascript-format
 msgid "You have used 100% of your monthly limit (10k)."
 msgstr "لقد استخدمت 100% من حدك الشهري (10k)."
 
-#: applet.js:1956
+#: applet.js:1984
 msgid "Power Saving Enabled"
 msgstr "تم تفعيل توفير الطاقة"
 
-#: applet.js:1956
+#: applet.js:1984
 msgid "Interval set to 5 min to avoid API ban."
 msgstr "تم تعيين الفاصل الزمني إلى 5 دقائق لتجنب حظر API."
 
-#: applet.js:1959
+#: applet.js:1987
 msgid "API Limit Warning"
 msgstr "تحذير حد API"
 
-#: applet.js:1959
+#: applet.js:1987
 #, fuzzy, javascript-format
 msgid "You have reached 90% of your limit."
 msgstr "لقد وصلت إلى 90% من حدك."
 
-#: applet.js:1962
+#: applet.js:1990
 msgid "API Limit Info"
 msgstr "معلومات حد API"
 
-#: applet.js:1962
+#: applet.js:1990
 #, fuzzy, javascript-format
 msgid "You have reached 80% of your limit."
 msgstr "لقد وصلت إلى 80% من حدك."
 
 #. Set base texts
-#: footer.js:103
+#: footer.js:94
 msgid "API: Active"
 msgstr "API: نشط"
 
-#: footer.js:103
+#: footer.js:94
 msgid "Basic Mode"
 msgstr "الوضع الأساسي"
 
-#: footer.js:107
+#: footer.js:98
 msgid "Source: CoinGecko"
 msgstr "المصدر: CoinGecko"
 
-#: footer.js:110
+#: footer.js:101
 msgid "Get Free API Key"
 msgstr "احصل على مفتاح API مجاني"
 
-#: footer.js:120 api.js:206 api.js:213
-msgid "Month:"
-msgstr "الشهر:"
+#: footer.js:111
+#, fuzzy, javascript-format
+msgid "Month: %s"
+msgstr "الشهر: "
 
-#: footer.js:121
-#, fuzzy
-msgid "Ø:"
-msgstr "المتوسط: "
+#: footer.js:112
+#, javascript-format
+msgid "Ø: %s"
+msgstr ""
 
-#: footer.js:124
-msgid "Alarms: "
+#: footer.js:115
+#, fuzzy, javascript-format
+msgid "Alarms: %s"
 msgstr "تنبيهات: "
 
-#: header.js:126 header.js:284
+#: header.js:117 header.js:275
 msgid "Portfolio Tracker"
 msgstr "متتبع المحفظة"
 
-#: header.js:128 header.js:285
+#: header.js:119 header.js:276
 msgid "Alarm Management"
 msgstr "إدارة التنبيهات"
 
-#: header.js:130 header.js:287
+#: header.js:121 header.js:278
 msgid "API Usage & Stats"
 msgstr "استخدام API والإحصائيات"
 
-#: header.js:132
+#: header.js:123
 msgid "Support Development"
 msgstr "دعم التطوير"
 
 # Strings from JS files
 #. IMPORTANT: For the drawing loop we need the pure text without markup!
-#: header.js:137 header.js:283 header.js:650
+#: header.js:128 header.js:274 header.js:641
 msgid "Market Dashboard"
 msgstr "لوحة معلومات السوق"
 
-#: header.js:139 header.js:651
+#: header.js:130 header.js:642
 msgid "24H Price Change [%]"
 msgstr "تغير السعر 24 ساعة [%]"
 
-#: header.js:289
+#: header.js:280
 msgid "Support"
 msgstr "الدعم"
 
-#: header.js:293
+#: header.js:284
 msgid "Settings"
 msgstr "الإعدادات"
 
-#: alarm.js:251
+#: alarm.js:242
 msgid "Alarm Archive Full"
 msgstr "أرشيف التنبيهات ممتلئ"
 
-#: alarm.js:251
-msgid "Oldest alarm for "
+#: alarm.js:242
+#, fuzzy, javascript-format
+msgid "Oldest alarm for %s was deleted."
 msgstr "أقدم تنبيه لـ "
 
-#: alarm.js:251
-msgid " was deleted."
-msgstr " تم حذفه."
-
-#: alarm.js:333
-msgid "Background Alarm: "
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Background Alarm: %s"
 msgstr "تنبيه الخلفية: "
 
-#: alarm.js:333
-msgid "Target price "
-msgstr "السعر المستهدف "
-
-#: alarm.js:333
-msgid " reached! Current: "
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Target price %s reached! Current: %s"
 msgstr " تم الوصول! الحالي: "
 
-#: alarm.js:345
-msgid "risen"
-msgstr "ارتفع"
-
-#: alarm.js:345
-msgid "fallen"
-msgstr "انخفض"
-
-#: alarm.js:346
-msgid "Volatility Alarm: "
-msgstr "تنبيه التقلب: "
-
-#: alarm.js:346
-#, fuzzy
-msgid " has "
-msgstr "قد "
-
-#: alarm.js:346
-msgid " by "
-msgstr " بمقدار "
-
-#: alarm.js:478
+#: alarm.js:469
 msgid "Alarm Settings"
 msgstr "إعدادات التنبيه"
 
-#: alarm.js:582
-msgid "Target Price ("
+#: alarm.js:573
+#, fuzzy, javascript-format
+msgid "Target Price (%s):"
 msgstr "السعر المستهدف ("
 
-#: alarm.js:583
+#: alarm.js:574
 msgid "Change (%):"
 msgstr "التغيير (%):"
 
-#: alarm.js:586
+#: alarm.js:577
 msgid "Press ENTER to save."
 msgstr "اضغط ENTER للحفظ."
 
-#: alarm.js:652 alarm.js:661
+#: alarm.js:643 alarm.js:652
 msgid "Search alarms..."
 msgstr "بحث في التنبيهات..."
 
-#: alarm.js:748 portfolio.js:1271
+#: alarm.js:739 portfolio.js:1262
 msgid "No matches."
 msgstr "لا توجد تطابقات."
 
-#: alarm.js:748
+#: alarm.js:739
 msgid "No alarms here yet."
 msgstr "لا توجد تنبيهات هنا بعد."
 
+#: alarm.js:856
+#, fuzzy, javascript-format
+msgid "Target: %s"
+msgstr "الهدف:"
+
+#: alarm.js:857
+#, fuzzy, javascript-format
+msgid "Vol: %s%%"
+msgstr "حجم 24 ساعة:"
+
+#: alarm.js:860
+#, fuzzy, javascript-format
+msgid "Current: %s"
+msgstr "الحالي: "
+
+#: alarm.js:865
+#, fuzzy, javascript-format
+msgid "Created: %s"
+msgstr "تم الإنشاء: "
+
 #. Price Input
-#: alarm.js:865 alarm.js:1032
+#: alarm.js:1023
 msgid "Target:"
 msgstr "الهدف:"
 
-#: alarm.js:866
-#, fuzzy
-msgid "Vol:"
-msgstr "حجم 24 ساعة:"
-
-#: alarm.js:869
-msgid "Current: "
-msgstr "الحالي: "
-
-#: alarm.js:874
-msgid "Created: "
-msgstr "تم الإنشاء: "
-
 #. Vol Input
-#: alarm.js:1053
+#: alarm.js:1044
 msgid "Vol %:"
 msgstr "التقلب %:"
 
-#: alarm.js:1067
+#: alarm.js:1058
 msgid "ENTER to save"
 msgstr "ENTER للحفظ"
 
 #. Sort options
-#: alarm.js:1111 portfolio.js:1017
+#: alarm.js:1102 portfolio.js:1008
 msgid "Date"
 msgstr "التاريخ"
 
-#: alarm.js:1112
+#: alarm.js:1103
 msgid "Name"
 msgstr "الاسم"
 
-#: alarm.js:1175 alarm.js:1227
+#: alarm.js:1166 alarm.js:1218
 msgid "Delete all"
 msgstr "حذف الكل"
 
-#: alarm.js:1183 alarm.js:1191 alarm.js:1199 alarm.js:1222 portfolio.js:1221
-#: portfolio.js:1228
+#: alarm.js:1174 alarm.js:1182 alarm.js:1190 alarm.js:1213 portfolio.js:1212
+#: portfolio.js:1219
 msgid "Sure?"
 msgstr "متأكد؟"
 
-#: alarm.js:1239
-msgid "Alarms "
+#: alarm.js:1230
+#, fuzzy, javascript-format
+msgid "Alarms %s of %s"
 msgstr "تنبيهات "
 
-#: alarm.js:1239
-msgid " of "
-msgstr " من "
-
-#: donate.js:44
+#: donate.js:35
 msgid ""
 "If you like this applet, you can support\n"
 "its development with a donation."
@@ -263,314 +276,342 @@ msgstr ""
 "إذا أعجبك هذا التطبيق المصغر، يمكنك دعم\n"
 "تطويره بتبرع."
 
-#: donate.js:190
+#: donate.js:181
 msgid "Address:"
 msgstr "العنوان:"
 
-#: donate.js:221
+#: donate.js:212
 msgid "Copied"
 msgstr "تم النسخ"
 
-#: donate.js:221
-msgid " address copied."
+#: donate.js:212
+#, fuzzy, javascript-format
+msgid "%s address copied."
 msgstr " تم نسخ العنوان."
 
-#: search.js:42
+#: search.js:33
 msgid "Search..."
 msgstr "بحث..."
 
-#: search.js:181
+#: search.js:172
 msgid "No results..."
 msgstr "لا توجد نتائج..."
 
-#: portfolio.js:325
+#: portfolio.js:316
 msgid "Converting..."
 msgstr "جار التحويل..."
 
-#: portfolio.js:374
+#: portfolio.js:365
 msgid "Error"
 msgstr "خطأ"
 
-#: portfolio.js:374
+#: portfolio.js:365
 msgid "Currency conversion failed."
 msgstr "فشل تحويل العملة."
 
-#: portfolio.js:612
+#: portfolio.js:603
 msgid "Total Balance"
 msgstr "إجمالي الرصيد"
 
 #. FIX: expand: false for label, insert spacer instead
-#: portfolio.js:729
+#: portfolio.js:720
 msgid "Select Currency"
 msgstr "اختر العملة"
 
-#: portfolio.js:799 portfolio.js:807
+#: portfolio.js:790 portfolio.js:798
 msgid "Filter portfolio..."
 msgstr "تصفية المحفظة..."
 
-#: portfolio.js:1015
+#: portfolio.js:1006
 msgid "Amount"
 msgstr "المبلغ"
 
-#: portfolio.js:1016
+#: portfolio.js:1007
 msgid "Buy Price"
 msgstr "سعر الشراء"
 
 #. Add TX Button
-#: portfolio.js:1208
+#: portfolio.js:1199
 msgid "+ Transaction"
 msgstr "+ معاملة"
 
 #. Delete Coin Button
-#: portfolio.js:1217 portfolio.js:1233
+#: portfolio.js:1208 portfolio.js:1224
 msgid "Remove Position"
 msgstr "إزالة المركز"
 
-#: portfolio.js:1271
+#: portfolio.js:1262
 msgid "No positions here yet."
 msgstr "لا توجد مراكز هنا بعد."
 
-#: portfolio.js:1297
+#: portfolio.js:1288
 msgid "Add Coin"
 msgstr "إضافة عملة"
 
-#: portfolio.js:1314 portfolio.js:1320
+#: portfolio.js:1305 portfolio.js:1311
 msgid "Search (e.g. Bitcoin)..."
 msgstr "بحث (مثل Bitcoin)..."
 
-#: portfolio.js:1407
+#: portfolio.js:1398
 msgid "No results"
 msgstr "لا توجد نتائج"
 
-#: seasonal.js:89
+#: seasonal.js:80
 msgid "HAPPY HALLOWEEN !"
 msgstr "هالوين سعيد !"
 
-#: seasonal.js:387
+#: seasonal.js:378
 msgid "MERRY CHRISTMAS 🎄"
 msgstr "عيد ميلاد مجيد 🎄"
 
 #. Straighten up
-#: seasonal.js:495
+#: seasonal.js:486
 msgid "HAPPY BITCOIN PIZZA DAY 🍕"
 msgstr "يوم بيتزا بيتكوين سعيد 🍕"
 
-#: charts.js:190
+#: charts.js:181
 msgid "?"
 msgstr ""
 
-#: charts.js:237
+#: charts.js:228
 msgid "Rank:"
 msgstr "الرتبة:"
 
-#: charts.js:237
+#: charts.js:228
 msgid "M.Cap:"
 msgstr "القيمة السوقية:"
 
-#: charts.js:238
+#: charts.js:229
 msgid "24h High:"
 msgstr "أعلى 24 ساعة:"
 
-#: charts.js:238
+#: charts.js:229
 msgid "24h Vol:"
 msgstr "حجم 24 ساعة:"
 
-#: charts.js:239
+#: charts.js:230
 msgid "24h Low:"
 msgstr "أدنى 24 ساعة:"
 
-#: charts.js:239
+#: charts.js:230
 msgid "ATH:"
 msgstr "أعلى مستوى:"
 
-#: utils.js:343
+#: utils.js:348
 msgid " (Rate Limit)"
 msgstr " (حد المعدل)"
 
-#: utils.js:344
+#: utils.js:349
 msgid " (API Key invalid)"
 msgstr " (مفتاح API غير صالح)"
 
-#: utils.js:345
+#: utils.js:350
 msgid " (Network)"
 msgstr " (شبكة)"
 
-#: utils.js:347
+#: utils.js:352
 msgid "Crypto-Tracker Error"
 msgstr "خطأ Crypto-Tracker"
 
-#: utils.js:347
-msgid "An error was intercepted"
+#: utils.js:352
+#, fuzzy, javascript-format
+msgid "An error was intercepted%s. See log."
 msgstr "تم اعتراض خطأ"
 
-#: utils.js:347
-msgid ". See log."
-msgstr ". انظر السجل."
-
-#: api.js:76
+#: api.js:67
 msgid "API successfully activated."
 msgstr "تم تفعيل API بنجاح."
 
-#: api.js:82
+#: api.js:73
 msgid "No internet connection"
 msgstr "لا يوجد اتصال بالإنترنت"
 
-#: api.js:84
+#: api.js:75
 msgid "Key invalid"
 msgstr "المفتاح غير صالح"
 
-#: api.js:86
+#: api.js:77
 msgid "Key blocked"
 msgstr "المفتاح محظور"
 
-#: api.js:88
+#: api.js:79
 msgid "Limit reached"
 msgstr "تم الوصول للحد"
 
-#: api.js:90
+#: api.js:81
 msgid "Server error"
 msgstr "خطأ في الخادم"
 
-#: api.js:94
-msgid "API Error: "
+#: api.js:85
+#, fuzzy, javascript-format
+msgid "API Error: %s"
 msgstr "خطأ API: "
 
-#: api.js:99
+#: api.js:90
 msgid "System error"
 msgstr "خطأ في النظام"
 
-#: api.js:133
+#: api.js:131
 msgid "System Diagnosis"
 msgstr "تشخيص النظام"
 
-#: api.js:145
+#: api.js:143
 msgid "API Connection: Active & Valid"
 msgstr "اتصال API: نشط وصالح"
 
-#: api.js:147
+#: api.js:145
 msgid "Not configured"
 msgstr "غير مكون"
 
-#: api.js:148
-msgid "API Status: "
+#: api.js:146
+#, fuzzy, javascript-format
+msgid "API Status: %s"
 msgstr "حالة API: "
 
-#: api.js:156
-msgid "Quota critical: "
+#: api.js:154
+#, fuzzy, javascript-format
+msgid "Quota critical: %s%% used"
 msgstr "الحصة حرجة: "
 
-#: api.js:156 api.js:158
-msgid "% used"
-msgstr "% مستخدم"
-
-#: api.js:158
-msgid "Quota high: "
+#: api.js:156
+#, fuzzy, javascript-format
+msgid "Quota high: %s%% used"
 msgstr "الحصة مرتفعة: "
 
-#: api.js:160
-msgid "Quota: "
-msgstr "الحصة: "
-
-#: api.js:160
-msgid "(In the green)"
+#: api.js:158
+#, fuzzy, javascript-format
+msgid "Quota: %s%% (In the green)"
 msgstr "(في المنطقة الخضراء)"
 
-#: api.js:167
-msgid "Period: "
-msgstr "الفترة: "
-
-#: api.js:167
-msgid " days left in month."
+#: api.js:165
+#, fuzzy, javascript-format
+msgid "Period: %s days left in month."
 msgstr " أيام متبقية في الشهر."
 
-#: api.js:173
-msgid "Tip: Interval ("
-msgstr "نصيحة: الفاصل الزمني ("
-
-#: api.js:173
-msgid "s) is aggressive for Free Tier."
+#: api.js:171
+#, fuzzy, javascript-format
+msgid "Tip: Interval (%ss) is aggressive for Free Tier."
 msgstr "ث) عدواني للمستوى المجاني."
 
-#: api.js:180
+#: api.js:178
 msgid "Note: Error log exists."
 msgstr "ملاحظة: يوجد سجل أخطاء."
 
-#: api.js:182
+#: api.js:180
 msgid "System: No crashes logged."
 msgstr "النظام: لم يتم تسجيل أعطال."
 
-#: api.js:204 api.js:399
+#: api.js:202 api.js:397
 msgid "Free API (Basic)"
 msgstr "API مجاني (أساسي)"
 
-#: api.js:205 api.js:212
+#: api.js:203 api.js:210
 msgid "Today:"
 msgstr "اليوم:"
 
-#: api.js:207 api.js:214
+#: api.js:204 api.js:211
+msgid "Month:"
+msgstr "الشهر:"
+
+#: api.js:205 api.js:212
 msgid "Ø per Day:"
 msgstr "المتوسط يوميًا:"
 
-#: api.js:211 api.js:400
+#: api.js:209 api.js:398
 msgid "Key API (Pro)"
 msgstr "API المفتاح (احترافي)"
 
-#: api.js:226
+#: api.js:224
 msgid "Distribution (Key Calls)"
 msgstr "التوزيع (مكالمات المفتاح)"
 
-#: api.js:241
+#: api.js:239
 msgid "Charts"
 msgstr "المخططات"
 
 #. Blue
-#: api.js:242
+#: api.js:240
 msgid "Details"
 msgstr "التفاصيل"
 
 #. Purple
-#: api.js:243
+#: api.js:241
 msgid "Search"
 msgstr "بحث"
 
 #. Yellow
-#: api.js:244
+#: api.js:242
 msgid "Portfolio"
 msgstr "المحفظة"
 
 #. Cyan
-#: api.js:245
+#: api.js:243
 msgid "Alarms"
 msgstr "تنبيهات"
 
 #. Red/Pink
-#: api.js:246
+#: api.js:244
 msgid "Updates"
 msgstr "التحديثات"
 
-#: api.js:296
+#: api.js:294
 msgid "History (Last 14 Days)"
 msgstr "التاريخ (آخر 14 يومًا)"
 
-#: api.js:419
-msgid "Error Log ("
+#: api.js:417
+#, fuzzy, javascript-format
+msgid "Error Log (%s KB)"
 msgstr "سجل الأخطاء ("
 
-#: api.js:419
-msgid " KB)"
-msgstr " كيلوبايت)"
-
-#: api.js:422
+#: api.js:420
 msgid "The system prevented and logged crashes."
 msgstr "منع النظام الأعطال وسجلها."
 
-#: api.js:428
+#: api.js:426
 msgid "Delete"
 msgstr "حذف"
 
-#: api.js:441
+#: api.js:439
 msgid "Dismiss"
 msgstr "تجاهل"
+
+#, fuzzy
+#~ msgid "Ø:"
+#~ msgstr "المتوسط: "
+
+#~ msgid " was deleted."
+#~ msgstr " تم حذفه."
+
+#~ msgid "Target price "
+#~ msgstr "السعر المستهدف "
+
+#, fuzzy
+#~ msgid " has "
+#~ msgstr "قد "
+
+#~ msgid " by "
+#~ msgstr " بمقدار "
+
+#~ msgid " of "
+#~ msgstr " من "
+
+#~ msgid ". See log."
+#~ msgstr ". انظر السجل."
+
+#~ msgid "% used"
+#~ msgstr "% مستخدم"
+
+#~ msgid "Quota: "
+#~ msgstr "الحصة: "
+
+#~ msgid "Period: "
+#~ msgstr "الفترة: "
+
+#~ msgid "Tip: Interval ("
+#~ msgstr "نصيحة: الفاصل الزمني ("
+
+#~ msgid " KB)"
+#~ msgstr " كيلوبايت)"
 
 #~ msgid "Crypto Tracker"
 #~ msgstr "متتبع العملات المشفرة"
@@ -933,17 +974,8 @@ msgstr "تجاهل"
 #~ msgid " Loading..."
 #~ msgstr " جار التحميل..."
 
-#~ msgid "Price Alarm: "
-#~ msgstr "تنبيه السعر: "
-
 #~ msgid "Target "
 #~ msgstr "الهدف "
-
-#~ msgid " reached! Price: "
-#~ msgstr " تم الوصول! السعر: "
-
-#~ msgid "NEW ALL TIME HIGH 🚀"
-#~ msgstr "أعلى مستوى جديد على الإطلاق 🚀"
 
 #~ msgid "Search Coin"
 #~ msgstr "بحث عن عملة"
@@ -956,6 +988,3 @@ msgstr "تجاهل"
 
 #~ msgid "New month: Interval reset to 120s."
 #~ msgstr "شهر جديد: إعادة تعيين الفاصل الزمني إلى 120 ثانية."
-
-#~ msgid "Month: "
-#~ msgstr "الشهر: "

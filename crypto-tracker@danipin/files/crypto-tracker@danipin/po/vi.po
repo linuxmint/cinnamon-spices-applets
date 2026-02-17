@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: crypto-tracker@danipin 1.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-17 19:20+0200\n"
+"POT-Creation-Date: 2026-02-17 22:08+0200\n"
 "PO-Revision-Date: 2025-01-24 22:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: Vietnamese\n"
@@ -17,244 +17,257 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Row 2: Total Value
-#: applet.js:458 applet.js:461 applet.js:805 portfolio.js:708 utils.js:101
+#: applet.js:442 applet.js:445 applet.js:789 portfolio.js:699 utils.js:106
 msgid "Loading..."
 msgstr "Đang tải..."
 
-#: applet.js:873
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Price Alarm: %s"
+msgstr "Cảnh báo giá: "
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Target %s reached! Price: %s"
+msgstr " đã đạt! Giá: "
+
+#: applet.js:742 alarm.js:336
+msgid "risen"
+msgstr "tăng"
+
+#: applet.js:742 alarm.js:336
+msgid "fallen"
+msgstr "giảm"
+
+#: applet.js:743 alarm.js:337
+#, fuzzy, javascript-format
+msgid "Volatility Alarm: %s"
+msgstr "Cảnh báo biến động: "
+
+#: applet.js:743 alarm.js:337
+#, javascript-format
+msgid "%s has %s by %s%%"
+msgstr ""
+
+#: applet.js:857
 msgid "Colors reset to default values."
 msgstr "Màu sắc đã được đặt lại về giá trị mặc định."
 
-#: applet.js:918
+#: applet.js:917
 msgid "List updated! Please reopen settings."
 msgstr "Danh sách đã cập nhật! Vui lòng mở lại cài đặt."
 
-#: applet.js:1949
+#: applet.js:1468
+msgid "NEW ALL TIME HIGH 🚀"
+msgstr "MỨC CAO NHẤT MỌI THỜI ĐẠI MỚI 🚀"
+
+#: applet.js:1977
 msgid "API Limit Reached"
 msgstr "Đã đạt giới hạn API"
 
-#: applet.js:1949
+#: applet.js:1977
 #, fuzzy, javascript-format
 msgid "You have used 100% of your monthly limit (10k)."
 msgstr "Bạn đã sử dụng 100% giới hạn hàng tháng (10k)."
 
-#: applet.js:1956
+#: applet.js:1984
 msgid "Power Saving Enabled"
 msgstr "Đã bật tiết kiệm năng lượng"
 
-#: applet.js:1956
+#: applet.js:1984
 msgid "Interval set to 5 min to avoid API ban."
 msgstr "Khoảng thời gian được đặt thành 5 phút để tránh bị cấm API."
 
-#: applet.js:1959
+#: applet.js:1987
 msgid "API Limit Warning"
 msgstr "Cảnh báo giới hạn API"
 
-#: applet.js:1959
+#: applet.js:1987
 #, fuzzy, javascript-format
 msgid "You have reached 90% of your limit."
 msgstr "Bạn đã đạt 90% giới hạn của mình."
 
-#: applet.js:1962
+#: applet.js:1990
 msgid "API Limit Info"
 msgstr "Thông tin giới hạn API"
 
-#: applet.js:1962
+#: applet.js:1990
 #, fuzzy, javascript-format
 msgid "You have reached 80% of your limit."
 msgstr "Bạn đã đạt 80% giới hạn của mình."
 
 #. Set base texts
-#: footer.js:103
+#: footer.js:94
 msgid "API: Active"
 msgstr "API: Hoạt động"
 
-#: footer.js:103
+#: footer.js:94
 msgid "Basic Mode"
 msgstr "Chế độ cơ bản"
 
-#: footer.js:107
+#: footer.js:98
 msgid "Source: CoinGecko"
 msgstr "Nguồn: CoinGecko"
 
-#: footer.js:110
+#: footer.js:101
 msgid "Get Free API Key"
 msgstr "Nhận khóa API miễn phí"
 
-#: footer.js:120 api.js:206 api.js:213
-msgid "Month:"
-msgstr "Tháng:"
+#: footer.js:111
+#, fuzzy, javascript-format
+msgid "Month: %s"
+msgstr "Tháng: "
 
-#: footer.js:121
-#, fuzzy
-msgid "Ø:"
-msgstr "Ø: "
+#: footer.js:112
+#, javascript-format
+msgid "Ø: %s"
+msgstr ""
 
-#: footer.js:124
-msgid "Alarms: "
+#: footer.js:115
+#, fuzzy, javascript-format
+msgid "Alarms: %s"
 msgstr "Cảnh báo: "
 
-#: header.js:126 header.js:284
+#: header.js:117 header.js:275
 msgid "Portfolio Tracker"
 msgstr "Theo dõi danh mục đầu tư"
 
-#: header.js:128 header.js:285
+#: header.js:119 header.js:276
 msgid "Alarm Management"
 msgstr "Quản lý cảnh báo"
 
-#: header.js:130 header.js:287
+#: header.js:121 header.js:278
 msgid "API Usage & Stats"
 msgstr "Sử dụng API & Thống kê"
 
-#: header.js:132
+#: header.js:123
 msgid "Support Development"
 msgstr "Hỗ trợ phát triển"
 
 # Strings from JS files
 #. IMPORTANT: For the drawing loop we need the pure text without markup!
-#: header.js:137 header.js:283 header.js:650
+#: header.js:128 header.js:274 header.js:641
 msgid "Market Dashboard"
 msgstr "Bảng điều khiển thị trường"
 
-#: header.js:139 header.js:651
+#: header.js:130 header.js:642
 msgid "24H Price Change [%]"
 msgstr "Thay đổi giá 24H [%]"
 
-#: header.js:289
+#: header.js:280
 msgid "Support"
 msgstr "Hỗ trợ"
 
-#: header.js:293
+#: header.js:284
 msgid "Settings"
 msgstr "Cài đặt"
 
-#: alarm.js:251
+#: alarm.js:242
 msgid "Alarm Archive Full"
 msgstr "Lưu trữ cảnh báo đầy"
 
-#: alarm.js:251
-msgid "Oldest alarm for "
+#: alarm.js:242
+#, fuzzy, javascript-format
+msgid "Oldest alarm for %s was deleted."
 msgstr "Cảnh báo cũ nhất cho "
 
-#: alarm.js:251
-msgid " was deleted."
-msgstr " đã bị xóa."
-
-#: alarm.js:333
-msgid "Background Alarm: "
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Background Alarm: %s"
 msgstr "Cảnh báo nền: "
 
-#: alarm.js:333
-msgid "Target price "
-msgstr "Giá mục tiêu "
-
-#: alarm.js:333
-msgid " reached! Current: "
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Target price %s reached! Current: %s"
 msgstr " đã đạt! Hiện tại: "
 
-#: alarm.js:345
-msgid "risen"
-msgstr "tăng"
-
-#: alarm.js:345
-msgid "fallen"
-msgstr "giảm"
-
-#: alarm.js:346
-msgid "Volatility Alarm: "
-msgstr "Cảnh báo biến động: "
-
-#: alarm.js:346
-#, fuzzy
-msgid " has "
-msgstr "đã "
-
-#: alarm.js:346
-msgid " by "
-msgstr " thêm "
-
-#: alarm.js:478
+#: alarm.js:469
 msgid "Alarm Settings"
 msgstr "Cài đặt cảnh báo"
 
-#: alarm.js:582
-msgid "Target Price ("
+#: alarm.js:573
+#, fuzzy, javascript-format
+msgid "Target Price (%s):"
 msgstr "Giá mục tiêu ("
 
-#: alarm.js:583
+#: alarm.js:574
 msgid "Change (%):"
 msgstr "Thay đổi (%):"
 
-#: alarm.js:586
+#: alarm.js:577
 msgid "Press ENTER to save."
 msgstr "Nhấn ENTER để lưu."
 
-#: alarm.js:652 alarm.js:661
+#: alarm.js:643 alarm.js:652
 msgid "Search alarms..."
 msgstr "Tìm kiếm cảnh báo..."
 
-#: alarm.js:748 portfolio.js:1271
+#: alarm.js:739 portfolio.js:1262
 msgid "No matches."
 msgstr "Không có kết quả phù hợp."
 
-#: alarm.js:748
+#: alarm.js:739
 msgid "No alarms here yet."
 msgstr "Chưa có cảnh báo nào ở đây."
 
+#: alarm.js:856
+#, fuzzy, javascript-format
+msgid "Target: %s"
+msgstr "Mục tiêu:"
+
+#: alarm.js:857
+#, fuzzy, javascript-format
+msgid "Vol: %s%%"
+msgstr "Vol 24h:"
+
+#: alarm.js:860
+#, fuzzy, javascript-format
+msgid "Current: %s"
+msgstr "Hiện tại: "
+
+#: alarm.js:865
+#, fuzzy, javascript-format
+msgid "Created: %s"
+msgstr "Đã tạo: "
+
 #. Price Input
-#: alarm.js:865 alarm.js:1032
+#: alarm.js:1023
 msgid "Target:"
 msgstr "Mục tiêu:"
 
-#: alarm.js:866
-#, fuzzy
-msgid "Vol:"
-msgstr "Vol 24h:"
-
-#: alarm.js:869
-msgid "Current: "
-msgstr "Hiện tại: "
-
-#: alarm.js:874
-msgid "Created: "
-msgstr "Đã tạo: "
-
 #. Vol Input
-#: alarm.js:1053
+#: alarm.js:1044
 msgid "Vol %:"
 msgstr "Vol %:"
 
-#: alarm.js:1067
+#: alarm.js:1058
 msgid "ENTER to save"
 msgstr "ENTER để lưu"
 
 #. Sort options
-#: alarm.js:1111 portfolio.js:1017
+#: alarm.js:1102 portfolio.js:1008
 msgid "Date"
 msgstr "Ngày"
 
-#: alarm.js:1112
+#: alarm.js:1103
 msgid "Name"
 msgstr "Tên"
 
-#: alarm.js:1175 alarm.js:1227
+#: alarm.js:1166 alarm.js:1218
 msgid "Delete all"
 msgstr "Xóa tất cả"
 
-#: alarm.js:1183 alarm.js:1191 alarm.js:1199 alarm.js:1222 portfolio.js:1221
-#: portfolio.js:1228
+#: alarm.js:1174 alarm.js:1182 alarm.js:1190 alarm.js:1213 portfolio.js:1212
+#: portfolio.js:1219
 msgid "Sure?"
 msgstr "Chắc chắn?"
 
-#: alarm.js:1239
-msgid "Alarms "
+#: alarm.js:1230
+#, fuzzy, javascript-format
+msgid "Alarms %s of %s"
 msgstr "Cảnh báo "
 
-#: alarm.js:1239
-msgid " of "
-msgstr " của "
-
-#: donate.js:44
+#: donate.js:35
 msgid ""
 "If you like this applet, you can support\n"
 "its development with a donation."
@@ -262,314 +275,342 @@ msgstr ""
 "Nếu bạn thích applet này, bạn có thể hỗ trợ\n"
 "sự phát triển của nó bằng cách quyên góp."
 
-#: donate.js:190
+#: donate.js:181
 msgid "Address:"
 msgstr "Địa chỉ:"
 
-#: donate.js:221
+#: donate.js:212
 msgid "Copied"
 msgstr "Đã sao chép"
 
-#: donate.js:221
-msgid " address copied."
+#: donate.js:212
+#, fuzzy, javascript-format
+msgid "%s address copied."
 msgstr " địa chỉ đã được sao chép."
 
-#: search.js:42
+#: search.js:33
 msgid "Search..."
 msgstr "Tìm kiếm..."
 
-#: search.js:181
+#: search.js:172
 msgid "No results..."
 msgstr "Không có kết quả..."
 
-#: portfolio.js:325
+#: portfolio.js:316
 msgid "Converting..."
 msgstr "Đang chuyển đổi..."
 
-#: portfolio.js:374
+#: portfolio.js:365
 msgid "Error"
 msgstr "Lỗi"
 
-#: portfolio.js:374
+#: portfolio.js:365
 msgid "Currency conversion failed."
 msgstr "Chuyển đổi tiền tệ thất bại."
 
-#: portfolio.js:612
+#: portfolio.js:603
 msgid "Total Balance"
 msgstr "Tổng số dư"
 
 #. FIX: expand: false for label, insert spacer instead
-#: portfolio.js:729
+#: portfolio.js:720
 msgid "Select Currency"
 msgstr "Chọn tiền tệ"
 
-#: portfolio.js:799 portfolio.js:807
+#: portfolio.js:790 portfolio.js:798
 msgid "Filter portfolio..."
 msgstr "Lọc danh mục đầu tư..."
 
-#: portfolio.js:1015
+#: portfolio.js:1006
 msgid "Amount"
 msgstr "Số lượng"
 
-#: portfolio.js:1016
+#: portfolio.js:1007
 msgid "Buy Price"
 msgstr "Giá mua"
 
 #. Add TX Button
-#: portfolio.js:1208
+#: portfolio.js:1199
 msgid "+ Transaction"
 msgstr "+ Giao dịch"
 
 #. Delete Coin Button
-#: portfolio.js:1217 portfolio.js:1233
+#: portfolio.js:1208 portfolio.js:1224
 msgid "Remove Position"
 msgstr "Xóa vị thế"
 
-#: portfolio.js:1271
+#: portfolio.js:1262
 msgid "No positions here yet."
 msgstr "Chưa có vị thế nào ở đây."
 
-#: portfolio.js:1297
+#: portfolio.js:1288
 msgid "Add Coin"
 msgstr "Thêm Coin"
 
-#: portfolio.js:1314 portfolio.js:1320
+#: portfolio.js:1305 portfolio.js:1311
 msgid "Search (e.g. Bitcoin)..."
 msgstr "Tìm kiếm (ví dụ: Bitcoin)..."
 
-#: portfolio.js:1407
+#: portfolio.js:1398
 msgid "No results"
 msgstr "Không có kết quả"
 
-#: seasonal.js:89
+#: seasonal.js:80
 msgid "HAPPY HALLOWEEN !"
 msgstr "CHÚC MỪNG HALLOWEEN !"
 
-#: seasonal.js:387
+#: seasonal.js:378
 msgid "MERRY CHRISTMAS 🎄"
 msgstr "GIÁNG SINH VUI VẺ 🎄"
 
 #. Straighten up
-#: seasonal.js:495
+#: seasonal.js:486
 msgid "HAPPY BITCOIN PIZZA DAY 🍕"
 msgstr "CHÚC MỪNG NGÀY PIZZA BITCOIN 🍕"
 
-#: charts.js:190
+#: charts.js:181
 msgid "?"
 msgstr ""
 
-#: charts.js:237
+#: charts.js:228
 msgid "Rank:"
 msgstr "Xếp hạng:"
 
-#: charts.js:237
+#: charts.js:228
 msgid "M.Cap:"
 msgstr "Vốn hóa:"
 
-#: charts.js:238
+#: charts.js:229
 msgid "24h High:"
 msgstr "Cao 24h:"
 
-#: charts.js:238
+#: charts.js:229
 msgid "24h Vol:"
 msgstr "Vol 24h:"
 
-#: charts.js:239
+#: charts.js:230
 msgid "24h Low:"
 msgstr "Thấp 24h:"
 
-#: charts.js:239
+#: charts.js:230
 msgid "ATH:"
 msgstr "ATH:"
 
-#: utils.js:343
+#: utils.js:348
 msgid " (Rate Limit)"
 msgstr " (Giới hạn tốc độ)"
 
-#: utils.js:344
+#: utils.js:349
 msgid " (API Key invalid)"
 msgstr " (Khóa API không hợp lệ)"
 
-#: utils.js:345
+#: utils.js:350
 msgid " (Network)"
 msgstr " (Mạng)"
 
-#: utils.js:347
+#: utils.js:352
 msgid "Crypto-Tracker Error"
 msgstr "Lỗi Crypto-Tracker"
 
-#: utils.js:347
-msgid "An error was intercepted"
+#: utils.js:352
+#, fuzzy, javascript-format
+msgid "An error was intercepted%s. See log."
 msgstr "Đã chặn một lỗi"
 
-#: utils.js:347
-msgid ". See log."
-msgstr ". Xem nhật ký."
-
-#: api.js:76
+#: api.js:67
 msgid "API successfully activated."
 msgstr "API đã được kích hoạt thành công."
 
-#: api.js:82
+#: api.js:73
 msgid "No internet connection"
 msgstr "Không có kết nối internet"
 
-#: api.js:84
+#: api.js:75
 msgid "Key invalid"
 msgstr "Khóa không hợp lệ"
 
-#: api.js:86
+#: api.js:77
 msgid "Key blocked"
 msgstr "Khóa bị chặn"
 
-#: api.js:88
+#: api.js:79
 msgid "Limit reached"
 msgstr "Đã đạt giới hạn"
 
-#: api.js:90
+#: api.js:81
 msgid "Server error"
 msgstr "Lỗi máy chủ"
 
-#: api.js:94
-msgid "API Error: "
+#: api.js:85
+#, fuzzy, javascript-format
+msgid "API Error: %s"
 msgstr "Lỗi API: "
 
-#: api.js:99
+#: api.js:90
 msgid "System error"
 msgstr "Lỗi hệ thống"
 
-#: api.js:133
+#: api.js:131
 msgid "System Diagnosis"
 msgstr "Chẩn đoán hệ thống"
 
-#: api.js:145
+#: api.js:143
 msgid "API Connection: Active & Valid"
 msgstr "Kết nối API: Hoạt động & Hợp lệ"
 
-#: api.js:147
+#: api.js:145
 msgid "Not configured"
 msgstr "Chưa được cấu hình"
 
-#: api.js:148
-msgid "API Status: "
+#: api.js:146
+#, fuzzy, javascript-format
+msgid "API Status: %s"
 msgstr "Trạng thái API: "
 
-#: api.js:156
-msgid "Quota critical: "
+#: api.js:154
+#, fuzzy, javascript-format
+msgid "Quota critical: %s%% used"
 msgstr "Hạn ngạch nghiêm trọng: "
 
-#: api.js:156 api.js:158
-msgid "% used"
-msgstr "% đã sử dụng"
-
-#: api.js:158
-msgid "Quota high: "
+#: api.js:156
+#, fuzzy, javascript-format
+msgid "Quota high: %s%% used"
 msgstr "Hạn ngạch cao: "
 
-#: api.js:160
-msgid "Quota: "
-msgstr "Hạn ngạch: "
-
-#: api.js:160
-msgid "(In the green)"
+#: api.js:158
+#, fuzzy, javascript-format
+msgid "Quota: %s%% (In the green)"
 msgstr "(Trong vùng xanh)"
 
-#: api.js:167
-msgid "Period: "
-msgstr "Giai đoạn: "
-
-#: api.js:167
-msgid " days left in month."
+#: api.js:165
+#, fuzzy, javascript-format
+msgid "Period: %s days left in month."
 msgstr " ngày còn lại trong tháng."
 
-#: api.js:173
-msgid "Tip: Interval ("
-msgstr "Mẹo: Khoảng thời gian ("
-
-#: api.js:173
-msgid "s) is aggressive for Free Tier."
+#: api.js:171
+#, fuzzy, javascript-format
+msgid "Tip: Interval (%ss) is aggressive for Free Tier."
 msgstr "s) là quá mức cho Gói miễn phí."
 
-#: api.js:180
+#: api.js:178
 msgid "Note: Error log exists."
 msgstr "Lưu ý: Nhật ký lỗi tồn tại."
 
-#: api.js:182
+#: api.js:180
 msgid "System: No crashes logged."
 msgstr "Hệ thống: Không có sự cố nào được ghi lại."
 
-#: api.js:204 api.js:399
+#: api.js:202 api.js:397
 msgid "Free API (Basic)"
 msgstr "API miễn phí (Cơ bản)"
 
-#: api.js:205 api.js:212
+#: api.js:203 api.js:210
 msgid "Today:"
 msgstr "Hôm nay:"
 
-#: api.js:207 api.js:214
+#: api.js:204 api.js:211
+msgid "Month:"
+msgstr "Tháng:"
+
+#: api.js:205 api.js:212
 msgid "Ø per Day:"
 msgstr "Ø mỗi ngày:"
 
-#: api.js:211 api.js:400
+#: api.js:209 api.js:398
 msgid "Key API (Pro)"
 msgstr "API khóa (Pro)"
 
-#: api.js:226
+#: api.js:224
 msgid "Distribution (Key Calls)"
 msgstr "Phân phối (Cuộc gọi khóa)"
 
-#: api.js:241
+#: api.js:239
 msgid "Charts"
 msgstr "Biểu đồ"
 
 #. Blue
-#: api.js:242
+#: api.js:240
 msgid "Details"
 msgstr "Chi tiết"
 
 #. Purple
-#: api.js:243
+#: api.js:241
 msgid "Search"
 msgstr "Tìm kiếm"
 
 #. Yellow
-#: api.js:244
+#: api.js:242
 msgid "Portfolio"
 msgstr "Danh mục đầu tư"
 
 #. Cyan
-#: api.js:245
+#: api.js:243
 msgid "Alarms"
 msgstr "Cảnh báo"
 
 #. Red/Pink
-#: api.js:246
+#: api.js:244
 msgid "Updates"
 msgstr "Cập nhật"
 
-#: api.js:296
+#: api.js:294
 msgid "History (Last 14 Days)"
 msgstr "Lịch sử (14 ngày qua)"
 
-#: api.js:419
-msgid "Error Log ("
+#: api.js:417
+#, fuzzy, javascript-format
+msgid "Error Log (%s KB)"
 msgstr "Nhật ký lỗi ("
 
-#: api.js:419
-msgid " KB)"
-msgstr " KB)"
-
-#: api.js:422
+#: api.js:420
 msgid "The system prevented and logged crashes."
 msgstr "Hệ thống đã ngăn chặn và ghi lại các sự cố."
 
-#: api.js:428
+#: api.js:426
 msgid "Delete"
 msgstr "Xóa"
 
-#: api.js:441
+#: api.js:439
 msgid "Dismiss"
 msgstr "Bỏ qua"
+
+#, fuzzy
+#~ msgid "Ø:"
+#~ msgstr "Ø: "
+
+#~ msgid " was deleted."
+#~ msgstr " đã bị xóa."
+
+#~ msgid "Target price "
+#~ msgstr "Giá mục tiêu "
+
+#, fuzzy
+#~ msgid " has "
+#~ msgstr "đã "
+
+#~ msgid " by "
+#~ msgstr " thêm "
+
+#~ msgid " of "
+#~ msgstr " của "
+
+#~ msgid ". See log."
+#~ msgstr ". Xem nhật ký."
+
+#~ msgid "% used"
+#~ msgstr "% đã sử dụng"
+
+#~ msgid "Quota: "
+#~ msgstr "Hạn ngạch: "
+
+#~ msgid "Period: "
+#~ msgstr "Giai đoạn: "
+
+#~ msgid "Tip: Interval ("
+#~ msgstr "Mẹo: Khoảng thời gian ("
+
+#~ msgid " KB)"
+#~ msgstr " KB)"
 
 #~ msgid "Crypto Tracker"
 #~ msgstr "Crypto Tracker"
@@ -937,17 +978,8 @@ msgstr "Bỏ qua"
 #~ msgid " Loading..."
 #~ msgstr " Đang tải..."
 
-#~ msgid "Price Alarm: "
-#~ msgstr "Cảnh báo giá: "
-
 #~ msgid "Target "
 #~ msgstr "Mục tiêu "
-
-#~ msgid " reached! Price: "
-#~ msgstr " đã đạt! Giá: "
-
-#~ msgid "NEW ALL TIME HIGH 🚀"
-#~ msgstr "MỨC CAO NHẤT MỌI THỜI ĐẠI MỚI 🚀"
 
 #~ msgid "Search Coin"
 #~ msgstr "Tìm kiếm Coin"
@@ -960,6 +992,3 @@ msgstr "Bỏ qua"
 
 #~ msgid "New month: Interval reset to 120s."
 #~ msgstr "Tháng mới: Khoảng thời gian được đặt lại thành 120 giây."
-
-#~ msgid "Month: "
-#~ msgstr "Tháng: "

@@ -51,7 +51,19 @@ When you click the applet on the panel, a pop-up menu opens:
     * The **Comparison Currency** (e.g., (USD)).
     * The calculated **24-hour percentage change** (e.g., `+ 2.45%`) colored according to the configured **Rising/Falling Price** color.
 
-## 🛠️ Development & Localization
+## 📁 Data Storage & Backup
+
+The applet stores your data in the standard user configuration directory.
+
+*   **Persistent Data:** `~/.config/crypto-tracker@danipin/`
+    *   `portfolio.json`: Contains your portfolio holdings and transactions.
+    *   `alarms.json`: Contains your active and archived alarms.
+    *   `call_stats.json`: Tracks your API usage history.
+
+*   **Cache & Logs:** `~/.cache/crypto-tracker@danipin/`
+    *   `error_log.txt`: Error log for debugging.
+
+## �️ Development & Localization
 
 The applet uses the standard `gettext` system for translations.
 

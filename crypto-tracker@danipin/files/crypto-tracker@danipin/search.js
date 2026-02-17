@@ -15,15 +15,6 @@ const Gettext = imports.gettext;
 const UUID = "crypto-tracker@danipin";
 
 function _(str) {
-  let forced = _applet ? _applet.forcedLocale : null;
-  if (forced && forced !== "system") {
-      let old = GLib.getenv("LANGUAGE");
-      GLib.setenv("LANGUAGE", forced, true);
-      let res = Gettext.dgettext(UUID, str);
-      if (old) GLib.setenv("LANGUAGE", old, true);
-      else GLib.unsetenv("LANGUAGE");
-      return res;
-  }
   return Gettext.dgettext(UUID, str);
 }
 
@@ -314,6 +305,13 @@ function stopSearch(rebuild = false) {
     Mainloop.timeout_add(100, () => { if (_applet.menu) _applet.menu.close = _applet._originalMenuClose; return false; });
 }
 
+function destroy() {
+    if (_searchTimeout) {
+        Mainloop.source_remove(_searchTimeout);
+        _searchTimeout = null;
+    }
+}
+
 var Search = {
     init: init,
     onSearchTextChanged: onSearchTextChanged,
@@ -321,5 +319,6 @@ var Search = {
     startSearch: startSearch,
     stopSearch: stopSearch,
     createSearchUI: createSearchUI,
-    setupSearchEntry: setupSearchEntry
+    setupSearchEntry: setupSearchEntry,
+    destroy: destroy
 };

@@ -1,0 +1,968 @@
+# Ukrainian translation for crypto-tracker@danipin
+# Copyright (C) 2025
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: crypto-tracker@danipin 1.0.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-17 19:20+0200\n"
+"PO-Revision-Date: 2025-01-24 22:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: Ukrainian\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. Row 2: Total Value
+#: applet.js:458 applet.js:461 applet.js:805 portfolio.js:708 utils.js:101
+msgid "Loading..."
+msgstr "Завантаження..."
+
+#: applet.js:873
+msgid "Colors reset to default values."
+msgstr "Кольори скинуто до значень за замовчуванням."
+
+#: applet.js:918
+msgid "List updated! Please reopen settings."
+msgstr "Список оновлено! Будь ласка, відкрийте налаштування знову."
+
+#: applet.js:1949
+msgid "API Limit Reached"
+msgstr "Ліміт API досягнуто"
+
+#: applet.js:1949
+#, fuzzy, javascript-format
+msgid "You have used 100% of your monthly limit (10k)."
+msgstr "Ви використали 100% вашого місячного ліміту (10k)."
+
+#: applet.js:1956
+msgid "Power Saving Enabled"
+msgstr "Енергосбереження увімкнено"
+
+#: applet.js:1956
+msgid "Interval set to 5 min to avoid API ban."
+msgstr "Інтервал встановлено на 5 хв, щоб уникнути бану API."
+
+#: applet.js:1959
+msgid "API Limit Warning"
+msgstr "Попередження ліміту API"
+
+#: applet.js:1959
+#, fuzzy, javascript-format
+msgid "You have reached 90% of your limit."
+msgstr "Ви досягли 90% вашого ліміту."
+
+#: applet.js:1962
+msgid "API Limit Info"
+msgstr "Інфо ліміту API"
+
+#: applet.js:1962
+#, fuzzy, javascript-format
+msgid "You have reached 80% of your limit."
+msgstr "Ви досягли 80% вашого ліміту."
+
+#. Set base texts
+#: footer.js:103
+msgid "API: Active"
+msgstr "API: Активний"
+
+#: footer.js:103
+msgid "Basic Mode"
+msgstr "Базовий режим"
+
+#: footer.js:107
+msgid "Source: CoinGecko"
+msgstr "Джерело: CoinGecko"
+
+#: footer.js:110
+msgid "Get Free API Key"
+msgstr "Отримати безкоштовний API ключ"
+
+#: footer.js:120 api.js:206 api.js:213
+msgid "Month:"
+msgstr "Місяць:"
+
+#: footer.js:121
+#, fuzzy
+msgid "Ø:"
+msgstr "Ø: "
+
+#: footer.js:124
+msgid "Alarms: "
+msgstr "Сповіщення: "
+
+#: header.js:126 header.js:284
+msgid "Portfolio Tracker"
+msgstr "Трекер портфеля"
+
+#: header.js:128 header.js:285
+msgid "Alarm Management"
+msgstr "Керування сповіщеннями"
+
+#: header.js:130 header.js:287
+msgid "API Usage & Stats"
+msgstr "Використання API та статистика"
+
+#: header.js:132
+msgid "Support Development"
+msgstr "Підтримати розробку"
+
+# Strings from JS files
+#. IMPORTANT: For the drawing loop we need the pure text without markup!
+#: header.js:137 header.js:283 header.js:650
+msgid "Market Dashboard"
+msgstr "Ринкова панель"
+
+#: header.js:139 header.js:651
+msgid "24H Price Change [%]"
+msgstr "Зміна ціни за 24г [%]"
+
+#: header.js:289
+msgid "Support"
+msgstr "Підтримка"
+
+#: header.js:293
+msgid "Settings"
+msgstr "Налаштування"
+
+#: alarm.js:251
+msgid "Alarm Archive Full"
+msgstr "Архів сповіщень повний"
+
+#: alarm.js:251
+msgid "Oldest alarm for "
+msgstr "Найстаріше сповіщення для "
+
+#: alarm.js:251
+msgid " was deleted."
+msgstr " було видалено."
+
+#: alarm.js:333
+msgid "Background Alarm: "
+msgstr "Фонове сповіщення: "
+
+#: alarm.js:333
+msgid "Target price "
+msgstr "Цільова ціна "
+
+#: alarm.js:333
+msgid " reached! Current: "
+msgstr " досягнуто! Поточна: "
+
+#: alarm.js:345
+msgid "risen"
+msgstr "зросла"
+
+#: alarm.js:345
+msgid "fallen"
+msgstr "впала"
+
+#: alarm.js:346
+msgid "Volatility Alarm: "
+msgstr "Сповіщення волатильності: "
+
+#: alarm.js:346
+#, fuzzy
+msgid " has "
+msgstr " "
+
+#: alarm.js:346
+msgid " by "
+msgstr " на "
+
+#: alarm.js:478
+msgid "Alarm Settings"
+msgstr "Налаштування сповіщення"
+
+#: alarm.js:582
+msgid "Target Price ("
+msgstr "Цільова ціна ("
+
+#: alarm.js:583
+msgid "Change (%):"
+msgstr "Зміна (%):"
+
+#: alarm.js:586
+msgid "Press ENTER to save."
+msgstr "Натисніть ENTER для збереження."
+
+#: alarm.js:652 alarm.js:661
+msgid "Search alarms..."
+msgstr "Пошук сповіщень..."
+
+#: alarm.js:748 portfolio.js:1271
+msgid "No matches."
+msgstr "Немає збігів."
+
+#: alarm.js:748
+msgid "No alarms here yet."
+msgstr "Тут поки немає сповіщень."
+
+#. Price Input
+#: alarm.js:865 alarm.js:1032
+msgid "Target:"
+msgstr "Ціль:"
+
+#: alarm.js:866
+#, fuzzy
+msgid "Vol:"
+msgstr "24г Об'єм:"
+
+#: alarm.js:869
+msgid "Current: "
+msgstr "Поточна: "
+
+#: alarm.js:874
+msgid "Created: "
+msgstr "Створено: "
+
+#. Vol Input
+#: alarm.js:1053
+msgid "Vol %:"
+msgstr "Вол %:"
+
+#: alarm.js:1067
+msgid "ENTER to save"
+msgstr "ENTER для збереження"
+
+#. Sort options
+#: alarm.js:1111 portfolio.js:1017
+msgid "Date"
+msgstr "Дата"
+
+#: alarm.js:1112
+msgid "Name"
+msgstr "Ім'я"
+
+#: alarm.js:1175 alarm.js:1227
+msgid "Delete all"
+msgstr "Видалити все"
+
+#: alarm.js:1183 alarm.js:1191 alarm.js:1199 alarm.js:1222 portfolio.js:1221
+#: portfolio.js:1228
+msgid "Sure?"
+msgstr "Впевнені?"
+
+#: alarm.js:1239
+msgid "Alarms "
+msgstr "Сповіщення "
+
+#: alarm.js:1239
+msgid " of "
+msgstr " з "
+
+#: donate.js:44
+msgid ""
+"If you like this applet, you can support\n"
+"its development with a donation."
+msgstr ""
+"Якщо вам подобається цей аплет, ви можете підтримати\n"
+"його розробку пожертвою."
+
+#: donate.js:190
+msgid "Address:"
+msgstr "Адреса:"
+
+#: donate.js:221
+msgid "Copied"
+msgstr "Скопійовано"
+
+#: donate.js:221
+msgid " address copied."
+msgstr " адресу скопійовано."
+
+#: search.js:42
+msgid "Search..."
+msgstr "Пошук..."
+
+#: search.js:181
+msgid "No results..."
+msgstr "Немає результатів..."
+
+#: portfolio.js:325
+msgid "Converting..."
+msgstr "Конвертація..."
+
+#: portfolio.js:374
+msgid "Error"
+msgstr "Помилка"
+
+#: portfolio.js:374
+msgid "Currency conversion failed."
+msgstr "Помилка конвертації валюти."
+
+#: portfolio.js:612
+msgid "Total Balance"
+msgstr "Загальний баланс"
+
+#. FIX: expand: false for label, insert spacer instead
+#: portfolio.js:729
+msgid "Select Currency"
+msgstr "Виберіть валюту"
+
+#: portfolio.js:799 portfolio.js:807
+msgid "Filter portfolio..."
+msgstr "Фільтр портфеля..."
+
+#: portfolio.js:1015
+msgid "Amount"
+msgstr "Кількість"
+
+#: portfolio.js:1016
+msgid "Buy Price"
+msgstr "Ціна покупки"
+
+#. Add TX Button
+#: portfolio.js:1208
+msgid "+ Transaction"
+msgstr "+ Транзакція"
+
+#. Delete Coin Button
+#: portfolio.js:1217 portfolio.js:1233
+msgid "Remove Position"
+msgstr "Видалити позицію"
+
+#: portfolio.js:1271
+msgid "No positions here yet."
+msgstr "Тут поки немає позицій."
+
+#: portfolio.js:1297
+msgid "Add Coin"
+msgstr "Додати монету"
+
+#: portfolio.js:1314 portfolio.js:1320
+msgid "Search (e.g. Bitcoin)..."
+msgstr "Пошук (напр. Bitcoin)..."
+
+#: portfolio.js:1407
+msgid "No results"
+msgstr "Немає результатів"
+
+#: seasonal.js:89
+msgid "HAPPY HALLOWEEN !"
+msgstr "З ХЕЛЛОВІНОМ !"
+
+#: seasonal.js:387
+msgid "MERRY CHRISTMAS 🎄"
+msgstr "З РІЗДВОМ 🎄"
+
+#. Straighten up
+#: seasonal.js:495
+msgid "HAPPY BITCOIN PIZZA DAY 🍕"
+msgstr "З ДНЕМ БІТКОЇН-ПІЦИ 🍕"
+
+#: charts.js:190
+msgid "?"
+msgstr ""
+
+#: charts.js:237
+msgid "Rank:"
+msgstr "Ранг:"
+
+#: charts.js:237
+msgid "M.Cap:"
+msgstr "Кап.:"
+
+#: charts.js:238
+msgid "24h High:"
+msgstr "24г Макс:"
+
+#: charts.js:238
+msgid "24h Vol:"
+msgstr "24г Об'єм:"
+
+#: charts.js:239
+msgid "24h Low:"
+msgstr "24г Мін:"
+
+#: charts.js:239
+msgid "ATH:"
+msgstr "ATH:"
+
+#: utils.js:343
+msgid " (Rate Limit)"
+msgstr " (Ліміт запитів)"
+
+#: utils.js:344
+msgid " (API Key invalid)"
+msgstr " (Невірний ключ API)"
+
+#: utils.js:345
+msgid " (Network)"
+msgstr " (Мережа)"
+
+#: utils.js:347
+msgid "Crypto-Tracker Error"
+msgstr "Помилка Crypto-Tracker"
+
+#: utils.js:347
+msgid "An error was intercepted"
+msgstr "Перехоплено помилку"
+
+#: utils.js:347
+msgid ". See log."
+msgstr ". Див. журнал."
+
+#: api.js:76
+msgid "API successfully activated."
+msgstr "API успішно активовано."
+
+#: api.js:82
+msgid "No internet connection"
+msgstr "Немає з'єднання з інтернетом"
+
+#: api.js:84
+msgid "Key invalid"
+msgstr "Ключ недійсний"
+
+#: api.js:86
+msgid "Key blocked"
+msgstr "Ключ заблокирован"
+
+#: api.js:88
+msgid "Limit reached"
+msgstr "Ліміт вичерпано"
+
+#: api.js:90
+msgid "Server error"
+msgstr "Помилка сервера"
+
+#: api.js:94
+msgid "API Error: "
+msgstr "Помилка API: "
+
+#: api.js:99
+msgid "System error"
+msgstr "Системна помилка"
+
+#: api.js:133
+msgid "System Diagnosis"
+msgstr "Діагностика системи"
+
+#: api.js:145
+msgid "API Connection: Active & Valid"
+msgstr "З'єднання API: Активне та коректне"
+
+#: api.js:147
+msgid "Not configured"
+msgstr "Не налаштовано"
+
+#: api.js:148
+msgid "API Status: "
+msgstr "Статус API: "
+
+#: api.js:156
+msgid "Quota critical: "
+msgstr "Квота критична: "
+
+#: api.js:156 api.js:158
+msgid "% used"
+msgstr "% використано"
+
+#: api.js:158
+msgid "Quota high: "
+msgstr "Квота висока: "
+
+#: api.js:160
+msgid "Quota: "
+msgstr "Квота: "
+
+#: api.js:160
+msgid "(In the green)"
+msgstr "(В нормі)"
+
+#: api.js:167
+msgid "Period: "
+msgstr "Період: "
+
+#: api.js:167
+msgid " days left in month."
+msgstr " днів залишилося в місяці."
+
+#: api.js:173
+msgid "Tip: Interval ("
+msgstr "Порада: Інтервал ("
+
+#: api.js:173
+msgid "s) is aggressive for Free Tier."
+msgstr "с) агресивний для безкоштовного тарифу."
+
+#: api.js:180
+msgid "Note: Error log exists."
+msgstr "Прим.: Є журнал помилок."
+
+#: api.js:182
+msgid "System: No crashes logged."
+msgstr "Система: Збоїв не зафіксовано."
+
+#: api.js:204 api.js:399
+msgid "Free API (Basic)"
+msgstr "Безкоштовний API (Базовий)"
+
+#: api.js:205 api.js:212
+msgid "Today:"
+msgstr "Сьогодні:"
+
+#: api.js:207 api.js:214
+msgid "Ø per Day:"
+msgstr "Ø в день:"
+
+#: api.js:211 api.js:400
+msgid "Key API (Pro)"
+msgstr "Ключ API (Pro)"
+
+#: api.js:226
+msgid "Distribution (Key Calls)"
+msgstr "Розподіл (Виклики з ключем)"
+
+#: api.js:241
+msgid "Charts"
+msgstr "Графіки"
+
+#. Blue
+#: api.js:242
+msgid "Details"
+msgstr "Деталі"
+
+#. Purple
+#: api.js:243
+msgid "Search"
+msgstr "Пошук"
+
+#. Yellow
+#: api.js:244
+msgid "Portfolio"
+msgstr "Портфель"
+
+#. Cyan
+#: api.js:245
+msgid "Alarms"
+msgstr "Сповіщення"
+
+#. Red/Pink
+#: api.js:246
+msgid "Updates"
+msgstr "Оновлення"
+
+#: api.js:296
+msgid "History (Last 14 Days)"
+msgstr "Історія (Останні 14 днів)"
+
+#: api.js:419
+msgid "Error Log ("
+msgstr "Журнал помилок ("
+
+#: api.js:419
+msgid " KB)"
+msgstr " КБ)"
+
+#: api.js:422
+msgid "The system prevented and logged crashes."
+msgstr "Система запобігла та записала збої."
+
+#: api.js:428
+msgid "Delete"
+msgstr "Видалити"
+
+#: api.js:441
+msgid "Dismiss"
+msgstr "Сховати"
+
+#~ msgid "Crypto Tracker"
+#~ msgstr "Crypto Tracker"
+
+#~ msgid ""
+#~ "A comprehensive cryptocurrency dashboard providing real-time market data, "
+#~ "portfolio management, interactive charts, and advanced alerting "
+#~ "capabilities, enhanced with seasonal visual elements."
+#~ msgstr ""
+#~ "Комплексна панель моніторингу криптовалют, що надає ринкові дані в "
+#~ "реальному часі, управління портфелем, інтерактивні графіки та розширені "
+#~ "можливості оповіщення, доповнена сезонними візуальними елементами."
+
+#~ msgid "Metric 1 (Primary)"
+#~ msgstr "Метрика 1 (Основна)"
+
+#~ msgid "Metric 2"
+#~ msgstr "Метрика 2"
+
+#~ msgid "Metric 3"
+#~ msgstr "Метрика 3"
+
+#~ msgid "General"
+#~ msgstr "Загальні"
+
+#~ msgid "DevTools (Debug)"
+#~ msgstr "Інструменти розробника (Налагодження)"
+
+#~ msgid "Developer Options"
+#~ msgstr "Параметри розробника"
+
+#~ msgid "Applet Settings"
+#~ msgstr "Налаштування аплету"
+
+#~ msgid "CoinGecko API Configuration"
+#~ msgstr "Конфігурація API CoinGecko"
+
+#~ msgid "Display and Activation"
+#~ msgstr "Відображення та активація"
+
+#~ msgid "Data Source (API)"
+#~ msgstr "Джерело даних (API)"
+
+#~ msgid "Color Settings"
+#~ msgstr "Налаштування кольорів"
+
+#~ msgid "Changes will activate on the next API update interval."
+#~ msgstr "Зміни набудуть чинності під час наступного оновлення API."
+
+#~ msgid "CoinGecko API Key (Demo or Pro)"
+#~ msgstr "Ключ API CoinGecko (Demo або Pro)"
+
+#~ msgid "Unlocks higher limits and more stable data queries."
+#~ msgstr "Розблоковує вищі ліміти та стабільніші запити даних."
+
+#~ msgid ""
+#~ "CALL TRACKING OVERVIEW:\n"
+#~ "\n"
+#~ "• BASIC CALLS: Run via public servers (approx. 5-15 calls/min). \n"
+#~ "  Used for: Standard price queries (saves key quota).\n"
+#~ "\n"
+#~ "• KEY CALLS: Run via your Demo Key quota.\n"
+#~ "  Used for: Charts, coin details & more stable queries.\n"
+#~ "\n"
+#~ "LIMITS (DEMO KEY):\n"
+#~ "• Total: 10,000 calls per month\n"
+#~ "• Speed: Max. 30 requests per minute\n"
+#~ "\n"
+#~ "The tracking in the footer shows you in real-time how many requests have "
+#~ "been used so you can keep an eye on your monthly 10k limit."
+#~ msgstr ""
+#~ "ОГЛЯД ВІДСТЕЖЕННЯ ВИКЛИКІВ:\n"
+#~ "\n"
+#~ "• БАЗОВІ ЗАПИТИ: Виконуються через публічні сервери (бл. 5-15 запитів/"
+#~ "хв). \n"
+#~ "  Використовується для: Стандартних запитів цін (економить квоту ключа).\n"
+#~ "\n"
+#~ "• ЗАПИТИ З КЛЮЧЕМ: Виконуються через квоту вашого Demo ключа.\n"
+#~ "  Використовується для: Графіків, деталей монет та стабільніших запитів.\n"
+#~ "\n"
+#~ "ЛІМІТИ (DEMO КЛЮЧ):\n"
+#~ "• Всього: 10 000 запитів на місяць\n"
+#~ "• Швидкість: Макс. 30 запитів на хвилину\n"
+#~ "\n"
+#~ "Відстеження в нижньому колонтитулі показує в реальному часі, скільки "
+#~ "запитів було використано, щоб ви могли стежити за своїм щомісячним "
+#~ "лімітом у 10k."
+
+#~ msgid "Show Active Alarms"
+#~ msgstr "Показувати активні сповіщення"
+
+#~ msgid "Shows the count of active alarms in the footer."
+#~ msgstr "Показує кількість активних сповіщень у нижньому колонтитулі."
+
+#~ msgid "Show Monthly Statistics"
+#~ msgstr "Показувати місячну статистику"
+
+#~ msgid "Shows total API key calls this month."
+#~ msgstr "Показує загальну кількість викликів ключа API цього місяця."
+
+#~ msgid "Show Daily Average"
+#~ msgstr "Показувати середнє за день"
+
+#~ msgid "Shows the calculated average per day."
+#~ msgstr "Показує розраховане середнє значення за день."
+
+#~ msgid "Candle Charts as Default"
+#~ msgstr "Свічкові графіки за замовчуванням"
+
+#~ msgid "Shows charts as candlesticks by default where possible."
+#~ msgstr ""
+#~ "Показує графіки у вигляді японських свічок за замовчуванням, де це "
+#~ "можливо."
+
+#~ msgid "Chart: Bullish Candle Color (Up)"
+#~ msgstr "Графік: Колір бичачої свічки (Вгору)"
+
+#~ msgid "Color for rising candles."
+#~ msgstr "Колір для зростаючих свічок."
+
+#~ msgid "Chart: Bearish Candle Color (Down)"
+#~ msgstr "Графік: Колір ведмежої свічки (Вниз)"
+
+#~ msgid "Color for falling candles."
+#~ msgstr "Колір для падаючих свічок."
+
+#~ msgid "Price Alarm"
+#~ msgstr "Сповіщення про ціну"
+
+#~ msgid "Notification when this price is reached."
+#~ msgstr "Сповіщення при досягненні цієї ціни."
+
+#~ msgid "Enter the target price e.g. 5 or 2598. 0 disables the alarm."
+#~ msgstr "Введіть цільову ціну, наприклад 5 або 2598. 0 вимикає сповіщення."
+
+#~ msgid "Percent Alarm"
+#~ msgstr "Сповіщення про відсотки"
+
+#~ msgid "Alarm on percentage change (24h)."
+#~ msgstr "Сповіщення про зміну відсотка (24г)."
+
+#~ msgid "Enter a percentage value e.g. 5. 0 disables the alarm."
+#~ msgstr "Введіть значення у відсотках, наприклад 5. 0 вимикає сповіщення."
+
+#~ msgid "Compact Mode"
+#~ msgstr "Компактний режим"
+
+#~ msgid "Space-saving display in panel (BTC $85.5K)."
+#~ msgstr "Компактне відображення на панелі (BTC $85.5K)."
+
+#~ msgid "Enable Seasonal Theme"
+#~ msgstr "Увімкнути сезонну тему"
+
+#~ msgid ""
+#~ "Automatically activates festive designs (e.g. Christmas) at certain times."
+#~ msgstr ""
+#~ "Автоматично активує святкові дизайни (наприклад, Різдво) у певний час."
+
+#~ msgid "Show Decimals"
+#~ msgstr "Показувати десяткові знаки"
+
+#~ msgid "Toggles the display of cent amounts on or off."
+#~ msgstr "Перемикає відображення копійок/центів."
+
+#~ msgid "Show Trend Arrows"
+#~ msgstr "Показувати стрілки тренду"
+
+#~ msgid "Shows or hides trend arrows for price changes."
+#~ msgstr "Показує або приховує стрілки тренду для змін ціни."
+
+#~ msgid "Icon Opacity"
+#~ msgstr "Прозорість піктограми"
+
+#~ msgid "Controls the visibility of crypto icons."
+#~ msgstr "Керує видимістю піктограм криптовалют."
+
+#~ msgid "Update Interval"
+#~ msgstr "Інтервал оновлення"
+
+#~ msgid "How often prices are fetched from CoinGecko."
+#~ msgstr "Як часто ціни отримуються з CoinGecko."
+
+#~ msgid "Reset Colors"
+#~ msgstr "Скинути кольори"
+
+#~ msgid "Resets all custom colors (charts & metrics) to default values."
+#~ msgstr ""
+#~ "Скидає всі користувацькі кольори (графіки та метрики) до значень за "
+#~ "замовчуванням."
+
+#~ msgid "Update Top Coins List"
+#~ msgstr "Оновити список топ монет"
+
+#~ msgid ""
+#~ "Loads the current top 50 coins from CoinGecko and updates the selection "
+#~ "lists (requires settings restart)."
+#~ msgstr ""
+#~ "Завантажує поточні топ-50 монет з CoinGecko та оновлює списки вибору "
+#~ "(потрібен перезапуск налаштувань)."
+
+#~ msgid "Force ATH Rocket"
+#~ msgstr "Примусова ракета ATH"
+
+#~ msgid "Always show the rocket animation (for testing purposes)."
+#~ msgstr "Завжди показувати анімацію ракети (для тестування)."
+
+#~ msgid "Force Seasonal Theme"
+#~ msgstr "Примусова сезонна тема"
+
+#~ msgid "Override the date-based theme selection."
+#~ msgstr "Перевизначити вибір теми на основі дати."
+
+#~ msgid "Debug Frames (Layout)"
+#~ msgstr "Налагоджувальні рамки (Макет)"
+
+#~ msgid "Draws colorful frames around menu elements for layout inspection."
+#~ msgstr "Малює кольорові рамки навколо елементів меню для перевірки макета."
+
+#~ msgid "Show Error Notifications"
+#~ msgstr "Показувати сповіщення про помилки"
+
+#~ msgid "Sends a desktop notification when an internal error is caught."
+#~ msgstr ""
+#~ "Надсилає сповіщення на робочий стіл, коли перехоплено внутрішню помилку."
+
+#~ msgid "Test Crash (Safe)"
+#~ msgstr "Тестовий збій (Безпечний)"
+
+#~ msgid "Provokes an error to test logging and notifications."
+#~ msgstr "Викликає помилку для перевірки логування та сповіщень."
+
+#~ msgid "Show Icon"
+#~ msgstr "Показувати піктограму"
+
+#~ msgid "Shows the crypto icon next to the price."
+#~ msgstr "Показує піктограму криптовалюти поруч із ціною."
+
+#~ msgid "Toggles the display of decimal places on/off."
+#~ msgstr "Перемикає відображення десяткових знаків."
+
+#~ msgid "Number of Decimals"
+#~ msgstr "Кількість десяткових знаків"
+
+#~ msgid "Number of decimal places (2-8)."
+#~ msgstr "Кількість десяткових знаків (2-8)."
+
+#~ msgid "Color the Arrow Only"
+#~ msgstr "Фарбувати лише стрілку"
+
+#~ msgid "If active, the price text remains white."
+#~ msgstr "Якщо активно, текст ціни залишається білим."
+
+#~ msgid "Show Currency Symbol (e.g. $ or €)"
+#~ msgstr "Показувати символ валюти (напр. $ або €)"
+
+#~ msgid "Replaces the currency code with the symbol."
+#~ msgstr "Замінює код валюти символом."
+
+#~ msgid "Enabled"
+#~ msgstr "Увімкнено"
+
+#~ msgid "Toggles the display of this metric on/off."
+#~ msgstr "Перемикає відображення цієї метрики."
+
+#~ msgid "Currency ID (CoinGecko)"
+#~ msgstr "ID валюти (CoinGecko)"
+
+#~ msgid "Select the cryptocurrency from the top list."
+#~ msgstr "Виберіть криптовалюту з топ-списку."
+
+#~ msgid "Custom Currency ID"
+#~ msgstr "Користувацький ID валюти"
+
+#~ msgid "CoinGecko ID (e.g. 'litecoin')"
+#~ msgstr "ID CoinGecko (напр. 'litecoin')"
+
+#~ msgid "Comparison Currency"
+#~ msgstr "Валюта порівняння"
+
+#~ msgid "Select the currency for the price comparison."
+#~ msgstr "Виберіть валюту для порівняння цін."
+
+#~ msgid "Display Symbol"
+#~ msgstr "Символ відображення"
+
+#~ msgid "The symbol displayed on the panel (e.g. BTC)."
+#~ msgstr "Символ, що відображається на панелі (напр. BTC)."
+
+#~ msgid "Color for Rising Price (▲)"
+#~ msgstr "Колір для зростаючої ціни (▲)"
+
+#~ msgid "Select the color for positive price movement."
+#~ msgstr "Виберіть колір для позитивного руху ціни."
+
+#~ msgid "Color for Falling Price (▼)"
+#~ msgstr "Колір для падаючої ціни (▼)"
+
+#~ msgid "Select the color for negative price movement."
+#~ msgstr "Виберіть колір для негативного руху ціни."
+
+#~ msgid "15 Seconds (Minimum)"
+#~ msgstr "15 Секунд (Мінімум)"
+
+#~ msgid "30 Seconds"
+#~ msgstr "30 Секунд"
+
+#~ msgid "60 Seconds (1 Minute)"
+#~ msgstr "60 Секунд (1 Хвилина)"
+
+#~ msgid "120 Seconds (2 Minutes)"
+#~ msgstr "120 Секунд (2 Хвилини)"
+
+#~ msgid "300 Seconds (5 Minutes)"
+#~ msgstr "300 Секунд (5 Хвилин)"
+
+#~ msgid "Automatic (Date based)"
+#~ msgstr "Automatic (Date based)"
+
+#~ msgid "New Year"
+#~ msgstr "New Year"
+
+#~ msgid "Christmas (General)"
+#~ msgstr "Christmas (General)"
+
+#~ msgid "Christmas (Eve & Day)"
+#~ msgstr "Christmas (Eve & Day)"
+
+#~ msgid "Halloween"
+#~ msgstr "Halloween"
+
+#~ msgid "Valentine's Day"
+#~ msgstr "Valentine's Day"
+
+#~ msgid "Bitcoin Pizza Day"
+#~ msgstr "Bitcoin Pizza Day"
+
+#~ msgid "Easter"
+#~ msgstr "Easter"
+
+#~ msgid "Custom ID"
+#~ msgstr "Користувацький ID"
+
+#~ msgid "US Dollar (USD)"
+#~ msgstr "Долар США (USD)"
+
+#~ msgid "Euro (EUR)"
+#~ msgstr "Євро (EUR)"
+
+#~ msgid "Canadian Dollar (CAD)"
+#~ msgstr "Канадський долар (CAD)"
+
+#~ msgid "British Pound (GBP)"
+#~ msgstr "Британський фунт (GBP)"
+
+#~ msgid "Japanese Yen (JPY)"
+#~ msgstr "Японська єна (JPY)"
+
+#~ msgid "Swiss Franc (CHF)"
+#~ msgstr "Швейцарський франк (CHF)"
+
+#~ msgid "Australian Dollar (AUD)"
+#~ msgstr "Австралійський долар (AUD)"
+
+#~ msgid "Happy New Year"
+#~ msgstr "З Новим Роком"
+
+#~ msgid " Loading..."
+#~ msgstr " Завантаження..."
+
+#~ msgid "Price Alarm: "
+#~ msgstr "Сповіщення ціни: "
+
+#~ msgid "Target "
+#~ msgstr "Ціль "
+
+#~ msgid " reached! Price: "
+#~ msgstr " досягнуто! Ціна: "
+
+#~ msgid "NEW ALL TIME HIGH 🚀"
+#~ msgstr "НОВИЙ ІСТОРИЧНИЙ МАКСИМУМ 🚀"
+
+#~ msgid "Search Coin"
+#~ msgstr "Пошук монети"
+
+#~ msgid "Loading market data..."
+#~ msgstr "Завантаження ринкових даних..."
+
+#~ msgid "Power Saving Disabled"
+#~ msgstr "Енергосбереження вимкнено"
+
+#~ msgid "New month: Interval reset to 120s."
+#~ msgstr "Новий місяць: Інтервал скинуто на 120с."
+
+#~ msgid "Month: "
+#~ msgstr "Місяць: "

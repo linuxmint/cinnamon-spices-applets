@@ -15,15 +15,6 @@ const Gettext = imports.gettext;
 const UUID = "crypto-tracker@danipin";
 
 function _(str) {
-  let forced = _applet ? _applet.forcedLocale : null;
-  if (forced && forced !== "system") {
-      let old = GLib.getenv("LANGUAGE");
-      GLib.setenv("LANGUAGE", forced, true);
-      let res = Gettext.dgettext(UUID, str);
-      if (old) GLib.setenv("LANGUAGE", old, true);
-      else GLib.unsetenv("LANGUAGE");
-      return res;
-  }
   return Gettext.dgettext(UUID, str);
 }
 
@@ -73,7 +64,7 @@ function _validateKeySilently() {
                     DataPersistence.saveCallStats();
                     _applet.apiError = null;
                     if (!wasValidBefore) {
-                        Util.spawnCommandLine('notify-send "Crypto-Tracker" "' + _("API successfully activated.") + '" --icon=emblem-ok-symbolic');
+                        Utils.sendNotification("Crypto-Tracker", _("API successfully activated."), "cheerful.oga", "emblem-ok-symbolic");
                     }
                 } else {
                     _applet.apiValid = false;
@@ -91,7 +82,7 @@ function _validateKeySilently() {
                     }
 
                     if (wasValidBefore) {
-                        Util.spawnCommandLine('notify-send "Crypto-Tracker" "' + _("API Error: ") + _applet.apiError + '" --icon=dialog-warning');
+                        Utils.sendNotification("Crypto-Tracker", _("API Error: %s").format(_applet.apiError), "suspend-error.oga", "dialog-warning");
                     }
                 }
             } catch (e) { 
@@ -103,6 +94,13 @@ function _validateKeySilently() {
         });
         return false;
     });
+}
+
+function destroy() {
+    if (_validationTimeout) {
+        Mainloop.source_remove(_validationTimeout);
+        _validationTimeout = null;
+    }
 }
 
 function createStatsSection(maxHeight) {
@@ -145,7 +143,7 @@ function createStatsSection(maxHeight) {
         addHealthRow("emblem-ok-symbolic", _("API Connection: Active & Valid"), "#449d44");
     } else {
         let err = _applet.apiError || _("Not configured");
-        addHealthRow("dialog-error-symbolic", _("API Status: ") + err, "#d9534f");
+        addHealthRow("dialog-error-symbolic", _("API Status: %s").format(err), "#d9534f");
     }
 
     // 2. Quota Check
@@ -153,28 +151,28 @@ function createStatsSection(maxHeight) {
     let usage = _applet.keyCalls;
     let pct = (usage / limit) * 100;
     if (pct > 90) {
-        addHealthRow("weather-storm-symbolic", _("Quota critical: ") + pct.toFixed(1) + _("% used"), "#d9534f");
+        addHealthRow("weather-storm-symbolic", _("Quota critical: %s%% used").format(pct.toFixed(1)), "#d9534f");
     } else if (pct > 75) {
-        addHealthRow("weather-clouds-symbolic", _("Quota high: ") + pct.toFixed(1) + _("% used"), "#e67e22");
+        addHealthRow("weather-clouds-symbolic", _("Quota high: %s%% used").format(pct.toFixed(1)), "#e67e22");
     } else {
-        addHealthRow("weather-clear-symbolic", _("Quota: ") + pct.toFixed(1) + "% " + _("(In the green)"), "#449d44");
+        addHealthRow("weather-clear-symbolic", _("Quota: %s%% (In the green)").format(pct.toFixed(1)), "#449d44");
     }
 
     // 2b. Days Remaining (Context for Quota)
     let now = new Date();
     let lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
     let daysLeft = lastDay.getDate() - now.getDate();
-    addHealthRow("appointment-soon-symbolic", _("Period: ") + daysLeft + _(" days left in month."), "#5bc0de");
+    addHealthRow("appointment-soon-symbolic", _("Period: %s days left in month.").format(daysLeft), "#5bc0de");
 
     // 3. Config Check (Free Tier Interval)
     let interval = _applet.settings.getValue("update-interval-seconds");
     let apiKey = _applet.settings.getValue("api-key");
     if ((!apiKey || apiKey.length < 5) && interval < 60) {
-        addHealthRow("dialog-warning-symbolic", _("Tip: Interval (") + interval + _("s) is aggressive for Free Tier."), "#e67e22");
+        addHealthRow("dialog-warning-symbolic", _("Tip: Interval (%ss) is aggressive for Free Tier.").format(interval), "#e67e22");
     }
 
     // 4. Error Log Check
-    let logPath = _applet.metadata.path + "/error_log.txt";
+    let logPath = Utils.getCacheDir() + "/error_log.txt";
     let logFile = Gio.file_new_for_path(logPath);
     if (logFile.query_exists(null)) {
         addHealthRow("dialog-information-symbolic", _("Note: Error log exists."), "#5bc0de");
@@ -404,7 +402,7 @@ function createStatsSection(maxHeight) {
     try {
         if (_applet._hideErrorLogWarning) throw "Dismissed"; // Skip if dismissed
 
-        let logPath = _applet.metadata.path + "/error_log.txt";
+        let logPath = Utils.getCacheDir() + "/error_log.txt";
         let logFile = Gio.file_new_for_path(logPath);
         if (logFile.query_exists(null)) {
             let info = logFile.query_info('standard::size', Gio.FileQueryInfoFlags.NONE, null);
@@ -416,7 +414,7 @@ function createStatsSection(maxHeight) {
                 
                 let errHead = new St.BoxLayout({ y_align: St.Align.MIDDLE });
                 errHead.add(new St.Icon({ icon_name: "dialog-warning-symbolic", style: "color: #d9534f; font-size: 16px; margin-right: 8px;" }));
-                errHead.add(new St.Label({ text: _("Error Log (") + (size / 1024).toFixed(1) + _(" KB)"), style: "color: #d9534f; font-weight: bold;" }));
+                errHead.add(new St.Label({ text: _("Error Log (%s KB)").format((size / 1024).toFixed(1)), style: "color: #d9534f; font-weight: bold;" }));
                 errBox.add(errHead);
                 
                 let errInfo = new St.Label({ text: _("The system prevented and logged crashes."), style: "color: " + _applet.colors.text_dim + "; font-size: 11px; margin: 5px 0;" });
@@ -461,5 +459,6 @@ function createStatsSection(maxHeight) {
 var ApiConfig = {
     init: init,
     validateKeySilently: _validateKeySilently,
-    createStatsSection: createStatsSection
+    createStatsSection: createStatsSection,
+    destroy: destroy
 };

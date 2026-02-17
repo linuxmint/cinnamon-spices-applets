@@ -9,15 +9,6 @@ const Gettext = imports.gettext;
 const UUID = "crypto-tracker@danipin";
 
 function _(str) {
-  let forced = _applet ? _applet.forcedLocale : null;
-  if (forced && forced !== "system") {
-      let old = GLib.getenv("LANGUAGE");
-      GLib.setenv("LANGUAGE", forced, true);
-      let res = Gettext.dgettext(UUID, str);
-      if (old) GLib.setenv("LANGUAGE", old, true);
-      else GLib.unsetenv("LANGUAGE");
-      return res;
-  }
   return Gettext.dgettext(UUID, str);
 }
 
@@ -117,11 +108,11 @@ function createFooter(searchActive = false) {
 
         // --- ONLY UPDATE IF API VALID ---
         if (_applet.apiValid) {
-            labelMonat.set_text(_("Month:") + " " + _applet.keyCalls);
-            labelAvg.set_text(_("Ø:") + " " + (_applet.avgPerDay || "0"));
+            labelMonat.set_text(_("Month: %s").format(_applet.keyCalls));
+            labelAvg.set_text(_("Ø: %s").format(_applet.avgPerDay || "0"));
             
             let alarmCount = (Alarm && Alarm.getAlarms) ? Alarm.getAlarms().length : 0;
-            labelAlarms.set_text(_("Alarms: ") + alarmCount);
+            labelAlarms.set_text(_("Alarms: %s").format(alarmCount));
             labelAlarms.set_style(stdStyle);
 
             let mStyle = (isH) ? (_applet.keyCalls >= 9000 ? "color: " + dangerColor + ";" : (_applet.keyCalls >= 7500 ? "color: " + warnColor + ";" : hoverColor)) : passiveColor;

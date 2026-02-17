@@ -14,15 +14,6 @@ const Gettext = imports.gettext;
 const UUID = "crypto-tracker@danipin";
 
 function _(str) {
-  let forced = _applet ? _applet.forcedLocale : null;
-  if (forced && forced !== "system") {
-      let old = GLib.getenv("LANGUAGE");
-      GLib.setenv("LANGUAGE", forced, true);
-      let res = Gettext.dgettext(UUID, str);
-      if (old) GLib.setenv("LANGUAGE", old, true);
-      else GLib.unsetenv("LANGUAGE");
-      return res;
-  }
   return Gettext.dgettext(UUID, str);
 }
 
@@ -43,7 +34,7 @@ function init(applet) {
 }
 
 function getFilePath() {
-    return _applet.metadata.path + "/alarms.json";
+    return Utils.getUserDir() + "/alarms.json";
 }
 
 function loadAlarms() {
@@ -248,7 +239,7 @@ function upsertAlarm(id, symbol, price, vol, currentPrice, currency) {
         if (_alarms.length >= MAX_ALARMS) {
             _alarms.sort((a, b) => a.created - b.created); // Oldest first
             let removed = _alarms.shift();
-            Utils.sendNotification(_("Alarm Archive Full"), _("Oldest alarm for ") + removed.symbol + _(" was deleted."), "dialog-warning");
+            Utils.sendNotification(_("Alarm Archive Full"), _("Oldest alarm for %s was deleted.").format(removed.symbol), "dialog-warning");
         }
         _alarms.push({
             id: id,
@@ -330,7 +321,7 @@ function checkArchivedAlarms(apiData, globalCurrency) {
             else if (!a.condition && currentPrice === a.price) triggered = true; // Fallback
 
             if (triggered) {
-                Utils.sendNotification(_("Background Alarm: ") + a.symbol, _("Target price ") + a.price + _(" reached! Current: ") + currentPrice, "complete.oga", "emblem-money-symbolic");
+                Utils.sendNotification(_("Background Alarm: %s").format(a.symbol), _("Target price %s reached! Current: %s").format(a.price, currentPrice), "complete.oga", "emblem-money-symbolic");
                 a.triggered_at = Date.now();
                 a.trigger_reason = 'price';
                 changed = true;
@@ -343,7 +334,7 @@ function checkArchivedAlarms(apiData, globalCurrency) {
                 let now = Date.now();
                 if (!a.lastVolTime || (now - a.lastVolTime > 3600000)) {
                     let dir = change24h >= 0 ? _("risen") : _("fallen");
-                    Utils.sendNotification(_("Volatility Alarm: ") + a.symbol, a.symbol + _(" has ") + dir + _(" by ") + change24h.toFixed(2) + "%", "just-saying.oga", "dialog-warning");
+                    Utils.sendNotification(_("Volatility Alarm: %s").format(a.symbol), _("%s has %s by %s%%").format(a.symbol, dir, change24h.toFixed(2)), "just-saying.oga", "dialog-warning");
                     a.lastVolTime = now;
                     a.triggered_at = now;
                     a.trigger_reason = 'vol';
@@ -420,7 +411,7 @@ function setupAlarmChecks() {
 
 function checkMissingIcons() {
     let missing = _alarms.filter(a => {
-        let iconPath = _applet.metadata.path + "/icons/" + a.id + ".png";
+        let iconPath = Utils.getCacheDir() + "/icons/" + a.id + ".png";
         return !Gio.file_new_for_path(iconPath).query_exists(null);
     });
 
@@ -579,7 +570,7 @@ function createAlarmMenu(i, cur) {
         return row;
     };
 
-    alarmBox.add(createInput(_("Target Price (") + cur + "):", "metric" + i + "-alert-price"));
+    alarmBox.add(createInput(_("Target Price (%s):").format(cur), "metric" + i + "-alert-price"));
     alarmBox.add(createInput(_("Change (%):"), "metric" + i + "-alert-percent"));
 
     let footerBox = new St.BoxLayout({ style: "margin-top: 6px;" + dFooter, y_align: St.Align.MIDDLE });
@@ -832,7 +823,7 @@ function createArchiveSection(isViewSwitching, maxHeight) {
                 // Logo with Frame
                 let iconName = a.symbol.toLowerCase();
                 let iconPath = _applet.metadata.path + "/icons/" + iconName + "-symbolic.svg";
-                let cachedPath = _applet.metadata.path + "/icons/" + a.id + ".png";
+                let cachedPath = Utils.getCacheDir() + "/icons/" + a.id + ".png";
                 let cachedFile = Gio.file_new_for_path(cachedPath);
                 let iconFile = Gio.file_new_for_path(iconPath);
 
@@ -862,16 +853,16 @@ function createArchiveSection(isViewSwitching, maxHeight) {
                 let pStyle = (isTriggered && a.trigger_reason === 'price') ? "color='#e67e22' weight='bold'" : "color='#aaa'";
                 let vStyle = (isTriggered && a.trigger_reason === 'vol') ? "color='#e67e22' weight='bold'" : "color='#aaa'";
 
-                if (a.price > 0) detailsText += `<span ${pStyle}>` + _("Target:") + ` ${a.price}</span>`;
-                if (a.vol > 0) detailsText += (detailsText ? " | " : "") + `<span ${vStyle}>` + _("Vol:") + ` ${a.vol}%</span>`;
+                if (a.price > 0) detailsText += `<span ${pStyle}>` + _("Target: %s").format(a.price) + `</span>`;
+                if (a.vol > 0) detailsText += (detailsText ? " | " : "") + `<span ${vStyle}>` + _("Vol: %s%%").format(a.vol) + `</span>`;
 
                 let displayPrice = isActive ? activePrice : a.currentPrice;
-                if (displayPrice) detailsText += "\n" + _("Current: ") + displayPrice;
+                if (displayPrice) detailsText += "\n" + _("Current: %s").format(displayPrice);
 
                 // Add date
                 let d = new Date(a.created);
                 let dateStr = d.getDate().toString().padStart(2, '0') + "." + (d.getMonth() + 1).toString().padStart(2, '0') + "." + d.getFullYear();
-                detailsText += "\n" + _("Created: ") + dateStr;
+                detailsText += "\n" + _("Created: %s").format(dateStr);
 
                 let detailsLbl = new St.Label({ style: "font-size: 11px; color: " + _applet.colors.text_dim + ";" });
                 detailsLbl.clutter_text.set_use_markup(true);
@@ -1236,7 +1227,7 @@ function createArchiveToolbar() {
     delBtn.connect('destroy', () => { if (resetDelTimer) Mainloop.source_remove(resetDelTimer); });
 
     let trackerLabel = new St.Label({ 
-        text: _("Alarms ") + _alarms.length + _(" of ") + MAX_ALARMS, 
+        text: _("Alarms %s of %s").format(_alarms.length, MAX_ALARMS), 
         style: "font-size: 12px; color: " + _applet.colors.text_more_dim + "; margin-right: 10px; padding-top: 2px;", 
         y_align: St.Align.MIDDLE 
     });
@@ -1248,6 +1239,13 @@ function createArchiveToolbar() {
     wrapper.add(new St.Widget(), { expand: true });
     wrapper.add(rightBox);
     return wrapper;
+}
+
+function destroy() {
+    for (let key in _alarmChecks) {
+        if (_alarmChecks[key]) Mainloop.source_remove(_alarmChecks[key]);
+    }
+    _alarmChecks = {};
 }
 
 var Alarm = {
@@ -1271,5 +1269,6 @@ var Alarm = {
     resetSearch: resetSearch,
     addArchivedIds: addArchivedIds,
     createArchiveToolbar: createArchiveToolbar,
-    checkMetricsForAlarms: checkMetricsForAlarms
+    checkMetricsForAlarms: checkMetricsForAlarms,
+    destroy: destroy
 };

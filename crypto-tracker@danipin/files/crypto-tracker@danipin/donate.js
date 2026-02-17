@@ -12,15 +12,6 @@ const Gettext = imports.gettext;
 const UUID = "crypto-tracker@danipin";
 
 function _(str) {
-  let forced = _applet ? _applet.forcedLocale : null;
-  if (forced && forced !== "system") {
-      let old = GLib.getenv("LANGUAGE");
-      GLib.setenv("LANGUAGE", forced, true);
-      let res = Gettext.dgettext(UUID, str);
-      if (old) GLib.setenv("LANGUAGE", old, true);
-      else GLib.unsetenv("LANGUAGE");
-      return res;
-  }
   return Gettext.dgettext(UUID, str);
 }
 
@@ -166,7 +157,7 @@ function createDonateSection(maxHeight) {
             let qrBox = new St.BoxLayout({ x_align: St.Align.MIDDLE, style: "margin-bottom: 10px; margin-top: 10px;" });
             
             let qrId = "qr_" + opt.id;
-            let qrPath = _applet.metadata.path + "/icons/" + qrId + ".png";
+            let qrPath = Utils.getCacheDir() + "/icons/" + qrId + ".png";
             let qrFile = Gio.file_new_for_path(qrPath);
             
             if (!qrFile.query_exists(null)) {
@@ -218,7 +209,7 @@ function createDonateSection(maxHeight) {
             copyBtn.connect('clicked', () => {
                 let clipboard = St.Clipboard.get_default();
                 clipboard.set_text(St.ClipboardType.CLIPBOARD, opt.address);
-                Utils.sendNotification(_("Copied"), opt.name + _(" address copied."), "dialog-information");
+                Utils.sendNotification(_("Copied"), _("%s address copied.").format(opt.name), "dialog-information");
                 
                 if (resetCopyTimer) {
                     Mainloop.source_remove(resetCopyTimer);
