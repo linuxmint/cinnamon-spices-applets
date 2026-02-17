@@ -1,8 +1,0 @@
-{
-  "uuid": "crypto-tracker@danipin",
-  "name": "Crypto Tracker",
-  "description": "A comprehensive cryptocurrency dashboard providing real-time market data, portfolio management, interactive charts, and advanced alerting capabilities, enhanced with seasonal visual elements.",
-   "version": "1.1.2",
-  "author": "d-atoshi",
-  "max-instances": 1
-}
