@@ -1,0 +1,6 @@
+{
+    "description": "An applet to access your account details, switch users and quickly logout or power off the computer", 
+    "uuid": "quick-settings@celiopy", 
+    "name": "Quick Settings",
+    "max-instances": 1
+}

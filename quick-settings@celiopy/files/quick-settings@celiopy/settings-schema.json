@@ -1,0 +1,48 @@
+{
+    "section1": {
+        "type": "section",
+        "description": "Settings"
+    },
+    "display-name": {
+        "type": "switch",
+        "default": false,
+        "description": "Display user name and host"
+    },
+    "section2": {
+        "type": "section",
+        "description": "Theme"
+    },
+    "light-theme": {
+        "type": "combobox",
+        "default": "Adwaita",
+        "options": {
+            "Adwaita": "Adwaita",
+            "Arc": "Arc",
+            "Numix": "Numix",
+            "Materia": "Materia",
+            "Materia-light-compact": "Materia Light Compact"
+        },
+        "description": "Select a light theme"
+    },
+    "dark-theme": {
+        "type": "combobox",
+        "default": "Adwaita-dark",
+        "options": {
+            "Adwaita-dark": "Adwaita Dark",
+            "Arc-Dark": "Arc Dark",
+            "Numix-Dark": "Numix Dark",
+            "Materia-dark-compact": "Materia Dark Compact"
+        },
+        "description": "Select a dark theme"
+    },
+    "section3": {
+        "type": "section",
+        "description": "Keyboard shortcuts"
+    },
+    "keyOpen": {
+        "type": "keybinding",
+        "description": "Show menu",
+        "default": "<Super>a",
+        "tooltip": "Set keybinding(s) to show menu."
+    }
+}
