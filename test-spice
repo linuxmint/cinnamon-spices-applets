@@ -6,6 +6,7 @@ import os
 import sys
 import shutil
 import subprocess
+import time
 from pathlib import Path
 
 DEV_PREFIX = "devtest-"
@@ -62,6 +63,32 @@ def reload_xlet(uuid):
         print(out.stderr.decode('ascii') + '\nReload error!')
 
 
+def watch(uuid, action):
+    cmd = ["inotifywait", "--recursive", "--quiet", "--event", "modify", "--monitor", uuid]
+    last_run = 0
+    try:
+        with subprocess.Popen(cmd, stdout=subprocess.PIPE, text=True) as proc:
+            print('Watching for changes. Press Ctrl+C to stop.')
+            for line in proc.stdout:
+                now = time.time()
+                if (now - last_run) > 1:
+                    action(uuid)
+                    last_run = now
+    except FileNotFoundError:
+        print('Failed to start watcher. Make sure inotify-tools package is installed.')
+        sys.exit(3)
+    except KeyboardInterrupt:
+        sys.exit(0)
+
+
+def validate_and_copy(uuid):
+    if validate_spice(uuid):
+        copy_xlet(uuid)
+        return True
+    else:
+        return False
+
+
 def main():
     """
     Simpler testing of Spices for developers
@@ -72,9 +99,12 @@ def main():
                         help='Remove all test Spices')
     parser.add_argument('-s', '--skip', action='store_true',
                         help='Skip Spice validation with validate-spice')
+    parser.add_argument('-w', '--watch', action='store_true',
+                        help='Watch the Spice directory for changes and update the applet with reload')
     parser.add_argument('uuid', type=str, metavar='UUID', nargs='?',
                         help='the UUID of the Spice')
     args = parser.parse_args()
+    uuid = args.uuid.rstrip('/') if args.uuid else None
 
     if args.remove and not args.uuid:
         for file_path in os.listdir(APPLETS_PATH):
@@ -84,10 +114,13 @@ def main():
                     shutil.rmtree(rm_path)
         sys.exit(0)
     elif args.skip and args.uuid:
-        copy_xlet(args.uuid.rstrip('/'))
+        copy_xlet(uuid)
     elif args.uuid and not args.remove:
-        if validate_spice(args.uuid.rstrip('/')):
-            copy_xlet(args.uuid.rstrip('/'))
+        if args.watch:
+            if validate_and_copy(uuid):
+                watch(uuid, validate_and_copy)
+        else:
+            validate_and_copy(uuid)
     else:
         parser.print_help()
         sys.exit(2)
