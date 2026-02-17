@@ -1,0 +1,538 @@
+# Danish translations for powerman@dr.drummie package.
+# Copyright (C) 2025 THE powerman@dr.drummie'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the powerman@dr.drummie package.
+# Automatically generated, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: powerman@dr.drummie 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/drdrummie/powerman-dr.drummie\n"
+"POT-Creation-Date: 2025-09-21 18:21+0200\n"
+"PO-Revision-Date: 2025-09-06 22:34+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/applet.js:54 src/powerman-framework.js:29
+msgid "Power Saver"
+msgstr "Strømbesparelse"
+
+#: src/applet.js:55 src/powerman-framework.js:30
+msgid "Balanced"
+msgstr "Balanceret"
+
+#: src/applet.js:56 src/powerman-framework.js:31
+msgid "Performance"
+msgstr "Ydeevne"
+
+#: src/applet.js:63
+msgid "Battery full"
+msgstr "Batteri fuld"
+
+#: src/applet.js:65
+msgid "Battery almost full"
+msgstr "Batteri næsten fuld"
+
+#: src/applet.js:67
+msgid "Battery good"
+msgstr "Batteri god"
+
+#: src/applet.js:69
+msgid "Low battery"
+msgstr "Lavt batteri"
+
+#: src/applet.js:71
+msgid "Critically low battery"
+msgstr "Kritisk lavt batteri"
+
+#: src/applet.js:73 src/applet.js:139
+msgid "Unknown"
+msgstr "Ukendt"
+
+#: src/applet.js:80
+msgid "AC adapter"
+msgstr "AC-adapter"
+
+#: src/applet.js:82
+msgid "Laptop battery"
+msgstr "Bærbar batteri"
+
+#: src/applet.js:84
+msgid "UPS"
+msgstr "UPS"
+
+#: src/applet.js:86
+msgid "Monitor"
+msgstr "Skærm"
+
+#: src/applet.js:88
+msgid "Mouse"
+msgstr "Mus"
+
+#: src/applet.js:90
+msgid "Keyboard"
+msgstr "Tastatur"
+
+#: src/applet.js:92
+msgid "PDA"
+msgstr "PDA"
+
+#: src/applet.js:94
+msgid "Cell phone"
+msgstr "Mobiltelefon"
+
+#: src/applet.js:96
+msgid "Media player"
+msgstr "Medieafspiller"
+
+#: src/applet.js:98
+msgid "Tablet"
+msgstr "Tablet"
+
+#: src/applet.js:100
+msgid "Computer"
+msgstr "Computer"
+
+#: src/applet.js:102
+msgid "Gaming input"
+msgstr "Spilinput"
+
+#: src/applet.js:104
+msgid "Pen"
+msgstr "Pen"
+
+#: src/applet.js:106
+msgid "Touchpad"
+msgstr "Touchpad"
+
+#: src/applet.js:108
+msgid "Modem"
+msgstr "Modem"
+
+#: src/applet.js:110
+msgid "Network"
+msgstr "Netværk"
+
+#: src/applet.js:112
+msgid "Headset"
+msgstr "Headset"
+
+#: src/applet.js:114
+msgid "Speakers"
+msgstr "Højttalere"
+
+#: src/applet.js:116
+msgid "Headphones"
+msgstr "Hovedtelefoner"
+
+#: src/applet.js:118
+msgid "Video"
+msgstr "Video"
+
+#: src/applet.js:120
+msgid "Audio device"
+msgstr "Lydenhed"
+
+#: src/applet.js:122
+msgid "Remote control"
+msgstr "Fjernbetjening"
+
+#: src/applet.js:124
+msgid "Printer"
+msgstr "Printer"
+
+#: src/applet.js:126
+msgid "Scanner"
+msgstr "Scanner"
+
+#: src/applet.js:128
+msgid "Camera"
+msgstr "Kamera"
+
+#: src/applet.js:130
+msgid "Wearable"
+msgstr "Wearable"
+
+#: src/applet.js:132
+msgid "Toy"
+msgstr "Legetøj"
+
+#: src/applet.js:134
+msgid "Bluetooth device"
+msgstr "Lydenhed"
+
+#: src/applet.js:447 src/applet.js:1133
+msgid "Brightness"
+msgstr "Lysstyrke"
+
+#: src/applet.js:448 src/applet.js:1138
+msgid "Keyboard backlight"
+msgstr "Tastatur baggrundslys"
+
+#: src/applet.js:461
+msgid "Brightness Automation"
+msgstr "Lysstyrkeautomatisering"
+
+#: src/applet.js:473
+msgid "Power Profile Automation"
+msgstr "Strømprofil automatiserings"
+
+#: src/applet.js:499
+msgid "Automation Settings"
+msgstr "Automatiseringsindstillinger"
+
+#: src/applet.js:508
+msgid "Power Settings"
+msgstr "Strømindstillinger"
+
+#: src/applet.js:775
+msgid "Charging"
+msgstr "Oplader"
+
+#: src/applet.js:779
+#, javascript-format
+msgid "Charging - %d hour until fully charged"
+msgid_plural "Charging - %d hours until fully charged"
+msgstr[0] "Oplader - %d time til fuldt opladet"
+msgstr[1] "Oplader - %d timer til fuldt opladet"
+
+#: src/applet.js:784
+#, javascript-format
+msgid "Charging - %d %s %d %s until fully charged"
+msgstr "Oplader - %d %s %d %s til fuldt opladet"
+
+#: src/applet.js:787 src/applet.js:815
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "time"
+msgstr[1] "timer"
+
+#: src/applet.js:789 src/applet.js:817
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minut"
+msgstr[1] "minutter"
+
+#: src/applet.js:794
+#, javascript-format
+msgid "Charging - %d minute until fully charged"
+msgid_plural "Charging - %d minutes until fully charged"
+msgstr[0] "Oplader - %d minut til fuldt opladet"
+msgstr[1] "Oplader - %d minutter til fuldt opladet"
+
+#: src/applet.js:800
+msgid "Fully charged"
+msgstr "Fuldt opladet"
+
+#: src/applet.js:803
+msgid "Using battery power"
+msgstr "Bruger batteristrøm"
+
+#: src/applet.js:807
+#, javascript-format
+msgid "Using battery power - %d hour remaining"
+msgid_plural "Using battery power - %d hours remaining"
+msgstr[0] "Bruger batteristrøm - %d time tilbage"
+msgstr[1] "Bruger batteristrøm - %d timer tilbage"
+
+#: src/applet.js:812
+#, javascript-format
+msgid "Using battery power - %d %s %d %s remaining"
+msgstr "Bruger batteristrøm - %d %s %d %s tilbage"
+
+#: src/applet.js:822
+#, javascript-format
+msgid "Using battery power - %d minute remaining"
+msgid_plural "Using battery power - %d minutes remaining"
+msgstr[0] "Bruger batteristrøm - %d minut tilbage"
+msgstr[1] "Bruger batteristrøm - %d minutter tilbage"
+
+#: src/applet.js:828
+msgid "Fully discharged"
+msgstr "Fuldt afladet"
+
+#: src/applet.js:830
+msgid "Not charging"
+msgstr "Oplader ikke"
+
+#: src/applet.js:848 src/applet.js:858 src/applet.js:1091 src/applet.js:1101
+#, javascript-format
+msgctxt "time of battery remaining"
+msgid "%d:%02d"
+msgstr "%d:%02d"
+
+#: src/applet.js:850 src/applet.js:856 src/applet.js:1093 src/applet.js:1099
+#, javascript-format
+msgctxt "percent of battery remaining"
+msgid "%d%%"
+msgstr "%d%%"
+
+#: src/powerman-framework.js:964
+msgid "Critical Battery"
+msgstr "Kritisk batteri"
+
+#: src/powerman-framework.js:965
+#, javascript-format
+msgid "Battery %s critically low"
+msgstr "Batteri %s kritisk lavt"
+
+#: src/powerman-framework.js:970
+msgid "Low Battery"
+msgstr "Lavt batteri"
+
+#: src/powerman-framework.js:971
+#, javascript-format
+msgid "Battery %s low"
+msgstr "Batteri %s lavt"
+
+#: src/powerman-framework.js:1054 src/powerman-framework.js:1065
+#, javascript-format
+msgid "brightness %d%%"
+msgstr "lysstyrke %d%%"
+
+#: src/powerman-framework.js:1250
+#, javascript-format
+msgid "power profile %s"
+msgstr "strømprofil %s"
+
+#: src/powerman-framework.js:1368
+#, javascript-format
+msgid "power-saver mode (battery low: %d%%)"
+msgstr "strømbesparelsestilstand (batteri lavt: %d%%)"
+
+#: src/powerman-framework.js:1488
+msgid "AC power: "
+msgstr "AC-strøm: "
+
+#: src/powerman-framework.js:1488
+msgid "Battery power: "
+msgstr "Batteristrøm: "
+
+#: src/powerman-framework.js:1513
+msgid "Power Automation"
+msgstr "Strømautomatisering"
+
+# Metadata strings from metadata.json
+msgid ""
+"Enhanced power management with separate AC/Battery settings for brightness, "
+"power profiles, and automation - based on original power applet for Cinnamon"
+msgstr ""
+
+msgid "PowerMan - Enhanced Power Manager"
+msgstr ""
+
+# Settings UI strings from settings-schema.json
+msgid "10 minutes"
+msgstr "10 minutter"
+
+msgid "10 seconds"
+msgstr "10 sekunder"
+
+msgid "15 seconds"
+msgstr "15 sekunder"
+
+msgid "1 minute"
+msgstr "1 minut"
+
+msgid "2 minutes"
+msgstr "2 minutter"
+
+msgid "30 seconds"
+msgstr "30 sekunder"
+
+msgid "5 minutes"
+msgstr "5 minutter"
+
+msgid "5 seconds"
+msgstr "5 sekunder"
+
+msgid "60 seconds"
+msgstr "60 sekunder"
+
+msgid "90 seconds"
+msgstr "90 sekunder"
+
+msgid "AC brightness level (%)"
+msgstr "AC lysstyrkeniveau (%)"
+
+msgid "AC power profile"
+msgstr "AC strømprofil"
+
+msgid "Always show all batteries"
+msgstr "Vis altid alle batterier"
+
+msgid "Always show multiple batteries in panel"
+msgstr "Vis altid flere batterier i panel"
+
+msgid "Auto dim screen when idle on battery power"
+msgstr "Automatisk dæmp skærm ved inaktivitet på batteristrøm"
+
+msgid "Automatically adjust brightness for AC/Battery"
+msgstr "Juster automatisk lysstyrke for AC/Batteri"
+
+msgid "Automatically dim the screen when idle while on AC power"
+msgstr "Dæmp automatisk skærmen ved inaktivitet på AC-strøm"
+
+msgid "Automatically switch power profiles for AC/Battery"
+msgstr "Skift automatisk strømprofiler for AC/Batteri"
+
+msgid "Automatically switch to power-saver mode when battery is low"
+msgstr "Skift automatisk til strømbesparelsestilstand når batteri er lavt"
+
+msgid ""
+"Automatically update AC/Battery brightness settings when user manually "
+"changes brightness"
+msgstr ""
+
+msgid "Auto power-saver on low battery"
+msgstr "Automatisk strømbesparelse på lavt batteri"
+
+msgid "Battery brightness level (%)"
+msgstr "Batteri lysstyrkeniveau (%)"
+
+msgid "Battery percentage below which to automatically enable power-saver mode"
+msgstr ""
+"Batteriprocent under hvilken strømbesparelsestilstand aktiveres automatisk"
+
+msgid "Battery power profile"
+msgstr "Batteri strømprofil"
+
+msgid "Battery Power Saving"
+msgstr "Batteri strømbesparelse"
+
+msgid "Brightness Control"
+msgstr "Lysstyrkekontrol"
+
+msgid "Brightness Control Status"
+msgstr "Lysstyrkekontrol status"
+
+msgid "Brightness level to use when on AC power"
+msgstr "Lysstyrkeniveau at bruge på AC-strøm"
+
+msgid "Brightness level to use when on battery power"
+msgstr "Lysstyrkeniveau at bruge på batteristrøm"
+
+msgid "Brightness level when dimmed (%)"
+msgstr "Lysstyrkeniveau når dæmpet (%)"
+
+msgid "Debug and Logging"
+msgstr "Fejlfinding og logning"
+
+msgid "Dim screen when idle on AC power"
+msgstr "Dæmp skærm ved inaktivitet på AC-strøm"
+
+msgid "Dim screen when idle on battery"
+msgstr "Dæmp skærm ved inaktivitet på batteri"
+
+msgid "Disable default Cinnamon power applet and use PowerMan instead"
+msgstr "Deaktiver standard Cinnamon strøm-applet og brug PowerMan i stedet"
+
+msgid "Display"
+msgstr "Skærm"
+
+msgid "Display and Advanced"
+msgstr "Skærm og avanceret"
+
+msgid "Display notifications when power automation actions are performed"
+msgstr "Vis notifikationer når strømautomatiseringshandlinger udføres"
+
+msgid ""
+"Enable automatic switching between different power profiles for AC and "
+"Battery"
+msgstr ""
+"Aktivér automatisk skift mellem forskellige strømprofiler for AC og batteri"
+
+msgid "Enable debug logging"
+msgstr "Aktivér fejlfinding logning"
+
+msgid "Enable detailed logging for troubleshooting power automation"
+msgstr "Aktivér detaljeret logning for fejlfinding af strømautomatisering"
+
+msgid "Enable separate brightness levels for AC power and battery power"
+msgstr "Aktivér separate lysstyrkeniveauer for AC-strøm og batteristrøm"
+
+msgid "Hide applet icon from panel"
+msgstr "Skjul applet-ikon fra panel"
+
+msgid "Hide label"
+msgstr "Skjul etiket"
+
+msgid "List of original power applets that were disabled"
+msgstr ""
+
+msgid "Low battery threshold (%)"
+msgstr "Lav batteri tærskel (%)"
+
+msgid "Notifications and System Integration"
+msgstr "Notifikationer og systemintegration"
+
+msgid "Panel Display Options"
+msgstr "Panel visningsindstillinger"
+
+msgid "Power Control"
+msgstr "Strømkontrol"
+
+msgid "Power Control Status"
+msgstr "Strømkontrol status"
+
+msgid ""
+"Power profile automation is not available. No power profiles daemon or "
+"battery devices detected."
+msgstr ""
+"Strømprofil automatiserings er ikke tilgængelig. Ingen strømprofil daemon "
+"eller batterienheder registreret."
+
+msgid "Power profile to use when on AC power"
+msgstr "Strømprofil at bruge på AC-strøm"
+
+msgid "Power profile to use when on battery power"
+msgstr "Strømprofil at bruge på batteristrøm"
+
+msgid "Prefer battery-based AC detection"
+msgstr ""
+
+msgid "Remember user brightness changes"
+msgstr ""
+
+msgid "Replace system power applet"
+msgstr "Erstat systemets strøm-applet"
+
+msgid ""
+"Screen brightness control is not available on this system. Brightness "
+"automation is disabled."
+msgstr ""
+"Skærm lysstyrkekontrol er ikke tilgængelig på dette system. "
+"Lysstyrkeautomatisering er deaktiveret."
+
+msgid "Screen Dimming Settings"
+msgstr "Skærm dæmpningsindstillinger"
+
+msgid "Screen dim timeout"
+msgstr "Skærm dæmpning timeout"
+
+msgid "Show automation notifications"
+msgstr "Vis automatiseringsnotifikationer"
+
+msgid "Show percentage"
+msgstr "Vis procent"
+
+msgid "Show percentage and time remaining"
+msgstr "Vis procent og tid tilbage"
+
+msgid "Show time remaining"
+msgstr "Vis tid tilbage"
+
+msgid "The brightness level to use when dimming the screen"
+msgstr "Lysstyrkeniveauet at bruge når skærmen dæmpes"
+
+msgid "Time before screen dims when idle"
+msgstr "Tid før skærm dæmpes ved inaktivitet"
+
+msgid ""
+"Use battery state for AC detection instead of LINE_POWER (recommended for "
+"most laptops)"
+msgstr ""
