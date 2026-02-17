@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "allowJs": true,
+    "checkJs": false,
+    "noImplicitAny": false
+  },
+  "exclude": ["node_modules"]
+}

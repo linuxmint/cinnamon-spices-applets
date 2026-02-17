@@ -1,0 +1,545 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["page-metric1", "page-metric2", "page-metric3", "page-general"],
+        
+        "page-metric1": {
+            "type": "page",
+            "title": "Metric 1 (Primary)",
+            "sections": ["section-metric1-display", "section-metric1-source", "section-metric1-alerts", "section-metric1-color", "section-metric1-info"]
+        },
+        
+        "page-metric2": {
+            "type": "page",
+            "title": "Metric 2",
+            "sections": ["section-metric2-display", "section-metric2-source", "section-metric2-alerts", "section-metric2-color", "section-metric2-info"]
+        },
+        
+        "page-metric3": {
+            "type": "page",
+            "title": "Metric 3",
+            "sections": ["section-metric3-display", "section-metric3-source", "section-metric3-alerts", "section-metric3-color", "section-metric3-info"]
+        },
+        
+        "page-general": {
+            "type": "page",
+            "title": "General",
+            "sections": ["section-general-settings", "section-api-settings", "section-general-info"]
+        },
+
+        "page-devtools": {
+            "type": "page",
+            "title": "DevTools (Debug)",
+            "sections": ["section-devtools-options"]
+        },
+        
+        "section-devtools-options": {
+            "type": "section",
+            "title": "Developer Options",
+            "keys": ["dev-always-show-rocket", "dev-force-theme", "dev-force-language", "dev-show-frames", "dev-show-error-notifications", "dev-test-crash"]
+        },
+        
+        "section-general-settings": {
+            "type": "section",
+            "title": "Applet Settings",
+            "keys": [
+                "compact-mode", 
+                "enable-holiday-theme",
+                "global-show-cents", 
+                "global-show-arrows", 
+                "global-icon-opacity", 
+                "update-interval-seconds"
+            ] 
+        },
+
+        "section-api-settings": {
+            "type": "section",
+            "title": "CoinGecko API Configuration",
+            "keys": ["api-key", "reset-colors", "update-coin-list", "prefer-candle-charts", "chart-color-candle-up", "chart-color-candle-down", "show-active-alarms", "show-monthly-stats", "show-avg-stats"]
+        },
+
+        "section-metric1-display": {
+            "type": "section",
+            "title": "Display and Activation",
+            "keys": ["metric1-enabled", "metric1-show-icon", "metric1-symbol", "metric1-show-symbol", "metric1-show-cents", "metric1-decimals"]
+        },
+        "section-metric1-source": {
+            "type": "section",
+            "title": "Data Source (API)",
+            "keys": ["metric1-id", "metric1-custom-id", "metric1-currency"]
+        },
+        "section-metric1-alerts": {
+            "type": "section",
+            "title": "Alarms",
+            "keys": ["metric1-alert-price", "metric1-alert-percent"]
+        },
+        "section-metric1-color": {
+            "type": "section",
+            "title": "Color Settings",
+            "keys": ["metric1-color-arrow-only", "metric1-color-up", "metric1-color-down"]
+        },
+        "section-metric1-info": {
+            "type": "section",
+            "title": "Changes will activate on the next API update interval.",
+            "keys": []
+        },
+        
+        "section-metric2-display": {
+            "type": "section",
+            "title": "Display and Activation",
+            "keys": ["metric2-enabled", "metric2-show-icon", "metric2-symbol", "metric2-show-symbol", "metric2-show-cents", "metric2-decimals"]
+        },
+        "section-metric2-source": {
+            "type": "section",
+            "title": "Data Source (API)",
+            "keys": ["metric2-id", "metric2-custom-id", "metric2-currency"]
+        },
+        "section-metric2-alerts": {
+            "type": "section",
+            "title": "Alarms",
+            "keys": ["metric2-alert-price", "metric2-alert-percent"]
+        },
+        "section-metric2-color": {
+            "type": "section",
+            "title": "Color Settings",
+            "keys": ["metric2-color-arrow-only", "metric2-color-up", "metric2-color-down"]
+        },
+        "section-metric2-info": {
+            "type": "section",
+            "title": "Changes will activate on the next API update interval.",
+            "keys": []
+        },
+
+        "section-metric3-display": {
+            "type": "section",
+            "title": "Display and Activation",
+            "keys": ["metric3-enabled", "metric3-show-icon", "metric3-symbol", "metric3-show-symbol", "metric3-show-cents", "metric3-decimals"]
+        },
+        "section-metric3-source": {
+            "type": "section",
+            "title": "Data Source (API)",
+            "keys": ["metric3-id", "metric3-custom-id", "metric3-currency"]
+        },
+        "section-metric3-alerts": {
+            "type": "section",
+            "title": "Alarms",
+            "keys": ["metric3-alert-price", "metric3-alert-percent"]
+        },
+        "section-metric3-color": {
+            "type": "section",
+            "title": "Color Settings",
+            "keys": ["metric3-color-arrow-only", "metric3-color-up", "metric3-color-down"]
+        },
+        "section-metric3-info": {
+            "type": "section",
+            "title": "Changes will activate on the next API update interval.",
+            "keys": []
+        },
+        
+        "section-general-info": {
+            "type": "section",
+            "title": "Changes will activate on the next API update interval.",
+            "keys": []
+        }
+    },
+    
+    "api-key": {
+        "type": "entry",
+        "default": "",
+        "name": "CoinGecko API Key (Demo or Pro)",
+        "description": "Unlocks higher limits and more stable data queries.",
+        "tooltip": "CALL TRACKING OVERVIEW:\n\n• BASIC CALLS: Run via public servers (approx. 5-15 calls/min). \n  Used for: Standard price queries (saves key quota).\n\n• KEY CALLS: Run via your Demo Key quota.\n  Used for: Charts, coin details & more stable queries.\n\nLIMITS (DEMO KEY):\n• Total: 10,000 calls per month\n• Speed: Max. 30 requests per minute\n\nThe tracking in the footer shows you in real-time how many requests have been used so you can keep an eye on your monthly 10k limit."
+    },
+
+    "show-active-alarms": {
+        "type": "switch",
+        "default": true,
+        "name": "Show Active Alarms",
+        "description": "Shows the count of active alarms in the footer."
+    },
+    "show-monthly-stats": {
+        "type": "switch",
+        "default": true,
+        "name": "Show Monthly Statistics",
+        "description": "Shows total API key calls this month."
+    },
+    "show-avg-stats": {
+        "type": "switch",
+        "default": true,
+        "name": "Show Daily Average",
+        "description": "Shows the calculated average per day."
+    },
+
+    "prefer-candle-charts": {
+        "type": "switch",
+        "default": false,
+        "name": "Candle Charts as Default",
+        "description": "Shows charts as candlesticks by default where possible."
+    },
+
+    "chart-color-candle-up": {
+        "type": "colorchooser",
+        "default": "#449d44",
+        "name": "Chart: Bullish Candle Color (Up)",
+        "description": "Color for rising candles."
+    },
+
+    "chart-color-candle-down": {
+        "type": "colorchooser",
+        "default": "#d9534f",
+        "name": "Chart: Bearish Candle Color (Down)",
+        "description": "Color for falling candles."
+    },
+
+    "metric1-alert-price": {
+        "type": "entry",
+        "default": "0",
+        "name": "Price Alarm",
+        "description": "Notification when this price is reached.",
+        "tooltip": "Enter the target price e.g. 5 or 2598. 0 disables the alarm."
+    },
+    "metric1-alert-percent": {
+        "type": "entry",
+        "default": "0",
+        "name": "Percent Alarm",
+        "description": "Alarm on percentage change (24h).",
+        "tooltip": "Enter a percentage value e.g. 5. 0 disables the alarm."
+    },
+
+    "metric2-alert-price": {
+        "type": "entry",
+        "default": "0",
+        "name": "Price Alarm",
+        "description": "Notification when this price is reached.",
+        "tooltip": "Enter the target price e.g. 5 or 2598. 0 disables the alarm."
+    },
+    "metric2-alert-percent": {
+        "type": "entry",
+        "default": "0",
+        "name": "Percent Alarm",
+        "description": "Alarm on percentage change (24h).",
+        "tooltip": "Enter a percentage value e.g. 5. 0 disables the alarm."
+    },
+
+    "metric3-alert-price": {
+        "type": "entry",
+        "default": "0",
+        "name": "Price Alarm",
+        "description": "Notification when this price is reached.",
+        "tooltip": "Enter the target price e.g. 5 or 2598. 0 disables the alarm."
+    },
+    "metric3-alert-percent": {
+        "type": "entry",
+        "default": "0",
+        "name": "Percent Alarm",
+        "description": "Alarm on percentage change (24h).",
+        "tooltip": "Enter a percentage value e.g. 5. 0 disables the alarm."
+    },
+
+    "compact-mode": {
+        "type": "switch",
+        "default": false,
+        "name": "Compact Mode",
+        "description": "Space-saving display in panel (BTC $85.5K)."
+    },
+
+    "enable-holiday-theme": {
+        "type": "switch",
+        "default": true,
+        "name": "Enable Seasonal Theme",
+        "description": "Automatically activates festive designs (e.g. Christmas) at certain times."
+    },
+
+    "global-show-cents": {
+        "type": "switch",
+        "default": true,
+        "name": "Show Decimals",
+        "description": "Toggles the display of cent amounts on or off."
+    },
+
+    "global-show-arrows": {
+        "type": "switch",
+        "default": true,
+        "name": "Show Trend Arrows",
+        "description": "Shows or hides trend arrows for price changes."
+    },
+
+    "global-icon-opacity": {
+        "type": "combobox",
+        "default": "10",
+        "options": {
+            "1 (10%)": "1",
+            "2 (20%)": "2",
+            "3 (30%)": "3",
+            "4 (40%)": "4",
+            "5 (50%)": "5",
+            "6 (60%)": "6",
+            "7 (70%)": "7",
+            "8 (80%)": "8",
+            "9 (90%)": "9",
+            "10 (100%)": "10"
+        },
+        "name": "Icon Opacity",
+        "description": "Controls the visibility of crypto icons."
+    },
+
+    "update-interval-seconds": {
+        "type": "combobox",
+        "default": "120",
+        "options": {
+            "15 Seconds (Minimum)": "15",
+            "30 Seconds": "30",
+            "60 Seconds (1 Minute)": "60",
+            "120 Seconds (2 Minutes)": "120",
+            "300 Seconds (5 Minutes)": "300"
+        },
+        "name": "Update Interval",
+        "description": "How often prices are fetched from CoinGecko."
+    },
+
+    "reset-colors": {
+        "type": "button",
+        "label": "Reset Colors",
+        "description": "Resets all custom colors (charts & metrics) to default values.",
+        "callback": "_resetColors"
+    },
+
+    "update-coin-list": {
+        "type": "button",
+        "label": "Update Top Coins List",
+        "description": "Loads the current top 50 coins from CoinGecko and updates the selection lists (requires settings restart).",
+        "callback": "_updateCoinList"
+    },
+
+    "dev-always-show-rocket": {
+        "type": "switch",
+        "default": false,
+        "name": "Force ATH Rocket",
+        "description": "Always show the rocket animation (for testing purposes)."
+    },
+
+    "dev-force-theme": {
+        "type": "combobox",
+        "default": "auto",
+        "options": { "Automatic (Date based)": "auto", "New Year": "newyear", "Christmas (General)": "xmas", "Christmas (Eve & Day)": "xmas_eve", "Halloween": "halloween", "Valentine's Day": "valentine", "Bitcoin Pizza Day": "pizza", "Easter": "easter" },
+        "name": "Force Seasonal Theme",
+        "description": "Override the date-based theme selection."
+    },
+
+    "dev-force-language": {
+        "type": "combobox",
+        "default": "system",
+        "options": {
+            "System Default": "system",
+            "English": "en",
+            "German (Deutsch)": "de",
+            "Arabic (العربية)": "ar",
+            "Czech (Čeština)": "cs",
+            "Danish (Dansk)": "da",
+            "Spanish (Español)": "es",
+            "French (Français)": "fr",
+            "Hindi (हिन्दी)": "hi",
+            "Hungarian (Magyar)": "hu",
+            "Indonesian (Bahasa Indonesia)": "id",
+            "Italian (Italiano)": "it",
+            "Japanese (日本語)": "ja",
+            "Korean (한국어)": "ko",
+            "Malay (Bahasa Melayu)": "ms",
+            "Dutch (Nederlands)": "nl",
+            "Polish (Polski)": "pl",
+            "Portuguese (Português)": "pt",
+            "Russian (Русский)": "ru",
+            "Swedish (Svenska)": "sv",
+            "Thai (ไทย)": "th",
+            "Filipino (Tagalog)": "tl",
+            "Turkish (Türkçe)": "tr",
+            "Ukrainian (Українська)": "uk",
+            "Vietnamese (Tiếng Việt)": "vi",
+            "Chinese Simplified (简体中文)": "zh_CN",
+            "Chinese Traditional (繁體中文)": "zh_TW"
+        },
+        "name": "Force Language (Debug)",
+        "description": "Force a specific language for testing translations."
+    },
+
+    "dev-show-frames": {
+        "type": "switch",
+        "default": false,
+        "name": "Debug Frames (Layout)",
+        "description": "Draws colorful frames around menu elements for layout inspection."
+    },
+
+    "dev-show-error-notifications": {
+        "type": "switch",
+        "default": true,
+        "name": "Show Error Notifications",
+        "description": "Sends a desktop notification when an internal error is caught."
+    },
+
+    "dev-test-crash": {
+        "type": "button",
+        "label": "Test Crash (Safe)",
+        "description": "Provokes an error to test logging and notifications.",
+        "callback": "_testCrash"
+    },
+
+    "metric1-show-icon": { "type": "switch", "default": false, "name": "Show Icon", "description": "Shows the crypto icon next to the price." },
+    "metric2-show-icon": { "type": "switch", "default": false, "name": "Show Icon", "description": "Shows the crypto icon next to the price." },
+    "metric3-show-icon": { "type": "switch", "default": false, "name": "Show Icon", "description": "Shows the crypto icon next to the price." },
+
+    "metric1-show-cents": { "type": "switch", "default": true, "name": "Show Decimals", "description": "Toggles the display of decimal places on/off." },
+    "metric1-decimals": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 2,
+        "max": 8,
+        "step": 1,
+        "units": "digits",
+        "name": "Number of Decimals",
+        "description": "Number of decimal places (2-8)."
+    },
+    "metric2-show-cents": { "type": "switch", "default": true, "name": "Show Decimals", "description": "Toggles the display of decimal places on/off." },
+    "metric2-decimals": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 2,
+        "max": 8,
+        "step": 1,
+        "units": "digits",
+        "name": "Number of Decimals",
+        "description": "Number of decimal places (2-8)."
+    },
+    "metric3-show-cents": { "type": "switch", "default": true, "name": "Show Decimals", "description": "Toggles the display of decimal places on/off." },
+    "metric3-decimals": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 2,
+        "max": 8,
+        "step": 1,
+        "units": "digits",
+        "name": "Number of Decimals",
+        "description": "Number of decimal places (2-8)."
+    },
+
+    "metric1-color-arrow-only": { "type": "switch", "default": true, "name": "Color the Arrow Only", "description": "If active, the price text remains white." },
+    "metric2-color-arrow-only": { "type": "switch", "default": true, "name": "Color the Arrow Only", "description": "If active, the price text remains white." },
+    "metric3-color-arrow-only": { "type": "switch", "default": true, "name": "Color the Arrow Only", "description": "If active, the price text remains white." },
+
+    "metric1-show-symbol": { "type": "switch", "default": true, "name": "Show Currency Symbol (e.g. $ or €)", "description": "Replaces the currency code with the symbol." },
+    "metric2-show-symbol": { "type": "switch", "default": true, "name": "Show Currency Symbol (e.g. $ or €)", "description": "Replaces the currency code with the symbol." },
+    "metric3-show-symbol": { "type": "switch", "default": true, "name": "Show Currency Symbol (e.g. $ or €)", "description": "Replaces the currency code with the symbol." },
+    
+    "metric1-enabled": { "type": "switch", "default": true, "name": "Enabled", "description": "Toggles the display of this metric on/off." },
+    "metric1-id": {
+        "type": "combobox", "default": "bitcoin",
+        "options": {
+            "Custom ID": "custom",
+            "Bitcoin (BTC)": "bitcoin",
+            "Ethereum (ETH)": "ethereum",
+            "BNB (BNB)": "binancecoin",
+            "Solana (SOL)": "solana",
+            "XRP (XRP)": "ripple",
+            "Dogecoin (DOGE)": "dogecoin",
+            "Toncoin (TON)": "the-open-network",
+            "Cardano (ADA)": "cardano",
+            "Shiba Inu (SHIB)": "shiba-inu",
+            "Avalanche (AVAX)": "avalanche-2",
+            "TRON (TRX)": "tron",
+            "Polkadot (DOT)": "polkadot",
+            "Bitcoin Cash (BCH)": "bitcoin-cash",
+            "Chainlink (LINK)": "chainlink",
+            "NEAR Protocol (NEAR)": "near",
+            "Polygon (POL)": "matic-network",
+            "Litecoin (LTC)": "litecoin",
+            "Pepe (PEPE)": "pepe",
+            "Internet Computer (ICP)": "internet-computer",
+            "Kaspa (KAS)": "kaspa"
+        },
+        "name": "Currency ID (CoinGecko)", "description": "Select the cryptocurrency from the top list."
+    },
+    "metric1-custom-id": { "type": "entry", "default": "", "name": "Custom Currency ID", "description": "CoinGecko ID (e.g. 'litecoin')" },
+    "metric1-currency": {
+        "type": "combobox", "default": "USD",
+        "options": { "US Dollar (USD)": "USD", "Euro (EUR)": "EUR", "Canadian Dollar (CAD)": "CAD", "British Pound (GBP)": "GBP", "Japanese Yen (JPY)": "JPY", "Swiss Franc (CHF)": "CHF", "Australian Dollar (AUD)": "AUD" },
+        "name": "Comparison Currency", "description": "Select the currency for the price comparison."
+    },
+    "metric1-symbol": { "type": "entry", "default": "BTC", "name": "Display Symbol", "description": "The symbol displayed on the panel (e.g. BTC)." },
+    "metric1-color-up": { "type": "colorchooser", "default": "#00FF00", "name": "Color for Rising Price (▲)", "description": "Select the color for positive price movement." },
+    "metric1-color-down": { "type": "colorchooser", "default": "#FF0000", "name": "Color for Falling Price (▼)", "description": "Select the color for negative price movement." },
+    
+    "metric2-enabled": { "type": "switch", "default": true, "name": "Enabled", "description": "Toggles the display of this metric on/off." },
+    "metric2-id": {
+        "type": "combobox", "default": "ethereum",
+        "options": {
+            "Custom ID": "custom",
+            "Bitcoin (BTC)": "bitcoin",
+            "Ethereum (ETH)": "ethereum",
+            "BNB (BNB)": "binancecoin",
+            "Solana (SOL)": "solana",
+            "XRP (XRP)": "ripple",
+            "Dogecoin (DOGE)": "dogecoin",
+            "Toncoin (TON)": "the-open-network",
+            "Cardano (ADA)": "cardano",
+            "Shiba Inu (SHIB)": "shiba-inu",
+            "Avalanche (AVAX)": "avalanche-2",
+            "TRON (TRX)": "tron",
+            "Polkadot (DOT)": "polkadot",
+            "Bitcoin Cash (BCH)": "bitcoin-cash",
+            "Chainlink (LINK)": "chainlink",
+            "NEAR Protocol (NEAR)": "near",
+            "Polygon (POL)": "matic-network",
+            "Litecoin (LTC)": "litecoin",
+            "Pepe (PEPE)": "pepe",
+            "Internet Computer (ICP)": "internet-computer",
+            "Kaspa (KAS)": "kaspa"
+        },
+        "name": "Currency ID (CoinGecko)", "description": "Select the cryptocurrency from the top list."
+    },
+    "metric2-custom-id": { "type": "entry", "default": "", "name": "Custom Currency ID", "description": "CoinGecko ID (e.g. 'litecoin')" },
+    "metric2-currency": {
+        "type": "combobox", "default": "EUR",
+        "options": { "US Dollar (USD)": "USD", "Euro (EUR)": "EUR", "Canadian Dollar (CAD)": "CAD", "British Pound (GBP)": "GBP", "Japanese Yen (JPY)": "JPY", "Swiss Franc (CHF)": "CHF", "Australian Dollar (AUD)": "AUD" },
+        "name": "Comparison Currency", "description": "Select the currency for the price comparison."
+    },
+    "metric2-symbol": { "type": "entry", "default": "ETH", "name": "Display Symbol", "description": "The symbol displayed on the panel (e.g. ETH)." },
+    "metric2-color-up": { "type": "colorchooser", "default": "#00FF00", "name": "Color for Rising Price (▲)", "description": "Select the color for positive price movement." },
+    "metric2-color-down": { "type": "colorchooser", "default": "#FF0000", "name": "Color for Falling Price (▼)", "description": "Select the color for negative price movement." },
+    
+    "metric3-enabled": { "type": "switch", "default": true, "name": "Enabled", "description": "Toggles the display of this metric on/off." },
+    "metric3-id": {
+        "type": "combobox", "default": "cardano",
+        "options": {
+            "Custom ID": "custom",
+            "Bitcoin (BTC)": "bitcoin",
+            "Ethereum (ETH)": "ethereum",
+            "BNB (BNB)": "binancecoin",
+            "Solana (SOL)": "solana",
+            "XRP (XRP)": "ripple",
+            "Dogecoin (DOGE)": "dogecoin",
+            "Toncoin (TON)": "the-open-network",
+            "Cardano (ADA)": "cardano",
+            "Shiba Inu (SHIB)": "shiba-inu",
+            "Avalanche (AVAX)": "avalanche-2",
+            "TRON (TRX)": "tron",
+            "Polkadot (DOT)": "polkadot",
+            "Bitcoin Cash (BCH)": "bitcoin-cash",
+            "Chainlink (LINK)": "chainlink",
+            "NEAR Protocol (NEAR)": "near",
+            "Polygon (POL)": "matic-network",
+            "Litecoin (LTC)": "litecoin",
+            "Pepe (PEPE)": "pepe",
+            "Internet Computer (ICP)": "internet-computer",
+            "Kaspa (KAS)": "kaspa"
+        },
+        "name": "Currency ID (CoinGecko)", "description": "Select the cryptocurrency from the top list."
+    },
+    "metric3-custom-id": { "type": "entry", "default": "", "name": "Custom Currency ID", "description": "CoinGecko ID (e.g. 'litecoin')" },
+    "metric3-currency": {
+        "type": "combobox", "default": "USD",
+        "options": { "US Dollar (USD)": "USD", "Euro (EUR)": "EUR", "Canadian Dollar (CAD)": "CAD", "British Pound (GBP)": "GBP", "Japanese Yen (JPY)": "JPY", "Swiss Franc (CHF)": "CHF", "Australian Dollar (AUD)": "AUD" },
+        "name": "Comparison Currency", "description": "Select the currency for the price comparison."
+    },
+    "metric3-symbol": { "type": "entry", "default": "ADA", "name": "Display Symbol", "description": "The symbol displayed on the panel (e.g. ADA)." },
+    "metric3-color-up": { "type": "colorchooser", "default": "#00FF00", "name": "Color for Rising Price (▲)", "description": "Select the color for positive price movement." },
+    "metric3-color-down": { "type": "colorchooser", "default": "#FF0000", "name": "Color for Falling Price (▼)", "description": "Select the color for negative price movement." }
+}

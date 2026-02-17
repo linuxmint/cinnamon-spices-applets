@@ -1,0 +1,977 @@
+# French translation for crypto-tracker@danipin
+# Copyright (C) 2025
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: crypto-tracker@danipin 1.0.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-17 19:20+0200\n"
+"PO-Revision-Date: 2025-01-24 22:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. Row 2: Total Value
+#: applet.js:458 applet.js:461 applet.js:805 portfolio.js:708 utils.js:101
+msgid "Loading..."
+msgstr "Chargement..."
+
+#: applet.js:873
+msgid "Colors reset to default values."
+msgstr "Couleurs réinitialisées aux valeurs par défaut."
+
+#: applet.js:918
+msgid "List updated! Please reopen settings."
+msgstr "Liste mise à jour ! Veuillez rouvrir les paramètres."
+
+#: applet.js:1949
+msgid "API Limit Reached"
+msgstr "Limite API atteinte"
+
+#: applet.js:1949
+#, javascript-format
+msgid "You have used 100% of your monthly limit (10k)."
+msgstr "Vous avez utilisé 100% de votre limite mensuelle (10k)."
+
+#: applet.js:1956
+msgid "Power Saving Enabled"
+msgstr "Économie d'énergie activée"
+
+#: applet.js:1956
+msgid "Interval set to 5 min to avoid API ban."
+msgstr "Intervalle réglé à 5 min pour éviter le bannissement de l'API."
+
+#: applet.js:1959
+msgid "API Limit Warning"
+msgstr "Avertissement de limite API"
+
+#: applet.js:1959
+#, javascript-format
+msgid "You have reached 90% of your limit."
+msgstr "Vous avez atteint 90% de votre limite."
+
+#: applet.js:1962
+msgid "API Limit Info"
+msgstr "Info limite API"
+
+#: applet.js:1962
+#, javascript-format
+msgid "You have reached 80% of your limit."
+msgstr "Vous avez atteint 80% de votre limite."
+
+#. Set base texts
+#: footer.js:103
+msgid "API: Active"
+msgstr "API : Active"
+
+#: footer.js:103
+msgid "Basic Mode"
+msgstr "Mode Basique"
+
+#: footer.js:107
+msgid "Source: CoinGecko"
+msgstr "Source : CoinGecko"
+
+#: footer.js:110
+msgid "Get Free API Key"
+msgstr "Obtenir une clé API gratuite"
+
+#: footer.js:120 api.js:206 api.js:213
+msgid "Month:"
+msgstr "Mois :"
+
+#: footer.js:121
+#, fuzzy
+msgid "Ø:"
+msgstr "Ø : "
+
+#: footer.js:124
+msgid "Alarms: "
+msgstr "Alarmes : "
+
+#: header.js:126 header.js:284
+msgid "Portfolio Tracker"
+msgstr "Suivi de portefeuille"
+
+#: header.js:128 header.js:285
+msgid "Alarm Management"
+msgstr "Gestion des alarmes"
+
+#: header.js:130 header.js:287
+msgid "API Usage & Stats"
+msgstr "Utilisation API & Stats"
+
+#: header.js:132
+msgid "Support Development"
+msgstr "Soutenir le développement"
+
+# Strings from JS files
+#. IMPORTANT: For the drawing loop we need the pure text without markup!
+#: header.js:137 header.js:283 header.js:650
+msgid "Market Dashboard"
+msgstr "Tableau de bord du marché"
+
+#: header.js:139 header.js:651
+msgid "24H Price Change [%]"
+msgstr "Changement de prix 24H [%]"
+
+#: header.js:289
+msgid "Support"
+msgstr "Soutien"
+
+#: header.js:293
+msgid "Settings"
+msgstr "Paramètres"
+
+#: alarm.js:251
+msgid "Alarm Archive Full"
+msgstr "Archive d'alarmes pleine"
+
+#: alarm.js:251
+msgid "Oldest alarm for "
+msgstr "Plus ancienne alarme pour "
+
+#: alarm.js:251
+msgid " was deleted."
+msgstr " a été supprimée."
+
+#: alarm.js:333
+msgid "Background Alarm: "
+msgstr "Alarme en arrière-plan : "
+
+#: alarm.js:333
+msgid "Target price "
+msgstr "Prix cible "
+
+#: alarm.js:333
+msgid " reached! Current: "
+msgstr " atteint ! Actuel : "
+
+#: alarm.js:345
+msgid "risen"
+msgstr "augmenté"
+
+#: alarm.js:345
+msgid "fallen"
+msgstr "baissé"
+
+#: alarm.js:346
+msgid "Volatility Alarm: "
+msgstr "Alarme de volatilité : "
+
+#: alarm.js:346
+#, fuzzy
+msgid " has "
+msgstr "a "
+
+#: alarm.js:346
+msgid " by "
+msgstr " de "
+
+#: alarm.js:478
+msgid "Alarm Settings"
+msgstr "Paramètres d'alarme"
+
+#: alarm.js:582
+msgid "Target Price ("
+msgstr "Prix cible ("
+
+#: alarm.js:583
+msgid "Change (%):"
+msgstr "Changement (%) :"
+
+#: alarm.js:586
+msgid "Press ENTER to save."
+msgstr "Appuyez sur ENTRÉE pour enregistrer."
+
+#: alarm.js:652 alarm.js:661
+msgid "Search alarms..."
+msgstr "Rechercher des alarmes..."
+
+#: alarm.js:748 portfolio.js:1271
+msgid "No matches."
+msgstr "Aucune correspondance."
+
+#: alarm.js:748
+msgid "No alarms here yet."
+msgstr "Pas encore d'alarmes ici."
+
+#. Price Input
+#: alarm.js:865 alarm.js:1032
+msgid "Target:"
+msgstr "Cible :"
+
+#: alarm.js:866
+#, fuzzy
+msgid "Vol:"
+msgstr "Vol 24h :"
+
+#: alarm.js:869
+msgid "Current: "
+msgstr "Actuel : "
+
+#: alarm.js:874
+msgid "Created: "
+msgstr "Créé : "
+
+#. Vol Input
+#: alarm.js:1053
+msgid "Vol %:"
+msgstr "Vol % :"
+
+#: alarm.js:1067
+msgid "ENTER to save"
+msgstr "ENTRÉE pour enregistrer"
+
+#. Sort options
+#: alarm.js:1111 portfolio.js:1017
+msgid "Date"
+msgstr "Date"
+
+#: alarm.js:1112
+msgid "Name"
+msgstr "Nom"
+
+#: alarm.js:1175 alarm.js:1227
+msgid "Delete all"
+msgstr "Tout supprimer"
+
+#: alarm.js:1183 alarm.js:1191 alarm.js:1199 alarm.js:1222 portfolio.js:1221
+#: portfolio.js:1228
+msgid "Sure?"
+msgstr "Sûr ?"
+
+#: alarm.js:1239
+msgid "Alarms "
+msgstr "Alarmes "
+
+#: alarm.js:1239
+msgid " of "
+msgstr " de "
+
+#: donate.js:44
+msgid ""
+"If you like this applet, you can support\n"
+"its development with a donation."
+msgstr ""
+"Si vous aimez cette applet, vous pouvez soutenir\n"
+"son développement par un don."
+
+#: donate.js:190
+msgid "Address:"
+msgstr "Adresse :"
+
+#: donate.js:221
+msgid "Copied"
+msgstr "Copié"
+
+#: donate.js:221
+msgid " address copied."
+msgstr " adresse copiée."
+
+#: search.js:42
+msgid "Search..."
+msgstr "Rechercher..."
+
+#: search.js:181
+msgid "No results..."
+msgstr "Aucun résultat..."
+
+#: portfolio.js:325
+msgid "Converting..."
+msgstr "Conversion..."
+
+#: portfolio.js:374
+msgid "Error"
+msgstr "Erreur"
+
+#: portfolio.js:374
+msgid "Currency conversion failed."
+msgstr "Échec de la conversion de devise."
+
+#: portfolio.js:612
+msgid "Total Balance"
+msgstr "Solde total"
+
+#. FIX: expand: false for label, insert spacer instead
+#: portfolio.js:729
+msgid "Select Currency"
+msgstr "Sélectionner la devise"
+
+#: portfolio.js:799 portfolio.js:807
+msgid "Filter portfolio..."
+msgstr "Filtrer le portefeuille..."
+
+#: portfolio.js:1015
+msgid "Amount"
+msgstr "Montant"
+
+#: portfolio.js:1016
+msgid "Buy Price"
+msgstr "Prix d'achat"
+
+#. Add TX Button
+#: portfolio.js:1208
+msgid "+ Transaction"
+msgstr "+ Transaction"
+
+#. Delete Coin Button
+#: portfolio.js:1217 portfolio.js:1233
+msgid "Remove Position"
+msgstr "Supprimer la position"
+
+#: portfolio.js:1271
+msgid "No positions here yet."
+msgstr "Aucune position ici pour le moment."
+
+#: portfolio.js:1297
+msgid "Add Coin"
+msgstr "Ajouter une pièce"
+
+#: portfolio.js:1314 portfolio.js:1320
+msgid "Search (e.g. Bitcoin)..."
+msgstr "Rechercher (par ex. Bitcoin)..."
+
+#: portfolio.js:1407
+msgid "No results"
+msgstr "Aucun résultat"
+
+#: seasonal.js:89
+msgid "HAPPY HALLOWEEN !"
+msgstr "JOYEUX HALLOWEEN !"
+
+#: seasonal.js:387
+msgid "MERRY CHRISTMAS 🎄"
+msgstr "JOYEUX NOËL 🎄"
+
+#. Straighten up
+#: seasonal.js:495
+msgid "HAPPY BITCOIN PIZZA DAY 🍕"
+msgstr "JOYEUX BITCOIN PIZZA DAY 🍕"
+
+#: charts.js:190
+msgid "?"
+msgstr ""
+
+#: charts.js:237
+msgid "Rank:"
+msgstr "Rang :"
+
+#: charts.js:237
+msgid "M.Cap:"
+msgstr "Cap. Marché :"
+
+#: charts.js:238
+msgid "24h High:"
+msgstr "Haut 24h :"
+
+#: charts.js:238
+msgid "24h Vol:"
+msgstr "Vol 24h :"
+
+#: charts.js:239
+msgid "24h Low:"
+msgstr "Bas 24h :"
+
+#: charts.js:239
+msgid "ATH:"
+msgstr "ATH :"
+
+#: utils.js:343
+msgid " (Rate Limit)"
+msgstr " (Limite de taux)"
+
+#: utils.js:344
+msgid " (API Key invalid)"
+msgstr " (Clé API invalide)"
+
+#: utils.js:345
+msgid " (Network)"
+msgstr " (Réseau)"
+
+#: utils.js:347
+msgid "Crypto-Tracker Error"
+msgstr "Erreur Crypto-Tracker"
+
+#: utils.js:347
+msgid "An error was intercepted"
+msgstr "Une erreur a été interceptée"
+
+#: utils.js:347
+msgid ". See log."
+msgstr ". Voir le journal."
+
+#: api.js:76
+msgid "API successfully activated."
+msgstr "API activée avec succès."
+
+#: api.js:82
+msgid "No internet connection"
+msgstr "Pas de connexion internet"
+
+#: api.js:84
+msgid "Key invalid"
+msgstr "Clé invalide"
+
+#: api.js:86
+msgid "Key blocked"
+msgstr "Clé bloquée"
+
+#: api.js:88
+msgid "Limit reached"
+msgstr "Limite atteinte"
+
+#: api.js:90
+msgid "Server error"
+msgstr "Erreur serveur"
+
+#: api.js:94
+msgid "API Error: "
+msgstr "Erreur API : "
+
+#: api.js:99
+msgid "System error"
+msgstr "Erreur système"
+
+#: api.js:133
+msgid "System Diagnosis"
+msgstr "Diagnostic système"
+
+#: api.js:145
+msgid "API Connection: Active & Valid"
+msgstr "Connexion API : Active & Valide"
+
+#: api.js:147
+msgid "Not configured"
+msgstr "Non configuré"
+
+#: api.js:148
+msgid "API Status: "
+msgstr "Statut API : "
+
+#: api.js:156
+msgid "Quota critical: "
+msgstr "Quota critique : "
+
+#: api.js:156 api.js:158
+msgid "% used"
+msgstr "% utilisé"
+
+#: api.js:158
+msgid "Quota high: "
+msgstr "Quota élevé : "
+
+#: api.js:160
+msgid "Quota: "
+msgstr "Quota : "
+
+#: api.js:160
+msgid "(In the green)"
+msgstr "(Dans le vert)"
+
+#: api.js:167
+msgid "Period: "
+msgstr "Période : "
+
+#: api.js:167
+msgid " days left in month."
+msgstr " jours restants dans le mois."
+
+#: api.js:173
+msgid "Tip: Interval ("
+msgstr "Astuce : Intervalle ("
+
+#: api.js:173
+msgid "s) is aggressive for Free Tier."
+msgstr "s) est agressif pour le niveau gratuit."
+
+#: api.js:180
+msgid "Note: Error log exists."
+msgstr "Note : Un journal d'erreurs existe."
+
+#: api.js:182
+msgid "System: No crashes logged."
+msgstr "Système : Aucun crash enregistré."
+
+#: api.js:204 api.js:399
+msgid "Free API (Basic)"
+msgstr "API Gratuite (Basique)"
+
+#: api.js:205 api.js:212
+msgid "Today:"
+msgstr "Aujourd'hui :"
+
+#: api.js:207 api.js:214
+msgid "Ø per Day:"
+msgstr "Ø par jour :"
+
+#: api.js:211 api.js:400
+msgid "Key API (Pro)"
+msgstr "API Clé (Pro)"
+
+#: api.js:226
+msgid "Distribution (Key Calls)"
+msgstr "Distribution (Appels Clé)"
+
+#: api.js:241
+msgid "Charts"
+msgstr "Graphiques"
+
+#. Blue
+#: api.js:242
+msgid "Details"
+msgstr "Détails"
+
+#. Purple
+#: api.js:243
+msgid "Search"
+msgstr "Recherche"
+
+#. Yellow
+#: api.js:244
+msgid "Portfolio"
+msgstr "Portefeuille"
+
+#. Cyan
+#: api.js:245
+msgid "Alarms"
+msgstr "Alarmes"
+
+#. Red/Pink
+#: api.js:246
+msgid "Updates"
+msgstr "Mises à jour"
+
+#: api.js:296
+msgid "History (Last 14 Days)"
+msgstr "Historique (14 derniers jours)"
+
+#: api.js:419
+msgid "Error Log ("
+msgstr "Journal d'erreurs ("
+
+#: api.js:419
+msgid " KB)"
+msgstr " Ko)"
+
+#: api.js:422
+msgid "The system prevented and logged crashes."
+msgstr "Le système a empêché et enregistré des crashs."
+
+#: api.js:428
+msgid "Delete"
+msgstr "Supprimer"
+
+#: api.js:441
+msgid "Dismiss"
+msgstr "Ignorer"
+
+#~ msgid "Crypto Tracker"
+#~ msgstr "Crypto Tracker"
+
+#~ msgid ""
+#~ "A comprehensive cryptocurrency dashboard providing real-time market data, "
+#~ "portfolio management, interactive charts, and advanced alerting "
+#~ "capabilities, enhanced with seasonal visual elements."
+#~ msgstr ""
+#~ "Un tableau de bord complet de crypto-monnaies fournissant des données de "
+#~ "marché en temps réel, une gestion de portefeuille, des graphiques "
+#~ "interactifs et des capacités d'alerte avancées, enrichi d'éléments "
+#~ "visuels saisonniers."
+
+#~ msgid "Metric 1 (Primary)"
+#~ msgstr "Métrique 1 (Primaire)"
+
+#~ msgid "Metric 2"
+#~ msgstr "Métrique 2"
+
+#~ msgid "Metric 3"
+#~ msgstr "Métrique 3"
+
+#~ msgid "General"
+#~ msgstr "Général"
+
+#~ msgid "DevTools (Debug)"
+#~ msgstr "Outils de développement (Débogage)"
+
+#~ msgid "Developer Options"
+#~ msgstr "Options pour les développeurs"
+
+#~ msgid "Applet Settings"
+#~ msgstr "Paramètres de l'applet"
+
+#~ msgid "CoinGecko API Configuration"
+#~ msgstr "Configuration de l'API CoinGecko"
+
+#~ msgid "Display and Activation"
+#~ msgstr "Affichage et Activation"
+
+#~ msgid "Data Source (API)"
+#~ msgstr "Source de données (API)"
+
+#~ msgid "Color Settings"
+#~ msgstr "Paramètres de couleur"
+
+#~ msgid "Changes will activate on the next API update interval."
+#~ msgstr ""
+#~ "Les modifications seront activées lors du prochain intervalle de mise à "
+#~ "jour de l'API."
+
+#~ msgid "CoinGecko API Key (Demo or Pro)"
+#~ msgstr "Clé API CoinGecko (Démo ou Pro)"
+
+#~ msgid "Unlocks higher limits and more stable data queries."
+#~ msgstr ""
+#~ "Débloque des limites plus élevées et des requêtes de données plus stables."
+
+#~ msgid ""
+#~ "CALL TRACKING OVERVIEW:\n"
+#~ "\n"
+#~ "• BASIC CALLS: Run via public servers (approx. 5-15 calls/min). \n"
+#~ "  Used for: Standard price queries (saves key quota).\n"
+#~ "\n"
+#~ "• KEY CALLS: Run via your Demo Key quota.\n"
+#~ "  Used for: Charts, coin details & more stable queries.\n"
+#~ "\n"
+#~ "LIMITS (DEMO KEY):\n"
+#~ "• Total: 10,000 calls per month\n"
+#~ "• Speed: Max. 30 requests per minute\n"
+#~ "\n"
+#~ "The tracking in the footer shows you in real-time how many requests have "
+#~ "been used so you can keep an eye on your monthly 10k limit."
+#~ msgstr ""
+#~ "APERÇU DU SUIVI DES APPELS :\n"
+#~ "\n"
+#~ "• APPELS DE BASE : Exécutés via des serveurs publics (env. 5-15 appels/"
+#~ "min). \n"
+#~ "  Utilisé pour : Requêtes de prix standard (économise le quota de clé).\n"
+#~ "\n"
+#~ "• APPELS CLÉ : Exécutés via votre quota de clé Démo.\n"
+#~ "  Utilisé pour : Graphiques, détails des pièces et requêtes plus "
+#~ "stables.\n"
+#~ "\n"
+#~ "LIMITES (CLÉ DÉMO) :\n"
+#~ "• Total : 10 000 appels par mois\n"
+#~ "• Vitesse : Max. 30 requêtes par minute\n"
+#~ "\n"
+#~ "Le suivi en bas de page vous montre en temps réel combien de requêtes ont "
+#~ "été utilisées afin que vous puissiez garder un œil sur votre limite "
+#~ "mensuelle de 10k."
+
+#~ msgid "Show Active Alarms"
+#~ msgstr "Afficher les alarmes actives"
+
+#~ msgid "Shows the count of active alarms in the footer."
+#~ msgstr "Affiche le nombre d'alarmes actives dans le pied de page."
+
+#~ msgid "Show Monthly Statistics"
+#~ msgstr "Afficher les statistiques mensuelles"
+
+#~ msgid "Shows total API key calls this month."
+#~ msgstr "Affiche le total des appels de clé API ce mois-ci."
+
+#~ msgid "Show Daily Average"
+#~ msgstr "Afficher la moyenne quotidienne"
+
+#~ msgid "Shows the calculated average per day."
+#~ msgstr "Affiche la moyenne calculée par jour."
+
+#~ msgid "Candle Charts as Default"
+#~ msgstr "Graphiques en chandeliers par défaut"
+
+#~ msgid "Shows charts as candlesticks by default where possible."
+#~ msgstr ""
+#~ "Affiche les graphiques sous forme de chandeliers par défaut lorsque cela "
+#~ "est possible."
+
+#~ msgid "Chart: Bullish Candle Color (Up)"
+#~ msgstr "Graphique : Couleur de bougie haussière (Haut)"
+
+#~ msgid "Color for rising candles."
+#~ msgstr "Couleur pour les bougies montantes."
+
+#~ msgid "Chart: Bearish Candle Color (Down)"
+#~ msgstr "Graphique : Couleur de bougie baissière (Bas)"
+
+#~ msgid "Color for falling candles."
+#~ msgstr "Couleur pour les bougies descendantes."
+
+#~ msgid "Price Alarm"
+#~ msgstr "Alarme de prix"
+
+#~ msgid "Notification when this price is reached."
+#~ msgstr "Notification lorsque ce prix est atteint."
+
+#~ msgid "Enter the target price e.g. 5 or 2598. 0 disables the alarm."
+#~ msgstr "Entrez le prix cible, par ex. 5 ou 2598. 0 désactive l'alarme."
+
+#~ msgid "Percent Alarm"
+#~ msgstr "Alarme de pourcentage"
+
+#~ msgid "Alarm on percentage change (24h)."
+#~ msgstr "Alarme sur changement de pourcentage (24h)."
+
+#~ msgid "Enter a percentage value e.g. 5. 0 disables the alarm."
+#~ msgstr "Entrez une valeur en pourcentage, par ex. 5. 0 désactive l'alarme."
+
+#~ msgid "Compact Mode"
+#~ msgstr "Mode compact"
+
+#~ msgid "Space-saving display in panel (BTC $85.5K)."
+#~ msgstr "Affichage peu encombrant dans le panneau (BTC $85.5K)."
+
+#~ msgid "Enable Seasonal Theme"
+#~ msgstr "Activer le thème saisonnier"
+
+#~ msgid ""
+#~ "Automatically activates festive designs (e.g. Christmas) at certain times."
+#~ msgstr ""
+#~ "Active automatiquement des designs festifs (par ex. Noël) à certaines "
+#~ "périodes."
+
+#~ msgid "Show Decimals"
+#~ msgstr "Afficher les décimales"
+
+#~ msgid "Toggles the display of cent amounts on or off."
+#~ msgstr "Active ou désactive l'affichage des montants en centimes."
+
+#~ msgid "Show Trend Arrows"
+#~ msgstr "Afficher les flèches de tendance"
+
+#~ msgid "Shows or hides trend arrows for price changes."
+#~ msgstr ""
+#~ "Affiche ou masque les flèches de tendance pour les changements de prix."
+
+#~ msgid "Icon Opacity"
+#~ msgstr "Opacité de l'icône"
+
+#~ msgid "Controls the visibility of crypto icons."
+#~ msgstr "Contrôle la visibilité des icônes crypto."
+
+#~ msgid "Update Interval"
+#~ msgstr "Intervalle de mise à jour"
+
+#~ msgid "How often prices are fetched from CoinGecko."
+#~ msgstr "Fréquence à laquelle les prix sont récupérés de CoinGecko."
+
+#~ msgid "Reset Colors"
+#~ msgstr "Réinitialiser les couleurs"
+
+#~ msgid "Resets all custom colors (charts & metrics) to default values."
+#~ msgstr ""
+#~ "Réinitialise toutes les couleurs personnalisées (graphiques et métriques) "
+#~ "aux valeurs par défaut."
+
+#~ msgid "Update Top Coins List"
+#~ msgstr "Mettre à jour la liste des meilleures pièces"
+
+#~ msgid ""
+#~ "Loads the current top 50 coins from CoinGecko and updates the selection "
+#~ "lists (requires settings restart)."
+#~ msgstr ""
+#~ "Charge les 50 meilleures pièces actuelles de CoinGecko et met à jour les "
+#~ "listes de sélection (nécessite un redémarrage des paramètres)."
+
+#~ msgid "Force ATH Rocket"
+#~ msgstr "Forcer la fusée ATH"
+
+#~ msgid "Always show the rocket animation (for testing purposes)."
+#~ msgstr "Toujours afficher l'animation de la fusée (à des fins de test)."
+
+#~ msgid "Force Seasonal Theme"
+#~ msgstr "Forcer le thème saisonnier"
+
+#~ msgid "Override the date-based theme selection."
+#~ msgstr "Ignorer la sélection de thème basée sur la date."
+
+#~ msgid "Debug Frames (Layout)"
+#~ msgstr "Cadres de débogage (Mise en page)"
+
+#~ msgid "Draws colorful frames around menu elements for layout inspection."
+#~ msgstr ""
+#~ "Dessine des cadres colorés autour des éléments de menu pour l'inspection "
+#~ "de la mise en page."
+
+#~ msgid "Show Error Notifications"
+#~ msgstr "Afficher les notifications d'erreur"
+
+#~ msgid "Sends a desktop notification when an internal error is caught."
+#~ msgstr ""
+#~ "Envoie une notification de bureau lorsqu'une erreur interne est détectée."
+
+#~ msgid "Test Crash (Safe)"
+#~ msgstr "Test de crash (Sûr)"
+
+#~ msgid "Provokes an error to test logging and notifications."
+#~ msgstr ""
+#~ "Provoque une erreur pour tester la journalisation et les notifications."
+
+#~ msgid "Show Icon"
+#~ msgstr "Afficher l'icône"
+
+#~ msgid "Shows the crypto icon next to the price."
+#~ msgstr "Affiche l'icône crypto à côté du prix."
+
+#~ msgid "Toggles the display of decimal places on/off."
+#~ msgstr "Active ou désactive l'affichage des décimales."
+
+#~ msgid "Number of Decimals"
+#~ msgstr "Nombre de décimales"
+
+#~ msgid "Number of decimal places (2-8)."
+#~ msgstr "Nombre de décimales (2-8)."
+
+#~ msgid "Color the Arrow Only"
+#~ msgstr "Colorer la flèche uniquement"
+
+#~ msgid "If active, the price text remains white."
+#~ msgstr "Si actif, le texte du prix reste blanc."
+
+#~ msgid "Show Currency Symbol (e.g. $ or €)"
+#~ msgstr "Afficher le symbole de la devise (par ex. $ ou €)"
+
+#~ msgid "Replaces the currency code with the symbol."
+#~ msgstr "Remplace le code de la devise par le symbole."
+
+#~ msgid "Enabled"
+#~ msgstr "Activé"
+
+#~ msgid "Toggles the display of this metric on/off."
+#~ msgstr "Active ou désactive l'affichage de cette métrique."
+
+#~ msgid "Currency ID (CoinGecko)"
+#~ msgstr "ID de devise (CoinGecko)"
+
+#~ msgid "Select the cryptocurrency from the top list."
+#~ msgstr "Sélectionnez la crypto-monnaie dans la liste principale."
+
+#~ msgid "Custom Currency ID"
+#~ msgstr "ID de devise personnalisée"
+
+#~ msgid "CoinGecko ID (e.g. 'litecoin')"
+#~ msgstr "ID CoinGecko (par ex. 'litecoin')"
+
+#~ msgid "Comparison Currency"
+#~ msgstr "Devise de comparaison"
+
+#~ msgid "Select the currency for the price comparison."
+#~ msgstr "Sélectionnez la devise pour la comparaison des prix."
+
+#~ msgid "Display Symbol"
+#~ msgstr "Symbole d'affichage"
+
+#~ msgid "The symbol displayed on the panel (e.g. BTC)."
+#~ msgstr "Le symbole affiché sur le panneau (par ex. BTC)."
+
+#~ msgid "Color for Rising Price (▲)"
+#~ msgstr "Couleur pour prix en hausse (▲)"
+
+#~ msgid "Select the color for positive price movement."
+#~ msgstr "Sélectionnez la couleur pour un mouvement de prix positif."
+
+#~ msgid "Color for Falling Price (▼)"
+#~ msgstr "Couleur pour prix en baisse (▼)"
+
+#~ msgid "Select the color for negative price movement."
+#~ msgstr "Sélectionnez la couleur pour un mouvement de prix négatif."
+
+#~ msgid "15 Seconds (Minimum)"
+#~ msgstr "15 Secondes (Minimum)"
+
+#~ msgid "30 Seconds"
+#~ msgstr "30 Secondes"
+
+#~ msgid "60 Seconds (1 Minute)"
+#~ msgstr "60 Secondes (1 Minute)"
+
+#~ msgid "120 Seconds (2 Minutes)"
+#~ msgstr "120 Secondes (2 Minutes)"
+
+#~ msgid "300 Seconds (5 Minutes)"
+#~ msgstr "300 Secondes (5 Minutes)"
+
+#~ msgid "Automatic (Date based)"
+#~ msgstr "Automatic (Date based)"
+
+#~ msgid "New Year"
+#~ msgstr "New Year"
+
+#~ msgid "Christmas (General)"
+#~ msgstr "Christmas (General)"
+
+#~ msgid "Christmas (Eve & Day)"
+#~ msgstr "Christmas (Eve & Day)"
+
+#~ msgid "Halloween"
+#~ msgstr "Halloween"
+
+#~ msgid "Valentine's Day"
+#~ msgstr "Valentine's Day"
+
+#~ msgid "Bitcoin Pizza Day"
+#~ msgstr "Bitcoin Pizza Day"
+
+#~ msgid "Easter"
+#~ msgstr "Easter"
+
+#~ msgid "Custom ID"
+#~ msgstr "ID Personnalisé"
+
+#~ msgid "US Dollar (USD)"
+#~ msgstr "Dollar américain (USD)"
+
+#~ msgid "Euro (EUR)"
+#~ msgstr "Euro (EUR)"
+
+#~ msgid "Canadian Dollar (CAD)"
+#~ msgstr "Dollar canadien (CAD)"
+
+#~ msgid "British Pound (GBP)"
+#~ msgstr "Livre sterling (GBP)"
+
+#~ msgid "Japanese Yen (JPY)"
+#~ msgstr "Yen japonais (JPY)"
+
+#~ msgid "Swiss Franc (CHF)"
+#~ msgstr "Franc suisse (CHF)"
+
+#~ msgid "Australian Dollar (AUD)"
+#~ msgstr "Dollar australien (AUD)"
+
+#~ msgid "Happy New Year"
+#~ msgstr "Bonne Année"
+
+#~ msgid " Loading..."
+#~ msgstr " Chargement..."
+
+#~ msgid "Price Alarm: "
+#~ msgstr "Alarme de prix : "
+
+#~ msgid "Target "
+#~ msgstr "Cible "
+
+#~ msgid " reached! Price: "
+#~ msgstr " atteint ! Prix : "
+
+#~ msgid "NEW ALL TIME HIGH 🚀"
+#~ msgstr "NOUVEAU SOMMET HISTORIQUE 🚀"
+
+#~ msgid "Search Coin"
+#~ msgstr "Rechercher une pièce"
+
+#~ msgid "Loading market data..."
+#~ msgstr "Chargement des données du marché..."
+
+#~ msgid "Power Saving Disabled"
+#~ msgstr "Économie d'énergie désactivée"
+
+#~ msgid "New month: Interval reset to 120s."
+#~ msgstr "Nouveau mois : Intervalle réinitialisé à 120s."
+
+#~ msgid "Month: "
+#~ msgstr "Mois : "
