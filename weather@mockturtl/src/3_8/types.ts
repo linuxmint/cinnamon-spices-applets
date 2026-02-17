@@ -19,22 +19,29 @@ export interface Metadata {
 
 export type LocationType = "coordinates" | "postcode";
 
+export enum ProviderErrorCode {
+	OK = 0,
+	NO_KEY = 1,
+}
+
 /**
  * A WeatherProvider must implement this interface.
  */
-export interface WeatherProvider {
+export interface WeatherProvider<Service extends Services = Services, Options = unknown> {
 	readonly needsApiKey: boolean;
 	readonly prettyName: string;
-	readonly name: Services;
+	readonly name: Service;
 	readonly maxForecastSupport: number;
 	readonly maxHourlyForecastSupport: number;
 	readonly website: string;
 	readonly remainingCalls: number | null;
 	readonly supportHourlyPrecipChance: boolean;
-    readonly supportHourlyPrecipVolume: boolean;
+	readonly supportHourlyPrecipVolume: boolean;
 	readonly locationType: LocationType;
 
-	GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null>;
+	GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config, customConfig: Options): Promise<WeatherData | null>;
+
+	ValidConfiguration(config: Config, customConfig: Options): ProviderErrorCode;
 }
 
 export const enum RefreshState {
@@ -86,7 +93,7 @@ export interface AppletError {
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
 export type ErrorSeverity = "hard" | "soft" | "silent";
-export type ApiService = "ipapi" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell" | "met-uk" | "us-weather" | "pirate_weather" | "geoip.fedoreproject";
+export type ApiService = "ipapi" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell" | "met-uk" | "us-weather" | "pirate_weather" | "geoip.fedoraproject" | "geoiplookup";
 export type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
 	"location not found" | "no network response" | "no api response" | "location not covered" |
 	"bad api response - non json" | "bad api response" | "no response body" |
@@ -106,3 +113,4 @@ export type ArrowIcons =
 	"south-west-arrow-weather-symbolic" |
 	"west-arrow-weather-symbolic";
 
+export type RemovePrefix<T extends string, Prefix extends string> = T extends `${Prefix}${infer R}` ? R : never;

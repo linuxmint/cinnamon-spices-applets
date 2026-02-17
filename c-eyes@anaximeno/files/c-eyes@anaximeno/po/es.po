@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-20 06:52-0100\n"
-"PO-Revision-Date: 2025-12-22 22:19-0300\n"
+"POT-Creation-Date: 2026-02-10 17:17-0100\n"
+"PO-Revision-Date: 2026-02-10 19:09-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -34,15 +34,15 @@ msgstr ""
 "en el módulo de configuración de Extensiones de Cinnamon para versiones de "
 "Cinnamon >= 5.4"
 
-#. 4.2/applet.js:396 5.4/applet.js:393
+#. 4.2/applet.js:396 5.4/applet.js:392
 msgid "click to deactivate the eye"
 msgstr "haga clic para desactivar el ojo"
 
-#. 4.2/applet.js:396 5.4/applet.js:393
+#. 4.2/applet.js:396 5.4/applet.js:392
 msgid "click to activate the eye"
 msgstr "haga clic para activar el ojo"
 
-#. 4.2/applet.js:397 5.4/applet.js:394
+#. 4.2/applet.js:397 5.4/applet.js:393
 msgid "TIP"
 msgstr "TIP"
 
@@ -69,7 +69,7 @@ msgstr "Ojo"
 
 #. 4.2->settings-schema.json->effects->title
 #. 5.4->settings-schema.json->effects->title
-#. 6.2->settings-schema.json->effects-page->title
+#. 6.2->settings-schema.json->effects-section->title
 msgid "Effects"
 msgstr "Efectos"
 
@@ -79,7 +79,6 @@ msgstr "Efectos"
 #. 5.4->settings-schema.json->click-generic->title
 #. 6.2->settings-schema.json->general-page->title
 #. 6.2->settings-schema.json->general-section->title
-#. 6.2->settings-schema.json->general-effects-section->title
 msgid "General"
 msgstr "General"
 
@@ -150,9 +149,6 @@ msgstr "Relleno"
 #. 5.4->settings-schema.json->eye-repaint-interval->units
 #. 5.4->settings-schema.json->fade-timeout->units
 #. 6.2->settings-schema.json->repaint-interval->units
-#. 6.2->settings-schema.json->blink-period->units
-#. 6.2->settings-schema.json->blink-gap->units
-#. 6.2->settings-schema.json->idle-delay->units
 msgid "ms"
 msgstr "ms"
 
@@ -231,8 +227,6 @@ msgstr "Color de pupila activado"
 #. 4.2->settings-schema.json->fill-bulb-color-painting->description
 #. 5.4->settings-schema.json->fill-lids-color-painting->description
 #. 5.4->settings-schema.json->fill-bulb-color-painting->description
-#. 6.2->settings-schema.json->fill-lids-color-painting->description
-#. 6.2->settings-schema.json->fill-bulb-color-painting->description
 msgid "Fill the Colors Inside the Eye"
 msgstr "Rellenar los colores del interior del ojo"
 
@@ -483,21 +477,14 @@ msgstr "Color de iris"
 msgid "Pupil Color"
 msgstr "Color de pupila"
 
-#. 6.2->settings-schema.json->blink-effect->description
+#. 6.2->settings-schema.json->blink-effect-enabled->description
 msgid "Blink Effect"
 msgstr "Efecto parpadeo"
 
-#. 6.2->settings-schema.json->blink-effect->options
-msgid "None"
-msgstr "Ninguno"
-
-#. 6.2->settings-schema.json->blink-effect->options
-msgid "When Idle"
-msgstr "Cuando está inactivo"
-
-#. 6.2->settings-schema.json->blink-effect->options
-msgid "Always"
-msgstr "Siempre"
+#. 6.2->settings-schema.json->blink-period->units
+#. 6.2->settings-schema.json->blink-gap->units
+msgid "seconds"
+msgstr "segundos"
 
 #. 6.2->settings-schema.json->blink-period->description
 msgid "Blink Period"
@@ -506,22 +493,36 @@ msgstr "Período de parpadeo"
 #. 6.2->settings-schema.json->blink-period->tooltip
 msgid ""
 "This setting controls the duration of a full blink cycle (closing and "
-"opening). Measured in milliseconds."
+"opening)."
 msgstr ""
 "Este ajuste controla la duración de un ciclo completo de parpadeo (cierre y "
-"apertura). Se mide en milisegundos."
+"apertura)."
 
 #. 6.2->settings-schema.json->blink-gap->description
 msgid "Blink Gap"
 msgstr "Intervalo de parpadeo"
 
 #. 6.2->settings-schema.json->blink-gap->tooltip
-msgid ""
-"This setting controls the time gap between two consecutive blinks. Measured "
-"in milliseconds."
+msgid "This setting controls the time gap between two consecutive blinks."
 msgstr ""
 "Esta configuración controla el intervalo de tiempo entre dos parpadeos "
-"consecutivos. Se mide en milisegundos."
+"consecutivos."
+
+#. 6.2->settings-schema.json->sleep-effect-enabled->description
+msgid "Sleep Effect"
+msgstr "Efecto sueño"
+
+#. 6.2->settings-schema.json->sleep-effect-enabled->tooltip
+msgid ""
+"When enabled, the eyes will slowly close when the system is idle and open "
+"again when activity is detected."
+msgstr ""
+"Cuando está activada, los ojos se cerrarán lentamente cuando el sistema esté "
+"inactivo y se volverán a abrir cuando se detecte actividad."
+
+#. 6.2->settings-schema.json->idle-delay->units
+msgid "minutes"
+msgstr "minutos"
 
 #. 6.2->settings-schema.json->idle-delay->description
 msgid "Idle Delay"
@@ -530,8 +531,7 @@ msgstr "Retardo de inactividad"
 #. 6.2->settings-schema.json->idle-delay->tooltip
 msgid ""
 "This setting controls the time of inactivity (no mouse or keyboard input) "
-"after which the system is considered idle. Measured in milliseconds."
+"after which the system is considered idle."
 msgstr ""
 "Esta configuración controla el tiempo de inactividad (sin entradas del ratón "
-"ni del teclado) tras el cual el sistema se considera inactivo. Se mide en "
-"milisegundos."
+"ni del teclado) tras el cual el sistema se considera inactivo."

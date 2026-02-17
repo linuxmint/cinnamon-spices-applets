@@ -9,13 +9,12 @@
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/services/logger";
-import type { AppletError, LocationData} from "../../types";
+import { ProviderErrorCode, type AppletError, type LocationData, type WeatherProvider } from "../../types";
 import { _, IsLangSupported } from "../../utils";
-import { BaseProvider } from "../BaseProvider";
-import type { OpenWeatherMapError} from "./payload/common";
+import type { OpenWeatherMapError } from "./payload/common";
 import { ConvertLocaleToOWMLang, OWM_SUPPORTED_LANGS } from "./payload/common";
 import { Services, type Config } from "../../config";
-import type { OWMOneCallPayload} from "./payload/onecall";
+import type { OWMOneCallPayload } from "./payload/onecall";
 import { OWMOneCallToWeatherData } from "./payload/onecall";
 import type { OWMWeatherResponse } from "./payload/weather";
 import type { WeatherData } from "../../weather-data";
@@ -24,12 +23,16 @@ import { ErrorHandler } from "../../lib/services/error_handler";
 /** Stores IDs for "lat,long" string, to be able to construct URLs for OpenWeatherMap Website */
 const IDCache: Record<string, number> = {};
 
-export class OpenWeatherMapOneCall extends BaseProvider {
+export interface OpenWeatherOneCallOptions {
+	apiKey: string;
+}
+
+export class OpenWeatherMapOneCall implements WeatherProvider<Services.OpenWeatherMap_OneCall, OpenWeatherOneCallOptions> {
 	//--------------------------------------------------------
 	//  Properties
 	//--------------------------------------------------------
 	public readonly prettyName = _("OpenWeatherMap");
-	public readonly name: Services = Services.OpenWeatherMap_OneCall;
+	public readonly name = Services.OpenWeatherMap_OneCall;
 	public readonly maxForecastSupport = 8;
 	public readonly website = "https://openweathermap.org/";
 	public readonly maxHourlyForecastSupport = 48;
@@ -37,29 +40,30 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 	public readonly remainingCalls: number | null = null;
 	public readonly supportHourlyPrecipChance = true;
 	public readonly supportHourlyPrecipVolume = true;
+	public readonly locationType = "coordinates";
 
 	private base_url = "https://api.openweathermap.org/data/3.0/onecall" //lat=51.5085&lon=-0.1257&appid={YOUR API KEY}"
-	private id_irl  = "https://api.openweathermap.org/data/2.5/weather";
+	private id_irl = "https://api.openweathermap.org/data/2.5/weather";
 
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
 
-	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
-		const params = this.ConstructParams(loc, config.ApiKey, config);
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config, customConfig: OpenWeatherOneCallOptions): Promise<WeatherData | null> {
+		const params = this.ConstructParams(loc, customConfig.apiKey, config);
 
 		const cachedID = IDCache[`${loc.lat},${loc.lon}`];
 
 		// Await both of them, if already have it idPayload will be null
 		// If we don't have the ID we push a call to get it
-		const [ json, idPayload ] = await Promise.all([
+		const [json, idPayload] = await Promise.all([
 			HttpLib.Instance.LoadJsonSimple<OWMOneCallPayload>({
 				url: this.base_url,
 				cancellable,
 				params: params,
 				HandleError: this.HandleError
 			}),
-			(cachedID == null) ? HttpLib.Instance.LoadJsonSimple<OWMWeatherResponse>({url: this.id_irl, cancellable, params, HandleError: this.HandleError}) : Promise.resolve()
+			(cachedID == null) ? HttpLib.Instance.LoadJsonSimple<OWMWeatherResponse>({ url: this.id_irl, cancellable, params, HandleError: this.HandleError }) : Promise.resolve()
 		]);
 
 		// We store the newly gotten ID if we got it
@@ -73,6 +77,13 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 		json.id = cachedID ?? idPayload?.id;
 		return OWMOneCallToWeatherData(json, !!params.lang);
 	};
+
+	public ValidConfiguration(config: Config, customConfig: OpenWeatherOneCallOptions): ProviderErrorCode {
+		if (!customConfig.apiKey) {
+			return ProviderErrorCode.NO_KEY;
+		}
+		return ProviderErrorCode.OK;
+	}
 
 	private ConstructParams(loc: LocationData, key: string, config: Config): HTTPParams {
 		const params: HTTPParams = {

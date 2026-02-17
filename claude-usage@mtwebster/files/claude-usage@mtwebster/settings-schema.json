@@ -1,0 +1,18 @@
+{
+    "update-interval": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "units": "minutes",
+        "description": "Update interval",
+        "tooltip": "How often to poll the Claude API for usage data (in minutes)"
+    },
+    "credentials-path": {
+        "type": "filechooser",
+        "default": "",
+        "description": "Alternate credentials file path",
+        "tooltip": "Path to Claude credentials JSON file (defaults to ~/.claude/.credentials.json otherwise)"
+    }
+}

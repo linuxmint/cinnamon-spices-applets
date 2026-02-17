@@ -15,15 +15,15 @@ This *sound150@claudiux* applet is an enhancement of the Cinnamon system sound a
 
 **Sound volume:**
 
-  * **The volume step can be redefined** (from 1% to 10%).
+  * **The Volume Step can be redefined** (from 1% to 10%).
   * **All multiples of 25% (or only 100%) can be magnetized.**
+  * **The Balance can be adjusted** using the slider in the menu.
   * Before Cinnamon 6.4, the **OSD** is compatible with the [Horizontal OSD](https://cinnamon-spices.linuxmint.com/extensions/view/93) Cinnamon extension.
   * The **OSD** is compatible with Cinnamon 6.4 (use of the 'Horizontal OSD' extension, or 'OSD with numbers' extension, is not recommended).
   * From Cinnamon 6.4, having a horizontal OSD requires the [OSD150@claudiux](https://cinnamon-spices.linuxmint.com/extensions/view/106) extension. Notifications are available to help you install and enable the OSD150@claudiux extension.
+  * From Cinnamon 6.6, users can try to avoid ads by recognizing certain words in the title, which they define themselves.
 
 **The song's cover art** can be displayed when it is correctly embedded in the file (.mp3, .flac ...) or available from the **[Radio3.0 applet](https://cinnamon-spices.linuxmint.com/applets/view/360)**.
-
-The delay between icon and album art display can be set (from 0 up to 10 seconds). 0 means that the icon is not displayed when the album art is available.
 
 **You can use the mouse wheel on this applet to control the sound volume. Use Ctrl+wheel or Shift+wheel to control the microphone volume.**
 
@@ -59,6 +59,10 @@ This applet also requires *imagemagick*. If this package is not installed, the u
  * Since version 5.0.0, settings have been presented in a new way, with 4 tabs: *Behavior*, *Sound*, *Icon*, *Shortcuts*, making this applet highly configurable.
 
 ## FAQ
+
+### How to resize the menu?
+
+  * Resize the menu by grabbing its edges with the mouse.
 
 ### Keyboard shortcuts are not respecting volume step
 

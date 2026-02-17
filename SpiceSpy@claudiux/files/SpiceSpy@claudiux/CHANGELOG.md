@@ -1,3 +1,6 @@
+### v5.7.1~20251230
+  * Minor bugfixes.
+
 ### v5.7.0~20251228
   * You can now interrupt a refresh.
   * You can request to change the icon color when refreshing. You can choose this color.

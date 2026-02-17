@@ -36,6 +36,7 @@ SpicesUpdate@claudiux/**                           @claudiux
 VPN-Sentinel@claudiux/**                           @claudiux
 anime-wallpaper@flyflyan/**                        @fly206
 any-alarm@sophie-la-li/**                          @sophie-la-li
+app-drawer@mostlynick3/**                          @mostlynick3
 app-launcher@mchilli/**                            @mchilli
 asl@santiago/**                                    @SamBurgos
 auto-dark-light@gihaume/**                         @guillaume-mueller
@@ -57,6 +58,8 @@ calendar@simonwiles.net/**                         @simonwiles
 cheaty@centurix/**                                 @centurix
 cinnamon-timer@jake1164/**                         @jake1164
 cinnamonvantage@garlayntoji/**                     @Garlayntoji
+classic-menu@fredcw/**                             @fredcw
+claude-usage@mtwebster/**                          @mtwebster
 clean-show-desktop@filipetorresbr/**               @FilipeTorresBR
 click-clock@wernerstucky/**                        @wernerstucky
 clipboard-eraser@Techcrafter/**                    @Techcrafter
@@ -67,11 +70,13 @@ color-picker@fmete/**                              @icarter09
 combined-monitor@danipin/**                        @d-atoshi
 commandLauncher@scollins/**                        @collinss
 computer@brownsr/**                                @brownsr
+configurable-menu@johndoe8771/**                   @JohnDoe8771
 cpu-monitor-text@gnemonix/**                       @gnemonix
 cpufreq@mtwebster/**                               @yrtimiD
 cryptocoin@guantanamoe/**                          @imDeprecated
 daily-wallpaper@Tomfez/**                          @Tomfez
 darkMode@linuxedo.com/**                           @slgobinath
+day-progress@chmodmasx/**                          @chmodmasx
 ddcci-monitor-control@andr35/**                    @andr35
 ddcci-multi-monitor@tim-we/**                      @GingerGigiCat
 desaturate-all@hkoosha/**                          @klangman
@@ -105,6 +110,7 @@ jenkins@backuity.org/**                            @vitaliis
 kdecapplet@joejoetv/**                             @JoeJoeTV
 kdeccc@Severga/**                                  @Severga
 localipswithsettings@edaubert/**                   @edaubert
+ma-ram-monitor@lanote/**                           @notoyeah
 mailnagapplet@ozderya.net/**                       @hyOzd
 maximus-buttons@hanspr/**                          @hanspr
 maximus-title@hanspr/**                            @hanspr
@@ -116,6 +122,8 @@ mouse-keys-shortcut@GabrielCamara3526/**           @GabrielCamara3526
 multicore-sys-monitor@ccadeptic23/**               @claudiux
 mybookmarks@markbokil.com/**                       @Centurix
 mylauncher@markbokil.com/**                        @Centurix
+nepali-date@bishalacharya/**                       @everestbis
+netspeed@iMayhem/**                                @iMayhem
 netusagemonitor@pdcurtis/**                        @pdcurtis
 network@brownsr/**                                 @brownsr
 networkmonitor@axel358/**                          @axel358
@@ -125,6 +133,7 @@ nightscout@ranneft/**                              @ImmRanneft
 nordvpn-indicator@nickdurante/**                   @nickdurante
 notification-mute@jgillula/**                      @jgillula
 notifications-enhanced@hilyxx/**                   @hilyxx
+nvidia-monitor@kalin91/**                          @kalin91
 nvidia-temp@sophie-la-li/**                        @sophie-la-li
 nvidiaprime@pdcurtis/**                            @pdcurtis
 octopussy@centurix/**                              @centurix
@@ -141,11 +150,14 @@ profile-switcher@pixunil/**                        @pixunil
 proxy-mode@yrtimid/**                              @yrtimiD
 ptt@thbemme/**                                     @thbemme
 qredshift@quintao/**                               @raphaelquintao
+quick-alarm@andreas-glaser/**                      @andreas-glaser
+radio@driglu4it/**                                 @jonath92
 rancher@centurix/**                                @centurix
 ratecurrency@magner/**                             @AleksiMagner
 redshift@marvel4u/**                               @marvel4u
 restart-cinnamon@kolle/**                          @icarter09
 rssNewsticker@KopfDesDaemons/**                    @KopfDesDaemons
+rssdock@lyk4s5/**                                  @lyk4s5
 rswitcher@nixdev.com/**                            @mindbeat
 rust-menu@jerrywham/**                             @jerrywham
 screen-inhibit@mtwebster/**                        @claudiux
@@ -170,6 +182,7 @@ standardIconNames@jerrywham/**                     @jerrywham
 stevedore@centurix/**                              @centurix
 sticky@scollins/**                                 @collinss
 stopwatch@pdcurtis/**                              @pdcurtis
+storage-act-led@mrbartblog/**                      @mrbartblog
 suspend@janax/**                                   @klangman
 sync@szlldm/**                                     @szlldm
 sysmon@rohan/**                                    @222rohan
@@ -194,7 +207,6 @@ vpnLookOut@claudiux/**                             @claudiux
 wakapidisplay@babico/**                            @babico
 wakatimedisplay@inventor96/**                      @inventor96
 wallpaper-slideshow@amaan-mohib/**                 @amaan-mohib
-weather@mockturtl/**                               @Gr3q
 website-notifier@cardsurf/**                       @cardsurf
 window-list@sangorys/**                            @sangorys
 window-list@zeripath.sdf-eu.org/**                 @zeripath
@@ -233,7 +245,6 @@ xsession@claudiux/**                               @claudiux
 # paneldo@beatlink
 # places-bookmarks@dmo60.de
 # places-with-terminal@mtwebster
-# radio@driglu4it
 # rwall@typicalfoobar
 # scripts@paucapo.com
 # separator2@zyzz
@@ -242,5 +253,6 @@ xsession@claudiux/**                               @claudiux
 # systray-collapsible@koutch
 # todo@threefi
 # uptime@vatanuki.kun
+# weather@mockturtl
 # web-developer-menu@infiniteshroom
 # xampp-panel@backids99

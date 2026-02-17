@@ -4,6 +4,7 @@ const Gtk = imports.gi.Gtk;
 const Clutter = imports.gi.Clutter;
 const Pango = imports.gi.Pango;
 const St = imports.gi.St;
+const GnomeSession = imports.misc.gnomeSession;
 const {SignalManager} = imports.misc.signalManager;
 const windowTracker = imports.gi.Cinnamon.WindowTracker.get_default();
 
@@ -258,6 +259,7 @@ class DirectApplet extends Applet.TextIconApplet {
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
             this.on_orientation_changed(orientation);
 
+            this.sessionManager = new GnomeSession.SessionManager();
             this.signals = new SignalManager(null);
             this.appSystem = Cinnamon.AppSystem.get_default();
             this.appFavorites = getAppFavorites();
@@ -892,6 +894,23 @@ class DirectApplet extends Applet.TextIconApplet {
                 }));
             }
         }
+        
+        //system items
+        this.systemSection.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        let logoutItem = new PopupMenu.PopupIconMenuItem(_("Logout"), "system-log-out", St.IconType.SYMBOLIC);
+        logoutItem._icon.set_icon_size(this.iconSize);
+        this.systemSection.addMenuItem(logoutItem);
+        logoutItem.connect("activate", Lang.bind(this, function() {
+            this.menu.close();
+            this.sessionManager.LogoutRemote(0);
+        }));
+        let quitItem = new PopupMenu.PopupIconMenuItem(_("Quit"), "system-shutdown", St.IconType.SYMBOLIC);
+        quitItem._icon.set_icon_size(this.iconSize);
+        this.systemSection.addMenuItem(quitItem);
+        quitItem.connect("activate", Lang.bind(this, function() {
+            this.menu.close();
+            this.sessionManager.ShutdownRemote();
+        }));
     }
     
     buildCustomSection() {

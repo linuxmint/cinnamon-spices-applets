@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-12-28 16:21+0100\n"
-"PO-Revision-Date: 2025-11-17 12:40+0100\n"
+"PO-Revision-Date: 2026-01-01 22:03+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -55,9 +55,8 @@ msgid "Refresh"
 msgstr "Frissítés"
 
 #. applet.js:944
-#, fuzzy
 msgid "Refreshing in progress - Click to stop"
-msgstr "Frissítés folyamatban"
+msgstr "Frissítés folyamatban - Kattintson a leállításhoz"
 
 #. applet.js:969
 msgid "Refreshing in progress"
@@ -104,7 +103,7 @@ msgstr "óra"
 
 #. settings-schema.json->update-interruptible->description
 msgid "The update can be interrupted by the user"
-msgstr ""
+msgstr "A frissítést a felhasználó megszakíthatja"
 
 #. settings-schema.json->standard-opacity->description
 msgid "Opacity in absence of change"
@@ -229,11 +228,11 @@ msgstr "Csak a nem nulla értékek megjelenítése a panelen"
 
 #. settings-schema.json->coloredIcon->description
 msgid "Change icon color while refreshing"
-msgstr ""
+msgstr "Ikon színének módosítása frissítés közben"
 
 #. settings-schema.json->colorWhileRefreshing->description
 msgid "Icon color while refreshing"
-msgstr ""
+msgstr "Ikon színe frissítés közben"
 
 #. settings-schema.json->author-list->columns->title
 msgid "GitHub user name"

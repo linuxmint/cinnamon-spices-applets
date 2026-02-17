@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-11-30 00:16-0500\n"
-"PO-Revision-Date: 2024-10-02 16:30+0200\n"
+"PO-Revision-Date: 2026-01-01 21:57+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.8\n"
 
 #. 5.8/applet.js:59 4.0/applet.js:60 3.2/applet.js:157
 msgid "Initializing"
@@ -872,7 +872,7 @@ msgstr "Qwant"
 
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Custom"
-msgstr ""
+msgstr "Egyéni"
 
 #. 5.8->settings-schema.json->web-search-option->tooltip
 #. 4.0->settings-schema.json->web-search-option->tooltip
@@ -882,11 +882,11 @@ msgstr ""
 
 #. 5.8->settings-schema.json->web-search-custom-url->description
 msgid "URL for custom search"
-msgstr ""
+msgstr "URL az egyéni kereséshez"
 
 #. 5.8->settings-schema.json->web-search-custom-url->tooltip
 msgid "Enter the URL that is prepended to the search query."
-msgstr ""
+msgstr "Írja be a keresési lekérdezés elé fűzött URL-címet."
 
 #. 5.8->settings-schema.json->web-suggestions->description
 #. 4.0->settings-schema.json->web-suggestions->description

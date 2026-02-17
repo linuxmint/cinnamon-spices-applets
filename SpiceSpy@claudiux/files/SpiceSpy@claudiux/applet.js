@@ -337,7 +337,7 @@ class SpiceSpy extends Applet.TextIconApplet {
 
     this.fistTime = true;
     this.loopId = null;
-    this.jobsLoopId = null;
+    this.commentsJobsLoopId = null;
     this.issuesLoopId = null;
     this.is_looping = true;
     
@@ -726,7 +726,8 @@ class SpiceSpy extends Applet.TextIconApplet {
         const currentTime = parseInt(new Date / 1000);
         const difference = currentTime - jsonModifTime;
         if (difference >= 900) { // 900s = 15 min.
-          Util.spawnCommandLineAsync(CACHE_UPDATER+" --update-all");
+          //~ Util.spawnCommandLineAsync(CACHE_UPDATER+" --update-all");
+          Util.spawnCommandLineAsync(CACHE_UPDATER);
         }
       } else {
         Util.spawnCommandLineAsync(CACHE_INIT);
@@ -926,7 +927,7 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.menu.addMenuItem(read_all);
     }
 
-    if (this.issuesJobsList.length === 0) {
+    if (this.issuesJobsList.length === 0 && this.commentsJobsList.length === 0) {
       let refresh = new PopupMenu.PopupIconMenuItem(_("Refresh"), "view-refresh-symbolic", St.IconType.SYMBOLIC);
       refresh.connect("activate",
         () => {
@@ -949,16 +950,16 @@ class SpiceSpy extends Applet.TextIconApplet {
         refresh_in_progress.connect("activate",
         () => {
           if (this.menu) this.menu.toggle(true);
-          if (this.issuesLoopId != null) {
-            source_remove(this.issuesLoopId);
-          }
-          this.issuesLoopId = null;
+          //~ if (this.issuesLoopId != null) {
+            //~ source_remove(this.issuesLoopId);
+          //~ }
+          //~ this.issuesLoopId = null;
           this.issuesJobsList = [];
           
-          if (this.jobsLoopId != null) {
-            source_remove(this.jobsLoopId);
-          }
-          this.jobsLoopId = null;
+          //~ if (this.commentsJobsLoopId != null) {
+            //~ source_remove(this.commentsJobsLoopId);
+          //~ }
+          //~ this.commentsJobsLoopId = null;
           this.commentsJobsList = [];
           //~ this.is_looping = true;
           //~ this.fistTime = false;
@@ -1011,7 +1012,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.renew_caches();
 
     this.loopId = timeout_add_seconds(60, () => { this.loop() });
-    this.jobsLoopId = timeout_add_seconds(15, () => { this.commentsJobs_loop(); return this.is_looping; });
+    this.commentsJobsLoopId = timeout_add_seconds(15, () => { this.commentsJobs_loop(); return this.is_looping; });
     this.iconColorLoopId = timeout_add_seconds(1, () => { this.setIconColor(); return this.is_looping; });
 
     this.update_issues_json();
@@ -1032,7 +1033,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     remove_all_sources();
     if (this.menu) this.menu.removeAll();
     this.loopId = null;
-    this.jobsLoopId = null;
+    this.commentsJobsLoopId = null;
     this.issuesLoopId = null;
     this.issuesJsonLoopId = null;
   } // End of on_applet_removed_from_panel

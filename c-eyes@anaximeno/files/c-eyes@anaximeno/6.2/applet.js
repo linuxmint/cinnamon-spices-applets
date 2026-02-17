@@ -79,11 +79,20 @@ class Eye extends Applet.Applet {
 		this._last_eye_x = null;
 		this._last_eye_y = null;
 
-		this.idle_monitor = new Helpers.IdleMonitor(this.idle_delay);
+		this.idle_monitor = new Helpers.IdleMonitor(this.idle_delay_ms);
+		this.idle_monitor.add_idle_listener(this.on_idle_state_change.bind(this));
 
 		this.last_blink_start = null;
 		this.last_blink_end = null;
+		this.sleep_start_time = null;
+		this.sleep_start_val = 0.0;
+		this.wake_start_time = null;
+		this.wake_start_val = 0.0;
 		this.blink_rate = 0.00;
+
+		this._cached_base_color = null;
+		this._cached_iris_color = null;
+		this._cached_pupil_color = null;
 
 		this.enabled = false;
 		this.set_active(true);
@@ -164,16 +173,6 @@ class Eye extends Applet.Applet {
 				cb: this.on_property_updated,
 			},
 			{
-				key: "fill-lids-color-painting",
-				value: "fill_lids_color_painting",
-				cb: this.on_property_updated,
-			},
-			{
-				key: "fill-bulb-color-painting",
-				value: "fill_bulb_color_painting",
-				cb: this.on_property_updated,
-			},
-			{
 				key: "deactivate-on-fullscreen",
 				value: "deactivate_on_fullscreen",
 				cb: this.on_fullscreen_changed,
@@ -207,9 +206,16 @@ class Eye extends Applet.Applet {
 				},
 			},
 			{
-				key: "blink-effect",
-				value: "blink_effect",
-				cb: null
+				key: "blink-effect-enabled",
+				value: "blink_effect_enabled",
+				cb: () => {
+					if (!this.blink_effect_enabled) {
+						this.last_blink_start = null;
+						this.last_blink_end = null;
+						this.blink_rate = 0.00;
+						this.on_property_updated();
+					}
+				},
 			},
 			{
 				key: "blink-period",
@@ -225,10 +231,9 @@ class Eye extends Applet.Applet {
 				key: "idle-delay",
 				value: "idle_delay",
 				cb: _d.debounce((value) => {
-					if (this.idle_monitor) {
-						this.idle_monitor.destroy();
-					}
-					this.idle_monitor = new Helpers.IdleMonitor(value);
+					if (this.idle_monitor) this.idle_monitor.destroy();
+					this.idle_monitor = new Helpers.IdleMonitor(this.idle_delay_ms);
+					this.idle_monitor.add_idle_listener(this.on_idle_state_change.bind(this));
 				}, 300),
 			}
 		];
@@ -242,6 +247,18 @@ class Eye extends Applet.Applet {
 		));
 
 		return settings;
+	}
+
+	get blink_period_ms() {
+		return this.blink_period * 1000;
+	}
+
+	get blink_gap_ms() {
+		return this.blink_gap * 1000;
+	}
+
+	get idle_delay_ms() {
+		return this.idle_delay * 60 * 1000;
 	}
 
 	on_orientation_changed(orientation) {
@@ -259,6 +276,18 @@ class Eye extends Applet.Applet {
 
 	on_property_updated(value = null) {
 		this.update_sizes();
+
+		if (this.use_alternative_colors) {
+			let [ok, color] = Clutter.Color.from_string(this.base_color);
+			this._cached_base_color = ok ? color : null;
+
+			[ok, color] = Clutter.Color.from_string(this.iris_color);
+			this._cached_iris_color = ok ? color : null;
+
+			[ok, color] = Clutter.Color.from_string(this.pupil_color);
+			this._cached_pupil_color = ok ? color : null;
+		}
+
 		this.area.queue_repaint();
 	}
 
@@ -279,7 +308,7 @@ class Eye extends Applet.Applet {
 		}
 	}
 
-	on_refresh_timeout() {
+	on_eye_refresh() {
 		// if the applet was disabled but the source hasn't
 		// been removed yet, stop the source.
 		if (!this.enabled) return GLib.SOURCE_REMOVE;
@@ -300,7 +329,16 @@ class Eye extends Applet.Applet {
 
 	on_optimization_mode_updated() {
 		this.set_active(this.enabled);
-		global.log(Configs.UUID, `optimizing to ${this.optimization_mode}`);
+		Helpers.log(this.instanceId, `optimization mode updated to ${this.optimization_mode}`);
+	}
+
+	on_idle_state_change() {
+		if (this.idle_monitor.idle) {
+			Helpers.log(this.instanceId, `System is considered idle after ${this.idle_monitor.idle_delay}ms inactivity, sleeping...`);
+		} else {
+			Helpers.log(this.instanceId, "System is considered active again!");
+		}
+		this.on_eye_refresh();
 	}
 
 	update_sizes() {
@@ -339,12 +377,12 @@ class Eye extends Applet.Applet {
 			this.refresh_handler_id = GLib.timeout_add(
 				GLib.PRIORITY_DEFAULT,
 				this.repaint_interval,
-				this.on_refresh_timeout.bind(this),
+				this.on_eye_refresh.bind(this),
 			);
 			this.on_property_updated();
 		}
 
-		global.log(Configs.UUID, `Eye/${this.instanceId} - ${enabled ? "enabled" : "disabled"}`);
+		Helpers.log(this.instanceId, enabled ? "enabled" : "disabled");
 	}
 
 	destroy() {
@@ -361,31 +399,21 @@ class Eye extends Applet.Applet {
 		const theme_node = this.area.get_theme_node();
 		const [mouse_x, mouse_y, _] = global.get_pointer();
 		const [area_x, area_y] = this.get_area_position();
+		const stroke_color = theme_node.get_foreground_color();
 
-		let base_color = theme_node.get_foreground_color();
-		let iris_color = theme_node.get_foreground_color();
-		let pupil_color = theme_node.get_foreground_color();
+		let base_color = stroke_color;
+		let iris_color = stroke_color;
+		let pupil_color = stroke_color;
 
 		if (this.use_alternative_colors) {
-			let [ok, color] = Clutter.Color.from_string(this.base_color);
-			base_color = ok ? color : base_color;
-
-			[ok, color] = Clutter.Color.from_string(this.iris_color);
-			iris_color = ok ? color : iris_color;
-
-			[ok, color] = Clutter.Color.from_string(this.pupil_color);
-			pupil_color = ok ? color : pupil_color;
+			if (this._cached_base_color) base_color = this._cached_base_color;
+			if (this._cached_iris_color) iris_color = this._cached_iris_color;
+			if (this._cached_pupil_color) pupil_color = this._cached_pupil_color;
 		}
-
-		// if (this.blink_effect !== "none") {
-		// 	global.log(Configs.UUID, `Eye/${this.instanceId} - blinking rate: ${this.blink_rate}`);
-		// }
 
 		const padding = this.padding * global.ui_scale;
 		const line_width = this.line_width * global.ui_scale;
 		const is_vertical = this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT;
-		const lids_fill = this.fill_lids_color_painting && this.use_alternative_colors;
-		const bulb_fill = this.fill_bulb_color_painting && this.use_alternative_colors;
 
 		this.eyePainter.drawEye(
 			area,
@@ -401,8 +429,7 @@ class Eye extends Applet.Applet {
 				padding: padding,
 				line_width: line_width,
 				is_vertical: is_vertical,
-				lids_fill: lids_fill,
-				bulb_fill: bulb_fill,
+				fill: this.use_alternative_colors,
 			},
 		);
 	}
@@ -433,7 +460,7 @@ class Eye extends Applet.Applet {
 		const [ox, oy] = this.get_area_position();
 
 		let should_redraw = true;
-		if (this.check_blink_needed()) {
+		if (this.check_pending_animation()) {
 			should_redraw = true;
 		} else if (this._last_mouse_x == mouse_x &&
 			this._last_mouse_y == mouse_y &&
@@ -458,8 +485,12 @@ class Eye extends Applet.Applet {
 				should_redraw = true;
 			} else {
 				const dot_prod = current_x * last_x + current_y * last_y;
-				const cos_angle = dot_prod / Math.sqrt(last_sq_dist * current_sq_dist);
-				should_redraw = cos_angle <= this.cos_repaint_angle;
+				if (dot_prod < 0) {
+					should_redraw = true;
+				} else {
+					const limit_sq = this.cos_repaint_angle * this.cos_repaint_angle;
+					should_redraw = (dot_prod * dot_prod) <= (limit_sq * last_sq_dist * current_sq_dist);
+				}
 			}
 		}
 
@@ -473,39 +504,70 @@ class Eye extends Applet.Applet {
 		return should_redraw;
 	}
 
-	check_blink_needed() {
-		if (this.blink_effect === "none") {
+	check_pending_animation() {
+		const now = Date.now();
+		const is_idle = this.idle_monitor && this.idle_monitor.idle;
+
+		const is_blinking = this.blink_effect_enabled &&
+			this.last_blink_start && this.last_blink_end &&
+			this.last_blink_start <= now && now <= this.last_blink_end;
+
+		if (is_blinking) {
+			const progress = (now - this.last_blink_start) / this.blink_period_ms;
+			this.blink_rate = Math.sin(progress * Math.PI);
+			return true;
+		}
+
+		if (is_idle) {
+			if (this.blink_rate < 1.0) {
+				if (!this.sleep_start_time) {
+					this.sleep_start_time = now;
+					this.sleep_start_val = this.blink_rate;
+				}
+
+				const duration = (this.blink_period_ms || 200) / 2;
+				const progress = Math.min((now - this.sleep_start_time) / duration, 1.0);
+				// Animate from current val to 1.0
+				this.blink_rate = this.sleep_start_val + (1.0 - this.sleep_start_val) * Math.sin(progress * Math.PI / 2);
+				return true;
+			}
+			this.blink_rate = 1.0;
 			return false;
 		}
 
-		const now = Date.now();
+		this.sleep_start_time = null;
 
-		if (this.blink_effect === "always" || (this.blink_effect === "idle" && this.idle_monitor.idle)) {
-			if (this.last_blink_start === null ||
-				this.last_blink_end === null ||
-				this.last_blink_end + this.blink_gap < now
-			) {
-				this.last_blink_start = now;
-				this.last_blink_end = now + this.blink_period;
-				this.blink_rate = 0.00;
-				// global.log(Configs.UUID, `Eye/${this.instanceId} - starting '${this.blink_effect}' blink`);
-				return true;
-			} else if (this.last_blink_start <= now && now <= this.last_blink_end) {
-				let progress = (now - this.last_blink_start) / this.blink_period;
-
-				if (progress <= 0.5) {
-					this.blink_rate = progress * 2;
-				} else {
-					this.blink_rate = 2 - progress * 2;
-				}
-
-				this.blink_rate = Math.round(this.blink_rate * 100) / 100;
-				return true;
-			} else if (this.blink_rate > 0.00) {
-				this.blink_rate = 0.00;
-				// global.log(Configs.UUID, `Eye/${this.instanceId} - ending '${this.blink_effect}' blink`);
-				return true;
+		if (this.blink_rate > 0.01 && !is_blinking) {
+			if (!this.wake_start_time) {
+				this.wake_start_time = now;
+				this.wake_start_val = this.blink_rate;
 			}
+
+			const duration = (this.blink_period_ms || 200) / 2;
+			const progress = Math.min((now - this.wake_start_time) / duration, 1.0);
+			// Animate from current val to 0.0
+			this.blink_rate = this.wake_start_val * Math.cos(progress * Math.PI / 2);
+
+			if (progress >= 1.0) {
+				this.blink_rate = 0.0;
+				this.wake_start_time = null;
+			}
+			return true;
+		}
+		this.wake_start_time = null;
+
+		if (!this.blink_effect_enabled) return false;
+
+		if (!this.last_blink_start || !this.last_blink_end ||
+			(this.last_blink_end + this.blink_gap_ms) < now) {
+			// --
+			this.last_blink_start = now;
+			this.last_blink_end = now + this.blink_period_ms;
+			this.blink_rate = 0.00;
+			return true;
+		} else if (this.blink_rate > 0.00) {
+			this.blink_rate = 0.00;
+			return true;
 		}
 
 		return false;

@@ -1,0 +1,358 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": ["Applet", "Monitor"],
+    "Applet": {
+      "type": "page",
+      "title": "Applet Settings",
+      "sections": [
+        "section_general",
+        "section_temp",
+        "section_memory",
+        "section_gpu",
+        "section_fan"
+      ]
+    },
+    "section_general": {
+      "type": "section",
+      "title": "General Settings",
+      "keys": ["refresh-interval", "encoding", "border-color", "sep_general"]
+    },
+    "section_temp": {
+      "type": "section",
+      "title": "Temperature",
+      "keys": ["show-temp", "temp-unit", "sep_temp"]
+    },
+    "section_memory": {
+      "type": "section",
+      "title": "Memory Usage",
+      "keys": ["show-memory", "memory-display-mode", "sep_memory"]
+    },
+    "section_gpu": {
+      "type": "section",
+      "title": "GPU Utilization",
+      "keys": ["show-gpu-util", "gpu-display-mode", "sep_gpu"]
+    },
+    "section_fan": {
+      "type": "section",
+      "title": "Fan Speed",
+      "keys": ["show-fan-speed", "fan-display-mode", "sep_fan"]
+    },
+    "Monitor": {
+      "type": "page",
+      "title": "Monitor Settings",
+      "sections": [
+        "top_note",
+        "metric_colors_section",
+        "layout_colors_section",
+        "y_axis_section",
+        "x_axis_section"
+      ]
+    },
+    "top_note": {
+      "type": "section",
+      "title": "Note",
+      "keys": ["monitor-note"]
+    },
+    "metric_colors_section": {
+      "type": "section",
+      "title": "Metric Colors",
+      "keys": [
+        "temp-color",
+        "mem_color",
+        "gpu_color",
+        "fan_color"
+      ]
+    },
+    "layout_colors_section": {
+      "type": "section",
+      "title": "Layout Colors",
+      "keys": [
+        "background_color",
+        "sep_axes_colors",
+        "temp-axis-color",
+        "percent-axis-color",
+        "x-axis-color",
+        "guidelines-color"
+      ]
+    },
+    "y_axis_section": {
+      "type": "section",
+      "title": "Y-Axis Settings",
+      "keys": ["y-axis-steps", "y-axis-temp-unit"]
+    },
+    "x_axis_section": {
+      "type": "section",
+      "title": "X-Axis Settings",
+      "keys": [
+        "x-axis-steps",
+        "x-axis-unit",
+        "x-axis-length-sec",
+        "x-axis-length-min",
+        "x-axis-length-hour",
+        "sep_xaxis"
+      ]
+    }
+  },
+  "monitor-note": {
+    "type": "label",
+    "description": "Changes to monitor settings will take effect after restarting the monitor."
+  },
+  "y-axis-steps": {
+    "type": "combobox",
+    "default": 3,
+    "options": {
+      "1 Line (50%)": 1,
+      "2 Lines (33%, 66%)": 2,
+      "3 Lines (25%, 50%, 75%)": 3,
+      "4 Lines (20%, 40%, 60%, 80%)": 4,
+      "5 Lines (16%, 33%, 50%, 66%, 83%)": 5,
+      "9 Lines (Every 10%)": 9
+    },
+    "description": "Y-Axis Guides",
+    "tooltip": "Number of guide lines for the Y-Axis."
+  },
+  "y-axis-temp-unit": {
+    "type": "combobox",
+    "default": "C",
+    "options": {
+      "Celsius (°C)": "C",
+      "Fahrenheit (°F)": "F"
+    },
+    "description": "Y-Axis Temperature Unit",
+    "tooltip": "Unit for the temperature axis in the monitor."
+  },
+  "x-axis-steps": {
+    "type": "combobox",
+    "default": 2,
+    "options": {
+      "1 Line (50%)": 1,
+      "2 Lines (33%, 66%)": 2,
+      "3 Lines (25%, 50%, 75%)": 3,
+      "4 Lines (20%, 40%, 60%, 80%)": 4,
+      "5 Lines (16%, 33%, 50%, 66%, 83%)": 5,
+      "9 Lines (Every 10%)": 9
+    },
+    "description": "X-Axis Guides",
+    "tooltip": "Number of vertical guide lines for the X-Axis."
+  },
+  "x-axis-unit": {
+    "type": "combobox",
+    "default": "seconds",
+    "options": {
+      "Seconds": "seconds",
+      "Minutes": "minutes",
+      "Hours": "hours"
+    },
+    "description": "X-Axis Unit",
+    "tooltip": "Unit of time for the X-Axis."
+  },
+  "sep_xaxis": {
+    "type": "separator"
+  },
+  "x-axis-length-sec": {
+    "type": "spinbutton",
+    "default": 60,
+    "min": 15,
+    "max": 300,
+    "step": 15,
+    "units": "s",
+    "description": "X-Axis Length (Seconds)",
+    "tooltip": "Total duration shown on the graph.",
+    "dependency": "x-axis-unit=seconds"
+  },
+  "x-axis-length-min": {
+    "type": "spinbutton",
+    "default": 10,
+    "min": 1,
+    "max": 120,
+    "step": 1,
+    "units": "m",
+    "description": "X-Axis Length (Minutes)",
+    "tooltip": "Total duration shown on the graph.",
+    "dependency": "x-axis-unit=minutes"
+  },
+  "x-axis-length-hour": {
+    "type": "spinbutton",
+    "default": 1,
+    "min": 0.5,
+    "max": 12,
+    "step": 0.5,
+    "units": "h",
+    "description": "X-Axis Length (Hours)",
+    "tooltip": "Total duration shown on the graph.",
+    "dependency": "x-axis-unit=hours"
+  },
+  "temp-color": {
+    "type": "colorchooser",
+    "default": "rgba(245, 23, 23, 1.0)",
+    "description": "Temperature Color",
+    "tooltip": "Color used for temperature in the graph."
+  },
+  "mem_color": {
+    "type": "colorchooser",
+    "default": "rgba(251, 255, 7, 1.0)",
+    "description": "Memory Usage Color",
+    "tooltip": "Color used for memory usage in the graph."
+  },
+  "gpu_color": {
+    "type": "colorchooser",
+    "default": "rgba(14, 216, 21, 1.0)",
+    "description": "GPU Utilization Color",
+    "tooltip": "Color used for GPU utilization in the graph."
+  },
+  "fan_color": {
+    "type": "colorchooser",
+    "default": "rgba(120, 5, 228, 1.0)",
+    "description": "Fan Speed Color",
+    "tooltip": "Color used for fan speed in the graph."
+  },
+  "background_color": {
+    "type": "colorchooser",
+    "default": "rgba(0, 0, 0, 1.0)",
+    "description": "Background Color",
+    "tooltip": "Background color of the graph."
+  },
+  "sep_axes_colors": {
+    "type": "separator"
+  },
+  "temp-axis-color": {
+    "type": "colorchooser",
+    "default": "rgba(245, 23, 23, 1.0)",
+    "description": "Temperature Axis Color",
+    "tooltip": "Color for the temperature axis labels."
+  },
+  "percent-axis-color": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 1.0)",
+    "description": "Percentage Axis Color",
+    "tooltip": "Color for the percentage axis labels."
+  },
+  "x-axis-color": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 1.0)",
+    "description": "X-Axis Color",
+    "tooltip": "Color for the X-axis labels (Time)."
+  },
+  "guidelines-color": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.3)",
+    "description": "Guidelines Color",
+    "tooltip": "Color for the grid/guide lines."
+  },
+  "sep_general": {
+    "type": "separator"
+  },
+  "sep_temp": {
+    "type": "separator"
+  },
+  "sep_memory": {
+    "type": "separator"
+  },
+  "sep_gpu": {
+    "type": "separator"
+  },
+  "sep_fan": {
+    "type": "separator"
+  },
+
+  "refresh-interval": {
+    "type": "spinbutton",
+    "default": 1.5,
+    "min": 0.5,
+    "max": 86400,
+    "step": 0.5,
+    "units": "s",
+    "description": "Refresh Interval",
+    "tooltip": "How often to update the GPU stats (in seconds)."
+  },
+  "border-color": {
+    "type": "colorchooser",
+    "default": "rgba(0, 0, 0, 0.0)",
+    "description": "Applet Border Color",
+    "tooltip": "Color of the applet border. Set alpha to 0 for no border."
+  },
+  "encoding": {
+    "type": "combobox",
+    "default": "utf8",
+    "options": {
+      "UTF-8": "utf8",
+      "macintosh": "mac",
+      "ASCII": "windows-1252"
+    },
+    "description": "nvidia-smi Output Encoding",
+    "tooltip": "Select the character encoding used by nvidia-smi output."
+  },
+
+  "show-temp": {
+    "type": "switch",
+    "default": true,
+    "description": "Show Temperature",
+    "tooltip": "Show GPU temperature in the panel."
+  },
+  "temp-unit": {
+    "type": "combobox",
+    "default": "C",
+    "options": {
+      "Celsius (°C)": "C",
+      "Fahrenheit (°F)": "F"
+    },
+    "description": "Temperature Unit",
+    "tooltip": "Choose the unit for displaying GPU temperature.",
+    "dependency": "show-temp"
+  },
+
+  "show-memory": {
+    "type": "switch",
+    "default": true,
+    "description": "Show Memory Usage",
+    "tooltip": "Show GPU memory usage in the panel."
+  },
+  "memory-display-mode": {
+    "type": "combobox",
+    "default": "pie",
+    "options": {
+      "Text (Used / Total)": "text",
+      "Pie Chart": "pie"
+    },
+    "description": "Memory Display Mode",
+    "tooltip": "Choose how to display memory usage: as text or as a pie chart.",
+    "dependency": "show-memory"
+  },
+
+  "show-gpu-util": {
+    "type": "switch",
+    "default": true,
+    "description": "Show GPU Utilization",
+    "tooltip": "Show GPU utilization percentage in the panel."
+  },
+  "gpu-display-mode": {
+    "type": "combobox",
+    "default": "pie",
+    "options": {
+      "Text (Percent)": "text",
+      "Pie Chart": "pie"
+    },
+    "description": "GPU Display Mode",
+    "tooltip": "Choose how to display GPU utilization: as text or as a pie chart.",
+    "dependency": "show-gpu-util"
+  },
+
+  "show-fan-speed": {
+    "type": "switch",
+    "default": true,
+    "description": "Show Fan Speed",
+    "tooltip": "Show GPU fan speed percentage in the panel."
+  },
+  "fan-display-mode": {
+    "type": "combobox",
+    "default": "pie",
+    "options": {
+      "Text (Percent)": "text",
+      "Pie Chart": "pie"
+    },
+    "description": "Fan Display Mode",
+    "tooltip": "Choose how to display fan speed: as text or as a pie chart.",
+    "dependency": "show-fan-speed"
+  }
+}

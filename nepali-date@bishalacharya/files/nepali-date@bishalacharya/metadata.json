@@ -1,0 +1,6 @@
+{
+    "uuid": "nepali-date@bishalacharya",
+  "name": "Nepali Date (BS)",
+    "description": "Show Nepali (Bikram Sambat) date",
+    "version": "1.0",
+    "max-instances": -1}

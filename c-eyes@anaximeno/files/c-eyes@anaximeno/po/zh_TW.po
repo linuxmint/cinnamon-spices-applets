@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: c-eyes@anaximeno 3.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-20 06:52-0100\n"
+"POT-Creation-Date: 2026-02-10 17:17-0100\n"
 "PO-Revision-Date: 2025-08-30 03:12+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -28,15 +28,15 @@ msgstr ""
 "並移至名為 mouse-click-effects 的新擴充元件，Cinnamon 5.4 以上的版本已可\n"
 "透過 Cinnamon 擴充元件設定模組進行安裝。"
 
-#. 4.2/applet.js:396 5.4/applet.js:393
+#. 4.2/applet.js:396 5.4/applet.js:392
 msgid "click to deactivate the eye"
 msgstr "點選以停用眼睛"
 
-#. 4.2/applet.js:396 5.4/applet.js:393
+#. 4.2/applet.js:396 5.4/applet.js:392
 msgid "click to activate the eye"
 msgstr "點選以啟用眼睛"
 
-#. 4.2/applet.js:397 5.4/applet.js:394
+#. 4.2/applet.js:397 5.4/applet.js:393
 msgid "TIP"
 msgstr "小提示"
 
@@ -61,7 +61,7 @@ msgstr "眼睛"
 
 #. 4.2->settings-schema.json->effects->title
 #. 5.4->settings-schema.json->effects->title
-#. 6.2->settings-schema.json->effects-page->title
+#. 6.2->settings-schema.json->effects-section->title
 msgid "Effects"
 msgstr "特效"
 
@@ -71,7 +71,6 @@ msgstr "特效"
 #. 5.4->settings-schema.json->click-generic->title
 #. 6.2->settings-schema.json->general-page->title
 #. 6.2->settings-schema.json->general-section->title
-#. 6.2->settings-schema.json->general-effects-section->title
 msgid "General"
 msgstr "一般"
 
@@ -142,9 +141,6 @@ msgstr "內距"
 #. 5.4->settings-schema.json->eye-repaint-interval->units
 #. 5.4->settings-schema.json->fade-timeout->units
 #. 6.2->settings-schema.json->repaint-interval->units
-#. 6.2->settings-schema.json->blink-period->units
-#. 6.2->settings-schema.json->blink-gap->units
-#. 6.2->settings-schema.json->idle-delay->units
 msgid "ms"
 msgstr "毫秒"
 
@@ -220,8 +216,6 @@ msgstr "啟用時的瞳孔顏色"
 #. 4.2->settings-schema.json->fill-bulb-color-painting->description
 #. 5.4->settings-schema.json->fill-lids-color-painting->description
 #. 5.4->settings-schema.json->fill-bulb-color-painting->description
-#. 6.2->settings-schema.json->fill-lids-color-painting->description
-#. 6.2->settings-schema.json->fill-bulb-color-painting->description
 msgid "Fill the Colors Inside the Eye"
 msgstr "填滿眼睛內部的顏色"
 
@@ -469,21 +463,14 @@ msgstr "虹膜顏色"
 msgid "Pupil Color"
 msgstr "瞳孔顏色"
 
-#. 6.2->settings-schema.json->blink-effect->description
+#. 6.2->settings-schema.json->blink-effect-enabled->description
 #, fuzzy
 msgid "Blink Effect"
 msgstr "特效"
 
-#. 6.2->settings-schema.json->blink-effect->options
-msgid "None"
-msgstr ""
-
-#. 6.2->settings-schema.json->blink-effect->options
-msgid "When Idle"
-msgstr ""
-
-#. 6.2->settings-schema.json->blink-effect->options
-msgid "Always"
+#. 6.2->settings-schema.json->blink-period->units
+#. 6.2->settings-schema.json->blink-gap->units
+msgid "seconds"
 msgstr ""
 
 #. 6.2->settings-schema.json->blink-period->description
@@ -493,7 +480,7 @@ msgstr ""
 #. 6.2->settings-schema.json->blink-period->tooltip
 msgid ""
 "This setting controls the duration of a full blink cycle (closing and "
-"opening). Measured in milliseconds."
+"opening)."
 msgstr ""
 
 #. 6.2->settings-schema.json->blink-gap->description
@@ -502,9 +489,22 @@ msgid "Blink Gap"
 msgstr "閃爍"
 
 #. 6.2->settings-schema.json->blink-gap->tooltip
+msgid "This setting controls the time gap between two consecutive blinks."
+msgstr ""
+
+#. 6.2->settings-schema.json->sleep-effect-enabled->description
+#, fuzzy
+msgid "Sleep Effect"
+msgstr "啟用特效"
+
+#. 6.2->settings-schema.json->sleep-effect-enabled->tooltip
 msgid ""
-"This setting controls the time gap between two consecutive blinks. Measured "
-"in milliseconds."
+"When enabled, the eyes will slowly close when the system is idle and open "
+"again when activity is detected."
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->units
+msgid "minutes"
 msgstr ""
 
 #. 6.2->settings-schema.json->idle-delay->description
@@ -514,5 +514,5 @@ msgstr ""
 #. 6.2->settings-schema.json->idle-delay->tooltip
 msgid ""
 "This setting controls the time of inactivity (no mouse or keyboard input) "
-"after which the system is considered idle. Measured in milliseconds."
+"after which the system is considered idle."
 msgstr ""

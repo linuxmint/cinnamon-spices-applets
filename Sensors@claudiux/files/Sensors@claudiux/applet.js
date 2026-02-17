@@ -296,6 +296,7 @@ class SensorsApplet extends Applet.Applet {
 
     // General tab
     this.s.bind("show_tooltip", "show_tooltip", () => { this.on_settings_changed() });
+    this.s.bind("do_not_check_dependencies", "do_not_check_dependencies");
     this.s.bind("has_set_markup", "has_set_markup");
     this.s.bind("interval", "interval", () => { this.on_settings_changed() });
     this.s.bind("keep_size", "keep_size", () => { this.updateUI() });
@@ -1727,25 +1728,33 @@ class SensorsApplet extends Applet.Applet {
   }
 
   on_applet_added_to_panel(userEnabled) {
-    // Check about dependencies:
-    this.checkDepInterval = null;
-    if (this.dependencies.areDepMet()) {
-      // All dependencies are installed. Now, run the loop!:
+    if (!this.do_not_check_dependencies) {
+      // Check about dependencies:
+      this.checkDepInterval = null;
+      if (this.dependencies.areDepMet()) {
+        // All dependencies are installed. Now, run the loop!:
+        spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
+        this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
+        this.isLooping = true;
+        this.reap_sensors();
+      } else {
+        // Some dependencies are missing. Suggest to the user to install them.
+        this.isLooping = false;
+        this.checkDepInterval = setInterval(
+          () => {
+            clearInterval(this.checkDepInterval);
+            this.dependencies.check_dependencies();
+            this.checkDepInterval = null;
+          },
+          10000
+        );
+      }
+    } else {
+      this.checkDepInterval = null;
       spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
       this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
       this.isLooping = true;
       this.reap_sensors();
-    } else {
-      // Some dependencies are missing. Suggest to the user to install them.
-      this.isLooping = false;
-      this.checkDepInterval = setInterval(
-        () => {
-          clearInterval(this.checkDepInterval);
-          this.dependencies.check_dependencies();
-          this.checkDepInterval = null;
-        },
-        10000
-      );
     }
   }
 

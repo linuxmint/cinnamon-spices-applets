@@ -15,7 +15,8 @@
         "section_Display",
         "section_Tooltip",
         "section_Report",
-        "section_remove_incompatible_xlets"
+        "section_remove_incompatible_xlets",
+        "section_dependencies"
       ]
     },
     "page_Temperatures": {
@@ -107,6 +108,13 @@
       "title": "Remove from panels certain applets that also use sensors",
       "keys": [
         "remove_temperatureATfevimu"
+      ]
+    },
+    "section_dependencies": {
+      "type": "section",
+      "title": "Dependencies",
+      "keys": [
+        "do_not_check_dependencies"
       ]
     },
     "section_tempDisktemp": {
@@ -393,6 +401,12 @@
     "description": "Show in menu the action: Restart this applet",
     "tooltip": "Whether or not to display in menu the action: Restart this applet."
   },
+  "do_not_check_dependencies": {
+    "type": "switch",
+    "default": false,
+    "description": "Do not check dependencies",
+    "tooltip": "If you do not want to install certain dependencies (e.g., fonts), check this box. Be careful with dependencies that are necessary for this applet to function properly."
+  },
   "make_disktemp_readable_by_user": {
     "type": "button",
     "description": "Make disk temperature user-readable",
@@ -400,13 +414,13 @@
   },
   "show_temp": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_temp_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_temp"
@@ -615,13 +629,13 @@
   },
   "show_fan": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_fan_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_fan"
@@ -757,13 +771,13 @@
   },
   "show_volt": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_volt_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_volt"
@@ -882,13 +896,13 @@
   },
   "show_intrusion": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_intrusion_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": " Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_intrusion"

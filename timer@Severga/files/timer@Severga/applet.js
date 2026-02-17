@@ -276,11 +276,13 @@ TimerApplet.prototype = {
       this.periodS = this.sSpin.value;
       this.period = this.periodH * 3600 + this.periodM * 60 + this.periodS;
       this.endTime = new Date(Date.now() + this.period * 1000);
-      if (this.period) {
+      if (this.period > 0) {
         this.saved_endTime = this.endTime.getTime();
         this._tick();
-      } else {
+      }
+      else {
         this.saved_endTime = 0;
+        this.periodMenuItem.setLabel(_("In:  00:00:00"));
         this.timeMenuItem.setLabel(_("At:  --:--:--"));
       }
     }.bind(this));

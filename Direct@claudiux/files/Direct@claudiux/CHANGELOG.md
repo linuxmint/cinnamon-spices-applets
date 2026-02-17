@@ -1,3 +1,6 @@
+### v1.6.2~20260107
+* System section: Add Quit and Logout buttons.
+
 ### v1.6.1~20251223
 * "Text size" becomes "Text width".
 * Changes the method to open the menu.

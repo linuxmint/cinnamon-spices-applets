@@ -1,3 +1,13 @@
+### v5.10.3~20260215
+  * Added option "Do not check dependencies" in General tab.
+  * Fixes [#8325](https://github.com/linuxmint/cinnamon-spices-applets/issues/8325)
+
+### v5.10.2~20260214
+  * Fixes [#8316](https://github.com/linuxmint/cinnamon-spices-applets/issues/8316)
+
+### v5.10.1~20260130
+  * Ensures compatibility with several old versions of Cinnamon.
+
 ### v5.10.0~20251212
   * Use xlet-settings instead of cinnamon-settings to configure applet.
 

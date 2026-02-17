@@ -1,3 +1,41 @@
+### v3.1.1~20260209
+* Added CSS file stylesheet.css.
+* Fixes [#8297](https://github.com/linuxmint/cinnamon-spices-applets/issues/8297)
+
+### v3.1.0~20260205
+* Corrects errors that occur when changing methods.
+* Corrects errors due to translations.
+
+### v3.0.4~20260205
+* Minor bug fix.
+
+### v3.0.3~20260204
+* Bug fix: xsct now launches correctly on certain platforms.
+
+### v3.0.2~20260203
+* Asynchronously change of Screen Temperature.
+
+### v3.0.1~20260202
+* Now can display shortcuts in the menu.
+* Improves translation.
+
+### v3.0.0~20260201
+* The user can choose between using Red-Green-Blue Gamma or using the Screen Temperature (K).
+* To use the Screen Temperature, the user must install `xsct`.
+
+### v2.7.2~20260125
+* Improves the display of the menu.
+* Code cleanup.
+
+### v2.7.1~20260121
+* Compatible with Cinnamon 6.6.
+* Allows users to edit / add presets.
+* Fixes [#8227](https://github.com/linuxmint/cinnamon-spices-applets/issues/8227)
+
+### v2.7.0~20260107
+* For cinnamon 6.6: Does not use the shellUtils library, to avoid any problem with Gio.UnixOutputStream.
+* Thus, permanently fixes [#8111](https://github.com/linuxmint/cinnamon-spices-applets/issues/8111)
+
 ### v2.6.1~20251223
 * Solves a problem with Gio.UnixOutputStream.
 * Fixes [#8111](https://github.com/linuxmint/cinnamon-spices-applets/issues/8111)

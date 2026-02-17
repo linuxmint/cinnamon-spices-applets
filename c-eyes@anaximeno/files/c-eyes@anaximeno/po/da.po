@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-20 06:52-0100\n"
+"POT-Creation-Date: 2026-02-10 17:17-0100\n"
 "PO-Revision-Date: 2023-12-29 08:19+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -28,15 +28,15 @@ msgid ""
 "on the Cinnamon Extensions settings module for versions of Cinnamon >= 5.4"
 msgstr ""
 
-#. 4.2/applet.js:396 5.4/applet.js:393
+#. 4.2/applet.js:396 5.4/applet.js:392
 msgid "click to deactivate the eye"
 msgstr "klik for at deaktivere øjet"
 
-#. 4.2/applet.js:396 5.4/applet.js:393
+#. 4.2/applet.js:396 5.4/applet.js:392
 msgid "click to activate the eye"
 msgstr "klik for at aktivere øjet"
 
-#. 4.2/applet.js:397 5.4/applet.js:394
+#. 4.2/applet.js:397 5.4/applet.js:393
 msgid "TIP"
 msgstr "TIP"
 
@@ -63,7 +63,7 @@ msgstr "Øje"
 
 #. 4.2->settings-schema.json->effects->title
 #. 5.4->settings-schema.json->effects->title
-#. 6.2->settings-schema.json->effects-page->title
+#. 6.2->settings-schema.json->effects-section->title
 msgid "Effects"
 msgstr "Effekter"
 
@@ -73,7 +73,6 @@ msgstr "Effekter"
 #. 5.4->settings-schema.json->click-generic->title
 #. 6.2->settings-schema.json->general-page->title
 #. 6.2->settings-schema.json->general-section->title
-#. 6.2->settings-schema.json->general-effects-section->title
 msgid "General"
 msgstr "Generelt"
 
@@ -144,9 +143,6 @@ msgstr "Udfyldning"
 #. 5.4->settings-schema.json->eye-repaint-interval->units
 #. 5.4->settings-schema.json->fade-timeout->units
 #. 6.2->settings-schema.json->repaint-interval->units
-#. 6.2->settings-schema.json->blink-period->units
-#. 6.2->settings-schema.json->blink-gap->units
-#. 6.2->settings-schema.json->idle-delay->units
 msgid "ms"
 msgstr "ms"
 
@@ -219,8 +215,6 @@ msgstr "Aktiveret pupilfarve"
 #. 4.2->settings-schema.json->fill-bulb-color-painting->description
 #. 5.4->settings-schema.json->fill-lids-color-painting->description
 #. 5.4->settings-schema.json->fill-bulb-color-painting->description
-#. 6.2->settings-schema.json->fill-lids-color-painting->description
-#. 6.2->settings-schema.json->fill-bulb-color-painting->description
 msgid "Fill the Colors Inside the Eye"
 msgstr ""
 
@@ -470,21 +464,14 @@ msgstr "Aktiveret irisfarve"
 msgid "Pupil Color"
 msgstr "Aktiveret pupilfarve"
 
-#. 6.2->settings-schema.json->blink-effect->description
+#. 6.2->settings-schema.json->blink-effect-enabled->description
 #, fuzzy
 msgid "Blink Effect"
 msgstr "Effekter"
 
-#. 6.2->settings-schema.json->blink-effect->options
-msgid "None"
-msgstr ""
-
-#. 6.2->settings-schema.json->blink-effect->options
-msgid "When Idle"
-msgstr ""
-
-#. 6.2->settings-schema.json->blink-effect->options
-msgid "Always"
+#. 6.2->settings-schema.json->blink-period->units
+#. 6.2->settings-schema.json->blink-gap->units
+msgid "seconds"
 msgstr ""
 
 #. 6.2->settings-schema.json->blink-period->description
@@ -494,7 +481,7 @@ msgstr ""
 #. 6.2->settings-schema.json->blink-period->tooltip
 msgid ""
 "This setting controls the duration of a full blink cycle (closing and "
-"opening). Measured in milliseconds."
+"opening)."
 msgstr ""
 
 #. 6.2->settings-schema.json->blink-gap->description
@@ -503,9 +490,22 @@ msgid "Blink Gap"
 msgstr "Blink"
 
 #. 6.2->settings-schema.json->blink-gap->tooltip
+msgid "This setting controls the time gap between two consecutive blinks."
+msgstr ""
+
+#. 6.2->settings-schema.json->sleep-effect-enabled->description
+#, fuzzy
+msgid "Sleep Effect"
+msgstr "Aktivér effekter"
+
+#. 6.2->settings-schema.json->sleep-effect-enabled->tooltip
 msgid ""
-"This setting controls the time gap between two consecutive blinks. Measured "
-"in milliseconds."
+"When enabled, the eyes will slowly close when the system is idle and open "
+"again when activity is detected."
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->units
+msgid "minutes"
 msgstr ""
 
 #. 6.2->settings-schema.json->idle-delay->description
@@ -515,5 +515,5 @@ msgstr ""
 #. 6.2->settings-schema.json->idle-delay->tooltip
 msgid ""
 "This setting controls the time of inactivity (no mouse or keyboard input) "
-"after which the system is considered idle. Measured in milliseconds."
+"after which the system is considered idle."
 msgstr ""

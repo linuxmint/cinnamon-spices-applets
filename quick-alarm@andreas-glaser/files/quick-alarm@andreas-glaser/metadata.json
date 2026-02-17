@@ -1,0 +1,7 @@
+{
+  "uuid": "quick-alarm@andreas-glaser",
+  "name": "Quick Alarm",
+  "description": "Queue alarms quickly.",
+  "version": 7,
+  "max-instances": 1
+}

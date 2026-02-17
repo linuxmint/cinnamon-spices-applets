@@ -17,7 +17,7 @@ From Applet Settings:
   * Open this applet settings and configure it using each tab.
   * The Colors tab allows you to set the colors used by Net and Disks devices.
   * In the Net and Disk IO tabs, you can use the “Update Device List” button to display the devices used by your system.
-  * Some changes require the use of the “Refresh All” option in the context menu. Use a “Refresh Rate (ms)” greater than or equal to 1000 for better results.
+  * Some changes require the use of the “Refresh All” option in the context menu.
 
 ## Translations
 

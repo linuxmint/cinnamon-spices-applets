@@ -1,0 +1,325 @@
+# CLASSIC MENU
+# This file is put in the public domain.
+# Translated by treasboi, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: classic-menu@fredcw 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-29 14:23-0500\n"
+"PO-Revision-Date: 2026-01-17 03:31+0300\n"
+"Last-Translator: treasboi\n"
+"Language-Team: Turkish\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#. metadata.json->name
+#. applet.js:16
+msgid "Classic Menu"
+msgstr "Klasik Menü"
+
+#. applet.js:16
+msgid "Classic Menu is for cinnamon versions 6.6 and later only."
+msgstr ""
+"Klasik Menü sadece Cinnamon 6.6 ve sonraki sürümler içindir."
+
+#. 6.6/applet.js:397 6.6/applet.js:486
+msgid "Remove from favorites"
+msgstr "Favorilerden sil"
+
+#. 6.6/applet.js:404 6.6/applet.js:489
+msgid "Add to favorites"
+msgstr "Sık kullanılanlara ekle"
+
+#. 6.6/applet.js:473
+msgid "Run with dedicated GPU"
+msgstr "Harici GPU ile çalıştır"
+
+#. 6.6/applet.js:477
+msgid "Add to panel"
+msgstr "Panele ekle"
+
+#. 6.6/applet.js:481
+msgid "Add to desktop"
+msgstr "Masaüstüne ekle"
+
+#. 6.6/applet.js:496
+msgid "Properties"
+msgstr "Özellikler"
+
+#. 6.6/applet.js:501
+msgid "Uninstall"
+msgstr "Kaldır"
+
+#. 6.6/applet.js:759 6.6/applet.js:867
+msgid "This file is no longer available"
+msgstr "Bu dosya artık mevcut değil"
+
+#. 6.6/applet.js:773 6.6/applet.js:881
+msgid "Open with"
+msgstr "Birlikte Aç:"
+
+#. 6.6/applet.js:819 6.6/applet.js:927
+msgid "Other application..."
+msgstr "Başka Uygulama..."
+
+#. 6.6->settings-schema.json->menu->title
+#. 6.6/applet.js:1199
+msgid "Menu"
+msgstr "Menü"
+
+#. 6.6/applet.js:1204
+msgid "Edit menu"
+msgstr "Menüyü düzenle"
+
+#. 6.6/applet.js:2458
+msgid "Places"
+msgstr "Konumlar"
+
+#. 6.6/applet.js:2496
+msgid "Recent Files"
+msgstr "Son Dosyalar"
+
+#. 6.6/applet.js:2511
+msgid "Clear list"
+msgstr "Listeyi temizle"
+
+#. 6.6/applet.js:2512
+msgid "Clear all recent documents"
+msgstr "Son belgelerin tümünü temizle"
+
+#. 6.6/applet.js:2531
+msgid "No recent documents"
+msgstr "Son kullanılan belge yok"
+
+#. 6.6/applet.js:2566
+msgid "Favorites"
+msgstr "Sık Kullanılanlar"
+
+#. 6.6/applet.js:2595
+msgid "All Applications"
+msgstr "Tüm Uygulamalar"
+
+#. 6.6/applet.js:2663
+msgid "Lock Screen"
+msgstr "Ekranı Kilitle"
+
+#. 6.6/applet.js:2664
+msgid "Lock the screen"
+msgstr "Ekranı kilitle"
+
+#. 6.6/applet.js:2688
+msgid "Log Out"
+msgstr "Oturum Kapat"
+
+#. 6.6/applet.js:2689
+msgid "Leave the session"
+msgstr "Oturumu terk et"
+
+#. 6.6/applet.js:2700
+msgid "Shut Down"
+msgstr "Kapat"
+
+#. 6.6/applet.js:2701
+msgid "Shut down the computer"
+msgstr "Bilgisayarı kapat"
+
+#. metadata.json->description
+msgid "The classic Cinnamon menu for cinnamon 6.6 and later"
+msgstr "Cinnamon 6.6 ve sonrası için Klasik Cinnamon menüsü"
+
+#. 6.6->settings-schema.json->panel->title
+msgid "Panel"
+msgstr "Panel"
+
+#. 6.6->settings-schema.json->panel-appear->title
+msgid "Appearance"
+msgstr "Görünüm"
+
+#. 6.6->settings-schema.json->panel-behave->title
+#. 6.6->settings-schema.json->menu-behave->title
+msgid "Behavior"
+msgstr "Davranış"
+
+#. 6.6->settings-schema.json->menu-layout->title
+msgid "Layout and content"
+msgstr "Düzen ve içerik"
+
+#. 6.6->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Menüyü açıp kapatacak klavye kısayolu"
+
+#. 6.6->settings-schema.json->menu-custom->description
+msgid "Use a custom icon and label"
+msgstr "Özel simge ve etiket kullan"
+
+#. 6.6->settings-schema.json->menu-custom->tooltip
+msgid "Check this to specify a custom icon and label"
+msgstr "Özel bir simge ve etiket belirtmek için bunu işaretleyin"
+
+#. 6.6->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr "Simge"
+
+#. 6.6->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "Panelde gösterilecek bir simge seçin."
+
+#. 6.6->settings-schema.json->menu-icon-size->units
+#. 6.6->settings-schema.json->category-icon-size->units
+#. 6.6->settings-schema.json->application-icon-size->units
+#. 6.6->settings-schema.json->fav-icon-size->units
+msgid "px"
+msgstr "px"
+
+#. 6.6->settings-schema.json->menu-icon-size->description
+msgid "Icon size"
+msgstr "Simge boyutu"
+
+#. 6.6->settings-schema.json->menu-label->description
+msgid "Text"
+msgstr "Metin"
+
+#. 6.6->settings-schema.json->menu-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "Panelde gösterilecek özel metni girin."
+
+#. 6.6->settings-schema.json->show-category-icons->description
+msgid "Show category icons"
+msgstr "Kategori simgelerini göster"
+
+#. 6.6->settings-schema.json->show-category-icons->tooltip
+msgid "Choose whether or not to show icons on categories."
+msgstr "Kategorilerde simgelerin gösterilip gösterilmeyeceğini seçin."
+
+#. 6.6->settings-schema.json->category-icon-size->description
+msgid "Categories icon size"
+msgstr "Kategori simge boyutu"
+
+#. 6.6->settings-schema.json->show-application-icons->description
+msgid "Show application icons"
+msgstr "Uygulama simgelerini göster"
+
+#. 6.6->settings-schema.json->show-application-icons->tooltip
+msgid "Choose whether or not to show icons on applications."
+msgstr "Uygulamalarda simgelerin gösterilip gösterilmeyeceğini seçin."
+
+#. 6.6->settings-schema.json->application-icon-size->description
+msgid "Applications icon size"
+msgstr "Uygulama simge boyutu"
+
+#. 6.6->settings-schema.json->favbox-show->description
+msgid "Show favorites and session buttons"
+msgstr "Sık kullanılanları ve oturum düğmelerini göster"
+
+#. 6.6->settings-schema.json->favbox-show->tooltip
+msgid "Choose whether or not to show the left pane of the menu."
+msgstr "Menünün sol bölmesinin gösterilip gösterilmeyeceğini seçin."
+
+#. 6.6->settings-schema.json->fav-icon-size->description
+msgid "Favorites icon size"
+msgstr "Sık kullanılanlar simge boyutu"
+
+#. 6.6->settings-schema.json->show-favorites->description
+msgid "Show favorites"
+msgstr "Sık kullanılanları göster"
+
+#. 6.6->settings-schema.json->show-favorites->tooltip
+msgid "Choose whether or not to show favorite files in the menu."
+msgstr "Menüde sık kullanılan dosyaların gösterilip gösterilmeyeceğini seçin."
+
+#. 6.6->settings-schema.json->show-places->description
+msgid "Show bookmarks and places"
+msgstr "Yer imleri ve konumları göster"
+
+#. 6.6->settings-schema.json->show-places->tooltip
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "Menüde yer imleri ve konumların gösterilip gösterilmeyeceğini seçin."
+
+#. 6.6->settings-schema.json->show-recents->description
+msgid "Show recents"
+msgstr "Son kullanılanları göster"
+
+#. 6.6->settings-schema.json->show-recents->tooltip
+msgid "Choose whether or not to show recents in the menu."
+msgstr "Menüde son kullanılanların gösterilip gösterilmeyeceğini seçin."
+
+#. 6.6->settings-schema.json->category-hover->description
+msgid "Change categories on hover"
+msgstr "Üzerine gelindiğinde kategorileri değiştir"
+
+#. 6.6->settings-schema.json->category-hover->tooltip
+msgid "Choose whether or not to change categories by hovering."
+msgstr "Üzerine gelerek kategorilerin değişip değişmeyeceğini seçin."
+
+#. 6.6->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr "Uygulama listesinde otomatik kaydırmayı etkinleştir"
+
+#. 6.6->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
+"Uygulama listesinde yumuşak otomatik kaydırmayı etkinleştirip etkinleştirmemeyi seçin."
+
+#. 6.6->settings-schema.json->search-filesystem->description
+msgid "Enable filesystem path entry in search box"
+msgstr "Arama çubuğunda dosya yolu girişini etkinleştir"
+
+#. 6.6->settings-schema.json->search-filesystem->tooltip
+msgid "Allows path entry in the menu search box."
+msgstr "Menü arama çubuğunda yol girişi yapılmasına izin verir."
+
+#. 6.6->settings-schema.json->force-show-panel->description
+msgid "Force the panel to be visible when opening the menu"
+msgstr "Menüyü açarken panelin görünmesini zorla"
+
+#. 6.6->settings-schema.json->force-show-panel->tooltip
+msgid ""
+"Opening the menu will also show the main panel (which may be auto-hidden)."
+msgstr ""
+"Menüyü açmak, ana panelin de görünmesini sağlar (panel otomatik gizli olabilir)."
+
+#. 6.6->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr "Faremi üzerine getirdiğimde menüyü aç"
+
+#. 6.6->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr "Fare uygulamacığa girdiğinde menüyü açmayı etkinleştir"
+
+#. 6.6->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "milisaniye"
+
+#. 6.6->settings-schema.json->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Menü üzerine gelme gecikmesi"
+
+#. 6.6->settings-schema.json->hover-delay->tooltip
+msgid "Delay before the menu opens when hovered"
+msgstr "Üzerine gelindiğinde menünün açılma gecikmesi"
+
+#. 6.6->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Menü animasyonlarını kullan"
+
+#. 6.6->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr "Açarken ve kapanırken menü animasyonuna izin ver"
+
+#. 6.6->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Menü düzenleyiciyi aç"
+
+#. 6.6->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr "Menü girişlerinizi özelleştirmek için bu düğmeye basınız."
+
+#. 6.6->settings-schema.json->reset-menu-size-button->description
+msgid "Restore the menu to its original size"
+msgstr "Menüyü varsayılan boyutuna sıfırla"

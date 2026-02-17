@@ -101,15 +101,46 @@ class GraphVBars {
 
     //Draw Border
     let borderColor;
+    let borderRadius = this.applet.borderRadius;
     if (this.applet.borderOn) {
       if (providerName != 'SWAP') {
         borderColor = RGBa2rgba(this.applet.borderColor);
         areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
+        /**       A----------B
+         *       /            \
+         *      H              C
+         *      |              |
+         *      |              |
+         *      G              D
+         *       \            /
+         *        F----------E
+         * 
+        **/ 
+        const A = {x: borderRadius, y: 0};
+        const B = {x: width - borderRadius, y: 0};
+        const C = {x: width, y: borderRadius};
+        const D = {x: width, y: height - borderRadius};
+        const E = {x: width - borderRadius, y: height};
+        const F = {x: borderRadius, y: height};
+        const G = {x: 0, y: height - borderRadius};
+        const H = {x: 0, y: borderRadius};
 
-        areaContext.moveTo(0, 0);
-        areaContext.lineTo(width, 0);
-        areaContext.lineTo(width, height);
-        areaContext.lineTo(0, height);
+        if (borderRadius == 0) {
+          areaContext.moveTo(0, 0);
+          areaContext.lineTo(width, 0);
+          areaContext.lineTo(width, height);
+          areaContext.lineTo(0, height);
+        } else {
+          areaContext.moveTo(A.x, A.y);
+          areaContext.lineTo(B.x, B.y);
+          areaContext.curveTo(width, 0, width, 0, C.x, C.y);
+          areaContext.lineTo(D.x, D.y);
+          areaContext.curveTo(width, height, width, height, E.x, E.y);
+          areaContext.lineTo(F.x, F.y);
+          areaContext.curveTo(0, height, 0, height, G.x, G.y);
+          areaContext.lineTo(H.x, H.y);
+          areaContext.curveTo(0, 0, 0, 0, A.x, A.y);
+        }
 
         areaContext.closePath();
         areaContext.stroke();
@@ -190,7 +221,8 @@ class GraphVBars {
       }
       areaContext.setSourceRGBA(r, g, b, a);
 
-      this.drawRoundedRectangle(areaContext, vbarOffset, _height - vbarHeight, vbarWidth, vbarHeight, 1.5);
+      //~ this.drawRoundedRectangle(areaContext, vbarOffset, _height - vbarHeight, vbarWidth, vbarHeight, 1.5);
+      this.drawRoundedRectangle(areaContext, vbarOffset, _height - vbarHeight, vbarWidth, vbarHeight, 1.0);
       areaContext.fill();
     }
 
@@ -260,14 +292,36 @@ class GraphVBars100 extends GraphVBars {
 
     //Draw Border
     let borderColor;
+    let borderRadius = this.applet.borderRadius;
     if (this.applet.borderOn) {
       if (providerName != 'SWAP') {
         borderColor = RGBa2rgba(this.applet.borderColor);
         areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
-        areaContext.moveTo(0, 0);
-        areaContext.lineTo(width, 0);
-        areaContext.lineTo(width, height);
-        areaContext.lineTo(0, height);
+        const A = {x: borderRadius, y: 0};
+        const B = {x: width - borderRadius, y: 0};
+        const C = {x: width, y: borderRadius};
+        const D = {x: width, y: height - borderRadius};
+        const E = {x: width - borderRadius, y: height};
+        const F = {x: borderRadius, y: height};
+        const G = {x: 0, y: height - borderRadius};
+        const H = {x: 0, y: borderRadius};
+        
+        if (borderRadius == 0) {
+          areaContext.moveTo(0, 0);
+          areaContext.lineTo(width, 0);
+          areaContext.lineTo(width, height);
+          areaContext.lineTo(0, height);
+        } else {
+          areaContext.moveTo(A.x, A.y);
+          areaContext.lineTo(B.x, B.y);
+          areaContext.curveTo(width, 0, width, 0, C.x, C.y);
+          areaContext.lineTo(D.x, D.y);
+          areaContext.curveTo(width, height, width, height, E.x, E.y);
+          areaContext.lineTo(F.x, F.y);
+          areaContext.curveTo(0, height, 0, height, G.x, G.y);
+          areaContext.lineTo(H.x, H.y);
+          areaContext.curveTo(0, 0, 0, 0, A.x, A.y);
+        }
 
         areaContext.closePath();
         areaContext.stroke();
@@ -374,14 +428,35 @@ class GraphPieChart {
 
     //Draw Border
     let borderColor;
+    let borderRadius = this.applet.borderRadius;
     if (this.applet.borderOn) {
       borderColor = RGBa2rgba(this.applet.borderColor);
       areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
+      const A = {x: borderRadius, y: 0};
+      const B = {x: width - borderRadius, y: 0};
+      const C = {x: width, y: borderRadius};
+      const D = {x: width, y: height - borderRadius};
+      const E = {x: width - borderRadius, y: height};
+      const F = {x: borderRadius, y: height};
+      const G = {x: 0, y: height - borderRadius};
+      const H = {x: 0, y: borderRadius};
 
-      areaContext.moveTo(0, 0);
-      areaContext.lineTo(width, 0);
-      areaContext.lineTo(width, height);
-      areaContext.lineTo(0, height);
+      if (borderRadius == 0) {
+        areaContext.moveTo(0, 0);
+        areaContext.lineTo(width, 0);
+        areaContext.lineTo(width, height);
+        areaContext.lineTo(0, height);
+      } else {
+        areaContext.moveTo(A.x, A.y);
+        areaContext.lineTo(B.x, B.y);
+        areaContext.curveTo(width, 0, width, 0, C.x, C.y);
+        areaContext.lineTo(D.x, D.y);
+        areaContext.curveTo(width, height, width, height, E.x, E.y);
+        areaContext.lineTo(F.x, F.y);
+        areaContext.curveTo(0, height, 0, height, G.x, G.y);
+        areaContext.lineTo(H.x, H.y);
+        areaContext.curveTo(0, 0, 0, 0, A.x, A.y);
+      }
 
       areaContext.closePath();
       areaContext.stroke();
@@ -594,14 +669,35 @@ class GraphLineChart {
 
     //Draw Border
     let borderColor;
+    let borderRadius = this.applet.borderRadius;
     if (this.applet.borderOn) {
       borderColor = RGBa2rgba(this.applet.borderColor);
       areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
+      const A = {x: borderRadius, y: 0};
+      const B = {x: width - borderRadius, y: 0};
+      const C = {x: width, y: borderRadius};
+      const D = {x: width, y: height - borderRadius};
+      const E = {x: width - borderRadius, y: height};
+      const F = {x: borderRadius, y: height};
+      const G = {x: 0, y: height - borderRadius};
+      const H = {x: 0, y: borderRadius};
 
-      areaContext.moveTo(0, 0);
-      areaContext.lineTo(width, 0);
-      areaContext.lineTo(width, height);
-      areaContext.lineTo(0, height);
+      if (borderRadius == 0) {
+        areaContext.moveTo(0, 0);
+        areaContext.lineTo(width, 0);
+        areaContext.lineTo(width, height);
+        areaContext.lineTo(0, height);
+      } else {
+        areaContext.moveTo(A.x, A.y);
+        areaContext.lineTo(B.x, B.y);
+        areaContext.curveTo(width, 0, width, 0, C.x, C.y);
+        areaContext.lineTo(D.x, D.y);
+        areaContext.curveTo(width, height, width, height, E.x, E.y);
+        areaContext.lineTo(F.x, F.y);
+        areaContext.curveTo(0, height, 0, height, G.x, G.y);
+        areaContext.lineTo(H.x, H.y);
+        areaContext.curveTo(0, 0, 0, 0, A.x, A.y);
+      }
 
       areaContext.closePath();
       areaContext.stroke();

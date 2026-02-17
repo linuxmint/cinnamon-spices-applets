@@ -77,10 +77,12 @@
         "removeEnlightenment",
         "labelsOn",
         "borderOn",
+        "borderRadius",
+        "graphStep",
         "graphSpacing",
         "thickness",
         "useIconSize",
-        "graphHeight",
+        "graphHeightPercent",
         "refreshRate"
       ]
     },
@@ -297,6 +299,29 @@
     "default": false,
     "description": "Add a border to each graph"
   },
+  "borderRadius": {
+    "type": "scale",
+    "default": 0,
+    "min": 0,
+    "max": 25,
+    "step": 1,
+    "description": "Radius of curvature in corners",
+    "dependency": "borderOn"
+  },
+  "graphStep": {
+    "type": "combobox",
+    "default": 16,
+    "options": {
+      "1px": 1,
+      "2px": 2,
+      "4px": 4,
+      "8px": 8,
+      "16px": 16,
+      "32px": 32,
+      "64px": 64
+    },
+    "description": "Step for the width of a graph"
+  },
   "graphSpacing": {
     "type": "scale",
     "default": 1,
@@ -320,15 +345,19 @@
     "default": false,
     "description": "Limit height to the size of a colored icon"
   },
-  "graphHeight": {
+  "graphHeightPercent": {
     "type": "scale",
-    "default": 40,
-    "description": "Graph height (pixels)",
-    "min": 16,
-    "max": 64,
-    "step": 4,
+    "default": 100,
+    "description": "Graph height (% of panel height)",
+    "min": 40,
+    "max": 100,
+    "step": 1,
     "show-value": true,
     "dependency": "!useIconSize"
+  },
+  "graphHeight": {
+    "type": "generic",
+    "default": 40
   },
   "refreshRate": {
     "type": "scale",
@@ -388,7 +417,7 @@
     "description": "Width",
     "min": 16,
     "max": 320,
-    "step": 16,
+    "step": 1,
     "show-value": true,
     "dependency": "!CPU_squared"
   },
@@ -479,7 +508,7 @@
     "description": "Width",
     "min": 16,
     "max": 320,
-    "step": 16,
+    "step": 1,
     "show-value": true,
     "dependency": "!Mem_squared"
   },
@@ -546,7 +575,7 @@
     "description": "Width",
     "min": 16,
     "max": 320,
-    "step": 16,
+    "step": 1,
     "show-value": true,
     "dependency": "!Net_squared"
   },
@@ -709,7 +738,7 @@
     "description": "Width",
     "min": 16,
     "max": 320,
-    "step": 16,
+    "step": 1,
     "show-value": true,
     "dependency": "!Disk_squared"
   },
@@ -890,7 +919,7 @@
     "description": "Width",
     "min": 16,
     "max": 320,
-    "step": 16,
+    "step": 1,
     "show-value": true,
     "dependency": "!DiskUsage_squared"
   },

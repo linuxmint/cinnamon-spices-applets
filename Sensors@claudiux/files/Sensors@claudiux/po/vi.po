@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux 5.4.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-03-30 14:17+0200\n"
+"POT-Creation-Date: 2026-02-16 00:47+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -19,123 +19,123 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
-#. applet.js:225 applet_OLD.js:235
+#. applet.js:228
 msgid "Sensors Monitor"
 msgstr "Trình giám sát cảm biến"
 
-#. applet.js:465 applet_OLD.js:418
+#. applet.js:503
 msgid "Suspended"
 msgstr "Đã tạm dừng"
 
-#. applet.js:732 applet.js:773 applet_OLD.js:638 applet_OLD.js:682
+#. applet.js:819 applet.js:861
 msgid "high:"
 msgstr "cao:"
 
-#. applet.js:732 applet.js:735 applet.js:773 applet.js:775 applet.js:816
-#. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
-#. applet_OLD.js:726
+#. applet.js:819 applet.js:822 applet.js:861 applet.js:863 applet.js:904
 msgid "n/a"
 msgstr "không có"
 
-#. applet.js:735 applet.js:775 applet_OLD.js:642 applet_OLD.js:684
+#. applet.js:822 applet.js:863
 msgid "crit:"
 msgstr "nguy hiểm:"
 
-#. applet.js:816 applet.js:860 applet_OLD.js:726 applet_OLD.js:770
+#. applet.js:904 applet.js:948
 msgid "min:"
 msgstr "thấp:"
 
-#. applet.js:862 applet_OLD.js:772
+#. applet.js:950
 msgid "max:"
 msgstr "cao:"
 
-#. applet.js:891 applet_OLD.js:801
+#. applet.js:979
 msgid "No intrusion detected"
 msgstr "Không phát hiện xâm nhập"
 
-#. applet.js:891 applet_OLD.js:801
+#. applet.js:979
 msgid "INTRUSION DETECTED!"
 msgstr "PHÁT HIỆN XÂM NHẬP!"
 
-#. applet.js:911 applet_OLD.js:821
+#. applet.js:999
 msgid "Must be configured!"
 msgstr "Cần được cấu hình!"
 
-#. applet.js:1275 applet_OLD.js:1208
+#. applet.js:1368
 msgid "Settings"
 msgstr "Cài đặt"
 
-#. applet.js:1275 applet_OLD.js:1208
+#. applet.js:1368
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1282 applet_OLD.js:1215
+#. applet.js:1375
 msgid "⚙ General"
 msgstr "⚙ Chung"
 
-#. applet.js:1298 applet_OLD.js:1231
+#. applet.js:1391
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "Cảm biến nhiệt độ %s"
 
-#. applet.js:1314 applet_OLD.js:1247
+#. applet.js:1407
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "Cảm biến quạt %s"
 
-#. applet.js:1330 applet_OLD.js:1263
+#. applet.js:1423
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "Cảm biến điện áp %s"
 
-#. applet.js:1346 applet_OLD.js:1279
+#. applet.js:1439
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "Cảm biến xâm nhập %s"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1365 applet_OLD.js:1306
+#. applet.js:1458
 msgid "Run xsensors"
 msgstr "Chạy xsensors"
 
-#. applet.js:1374 applet_OLD.js:1315
+#. applet.js:1467
 msgid "Suspend Sensors"
 msgstr "Tạm dừng cảm biến"
 
-#. applet.js:1385 applet_OLD.js:1326
+#. applet.js:1478
 msgid "Reload this applet"
 msgstr "Tải lại applet này"
 
-#. applet.js:1707 applet_OLD.js:1656
+#. applet.js:1825
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Bạn có chắc muốn xóa '%s' không?"
 
-#. lib/checkDependencies.js:353
+#. lib/checkDependencies.js:369
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Applet %s đang hoạt động đầy đủ."
 
-#. lib/checkDependencies.js:354
+#. lib/checkDependencies.js:370
 msgid "All dependencies are installed"
 msgstr "Tất cả các gói phụ thuộc đã được cài đặt"
 
-#. lib/checkDependencies.js:383
+#. lib/checkDependencies.js:399
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
-msgstr "Có vẻ bạn đang thiếu một số chương trình cần thiết để applet này hoạt động đầy đủ."
+msgstr ""
+"Có vẻ bạn đang thiếu một số chương trình cần thiết để applet này hoạt động "
+"đầy đủ."
 
-#. lib/checkDependencies.js:385
+#. lib/checkDependencies.js:401
 msgid "Please install these packages:"
 msgstr "Vui lòng cài đặt các gói sau:"
 
-#. lib/checkDependencies.js:389 lib/checkDependencies.js:399
+#. lib/checkDependencies.js:405 lib/checkDependencies.js:415
 msgid "Some dependencies are not installed!"
 msgstr "Một số gói phụ thuộc chưa được cài đặt!"
 
-#. lib/checkDependencies.js:401
+#. lib/checkDependencies.js:417
 msgid "Install these packages now"
 msgstr "Cài đặt các gói này ngay"
 
@@ -196,9 +196,9 @@ msgid ""
 "GPU - Power Supply), Fan Speed, Voltages, Intrusions. Notifies you with "
 "color changes when a value reaches or exceeds its limit."
 msgstr ""
-"Hiển thị giá trị từ nhiều cảm biến hệ thống như nhiệt độ (CPU - GPU - nguồn), "
-"tốc độ quạt, điện áp và xâm nhập. Thông báo bằng cách thay đổi màu khi một "
-"giá trị đạt hoặc vượt ngưỡng giới hạn."
+"Hiển thị giá trị từ nhiều cảm biến hệ thống như nhiệt độ (CPU - GPU - "
+"nguồn), tốc độ quạt, điện áp và xâm nhập. Thông báo bằng cách thay đổi màu "
+"khi một giá trị đạt hoặc vượt ngưỡng giới hạn."
 
 #. metadata.json->contributors
 msgid "claudiux: Author. JEleniel: support for NVidia video cards."
@@ -243,6 +243,10 @@ msgstr "Giá trị cảm biến"
 #. settings-schema.json->section_remove_incompatible_xlets->title
 msgid "Remove from panels certain applets that also use sensors"
 msgstr "Xóa khỏi bảng một số applet cũng sử dụng cảm biến"
+
+#. settings-schema.json->section_dependencies->title
+msgid "Dependencies"
+msgstr ""
 
 #. settings-schema.json->section_tempDisktemp->title
 msgid "For the time being, disk temperature can only be read by root."
@@ -390,7 +394,8 @@ msgid ""
 "have been defined.\n"
 "Unchecked: The size of this applet is optimized, but it may change."
 msgstr ""
-"Đánh dấu: Kích thước của applet sẽ giữ nguyên sau khi bạn thiết lập xong các tùy chọn.\n"
+"Đánh dấu: Kích thước của applet sẽ giữ nguyên sau khi bạn thiết lập xong các "
+"tùy chọn.\n"
 "Bỏ đánh dấu: Kích thước của applet được tối ưu tự động nhưng có thể thay đổi."
 
 #. settings-schema.json->char_size->description
@@ -474,8 +479,8 @@ msgid ""
 "Whether or not to display the names of the main sensors (those displayed in "
 "the panel) in bold italics in the tooltip."
 msgstr ""
-"Bật/tắt việc hiển thị tên của các cảm biến chính (những cảm biến hiển thị trên bảng) "
-"bằng kiểu chữ in đậm và nghiêng trong chú giải."
+"Bật/tắt việc hiển thị tên của các cảm biến chính (những cảm biến hiển thị "
+"trên bảng) bằng kiểu chữ in đậm và nghiêng trong chú giải."
 
 #. settings-schema.json->restart_in_menu->description
 msgid "Show in menu the action: Restart this applet"
@@ -484,6 +489,17 @@ msgstr "Hiển thị trong menu tùy chọn: Khởi động lại applet này"
 #. settings-schema.json->restart_in_menu->tooltip
 msgid "Whether or not to display in menu the action: Restart this applet."
 msgstr "Bật/tắt việc hiển thị tùy chọn khởi động lại applet trong menu."
+
+#. settings-schema.json->do_not_check_dependencies->description
+msgid "Do not check dependencies"
+msgstr ""
+
+#. settings-schema.json->do_not_check_dependencies->tooltip
+msgid ""
+"If you do not want to install certain dependencies (e.g., fonts), check this "
+"box. Be careful with dependencies that are necessary for this applet to "
+"function properly."
+msgstr ""
 
 #. settings-schema.json->make_disktemp_readable_by_user->description
 msgid "Make disk temperature user-readable"
@@ -505,7 +521,8 @@ msgstr "Hiển thị giá trị của các cảm biến được chọn"
 msgid ""
 "Whether or not to display the values of the sensors selected in the list "
 "below."
-msgstr "Bật/tắt hiển thị giá trị của các cảm biến được chọn trong danh sách bên dưới."
+msgstr ""
+"Bật/tắt hiển thị giá trị của các cảm biến được chọn trong danh sách bên dưới."
 
 #. settings-schema.json->show_temp_name->description
 #. settings-schema.json->show_fan_name->description
@@ -522,8 +539,8 @@ msgid ""
 "Whether or not to display into this applet label the 'Shown name' of the "
 "sensors selected in the list below. Without effect in vertical panels."
 msgstr ""
-"Bật/tắt việc hiển thị 'Tên hiển thị' của các cảm biến đã chọn trên nhãn applet. "
-"Không áp dụng cho bảng dọc."
+"Bật/tắt việc hiển thị 'Tên hiển thị' của các cảm biến đã chọn trên nhãn "
+"applet. Không áp dụng cho bảng dọc."
 
 #. settings-schema.json->chars_temp->tooltip
 msgid "The first emoji in this list is used for temperature"
@@ -581,7 +598,9 @@ msgstr "Bảng dọc: Hiển thị giá trị nhiệt độ và °C/°F trên c�
 msgid ""
 "Whether or not to show, in a vertical panel, °C or °F on the same line as "
 "the temperature value."
-msgstr "Bật/tắt hiển thị °C hoặc °F trên cùng một dòng với giá trị nhiệt độ trong bảng dọc."
+msgstr ""
+"Bật/tắt hiển thị °C hoặc °F trên cùng một dòng với giá trị nhiệt độ trong "
+"bảng dọc."
 
 #. settings-schema.json->journalize_temp->description
 msgid "Log high and critical temperatures"
@@ -592,8 +611,8 @@ msgid ""
 "When this option is checked, temperatures exceeding the high or critical "
 "limit are recorded in the system journal."
 msgstr ""
-"Khi được bật, các giá trị nhiệt độ vượt ngưỡng cao hoặc tới hạn sẽ được ghi lại "
-"trong nhật ký hệ thống."
+"Khi được bật, các giá trị nhiệt độ vượt ngưỡng cao hoặc tới hạn sẽ được ghi "
+"lại trong nhật ký hệ thống."
 
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description
@@ -714,7 +733,8 @@ msgid ""
 "see help.\n"
 "High and Critical values: Cf. technical manual of your disk."
 msgstr ""
-"Tên đĩa: Tên của thiết bị lưu trữ được lệnh 'lsblk' trả về. Xem thêm trong phần trợ giúp.\n"
+"Tên đĩa: Tên của thiết bị lưu trữ được lệnh 'lsblk' trả về. Xem thêm trong "
+"phần trợ giúp.\n"
 "Các giá trị Cao và Nguy cấp: Tham khảo hướng dẫn kỹ thuật của ổ đĩa."
 
 #. settings-schema.json->chars_fan->tooltip
@@ -738,7 +758,8 @@ msgid ""
 "When this option is checked, fan speeds below the critical limit are "
 "recorded in the system log."
 msgstr ""
-"Khi bật tùy chọn này, tốc độ quạt thấp hơn giới hạn nguy cấp sẽ được ghi vào nhật ký hệ thống."
+"Khi bật tùy chọn này, tốc độ quạt thấp hơn giới hạn nguy cấp sẽ được ghi vào "
+"nhật ký hệ thống."
 
 #. settings-schema.json->fan_sensors->columns->title
 msgid ""
@@ -758,7 +779,8 @@ msgid ""
 "  You can use the 4 operations (+-*/) and parentheses.\n"
 "  Example: $*1.1+0.5"
 msgstr ""
-"Nhấp đúp vào một dòng để thay đổi 'Tên hiển thị', 'Tối thiểu' hoặc 'Công thức'.\n"
+"Nhấp đúp vào một dòng để thay đổi 'Tên hiển thị', 'Tối thiểu' hoặc 'Công "
+"thức'.\n"
 "Để đặt lại 'Tên hiển thị', sao chép/dán 'Tên cảm biến'.\n"
 "'Tối thiểu' (tùy chọn) phải là số hợp lệ.\n"
 "'Công thức' (tùy chọn):\n"
@@ -795,7 +817,8 @@ msgid ""
 "When this option is checked, voltages below the minimum limit or above the "
 "maximum limit are recorded in the system log."
 msgstr ""
-"Khi bật tùy chọn này, các mức điện áp thấp hơn giới hạn tối thiểu hoặc cao hơn giới hạn tối đa sẽ được ghi vào nhật ký hệ thống."
+"Khi bật tùy chọn này, các mức điện áp thấp hơn giới hạn tối thiểu hoặc cao "
+"hơn giới hạn tối đa sẽ được ghi vào nhật ký hệ thống."
 
 #. settings-schema.json->volt_sensors->columns->title
 msgid ""
@@ -823,7 +846,8 @@ msgid ""
 "  You can use the 4 operations (+-*/) and parentheses.\n"
 "  Example: $*1.1+0.5"
 msgstr ""
-"Nhấp đúp vào một dòng để thay đổi 'Tên hiển thị', 'Tối thiểu', 'Tối đa' hoặc 'Công thức'.\n"
+"Nhấp đúp vào một dòng để thay đổi 'Tên hiển thị', 'Tối thiểu', 'Tối đa' hoặc "
+"'Công thức'.\n"
 "Để đặt lại 'Tên hiển thị', sao chép/dán 'Tên cảm biến'.\n"
 "'Tối thiểu' và 'Tối đa' (tùy chọn) phải là số hợp lệ.\n"
 "'Công thức' (tùy chọn):\n"
@@ -837,11 +861,14 @@ msgid ""
 " Whether or not to display into this applet label the 'Shown name' of the "
 "sensors selected in the list below. Without effect in vertical panels."
 msgstr ""
-" Có hiển thị hay không 'Tên hiển thị' của các cảm biến được chọn trong danh sách bên dưới trong nhãn của tiểu dụng này. Không có tác dụng trên bảng điều khiển dọc."
+" Có hiển thị hay không 'Tên hiển thị' của các cảm biến được chọn trong danh "
+"sách bên dưới trong nhãn của tiểu dụng này. Không có tác dụng trên bảng điều "
+"khiển dọc."
 
 #. settings-schema.json->chars_intrusion->tooltip
 msgid "The first emoji in this list is used for intrusion"
-msgstr "Biểu tượng cảm xúc đầu tiên trong danh sách được dùng cho cảm biến xâm nhập"
+msgstr ""
+"Biểu tượng cảm xúc đầu tiên trong danh sách được dùng cho cảm biến xâm nhập"
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"
@@ -853,7 +880,8 @@ msgstr "Ghi nhật ký xâm nhập"
 
 #. settings-schema.json->journalize_intrusion->tooltip
 msgid "When this option is checked, intrusions are recorded in the system log."
-msgstr "Khi bật tùy chọn này, các sự kiện xâm nhập sẽ được ghi vào nhật ký hệ thống."
+msgstr ""
+"Khi bật tùy chọn này, các sự kiện xâm nhập sẽ được ghi vào nhật ký hệ thống."
 
 #. settings-schema.json->intrusion_sensors->tooltip
 msgid ""
@@ -912,7 +940,8 @@ msgid ""
 "Add a line by custom sensor to set the type, the name and the path of the "
 "file to monitor (/sys/class/...)."
 msgstr ""
-"Thêm một dòng cho cảm biến tùy chỉnh để đặt loại, tên và đường dẫn đến tệp cần giám sát (/sys/class/...)."
+"Thêm một dòng cho cảm biến tùy chỉnh để đặt loại, tên và đường dẫn đến tệp "
+"cần giám sát (/sys/class/...)."
 
 #. settings-schema.json->report->description
 #. scripts/show_sensor_values.sh:5

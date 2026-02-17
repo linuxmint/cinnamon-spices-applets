@@ -47,7 +47,7 @@ if [ "$errors" -eq 0 ]; then
       cp --verbose files/weather@mockturtl/${VERSION}/weather-applet.js ~/.local/share/cinnamon/applets/weather\@mockturtl/${VERSION}/weather-applet.js
       echo "Restarting Cinnamon..."
       # Restart Cinnamon in the background without terminating the script
-      nohup bash -c "export DISPLAY=:0; cinnamon --replace" > /dev/null 2>&1 &
+      cinnamon-dbus-command RestartCinnamon 0
       if $DEBUG; then
         #cinnamon-looking-glass --logs & #TODO create command line parameter in Looking Glass to open logs tab
         cinnamon-looking-glass &

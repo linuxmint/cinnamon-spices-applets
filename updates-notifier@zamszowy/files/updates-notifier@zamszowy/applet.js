@@ -381,14 +381,16 @@ UpdatesNotifier.prototype = {
         // accept updates changes only when originating from this applet
         this.checkingInProgress = true;
         Util.spawn_async(['/usr/bin/bash', this.applet_path + '/updates.sh', "check", refreshMode], (stdout) => {
+            this.lastRefreshTime = GLib.get_monotonic_time();
+
             if (stdout !== '') {
                 this.checkingInProgress = false;
                 global.logError(`${UUID}: pkcon get-updates failed`);
                 this.hasError = true;
                 this._update();
+                return;
             }
 
-            this.lastRefreshTime = GLib.get_monotonic_time();
             if (this.showFirmware) {
                 let fwCount = 0;
                 for (let line of stdout.trim().split("\n")) {

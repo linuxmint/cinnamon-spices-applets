@@ -13,7 +13,9 @@ check)
         pkcon refresh &>/dev/null
     fi
 
-    if ! out=$(pkcon get-updates 2>&1); then
+    out=$(pkcon get-updates 2>&1)
+    exit_code=$?
+    if [[ $exit_code -ne 0 ]] && [[ $exit_code -ne 5 ]]; then
         echo ERROR
         echo "$out" > "$DIR/error"
         exit 0

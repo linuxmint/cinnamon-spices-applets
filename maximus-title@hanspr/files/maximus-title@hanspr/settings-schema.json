@@ -5,7 +5,7 @@
     },
     "title-len": {
         "type": "entry",
-        "description": "Maximum title lenght",
+        "description": "Maximum title length",
         "default": "60"
     },
     "title-bg": {
