@@ -1,0 +1,312 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-17 10:44-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#: applet.js:100 applet.js:374 applet.js:377 applet.js:413
+msgid "Essentials Backgrounds"
+msgstr ""
+
+#: applet.js:147
+msgid "Change Background Now"
+msgstr ""
+
+#: applet.js:156
+msgid "Save to Favorites"
+msgstr ""
+
+#: applet.js:166
+msgid "No wallpaper set yet"
+msgstr ""
+
+#: applet.js:176
+msgid "History"
+msgstr ""
+
+#: applet.js:177 applet.js:444
+msgid "No history yet"
+msgstr ""
+
+#: applet.js:185 applet.js:576 applet.js:596
+msgid "Source: "
+msgstr ""
+
+#: applet.js:192
+msgid "Open Cache Folder"
+msgstr ""
+
+#: applet.js:203
+msgid "Open Favorites Folder"
+msgstr ""
+
+#: applet.js:216
+msgid "Settings"
+msgstr ""
+
+#: applet.js:233 applet.js:286
+msgid "Pause"
+msgstr ""
+
+#: applet.js:281
+msgid "Resume"
+msgstr ""
+
+#: applet.js:313
+msgid "Unknown provider: "
+msgstr ""
+
+#: applet.js:317
+msgid "Fetching wallpaper..."
+msgstr ""
+
+#: applet.js:322
+msgid "Essentials Backgrounds — Error"
+msgstr ""
+
+#: applet.js:337
+msgid "Download failed: "
+msgstr ""
+
+#: applet.js:381
+msgid "Wallpaper Changed"
+msgstr ""
+
+#: applet.js:417
+msgid "Saved to Favorites"
+msgstr ""
+
+#: applet.js:451 applet.js:563
+msgid "Unknown"
+msgstr ""
+
+#: applet.js:582
+msgid "Random"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Automatically fetches stunning wallpapers from Bing, Unsplash and other "
+"sources, changing your desktop background periodically."
+msgstr ""
+
+#. settings-schema.json->page-general->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->page-effects->title
+msgid "Effects"
+msgstr ""
+
+#. settings-schema.json->page-unsplash->title
+msgid "Unsplash"
+msgstr ""
+
+#. settings-schema.json->section-behavior->title
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->section-notifications->title
+msgid "Notifications"
+msgstr ""
+
+#. settings-schema.json->section-effects->title
+msgid "Image Effects"
+msgstr ""
+
+#. settings-schema.json->section-unsplash->title
+msgid "Unsplash Settings"
+msgstr ""
+
+#. settings-schema.json->provider->description
+msgid "Wallpaper source"
+msgstr ""
+
+#. settings-schema.json->provider->tooltip
+msgid "Choose where to fetch wallpapers from"
+msgstr ""
+
+#. settings-schema.json->provider->options
+msgid "Bing Daily"
+msgstr ""
+
+#. settings-schema.json->provider->options
+msgid "Wallhaven"
+msgstr ""
+
+#. settings-schema.json->provider->options
+msgid "NASA APOD"
+msgstr ""
+
+#. settings-schema.json->provider->options
+msgid "Picsum"
+msgstr ""
+
+#. settings-schema.json->provider->options
+msgid "Unsplash (API key)"
+msgstr ""
+
+#. settings-schema.json->provider->options
+msgid "🔀 Random"
+msgstr ""
+
+#. settings-schema.json->interval->units
+msgid "minutes"
+msgstr ""
+
+#. settings-schema.json->interval->description
+msgid "Change interval"
+msgstr ""
+
+#. settings-schema.json->interval->tooltip
+msgid "How often to change the wallpaper (in minutes)"
+msgstr ""
+
+#. settings-schema.json->auto-start->description
+msgid "Start automatically"
+msgstr ""
+
+#. settings-schema.json->auto-start->tooltip
+msgid "Start changing wallpapers automatically when the applet loads"
+msgstr ""
+
+#. settings-schema.json->notification->description
+msgid "Show notifications"
+msgstr ""
+
+#. settings-schema.json->notification->tooltip
+msgid "Show a notification when the wallpaper changes"
+msgstr ""
+
+#. settings-schema.json->effect-blur->description
+msgid "Blur"
+msgstr ""
+
+#. settings-schema.json->effect-blur->tooltip
+msgid "Apply a gaussian blur effect to the wallpaper"
+msgstr ""
+
+#. settings-schema.json->effect-blur-radius->units
+msgid "px"
+msgstr ""
+
+#. settings-schema.json->effect-blur-radius->description
+msgid "Blur intensity"
+msgstr ""
+
+#. settings-schema.json->effect-blur-radius->tooltip
+msgid "Blur radius in pixels (higher = more blurry)"
+msgstr ""
+
+#. settings-schema.json->effect-brightness->description
+msgid "Brightness / Dim"
+msgstr ""
+
+#. settings-schema.json->effect-brightness->tooltip
+msgid "Adjust the brightness of the wallpaper"
+msgstr ""
+
+#. settings-schema.json->effect-brightness-value->units
+#. settings-schema.json->effect-saturation-value->units
+msgid "%"
+msgstr ""
+
+#. settings-schema.json->effect-brightness-value->description
+msgid "Brightness level"
+msgstr ""
+
+#. settings-schema.json->effect-brightness-value->tooltip
+msgid "Negative values darken, positive values brighten"
+msgstr ""
+
+#. settings-schema.json->effect-saturation->description
+msgid "Saturation"
+msgstr ""
+
+#. settings-schema.json->effect-saturation->tooltip
+msgid "Adjust the color saturation of the wallpaper"
+msgstr ""
+
+#. settings-schema.json->effect-saturation-value->description
+msgid "Saturation level"
+msgstr ""
+
+#. settings-schema.json->effect-saturation-value->tooltip
+msgid "0% = no color, 100% = normal, 300% = very vivid"
+msgstr ""
+
+#. settings-schema.json->effect-contrast->description
+msgid "Contrast"
+msgstr ""
+
+#. settings-schema.json->effect-contrast->tooltip
+msgid "Adjust the contrast of the wallpaper"
+msgstr ""
+
+#. settings-schema.json->effect-contrast-value->units
+msgid "levels"
+msgstr ""
+
+#. settings-schema.json->effect-contrast-value->description
+msgid "Contrast level"
+msgstr ""
+
+#. settings-schema.json->effect-contrast-value->tooltip
+msgid "Negative = less contrast, positive = more contrast"
+msgstr ""
+
+#. settings-schema.json->effect-grayscale->description
+msgid "Grayscale"
+msgstr ""
+
+#. settings-schema.json->effect-grayscale->tooltip
+msgid "Convert the wallpaper to grayscale (black & white)"
+msgstr ""
+
+#. settings-schema.json->effect-sepia->description
+msgid "Sepia"
+msgstr ""
+
+#. settings-schema.json->effect-sepia->tooltip
+msgid "Apply a warm sepia tone to the wallpaper"
+msgstr ""
+
+#. settings-schema.json->effect-vignette->description
+msgid "Vignette"
+msgstr ""
+
+#. settings-schema.json->effect-vignette->tooltip
+msgid "Add a dark vignette around the edges"
+msgstr ""
+
+#. settings-schema.json->unsplash-api-key->description
+msgid "Unsplash API Key"
+msgstr ""
+
+#. settings-schema.json->unsplash-api-key->tooltip
+msgid "Get your free API key at unsplash.com/developers"
+msgstr ""
+
+#. settings-schema.json->unsplash-query->description
+msgid "Search terms"
+msgstr ""
+
+#. settings-schema.json->unsplash-query->tooltip
+msgid ""
+"Comma-separated keywords for Unsplash search (e.g. "
+"nature,landscape,mountains)"
+msgstr ""

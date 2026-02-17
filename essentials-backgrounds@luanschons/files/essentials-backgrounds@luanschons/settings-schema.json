@@ -1,0 +1,207 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "page-general",
+            "page-effects",
+            "page-unsplash"
+        ],
+        "page-general": {
+            "type": "page",
+            "title": "General",
+            "sections": [
+                "section-behavior",
+                "section-notifications"
+            ]
+        },
+        "page-effects": {
+            "type": "page",
+            "title": "Effects",
+            "sections": [
+                "section-effects"
+            ]
+        },
+        "page-unsplash": {
+            "type": "page",
+            "title": "Unsplash",
+            "sections": [
+                "section-unsplash"
+            ]
+        },
+        "section-behavior": {
+            "type": "section",
+            "title": "Behavior",
+            "keys": [
+                "provider",
+                "interval",
+                "auto-start"
+            ]
+        },
+        "section-notifications": {
+            "type": "section",
+            "title": "Notifications",
+            "keys": [
+                "notification"
+            ]
+        },
+        "section-effects": {
+            "type": "section",
+            "title": "Image Effects",
+            "keys": [
+                "effect-blur",
+                "effect-blur-radius",
+                "effect-brightness",
+                "effect-brightness-value",
+                "effect-saturation",
+                "effect-saturation-value",
+                "effect-contrast",
+                "effect-contrast-value",
+                "effect-grayscale",
+                "effect-sepia",
+                "effect-vignette"
+            ]
+        },
+        "section-unsplash": {
+            "type": "section",
+            "title": "Unsplash Settings",
+            "keys": [
+                "unsplash-api-key",
+                "unsplash-query"
+            ]
+        }
+    },
+    "provider": {
+        "type": "combobox",
+        "default": "bing",
+        "description": "Wallpaper source",
+        "tooltip": "Choose where to fetch wallpapers from",
+        "options": {
+            "Bing Daily": "bing",
+            "Wallhaven": "wallhaven",
+            "NASA APOD": "nasa",
+            "Picsum": "picsum",
+            "Unsplash (API key)": "unsplash",
+            "🔀 Random": "random"
+        }
+    },
+    "interval": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 5,
+        "max": 1440,
+        "step": 5,
+        "units": "minutes",
+        "description": "Change interval",
+        "tooltip": "How often to change the wallpaper (in minutes)"
+    },
+    "auto-start": {
+        "type": "switch",
+        "default": true,
+        "description": "Start automatically",
+        "tooltip": "Start changing wallpapers automatically when the applet loads"
+    },
+    "notification": {
+        "type": "switch",
+        "default": true,
+        "description": "Show notifications",
+        "tooltip": "Show a notification when the wallpaper changes"
+    },
+    "effect-blur": {
+        "type": "switch",
+        "default": false,
+        "description": "Blur",
+        "tooltip": "Apply a gaussian blur effect to the wallpaper"
+    },
+    "effect-blur-radius": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 1,
+        "max": 30,
+        "step": 1,
+        "units": "px",
+        "description": "Blur intensity",
+        "tooltip": "Blur radius in pixels (higher = more blurry)",
+        "dependency": "effect-blur"
+    },
+    "effect-brightness": {
+        "type": "switch",
+        "default": false,
+        "description": "Brightness / Dim",
+        "tooltip": "Adjust the brightness of the wallpaper"
+    },
+    "effect-brightness-value": {
+        "type": "spinbutton",
+        "default": -20,
+        "min": -60,
+        "max": 60,
+        "step": 5,
+        "units": "%",
+        "description": "Brightness level",
+        "tooltip": "Negative values darken, positive values brighten",
+        "dependency": "effect-brightness"
+    },
+    "effect-saturation": {
+        "type": "switch",
+        "default": false,
+        "description": "Saturation",
+        "tooltip": "Adjust the color saturation of the wallpaper"
+    },
+    "effect-saturation-value": {
+        "type": "spinbutton",
+        "default": 130,
+        "min": 0,
+        "max": 300,
+        "step": 10,
+        "units": "%",
+        "description": "Saturation level",
+        "tooltip": "0% = no color, 100% = normal, 300% = very vivid",
+        "dependency": "effect-saturation"
+    },
+    "effect-contrast": {
+        "type": "switch",
+        "default": false,
+        "description": "Contrast",
+        "tooltip": "Adjust the contrast of the wallpaper"
+    },
+    "effect-contrast-value": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": -5,
+        "max": 5,
+        "step": 1,
+        "units": "levels",
+        "description": "Contrast level",
+        "tooltip": "Negative = less contrast, positive = more contrast",
+        "dependency": "effect-contrast"
+    },
+    "effect-grayscale": {
+        "type": "switch",
+        "default": false,
+        "description": "Grayscale",
+        "tooltip": "Convert the wallpaper to grayscale (black & white)"
+    },
+    "effect-sepia": {
+        "type": "switch",
+        "default": false,
+        "description": "Sepia",
+        "tooltip": "Apply a warm sepia tone to the wallpaper"
+    },
+    "effect-vignette": {
+        "type": "switch",
+        "default": false,
+        "description": "Vignette",
+        "tooltip": "Add a dark vignette around the edges"
+    },
+    "unsplash-api-key": {
+        "type": "entry",
+        "default": "",
+        "description": "Unsplash API Key",
+        "tooltip": "Get your free API key at unsplash.com/developers"
+    },
+    "unsplash-query": {
+        "type": "entry",
+        "default": "nature,landscape",
+        "description": "Search terms",
+        "tooltip": "Comma-separated keywords for Unsplash search (e.g. nature,landscape,mountains)"
+    }
+}
