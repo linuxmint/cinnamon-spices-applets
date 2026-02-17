@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# SSH LAUNCHER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# sumo, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-19 17:20+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-06 20:34+0100\n"
 "PO-Revision-Date: 2023-02-11 19:18+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
@@ -19,35 +20,35 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 
 #. metadata.json->name
-#: applet.js:40 applet.js:56 applet.js:99 applet.js:206 applet.js:223
+#. applet.js:51 applet.js:67 applet.js:114 applet.js:256 applet.js:271
 msgid "SSH Launcher"
 msgstr "SSH 启动器"
 
-#: applet.js:99
+#. applet.js:114
 msgid "No suitable icon found, falling back to custom icon"
 msgstr "没有找到合适的图标，退回到自定义图标"
 
-#: applet.js:105
+#. applet.js:126
 msgid "Force Update from SSH config"
 msgstr "强制从 SSH 配置更新"
 
-#: applet.js:143
+#. applet.js:193
 msgid "Background (-fN)"
 msgstr "后台 (-fN)"
 
-#: applet.js:146
+#. applet.js:196
 msgid "Forward X11 (-X)"
 msgstr "转发 X11 (-X)"
 
-#: applet.js:187
+#. applet.js:237
 msgid "ERROR. "
 msgstr "错误。"
 
-#: applet.js:190
+#. applet.js:240
 msgid "Edit SSH config"
 msgstr "编辑 SSH 配置"
 
-#: applet.js:206
+#. applet.js:256
 msgid ""
 "Error: I can't open the terminal.\n"
 "You need to set a default terminal first in Preferred Applications!\n"
@@ -59,13 +60,17 @@ msgstr ""
 "\n"
 "(更多帮助在右键单击->关于->更多信息)"
 
-#: applet.js:223
+#. applet.js:271
 msgid "Connection opened to "
 msgstr "打开连接到 "
 
-#: applet.js:223
+#. applet.js:271
 msgid " using "
 msgstr " 使用 "
+
+#. metadata.json->description
+msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
+msgstr "连接到 ~/.ssh/config 中配置的 SSH 主机的小程序"
 
 #. settings-schema.json->headAppearance->description
 msgid "Appearance"
@@ -94,10 +99,6 @@ msgid ""
 msgstr ""
 "通常它应该以 -e 结尾以执行所提供的 ssh 命令，请查阅您所选择的终端的手册。"
 
-#. metadata.json->description
-msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
-msgstr "连接到 ~/.ssh/config 中配置的 SSH 主机的小程序"
-
 #. settings-schema.json->showConnectionNotification->description
 msgid "Show notification when launching SSH connection"
 msgstr "启动 SSH 连接时显示通知"
@@ -105,3 +106,11 @@ msgstr "启动 SSH 连接时显示通知"
 #. settings-schema.json->showConnectionNotification->tooltip
 msgid "Display a notification message when SSH terminal is launched"
 msgstr "启动 SSH 终端时显示通知消息"
+
+#. settings-schema.json->openMenuKey->description
+msgid "Keyboard shortcut to open the SSH menu"
+msgstr "打开 SSH 菜单的键盘快捷键"
+
+#. settings-schema.json->openMenuKey->tooltip
+msgid "Set a global keyboard shortcut to open the SSH launcher menu"
+msgstr "设置全局键盘快捷键以打开 SSH 菜单"
