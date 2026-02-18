@@ -340,15 +340,32 @@ class SensorsApplet extends Applet.Applet {
           else if (maximize_horizontally)
             window.maximize(HORIZONTAL);
           else if (fixed)
-            window.move_resize_frame(null, 0, 0, this.window_width, this.window_height);
-          window.activate(300);
+            window.move_resize_frame(null, 1 * this.window_x, 1 * this.window_y, 1 * this.window_width, 1 * this.window_height);
+            
           //~ this.settingsWindow = window;
           //~ app.connect("windows-changed", () => { this.settingsWindow = undefined; });
+          
+          window.activate(300);
         }
       }, 1000);
     }
     // Returns the pid:
+    this.configWindowPid = pid;
     return pid;
+  }
+  
+  _on_window_set_current_size() {
+    if (this.configWindowPid) {
+      let wins = global.get_window_actors();
+      wins.forEach( (w) => {
+        if (w.meta_window.get_pid() == this.configWindowPid) {
+          this.window_width = "" + (w.get_width() - 20).toString();
+          this.window_height = "" + (w.get_height() - 18).toString();
+          this.window_x = "" + w.get_x().toString();
+          this.window_y = "" + w.get_y().toString();
+        }
+      });
+    }
   }
 
   get_user_settings() {
@@ -360,6 +377,8 @@ class SensorsApplet extends Applet.Applet {
     this.s.bind("window_maximizing", "window_maximizing");
     this.s.bind("window_width", "window_width");
     this.s.bind("window_height", "window_height");
+    this.s.bind("window_x", "window_x");
+    this.s.bind("window_y", "window_y");
     this.s.bind("has_set_markup", "has_set_markup");
     this.s.bind("interval", "interval", () => { this.on_settings_changed() });
     this.s.bind("keep_size", "keep_size", () => { this.updateUI() });
