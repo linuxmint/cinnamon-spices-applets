@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-02-16 00:47+0100\n"
+"POT-Creation-Date: 2026-02-18 05:07+0100\n"
 "PO-Revision-Date: 2025-05-13 14:30+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -20,93 +20,93 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
-#. applet.js:228
+#. applet.js:232
 msgid "Sensors Monitor"
 msgstr "Sensoren Monitor"
 
-#. applet.js:503
+#. applet.js:566
 msgid "Suspended"
 msgstr "Opgeschort"
 
-#. applet.js:819 applet.js:861
+#. applet.js:882 applet.js:924
 msgid "high:"
 msgstr "hoog:"
 
-#. applet.js:819 applet.js:822 applet.js:861 applet.js:863 applet.js:904
+#. applet.js:882 applet.js:885 applet.js:924 applet.js:926 applet.js:967
 msgid "n/a"
 msgstr "n.v.t"
 
-#. applet.js:822 applet.js:863
+#. applet.js:885 applet.js:926
 msgid "crit:"
 msgstr "kritiek:"
 
-#. applet.js:904 applet.js:948
+#. applet.js:967 applet.js:1011
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:950
+#. applet.js:1013
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:979
+#. applet.js:1042
 msgid "No intrusion detected"
 msgstr "Geen verstoring gedetecteerd"
 
-#. applet.js:979
+#. applet.js:1042
 msgid "INTRUSION DETECTED!"
 msgstr "VERSTORING GEDETECTEERD!"
 
-#. applet.js:999
+#. applet.js:1062
 msgid "Must be configured!"
 msgstr "Moet worden ingesteld!"
 
-#. applet.js:1368
+#. applet.js:1431
 msgid "Settings"
 msgstr "Instellingen"
 
-#. applet.js:1368
+#. applet.js:1431
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1375
+#. applet.js:1438
 msgid "⚙ General"
 msgstr "⚙ Algemeen"
 
-#. applet.js:1391
+#. applet.js:1455
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Temperatuursensoren"
 
-#. applet.js:1407
+#. applet.js:1472
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Ventilatorsensoren"
 
-#. applet.js:1423
+#. applet.js:1489
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Spanningssensoren"
 
-#. applet.js:1439
+#. applet.js:1506
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Inbraaksensoren"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1458
+#. applet.js:1542
 msgid "Run xsensors"
 msgstr "Uitvoeren xsensors"
 
-#. applet.js:1467
+#. applet.js:1551
 msgid "Suspend Sensors"
 msgstr "Opschorten van sensors"
 
-#. applet.js:1478
+#. applet.js:1562
 msgid "Reload this applet"
 msgstr "Herlaad deze hulptoepassing"
 
-#. applet.js:1825
+#. applet.js:1909
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Weet u zeker dat u '%s' wilt verwijderen?"
@@ -226,6 +226,10 @@ msgstr "⮿ Verstoring"
 msgid "⛓ Custom"
 msgstr "⛓ Aangepast"
 
+#. settings-schema.json->section_SettingsWindow->title
+msgid "This settings window"
+msgstr ""
+
 #. settings-schema.json->section_Display->title
 #. settings-schema.json->section_tempOptions->title
 #. settings-schema.json->section_fanOptions->title
@@ -293,6 +297,54 @@ msgstr "Disclaimer"
 #. settings-schema.json->section_customSensors->title
 msgid "Custom sensors"
 msgstr "Aangepaste sensoren"
+
+#. settings-schema.json->window_maximizing->description
+msgid "How to set its size"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "let it be"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize horizontally"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize vertically"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize everything"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "fixed"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->tooltip
+msgid "Future window openings."
+msgstr ""
+
+#. settings-schema.json->window_width->description
+msgid "Width"
+msgstr ""
+
+#. settings-schema.json->window_width->tooltip
+msgid ""
+"This number must match your screen configuration.\n"
+"Minimum value: 800."
+msgstr ""
+
+#. settings-schema.json->window_height->description
+msgid "Height"
+msgstr ""
+
+#. settings-schema.json->window_height->tooltip
+msgid ""
+"This number must match your screen configuration.\n"
+"Minimum value: 100."
+msgstr ""
 
 #. settings-schema.json->interval->options
 msgid "1"

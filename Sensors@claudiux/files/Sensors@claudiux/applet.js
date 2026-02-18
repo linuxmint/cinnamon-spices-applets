@@ -6,6 +6,7 @@ const Applet = imports.ui.applet;
 const {AppletSettings} = imports.ui.settings;
 const Extension = imports.ui.extension;
 const ModalDialog = imports.ui.modalDialog;
+const { WindowTracker } = imports.gi.Cinnamon;
 //util
 const {spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, unref} = require("./lib/util");
 //to-string
@@ -203,6 +204,9 @@ class SensorsApplet extends Applet.Applet {
 
     // To be sure that the scripts will be executable:
     spawnCommandLineAsync(`/bin/bash -c 'cd ${SCRIPTS_DIR} && chmod 755 *.py *.sh'`, null, null);
+    
+    // Window Tracker:
+    this.tracker = WindowTracker.get_default();
 
     this.sudo_or_wheel = "none";
     let subProcess = spawnCommandLineAsyncIO("/usr/bin/env bash -c 'groups'", (out, err, exitCode) => {
@@ -290,6 +294,62 @@ class SensorsApplet extends Applet.Applet {
                                 });
     }
   }
+  
+  configureApplet(tab=0) {
+    //~ logDebug("tab=" + tab);
+    const HORIZONTAL = 1;
+    const VERTICAL = 2;
+    const BOTH = 3
+    let maximize_horizontally = this.window_maximizing == "horizontally";
+    let maximize_vertically = this.window_maximizing == "vertically";
+    let maximize_both = this.window_maximizing == "both";
+    let fixed = this.window_maximizing == "fixed";
+    if (fixed && (isNaN(parseInt(this.window_width)) || isNaN(parseInt(this.window_height)))) {
+      fixed = false;
+      this.window_maximizing = "none";
+    }
+    //~ let window_width = Math.min(this.window_width, global.screen_width);
+    //~ this.window_width = window_width;
+    this._applet_context_menu.close(false);
+    //~ this.closeSettingsWindow();
+
+    //~ let nemo_size_prefixes = get_nemo_size_prefixes();
+    //~ if (nemo_size_prefixes !== this.size_prefixes) {
+      //~ this.size_prefixes = nemo_size_prefixes
+    //~ }
+
+    //~ this._set_settings_options();
+
+    let pid = spawnCommandLine("xlet-settings applet " + UUID + " -i " + this.instance_id + " -t " + tab);
+    //~ let pid = spawnCommandLine(SCRIPTS_DIR + "/configRadio3.0.sh " + this.instance_id + " " + tab);
+
+    if (this.window_maximizing != "none") {
+      var app = null;
+      var intervalId = null;
+      intervalId = setTimeout(() => {
+        clearTimeout(intervalId);
+        app = this.tracker.get_app_from_pid(pid);
+        if (app != null) {
+          let window = app.get_windows()[0];
+          //~ this.settingsTab = tab;
+          //~ window.move_resize_frame(null, 0, 0, window_width, 800);
+          if (maximize_vertically)
+            window.maximize(VERTICAL);
+          else if (maximize_both)
+            window.maximize(BOTH);
+          else if (maximize_horizontally)
+            window.maximize(HORIZONTAL);
+          else if (fixed)
+            window.move_resize_frame(null, 0, 0, this.window_width, this.window_height);
+          window.activate(300);
+          //~ this.settingsWindow = window;
+          //~ app.connect("windows-changed", () => { this.settingsWindow = undefined; });
+        }
+      }, 1000);
+    }
+    // Returns the pid:
+    return pid;
+  }
 
   get_user_settings() {
     this.s = new AppletSettings(this, UUID, this.instanceId);
@@ -297,6 +357,9 @@ class SensorsApplet extends Applet.Applet {
     // General tab
     this.s.bind("show_tooltip", "show_tooltip", () => { this.on_settings_changed() });
     this.s.bind("do_not_check_dependencies", "do_not_check_dependencies");
+    this.s.bind("window_maximizing", "window_maximizing");
+    this.s.bind("window_width", "window_width");
+    this.s.bind("window_height", "window_height");
     this.s.bind("has_set_markup", "has_set_markup");
     this.s.bind("interval", "interval", () => { this.on_settings_changed() });
     this.s.bind("keep_size", "keep_size", () => { this.updateUI() });
@@ -1379,7 +1442,8 @@ class SensorsApplet extends Applet.Applet {
         let _to = setTimeout( () => {
             clearTimeout(_to);
             if (this.menu.isOpen) this.menu.close();
-            this.pids.push(spawnCommandLine("xlet-settings applet %s".format(UUID)));
+            //~ this.pids.push(spawnCommandLine("xlet-settings applet %s".format(UUID)));
+            this.configureApplet(0)
           },
           300
         );
@@ -1395,7 +1459,8 @@ class SensorsApplet extends Applet.Applet {
         let _to = setTimeout( () => {
             clearTimeout(_to);
             if (this.menu.isOpen) this.menu.close();
-            this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 1".format(UUID)));
+            //~ this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 1".format(UUID)));
+            this.configureApplet(1)
           },
           300
         );
@@ -1411,7 +1476,8 @@ class SensorsApplet extends Applet.Applet {
         let _to = setTimeout( () => {
             clearTimeout(_to);
             if (this.menu.isOpen) this.menu.close();
-            this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 2".format(UUID)));
+            //~ this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 2".format(UUID)));
+            this.configureApplet(2)
           },
           300
         );
@@ -1427,7 +1493,8 @@ class SensorsApplet extends Applet.Applet {
         let _to = setTimeout( () => {
             clearTimeout(_to);
             if (this.menu.isOpen) this.menu.close();
-            this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 3".format(UUID)));
+            //~ this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 3".format(UUID)));
+            this.configureApplet(3)
           },
           300
         );
@@ -1443,7 +1510,8 @@ class SensorsApplet extends Applet.Applet {
         let _to = setTimeout( () => {
             clearTimeout(_to);
             if (this.menu.isOpen) this.menu.close();
-            this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 4".format(UUID)));
+            //~ this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 4".format(UUID)));
+            this.configureApplet(4)
           },
           300
         );
@@ -1453,6 +1521,22 @@ class SensorsApplet extends Applet.Applet {
 
     // Button Custom:
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+    
+    // Maximizing mode:
+    //~ const items = ["none", "horizontally", "vertically", "both"];
+    //~ const translated_items = [_("none"), _("horizontally"), _("vertically"), _("both")];
+    //~ let maximize_combobox = new PopupMenu.PopupComboBoxMenuItem({});
+    //~ for (let i=0;i<items.length;i++) {
+      //~ maximize_combobox._menu.addMenuItem(new PopupMenu.PopupMenuItem(translated_items[i]), i);
+      //~ if (this.window_maximizing === items[i]) maximize_combobox._menu.setActiveItem(i);
+    //~ }
+    //~ maximize_combobox.connect('active-item-changed', (value) => {
+      //~ global.log("Item chosen: " + value);
+    //~ });
+    //~ this.menu.addMenuItem(maximize_combobox);
+    //~ maximize_combobox._menu.open(),
+    
+    //~ this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
     // Button xsensors
     let _values_in_real_time_button = new PopupMenu.PopupIconMenuItem(_("Run xsensors"),

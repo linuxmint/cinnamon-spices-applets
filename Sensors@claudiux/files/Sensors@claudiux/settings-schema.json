@@ -12,6 +12,7 @@
       "type": "page",
       "title": "⚙ General",
       "sections": [
+        "section_SettingsWindow",
         "section_Display",
         "section_Tooltip",
         "section_Report",
@@ -64,6 +65,15 @@
         "section_customDisclaimer",
         "section_customDisplay",
         "section_customSensors"
+      ]
+    },
+    "section_SettingsWindow": {
+      "type": "section",
+      "title": "This settings window",
+      "keys": [
+        "window_maximizing",
+        "window_width",
+        "window_height"
       ]
     },
     "section_Display": {
@@ -275,6 +285,33 @@
   "has_set_markup": {
     "type": "generic",
     "default": false
+  },
+  "window_maximizing": {
+    "type": "combobox",
+    "default": "none",
+    "description": "How to set its size",
+    "options": {
+      "let it be": "none",
+      "maximize horizontally": "horizontally",
+      "maximize vertically": "vertically",
+      "maximize everything": "both",
+      "fixed": "fixed"
+    },
+    "tooltip": "Future window openings."
+  },
+  "window_width": {
+    "type": "entry",
+    "default": "800",
+    "description": "Width",
+    "tooltip": "This number must match your screen configuration.\nMinimum value: 800.",
+    "dependency": "window_maximizing=fixed"
+  },
+  "window_height": {
+    "type": "entry",
+    "default": "600",
+    "description": "Height",
+    "tooltip": "This number must match your screen configuration.\nMinimum value: 100.",
+    "dependency": "window_maximizing=fixed"
   },
   "interval": {
     "type": "combobox",
