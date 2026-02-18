@@ -1,3 +1,7 @@
+### v5.10.4~20260218
+  * Added section "This settings window" to set its size.
+  * Fixes [#8324](https://github.com/linuxmint/cinnamon-spices-applets/issues/8324)
+
 ### v5.10.3~20260215
   * Added option "Do not check dependencies" in General tab.
   * Fixes [#8325](https://github.com/linuxmint/cinnamon-spices-applets/issues/8325)
