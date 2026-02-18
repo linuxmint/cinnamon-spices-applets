@@ -73,7 +73,9 @@
       "keys": [
         "window_maximizing",
         "window_width",
-        "window_height"
+        "window_height",
+        "window_set_current_size",
+        "window_label"
       ]
     },
     "section_Display": {
@@ -312,6 +314,25 @@
     "description": "Height",
     "tooltip": "This number must match your screen configuration.\nMinimum value: 100.",
     "dependency": "window_maximizing=fixed"
+  },
+  "window_set_current_size": {
+    "type": "button",
+    "callback": "_on_window_set_current_size",
+    "description": "Set to the approximate current size and position",
+    "dependency": "window_maximizing=fixed"
+  },
+  "window_label": {
+    "type": "label",
+    "description": "The exact size and position will depend on Cinnamon.",
+    "dependency": "window_maximizing=fixed"
+  },
+  "window_x": {
+    "type": "generic",
+    "default": "0"
+  },
+  "window_y": {
+    "type": "generic",
+    "default": "0"
   },
   "interval": {
     "type": "combobox",

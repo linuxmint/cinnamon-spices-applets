@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-02-18 05:07+0100\n"
+"POT-Creation-Date: 2026-02-18 18:19+0100\n"
 "PO-Revision-Date: 2025-08-27 18:03+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -24,89 +24,89 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Monitoraggio Sensori"
 
-#. applet.js:566
+#. applet.js:585
 msgid "Suspended"
 msgstr "Sospeso"
 
-#. applet.js:882 applet.js:924
+#. applet.js:901 applet.js:943
 msgid "high:"
 msgstr "alto:"
 
-#. applet.js:882 applet.js:885 applet.js:924 applet.js:926 applet.js:967
+#. applet.js:901 applet.js:904 applet.js:943 applet.js:945 applet.js:986
 msgid "n/a"
 msgstr "n/d"
 
-#. applet.js:885 applet.js:926
+#. applet.js:904 applet.js:945
 msgid "crit:"
 msgstr "crit:"
 
-#. applet.js:967 applet.js:1011
+#. applet.js:986 applet.js:1030
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:1013
+#. applet.js:1032
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:1042
+#. applet.js:1061
 msgid "No intrusion detected"
 msgstr "Nessuna intrusione rilevata"
 
-#. applet.js:1042
+#. applet.js:1061
 msgid "INTRUSION DETECTED!"
 msgstr "INTRUSIONE RILEVATA!"
 
-#. applet.js:1062
+#. applet.js:1081
 msgid "Must be configured!"
 msgstr "Deve essere configurato!"
 
-#. applet.js:1431
+#. applet.js:1450
 msgid "Settings"
 msgstr "Impostazioni"
 
-#. applet.js:1431
+#. applet.js:1450
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1438
+#. applet.js:1457
 msgid "⚙ General"
 msgstr "⚙ Generale"
 
-#. applet.js:1455
+#. applet.js:1474
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Sensori di temperatura"
 
-#. applet.js:1472
+#. applet.js:1491
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Sensori delle ventole"
 
-#. applet.js:1489
+#. applet.js:1508
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Sensori di tensione"
 
-#. applet.js:1506
+#. applet.js:1525
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Sensori di intrusione"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1542
+#. applet.js:1561
 msgid "Run xsensors"
 msgstr "Esegui xsensors"
 
-#. applet.js:1551
+#. applet.js:1570
 msgid "Suspend Sensors"
 msgstr "Sospendi i sensori"
 
-#. applet.js:1562
+#. applet.js:1581
 msgid "Reload this applet"
 msgstr "Ricarica questa applet"
 
-#. applet.js:1909
+#. applet.js:1928
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Rimuovere '%s'?"
@@ -339,6 +339,14 @@ msgstr ""
 msgid ""
 "This number must match your screen configuration.\n"
 "Minimum value: 100."
+msgstr ""
+
+#. settings-schema.json->window_set_current_size->description
+msgid "Set to the approximate current size and position"
+msgstr ""
+
+#. settings-schema.json->window_label->description
+msgid "The exact size and position will depend on Cinnamon."
 msgstr ""
 
 #. settings-schema.json->interval->options
