@@ -170,8 +170,6 @@ MyApplet.prototype = {
             } else if (propVal.indexOf('[MC]') != -1) { //add/remove applets 
                 propVal = "sh " + AppletDir + "/run-minecraft.sh";
                 sc = true;
-            } else if (propVal.indexOf('[EE]') != -1) { // ?
-                propVal = "xdg-open http://markbokil.com/downloads/mylauncher/mycat.jpg";
             } else {
                  sc = true;
             }
