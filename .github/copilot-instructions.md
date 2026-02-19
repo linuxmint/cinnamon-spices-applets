@@ -119,7 +119,7 @@ severity.
   callback, instead of leveraging the return value (GLib.SOURCE_REMOVE or
   GLib.SOURCE_CONTINUE) to control whether it should repeat or not.
 
-### API Usage, 
+### API/General code 
 
 - Look for polyfills and shell scripts that do things that could be performed by
   existing Cinnamon or GObject/introspected APIs. If any are present, recommend
@@ -132,6 +132,17 @@ severity.
 - Look for exceedingly niche/edge-case handling that only adds complexity without
   much real-world benefit. Recommend removing any such code unless there's a
   compelling reason to keep it.
+
+- Recommend using named return values instead of their numeric/boolean equivalents.
+  - GLib.SOURCE_REMOVE and GLib.SOURCE_CONTINUE when dealing with GLib timers.
+  - Clutter.EVENT_STOP and Clutter.EVENT_PROPAGATE when dealing with Clutter event
+    handlers.
+
+- Common acceptable patterns for cinnamon:
+  - In general Clutter.Actors don't need to be explicitly destroyed - removing them
+    from their parent container and dereferencing them is sufficient.
+  - Adding custom properties to GObjects via monkey-patching is ok, as long as it
+    does not conflict with existing GObject properties.
 
 ### Translation / Localization
 
