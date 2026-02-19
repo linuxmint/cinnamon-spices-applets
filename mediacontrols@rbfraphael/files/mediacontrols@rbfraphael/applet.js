@@ -160,15 +160,8 @@ class MediaControlsApplet extends Applet.TextIconApplet {
         this.settings.bind("hover_bg_color", "config_hover_bg_color", this._updateStyles.bind(this));
     }
 
-    _onSettingsChanged() {
-        this._updateUi();
-    }
-
     _rebuildUi() {
-        this.actor.get_children().forEach(child => {
-            this.actor.remove_child(child);
-        });
-
+        this.actor.destroy_all_children();
         this._buildUi();
     }
 
@@ -454,6 +447,11 @@ class MediaControlsApplet extends Applet.TextIconApplet {
         Object.values(this._players).forEach((p) => {
             p.player.destroy();
         });
+
+        if(this.settings) {
+            this.settings.finalize();
+            this.settings = null;
+        }
 
         if (this._dbus && this._ownerChangedId) {
             this._dbus.disconnectSignal(this._ownerChangedId);
