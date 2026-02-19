@@ -1,3 +1,7 @@
+### v3.5.1~20260219
+  * Make some messages easier to understand.
+  * Button to apply the multiple of the width of each graph.
+
 ### v3.5.0~20260219
   * Ability to show the CPU temperature.
 

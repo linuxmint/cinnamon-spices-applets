@@ -79,6 +79,7 @@
         "borderOn",
         "borderRadius",
         "graphStep",
+        "graphStepApply",
         "graphSpacing",
         "thickness",
         "useIconSize",
@@ -323,7 +324,12 @@
       "32px": 32,
       "64px": 64
     },
-    "description": "Step for the width of a graph"
+    "description": "The width of each graphic must be a multiple of:"
+  },
+  "graphStepApply": {
+    "type": "button",
+    "callback": "on_apply_width_multiple",
+    "description": "Apply this multiple"
   },
   "graphSpacing": {
     "type": "scale",
@@ -431,7 +437,7 @@
   },
   "CPU_showTemp": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Show the CPU temperature"
   },
   "CPU_tempInFahrenheit": {
