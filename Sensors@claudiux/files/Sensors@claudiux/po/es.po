@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-18 18:19+0100\n"
-"PO-Revision-Date: 2026-02-15 22:00-0300\n"
+"PO-Revision-Date: 2026-02-18 21:48-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -228,7 +228,7 @@ msgstr "⛓ Personalizado"
 
 #. settings-schema.json->section_SettingsWindow->title
 msgid "This settings window"
-msgstr ""
+msgstr "Esta ventana de configuración"
 
 #. settings-schema.json->section_Display->title
 #. settings-schema.json->section_tempOptions->title
@@ -297,59 +297,63 @@ msgstr "Sensores personalizados"
 
 #. settings-schema.json->window_maximizing->description
 msgid "How to set its size"
-msgstr ""
+msgstr "Cómo configurar su tamaño"
 
 #. settings-schema.json->window_maximizing->options
 msgid "let it be"
-msgstr ""
+msgstr "déjalo estar"
 
 #. settings-schema.json->window_maximizing->options
 msgid "maximize horizontally"
-msgstr ""
+msgstr "maximizar horizontalmente"
 
 #. settings-schema.json->window_maximizing->options
 msgid "maximize vertically"
-msgstr ""
+msgstr "maximizar verticalmente"
 
 #. settings-schema.json->window_maximizing->options
 msgid "maximize everything"
-msgstr ""
+msgstr "maximizar todo"
 
 #. settings-schema.json->window_maximizing->options
 msgid "fixed"
-msgstr ""
+msgstr "fijo"
 
 #. settings-schema.json->window_maximizing->tooltip
 msgid "Future window openings."
-msgstr ""
+msgstr "Futuras aperturas de ventanas."
 
 #. settings-schema.json->window_width->description
 msgid "Width"
-msgstr ""
+msgstr "Ancho"
 
 #. settings-schema.json->window_width->tooltip
 msgid ""
 "This number must match your screen configuration.\n"
 "Minimum value: 800."
 msgstr ""
+"Este número debe coincidir con la configuración de su pantalla.\n"
+"Valor mínimo: 800."
 
 #. settings-schema.json->window_height->description
 msgid "Height"
-msgstr ""
+msgstr "Altura"
 
 #. settings-schema.json->window_height->tooltip
 msgid ""
 "This number must match your screen configuration.\n"
 "Minimum value: 100."
 msgstr ""
+"Este número debe coincidir con la configuración de su pantalla.\n"
+"Valor mínimo: 100."
 
 #. settings-schema.json->window_set_current_size->description
 msgid "Set to the approximate current size and position"
-msgstr ""
+msgstr "Establecer el tamaño y la posición aproximados actuales"
 
 #. settings-schema.json->window_label->description
 msgid "The exact size and position will depend on Cinnamon."
-msgstr ""
+msgstr "El tamaño y la posición exactos dependerán de Cinnamon."
 
 #. settings-schema.json->interval->options
 msgid "1"
