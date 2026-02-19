@@ -1,12 +1,24 @@
 # Changelog
 
+## 3.6.9
+
+* Fixes [Unit label kph should be km/h (SI unit) #8036](https://github.com/linuxmint/cinnamon-spices-applets/issues/8036)
+* Removed myself as the maintainer of the weather@mockturtl applet and updated CODEOWNERS
+* Clean build instructions
+* Make hourly weather day (Mon, Tue, etc) text bold
+* Fixes [[Security] ReDoS vulnerability in weather@mockturtl applet via luxon@3.2.0 (CVE-2023-22467) #8155](https://github.com/linuxmint/cinnamon-spices-applets/issues/8155)
+* Fixes [weather@mockturl - service error #8160](https://github.com/linuxmint/cinnamon-spices-applets/issues/8160)
+* To support new Met UK API provider-specific key fields are added (keys are remembered for each provider that needs it)
+* Make GeoClue optional for getting location automatically.
+* Make IP-based location detection provider configurable
+
 ## 3.6.8
 
 * Fixes [weather@mockturtl - superwide popup Pirateweather](https://github.com/linuxmint/cinnamon-spices-applets/issues/7389)
 * Fixes [[weather@mockturtl] - UV index options for Panel #7399](https://github.com/linuxmint/cinnamon-spices-applets/issues/7399) - UV index for the next h hours doesn't exist in most of the providers
 * GeoClue2 is borderline useless for automation location lookup so be a lot stricter when allocating time for it. Hopefully this is the cause of most of the issue reports
 * Fixes [weather@mockturl - #7624](https://github.com/linuxmint/cinnamon-spices-applets/issues/7624)
-* Update Serbian translations by minciv@protonmail.com
+* Update Serbian translations by <minciv@protonmail.com>
 
 ## 3.6.7
 
@@ -304,7 +316,7 @@ Fix nominatim not getting location data due to API changes. Related issues:
 
 * Resolves [#3694](https://github.com/linuxmint/cinnamon-spices-applets/issues/3694)
 * Move Typescript declarations out of the weather applet folder to prevent update triggers from other applets making declaration changes. Please review this now if it's ok, should be in a folder with a different name or have a more thorough README etc.
-* Update de.po with contribution from kipuka@eclipso.eu
+* Update de.po with contribution from <kipuka@eclipso.eu>
 * Add deprecation notices for relevant providers and their EOL date
 * Make provider names translatable
 * Add stack trace to errors (even if they do not seem to be correct)

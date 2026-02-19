@@ -1,3 +1,11 @@
+### v3.5.0~20260219
+  * Ability to show the CPU temperature.
+
+### v3.4.2~20260213
+  * Ability to choose the radius of curvature in corners.
+  * Better detection of network devices.
+  * Fixes [#8311](https://github.com/linuxmint/cinnamon-spices-applets/issues/8311)
+
 ### v3.4.1~20260208
   * Smoother reading of all system data, even those related to networks.
   * The box width can be adjusted in increments of 1, 2, 4, 8, 16, 32, and 64 pixels in the General tab of this applet's settings.

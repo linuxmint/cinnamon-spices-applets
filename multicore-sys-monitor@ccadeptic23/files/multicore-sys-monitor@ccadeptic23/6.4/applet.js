@@ -113,7 +113,7 @@ const formatBytesValueUnit = (bytes, decimals=2, withRate=true) => {
     if (!isBinary) {
         k = 1000;
         sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        i = Math.min(Math.max(0, Math.floor(Math.log(bytes) / Math.log(k))), 8);
+        i = Math.min(Math.max(0, Math.floor(Math.log10(bytes) / Math.log10(k))), 8);
     } else {
         k = 1024;
         sizes = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
@@ -172,6 +172,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Disk_devicesList", "Disk_devicesList");
         this.settings.bind("labelsOn", "labelsOn");
         this.settings.bind("borderOn", "borderOn");
+        this.settings.bind("borderRadius", "borderRadius");
         this.settings.bind("graphStep", "graphStep");
         this.settings.bind("graphSpacing", "graphSpacing");
         this.settings.bind("percentAtEndOfLine", "percentAtEndOfLine");
@@ -189,6 +190,9 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("backgroundColor", "backgroundColor");
         this.settings.bind("CPU_enabled", "CPU_enabled");
         this.settings.bind("CPU_squared", "CPU_squared");
+        this.settings.bind("CPU_showTemp", "CPU_showTemp");
+        this.settings.bind("CPU_tempInFahrenheit", "CPU_tempInFahrenheit");
+        this.settings.bind("CPU_tempPath", "CPU_tempPath");
         this.settings.bind("CPU_width", "CPU_width", () => { this.adjust_CPU_width() });
         this.settings.bind("CPU_mergeAll", "CPU_mergeAll");
         this.settings.bind("CPU_color0", "CPU_color0");
@@ -622,9 +626,10 @@ class MCSM extends Applet.IconApplet {
             knownDevices.push(d["id"]);
         }
         var ret = "";
+        var returnedDevices = [];
         if (GLib.file_test(NETWORK_DEVICES_STATUS_PATH, GLib.FileTest.EXISTS)) {
             readFileAsync(NETWORK_DEVICES_STATUS_PATH).then((status) => {
-                ret += status;
+                ret += status.trim();
             });
         } else {
             const net_dir_path = "/sys/class/net";
@@ -640,23 +645,26 @@ class MCSM extends Applet.IconApplet {
                 });
             }
         }
-        var returnedDevices = ret.trim().split(" ");
-        for (let d of returnedDevices) {
-            let [dev, status] = d.split(":");
-            if (knownDevices.indexOf(dev) < 0) {
-                if (status === "up" || status === "down") {
-                    new_Net_devicesList.push({
-                        "enabled": status === "up",
-                        "id": dev,
-                        "name": dev,
-                        "colorDown": (knownDevices.length * 2) % nb_colors,
-                        "colorUp": (knownDevices.length * 2 + 1) % nb_colors
-                    });
-                    knownDevices.push(dev);
-                }
-            }
-        }
-        this.Net_devicesList = new_Net_devicesList;
+        let idto = setTimeout( () => {
+			clearTimeout(idto);
+			returnedDevices = ret.trim().split(" ");
+			for (let d of returnedDevices) {
+				let [dev, status] = d.split(":");
+				if (knownDevices.indexOf(dev) < 0) {
+					if (status === "up" || status === "down") {
+						new_Net_devicesList.push({
+							"enabled": status === "up",
+							"id": dev,
+							"name": dev,
+							"colorDown": (knownDevices.length * 2) % nb_colors,
+							"colorUp": (knownDevices.length * 2 + 1) % nb_colors
+						});
+						knownDevices.push(dev);
+					}
+				}
+			}
+			this.Net_devicesList = new_Net_devicesList;
+		}, 2100);
     }
 
     on_Net_cleardevlist_btn_clicked() {
@@ -844,6 +852,26 @@ class MCSM extends Applet.IconApplet {
         if (!this.CPU_enabled) return;
         let old, duration;
         if (DEBUG) old = Date.now();
+        
+        if (
+            this.CPU_showTemp && 
+            this.CPU_tempPath.length > 0 && 
+            GLib.file_test(this.CPU_tempPath, GLib.FileTest.EXISTS)
+        ) {
+            //~ global.log("this.CPU_tempPath: " + this.CPU_tempPath);
+            readFileAsync(this.CPU_tempPath).then((contents) => {
+                //~ global.log("contents: " + contents);
+                let _temp = contents.trim();
+                //~ global.log("_temp: " + _temp);
+                _temp = parseInt(_temp);
+                if (!isNaN(_temp)) {
+                    _temp = Math.round(1 * _temp / 1000);
+                    if (this.CPU_tempInFahrenheit)
+                        _temp = Math.round(1.8 * _temp + 32);
+                    this.CPU_temperature = _temp;
+                }
+            }); //.catch(null)
+        }
         
         readFileAsync("/proc/stat").then((contents) => {
             var data = [];
