@@ -276,8 +276,9 @@ class MediaControlsApplet extends Applet.TextIconApplet {
                 }
 
                 if (this.config_truncate_track_info) {
-                    if(trackInfo.trim().length > this.config_truncate_length){
-                        trackInfo = Util.splitByGlyph(trackInfo).slice(0, this.config_truncate_length - 3).join("") + "...";
+                    const glyphs = Util.splitByGlyph(trackInfo);
+                    if (glyphs.length > this.config_truncate_length) {
+                        trackInfo = glyphs.slice(0, this.config_truncate_length - 3).join("") + "...";
                     }
                 }
 
