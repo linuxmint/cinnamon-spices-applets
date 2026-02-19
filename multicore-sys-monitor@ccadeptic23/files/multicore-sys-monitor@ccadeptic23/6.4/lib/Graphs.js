@@ -227,18 +227,33 @@ class GraphVBars {
     }
 
     // Label
+    let fontsize_px = Math.trunc(1 / 3 * _height);
+    let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
     if (labelsEnabled) {
       let pangolayout = area.create_pango_layout(providerName);
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
       pangolayout.set_width(_width);
-      let fontsize_px = Math.trunc(1 / 3 * _height);
-      let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
       pangolayout.set_font_description(fontdesc);
 
       areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       areaContext.moveTo(_width / 2, 0); //place text in center of graph area
       PangoCairo.layout_path(areaContext, pangolayout);
+      areaContext.fill();
+    }
+    
+    // Temperature
+    if (providerName != 'SWAP' && this.applet.CPU_showTemp && this.applet.CPU_temperature) {
+      let degrees = (this.applet.CPU_tempInFahrenheit) ? "°F" : "°C";
+      let pangolayout2 = area.create_pango_layout("" + this.applet.CPU_temperature + degrees);
+
+      pangolayout2.set_alignment(Pango.Alignment.RIGHT);
+      pangolayout2.set_width(_width);
+      pangolayout2.set_font_description(fontdesc);
+
+      areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
+      areaContext.moveTo(_width, 0); //place text in top right corner of graph area
+      PangoCairo.layout_path(areaContext, pangolayout2);
       areaContext.fill();
     }
   }

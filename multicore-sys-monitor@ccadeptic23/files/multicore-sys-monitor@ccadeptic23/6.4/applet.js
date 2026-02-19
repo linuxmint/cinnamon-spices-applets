@@ -190,6 +190,9 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("backgroundColor", "backgroundColor");
         this.settings.bind("CPU_enabled", "CPU_enabled");
         this.settings.bind("CPU_squared", "CPU_squared");
+        this.settings.bind("CPU_showTemp", "CPU_showTemp");
+        this.settings.bind("CPU_tempInFahrenheit", "CPU_tempInFahrenheit");
+        this.settings.bind("CPU_tempPath", "CPU_tempPath");
         this.settings.bind("CPU_width", "CPU_width", () => { this.adjust_CPU_width() });
         this.settings.bind("CPU_mergeAll", "CPU_mergeAll");
         this.settings.bind("CPU_color0", "CPU_color0");
@@ -849,6 +852,26 @@ class MCSM extends Applet.IconApplet {
         if (!this.CPU_enabled) return;
         let old, duration;
         if (DEBUG) old = Date.now();
+        
+        if (
+            this.CPU_showTemp && 
+            this.CPU_tempPath.length > 0 && 
+            GLib.file_test(this.CPU_tempPath, GLib.FileTest.EXISTS)
+        ) {
+            //~ global.log("this.CPU_tempPath: " + this.CPU_tempPath);
+            readFileAsync(this.CPU_tempPath).then((contents) => {
+                //~ global.log("contents: " + contents);
+                let _temp = contents.trim();
+                //~ global.log("_temp: " + _temp);
+                _temp = parseInt(_temp);
+                if (!isNaN(_temp)) {
+                    _temp = Math.round(1 * _temp / 1000);
+                    if (this.CPU_tempInFahrenheit)
+                        _temp = Math.round(1.8 * _temp + 32);
+                    this.CPU_temperature = _temp;
+                }
+            }); //.catch(null)
+        }
         
         readFileAsync("/proc/stat").then((contents) => {
             var data = [];

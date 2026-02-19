@@ -111,6 +111,9 @@
         "CPU_squared",
         "CPU_width",
         "CPU_mergeAll",
+        "CPU_showTemp",
+        "CPU_tempInFahrenheit",
+        "CPU_tempPath",
         "CPU_byActivity",
         "CPU_useProgressiveColors"
       ]
@@ -425,6 +428,23 @@
     "type": "switch",
     "default": false,
     "description": "Merge all"
+  },
+  "CPU_showTemp": {
+    "type": "switch",
+    "default": false,
+    "description": "Show the CPU temperature"
+  },
+  "CPU_tempInFahrenheit": {
+    "type": "switch",
+    "default": false,
+    "description": "Fahrenheit degrees",
+    "dependency": "CPU_showTemp"
+  },
+  "CPU_tempPath": {
+    "type": "entry",
+    "default": "/sys/class/thermal/thermal_zone1/temp",
+    "expand-width": true,
+    "description": "Path to the system file used to check the CPU temperature"
   },
   "CPU_byActivity": {
     "type": "switch",
