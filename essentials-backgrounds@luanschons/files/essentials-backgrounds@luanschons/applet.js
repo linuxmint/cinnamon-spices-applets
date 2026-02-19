@@ -13,6 +13,7 @@ const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
+const MessageTray = imports.ui.messageTray;
 const Util = imports.misc.util;
 const Lang = imports.lang;
 const St = imports.gi.St;
@@ -198,7 +199,7 @@ class EssentialsBackgroundsApplet extends Applet.IconApplet {
             St.IconType.SYMBOLIC
         );
         openCacheItem.connect("activate", () => {
-            Util.spawnCommandLine("xdg-open " + WALLPAPER_DIR);
+            Util.spawnCommandLine("xdg-open '" + WALLPAPER_DIR + "'");
         });
         this.menu.addMenuItem(openCacheItem);
 
@@ -209,7 +210,7 @@ class EssentialsBackgroundsApplet extends Applet.IconApplet {
             St.IconType.SYMBOLIC
         );
         openFavItem.connect("activate", () => {
-            Util.spawnCommandLine("xdg-open " + FAVORITES_DIR);
+            Util.spawnCommandLine("xdg-open '" + FAVORITES_DIR + "'");
         });
         this.menu.addMenuItem(openFavItem);
 
@@ -378,9 +379,9 @@ class EssentialsBackgroundsApplet extends Applet.IconApplet {
         this.set_applet_tooltip(info.title || _("Essentials Backgrounds"));
 
         if (this.showNotification) {
-            let source = new Main.MessageTray.SystemNotificationSource(_("Essentials Backgrounds"));
+            let source = new MessageTray.SystemNotificationSource(_("Essentials Backgrounds"));
             Main.messageTray.add(source);
-            let notification = new Main.MessageTray.Notification(
+            let notification = new MessageTray.Notification(
                 source,
                 _("Wallpaper Changed"),
                 info.title + (info.credits ? "\n" + info.credits : "")
@@ -414,9 +415,9 @@ class EssentialsBackgroundsApplet extends Applet.IconApplet {
             srcFile.copy(destFile, Gio.FileCopyFlags.NONE, null, null);
 
             if (this.showNotification) {
-                let source = new Main.MessageTray.SystemNotificationSource(_("Essentials Backgrounds"));
+                let source = new MessageTray.SystemNotificationSource(_("Essentials Backgrounds"));
                 Main.messageTray.add(source);
-                let notification = new Main.MessageTray.Notification(
+                let notification = new MessageTray.Notification(
                     source,
                     _("Saved to Favorites"),
                     this._currentInfo.title || this._currentInfo.filename
