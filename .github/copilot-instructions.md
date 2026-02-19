@@ -139,8 +139,10 @@ severity.
     handlers.
 
 - Common acceptable patterns for cinnamon:
-  - In general Clutter.Actors don't need to be explicitly destroyed - removing them
-    from their parent container and dereferencing them is sufficient.
+  - In general Clutter.Actors (and GObjects in general) don't need to be explicitly
+    destroyed - removing them from their parent container and dereferencing them is
+    sufficient. Any signal connections to these objects will also go away, they don't
+    need to be disconnected.
   - Adding custom properties to GObjects via monkey-patching is ok, as long as it
     does not conflict with existing GObject properties.
 
