@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-19 22:56+0100\n"
-"PO-Revision-Date: 2026-02-19 10:53-0300\n"
+"PO-Revision-Date: 2026-02-19 19:47-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -509,11 +509,11 @@ msgstr "64px"
 
 #. 6.4->settings-schema.json->graphStep->description
 msgid "The width of each graphic must be a multiple of:"
-msgstr ""
+msgstr "El ancho de cada gráfico debe ser un múltiplo de:"
 
 #. 6.4->settings-schema.json->graphStepApply->description
 msgid "Apply this multiple"
-msgstr ""
+msgstr "Aplicar este múltiplo"
 
 #. 6.4->settings-schema.json->graphSpacing->description
 msgid "Graph spacing"
