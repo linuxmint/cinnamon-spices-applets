@@ -374,6 +374,14 @@ class MCSM extends Applet.IconApplet {
         );
         this.DiskUsage_width = DiskUsage_width;
     }
+    
+    on_apply_width_multiple() {
+        this.adjust_CPU_width();
+        this.adjust_Mem_width();
+        this.adjust_Net_width();
+        this.adjust_Disk_width();
+        this.adjust_DiskUsage_width();
+    }
 
     set_panelHeight() {
         this.iconSize = this.getPanelIconSize(St.IconType.FULLCOLOR);
