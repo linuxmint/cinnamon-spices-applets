@@ -4,6 +4,7 @@ const GLib = imports.gi.GLib;
 const Interfaces = imports.misc.interfaces;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
+const Util = imports.misc.util;
 
 const UUID = 'mediacontrols@rbfraphael';
 const MEDIA_PLAYER_2_PATH = "/org/mpris/MediaPlayer2";
@@ -276,7 +277,7 @@ class MediaControlsApplet extends Applet.TextIconApplet {
 
                 if (this.config_truncate_track_info) {
                     if(trackInfo.trim().length > this.config_truncate_length){
-                        trackInfo = trackInfo.substring(0, this.config_truncate_length - 3) + "...";
+                        trackInfo = Util.splitByGlyph(trackInfo).slice(0, this.config_truncate_length - 3).join("") + "...";
                     }
                 }
 
