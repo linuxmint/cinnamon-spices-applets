@@ -66,14 +66,19 @@ class FadeMonitorsApplet extends Applet.IconApplet {
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
+        // ----- Status indicator (non‑interactive) -----
+        this.statusItem = new PopupMenu.PopupMenuItem("");
+        this.statusItem.setSensitive(false);
+        this.menu.addMenuItem(this.statusItem);
+
         // Script control section
-        let startItem = new PopupMenu.PopupMenuItem("Start Script");
+        let startItem = new PopupMenu.PopupMenuItem("Start");
         startItem.connect("activate", () => {
             this._startScript();
         });
         this.menu.addMenuItem(startItem);
 
-        let stopItem = new PopupMenu.PopupMenuItem("Stop Script");
+        let stopItem = new PopupMenu.PopupMenuItem("Stop");
         stopItem.connect("activate", () => {
             this._stopScript();
         });
@@ -82,7 +87,7 @@ class FadeMonitorsApplet extends Applet.IconApplet {
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         // Configuration section
-        let settingsItem = new PopupMenu.PopupMenuItem("Open Script");
+        let settingsItem = new PopupMenu.PopupMenuItem("Open script");
         settingsItem.connect("activate", () => {
             this._openScriptFile();
         });
@@ -94,13 +99,33 @@ class FadeMonitorsApplet extends Applet.IconApplet {
     _refreshMenuLabels() {
         this.mouseToggleItem.label.text = 
             this._mouseDimmingEnabled ? 
-            "Mouse Dimming: On" : 
-            "Mouse Dimming: off";
+            "Mouse Dim: On" : 
+            "Mouse Dim: off";
         
         this.idleToggleItem.label.text = 
             this._idleDimmingEnabled ? 
-            "Idle Dimming: On" : 
-            "Idle Dimming: off";
+            "Idle Dim: On" : 
+            "Idle Dim: off";
+
+        // Update status
+        let running = this._isScriptRunning();
+        this.statusItem.label.text = running ? "Status: Running" : "Status: Stopped";
+    }
+
+    /* ---------------- Script running check ---------------- */
+    _isScriptRunning() {
+        try {
+            let [ok, stdout] = GLib.spawn_sync(
+                null,
+                ["pgrep", "-f", SCRIPT_NAME + "$"],
+                null,
+                GLib.SpawnFlags.SEARCH_PATH,
+                null
+            );
+            return ok && stdout.toString().trim().length > 0;
+        } catch (e) {
+            return false;
+        }
     }
 
     /* ---------------- File Operations ---------------- */
@@ -121,21 +146,6 @@ class FadeMonitorsApplet extends Applet.IconApplet {
             launcher.launch([file], null);
         } catch (e) {
             this._showError("Failed to open script: " + e.message);
-        }
-    }
-
-    _openConfigFolder() {
-        try {
-            let configDir = HOME + "/.local/bin/";
-            let file = Gio.File.new_for_path(configDir);
-            let launcher = Gio.AppInfo.create_from_commandline(
-                "xdg-open",
-                "xdg-open",
-                Gio.AppInfoCreateFlags.NONE
-            );
-            launcher.launch([file], null);
-        } catch (e) {
-            this._showError("Failed to open config folder: " + e.message);
         }
     }
 
