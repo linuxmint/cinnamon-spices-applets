@@ -77,6 +77,8 @@
         "removeEnlightenment",
         "labelsOn",
         "borderOn",
+        "borderRadius",
+        "graphStep",
         "graphSpacing",
         "thickness",
         "useIconSize",
@@ -109,6 +111,9 @@
         "CPU_squared",
         "CPU_width",
         "CPU_mergeAll",
+        "CPU_showTemp",
+        "CPU_tempInFahrenheit",
+        "CPU_tempPath",
         "CPU_byActivity",
         "CPU_useProgressiveColors"
       ]
@@ -297,6 +302,29 @@
     "default": false,
     "description": "Add a border to each graph"
   },
+  "borderRadius": {
+    "type": "scale",
+    "default": 0,
+    "min": 0,
+    "max": 25,
+    "step": 1,
+    "description": "Radius of curvature in corners",
+    "dependency": "borderOn"
+  },
+  "graphStep": {
+    "type": "combobox",
+    "default": 16,
+    "options": {
+      "1px": 1,
+      "2px": 2,
+      "4px": 4,
+      "8px": 8,
+      "16px": 16,
+      "32px": 32,
+      "64px": 64
+    },
+    "description": "Step for the width of a graph"
+  },
   "graphSpacing": {
     "type": "scale",
     "default": 1,
@@ -392,7 +420,7 @@
     "description": "Width",
     "min": 16,
     "max": 320,
-    "step": 16,
+    "step": 1,
     "show-value": true,
     "dependency": "!CPU_squared"
   },
@@ -400,6 +428,23 @@
     "type": "switch",
     "default": false,
     "description": "Merge all"
+  },
+  "CPU_showTemp": {
+    "type": "switch",
+    "default": false,
+    "description": "Show the CPU temperature"
+  },
+  "CPU_tempInFahrenheit": {
+    "type": "switch",
+    "default": false,
+    "description": "Fahrenheit degrees",
+    "dependency": "CPU_showTemp"
+  },
+  "CPU_tempPath": {
+    "type": "entry",
+    "default": "/sys/class/thermal/thermal_zone1/temp",
+    "expand-width": true,
+    "description": "Path to the system file used to check the CPU temperature"
   },
   "CPU_byActivity": {
     "type": "switch",
@@ -483,7 +528,7 @@
     "description": "Width",
     "min": 16,
     "max": 320,
-    "step": 16,
+    "step": 1,
     "show-value": true,
     "dependency": "!Mem_squared"
   },
@@ -550,7 +595,7 @@
     "description": "Width",
     "min": 16,
     "max": 320,
-    "step": 16,
+    "step": 1,
     "show-value": true,
     "dependency": "!Net_squared"
   },
@@ -713,7 +758,7 @@
     "description": "Width",
     "min": 16,
     "max": 320,
-    "step": 16,
+    "step": 1,
     "show-value": true,
     "dependency": "!Disk_squared"
   },
@@ -894,7 +939,7 @@
     "description": "Width",
     "min": 16,
     "max": 320,
-    "step": 16,
+    "step": 1,
     "show-value": true,
     "dependency": "!DiskUsage_squared"
   },

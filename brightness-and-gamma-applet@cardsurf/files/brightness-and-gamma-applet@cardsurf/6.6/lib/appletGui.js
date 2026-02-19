@@ -89,12 +89,6 @@ class RadioMenuItem extends PopupMenu.PopupSubMenuMenuItem {
         this.set_option_style(option, css_style);
     }
 
-    set_font_weight(option_index, font_weight) {
-        let css_style = "font-weight: " + font_weight + ";";
-        let option = this.options[option_index];
-        this.set_option_style(option, css_style);
-    }
-
     set_option_style(option, css_style) {
         option.label.set_style(css_style);
     }
@@ -256,7 +250,7 @@ class MenuSliders {
                                 this.applet.target_temperature ===  this.applet.screen_temp
                             ) {
                                 clearInterval(_interval);
-                                this.save_last_values();
+                                this.applet.save_last_values();
                             }
                             this.applet.brightness += Math.sign(this.applet.target_brightness - this.applet.brightness);
                             let diff_temp = this.applet.target_temperature - this.applet.screen_temp;
@@ -302,7 +296,7 @@ class MenuSliders {
                                 this.applet.target_gamma_blue === this.applet.gamma_blue
                             ) {
                                 clearInterval(_interval);
-                                this.save_last_values();
+                                this.applet.save_last_values();
                             }
     
                             this.applet.brightness += Math.sign(this.applet.target_brightness - this.applet.brightness);
@@ -347,12 +341,17 @@ class MenuSliders {
     }
 
     _init_label(key, value) {
-        let label = this.add_label(key, "");
-        this.set_label_text(key, value);
+        //~ let label = this.add_label(key, "");
+        let label = this.add_label(key, this.get_description_text(key, value));
+        //~ this.set_label_text(key, value);
     }
 
     add_label(key, text){
-        let label = new PopupMenu.PopupMenuItem(text, { reactive: false });
+        let label = new PopupMenu.PopupMenuItem(text, { reactive: false, style_class: "label-monospace" });
+        label.label.clutter_text.set_markup(text);
+        let fontdesc = Pango.font_description_from_string('monospace');
+        label.label.clutter_text.set_font_description(fontdesc);
+        label.label.clutter_text.set_ellipsize(Pango.EllipsizeMode.NONE);
         this.menu.addMenuItem(label);
         this.labels[key] = label;
         return label;
@@ -365,6 +364,8 @@ class MenuSliders {
         let fontdesc = Pango.font_description_from_string('monospace');
         label.label.clutter_text.set_font_description(fontdesc);
         label.label.clutter_text.set_ellipsize(Pango.EllipsizeMode.NONE);
+        
+        this.labels[key] = label;
     }
 
     get_description_text(key, value) {

@@ -12,10 +12,12 @@
       "type": "page",
       "title": "⚙ General",
       "sections": [
+        "section_SettingsWindow",
         "section_Display",
         "section_Tooltip",
         "section_Report",
-        "section_remove_incompatible_xlets"
+        "section_remove_incompatible_xlets",
+        "section_dependencies"
       ]
     },
     "page_Temperatures": {
@@ -65,6 +67,17 @@
         "section_customSensors"
       ]
     },
+    "section_SettingsWindow": {
+      "type": "section",
+      "title": "This settings window",
+      "keys": [
+        "window_maximizing",
+        "window_width",
+        "window_height",
+        "window_set_current_size",
+        "window_label"
+      ]
+    },
     "section_Display": {
       "type": "section",
       "title": "Options",
@@ -107,6 +120,13 @@
       "title": "Remove from panels certain applets that also use sensors",
       "keys": [
         "remove_temperatureATfevimu"
+      ]
+    },
+    "section_dependencies": {
+      "type": "section",
+      "title": "Dependencies",
+      "keys": [
+        "do_not_check_dependencies"
       ]
     },
     "section_tempDisktemp": {
@@ -268,6 +288,52 @@
     "type": "generic",
     "default": false
   },
+  "window_maximizing": {
+    "type": "combobox",
+    "default": "none",
+    "description": "How to set its size",
+    "options": {
+      "let it be": "none",
+      "maximize horizontally": "horizontally",
+      "maximize vertically": "vertically",
+      "maximize everything": "both",
+      "fixed": "fixed"
+    },
+    "tooltip": "Future window openings."
+  },
+  "window_width": {
+    "type": "entry",
+    "default": "800",
+    "description": "Width",
+    "tooltip": "This number must match your screen configuration.\nMinimum value: 800.",
+    "dependency": "window_maximizing=fixed"
+  },
+  "window_height": {
+    "type": "entry",
+    "default": "600",
+    "description": "Height",
+    "tooltip": "This number must match your screen configuration.\nMinimum value: 100.",
+    "dependency": "window_maximizing=fixed"
+  },
+  "window_set_current_size": {
+    "type": "button",
+    "callback": "_on_window_set_current_size",
+    "description": "Set to the approximate current size and position",
+    "dependency": "window_maximizing=fixed"
+  },
+  "window_label": {
+    "type": "label",
+    "description": "The exact size and position will depend on Cinnamon.",
+    "dependency": "window_maximizing=fixed"
+  },
+  "window_x": {
+    "type": "generic",
+    "default": "0"
+  },
+  "window_y": {
+    "type": "generic",
+    "default": "0"
+  },
   "interval": {
     "type": "combobox",
     "default": 10,
@@ -393,6 +459,12 @@
     "description": "Show in menu the action: Restart this applet",
     "tooltip": "Whether or not to display in menu the action: Restart this applet."
   },
+  "do_not_check_dependencies": {
+    "type": "switch",
+    "default": false,
+    "description": "Do not check dependencies",
+    "tooltip": "If you do not want to install certain dependencies (e.g., fonts), check this box. Be careful with dependencies that are necessary for this applet to function properly."
+  },
   "make_disktemp_readable_by_user": {
     "type": "button",
     "description": "Make disk temperature user-readable",
@@ -400,13 +472,13 @@
   },
   "show_temp": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_temp_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_temp"
@@ -615,13 +687,13 @@
   },
   "show_fan": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_fan_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_fan"
@@ -757,13 +829,13 @@
   },
   "show_volt": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_volt_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_volt"
@@ -882,13 +954,13 @@
   },
   "show_intrusion": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_intrusion_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": " Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_intrusion"

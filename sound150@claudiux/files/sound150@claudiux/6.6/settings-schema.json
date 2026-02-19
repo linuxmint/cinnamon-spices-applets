@@ -60,7 +60,6 @@
       "type": "section",
       "title": "Menu",
       "keys": [
-        "userMenuWidth",
         "playerControl",
         "extendedPlayerControl",
         "keepPlayerListOpen",
@@ -232,6 +231,9 @@
       "keys": [
         "keyOpen",
         "keySwitchPlayer",
+        "keyBalanceLeft",
+        "keyBalanceRight",
+        "keyBalanceCenter",
         "redefine-volume-keybindings",
         "button-set-to-default-keybindings",
         "audio-stop",
@@ -253,15 +255,6 @@
         "button-reload-applet"
       ]
     }
-  },
-  "userMenuWidth": {
-    "type": "scale",
-    "default": 450,
-    "min": 300,
-    "max": 6000,
-    "step": 10,
-    "description": "Menu width (in pixels)",
-    "show-value": true
   },
   "playerControl": {
     "type": "switch",
@@ -397,6 +390,24 @@
     "description": "Switch to next player",
     "default": "::",
     "tooltip": "Set keybinding(s) to switch to the next player if it exists."
+  },
+  "keyBalanceLeft": {
+    "type": "keybinding",
+    "description": "Balance: to the left",
+    "default": "::",
+    "tooltip": "Set keybinding(s) to increase the volume on the left side."
+  },
+  "keyBalanceRight": {
+    "type": "keybinding",
+    "description": "Balance: to the right",
+    "default": "::",
+    "tooltip": "Set keybinding(s) to increase the volume on the right side."
+  },
+  "keyBalanceCenter": {
+    "type": "keybinding",
+    "description": "Balance: re-init",
+    "default": "::",
+    "tooltip": "Set keybinding(s) to rebalance the volume between the left and right sides."
   },
   "_knownPlayers": {
     "type": "generic",
@@ -828,6 +839,10 @@
     "type": "generic",
     "default": "50%"
   },
+  "balance": {
+    "type": "generic",
+    "default": 0.5
+  },
   "soundATcinnamonDOTorg_is_loaded": {
     "type": "generic",
     "default": false
@@ -906,5 +921,13 @@
   "VOLUME_ADJUSTMENT_STEP": {
     "type": "generic",
     "default": 0.05
+  },
+  "userMenuWidth": {
+    "type": "generic",
+    "default": 450
+  },
+  "userMenuHeight": {
+    "type": "generic",
+    "default": 800
   }
 }

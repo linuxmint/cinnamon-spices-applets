@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux 3.7.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-03-30 14:17+0200\n"
+"POT-Creation-Date: 2026-02-18 18:19+0100\n"
 "PO-Revision-Date: 2025-04-10 14:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,109 +19,107 @@ msgstr ""
 "X-Generator: Poedit 3.4.4\n"
 
 #. metadata.json->name
-#. applet.js:225 applet_OLD.js:235
+#. applet.js:232
 msgid "Sensors Monitor"
 msgstr "Szenzor Figyelő"
 
-#. applet.js:465 applet_OLD.js:418
+#. applet.js:585
 msgid "Suspended"
 msgstr "Felfüggesztve"
 
-#. applet.js:732 applet.js:773 applet_OLD.js:638 applet_OLD.js:682
+#. applet.js:901 applet.js:943
 msgid "high:"
 msgstr "magas:"
 
-#. applet.js:732 applet.js:735 applet.js:773 applet.js:775 applet.js:816
-#. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
-#. applet_OLD.js:726
+#. applet.js:901 applet.js:904 applet.js:943 applet.js:945 applet.js:986
 msgid "n/a"
 msgstr "n/a"
 
-#. applet.js:735 applet.js:775 applet_OLD.js:642 applet_OLD.js:684
+#. applet.js:904 applet.js:945
 msgid "crit:"
 msgstr "krit:"
 
-#. applet.js:816 applet.js:860 applet_OLD.js:726 applet_OLD.js:770
+#. applet.js:986 applet.js:1030
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:862 applet_OLD.js:772
+#. applet.js:1032
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:891 applet_OLD.js:801
+#. applet.js:1061
 msgid "No intrusion detected"
 msgstr "Nem észleltünk behatolást"
 
-#. applet.js:891 applet_OLD.js:801
+#. applet.js:1061
 msgid "INTRUSION DETECTED!"
 msgstr "BEHATOLÁST ÉSZLELTÜNK!"
 
-#. applet.js:911 applet_OLD.js:821
+#. applet.js:1081
 msgid "Must be configured!"
 msgstr "Be kell állítani!"
 
-#. applet.js:1275 applet_OLD.js:1208
+#. applet.js:1450
 msgid "Settings"
 msgstr "Beállítások"
 
-#. applet.js:1275 applet_OLD.js:1208
+#. applet.js:1450
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1282 applet_OLD.js:1215
+#. applet.js:1457
 msgid "⚙ General"
 msgstr "⚙ Általános"
 
-#. applet.js:1298 applet_OLD.js:1231
+#. applet.js:1474
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Hőmérséklet szenzorok"
 
-#. applet.js:1314 applet_OLD.js:1247
+#. applet.js:1491
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Ventilátor szenzorok"
 
-#. applet.js:1330 applet_OLD.js:1263
+#. applet.js:1508
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Feszültség szenzorok"
 
-#. applet.js:1346 applet_OLD.js:1279
+#. applet.js:1525
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Behatolás szenzorok"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1365 applet_OLD.js:1306
+#. applet.js:1561
 msgid "Run xsensors"
 msgstr "Xsensors futtatása"
 
-#. applet.js:1374 applet_OLD.js:1315
+#. applet.js:1570
 msgid "Suspend Sensors"
 msgstr "Felfüggesztett Szenzorok"
 
-#. applet.js:1385 applet_OLD.js:1326
+#. applet.js:1581
 msgid "Reload this applet"
 msgstr "Kisalkalmazás újratöltése"
 
-#. applet.js:1707 applet_OLD.js:1656
+#. applet.js:1928
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Biztosan el akarja távolítani a(z) '%s'-t)"
 
-#. lib/checkDependencies.js:353
+#. lib/checkDependencies.js:369
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "A kisalkalmazás %s teljesen működőképes."
 
-#. lib/checkDependencies.js:354
+#. lib/checkDependencies.js:370
 msgid "All dependencies are installed"
 msgstr "Minden függőség telepítve van"
 
-#. lib/checkDependencies.js:383
+#. lib/checkDependencies.js:399
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -129,15 +127,15 @@ msgstr ""
 "Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a "
 "kisalkalmazás minden funkcióval rendelkezzen."
 
-#. lib/checkDependencies.js:385
+#. lib/checkDependencies.js:401
 msgid "Please install these packages:"
 msgstr "Kérjük, telepítse ezeket a csomagokat:"
 
-#. lib/checkDependencies.js:389 lib/checkDependencies.js:399
+#. lib/checkDependencies.js:405 lib/checkDependencies.js:415
 msgid "Some dependencies are not installed!"
 msgstr "Néhány függőség nincs telepítve!"
 
-#. lib/checkDependencies.js:401
+#. lib/checkDependencies.js:417
 msgid "Install these packages now"
 msgstr "Telepítse ezeket a csomagokat most"
 
@@ -227,6 +225,10 @@ msgstr "⮿ Behatolás"
 msgid "⛓ Custom"
 msgstr "⛓ Egyéni"
 
+#. settings-schema.json->section_SettingsWindow->title
+msgid "This settings window"
+msgstr ""
+
 #. settings-schema.json->section_Display->title
 #. settings-schema.json->section_tempOptions->title
 #. settings-schema.json->section_fanOptions->title
@@ -248,6 +250,10 @@ msgid "Remove from panels certain applets that also use sensors"
 msgstr ""
 "Távolítson el a panelről bizonyos kisalkalmazásokat, amelyek szintén "
 "érzékelőket használnak"
+
+#. settings-schema.json->section_dependencies->title
+msgid "Dependencies"
+msgstr ""
 
 #. settings-schema.json->section_tempDisktemp->title
 msgid "For the time being, disk temperature can only be read by root."
@@ -289,6 +295,62 @@ msgstr "Jogi nyilatkozat"
 #. settings-schema.json->section_customSensors->title
 msgid "Custom sensors"
 msgstr "Egyéni szenzorok"
+
+#. settings-schema.json->window_maximizing->description
+msgid "How to set its size"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "let it be"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize horizontally"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize vertically"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize everything"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "fixed"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->tooltip
+msgid "Future window openings."
+msgstr ""
+
+#. settings-schema.json->window_width->description
+msgid "Width"
+msgstr ""
+
+#. settings-schema.json->window_width->tooltip
+msgid ""
+"This number must match your screen configuration.\n"
+"Minimum value: 800."
+msgstr ""
+
+#. settings-schema.json->window_height->description
+msgid "Height"
+msgstr ""
+
+#. settings-schema.json->window_height->tooltip
+msgid ""
+"This number must match your screen configuration.\n"
+"Minimum value: 100."
+msgstr ""
+
+#. settings-schema.json->window_set_current_size->description
+msgid "Set to the approximate current size and position"
+msgstr ""
+
+#. settings-schema.json->window_label->description
+msgid "The exact size and position will depend on Cinnamon."
+msgstr ""
 
 #. settings-schema.json->interval->options
 msgid "1"
@@ -495,6 +557,17 @@ msgid "Whether or not to display in menu the action: Restart this applet."
 msgstr ""
 "Megjeleníti-e a menüben ezt a műveletet vagy sem: Indítsa újra a "
 "kisalkalmazást."
+
+#. settings-schema.json->do_not_check_dependencies->description
+msgid "Do not check dependencies"
+msgstr ""
+
+#. settings-schema.json->do_not_check_dependencies->tooltip
+msgid ""
+"If you do not want to install certain dependencies (e.g., fonts), check this "
+"box. Be careful with dependencies that are necessary for this applet to "
+"function properly."
+msgstr ""
 
 #. settings-schema.json->make_disktemp_readable_by_user->description
 msgid "Make disk temperature user-readable"
