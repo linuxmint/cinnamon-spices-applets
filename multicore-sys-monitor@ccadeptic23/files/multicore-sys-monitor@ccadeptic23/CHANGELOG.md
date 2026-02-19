@@ -1,3 +1,6 @@
+### v3.5.0~20260219
+  * Ability to show the CPU temperature.
+
 ### v3.4.2~20260213
   * Ability to choose the radius of curvature in corners.
   * Better detection of network devices.
