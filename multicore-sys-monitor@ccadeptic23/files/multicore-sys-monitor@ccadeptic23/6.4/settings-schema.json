@@ -25,7 +25,8 @@
       "sections": [
         "sectionCPUOptions",
         "sectionCPUColors",
-        "sectionCPUColorsByActivity"
+        "sectionCPUColorsByActivity",
+        "sectionCPUTemperature"
       ]
     },
     "pageMem": {
@@ -112,11 +113,23 @@
         "CPU_squared",
         "CPU_width",
         "CPU_mergeAll",
+        
+        "CPU_byActivity",
+        "CPU_useProgressiveColors"
+      ]
+    },
+    "sectionCPUTemperature": {
+      "type": "section",
+      "title": "CPU Temperature",
+      "keys": [
         "CPU_showTemp",
         "CPU_tempInFahrenheit",
         "CPU_tempPath",
-        "CPU_byActivity",
-        "CPU_useProgressiveColors"
+        "CPU_tempHigh",
+        "CPU_tempCrit",
+        "CPU_tempColor",
+        "CPU_tempColorHigh",
+        "CPU_tempColorCrit"
       ]
     },
     "sectionCPUColors": {
@@ -451,6 +464,35 @@
     "default": "/sys/class/thermal/thermal_zone1/temp",
     "expand-width": true,
     "description": "Path to the system file used to check the CPU temperature"
+  },
+  "CPU_tempHigh": {
+    "type": "entry",
+    "default": "65",
+    "expand-width": true,
+    "description": "High CPU Temperature (°C)",
+    "tooltip": "Refer to your CPU documentation."
+  },
+  "CPU_tempCrit": {
+    "type": "entry",
+    "default": "75",
+    "expand-width": true,
+    "description": "Critical CPU Temperature (°C)",
+    "tooltip": "Refer to your CPU documentation.\nMust be greater than the High CPU Temperature."
+  },
+  "CPU_tempColor": {
+    "type": "colorchooser",
+    "default": "rgba(238, 238, 236, 1)",
+    "description": "Normal Temperature Color"
+  },
+  "CPU_tempColorHigh": {
+    "type": "colorchooser",
+    "default": "rgba(255, 120, 0, 1)",
+    "description": "High Temperature Color"
+  },
+  "CPU_tempColorCrit": {
+    "type": "colorchooser",
+    "default": "rgba(224, 27, 36, 1)",
+    "description": "Critical Temperature Color"
   },
   "CPU_byActivity": {
     "type": "switch",

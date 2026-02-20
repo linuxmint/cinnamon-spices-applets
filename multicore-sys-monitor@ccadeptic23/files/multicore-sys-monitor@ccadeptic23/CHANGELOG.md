@@ -1,3 +1,9 @@
+### v3.5.2~20260220
+  * Adds colors for CPU Temperature warnings.
+  * Adds CPU Temperature to the tooltip.
+  * Fixes [#8348](https://github.com/linuxmint/cinnamon-spices-applets/issues/8348)
+  * Fixes [#8349](https://github.com/linuxmint/cinnamon-spices-applets/issues/8349)
+
 ### v3.5.1~20260219
   * Make some messages easier to understand.
   * Button to apply the multiple of the width of each graph.
