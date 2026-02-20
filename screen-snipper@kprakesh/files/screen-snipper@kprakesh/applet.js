@@ -1,9 +1,29 @@
+
+/**
+ * Screen Snipper
+ * Copyright (C) 2026 kprakesh
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 const Applet = imports.ui.applet;
 const Util = imports.misc.util;
 const Settings = imports.ui.settings;
 const PopupMenu = imports.ui.popupMenu;
+const GLib = imports.gi.GLib;
+const Main = imports.ui.main;
 
-class MyApplet extends Applet.TextIconApplet {
+class ScreenSnipperApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
@@ -58,17 +78,27 @@ class MyApplet extends Applet.TextIconApplet {
         this.menu.toggle();
     }
 
-    _snipToClipboard() {
-        // -a: area, -c: clipboard
-        Util.spawnCommandLine("gnome-screenshot -a -c");
+    _checkDependency() {
+        if (!GLib.find_program_in_path("gnome-screenshot")) {
+            Main.notify("Screen Snipper Error", "Please install 'gnome-screenshot' to use this applet.");
+            return false;
+        }
+        return true;
     }
 
-    _fullScreenDelayed() {
-        // -c: clipboard, -d: delay
-        Util.spawnCommandLine(`gnome-screenshot -c -d ${this.delaySeconds}`);
+   _snipToClipboard() {
+        if (this._checkDependency()) {
+            Util.spawnCommandLine("gnome-screenshot -a -c");
+        }
+    }
+
+   _fullScreenDelayed() {
+        if (this._checkDependency()) {
+            Util.spawnCommandLine(`gnome-screenshot -c -d ${this.delaySeconds}`);
+        }
     }
 }
 
 function main(metadata, orientation, panel_height, instance_id) {
-    return new MyApplet(metadata, orientation, panel_height, instance_id);
+    return new ScreenSnipperApplet(metadata, orientation, panel_height, instance_id);
 }

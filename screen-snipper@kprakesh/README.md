@@ -6,7 +6,7 @@ A simple, lightweight Cinnamon applet that allows you to quickly capture screens
 
 ## Features
 
-* **✂️ Capture Area:** innovative "snip" tool to select a region of your screen and copy it directly to the clipboard.
+* **✂️ Capture Area:** Interactive "snip" tool to select a region of your screen and copy it directly to the clipboard.
 * **⏱️ Delayed Capture:** Take a full-screen screenshot after a set delay (perfect for capturing open menus or tooltips).
 * **⚙️ Configurable:** Customize the delay time (in seconds) via the applet settings.
 * **📋 Clipboard Integration:** All captures are automatically copied to your clipboard, ready to paste.
@@ -18,3 +18,4 @@ This applet relies on the standard GNOME screenshot tool. It is pre-installed on
 
 ```bash
 sudo apt install gnome-screenshot
+```
