@@ -62,7 +62,7 @@ msgstr "¡Tienes %d correos nuevos!"
 
 #. applet.js:608 applet.js:653
 msgid "Mark All Read"
-msgstr "Marcar todo como léido"
+msgstr "Marcar todo como leído"
 
 #. applet.js:616
 msgid "You have new mail!"
@@ -105,6 +105,18 @@ msgstr "Mailnag"
 #. metadata.json->description
 msgid "Mailnag mail notifier applet"
 msgstr "Applet de notificación Mailnag"
+
+#. settings-schema.json->hide_on_zero->description
+msgid "Hide icon when no unread emails"
+msgstr "Ocultar icono cuando no haya correos sin leer"
+
+#. settings-schema.json->hide_on_zero->tooltip
+msgid ""
+"If enabled, the applet icon will disappear from the panel when the "
+"unread email count is zero."
+msgstr ""
+"Si está activado, el icono del applet desaparecerá del panel cuando "
+"no haya correos sin leer."
 
 #. settings-schema.json->notifications->description
 msgid "Show notifications"
