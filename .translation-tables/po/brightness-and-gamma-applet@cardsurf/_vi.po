@@ -1,0 +1,138 @@
+# BRIGHTNESS AND GAMMA APPLET
+# This file is put in the public domain.
+# cardsurf, 2017
+#
+msgid ""
+msgstr ""
+
+#. appletGui.js:236 6.6/applet.js:45 6.6/lib/appletGui.js:215 6.4/applet.js:44
+#. 6.4/lib/appletGui.js:213
+msgid "Red"
+msgstr ""
+
+#. 6.6->settings-schema.json->preset_list_temp->columns->title
+#. 6.6/applet.js:50 6.6/lib/appletGui.js:218
+msgid "Temperature"
+msgstr ""
+
+#. 6.6/applet.js:52
+msgid "Standard values"
+msgstr ""
+
+#. 6.6/applet.js:53
+msgid "Day-time comfort"
+msgstr ""
+
+#. 6.6/applet.js:54
+msgid "Night-time comfort"
+msgstr ""
+
+#. 6.6/applet.js:55
+msgid "All values at maximum"
+msgstr ""
+
+#. 6.6/applet.js:813 6.4/applet.js:760
+msgid "Toggle On / Off"
+msgstr ""
+
+#. 6.6->settings-schema.json->toggle_on_off_shortcut->description
+#. 6.4->settings-schema.json->toggle_on_off_shortcut->description
+msgid "Hotkey to Toggle On/Off this applet"
+msgstr ""
+
+#. 6.6->settings-schema.json->way_to_set_off->options
+#. 6.4->settings-schema.json->way_to_set_off->options
+msgid "No change"
+msgstr ""
+
+#. 6.6->settings-schema.json->way_to_set_off->options
+#. 6.4->settings-schema.json->way_to_set_off->options
+msgid "All values set to 100%"
+msgstr ""
+
+#. 6.6->settings-schema.json->way_to_set_off->description
+#. 6.4->settings-schema.json->way_to_set_off->description
+msgid "Way to set this applet off"
+msgstr ""
+
+#. 6.6->settings-schema.json->gamma_or_temp->options
+msgid "Gamma Red-Green-Blue"
+msgstr ""
+
+#. 6.6->settings-schema.json->gamma_or_temp->options
+msgid "Screen Temperature (K)"
+msgstr ""
+
+#. 6.6->settings-schema.json->gamma_or_temp->description
+msgid "Setting Method"
+msgstr ""
+
+#. 6.6->settings-schema.json->minimum_temp->units
+#. 6.6->settings-schema.json->maximum_temp->units
+msgid "K"
+msgstr ""
+
+#. 6.6->settings-schema.json->minimum_temp->description
+msgid "Minimum temperature"
+msgstr ""
+
+#. 6.6->settings-schema.json->minimum_temp->tooltip
+msgid "A minimum value of temperature. Value from 700 K to 6500 K."
+msgstr ""
+
+#. 6.6->settings-schema.json->maximum_temp->description
+msgid "Maximum temperature"
+msgstr ""
+
+#. 6.6->settings-schema.json->maximum_temp->tooltip
+msgid "A maximum value of temperature. Value from 6500 K to 22000 K."
+msgstr ""
+
+#. 6.6->settings-schema.json->options_type->options
+msgid "Gamma / Temperature"
+msgstr ""
+
+#. 6.6->settings-schema.json->baga_icon->options
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Only sun"
+msgstr ""
+
+#. 6.6->settings-schema.json->baga_icon->options
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Screen with sun"
+msgstr ""
+
+#. 6.6->settings-schema.json->baga_icon->options
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Symbolic"
+msgstr ""
+
+#. 6.6->settings-schema.json->preset_list->columns->title
+#. 6.6->settings-schema.json->preset_list_temp->columns->title
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid "Hotkey"
+msgstr ""
+
+#. 6.6->settings-schema.json->show_shortcuts_in_menu->description
+msgid "Show shortcuts in the menu"
+msgstr ""
+
+#. 6.6->settings-schema.json->preset_selected_keybind->description
+msgid "Choose a shortcut to copy"
+msgstr ""
+
+#. 6.6->settings-schema.json->preset_selected_keybind->tooltip
+msgid ""
+"Helps you select a keyboard shortcut to use in any of the items listed "
+"above.\n"
+"Once selected, click on the button below, then edit the item to paste "
+"(Ctrl+V) this shortcut."
+msgstr ""
+
+#. 6.6->settings-schema.json->preset_copy_keybind->description
+msgid "Copy this shortcut to the clipboard"
+msgstr ""
+
+#. 6.6->settings-schema.json->values_reload->description
+msgid "Apply the selected method"
+msgstr ""

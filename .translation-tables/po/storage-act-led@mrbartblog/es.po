@@ -1,0 +1,29 @@
+# STORAGE ACTIVITY LED INDICATOR
+# This file is put in the public domain.
+# mrbartblog, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: storage-act-led@mrbartblog 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-19 09:06+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#. metadata.json->name
+msgid "Storage activity LED indicator"
+msgstr "Indicador LED de actividad de almacenamiento"
+
+#. metadata.json->description
+msgid "Emulates HDD/SDD activity LED indicator, for computers without one"
+msgstr ""
+"Emula el indicador LED de actividad del disco duro/SSD, para ordenadores "
+"que no lo tienen"

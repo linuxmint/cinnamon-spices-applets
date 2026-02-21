@@ -1,0 +1,160 @@
+# BRIGHTNESS AND GAMMA APPLET
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# cardsurf, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-02-02 14:48+0100\n"
+"PO-Revision-Date: 2025-08-26 08:39+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. 6.6->settings-schema.json->preset_list_temp->columns->title
+#. 6.6/applet.js:50 6.6/lib/appletGui.js:218
+msgid "Temperature"
+msgstr ""
+
+#. 6.6/applet.js:52
+msgid "Standard values"
+msgstr ""
+
+#. 6.6/applet.js:53
+msgid "Day-time comfort"
+msgstr ""
+
+#. 6.6/applet.js:54
+msgid "Night-time comfort"
+msgstr ""
+
+#. 6.6/applet.js:55
+msgid "All values at maximum"
+msgstr ""
+
+#. 6.6/applet.js:813 6.4/applet.js:760
+msgid "Toggle On / Off"
+msgstr ""
+
+#. 6.6->settings-schema.json->smooth_duration-label->description
+#. 6.4->settings-schema.json->smooth_duration-label->description
+msgid ""
+"The changes are made step by step.\n"
+"Here you define the duration (in milliseconds) of each step in which the "
+"values are changed by one unit, if necessary.\n"
+"0 means instantaneous changes.\n"
+"Recommended value: between 200 and 300."
+msgstr ""
+
+#. 6.6->settings-schema.json->smooth_duration->description
+#. 6.4->settings-schema.json->smooth_duration->description
+msgid "Step duration (ms)"
+msgstr ""
+
+#. 6.6->settings-schema.json->toggle_on_off_shortcut->description
+#. 6.4->settings-schema.json->toggle_on_off_shortcut->description
+msgid "Hotkey to Toggle On/Off this applet"
+msgstr ""
+
+#. 6.6->settings-schema.json->way_to_set_off->options
+#. 6.4->settings-schema.json->way_to_set_off->options
+msgid "No change"
+msgstr ""
+
+#. 6.6->settings-schema.json->way_to_set_off->options
+#. 6.4->settings-schema.json->way_to_set_off->options
+msgid "All values set to 100%"
+msgstr ""
+
+#. 6.6->settings-schema.json->way_to_set_off->description
+#. 6.4->settings-schema.json->way_to_set_off->description
+msgid "Way to set this applet off"
+msgstr ""
+
+#. 6.6->settings-schema.json->gamma_or_temp->options
+msgid "Gamma Red-Green-Blue"
+msgstr ""
+
+#. 6.6->settings-schema.json->gamma_or_temp->options
+msgid "Screen Temperature (K)"
+msgstr ""
+
+#. 6.6->settings-schema.json->gamma_or_temp->description
+msgid "Setting Method"
+msgstr ""
+
+#. 6.6->settings-schema.json->minimum_temp->units
+#. 6.6->settings-schema.json->maximum_temp->units
+msgid "K"
+msgstr ""
+
+#. 6.6->settings-schema.json->minimum_temp->description
+msgid "Minimum temperature"
+msgstr ""
+
+#. 6.6->settings-schema.json->minimum_temp->tooltip
+msgid "A minimum value of temperature. Value from 700 K to 6500 K."
+msgstr ""
+
+#. 6.6->settings-schema.json->maximum_temp->description
+msgid "Maximum temperature"
+msgstr ""
+
+#. 6.6->settings-schema.json->maximum_temp->tooltip
+msgid "A maximum value of temperature. Value from 6500 K to 22000 K."
+msgstr ""
+
+#. 6.6->settings-schema.json->options_type->options
+msgid "Gamma / Temperature"
+msgstr ""
+
+#. 6.6->settings-schema.json->baga_icon->options
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Only sun"
+msgstr ""
+
+#. 6.6->settings-schema.json->baga_icon->options
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Screen with sun"
+msgstr ""
+
+#. 6.6->settings-schema.json->baga_icon->options
+#. 6.4->settings-schema.json->baga_icon->options
+msgid "Symbolic"
+msgstr ""
+
+#. 6.6->settings-schema.json->preset_list->columns->title
+#. 6.6->settings-schema.json->preset_list_temp->columns->title
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid "Hotkey"
+msgstr ""
+
+#. 6.6->settings-schema.json->show_shortcuts_in_menu->description
+msgid "Show shortcuts in the menu"
+msgstr ""
+
+#. 6.6->settings-schema.json->preset_selected_keybind->description
+msgid "Choose a shortcut to copy"
+msgstr ""
+
+#. 6.6->settings-schema.json->preset_selected_keybind->tooltip
+msgid ""
+"Helps you select a keyboard shortcut to use in any of the items listed "
+"above.\n"
+"Once selected, click on the button below, then edit the item to paste "
+"(Ctrl+V) this shortcut."
+msgstr ""
+
+#. 6.6->settings-schema.json->preset_copy_keybind->description
+msgid "Copy this shortcut to the clipboard"
+msgstr ""
+
+#. 6.6->settings-schema.json->values_reload->description
+msgid "Apply the selected method"
+msgstr ""

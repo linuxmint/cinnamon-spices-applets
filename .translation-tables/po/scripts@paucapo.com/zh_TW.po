@@ -1,0 +1,197 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: scripts@paucapo.com 1.03\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-08-27 02:19+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:24
+msgid ""
+"No terminals are found. Switch the setting <Find automatically a terminal> "
+"off to fix this."
+msgstr ""
+"找不到終端機。請關閉 <自動尋找終端機> 設定以解決此問題。"
+
+#: applet.js:64
+msgid "Desktop env default terminal: "
+msgstr "桌面環境預設終端機："
+
+#: applet.js:65 applet.js:90 applet.js:115
+msgid "Command to execute a script: "
+msgstr "執行指令稿的指令："
+
+#: applet.js:89
+msgid "Sym-link of x-terminal-emulator: "
+msgstr "x-terminal-emulator 的符號連結："
+
+#: applet.js:172
+#, javascript-format
+msgid "The script: <%s> doesn't exist"
+msgstr "指令稿：<%s> 不存在"
+
+#. settings-schema.json->leftClickBehavior->options
+#. settings-schema.json->rightClickBehavior->options
+#: applet.js:211
+msgid "Execute silently"
+msgstr "背景執行"
+
+#. settings-schema.json->leftClickBehavior->options
+#. settings-schema.json->rightClickBehavior->options
+#: applet.js:216
+msgid "Execute in terminal"
+msgstr "在終端機中執行"
+
+#. settings-schema.json->leftClickBehavior->options
+#. settings-schema.json->rightClickBehavior->options
+#: applet.js:221
+msgid "Edit the script"
+msgstr "編輯指令稿"
+
+#: applet.js:227
+msgid "Open the document"
+msgstr "開啟說明文件"
+
+#: applet.js:360
+msgid "Scripts"
+msgstr "指令稿"
+
+#: applet.js:425
+msgid ""
+"The applet Script Menu cant run due to missing dependencies. The missing "
+"dependencies are:"
+msgstr ""
+"「指令稿選單」小程式因缺少相依性套件而無法執行，缺少的相依性套件為："
+
+#: applet.js:433
+msgid ""
+"Terminal emulator. Switch the setting <Find automatically a terminal> off to "
+"fix this."
+msgstr ""
+"終端機模擬器。請關閉 <自動尋找終端機> 設定以解決此問題。"
+
+#: applet.js:470
+msgid "Open scripts folder"
+msgstr "開啟指令稿資料夾"
+
+#: applet.js:475
+msgid "Update menu"
+msgstr "更新選單"
+
+#: applet.js:482
+msgid "Applet 'Script Menu'"
+msgstr "[指令稿選單] 小程式"
+
+#. metadata.json->name
+msgid "Scripts Menu"
+msgstr "指令稿選單"
+
+#. metadata.json->description
+msgid "Menu applet for starting scripts"
+msgstr "用於啟動指令稿的選單小程式"
+
+#. settings-schema.json->autoupdate->description
+msgid "Autoupdate. Update scripts list when the applet is opened."
+msgstr "自動更新。開啟小程式時會同步更新指令稿清單。"
+
+#. settings-schema.json->directory->description
+msgid "Scripts directory"
+msgstr "指令稿目錄"
+
+#. settings-schema.json->head_icon->description
+msgid "Icon"
+msgstr "圖示"
+
+#. settings-schema.json->customicon->description
+msgid "Custom icon"
+msgstr "自訂圖示"
+
+#. settings-schema.json->icon->description
+msgid "Icon (empty to hide the icon)"
+msgstr "圖示（留空則隱藏圖示）"
+
+#. settings-schema.json->showtitle->description
+msgid "Show title"
+msgstr "顯示標題"
+
+#. settings-schema.json->paneltitle->description
+msgid "Title"
+msgstr "標題"
+
+#. settings-schema.json->head_scriptExecution->description
+msgid "Script execution"
+msgstr "指令稿執行"
+
+#. settings-schema.json->leftClickBehavior->description
+msgid "Script execution method on left click"
+msgstr "左鍵點選時的指令稿執行方式"
+
+#. settings-schema.json->leftClickBehavior->tooltip
+msgid "How the scripts are processed when you left click on them."
+msgstr "左鍵點選指令稿時的處理方式。"
+
+#. settings-schema.json->leftClickBehavior->options
+#. settings-schema.json->rightClickBehavior->options
+msgid "Ask what to do"
+msgstr "詢問要執行的操作"
+
+#. settings-schema.json->rightClickBehavior->description
+msgid "Script execution method on right click"
+msgstr "右鍵點選時的指令稿執行方式"
+
+#. settings-schema.json->rightClickBehavior->tooltip
+msgid "How the scripts are processed when you right click on them."
+msgstr "右鍵點選指令稿時的處理方式。"
+
+#. settings-schema.json->findTerminalAutomatically->description
+msgid "Find automatically a terminal? (To execute the scripts in a terminal)"
+msgstr "自動尋找終端機？（用於在終端機中執行指令稿）"
+
+#. settings-schema.json->foundTerminalDescription->description
+msgid "The found terminal is:"
+msgstr "找到的終端機："
+
+#. settings-schema.json->overrideCommandToExecuteInTerminal->description
+msgid "Prepended command to execute the scripts in the terminal"
+msgstr "在終端機中執行指令稿的前置指令"
+
+#. settings-schema.json->overrideCommandToExecuteInTerminal->tooltip
+msgid ""
+"To execute the scripts 'in terminal', the scripts are executed with this "
+"command prepended.\n"
+"Some potential valid commands are:\n"
+"    gnome-terminal --\n"
+"    nxterm -e\n"
+"    rxvt -e\n"
+"    xterm -e"
+msgstr ""
+"若要在終端機中執行指令稿，執行時會於前方附加此指令。\n"
+"常見可用指令如下：\n"
+"    gnome-terminal --\n"
+"    nxterm -e\n"
+"    rxvt -e\n"
+"    xterm -e"
+
+#. settings-schema.json->useDefaultTextEditorWithScripts->description
+msgid "Use the default editor to edit scripts?"
+msgstr "使用預設的編輯器來編輯指令稿？"
+
+#. settings-schema.json->overrideCommandToEditScripts->description
+msgid "Prepended command to edit the scripts"
+msgstr "編輯指令稿的前置指令"
+
+#. settings-schema.json->overrideCommandToEditScripts->tooltip
+msgid ""
+"To edit the scripts, the scripts are executed with this command prepended."
+msgstr ""
+"若要編輯指令稿，執行時會於前方附加此指令。"
