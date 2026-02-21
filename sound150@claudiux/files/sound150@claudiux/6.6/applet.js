@@ -55,6 +55,8 @@ const {
 } = require("./lib/mainloopTools");
 const { del_song_arts } = require("./lib/del_song_arts");
 
+const { getRealScale } = require("./lib/get-real-scale");
+
 const { VolumeSlider } = require("./lib/volumeSlider");
 const { BalanceSlider } = require("./lib/balanceSlider");
 const { ControlButton } = require("./lib/controlButton");
@@ -222,6 +224,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.alreadyCalledBysetAppletTooltip = false;
 
         this.real_ui_scale = 1.0;
+        //~ global.log("Real Scale: " + getRealScale());
         Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-real-scale.py", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 this.real_ui_scale = parseFloat(stdout);
@@ -545,6 +548,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         Interfaces.getDBusAsync((proxy, error) => {
             if (error) {
                 // ?? what else should we do if we fail completely here?
+                global.logError("sound150 - applet.js: 551 - " + error);
                 throw error;
             }
 
@@ -736,8 +740,6 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.menu.actor.set_width(width);
         this.menu.actor.set_height(height);
         if (!this._resizer.resizingInProgress) {
-           //~ this.settings.popup_width = width / this.real_ui_scale;
-           //~ this.settings.popup_height = height / this.real_ui_scale;
            this.popup_width = Math.max( Math.round(width / this.real_ui_scale), 450 );
            this.popup_height = Math.round(height / this.real_ui_scale);
         }
@@ -2947,14 +2949,16 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (this.showVolumeLevelNearIcon) {
             label = "" + this.volume;
             if (this._seeker && this._seeker.status == "Paused") label = "⏸ " + this.volume;
-            if (this.title_text.length > 0) {
-                if (this._panelHeight >= 60)
-                    label += "\n" + this.title_text;
-                else
-                    label += " - " + this.title_text;
+            if (this.isHorizontal) {
+                if (this.title_text.length > 0) {
+                    if (this._panelHeight >= 60)
+                        label += "\n" + this.title_text;
+                    else
+                        label += " - " + this.title_text;
+                }
             }
         } else {
-            if (this.title_text.length > 0)
+            if (this.title_text.length > 0 && this.isHorizontal)
                 label = "" + this.title_text;
             if (this._seeker && this._seeker.status == "Paused") label = "⏸ " + label;
         }
