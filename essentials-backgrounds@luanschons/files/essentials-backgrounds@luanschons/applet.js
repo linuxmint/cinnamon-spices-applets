@@ -199,7 +199,7 @@ class EssentialsBackgroundsApplet extends Applet.IconApplet {
             St.IconType.SYMBOLIC
         );
         openCacheItem.connect("activate", () => {
-            Util.spawnCommandLine("xdg-open '" + WALLPAPER_DIR + "'");
+            Util.spawn(["xdg-open", WALLPAPER_DIR]);
         });
         this.menu.addMenuItem(openCacheItem);
 
@@ -210,7 +210,7 @@ class EssentialsBackgroundsApplet extends Applet.IconApplet {
             St.IconType.SYMBOLIC
         );
         openFavItem.connect("activate", () => {
-            Util.spawnCommandLine("xdg-open '" + FAVORITES_DIR + "'");
+            Util.spawn(["xdg-open", FAVORITES_DIR]);
         });
         this.menu.addMenuItem(openFavItem);
 
@@ -223,7 +223,7 @@ class EssentialsBackgroundsApplet extends Applet.IconApplet {
             St.IconType.SYMBOLIC
         );
         settingsItem.connect("activate", () => {
-            Util.spawnCommandLine("xlet-settings applet " + UUID);
+            Util.spawn(["xlet-settings", "applet", UUID]);
         });
         this.menu.addMenuItem(settingsItem);
     }
@@ -329,20 +329,26 @@ class EssentialsBackgroundsApplet extends Applet.IconApplet {
             }
 
             let destPath = GLib.build_filenamev([WALLPAPER_DIR, info.filename]);
-
-            // Check if already downloaded
             let destFile = Gio.File.new_for_path(destPath);
-            if (destFile.query_exists(null)) {
-                this._applyWallpaper(destPath, info);
-                return;
-            }
 
-            Providers.downloadImage(info.url, destPath, (dlError, filePath) => {
-                if (dlError) {
-                    this._showError(_("Download failed: ") + (dlError.message || String(dlError)));
-                    return;
+            destFile.query_info_async("standard::*", Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (file, res) => {
+                let exists = false;
+                try {
+                    file.query_info_finish(res);
+                    exists = true;
+                } catch (e) { }
+
+                if (exists) {
+                    this._applyWallpaper(destPath, info);
+                } else {
+                    Providers.downloadImage(info.url, destPath, (dlError, filePath) => {
+                        if (dlError) {
+                            this._showError(_("Download failed: ") + (dlError.message || String(dlError)));
+                            return;
+                        }
+                        this._applyWallpaper(filePath, info);
+                    });
                 }
-                this._applyWallpaper(filePath, info);
             });
         });
     }
@@ -402,32 +408,32 @@ class EssentialsBackgroundsApplet extends Applet.IconApplet {
             return;
         }
 
-        try {
-            let srcFile = Gio.File.new_for_path(this._currentFilePath);
-            let destFile = Gio.File.new_for_path(
-                GLib.build_filenamev([FAVORITES_DIR, this._currentInfo.filename])
-            );
+        let srcFile = Gio.File.new_for_path(this._currentFilePath);
+        let destFile = Gio.File.new_for_path(
+            GLib.build_filenamev([FAVORITES_DIR, this._currentInfo.filename])
+        );
 
-            if (destFile.query_exists(null)) {
-                return; // Already saved
+        srcFile.copy_async(destFile, Gio.FileCopyFlags.NONE, GLib.PRIORITY_DEFAULT, null, null, (file, res) => {
+            try {
+                file.copy_finish(res);
+
+                if (this.showNotification) {
+                    let source = new MessageTray.SystemNotificationSource(_("Essentials Backgrounds"));
+                    Main.messageTray.add(source);
+                    let notification = new MessageTray.Notification(
+                        source,
+                        _("Saved to Favorites"),
+                        this._currentInfo.title || this._currentInfo.filename
+                    );
+                    notification.setTransient(true);
+                    source.notify(notification);
+                }
+            } catch (e) {
+                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+                    this._showError("Favorite save failed: " + e.message);
+                }
             }
-
-            srcFile.copy(destFile, Gio.FileCopyFlags.NONE, null, null);
-
-            if (this.showNotification) {
-                let source = new MessageTray.SystemNotificationSource(_("Essentials Backgrounds"));
-                Main.messageTray.add(source);
-                let notification = new MessageTray.Notification(
-                    source,
-                    _("Saved to Favorites"),
-                    this._currentInfo.title || this._currentInfo.filename
-                );
-                notification.setTransient(true);
-                source.notify(notification);
-            }
-        } catch (e) {
-            this._showError("Favorite save failed: " + e.message);
-        }
+        });
     }
 
     // ========================
@@ -459,9 +465,15 @@ class EssentialsBackgroundsApplet extends Applet.IconApplet {
             let item = new PopupMenu.PopupMenuItem(title);
             item.connect("activate", () => {
                 let file = Gio.File.new_for_path(entry.filePath);
-                if (file.query_exists(null)) {
-                    this._applyWallpaper(entry.filePath, entry.info);
-                }
+                file.query_info_async("standard::*", Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (f, res) => {
+                    try {
+                        f.query_info_finish(res);
+                        this._applyWallpaper(entry.filePath, entry.info);
+                    } catch (e) {
+                        // File might have been deleted from cache
+                        this._showError("History file not found: " + entry.filePath);
+                    }
+                });
             });
             this._historyMenu.menu.addMenuItem(item);
         }
@@ -480,74 +492,74 @@ class EssentialsBackgroundsApplet extends Applet.IconApplet {
     _processEffects(inputPath, callback) {
         let outputPath = inputPath.replace(/(\.[^.]+)$/, "_fx$1");
         let outFile = Gio.File.new_for_path(outputPath);
-        if (outFile.query_exists(null)) {
-            try { outFile.delete(null); } catch (e) { }
-        }
+        outFile.delete_async(GLib.PRIORITY_DEFAULT, null, (file, res) => {
+            try { file.delete_finish(res); } catch (e) { }
 
-        let args = ["convert", inputPath];
+            let args = ["convert", inputPath];
 
-        // Blur
-        if (this.effectBlur) {
-            let r = this.effectBlurRadius || 5;
-            args.push("-blur", "0x" + r);
-        }
-
-        // Brightness
-        if (this.effectBrightness) {
-            let val = this.effectBrightnessValue || 0;
-            let brightnessPercent = 100 + val;
-            args.push("-modulate", brightnessPercent + ",100,100");
-        }
-
-        // Saturation
-        if (this.effectSaturation) {
-            let sat = this.effectSaturationValue || 100;
-            args.push("-modulate", "100," + sat + ",100");
-        }
-
-        // Contrast
-        if (this.effectContrast) {
-            let c = this.effectContrastValue || 0;
-            if (c > 0) {
-                for (let i = 0; i < Math.min(c, 5); i++) args.push("-contrast");
-            } else if (c < 0) {
-                for (let i = 0; i < Math.min(Math.abs(c), 5); i++) args.push("+contrast");
+            // Blur
+            if (this.effectBlur) {
+                let r = this.effectBlurRadius || 5;
+                args.push("-blur", "0x" + r);
             }
-        }
 
-        // Grayscale
-        if (this.effectGrayscale) {
-            args.push("-colorspace", "Gray");
-        }
+            // Brightness
+            if (this.effectBrightness) {
+                let val = this.effectBrightnessValue || 0;
+                let brightnessPercent = 100 + val;
+                args.push("-modulate", brightnessPercent + ",100,100");
+            }
 
-        // Sepia
-        if (this.effectSepia) {
-            args.push("-sepia-tone", "80%");
-        }
+            // Saturation
+            if (this.effectSaturation) {
+                let sat = this.effectSaturationValue || 100;
+                args.push("-modulate", "100," + sat + ",100");
+            }
 
-        // Vignette
-        if (this.effectVignette) {
-            args.push("-vignette", "0x40");
-        }
-
-        args.push(outputPath);
-
-        try {
-            let proc = Gio.Subprocess.new(
-                args,
-                Gio.SubprocessFlags.STDOUT_SILENCE | Gio.SubprocessFlags.STDERR_PIPE
-            );
-            proc.wait_check_async(null, (proc, result) => {
-                try {
-                    proc.wait_check_finish(result);
-                    callback(null, outputPath);
-                } catch (e) {
-                    callback(e, null);
+            // Contrast
+            if (this.effectContrast) {
+                let c = this.effectContrastValue || 0;
+                if (c > 0) {
+                    for (let i = 0; i < Math.min(c, 5); i++) args.push("-contrast");
+                } else if (c < 0) {
+                    for (let i = 0; i < Math.min(Math.abs(c), 5); i++) args.push("+contrast");
                 }
-            });
-        } catch (e) {
-            callback(e, null);
-        }
+            }
+
+            // Grayscale
+            if (this.effectGrayscale) {
+                args.push("-colorspace", "Gray");
+            }
+
+            // Sepia
+            if (this.effectSepia) {
+                args.push("-sepia-tone", "80%");
+            }
+
+            // Vignette
+            if (this.effectVignette) {
+                args.push("-vignette", "0x40");
+            }
+
+            args.push(outputPath);
+
+            try {
+                let proc = Gio.Subprocess.new(
+                    args,
+                    Gio.SubprocessFlags.STDOUT_SILENCE | Gio.SubprocessFlags.STDERR_PIPE
+                );
+                proc.wait_check_async(null, (p, result) => {
+                    try {
+                        p.wait_check_finish(result);
+                        callback(null, outputPath);
+                    } catch (e) {
+                        callback(e, null);
+                    }
+                });
+            } catch (e) {
+                callback(e, null);
+            }
+        });
     }
 
     // ========================
@@ -560,11 +572,19 @@ class EssentialsBackgroundsApplet extends Applet.IconApplet {
         } else {
             let iconPath = this.metadata.path + "/icon.png";
             let iconFile = Gio.File.new_for_path(iconPath);
-            if (iconFile.query_exists(null)) {
-                this.set_applet_icon_path(iconPath);
-            } else {
-                this.set_applet_icon_symbolic_name("preferences-desktop-wallpaper");
-            }
+            iconFile.query_info_async("standard::*", Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (file, res) => {
+                let exists = false;
+                try {
+                    file.query_info_finish(res);
+                    exists = true;
+                } catch (e) { }
+
+                if (exists) {
+                    this.set_applet_icon_path(iconPath);
+                } else {
+                    this.set_applet_icon_symbolic_name("preferences-desktop-wallpaper");
+                }
+            });
         }
     }
 
@@ -626,54 +646,79 @@ class EssentialsBackgroundsApplet extends Applet.IconApplet {
 
     _ensureDir(path) {
         let dir = Gio.File.new_for_path(path);
-        if (!dir.query_exists(null)) {
+        dir.make_directory_with_parents_async(GLib.PRIORITY_DEFAULT, null, (file, res) => {
             try {
-                dir.make_directory_with_parents(null);
+                file.make_directory_with_parents_finish(res);
             } catch (e) {
-                global.logWarning("[EssentialsBackgrounds] Cannot create dir: " + path);
+                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+                    global.logWarning("[EssentialsBackgrounds] Cannot create dir: " + path + " - " + e.message);
+                }
             }
-        }
+        });
     }
 
     _cleanOldFiles(keepPath) {
         try {
             let dir = Gio.File.new_for_path(WALLPAPER_DIR);
-            let enumerator = dir.enumerate_children("standard::name,standard::type,time::modified",
-                Gio.FileQueryInfoFlags.NONE, null);
-
-            let files = [];
-            let info;
-            while ((info = enumerator.next_file(null)) !== null) {
-                if (info.get_file_type() === Gio.FileType.REGULAR) {
-                    let fullPath = GLib.build_filenamev([WALLPAPER_DIR, info.get_name()]);
-                    files.push({
-                        path: fullPath,
-                        modified: info.get_modification_date_time()
-                    });
-                }
-            }
-            enumerator.close(null);
-
-            const MAX_FILES = 20;
-            if (files.length > MAX_FILES) {
-                files.sort((a, b) => {
-                    if (!a.modified || !b.modified) return 0;
-                    return b.modified.compare(a.modified);
-                });
-
-                // Also protect history files from deletion
-                let protectedPaths = [keepPath];
-                this._history.forEach(h => protectedPaths.push(h.filePath));
-
-                for (let i = MAX_FILES; i < files.length; i++) {
-                    if (protectedPaths.indexOf(files[i].path) === -1) {
-                        let f = Gio.File.new_for_path(files[i].path);
-                        try { f.delete(null); } catch (e) { }
+            dir.enumerate_children_async("standard::name,standard::type,time::modified",
+                Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (file, res) => {
+                    try {
+                        let enumerator = file.enumerate_children_finish(res);
+                        this._iterateCleanup(enumerator, [], keepPath);
+                    } catch (e) {
+                        global.logWarning("[EssentialsBackgrounds] Cleanup enumeration failed: " + e.message);
                     }
-                }
-            }
+                });
         } catch (e) {
             global.logWarning("[EssentialsBackgrounds] Cleanup error: " + e.message);
+        }
+    }
+
+    _iterateCleanup(enumerator, files, keepPath) {
+        enumerator.next_files_async(50, GLib.PRIORITY_DEFAULT, null, (enumObj, res) => {
+            try {
+                let infos = enumObj.next_files_finish(res);
+                if (infos.length > 0) {
+                    infos.forEach(info => {
+                        if (info.get_file_type() === Gio.FileType.REGULAR) {
+                            let fullPath = GLib.build_filenamev([WALLPAPER_DIR, info.get_name()]);
+                            files.push({
+                                path: fullPath,
+                                modified: info.get_modification_date_time()
+                            });
+                        }
+                    });
+                    this._iterateCleanup(enumerator, files, keepPath);
+                } else {
+                    enumerator.close_async(GLib.PRIORITY_DEFAULT, null, null);
+                    this._doCleanup(files, keepPath);
+                }
+            } catch (e) {
+                global.logWarning("[EssentialsBackgrounds] Cleanup iteration failed: " + e.message);
+            }
+        });
+    }
+
+    _doCleanup(files, keepPath) {
+        const MAX_FILES = 20;
+        if (files.length <= MAX_FILES) return;
+
+        files.sort((a, b) => {
+            if (!a.modified || !b.modified) return 0;
+            return b.modified.compare(a.modified);
+        });
+
+        // Also protect history files from deletion
+        let protectedPaths = [keepPath];
+        this._history.forEach(h => protectedPaths.push(h.filePath));
+
+        for (let i = MAX_FILES; i < files.length; i++) {
+            if (protectedPaths.indexOf(files[i].path) === -1) {
+                let f = Gio.File.new_for_path(files[i].path);
+                f.delete_async(GLib.PRIORITY_DEFAULT, null, (file, res) => {
+                    try { file.delete_finish(res); } catch (e) { }
+                });
+            }
         }
     }
 }

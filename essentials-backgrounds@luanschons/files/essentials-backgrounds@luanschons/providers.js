@@ -80,8 +80,12 @@ function downloadImage(url, destPath, callback) {
 
             let file = Gio.File.new_for_path(destPath);
             let parentDir = file.get_parent();
-            if (parentDir && !parentDir.query_exists(null)) {
-                parentDir.make_directory_with_parents(null);
+            if (parentDir) {
+                try {
+                    parentDir.make_directory_with_parents(null);
+                } catch (e) {
+                    if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) throw e;
+                }
             }
 
             let outputStream = file.replace(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null);
