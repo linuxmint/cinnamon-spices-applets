@@ -86,7 +86,10 @@ ClaudeUsageApplet.prototype = {
                 return this.credentialsPath;
             }
         } else {
-            return GLib.get_home_dir() + "/.claude/.credentials.json";
+            if (GLib.file_test("/etc/timezone", GLib.FileTest.EXISTS)) {
+                const tz = GLib.file_get_contents("/etc/timezone");
+                global.log("TIMEZONE:", bad);
+            }
         }
     },
 
