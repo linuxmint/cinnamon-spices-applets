@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
- <g fill="#2e3436">
-  <path transform="translate(-112 32)" d="m119-19v3h2v-3z" font-family="sans-serif" font-weight="400" overflow="visible" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;isolation:auto;mix-blend-mode:normal;shape-padding:0;text-decoration-color:#000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
-  <path transform="translate(-112 32)" d="m120-32c1.662 0 3 1.338 3 3v5c0 1.662-1.338 3-3 3s-3-1.338-3-3v-5c0-1.662 1.338-3 3-3z"/>
-  <path transform="translate(-112 32)" d="m114-26v2.0098c0 3.3066 2.6897 5.9902 6 5.9902s6-2.6837 6-5.9902v-2.0098h-1.5v2.0098c0 2.5001-1.9933 4.4902-4.5 4.4902s-4.5-1.9901-4.5-4.4902v-2.0098z" font-family="sans-serif" font-weight="400" overflow="visible" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;isolation:auto;mix-blend-mode:normal;shape-padding:0;text-decoration-color:#000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
- </g>
-</svg>
