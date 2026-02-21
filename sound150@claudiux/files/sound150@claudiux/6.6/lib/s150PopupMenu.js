@@ -182,7 +182,7 @@ class Player extends PopupMenu.PopupMenuSection {
 
         let asyncReadyCb = (proxy, error, property) => {
             if (error)
-                logError(error);
+                global.logError(error);
             else {
                 this[property] = proxy;
                 this._dbus_acquired();
@@ -379,7 +379,7 @@ class Player extends PopupMenu.PopupMenuSection {
         try {
             this.vertBox.add_actor(this._trackCover);
         } catch (e) {
-            logError("Unable to add actor this._trackCover to this.vertBox!: " + e)
+            global.logError("Unable to add actor this._trackCover to this.vertBox!: " + e)
         }
 
         // Labels
@@ -448,7 +448,7 @@ class Player extends PopupMenu.PopupMenuSection {
         try {
             this.trackInfo.add_actor(trackControls);
         } catch (e) {
-            logError("Unable to add actor trackControls to this.trackInfo!")
+            global.logError("Unable to add actor trackControls to this.trackInfo!")
         }
 
         this.controls = new St.BoxLayout();
@@ -681,7 +681,7 @@ class Player extends PopupMenu.PopupMenuSection {
                     } else
                         this._title = _("Unknown Title");
                 } catch (e) {
-                    //~ logError("XML error: "+e);
+                    //~ global.logError("XML error: "+e);
                     this._title = _("Unknown Title");
                 }
             } else if (this._title.includes(" - ") && this._artist == _("Unknown Artist")) {
@@ -988,7 +988,7 @@ class Player extends PopupMenu.PopupMenuSection {
             this._cover_path = cover_path;
             this._applet._icon_path = cover_path; // Added
             this._applet.setAppletIcon(this._applet.player, cover_path); // Added
-            if (cover_path != null)
+            if (cover_path != null && GLib.file_test(cover_path, GLib.FileTest.EXISTS))
                 this._cover_load_handle = St.TextureCache.get_default().load_image_from_file_async(
                     cover_path,
                     Math.trunc(300 * this._applet.real_ui_scale),
@@ -1001,11 +1001,15 @@ class Player extends PopupMenu.PopupMenuSection {
 
             //~ log("this._cover_path: "+this._cover_path, true);
             try {
-                let pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
-                    this._cover_path,
-                    Math.trunc(300 * this._applet.real_ui_scale),
-                    Math.trunc(300 * this._applet.real_ui_scale)
-                );
+                let pixbuf = null;
+                if (GLib.file_test(this._cover_path, GLib.FileTest.EXISTS)) {
+                    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
+                        this._cover_path,
+                        Math.trunc(300 * this._applet.real_ui_scale),
+                        Math.trunc(300 * this._applet.real_ui_scale)
+                    );
+                }
+                
                 if (pixbuf) {
                     let image = new Clutter.Image();
                     image.set_data(
@@ -1132,7 +1136,7 @@ class Player extends PopupMenu.PopupMenuSection {
         try {
             PopupMenu.PopupMenuSection.prototype.destroy.call(this);
         } catch (e) {
-            logError("Error destroying Player!!!: " + e)
+            global.logError("Error destroying Player!!!: " + e)
         }
     }
 }
@@ -1550,7 +1554,7 @@ class Seeker extends Slider.Slider {
                     pos = position[0].get_int64();
                 } catch (e) {
                     pos = "NaN";
-                    //~ logError("pos error: "+e);
+                    //~ global.logError("pos error: "+e);
                 }
                 if (isNaN(pos)) {
                     //~ logDebug("pos is NaN!!!");
@@ -1611,7 +1615,7 @@ class MediaPlayerLauncher extends PopupMenu.PopupBaseMenuItem {
                 align: St.Align.END
             });
         } catch (e) {
-            logError("Unable to add actor this._icon_bin to this!: " + e)
+            global.logError("Unable to add actor this._icon_bin to this!: " + e)
         }
 
         this.connect("activate", (event) => this._onActivate(event));

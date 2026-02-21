@@ -1,3 +1,6 @@
+### v14.1.1~20260221
+  * Better management of label (on vertical panel).
+
 ### v14.1.0~20260212
   * Resize the menu by grabbing its edges with the mouse.
 
