@@ -2,12 +2,14 @@
 
 name: Validate spices and scan for safe patterns
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
   pull_request:
+    branches: [ master ]
+  pull_request_target:
     branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -20,6 +22,7 @@ permissions:
 jobs:
   # This workflow contains a single job called "build"
   build:
+    if: github.event_name != 'pull_request_target'
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -35,15 +38,20 @@ jobs:
           sudo apt-get install -y python3 python3-pil gettext >/dev/null 2>&1
           python3 validate-spice --all
 
+  pattern-check:
+    if: github.event_name == 'pull_request_target'
+    runs-on: ubuntu-latest
+    permissions:
+        pull-requests: write
+
+    steps:
       - name: Checkout github-actions
-        if: github.event_name == 'pull_request'
         uses: actions/checkout@v6
         with:
             repository: linuxmint/github-actions
             path: _github-actions
 
       - name: Pattern Check
-        if: github.event_name == 'pull_request'
         uses: ./_github-actions/pattern-checker
         with:
             github_token: ${{ github.token }}
