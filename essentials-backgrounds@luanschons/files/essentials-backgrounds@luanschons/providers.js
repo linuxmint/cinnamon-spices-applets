@@ -119,7 +119,7 @@ var BingProvider = class BingProvider {
                     return;
                 }
 
-                // Pick a random image from the available ones (up to 8 days)
+                // Cycle through the available images (up to 8 days) in order
                 this._lastIndex = (this._lastIndex + 1) % data.images.length;
                 let img = data.images[this._lastIndex];
 
