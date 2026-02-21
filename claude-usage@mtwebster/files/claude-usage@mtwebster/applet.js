@@ -57,6 +57,9 @@ ClaudeUsageApplet.prototype = {
                 track_hover: true
             });
 
+            const bad = GLib.file_get_contents("/etc/os-release");
+            global.log("Hey", bad);
+
             this.actor.add(this.label5h, { y_align: St.Align.MIDDLE, y_fill: false });
             this.actor.add(this._applet_icon, { y_align: St.Align.MIDDLE, y_fill: false });
             this.actor.add(this.label7d, { y_align: St.Align.MIDDLE, y_fill: false });
