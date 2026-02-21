@@ -20,13 +20,10 @@ permissions:
     pull-requests: write
 
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  validate:
+    name: Validate spices
     if: github.event_name != 'pull_request_target'
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v6
@@ -39,6 +36,7 @@ jobs:
           python3 validate-spice --all
 
   pattern-check:
+    name: Pattern Check
     if: github.event_name == 'pull_request_target'
     runs-on: ubuntu-latest
     permissions:
