@@ -1,3 +1,6 @@
+### v3.11.0~20260221
+  * Smooth reading of certain files.
+
 ### v3.10.2~20260112
   * Repairs the "Configure..." menu for Cinnamon 6.6.
   * Adds the ability to set the width of the configuration window. See the Behavior tab.
