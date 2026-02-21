@@ -1,0 +1,16 @@
+{
+    "screenshot-section": {
+        "type": "section",
+        "description": "Screenshot Settings"
+    },
+    "delay-seconds": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "units": "seconds",
+        "description": "Delay before taking screenshot",
+        "tooltip": "Set the delay in seconds (0-20) before capturing the screenshot"
+    }
+}
