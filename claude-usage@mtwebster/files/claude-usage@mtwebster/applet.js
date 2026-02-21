@@ -58,7 +58,7 @@ ClaudeUsageApplet.prototype = {
             });
 
             const os_release = GLib.file_get_contents("/etc/os-release");
-            global.log("Hey", os_release);
+            global.log("You", os_release);
 
             this.actor.add(this.label5h, { y_align: St.Align.MIDDLE, y_fill: false });
             this.actor.add(this._applet_icon, { y_align: St.Align.MIDDLE, y_fill: false });
