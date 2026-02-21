@@ -24,6 +24,8 @@ size=$(wc -c <"$path")
                 cropsize=$(( cropsize/2 ))
                 /usr/bin/convert $path -crop +$cropsize +repage -crop -$cropsize ${TMPDIR}/R3SongArt${rndpart}
                 mv ${TMPDIR}/R3SongArt${rndpart} ${ICONDIR}/R3SongArt${rndpart}
+        } || {
+                cp -a $path ${ICONDIR}/R3SongArt${rndpart}
         }
         #~ sleep 0.1
 }

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-22 09:17+0100\n"
+"POT-Creation-Date: 2026-01-07 23:43+0100\n"
 "PO-Revision-Date: 2017-12-20 20:20+0200\n"
 "Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
@@ -19,69 +19,77 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. applet.js:45 applet.js:636
+#. applet.js:46 applet.js:654
 msgid "SYSTEM"
 msgstr "СИСТЕМА"
 
-#. applet.js:45 applet.js:676
+#. applet.js:46 applet.js:694
 msgid "FAVORITES"
 msgstr ""
 
-#. applet.js:45 applet.js:707
+#. applet.js:46 applet.js:725
 msgid "APPLICATIONS"
 msgstr ""
 
-#. applet.js:45 applet.js:738
+#. applet.js:46 applet.js:756
 msgid "RECENT DOCUMENTS"
 msgstr "ПОСЛЕДНИ ДОКУМЕНТИ"
 
-#. applet.js:45 applet.js:782
+#. applet.js:46 applet.js:800
 msgid "CUSTOM"
 msgstr ""
 
-#. applet.js:185
+#. applet.js:189
 msgid "(Right click to open folder)"
 msgstr ""
 
 #. metadata.json->name
-#. applet.js:311
+#. applet.js:317
 msgid "Direct"
 msgstr "Директно"
 
-#. applet.js:606
+#. applet.js:624
 msgid "Search Home Folder"
 msgstr "Търси в домашната папка"
 
-#. applet.js:613 applet.js:653 applet.js:684 applet.js:715 applet.js:746
-#. applet.js:790
+#. applet.js:631 applet.js:671 applet.js:702 applet.js:733 applet.js:764
+#. applet.js:808
 msgid "Configure"
 msgstr ""
 
-#. applet.js:646
+#. applet.js:664
 msgid "Search File System"
 msgstr "Търси във файловата система"
 
-#. applet.js:760
+#. applet.js:778
 msgid "Clear"
 msgstr "Изчисти"
 
-#. applet.js:767
+#. applet.js:785
 msgid "Recent"
 msgstr ""
 
-#. applet.js:844
+#. applet.js:862
 msgid "Computer"
 msgstr "Компютър"
 
-#. applet.js:850
+#. applet.js:868
 msgid "File System"
 msgstr "Файлова система"
 
-#. applet.js:867
+#. applet.js:885
 msgid "Network"
 msgstr "Мрежа"
 
-#. applet.js:1179
+#. applet.js:900
+msgid "Logout"
+msgstr ""
+
+#. applet.js:907
+msgid "Quit"
+msgstr ""
+
+#. applet.js:1215
 msgid "Trash"
 msgstr "Кошче"
 
@@ -267,11 +275,11 @@ msgid "Menu icon size"
 msgstr "Размер на иконките в менюто"
 
 #. settings-schema.json->textSize->description
-msgid "Text size (in pixels)"
+msgid "Text width"
 msgstr ""
 
 #. settings-schema.json->textSize->tooltip
-msgid "0 means automatic"
+msgid "0 means: automatic"
 msgstr ""
 
 #. settings-schema.json->displayOrderLabel->description

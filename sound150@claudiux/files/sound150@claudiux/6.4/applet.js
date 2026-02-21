@@ -181,8 +181,8 @@ const original_players_with_seek_support = [
     "amarok", "xnoise", "gmusicbrowser",
     "vlc", "qmmp", "deadbeef",
     "audacious", "celluloid", "spotify", "mpv", "smplayer",
-    "LibreWolf"
-]; // Added: "smplayer", "LibreWolf"
+    "LibreWolf", "Strawberry"
+]; // Added: "smplayer", "LibreWolf", "Strawberry"
 var players_without_seek_support = original_players_without_seek_support;
 var players_with_seek_support = original_players_with_seek_support;
 
@@ -213,11 +213,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.instanceId = instanceId;
 
         this.real_ui_scale = 1.0;
-        this.menuWidth = 450;
+        this.menuWidth = 520;
         Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-real-scale.py", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 this.real_ui_scale = parseFloat(stdout);
-                this.menuWidth = Math.round(450 * this.real_ui_scale);
+                this.menuWidth = Math.round(520 * this.real_ui_scale);
             }
         }, {});
 
@@ -264,6 +264,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._chooseActivePlayerItem = new PopupMenu.PopupSubMenuMenuItem(_("Choose player controls"));
 
         this.settings = new Settings.AppletSettings(this, UUID, this.instanceId);
+        this.settings.bind("userMenuWidth", "userMenuWidth", (value) => {
+            this.menuWidth = Math.round(value * this.real_ui_scale);
+        });
+        this.menuWidth = Math.round(this.userMenuWidth * this.real_ui_scale);
         this.settings.bind("runAsync", "runAsync");
         this.settings.bind("shortenArtistTitle", "shortenArtistTitle");
         this.settings.bind("doNotUsePlayerctld", "doNotUsePlayerctld", () => {
@@ -768,7 +772,8 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     on_leave_event(actor, event) {
         this.isActorEntered = false;
-        if (this.playerControl && this._activePlayer)
+        //~ if (this.playerControl && this._activePlayer)
+        if (this._activePlayer && this._players[this._activePlayer])
             this.setAppletTextIcon(this._players[this._activePlayer], true);
         else
             this.setAppletTextIcon();
@@ -876,7 +881,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                     `notify-send -u critical --icon="audio-volume-overamplified-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`,
                     (stdout, stderr, exitCode) => {
                         if (exitCode === 0) {
-                            logDebug("stdout: " + stdout + " " + typeof stdout);
+                            //~ logDebug("stdout: " + stdout + " " + typeof stdout);
                             if (stdout.startsWith("opt1")) {
                                 //~ Util.spawnCommandLineAsync("cinnamon-settings extensions -t download");
                                 Util.spawnCommandLineAsync("cinnamon-settings extensions -t 1");
@@ -1116,7 +1121,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (!this._sound_settings.get_boolean(OVERAMPLIFICATION_KEY) && this.maxVolume > 100) {
             this.maxVolume = 100;
         }
-
+        
+        if (! this.showalbum) {
+            this.keepAlbumArtIcon = false;
+        }
+        this._iconLooping = this.showalbum;
+        
         this._volumeMax = this.maxVolume / 100 * this._volumeNorm;
         if (this.maxVolume > 100) {
             if (this._outputVolumeSection)
@@ -1193,7 +1203,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
         this.color0_100 = color;
 
-        this._iconLooping = true;
+        this._iconLooping = this.showalbum;
 
         if (this._output && this._output.is_muted) {
             this.old_volume = this.volume;
@@ -1204,12 +1214,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._on_sound_settings_change();
 
         this._loopArtId = null;
-        this._artLooping = true;
+        this._artLooping = this.showalbum;
         this._loopArtId = timeout_add_seconds(10, () => {
             this.loopArt();
         });
 
-        this.iconsMonitor =null;
+        this.iconsMonitor = null;
         this.iconsMonitorId == null;
         this.monitor_icon_dir();
 
@@ -1659,7 +1669,10 @@ class Sound150Applet extends Applet.TextIconApplet {
                 this._playerIcon = [icon, source === "player-path"];
         }
         
-        if (! this.showalbum) this.keepAlbumArtIcon = false;
+        if (! this.showalbum) {
+            this.keepAlbumArtIcon = false;
+            this._iconLooping = false;
+        }
 
         if (this.playerControl && this._activePlayer && this._playerIcon && this._playerIcon[0]) {
             if (source === "output") {
@@ -1671,13 +1684,15 @@ class Sound150Applet extends Applet.TextIconApplet {
                         if (this._iconTimeoutId != null) source_remove(this._iconTimeoutId);
                         //~ this._iconTimeoutId = timeout_add_seconds(OUTPUT_ICON_SHOW_TIME_SECONDS, () => {
                         this._iconTimeoutId = timeout_add_seconds(0, () => {
-                            this.setAppletTextIcon(this._players[this._activePlayer], true);
-                            //~ return false;
-                            return this._iconLooping;
+                            //~ this.setAppletTextIcon(this._players[this._activePlayer], true);
+                            this.setIcon();
+                            return false;
+                            //~ return this._iconLooping;
                         });
                     }
                 } else {
-                    return this._iconLooping;
+                    //~ return this._iconLooping;
+                    return false;
                 }
             } else {
                 // if we have an active player and want to change the icon, change it immediately
@@ -1731,7 +1746,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     loopArt() {
-        source_remove(this._loopArtId);
+        if (this._loopArtId != null) source_remove(this._loopArtId);
         this._loopArtId = null;
         if (!this._artLooping) return;
         
@@ -1813,6 +1828,14 @@ class Sound150Applet extends Applet.TextIconApplet {
             path = null;
         }
 
+        //~ if (this.old_player === player && this.old_path === path) return;
+        if ((this.old_player === player && 
+            (typeof(this.old_path) === "string" && typeof(path) === "string" && this.old_path.split("/").pop() === path.split("/").pop()))) 
+                return;
+        this.old_player = player;
+        this.old_path = path;
+        //~ logDebug("setAppletIcon(" + player + ", " + path +")");
+        
         if (!this.allowChangeArt) return;
 
         if (this.showalbum) {
@@ -2237,22 +2260,22 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _theme_set() {
-        logDebug("_theme_set()");
+        //~ logDebug("_theme_set()");
         let color = this.color0_100;
         try {
             if (!this.themeNode) {
-                logDebug("this.themeNode was not defined.");
+                //~ logDebug("this.themeNode was not defined.");
                 this.themeNode = this.actor.get_theme_node();
             }
             let defaultColor = this.themeNode.get_foreground_color();
-            logDebug("defaultColor: "+defaultColor.to_string());
+            //~ logDebug("defaultColor: "+defaultColor.to_string());
             color = defaultColor.to_string();
         } catch(e) {
             color = this.color0_100;
         }
         this.color0_100 = color;
         let _style = `color: ${color};`;
-        logDebug("_style: "+_style);
+        //~ logDebug("_style: "+_style);
         this.actor.style = _style;
         this._setStyle();
     }

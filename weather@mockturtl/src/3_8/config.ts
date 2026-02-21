@@ -1,15 +1,13 @@
 import type { WeatherApplet } from "./main";
-import type { LocationData, LocationServiceResult, WeatherProvider} from "./types";
+import type { LocationData, LocationServiceResult, RemovePrefix, WeatherProvider } from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Logger } from "./lib/services/logger";
-import type { LogLevel} from "./consts";
+import type { LogLevel } from "./consts";
 import { distanceUnitLocales, fahrenheitCountries, UUID, windSpeedUnitLocales } from "./consts";
 import { LocationStore } from "./location_services/locationstore";
 import { GeoLocation } from "./location_services/nominatim";
 import { DateTime } from "luxon";
 import { FileExists, LoadContents } from "./lib/io_lib";
-import { MetUk } from "./providers/met_uk";
-import type { BaseProvider } from "./providers/BaseProvider";
 import { OpenWeatherMapOneCall } from "./providers/openweathermap/provider-closed";
 import { MetNorway } from "./providers/met_norway/provider";
 import { Weatherbit } from "./providers/weatherbit/provider";
@@ -31,6 +29,10 @@ import type settingsSchema from "../../files/weather@mockturtl/3.8/settings-sche
 import { soupLib } from "./lib/soupLib";
 import { GeoTimezone } from "./location_services/tz_lookup";
 import { SwissMeteo } from "./providers/swiss-meteo/provider";
+import { MetUk } from "./providers/met_uk/provider";
+import { IpApi } from "./location_services/geoip_services/ipApi";
+import { GeoJS } from "./location_services/geoip_services/geojs.io";
+import { GeoIPLookupIO } from "./location_services/geoip_services/geoiplookup.io";
 
 const { get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -75,7 +77,15 @@ export enum Services {
 	SwissMeteo = "Swiss Meteo"
 }
 
-export const ServiceClassMapping: ServiceClassMappingType = {
+export enum LocationProvider {
+	FedoraGeoIP = "fedora",
+	IpApi = "ipapi",
+	GeoJS = "geojs",
+	GeoIPLookup = "geoiplookup",
+	GeoClue2 = "geoclue2"
+}
+
+export const ServiceClassMapping = {
 	[Services.OpenWeatherMap_Open]: () => new OpenWeatherMapOpen(),
 	[Services.OpenWeatherMap_OneCall]: () => new OpenWeatherMapOneCall(),
 	[Services.MetNorway]: () => new MetNorway(),
@@ -91,7 +101,10 @@ export const ServiceClassMapping: ServiceClassMappingType = {
 	[Services.PirateWeather]: () => new PirateWeather(),
 	[Services.OpenMeteo]: () => new OpenMeteo(),
 	[Services.SwissMeteo]: () => new SwissMeteo(),
-}
+} satisfies ServiceClassMappingType;
+
+type ServiceImplementation<T extends Services> = ReturnType<typeof ServiceClassMapping[T]>;
+type ServiceOption<T extends Services> = ServiceImplementation<T> extends WeatherProvider<T, infer U> ? U : never;
 
 export class Config {
 	private readonly WEATHER_LOCATION = "location";
@@ -102,7 +115,19 @@ export class Config {
 	private readonly _temperatureUnit!: WeatherUnits;
 	private readonly _windSpeedUnit!: WeatherWindSpeedUnits;
 	private readonly _distanceUnit!: DistanceUnits;
+	/**
+	 * @deprecated there are provider-specific api keys now, this is only kept for migration in configs
+	 */
 	private readonly _apiKey!: string;
+	private readonly _openweathermap_onecall_apikey!: string;
+	private readonly _metoffice_forecast_apikey!: string;
+	private readonly _metoffice_observations_apikey!: string;
+	private readonly _pirateweather_apikey!: string;
+	private readonly _visualcrossing_apikey!: string;
+	private readonly _weatherbit_apikey!: string;
+	private readonly _tomorrowio_apikey!: string;
+	private readonly _accuweather_apikey!: string;
+	private readonly _weatherunderground_apikey!: string;
 	private readonly _useSymbolicIcons!: boolean;
 	public readonly keybinding!: string;
 
@@ -139,6 +164,8 @@ export class Config {
 	public readonly _alwaysShowHourlyWeather!: boolean;
 	public readonly _logLevel!: LogLevel;
 	public readonly _selectedLogPath!: string;
+	public readonly _geoclue!: boolean;
+	public readonly _autoloc_provider!: LocationProvider;
 	/**
 	 * Panel text override
 	 */
@@ -151,6 +178,15 @@ export class Config {
 
 	public readonly DataServiceChanged = new Event<Config, Services>();
 	public readonly ApiKeyChanged = new Event<Config, string>();
+	public readonly OpenWeatherMapOneCallApiKeyChanged = new Event<Config, string>();
+	public readonly MetofficeForecastApiKeyChanged = new Event<Config, string>();
+	public readonly MetofficeObservationsApiKeyChanged = new Event<Config, string>();
+	public readonly PirateWeatherApiKeyChanged = new Event<Config, string>();
+	public readonly VisualCrossingApiKeyChanged = new Event<Config, string>();
+	public readonly WeatherbitApiKeyChanged = new Event<Config, string>();
+	public readonly TomorrowIOApiKeyChanged = new Event<Config, string>();
+	public readonly AccuWeatherApiKeyChanged = new Event<Config, string>();
+	public readonly WeatherUndergroundApiKeyChanged = new Event<Config, string>();
 	public readonly TemperatureUnitChanged = new Event<Config, WeatherUnits>();
 	public readonly TemperatureHighFirstChanged = new Event<Config, boolean>();
 	public readonly WindSpeedUnitChanged = new Event<Config, WeatherWindSpeedUnits>();
@@ -189,6 +225,8 @@ export class Config {
 	public readonly RunScriptChanged = new Event<Config, boolean>();
 	public readonly TempTextOverrideChanged = new Event<Config, string>();
 	public readonly UV_IndexChanged = new Event<Config, boolean>();
+	public readonly GeoClueChanged = new Event<Config, boolean>();
+	public readonly AutoLocProviderChanged = new Event<Config, LocationProvider>();
 
 	public readonly FontChanged = new Event<Config, void>();
 	public readonly HotkeyChanged = new Event<Config, void>();
@@ -214,7 +252,34 @@ export class Config {
 			return TimeZone.new_local().get_identifier();
 	}
 
-	private readonly autoLocProvider: GeoIP;
+	private autoLocProvider: GeoIP | null = null;
+
+	private get LocationProvider(): GeoIP {
+		if (this.autoLocProvider && this.autoLocProvider.provider === this._autoloc_provider) {
+			return this.autoLocProvider;
+		}
+
+		let provider;
+		switch (this._autoloc_provider) {
+			// GeoClue shouldn't show up here, so we return the default instead
+			case LocationProvider.GeoClue2:
+			case LocationProvider.FedoraGeoIP:
+				provider = new GeoIPFedora();
+				break;
+			case LocationProvider.IpApi:
+				provider = new IpApi();
+				break;
+			case LocationProvider.GeoJS:
+				provider = new GeoJS();
+				break;
+			case LocationProvider.GeoIPLookup:
+				provider = new GeoIPLookupIO();
+				break;
+		}
+
+		this.autoLocProvider = provider;
+		return provider;
+	}
 	private readonly geoClue: GeoClue;
 	private readonly geoLocationService: GeoLocation;
 	private readonly tzService = new GeoTimezone();
@@ -251,10 +316,6 @@ export class Config {
 		return this.currentLocation;
 	}
 
-	public get ApiKey(): string {
-		return this._apiKey.replace(" ", "");
-	}
-
 	public get Language(): string | null {
 		return this.GetLanguage(this.currentLocale);
 	}
@@ -271,7 +332,7 @@ export class Config {
 	/**
 	 * @returns Units, automatic is already resolved here
 	 */
-	public get WindSpeedUnit(): WeatherWindSpeedUnits {
+	public get WindSpeedUnit(): Exclude<WeatherWindSpeedUnits, "automatic"> {
 		if (this._windSpeedUnit == "automatic")
 			return this.GetLocaleWindSpeedUnit(this.UserTimezone);
 		return this._windSpeedUnit;
@@ -307,6 +368,96 @@ export class Config {
 			IconType.FULLCOLOR;
 	}
 
+	public GetServiceConfig<T extends Services>(service: T): ServiceOption<T> {
+		const oldApiKey = this._apiKey.trim();
+
+		// Migration once from old key to new key, key goes to selected provider
+		let newApiKeyField: RemovePrefix<keyof Config, "_"> | null = null;
+		switch (service) {
+			case Services.OpenWeatherMap_OneCall:
+				newApiKeyField = Keys.OPENWEATHERMAP_ONECALL_API_KEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.PirateWeather:
+				newApiKeyField = Keys.PIRATEWEATHER_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.VisualCrossing:
+				newApiKeyField = Keys.VISUALCROSSING_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.Weatherbit:
+				newApiKeyField = Keys.WEATHERBIT_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.Tomorrow_IO:
+				newApiKeyField = Keys.TOMORROW_IO_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.AccuWeather:
+				newApiKeyField = Keys.ACCUWEATHER_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.WeatherUnderground:
+				newApiKeyField = Keys.WEATHER_UNDERGROUND_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+		}
+
+		if (newApiKeyField != null && !this[`_${newApiKeyField}`] && !!oldApiKey) {
+			this.settings.setValue(newApiKeyField, oldApiKey);
+			this.settings.setValue(Keys.API_KEY.key, "");
+			Logger.Info(`Migrating old API key to new field for service ${service}`);
+		}
+
+		switch (service) {
+			case Services.OpenWeatherMap_OneCall: {
+				const result: ServiceOption<Services.OpenWeatherMap_OneCall> = {
+					apiKey: this._openweathermap_onecall_apikey.trim() || oldApiKey
+				}
+				return result as ServiceOption<T>;
+			}
+			case Services.Weatherbit: {
+				const result: ServiceOption<Services.Weatherbit> = {
+					apiKey: this._weatherbit_apikey.trim() || oldApiKey
+				}
+				return result as ServiceOption<T>;
+			}
+			case Services.Tomorrow_IO: {
+				return {
+					apiKey: this._tomorrowio_apikey.trim() || oldApiKey
+				} satisfies ServiceOption<Services.Tomorrow_IO> as ServiceOption<T>;
+			}
+			case Services.MetOfficeUK: {
+				return {
+					forecastKey: this._metoffice_forecast_apikey.trim(),
+					observationKey: this._metoffice_observations_apikey.trim()
+				} satisfies ServiceOption<Services.MetOfficeUK> as ServiceOption<T>;
+			}
+			case Services.VisualCrossing: {
+				return {
+					apiKey: this._visualcrossing_apikey.trim() || oldApiKey
+				} satisfies ServiceOption<Services.VisualCrossing> as ServiceOption<T>;
+			}
+			case Services.AccuWeather: {
+				return {
+					apiKey: this._accuweather_apikey.trim() || oldApiKey
+				} satisfies ServiceOption<Services.AccuWeather> as ServiceOption<T>;
+			}
+			case Services.WeatherUnderground: {
+				return {
+					apiKey: this._weatherunderground_apikey.trim() || oldApiKey
+				} satisfies ServiceOption<Services.WeatherUnderground> as ServiceOption<T>;
+			}
+			case Services.PirateWeather: {
+				return {
+					apiKey: this._pirateweather_apikey.trim() || oldApiKey
+				} satisfies ServiceOption<Services.PirateWeather> as ServiceOption<T>;
+			}
+			case Services.OpenWeatherMap_Open:
+			case Services.DeutscherWetterdienst:
+			case Services.MetNorway:
+			case Services.OpenMeteo:
+			case Services.SwissMeteo:
+			case Services.USWeather:
+			case Services.DanishMI:
+				return null as ServiceOption<T>;
+		}
+	}
+
 	/** Called when user changed manual locations, automatically switches to manual location mode. */
 	public SwitchToNextLocation(): LocationData | null {
 		const nextLoc = this.LocStore.GetNextLocation(this.CurrentLocation);
@@ -322,11 +473,6 @@ export class Config {
 		this.InjectLocationToConfig(previousLoc, true);
 		return previousLoc;
 	}
-
-	public NoApiKey(): boolean {
-		const key = this._apiKey?.replace(" ", "");
-		return (!key || key == "");
-	};
 
 	public async GetLocation(cancellable: imports.gi.Gio.Cancellable, provider: WeatherProvider): Promise<LocationData | null> {
 		this.currentLocation = null;
@@ -382,31 +528,16 @@ export class Config {
 	 * it looks up coordinates via geolocation api
 	 */
 	private async EnsureLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
-		// Automatic location
 		if (!this._manualLocation) {
-			Logger.Info("Obtaining auto location via GeoClue2.");
-			const geoClue = await this.geoClue.GetLocation(cancellable);
-			if (geoClue != null) {
-				return geoClue;
-			}
-
-			Logger.Info("Obtaining auto location via IP lookup instead.");
-			const location = await this.autoLocProvider.GetLocation(cancellable, this);
-			// User facing errors handled by provider
-			if (!location)
-				return null;
-
-			return location;
+			return await this.GetLocationAutomatically(cancellable);
 		}
-
-		// Manual Location
 
 		let loc = this._location;
 		if (loc == undefined || loc.trim() == "") {  // No location
 			return null;
 		}
 
-		// Find location in storage
+		// Find location in storage, returning as is and switching to it
 		let location = this.LocStore.FindLocation(this._location);
 		if (location != null) {
 			Logger.Debug("Manual Location exist in Saved Locations, retrieve.");
@@ -414,8 +545,9 @@ export class Config {
 			this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
 			return location;
 		}
-		// location not in storage
-		else if (IsCoordinate(loc)) {
+
+		// Location is a coordinate, construct return object
+		if (IsCoordinate(loc)) {
 			// Get Location
 			loc = loc.replace(" ", "");
 			const latLong = loc.split(",");
@@ -428,15 +560,20 @@ export class Config {
 			return location;
 		}
 
+		// Reverse geocoding, location is text
 		Logger.Debug("Location is text, geo locating...")
 		const locationData = await this.geoLocationService.GetLocation(loc, cancellable);
 		// User facing errors are handled by service
-		if (locationData == null) return null;
+		if (locationData == null) {
+			return null;
+		}
+
 		if (locationData?.entryText) {
 			Logger.Debug("Coordinates are found via Reverse address search");
 		}
 
-		// Maybe location is in locationStore, first search
+		// Reverse geocoding might give back a different entry text than what was entered,
+		// so we need to look that up in our store too.
 		location = this.LocStore.FindLocation(locationData.entryText);
 		if (location != null) {
 			Logger.Debug("Entered location was found in Saved Location, switch to it instead.");
@@ -446,6 +583,25 @@ export class Config {
 		else {
 			return locationData;
 		}
+	}
+
+	private async GetLocationAutomatically(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
+		if (this._geoclue) {
+			Logger.Info("Obtaining auto location via GeoClue2.");
+			const geoClue = await this.geoClue.GetLocation(cancellable);
+			if (geoClue != null) {
+				return geoClue;
+			}
+		}
+
+		Logger.Info("Obtaining auto location via IP lookup.");
+		const location = await this.LocationProvider.GetLocation(cancellable, this);
+		// User facing errors handled by provider
+		if (!location) {
+			return null;
+		}
+
+		return location;
 	}
 
 	/** Attaches settings to functions */
@@ -534,11 +690,11 @@ export class Config {
 		return "fahrenheit";
 	}
 
-	private GetLocaleWindSpeedUnit(code: string | null): WeatherWindSpeedUnits {
+	private GetLocaleWindSpeedUnit(code: string | null): Exclude<WeatherWindSpeedUnits, "automatic"> {
 		if (code == null)
 			return "kph";
 
-		let key: WeatherWindSpeedUnits;
+		let key: Exclude<WeatherWindSpeedUnits, "automatic">;
 		for (key in windSpeedUnitLocales) {
 			if (windSpeedUnitLocales[key]?.includes(code))
 				return key;
@@ -638,7 +794,7 @@ export class Config {
 /**
  * Keys matching the ones in settings-schema.json
  */
- const Keys = {
+const Keys = {
 	DATA_SERVICE: {
 		key: "dataService",
 		prop: "DataService"
@@ -646,6 +802,42 @@ export class Config {
 	API_KEY: {
 		key: "apiKey",
 		prop: "ApiKey"
+	},
+	OPENWEATHERMAP_ONECALL_API_KEY: {
+		key: "openweathermap_onecall_apikey",
+		prop: "OpenWeatherMapOneCallApiKey",
+	},
+	METOFFICE_FORECAST_APIKEY: {
+		key: "metoffice_forecast_apikey",
+		prop: "MetofficeForecastApiKey"
+	},
+	METOFFICE_OBSERVATIONS_APIKEY: {
+		key: "metoffice_observations_apikey",
+		prop: "MetofficeObservationsApiKey"
+	},
+	PIRATEWEATHER_APIKEY: {
+		key: "pirateweather_apikey",
+		prop: "PirateWeatherApiKey"
+	},
+	VISUALCROSSING_APIKEY: {
+		key: "visualcrossing_apikey",
+		prop: "VisualCrossingApiKey"
+	},
+	WEATHERBIT_APIKEY: {
+		key: "weatherbit_apikey",
+		prop: "WeatherbitApiKey"
+	},
+	TOMORROW_IO_APIKEY: {
+		key: "tomorrowio_apikey",
+		prop: "TomorrowIOApiKey"
+	},
+	ACCUWEATHER_APIKEY: {
+		key: "accuweather_apikey",
+		prop: "AccuWeatherApiKey"
+	},
+	WEATHER_UNDERGROUND_APIKEY: {
+		key: "weatherunderground_apikey",
+		prop: "WeatherUndergroundApiKey"
 	},
 	TEMPERATURE_UNIT_KEY: {
 		key: "temperatureUnit",
@@ -787,8 +979,17 @@ export class Config {
 		key: "uvIndex",
 		prop: "UV_Index"
 	},
+	GEO_CLUE: {
+		key: "geoclue",
+		prop: "GeoClue"
+	},
+	AUTOLOC_PROVIDER: {
+		key: "autoloc_provider",
+		prop: "AutoLocProvider"
+	}
 } as const;
 
 type ServiceClassMappingType = {
-	[key in Services]: (app: WeatherApplet) => BaseProvider;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	[key in Services]: (app: WeatherApplet) => WeatherProvider<any, any>;
 }

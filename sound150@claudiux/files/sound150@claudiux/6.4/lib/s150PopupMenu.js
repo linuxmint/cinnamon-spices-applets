@@ -2,6 +2,7 @@
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
+const Signals = imports.signals;
 const UUID = "sound150@claudiux";
 const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
@@ -119,6 +120,8 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
             iconName = "banshee";
         } else if (name === "Spotify") {
             iconName = "spotify";
+        } else if (name === "Strawberry") {
+            iconName = "strawberry";
         } else if (name === "VBox") {
             name = "Virtualbox";
             iconName = "virtualbox";
@@ -144,6 +147,7 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
         }
     }
 }
+Signals.addSignalMethods(StreamMenuSection.prototype);
 
 class Player extends PopupMenu.PopupMenuSection {
     constructor(applet, busname, owner) {
@@ -341,7 +345,7 @@ class Player extends PopupMenu.PopupMenuSection {
         this.coverBox.add_actor(this.trackInfo);
 
         // If the actor is on stage, we set the layout manager
-        //~ // else we're waiting about 500 ms to retry.
+        // else we're waiting about 500 ms to retry.
         if (this.actor && this.coverBox && this.actor.get_stage() != null) {
             this.coverBox.set_layout_manager(COVERBOX_LAYOUT_MANAGER);
         } else {
@@ -685,7 +689,7 @@ class Player extends PopupMenu.PopupMenuSection {
             let dontDisplayArtSites = this._applet.sitesNotDisplayingAlbumArt;
             for (let site of dontDisplayArtSites) {
                 if (metadata["xesam:url"].unpack().toLowerCase().includes(site) ||
-                    metadata["mpris:artUrl"].unpack().toLowerCase().includes(site)) {
+                    (metadata["mpris:artUrl"] && metadata["mpris:artUrl"].unpack().toLowerCase().includes(site))) {
                     if (this._applet.iconsWhenNotDisplayingAlbumArt[site].length > 0) {
                         let siteIcon = this._applet.iconsWhenNotDisplayingAlbumArt[site];
                         this._trackCoverFile = `file://${siteIcon}`;
@@ -1084,6 +1088,7 @@ class Player extends PopupMenu.PopupMenuSection {
         }
     }
 }
+Signals.addSignalMethods(Player.prototype);
 
 class Seeker extends Slider.Slider {
     constructor(mediaServerPlayer, props, playerName) {
@@ -1519,7 +1524,7 @@ class Seeker extends Slider.Slider {
             this._seekChangedId = null;
         }
 
-        //~ this.disconnectAll(); //??? Seems cause of bugs.
+        this.disconnectAll(); //??? Seems cause of bugs.
 
         this.posLabel = null;
         this.durLabel = null;
@@ -1528,6 +1533,7 @@ class Seeker extends Slider.Slider {
         this._prop = null;
     }
 }
+Signals.addSignalMethods(Seeker.prototype);
 
 
 
@@ -1565,6 +1571,7 @@ class MediaPlayerLauncher extends PopupMenu.PopupBaseMenuItem {
         this._app.activate_full(-1, _time);
     }
 }
+Signals.addSignalMethods(MediaPlayerLauncher.prototype);
 
 module.exports = {
     StreamMenuSection,

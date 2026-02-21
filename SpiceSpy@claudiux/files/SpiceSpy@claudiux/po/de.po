@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 4.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-25 23:34+0200\n"
+"POT-Creation-Date: 2025-12-28 16:21+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,50 +17,55 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:201
+#. applet.js:185
 msgid "score"
 msgstr "Punktestand"
 
-#. applet.js:213
+#. applet.js:197
 msgid "comments"
 msgstr "Kommentare"
 
 # Better not translate "issue"?
-#. applet.js:225
+#. applet.js:209
 msgid "recent issues"
 msgstr "aktuelle Probleme"
 
-#. applet.js:237
+#. applet.js:222
 msgid "translations"
 msgstr "Übersetzungen"
 
-#. applet.js:312
+#. applet.js:297
 #, fuzzy
 msgid "Reload icons"
 msgstr "Applet neu Laden"
 
-#. applet.js:318
+#. applet.js:303
 msgid "Visit website"
 msgstr ""
 
-#. applet.js:826
+#. applet.js:831
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:915
+#. applet.js:919
 msgid "Mark all as read"
 msgstr "Alle als gelesen markieren"
 
-#. applet.js:926
+#. applet.js:930
 msgid "Refresh"
 msgstr "Aktualisieren"
 
-#. applet.js:938
+#. applet.js:944
+#, fuzzy
+msgid "Refreshing in progress - Click to stop"
+msgstr "Aktualisierung läuft"
+
+#. applet.js:969
 msgid "Refreshing in progress"
 msgstr "Aktualisierung läuft"
 
 # Same wording as in context menu on applet right click.
-#. applet.js:949
+#. applet.js:981
 msgid "Configure..."
 msgstr "Einrichten..."
 
@@ -99,6 +104,10 @@ msgstr "Aktualisierungsintervall"
 #. settings-schema.json->update-interval-hours->units
 msgid "hours"
 msgstr "Stunden"
+
+#. settings-schema.json->update-interruptible->description
+msgid "The update can be interrupted by the user"
+msgstr ""
 
 #. settings-schema.json->standard-opacity->description
 msgid "Opacity in absence of change"
@@ -223,6 +232,14 @@ msgstr "Nichts anzeigen"
 #. settings-schema.json->useful-only->description
 msgid "Show only non-zero values in panel"
 msgstr "Zeige nur Werte über Null im Panel an"
+
+#. settings-schema.json->coloredIcon->description
+msgid "Change icon color while refreshing"
+msgstr ""
+
+#. settings-schema.json->colorWhileRefreshing->description
+msgid "Icon color while refreshing"
+msgstr ""
 
 #. settings-schema.json->author-list->columns->title
 msgid "GitHub user name"

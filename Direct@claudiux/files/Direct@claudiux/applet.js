@@ -4,7 +4,8 @@ const Gtk = imports.gi.Gtk;
 const Clutter = imports.gi.Clutter;
 const Pango = imports.gi.Pango;
 const St = imports.gi.St;
-
+const GnomeSession = imports.misc.gnomeSession;
+const {SignalManager} = imports.misc.signalManager;
 const windowTracker = imports.gi.Cinnamon.WindowTracker.get_default();
 
 const CMenu = imports.gi.CMenu;
@@ -30,7 +31,7 @@ const MENU_ITEM_TEXT_LENGTH = 25;
 const ICONBROWSER_PROGRAM = "yad-icon-browser";
 
 var TEXTSIZE = 0;
-var menu_item_icon_size;
+var MENU_ITEM_ICON_SIZE = 22;
 const UUID = "Direct@claudiux";
 Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
 
@@ -56,7 +57,7 @@ class IconMenuItem extends PopupMenu.PopupBaseMenuItem {
         this.actor.add_style_class_name("xCenter-menuItem");
 
         if ( typeof icon == "string" ) {
-            icon = new St.Icon({icon_name: icon, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
+            icon = new St.Icon({icon_name: icon, icon_size: MENU_ITEM_ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
         }
 
         this.addActor(icon);
@@ -92,12 +93,15 @@ class FolderTypeMenuItem extends PopupMenu.PopupBaseMenuItem {
 class VolumeMenuItem extends IconMenuItem {
     constructor(volume, mounted) {
         let icon = volume.get_icon();
-        super(volume.get_name(), St.TextureCache.get_default().load_gicon(null, icon, menu_item_icon_size));
+        super(volume.get_name(), St.TextureCache.get_default().load_gicon(null, icon, MENU_ITEM_ICON_SIZE));
 
         if ( mounted ) {
-            let ejectIcon = new St.Icon({ icon_name: "media-eject", icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR });
+            let ejectIcon = new St.Icon({ icon_name: "media-eject", icon_size: MENU_ITEM_ICON_SIZE, icon_type: St.IconType.FULLCOLOR });
             let ejectButton = new St.Button({ child: ejectIcon });
-            this.addActor(ejectButton, { span: -1, align: St.Align.END });
+            try {
+                this.addActor(ejectButton, { span: -1, expand: false, align: St.Align.END, position: 2 });
+                //~ this.addActor(ejectButton);
+            } catch(e) {}
 
             ejectButton.connect("clicked", function() {
                 let mount = volume.get_mount();
@@ -126,10 +130,10 @@ class PlaceMenuItem extends FolderTypeMenuItem {
         let icon;
         if (uri == null) {
             if ( iconName && icon_exists(iconName) ) {
-                icon = new St.Icon({icon_name: iconName, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
+                icon = new St.Icon({icon_name: iconName, icon_size: MENU_ITEM_ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
             }
             else {
-                icon = new St.Icon({icon_name: "window-minimize-symbolic", icon_size: menu_item_icon_size, icon_type: St.IconType.SYMBOLIC});
+                icon = new St.Icon({icon_name: "window-minimize-symbolic", icon_size: MENU_ITEM_ICON_SIZE, icon_type: St.IconType.SYMBOLIC});
             }
             super(text, icon);
             this.uri = null;
@@ -141,10 +145,10 @@ class PlaceMenuItem extends FolderTypeMenuItem {
 
         
         if ( iconName && icon_exists(iconName) ) {
-            icon = new St.Icon({icon_name: iconName, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
+            icon = new St.Icon({icon_name: iconName, icon_size: MENU_ITEM_ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
         }
         else {
-            icon = St.TextureCache.get_default().load_gicon(null, fileInfo.get_icon(), menu_item_icon_size)
+            icon = St.TextureCache.get_default().load_gicon(null, fileInfo.get_icon(), MENU_ITEM_ICON_SIZE)
         }
 
         if ( !text ) text = fileInfo.get_name();
@@ -165,7 +169,7 @@ class PlaceMenuItem extends FolderTypeMenuItem {
 class RecentFileMenuItem extends IconMenuItem {
     constructor(text, icon, gicon = null, uri, folderApp, showUri=false){
         if ( gicon ) {
-            icon = new St.Icon({gicon: gicon, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
+            icon = new St.Icon({gicon: gicon, icon_size: MENU_ITEM_ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
         }
 
         super(text, icon);
@@ -255,11 +259,13 @@ class DirectApplet extends Applet.TextIconApplet {
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
             this.on_orientation_changed(orientation);
 
+            this.sessionManager = new GnomeSession.SessionManager();
+            this.signals = new SignalManager(null);
             this.appSystem = Cinnamon.AppSystem.get_default();
             this.appFavorites = getAppFavorites();
 
-            this.enterEventId = null;
-            this.leaveEventId = null;
+            //~ this.enterEventId = null;
+            //~ this.leaveEventId = null;
             this.iconIsHovered = false;
             this.userSection = new PopupMenu.PopupMenuSection();
             this.systemSection = new PopupMenu.PopupMenuSection();
@@ -328,10 +334,16 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     on_applet_added_to_panel() {
-        this.enterEventId = this.actor.connect("enter-event", (actor, event) => {
+        this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
+        if (this.signals.isConnected("enter-event", this.actor)) {
+            this.signals.disconnect("enter-event", this.actor);
+            this.signals.disconnect("leave-event", this.actor);
+        }
+        //~ this.enterEventId = this.actor.connect("enter-event", (actor, event) => {
+        this.signals.connect(this.actor, "enter-event", () => {
             this.iconIsHovered = true;
             this.controlDisplayOrder();
-            if ( ! this.menu.isOpen ) {
+            if ( ! this.menu || ! this.menu.isOpen ) {
                 this.buildMenu();
                 if ( this.openHoveringOver ) {
                     let _to = setTimeout( () => {
@@ -343,15 +355,21 @@ class DirectApplet extends Applet.TextIconApplet {
                 }
             }
         });
-        this.leaveEventId = this.actor.connect("leave-event", (actor, event) => { this.iconIsHovered = false } );
-        this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
+        //~ this.leaveEventId = this.actor.connect("leave-event", (actor, event) => { this.iconIsHovered = false } );
+        this.signals.connect(this.actor, "leave-event", () => { this.iconIsHovered = false } );
     }
 
     on_applet_removed_from_panel() {
-        if ( this.enterEventId )
-            this.actor.disconnect(this.enterEventId); // "enter-event"
-        if ( this.leaveEventId )
-            this.actor.disconnect(this.leaveEventId); // "leave-event"
+        //~ if ( this.enterEventId )
+            //~ this.actor.disconnect(this.enterEventId); // "enter-event"
+        //~ if ( this.leaveEventId )
+            //~ this.actor.disconnect(this.leaveEventId); // "leave-event"
+        if (this.signals.isConnected('enter-event', this.actor)) {
+            this.signals.disconnect('enter-event', this.actor);
+        }
+        if (this.signals.isConnected('leave-event', this.actor)) {
+            this.signals.disconnect('leave-event', this.actor);
+        }
         if ( this.keyId ) {
             Main.keybindingManager.removeHotKey(this.keyId);
             this.keyId = null;
@@ -503,7 +521,7 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     buildMenu() {
-        menu_item_icon_size = this.iconSize;
+        MENU_ITEM_ICON_SIZE = this.iconSize;
 
         if ( this.menu ) {
             this.menu.removeAll();
@@ -820,7 +838,7 @@ class DirectApplet extends Applet.TextIconApplet {
         bookmarks = bookmarks.concat(Main.placesManager.getBookmarks());
 
         for ( let bookmark of bookmarks ) {
-            let bookmarkItem = new FolderTypeMenuItem(bookmark.name, bookmark.iconFactory(menu_item_icon_size));
+            let bookmarkItem = new FolderTypeMenuItem(bookmark.name, bookmark.iconFactory(MENU_ITEM_ICON_SIZE));
             this.userSection.addMenuItem(bookmarkItem);
             let launch = bookmark.launch;
             bookmarkItem.connect("activate", Lang.bind(this, function() {
@@ -869,13 +887,30 @@ class DirectApplet extends Applet.TextIconApplet {
 
             if (Main.placesManager.getDefaultPlaces().length > 2) {
                 let bookmark = Main.placesManager.getDefaultPlaces()[2];
-                let connectToItem = new IconMenuItem(bookmark.name, bookmark.iconFactory(menu_item_icon_size));
+                let connectToItem = new IconMenuItem(bookmark.name, bookmark.iconFactory(MENU_ITEM_ICON_SIZE));
                 this.systemSection.addMenuItem(connectToItem);
                 connectToItem.connect("activate", Lang.bind(this, function() {
                     bookmark.launch();
                 }));
             }
         }
+        
+        //system items
+        this.systemSection.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        let logoutItem = new PopupMenu.PopupIconMenuItem(_("Logout"), "system-log-out", St.IconType.SYMBOLIC);
+        logoutItem._icon.set_icon_size(this.iconSize);
+        this.systemSection.addMenuItem(logoutItem);
+        logoutItem.connect("activate", Lang.bind(this, function() {
+            this.menu.close();
+            this.sessionManager.LogoutRemote(0);
+        }));
+        let quitItem = new PopupMenu.PopupIconMenuItem(_("Quit"), "system-shutdown", St.IconType.SYMBOLIC);
+        quitItem._icon.set_icon_size(this.iconSize);
+        this.systemSection.addMenuItem(quitItem);
+        quitItem.connect("activate", Lang.bind(this, function() {
+            this.menu.close();
+            this.sessionManager.ShutdownRemote();
+        }));
     }
     
     buildCustomSection() {
@@ -949,7 +984,8 @@ class DirectApplet extends Applet.TextIconApplet {
         else this.favoriteSection = new PopupMenu.PopupMenuSection();
 
         for (let i = 0; i < this._favoriteButtons.length; i ++) {
-            this._favoriteButtons[i].destroy();
+            if (this._favoriteButtons[i])
+                this._favoriteButtons[i].destroy();
         }
         this._favoriteButtons = [];
         var infos = this.favorites.get_favorites(null);
@@ -1265,6 +1301,7 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     configureApplet(tab=0) {
+        this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
         const maximize_vertically = true;
         const VERTICAL = 2;
         this._applet_context_menu.close(false);

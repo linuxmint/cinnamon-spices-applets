@@ -25,7 +25,8 @@
       "sections": [
         "sectionCPUOptions",
         "sectionCPUColors",
-        "sectionCPUColorsByActivity"
+        "sectionCPUColorsByActivity",
+        "sectionCPUTemperature"
       ]
     },
     "pageMem": {
@@ -77,10 +78,13 @@
         "removeEnlightenment",
         "labelsOn",
         "borderOn",
+        "borderRadius",
+        "graphStep",
+        "graphStepApply",
         "graphSpacing",
         "thickness",
         "useIconSize",
-        "graphHeight",
+        "graphHeightPercent",
         "refreshRate"
       ]
     },
@@ -109,8 +113,23 @@
         "CPU_squared",
         "CPU_width",
         "CPU_mergeAll",
+        
         "CPU_byActivity",
         "CPU_useProgressiveColors"
+      ]
+    },
+    "sectionCPUTemperature": {
+      "type": "section",
+      "title": "CPU Temperature",
+      "keys": [
+        "CPU_showTemp",
+        "CPU_tempInFahrenheit",
+        "CPU_tempPath",
+        "CPU_tempHigh",
+        "CPU_tempCrit",
+        "CPU_tempColor",
+        "CPU_tempColorHigh",
+        "CPU_tempColorCrit"
       ]
     },
     "sectionCPUColors": {
@@ -297,6 +316,34 @@
     "default": false,
     "description": "Add a border to each graph"
   },
+  "borderRadius": {
+    "type": "scale",
+    "default": 0,
+    "min": 0,
+    "max": 25,
+    "step": 1,
+    "description": "Radius of curvature in corners",
+    "dependency": "borderOn"
+  },
+  "graphStep": {
+    "type": "combobox",
+    "default": 16,
+    "options": {
+      "1px": 1,
+      "2px": 2,
+      "4px": 4,
+      "8px": 8,
+      "16px": 16,
+      "32px": 32,
+      "64px": 64
+    },
+    "description": "The width of each graphic must be a multiple of:"
+  },
+  "graphStepApply": {
+    "type": "button",
+    "callback": "on_apply_width_multiple",
+    "description": "Apply this multiple"
+  },
   "graphSpacing": {
     "type": "scale",
     "default": 1,
@@ -320,15 +367,19 @@
     "default": false,
     "description": "Limit height to the size of a colored icon"
   },
-  "graphHeight": {
+  "graphHeightPercent": {
     "type": "scale",
-    "default": 40,
-    "description": "Graph height (pixels)",
-    "min": 16,
-    "max": 64,
-    "step": 4,
+    "default": 100,
+    "description": "Graph height (% of panel height)",
+    "min": 40,
+    "max": 100,
+    "step": 1,
     "show-value": true,
     "dependency": "!useIconSize"
+  },
+  "graphHeight": {
+    "type": "generic",
+    "default": 40
   },
   "refreshRate": {
     "type": "scale",
@@ -388,7 +439,7 @@
     "description": "Width",
     "min": 16,
     "max": 320,
-    "step": 16,
+    "step": 1,
     "show-value": true,
     "dependency": "!CPU_squared"
   },
@@ -396,6 +447,52 @@
     "type": "switch",
     "default": false,
     "description": "Merge all"
+  },
+  "CPU_showTemp": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the CPU temperature"
+  },
+  "CPU_tempInFahrenheit": {
+    "type": "switch",
+    "default": false,
+    "description": "Fahrenheit degrees",
+    "dependency": "CPU_showTemp"
+  },
+  "CPU_tempPath": {
+    "type": "entry",
+    "default": "/sys/class/thermal/thermal_zone1/temp",
+    "expand-width": true,
+    "description": "Path to the system file used to check the CPU temperature"
+  },
+  "CPU_tempHigh": {
+    "type": "entry",
+    "default": "65",
+    "expand-width": true,
+    "description": "High CPU Temperature (°C)",
+    "tooltip": "Refer to your CPU documentation."
+  },
+  "CPU_tempCrit": {
+    "type": "entry",
+    "default": "75",
+    "expand-width": true,
+    "description": "Critical CPU Temperature (°C)",
+    "tooltip": "Refer to your CPU documentation.\nMust be greater than the High CPU Temperature."
+  },
+  "CPU_tempColor": {
+    "type": "colorchooser",
+    "default": "rgba(238, 238, 236, 1)",
+    "description": "Normal Temperature Color"
+  },
+  "CPU_tempColorHigh": {
+    "type": "colorchooser",
+    "default": "rgba(255, 120, 0, 1)",
+    "description": "High Temperature Color"
+  },
+  "CPU_tempColorCrit": {
+    "type": "colorchooser",
+    "default": "rgba(224, 27, 36, 1)",
+    "description": "Critical Temperature Color"
   },
   "CPU_byActivity": {
     "type": "switch",
@@ -479,7 +576,7 @@
     "description": "Width",
     "min": 16,
     "max": 320,
-    "step": 16,
+    "step": 1,
     "show-value": true,
     "dependency": "!Mem_squared"
   },
@@ -546,7 +643,7 @@
     "description": "Width",
     "min": 16,
     "max": 320,
-    "step": 16,
+    "step": 1,
     "show-value": true,
     "dependency": "!Net_squared"
   },
@@ -709,7 +806,7 @@
     "description": "Width",
     "min": 16,
     "max": 320,
-    "step": 16,
+    "step": 1,
     "show-value": true,
     "dependency": "!Disk_squared"
   },
@@ -890,7 +987,7 @@
     "description": "Width",
     "min": 16,
     "max": 320,
-    "step": 16,
+    "step": 1,
     "show-value": true,
     "dependency": "!DiskUsage_squared"
   },
