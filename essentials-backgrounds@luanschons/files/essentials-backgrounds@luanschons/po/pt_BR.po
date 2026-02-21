@@ -1,0 +1,316 @@
+# Brazilian Portuguese translation for essentials-backgrounds@luanschons
+# Copyright (C) 2026 Luan Schons Griebler
+# This file is distributed under the same license as the applet.
+# Luan Schons Griebler <luan@twizer.com.br>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: essentials-backgrounds@luanschons 1.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-17 10:44-0300\n"
+"PO-Revision-Date: 2026-02-17 10:44-0300\n"
+"Last-Translator: \n"
+"Language-Team: Portuguese (Brazil)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. metadata.json->name
+#: applet.js:100 applet.js:374 applet.js:377 applet.js:413
+msgid "Essentials Backgrounds"
+msgstr "Essentials Backgrounds"
+
+#: applet.js:147
+msgid "Change Background Now"
+msgstr "Trocar Papel de Parede Agora"
+
+#: applet.js:156
+msgid "Save to Favorites"
+msgstr "Salvar nos Favoritos"
+
+#: applet.js:166
+msgid "No wallpaper set yet"
+msgstr "Nenhum papel de parede definido ainda"
+
+#: applet.js:176
+msgid "History"
+msgstr "Histórico"
+
+#: applet.js:177 applet.js:444
+msgid "No history yet"
+msgstr "Nenhum histórico ainda"
+
+#: applet.js:185 applet.js:576 applet.js:596
+msgid "Source: "
+msgstr "Fonte: "
+
+#: applet.js:192
+msgid "Open Cache Folder"
+msgstr "Abrir Pasta de Cache"
+
+#: applet.js:203
+msgid "Open Favorites Folder"
+msgstr "Abrir Pasta de Favoritos"
+
+#: applet.js:216
+msgid "Settings"
+msgstr "Configurações"
+
+#: applet.js:233 applet.js:286
+msgid "Pause"
+msgstr "Pausar"
+
+#: applet.js:281
+msgid "Resume"
+msgstr "Retomar"
+
+#: applet.js:313
+msgid "Unknown provider: "
+msgstr "Fonte desconhecida: "
+
+#: applet.js:317
+msgid "Fetching wallpaper..."
+msgstr "Buscando papel de parede..."
+
+#: applet.js:322
+msgid "Essentials Backgrounds — Error"
+msgstr "Essentials Backgrounds — Erro"
+
+#: applet.js:337
+msgid "Download failed: "
+msgstr "Falha no download: "
+
+#: applet.js:381
+msgid "Wallpaper Changed"
+msgstr "Papel de Parede Alterado"
+
+#: applet.js:417
+msgid "Saved to Favorites"
+msgstr "Salvo nos Favoritos"
+
+#: applet.js:451 applet.js:563
+msgid "Unknown"
+msgstr "Desconhecido"
+
+#: applet.js:582
+msgid "Random"
+msgstr "Aleatório"
+
+#. metadata.json->description
+msgid ""
+"Automatically fetches stunning wallpapers from Bing, Unsplash and other "
+"sources, changing your desktop background periodically."
+msgstr ""
+"Busca automaticamente papéis de parede incríveis do Bing, Unsplash e outras "
+"fontes, alterando o fundo da área de trabalho periodicamente."
+
+#. settings-schema.json->page-general->title
+msgid "General"
+msgstr "Geral"
+
+#. settings-schema.json->page-effects->title
+msgid "Effects"
+msgstr "Efeitos"
+
+#. settings-schema.json->page-unsplash->title
+msgid "Unsplash"
+msgstr "Unsplash"
+
+#. settings-schema.json->section-behavior->title
+msgid "Behavior"
+msgstr "Comportamento"
+
+#. settings-schema.json->section-notifications->title
+msgid "Notifications"
+msgstr "Notificações"
+
+#. settings-schema.json->section-effects->title
+msgid "Image Effects"
+msgstr "Efeitos de Imagem"
+
+#. settings-schema.json->section-unsplash->title
+msgid "Unsplash Settings"
+msgstr "Configurações do Unsplash"
+
+#. settings-schema.json->provider->description
+msgid "Wallpaper source"
+msgstr "Fonte do papel de parede"
+
+#. settings-schema.json->provider->tooltip
+msgid "Choose where to fetch wallpapers from"
+msgstr "Escolha de onde buscar os papéis de parede"
+
+#. settings-schema.json->provider->options
+msgid "Bing Daily"
+msgstr "Bing Diário"
+
+#. settings-schema.json->provider->options
+msgid "Wallhaven"
+msgstr "Wallhaven"
+
+#. settings-schema.json->provider->options
+msgid "NASA APOD"
+msgstr "NASA APOD"
+
+#. settings-schema.json->provider->options
+msgid "Picsum"
+msgstr "Picsum"
+
+#. settings-schema.json->provider->options
+msgid "Unsplash (API key)"
+msgstr "Unsplash (chave API)"
+
+#. settings-schema.json->provider->options
+msgid "🔀 Random"
+msgstr "🔀 Aleatório"
+
+#. settings-schema.json->interval->units
+msgid "minutes"
+msgstr "minutos"
+
+#. settings-schema.json->interval->description
+msgid "Change interval"
+msgstr "Intervalo de troca"
+
+#. settings-schema.json->interval->tooltip
+msgid "How often to change the wallpaper (in minutes)"
+msgstr "Com que frequência trocar o papel de parede (em minutos)"
+
+#. settings-schema.json->auto-start->description
+msgid "Start automatically"
+msgstr "Iniciar automaticamente"
+
+#. settings-schema.json->auto-start->tooltip
+msgid "Start changing wallpapers automatically when the applet loads"
+msgstr "Começar a trocar papéis de parede automaticamente ao carregar o applet"
+
+#. settings-schema.json->notification->description
+msgid "Show notifications"
+msgstr "Mostrar notificações"
+
+#. settings-schema.json->notification->tooltip
+msgid "Show a notification when the wallpaper changes"
+msgstr "Mostrar uma notificação quando o papel de parede mudar"
+
+#. settings-schema.json->effect-blur->description
+msgid "Blur"
+msgstr "Desfoque"
+
+#. settings-schema.json->effect-blur->tooltip
+msgid "Apply a gaussian blur effect to the wallpaper"
+msgstr "Aplicar um efeito de desfoque gaussiano ao papel de parede"
+
+#. settings-schema.json->effect-blur-radius->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->effect-blur-radius->description
+msgid "Blur intensity"
+msgstr "Intensidade do desfoque"
+
+#. settings-schema.json->effect-blur-radius->tooltip
+msgid "Blur radius in pixels (higher = more blurry)"
+msgstr "Raio do desfoque em pixels (maior = mais borrado)"
+
+#. settings-schema.json->effect-brightness->description
+msgid "Brightness / Dim"
+msgstr "Brilho / Escurecer"
+
+#. settings-schema.json->effect-brightness->tooltip
+msgid "Adjust the brightness of the wallpaper"
+msgstr "Ajustar o brilho do papel de parede"
+
+#. settings-schema.json->effect-brightness-value->units
+#. settings-schema.json->effect-saturation-value->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->effect-brightness-value->description
+msgid "Brightness level"
+msgstr "Nível de brilho"
+
+#. settings-schema.json->effect-brightness-value->tooltip
+msgid "Negative values darken, positive values brighten"
+msgstr "Valores negativos escurecem, valores positivos clareiam"
+
+#. settings-schema.json->effect-saturation->description
+msgid "Saturation"
+msgstr "Saturação"
+
+#. settings-schema.json->effect-saturation->tooltip
+msgid "Adjust the color saturation of the wallpaper"
+msgstr "Ajustar a saturação de cor do papel de parede"
+
+#. settings-schema.json->effect-saturation-value->description
+msgid "Saturation level"
+msgstr "Nível de saturação"
+
+#. settings-schema.json->effect-saturation-value->tooltip
+msgid "0% = no color, 100% = normal, 300% = very vivid"
+msgstr "0% = sem cor, 100% = normal, 300% = muito vívido"
+
+#. settings-schema.json->effect-contrast->description
+msgid "Contrast"
+msgstr "Contraste"
+
+#. settings-schema.json->effect-contrast->tooltip
+msgid "Adjust the contrast of the wallpaper"
+msgstr "Ajustar o contraste do papel de parede"
+
+#. settings-schema.json->effect-contrast-value->units
+msgid "levels"
+msgstr "níveis"
+
+#. settings-schema.json->effect-contrast-value->description
+msgid "Contrast level"
+msgstr "Nível de contraste"
+
+#. settings-schema.json->effect-contrast-value->tooltip
+msgid "Negative = less contrast, positive = more contrast"
+msgstr "Negativo = menos contraste, positivo = mais contraste"
+
+#. settings-schema.json->effect-grayscale->description
+msgid "Grayscale"
+msgstr "Escala de cinza"
+
+#. settings-schema.json->effect-grayscale->tooltip
+msgid "Convert the wallpaper to grayscale (black & white)"
+msgstr "Converter o papel de parede para escala de cinza (preto e branco)"
+
+#. settings-schema.json->effect-sepia->description
+msgid "Sepia"
+msgstr "Sépia"
+
+#. settings-schema.json->effect-sepia->tooltip
+msgid "Apply a warm sepia tone to the wallpaper"
+msgstr "Aplicar um tom sépia quente ao papel de parede"
+
+#. settings-schema.json->effect-vignette->description
+msgid "Vignette"
+msgstr "Vinheta"
+
+#. settings-schema.json->effect-vignette->tooltip
+msgid "Add a dark vignette around the edges"
+msgstr "Adicionar uma vinheta escura ao redor das bordas"
+
+#. settings-schema.json->unsplash-api-key->description
+msgid "Unsplash API Key"
+msgstr "Chave API do Unsplash"
+
+#. settings-schema.json->unsplash-api-key->tooltip
+msgid "Get your free API key at unsplash.com/developers"
+msgstr "Obtenha sua chave API gratuita em unsplash.com/developers"
+
+#. settings-schema.json->unsplash-query->description
+msgid "Search terms"
+msgstr "Termos de busca"
+
+#. settings-schema.json->unsplash-query->tooltip
+msgid ""
+"Comma-separated keywords for Unsplash search (e.g. "
+"nature,landscape,mountains)"
+msgstr ""
+"Palavras-chave separadas por vírgula para busca no Unsplash (ex: "
+"natureza,paisagem,montanhas)"

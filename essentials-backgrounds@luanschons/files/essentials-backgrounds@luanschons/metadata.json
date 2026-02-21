@@ -1,0 +1,11 @@
+{
+    "uuid": "essentials-backgrounds@luanschons",
+    "name": "Essentials Backgrounds",
+    "description": "Automatically fetches stunning wallpapers from Bing, Unsplash and other sources, changing your desktop background periodically.",
+    "icon": "icon",
+    "max-instances": 1,
+    "version": "1.1.0",
+    "author": "Luan Schons Griebler",
+    "email": "luan@twizer.com.br",
+    "website": "https://github.com/Luan1Schons/cinnamon-essentials-backgrounds"
+}
