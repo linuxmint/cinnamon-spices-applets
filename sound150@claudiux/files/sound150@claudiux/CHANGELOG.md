@@ -1,3 +1,9 @@
+### v15.0.1~20260222
+  * Improves asynchronous function calls.
+
+### v15.0.0~20260221
+  * Functional improvements.
+
 ### v14.1.1~20260221
   * Better management of label (on vertical panel).
 

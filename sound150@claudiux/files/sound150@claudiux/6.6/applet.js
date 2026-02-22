@@ -116,12 +116,13 @@ const IS_OSD150_INSTALLED = () => {
     return GLib.file_test(OSD150_DIR, GLib.FileTest.EXISTS);
 }
 
+// playerctld:
 function run_playerctld() {
-    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
+    Util.spawn_async(["/usr/bin/env", "bash", "-C", `'${PATH2SCRIPTS}/run_playerctld.sh'`], null);
 }
 
 function kill_playerctld() {
-    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
+    Util.spawn_async(["/usr/bin/env", "bash", "-C", `'${PATH2SCRIPTS}/kill_playerctld.sh'`], null);
 }
 
 const superRND = (2**31-1)**2;
@@ -890,7 +891,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         let _icon_path = ICONDIR + "/" + name;
         if (!GLib.file_test(_icon_path, GLib.FileTest.EXISTS)) {
             _art_path = _art_path.replace("file://", "");
-            Util.spawnCommandLineAsync(`${make_icon_script} "${_art_path}"`);
+            Util.spawn_async([`${make_icon_script}`, `"${_art_path}"`]);
         }
     }
 
@@ -1051,10 +1052,8 @@ class Sound150Applet extends Applet.TextIconApplet {
                     `notify-send -u critical --icon="audio-volume-overamplified-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`,
                     (stdout, stderr, exitCode) => {
                         if (exitCode === 0) {
-                            //~ logDebug("stdout: " + stdout + " " + typeof stdout);
                             if (stdout.startsWith("opt1")) {
-                                //~ Util.spawnCommandLineAsync("cinnamon-settings extensions -t download");
-                                Util.spawnCommandLineAsync("cinnamon-settings extensions -t 1");
+                                Util.spawn_async(["cinnamon-settings", "extensions", "-t", "1"]);
                             } else {
                                 this.OSDhorizontal = false;
                             }
@@ -1991,16 +1990,14 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._loopArtId = null;
         if (!this._artLooping) return;
         
-        //~ if (this._playerctl && this._imagemagick && this.is_empty(ALBUMART_PICS_DIR)) {
         if (this._playerctl && this._imagemagick && this.is_empty(ARTDIR)) {
             if (this.runAsync) {
-                Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+                Util.spawn_async(["/usr/bin/env", "bash", "-c", `'${PATH2SCRIPTS}/get_album_art.sh'`]);
             } else {
-                Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+                Util.spawn(["/usr/bin/env", "bash", "-c", `'${PATH2SCRIPTS}/get_album_art.sh'`]);
             }
         }
 
-        //~ if (!this._playerctl || this.title_text_old == this.title_text) {
         if (this.title_text_old == this.title_text) {
             this._loopArtId = timeout_add_seconds(10, () => {
                 this.loopArt();
@@ -2455,12 +2452,14 @@ class Sound150Applet extends Applet.TextIconApplet {
         //button Install playerctl (when it isn't installed)
         if (this._playerctl === null && !this.doNotUsePlayerctld) {
             let _install_playerctl_button = this.menu.addAction(_("Install playerctl"), () => {
-                Util.spawnCommandLineAsync("/usr/bin/env bash -C '%s/install_playerctl.sh'".format(PATH2SCRIPTS));
+                //~ Util.spawnCommandLineAsync("/usr/bin/env bash -C '%s/install_playerctl.sh'".format(PATH2SCRIPTS));
+                Util.spawn_async(["/usr/bin/env", "bash", "-C", `'${PATH2SCRIPTS}/install_playerctl.sh'`]);
             });
         }
         if (!this._imagemagick) {
             let _install_imagemagick_button = this.menu.addAction(_("Install imagemagick"), () => {
-                Util.spawnCommandLineAsync("/usr/bin/env bash -C '%s/install_imagemagick.sh'".format(PATH2SCRIPTS));
+                //~ Util.spawnCommandLineAsync("/usr/bin/env bash -C '%s/install_imagemagick.sh'".format(PATH2SCRIPTS));
+                Util.spawn_async(["/usr/bin/env", "bash", "-C", `'${PATH2SCRIPTS}/install_imagemagick.sh'`]);
             });
         }
     }
@@ -2926,7 +2925,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _onSystemSoundSettingsPressed() {
-        Util.spawnCommandLineAsync("cinnamon-settings sound");
+        Util.spawn_async(["cinnamon-settings", "sound"]);
     }
 
     volume_near_icon(comesFrom="") {
@@ -3070,7 +3069,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_desklet_open_settings_button_clicked() {
-        Util.spawnCommandLineAsync("xlet-settings desklet " + DESKLET_UUID);
+        Util.spawn_async(["xlet-settings", "desklet", DESKLET_UUID]);
     }
 
     _is_desklet_activated() {
