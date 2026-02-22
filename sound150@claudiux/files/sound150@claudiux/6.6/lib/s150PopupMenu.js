@@ -53,11 +53,11 @@ const COVERBOX_LAYOUT_MANAGER = new Clutter.BinLayout({
 
 // playerctld:
 function run_playerctld() {
-    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
+    Util.spawn_async(["/usr/bin/env", "bash", "-C", `'${PATH2SCRIPTS}/run_playerctld.sh'`], null);
 }
 
 function kill_playerctld() {
-    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
+    Util.spawn_async(["/usr/bin/env", "bash", "-C", `'${PATH2SCRIPTS}/kill_playerctld.sh'`], null);
 }
 
 // Text wrapper
@@ -114,8 +114,7 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
 
         // Trim stream name
         name = formatTextWrap(name, 20);
-        //~ logDebug("StreamMenuSection: name:"+name);
-
+        
         // Special cases
         if (name === "Banshee") {
             iconName = "banshee";
@@ -139,9 +138,6 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
 
         if (name != "Muffin") { // This test is it really necessary?
             this.slider = new VolumeSlider(applet, stream, name, iconName);
-            //FIXME: which line? is this useful? it seems DEPRECATED.
-            //~ this.slider._slider.style = "min-width: 6em;";
-            //~ this.slider._slider.style = "width: 6em;";
             this.addMenuItem(this.slider);
         } else {
             this.slider = null
@@ -156,7 +152,6 @@ class Player extends PopupMenu.PopupMenuSection {
         this._owner = owner;
         this._busName = busname;
         this._applet = applet;
-        //~ logDebug("busname: "+busname);
         players_without_seek_support = this._applet.players_without_seek_support;
 
         // We'll update this later with a proper name
@@ -197,12 +192,10 @@ class Player extends PopupMenu.PopupMenuSection {
             this._name = this._mediaServer.Identity;
         } else {
             let displayName = this._busName.replace("org.mpris.MediaPlayer2.", "");
-            //~ this._name = capitalize_each_word(displayName);
             this._name = displayName.capitalize();
         }
 
         let mainBox = new PopupMenu.PopupMenuSection();
-        //~ this.addMenuItem(mainBox);
 
         this.vertBox = new St.BoxLayout({
             style_class: "sound-player",
@@ -264,16 +257,6 @@ class Player extends PopupMenu.PopupMenuSection {
         this._cover_load_handle = 0;
         this._cover_path = null;
 
-        //~ this.display_cover_button = new ControlButton("image-x-generic",
-        //~ _("View cover"),
-        //~ () => {
-        //~ Util.spawnCommandLineAsync("xdg-open "+this._cover_path)
-        //~ },
-        //~ true
-        //~ );
-        //~ this.coverBox.add_actor(this.display_cover_button.getActor());
-        //~ this.display_cover_button.getActor().show();
-
         // Track info (artist + title)
         this._artist = _("Unknown Artist");
         this._album = _("Unknown Album");
@@ -282,7 +265,6 @@ class Player extends PopupMenu.PopupMenuSection {
         // Removing "style: "height: auto;"" avoids warning messages "St-WARNING **: Ignoring length property that isn't a number at line 1, col 9"
         this.trackInfo = new St.BoxLayout({
             style_class: "sound-player-overlay",
-            //~ style: "min-height: 6em;", // replaces "height: auto;" REMOVED: DEPRECATED!
             style: "height: 6em;",
             important: true,
             vertical: true
@@ -340,10 +322,8 @@ class Player extends PopupMenu.PopupMenuSection {
         }
         titleInfo.add_actor(titleIcon);
         titleInfo.add_actor(this.titleLabel);
-        //~ titleInfo.add_actor(this.display_cover_button.getActor());
         this.trackInfo.add_actor(artistInfo);
         this.trackInfo.add_actor(titleInfo);
-        //~ this.trackInfo.add_actor(this.display_cover_button.getActor());
         this.coverBox.add_actor(this.trackInfo);
 
         // If the actor is on stage, we set the layout manager
@@ -368,26 +348,13 @@ class Player extends PopupMenu.PopupMenuSection {
             global.logError("Unable to add actor this._trackCover to this.vertBox!: " + e)
         }
 
-        // Labels
-        //~ durationLabel = new St.Label({text:" 00:00 "});
-        //~ durationLabel.clutterText.line_wrap = false;
-        //~ durationLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
-        //~ durationLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
-        //~ positionLabel = new St.Label({text:" 00:00 "});
-        //~ positionLabel.clutterText.line_wrap = false;
-        //~ positionLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
-        //~ positionLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
-
         // Playback controls
         let trackControls = new St.Bin({
             x_align: St.Align.MIDDLE
         });
-        //~ if (this._prevButton) this._prevButton.destroy();
         this._prevButton = new ControlButton("media-skip-backward",
             _("Previous"),
             () => {
-                //~ Util.spawnCommandLine("/usr/bin/env bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
-
                 if (this._seeker) {
                     if (this._seeker.status === "Playing" && this._seeker.posLabel) 
                         this._seeker.posLabel.set_text(" 00:00:00 ");
@@ -401,16 +368,12 @@ class Player extends PopupMenu.PopupMenuSection {
                 } else
                     this._mediaServerPlayer.PreviousRemote();
             });
-        //~ if (this._playButton) this._playButton.destroy();
         this._playButton = new ControlButton("media-playback-start",
             _("Play"),
             () => this._mediaServerPlayer.PlayPauseRemote());
-        //~ if (this._stopButton) this._stopButton.destroy();
         this._stopButton = new ControlButton("media-playback-stop",
             _("Stop"),
             () => {
-                //~ Util.spawnCommandLine("/usr/bin/env bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
-
                 if (this._name.toLowerCase() === "mpv" &&
                     GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
                     GLib.file_set_contents(RUNTIME_DIR + "/R30Stop", "");
@@ -418,12 +381,9 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._mediaServerPlayer.StopRemote()
                 }
             });
-        //~ if (this._nextButton) this._nextButton.destroy();
         this._nextButton = new ControlButton("media-skip-forward",
             _("Next"),
             () => {
-                //~ Util.spawnCommandLine("/usr/bin/env bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
-
                 if (this._name.toLowerCase() === "mpv" &&
                     GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
                     GLib.file_set_contents(RUNTIME_DIR + "/R30Next", "");
@@ -456,14 +416,12 @@ class Player extends PopupMenu.PopupMenuSection {
 
         // Position slider
         if (this._mediaServerPlayer) {
-            //~ if (this._seeker) this._seeker.destroy();
             this._seeker = new Seeker(
                 this._mediaServerPlayer,
                 this._prop,
                 this._name.toLowerCase()
             );
             this.vertBox.add_actor(this._seeker.getActor());
-            //this.vertBox.add_actor(seekerBox);
         }
 
 
@@ -480,10 +438,6 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._setMetadata(props.Metadata.deep_unpack());
                 if (props.CanGoNext || props.CanGoPrevious)
                     this._updateControls();
-                //~ else {
-                //~ if(!props.CanGoNext) this._nextButton.setEnabled(false);
-                //~ if(!props.CanGoPrevious) this._prevButton.setEnabled(false);
-                //~ }
                 if (props.LoopStatus)
                     this._setLoopStatus(props.LoopStatus.unpack());
                 if (props.Shuffle)
@@ -553,20 +507,15 @@ class Player extends PopupMenu.PopupMenuSection {
         var canGoPrevious = false;
         try {
             this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, "CanGoNext", (value, error) => {
-                //~ logDebug("error: "+error);
                 if (!error) {
-                    //~ logDebug("value[0].unpack(): "+value[0].unpack());
                     canGoNext = value[0].unpack();
-                    //~ logDebug("canGoNext from value: "+canGoNext);
                     this._nextButton.setEnabled(canGoNext);
                 } else {
                     canGoNext = false;
-                    //~ this._nextButton.setEnabled(canGoNext);
                 }
             });
         } catch (e) {
             canGoNext = false;
-            //~ this._nextButton.setEnabled(canGoNext);
         }
         try {
             this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, "CanGoPrevious", (value, error) => {
@@ -575,27 +524,16 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._prevButton.setEnabled(canGoPrevious);
                 } else {
                     canGoPrevious = false;
-                    //~ this._prevButton.setEnabled(canGoPrevious);
                 }
             });
         } catch (e) {
             canGoPrevious = false;
-            //~ this._prevButton.setEnabled(canGoPrevious);
         }
-        //~ logDebug("canGoNext: "+canGoNext);
-        //~ logDebug("canGoPrevious: "+canGoPrevious);
-        //~ this._nextButton.setEnabled(canGoNext);
-        //~ this._prevButton.setEnabled(canGoPrevious);
     }
 
-    //~ async _setMetadata(metadata) {
     _setMetadata(metadata) {
         if (!metadata || (this._applet.actor.get_stage() == null))
             return;
-
-        //~ for (let info of Object.keys(metadata)) {
-        //~ log(""+info+": "+metadata[info].unpack(), true);
-        //~ }
 
         let trackid = ""; // D-Bus path: A unique identity for this track
         if (metadata["mpris:trackid"]) {
@@ -606,7 +544,6 @@ class Player extends PopupMenu.PopupMenuSection {
         if (metadata["mpris:length"]) {
             trackLength = metadata["mpris:length"].unpack() / 1000000;
         }
-        //this._seeker.setTrack(trackid, trackLength);
 
         if (metadata["xesam:artist"]) {
             switch (metadata["xesam:artist"].get_type_string()) {
@@ -643,21 +580,15 @@ class Player extends PopupMenu.PopupMenuSection {
                 try {
                     xml_string = HtmlEncodeDecode.decode(xml_string);
                     let json_data = xml2json(xml_string);
-                    //~ log("json_data: "+JSON.stringify(json_data, null, 4), true);
                     if (json_data["ZettaLite"]) {
-                        //~ log("ZettaLite data!!!", true);
                         let json_title = "" + json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Title"];
                         let json_artist = "" + json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Artist1"];
-                        //~ log("json_title: "+json_title, true);
-                        //~ log("json_artist: "+json_artist, true);
                         if (json_title) {
-                            //~ this._title = capitalize_each_word(json_title);
                             this._title = json_title.capitalize();
                         } else {
                             this._title = _("Unknown Title");
                         }
                         if (json_artist) {
-                            //~ this._artist = capitalize_each_word(json_artist);
                             this._artist = json_artist.capitalize();
                             if (this.artistLabel != null)
                                 this.artistLabel.set_text(this._artist);
@@ -667,7 +598,6 @@ class Player extends PopupMenu.PopupMenuSection {
                     } else
                         this._title = _("Unknown Title");
                 } catch (e) {
-                    //~ global.logError("XML error: "+e);
                     this._title = _("Unknown Title");
                 }
             } else if (this._title.includes(" - ") && this._artist == _("Unknown Artist")) {
@@ -693,7 +623,6 @@ class Player extends PopupMenu.PopupMenuSection {
         this._seeker.setTrack(trackid, trackLength, old_title != this._title);
         
         if (metadata["xesam:url"]) {
-            //~ global.log("xesam:url = " + metadata["xesam:url"].unpack());
             let dontDisplayArtSites = this._applet.sitesNotDisplayingAlbumArt;
             for (let site of dontDisplayArtSites) {
                 if (metadata["xesam:url"].unpack().toLowerCase().includes(site) ||
@@ -727,10 +656,6 @@ class Player extends PopupMenu.PopupMenuSection {
                                 this._applet.setAppletIcon(null, null);
                                 return;
                         }
-                        //~ this._applet._icon_path = null;
-                        //~ this._trackCoverFile = null;
-                        //~ this._applet.setAppletIcon(null, null);
-                        //~ return;
                     }
                     
                 }
@@ -843,7 +768,6 @@ class Player extends PopupMenu.PopupMenuSection {
         } else if (status == "Paused") {
             this._playButton.setData("media-playback-start", _("Play"));
             this.playerIcon.set_icon_name("media-playback-pause");
-            //~ this._applet.setAppletTextIcon(this, false);
             this._applet.setAppletTextIcon(this, true);
             this._seeker.pause();
             this._applet.volume_near_icon("s150PopupMenu - seeker paused");
@@ -901,9 +825,9 @@ class Player extends PopupMenu.PopupMenuSection {
         this._albumArtFetchTimeout = setTimeout(() => {
             this._albumArtFetchTimeout = null;
             if (this._applet.runAsync)
-                Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+                Util.spawn_async(["/usr/bin/env", "bash", "-c", `'${PATH2SCRIPTS}/get_album_art.sh'`], null);
             else
-                Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+                Util.spawn(["/usr/bin/env", "bash", "-c", `'${PATH2SCRIPTS}/get_album_art.sh'`]);
         }, 300);
     }
 
@@ -922,16 +846,13 @@ class Player extends PopupMenu.PopupMenuSection {
                 important: true,
                 icon_name: "media-optical",
                 icon_size: Math.trunc(300 * this._applet.real_ui_scale),
-                //icon_type: St.IconType.FULLCOLOR
                 icon_type: St.IconType.SYMBOLIC
             });
             cover_path = null;
             this._cover_path = null;
             this._applet.setAppletTextIcon(this, null);
         } else {
-            //~ global.log("typeof(cover_path): " + typeof(cover_path) );
             baseName = (typeof(cover_path) === "string") ? cover_path.split("/").pop() : "";
-            //~ let dir = Gio.file_new_for_path(ALBUMART_PICS_DIR);
             let dir = Gio.file_new_for_path(ARTS_DIR);
             let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
             if ((dir_children.next_file(null)) == null) { // dir does not contain any file.
@@ -939,14 +860,12 @@ class Player extends PopupMenu.PopupMenuSection {
                     if (! baseName.startsWith("R3SongArt")) {
                         rnd = randomIntegerInInterval(0, superRND).toString();
                         if (this._applet.runAsync) {
-                            Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
-                            Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ARTS_DIR}/R3SongArt${rnd}`);
+                            Util.spawn_async(["cp", "-a", `"${cover_path}"`, `${ALBUMART_PICS_DIR}/R3SongArt${rnd}`], null);
+                            Util.spawn_async(["cp", "-a", `"${cover_path}"`, `${ARTS_DIR}/R3SongArt${rnd}`], null);
                         } else {
-                            Util.spawnCommandLine(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
-                            Util.spawnCommandLine(`cp -a "${cover_path}" ${ARTS_DIR}/R3SongArt${rnd}`);
+                            Util.spawn(["cp", "-a", `"${cover_path}"`, `${ALBUMART_PICS_DIR}/R3SongArt${rnd}`]);
+                            Util.spawn(["cp", "-a", `"${cover_path}"`, `${ARTS_DIR}/R3SongArt${rnd}`]);
                         }
-                        //~ cover_path = `${ALBUMART_PICS_DIR}/R3SongArt${rnd}`;
-                        //~ this._cover_path = `${ALBUMART_PICS_DIR}/R3SongArt${rnd}`;
                         cover_path = `${ARTS_DIR}/R3SongArt${rnd}`;
                         this._cover_path = `${ARTS_DIR}/R3SongArt${rnd}`;
                     }
@@ -955,16 +874,15 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._cover_path = null;
                 }
             } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
-                //~ del_song_arts(); //FIXME: is it useless???
                 if (GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
                     if (! baseName.startsWith("R3SongArt")) {
                         rnd = randomIntegerInInterval(0, superRND).toString();
                         if (this._applet.runAsync) {
-                            Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
-                            Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ARTS_DIR}/R3SongArt${rnd}`);
+                            Util.spawn_async(["cp", "-a", `"${cover_path}"`, `${ALBUMART_PICS_DIR}/R3SongArt${rnd}`], null);
+                            Util.spawn_async(["cp", "-a", `"${cover_path}"`, `${ARTS_DIR}/R3SongArt${rnd}`], null);
                         } else {
-                            Util.spawnCommandLine(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
-                            Util.spawnCommandLine(`cp -a "${cover_path}" ${ARTS_DIR}/R3SongArt${rnd}`);
+                            Util.spawn(["cp", "-a", `"${cover_path}"`, `${ALBUMART_PICS_DIR}/R3SongArt${rnd}`]);
+                            Util.spawn(["cp", "-a", `"${cover_path}"`, `${ARTS_DIR}/R3SongArt${rnd}`]);
                         }
                         cover_path = `${ARTS_DIR}/R3SongArt${rnd}`;
                         this._cover_path = `${ARTS_DIR}/R3SongArt${rnd}`;
@@ -1006,8 +924,6 @@ class Player extends PopupMenu.PopupMenuSection {
 
         // Make sure any oddly-shaped album art doesn't affect the height of the applet popup
         // (and move the player controls as a result).
-        //~ log("actor size (wxh): "+actor.width+"x"+actor.height);
-        //~ actor.set_margin_bottom(Math.max(0, Math.trunc(300 * global.ui_scale - actor.height)));
         let mb = 55;
         if (this._applet.viewFullAlbumArt) {
             switch (this._applet.real_ui_scale) {
@@ -1040,14 +956,6 @@ class Player extends PopupMenu.PopupMenuSection {
             if (this.coverBox) {
                 if (this.cover && !this._applet.dontShowAnyImageInMenu) {
                     this.coverBox.add_actor(this.cover);
-                    //~ this.coverBox.set_reactive = true;
-                    //~ this.coverBox.connect("enter-event", (event) => { global.log("xdg-open "+this._cover_path); Util.spawnCommandLineAsync("xdg-open "+this._cover_path) });
-                    //~ this._playerBox.set_reactive = true;
-                    //~ this._playerBox.connect("activate", (event) => { Util.spawnCommandLineAsync("xdg-open " + this._cover_path) });
-                    //~ this.coverBox.actor.set_reactive = true;
-                    //~ this.coverBox.actor.connect("button-press-event", (event) => { global.log("xdg-open "+this._cover_path); Util.spawnCommandLineAsync("xdg-open "+this._cover_path) });
-                    //~ this.coverBox.connect("click-event", (event) => Util.spawnCommandLineAsync("xdg-open "+this._cover_path));
-                    //~ this.coverBox.connect("button-press-event", (event) => Util.spawnCommandLineAsync("xdg-open "+this._cover_path));
                     try {
                         this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);
                     } catch(e) {}
@@ -1068,9 +976,6 @@ class Player extends PopupMenu.PopupMenuSection {
     }
 
     destroy() {
-        //~ logDebug('Player.destroy()');
-        //~ if (this._seeker)
-        //~ this._seeker.destroy();
         if (this._albumArtFetchTimeout) {
             clearTimeout(this._albumArtFetchTimeout);
             this._albumArtFetchTimeout = null;
@@ -1098,8 +1003,6 @@ class Seeker extends Slider.Slider {
         this.destroyed = false;
 
         this.actor.set_direction(St.TextDirection.LTR); // Do not invert on RTL layout
-        //~ this.actor.expand = true;
-        //~ this.actor.set_draw_value(true);
         this.tooltipText = "00:00:00";
         this.tooltip = new Tooltips.Tooltip(this.actor, this.tooltipText);
 
@@ -1132,19 +1035,11 @@ class Seeker extends Slider.Slider {
             style: "font-family: 'Digital Numbers',monospace; "
         });
         this.posLabel.x_align = St.Align.START;
-        //~ logDebug("this.posLabel: "+this.posLabel);
-        //~ this.posLabel.clutterText.line_wrap = false;
-        //~ this.posLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
-        //~ this.posLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
         this.durLabel = new St.Label({
             text: " 00:00:00 ",
             style: "font-family: 'Digital Numbers',monospace; "
         });
         this.durLabel.x_align = St.Align.END;
-        //~ logDebug("this.durLabel: "+this.durLabel);
-        //~ this.durLabel.clutterText.line_wrap = false;
-        //~ this.durLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
-        //~ this.durLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
 
         this.actor.x_align = St.Align.MIDDLE;
         this.seekerBox.add_actor(this.posLabel);
@@ -1163,12 +1058,6 @@ class Seeker extends Slider.Slider {
 
         this.actor.connect("enter-event", (event) => {
             this.show_target_time()
-            //~ // let [x,y] = event.get_position();
-            //~ let [x,y] = this.tooltip.mousePosition;
-            //~ logDebug("enter-event - x: "+x);
-            //~ this.tooltipText = ""+x;
-            //~ this.tooltip.set_text(this.tooltipText);
-            //~ this.tooltip.show();
         });
 
         this.actor.connect("motion-event", (event) => {
@@ -1185,7 +1074,6 @@ class Seeker extends Slider.Slider {
             }, 100);
         });
 
-        //~ this._seekChangedId = this._mediaServerPlayer.connectSignal("Seeked", (id, sender, value) => {
         this._seekChangedId = mediaServerPlayer.connectSignal("Seeked", (id, sender, value) => {
             if (this.destroyed) return;
             // Seek value sent by the player
@@ -1215,7 +1103,6 @@ class Seeker extends Slider.Slider {
         if (this.actor.get_stage() == null || this.destroyed) return;
         const [sliderX, sliderY] = this.actor.get_transformed_position();
         const width = this.actor.width;
-        //~ this.actor.width = width * this._applet.real_ui_scale; // ADDED
         let [x, y] = this.tooltip.mousePosition;
         if (this.tooltip) {
             this.tooltip.hide();
@@ -1269,8 +1156,6 @@ class Seeker extends Slider.Slider {
             this._updateTimer();
         else
             this._updateValue();
-
-        //~ kill_playerctld(); //???
     }
 
     hideAll() {
@@ -1279,7 +1164,6 @@ class Seeker extends Slider.Slider {
         if (this.actor) this.actor.hide();
         if (this.posLabel) this.posLabel.hide();
         if (this.seekerBox) this.seekerBox.hide();
-        //~ this.parent.hide();
     }
 
     showAll() {
@@ -1288,7 +1172,6 @@ class Seeker extends Slider.Slider {
         if (this.durLabel) this.durLabel.show();
         if (this.posLabel) this.posLabel.show();
         if (this.actor) this.actor.show();
-        //~ this.parent.show();
     }
 
     setTrack(trackid, length, force_zero = false) {
@@ -1312,8 +1195,6 @@ class Seeker extends Slider.Slider {
 
     _updateValue() {
         if (this.destroyed) return;
-        //~ this._currentTime = (Date.now() - this.startingDate) / 1000;
-
         if (this.canSeek) {
             this.showAll();
             if (this._length > 0 && this._wantedSeekValue > 0) {
@@ -1397,8 +1278,6 @@ class Seeker extends Slider.Slider {
     }
 
     _updateTimer() {
-        //~ if (this.destroyed) return GLib.SOURCE_REMOVE;
-
         if (this._timeoutId_timerCallback != null) {
             source_remove(this._timeoutId_timerCallback);
         }
@@ -1434,8 +1313,6 @@ class Seeker extends Slider.Slider {
         }
 
         this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, "CanSeek", (position, error) => {
-            //~ logDebug("Dbus CanSeek: "+position[0].get_boolean());
-            //~ logDebug("Dbus !error: "+!error);
             if (!error && position[0])
                 this._setCanSeek(position[0].get_boolean());
             else
@@ -1445,7 +1322,6 @@ class Seeker extends Slider.Slider {
 
     _cantSeek() {
         this.canSeek = false;
-        //~ if (this.destroyed) return;
         if (this._length > 0) {
             this.showAll();
             this._updateValue();
@@ -1471,7 +1347,6 @@ class Seeker extends Slider.Slider {
         } else {
             this._cantSeek();
         }
-        //~ logDebug("this.canSeek: "+this.canSeek);
     }
 
     _setPosition(value) {
@@ -1491,9 +1366,7 @@ class Seeker extends Slider.Slider {
         if (this.destroyed) return;
 
         this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, "Position", (position, error) => {
-            //~ logDebug("_getPosition dbus !error: "+!error);
             if (!error && position[0]) {
-                //~ logDebug("_getPosition position: "+position[0].get_int64());
                 this._setPosition(position[0].get_int64());
             } else {
                 let pos;
@@ -1501,15 +1374,11 @@ class Seeker extends Slider.Slider {
                     pos = position[0].get_int64();
                 } catch (e) {
                     pos = "NaN";
-                    //~ global.logError("pos error: "+e);
                 }
                 if (isNaN(pos)) {
-                    //~ logDebug("pos is NaN!!!");
                     this._currentTime = (Date.now() - this.startingDate) / 1000;
-                    //~ logDebug("this._currentTime: "+this._currentTime);
                     this._setPosition(this._currentTime * 1000000);
                 } else {
-                    //~ logDebug("pos is Valid!!! pos:" + pos);
                     this._setPosition(pos);
                 }
             }
@@ -1517,7 +1386,6 @@ class Seeker extends Slider.Slider {
     }
 
     destroy() {
-        //~ logDebug("Seeker.destroy()");
         if (this.destroyed) return;
         this.status = "Stopped";
         this.destroyed = true;
