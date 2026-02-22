@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-02-02 14:48+0100\n"
-"PO-Revision-Date: 2026-02-02 14:48+0100\n"
+"POT-Creation-Date: 2026-02-22 21:37+0100\n"
+"PO-Revision-Date: 2026-02-22 21:40+0100\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,20 +19,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:178 6.6/applet.js:266 6.4/applet.js:250
+#. applet.js:178 6.6/applet.js:268 6.4/applet.js:250
 msgid "The following packages were not found:"
 msgstr "Les paquets suivants ne sont pas installés :"
 
-#. applet.js:179 6.6/applet.js:267 6.4/applet.js:251
+#. applet.js:179 6.6/applet.js:269 6.4/applet.js:251
 msgid "Please install the above packages to use the applet"
 msgstr ""
 "Veuillez installer les paquets ci-dessus pour pouvoir utiliser cette applet"
 
-#. applet.js:564 6.6/applet.js:963 6.4/applet.js:855
+#. applet.js:564 6.6/applet.js:1023 6.4/applet.js:855
 msgid "Screen"
 msgstr "Écran"
 
-#. applet.js:647 6.6/applet.js:1046 6.4/applet.js:938
+#. applet.js:647 6.6/applet.js:1106 6.4/applet.js:938
 msgid "Outputs"
 msgstr "Sorties"
 
@@ -42,36 +42,36 @@ msgstr "Sorties"
 #. 6.6->settings-schema.json->preset_list_temp->columns->title
 #. 6.4->settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->preset_list->columns->title
-#. appletGui.js:235 6.6/applet.js:44 6.6/lib/appletGui.js:214 6.4/applet.js:43
+#. appletGui.js:235 6.6/applet.js:44 6.6/lib/appletGui.js:208 6.4/applet.js:43
 #. 6.4/lib/appletGui.js:212
 msgid "Brightness"
 msgstr "Luminosité"
 
-#. appletGui.js:236 6.6/applet.js:45 6.6/lib/appletGui.js:215 6.4/applet.js:44
+#. appletGui.js:236 6.6/applet.js:45 6.6/lib/appletGui.js:209 6.4/applet.js:44
 #. 6.4/lib/appletGui.js:213
 msgid "Red"
 msgstr "Rouge"
 
-#. appletGui.js:237 6.6/applet.js:46 6.6/lib/appletGui.js:216 6.4/applet.js:45
+#. appletGui.js:237 6.6/applet.js:46 6.6/lib/appletGui.js:210 6.4/applet.js:45
 #. 6.4/lib/appletGui.js:214
 msgid "Green"
 msgstr "Vert"
 
-#. appletGui.js:238 6.6/applet.js:47 6.6/lib/appletGui.js:217 6.4/applet.js:46
+#. appletGui.js:238 6.6/applet.js:47 6.6/lib/appletGui.js:211 6.4/applet.js:46
 #. 6.4/lib/appletGui.js:215
 msgid "Blue"
 msgstr "Bleu"
 
-#. 6.6/applet.js:48 6.6/applet.js:1128 6.4/applet.js:47 6.4/applet.js:1009
+#. 6.6/applet.js:48 6.6/applet.js:1188 6.4/applet.js:47 6.4/applet.js:1009
 msgid "Sunrise"
 msgstr "Aube"
 
-#. 6.6/applet.js:49 6.6/applet.js:1130 6.4/applet.js:48 6.4/applet.js:1011
+#. 6.6/applet.js:49 6.6/applet.js:1190 6.4/applet.js:48 6.4/applet.js:1011
 msgid "Sunset"
 msgstr "Crépuscule"
 
 #. 6.6->settings-schema.json->preset_list_temp->columns->title
-#. 6.6/applet.js:50 6.6/lib/appletGui.js:218
+#. 6.6/applet.js:50 6.6/lib/appletGui.js:212
 msgid "Temperature"
 msgstr "Température"
 
@@ -91,21 +91,21 @@ msgstr "Confort Nuit"
 msgid "All values at maximum"
 msgstr "Tout à 100%"
 
-#. 6.6/applet.js:813 6.4/applet.js:760
+#. 6.6/applet.js:848 6.4/applet.js:760
 msgid "Toggle On / Off"
 msgstr "Activer / désactiver cette applet"
 
-#. 6.6/applet.js:823 6.4/applet.js:770
+#. 6.6/applet.js:858 6.4/applet.js:770
 msgid "Reload"
 msgstr "Relancer"
 
-#. 6.6/applet.js:833 6.4/applet.js:780
+#. 6.6/applet.js:868 6.4/applet.js:780
 msgid "Configure Presets"
 msgstr "Configurer les pré-réglages"
 
 #. 6.6->settings-schema.json->page_presets->title
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.6/applet.js:910 6.4/applet.js:824
+#. 6.6/applet.js:970 6.4/applet.js:824
 msgid "Presets"
 msgstr "Pré-réglages"
 
@@ -378,6 +378,18 @@ msgstr ""
 #. 6.4->settings-schema.json->smooth_duration->description
 msgid "Step duration (ms)"
 msgstr "Durée d'une étape (ms)"
+
+#. 6.6->settings-schema.json->all100OnFullscreen->description
+msgid "Set all to 100% in full-screen mode"
+msgstr "Tout régler à 100 % en mode plein écran"
+
+#. 6.6->settings-schema.json->all100OnFullscreen->tooltip
+msgid ""
+"When an application switches to full-screen mode, all values are set to "
+"100%. Useful for games and videos."
+msgstr ""
+"Lorsqu'une application passe en mode plein écran, toutes les valeurs sont "
+"mises à 100 %. Utile pour les jeux et les vidéos."
 
 #. 6.6->settings-schema.json->apply_changing_monitors->description
 #. 6.4->settings-schema.json->apply_changing_monitors->description
