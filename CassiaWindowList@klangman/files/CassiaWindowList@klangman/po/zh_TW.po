@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: CassiaWindowList@klangman 2.4.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-31 21:09-0400\n"
+"POT-Creation-Date: 2026-02-23 10:08-0500\n"
 "PO-Revision-Date: 2025-08-22 23:45+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -21,32 +21,32 @@ msgstr ""
 msgid "all buttons"
 msgstr "所有按鈕"
 
-#. 4.0/applet.js:1955 6.0/applet.js:1955 6.4/applet.js:1933
+#. 4.0/applet.js:1955 6.0/applet.js:1955 6.4/applet.js:1936
 msgid "windows in this group"
 msgstr "這個群組內的視窗"
 
-#. 4.0/applet.js:3342 6.0/applet.js:3342 6.4/applet.js:3314
+#. 4.0/applet.js:3342 6.0/applet.js:3342 6.4/applet.js:3317
 msgid "Applet Preferences"
 msgstr "小程式偏好設定"
 
-#. 4.0/applet.js:3346 6.0/applet.js:3346 6.4/applet.js:3318
+#. 4.0/applet.js:3346 6.0/applet.js:3346 6.4/applet.js:3321
 msgid "About..."
 msgstr "關於…"
 
-#. 4.0/applet.js:3350 6.0/applet.js:3350 6.4/applet.js:3322
+#. 4.0/applet.js:3350 6.0/applet.js:3350 6.4/applet.js:3325
 msgid "Configure..."
 msgstr "設定…"
 
-#. 4.0/applet.js:3354 6.0/applet.js:3354 6.4/applet.js:3326
+#. 4.0/applet.js:3354 6.0/applet.js:3354 6.4/applet.js:3329
 msgid "Website"
 msgstr "網站"
 
-#. 4.0/applet.js:3358 6.0/applet.js:3358 6.4/applet.js:3330
+#. 4.0/applet.js:3358 6.0/applet.js:3358 6.4/applet.js:3333
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "移除「%s」"
 
-#. 4.0/applet.js:3360 6.0/applet.js:3360 6.4/applet.js:3332
+#. 4.0/applet.js:3360 6.0/applet.js:3360 6.4/applet.js:3335
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "確定要移除這個 CassiaWindowList 執行個體嗎？"
 
@@ -68,80 +68,80 @@ msgstr "確定要移除這個 CassiaWindowList 執行個體嗎？"
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3369 6.0/applet.js:3369 6.4/applet.js:3341
+#. 4.0/applet.js:3369 6.0/applet.js:3369 6.4/applet.js:3344
 msgid "Open new window"
 msgstr "開啟新視窗"
 
-#. 4.0/applet.js:3377 6.0/applet.js:3377 6.4/applet.js:3349
+#. 4.0/applet.js:3377 6.0/applet.js:3377 6.4/applet.js:3352
 msgid "Remove from panel"
 msgstr "從面板移除"
 
-#. 4.0/applet.js:3379 6.0/applet.js:3379 6.4/applet.js:3351
+#. 4.0/applet.js:3379 6.0/applet.js:3379 6.4/applet.js:3354
 msgid "Remove from this workspace"
 msgstr "從此工作區移除"
 
-#. 4.0/applet.js:3385 6.0/applet.js:3385 6.4/applet.js:3357
+#. 4.0/applet.js:3385 6.0/applet.js:3385 6.4/applet.js:3360
 msgid "Pin to panel"
 msgstr "釘選到面板"
 
-#. 4.0/applet.js:3387 6.0/applet.js:3387 6.4/applet.js:3359
+#. 4.0/applet.js:3387 6.0/applet.js:3387 6.4/applet.js:3362
 msgid "Pin to this workspace"
 msgstr "釘選到此工作區"
 
-#. 4.0/applet.js:3428 6.0/applet.js:3428 6.4/applet.js:3400
+#. 4.0/applet.js:3428 6.0/applet.js:3428 6.4/applet.js:3403
 msgid "Pin to other workspaces"
 msgstr "釘選到其他工作區"
 
-#. 4.0/applet.js:3449 6.0/applet.js:3449 6.4/applet.js:3421
+#. 4.0/applet.js:3449 6.0/applet.js:3449 6.4/applet.js:3424
 msgid "Pin to all workspaces"
 msgstr "釘選到所有工作區"
 
-#. 4.0/applet.js:3467 6.0/applet.js:3467 6.4/applet.js:3439
+#. 4.0/applet.js:3467 6.0/applet.js:3467 6.4/applet.js:3442
 msgid "Pin to launcher"
 msgstr "釘選到啟動器"
 
 #. 4.0/applet.js:3485 4.0/applet.js:3706 6.0/applet.js:3485 6.0/applet.js:3706
-#. 6.4/applet.js:3457 6.4/applet.js:3675
+#. 6.4/applet.js:3460 6.4/applet.js:3678
 msgid "Add new Hotkey for"
 msgstr "新增快捷鍵給"
 
-#. 4.0/applet.js:3499 6.0/applet.js:3499 6.4/applet.js:3471
+#. 4.0/applet.js:3499 6.0/applet.js:3499 6.4/applet.js:3474
 msgid "Recent files"
 msgstr "最近的檔案"
 
-#. 4.0/applet.js:3523 6.0/applet.js:3523 6.4/applet.js:3495
+#. 4.0/applet.js:3523 6.0/applet.js:3523 6.4/applet.js:3498
 msgid "Places"
 msgstr "位置"
 
-#. 4.0/applet.js:3562 6.0/applet.js:3562 6.4/applet.js:3534
+#. 4.0/applet.js:3562 6.0/applet.js:3562 6.4/applet.js:3537
 msgid "Prioritize window list position"
 msgstr "優先排序視窗清單位置"
 
-#. 4.0/applet.js:3582 6.0/applet.js:3582 6.4/applet.js:3554
+#. 4.0/applet.js:3582 6.0/applet.js:3582 6.4/applet.js:3557
 msgid "Always on top"
 msgstr "永遠置於最上層"
 
-#. 4.0/applet.js:3594 6.0/applet.js:3594 6.4/applet.js:3566
+#. 4.0/applet.js:3594 6.0/applet.js:3594 6.4/applet.js:3569
 msgid "Only on this workspace"
 msgstr "僅限此工作區"
 
-#. 4.0/applet.js:3596 6.0/applet.js:3596 6.4/applet.js:3568
+#. 4.0/applet.js:3596 6.0/applet.js:3596 6.4/applet.js:3571
 msgid "Visible on all workspaces"
 msgstr "在所有工作區顯示"
 
-#. 4.0/applet.js:3597 6.0/applet.js:3597 6.4/applet.js:3569
+#. 4.0/applet.js:3597 6.0/applet.js:3597 6.4/applet.js:3572
 msgid "Move to another workspace"
 msgstr "移動到其他工作區"
 
-#. 4.0/applet.js:3606 6.0/applet.js:3606 6.4/applet.js:3578
+#. 4.0/applet.js:3606 6.0/applet.js:3606 6.4/applet.js:3581
 msgid " (this workspace)"
 msgstr "（此工作區）"
 
-#. 4.0/applet.js:3619 6.0/applet.js:3619 6.4/applet.js:3591
+#. 4.0/applet.js:3619 6.0/applet.js:3619 6.4/applet.js:3594
 msgid "Move to another monitor"
 msgstr "移動到其他螢幕"
 
-#. 4.0/applet.js:3627 6.0/applet.js:3627 6.4/applet.js:3599
+#. 4.0/applet.js:3627 6.0/applet.js:3627 6.4/applet.js:3602
 msgid "Monitor"
 msgstr "螢幕"
 
@@ -163,48 +163,48 @@ msgstr "螢幕"
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3644 6.0/applet.js:3644 6.4/applet.js:3613
+#. 4.0/applet.js:3644 6.0/applet.js:3644 6.4/applet.js:3616
 msgid "Move window here"
 msgstr "將視窗移至此處"
 
-#. 4.0/applet.js:3661 6.0/applet.js:3661 6.4/applet.js:3630
+#. 4.0/applet.js:3661 6.0/applet.js:3661 6.4/applet.js:3633
 msgid "unassigned"
 msgstr "未指派"
 
 #. 4.0/applet.js:3672 4.0/applet.js:3703 6.0/applet.js:3672 6.0/applet.js:3703
-#. 6.4/applet.js:3641 6.4/applet.js:3672
+#. 6.4/applet.js:3644 6.4/applet.js:3675
 msgid "Assign window to a hotkey"
 msgstr "將視窗指派給快捷鍵"
 
-#. 4.0/applet.js:3726 6.0/applet.js:3726 6.4/applet.js:3695
+#. 4.0/applet.js:3726 6.0/applet.js:3726 6.4/applet.js:3698
 msgid "Change application label contents"
 msgstr "變更應用程式標籤內容"
 
-#. 4.0/applet.js:3729 6.0/applet.js:3729 6.4/applet.js:3698
+#. 4.0/applet.js:3729 6.0/applet.js:3729 6.4/applet.js:3701
 msgid "Remove custom setting"
 msgstr "移除自訂設定"
 
-#. 4.0/applet.js:3736 6.0/applet.js:3736 6.4/applet.js:3705
+#. 4.0/applet.js:3736 6.0/applet.js:3736 6.4/applet.js:3708
 msgid "Use window title"
 msgstr "使用視窗標題"
 
-#. 4.0/applet.js:3743 6.0/applet.js:3743 6.4/applet.js:3712
+#. 4.0/applet.js:3743 6.0/applet.js:3743 6.4/applet.js:3715
 msgid "Use application name"
 msgstr "使用應用程式名稱"
 
-#. 4.0/applet.js:3750 6.0/applet.js:3750 6.4/applet.js:3719
+#. 4.0/applet.js:3750 6.0/applet.js:3750 6.4/applet.js:3722
 msgid "No label"
 msgstr "無標籤"
 
-#. 4.0/applet.js:3765 6.0/applet.js:3765 6.4/applet.js:3734
+#. 4.0/applet.js:3765 6.0/applet.js:3765 6.4/applet.js:3737
 msgid "Ungroup application windows"
 msgstr "取消群組應用程式視窗"
 
-#. 4.0/applet.js:3773 6.0/applet.js:3773 6.4/applet.js:3742
+#. 4.0/applet.js:3773 6.0/applet.js:3773 6.4/applet.js:3745
 msgid "Group application windows"
 msgstr "群組應用程式視窗"
 
-#. 4.0/applet.js:3786 6.0/applet.js:3786 6.4/applet.js:3755
+#. 4.0/applet.js:3786 6.0/applet.js:3786 6.4/applet.js:3758
 msgid "Automatic grouping/ungrouping"
 msgstr "自動群組/取消群組"
 
@@ -226,39 +226,39 @@ msgstr "自動群組/取消群組"
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3814 6.0/applet.js:3814 6.4/applet.js:3783
+#. 4.0/applet.js:3814 6.0/applet.js:3814 6.4/applet.js:3786
 msgid "Move titlebar on to screen"
 msgstr "將標題列移至螢幕上"
 
-#. 4.0/applet.js:3819 6.0/applet.js:3819 6.4/applet.js:3788
+#. 4.0/applet.js:3819 6.0/applet.js:3819 6.4/applet.js:3791
 msgid "Restore"
 msgstr "還原"
 
-#. 4.0/applet.js:3823 6.0/applet.js:3823 6.4/applet.js:3792
+#. 4.0/applet.js:3823 6.0/applet.js:3823 6.4/applet.js:3795
 msgid "Minimize"
 msgstr "最小化"
 
-#. 4.0/applet.js:3829 6.0/applet.js:3829 6.4/applet.js:3798
+#. 4.0/applet.js:3829 6.0/applet.js:3829 6.4/applet.js:3801
 msgid "Unmaximize"
 msgstr "取消最大化"
 
-#. 4.0/applet.js:3837 6.0/applet.js:3837 6.4/applet.js:3806
+#. 4.0/applet.js:3837 6.0/applet.js:3837 6.4/applet.js:3809
 msgid "Close others"
 msgstr "關閉其他"
 
-#. 4.0/applet.js:3839 6.0/applet.js:3839 6.4/applet.js:3808
+#. 4.0/applet.js:3839 6.0/applet.js:3839 6.4/applet.js:3811
 msgid "Close other windows for application"
 msgstr "關閉應用程式的其他視窗"
 
-#. 4.0/applet.js:3860 6.0/applet.js:3860 6.4/applet.js:3829
+#. 4.0/applet.js:3860 6.0/applet.js:3860 6.4/applet.js:3832
 msgid "Close all"
 msgstr "全部關閉"
 
-#. 4.0/applet.js:3862 6.0/applet.js:3862 6.4/applet.js:3831
+#. 4.0/applet.js:3862 6.0/applet.js:3862 6.4/applet.js:3834
 msgid "Close all windows for application"
 msgstr "關閉應用程式的所有視窗"
 
-#. 4.0/applet.js:3878 6.0/applet.js:3878 6.4/applet.js:3847
+#. 4.0/applet.js:3878 6.0/applet.js:3878 6.4/applet.js:3850
 msgid "Close"
 msgstr "關閉"
 
