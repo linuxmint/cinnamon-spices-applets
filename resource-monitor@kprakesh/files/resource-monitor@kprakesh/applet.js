@@ -26,14 +26,15 @@ const Settings = imports.ui.settings;
 
 const UPDATE_INTERVAL_SECONDS = 2;
 
-function MyApplet(metadata, orientation, panel_height, instance_id) {
+function ResourceMonitorApplet(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
 }
 
-MyApplet.prototype = {
+ResourceMonitorApplet.prototype = {
     __proto__: Applet.TextIconApplet.prototype,
 
     _init: function(metadata, orientation, panel_height, instance_id) {
+        this.metadata = metadata;
         Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
         this.set_applet_tooltip("Resource Usage");
@@ -186,5 +187,5 @@ MyApplet.prototype = {
 };
 
 function main(metadata, orientation, panel_height, instance_id) {
-    return new MyApplet(metadata, orientation, panel_height, instance_id);
+    return new ResourceMonitorApplet(metadata, orientation, panel_height, instance_id);
 }
