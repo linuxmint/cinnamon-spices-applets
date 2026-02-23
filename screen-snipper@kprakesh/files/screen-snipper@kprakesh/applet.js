@@ -88,13 +88,13 @@ class ScreenSnipperApplet extends Applet.TextIconApplet {
 
    _snipToClipboard() {
         if (this._checkDependency()) {
-            Util.spawnCommandLine("gnome-screenshot -a -c");
+            Util.spawn(["gnome-screenshot", "-a", "-c"]);
         }
     }
 
    _fullScreenDelayed() {
         if (this._checkDependency()) {
-            Util.spawnCommandLine(`gnome-screenshot -c -d ${this.delaySeconds}`);
+            Util.spawn(["gnome-screenshot", "-c", "-d", this.delaySeconds.toString()]);
         }
     }
 }
