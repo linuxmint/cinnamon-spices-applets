@@ -2,7 +2,7 @@
 
 A lightweight, high-performance system monitor for the Linux Mint Cinnamon desktop. It displays CPU, RAM, and Swap usage directly in your panel with minimal system impact.
 
-![Applet Preview](https://raw.githubusercontent.com/kpr-dev590/resource-monitor-cinnamon/main/icon.png)
+![Applet Preview](screenshot.png)
 
 ## 🚀 Features
 
