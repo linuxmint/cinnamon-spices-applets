@@ -21,11 +21,11 @@ msgstr ""
 msgid "Settings"
 msgstr "Настройки"
 
-#: applet.js:325
+#: applet.js:338
 msgid "It's time for "
 msgstr "Это время для "
 
-#: applet.js:326
+#: applet.js:339
 msgid "Now : "
 msgstr "Сейчас : "
 
