@@ -308,7 +308,7 @@ AzanApplet.prototype = {
                     }
 
                     if (diffMinutes == extraReminderTime && extraReminderTime > 0) {
-                        Main.notify(_(extraReminderTime + " Minutes untill " + this._timeNames[nearestPrayerId]));
+                        Main.notify(_(extraReminderTime + " Minutes until " + this._timeNames[nearestPrayerId]));
                     }
                     // global.logError("prayerId: %s, diffSeconds: %s, diffMinutes: %s, minDiffMinutes: %s, isTimeForPraying: %s, nearestPrayerId: %s".format(
                     //     prayerId, diffSeconds, diffMinutes, minDiffMinutes, isTimeForPraying, nearestPrayerId
