@@ -28,7 +28,7 @@ msgid "Settings"
 msgstr ""
 
 #: applet.js:311
-msgid " Minutes untill "
+msgid " Minutes until "
 msgstr ""
 
 #: applet.js:338
