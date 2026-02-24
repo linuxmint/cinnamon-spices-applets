@@ -146,6 +146,7 @@ class GPasteApplet extends Applet.IconApplet {
             this._appletSettings.bind("display-searchbar",     "displaySearchBar",    this._onDisplaySettingsUpdated);
             this._appletSettings.bind("display-gpaste-ui",     "displayGPasteUI",     this._onDisplaySettingsUpdated);
             this._appletSettings.bind("display-empty-history", "displayEmptyHistory", this._onDisplaySettingsUpdated);
+            this._appletSettings.bind("reverse-history-order", "reverseHistory", this._onDisplaySettingsUpdated);
             
             this._appletSettings.bind("kb-show-history", "kbShowHistory", this._onKeybindingUpdated);
             this._onKeybindingUpdated();
@@ -254,6 +255,8 @@ class GPasteApplet extends Applet.IconApplet {
 
         this.msepBottom2.actor.visible       = this.displayGPasteUI;
         this.mitemUI.actor.visible           = this.displayGPasteUI;
+
+        this._onSettingsUpdated();
     }
 
     /*
@@ -271,10 +274,6 @@ class GPasteApplet extends Applet.IconApplet {
             for (let i = newSize; i < oldSize; ++i) {
                 this._historyItems.pop().destroy();
             }
-        }
-
-        if (this.mitemSearch.entry.get_text() == '') {
-            this._historyItems[0].actor.set_style("font-weight: bold;");
         }
 
         this.refresh(oldSize);
@@ -352,6 +351,8 @@ class GPasteApplet extends Applet.IconApplet {
      * Refresh the history items
      */
     refresh (startID) {
+        this._historyItems.forEach(item => item.actor.set_style(null));
+
         if (this._searchResults.length > 0) { // Search field isn't empty
             this.search(this.mitemSearch.getText());
         } else {
@@ -364,7 +365,8 @@ class GPasteApplet extends Applet.IconApplet {
                 }
 
                 for (let i = startID; i < size; ++i) {
-                    this._historyItems[i].setIndex(i);
+                    const idx = this.reverseHistory ? (size - 1 - i) : i;
+                    this._historyItems[i].setIndex(idx);
                 }
                 for (let i = size; i < maxSize; ++i) {
                     this._historyItems[i].setIndex(-1);
@@ -374,6 +376,9 @@ class GPasteApplet extends Applet.IconApplet {
                     this.mitemHistoryIsEmpty.actor.show();
                 } else {
                     this.mitemHistoryIsEmpty.actor.hide();
+                    const highlightPos = this.reverseHistory ? size - 1 : 0;
+                    if (highlightPos >= 0 && highlightPos < this._historyItems.length)
+                        this._historyItems[highlightPos].actor.set_style("font-weight: bold;");
                 }
             });
         }
@@ -397,14 +402,16 @@ class GPasteApplet extends Applet.IconApplet {
                     results = maxSize;
                 }
 
+                const ordered = this.reverseHistory ? this._searchResults.slice().reverse() : this._searchResults;
+
                 this._historyItems.slice(0, results).forEach((item, index) => {
-                    item.setUuid(this._searchResults[index]);
+                    item.setUuid(ordered[index]);
                 });
                 this._historyItems.slice(results, maxSize).forEach((item, index) => {
                     item.setIndex(-1);
                 });
 
-                this._historyItems[0].actor.set_style(null);
+                this._historyItems.forEach(item => item.actor.set_style(null));
 
                 if (results == 0) { // There aren't any results, display "(No results)"
                     this.mitemNoSearchResults.actor.show();
@@ -417,7 +424,6 @@ class GPasteApplet extends Applet.IconApplet {
 
             this._searchResults = [];
             this.refresh(0);
-            this._historyItems[0].actor.set_style("font-weight: bold;");
         }
     }
 
@@ -570,6 +576,17 @@ class GPasteApplet extends Applet.IconApplet {
         debugLog("[" + uuid + "] Client event: _onClientTracking");
 
         this.mitemTrack.setToggleState(state);
+    }
+
+    /*
+     * Called whenever settings change that affect how the history is presented
+     */
+    _onSettingsUpdated() {
+        if (this._searchResults.length > 0) {
+            this.search(this.mitemSearch.getText());
+        } else {
+            this.refresh(0);
+        }
     }
 
     //
