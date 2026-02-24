@@ -26,11 +26,11 @@ msgstr "%Y. %B %e., %A"
 msgid "Settings"
 msgstr "Beállítások"
 
-#: applet.js:325
+#: applet.js:338
 msgid "It's time for "
 msgstr "Itt az idő "
 
-#: applet.js:326
+#: applet.js:339
 msgid "Now : "
 msgstr "Most : "
 
