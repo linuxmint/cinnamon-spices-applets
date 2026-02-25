@@ -19,6 +19,8 @@ Then enter its path in the "Path to the system file used to check the CPU temper
 
 You can display the CPU temperature in degrees Fahrenheit (°F), if you wish.
 
+You can set color warnings when the CPU temperature reaches a High or Critical level.
+
 
 ## Instructions for upgrading to Cinnamon 6.4
 

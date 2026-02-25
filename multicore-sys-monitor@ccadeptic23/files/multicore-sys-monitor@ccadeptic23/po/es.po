@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2026-02-19 04:34+0100\n"
-"PO-Revision-Date: 2026-02-19 10:53-0300\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-02-20 15:19+0100\n"
+"PO-Revision-Date: 2026-02-21 11:50-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -20,8 +21,8 @@ msgstr ""
 
 #. 6.4->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
-#. 3.2/prefs.js:187 6.0/DataProviders.js:60 6.0/prefs.js:303 6.4/applet.js:543
-#. 6.4/applet.js:1476 6.4/applet.js:1517 3.4/DataProviders.js:58
+#. 3.2/prefs.js:187 6.0/DataProviders.js:60 6.0/prefs.js:303 6.4/applet.js:556
+#. 6.4/applet.js:1489 6.4/applet.js:1536 3.4/DataProviders.js:58
 #. 3.4/prefs.js:195 5.6/DataProviders.js:55 5.6/prefs.js:303
 #. 4.0/DataProviders.js:55 4.0/prefs.js:303 3.0/prefsui.glade:452
 #. 3.2/prefsui.glade:504 6.0/prefsui.glade:580 3.4/prefsui.glade:434
@@ -35,13 +36,13 @@ msgid "------------- CPU ------------"
 msgstr "------------- CPU ------------"
 
 #. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 6.0/DataProviders.js:131
-#. 6.4/applet.js:1519 3.4/DataProviders.js:129 5.6/DataProviders.js:126
+#. 6.4/applet.js:1538 3.4/DataProviders.js:129 5.6/DataProviders.js:126
 #. 4.0/DataProviders.js:126
 msgid "Core"
 msgstr "Núcleo"
 
 #. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 6.0/DataProviders.js:143
-#. 6.4/applet.js:1313 3.4/DataProviders.js:141 5.6/DataProviders.js:138
+#. 6.4/applet.js:1326 3.4/DataProviders.js:141 5.6/DataProviders.js:138
 #. 4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "MEM"
@@ -56,25 +57,25 @@ msgid "Usedup:"
 msgstr "Usado:"
 
 #. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 6.0/DataProviders.js:164
-#. 6.4/applet.js:1349 3.4/DataProviders.js:162 5.6/DataProviders.js:159
+#. 6.4/applet.js:1362 3.4/DataProviders.js:162 5.6/DataProviders.js:159
 #. 4.0/DataProviders.js:159
 msgid "Cached:"
 msgstr "En caché:"
 
 #. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 6.0/DataProviders.js:164
-#. 6.4/applet.js:1349 3.4/DataProviders.js:162 5.6/DataProviders.js:159
+#. 6.4/applet.js:1362 3.4/DataProviders.js:162 5.6/DataProviders.js:159
 #. 4.0/DataProviders.js:159
 msgid "Buffer:"
 msgstr "Buffer:"
 
 #. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 6.0/DataProviders.js:164
-#. 6.4/applet.js:49 6.4/applet.js:1349 3.4/DataProviders.js:162
+#. 6.4/applet.js:49 6.4/applet.js:1362 3.4/DataProviders.js:162
 #. 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "Libre:"
 
 #. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 6.0/DataProviders.js:178
-#. 6.4/applet.js:1426 3.4/DataProviders.js:176 5.6/DataProviders.js:173
+#. 6.4/applet.js:1439 3.4/DataProviders.js:176 5.6/DataProviders.js:173
 #. 4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "SWAP"
@@ -86,7 +87,7 @@ msgstr "------------ Swap ------------"
 
 #. 6.4->settings-schema.json->Mem_colorSwap->description
 #. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 6.0/DataProviders.js:222
-#. 6.4/applet.js:50 6.4/applet.js:1452 3.4/DataProviders.js:195
+#. 6.4/applet.js:50 6.4/applet.js:1465 3.4/DataProviders.js:195
 #. 5.6/DataProviders.js:194 4.0/DataProviders.js:194 3.0/prefsui.glade:785
 #. 3.2/prefsui.glade:837 6.0/prefsui.glade:907 3.4/prefsui.glade:761
 #. 5.6/prefsui.glade:907 4.0/prefsui.glade:907
@@ -94,7 +95,7 @@ msgid "Swap"
 msgstr "Swap"
 
 #. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 6.0/DataProviders.js:232
-#. 6.4/applet.js:1542 3.4/DataProviders.js:205 5.6/DataProviders.js:204
+#. 6.4/applet.js:1561 3.4/DataProviders.js:205 5.6/DataProviders.js:204
 #. 4.0/DataProviders.js:204
 msgid "NET"
 msgstr "RED"
@@ -105,7 +106,7 @@ msgid "---------- Networks ----------"
 msgstr "------------ Redes -----------"
 
 #. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 6.0/DataProviders.js:334
-#. 6.4/applet.js:51 6.4/applet.js:1657 6.4/applet.js:1659
+#. 6.4/applet.js:51 6.4/applet.js:1676 6.4/applet.js:1678
 #. 3.4/DataProviders.js:300 5.6/DataProviders.js:298 4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "Descarga:"
@@ -116,13 +117,13 @@ msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
 #. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 6.0/DataProviders.js:335
-#. 6.4/applet.js:52 6.4/applet.js:1661 6.4/applet.js:1663
+#. 6.4/applet.js:52 6.4/applet.js:1680 6.4/applet.js:1682
 #. 3.4/DataProviders.js:301 5.6/DataProviders.js:299 4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "Subida:"
 
 #. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 6.0/DataProviders.js:351
-#. 6.4/applet.js:1680 6.4/applet.js:1820 3.4/DataProviders.js:317
+#. 6.4/applet.js:1699 6.4/applet.js:1839 3.4/DataProviders.js:317
 #. 5.6/DataProviders.js:315 4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "DISCO"
@@ -133,7 +134,7 @@ msgid "------------ Disks -----------"
 msgstr "----------- Discos -----------"
 
 #. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 6.0/DataProviders.js:420
-#. 6.4/applet.js:53 6.4/applet.js:1797 6.4/applet.js:1799
+#. 6.4/applet.js:53 6.4/applet.js:1816 6.4/applet.js:1818
 #. 3.4/DataProviders.js:386 5.6/DataProviders.js:384 4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "Lectura:"
@@ -144,7 +145,7 @@ msgid "(MiB/s)"
 msgstr "(MiB/s)"
 
 #. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 6.0/DataProviders.js:421
-#. 6.4/applet.js:54 6.4/applet.js:1801 6.4/applet.js:1803
+#. 6.4/applet.js:54 6.4/applet.js:1820 6.4/applet.js:1822
 #. 3.4/DataProviders.js:387 5.6/DataProviders.js:385 4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "Escritura:"
@@ -215,7 +216,7 @@ msgstr "Error al guardar el archivo:"
 msgid "/s"
 msgstr "/s"
 
-#. 6.0/DataProviders.js:164 6.4/applet.js:47 6.4/applet.js:1349
+#. 6.0/DataProviders.js:164 6.4/applet.js:47 6.4/applet.js:1362
 #. 3.4/DataProviders.js:162 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "Usada:"
@@ -243,15 +244,15 @@ msgstr ""
 msgid "Refresh graphs"
 msgstr "Actualizar gráficos"
 
-#. 6.0/applet.js:325 6.4/applet.js:508
+#. 6.0/applet.js:325 6.4/applet.js:521
 msgid "Without any graphics"
 msgstr "Sin gráficos"
 
-#. 6.0/applet.js:331 6.4/applet.js:514
+#. 6.0/applet.js:331 6.4/applet.js:527
 msgid "With graphics"
 msgstr "Con gráficos"
 
-#. 6.0/applet.js:341 6.4/applet.js:525
+#. 6.0/applet.js:341 6.4/applet.js:538
 msgid "Drop Memory Cache (needs root rights)"
 msgstr "Eliminar caché de memoria (necesita derechos de root)"
 
@@ -297,44 +298,44 @@ msgid "Recoverable:"
 msgstr "Recuperable:"
 
 #. 6.4->settings-schema.json->RefreshAll_btn->description
-#. 6.4/applet.js:498
+#. 6.4/applet.js:511
 msgid "Refresh All"
 msgstr "Actualizar todo"
 
-#. 6.4/applet.js:541
+#. 6.4/applet.js:554
 msgid "Configure..."
 msgstr "Configurar..."
 
 #. 6.4->settings-schema.json->pageGeneral->title
-#. 6.4/applet.js:542 3.0/prefsui.glade:281 3.2/prefsui.glade:333
+#. 6.4/applet.js:555 3.0/prefsui.glade:281 3.2/prefsui.glade:333
 #. 6.0/prefsui.glade:299 3.4/prefsui.glade:264 5.6/prefsui.glade:299
 #. 4.0/prefsui.glade:299
 msgid "General"
 msgstr "General"
 
 #. 6.4->settings-schema.json->pageMem->title
-#. 6.4/applet.js:544 6.4/applet.js:1345 3.0/prefsui.glade:832
+#. 6.4/applet.js:557 6.4/applet.js:1358 3.0/prefsui.glade:832
 #. 3.2/prefsui.glade:884 6.0/prefsui.glade:954 3.4/prefsui.glade:808
 #. 5.6/prefsui.glade:954 4.0/prefsui.glade:954
 msgid "Memory"
 msgstr "Memoria"
 
 #. 6.4->settings-schema.json->pageNetwork->title
-#. 6.4/applet.js:545 6.4/applet.js:1003 6.4/applet.js:1549
+#. 6.4/applet.js:558 6.4/applet.js:1016 6.4/applet.js:1568
 #. 3.0/prefsui.glade:1154 3.2/prefsui.glade:1206 6.0/prefsui.glade:1289
 #. 3.4/prefsui.glade:1143 5.6/prefsui.glade:1289 4.0/prefsui.glade:1289
 msgid "Network"
 msgstr "Red"
 
 #. 6.4->settings-schema.json->pageDisk->title
-#. 6.4/applet.js:546 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
+#. 6.4/applet.js:559 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
 #. 6.0/prefsui.glade:1635 3.4/prefsui.glade:1489 5.6/prefsui.glade:1635
 #. 4.0/prefsui.glade:1635
 msgid "Disk IO"
 msgstr "E/S de disco"
 
 #. 6.4->settings-schema.json->pageDiskUsage->title
-#. 6.4/applet.js:547
+#. 6.4/applet.js:560
 msgid "Disk Usage"
 msgstr "Uso de disco"
 
@@ -343,7 +344,7 @@ msgstr "Uso de disco"
 #. 6.4->settings-schema.json->sectionCPUColors->title
 #. 6.4->settings-schema.json->sectionMemoryColors->title
 #. 6.4->settings-schema.json->sectionDiskUsageColors->title
-#. 6.4/applet.js:548 3.0/prefsui.glade:411 3.0/prefsui.glade:584
+#. 6.4/applet.js:561 3.0/prefsui.glade:411 3.0/prefsui.glade:584
 #. 3.2/prefsui.glade:463 3.2/prefsui.glade:636 6.0/prefsui.glade:494
 #. 6.0/prefsui.glade:710 3.4/prefsui.glade:392 3.4/prefsui.glade:564
 #. 5.6/prefsui.glade:494 5.6/prefsui.glade:710 4.0/prefsui.glade:494
@@ -351,47 +352,47 @@ msgstr "Uso de disco"
 msgid "Colors"
 msgstr "Colores"
 
-#. 6.4/applet.js:691 6.4/applet.js:734 6.4/applet.js:748
+#. 6.4/applet.js:704 6.4/applet.js:747 6.4/applet.js:761
 msgid "root"
 msgstr "root"
 
-#. 6.4/applet.js:1118 6.4/applet.js:1689 6.4/applet.js:1769 6.4/applet.js:1867
-#. 6.4/applet.js:1869
+#. 6.4/applet.js:1131 6.4/applet.js:1708 6.4/applet.js:1788 6.4/applet.js:1886
+#. 6.4/applet.js:1888
 msgid "Disks"
 msgstr "Disco"
 
-#. 6.4/applet.js:1371
+#. 6.4/applet.js:1384
 msgid "Buffers/Cache/Shared"
 msgstr "Búferes/Caché/Compartido"
 
-#. 6.4/applet.js:1399 6.4/applet.js:1506 6.4/applet.js:1846
+#. 6.4/applet.js:1412 6.4/applet.js:1525 6.4/applet.js:1865
 msgid ":"
 msgstr ":"
 
-#. 6.4/applet.js:1401 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 6.4/applet.js:1414 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 6.0/prefsui.glade:809 3.4/prefsui.glade:663 5.6/prefsui.glade:809
 #. 4.0/prefsui.glade:809
 msgid "Buffer"
 msgstr "Buffer"
 
 #. 6.4->settings-schema.json->Mem_colorCache->description
-#. 6.4/applet.js:1401
+#. 6.4/applet.js:1414
 msgid "Cache"
 msgstr "Caché"
 
-#. 6.4/applet.js:1401
+#. 6.4/applet.js:1414
 msgid "Shared"
 msgstr "Compartido"
 
-#. 6.4/applet.js:1502
+#. 6.4/applet.js:1515
 msgid "CPUs"
 msgstr "CPUs"
 
-#. 6.4/applet.js:1629
+#. 6.4/applet.js:1648
 msgid "Networks"
 msgstr "Redes"
 
-#. 6.4/applet.js:1841
+#. 6.4/applet.js:1860
 msgid "Usage"
 msgstr "Uso"
 
@@ -413,8 +414,12 @@ msgid "Multi-Core System Monitor"
 msgstr "Monitor de sistema multinúcleo"
 
 #. metadata.json->description
-msgid "Displays in realtime the cpu usage for each core/cpu and overall memory usage."
-msgstr "Muestra en tiempo real el uso de cpu para cada núcleo/cpu y el uso global de memoria."
+msgid ""
+"Displays in realtime the cpu usage for each core/cpu and overall memory "
+"usage."
+msgstr ""
+"Muestra en tiempo real el uso de cpu para cada núcleo/cpu y el uso global de "
+"memoria."
 
 #. 6.4->settings-schema.json->sectionGeneralOptions->title
 #. 6.4->settings-schema.json->sectionCPUOptions->title
@@ -428,6 +433,10 @@ msgstr "Opciones"
 #. 6.4->settings-schema.json->sectionTooltip->title
 msgid "Tooltip"
 msgstr "Información sobre herramientas"
+
+#. 6.4->settings-schema.json->sectionCPUTemperature->title
+msgid "CPU Temperature"
+msgstr "Temperatura de la CPU"
 
 #. 6.4->settings-schema.json->sectionCPUColorsByActivity->title
 #. 6.0/prefsui.glade:538 5.6/prefsui.glade:538 4.0/prefsui.glade:538
@@ -503,8 +512,12 @@ msgid "64px"
 msgstr "64px"
 
 #. 6.4->settings-schema.json->graphStep->description
-msgid "Step for the width of a graph"
-msgstr "Paso para el ancho de un gráfico"
+msgid "The width of each graphic must be a multiple of:"
+msgstr "El ancho de cada gráfico debe ser un múltiplo de:"
+
+#. 6.4->settings-schema.json->graphStepApply->description
+msgid "Apply this multiple"
+msgstr "Aplicar este múltiplo"
 
 #. 6.4->settings-schema.json->graphSpacing->description
 msgid "Graph spacing"
@@ -602,7 +615,40 @@ msgstr "Grados Fahrenheit"
 
 #. 6.4->settings-schema.json->CPU_tempPath->description
 msgid "Path to the system file used to check the CPU temperature"
-msgstr "Ruta al archivo del sistema utilizado para comprobar la temperatura de la CPU"
+msgstr ""
+"Ruta al archivo del sistema utilizado para comprobar la temperatura de la CPU"
+
+#. 6.4->settings-schema.json->CPU_tempHigh->description
+msgid "High CPU Temperature (°C)"
+msgstr "Temperatura mas alta de la CPU"
+
+#. 6.4->settings-schema.json->CPU_tempHigh->tooltip
+msgid "Refer to your CPU documentation."
+msgstr "Consulte la documentación de su CPU."
+
+#. 6.4->settings-schema.json->CPU_tempCrit->description
+msgid "Critical CPU Temperature (°C)"
+msgstr "Temperatura crítica de la CPU (°C)"
+
+#. 6.4->settings-schema.json->CPU_tempCrit->tooltip
+msgid ""
+"Refer to your CPU documentation.\n"
+"Must be greater than the High CPU Temperature."
+msgstr ""
+"Consulte la documentación de su CPU.\n"
+"Debe ser superior a la temperatura alta de la CPU."
+
+#. 6.4->settings-schema.json->CPU_tempColor->description
+msgid "Normal Temperature Color"
+msgstr "Color a temperatura normal"
+
+#. 6.4->settings-schema.json->CPU_tempColorHigh->description
+msgid "High Temperature Color"
+msgstr "Color a alta temperatura"
+
+#. 6.4->settings-schema.json->CPU_tempColorCrit->description
+msgid "Critical Temperature Color"
+msgstr "Color de temperatura crítica"
 
 #. 6.4->settings-schema.json->CPU_byActivity->description
 #. 6.0/prefsui.glade:433 5.6/prefsui.glade:433 4.0/prefsui.glade:433
@@ -617,10 +663,12 @@ msgstr "Utilizar colores automáticos"
 #. 6.4->settings-schema.json->CPU_colorExplanation->description
 msgid ""
 "The CPUs are colored in groups of four: CPU0, CPU1, CPU2, and CPU3.\n"
-"The fifth, named CPU4, will have the same color as CPU0; the sixth, CPU5, will have the same color as CPU1, and so on."
+"The fifth, named CPU4, will have the same color as CPU0; the sixth, CPU5, "
+"will have the same color as CPU1, and so on."
 msgstr ""
 "Las CPU están coloreadas en grupos de cuatro: CPU0, CPU1, CPU2 y CPU3.\n"
-"La quinta, denominada CPU4, tendrá el mismo color que la CPU0; la sexta, CPU5, tendrá el mismo color que la CPU1, y así sucesivamente."
+"La quinta, denominada CPU4, tendrá el mismo color que la CPU0; la sexta, "
+"CPU5, tendrá el mismo color que la CPU1, y así sucesivamente."
 
 #. 6.4->settings-schema.json->CPU_color0->description
 msgid "CPU0 Color"
@@ -682,12 +730,16 @@ msgstr "Ninguna"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->tooltip
 msgid ""
-"100%: The Swap graph is a bar that spans the entire width of the graph, behind the circle.\n"
-"10%: The Swap graph is a bar that occupies 10% of the graph width, to the left of the circle.\n"
+"100%: The Swap graph is a bar that spans the entire width of the graph, "
+"behind the circle.\n"
+"10%: The Swap graph is a bar that occupies 10% of the graph width, to the "
+"left of the circle.\n"
 "None: No Swap bar."
 msgstr ""
-"100%: El gráfico Swap es una barra que abarca todo el ancho del gráfico, detrás del círculo.\n"
-"10%: El gráfico Swap es una barra que ocupa el 10% del ancho del gráfico, a la izquierda del círculo.\n"
+"100%: El gráfico Swap es una barra que abarca todo el ancho del gráfico, "
+"detrás del círculo.\n"
+"10%: El gráfico Swap es una barra que ocupa el 10% del ancho del gráfico, a "
+"la izquierda del círculo.\n"
 "Ninguna: No hay barra de intercambio."
 
 #. 6.4->settings-schema.json->Net_autoscale->description
@@ -967,17 +1019,26 @@ msgid ""
 "\tlarge values so that they dont dominate the smaller readings."
 msgstr ""
 "Escala automática:\n"
-"\tEsta opción escalará el gráfico de líneas en base a la lectura más grande dentro del área visualizada.\n"
-"\tUna vez que la lectura más grande ya no se muestre, la siguiente lectura más grande se convertirá \n"
-"\ten el nuevo valor por el cual se escalarán las lecturas. Esto permite que el gráfico se \"amplíe\" \n"
-"\tpara mostrar los detalles del mismo. Sin embargo, también significa que si hay una lectura grande, \n"
-"\tlas lecturas pequeñas pueden ser indistinguibles de 0. Y si sólo hay lecturas pequeñas entonces,\n"
-"\tlas lecturas ligeramente más grandes pueden aparecer más grandes de lo que deberían.\n"
-"\tSi no se activa, el valor más grande utilizado será la lectura más grande desde que Cinnamon inició.\n"
+"\tEsta opción escalará el gráfico de líneas en base a la lectura más grande "
+"dentro del área visualizada.\n"
+"\tUna vez que la lectura más grande ya no se muestre, la siguiente lectura "
+"más grande se convertirá \n"
+"\ten el nuevo valor por el cual se escalarán las lecturas. Esto permite que "
+"el gráfico se \"amplíe\" \n"
+"\tpara mostrar los detalles del mismo. Sin embargo, también significa que si "
+"hay una lectura grande, \n"
+"\tlas lecturas pequeñas pueden ser indistinguibles de 0. Y si sólo hay "
+"lecturas pequeñas entonces,\n"
+"\tlas lecturas ligeramente más grandes pueden aparecer más grandes de lo que "
+"deberían.\n"
+"\tSi no se activa, el valor más grande utilizado será la lectura más grande "
+"desde que Cinnamon inició.\n"
 "\n"
 "Escala logarítmica:\n"
-"\tEsta opción transformará las lecturas para que se muestren usando una escala logarítmica.\n"
-"\tSi no está familiarizado, básicamente reduce los valores grandes para que no dominen sobre lecturas más pequeñas."
+"\tEsta opción transformará las lecturas para que se muestren usando una "
+"escala logarítmica.\n"
+"\tSi no está familiarizado, básicamente reduce los valores grandes para que "
+"no dominen sobre lecturas más pequeñas."
 
 #. 6.0/prefsui.glade:508 5.6/prefsui.glade:508 4.0/prefsui.glade:508
 msgid "by CPU:"
@@ -991,7 +1052,8 @@ msgid ""
 "    the next largest becomes the new value by which the readings\n"
 "    are scaled. This lets the plot \"zoom\" to show details of the graph.\n"
 "    However, it also means that if there is a large reading small readings\n"
-"    may become indistinguishable from 0. And if there are only small readings\n"
+"    may become indistinguishable from 0. And if there are only small "
+"readings\n"
 "    then slightly larger readings may appear larger than they should.\n"
 "    If not enabled the largest value used will be the largest reading since\n"
 "    cinnamon was started.\n"
@@ -1003,13 +1065,19 @@ msgid ""
 msgstr ""
 "Escala automática:\n"
 "    Esto escalará el gráfico lineal por la lectura más grande dentro del\n"
-"    del área visualizada. Una vez que la lectura más grande ya no se muestre\n"
+"    del área visualizada. Una vez que la lectura más grande ya no se "
+"muestre\n"
 "    la siguiente más grande se convertirá en el nuevo valor por el cual \n"
-"    se escalarán las lecturas. Esto permite \"ampliar\" el gráfico para mostrar los detalles.\n"
-"    Sin embargo, también significa que si hay una lectura grande, las lecturas pequeñas\n"
-"    pueden llegar a ser indistinguibles de 0. Y si sólo hay lecturas pequeñas\n"
-"    entonces las lecturas ligeramente más grandes pueden aparecer más grandes de lo que deberían.\n"
-"    Si no se activa, el valor más grande utilizado será la lectura más grande desde que se inició\n"
+"    se escalarán las lecturas. Esto permite \"ampliar\" el gráfico para "
+"mostrar los detalles.\n"
+"    Sin embargo, también significa que si hay una lectura grande, las "
+"lecturas pequeñas\n"
+"    pueden llegar a ser indistinguibles de 0. Y si sólo hay lecturas "
+"pequeñas\n"
+"    entonces las lecturas ligeramente más grandes pueden aparecer más "
+"grandes de lo que deberían.\n"
+"    Si no se activa, el valor más grande utilizado será la lectura más "
+"grande desde que se inició\n"
 "    cinnamon.\n"
 "\n"
 "Escala logarítmica:\n"

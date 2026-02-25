@@ -193,6 +193,11 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_showTemp", "CPU_showTemp");
         this.settings.bind("CPU_tempInFahrenheit", "CPU_tempInFahrenheit");
         this.settings.bind("CPU_tempPath", "CPU_tempPath");
+        this.settings.bind("CPU_tempHigh", "CPU_tempHigh");
+        this.settings.bind("CPU_tempCrit", "CPU_tempCrit");
+        this.settings.bind("CPU_tempColor", "CPU_tempColor");
+        this.settings.bind("CPU_tempColorHigh", "CPU_tempColorHigh");
+        this.settings.bind("CPU_tempColorCrit", "CPU_tempColorCrit");
         this.settings.bind("CPU_width", "CPU_width", () => { this.adjust_CPU_width() });
         this.settings.bind("CPU_mergeAll", "CPU_mergeAll");
         this.settings.bind("CPU_color0", "CPU_color0");
@@ -373,6 +378,14 @@ class MCSM extends Applet.IconApplet {
             Math.round(this.DiskUsage_width / this.graphStep) * this.graphStep
         );
         this.DiskUsage_width = DiskUsage_width;
+    }
+    
+    on_apply_width_multiple() {
+        this.adjust_CPU_width();
+        this.adjust_Mem_width();
+        this.adjust_Net_width();
+        this.adjust_Disk_width();
+        this.adjust_DiskUsage_width();
     }
 
     set_panelHeight() {
@@ -1204,7 +1217,7 @@ class MCSM extends Applet.IconApplet {
             appletTooltipString += this[provider].getTooltipString();
         }
         if (this.hovered)
-            this.set_applet_tooltip(appletTooltipString, true);
+            this.set_applet_tooltip(appletTooltipString.trimEnd(), true);
     }
 
     /** Network
@@ -1500,6 +1513,12 @@ class MultiCpuDataProvider {
         if (! this.isEnabled) return "";
         if (! this.isRunning) return "";
         let trans = _("CPUs");
+        if (this.applet.CPU_showTemp && this.applet.CPU_temperature) {
+            let temperature = 1 * this.applet.CPU_temperature;
+            let degree = (this.applet.CPU_tempInFahrenheit) ?  "°F" : "°C";
+            temperature = "" + temperature + degree;
+            trans += " " + temperature;
+        }
         let len = trans.length - 2;
         var toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
 

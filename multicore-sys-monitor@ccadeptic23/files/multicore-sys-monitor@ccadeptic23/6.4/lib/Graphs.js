@@ -250,8 +250,22 @@ class GraphVBars {
       pangolayout2.set_alignment(Pango.Alignment.RIGHT);
       pangolayout2.set_width(_width);
       pangolayout2.set_font_description(fontdesc);
-
-      areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
+      
+      let tempColor;
+      let CPU_tempHigh = 1 * this.applet.CPU_tempHigh;
+      let CPU_tempCrit = 1 * this.applet.CPU_tempCrit;
+      if (this.applet.CPU_tempInFahrenheit) {
+        CPU_tempHigh = 1.8 * CPU_tempHigh + 32;
+        CPU_tempCrit = 1.8 * CPU_tempCrit + 32;
+      }
+      if (1 * this.applet.CPU_temperature < 1 * CPU_tempHigh)
+        tempColor = RGBa2rgba(this.applet.CPU_tempColor);
+      else if (1 * this.applet.CPU_temperature < 1 * CPU_tempCrit)
+        tempColor = RGBa2rgba(this.applet.CPU_tempColorHigh);
+      else
+        tempColor = RGBa2rgba(this.applet.CPU_tempColorCrit);
+        
+      areaContext.setSourceRGBA(tempColor[0], tempColor[1], tempColor[2], tempColor[3]);
       areaContext.moveTo(_width, 0); //place text in top right corner of graph area
       PangoCairo.layout_path(areaContext, pangolayout2);
       areaContext.fill();
