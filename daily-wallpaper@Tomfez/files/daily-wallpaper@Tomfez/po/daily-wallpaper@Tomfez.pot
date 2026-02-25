@@ -1,6 +1,6 @@
 # DAILY DESKTOP WALLPAPER
 # This file is put in the public domain.
-# Tomfez, 2016
+# Tomfez, 2025
 #
 #, fuzzy
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: daily-wallpaper@Tomfez 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-25 21:26+0200\n"
+"POT-Creation-Date: 2026-02-25 21:09+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,56 +22,56 @@ msgstr ""
 msgid "Daily desktop wallpaper"
 msgstr ""
 
-#. applet.js:117
+#. applet.js:123
 msgid "Refresh"
 msgstr ""
 
-#. applet.js:130
+#. applet.js:136
 msgid "Copy image URL to clipboard"
 msgstr ""
 
-#. applet.js:131
+#. applet.js:137
 msgid "Open image folder"
 msgstr ""
 
-#. applet.js:133
+#. applet.js:139
 msgid "Settings"
 msgstr ""
 
-#. applet.js:290
+#. applet.js:296
 msgid "Next refresh"
 msgstr ""
 
-#. applet.js:336
+#. applet.js:343
 msgid "This is the most recent image."
 msgstr ""
 
-#. applet.js:344
+#. applet.js:351
 msgid "Last image. Unable to get more images."
 msgstr ""
 
-#. applet.js:388
+#. applet.js:395
 msgid "Refresh deactivated"
 msgstr ""
 
-#. applet.js:448 applet.js:475
+#. applet.js:455 applet.js:482
 #, javascript-format
 msgid "Wallpaper of the day at %s for %s"
 msgstr ""
 
-#. source.js:83 source.js:102
+#. source.js:98 source.js:117
 msgid "No image today."
 msgstr ""
 
-#. utils.js:90 utils.js:93
+#. utils.js:96 utils.js:99
 msgid "minutes"
 msgstr ""
 
-#. utils.js:96
+#. utils.js:102
 msgid "days"
 msgstr ""
 
-#. utils.js:99
+#. utils.js:105
 msgid "hours"
 msgstr ""
 
@@ -114,6 +114,10 @@ msgstr ""
 
 #. settings-schema.json->currentSource->options
 msgid "APOD"
+msgstr ""
+
+#. settings-schema.json->currentSource->options
+msgid "Picsum Photos"
 msgstr ""
 
 #. settings-schema.json->refreshInterval->description
@@ -343,6 +347,26 @@ msgstr ""
 msgid ""
 "Set your API key for APOD API. The default API key is used for initially "
 "exploring APIs prior to signing up, but it has much lower rate limits."
+msgstr ""
+
+#. settings-schema.json->image-width-option->description
+msgid "Set the prefered width for the image"
+msgstr ""
+
+#. settings-schema.json->image-height-option->description
+msgid "Set the prefered height for the image"
+msgstr ""
+
+#. settings-schema.json->image-blur-option->description
+msgid "Get a blurred image"
+msgstr ""
+
+#. settings-schema.json->image-blur-amount->description
+msgid "Adjust the amount of blur by providing a number between 1 and 10"
+msgstr ""
+
+#. settings-schema.json->image-grayscale-option->description
+msgid "Get a grayscale image"
 msgstr ""
 
 #. settings-schema.json->image-aspect-options->description
