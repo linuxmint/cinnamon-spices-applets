@@ -22,7 +22,7 @@ Inspired by Gnome Shell's [Media Controls by Sakith B.](https://extensions.gnome
 ### Changelog
 
 #### 1.1.0
-Special thanks to [@lumapu](https://github.com/lumapu) for its [ideas and contributions](https://github.com/linuxmint/cinnamon-spices-applets/pull/8276).
+Special thanks to [@lumapu](https://github.com/lumapu) for his [ideas and contributions](https://github.com/linuxmint/cinnamon-spices-applets/pull/8276).
 - Settings menu added
 - Option to show/hide player icon
 - Option to show/hide track info on panel
