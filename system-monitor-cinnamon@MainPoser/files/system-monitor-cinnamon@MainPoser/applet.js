@@ -81,8 +81,25 @@ class SysMonitorCinnamon extends Applet.TextIconApplet {
         this.set_applet_label(label);
 
         // 使用绑定的变量 this._settings.refresh_interval
-        this._render.dataTimeoutId = Mainloop.timeout_add(this._settings.refresh_interval * 1000, () => this._data_loop());
-        return false;
+        this._render.dataTimeoutId = Mainloop.timeout_add(this._settings.refresh_interval * 1000, () => {
+            try {
+                this._stats.cpu = this._get_cpu_usage();
+                this._stats.mem = this._get_mem_usage();
+
+                // 5. 根据配置逻辑显示
+                let label = ` CPU: ${this._stats.cpu}% | RAM: ${this._stats.mem}%`;
+
+                if (this._settings.show_network) {
+                    let net = this._get_net_speed();
+                    label += ` | ${net}`;
+                }
+
+                this.set_applet_label(label);
+            } catch (e) {
+                global.logError(`Error in _data_loop: ${e}`);
+            }
+            return true;
+        });
     }
 
     /**
@@ -105,8 +122,27 @@ class SysMonitorCinnamon extends Applet.TextIconApplet {
             this.set_applet_icon_path(iconPath);
         }
 
-        this._render.animTimeoutId = Mainloop.timeout_add(delay, () => this._anim_loop());
-        return false;
+        this._render.animTimeoutId = Mainloop.timeout_add(delay, () => {
+            try {
+                // 计算当前帧的延迟: CPU 越高，跑得越快
+                // 映射逻辑: 0% -> 400ms, 100% -> 40ms
+                let delay = Math.max(40, 400 - (this._stats.cpu * 3.6));
+
+                // 切换 0-4 帧
+                this._render.frame = (this._render.frame + 1) % 5;
+                this._settings.them = this._get_them();
+
+                let iconPath = `${this._render.path}/icons/runners/${this._settings.runner}/${this._settings.them}/${this._settings.runner}_${this._render.frame}.svg`;
+
+                if (GLib.file_test(iconPath, GLib.FileTest.EXISTS)) {
+                    // 使用最基础、绝不报错的方法
+                    this.set_applet_icon_path(iconPath);
+                }
+            } catch (e) {
+                global.logError(`Error in _anim_loop: ${e}`);
+            }
+            return true;
+        });
     }
 
     /**
