@@ -24,7 +24,7 @@ Inspired by [RunCat365](https://github.com/Kyome22/RunCat365)
 After installation, the applet will automatically display system monitoring information on the panel. The default format is:
 
 ```
-CPU: 45% | MEM: 2.1G/8G | ↑ 1.2MB/s ↓ 500KB/s
+CPU: 45% | RAM: 21% | ↓ 500 KB/s ↑ 100 KB/s 
 ```
 
 ## Configuration Options
