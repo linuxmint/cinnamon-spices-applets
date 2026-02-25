@@ -120,15 +120,11 @@ class EssentialsBackgroundsApplet extends Applet.IconApplet {
 
     _detectResolution() {
         try {
-            let display = global.display || global.screen;
+            let display = global.display;
             if (display) {
                 let monitor = display.get_current_monitor ? display.get_current_monitor() : 0;
-                let rect = null;
-                if (global.display && global.display.get_monitor_geometry) {
-                    rect = global.display.get_monitor_geometry(monitor);
-                } else if (global.screen && global.screen.get_monitor_geometry) {
-                    rect = global.screen.get_monitor_geometry(monitor);
-                }
+                let rect = display.get_monitor_geometry ? display.get_monitor_geometry(monitor) : null;
+
                 if (rect) {
                     this._screenWidth = rect.width;
                     this._screenHeight = rect.height;
