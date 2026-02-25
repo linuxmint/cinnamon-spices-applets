@@ -200,10 +200,23 @@ class SysMonitorCinnamon extends Applet.TextIconApplet {
      * 纯读取 /proc/meminfo 获取内存
      */
     _get_mem_usage() {
-        let content = GLib.file_get_contents("/proc/meminfo")[1].toString();
-        let total = parseInt(content.match(/MemTotal:\s+(\d+)/)[1]);
-        let available = parseInt(content.match(/MemAvailable:\s+(\d+)/)[1]);
-        return Math.round(((total - available) / total) * 100);
+        try {
+            let content = GLib.file_get_contents("/proc/meminfo")[1].toString();
+            let totalMatch = content.match(/MemTotal:\s+(\d+)/);
+            let availableMatch = content.match(/MemAvailable:\s+(\d+)/);
+            if (!totalMatch || !availableMatch) {
+                throw new Error("Unexpected /proc/meminfo format");
+            }
+            let total = parseInt(totalMatch[1]);
+            let available = parseInt(availableMatch[1]);
+            if (!isFinite(total) || total <= 0 || !isFinite(available)) {
+                throw new Error("Failed to parse memory values");
+            }
+            return Math.round(((total - available) / total) * 100);
+        } catch (e) {
+            global.logError("Failed to get memory usage: " + e);
+            return 0;
+        }
     }
 
     /**
