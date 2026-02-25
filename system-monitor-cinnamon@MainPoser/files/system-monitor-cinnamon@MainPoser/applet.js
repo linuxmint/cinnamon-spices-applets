@@ -177,8 +177,8 @@ class SysMonitorCinnamon extends Applet.TextIconApplet {
         try {
             let content = GLib.file_get_contents("/proc/net/dev")[1].toString();
             let lines = content.split('\n');
-            let totalDownload = 0;
-            let totalUpload = 0;
+            let totalDownload = BigInt(0);
+            let totalUpload = BigInt(0);
 
             for (let line of lines) {
                 // 排除环回地址 lo 和虚拟网卡，只计算物理网卡或特定前缀
@@ -187,8 +187,8 @@ class SysMonitorCinnamon extends Applet.TextIconApplet {
                     // data[0] 是网卡名
                     // data[1] 是 Receive Bytes (下载)
                     // data[9] 是 Transmit Bytes (上传)
-                    totalDownload += parseInt(data[1]);
-                    totalUpload += parseInt(data[9]);
+                    totalDownload += BigInt(data[1]);
+                    totalUpload += BigInt(data[9]);
                 }
             }
             return {
@@ -213,8 +213,9 @@ class SysMonitorCinnamon extends Applet.TextIconApplet {
         if (deltaTime <= 0) return "↓ 0.0 KB/s ↑ 0.0 KB/s";
 
         // 计算差值并转为 KB/s
-        this._stats.net.down = ((current.rx - this._stats.lastVfsData.rx) / 1024 / deltaTime).toFixed(1);
-        this._stats.net.up = ((current.tx - this._stats.lastVfsData.tx) / 1024 / deltaTime).toFixed(1);
+        // 由于 rx 和 tx 现在是 BigInt，需要转换为 Number 进行浮点除法
+        this._stats.net.down = (Number(current.rx - this._stats.lastVfsData.rx) / 1024 / deltaTime).toFixed(1);
+        this._stats.net.up = (Number(current.tx - this._stats.lastVfsData.tx) / 1024 / deltaTime).toFixed(1);
 
         this._stats.lastVfsData = current;
 
