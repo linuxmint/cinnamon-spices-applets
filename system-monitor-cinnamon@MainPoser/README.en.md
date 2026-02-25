@@ -41,8 +41,8 @@ Right-click the applet and select "Configure" to adjust the following options:
 ```
 system-monitor-cinnamon/
 ├── applet.js              # Main program file
-├── metada.json            # Applet metadata
-├── setting-schema.json    # Configuration options definition
+├── metadata.json          # Applet metadata
+├── settings-schema.json   # Configuration options definition
 ├── stylesheet.css         # Style file
 ├── icons/                 # Icon resources
 │   └── runners/

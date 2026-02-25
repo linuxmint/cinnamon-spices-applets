@@ -43,8 +43,8 @@ CPU: 45% | MEM: 2.1G/8G | ↑ 1.2MB/s ↓ 500KB/s
 ```
 system-monitor-cinnamon/
 ├── applet.js              # 主程序文件
-├── metada.json            # 小部件元数据
-├── setting-schema.json    # 配置选项定义
+├── metadata.json          # 小部件元数据
+├── settings-schema.json   # 配置选项定义
 ├── stylesheet.css         # 样式文件
 ├── icons/                 # 图标资源
 │   └── runners/
