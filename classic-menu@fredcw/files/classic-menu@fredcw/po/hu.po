@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: classic-menu@fredcw 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-29 14:23-0500\n"
+"POT-Creation-Date: 2026-02-25 03:37+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,16 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.8\n"
-
-#. metadata.json->name
-#. applet.js:16
-msgid "Classic Menu"
-msgstr "Klasszikus Menü"
-
-#. applet.js:16
-msgid "Classic Menu is for cinnamon versions 6.6 and later only."
-msgstr ""
-"A Klasszikus Menü csak a Cinnamon 6.6-os és újabb verzióihoz érhető el."
 
 #. 6.6/applet.js:397 6.6/applet.js:486
 msgid "Remove from favorites"
@@ -56,78 +46,86 @@ msgstr "Tulajdonságok"
 msgid "Uninstall"
 msgstr "Eltávolítás"
 
-#. 6.6/applet.js:759 6.6/applet.js:867
+#. 6.6/applet.js:743
 msgid "This file is no longer available"
 msgstr "Ez a fájl már nem érhető el"
 
-#. 6.6/applet.js:773 6.6/applet.js:881
+#. 6.6/applet.js:753
 msgid "Open with"
 msgstr "Megnyitás ezzel:"
 
-#. 6.6/applet.js:819 6.6/applet.js:927
+#. 6.6/applet.js:806
 msgid "Other application..."
 msgstr "Más alkalmazás..."
 
+#. 6.6/applet.js:822
+msgid "Open containing folder"
+msgstr ""
+
 #. 6.6->settings-schema.json->menu->title
-#. 6.6/applet.js:1199
+#. 6.6/applet.js:1178
 msgid "Menu"
 msgstr "Menü"
 
-#. 6.6/applet.js:1204
+#. 6.6/applet.js:1183
 msgid "Edit menu"
 msgstr "Menü szerkesztése"
 
-#. 6.6/applet.js:2458
+#. 6.6/applet.js:2444
 msgid "Places"
 msgstr "Helyek"
 
-#. 6.6/applet.js:2496
+#. 6.6/applet.js:2482
 msgid "Recent Files"
 msgstr "Legutóbbi fájlok"
 
-#. 6.6/applet.js:2511
+#. 6.6/applet.js:2497
 msgid "Clear list"
 msgstr "Lista törlése"
 
-#. 6.6/applet.js:2512
+#. 6.6/applet.js:2498
 msgid "Clear all recent documents"
 msgstr "Az összes legutóbbi dokumentum törlése"
 
-#. 6.6/applet.js:2531
+#. 6.6/applet.js:2517
 msgid "No recent documents"
 msgstr "Nincsenek friss dokumentumok"
 
-#. 6.6/applet.js:2566
+#. 6.6/applet.js:2552
 msgid "Favorites"
 msgstr "Kedvencek"
 
-#. 6.6/applet.js:2595
+#. 6.6/applet.js:2581
 msgid "All Applications"
 msgstr "Minden alkalmazás"
 
-#. 6.6/applet.js:2663
+#. 6.6/applet.js:2649
 msgid "Lock Screen"
 msgstr "Zárolási képernyő"
 
-#. 6.6/applet.js:2664
+#. 6.6/applet.js:2650
 msgid "Lock the screen"
 msgstr "A képernyő zárolása"
 
-#. 6.6/applet.js:2688
+#. 6.6/applet.js:2674
 msgid "Log Out"
 msgstr "Kijelentkezés"
 
-#. 6.6/applet.js:2689
+#. 6.6/applet.js:2675
 msgid "Leave the session"
 msgstr "Kilépés a munkamenetből"
 
-#. 6.6/applet.js:2700
+#. 6.6/applet.js:2686
 msgid "Shut Down"
 msgstr "Leállítás"
 
-#. 6.6/applet.js:2701
+#. 6.6/applet.js:2687
 msgid "Shut down the computer"
 msgstr "Kapcsold ki a számítógépet"
+
+#. metadata.json->name
+msgid "Classic Menu"
+msgstr "Klasszikus Menü"
 
 #. metadata.json->description
 msgid "The classic Cinnamon menu for cinnamon 6.6 and later"
