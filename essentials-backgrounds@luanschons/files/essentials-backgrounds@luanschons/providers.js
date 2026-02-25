@@ -80,19 +80,48 @@ function downloadImage(url, destPath, callback) {
 
             let file = Gio.File.new_for_path(destPath);
             let parentDir = file.get_parent();
+
+            const writeFile = () => {
+                file.replace_async(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, GLib.PRIORITY_DEFAULT, null, (fileObj, res) => {
+                    try {
+                        let outputStream = fileObj.replace_finish(res);
+                        outputStream.write_bytes_async(bytes, GLib.PRIORITY_DEFAULT, null, (stream, writeRes) => {
+                            try {
+                                stream.write_bytes_finish(writeRes);
+                                stream.close_async(GLib.PRIORITY_DEFAULT, null, (s, closeRes) => {
+                                    try {
+                                        s.close_finish(closeRes);
+                                        callback(null, destPath);
+                                    } catch (e) {
+                                        callback(e, null);
+                                    }
+                                });
+                            } catch (e) {
+                                callback(e, null);
+                            }
+                        });
+                    } catch (e) {
+                        callback(e, null);
+                    }
+                });
+            };
+
             if (parentDir) {
-                try {
-                    parentDir.make_directory_with_parents(null);
-                } catch (e) {
-                    if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) throw e;
-                }
+                parentDir.make_directory_with_parents_async(GLib.PRIORITY_DEFAULT, null, (dir, res) => {
+                    try {
+                        dir.make_directory_with_parents_finish(res);
+                        writeFile();
+                    } catch (e) {
+                        if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+                            writeFile();
+                        } else {
+                            callback(e, null);
+                        }
+                    }
+                });
+            } else {
+                writeFile();
             }
-
-            let outputStream = file.replace(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null);
-            outputStream.write_bytes(bytes.get_data(), null);
-            outputStream.close(null);
-
-            callback(null, destPath);
         } catch (e) {
             callback(e, null);
         }
