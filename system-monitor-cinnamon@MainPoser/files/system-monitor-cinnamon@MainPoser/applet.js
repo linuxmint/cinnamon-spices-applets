@@ -113,9 +113,9 @@ class SysMonitorCinnamon extends Applet.TextIconApplet {
 
         // 切换 0-4 帧
         this._render.frame = (this._render.frame + 1) % 5;
-        this._settings.them = this._get_them();
+        this._settings.theme = this._get_theme();
 
-        let iconPath = `${this._render.path}/icons/runners/${this._settings.runner}/${this._settings.them}/${this._settings.runner}_${this._render.frame}.svg`;
+        let iconPath = `${this._render.path}/icons/runners/${this._settings.runner}/${this._settings.theme}/${this._settings.runner}_${this._render.frame}.svg`;
 
         if (GLib.file_test(iconPath, GLib.FileTest.EXISTS)) {
             // 使用最基础、绝不报错的方法
@@ -130,9 +130,9 @@ class SysMonitorCinnamon extends Applet.TextIconApplet {
 
                 // 切换 0-4 帧
                 this._render.frame = (this._render.frame + 1) % 5;
-                this._settings.them = this._get_them();
+                this._settings.theme = this._get_theme();
 
-                let iconPath = `${this._render.path}/icons/runners/${this._settings.runner}/${this._settings.them}/${this._settings.runner}_${this._render.frame}.svg`;
+                let iconPath = `${this._render.path}/icons/runners/${this._settings.runner}/${this._settings.theme}/${this._settings.runner}_${this._render.frame}.svg`;
 
                 if (GLib.file_test(iconPath, GLib.FileTest.EXISTS)) {
                     // 使用最基础、绝不报错的方法
@@ -262,7 +262,7 @@ class SysMonitorCinnamon extends Applet.TextIconApplet {
     /**
      * 核心: 决定当前应该使用哪个文件夹
      */
-    _get_them() {
+    _get_theme() {
         // 如果用户手动选择了黑色或白色，直接返回
         if (this._settings.icon_theme === "black") return "black";
         if (this._settings.icon_theme === "white") return "white";
