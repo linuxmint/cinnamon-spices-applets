@@ -407,10 +407,10 @@ class ApplicationContextMenuItem extends PopupMenu.PopupBaseMenuItem {
                 closeMenu = false;
                 break;
             case "app_properties":
-                Util.spawnCommandLine("cinnamon-desktop-editor -mlauncher -o" + GLib.shell_quote(this._appButton.app.get_app_info().get_filename()));
+                Util.spawn(["cinnamon-desktop-editor", "-mlauncher", "-o", this._appButton.app.get_app_info().get_filename()]);
                 break;
             case "uninstall":
-                Util.spawnCommandLine("/usr/bin/cinnamon-remove-application '" + this._appButton.app.get_app_info().get_filename() + "'");
+                Util.spawn(["cinnamon-remove-application", this._appButton.app.get_app_info().get_filename()]);
                 break;
             case "offload_launch":
                 try {
@@ -808,7 +808,7 @@ class FileButton extends SimpleMenuItem {
                 false,
                 [],
                 () => {
-                    Util.spawnCommandLine("nemo-open-with " + this.uri);
+                    Util.spawn(["nemo-open-with", this.uri]);
                     this.applet.toggleContextMenu(this);
                     this.applet.menu.close();
                 }
@@ -1181,7 +1181,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this.menuManager.addMenu(this.menu);
 
         const edit_item = new PopupMenu.PopupIconMenuItem(_("Edit menu"), "document-edit", St.IconType.SYMBOLIC);
-        edit_item.connect("activate", () => Util.spawnCommandLine("cinnamon-menu-editor"));
+        edit_item.connect("activate", () => Util.spawn(["cinnamon-menu-editor"]));
         this._applet_context_menu.addMenuItem(edit_item);
 
         this.settings = new Settings.AppletSettings(this, __meta.uuid, instance_id);
@@ -1469,7 +1469,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
 
     // settings button callbacks
     _launch_editor() {
-        Util.spawnCommandLine("cinnamon-menu-editor");
+        Util.spawn(["cinnamon-menu-editor"]);
     }
 
     _reset_menu_size() {
@@ -2656,10 +2656,10 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             let screensaver_dialog = GLib.find_program_in_path("cinnamon-screensaver-command");
             if (screensaver_dialog) {
                 if (screensaver_settings.get_boolean("ask-for-away-message")) {
-                    Util.spawnCommandLine("cinnamon-screensaver-lock-dialog");
+                    Util.spawn(["cinnamon-screensaver-lock-dialog"]);
                 }
                 else {
-                    Util.spawnCommandLine("cinnamon-screensaver-command --lock");
+                    Util.spawn(["cinnamon-screensaver-command", "--lock"]);
                 }
             }
             else {
