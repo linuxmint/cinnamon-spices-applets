@@ -35,7 +35,7 @@ imports.searchPath.unshift(AppletDir);
 const Providers = imports.providers;
 
 const WALLPAPER_DIR = GLib.build_filenamev([GLib.get_user_cache_dir(), "essentials-backgrounds"]);
-const FAVORITES_DIR = GLib.build_filenamev([GLib.get_home_dir(), "Pictures", "Essentials Backgrounds"]);
+const FAVORITES_DIR = GLib.build_filenamev([GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES), "Essentials Backgrounds"]);
 const MAX_HISTORY = 5;
 
 class EssentialsBackgroundsApplet extends Applet.IconApplet {
@@ -641,16 +641,14 @@ class EssentialsBackgroundsApplet extends Applet.IconApplet {
     // ========================
 
     _ensureDir(path) {
-        let dir = Gio.File.new_for_path(path);
-        dir.make_directory_with_parents_async(GLib.PRIORITY_DEFAULT, null, (file, res) => {
-            try {
-                file.make_directory_with_parents_finish(res);
-            } catch (e) {
-                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
-                    global.logWarning("[EssentialsBackgrounds] Cannot create dir: " + path + " - " + e.message);
-                }
+        try {
+            let dir = Gio.File.new_for_path(path);
+            dir.make_directory_with_parents(null);
+        } catch (e) {
+            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+                global.logWarning("[EssentialsBackgrounds] Cannot create dir: " + path + " - " + e.message);
             }
-        });
+        }
     }
 
     _cleanOldFiles(keepPath) {
