@@ -9,6 +9,7 @@ import { installMpvWithMpris } from "../../services/mpv/CheckInstallation";
 import { createYouTubeDownloadIcon } from "./YoutubeDownloadIcon";
 import { notify } from "../../lib/notify";
 import { createRadioContextMenu } from "../RadioContextMenu";
+import { configs } from "../../services/Config";
 
 const { ScrollDirection } = imports.gi.Clutter;
 
@@ -32,7 +33,7 @@ const createRadioAppletContainer = (props: CreateRadioAppletContainerProps) => {
   let installationInProgress = false;
 
   const appletContainer = createAppletContainer({
-    onMiddleClick: () => mpvHandler.togglePlayPause(),
+    onMiddleClick: handleMiddleClick,
     onRemoved: handleAppletRemoved,
     onClick: handleClick,
     onRightClick: () => {
@@ -42,6 +43,7 @@ const createRadioAppletContainer = (props: CreateRadioAppletContainerProps) => {
     onScroll: handleScroll,
     ...props
   });
+
 
   [
     createRadioAppletIcon(),
@@ -66,6 +68,20 @@ const createRadioAppletContainer = (props: CreateRadioAppletContainerProps) => {
   function handleAppletRemoved() {
     mpvHandler?.deactivateAllListener();
     mpvHandler?.stop();
+  }
+
+  function handleMiddleClick(){
+
+    const lastUrl = configs.settingsObject.lastUrl
+
+    if (mpvHandler.getPlaybackStatus() !== "Stopped") {
+      mpvHandler.togglePlayPause()
+      return
+    }
+
+    if (mpvHandler.getPlaybackStatus() === 'Stopped' && lastUrl) {
+      mpvHandler.setUrl(lastUrl)
+    }
   }
 
   function handleScroll(scrollDirection: imports.gi.Clutter.ScrollDirection) {
