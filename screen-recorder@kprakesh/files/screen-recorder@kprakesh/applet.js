@@ -30,6 +30,8 @@ const Main = imports.ui.main;
 class ScreenRecorderApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
+        
+        this.metadata = metadata;
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.settings.bind("record-audio", "recordAudio");
@@ -71,59 +73,71 @@ class ScreenRecorderApplet extends Applet.TextIconApplet {
         }
     }
 
+    // Ensure ffmpeg is installed before attempting to record; notify user if missing
+    checkDependencies() {
+        if (!GLib.find_program_in_path("ffmpeg")) {
+            let title = "Screen Recorder: Dependency Missing";
+            let msg = "Please open your terminal and run:\n\nsudo apt install ffmpeg";
+            
+            Main.notify(title, msg); 
+            
+            return false;
+        }
+        return true;
+    }
+    
     startRecording() {
     
+        if (!this.checkDependencies()) return;
+
         let monitor = Main.layoutManager.primaryMonitor;
         let screen_resolution = `${monitor.width}x${monitor.height}`;
-        
         let now = GLib.DateTime.new_now_local();
         let timestamp = now.format("%Y-%m-%d_%H-%M-%S");
-        let ext = this.outputFormat; 
         
-        let save_dir = this.saveDirectory;
-        if (save_dir.startsWith("~")) {
-            save_dir = save_dir.replace("~", GLib.get_home_dir());
-        }
-        
-        let output_file = `${save_dir}/ScreenRecord_${timestamp}.${ext}`;
+        let save_dir = this.saveDirectory.replace("~", GLib.get_home_dir());
+        let output_file = `${save_dir}/ScreenRecord_${timestamp}.${this.outputFormat}`;
+
+        // Properly escape the path for the shell
+        let escaped_output = GLib.shell_quote(output_file);
 
         let audio_flag = this.recordAudio ? "-f pulse -i $(pactl get-default-sink).monitor" : "";
+        let codec_flags = (this.outputFormat === "webm") 
+            ? "-c:v libvpx -crf 10 -b:v 1M -c:a libvorbis" 
+            : "-c:v libx264 -preset ultrafast -c:a aac";
 
-        let codec_flags = "";
-        if (ext === "webm") {
-            codec_flags = this.recordAudio ? "-c:v libvpx -crf 10 -b:v 1M -c:a libvorbis" : "-c:v libvpx -crf 10 -b:v 1M";
-        } else {
-            codec_flags = this.recordAudio ? "-c:v libx264 -preset ultrafast -c:a aac" : "-c:v libx264 -preset ultrafast";
+        let ffmpeg_cmd = `ffmpeg -video_size ${screen_resolution} -framerate 30 -f x11grab -i :0.0 ${audio_flag} ${codec_flags} ${escaped_output}`;
+
+        // Use GLib to spawn so we can track the PID
+        let [success, argv] = GLib.shell_parse_argv(`bash -c '${ffmpeg_cmd}'`);
+        if (success) {
+            let [result, pid] = GLib.spawn_async(null, argv, null, GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD, null);
+            this.current_pid = pid;
+
+            GLib.child_watch_add(GLib.PRIORITY_DEFAULT, this.current_pid, (pid, status) => {
+                if (this.isRecording) this.stopRecording(true); // Reset UI if ffmpeg dies
+                GLib.spawn_close_pid(pid);
+            });
         }
 
-        let ffmpeg_cmd = `ffmpeg -video_size ${screen_resolution} -framerate 30 -f x11grab -i :0.0 ${audio_flag} ${codec_flags} "${output_file}"`;
-
-        Util.spawn(["bash", "-c", ffmpeg_cmd]);
-        
-        // --- UI Updates for Recording ---
         this.set_applet_icon_symbolic_name("media-playback-stop");
-        this.set_applet_label(" REC ");
-        this._applet_icon.style = "color: #ff4444;"; 
-        // --------------------------------
-
+        this.set_applet_label("REC");
+        this._applet_icon.style = "color: #ff4444;";  
         this.recordMenuItem.label.set_text("Stop Recording");
-        this.recordMenuItem.setIconSymbolicName("media-playback-stop");
-        
         this.isRecording = true;
     }
 
-    stopRecording() {
-        Util.spawn(["killall", "-SIGINT", "ffmpeg"]);
+    stopRecording(was_crash = false) {
+        if (this.current_pid && !was_crash) {
+            Util.spawn(["kill", "-SIGINT", this.current_pid.toString()]);
+        }
+        this.current_pid = null;
         
-        // --- UI Updates for Stopped ---
         this.set_applet_icon_symbolic_name("camera-video-symbolic");
-        this.set_applet_label(""); 
+        this.set_applet_label("");
         this._applet_icon.style = ""; 
-        // ------------------------------
-        
         this.recordMenuItem.label.set_text("Start Recording");
-        this.recordMenuItem.setIconSymbolicName("media-record");
-        
+        this.set_applet_tooltip("Screen Recorder");
         this.isRecording = false;
     }
 }
