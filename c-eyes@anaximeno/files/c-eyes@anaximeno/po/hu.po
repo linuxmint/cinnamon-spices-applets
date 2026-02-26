@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-10 17:17-0100\n"
-"PO-Revision-Date: 2026-01-01 22:47+0100\n"
+"PO-Revision-Date: 2026-02-24 09:35+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -483,57 +483,53 @@ msgstr "Pislogás effektus"
 #. 6.2->settings-schema.json->blink-period->units
 #. 6.2->settings-schema.json->blink-gap->units
 msgid "seconds"
-msgstr ""
+msgstr "másodperc"
 
 #. 6.2->settings-schema.json->blink-period->description
 msgid "Blink Period"
 msgstr "Pislogási időszak"
 
 #. 6.2->settings-schema.json->blink-period->tooltip
-#, fuzzy
 msgid ""
 "This setting controls the duration of a full blink cycle (closing and "
 "opening)."
 msgstr ""
 "Ez a beállítás szabályozza a teljes pislogási ciklus (zárás és nyitás) "
-"időtartamát. Ezredmásodpercben mérve."
+"időtartamát."
 
 #. 6.2->settings-schema.json->blink-gap->description
 msgid "Blink Gap"
 msgstr "Pislogás űr"
 
 #. 6.2->settings-schema.json->blink-gap->tooltip
-#, fuzzy
 msgid "This setting controls the time gap between two consecutive blinks."
 msgstr ""
-"Ez a beállítás szabályozza a két egymást követő pislogás közötti időközt. "
-"Ezredmásodpercben mérve."
+"Ez a beállítás szabályozza a két egymást követő pislogás közötti időközt."
 
 #. 6.2->settings-schema.json->sleep-effect-enabled->description
-#, fuzzy
 msgid "Sleep Effect"
-msgstr "Effektusok engedélyezése"
+msgstr "Alvás effektus"
 
 #. 6.2->settings-schema.json->sleep-effect-enabled->tooltip
 msgid ""
 "When enabled, the eyes will slowly close when the system is idle and open "
 "again when activity is detected."
 msgstr ""
+"Engedélyezéskor a szemek lassan lecsukódnak, amikor a rendszer tétlen, és "
+"újra kinyílnak, amikor aktivitást észlel."
 
 #. 6.2->settings-schema.json->idle-delay->units
 msgid "minutes"
-msgstr ""
+msgstr "perc"
 
 #. 6.2->settings-schema.json->idle-delay->description
 msgid "Idle Delay"
 msgstr "Üresjárati késleltetés"
 
 #. 6.2->settings-schema.json->idle-delay->tooltip
-#, fuzzy
 msgid ""
 "This setting controls the time of inactivity (no mouse or keyboard input) "
 "after which the system is considered idle."
 msgstr ""
 "Ez a beállítás szabályozza az inaktivitás idejét (nincs egér- vagy "
-"billentyűzetbevitel), amely után a rendszer tétlennek tekintendő. "
-"Ezredmásodpercben mérve."
+"billentyűzetbevitel), amely után a rendszer tétlennek tekintendő."
