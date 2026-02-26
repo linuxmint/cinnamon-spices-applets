@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-18 18:19+0100\n"
-"PO-Revision-Date: 2025-04-10 14:10+0200\n"
+"PO-Revision-Date: 2026-02-24 09:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.8\n"
 
 #. metadata.json->name
 #. applet.js:232
@@ -227,7 +227,7 @@ msgstr "⛓ Egyéni"
 
 #. settings-schema.json->section_SettingsWindow->title
 msgid "This settings window"
-msgstr ""
+msgstr "Ez a beállítások ablak"
 
 #. settings-schema.json->section_Display->title
 #. settings-schema.json->section_tempOptions->title
@@ -253,7 +253,7 @@ msgstr ""
 
 #. settings-schema.json->section_dependencies->title
 msgid "Dependencies"
-msgstr ""
+msgstr "Függőségek"
 
 #. settings-schema.json->section_tempDisktemp->title
 msgid "For the time being, disk temperature can only be read by root."
@@ -298,59 +298,63 @@ msgstr "Egyéni szenzorok"
 
 #. settings-schema.json->window_maximizing->description
 msgid "How to set its size"
-msgstr ""
+msgstr "Hogyan kell beállítani a méretét"
 
 #. settings-schema.json->window_maximizing->options
 msgid "let it be"
-msgstr ""
+msgstr "Legyen"
 
 #. settings-schema.json->window_maximizing->options
 msgid "maximize horizontally"
-msgstr ""
+msgstr "vízszintes maximalizálás"
 
 #. settings-schema.json->window_maximizing->options
 msgid "maximize vertically"
-msgstr ""
+msgstr "Függőleges maximalizálás"
 
 #. settings-schema.json->window_maximizing->options
 msgid "maximize everything"
-msgstr ""
+msgstr "Minden maximalizálása"
 
 #. settings-schema.json->window_maximizing->options
 msgid "fixed"
-msgstr ""
+msgstr "rögzített"
 
 #. settings-schema.json->window_maximizing->tooltip
 msgid "Future window openings."
-msgstr ""
+msgstr "Jövőbeli ablaknyílások."
 
 #. settings-schema.json->window_width->description
 msgid "Width"
-msgstr ""
+msgstr "Szélesség"
 
 #. settings-schema.json->window_width->tooltip
 msgid ""
 "This number must match your screen configuration.\n"
 "Minimum value: 800."
 msgstr ""
+"Ennek a számnak meg kell egyeznie a képernyő konfigurációjával.\n"
+"Minimális érték: 800."
 
 #. settings-schema.json->window_height->description
 msgid "Height"
-msgstr ""
+msgstr "Magasság"
 
 #. settings-schema.json->window_height->tooltip
 msgid ""
 "This number must match your screen configuration.\n"
 "Minimum value: 100."
 msgstr ""
+"Ennek a számnak meg kell egyeznie a képernyő konfigurációjával.\n"
+"Minimális érték: 100."
 
 #. settings-schema.json->window_set_current_size->description
 msgid "Set to the approximate current size and position"
-msgstr ""
+msgstr "Beállítás a hozzávetőleges aktuális méretre és pozícióra"
 
 #. settings-schema.json->window_label->description
 msgid "The exact size and position will depend on Cinnamon."
-msgstr ""
+msgstr "A pontos méret és pozíció a Cinnamontól függ."
 
 #. settings-schema.json->interval->options
 msgid "1"
@@ -560,7 +564,7 @@ msgstr ""
 
 #. settings-schema.json->do_not_check_dependencies->description
 msgid "Do not check dependencies"
-msgstr ""
+msgstr "Ne ellenőrizze a függőségeket"
 
 #. settings-schema.json->do_not_check_dependencies->tooltip
 msgid ""
@@ -568,6 +572,9 @@ msgid ""
 "box. Be careful with dependencies that are necessary for this applet to "
 "function properly."
 msgstr ""
+"Ha nem szeretne bizonyos függőségeket (pl. betűtípusokat) telepíteni, "
+"jelölje be ezt a négyzetet. Legyen óvatos azokkal a függőségekkel, amelyek "
+"szükségesek az applet megfelelő működéséhez."
 
 #. settings-schema.json->make_disktemp_readable_by_user->description
 msgid "Make disk temperature user-readable"

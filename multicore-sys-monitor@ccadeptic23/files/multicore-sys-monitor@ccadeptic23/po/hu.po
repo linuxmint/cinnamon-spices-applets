@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-20 15:19+0100\n"
-"PO-Revision-Date: 2026-01-11 08:39+0100\n"
+"PO-Revision-Date: 2026-02-26 14:30+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.8\n"
 
 #. 6.4->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
@@ -437,7 +437,7 @@ msgstr "Eszköztipp"
 
 #. 6.4->settings-schema.json->sectionCPUTemperature->title
 msgid "CPU Temperature"
-msgstr ""
+msgstr "CPU Hőmérséklet"
 
 #. 6.4->settings-schema.json->sectionCPUColorsByActivity->title
 #. 6.0/prefsui.glade:538 5.6/prefsui.glade:538 4.0/prefsui.glade:538
@@ -482,43 +482,43 @@ msgstr "Adjon hozzá egy szegélyt minden grafikonhoz"
 
 #. 6.4->settings-schema.json->borderRadius->description
 msgid "Radius of curvature in corners"
-msgstr ""
+msgstr "Sarkok görbületi sugara"
 
 #. 6.4->settings-schema.json->graphStep->options
 msgid "1px"
-msgstr ""
+msgstr "1px"
 
 #. 6.4->settings-schema.json->graphStep->options
 msgid "2px"
-msgstr ""
+msgstr "2px"
 
 #. 6.4->settings-schema.json->graphStep->options
 msgid "4px"
-msgstr ""
+msgstr "4px"
 
 #. 6.4->settings-schema.json->graphStep->options
 msgid "8px"
-msgstr ""
+msgstr "8px"
 
 #. 6.4->settings-schema.json->graphStep->options
 msgid "16px"
-msgstr ""
+msgstr "16px"
 
 #. 6.4->settings-schema.json->graphStep->options
 msgid "32px"
-msgstr ""
+msgstr "32px"
 
 #. 6.4->settings-schema.json->graphStep->options
 msgid "64px"
-msgstr ""
+msgstr "64px"
 
 #. 6.4->settings-schema.json->graphStep->description
 msgid "The width of each graphic must be a multiple of:"
-msgstr ""
+msgstr "Minden grafika szélességének a következők többszörösének kell lennie:"
 
 #. 6.4->settings-schema.json->graphStepApply->description
 msgid "Apply this multiple"
-msgstr ""
+msgstr "Alkalmazd ezt a többszöröst"
 
 #. 6.4->settings-schema.json->graphSpacing->description
 msgid "Graph spacing"
@@ -608,45 +608,48 @@ msgstr "Összes egyesítése"
 
 #. 6.4->settings-schema.json->CPU_showTemp->description
 msgid "Show the CPU temperature"
-msgstr ""
+msgstr "Mutassa meg a CPU hőmérsékletét"
 
 #. 6.4->settings-schema.json->CPU_tempInFahrenheit->description
 msgid "Fahrenheit degrees"
-msgstr ""
+msgstr "Fahrenheit fok"
 
 #. 6.4->settings-schema.json->CPU_tempPath->description
 msgid "Path to the system file used to check the CPU temperature"
 msgstr ""
+"A CPU hőmérsékletének ellenőrzéséhez használt rendszerfájl elérési útja"
 
 #. 6.4->settings-schema.json->CPU_tempHigh->description
 msgid "High CPU Temperature (°C)"
-msgstr ""
+msgstr "Magas CPU-hőmérséklet (°C)"
 
 #. 6.4->settings-schema.json->CPU_tempHigh->tooltip
 msgid "Refer to your CPU documentation."
-msgstr ""
+msgstr "Lásd a CPU dokumentációját."
 
 #. 6.4->settings-schema.json->CPU_tempCrit->description
 msgid "Critical CPU Temperature (°C)"
-msgstr ""
+msgstr "Kritikus CPU-hőmérséklet (°C)"
 
 #. 6.4->settings-schema.json->CPU_tempCrit->tooltip
 msgid ""
 "Refer to your CPU documentation.\n"
 "Must be greater than the High CPU Temperature."
 msgstr ""
+"Lásd a CPU dokumentációját.\n"
+"Magasabbnak kell lennie, mint a magas CPU hőmérséklet."
 
 #. 6.4->settings-schema.json->CPU_tempColor->description
 msgid "Normal Temperature Color"
-msgstr ""
+msgstr "Normál hőmérséklet szín"
 
 #. 6.4->settings-schema.json->CPU_tempColorHigh->description
 msgid "High Temperature Color"
-msgstr ""
+msgstr "Magas hőmérséklet szín"
 
 #. 6.4->settings-schema.json->CPU_tempColorCrit->description
 msgid "Critical Temperature Color"
-msgstr ""
+msgstr "Kritikus hőmérséklet szín"
 
 #. 6.4->settings-schema.json->CPU_byActivity->description
 #. 6.0/prefsui.glade:433 5.6/prefsui.glade:433 4.0/prefsui.glade:433

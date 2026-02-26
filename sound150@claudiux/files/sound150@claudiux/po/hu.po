@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-11 18:34+0100\n"
-"PO-Revision-Date: 2026-01-02 14:12+0100\n"
+"PO-Revision-Date: 2026-02-26 14:38+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -363,9 +363,8 @@ msgid "Install imagemagick"
 msgstr "Az imagemagick telepítése"
 
 #. 6.6/lib/balanceSlider.js:20
-#, fuzzy
 msgid "Balance"
-msgstr "Mégse"
+msgstr "Egyensúly"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
@@ -1137,11 +1136,11 @@ msgstr "Helyi menü"
 
 #. 6.6->settings-schema.json->sectionMenu3->title
 msgid "Output Devices Not Displayed In The Context Menu"
-msgstr ""
+msgstr "A kimeneti eszközök nem jelennek meg a helyi menüben"
 
 #. 6.6->settings-schema.json->sectionMenu4->title
 msgid "Input Devices Not Displayed In The Context Menu"
-msgstr ""
+msgstr "A beviteli eszközök nem jelennek meg a helyi menüben"
 
 #. 6.6->settings-schema.json->sectionBehavior1->title
 #. 6.4->settings-schema.json->sectionBehavior1->title
@@ -1170,7 +1169,7 @@ msgstr "Távolítsa el az inkompatibilis bővítményeket"
 
 #. 6.6->settings-schema.json->sectionSound6->title
 msgid "Advertisement"
-msgstr ""
+msgstr "Hirdetés"
 
 #. 6.6->settings-schema.json->sectionCommands->title
 #. 6.4->settings-schema.json->sectionCommands->title
@@ -1180,7 +1179,7 @@ msgstr "Egyéni parancsok"
 #. 6.6->settings-schema.json->userMenuWidth->description
 #. 6.4->settings-schema.json->userMenuWidth->description
 msgid "Menu width (in pixels)"
-msgstr ""
+msgstr "Menü szélessége (pixelben)"
 
 #. 6.6->settings-schema.json->dontShowAnyImageInMenu->description
 #. 6.4->settings-schema.json->dontShowAnyImageInMenu->description
@@ -1281,47 +1280,48 @@ msgid ""
 "In the list below, add a line containing part of its name (case sensitive) "
 "for each unwanted device."
 msgstr ""
+"Az alábbi listában adjon hozzá egy sort, amely tartalmazza a nem kívánt "
+"eszköz nevének egy részét (kis- és nagybetűérzékeny)."
 
 #. 6.6->settings-schema.json->ignoredOutputDevices->description
 #. 6.6->settings-schema.json->ignoredInputDevices->description
-#, fuzzy
 msgid "Unwanted devices"
-msgstr "Bemeneti eszköz"
+msgstr "Nem kívánt eszközök"
 
 #. 6.6->settings-schema.json->ignoredOutputDevices->columns->title
 #. 6.6->settings-schema.json->ignoredInputDevices->columns->title
 msgid "Part of the device name"
-msgstr ""
+msgstr "Az eszköz nevének egy része"
 
 #. 6.6->settings-schema.json->keyBalanceLeft->description
 msgid "Balance: to the left"
-msgstr ""
+msgstr "Egyensúly: balra"
 
 #. 6.6->settings-schema.json->keyBalanceLeft->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to increase the volume on the left side."
-msgstr "Hang beállításokat megjelenítő billentyűkombináció beállítása."
+msgstr ""
+"Billentyűparancs-összekapcsolás(oka)t állít be a bal oldali hangerő "
+"növeléséhez."
 
 #. 6.6->settings-schema.json->keyBalanceRight->description
 msgid "Balance: to the right"
-msgstr ""
+msgstr "Egyensúly: jobbra"
 
 #. 6.6->settings-schema.json->keyBalanceRight->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to increase the volume on the right side."
-msgstr "Hang beállításokat megjelenítő billentyűkombináció beállítása."
+msgstr ""
+"Billentyűparancs-kiosztás beállítása a jobb oldali hangerő növeléséhez."
 
 #. 6.6->settings-schema.json->keyBalanceCenter->description
 msgid "Balance: re-init"
-msgstr ""
+msgstr "Egyensúly: újraindítás"
 
 #. 6.6->settings-schema.json->keyBalanceCenter->tooltip
-#, fuzzy
 msgid ""
 "Set keybinding(s) to rebalance the volume between the left and right sides."
 msgstr ""
-"Állítsa be a billentyűkombináció(ka)t, hogy a következő lejátszóra váltson, "
-"ha létezik."
+"Billentyűzet-összerendelés(ek) beállítása a bal és jobb oldal közötti "
+"hangerő-egyensúlyozáshoz."
 
 #. 6.6->settings-schema.json->runAsync->description
 #. 6.4->settings-schema.json->runAsync->description
@@ -1435,15 +1435,15 @@ msgstr "Parancs"
 
 #. 6.6->settings-schema.json->adv_avoid->description
 msgid "Try to avoid advertisement"
-msgstr ""
+msgstr "Próbáld meg elkerülni a reklámokat"
 
 #. 6.6->settings-schema.json->adv_volume->description
 msgid "Volume during advertisements"
-msgstr ""
+msgstr "Hangerő a hirdetések alatt"
 
 #. 6.6->settings-schema.json->adv_icon->description
 msgid "Symbolic icon displayed during advertisements"
-msgstr ""
+msgstr "Szimbolikus ikon, amely a hirdetések során jelenik meg"
 
 #. 6.6->settings-schema.json->adv_label->description
 msgid ""
@@ -1452,14 +1452,18 @@ msgid ""
 "the value indicated above.\n"
 "The volume is restored at the end of the advertisement."
 msgstr ""
+"A hirdetéseket a cím alapján észleli a rendszer.\n"
+"Ha egy cím legalább egyet tartalmaz ezek közül a szavak közül, a hangerő a "
+"fent megadott értékre csökken.\n"
+"A hangerő a hirdetés végén visszaáll."
 
 #. 6.6->settings-schema.json->adv_list->description
 msgid "Advertisement list"
-msgstr ""
+msgstr "Hirdetéslista"
 
 #. 6.6->settings-schema.json->adv_list->columns->title
 msgid "Part of title"
-msgstr ""
+msgstr "A cím egy része"
 
 #. 2.8->settings-schema.json->percentMaxVol->options
 #. 3.4->settings-schema.json->percentMaxVol->options

@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-01-13 00:07+0100\n"
-"PO-Revision-Date: 2026-01-11 08:26+0100\n"
+"PO-Revision-Date: 2026-02-24 09:24+0100\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.8\n"
 
 #. applet.js:288
 msgid "unassigned"
@@ -1226,13 +1226,15 @@ msgstr ""
 
 #. settings-schema.json->window-width->description
 msgid "Width (in pixels)"
-msgstr ""
+msgstr "Szélesség (képpontokban)"
 
 #. settings-schema.json->window-width->tooltip
 msgid ""
 "Limited by the width of the screen.\n"
 "Will only be valid from the next time this window is opened."
 msgstr ""
+"A képernyő szélessége korlátozza.\n"
+"Csak az ablak következő megnyitásától lesz érvényes."
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
