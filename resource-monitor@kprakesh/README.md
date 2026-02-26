@@ -36,7 +36,7 @@ This applet is designed for efficiency. By parsing `/proc/stat` and `/proc/memin
 * **Update Interval**: Default 2 seconds.
 
 ## 📄 License
-This project is licensed under the GPL-3.0 License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GPL-3.0 License.
 
 ## 🤝 Support & Contributions
 Developed by **kprakesh**. Part of the broader Linux Mint ecosystem contribution alongside projects like [Symphonie](https://github.com/kpr-dev590/Symphonie).
