@@ -4,7 +4,6 @@ const Main = imports.ui.main;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const Gio = imports.gi.Gio;
-const Lang = imports.lang;
 const uuid = "AlwaysOn@krivetochka";
 const symbolic_icon_name = "lapt_symb_empty";
 const symbolic_active_icon_name = "lapt_symb";
@@ -47,7 +46,7 @@ class AlwaysOn extends Applet.IconApplet {
         this.settings.bind("hide-applet", "hide_applet_switcher", this.on_settings_changed);
         this.settings.bind("key-bind", "keybind", this.on_shortcut_changed);
 
-        this._panelEditSignalId = global.settings.connect('changed::' + PANEL_EDIT_MODE_KEY, Lang.bind(this, this.on_settings_changed));
+        this._panelEditSignalId = global.settings.connect('changed::' + PANEL_EDIT_MODE_KEY, this.on_settings_changed.bind(this));
         this._prepareForShutdownSignalId = this._systemBus.signal_subscribe(
             "org.freedesktop.login1",
             "org.freedesktop.login1.Manager",
@@ -55,7 +54,7 @@ class AlwaysOn extends Applet.IconApplet {
             "/org/freedesktop/login1",
             null,
             Gio.DBusSignalFlags.NONE,
-            Lang.bind(this, this._onPrepareForShutdown)
+            this._onPrepareForShutdown.bind(this)
         );
         this.on_shortcut_changed();
         this.on_settings_changed();
@@ -197,7 +196,7 @@ class AlwaysOn extends Applet.IconApplet {
 
     on_shortcut_changed() {
         Main.keybindingManager.removeHotKey(this._uuid);
-        Main.keybindingManager.addHotKey(this._uuid, this.keybind, Lang.bind(this, this.on_applet_clicked));
+        Main.keybindingManager.addHotKey(this._uuid, this.keybind, this.on_applet_clicked.bind(this));
     }
 
     on_applet_removed_from_panel() {
