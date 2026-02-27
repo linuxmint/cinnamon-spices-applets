@@ -45,7 +45,7 @@
         "mem_c": {
             "type": "section",
             "title": "Colors",
-            "keys": ["mem_color_0", "mem_color_1"]
+            "keys": ["mem_color_0", "mem_color_1", "mem_color_2", "mem_color_3"]
         },
         "swap": {
             "type": "page",
@@ -248,7 +248,17 @@
     },
     "mem_color_1": {
         "type": "colorchooser",
+        "default": "rgb(117,78,210)",
+        "description": "Shared color"
+    },
+    "mem_color_2": {
+        "type": "colorchooser",
         "default": "rgb(52,101,164)",
+        "description": "Buffer color"
+    },
+    "mem_color_3": {
+        "type": "colorchooser",
+        "default": "rgb(220,182,48)",
         "description": "Cached color"
     },
     "swap_enabled": {
