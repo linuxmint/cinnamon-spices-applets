@@ -4426,38 +4426,48 @@ function addDownloadingSongsChangeListener(callback) {
 
 
 
+
 const { PanelItemTooltip } = imports.ui.tooltips;
 const { markup_escape_text } = imports.gi.GLib;
 function createRadioAppletTooltip(args) {
-    const { appletContainer, } = args;
+    const { appletContainer } = args;
     const tooltip = new PanelItemTooltip(appletContainer, undefined, __meta.orientation);
-    tooltip['_tooltip'].set_style("text-align: left;");
-    const setRefreshTooltip = () => {
+    tooltip["_tooltip"].set_style("text-align: left;");
+    const getTooltipLines = () => {
         var _a;
-        // @ts-ignore
-        tooltip.orientation = __meta.orientation;
-        if (mpvHandler.getPlaybackStatus() === 'Stopped') {
-            tooltip.set_markup("Radio++");
-            return;
+        if (mpvHandler.getPlaybackStatus() === "Stopped") {
+            const lines = ["Radio++"];
+            const lastUrl = configs.settingsObject.lastUrl;
+            if (lastUrl) {
+                lines.push("");
+                lines.push("<b>Hint</b>: Middle click to play last station");
+            }
+            return lines;
         }
         const lines = [
-            [`<b>Volume</b>`],
-            [`${(_a = mpvHandler.getVolume()) === null || _a === void 0 ? void 0 : _a.toString()} %`],
-            [],
-            ['<b>Songtitle</b>'],
-            [`${markup_escape_text(mpvHandler.getCurrentTitle() || '', -1)}`],
-            [],
-            ['<b>Station</b>'],
-            [`${markup_escape_text(mpvHandler.getCurrentChannelName() || '', -1)} `],
+            `<b>Volume</b>`,
+            `${(_a = mpvHandler.getVolume()) === null || _a === void 0 ? void 0 : _a.toString()} %`,
+            "",
+            "<b>Songtitle</b>",
+            `${markup_escape_text(mpvHandler.getCurrentTitle() || "", -1)}`,
+            "",
+            "<b>Station</b>",
+            `${markup_escape_text(mpvHandler.getCurrentChannelName() || "", -1)} `,
         ];
         const currentDownloadingSongs = getCurrentDownloadingSongs();
         if (currentDownloadingSongs.length !== 0) {
             [
-                [],
-                ['<b>Songs downloading:</b>'],
-                ...currentDownloadingSongs.map(downloadingSong => [markup_escape_text(downloadingSong, -1)])
-            ].forEach(line => lines.push(line));
+                "",
+                "<b>Songs downloading:</b>",
+                ...currentDownloadingSongs.map((downloadingSong) => markup_escape_text(downloadingSong, -1)),
+            ].forEach((line) => lines.push(line));
         }
+        return lines;
+    };
+    const setRefreshTooltip = () => {
+        // @ts-ignore
+        tooltip.orientation = __meta.orientation;
+        const lines = getTooltipLines();
         const markupTxt = lines.join(`\n`);
         tooltip.set_markup(markupTxt);
     };
@@ -4467,8 +4477,8 @@ function createRadioAppletTooltip(args) {
         mpvHandler.addTitleChangeHandler,
         mpvHandler.addChannelChangeHandler,
         addDownloadingSongsChangeListener,
-        addOnAppletMovedCallback
-    ].forEach(cb => cb(setRefreshTooltip));
+        addOnAppletMovedCallback,
+    ].forEach((cb) => cb(setRefreshTooltip));
     setRefreshTooltip();
     return tooltip;
 }
@@ -5821,6 +5831,7 @@ function createRadioContextMenu(args) {
 
 
 
+
 const { ScrollDirection: RadioAppletContainer_ScrollDirection } = imports.gi.Clutter;
 let appletContainer;
 const getRadioAppletContainer = (props) => {
@@ -5833,7 +5844,7 @@ const getRadioAppletContainer = (props) => {
 };
 const createRadioAppletContainer = (props) => {
     let installationInProgress = false;
-    const appletContainer = createAppletContainer(Object.assign({ onMiddleClick: () => mpvHandler.togglePlayPause(), onRemoved: handleAppletRemoved, onClick: handleClick, onRightClick: () => {
+    const appletContainer = createAppletContainer(Object.assign({ onMiddleClick: handleMiddleClick, onRemoved: handleAppletRemoved, onClick: handleClick, onRightClick: () => {
             radioPopupMenu === null || radioPopupMenu === void 0 ? void 0 : radioPopupMenu.close();
             contextMenu === null || contextMenu === void 0 ? void 0 : contextMenu.toggle();
         }, onScroll: handleScroll }, props));
@@ -5855,6 +5866,16 @@ const createRadioAppletContainer = (props) => {
     function handleAppletRemoved() {
         mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.deactivateAllListener();
         mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.stop();
+    }
+    function handleMiddleClick() {
+        const lastUrl = configs.settingsObject.lastUrl;
+        if (mpvHandler.getPlaybackStatus() !== "Stopped") {
+            mpvHandler.togglePlayPause();
+            return;
+        }
+        if (mpvHandler.getPlaybackStatus() === 'Stopped' && lastUrl) {
+            mpvHandler.setUrl(lastUrl);
+        }
     }
     function handleScroll(scrollDirection) {
         if (scrollDirection === RadioAppletContainer_ScrollDirection.UP) {
