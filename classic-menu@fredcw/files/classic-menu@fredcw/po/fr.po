@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-25 03:37+0000\n"
-"PO-Revision-Date: 2025-12-30 13:48+0100\n"
+"PO-Revision-Date: 2026-02-27 14:55+0100\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -59,7 +59,7 @@ msgstr "Autre application..."
 
 #. 6.6/applet.js:822
 msgid "Open containing folder"
-msgstr ""
+msgstr "Ouvrir le dossier du fichier"
 
 #. 6.6->settings-schema.json->menu->title
 #. 6.6/applet.js:1178
