@@ -44,5 +44,25 @@
     "units" : "bytes per second",
     "description": "Hide speed if network traffic is less than",
     "tooltip": "Use a compact display style if network traffic is less than the specified amount"
+ },
+  "display-width" : {
+   "type": "spinbutton",
+   "default": 5.5,
+   "min": 1,
+   "max": 20,
+   "step": 0.5,
+   "units": "em",
+   "description": "Label width",
+   "tooltip": "Sets a fixed applet width, preventing applet wobble (0 = auto)"
+ },
+ "display-padding" : {
+   "type": "spinbutton",
+   "default": 0,
+   "min": 0,
+   "max": 2,
+   "step": 0.1,
+   "units": "em",
+   "description": "Label padding",
+   "tooltip": "Sets a padding so the applet text doesn't touch the edges (0 = auto)"
  }
 }
