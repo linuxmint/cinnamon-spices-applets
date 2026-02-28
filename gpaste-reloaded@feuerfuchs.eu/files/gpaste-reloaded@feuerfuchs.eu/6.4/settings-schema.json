@@ -33,6 +33,11 @@
         "type":        "checkbox",
         "description": "Display 'Empty history'"
     },
+    "reverse-history-order": {
+        "default":     false,
+        "type":        "checkbox",
+        "description": "Reverse history order (newest at bottom)"
+    },
 
     "key-bindings": {
         "type":        "header",
