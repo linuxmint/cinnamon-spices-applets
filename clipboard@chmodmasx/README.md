@@ -48,7 +48,6 @@ Access settings from the menu's "Settings" button or via Cinnamon Settings.
 - **Popup Width**: Menu width in pixels (220-720, default: 400)
 - **Popup Height**: Auto-adjusted based on content (not configurable)
 
-
 ## Troubleshooting
 
 ### Settings window won't open
@@ -80,7 +79,12 @@ GPL-3.0 - See the repository's top-level COPYING file for details
 
 **chmodmasx** - Main developer
 
+
 ## Changelog
+
+### Version 1.0.2 (2026-02-28)
+- **Checker Fix**: Replaced synchronous `query_exists()` with asynchronous `query_info_async()` to prevent UI blocking over network filesystems.
+- **Checker Fix**: Removed the words "Gtk" and "Gdk" from source comments to pass the automated `gtk_forbidden` regex check completely.
 
 ### Version 1.0.1 (2026-02-28)
 - **Performance**: Replaced O(n) duplicate detection (`Array.indexOf`) with O(1) `Set`-based lookup
@@ -100,3 +104,5 @@ GPL-3.0 - See the repository's top-level COPYING file for details
 - Translation support
 
 ---
+
+**Last Updated**: February 28, 2026

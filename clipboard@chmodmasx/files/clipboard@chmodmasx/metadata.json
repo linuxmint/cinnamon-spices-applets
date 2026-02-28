@@ -2,7 +2,7 @@
     "uuid": "clipboard@chmodmasx",
     "name": "Clipboard",
     "description": "Clipboard history applet with a Parcellite-style menu",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "cinnamon-version": [
         "5.0",
         "5.2",

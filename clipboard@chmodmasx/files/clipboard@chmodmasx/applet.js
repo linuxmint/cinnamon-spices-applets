@@ -540,13 +540,13 @@ class ClipboardApplet extends Applet.IconApplet {
 
     _initClipboardMonitors() {
         // Use St.Clipboard (the Cinnamon/Shell Toolkit clipboard) instead of the
-        // forbidden Gtk.Clipboard and Gdk.Display APIs.
+        // older legacy clipboard and display APIs.
         this._clipboard = St.Clipboard.get_default();
         if (!this._clipboard) {
             global.logWarning("[clipboard@chmodmasx] St.Clipboard not available.");
             return;
         }
-        // Without Gtk.Clipboard's owner-change signal, clipboard monitoring is
+        // Without the legacy owner-change signal, clipboard monitoring is
         // handled entirely through the polling timer.
         this._updatePollingTimer();
     }
@@ -770,62 +770,105 @@ class ClipboardApplet extends Applet.IconApplet {
 
                 // Locate the settings-schema.json (user install first, then system).
                 // hardcoded_data_dir: use GLib.get_user_data_dir() instead of get_home_dir().
-                let schemaPath = GLib.build_filenamev([GLib.get_user_data_dir(), "cinnamon/applets", uuid, "settings-schema.json"]);
-                let schemaFile = Gio.File.new_for_path(schemaPath);
-                if (!schemaFile.query_exists(null)) {
-                    schemaPath = GLib.build_filenamev(["/usr/share/cinnamon/applets", uuid, "settings-schema.json"]);
-                    schemaFile = Gio.File.new_for_path(schemaPath);
-                }
-                if (!schemaFile.query_exists(null)) {
-                    global.logWarning(`[${uuid}] settings-schema.json not found; cannot create settings file.`);
+                let userSchemaPath = GLib.build_filenamev([GLib.get_user_data_dir(), "cinnamon/applets", uuid, "settings-schema.json"]);
+                let userSchemaFile = Gio.File.new_for_path(userSchemaPath);
+
+                userSchemaFile.query_info_async(
+                    "standard::type",
+                    Gio.FileQueryInfoFlags.NONE,
+                    GLib.PRIORITY_DEFAULT,
+                    null,
+                    (_f1, res1) => {
+                        let schemaFileToUse = null;
+                        try {
+                            _f1.query_info_finish(res1);
+                            schemaFileToUse = userSchemaFile;
+                        } catch (e1) {
+                            if (!e1.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                                global.logError(e1);
+                            }
+                        }
+
+                        if (schemaFileToUse) {
+                            this._loadSchemaAndWriteSettings(schemaFileToUse, configFile, uuid, onDone);
+                        } else {
+                            // Try system path
+                            let sysSchemaPath = GLib.build_filenamev(["/usr/share/cinnamon/applets", uuid, "settings-schema.json"]);
+                            let sysSchemaFile = Gio.File.new_for_path(sysSchemaPath);
+
+                            sysSchemaFile.query_info_async(
+                                "standard::type",
+                                Gio.FileQueryInfoFlags.NONE,
+                                GLib.PRIORITY_DEFAULT,
+                                null,
+                                (_f2, res2) => {
+                                    try {
+                                        _f2.query_info_finish(res2);
+                                        schemaFileToUse = sysSchemaFile;
+                                    } catch (e2) {
+                                        if (!e2.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                                            global.logError(e2);
+                                        }
+                                    }
+
+                                    if (schemaFileToUse) {
+                                        this._loadSchemaAndWriteSettings(schemaFileToUse, configFile, uuid, onDone);
+                                    } else {
+                                        global.logWarning(`[${uuid}] settings-schema.json not found; cannot create settings file.`);
+                                        if (onDone) onDone();
+                                    }
+                                }
+                            );
+                        }
+                    }
+                );
+            }
+        );
+    }
+
+    _loadSchemaAndWriteSettings(schemaFile, configFile, uuid, onDone) {
+        // Read the schema file asynchronously.
+        schemaFile.load_contents_async(null, (_sf, schemaRes) => {
+            try {
+                let [ok, contents] = _sf.load_contents_finish(schemaRes);
+                if (!ok) {
                     if (onDone) onDone();
                     return;
                 }
+                let schemaText = ByteArray.toString(contents);
+                let schemaData = JSON.parse(schemaText);
+                let settingsData = JSON.parse(JSON.stringify(schemaData));
+                for (let key in settingsData) {
+                    let entry = settingsData[key];
+                    if (entry && typeof entry === "object" && entry.default !== undefined) {
+                        entry.value = entry.default;
+                    }
+                }
+                if (global.get_md5_for_string) {
+                    settingsData.__md5__ = global.get_md5_for_string(schemaText);
+                }
+                let output = JSON.stringify(settingsData, null, 4);
+                let bytes = new GLib.Bytes(new TextEncoder().encode(output));
 
-                // Read the schema file asynchronously.
-                schemaFile.load_contents_async(null, (_sf, schemaRes) => {
-                    try {
-                        let [ok, contents] = _sf.load_contents_finish(schemaRes);
-                        if (!ok) {
-                            if (onDone) onDone();
-                            return;
+                // Write the settings file asynchronously.
+                configFile.replace_contents_bytes_async(
+                    bytes, null, false,
+                    Gio.FileCreateFlags.REPLACE_DESTINATION,
+                    null,
+                    (_cf, writeRes) => {
+                        try {
+                            _cf.replace_contents_finish(writeRes);
+                        } catch (writeErr) {
+                            global.logError(writeErr);
                         }
-                        let schemaText = ByteArray.toString(contents);
-                        let schemaData = JSON.parse(schemaText);
-                        let settingsData = JSON.parse(JSON.stringify(schemaData));
-                        for (let key in settingsData) {
-                            let entry = settingsData[key];
-                            if (entry && typeof entry === "object" && entry.default !== undefined) {
-                                entry.value = entry.default;
-                            }
-                        }
-                        if (global.get_md5_for_string) {
-                            settingsData.__md5__ = global.get_md5_for_string(schemaText);
-                        }
-                        let output = JSON.stringify(settingsData, null, 4);
-                        let bytes = new GLib.Bytes(new TextEncoder().encode(output));
-
-                        // Write the settings file asynchronously.
-                        configFile.replace_contents_bytes_async(
-                            bytes, null, false,
-                            Gio.FileCreateFlags.REPLACE_DESTINATION,
-                            null,
-                            (_cf, writeRes) => {
-                                try {
-                                    _cf.replace_contents_finish(writeRes);
-                                } catch (writeErr) {
-                                    global.logError(writeErr);
-                                }
-                                if (onDone) onDone();
-                            }
-                        );
-                    } catch (parseErr) {
-                        global.logError(parseErr);
                         if (onDone) onDone();
                     }
-                });
+                );
+            } catch (parseErr) {
+                global.logError(parseErr);
+                if (onDone) onDone();
             }
-        );
+        });
     }
 
     _setClipboardText(text) {
