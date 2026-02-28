@@ -57,6 +57,7 @@
 			"title": "Style",
 			"keys": [
 				"mode",
+				"pupil-shape",
 				"line-width",
 				"padding",
 				"margin",
@@ -81,6 +82,16 @@
 		"options": {
 			"Lids": "lids",
 			"Bulb": "bulb"
+		}
+	},
+	"pupil-shape": {
+		"type": "combobox",
+		"default": "round",
+		"description": "Pupil Shape",
+		"options": {
+			"Round": "round",
+			"Vertical": "vertical",
+			"Horizontal": "horizontal"
 		}
 	},
 	"tooltip-message": {

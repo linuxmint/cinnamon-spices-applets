@@ -144,6 +144,11 @@ class Eye extends Applet.Applet {
 				},
 			},
 			{
+				key: "pupil-shape",
+				value: "pupil_shape",
+				cb: this.on_property_updated,
+			},
+			{
 				key: "line-width",
 				value: "line_width",
 				cb: _d.debounce(
@@ -426,6 +431,7 @@ class Eye extends Applet.Applet {
 				base_color: base_color,
 				iris_color: iris_color,
 				pupil_color: pupil_color,
+				pupil_shape: this.pupil_shape,
 				padding: padding,
 				line_width: line_width,
 				is_vertical: is_vertical,

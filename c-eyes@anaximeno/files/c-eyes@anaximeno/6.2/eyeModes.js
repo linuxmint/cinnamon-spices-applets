@@ -205,7 +205,7 @@ var EyelidMode = class EyelidMode extends EyeMode {
         const pupil_rad = iris_rad * 0.4;
 
         const cosSquared = cos_mouse_ang * cos_mouse_ang;
-        const max_rad = eye_rad * (cosSquared * cosSquared * 0.5 + 0.25);
+        const max_rad = eye_rad * (cosSquared * cosSquared * 0.5 + 0.45);
         const mouse_rad = Math.min(mouse_dist, max_rad);
 
         const iris_arc = Math.asin(iris_rad / eye_rad);
@@ -252,15 +252,31 @@ var EyelidMode = class EyelidMode extends EyeMode {
 
         cr.identityMatrix();
         cr.translate(half_width, half_height);
-        cr.rotate(mouse_ang);
 
         Clutter.cairo_set_source_color(cr, options.pupil_color);
 
-        const pupil_translate_x = eye_rad * sin_eye_ang;
-        const pupil_scale_x = pupil_rad * cos_eye_ang;
+        const pupil_translate_x_base = eye_rad * sin_eye_ang;
+        const pt_x = pupil_translate_x_base * Math.cos(mouse_ang);
+        const pt_y = pupil_translate_x_base * Math.sin(mouse_ang);
 
-        cr.translate(pupil_translate_x, 0);
-        cr.scale(pupil_scale_x, pupil_rad);
+        cr.translate(pt_x, pt_y);
+
+        cr.rotate(mouse_ang);
+        cr.scale(cos_eye_ang, 1.0);
+        cr.rotate(-mouse_ang);
+
+        let shape_width = pupil_rad;
+        let shape_height = pupil_rad;
+
+        if (options.pupil_shape === 'vertical') {
+            shape_width = pupil_rad * 0.4;
+            shape_height = pupil_rad * 1.8;
+        } else if (options.pupil_shape === 'horizontal') {
+            shape_width = pupil_rad * 1.8;
+            shape_height = pupil_rad * 0.4;
+        }
+
+        cr.scale(shape_width, shape_height);
         cr.arc(0, 0, 1.0, 0, TWO_PI);
         cr.fill();
 
@@ -324,15 +340,31 @@ var BulbMode = class BulbMode extends EyeMode {
 
         cr.identityMatrix();
         cr.translate(half_width, half_height);
-        cr.rotate(mouse_ang);
 
         Clutter.cairo_set_source_color(cr, options.pupil_color);
 
-        const pupil_translate_x = eye_rad * sin_eye_ang;
-        const pupil_scale_x = pupil_rad * cos_eye_ang;
+        const pupil_translate_x_base = eye_rad * sin_eye_ang;
+        const pt_x = pupil_translate_x_base * Math.cos(mouse_ang);
+        const pt_y = pupil_translate_x_base * Math.sin(mouse_ang);
 
-        cr.translate(pupil_translate_x, 0);
-        cr.scale(pupil_scale_x, pupil_rad);
+        cr.translate(pt_x, pt_y);
+
+        cr.rotate(mouse_ang);
+        cr.scale(cos_eye_ang, 1.0);
+        cr.rotate(-mouse_ang);
+
+        let shape_width = pupil_rad;
+        let shape_height = pupil_rad;
+
+        if (options.pupil_shape === 'vertical') {
+            shape_width = pupil_rad * 0.4;
+            shape_height = pupil_rad * 1.8;
+        } else if (options.pupil_shape === 'horizontal') {
+            shape_width = pupil_rad * 1.8;
+            shape_height = pupil_rad * 0.4;
+        }
+
+        cr.scale(shape_width, shape_height);
         cr.arc(0, 0, 1.0, 0, TWO_PI);
         cr.fill();
 
