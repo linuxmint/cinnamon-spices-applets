@@ -59,6 +59,8 @@ const Atk = imports.gi.Atk;
 const Cvc = imports.gi.Cvc;
 //Signals:
 const Signals = imports.signals;
+//readFileAsync:
+const { readFileAsync } = require("./lib/readFileAsync");
 //checkDependencies:
 const { Dependencies, criticalNotify } = require("./lib/checkDependencies");
 //htmlEncodeDecode:
@@ -743,6 +745,7 @@ RadioNotificationSource.prototype = {
     this._updateCount();
   }
 }
+Signals.addSignalMethods(RadioNotificationSource.prototype);
 
 const messageTray = new RadioMessageTray();
 //~ const SOURCE = new RadioNotificationSource("Radio3.0");
@@ -760,6 +763,7 @@ class TitleSeparatorMenuItem extends PopupBaseMenuItem {
     this.addActor(this.label);
   }
 }
+Signals.addSignalMethods(TitleSeparatorMenuItem.prototype);
 
 var RadioPopupSubMenuMenuItem = class RadioPopupSubMenuMenuItem extends PopupSubMenuMenuItem {
   _init(text, needScrollbar=true) {
@@ -831,6 +835,7 @@ var RadioPopupSubMenuMenuItem = class RadioPopupSubMenuMenuItem extends PopupSub
     return topMaxHeight >= 0 && topNaturalHeight >= topMaxHeight;
   }
 }
+Signals.addSignalMethods(RadioPopupSubMenuMenuItem.prototype);
 
 var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends PopupSubMenuMenuItem {
   _connectSubMenuSignals(object, menu) {
@@ -977,6 +982,7 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
 
     }
 }
+Signals.addSignalMethods(StationsPopupSubMenuMenuItem.prototype);
 
 /**
  * #R3PopupMenu:
@@ -1022,6 +1028,7 @@ var R3PopupMenu = class R3PopupMenu extends PopupMenu {
     this.emit('destroy');
   }
 }
+Signals.addSignalMethods(R3PopupMenu.prototype);
 
 class WebRadioReceiverAndRecorder extends TextIconApplet {
   constructor(orientation, panel_height, instance_id) {
@@ -1392,10 +1399,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           while (file != null) {
             let name = file.get_name();
             if (name.startsWith("R3SongArt")) {
-            this.rm_file(`${dir_path}/${name}`);
-            //~ let f = file_new_for_path(dir_path+"/"+name);
-            //~ if (f.query_exists(null))
-              //~ f.delete(null);
+              this.rm_file(`${dir_path}/${name}`);
+              //~ let f = file_new_for_path(dir_path+"/"+name);
+              //~ if (f.query_exists(null))
+                //~ f.delete(null);
             }
             file = dir_children.next_file(null);
           }
@@ -1655,8 +1662,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   rm_file(path) {
     let file = file_new_for_path(path);
-    if (file.query_exists(null))
-      file.delete(null);
+    if (file.query_exists(null)) {
+      try {
+        file.delete(null);
+      } catch(e) {}
+    }
   }
 
   on_next_event(event) {
@@ -2124,39 +2134,37 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (this.actor.get_stage() == null) return;
     //log("_on_mpv_title_changed: " + MPV_TITLE_FILE);
 
-    let [, _title] = file_get_contents(MPV_TITLE_FILE);
-    let title = to_string(_title).trim();
-    free(_title);
-    //let title = title_obj.prop;
-
-    if (title.length === 0 || (title.length > 0 && this.songTitle == title)) return;
-
-    if (title.includes("xml")) {
-      let xml_string = title.replace(/>\s*</g, "><"); // deletes all useless spaces.
-      try {
-        xml_string = HtmlEncodeDecode.decode(xml_string);
-        let json_data = xml2json(xml_string);
-        if (json_data ["ZettaLite"]) {
-          let json_title = ""+json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Title"];
-          let json_artist = ""+json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Artist1"];
-          if (!json_title) json_title = "";
-          if (!json_artist) json_artist = "";
-          if (json_title && json_artist)
-            title = capitalize_each_word(json_artist) + " - " + capitalize_each_word(json_title);
-          else if(json_title)
-            title = capitalize_each_word(json_title);
-          else if(json_artist)
-            title = capitalize_each_word(json_artist);
-          else
+    readFileAsync(MPV_TITLE_FILE).then( (_title) => {
+      let title = _title.trim();
+      if (title.length === 0 || (title.length > 0 && this.songTitle == title)) return;
+      
+      if (title.includes("xml")) {
+        let xml_string = title.replace(/>\s*</g, "><"); // deletes all useless spaces.
+        try {
+          xml_string = HtmlEncodeDecode.decode(xml_string);
+          let json_data = xml2json(xml_string);
+          if (json_data ["ZettaLite"]) {
+            let json_title = ""+json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Title"];
+            let json_artist = ""+json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Artist1"];
+            if (!json_title) json_title = "";
+            if (!json_artist) json_artist = "";
+            if (json_title && json_artist)
+              title = capitalize_each_word(json_artist) + " - " + capitalize_each_word(json_title);
+            else if(json_title)
+              title = capitalize_each_word(json_title);
+            else if(json_artist)
+              title = capitalize_each_word(json_artist);
+            else
+              title = "";
+          } else
             title = "";
-        } else
+        } catch(e) {
           title = "";
-      } catch(e) {
-        title = "";
+        }
       }
-    }
-
-    this.on_song_changed(this.get_radio_name(this.radioId), title);
+  
+      this.on_song_changed(this.get_radio_name(this.radioId), title);
+    });
   }
 
   monitor_rec_folder() {

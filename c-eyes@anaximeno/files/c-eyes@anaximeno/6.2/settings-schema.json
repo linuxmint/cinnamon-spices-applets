@@ -3,15 +3,15 @@
 		"type": "layout",
 		"pages": [
 			"general-page",
-			"style-page",
-			"effects-page"
+			"style-page"
 		],
 		"general-page": {
 			"type": "page",
 			"title": "General",
 			"sections": [
 				"general-section",
-				"optimization-section"
+				"optimization-section",
+				"effects-section"
 			]
 		},
 		"style-page": {
@@ -22,19 +22,12 @@
 				"colors-section"
 			]
 		},
-		"effects-page": {
-			"type": "page",
-			"title": "Effects",
-			"sections": [
-				"general-effects-section"
-			]
-		},
 		"general-section": {
 			"type": "section",
 			"title": "General",
 			"keys": [
-				"tooltip-message",
 				"mode",
+				"tooltip-message",
 				"deactivate-on-fullscreen",
 				"optimization-mode"
 			]
@@ -46,6 +39,17 @@
 			"keys": [
 				"repaint-interval",
 				"repaint-angle"
+			]
+		},
+		"effects-section": {
+			"type": "section",
+			"title": "Effects",
+			"keys": [
+				"blink-effect-enabled",
+				"blink-period",
+				"blink-gap",
+				"sleep-effect-enabled",
+				"idle-delay"
 			]
 		},
 		"styles-section": {
@@ -66,19 +70,7 @@
 			"keys": [
 				"base-color",
 				"iris-color",
-				"pupil-color",
-				"fill-lids-color-painting",
-				"fill-bulb-color-painting"
-			]
-		},
-		"general-effects-section": {
-			"type": "section",
-			"title": "General",
-			"keys": [
-				"blink-effect",
-				"blink-period",
-				"blink-gap",
-				"idle-delay"
+				"pupil-color"
 			]
 		}
 	},
@@ -161,76 +153,67 @@
 	},
 	"use-alternative-colors": {
 		"type": "switch",
-		"default": true,
+		"default": false,
 		"description": "Use Alternative Colors for the Eye",
 		"tooltip": "When disabled it will use the current system theme's default color for panel items."
 	},
 	"base-color": {
 		"type": "colorchooser",
-		"default": "#BBBBBB",
+		"default": "#BEBEBE",
 		"description": "Base Color"
 	},
 	"iris-color": {
 		"type": "colorchooser",
-		"default": "#634E34",
+		"default": "#9F5211",
 		"description": "Iris Color"
 	},
 	"pupil-color": {
 		"type": "colorchooser",
-		"default": "#130F0A",
+		"default": "#000000",
 		"description": "Pupil Color"
 	},
-	"fill-lids-color-painting": {
-		"dependency": "mode=lids",
+	"blink-effect-enabled": {
 		"type": "checkbox",
 		"default": true,
-		"description": "Fill the Colors Inside the Eye"
-	},
-	"fill-bulb-color-painting": {
-		"dependency": "mode=bulb",
-		"type": "checkbox",
-		"default": true,
-		"description": "Fill the Colors Inside the Eye"
-	},
-	"blink-effect": {
-		"type": "combobox",
-		"default": "none",
-		"description": "Blink Effect",
-		"options": {
-			"None": "none",
-			"When Idle": "idle",
-			"Always": "always"
-		}
+		"description": "Blink Effect"
 	},
 	"blink-period": {
 		"type": "spinbutton",
-		"default": 600,
-		"min": 200,
-		"max": 5000,
-		"step": 100,
-		"units": "ms",
+		"dependency": "blink-effect-enabled",
+		"default": 0.6,
+		"min": 0.2,
+		"max": 2,
+		"step": 0.2,
+		"units": "seconds",
 		"description": "Blink Period",
-		"tooltip": "This setting controls the duration of a full blink cycle (closing and opening). Measured in milliseconds."
+		"tooltip": "This setting controls the duration of a full blink cycle (closing and opening)."
 	},
 	"blink-gap": {
 		"type": "spinbutton",
-		"default": 8000,
-		"min": 1000,
-		"max": 20000,
-		"step": 500,
-		"units": "ms",
+		"dependency": "blink-effect-enabled",
+		"default": 10,
+		"min": 1,
+		"max": 60,
+		"step": 1,
+		"units": "seconds",
 		"description": "Blink Gap",
-		"tooltip": "This setting controls the time gap between two consecutive blinks. Measured in milliseconds."
+		"tooltip": "This setting controls the time gap between two consecutive blinks."
+	},
+	"sleep-effect-enabled": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Sleep Effect",
+		"tooltip": "When enabled, the eyes will slowly close when the system is idle and open again when activity is detected."
 	},
 	"idle-delay": {
-		"dependency": "blink-effect=idle",
+		"dependency": "sleep-effect-enabled",
 		"type": "spinbutton",
-		"default": 30000,
-		"min": 5000,
-		"max": 600000,
-		"step": 5000,
-		"units": "ms",
+		"default": 5,
+		"min": 1,
+		"max": 120,
+		"step": 1,
+		"units": "minutes",
 		"description": "Idle Delay",
-		"tooltip": "This setting controls the time of inactivity (no mouse or keyboard input) after which the system is considered idle. Measured in milliseconds."
+		"tooltip": "This setting controls the time of inactivity (no mouse or keyboard input) after which the system is considered idle."
 	}
 }

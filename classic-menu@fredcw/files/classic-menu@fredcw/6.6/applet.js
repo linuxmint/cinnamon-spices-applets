@@ -407,10 +407,10 @@ class ApplicationContextMenuItem extends PopupMenu.PopupBaseMenuItem {
                 closeMenu = false;
                 break;
             case "app_properties":
-                Util.spawnCommandLine("cinnamon-desktop-editor -mlauncher -o" + GLib.shell_quote(this._appButton.app.get_app_info().get_filename()));
+                Util.spawn(["cinnamon-desktop-editor", "-mlauncher", "-o", this._appButton.app.get_app_info().get_filename()]);
                 break;
             case "uninstall":
-                Util.spawnCommandLine("/usr/bin/cinnamon-remove-application '" + this._appButton.app.get_app_info().get_filename() + "'");
+                Util.spawn(["cinnamon-remove-application", this._appButton.app.get_app_info().get_filename()]);
                 break;
             case "offload_launch":
                 try {
@@ -703,12 +703,19 @@ class PlaceButton extends SimpleMenuItem {
 }
 
 class UserfileContextMenuItem extends PopupMenu.PopupBaseMenuItem {
-    constructor(button, label, is_default, cbParams, callback) {
+    constructor(button, label, iconName, is_default, cbParams, callback) {
         super({focusOnHover: false});
 
         this._button = button;
         this._cbParams = cbParams;
         this._callback = callback;
+
+        if (iconName) {
+            this.icon = new St.Icon({ icon_name: iconName, icon_size: 12, icon_type: St.IconType.SYMBOLIC });
+            if (this.icon)
+                this.addActor(this.icon);
+        }
+
         this.label = new St.Label({ text: label });
         this.addActor(this.label);
 
@@ -722,7 +729,138 @@ class UserfileContextMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
 }
 
-class RecentButton extends SimpleMenuItem {
+class FileButton extends SimpleMenuItem {
+    constructor(applet, params) {
+        super(applet, params);
+        this._useDBus = true;
+    }
+
+    activate() {
+        try {
+            Gio.app_info_launch_default_for_uri(this.uri, global.create_app_launch_context());
+            this.applet.menu.close();
+        } catch (e) {
+            Main.notify(_("This file is no longer available"), e.message);
+        }
+    }
+
+    hasLocalPath(file) {
+        return file.is_native() || file.get_path() != null;
+    }
+
+    populateMenu(menu) {
+        let menuItem;
+        menuItem = new PopupMenu.PopupMenuItem(_("Open with"), { reactive: false });
+        menuItem.actor.style = "font-weight: bold";
+        menu.addMenuItem(menuItem);
+
+        let file = Gio.File.new_for_uri(this.uri);
+
+        let default_info = Gio.AppInfo.get_default_for_type(this.mimeType, !this.hasLocalPath(file));
+
+        let infoLaunchFunc = (info, file) => {
+            info.launch([file], null);
+            this.applet.toggleContextMenu(this);
+            this.applet.menu.close();
+        };
+
+        if (default_info) {
+            menuItem = new UserfileContextMenuItem(
+                this,
+                default_info.get_display_name(),
+                null,
+                false,
+                [default_info, file],
+                infoLaunchFunc
+            );
+            menu.addMenuItem(menuItem);
+        }
+
+        let infos = Gio.AppInfo.get_all_for_type(this.mimeType);
+
+        for (let i = 0; i < infos.length; i++) {
+            let info = infos[i];
+
+            file = Gio.File.new_for_uri(this.uri);
+
+            if (!this.hasLocalPath(file) && !info.supports_uris())
+                continue;
+
+            if (info.equal(default_info))
+                continue;
+
+            menuItem = new UserfileContextMenuItem(
+                this,
+                info.get_display_name(),
+                null,
+                false,
+                [info, file],
+                infoLaunchFunc
+            );
+            menu.addMenuItem(menuItem);
+        }
+
+        if (GLib.find_program_in_path ("nemo-open-with") != null) {
+            menuItem = new UserfileContextMenuItem(
+                this,
+                _("Other application..."),
+                null,
+                false,
+                [],
+                () => {
+                    Util.spawn(["nemo-open-with", this.uri]);
+                    this.applet.toggleContextMenu(this);
+                    this.applet.menu.close();
+                }
+            );
+            menu.addMenuItem(menuItem);
+        }
+
+        if (this.mimeType !== "inode/directory") {
+            menuItem = new UserfileContextMenuItem(
+                this,
+                _("Open containing folder"),
+                "xsi-go-jump-symbolic",
+                false,
+                [],
+                () => {
+                    if (!(this._useDBus && this._openContainingFolderViaDBus())) {
+                        // Do not attempt to use DBus again once it's failed.
+                        this._useDBus = false;
+                        const fileBrowser = Gio.AppInfo.get_default_for_type('inode/directory', true);
+                        fileBrowser.launch([file.get_parent()], null);
+                    }
+                }
+            );
+            menu.addMenuItem(menuItem);
+        }
+    }
+
+    _openContainingFolderViaDBus() {
+        try {
+            Gio.DBus.session.call_sync(
+                "org.freedesktop.FileManager1",
+                "/org/freedesktop/FileManager1",
+                "org.freedesktop.FileManager1",
+                "ShowItems",
+                new GLib.Variant("(ass)", [
+                    [this.uri],
+                    global.get_pid().toString()
+                ]),
+                null,
+                Gio.DBusCallFlags.NONE,
+                1000,
+                null
+            );
+        } catch (e) {
+            global.log(`Could not open containing folder via DBus: ${e}`);
+            return false;
+        }
+        return true;
+    }
+}
+
+class RecentButton extends FileButton {
     constructor(applet, recent) {
         let fileIndex = recent.uriDecoded.indexOf("file:///");
         let selectedAppUri = fileIndex === -1 ? "" : recent.uriDecoded.substr(fileIndex + 7);
@@ -747,89 +885,9 @@ class RecentButton extends SimpleMenuItem {
             AppUtils.decomp_string(recent.name).replace(/\s/g, '')
         ];
     }
-
-    activate() {
-        try {
-            Gio.app_info_launch_default_for_uri(this.uri, global.create_app_launch_context());
-            this.applet.menu.close();
-        } catch (e) {
-            let source = new MessageTray.SystemNotificationSource();
-            Main.messageTray.add(source);
-            let notification = new MessageTray.Notification(source,
-                                                            _("This file is no longer available"),
-                                                            e.message);
-            notification.setTransient(true);
-            notification.setUrgency(MessageTray.Urgency.NORMAL);
-            source.notify(notification);
-        }
-    }
-
-    hasLocalPath(file) {
-        return file.is_native() || file.get_path() != null;
-    }
-
-    populateMenu(menu) {
-        let menuItem;
-        menuItem = new PopupMenu.PopupMenuItem(_("Open with"), { reactive: false });
-        menuItem.actor.style = "font-weight: bold";
-        menu.addMenuItem(menuItem);
-
-        let file = Gio.File.new_for_uri(this.uri);
-
-        let default_info = Gio.AppInfo.get_default_for_type(this.mimeType, !this.hasLocalPath(file));
-
-        let infoLaunchFunc = (info, file) => {
-            info.launch([file], null);
-            this.applet.toggleContextMenu(this);
-            this.applet.menu.close();
-        };
-
-        if (default_info) {
-            menuItem = new UserfileContextMenuItem(this,
-                                                   default_info.get_display_name(),
-                                                   false,
-                                                   [default_info, file],
-                                                   infoLaunchFunc);
-            menu.addMenuItem(menuItem);
-        }
-
-        let infos = Gio.AppInfo.get_all_for_type(this.mimeType);
-
-        for (let i = 0; i < infos.length; i++) {
-            let info = infos[i];
-
-            file = Gio.File.new_for_uri(this.uri);
-
-            if (!this.hasLocalPath(file) && !info.supports_uris())
-                continue;
-
-            if (info.equal(default_info))
-                continue;
-
-            menuItem = new UserfileContextMenuItem(this,
-                                                   info.get_display_name(),
-                                                   false,
-                                                   [info, file],
-                                                   infoLaunchFunc);
-            menu.addMenuItem(menuItem);
-        }
-
-        if (GLib.find_program_in_path ("nemo-open-with") != null) {
-            menuItem = new UserfileContextMenuItem(this,
-                                                 _("Other application..."),
-                                                 false,
-                                                 [],
-                                                 () => {
-                                                     Util.spawnCommandLine("nemo-open-with " + this.uri);
-                                                     this.applet.toggleContextMenu(this);
-                                                     this.applet.menu.close();
-                                                 });
-            menu.addMenuItem(menuItem);
-        }
-    }
 }
 
-class FavoriteButton extends SimpleMenuItem {
+class FavoriteButton extends FileButton {
     constructor(applet, favoriteInfo) {
         super(applet, { name: favoriteInfo.display_name,
                         description: decodeURIComponent(favoriteInfo.uri),
@@ -854,86 +912,6 @@ class FavoriteButton extends SimpleMenuItem {
         this.searchStrings = [
             AppUtils.decomp_string(favoriteInfo.display_name).replace(/\s/g, '')
         ];
-    }
-
-    activate() {
-        try {
-            XApp.Favorites.get_default().launch(this.uri, 0);
-            this.applet.menu.close();
-        } catch (e) {
-            let source = new MessageTray.SystemNotificationSource();
-            Main.messageTray.add(source);
-            let notification = new MessageTray.Notification(source,
-                                                            _("This file is no longer available"),
-                                                            e.message);
-            notification.setTransient(true);
-            notification.setUrgency(MessageTray.Urgency.NORMAL);
-            source.notify(notification);
-        }
-    }
-
-    hasLocalPath(file) {
-        return file.is_native() || file.get_path() != null;
-    }
-
-    populateMenu(menu) {
-        let menuItem;
-        menuItem = new PopupMenu.PopupMenuItem(_("Open with"), { reactive: false });
-        menuItem.actor.style = "font-weight: bold";
-        menu.addMenuItem(menuItem);
-
-        let file = Gio.File.new_for_uri(this.uri);
-
-        let default_info = Gio.AppInfo.get_default_for_type(this.mimeType, !this.hasLocalPath(file));
-
-        let infoLaunchFunc = (info, file) => {
-            info.launch([file], null);
-            this.applet.toggleContextMenu(this);
-            this.applet.menu.close();
-        };
-
-        if (default_info) {
-            menuItem = new UserfileContextMenuItem(this,
-                                                   default_info.get_display_name(),
-                                                   false,
-                                                   [default_info, file],
-                                                   infoLaunchFunc);
-            menu.addMenuItem(menuItem);
-        }
-
-        let infos = Gio.AppInfo.get_all_for_type(this.mimeType);
-
-        for (let i = 0; i < infos.length; i++) {
-            let info = infos[i];
-
-            file = Gio.File.new_for_uri(this.uri);
-
-            if (!this.hasLocalPath(file) && !info.supports_uris())
-                continue;
-
-            if (info.equal(default_info))
-                continue;
-
-            menuItem = new UserfileContextMenuItem(this,
-                                                   info.get_display_name(),
-                                                   false,
-                                                   [info, file],
-                                                   infoLaunchFunc);
-            menu.addMenuItem(menuItem);
-        }
-
-        if (GLib.find_program_in_path ("nemo-open-with") != null) {
-            menuItem = new UserfileContextMenuItem(this,
-                                                   _("Other application..."),
-                                                   false,
-                                                   [],
-                                                   () => {
-                                                       Util.spawnCommandLine("nemo-open-with " + this.uri);
-                                                       this.applet.toggleContextMenu(this);
-                                                       this.applet.menu.close();
-                                                   });
-            menu.addMenuItem(menuItem);
-        }
     }
 }
 
@@ -1194,6 +1172,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     constructor(orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
+        this.instance_id = instance_id;
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         this.set_applet_tooltip(_("Menu"));
@@ -1202,7 +1181,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this.menuManager.addMenu(this.menu);
 
         const edit_item = new PopupMenu.PopupIconMenuItem(_("Edit menu"), "document-edit", St.IconType.SYMBOLIC);
-        edit_item.connect("activate", () => Util.spawnCommandLine("cinnamon-menu-editor"));
+        edit_item.connect("activate", () => Util.spawn(["cinnamon-menu-editor"]));
         this._applet_context_menu.addMenuItem(edit_item);
 
         this.settings = new Settings.AppletSettings(this, __meta.uuid, instance_id);
@@ -1490,7 +1469,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
 
     // settings button callbacks
     _launch_editor() {
-        Util.spawnCommandLine("cinnamon-menu-editor");
+        Util.spawn(["cinnamon-menu-editor"]);
     }
 
     _reset_menu_size() {
@@ -1525,6 +1504,13 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             }
             this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";
 
+            // Center menu if applet in center zone of top or bottom panel.
+            const appletDefinition = Main.AppletManager.getAppletDefinition({applet_id: this.instance_id});
+            if ((this._orientation === St.Side.BOTTOM || this._orientation === St.Side.TOP) &&
+                                                        appletDefinition.location_label === 'center') {
+                const monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
+                this.menu.shiftToPosition(Math.floor(monitor.width / 2) + monitor.x);
+            }
             Mainloop.idle_add(Lang.bind(this, this._initial_cat_selection, n));
         } else {
             this.actor.remove_style_pseudo_class('active');
@@ -2667,13 +2653,13 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             this.menu.close();
 
             let screensaver_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.screensaver" });
-            let screensaver_dialog = Gio.file_new_for_path("/usr/bin/cinnamon-screensaver-command");
-            if (screensaver_dialog.query_exists(null)) {
+            let screensaver_dialog = GLib.find_program_in_path("cinnamon-screensaver-command");
+            if (screensaver_dialog) {
                 if (screensaver_settings.get_boolean("ask-for-away-message")) {
-                    Util.spawnCommandLine("cinnamon-screensaver-lock-dialog");
+                    Util.spawn(["cinnamon-screensaver-lock-dialog"]);
                 }
                 else {
-                    Util.spawnCommandLine("cinnamon-screensaver-command --lock");
+                    Util.spawn(["cinnamon-screensaver-command", "--lock"]);
                 }
             }
             else {

@@ -6,20 +6,19 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import type { ErrorResponse} from "../../lib/httpLib";
+import type { ErrorResponse } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/services/logger";
 import { getTimes } from "suncalc";
 import type { WeatherData, ForecastData, HourlyForecastData, Condition } from "../../weather-data";
-import type { LocationData, correctGetTimes, SunTime } from "../../types";
+import { type LocationData, type correctGetTimes, type SunTime, type WeatherProvider, ProviderErrorCode } from "../../types";
 import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, OnSameDay } from "../../utils";
 import { DateTime } from "luxon";
-import { BaseProvider } from "../BaseProvider";
 import { Services, type Config } from "../../config";
 import { GetUSWeatherAlerts } from "./alerts";
 import { ErrorHandler } from "../../lib/services/error_handler";
 
-export class USWeather extends BaseProvider {
+export class USWeather implements WeatherProvider<Services.USWeather> {
 
 	//--------------------------------------------------------
 	//  Properties
@@ -33,6 +32,7 @@ export class USWeather extends BaseProvider {
 	public readonly remainingCalls: number | null = null;
 	public readonly supportHourlyPrecipChance = false;
 	public readonly supportHourlyPrecipVolume = false;
+	public readonly locationType = "coordinates";
 
 	private sitesUrl = "https://api.weather.gov/points/";
 
@@ -109,6 +109,10 @@ export class USWeather extends BaseProvider {
 		return weather;
 	};
 
+	public ValidConfiguration(): ProviderErrorCode {
+		return ProviderErrorCode.OK;
+	}
+
 	/**
 	 * Handles App errors internally
 	 * @param loc
@@ -166,7 +170,7 @@ export class USWeather extends BaseProvider {
 	 *
 	 * @param message Soup Message object
 	 */
-	private OnObtainingGridData = (message: ErrorResponse<{title: string}>): boolean => {
+	private OnObtainingGridData = (message: ErrorResponse<{ title: string }>): boolean => {
 		if (message.ErrorData.code == 404 && message?.Data != null) {
 			if (message.Data.title == "Data Unavailable For Requested Point") {
 				ErrorHandler.Instance.PostError({

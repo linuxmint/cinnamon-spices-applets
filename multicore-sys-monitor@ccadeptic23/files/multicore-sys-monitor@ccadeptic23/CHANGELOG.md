@@ -1,3 +1,29 @@
+### v3.5.2~20260220
+  * Adds colors for CPU Temperature warnings.
+  * Adds CPU Temperature to the tooltip.
+  * Fixes [#8348](https://github.com/linuxmint/cinnamon-spices-applets/issues/8348)
+  * Fixes [#8349](https://github.com/linuxmint/cinnamon-spices-applets/issues/8349)
+
+### v3.5.1~20260219
+  * Make some messages easier to understand.
+  * Button to apply the multiple of the width of each graph.
+
+### v3.5.0~20260219
+  * Ability to show the CPU temperature.
+
+### v3.4.2~20260213
+  * Ability to choose the radius of curvature in corners.
+  * Better detection of network devices.
+  * Fixes [#8311](https://github.com/linuxmint/cinnamon-spices-applets/issues/8311)
+
+### v3.4.1~20260208
+  * Smoother reading of all system data, even those related to networks.
+  * The box width can be adjusted in increments of 1, 2, 4, 8, 16, 32, and 64 pixels in the General tab of this applet's settings.
+
+### v3.4.0~20260203
+  * Smoother reading of most system data.
+  * Uses readFileAsync module.
+
 ### v3.3.0~20260106
   * Better takes into account HiDPI display.
   * Changes graph height in pixels with % of panel height.

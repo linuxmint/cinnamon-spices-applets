@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux Czech 5.8.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-03-30 14:17+0200\n"
+"POT-Creation-Date: 2026-02-18 18:19+0100\n"
 "PO-Revision-Date: 2025-09-14 13:25+0200\n"
 "Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
 "Language-Team: \n"
@@ -16,124 +16,122 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 
 #. metadata.json->name
-#. applet.js:225 applet_OLD.js:235
+#. applet.js:232
 msgid "Sensors Monitor"
 msgstr "Sledování senzorů"
 
-#. applet.js:465 applet_OLD.js:418
+#. applet.js:585
 msgid "Suspended"
 msgstr "Zastaveno"
 
-#. applet.js:732 applet.js:773 applet_OLD.js:638 applet_OLD.js:682
+#. applet.js:901 applet.js:943
 msgid "high:"
 msgstr "vysoká:"
 
-#. applet.js:732 applet.js:735 applet.js:773 applet.js:775 applet.js:816
-#. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
-#. applet_OLD.js:726
+#. applet.js:901 applet.js:904 applet.js:943 applet.js:945 applet.js:986
 msgid "n/a"
 msgstr "n/a"
 
-#. applet.js:735 applet.js:775 applet_OLD.js:642 applet_OLD.js:684
+#. applet.js:904 applet.js:945
 msgid "crit:"
 msgstr "krit:"
 
-#. applet.js:816 applet.js:860 applet_OLD.js:726 applet_OLD.js:770
+#. applet.js:986 applet.js:1030
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:862 applet_OLD.js:772
+#. applet.js:1032
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:891 applet_OLD.js:801
+#. applet.js:1061
 msgid "No intrusion detected"
 msgstr "Narušení nedetekováno"
 
-#. applet.js:891 applet_OLD.js:801
+#. applet.js:1061
 msgid "INTRUSION DETECTED!"
 msgstr "DETEKOVÁNO NARUŠENÍ!"
 
-#. applet.js:911 applet_OLD.js:821
+#. applet.js:1081
 msgid "Must be configured!"
 msgstr "Musí být nastaveno!"
 
-#. applet.js:1275 applet_OLD.js:1208
+#. applet.js:1450
 msgid "Settings"
 msgstr "Předvolby"
 
-#. applet.js:1275 applet_OLD.js:1208
+#. applet.js:1450
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1282 applet_OLD.js:1215
+#. applet.js:1457
 msgid "⚙ General"
 msgstr "⚙ Obecné"
 
-#. applet.js:1298 applet_OLD.js:1231
+#. applet.js:1474
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Teplotní senzory"
 
-#. applet.js:1314 applet_OLD.js:1247
+#. applet.js:1491
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Senzory větráků"
 
-#. applet.js:1330 applet_OLD.js:1263
+#. applet.js:1508
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Napěťové senzory"
 
-#. applet.js:1346 applet_OLD.js:1279
+#. applet.js:1525
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Senzory narušení"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1365 applet_OLD.js:1306
+#. applet.js:1561
 msgid "Run xsensors"
 msgstr "Spustit xsensors"
 
-#. applet.js:1374 applet_OLD.js:1315
+#. applet.js:1570
 msgid "Suspend Sensors"
 msgstr "Pozastavit Sledování senzorů"
 
-#. applet.js:1385 applet_OLD.js:1326
+#. applet.js:1581
 msgid "Reload this applet"
 msgstr "Znovunačíst tento applet"
 
-#. applet.js:1707 applet_OLD.js:1656
+#. applet.js:1928
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Opravdu odstranit '%s'?"
 
-#. lib/checkDependencies.js:353
+#. lib/checkDependencies.js:369
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Applet %s je plně funkční."
 
-#. lib/checkDependencies.js:354
+#. lib/checkDependencies.js:370
 msgid "All dependencies are installed"
 msgstr "Všechny závislosti jsou nainstalované"
 
-#. lib/checkDependencies.js:383
+#. lib/checkDependencies.js:399
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 "Zdá se, že chybí některé z programů vyžadovaných pro plnou funkčnost appletu."
 
-#. lib/checkDependencies.js:385
+#. lib/checkDependencies.js:401
 msgid "Please install these packages:"
 msgstr "Je nutné instalovat následující balíčky:"
 
-#. lib/checkDependencies.js:389 lib/checkDependencies.js:399
+#. lib/checkDependencies.js:405 lib/checkDependencies.js:415
 msgid "Some dependencies are not installed!"
 msgstr "Některé závislosti nejsou nainstalované!"
 
-#. lib/checkDependencies.js:401
+#. lib/checkDependencies.js:417
 msgid "Install these packages now"
 msgstr "Balíčky nainstalovat nyní"
 
@@ -223,6 +221,10 @@ msgstr "⮿ Narušení"
 msgid "⛓ Custom"
 msgstr "⛓ Vlastní"
 
+#. settings-schema.json->section_SettingsWindow->title
+msgid "This settings window"
+msgstr ""
+
 #. settings-schema.json->section_Display->title
 #. settings-schema.json->section_tempOptions->title
 #. settings-schema.json->section_fanOptions->title
@@ -242,6 +244,10 @@ msgstr "Hodnoty senzorů"
 #. settings-schema.json->section_remove_incompatible_xlets->title
 msgid "Remove from panels certain applets that also use sensors"
 msgstr "Odstraňte z panelu jiné applety, rovněž sledující senzory počítače"
+
+#. settings-schema.json->section_dependencies->title
+msgid "Dependencies"
+msgstr ""
 
 #. settings-schema.json->section_tempDisktemp->title
 msgid "For the time being, disk temperature can only be read by root."
@@ -282,6 +288,62 @@ msgstr "Zřeknutí se odpovědnosti"
 #. settings-schema.json->section_customSensors->title
 msgid "Custom sensors"
 msgstr "Vlastní senzory"
+
+#. settings-schema.json->window_maximizing->description
+msgid "How to set its size"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "let it be"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize horizontally"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize vertically"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize everything"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "fixed"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->tooltip
+msgid "Future window openings."
+msgstr ""
+
+#. settings-schema.json->window_width->description
+msgid "Width"
+msgstr ""
+
+#. settings-schema.json->window_width->tooltip
+msgid ""
+"This number must match your screen configuration.\n"
+"Minimum value: 800."
+msgstr ""
+
+#. settings-schema.json->window_height->description
+msgid "Height"
+msgstr ""
+
+#. settings-schema.json->window_height->tooltip
+msgid ""
+"This number must match your screen configuration.\n"
+"Minimum value: 100."
+msgstr ""
+
+#. settings-schema.json->window_set_current_size->description
+msgid "Set to the approximate current size and position"
+msgstr ""
+
+#. settings-schema.json->window_label->description
+msgid "The exact size and position will depend on Cinnamon."
+msgstr ""
 
 #. settings-schema.json->interval->options
 msgid "1"
@@ -484,6 +546,17 @@ msgstr "Zobrazovat v menu akci: Restartovat tento applet"
 #. settings-schema.json->restart_in_menu->tooltip
 msgid "Whether or not to display in menu the action: Restart this applet."
 msgstr "Možnost zobrazit položky 'Restartovat tento applet' v jeho menu."
+
+#. settings-schema.json->do_not_check_dependencies->description
+msgid "Do not check dependencies"
+msgstr ""
+
+#. settings-schema.json->do_not_check_dependencies->tooltip
+msgid ""
+"If you do not want to install certain dependencies (e.g., fonts), check this "
+"box. Be careful with dependencies that are necessary for this applet to "
+"function properly."
+msgstr ""
 
 #. settings-schema.json->make_disktemp_readable_by_user->description
 msgid "Make disk temperature user-readable"

@@ -1,3 +1,19 @@
+### v15.0.1~20260222
+  * Improves asynchronous function calls.
+
+### v15.0.0~20260221
+  * Functional improvements.
+
+### v14.1.1~20260221
+  * Better management of label (on vertical panel).
+
+### v14.1.0~20260212
+  * Resize the menu by grabbing its edges with the mouse.
+
+### v14.0.0~20260211
+  * Adds a Balance slider in the menu + keybindings.
+  * Fixes [#8052](https://github.com/linuxmint/cinnamon-spices-applets/issues/8052)
+
 ### v13.10.0~20260121
   * Try to avoid advertisements by detecting certain words in the title, defined by the user.
 

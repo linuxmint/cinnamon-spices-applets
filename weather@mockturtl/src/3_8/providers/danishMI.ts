@@ -1,22 +1,22 @@
 import { DateTime } from "luxon";
 import { Services } from "../config";
-import type { HTTPParams} from "../lib/httpLib";
+import type { HTTPParams } from "../lib/httpLib";
 import { HttpLib } from "../lib/httpLib";
-import type { Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../weather-data";
+import type { Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData } from "../weather-data";
 import { CelsiusToKelvin, GetDistance, mode, _ } from "../utils";
-import { BaseProvider } from "./BaseProvider";
-import type { LocationData } from "../types";
+import { ProviderErrorCode, type LocationData, type WeatherProvider } from "../types";
 
-export class DanishMI extends BaseProvider {
+export class DanishMI implements WeatherProvider<Services.DanishMI> {
 	public readonly needsApiKey: boolean = false;
 	public readonly prettyName: string = _("DMI Denmark");
-	public readonly name: Services = Services.DanishMI;
+	public readonly name = Services.DanishMI;
 	public readonly maxForecastSupport: number = 10;
 	public readonly maxHourlyForecastSupport: number = 48;
 	public readonly website: string = "https://www.dmi.dk/";
 	public readonly remainingCalls: number | null = null;
 	public readonly supportHourlyPrecipChance = false;
 	public readonly supportHourlyPrecipVolume = true;
+	public readonly locationType = "coordinates";
 
 	private url = "https://www.dmi.dk/NinJo2DmiDk/ninjo2dmidk";
 	private forecastParams: HTTPParams = {
@@ -59,6 +59,10 @@ export class DanishMI extends BaseProvider {
 			return null;
 
 		return this.ParseWeather(observations, forecasts, loc);
+	}
+
+	public ValidConfiguration(): ProviderErrorCode {
+		return ProviderErrorCode.OK;
 	}
 
 	private ParseWeather(observations: DanishObservationPayload[], forecasts: DanishMIPayload, loc: LocationData): WeatherData {
