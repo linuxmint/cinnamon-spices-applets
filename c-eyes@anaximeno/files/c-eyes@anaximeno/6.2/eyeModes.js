@@ -25,7 +25,6 @@ const TWO_PI = 2 * Math.PI;
 class EyeMode {
     constructor(mode) {
         this.mode = mode;
-        this._blinkParams = { x: 0, y: 0, w: 0, coverH: 0, yRad: 0 };
     }
 
     /**
@@ -65,48 +64,7 @@ class EyeMode {
     }
 
     /**
-     * Appends a vertical capsule path to the context
-     * @param {cairo.Context} cr The Cairo drawing context
-     * @param {number} x The x-coordinate of the capsule's top-left
-     * @param {number} y The y-coordinate of the capsule's top-left
-     * @param {number} w The width of the capsule
-     * @param {number} h The height of the capsule
-     * @param {number} yRad The radius for the rounded ends in the y-direction
-     */
-    _appendVerticalCapsulePath(cr, x, y, w, h, yRad) {
-        const xr = w * 0.5;
-        const yr = yRad > 0 ? Math.min(yRad, h * 0.5) : 0;
-
-        if (yr <= 0) {
-            cr.rectangle(x, y, w, h);
-            return;
-        }
-
-        const cx = x + xr;
-        const topCy = y + yr;
-        const bottomCy = y + h - yr;
-
-        cr.moveTo(x, topCy);
-
-        cr.save();
-        cr.translate(cx, topCy);
-        cr.scale(xr, yr);
-        cr.arc(0, 0, 1, Math.PI, 0);
-        cr.restore();
-
-        cr.lineTo(x + w, bottomCy);
-
-        cr.save();
-        cr.translate(cx, bottomCy);
-        cr.scale(xr, yr);
-        cr.arc(0, 0, 1, 0, Math.PI);
-        cr.restore();
-
-        cr.closePath();
-    }
-
-    /**
-     * Applies upper-lid blink effect
+     * Applies blink effect
      * @param {cairo.Context} cr The Cairo drawing context
      * @param {number} blink_rate 0..1 (1 = fully closed), the rate at which the eye is blinking
      * @param {number} eye_rad The radius of the eye
@@ -116,26 +74,21 @@ class EyeMode {
      * @param {boolean} do_stroke Whether to stroke the blink layer (used when not filling)
      * @param {Clutter.Color} stroke_color The color to use for the stroke
      * @param {Function} appendEyePath A function that appends the eye outline path to the context
+     * @param {boolean} use_lower_lid Whether the lower lid should also converge upwards (best for circular eyes)
      */
-    _applyUpperLidBlink(cr, blink_rate, eye_rad, line_width, area_width, area_height, do_stroke, stroke_color, appendEyePath) {
+    _applyUpperLidBlink(cr, blink_rate, eye_rad, line_width, area_width, area_height, do_stroke, stroke_color, appendEyePath, use_lower_lid = false) {
         if (blink_rate <= 0) return;
 
         const t0 = blink_rate > 1 ? 1 : (blink_rate < 0 ? 0 : blink_rate);
         const t = t0 * t0 * (3 - 2 * t0);
 
-        const pad = line_width * 2;
-        const radPlusPad = eye_rad + pad;
-
-        const p = this._blinkParams;
-        p.x = -radPlusPad;
-        p.y = -radPlusPad;
-        p.w = 2 * radPlusPad;
-        p.coverH = (2 * eye_rad * t) + pad;
-        p.yRad = Math.min(eye_rad * 0.55, p.coverH * 0.5);
+        const radPlusPad = eye_rad + line_width * 2;
 
         cr.save();
         cr.identityMatrix();
         cr.translate(area_width * 0.5, area_height * 0.5);
+
+        const cp_x = radPlusPad / 3.0; // For converting quadratic bezier to cubic bezier
 
         cr.newPath();
         appendEyePath(cr);
@@ -143,16 +96,89 @@ class EyeMode {
 
         cr.setOperator(Cairo.Operator.CLEAR);
         cr.newPath();
-        this._appendVerticalCapsulePath(cr, p.x, p.y, p.w, p.coverH, p.yRad);
-        cr.fill();
 
-        if (do_stroke) {
-            cr.setOperator(Cairo.Operator.OVER);
-            Clutter.cairo_set_source_color(cr, stroke_color);
-            cr.setLineWidth(line_width);
-            cr.newPath();
-            this._appendVerticalCapsulePath(cr, p.x, p.y, p.w, p.coverH, p.yRad);
-            cr.stroke();
+        if (use_lower_lid) {
+            const meet_y = eye_rad * 0.25; // Eyelids meet slightly below the horizontal center
+            const overlap = 0.5 * t;       // Slight overlap when closed to prevent gap seams
+
+            // Upper lid edge positions: arcs downwards as it moves down
+            const up_y_side = -radPlusPad * (1 - t) + (meet_y + overlap) * t;
+            const up_y_center = (-radPlusPad - eye_rad * 0.4) * (1 - t) + (meet_y + overlap) * t;
+            const up_y_control = 2 * up_y_center - up_y_side;
+
+            // Lower lid edge positions: arcs upwards as it moves up
+            const low_y_side = radPlusPad * (1 - t) + (meet_y - overlap) * t;
+            const low_y_center = (radPlusPad + eye_rad * 0.2) * (1 - t) + (meet_y - overlap) * t;
+            const low_y_control = 2 * low_y_center - low_y_side;
+
+            const up_y_cp = up_y_side + (up_y_control - up_y_side) * 2 / 3;
+            const low_y_cp = low_y_side + (low_y_control - low_y_side) * 2 / 3;
+
+            // Upper lid mask
+            cr.moveTo(-radPlusPad, -radPlusPad);
+            cr.lineTo(radPlusPad, -radPlusPad);
+            cr.lineTo(radPlusPad, up_y_side);
+            cr.curveTo(cp_x, up_y_cp, -cp_x, up_y_cp, -radPlusPad, up_y_side);
+            cr.closePath();
+
+            // Lower lid mask
+            cr.moveTo(-radPlusPad, radPlusPad);
+            cr.lineTo(radPlusPad, radPlusPad);
+            cr.lineTo(radPlusPad, low_y_side);
+            cr.curveTo(cp_x, low_y_cp, -cp_x, low_y_cp, -radPlusPad, low_y_side);
+            cr.closePath();
+
+            cr.fill();
+
+            if (do_stroke) {
+                cr.setOperator(Cairo.Operator.OVER);
+                Clutter.cairo_set_source_color(cr, stroke_color);
+                cr.setLineWidth(line_width);
+                cr.setLineJoin(Cairo.LineJoin.ROUND);
+                cr.setLineCap(Cairo.LineCap.ROUND);
+                cr.newPath();
+
+                cr.moveTo(radPlusPad, up_y_side);
+                cr.curveTo(cp_x, up_y_cp, -cp_x, up_y_cp, -radPlusPad, up_y_side);
+
+                cr.moveTo(radPlusPad, low_y_side);
+                cr.curveTo(cp_x, low_y_cp, -cp_x, low_y_cp, -radPlusPad, low_y_side);
+
+                cr.stroke();
+            }
+        } else {
+            const closed_y = radPlusPad;
+
+            // Upper lid edge positions: arcs downwards as it moves down
+            const up_y_side = -radPlusPad * (1 - t) + closed_y * t;
+            const up_y_center = (-radPlusPad - eye_rad * 0.4) * (1 - t) + closed_y * t;
+            const up_y_control = 2 * up_y_center - up_y_side;
+
+            const up_y_cp = up_y_side + (up_y_control - up_y_side) * 2 / 3;
+
+            // Upper lid mask
+            cr.moveTo(-radPlusPad, -radPlusPad);
+            cr.lineTo(radPlusPad, -radPlusPad);
+            cr.lineTo(radPlusPad, up_y_side);
+            cr.curveTo(cp_x, up_y_cp, -cp_x, up_y_cp, -radPlusPad, up_y_side);
+            cr.closePath();
+
+            cr.fill();
+
+            if (do_stroke) {
+                cr.setOperator(Cairo.Operator.OVER);
+                Clutter.cairo_set_source_color(cr, stroke_color);
+                cr.setLineWidth(line_width);
+                cr.setLineJoin(Cairo.LineJoin.ROUND);
+                cr.setLineCap(Cairo.LineCap.ROUND);
+                cr.newPath();
+
+                // Re-add path for stroking the lid edge curve
+                cr.moveTo(radPlusPad, up_y_side);
+                cr.curveTo(cp_x, up_y_cp, -cp_x, up_y_cp, -radPlusPad, up_y_side);
+
+                cr.stroke();
+            }
         }
 
         cr.restore();
@@ -369,7 +395,8 @@ var BulbMode = class BulbMode extends EyeMode {
         cr.fill();
 
         this._applyUpperLidBlink(cr, blink_rate, eye_rad, options.line_width, area_width, area_height, !options.fill, options.base_color,
-            (ctx) => { ctx.arc(0, 0, eye_rad, 0, TWO_PI); }
+            (ctx) => { ctx.arc(0, 0, eye_rad, 0, TWO_PI); },
+            true // use lower lid
         );
     }
 }
