@@ -1,0 +1,7 @@
+{
+    "uuid": "resource-monitor@kprakesh",
+    "name": "Resource Monitor",
+    "author": "kprakesh",
+    "icon": "icon.svg",
+    "license": "GPL-3.0"
+}
