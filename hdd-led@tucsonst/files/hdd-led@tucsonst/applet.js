@@ -1,12 +1,14 @@
+const UUID = "hdd-led@tucsonst";
+
+// Cinnamon-Spices applet to simulate a HDD activity LED on the system panel.
+// tucsonst - S. Tillman
+
 const Applet = imports.ui.applet;
 const Mainloop = imports.mainloop;
 const GLib = imports.gi.GLib;
 const ByteArray = imports.byteArray;
 const Util = imports.misc.util;
 
-const UUID = "hdd-led@tucsonst";
-// const HOME_DIR = GLib.get_home_dir();
-// const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const TOOLTIP = _("Drive activity\n");
 const DISKSTATS = "/proc/diskstats";
 const DEVICE = _("Device");
