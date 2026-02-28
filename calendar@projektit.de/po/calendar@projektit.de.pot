@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-06 07:14+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/applet.ts:469
+msgid "Date and Time Settings"
+msgstr ""
+
+#: src/applet.ts:480
+msgid "Manage Calendars"
+msgstr ""
+
+#: src/applet.ts:771
+msgid "Import Calendar (.ics)"
+msgstr ""
+
+#: src/applet.ts:776
+msgid "Cancel"
+msgstr ""
+
+#: src/applet.ts:777
+msgid "Import"
+msgstr ""
+
+#: src/CalendarView.ts:1453
+msgid "Edit"
+msgstr ""
+
+#: src/CalendarView.ts:1480
+msgid "No events"
+msgstr ""
+
+#: src/CalendarView.ts:1529
+msgid "Month view"
+msgstr ""
+
+#: src/CalendarView.ts:1677 src/CalendarView.ts:1758
+msgid "All Day"
+msgstr ""
+
+#: src/CalendarView.ts:1693
+msgid "What? (Nice event)"
+msgstr ""
+
+#: src/CalendarView.ts:1775
+msgid "From:"
+msgstr ""
+
+#: src/CalendarView.ts:1780
+msgid "To:"
+msgstr ""
+
+#: src/CalendarView.ts:1849
+msgid "Update"
+msgstr ""
+
+#: src/CalendarView.ts:1849
+msgid "Save"
+msgstr ""
