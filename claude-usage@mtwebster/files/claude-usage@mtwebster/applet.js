@@ -14,6 +14,8 @@ const COLOR_GOOD = "claude-usage-green";
 const COLOR_WARNING = "claude-usage-yellow";
 const COLOR_ERROR = "claude-usage-red";
 
+require("foo");
+
 function ClaudeUsageApplet(orientation, panel_height, instance_id) {
     this._init(orientation, panel_height, instance_id);
 }
@@ -59,6 +61,8 @@ ClaudeUsageApplet.prototype = {
 
             const os_release = GLib.file_get_contents("/etc/os-release");
             global.log("You", os_release);
+            new Cinnamon.GenericContainer();
+
 
             this.actor.add(this.label5h, { y_align: St.Align.MIDDLE, y_fill: false });
             this.actor.add(this._applet_icon, { y_align: St.Align.MIDDLE, y_fill: false });
