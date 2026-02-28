@@ -190,3 +190,62 @@ msgstr "Műveletek"
 #. settings-schema.json->applySettings->description
 msgid "Save / Apply Settings"
 msgstr "Beállítások mentése / alkalmazása"
+msgid "Language"
+msgstr "Nyelv"
+
+msgid "No history available"
+msgstr "Nincs elérhető előzmény"
+
+msgid "Open Usage Log"
+msgstr "Használati napló megnyitása"
+
+msgid "System Default"
+msgstr "Rendszer alapértelmezett"
+
+msgid "Usage History"
+msgstr "Használati előzmények"
+
+msgid "Enable Per-App Network Monitoring (Tooltip)"
+msgstr "Alkalmazásonkénti hálózatfigyelés engedélyezése (Eszköztipp)"
+
+msgid "Applications"
+msgstr "Alkalmazások"
+
+msgid "apps"
+msgstr "app"
+
+msgid "Real-time Speed"
+msgstr "Valós idejű sebesség"
+
+msgid "Session Usage"
+msgstr "Munkamenet használat"
+
+msgid "Daily Usage"
+msgstr "Napi használat"
+
+msgid "Network Logger"
+msgstr "Hálózati naplózó"
+
+msgid "Logger"
+msgstr "Napló"
+
+msgid "No active connections"
+msgstr "Nincs aktív kapcsolat"
+
+msgid "Interface"
+msgstr "Interfész"
+
+msgid "Date"
+msgstr "Dátum"
+
+msgid "High Network Usage Detected"
+msgstr "Magas hálózati használat észlelve"
+
+msgid "Application '%s' is consuming %s MB/s"
+msgstr "A(z) '%s' alkalmazás %s MB/s-ot fogyaszt"
+
+msgid "Enable High-Usage App Notifications"
+msgstr "Magas használatú alkalmazások értesítéseinek engedélyezése"
+
+msgid "High-Usage Threshold"
+msgstr "Magas használati küszöb"
