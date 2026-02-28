@@ -48,36 +48,6 @@ Access settings from the menu's "Settings" button or via Cinnamon Settings.
 - **Popup Width**: Menu width in pixels (220-720, default: 400)
 - **Popup Height**: Auto-adjusted based on content (not configurable)
 
-## Dependencies
-
-- Cinnamon 5.0 or later
-- GLib and Gio libraries (usually pre-installed)
-
-## Supported Versions
-
-- Cinnamon 5.0
-- Cinnamon 5.2
-- Cinnamon 5.4
-- Cinnamon 5.6
-- Cinnamon 5.8
-- Cinnamon 6.0
-- Cinnamon 6.2
-- Cinnamon 6.4
-
-## File Structure
-
-```
-clipboard@chmodmasx/
-├── files/clipboard@chmodmasx/
-│   ├── applet.js              # Main applet code
-│   ├── metadata.json          # Applet metadata
-│   ├── po/                    # Translations
-│   ├── settings-schema.json   # Settings definition
-│   ├── stylesheet.css         # UI styling
-│   └── icon.png              # Applet icon
-├── info.json                 # Spices metadata
-└── README.md                 # This file
-```
 
 ## Troubleshooting
 
@@ -93,7 +63,7 @@ clipboard@chmodmasx/
 
 ### History not persisting
 1. Verify "Persist History" is enabled in settings
-2. Check that `~/.local/share/cinnamon/clipboard@chmodmasx/` directory exists
+2. Check that `$XDG_DATA_HOME/cinnamon/clipboard@chmodmasx/` directory exists (usually `~/.local/share/cinnamon/clipboard@chmodmasx/`)
 3. Ensure write permissions in user's home directory
 
 ## Performance Tips
@@ -104,23 +74,22 @@ clipboard@chmodmasx/
 
 ## License
 
-GPL-3.0 - See COPYING file for details
+GPL-3.0 - See the repository's top-level COPYING file for details
 
 ## Author
 
 **chmodmasx** - Main developer
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit issues or pull requests.
-
-## Links
-
-- [Cinnamon Spices](https://cinnamon-spices.linuxmint.com)
-- [Cinnamon Documentation](https://wiki.linuxmint.com/wiki/Cinnamon)
-- [GitHub Repository](https://github.com/linuxmint/cinnamon-spices-applets)
-
 ## Changelog
+
+### Version 1.0.1 (2026-02-28)
+- **Performance**: Replaced O(n) duplicate detection (`Array.indexOf`) with O(1) `Set`-based lookup
+- **Correctness**: History size limit is now enforced immediately after loading from disk
+- **API compliance**: Replaced forbidden `Gtk.Clipboard`/`Gdk.Display` with `St.Clipboard` (Cinnamon Shell Toolkit); clipboard monitoring is now handled entirely via the polling timer
+- **Non-blocking I/O**: All file operations (`_loadHistory`, `_saveHistory`, `_initStorage`, `_ensureSettingsFile`) migrated to async `Gio` API
+- **XDG compliance**: Replaced hardcoded `~/.local/share` paths with `GLib.get_user_data_dir()`
+- **Security**: Replaced shell string spawn with `Util.spawn()` argv array
+- **Documentation**: Fixed `_clearHistory` JSDoc comment; clarified `COPYING` file location in README
 
 ### Version 1.0.0 (2026-01-20)
 - Initial release
@@ -131,5 +100,3 @@ Contributions are welcome! Please feel free to submit issues or pull requests.
 - Translation support
 
 ---
-
-**Last Updated**: January 26, 2026

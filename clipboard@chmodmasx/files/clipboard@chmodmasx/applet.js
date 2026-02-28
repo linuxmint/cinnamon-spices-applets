@@ -1,8 +1,7 @@
 const Applet = imports.ui.applet;
 const Clutter = imports.gi.Clutter;
+const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const Gtk = imports.gi.Gtk;
-const Gdk = imports.gi.Gdk;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
@@ -23,7 +22,7 @@ const MENU_DEFAULT_HEIGHT = 300;
 const MENU_MIN_HISTORY_HEIGHT = 24;
 const ITEM_HORIZONTAL_PADDING = 36;
 function _(str) {
-    Gettext.bindtextdomain(AppletUUID, GLib.get_home_dir() + "/.local/share/locale");
+    Gettext.bindtextdomain(AppletUUID, GLib.get_user_data_dir() + "/locale");
     let translated = Gettext.dgettext(AppletUUID, str);
     if (translated !== str) {
         return translated;
@@ -55,6 +54,7 @@ class ClipboardApplet extends Applet.IconApplet {
         this.set_applet_tooltip(_("Clipboard history"));
 
         this._history = [];
+        this._historySet = new Set();
         this._filterText = "";
         this._lastSetClipboardText = null;
         this._lastSetPrimaryText = null;
@@ -114,53 +114,86 @@ class ClipboardApplet extends Applet.IconApplet {
 
     /**
      * Initialize storage directory for applet data
-     * Creates ~/.local/share/cinnamon/clipboard@chmodmasx directory if needed
+     * Creates $XDG_DATA_HOME/cinnamon/clipboard@chmodmasx directory if needed
      * Stores history data in history.json
      */
     _initStorage() {
         let dataDir = GLib.build_filenamev([GLib.get_user_data_dir(), "cinnamon", this._appletUuid]);
-        if (!GLib.file_test(dataDir, GLib.FileTest.IS_DIR)) {
-            GLib.mkdir_with_parents(dataDir, 0o700);
+        // Use Gio to avoid synchronous file_test stat call.
+        let dataDirFile = Gio.File.new_for_path(dataDir);
+        try {
+            dataDirFile.make_directory_with_parents(null);
+        } catch (e) {
+            // EXISTS means the directory is already there — that is fine.
+            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+                global.logError(e);
+            }
         }
         this._historyPath = GLib.build_filenamev([dataDir, "history.json"]);
     }
 
+    /**
+     * Load clipboard history from persistent storage (JSON file)
+     * Only loads if persist-history setting is enabled
+     * Uses async Gio I/O to avoid blocking the main loop
+     * Enforces current historySize limit immediately after loading
+     */
     _loadHistory() {
         if (!this.persistHistory) {
             return;
         }
-        if (!GLib.file_test(this._historyPath, GLib.FileTest.EXISTS)) {
-            return;
-        }
-        try {
-            let [ok, contents] = GLib.file_get_contents(this._historyPath);
-            if (!ok) {
+        let file = Gio.File.new_for_path(this._historyPath);
+        file.load_contents_async(null, (_file, res) => {
+            try {
+                let [ok, contents] = _file.load_contents_finish(res);
+                if (!ok) {
+                    return;
+                }
+                let data = ByteArray.toString(contents);
+                let parsed = JSON.parse(data);
+                if (Array.isArray(parsed)) {
+                    this._history = parsed.filter(item => typeof item === "string");
+                }
+            } catch (e) {
+                // NOT_FOUND is expected on first run — skip logging for it.
+                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                    global.logError(e);
+                }
                 return;
             }
-            let data = ByteArray.toString(contents);
-            let parsed = JSON.parse(data);
-            if (Array.isArray(parsed)) {
-                this._history = parsed.filter(item => typeof item === "string");
-            }
-        } catch (e) {
-            global.logError(e);
-        }
+            // Enforce current size limit immediately, in case the user reduced
+            // historySize since the last session.
+            this._trimHistory();
+            this._historySet = new Set(this._history);
+            this._rebuildHistoryList();
+        });
     }
 
     /**
      * Save clipboard history to persistent storage (JSON file)
      * Only saves if persist-history setting is enabled
-     * Catches and logs file I/O errors gracefully
+     * Uses async Gio I/O to avoid blocking the main loop
      */
     _saveHistory() {
         if (!this.persistHistory) {
             return;
         }
-        try {
-            GLib.file_set_contents(this._historyPath, JSON.stringify(this._history));
-        } catch (e) {
-            global.logError(e);
-        }
+        let data = JSON.stringify(this._history);
+        // Encode to bytes for the async API.
+        let bytes = new GLib.Bytes(new TextEncoder().encode(data));
+        let file = Gio.File.new_for_path(this._historyPath);
+        file.replace_contents_bytes_async(
+            bytes, null, false,
+            Gio.FileCreateFlags.REPLACE_DESTINATION,
+            null,
+            (_file, res) => {
+                try {
+                    _file.replace_contents_finish(res);
+                } catch (e) {
+                    global.logError(e);
+                }
+            }
+        );
     }
 
     /**
@@ -286,23 +319,23 @@ class ClipboardApplet extends Applet.IconApplet {
         let width = this._getPopupWidth() * global.ui_scale;
         let height = this._getPopupHeight() * global.ui_scale;
         let minHeight = this._getMinMenuHeight();
-        
+
         // Get the preferred height of the content and calculate what the total height should be
         let chromeHeight = this._getChromeHeight();
         let preferredContentHeight = this._getHistoryPreferredHeight();
         let preferredTotalHeight = chromeHeight + Math.max(preferredContentHeight, MENU_MIN_HISTORY_HEIGHT);
-        
+
         // Use the preferred height if it's less than the configured height
         // This allows auto-growth while respecting the max configured size
         height = Math.max(minHeight, preferredTotalHeight);
-        
+
         // Limit height to available screen space (respecting panels)
         let maxAvailableHeight = this._getMaxAvailableHeight();
         height = Math.min(height, maxAvailableHeight);
-        
+
         this._setMenuSize(width, height);
     }
-    
+
     _getMaxAvailableHeight() {
         // Get the monitor where the applet is located
         let monitorIndex = Main.layoutManager.primaryIndex;
@@ -310,12 +343,12 @@ class ClipboardApplet extends Applet.IconApplet {
             // Fallback to screen height if monitor info not available
             return global.screen_height;
         }
-        
+
         let monitor = Main.layoutManager.monitors[monitorIndex];
         if (!monitor) {
             return global.screen_height;
         }
-        
+
         // Calculate padding for panels
         let padding = { top: 0, bottom: 0 };
         try {
@@ -324,13 +357,13 @@ class ClipboardApplet extends Applet.IconApplet {
                 if (!panel || panel._hidden || !panel.actor) {
                     continue;
                 }
-                
+
                 let actor = panel.actor;
                 let actorHeight = actor.height || actor.get_height();
                 if (!actorHeight) {
                     continue;
                 }
-                
+
                 // Check panel position and add to appropriate padding
                 if (panel.panelPosition === 0) { // TOP
                     let topEdge = actor.y + actorHeight;
@@ -344,7 +377,7 @@ class ClipboardApplet extends Applet.IconApplet {
         } catch (e) {
             // If panel manager not available, just use monitor height
         }
-        
+
         // Calculate available height
         let availableHeight = monitor.height - padding.top - padding.bottom;
         return Math.max(0, availableHeight);
@@ -506,50 +539,22 @@ class ClipboardApplet extends Applet.IconApplet {
     }
 
     _initClipboardMonitors() {
-        this._display = Gdk.Display.get_default();
-        if (!this._display) {
+        // Use St.Clipboard (the Cinnamon/Shell Toolkit clipboard) instead of the
+        // forbidden Gtk.Clipboard and Gdk.Display APIs.
+        this._clipboard = St.Clipboard.get_default();
+        if (!this._clipboard) {
+            global.logWarning("[clipboard@chmodmasx] St.Clipboard not available.");
             return;
         }
-        this._clipboard = Gtk.Clipboard.get_default(this._display);
-        this._primaryAtom = Gdk.Atom.intern("PRIMARY", false);
-        this._primary = Gtk.Clipboard.get_for_display(this._display, this._primaryAtom);
-
-        if (this._clipboard) {
-            this._clipboardOwnerId = this._clipboard.connect("owner-change", () => {
-                this._handleClipboardChange("clipboard");
-            });
-        }
-
-        this._updatePrimaryTracking();
+        // Without Gtk.Clipboard's owner-change signal, clipboard monitoring is
+        // handled entirely through the polling timer.
         this._updatePollingTimer();
     }
 
+    // St.Clipboard does not expose an owner-change signal, so primary-selection
+    // tracking is controlled solely by the polling timer (see _startPolling).
     _updatePrimaryTracking() {
-        if (!this._primary) {
-            return;
-        }
-        if (this.trackPrimary && !this._primaryOwnerId) {
-            this._primaryOwnerId = this._primary.connect("owner-change", () => {
-                this._handleClipboardChange("primary");
-            });
-        }
-        if (!this.trackPrimary && this._primaryOwnerId) {
-            this._primary.disconnect(this._primaryOwnerId);
-            this._primaryOwnerId = 0;
-        }
-    }
-
-    _handleClipboardChange(source) {
-        if (!this.trackingEnabled) {
-            return;
-        }
-        let clipboard = source === "primary" ? this._primary : this._clipboard;
-        if (!clipboard) {
-            return;
-        }
-        clipboard.request_text((clip, text) => {
-            this._onClipboardText(source, text);
-        });
+        // No-op: primary tracking on/off is handled by the polling loop.
     }
 
     _onClipboardText(source, text) {
@@ -581,12 +586,18 @@ class ClipboardApplet extends Applet.IconApplet {
             return;
         }
         if (this.ignoreDuplicates) {
-            let existingIndex = this._history.indexOf(text);
-            if (existingIndex !== -1) {
-                this._history.splice(existingIndex, 1);
+            // O(1) duplicate check using Set instead of Array.indexOf (O(n)).
+            // Move existing item to the front by removing it first.
+            if (this._historySet.has(text)) {
+                let existingIndex = this._history.indexOf(text);
+                if (existingIndex !== -1) {
+                    this._history.splice(existingIndex, 1);
+                }
+                this._historySet.delete(text);
             }
         }
         this._history.unshift(text);
+        this._historySet.add(text);
         this._trimHistory();
         this._saveHistory();
         this._rebuildHistoryList();
@@ -661,14 +672,13 @@ class ClipboardApplet extends Applet.IconApplet {
      * @param {string} source - 'clipboard' or 'primary' selection
      */
     _pollClipboard(source) {
-        if (!this.trackingEnabled) {
+        if (!this.trackingEnabled || !this._clipboard) {
             return;
         }
-        let clipboard = source === "primary" ? this._primary : this._clipboard;
-        if (!clipboard) {
-            return;
-        }
-        clipboard.request_text((clip, text) => {
+        let type = source === "primary"
+            ? St.ClipboardType.PRIMARY
+            : St.ClipboardType.CLIPBOARD;
+        this._clipboard.get_text(type, (_clip, text) => {
             this._onClipboardText(source, text);
         });
     }
@@ -676,17 +686,22 @@ class ClipboardApplet extends Applet.IconApplet {
     _trimHistory() {
         let max = Math.max(1, Number(this.historySize) || 50);
         if (this._history.length > max) {
-            this._history.length = max;
+            // Remove trimmed items from the Set to keep both in sync.
+            let removed = this._history.splice(max);
+            for (let item of removed) {
+                this._historySet.delete(item);
+            }
         }
     }
 
     /**
      * Clear all clipboard history
-     * Empties the history array and removes persistent storage file
+     * Empties the history array and clears persistent storage file (saves empty history)
      * Immediately updates menu UI to show empty state
      */
     _clearHistory() {
         this._history = [];
+        this._historySet = new Set();
         this._saveHistory();
         this._rebuildHistoryList();
     }
@@ -698,67 +713,130 @@ class ClipboardApplet extends Applet.IconApplet {
     _openSettings() {
         this.menu.close();
         let uuid = this._appletUuid || this._uuid || BASE_UUID;
-        this._ensureSettingsFile(uuid);
-        let command = `xlet-settings applet ${uuid} -i ${this._instanceId}`;
-        try {
-            Util.spawnCommandLine(command);
-        } catch (e) {
-            global.logError(e);
-        }
+        // Ensure the settings config file exists, then spawn the settings window.
+        // shell_string_spawn: use argv array instead of a shell command string.
+        this._ensureSettingsFile(uuid, () => {
+            try {
+                Util.spawn(["xlet-settings", "applet", uuid, "-i", String(this._instanceId)]);
+            } catch (e) {
+                global.logError(e);
+            }
+        });
     }
 
-    _ensureSettingsFile(uuid) {
+    /**
+     * Ensure the Cinnamon settings JSON file exists for this applet instance.
+     * Fully async: uses Gio file I/O to avoid blocking the main loop.
+     * @param {string} uuid  - Applet UUID
+     * @param {Function} onDone - Callback invoked when the file is ready (or already existed)
+     */
+    _ensureSettingsFile(uuid, onDone) {
         let configDir = GLib.build_filenamev([GLib.get_user_config_dir(), "cinnamon", "spices", uuid]);
         let configPath = GLib.build_filenamev([configDir, `${uuid}.json`]);
-        if (GLib.file_test(configPath, GLib.FileTest.EXISTS)) {
-            return true;
-        }
-        if (!GLib.file_test(configDir, GLib.FileTest.IS_DIR)) {
-            GLib.mkdir_with_parents(configDir, 0o700);
-        }
+        let configFile = Gio.File.new_for_path(configPath);
 
-        let schemaPath = GLib.build_filenamev([GLib.get_home_dir(), ".local/share/cinnamon/applets", uuid, "settings-schema.json"]);
-        if (!GLib.file_test(schemaPath, GLib.FileTest.EXISTS)) {
-            schemaPath = GLib.build_filenamev(["/usr/share/cinnamon/applets", uuid, "settings-schema.json"]);
-        }
-        if (!GLib.file_test(schemaPath, GLib.FileTest.EXISTS)) {
-            global.logWarning(`[${uuid}] settings-schema.json not found; cannot create settings file.`);
-            return false;
-        }
-
-        try {
-            let [ok, contents] = GLib.file_get_contents(schemaPath);
-            if (!ok) {
-                return false;
-            }
-            let schemaText = ByteArray.toString(contents);
-            let schemaData = JSON.parse(schemaText);
-            let settingsData = JSON.parse(JSON.stringify(schemaData));
-            for (let key in settingsData) {
-                let entry = settingsData[key];
-                if (entry && typeof entry === "object" && entry.default !== undefined) {
-                    entry.value = entry.default;
+        // Check whether the config file already exists (async stat).
+        configFile.query_info_async(
+            "standard::type",
+            Gio.FileQueryInfoFlags.NONE,
+            GLib.PRIORITY_DEFAULT,
+            null,
+            (_f, res) => {
+                try {
+                    _f.query_info_finish(res);
+                    // File exists — nothing to do, just invoke the callback.
+                    if (onDone) onDone();
+                    return;
+                } catch (e) {
+                    if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                        global.logError(e);
+                        if (onDone) onDone();
+                        return;
+                    }
+                    // NOT_FOUND is expected — we need to create the file.
                 }
+
+                // Ensure parent config directory exists.
+                let configDirFile = Gio.File.new_for_path(configDir);
+                try {
+                    configDirFile.make_directory_with_parents(null);
+                } catch (e) {
+                    if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+                        global.logError(e);
+                        if (onDone) onDone();
+                        return;
+                    }
+                }
+
+                // Locate the settings-schema.json (user install first, then system).
+                // hardcoded_data_dir: use GLib.get_user_data_dir() instead of get_home_dir().
+                let schemaPath = GLib.build_filenamev([GLib.get_user_data_dir(), "cinnamon/applets", uuid, "settings-schema.json"]);
+                let schemaFile = Gio.File.new_for_path(schemaPath);
+                if (!schemaFile.query_exists(null)) {
+                    schemaPath = GLib.build_filenamev(["/usr/share/cinnamon/applets", uuid, "settings-schema.json"]);
+                    schemaFile = Gio.File.new_for_path(schemaPath);
+                }
+                if (!schemaFile.query_exists(null)) {
+                    global.logWarning(`[${uuid}] settings-schema.json not found; cannot create settings file.`);
+                    if (onDone) onDone();
+                    return;
+                }
+
+                // Read the schema file asynchronously.
+                schemaFile.load_contents_async(null, (_sf, schemaRes) => {
+                    try {
+                        let [ok, contents] = _sf.load_contents_finish(schemaRes);
+                        if (!ok) {
+                            if (onDone) onDone();
+                            return;
+                        }
+                        let schemaText = ByteArray.toString(contents);
+                        let schemaData = JSON.parse(schemaText);
+                        let settingsData = JSON.parse(JSON.stringify(schemaData));
+                        for (let key in settingsData) {
+                            let entry = settingsData[key];
+                            if (entry && typeof entry === "object" && entry.default !== undefined) {
+                                entry.value = entry.default;
+                            }
+                        }
+                        if (global.get_md5_for_string) {
+                            settingsData.__md5__ = global.get_md5_for_string(schemaText);
+                        }
+                        let output = JSON.stringify(settingsData, null, 4);
+                        let bytes = new GLib.Bytes(new TextEncoder().encode(output));
+
+                        // Write the settings file asynchronously.
+                        configFile.replace_contents_bytes_async(
+                            bytes, null, false,
+                            Gio.FileCreateFlags.REPLACE_DESTINATION,
+                            null,
+                            (_cf, writeRes) => {
+                                try {
+                                    _cf.replace_contents_finish(writeRes);
+                                } catch (writeErr) {
+                                    global.logError(writeErr);
+                                }
+                                if (onDone) onDone();
+                            }
+                        );
+                    } catch (parseErr) {
+                        global.logError(parseErr);
+                        if (onDone) onDone();
+                    }
+                });
             }
-            if (global.get_md5_for_string) {
-                settingsData.__md5__ = global.get_md5_for_string(schemaText);
-            }
-            GLib.file_set_contents(configPath, JSON.stringify(settingsData, null, 4));
-            return true;
-        } catch (e) {
-            global.logError(e);
-            return false;
-        }
+        );
     }
 
     _setClipboardText(text) {
-        if (this._clipboard) {
-            this._lastSetClipboardText = text;
-            this._clipboard.set_text(text, -1);
+        if (!this._clipboard) {
+            return;
         }
-        if (this.syncPrimary && this._primary) {
+        this._lastSetClipboardText = text;
+        this._clipboard.set_text(St.ClipboardType.CLIPBOARD, text);
+        if (this.syncPrimary) {
             this._lastSetPrimaryText = text;
-            this._primary.set_text(text, -1);
+            this._clipboard.set_text(St.ClipboardType.PRIMARY, text);
         }
     }
 
@@ -878,6 +956,8 @@ class ClipboardApplet extends Applet.IconApplet {
             return;
         }
         this._setClipboardText(text);
+        // Move activated item to the top of the history (most-recent first).
+        // The Set doesn't need to change since the item remains in history.
         if (this.ignoreDuplicates && index > 0) {
             this._history.splice(index, 1);
             this._history.unshift(text);
@@ -897,7 +977,8 @@ class ClipboardApplet extends Applet.IconApplet {
         if (index < 0 || index >= this._history.length) {
             return;
         }
-        this._history.splice(index, 1);
+        let [removed] = this._history.splice(index, 1);
+        this._historySet.delete(removed);
         this._saveHistory();
         this._rebuildHistoryList();
     }
@@ -917,14 +998,7 @@ class ClipboardApplet extends Applet.IconApplet {
      * CRITICAL: Prevents memory leaks and orphaned file handles
      */
     on_applet_removed_from_panel() {
-        if (this._clipboard && this._clipboardOwnerId) {
-            this._clipboard.disconnect(this._clipboardOwnerId);
-            this._clipboardOwnerId = 0;
-        }
-        if (this._primary && this._primaryOwnerId) {
-            this._primary.disconnect(this._primaryOwnerId);
-            this._primaryOwnerId = 0;
-        }
+        // St.Clipboard is a singleton managed by the shell — no disconnection needed.
         this._stopPolling();
         this._saveHistory();
         this._settings.finalize();
