@@ -1,0 +1,9 @@
+{
+    "uuid": "workspace-indicator@benzor.hu",
+    "name": "Workspace Indicator",
+    "description": "Single-button workspace indicator and switcher",
+    "version": "1.0.0",
+    "max_instances": 10,
+    "multiversion": true,
+    "author": "Benzor94"
+}
