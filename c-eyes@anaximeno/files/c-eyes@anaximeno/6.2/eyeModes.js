@@ -257,7 +257,12 @@ var EyelidMode = class EyelidMode extends EyeMode {
 
         cr.newPath();
         this._appendEyelidEyePath(cr, eye_rad, iris_rad, x_def, y_def, top_lid, bottom_lid);
-        options.fill ? cr.fill() : cr.stroke();
+
+        if (options.fill) {
+            cr.fill();
+        } else {
+            cr.stroke();
+        }
 
         cr.newPath();
         this._appendEyelidEyePath(cr, eye_rad, iris_rad, x_def, y_def, top_lid, bottom_lid);
@@ -306,7 +311,10 @@ var EyelidMode = class EyelidMode extends EyeMode {
         cr.arc(0, 0, 1.0, 0, TWO_PI);
         cr.fill();
 
-        this._applyUpperLidBlink(cr, blink_rate, eye_rad, options.line_width, area_width, area_height, !options.fill, options.base_color,
+        let lid_stroke_width = options.fill ? Math.max(1, options.line_width * 0.4) : options.line_width;
+        let lid_stroke_color = options.fill ? options.stroke_color : options.base_color;
+
+        this._applyUpperLidBlink(cr, blink_rate, eye_rad, lid_stroke_width, area_width, area_height, true, lid_stroke_color,
             (ctx) => this._appendEyelidEyePath(ctx, eye_rad, iris_rad, x_def, y_def, top_lid, bottom_lid)
         );
     }
@@ -349,7 +357,12 @@ var BulbMode = class BulbMode extends EyeMode {
         cr.translate(half_width, half_height);
         cr.setLineWidth(options.line_width);
         cr.arc(0, 0, eye_rad, 0, TWO_PI);
-        options.fill ? cr.fill() : cr.stroke();
+
+        if (options.fill) {
+            cr.fill();
+        } else {
+            cr.stroke();
+        }
 
         cr.rotate(mouse_ang);
 
@@ -394,7 +407,10 @@ var BulbMode = class BulbMode extends EyeMode {
         cr.arc(0, 0, 1.0, 0, TWO_PI);
         cr.fill();
 
-        this._applyUpperLidBlink(cr, blink_rate, eye_rad, options.line_width, area_width, area_height, !options.fill, options.base_color,
+        let lid_stroke_width = options.fill ? Math.max(1, options.line_width * 0.4) : options.line_width;
+        let lid_stroke_color = options.fill ? options.stroke_color : options.base_color;
+
+        this._applyUpperLidBlink(cr, blink_rate, eye_rad, lid_stroke_width, area_width, area_height, true, lid_stroke_color,
             (ctx) => { ctx.arc(0, 0, eye_rad, 0, TWO_PI); },
             true // use lower lid
         );

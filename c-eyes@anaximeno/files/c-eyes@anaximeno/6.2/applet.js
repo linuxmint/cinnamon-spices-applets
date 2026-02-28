@@ -436,6 +436,7 @@ class Eye extends Applet.Applet {
 				line_width: line_width,
 				is_vertical: is_vertical,
 				fill: this.use_alternative_colors,
+				stroke_color: stroke_color,
 			},
 		);
 	}
