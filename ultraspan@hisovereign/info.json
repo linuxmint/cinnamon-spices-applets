@@ -1,0 +1,8 @@
+{
+  "uuid": "ultraspan@hisovereign",
+  "name": "Ultraspan",
+  "description": "This is only an applet for the Ultraspan wallpaper script. It can set wallpapers, change settings, and overall control the Ultraspan script. See: github.com/hisovereign/ultraspan",
+  "version": "1.0",
+  "author": "hisovereign",
+  "license": "GPL-2.0+"
+}
