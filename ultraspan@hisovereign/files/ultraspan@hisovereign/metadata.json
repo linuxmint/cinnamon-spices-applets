@@ -1,0 +1,7 @@
+{
+    "uuid": "ultraspan@hisovereign",
+    "name": "Ultraspan Applet",
+    "description": "A Cinnamon applet for Ultraspan script",
+    "version": "1.0",
+    "max-instances": 1
+}
