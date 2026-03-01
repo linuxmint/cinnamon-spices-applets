@@ -1,0 +1,11 @@
+{
+  "name": "hdd-led-tucsonst",
+  "version": "1.0.0",
+  "description": "HDD LED Indicator Applet",
+  "main": "applet.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tucsonst",
+  "license": "GPL-3.0"
+}
