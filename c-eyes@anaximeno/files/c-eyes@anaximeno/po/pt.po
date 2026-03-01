@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-01 16:37-0100\n"
-"PO-Revision-Date: 2026-03-01 16:39-0100\n"
+"POT-Creation-Date: 2026-03-01 19:43-0100\n"
+"PO-Revision-Date: 2026-03-01 19:47-0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt\n"
@@ -133,7 +133,6 @@ msgstr "px"
 
 #. 4.2->settings-schema.json->eye-margin->description
 #. 5.4->settings-schema.json->eye-margin->description
-#. 6.2->settings-schema.json->margin->description
 msgid "Margin"
 msgstr "Margem"
 
@@ -467,6 +466,30 @@ msgstr "Performance"
 #. 6.2->settings-schema.json->optimization-mode->options
 msgid "Manual"
 msgstr "Manual"
+
+#. 6.2->settings-schema.json->margin->description
+msgid "Width"
+msgstr "Largura"
+
+#. 6.2->settings-schema.json->margin->tooltip
+msgid ""
+"This setting controls the width of the area around the eye within which the "
+"eye will follow the mouse cursor. Positive values increase the area, while "
+"negative values decrease it."
+msgstr ""
+"Esta configuração controla a largura da área ao redor do olho dentro da qual "
+"o olho seguirá o cursor do rato. Valores positivos aumentam a área, enquanto "
+"valores negativos a diminuem."
+
+#. 6.2->settings-schema.json->padding->tooltip
+msgid ""
+"This setting controls the padding around the eye within which the eye will "
+"follow the mouse cursor. Increasing the padding decreases the radius of the "
+"eye, while decreasing the padding increases the radius of the eye."
+msgstr ""
+"Esta configuração controla o preenchimento ao redor do olho, dentro do qual "
+"o olho seguirá o cursor do rato. Aumentar o preenchimento diminui o raio do "
+"olho, enquanto diminuir o preenchimento aumenta o raio do olho."
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
