@@ -1,0 +1,107 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "General"
+        ],
+        "General": {
+            "type": "page",
+            "title": "General",
+            "sections": [
+                "section-history",
+                "section-tracking",
+                "section-menu"
+            ]
+        },
+        "section-history": {
+            "type": "section",
+            "title": "History",
+            "keys": [
+                "history-size",
+                "ignore-duplicates",
+                "ignore-whitespace",
+                "persist-history"
+            ]
+        },
+        "section-tracking": {
+            "type": "section",
+            "title": "Tracking",
+            "keys": [
+                "tracking-enabled",
+                "poll-interval",
+                "track-primary",
+                "sync-primary"
+            ]
+        },
+        "section-menu": {
+            "type": "section",
+            "title": "Menu",
+            "keys": [
+                "show-search",
+                "popup-width"
+            ]
+        }
+    },
+    "history-size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 5,
+        "max": 500,
+        "step": 1,
+        "units": "items",
+        "description": "Maximum number of items to keep"
+    },
+    "ignore-duplicates": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Ignore duplicate entries"
+    },
+    "ignore-whitespace": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Ignore empty or whitespace-only entries"
+    },
+    "persist-history": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Persist history on disk"
+    },
+    "tracking-enabled": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Track clipboard changes"
+    },
+    "poll-interval": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "units": "seconds",
+        "description": "Polling interval for clipboard updates"
+    },
+    "track-primary": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Track primary selection (mouse selection)"
+    },
+    "sync-primary": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Also set primary selection when choosing an item"
+    },
+    "show-search": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show search box"
+    },
+    "popup-width": {
+        "type": "spinbutton",
+        "default": 400,
+        "min": 220,
+        "max": 720,
+        "step": 10,
+        "units": "px",
+        "description": "Menu width"
+    }
+}
