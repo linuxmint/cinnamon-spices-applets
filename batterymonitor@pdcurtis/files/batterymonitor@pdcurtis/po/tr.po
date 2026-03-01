@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Gökhan GÖKKAYA <gokhanlnx@gmail.com>.
+# TURBOKAN_TR.
 #
 msgid ""
 msgstr ""
@@ -9,31 +9,29 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-05 14:36-0500\n"
-"PO-Revision-Date: 2024-01-21 17:50-0500\n"
-"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
+"PO-Revision-Date: 2026-03-01 10:51+0300\n"
+"Last-Translator: "TURBOKAN_TR" \n"
 "Language-Team: \n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.8\n"
 
 #: 5.4/applet.js:300 3.2/applet.js:130
 msgid "--%"
-msgstr "--%"
+msgstr "%--"
 
 #: 5.4/applet.js:301 3.2/applet.js:131
 msgid "Waiting"
 msgstr "Bekleniyor"
 
 #: 5.4/applet.js:327
-#, fuzzy
 msgid "Some dependencies not installed."
-msgstr "Bazı Bağımlılıklar Yüklenmedi"
+msgstr "Bazı Bağımlılıklar Yüklenmedi."
 
 #: 5.4/applet.js:327
-#, fuzzy
 msgid ""
 "Both 'sox' and 'zenity' are required for this applet to have all of its "
 "functionality including notifications and audible alerts.\n"
@@ -43,7 +41,7 @@ msgstr ""
 "Bu uygulamanın bildirimler ve sesli uyarılar dahil tüm olanaklarına sahip "
 "olması için hem 'sox' hem de 'zenity' gereklidir.\n"
 "\n"
-"Lütfen bunların nasıl kurulacağına ilişkin yardım dosyasını okuyun."
+"Lütfen bunların nasıl kurulacağına ilişkin yardım dosyasını okuyun.\n"
 
 #: 5.4/applet.js:337 3.2/applet.js:193
 msgid "Battery Monitor Applet"
@@ -80,14 +78,13 @@ msgstr "Değişim Günlüğünü İncele"
 
 #: 5.4/applet.js:423
 msgid "Open the README"
-msgstr ""
+msgstr "README dosyasını aç"
 
 #: 5.4/applet.js:439 3.2/applet.js:358
 msgid "Waiting for battery information"
 msgstr "Pil bilgileri bekleniyor"
 
 #: 5.4/applet.js:444
-#, fuzzy
 msgid "Alert/Suspend:"
 msgstr "Askı:"
 
@@ -96,14 +93,13 @@ msgid "Battery Low - turn off or connect to power supply"
 msgstr "Düşük Pil - kapat veya ana şebekeye bağla"
 
 #: 5.4/applet.js:555
-#, fuzzy
 msgid ""
 "The battery level has fallen to your alert level.\n"
 "\n"
 "Either connect to a power source or save or close down\n"
 "your work and suspend or shutdown the machine.\n"
 msgstr ""
-"Pil Düzeyi, uyarı düzeyinize düştü\n"
+"Pil Düzeyi uyarı düzeyinize düştü.\n"
 "\n"
 "ya bir güç kaynağına yeniden bağlanın,\n"
 "\n"
@@ -116,14 +112,13 @@ msgstr "Pil Kritik, şebekeye bağlanmazsa askıya alınacak"
 
 #: 5.4/applet.js:589
 msgid "Time to Empty:"
-msgstr ""
+msgstr "Bitmesine kalan süre:"
 
 #: 5.4/applet.js:590
 msgid "Time to Full:"
-msgstr ""
+msgstr "Dolmasına kalan süre:"
 
 #: 5.4/applet.js:593 5.4/applet.js:640
-#, fuzzy
 msgid "Current Charge:"
 msgstr "Şarj Oranı:"
 
@@ -145,7 +140,7 @@ msgstr "Askı durumu:"
 
 #: 5.4/applet.js:646
 msgid "The battery level has been recharged to"
-msgstr ""
+msgstr "Pil seviyesi şu seviyeye yeniden şarj edildi:"
 
 #: 3.2/applet.js:160
 msgid "Some Dependencies not Installed"
@@ -243,29 +238,27 @@ msgstr "Şarj:"
 
 #: 3.2/applet.js:522
 msgid "Percentage Charge:"
-msgstr "Şarj Oranı:"
+msgstr "Şarj Yüzdesi:"
 
 #. metadata.json->description
-#, fuzzy
 msgid "Displays charge as percentage and allows alerts and actions"
 msgstr "Şarj Yüzdesini Gösterir, Uyarı ve Eylemlere Olanak Sağlar"
 
 #. 5.4->settings-schema.json->General->title
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 #. 5.4->settings-schema.json->Style->title
 msgid "Style"
-msgstr ""
+msgstr "Tarz"
 
 #. 5.4->settings-schema.json->general->title
 msgid "General Settings"
-msgstr ""
+msgstr "Genel Ayarlar"
 
 #. 5.4->settings-schema.json->display_mode->title
-#, fuzzy
 msgid "Display Options"
-msgstr "Görünüm Kipi"
+msgstr "Görünüm Ayarları"
 
 #. 5.4->settings-schema.json->low_alert->title
 #. 3.2->settings-schema.json->head2->description
@@ -274,15 +267,15 @@ msgstr "Düşük Pil Uyarısı Ayarları"
 
 #. 5.4->settings-schema.json->advanced->title
 msgid "Advanced"
-msgstr ""
+msgstr "Gelişmiş"
 
 #. 5.4->settings-schema.json->bam_normal->title
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #. 5.4->settings-schema.json->bam_discharging->title
 msgid "Discharging"
-msgstr ""
+msgstr "Deşarj"
 
 #. 5.4->settings-schema.json->bam_alert->title
 msgid "Alert"
@@ -290,15 +283,15 @@ msgstr "Uyarı"
 
 #. 5.4->settings-schema.json->bam_alert_discharging->title
 msgid "Alert Discharging"
-msgstr ""
+msgstr "Uyarı Deşarj oluyor"
 
 #. 5.4->settings-schema.json->bam_limit_exceeded->title
 msgid "Limit Exceeded"
-msgstr ""
+msgstr "Sınır Aşıldı"
 
 #. 5.4->settings-schema.json->bam_limit_exceeded2->title
 msgid "Limit Exceeded - Critical"
-msgstr ""
+msgstr "Sınır Aşıldı - Kritik"
 
 #. 5.4->settings-schema.json->refreshInterval-spinner->units
 #. 3.2->settings-schema.json->refreshInterval-spinner->units
@@ -328,7 +321,7 @@ msgstr ""
 #. 5.4->settings-schema.json->limit_exceeded_font_size->units
 #. 5.4->settings-schema.json->limit_exceeded2_font_size->units
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #. 5.4->settings-schema.json->alertPercentage->description
 #. 3.2->settings-schema.json->alertPercentage->description
@@ -346,15 +339,15 @@ msgstr ""
 
 #. 5.4->settings-schema.json->recharged_alert->description
 msgid "Visible Alert when Recharging"
-msgstr ""
+msgstr "Şarj olurken görülebilir uyarı"
 
 #. 5.4->settings-schema.json->recharged_alert->tooltip
 msgid "Provide visible alert when battery is recharged to a certain threshold"
-msgstr ""
+msgstr "Pil belirli bir seviyeye kadar şarj olduğunda görünür bir uyarı göster"
 
 #. 5.4->settings-schema.json->recharged_alert_percentage->description
 msgid "Percentage threshold for visible recharged alert"
-msgstr ""
+msgstr "Şarj durumunu gösteren görünür uyarı için yüzde eşiği"
 
 #. 5.4->settings-schema.json->displayType->options
 #. 5.4->settings-schema.json->iconTheme->options
@@ -393,6 +386,15 @@ msgid ""
 "  Icon Only: The battery icon on a colored background indicating the current "
 "status"
 msgstr ""
+"Aşağıdaki görüntüleme seçenekleri mevcuttur (dikey paneller için Sıkışık, "
+"Sıkışık Ek ve Sadece Simge dahil):\n"
+"\n"
+"Klasik: Yatay panel için genişletilmiş mesajlarla pil yüzdesi\n"
+"Klasik Ek: Klasik modele ek olarak pil simgesi\n"
+"Sıkışık: Genişletilmiş mesajlar olmadan pil yüzdesi\n"
+"Sıkışık Ek: Sıkışık modele ek olarak pil simgesi\n"
+"Sadece Simge: Mevcut durumu gösteren renkli bir arka plan üzerinde pil "
+"simgesi"
 
 #. 5.4->settings-schema.json->iconTheme->options
 #. 3.2->settings-schema.json->iconTheme->options
@@ -411,33 +413,39 @@ msgstr "Simge Teması"
 
 #. 5.4->settings-schema.json->time_remaining_display->description
 msgid "Append estimated time remaining to chosen display type"
-msgstr ""
+msgstr "Seçilen görüntüleme türüne tahmini kalan süreyi ekle"
 
 #. 5.4->settings-schema.json->time_remaining_display->tooltip
 msgid ""
 "This will append an estimate to the above option for time remaining based on "
 "the amount of remaining battery power"
 msgstr ""
+"Bu işlem, kalan pil gücüne bağlı olarak yukarıdaki kalan süre seçeneğine "
+"tahmini bir değer ekleyecektir"
 
 #. 5.4->settings-schema.json->time_remaining_toolbar->description
 msgid "Append estimated time remaining to toolbar menu"
-msgstr ""
+msgstr "Araç çubuğu menüsüne tahmini kalan süreyi ekle"
 
 #. 5.4->settings-schema.json->time_remaining_toolbar->tooltip
 msgid ""
 "This will append an estimate to the toolbar menu for time remaining based on "
 "the amount of remaining battery power"
 msgstr ""
+"Bu işlem, kalan pil gücüne bağlı olarak kalan süre için araç çubuğu menüsüne "
+"bir tahmin ekleyecektir"
 
 #. 5.4->settings-schema.json->time_remaining_tooltip->description
 msgid "Append estimated time remaining to tooltip"
-msgstr ""
+msgstr "Araç ipucuna tahmini kalan süreyi ekle"
 
 #. 5.4->settings-schema.json->time_remaining_tooltip->tooltip
 msgid ""
 "This will append an estimate to the tooltip for time remaining based on the "
 "amount of remaining battery power"
 msgstr ""
+"Bu işlem, kalan pil gücüne bağlı olarak kalan süre için tahmini bir değeri "
+"ipucu metnine ekleyecektir"
 
 #. 5.4->settings-schema.json->useBatteryLowSound->description
 #. 3.2->settings-schema.json->useBatteryLowSound->description
@@ -446,11 +454,11 @@ msgstr "Pil Zayıf ve Kapatma Seviyesinde olduğunda sesli uyarılar sağlayın"
 
 #. 5.4->settings-schema.json->useBatteryLowSound->tooltip
 msgid ""
-"Must have `sox` installed. Limited number of sound file types supported (."
-"oga and .wav)"
+"Must have `sox` installed. Limited number of sound file types supported "
+"(.oga and .wav)"
 msgstr ""
-"Sox kurulu olmalıdır. Sınırlı sayıda ses dosyası türü desteklenir (.oga ve ."
-"wav)"
+"Sox kurulu olmalıdır. Sınırlı sayıda ses dosyası türü desteklenir (.oga "
+"ve .wav)"
 
 #. 5.4->settings-schema.json->chooseBatteryLowSound->description
 #. 3.2->settings-schema.json->chooseBatteryLowSound->description
@@ -507,7 +515,7 @@ msgstr ""
 
 #. 5.4->settings-schema.json->customBatteryPath->description
 msgid "Path to battery capacity directory (device path)"
-msgstr ""
+msgstr "Pil kapasitesi dizinine giden yol (cihaz yolu)"
 
 #. 5.4->settings-schema.json->customBatteryPath->tooltip
 msgid ""
@@ -517,6 +525,10 @@ msgid ""
 "Default:\n"
 "/sys/class/power_supply/BAT0"
 msgstr ""
+"İkinci pilinizi izlemek için örneğin kendi güç kaynağı nesnenizi seçin.\n"
+"\n"
+"Varsayılan:\n"
+"/sys/class/power_supply/BAT0"
 
 #. 5.4->settings-schema.json->normal_background_color->description
 #. 5.4->settings-schema.json->discharging_background_color->description
@@ -525,7 +537,7 @@ msgstr ""
 #. 5.4->settings-schema.json->limit_exceeded_background_color->description
 #. 5.4->settings-schema.json->limit_exceeded2_background_color->description
 msgid "Background Color"
-msgstr ""
+msgstr "Arka Plan Rengi"
 
 #. 5.4->settings-schema.json->normal_background_color->tooltip
 #. 5.4->settings-schema.json->normal_border_color->tooltip
@@ -540,7 +552,7 @@ msgstr ""
 #. 5.4->settings-schema.json->limit_exceeded2_background_color->tooltip
 #. 5.4->settings-schema.json->limit_exceeded2_border_color->tooltip
 msgid "RGB or RGBA"
-msgstr ""
+msgstr "RGB ya da RGBA"
 
 #. 5.4->settings-schema.json->normal_border_color->description
 #. 5.4->settings-schema.json->discharging_border_color->description
@@ -549,7 +561,7 @@ msgstr ""
 #. 5.4->settings-schema.json->limit_exceeded_border_color->description
 #. 5.4->settings-schema.json->limit_exceeded2_border_color->description
 msgid "Border Color"
-msgstr ""
+msgstr "Kenar Rengi"
 
 #. 5.4->settings-schema.json->normal_font_size->description
 #. 5.4->settings-schema.json->discharging_font_size->description
@@ -558,7 +570,7 @@ msgstr ""
 #. 5.4->settings-schema.json->limit_exceeded_font_size->description
 #. 5.4->settings-schema.json->limit_exceeded2_font_size->description
 msgid "Font Size"
-msgstr ""
+msgstr "Yazı Tipi Boyutu"
 
 #. 3.2->settings-schema.json->head->description
 msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
@@ -612,8 +624,8 @@ msgid ""
 "Must have Sox installed. Limited number of sound file types supported (.oga "
 "and .wav)"
 msgstr ""
-"Sox kurulu olmalıdır. Sınırlı sayıda ses dosyası türü desteklenir (.oga ve ."
-"wav)"
+"Sox kurulu olmalıdır. Sınırlı sayıda ses dosyası türü desteklenir (.oga "
+"ve .wav)"
 
 #. 3.2->settings-schema.json->chooseBatteryLowSound->tooltip
 msgid ""
@@ -675,21 +687,20 @@ msgstr ""
 
 #: 5.4/suspendScript.sh:22
 msgid "WARNING: SUSPENDING SOON"
-msgstr ""
+msgstr "UYARI: YAKINDA ASKIYA ALINACAK"
 
 #: 5.4/suspendScript.sh:23
 msgid "The battery level is critical. The machine will be suspended shortly."
-msgstr ""
+msgstr "Pil seviyesi kritik. Makine kısa süre içinde askıya alınacak."
 
 #: 5.4/suspendScript.sh:24
 msgid "Abort Suspension"
-msgstr ""
+msgstr "Askıya Almayı İptal Et"
 
 #: 5.4/suspendScript.sh:25
-#, fuzzy
 msgid "Suspend Immediately"
-msgstr "Askı durumu:"
+msgstr "Hemen askıya al"
 
 #: 5.4/suspendScript.sh:26
 msgid "The machine was suspended as the battery level was critical."
-msgstr ""
+msgstr "Pil seviyesi kritik düzeyde olduğu için makine askıya alındı."
