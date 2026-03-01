@@ -194,6 +194,48 @@ class EyeMode {
         cr.curveTo(x_plus_iris, y_minus_bottom, x_minus_iris, y_minus_bottom, -eye_rad, 0);
         cr.closePath();
     }
+
+    /**
+     * Draws the pupil with the given shape
+     * @param {cairo.Context} cr The Cairo drawing context
+     * @param {number} pupil_rad The base radius of the pupil
+     * @param {String} pupil_shape The shape of the pupil
+     */
+    _drawPupil(cr, pupil_rad, pupil_shape) {
+        let shape_width = pupil_rad;
+        let shape_height = pupil_rad;
+
+        if (pupil_shape === 'vertical') {
+            shape_width = pupil_rad * 0.4;
+            shape_height = pupil_rad * 1.8;
+        } else if (pupil_shape === 'horizontal') {
+            shape_width = pupil_rad * 1.8;
+            shape_height = pupil_rad * 0.4;
+        } else if (pupil_shape === 'star') {
+            shape_width = pupil_rad * 1.5;
+            shape_height = pupil_rad * 1.5;
+        }
+
+        cr.scale(shape_width, shape_height);
+
+        if (pupil_shape === 'star') {
+            cr.newPath();
+            const num_points = 5;
+            const inner_rad = 0.382; // roughly 3 - sqrt(5) / 2
+
+            for (let i = 0; i < num_points * 2; i++) {
+                let rad = i % 2 === 0 ? 1.0 : inner_rad;
+                let angle = (i * Math.PI) / num_points - (Math.PI / 2);
+                cr.lineTo(Math.cos(angle) * rad, Math.sin(angle) * rad);
+            }
+
+            cr.closePath();
+        } else {
+            cr.arc(0, 0, 1.0, 0, TWO_PI);
+        }
+
+        cr.fill();
+    }
 }
 
 var EyelidMode = class EyelidMode extends EyeMode {
@@ -283,20 +325,7 @@ var EyelidMode = class EyelidMode extends EyeMode {
         cr.scale(cos_eye_ang, 1.0);
         cr.rotate(-mouse_ang);
 
-        let shape_width = pupil_rad;
-        let shape_height = pupil_rad;
-
-        if (options.pupil_shape === 'vertical') {
-            shape_width = pupil_rad * 0.4;
-            shape_height = pupil_rad * 1.8;
-        } else if (options.pupil_shape === 'horizontal') {
-            shape_width = pupil_rad * 1.8;
-            shape_height = pupil_rad * 0.4;
-        }
-
-        cr.scale(shape_width, shape_height);
-        cr.arc(0, 0, 1.0, 0, TWO_PI);
-        cr.fill();
+        this._drawPupil(cr, pupil_rad, options.pupil_shape);
 
         let lid_stroke_width = options.fill ? Math.max(1, options.line_width * 0.4) : options.line_width;
         let lid_stroke_color = options.fill ? options.stroke_color : options.base_color;
@@ -379,20 +408,7 @@ var BulbMode = class BulbMode extends EyeMode {
         cr.scale(cos_eye_ang, 1.0);
         cr.rotate(-mouse_ang);
 
-        let shape_width = pupil_rad;
-        let shape_height = pupil_rad;
-
-        if (options.pupil_shape === 'vertical') {
-            shape_width = pupil_rad * 0.4;
-            shape_height = pupil_rad * 1.8;
-        } else if (options.pupil_shape === 'horizontal') {
-            shape_width = pupil_rad * 1.8;
-            shape_height = pupil_rad * 0.4;
-        }
-
-        cr.scale(shape_width, shape_height);
-        cr.arc(0, 0, 1.0, 0, TWO_PI);
-        cr.fill();
+        this._drawPupil(cr, pupil_rad, options.pupil_shape);
 
         let lid_stroke_width = options.fill ? Math.max(1, options.line_width * 0.4) : options.line_width;
         let lid_stroke_color = options.fill ? options.stroke_color : options.base_color;
