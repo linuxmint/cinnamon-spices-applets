@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: c-eyes@anaximeno 3.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-02-10 17:17-0100\n"
+"POT-Creation-Date: 2026-03-01 16:37-0100\n"
 "PO-Revision-Date: 2025-08-30 03:12+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -416,6 +416,22 @@ msgstr "最佳化"
 #. 6.2->settings-schema.json->mode->description
 msgid "Eye Mode"
 msgstr "眼睛模式"
+
+#. 6.2->settings-schema.json->pupil-shape->description
+msgid "Pupil Shape"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Round"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Vertical"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Horizontal"
+msgstr ""
 
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"

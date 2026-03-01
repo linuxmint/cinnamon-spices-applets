@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-02-10 17:17-0100\n"
+"POT-Creation-Date: 2026-03-01 16:37-0100\n"
 "PO-Revision-Date: 2023-12-29 08:19+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -413,6 +413,22 @@ msgstr ""
 #, fuzzy
 msgid "Eye Mode"
 msgstr "Tilstand"
+
+#. 6.2->settings-schema.json->pupil-shape->description
+msgid "Pupil Shape"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Round"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Vertical"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Horizontal"
+msgstr ""
 
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
