@@ -1,7 +1,27 @@
 {
-    "uuid": "ultraspan@hisovereign",
-    "name": "Ultraspan Applet",
-    "description": "A Cinnamon applet for Ultraspan script",
-    "version": "1.0",
-    "max-instances": 1
+  "uuid": "ultraspan@hisovereign",
+  "name": "Ultraspan Wallpaper Manager",
+  "description": "This is a toggle for the Ultraspan script: The advanced combined-single span wallpaper manager with zoom, fit, and center modes",
+  "icon": "preferences-desktop-wallpaper",
+  "version": "1.0",
+  "cinnamon-version": [
+    "3.0",
+    "3.2",
+    "3.4",
+    "3.6",
+    "3.8",
+    "4.0",
+    "4.2",
+    "4.4",
+    "4.6",
+    "5.0",
+    "5.2",
+    "5.4",
+    "5.6",
+    "5.8",
+    "6.0"
+  ],
+  "author": "hisovereign",
+  "max-instances": 1,
+  "last-edited": 1772391123
 }
