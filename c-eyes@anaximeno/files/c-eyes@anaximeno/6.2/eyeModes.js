@@ -38,19 +38,6 @@ class EyeMode {
     }
 
     /**
-     * Computes top and lateral sizes based on orientation
-     * @param {number} area_width The width of the drawing area
-     * @param {number} area_height The height of the drawing area
-     * @param {boolean} is_vertical Whether the panel is oriented vertically
-     * @returns {Array<number>} [top_size, lat_size] where top_size is the size along the panel's length and lat_size along its width
-     */
-    topAndLatSizes(area_width, area_height, is_vertical) {
-        return is_vertical
-            ? [area_width, area_height]
-            : [area_height, area_width];
-    }
-
-    /**
      * Clears the drawing area
      * @param {cairo.Context} cr The Cairo drawing context
      * @param {number} area_width The width of the area to clear
@@ -224,8 +211,8 @@ var EyelidMode = class EyelidMode extends EyeMode {
         const cos_mouse_ang = Math.cos(mouse_ang);
         const sin_mouse_ang = Math.sin(mouse_ang);
 
-        const [top_size, lat_size] = this.topAndLatSizes(area_width, area_height, options.is_vertical);
-        const eye_rad = Math.min(top_size - options.padding, lat_size) * 0.5;
+        const min_area_size = Math.min(area_width, area_height);
+        const eye_rad = (min_area_size - options.padding) * 0.5;
 
         const iris_rad = eye_rad * 0.5;
         const pupil_rad = iris_rad * 0.4;
@@ -332,8 +319,8 @@ var BulbMode = class BulbMode extends EyeMode {
         const mouse_dist = Math.sqrt(mouse_x * mouse_x + mouse_y * mouse_y);
         const mouse_ang = Math.atan2(mouse_y, mouse_x);
 
-        const [top_size, lat_size] = this.topAndLatSizes(area_width, area_height, options.is_vertical);
-        const eye_rad = Math.min(top_size - options.padding, lat_size) * 0.5;
+        const min_area_size = Math.min(area_width, area_height);
+        const eye_rad = (min_area_size - options.padding) * 0.5;
 
         const iris_rad = eye_rad * 0.6;
         const pupil_rad = iris_rad * 0.4;

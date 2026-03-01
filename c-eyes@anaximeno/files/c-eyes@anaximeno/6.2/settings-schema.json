@@ -138,7 +138,7 @@
 	"line-width": {
 		"type": "spinbutton",
 		"description": "Line Width",
-		"default": 2.5,
+		"default": 2.0,
 		"min": 1,
 		"max": 5,
 		"step": 0.5,
@@ -151,16 +151,18 @@
 		"max": 32.0,
 		"step": 0.5,
 		"units": "px",
-		"description": "Margin"
+		"description": "Width",
+		"tooltip": "This setting controls the width of the area around the eye within which the eye will follow the mouse cursor. Positive values increase the area, while negative values decrease it."
 	},
 	"padding": {
 		"type": "spinbutton",
-		"default": 4.0,
+		"default": 8,
 		"min": 0,
 		"max": 32,
 		"step": 2,
 		"units": "px",
-		"description": "Padding"
+		"description": "Padding",
+		"tooltip": "This setting controls the padding around the eye within which the eye will follow the mouse cursor. Increasing the padding decreases the radius of the eye, while decreasing the padding increases the radius of the eye."
 	},
 	"use-alternative-colors": {
 		"type": "switch",
