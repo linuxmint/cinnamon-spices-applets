@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-03-01 21:29-0100\n"
-"PO-Revision-Date: 2026-02-10 19:09-0300\n"
+"PO-Revision-Date: 2026-03-01 20:31-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -430,23 +430,23 @@ msgstr "Tipo de ojo"
 
 #. 6.2->settings-schema.json->pupil-shape->description
 msgid "Pupil Shape"
-msgstr ""
+msgstr "Forma de la pupila"
 
 #. 6.2->settings-schema.json->pupil-shape->options
 msgid "Round"
-msgstr ""
+msgstr "Redonda"
 
 #. 6.2->settings-schema.json->pupil-shape->options
 msgid "Vertical"
-msgstr ""
+msgstr "Vertical"
 
 #. 6.2->settings-schema.json->pupil-shape->options
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontal"
 
 #. 6.2->settings-schema.json->pupil-shape->options
 msgid "Star"
-msgstr ""
+msgstr "Estrella"
 
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
@@ -473,9 +473,8 @@ msgid "Manual"
 msgstr "Manual"
 
 #. 6.2->settings-schema.json->margin->description
-#, fuzzy
 msgid "Width"
-msgstr "Anchura de línea"
+msgstr "Ancho"
 
 #. 6.2->settings-schema.json->margin->tooltip
 msgid ""
@@ -483,6 +482,9 @@ msgid ""
 "eye will follow the mouse cursor. Positive values increase the area, while "
 "negative values decrease it."
 msgstr ""
+"Esta configuración controla el ancho del área alrededor del ojo dentro de la "
+"cual el ojo seguirá el cursor del ratón. Los valores positivos aumentan el "
+"área, mientras que los valores negativos la disminuyen."
 
 #. 6.2->settings-schema.json->padding->tooltip
 msgid ""
@@ -490,6 +492,9 @@ msgid ""
 "follow the mouse cursor. Increasing the padding decreases the radius of the "
 "eye, while decreasing the padding increases the radius of the eye."
 msgstr ""
+"Esta configuración controla el relleno alrededor del ojo dentro del cual el "
+"ojo seguirá el cursor del ratón. Al aumentar el relleno se reduce el radio "
+"del ojo, mientras que al disminuirlo se aumenta el radio del ojo."
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
