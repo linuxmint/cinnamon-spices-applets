@@ -1,0 +1,231 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-12-08 05:01-0500\n"
+"PO-Revision-Date: 2025-08-31 23:48+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4\n"
+
+#: applet.js:58
+msgid "%A %B %e, %Y"
+msgstr "%Y 年 %B %e 日（%A）"
+
+#: applet.js:149
+msgid "Settings"
+msgstr "設定"
+
+#: applet.js:325
+msgid "It's time for "
+msgstr "現在是 "
+
+#: applet.js:326
+msgid "Now : "
+msgstr "現在："
+
+#. metadata.json->name
+msgid "Azan"
+msgstr "Azan"
+
+#. metadata.json->description
+msgid "Azan is an Islamic prayer times application"
+msgstr "Azan 是一款伊斯蘭教祈禱時間應用程式"
+
+#. settings-schema.json->head_calculations->description
+msgid "Calculations"
+msgstr "計算"
+
+#. settings-schema.json->calculation_method->description
+msgid "Calculation method"
+msgstr "計算方式"
+
+#. settings-schema.json->calculation_method->options
+msgid "Muslim World League"
+msgstr "穆斯林世界聯盟 (MWL)"
+
+#. settings-schema.json->calculation_method->options
+msgid "Islamic Society of North America (ISNA)"
+msgstr "北美伊斯蘭協會 (ISNA)"
+
+#. settings-schema.json->calculation_method->options
+msgid "Egyptian General Authority of Survey"
+msgstr "埃及測量總局"
+
+#. settings-schema.json->calculation_method->options
+msgid "Umm Al-Qura University, Makkah"
+msgstr "麥加烏姆古拉大學（Umm Al-Qura University）"
+
+#. settings-schema.json->calculation_method->options
+msgid "University of Islamic Sciences, Karachi"
+msgstr "卡拉奇伊斯蘭科學大學"
+
+#. settings-schema.json->calculation_method->options
+msgid "Institute of Geophysics, University of Tehran"
+msgstr "德黑蘭大學地球物理研究所"
+
+#. settings-schema.json->calculation_method->options
+msgid "Shia Ithna-Ashari, Leva Institute, Qum"
+msgstr "什葉派十二伊瑪目，庫姆 Leva 學院"
+
+#. settings-schema.json->head_location->description
+msgid "Your Location"
+msgstr "您的位置"
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr "緯度"
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr "經度"
+
+#. settings-schema.json->timezone->description
+msgid "Timezone"
+msgstr "時區"
+
+#. settings-schema.json->timezone->options
+msgid "Auto"
+msgstr "自動"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -12:00"
+msgstr "GMT -12:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -11:00"
+msgstr "GMT -11:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -10:00"
+msgstr "GMT -10:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -09:00"
+msgstr "GMT -09:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -08:00"
+msgstr "GMT -08:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -07:00"
+msgstr "GMT -07:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -06:00"
+msgstr "GMT -06:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -05:00"
+msgstr "GMT -05:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -04:00"
+msgstr "GMT -04:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -03:00"
+msgstr "GMT -03:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -02:00"
+msgstr "GMT -02:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -01:00"
+msgstr "GMT -01:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +00:00"
+msgstr "GMT +00:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +01:00"
+msgstr "GMT +01:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +02:00"
+msgstr "GMT +02:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +03:00"
+msgstr "GMT +03:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +04:00"
+msgstr "GMT +04:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +05:00"
+msgstr "GMT +05:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +06:00"
+msgstr "GMT +06:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +07:00"
+msgstr "GMT +07:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +08:00"
+msgstr "GMT +08:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +09:00"
+msgstr "GMT +09:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +10:00"
+msgstr "GMT +10:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +11:00"
+msgstr "GMT +11:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +12:00"
+msgstr "GMT +12:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +13:00"
+msgstr "GMT +13:00"
+
+#. settings-schema.json->time_format->description
+msgid "Time format"
+msgstr "時間格式"
+
+#. settings-schema.json->time_format->options
+msgid "24h"
+msgstr "24 小時制"
+
+#. settings-schema.json->time_format->options
+msgid "12h"
+msgstr "12 小時制"
+
+#. settings-schema.json->head_juristic->description
+msgid "Juristic Settings"
+msgstr "教法學派設定"
+
+#. settings-schema.json->juristic->description
+msgid "Method"
+msgstr "教法學派"
+
+#. settings-schema.json->juristic->options
+msgid "Shafi`i, Maliki, Ja`fari, Hanbali"
+msgstr "沙斐儀派、馬立克派、賈法里派、罕百里派"
+
+#. settings-schema.json->juristic->options
+msgid "Hanafi"
+msgstr "哈納斐派"

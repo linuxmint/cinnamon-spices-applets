@@ -1,0 +1,30 @@
+# RSS NEWSTICKER
+# This file is put in the public domain.
+# KopfDesDaemons, 2024
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->head0->description
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->head1->description
+msgid "Ticker"
+msgstr ""
+
+#. settings-schema.json->width->description
+msgid "Width of ticker in px"
+msgstr ""
+
+#. settings-schema.json->tickerSeperator->description
+msgid "Separator between headlines"
+msgstr ""
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh interval in seconds"
+msgstr ""
+
+#. settings-schema.json->tickerSpeed->description
+msgid "Speed of ticker in ms"
+msgstr ""

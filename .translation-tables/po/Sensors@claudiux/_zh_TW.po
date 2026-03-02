@@ -1,0 +1,92 @@
+# SENSORS MONITOR
+# This file is put in the public domain.
+# claudiux, 2020
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Sensors@claudiux 5.4.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-02-18 18:19+0100\n"
+"PO-Revision-Date: 2025-08-31 23:55+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. settings-schema.json->section_SettingsWindow->title
+msgid "This settings window"
+msgstr ""
+
+#. settings-schema.json->section_dependencies->title
+msgid "Dependencies"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->description
+msgid "How to set its size"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "let it be"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize horizontally"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize vertically"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize everything"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "fixed"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->tooltip
+msgid "Future window openings."
+msgstr ""
+
+#. settings-schema.json->window_width->description
+msgid "Width"
+msgstr ""
+
+#. settings-schema.json->window_width->tooltip
+msgid ""
+"This number must match your screen configuration.\n"
+"Minimum value: 800."
+msgstr ""
+
+#. settings-schema.json->window_height->description
+msgid "Height"
+msgstr ""
+
+#. settings-schema.json->window_height->tooltip
+msgid ""
+"This number must match your screen configuration.\n"
+"Minimum value: 100."
+msgstr ""
+
+#. settings-schema.json->window_set_current_size->description
+msgid "Set to the approximate current size and position"
+msgstr ""
+
+#. settings-schema.json->window_label->description
+msgid "The exact size and position will depend on Cinnamon."
+msgstr ""
+
+#. settings-schema.json->do_not_check_dependencies->description
+msgid "Do not check dependencies"
+msgstr ""
+
+#. settings-schema.json->do_not_check_dependencies->tooltip
+msgid ""
+"If you do not want to install certain dependencies (e.g., fonts), check this "
+"box. Be careful with dependencies that are necessary for this applet to "
+"function properly."
+msgstr ""

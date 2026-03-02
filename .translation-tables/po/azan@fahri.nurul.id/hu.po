@@ -1,0 +1,232 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-12-08 05:01-0500\n"
+"PO-Revision-Date: 2025-08-08 08:03+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:58
+msgid "%A %B %e, %Y"
+msgstr "%Y. %B %e., %A"
+
+#: applet.js:149
+msgid "Settings"
+msgstr "Beállítások"
+
+#: applet.js:325
+msgid "It's time for "
+msgstr "Itt az idő "
+
+#: applet.js:326
+msgid "Now : "
+msgstr "Most : "
+
+#. metadata.json->name
+msgid "Azan"
+msgstr "Azan"
+
+#. metadata.json->description
+msgid "Azan is an Islamic prayer times application"
+msgstr "Azan egy iszlám imaidő alkalmazás"
+
+#. settings-schema.json->head_calculations->description
+msgid "Calculations"
+msgstr "Számítások"
+
+#. settings-schema.json->calculation_method->description
+msgid "Calculation method"
+msgstr "Számítási módszer"
+
+#. settings-schema.json->calculation_method->options
+msgid "Muslim World League"
+msgstr "Muszlim Világliga"
+
+#. settings-schema.json->calculation_method->options
+msgid "Islamic Society of North America (ISNA)"
+msgstr "Észak-Amerikai Iszlám Társaság (ISNA)"
+
+#. settings-schema.json->calculation_method->options
+msgid "Egyptian General Authority of Survey"
+msgstr "Egyiptomi Általános Felmérési Hatóság"
+
+#. settings-schema.json->calculation_method->options
+msgid "Umm Al-Qura University, Makkah"
+msgstr "Umm Al-Qura Egyetem, Mekka"
+
+#. settings-schema.json->calculation_method->options
+msgid "University of Islamic Sciences, Karachi"
+msgstr "Iszlám Tudományok Egyeteme, Karacsi"
+
+#. settings-schema.json->calculation_method->options
+msgid "Institute of Geophysics, University of Tehran"
+msgstr "Teheráni Egyetem Geofizikai Intézete"
+
+#. settings-schema.json->calculation_method->options
+msgid "Shia Ithna-Ashari, Leva Institute, Qum"
+msgstr "Shia Ithna-Ashari, Leva Institute, Qum"
+
+#. settings-schema.json->head_location->description
+msgid "Your Location"
+msgstr "Ön tartózkodási helye"
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr "Szélesség"
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr "Hosszúság"
+
+#. settings-schema.json->timezone->description
+msgid "Timezone"
+msgstr "Időzóna"
+
+#. settings-schema.json->timezone->options
+msgid "Auto"
+msgstr "Automatikus"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -12:00"
+msgstr "GMT -12:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -11:00"
+msgstr "GMT -11:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -10:00"
+msgstr "GMT -10:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -09:00"
+msgstr "GMT -09:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -08:00"
+msgstr "GMT -08:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -07:00"
+msgstr "GMT -07:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -06:00"
+msgstr "GMT -06:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -05:00"
+msgstr "GMT -05:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -04:00"
+msgstr "GMT -04:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -03:00"
+msgstr "GMT -03:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -02:00"
+msgstr "GMT -02:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT -01:00"
+msgstr "GMT -01:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +00:00"
+msgstr "GMT +00:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +01:00"
+msgstr "GMT +01:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +02:00"
+msgstr "GMT +02:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +03:00"
+msgstr "GMT +03:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +04:00"
+msgstr "GMT +04:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +05:00"
+msgstr "GMT +05:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +06:00"
+msgstr "GMT +06:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +07:00"
+msgstr "GMT +07:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +08:00"
+msgstr "GMT +08:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +09:00"
+msgstr "GMT +09:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +10:00"
+msgstr "GMT +10:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +11:00"
+msgstr "GMT +11:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +12:00"
+msgstr "GMT +12:00"
+
+#. settings-schema.json->timezone->options
+msgid "GMT +13:00"
+msgstr "GMT +13:00"
+
+#. settings-schema.json->time_format->description
+msgid "Time format"
+msgstr "Idő formátum"
+
+#. settings-schema.json->time_format->options
+msgid "24h"
+msgstr "24 órás óra használata"
+
+#. settings-schema.json->time_format->options
+msgid "12h"
+msgstr "12 órás óra használata"
+
+#. settings-schema.json->head_juristic->description
+msgid "Juristic Settings"
+msgstr "Jogi beállítások"
+
+#. settings-schema.json->juristic->description
+msgid "Method"
+msgstr "Módszer"
+
+#. settings-schema.json->juristic->options
+msgid "Shafi`i, Maliki, Ja`fari, Hanbali"
+msgstr "Shafi`i, Maliki, Ja`fari, Hanbali"
+
+#. settings-schema.json->juristic->options
+msgid "Hanafi"
+msgstr "Hanafi"

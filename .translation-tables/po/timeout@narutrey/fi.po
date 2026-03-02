@@ -1,0 +1,121 @@
+# Cinnamon Applet timeout@narutrey
+# Copyright (C) 2016 Naru Trey
+# This file is distributed under the same license as the timeout@narutrey package.
+# Naru Trey <contact@libnaru.so>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-28 17:16+0400\n"
+"PO-Revision-Date: 2024-11-22 17:49+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:210
+msgid "Time left:"
+msgstr "Aikaa jäljellä:"
+
+#: applet.js:256
+msgid "Resume"
+msgstr "Jatka"
+
+#: applet.js:262
+msgid "The break is over"
+msgstr "Tauko on ohi"
+
+#: applet.js:272
+msgid "Break!"
+msgstr "Tauko!"
+
+#: applet.js:282
+msgid "Postpone"
+msgstr "Lykkää"
+
+#: applet.js:310
+msgid "Enabled"
+msgstr "Käytössä"
+
+#: applet.js:319
+msgid "Reset timer"
+msgstr "Nollaa ajastin"
+
+#: applet.js:324
+msgid "Take a break"
+msgstr "Pidä tauko"
+
+#. timeout@narutrey->metadata.json->description
+msgid "Automatically controlled time outs and breaks"
+msgstr "Voit määrittää milloin pidät taukoa tietokoneellasi"
+
+#. timeout@narutrey->metadata.json->name
+msgid "Time Out"
+msgstr "Time Out"
+
+#. timeout@narutrey->settings-schema.json->enable->description
+msgid "Enable"
+msgstr "Käytä"
+
+#. timeout@narutrey->settings-schema.json->display_seconds->description
+msgid "Display seconds"
+msgstr "Näytä sekunnit"
+
+#. timeout@narutrey->settings-schema.json->appearance->description
+msgid "Appearance"
+msgstr "Ulkoasu"
+
+#. timeout@narutrey->settings-schema.json->time_postpone->description
+msgid "Postpone length"
+msgstr "Siirrä pituutta"
+
+#. timeout@narutrey->settings-schema.json->time_postpone->units
+#. timeout@narutrey->settings-schema.json->time_work->units
+#. timeout@narutrey->settings-schema.json->time_break->units
+msgid "minutes"
+msgstr "minuuttia"
+
+#. timeout@narutrey->settings-schema.json->allow_postpone->description
+msgid "Allow postpone"
+msgstr "Salli lykkääminen"
+
+#. timeout@narutrey->settings-schema.json->behaviour->description
+msgid "Behaviour"
+msgstr "Toiminta"
+
+#. timeout@narutrey->settings-schema.json->time_work->description
+msgid "Time between breaks"
+msgstr "Taukojen välinen aika"
+
+#. timeout@narutrey->settings-schema.json->display_mode->options
+msgid "Only Icon"
+msgstr "Vain kuvake"
+
+#. timeout@narutrey->settings-schema.json->display_mode->options
+msgid "Icon and Label"
+msgstr "Kuvake ja aika"
+
+#. timeout@narutrey->settings-schema.json->display_mode->options
+msgid "Only Label"
+msgstr "Vain aika"
+
+#. timeout@narutrey->settings-schema.json->display_mode->description
+msgid "Display panel"
+msgstr "Näytä paneelissa"
+
+#. timeout@narutrey->settings-schema.json->time_break->description
+msgid "Break length"
+msgstr "Tauon pituus"
+
+#. timeout@narutrey->settings-schema.json->resume_auto->description
+msgid "Resume automatically"
+msgstr "Jatka automaattisesti"
+
+#. timeout@narutrey->settings-schema.json->Time_settings_header->description
+msgid "Time settings"
+msgstr "Ajan asetukset"

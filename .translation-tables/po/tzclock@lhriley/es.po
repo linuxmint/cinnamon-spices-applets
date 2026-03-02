@@ -1,0 +1,133 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-26 15:34-0800\n"
+"PO-Revision-Date: 2022-01-04 23:51-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:26
+msgid "%l:%M %p %Z"
+msgstr "%l:%M %p %Z"
+
+#: tzclock_settings.py:66
+msgid "Timezone"
+msgstr "Zona horaria"
+
+#: tzclock_settings.py:207
+msgid "Region"
+msgstr "Región"
+
+#: tzclock_settings.py:210
+msgid "City"
+msgstr "Ciudad"
+
+#. settings-schema.json->tzclock-settings-header->description
+msgid "Timezone Clock Settings"
+msgstr "Configuración del reloj de zona horaria"
+
+#. settings-schema.json->displayed-timezone->description
+msgid "Timezone to display"
+msgstr "Zona horaria a mostrar"
+
+#. settings-schema.json->displayed-timezone->tooltip
+msgid "Enter a valid timezone name to display."
+msgstr "Introduzca un nombre válido de zona horaria para mostrar."
+
+#. settings-schema.json->tzclocks-settings-button->description
+msgid "Select timezone on map"
+msgstr "Seleccione la zona horaria en el mapa"
+
+#. settings-schema.json->tzclocks-settings-button->tooltip
+msgid "Click this button to select timezone on map."
+msgstr "Haga clic en este botón para seleccionar la zona horaria en el mapa."
+
+#. settings-schema.json->browse-timezones-button->description
+msgid "Browse valid timezone values by country"
+msgstr "Examinar los valores de la zona horaria válidos por país"
+
+#. settings-schema.json->browse-timezones-button->tooltip
+msgid "Click this button to browse valid timezone values by country."
+msgstr ""
+"Haga clic en este botón para buscar los valores válidos de la zona horaria "
+"por país."
+
+#. settings-schema.json->clock-display->description
+msgid "Clock Display Format"
+msgstr "Formato de la visualización del reloj"
+
+#. settings-schema.json->clock-use-24h->description
+msgid "Display the time using a 24 hour clock"
+msgstr "Mostrar la hora mediante un reloj de 24 horas"
+
+#. settings-schema.json->clock-use-24h->tooltip
+msgid ""
+"Check this to display the time using a 24 hour clock in the timezone clock "
+"applet."
+msgstr ""
+"Marque esta opción para mostrar la hora utilizando un reloj de 24 horas."
+
+#. settings-schema.json->clock-show-seconds->description
+msgid "Display the time with seconds"
+msgstr "Mostrar la hora con los segundos"
+
+#. settings-schema.json->clock-show-seconds->tooltip
+msgid ""
+"Check this to display the time with seconds in the timezone clock applet."
+msgstr "Marque esta opción para mostrar la hora con segundos."
+
+#. settings-schema.json->clock-show-date->description
+msgid "Display the date"
+msgstr "Mostrar la fecha"
+
+#. settings-schema.json->clock-show-date->tooltip
+msgid "Check this to display the date in the timezone clock applet."
+msgstr "Marque esta opción para mostrar la fecha."
+
+#. settings-schema.json->use-custom-format->description
+msgid "Use a custom date format"
+msgstr "Utilizar un formato de fecha personalizado"
+
+#. settings-schema.json->use-custom-format->tooltip
+msgid ""
+"Check this to define a custom format for the date in the timezone clock "
+"applet."
+msgstr "Marque esta opción para definir un formato personalizado."
+
+#. settings-schema.json->custom-format->description
+msgid "Date format:"
+msgstr "Formato de fecha:"
+
+#. settings-schema.json->custom-format->tooltip
+msgid "Set your custom format here."
+msgstr "Configure su formato personalizado aquí."
+
+#. settings-schema.json->format-button->description
+msgid "Show information on date format syntax"
+msgstr "Mostrar información sobre la sintaxis del formato de fecha"
+
+#. settings-schema.json->format-button->tooltip
+msgid "Click this button to know more about the syntax for date formats."
+msgstr ""
+"Haga clic en este botón para saber más sobre la sintaxis de los formatos "
+"de fecha."
+
+#. metadata.json->name
+msgid "Timezone Clock"
+msgstr "Reloj de zona horaria"
+
+#. metadata.json->description
+msgid "A simple clock for displaying the current time in a timezone"
+msgstr "Un simple reloj para mostrar la hora actual en una zona horaria"

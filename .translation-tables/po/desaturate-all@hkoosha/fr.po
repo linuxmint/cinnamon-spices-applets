@@ -1,0 +1,91 @@
+# DESATURATE ALL
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# hkoosha, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: desaturate-all@hkoosha 1.1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-05-17 10:44-0400\n"
+"PO-Revision-Date: 2025-10-13 14:46+0200\n"
+"Last-Translator: FabRCT\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. applet.js:62
+msgid "Click to disable effect"
+msgstr "Cliquez pour désactiver l'effet"
+
+#. applet.js:64
+msgid "Click to desaturate the desktop"
+msgstr "Cliquez pour désaturer le bureau"
+
+#. applet.js:72
+msgid "Will automatically desaturate in"
+msgstr "Se désaturera automatiquement dans"
+
+#. applet.js:74
+msgid "Will automatically disable in"
+msgstr "Sera automatiquement désactivé dans"
+
+#. applet.js:76
+msgid "minutes"
+msgstr "minutes"
+
+#. applet.js:79
+msgid "Will automatically desaturate at"
+msgstr "Se désaturera automatiquement à"
+
+#. applet.js:81
+msgid "Will automatically disable at"
+msgstr "Sera automatiquement désactivé à"
+
+#. metadata.json->name
+msgid "Desaturate All"
+msgstr "Tout dé-saturer"
+
+#. metadata.json->description
+msgid "Convert your screen to gray-scale."
+msgstr "Convertir votre écran en niveaux de gris."
+
+#. settings-schema.json->saturation->description
+msgid "Color saturation"
+msgstr "Saturation des couleurs"
+
+#. settings-schema.json->keybinding->description
+msgid "Shortcut to toggle desaturation effect"
+msgstr "Raccourci pour basculer en niveaux de gris"
+
+#. settings-schema.json->automatic->description
+msgid "Automatic"
+msgstr "Automatique"
+
+#. settings-schema.json->automatic->tooltip
+msgid ""
+"Automatically enable and disable the desaturation effect based on the time "
+"of day"
+msgstr ""
+"Activer et désactiver automatiquement l'effet de dé-saturation en fonction "
+"de l'heure de la journée"
+
+#. settings-schema.json->start-timechooser->description
+msgid "Time of day to automatically enable"
+msgstr "Heure de la journée pour l'activation automatique"
+
+#. settings-schema.json->end-timechooser->description
+msgid "Time of day to automatically disable"
+msgstr "Heure de la journée pour la désactivation automatique"
+
+#. settings-schema.json->resume-on-startup->description
+msgid "Restore desaturation effect state on startup"
+msgstr "Rétablir au démarrage l'état de l'effet de dé-saturation"
+
+#. settings-schema.json->resume-on-startup->tooltip
+msgid "Restore the previously set desaturation state when cinnamon starts"
+msgstr ""
+"Rétablir l'état de dé-saturation précédemment défini lorsque Cinnamon démarre"

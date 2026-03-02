@@ -1,0 +1,51 @@
+# TIMER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Severga, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-19 13:41-0500\n"
+"PO-Revision-Date: 2023-12-28 09:08+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. applet.js:95
+msgid "Run command | turn off computer on timer"
+msgstr ""
+
+#. settings-schema.json->customCommand->description
+msgid "Command to run on timer (empty for turn off)"
+msgstr ""
+
+#. settings-schema.json->customCommand->tooltip
+msgid ""
+"Custom command to run on timer. Leave empty to turn off the computer on timer"
+msgstr ""
+
+#. settings-schema.json->cancelTurnOffOption->description
+msgid "Cancel run command (turn off) option"
+msgstr ""
+
+#. settings-schema.json->cancelTurnOffOption->tooltip
+msgid ""
+"Cancel the option to run command or turn off for subsequent use (triggers "
+"only at the moment count down finished)"
+msgstr ""
+
+#. settings-schema.json->customText->description
+msgid "Custom notification text"
+msgstr ""
+
+#. settings-schema.json->customText->tooltip
+msgid "Custom text of the system notification on timer"
+msgstr ""

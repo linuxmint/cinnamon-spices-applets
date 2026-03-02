@@ -1,0 +1,114 @@
+# ALWAYSON
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Krivetochka, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-03 19:31-0400\n"
+"PO-Revision-Date: 2025-05-04 01:00+0200\n"
+"Last-Translator: Krivetochka <krivetochkadev@gmail.com>\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:28
+msgid "Click here to activate AlwaysOn"
+msgstr "Нажмите чтобы активировать AlwaysOn"
+
+#. applet.js:66
+msgid "AlwaysOn activated"
+msgstr "AlwaysOn включен"
+
+#. applet.js:66
+msgid "Your computer will now stay active."
+msgstr "Теперь ваш компьютер будет оставаться активным."
+
+#. applet.js:74
+msgid "Deactivate AlwaysOn"
+msgstr "Выключить AlwaysOn"
+
+#. applet.js:85
+msgid "AlwaysOn deactivated"
+msgstr "AlwaysOn выключен"
+
+#. applet.js:85
+msgid "Now your computer can go to sleep."
+msgstr "Теперь ваш компьютер может войти в спящий режим."
+
+#. applet.js:93
+msgid "Activate AlwaysOn"
+msgstr "Включить AlwaysOn"
+
+#. metadata.json->name
+msgid "AlwaysOn"
+msgstr "AlwaysOn"
+
+#. metadata.json->description
+msgid ""
+"When AlwaysOn is activated, the screen will remain on, and the computer will "
+"not go to sleep. The behavior can be changed in the applet settings."
+msgstr ""
+"Когда AlwaysOn активирован экран будет оставаться включенным, также "
+"компьютер не будет уходить в сон. Поведение можно изменить в настройках "
+"апплета."
+
+#. settings-schema.json->section-general->description
+msgid "General"
+msgstr "Общие"
+
+#. settings-schema.json->change-affected-settings->description
+msgid "Click to select which settings will be affected by this applet"
+msgstr "Нажмите, чтобы выбрать, на какие настройки будет влиять этот апплет"
+
+#. settings-schema.json->idle-dim-battery->description
+msgid "Dim the screen when idle"
+msgstr "Затемнять экран при бездействии"
+
+#. settings-schema.json->sleep-inactive->description
+msgid "Sleep mode when idle"
+msgstr "Спящий режим при бездействии"
+
+#. settings-schema.json->sleep-display->description
+msgid "Turning off the screen when idle"
+msgstr "Выключение экрана при бездействии"
+
+#. settings-schema.json->key-bind->description
+msgid "Select a combination to activate the applet"
+msgstr "Выберите комбинацию клавиш для активации апплета"
+
+#. settings-schema.json->section-not->description
+msgid "Notifications"
+msgstr "Уведомления"
+
+#. settings-schema.json->notificate->description
+msgid "Send notifications from this applet"
+msgstr "Присылать уведомления от этого апплета"
+
+#. settings-schema.json->section-icon->description
+msgid "Appearance"
+msgstr "Оформление"
+
+#. settings-schema.json->choose-icon->description
+msgid "Choose icon type"
+msgstr "Выберите тип значка"
+
+#. settings-schema.json->choose-icon->options
+msgid "Symbolic"
+msgstr "Символьный"
+
+#. settings-schema.json->choose-icon->options
+msgid "Colored"
+msgstr "Цветной"
+
+#. settings-schema.json->hide-applet->description
+msgid "Hide applet from the panel (works best with notifications enabled)"
+msgstr ""
+"Скрыть апплет с панели (лучше всего работает с включенными уведомлениями)"

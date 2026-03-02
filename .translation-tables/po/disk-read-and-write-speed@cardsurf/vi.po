@@ -1,0 +1,439 @@
+# DISK READ AND WRITE SPEED
+# This file is put in the public domain.
+# cardsurf, 2017
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: disk-read-and-write-speed@cardsurf 1.1.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-28 14:32+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:981
+msgid " TiB"
+msgstr " TiB"
+
+#. applet.js:984
+msgid " GiB"
+msgstr " GiB"
+
+#. applet.js:987
+msgid " MiB"
+msgstr " MiB"
+
+#. applet.js:990
+msgid " kiB"
+msgstr " kiB"
+
+#. applet.js:992
+msgid "   B"
+msgstr "   B"
+
+#. applet.js:995
+msgid " TB"
+msgstr " TB"
+
+#. applet.js:998
+msgid " GB"
+msgstr " GB"
+
+#. applet.js:1001
+msgid " MB"
+msgstr " MB"
+
+#. applet.js:1004
+msgid " kB"
+msgstr " kB"
+
+#. applet.js:1006
+msgid "  B"
+msgstr "  B"
+
+#. applet.js:1016
+msgid " Tib"
+msgstr " Tib"
+
+#. applet.js:1019
+msgid " Gib"
+msgstr " Gib"
+
+#. applet.js:1022
+msgid " Mib"
+msgstr " Mib"
+
+#. applet.js:1025
+msgid " kib"
+msgstr " kib"
+
+#. applet.js:1027
+msgid "   b"
+msgstr "   b"
+
+#. applet.js:1030
+msgid " Tb"
+msgstr " Tb"
+
+#. applet.js:1033
+msgid " Gb"
+msgstr " Gb"
+
+#. applet.js:1036
+msgid " Mb"
+msgstr " Mb"
+
+#. applet.js:1039
+msgid " kb"
+msgstr " kb"
+
+#. applet.js:1041
+msgid "  b"
+msgstr "  b"
+
+#. metadata.json->description
+msgid "Shows usage of a disk"
+msgstr "Hiển thị mức sử dụng của ổ đĩa"
+
+#. metadata.json->name
+msgid "Disk read and write speed"
+msgstr "Tốc độ đọc/ghi ổ đĩa"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Cấu hình"
+
+#. settings-schema.json->display_mode->description
+msgid "Show"
+msgstr "Hiển thị"
+
+#. settings-schema.json->display_mode->options
+msgid "Average speed per second"
+msgstr "Tốc độ trung bình mỗi giây"
+
+#. settings-schema.json->display_mode->options
+msgid "Amount of data transferred"
+msgstr "Lượng dữ liệu truyền"
+
+#. settings-schema.json->display_mode->tooltip
+msgid "Values shown in the panel"
+msgstr "Giá trị hiển thị trên panel"
+
+#. settings-schema.json->unit_type->description
+msgid "Unit"
+msgstr "Đơn vị"
+
+#. settings-schema.json->unit_type->options
+msgid "Bytes"
+msgstr "Byte"
+
+#. settings-schema.json->unit_type->options
+msgid "Bits"
+msgstr "Bit"
+
+#. settings-schema.json->unit_type->tooltip
+msgid "Base data unit shown in the panel"
+msgstr "Đơn vị dữ liệu cơ bản hiển thị trên panel"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr "Hệ thập phân hay nhị phân"
+
+#. settings-schema.json->is_binary->options
+msgid "Decimal"
+msgstr "Thập phân"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr "Nhị phân"
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
+"Thập phân: k, M, G, T\n"
+"Nhị phân: ki, Mi, Gi, Ti"
+
+#. settings-schema.json->update_every->units
+msgid "seconds"
+msgstr "giây"
+
+#. settings-schema.json->update_every->description
+msgid "Calculate every"
+msgstr "Tính toán mỗi"
+
+#. settings-schema.json->update_every->tooltip
+msgid "How often to calculate disk read and write speed"
+msgstr "Tần suất tính tốc độ đọc/ghi ổ đĩa"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Giao diện"
+
+#. settings-schema.json->gui_speed_type->description
+msgid "Type"
+msgstr "Kiểu"
+
+#. settings-schema.json->gui_speed_type->options
+msgid "Compact"
+msgstr "Nhỏ gọn"
+
+#. settings-schema.json->gui_speed_type->options
+msgid "Large"
+msgstr "Lớn"
+
+#. settings-schema.json->gui_speed_type->tooltip
+msgid "Applet Gui"
+msgstr "Giao diện Applet"
+
+#. settings-schema.json->gui_decimal_places->description
+#. settings-schema.json->hover_popup_decimal_places->description
+msgid "Decimal places"
+msgstr "Số chữ số thập phân"
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "Auto"
+msgstr "Tự động"
+
+# #. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "0 "
+msgstr "0 "
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "1 "
+msgstr "1 "
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "2 "
+msgstr "2 "
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "3 "
+msgstr "3 "
+
+#. settings-schema.json->gui_decimal_places->tooltip
+msgid "Decimal places of disk read and write speed shown in the panel"
+msgstr "Số chữ số thập phân hiển thị tốc độ đọc và ghi đĩa trên panel"
+
+#. settings-schema.json->gui_text_css->description
+msgid "Text CSS"
+msgstr "CSS văn bản"
+
+#. settings-schema.json->gui_text_css->tooltip
+msgid "A CSS style applied to the text in the panel"
+msgstr "Kiểu CSS áp dụng cho văn bản trên panel"
+
+#. settings-schema.json->gui_read_icon_filename->description
+msgid "Read icon"
+msgstr "Biểu tượng đọc"
+
+#. settings-schema.json->gui_read_icon_filename->tooltip
+msgid "An icon displayed next to disk read speed in the panel"
+msgstr "Biểu tượng hiển thị cạnh tốc độ đọc đĩa trên panel"
+
+#. settings-schema.json->gui_written_icon_filename->description
+msgid "Write icon"
+msgstr "Biểu tượng ghi"
+
+#. settings-schema.json->gui_written_icon_filename->tooltip
+msgid "An icon displayed next to disk write speed in the panel"
+msgstr "Biểu tượng hiển thị cạnh tốc độ ghi đĩa trên panel"
+
+#. settings-schema.json->hover_popup_headers_css->description
+msgid "Popup headers CSS"
+msgstr "CSS tiêu đề popup"
+
+#. settings-schema.json->hover_popup_headers_css->tooltip
+msgid "A CSS style applied to headers in the hover popup"
+msgstr "Kiểu CSS áp dụng cho tiêu đề trong popup hover"
+
+#. settings-schema.json->hover_popup_rows_css->description
+msgid "Popup rows CSS"
+msgstr "CSS dòng popup"
+
+#. settings-schema.json->hover_popup_rows_css->tooltip
+msgid "A CSS style applied to rows in the hover popup"
+msgstr "Kiểu CSS áp dụng cho các dòng trong popup hover"
+
+#. settings-schema.json->total_data_start->description
+msgid "Total data"
+msgstr "Tổng dữ liệu"
+
+#. settings-schema.json->show_hover->description
+msgid "Show total read and write on hover"
+msgstr "Hiển thị tổng đọc và ghi khi hover"
+
+#. settings-schema.json->show_hover->tooltip
+msgid "Show the hover popup with total amount of data read and written"
+msgstr "Hiển thị popup hover với tổng dữ liệu đã đọc và ghi"
+
+#. settings-schema.json->show_total_bytes_read->description
+msgid "Show total bytes read"
+msgstr "Hiển thị tổng số byte đã đọc"
+
+#. settings-schema.json->show_total_bytes_read->tooltip
+msgid "Show the column with the total amount of bytes read in the hover popup"
+msgstr "Hiển thị cột tổng số byte đã đọc trong popup hover"
+
+#. settings-schema.json->show_total_bytes_written->description
+msgid "Show total bytes written"
+msgstr "Hiển thị tổng số byte đã ghi"
+
+#. settings-schema.json->show_total_bytes_written->tooltip
+msgid ""
+"Show the column with the total amount of bytes written in the hover popup"
+msgstr "Hiển thị cột tổng số byte đã ghi trong popup hover"
+
+#. settings-schema.json->total_bytes_read_column_name->description
+msgid "Total bytes read column name"
+msgstr "Tên cột tổng byte đọc"
+
+#. settings-schema.json->total_bytes_read_column_name->tooltip
+msgid ""
+"A name of the column with the total amount of bytes read in the hover popup"
+msgstr "Tên cột hiển thị tổng byte đọc trong popup hover"
+
+#. settings-schema.json->total_bytes_written_column_name->description
+msgid "Total bytes written column name"
+msgstr "Tên cột tổng byte ghi"
+
+#. settings-schema.json->total_bytes_written_column_name->tooltip
+msgid ""
+"A name of the column with the total amount of bytes written in the hover "
+"popup"
+msgstr "Tên cột hiển thị tổng byte ghi trong popup hover"
+
+#. settings-schema.json->devices_regex_string->description
+msgid "Disks"
+msgstr "Đĩa"
+
+#. settings-schema.json->devices_regex_string->tooltip
+msgid "A regular expression that matches disk names to show in the hover popup"
+msgstr "Biểu thức chính quy khớp tên các đĩa để hiển thị trong popup hover"
+
+#. settings-schema.json->device_aliases_string->description
+msgid "Aliases"
+msgstr "Bí danh"
+
+#. settings-schema.json->device_aliases_string->tooltip
+msgid ""
+"A comma separated list of \"disk:alias\" pairs that replace disk names in "
+"the hover popup"
+msgstr ""
+"Danh sách các cặp \"đĩa:bí danh\" cách nhau bằng dấu phẩy để thay thế tên "
+"đĩa trong popup hover"
+
+#. settings-schema.json->column_names_string->description
+msgid "Headers"
+msgstr "Tiêu đề"
+
+#. settings-schema.json->column_names_string->tooltip
+msgid "A comma separated list of column headers to show in the hover popup"
+msgstr ""
+"Danh sách tiêu đề cột cách nhau bằng dấu phẩy hiển thị trong popup hover"
+
+#. settings-schema.json->column_indexes_string->description
+msgid "Columns"
+msgstr "Cột"
+
+#. settings-schema.json->column_indexes_string->tooltip
+msgid "A comma separated list of column indexes to show in the hover popup"
+msgstr ""
+"Danh sách các chỉ số cột cách nhau bằng dấu phẩy hiển thị trong popup hover"
+
+#. settings-schema.json->column_spaces->description
+msgid "Spaces"
+msgstr "Khoảng cách"
+
+#. settings-schema.json->column_spaces->tooltip
+msgid "A number of spaces between columns in the hover popup"
+msgstr "Số khoảng cách giữa các cột trong popup hover"
+
+#. settings-schema.json->column_type_sort->description
+msgid "Column sort"
+msgstr "Sắp xếp theo cột"
+
+#. settings-schema.json->column_type_sort->options
+msgid "Bytes read"
+msgstr "Byte đọc"
+
+#. settings-schema.json->column_type_sort->options
+msgid "Bytes written"
+msgstr "Byte ghi"
+
+#. settings-schema.json->column_type_sort->options
+msgid "Other"
+msgstr "Khác"
+
+#. settings-schema.json->column_type_sort->tooltip
+msgid "A column used to sort rows in the hover popup"
+msgstr "Cột dùng để sắp xếp các dòng trong popup hover"
+
+#. settings-schema.json->column_index_sort->description
+msgid "Sort column index"
+msgstr "Chỉ số cột sắp xếp"
+
+#. settings-schema.json->column_index_sort->tooltip
+msgid "An index of a column that is used to sort rows in the hover popup"
+msgstr "Chỉ số cột dùng để sắp xếp các dòng trong popup hover"
+
+#. settings-schema.json->column_sort_order->description
+msgid "Order"
+msgstr "Thứ tự"
+
+#. settings-schema.json->column_sort_order->options
+msgid "Ascending"
+msgstr "Tăng dần"
+
+#. settings-schema.json->column_sort_order->options
+msgid "Descending"
+msgstr "Giảm dần"
+
+#. settings-schema.json->column_sort_order->tooltip
+msgid "An order used to sort rows in the hover popup"
+msgstr "Thứ tự dùng để sắp xếp các dòng trong popup hover"
+
+#. settings-schema.json->hover_popup_decimal_places->tooltip
+msgid ""
+"Decimal places of total amount of data read and written shown in the hover "
+"popup"
+msgstr ""
+"Số chữ số thập phân của tổng dữ liệu đọc và ghi hiển thị trong popup hover"
+
+#. settings-schema.json->processes_start->description
+msgid "Processes"
+msgstr "Tiến trình"
+
+#. settings-schema.json->launch_terminal->description
+msgid "List input and output information per process"
+msgstr "Liệt kê thông tin vào ra cho mỗi tiến trình"
+
+#. settings-schema.json->launch_terminal->tooltip
+msgid ""
+"Open a terminal with a list of input and output informations per process on "
+"a left mouse click. The next click closes the terminal."
+msgstr ""
+"Mở terminal hiển thị thông tin vào ra của mỗi tiến trình khi nhấn chuột "
+"trái. Nhấn lại để đóng terminal."
+
+#. settings-schema.json->terminal_command->description
+msgid "Command"
+msgstr "Lệnh"
+
+#. settings-schema.json->terminal_command->tooltip
+msgid "A command used to show input and output information per process"
+msgstr "Lệnh dùng để hiển thị thông tin vào ra của mỗi tiến trình"

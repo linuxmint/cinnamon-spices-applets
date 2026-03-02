@@ -1,0 +1,61 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-08-03 18:47+0200\n"
+"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:278
+msgid "Gnote isn't running! Do you have it installed?"
+msgstr "Gnote nem fut! Installálta már?"
+
+#. metadata.json->name
+#. applet.js:324
+msgid "Gnote"
+msgstr "Gnote"
+
+#. applet.js:339
+msgid "Error: "
+msgstr "Hiba: "
+
+#. applet.js:340
+msgid "Retry"
+msgstr "Újra"
+
+#. applet.js:354
+msgid "New Note"
+msgstr "Új jegyzet"
+
+#. applet.js:363
+msgid "Type to search..."
+msgstr "Gépeljen a kereséshez…"
+
+#. applet.js:436
+msgid "GNote DBus service not found. Is GNote installed?"
+msgstr "GNote DBus szolgáltatás nem található. A GNote installálva van?"
+
+#. applet.js:438
+msgid "Click to see error!"
+msgstr "Kattintson a hiba megtekintéséhez!"
+
+#. metadata.json->description
+msgid "Lists notes, view notes, create notes and search notes."
+msgstr ""
+"Jegyzeteket listáz, jegyzeteket tekint meg, jegyzeteket hoz létre és keres "
+"jegyzeteket."
+
+#~ msgid "Gnote stopped working!"
+#~ msgstr "Gnote leállt!"

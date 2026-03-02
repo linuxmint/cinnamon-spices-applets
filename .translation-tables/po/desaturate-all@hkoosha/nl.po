@@ -1,0 +1,92 @@
+# DESATURATE ALL
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# hkoosha, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-17 10:44-0400\n"
+"PO-Revision-Date: 2025-06-13 18:23+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:62
+msgid "Click to disable effect"
+msgstr "Klik om effect uit te schakelen"
+
+#. applet.js:64
+msgid "Click to desaturate the desktop"
+msgstr "Klik om het bureaublad te desatureren"
+
+#. applet.js:72
+msgid "Will automatically desaturate in"
+msgstr "Wordt automatisch gedesatureerd over"
+
+#. applet.js:74
+msgid "Will automatically disable in"
+msgstr "Wordt automatisch uitgeschakeld over"
+
+#. applet.js:76
+msgid "minutes"
+msgstr "minuten"
+
+#. applet.js:79
+msgid "Will automatically desaturate at"
+msgstr "Wordt automatisch gedesatureerd om"
+
+#. applet.js:81
+msgid "Will automatically disable at"
+msgstr "Wordt automatisch uitgeschakeld om"
+
+#. metadata.json->name
+msgid "Desaturate All"
+msgstr "Desatureer Alles"
+
+#. metadata.json->description
+msgid "Convert your screen to gray-scale."
+msgstr "Zet je scherm om naar grijswaarden."
+
+#. settings-schema.json->saturation->description
+msgid "Color saturation"
+msgstr "Kleurverzadiging"
+
+#. settings-schema.json->keybinding->description
+msgid "Shortcut to toggle desaturation effect"
+msgstr "Sneltoets om het desaturatie-effect in- en uit te schakelen"
+
+#. settings-schema.json->automatic->description
+msgid "Automatic"
+msgstr "Automatisch"
+
+#. settings-schema.json->automatic->tooltip
+msgid ""
+"Automatically enable and disable the desaturation effect based on the time "
+"of day"
+msgstr ""
+"Schakel het desaturatie-effect automatisch in en uit op basis van het "
+"tijdstip van de dag"
+
+#. settings-schema.json->start-timechooser->description
+msgid "Time of day to automatically enable"
+msgstr "Tijdstip van de dag om automatisch in te schakelen"
+
+#. settings-schema.json->end-timechooser->description
+msgid "Time of day to automatically disable"
+msgstr "Tijdstip van de dag om automatisch uit te schakelen"
+
+#. settings-schema.json->resume-on-startup->description
+msgid "Restore desaturation effect state on startup"
+msgstr "Herstel de staat van het desaturatie-effect bij opstarten"
+
+#. settings-schema.json->resume-on-startup->tooltip
+msgid "Restore the previously set desaturation state when cinnamon starts"
+msgstr ""
+"Herstel de eerder ingestelde desaturatie-status wanneer Cinnamon wordt "
+"opgestart"

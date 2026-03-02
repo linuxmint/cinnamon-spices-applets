@@ -1,0 +1,523 @@
+# FISH
+# This file is put in the public domain.
+# kriegcc, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: fish@kriegcc 0.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-20 18:32+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. fish-applet.js:838
+msgid "Fish Applet"
+msgstr "Applet Cá"
+
+#. fish-applet.js:895
+msgid "There's something fishy going on here:"
+msgstr "Có gì đó không ổn ở đây:"
+
+#. fish-applet.js:936
+msgid "Copy Error Messages"
+msgstr "Sao chép thông báo lỗi"
+
+#. fish-applet.js:939
+msgid "Copy Error Message"
+msgstr "Sao chép thông báo lỗi"
+
+#. fish-applet.js:955 fish-applet.js:1459
+msgid "Open Preferences"
+msgstr "Mở Cài đặt"
+
+#. fish-applet.js:967
+msgid "Errors copied to the clipboard"
+msgstr "Các lỗi đã được sao chép vào bộ nhớ tạm"
+
+#. fish-applet.js:970
+msgid "Error copied to the clipboard"
+msgstr "Lỗi đã được sao chép vào bộ nhớ tạm"
+
+#. fish-applet.js:1043
+msgid "Copy Message"
+msgstr "Sao chép thông điệp"
+
+#. fish-applet.js:1055
+msgid "Speak again"
+msgstr "Nói lại"
+
+#. fish-applet.js:1060
+msgid "Close"
+msgstr "Đóng"
+
+#. fish-applet.js:1080
+#, javascript-format
+msgid "%s the Fish Says:"
+msgstr "%s Cá nói:"
+
+#. fish-applet.js:1088
+msgid "Message copied to the clipboard"
+msgstr "Thông điệp đã được sao chép vào bộ nhớ tạm"
+
+#. fish-applet.js:1116
+msgid "The water needs changing"
+msgstr "Cần thay nước"
+
+#. fish-applet.js:1121
+msgid "Look at today's date!"
+msgstr "Nhìn ngày hôm nay!"
+
+#. fish-applet.js:1422
+#, javascript-format
+msgid "%s the Fish, the fortune teller"
+msgstr "%s Cá, nhà tiên tri"
+
+#. fish-applet.js:1439
+#, javascript-format
+msgid ""
+"Warning: The command appears to be something actually useful. \n"
+"Since this is a useless applet, you may not want to do this. \n"
+"We strongly advise you against using %s for anything which would make the "
+"applet \"practical\" or useful."
+msgstr ""
+"Cảnh báo: Lệnh này có vẻ thực sự hữu ích.\n"
+"Vì đây là một applet vô dụng, bạn có thể không muốn làm điều này.\n"
+"Chúng tôi khuyên bạn không nên dùng %s cho bất cứ việc gì làm applet trở nên "
+"\"thực dụng\" hoặc hữu ích."
+
+#. fish-applet.js:1447
+msgid ""
+"Normally, the Fish's wisdom is derived from the 'fortune' command-line "
+"utility. \n"
+"It seems that this dependency is missing on your system.\n"
+"However, it should be available for most distributions. \n"
+"Please refer to the documentation for instructions on how to install it. \n"
+"If you prefer not to install any additional packages, you can change the "
+"command in the applet's settings."
+msgstr ""
+"Thông thường, trí tuệ của Cá được lấy từ tiện ích dòng lệnh 'fortune'.\n"
+"Có vẻ như phụ thuộc này đang thiếu trên hệ thống của bạn.\n"
+"Tuy nhiên, nó có sẵn trên hầu hết các bản phân phối.\n"
+"Vui lòng tham khảo tài liệu để biết hướng dẫn cài đặt.\n"
+"Nếu bạn không muốn cài thêm gói, bạn có thể thay đổi lệnh trong cài đặt "
+"applet."
+
+#. fish-applet.js:1455
+msgid "Open Documentation"
+msgstr "Mở Tài liệu"
+
+#. ImageChooser.py:56
+msgid "File"
+msgstr "Tệp"
+
+#. ImageChooser.py:61
+msgid "Select an animation"
+msgstr "Chọn hoạt hình"
+
+#. ImageChooser.py:66
+msgid "Images"
+msgstr "Hình ảnh"
+
+#. metadata.json->name
+msgid "Fish"
+msgstr "Cá"
+
+#. metadata.json->description
+msgid ""
+"Displays a small fish in your panel and does nothing useful whatsoever "
+"beyond that."
+msgstr ""
+"Hiển thị một con cá nhỏ trên thanh panel và không làm gì hữu ích ngoài điều "
+"đó."
+
+#. settings-schema.json->pagePreferences->title
+msgid "Preferences"
+msgstr "Cài đặt"
+
+#. settings-schema.json->pageAdvancedSettings->title
+msgid "Advanced Settings"
+msgstr "Cài đặt nâng cao"
+
+#. settings-schema.json->pageHelp->title
+msgid "Help"
+msgstr "Trợ giúp"
+
+#. settings-schema.json->pageAbout->title
+msgid "About"
+msgstr "Thông tin"
+
+#. settings-schema.json->sectionGeneral->title
+msgid "General"
+msgstr "Chung"
+
+#. settings-schema.json->sectionAnimation->title
+msgid "Animation"
+msgstr "Hoạt hình"
+
+#. settings-schema.json->sectionAdvancedAnimationSettings->title
+msgid "Animation Settings"
+msgstr "Cài đặt Hoạt hình"
+
+#. settings-schema.json->sectionAdvancedAnimationSettingsMargin->title
+msgid "Animation Margin"
+msgstr "Lề Hoạt hình"
+
+#. settings-
+#. schema.json->sectionAdvancedAnimationSettingsCustomDimension->title
+msgid "Animation Custom Dimension"
+msgstr "Kích thước tùy chỉnh Hoạt hình"
+
+#. settings-schema.json->sectionDeveloperOptions->title
+msgid "Developer Options"
+msgstr "Tùy chọn Nhà phát triển"
+
+#. settings-schema.json->sectionInstruction->title
+msgid "Manual"
+msgstr "Hướng dẫn"
+
+#. settings-schema.json->sectionReportIssue->title
+msgid "Report an Issue"
+msgstr "Báo lỗi"
+
+#. settings-schema.json->sectionAbout->title
+msgid "About Fish Applet"
+msgstr "Về Applet Cá"
+
+#. settings-schema.json->sectionVersion->title
+msgid "Version"
+msgstr "Phiên bản"
+
+#. settings-schema.json->sectionLicense->title
+msgid "License"
+msgstr "Giấy phép"
+
+#. settings-schema.json->sectionCredits->title
+msgid "Credits"
+msgstr "Nhà phát triển"
+
+#. settings-schema.json->sectionMaintainersAndContributors->title
+msgid "Maintainer and Contributors"
+msgstr "Người duy trì và đóng góp"
+
+#. settings-schema.json->keyNameOfFish->description
+msgid "Name of fish"
+msgstr "Tên cá"
+
+#. settings-schema.json->keyNameOfFish->tooltip
+msgid "Use this text box to specify the name of the fish."
+msgstr "Sử dụng ô này để đặt tên cho cá."
+
+#. settings-schema.json->keyCommand->description
+msgid "Command to run when clicked"
+msgstr "Lệnh thực thi khi nhấn"
+
+#. settings-schema.json->keyCommand->tooltip
+msgid ""
+"By default, Fish runs the 'fortune' command when you click on the applet. "
+"Use this text box to specify an alternative command to run."
+msgstr ""
+"Mặc định, Cá chạy lệnh 'fortune' khi bạn nhấn vào applet. Sử dụng ô này để "
+"chỉ định lệnh khác."
+
+#. settings-schema.json->keyFrames->units
+msgid "frames"
+msgstr "khung"
+
+#. settings-schema.json->keyFrames->description
+msgid "Total frames in animation"
+msgstr "Tổng số khung trong hoạt hình"
+
+#. settings-schema.json->keyFrames->tooltip
+msgid "Use this spin box to specify the number of frames in the animation."
+msgstr "Sử dụng ô này để chỉ định số khung trong hoạt hình."
+
+#. settings-schema.json->keyPausePerFrameInSeconds->units
+msgid "seconds"
+msgstr "giây"
+
+#. settings-schema.json->keyPausePerFrameInSeconds->description
+msgid "Pause per frame"
+msgstr "Tạm dừng mỗi khung"
+
+#. settings-schema.json->keyPausePerFrameInSeconds->tooltip
+msgid ""
+"Use this spin box to specify the pause in seconds between each frame in the "
+"animation."
+msgstr ""
+"Sử dụng ô này để đặt thời gian tạm dừng (giây) giữa các khung trong hoạt "
+"hình."
+
+#. settings-schema.json->keyFlipSidewaysOnVerticalPanel->description
+msgid "Flip sideways on vertical panels"
+msgstr "Lật ngang trên thanh dọc"
+
+#. settings-schema.json->keyFlipSidewaysOnVerticalPanel->tooltip
+msgid ""
+"Select this option to rotate the applet image sideways when you add the "
+"applet to a vertical panel."
+msgstr "Chọn để xoay hình applet ngang khi thêm vào thanh dọc."
+
+#. settings-schema.json->keyImagePath->tooltip
+msgid ""
+"Use this field to select the image to display in the applet. You can select "
+"an image that is supplied with the applet or a personal image."
+msgstr ""
+"Sử dụng ô này để chọn hình hiển thị trong applet. Có thể dùng hình kèm "
+"applet hoặc hình cá nhân."
+
+#. settings-schema.json->keyAnimationScalingMode->description
+msgid "Scaling Mode"
+msgstr "Chế độ phóng to"
+
+#. settings-schema.json->keyAnimationScalingMode->options
+msgid "Auto-fit"
+msgstr "Tự động vừa khung"
+
+#. settings-schema.json->keyAnimationScalingMode->options
+msgid "Preserve original size"
+msgstr "Giữ kích thước gốc"
+
+#. settings-schema.json->keyAnimationScalingMode->options
+msgid "Custom"
+msgstr "Tùy chỉnh"
+
+#. settings-schema.json->keyAnimationScalingMode->tooltip
+msgid "Select how the animation image in the panel should be scaled."
+msgstr "Chọn cách hình hoạt hình được phóng to trên thanh panel."
+
+#. settings-schema.json->keyAnimationMarginHint->description
+msgid ""
+"Margin options apply only when the 'auto-fit' option is enabled. For other "
+"settings, margins appear if the animation is smaller than the panel."
+msgstr ""
+"Tùy chọn lề chỉ áp dụng khi bật 'tự động vừa khung'. Với các cài đặt khác, "
+"lề xuất hiện nếu hoạt hình nhỏ hơn thanh panel."
+
+#. settings-schema.json->keyAnimationAutoMargin->description
+msgid "Auto-margin"
+msgstr "Lề tự động"
+
+#. settings-schema.json->keyAnimationAutoMargin->tooltip
+msgid "Check this to use the default margin from theme."
+msgstr "Chọn để dùng lề mặc định từ theme."
+
+#. settings-schema.json->keyAnimationMargin->units
+#. settings-schema.json->keyAnimationHeight->units
+#. settings-schema.json->keyAnimationWidth->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->keyAnimationMargin->description
+msgid "Margin around the animation frame"
+msgstr "Lề quanh khung hoạt hình"
+
+#. settings-schema.json->keyAnimationMargin->tooltip
+msgid ""
+"Use this spin box to specify the margin around the animation frame shown in "
+"the panel."
+msgstr ""
+"Sử dụng ô này để đặt lề quanh khung hoạt hình hiển thị trên thanh panel."
+
+#. settings-schema.json->keyAnimationHeight->description
+msgid "Height"
+msgstr "Chiều cao"
+
+#. settings-schema.json->keyAnimationHeight->tooltip
+msgid "Use this spin box to specify a custom height for the animation frame."
+msgstr "Sử dụng ô này để đặt chiều cao tùy chỉnh cho khung hoạt hình."
+
+#. settings-schema.json->keyAnimationWidth->description
+msgid "Width"
+msgstr "Chiều rộng"
+
+#. settings-schema.json->keyAnimationWidth->tooltip
+msgid "Use this spin box to specify a custom width for the animation frame."
+msgstr "Sử dụng ô này để đặt chiều rộng tùy chỉnh cho khung hoạt hình."
+
+#. settings-schema.json->keyAnimationPreserveAspectRatio->description
+msgid "Preserve aspect ratio"
+msgstr "Giữ tỉ lệ khung hình"
+
+#. settings-schema.json->keyAnimationPreserveAspectRatio->tooltip
+msgid ""
+"Enable this option to maintain the original aspect ratio of the animation. "
+"If enabled, the specified width will be ignored."
+msgstr ""
+"Bật để giữ tỉ lệ gốc của hoạt hình. Nếu bật, chiều rộng đã chỉ định sẽ bị bỏ "
+"qua."
+
+#. settings-schema.json->keyAnimationRotationHint->description
+msgid ""
+"If a rotation is selected, the image may also be flipped sideways depending "
+"on the 'Flip sideways on vertical panels' option."
+msgstr ""
+"Nếu chọn xoay, hình có thể bị lật ngang tùy vào tùy chọn 'Lật ngang trên "
+"thanh dọc'."
+
+#. settings-schema.json->keyAnimationRotation->description
+msgid "Rotation"
+msgstr "Xoay"
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "0°"
+msgstr "0°"
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "90°"
+msgstr "90°"
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "180°"
+msgstr "180°"
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "270°"
+msgstr "270°"
+
+#. settings-schema.json->keyLogLevel->description
+msgid "Log Level"
+msgstr "Mức độ ghi log"
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Info"
+msgstr "Thông tin"
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Debug"
+msgstr "Gỡ lỗi"
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Warning"
+msgstr "Cảnh báo"
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Error"
+msgstr "Lỗi"
+
+#. settings-schema.json->keyForceFoolsDay->description
+msgid "Force Fool's Day"
+msgstr "Bắt buộc Ngày Cá tháng Tư"
+
+#. settings-schema.json->keyForceFoolsDay->tooltip
+msgid ""
+"Enforces Fool's Day mode for debugging purposes. Simulates Fool's Day (April "
+"1st) without modifying the system date."
+msgstr ""
+"Bật chế độ Ngày Cá tháng Tư để gỡ lỗi. Mô phỏng ngày 1/4 mà không thay đổi "
+"ngày hệ thống."
+
+#. settings-schema.json->keyInstructionsText->description
+msgid ""
+"For instructions on how to use and configure this applet, please visit the "
+"applet's page on the Cinnamon Spices website."
+msgstr ""
+"Xem hướng dẫn sử dụng và cài đặt applet trên trang của Cinnamon Spices."
+
+#. settings-schema.json->keyReportIssueText->description
+msgid ""
+"If you encounter a problem with this applet, please file an issue report on "
+"GitHub. Note that a GitHub account is required to submit an issue. Before "
+"doing so, check if the issue has already been submitted by someone else. "
+"Since this applet is part of Linux Mint's `cinnamon-spices-applets` "
+"repository, it's important to follow their guidelines for this process. Make "
+"sure that the applet name (fish@kriegcc) is included in the title when "
+"opening a new issue. Follow the provided template for the description and "
+"provide as much information as possible about the issue."
+msgstr ""
+"Nếu gặp sự cố với applet, hãy báo lỗi trên GitHub. Cần tài khoản GitHub để "
+"gửi báo cáo. Trước đó, kiểm tra xem vấn đề đã được báo bởi người khác chưa. "
+"Applet thuộc kho `cinnamon-spices-applets` của Linux Mint nên tuân theo "
+"hướng dẫn của họ. Đảm bảo tên applet (fish@kriegcc) xuất hiện trong tiêu đề "
+"khi mở báo cáo mới. Sử dụng mẫu mô tả và cung cấp đầy đủ thông tin về sự cố."
+
+#. settings-schema.json->keyButtonReportIssueInstructions->description
+msgid "Reporting Bugs Instructions of Cinnamon Spices applets"
+msgstr "Hướng dẫn báo lỗi cho applet Cinnamon Spices"
+
+#. settings-schema.json->keyButtonReportIssueInstructions->tooltip
+msgid ""
+"Opens the contributions guidelines of the Cinnamon Spices applets repository "
+"on Github."
+msgstr "Mở hướng dẫn đóng góp của kho applet Cinnamon Spices trên Github."
+
+#. settings-schema.json->keyAboutText->description
+msgid ""
+"The Fish applet displays a small fish, called Wanda, in the panel. Wanda "
+"does nothing useful. The applet has really no use what-so-ever. It only "
+"takes up disk space and compilation time, and if loaded it also takes up "
+"precious panel space and memory. Anybody found using it should be promptly "
+"sent for a psychiatric evaluation."
+msgstr ""
+"Applet Cá hiển thị một con cá nhỏ tên Wanda trên thanh panel. Wanda không "
+"làm gì hữu ích. Applet này hoàn toàn vô dụng, chỉ chiếm dung lượng đĩa và "
+"thời gian biên dịch, khi tải còn chiếm chỗ trên thanh panel và bộ nhớ. Ai sử "
+"dụng nên được đánh giá tâm lý ngay."
+
+#. settings-schema.json->keyButtonWebsite->description
+msgid "Fish Applet at Cinnamon Spices Website"
+msgstr "Applet Cá trên trang Cinnamon Spices"
+
+#. settings-schema.json->keyButtonWebsite->tooltip
+msgid "Opens the applet's page on Cinnamon Spices website."
+msgstr "Mở trang applet trên Cinnamon Spices."
+
+#. settings-schema.json->keyVersion->description
+msgid "v0.2.0"
+msgstr "v0.2.0"
+
+#. settings-schema.json->keyLicenseText->description
+msgid "GPL-3.0-or-later"
+msgstr "GPL-3.0-hoặc-mới hơn"
+
+#. settings-schema.json->keyCreditsText->description
+msgid ""
+"This project is an adaption of the Fish applet from GNOME and MATE desktops "
+"for Cinnamon desktop.\n"
+"The original Fish applet is licensed under the GNU General Public License "
+"(GPL).\n"
+"\n"
+"Original Authors:\n"
+"George Lebl\n"
+"Mark McLoughlin\n"
+"Vincent Untz\n"
+"Stefano Karapetsas\n"
+"\n"
+"Copyright:\n"
+"(C) 1998-2002 Free Software Foundation, Inc.\n"
+"(C) 2002-2005 Vincent Untz\n"
+"(C) 2012-2021 MATE developers"
+msgstr ""
+"Dự án này là phiên bản chỉnh sửa của applet Cá từ GNOME và MATE cho "
+"Cinnamon.\n"
+"Applet Cá gốc được cấp phép theo GNU GPL (GPL).\n"
+"\n"
+"Tác giả gốc:\n"
+"George Lebl\n"
+"Mark McLoughlin\n"
+"Vincent Untz\n"
+"Stefano Karapetsas\n"
+"\n"
+"Bản quyền:\n"
+"(C) 1998-2002 Free Software Foundation, Inc.\n"
+"(C) 2002-2005 Vincent Untz\n"
+"(C) 2012-2021 các nhà phát triển MATE"
+
+#. settings-schema.json->keyMaintainersAndContributorsText->description
+msgid ""
+"Maintainer:\n"
+"kriegcc\n"
+"\n"
+"Contributors:\n"
+msgstr ""
+"Người duy trì:\n"
+"kriegcc\n"
+"\n"
+"Người đóng góp:\n"

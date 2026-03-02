@@ -1,0 +1,10 @@
+# CLASSIC MENU
+# This file is put in the public domain.
+# fredcw, 2025
+#
+msgid ""
+msgstr ""
+
+#. 6.6/applet.js:822
+msgid "Open containing folder"
+msgstr ""

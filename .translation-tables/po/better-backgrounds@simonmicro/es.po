@@ -1,0 +1,375 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-07 19:16+0000\n"
+"PO-Revision-Date: 2023-12-08 19:21-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4\n"
+
+#. metadata.json->name
+msgid "Better Backgrounds"
+msgstr "Mejores fondos"
+
+#. metadata.json->description
+msgid ""
+"Apply new backgrounds from Bing, Himawari 8, Picsum Photos, PlaceKitten.com, "
+"Unsplash.com or even whole websites - specify search tags, triggers and more!"
+msgstr ""
+"Aplique nuevos fondos de Bing, Himawari 8, Picsum Photos, PlaceKitten.com, "
+"Unsplash.com o incluso sitios web completos: especifique etiquetas de "
+"búsqueda, activadores y más!"
+
+#. settings-schema.json->pageBehaviour->title
+msgid "Behaviour"
+msgstr "Comportamiento"
+
+#. settings-schema.json->pageEffects->title
+msgid "Effects"
+msgstr "Efectos"
+
+#. settings-schema.json->pageSource->title
+#. settings-schema.json->imagesource->title
+msgid "Source"
+msgstr "Fuente"
+
+#. settings-schema.json->pageResolution->title
+#. settings-schema.json->imageresbing->title
+#. settings-schema.json->imageresunsplash->title
+#. settings-schema.json->imageresplacekitten->title
+#. settings-schema.json->imageresplacecutycapt->title
+#. settings-schema.json->imagerespicsum->title
+#. settings-schema.json->imagereshimawari->title
+msgid "Resolution"
+msgstr "Resolución"
+
+#. settings-schema.json->applet->title
+msgid "Applet"
+msgstr "Applet"
+
+#. settings-schema.json->applet-store->title
+msgid "Save Pictures"
+msgstr "Guardar imágenes"
+
+#. settings-schema.json->effects->title
+msgid "Image effects"
+msgstr "Efectos de imagen"
+
+#. settings-schema.json->changeon->title
+msgid "Triggers"
+msgstr "Activadores"
+
+#. settings-schema.json->imagetags->title
+msgid "Tags"
+msgstr "Etiquetas"
+
+#. settings-schema.json->imageapply->title
+msgid "Apply"
+msgstr "Aplicar"
+
+#. settings-schema.json->applet-icon-animation->description
+msgid "Animate icon while downloading"
+msgstr "Animar el icono durante la descarga"
+
+#. settings-schema.json->applet-icon-animation->tooltip
+msgid "When a new background is downloaded the icon gets animated..."
+msgstr "Cuando se descarga un nuevo fondo, el ícono se anima..."
+
+#. settings-schema.json->applet-show-notification->description
+msgid "Show notifications on problems"
+msgstr "Mostrar notificaciones sobre problemas"
+
+#. settings-schema.json->applet-show-notification->tooltip
+msgid "Bad network? Faulty setup? The applet will notify you. Every time."
+msgstr ""
+"¿Problemas con la red? ¿Una configuración defectuosa? El applet se lo "
+"notificará. Siempre."
+
+#. settings-schema.json->applet-info-issues->description
+msgid ""
+"You found a bug or want to suggest a missing feature? Just checkout the "
+"source code at https://github.com/simonmicro/better-backgrounds right over "
+"on Github!"
+msgstr ""
+"¿Ha encontrado un error o quiere sugerir una función que falte? Consulte el "
+"código fuente en https://github.com/simonmicro/better-backgrounds en Github!"
+
+#. settings-schema.json->applet-store-location->description
+msgid "Picture save location"
+msgstr "Ubicación para guardar la imagen"
+
+#. settings-schema.json->applet-store-location->tooltip
+msgid ""
+"When you choose to save the current background, where do you want to put it?"
+msgstr "Cuando elija guardar el fondo actual, ¿dónde quiere ponerlo?"
+
+#. settings-schema.json->applet-store-info->description
+msgid ""
+"This feature uses the command 'convert' from the package 'imagemagick'. "
+"Please make sure this package or command is installed."
+msgstr ""
+"Esta función utiliza el comando 'convert' del paquete 'imagemagick'. Por "
+"favor, asegúrese de que este paquete o comando esté instalado."
+
+#. settings-schema.json->change-onstart->description
+msgid "On applet reloading"
+msgstr "Al recargar el applet"
+
+#. settings-schema.json->change-onstart->tooltip
+msgid "Every time the applet is (re-)loaded, the background will be changed"
+msgstr "Cada vez que se (re)cargue el applet, se cambiará el fondo"
+
+#. settings-schema.json->change-onclick->description
+msgid "Clicking on the applet"
+msgstr "Al hacer clic en el applet"
+
+#. settings-schema.json->change-onclick->tooltip
+msgid "Just click onto the icon in your panel"
+msgstr "Haga clic en el icono de su panel"
+
+#. settings-schema.json->change-onclick-nomenu->description
+msgid ""
+"Note that this will disable the menu on clicking the applet - because "
+"clicking will change the background before you've got any chance to press "
+"the corresponding button to e.g. save the image!"
+msgstr ""
+"Tenga en cuenta que esto desactivará el menú al hacer clic en el applet, "
+"porque al hacer clic cambiará el fondo antes de que pueda pulsar el botón "
+"correspondiente para, por ejemplo, guardar la imagen!"
+
+#. settings-schema.json->change-ontime->description
+msgid "After some time"
+msgstr "Después de algún tiempo"
+
+#. settings-schema.json->change-ontime->tooltip
+msgid ""
+"After the specified number of minutes passes, we will change the background"
+msgstr ""
+"Una vez transcurrido el número de minutos especificado, cambiaremos el fondo"
+
+#. settings-schema.json->change-time->description
+msgid "Change after"
+msgstr "Cambiar después de"
+
+#. settings-schema.json->change-time->units
+msgid "minutes"
+msgstr "minutos"
+
+#. settings-schema.json->effect-note->description
+msgid ""
+"This feature uses the command 'mogrify' from the package 'imagemagick'. "
+"Please make sure this package or command is installed."
+msgstr ""
+"Esta función utiliza el comando 'mogrify' del paquete 'imagemagick'. "
+"Asegúrese de que este paquete o comando esté instalado."
+
+#. settings-schema.json->effect-select->description
+msgid "Apply effects"
+msgstr "Aplicar efectos"
+
+#. settings-schema.json->effect-select->options
+msgid "Gaussian blur"
+msgstr "Desenfoque gaussiano"
+
+#. settings-schema.json->effect-select->options
+msgid "Grayscale"
+msgstr "Escala de grises"
+
+#. settings-schema.json->effect-select->options
+msgid "None"
+msgstr "Ninguno"
+
+#. settings-schema.json->image-source->description
+msgid "Image source"
+msgstr "Fuente de la imagen"
+
+#. settings-schema.json->image-source->options
+msgid "Bing"
+msgstr "Bing"
+
+#. settings-schema.json->image-source->options
+msgid "Cutycapt"
+msgstr "Cutycapt"
+
+#. settings-schema.json->image-source->options
+msgid "Himawari 8"
+msgstr "Himawari 8"
+
+#. settings-schema.json->image-source->options
+msgid "Placekitten"
+msgstr "Placekitten"
+
+#. settings-schema.json->image-source->options
+msgid "Picsum Photos"
+msgstr "Picsum Photos"
+
+#. settings-schema.json->image-source->options
+msgid "Unsplash"
+msgstr "Unsplash"
+
+#. settings-schema.json->source-supports-info->description
+msgid ""
+"This source supports displaying additional image autor information. It will "
+"be shown inside the applets tooltip."
+msgstr ""
+"Esta fuente admite la visualización de información adicional del autor de la "
+"imagen. Se mostrará dentro de la información sobre herramientas del applet."
+
+#. settings-schema.json->install-warn-cutycapt->description
+msgid ""
+"Please make sure to install the 'cutycapt' package from the package manager "
+"of your choice!"
+msgstr ""
+"Asegúrese de instalar el paquete 'cutycapt' desde el gestor de paquetes de "
+"su elección!"
+
+#. settings-schema.json->install-warn-imagemagick->description
+msgid ""
+"This feature uses the command 'montage' from the package 'imagemagick'. "
+"Please make sure this package or command is installed."
+msgstr ""
+"Esta función utiliza el comando 'montage' del paquete 'imagemagick'. "
+"Asegúrese de que este paquete o comando esté instalado."
+
+#. settings-schema.json->source-warn-unsplash->description
+msgid ""
+"This source is known to cause trouble, especially during times of high "
+"demand. Please be patient and try again later if you experience problems. "
+"More information can be found at: https://status.unsplash.com/"
+msgstr ""
+"Se sabe que esta fuente causa problemas, especialmente en épocas de gran "
+"demanda. Por favor, sea paciente y vuelva a intentarlo más tarde si "
+"experimenta problemas. Más información en: https://status.unsplash.com/"
+
+#. settings-schema.json->image-res-manual->description
+msgid "Use custom resolution"
+msgstr "Utilizar una resolución personalizada"
+
+#. settings-schema.json->image-res-manual->tooltip
+msgid "This is mostly 1920x1080 or higher"
+msgstr "Se trata principalmente de 1920x1080 o superior"
+
+#. settings-schema.json->image-res-info->description
+msgid ""
+"Please make sure to choose a common resolution, otherwise the background "
+"can't be changed!"
+msgstr ""
+"Por favor, asegúrese de elegir una resolución común, de lo contrario no se "
+"podrá cambiar el fondo!"
+
+#. settings-schema.json->image-res-width->description
+msgid "Width"
+msgstr "Ancho"
+
+#. settings-schema.json->image-res-width->units
+#. settings-schema.json->image-res-height->units
+msgid "pixels"
+msgstr "pixeles"
+
+#. settings-schema.json->image-res-height->description
+msgid "Height"
+msgstr "Alto"
+
+#. settings-schema.json->image-tag->description
+msgid "Use own search tags"
+msgstr "Utilizar etiquetas de búsqueda propias"
+
+#. settings-schema.json->image-tag->tooltip
+msgid "Specify own tags to look for..."
+msgstr "Especifique etiquetas propias para buscar..."
+
+#. settings-schema.json->image-res-himawari->description
+msgid ""
+"Image zoom factor - this factor times the tile size (550 pixels) equals the "
+"image resolution. So e.g. the factor '4x' would result in a 2200x2200 pixels "
+"image. Please note that factor² much tiles will be temporarly downloaded."
+msgstr ""
+"Factor de zoom de imagen: este factor multiplicado por el tamaño del mosaico "
+"(550 píxeles) es igual a la resolución de la imagen. Entonces, por ejemplo. "
+"el factor '4x' daría como resultado una imagen de 2200x2200 píxeles. Tenga "
+"en cuenta que los mosaicos de factor² se descargarán temporalmente."
+
+#. settings-schema.json->image-res-himawari->options
+msgid "1x"
+msgstr "1x"
+
+#. settings-schema.json->image-res-himawari->options
+msgid "4x"
+msgstr "4x"
+
+#. settings-schema.json->image-res-himawari->options
+msgid "8x"
+msgstr "8x"
+
+#. settings-schema.json->image-res-himawari->options
+msgid "16x"
+msgstr "16x"
+
+#. settings-schema.json->image-res-himawari->options
+msgid "20x"
+msgstr "20x"
+
+#. settings-schema.json->image-res-unsupported->description
+msgid "Sorry, the selected source does not support resolution modifiers."
+msgstr ""
+"Lo sentimos, la fuente seleccionada no admite modificadores de resolución."
+
+#. settings-schema.json->image-tag-info->description
+msgid ""
+"Please make sure to choose an available tag, otherwise the background can't "
+"be changed! Make sure to seperate the tags by a ',' and not spaces, also the "
+"tags are understood as AND - not as OR! A valid search term could be 'nature,"
+"water'..."
+msgstr ""
+"Asegúrese de elegir una etiqueta disponible; de lo contrario, el fondo no se "
+"podrá cambiar. Asegúrese de separar las etiquetas con un ',' y no con "
+"espacios. Además, las etiquetas se entienden como Y, no como O. Un término "
+"de búsqueda válido podría ser 'naturaleza,agua'..."
+
+#. settings-schema.json->image-tag-data->description
+msgid "Search tags"
+msgstr "Buscar etiquetas"
+
+#. settings-schema.json->image-tag-data->tooltip
+msgid "Enter your topic filters"
+msgstr "Introduzca sus filtros temáticos"
+
+#. settings-schema.json->image-align-info->description
+msgid ""
+"Note that properties for the image alignment are not modified from the "
+"original desktop wallpaper. Recommended is to choose the 'zoom' option, "
+"because it ensures always the best fit on your screen."
+msgstr ""
+"Tenga en cuenta que las propiedades de alineación de la imagen no se "
+"modifican con respecto al fondo de escritorio original. Se recomienda elegir "
+"la opción \"zoom\", ya que garantiza siempre el mejor ajuste a la pantalla."
+
+#. settings-schema.json->image-uri->description
+msgid "Website URI to render"
+msgstr "URI del sitio web que se mostrará"
+
+#. settings-schema.json->image-uri->tooltip
+msgid "Enter the website URI which sould be rendered as your background"
+msgstr "Introduzca el URI del sitio web que debe aparecer como fondo."
+
+#. settings-schema.json->image-update-button->description
+msgid "Apply now"
+msgstr "Aplicar ahora"
+
+#. settings-schema.json->image-update-button->tooltip
+msgid ""
+"The settings are already stored - press this button to force a refresh of "
+"the background now."
+msgstr ""
+"La configuración ya está almacenada; presione este botón para forzar una "
+"actualización del fondo ahora."

@@ -1,0 +1,57 @@
+# CINNAMON EYES
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# anaximeno, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: c-eyes@anaximeno 3.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-03-01 21:29-0100\n"
+"PO-Revision-Date: 2026-02-11 08:29+0100\n"
+"Last-Translator: FabRCT\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. 6.2->settings-schema.json->pupil-shape->description
+msgid "Pupil Shape"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Round"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Vertical"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Horizontal"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Star"
+msgstr ""
+
+#. 6.2->settings-schema.json->margin->description
+msgid "Width"
+msgstr ""
+
+#. 6.2->settings-schema.json->margin->tooltip
+msgid ""
+"This setting controls the width of the area around the eye within which the "
+"eye will follow the mouse cursor. Positive values increase the area, while "
+"negative values decrease it."
+msgstr ""
+
+#. 6.2->settings-schema.json->padding->tooltip
+msgid ""
+"This setting controls the padding around the eye within which the eye will "
+"follow the mouse cursor. Increasing the padding decreases the radius of the "
+"eye, while decreasing the padding increases the radius of the eye."
+msgstr ""

@@ -1,0 +1,113 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-10 18:26+0300\n"
+"PO-Revision-Date: 2024-03-11 20:31+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+#: applet.js:45
+msgid "Night Light can't work properly: sct package not installed!"
+msgstr ""
+"Night Light не может правильно работать, так как пакет sct не установлен!"
+
+#. metadata.json->name
+#: applet.js:46 applet.js:49 applet.js:81
+msgid "Night Light"
+msgstr "Night Light"
+
+#: applet.js:46
+msgid "error"
+msgstr "ошибка"
+
+#: applet.js:49
+msgid ""
+"Warning: 'sct' command not found! This applet is a frontend for this "
+"command. Please, install 'sct' package and restart Cinnamon or reload the "
+"applet."
+msgstr ""
+"Предупреждение: команда 'sct' не найдена! Этот апплет является интерфейсом "
+"этой команды. Пожалуйста, установите пакет 'sct' и перезапустите Cinnamon "
+"или перезагрузите апплет."
+
+#: applet.js:57
+msgid "off"
+msgstr "выкл"
+
+#: applet.js:57
+msgid "on"
+msgstr "вкл"
+
+#: applet.js:57
+msgid "auto"
+msgstr "авто"
+
+#. metadata.json->description
+msgid "Screen night light activating applet"
+msgstr "Апплет для активации изменения цветовой температуры экрана монитора"
+
+#. settings-schema.json->common_label->description
+msgid "Common"
+msgstr "Общее"
+
+#. settings-schema.json->temperature->description
+msgid "Night Light temperature (K)"
+msgstr "Цветовая температура экрана монитора (Кельвин)"
+
+#. settings-schema.json->temperature->tooltip
+msgid "Night Light screen temperature"
+msgstr "Цветовая температура экрана монитора"
+
+#. settings-schema.json->auto_label->description
+msgid "Auto mode schedule"
+msgstr "Расписание для автоматического режима"
+
+#. settings-schema.json->startH->description
+msgid "Start time, hour"
+msgstr "Начальное время, час"
+
+#. settings-schema.json->startH->tooltip
+msgid "Start time (hour)"
+msgstr "Начальное время (час)"
+
+#. settings-schema.json->startM->description
+msgid "Start time, minute"
+msgstr "Начальное время, минута"
+
+#. settings-schema.json->startM->tooltip
+msgid "Start time (minute)"
+msgstr "Начальное время (минута)"
+
+#. settings-schema.json->endH->description
+msgid "End time, hour"
+msgstr "Конечное время, час"
+
+#. settings-schema.json->endH->tooltip
+msgid "End time (hour)"
+msgstr "Конечное время (час)"
+
+#. settings-schema.json->endM->description
+msgid "End time, minute"
+msgstr "Конечное время, минута"
+
+#. settings-schema.json->endM->tooltip
+msgid "End time (minute)"
+msgstr "Конечное время (минута)"
+
+#. settings-schema.json->mode->description
+#. settings-schema.json->mode->tooltip
+msgid "mode"
+msgstr ""

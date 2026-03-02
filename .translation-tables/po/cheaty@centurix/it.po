@@ -1,0 +1,89 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-04-27 13:15+0200\n"
+"PO-Revision-Date: 2023-10-29 16:57+0100\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:87
+msgid "version"
+msgstr "versione"
+
+#: applet.js:87
+msgid "Author:"
+msgstr "Autore:"
+
+#: applet.js:87
+msgid "Email:"
+msgstr "Email:"
+
+#: applet.js:87
+msgid "Repository:"
+msgstr "Repository:"
+
+#: applet.js:157
+msgid "Cheaty: Easy access cheatsheets"
+msgstr "Cheaty: bigliettini di facile accesso"
+
+#: applet.js:307
+msgid "Configure..."
+msgstr "Configura..."
+
+#: applet.js:321
+msgid "Code copied to the clipboard"
+msgstr "Codice copiato negli appunti"
+
+#. metadata.json->description
+msgid "An applet to provide quick access to a variety of cheat sheets."
+msgstr "Un applet per fornire un rapido accesso a una varietà di bigliettini."
+
+#. metadata.json->name
+msgid "Cheaty - Cheatsheet keeper"
+msgstr "Cheaty - Custode di Bigliettini"
+
+#. settings-schema.json->cheatsheetFolder->description
+msgid "cheatsheetFolder"
+msgstr "cartellaBigliettini"
+
+#. settings-schema.json->keyOpen->description
+msgid "Show Cheaty popup menu"
+msgstr "Mostra il menù a comparsa di Cheaty"
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the Cheaty popup menu."
+msgstr ""
+"Imposta le combinazioni di tasti per mostrare il menù a comparsa Cheaty."
+
+#. settings-schema.json->cheatsheets->description
+msgid "Cheat sheet selector"
+msgstr "Selettore dei bigliettini"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Enabled"
+msgstr "Attivato"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Name"
+msgstr "Nome"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Description"
+msgstr "Descrizione"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Author"
+msgstr "Autore"

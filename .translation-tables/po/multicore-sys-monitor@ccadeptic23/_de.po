@@ -1,0 +1,135 @@
+# MULTI-CORE SYSTEM MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# ccadeptic23, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-02-20 15:19+0100\n"
+"PO-Revision-Date: 2026-02-20 07:38+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "00-20"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_activity_20_40->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "20-40"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_activity_40_60->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "40-60"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_activity_60_80->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "60-80"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_activity_80_100->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "80-100"
+msgstr ""
+
+#. 6.4/applet.js:45
+msgid "Unrecoverable:"
+msgstr ""
+
+#. 6.4/applet.js:46
+msgid "Recoverable:"
+msgstr ""
+
+#. 6.4/applet.js:704 6.4/applet.js:747 6.4/applet.js:761
+msgid "root"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_colorCache->description
+#. 6.4/applet.js:1414
+msgid "Cache"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionTooltip->title
+msgid "Tooltip"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionCPUTemperature->title
+msgid "CPU Temperature"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStep->options
+msgid "1px"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStep->options
+msgid "2px"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStep->options
+msgid "4px"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStep->options
+msgid "8px"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStep->options
+msgid "16px"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStep->options
+msgid "32px"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStep->options
+msgid "64px"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempHigh->description
+msgid "High CPU Temperature (°C)"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempHigh->tooltip
+msgid "Refer to your CPU documentation."
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempCrit->description
+msgid "Critical CPU Temperature (°C)"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempCrit->tooltip
+msgid ""
+"Refer to your CPU documentation.\n"
+"Must be greater than the High CPU Temperature."
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempColor->description
+msgid "Normal Temperature Color"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempColorHigh->description
+msgid "High Temperature Color"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempColorCrit->description
+msgid "Critical Temperature Color"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_activity_0_20->description
+msgid "0-20"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_colorBuffers->description
+msgid "Buffers"
+msgstr ""
