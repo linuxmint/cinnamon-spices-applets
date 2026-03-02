@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-07 19:07+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:43
+msgid "Open clipboard history"
+msgstr ""
+
+#: applet.js:107
+msgid "[SETTINGS] Settings change detected"
+msgstr ""
+
+#: applet.js:115
+msgid "🗑️ Clear entire history"
+msgstr ""
+
+#: applet.js:118
+msgid "History emptied and clipboard erased!"
+msgstr ""
+
+#: applet.js:143
+#, javascript-format
+msgid "“%s” copied to clipboard."
+msgstr ""
+
+#: applet.js:152
+msgid "Clipboard has been emptied."
+msgstr ""
+
+#: applet.js:161
+msgid "Clipboard cleared (it contained text)."
+msgstr ""
+
+#: applet.js:163
+msgid "Clipboard not cleared (non-text content)."
+msgstr ""
+
+#: applet.js:176
+#, javascript-format
+msgid "An error occurred while adding content to clipboard history: %s"
+msgstr ""
+
+#: applet.js:206
+#, javascript-format
+msgid "New content detected: “%s”"
+msgstr ""
+
+#: applet.js:210
+#, javascript-format
+msgid "The contents of the clipboard have not changed since last %s seconds."
+msgstr ""
+
+#: applet.js:215
+msgid "Starting clipboard checking."
+msgstr ""
+
+#: clipboard-history@axaul->metadata.json->name
+msgid "Clipboard history"
+msgstr ""
+
+#: clipboard-history@axaul->metadata.json->description
+msgid "Utility to access previously copied text."
+msgstr ""
+
+#: clipboard-history@axaul->settings-schema.json->debug_mode->description
+msgid "Enable debug mode"
+msgstr ""
+
+#: clipboard-history@axaul->settings-schema.json->clipboard_history_limit->description
+msgid "Maximum number of items that can be stored in the clipboard history."
+msgstr ""
+
+#: clipboard-history@axaul->settings-schema.json->poll_interval->description
+msgid "Clipboard check interval"
+msgstr ""
+
+#: clipboard-history@axaul->settings-schema.json->poll_interval->units
+msgid "seconds"
+msgstr ""
+
+#: clipboard-history@axaul->settings-schema.json->open_applet_shortcut->description
+msgid "Open clipboard history with shortcut."
+msgstr ""
+
+#: clipboard-history@axaul->settings-schema.json->open_applet_shortcut->tooltip
+msgid "Save keyboard shortcuts to open the clipboard history."
+msgstr ""

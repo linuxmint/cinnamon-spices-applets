@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-07 19:07+0200\n"
+"PO-Revision-Date: 2025-05-07 19:11+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+
+#: applet.js:43
+msgid "Open clipboard history"
+msgstr "Ouvrir l'historique du presse-papiers"
+
+#: applet.js:107
+msgid "[SETTINGS] Settings change detected"
+msgstr "[PARAMS] Changement de paramètres détecté"
+
+#: applet.js:115
+msgid "🗑️ Clear entire history"
+msgstr "🗑️ Vider tout l'historique"
+
+#: applet.js:118
+msgid "History emptied and clipboard erased!"
+msgstr "Historique vidé et presse-papiers effacé !"
+
+#: applet.js:143
+#, javascript-format
+msgid "“%s” copied to clipboard."
+msgstr "« %s » copié dans le presse-papiers."
+
+#: applet.js:152
+msgid "Clipboard has been emptied."
+msgstr "Le presse-papiers a été vidé."
+
+#: applet.js:161
+msgid "Clipboard cleared (it contained text)."
+msgstr "Presse-papiers vidé (contenait du texte)."
+
+#: applet.js:163
+msgid "Clipboard not cleared (non-text content)."
+msgstr "Presse-papiers non vidé (contenu non texte)."
+
+#: applet.js:176
+#, javascript-format
+msgid "An error occurred while adding content to clipboard history: %s"
+msgstr "Une erreur est survenue lors de l'ajout du contenu à l'historique du presse-papiers : %s\""
+
+#: applet.js:206
+#, javascript-format
+msgid "New content detected: “%s”"
+msgstr "Nouveau contenu détecté : « %s »"
+
+#: applet.js:210
+#, javascript-format
+msgid "The contents of the clipboard have not changed since last %s seconds."
+msgstr "Le contenu du presse-papiers n'a pas changé depuis ces %s dernières secondes."
+
+#: applet.js:215
+msgid "Starting clipboard checking."
+msgstr "Démarrage de la surveillance du presse-papiers."
+
+#: clipboard-history@axaul->metadata.json->name
+msgid "Clipboard history"
+msgstr "Historique du presse-papiers"
+
+#: clipboard-history@axaul->metadata.json->description
+msgid "Utility to access previously copied text."
+msgstr "Utilitaire pour accéder à des éléments anciennement copiés."
+
+#: clipboard-history@axaul->settings-schema.json->debug_mode->description
+msgid "Enable debug mode"
+msgstr "Activer le mode de débogage"
+
+#: clipboard-history@axaul->settings-schema.json->clipboard_history_limit->description
+msgid "Maximum number of items that can be stored in the clipboard history."
+msgstr "Nombre maximal d'éléments pouvant être stockés dans l'historique du presse-papiers."
+
+#: clipboard-history@axaul->settings-schema.json->poll_interval->description
+msgid "Clipboard check interval"
+msgstr "Intervalle de vérification du presse-papiers"
+
+#: clipboard-history@axaul->settings-schema.json->poll_interval->units
+msgid "seconds"
+msgstr "secondes"
+
+#: clipboard-history@axaul->settings-schema.json->open_applet_shortcut->description
+msgid "Open clipboard history with shortcut."
+msgstr "Ouvrir l'historique du presse-papiers à l'aide d'un raccourci clavier."
+
+#: clipboard-history@axaul->settings-schema.json->open_applet_shortcut->tooltip
+msgid "Save keyboard shortcuts to open the clipboard history."
+msgstr "Enregistrer des raccourcis-clavier pour ouvrir l'historique du presse-papiers."
