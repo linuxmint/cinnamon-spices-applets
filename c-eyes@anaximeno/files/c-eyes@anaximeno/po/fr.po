@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-03-01 21:29-0100\n"
-"PO-Revision-Date: 2026-02-11 08:29+0100\n"
+"PO-Revision-Date: 2026-03-02 16:57+0100\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -427,23 +427,23 @@ msgstr "Type d’œil"
 
 #. 6.2->settings-schema.json->pupil-shape->description
 msgid "Pupil Shape"
-msgstr ""
+msgstr "Forme de la pupille"
 
 #. 6.2->settings-schema.json->pupil-shape->options
 msgid "Round"
-msgstr ""
+msgstr "Ronde"
 
 #. 6.2->settings-schema.json->pupil-shape->options
 msgid "Vertical"
-msgstr ""
+msgstr "Verticale"
 
 #. 6.2->settings-schema.json->pupil-shape->options
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontale"
 
 #. 6.2->settings-schema.json->pupil-shape->options
 msgid "Star"
-msgstr ""
+msgstr "Étoile"
 
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
@@ -470,9 +470,8 @@ msgid "Manual"
 msgstr "Manuel"
 
 #. 6.2->settings-schema.json->margin->description
-#, fuzzy
 msgid "Width"
-msgstr "Épaisseur du trait"
+msgstr "Largeur"
 
 #. 6.2->settings-schema.json->margin->tooltip
 msgid ""
@@ -480,6 +479,9 @@ msgid ""
 "eye will follow the mouse cursor. Positive values increase the area, while "
 "negative values decrease it."
 msgstr ""
+"Ce paramètre contrôle la largeur de la zone autour de l'œil dans laquelle "
+"l'œil suivra le curseur de la souris. Les valeurs positives augmentent la "
+"zone, tandis que les valeurs négatives la diminuent."
 
 #. 6.2->settings-schema.json->padding->tooltip
 msgid ""
@@ -487,6 +489,9 @@ msgid ""
 "follow the mouse cursor. Increasing the padding decreases the radius of the "
 "eye, while decreasing the padding increases the radius of the eye."
 msgstr ""
+"Ce paramètre contrôle la marge autour de l'œil dans laquelle celui-ci suivra "
+"le curseur de la souris. Augmenter la marge diminue le rayon de l'œil, tandis "
+"que la diminuer l'augmente."
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
