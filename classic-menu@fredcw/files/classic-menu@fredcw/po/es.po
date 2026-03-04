@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: classic-menu@fredcw 1.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2025-12-29 14:23-0500\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-02-25 03:37+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,15 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.8\n"
-
-#. metadata.json->name
-#. applet.js:16
-msgid "Classic Menu"
-msgstr "Menú clásico"
-
-#. applet.js:16
-msgid "Classic Menu is for cinnamon versions 6.6 and later only."
-msgstr "El menú clásico solo es compatible con las versiones 6.6 y posteriores de Cinnamon."
 
 #. 6.6/applet.js:397 6.6/applet.js:486
 msgid "Remove from favorites"
@@ -54,78 +46,86 @@ msgstr "Propiedades"
 msgid "Uninstall"
 msgstr "Desinstalar"
 
-#. 6.6/applet.js:759 6.6/applet.js:867
+#. 6.6/applet.js:743
 msgid "This file is no longer available"
 msgstr "Este archivo ya no está disponible"
 
-#. 6.6/applet.js:773 6.6/applet.js:881
+#. 6.6/applet.js:753
 msgid "Open with"
 msgstr "Abrir con"
 
-#. 6.6/applet.js:819 6.6/applet.js:927
+#. 6.6/applet.js:806
 msgid "Other application..."
 msgstr "Otra aplicación..."
 
+#. 6.6/applet.js:822
+msgid "Open containing folder"
+msgstr ""
+
 #. 6.6->settings-schema.json->menu->title
-#. 6.6/applet.js:1199
+#. 6.6/applet.js:1178
 msgid "Menu"
 msgstr "Menú"
 
-#. 6.6/applet.js:1204
+#. 6.6/applet.js:1183
 msgid "Edit menu"
 msgstr "Editar menú"
 
-#. 6.6/applet.js:2458
+#. 6.6/applet.js:2444
 msgid "Places"
 msgstr "Lugares"
 
-#. 6.6/applet.js:2496
+#. 6.6/applet.js:2482
 msgid "Recent Files"
 msgstr "Archivos recientes"
 
-#. 6.6/applet.js:2511
+#. 6.6/applet.js:2497
 msgid "Clear list"
 msgstr "Borrar lista"
 
-#. 6.6/applet.js:2512
+#. 6.6/applet.js:2498
 msgid "Clear all recent documents"
 msgstr "Borrar todos los documentos recientes"
 
-#. 6.6/applet.js:2531
+#. 6.6/applet.js:2517
 msgid "No recent documents"
 msgstr "No hay documentos recientes"
 
-#. 6.6/applet.js:2566
+#. 6.6/applet.js:2552
 msgid "Favorites"
 msgstr "Favoritos"
 
-#. 6.6/applet.js:2595
+#. 6.6/applet.js:2581
 msgid "All Applications"
 msgstr "Todas las aplicaciones"
 
-#. 6.6/applet.js:2663
+#. 6.6/applet.js:2649
 msgid "Lock Screen"
 msgstr "Pantalla de bloqueo"
 
-#. 6.6/applet.js:2664
+#. 6.6/applet.js:2650
 msgid "Lock the screen"
 msgstr "Bloquear la pantalla"
 
-#. 6.6/applet.js:2688
+#. 6.6/applet.js:2674
 msgid "Log Out"
 msgstr "Cerrar la sesión"
 
-#. 6.6/applet.js:2689
+#. 6.6/applet.js:2675
 msgid "Leave the session"
 msgstr "Salir de la sesión"
 
-#. 6.6/applet.js:2700
+#. 6.6/applet.js:2686
 msgid "Shut Down"
 msgstr "Apagar"
 
-#. 6.6/applet.js:2701
+#. 6.6/applet.js:2687
 msgid "Shut down the computer"
 msgstr "Apague la computadora"
+
+#. metadata.json->name
+msgid "Classic Menu"
+msgstr "Menú clásico"
 
 #. metadata.json->description
 msgid "The classic Cinnamon menu for cinnamon 6.6 and later"
@@ -158,7 +158,8 @@ msgstr "Utiliza un icono y una etiqueta personalizados"
 
 #. 6.6->settings-schema.json->menu-custom->tooltip
 msgid "Check this to specify a custom icon and label"
-msgstr "Marque esta casilla para especificar un icono y una etiqueta personalizados"
+msgstr ""
+"Marque esta casilla para especificar un icono y una etiqueta personalizados"
 
 #. 6.6->settings-schema.json->menu-icon->description
 msgid "Icon"
@@ -260,12 +261,17 @@ msgid "Enable autoscrolling in application list"
 msgstr "Habilitar el desplazamiento automático en la lista de aplicaciones"
 
 #. 6.6->settings-schema.json->enable-autoscroll->tooltip
-msgid "Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr "Elija si deseas habilitar o no el desplazamiento automático suave en la lista de aplicaciones."
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
+"Elija si deseas habilitar o no el desplazamiento automático suave en la "
+"lista de aplicaciones."
 
 #. 6.6->settings-schema.json->search-filesystem->description
 msgid "Enable filesystem path entry in search box"
-msgstr "Habilitar la entrada de la ruta del sistema de archivos en el cuadro de búsqueda"
+msgstr ""
+"Habilitar la entrada de la ruta del sistema de archivos en el cuadro de "
+"búsqueda"
 
 #. 6.6->settings-schema.json->search-filesystem->tooltip
 msgid "Allows path entry in the menu search box."
@@ -276,8 +282,11 @@ msgid "Force the panel to be visible when opening the menu"
 msgstr "Forzar que el panel sea visible al abrir el menú"
 
 #. 6.6->settings-schema.json->force-show-panel->tooltip
-msgid "Opening the menu will also show the main panel (which may be auto-hidden)."
-msgstr "Al abrir el menú también se mostrará el panel principal (que puede estar oculto automáticamente)."
+msgid ""
+"Opening the menu will also show the main panel (which may be auto-hidden)."
+msgstr ""
+"Al abrir el menú también se mostrará el panel principal (que puede estar "
+"oculto automáticamente)."
 
 #. 6.6->settings-schema.json->activate-on-hover->description
 msgid "Open the menu when I move my mouse over it"
