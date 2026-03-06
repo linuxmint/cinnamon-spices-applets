@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-28 16:21+0100\n"
+"POT-Creation-Date: 2026-03-06 01:25+0100\n"
 "PO-Revision-Date: 2025-12-30 14:13-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -41,27 +41,27 @@ msgstr "Recargar iconos"
 msgid "Visit website"
 msgstr "Visitar el sitio web"
 
-#. applet.js:831
+#. applet.js:832
 msgid "Spices"
 msgstr "Especias"
 
-#. applet.js:919
+#. applet.js:923
 msgid "Mark all as read"
 msgstr "Marcar todos como leídos"
 
-#. applet.js:930
+#. applet.js:934
 msgid "Refresh"
 msgstr "Actualizar"
 
-#. applet.js:944
+#. applet.js:948
 msgid "Refreshing in progress - Click to stop"
 msgstr "Actualización en curso: haga clic para detenerla"
 
-#. applet.js:969
+#. applet.js:973
 msgid "Refreshing in progress"
 msgstr "Actualización en curso"
 
-#. applet.js:981
+#. applet.js:985
 msgid "Configure..."
 msgstr "Configurar..."
 
@@ -196,6 +196,11 @@ msgstr "Número de comentarios (de abajo hacia arriba)"
 #. settings-schema.json->sort-by->options
 msgid "Number of comments (top-down)"
 msgstr "Número de comentarios (de arriba hacia abajo)"
+
+#. settings-schema.json->sort-by->options
+#, fuzzy
+msgid "Number of issues"
+msgstr "Mostrar número de problemas en el menú"
 
 #. settings-schema.json->show-uuid->description
 msgid "Show UUID instead of name"

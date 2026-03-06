@@ -909,6 +909,9 @@ class SpiceSpy extends Applet.TextIconApplet {
                 break;
               case "dcomments":
                 menuItems.sort((a,b) => a.spice.comments < b.spice.comments);
+                break;
+              case "issues":
+                menuItems.sort((a,b) => a.spice.issues < b.spice.issues);
             }
 
             for(let item of menuItems)
