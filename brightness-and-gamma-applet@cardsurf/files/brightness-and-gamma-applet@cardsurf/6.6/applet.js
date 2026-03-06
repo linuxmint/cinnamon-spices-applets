@@ -78,6 +78,8 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.set_applet_icon_name(this.baga_icon + "-on");
         this.settingsWindow = undefined;
         
+        this.isInFullscreenMode = false;
+        
         this._clipboard = St.Clipboard.get_default();
 
         this.bagaShortcuts = [];
@@ -343,6 +345,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ["smooth_duration", null],
                         ["apply_startup", null],
                         ["apply_every", null],
+                        ["all100OnFullscreen", null],
                         ["apply_changing_monitors", null],
                         ["save_every", null],
                         ["update_scroll", null],
@@ -636,6 +639,34 @@ class BrightnessAndGamma extends Applet.IconApplet {
     on_applet_clicked(event) {
         this.menu_sliders._init_items_presets();
         this.menu_sliders.toggle();
+        //~ global.log("Is fullscreen: " + this.is_fullscreen());
+    }
+    
+    _check_fullscreen_mode() {
+        if (!this.all100OnFullscreen) return;
+        let fullscreen = this.is_fullscreen();
+        if (fullscreen === this.isInFullscreenMode) return;
+        if (fullscreen === true) {
+            //~ this.is_running = false;
+            //~ this.set_applet_icon_name(this.baga_icon + "-full");
+            this.brightness = 100;
+            if (this.useScreenTemp) {
+                this.screen_temp = 6500;
+                this.update_xsct();
+            } else {
+                this.gamma_red = 100;
+                this.gamma_green = 100;
+                this.gamma_blue = 100;
+                this.update_xrandr();
+            }
+            this.isInFullscreenMode = true;
+            this.save_last_values();
+        } else {
+            this.is_running = true;
+            this.isInFullscreenMode = false;
+            //~ this.set_applet_icon_name(this.baga_icon + "-on");
+            this.on_applet_added_to_panel();
+        }
     }
 
     // Override
@@ -647,6 +678,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this._applet_tooltip._tooltip.set_style('font-family: monospace;');
         this._check_sunrise_sunset(true);
         this.update_tooltip();
+        timeout_add_seconds(5, () => { this._check_fullscreen_mode(); return this.is_running; });
         timeout_add_seconds(900, () => { this._check_sunrise_sunset(); return this.is_running; });
         Main.layoutManager.connect('monitors-changed', () => { if (this.apply_changing_monitors) this.on_preset_reload_button_clicked(); });
     }
@@ -910,9 +942,9 @@ class BrightnessAndGamma extends Applet.IconApplet {
         for (let i=0; i < new_preset_list.length; i++) {
             let preset = new_preset_list[i];
             let name = preset["name"];
-            global.log("name: " + name + "(" + name.length + ") -> " + _(name));
+            //~ global.log("name: " + name + "(" + name.length + ") -> " + _(name));
             if (name.length > 0 && name != _(name)) {
-                global.log("Changing.");
+                //~ global.log("Changing.");
                 new_preset_list[i]["name"] = _(name);
             }
         }
@@ -921,9 +953,9 @@ class BrightnessAndGamma extends Applet.IconApplet {
         for (let i=0; i < new_preset_list.length; i++) {
             let preset = new_preset_list[i];
             let name = preset["name"];
-            global.log("name: " + name + " -> " + _(name));
+            //~ global.log("name: " + name + " -> " + _(name));
             if (name.length > 0 && name != _(name)) {
-                global.log("Changing.");
+                //~ global.log("Changing.");
                 new_preset_list[i]["name"] = _(name);
             }
         }
@@ -1295,6 +1327,11 @@ class BrightnessAndGamma extends Applet.IconApplet {
         let parameter = number.toString();
         return parameter;
     }
+    
+    _get_number_of_monitors() {
+        let nMonitors = Main.layoutManager.monitors.length;
+        return nMonitors;
+    }
 
     _get_gamma_parameter() {
         let parameter_red = this._get_scaled_parameter(this.gamma_red);
@@ -1302,6 +1339,11 @@ class BrightnessAndGamma extends Applet.IconApplet {
         let parameter_blue = this._get_scaled_parameter(this.gamma_blue);
         let parameter = parameter_red + this.gamma_separator + parameter_green + this.gamma_separator + parameter_blue;
         return parameter;
+    }
+    
+    is_fullscreen() {
+        //~ global.log("this.panel.monitorIndex: " + this.panel.monitorIndex);
+        return global.display.get_monitor_in_fullscreen(this.panel.monitorIndex);
     }
 
     spawn_xrandr_process(argv) {

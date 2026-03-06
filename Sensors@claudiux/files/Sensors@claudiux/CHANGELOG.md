@@ -1,3 +1,6 @@
+### v5.10.6~20260304
+  * Added option: Separator Color.
+
 ### v5.10.5~20260218
   * Improved section "This settings window".
   * From now on, the user can set the size and position of the settings window to its current (approximate) size and position. Then let Cinnamon decide the real values.
