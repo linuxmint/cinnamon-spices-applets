@@ -19,6 +19,7 @@
                 "disable_nightmode",
                 "apply_startup",
                 "apply_every",
+                "all100OnFullscreen",
                 "apply_changing_monitors",
                 "update_scroll",
                 "scroll_step",
@@ -109,6 +110,12 @@
         "step": 50,
         "show-value": true,
         "description": "Step duration (ms)"
+    },
+    "all100OnFullscreen" : {
+        "type" : "switch",
+        "default" : false,
+        "description": "Set all to 100% in full-screen mode",
+        "tooltip": "When an application switches to full-screen mode, all values are set to 100%. Useful for games and videos."
     },
     "apply_changing_monitors" : {
         "type" : "switch",

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: classic-menu@fredcw 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-29 14:23-0500\n"
+"POT-Creation-Date: 2026-02-25 03:37+0000\n"
 "PO-Revision-Date: 2026-01-17 03:31+0300\n"
 "Last-Translator: treasboi\n"
 "Language-Team: Turkish\n"
@@ -16,16 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.8\n"
-
-#. metadata.json->name
-#. applet.js:16
-msgid "Classic Menu"
-msgstr "Klasik Menü"
-
-#. applet.js:16
-msgid "Classic Menu is for cinnamon versions 6.6 and later only."
-msgstr ""
-"Klasik Menü sadece Cinnamon 6.6 ve sonraki sürümler içindir."
 
 #. 6.6/applet.js:397 6.6/applet.js:486
 msgid "Remove from favorites"
@@ -55,78 +45,86 @@ msgstr "Özellikler"
 msgid "Uninstall"
 msgstr "Kaldır"
 
-#. 6.6/applet.js:759 6.6/applet.js:867
+#. 6.6/applet.js:743
 msgid "This file is no longer available"
 msgstr "Bu dosya artık mevcut değil"
 
-#. 6.6/applet.js:773 6.6/applet.js:881
+#. 6.6/applet.js:753
 msgid "Open with"
 msgstr "Birlikte Aç:"
 
-#. 6.6/applet.js:819 6.6/applet.js:927
+#. 6.6/applet.js:806
 msgid "Other application..."
 msgstr "Başka Uygulama..."
 
+#. 6.6/applet.js:822
+msgid "Open containing folder"
+msgstr ""
+
 #. 6.6->settings-schema.json->menu->title
-#. 6.6/applet.js:1199
+#. 6.6/applet.js:1178
 msgid "Menu"
 msgstr "Menü"
 
-#. 6.6/applet.js:1204
+#. 6.6/applet.js:1183
 msgid "Edit menu"
 msgstr "Menüyü düzenle"
 
-#. 6.6/applet.js:2458
+#. 6.6/applet.js:2444
 msgid "Places"
 msgstr "Konumlar"
 
-#. 6.6/applet.js:2496
+#. 6.6/applet.js:2482
 msgid "Recent Files"
 msgstr "Son Dosyalar"
 
-#. 6.6/applet.js:2511
+#. 6.6/applet.js:2497
 msgid "Clear list"
 msgstr "Listeyi temizle"
 
-#. 6.6/applet.js:2512
+#. 6.6/applet.js:2498
 msgid "Clear all recent documents"
 msgstr "Son belgelerin tümünü temizle"
 
-#. 6.6/applet.js:2531
+#. 6.6/applet.js:2517
 msgid "No recent documents"
 msgstr "Son kullanılan belge yok"
 
-#. 6.6/applet.js:2566
+#. 6.6/applet.js:2552
 msgid "Favorites"
 msgstr "Sık Kullanılanlar"
 
-#. 6.6/applet.js:2595
+#. 6.6/applet.js:2581
 msgid "All Applications"
 msgstr "Tüm Uygulamalar"
 
-#. 6.6/applet.js:2663
+#. 6.6/applet.js:2649
 msgid "Lock Screen"
 msgstr "Ekranı Kilitle"
 
-#. 6.6/applet.js:2664
+#. 6.6/applet.js:2650
 msgid "Lock the screen"
 msgstr "Ekranı kilitle"
 
-#. 6.6/applet.js:2688
+#. 6.6/applet.js:2674
 msgid "Log Out"
 msgstr "Oturum Kapat"
 
-#. 6.6/applet.js:2689
+#. 6.6/applet.js:2675
 msgid "Leave the session"
 msgstr "Oturumu terk et"
 
-#. 6.6/applet.js:2700
+#. 6.6/applet.js:2686
 msgid "Shut Down"
 msgstr "Kapat"
 
-#. 6.6/applet.js:2701
+#. 6.6/applet.js:2687
 msgid "Shut down the computer"
 msgstr "Bilgisayarı kapat"
+
+#. metadata.json->name
+msgid "Classic Menu"
+msgstr "Klasik Menü"
 
 #. metadata.json->description
 msgid "The classic Cinnamon menu for cinnamon 6.6 and later"
@@ -264,7 +262,8 @@ msgstr "Uygulama listesinde otomatik kaydırmayı etkinleştir"
 msgid ""
 "Choose whether or not to enable smooth autoscrolling in the application list."
 msgstr ""
-"Uygulama listesinde yumuşak otomatik kaydırmayı etkinleştirip etkinleştirmemeyi seçin."
+"Uygulama listesinde yumuşak otomatik kaydırmayı etkinleştirip "
+"etkinleştirmemeyi seçin."
 
 #. 6.6->settings-schema.json->search-filesystem->description
 msgid "Enable filesystem path entry in search box"
@@ -282,7 +281,8 @@ msgstr "Menüyü açarken panelin görünmesini zorla"
 msgid ""
 "Opening the menu will also show the main panel (which may be auto-hidden)."
 msgstr ""
-"Menüyü açmak, ana panelin de görünmesini sağlar (panel otomatik gizli olabilir)."
+"Menüyü açmak, ana panelin de görünmesini sağlar (panel otomatik gizli "
+"olabilir)."
 
 #. 6.6->settings-schema.json->activate-on-hover->description
 msgid "Open the menu when I move my mouse over it"

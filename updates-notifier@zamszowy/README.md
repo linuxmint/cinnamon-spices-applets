@@ -1,7 +1,7 @@
 # updates notifier
 
 This applet monitors and refreshes (via configurable timeout) available updates
-using pkcon tool and PackageKitGlib package.  
+using pkgcli/pkgctl/pkcon tool and PackageKitGlib package.  
 It also allows refreshing updates, viewing available ones and installing them
 through the popup menu.  
 When viewing updates, all entries are clickable and will open the update
@@ -24,7 +24,7 @@ are waiting for the upgrades.
 
 ## Dependencies
 
-- `pkcon`, `PackageKitGlib`,
+- `pkgcli/pkgctl/pkcon` form `PackageKit` package, `PackageKitGlib`,
 - optional `fwupdmgr` and `jq` for showing available firmware updates
 
 ## Icons

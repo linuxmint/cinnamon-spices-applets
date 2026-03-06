@@ -5,23 +5,71 @@ set -u
 DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 readonly DIR
 
+PKG_TOOL=""
+if command -v pkgcli &>/dev/null; then
+    PKG_TOOL=pkgcli
+elif command -v pkgctl &>/dev/null; then
+    PKG_TOOL=pkgctl
+elif command -v pkcon &>/dev/null; then
+    PKG_TOOL=pkcon
+else
+    echo "No suitable package manager found (pkgcli, pkgctl, pkcon)" >"$DIR/error"
+    echo ERROR
+    exit 0
+fi
+readonly PKG_TOOL
+
+pkg_refresh() {
+    case "$PKG_TOOL" in
+    pkgcli | pkgctl)
+        $PKG_TOOL -q refresh
+        ;;
+    pkcon)
+        $PKG_TOOL refresh
+        ;;
+    esac
+}
+
+pkg_list_updates() {
+    case "$PKG_TOOL" in
+    pkgcli | pkgctl)
+        $PKG_TOOL -q list-updates
+        ;;
+    pkcon)
+        $PKG_TOOL get-updates
+        local -r ret=$?
+        [[ $ret -eq 5 ]] && ret=0
+        return $ret
+        ;;
+    esac
+}
+
+pkg_list_installed() {
+    case "$PKG_TOOL" in
+    pkgcli | pkgctl)
+        $PKG_TOOL -q -f installed list
+        ;;
+    pkcon)
+        $PKG_TOOL get-packages --filter installed
+        ;;
+    esac
+}
+
 case "$1" in
 check)
     refreshMode=$2
 
     if [[ "$refreshMode" = "updates" ]]; then
-        pkcon refresh &>/dev/null
+        pkg_refresh &>/dev/null
     fi
 
-    out=$(pkcon get-updates 2>&1)
-    exit_code=$?
-    if [[ $exit_code -ne 0 ]] && [[ $exit_code -ne 5 ]]; then
+    if ! out=$(pkg_list_updates 2>&1); then
         echo ERROR
         echo "$out" > "$DIR/error"
         exit 0
     fi
 
-    pkcon get-packages --filter installed &>/dev/null
+    pkg_list_installed &>/dev/null
 
     if command -v fwupdmgr &>/dev/null && command -v jq &>/dev/null; then
         if [[ "$refreshMode" = "updates" ]]; then

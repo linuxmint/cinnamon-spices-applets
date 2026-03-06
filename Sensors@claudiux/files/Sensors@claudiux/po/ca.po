@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux 3.7.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-02-18 18:19+0100\n"
+"POT-Creation-Date: 2026-03-04 22:41+0100\n"
 "PO-Revision-Date: 2025-09-28 16:06+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -23,89 +23,89 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Monitor de sensors"
 
-#. applet.js:585
+#. applet.js:586
 msgid "Suspended"
 msgstr "Suspès"
 
-#. applet.js:901 applet.js:943
+#. applet.js:921 applet.js:963
 msgid "high:"
 msgstr "alt:"
 
-#. applet.js:901 applet.js:904 applet.js:943 applet.js:945 applet.js:986
+#. applet.js:921 applet.js:924 applet.js:963 applet.js:965 applet.js:1006
 msgid "n/a"
 msgstr "n/a"
 
-#. applet.js:904 applet.js:945
+#. applet.js:924 applet.js:965
 msgid "crit:"
 msgstr "crít:"
 
-#. applet.js:986 applet.js:1030
+#. applet.js:1006 applet.js:1050
 msgid "min:"
 msgstr "mín:"
 
-#. applet.js:1032
+#. applet.js:1052
 msgid "max:"
 msgstr "màx:"
 
-#. applet.js:1061
+#. applet.js:1081
 msgid "No intrusion detected"
 msgstr "No s'ha detectat intrusió"
 
-#. applet.js:1061
+#. applet.js:1081
 msgid "INTRUSION DETECTED!"
 msgstr "INTRUSIÓ DETECTADA!"
 
-#. applet.js:1081
+#. applet.js:1101
 msgid "Must be configured!"
 msgstr "S'ha de configurar!"
 
-#. applet.js:1450
+#. applet.js:1470
 msgid "Settings"
 msgstr "Opcions"
 
-#. applet.js:1450
+#. applet.js:1470
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1457
+#. applet.js:1477
 msgid "⚙ General"
 msgstr "⚙ General"
 
-#. applet.js:1474
+#. applet.js:1494
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Sensors de temperatura"
 
-#. applet.js:1491
+#. applet.js:1511
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Sensors de ventilador"
 
-#. applet.js:1508
+#. applet.js:1528
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Sensors de voltatge"
 
-#. applet.js:1525
+#. applet.js:1545
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Sensors d'intrusió"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1561
+#. applet.js:1581
 msgid "Run xsensors"
 msgstr "Executar xsensors"
 
-#. applet.js:1570
+#. applet.js:1590
 msgid "Suspend Sensors"
 msgstr "Suspendre sensors"
 
-#. applet.js:1581
+#. applet.js:1601
 msgid "Reload this applet"
 msgstr "Refresca aquesta miniaplicació"
 
-#. applet.js:1928
+#. applet.js:1948
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Segur que voleu eliminar '%s'?"
@@ -486,6 +486,11 @@ msgstr "barra"
 
 #. settings-schema.json->separator_type->description
 msgid "Separator"
+msgstr "Separador"
+
+#. settings-schema.json->separator_color->description
+#, fuzzy
+msgid "Separator Color"
 msgstr "Separador"
 
 #. settings-schema.json->char_color_customized->description
