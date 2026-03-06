@@ -113,11 +113,11 @@ const formatBytesValueUnit = (bytes, decimals=2, withRate=true) => {
     if (!isBinary) {
         k = 1000;
         sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        i = Math.min(Math.max(0, Math.floor(Math.log10(bytes) / Math.log10(k))), 8);
+        i = Math.min(Math.max(0, Math.trunc(Math.log10(bytes) / 3)), 8); // Math.log10(k) = 3.
     } else {
         k = 1024;
         sizes = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
-        i = Math.min(Math.max(0, Math.floor(Math.log2(bytes) / Math.log2(k))), 8);
+        i = Math.min(Math.max(0, Math.trunc(Math.log2(bytes) / 10)), 8); // Math.log2(k) = 10.
     }
     let value;
     if (isNaN(i)) {
@@ -450,7 +450,7 @@ class MCSM extends Applet.IconApplet {
         this._isHighlighted;
         if (this.without_any_graph) return;
         let xOffset = 0;
-        let yOffset = Math.max(0, Math.floor((this._panelHeight - this.panelHeight) / 2));
+        let yOffset = Math.max(0, Math.trunc((this._panelHeight - this.panelHeight) / 2));
         for (let i = 0, len = properties.length; i < len; i++) {
             if (properties[i].abbrev === 'Swap') {
                 continue;
@@ -976,7 +976,7 @@ class MCSM extends Applet.IconApplet {
         for (let name of Object.keys(dataNet)) {
             let rx = dataNet[name]["rx"];
             let tx = dataNet[name]["tx"];
-            datastring += name + ":" + rx + ":" + tx + " ";
+            datastring += `${name}:${rx}:${tx} `;
         }
         datastring = datastring.trim();
         var allowedInterfaces = [];
@@ -999,14 +999,14 @@ class MCSM extends Applet.IconApplet {
                 continue;
             }
             if (this.Net_mergeAll) {
-                sum_rx = sum_rx + Math.trunc(rx);
-                sum_tx = sum_tx + Math.trunc(tx);
+                sum_rx = sum_rx + 1 * rx;
+                sum_tx = sum_tx + 1 * tx;
             } else {
                 data.push({
                     "id": iface,
                     "name": names[iface],
-                    "up": Math.trunc(tx),
-                    "down": Math.trunc(rx)
+                    "up": 1 * tx,
+                    "down": 1 * rx
                 });
             }
         }
@@ -1021,6 +1021,21 @@ class MCSM extends Applet.IconApplet {
         }
         this.networkProvider.setData(data, disabledDevices);
     }
+    
+    _read_rx_tx_bytes(name, status) {
+        if (status != "up") return;
+        const net_dir_path = "/sys/class/net";
+        var rx_bytes = "", tx_bytes = "";
+        const rx_bytes_path = `${net_dir_path}/${name}/statistics/rx_bytes`;
+        const tx_bytes_path = `${net_dir_path}/${name}/statistics/tx_bytes`;
+        readFileAsync(rx_bytes_path).then( (outputR) => {
+            rx_bytes = outputR.trim();
+            readFileAsync(tx_bytes_path).then( (outputT) => {
+                tx_bytes = outputT.trim();
+                this.lastDataNet[""+name] = {"rx": parseInt(rx_bytes), "tx": parseInt(tx_bytes)};
+            });
+        });
+    }
 
     get_net_info() {
         if (!this.isRunning) return;
@@ -1033,18 +1048,7 @@ class MCSM extends Applet.IconApplet {
                 let names_status = result.trim().split(" ");
                 for (let name_status of names_status) {
                     let [name, status] = name_status.split(":");
-                    if (status == "up") {
-                        var rx_bytes = "", tx_bytes = "";
-                        let rx_bytes_path = `${net_dir_path}/${name}/statistics/rx_bytes`;
-                        let tx_bytes_path = `${net_dir_path}/${name}/statistics/tx_bytes`;
-                        readFileAsync(rx_bytes_path).then( (outputR) => {
-                            rx_bytes = outputR.trim();
-                            readFileAsync(tx_bytes_path).then( (outputT) => {
-                                tx_bytes = outputT.trim();
-                                this.lastDataNet[""+name] = {"rx": parseInt(rx_bytes), "tx": parseInt(tx_bytes)};
-                            });
-                        });
-                    }
+                    this._read_rx_tx_bytes(name, status);
                 }
             });
         } else {
@@ -1055,18 +1059,7 @@ class MCSM extends Applet.IconApplet {
                 let operstate_file_path = `${net_dir_path}/${name}/operstate`;
                 readFileAsync(operstate_file_path).then( (output) => {
                     let net_status = output.trim();
-                    if (net_status == "up") {
-                        let rx_bytes_path = `${net_dir_path}/${name}/statistics/rx_bytes`;
-                        let tx_bytes_path = `${net_dir_path}/${name}/statistics/tx_bytes`;
-                        
-                        readFileAsync(rx_bytes_path).then( (outputR) => {
-                            let rx_bytes = outputR.trim();
-                            readFileAsync(tx_bytes_path).then( (outputT) => {
-                                let tx_bytes = outputT.trim();
-                                this.lastDataNet[""+name] = {"rx": parseInt(rx_bytes), "tx": parseInt(tx_bytes)};
-                            });
-                        });
-                    }
+                    this._read_rx_tx_bytes(name, net_status);
                 });
                 
             }
@@ -1622,21 +1615,27 @@ class NetDataProvider {
         for (let i = 0, len = this.currentReadings.length; i < len; i++) {
             let data_index = dataIds.indexOf(this.currentReadings[i]["id"]);
             if (data_index < 0) continue;
-            this.currentReadings[i].down = data[data_index]["down"];
-            this.currentReadings[i].up = data[data_index]["up"];
+            this.currentReadings[i]["down"] = data[data_index]["down"];
+            this.currentReadings[i]["up"] = data[data_index]["up"];
+            
+            if (this.currentReadings[i].lastReading[0] === 0 && this.currentReadings[i].lastReading[1] === 0) {
+                this.currentReadings[i].lastReading[0] = this.currentReadings[i]["down"];
+                this.currentReadings[i].lastReading[1] = this.currentReadings[i]["up"];
+                continue
+            }
 
-            this.currentReadings[i].tooltipDown = Math.round(
-                ((this.currentReadings[i].down - this.currentReadings[i].lastReading[0]) / secondsSinceLastUpdate)
-            );
-            this.currentReadings[i].tooltipUp = Math.round(
-                ((this.currentReadings[i].up - this.currentReadings[i].lastReading[1]) / secondsSinceLastUpdate)
-            );
-
-              this.currentReadings[i].lastReading[0] = this.currentReadings[i].down;
-              this.currentReadings[i].lastReading[1] = this.currentReadings[i].up;
-
-              this.currentReadings[i].readingRatesList[0] = Math.round(this.currentReadings[i].tooltipDown / 1024);
-              this.currentReadings[i].readingRatesList[1] = Math.round(this.currentReadings[i].tooltipUp / 1024);
+            this.currentReadings[i].tooltipDown = Math.abs(Math.round(
+                ((this.currentReadings[i]["down"] - this.currentReadings[i].lastReading[0]) / secondsSinceLastUpdate)
+            ));
+            this.currentReadings[i].tooltipUp = Math.abs(Math.round(
+                ((this.currentReadings[i]["up"] - this.currentReadings[i].lastReading[1]) / secondsSinceLastUpdate)
+            ));
+            
+            this.currentReadings[i].lastReading[0] = this.currentReadings[i]["down"];
+            this.currentReadings[i].lastReading[1] = this.currentReadings[i]["up"];
+            
+            this.currentReadings[i].readingRatesList[0] = this.currentReadings[i].tooltipDown;
+            this.currentReadings[i].readingRatesList[1] = this.currentReadings[i].tooltipUp;
         }
 
         this.lastUpdatedTime = newUpdateTime;
