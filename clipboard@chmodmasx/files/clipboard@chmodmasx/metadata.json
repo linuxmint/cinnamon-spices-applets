@@ -1,0 +1,18 @@
+{
+    "uuid": "clipboard@chmodmasx",
+    "name": "Clipboard",
+    "description": "Clipboard history applet with a Parcellite-style menu",
+    "version": "1.0.2",
+    "cinnamon-version": [
+        "5.0",
+        "5.2",
+        "5.4",
+        "5.6",
+        "5.8",
+        "6.0",
+        "6.2",
+        "6.4"
+    ],
+    "max-instances": 1,
+    "author": "chmodmasx"
+}

@@ -1,0 +1,128 @@
+# Clipboard Applet for Cinnamon - Spanish translation
+# Copyright (C) 2026 chmodmasx
+# This file is distributed under the same license as the clipboard@chmodmasx package.
+# chmodmasx, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: clipboard@chmodmasx 1.0.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-26 17:47-0300\n"
+"PO-Revision-Date: 2026-01-26 17:45-0300\n"
+"Last-Translator: chmodmasx <chmodmasx@example.com>\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:55
+msgid "Clipboard history"
+msgstr "Historial del portapapeles"
+
+#. applet.js:186
+msgid "Filter..."
+msgstr "Filtrar..."
+
+#. applet.js:242
+msgid "Clear history"
+msgstr "Limpiar historial"
+
+#. applet.js:246
+msgid "Clear clipboard"
+msgstr "Limpiar portapapeles"
+
+#. applet.js:250
+msgid "Tracking enabled"
+msgstr "Seguimiento activado"
+
+#. applet.js:256
+msgid "Settings"
+msgstr "Configuración"
+
+#. applet.js:810
+msgid "(empty)"
+msgstr "(vacío)"
+
+#. applet.js:855
+msgid "No items"
+msgstr "Sin elementos"
+
+#. metadata.json->name
+msgid "Clipboard"
+msgstr "Portapapeles"
+
+#. metadata.json->description
+msgid "Clipboard history applet with a Parcellite-style menu"
+msgstr "Applet de historial del portapapeles con un menú estilo Parcellite"
+
+#. settings-schema.json->General->title
+msgid "General"
+msgstr "General"
+
+#. settings-schema.json->section-history->title
+msgid "History"
+msgstr "Historial"
+
+#. settings-schema.json->section-tracking->title
+msgid "Tracking"
+msgstr "Seguimiento"
+
+#. settings-schema.json->section-menu->title
+msgid "Menu"
+msgstr "Menú"
+
+#. settings-schema.json->history-size->units
+msgid "items"
+msgstr "elementos"
+
+#. settings-schema.json->history-size->description
+msgid "Maximum number of items to keep"
+msgstr "Número máximo de elementos a guardar"
+
+#. settings-schema.json->ignore-duplicates->description
+msgid "Ignore duplicate entries"
+msgstr "Ignorar entradas duplicadas"
+
+#. settings-schema.json->ignore-whitespace->description
+msgid "Ignore empty or whitespace-only entries"
+msgstr "Ignorar entradas vacías o solo espacios"
+
+#. settings-schema.json->persist-history->description
+msgid "Persist history on disk"
+msgstr "Guardar historial en disco"
+
+#. settings-schema.json->tracking-enabled->description
+msgid "Track clipboard changes"
+msgstr "Rastrear cambios del portapapeles"
+
+#. settings-schema.json->poll-interval->units
+msgid "seconds"
+msgstr "segundos"
+
+#. settings-schema.json->poll-interval->description
+msgid "Polling interval for clipboard updates"
+msgstr "Intervalo de sondeo para actualizaciones del portapapeles"
+
+#. settings-schema.json->track-primary->description
+msgid "Track primary selection (mouse selection)"
+msgstr "Rastrear selección primaria (selección del ratón)"
+
+#. settings-schema.json->sync-primary->description
+msgid "Also set primary selection when choosing an item"
+msgstr "También establecer selección primaria al elegir un elemento"
+
+#. settings-schema.json->show-search->description
+msgid "Show search box"
+msgstr "Mostrar cuadro de búsqueda"
+
+#. settings-schema.json->popup-width->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->popup-width->description
+msgid "Menu width"
+msgstr "Ancho del menú"
