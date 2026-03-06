@@ -1,0 +1,27 @@
+{
+    "layout": {
+        "type": "header",
+        "description": "Recording Settings"
+    },
+    "record-audio": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Record system audio"
+    },
+    "output-format": {
+        "type": "combobox",
+        "default": "mp4",
+        "description": "Video output format",
+        "options": {
+            "MP4 (Standard)": "mp4",
+            "WebM (Free/Open)": "webm",
+            "MKV (Matroska)": "mkv"
+        }
+    },
+    "save-directory": {
+        "type": "filechooser",
+        "select-dir": true,
+        "default": "~/Videos",
+        "description": "Save recordings to folder"
+    }
+}
