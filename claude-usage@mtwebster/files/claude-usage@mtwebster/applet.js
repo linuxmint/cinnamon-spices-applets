@@ -30,6 +30,7 @@ ClaudeUsageApplet.prototype = {
             this.settings = new Settings.AppletSettings(this, UUID, instance_id);
             this.settings.bind("update-interval", "updateInterval", this.onUpdateIntervalChanged.bind(this));
             this.settings.bind("credentials-path", "credentialsPath", this.onCredentialsPathChanged.bind(this));
+            this.settings.bind("last-api-call-time", "lastApiCallTime");
 
             this.credentials = null;
             this.tokenExpired = false;
@@ -63,11 +64,10 @@ ClaudeUsageApplet.prototype = {
 
             this.lastUpdateTime = null;
             this.updateTimer = 0;
+            this.initialFetch = true;
 
             this._setupFileMonitor();
             this._readCredentials();
-
-            this.startTimer();
         }
         catch (e) {
             this.handleError("Initialization failed: " + e);
@@ -122,7 +122,6 @@ ClaudeUsageApplet.prototype = {
                         global.log(UUID, "Loaded credentials");
                         this.tokenExpired = false;
                         this.startTimer();
-                        this.fetchUsageData();
                     } else {
                         throw new Error("Expected claudeAiOauth.accessToken");
                     }
@@ -159,6 +158,8 @@ ClaudeUsageApplet.prototype = {
             request.request_headers.append('Authorization', 'Bearer ' + this.credentials.claudeAiOauth.accessToken.trim());
             request.request_headers.append('anthropic-beta', 'oauth-2025-04-20');
             request.request_headers.append('Content-Type', 'application/json');
+
+            this.lastApiCallTime = GLib.get_real_time() / 1000000;
 
             this._httpSession.send_and_read_async(
                 request,
@@ -325,6 +326,13 @@ ClaudeUsageApplet.prototype = {
 
     updateLoop: function() {
         this.fetchUsageData();
+
+        if (this.initialFetch) {
+            this.initialFetch = false;
+            this.startTimer();
+            return GLib.SOURCE_REMOVE;
+        }
+
         return GLib.SOURCE_CONTINUE;
     },
 
@@ -338,8 +346,26 @@ ClaudeUsageApplet.prototype = {
     startTimer: function() {
         this.stopTimer();
 
-        const intervalSeconds = this.updateInterval * 60;
-        this.updateTimer = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, intervalSeconds, this.updateLoop.bind(this));
+        let intervalSeconds;
+        if (this.initialFetch && this.lastApiCallTime > 0) {
+            const nowSeconds = GLib.get_real_time() / 1000000;
+            const elapsed = nowSeconds - this.lastApiCallTime;
+            const remaining = (this.updateInterval * 60) - elapsed;
+            intervalSeconds = Math.max(Math.ceil(remaining), 0);
+        } else {
+            intervalSeconds = this.updateInterval * 60;
+        }
+
+        if (this.initialFetch && intervalSeconds === 0) {
+            this.updateLoop();
+        } else {
+            if (this.initialFetch) {
+                global.log(UUID, "Deferring first fetch by " + intervalSeconds + " seconds");
+            }
+            this.updateTimer = GLib.timeout_add_seconds(
+                GLib.PRIORITY_DEFAULT, intervalSeconds, this.updateLoop.bind(this)
+            );
+        }
     },
 
     onUpdateIntervalChanged: function() {
@@ -382,6 +408,7 @@ ClaudeUsageApplet.prototype = {
         if (this.tokenExpired) {
             this._readCredentials();
         } else {
+            this.initialFetch = false;
             this.fetchUsageData();
             this.startTimer();
         }
