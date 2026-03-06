@@ -166,7 +166,7 @@ ClaudeUsageApplet.prototype = {
                 null,
                 (session, result) => {
                     try {
-                        const status = request.get_status();
+                        const status = request.status_code;
                         if (status === 200) {
                             const bytes = this._httpSession.send_and_read_finish(result);
                             const data = JSON.parse(ByteArray.toString(bytes.get_data()));
@@ -186,6 +186,10 @@ ClaudeUsageApplet.prototype = {
                                 this.handleError("Got 403 Forbidden");
                                 this.set_applet_tooltip("Error: Access forbidden (403)");
                             }
+                        } else if (status === 429) {
+                            global.log(UUID, "Got 429 Too Many Requests, stopping timer.");
+                            this.stopTimer();
+                            this.handleError("Rate limited (429). Will retry at next interval.");
                         } else {
                             this.handleError("API request failed: HTTP " + status);
                         }
