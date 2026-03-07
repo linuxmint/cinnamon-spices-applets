@@ -181,7 +181,7 @@ MyApplet.prototype = {
         if(p_default.split(': ')[1] != undefined) p_default = p_default.split(': ')[1].trim();
         else p_default = 'no default';
         p_list = p_list.split('\n');
-        this.printersCount = p_list.length - 2;
+        this.printersCount = p_list.length - 1;
         for(var n = 0; n < this.printersCount; n++) {
             let printer = p_list[n].split(' ')[0].trim();
             this.printers.push(printer);

@@ -387,6 +387,7 @@ class SensorsApplet extends Applet.Applet {
     this.s.bind("separator_type", "separator_type", () => { this.updateUI() });
     this.s.bind("vertical-align", "vertical_align", () => { this.updateUI() });
     this.s.bind("char_color_customized", "char_color_customized", () => { this.updateUI() });
+    this.s.bind("separator_color", "separator_color", () => { this.updateUI() });
     this.s.bind("char_color", "char_color", () => { this.updateUI() });
     this.s.bind("crit_color", "crit_color", () => { this.updateUI() });
     this.s.bind("high_color", "high_color", () => { this.updateUI() });
@@ -596,6 +597,7 @@ class SensorsApplet extends Applet.Applet {
       var high = false;
       var crit = false;
       let layoutBin = new St.Bin();
+      let sepBin = null;
       let c = labels[i];
       let l_style = null;
       if (c.endsWith("$")) { // critical value
@@ -607,11 +609,29 @@ class SensorsApplet extends Applet.Applet {
       } else if (this.char_color_customized) {
         l_style = "color: " + this.char_color + ";";
       }
-      let l = new St.Label({text: (i===0 || this.separator == "NO_SEP") ? c : this.separator + c});
+      
+      //~ let l = new St.Label({text: (i===0 || this.separator == "NO_SEP") ? c : this.separator + c});
+      let l = new St.Label({text: c});
+      
+      let sep_l = null;
+      if (i !== 0 && this.separator !== "NO_SEP") {
+        sep_l = new St.Label({text: this.separator});
+      }
+      
       if (l_style)
         l.set_style(l_style);
-
+      
+      if (sep_l) {
+        sep_l.set_style(`color: ${this.separator_color}; `);
+        sepBin = new St.Bin();
+        sepBin.set_child(sep_l);
+      }
       layoutBin.set_child(l);
+      if (sep_l) {
+        this.actor.add(sepBin, { y_align: St.Align.MIDDLE,
+                                  y_fill: false,
+                                });
+      }
       this.actor.add(layoutBin, { y_align: St.Align.MIDDLE,
                                   y_fill: false,
                                 });

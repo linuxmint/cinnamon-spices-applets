@@ -1,3 +1,6 @@
+### v3.2.0~20260222
+* Added option "Set all to 100% in full-screen mode". Useful for games and videos.
+
 ### v3.1.1~20260209
 * Added CSS file stylesheet.css.
 * Fixes [#8297](https://github.com/linuxmint/cinnamon-spices-applets/issues/8297)

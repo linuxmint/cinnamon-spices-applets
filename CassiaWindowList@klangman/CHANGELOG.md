@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.6
+
+* Fix ghost thumbnail menu when running in Cinnamon 6.6
+
 ## 2.4.5
 
 * Avoids 'destroy()' errors.
