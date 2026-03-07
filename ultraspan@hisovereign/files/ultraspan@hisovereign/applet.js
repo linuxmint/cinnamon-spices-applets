@@ -28,24 +28,32 @@ const Gettext = imports.gettext;  // Added for translations
 
 let UUID = "ultraspan@hisovereign";
 
-// Setup translations
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+// Get standard XDG directories (HOME defined once here)
+const HOME = GLib.get_home_dir();
+const USER_DATA_DIR = GLib.get_user_data_dir();      // ~/.local/share
+const USER_CONFIG_DIR = GLib.get_user_config_dir();  // ~/.config
+const USER_CACHE_DIR = GLib.get_user_cache_dir();    // ~/.cache
+const USER_BIN_DIR = HOME + "/.local/bin";           // No XDG equivalent
+
+// Construct paths properly
+const SCRIPT_PATH = GLib.build_filenamev([USER_BIN_DIR, "ultraspan"]);
+const RANDOM_FOLDER = GLib.build_filenamev([HOME, "Pictures", "ultraspan"]);
+const CONFIG_DIR = GLib.build_filenamev([USER_CONFIG_DIR, "ultraspan"]);
+
+// Translation setup with proper locale path
+const LOCALE_DIR = GLib.build_filenamev([USER_DATA_DIR, "locale"]);
+Gettext.bindtextdomain(UUID, LOCALE_DIR);
 
 function _(text) {
     return Gettext.dgettext(UUID, text);
 }
-
-const HOME = GLib.get_home_dir();
-const SCRIPT_PATH = HOME + "/.local/bin/ultraspan";
-const RANDOM_FOLDER = HOME + "/Pictures/ultraspan";
-const CONFIG_DIR = HOME + "/.config/ultraspan";
 
 class UltraspanApplet extends Applet.IconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
 
         this.set_applet_icon_symbolic_name("preferences-desktop-wallpaper");
-        this.set_applet_tooltip(_("Ultraspan Wallpaper Manager"));  // Wrapped for translation
+        this.set_applet_tooltip(_("Ultraspan Wallpaper Manager"));
 
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -63,7 +71,7 @@ class UltraspanApplet extends Applet.IconApplet {
         this._protectFromBlur();
     }
 
-    // NEW: Proper lifecycle cleanup
+    // Proper lifecycle cleanup
     on_applet_removed_from_panel() {
         // Clear interval timer
         if (this._menuTimer) {
@@ -299,7 +307,7 @@ class UltraspanApplet extends Applet.IconApplet {
             this._rebuildMenu();
         });
         this.menu.addMenuItem(refreshItem);
-        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
 
         this._addRandomControl();
     }
@@ -310,58 +318,71 @@ class UltraspanApplet extends Applet.IconApplet {
         folderItem.menu.actor.add_style_class_name('ultraspan-submenu');
         this.menu.addMenuItem(folderItem);
         
-        if (!GLib.file_test(RANDOM_FOLDER, GLib.FileTest.EXISTS)) {
-            const noFolderItem = new PopupMenu.PopupMenuItem(_("Folder does not exist"));
-            noFolderItem.setSensitive(false);
-            folderItem.menu.addMenuItem(noFolderItem);
-            
-            const createItem = new PopupMenu.PopupMenuItem(_("Create folder"));
-            createItem.connect("activate", () => {
-                GLib.mkdir_with_parents(RANDOM_FOLDER, 0o755);
-                this._setTimeout(() => this._rebuildMenu(), 300);
-            });
-            folderItem.menu.addMenuItem(createItem);
-            return;
-        }
-        
-        // Use async directory reading
-        this._getImagesFromFolderAsync(RANDOM_FOLDER, 30, (images) => {
-            if (images.length === 0) {
-                const noImagesItem = new PopupMenu.PopupMenuItem(_("No images found"));
-                noImagesItem.setSensitive(false);
-                noImagesItem.actor.add_style_class_name('ultraspan-header');
-                folderItem.menu.addMenuItem(noImagesItem);
-                
-                const openItem = new PopupMenu.PopupMenuItem(_("Open folder to add images"));
-                openItem.connect("activate", () => {
-                    this._openFolderInFileManager(RANDOM_FOLDER);
+        // Use async check instead of GLib.file_test
+        let folder = Gio.File.new_for_path(RANDOM_FOLDER);
+        folder.query_info_async('*', Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (obj, res) => {
+            try {
+                obj.query_info_finish(res);
+                // Folder exists, load images
+                this._getImagesFromFolderAsync(RANDOM_FOLDER, 30, (images) => {
+                    this._populateFolderMenu(folderItem, images);
                 });
-                folderItem.menu.addMenuItem(openItem);
-            } else {
-                const countItem = new PopupMenu.PopupMenuItem(
-                    _("%d images found").format(images.length)
-                );
-                countItem.setSensitive(false);
-                countItem.actor.add_style_class_name('ultraspan-header');
-                folderItem.menu.addMenuItem(countItem);
-                
-                images.forEach(image => {
-                    const item = new PopupMenu.PopupMenuItem(this._truncateName(image.name, 25));
-                    item.actor.add_style_class_name('ultraspan-filename');
-                    item.connect("activate", () => {
-                        this._setWallpaper(image.path);
+            } catch (e) {
+                if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                    // Folder doesn't exist
+                    const noFolderItem = new PopupMenu.PopupMenuItem(_("Folder does not exist"));
+                    noFolderItem.setSensitive(false);
+                    folderItem.menu.addMenuItem(noFolderItem);
+                    
+                    const createItem = new PopupMenu.PopupMenuItem(_("Create folder"));
+                    createItem.connect("activate", () => {
+                        GLib.mkdir_with_parents(RANDOM_FOLDER, 0o755);
+                        this._setTimeout(() => this._rebuildMenu(), 300);
                     });
-                    folderItem.menu.addMenuItem(item);
-                });
-                
-                folderItem.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-                const openFolderItem = new PopupMenu.PopupMenuItem(_("Open folder"));
-                openFolderItem.connect("activate", () => {
-                    this._openFolderInFileManager(RANDOM_FOLDER);
-                });
-                folderItem.menu.addMenuItem(openFolderItem);
+                    folderItem.menu.addMenuItem(createItem);
+                } else {
+                    global.logError("Error checking folder: " + e);
+                }
             }
         });
+    }
+
+    _populateFolderMenu(folderItem, images) {
+        if (images.length === 0) {
+            const noImagesItem = new PopupMenu.PopupMenuItem(_("No images found"));
+            noImagesItem.setSensitive(false);
+            noImagesItem.actor.add_style_class_name('ultraspan-header');
+            folderItem.menu.addMenuItem(noImagesItem);
+            
+            const openItem = new PopupMenu.PopupMenuItem(_("Open folder to add images"));
+            openItem.connect("activate", () => {
+                this._openFolderInFileManager(RANDOM_FOLDER);
+            });
+            folderItem.menu.addMenuItem(openItem);
+        } else {
+            const countItem = new PopupMenu.PopupMenuItem(
+                _("%d images found").format(images.length)
+            );
+            countItem.setSensitive(false);
+            countItem.actor.add_style_class_name('ultraspan-header');
+            folderItem.menu.addMenuItem(countItem);
+            
+            images.forEach(image => {
+                const item = new PopupMenu.PopupMenuItem(this._truncateName(image.name, 25));
+                item.actor.add_style_class_name('ultraspan-filename');
+                item.connect("activate", () => {
+                    this._setWallpaper(image.path);
+                });
+                folderItem.menu.addMenuItem(item);
+            });
+            
+            folderItem.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            const openFolderItem = new PopupMenu.PopupMenuItem(_("Open folder"));
+            openFolderItem.connect("activate", () => {
+                this._openFolderInFileManager(RANDOM_FOLDER);
+            });
+            folderItem.menu.addMenuItem(openFolderItem);
+        }
     }
 
     _addSettingsSubMenu() {
@@ -466,7 +487,7 @@ class UltraspanApplet extends Applet.IconApplet {
                 this._runCommandInBackground(["clean"]);
                 this._setTimeout(() => {
                     // Read state file asynchronously
-                    const statePath = CONFIG_DIR + "/state";
+                    const statePath = GLib.build_filenamev([CONFIG_DIR, "state"]);
                     let stateFile = Gio.File.new_for_path(statePath);
                     
                     stateFile.load_contents_async(null, (obj, res) => {
@@ -475,12 +496,22 @@ class UltraspanApplet extends Applet.IconApplet {
                             if (success) {
                                 const lines = contents.toString().split('\n');
                                 const lastImage = lines[0];
-                                if (GLib.file_test(lastImage, GLib.FileTest.EXISTS)) {
-                                    this._setWallpaper(lastImage);
-                                } else {
-                                    Main.notify(_("Ultraspan"), 
-                                        _("Last wallpaper file no longer exists."));
-                                }
+                                
+                                // Async check if file exists
+                                let imageFile = Gio.File.new_for_path(lastImage);
+                                imageFile.query_info_async('*', Gio.FileQueryInfoFlags.NONE, 
+                                    GLib.PRIORITY_DEFAULT, null, (obj2, res2) => {
+                                    try {
+                                        obj2.query_info_finish(res2);
+                                        // File exists
+                                        this._setWallpaper(lastImage);
+                                    } catch (e) {
+                                        if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                                            Main.notify(_("Ultraspan"), 
+                                                _("Last wallpaper file no longer exists."));
+                                        }
+                                    }
+                                });
                             }
                         } catch (e) {
                             global.logError("Error reading state file: " + e);
@@ -493,30 +524,54 @@ class UltraspanApplet extends Applet.IconApplet {
     }
 
     _addRandomControl() {
-        const randomFile = CONFIG_DIR + "/random";
-        const isActive = GLib.file_test(randomFile, GLib.FileTest.EXISTS);
+        const randomFile = GLib.build_filenamev([CONFIG_DIR, "random"]);
         
-        if (isActive) {
-            const stopItem = new PopupMenu.PopupMenuItem("⏹️ " + _("Stop Random Rotation"));
-            stopItem.connect("activate", () => {
-                this._runCommandInBackground(["random-stop"]);
-                this._setTimeout(() => this._rebuildMenu(), 100);
-            });
-            this.menu.addMenuItem(stopItem);
-        } else {
-            const startItem = new PopupMenu.PopupMenuItem("▶️ " + _("Start Random Rotation"));
-            startItem.connect("activate", () => {
-                if (!GLib.file_test(RANDOM_FOLDER, GLib.FileTest.EXISTS)) {
-                    GLib.mkdir_with_parents(RANDOM_FOLDER, 0o755);
-                }
-                this._readConfigAsync((currentConfig) => {
-                    let mode = currentConfig.mode || 'zoom';
-                    this._runCommandInBackground(["random", RANDOM_FOLDER, mode]);
+        // Async check if random file exists
+        let file = Gio.File.new_for_path(randomFile);
+        file.query_info_async('*', Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (obj, res) => {
+            try {
+                obj.query_info_finish(res);
+                // File exists - random is active
+                const stopItem = new PopupMenu.PopupMenuItem("⏹️ " + _("Stop Random Rotation"));
+                stopItem.connect("activate", () => {
+                    this._runCommandInBackground(["random-stop"]);
                     this._setTimeout(() => this._rebuildMenu(), 100);
                 });
-            });
-            this.menu.addMenuItem(startItem);
-        }
+                this.menu.addMenuItem(stopItem);
+            } catch (e) {
+                if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                    // File doesn't exist - random is inactive
+                    const startItem = new PopupMenu.PopupMenuItem("▶️ " + _("Start Random Rotation"));
+                    startItem.connect("activate", () => {
+                        // Check if folder exists
+                        let folder = Gio.File.new_for_path(RANDOM_FOLDER);
+                        folder.query_info_async('*', Gio.FileQueryInfoFlags.NONE, 
+                            GLib.PRIORITY_DEFAULT, null, (obj2, res2) => {
+                            try {
+                                obj2.query_info_finish(res2);
+                                // Folder exists
+                                this._readConfigAsync((currentConfig) => {
+                                    let mode = currentConfig.mode || 'zoom';
+                                    this._runCommandInBackground(["random", RANDOM_FOLDER, mode]);
+                                    this._setTimeout(() => this._rebuildMenu(), 100);
+                                });
+                            } catch (e) {
+                                if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                                    // Folder doesn't exist - create it
+                                    GLib.mkdir_with_parents(RANDOM_FOLDER, 0o755);
+                                    this._readConfigAsync((currentConfig) => {
+                                        let mode = currentConfig.mode || 'zoom';
+                                        this._runCommandInBackground(["random", RANDOM_FOLDER, mode]);
+                                        this._setTimeout(() => this._rebuildMenu(), 100);
+                                    });
+                                }
+                            }
+                        });
+                    });
+                    this.menu.addMenuItem(startItem);
+                }
+            }
+        });
     }
 
     /* ---------------- Async Config Reader ---------------- */
@@ -529,13 +584,8 @@ class UltraspanApplet extends Applet.IconApplet {
             random_interval: 30
         };
         
-        const configPath = CONFIG_DIR + "/config";
+        const configPath = GLib.build_filenamev([CONFIG_DIR, "config"]);
         let configFile = Gio.File.new_for_path(configPath);
-        
-        if (!GLib.file_test(configPath, GLib.FileTest.EXISTS)) {
-            callback(config);
-            return;
-        }
         
         configFile.load_contents_async(null, (obj, res) => {
             try {
@@ -584,35 +634,39 @@ class UltraspanApplet extends Applet.IconApplet {
     /* ---------------- Safe Command Execution ---------------- */
     
     _runCommandInBackground(args) {
-        if (!GLib.file_test(SCRIPT_PATH, GLib.FileTest.EXISTS)) {
-            global.log("Ultraspan script not found at: " + SCRIPT_PATH);
-            return;
-        }
-        
-        this._setTimeout(() => {
+        // Async check if script exists
+        let scriptFile = Gio.File.new_for_path(SCRIPT_PATH);
+        scriptFile.query_info_async('*', Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (obj, res) => {
             try {
-                const fullArgs = [SCRIPT_PATH].concat(args);
-                GLib.spawn_async(null, fullArgs, null,
-                    GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD,
-                    null);
+                obj.query_info_finish(res);
+                // Script exists, run command
+                this._setTimeout(() => {
+                    try {
+                        const fullArgs = [SCRIPT_PATH].concat(args);
+                        GLib.spawn_async(null, fullArgs, null,
+                            GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+                            null);
+                    } catch (e) {
+                        global.logError("Error running command: " + e);
+                    }
+                }, 10);
             } catch (e) {
-                global.logError("Error running command: " + e);
+                if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                    global.log("Ultraspan script not found at: " + SCRIPT_PATH);
+                } else {
+                    global.logError("Error checking script: " + e);
+                }
             }
-        }, 10);
+        });
     }
     
     /* ---------------- Async Image Loading ---------------- */
     
     _getImagesFromFolderAsync(folderPath, maxCount, callback) {
         const images = [];
-    
-        if (!GLib.file_test(folderPath, GLib.FileTest.EXISTS)) {
-            callback(images);
-            return;
-        }
-    
-        const dir = Gio.File.new_for_path(folderPath);
-    
+        
+        let dir = Gio.File.new_for_path(folderPath);
+        
         dir.enumerate_children_async('standard::name', Gio.FileQueryInfoFlags.NONE,
             GLib.PRIORITY_DEFAULT, null, (obj, res) => {
             try {
@@ -624,7 +678,7 @@ class UltraspanApplet extends Applet.IconApplet {
             }
         });
     }
-
+    
     _enumerateNextAsync(enumerator, folderPath, images, maxCount, callback) {
         enumerator.next_files_async(10, GLib.PRIORITY_DEFAULT, null, (obj, res) => {
             try {
@@ -635,25 +689,34 @@ class UltraspanApplet extends Applet.IconApplet {
                     callback(images);
                     return;
                 }
-            
+                
                 files.forEach(fileInfo => {
                     if (images.length >= maxCount) return;
-                
+                    
                     const fileName = fileInfo.get_name();
                     const lowerName = fileName.toLowerCase();
                     if (lowerName.endsWith('.jpg') || lowerName.endsWith('.jpeg') || 
                         lowerName.endsWith('.png') || lowerName.endsWith('.webp')) {
-                    
+                        
                         const filePath = GLib.build_filenamev([folderPath, fileName]);
-                        if (GLib.file_test(filePath, GLib.FileTest.EXISTS)) {
-                            images.push({ name: fileName, path: filePath });
-                        }
+                        
+                        // Check if file exists asynchronously
+                        let file = Gio.File.new_for_path(filePath);
+                        file.query_info_async('*', Gio.FileQueryInfoFlags.NONE, 
+                            GLib.PRIORITY_DEFAULT, null, (obj2, res2) => {
+                            try {
+                                obj2.query_info_finish(res2);
+                                images.push({ name: fileName, path: filePath });
+                            } catch (e) {
+                                // File doesn't exist or error, skip it
+                            }
+                        });
                     }
                 });
-            
+                
                 // Continue to next batch
                 this._enumerateNextAsync(enumerator, folderPath, images, maxCount, callback);
-            
+                
             } catch (e) {
                 global.logError("Error reading files: " + e);
                 callback(images);
