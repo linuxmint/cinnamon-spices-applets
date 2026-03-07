@@ -43,6 +43,7 @@
       "sections": [
         "sectionNetworkOptions",
         "sectionNetworkScaling",
+        "sectionNetworkTooltip",
         "sectionNetworkDevices"
       ]
     },
@@ -52,6 +53,7 @@
       "sections": [
         "sectionDiskOptions",
         "sectionDiskScaling",
+        "sectionDiskTooltip",
         "sectionDiskDevices"
       ]
     },
@@ -198,6 +200,13 @@
         "Net_logscale"
       ]
     },
+    "sectionNetworkTooltip": {
+      "type": "section",
+      "title": "Tooltip",
+      "keys": [
+        "Net_symbolsInTooltip"
+      ]
+    },
     "sectionNetworkDevices": {
       "type": "section",
       "title": "Devices",
@@ -226,6 +235,13 @@
       "keys": [
         "Disk_autoscale",
         "Disk_logscale"
+      ]
+    },
+    "sectionDiskTooltip": {
+      "type": "section",
+      "title": "Tooltip",
+      "keys": [
+        "Disk_symbolsInTooltip"
       ]
     },
     "sectionDiskDevices": {
@@ -662,6 +678,11 @@
     "default": true,
     "description": "Logarithmic"
   },
+  "Net_symbolsInTooltip": {
+    "type": "switch",
+    "default": false,
+    "description": "Use symbols instead of words"
+  },
   "Net_getdevlist_btn": {
     "type": "button",
     "description": "Update this device list",
@@ -824,6 +845,11 @@
     "type": "switch",
     "default": true,
     "description": "Logarithmic"
+  },
+  "Disk_symbolsInTooltip": {
+    "type": "switch",
+    "default": false,
+    "description": "Use symbols instead of words"
   },
   "Disk_getdevlist_btn": {
     "type": "button",
