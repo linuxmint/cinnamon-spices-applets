@@ -85,7 +85,12 @@ MyApplet.prototype = {
         let majorVersion = parseInt(cinnamonVersion[0]);
         let minorVersion = parseInt(cinnamonVersion[1]);
         this.pkexec = majorVersion > 3 || (majorVersion == 3 && minorVersion > 7);
-    },
+		try {
+			let [result, stdout, stderr] = GLib.spawn_command_line_sync('/usr/bin/lpq');
+		} catch (error) {
+			Util.spawn(['python3', APPLET_PATH + '/cups-bsd_warning.py']);
+		}
+   },
 
     on_reload_button: function() {
         Util.spawnCommandLine("dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'printers@linux-man' string:'APPLET'");
@@ -181,7 +186,7 @@ MyApplet.prototype = {
         if(p_default.split(': ')[1] != undefined) p_default = p_default.split(': ')[1].trim();
         else p_default = 'no default';
         p_list = p_list.split('\n');
-        this.printersCount = p_list.length - 2;
+        this.printersCount = p_list.length - 1;
         for(var n = 0; n < this.printersCount; n++) {
             let printer = p_list[n].split(' ')[0].trim();
             this.printers.push(printer);
