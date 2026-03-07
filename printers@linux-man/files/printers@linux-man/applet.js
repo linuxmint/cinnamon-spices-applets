@@ -85,7 +85,8 @@ MyApplet.prototype = {
         let majorVersion = parseInt(cinnamonVersion[0]);
         let minorVersion = parseInt(cinnamonVersion[1]);
         this.pkexec = majorVersion > 3 || (majorVersion == 3 && minorVersion > 7);
-    },
+        if(!GLib.find_program_in_path("lpq")) Util.spawn(['python3', APPLET_PATH + '/cups-bsd_warning.py']);
+   },
 
     on_reload_button: function() {
         Util.spawnCommandLine("dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'printers@linux-man' string:'APPLET'");
