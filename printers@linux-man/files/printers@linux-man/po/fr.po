@@ -5,18 +5,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: printers@linux-man 2.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-06 23:30+0000\n"
-"PO-Revision-Date: 2025-03-07 17:42+0100\n"
-"Last-Translator: claudiux\n"
+"PO-Revision-Date: 2026-03-07 12:55+0100\n"
+"Last-Translator: FabRCT\n"
 "Language-Team: French\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
 #: applet.js:59 applet.js:178 cups-bsd_warning.py:26
@@ -41,6 +40,9 @@ msgid ""
 "Missing dependency.\n"
 "'lpq' command is missing! Please install 'cups-bsd' package (if available)."
 msgstr ""
+"Dépendance manquante.\n"
+"La commande 'lpq' est manquante ! Veuillez installer le paquet 'cups-bsd' "
+"(s'il est disponible)."
 
 #. metadata.json->description
 msgid "Manage Jobs and Printers"
