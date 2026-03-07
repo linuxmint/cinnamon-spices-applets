@@ -1,0 +1,113 @@
+# TIMER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Severga, 2023
+#
+msgid ""
+msgstr ""
+
+#. applet.js:45 applet.js:217 applet.js:244 applet.js:271 applet.js:335
+#. applet.js:465 applet.js:537
+msgid "Timer: inactive"
+msgstr ""
+
+#. applet.js:95
+msgid "Run command | turn off computer on timer"
+msgstr ""
+
+#. settings-schema.json->openSubmenu->options
+#. applet.js:100
+msgid "Quick setup"
+msgstr ""
+
+#. settings-schema.json->openSubmenu->options
+#. applet.js:131
+msgid "Precise setup"
+msgstr ""
+
+#. applet.js:266
+msgid "Set period"
+msgstr ""
+
+#. applet.js:287
+msgid "Add preset"
+msgstr ""
+
+#. settings-schema.json->openSubmenu->options
+#. settings-schema.json->preset->description
+#. settings-schema.json->preset->tooltip
+#. applet.js:296
+msgid "Presets"
+msgstr ""
+
+#. applet.js:498 applet.js:520
+msgid "In:  "
+msgstr ""
+
+#. applet.js:504 applet.js:528
+msgid "At:  "
+msgstr ""
+
+#. applet.js:532
+msgid "Timer: "
+msgstr ""
+
+#. metadata.json->name
+#. applet.js:568
+msgid "Timer"
+msgstr ""
+
+#. applet.js:568
+msgid "Time's up!"
+msgstr ""
+
+#. metadata.json->description
+msgid "A timer applet"
+msgstr ""
+
+#. settings-schema.json->customCommand->description
+msgid "Command to run on timer (empty for turn off)"
+msgstr ""
+
+#. settings-schema.json->customCommand->tooltip
+msgid ""
+"Custom command to run on timer. Leave empty to turn off the computer on timer"
+msgstr ""
+
+#. settings-schema.json->cancelTurnOffOption->description
+msgid "Cancel run command (turn off) option"
+msgstr ""
+
+#. settings-schema.json->cancelTurnOffOption->tooltip
+msgid ""
+"Cancel the option to run command or turn off for subsequent use (triggers "
+"only at the moment count down finished)"
+msgstr ""
+
+#. settings-schema.json->soundOn->description
+#. settings-schema.json->soundOn->tooltip
+msgid "Play sound on timer"
+msgstr ""
+
+#. settings-schema.json->soundPath->description
+#. settings-schema.json->soundPath->tooltip
+msgid "Soundclip file path"
+msgstr ""
+
+#. settings-schema.json->showNotifications->description
+#. settings-schema.json->showNotifications->tooltip
+msgid "Show system notification on timer"
+msgstr ""
+
+#. settings-schema.json->customText->description
+msgid "Custom notification text"
+msgstr ""
+
+#. settings-schema.json->customText->tooltip
+msgid "Custom text of the system notification on timer"
+msgstr ""
+
+#. settings-schema.json->openSubmenu->description
+#. settings-schema.json->openSubmenu->tooltip
+msgid "Submenu to open initially"
+msgstr ""

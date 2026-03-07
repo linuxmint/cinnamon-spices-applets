@@ -1,0 +1,266 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: stevedore@centurix 0.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-10-12 16:17+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:84
+msgid "Create a container from an image"
+msgstr "Tạo một container từ image"
+
+#: applet.js:94
+msgid "Mount location:"
+msgstr "Vị trí mount:"
+
+#: applet.js:116
+msgid "Destination location:"
+msgstr "Vị trí đích:"
+
+#: applet.js:138
+msgid "Working directory:"
+msgstr "Thư mục làm việc:"
+
+#: applet.js:160
+msgid "Memory:"
+msgstr "Bộ nhớ:"
+
+#: applet.js:182
+msgid "Swap size:"
+msgstr "Kích thước swap:"
+
+#: applet.js:204
+msgid "Entry point:"
+msgstr "Điểm vào:"
+
+#: applet.js:226
+msgid "Extra parameters:"
+msgstr "Tham số bổ sung:"
+
+#: applet.js:248
+msgid "Start"
+msgstr "Bắt đầu"
+
+#: applet.js:263 applet.js:342
+msgid "Cancel"
+msgstr "Hủy"
+
+#: applet.js:312
+msgid "Search for a Docker image:"
+msgstr "Tìm kiếm Docker image:"
+
+#: applet.js:397
+msgid "Select"
+msgstr "Chọn"
+
+#: applet.js:424
+msgid "Searching..."
+msgstr "Đang tìm kiếm..."
+
+#: applet.js:468
+msgid "Stevedore: Docker controller"
+msgstr "Stevedore: Bộ điều khiển Docker"
+
+#: applet.js:481
+msgid "Stevedor: Cannot locate Docker, is it installed?"
+msgstr "Stevedore: Không tìm thấy Docker, nó đã được cài đặt chưa?"
+
+#: applet.js:482
+msgid "Cannot locate Docker, is it installed?"
+msgstr "Không tìm thấy Docker, nó đã được cài đặt chưa?"
+
+#: applet.js:485 applet.js:497
+msgid "Get Docker"
+msgstr "Tải Docker"
+
+#: applet.js:493 applet.js:494
+msgid ""
+"Stevedor: Docker is out of date, please install version 17.03.0-ce or higher."
+msgstr ""
+"Stevedore: Docker đã lỗi thời, vui lòng cài đặt phiên bản 17.03.0-ce hoặc "
+"cao hơn."
+
+#: applet.js:513
+msgid "Create a new image"
+msgstr "Tạo image mới"
+
+#: applet.js:516
+msgid "Images"
+msgstr "Images"
+
+#: applet.js:522
+msgid "No Images Installed"
+msgstr "Chưa có Image nào được cài đặt"
+
+#: applet.js:532
+msgid "Start a new container from this image"
+msgstr "Khởi chạy container mới từ image này"
+
+#: applet.js:539
+msgid "Image Home Page"
+msgstr "Trang chủ Image"
+
+#: applet.js:546
+msgid "Remove this image"
+msgstr "Xóa image này"
+
+#: applet.js:555
+msgid "Containers"
+msgstr "Containers"
+
+#: applet.js:560
+msgid "No Containers Created"
+msgstr "Chưa có Container nào được tạo"
+
+#: applet.js:568 applet.js:571
+msgid "Running"
+msgstr "Đang chạy"
+
+#: applet.js:568 applet.js:571
+msgid "Stopped"
+msgstr "Đã dừng"
+
+#: applet.js:578
+msgid "Memory: "
+msgstr "Bộ nhớ: "
+
+#: applet.js:584
+msgid "Entry point: "
+msgstr "Điểm vào: "
+
+#: applet.js:592
+msgid "Mount: "
+msgstr "Mount: "
+
+#: applet.js:603
+msgid "IP Address: "
+msgstr "Địa chỉ IP: "
+
+#: applet.js:615
+msgid "Open a terminal"
+msgstr "Mở terminal"
+
+#: applet.js:627
+msgid "Show TTY Session"
+msgstr "Hiển thị phiên TTY"
+
+#: applet.js:640
+msgid "Open a browser"
+msgstr "Mở trình duyệt"
+
+#: applet.js:651
+msgid "Delete this container"
+msgstr "Xóa container này"
+
+#: applet.js:660
+msgid "Docker Version"
+msgstr "Phiên bản Docker"
+
+#: applet.js:661
+msgid "Docker Version: "
+msgstr "Phiên bản Docker: "
+
+#: applet.js:662
+msgid "API Version: "
+msgstr "Phiên bản API: "
+
+#: applet.js:663
+msgid "Go Version: "
+msgstr "Phiên bản Go: "
+
+#: applet.js:664
+msgid "Git Commit: "
+msgstr "Git Commit: "
+
+#: applet.js:665
+msgid "Build Date: "
+msgstr "Ngày build: "
+
+#: applet.js:666
+msgid "OS/Arch: "
+msgstr "HĐH/Kiến trúc: "
+
+#: applet.js:670
+msgid "Refresh this menu"
+msgstr "Làm mới menu này"
+
+#: applet.js:681
+msgid "Installing image"
+msgstr "Đang cài đặt image"
+
+#: applet.js:681 applet.js:797 applet.js:828
+msgid "please wait..."
+msgstr "vui lòng chờ..."
+
+#: applet.js:691 applet.js:716
+msgid "Image"
+msgstr "Image"
+
+#: applet.js:691
+msgid "installed, ready to run."
+msgstr "đã được cài đặt, sẵn sàng chạy."
+
+#: applet.js:716
+msgid "removed."
+msgstr "đã bị xóa."
+
+#: applet.js:780
+msgid "Starting container"
+msgstr "Đang khởi động container"
+
+#: applet.js:782
+msgid "Container up"
+msgstr "Container đã chạy"
+
+#: applet.js:784
+msgid "Stopping container"
+msgstr "Đang dừng container"
+
+#: applet.js:786
+msgid "Container down"
+msgstr "Container đã dừng"
+
+#: applet.js:797
+msgid "Creating container from"
+msgstr "Đang tạo container từ"
+
+#: applet.js:800
+msgid "Image created."
+msgstr "Image đã được tạo."
+
+#: applet.js:828
+msgid "Removing container"
+msgstr "Đang xóa container"
+
+#: applet.js:831
+msgid "Container removed"
+msgstr "Container đã bị xóa"
+
+#: applet.js:838
+msgid "Copied to the clipboard"
+msgstr "Đã sao chép vào clipboard"
+
+#: terminal_reader.js:60
+msgid "Command not found."
+msgstr "Không tìm thấy lệnh."
+
+#. metadata.json->description
+msgid "Docker controlling applet."
+msgstr "Applet điều khiển Docker."
+
+#. metadata.json->name
+msgid "Stevedor - Docker controller"
+msgstr "Stevedore - Bộ điều khiển Docker"

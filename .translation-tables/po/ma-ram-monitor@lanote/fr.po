@@ -1,0 +1,239 @@
+# MODERATELY ADVANCED RAM MONITOR
+# This file is put in the public domain.
+# notoyeah, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ma-ram-monitor@lanote 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-02-01 17:50+0100\n"
+"PO-Revision-Date: 2026-02-04 10:07+0100\n"
+"Last-Translator: FabRCT\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. applet.js:98
+msgid "RAM error"
+msgstr "Erreur de RAM"
+
+#. settings-schema.json->show-mode->options
+#. applet.js:169
+msgid "Used RAM"
+msgstr "RAM utilisée"
+
+#. settings-schema.json->show-mode->options
+#. applet.js:169
+msgid "Available RAM"
+msgstr "RAM disponible"
+
+#. applet.js:194
+#, javascript-format
+msgid "Kernel read error: %s"
+msgstr "Erreur de lecture du noyau : %s"
+
+#. applet.js:209
+msgid "RAM Applet error"
+msgstr "Erreur de l'applet RAM"
+
+#. applet.js:209
+#, javascript-format
+msgid "Command \"%s\" not found."
+msgstr "Commande \"%s\" introuvable."
+
+#. metadata.json->name
+msgid "Moderately Advanced RAM Monitor"
+msgstr "Moniteur de RAM moyennement avancé"
+
+#. metadata.json->description
+msgid ""
+"A customizable RAM monitor. Reads memory statistics directly from the "
+"kernel's virtual filesystem (/proc/meminfo) for maximum accuracy and low "
+"overhead."
+msgstr ""
+"Lit les statistiques de mémoire directement depuis le système de\n"
+"fichiers virtuel du noyau (/proc/meminfo) pour une précision\n"
+"maximale et une faible surcharge."
+
+#. settings-schema.json->layout_header->description
+msgid "General Settings"
+msgstr "Paramètres généraux"
+
+#. settings-schema.json->mem-label->description
+msgid "Text label"
+msgstr "Texte de l'étiquette"
+
+#. settings-schema.json->mem-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "Saisissez le texte personnalisé à afficher dans le panneau."
+
+#. settings-schema.json->frequency->options
+msgid "0.5"
+msgstr "0,5"
+
+#. settings-schema.json->frequency->options
+msgid "1.0"
+msgstr "1,0"
+
+#. settings-schema.json->frequency->options
+msgid "2.0"
+msgstr "2,0"
+
+#. settings-schema.json->frequency->options
+msgid "3.0"
+msgstr "3,0"
+
+#. settings-schema.json->frequency->options
+msgid "4.0"
+msgstr "4,0"
+
+#. settings-schema.json->frequency->options
+msgid "5.0"
+msgstr "5,0"
+
+#. settings-schema.json->frequency->options
+msgid "10.0"
+msgstr "10,0"
+
+#. settings-schema.json->frequency->description
+msgid "Update frequency (seconds)"
+msgstr "Fréquence de mise à jour (secondes)"
+
+#. settings-schema.json->frequency->tooltip
+msgid "Determines how often the applet checks RAM usage data from the system."
+msgstr ""
+"Détermine la fréquence à laquelle l'applet vérifie les données\n"
+"d'utilisation de la RAM auprès du système."
+
+#. settings-schema.json->layout_display->description
+msgid "Visual Layout"
+msgstr "Affichage"
+
+#. settings-schema.json->show-mode->description
+msgid "Display mode"
+msgstr "Mode d'affichage"
+
+#. settings-schema.json->show-mode->tooltip
+msgid "Choose whether to monitor used memory or remaining available memory."
+msgstr ""
+"Choisissez si vous souhaitez surveiller la mémoire utilisée ou\n"
+"la mémoire disponible restante."
+
+#. settings-schema.json->show-value->description
+msgid "Show current memory"
+msgstr "Afficher la mémoire actuelle"
+
+#. settings-schema.json->show-value->tooltip
+msgid "Toggle whether to display actual memory amount on the panel."
+msgstr "Afficher ou non la quantité de mémoire sur le panneau."
+
+#. settings-schema.json->show-total->description
+msgid "Show total memory"
+msgstr "Afficher la mémoire totale"
+
+#. settings-schema.json->show-total->tooltip
+msgid "Toggle whether to display total RAM capacity next to the current usage."
+msgstr "Afficher ou non de la capacité totale de la RAM à côté de son utilisation actuelle."
+
+#. settings-schema.json->show-percent->description
+msgid "Show current memory as percentage"
+msgstr "Afficher la mémoire actuelle en pourcentage"
+
+#. settings-schema.json->show-percent->tooltip
+msgid "Toggle whether to display memory usage as a percentage."
+msgstr "Afficher ou non l'utilisation de la mémoire en pourcentage."
+
+#. settings-schema.json->unit-type->description
+msgid "Unit type"
+msgstr "Type d'unité"
+
+#. settings-schema.json->unit-type->tooltip
+msgid "Toggle whether to display memory usage in GB/GiB."
+msgstr "Affichage de l'utilisation de la mémoire en Go ou Gio."
+
+#. settings-schema.json->unit-type->options
+msgid "GiB (binary: 1024)"
+msgstr "Gio (binaire : 1024)"
+
+#. settings-schema.json->unit-type->options
+msgid "GB (decimal: 1000)"
+msgstr "Go (décimal : 1000)"
+
+#. settings-schema.json->use-monospace->description
+msgid "Stable width (Monospace font)"
+msgstr "Largeur stable (police à chasse fixe)"
+
+#. settings-schema.json->use-monospace->tooltip
+msgid "Forces a fixed-width font and prevents text jumping."
+msgstr "Force l'utilisation d'une police à chasse fixe et empêche le saut de texte."
+
+#. settings-schema.json->padding-size->units
+msgid "chars"
+msgstr "Caractères"
+
+#. settings-schema.json->padding-size->description
+msgid "Reserved numeric spaces"
+msgstr "Espaces réservés pour les nombres"
+
+#. settings-schema.json->padding-size->tooltip
+msgid "How many characters to reserve for numbers (e.g. 4 for '99.9')."
+msgstr "Combien de caractères sont réservés aux nombres (par exemple, 4 pour '99,9')."
+
+#. settings-schema.json->layout_alerts->description
+msgid "Warnings"
+msgstr "Avertissements"
+
+#. settings-schema.json->warning-usage->units
+#. settings-schema.json->warning-available->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->warning-usage->description
+msgid "Warning: usage above"
+msgstr "Avertissement : utilisation atteint"
+
+#. settings-schema.json->warning-usage->tooltip
+msgid ""
+"Triggers a blinking visual alert when RAM usage exceeds this percentage."
+msgstr ""
+"Déclenche une alerte visuelle clignotante lorsque\n"
+"l'utilisation de la RAM dépasse ce pourcentage."
+
+#. settings-schema.json->warning-available->description
+msgid "Warning: available below"
+msgstr "Avertissement : disponible atteint"
+
+#. settings-schema.json->warning-available->tooltip
+msgid ""
+"Triggers a blinking visual alert when available RAM falls below this "
+"percentage."
+msgstr ""
+"Déclenche une alerte visuelle clignotante lorsque\n"
+"la RAM disponible descend en dessous de ce pourcentage."
+
+#. settings-schema.json->layout_interaction->description
+msgid "Interaction"
+msgstr "Interaction"
+
+#. settings-schema.json->enable-click-launch->description
+msgid "Launch system monitor on click"
+msgstr "Lancer le moniteur système en cliquant"
+
+#. settings-schema.json->enable-click-launch->tooltip
+msgid "Left-clicking the applet will open the default system monitor."
+msgstr "Un clic gauche sur l'applet ouvrira le moniteur système par défaut."
+
+#. settings-schema.json->custom-command->description
+msgid "System monitor command"
+msgstr "Commande du moniteur système"
+
+#. settings-schema.json->custom-command->tooltip
+msgid ""
+"Enter the command to be executed (e.g., gnome-system-monitor or xterm -e "
+"htop)."
+msgstr ""
+"Saisissez la commande à exécuter (par exemple,\n"
+"gnome-system-monitor ou xterm -e htop)."

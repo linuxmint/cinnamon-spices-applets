@@ -1,0 +1,159 @@
+# TRILIUM API
+# This file is put in the public domain.
+# BeatLink, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: trilium-api@beatlink 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-23 15:43-0400\n"
+"PO-Revision-Date: 2025-09-21 15:18+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:83
+msgid "Toggle Reminders"
+msgstr "切換提醒"
+
+#. metadata.json->description
+msgid "Applet for Displaying Text from a Trilium API Script"
+msgstr "用於顯示 Trilium API 指令碼文字的小程式"
+
+#. metadata.json->name
+msgid "Trilium API"
+msgstr "Trilium API"
+
+#. settings-schema.json->page1->title
+msgid "Trilium Location"
+msgstr "Trilium 位置"
+
+#. settings-schema.json->page2->title
+msgid "API Settings"
+msgstr "API 設定"
+
+#. settings-schema.json->page3->title
+msgid "Label Display"
+msgstr "標籤顯示"
+
+#. settings-schema.json->page4->title
+msgid "Reminder Flash"
+msgstr "提醒閃爍"
+
+#. settings-schema.json->page5->title
+msgid "Open On Click"
+msgstr "點選開啟"
+
+#. settings-schema.json->api_location->description
+msgid "App Location"
+msgstr "應用程式位置"
+
+#. settings-schema.json->api_location->options
+msgid "This Computer"
+msgstr "本機"
+
+#. settings-schema.json->api_location->options
+msgid "Remote Server"
+msgstr "遠端伺服器"
+
+#. settings-schema.json->api_location->tooltip
+msgid ""
+"Please indicate whether this applet should point to the Trilium app "
+"installed locally or a remote URL"
+msgstr ""
+"請指定小程式要指向本機安裝的 Trilium 應用程式或是遠端 URL"
+
+#. settings-schema.json->api_url->description
+msgid "Remote Server URL"
+msgstr "遠端伺服器 URL"
+
+#. settings-schema.json->api_url->tooltip
+msgid ""
+"Enter the URL for the Trilium Server this app should connect to. (e.g "
+"https://trilium.example.com)"
+msgstr ""
+"請輸入此應用程式應連線的 Trilium 伺服器 URL（例如 "
+"https://trilium.example.com）"
+
+#. settings-schema.json->api_endpoint->description
+msgid "API Endpoint"
+msgstr "API 端點"
+
+#. settings-schema.json->api_endpoint->tooltip
+msgid ""
+"The Trilium API Endpoint that requests are sent to (whatever comes after "
+"'custom/')"
+msgstr ""
+"傳送請求的 Trilium API 端點（'custom/' 後面的部分）"
+
+#. settings-schema.json->api_key->description
+msgid "API Key"
+msgstr "API 金鑰"
+
+#. settings-schema.json->api_key->tooltip
+msgid "The API Key used in Agenda Panel script"
+msgstr "Agenda Panel 指令碼中使用的 API 金鑰"
+
+#. settings-schema.json->fetch_action->description
+msgid "Fetch Action"
+msgstr "擷取動作"
+
+#. settings-schema.json->fetch_action->tooltip
+msgid "The action sent during fetch requests"
+msgstr "擷取請求期間傳送的動作"
+
+#. settings-schema.json->click_action->description
+msgid "Click Action"
+msgstr "點選動作"
+
+#. settings-schema.json->click_action->tooltip
+msgid "The  action sent when the applet is clicked"
+msgstr "點選小程式時傳送的動作"
+
+#. settings-schema.json->api_polling_interval->description
+msgid "How often (in seconds) to check the API for new text."
+msgstr "檢查 API 中是否有新文字的頻率（以秒為單位）。"
+
+#. settings-schema.json->prefix_string->description
+msgid "The text added to the beginning of every panel message"
+msgstr "附加到每個面板訊息開頭的文字"
+
+#. settings-schema.json->suffix_string->description
+msgid "The text added to the end of every panel message"
+msgstr "附加到每個面板訊息結尾的文字"
+
+#. settings-schema.json->text_width->description
+msgid "The width of the panel text in characters"
+msgstr "面板文字的字元寬度"
+
+#. settings-schema.json->reminder_enabled->description
+msgid "Sets whether the reminder flashes are enabled or not"
+msgstr "設定是否啟用提醒閃爍"
+
+#. settings-schema.json->reminder_delay->description
+msgid "How often (in seconds) to flash the applet periodically for reminders."
+msgstr "設定提醒閃爍的頻率（以秒為單位）。"
+
+#. settings-schema.json->reminder_time->description
+msgid ""
+"How long (in milliseconds) should the applet reminder color stay set. Set to "
+"0 for infinity"
+msgstr ""
+"小程式提醒顏色應保持設定的時間（以毫秒為單位）。"
+"設定為 0 代表無限期"
+
+#. settings-schema.json->reminder_color->description
+msgid "The color used when reminding"
+msgstr "提醒時使用的顏色"
+
+#. settings-schema.json->open_on_click_toggle->description
+msgid "Open Trilium when the applet is clicked"
+msgstr "點選小程式時開啟 Trilium"
+
+#. settings-schema.json->open_command->description
+msgid "The command to open Trilium"
+msgstr "用來開啟 Trilium 的指令"

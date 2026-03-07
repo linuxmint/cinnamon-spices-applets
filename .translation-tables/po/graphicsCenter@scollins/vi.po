@@ -1,0 +1,123 @@
+# GRAPHICS CENTER
+# This file is put in the public domain.
+# collinss, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: graphicsCenter@scollins 2.0.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:125
+msgid "Clear"
+msgstr "Xóa"
+
+#. applet.js:158
+msgid "Graphics"
+msgstr "Đồ họa"
+
+#. applet.js:237
+msgid "LAUNCHERS"
+msgstr "TRÌNH KHỞI CHẠY"
+
+#. applet.js:262
+msgid "PICTURES"
+msgstr "HÌNH ẢNH"
+
+#. applet.js:273
+msgid "Open folder"
+msgstr "Mở thư mục"
+
+#. applet.js:300
+msgid "RECENT DOCUMENTS"
+msgstr "TÀI LIỆU GẦN ĐÂY"
+
+#. metadata.json->name
+msgid "Graphics Center"
+msgstr "Trung tâm Đồ họa"
+
+#. metadata.json->description
+msgid "Provides an easy and fast resource for all your picture needs"
+msgstr "Cung cấp nguồn tài nguyên nhanh và dễ dàng cho tất cả nhu cầu hình ảnh của bạn"
+
+#. metadata.json->comments
+msgid ""
+"Graphics Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy aceess to all of your graphics programs and pictures. Feel "
+"free to contribute by submitting pull requests, bug reports and feature "
+"requests to my github repo."
+msgstr "Graphics Center là applet Cinnamon đa nền tảng, nhiều tính năng, cung cấp truy cập dễ dàng đến tất cả các chương trình và hình ảnh của bạn. Bạn có thể đóng góp bằng cách gửi pull request, báo lỗi và đề xuất tính năng tới repo GitHub của tôi."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Tác giả"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Cài đặt chung"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Biểu tượng trên panel"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr "Chấp nhận tên biểu tượng hoặc đường dẫn trực tiếp (hỗ trợ biểu tượng ký hiệu)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Văn bản trên panel"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shorcut key"
+msgstr "Phím tắt mở menu"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Kích thước biểu tượng menu"
+
+#. settings-schema.json->pictures->description
+msgid "Pictures"
+msgstr "Hình ảnh"
+
+#. settings-schema.json->showPictures->description
+msgid "Show contents of pictures directory"
+msgstr "Hiển thị nội dung thư mục hình ảnh"
+
+#. settings-schema.json->recursePictures->description
+msgid "Show contents of subfolders"
+msgstr "Hiển thị nội dung các thư mục con"
+
+#. settings-schema.json->altDir->description
+msgid "Use alternate directory"
+msgstr "Sử dụng thư mục thay thế"
+
+#. settings-schema.json->pictureSize->description
+msgid "Thumbnail size"
+msgstr "Kích thước hình thu nhỏ"
+
+#. settings-schema.json->recent->description
+msgid "Recent Documents"
+msgstr "Tài liệu gần đây"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Hiển thị tài liệu gần đây"
+
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Số lượng hiển thị"
