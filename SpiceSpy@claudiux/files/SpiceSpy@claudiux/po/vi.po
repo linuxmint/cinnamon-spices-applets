@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 5.5.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-28 16:21+0100\n"
+"POT-Creation-Date: 2026-03-06 01:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -42,28 +42,28 @@ msgstr "Tải lại biểu tượng"
 msgid "Visit website"
 msgstr "Truy cập trang web"
 
-#. applet.js:831
+#. applet.js:832
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:919
+#. applet.js:923
 msgid "Mark all as read"
 msgstr "Đánh dấu tất cả là đã đọc"
 
-#. applet.js:930
+#. applet.js:934
 msgid "Refresh"
 msgstr "Làm mới"
 
-#. applet.js:944
+#. applet.js:948
 #, fuzzy
 msgid "Refreshing in progress - Click to stop"
 msgstr "Đang làm mới"
 
-#. applet.js:969
+#. applet.js:973
 msgid "Refreshing in progress"
 msgstr "Đang làm mới"
 
-#. applet.js:981
+#. applet.js:985
 msgid "Configure..."
 msgstr "Cấu hình..."
 
@@ -198,6 +198,11 @@ msgstr "Số bình luận (tăng dần)"
 #. settings-schema.json->sort-by->options
 msgid "Number of comments (top-down)"
 msgstr "Số bình luận (giảm dần)"
+
+#. settings-schema.json->sort-by->options
+#, fuzzy
+msgid "Number of issues"
+msgstr "Hiển thị số lượng vấn đề trong menu"
 
 #. settings-schema.json->show-uuid->description
 msgid "Show UUID instead of name"

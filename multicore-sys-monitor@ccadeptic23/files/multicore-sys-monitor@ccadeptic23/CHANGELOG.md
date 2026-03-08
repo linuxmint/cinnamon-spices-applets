@@ -1,3 +1,12 @@
+### v3.6.1~20260307
+  * New option "Use symbols instead of words" in tooltip for Networks and Disks.
+  * Checking this option for Networks: Replaces 'Up' with '▲' and 'Down' with '▼'.
+  * Checking this option for Disks: Replaces 'Read' with '▲' and 'Write' with '▼'.
+
+### v3.6.0~20260306
+  * Fixes net data errors in tooltip.
+  * Fixes [#8362](https://github.com/linuxmint/cinnamon-spices-applets/issues/8362)
+
 ### v3.5.2~20260220
   * Adds colors for CPU Temperature warnings.
   * Adds CPU Temperature to the tooltip.

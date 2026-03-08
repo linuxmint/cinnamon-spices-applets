@@ -1305,9 +1305,10 @@ class ThumbnailMenu extends PopupMenu.PopupMenu {
     //log( "menu close called!" );
     //var err = new Error();
     //log( "Stack:\n"+err.stack );
-    let time = this._settings.getValue("fade-animation-time")*0.001;
+    let time = this._settings.getValue("fade-animation-time");
     if (time) {
-       Tweener.addTween(this.actor, {time: time, transition: 'easeOutQuad', opacity: 0, onComplete: () => {super.close(false); this.removeAll();}});
+       this.actor.ease({duration: time, mode: Clutter.AnimationMode.EASE_OUT_QUAD, opacity: 0, onComplete: () => {super.close(false); this.removeAll();}});
+       //Tweener.addTween(this.actor, {time: time*0.001, transition: 'easeOutQuad', opacity: 0, onComplete: () => {super.close(false); this.removeAll();}});
     } else {
        super.close(false);
        this.removeAll();
