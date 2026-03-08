@@ -44,7 +44,8 @@
         "sectionNetworkOptions",
         "sectionNetworkScaling",
         "sectionNetworkTooltip",
-        "sectionNetworkDevices"
+        "sectionNetworkDevices",
+        "sectionNetworkTotal"
       ]
     },
     "pageDisk": {
@@ -131,7 +132,8 @@
         "CPU_tempCrit",
         "CPU_tempColor",
         "CPU_tempColorHigh",
-        "CPU_tempColorCrit"
+        "CPU_tempColorCrit",
+        "CPU_tempCorner"
       ]
     },
     "sectionCPUColors": {
@@ -216,6 +218,16 @@
         "Net_devicesList",
         "Net_cleardevlist_btn",
         "RefreshAll_btn"
+      ]
+    },
+    "sectionNetworkTotal": {
+      "type": "section",
+      "title": "Total amount or instant speed",
+      "keys": [
+        "Net_total_type",
+        "Net_total_display",
+        "Net_total_hovering_only",
+        "Net_totalCorner"
       ]
     },
     "sectionDiskOptions": {
@@ -494,6 +506,17 @@
     "expand-width": true,
     "description": "Critical CPU Temperature (°C)",
     "tooltip": "Refer to your CPU documentation.\nMust be greater than the High CPU Temperature."
+  },
+  "CPU_tempCorner": {
+    "type": "combobox",
+    "default": "TR",
+    "description": "Corner in which to display the temperature",
+    "options": {
+      "Top Right": "TR",
+      "Top Left": "TL",
+      "Bottom Right": "BR",
+      "Bottom Left": "BL"
+    }
   },
   "CPU_tempColor": {
     "type": "colorchooser",
@@ -796,6 +819,13 @@
           "#31": 31
         },
         "align": 0.5
+      },
+      {
+        "id": "inTotal",
+        "title": "Part of total",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
       }
     ],
     "show-buttons": true
@@ -804,6 +834,40 @@
     "type": "button",
     "description": "Clear this device list",
     "callback": "on_Net_cleardevlist_btn_clicked"
+  },
+  "Net_total_type": {
+    "type": "combobox",
+    "description": "Total amount or speed",
+    "default": "amount",
+    "options": {
+      "Total transfer amount (Bytes)": "amount",
+      "Instant network speed (Bytes per second)": "speed"
+    }
+  },
+  "Net_total_display": {
+    "type": "switch",
+    "default": true,
+    "description": "Display the value of this total",
+    "tooltip": "Be sure to check at least one “Part of total” box among the enabled devices."
+  },
+  "Net_total_hovering_only": {
+    "type": "switch",
+    "default": false,
+    "description": "Only display when hovering over this applet",
+    "dependency": "Net_total_display"
+  },
+  "Net_totalCorner": {
+    "type": "combobox",
+    "default": "TL",
+    "description": "Corner in which to display this total",
+    "options": {
+      "Top Right": "TR",
+      "Top Left": "TL",
+      "Bottom Right": "BR",
+      "Bottom Left": "BL",
+      "Right Only": "RO",
+      "Left Only": "LO"
+    }
   },
   "Disk_enabled": {
     "type": "switch",

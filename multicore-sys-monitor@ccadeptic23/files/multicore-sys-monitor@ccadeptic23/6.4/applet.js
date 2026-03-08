@@ -198,6 +198,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_tempColor", "CPU_tempColor");
         this.settings.bind("CPU_tempColorHigh", "CPU_tempColorHigh");
         this.settings.bind("CPU_tempColorCrit", "CPU_tempColorCrit");
+        this.settings.bind("CPU_tempCorner", "CPU_tempCorner");
         this.settings.bind("CPU_width", "CPU_width", () => { this.adjust_CPU_width() });
         this.settings.bind("CPU_mergeAll", "CPU_mergeAll");
         this.settings.bind("CPU_color0", "CPU_color0");
@@ -225,6 +226,10 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Net_mergeAll", "Net_mergeAll");
         this.settings.bind("Net_autoscale", "Net_autoscale");
         this.settings.bind("Net_logscale", "Net_logscale");
+        this.settings.bind("Net_total_type", "Net_total_type");
+        this.settings.bind("Net_total_display", "Net_total_display", () => { this.adjust_Net_width() });
+        this.settings.bind("Net_total_hovering_only", "Net_total_hovering_only");
+        this.settings.bind("Net_totalCorner", "Net_totalCorner");
         this.settings.bind("Net_symbolsInTooltip", "Net_symbolsInTooltip");
         this.settings.bind("Disk_enabled", "Disk_enabled");
         this.settings.bind("Disk_squared", "Disk_squared");
@@ -361,6 +366,8 @@ class MCSM extends Applet.IconApplet {
             Math.min(this.graphStep, 16),
             Math.round(this.Net_width / this.graphStep) * this.graphStep
         );
+        if (this.Net_total_display && Net_width < 128)
+            Net_width = 128;
         this.Net_width = Net_width;
     }
 
@@ -1555,6 +1562,9 @@ class NetDataProvider {
         this.applet = applet;
         this.name = _('NET');
         this.disabledDevices = [];
+        this.inTotalDevices = [];
+        this.totalAmountCurrent = [0, 0];
+        this.totalAmountPrevious = [0, 0];
         this.currentReadings = [];
         this.lastUpdatedTime = Date.now();
         if (this.applet.Net_mergeAll) {
@@ -1574,7 +1584,10 @@ class NetDataProvider {
             if (! dev["enabled"]) {
                 this.disabledDevices.push(dev["id"]);
                 continue;
+            } else {
+                if (dev["inTotal"]) this.inTotalDevices.push(dev["id"]);
             }
+            
             this.currentReadings.push({
                 "id": dev["id"],
                 "name": (dev["name"].length === 0) ? dev["id"] : dev["name"],
@@ -1614,11 +1627,19 @@ class NetDataProvider {
         const newUpdateTime = Date.now();
         const secondsSinceLastUpdate = (newUpdateTime - this.lastUpdatedTime) / 1000;
 
+        var currentAmount = [0, 0];
+        var previousAmount = [0, 0];
         for (let i = 0, len = this.currentReadings.length; i < len; i++) {
             let data_index = dataIds.indexOf(this.currentReadings[i]["id"]);
             if (data_index < 0) continue;
             this.currentReadings[i]["down"] = data[data_index]["down"];
             this.currentReadings[i]["up"] = data[data_index]["up"];
+            if (this.inTotalDevices.indexOf(this.currentReadings[i]["id"] > -1)) {
+                previousAmount[0] = previousAmount[0] + this.currentReadings[i].lastReading[0];
+                previousAmount[1] = previousAmount[1] + this.currentReadings[i].lastReading[1];
+                currentAmount[0] = currentAmount[0] + this.currentReadings[i]["down"];
+                currentAmount[1] = currentAmount[1] + this.currentReadings[i]["up"];
+            }
             
             if (this.currentReadings[i].lastReading[0] === 0 && this.currentReadings[i].lastReading[1] === 0) {
                 this.currentReadings[i].lastReading[0] = this.currentReadings[i]["down"];
@@ -1639,6 +1660,10 @@ class NetDataProvider {
             this.currentReadings[i].readingRatesList[0] = this.currentReadings[i].tooltipDown;
             this.currentReadings[i].readingRatesList[1] = this.currentReadings[i].tooltipUp;
         }
+        this.totalAmountPrevious[0] = previousAmount[0];
+        this.totalAmountPrevious[1] = previousAmount[1];
+        this.totalAmountCurrent[0] = currentAmount[0];
+        this.totalAmountCurrent[1] = currentAmount[1];
 
         this.lastUpdatedTime = newUpdateTime;
     }
