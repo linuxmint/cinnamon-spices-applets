@@ -1,3 +1,11 @@
+### v3.7.0~20260308
+  * New section in **Network**: "Total amount or instant speed".
+  * The user can choose to display the *Instant network speed* or the *Total transfer amount* or... none.
+  * Values can be displayed permanently or only when hovering over this applet.
+  * The user can choose the corner in which to display these values.
+  * Fixes [#8350](https://github.com/linuxmint/cinnamon-spices-applets/issues/8350)
+  * New option in **CPU**: "Corner in which to display the temperature".
+
 ### v3.6.1~20260307
   * New option "Use symbols instead of words" in tooltip for Networks and Disks.
   * Checking this option for Networks: Replaces 'Up' with '▲' and 'Down' with '▼'.
