@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-03-08 21:12+0100\n"
-"PO-Revision-Date: 2026-02-20 07:38+0100\n"
+"PO-Revision-Date: 2026-03-09 07:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -470,7 +470,7 @@ msgstr "Geräte"
 
 #. 6.4->settings-schema.json->sectionNetworkTotal->title
 msgid "Total amount or instant speed"
-msgstr ""
+msgstr "Datenvolumen oder aktuelle Geschwindigkeit"
 
 #. 6.4->settings-schema.json->sectionDiskUsagePaths->title
 msgid "Paths"
@@ -629,59 +629,60 @@ msgid "Path to the system file used to check the CPU temperature"
 msgstr "Pfad zur Systemdatei für die Prüfung der CPU-Temperatur"
 
 #. 6.4->settings-schema.json->CPU_tempHigh->description
-#, fuzzy
 msgid "High CPU Temperature (°C)"
-msgstr "CPU-Temperatur anzeigen"
+msgstr "Hohe CPU-Temperatur (°C)"
 
 #. 6.4->settings-schema.json->CPU_tempHigh->tooltip
 msgid "Refer to your CPU documentation."
-msgstr ""
+msgstr "Siehe CPU-Dokumentation."
 
 #. 6.4->settings-schema.json->CPU_tempCrit->description
 msgid "Critical CPU Temperature (°C)"
-msgstr ""
+msgstr "Kritische CPU-Temperatur (°C)"
 
 #. 6.4->settings-schema.json->CPU_tempCrit->tooltip
 msgid ""
 "Refer to your CPU documentation.\n"
 "Must be greater than the High CPU Temperature."
 msgstr ""
+"Siehe CPU-Dokumentation.\n"
+"Muss höher sein als die hohe CPU-Temperatur."
 
 #. 6.4->settings-schema.json->CPU_tempCorner->description
 msgid "Corner in which to display the temperature"
-msgstr ""
+msgstr "Ecke, in der die Temperatur angezeigt werden soll"
 
 #. 6.4->settings-schema.json->CPU_tempCorner->options
 #. 6.4->settings-schema.json->Net_totalCorner->options
 msgid "Top Right"
-msgstr ""
+msgstr "Oben rechts"
 
 #. 6.4->settings-schema.json->CPU_tempCorner->options
 #. 6.4->settings-schema.json->Net_totalCorner->options
 msgid "Top Left"
-msgstr ""
+msgstr "Oben links"
 
 #. 6.4->settings-schema.json->CPU_tempCorner->options
 #. 6.4->settings-schema.json->Net_totalCorner->options
 msgid "Bottom Right"
-msgstr ""
+msgstr "Unten rechts"
 
 #. 6.4->settings-schema.json->CPU_tempCorner->options
 #. 6.4->settings-schema.json->Net_totalCorner->options
 msgid "Bottom Left"
-msgstr ""
+msgstr "Unten links"
 
 #. 6.4->settings-schema.json->CPU_tempColor->description
 msgid "Normal Temperature Color"
-msgstr ""
+msgstr "Farbe normale Temperatur"
 
 #. 6.4->settings-schema.json->CPU_tempColorHigh->description
 msgid "High Temperature Color"
-msgstr ""
+msgstr "Farbe hohe Temperatur"
 
 #. 6.4->settings-schema.json->CPU_tempColorCrit->description
 msgid "Critical Temperature Color"
-msgstr ""
+msgstr "Farbe kritische Temperatur"
 
 #. 6.4->settings-schema.json->CPU_byActivity->description
 #. 6.0/prefsui.glade:433 5.6/prefsui.glade:433 4.0/prefsui.glade:433
@@ -798,7 +799,7 @@ msgstr "Logarithmisch"
 #. 6.4->settings-schema.json->Net_symbolsInTooltip->description
 #. 6.4->settings-schema.json->Disk_symbolsInTooltip->description
 msgid "Use symbols instead of words"
-msgstr ""
+msgstr "Symbole statt Worten verwenden"
 
 #. 6.4->settings-schema.json->Net_getdevlist_btn->description
 #. 6.4->settings-schema.json->Disk_getdevlist_btn->description
@@ -831,7 +832,7 @@ msgstr "Farbe Steigend"
 
 #. 6.4->settings-schema.json->Net_devicesList->columns->title
 msgid "Part of total"
-msgstr ""
+msgstr "Anteil Gesamtvolumen"
 
 #. 6.4->settings-schema.json->Net_cleardevlist_btn->description
 #. 6.4->settings-schema.json->Disk_cleardevlist_btn->description
@@ -840,40 +841,42 @@ msgstr "Diese Geräteliste leeren"
 
 #. 6.4->settings-schema.json->Net_total_type->description
 msgid "Total amount or speed"
-msgstr ""
+msgstr "Datenvolumen oder Geschwindigkeit"
 
 #. 6.4->settings-schema.json->Net_total_type->options
 msgid "Total transfer amount (Bytes)"
-msgstr ""
+msgstr "Übertragenes Datenvolumen (Bytes)"
 
 #. 6.4->settings-schema.json->Net_total_type->options
 msgid "Instant network speed (Bytes per second)"
-msgstr ""
+msgstr "Aktuelle Netzwerkgeschwindigkeit (Bytes pro Sekunde)"
 
 #. 6.4->settings-schema.json->Net_total_display->description
 msgid "Display the value of this total"
-msgstr ""
+msgstr "Wert dieses Gesamtvolumens anzeigen"
 
 #. 6.4->settings-schema.json->Net_total_display->tooltip
 msgid ""
 "Be sure to check at least one “Part of total” box among the enabled devices."
 msgstr ""
+"Stellen Sie sicher, dass mindestens ein \"Anteil Gesamtvolumen\" unter den "
+"aktivierten Geräten gewählt ist."
 
 #. 6.4->settings-schema.json->Net_total_hovering_only->description
 msgid "Only display when hovering over this applet"
-msgstr ""
+msgstr "Nur beim Überfahren des Applets mit der Maus anzeigen"
 
 #. 6.4->settings-schema.json->Net_totalCorner->description
 msgid "Corner in which to display this total"
-msgstr ""
+msgstr "Ecke, in der dieser Wert angezeigt werden soll"
 
 #. 6.4->settings-schema.json->Net_totalCorner->options
 msgid "Right Only"
-msgstr ""
+msgstr "Nur rechts"
 
 #. 6.4->settings-schema.json->Net_totalCorner->options
 msgid "Left Only"
-msgstr ""
+msgstr "Nur links"
 
 #. 6.4->settings-schema.json->Disk_devicesList->columns->title
 msgid "⚠️ Id"
@@ -1089,7 +1092,8 @@ msgid ""
 "\tthe next largest becomes the new value by which the readings\n"
 "\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
 "\tHowever, it also means that if there is a large reading small readings\n"
-"\tmay become indistinguishable from 0. And if there are only small readings\n"
+"\tmay become indistinguishable from 0. And if there are only small "
+"readings\n"
 "\tthen slightly larger readings may appear larger than they should.\n"
 "\tIf not enabled the largest value used will be the largest reading since\n"
 "\tcinnamon was started.\n"
@@ -1114,7 +1118,8 @@ msgstr ""
 "Logarithmische Skalierung:\n"
 "\tDies transformiert die Messwerte so, dass sie mit einer logarithmischen "
 "Skala\n"
-"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte verkleinert\n"
+"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte "
+"verkleinert\n"
 "\twerden, damit sie die kleineren Messwerte nicht unterdrücken."
 
 #. 6.0/prefsui.glade:508 5.6/prefsui.glade:508 4.0/prefsui.glade:508
@@ -1132,7 +1137,8 @@ msgid ""
 "    may become indistinguishable from 0. And if there are only small "
 "readings\n"
 "    then slightly larger readings may appear larger than they should.\n"
-"    If not enabled the largest value used will be the largest reading since\n"
+"    If not enabled the largest value used will be the largest reading "
+"since\n"
 "    cinnamon was started.\n"
 "\n"
 "Logarithmic Scaling:\n"
@@ -1155,5 +1161,6 @@ msgstr ""
 "Logarithmische Skalierung:\n"
 "\tDies transformiert die Messwerte so, dass sie mit einer logarithmischen "
 "Skala\n"
-"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte verkleinert\n"
+"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte "
+"verkleinert\n"
 "\twerden, damit sie die kleineren Messwerte nicht unterdrücken."
