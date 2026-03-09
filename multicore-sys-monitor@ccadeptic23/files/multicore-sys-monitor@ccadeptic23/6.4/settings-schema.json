@@ -847,7 +847,7 @@
   "Net_total_display": {
     "type": "switch",
     "default": true,
-    "description": "Display the value of this total",
+    "description": "Display that",
     "tooltip": "Be sure to check at least one “Part of total” box among the enabled devices."
   },
   "Net_total_hovering_only": {
@@ -859,7 +859,7 @@
   "Net_totalCorner": {
     "type": "combobox",
     "default": "TL",
-    "description": "Corner in which to display this total",
+    "description": "Corner in which to display that",
     "options": {
       "Top Right": "TR",
       "Top Left": "TL",
