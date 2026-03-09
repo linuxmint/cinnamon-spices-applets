@@ -1,3 +1,6 @@
+### v3.7.2~20260309
+  * Display improvements.
+
 ### v3.7.1~20260309
   * Changing certain messages.
 
