@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: multicore-sys-monitor@ccadeptic23 1.9.5\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-08 21:12+0100\n"
+"POT-Creation-Date: 2026-03-09 08:24+0100\n"
 "PO-Revision-Date: 2026-02-26 14:30+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -848,7 +848,7 @@ msgid "Instant network speed (Bytes per second)"
 msgstr ""
 
 #. 6.4->settings-schema.json->Net_total_display->description
-msgid "Display the value of this total"
+msgid "Display that"
 msgstr ""
 
 #. 6.4->settings-schema.json->Net_total_display->tooltip
@@ -861,7 +861,7 @@ msgid "Only display when hovering over this applet"
 msgstr ""
 
 #. 6.4->settings-schema.json->Net_totalCorner->description
-msgid "Corner in which to display this total"
+msgid "Corner in which to display that"
 msgstr ""
 
 #. 6.4->settings-schema.json->Net_totalCorner->options

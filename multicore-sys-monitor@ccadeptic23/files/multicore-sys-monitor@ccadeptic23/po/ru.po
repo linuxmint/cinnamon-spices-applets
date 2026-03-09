@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-08 21:12+0100\n"
+"POT-Creation-Date: 2026-03-09 08:24+0100\n"
 "PO-Revision-Date: 2017-05-03 21:10+0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -868,7 +868,7 @@ msgid "Instant network speed (Bytes per second)"
 msgstr ""
 
 #. 6.4->settings-schema.json->Net_total_display->description
-msgid "Display the value of this total"
+msgid "Display that"
 msgstr ""
 
 #. 6.4->settings-schema.json->Net_total_display->tooltip
@@ -881,7 +881,7 @@ msgid "Only display when hovering over this applet"
 msgstr ""
 
 #. 6.4->settings-schema.json->Net_totalCorner->description
-msgid "Corner in which to display this total"
+msgid "Corner in which to display that"
 msgstr ""
 
 #. 6.4->settings-schema.json->Net_totalCorner->options

@@ -1,3 +1,6 @@
+### v3.7.1~20260309
+  * Changing certain messages.
+
 ### v3.7.0~20260308
   * New section in **Network**: "Total amount or instant speed".
   * The user can choose to display the *Instant network speed* or the *Total transfer amount* or... none.
