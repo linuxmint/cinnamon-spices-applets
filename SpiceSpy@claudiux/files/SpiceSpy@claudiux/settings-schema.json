@@ -129,7 +129,8 @@
       "Score (bottom-up)": "score",
       "Score (top-down)": "dscore",
       "Number of comments (bottom-up)": "comments",
-      "Number of comments (top-down)": "dcomments"
+      "Number of comments (top-down)": "dcomments",
+      "Number of issues": "issues"
     }
   },
   "show-uuid": {
