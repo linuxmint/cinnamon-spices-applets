@@ -25,6 +25,48 @@ HttpSession.prototype = {
     },
 
     /**
+     * Fetches a random image, retrying if the page is empty.
+     * @param {number} attempts - Current attempt count to prevent infinite loops.
+     */
+    fetchRandomImage: function (callback, attempts = 0) {
+        if (attempts >= 5) {
+            Utils.log("Max retries reached. Could not find a valid page.");
+            return callback(null);
+        }
+
+        const randomPage = Math.floor(Math.random() * 1000) + 1; 
+        const url = `https://picsum.photos/v2/list?page=${randomPage}&limit=1`;
+        const request = Soup.Message.new('GET', url);
+
+        _httpSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, (session, result) => {
+            try {
+                const bytes = session.send_and_read_finish(result);
+                const status = request.get_status();
+
+                if (status === Soup.Status.OK) {
+                    const responseText = new TextDecoder('utf-8').decode(bytes.get_data());
+                    const data = JSON.parse(responseText);
+
+                    // Check if the page actually returned images
+                    if (Array.isArray(data) && data.length > 0) {
+                        Utils.log(`Success! Image found on page ${randomPage}`);
+                        callback(data[0]);
+                    } else {
+                        Utils.log(`Page ${randomPage} is empty. Retrying...`);
+                        this.fetchRandomImage(attempts + 1);
+                    }
+                } else {
+                    Utils.log(`Server returned status ${status}. Retrying...`);
+                    this.fetchRandomImage(attempts + 1);
+                }
+            } catch (e) {
+                Utils.log(`Error: ${e.message}`);
+                callback(null);
+            }
+        });
+    },
+
+    /**
      * queryMetada
      * @param {string} url - The url to call 
      * @param {function} callback - The function to call when url returns data
