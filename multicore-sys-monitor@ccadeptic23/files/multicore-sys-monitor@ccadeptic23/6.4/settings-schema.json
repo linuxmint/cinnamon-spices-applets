@@ -355,7 +355,7 @@
   },
   "graphStep": {
     "type": "combobox",
-    "default": 16,
+    "default": 1,
     "options": {
       "1px": 1,
       "2px": 2,

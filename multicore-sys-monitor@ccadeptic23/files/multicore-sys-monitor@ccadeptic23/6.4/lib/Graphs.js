@@ -888,8 +888,10 @@ class GraphLineChart {
       }
       let _down = formatBytesValueUnit(total[0], 2, false);
       let down = _down[0].toString().trim() + " " + _down[1].trim();
+      if (_down[0] == 0) down = "0          ";
       let _up = formatBytesValueUnit(total[1], 2, false);
       let up = _up[0].toString().trim() + " " + _up[1].trim();
+      if (_up[0] == 0) up = "0";
       
       let isOnly = this.applet.Net_totalCorner.includes("O");
       let isRight = this.applet.Net_totalCorner.includes("R");
