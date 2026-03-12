@@ -1,3 +1,8 @@
+### v3.8.0~20260312
+  * Can show the amounts (in Bytes) of Total, Used and Available memory in the tooltip.
+  * Same for Swap.
+  * Changes "min" values for all widths.
+
 ### v3.7.2~20260309
   * Display improvements.
 
