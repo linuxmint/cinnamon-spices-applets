@@ -1,0 +1,7 @@
+{
+    "uuid": "ascii-map@leadedyogurt",
+    "name": "Ascii Map",
+    "description": "Character map for extra ascii characters",
+    "version": "1.0.0",
+    "max-instances": "-1"
+}
