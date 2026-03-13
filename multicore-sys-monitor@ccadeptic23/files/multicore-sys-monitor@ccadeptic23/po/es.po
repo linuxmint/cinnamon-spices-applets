@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-03-12 21:04+0100\n"
-"PO-Revision-Date: 2026-03-09 08:26+0100\n"
+"PO-Revision-Date: 2026-03-12 21:16-0300\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.8\n"
 
 #. 6.4->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
@@ -364,7 +364,7 @@ msgstr "Disco"
 
 #. 6.4/applet.js:1372 6.4/applet.js:1491
 msgid "Available:"
-msgstr ""
+msgstr "Disponible:"
 
 #. 6.4/applet.js:1396
 msgid "Buffers/Cache/Shared"
@@ -735,6 +735,8 @@ msgid ""
 "Show the amounts (in Bytes) of Total, Used and Available memory in the "
 "tooltip"
 msgstr ""
+"Mostrar las cantidades (en bytes) de memoria total, utilizada y disponible "
+"en la información sobre herramientas"
 
 #. 6.4->settings-schema.json->Mem_colorUsedup->description
 #. 6.4->settings-schema.json->DiskUsage_colorUsed->description
