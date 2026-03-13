@@ -168,7 +168,8 @@
         "Mem_labelOn",
         "Mem_squared",
         "Mem_width",
-        "Mem_startAt12Oclock"
+        "Mem_startAt12Oclock",
+        "Mem_showBytesInTooltip"
       ]
     },
     "sectionMemoryColors": {
@@ -465,7 +466,7 @@
     "type": "scale",
     "default": 64,
     "description": "Width",
-    "min": 16,
+    "min": 10,
     "max": 320,
     "step": 1,
     "show-value": true,
@@ -613,7 +614,7 @@
     "type": "scale",
     "default": 64,
     "description": "Width",
-    "min": 16,
+    "min": 10,
     "max": 320,
     "step": 1,
     "show-value": true,
@@ -623,6 +624,11 @@
     "type": "switch",
     "default": false,
     "description": "Origin at 12 o'clock"
+  },
+  "Mem_showBytesInTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the amounts (in Bytes) of Total, Used and Available memory in the tooltip"
   },
   "Mem_colorUsedup": {
     "type": "colorchooser",
@@ -680,7 +686,7 @@
     "type": "scale",
     "default": 64,
     "description": "Width",
-    "min": 16,
+    "min": 10,
     "max": 320,
     "step": 1,
     "show-value": true,
@@ -858,7 +864,7 @@
   },
   "Net_totalCorner": {
     "type": "combobox",
-    "default": "TL",
+    "default": "LO",
     "description": "Corner in which to display that",
     "options": {
       "Top Right": "TR",
@@ -889,7 +895,7 @@
     "type": "scale",
     "default": 64,
     "description": "Width",
-    "min": 16,
+    "min": 10,
     "max": 320,
     "step": 1,
     "show-value": true,
@@ -1073,9 +1079,9 @@
   },
   "DiskUsage_width": {
     "type": "scale",
-    "default": 64,
+    "default": 32,
     "description": "Width",
-    "min": 16,
+    "min": 10,
     "max": 320,
     "step": 1,
     "show-value": true,

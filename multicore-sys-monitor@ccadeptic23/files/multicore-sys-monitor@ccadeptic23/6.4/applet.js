@@ -214,6 +214,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Mem_squared", "Mem_squared");
         this.settings.bind("Mem_width", "Mem_width", () => { this.adjust_Mem_width() });
         this.settings.bind("Mem_startAt12Oclock", "Mem_startAt12Oclock");
+        this.settings.bind("Mem_showBytesInTooltip", "Mem_showBytesInTooltip");
         this.settings.bind("Mem_colorUsedup", "Mem_colorUsedup");
         this.settings.bind("Mem_colorCache", "Mem_colorCache");
         this.settings.bind("Mem_colorBuffers", "Mem_colorBuffers");
@@ -1327,6 +1328,7 @@ class MemDataProvider {
         this.applet = applet;
         this.name = _('MEM');
         this.memusage = 0;
+        this.memTotal = 0;
         this.currentReadings = [0, 0, 0, 0];
     }
 
@@ -1345,6 +1347,7 @@ class MemDataProvider {
 
     setData(total, used, memInfo) {
         const precision = 100000;
+        this.memTotal = memInfo["MemTotal"];
         this.currentReadings = [
             (memInfo["MemUsed"] - memInfo["Cached"] - memInfo["Buffers"]) / memInfo["MemTotal"],
             memInfo["Cached"] / memInfo["MemTotal"],
@@ -1358,9 +1361,16 @@ class MemDataProvider {
         if (! this.isRunning) return "";
         var sum_used = 0;
         let trans = _("Memory");
+        let [strMemTotal, unitMemTotal] = formatBytesValueUnit(this.memTotal, 2, false);
+        if (this.applet.Mem_showBytesInTooltip) {
+            trans += " " + strMemTotal + " " + unitMemTotal;
+        }
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
-
+        if (this.applet.Mem_showBytesInTooltip) {
+            toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(formatBytesValueUnit(this.memTotal * this.currentReadings[0], 2, false)[0]).toFixed(2), 2).padStart(6, ' ') + " " + unitMemTotal.padStart(6, ' ') + '\n';
+            toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(formatBytesValueUnit(this.memTotal * (1 - this.currentReadings[0]), 2, false)[0]).toFixed(2), 2).padStart(6, ' ') + " " + unitMemTotal.padStart(6, ' ') + '\n';
+        }
         let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
         let percentChar = "%";
         if (this.applet.percentAtEndOfLine)
@@ -1440,6 +1450,7 @@ class SwapDataProvider {
         this.applet = applet;
         this.name = _('SWAP');
         this.swapusage = true;
+        this.swapTotal = 0;
         this.currentReadings = [0];
     }
 
@@ -1453,6 +1464,7 @@ class SwapDataProvider {
     }
 
     setData(total, value) {
+        this.swapTotal = total;
         this.swapusage = parseInt(total) !== 0;
         if (TESTING)
             this.currentReadings = [0.6];
@@ -1465,14 +1477,26 @@ class SwapDataProvider {
             return '';
         }
         let trans = _("Swap");
-        let len = trans.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
-
+        let [strSwapTotal, unitSwapTotal] = formatBytesValueUnit(this.swapTotal, 2, false);
+        let trans2 = trans + "";
+        if (this.applet.Mem_showBytesInTooltip) {
+            trans2 = trans + " " + strSwapTotal + " " + unitSwapTotal;
+        }
+        let len = trans2.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans2 + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
+        if (this.applet.Mem_showBytesInTooltip) {
+            let [swapUsedAmount, swapUsedUnit] = formatBytesValueUnit(this.swapTotal * this.currentReadings[0], 2, false);
+            let [swapAvailableAmount, swapAvailableUnit] = formatBytesValueUnit(this.swapTotal * (1 - this.currentReadings[0]), 2, false);
+            toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(swapUsedAmount).toFixed(2), 2).padStart(6, ' ') + " " + swapUsedUnit.padStart(6, ' ') + '\n';
+            toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(swapAvailableAmount).toFixed(2), 2).padStart(6, ' ') + " " + swapAvailableUnit.padStart(6, ' ') + '\n';
+        }
         let percentChar = "%";
         if (this.applet.percentAtEndOfLine)
             percentChar = "%".padStart(6, " ");
-
-        toolTipString += trans.padStart(spaces, ' ') + ':\t' + " " + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(6, ' ') + " " + percentChar + '\n';
+        
+        let colon = _(":");
+        let lenColon = Math.max(colon.length - 1, 0);
+        toolTipString += trans.padStart(spaces - lenColon, ' ') + colon + '\t' + " " + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(6, ' ') + " " + percentChar + '\n';
         return toolTipString;
     }
 
