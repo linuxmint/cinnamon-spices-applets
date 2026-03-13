@@ -68,6 +68,22 @@ const properties = [
     {graph: 'diskUsageGraph', provider: 'diskUsageProvider', abbrev: 'DiskUsage'}
 ];
 
+const orig_names = [
+    _("CPU"), 
+    _("MEM"), 
+    _("NET"), 
+    _("DISK"), 
+    _("DISK USAGE")
+];
+const orig_charts = [
+    [properties[0]], 
+    [properties[1], properties[2]], 
+    [properties[3]],
+    [properties[4]],
+    [properties[5]]
+];
+
+
 function get_nemo_size_prefixes() {
     let _SETTINGS_SCHEMA='org.nemo.preferences';
     let _SETTINGS_KEY = 'size-prefixes';
@@ -188,6 +204,8 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("labelColor", "labelColor");
         this.settings.bind("borderColor", "borderColor");
         this.settings.bind("backgroundColor", "backgroundColor");
+        this.settings.bind("displayOrder", "displayOrder");
+        this.controlDisplayOrder();
         this.settings.bind("CPU_enabled", "CPU_enabled");
         this.settings.bind("CPU_squared", "CPU_squared");
         this.settings.bind("CPU_showTemp", "CPU_showTemp");
@@ -318,7 +336,6 @@ class MCSM extends Applet.IconApplet {
 
         this.graphArea = new St.DrawingArea();
         this.graphArea.width = 1;
-        //~ this.graphArea.height = this.panelHeight * global.ui_scale;
         this.graphArea.height = this.panelHeight;
 
         this.multiCpuGraph = new Graphs.GraphVBars(this.graphArea, this);
@@ -341,6 +358,36 @@ class MCSM extends Applet.IconApplet {
 
         this.actor.add_actor(this.graphArea);
         this.graphArea.connect('repaint', (area) => this.onGraphRepaint(area));
+    }
+    
+    controlDisplayOrder(reinit=false) {
+        var displayOrder = [];
+        var order = [];
+        if (!reinit) {
+            for (let d of this.displayOrder) {
+                let section = d["id"];
+                if (order.indexOf(section) < 0 && orig_names.indexOf(section) >= 0) order.push(section);
+            }
+            if (order.length < orig_names.length) {
+                for (let name of orig_names) {
+                    if (order.indexOf(name) < 0 ) order.push(name);
+                }
+            }
+        } else {
+            order = orig_names;
+        }
+        
+        for (let name of order)
+            displayOrder.push({"id": name});
+
+        let _to = setTimeout( () => {
+            clearTimeout(_to);
+            this.displayOrder = displayOrder;
+        }, 0);
+    }
+    
+    reinitDisplayOrder() {
+        this.controlDisplayOrder(true);
     }
     
     adjust_CPU_width() {
@@ -400,30 +447,16 @@ class MCSM extends Applet.IconApplet {
 
     set_panelHeight() {
         this.iconSize = this.getPanelIconSize(St.IconType.FULLCOLOR);
-        //~ global.log("this.iconSize: " + this.iconSize);
         if (this.useIconSize) {
-            //~ global.log("Case 1");
             this.panelHeight = this.iconSize * global.ui_scale;
         } else if (this.graphHeightPercent) {
-            //~ global.log("Case 2");
-            //~ global.log("this.graphHeight: " + this.graphHeight);
-            //~ global.log("this._panelHeight: " + this._panelHeight);
-            
-            //~ if (this.graphHeight > this._panelHeight) this.graphHeight = this._panelHeight;
             this.graphHeight = Math.ceil(this._panelHeight * this.graphHeightPercent / 100);
             
-            //~ this.panelHeight = Math.ceil(this.graphHeight); // * global.ui_scale
             this.panelHeight = this.graphHeight; // * global.ui_scale
         } else {
-            //~ global.log("Case 3");
-            //~ global.log("this._panelHeight: " + this._panelHeight);
             this.panelHeight = this._panelHeight;
         }
-        //~ global.log("Finally");
-        //~ global.log("this.panelHeight: " + this.panelHeight);
-        //~ global.log("this.panelHeight * global.ui_scale: " + this.panelHeight * global.ui_scale);
         if (this.graphArea) {
-            //~ this.graphArea.height = this.panelHeight * global.ui_scale;
             this.graphArea.height = this.panelHeight;
             this.graphArea.queue_repaint();
         }
@@ -455,22 +488,33 @@ class MCSM extends Applet.IconApplet {
             return this.isRunning;
         });
     }
-
+    
     onGraphRepaint(area) {
         this._isHighlighted;
         if (this.without_any_graph) return;
         let xOffset = 0;
         let yOffset = Math.max(0, Math.trunc((this._panelHeight - this.panelHeight) / 2));
-        for (let i = 0, len = properties.length; i < len; i++) {
-            if (properties[i].abbrev === 'Swap') {
+        var order = [];
+        var _properties = [];
+        for (let o of this.displayOrder){
+            let box = o["id"];
+            if (order.indexOf(box) < 0 && orig_names.indexOf(box) >= 0) {
+                order.push(box);
+                let index = orig_names.indexOf(box);
+                _properties = _properties.concat(orig_charts[index]);
+            }
+        };
+        
+        for (let i = 0, len = _properties.length; i < len; i++) {
+            if (_properties[i].abbrev === 'Swap') {
                 continue;
             }
-            if (this[properties[i].provider].isEnabled) {
+            if (this[_properties[i].provider].isEnabled) {
                 // translate origin to the new location for the graph
                 let areaContext = area.get_context();
                 areaContext.translate(xOffset, yOffset);
-                let width = (this[`${properties[i].abbrev}_squared`] === true) ? this.panelHeight : this[`${properties[i].abbrev}_width`] * global.ui_scale;
-                if (properties[i].abbrev === 'Mem') {
+                let width = (this[`${_properties[i].abbrev}_squared`] === true) ? this.panelHeight : this[`${_properties[i].abbrev}_width`] * global.ui_scale;
+                if (_properties[i].abbrev === 'Mem') {
                     // paint the "swap" backdrop
                     this.swapGraph.paint(
                         this.swapProvider.name,
@@ -487,10 +531,10 @@ class MCSM extends Applet.IconApplet {
                         [this.Mem_colorSwap]
                     );
                 }
-                let labelOn = this[`${properties[i].abbrev}_labelOn`];
-                this[properties[i].graph].paint(
-                    this[properties[i].provider].name,
-                    this[properties[i].provider].currentReadings,
+                let labelOn = this[`${_properties[i].abbrev}_labelOn`];
+                this[_properties[i].graph].paint(
+                    this[_properties[i].provider].name,
+                    this[_properties[i].provider].currentReadings,
                     area,
                     areaContext,
                     this.labelsOn && labelOn,
@@ -498,7 +542,7 @@ class MCSM extends Applet.IconApplet {
                     this.panelHeight - 2 * global.ui_scale,
                     this.labelColor,
                     this.backgroundColor,
-                    this[properties[i].provider].getColorList()
+                    this[_properties[i].provider].getColorList()
                 );
                 // return translation to origin
                 areaContext.translate(-xOffset, -yOffset);
@@ -881,11 +925,8 @@ class MCSM extends Applet.IconApplet {
             this.CPU_tempPath.length > 0 && 
             GLib.file_test(this.CPU_tempPath, GLib.FileTest.EXISTS)
         ) {
-            //~ global.log("this.CPU_tempPath: " + this.CPU_tempPath);
-            readFileAsync(this.CPU_tempPath).then((contents) => {
-                //~ global.log("contents: " + contents);
+            /readFileAsync(this.CPU_tempPath).then((contents) => {
                 let _temp = contents.trim();
-                //~ global.log("_temp: " + _temp);
                 _temp = parseInt(_temp);
                 if (!isNaN(_temp)) {
                     _temp = Math.round(1 * _temp / 1000);

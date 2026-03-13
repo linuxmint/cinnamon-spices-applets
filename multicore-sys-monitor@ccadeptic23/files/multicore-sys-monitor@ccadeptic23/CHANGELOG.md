@@ -1,3 +1,6 @@
+### v3.8.1~20260313
+  * Choose the order in which the boxes appear.
+
 ### v3.8.0~20260312
   * Can show the amounts (in Bytes) of Total, Used and Available memory in the tooltip.
   * Same for Swap.
