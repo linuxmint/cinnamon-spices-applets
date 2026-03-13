@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-12 21:04+0100\n"
+"POT-Creation-Date: 2026-03-13 18:35+0100\n"
 "PO-Revision-Date: 2025-06-15 23:34+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -19,12 +19,12 @@ msgstr ""
 
 #. 6.4->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
-#. 3.2/prefs.js:187 6.0/DataProviders.js:60 6.0/prefs.js:303 6.4/applet.js:566
-#. 6.4/applet.js:1513 6.4/applet.js:1560 3.4/DataProviders.js:58
-#. 3.4/prefs.js:195 5.6/DataProviders.js:55 5.6/prefs.js:303
-#. 4.0/DataProviders.js:55 4.0/prefs.js:303 3.0/prefsui.glade:452
-#. 3.2/prefsui.glade:504 6.0/prefsui.glade:580 3.4/prefsui.glade:434
-#. 5.6/prefsui.glade:580 4.0/prefsui.glade:580
+#. 3.2/prefs.js:187 6.0/DataProviders.js:60 6.0/prefs.js:303 6.4/applet.js:72
+#. 6.4/applet.js:610 6.4/applet.js:1556 6.4/applet.js:1603
+#. 3.4/DataProviders.js:58 3.4/prefs.js:195 5.6/DataProviders.js:55
+#. 5.6/prefs.js:303 4.0/DataProviders.js:55 4.0/prefs.js:303
+#. 3.0/prefsui.glade:452 3.2/prefsui.glade:504 6.0/prefsui.glade:580
+#. 3.4/prefsui.glade:434 5.6/prefsui.glade:580 4.0/prefsui.glade:580
 msgid "CPU"
 msgstr "CPU"
 
@@ -34,14 +34,14 @@ msgid "------------- CPU ------------"
 msgstr "------------- CPU ------------"
 
 #. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 6.0/DataProviders.js:131
-#. 6.4/applet.js:1562 3.4/DataProviders.js:129 5.6/DataProviders.js:126
+#. 6.4/applet.js:1605 3.4/DataProviders.js:129 5.6/DataProviders.js:126
 #. 4.0/DataProviders.js:126
 msgid "Core"
 msgstr "核心"
 
 #. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 6.0/DataProviders.js:143
-#. 6.4/applet.js:1329 3.4/DataProviders.js:141 5.6/DataProviders.js:138
-#. 4.0/DataProviders.js:138
+#. 6.4/applet.js:73 6.4/applet.js:1370 3.4/DataProviders.js:141
+#. 5.6/DataProviders.js:138 4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "MEM"
 
@@ -55,25 +55,25 @@ msgid "Usedup:"
 msgstr "已使用："
 
 #. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 6.0/DataProviders.js:164
-#. 6.4/applet.js:1374 3.4/DataProviders.js:162 5.6/DataProviders.js:159
+#. 6.4/applet.js:1415 3.4/DataProviders.js:162 5.6/DataProviders.js:159
 #. 4.0/DataProviders.js:159
 msgid "Cached:"
 msgstr "快取："
 
 #. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 6.0/DataProviders.js:164
-#. 6.4/applet.js:1374 3.4/DataProviders.js:162 5.6/DataProviders.js:159
+#. 6.4/applet.js:1415 3.4/DataProviders.js:162 5.6/DataProviders.js:159
 #. 4.0/DataProviders.js:159
 msgid "Buffer:"
 msgstr "緩衝："
 
 #. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 6.0/DataProviders.js:164
-#. 6.4/applet.js:49 6.4/applet.js:1374 3.4/DataProviders.js:162
+#. 6.4/applet.js:49 6.4/applet.js:1415 3.4/DataProviders.js:162
 #. 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "可用："
 
 #. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 6.0/DataProviders.js:178
-#. 6.4/applet.js:1451 3.4/DataProviders.js:176 5.6/DataProviders.js:173
+#. 6.4/applet.js:1492 3.4/DataProviders.js:176 5.6/DataProviders.js:173
 #. 4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "SWAP"
@@ -85,7 +85,7 @@ msgstr "------------ Swap ------------"
 
 #. 6.4->settings-schema.json->Mem_colorSwap->description
 #. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 6.0/DataProviders.js:222
-#. 6.4/applet.js:50 6.4/applet.js:1479 3.4/DataProviders.js:195
+#. 6.4/applet.js:50 6.4/applet.js:1520 3.4/DataProviders.js:195
 #. 5.6/DataProviders.js:194 4.0/DataProviders.js:194 3.0/prefsui.glade:785
 #. 3.2/prefsui.glade:837 6.0/prefsui.glade:907 3.4/prefsui.glade:761
 #. 5.6/prefsui.glade:907 4.0/prefsui.glade:907
@@ -93,8 +93,8 @@ msgid "Swap"
 msgstr "虛擬記憶體"
 
 #. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 6.0/DataProviders.js:232
-#. 6.4/applet.js:1585 6.4/lib/Graphs.js:879 3.4/DataProviders.js:205
-#. 5.6/DataProviders.js:204 4.0/DataProviders.js:204
+#. 6.4/applet.js:74 6.4/applet.js:1628 6.4/lib/Graphs.js:879
+#. 3.4/DataProviders.js:205 5.6/DataProviders.js:204 4.0/DataProviders.js:204
 msgid "NET"
 msgstr "網路"
 
@@ -104,7 +104,7 @@ msgid "---------- Networks ----------"
 msgstr "------------ 網路 ------------"
 
 #. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 6.0/DataProviders.js:334
-#. 6.4/applet.js:51 6.4/applet.js:1729 6.4/applet.js:1731
+#. 6.4/applet.js:51 6.4/applet.js:1772 6.4/applet.js:1774
 #. 3.4/DataProviders.js:300 5.6/DataProviders.js:298 4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "下載："
@@ -115,14 +115,14 @@ msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
 #. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 6.0/DataProviders.js:335
-#. 6.4/applet.js:52 6.4/applet.js:1733 6.4/applet.js:1735
+#. 6.4/applet.js:52 6.4/applet.js:1776 6.4/applet.js:1778
 #. 3.4/DataProviders.js:301 5.6/DataProviders.js:299 4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "上傳："
 
 #. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 6.0/DataProviders.js:351
-#. 6.4/applet.js:1753 6.4/applet.js:1899 3.4/DataProviders.js:317
-#. 5.6/DataProviders.js:315 4.0/DataProviders.js:315
+#. 6.4/applet.js:75 6.4/applet.js:1796 6.4/applet.js:1942
+#. 3.4/DataProviders.js:317 5.6/DataProviders.js:315 4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "磁碟"
 
@@ -132,7 +132,7 @@ msgid "------------ Disks -----------"
 msgstr "------------ 磁碟 ------------"
 
 #. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 6.0/DataProviders.js:420
-#. 6.4/applet.js:53 6.4/applet.js:1875 6.4/applet.js:1877
+#. 6.4/applet.js:53 6.4/applet.js:1918 6.4/applet.js:1920
 #. 3.4/DataProviders.js:386 5.6/DataProviders.js:384 4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "讀取："
@@ -143,7 +143,7 @@ msgid "(MiB/s)"
 msgstr "(MiB/s)"
 
 #. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 6.0/DataProviders.js:421
-#. 6.4/applet.js:54 6.4/applet.js:1879 6.4/applet.js:1881
+#. 6.4/applet.js:54 6.4/applet.js:1922 6.4/applet.js:1924
 #. 3.4/DataProviders.js:387 5.6/DataProviders.js:385 4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "寫入："
@@ -214,8 +214,8 @@ msgstr "存檔時發生錯誤："
 msgid "/s"
 msgstr "/s"
 
-#. 6.0/DataProviders.js:164 6.4/applet.js:47 6.4/applet.js:1371
-#. 6.4/applet.js:1374 6.4/applet.js:1490 3.4/DataProviders.js:162
+#. 6.0/DataProviders.js:164 6.4/applet.js:47 6.4/applet.js:1412
+#. 6.4/applet.js:1415 6.4/applet.js:1531 3.4/DataProviders.js:162
 #. 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "已使用："
@@ -243,15 +243,15 @@ msgstr ""
 msgid "Refresh graphs"
 msgstr "重新整理圖表"
 
-#. 6.0/applet.js:325 6.4/applet.js:531
+#. 6.0/applet.js:325 6.4/applet.js:575
 msgid "Without any graphics"
 msgstr "不顯示圖表"
 
-#. 6.0/applet.js:331 6.4/applet.js:537
+#. 6.0/applet.js:331 6.4/applet.js:581
 msgid "With graphics"
 msgstr "顯示圖表"
 
-#. 6.0/applet.js:341 6.4/applet.js:548
+#. 6.0/applet.js:341 6.4/applet.js:592
 msgid "Drop Memory Cache (needs root rights)"
 msgstr "清除記憶體快取 (需要 root 權限)"
 
@@ -297,46 +297,50 @@ msgstr ""
 msgid "Recoverable:"
 msgstr ""
 
+#. 6.4/applet.js:76
+msgid "DISK USAGE"
+msgstr ""
+
 #. 6.4->settings-schema.json->RefreshAll_btn->description
-#. 6.4/applet.js:521
+#. 6.4/applet.js:565
 #, fuzzy
 msgid "Refresh All"
 msgstr "重新整理圖表"
 
-#. 6.4/applet.js:564
+#. 6.4/applet.js:608
 msgid "Configure..."
 msgstr ""
 
 #. 6.4->settings-schema.json->pageGeneral->title
-#. 6.4/applet.js:565 3.0/prefsui.glade:281 3.2/prefsui.glade:333
+#. 6.4/applet.js:609 3.0/prefsui.glade:281 3.2/prefsui.glade:333
 #. 6.0/prefsui.glade:299 3.4/prefsui.glade:264 5.6/prefsui.glade:299
 #. 4.0/prefsui.glade:299
 msgid "General"
 msgstr "一般"
 
 #. 6.4->settings-schema.json->pageMem->title
-#. 6.4/applet.js:567 6.4/applet.js:1363 3.0/prefsui.glade:832
+#. 6.4/applet.js:611 6.4/applet.js:1404 3.0/prefsui.glade:832
 #. 3.2/prefsui.glade:884 6.0/prefsui.glade:954 3.4/prefsui.glade:808
 #. 5.6/prefsui.glade:954 4.0/prefsui.glade:954
 msgid "Memory"
 msgstr "記憶體"
 
 #. 6.4->settings-schema.json->pageNetwork->title
-#. 6.4/applet.js:568 6.4/applet.js:1026 6.4/applet.js:1595
+#. 6.4/applet.js:612 6.4/applet.js:1067 6.4/applet.js:1638
 #. 3.0/prefsui.glade:1154 3.2/prefsui.glade:1206 6.0/prefsui.glade:1289
 #. 3.4/prefsui.glade:1143 5.6/prefsui.glade:1289 4.0/prefsui.glade:1289
 msgid "Network"
 msgstr "網路"
 
 #. 6.4->settings-schema.json->pageDisk->title
-#. 6.4/applet.js:569 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
+#. 6.4/applet.js:613 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
 #. 6.0/prefsui.glade:1635 3.4/prefsui.glade:1489 5.6/prefsui.glade:1635
 #. 4.0/prefsui.glade:1635
 msgid "Disk IO"
 msgstr "磁碟讀寫"
 
 #. 6.4->settings-schema.json->pageDiskUsage->title
-#. 6.4/applet.js:570
+#. 6.4/applet.js:614
 #, fuzzy
 msgid "Disk Usage"
 msgstr "磁碟讀寫"
@@ -346,7 +350,7 @@ msgstr "磁碟讀寫"
 #. 6.4->settings-schema.json->sectionCPUColors->title
 #. 6.4->settings-schema.json->sectionMemoryColors->title
 #. 6.4->settings-schema.json->sectionDiskUsageColors->title
-#. 6.4/applet.js:571 3.0/prefsui.glade:411 3.0/prefsui.glade:584
+#. 6.4/applet.js:615 3.0/prefsui.glade:411 3.0/prefsui.glade:584
 #. 3.2/prefsui.glade:463 3.2/prefsui.glade:636 6.0/prefsui.glade:494
 #. 6.0/prefsui.glade:710 3.4/prefsui.glade:392 3.4/prefsui.glade:564
 #. 5.6/prefsui.glade:494 5.6/prefsui.glade:710 4.0/prefsui.glade:494
@@ -354,55 +358,55 @@ msgstr "磁碟讀寫"
 msgid "Colors"
 msgstr "顏色"
 
-#. 6.4/applet.js:714 6.4/applet.js:757 6.4/applet.js:771
+#. 6.4/applet.js:758 6.4/applet.js:801 6.4/applet.js:815
 msgid "root"
 msgstr ""
 
-#. 6.4/applet.js:1134 6.4/applet.js:1762 6.4/applet.js:1842 6.4/applet.js:1946
-#. 6.4/applet.js:1948
+#. 6.4/applet.js:1175 6.4/applet.js:1805 6.4/applet.js:1885 6.4/applet.js:1989
+#. 6.4/applet.js:1991
 #, fuzzy
 msgid "Disks"
 msgstr "磁碟讀寫"
 
-#. 6.4/applet.js:1372 6.4/applet.js:1491
+#. 6.4/applet.js:1413 6.4/applet.js:1532
 msgid "Available:"
 msgstr ""
 
-#. 6.4/applet.js:1396
+#. 6.4/applet.js:1437
 msgid "Buffers/Cache/Shared"
 msgstr ""
 
-#. 6.4/applet.js:1424 6.4/applet.js:1549 6.4/applet.js:1725 6.4/applet.js:1726
-#. 6.4/applet.js:1871 6.4/applet.js:1872 6.4/applet.js:1925
+#. 6.4/applet.js:1465 6.4/applet.js:1538 6.4/applet.js:1592 6.4/applet.js:1768
+#. 6.4/applet.js:1769 6.4/applet.js:1914 6.4/applet.js:1915 6.4/applet.js:1968
 msgid ":"
 msgstr ""
 
-#. 6.4/applet.js:1426 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 6.4/applet.js:1467 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 6.0/prefsui.glade:809 3.4/prefsui.glade:663 5.6/prefsui.glade:809
 #. 4.0/prefsui.glade:809
 msgid "Buffer"
 msgstr "緩衝區"
 
 #. 6.4->settings-schema.json->Mem_colorCache->description
-#. 6.4/applet.js:1426
+#. 6.4/applet.js:1467
 #, fuzzy
 msgid "Cache"
 msgstr "快取"
 
-#. 6.4/applet.js:1426
+#. 6.4/applet.js:1467
 msgid "Shared"
 msgstr ""
 
-#. 6.4/applet.js:1539
+#. 6.4/applet.js:1582
 msgid "CPUs"
 msgstr ""
 
-#. 6.4/applet.js:1696
+#. 6.4/applet.js:1739
 #, fuzzy
 msgid "Networks"
 msgstr "網路"
 
-#. 6.4/applet.js:1920
+#. 6.4/applet.js:1963
 msgid "Usage"
 msgstr ""
 
@@ -437,6 +441,10 @@ msgstr ""
 #. 6.4->settings-schema.json->sectionDiskOptions->title
 #. 6.4->settings-schema.json->sectionDiskUsageOptions->title
 msgid "Options"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionGeneralOrder->title
+msgid "Display Order"
 msgstr ""
 
 #. 6.4->settings-schema.json->sectionTooltip->title
@@ -582,6 +590,32 @@ msgstr ""
 #, fuzzy
 msgid "Remove Enlightenment of this applet"
 msgstr "重新載入小程式"
+
+#. 6.4->settings-schema.json->displayOrderLabel->description
+msgid ""
+"Choose the order in which the boxes of this applet are displayed in the "
+"panel.\n"
+"Do not change these names!"
+msgstr ""
+
+#. 6.4->settings-schema.json->displayOrder->columns->title
+#. 6.4->settings-schema.json->Net_devicesList->columns->title
+#. 6.4->settings-schema.json->Disk_devicesList->columns->title
+#. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
+msgid "Name"
+msgstr ""
+
+#. 6.4->settings-schema.json->displayOrder->description
+msgid "Display order in the panel"
+msgstr ""
+
+#. 6.4->settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
+#. 6.4->settings-schema.json->displayOrderReinit->description
+msgid "Reset"
+msgstr ""
 
 #. 6.4->settings-schema.json->CPU_labelOn->description
 #. 6.4->settings-schema.json->Mem_labelOn->description
@@ -822,12 +856,6 @@ msgstr "啟用"
 
 #. 6.4->settings-schema.json->Net_devicesList->columns->title
 msgid "⚠️ Id️"
-msgstr ""
-
-#. 6.4->settings-schema.json->Net_devicesList->columns->title
-#. 6.4->settings-schema.json->Disk_devicesList->columns->title
-#. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
-msgid "Name"
 msgstr ""
 
 #. 6.4->settings-schema.json->Net_devicesList->columns->title

@@ -15,6 +15,7 @@
       "title": "General",
       "sections": [
         "sectionGeneralOptions",
+        "sectionGeneralOrder",
         "sectionGeneralColors",
         "sectionTooltip"
       ]
@@ -89,6 +90,15 @@
         "useIconSize",
         "graphHeightPercent",
         "refreshRate"
+      ]
+    },
+    "sectionGeneralOrder": {
+      "type": "section",
+      "title": "Display Order",
+      "keys": [
+        "displayOrderLabel",
+        "displayOrder",
+        "displayOrderReinit"
       ]
     },
     "sectionGeneralColors": {
@@ -445,6 +455,41 @@
     "dependency": "isHighlighted",
     "callback": "_removeEnlightenment",
     "description": "Remove Enlightenment of this applet"
+  },
+  "displayOrderLabel": {
+    "type": "label",
+    "description": "Choose the order in which the boxes of this applet are displayed in the panel.\nDo not change these names!"
+  },
+  "displayOrder": {
+    "type": "list",
+    "default": [
+
+    ],
+    "columns": [
+      {
+        "id": "id",
+        "title": "Name",
+        "type": "string",
+        "expand-width": true
+      }
+    ],
+    "show-buttons": true,
+    "hidden-buttons": [
+      "+",
+      "-",
+      "edit"
+    ],
+    "description": "Display order in the panel"
+  },
+  "displayOrderApply": {
+    "type": "button",
+    "description": "Apply",
+    "callback": "controlDisplayOrder"
+  },
+  "displayOrderReinit": {
+    "type": "button",
+    "description": "Reset",
+    "callback": "reinitDisplayOrder"
   },
   "CPU_enabled": {
     "type": "switch",
