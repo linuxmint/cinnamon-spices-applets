@@ -1,3 +1,73 @@
+### v3.8.1~20260313
+  * Choose the order in which the boxes appear.
+
+### v3.8.0~20260312
+  * Can show the amounts (in Bytes) of Total, Used and Available memory in the tooltip.
+  * Same for Swap.
+  * Changes "min" values for all widths.
+
+### v3.7.2~20260309
+  * Display improvements.
+
+### v3.7.1~20260309
+  * Changing certain messages.
+
+### v3.7.0~20260308
+  * New section in **Network**: "Total amount or instant speed".
+  * The user can choose to display the *Instant network speed* or the *Total transfer amount* or... none.
+  * Values can be displayed permanently or only when hovering over this applet.
+  * The user can choose the corner in which to display these values.
+  * Fixes [#8350](https://github.com/linuxmint/cinnamon-spices-applets/issues/8350)
+  * New option in **CPU**: "Corner in which to display the temperature".
+
+### v3.6.1~20260307
+  * New option "Use symbols instead of words" in tooltip for Networks and Disks.
+  * Checking this option for Networks: Replaces 'Up' with '▲' and 'Down' with '▼'.
+  * Checking this option for Disks: Replaces 'Read' with '▲' and 'Write' with '▼'.
+
+### v3.6.0~20260306
+  * Fixes net data errors in tooltip.
+  * Fixes [#8362](https://github.com/linuxmint/cinnamon-spices-applets/issues/8362)
+
+### v3.5.2~20260220
+  * Adds colors for CPU Temperature warnings.
+  * Adds CPU Temperature to the tooltip.
+  * Fixes [#8348](https://github.com/linuxmint/cinnamon-spices-applets/issues/8348)
+  * Fixes [#8349](https://github.com/linuxmint/cinnamon-spices-applets/issues/8349)
+
+### v3.5.1~20260219
+  * Make some messages easier to understand.
+  * Button to apply the multiple of the width of each graph.
+
+### v3.5.0~20260219
+  * Ability to show the CPU temperature.
+
+### v3.4.2~20260213
+  * Ability to choose the radius of curvature in corners.
+  * Better detection of network devices.
+  * Fixes [#8311](https://github.com/linuxmint/cinnamon-spices-applets/issues/8311)
+
+### v3.4.1~20260208
+  * Smoother reading of all system data, even those related to networks.
+  * The box width can be adjusted in increments of 1, 2, 4, 8, 16, 32, and 64 pixels in the General tab of this applet's settings.
+
+### v3.4.0~20260203
+  * Smoother reading of most system data.
+  * Uses readFileAsync module.
+
+### v3.3.0~20260106
+  * Better takes into account HiDPI display.
+  * Changes graph height in pixels with % of panel height.
+  * Lets open the Configure submenu of context menu.
+  * Fixes [#8148](https://github.com/linuxmint/cinnamon-spices-applets/issues/8148)
+
+### v3.2.2~20260105
+  * Takes into account HiDPI display.
+
+### v3.2.1~20260104
+  * "Graph height (pixels)" cannot exceed the height of the panel.
+  * Fixes [#8148](https://github.com/linuxmint/cinnamon-spices-applets/issues/8148)
+
 ### v3.2.0~20251211
   * Added option "Graph height (pixels)". Many thanks to Alex Rock (@Pierstoval)!
   * Now compatible with Cinnamon 6.6.

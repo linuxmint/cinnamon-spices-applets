@@ -24,7 +24,7 @@ msgstr "hiányzó függőségek"
 
 #. applet.js:230
 msgid "View error details"
-msgstr ""
+msgstr "Hiba részleteinek megtekintése"
 
 #. applet.js:244
 msgid "Check for new updates"
@@ -50,7 +50,7 @@ msgstr "Nincsenek frissítendő csomagok"
 
 #. applet.js:299
 msgid "Error checking for updates"
-msgstr ""
+msgstr "Hiba a frissítések ellenőrzésekor"
 
 #. applet.js:307
 #, javascript-format
@@ -67,7 +67,7 @@ msgstr "Hiba"
 
 #. error-window.js:39
 msgid "Error log file not found."
-msgstr ""
+msgstr "A hibanaplófájl nem található."
 
 #. info-window.js:66 info-window.js:85
 msgid "No details available."

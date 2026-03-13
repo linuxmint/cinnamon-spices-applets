@@ -30,6 +30,7 @@ const {
 const UUID = "Exit@claudiux";
 const SCRIPTS_DIR = GLib.get_home_dir()+"/.local/share/cinnamon/applets/"+UUID+"/scripts";
 const CANSHUTDOWN_SCRIPT = SCRIPTS_DIR+"/can-shutdown.sh";
+const UNBLOCK_SCRIPT = SCRIPTS_DIR+"/unblock.sh";
 
 // l10n/translation support
 function _(str) {
@@ -345,7 +346,7 @@ class ExitApplet extends Applet.IconApplet {
                 item = new PopupMenu.PopupIconMenuItem(_("Restart Cinnamon"), "cinnamon-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
 
-                    this.menu.close(true);
+                    this.menu.close();
                     restartCinnamon(this.showOSD); // replaces: global.reexec_self();
                 });
                 this.menu.addMenuItem(item);
@@ -386,7 +387,7 @@ class ExitApplet extends Applet.IconApplet {
                 item.connect('activate', () => {
                     let screensaver_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.screensaver" });
                     let screensaver_dialog = Gio.file_new_for_path("/usr/bin/cinnamon-screensaver-command");
-                    this.menu.close(true);
+                    this.menu.close();
                     if (screensaver_dialog.query_exists(null)) {
                         if (screensaver_settings.get_boolean("ask-for-away-message")) {
                             launcher.spawnv(["cinnamon-screensaver-lock-dialog"]);
@@ -412,7 +413,8 @@ class ExitApplet extends Applet.IconApplet {
                         // LightDM
                         item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
                         item.connect('activate', () => {
-                            this.menu.close(true);
+                            this.menu.close();
+                            Util.spawnCommandLine(UNBLOCK_SCRIPT);
                             launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
                             launcher.spawnv(["dm-tool", "switch-to-greeter"]);
                         });
@@ -422,7 +424,8 @@ class ExitApplet extends Applet.IconApplet {
                         // MDM
                         item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
                         item.connect('activate', () => {
-                            this.menu.close(true);
+                            this.menu.close();
+                            Util.spawnCommandLine(UNBLOCK_SCRIPT);
                             launcher.spawnv(["mdmflexiserver"]);
                         });
                         this.menu.addMenuItem(item);
@@ -431,7 +434,8 @@ class ExitApplet extends Applet.IconApplet {
                         // GDM
                         item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
                         item.connect('activate', () => {
-                            this.menu.close(true);
+                            this.menu.close();
+                            Util.spawnCommandLine(UNBLOCK_SCRIPT);
                             launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
                             launcher.spawnv(["gdmflexiserver"]);
                         });
@@ -440,7 +444,7 @@ class ExitApplet extends Applet.IconApplet {
                 } else {
                     item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
                     item.connect('activate', () => {
-                        this.menu.close(true);
+                        this.menu.close();
                         launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
                     });
                     this.menu.addMenuItem(item);
@@ -456,17 +460,18 @@ class ExitApplet extends Applet.IconApplet {
             if (this.can_shutdown) {
                 item = new PopupMenu.PopupIconMenuItem(_("Log Out"), "system-log-out-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
-                    this.menu.close(true);
+                    this.menu.close();
+                    Util.spawnCommandLine(UNBLOCK_SCRIPT);
                     this.screensaver_inhibitor.uninhibit_screensaver();
                     launcher.spawnv(["cinnamon-session-quit", "--logout", this.logoutMode]);
-                    this.menu.close(true);
+                    this.menu.close();
                     restartCinnamon(false);
                 });
                 this.menu.addMenuItem(item);
             } else {
                 item = new PopupMenu.PopupIconMenuItem(_("Log Out"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
-                    this.menu.close(true);
+                    this.menu.close();
                     launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
                 });
                 this.menu.addMenuItem(item);
@@ -484,14 +489,15 @@ class ExitApplet extends Applet.IconApplet {
                     item = new PopupMenu.PopupIconMenuItem(_("Suspend") + "   [" + this.mkSuspend + "]", "system-suspend", St.IconType.SYMBOLIC);
                 }
                 item.connect('activate', () => {
-                    this.menu.close(true);
+                    this.menu.close();
+                    Util.spawnCommandLine(UNBLOCK_SCRIPT);
                     launcher.spawnv(["systemctl", "suspend"]);
                 });
                 this.menu.addMenuItem(item);
             } else {
                 item = new PopupMenu.PopupIconMenuItem(_("Suspend"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
-                    this.menu.close(true);
+                    this.menu.close();
                     launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
                 });
                 this.menu.addMenuItem(item);
@@ -506,7 +512,8 @@ class ExitApplet extends Applet.IconApplet {
                     item = new PopupMenu.PopupIconMenuItem(_("Hibernate") + "   [" + this.mkHibernate + "]", "system-suspend-hibernate", St.IconType.SYMBOLIC);
                 }
                 item.connect('activate', () => {
-                    this.menu.close(true);
+                    this.menu.close();
+                    Util.spawnCommandLine(UNBLOCK_SCRIPT);
                     if (this.hibernateNeedsSudo) {
                         launcher.spawnv(["pkexec", "sudo", "systemctl", "hibernate"]);
                     } else {
@@ -526,7 +533,7 @@ class ExitApplet extends Applet.IconApplet {
             } else {
                 item = new PopupMenu.PopupIconMenuItem(_("Hibernate"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
-                    this.menu.close(true);
+                    this.menu.close();
                     launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
                 });
                 this.menu.addMenuItem(item);
@@ -544,14 +551,15 @@ class ExitApplet extends Applet.IconApplet {
                     item = new PopupMenu.PopupIconMenuItem(_("Restart") + "   [" + this.mkRestart + "]", "view-refresh", St.IconType.SYMBOLIC);
                 }
                 item.connect('activate', () => {
-                    this.menu.close(true);
+                    this.menu.close();
+                    Util.spawnCommandLine(UNBLOCK_SCRIPT);
                     launcher.spawnv(["systemctl", "reboot"]);
                 });
                 this.menu.addMenuItem(item);
             } else {
                 item = new PopupMenu.PopupIconMenuItem(_("Restart"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
-                    this.menu.close(true);
+                    this.menu.close();
                     launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
                 });
                 this.menu.addMenuItem(item);
@@ -566,7 +574,8 @@ class ExitApplet extends Applet.IconApplet {
                     item = new PopupMenu.PopupIconMenuItem(_("Power Off") + "   [" + this.mkShutdown + "]", "system-shutdown-symbolic", St.IconType.SYMBOLIC);
                 }
                 item.connect('activate', () => {
-                    this.menu.close(true);
+                    this.menu.close();
+                    Util.spawnCommandLine(UNBLOCK_SCRIPT);
                     this.screensaver_inhibitor.uninhibit_screensaver();
                     launcher.spawnv(["systemctl", "poweroff"]);
                 });
@@ -574,7 +583,7 @@ class ExitApplet extends Applet.IconApplet {
             } else {
                 item = new PopupMenu.PopupIconMenuItem(_("Power Off"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
-                    this.menu.close(true);
+                    this.menu.close();
                     launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
                 });
                 this.menu.addMenuItem(item);

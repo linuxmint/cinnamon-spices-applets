@@ -402,6 +402,28 @@ export function ExtraFieldToUserUnits(extra_field: APIUniqueField, config: Confi
 	}
 }
 
+/**
+ * If returns undefined, unit text doesn't need to be shown (e.g. Beaufort).
+ *
+ * Returns the most common text representation of the wind speed unit.
+ * @param unit
+ * @returns
+ */
+export function WindSpeedUnitToText(unit: Exclude<WeatherWindSpeedUnits, "automatic">): string | undefined {
+	switch (unit) {
+		case "Beaufort":
+			return undefined;
+		case "mph":
+			return _("mph");
+		case "kph":
+			return _("km/h");
+		case "Knots":
+			return _("Knots");
+		case "m/s":
+			return _("m/s");
+	}
+}
+
 export function MPStoUserUnits(mps: number, units: WeatherWindSpeedUnits): string {
 	// Override wind units with our preference, takes Meter/Second wind speed
 	switch (units) {
@@ -977,8 +999,8 @@ export function setInterval(func: Function, ms: number): number {
 
 /**
  * Can have false negatives if the function cannot be initialised
- * @param f 
- * @returns 
+ * @param f
+ * @returns
  */
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
 export function isConstructor(f: any): boolean {

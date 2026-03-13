@@ -1,0 +1,8 @@
+{
+  "uuid": "combined-monitor@danipin",
+  "name": "Combined Monitor",
+  "description": "Zeigt CPU-Last, RAM-Auslastung und Netzwerktraffic in einem einzigen Applet.",
+  "last_edited_time": "1734300000", 
+  "version": "1.0.5",
+  "author": "d-atoshi" 
+}

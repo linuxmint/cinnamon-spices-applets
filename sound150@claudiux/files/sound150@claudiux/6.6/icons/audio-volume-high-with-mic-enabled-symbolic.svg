@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="16"
+   height="16"
+   version="1.1"
+   id="svg12"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs16">
+    <linearGradient
+       id="linearGradient3031">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop3029" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient3031"
+       id="linearGradient3033"
+       x1="-0.23810678"
+       y1="8"
+       x2="16.238132"
+       y2="8"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       xlink:href="#linearGradient3031"
+       id="linearGradient3255"
+       gradientUnits="userSpaceOnUse"
+       x1="-0.23810678"
+       y1="8"
+       x2="16.238132"
+       y2="8" />
+    <linearGradient
+       xlink:href="#linearGradient3031"
+       id="linearGradient3257"
+       gradientUnits="userSpaceOnUse"
+       x1="-0.23810678"
+       y1="8"
+       x2="16.238132"
+       y2="8" />
+  </defs>
+  <g
+     fill="#474747"
+     id="g10">
+    <path
+       d="M0 5h2.484l2.97-3H6v12h-.475l-3.04-3H0z"
+       color="#bebebe"
+       overflow="visible"
+       id="path2" />
+    <path
+       d="M15 8c0-2.814-1-5.172-2.586-7H11v1.48C12.265 4 13 5.7 13 8c0 2.3-.78 4-2 5.52V15h1.381C13.847 13.36 15 10.814 15 8z"
+       overflow="visible"
+       id="path4" />
+    <path
+       d="M12 8c0-2.166-.739-4.02-2-5H9v2c.607.789 1 1.76 1 3 0 1.241-.393 2.22-1 3v2h1c1.223-.995 2-2.873 2-5z"
+       overflow="visible"
+       id="path6" />
+    <path
+       d="M9 8c0-1.257-.312-2.216-1-3H7v6h1c.672-.837 1-1.742 1-3z"
+       font-family="Sans"
+       font-weight="400"
+       overflow="visible"
+       style="text-decoration-line:none;text-indent:0;text-transform:none"
+       id="path8" />
+  </g>
+  <g
+     id="layer7"
+     class="success"
+     fill="#009909"
+     transform="matrix(1,0,0,0.976554,-0.05780475,5.821869)">
+    <path
+       id="path6332"
+       d="M 16.07655,5.006928 A 4.8579774,5.426724 0 0 1 11.220535,10.433651 4.8579774,5.426724 0 0 1 6.3605968,5.0113114 4.8579774,5.426724 0 0 1 11.212687,-0.41979201 4.8579774,5.426724 0 0 1 16.076544,4.9981611"
+       class="success" />
+  </g>
+  <g
+     fill="#2e3436"
+     id="g8"
+     transform="matrix(0.6,0,0,0.6,6.4233026,5.9347539)"
+     style="fill:#cccccc">
+    <path
+       transform="translate(-112,32)"
+       d="m 119,-19 v 3 h 2 v -3 z"
+       font-family="sans-serif"
+       font-weight="400"
+       overflow="visible"
+       style="font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#cccccc"
+       id="path2-3" />
+    <path
+       transform="translate(-112,32)"
+       d="m 120,-32 c 1.662,0 3,1.338 3,3 v 5 c 0,1.662 -1.338,3 -3,3 -1.662,0 -3,-1.338 -3,-3 v -5 c 0,-1.662 1.338,-3 3,-3 z"
+       id="path4-6"
+       style="fill:#cccccc" />
+    <path
+       transform="translate(-112,32)"
+       d="m 114,-26 v 2.0098 c 0,3.3066 2.6897,5.9902 6,5.9902 3.3103,0 6,-2.6837 6,-5.9902 V -26 h -1.5 v 2.0098 c 0,2.5001 -1.9933,4.4902 -4.5,4.4902 -2.5067,0 -4.5,-1.9901 -4.5,-4.4902 V -26 Z"
+       font-family="sans-serif"
+       font-weight="400"
+       overflow="visible"
+       style="font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#cccccc"
+       id="path6-7" />
+  </g>
+</svg>

@@ -2,10 +2,57 @@ const Pango = imports.gi.Pango;
 const PangoCairo = imports.gi.PangoCairo;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const Gettext = imports.gettext;
 
 const UUID = "multicore-sys-monitor@ccadeptic23";
 
 const TAU = Math.PI * 2;
+
+const HOME_DIR = GLib.get_home_dir();
+Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
+function _(str) {
+    let customTrans = Gettext.dgettext(UUID, str);
+    if (customTrans.length > 0 && customTrans !== str)
+        return customTrans;
+    return Gettext.gettext(str);
+}
+
+function get_nemo_size_prefixes() {
+  let _SETTINGS_SCHEMA='org.nemo.preferences';
+  let _SETTINGS_KEY = 'size-prefixes';
+  let _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
+  return _interface_settings.get_string(_SETTINGS_KEY)
+}
+
+const formatBytesValueUnit = (bytes, decimals=2, withRate=true) => {
+    const spaces = 16;
+    let _rate = (withRate === true) ? rate : "";
+    if (bytes < 1) {
+        return '0'.padStart(spaces/2 - 1) + '.00'.padEnd(spaces/2 - 1) + 'B'.padStart(3, ' ') + _rate;
+    }
+    let dm = (decimals + 1) || 3;
+    let isBinary = get_nemo_size_prefixes().startsWith('base-2');
+    let k, sizes, i;
+    if (!isBinary) {
+        k = 1000;
+        sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        i = Math.min(Math.max(0, Math.trunc(Math.log10(bytes) / 3)), 8); // Math.log10(k) = 3.
+    } else {
+        k = 1024;
+        sizes = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+        i = Math.min(Math.max(0, Math.trunc(Math.log2(bytes) / 10)), 8); // Math.log2(k) = 10.
+    }
+    let value;
+    if (isNaN(i)) {
+        i = 0;
+        value = "0";
+    } else {
+        value = (bytes / Math.pow(k, i)).toPrecision(dm).toString();
+    }
+
+    return [value, sizes[i] + _rate];
+}
+
 
 function RGBa2rgba(color) {
     if (typeof color == "string" && color.includes(",")) {
@@ -101,15 +148,46 @@ class GraphVBars {
 
     //Draw Border
     let borderColor;
+    let borderRadius = this.applet.borderRadius;
     if (this.applet.borderOn) {
       if (providerName != 'SWAP') {
         borderColor = RGBa2rgba(this.applet.borderColor);
         areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
+        /**       A----------B
+         *       /            \
+         *      H              C
+         *      |              |
+         *      |              |
+         *      G              D
+         *       \            /
+         *        F----------E
+         * 
+        **/ 
+        const A = {x: borderRadius, y: 0};
+        const B = {x: width - borderRadius, y: 0};
+        const C = {x: width, y: borderRadius};
+        const D = {x: width, y: height - borderRadius};
+        const E = {x: width - borderRadius, y: height};
+        const F = {x: borderRadius, y: height};
+        const G = {x: 0, y: height - borderRadius};
+        const H = {x: 0, y: borderRadius};
 
-        areaContext.moveTo(0, 0);
-        areaContext.lineTo(width, 0);
-        areaContext.lineTo(width, height);
-        areaContext.lineTo(0, height);
+        if (borderRadius == 0) {
+          areaContext.moveTo(0, 0);
+          areaContext.lineTo(width, 0);
+          areaContext.lineTo(width, height);
+          areaContext.lineTo(0, height);
+        } else {
+          areaContext.moveTo(A.x, A.y);
+          areaContext.lineTo(B.x, B.y);
+          areaContext.curveTo(width, 0, width, 0, C.x, C.y);
+          areaContext.lineTo(D.x, D.y);
+          areaContext.curveTo(width, height, width, height, E.x, E.y);
+          areaContext.lineTo(F.x, F.y);
+          areaContext.curveTo(0, height, 0, height, G.x, G.y);
+          areaContext.lineTo(H.x, H.y);
+          areaContext.curveTo(0, 0, 0, 0, A.x, A.y);
+        }
 
         areaContext.closePath();
         areaContext.stroke();
@@ -190,23 +268,71 @@ class GraphVBars {
       }
       areaContext.setSourceRGBA(r, g, b, a);
 
-      this.drawRoundedRectangle(areaContext, vbarOffset, _height - vbarHeight, vbarWidth, vbarHeight, 1.5);
+      //~ this.drawRoundedRectangle(areaContext, vbarOffset, _height - vbarHeight, vbarWidth, vbarHeight, 1.5);
+      this.drawRoundedRectangle(areaContext, vbarOffset, _height - vbarHeight, vbarWidth, vbarHeight, 1.0);
       areaContext.fill();
     }
 
     // Label
+    let fontsize_px = Math.trunc(1 / 3 * _height);
+    let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
     if (labelsEnabled) {
       let pangolayout = area.create_pango_layout(providerName);
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
       pangolayout.set_width(_width);
-      let fontsize_px = Math.trunc(1 / 3 * _height);
-      let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
       pangolayout.set_font_description(fontdesc);
 
       areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       areaContext.moveTo(_width / 2, 0); //place text in center of graph area
       PangoCairo.layout_path(areaContext, pangolayout);
+      areaContext.fill();
+    }
+    
+    // Temperature
+    if (providerName != 'SWAP' && this.applet.CPU_showTemp && this.applet.CPU_temperature) {
+      let degrees = (this.applet.CPU_tempInFahrenheit) ? "°F" : "°C";
+      let pangolayout2 = area.create_pango_layout("" + this.applet.CPU_temperature + degrees);
+
+      let isRight = this.applet.CPU_tempCorner.includes("R");
+      let isTop = this.applet.CPU_tempCorner.includes("T");
+      if (isRight)
+        pangolayout2.set_alignment(Pango.Alignment.RIGHT);
+      else
+        pangolayout2.set_alignment(Pango.Alignment.LEFT);
+
+      pangolayout2.set_width(_width);
+      pangolayout2.set_font_description(fontdesc);
+      
+      let tempColor;
+      let CPU_tempHigh = 1 * this.applet.CPU_tempHigh;
+      let CPU_tempCrit = 1 * this.applet.CPU_tempCrit;
+      if (this.applet.CPU_tempInFahrenheit) {
+        CPU_tempHigh = 1.8 * CPU_tempHigh + 32;
+        CPU_tempCrit = 1.8 * CPU_tempCrit + 32;
+      }
+      if (1 * this.applet.CPU_temperature < 1 * CPU_tempHigh)
+        tempColor = RGBa2rgba(this.applet.CPU_tempColor);
+      else if (1 * this.applet.CPU_temperature < 1 * CPU_tempCrit)
+        tempColor = RGBa2rgba(this.applet.CPU_tempColorHigh);
+      else
+        tempColor = RGBa2rgba(this.applet.CPU_tempColorCrit);
+        
+      areaContext.setSourceRGBA(tempColor[0], tempColor[1], tempColor[2], tempColor[3]);
+      
+      if (isRight) {
+        if (isTop)
+          areaContext.moveTo(_width, 0); //place text in top right corner of graph area
+        else
+          areaContext.moveTo(_width, 2/3 * _height - 3); //place text in bottom right corner of graph area
+      } else {
+        if (isTop)
+          areaContext.moveTo(3, 0); //place text in top left corner of graph area
+        else
+          areaContext.moveTo(3, 2/3 * _height - 3); //place text in bottom left corner of graph area
+      }
+      
+      PangoCairo.layout_path(areaContext, pangolayout2);
       areaContext.fill();
     }
   }
@@ -260,14 +386,36 @@ class GraphVBars100 extends GraphVBars {
 
     //Draw Border
     let borderColor;
+    let borderRadius = this.applet.borderRadius;
     if (this.applet.borderOn) {
       if (providerName != 'SWAP') {
         borderColor = RGBa2rgba(this.applet.borderColor);
         areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
-        areaContext.moveTo(0, 0);
-        areaContext.lineTo(width, 0);
-        areaContext.lineTo(width, height);
-        areaContext.lineTo(0, height);
+        const A = {x: borderRadius, y: 0};
+        const B = {x: width - borderRadius, y: 0};
+        const C = {x: width, y: borderRadius};
+        const D = {x: width, y: height - borderRadius};
+        const E = {x: width - borderRadius, y: height};
+        const F = {x: borderRadius, y: height};
+        const G = {x: 0, y: height - borderRadius};
+        const H = {x: 0, y: borderRadius};
+        
+        if (borderRadius == 0) {
+          areaContext.moveTo(0, 0);
+          areaContext.lineTo(width, 0);
+          areaContext.lineTo(width, height);
+          areaContext.lineTo(0, height);
+        } else {
+          areaContext.moveTo(A.x, A.y);
+          areaContext.lineTo(B.x, B.y);
+          areaContext.curveTo(width, 0, width, 0, C.x, C.y);
+          areaContext.lineTo(D.x, D.y);
+          areaContext.curveTo(width, height, width, height, E.x, E.y);
+          areaContext.lineTo(F.x, F.y);
+          areaContext.curveTo(0, height, 0, height, G.x, G.y);
+          areaContext.lineTo(H.x, H.y);
+          areaContext.curveTo(0, 0, 0, 0, A.x, A.y);
+        }
 
         areaContext.closePath();
         areaContext.stroke();
@@ -374,14 +522,35 @@ class GraphPieChart {
 
     //Draw Border
     let borderColor;
+    let borderRadius = this.applet.borderRadius;
     if (this.applet.borderOn) {
       borderColor = RGBa2rgba(this.applet.borderColor);
       areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
+      const A = {x: borderRadius, y: 0};
+      const B = {x: width - borderRadius, y: 0};
+      const C = {x: width, y: borderRadius};
+      const D = {x: width, y: height - borderRadius};
+      const E = {x: width - borderRadius, y: height};
+      const F = {x: borderRadius, y: height};
+      const G = {x: 0, y: height - borderRadius};
+      const H = {x: 0, y: borderRadius};
 
-      areaContext.moveTo(0, 0);
-      areaContext.lineTo(width, 0);
-      areaContext.lineTo(width, height);
-      areaContext.lineTo(0, height);
+      if (borderRadius == 0) {
+        areaContext.moveTo(0, 0);
+        areaContext.lineTo(width, 0);
+        areaContext.lineTo(width, height);
+        areaContext.lineTo(0, height);
+      } else {
+        areaContext.moveTo(A.x, A.y);
+        areaContext.lineTo(B.x, B.y);
+        areaContext.curveTo(width, 0, width, 0, C.x, C.y);
+        areaContext.lineTo(D.x, D.y);
+        areaContext.curveTo(width, height, width, height, E.x, E.y);
+        areaContext.lineTo(F.x, F.y);
+        areaContext.curveTo(0, height, 0, height, G.x, G.y);
+        areaContext.lineTo(H.x, H.y);
+        areaContext.curveTo(0, 0, 0, 0, A.x, A.y);
+      }
 
       areaContext.closePath();
       areaContext.stroke();
@@ -594,14 +763,35 @@ class GraphLineChart {
 
     //Draw Border
     let borderColor;
+    let borderRadius = this.applet.borderRadius;
     if (this.applet.borderOn) {
       borderColor = RGBa2rgba(this.applet.borderColor);
       areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
+      const A = {x: borderRadius, y: 0};
+      const B = {x: width - borderRadius, y: 0};
+      const C = {x: width, y: borderRadius};
+      const D = {x: width, y: height - borderRadius};
+      const E = {x: width - borderRadius, y: height};
+      const F = {x: borderRadius, y: height};
+      const G = {x: 0, y: height - borderRadius};
+      const H = {x: 0, y: borderRadius};
 
-      areaContext.moveTo(0, 0);
-      areaContext.lineTo(width, 0);
-      areaContext.lineTo(width, height);
-      areaContext.lineTo(0, height);
+      if (borderRadius == 0) {
+        areaContext.moveTo(0, 0);
+        areaContext.lineTo(width, 0);
+        areaContext.lineTo(width, height);
+        areaContext.lineTo(0, height);
+      } else {
+        areaContext.moveTo(A.x, A.y);
+        areaContext.lineTo(B.x, B.y);
+        areaContext.curveTo(width, 0, width, 0, C.x, C.y);
+        areaContext.lineTo(D.x, D.y);
+        areaContext.curveTo(width, height, width, height, E.x, E.y);
+        areaContext.lineTo(F.x, F.y);
+        areaContext.curveTo(0, height, 0, height, G.x, G.y);
+        areaContext.lineTo(H.x, H.y);
+        areaContext.curveTo(0, 0, 0, 0, A.x, A.y);
+      }
 
       areaContext.closePath();
       areaContext.stroke();
@@ -682,6 +872,97 @@ class GraphLineChart {
       areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       areaContext.moveTo(width / 2, 0); //place text in center of graph area
       PangoCairo.layout_path(areaContext, pangolayout);
+      areaContext.fill();
+    }
+    
+    // Total
+    if (providerName == _('NET') && this.applet.Net_total_display) {
+      if (this.applet.Net_total_hovering_only && !this.applet.hovered) return;
+      const wantSpeed = this.applet.Net_total_type === "speed";
+      const refreshRate = 0.001 * this.applet.refreshRate;
+      var total = this.applet.networkProvider.totalAmountCurrent;
+      var previous = this.applet.networkProvider.totalAmountPrevious;
+      if (wantSpeed) {
+        total[0] = (total[0] - previous[0]) / refreshRate;
+        total[1] = (total[1] - previous[1]) / refreshRate;
+      }
+      let _down = formatBytesValueUnit(total[0], 2, false);
+      let down = _down[0].toString().trim() + " " + _down[1].trim();
+      if (_down[0] == 0) down = "0          ";
+      let _up = formatBytesValueUnit(total[1], 2, false);
+      let up = _up[0].toString().trim() + " " + _up[1].trim();
+      if (_up[0] == 0) up = "0";
+      
+      let isOnly = this.applet.Net_totalCorner.includes("O");
+      let isRight = this.applet.Net_totalCorner.includes("R");
+      let isTop = this.applet.Net_totalCorner.includes("T");
+      let downstr = '▼ ' + down;
+      let upstr = '▲ ' + up;
+      let downupstr = downstr + '  ' + upstr;
+      let pangolayout2 = null;
+      let pangolayout3 = null;
+      if (isOnly) {
+        pangolayout2 = area.create_pango_layout(downstr);
+        pangolayout3 = area.create_pango_layout(upstr);
+      } else {
+        pangolayout2 = area.create_pango_layout(downupstr);
+      }
+      pangolayout2.set_single_paragraph_mode(true);
+      if (pangolayout3 != null)
+        pangolayout3.set_single_paragraph_mode(true);
+      
+      if (isRight) {
+        pangolayout2.set_alignment(Pango.Alignment.RIGHT);
+        if (pangolayout3 != null)
+          pangolayout3.set_alignment(Pango.Alignment.RIGHT);
+      } else {
+        pangolayout2.set_alignment(Pango.Alignment.LEFT);
+        if (pangolayout3 != null)
+          pangolayout3.set_alignment(Pango.Alignment.LEFT);
+      }
+      
+      pangolayout2.set_ellipsize(Pango.EllipsizeMode.NONE);
+      pangolayout2.set_width(-1); // Required to display it on a single line.
+      pangolayout2.set_height(1 / 3 * _height);
+      if (pangolayout3 != null) {
+        pangolayout3.set_ellipsize(Pango.EllipsizeMode.NONE);
+        pangolayout3.set_width(-1); // Required to display it on a single line.
+        pangolayout3.set_height(1 / 3 * _height);
+      }
+      let fontsize_px = Math.trunc(1 / 3 * _height);
+      let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
+      pangolayout2.set_font_description(fontdesc);
+      if (pangolayout3 != null)
+        pangolayout3.set_font_description(fontdesc);
+      
+      areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
+      
+      if (isOnly) {
+        if (isRight) {
+          areaContext.moveTo(1 * width - downstr.length * 6, 0);
+          PangoCairo.layout_path(areaContext, pangolayout2);
+          areaContext.moveTo(1 * width  - upstr.length * 6, 2/3 * _height - 3);
+          PangoCairo.layout_path(areaContext, pangolayout3);
+        } else {
+          areaContext.moveTo(3, 0);
+          PangoCairo.layout_path(areaContext, pangolayout2);
+          areaContext.moveTo(3, 2/3 * _height - 3);
+          PangoCairo.layout_path(areaContext, pangolayout3);
+        }
+      } else {
+        if (isRight) {
+          if (isTop)
+            areaContext.moveTo(1 * width - downupstr.length * 6, 0); //place text in top right corner of graph area
+          else
+            areaContext.moveTo(1 * width  - downupstr.length * 6, 2/3 * _height - 3); //place text in bottom right corner of graph area
+        } else {
+          if (isTop)
+            areaContext.moveTo(3, 0); //place text in top left corner of graph area
+          else
+            areaContext.moveTo(3, 2/3 * _height - 3); //place text in bottom left corner of graph area
+        }
+        PangoCairo.layout_path(areaContext, pangolayout2);
+      }
       areaContext.fill();
     }
   }

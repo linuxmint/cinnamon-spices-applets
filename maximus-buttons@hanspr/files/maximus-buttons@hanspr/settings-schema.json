@@ -5,7 +5,7 @@
     },
     "buttons-style": {
         "type": "entry",
-        "description": "Window Buttons Style  (Example: title:minimize:maximize:close:icon)",
+        "description": "Window Buttons Style  (Example: minimize:maximize:close:icon)",
         "default": "minimize:maximize:close"
     },
     
@@ -23,11 +23,6 @@
             "Vimix": "Vimix"
         },
         "tooltip": "Please select a theme for window buttons"
-    },
-    "on-desktop-shutdown": {
-        "type": "switch",
-        "default": false,
-        "description": "Click on close: poweroff if desktop is focused"
     },
     "hide-buttons": {
         "type": "switch",

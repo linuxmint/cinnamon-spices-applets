@@ -1,0 +1,624 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": ["page-cpu", "page-temp", "page-ram", "page-swap", "page-profiles", "page-general"],
+    "page-cpu": {
+      "type": "page",
+      "title": "CPU",
+      "sections": ["section-cpu-display", "section-cpu-thresholds", "section-cpu-colors"]
+    },
+    "page-temp": {
+      "type": "page",
+      "title": "CPU Temperature",
+      "sections": ["section-temp-display", "section-temp-thresholds", "section-temp-colors"]
+    },
+    "page-ram": {
+      "type": "page", 
+      "title": "RAM",
+      "sections": ["section-ram-display", "section-ram-thresholds", "section-ram-colors"]
+    },
+    "page-swap": {
+      "type": "page",
+      "title": "SWAP", 
+      "sections": [
+        "section-swap-display", 
+        "section-swap-thresholds", 
+        "section-swap-colors"
+      ]
+    },
+    "page-profiles": {
+      "type": "page",
+      "title": "Profiles",
+      "sections": ["section-profile-management", "section-profile-duration"]
+    },
+    "page-general": {
+      "type": "page",
+      "title": "General",
+      "sections": ["section-order", "section-general"]
+    },
+    
+    "section-order": {
+      "type": "section",
+      "title": "Order of Metrics",
+      "keys": ["cpu-order", "temp-order", "ram-order", "swap-order"]
+    },
+    
+    "section-cpu-display": {
+      "type": "section",
+      "title": "Display",
+      "keys": ["show-cpu", "cpu-label-text", "cpu-symbol", "cpu-display-percentage"]
+    },
+    "section-cpu-thresholds": {
+      "type": "section",
+      "title": "Thresholds",
+      "keys": ["cpu-low", "cpu-med", "cpu-high"]
+    },
+    "section-cpu-colors": {
+      "type": "section",
+      "title": "Colors",
+      "keys": ["cpu-enable-colors", "cpu-color-low", "cpu-color-med", "cpu-color-high", "cpu-color-critical"]
+    },
+
+    "section-temp-display": {
+      "type": "section",
+      "title": "Display",
+      "keys": ["show-temp", "show-celsius-symbol", "temp-label-text", "temp-symbol", "temp-unit"]
+    },
+    "section-temp-thresholds": {
+      "type": "section",
+      "title": "Thresholds (in °C)",
+      "keys": ["temp-low", "temp-med", "temp-high"]
+    },
+    "section-temp-colors": {
+      "type": "section",
+      "title": "Colors",
+      "keys": ["temp-enable-colors", "temp-color-low", "temp-color-med", "temp-color-high", "temp-color-critical"]
+    },
+    
+    "section-ram-display": {
+      "type": "section",
+      "title": "Display",
+      "keys": ["show-ram", "ram-label-text", "ram-symbol", "ram-display-percentage", "ram-display-mode"]
+    },
+    "section-ram-thresholds": {
+      "type": "section",
+      "title": "Thresholds",
+      "keys": ["ram-low", "ram-med", "ram-high"]
+    },
+    "section-ram-colors": {
+      "type": "section",
+      "title": "Colors",
+      "keys": ["ram-enable-colors", "ram-color-low", "ram-color-med", "ram-color-high", "ram-color-critical"]
+    },
+    
+    "section-swap-display": {
+      "type": "section",
+      "title": "Display",
+      "keys": ["show-swap", "swap-label-text", "swap-symbol", "swap-only-when-used", "swap-display-percentage", "swap-display-mode"]
+    },
+    "section-swap-thresholds": {
+      "type": "section",
+      "title": "Thresholds",
+      "keys": ["swap-low", "swap-med", "swap-high"]
+    },
+    "section-swap-colors": {
+      "type": "section",
+      "title": "Colors",
+      "keys": ["swap-enable-colors", "swap-color-low", "swap-color-med", "swap-color-high", "swap-color-critical"]
+    },
+    
+    "section-general": {
+      "type": "section",
+      "title": "Settings",
+      "keys": ["update-interval", "enable-separator", "separator-text", "separator-color", "display-percentage"]
+    },
+    
+    "section-profile-management": {
+      "type": "section",
+      "title": "Profiles (Slots 1 to 3)",
+      "keys": [
+        "profile-1-name", 
+        "profile-1-button", 
+        "profile-2-name", 
+        "profile-2-button", 
+        "profile-3-name", 
+        "profile-3-button"
+      ]
+    },
+    
+    "section-profile-duration": {
+      "type": "section",
+      "title": "Global",
+      "keys": ["profile-message-duration"]
+    }
+  },
+
+  "show-cpu": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show CPU"
+  },
+  "cpu-label-text": {
+    "type": "entry",
+    "default": "CPU",
+    "description": "Text for CPU"
+  },
+  "cpu-symbol": {
+    "type": "entry",
+    "default": "",
+    "description": "Custom symbol/icon for CPU. Leave empty for text label."
+  },
+  "cpu-display-percentage": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show percentage sign (%) for CPU",
+    "tooltip": "If disabled, only the value (e.g., '45') is displayed without the percentage sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in the 'General' tab acts as a master switch."
+  },
+  "cpu-low": {
+    "type": "spinbutton",
+    "default": 50,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Threshold LOW",
+    "tooltip": "The LOW color is used below this value"
+  },
+  "cpu-med": {
+    "type": "spinbutton",
+    "default": 75,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Threshold MED",
+    "tooltip": "The MED color is used between LOW and MED"
+  },
+  "cpu-high": {
+    "type": "spinbutton",
+    "default": 85,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Threshold HIGH",
+    "tooltip": "The HIGH color is used between MED and HIGH"
+  },
+  "cpu-enable-colors": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Enable color change for CPU"
+  },
+  "cpu-color-low": {
+    "type": "colorchooser",
+    "default": "#ffffff",
+    "description": "Color LOW"
+  },
+  "cpu-color-med": {
+    "type": "colorchooser",
+    "default": "#ffff00",
+    "description": "Color MED"
+  },
+  "cpu-color-high": {
+    "type": "colorchooser",
+    "default": "#FFA500",
+    "description": "Color HIGH"
+  },
+  "cpu-color-critical": {
+    "type": "colorchooser",
+    "default": "#FF4500",
+    "description": "Color CRITICAL",
+    "tooltip": "Used above the HIGH threshold"
+  },
+
+  "show-temp": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Show Temperature",
+    "tooltip": "Enables the display of CPU temperature. **Important:** On many systems, installing the 'lm-sensors' package and running 'sudo sensors-detect' is necessary for this function to work correctly. Please refer to the instructions in the README.md."
+  },
+  "show-celsius-symbol": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show °C symbol",
+    "tooltip": "Controls whether the Celsius symbol (°C or °F) should be displayed after the value."
+  },
+  "temp-label-text": {
+    "type": "entry",
+    "default": "TEMP",
+    "description": "Text for Temperature"
+  },
+  "temp-symbol": {
+    "type": "entry",
+    "default": "",
+    "description": "Custom symbol/icon for Temperature. Leave empty for text label."
+  },
+  "temp-unit": {
+    "type": "combobox",
+    "default": 0,
+    "options": {
+      "Celsius (°C)": 0,
+      "Fahrenheit (°F)": 1
+    },
+    "description": "Unit of Measurement",
+    "tooltip": "Choose whether the temperature should be displayed in Celsius or Fahrenheit. Threshold values must be adjusted accordingly."
+  },
+  "temp-low": {
+    "type": "spinbutton",
+    "default": 55,
+    "min": 0,
+    "max": 150,
+    "step": 1,
+    "units": "°C",
+    "description": "Threshold LOW",
+    "tooltip": "The LOW color is used below this value (applies to °C and °F)"
+  },
+  "temp-med": {
+    "type": "spinbutton",
+    "default": 70,
+    "min": 0,
+    "max": 150,
+    "step": 1,
+    "units": "°C",
+    "description": "Threshold MED",
+    "tooltip": "The MED color is used between LOW and MED (applies to °C and °F)"
+  },
+  "temp-high": {
+    "type": "spinbutton",
+    "default": 85,
+    "min": 0,
+    "max": 150,
+    "step": 1,
+    "units": "°C",
+    "description": "Threshold HIGH",
+    "tooltip": "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+  },
+  "temp-enable-colors": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Enable color change for TEMP"
+  },
+  "temp-color-low": {
+    "type": "colorchooser",
+    "default": "#2CFF2C",
+    "description": "Color LOW (Green)"
+  },
+  "temp-color-med": {
+    "type": "colorchooser",
+    "default": "#FFA500",
+    "description": "Color MED (Orange)"
+  },
+  "temp-color-high": {
+    "type": "colorchooser",
+    "default": "#FF4500",
+    "description": "Color HIGH (Red-Orange)"
+  },
+  "temp-color-critical": {
+    "type": "colorchooser",
+    "default": "#FF0000",
+    "description": "Color CRITICAL (Red)",
+    "tooltip": "Used above the HIGH threshold"
+  },
+
+  "show-ram": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show RAM"
+  },
+  "ram-label-text": {
+    "type": "entry",
+    "default": "RAM",
+    "description": "Text for RAM"
+  },
+  "ram-symbol": {
+    "type": "entry",
+    "default": "",
+    "description": "Custom symbol/icon for RAM. Leave empty for text label."
+  },
+  "ram-display-percentage": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show percentage sign (%) for RAM",
+    "tooltip": "If disabled, only the value (e.g., '45') is displayed without the percentage sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in the 'General' tab acts as a master switch."
+  },
+  "ram-display-mode": {
+    "type": "combobox",
+    "default": 0,
+    "options": {
+      "Percentage Usage (%)": 0,
+      "Used Memory (MB/GB)": 1,
+      "Free Memory (MB/GB)": 2
+    },
+    "description": "Display Mode",
+    "tooltip": "Choose whether percentage usage or used/free memory in MB/GB should be displayed."
+  },
+  "ram-low": {
+    "type": "spinbutton",
+    "default": 50,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Threshold LOW",
+    "tooltip": "The LOW color is used below this value"
+  },
+  "ram-med": {
+    "type": "spinbutton",
+    "default": 75,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Threshold MED",
+    "tooltip": "The MED color is used between LOW and MED"
+  },
+  "ram-high": {
+    "type": "spinbutton",
+    "default": 85,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Threshold HIGH",
+    "tooltip": "The HIGH color is used between MED and HIGH"
+  },
+  "ram-enable-colors": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Enable color change for RAM"
+  },
+  "ram-color-low": {
+    "type": "colorchooser",
+    "default": "#ffffff",
+    "description": "Color LOW"
+  },
+  "ram-color-med": {
+    "type": "colorchooser",
+    "default": "#ffff00",
+    "description": "Color MED"
+  },
+  "ram-color-high": {
+    "type": "colorchooser",
+    "default": "#FFA500",
+    "description": "Color HIGH"
+  },
+  "ram-color-critical": {
+    "type": "colorchooser",
+    "default": "#FF4500",
+    "description": "Color CRITICAL",
+    "tooltip": "Used above the HIGH threshold"
+  },
+
+  "show-swap": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show SWAP"
+  },
+  "swap-label-text": {
+    "type": "entry",
+    "default": "SWAP",
+    "description": "Text for SWAP"
+  },
+  "swap-symbol": {
+    "type": "entry",
+    "default": "",
+    "description": "Custom symbol/icon for SWAP. Leave empty for text label."
+  },
+  "swap-only-when-used": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Only show SWAP when used",
+    "tooltip": "If active, it only shows SWAP when usage is greater than 0%."
+  },
+  "swap-display-percentage": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show percentage sign (%) for SWAP",
+    "tooltip": "If disabled, only the value (e.g., '45') is displayed without the percentage sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in the 'General' tab acts as a master switch."
+  },
+  "swap-display-mode": {
+    "type": "combobox",
+    "default": 0,
+    "options": {
+      "Percentage Usage (%)": 0,
+      "Used Memory (MB/GB)": 1,
+      "Free Memory (MB/GB)": 2
+    },
+    "description": "Display Mode",
+    "tooltip": "Choose whether percentage usage or used/free memory in MB/GB should be displayed."
+  },
+  "swap-enable-colors": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Enable color change for SWAP"
+  },
+  "swap-low": {
+    "type": "spinbutton",
+    "default": 30,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Threshold LOW",
+    "tooltip": "If the value is less than or equal to the LOW threshold, the LOW color is used."
+  },
+  "swap-med": {
+    "type": "spinbutton",
+    "default": 60,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Threshold MED",
+    "tooltip": "If the value is greater than LOW and less than or equal to the MED threshold, the MED color is used."
+  },
+  "swap-high": {
+    "type": "spinbutton",
+    "default": 80,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Threshold HIGH",
+    "tooltip": "If the value is greater than MED and less than or equal to the HIGH threshold, the HIGH color is used."
+  },
+  "swap-color-low": {
+    "type": "colorchooser",
+    "default": "#ffffff",
+    "description": "Color LOW"
+  },
+  "swap-color-med": {
+    "type": "colorchooser",
+    "default": "#ffff00",
+    "description": "Color MED"
+  },
+  "swap-color-high": {
+    "type": "colorchooser",
+    "default": "#FFA500",
+    "description": "Color HIGH"
+  },
+  "swap-color-critical": {
+    "type": "colorchooser",
+    "default": "#FF4500",
+    "description": "Color CRITICAL",
+    "tooltip": "Used above the HIGH threshold"
+  },
+
+  "cpu-order": {
+    "type": "combobox",
+    "default": 1,
+    "options": {
+      "Position 1 (Left)": 1,
+      "Position 2": 2,
+      "Position 3": 3,
+      "Position 4 (Right)": 4
+    },
+    "description": "CPU Position",
+    "tooltip": "Defines the display position of CPU. The position is automatically swapped with the metric at the same position."
+  },
+  "temp-order": {
+    "type": "combobox",
+    "default": 2,
+    "options": {
+      "Position 1 (Left)": 1,
+      "Position 2": 2,
+      "Position 3": 3,
+      "Position 4 (Right)": 4
+    },
+    "description": "TEMP Position",
+    "tooltip": "Defines the display position of TEMP. The position is automatically swapped with the metric at the same position."
+  },
+  "ram-order": {
+    "type": "combobox",
+    "default": 3,
+    "options": {
+      "Position 1 (Left)": 1,
+      "Position 2": 2,
+      "Position 3": 3,
+      "Position 4 (Right)": 4
+    },
+    "description": "RAM Position",
+    "tooltip": "Defines the display position of RAM. The position is automatically swapped with the metric at the same position."
+  },
+  "swap-order": {
+    "type": "combobox",
+    "default": 4,
+    "options": {
+      "Position 1 (Left)": 1,
+      "Position 2": 2,
+      "Position 3": 3,
+      "Position 4 (Right)": 4
+    },
+    "description": "SWAP Position",
+    "tooltip": "Defines the display position of SWAP. The position is automatically swapped with the metric at the same position."
+  },
+
+  "update-interval": {
+    "type": "spinbutton",
+    "default": 1000,
+    "min": 500,
+    "max": 300000,
+    "step": 500,
+    "units": "ms",
+    "description": "Update Interval (ms)"
+  },
+  "enable-separator": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show separator between metrics"
+  },
+  "separator-text": {
+    "type": "entry",
+    "default": "|",
+    "description": "Separator Text"
+  },
+  "separator-color": {
+    "type": "colorchooser",
+    "default": "#ffffff",
+    "description": "Separator Color"
+  },
+  "display-percentage": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show percentage sign (%) (Master Switch)",
+    "tooltip": "If disabled, only the value (e.g., '45') is displayed for all percentage displays without the percentage sign (e.g., '45%'). Individual switches for CPU/RAM/SWAP must also be active."
+  },
+
+  "profile-message-duration": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 1,
+    "max": 60,
+    "step": 1,
+    "units": "Seconds",
+    "description": "Profile Message Duration (Seconds)",
+    "tooltip": "How long should the message ('Profile saved', 'Profile active') be displayed in the panel."
+  },
+  "profile-1-name": {
+    "type": "entry",
+    "default": "Slot 1 (Standard)",
+    "description": "Profile 1 Name",
+    "tooltip": "Enter a custom profile name in the text field!"
+  },
+  "profile-1-button": {
+    "type": "dummy",
+    "description": "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+  },
+  "profile-1-data": {
+    "type": "entry",
+    "default": "{}",
+    "description": "Saved data for Profile 1 (internal)"
+  },
+  
+  "profile-2-name": {
+    "type": "entry",
+    "default": "Slot 2 (Empty)",
+    "description": "Profile 2 Name",
+    "tooltip": "Enter a custom profile name in the text field!"
+  },
+  "profile-2-button": {
+    "type": "dummy",
+    "description": "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+  },
+  "profile-2-data": {
+    "type": "entry",
+    "default": "{}",
+    "description": "Saved data for Profile 2 (internal)"
+  },
+
+  "profile-3-name": {
+    "type": "entry",
+    "default": "Slot 3 (Empty)",
+    "description": "Profile 3 Name",
+    "tooltip": "Enter a custom profile name in the text field!"
+  },
+  "profile-3-button": {
+    "type": "dummy",
+    "description": "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+  },
+  "profile-3-data": {
+    "type": "entry",
+    "default": "{}",
+    "description": "Saved data for Profile 3 (internal)"
+  }
+}

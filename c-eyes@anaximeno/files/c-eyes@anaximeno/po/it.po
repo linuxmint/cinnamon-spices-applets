@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-22 04:46-0100\n"
+"POT-Creation-Date: 2026-03-01 21:29-0100\n"
 "PO-Revision-Date: 2025-01-03 15:06+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -34,19 +34,19 @@ msgstr ""
 "nel modulo delle impostazioni delle estensioni di Cinnamon per le versioni "
 "di Cinnamon >= 5.4"
 
-#. 4.2/applet.js:396 5.4/applet.js:393
+#. 4.2/applet.js:396 5.4/applet.js:392
 msgid "click to deactivate the eye"
 msgstr "fare clic per disattivare l'occhio"
 
-#. 4.2/applet.js:396 5.4/applet.js:393
+#. 4.2/applet.js:396 5.4/applet.js:392
 msgid "click to activate the eye"
 msgstr "fare clic per attivare l'occhio"
 
-#. 4.2/applet.js:397 5.4/applet.js:394
+#. 4.2/applet.js:397 5.4/applet.js:393
 msgid "TIP"
 msgstr "SUGGERIMENTO"
 
-#. 6.2/applet.js:48
+#. 6.2/applet.js:42
 msgid "Hey, I saw that!"
 msgstr "Ehi, l'ho visto!"
 
@@ -69,6 +69,7 @@ msgstr "Occhio"
 
 #. 4.2->settings-schema.json->effects->title
 #. 5.4->settings-schema.json->effects->title
+#. 6.2->settings-schema.json->effects-section->title
 msgid "Effects"
 msgstr "Effeti"
 
@@ -133,7 +134,6 @@ msgstr "px"
 
 #. 4.2->settings-schema.json->eye-margin->description
 #. 5.4->settings-schema.json->eye-margin->description
-#. 6.2->settings-schema.json->margin->description
 msgid "Margin"
 msgstr "Margine"
 
@@ -226,8 +226,6 @@ msgstr "Colore Pupilla attivato"
 #. 4.2->settings-schema.json->fill-bulb-color-painting->description
 #. 5.4->settings-schema.json->fill-lids-color-painting->description
 #. 5.4->settings-schema.json->fill-bulb-color-painting->description
-#. 6.2->settings-schema.json->fill-lids-color-painting->description
-#. 6.2->settings-schema.json->fill-bulb-color-painting->description
 msgid "Fill the Colors Inside the Eye"
 msgstr "Riempi i colori all'interno dell'occhio"
 
@@ -430,6 +428,26 @@ msgstr "Ottimizzazioni"
 msgid "Eye Mode"
 msgstr "Modalità occhio"
 
+#. 6.2->settings-schema.json->pupil-shape->description
+msgid "Pupil Shape"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Round"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Vertical"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Horizontal"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Star"
+msgstr ""
+
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
 msgstr "Messaggio di descrizione comando al passaggio del mouse"
@@ -454,6 +472,25 @@ msgstr "Prestazioni"
 msgid "Manual"
 msgstr "Manuale"
 
+#. 6.2->settings-schema.json->margin->description
+#, fuzzy
+msgid "Width"
+msgstr "Larghezza Linea"
+
+#. 6.2->settings-schema.json->margin->tooltip
+msgid ""
+"This setting controls the width of the area around the eye within which the "
+"eye will follow the mouse cursor. Positive values increase the area, while "
+"negative values decrease it."
+msgstr ""
+
+#. 6.2->settings-schema.json->padding->tooltip
+msgid ""
+"This setting controls the padding around the eye within which the eye will "
+"follow the mouse cursor. Increasing the padding decreases the radius of the "
+"eye, while decreasing the padding increases the radius of the eye."
+msgstr ""
+
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
 msgstr "Usa colori alternativi per l'occhio"
@@ -477,3 +514,57 @@ msgstr "Colore iride"
 #. 6.2->settings-schema.json->pupil-color->description
 msgid "Pupil Color"
 msgstr "Colore pupilla"
+
+#. 6.2->settings-schema.json->blink-effect-enabled->description
+#, fuzzy
+msgid "Blink Effect"
+msgstr "Effeti"
+
+#. 6.2->settings-schema.json->blink-period->units
+#. 6.2->settings-schema.json->blink-gap->units
+msgid "seconds"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-period->description
+msgid "Blink Period"
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-period->tooltip
+msgid ""
+"This setting controls the duration of a full blink cycle (closing and "
+"opening)."
+msgstr ""
+
+#. 6.2->settings-schema.json->blink-gap->description
+#, fuzzy
+msgid "Blink Gap"
+msgstr "Battito di ciglia"
+
+#. 6.2->settings-schema.json->blink-gap->tooltip
+msgid "This setting controls the time gap between two consecutive blinks."
+msgstr ""
+
+#. 6.2->settings-schema.json->sleep-effect-enabled->description
+#, fuzzy
+msgid "Sleep Effect"
+msgstr "Abilita Efetti"
+
+#. 6.2->settings-schema.json->sleep-effect-enabled->tooltip
+msgid ""
+"When enabled, the eyes will slowly close when the system is idle and open "
+"again when activity is detected."
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->units
+msgid "minutes"
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->description
+msgid "Idle Delay"
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->tooltip
+msgid ""
+"This setting controls the time of inactivity (no mouse or keyboard input) "
+"after which the system is considered idle."
+msgstr ""

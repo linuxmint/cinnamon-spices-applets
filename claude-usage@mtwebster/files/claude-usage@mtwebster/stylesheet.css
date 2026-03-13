@@ -1,0 +1,15 @@
+.claude-usage-label {
+    font-weight: bold;
+}
+
+.claude-usage-green {
+    color: #5da271;
+}
+
+.claude-usage-yellow {
+    color: #ffaa00;
+}
+
+.claude-usage-red {
+    color: #ff0000;
+}

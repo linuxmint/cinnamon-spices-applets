@@ -992,11 +992,7 @@ class CobiAppButton {
         this._workspace.menuManager.removeMenu(this.menu);
       }
     }
-    this._updateTooltip();
-    this._updateNumber();
-    this._updateLabelVisibility();
-    this._updateVisibility();
-    this._updateProgress();
+    this.updateView();
   }
   
   _updateCurrentWindow() {
@@ -1287,6 +1283,8 @@ class CobiAppButton {
     this._updateVisibility();
     this._updateTooltip();
     this.updateIcon();
+    this._updateLabelVisibility();
+    this._updateProgress();
   }
   
   destroy() {

@@ -1,0 +1,81 @@
+# RSSDOCK
+# This file is put in the public domain.
+# lyk4s5, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: rssdock@lyk4s5 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-31 14:40+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#. applet.js:23
+msgid "Loading Newsticker..."
+msgstr "Cargando el ticker de noticias..."
+
+#. applet.js:86
+msgid "No RSS source configured"
+msgstr "No hay ninguna fuente RSS configurada"
+
+#. metadata.json->name
+msgid "RSSDock"
+msgstr "RSSDock"
+
+#. metadata.json->description
+msgid "Multi-source RSS news ticker with smooth scrolling and time stamps."
+msgstr ""
+"Ticker de noticias RSS de múltiples fuentes con desplazamiento fluido y "
+"marcas de tiempo."
+
+#. settings-schema.json->news_sources->description
+msgid "NEWS Sources"
+msgstr "Fuentes de NOTICIAS"
+
+#. settings-schema.json->news_sources->columns->title
+msgid "Source Name"
+msgstr "Nombre de la fuente"
+
+#. settings-schema.json->news_sources->columns->title
+msgid "RSS URL"
+msgstr "URL del RSS"
+
+#. settings-schema.json->update_interval->units
+msgid "minutes"
+msgstr "minutos"
+
+#. settings-schema.json->update_interval->description
+msgid "Update Frequency"
+msgstr "Frecuencia de actualización"
+
+#. settings-schema.json->scroll_limit->description
+msgid "Visible Characters"
+msgstr "Caracteres visibles"
+
+#. settings-schema.json->width_multiplier->description
+msgid "Width Multiplier"
+msgstr "Multiplicador de anchura"
+
+#. settings-schema.json->scroll_speed->units
+msgid "ms"
+msgstr "ms"
+
+#. settings-schema.json->scroll_speed->description
+msgid "Speed (Low=Fast)"
+msgstr "Velocidad (Baja = Rápida)"
+
+#. settings-schema.json->vertical_offset->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->vertical_offset->description
+msgid "Vertical Offset"
+msgstr "Desplazamiento vertical"
