@@ -1411,8 +1411,10 @@ class MemDataProvider {
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
         if (this.applet.Mem_showBytesInTooltip) {
-            toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(formatBytesValueUnit(this.memTotal * this.currentReadings[0], 2, false)[0]).toFixed(2), 2).padStart(6, ' ') + " " + unitMemTotal.padStart(6, ' ') + '\n';
-            toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(formatBytesValueUnit(this.memTotal * (1 - this.currentReadings[0]), 2, false)[0]).toFixed(2), 2).padStart(6, ' ') + " " + unitMemTotal.padStart(6, ' ') + '\n';
+            let [strMemUsed, unitMemUsed] = formatBytesValueUnit(this.memTotal * this.currentReadings[0], 2, false);
+            let [strMemAvail, unitMemAvail] = formatBytesValueUnit(this.memTotal * (1 - this.currentReadings[0]), 2, false);
+            toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(strMemUsed).toFixed(2), 2).padStart(6, ' ') + " " + unitMemUsed.padStart(6, ' ') + '\n';
+            toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(strMemAvail).toFixed(2), 2).padStart(6, ' ') + " " + unitMemAvail.padStart(6, ' ') + '\n';
         }
         let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
         let percentChar = "%";

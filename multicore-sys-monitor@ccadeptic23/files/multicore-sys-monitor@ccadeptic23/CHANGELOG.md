@@ -1,3 +1,6 @@
+### v3.8.3~20260314
+  * Bug fix: The units of measurement for used memory and available memory are now correct.
+
 ### v3.8.2~20260314
   * Adds option 'Enable Swap' in the Memory tab. 
 
