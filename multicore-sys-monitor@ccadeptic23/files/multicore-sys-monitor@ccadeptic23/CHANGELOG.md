@@ -1,3 +1,6 @@
+### v3.8.2~20260314
+  * Adds option 'Enable Swap' in the Memory tab. 
+
 ### v3.8.1~20260313
   * Choose the order in which the boxes appear.
 
