@@ -175,6 +175,7 @@
       "title": "Options",
       "keys": [
         "Mem_enabled",
+        "Swap_enabled",
         "Mem_labelOn",
         "Mem_squared",
         "Mem_width",
@@ -643,6 +644,11 @@
     "type": "switch",
     "default": true,
     "description": "Enable"
+  },
+  "Swap_enabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable Swap"
   },
   "Mem_labelOn": {
     "type": "switch",
