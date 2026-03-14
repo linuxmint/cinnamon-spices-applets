@@ -1,0 +1,247 @@
+# MULTI-CORE SYSTEM MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# ccadeptic23, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-03-14 12:09+0100\n"
+"PO-Revision-Date: 2025-08-27 18:50+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 6.4/applet.js:51
+msgid "Swap:"
+msgstr ""
+
+#. 6.4/applet.js:77
+msgid "DISK USAGE"
+msgstr ""
+
+#. 6.4/applet.js:610
+msgid "Configure..."
+msgstr ""
+
+#. 6.4/applet.js:1415 6.4/applet.js:1534
+msgid "Available:"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionGeneralOrder->title
+msgid "Display Order"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionTooltip->title
+#. 6.4->settings-schema.json->sectionNetworkTooltip->title
+#. 6.4->settings-schema.json->sectionDiskTooltip->title
+msgid "Tooltip"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionCPUTemperature->title
+msgid "CPU Temperature"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionNetworkTotal->title
+msgid "Total amount or instant speed"
+msgstr ""
+
+#. 6.4->settings-schema.json->borderRadius->description
+msgid "Radius of curvature in corners"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStep->options
+msgid "1px"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStep->options
+msgid "2px"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStep->options
+msgid "4px"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStep->options
+msgid "8px"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStep->options
+msgid "16px"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStep->options
+msgid "32px"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStep->options
+msgid "64px"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStep->description
+msgid "The width of each graphic must be a multiple of:"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphStepApply->description
+msgid "Apply this multiple"
+msgstr ""
+
+#. 6.4->settings-schema.json->graphHeightPercent->description
+msgid "Graph height (% of panel height)"
+msgstr ""
+
+#. 6.4->settings-schema.json->percentAtEndOfLine->description
+msgid "Place % at the very end of the line"
+msgstr ""
+
+#. 6.4->settings-schema.json->displayOrderLabel->description
+msgid ""
+"Choose the order in which the boxes of this applet are displayed in the "
+"panel.\n"
+"Do not change these names!"
+msgstr ""
+
+#. 6.4->settings-schema.json->displayOrder->description
+msgid "Display order in the panel"
+msgstr ""
+
+#. 6.4->settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
+#. 6.4->settings-schema.json->displayOrderReinit->description
+msgid "Reset"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_showTemp->description
+msgid "Show the CPU temperature"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempInFahrenheit->description
+msgid "Fahrenheit degrees"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempPath->description
+msgid "Path to the system file used to check the CPU temperature"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempHigh->description
+msgid "High CPU Temperature (°C)"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempHigh->tooltip
+msgid "Refer to your CPU documentation."
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempCrit->description
+msgid "Critical CPU Temperature (°C)"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempCrit->tooltip
+msgid ""
+"Refer to your CPU documentation.\n"
+"Must be greater than the High CPU Temperature."
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempCorner->description
+msgid "Corner in which to display the temperature"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempCorner->options
+#. 6.4->settings-schema.json->Net_totalCorner->options
+msgid "Top Right"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempCorner->options
+#. 6.4->settings-schema.json->Net_totalCorner->options
+msgid "Top Left"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempCorner->options
+#. 6.4->settings-schema.json->Net_totalCorner->options
+msgid "Bottom Right"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempCorner->options
+#. 6.4->settings-schema.json->Net_totalCorner->options
+msgid "Bottom Left"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempColor->description
+msgid "Normal Temperature Color"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempColorHigh->description
+msgid "High Temperature Color"
+msgstr ""
+
+#. 6.4->settings-schema.json->CPU_tempColorCrit->description
+msgid "Critical Temperature Color"
+msgstr ""
+
+#. 6.4->settings-schema.json->Swap_enabled->description
+msgid "Enable Swap"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_showBytesInTooltip->description
+msgid ""
+"Show the amounts (in Bytes) of Total, Used and Available memory in the "
+"tooltip"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_colorBuffers->description
+msgid "Buffers"
+msgstr ""
+
+#. 6.4->settings-schema.json->Net_symbolsInTooltip->description
+#. 6.4->settings-schema.json->Disk_symbolsInTooltip->description
+msgid "Use symbols instead of words"
+msgstr ""
+
+#. 6.4->settings-schema.json->Net_devicesList->columns->title
+msgid "Part of total"
+msgstr ""
+
+#. 6.4->settings-schema.json->Net_total_type->description
+msgid "Total amount or speed"
+msgstr ""
+
+#. 6.4->settings-schema.json->Net_total_type->options
+msgid "Total transfer amount (Bytes)"
+msgstr ""
+
+#. 6.4->settings-schema.json->Net_total_type->options
+msgid "Instant network speed (Bytes per second)"
+msgstr ""
+
+#. 6.4->settings-schema.json->Net_total_display->description
+msgid "Display that"
+msgstr ""
+
+#. 6.4->settings-schema.json->Net_total_display->tooltip
+msgid ""
+"Be sure to check at least one “Part of total” box among the enabled devices."
+msgstr ""
+
+#. 6.4->settings-schema.json->Net_total_hovering_only->description
+msgid "Only display when hovering over this applet"
+msgstr ""
+
+#. 6.4->settings-schema.json->Net_totalCorner->description
+msgid "Corner in which to display that"
+msgstr ""
+
+#. 6.4->settings-schema.json->Net_totalCorner->options
+msgid "Right Only"
+msgstr ""
+
+#. 6.4->settings-schema.json->Net_totalCorner->options
+msgid "Left Only"
+msgstr ""

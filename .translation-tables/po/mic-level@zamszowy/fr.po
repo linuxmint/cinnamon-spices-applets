@@ -1,0 +1,95 @@
+# MICROPHONE LEVEL MONITOR
+# This file is put in the public domain.
+# zamszowy, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mic-level@zamszowy 1.1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-08-29 20:46+0200\n"
+"PO-Revision-Date: 2025-10-13 18:55+0200\n"
+"Last-Translator: FabRCT\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. applet.js:86
+msgid "Click so switch to HFP profile"
+msgstr "Cliquez pour passer au profil HFP"
+
+#. applet.js:88
+msgid "Click so switch to A2DP profile"
+msgstr "Cliquez pour passer au profil A2DPP"
+
+#. metadata.json->name
+msgid "Microphone level monitor"
+msgstr "Contrôleur de microphone"
+
+#. metadata.json->description
+msgid "Monitors microphone level"
+msgstr "Contrôle le niveau du microphone"
+
+#. settings-schema.json->page1->title
+msgid "Settings"
+msgstr "Paramètres"
+
+#. settings-schema.json->section0->title
+msgid "Timings (seconds)"
+msgstr "Délais (secondes)"
+
+#. settings-schema.json->section1->title
+msgid "Bluetooth devices"
+msgstr "Interfaces Bluetooth"
+
+#. settings-schema.json->section2->title
+msgid "Keybindings"
+msgstr "Raccourcis clavier"
+
+#. settings-schema.json->measure-time->description
+msgid "For how long to record a sample and report result"
+msgstr "Temps pour enregistrer un échantillon et présenter le résultat"
+
+#. settings-schema.json->sleep-time->description
+msgid "How long to wait before recoring another sample"
+msgstr "Temps avant d'enregistrer un autre échantillon"
+
+#. settings-schema.json->enable-bt-only->description
+msgid "Show applet only when BT device is active and has HFP profile enabled"
+msgstr ""
+"Afficher l'applet uniquement lorsque le périphérique BT est actif et que le "
+"profil HFP est activé"
+
+#. settings-schema.json->enable-bt-only->tooltip
+msgid ""
+"This option disables keybinding, since it would interfere with the automatic "
+"detection of HFP profile"
+msgstr ""
+"Cette option désactive le raccourci clavier, car il interfère avec la "
+"détection automatique du profil HFP"
+
+#. settings-schema.json->enable-click-to-switch-bt-profile->description
+msgid "Enable click on applet to switch between HFP and A2DP profiles"
+msgstr ""
+"Permettre de basculer entre les profils HFP et A2DP d'un clic sur l'applet"
+
+#. settings-schema.json->enable-keybind->description
+msgid "Enable keybind to enable/disable the applet"
+msgstr "Activer le raccourci clavier pour activer/désactiver l'applet"
+
+#. settings-schema.json->enable-keybind->tooltip
+#. settings-schema.json->keybind-toggle->tooltip
+msgid ""
+"This option will not work if optoon to show applet only when BT device is on "
+"as it would interfere with the automatic detection of HFP profile"
+msgstr ""
+"Cette option ne fonctionnera pas si l'option d'affichage de l'applet n'est "
+"activée que lorsque l'appareil BT est en marche, car elle interférerait avec "
+"la détection automatique du profil HFP"
+
+#. settings-schema.json->keybind-toggle->description
+msgid "Set key for toggling enable state of the applet"
+msgstr "Définir la combinaison de touches pour activer/désactiver l'applet"

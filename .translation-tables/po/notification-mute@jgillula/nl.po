@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-26 05:28-0500\n"
+"PO-Revision-Date: 2024-04-21 13:55+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:21
+msgid "Currently preventing notifications"
+msgstr "Op dit moment worden meldingen geblokkeerd"
+
+#: applet.js:22
+msgid "Currently allowing notifications"
+msgstr "Op dit moment worden meldingen toegestaan"
+
+#: applet.js:92
+msgid "Notification settings"
+msgstr "Meldingsinstellingen"
+
+#. metadata.json->name
+msgid "Notification Mute"
+msgstr "Demp Meldingen"
+
+#. metadata.json->description
+msgid "Click to mute notifications, click again to unmute"
+msgstr "Klik om meldingen te dempen, klik nog eens om dempen op te heffen"
+
+#. settings-schema.json->head->description
+msgid "Icons"
+msgstr "Pictogrammen"
+
+#. settings-schema.json->use-custom-off-icon->description
+msgid "Use a custom icon for when notifications are allowed."
+msgstr ""
+"Gebruik een aangepast pictogram voor wanneer meldingen zijn toegestaan."
+
+#. settings-schema.json->off-icon->description
+msgid "Notifications allowed icon:"
+msgstr "Pictogram voor meldingen toegestaan:"
+
+#. settings-schema.json->off-icon->tooltip
+#. settings-schema.json->on-icon->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr ""
+"Selecteer een pictogrambestand, of typ een pictogramnaam in het invoervak"
+
+#. settings-schema.json->use-custom-on-icon->description
+msgid "Use a custom icon for when notifications are muted."
+msgstr "Gebruik een aangepast pictogram voor wanneer meldingen zijn gedempt."
+
+#. settings-schema.json->on-icon->description
+msgid "Notifications muted icon:"
+msgstr "Pictogram voor meldingen gedempt:"
+
+#. settings-schema.json->head1->description
+msgid "Keybinding"
+msgstr "Sneltoets"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding for toggling notification mute"
+msgstr "Stel de sneltoets in voor het in- en uitschakelen van meldingsdemping"

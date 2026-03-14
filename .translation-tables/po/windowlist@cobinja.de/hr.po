@@ -1,0 +1,431 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: windowlist@cobinja.de\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-11 15:28+0100\n"
+"PO-Revision-Date: 2017-05-13 14:32+0200\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: \n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. 5.4/applet.js:1402 4.0/applet.js:1393 6.4/applet.js:1427 3.2/applet.js:1286
+msgid "Preferences"
+msgstr ""
+
+#. 5.4/applet.js:1406 4.0/applet.js:1397 6.4/applet.js:1431 3.2/applet.js:1290
+msgid "About..."
+msgstr ""
+
+#. 5.4/applet.js:1410 4.0/applet.js:1401 6.4/applet.js:1435 3.2/applet.js:1294
+msgid "Configure..."
+msgstr ""
+
+#. 5.4/applet.js:1414 4.0/applet.js:1405 6.4/applet.js:1439 3.2/applet.js:1298
+#, javascript-format
+msgid "Remove '%s'"
+msgstr ""
+
+#. 5.4/applet.js:1423 4.0/applet.js:1414 6.4/applet.js:1448 3.2/applet.js:1307
+msgid "Open new window"
+msgstr "Otvori novi prozor"
+
+#. 5.4/applet.js:1429 4.0/applet.js:1420 6.4/applet.js:1454 3.2/applet.js:1313
+msgid "Pin to this workspace"
+msgstr ""
+
+#. 5.4/applet.js:1443 4.0/applet.js:1434 6.4/applet.js:1468 3.2/applet.js:1327
+msgid "Pin to other workspaces"
+msgstr ""
+
+#. 5.4/applet.js:1484 4.0/applet.js:1475 6.4/applet.js:1509
+msgid "Places"
+msgstr ""
+
+#. 5.4/applet.js:1516 4.0/applet.js:1507 6.4/applet.js:1541 3.2/applet.js:1359
+msgid "Only on this workspace"
+msgstr ""
+
+#. 5.4/applet.js:1519 4.0/applet.js:1510 6.4/applet.js:1544 3.2/applet.js:1362
+msgid "Visible on all workspaces"
+msgstr ""
+
+#. 5.4/applet.js:1520 4.0/applet.js:1511 6.4/applet.js:1545 3.2/applet.js:1364
+msgid "Move to another workspace"
+msgstr ""
+
+#. 5.4/applet.js:1539 4.0/applet.js:1530 6.4/applet.js:1564 3.2/applet.js:1384
+msgid "Move to another monitor"
+msgstr ""
+
+#. 5.4/applet.js:1547 4.0/applet.js:1538 6.4/applet.js:1572 3.2/applet.js:1392
+msgid "Monitor"
+msgstr ""
+
+#. 5.4/applet.js:1563 4.0/applet.js:1554 6.4/applet.js:1585 3.2/applet.js:1404
+msgid "Restore"
+msgstr ""
+
+#. 5.4/applet.js:1568 4.0/applet.js:1559 6.4/applet.js:1590 3.2/applet.js:1409
+#, fuzzy
+msgid "Minimize"
+msgstr "Prikaži u prozoru"
+
+#. 5.4/applet.js:1574 4.0/applet.js:1565 6.4/applet.js:1596 3.2/applet.js:1415
+msgid "Unmaximize"
+msgstr "Prikaži u prozoru"
+
+#. 5.4/applet.js:1581 4.0/applet.js:1572 6.4/applet.js:1603 3.2/applet.js:1422
+msgid "Close others"
+msgstr ""
+
+#. 5.4/applet.js:1592 4.0/applet.js:1583 6.4/applet.js:1614 3.2/applet.js:1433
+msgid "Close all"
+msgstr ""
+
+#. 5.4/applet.js:1601 4.0/applet.js:1592 6.4/applet.js:1623 3.2/applet.js:1442
+msgid "Close"
+msgstr ""
+
+#. metadata.json->name
+msgid "CobiWindowList"
+msgstr ""
+
+#. metadata.json->description
+msgid "A window list with app grouping and window previews"
+msgstr "Prikaz prozora s grupiranjem aplikacija i prozorima pregleda"
+
+#. 5.4->settings-schema.json->section1->description
+#. 4.0->settings-schema.json->section1->description
+#. 6.4->settings-schema.json->section1->description
+#. 3.2->settings-schema.json->section1->description
+msgid "Captions"
+msgstr "Natpis"
+
+#. 5.4->settings-schema.json->caption-type->options
+#. 4.0->settings-schema.json->caption-type->options
+#. 6.4->settings-schema.json->caption-type->options
+#. 3.2->settings-schema.json->caption-type->options
+msgid "Name"
+msgstr "Naziv"
+
+#. 5.4->settings-schema.json->caption-type->options
+#. 4.0->settings-schema.json->caption-type->options
+#. 6.4->settings-schema.json->caption-type->options
+#. 3.2->settings-schema.json->caption-type->options
+msgid "Title"
+msgstr "Naslov"
+
+#. 5.4->settings-schema.json->caption-type->description
+#. 4.0->settings-schema.json->caption-type->description
+#. 6.4->settings-schema.json->caption-type->description
+#. 3.2->settings-schema.json->caption-type->description
+msgid "Caption type"
+msgstr "Vrsta natpisa"
+
+#. 5.4->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for->options
+#. 3.2->settings-schema.json->display-caption-for->options
+msgid "None"
+msgstr "Nijedan"
+
+#. 5.4->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for->options
+#. 3.2->settings-schema.json->display-caption-for->options
+msgid "All"
+msgstr "Sve"
+
+#. 5.4->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for->options
+#. 3.2->settings-schema.json->display-caption-for->options
+msgid "Running"
+msgstr "Pokrenute"
+
+#. 5.4->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for->options
+#. 3.2->settings-schema.json->display-caption-for->options
+msgid "Focused"
+msgstr "Fokusirane"
+
+#. 5.4->settings-schema.json->display-caption-for->description
+#. 4.0->settings-schema.json->display-caption-for->description
+#. 6.4->settings-schema.json->display-caption-for->description
+#. 3.2->settings-schema.json->display-caption-for->description
+msgid "Display Caption For"
+msgstr "Prikaži natpis za"
+
+#. 5.4->settings-schema.json->label-width->units
+#. 4.0->settings-schema.json->label-width->units
+#. 6.4->settings-schema.json->label-width->units
+#. 3.2->settings-schema.json->label-width->units
+msgid "pixels"
+msgstr ""
+
+#. 5.4->settings-schema.json->label-width->description
+#. 4.0->settings-schema.json->label-width->description
+#. 6.4->settings-schema.json->label-width->description
+#. 3.2->settings-schema.json->label-width->description
+msgid "Label width"
+msgstr "Širina naslova"
+
+#. 5.4->settings-schema.json->label-animation->description
+#. 4.0->settings-schema.json->label-animation->description
+#. 6.4->settings-schema.json->label-animation->description
+#. 3.2->settings-schema.json->label-animation->description
+msgid "Animate label"
+msgstr "Animirani naslov"
+
+#. 5.4->settings-schema.json->label-animation-time->units
+#. 5.4->settings-schema.json->animation-time->units
+#. 5.4->settings-schema.json->preview-timeout-show->units
+#. 5.4->settings-schema.json->preview-timeout-hide->units
+#. 4.0->settings-schema.json->label-animation-time->units
+#. 4.0->settings-schema.json->animation-time->units
+#. 4.0->settings-schema.json->preview-timeout-show->units
+#. 4.0->settings-schema.json->preview-timeout-hide->units
+#. 6.4->settings-schema.json->label-animation-time->units
+#. 6.4->settings-schema.json->animation-time->units
+#. 6.4->settings-schema.json->preview-timeout-show->units
+#. 6.4->settings-schema.json->preview-timeout-hide->units
+#. 3.2->settings-schema.json->label-animation-time->units
+#. 3.2->settings-schema.json->animation-time->units
+#. 3.2->settings-schema.json->preview-timeout-show->units
+#. 3.2->settings-schema.json->preview-timeout-hide->units
+msgid "milliseconds"
+msgstr ""
+
+#. 5.4->settings-schema.json->label-animation-time->description
+#. 4.0->settings-schema.json->label-animation-time->description
+#. 6.4->settings-schema.json->label-animation-time->description
+#. 3.2->settings-schema.json->label-animation-time->description
+msgid "Label animation time"
+msgstr "Vrijeme animiranog naslova"
+
+#. 5.4->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+#. 6.4->settings-schema.json->display-number->options
+#. 3.2->settings-schema.json->display-number->options
+msgid "Never"
+msgstr ""
+
+#. 5.4->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+#. 6.4->settings-schema.json->display-number->options
+#. 3.2->settings-schema.json->display-number->options
+msgid "Always"
+msgstr ""
+
+#. 5.4->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+#. 6.4->settings-schema.json->display-number->options
+#. 3.2->settings-schema.json->display-number->options
+#, fuzzy
+msgid "2 or more windows"
+msgstr "Grupiranje prozora"
+
+#. 5.4->settings-schema.json->display-number->description
+#. 4.0->settings-schema.json->display-number->description
+#. 6.4->settings-schema.json->display-number->description
+#. 3.2->settings-schema.json->display-number->description
+msgid "Display Number"
+msgstr "Prikaz brojeva"
+
+#. 5.4->settings-schema.json->section2->description
+#. 4.0->settings-schema.json->section2->description
+#. 6.4->settings-schema.json->section2->description
+#. 3.2->settings-schema.json->section2->description
+msgid "Icons"
+msgstr ""
+
+#. 5.4->settings-schema.json->group-windows->description
+#. 4.0->settings-schema.json->group-windows->description
+#. 6.4->settings-schema.json->group-windows->description
+#. 3.2->settings-schema.json->group-windows->description
+msgid "Group Windows"
+msgstr "Grupiranje prozora"
+
+#. 5.4->settings-schema.json->group-windows->tooltip
+#. 4.0->settings-schema.json->group-windows->tooltip
+#. 6.4->settings-schema.json->group-windows->tooltip
+#. 3.2->settings-schema.json->group-windows->tooltip
+msgid ""
+"If windows are grouped, all windows from an application are managed by the "
+"same button,\n"
+"if not grouped, all windows get an own button"
+msgstr ""
+
+#. 5.4->settings-schema.json->display-pinned->description
+#. 4.0->settings-schema.json->display-pinned->description
+#. 6.4->settings-schema.json->display-pinned->description
+#. 3.2->settings-schema.json->display-pinned->description
+msgid "Display Favorites"
+msgstr "Prikaz omiljenih"
+
+#. 5.4->settings-schema.json->animation-time->description
+#. 4.0->settings-schema.json->animation-time->description
+#. 6.4->settings-schema.json->animation-time->description
+#. 3.2->settings-schema.json->animation-time->description
+msgid "Animation Time"
+msgstr "Vrsta animacije"
+
+#. 5.4->settings-schema.json->animation-time->tooltip
+#. 4.0->settings-schema.json->animation-time->tooltip
+#. 6.4->settings-schema.json->animation-time->tooltip
+#. 3.2->settings-schema.json->animation-time->tooltip
+msgid "The flashing time when a new window is opened via a button"
+msgstr ""
+
+#. 5.4->settings-schema.json->show-windows-for-current-monitor->description
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->description
+#. 6.4->settings-schema.json->show-windows-for-current-monitor->description
+#. 3.2->settings-schema.json->show-windows-for-current-monitor->description
+msgid "Only show windows on the same monitor"
+msgstr ""
+
+#. 5.4->settings-schema.json->show-windows-for-current-monitor->tooltip
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->tooltip
+#. 6.4->settings-schema.json->show-windows-for-current-monitor->tooltip
+#. 3.2->settings-schema.json->show-windows-for-current-monitor->tooltip
+msgid ""
+"If enabled, this applet instance only manages windows\n"
+"that are displayed on the same monitor"
+msgstr ""
+
+#. 5.4->settings-schema.json->section3->description
+#. 4.0->settings-schema.json->section3->description
+#. 6.4->settings-schema.json->section3->description
+#. 3.2->settings-schema.json->section3->description
+#, fuzzy
+msgid "Preview menu"
+msgstr "Pregledi"
+
+#. 5.4->settings-schema.json->menu-show-on-click->description
+#. 4.0->settings-schema.json->menu-show-on-click->description
+#. 6.4->settings-schema.json->menu-show-on-click->description
+#. 3.2->settings-schema.json->menu-show-on-click->description
+#, fuzzy
+msgid "Show on click"
+msgstr "Prikaži pri prijelazu pokazivačem"
+
+#. 5.4->settings-schema.json->menu-show-on-click->tooltip
+#. 4.0->settings-schema.json->menu-show-on-click->tooltip
+#. 6.4->settings-schema.json->menu-show-on-click->tooltip
+#. 3.2->settings-schema.json->menu-show-on-click->tooltip
+msgid ""
+"If enabled, a popup menu with a list of current windows will show when "
+"clicking\n"
+"(Only with 2 or more windows)"
+msgstr ""
+
+#. 5.4->settings-schema.json->menu-show-on-hover->description
+#. 4.0->settings-schema.json->menu-show-on-hover->description
+#. 6.4->settings-schema.json->menu-show-on-hover->description
+#. 3.2->settings-schema.json->menu-show-on-hover->description
+msgid "Show on hover"
+msgstr "Prikaži pri prijelazu pokazivačem"
+
+#. 5.4->settings-schema.json->menu-show-on-hover->tooltip
+#. 4.0->settings-schema.json->menu-show-on-hover->tooltip
+#. 6.4->settings-schema.json->menu-show-on-hover->tooltip
+#. 3.2->settings-schema.json->menu-show-on-hover->tooltip
+msgid ""
+"If enabled, a popup menu with a list of current windows will show when "
+"hovering"
+msgstr ""
+
+#. 5.4->settings-schema.json->show-previews->description
+#. 4.0->settings-schema.json->show-previews->description
+#. 6.4->settings-schema.json->show-previews->description
+#. 3.2->settings-schema.json->show-previews->description
+#, fuzzy
+msgid "Show previews"
+msgstr "Pregledi"
+
+#. 5.4->settings-schema.json->show-previews->tooltip
+#. 4.0->settings-schema.json->show-previews->tooltip
+#. 6.4->settings-schema.json->show-previews->tooltip
+#. 3.2->settings-schema.json->show-previews->tooltip
+msgid ""
+"If enabled, the popup menu will show window previews\n"
+"(Always disabled when running Cinnamon in Software Rendering Mode)"
+msgstr ""
+
+#. 5.4->settings-schema.json->number-of-unshrunk-previews->units
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->units
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->units
+#. 3.2->settings-schema.json->number-of-unshrunk-previews->units
+#, fuzzy
+msgid "Windows"
+msgstr "Grupiranje prozora"
+
+#. 5.4->settings-schema.json->number-of-unshrunk-previews->description
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->description
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->description
+#. 3.2->settings-schema.json->number-of-unshrunk-previews->description
+msgid "Number of unshrunk previews"
+msgstr ""
+
+#. 5.4->settings-schema.json->preview-timeout-show->description
+#. 4.0->settings-schema.json->preview-timeout-show->description
+#. 6.4->settings-schema.json->preview-timeout-show->description
+#. 3.2->settings-schema.json->preview-timeout-show->description
+msgid "Timeout Show"
+msgstr "Istek vremena prikaza"
+
+#. 5.4->settings-schema.json->preview-timeout-show->tooltip
+#. 4.0->settings-schema.json->preview-timeout-show->tooltip
+#. 6.4->settings-schema.json->preview-timeout-show->tooltip
+#. 3.2->settings-schema.json->preview-timeout-show->tooltip
+msgid ""
+"The waiting time for the popup menu to show, when hovering a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+
+#. 5.4->settings-schema.json->preview-timeout-hide->description
+#. 4.0->settings-schema.json->preview-timeout-hide->description
+#. 6.4->settings-schema.json->preview-timeout-hide->description
+#. 3.2->settings-schema.json->preview-timeout-hide->description
+msgid "Timeout Hide"
+msgstr "Istek vremena sakrivanja"
+
+#. 5.4->settings-schema.json->preview-timeout-hide->tooltip
+#. 4.0->settings-schema.json->preview-timeout-hide->tooltip
+#. 6.4->settings-schema.json->preview-timeout-hide->tooltip
+#. 3.2->settings-schema.json->preview-timeout-hide->tooltip
+msgid ""
+"The waiting time for the popup menu to hide, when leaving a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+
+#. 5.4->settings-schema.json->preview-close-on-middle-click->description
+#. 4.0->settings-schema.json->preview-close-on-middle-click->description
+#. 6.4->settings-schema.json->preview-close-on-middle-click->description
+#. 3.2->settings-schema.json->preview-close-on-middle-click->description
+msgid "Close window on mouse-wheel click"
+msgstr ""
+
+#. 6.4->settings-schema.json->show_progress-indicator->description
+msgid "Show a progress indicator"
+msgstr ""
+
+#~ msgid "Remove this applet"
+#~ msgstr "Ukloni ovaj aplet"
+
+#~ msgid "Smart"
+#~ msgstr "Pametan"
+
+#~ msgid "Pin app to window list"
+#~ msgstr "Pričvrsti aplikaciju na popis prozora"
+
+#~ msgid "Unpin app from window list"
+#~ msgstr "Ukloni aplikaciju s popisa prozora"

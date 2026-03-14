@@ -1,0 +1,163 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-12-08 05:01-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: blogdron\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4\n"
+
+#: applet.js:58
+msgid "%A %B %e, %Y"
+msgstr ""
+
+#. metadata.json->name
+msgid "Azan"
+msgstr ""
+
+#. settings-schema.json->calculation_method->options
+msgid "Muslim World League"
+msgstr ""
+
+#. settings-schema.json->calculation_method->options
+msgid "Islamic Society of North America (ISNA)"
+msgstr ""
+
+#. settings-schema.json->calculation_method->options
+msgid "Egyptian General Authority of Survey"
+msgstr ""
+
+#. settings-schema.json->calculation_method->options
+msgid "Umm Al-Qura University, Makkah"
+msgstr ""
+
+#. settings-schema.json->calculation_method->options
+msgid "University of Islamic Sciences, Karachi"
+msgstr ""
+
+#. settings-schema.json->calculation_method->options
+msgid "Institute of Geophysics, University of Tehran"
+msgstr ""
+
+#. settings-schema.json->calculation_method->options
+msgid "Shia Ithna-Ashari, Leva Institute, Qum"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT -12:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT -11:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT -10:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT -09:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT -08:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT -07:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT -06:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT -05:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT -04:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT -03:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT -02:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT -01:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT +00:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT +01:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT +02:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT +03:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT +04:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT +05:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT +06:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT +07:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT +08:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT +09:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT +10:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT +11:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT +12:00"
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "GMT +13:00"
+msgstr ""
+
+#. settings-schema.json->juristic->options
+msgid "Shafi`i, Maliki, Ja`fari, Hanbali"
+msgstr ""
+
+#. settings-schema.json->juristic->options
+msgid "Hanafi"
+msgstr ""
