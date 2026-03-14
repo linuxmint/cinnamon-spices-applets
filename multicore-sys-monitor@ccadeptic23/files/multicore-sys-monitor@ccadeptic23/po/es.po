@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-03-14 12:09+0100\n"
-"PO-Revision-Date: 2026-03-12 21:16-0300\n"
+"PO-Revision-Date: 2026-03-14 10:42-0300\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -299,13 +299,12 @@ msgid "Recoverable:"
 msgstr "Recuperable:"
 
 #. 6.4/applet.js:51
-#, fuzzy
 msgid "Swap:"
-msgstr "Swap"
+msgstr "Swap:"
 
 #. 6.4/applet.js:77
 msgid "DISK USAGE"
-msgstr ""
+msgstr "USO DEL DISCO"
 
 #. 6.4->settings-schema.json->RefreshAll_btn->description
 #. 6.4/applet.js:567
@@ -446,9 +445,8 @@ msgid "Options"
 msgstr "Opciones"
 
 #. 6.4->settings-schema.json->sectionGeneralOrder->title
-#, fuzzy
 msgid "Display Order"
-msgstr "Mostrar esto"
+msgstr "Orden de visualización"
 
 #. 6.4->settings-schema.json->sectionTooltip->title
 #. 6.4->settings-schema.json->sectionNetworkTooltip->title
@@ -598,6 +596,9 @@ msgid ""
 "panel.\n"
 "Do not change these names!"
 msgstr ""
+"Elige el orden en el que se mostrarán los cuadros de este applet en el "
+"panel.\n"
+"¡No modifiques estos nombres!"
 
 #. 6.4->settings-schema.json->displayOrder->columns->title
 #. 6.4->settings-schema.json->Net_devicesList->columns->title
@@ -608,15 +609,15 @@ msgstr "Nombre"
 
 #. 6.4->settings-schema.json->displayOrder->description
 msgid "Display order in the panel"
-msgstr ""
+msgstr "Orden de visualización en el panel"
 
 #. 6.4->settings-schema.json->displayOrderApply->description
 msgid "Apply"
-msgstr ""
+msgstr "Aplicar"
 
 #. 6.4->settings-schema.json->displayOrderReinit->description
 msgid "Reset"
-msgstr ""
+msgstr "Restablecer"
 
 #. 6.4->settings-schema.json->CPU_labelOn->description
 #. 6.4->settings-schema.json->Mem_labelOn->description
@@ -767,9 +768,8 @@ msgid "0-20"
 msgstr "0-20"
 
 #. 6.4->settings-schema.json->Swap_enabled->description
-#, fuzzy
 msgid "Enable Swap"
-msgstr "Habilitar"
+msgstr "Habilitar Swap"
 
 #. 6.4->settings-schema.json->Mem_startAt12Oclock->description
 msgid "Origin at 12 o'clock"
