@@ -925,7 +925,7 @@ class MCSM extends Applet.IconApplet {
             this.CPU_tempPath.length > 0 && 
             GLib.file_test(this.CPU_tempPath, GLib.FileTest.EXISTS)
         ) {
-            /readFileAsync(this.CPU_tempPath).then((contents) => {
+            readFileAsync(this.CPU_tempPath).then((contents) => {
                 let _temp = contents.trim();
                 _temp = parseInt(_temp);
                 if (!isNaN(_temp)) {
