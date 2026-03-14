@@ -96,3 +96,11 @@ msgid ""
 msgstr ""
 "通常需要以 -e 作為結尾，以便執行所提供的 SSH 指令\n"
 "請參閱所使用終端機的使用手冊以取得更多資訊。"
+
+#. settings-schema.json->showConnectionNotification->description
+msgid "Show notification when launching SSH connection"
+msgstr "啟動 SSH 連線時顯示通知"
+
+#. settings-schema.json->showConnectionNotification->tooltip
+msgid "Display a notification message when SSH terminal is launched"
+msgstr "啟動 SSH 終端機時顯示通知訊息"

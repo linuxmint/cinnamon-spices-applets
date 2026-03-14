@@ -34,11 +34,11 @@ msgstr "設定"
 
 #. settings-schema.json->peek-desktop->description
 msgid "Peek at the desktop on hover"
-msgstr "滑鼠游標懸停時預覽桌面"
+msgstr "滑鼠游標停留時預覽桌面"
 
 #. settings-schema.json->peek-desktop->tooltip
 msgid "Peek at the desktop when hovering the applet"
-msgstr "當滑鼠游標懸停在小程式上時預覽桌面"
+msgstr "當滑鼠游標停留在小程式上時預覽桌面"
 
 #. settings-schema.json->peek-blur->description
 msgid "Blur effect"
@@ -54,7 +54,7 @@ msgstr "毫秒"
 
 #. settings-schema.json->peek-delay->description
 msgid "Hover delay"
-msgstr "懸停延遲"
+msgstr "停留延遲"
 
 #. settings-schema.json->peek-delay->tooltip
 msgid "Delay before Peek shows desktop"
@@ -99,19 +99,19 @@ msgstr "選取邊框色彩"
 
 #. settings-schema.json->on-hover-background->description
 msgid "Fill color on mouse hover"
-msgstr "滑鼠懸停時的填滿色彩"
+msgstr "滑鼠游標停留時的填滿色彩"
 
 #. settings-schema.json->on-hover-background->tooltip
 msgid "Change the fill color when mouse hover"
-msgstr "變更滑鼠懸停時的填滿色彩"
+msgstr "變更滑鼠游標停留時的填滿色彩"
 
 #. settings-schema.json->on-hover-border->description
 msgid "Border color on mouse hover"
-msgstr "滑鼠懸停時的邊框色彩"
+msgstr "滑鼠游標停留時的邊框色彩"
 
 #. settings-schema.json->on-hover-border->tooltip
 msgid "Change the Border color when mouse hover"
-msgstr "變更滑鼠懸停時的邊框色彩"
+msgstr "變更滑鼠游標停留時的邊框色彩"
 
 #. settings-schema.json->border-width->description
 msgid "Border width"

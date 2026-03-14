@@ -5,49 +5,45 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Project-Id-Version: desaturate-all@hkoosha 1.1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2025-05-17 10:44-0400\n"
-"PO-Revision-Date: 2025-05-03 19:52+0200\n"
-"Last-Translator: claudiux\n"
+"PO-Revision-Date: 2025-10-13 14:46+0200\n"
+"Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:62
 msgid "Click to disable effect"
-msgstr ""
+msgstr "Cliquez pour désactiver l'effet"
 
 #. applet.js:64
 msgid "Click to desaturate the desktop"
-msgstr ""
+msgstr "Cliquez pour désaturer le bureau"
 
 #. applet.js:72
 msgid "Will automatically desaturate in"
-msgstr ""
+msgstr "Se désaturera automatiquement dans"
 
 #. applet.js:74
-#, fuzzy
 msgid "Will automatically disable in"
-msgstr "Heure de la journée pour la désactivation automatique"
+msgstr "Sera automatiquement désactivé dans"
 
 #. applet.js:76
 msgid "minutes"
-msgstr ""
+msgstr "minutes"
 
 #. applet.js:79
 msgid "Will automatically desaturate at"
-msgstr ""
+msgstr "Se désaturera automatiquement à"
 
 #. applet.js:81
-#, fuzzy
 msgid "Will automatically disable at"
-msgstr "Heure de la journée pour la désactivation automatique"
+msgstr "Sera automatiquement désactivé à"
 
 #. metadata.json->name
 msgid "Desaturate All"

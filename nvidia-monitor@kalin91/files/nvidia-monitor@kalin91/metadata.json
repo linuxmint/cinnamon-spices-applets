@@ -1,0 +1,7 @@
+{
+  "uuid": "nvidia-monitor@kalin91",
+  "name": "NVIDIA Monitor",
+  "description": "Monitors GPU temperature, memory, utilization, and fan speed using nvidia-smi",
+  "version": "v1.0.1",
+  "multiversion": false
+}

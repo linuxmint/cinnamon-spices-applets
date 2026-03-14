@@ -118,14 +118,14 @@
         "default" : "%_I:%M:%S%P",
         "indent" : true,
         "description" : "Format used to display alarm time in the near future",
-        "tooltip" : "If the alarm time is less than the minutes specified below away,\nthe alarm time can be displayed with more details\n(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format)"
+        "tooltip" : "If the alarm time is less than the minutes specified below away,\nthe alarm time can be displayed with more details\n(see https://docs.gtk.org/glib/method.DateTime.format.html)"
     },
     "alarmtime-format-large" : {
         "type" : "entry",
         "default" : "%_I:%M%P",
         "indent" : true,
         "description" : "Format used to display alarm time in the not so near future",
-        "tooltip" : "If the alarm time is more than the minutes specified below away,\nthe alarm time can be displayed with less details\n(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format)"
+        "tooltip" : "If the alarm time is more than the minutes specified below away,\nthe alarm time can be displayed with less details\n(see https://docs.gtk.org/glib/method.DateTime.format.html)"
     },
     "alarmtime-format-switchover" : {
         "type" : "spinbutton",

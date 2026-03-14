@@ -1,3 +1,124 @@
+### v15.0.1~20260222
+  * Improves asynchronous function calls.
+
+### v15.0.0~20260221
+  * Functional improvements.
+
+### v14.1.1~20260221
+  * Better management of label (on vertical panel).
+
+### v14.1.0~20260212
+  * Resize the menu by grabbing its edges with the mouse.
+
+### v14.0.0~20260211
+  * Adds a Balance slider in the menu + keybindings.
+  * Fixes [#8052](https://github.com/linuxmint/cinnamon-spices-applets/issues/8052)
+
+### v13.10.0~20260121
+  * Try to avoid advertisements by detecting certain words in the title, defined by the user.
+
+### v13.9.3~20260114
+  * User can set menu width (for Cinnamon 6.4).
+  * Fixes [#8175](https://github.com/linuxmint/cinnamon-spices-applets/issues/8175)
+
+### v13.9.2~20260114
+  * Improves menu display for Cinnamon 6.4.
+  * Fixes [#8201](https://github.com/linuxmint/cinnamon-spices-applets/issues/8201)
+
+### v13.9.1~20260112
+  * Restore this applet for Cinnamon 6.4 (same as v13.8.2).
+  * Fixes [#8183](https://github.com/linuxmint/cinnamon-spices-applets/issues/8183)
+  * New features for Cinnamon 6.6.
+
+### v13.9.0~20251228
+  * Also displays OSD with commands like "pactl set-sink-volume ...".
+  * Fixes [#8045](https://github.com/linuxmint/cinnamon-spices-applets/issues/8045)
+
+### v13.8.2~20251225
+  * Fixes a nasty bug.
+  * Fixes [#8115](https://github.com/linuxmint/cinnamon-spices-applets/issues/8115)
+
+### v13.8.1~20251225
+  * Improves speed.
+  * Fixes [#8115](https://github.com/linuxmint/cinnamon-spices-applets/issues/8115)
+  * Transitional version. Some bugs need to be fixed, but it works.
+
+### v13.8.0~20251223
+  * Many improvements and several bug fixes.
+  * Fixes [#8052](https://github.com/linuxmint/cinnamon-spices-applets/issues/8052)
+  * Fixes [#8049](https://github.com/linuxmint/cinnamon-spices-applets/issues/8049)
+  * Fixes [#8029](https://github.com/linuxmint/cinnamon-spices-applets/issues/8029)
+
+### v13.7.7~20251206
+  * Bug fix: avoids errors about stream.
+
+### v13.7.6~20251205
+  * Bug fix: artist and title when the player does not provide them.
+
+### v13.7.5~20251204
+  * Improves execution speed.
+  * Fixes [#8029](https://github.com/linuxmint/cinnamon-spices-applets/issues/8029)
+
+### v13.7.4~20251201
+  * Avoids deleting the cover art after modifying the volume or the workspace.
+  * Fixes [#8020](https://github.com/linuxmint/cinnamon-spices-applets/issues/8020)
+
+### v13.7.3~20251126
+  * Avoids treating apostrophes as quotes (artist and title).
+
+### v13.7.2~20251121
+  * Functional improvements.
+
+### v13.7.1~20251114
+  * Adds option "Shorten Artist and Title". When the artist name or title is too long, you can choose how to shorten it.
+  * Fixes [#7966](https://github.com/linuxmint/cinnamon-spices-applets/issues/7966)
+
+### v13.7.0~20251111
+  * Adds option "Do not use playerctl". 
+  * Fixes [#7961](https://github.com/linuxmint/cinnamon-spices-applets/issues/7961)
+  * Improved stability. Several errors were fixed.
+
+### v13.6.2~20251109
+  * Avoid error loading image.
+
+### v13.6.1~20251106
+  * Improved stability.
+
+### v13.6.0~20251102
+  * Improves menu stability.
+
+### v13.5.2~20251031
+  * Avoids 'paint' errors.
+
+### v13.5.1~20251031
+  * Avoids 'destroy' errors.
+
+### v13.5.0~20251030
+  * Adds the 'mic-mute' shortcut. See the FAQ in README to implement it.
+
+### v13.4.1~20251030
+  * Fixes a bug when the current player is undefined.
+
+### v13.4.0~20251029
+  * Improves tooltip duration.
+  * Fixes [#7922](https://github.com/linuxmint/cinnamon-spices-applets/issues/7922)
+
+### v13.3.4~20251028
+  * Gets real ui_scale, when scaling is set to other values than 100% or 200%.
+  * Uses "font-family: 'Digital Numbers',monospace" to display counters in menu.
+
+### v13.3.3~20251028
+  * Avoids menu shaking.
+
+### v13.3.2~20251027
+  * Improves the display of album covers.
+
+### v13.3.1~20250925
+  * Minor bugfixes (importing modules).
+
+### v13.3.0~20250923
+  * Added option "Do not show any cover art in the menu" in the Menus tab of this applet settings.
+
 ### v13.2.2~20250814
   * Improved speed.
   * Code cleanup.

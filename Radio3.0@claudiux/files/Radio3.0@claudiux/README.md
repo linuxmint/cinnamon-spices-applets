@@ -18,6 +18,8 @@ With Radio3.0 you can:
 
   * **Create categories** and sort yourself your favorite radios.
 
+  * **Manage a Blacklist**. You can add a radio station to the blacklist by moving it to the virtual category *(Blacklist)* or when importing a list of radio stations. Stations added to the blacklist do not appear in search results or in the list of recently listened to stations. If a blacklisted station is currently playing, it is immediately replaced by the station that was previously playing. The list of blacklisted URLs is located at the bottom of the Radios tab; removing a URL from this blacklist does not restore the previously deleted station to the menu.
+
   * **Save and restore** entire lists of radios.
 
   * **Record songs or programs** while listening to them.

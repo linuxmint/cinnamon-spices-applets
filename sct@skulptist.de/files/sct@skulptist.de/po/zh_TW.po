@@ -69,7 +69,7 @@ msgstr "第 3 級色溫"
 #. settings-schema.json->colorStep6->tooltip
 #. settings-schema.json->colorStep7->tooltip
 msgid "Optional. Add another value between 1000 and 10000, or leave empty."
-msgstr "選填項目。可再輸入介於 1000 到 10000 之間的數值，或留空。"
+msgstr "此欄位為選填。可再輸入介於 1000 到 10000 之間的數值，或留空。"
 
 #. settings-schema.json->colorStep4->description
 msgid "Color temperature at step 4"

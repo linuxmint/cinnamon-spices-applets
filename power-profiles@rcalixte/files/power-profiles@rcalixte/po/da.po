@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 1.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-15 16:04-0400\n"
+"POT-Creation-Date: 2025-10-15 02:11-0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -18,39 +18,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. 5.4/applet.js:25
+#. 5.4/applet.js:28
 msgid "Power Saver"
 msgstr "Strømsparetilstand"
 
-#. 5.4/applet.js:26
+#. 5.4/applet.js:29
 msgid "Balanced"
 msgstr "Balanceret"
 
-#. 5.4/applet.js:27
+#. 5.4/applet.js:30
 msgid "Performance"
 msgstr "Ydeevne"
 
-#. 5.4/applet.js:60
-#, fuzzy
-msgid "Power Profiles Applet Error"
-msgstr "Strømprofiler"
-
-#. 5.4/applet.js:61
-msgid ""
-"The system package 'power-profiles-daemon' is not installed.\n"
-"\n"
-"Please install it and reload the applet."
-msgstr ""
-
-#. 5.4/applet.js:63
-msgid "Open README"
-msgstr ""
-
-#. 5.4/applet.js:64
-msgid "Open Website"
-msgstr ""
-
-#. 5.4/applet.js:88 5.4/applet.js:94
+#. 5.4/applet.js:63 5.4/applet.js:70
 msgid ""
 "Please make sure the power-profiles-daemon package is installed and the "
 "service is running."
@@ -58,19 +38,39 @@ msgstr ""
 "Sørg for, at pakken power-profiles-daemon er installeret, og at tjenesten "
 "kører."
 
-#. 5.4/applet.js:89
+#. 5.4/applet.js:64
 msgid "exception:"
 msgstr "undtagelse:"
 
-#. 5.4/applet.js:138
+#. 5.4/applet.js:117
+#, fuzzy
+msgid "Power Profiles Applet Error"
+msgstr "Strømprofiler"
+
+#. 5.4/applet.js:118
+msgid ""
+"The system package 'power-profiles-daemon' is not installed.\n"
+"\n"
+"Please install it and reload the applet."
+msgstr ""
+
+#. 5.4/applet.js:120
+msgid "Open README"
+msgstr ""
+
+#. 5.4/applet.js:121
+msgid "Open Website"
+msgstr ""
+
+#. 5.4/applet.js:151
 msgid "Current Profile:"
 msgstr "Nuværende profil:"
 
-#. 5.4/applet.js:143
+#. 5.4/applet.js:156
 msgid "Performance Degraded:"
 msgstr "Nedsat ydeevne:"
 
-#. 5.4/applet.js:154
+#. 5.4/applet.js:167
 msgid "Active Profile Holds:"
 msgstr "Aktiv profil holder:"
 
@@ -84,6 +84,48 @@ msgstr ""
 #. metadata.json->name
 msgid "Power Profiles"
 msgstr "Strømprofiler"
+
+#. 5.4->settings-schema.json->section0->description
+msgid "General"
+msgstr ""
+
+#. 5.4->settings-schema.json->cycleProfiles->description
+#, fuzzy
+msgid "Cycle through profiles when using keyboard shortcuts or scroll wheel"
+msgstr "Bladr gennem profiler med brug af tastaturgenveje"
+
+#. 5.4->settings-schema.json->cycleProfiles->tooltip
+msgid ""
+"If enabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the next profile would be 'Performance' "
+"(or 'Balanced' on some systems).\n"
+"\n"
+"If disabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the profile would not change."
+msgstr ""
+"Hvis den er aktiveret, vil den næste profil være “Ydelse” (eller "
+"“Balanceret” på nogle systemer), hvis den aktuelle profil er "
+"“Strømsparetilstand”, og tastaturgenvejen “Forrige profil” bruges.\n"
+"\n"
+"Hvis den er deaktiveret, vil profilen ikke blive ændret, hvis den aktuelle "
+"profil er “Strømsparetilstand”, og tastaturgenvejen “Forrige profil” bruges."
+
+#. 5.4->settings-schema.json->scrollBehavior->description
+msgid "Scroll wheel behavior"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Nothing"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+#, fuzzy
+msgid "Switch profiles"
+msgstr "Næste profil"
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles (reversed)"
+msgstr ""
 
 #. 5.4->settings-schema.json->section1->description
 msgid "Keyboard Shortcuts"
@@ -104,26 +146,6 @@ msgstr "Næste profil"
 #. 5.4->settings-schema.json->nextProfileKey->tooltip
 msgid "Set keybinding(s) to switch to next power profile."
 msgstr "Angiv tastegenveje til at skifte til næste strømprofil."
-
-#. 5.4->settings-schema.json->cycleProfiles->description
-msgid "Cycle through profiles when using keyboard shortcuts"
-msgstr "Bladr gennem profiler med brug af tastaturgenveje"
-
-#. 5.4->settings-schema.json->cycleProfiles->tooltip
-msgid ""
-"If enabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the next profile would be 'Performance' "
-"(or 'Balanced' on some systems).\n"
-"\n"
-"If disabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the profile would not change."
-msgstr ""
-"Hvis den er aktiveret, vil den næste profil være “Ydelse” (eller "
-"“Balanceret” på nogle systemer), hvis den aktuelle profil er "
-"“Strømsparetilstand”, og tastaturgenvejen “Forrige profil” bruges.\n"
-"\n"
-"Hvis den er deaktiveret, vil profilen ikke blive ændret, hvis den aktuelle "
-"profil er “Strømsparetilstand”, og tastaturgenvejen “Forrige profil” bruges."
 
 #. 5.4->settings-schema.json->showOSD->description
 msgid "On-screen display for keyboard shortcuts"

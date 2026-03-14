@@ -57,6 +57,12 @@ The applet provides several configuration options, accessible through the **Appl
   * Restrict brightness adjustments (scrolling and middle-click toggles) to selected monitors.
   * Useful for setups where only specific monitors should be controlled by this instance of the applet.
 
+* **Retry Logic for Monitor Detection**
+
+  * Enable (optional) retry logic to handle intermittent detection issues.
+  * Configure the expected number of monitors to detect.
+  * When enabled, the applet will attempt to detect monitors multiple times if the initial detection does not find the expected count.
+
 All of these options are **optional**. By default, the applet behaves as in earlier versions: scrolling adjusts brightness in fixed steps across all detected monitors.
 
 ---

@@ -205,13 +205,11 @@ msgstr "Denbora laburrean alarma-ordua bistaratzekoformatua"
 msgid ""
 "If the alarm time is less than the minutes specified below away,\n"
 "the alarm time can be displayed with more details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
 msgstr ""
 "Alarma-ordua behean zehaztutako minutu baino txikiagoa bada,\\n\n"
 "alarmaren ordua xehetasun gehiagorekin bistaratu daiteke\\n\n"
-"(ikus https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
-"time-format)"
+"(ikus https://docs.gtk.org/glib/method.DateTime.format.html)"
 
 #. 3.4->settings-schema.json->alarmtime-format-large->description
 #. 6.4->settings-schema.json->alarmtime-format-large->description
@@ -223,13 +221,11 @@ msgstr "Denbora luzean alarma-ordua bistaratzeko formatua"
 msgid ""
 "If the alarm time is more than the minutes specified below away,\n"
 "the alarm time can be displayed with less details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
 msgstr ""
 "Alarma-ordua behean zehaztutako minutu baino gehiago badira,\\n\n"
 "alarmaren ordua xehetasun gutxiagorekin bistaratu daiteke\\n\n"
-"(ikus https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
-"time-format)"
+"(ikus https://docs.gtk.org/glib/method.DateTime.format.html)"
 
 #. 3.4->settings-schema.json->alarmtime-format-switchover->units
 #. 6.4->settings-schema.json->alarmtime-format-switchover->units

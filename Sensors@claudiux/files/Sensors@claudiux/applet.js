@@ -6,6 +6,7 @@ const Applet = imports.ui.applet;
 const {AppletSettings} = imports.ui.settings;
 const Extension = imports.ui.extension;
 const ModalDialog = imports.ui.modalDialog;
+const { WindowTracker } = imports.gi.Cinnamon;
 //util
 const {spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, unref} = require("./lib/util");
 //to-string
@@ -203,6 +204,9 @@ class SensorsApplet extends Applet.Applet {
 
     // To be sure that the scripts will be executable:
     spawnCommandLineAsync(`/bin/bash -c 'cd ${SCRIPTS_DIR} && chmod 755 *.py *.sh'`, null, null);
+    
+    // Window Tracker:
+    this.tracker = WindowTracker.get_default();
 
     this.sudo_or_wheel = "none";
     let subProcess = spawnCommandLineAsyncIO("/usr/bin/env bash -c 'groups'", (out, err, exitCode) => {
@@ -220,6 +224,9 @@ class SensorsApplet extends Applet.Applet {
     // To check dependencies:
     this.dependencies = new Dependencies();
     //this.depCount = 0;
+
+    spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh 1 &");
+    //~ spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh 1 all &");
 
     // Applet tooltip:
     this.set_applet_tooltip(_('Sensors Monitor'));
@@ -244,6 +251,9 @@ class SensorsApplet extends Applet.Applet {
     // get settings defined in settings-schema.json:
     this.get_user_settings();
     this._variables();
+
+    // Run DisksDaemon:
+    this._on_temp_disks_modified();
 
     // Applet default UI:
     this.set_default_UI();
@@ -284,12 +294,91 @@ class SensorsApplet extends Applet.Applet {
                                 });
     }
   }
+  
+  configureApplet(tab=0) {
+    //~ logDebug("tab=" + tab);
+    const HORIZONTAL = 1;
+    const VERTICAL = 2;
+    const BOTH = 3
+    let maximize_horizontally = this.window_maximizing == "horizontally";
+    let maximize_vertically = this.window_maximizing == "vertically";
+    let maximize_both = this.window_maximizing == "both";
+    let fixed = this.window_maximizing == "fixed";
+    if (fixed && (isNaN(parseInt(this.window_width)) || isNaN(parseInt(this.window_height)))) {
+      fixed = false;
+      this.window_maximizing = "none";
+    }
+    //~ let window_width = Math.min(this.window_width, global.screen_width);
+    //~ this.window_width = window_width;
+    this._applet_context_menu.close(false);
+    //~ this.closeSettingsWindow();
+
+    //~ let nemo_size_prefixes = get_nemo_size_prefixes();
+    //~ if (nemo_size_prefixes !== this.size_prefixes) {
+      //~ this.size_prefixes = nemo_size_prefixes
+    //~ }
+
+    //~ this._set_settings_options();
+
+    let pid = spawnCommandLine("xlet-settings applet " + UUID + " -i " + this.instance_id + " -t " + tab);
+    //~ let pid = spawnCommandLine(SCRIPTS_DIR + "/configRadio3.0.sh " + this.instance_id + " " + tab);
+
+    if (this.window_maximizing != "none") {
+      var app = null;
+      var intervalId = null;
+      intervalId = setTimeout(() => {
+        clearTimeout(intervalId);
+        app = this.tracker.get_app_from_pid(pid);
+        if (app != null) {
+          let window = app.get_windows()[0];
+          //~ this.settingsTab = tab;
+          //~ window.move_resize_frame(null, 0, 0, window_width, 800);
+          if (maximize_vertically)
+            window.maximize(VERTICAL);
+          else if (maximize_both)
+            window.maximize(BOTH);
+          else if (maximize_horizontally)
+            window.maximize(HORIZONTAL);
+          else if (fixed)
+            window.move_resize_frame(null, 1 * this.window_x, 1 * this.window_y, 1 * this.window_width, 1 * this.window_height);
+            
+          //~ this.settingsWindow = window;
+          //~ app.connect("windows-changed", () => { this.settingsWindow = undefined; });
+          
+          window.activate(300);
+        }
+      }, 1000);
+    }
+    // Returns the pid:
+    this.configWindowPid = pid;
+    return pid;
+  }
+  
+  _on_window_set_current_size() {
+    if (this.configWindowPid) {
+      let wins = global.get_window_actors();
+      wins.forEach( (w) => {
+        if (w.meta_window.get_pid() == this.configWindowPid) {
+          this.window_width = "" + (w.get_width() - 20).toString();
+          this.window_height = "" + (w.get_height() - 18).toString();
+          this.window_x = "" + w.get_x().toString();
+          this.window_y = "" + w.get_y().toString();
+        }
+      });
+    }
+  }
 
   get_user_settings() {
     this.s = new AppletSettings(this, UUID, this.instanceId);
 
     // General tab
     this.s.bind("show_tooltip", "show_tooltip", () => { this.on_settings_changed() });
+    this.s.bind("do_not_check_dependencies", "do_not_check_dependencies");
+    this.s.bind("window_maximizing", "window_maximizing");
+    this.s.bind("window_width", "window_width");
+    this.s.bind("window_height", "window_height");
+    this.s.bind("window_x", "window_x");
+    this.s.bind("window_y", "window_y");
     this.s.bind("has_set_markup", "has_set_markup");
     this.s.bind("interval", "interval", () => { this.on_settings_changed() });
     this.s.bind("keep_size", "keep_size", () => { this.updateUI() });
@@ -298,6 +387,7 @@ class SensorsApplet extends Applet.Applet {
     this.s.bind("separator_type", "separator_type", () => { this.updateUI() });
     this.s.bind("vertical-align", "vertical_align", () => { this.updateUI() });
     this.s.bind("char_color_customized", "char_color_customized", () => { this.updateUI() });
+    this.s.bind("separator_color", "separator_color", () => { this.updateUI() });
     this.s.bind("char_color", "char_color", () => { this.updateUI() });
     this.s.bind("crit_color", "crit_color", () => { this.updateUI() });
     this.s.bind("high_color", "high_color", () => { this.updateUI() });
@@ -328,7 +418,7 @@ class SensorsApplet extends Applet.Applet {
     this.s.bind("always_show_unit_in_line", "always_show_unit_in_line", () => { this.updateUI() });
     this.s.bind("temp_sensors", "temp_sensors");
     this.s.bind("numberOfTempSensors", "numberOfTempSensors");
-    this.s.bind("temp_disks", "temp_disks");
+    this.s.bind("temp_disks", "temp_disks", this._on_temp_disks_modified.bind(this));
     this.s.bind("journalize_temp", "journalize_temp");
 
     // Fan tab
@@ -417,20 +507,51 @@ class SensorsApplet extends Applet.Applet {
     this.set_default_UI();
   }
 
+  _on_temp_disks_modified() {
+    const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
+    const SENSORS_DISKSWITNESS=`${SENSORS_DIR}/DisksWitness`;
+    var checkDisks = false;
+    let disks = this.s.getValue('temp_disks');
+    if (!disks) return;
+
+    var disksToCheck = [];
+    for (let disk of disks) {
+      if (disk["show_in_panel"] === true || disk["show_in_tooltip"] === true) {
+        checkDisks = true;
+        disksToCheck.push(disk["disk"])
+      }
+    }
+    if (checkDisks) {
+      spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " " + disksToCheck.join(",") + " &");
+    } else {
+      let diskwitness = Gio.file_new_for_path(SENSORS_DISKSWITNESS);
+      if (diskwitness.query_exists(null))
+        diskwitness.delete(null);
+      diskwitness = null;
+    }
+    checkDisks = null;
+  }
+
   is_disktemp_user_readable() {
     var ret = false;
-    const sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
+    var sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
+    if (GLib.find_program_in_path("/usr/bin/dnf") || GLib.find_program_in_path("/usr/bin/pacman")) {
+      // Distro is Fedora or Arch based.
+      sudoers_smartctl_path = "/etc/sudoersSensors.d/smartctl";
+    }
     const sudoers_smartctl_file = Gio.file_new_for_path(sudoers_smartctl_path);
     if (sudoers_smartctl_file.query_exists(null)) {
-    try {
+      try {
         let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
-        if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL:"))
+        if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL:")) {
           ret = true;
+        }
+        GLib.free(contents);
       } catch (e) {
-      ret = false
+        ret = false
+      }
     }
-    }
-    log("is_disktemp_user_readable: "+ret);
+    //~ log("is_disktemp_user_readable: "+ret);
     return ret
   }
 
@@ -476,6 +597,7 @@ class SensorsApplet extends Applet.Applet {
       var high = false;
       var crit = false;
       let layoutBin = new St.Bin();
+      let sepBin = null;
       let c = labels[i];
       let l_style = null;
       if (c.endsWith("$")) { // critical value
@@ -487,11 +609,29 @@ class SensorsApplet extends Applet.Applet {
       } else if (this.char_color_customized) {
         l_style = "color: " + this.char_color + ";";
       }
-      let l = new St.Label({text: (i===0 || this.separator == "NO_SEP") ? c : this.separator + c});
+      
+      //~ let l = new St.Label({text: (i===0 || this.separator == "NO_SEP") ? c : this.separator + c});
+      let l = new St.Label({text: c});
+      
+      let sep_l = null;
+      if (i !== 0 && this.separator !== "NO_SEP") {
+        sep_l = new St.Label({text: this.separator});
+      }
+      
       if (l_style)
         l.set_style(l_style);
-
+      
+      if (sep_l) {
+        sep_l.set_style(`color: ${this.separator_color}; `);
+        sepBin = new St.Bin();
+        sepBin.set_child(sep_l);
+      }
       layoutBin.set_child(l);
+      if (sep_l) {
+        this.actor.add(sepBin, { y_align: St.Align.MIDDLE,
+                                  y_fill: false,
+                                });
+      }
       this.actor.add(layoutBin, { y_align: St.Align.MIDDLE,
                                   y_fill: false,
                                 });
@@ -539,6 +679,7 @@ class SensorsApplet extends Applet.Applet {
     var _known_keys = [];
 
     for (let k of this.sensors_list[type].get_value()) {
+      //~ let _sensor = k["sensor"].trim();
       let _sensor = k["sensor"];
 
       _known_keys.push(_sensor);
@@ -546,7 +687,8 @@ class SensorsApplet extends Applet.Applet {
       if (k["shown_name"].length > 0) {
         //if (this.custom_names[_sensor]) log("custom_names: \"" + this.custom_names[_sensor] + "\"", true);
 
-        if (this.custom_names[_sensor] && (_sensor.toString() === k["shown_name"].toString())) {
+        //~ if (this.custom_names[_sensor] && (_sensor.toString() === k["shown_name"].toString())) {
+        if (this.custom_names[_sensor] && (_sensor === k["shown_name"])) {
           delete this.custom_names[_sensor];
           k["shown_name"] = ""
         } else {
@@ -564,7 +706,9 @@ class SensorsApplet extends Applet.Applet {
     this.number_of_sensors[type].set_value(_sensors.length);
 
     for (let sensor of _sensors) {
-      name = sensor.toString().trim();
+      //~ name = sensor.toString().trim();
+      //~ name = sensor.trim();
+      name = sensor;
       toPush = {};
       index = _known_keys.indexOf(name);
       if (type === "temps") this.minimumIntegerDigitsTemp = 2;
@@ -603,10 +747,8 @@ class SensorsApplet extends Applet.Applet {
         this.sensors_list[type].set_value(ret);
         this.updateUI();
       }
-      //unref(ret);
       ret = null;
       _known_keys = null;
-      //unref(toPush);
       toPush = null;
       name = null;
       modified = null;
@@ -619,6 +761,51 @@ class SensorsApplet extends Applet.Applet {
   }
 
   read_disk_temps() {
+    if (!this.show_temp || this.temp_disks.length === 0) return;
+    const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
+    const _disks_temp_file_path = `${SENSORS_DIR}/disks.txt`;
+    const _disks_temp_file = Gio.file_new_for_path(_disks_temp_file_path);
+    var lines = [];
+    var temps = {};
+    if (_disks_temp_file.query_exists(null)) {
+      let [success, contents] = GLib.file_get_contents(_disks_temp_file_path);
+      if (success) {
+        if (typeof contents === "object")
+          lines = to_string(contents).split("\n");
+        else
+          lines = (""+contents).split("\n");
+
+        for (let line of lines) {
+          if (line.length === 0) continue;
+          let [name, temp] = line.trim().split(" ");
+          if (name.length > 0)
+            temps[name] = 1.0 * parseInt(temp);
+        }
+      }
+
+      for (let disk of this.temp_disks) {
+        if (!disk["show_in_tooltip"] && !disk["show_in_panel"]) continue;
+
+        let _disk_name = disk["disk"].trim();
+        var _temp = temps[_disk_name];
+        if (!isNaN(_temp)) {
+          if (disk["user_formula"] && disk["user_formula"].length > 0) {
+            let _user_formula = disk["user_formula"].replace(/\$/g, _temp);
+            _temp = 1.0 * eval(_user_formula)
+          }
+        }
+        if (typeof _temp === "number") {
+          disk["value"] = _temp;
+          this._temp[_disk_name] = _temp;
+        }
+      }
+      GLib.free(contents);
+    } else {
+      this.read_disk_temps_slow();
+    }
+  }
+
+  read_disk_temps_slow() {
     if (this.show_temp && this.temp_disks.length > 0) {
       for (let disk of this.temp_disks) {
         if (!disk["show_in_tooltip"] && !disk["show_in_panel"]) continue;
@@ -660,7 +847,8 @@ class SensorsApplet extends Applet.Applet {
     var temp_disks = this.temp_disks;
     let subProcess = spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
       if (exitCode === 0) {
-        let out = stdout.trim();
+        //~ let out = stdout.trim();
+        let out = stdout;
         let disks = out.split(" ");
         for (let d of disks) {
           var found = false;
@@ -715,7 +903,8 @@ class SensorsApplet extends Applet.Applet {
         for (let t of this.temp_sensors) {
           if (this.data["temps"][t["sensor"]] !== undefined) {
             if (t["show_in_tooltip"]) {
-              if (t["shown_name"] && t["sensor"].toString() === t["shown_name"].toString()) {
+              //~ if (t["shown_name"] && t["sensor"].toString() === t["shown_name"].toString()) {
+              if (t["shown_name"] && t["sensor"] === t["shown_name"]) {
                 if (this.custom_names[t["sensor"]]) delete this.custom_names[t["sensor"]];
                 t["shown_name"] = ""
               }
@@ -745,7 +934,8 @@ class SensorsApplet extends Applet.Applet {
 
       if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks.length > 0) {
         for (let disk of this.temp_disks) {
-          let _disk_name = disk["disk"].trim();
+          //~ let _disk_name = disk["disk"].trim();
+          let _disk_name = disk["disk"];
           if (disk["show_in_tooltip"]) {
             if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
             let _temp;
@@ -822,7 +1012,7 @@ class SensorsApplet extends Applet.Applet {
           }
         }
       }
-      if (_tooltip !== "") {
+      if (_tooltip.length > 0) {
         _tooltip = C_FAN + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
@@ -867,7 +1057,7 @@ class SensorsApplet extends Applet.Applet {
           }
         }
       }
-      if (_tooltip !== "") {
+      if (_tooltip.length > 0) {
         _tooltip = C_VOLT + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
@@ -900,7 +1090,7 @@ class SensorsApplet extends Applet.Applet {
           }
         }
       }
-      if (_tooltip !== "") {
+      if (_tooltip.length > 0) {
         _tooltip = C_INTRU + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
@@ -915,7 +1105,7 @@ class SensorsApplet extends Applet.Applet {
     if (this._applet_tooltip.set_markup === undefined)
       this.set_applet_tooltip(_tooltip);
     else
-      this._applet_tooltip.set_markup(_tooltip);
+      this.set_applet_tooltip(_tooltip, true);
 
     _tooltip = null;
     _tooltips = null
@@ -958,35 +1148,35 @@ class SensorsApplet extends Applet.Applet {
     this.data = this.reaper.get_sensors_data();
 
     // Customs:
-    if (this.custom_sensors.length !== 0) {
-      for (let cs of this.custom_sensors) {
-        let cs_sensor = "CUSTOM: "+cs.shown_name;
-        switch (cs.sensor_type) {
-          case "temperature":
-            if (!this.data["temps"][cs_sensor]) continue;
-            let dict = {};
-            dict["sensor"] = cs_sensor;
-            dict["shown_name"] = cs.shown_name;
-            dict["show_in_panel"] = cs.show_in_panel;
-            dict["show_in_tooltip"] = cs.show_in_tooltip;
-            dict["high_by_user"] = cs.high_by_user;
-            dict["crit_by_user"] = cs.crit_by_user;
-            dict["user_formula"] = cs.user_formula;
-            dict["input"] = this.data["temps"][cs_sensor]["input"];
-            this.temp_sensors[cs_sensor] = dict;
-            break;
-          case "fan":
+    //~ if (this.custom_sensors.length !== 0) {
+      //~ for (let cs of this.custom_sensors) {
+        //~ let cs_sensor = "CUSTOM: "+cs.shown_name;
+        //~ switch (cs.sensor_type) {
+          //~ case "temperature":
+            //~ if (!this.data["temps"][cs_sensor]) continue;
+            //~ let dict = {};
+            //~ dict["sensor"] = cs_sensor;
+            //~ dict["shown_name"] = cs.shown_name;
+            //~ dict["show_in_panel"] = cs.show_in_panel;
+            //~ dict["show_in_tooltip"] = cs.show_in_tooltip;
+            //~ dict["high_by_user"] = cs.high_by_user;
+            //~ dict["crit_by_user"] = cs.crit_by_user;
+            //~ dict["user_formula"] = cs.user_formula;
+            //~ dict["input"] = this.data["temps"][cs_sensor]["input"];
+            //~ this.temp_sensors[cs_sensor] = dict;
+            //~ break;
+          //~ case "fan":
 
-            break;
-          case "voltage":
+            //~ break;
+          //~ case "voltage":
 
-            break;
-          case "intrusion":
+            //~ break;
+          //~ case "intrusion":
 
-            break;
-        }
-      }
-    }
+            //~ break;
+        //~ }
+      //~ }
+    //~ }
 
     // Temperatures:
     var nbr_already_shown = 0;
@@ -1039,7 +1229,8 @@ class SensorsApplet extends Applet.Applet {
     }
     if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks && !this.nothingToShow(this.temp_disks)) {
       for (let disk of this.temp_disks) {
-        let _disk_name = disk["disk"].trim();
+        //~ let _disk_name = disk["disk"].trim();
+        let _disk_name = disk["disk"];
         if (disk["show_in_panel"] && _disk_name.length > 0) {
           if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
           if (disk["value"]) this._temp[_disk_name] = disk["value"];
@@ -1215,22 +1406,26 @@ class SensorsApplet extends Applet.Applet {
     } else {
       _appletLabel = this.label_parts.join(sep);
       if (!this.keep_size) {
-        while (_appletLabel.includes("  ")) {
-          _appletLabel = _appletLabel.replace(/  /g, " ");
-        }
+        //~ while (_appletLabel.includes("  ")) {
+          //~ _appletLabel = _appletLabel.replace(/  /g, " ");
+        _appletLabel = _appletLabel.replace(/\ +/g, " ");
+        //~ }
       }
 
-      while (_appletLabel.includes("\n\n")) {
-        _appletLabel = _appletLabel.replace(/\n\n/g, "\n");
-      }
+      //~ while (_appletLabel.includes("\n\n")) {
+        //~ _appletLabel = _appletLabel.replace(/\n\n/g, "\n");
+      _appletLabel = _appletLabel.replace(/\n+/g, "\n");
+      //~ }
       var sep_twice = "" + this.separator.trim() + " " + this.separator.trim();
       if (sep_twice.length > 1) {
+        //~ _appletLabel = _appletLabel.replace(/${sep_twice}/g, this.separator.trim());
         while (_appletLabel.indexOf(sep_twice) > -1) {
           _appletLabel = _appletLabel.replace(sep_twice, this.separator.trim());
         }
       }
       sep_twice = "" + this.separator + this.separator;
       if (sep_twice.length > 1) {
+        //~ _appletLabel = _appletLabel.replace(/${sep_twice}/g, this.separator);
         while (_appletLabel.includes(sep_twice)) {
           _appletLabel = _appletLabel.replace(sep_twice, this.separator);
         }
@@ -1286,7 +1481,8 @@ class SensorsApplet extends Applet.Applet {
         let _to = setTimeout( () => {
             clearTimeout(_to);
             if (this.menu.isOpen) this.menu.close();
-            this.pids.push(spawnCommandLine("/usr/bin/xlet-settings applet %s &".format(UUID)));
+            //~ this.pids.push(spawnCommandLine("xlet-settings applet %s".format(UUID)));
+            this.configureApplet(0)
           },
           300
         );
@@ -1302,7 +1498,8 @@ class SensorsApplet extends Applet.Applet {
         let _to = setTimeout( () => {
             clearTimeout(_to);
             if (this.menu.isOpen) this.menu.close();
-            this.pids.push(spawnCommandLineAsync("%s applet %s -t 1 &".format(XS_PATH, UUID)));
+            //~ this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 1".format(UUID)));
+            this.configureApplet(1)
           },
           300
         );
@@ -1318,7 +1515,8 @@ class SensorsApplet extends Applet.Applet {
         let _to = setTimeout( () => {
             clearTimeout(_to);
             if (this.menu.isOpen) this.menu.close();
-            this.pids.push(spawnCommandLine("%s applet %s -t 2 &".format(XS_PATH, UUID)));
+            //~ this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 2".format(UUID)));
+            this.configureApplet(2)
           },
           300
         );
@@ -1334,7 +1532,8 @@ class SensorsApplet extends Applet.Applet {
         let _to = setTimeout( () => {
             clearTimeout(_to);
             if (this.menu.isOpen) this.menu.close();
-            this.pids.push(spawnCommandLine("%s applet %s -t 3 &".format(XS_PATH, UUID)));
+            //~ this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 3".format(UUID)));
+            this.configureApplet(3)
           },
           300
         );
@@ -1350,7 +1549,8 @@ class SensorsApplet extends Applet.Applet {
         let _to = setTimeout( () => {
             clearTimeout(_to);
             if (this.menu.isOpen) this.menu.close();
-            this.pids.push(spawnCommandLine("%s applet %s -t 4 &".format(XS_PATH, UUID)));
+            //~ this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 4".format(UUID)));
+            this.configureApplet(4)
           },
           300
         );
@@ -1360,6 +1560,22 @@ class SensorsApplet extends Applet.Applet {
 
     // Button Custom:
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+    
+    // Maximizing mode:
+    //~ const items = ["none", "horizontally", "vertically", "both"];
+    //~ const translated_items = [_("none"), _("horizontally"), _("vertically"), _("both")];
+    //~ let maximize_combobox = new PopupMenu.PopupComboBoxMenuItem({});
+    //~ for (let i=0;i<items.length;i++) {
+      //~ maximize_combobox._menu.addMenuItem(new PopupMenu.PopupMenuItem(translated_items[i]), i);
+      //~ if (this.window_maximizing === items[i]) maximize_combobox._menu.setActiveItem(i);
+    //~ }
+    //~ maximize_combobox.connect('active-item-changed', (value) => {
+      //~ global.log("Item chosen: " + value);
+    //~ });
+    //~ this.menu.addMenuItem(maximize_combobox);
+    //~ maximize_combobox._menu.open(),
+    
+    //~ this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
     // Button xsensors
     let _values_in_real_time_button = new PopupMenu.PopupIconMenuItem(_("Run xsensors"),
@@ -1572,6 +1788,8 @@ class SensorsApplet extends Applet.Applet {
         this.loopId = null;
     }
     this.detect_markup();
+    spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval + " &");
+    this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
     this.isLooping = true;
     this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
   }
@@ -1615,28 +1833,51 @@ class SensorsApplet extends Applet.Applet {
   }
 
   on_applet_removed_from_panel() {
+    //~ const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
+    const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
+    const SENSORS_WITNESS=`${SENSORS_DIR}/witness`;
+    const SENSORS_DISKSWITNESS=`${SENSORS_DIR}/DisksWitness`;
+    let witness = Gio.file_new_for_path(SENSORS_WITNESS);
+    if (witness.query_exists(null))
+      witness.delete(null);
+    witness = null;
+    let diskwitness = Gio.file_new_for_path(SENSORS_DISKSWITNESS);
+    if (diskwitness.query_exists(null))
+      diskwitness.delete(null);
+    diskwitness = null;
+
     this.on_applet_reloaded();
     remove_all_sources();
   }
 
   on_applet_added_to_panel(userEnabled) {
-    // Check about dependencies:
-    this.checkDepInterval = null;
-    if (this.dependencies.areDepMet()) {
-      // All dependencies are installed. Now, run the loop!:
+    if (!this.do_not_check_dependencies) {
+      // Check about dependencies:
+      this.checkDepInterval = null;
+      if (this.dependencies.areDepMet()) {
+        // All dependencies are installed. Now, run the loop!:
+        spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
+        this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
+        this.isLooping = true;
+        this.reap_sensors();
+      } else {
+        // Some dependencies are missing. Suggest to the user to install them.
+        this.isLooping = false;
+        this.checkDepInterval = setInterval(
+          () => {
+            clearInterval(this.checkDepInterval);
+            this.dependencies.check_dependencies();
+            this.checkDepInterval = null;
+          },
+          10000
+        );
+      }
+    } else {
+      this.checkDepInterval = null;
+      spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
+      this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
       this.isLooping = true;
       this.reap_sensors();
-    } else {
-      // Some dependencies are missing. Suggest to the user to install them.
-      this.isLooping = false;
-      this.checkDepInterval = setInterval(
-        () => {
-          clearInterval(this.checkDepInterval);
-          this.dependencies.check_dependencies();
-          this.checkDepInterval = null;
-        },
-        10000
-      );
     }
   }
 

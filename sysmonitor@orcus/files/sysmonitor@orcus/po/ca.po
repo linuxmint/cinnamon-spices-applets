@@ -10,14 +10,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-03-22 07:52-0400\n"
-"PO-Revision-Date: 2024-07-10 01:34+0200\n"
+"PO-Revision-Date: 2025-09-28 17:03+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. 3.0/providers.js:49 3.2/providers.js:56
 msgid "CPU:"
@@ -301,11 +301,11 @@ msgstr "Colors"
 
 #. 3.2->settings-schema.json->net_minimum_graph_scale->description
 msgid "Minimum graph scale"
-msgstr ""
+msgstr "Escala mínima del gràfic"
 
 #. 3.2->settings-schema.json->net_minimum_graph_scale->units
 msgid "Mb/s"
-msgstr ""
+msgstr "Mb/s"
 
 #. 3.2->settings-schema.json->net_minimum_graph_scale->tooltip
 msgid ""
@@ -315,3 +315,8 @@ msgid ""
 "\n"
 "To always automatically scale, set the value to 0."
 msgstr ""
+"L'escala mínima del gràfic en Megabits per segon.\n"
+"El gràfic no escalarà per sota d'aquest mínim, però ho farà si la velocitat "
+"de la xarxa n'excedeix el valor.\n"
+"\n"
+"Per a escalar sempre automàticament, assigneu el valor a 0."

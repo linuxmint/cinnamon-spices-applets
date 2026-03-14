@@ -8,9 +8,11 @@ from xapp.SettingsWidgets import *
 sys.path.append("/usr/share/cinnamon/cinnamon-settings/bin")
 
 #from SettingsWidgets import SoundFileChooser, DateChooser, TimeChooser, Keybinding
-from SettingsWidgets import DateChooser, TimeChooser, Keybinding
+# ~ from SettingsWidgets import DateChooser, TimeChooser, Keybinding
+from R3SettingsWidgets import DateChooser, TimeChooser, Keybinding
 from xapp.GSettingsWidgets import CAN_BACKEND as px_can_backend
-from SettingsWidgets import CAN_BACKEND as c_can_backend
+# ~ from SettingsWidgets import CAN_BACKEND as c_can_backend
+from R3SettingsWidgets import CAN_BACKEND as c_can_backend
 from R3TreeListWidgets import List
 import os
 import collections
@@ -155,8 +157,8 @@ class JSONSettingsHandler(object):
             if new_value != old_settings[key]["value"]:
                 for callback in callback_list:
                     callback(key, new_value)
-            if "options" in self.settings[key]:
-                print(key, "has options")
+            # ~ if "options" in self.settings[key]:
+                # ~ print(key, "has options")
 
     def get_settings(self):
         file = open(self.filepath)
@@ -390,9 +392,9 @@ class ComboBox(SettingsWidget):
             self.file_options_changed_monitor.connect("changed", self.do_update_options)
 
     def on_my_value_changed(self, widget):
-        print("self.key: ", self.key)
-        if self.key in ["category-to-move", "sched-radio"]:
-            print("\nComboBox: on_my_value_changed", self.key)
+        # ~ print("self.key: ", self.key)
+        # ~ if self.key in ["category-to-move", "sched-radio"]:
+            # ~ print("\nComboBox: on_my_value_changed", self.key)
 
             #self.content_widget.emit('popdown')
 
@@ -402,11 +404,11 @@ class ComboBox(SettingsWidget):
         if tree_iter != None:
             self.value = self.model[tree_iter][0]
             self.set_value(self.value)
-            print("value: "+self.value)
+            # ~ print("value: "+self.value)
 
     def on_setting_changed(self, *args):
         if self.key in ["category-to-move", "sched-radio"]:
-            print("\nComboBox: on_setting_changed", self.key)
+            # ~ print("\nComboBox: on_setting_changed", self.key)
             #print("len(args): "+str(len(args)))
 
             #if len(args) > 0:
@@ -414,7 +416,7 @@ class ComboBox(SettingsWidget):
             # ~ print("settings: "+self.settings.filepath)
             options = []
             for key, value in stgs[self.key]["options"].items():
-                print(key, value)
+                # ~ print(key, value)
                 options.append([value, key])
             if len(options) > 0:
                 self.set_options(options)
@@ -434,8 +436,8 @@ class ComboBox(SettingsWidget):
         #self.content_widget.connect('popdown', self.do_update_options)
 
     def set_options(self, options):
-        if self.key in ["category-to-move", "sched-radio"]:
-            print("ComboBox: set_options", self.key)
+        # ~ if self.key in ["category-to-move", "sched-radio"]:
+            # ~ print("ComboBox: set_options", self.key)
             # ~ print("type: "+str(type(options)))
         if self.valtype != None:
             var_type = self.valtype
@@ -457,8 +459,8 @@ class ComboBox(SettingsWidget):
 
         self.option_map = {}
         for option in options:
-            if self.key in ["category-to-move", "sched-radio"]:
-                print(option[0], option[1])
+            # ~ if self.key in ["category-to-move", "sched-radio"]:
+                # ~ print(option[0], option[1])
             self.option_map[option[0]] = self.model.append([option[0], option[1]])
 
         self.content_widget.set_id_column(0)

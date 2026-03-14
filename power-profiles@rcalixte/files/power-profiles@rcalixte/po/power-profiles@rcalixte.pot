@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: power-profiles@rcalixte 1.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-15 16:04-0400\n"
+"POT-Creation-Date: 2025-10-15 02:11-0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,56 +17,56 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. 5.4/applet.js:25
+#. 5.4/applet.js:28
 msgid "Power Saver"
 msgstr ""
 
-#. 5.4/applet.js:26
+#. 5.4/applet.js:29
 msgid "Balanced"
 msgstr ""
 
-#. 5.4/applet.js:27
+#. 5.4/applet.js:30
 msgid "Performance"
 msgstr ""
 
-#. 5.4/applet.js:60
+#. 5.4/applet.js:63 5.4/applet.js:70
+msgid ""
+"Please make sure the power-profiles-daemon package is installed and the "
+"service is running."
+msgstr ""
+
+#. 5.4/applet.js:64
+msgid "exception:"
+msgstr ""
+
+#. 5.4/applet.js:117
 msgid "Power Profiles Applet Error"
 msgstr ""
 
-#. 5.4/applet.js:61
+#. 5.4/applet.js:118
 msgid ""
 "The system package 'power-profiles-daemon' is not installed.\n"
 "\n"
 "Please install it and reload the applet."
 msgstr ""
 
-#. 5.4/applet.js:63
+#. 5.4/applet.js:120
 msgid "Open README"
 msgstr ""
 
-#. 5.4/applet.js:64
+#. 5.4/applet.js:121
 msgid "Open Website"
 msgstr ""
 
-#. 5.4/applet.js:88 5.4/applet.js:94
-msgid ""
-"Please make sure the power-profiles-daemon package is installed and the "
-"service is running."
-msgstr ""
-
-#. 5.4/applet.js:89
-msgid "exception:"
-msgstr ""
-
-#. 5.4/applet.js:138
+#. 5.4/applet.js:151
 msgid "Current Profile:"
 msgstr ""
 
-#. 5.4/applet.js:143
+#. 5.4/applet.js:156
 msgid "Performance Degraded:"
 msgstr ""
 
-#. 5.4/applet.js:154
+#. 5.4/applet.js:167
 msgid "Active Profile Holds:"
 msgstr ""
 
@@ -78,6 +78,40 @@ msgstr ""
 
 #. metadata.json->name
 msgid "Power Profiles"
+msgstr ""
+
+#. 5.4->settings-schema.json->section0->description
+msgid "General"
+msgstr ""
+
+#. 5.4->settings-schema.json->cycleProfiles->description
+msgid "Cycle through profiles when using keyboard shortcuts or scroll wheel"
+msgstr ""
+
+#. 5.4->settings-schema.json->cycleProfiles->tooltip
+msgid ""
+"If enabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the next profile would be 'Performance' "
+"(or 'Balanced' on some systems).\n"
+"\n"
+"If disabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the profile would not change."
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->description
+msgid "Scroll wheel behavior"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Nothing"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles (reversed)"
 msgstr ""
 
 #. 5.4->settings-schema.json->section1->description
@@ -98,20 +132,6 @@ msgstr ""
 
 #. 5.4->settings-schema.json->nextProfileKey->tooltip
 msgid "Set keybinding(s) to switch to next power profile."
-msgstr ""
-
-#. 5.4->settings-schema.json->cycleProfiles->description
-msgid "Cycle through profiles when using keyboard shortcuts"
-msgstr ""
-
-#. 5.4->settings-schema.json->cycleProfiles->tooltip
-msgid ""
-"If enabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the next profile would be 'Performance' "
-"(or 'Balanced' on some systems).\n"
-"\n"
-"If disabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the profile would not change."
 msgstr ""
 
 #. 5.4->settings-schema.json->showOSD->description

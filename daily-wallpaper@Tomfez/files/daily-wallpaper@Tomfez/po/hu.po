@@ -1,0 +1,382 @@
+# DAILY DESKTOP WALLPAPER
+# This file is put in the public domain.
+# Tomfez, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: daily-wallpaper@Tomfez 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-25 21:26+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#. metadata.json->name
+#. applet.js:47
+msgid "Daily desktop wallpaper"
+msgstr "Napi asztali háttérkép"
+
+#. applet.js:117
+msgid "Refresh"
+msgstr "Frissítés"
+
+#. applet.js:130
+msgid "Copy image URL to clipboard"
+msgstr "Kép URL-címének másolása a vágólapra"
+
+#. applet.js:131
+msgid "Open image folder"
+msgstr "Képmappa megnyitása"
+
+#. applet.js:133
+msgid "Settings"
+msgstr "Beállítások"
+
+#. applet.js:290
+msgid "Next refresh"
+msgstr "Következő frissítés"
+
+#. applet.js:336
+msgid "This is the most recent image."
+msgstr "Ez a legfrissebb kép."
+
+#. applet.js:344
+msgid "Last image. Unable to get more images."
+msgstr "Utolsó kép. Nem sikerült több képet beszerezni."
+
+#. applet.js:388
+msgid "Refresh deactivated"
+msgstr "Frissítés kikapcsolva"
+
+#. applet.js:448 applet.js:475
+#, javascript-format
+msgid "Wallpaper of the day at %s for %s"
+msgstr "A nap háttérképe %s-ban %s-nak"
+
+#. source.js:83 source.js:102
+msgid "No image today."
+msgstr "Ma nincs kép."
+
+#. utils.js:90 utils.js:93
+msgid "minutes"
+msgstr "perc"
+
+#. utils.js:96
+msgid "days"
+msgstr "nap"
+
+#. utils.js:99
+msgid "hours"
+msgstr "óra"
+
+#. metadata.json->description
+msgid "Download and apply a daily wallpaper to your desktop"
+msgstr "Tölts le és alkalmazz egy napi háttérképet az asztalodra"
+
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr "Általános"
+
+#. settings-schema.json->pageHelp->title
+msgid "Help"
+msgstr "Súgó"
+
+#. settings-schema.json->sectionUpdatePreferences->title
+msgid "Update preferences"
+msgstr "Beállítások frissítése"
+
+#. settings-schema.json->section1->title
+msgid "Image preferences"
+msgstr "Képbeállítások"
+
+#. settings-schema.json->sectionDebug->title
+#. settings-schema.json->debugToggle->description
+msgid "Debug"
+msgstr "Hibakeresés"
+
+#. settings-schema.json->currentSource->description
+msgid "Source of images"
+msgstr "A képek forrása"
+
+#. settings-schema.json->currentSource->options
+msgid "Bing"
+msgstr "Bing"
+
+#. settings-schema.json->currentSource->options
+msgid "Wikimedia"
+msgstr "Wikimedia"
+
+#. settings-schema.json->currentSource->options
+msgid "APOD"
+msgstr "APOD"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Update interval to check new wallpaper"
+msgstr "Frissítési intervallum az új háttérkép ellenőrzéséhez"
+
+#. settings-schema.json->refreshInterval->units
+msgid "Minutes"
+msgstr "Perc"
+
+#. settings-schema.json->saveWallpaper->description
+msgid "Save wallpaper to image directory"
+msgstr "Háttérkép mentése a képkönyvtárba"
+
+#. settings-schema.json->wallpaperNamePreferences->description
+msgid "Name of the file when saved to the image directory"
+msgstr "A fájl neve a képkönyvtárba mentéskor"
+
+#. settings-schema.json->wallpaperNamePreferences->tooltip
+msgid ""
+"Original: original file name.\n"
+"Custom: source name + date (ex: BingWallpaper_20240801.jpg)"
+msgstr ""
+"Eredeti: eredeti fájlnév.\n"
+"Egyéni: forrásnév + dátum (pl.: BingWallpaper_20240801.jpg)"
+
+#. settings-schema.json->wallpaperNamePreferences->options
+msgid "Original"
+msgstr "Eredeti"
+
+#. settings-schema.json->wallpaperNamePreferences->options
+msgid "Custom"
+msgstr "Egyéni"
+
+#. settings-schema.json->wallpaperDir->description
+msgid "Image directory"
+msgstr "Képkönyvtár"
+
+#. settings-schema.json->wallpaperDir->tooltip
+msgid "For example: /home/username/Pictures/wallpapers"
+msgstr "Például: /home/felhasználónév/Képek/hátterképek"
+
+#. settings-schema.json->dailyRefreshState->description
+msgid "Enable daily refresh"
+msgstr "Napi frissítés engedélyezése"
+
+#. settings-schema.json->selectedImagePreferences->description
+msgid "Selected image"
+msgstr "Kiválasztott kép"
+
+#. settings-schema.json->selectedImagePreferences->options
+msgid "Most recent"
+msgstr "Legfrissebb"
+
+#. settings-schema.json->selectedImagePreferences->options
+msgid "Random"
+msgstr "Véletlenszerű"
+
+#. settings-schema.json->selectedImagePreferences->tooltip
+msgid ""
+"Select the most recent image or a random image when the applet is launched"
+msgstr ""
+"A legújabb kép vagy egy véletlenszerű kép kiválasztása az applet "
+"indításakor"
+
+#. settings-schema.json->market->description
+msgid "Bing locale"
+msgstr "Bing locale"
+
+#. settings-schema.json->market->options
+msgid "auto-auto"
+msgstr "auto-auto"
+
+#. settings-schema.json->market->options
+msgid "da-DK, Denmark, Danish"
+msgstr "da-DK, Denmark, Danish"
+
+#. settings-schema.json->market->options
+msgid "de-AT, Austria, German"
+msgstr "de-AT, Austria, German"
+
+#. settings-schema.json->market->options
+msgid "de-CH, Switzerland, German"
+msgstr "de-CH, Switzerland, German"
+
+#. settings-schema.json->market->options
+msgid "de-DE, Germany, German"
+msgstr "de-DE, Germany, German"
+
+#. settings-schema.json->market->options
+msgid "en-AU, Australia, English"
+msgstr "en-AU, Australia, English"
+
+#. settings-schema.json->market->options
+msgid "en-CA, Canada, English"
+msgstr "en-CA, Canada, English"
+
+#. settings-schema.json->market->options
+msgid "en-GB, United Kingdom, English"
+msgstr "en-GB, United Kingdom, English"
+
+#. settings-schema.json->market->options
+msgid "en-ID, Indonesia, English"
+msgstr "en-ID, Indonesia, English"
+
+#. settings-schema.json->market->options
+msgid "en-IN, India, English"
+msgstr "en-IN, India, English"
+
+#. settings-schema.json->market->options
+msgid "en-MY, Malaysia, English"
+msgstr "en-MY, Malaysia, English"
+
+#. settings-schema.json->market->options
+msgid "en-NZ, New Zealand, English"
+msgstr "en-NZ, New Zealand, English"
+
+#. settings-schema.json->market->options
+msgid "en-PH, Republic of the Philippines, English"
+msgstr "en-PH, Republic of the Philippines, English"
+
+#. settings-schema.json->market->options
+msgid "en-US, United States, English"
+msgstr "en-US, United States, English"
+
+#. settings-schema.json->market->options
+msgid "en-ZA, South Africa, English"
+msgstr "en-ZA, South Africa, English"
+
+#. settings-schema.json->market->options
+msgid "es-AR, Argentina, Spanish"
+msgstr "es-AR, Argentina, Spanish"
+
+#. settings-schema.json->market->options
+msgid "es-CL, Chile, Spanish"
+msgstr "es-CL, Chile, Spanish"
+
+#. settings-schema.json->market->options
+msgid "es-ES, Spain, Spanish"
+msgstr "es-ES, Spain, Spanish"
+
+#. settings-schema.json->market->options
+msgid "es-MX, Mexico, Spanish"
+msgstr "es-MX, Mexico, Spanish"
+
+#. settings-schema.json->market->options
+msgid "es-US, United States, Spanish"
+msgstr "es-US, United States, Spanish"
+
+#. settings-schema.json->market->options
+msgid "fi-FI, Finland, Finnish"
+msgstr "fi-FI, Finland, Finnish"
+
+#. settings-schema.json->market->options
+msgid "fr-BE, Belgium, French"
+msgstr "fr-BE, Belgium, French"
+
+#. settings-schema.json->market->options
+msgid "fr-CA, Canada, French"
+msgstr "fr-CA, Canada, French"
+
+#. settings-schema.json->market->options
+msgid "fr-CH, Switzerland, French"
+msgstr "fr-CH, Switzerland, French"
+
+#. settings-schema.json->market->options
+msgid "fr-FR, France, French"
+msgstr "fr-FR, France, French"
+
+#. settings-schema.json->market->options
+msgid "it-IT, Italy, Italian"
+msgstr "it-IT, Italy, Italian"
+
+#. settings-schema.json->market->options
+msgid "ja-JP, Japan, Japanese"
+msgstr "ja-JP, Japan, Japanese"
+
+#. settings-schema.json->market->options
+msgid "ko-KR, Korea, Korean"
+msgstr "ko-KR, Korea, Korean"
+
+#. settings-schema.json->market->options
+msgid "nl-BE, Belgium, Dutch"
+msgstr "nl-BE, Belgium, Dutch"
+
+#. settings-schema.json->market->options
+msgid "nl-NL, Netherlands, Dutch"
+msgstr "nl-NL, Netherlands, Dutch"
+
+#. settings-schema.json->market->options
+msgid "no-NO, Norway, Norwegian"
+msgstr "no-NO, Norway, Norwegian"
+
+#. settings-schema.json->market->options
+msgid "pl-PL, Poland, Polish"
+msgstr "pl-PL, Poland, Polish"
+
+#. settings-schema.json->market->options
+msgid "pt-BR, Brazil, Portuguese"
+msgstr "pt-BR, Brazil, Portuguese"
+
+#. settings-schema.json->market->options
+msgid "ru-RU, Russia, Russian"
+msgstr "ru-RU, Russia, Russian"
+
+#. settings-schema.json->market->options
+msgid "sv-SE, Sweden, Swedish"
+msgstr "sv-SE, Sweden, Swedish"
+
+#. settings-schema.json->market->options
+msgid "tr-TR, Türkiye, Turkish"
+msgstr "tr-TR, Türkiye, Turkish"
+
+#. settings-schema.json->market->options
+msgid "zh-CN, People's republic of China, Chinese"
+msgstr "zh-CN, People's republic of China, Chinese"
+
+#. settings-schema.json->market->options
+msgid "zh-HK, Hong Kong SAR, Traditional Chinese"
+msgstr "zh-HK, Hong Kong SAR, Traditional Chinese"
+
+#. settings-schema.json->market->options
+msgid "zh-TW, Taiwan, Traditional Chinese"
+msgstr "zh-TW, Taiwan, Traditional Chinese"
+
+#. settings-schema.json->apiKey->description
+msgid "API key"
+msgstr "API kulcs"
+
+#. settings-schema.json->apiKey->tooltip
+msgid ""
+"Set your API key for APOD API. The default API key is used for initially "
+"exploring APIs prior to signing up, but it has much lower rate limits."
+msgstr ""
+"Állítsd be az APOD API-hoz tartozó API-kulcsot. Az alapértelmezett API-"
+"kulcsot a regisztráció előtti API-k felfedezéséhez használjuk, de ennek "
+"sokkal alacsonyabbak a sebességkorlátjai."
+
+#. settings-schema.json->image-aspect-options->description
+msgid "Image aspect"
+msgstr "Képarány"
+
+#. settings-schema.json->image-aspect-options->options
+msgid "Zoom"
+msgstr "Nagyítás"
+
+#. settings-schema.json->image-aspect-options->options
+msgid "Centered"
+msgstr "Középre"
+
+#. settings-schema.json->image-aspect-options->options
+msgid "Scaled"
+msgstr "Méretezett"
+
+#. settings-schema.json->image-aspect-options->options
+msgid "Stretched"
+msgstr "Nyújtott"
+
+#. settings-schema.json->image-aspect-options->options
+msgid "Spanned"
+msgstr "Áthidalt"
+
+#. settings-schema.json->image-aspect-options->options
+msgid "Mosaic"
+msgstr "Mozaik"

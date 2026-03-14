@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-### Installs playerctl with password dialog:
+### Installs imagemagick with password dialog:
 pkexec pkcon -y install imagemagick
 ### Pause 1 second:
 sleep 1

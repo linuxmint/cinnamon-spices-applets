@@ -1,0 +1,134 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: gputemperature@silentage.com 2.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2017-04-27 12:49+0800\n"
+"PO-Revision-Date: 2025-10-12 10:33+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:58
+msgid "GPU: ??ᴼC"
+msgstr "GPU: ??ᴼC"
+
+#: applet.js:70
+msgid "Current Temperature of your NVidia based GPU"
+msgstr "Nhiệt độ hiện tại của GPU NVidia của bạn"
+
+#: applet.js:75
+msgid "Current Temperature of your ATI based GPU"
+msgstr "Nhiệt độ hiện tại của GPU ATI của bạn"
+
+#: applet.js:80
+msgid "No supported GPUs detected."
+msgstr "Không phát hiện GPU hỗ trợ nào."
+
+#: applet.js:133 applet.js:348
+msgid "Temperature"
+msgstr "Nhiệt độ"
+
+#: applet.js:152 applet.js:441
+msgid "GPU:"
+msgstr "GPU:"
+
+#: applet.js:352
+msgid "Driver"
+msgstr "Trình điều khiển"
+
+#: applet.js:360
+msgid "Video Memory"
+msgstr "Bộ nhớ đồ họa"
+
+#: applet.js:363
+msgid "Total"
+msgstr "Tổng"
+
+#: applet.js:367
+msgid "Used"
+msgstr "Đã dùng"
+
+#: applet.js:371
+msgid "Interface"
+msgstr "Giao diện"
+
+#: applet.js:375
+msgid "Memory Clock"
+msgstr "Tốc độ bộ nhớ"
+
+#: applet.js:380
+msgid "Cuda Cores"
+msgstr "Nhân CUDA"
+
+#: applet.js:384
+msgid "Gpu Clock"
+msgstr "Tốc độ GPU"
+
+#: applet.js:388
+msgid "PCI Speed"
+msgstr "Tốc độ PCI"
+
+#: applet.js:403
+msgid "Fan "
+msgstr "Quạt "
+
+#: applet.js:411
+msgid "Displays:"
+msgstr "Màn hình:"
+
+#: applet.js:740
+msgid "No GPU Name"
+msgstr "Không có tên GPU"
+
+#: applet.js:805
+msgid "No Display Name"
+msgstr "Không có tên màn hình"
+
+#: applet.js:844
+msgid " GPU: ??ᴼC ERROR"
+msgstr "GPU: ??ᴼC LỖI"
+
+#: applet.js:846
+msgid "We couldn't determine your GPU's temperature."
+msgstr "Chúng tôi không thể xác định nhiệt độ GPU của bạn."
+
+#: applet.js:848
+msgid "If you have a NVIDIA GPU, please try installing"
+msgstr "Nếu bạn có GPU NVIDIA, vui lòng thử cài đặt"
+
+#: applet.js:849
+msgid "the binary drivers from http://geforce.com/drivers"
+msgstr "trình điều khiển nhị phân từ http://geforce.com/drivers"
+
+#: applet.js:850
+msgid "and the nvidia-settings package for your distribution."
+msgstr "và gói nvidia-settings cho bản phân phối của bạn."
+
+#: applet.js:852
+msgid "If you have an ATI GPU, please install the LM-SENSORS"
+msgstr "Nếu bạn có GPU ATI, vui lòng cài đặt LM-SENSORS"
+
+#: applet.js:853
+msgid "packages for your distribution."
+msgstr "các gói cho bản phân phối của bạn."
+
+#. gputemperature@silentage.com->metadata.json->name
+msgid "GPU Temperature"
+msgstr "Nhiệt độ GPU"
+
+#. gputemperature@silentage.com->metadata.json->description
+msgid ""
+"Shows NVidia/ATI GPU temperature in the panel, and detailed/multi-gpu "
+"information in a popup menu."
+msgstr "Hiển thị nhiệt độ GPU NVidia/ATI trong panel, và thông tin chi tiết/multi-GPU trong menu bật lên."

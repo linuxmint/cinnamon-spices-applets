@@ -26,7 +26,7 @@ msgid ""
 "Connect to VPN in one click from this applet. ExpressVPN client is required "
 "(this is a paid service)"
 msgstr ""
-"只需點選一下，即可快速連線 VPN。需要安裝 ExpressVPN 用戶端（此為付費服務）"
+"只需點選一下，即可快速連線 VPN。需要安裝 ExpressVPN 應用程式（此為付費服務）"
 
 #. settings-schema.json->configuration->description
 msgid "Configuration"

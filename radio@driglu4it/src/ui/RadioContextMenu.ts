@@ -37,7 +37,7 @@ export function createRadioContextMenu(args: PopupMenuProps) {
             iconName: 'system-run',
             text: 'Configure...',
             onActivated: () => {
-                spawnCommandLineWithErrorLogging(`xlet-settings applet ${__meta.uuid} ${__meta.instanceId} -t 0`)
+                spawnCommandLineWithErrorLogging(`xlet-settings applet ${__meta.uuid} -t 0`)
             }
         }, {
             iconName: 'edit-delete',

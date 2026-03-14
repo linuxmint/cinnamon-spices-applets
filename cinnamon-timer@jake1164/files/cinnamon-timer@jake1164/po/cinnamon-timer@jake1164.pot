@@ -200,8 +200,7 @@ msgstr ""
 msgid ""
 "If the alarm time is less than the minutes specified below away,\n"
 "the alarm time can be displayed with more details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
 msgstr ""
 
 #. 3.4->settings-schema.json->alarmtime-format-large->description
@@ -214,8 +213,7 @@ msgstr ""
 msgid ""
 "If the alarm time is more than the minutes specified below away,\n"
 "the alarm time can be displayed with less details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
 msgstr ""
 
 #. 3.4->settings-schema.json->alarmtime-format-switchover->units

@@ -201,13 +201,11 @@ msgstr "時間較近時的鬧鐘顯示格式"
 msgid ""
 "If the alarm time is less than the minutes specified below away,\n"
 "the alarm time can be displayed with more details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
 msgstr ""
 "若鬧鐘時間在下方指定的分鐘數內，\n"
 "鬧鐘時間便可顯示更多細節\n"
-"（請參閱 https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
-"time-format）"
+"（請參閱 https://docs.gtk.org/glib/method.DateTime.format.html）"
 
 #. 3.4->settings-schema.json->alarmtime-format-large->description
 #. 6.4->settings-schema.json->alarmtime-format-large->description
@@ -219,13 +217,11 @@ msgstr "時間較遠時的鬧鐘顯示格式"
 msgid ""
 "If the alarm time is more than the minutes specified below away,\n"
 "the alarm time can be displayed with less details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
 msgstr ""
 "若鬧鐘時間超過下方指定的分鐘數，\n"
 "可顯示較精簡的時間格式\n"
-"（請參閱 https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
-"time-format）"
+"（請參閱 https://docs.gtk.org/glib/method.DateTime.format.html）"
 
 #. 3.4->settings-schema.json->alarmtime-format-switchover->units
 #. 6.4->settings-schema.json->alarmtime-format-switchover->units

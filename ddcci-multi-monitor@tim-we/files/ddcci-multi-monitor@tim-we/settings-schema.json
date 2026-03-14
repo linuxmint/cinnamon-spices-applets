@@ -1,7 +1,7 @@
 {
     "layout": {
         "type": "layout",
-        "pages": ["page_general"],
+        "pages": ["page_general", "page_retry_detection"],
 
         "page_general": {
             "type": "page",
@@ -11,6 +11,14 @@
                 "section_scrolling",
                 "section_togglepoints",
                 "section_monitor"
+            ]
+        },
+
+        "page_retry_detection": {
+            "type": "page",
+            "title": "Detection",
+            "sections": [
+                "section_retry_detection"
             ]
         },
 
@@ -49,27 +57,38 @@
               "scale_toggle_point_2",
               "scale_toggle_point_3"
           ]
-      }
-      },
+        },
 
-      "entry_applet-label": {
+        "section_retry_detection": {
+            "type": "section",
+            "title": "Automatic Retry Detection",
+            "keys": [
+                "switch_enable-retry-detection",
+                "spinbutton_target-monitor-count",
+                "spinbutton_max-retry-attempts",
+                "spinbutton_retry-delay"
+            ]
+        }
+    },
+
+    "entry_applet-label": {
         "type": "entry",
         "default": "",
         "description": "Text shown next to the icon in the panel.\nLeave empty for no label."
-      },
-      "switch_show-bus-number": {
+    },
+    "switch_show-bus-number": {
         "type": "switch",
         "default": false,
         "description": "Show bus number next to the detected monitors."
-      },
+    },
 
-      "switch_manual-select-monitors": {
+    "switch_manual-select-monitors": {
         "type": "switch",
         "default": false,
         "description": "By default, scrolling & toggling adjusts brightness for all monitors.\nSwitch to enable custom monitor selection.\nThis will add checkbox options for each detected monitor."
-      },
+    },
 
-      "combobox_scroll-step": {
+    "combobox_scroll-step": {
         "type": "combobox",
         "default": 5,
         "options": {
@@ -82,14 +101,14 @@
           "50": 50
         },
         "description": "Adjustment step for brightness"
-      },
+    },
 
-      "switch_use-toggle-points": {
+    "switch_use-toggle-points": {
         "type": "switch",
         "default": false,
         "description": "Enable toggle points for brightness adjustment.\n(via mouse middle click)"
-      },
-      "spinbutton_num-of-toggle-points": {
+    },
+    "spinbutton_num-of-toggle-points": {
         "type": "spinbutton",
         "default": 3,
         "min": 1,
@@ -97,8 +116,8 @@
         "step": 1,
         "description": "Number of toggle points for brightness adjustment\n(only the first N toggle points will be used)",
         "dependency": "switch_use-toggle-points"
-      },
-      "scale_toggle_point_1": {
+    },
+    "scale_toggle_point_1": {
         "type": "scale",
         "default": 0,
         "min": 0,
@@ -106,8 +125,8 @@
         "step": 1,
         "description": "Brightness level for toggle point 1",
         "dependency": "switch_use-toggle-points"
-      },
-      "scale_toggle_point_2": {
+    },
+    "scale_toggle_point_2": {
         "type": "scale",
         "default": 50,
         "min": 0,
@@ -115,8 +134,8 @@
         "step": 1,
         "description": "Brightness level for toggle point 2",
         "dependency": "switch_use-toggle-points"
-      },
-      "scale_toggle_point_3": {
+    },
+    "scale_toggle_point_3": {
         "type": "scale",
         "default": 100,
         "min": 0,
@@ -124,11 +143,45 @@
         "step": 1,
         "description": "Brightness level for toggle point 3",
         "dependency": "switch_use-toggle-points"
-      },
+    },
 
-      "string_active-monitors": {
-          "type": "string",
-          "default": "{}",
-          "description": "Stores which monitors are active for scroll/click functions.\nThis is a JSON object where keys are bus numbers and values are true/false.\nExample: {\"1\":true,\"2\":false}"
-      }
+    "switch_enable-retry-detection": {
+        "type": "switch",
+        "default": false,
+        "description": "Enable automatic retry detection during startup.\nHelps ensure all monitors are detected when DDC/CI buses take time to initialize."
+    },
+    "spinbutton_target-monitor-count": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "description": "Expected number of monitors to detect.\nThe applet will retry detection until this many monitors are found or max attempts reached.",
+        "dependency": "switch_enable-retry-detection"
+    },
+    "spinbutton_max-retry-attempts": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "description": "Maximum number of retry attempts.\nLimited to 5 attempts to prevent excessive startup delays.",
+        "dependency": "switch_enable-retry-detection"
+    },
+    "spinbutton_retry-delay": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "units": "seconds",
+        "description": "Delay between detection attempts.\nTime to wait before retrying monitor detection (1-10 seconds).",
+        "dependency": "switch_enable-retry-detection"
+    },
+
+    "string_active-monitors": {
+        "type": "string",
+        "default": "{}",
+        "description": "Stores which monitors are active for scroll/click functions.\nThis is a JSON object where keys are bus numbers and values are true/false.\nExample: {\"1\":true,\"2\":false}"
+    }
 }

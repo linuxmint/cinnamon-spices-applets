@@ -100,3 +100,11 @@ msgid ""
 msgstr ""
 "Habitualment hauria d'acabar amb -e de manera que s'executi l'ordre ssh "
 "proveïda. Reviseu el manual del vostre terminal."
+
+#. settings-schema.json->showConnectionNotification->description
+msgid "Show notification when launching SSH connection"
+msgstr "Mostrar notificació en iniciar connexió SSH"
+
+#. settings-schema.json->showConnectionNotification->tooltip
+msgid "Display a notification message when SSH terminal is launched"
+msgstr "Mostrar un missatge de notificació quan s'inicia el terminal SSH"

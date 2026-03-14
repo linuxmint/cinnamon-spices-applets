@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-17 13:58+0200\n"
+"POT-Creation-Date: 2025-10-03 18:30+0200\n"
 "PO-Revision-Date: 2023-05-31 19:41+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
@@ -47,88 +47,92 @@ msgstr "扩展"
 msgid "RELOAD ALL"
 msgstr ""
 
-#. applet.js:241
+#. applet.js:248
 msgid "Middle-click: \n"
 msgstr "中键点击：\n"
 
-#. applet.js:241 applet.js:317
+#. applet.js:248 applet.js:327
 msgid "Show .xsession-errors"
 msgstr "显示 .xsession-errors"
 
-#. applet.js:242
+#. applet.js:249
 #, fuzzy
 msgid "Ctrl + Middle-click: \n"
 msgstr "中键点击：\n"
 
-#. applet.js:242 applet.js:331
+#. applet.js:249 applet.js:341
 msgid "Show latest messages"
 msgstr ""
 
-#. applet.js:295 applet.js:537
+#. applet.js:311 applet.js:553
 #, javascript-format
 msgid "%s latest messages"
 msgstr ""
 
-#. applet.js:295 applet.js:537
+#. applet.js:311 applet.js:553
 msgid "min: 10. max: 250."
 msgstr ""
 
-#. applet.js:348
+#. applet.js:358
 msgid "Restart Cinnamon"
 msgstr "重新启动 Cinnamon"
 
-#. applet.js:364
+#. applet.js:376
+msgid "Repeat last action"
+msgstr ""
+
+#. applet.js:380
 msgid "--- Reload Spices ---"
 msgstr "--- 重新加载 Spices ---"
 
-#. applet.js:370
+#. applet.js:386
 msgid "Reload Applet:"
 msgstr "重新加载小程序："
 
-#. applet.js:397
+#. applet.js:413
 msgid "Reload Desklet:"
 msgstr "重新加载桌面小工具："
 
-#. applet.js:424
+#. applet.js:440
 msgid "Reload Extension:"
 msgstr "重新加载扩展："
 
-#. applet.js:450
+#. applet.js:466
 msgid "Reload Current Theme"
 msgstr ""
 
-#. applet.js:464
+#. applet.js:480
 msgid "--- Settings for ---"
 msgstr ""
 
-#. applet.js:470
+#. applet.js:486
 #, fuzzy
 msgid "Applet:"
 msgstr "小程序"
 
-#. applet.js:479
+#. applet.js:495
 #, fuzzy
 msgid "Desklet:"
 msgstr "桌面小工具"
 
-#. applet.js:488
+#. applet.js:504
 #, fuzzy
 msgid "Extension:"
 msgstr "扩展"
 
-#. applet.js:497
+#. applet.js:513
 msgid "--- View Code ---"
 msgstr "--- 查看代码 ---"
 
-#. applet.js:503
+#. applet.js:519
 msgid "View Applet Code for:"
 msgstr "查看小程序的代码："
 
-#. applet.js:512
+#. applet.js:528
 msgid "View Desklet Code for:"
 msgstr "查看桌面小工具的代码："
 
-#. applet.js:521
+#. applet.js:537
 msgid "View Extension Code for:"
 msgstr "查看扩展的代码："
 

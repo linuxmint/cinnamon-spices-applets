@@ -214,7 +214,9 @@ const INSTALL = {
 const HOME_DIR = GLib.get_home_dir();
 
 const DISTRO = function() {
-  let osRelease = to_string(GLib.file_get_contents("/usr/lib/os-release")[1]);
+  let [, _osRelease] = GLib.file_get_contents("/usr/lib/os-release");
+  let osRelease = to_string(_osRelease);
+  GLib.free(_osRelease);
   let lines = osRelease.split("\n");
   var distro = "";
   for (let line of lines) {

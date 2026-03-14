@@ -1,3 +1,7 @@
+0.30
+ ===
+ - Fixed a bug where adding a new feed via the "Manage your feeds" dialog would lock the dialog height and disable resizing. This is especially problematic when the dialog exceeds the screen height, as some buttons become inaccessible.
+
 0.29
  ===
  - Found bug where if data folder is not created the app fails to load.  

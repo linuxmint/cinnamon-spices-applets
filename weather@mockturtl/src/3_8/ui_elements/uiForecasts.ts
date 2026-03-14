@@ -1,4 +1,4 @@
-import type { Config } from "../config";
+import { Services, type Config } from "../config";
 import { APPLET_ICON } from "../consts";
 import { Event } from "../lib/events";
 import { Logger } from "../lib/services/logger";
@@ -205,6 +205,12 @@ export class UIForecasts {
 				style_class: STYLE_FORECAST_SUMMARY,
 				reactive: true
 			});
+
+			forecastWeather.Summary.clutter_text.line_wrap = true;
+			// FIXME: use maximum width for all providers instead
+			if (config._dataService === Services.PirateWeather) {
+				forecastWeather.Summary.natural_width = 200;
+			}
 
 			forecastWeather.Temperature = Label({
 				/*text: Placeholders.LOADING,*/

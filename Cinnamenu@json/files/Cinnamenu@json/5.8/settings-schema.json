@@ -96,6 +96,7 @@
             "keys":[
                 "enable-emoji-search",
                 "web-search-option",
+                "web-search-custom-url",
                 "web-suggestions",
                 "enable-home-folder-search",
                 "enable-web-history-search",
@@ -356,9 +357,17 @@
             "AOL":9,
             "Startpage":10,
             "Brave":11,
-            "Qwant":12
+            "Qwant":12,
+            "Custom": 13
         },
         "tooltip":"Show an internet search option in search results"
+    },
+    "web-search-custom-url":{
+        "dependency":"web-search-option=13",
+        "type":"entry",
+        "default":"https://my-custom-search?q=",
+        "description":"URL for custom search",
+        "tooltip":"Enter the URL that is prepended to the search query."
     },
     "web-suggestions":{
         "type":"checkbox",

@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: CassiaWindowList@klangman 2.3.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-31 21:09-0400\n"
-"PO-Revision-Date: 2025-08-08 08:01+0200\n"
+"POT-Creation-Date: 2026-02-23 10:08-0500\n"
+"PO-Revision-Date: 2025-11-17 10:04+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,38 +16,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.8\n"
 
 #. 4.0/applet.js:611 6.0/applet.js:611 6.4/applet.js:589
 msgid "all buttons"
 msgstr "minden gomb"
 
-#. 4.0/applet.js:1955 6.0/applet.js:1955 6.4/applet.js:1933
+#. 4.0/applet.js:1955 6.0/applet.js:1955 6.4/applet.js:1936
 msgid "windows in this group"
 msgstr "ablakok ebben a csoportban"
 
-#. 4.0/applet.js:3342 6.0/applet.js:3342 6.4/applet.js:3314
+#. 4.0/applet.js:3342 6.0/applet.js:3342 6.4/applet.js:3317
 msgid "Applet Preferences"
 msgstr "Kisalkalmazás beállítások"
 
-#. 4.0/applet.js:3346 6.0/applet.js:3346 6.4/applet.js:3318
+#. 4.0/applet.js:3346 6.0/applet.js:3346 6.4/applet.js:3321
 msgid "About..."
 msgstr "Névjegy…"
 
-#. 4.0/applet.js:3350 6.0/applet.js:3350 6.4/applet.js:3322
+#. 4.0/applet.js:3350 6.0/applet.js:3350 6.4/applet.js:3325
 msgid "Configure..."
 msgstr "Beállítások…"
 
-#. 4.0/applet.js:3354 6.0/applet.js:3354 6.4/applet.js:3326
+#. 4.0/applet.js:3354 6.0/applet.js:3354 6.4/applet.js:3329
 msgid "Website"
 msgstr "Weboldal"
 
-#. 4.0/applet.js:3358 6.0/applet.js:3358 6.4/applet.js:3330
+#. 4.0/applet.js:3358 6.0/applet.js:3358 6.4/applet.js:3333
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eltávolítás: „%s”"
 
-#. 4.0/applet.js:3360 6.0/applet.js:3360 6.4/applet.js:3332
+#. 4.0/applet.js:3360 6.0/applet.js:3360 6.4/applet.js:3335
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Valóban el szeretné távolítani ezt a CassiaAblaklista ezen példányát?"
 
@@ -69,81 +69,80 @@ msgstr "Valóban el szeretné távolítani ezt a CassiaAblaklista ezen példány
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3369 6.0/applet.js:3369 6.4/applet.js:3341
+#. 4.0/applet.js:3369 6.0/applet.js:3369 6.4/applet.js:3344
 msgid "Open new window"
 msgstr "Új ablak megnyitása"
 
-#. 4.0/applet.js:3377 6.0/applet.js:3377 6.4/applet.js:3349
+#. 4.0/applet.js:3377 6.0/applet.js:3377 6.4/applet.js:3352
 msgid "Remove from panel"
 msgstr "Eltávolítás a panelról"
 
-#. 4.0/applet.js:3379 6.0/applet.js:3379 6.4/applet.js:3351
+#. 4.0/applet.js:3379 6.0/applet.js:3379 6.4/applet.js:3354
 msgid "Remove from this workspace"
 msgstr "Eltávolítás erről a munkaterületről"
 
-#. 4.0/applet.js:3385 6.0/applet.js:3385 6.4/applet.js:3357
+#. 4.0/applet.js:3385 6.0/applet.js:3385 6.4/applet.js:3360
 msgid "Pin to panel"
 msgstr "Panelhez rögzítés"
 
-#. 4.0/applet.js:3387 6.0/applet.js:3387 6.4/applet.js:3359
+#. 4.0/applet.js:3387 6.0/applet.js:3387 6.4/applet.js:3362
 msgid "Pin to this workspace"
 msgstr "Erre a munkaterületre rögzítés"
 
-#. 4.0/applet.js:3428 6.0/applet.js:3428 6.4/applet.js:3400
+#. 4.0/applet.js:3428 6.0/applet.js:3428 6.4/applet.js:3403
 msgid "Pin to other workspaces"
 msgstr "Más munkaterületre rögzítés"
 
-#. 4.0/applet.js:3449 6.0/applet.js:3449 6.4/applet.js:3421
+#. 4.0/applet.js:3449 6.0/applet.js:3449 6.4/applet.js:3424
 msgid "Pin to all workspaces"
 msgstr "Az összes munkaterületre rögzítés"
 
-#. 4.0/applet.js:3467 6.0/applet.js:3467 6.4/applet.js:3439
+#. 4.0/applet.js:3467 6.0/applet.js:3467 6.4/applet.js:3442
 msgid "Pin to launcher"
 msgstr "Alkalmazásindítóhoz rögzítés"
 
 #. 4.0/applet.js:3485 4.0/applet.js:3706 6.0/applet.js:3485 6.0/applet.js:3706
-#. 6.4/applet.js:3457 6.4/applet.js:3675
+#. 6.4/applet.js:3460 6.4/applet.js:3678
 msgid "Add new Hotkey for"
 msgstr "Új gyorsbillentyű hozzáadása ehhez"
 
-#. 4.0/applet.js:3499 6.0/applet.js:3499 6.4/applet.js:3471
+#. 4.0/applet.js:3499 6.0/applet.js:3499 6.4/applet.js:3474
 msgid "Recent files"
 msgstr "Nemrég használt fájlok"
 
-#. 4.0/applet.js:3523 6.0/applet.js:3523 6.4/applet.js:3495
+#. 4.0/applet.js:3523 6.0/applet.js:3523 6.4/applet.js:3498
 msgid "Places"
 msgstr "Helyek"
 
-#. 4.0/applet.js:3562 6.0/applet.js:3562 6.4/applet.js:3534
-#, fuzzy
+#. 4.0/applet.js:3562 6.0/applet.js:3562 6.4/applet.js:3537
 msgid "Prioritize window list position"
-msgstr "Az ablaklista gombjainak rögzítése"
+msgstr "Ablaklista pozíciójának rangsorolása"
 
-#. 4.0/applet.js:3582 6.0/applet.js:3582 6.4/applet.js:3554
+#. 4.0/applet.js:3582 6.0/applet.js:3582 6.4/applet.js:3557
 msgid "Always on top"
 msgstr "Mindig felül"
 
-#. 4.0/applet.js:3594 6.0/applet.js:3594 6.4/applet.js:3566
+#. 4.0/applet.js:3594 6.0/applet.js:3594 6.4/applet.js:3569
 msgid "Only on this workspace"
 msgstr "Csak ezen a munkaterületen"
 
-#. 4.0/applet.js:3596 6.0/applet.js:3596 6.4/applet.js:3568
+#. 4.0/applet.js:3596 6.0/applet.js:3596 6.4/applet.js:3571
 msgid "Visible on all workspaces"
 msgstr "Minden munkaterületen látható"
 
-#. 4.0/applet.js:3597 6.0/applet.js:3597 6.4/applet.js:3569
+#. 4.0/applet.js:3597 6.0/applet.js:3597 6.4/applet.js:3572
 msgid "Move to another workspace"
 msgstr "Áthelyezés másik munkaterületre"
 
-#. 4.0/applet.js:3606 6.0/applet.js:3606 6.4/applet.js:3578
+#. 4.0/applet.js:3606 6.0/applet.js:3606 6.4/applet.js:3581
 msgid " (this workspace)"
 msgstr " (ez a munkaterület)"
 
-#. 4.0/applet.js:3619 6.0/applet.js:3619 6.4/applet.js:3591
+#. 4.0/applet.js:3619 6.0/applet.js:3619 6.4/applet.js:3594
 msgid "Move to another monitor"
 msgstr "Áthelyezés a másik kijelzőre"
 
-#. 4.0/applet.js:3627 6.0/applet.js:3627 6.4/applet.js:3599
+#. 4.0/applet.js:3627 6.0/applet.js:3627 6.4/applet.js:3602
 msgid "Monitor"
 msgstr "Kijelző"
 
@@ -165,48 +164,48 @@ msgstr "Kijelző"
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3644 6.0/applet.js:3644 6.4/applet.js:3613
+#. 4.0/applet.js:3644 6.0/applet.js:3644 6.4/applet.js:3616
 msgid "Move window here"
 msgstr "Ablak mozdítása ide"
 
-#. 4.0/applet.js:3661 6.0/applet.js:3661 6.4/applet.js:3630
+#. 4.0/applet.js:3661 6.0/applet.js:3661 6.4/applet.js:3633
 msgid "unassigned"
 msgstr "nincs társítva"
 
 #. 4.0/applet.js:3672 4.0/applet.js:3703 6.0/applet.js:3672 6.0/applet.js:3703
-#. 6.4/applet.js:3641 6.4/applet.js:3672
+#. 6.4/applet.js:3644 6.4/applet.js:3675
 msgid "Assign window to a hotkey"
 msgstr "Az ablak hozzárendelése egy gyorsbillentyűhöz"
 
-#. 4.0/applet.js:3726 6.0/applet.js:3726 6.4/applet.js:3695
+#. 4.0/applet.js:3726 6.0/applet.js:3726 6.4/applet.js:3698
 msgid "Change application label contents"
 msgstr "Az alkalmazáscímke tartalmának módosítása"
 
-#. 4.0/applet.js:3729 6.0/applet.js:3729 6.4/applet.js:3698
+#. 4.0/applet.js:3729 6.0/applet.js:3729 6.4/applet.js:3701
 msgid "Remove custom setting"
 msgstr "Egyéni beállítás eltávolítása"
 
-#. 4.0/applet.js:3736 6.0/applet.js:3736 6.4/applet.js:3705
+#. 4.0/applet.js:3736 6.0/applet.js:3736 6.4/applet.js:3708
 msgid "Use window title"
 msgstr "Ablakcím használata"
 
-#. 4.0/applet.js:3743 6.0/applet.js:3743 6.4/applet.js:3712
+#. 4.0/applet.js:3743 6.0/applet.js:3743 6.4/applet.js:3715
 msgid "Use application name"
 msgstr "Alkalmazásnév használata"
 
-#. 4.0/applet.js:3750 6.0/applet.js:3750 6.4/applet.js:3719
+#. 4.0/applet.js:3750 6.0/applet.js:3750 6.4/applet.js:3722
 msgid "No label"
 msgstr "Nincs címke"
 
-#. 4.0/applet.js:3765 6.0/applet.js:3765 6.4/applet.js:3734
+#. 4.0/applet.js:3765 6.0/applet.js:3765 6.4/applet.js:3737
 msgid "Ungroup application windows"
 msgstr "Ablakokat ne csoportosítsa alkalmazás szerint"
 
-#. 4.0/applet.js:3773 6.0/applet.js:3773 6.4/applet.js:3742
+#. 4.0/applet.js:3773 6.0/applet.js:3773 6.4/applet.js:3745
 msgid "Group application windows"
 msgstr "Alkalmazás ablakok csoportosítása"
 
-#. 4.0/applet.js:3786 6.0/applet.js:3786 6.4/applet.js:3755
+#. 4.0/applet.js:3786 6.0/applet.js:3786 6.4/applet.js:3758
 msgid "Automatic grouping/ungrouping"
 msgstr "Automatikus csoportosítás létrehozása és megszüntetése"
 
@@ -228,39 +227,39 @@ msgstr "Automatikus csoportosítás létrehozása és megszüntetése"
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3814 6.0/applet.js:3814 6.4/applet.js:3783
+#. 4.0/applet.js:3814 6.0/applet.js:3814 6.4/applet.js:3786
 msgid "Move titlebar on to screen"
 msgstr "Címsor mozgatása a kijelzőre"
 
-#. 4.0/applet.js:3819 6.0/applet.js:3819 6.4/applet.js:3788
+#. 4.0/applet.js:3819 6.0/applet.js:3819 6.4/applet.js:3791
 msgid "Restore"
 msgstr "Visszaállítás"
 
-#. 4.0/applet.js:3823 6.0/applet.js:3823 6.4/applet.js:3792
+#. 4.0/applet.js:3823 6.0/applet.js:3823 6.4/applet.js:3795
 msgid "Minimize"
 msgstr "Minimalizálás"
 
-#. 4.0/applet.js:3829 6.0/applet.js:3829 6.4/applet.js:3798
+#. 4.0/applet.js:3829 6.0/applet.js:3829 6.4/applet.js:3801
 msgid "Unmaximize"
 msgstr "Eredeti méret"
 
-#. 4.0/applet.js:3837 6.0/applet.js:3837 6.4/applet.js:3806
+#. 4.0/applet.js:3837 6.0/applet.js:3837 6.4/applet.js:3809
 msgid "Close others"
 msgstr "Többi bezárása"
 
-#. 4.0/applet.js:3839 6.0/applet.js:3839 6.4/applet.js:3808
+#. 4.0/applet.js:3839 6.0/applet.js:3839 6.4/applet.js:3811
 msgid "Close other windows for application"
 msgstr "Zárja be a többi ablakot az alkalmazáshoz"
 
-#. 4.0/applet.js:3860 6.0/applet.js:3860 6.4/applet.js:3829
+#. 4.0/applet.js:3860 6.0/applet.js:3860 6.4/applet.js:3832
 msgid "Close all"
 msgstr "Minden bezárása"
 
-#. 4.0/applet.js:3862 6.0/applet.js:3862 6.4/applet.js:3831
+#. 4.0/applet.js:3862 6.0/applet.js:3862 6.4/applet.js:3834
 msgid "Close all windows for application"
 msgstr "Zárja be az összes ablakot az alkalmazáshoz"
 
-#. 4.0/applet.js:3878 6.0/applet.js:3878 6.4/applet.js:3847
+#. 4.0/applet.js:3878 6.0/applet.js:3878 6.4/applet.js:3850
 msgid "Close"
 msgstr "Bezárás"
 
@@ -303,7 +302,7 @@ msgstr "Általános"
 #. 6.0->settings-schema.json->mouse-page->title
 #. 6.4->settings-schema.json->mouse-page->title
 msgid "Mouse"
-msgstr ""
+msgstr "Egér"
 
 #. 4.0->settings-schema.json->preview-page->title
 #. 6.0->settings-schema.json->preview-page->title
@@ -531,7 +530,7 @@ msgstr ""
 "Válassza ki az ablak állapotának típusát, amelynél az ablaklista gombjainak "
 "címkéit el kell rejteni. Alkalmazáskészletek esetén a címke továbbra is "
 "megjelenik, kivéve, ha az összes alkalmazásablak rendelkezik a kiválasztott "
-"tulajdonsággal."
+"tulajdonsággal"
 
 #. 4.0->settings-schema.json->display-indicators->options
 #. 6.0->settings-schema.json->display-indicators->options
@@ -787,7 +786,7 @@ msgstr ""
 "jelenik meg, ha a címke tartalmától függően megfelelő (azaz ha két vagy több "
 "ablak van egy csoportban, vagy ha a Windows munkaterülete vagy monitora nem "
 "egyezik meg az aktuálissal). Ha ez az opció le van tiltva, a címke mindig "
-"látható."
+"látható"
 
 #. 4.0->settings-schema.json->progress-display-type->options
 #. 4.0->settings-schema.json->display-pinned->options
@@ -958,9 +957,8 @@ msgstr "Tartalmazzon ablakokat minden munkaterületről"
 #. 4.0->settings-schema.json->remember-button-order->description
 #. 6.0->settings-schema.json->remember-button-order->description
 #. 6.4->settings-schema.json->remember-button-order->description
-#, fuzzy
 msgid "Allow prioritizing window list button order"
-msgstr "Az ablaklista gombjainak rögzítése"
+msgstr "Ablaklista gombsorrendjének rangsorolásának engedélyezése"
 
 #. 4.0->settings-schema.json->remember-button-order->tooltip
 #. 6.0->settings-schema.json->remember-button-order->tooltip
@@ -975,6 +973,14 @@ msgid ""
 "list position\" context menu option allows you to add and remove an "
 "application from the priority list."
 msgstr ""
+"Ennek az opciónak az engedélyezésével könnyedén szabályozhatja, hogy kedvenc "
+"alkalmazásai hol jelenjenek meg az ablaklistában. Ez az alkalmazások állandó "
+"pozícióprioritási sorrendjének fenntartásával érhető el. A prioritással "
+"rendelkező alkalmazások új ablaklista gombjai prioritási sorrendben, a "
+"prioritás nélküli alkalmazások előtt jelennek meg. A húzással történő "
+"egérhasználat automatikusan hozzáadja és átrendezi a prioritási listát. Az "
+"„Ablaklista pozíciójának priorizálása” helyi menüopció lehetővé teszi egy "
+"alkalmazás hozzáadását és eltávolítását a prioritási listából."
 
 #. 4.0->settings-schema.json->show-tooltips->description
 #. 6.0->settings-schema.json->show-tooltips->description
@@ -1048,7 +1054,7 @@ msgid ""
 msgstr ""
 "Ha engedélyezve van, egy teljes méretű előnézeti ablak jelenik meg, amikor "
 "az egérmutatót egy ablaklista gomb fölé viszi. Az előnézet megjelenése "
-"előtti késleltetést a Speciális lapon található beállítás szabályozza."
+"előtti késleltetést a Speciális lapon található beállítás szabályozza"
 
 #. 4.0->settings-schema.json->no-click-activate->description
 #. 6.0->settings-schema.json->no-click-activate->description
@@ -2332,16 +2338,14 @@ msgstr ""
 #. 4.0->settings-schema.json->hotkey-sequence->description
 #. 6.0->settings-schema.json->hotkey-sequence->description
 #. 6.4->settings-schema.json->hotkey-sequence->description
-#, fuzzy
 msgid "Smart numeric hotkeys (using \"1\" automatically extends to 0-9)"
 msgstr ""
-"Intelligens numerikus gyorsbillentyűk (az „1” használata automatikusan 1-től "
-"9-ig terjed)"
+"Intelligens numerikus gyorsbillentyűk (az „1” használata automatikusan 0–9-"
+"re bővíti a billentyűket)"
 
 #. 4.0->settings-schema.json->hotkey-sequence->tooltip
 #. 6.0->settings-schema.json->hotkey-sequence->tooltip
 #. 6.4->settings-schema.json->hotkey-sequence->tooltip
-#, fuzzy
 msgid ""
 "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will "
 "automatically create hotkeys 0 through 9 (i.e. Alt+0 through Alt+9). The "
@@ -2350,9 +2354,10 @@ msgid ""
 "and 10th window is activated by hotkey 0"
 msgstr ""
 "Ha engedélyezve van, az „1”-es számra végződő gyorsbillentyűk (azaz Alt+1) "
-"automatikusan létrehozzák az 1–9. gyorsbillentyűket (azaz Alt+1-től Alt+9-"
-"ig). A hozzárendelt alkalmazás első 9 ablaka, az ablaklistán sorrendben, a 9 "
-"gyorsbillentyűvel aktiválódik."
+"automatikusan létrehozzák a 0–9-es gyorsbillentyűket (azaz Alt+0-tól Alt+9-"
+"ig). A hozzárendelt alkalmazás első 10 ablakát, az ablaklistán sorrendben, a "
+"10 gyorsbillentyű aktiválja. Az első ablakot az 1-es, a 10-es "
+"gyorsbillentyűt pedig a 0-s"
 
 #. 4.0->settings-schema.json->hotkey-grave-help->description
 #. 6.0->settings-schema.json->hotkey-grave-help->description

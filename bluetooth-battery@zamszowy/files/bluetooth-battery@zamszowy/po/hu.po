@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-29 21:28+0200\n"
-"PO-Revision-Date: 2023-12-13 16:46+0100\n"
+"PO-Revision-Date: 2025-11-17 12:45+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.8\n"
 
 #. applet.js:84
 msgid "Show devices battery levels"
@@ -31,7 +31,7 @@ msgstr "Teszt értesítés"
 
 #. applet.js:161 applet.js:166 applet.js:257 applet.js:267
 msgid "Battery dropped below %d%"
-msgstr ""
+msgstr "Az akkumulátor %d% alá esett"
 
 #. metadata.json->name
 msgid "Bluetooth battery"
@@ -130,19 +130,19 @@ msgstr "Szöveg"
 
 #. settings-schema.json->icon-style->description
 msgid "Icon style"
-msgstr ""
+msgstr "Ikon stílus"
 
 #. settings-schema.json->icon-style->options
 msgid "dark"
-msgstr ""
+msgstr "sötét"
 
 #. settings-schema.json->icon-style->options
 msgid "light"
-msgstr ""
+msgstr "világos"
 
 #. settings-schema.json->icon-style->options
 msgid "symbolic"
-msgstr ""
+msgstr "szimbolikus"
 
 #. settings-schema.json->blacklist->tooltip
 msgid "tooltip"

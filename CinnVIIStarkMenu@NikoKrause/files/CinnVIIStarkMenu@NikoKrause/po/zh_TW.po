@@ -471,13 +471,13 @@ msgstr "毫秒"
 #. 3.2->settings-schema.json->hover-delay->description
 #. 3.4->settings-schema.json->hover-delay->description
 msgid "Menu hover delay"
-msgstr "選單懸停延遲時間"
+msgstr "選單游標停留延遲時間"
 
 #. 4.2->settings-schema.json->hover-delay->tooltip
 #. 3.2->settings-schema.json->hover-delay->tooltip
 #. 3.4->settings-schema.json->hover-delay->tooltip
 msgid "Delay before the menu opens when hovered"
-msgstr "滑鼠懸停時，選單開啟前的延遲時間"
+msgstr "滑鼠游標停留時，選單開啟前的延遲時間"
 
 #. 4.2->settings-schema.json->enable-animation->description
 #. 3.2->settings-schema.json->enable-animation->description
@@ -1195,7 +1195,7 @@ msgstr "一般設定"
 
 #. 2.6->settings-schema.json->hover-delay->description
 msgid "Category hover delay"
-msgstr "分類懸停延遲時間"
+msgstr "分類游標停留延遲時間"
 
 #. 2.6->settings-schema.json->hover-delay->tooltip
 msgid "Delay between switching categories"

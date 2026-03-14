@@ -208,13 +208,11 @@ msgstr "Format utilitzat per mostrar el proper temps d'alarma"
 msgid ""
 "If the alarm time is less than the minutes specified below away,\n"
 "the alarm time can be displayed with more details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
 msgstr ""
 "Si el temps d'alarma és menor que els minuts especificats,\n"
 "l'alarma pot mostrar-se de manera més detallada\n"
-"(consulteu https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-"
-"date-time-format)"
+"(consulteu https://docs.gtk.org/glib/method.DateTime.format.html)"
 
 #. 3.4->settings-schema.json->alarmtime-format-large->description
 #. 6.4->settings-schema.json->alarmtime-format-large->description
@@ -226,13 +224,11 @@ msgstr "Format utilitzat per mostrar el temps d'alarma en un futur distant"
 msgid ""
 "If the alarm time is more than the minutes specified below away,\n"
 "the alarm time can be displayed with less details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
 msgstr ""
 "Si el temps d'alarma és menor que els minuts especificats,\n"
 "l'alarma pot mostrar-se de manera menys detallada\n"
-"(consulteu https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-"
-"date-time-format)"
+"(consulteu https://docs.gtk.org/glib/method.DateTime.format.html)"
 
 #. 3.4->settings-schema.json->alarmtime-format-switchover->units
 #. 6.4->settings-schema.json->alarmtime-format-switchover->units

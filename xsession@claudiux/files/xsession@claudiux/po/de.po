@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xsession@claudiux 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-17 13:58+0200\n"
+"POT-Creation-Date: 2025-10-03 18:30+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -46,85 +46,89 @@ msgstr "Erweiterungen"
 msgid "RELOAD ALL"
 msgstr ""
 
-#. applet.js:241
+#. applet.js:248
 msgid "Middle-click: \n"
 msgstr "Mittlerer Maus Klick:\n"
 
-#. applet.js:241 applet.js:317
+#. applet.js:248 applet.js:327
 msgid "Show .xsession-errors"
 msgstr ".xsession-errors anzeigen"
 
-#. applet.js:242
+#. applet.js:249
 #, fuzzy
 msgid "Ctrl + Middle-click: \n"
 msgstr "Mittlerer Maus Klick:\n"
 
-#. applet.js:242 applet.js:331
+#. applet.js:249 applet.js:341
 msgid "Show latest messages"
 msgstr ""
 
-#. applet.js:295 applet.js:537
+#. applet.js:311 applet.js:553
 #, javascript-format
 msgid "%s latest messages"
 msgstr ""
 
-#. applet.js:295 applet.js:537
+#. applet.js:311 applet.js:553
 msgid "min: 10. max: 250."
 msgstr ""
 
-#. applet.js:348
+#. applet.js:358
 msgid "Restart Cinnamon"
 msgstr "Cinnamon neustarten"
 
-#. applet.js:364
+#. applet.js:376
+msgid "Repeat last action"
+msgstr ""
+
+#. applet.js:380
 msgid "--- Reload Spices ---"
 msgstr "--- Spices neuladen ---"
 
-#. applet.js:370
+#. applet.js:386
 msgid "Reload Applet:"
 msgstr "Applet Neuladen:"
 
-#. applet.js:397
+#. applet.js:413
 msgid "Reload Desklet:"
 msgstr "Desklet Neuladen:"
 
-#. applet.js:424
+#. applet.js:440
 msgid "Reload Extension:"
 msgstr "Extension Neuladen:"
 
-#. applet.js:450
+#. applet.js:466
 msgid "Reload Current Theme"
 msgstr ""
 
-#. applet.js:464
+#. applet.js:480
 msgid "--- Settings for ---"
 msgstr "--- Einstellungen für --_"
 
-#. applet.js:470
+#. applet.js:486
 msgid "Applet:"
 msgstr "Applet:"
 
-#. applet.js:479
+#. applet.js:495
 msgid "Desklet:"
 msgstr "Desklet:"
 
-#. applet.js:488
+#. applet.js:504
 msgid "Extension:"
 msgstr "Erweiterung:"
 
-#. applet.js:497
+#. applet.js:513
 msgid "--- View Code ---"
 msgstr "--- Code anzeigen ---"
 
-#. applet.js:503
+#. applet.js:519
 msgid "View Applet Code for:"
 msgstr "Zeige Applet Code für:"
 
-#. applet.js:512
+#. applet.js:528
 msgid "View Desklet Code for:"
 msgstr "Zeige Desklet code für:"
 
-#. applet.js:521
+#. applet.js:537
 msgid "View Extension Code for:"
 msgstr "Zeige Erweiterungs Code für:"
 

@@ -139,3 +139,6 @@ msgstr "Wenn aktiviert, wird beim Darüberfahren ein Menü mit einer Liste der F
 
 msgid "Show previews"
 msgstr "Vorschaubilder anzeigen"
+
+msgid "Show a progress indicator"
+msgstr "Fortschritt anzeigen"

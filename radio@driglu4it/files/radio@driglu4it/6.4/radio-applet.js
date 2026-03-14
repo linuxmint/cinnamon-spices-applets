@@ -1272,9 +1272,9 @@ function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
 
 
 /** Built-in value references. */
-var Uint8Array = _root.Uint8Array;
+var _Uint8Array_Uint8Array = _root.Uint8Array;
 
-/* harmony default export */ const _Uint8Array = (Uint8Array);
+/* harmony default export */ const _Uint8Array = (_Uint8Array_Uint8Array);
 
 ;// ./node_modules/lodash-es/_mapToArray.js
 /**
@@ -2666,6 +2666,25 @@ const CANCEL_ICON_NAME = "dialog-cancel";
 ;// ./src/services/mpv/MpvHandler.ts
 
 
+// some streams send UTF-8 metadata that the MPRIS plugin decodes as
+// ISO‑8859‑1/ASCII, so characters like "ü" show up as "Ã¼".  We try to
+// undo that by running the string through a decoder; if it fails we return the
+// original value untouched.  The function is safe to call on normal strings as
+// well.
+function decodeMetadataString(str) {
+    try {
+        const bytes = new Uint8Array(Array.from(str, (c) => c.charCodeAt(0)));
+        const Decoder = globalThis.TextDecoder;
+        if (Decoder) {
+            return new Decoder('utf-8', { fatal: false }).decode(bytes);
+        }
+        // fallback used in existing code prior to adding TextDecoder
+        return decodeURIComponent(escape(str));
+    }
+    catch (_a) {
+        return str;
+    }
+}
 const { getDBusProperties, getDBus, getDBusProxyWithOwner } = imports.misc.interfaces;
 const { spawnCommandLine } = imports.misc.util;
 // see https://lazka.github.io/pgi-docs/Cvc-1.0/index.html
@@ -2762,7 +2781,9 @@ function createMpvHandler() {
             const volume = (_b = props.Volume) === null || _b === void 0 ? void 0 : _b.unpack();
             const playbackStatus = (_c = props.PlaybackStatus) === null || _c === void 0 ? void 0 : _c.unpack();
             const url = metadata === null || metadata === void 0 ? void 0 : metadata['xesam:url'];
-            const title = metadata === null || metadata === void 0 ? void 0 : metadata['xesam:title'];
+            let title = metadata === null || metadata === void 0 ? void 0 : metadata['xesam:title'];
+            // repair common mis‑decoding from Latin‑1
+            title = title ? decodeMetadataString(title) : title;
             const length = metadata === null || metadata === void 0 ? void 0 : metadata["mpris:length"];
             const newUrlValid = checkUrlValid(url);
             const relevantEvent = newUrlValid || currentUrl;
@@ -2932,7 +2953,8 @@ function createMpvHandler() {
     function getCurrentTitle() {
         if (getPlaybackStatus() === "Stopped")
             return;
-        return mediaServerPlayer.Metadata["xesam:title"].unpack();
+        const raw = mediaServerPlayer.Metadata["xesam:title"].unpack();
+        return raw ? decodeMetadataString(raw) : raw;
     }
     /**
      * pauses all MediaPlayers with MPRIS Support except mpv
@@ -5719,7 +5741,7 @@ function createUpdateStationsMenuItem() {
             self.setText("Updating Radio stations...");
             notify("Upating Radio stations... \n\nThis can take several minutes!");
             makeJsonHttpRequest({
-                url: "http://de1.api.radio-browser.info/json/stations",
+                url: "http://de1.api.radio-browser.info/json/stations?limit=100000&hidebroken=true",
                 onSuccess: (resp) => saveStations(resp),
                 onErr: (err) => {
                     notifyError(`Couldn't update the station list due to an error`, err.reason_phrase, { showInternetInfo: true });
@@ -5767,7 +5789,7 @@ function createRadioContextMenu(args) {
             iconName: 'system-run',
             text: 'Configure...',
             onActivated: () => {
-                spawnCommandLineWithErrorLogging(`xlet-settings applet ${__meta.uuid} ${__meta.instanceId} -t 0`);
+                spawnCommandLineWithErrorLogging(`xlet-settings applet ${__meta.uuid} -t 0`);
             }
         }, {
             iconName: 'edit-delete',

@@ -1,3 +1,64 @@
+### v5.10.7~20260314
+  * Avoid errors using Gentoo.
+  * Gentoo users must install all dependencies themselves. Please refer to the README file.
+
+### v5.10.6~20260304
+  * Added option: Separator Color.
+
+### v5.10.5~20260218
+  * Improved section "This settings window".
+  * From now on, the user can set the size and position of the settings window to its current (approximate) size and position. Then let Cinnamon decide the real values.
+
+### v5.10.4~20260218
+  * Added section "This settings window" to set its size.
+  * Fixes [#8324](https://github.com/linuxmint/cinnamon-spices-applets/issues/8324)
+
+### v5.10.3~20260215
+  * Added option "Do not check dependencies" in General tab.
+  * Fixes [#8325](https://github.com/linuxmint/cinnamon-spices-applets/issues/8325)
+
+### v5.10.2~20260214
+  * Fixes [#8316](https://github.com/linuxmint/cinnamon-spices-applets/issues/8316)
+
+### v5.10.1~20260130
+  * Ensures compatibility with several old versions of Cinnamon.
+
+### v5.10.0~20251212
+  * Use xlet-settings instead of cinnamon-settings to configure applet.
+
+### v5.9.3~20251121
+  * Updates to-string() function.
+
+### v5.9.2~20250919
+  * Fixes [#7761](https://github.com/linuxmint/cinnamon-spices-applets/issues/7761)
+
+### v5.9.1~20250917
+  * Fixes [#7761](https://github.com/linuxmint/cinnamon-spices-applets/issues/7761)
+
+### v5.9.0~20250913
+  * Improves the reading of disk temperatures.
+
+### v5.8.2~20250911
+  * Avoids any unnecessary work.
+  * Fixes [#7714](https://github.com/linuxmint/cinnamon-spices-applets/issues/7714)
+
+
+### v5.8.1~20250908
+  * Avoids memory leaks.
+
+### v5.8.0~20250907
+  * Increases the speed at which disk temperatures are read.
+
+### v5.7.3~20250906
+  * Takes into account the "Refresh interval" value in the `SensorsDaemon.sh` script.
+
+### v5.7.2~20250906
+  * Improves stability.
+  * Fixes [#7670](https://github.com/linuxmint/cinnamon-spices-applets/issues/7670)
+
+### v5.7.0~20250905
+  * Increases speed.
+
 ### v5.6.1~20250701
   * Fixes bad data in json file.
 

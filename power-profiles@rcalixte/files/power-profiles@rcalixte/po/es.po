@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-15 16:04-0400\n"
+"POT-Creation-Date: 2025-10-15 02:11-0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: haggen88\n"
 "Language-Team: \n"
@@ -16,25 +16,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.7\n"
 
-#. 5.4/applet.js:25
+#. 5.4/applet.js:28
 msgid "Power Saver"
 msgstr "Ahorro de energía"
 
-#. 5.4/applet.js:26
+#. 5.4/applet.js:29
 msgid "Balanced"
 msgstr "Equilibrado"
 
-#. 5.4/applet.js:27
+#. 5.4/applet.js:30
 msgid "Performance"
 msgstr "Alto rendimiento"
 
-#. 5.4/applet.js:60
+#. 5.4/applet.js:63 5.4/applet.js:70
+msgid ""
+"Please make sure the power-profiles-daemon package is installed and the "
+"service is running."
+msgstr ""
+"Asegúrese de que el paquete power-profiles-daemon está instalado y de que el "
+"servicio se está ejecutando."
+
+#. 5.4/applet.js:64
+msgid "exception:"
+msgstr "excepción:"
+
+#. 5.4/applet.js:117
 msgid "Power Profiles Applet Error"
 msgstr "Error en el applet de perfiles de energía"
 
-#. 5.4/applet.js:61
+#. 5.4/applet.js:118
 msgid ""
 "The system package 'power-profiles-daemon' is not installed.\n"
 "\n"
@@ -44,35 +56,23 @@ msgstr ""
 "\n"
 "Por favor, instálelo y vuelva a cargar el applet."
 
-#. 5.4/applet.js:63
+#. 5.4/applet.js:120
 msgid "Open README"
 msgstr "Abrir README"
 
-#. 5.4/applet.js:64
+#. 5.4/applet.js:121
 msgid "Open Website"
 msgstr "Abrir el sitio web"
 
-#. 5.4/applet.js:88 5.4/applet.js:94
-msgid ""
-"Please make sure the power-profiles-daemon package is installed and the "
-"service is running."
-msgstr ""
-"Asegúrese de que el paquete power-profiles-daemon está instalado y de que el "
-"servicio se está ejecutando."
-
-#. 5.4/applet.js:89
-msgid "exception:"
-msgstr "excepción:"
-
-#. 5.4/applet.js:138
+#. 5.4/applet.js:151
 msgid "Current Profile:"
 msgstr "Perfil actual:"
 
-#. 5.4/applet.js:143
+#. 5.4/applet.js:156
 msgid "Performance Degraded:"
 msgstr "Rendimiento degradado:"
 
-#. 5.4/applet.js:154
+#. 5.4/applet.js:167
 msgid "Active Profile Holds:"
 msgstr "Perfil activo conservado:"
 
@@ -87,6 +87,47 @@ msgstr ""
 #. metadata.json->name
 msgid "Power Profiles"
 msgstr "Perfiles de energía"
+
+#. 5.4->settings-schema.json->section0->description
+msgid "General"
+msgstr "General"
+
+#. 5.4->settings-schema.json->cycleProfiles->description
+msgid "Cycle through profiles when using keyboard shortcuts or scroll wheel"
+msgstr ""
+"Moverse por los perfiles utilizando atajos de teclado o la rueda del ratón"
+
+#. 5.4->settings-schema.json->cycleProfiles->tooltip
+msgid ""
+"If enabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the next profile would be 'Performance' "
+"(or 'Balanced' on some systems).\n"
+"\n"
+"If disabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the profile would not change."
+msgstr ""
+"Si está habilitado, si el perfil actual es 'Ahorro de energía' y se usa el "
+"atajo de teclado 'Perfil anterior', el siguiente perfil sería 'Alto "
+"rendimiento' (o 'Equilibrado' en algunos sistemas).\n"
+"\n"
+"Si está deshabilitado, si el perfil actual es 'Ahorro de energía' y se usa "
+"el atajo de teclado 'Perfil anterior', el perfil no cambiará."
+
+#. 5.4->settings-schema.json->scrollBehavior->description
+msgid "Scroll wheel behavior"
+msgstr "Comportamiento de la rueda de desplazamiento"
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Nothing"
+msgstr "Nada"
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles"
+msgstr "Cambiar perfiles"
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles (reversed)"
+msgstr "Cambiar perfiles (invertidos)"
 
 #. 5.4->settings-schema.json->section1->description
 msgid "Keyboard Shortcuts"
@@ -111,26 +152,6 @@ msgid "Set keybinding(s) to switch to next power profile."
 msgstr ""
 "Establezca la combinación de teclas para cambiar al siguiente perfil de "
 "energía."
-
-#. 5.4->settings-schema.json->cycleProfiles->description
-msgid "Cycle through profiles when using keyboard shortcuts"
-msgstr "Pasar de un perfil a otro al usar atajos de teclado"
-
-#. 5.4->settings-schema.json->cycleProfiles->tooltip
-msgid ""
-"If enabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the next profile would be 'Performance' "
-"(or 'Balanced' on some systems).\n"
-"\n"
-"If disabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the profile would not change."
-msgstr ""
-"Si está habilitado, si el perfil actual es 'Ahorro de energía' y se usa el "
-"atajo de teclado 'Perfil anterior', el siguiente perfil sería 'Alto "
-"rendimiento' (o 'Equilibrado' en algunos sistemas).\n"
-"\n"
-"Si está deshabilitado, si el perfil actual es 'Ahorro de energía' y se usa "
-"el atajo de teclado 'Perfil anterior', el perfil no cambiará."
 
 #. 5.4->settings-schema.json->showOSD->description
 msgid "On-screen display for keyboard shortcuts"

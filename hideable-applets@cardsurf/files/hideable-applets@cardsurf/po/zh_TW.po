@@ -54,7 +54,7 @@ msgstr "滑鼠左鍵點選"
 
 #. settings-schema.json->action_trigger_type->options
 msgid "Mouse hover"
-msgstr "滑鼠懸停"
+msgstr "滑鼠游標停留"
 
 #. settings-schema.json->action_trigger_type->options
 msgid "None"

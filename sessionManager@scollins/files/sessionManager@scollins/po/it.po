@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# SESSION MANAGER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# collinss, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-13 23:47+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-27 10:12+0200\n"
 "PO-Revision-Date: 2022-06-03 19:11+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -17,80 +18,55 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
 
-#: applet.js:159
+#. applet.js:154
 msgid "Session"
 msgstr "Sessione"
 
-#: applet.js:226
+#. applet.js:240
 msgid "Lock Screen"
 msgstr "Blocca Schermo"
 
-#: applet.js:230
+#. applet.js:246
 msgid "Switch User"
 msgstr "Cambia utente"
 
-#: applet.js:235
+#. applet.js:252
 msgid "Guest Session"
 msgstr "Sessione Ospite"
 
-#: applet.js:240
+#. applet.js:258
 msgid "Log Off"
 msgstr "Disconnetti"
 
-#: applet.js:246
+#. applet.js:269
 msgid "Suspend"
 msgstr "Sospendi"
 
-#: applet.js:251
+#. applet.js:275
 msgid "Sleep"
 msgstr "Sospendi"
 
-#: applet.js:256
+#. applet.js:281
 msgid "Hibernate"
 msgstr "Iberna"
 
-#: applet.js:262
+#. applet.js:292
 msgid "Restart"
 msgstr "Riavvia"
 
-#: applet.js:266
+#. applet.js:298
 msgid "Shut Down"
 msgstr "Arresta"
 
-#. sessionManager@scollins->settings-schema.json->panelIcon->description
-msgid "Panel Icon"
-msgstr "Icona Pannello"
+#. metadata.json->name
+msgid "Session Manager"
+msgstr "Gestore Sessione"
 
-#. sessionManager@scollins->settings-schema.json->iconSize->description
-msgid "Icon Size"
-msgstr "Dimensione Icona"
-
-#. sessionManager@scollins->settings-schema.json->iconSize->units
-msgid "px"
-msgstr "px"
-
-#. sessionManager@scollins->settings-
-#. schema.json->symbolicMenuIcons->description
-msgid "Symbolic icons in menu"
-msgstr "Icone simboliche nel menù"
-
-#. sessionManager@scollins->settings-schema.json->panelText->description
-msgid "Panel Text"
-msgstr "Testo Pannello"
-
-#. sessionManager@scollins->settings-schema.json->general->description
-msgid "General Settings"
-msgstr "Impostazioni Generali"
-
-#. sessionManager@scollins->metadata.json->description
+#. metadata.json->description
 msgid "Provides easy access to shut down, restart, etc"
 msgstr "Fornisce un facile accesso per l'arresto, il riavvio, ecc"
 
-#. sessionManager@scollins->metadata.json->contributors
-msgid "Stephen Collins - Author"
-msgstr "Stephen Collins - Autore"
-
-#. sessionManager@scollins->metadata.json->comments
+#. metadata.json->comments
 msgid ""
 "Session Manager is an applet that provides easy access to session controls "
 "such as shut down, restart, log off, switch user, etc. It has been tested in "
@@ -106,6 +82,75 @@ msgstr ""
 "supportata, invia una richiesta di funzionalità su github e la aggiungerò al "
 "più presto."
 
-#. sessionManager@scollins->metadata.json->name
-msgid "Session Manager"
-msgstr "Gestore Sessione"
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Autore"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Impostazioni Generali"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr "Icona Pannello"
+
+#. settings-schema.json->panelText->description
+msgid "Panel Text"
+msgstr "Testo Pannello"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Icon Size"
+msgstr "Dimensione Icona"
+
+#. settings-schema.json->symbolicMenuIcons->description
+msgid "Symbolic icons in menu"
+msgstr "Icone simboliche nel menù"
+
+#. settings-schema.json->menuOptions->description
+msgid "Menu Options"
+msgstr ""
+
+#. settings-schema.json->showLockScreen->description
+#, fuzzy
+msgid "Show Lock Screen option"
+msgstr "Blocca Schermo"
+
+#. settings-schema.json->showSwitchUser->description
+#, fuzzy
+msgid "Show Switch User option"
+msgstr "Cambia utente"
+
+#. settings-schema.json->showGuestSession->description
+#, fuzzy
+msgid "Show Guest Session option"
+msgstr "Sessione Ospite"
+
+#. settings-schema.json->showLogOff->description
+msgid "Show Log Off option"
+msgstr ""
+
+#. settings-schema.json->showSuspend->description
+msgid "Show Suspend option"
+msgstr ""
+
+#. settings-schema.json->showSleep->description
+msgid "Show Sleep option"
+msgstr ""
+
+#. settings-schema.json->showHibernate->description
+#, fuzzy
+msgid "Show Hibernate option"
+msgstr "Iberna"
+
+#. settings-schema.json->showRestart->description
+msgid "Show Restart option"
+msgstr ""
+
+#. settings-schema.json->showShutDown->description
+#, fuzzy
+msgid "Show Shut Down option"
+msgstr "Arresta"

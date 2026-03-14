@@ -25,15 +25,15 @@ When the score or number of comments changes, the differences are indicated in t
 
 The menu of the SpiceSpy applet contains:
 
-* A button "Mark all as read".
-* A button "Refresh"
 * The list of Spices with, for each Spice:
-    * its name or UUID, depending on your choice.
-    * its icon (optional)
-    * its score
-    * its number of comments
+    * its name or UUID, depending on your choice; this may be preceded by a symbol indicating that an update is available.
+    * its icon (optional).
+    * its score.
+    * its number of comments.
     * its number of available translations (optional).
     * its number of open issues (optional).
+* A button "Mark all as read".
+* A button "Refresh" or a message "Refreshing in progress".
 * A button "Configure..."
 
 Please note:

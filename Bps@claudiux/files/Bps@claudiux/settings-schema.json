@@ -81,9 +81,5 @@
     "checked_interfaces_string" : {
         "type": "generic",
         "default" : "eth0"
-    },
-    "unplugged_interfaces_string" : {
-        "type": "generic",
-        "default" : ""
     }
 }
