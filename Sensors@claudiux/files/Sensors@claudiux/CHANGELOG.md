@@ -1,3 +1,7 @@
+### v5.10.7~20260314
+  * Avoid errors using Gentoo.
+  * Gentoo users must install all dependencies themselves. Please refer to the README file.
+
 ### v5.10.6~20260304
   * Added option: Separator Color.
 
