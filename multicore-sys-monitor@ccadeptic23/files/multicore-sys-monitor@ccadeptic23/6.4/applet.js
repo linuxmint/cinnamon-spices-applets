@@ -48,6 +48,7 @@ const translated_strings = [
     _("Usedup:"),
     _("Free:"),
     _("Swap"),
+    _("Swap:"),
     _("Down:"),
     _("Up:"),
     _("Read:"),
@@ -229,6 +230,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_activity_60_80", "CPU_activity_60_80");
         this.settings.bind("CPU_activity_80_100", "CPU_activity_80_100");
         this.settings.bind("Mem_enabled", "Mem_enabled");
+        this.settings.bind("Swap_enabled", "Swap_enabled");
         this.settings.bind("Mem_squared", "Mem_squared");
         this.settings.bind("Mem_width", "Mem_width", () => { this.adjust_Mem_width() });
         this.settings.bind("Mem_startAt12Oclock", "Mem_startAt12Oclock");
@@ -523,7 +525,7 @@ class MCSM extends Applet.IconApplet {
                         areaContext,
                         // no label for the backdrop
                         false,
-                        Math.round(width * this.Mem_swapWidth / 100) - 2 * global.ui_scale,
+                        (this.Swap_enabled) ? Math.round(width * this.Mem_swapWidth / 100) - 2 * global.ui_scale : 0,
                         this.panelHeight - 2 * global.ui_scale,
                         [0, 0, 0, 0],
                         // clear background so that it doesn't mess up the other one
@@ -1542,7 +1544,7 @@ class SwapDataProvider {
     }
 
     get isEnabled() {
-        return this.applet.CPU_enabled;
+        return this.applet.Swap_enabled;
     }
 
     get isRunning() {
