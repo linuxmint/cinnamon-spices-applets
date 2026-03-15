@@ -1,0 +1,994 @@
+# Vietnamese translation for crypto-tracker@danipin
+# Copyright (C) 2025
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: crypto-tracker@danipin 1.1.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-17 22:08+0200\n"
+"PO-Revision-Date: 2025-01-24 22:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: Vietnamese\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Row 2: Total Value
+#: applet.js:442 applet.js:445 applet.js:789 portfolio.js:699 utils.js:106
+msgid "Loading..."
+msgstr "Đang tải..."
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Price Alarm: %s"
+msgstr "Cảnh báo giá: "
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Target %s reached! Price: %s"
+msgstr " đã đạt! Giá: "
+
+#: applet.js:742 alarm.js:336
+msgid "risen"
+msgstr "tăng"
+
+#: applet.js:742 alarm.js:336
+msgid "fallen"
+msgstr "giảm"
+
+#: applet.js:743 alarm.js:337
+#, fuzzy, javascript-format
+msgid "Volatility Alarm: %s"
+msgstr "Cảnh báo biến động: "
+
+#: applet.js:743 alarm.js:337
+#, javascript-format
+msgid "%s has %s by %s%%"
+msgstr ""
+
+#: applet.js:857
+msgid "Colors reset to default values."
+msgstr "Màu sắc đã được đặt lại về giá trị mặc định."
+
+#: applet.js:917
+msgid "List updated! Please reopen settings."
+msgstr "Danh sách đã cập nhật! Vui lòng mở lại cài đặt."
+
+#: applet.js:1468
+msgid "NEW ALL TIME HIGH 🚀"
+msgstr "MỨC CAO NHẤT MỌI THỜI ĐẠI MỚI 🚀"
+
+#: applet.js:1977
+msgid "API Limit Reached"
+msgstr "Đã đạt giới hạn API"
+
+#: applet.js:1977
+#, fuzzy, javascript-format
+msgid "You have used 100% of your monthly limit (10k)."
+msgstr "Bạn đã sử dụng 100% giới hạn hàng tháng (10k)."
+
+#: applet.js:1984
+msgid "Power Saving Enabled"
+msgstr "Đã bật tiết kiệm năng lượng"
+
+#: applet.js:1984
+msgid "Interval set to 5 min to avoid API ban."
+msgstr "Khoảng thời gian được đặt thành 5 phút để tránh bị cấm API."
+
+#: applet.js:1987
+msgid "API Limit Warning"
+msgstr "Cảnh báo giới hạn API"
+
+#: applet.js:1987
+#, fuzzy, javascript-format
+msgid "You have reached 90% of your limit."
+msgstr "Bạn đã đạt 90% giới hạn của mình."
+
+#: applet.js:1990
+msgid "API Limit Info"
+msgstr "Thông tin giới hạn API"
+
+#: applet.js:1990
+#, fuzzy, javascript-format
+msgid "You have reached 80% of your limit."
+msgstr "Bạn đã đạt 80% giới hạn của mình."
+
+#. Set base texts
+#: footer.js:94
+msgid "API: Active"
+msgstr "API: Hoạt động"
+
+#: footer.js:94
+msgid "Basic Mode"
+msgstr "Chế độ cơ bản"
+
+#: footer.js:98
+msgid "Source: CoinGecko"
+msgstr "Nguồn: CoinGecko"
+
+#: footer.js:101
+msgid "Get Free API Key"
+msgstr "Nhận khóa API miễn phí"
+
+#: footer.js:111
+#, fuzzy, javascript-format
+msgid "Month: %s"
+msgstr "Tháng: "
+
+#: footer.js:112
+#, javascript-format
+msgid "Ø: %s"
+msgstr ""
+
+#: footer.js:115
+#, fuzzy, javascript-format
+msgid "Alarms: %s"
+msgstr "Cảnh báo: "
+
+#: header.js:117 header.js:275
+msgid "Portfolio Tracker"
+msgstr "Theo dõi danh mục đầu tư"
+
+#: header.js:119 header.js:276
+msgid "Alarm Management"
+msgstr "Quản lý cảnh báo"
+
+#: header.js:121 header.js:278
+msgid "API Usage & Stats"
+msgstr "Sử dụng API & Thống kê"
+
+#: header.js:123
+msgid "Support Development"
+msgstr "Hỗ trợ phát triển"
+
+# Strings from JS files
+#. IMPORTANT: For the drawing loop we need the pure text without markup!
+#: header.js:128 header.js:274 header.js:641
+msgid "Market Dashboard"
+msgstr "Bảng điều khiển thị trường"
+
+#: header.js:130 header.js:642
+msgid "24H Price Change [%]"
+msgstr "Thay đổi giá 24H [%]"
+
+#: header.js:280
+msgid "Support"
+msgstr "Hỗ trợ"
+
+#: header.js:284
+msgid "Settings"
+msgstr "Cài đặt"
+
+#: alarm.js:242
+msgid "Alarm Archive Full"
+msgstr "Lưu trữ cảnh báo đầy"
+
+#: alarm.js:242
+#, fuzzy, javascript-format
+msgid "Oldest alarm for %s was deleted."
+msgstr "Cảnh báo cũ nhất cho "
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Background Alarm: %s"
+msgstr "Cảnh báo nền: "
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Target price %s reached! Current: %s"
+msgstr " đã đạt! Hiện tại: "
+
+#: alarm.js:469
+msgid "Alarm Settings"
+msgstr "Cài đặt cảnh báo"
+
+#: alarm.js:573
+#, fuzzy, javascript-format
+msgid "Target Price (%s):"
+msgstr "Giá mục tiêu ("
+
+#: alarm.js:574
+msgid "Change (%):"
+msgstr "Thay đổi (%):"
+
+#: alarm.js:577
+msgid "Press ENTER to save."
+msgstr "Nhấn ENTER để lưu."
+
+#: alarm.js:643 alarm.js:652
+msgid "Search alarms..."
+msgstr "Tìm kiếm cảnh báo..."
+
+#: alarm.js:739 portfolio.js:1262
+msgid "No matches."
+msgstr "Không có kết quả phù hợp."
+
+#: alarm.js:739
+msgid "No alarms here yet."
+msgstr "Chưa có cảnh báo nào ở đây."
+
+#: alarm.js:856
+#, fuzzy, javascript-format
+msgid "Target: %s"
+msgstr "Mục tiêu:"
+
+#: alarm.js:857
+#, fuzzy, javascript-format
+msgid "Vol: %s%%"
+msgstr "Vol 24h:"
+
+#: alarm.js:860
+#, fuzzy, javascript-format
+msgid "Current: %s"
+msgstr "Hiện tại: "
+
+#: alarm.js:865
+#, fuzzy, javascript-format
+msgid "Created: %s"
+msgstr "Đã tạo: "
+
+#. Price Input
+#: alarm.js:1023
+msgid "Target:"
+msgstr "Mục tiêu:"
+
+#. Vol Input
+#: alarm.js:1044
+msgid "Vol %:"
+msgstr "Vol %:"
+
+#: alarm.js:1058
+msgid "ENTER to save"
+msgstr "ENTER để lưu"
+
+#. Sort options
+#: alarm.js:1102 portfolio.js:1008
+msgid "Date"
+msgstr "Ngày"
+
+#: alarm.js:1103
+msgid "Name"
+msgstr "Tên"
+
+#: alarm.js:1166 alarm.js:1218
+msgid "Delete all"
+msgstr "Xóa tất cả"
+
+#: alarm.js:1174 alarm.js:1182 alarm.js:1190 alarm.js:1213 portfolio.js:1212
+#: portfolio.js:1219
+msgid "Sure?"
+msgstr "Chắc chắn?"
+
+#: alarm.js:1230
+#, fuzzy, javascript-format
+msgid "Alarms %s of %s"
+msgstr "Cảnh báo "
+
+#: donate.js:35
+msgid ""
+"If you like this applet, you can support\n"
+"its development with a donation."
+msgstr ""
+"Nếu bạn thích applet này, bạn có thể hỗ trợ\n"
+"sự phát triển của nó bằng cách quyên góp."
+
+#: donate.js:181
+msgid "Address:"
+msgstr "Địa chỉ:"
+
+#: donate.js:212
+msgid "Copied"
+msgstr "Đã sao chép"
+
+#: donate.js:212
+#, fuzzy, javascript-format
+msgid "%s address copied."
+msgstr " địa chỉ đã được sao chép."
+
+#: search.js:33
+msgid "Search..."
+msgstr "Tìm kiếm..."
+
+#: search.js:172
+msgid "No results..."
+msgstr "Không có kết quả..."
+
+#: portfolio.js:316
+msgid "Converting..."
+msgstr "Đang chuyển đổi..."
+
+#: portfolio.js:365
+msgid "Error"
+msgstr "Lỗi"
+
+#: portfolio.js:365
+msgid "Currency conversion failed."
+msgstr "Chuyển đổi tiền tệ thất bại."
+
+#: portfolio.js:603
+msgid "Total Balance"
+msgstr "Tổng số dư"
+
+#. FIX: expand: false for label, insert spacer instead
+#: portfolio.js:720
+msgid "Select Currency"
+msgstr "Chọn tiền tệ"
+
+#: portfolio.js:790 portfolio.js:798
+msgid "Filter portfolio..."
+msgstr "Lọc danh mục đầu tư..."
+
+#: portfolio.js:1006
+msgid "Amount"
+msgstr "Số lượng"
+
+#: portfolio.js:1007
+msgid "Buy Price"
+msgstr "Giá mua"
+
+#. Add TX Button
+#: portfolio.js:1199
+msgid "+ Transaction"
+msgstr "+ Giao dịch"
+
+#. Delete Coin Button
+#: portfolio.js:1208 portfolio.js:1224
+msgid "Remove Position"
+msgstr "Xóa vị thế"
+
+#: portfolio.js:1262
+msgid "No positions here yet."
+msgstr "Chưa có vị thế nào ở đây."
+
+#: portfolio.js:1288
+msgid "Add Coin"
+msgstr "Thêm Coin"
+
+#: portfolio.js:1305 portfolio.js:1311
+msgid "Search (e.g. Bitcoin)..."
+msgstr "Tìm kiếm (ví dụ: Bitcoin)..."
+
+#: portfolio.js:1398
+msgid "No results"
+msgstr "Không có kết quả"
+
+#: seasonal.js:80
+msgid "HAPPY HALLOWEEN !"
+msgstr "CHÚC MỪNG HALLOWEEN !"
+
+#: seasonal.js:378
+msgid "MERRY CHRISTMAS 🎄"
+msgstr "GIÁNG SINH VUI VẺ 🎄"
+
+#. Straighten up
+#: seasonal.js:486
+msgid "HAPPY BITCOIN PIZZA DAY 🍕"
+msgstr "CHÚC MỪNG NGÀY PIZZA BITCOIN 🍕"
+
+#: charts.js:181
+msgid "?"
+msgstr ""
+
+#: charts.js:228
+msgid "Rank:"
+msgstr "Xếp hạng:"
+
+#: charts.js:228
+msgid "M.Cap:"
+msgstr "Vốn hóa:"
+
+#: charts.js:229
+msgid "24h High:"
+msgstr "Cao 24h:"
+
+#: charts.js:229
+msgid "24h Vol:"
+msgstr "Vol 24h:"
+
+#: charts.js:230
+msgid "24h Low:"
+msgstr "Thấp 24h:"
+
+#: charts.js:230
+msgid "ATH:"
+msgstr "ATH:"
+
+#: utils.js:348
+msgid " (Rate Limit)"
+msgstr " (Giới hạn tốc độ)"
+
+#: utils.js:349
+msgid " (API Key invalid)"
+msgstr " (Khóa API không hợp lệ)"
+
+#: utils.js:350
+msgid " (Network)"
+msgstr " (Mạng)"
+
+#: utils.js:352
+msgid "Crypto-Tracker Error"
+msgstr "Lỗi Crypto-Tracker"
+
+#: utils.js:352
+#, fuzzy, javascript-format
+msgid "An error was intercepted%s. See log."
+msgstr "Đã chặn một lỗi"
+
+#: api.js:67
+msgid "API successfully activated."
+msgstr "API đã được kích hoạt thành công."
+
+#: api.js:73
+msgid "No internet connection"
+msgstr "Không có kết nối internet"
+
+#: api.js:75
+msgid "Key invalid"
+msgstr "Khóa không hợp lệ"
+
+#: api.js:77
+msgid "Key blocked"
+msgstr "Khóa bị chặn"
+
+#: api.js:79
+msgid "Limit reached"
+msgstr "Đã đạt giới hạn"
+
+#: api.js:81
+msgid "Server error"
+msgstr "Lỗi máy chủ"
+
+#: api.js:85
+#, fuzzy, javascript-format
+msgid "API Error: %s"
+msgstr "Lỗi API: "
+
+#: api.js:90
+msgid "System error"
+msgstr "Lỗi hệ thống"
+
+#: api.js:131
+msgid "System Diagnosis"
+msgstr "Chẩn đoán hệ thống"
+
+#: api.js:143
+msgid "API Connection: Active & Valid"
+msgstr "Kết nối API: Hoạt động & Hợp lệ"
+
+#: api.js:145
+msgid "Not configured"
+msgstr "Chưa được cấu hình"
+
+#: api.js:146
+#, fuzzy, javascript-format
+msgid "API Status: %s"
+msgstr "Trạng thái API: "
+
+#: api.js:154
+#, fuzzy, javascript-format
+msgid "Quota critical: %s%% used"
+msgstr "Hạn ngạch nghiêm trọng: "
+
+#: api.js:156
+#, fuzzy, javascript-format
+msgid "Quota high: %s%% used"
+msgstr "Hạn ngạch cao: "
+
+#: api.js:158
+#, fuzzy, javascript-format
+msgid "Quota: %s%% (In the green)"
+msgstr "(Trong vùng xanh)"
+
+#: api.js:165
+#, fuzzy, javascript-format
+msgid "Period: %s days left in month."
+msgstr " ngày còn lại trong tháng."
+
+#: api.js:171
+#, fuzzy, javascript-format
+msgid "Tip: Interval (%ss) is aggressive for Free Tier."
+msgstr "s) là quá mức cho Gói miễn phí."
+
+#: api.js:178
+msgid "Note: Error log exists."
+msgstr "Lưu ý: Nhật ký lỗi tồn tại."
+
+#: api.js:180
+msgid "System: No crashes logged."
+msgstr "Hệ thống: Không có sự cố nào được ghi lại."
+
+#: api.js:202 api.js:397
+msgid "Free API (Basic)"
+msgstr "API miễn phí (Cơ bản)"
+
+#: api.js:203 api.js:210
+msgid "Today:"
+msgstr "Hôm nay:"
+
+#: api.js:204 api.js:211
+msgid "Month:"
+msgstr "Tháng:"
+
+#: api.js:205 api.js:212
+msgid "Ø per Day:"
+msgstr "Ø mỗi ngày:"
+
+#: api.js:209 api.js:398
+msgid "Key API (Pro)"
+msgstr "API khóa (Pro)"
+
+#: api.js:224
+msgid "Distribution (Key Calls)"
+msgstr "Phân phối (Cuộc gọi khóa)"
+
+#: api.js:239
+msgid "Charts"
+msgstr "Biểu đồ"
+
+#. Blue
+#: api.js:240
+msgid "Details"
+msgstr "Chi tiết"
+
+#. Purple
+#: api.js:241
+msgid "Search"
+msgstr "Tìm kiếm"
+
+#. Yellow
+#: api.js:242
+msgid "Portfolio"
+msgstr "Danh mục đầu tư"
+
+#. Cyan
+#: api.js:243
+msgid "Alarms"
+msgstr "Cảnh báo"
+
+#. Red/Pink
+#: api.js:244
+msgid "Updates"
+msgstr "Cập nhật"
+
+#: api.js:294
+msgid "History (Last 14 Days)"
+msgstr "Lịch sử (14 ngày qua)"
+
+#: api.js:417
+#, fuzzy, javascript-format
+msgid "Error Log (%s KB)"
+msgstr "Nhật ký lỗi ("
+
+#: api.js:420
+msgid "The system prevented and logged crashes."
+msgstr "Hệ thống đã ngăn chặn và ghi lại các sự cố."
+
+#: api.js:426
+msgid "Delete"
+msgstr "Xóa"
+
+#: api.js:439
+msgid "Dismiss"
+msgstr "Bỏ qua"
+
+#, fuzzy
+#~ msgid "Ø:"
+#~ msgstr "Ø: "
+
+#~ msgid " was deleted."
+#~ msgstr " đã bị xóa."
+
+#~ msgid "Target price "
+#~ msgstr "Giá mục tiêu "
+
+#, fuzzy
+#~ msgid " has "
+#~ msgstr "đã "
+
+#~ msgid " by "
+#~ msgstr " thêm "
+
+#~ msgid " of "
+#~ msgstr " của "
+
+#~ msgid ". See log."
+#~ msgstr ". Xem nhật ký."
+
+#~ msgid "% used"
+#~ msgstr "% đã sử dụng"
+
+#~ msgid "Quota: "
+#~ msgstr "Hạn ngạch: "
+
+#~ msgid "Period: "
+#~ msgstr "Giai đoạn: "
+
+#~ msgid "Tip: Interval ("
+#~ msgstr "Mẹo: Khoảng thời gian ("
+
+#~ msgid " KB)"
+#~ msgstr " KB)"
+
+#~ msgid "Crypto Tracker"
+#~ msgstr "Crypto Tracker"
+
+#~ msgid ""
+#~ "A comprehensive cryptocurrency dashboard providing real-time market data, "
+#~ "portfolio management, interactive charts, and advanced alerting "
+#~ "capabilities, enhanced with seasonal visual elements."
+#~ msgstr ""
+#~ "Bảng điều khiển tiền điện tử toàn diện cung cấp dữ liệu thị trường thời "
+#~ "gian thực, quản lý danh mục đầu tư, biểu đồ tương tác và khả năng cảnh "
+#~ "báo nâng cao, được tăng cường với các yếu tố hình ảnh theo mùa."
+
+#~ msgid "Metric 1 (Primary)"
+#~ msgstr "Chỉ số 1 (Chính)"
+
+#~ msgid "Metric 2"
+#~ msgstr "Chỉ số 2"
+
+#~ msgid "Metric 3"
+#~ msgstr "Chỉ số 3"
+
+#~ msgid "General"
+#~ msgstr "Chung"
+
+#~ msgid "DevTools (Debug)"
+#~ msgstr "Công cụ phát triển (Gỡ lỗi)"
+
+#~ msgid "Developer Options"
+#~ msgstr "Tùy chọn nhà phát triển"
+
+#~ msgid "Applet Settings"
+#~ msgstr "Cài đặt Applet"
+
+#~ msgid "CoinGecko API Configuration"
+#~ msgstr "Cấu hình API CoinGecko"
+
+#~ msgid "Display and Activation"
+#~ msgstr "Hiển thị và Kích hoạt"
+
+#~ msgid "Data Source (API)"
+#~ msgstr "Nguồn dữ liệu (API)"
+
+#~ msgid "Color Settings"
+#~ msgstr "Cài đặt màu sắc"
+
+#~ msgid "Changes will activate on the next API update interval."
+#~ msgstr "Thay đổi sẽ có hiệu lực vào lần cập nhật API tiếp theo."
+
+#~ msgid "CoinGecko API Key (Demo or Pro)"
+#~ msgstr "Khóa API CoinGecko (Demo hoặc Pro)"
+
+#~ msgid "Unlocks higher limits and more stable data queries."
+#~ msgstr "Mở khóa giới hạn cao hơn và truy vấn dữ liệu ổn định hơn."
+
+#~ msgid ""
+#~ "CALL TRACKING OVERVIEW:\n"
+#~ "\n"
+#~ "• BASIC CALLS: Run via public servers (approx. 5-15 calls/min). \n"
+#~ "  Used for: Standard price queries (saves key quota).\n"
+#~ "\n"
+#~ "• KEY CALLS: Run via your Demo Key quota.\n"
+#~ "  Used for: Charts, coin details & more stable queries.\n"
+#~ "\n"
+#~ "LIMITS (DEMO KEY):\n"
+#~ "• Total: 10,000 calls per month\n"
+#~ "• Speed: Max. 30 requests per minute\n"
+#~ "\n"
+#~ "The tracking in the footer shows you in real-time how many requests have "
+#~ "been used so you can keep an eye on your monthly 10k limit."
+#~ msgstr ""
+#~ "TỔNG QUAN THEO DÕI CUỘC GỌI:\n"
+#~ "\n"
+#~ "• CUỘC GỌI CƠ BẢN: Chạy qua máy chủ công cộng (khoảng 5-15 cuộc gọi/"
+#~ "phút). \n"
+#~ "  Sử dụng cho: Truy vấn giá tiêu chuẩn (tiết kiệm hạn ngạch khóa).\n"
+#~ "\n"
+#~ "• CUỘC GỌI KHÓA: Chạy qua hạn ngạch Khóa Demo của bạn.\n"
+#~ "  Sử dụng cho: Biểu đồ, chi tiết coin & truy vấn ổn định hơn.\n"
+#~ "\n"
+#~ "GIỚI HẠN (KHÓA DEMO):\n"
+#~ "• Tổng cộng: 10.000 cuộc gọi mỗi tháng\n"
+#~ "• Tốc độ: Tối đa 30 yêu cầu mỗi phút\n"
+#~ "\n"
+#~ "Theo dõi ở chân trang hiển thị cho bạn trong thời gian thực bao nhiêu yêu "
+#~ "cầu đã được sử dụng để bạn có thể theo dõi giới hạn 10k hàng tháng của "
+#~ "mình."
+
+#~ msgid "Show Active Alarms"
+#~ msgstr "Hiển thị cảnh báo đang hoạt động"
+
+#~ msgid "Shows the count of active alarms in the footer."
+#~ msgstr "Hiển thị số lượng cảnh báo đang hoạt động ở chân trang."
+
+#~ msgid "Show Monthly Statistics"
+#~ msgstr "Hiển thị thống kê hàng tháng"
+
+#~ msgid "Shows total API key calls this month."
+#~ msgstr "Hiển thị tổng số cuộc gọi khóa API trong tháng này."
+
+#~ msgid "Show Daily Average"
+#~ msgstr "Hiển thị trung bình hàng ngày"
+
+#~ msgid "Shows the calculated average per day."
+#~ msgstr "Hiển thị mức trung bình được tính toán mỗi ngày."
+
+#~ msgid "Candle Charts as Default"
+#~ msgstr "Biểu đồ nến làm mặc định"
+
+#~ msgid "Shows charts as candlesticks by default where possible."
+#~ msgstr "Hiển thị biểu đồ dưới dạng nến theo mặc định nếu có thể."
+
+#~ msgid "Chart: Bullish Candle Color (Up)"
+#~ msgstr "Biểu đồ: Màu nến tăng (Lên)"
+
+#~ msgid "Color for rising candles."
+#~ msgstr "Màu cho nến tăng."
+
+#~ msgid "Chart: Bearish Candle Color (Down)"
+#~ msgstr "Biểu đồ: Màu nến giảm (Xuống)"
+
+#~ msgid "Color for falling candles."
+#~ msgstr "Màu cho nến giảm."
+
+#~ msgid "Price Alarm"
+#~ msgstr "Cảnh báo giá"
+
+#~ msgid "Notification when this price is reached."
+#~ msgstr "Thông báo khi đạt đến mức giá này."
+
+#~ msgid "Enter the target price e.g. 5 or 2598. 0 disables the alarm."
+#~ msgstr "Nhập giá mục tiêu ví dụ: 5 hoặc 2598. 0 tắt cảnh báo."
+
+#~ msgid "Percent Alarm"
+#~ msgstr "Cảnh báo phần trăm"
+
+#~ msgid "Alarm on percentage change (24h)."
+#~ msgstr "Cảnh báo khi thay đổi phần trăm (24h)."
+
+#~ msgid "Enter a percentage value e.g. 5. 0 disables the alarm."
+#~ msgstr "Nhập giá trị phần trăm ví dụ: 5. 0 tắt cảnh báo."
+
+#~ msgid "Compact Mode"
+#~ msgstr "Chế độ gọn nhẹ"
+
+#~ msgid "Space-saving display in panel (BTC $85.5K)."
+#~ msgstr "Hiển thị tiết kiệm không gian trong bảng điều khiển (BTC $85.5K)."
+
+#~ msgid "Enable Seasonal Theme"
+#~ msgstr "Bật chủ đề theo mùa"
+
+#~ msgid ""
+#~ "Automatically activates festive designs (e.g. Christmas) at certain times."
+#~ msgstr ""
+#~ "Tự động kích hoạt các thiết kế lễ hội (ví dụ: Giáng sinh) vào những thời "
+#~ "điểm nhất định."
+
+#~ msgid "Show Decimals"
+#~ msgstr "Hiển thị số thập phân"
+
+#~ msgid "Toggles the display of cent amounts on or off."
+#~ msgstr "Bật hoặc tắt hiển thị số tiền lẻ."
+
+#~ msgid "Show Trend Arrows"
+#~ msgstr "Hiển thị mũi tên xu hướng"
+
+#~ msgid "Shows or hides trend arrows for price changes."
+#~ msgstr "Hiển thị hoặc ẩn mũi tên xu hướng cho thay đổi giá."
+
+#~ msgid "Icon Opacity"
+#~ msgstr "Độ mờ biểu tượng"
+
+#~ msgid "Controls the visibility of crypto icons."
+#~ msgstr "Kiểm soát khả năng hiển thị của các biểu tượng tiền điện tử."
+
+#~ msgid "Update Interval"
+#~ msgstr "Khoảng thời gian cập nhật"
+
+#~ msgid "How often prices are fetched from CoinGecko."
+#~ msgstr "Tần suất lấy giá từ CoinGecko."
+
+#~ msgid "Reset Colors"
+#~ msgstr "Đặt lại màu sắc"
+
+#~ msgid "Resets all custom colors (charts & metrics) to default values."
+#~ msgstr ""
+#~ "Đặt lại tất cả các màu tùy chỉnh (biểu đồ & chỉ số) về giá trị mặc định."
+
+#~ msgid "Update Top Coins List"
+#~ msgstr "Cập nhật danh sách Top Coin"
+
+#~ msgid ""
+#~ "Loads the current top 50 coins from CoinGecko and updates the selection "
+#~ "lists (requires settings restart)."
+#~ msgstr ""
+#~ "Tải 50 coin hàng đầu hiện tại từ CoinGecko và cập nhật danh sách lựa chọn "
+#~ "(yêu cầu khởi động lại cài đặt)."
+
+#~ msgid "Force ATH Rocket"
+#~ msgstr "Buộc tên lửa ATH"
+
+#~ msgid "Always show the rocket animation (for testing purposes)."
+#~ msgstr "Luôn hiển thị hoạt ảnh tên lửa (cho mục đích thử nghiệm)."
+
+#~ msgid "Force Seasonal Theme"
+#~ msgstr "Buộc chủ đề theo mùa"
+
+#~ msgid "Override the date-based theme selection."
+#~ msgstr "Ghi đè lựa chọn chủ đề dựa trên ngày tháng."
+
+#~ msgid "Debug Frames (Layout)"
+#~ msgstr "Khung gỡ lỗi (Bố cục)"
+
+#~ msgid "Draws colorful frames around menu elements for layout inspection."
+#~ msgstr ""
+#~ "Vẽ các khung đầy màu sắc xung quanh các phần tử menu để kiểm tra bố cục."
+
+#~ msgid "Show Error Notifications"
+#~ msgstr "Hiển thị thông báo lỗi"
+
+#~ msgid "Sends a desktop notification when an internal error is caught."
+#~ msgstr "Gửi thông báo trên màn hình khi phát hiện lỗi nội bộ."
+
+#~ msgid "Test Crash (Safe)"
+#~ msgstr "Kiểm tra sự cố (An toàn)"
+
+#~ msgid "Provokes an error to test logging and notifications."
+#~ msgstr "Gây ra lỗi để kiểm tra ghi nhật ký và thông báo."
+
+#~ msgid "Show Icon"
+#~ msgstr "Hiển thị biểu tượng"
+
+#~ msgid "Shows the crypto icon next to the price."
+#~ msgstr "Hiển thị biểu tượng tiền điện tử bên cạnh giá."
+
+#~ msgid "Toggles the display of decimal places on/off."
+#~ msgstr "Bật/tắt hiển thị các chữ số thập phân."
+
+#~ msgid "Number of Decimals"
+#~ msgstr "Số chữ số thập phân"
+
+#~ msgid "Number of decimal places (2-8)."
+#~ msgstr "Số lượng chữ số thập phân (2-8)."
+
+#~ msgid "Color the Arrow Only"
+#~ msgstr "Chỉ tô màu mũi tên"
+
+#~ msgid "If active, the price text remains white."
+#~ msgstr "Nếu hoạt động, văn bản giá vẫn màu trắng."
+
+#~ msgid "Show Currency Symbol (e.g. $ or €)"
+#~ msgstr "Hiển thị ký hiệu tiền tệ (ví dụ: $ hoặc €)"
+
+#~ msgid "Replaces the currency code with the symbol."
+#~ msgstr "Thay thế mã tiền tệ bằng ký hiệu."
+
+#~ msgid "Enabled"
+#~ msgstr "Đã bật"
+
+#~ msgid "Toggles the display of this metric on/off."
+#~ msgstr "Bật/tắt hiển thị chỉ số này."
+
+#~ msgid "Currency ID (CoinGecko)"
+#~ msgstr "ID tiền tệ (CoinGecko)"
+
+#~ msgid "Select the cryptocurrency from the top list."
+#~ msgstr "Chọn tiền điện tử từ danh sách hàng đầu."
+
+#~ msgid "Custom Currency ID"
+#~ msgstr "ID tiền tệ tùy chỉnh"
+
+#~ msgid "CoinGecko ID (e.g. 'litecoin')"
+#~ msgstr "ID CoinGecko (ví dụ: 'litecoin')"
+
+#~ msgid "Comparison Currency"
+#~ msgstr "Tiền tệ so sánh"
+
+#~ msgid "Select the currency for the price comparison."
+#~ msgstr "Chọn tiền tệ để so sánh giá."
+
+#~ msgid "Display Symbol"
+#~ msgstr "Ký hiệu hiển thị"
+
+#~ msgid "The symbol displayed on the panel (e.g. BTC)."
+#~ msgstr "Ký hiệu hiển thị trên bảng điều khiển (ví dụ: BTC)."
+
+#~ msgid "Color for Rising Price (▲)"
+#~ msgstr "Màu cho giá tăng (▲)"
+
+#~ msgid "Select the color for positive price movement."
+#~ msgstr "Chọn màu cho biến động giá tích cực."
+
+#~ msgid "Color for Falling Price (▼)"
+#~ msgstr "Màu cho giá giảm (▼)"
+
+#~ msgid "Select the color for negative price movement."
+#~ msgstr "Chọn màu cho biến động giá tiêu cực."
+
+#~ msgid "15 Seconds (Minimum)"
+#~ msgstr "15 Giây (Tối thiểu)"
+
+#~ msgid "30 Seconds"
+#~ msgstr "30 Giây"
+
+#~ msgid "60 Seconds (1 Minute)"
+#~ msgstr "60 Giây (1 Phút)"
+
+#~ msgid "120 Seconds (2 Minutes)"
+#~ msgstr "120 Giây (2 Phút)"
+
+#~ msgid "300 Seconds (5 Minutes)"
+#~ msgstr "300 Giây (5 Phút)"
+
+#~ msgid "Automatic (Date based)"
+#~ msgstr "Automatic (Date based)"
+
+#~ msgid "New Year"
+#~ msgstr "New Year"
+
+#~ msgid "Christmas (General)"
+#~ msgstr "Christmas (General)"
+
+#~ msgid "Christmas (Eve & Day)"
+#~ msgstr "Christmas (Eve & Day)"
+
+#~ msgid "Halloween"
+#~ msgstr "Halloween"
+
+#~ msgid "Valentine's Day"
+#~ msgstr "Valentine's Day"
+
+#~ msgid "Bitcoin Pizza Day"
+#~ msgstr "Bitcoin Pizza Day"
+
+#~ msgid "Easter"
+#~ msgstr "Easter"
+
+#~ msgid "Custom ID"
+#~ msgstr "ID tùy chỉnh"
+
+#~ msgid "US Dollar (USD)"
+#~ msgstr "Đô la Mỹ (USD)"
+
+#~ msgid "Euro (EUR)"
+#~ msgstr "Euro (EUR)"
+
+#~ msgid "Canadian Dollar (CAD)"
+#~ msgstr "Đô la Canada (CAD)"
+
+#~ msgid "British Pound (GBP)"
+#~ msgstr "Bảng Anh (GBP)"
+
+#~ msgid "Japanese Yen (JPY)"
+#~ msgstr "Yên Nhật (JPY)"
+
+#~ msgid "Swiss Franc (CHF)"
+#~ msgstr "Franc Thụy Sĩ (CHF)"
+
+#~ msgid "Australian Dollar (AUD)"
+#~ msgstr "Đô la Úc (AUD)"
+
+#~ msgid "Happy New Year"
+#~ msgstr "Chúc mừng năm mới"
+
+#~ msgid " Loading..."
+#~ msgstr " Đang tải..."
+
+#~ msgid "Target "
+#~ msgstr "Mục tiêu "
+
+#~ msgid "Search Coin"
+#~ msgstr "Tìm kiếm Coin"
+
+#~ msgid "Loading market data..."
+#~ msgstr "Đang tải dữ liệu thị trường..."
+
+#~ msgid "Power Saving Disabled"
+#~ msgstr "Đã tắt tiết kiệm năng lượng"
+
+#~ msgid "New month: Interval reset to 120s."
+#~ msgstr "Tháng mới: Khoảng thời gian được đặt lại thành 120 giây."

@@ -1,0 +1,989 @@
+# Czech translation for crypto-tracker@danipin
+# Copyright (C) 2025
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: crypto-tracker@danipin 1.1.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-17 22:08+0200\n"
+"PO-Revision-Date: 2025-01-24 22:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: Czech\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#. Row 2: Total Value
+#: applet.js:442 applet.js:445 applet.js:789 portfolio.js:699 utils.js:106
+msgid "Loading..."
+msgstr "Načítání..."
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Price Alarm: %s"
+msgstr "Cenový alarm: "
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Target %s reached! Price: %s"
+msgstr " dosažen! Cena: "
+
+#: applet.js:742 alarm.js:336
+msgid "risen"
+msgstr "vzrostl"
+
+#: applet.js:742 alarm.js:336
+msgid "fallen"
+msgstr "klesl"
+
+#: applet.js:743 alarm.js:337
+#, fuzzy, javascript-format
+msgid "Volatility Alarm: %s"
+msgstr "Alarm volatility: "
+
+#: applet.js:743 alarm.js:337
+#, javascript-format
+msgid "%s has %s by %s%%"
+msgstr ""
+
+#: applet.js:857
+msgid "Colors reset to default values."
+msgstr "Barvy obnoveny na výchozí hodnoty."
+
+#: applet.js:917
+msgid "List updated! Please reopen settings."
+msgstr "Seznam aktualizován! Prosím znovu otevřete nastavení."
+
+#: applet.js:1468
+msgid "NEW ALL TIME HIGH 🚀"
+msgstr "NOVÉ HISTORICKÉ MAXIMUM 🚀"
+
+#: applet.js:1977
+msgid "API Limit Reached"
+msgstr "Dosažen limit API"
+
+#: applet.js:1977
+#, fuzzy, javascript-format
+msgid "You have used 100% of your monthly limit (10k)."
+msgstr "Využili jste 100 % svého měsíčního limitu (10k)."
+
+#: applet.js:1984
+msgid "Power Saving Enabled"
+msgstr "Úsporný režim povolen"
+
+#: applet.js:1984
+msgid "Interval set to 5 min to avoid API ban."
+msgstr "Interval nastaven na 5 min, aby se zabránilo zákazu API."
+
+#: applet.js:1987
+msgid "API Limit Warning"
+msgstr "Varování limitu API"
+
+#: applet.js:1987
+#, fuzzy, javascript-format
+msgid "You have reached 90% of your limit."
+msgstr "Dosáhli jste 90 % svého limitu."
+
+#: applet.js:1990
+msgid "API Limit Info"
+msgstr "Info o limitu API"
+
+#: applet.js:1990
+#, fuzzy, javascript-format
+msgid "You have reached 80% of your limit."
+msgstr "Dosáhli jste 80 % svého limitu."
+
+#. Set base texts
+#: footer.js:94
+msgid "API: Active"
+msgstr "API: Aktivní"
+
+#: footer.js:94
+msgid "Basic Mode"
+msgstr "Základní režim"
+
+#: footer.js:98
+msgid "Source: CoinGecko"
+msgstr "Zdroj: CoinGecko"
+
+#: footer.js:101
+msgid "Get Free API Key"
+msgstr "Získat zdarma API klíč"
+
+#: footer.js:111
+#, fuzzy, javascript-format
+msgid "Month: %s"
+msgstr "Měsíc: "
+
+#: footer.js:112
+#, javascript-format
+msgid "Ø: %s"
+msgstr ""
+
+#: footer.js:115
+#, fuzzy, javascript-format
+msgid "Alarms: %s"
+msgstr "Alarmy: "
+
+#: header.js:117 header.js:275
+msgid "Portfolio Tracker"
+msgstr "Sledování portfolia"
+
+#: header.js:119 header.js:276
+msgid "Alarm Management"
+msgstr "Správa alarmů"
+
+#: header.js:121 header.js:278
+msgid "API Usage & Stats"
+msgstr "Využití API a statistiky"
+
+#: header.js:123
+msgid "Support Development"
+msgstr "Podpořit vývoj"
+
+# Strings from JS files
+#. IMPORTANT: For the drawing loop we need the pure text without markup!
+#: header.js:128 header.js:274 header.js:641
+msgid "Market Dashboard"
+msgstr "Tržní přehled"
+
+#: header.js:130 header.js:642
+msgid "24H Price Change [%]"
+msgstr "Změna ceny 24h [%]"
+
+#: header.js:280
+msgid "Support"
+msgstr "Podpora"
+
+#: header.js:284
+msgid "Settings"
+msgstr "Nastavení"
+
+#: alarm.js:242
+msgid "Alarm Archive Full"
+msgstr "Archiv alarmů plný"
+
+#: alarm.js:242
+#, fuzzy, javascript-format
+msgid "Oldest alarm for %s was deleted."
+msgstr "Nejstarší alarm pro "
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Background Alarm: %s"
+msgstr "Alarm na pozadí: "
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Target price %s reached! Current: %s"
+msgstr " dosažen! Aktuální: "
+
+#: alarm.js:469
+msgid "Alarm Settings"
+msgstr "Nastavení alarmu"
+
+#: alarm.js:573
+#, fuzzy, javascript-format
+msgid "Target Price (%s):"
+msgstr "Cílová cena ("
+
+#: alarm.js:574
+msgid "Change (%):"
+msgstr "Změna (%):"
+
+#: alarm.js:577
+msgid "Press ENTER to save."
+msgstr "Stiskněte ENTER pro uložení."
+
+#: alarm.js:643 alarm.js:652
+msgid "Search alarms..."
+msgstr "Hledat alarmy..."
+
+#: alarm.js:739 portfolio.js:1262
+msgid "No matches."
+msgstr "Žádné shody."
+
+#: alarm.js:739
+msgid "No alarms here yet."
+msgstr "Zatím zde nejsou žádné alarmy."
+
+#: alarm.js:856
+#, fuzzy, javascript-format
+msgid "Target: %s"
+msgstr "Cíl:"
+
+#: alarm.js:857
+#, fuzzy, javascript-format
+msgid "Vol: %s%%"
+msgstr "24h Obj:"
+
+#: alarm.js:860
+#, fuzzy, javascript-format
+msgid "Current: %s"
+msgstr "Aktuální: "
+
+#: alarm.js:865
+#, fuzzy, javascript-format
+msgid "Created: %s"
+msgstr "Vytvořeno: "
+
+#. Price Input
+#: alarm.js:1023
+msgid "Target:"
+msgstr "Cíl:"
+
+#. Vol Input
+#: alarm.js:1044
+msgid "Vol %:"
+msgstr "Vol %:"
+
+#: alarm.js:1058
+msgid "ENTER to save"
+msgstr "ENTER pro uložení"
+
+#. Sort options
+#: alarm.js:1102 portfolio.js:1008
+msgid "Date"
+msgstr "Datum"
+
+#: alarm.js:1103
+msgid "Name"
+msgstr "Název"
+
+#: alarm.js:1166 alarm.js:1218
+msgid "Delete all"
+msgstr "Smazat vše"
+
+#: alarm.js:1174 alarm.js:1182 alarm.js:1190 alarm.js:1213 portfolio.js:1212
+#: portfolio.js:1219
+msgid "Sure?"
+msgstr "Jistě?"
+
+#: alarm.js:1230
+#, fuzzy, javascript-format
+msgid "Alarms %s of %s"
+msgstr "Alarmy "
+
+#: donate.js:35
+msgid ""
+"If you like this applet, you can support\n"
+"its development with a donation."
+msgstr ""
+"Pokud se vám tento aplet líbí, můžete podpořit\n"
+"jeho vývoj darem."
+
+#: donate.js:181
+msgid "Address:"
+msgstr "Adresa:"
+
+#: donate.js:212
+msgid "Copied"
+msgstr "Zkopírováno"
+
+#: donate.js:212
+#, fuzzy, javascript-format
+msgid "%s address copied."
+msgstr " adresa zkopírována."
+
+#: search.js:33
+msgid "Search..."
+msgstr "Hledat..."
+
+#: search.js:172
+msgid "No results..."
+msgstr "Žádné výsledky..."
+
+#: portfolio.js:316
+msgid "Converting..."
+msgstr "Převádění..."
+
+#: portfolio.js:365
+msgid "Error"
+msgstr "Chyba"
+
+#: portfolio.js:365
+msgid "Currency conversion failed."
+msgstr "Převod měny selhal."
+
+#: portfolio.js:603
+msgid "Total Balance"
+msgstr "Celkový zůstatek"
+
+#. FIX: expand: false for label, insert spacer instead
+#: portfolio.js:720
+msgid "Select Currency"
+msgstr "Vybrat měnu"
+
+#: portfolio.js:790 portfolio.js:798
+msgid "Filter portfolio..."
+msgstr "Filtrovat portfolio..."
+
+#: portfolio.js:1006
+msgid "Amount"
+msgstr "Množství"
+
+#: portfolio.js:1007
+msgid "Buy Price"
+msgstr "Nákupní cena"
+
+#. Add TX Button
+#: portfolio.js:1199
+msgid "+ Transaction"
+msgstr "+ Transakce"
+
+#. Delete Coin Button
+#: portfolio.js:1208 portfolio.js:1224
+msgid "Remove Position"
+msgstr "Odstranit pozici"
+
+#: portfolio.js:1262
+msgid "No positions here yet."
+msgstr "Zatím zde nejsou žádné pozice."
+
+#: portfolio.js:1288
+msgid "Add Coin"
+msgstr "Přidat minci"
+
+#: portfolio.js:1305 portfolio.js:1311
+msgid "Search (e.g. Bitcoin)..."
+msgstr "Hledat (např. Bitcoin)..."
+
+#: portfolio.js:1398
+msgid "No results"
+msgstr "Žádné výsledky"
+
+#: seasonal.js:80
+msgid "HAPPY HALLOWEEN !"
+msgstr "ŠŤASTNÝ HALLOWEEN !"
+
+#: seasonal.js:378
+msgid "MERRY CHRISTMAS 🎄"
+msgstr "VESELÉ VÁNOCE 🎄"
+
+#. Straighten up
+#: seasonal.js:486
+msgid "HAPPY BITCOIN PIZZA DAY 🍕"
+msgstr "ŠŤASTNÝ BITCOIN PIZZA DAY 🍕"
+
+#: charts.js:181
+msgid "?"
+msgstr ""
+
+#: charts.js:228
+msgid "Rank:"
+msgstr "Pořadí:"
+
+#: charts.js:228
+msgid "M.Cap:"
+msgstr "Tržní kap.:"
+
+#: charts.js:229
+msgid "24h High:"
+msgstr "24h Max:"
+
+#: charts.js:229
+msgid "24h Vol:"
+msgstr "24h Obj:"
+
+#: charts.js:230
+msgid "24h Low:"
+msgstr "24h Min:"
+
+#: charts.js:230
+msgid "ATH:"
+msgstr "ATH:"
+
+#: utils.js:348
+msgid " (Rate Limit)"
+msgstr " (Limit rychlosti)"
+
+#: utils.js:349
+msgid " (API Key invalid)"
+msgstr " (Neplatný API klíč)"
+
+#: utils.js:350
+msgid " (Network)"
+msgstr " (Síť)"
+
+#: utils.js:352
+msgid "Crypto-Tracker Error"
+msgstr "Chyba Crypto-Tracker"
+
+#: utils.js:352
+#, fuzzy, javascript-format
+msgid "An error was intercepted%s. See log."
+msgstr "Byla zachycena chyba"
+
+#: api.js:67
+msgid "API successfully activated."
+msgstr "API úspěšně aktivováno."
+
+#: api.js:73
+msgid "No internet connection"
+msgstr "Žádné připojení k internetu"
+
+#: api.js:75
+msgid "Key invalid"
+msgstr "Neplatný klíč"
+
+#: api.js:77
+msgid "Key blocked"
+msgstr "Klíč zablokován"
+
+#: api.js:79
+msgid "Limit reached"
+msgstr "Limit dosažen"
+
+#: api.js:81
+msgid "Server error"
+msgstr "Chyba serveru"
+
+#: api.js:85
+#, fuzzy, javascript-format
+msgid "API Error: %s"
+msgstr "Chyba API: "
+
+#: api.js:90
+msgid "System error"
+msgstr "Systémová chyba"
+
+#: api.js:131
+msgid "System Diagnosis"
+msgstr "Diagnostika systému"
+
+#: api.js:143
+msgid "API Connection: Active & Valid"
+msgstr "Připojení API: Aktivní a platné"
+
+#: api.js:145
+msgid "Not configured"
+msgstr "Nenakonfigurováno"
+
+#: api.js:146
+#, fuzzy, javascript-format
+msgid "API Status: %s"
+msgstr "Stav API: "
+
+#: api.js:154
+#, fuzzy, javascript-format
+msgid "Quota critical: %s%% used"
+msgstr "Kvóta kritická: "
+
+#: api.js:156
+#, fuzzy, javascript-format
+msgid "Quota high: %s%% used"
+msgstr "Kvóta vysoká: "
+
+#: api.js:158
+#, fuzzy, javascript-format
+msgid "Quota: %s%% (In the green)"
+msgstr "(V zeleném)"
+
+#: api.js:165
+#, fuzzy, javascript-format
+msgid "Period: %s days left in month."
+msgstr " dní zbývá v měsíci."
+
+#: api.js:171
+#, fuzzy, javascript-format
+msgid "Tip: Interval (%ss) is aggressive for Free Tier."
+msgstr "s) je agresivní pro bezplatnou úroveň."
+
+#: api.js:178
+msgid "Note: Error log exists."
+msgstr "Poznámka: Existuje chybový protokol."
+
+#: api.js:180
+msgid "System: No crashes logged."
+msgstr "Systém: Žádné pády nezaznamenány."
+
+#: api.js:202 api.js:397
+msgid "Free API (Basic)"
+msgstr "Free API (Základní)"
+
+#: api.js:203 api.js:210
+msgid "Today:"
+msgstr "Dnes:"
+
+#: api.js:204 api.js:211
+msgid "Month:"
+msgstr "Měsíc:"
+
+#: api.js:205 api.js:212
+msgid "Ø per Day:"
+msgstr "Ø za den:"
+
+#: api.js:209 api.js:398
+msgid "Key API (Pro)"
+msgstr "Key API (Pro)"
+
+#: api.js:224
+msgid "Distribution (Key Calls)"
+msgstr "Distribuce (Klíčová volání)"
+
+#: api.js:239
+msgid "Charts"
+msgstr "Grafy"
+
+#. Blue
+#: api.js:240
+msgid "Details"
+msgstr "Detaily"
+
+#. Purple
+#: api.js:241
+msgid "Search"
+msgstr "Hledat"
+
+#. Yellow
+#: api.js:242
+msgid "Portfolio"
+msgstr "Portfolio"
+
+#. Cyan
+#: api.js:243
+msgid "Alarms"
+msgstr "Alarmy"
+
+#. Red/Pink
+#: api.js:244
+msgid "Updates"
+msgstr "Aktualizace"
+
+#: api.js:294
+msgid "History (Last 14 Days)"
+msgstr "Historie (Posledních 14 dní)"
+
+#: api.js:417
+#, fuzzy, javascript-format
+msgid "Error Log (%s KB)"
+msgstr "Chybový protokol ("
+
+#: api.js:420
+msgid "The system prevented and logged crashes."
+msgstr "Systém zabránil pádům a zaznamenal je."
+
+#: api.js:426
+msgid "Delete"
+msgstr "Smazat"
+
+#: api.js:439
+msgid "Dismiss"
+msgstr "Zavřít"
+
+#, fuzzy
+#~ msgid "Ø:"
+#~ msgstr "Ø: "
+
+#~ msgid " was deleted."
+#~ msgstr " byl smazán."
+
+#~ msgid "Target price "
+#~ msgstr "Cílová cena "
+
+#, fuzzy
+#~ msgid " has "
+#~ msgstr " "
+
+#~ msgid " by "
+#~ msgstr " o "
+
+#~ msgid " of "
+#~ msgstr " z "
+
+#~ msgid ". See log."
+#~ msgstr ". Viz protokol."
+
+#~ msgid "% used"
+#~ msgstr "% využito"
+
+#~ msgid "Quota: "
+#~ msgstr "Kvóta: "
+
+#~ msgid "Period: "
+#~ msgstr "Období: "
+
+#~ msgid "Tip: Interval ("
+#~ msgstr "Tip: Interval ("
+
+#~ msgid " KB)"
+#~ msgstr " KB)"
+
+#~ msgid "Crypto Tracker"
+#~ msgstr "Crypto Tracker"
+
+#~ msgid ""
+#~ "A comprehensive cryptocurrency dashboard providing real-time market data, "
+#~ "portfolio management, interactive charts, and advanced alerting "
+#~ "capabilities, enhanced with seasonal visual elements."
+#~ msgstr ""
+#~ "Komplexní panel pro kryptoměny poskytující tržní data v reálném čase, "
+#~ "správu portfolia, interaktivní grafy a pokročilé možnosti upozornění, "
+#~ "vylepšený o sezónní vizuální prvky."
+
+#~ msgid "Metric 1 (Primary)"
+#~ msgstr "Metrika 1 (Primární)"
+
+#~ msgid "Metric 2"
+#~ msgstr "Metrika 2"
+
+#~ msgid "Metric 3"
+#~ msgstr "Metrika 3"
+
+#~ msgid "General"
+#~ msgstr "Obecné"
+
+#~ msgid "DevTools (Debug)"
+#~ msgstr "Vývojářské nástroje (Ladění)"
+
+#~ msgid "Developer Options"
+#~ msgstr "Možnosti pro vývojáře"
+
+#~ msgid "Applet Settings"
+#~ msgstr "Nastavení apletu"
+
+#~ msgid "CoinGecko API Configuration"
+#~ msgstr "Konfigurace CoinGecko API"
+
+#~ msgid "Display and Activation"
+#~ msgstr "Zobrazení a aktivace"
+
+#~ msgid "Data Source (API)"
+#~ msgstr "Zdroj dat (API)"
+
+#~ msgid "Color Settings"
+#~ msgstr "Nastavení barev"
+
+#~ msgid "Changes will activate on the next API update interval."
+#~ msgstr "Změny se projeví při příštím intervalu aktualizace API."
+
+#~ msgid "CoinGecko API Key (Demo or Pro)"
+#~ msgstr "CoinGecko API klíč (Demo nebo Pro)"
+
+#~ msgid "Unlocks higher limits and more stable data queries."
+#~ msgstr "Odemkne vyšší limity a stabilnější datové dotazy."
+
+#~ msgid ""
+#~ "CALL TRACKING OVERVIEW:\n"
+#~ "\n"
+#~ "• BASIC CALLS: Run via public servers (approx. 5-15 calls/min). \n"
+#~ "  Used for: Standard price queries (saves key quota).\n"
+#~ "\n"
+#~ "• KEY CALLS: Run via your Demo Key quota.\n"
+#~ "  Used for: Charts, coin details & more stable queries.\n"
+#~ "\n"
+#~ "LIMITS (DEMO KEY):\n"
+#~ "• Total: 10,000 calls per month\n"
+#~ "• Speed: Max. 30 requests per minute\n"
+#~ "\n"
+#~ "The tracking in the footer shows you in real-time how many requests have "
+#~ "been used so you can keep an eye on your monthly 10k limit."
+#~ msgstr ""
+#~ "PŘEHLED SLEDOVÁNÍ VOLÁNÍ:\n"
+#~ "\n"
+#~ "• ZÁKLADNÍ VOLÁNÍ: Běží přes veřejné servery (cca 5-15 volání/min). \n"
+#~ "  Použito pro: Standardní dotazy na cenu (šetří kvótu klíče).\n"
+#~ "\n"
+#~ "• KLÍČOVÁ VOLÁNÍ: Běží přes vaši kvótu Demo klíče.\n"
+#~ "  Použito pro: Grafy, detaily mincí a stabilnější dotazy.\n"
+#~ "\n"
+#~ "LIMITY (DEMO KLÍČ):\n"
+#~ "• Celkem: 10 000 volání měsíčně\n"
+#~ "• Rychlost: Max. 30 požadavků za minutu\n"
+#~ "\n"
+#~ "Sledování v zápatí vám v reálném čase ukazuje, kolik požadavků bylo "
+#~ "použito, abyste mohli sledovat svůj měsíční limit 10k."
+
+#~ msgid "Show Active Alarms"
+#~ msgstr "Zobrazit aktivní alarmy"
+
+#~ msgid "Shows the count of active alarms in the footer."
+#~ msgstr "Zobrazuje počet aktivních alarmů v zápatí."
+
+#~ msgid "Show Monthly Statistics"
+#~ msgstr "Zobrazit měsíční statistiky"
+
+#~ msgid "Shows total API key calls this month."
+#~ msgstr "Zobrazuje celkový počet volání API klíče tento měsíc."
+
+#~ msgid "Show Daily Average"
+#~ msgstr "Zobrazit denní průměr"
+
+#~ msgid "Shows the calculated average per day."
+#~ msgstr "Zobrazuje vypočítaný průměr za den."
+
+#~ msgid "Candle Charts as Default"
+#~ msgstr "Svíčkové grafy jako výchozí"
+
+#~ msgid "Shows charts as candlesticks by default where possible."
+#~ msgstr "Zobrazuje grafy jako svíčky ve výchozím nastavení, kde je to možné."
+
+#~ msgid "Chart: Bullish Candle Color (Up)"
+#~ msgstr "Graf: Barva býčí svíčky (Nahoru)"
+
+#~ msgid "Color for rising candles."
+#~ msgstr "Barva pro rostoucí svíčky."
+
+#~ msgid "Chart: Bearish Candle Color (Down)"
+#~ msgstr "Graf: Barva medvědí svíčky (Dolů)"
+
+#~ msgid "Color for falling candles."
+#~ msgstr "Barva pro klesající svíčky."
+
+#~ msgid "Price Alarm"
+#~ msgstr "Cenový alarm"
+
+#~ msgid "Notification when this price is reached."
+#~ msgstr "Upozornění při dosažení této ceny."
+
+#~ msgid "Enter the target price e.g. 5 or 2598. 0 disables the alarm."
+#~ msgstr "Zadejte cílovou cenu např. 5 nebo 2598. 0 vypne alarm."
+
+#~ msgid "Percent Alarm"
+#~ msgstr "Procentuální alarm"
+
+#~ msgid "Alarm on percentage change (24h)."
+#~ msgstr "Alarm při procentuální změně (24h)."
+
+#~ msgid "Enter a percentage value e.g. 5. 0 disables the alarm."
+#~ msgstr "Zadejte procentuální hodnotu např. 5. 0 vypne alarm."
+
+#~ msgid "Compact Mode"
+#~ msgstr "Kompaktní režim"
+
+#~ msgid "Space-saving display in panel (BTC $85.5K)."
+#~ msgstr "Úsporné zobrazení na panelu (BTC $85.5K)."
+
+#~ msgid "Enable Seasonal Theme"
+#~ msgstr "Povolit sezónní motiv"
+
+#~ msgid ""
+#~ "Automatically activates festive designs (e.g. Christmas) at certain times."
+#~ msgstr ""
+#~ "Automaticky aktivuje sváteční designy (např. Vánoce) v určitých časech."
+
+#~ msgid "Show Decimals"
+#~ msgstr "Zobrazit desetinná místa"
+
+#~ msgid "Toggles the display of cent amounts on or off."
+#~ msgstr "Přepíná zobrazení haléřových částek."
+
+#~ msgid "Show Trend Arrows"
+#~ msgstr "Zobrazit šipky trendu"
+
+#~ msgid "Shows or hides trend arrows for price changes."
+#~ msgstr "Zobrazuje nebo skrývá šipky trendu pro změny cen."
+
+#~ msgid "Icon Opacity"
+#~ msgstr "Průhlednost ikony"
+
+#~ msgid "Controls the visibility of crypto icons."
+#~ msgstr "Řídí viditelnost ikon kryptoměn."
+
+#~ msgid "Update Interval"
+#~ msgstr "Interval aktualizace"
+
+#~ msgid "How often prices are fetched from CoinGecko."
+#~ msgstr "Jak často jsou ceny stahovány z CoinGecko."
+
+#~ msgid "Reset Colors"
+#~ msgstr "Obnovit barvy"
+
+#~ msgid "Resets all custom colors (charts & metrics) to default values."
+#~ msgstr "Obnoví všechny vlastní barvy (grafy a metriky) na výchozí hodnoty."
+
+#~ msgid "Update Top Coins List"
+#~ msgstr "Aktualizovat seznam top mincí"
+
+#~ msgid ""
+#~ "Loads the current top 50 coins from CoinGecko and updates the selection "
+#~ "lists (requires settings restart)."
+#~ msgstr ""
+#~ "Načte aktuálních top 50 mincí z CoinGecko a aktualizuje výběrové seznamy "
+#~ "(vyžaduje restart nastavení)."
+
+#~ msgid "Force ATH Rocket"
+#~ msgstr "Vynutit ATH raketu"
+
+#~ msgid "Always show the rocket animation (for testing purposes)."
+#~ msgstr "Vždy zobrazit animaci rakety (pro testovací účely)."
+
+#~ msgid "Force Seasonal Theme"
+#~ msgstr "Vynutit sezónní motiv"
+
+#~ msgid "Override the date-based theme selection."
+#~ msgstr "Přepsat výběr motivu na základě data."
+
+#~ msgid "Debug Frames (Layout)"
+#~ msgstr "Ladicí rámečky (Rozvržení)"
+
+#~ msgid "Draws colorful frames around menu elements for layout inspection."
+#~ msgstr "Kreslí barevné rámečky kolem prvků menu pro kontrolu rozvržení."
+
+#~ msgid "Show Error Notifications"
+#~ msgstr "Zobrazit chybová upozornění"
+
+#~ msgid "Sends a desktop notification when an internal error is caught."
+#~ msgstr "Odesílá upozornění na plochu, když je zachycena vnitřní chyba."
+
+#~ msgid "Test Crash (Safe)"
+#~ msgstr "Test pádu (Bezpečný)"
+
+#~ msgid "Provokes an error to test logging and notifications."
+#~ msgstr "Vyvolá chybu pro testování logování a upozornění."
+
+#~ msgid "Show Icon"
+#~ msgstr "Zobrazit ikonu"
+
+#~ msgid "Shows the crypto icon next to the price."
+#~ msgstr "Zobrazuje ikonu kryptoměny vedle ceny."
+
+#~ msgid "Toggles the display of decimal places on/off."
+#~ msgstr "Přepíná zobrazení desetinných míst."
+
+#~ msgid "Number of Decimals"
+#~ msgstr "Počet desetinných míst"
+
+#~ msgid "Number of decimal places (2-8)."
+#~ msgstr "Počet desetinných míst (2-8)."
+
+#~ msgid "Color the Arrow Only"
+#~ msgstr "Obarvit pouze šipku"
+
+#~ msgid "If active, the price text remains white."
+#~ msgstr "Pokud je aktivní, text ceny zůstane bílý."
+
+#~ msgid "Show Currency Symbol (e.g. $ or €)"
+#~ msgstr "Zobrazit symbol měny (např. $ nebo €)"
+
+#~ msgid "Replaces the currency code with the symbol."
+#~ msgstr "Nahradí kód měny symbolem."
+
+#~ msgid "Enabled"
+#~ msgstr "Povoleno"
+
+#~ msgid "Toggles the display of this metric on/off."
+#~ msgstr "Přepíná zobrazení této metriky."
+
+#~ msgid "Currency ID (CoinGecko)"
+#~ msgstr "ID měny (CoinGecko)"
+
+#~ msgid "Select the cryptocurrency from the top list."
+#~ msgstr "Vyberte kryptoměnu z top seznamu."
+
+#~ msgid "Custom Currency ID"
+#~ msgstr "Vlastní ID měny"
+
+#~ msgid "CoinGecko ID (e.g. 'litecoin')"
+#~ msgstr "CoinGecko ID (např. 'litecoin')"
+
+#~ msgid "Comparison Currency"
+#~ msgstr "Srovnávací měna"
+
+#~ msgid "Select the currency for the price comparison."
+#~ msgstr "Vyberte měnu pro srovnání cen."
+
+#~ msgid "Display Symbol"
+#~ msgstr "Zobrazovaný symbol"
+
+#~ msgid "The symbol displayed on the panel (e.g. BTC)."
+#~ msgstr "Symbol zobrazený na panelu (např. BTC)."
+
+#~ msgid "Color for Rising Price (▲)"
+#~ msgstr "Barva pro rostoucí cenu (▲)"
+
+#~ msgid "Select the color for positive price movement."
+#~ msgstr "Vyberte barvu pro pozitivní pohyb ceny."
+
+#~ msgid "Color for Falling Price (▼)"
+#~ msgstr "Barva pro klesající cenu (▼)"
+
+#~ msgid "Select the color for negative price movement."
+#~ msgstr "Vyberte barvu pro negativní pohyb ceny."
+
+#~ msgid "15 Seconds (Minimum)"
+#~ msgstr "15 sekund (Minimum)"
+
+#~ msgid "30 Seconds"
+#~ msgstr "30 sekund"
+
+#~ msgid "60 Seconds (1 Minute)"
+#~ msgstr "60 sekund (1 minuta)"
+
+#~ msgid "120 Seconds (2 Minutes)"
+#~ msgstr "120 sekund (2 minuty)"
+
+#~ msgid "300 Seconds (5 Minutes)"
+#~ msgstr "300 sekund (5 minut)"
+
+#~ msgid "Automatic (Date based)"
+#~ msgstr "Automatic (Date based)"
+
+#~ msgid "New Year"
+#~ msgstr "New Year"
+
+#~ msgid "Christmas (General)"
+#~ msgstr "Christmas (General)"
+
+#~ msgid "Christmas (Eve & Day)"
+#~ msgstr "Christmas (Eve & Day)"
+
+#~ msgid "Halloween"
+#~ msgstr "Halloween"
+
+#~ msgid "Valentine's Day"
+#~ msgstr "Valentine's Day"
+
+#~ msgid "Bitcoin Pizza Day"
+#~ msgstr "Bitcoin Pizza Day"
+
+#~ msgid "Easter"
+#~ msgstr "Easter"
+
+#~ msgid "Custom ID"
+#~ msgstr "Vlastní ID"
+
+#~ msgid "US Dollar (USD)"
+#~ msgstr "Americký dolar (USD)"
+
+#~ msgid "Euro (EUR)"
+#~ msgstr "Euro (EUR)"
+
+#~ msgid "Canadian Dollar (CAD)"
+#~ msgstr "Kanadský dolar (CAD)"
+
+#~ msgid "British Pound (GBP)"
+#~ msgstr "Britská libra (GBP)"
+
+#~ msgid "Japanese Yen (JPY)"
+#~ msgstr "Japonský jen (JPY)"
+
+#~ msgid "Swiss Franc (CHF)"
+#~ msgstr "Švýcarský frank (CHF)"
+
+#~ msgid "Australian Dollar (AUD)"
+#~ msgstr "Australský dolar (AUD)"
+
+#~ msgid "Happy New Year"
+#~ msgstr "Šťastný Nový rok"
+
+#~ msgid " Loading..."
+#~ msgstr " Načítání..."
+
+#~ msgid "Target "
+#~ msgstr "Cíl "
+
+#~ msgid "Search Coin"
+#~ msgstr "Hledat minci"
+
+#~ msgid "Loading market data..."
+#~ msgstr "Načítání tržních dat..."
+
+#~ msgid "Power Saving Disabled"
+#~ msgstr "Úsporný režim zakázán"
+
+#~ msgid "New month: Interval reset to 120s."
+#~ msgstr "Nový měsíc: Interval obnoven na 120s."
