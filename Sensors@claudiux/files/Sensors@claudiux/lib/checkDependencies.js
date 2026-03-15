@@ -118,7 +118,8 @@ var DEPENDENCIES = {
   "openSUSE": [
     ["sensors", "/usr/bin/sensors",  "sensors"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"]
-  ]
+  ],
+  "gentoo": []
 }
 
 
@@ -145,8 +146,8 @@ const UPDATE = {
   "debian": "apt-get update",
   "devuan": "apt-get update",
   "fedora": "sudo dnf update",
-  "openSUSE": ""//,
-  //"gentoo": "emerge --sync"
+  "openSUSE": "",
+  "gentoo": ""
 }
 
 const INSTALL = {
@@ -155,7 +156,8 @@ const INSTALL = {
   "debian": "apt-get install",
   "devuan": "apt-get install",
   "fedora": "sudo dnf install",
-  "openSUSE": "sudo zypper --non-interactive install"
+  "openSUSE": "sudo zypper --non-interactive install",
+  "gentoo": ""
 }
 
 //const HOME_DIR = GLib.get_home_dir();
