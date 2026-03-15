@@ -187,7 +187,29 @@ function parseAlarmSpec(input, now = new Date(), t = null) {
   return { ok: true, due, label, showSeconds: false };
 }
 
+/**
+ * Formats the time remaining until a future date as a compact string for panel display.
+ * @param {Date} dueDate - The target date
+ * @param {number} nowMs - Current time in milliseconds (Date.now())
+ * @returns {string} Compact countdown string, e.g. "42s", "5m", "1m 30s", "1h 5m". Empty string if past.
+ */
+function formatCountdown(dueDate, nowMs) {
+  const diffMs = dueDate.getTime() - nowMs;
+  if (diffMs <= 0) return "";
+
+  const totalSec = Math.ceil(diffMs / 1000);
+  const h = Math.floor(totalSec / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  const s = totalSec % 60;
+
+  if (h > 0) return m > 0 ? `${h}h ${m}m` : `${h}h`;
+  if (m >= 2) return `${m}m`;
+  if (m === 1) return s > 0 ? `1m ${s}s` : "1m";
+  return `${s}s`;
+}
+
 var formatTime = formatTime;
 var formatTimeHHMM = formatTimeHHMM;
 var formatTimeHHMMSS = formatTimeHHMMSS;
+var formatCountdown = formatCountdown;
 var parseAlarmSpec = parseAlarmSpec;

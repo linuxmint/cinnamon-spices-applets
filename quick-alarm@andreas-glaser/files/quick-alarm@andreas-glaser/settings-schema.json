@@ -1,4 +1,13 @@
 {
+  "sectionPanel": {
+    "type": "section",
+    "description": "Panel"
+  },
+  "showCountdown": {
+    "type": "switch",
+    "default": false,
+    "description": "Show remaining time beside icon"
+  },
   "sectionNotification": {
     "type": "section",
     "description": "Notification"
