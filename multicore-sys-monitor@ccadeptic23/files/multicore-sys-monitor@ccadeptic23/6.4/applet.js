@@ -48,6 +48,7 @@ const translated_strings = [
     _("Usedup:"),
     _("Free:"),
     _("Swap"),
+    _("Swap:"),
     _("Down:"),
     _("Up:"),
     _("Read:"),
@@ -67,6 +68,22 @@ const properties = [
     {graph: 'diskGraph', provider: 'diskProvider', abbrev: 'Disk'},
     {graph: 'diskUsageGraph', provider: 'diskUsageProvider', abbrev: 'DiskUsage'}
 ];
+
+const orig_names = [
+    _("CPU"), 
+    _("MEM"), 
+    _("NET"), 
+    _("DISK"), 
+    _("DISK USAGE")
+];
+const orig_charts = [
+    [properties[0]], 
+    [properties[1], properties[2]], 
+    [properties[3]],
+    [properties[4]],
+    [properties[5]]
+];
+
 
 function get_nemo_size_prefixes() {
     let _SETTINGS_SCHEMA='org.nemo.preferences';
@@ -113,11 +130,11 @@ const formatBytesValueUnit = (bytes, decimals=2, withRate=true) => {
     if (!isBinary) {
         k = 1000;
         sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        i = Math.min(Math.max(0, Math.floor(Math.log10(bytes) / Math.log10(k))), 8);
+        i = Math.min(Math.max(0, Math.trunc(Math.log10(bytes) / 3)), 8); // Math.log10(k) = 3.
     } else {
         k = 1024;
         sizes = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
-        i = Math.min(Math.max(0, Math.floor(Math.log2(bytes) / Math.log2(k))), 8);
+        i = Math.min(Math.max(0, Math.trunc(Math.log2(bytes) / 10)), 8); // Math.log2(k) = 10.
     }
     let value;
     if (isNaN(i)) {
@@ -188,6 +205,8 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("labelColor", "labelColor");
         this.settings.bind("borderColor", "borderColor");
         this.settings.bind("backgroundColor", "backgroundColor");
+        this.settings.bind("displayOrder", "displayOrder");
+        this.controlDisplayOrder();
         this.settings.bind("CPU_enabled", "CPU_enabled");
         this.settings.bind("CPU_squared", "CPU_squared");
         this.settings.bind("CPU_showTemp", "CPU_showTemp");
@@ -198,6 +217,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_tempColor", "CPU_tempColor");
         this.settings.bind("CPU_tempColorHigh", "CPU_tempColorHigh");
         this.settings.bind("CPU_tempColorCrit", "CPU_tempColorCrit");
+        this.settings.bind("CPU_tempCorner", "CPU_tempCorner");
         this.settings.bind("CPU_width", "CPU_width", () => { this.adjust_CPU_width() });
         this.settings.bind("CPU_mergeAll", "CPU_mergeAll");
         this.settings.bind("CPU_color0", "CPU_color0");
@@ -210,9 +230,11 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_activity_60_80", "CPU_activity_60_80");
         this.settings.bind("CPU_activity_80_100", "CPU_activity_80_100");
         this.settings.bind("Mem_enabled", "Mem_enabled");
+        this.settings.bind("Swap_enabled", "Swap_enabled");
         this.settings.bind("Mem_squared", "Mem_squared");
         this.settings.bind("Mem_width", "Mem_width", () => { this.adjust_Mem_width() });
         this.settings.bind("Mem_startAt12Oclock", "Mem_startAt12Oclock");
+        this.settings.bind("Mem_showBytesInTooltip", "Mem_showBytesInTooltip");
         this.settings.bind("Mem_colorUsedup", "Mem_colorUsedup");
         this.settings.bind("Mem_colorCache", "Mem_colorCache");
         this.settings.bind("Mem_colorBuffers", "Mem_colorBuffers");
@@ -225,12 +247,18 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Net_mergeAll", "Net_mergeAll");
         this.settings.bind("Net_autoscale", "Net_autoscale");
         this.settings.bind("Net_logscale", "Net_logscale");
+        this.settings.bind("Net_total_type", "Net_total_type");
+        this.settings.bind("Net_total_display", "Net_total_display", () => { this.adjust_Net_width() });
+        this.settings.bind("Net_total_hovering_only", "Net_total_hovering_only");
+        this.settings.bind("Net_totalCorner", "Net_totalCorner");
+        this.settings.bind("Net_symbolsInTooltip", "Net_symbolsInTooltip");
         this.settings.bind("Disk_enabled", "Disk_enabled");
         this.settings.bind("Disk_squared", "Disk_squared");
         this.settings.bind("Disk_width", "Disk_width", () => { this.adjust_Disk_width() });
         this.settings.bind("Disk_mergeAll", "Disk_mergeAll");
         this.settings.bind("Disk_autoscale", "Disk_autoscale");
         this.settings.bind("Disk_logscale", "Disk_logscale");
+        this.settings.bind("Disk_symbolsInTooltip", "Disk_symbolsInTooltip");
         this.settings.bind("DiskUsage_enabled", "DiskUsage_enabled");
         this.settings.bind("DiskUsage_labelOn", "DiskUsage_labelOn");
         this.settings.bind("DiskUsage_squared", "DiskUsage_squared");
@@ -310,7 +338,6 @@ class MCSM extends Applet.IconApplet {
 
         this.graphArea = new St.DrawingArea();
         this.graphArea.width = 1;
-        //~ this.graphArea.height = this.panelHeight * global.ui_scale;
         this.graphArea.height = this.panelHeight;
 
         this.multiCpuGraph = new Graphs.GraphVBars(this.graphArea, this);
@@ -333,6 +360,36 @@ class MCSM extends Applet.IconApplet {
 
         this.actor.add_actor(this.graphArea);
         this.graphArea.connect('repaint', (area) => this.onGraphRepaint(area));
+    }
+    
+    controlDisplayOrder(reinit=false) {
+        var displayOrder = [];
+        var order = [];
+        if (!reinit) {
+            for (let d of this.displayOrder) {
+                let section = d["id"];
+                if (order.indexOf(section) < 0 && orig_names.indexOf(section) >= 0) order.push(section);
+            }
+            if (order.length < orig_names.length) {
+                for (let name of orig_names) {
+                    if (order.indexOf(name) < 0 ) order.push(name);
+                }
+            }
+        } else {
+            order = orig_names;
+        }
+        
+        for (let name of order)
+            displayOrder.push({"id": name});
+
+        let _to = setTimeout( () => {
+            clearTimeout(_to);
+            this.displayOrder = displayOrder;
+        }, 0);
+    }
+    
+    reinitDisplayOrder() {
+        this.controlDisplayOrder(true);
     }
     
     adjust_CPU_width() {
@@ -359,6 +416,8 @@ class MCSM extends Applet.IconApplet {
             Math.min(this.graphStep, 16),
             Math.round(this.Net_width / this.graphStep) * this.graphStep
         );
+        if (this.Net_total_display && Net_width < 128)
+            Net_width = 128;
         this.Net_width = Net_width;
     }
 
@@ -390,30 +449,16 @@ class MCSM extends Applet.IconApplet {
 
     set_panelHeight() {
         this.iconSize = this.getPanelIconSize(St.IconType.FULLCOLOR);
-        //~ global.log("this.iconSize: " + this.iconSize);
         if (this.useIconSize) {
-            //~ global.log("Case 1");
             this.panelHeight = this.iconSize * global.ui_scale;
         } else if (this.graphHeightPercent) {
-            //~ global.log("Case 2");
-            //~ global.log("this.graphHeight: " + this.graphHeight);
-            //~ global.log("this._panelHeight: " + this._panelHeight);
-            
-            //~ if (this.graphHeight > this._panelHeight) this.graphHeight = this._panelHeight;
             this.graphHeight = Math.ceil(this._panelHeight * this.graphHeightPercent / 100);
             
-            //~ this.panelHeight = Math.ceil(this.graphHeight); // * global.ui_scale
             this.panelHeight = this.graphHeight; // * global.ui_scale
         } else {
-            //~ global.log("Case 3");
-            //~ global.log("this._panelHeight: " + this._panelHeight);
             this.panelHeight = this._panelHeight;
         }
-        //~ global.log("Finally");
-        //~ global.log("this.panelHeight: " + this.panelHeight);
-        //~ global.log("this.panelHeight * global.ui_scale: " + this.panelHeight * global.ui_scale);
         if (this.graphArea) {
-            //~ this.graphArea.height = this.panelHeight * global.ui_scale;
             this.graphArea.height = this.panelHeight;
             this.graphArea.queue_repaint();
         }
@@ -445,22 +490,33 @@ class MCSM extends Applet.IconApplet {
             return this.isRunning;
         });
     }
-
+    
     onGraphRepaint(area) {
         this._isHighlighted;
         if (this.without_any_graph) return;
         let xOffset = 0;
-        let yOffset = Math.max(0, Math.floor((this._panelHeight - this.panelHeight) / 2));
-        for (let i = 0, len = properties.length; i < len; i++) {
-            if (properties[i].abbrev === 'Swap') {
+        let yOffset = Math.max(0, Math.trunc((this._panelHeight - this.panelHeight) / 2));
+        var order = [];
+        var _properties = [];
+        for (let o of this.displayOrder){
+            let box = o["id"];
+            if (order.indexOf(box) < 0 && orig_names.indexOf(box) >= 0) {
+                order.push(box);
+                let index = orig_names.indexOf(box);
+                _properties = _properties.concat(orig_charts[index]);
+            }
+        };
+        
+        for (let i = 0, len = _properties.length; i < len; i++) {
+            if (_properties[i].abbrev === 'Swap') {
                 continue;
             }
-            if (this[properties[i].provider].isEnabled) {
+            if (this[_properties[i].provider].isEnabled) {
                 // translate origin to the new location for the graph
                 let areaContext = area.get_context();
                 areaContext.translate(xOffset, yOffset);
-                let width = (this[`${properties[i].abbrev}_squared`] === true) ? this.panelHeight : this[`${properties[i].abbrev}_width`] * global.ui_scale;
-                if (properties[i].abbrev === 'Mem') {
+                let width = (this[`${_properties[i].abbrev}_squared`] === true) ? this.panelHeight : this[`${_properties[i].abbrev}_width`] * global.ui_scale;
+                if (_properties[i].abbrev === 'Mem') {
                     // paint the "swap" backdrop
                     this.swapGraph.paint(
                         this.swapProvider.name,
@@ -469,7 +525,7 @@ class MCSM extends Applet.IconApplet {
                         areaContext,
                         // no label for the backdrop
                         false,
-                        Math.round(width * this.Mem_swapWidth / 100) - 2 * global.ui_scale,
+                        (this.Swap_enabled) ? Math.round(width * this.Mem_swapWidth / 100) - 2 * global.ui_scale : 0,
                         this.panelHeight - 2 * global.ui_scale,
                         [0, 0, 0, 0],
                         // clear background so that it doesn't mess up the other one
@@ -477,10 +533,10 @@ class MCSM extends Applet.IconApplet {
                         [this.Mem_colorSwap]
                     );
                 }
-                let labelOn = this[`${properties[i].abbrev}_labelOn`];
-                this[properties[i].graph].paint(
-                    this[properties[i].provider].name,
-                    this[properties[i].provider].currentReadings,
+                let labelOn = this[`${_properties[i].abbrev}_labelOn`];
+                this[_properties[i].graph].paint(
+                    this[_properties[i].provider].name,
+                    this[_properties[i].provider].currentReadings,
                     area,
                     areaContext,
                     this.labelsOn && labelOn,
@@ -488,7 +544,7 @@ class MCSM extends Applet.IconApplet {
                     this.panelHeight - 2 * global.ui_scale,
                     this.labelColor,
                     this.backgroundColor,
-                    this[properties[i].provider].getColorList()
+                    this[_properties[i].provider].getColorList()
                 );
                 // return translation to origin
                 areaContext.translate(-xOffset, -yOffset);
@@ -871,11 +927,8 @@ class MCSM extends Applet.IconApplet {
             this.CPU_tempPath.length > 0 && 
             GLib.file_test(this.CPU_tempPath, GLib.FileTest.EXISTS)
         ) {
-            //~ global.log("this.CPU_tempPath: " + this.CPU_tempPath);
             readFileAsync(this.CPU_tempPath).then((contents) => {
-                //~ global.log("contents: " + contents);
                 let _temp = contents.trim();
-                //~ global.log("_temp: " + _temp);
                 _temp = parseInt(_temp);
                 if (!isNaN(_temp)) {
                     _temp = Math.round(1 * _temp / 1000);
@@ -976,7 +1029,7 @@ class MCSM extends Applet.IconApplet {
         for (let name of Object.keys(dataNet)) {
             let rx = dataNet[name]["rx"];
             let tx = dataNet[name]["tx"];
-            datastring += name + ":" + rx + ":" + tx + " ";
+            datastring += `${name}:${rx}:${tx} `;
         }
         datastring = datastring.trim();
         var allowedInterfaces = [];
@@ -999,14 +1052,14 @@ class MCSM extends Applet.IconApplet {
                 continue;
             }
             if (this.Net_mergeAll) {
-                sum_rx = sum_rx + Math.trunc(rx);
-                sum_tx = sum_tx + Math.trunc(tx);
+                sum_rx = sum_rx + 1 * rx;
+                sum_tx = sum_tx + 1 * tx;
             } else {
                 data.push({
                     "id": iface,
                     "name": names[iface],
-                    "up": Math.trunc(tx),
-                    "down": Math.trunc(rx)
+                    "up": 1 * tx,
+                    "down": 1 * rx
                 });
             }
         }
@@ -1021,6 +1074,21 @@ class MCSM extends Applet.IconApplet {
         }
         this.networkProvider.setData(data, disabledDevices);
     }
+    
+    _read_rx_tx_bytes(name, status) {
+        if (status != "up") return;
+        const net_dir_path = "/sys/class/net";
+        var rx_bytes = "", tx_bytes = "";
+        const rx_bytes_path = `${net_dir_path}/${name}/statistics/rx_bytes`;
+        const tx_bytes_path = `${net_dir_path}/${name}/statistics/tx_bytes`;
+        readFileAsync(rx_bytes_path).then( (outputR) => {
+            rx_bytes = outputR.trim();
+            readFileAsync(tx_bytes_path).then( (outputT) => {
+                tx_bytes = outputT.trim();
+                this.lastDataNet[""+name] = {"rx": parseInt(rx_bytes), "tx": parseInt(tx_bytes)};
+            });
+        });
+    }
 
     get_net_info() {
         if (!this.isRunning) return;
@@ -1033,18 +1101,7 @@ class MCSM extends Applet.IconApplet {
                 let names_status = result.trim().split(" ");
                 for (let name_status of names_status) {
                     let [name, status] = name_status.split(":");
-                    if (status == "up") {
-                        var rx_bytes = "", tx_bytes = "";
-                        let rx_bytes_path = `${net_dir_path}/${name}/statistics/rx_bytes`;
-                        let tx_bytes_path = `${net_dir_path}/${name}/statistics/tx_bytes`;
-                        readFileAsync(rx_bytes_path).then( (outputR) => {
-                            rx_bytes = outputR.trim();
-                            readFileAsync(tx_bytes_path).then( (outputT) => {
-                                tx_bytes = outputT.trim();
-                                this.lastDataNet[""+name] = {"rx": parseInt(rx_bytes), "tx": parseInt(tx_bytes)};
-                            });
-                        });
-                    }
+                    this._read_rx_tx_bytes(name, status);
                 }
             });
         } else {
@@ -1055,18 +1112,7 @@ class MCSM extends Applet.IconApplet {
                 let operstate_file_path = `${net_dir_path}/${name}/operstate`;
                 readFileAsync(operstate_file_path).then( (output) => {
                     let net_status = output.trim();
-                    if (net_status == "up") {
-                        let rx_bytes_path = `${net_dir_path}/${name}/statistics/rx_bytes`;
-                        let tx_bytes_path = `${net_dir_path}/${name}/statistics/tx_bytes`;
-                        
-                        readFileAsync(rx_bytes_path).then( (outputR) => {
-                            let rx_bytes = outputR.trim();
-                            readFileAsync(tx_bytes_path).then( (outputT) => {
-                                let tx_bytes = outputT.trim();
-                                this.lastDataNet[""+name] = {"rx": parseInt(rx_bytes), "tx": parseInt(tx_bytes)};
-                            });
-                        });
-                    }
+                    this._read_rx_tx_bytes(name, net_status);
                 });
                 
             }
@@ -1325,6 +1371,7 @@ class MemDataProvider {
         this.applet = applet;
         this.name = _('MEM');
         this.memusage = 0;
+        this.memTotal = 0;
         this.currentReadings = [0, 0, 0, 0];
     }
 
@@ -1343,6 +1390,7 @@ class MemDataProvider {
 
     setData(total, used, memInfo) {
         const precision = 100000;
+        this.memTotal = memInfo["MemTotal"];
         this.currentReadings = [
             (memInfo["MemUsed"] - memInfo["Cached"] - memInfo["Buffers"]) / memInfo["MemTotal"],
             memInfo["Cached"] / memInfo["MemTotal"],
@@ -1356,9 +1404,18 @@ class MemDataProvider {
         if (! this.isRunning) return "";
         var sum_used = 0;
         let trans = _("Memory");
+        let [strMemTotal, unitMemTotal] = formatBytesValueUnit(this.memTotal, 2, false);
+        if (this.applet.Mem_showBytesInTooltip) {
+            trans += " " + strMemTotal + " " + unitMemTotal;
+        }
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
-
+        if (this.applet.Mem_showBytesInTooltip) {
+            let [strMemUsed, unitMemUsed] = formatBytesValueUnit(this.memTotal * this.currentReadings[0], 2, false);
+            let [strMemAvail, unitMemAvail] = formatBytesValueUnit(this.memTotal * (1 - this.currentReadings[0]), 2, false);
+            toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(strMemUsed).toFixed(2), 2).padStart(6, ' ') + " " + unitMemUsed.padStart(6, ' ') + '\n';
+            toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(strMemAvail).toFixed(2), 2).padStart(6, ' ') + " " + unitMemAvail.padStart(6, ' ') + '\n';
+        }
         let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
         let percentChar = "%";
         if (this.applet.percentAtEndOfLine)
@@ -1438,6 +1495,7 @@ class SwapDataProvider {
         this.applet = applet;
         this.name = _('SWAP');
         this.swapusage = true;
+        this.swapTotal = 0;
         this.currentReadings = [0];
     }
 
@@ -1451,6 +1509,7 @@ class SwapDataProvider {
     }
 
     setData(total, value) {
+        this.swapTotal = total;
         this.swapusage = parseInt(total) !== 0;
         if (TESTING)
             this.currentReadings = [0.6];
@@ -1463,19 +1522,31 @@ class SwapDataProvider {
             return '';
         }
         let trans = _("Swap");
-        let len = trans.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
-
+        let [strSwapTotal, unitSwapTotal] = formatBytesValueUnit(this.swapTotal, 2, false);
+        let trans2 = trans + "";
+        if (this.applet.Mem_showBytesInTooltip) {
+            trans2 = trans + " " + strSwapTotal + " " + unitSwapTotal;
+        }
+        let len = trans2.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans2 + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
+        if (this.applet.Mem_showBytesInTooltip) {
+            let [swapUsedAmount, swapUsedUnit] = formatBytesValueUnit(this.swapTotal * this.currentReadings[0], 2, false);
+            let [swapAvailableAmount, swapAvailableUnit] = formatBytesValueUnit(this.swapTotal * (1 - this.currentReadings[0]), 2, false);
+            toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(swapUsedAmount).toFixed(2), 2).padStart(6, ' ') + " " + swapUsedUnit.padStart(6, ' ') + '\n';
+            toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(swapAvailableAmount).toFixed(2), 2).padStart(6, ' ') + " " + swapAvailableUnit.padStart(6, ' ') + '\n';
+        }
         let percentChar = "%";
         if (this.applet.percentAtEndOfLine)
             percentChar = "%".padStart(6, " ");
-
-        toolTipString += trans.padStart(spaces, ' ') + ':\t' + " " + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(6, ' ') + " " + percentChar + '\n';
+        
+        let colon = _(":");
+        let lenColon = Math.max(colon.length - 1, 0);
+        toolTipString += trans.padStart(spaces - lenColon, ' ') + colon + '\t' + " " + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(6, ' ') + " " + percentChar + '\n';
         return toolTipString;
     }
 
     get isEnabled() {
-        return this.applet.CPU_enabled;
+        return this.applet.Swap_enabled;
     }
 
     get isRunning() {
@@ -1560,6 +1631,9 @@ class NetDataProvider {
         this.applet = applet;
         this.name = _('NET');
         this.disabledDevices = [];
+        this.inTotalDevices = [];
+        this.totalAmountCurrent = [0, 0];
+        this.totalAmountPrevious = [0, 0];
         this.currentReadings = [];
         this.lastUpdatedTime = Date.now();
         if (this.applet.Net_mergeAll) {
@@ -1579,7 +1653,10 @@ class NetDataProvider {
             if (! dev["enabled"]) {
                 this.disabledDevices.push(dev["id"]);
                 continue;
+            } else {
+                if (dev["inTotal"]) this.inTotalDevices.push(dev["id"]);
             }
+            
             this.currentReadings.push({
                 "id": dev["id"],
                 "name": (dev["name"].length === 0) ? dev["id"] : dev["name"],
@@ -1619,25 +1696,43 @@ class NetDataProvider {
         const newUpdateTime = Date.now();
         const secondsSinceLastUpdate = (newUpdateTime - this.lastUpdatedTime) / 1000;
 
+        var currentAmount = [0, 0];
+        var previousAmount = [0, 0];
         for (let i = 0, len = this.currentReadings.length; i < len; i++) {
             let data_index = dataIds.indexOf(this.currentReadings[i]["id"]);
             if (data_index < 0) continue;
-            this.currentReadings[i].down = data[data_index]["down"];
-            this.currentReadings[i].up = data[data_index]["up"];
+            this.currentReadings[i]["down"] = data[data_index]["down"];
+            this.currentReadings[i]["up"] = data[data_index]["up"];
+            if (this.inTotalDevices.indexOf(this.currentReadings[i]["id"] > -1)) {
+                previousAmount[0] = previousAmount[0] + this.currentReadings[i].lastReading[0];
+                previousAmount[1] = previousAmount[1] + this.currentReadings[i].lastReading[1];
+                currentAmount[0] = currentAmount[0] + this.currentReadings[i]["down"];
+                currentAmount[1] = currentAmount[1] + this.currentReadings[i]["up"];
+            }
+            
+            if (this.currentReadings[i].lastReading[0] === 0 && this.currentReadings[i].lastReading[1] === 0) {
+                this.currentReadings[i].lastReading[0] = this.currentReadings[i]["down"];
+                this.currentReadings[i].lastReading[1] = this.currentReadings[i]["up"];
+                continue
+            }
 
-            this.currentReadings[i].tooltipDown = Math.round(
-                ((this.currentReadings[i].down - this.currentReadings[i].lastReading[0]) / secondsSinceLastUpdate)
-            );
-            this.currentReadings[i].tooltipUp = Math.round(
-                ((this.currentReadings[i].up - this.currentReadings[i].lastReading[1]) / secondsSinceLastUpdate)
-            );
-
-              this.currentReadings[i].lastReading[0] = this.currentReadings[i].down;
-              this.currentReadings[i].lastReading[1] = this.currentReadings[i].up;
-
-              this.currentReadings[i].readingRatesList[0] = Math.round(this.currentReadings[i].tooltipDown / 1024);
-              this.currentReadings[i].readingRatesList[1] = Math.round(this.currentReadings[i].tooltipUp / 1024);
+            this.currentReadings[i].tooltipDown = Math.abs(Math.round(
+                ((this.currentReadings[i]["down"] - this.currentReadings[i].lastReading[0]) / secondsSinceLastUpdate)
+            ));
+            this.currentReadings[i].tooltipUp = Math.abs(Math.round(
+                ((this.currentReadings[i]["up"] - this.currentReadings[i].lastReading[1]) / secondsSinceLastUpdate)
+            ));
+            
+            this.currentReadings[i].lastReading[0] = this.currentReadings[i]["down"];
+            this.currentReadings[i].lastReading[1] = this.currentReadings[i]["up"];
+            
+            this.currentReadings[i].readingRatesList[0] = this.currentReadings[i].tooltipDown;
+            this.currentReadings[i].readingRatesList[1] = this.currentReadings[i].tooltipUp;
         }
+        this.totalAmountPrevious[0] = previousAmount[0];
+        this.totalAmountPrevious[1] = previousAmount[1];
+        this.totalAmountCurrent[0] = currentAmount[0];
+        this.totalAmountCurrent[1] = currentAmount[1];
 
         this.lastUpdatedTime = newUpdateTime;
     }
@@ -1672,14 +1767,20 @@ class NetDataProvider {
             }
             let name = (this.currentReadings[i]['name'].length === 0) ? this.currentReadings[i].id : this.currentReadings[i].name;
             toolTipString += name.padEnd(22) + '\n';
-            if ((""+down_value).length < 7)
-                toolTipString += _('Down:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + down_value.padStart(6) + " " + down_unit.padStart(6, ' ') + '\n';
-            else
-                toolTipString += _('Down:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + down_value.padStart(5) + "" + down_unit.padStart(6, ' ') + '\n';
-            if ((""+up_value).length < 7)
-                toolTipString += _('Up:').split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + " " + up_value.padStart(6) + " " + up_unit.padStart(6, ' ') + '\n';
-            else
-                toolTipString += _('Up:').split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + "" + up_value.padStart(5) + " " + up_unit.padStart(6, ' ') + '\n';
+            
+            if (this.applet.Net_symbolsInTooltip) {
+                toolTipString += (' ▼︎' + _(':')).split(':')[0].padStart(spaces + 1, ' ') + ':' + "\t" + " " + down_value.padStart(6) + " " + down_unit.padStart(6, ' ') + '\n';
+                toolTipString += (' ▲' + _(':')).split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + " " + up_value.padStart(6) + " " + up_unit.padStart(6, ' ') + '\n';
+            } else {
+                if ((""+down_value).length < 7)
+                    toolTipString += _('Down:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + down_value.padStart(6) + " " + down_unit.padStart(6, ' ') + '\n';
+                else
+                    toolTipString += _('Down:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + down_value.padStart(5) + "" + down_unit.padStart(6, ' ') + '\n';
+                if ((""+up_value).length < 7)
+                    toolTipString += _('Up:').split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + " " + up_value.padStart(6) + " " + up_unit.padStart(6, ' ') + '\n';
+                else
+                    toolTipString += _('Up:').split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + "" + up_value.padStart(5) + " " + up_unit.padStart(6, ' ') + '\n';
+            }
         }
         return toolTipString;
     }
@@ -1812,14 +1913,20 @@ class DiskDataProvider {
                 toolTipString += this.currentReadings[i].name.padStart(1, " ").padEnd(title.length - this.currentReadings[i].id.length - 1, " ") + this.currentReadings[i].id + '\n';
             else
                 toolTipString += this.currentReadings[i].name.padEnd(22) + '\n';
-            if ((""+read).length < 7)
-                toolTipString += _('Read:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + read.padStart(6, " ") + " " + read_unit.padStart(6, " ") + '\n';
-            else
-                toolTipString += _('Read:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + read.padStart(5, " ") + " " + read_unit.padStart(6, " ") + '\n';
-            if ((""+write).length < 7)
-                toolTipString += _('Write:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + write.padStart(6, " ") + " " + write_unit.padStart(6, " ") + '\n';
-            else
-                toolTipString += _('Write:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + write.padStart(5, " ") + " " + write_unit.padStart(6, " ") + '\n';
+                
+            if (this.applet.Disk_symbolsInTooltip) {
+                toolTipString += (' ▲' + _(':')).split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + read.padStart(6, " ") + " " + read_unit.padStart(6, " ") + '\n';
+                toolTipString += (' ▼︎' + _(':')).split(':')[0].padStart(spaces + 1, ' ') + ':' + "\t" + " " + write.padStart(6, " ") + " " + write_unit.padStart(6, " ") + '\n';
+            } else {
+                if ((""+read).length < 7)
+                    toolTipString += _('Read:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + read.padStart(6, " ") + " " + read_unit.padStart(6, " ") + '\n';
+                else
+                    toolTipString += _('Read:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + read.padStart(5, " ") + " " + read_unit.padStart(6, " ") + '\n';
+                if ((""+write).length < 7)
+                    toolTipString += _('Write:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + write.padStart(6, " ") + " " + write_unit.padStart(6, " ") + '\n';
+                else
+                    toolTipString += _('Write:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + write.padStart(5, " ") + " " + write_unit.padStart(6, " ") + '\n';
+            }
         }
         return toolTipString;
     }

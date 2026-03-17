@@ -15,6 +15,7 @@
       "title": "General",
       "sections": [
         "sectionGeneralOptions",
+        "sectionGeneralOrder",
         "sectionGeneralColors",
         "sectionTooltip"
       ]
@@ -43,7 +44,9 @@
       "sections": [
         "sectionNetworkOptions",
         "sectionNetworkScaling",
-        "sectionNetworkDevices"
+        "sectionNetworkTooltip",
+        "sectionNetworkDevices",
+        "sectionNetworkTotal"
       ]
     },
     "pageDisk": {
@@ -52,6 +55,7 @@
       "sections": [
         "sectionDiskOptions",
         "sectionDiskScaling",
+        "sectionDiskTooltip",
         "sectionDiskDevices"
       ]
     },
@@ -86,6 +90,15 @@
         "useIconSize",
         "graphHeightPercent",
         "refreshRate"
+      ]
+    },
+    "sectionGeneralOrder": {
+      "type": "section",
+      "title": "Display Order",
+      "keys": [
+        "displayOrderLabel",
+        "displayOrder",
+        "displayOrderReinit"
       ]
     },
     "sectionGeneralColors": {
@@ -129,7 +142,8 @@
         "CPU_tempCrit",
         "CPU_tempColor",
         "CPU_tempColorHigh",
-        "CPU_tempColorCrit"
+        "CPU_tempColorCrit",
+        "CPU_tempCorner"
       ]
     },
     "sectionCPUColors": {
@@ -161,10 +175,12 @@
       "title": "Options",
       "keys": [
         "Mem_enabled",
+        "Swap_enabled",
         "Mem_labelOn",
         "Mem_squared",
         "Mem_width",
-        "Mem_startAt12Oclock"
+        "Mem_startAt12Oclock",
+        "Mem_showBytesInTooltip"
       ]
     },
     "sectionMemoryColors": {
@@ -198,6 +214,13 @@
         "Net_logscale"
       ]
     },
+    "sectionNetworkTooltip": {
+      "type": "section",
+      "title": "Tooltip",
+      "keys": [
+        "Net_symbolsInTooltip"
+      ]
+    },
     "sectionNetworkDevices": {
       "type": "section",
       "title": "Devices",
@@ -207,6 +230,16 @@
         "Net_devicesList",
         "Net_cleardevlist_btn",
         "RefreshAll_btn"
+      ]
+    },
+    "sectionNetworkTotal": {
+      "type": "section",
+      "title": "Total amount or instant speed",
+      "keys": [
+        "Net_total_type",
+        "Net_total_display",
+        "Net_total_hovering_only",
+        "Net_totalCorner"
       ]
     },
     "sectionDiskOptions": {
@@ -226,6 +259,13 @@
       "keys": [
         "Disk_autoscale",
         "Disk_logscale"
+      ]
+    },
+    "sectionDiskTooltip": {
+      "type": "section",
+      "title": "Tooltip",
+      "keys": [
+        "Disk_symbolsInTooltip"
       ]
     },
     "sectionDiskDevices": {
@@ -327,7 +367,7 @@
   },
   "graphStep": {
     "type": "combobox",
-    "default": 16,
+    "default": 1,
     "options": {
       "1px": 1,
       "2px": 2,
@@ -417,6 +457,41 @@
     "callback": "_removeEnlightenment",
     "description": "Remove Enlightenment of this applet"
   },
+  "displayOrderLabel": {
+    "type": "label",
+    "description": "Choose the order in which the boxes of this applet are displayed in the panel.\nDo not change these names!"
+  },
+  "displayOrder": {
+    "type": "list",
+    "default": [
+
+    ],
+    "columns": [
+      {
+        "id": "id",
+        "title": "Name",
+        "type": "string",
+        "expand-width": true
+      }
+    ],
+    "show-buttons": true,
+    "hidden-buttons": [
+      "+",
+      "-",
+      "edit"
+    ],
+    "description": "Display order in the panel"
+  },
+  "displayOrderApply": {
+    "type": "button",
+    "description": "Apply",
+    "callback": "controlDisplayOrder"
+  },
+  "displayOrderReinit": {
+    "type": "button",
+    "description": "Reset",
+    "callback": "reinitDisplayOrder"
+  },
   "CPU_enabled": {
     "type": "switch",
     "default": true,
@@ -437,7 +512,7 @@
     "type": "scale",
     "default": 64,
     "description": "Width",
-    "min": 16,
+    "min": 10,
     "max": 320,
     "step": 1,
     "show-value": true,
@@ -478,6 +553,17 @@
     "expand-width": true,
     "description": "Critical CPU Temperature (°C)",
     "tooltip": "Refer to your CPU documentation.\nMust be greater than the High CPU Temperature."
+  },
+  "CPU_tempCorner": {
+    "type": "combobox",
+    "default": "TR",
+    "description": "Corner in which to display the temperature",
+    "options": {
+      "Top Right": "TR",
+      "Top Left": "TL",
+      "Bottom Right": "BR",
+      "Bottom Left": "BL"
+    }
   },
   "CPU_tempColor": {
     "type": "colorchooser",
@@ -559,6 +645,11 @@
     "default": true,
     "description": "Enable"
   },
+  "Swap_enabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable Swap"
+  },
   "Mem_labelOn": {
     "type": "switch",
     "default": true,
@@ -574,7 +665,7 @@
     "type": "scale",
     "default": 64,
     "description": "Width",
-    "min": 16,
+    "min": 10,
     "max": 320,
     "step": 1,
     "show-value": true,
@@ -584,6 +675,11 @@
     "type": "switch",
     "default": false,
     "description": "Origin at 12 o'clock"
+  },
+  "Mem_showBytesInTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the amounts (in Bytes) of Total, Used and Available memory in the tooltip"
   },
   "Mem_colorUsedup": {
     "type": "colorchooser",
@@ -641,7 +737,7 @@
     "type": "scale",
     "default": 64,
     "description": "Width",
-    "min": 16,
+    "min": 10,
     "max": 320,
     "step": 1,
     "show-value": true,
@@ -661,6 +757,11 @@
     "type": "switch",
     "default": true,
     "description": "Logarithmic"
+  },
+  "Net_symbolsInTooltip": {
+    "type": "switch",
+    "default": false,
+    "description": "Use symbols instead of words"
   },
   "Net_getdevlist_btn": {
     "type": "button",
@@ -775,6 +876,13 @@
           "#31": 31
         },
         "align": 0.5
+      },
+      {
+        "id": "inTotal",
+        "title": "Part of total",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
       }
     ],
     "show-buttons": true
@@ -783,6 +891,40 @@
     "type": "button",
     "description": "Clear this device list",
     "callback": "on_Net_cleardevlist_btn_clicked"
+  },
+  "Net_total_type": {
+    "type": "combobox",
+    "description": "Total amount or speed",
+    "default": "amount",
+    "options": {
+      "Total transfer amount (Bytes)": "amount",
+      "Instant network speed (Bytes per second)": "speed"
+    }
+  },
+  "Net_total_display": {
+    "type": "switch",
+    "default": true,
+    "description": "Display that",
+    "tooltip": "Be sure to check at least one “Part of total” box among the enabled devices."
+  },
+  "Net_total_hovering_only": {
+    "type": "switch",
+    "default": false,
+    "description": "Only display when hovering over this applet",
+    "dependency": "Net_total_display"
+  },
+  "Net_totalCorner": {
+    "type": "combobox",
+    "default": "LO",
+    "description": "Corner in which to display that",
+    "options": {
+      "Top Right": "TR",
+      "Top Left": "TL",
+      "Bottom Right": "BR",
+      "Bottom Left": "BL",
+      "Right Only": "RO",
+      "Left Only": "LO"
+    }
   },
   "Disk_enabled": {
     "type": "switch",
@@ -804,7 +946,7 @@
     "type": "scale",
     "default": 64,
     "description": "Width",
-    "min": 16,
+    "min": 10,
     "max": 320,
     "step": 1,
     "show-value": true,
@@ -824,6 +966,11 @@
     "type": "switch",
     "default": true,
     "description": "Logarithmic"
+  },
+  "Disk_symbolsInTooltip": {
+    "type": "switch",
+    "default": false,
+    "description": "Use symbols instead of words"
   },
   "Disk_getdevlist_btn": {
     "type": "button",
@@ -983,9 +1130,9 @@
   },
   "DiskUsage_width": {
     "type": "scale",
-    "default": 64,
+    "default": 32,
     "description": "Width",
-    "min": 16,
+    "min": 10,
     "max": 320,
     "step": 1,
     "show-value": true,

@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-22 21:37+0100\n"
-"PO-Revision-Date: 2026-01-01 22:44+0100\n"
+"PO-Revision-Date: 2026-02-24 09:34+0100\n"
 "Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -71,24 +71,23 @@ msgstr "Napnyugta"
 #. 6.6->settings-schema.json->preset_list_temp->columns->title
 #. 6.6/applet.js:50 6.6/lib/appletGui.js:212
 msgid "Temperature"
-msgstr ""
+msgstr "Hőmérséklet"
 
 #. 6.6/applet.js:52
 msgid "Standard values"
-msgstr ""
+msgstr "Standard értékek"
 
 #. 6.6/applet.js:53
 msgid "Day-time comfort"
-msgstr ""
+msgstr "Nappali komfort"
 
 #. 6.6/applet.js:54
 msgid "Night-time comfort"
-msgstr ""
+msgstr "Éjjeli komfort"
 
 #. 6.6/applet.js:55
-#, fuzzy
 msgid "All values at maximum"
-msgstr "Minden érték 100%-ra van állítva"
+msgstr "Minden érték maximumon"
 
 #. 6.6/applet.js:848 6.4/applet.js:760
 msgid "Toggle On / Off"
@@ -370,13 +369,15 @@ msgstr "Lépés időtartama (ms)"
 
 #. 6.6->settings-schema.json->all100OnFullscreen->description
 msgid "Set all to 100% in full-screen mode"
-msgstr ""
+msgstr "Teljes képernyős módban állítsa az összeset 100%-ra"
 
 #. 6.6->settings-schema.json->all100OnFullscreen->tooltip
 msgid ""
 "When an application switches to full-screen mode, all values are set to "
 "100%. Useful for games and videos."
 msgstr ""
+"Amikor egy alkalmazás teljes képernyős módba vált, minden érték 100%-ra áll "
+"vissza. Ez játékokhoz és videókhoz hasznos."
 
 #. 6.6->settings-schema.json->apply_changing_monitors->description
 #. 6.4->settings-schema.json->apply_changing_monitors->description
@@ -411,51 +412,44 @@ msgstr "Minden érték 100%-ra van állítva"
 #. 6.6->settings-schema.json->way_to_set_off->description
 #. 6.4->settings-schema.json->way_to_set_off->description
 msgid "Way to set this applet off"
-msgstr "Hogyan lehet bekapcsolni ezt az appletet?"
+msgstr "A kisalkalmazás kikapcsolásának módja"
 
 #. 6.6->settings-schema.json->gamma_or_temp->options
-#, fuzzy
 msgid "Gamma Red-Green-Blue"
-msgstr ""
-"Gamma\n"
-"Zöld"
+msgstr "Gamma Piros-Zöld-Kék"
 
 #. 6.6->settings-schema.json->gamma_or_temp->options
 msgid "Screen Temperature (K)"
-msgstr ""
+msgstr "Képernyő hőmérséklete (K)"
 
 #. 6.6->settings-schema.json->gamma_or_temp->description
 msgid "Setting Method"
-msgstr ""
+msgstr "Beállítási módszer"
 
 #. 6.6->settings-schema.json->minimum_temp->units
 #. 6.6->settings-schema.json->maximum_temp->units
 msgid "K"
-msgstr ""
+msgstr "K"
 
 #. 6.6->settings-schema.json->minimum_temp->description
-#, fuzzy
 msgid "Minimum temperature"
-msgstr "Minimális gamma"
+msgstr "Minimum hőmérséklet"
 
 #. 6.6->settings-schema.json->minimum_temp->tooltip
-#, fuzzy
 msgid "A minimum value of temperature. Value from 700 K to 6500 K."
-msgstr "A gamma minimális értéke. 10% és 50% közötti érték."
+msgstr "A hőmérséklet minimális értéke. 700 K és 6500 K közötti érték."
 
 #. 6.6->settings-schema.json->maximum_temp->description
-#, fuzzy
 msgid "Maximum temperature"
-msgstr "Maximális gamma"
+msgstr "Maximális hőmérséklet"
 
 #. 6.6->settings-schema.json->maximum_temp->tooltip
-#, fuzzy
 msgid "A maximum value of temperature. Value from 6500 K to 22000 K."
-msgstr "A gamma maximális értéke. 51% és 200% közötti érték."
+msgstr "A hőmérséklet maximális értéke. Érték 6500 K és 22000 K között."
 
 #. 6.6->settings-schema.json->options_type->options
 msgid "Gamma / Temperature"
-msgstr ""
+msgstr "Gamma / Hőmérséklet"
 
 #. 6.6->settings-schema.json->baga_icon->options
 #. 6.4->settings-schema.json->baga_icon->options
@@ -556,11 +550,11 @@ msgstr "Gyorsbillentyű"
 
 #. 6.6->settings-schema.json->show_shortcuts_in_menu->description
 msgid "Show shortcuts in the menu"
-msgstr ""
+msgstr "Parancsikonok megjelenítése a menüben"
 
 #. 6.6->settings-schema.json->preset_selected_keybind->description
 msgid "Choose a shortcut to copy"
-msgstr ""
+msgstr "Válasszon egy parancsikont a másoláshoz"
 
 #. 6.6->settings-schema.json->preset_selected_keybind->tooltip
 msgid ""
@@ -569,10 +563,14 @@ msgid ""
 "Once selected, click on the button below, then edit the item to paste "
 "(Ctrl+V) this shortcut."
 msgstr ""
+"Segít kiválasztani egy billentyűparancsot a fent felsorolt ​​elemek "
+"bármelyikéhez.\n"
+"A kiválasztás után kattintson az alábbi gombra, majd szerkessze az elemet a "
+"billentyűparancs beillesztéséhez (Ctrl+V)."
 
 #. 6.6->settings-schema.json->preset_copy_keybind->description
 msgid "Copy this shortcut to the clipboard"
-msgstr ""
+msgstr "Másolja ezt a parancsikont a vágólapra"
 
 #. 6.6->settings-schema.json->preset_sunrise_sunset_button->description
 #. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
@@ -586,4 +584,4 @@ msgstr "Az összes módosítás alkalmazása"
 
 #. 6.6->settings-schema.json->values_reload->description
 msgid "Apply the selected method"
-msgstr ""
+msgstr "Alkalmazza a kiválasztott módszert"
