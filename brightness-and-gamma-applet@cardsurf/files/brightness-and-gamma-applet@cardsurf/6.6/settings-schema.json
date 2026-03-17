@@ -352,7 +352,7 @@
                 "show": true,
                 "brightness": 80,
                 "temperature": 4000,
-                "start_at_sunrise": false,
+                "start_at_sunrise": true,
                 "start_at_sunset": false
             },
             {
@@ -361,7 +361,7 @@
                 "brightness": 70,
                 "gamma_red": 2700,
                 "start_at_sunrise": false,
-                "start_at_sunset": false
+                "start_at_sunset": true
             }
         ]
     },
@@ -406,12 +406,12 @@
 
     "last_values_string_temp" : {
         "type": "generic",
-        "default" : ""
+        "default" : "Screen 0,0,100,6500"
     },
 
     "last_values_string" : {
         "type": "generic",
-        "default" : ""
+        "default" : "Screen 0,0,100,100,100,100"
     },
 
     "numberOfMonitors" : {
