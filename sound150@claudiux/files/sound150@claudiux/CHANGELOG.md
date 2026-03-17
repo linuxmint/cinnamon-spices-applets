@@ -1,3 +1,7 @@
+### v16.0.0~20260315
+  * The album cover is back!
+  * Fixes [#8383](https://github.com/linuxmint/cinnamon-spices-applets/issues/8383)
+
 ### v15.0.1~20260222
   * Improves asynchronous function calls.
 

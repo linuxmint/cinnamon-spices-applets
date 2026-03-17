@@ -24,6 +24,7 @@ const { ControlButton } = require("./lib/controlButton");
 const { VolumeSlider } = require("./lib/volumeSlider");
 const Interfaces = imports.misc.interfaces;
 const Clutter = imports.gi.Clutter;
+const GdkPixbuf = imports.gi.GdkPixbuf;
 const Slider = imports.ui.slider;
 const Gettext = imports.gettext;
 const Pango = imports.gi.Pango;
@@ -53,11 +54,25 @@ const COVERBOX_LAYOUT_MANAGER = new Clutter.BinLayout({
 
 // playerctld:
 function run_playerctld() {
-    Util.spawn_async(["/usr/bin/env", "bash", "-C", `'${PATH2SCRIPTS}/run_playerctld.sh'`], null);
+    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
 }
 
 function kill_playerctld() {
-    Util.spawn_async(["/usr/bin/env", "bash", "-C", `'${PATH2SCRIPTS}/kill_playerctld.sh'`], null);
+    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
+}
+
+function getImageAtScale(imageFileName, width, height) {
+  let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(imageFileName, width, height);
+  let image = new Clutter.Image();
+  image.set_data(
+    pixBuf.get_pixels(),
+    pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
+    width, height,
+    pixBuf.get_rowstride()
+  );
+  let actor = new Clutter.Actor({width: width, height: height});
+  actor.set_content(image);
+  return actor;
 }
 
 // Text wrapper
@@ -114,7 +129,8 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
 
         // Trim stream name
         name = formatTextWrap(name, 20);
-        
+        //~ logDebug("StreamMenuSection: name:"+name);
+
         // Special cases
         if (name === "Banshee") {
             iconName = "banshee";
@@ -159,7 +175,6 @@ class Player extends PopupMenu.PopupMenuSection {
 
         this._oldTitle = "";
         this._title = "";
-        this._albumArtFetchTimeout = null;
 
         let asyncReadyCb = (proxy, error, property) => {
             if (error)
@@ -615,7 +630,10 @@ class Player extends PopupMenu.PopupMenuSection {
 
         if (old_title != this._title) {
             del_song_arts();
-            this._scheduleAlbumArtFetch();
+            if (this._applet.runAsync)
+                Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            else
+                Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
         }
 
         if (this.titleLabel != null)
@@ -670,7 +688,10 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._trackCoverFile = artUrl;
                     change = true;
                 }
-                this._scheduleAlbumArtFetch();
+                if (this._applet.runAsync)
+                    Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+                else
+                    Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
             }
         } else if (metadata["xesam:url"]) {
             if (this._oldTitle != this._title) {
@@ -704,7 +725,10 @@ class Player extends PopupMenu.PopupMenuSection {
                 });
             }
         } else {
-            this._scheduleAlbumArtFetch();
+            if (this._applet.runAsync)
+                Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            else
+                Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
             if (this._trackCoverFile != false) {
                 this._trackCoverFile = false;
                 change = true;
@@ -818,19 +842,6 @@ class Player extends PopupMenu.PopupMenuSection {
         this._shuffleButton.setActive(status);
     }
 
-    _scheduleAlbumArtFetch() {
-        if (this._albumArtFetchTimeout) {
-            clearTimeout(this._albumArtFetchTimeout);
-        }
-        this._albumArtFetchTimeout = setTimeout(() => {
-            this._albumArtFetchTimeout = null;
-            if (this._applet.runAsync)
-                Util.spawn_async(["/usr/bin/env", "bash", "-c", `'${PATH2SCRIPTS}/get_album_art.sh'`], null);
-            else
-                Util.spawn(["/usr/bin/env", "bash", "-c", `'${PATH2SCRIPTS}/get_album_art.sh'`]);
-        }, 300);
-    }
-
     _onDownloadedCover() {
         if (!this._trackCoverFileTmp) return;
         let cover_path = this._trackCoverFileTmp.get_path();
@@ -853,6 +864,7 @@ class Player extends PopupMenu.PopupMenuSection {
             this._applet.setAppletTextIcon(this, null);
         } else {
             baseName = (typeof(cover_path) === "string") ? cover_path.split("/").pop() : "";
+            //~ let dir = Gio.file_new_for_path(ALBUMART_PICS_DIR);
             let dir = Gio.file_new_for_path(ARTS_DIR);
             let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
             if ((dir_children.next_file(null)) == null) { // dir does not contain any file.
@@ -860,11 +872,11 @@ class Player extends PopupMenu.PopupMenuSection {
                     if (! baseName.startsWith("R3SongArt")) {
                         rnd = randomIntegerInInterval(0, superRND).toString();
                         if (this._applet.runAsync) {
-                            Util.spawn_async(["cp", "-a", `"${cover_path}"`, `${ALBUMART_PICS_DIR}/R3SongArt${rnd}`], null);
-                            Util.spawn_async(["cp", "-a", `"${cover_path}"`, `${ARTS_DIR}/R3SongArt${rnd}`], null);
+                            Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
+                            Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ARTS_DIR}/R3SongArt${rnd}`);
                         } else {
-                            Util.spawn(["cp", "-a", `"${cover_path}"`, `${ALBUMART_PICS_DIR}/R3SongArt${rnd}`]);
-                            Util.spawn(["cp", "-a", `"${cover_path}"`, `${ARTS_DIR}/R3SongArt${rnd}`]);
+                            Util.spawnCommandLine(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
+                            Util.spawnCommandLine(`cp -a "${cover_path}" ${ARTS_DIR}/R3SongArt${rnd}`);
                         }
                         cover_path = `${ARTS_DIR}/R3SongArt${rnd}`;
                         this._cover_path = `${ARTS_DIR}/R3SongArt${rnd}`;
@@ -874,15 +886,16 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._cover_path = null;
                 }
             } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
+                //~ del_song_arts(); //FIXME: is it useless???
                 if (GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
                     if (! baseName.startsWith("R3SongArt")) {
                         rnd = randomIntegerInInterval(0, superRND).toString();
                         if (this._applet.runAsync) {
-                            Util.spawn_async(["cp", "-a", `"${cover_path}"`, `${ALBUMART_PICS_DIR}/R3SongArt${rnd}`], null);
-                            Util.spawn_async(["cp", "-a", `"${cover_path}"`, `${ARTS_DIR}/R3SongArt${rnd}`], null);
+                            Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
+                            Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ARTS_DIR}/R3SongArt${rnd}`);
                         } else {
-                            Util.spawn(["cp", "-a", `"${cover_path}"`, `${ALBUMART_PICS_DIR}/R3SongArt${rnd}`]);
-                            Util.spawn(["cp", "-a", `"${cover_path}"`, `${ARTS_DIR}/R3SongArt${rnd}`]);
+                            Util.spawnCommandLine(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
+                            Util.spawnCommandLine(`cp -a "${cover_path}" ${ARTS_DIR}/R3SongArt${rnd}`);
                         }
                         cover_path = `${ARTS_DIR}/R3SongArt${rnd}`;
                         this._cover_path = `${ARTS_DIR}/R3SongArt${rnd}`;
@@ -906,6 +919,51 @@ class Player extends PopupMenu.PopupMenuSection {
                     }
                 );
             this._applet.setIcon();
+
+            //~ log("this._cover_path: "+this._cover_path, true);
+            try {
+                let pixbuf = null;
+                if (GLib.file_test(this._cover_path, GLib.FileTest.EXISTS)) {
+                    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
+                        this._cover_path,
+                        Math.trunc(300 * this._applet.real_ui_scale),
+                        Math.trunc(300 * this._applet.real_ui_scale)
+                    );
+                }
+                
+                if (pixbuf) {
+                    let image = new Clutter.Image();
+                    image.set_data(
+                        pixbuf.get_pixels(),
+                        pixbuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGB_888,
+                        pixbuf.get_width(),
+                        pixbuf.get_height(),
+                        pixbuf.get_rowstride()
+                    );
+                    this.cover = image.get_texture();
+                }
+                if (this._applet.keepAlbumAspectRatio) {
+                    //TODO: Replace Texture by Image.
+                    this.cover = new Clutter.Texture({
+                        width: Math.trunc(300 * this._applet.real_ui_scale),
+                        keep_aspect_ratio: true,
+                        //filter_quality: 2,
+                        filter_quality: Clutter.Texture.QUALITY_HIGH,
+                        filename: cover_path
+                    });
+                } else {
+                    //TODO: Replace Texture by Image.
+                    this.cover = new Clutter.Texture({
+                        width: Math.trunc(300 * this._applet.real_ui_scale),
+                        height: Math.trunc(300 * this._applet.real_ui_scale),
+                        keep_aspect_ratio: false,
+                        filter_quality: Clutter.Texture.QUALITY_HIGH,
+                        filename: cover_path
+                    });
+                }
+                this.cover.icon_size = Math.trunc(300 * this._applet.real_ui_scale);
+                //~ this.display_cover_button.show();
+            } catch (e) {}
         }
         this._oldTitle = this._title; // Here??? FIXME!!!
     }
@@ -924,6 +982,8 @@ class Player extends PopupMenu.PopupMenuSection {
 
         // Make sure any oddly-shaped album art doesn't affect the height of the applet popup
         // (and move the player controls as a result).
+        //~ log("actor size (wxh): "+actor.width+"x"+actor.height);
+        //~ actor.set_margin_bottom(Math.max(0, Math.trunc(300 * global.ui_scale - actor.height)));
         let mb = 55;
         if (this._applet.viewFullAlbumArt) {
             switch (this._applet.real_ui_scale) {
@@ -976,10 +1036,9 @@ class Player extends PopupMenu.PopupMenuSection {
     }
 
     destroy() {
-        if (this._albumArtFetchTimeout) {
-            clearTimeout(this._albumArtFetchTimeout);
-            this._albumArtFetchTimeout = null;
-        }
+        //~ logDebug('Player.destroy()');
+        //~ if (this._seeker)
+        //~ this._seeker.destroy();
         if (this._prop && this._propChangedId)
             try { this._prop.disconnectSignal(this._propChangedId) } catch(e) {};
 
@@ -1003,6 +1062,8 @@ class Seeker extends Slider.Slider {
         this.destroyed = false;
 
         this.actor.set_direction(St.TextDirection.LTR); // Do not invert on RTL layout
+        //~ this.actor.expand = true;
+        //~ this.actor.set_draw_value(true);
         this.tooltipText = "00:00:00";
         this.tooltip = new Tooltips.Tooltip(this.actor, this.tooltipText);
 
@@ -1035,11 +1096,19 @@ class Seeker extends Slider.Slider {
             style: "font-family: 'Digital Numbers',monospace; "
         });
         this.posLabel.x_align = St.Align.START;
+        //~ logDebug("this.posLabel: "+this.posLabel);
+        //~ this.posLabel.clutterText.line_wrap = false;
+        //~ this.posLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        //~ this.posLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
         this.durLabel = new St.Label({
             text: " 00:00:00 ",
             style: "font-family: 'Digital Numbers',monospace; "
         });
         this.durLabel.x_align = St.Align.END;
+        //~ logDebug("this.durLabel: "+this.durLabel);
+        //~ this.durLabel.clutterText.line_wrap = false;
+        //~ this.durLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        //~ this.durLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
 
         this.actor.x_align = St.Align.MIDDLE;
         this.seekerBox.add_actor(this.posLabel);
@@ -1058,6 +1127,12 @@ class Seeker extends Slider.Slider {
 
         this.actor.connect("enter-event", (event) => {
             this.show_target_time()
+            //~ // let [x,y] = event.get_position();
+            //~ let [x,y] = this.tooltip.mousePosition;
+            //~ logDebug("enter-event - x: "+x);
+            //~ this.tooltipText = ""+x;
+            //~ this.tooltip.set_text(this.tooltipText);
+            //~ this.tooltip.show();
         });
 
         this.actor.connect("motion-event", (event) => {
@@ -1074,6 +1149,7 @@ class Seeker extends Slider.Slider {
             }, 100);
         });
 
+        //~ this._seekChangedId = this._mediaServerPlayer.connectSignal("Seeked", (id, sender, value) => {
         this._seekChangedId = mediaServerPlayer.connectSignal("Seeked", (id, sender, value) => {
             if (this.destroyed) return;
             // Seek value sent by the player
@@ -1103,6 +1179,7 @@ class Seeker extends Slider.Slider {
         if (this.actor.get_stage() == null || this.destroyed) return;
         const [sliderX, sliderY] = this.actor.get_transformed_position();
         const width = this.actor.width;
+        //~ this.actor.width = width * this._applet.real_ui_scale; // ADDED
         let [x, y] = this.tooltip.mousePosition;
         if (this.tooltip) {
             this.tooltip.hide();
@@ -1195,6 +1272,8 @@ class Seeker extends Slider.Slider {
 
     _updateValue() {
         if (this.destroyed) return;
+        //~ this._currentTime = (Date.now() - this.startingDate) / 1000;
+
         if (this.canSeek) {
             this.showAll();
             if (this._length > 0 && this._wantedSeekValue > 0) {
@@ -1228,19 +1307,25 @@ class Seeker extends Slider.Slider {
                 } else if (!this._dragging) {
                     if (this.status === "Playing" && this.posLabel != null) this.posLabel.set_text(this.time_for_label(this._currentTime));
                     this.setValue(this._currentTime / this._length);
-                    if (this.status === "Playing") {
-                        if (this._timeoutId_timerCallback == null && !this.destroyed) {
-                            this._timerTicker = 0;
-                            this._timeoutId_timerCallback = timeout_add_seconds(1, () => {
-                                return this._timerCallback();
-                            });
-                        }
-                    } else {
-                        if (this._timeoutId_timerCallback != null) {
-                            source_remove(this._timeoutId_timerCallback);
-                            this._timeoutId_timerCallback = null;
-                        }
+                    if (this._timeoutId != null) {
+                        source_remove(this._timeoutId);
                     }
+                    this._timeoutId = null;
+                    if (this._timeoutId_timerCallback != null) {
+                        source_remove(this._timeoutId_timerCallback);
+                    }
+                    this._timeoutId_timerCallback = null;
+
+                    if (!this.destroyed) {
+                        this._timeoutId = timeout_add_seconds(1, () => {
+                            this._updateValue();
+                            return !this.destroyed
+                        });
+                        this._timeoutId_timerCallback = timeout_add_seconds(1, () => {
+                            return this._timerCallback()
+                        });
+                    }
+                    //return (!this.destroyed && this.status === "Playing") ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE; //???
                 }
             } else {
                 this.setValue(0);
@@ -1253,10 +1338,7 @@ class Seeker extends Slider.Slider {
     }
 
     _timerCallback() {
-        if (this.destroyed) {
-            this._timeoutId_timerCallback = null;
-            return GLib.SOURCE_REMOVE;
-        }
+        if (this.destroyed) return GLib.SOURCE_REMOVE;
         if (this.status === "Playing") {
             if (this._timerTicker < 10) {
                 this._currentTime += 1;
@@ -1267,17 +1349,18 @@ class Seeker extends Slider.Slider {
                 this._getPosition();
             }
             return GLib.SOURCE_CONTINUE;
-        }
-        if (this.status === "Stopped") {
+        } else if (this.status === "Stopped") {
             this._setPosition(0);
             this._timerTicker = 0;
             this._currentTime = 0;
+            return GLib.SOURCE_REMOVE;
         }
-        this._timeoutId_timerCallback = null;
-        return GLib.SOURCE_REMOVE;
+        return (this.status === "Playing") ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE;
     }
 
     _updateTimer() {
+        //~ if (this.destroyed) return GLib.SOURCE_REMOVE;
+
         if (this._timeoutId_timerCallback != null) {
             source_remove(this._timeoutId_timerCallback);
         }
@@ -1313,6 +1396,8 @@ class Seeker extends Slider.Slider {
         }
 
         this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, "CanSeek", (position, error) => {
+            //~ logDebug("Dbus CanSeek: "+position[0].get_boolean());
+            //~ logDebug("Dbus !error: "+!error);
             if (!error && position[0])
                 this._setCanSeek(position[0].get_boolean());
             else
@@ -1322,6 +1407,7 @@ class Seeker extends Slider.Slider {
 
     _cantSeek() {
         this.canSeek = false;
+        //~ if (this.destroyed) return;
         if (this._length > 0) {
             this.showAll();
             this._updateValue();
@@ -1347,6 +1433,7 @@ class Seeker extends Slider.Slider {
         } else {
             this._cantSeek();
         }
+        //~ logDebug("this.canSeek: "+this.canSeek);
     }
 
     _setPosition(value) {
@@ -1366,7 +1453,9 @@ class Seeker extends Slider.Slider {
         if (this.destroyed) return;
 
         this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, "Position", (position, error) => {
+            //~ logDebug("_getPosition dbus !error: "+!error);
             if (!error && position[0]) {
+                //~ logDebug("_getPosition position: "+position[0].get_int64());
                 this._setPosition(position[0].get_int64());
             } else {
                 let pos;
@@ -1374,11 +1463,15 @@ class Seeker extends Slider.Slider {
                     pos = position[0].get_int64();
                 } catch (e) {
                     pos = "NaN";
+                    //~ global.logError("pos error: "+e);
                 }
                 if (isNaN(pos)) {
+                    //~ logDebug("pos is NaN!!!");
                     this._currentTime = (Date.now() - this.startingDate) / 1000;
+                    //~ logDebug("this._currentTime: "+this._currentTime);
                     this._setPosition(this._currentTime * 1000000);
                 } else {
+                    //~ logDebug("pos is Valid!!! pos:" + pos);
                     this._setPosition(pos);
                 }
             }
@@ -1386,17 +1479,10 @@ class Seeker extends Slider.Slider {
     }
 
     destroy() {
+        //~ logDebug("Seeker.destroy()");
         if (this.destroyed) return;
         this.status = "Stopped";
         this.destroyed = true;
-        if (this._timeoutId != null) {
-            source_remove(this._timeoutId);
-            this._timeoutId = null;
-        }
-        if (this._timeoutId_timerCallback != null) {
-            source_remove(this._timeoutId_timerCallback);
-            this._timeoutId_timerCallback = null;
-        }
         if (this._seekChangedId) {
             this._mediaServerPlayer.disconnectSignal(this._seekChangedId);
             this._seekChangedId = null;
