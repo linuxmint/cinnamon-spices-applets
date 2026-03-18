@@ -222,6 +222,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.themeNode = null;
         
         this.alreadyCalledBysetAppletTooltip = false;
+        
+        this._appVolumeSection = new PopupMenu.PopupMenuSection();
 
         this.real_ui_scale = 1.0;
         this.menuWidth = 450;
@@ -263,6 +265,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.players_without_seek_support = original_players_without_seek_support;
         this.players_with_seek_support = original_players_with_seek_support;
         this.PERCENT_CHAR = _("%");
+        
+        this.gesturesManager = Main.gesturesManager;
 
         this.oldPlayerIcon0 = null;
         this._ownerChangedId = null;
@@ -673,9 +677,11 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this._outputApplicationsMenu = new PopupMenu.PopupSubMenuMenuItem(_("Applications"));
         this._selectOutputDeviceItem = new PopupMenu.PopupSubMenuMenuItem(_("Output device"));
-        this._applet_context_menu.addMenuItem(this._outputApplicationsMenu);
+        this._appVolumeSection.addMenuItem(this._outputApplicationsMenu);
+        //~ this._applet_context_menu.addMenuItem(this._outputApplicationsMenu);
         this._applet_context_menu.addMenuItem(this._selectOutputDeviceItem);
         this._outputApplicationsMenu.actor.hide();
+        this._appVolumeSection.actor.hide();
         this._selectOutputDeviceItem.actor.hide();
 
         this._inputSection = new PopupMenu.PopupMenuSection();
@@ -883,25 +889,25 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
         if (this.context_menu_item_showDesklet != null)
             this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
-        if (this._outputApplicationsMenu != null) {
+        if (this._outputApplicationsMenu != null && this._outputApplicationsMenu.menu != null) {
             if (this.keepAppListOpen)
                 this._outputApplicationsMenu.menu.open();
             else
                 this._outputApplicationsMenu.menu.close();
         }
-        if (this.commands_menu_item != null) {
+        if (this.commands_menu_item != null && this.commands_menu_item.menu != null) {
             if (this.keepCommandListOpen)
                 this.commands_menu_item.menu.open();
             else
                 this.commands_menu_item.menu.close();
         }
-        if (this._selectOutputDeviceItem != null) {
+        if (this._selectOutputDeviceItem != null && this._selectOutputDeviceItem.menu != null) {
             if (this.keepOutputListOpen)
                 this._selectOutputDeviceItem.menu.open();
             else
                 this._selectOutputDeviceItem.menu.close();
         }
-        if (this._selectInputDeviceItem != null) {
+        if (this._selectInputDeviceItem != null && this._selectInputDeviceItem.menu != null) {
             if (this.keepInputListOpen)
                 this._selectInputDeviceItem.menu.open();
             else
@@ -1973,7 +1979,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             }));
             this._applet_icon.set_icon_type(St.IconType.FULLCOLOR);
             this._setStyle();
-            //~ this._applet_icon.actor.style = "object-fit: cover; ";
+            this._applet_icon.actor.style = "object-fit: fill; ";
         } catch (e) {
             // global.log(e);
         }
@@ -2409,7 +2415,17 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         this._outputVolumeSection = new VolumeSlider(this, null, _("Volume"), null);
         this._outputVolumeSection.connect("values-changed", (...args) => this._outputValuesChanged(...args));
-
+        
+        
+        //~ if (this._outputApplicationsMenu) {
+            global.log("ADDING this._outputApplicationsMenu")
+            this._appVolumeSection.addMenuItem(this._outputApplicationsMenu);
+            this._appVolumeSection.actor.show();
+            this._outputApplicationsMenu.actor.show();
+            this._outputApplicationsMenu.menu.open();
+        //~ }
+        this.menu.addMenuItem(this._appVolumeSection);
+        
         this.menu.addMenuItem(this._outputVolumeSection);
         this.menu.addMenuItem(this._inputVolumeSection);
         
@@ -2588,6 +2604,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         //~ this.actor.style = _style;
         this.actor.style = null;
         this._setStyle();
+        this._applet_icon.actor.style = "object-fit: fill; ";
     }
 
     _outputValuesChanged(actor, iconName, percentage) {
@@ -2799,6 +2816,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             // for sink inputs, add a menuitem to the application submenu
             let item = new StreamMenuSection(this, stream);
             this._outputApplicationsMenu.menu.addMenuItem(item);
+            this._appVolumeSection.actor.show();
             this._outputApplicationsMenu.actor.show();
             this._streams.push({
                 id: id,
@@ -2830,8 +2848,10 @@ class Sound150Applet extends Applet.TextIconApplet {
 
                 // hide submenus or sections if showing them is unnecessary
                 if (stream.type === "SinkInput") {
-                    if (this._outputApplicationsMenu.menu.numMenuItems === 0)
+                    if (this._outputApplicationsMenu.menu.numMenuItems === 0) {
                         this._outputApplicationsMenu.actor.hide();
+                        this._appVolumeSection.actor.hide();
+                    }
                 } else if (stream.type === "SourceOutput") {
                     if (--this._recordingAppsNum === 0) {
                         this._inputSection.actor.hide();
@@ -2865,8 +2885,10 @@ class Sound150Applet extends Applet.TextIconApplet {
 
             // hide submenus or sections if showing them is unnecessary
             if (stream.type === "SinkInput") {
-                if (this._outputApplicationsMenu.menu.numMenuItems === 0)
+                if (this._outputApplicationsMenu.menu.numMenuItems === 0) {
+                    this._appVolumeSection.actor.hide();
                     this._outputApplicationsMenu.actor.hide();
+                }
             } else if (stream.type === "SourceOutput") {
                 if (--this._recordingAppsNum === 0) {
                     this._inputSection.actor.hide();
