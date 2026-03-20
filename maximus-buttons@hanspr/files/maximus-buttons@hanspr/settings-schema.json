@@ -25,9 +25,15 @@
         "tooltip": "Please select a theme for window buttons"
     },
     "hide-buttons": {
-        "type": "switch",
-        "default": true,
-        "description": "Hide buttons: instead of removing (no applets jump left right)"
+        "type": "combobox",
+        "default": "blank",
+        "description": "Hide buttons",
+        "options": {
+            "Remove button from panel (jumpy)": "hide",
+            "Dim buttons": "dim",
+            "Blank space": "blank"
+        },
+        "tooltip": "Behaviour of the buttons when they should be hidden"
     },
     "only-maximized": {
         "type": "switch",
