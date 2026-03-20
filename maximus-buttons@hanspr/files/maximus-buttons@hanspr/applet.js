@@ -170,7 +170,7 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     minimizeWindow() {
-        if (this.button["minimize"].opacity == 0) {
+        if (this.button["minimize"].opacity < 255) {
             return false
         }
         let activeWindow = global.display.focus_window
@@ -202,7 +202,7 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     maximizeWindow() {
-        if (this.button["maximize"].opacity == 0) {
+        if (this.button["minimize"].opacity < 255) {
             return false
         }
         let activeWindow = global.display.focus_window
@@ -239,7 +239,7 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     closeWindow() {
-        if (this.button["close"].opacity == 0) {
+        if (this.button["minimize"].opacity < 255) {
             return false
         }
         let activeWindow = global.display.focus_window
