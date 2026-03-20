@@ -69,6 +69,7 @@
         "showMediaOptical",
         "viewFullAlbumArt",
         "shortenArtistTitle",
+        "keepAppListOpen",
         "doNotUsePlayerctld"
       ]
     },
@@ -76,7 +77,6 @@
       "type": "section",
       "title": "Context Menu",
       "keys": [
-        "keepAppListOpen",
         "keepOutputListOpen",
         "keepInputListOpen",
         "keepCommandListOpen"
@@ -322,7 +322,7 @@
   "keepAppListOpen": {
     "type": "switch",
     "default": false,
-    "description": "Keep the App selector open"
+    "description": "Keep the App Volume Control open"
   },
   "keepOutputListOpen": {
     "type": "switch",

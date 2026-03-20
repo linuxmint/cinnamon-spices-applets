@@ -678,6 +678,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._outputApplicationsMenu = new PopupMenu.PopupSubMenuMenuItem(_("Applications"));
         this._selectOutputDeviceItem = new PopupMenu.PopupSubMenuMenuItem(_("Output device"));
         this._appVolumeSection.addMenuItem(this._outputApplicationsMenu);
+        this._appVolumeSection.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         //~ this._applet_context_menu.addMenuItem(this._outputApplicationsMenu);
         this._applet_context_menu.addMenuItem(this._selectOutputDeviceItem);
         this._outputApplicationsMenu.actor.hide();

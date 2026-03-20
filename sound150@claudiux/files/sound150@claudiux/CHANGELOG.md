@@ -1,3 +1,6 @@
+### v16.1.1~20260320
+  * Replaces the "Keep App selector open" option in the context menu with "Keep the App Volume Control open" in the main menu.
+
 ### v16.1.0~20260318
   * Application volume sliders are moved from the context menu to the main menu.
   * Many improvements.
