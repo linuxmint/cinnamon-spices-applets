@@ -62,6 +62,8 @@ class ClipboardApplet extends Applet.IconApplet {
         this._lastObservedPrimaryText = null;
         this._isInitializing = true;
         this._pollId = 0;
+        this._searchTimeout = 0;
+        this._settingsTimeout = 0;
 
         this._initStorage();
         this._settings = new Settings.AppletSettings(this, this._appletUuid, instance_id);
@@ -102,14 +104,21 @@ class ClipboardApplet extends Applet.IconApplet {
         if (this._isInitializing) {
             return;
         }
-        this._updateMenuVisibility();
-        this._applyMenuSize();
-        this._updateTrackingSwitch();
-        this._updatePrimaryTracking();
-        this._updatePollingTimer();
-        this._trimHistory();
-        this._saveHistory();
-        this._rebuildHistoryList();
+        if (this._settingsTimeout) {
+            Mainloop.source_remove(this._settingsTimeout);
+        }
+        this._settingsTimeout = Mainloop.timeout_add(200, () => {
+            this._settingsTimeout = 0;
+            this._updateMenuVisibility();
+            this._applyMenuSize();
+            this._updateTrackingSwitch();
+            this._updatePrimaryTracking();
+            this._updatePollingTimer();
+            this._trimHistory();
+            this._saveHistory();
+            this._rebuildHistoryList();
+            return false;
+        });
     }
 
     /**
@@ -625,7 +634,7 @@ class ClipboardApplet extends Applet.IconApplet {
             this._stopPolling();
             return;
         }
-        let interval = Math.max(1, Number(this.pollInterval) || 1);
+        let interval = Math.max(5, Number(this.pollInterval) || 5);
         if (this._pollIntervalSeconds === interval && this._pollId) {
             return;
         }
@@ -875,18 +884,32 @@ class ClipboardApplet extends Applet.IconApplet {
         if (!this._clipboard) {
             return;
         }
-        this._lastSetClipboardText = text;
-        this._clipboard.set_text(St.ClipboardType.CLIPBOARD, text);
-        if (this.syncPrimary) {
-            this._lastSetPrimaryText = text;
-            this._clipboard.set_text(St.ClipboardType.PRIMARY, text);
-        }
+        
+        // Use idle_add with IDLE priority to avoid blocking the main loop
+        let idle = GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+            this._lastSetClipboardText = text;
+            this._clipboard.set_text(St.ClipboardType.CLIPBOARD, text);
+            
+            if (this.syncPrimary) {
+                this._lastSetPrimaryText = text;
+                this._clipboard.set_text(St.ClipboardType.PRIMARY, text);
+            }
+        });
+        
+        return idle;
     }
 
     _onSearchChanged() {
-        this._filterText = this._searchEntry.get_text();
-        this._updateSearchIcon();
-        this._rebuildHistoryList();
+        if (this._searchTimeout) {
+            Mainloop.source_remove(this._searchTimeout);
+        }
+        this._searchTimeout = Mainloop.timeout_add(150, () => {
+            this._searchTimeout = 0;
+            this._filterText = this._searchEntry.get_text();
+            this._updateSearchIcon();
+            this._rebuildHistoryList();
+            return false;
+        });
     }
 
     _onSearchKeyPress(event) {
@@ -1043,6 +1066,12 @@ class ClipboardApplet extends Applet.IconApplet {
     on_applet_removed_from_panel() {
         // St.Clipboard is a singleton managed by the shell — no disconnection needed.
         this._stopPolling();
+        if (this._searchTimeout) {
+            Mainloop.source_remove(this._searchTimeout);
+        }
+        if (this._settingsTimeout) {
+            Mainloop.source_remove(this._settingsTimeout);
+        }
         this._saveHistory();
         this._settings.finalize();
     }

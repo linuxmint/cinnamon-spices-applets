@@ -73,8 +73,8 @@
     },
     "poll-interval": {
         "type": "spinbutton",
-        "default": 1,
-        "min": 1,
+        "default": 5,
+        "min": 5,
         "max": 10,
         "step": 1,
         "units": "seconds",
