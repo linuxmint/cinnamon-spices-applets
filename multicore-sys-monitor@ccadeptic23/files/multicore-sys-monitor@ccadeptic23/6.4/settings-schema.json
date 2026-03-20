@@ -126,7 +126,7 @@
         "CPU_squared",
         "CPU_width",
         "CPU_mergeAll",
-        
+        "CPU_ignoreHyperthreading",
         "CPU_byActivity",
         "CPU_useProgressiveColors"
       ]
@@ -522,6 +522,13 @@
     "type": "switch",
     "default": false,
     "description": "Merge all"
+  },
+  "CPU_ignoreHyperthreading": {
+    "type": "switch",
+    "default": false,
+    "description": "Ignore Hyper-Threading",
+    "dependency": "CPU_mergeAll",
+    "tooltip": "Example: An 8-core processor with Hyper-Threading technology appears to have 16 cores, even though it does not."
   },
   "CPU_showTemp": {
     "type": "switch",

@@ -166,6 +166,13 @@ class MCSM extends Applet.IconApplet {
 
         this.metadata = metadata;
         this.instance_id = instance_id;
+        
+        this.hyperThreadingIsOn = false;
+        readFileAsync("/sys/devices/system/cpu/smt/control").then( (status) => {
+            let _status = status.trim();
+            // _status yields: on|off|forceoff|notsupported|notimplemented
+            this.hyperThreadingIsOn = _status.includes("on");
+        });
 
         Util.spawnCommandLineAsync("/usr/bin/env bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
 
@@ -220,6 +227,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_tempCorner", "CPU_tempCorner");
         this.settings.bind("CPU_width", "CPU_width", () => { this.adjust_CPU_width() });
         this.settings.bind("CPU_mergeAll", "CPU_mergeAll");
+        this.settings.bind("CPU_ignoreHyperthreading", "CPU_ignoreHyperthreading");
         this.settings.bind("CPU_color0", "CPU_color0");
         this.settings.bind("CPU_color1", "CPU_color1");
         this.settings.bind("CPU_color2", "CPU_color2");
@@ -1577,6 +1585,8 @@ class MultiCpuDataProvider {
     }
 
     setData(data) {
+        if (this.applet.hyperThreadingIsOn && this.applet.CPU_mergeAll && this.applet.CPU_ignoreHyperthreading && data[0])
+            data[0] = Math.min(2 * data[0], 1);
         this.currentReadings = data;
     }
 
