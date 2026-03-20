@@ -1,3 +1,7 @@
+### v3.8.4~20260320
+  * CPU: adds option Ignore Hyper-Threading. (Only when option "Merge all" is set to true.)
+  * Fixes [#7960](https://github.com/linuxmint/cinnamon-spices-applets/issues/7960)
+
 ### v3.8.3~20260314
   * Bug fix: The units of measurement for used memory and available memory are now correct.
 
