@@ -357,15 +357,19 @@ class MyApplet extends Applet.TextIconApplet {
                 show = false
             }
             if (what == "show" && show) {
-                if (!this.hideButtons) {
+                if (this.hideButtons == "hide") {
                     this.button[buttons[i]].show()
                 }
                 this.button[buttons[i]].opacity = 255
             } else {
-                if (!this.hideButtons) {
+                if (this.hideButtons == "hide") {
                     this.button[buttons[i]].hide()
+                    this.button[buttons[i]].opacity = 0
+                } else if (this.hideButtons == "dim") {
+                    this.button[buttons[i]].opacity = 100
+                } else {
+                    this.button[buttons[i]].opacity = 0
                 }
-                this.button[buttons[i]].opacity = 0
             }
         }
     }
