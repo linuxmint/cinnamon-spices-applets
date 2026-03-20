@@ -48,7 +48,8 @@ CPUTemperatureApplet.prototype = {
     this.menuItems = [];
     this.state = {};
     this.settings = new Settings.AppletSettings(this.state, metadata.uuid, instance_id);
-
+    
+    this.settings.bindProperty(Settings.BindingDirection.IN, "keep_size", "keep_size", null, null);
     this.settings.bindProperty(Settings.BindingDirection.IN, 'use-fahrenheit', 'useFahrenheit', () => this.on_settings_changed(), null);
     this.settings.bindProperty(Settings.BindingDirection.IN, 'only-integer-part', 'onlyIntegerPart', () => this.on_settings_changed(), null);
     this.settings.bindProperty(Settings.BindingDirection.IN, 'show-unit', 'showUnit', () => this.on_settings_changed(), null);
@@ -58,7 +59,6 @@ CPUTemperatureApplet.prototype = {
     this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval');
     this.settings.bindProperty(Settings.BindingDirection.IN, 'change-color', 'changeColor', () => this.on_settings_changed(), null);
     this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, 'only-colors', 'onlyColors', () => this.on_settings_changed(), null);
-    this.settings.bindProperty(Settings.BindingDirection.IN, "keep_size", "keep_size", null, null);
 
     this.lang = {
       acpi: 'ACPI Adapter',
@@ -180,8 +180,8 @@ CPUTemperatureApplet.prototype = {
       return false;
     }
 
-    let _monospace = (this.keep_size) ? "temp-monospace" : "applet-box";
-    this.actor.set_style_class_name("%s".format(_monospace));
+    let _monospace = (this.state.keep_size === true) ? "temp-monospace" : "applet-box";
+    this.actor.set_style_class_name(`${_monospace}`);
 
 
     if (this.sensorsPath && !this.waitForCmd) {

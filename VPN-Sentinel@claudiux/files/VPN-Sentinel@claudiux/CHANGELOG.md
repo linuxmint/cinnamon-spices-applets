@@ -1,3 +1,6 @@
+### v2.5.1~20260207
+  * Updates checkDependencies.js for Arch.
+
 ### v2.5.0~20251212
   * Use xlet-settings instead of cinnamon-settings to configure applet.
 

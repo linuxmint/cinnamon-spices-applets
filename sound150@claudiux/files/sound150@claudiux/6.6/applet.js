@@ -36,6 +36,7 @@ const Gettext = imports.gettext;
 const Extension = imports.ui.extension;
 const Pango = imports.gi.Pango;
 const ModalDialog = imports.ui.modalDialog;
+const Signals = imports.signals;
 
 
 let HtmlEncodeDecode = require("./lib/htmlEncodeDecode");
@@ -54,7 +55,10 @@ const {
 } = require("./lib/mainloopTools");
 const { del_song_arts } = require("./lib/del_song_arts");
 
+const { getRealScale } = require("./lib/get-real-scale");
+
 const { VolumeSlider } = require("./lib/volumeSlider");
+const { BalanceSlider } = require("./lib/balanceSlider");
 const { ControlButton } = require("./lib/controlButton");
 const { StreamMenuSection, Player, MediaPlayerLauncher, Seeker } = require("./lib/s150PopupMenu");
 
@@ -218,19 +222,51 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.themeNode = null;
         
         this.alreadyCalledBysetAppletTooltip = false;
+        
+        this._appVolumeSection = new PopupMenu.PopupMenuSection();
 
         this.real_ui_scale = 1.0;
-        this.menuWidth = this.userMenuWidth; //520;
-        Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-real-scale.py", (stdout, stderr, exitCode) => {
-            if (exitCode === 0) {
-                this.real_ui_scale = parseFloat(stdout);
-                this.menuWidth = Math.round(this.userMenuWidth * this.real_ui_scale);
-            }
-        }, {});
+        this.menuWidth = 450;
+        Gio.DBus.session.call(
+            'org.cinnamon.Muffin.DisplayConfig',
+            '/org/cinnamon/Muffin/DisplayConfig',
+            'org.cinnamon.Muffin.DisplayConfig',
+            'GetCurrentState',
+            null,
+            null,
+            Gio.DBusCallFlags.NONE,
+            -1,
+            null,
+            (connection, result) => {
+                try {
+                    const [, physical_monitors, logical_monitors] = connection.call_finish(result).deep_unpack();
+                    let scale = 1.0;
+                    outer: for (const [, , lm_scale, , , linked_monitors_info] of logical_monitors) {
+                        for (const [linked_connector] of linked_monitors_info) {
+                            for (const [monitor_info, monitor_modes] of physical_monitors) {
+                                if (monitor_info[0] === linked_connector) {
+                                    for (const [, , , , , , mode_props] of monitor_modes) {
+                                        if (mode_props['is-current']) {
+                                            scale = lm_scale;
+                                            break outer;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    this.real_ui_scale = scale;
+                    this.menuWidth = Math.round(450 * this.real_ui_scale);
+                } catch(e) {
+                    global.logError("sound150@claudiux: Error getting real UI scale via DBus: " + e);
+                }
+            });
 
         this.players_without_seek_support = original_players_without_seek_support;
         this.players_with_seek_support = original_players_with_seek_support;
         this.PERCENT_CHAR = _("%");
+        
+        this.gesturesManager = Main.gesturesManager;
 
         this.oldPlayerIcon0 = null;
         this._ownerChangedId = null;
@@ -273,10 +309,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._chooseActivePlayerItem = new PopupMenu.PopupSubMenuMenuItem(_("Choose player controls"));
 
         this.settings = new Settings.AppletSettings(this, UUID, this.instanceId);
-        this.settings.bind("userMenuWidth", "userMenuWidth", (value) => {
-            this.menuWidth = Math.round(value * this.real_ui_scale);
-        });
-        this.menuWidth = Math.round(this.userMenuWidth * this.real_ui_scale);
+        
+        this.settings.bind("userMenuWidth", "popup_width");
+        this.settings.bind("userMenuHeight", "popup_height");
+        
         this.settings.bind("ignoredInputDevices", "ignoredInputDevices", () => {this._on_reload_this_applet_pressed();});
         this.settings.bind("ignoredOutputDevices", "ignoredOutputDevices", () => {this._on_reload_this_applet_pressed();});
         this.settings.bind("runAsync", "runAsync");
@@ -379,6 +415,15 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("keySwitchPlayer", "keySwitchPlayer", () => {
             this._setKeybinding()
         });
+        this.settings.bind("keyBalanceLeft", "keyBalanceLeft", () => {
+            this._setKeybinding()
+        });
+        this.settings.bind("keyBalanceRight", "keyBalanceRight", () => {
+            this._setKeybinding()
+        });
+        this.settings.bind("keyBalanceCenter", "keyBalanceCenter", () => {
+            this._setKeybinding()
+        });
 
         this.settings.bind("magneticOn", "magneticOn", () => this._on_sound_settings_change());
         this.settings.bind("magnetic25On", "magnetic25On", () => this._on_sound_settings_change());
@@ -414,6 +459,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("volumeSoundEnabled", "volumeSoundEnabled", this.on_volumeSoundEnabled_changed);
         this.settings.bind("maxVolume", "maxVolume", (value) => this._on_maxVolume_changed(value));
 
+        this.settings.bind("balance", "balance");
         this.settings.bind("volume", "volume");
 
         this.old_volume = this.volume;
@@ -507,6 +553,13 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, this.orientation);
         this.menuManager.addMenu(this.menu);
+        this._resizer = new Applet.PopupResizeHandler(
+            this.menu.actor,
+            () => this.orientation,
+            (w,h) => this._onBoxResized(w,h),
+            () => this.popup_width * this.real_ui_scale,
+            () => this.popup_height * this.real_ui_scale
+        );
 
         this.set_applet_icon_symbolic_name("audio-x-generic");
 
@@ -528,6 +581,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         Interfaces.getDBusAsync((proxy, error) => {
             if (error) {
                 // ?? what else should we do if we fail completely here?
+                global.logError("sound150 - applet.js: 551 - " + error);
                 throw error;
             }
 
@@ -598,6 +652,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._output = null;
         this._outputMutedId = null;
         this._outputIcon = "audio-volume-muted-symbolic";
+        
+        this._channelMap = null;
 
         this._input = null;
         this._inputMutedId = null;
@@ -621,9 +677,11 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this._outputApplicationsMenu = new PopupMenu.PopupSubMenuMenuItem(_("Applications"));
         this._selectOutputDeviceItem = new PopupMenu.PopupSubMenuMenuItem(_("Output device"));
-        this._applet_context_menu.addMenuItem(this._outputApplicationsMenu);
+        this._appVolumeSection.addMenuItem(this._outputApplicationsMenu);
+        //~ this._applet_context_menu.addMenuItem(this._outputApplicationsMenu);
         this._applet_context_menu.addMenuItem(this._selectOutputDeviceItem);
         this._outputApplicationsMenu.actor.hide();
+        this._appVolumeSection.actor.hide();
         this._selectOutputDeviceItem.actor.hide();
 
         this._inputSection = new PopupMenu.PopupMenuSection();
@@ -712,6 +770,15 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this._sound_settings.connect("changed::" + OVERAMPLIFICATION_KEY, () => this._on_sound_settings_change());
     }
+    
+    _onBoxResized(width, height) {
+        this.menu.actor.set_width(width);
+        this.menu.actor.set_height(height);
+        if (!this._resizer.resizingInProgress) {
+           this.popup_width = Math.max( Math.round(width / this.real_ui_scale), 450 );
+           this.popup_height = Math.round(height / this.real_ui_scale);
+        }
+    }
 
     monitor_icon_dir() {
         this.unmonitor_icon_dir();
@@ -743,7 +810,8 @@ class Sound150Applet extends Applet.TextIconApplet {
      unmonitor_art_dir() {
         if (this.artsMonitor == null || this.artsMonitorId == null || this.artsMonitor.is_cancelled()) return;
         
-        this.artsMonitor.disconnect(this.iconsMonitorId);
+        //~ this.artsMonitor.disconnect(this.iconsMonitorId);
+        this.artsMonitor.disconnect(this.artsMonitorId);
         if (! this.artsMonitor.is_cancelled() )
             this.artsMonitor.cancel();
         this.artsMonitor = null;
@@ -821,25 +889,25 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
         if (this.context_menu_item_showDesklet != null)
             this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
-        if (this._outputApplicationsMenu != null) {
+        if (this._outputApplicationsMenu != null && this._outputApplicationsMenu.menu != null) {
             if (this.keepAppListOpen)
                 this._outputApplicationsMenu.menu.open();
             else
                 this._outputApplicationsMenu.menu.close();
         }
-        if (this.commands_menu_item != null) {
+        if (this.commands_menu_item != null && this.commands_menu_item.menu != null) {
             if (this.keepCommandListOpen)
                 this.commands_menu_item.menu.open();
             else
                 this.commands_menu_item.menu.close();
         }
-        if (this._selectOutputDeviceItem != null) {
+        if (this._selectOutputDeviceItem != null && this._selectOutputDeviceItem.menu != null) {
             if (this.keepOutputListOpen)
                 this._selectOutputDeviceItem.menu.open();
             else
                 this._selectOutputDeviceItem.menu.close();
         }
-        if (this._selectInputDeviceItem != null) {
+        if (this._selectInputDeviceItem != null && this._selectInputDeviceItem.menu != null) {
             if (this.keepInputListOpen)
                 this._selectInputDeviceItem.menu.open();
             else
@@ -1084,8 +1152,43 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
         return commandline;
     }
+    
+    _balanceLeft() {
+        let bal = this.balance;
+        this.balance = Math.max(
+            0,
+            bal - 0.05
+        );
+        if (this._channelMap)
+            this._channelMap.set_balance(2 * this.balance - 1);
+    }
+    
+    _balanceRight() {
+        let bal = this.balance;
+        this.balance = Math.min(
+            1,
+            bal + 0.05
+        );
+        if (this._channelMap)
+            this._channelMap.set_balance(2 * this.balance - 1);
+    }
+    
+    _balanceCenter() {
+        this.balance = 0.5;
+        if (this._channelMap)
+            this._channelMap.set_balance(0);
+    }
 
     _setKeybinding() {
+        Main.keybindingManager.addHotKey("balance-left-" + this.instance_id, this.keyBalanceLeft, () => {
+            this._balanceLeft()
+        });
+        Main.keybindingManager.addHotKey("balance-right-" + this.instance_id, this.keyBalanceRight, () => {
+            this._balanceRight()
+        });
+        Main.keybindingManager.addHotKey("balance-center-" + this.instance_id, this.keyBalanceCenter, () => {
+            this._balanceCenter()
+        });
         Main.keybindingManager.addHotKey("sound-open-" + this.instance_id, this.keyOpen, () => {
             this._openMenu()
         });
@@ -1267,8 +1370,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     on_applet_added_to_panel() {
         this.themeNode = null;
-        //~ this.set_applet_label(this._applet_label.get_text());
-        this.menu.actor.set_width(this.menuWidth);
+        this.menu.actor.set_width(this.popup_width);
         this.title_text_old = "";
         this.startingUp = true;
         if (this._playerctl)
@@ -1312,7 +1414,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         });
 
         this.iconsMonitor = null;
-        this.iconsMonitorId == null;
+        this.iconsMonitorId = null;
         this.monitor_icon_dir();
         this.artsMonitor = null;
         this.artsMonitorId = null;
@@ -1359,6 +1461,9 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.volume = this.old_volume;
         }
 
+        Main.keybindingManager.removeHotKey("balance-left-" + this.instance_id);
+        Main.keybindingManager.removeHotKey("balance-right-" + this.instance_id);
+        Main.keybindingManager.removeHotKey("balance-center-" + this.instance_id);
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("switch-player-" + this.instance_id);
         try {
@@ -1440,11 +1545,12 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._remove_OsdWithNumberATJosephMcc_button.actor.show();
         else
             this._remove_OsdWithNumberATJosephMcc_button.actor.hide();
-        this.menu.actor.set_width(this.menuWidth);
+        this._balanceSection._onValueInit();
+        this.menu.actor.set_width(this.popup_width);
     }
 
     _openMenu() {
-        this.menu.actor.set_width(this.menuWidth);
+        this.menu.actor.set_width(this.popup_width);
         this.menu.toggle(true);
     }
 
@@ -1670,7 +1776,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             icon_name += "-symbolic";
             this._outputIcon = icon_name;
             let icon = Gio.Icon.new_for_string(icon_name);
-            //~ if (! this.keepAlbumArtIcon) 
+            if (! this.keepAlbumArtIcon) // Is it enough????
                 this.set_applet_icon_symbolic_name(icon_name);
             let _bar_level = null;
             let _volume_str = "";
@@ -1833,15 +1939,19 @@ class Sound150Applet extends Applet.TextIconApplet {
                             const target = Gio.File.new_for_path(ICONDIR + "/R3SongArt" + baseName);
                             //~ const target2 = Gio.File.new_for_path(ALBUMART_PICS_DIR + "/R3SongArt" + baseName);
                             const target2 = Gio.File.new_for_path(ARTDIR + "/R3SongArt" + baseName);
-                            source.copy(target, Gio.FileCopyFlags.NONE, null, null);
-                            source.copy(target2, Gio.FileCopyFlags.NONE, null, null);
+                            if (!target.query_exists(null)) {
+                                try { source.copy(target, Gio.FileCopyFlags.NONE, null, null); } catch(e) { /* copy may fail if source is gone or dir full; icon is non-critical */ }
+                            }
+                            if (!target2.query_exists(null)) {
+                                try { source.copy(target2, Gio.FileCopyFlags.NONE, null, null); } catch(e) { /* copy may fail if source is gone or dir full; icon is non-critical */ }
+                            }
                         }
                     }
                 } else {
                     //DON'T change the icon:
                     if (this._playerIcon && this._playerIcon[0] != this.oldPlayerIcon0 || !this._iconTimeoutId) {
-                        //~ if (! this.keepAlbumArtIcon) this.set_applet_icon_symbolic_name(this._playerIcon[0]);
-                        this.set_applet_icon_symbolic_name(this._playerIcon[0]);
+                        if (! this.keepAlbumArtIcon) this.set_applet_icon_symbolic_name(this._playerIcon[0]);
+                        //~ this.set_applet_icon_symbolic_name(this._playerIcon[0]);
                         this.oldPlayerIcon0 = this._playerIcon[0];
                     }
                 }
@@ -1869,7 +1979,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             }));
             this._applet_icon.set_icon_type(St.IconType.FULLCOLOR);
             this._setStyle();
-            //~ this._applet_icon.actor.style = "object-fit: cover; ";
+            this._applet_icon.actor.style = "object-fit: fill; ";
         } catch (e) {
             // global.log(e);
         }
@@ -2305,9 +2415,24 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         this._outputVolumeSection = new VolumeSlider(this, null, _("Volume"), null);
         this._outputVolumeSection.connect("values-changed", (...args) => this._outputValuesChanged(...args));
-
+        
+        
+        //~ if (this._outputApplicationsMenu) {
+            global.log("ADDING this._outputApplicationsMenu")
+            this._appVolumeSection.addMenuItem(this._outputApplicationsMenu);
+            this._appVolumeSection.actor.show();
+            this._outputApplicationsMenu.actor.show();
+            this._outputApplicationsMenu.menu.open();
+        //~ }
+        this.menu.addMenuItem(this._appVolumeSection);
+        
         this.menu.addMenuItem(this._outputVolumeSection);
         this.menu.addMenuItem(this._inputVolumeSection);
+        
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        
+        this._balanceSection = new BalanceSlider(this);
+        this.menu.addMenuItem(this._balanceSection);
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -2479,6 +2604,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         //~ this.actor.style = _style;
         this.actor.style = null;
         this._setStyle();
+        this._applet_icon.actor.style = "object-fit: fill; ";
     }
 
     _outputValuesChanged(actor, iconName, percentage) {
@@ -2561,6 +2687,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
         this._output = this._control.get_default_sink();
         if (this._output) {
+            this._channelMap = this._output.get_channel_map();
             this._outputVolumeSection.connectWithStream(this._output);
             this._outputMutedId = this._output.connect("notify::is-muted", (...args) => this._mutedChanged(...args, "_output"));
             this._mutedChanged(null, null, "_output");
@@ -2689,6 +2816,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             // for sink inputs, add a menuitem to the application submenu
             let item = new StreamMenuSection(this, stream);
             this._outputApplicationsMenu.menu.addMenuItem(item);
+            this._appVolumeSection.actor.show();
             this._outputApplicationsMenu.actor.show();
             this._streams.push({
                 id: id,
@@ -2720,8 +2848,10 @@ class Sound150Applet extends Applet.TextIconApplet {
 
                 // hide submenus or sections if showing them is unnecessary
                 if (stream.type === "SinkInput") {
-                    if (this._outputApplicationsMenu.menu.numMenuItems === 0)
+                    if (this._outputApplicationsMenu.menu.numMenuItems === 0) {
                         this._outputApplicationsMenu.actor.hide();
+                        this._appVolumeSection.actor.hide();
+                    }
                 } else if (stream.type === "SourceOutput") {
                     if (--this._recordingAppsNum === 0) {
                         this._inputSection.actor.hide();
@@ -2748,14 +2878,17 @@ class Sound150Applet extends Applet.TextIconApplet {
     _removeAllStreams() {
         for (let i = 0, l = this._streams.length; i < l; ++i) {
             let stream = this._streams[i];
+            if (! stream) continue;
             if (stream.item) {
                 try { stream.item.destroy() } catch(e) {}
             }
 
             // hide submenus or sections if showing them is unnecessary
             if (stream.type === "SinkInput") {
-                if (this._outputApplicationsMenu.menu.numMenuItems === 0)
+                if (this._outputApplicationsMenu.menu.numMenuItems === 0) {
+                    this._appVolumeSection.actor.hide();
                     this._outputApplicationsMenu.actor.hide();
+                }
             } else if (stream.type === "SourceOutput") {
                 if (--this._recordingAppsNum === 0) {
                     this._inputSection.actor.hide();
@@ -2840,16 +2973,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 else if (this.showMicUnmutedOnIcon && (this.mute_in_switch && !this.mute_in_switch.state)) iconName += "-with-mic-enabled";
     
                 iconName += "-symbolic";
-                this._outputIcon = iconName;if (volume < 1)
-                    iconName += "muted";
-                else if (volume < 33)
-                    iconName += "low";
-                else if (volume < 67)
-                    iconName += "medium";
-                else if (volume <= 100)
-                    iconName += "high";
-                else
-                    iconName += "overamplified";
+                this._outputIcon = iconName;
                 icon = Gio.Icon.new_for_string(this._outputIcon);
                 _bar_level = null;
                 _volume_str = "";
@@ -2871,14 +2995,16 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (this.showVolumeLevelNearIcon) {
             label = "" + this.volume;
             if (this._seeker && this._seeker.status == "Paused") label = "⏸ " + this.volume;
-            if (this.title_text.length > 0) {
-                if (this._panelHeight >= 60)
-                    label += "\n" + this.title_text;
-                else
-                    label += " - " + this.title_text;
+            if (this.isHorizontal) {
+                if (this.title_text.length > 0) {
+                    if (this._panelHeight >= 60)
+                        label += "\n" + this.title_text;
+                    else
+                        label += " - " + this.title_text;
+                }
             }
         } else {
-            if (this.title_text.length > 0)
+            if (this.title_text.length > 0 && this.isHorizontal)
                 label = "" + this.title_text;
             if (this._seeker && this._seeker.status == "Paused") label = "⏸ " + label;
         }
@@ -3015,6 +3141,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         return GLib.file_test(ALBUMART_ON, GLib.FileTest.EXISTS);
     }
 }
+Signals.addSignalMethods(Sound150Applet.prototype);
 
 function main(metadata, orientation, panel_height, instanceId) {
     return new Sound150Applet(metadata, orientation, panel_height, instanceId);

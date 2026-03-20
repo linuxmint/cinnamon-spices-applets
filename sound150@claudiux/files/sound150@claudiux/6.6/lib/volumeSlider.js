@@ -8,6 +8,7 @@ const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
 const Cvc = imports.gi.Cvc;
 const Clutter = imports.gi.Clutter;
+const Signals = imports.signals;
 
 const { ControlButton } = require("./lib/controlButton");
 
@@ -425,6 +426,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         cr.$dispose();
     }
 }
+Signals.addSignalMethods(VolumeSlider.prototype);
 
 module.exports = {
     VolumeSlider

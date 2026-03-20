@@ -2,7 +2,7 @@
  "uuid": "classic-menu@fredcw",
  "name": "Classic Menu",
  "description": "The classic Cinnamon menu for cinnamon 6.6 and later",
- "version": "1.0",
+ "version": "1.0.2",
  "multiversion": true,
  "website": "https://github.com/linuxmint/cinnamon-spices-applets",
  "max-instances": -1

@@ -3,6 +3,13 @@ const Mainloop = imports.mainloop;
 const GLib = imports.gi.GLib;
 const ByteArray = imports.byteArray;
 
+const to_string = function(data) {
+    if (ByteArray.hasOwnProperty("toString")) {
+        return "" + ByteArray.toString(data);
+    }
+    return "" + data.toString();
+};
+
 class MyApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instance_id) {
         super(orientation, panelHeight, instance_id);
@@ -27,7 +34,7 @@ class MyApplet extends Applet.TextIconApplet {
 
             let total_r = 0;
             let total_w = 0;
-            let lines = ByteArray.toString(content).split('\n');
+            let lines = to_string(content).split('\n');
 
             for (let line of lines) {
                 let parts = line.trim().split(/\s+/);
@@ -60,7 +67,7 @@ class MyApplet extends Applet.TextIconApplet {
 
         this.last_reads = stats.r;
         this.last_writes = stats.w;
-
+        
         // 100ms update time setting
         this._timer_id = Mainloop.timeout_add(100, () => {
             this._update_loop();

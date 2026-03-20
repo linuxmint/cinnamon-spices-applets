@@ -29,6 +29,8 @@ class CustomAppList(SettingsWidget):
 
         self.saved_configuration = True
 
+        icon_theme = Gtk.IconTheme.get_default()
+        icon_theme.append_search_path(os.path.join(APPLET_DIR, "icons"))
         provider = Gtk.CssProvider()
         provider.load_from_path(os.path.join(APPLET_DIR, "ui", "style.css"))
         context = Gtk.StyleContext()
