@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: c-eyes@anaximeno 2.1.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-02-10 17:17-0100\n"
+"POT-Creation-Date: 2026-03-01 21:29-0100\n"
 "PO-Revision-Date: 2026-02-24 09:35+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -133,7 +133,6 @@ msgstr "képpont"
 
 #. 4.2->settings-schema.json->eye-margin->description
 #. 5.4->settings-schema.json->eye-margin->description
-#. 6.2->settings-schema.json->margin->description
 msgid "Margin"
 msgstr "Tűréshatár"
 
@@ -428,6 +427,26 @@ msgstr "Optimalizációk"
 msgid "Eye Mode"
 msgstr "Szem mód"
 
+#. 6.2->settings-schema.json->pupil-shape->description
+msgid "Pupil Shape"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Round"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Vertical"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Horizontal"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Star"
+msgstr ""
+
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
 msgstr "Eszköztipp üzenet az egérmutatóval"
@@ -451,6 +470,25 @@ msgstr "Teljesítmény"
 #. 6.2->settings-schema.json->optimization-mode->options
 msgid "Manual"
 msgstr "Kézi"
+
+#. 6.2->settings-schema.json->margin->description
+#, fuzzy
+msgid "Width"
+msgstr "Vonalvastagság"
+
+#. 6.2->settings-schema.json->margin->tooltip
+msgid ""
+"This setting controls the width of the area around the eye within which the "
+"eye will follow the mouse cursor. Positive values increase the area, while "
+"negative values decrease it."
+msgstr ""
+
+#. 6.2->settings-schema.json->padding->tooltip
+msgid ""
+"This setting controls the padding around the eye within which the eye will "
+"follow the mouse cursor. Increasing the padding decreases the radius of the "
+"eye, while decreasing the padding increases the radius of the eye."
+msgstr ""
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"

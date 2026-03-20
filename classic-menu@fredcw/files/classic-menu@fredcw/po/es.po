@@ -60,7 +60,7 @@ msgstr "Otra aplicación..."
 
 #. 6.6/applet.js:822
 msgid "Open containing folder"
-msgstr ""
+msgstr "Abrir la carpeta contenedora"
 
 #. 6.6->settings-schema.json->menu->title
 #. 6.6/applet.js:1178

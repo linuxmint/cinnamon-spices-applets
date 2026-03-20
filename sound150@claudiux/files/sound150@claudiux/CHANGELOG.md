@@ -1,3 +1,12 @@
+### v16.1.0~20260318
+  * Application volume sliders are moved from the context menu to the main menu.
+  * Many improvements.
+  * Fixes [#8046](https://github.com/linuxmint/cinnamon-spices-applets/issues/8046)
+
+### v16.0.0~20260315
+  * The album cover is back!
+  * Fixes [#8383](https://github.com/linuxmint/cinnamon-spices-applets/issues/8383)
+
 ### v15.0.1~20260222
   * Improves asynchronous function calls.
 

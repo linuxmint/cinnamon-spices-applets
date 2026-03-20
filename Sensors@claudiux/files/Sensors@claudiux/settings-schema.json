@@ -87,6 +87,7 @@
         "char_size",
         "horizontal_width",
         "separator_type",
+        "separator_color",
         "char_color_customized",
         "char_color",
         "crit_color",
@@ -396,6 +397,12 @@
       "bar": "bar"
     },
     "description": "Separator"
+  },
+  "separator_color": {
+    "type": "colorchooser",
+    "default": "rgba(127,127,127, 1.0)",
+    "dependency": "separator_type!=none",
+    "description": "Separator Color"
   },
   "vertical-align": {
     "type": "generic",
