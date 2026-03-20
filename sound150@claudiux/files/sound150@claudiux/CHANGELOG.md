@@ -1,3 +1,6 @@
+### v16.1.2~20260320
+  * Minor bug fixed.
+
 ### v16.1.1~20260320
   * Replaces the "Keep App selector open" option in the context menu with "Keep the App Volume Control open" in the main menu.
 
