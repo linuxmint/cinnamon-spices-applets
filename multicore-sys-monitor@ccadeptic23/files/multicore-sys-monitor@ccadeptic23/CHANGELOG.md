@@ -1,3 +1,6 @@
+### v3.9.0~20260321
+  * Memory: Now able to use a Bar chart.
+
 ### v3.8.4~20260320
   * CPU: adds option Ignore Hyper-Threading. (Only when option "Merge all" is set to true.)
   * Fixes [#7960](https://github.com/linuxmint/cinnamon-spices-applets/issues/7960)
