@@ -179,6 +179,7 @@
         "Mem_labelOn",
         "Mem_squared",
         "Mem_width",
+        "Mem_chartType",
         "Mem_startAt12Oclock",
         "Mem_showBytesInTooltip"
       ]
@@ -663,6 +664,15 @@
     "description": "Label",
     "dependency": "labelsOn"
   },
+  "Mem_chartType": {
+    "type": "combobox",
+    "default": "pie",
+    "description": "Chart Type",
+    "options": {
+      "Pie chart": "pie",
+      "Bar chart": "bar"
+    }
+  },
   "Mem_squared": {
     "type": "switch",
     "default": false,
@@ -681,7 +691,8 @@
   "Mem_startAt12Oclock": {
     "type": "switch",
     "default": false,
-    "description": "Origin at 12 o'clock"
+    "description": "Origin at 12 o'clock",
+    "dependency": "Mem_chartType=pie"
   },
   "Mem_showBytesInTooltip": {
     "type": "switch",
