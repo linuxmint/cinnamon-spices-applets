@@ -188,7 +188,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
 
         if (this.applet.showOSD && (rounded_volume != Math.round(this.oldValue) || this.isMic)) {
             if (IS_OSD150_ENABLED())
-                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
+                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.applet.OSDhorizontal);
             else
                 Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level);
         }
