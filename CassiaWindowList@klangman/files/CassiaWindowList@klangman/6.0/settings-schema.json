@@ -58,7 +58,7 @@
     "general-settings" : {
       "type" : "section",
       "title" : "General window list settings",
-      "keys" : ["group-windows", "display-pinned", "synchronize-pinned", "animate-icon", "show-windows-for-current-monitor", "show-windows-for-all-workspaces", "remember-button-order", "show-tooltips", "button-spacing", "hover-peek-windowlist", "no-click-activate"]
+      "keys" : ["group-windows", "display-pinned", "synchronize-pinned", "animate-icon", "show-windows-for-current-monitor", "show-windows-for-all-workspaces", "remember-button-order", "show-tooltips", "show-tooltip-hotkeys", "button-spacing", "hover-peek-windowlist", "no-click-activate"]
     },
     "general-mouse" : {
       "type" : "section",
@@ -303,6 +303,13 @@
     "default": true,
     "description": "Show tooltips for window list buttons",
     "tooltip": "Enable to show tooltips using window title or application name when hovering over window list buttons"
+  },
+  "show-tooltip-hotkeys": {
+    "type": "switch",
+    "default": true,
+    "dependency" : "show-tooltips",
+    "description": "Show hotkeys in the window list button tooltips",
+    "tooltip": "Enable to show window activation hotkeys in the window list button tooltips"
   },
   "hide-panel-apps": {
     "type": "switch",
