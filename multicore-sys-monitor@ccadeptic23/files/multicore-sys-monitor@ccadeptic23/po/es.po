@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-03-22 14:25+0100\n"
-"PO-Revision-Date: 2026-03-21 18:42+0100\n"
+"PO-Revision-Date: 2026-03-22 10:47-0300\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.9\n"
 
 #. 6.4->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
@@ -672,46 +672,43 @@ msgstr ""
 
 #. 6.4->settings-schema.json->CPU_showLoadOverTime->description
 msgid "Show only the CPU Load Over Time"
-msgstr ""
+msgstr "Mostrar solo la carga de la CPU a lo largo del tiempo"
 
 #. 6.4->settings-schema.json->CPU_showLoadOverTimeHowManyBars->description
 msgid "How many bars?"
-msgstr ""
+msgstr "¿Cuántas barras?"
 
 #. 6.4->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. 6.4->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #. 6.4->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #. 6.4->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
 msgid "8"
-msgstr ""
+msgstr "8"
 
 #. 6.4->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
-#, fuzzy
 msgid "16"
-msgstr "16px"
+msgstr "16"
 
 #. 6.4->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
-#, fuzzy
 msgid "32"
-msgstr "32px"
+msgstr "32"
 
 #. 6.4->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
-#, fuzzy
 msgid "64"
-msgstr "64px"
+msgstr "64"
 
 #. 6.4->settings-schema.json->CPU_showLoadOverTimeHowManyBars->tooltip
 msgid "Related to CPU Load Over Time"
-msgstr ""
+msgstr "Relacionado con la carga de la CPU a lo largo del tiempo"
 
 #. 6.4->settings-schema.json->CPU_showTemp->description
 msgid "Show the CPU temperature"
