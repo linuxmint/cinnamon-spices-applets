@@ -298,6 +298,13 @@
     "description": "Allow prioritizing window list button order",
     "tooltip": "Enabling this option makes it easy for you to control where your favorite applications will appear on the window list. This is achieved by maintaining a persistent position priority order for applications. New Window list buttons for applications with priority will appear in priority order and ahead of applications without priority. Using drag-and-drop will automatically add to and reorder the priority list. The \"Prioritize window list position\" context menu option allows you to add and remove an application from the priority list."
   },
+  "expand-group-on-hover": {
+    "type": "switch",
+    "default": false,
+    "dependency" : "group-windows<3",
+    "description": "Temporarily ungroup the window list button under the mouse pointer",
+    "tooltip": "Enabling this option will ungroup a grouped window list button when the mouse is hovering over the button, and then regroup the button when the pointer is moved off the button."
+  },
   "show-tooltips": {
     "type": "switch",
     "default": true,
