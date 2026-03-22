@@ -28,7 +28,8 @@
         "section_tempOptions",
         "section_tempSensors",
         "section_tempDisktemp",
-        "section_tempDisks"
+        "section_tempDisks",
+        "section_helpColors"
       ]
     },
     "page_Fans": {
@@ -37,7 +38,8 @@
       "sections": [
         "section_fanDisplay",
         "section_fanOptions",
-        "section_fanSensors"
+        "section_fanSensors",
+        "section_helpColors"
       ]
     },
     "page_Voltages": {
@@ -46,7 +48,8 @@
       "sections": [
         "section_voltDisplay",
         "section_voltOptions",
-        "section_voltSensors"
+        "section_voltSensors",
+        "section_helpColors"
       ]
     },
     "page_Intrusion": {
@@ -64,7 +67,8 @@
       "sections": [
         "section_customDisclaimer",
         "section_customDisplay",
-        "section_customSensors"
+        "section_customSensors",
+        "section_helpColors"
       ]
     },
     "section_SettingsWindow": {
@@ -173,11 +177,19 @@
       "type": "section",
       "title": "Disk temperature sensors",
       "keys": [
+        "show_disks_first",
         "btn_renew_disks_list",
         "temp_disks",
         "update_display"
       ],
       "dependency": "disktemp_is_user_readable"
+    },
+    "section_helpColors": {
+      "type": "section",
+      "title": "Help to select color",
+      "keys": [
+        "button_color_help"
+      ]
     },
     "section_fanDisplay": {
       "type": "section",
@@ -615,6 +627,13 @@
         "align": 0.5,
         "type": "string",
         "default": ""
+      },
+      {
+        "id": "color",
+        "title": "Color\nin panel",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
@@ -622,6 +641,11 @@
     ],
     "tooltip": "Double-click on a line to change 'Shown name', 'High', 'Critical' or 'Formula'.\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\n'High' and 'Critical' (optional) must be valid numbers.\n'Formula' (optional):\n  Use $ as the value returned by the sensor.\n  You can use the 4 operations (+-*/) and parentheses.\n  Example: $*1.1+0.5",
     "show-buttons": true
+  },
+  "show_disks_first": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the disk temperatures before those of the other sensors"
   },
   "btn_renew_disks_list": {
     "type": "button",
@@ -677,6 +701,13 @@
       {
         "id": "user_formula",
         "title": "Formula",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "color",
+        "title": "Color\nin panel",
         "align": 0.5,
         "type": "string",
         "default": ""
@@ -822,6 +853,13 @@
         "align": 0.5,
         "type": "string",
         "default": ""
+      },
+      {
+        "id": "color",
+        "title": "Color\nin panel",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
@@ -944,6 +982,13 @@
       {
         "id": "user_formula",
         "title": "Formula",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "color",
+        "title": "Color\nin panel",
         "align": 0.5,
         "type": "string",
         "default": ""
@@ -1148,6 +1193,13 @@
         "align": 0.5,
         "type": "string",
         "default": ""
+      },
+      {
+        "id": "color",
+        "title": "Color\nin panel",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
@@ -1171,6 +1223,11 @@
     "type": "button",
     "description": "Update display",
     "callback": "updateUI_from_settings"
+  },
+  "button_color_help": {
+    "type": "button",
+    "description": "Open HTML Colors web page",
+    "callback": "_on_open_HTML_Colors_web_page"
   },
   "custom_names": {
     "type": "generic",

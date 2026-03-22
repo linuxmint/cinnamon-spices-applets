@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux 5.4.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-04 22:41+0100\n"
+"POT-Creation-Date: 2026-03-22 19:51+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -23,103 +23,103 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Trình giám sát cảm biến"
 
-#. applet.js:586
+#. applet.js:587
 msgid "Suspended"
 msgstr "Đã tạm dừng"
 
-#. applet.js:921 applet.js:963
+#. applet.js:929 applet.js:971
 msgid "high:"
 msgstr "cao:"
 
-#. applet.js:921 applet.js:924 applet.js:963 applet.js:965 applet.js:1006
+#. applet.js:929 applet.js:932 applet.js:971 applet.js:973 applet.js:1014
 msgid "n/a"
 msgstr "không có"
 
-#. applet.js:924 applet.js:965
+#. applet.js:932 applet.js:973
 msgid "crit:"
 msgstr "nguy hiểm:"
 
-#. applet.js:1006 applet.js:1050
+#. applet.js:1014 applet.js:1058
 msgid "min:"
 msgstr "thấp:"
 
-#. applet.js:1052
+#. applet.js:1060
 msgid "max:"
 msgstr "cao:"
 
-#. applet.js:1081
+#. applet.js:1089
 msgid "No intrusion detected"
 msgstr "Không phát hiện xâm nhập"
 
-#. applet.js:1081
+#. applet.js:1089
 msgid "INTRUSION DETECTED!"
 msgstr "PHÁT HIỆN XÂM NHẬP!"
 
-#. applet.js:1101
+#. applet.js:1109
 msgid "Must be configured!"
 msgstr "Cần được cấu hình!"
 
-#. applet.js:1470
+#. applet.js:1511
 msgid "Settings"
 msgstr "Cài đặt"
 
-#. applet.js:1470
+#. applet.js:1511
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1477
+#. applet.js:1518
 msgid "⚙ General"
 msgstr "⚙ Chung"
 
-#. applet.js:1494
+#. applet.js:1535
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "Cảm biến nhiệt độ %s"
 
-#. applet.js:1511
+#. applet.js:1552
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "Cảm biến quạt %s"
 
-#. applet.js:1528
+#. applet.js:1569
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "Cảm biến điện áp %s"
 
-#. applet.js:1545
+#. applet.js:1586
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "Cảm biến xâm nhập %s"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1581
+#. applet.js:1622
 msgid "Run xsensors"
 msgstr "Chạy xsensors"
 
-#. applet.js:1590
+#. applet.js:1631
 msgid "Suspend Sensors"
 msgstr "Tạm dừng cảm biến"
 
-#. applet.js:1601
+#. applet.js:1642
 msgid "Reload this applet"
 msgstr "Tải lại applet này"
 
-#. applet.js:1948
+#. applet.js:1998
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Bạn có chắc muốn xóa '%s' không?"
 
-#. lib/checkDependencies.js:369
+#. lib/checkDependencies.js:371
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Applet %s đang hoạt động đầy đủ."
 
-#. lib/checkDependencies.js:370
+#. lib/checkDependencies.js:372
 msgid "All dependencies are installed"
 msgstr "Tất cả các gói phụ thuộc đã được cài đặt"
 
-#. lib/checkDependencies.js:399
+#. lib/checkDependencies.js:401
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -127,15 +127,15 @@ msgstr ""
 "Có vẻ bạn đang thiếu một số chương trình cần thiết để applet này hoạt động "
 "đầy đủ."
 
-#. lib/checkDependencies.js:401
+#. lib/checkDependencies.js:403
 msgid "Please install these packages:"
 msgstr "Vui lòng cài đặt các gói sau:"
 
-#. lib/checkDependencies.js:405 lib/checkDependencies.js:415
+#. lib/checkDependencies.js:407 lib/checkDependencies.js:417
 msgid "Some dependencies are not installed!"
 msgstr "Một số gói phụ thuộc chưa được cài đặt!"
 
-#. lib/checkDependencies.js:417
+#. lib/checkDependencies.js:419
 msgid "Install these packages now"
 msgstr "Cài đặt các gói này ngay"
 
@@ -271,6 +271,10 @@ msgstr "Cảm biến nhiệt độ"
 #. settings-schema.json->section_tempDisks->title
 msgid "Disk temperature sensors"
 msgstr "Cảm biến nhiệt độ ổ đĩa"
+
+#. settings-schema.json->section_helpColors->title
+msgid "Help to select color"
+msgstr ""
 
 #. settings-schema.json->section_fanSensors->title
 msgid "Fan sensors"
@@ -754,6 +758,19 @@ msgstr ""
 msgid "Formula"
 msgstr "Công thức"
 
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
+#, fuzzy
+msgid ""
+"Color\n"
+"in panel"
+msgstr ""
+"Hiển thị\n"
+"trên bảng"
+
 #. settings-schema.json->temp_sensors->tooltip
 msgid ""
 "Double-click on a line to change 'Shown name', 'High', 'Critical' or "
@@ -773,6 +790,11 @@ msgstr ""
 "  Sử dụng $ làm giá trị do cảm biến trả về.\n"
 "  Có thể dùng 4 phép toán (+-*/) và dấu ngoặc đơn.\n"
 "  Ví dụ: $*1.1+0.5"
+
+#. settings-schema.json->show_disks_first->description
+#, fuzzy
+msgid "Display the disk temperatures before those of the other sensors"
+msgstr "Hiển thị giá trị của các cảm biến được chọn"
 
 #. settings-schema.json->btn_renew_disks_list->description
 msgid "Renew the list of known disks"
@@ -1020,6 +1042,10 @@ msgstr "Hữu ích khi cần báo cáo sự cố."
 #. settings-schema.json->update_display->description
 msgid "Update display"
 msgstr "Cập nhật hiển thị"
+
+#. settings-schema.json->button_color_help->description
+msgid "Open HTML Colors web page"
+msgstr ""
 
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
