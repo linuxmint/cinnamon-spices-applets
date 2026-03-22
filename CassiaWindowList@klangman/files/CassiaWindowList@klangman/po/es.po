@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-03-21 23:24-0400\n"
-"PO-Revision-Date: 2025-08-13 21:07-0400\n"
+"PO-Revision-Date: 2026-03-22 10:53-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.9\n"
 
 #. 4.0/applet.js:617 6.0/applet.js:601 5.4/applet.js:601
 msgid "all buttons"
@@ -264,9 +264,9 @@ msgid "Close"
 msgstr "Cerrar"
 
 #. 6.0/applet.js:1996 5.4/applet.js:1996
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s windows in this group"
-msgstr "ventanas en este grupo"
+msgstr "%s ventanas en este grupo"
 
 #. SetupWizard.py:188
 msgid "Exit"
@@ -1020,20 +1020,20 @@ msgstr ""
 #. 4.0->settings-schema.json->show-tooltip-hotkeys->description
 #. 6.0->settings-schema.json->show-tooltip-hotkeys->description
 #. 5.4->settings-schema.json->show-tooltip-hotkeys->description
-#, fuzzy
 msgid "Show hotkeys in the window list button tooltips"
-msgstr "Mostrar información sobre los botones de la lista de ventanas"
+msgstr ""
+"Mostrar las teclas de acceso rápido en las descripciones emergentes de los "
+"botones de la lista de ventanas"
 
 #. 4.0->settings-schema.json->show-tooltip-hotkeys->tooltip
 #. 6.0->settings-schema.json->show-tooltip-hotkeys->tooltip
 #. 5.4->settings-schema.json->show-tooltip-hotkeys->tooltip
-#, fuzzy
 msgid ""
 "Enable to show window activation hotkeys in the window list button tooltips"
 msgstr ""
-"Habilite para mostrar información sobre herramientas usando el título de la "
-"ventana o el nombre de la aplicación al pasar el cursor sobre los botones de "
-"la lista de ventanas"
+"Habilitar la visualización de las teclas de acceso rápido para la activación "
+"de ventanas en las descripciones emergentes de los botones de la lista de "
+"ventanas"
 
 #. 4.0->settings-schema.json->hide-panel-apps->description
 #. 6.0->settings-schema.json->hide-panel-apps->description
@@ -2611,6 +2611,8 @@ msgstr ""
 #. 5.4->settings-schema.json->expand-group-on-hover->description
 msgid "Temporarily ungroup the window list button under the mouse pointer"
 msgstr ""
+"Desagrupar temporalmente el botón de la lista de ventanas situado debajo del "
+"puntero del ratón"
 
 #. 5.4->settings-schema.json->expand-group-on-hover->tooltip
 msgid ""
@@ -2618,6 +2620,9 @@ msgid ""
 "mouse is hovering over the button, and then regroup the button when the "
 "pointer is moved off the button."
 msgstr ""
+"Si se activa esta opción, el botón de una lista de ventanas agrupadas se "
+"desagrupará al pasar el ratón por encima de él, y se volverá a agrupar "
+"cuando el puntero se aleje del botón."
 
 #. SetupWizard.ui:7
 msgid "CassiaWindowList Basic Setup Wizard"
