@@ -1,3 +1,8 @@
+### v3.9.1~20260322
+  * CPU: adds option Show only the CPU Load Over Time.
+  * Also you can set How many bars you want to display.
+  * Fixes [#7960](https://github.com/linuxmint/cinnamon-spices-applets/issues/7960)
+
 ### v3.9.0~20260321
   * Memory: Now able to use a Bar chart.
 

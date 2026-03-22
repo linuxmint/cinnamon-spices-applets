@@ -127,6 +127,8 @@
         "CPU_width",
         "CPU_mergeAll",
         "CPU_ignoreHyperthreading",
+        "CPU_showLoadOverTime",
+        "CPU_showLoadOverTimeHowManyBars",
         "CPU_byActivity",
         "CPU_useProgressiveColors"
       ]
@@ -530,6 +532,28 @@
     "description": "Ignore Hyper-Threading",
     "dependency": "CPU_mergeAll",
     "tooltip": "Example: An 8-core processor with Hyper-Threading technology appears to have 16 cores, even though it does not."
+  },
+  "CPU_showLoadOverTime": {
+    "type": "switch",
+    "default": false,
+    "description": "Show only the CPU Load Over Time",
+    "dependency": "CPU_mergeAll"
+  },
+  "CPU_showLoadOverTimeHowManyBars": {
+    "type": "combobox",
+    "description": "How many bars?",
+    "default": 8,
+    "options": {
+      "1": 1,
+      "2": 2,
+      "4": 4,
+      "8": 8,
+      "16": 16,
+      "32": 32,
+      "64": 64
+    },
+    "tooltip": "Related to CPU Load Over Time",
+    "dependency": "CPU_mergeAll"
   },
   "CPU_showTemp": {
     "type": "switch",

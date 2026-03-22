@@ -127,9 +127,9 @@ class GraphVBars {
     if (providerName == 'SWAP' && this.applet.Mem_swapWidth === 0)
       return;
     if (!labelColor) {
-        labelColor = [1, 1, 1, 0.1];
+      labelColor = [1, 1, 1, 0.1];
     } else {
-        labelColor = RGBa2rgba(labelColor);
+      labelColor = RGBa2rgba(labelColor);
     }
 
     bgColor = RGBa2rgba(bgColor);
