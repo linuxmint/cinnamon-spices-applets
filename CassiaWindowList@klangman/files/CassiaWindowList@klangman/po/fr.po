@@ -5,19 +5,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Project-Id-Version: CassiaWindowList@klangman 2.4.7\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2026-03-21 23:24-0400\n"
-"PO-Revision-Date: 2025-09-04 09:11+0200\n"
-"Last-Translator: claudiux\n"
+"PO-Revision-Date: 2026-03-22 09:33+0100\n"
+"Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
 
 #. 4.0/applet.js:617 6.0/applet.js:601 5.4/applet.js:601
 msgid "all buttons"
@@ -265,9 +263,9 @@ msgid "Close"
 msgstr "Fermer"
 
 #. 6.0/applet.js:1996 5.4/applet.js:1996
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s windows in this group"
-msgstr "fenêtres dans ce groupe"
+msgstr "%s fenêtres dans ce groupe"
 
 #. SetupWizard.py:188
 msgid "Exit"
@@ -1028,20 +1026,19 @@ msgstr ""
 #. 4.0->settings-schema.json->show-tooltip-hotkeys->description
 #. 6.0->settings-schema.json->show-tooltip-hotkeys->description
 #. 5.4->settings-schema.json->show-tooltip-hotkeys->description
-#, fuzzy
 msgid "Show hotkeys in the window list button tooltips"
-msgstr "Afficher des infobulles pour les boutons de la liste des fenêtres"
+msgstr ""
+"Afficher les raccourcis clavier dans les infobulles des boutons de la liste "
+"des fenêtres"
 
 #. 4.0->settings-schema.json->show-tooltip-hotkeys->tooltip
 #. 6.0->settings-schema.json->show-tooltip-hotkeys->tooltip
 #. 5.4->settings-schema.json->show-tooltip-hotkeys->tooltip
-#, fuzzy
 msgid ""
 "Enable to show window activation hotkeys in the window list button tooltips"
 msgstr ""
-"Activer pour afficher des infobulles indiquant le titre de la fenêtre ou le "
-"nom de l'application lorsque l'on survole les boutons de la liste des "
-"fenêtres"
+"Activer cette option pour afficher les raccourcis clavier d'activation des "
+"fenêtres dans les infobulles des boutons de la liste des fenêtres."
 
 #. 4.0->settings-schema.json->hide-panel-apps->description
 #. 6.0->settings-schema.json->hide-panel-apps->description
@@ -2627,7 +2624,7 @@ msgstr ""
 
 #. 5.4->settings-schema.json->expand-group-on-hover->description
 msgid "Temporarily ungroup the window list button under the mouse pointer"
-msgstr ""
+msgstr "Dissocier temporairement le bouton de la liste des fenêtres sous le pointeur de la souris"
 
 #. 5.4->settings-schema.json->expand-group-on-hover->tooltip
 msgid ""
@@ -2635,6 +2632,9 @@ msgid ""
 "mouse is hovering over the button, and then regroup the button when the "
 "pointer is moved off the button."
 msgstr ""
+"L'activation de cette option dissociera un bouton de liste de fenêtres "
+"groupées lorsque la souris survolera le bouton, puis le groupera à "
+"nouveau lorsque le pointeur sera déplacé hors du bouton."
 
 #. SetupWizard.ui:7
 msgid "CassiaWindowList Basic Setup Wizard"
