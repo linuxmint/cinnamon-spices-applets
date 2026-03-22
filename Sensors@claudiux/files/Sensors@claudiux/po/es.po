@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-03-22 19:51+0100\n"
-"PO-Revision-Date: 2026-03-06 11:01-0300\n"
+"PO-Revision-Date: 2026-03-22 16:28-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #. metadata.json->name
 #. applet.js:232
@@ -277,7 +277,7 @@ msgstr "Sensores de temperatura del disco"
 
 #. settings-schema.json->section_helpColors->title
 msgid "Help to select color"
-msgstr ""
+msgstr "Ayuda para elegir el color"
 
 #. settings-schema.json->section_fanSensors->title
 msgid "Fan sensors"
@@ -776,13 +776,12 @@ msgstr "Fórmula"
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->custom_sensors->columns->title
-#, fuzzy
 msgid ""
 "Color\n"
 "in panel"
 msgstr ""
-"Mostrar en\n"
-"el panel"
+"Color\n"
+"del panel"
 
 #. settings-schema.json->temp_sensors->tooltip
 msgid ""
@@ -806,9 +805,9 @@ msgstr ""
 "  Ejemplo: $*1.1+0.5"
 
 #. settings-schema.json->show_disks_first->description
-#, fuzzy
 msgid "Display the disk temperatures before those of the other sensors"
-msgstr "Mostrar los valores de estos sensores seleccionados"
+msgstr ""
+"Mostrar las temperaturas de los discos antes que las de los demás sensores"
 
 #. settings-schema.json->btn_renew_disks_list->description
 msgid "Renew the list of known disks"
@@ -1059,7 +1058,7 @@ msgstr "Actualizar el monitor"
 
 #. settings-schema.json->button_color_help->description
 msgid "Open HTML Colors web page"
-msgstr ""
+msgstr "Abrir la página web de colores HTML"
 
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
