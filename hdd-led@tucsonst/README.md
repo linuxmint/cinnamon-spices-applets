@@ -23,7 +23,7 @@ By comparing the current r/w values with the previous ones every **100ms**, the 
 * **zenity**: This applet utilizes zenity to produce the drive activity pop-up dialog. Most standard Linux distributions, including Linux Mint, come with it pre-installed. 
 
 ## Configuration
-Currently the applet sums the r/w counts of all disks in the system to determine r/w activity. A future enhancement would be to allow the user to select which disks devices to monitor.
+Currently the applet sums the r/w counts of all disks in the system to determine r/w activity. A future enhancement would be to allow the user to select which disk devices to monitor.
 
 The refresh/measurement interval is set to **100ms**. This value can be changed directly in the `applet.js` code. However, in the author's opinion, 100ms provides a very accurate representation of how a physical LED built into a computer would behave – longer would be too slow, and shorter would be hard for the human eye to track.
 
