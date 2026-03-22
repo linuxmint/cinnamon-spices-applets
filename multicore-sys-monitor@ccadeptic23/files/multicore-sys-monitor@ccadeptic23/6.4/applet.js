@@ -239,6 +239,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_activity_80_100", "CPU_activity_80_100");
         this.settings.bind("Mem_enabled", "Mem_enabled");
         this.settings.bind("Swap_enabled", "Swap_enabled");
+        this.settings.bind("Mem_chartType", "Mem_chartType");
         this.settings.bind("Mem_squared", "Mem_squared");
         this.settings.bind("Mem_width", "Mem_width", () => { this.adjust_Mem_width() });
         this.settings.bind("Mem_startAt12Oclock", "Mem_startAt12Oclock");
