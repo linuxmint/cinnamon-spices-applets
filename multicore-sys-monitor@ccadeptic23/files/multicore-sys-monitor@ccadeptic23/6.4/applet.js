@@ -227,7 +227,13 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_tempCorner", "CPU_tempCorner");
         this.settings.bind("CPU_width", "CPU_width", () => { this.adjust_CPU_width() });
         this.settings.bind("CPU_mergeAll", "CPU_mergeAll");
-        this.settings.bind("CPU_ignoreHyperthreading", "CPU_ignoreHyperthreading");
+        this.settings.bind("CPU_ignoreHyperthreading", "CPU_ignoreHyperthreading", (value) => {
+            if (value === false) this.CPU_showLoadOverTime = false;
+        });
+        this.settings.bind("CPU_showLoadOverTime", "CPU_showLoadOverTime", (value) => {
+            if (value === true) this.CPU_ignoreHyperthreading = true;
+        });
+        this.settings.bind("CPU_showLoadOverTimeHowManyBars", "CPU_showLoadOverTimeHowManyBars", () => { this.refreshAll() });
         this.settings.bind("CPU_color0", "CPU_color0");
         this.settings.bind("CPU_color1", "CPU_color1");
         this.settings.bind("CPU_color2", "CPU_color2");
@@ -969,11 +975,21 @@ class MCSM extends Applet.IconApplet {
             let values = cpuString.split(" ");
             if (this.oldCPU_Total_Values.length === 0) { // first execution
                 if (this.CPU_mergeAll) {
-                    data.push(0);
-                    for (let v of values) {
-                        let [total, idle] = v.split(",");
-                        this.oldCPU_Total_Values.push(1 * total);
-                        this.oldCPU_Idle_Values.push(1 * idle);
+                    if (this.CPU_showLoadOverTime) {
+                        for (let i=0; i<this.CPU_showLoadOverTimeHowManyBars; i++) {
+                            data.push(0);
+                            let v = values [0];
+                            let [total, idle] = v.split(",");
+                            this.oldCPU_Total_Values.push(1 * total);
+                            this.oldCPU_Idle_Values.push(1 * idle);
+                        }
+                    } else {
+                        data.push(0);
+                        for (let v of values) {
+                            let [total, idle] = v.split(",");
+                            this.oldCPU_Total_Values.push(1 * total);
+                            this.oldCPU_Idle_Values.push(1 * idle);
+                        }
                     }
                 } else {
                     for (let i=0, len=values.length; i<len; i++) {
@@ -987,19 +1003,38 @@ class MCSM extends Applet.IconApplet {
                 }
             } else { // next executions
                 if (this.CPU_mergeAll) {
-                    let [totalValue, idleValue] = values[0].split(",");
-                    totalValue = 1 * totalValue;
-                    idleValue = 1 * idleValue;
-                    let total = totalValue - this.oldCPU_Total_Values[0];
-                    let idle = idleValue - this.oldCPU_Idle_Values[0];
-                    if (total != 0)
-                        data.push((total - idle) / total);
-                    this.oldCPU_Total_Values[0] = totalValue;
-                    this.oldCPU_Idle_Values[0] = idleValue;
-                    for (let i=1, len=values.length; i < len; i++) {
-                        let [totalValue, idleValue] = values[i].split(",");
-                        this.oldCPU_Total_Values[i] = 1 * totalValue;
-                        this.oldCPU_Idle_Values[i] = 1 * idleValue;
+                    if (this.CPU_showLoadOverTime) {
+                        data = this.multiCpuProvider.getData();
+                        let [totalValue, idleValue] = values[0].split(",");
+                        totalValue = 1 * totalValue;
+                        idleValue = 1 * idleValue;
+                        
+                        data.splice(0, 1);
+                        let total = totalValue - this.oldCPU_Total_Values[0];
+                        let idle = idleValue - this.oldCPU_Idle_Values[0];
+                        if (total != 0)
+                            data.push(2 * (total - idle) / total);
+                        else
+                            data.push(0);
+                        this.oldCPU_Total_Values.splice(0, 1);
+                        this.oldCPU_Total_Values.push(totalValue);
+                        this.oldCPU_Idle_Values.splice(0, 1);
+                        this.oldCPU_Idle_Values.push(idleValue);
+                    } else {
+                        let [totalValue, idleValue] = values[0].split(",");
+                        totalValue = 1 * totalValue;
+                        idleValue = 1 * idleValue;
+                        let total = totalValue - this.oldCPU_Total_Values[0];
+                        let idle = idleValue - this.oldCPU_Idle_Values[0];
+                        if (total != 0)
+                            data.push((total - idle) / total);
+                        this.oldCPU_Total_Values[0] = totalValue;
+                        this.oldCPU_Idle_Values[0] = idleValue;
+                        for (let i=1, len=values.length; i < len; i++) {
+                            let [totalValue, idleValue] = values[i].split(",");
+                            this.oldCPU_Total_Values[i] = 1 * totalValue;
+                            this.oldCPU_Idle_Values[i] = 1 * idleValue;
+                        }
                     }
                 } else {
                     let i = 0;
@@ -1573,7 +1608,10 @@ class MultiCpuDataProvider {
 
     getColorList() {
         var colorList = [];
-        for (let i=0, nb=this.CPUCount; i<nb ; i++) {
+        let nb = this.CPUCount;
+        if (this.applet.CPU_showLoadOverTime === true && this.applet.CPU_mergeAll && this.applet.CPU_ignoreHyperthreading)
+            nb = this.applet.CPU_showLoadOverTimeHowManyBars;
+        for (let i=0; i<nb ; i++) {
             let n = i % 4;
             colorList.push(this.applet[`CPU_color${n}`]);
         }
@@ -1586,8 +1624,9 @@ class MultiCpuDataProvider {
     }
 
     setData(data) {
-        if (this.applet.hyperThreadingIsOn && this.applet.CPU_mergeAll && this.applet.CPU_ignoreHyperthreading && data[0])
+        if (this.applet.hyperThreadingIsOn && this.applet.CPU_mergeAll && this.applet.CPU_ignoreHyperthreading && data[0] && !this.applet.CPU_showLoadOverTime) {
             data[0] = Math.min(2 * data[0], 1);
+        }
         this.currentReadings = data;
     }
 
@@ -1609,17 +1648,25 @@ class MultiCpuDataProvider {
         let percentChar = "%";
         if (this.applet.percentAtEndOfLine)
             percentChar = "%".padStart(9, " ");
-
-        for (let i = 0; i < this.CPUCount; i++) {
-            let percentage = formatNumber(parseInt(100 * this.currentReadings[i]), 0);
+            
+        if (this.applet.CPU_showLoadOverTime) {
+            let percentage = formatNumber(parseInt(100 * this.currentReadings[this.currentReadings.length - 1]), 0);
             var percentage_str = "" + percentage;
             percentage_str = percentage_str.padStart(3);
-            if (this.applet.CPU_mergeAll) {
-                toolTipString += (_('CPU') + ' ').padStart(spaces - lenColon, ' ');
-            } else {
-                toolTipString += (_('Core') + ' ' + i).padStart(spaces - lenColon, ' ');
-            }
+            toolTipString += (_('CPU') + ' ').padStart(spaces - lenColon, ' ');
             toolTipString += colon + '\t' + " " + percentage_str + " " + percentChar + '\n';
+        } else {
+            for (let i = 0; i < this.CPUCount; i++) {
+                let percentage = formatNumber(parseInt(100 * this.currentReadings[i]), 0);
+                var percentage_str = "" + percentage;
+                percentage_str = percentage_str.padStart(3);
+                if (this.applet.CPU_mergeAll) {
+                    toolTipString += (_('CPU') + ' ').padStart(spaces - lenColon, ' ');
+                } else {
+                    toolTipString += (_('Core') + ' ' + i).padStart(spaces - lenColon, ' ');
+                }
+                toolTipString += colon + '\t' + " " + percentage_str + " " + percentChar + '\n';
+            }
         }
         return toolTipString;
     }
