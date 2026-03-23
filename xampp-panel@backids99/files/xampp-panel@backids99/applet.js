@@ -7,7 +7,6 @@ const Lang = imports.lang;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Settings = imports.ui.settings;
-const Main = imports.ui.main;
 const AppletDir = imports.ui.appletManager.appletMeta['xampp-panel@backids99'].path;
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
@@ -17,21 +16,21 @@ function _(str) {
 }
 
 var CommandConstants = {
-  COMMAND_START_LINUX_MANAGER: "./.local/share/cinnamon/applets/xampp-panel@backids99/xamp_manager_wrap.sh",
-  COMMAND_START_XAMPP: "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp start",
-  COMMAND_STOP_XAMPP: "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp stop",
-  COMMAND_RESTART_XAMPP: "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp restart",
-  COMMAND_START_MYSQL: "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp startmysql",
-  COMMAND_STOP_MYSQL: "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp stopmysql",
-  COMMAND_RESTART_MYSQL: "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp restartmysql",
-  COMMAND_PHP_CONFIG_EDIT: "xed admin:///opt/lampp/etc/php.ini",
-  COMMAND_HOSTS_EDIT: "xed admin:///etc/hosts",
-  COMMAND_HTTPD_VHOSTS_CONF_EDIT: "xed admin:///opt/lampp/etc/extra/httpd-vhosts.conf",
-  COMMAND_HTTPD_CONF_EDIT: "xed admin:///opt/lampp/etc/httpd.conf",
-  COMMAND_LAUNCH_PHPMYADMIN: "xdg-open http://localhost/phpmyadmin/",
-  COMMAND_LAUNCH_WEBDIR: "xdg-open http://localhost/",
-  COMMAND_OPEN_WEBDIR: "nemo /opt/lampp/htdocs/",
-}
+  COMMAND_START_LINUX_MANAGER: ["bash", AppletDir + "/xamp_manager_wrap.sh"],
+  COMMAND_START_XAMPP: ["bash", AppletDir + "/server_wrap.sh", "start"],
+  COMMAND_STOP_XAMPP: ["bash", AppletDir + "/server_wrap.sh", "stop"],
+  COMMAND_RESTART_XAMPP: ["bash", AppletDir + "/server_wrap.sh", "restart"],
+  COMMAND_START_MYSQL: ["bash", AppletDir + "/server_wrap.sh", "startmysql"],
+  COMMAND_STOP_MYSQL: ["bash", AppletDir + "/server_wrap.sh", "stopmysql"],
+  COMMAND_RESTART_MYSQL: ["bash", AppletDir + "/server_wrap.sh", "restartmysql"],
+  COMMAND_PHP_CONFIG_EDIT: ["xed", "admin:///opt/lampp/etc/php.ini"],
+  COMMAND_HOSTS_EDIT: ["xed", "admin:///etc/hosts"],
+  COMMAND_HTTPD_VHOSTS_CONF_EDIT: ["xed", "admin:///opt/lampp/etc/extra/httpd-vhosts.conf"],
+  COMMAND_HTTPD_CONF_EDIT: ["xed", "admin:///opt/lampp/etc/httpd.conf"],
+  COMMAND_LAUNCH_PHPMYADMIN: ["xdg-open", "http://localhost/phpmyadmin/"],
+  COMMAND_LAUNCH_WEBDIR: ["xdg-open", "http://localhost/"],
+  COMMAND_OPEN_WEBDIR: ["nemo", "/opt/lampp/htdocs/"],
+};
 
 class MyApplet extends Applet.IconApplet {
   constructor(orientation, panel_height, instance_id) {
@@ -41,7 +40,7 @@ class MyApplet extends Applet.IconApplet {
     this.settings = new Settings.AppletSettings(this, UUID, instance_id);
     this.settings.bindProperty(
       Settings.BindingDirection.IN,
-      "MySQLActions",
+      "mySQLActions",
       "showMySQLActions",
       () => this._showMenu(),
       null
@@ -56,62 +55,56 @@ class MyApplet extends Applet.IconApplet {
   // Clear all menu items then reload when opening
     this.menu.removeAll();
     this.menu.addAction(_("Start XAMPP manager"), () => {
-      Util.spawnCommandLineAsync(CommandConstants.COMMAND_START_LINUX_MANAGER, null, null);
+      Util.spawn(CommandConstants.COMMAND_START_LINUX_MANAGER);
     });
     this.menu.addAction(_("XAMPP Start"), () => {
-      Util.spawnCommandLineAsync(CommandConstants.COMMAND_START_XAMPP, null, null);
+      Util.spawn(CommandConstants.COMMAND_START_XAMPP);
     });
     this.menu.addAction(_("XAMPP Stop"), () => {
-      Util.spawnCommandLineAsync(CommandConstants.COMMAND_STOP_XAMPP, null, null);
+      Util.spawn(CommandConstants.COMMAND_STOP_XAMPP);
     });
     this.menu.addAction(_("XAMPP Restart"), () => {
-      Util.spawnCommandLineAsync(CommandConstants.COMMAND_RESTART_XAMPP, null, null);
+      Util.spawn(CommandConstants.COMMAND_RESTART_XAMPP);
     });
 
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
     // show SQL actions if this setting is enabled
     if (this.showMySQLActions) {
       this.menu.addAction(_("MySQL Start"), () => {
-        Util.spawnCommandLineAsync(CommandConstants.COMMAND_START_MYSQL, () => {
-          Main.notify(_("Xampp Panel Menu"), _("Starting MySQL..."));
-        });
+        Util.spawn(CommandConstants.COMMAND_START_MYSQL);
       });
       this.menu.addAction(_("MySQL Stop"), () => {
-        Util.spawnCommandLineAsync(CommandConstants.COMMAND_STOP_MYSQL, () => {
-          Main.notify(_("Xampp Panel Menu"), _("Stopping MySQL..."));
-        });
+        Util.spawn(CommandConstants.COMMAND_STOP_MYSQL);
       });
       this.menu.addAction(_("MySQL Restart"), () => {
-        Util.spawnCommandLineAsync(CommandConstants.COMMAND_RESTART_MYSQL, () => {
-          Main.notify(_("Xampp Panel Menu"), _("Restarting MySQL..."));
-        });
+        Util.spawn(CommandConstants.COMMAND_RESTART_MYSQL);
       });
       this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
     }
 
     this.menu.addAction(_("Open Web Dir"), () => {
-      Util.spawnCommandLine(CommandConstants.COMMAND_OPEN_WEBDIR);
+      Util.spawn(CommandConstants.COMMAND_OPEN_WEBDIR);
     });
     this.menu.addAction(_("Launch Web Dir"), () => {
-      Util.spawnCommandLine(CommandConstants.COMMAND_LAUNCH_WEBDIR);
+      Util.spawn(CommandConstants.COMMAND_LAUNCH_WEBDIR);
     });
     this.menu.addAction(_("Launch phpMyAdmin"), () => {
-      Util.spawnCommandLine(CommandConstants.COMMAND_LAUNCH_PHPMYADMIN);
+      Util.spawn(CommandConstants.COMMAND_LAUNCH_PHPMYADMIN);
     });
 
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
     this.menu.addAction(_("Edit default php.ini"), () => {
-      Util.spawnCommandLine(CommandConstants.COMMAND_PHP_CONFIG_EDIT);
+      Util.spawn(CommandConstants.COMMAND_PHP_CONFIG_EDIT);
     });
     this.menu.addAction(_("Edit etc/hosts"), () => {
-      Util.spawnCommandLine(CommandConstants.COMMAND_HOSTS_EDIT);
+      Util.spawn(CommandConstants.COMMAND_HOSTS_EDIT);
     });
     this.menu.addAction(_("Edit extra/httpd-vhosts.conf"), () => {
-      Util.spawnCommandLine(CommandConstants.COMMAND_HTTPD_VHOSTS_CONF_EDIT);
+      Util.spawn(CommandConstants.COMMAND_HTTPD_VHOSTS_CONF_EDIT);
     });
     this.menu.addAction(_("Edit httpd.conf"), () => {
-      Util.spawnCommandLine(CommandConstants.COMMAND_HTTPD_CONF_EDIT);
+      Util.spawn(CommandConstants.COMMAND_HTTPD_CONF_EDIT);
     });
   }
   on_applet_clicked() {

@@ -3,7 +3,7 @@
     "type": "section",
     "description": "MySQL shortcuts"
   },
-  "MySQLActions": {
+  "mySQLActions": {
     "type": "switch",
     "default": false,
     "description": "Display MySQL controls"
