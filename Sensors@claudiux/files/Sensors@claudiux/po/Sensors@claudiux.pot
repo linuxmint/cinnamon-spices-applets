@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Sensors@claudiux 5.10.6\n"
+"Project-Id-Version: Sensors@claudiux 5.11.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-04 22:41+0100\n"
+"POT-Creation-Date: 2026-03-22 19:51+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,117 +22,117 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr ""
 
-#. applet.js:586
+#. applet.js:587
 msgid "Suspended"
 msgstr ""
 
-#. applet.js:921 applet.js:963
+#. applet.js:929 applet.js:971
 msgid "high:"
 msgstr ""
 
-#. applet.js:921 applet.js:924 applet.js:963 applet.js:965 applet.js:1006
+#. applet.js:929 applet.js:932 applet.js:971 applet.js:973 applet.js:1014
 msgid "n/a"
 msgstr ""
 
-#. applet.js:924 applet.js:965
+#. applet.js:932 applet.js:973
 msgid "crit:"
 msgstr ""
 
-#. applet.js:1006 applet.js:1050
+#. applet.js:1014 applet.js:1058
 msgid "min:"
 msgstr ""
 
-#. applet.js:1052
+#. applet.js:1060
 msgid "max:"
 msgstr ""
 
-#. applet.js:1081
+#. applet.js:1089
 msgid "No intrusion detected"
 msgstr ""
 
-#. applet.js:1081
+#. applet.js:1089
 msgid "INTRUSION DETECTED!"
 msgstr ""
 
-#. applet.js:1101
+#. applet.js:1109
 msgid "Must be configured!"
 msgstr ""
 
-#. applet.js:1470
+#. applet.js:1511
 msgid "Settings"
 msgstr ""
 
-#. applet.js:1470
+#. applet.js:1511
 msgid ":"
 msgstr ""
 
 #. settings-schema.json->page_General->title
-#. applet.js:1477
+#. applet.js:1518
 msgid "⚙ General"
 msgstr ""
 
-#. applet.js:1494
+#. applet.js:1535
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr ""
 
-#. applet.js:1511
+#. applet.js:1552
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr ""
 
-#. applet.js:1528
+#. applet.js:1569
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr ""
 
-#. applet.js:1545
+#. applet.js:1586
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr ""
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1581
+#. applet.js:1622
 msgid "Run xsensors"
 msgstr ""
 
-#. applet.js:1590
+#. applet.js:1631
 msgid "Suspend Sensors"
 msgstr ""
 
-#. applet.js:1601
+#. applet.js:1642
 msgid "Reload this applet"
 msgstr ""
 
-#. applet.js:1948
+#. applet.js:1998
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
 
-#. lib/checkDependencies.js:369
+#. lib/checkDependencies.js:371
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr ""
 
-#. lib/checkDependencies.js:370
+#. lib/checkDependencies.js:372
 msgid "All dependencies are installed"
 msgstr ""
 
-#. lib/checkDependencies.js:399
+#. lib/checkDependencies.js:401
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 
-#. lib/checkDependencies.js:401
+#. lib/checkDependencies.js:403
 msgid "Please install these packages:"
 msgstr ""
 
-#. lib/checkDependencies.js:405 lib/checkDependencies.js:415
+#. lib/checkDependencies.js:407 lib/checkDependencies.js:417
 msgid "Some dependencies are not installed!"
 msgstr ""
 
-#. lib/checkDependencies.js:417
+#. lib/checkDependencies.js:419
 msgid "Install these packages now"
 msgstr ""
 
@@ -264,6 +264,10 @@ msgstr ""
 
 #. settings-schema.json->section_tempDisks->title
 msgid "Disk temperature sensors"
+msgstr ""
+
+#. settings-schema.json->section_helpColors->title
+msgid "Help to select color"
 msgstr ""
 
 #. settings-schema.json->section_fanSensors->title
@@ -725,6 +729,16 @@ msgstr ""
 msgid "Formula"
 msgstr ""
 
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"Color\n"
+"in panel"
+msgstr ""
+
 #. settings-schema.json->temp_sensors->tooltip
 msgid ""
 "Double-click on a line to change 'Shown name', 'High', 'Critical' or "
@@ -735,6 +749,10 @@ msgid ""
 "  Use $ as the value returned by the sensor.\n"
 "  You can use the 4 operations (+-*/) and parentheses.\n"
 "  Example: $*1.1+0.5"
+msgstr ""
+
+#. settings-schema.json->show_disks_first->description
+msgid "Display the disk temperatures before those of the other sensors"
 msgstr ""
 
 #. settings-schema.json->btn_renew_disks_list->description
@@ -934,6 +952,10 @@ msgstr ""
 
 #. settings-schema.json->update_display->description
 msgid "Update display"
+msgstr ""
+
+#. settings-schema.json->button_color_help->description
+msgid "Open HTML Colors web page"
 msgstr ""
 
 #. settings-schema.json->remove_temperatureATfevimu->description

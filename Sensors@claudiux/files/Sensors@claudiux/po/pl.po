@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux 5.4.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-04 22:41+0100\n"
+"POT-Creation-Date: 2026-03-22 19:51+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Skajmer <skajmer@proton.me>\n"
 "Language-Team: \n"
@@ -23,103 +23,103 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Monitor czujników"
 
-#. applet.js:586
+#. applet.js:587
 msgid "Suspended"
 msgstr "Wstrzymany"
 
-#. applet.js:921 applet.js:963
+#. applet.js:929 applet.js:971
 msgid "high:"
 msgstr "wysoki:"
 
-#. applet.js:921 applet.js:924 applet.js:963 applet.js:965 applet.js:1006
+#. applet.js:929 applet.js:932 applet.js:971 applet.js:973 applet.js:1014
 msgid "n/a"
 msgstr "n/d"
 
-#. applet.js:924 applet.js:965
+#. applet.js:932 applet.js:973
 msgid "crit:"
 msgstr "kryt:"
 
-#. applet.js:1006 applet.js:1050
+#. applet.js:1014 applet.js:1058
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:1052
+#. applet.js:1060
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:1081
+#. applet.js:1089
 msgid "No intrusion detected"
 msgstr "Nie wykryto naruszeń"
 
-#. applet.js:1081
+#. applet.js:1089
 msgid "INTRUSION DETECTED!"
 msgstr "WYKRYTO NARUSZENIE!"
 
-#. applet.js:1101
+#. applet.js:1109
 msgid "Must be configured!"
 msgstr "Musi zostać skonfigurowane!"
 
-#. applet.js:1470
+#. applet.js:1511
 msgid "Settings"
 msgstr "Ustawienia"
 
-#. applet.js:1470
+#. applet.js:1511
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1477
+#. applet.js:1518
 msgid "⚙ General"
 msgstr "⚙ Ogólne"
 
-#. applet.js:1494
+#. applet.js:1535
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Czujniki temperatury"
 
-#. applet.js:1511
+#. applet.js:1552
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Czujniki wentylatorów"
 
-#. applet.js:1528
+#. applet.js:1569
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Czujniki napięcia"
 
-#. applet.js:1545
+#. applet.js:1586
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Czujniki naruszeń"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1581
+#. applet.js:1622
 msgid "Run xsensors"
 msgstr "Uruchom xsensors"
 
-#. applet.js:1590
+#. applet.js:1631
 msgid "Suspend Sensors"
 msgstr "Wstrzymaj czujniki"
 
-#. applet.js:1601
+#. applet.js:1642
 msgid "Reload this applet"
 msgstr "Przeładuj ten aplet"
 
-#. applet.js:1948
+#. applet.js:1998
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Czy na pewno chcesz usunąć '%s'?"
 
-#. lib/checkDependencies.js:369
+#. lib/checkDependencies.js:371
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Aplet %s jest w pełni funkcjonalny."
 
-#. lib/checkDependencies.js:370
+#. lib/checkDependencies.js:372
 msgid "All dependencies are installed"
 msgstr "Wszystkie zależności są zainstalowane"
 
-#. lib/checkDependencies.js:399
+#. lib/checkDependencies.js:401
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -127,15 +127,15 @@ msgstr ""
 "Wygląda na to że brakuje niektórych programów wymaganych do działania "
 "wszystkich funkcji tego apletu."
 
-#. lib/checkDependencies.js:401
+#. lib/checkDependencies.js:403
 msgid "Please install these packages:"
 msgstr "Zainstaluj te pakiety:"
 
-#. lib/checkDependencies.js:405 lib/checkDependencies.js:415
+#. lib/checkDependencies.js:407 lib/checkDependencies.js:417
 msgid "Some dependencies are not installed!"
 msgstr "Niektóre zależności nie są zainstalowane!"
 
-#. lib/checkDependencies.js:417
+#. lib/checkDependencies.js:419
 msgid "Install these packages now"
 msgstr "Zainstaluj te pakiety teraz"
 
@@ -273,6 +273,10 @@ msgstr "Sensory temperatury"
 #. settings-schema.json->section_tempDisks->title
 msgid "Disk temperature sensors"
 msgstr "Sensory temperatury dysku"
+
+#. settings-schema.json->section_helpColors->title
+msgid "Help to select color"
+msgstr ""
 
 #. settings-schema.json->section_fanSensors->title
 msgid "Fan sensors"
@@ -755,6 +759,19 @@ msgstr ""
 msgid "Formula"
 msgstr "Formuła"
 
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
+#, fuzzy
+msgid ""
+"Color\n"
+"in panel"
+msgstr ""
+"Pokaż\n"
+"w panelu"
+
 #. settings-schema.json->temp_sensors->tooltip
 msgid ""
 "Double-click on a line to change 'Shown name', 'High', 'Critical' or "
@@ -774,6 +791,11 @@ msgstr ""
 "  Używaj $ jako wartości zwracanej przez sensor.\n"
 "  Możesz używać 4 operatorów (+-*/) i nawiasów.\n"
 "  Przykład: $*1.1+0.5"
+
+#. settings-schema.json->show_disks_first->description
+#, fuzzy
+msgid "Display the disk temperatures before those of the other sensors"
+msgstr "Wyświetlaj wartości tych wybranych sensorów"
 
 #. settings-schema.json->btn_renew_disks_list->description
 msgid "Renew the list of known disks"
@@ -1020,6 +1042,10 @@ msgstr "Przydatne do zgłoszenia problemu."
 #. settings-schema.json->update_display->description
 msgid "Update display"
 msgstr "Aktualizuj wyświetlanie"
+
+#. settings-schema.json->button_color_help->description
+msgid "Open HTML Colors web page"
+msgstr ""
 
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
