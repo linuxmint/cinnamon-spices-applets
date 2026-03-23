@@ -1,3 +1,6 @@
+### v3.10.0~20260323
+  * Makes the latest version compatible with Cinnamon 5.6 and later!
+
 ### v3.9.1~20260322
   * CPU: adds option Show only the CPU Load Over Time.
   * Also you can set How many bars you want to display.
