@@ -1,3 +1,7 @@
+### v3.10.1~20260324
+  * The user can choose between the htop method (recommended) and the System Monitor method to calculate memory values.
+  * Fixes [#8457](https://github.com/linuxmint/cinnamon-spices-applets/issues/8457)
+
 ### v3.10.0~20260323
   * Makes the latest version compatible with Cinnamon 5.6 and later!
 
