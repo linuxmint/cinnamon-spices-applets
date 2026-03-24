@@ -2,7 +2,6 @@ const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const PopupMenu = imports.ui.popupMenu;
 const Mainloop = imports.mainloop;
-const Lang = imports.lang;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const Clutter = imports.gi.Clutter;
@@ -71,13 +70,13 @@ class OpenHABItemApplet extends Applet.TextIconApplet {
         this._loadSharedConfig();
 
         // Scroll-wheel dimmer control directly on panel
-        this.actor.connect("scroll-event", Lang.bind(this, this._onScrollEvent));
+        this.actor.connect("scroll-event", this._onScrollEvent.bind(this));
 
         // Auto-close popup menu on timeout
-        this.menu.connect("open-state-changed", Lang.bind(this, this._onMenuOpenStateChanged));
+        this.menu.connect("open-state-changed", this._onMenuOpenStateChanged.bind(this));
 
         // Start monitoring shared config for changes from other instances
-        this._serverConfig.startMonitor(Lang.bind(this, this._onSharedConfigChanged));
+        this._serverConfig.startMonitor(this._onSharedConfigChanged.bind(this));
 
         // Start polling
         this._startPolling();
@@ -86,48 +85,50 @@ class OpenHABItemApplet extends Applet.TextIconApplet {
     _bindSettings() {
         this.settings = new Settings.AppletSettings(this, UUID, this.instanceId);
 
-        this.settings.bind("serverUrl", "serverUrl", Lang.bind(this, this._onServerSettingsChanged));
-        this.settings.bind("apiToken", "apiToken", Lang.bind(this, this._onServerSettingsChanged));
-        this.settings.bind("pollInterval", "pollInterval", Lang.bind(this, this._onPollIntervalChanged));
-        this.settings.bind("itemName", "itemName", Lang.bind(this, this._onItemChanged));
-        this.settings.bind("itemLabel", "itemLabel", Lang.bind(this, this._onDisplayChanged));
-        this.settings.bind("additionalItems", "additionalItems", Lang.bind(this, this._onItemChanged));
+        this.settings.bind("serverUrl", "serverUrl", this._onServerSettingsChanged.bind(this));
+        this.settings.bind("apiToken", "apiToken", this._onServerSettingsChanged.bind(this));
+        this.settings.bind("pollInterval", "pollInterval", this._onPollIntervalChanged.bind(this));
+        this.settings.bind("itemName", "itemName", this._onItemChanged.bind(this));
+        this.settings.bind("itemLabel", "itemLabel", this._onDisplayChanged.bind(this));
+        this.settings.bind("additionalItems", "additionalItems", this._onItemChanged.bind(this));
         this.settings.bind("scrollDimmerItem", "scrollDimmerItem");
         this.settings.bind("scrollDimmerStep", "scrollDimmerStep");
-        this.settings.bind("showIcon", "optShowIcon", Lang.bind(this, this._onDisplayChanged));
-        this.settings.bind("customIcon", "customIcon", Lang.bind(this, this._onDisplayChanged));
-        this.settings.bind("showLabel", "optShowLabel", Lang.bind(this, this._onDisplayChanged));
-        this.settings.bind("showState", "optShowState", Lang.bind(this, this._onDisplayChanged));
-        this.settings.bind("panelTextFormat", "panelTextFormat", Lang.bind(this, this._onDisplayChanged));
-        this.settings.bind("readOnly", "readOnly", Lang.bind(this, this._onDisplayChanged));
+        this.settings.bind("showIcon", "optShowIcon", this._onDisplayChanged.bind(this));
+        this.settings.bind("customIcon", "customIcon", this._onDisplayChanged.bind(this));
+        this.settings.bind("showLabel", "optShowLabel", this._onDisplayChanged.bind(this));
+        this.settings.bind("showState", "optShowState", this._onDisplayChanged.bind(this));
+        this.settings.bind("panelTextFormat", "panelTextFormat", this._onDisplayChanged.bind(this));
+        this.settings.bind("readOnly", "readOnly", this._onDisplayChanged.bind(this));
         this.settings.bind("doubleClickToggle", "doubleClickToggle");
-        this.settings.bind("dimmerShowToggle", "dimmerShowToggle", Lang.bind(this, this._onDisplayChanged));
-        this.settings.bind("colorShowPercent", "colorShowPercent", Lang.bind(this, this._onDisplayChanged));
-        this.settings.bind("colorPreviewWidth", "colorPreviewWidth", Lang.bind(this, this._onDisplayChanged));
-        this.settings.bind("colorPreviewHeight", "colorPreviewHeight", Lang.bind(this, this._onDisplayChanged));
+        this.settings.bind("dimmerShowToggle", "dimmerShowToggle", this._onDisplayChanged.bind(this));
+        this.settings.bind("colorShowPercent", "colorShowPercent", this._onDisplayChanged.bind(this));
+        this.settings.bind("colorPreviewWidth", "colorPreviewWidth", this._onDisplayChanged.bind(this));
+        this.settings.bind("colorPreviewHeight", "colorPreviewHeight", this._onDisplayChanged.bind(this));
         this.settings.bind("popupAutoClose", "popupAutoClose");
         this.settings.bind("popupAutoCloseDelay", "popupAutoCloseDelay");
-        this.settings.bind("tooltipShowLabel", "tooltipShowLabel", Lang.bind(this, this._onDisplayChanged));
-        this.settings.bind("tooltipShowType", "tooltipShowType", Lang.bind(this, this._onDisplayChanged));
-        this.settings.bind("tooltipShowState", "tooltipShowState", Lang.bind(this, this._onDisplayChanged));
-        this.settings.bind("tooltipShowName", "tooltipShowName", Lang.bind(this, this._onDisplayChanged));
-        this.settings.bind("tooltipShowServer", "tooltipShowServer", Lang.bind(this, this._onDisplayChanged));
+        this.settings.bind("tooltipShowLabel", "tooltipShowLabel", this._onDisplayChanged.bind(this));
+        this.settings.bind("tooltipShowType", "tooltipShowType", this._onDisplayChanged.bind(this));
+        this.settings.bind("tooltipShowState", "tooltipShowState", this._onDisplayChanged.bind(this));
+        this.settings.bind("tooltipShowName", "tooltipShowName", this._onDisplayChanged.bind(this));
+        this.settings.bind("tooltipShowServer", "tooltipShowServer", this._onDisplayChanged.bind(this));
     }
 
     _loadSharedConfig() {
-        let shared = this._serverConfig.read();
-        if (shared) {
-            // If our settings are at default/empty and shared config has values, use shared
-            if (shared.serverUrl && !this.serverUrl) {
-                this.serverUrl = shared.serverUrl;
+        this._serverConfig.read((shared) => {
+            if (this._isDestroyed) return;
+            if (shared) {
+                // If our settings are at default/empty and shared config has values, use shared
+                if (shared.serverUrl && !this.serverUrl) {
+                    this.serverUrl = shared.serverUrl;
+                }
+                if (shared.apiToken && !this.apiToken) {
+                    this.apiToken = shared.apiToken;
+                }
+                if (shared.pollInterval && this.pollInterval === 30) {
+                    this.pollInterval = shared.pollInterval;
+                }
             }
-            if (shared.apiToken && !this.apiToken) {
-                this.apiToken = shared.apiToken;
-            }
-            if (shared.pollInterval && this.pollInterval === 30) {
-                this.pollInterval = shared.pollInterval;
-            }
-        }
+        });
     }
 
     _onSharedConfigChanged(config) {
@@ -197,11 +198,11 @@ class OpenHABItemApplet extends Applet.TextIconApplet {
         // Set up periodic polling
         this._pollTimerId = Mainloop.timeout_add_seconds(
             this.pollInterval,
-            Lang.bind(this, function() {
+            () => {
                 if (this._isDestroyed) return GLib.SOURCE_REMOVE;
                 this._fetchItem();
                 return GLib.SOURCE_CONTINUE;
-            })
+            }
         );
     }
 
@@ -234,7 +235,7 @@ class OpenHABItemApplet extends Applet.TextIconApplet {
         this._http.get(
             url,
             this.apiToken,
-            Lang.bind(this, function(responseText) {
+            (responseText) => {
                 try {
                     let data = JSON.parse(responseText);
                     this._itemData = data;
@@ -247,8 +248,8 @@ class OpenHABItemApplet extends Applet.TextIconApplet {
                     this._showStatus("error", "Invalid response from server");
                     global.logError("OpenHAB: Failed to parse response: " + e.message);
                 }
-            }),
-            Lang.bind(this, function(errorMsg, status) {
+            },
+            (errorMsg, status) => {
                 if (status === 404) {
                     this._showStatus("error", "Item '" + this.itemName + "' not found");
                 } else if (status === 401 || status === 403) {
@@ -257,7 +258,7 @@ class OpenHABItemApplet extends Applet.TextIconApplet {
                     this._showStatus("offline", "Cannot reach server: " + errorMsg);
                 }
                 global.logError("OpenHAB: Fetch error for " + this.itemName + ": " + errorMsg);
-            })
+            }
         );
 
         // Fetch additional items
@@ -273,7 +274,7 @@ class OpenHABItemApplet extends Applet.TextIconApplet {
         this._http.get(
             url,
             this.apiToken,
-            Lang.bind(this, function(responseText) {
+            (responseText) => {
                 try {
                     let data = JSON.parse(responseText);
                     this._additionalItemData[name] = data;
@@ -283,10 +284,10 @@ class OpenHABItemApplet extends Applet.TextIconApplet {
                 } catch (e) {
                     global.logError("OpenHAB: Failed to parse additional item " + name + ": " + e.message);
                 }
-            }),
-            Lang.bind(this, function(errorMsg) {
+            },
+            (errorMsg) => {
                 global.logError("OpenHAB: Fetch error for additional item " + name + ": " + errorMsg);
-            })
+            }
         );
     }
 
@@ -300,18 +301,18 @@ class OpenHABItemApplet extends Applet.TextIconApplet {
             url,
             command,
             this.apiToken,
-            Lang.bind(this, function(responseText, status) {
+            (responseText, status) => {
                 // Refresh after a short delay to let OpenHAB process the command
                 if (!this._isDestroyed) {
-                    Mainloop.timeout_add(500, Lang.bind(this, function() {
+                    Mainloop.timeout_add(500, () => {
                         this._fetchItem();
                         return GLib.SOURCE_REMOVE;
-                    }));
+                    });
                 }
-            }),
-            Lang.bind(this, function(errorMsg, status) {
+            },
+            (errorMsg, status) => {
                 global.logError("OpenHAB: Command error for " + this.itemName + ": " + errorMsg);
-            })
+            }
         );
     }
 
@@ -447,13 +448,13 @@ class OpenHABItemApplet extends Applet.TextIconApplet {
         if (!this.popupAutoClose) return;
 
         let delay = this.popupAutoCloseDelay || 10;
-        this._menuAutoCloseTimer = Mainloop.timeout_add_seconds(delay, Lang.bind(this, function() {
+        this._menuAutoCloseTimer = Mainloop.timeout_add_seconds(delay, () => {
             this._menuAutoCloseTimer = null;
             if (this.menu.isOpen) {
                 this.menu.close(true);
             }
             return GLib.SOURCE_REMOVE;
-        }));
+        });
     }
 
     _stopAutoCloseTimer() {
@@ -476,7 +477,7 @@ class OpenHABItemApplet extends Applet.TextIconApplet {
         if (this._itemData) {
             let menuItems = ItemRenderers.buildMenuItems(
                 this._itemData,
-                Lang.bind(this, this._sendCommand),
+                this._sendCommand.bind(this),
                 menuOpts
             );
             for (let item of menuItems) {
@@ -490,9 +491,9 @@ class OpenHABItemApplet extends Applet.TextIconApplet {
             let data = this._additionalItemData[name];
             if (data) {
                 this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-                let sendCmd = Lang.bind(this, function(cmd) {
-                    this._sendCommandToItem(name, cmd);
-                });
+                let sendCmd = ((itemName) => (cmd) => {
+                    this._sendCommandToItem(itemName, cmd);
+                })(name);
                 let menuItems = ItemRenderers.buildMenuItems(data, sendCmd, menuOpts);
                 for (let item of menuItems) {
                     this.menu.addMenuItem(item);
@@ -510,9 +511,9 @@ class OpenHABItemApplet extends Applet.TextIconApplet {
             "view-refresh-symbolic",
             St.IconType.SYMBOLIC
         );
-        refreshItem.connect("activate", Lang.bind(this, function() {
+        refreshItem.connect("activate", () => {
             this._fetchItem();
-        }));
+        });
         this.menu.addMenuItem(refreshItem);
 
         // Configure button
@@ -521,9 +522,9 @@ class OpenHABItemApplet extends Applet.TextIconApplet {
             "preferences-system-symbolic",
             St.IconType.SYMBOLIC
         );
-        configItem.connect("activate", Lang.bind(this, function() {
+        configItem.connect("activate", () => {
             this.configureApplet();
-        }));
+        });
         this.menu.addMenuItem(configItem);
     }
 
@@ -558,12 +559,12 @@ class OpenHABItemApplet extends Applet.TextIconApplet {
 
         this._lastClickTime = now;
 
-        this._clickTimer = Mainloop.timeout_add(doubleClickThreshold, Lang.bind(this, function() {
+        this._clickTimer = Mainloop.timeout_add(doubleClickThreshold, () => {
             this._clickTimer = null;
             this._updateMenu();
             this.menu.toggle();
             return GLib.SOURCE_REMOVE;
-        }));
+        });
     }
 
     _onScrollEvent(actor, event) {

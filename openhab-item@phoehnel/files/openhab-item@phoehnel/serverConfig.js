@@ -16,21 +16,23 @@ var ServerConfig = class ServerConfig {
         this._changeCallbacks = [];
     }
 
-    read() {
-        try {
-            let file = Gio.File.new_for_path(this._configPath);
-            if (!file.query_exists(null)) {
-                return null;
+    read(callback) {
+        let file = Gio.File.new_for_path(this._configPath);
+        file.load_contents_async(null, (source, result) => {
+            try {
+                let [ok, contents] = source.load_contents_finish(result);
+                if (ok) {
+                    let text = imports.byteArray.toString(contents);
+                    callback(JSON.parse(text));
+                    return;
+                }
+            } catch (e) {
+                if (!e.matches || !e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                    global.logError("OpenHAB: Failed to read server config: " + e.message);
+                }
             }
-            let [ok, contents] = GLib.file_get_contents(this._configPath);
-            if (ok) {
-                let text = imports.byteArray.toString(contents);
-                return JSON.parse(text);
-            }
-        } catch (e) {
-            global.logError("OpenHAB: Failed to read server config: " + e.message);
-        }
-        return null;
+            callback(null);
+        });
     }
 
     write(config) {
@@ -53,28 +55,32 @@ var ServerConfig = class ServerConfig {
         }
 
         try {
-            // Ensure the config directory and file exist so we can monitor
+            // Ensure the config directory exists
             GLib.mkdir_with_parents(this._configDir, 0o755);
             let file = Gio.File.new_for_path(this._configPath);
-            if (!file.query_exists(null)) {
-                // Create empty config so the file exists for monitoring
-                this.write({ serverUrl: "", apiToken: "", pollInterval: 30 });
-            }
+
+            // Create default config if file doesn't exist yet
+            this.read((config) => {
+                if (!config) {
+                    this.write({ serverUrl: "", apiToken: "", pollInterval: 30 });
+                }
+            });
 
             this._monitor = file.monitor_file(Gio.FileMonitorFlags.NONE, null);
-            this._monitor.connect("changed", (monitor, file, otherFile, eventType) => {
+            this._monitor.connect("changed", (monitor, changedFile, otherFile, eventType) => {
                 if (eventType === Gio.FileMonitorEvent.CHANGES_DONE_HINT ||
                     eventType === Gio.FileMonitorEvent.CHANGED) {
-                    let config = this.read();
-                    if (config) {
-                        for (let cb of this._changeCallbacks) {
-                            try {
-                                cb(config);
-                            } catch (e) {
-                                global.logError("OpenHAB: Config change callback error: " + e.message);
+                    this.read((config) => {
+                        if (config) {
+                            for (let cb of this._changeCallbacks) {
+                                try {
+                                    cb(config);
+                                } catch (e) {
+                                    global.logError("OpenHAB: Config change callback error: " + e.message);
+                                }
                             }
                         }
-                    }
+                    });
                 }
             });
         } catch (e) {
