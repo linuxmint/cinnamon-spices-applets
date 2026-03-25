@@ -49,8 +49,40 @@ function SessionManager(initCallback, cancellable) {
     return new SessionManagerProxy(Gio.DBus.session, 'org.gnome.SessionManager', '/org/gnome/SessionManager', initCallback, cancellable);
 }
 
+const versionCompare = (left, right) => {
+    if (typeof left + typeof right != "stringstring")
+        return false;
+    
+    let a = left.split(".");
+    let b = right.split(".");
+    let len = Math.min(a.length, b.length);
+    
+    for (let i = 0; i < len; i++) {
+        let l = parseInt(a[i], 10);
+        let r = parseInt(b[i], 10);
+        if (isNaN(l) || isNaN(r))
+            return false;
+        if (l > r) {
+            return 1;
+        } else if (l < r) {
+            return -1;
+        }
+    }
+    
+    return 0;
+};
+
+const Cin_6dot6_or_more = versionCompare(GLib.getenv('CINNAMON_VERSION'), "6.6") >= 0;
+
 const POWER_SCHEMA = "org.cinnamon.settings-daemon.plugins.power";
-const SLEEP_DISPLAY_AC_KEY = "sleep-display-ac";
+var POWER_SCHEMA2 = "org.cinnamon.settings-daemon.plugins.power";
+if (Cin_6dot6_or_more)
+    POWER_SCHEMA2 = "org.cinnamon.desktop.session";
+
+var SLEEP_DISPLAY_AC_KEY = "sleep-display-ac";
+if (versionCompare(GLib.getenv('CINNAMON_VERSION'), "6.6") >= 0)
+    SLEEP_DISPLAY_AC_KEY = "idle-delay";
+
 const SLEEP_INACTIVE_AC_TIMEOUT_KEY = "sleep-inactive-ac-timeout";
 
 const SCREENSAVER_COMMAND = GLib.find_program_in_path("cinnamon-screensaver-command");
@@ -64,6 +96,7 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
         this.icon_path_off = false;
 
         this.power_settings = new Gio.Settings({ schema_id: POWER_SCHEMA });
+        this.power_settings2 = new Gio.Settings({ schema_id: POWER_SCHEMA2 });
 
         try {
             this.settings = new Settings.AppletSettings(this, this.uuid, instance_id);
@@ -332,11 +365,17 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
     }
 
     get sleep_display_ac() {
-        return this.power_settings.get_int(SLEEP_DISPLAY_AC_KEY);
+        if (Cin_6dot6_or_more)
+            return this.power_settings2.get_uint(SLEEP_DISPLAY_AC_KEY);
+        else
+            return this.power_settings.get_int(SLEEP_DISPLAY_AC_KEY);
     }
 
     set sleep_display_ac(value) {
-        this.power_settings.set_int(SLEEP_DISPLAY_AC_KEY, value);
+        if (Cin_6dot6_or_more)
+            this.power_settings2.set_uint(SLEEP_DISPLAY_AC_KEY, Math.abs(value));
+        else
+            this.power_settings.set_int(SLEEP_DISPLAY_AC_KEY, value);
     }
 
     get sleep_inactive_ac_timeout() {
