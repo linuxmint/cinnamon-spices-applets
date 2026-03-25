@@ -341,6 +341,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         });
 
         this.settings.bind("keepAppListOpen", "keepAppListOpen");
+        this.settings.bind("appsNotToDisplay", "appsNotToDisplay", () => {
+            this._on_reload_this_applet_pressed();
+        });
         this.settings.bind("keepOutputListOpen", "keepOutputListOpen");
         this.settings.bind("keepInputListOpen", "keepInputListOpen");
         this.settings.bind("keepCommandListOpen", "keepCommandListOpen");
@@ -891,6 +894,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (this.context_menu_item_showDesklet != null)
             this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
         if (this._outputApplicationsMenu != null && this._outputApplicationsMenu.menu != null) {
+            if (this._outputApplicationsMenu.menu.numMenuItems === 0)
+                this._outputApplicationsMenu.actor.hide();
+            else
+                this._outputApplicationsMenu.actor.show();
             if (this.keepAppListOpen)
                 this._outputApplicationsMenu.menu.open();
             else
@@ -2417,14 +2424,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._outputVolumeSection = new VolumeSlider(this, null, _("Volume"), null);
         this._outputVolumeSection.connect("values-changed", (...args) => this._outputValuesChanged(...args));
         
-        
-        //~ if (this._outputApplicationsMenu) {
-            global.log("ADDING this._outputApplicationsMenu")
-            this._appVolumeSection.addMenuItem(this._outputApplicationsMenu);
-            this._appVolumeSection.actor.show();
-            this._outputApplicationsMenu.actor.show();
-            this._outputApplicationsMenu.menu.open();
-        //~ }
+        // Applications, output and input volume sections:
+        this._appVolumeSection.addMenuItem(this._outputApplicationsMenu);
+        this._appVolumeSection.actor.show();
+        this._outputApplicationsMenu.actor.show();
+        this._outputApplicationsMenu.menu.open();
         this.menu.addMenuItem(this._appVolumeSection);
         
         this.menu.addMenuItem(this._outputVolumeSection);
@@ -2807,8 +2811,28 @@ class Sound150Applet extends Applet.TextIconApplet {
     _onStreamAdded(control, id) {
         let stream = this._control.lookup_stream_id(id);
         let appId = stream.application_id;
+        let name = stream.name;
+        
+        var unwanted = [];
+        for (let u of this.appsNotToDisplay) {
+            if (u["appMenu"] === true && u["partOfName"].length > 0)
+                unwanted.push(u["partOfName"].toLowerCase());
+        }
+        
+        var isUnwanted = false;
+        for (let n of unwanted) {
+            if (name && name.toLowerCase().includes(n)) {
+                isUnwanted = true;
+                break
+            }
+        }
+        global.log("name: " + name);
+        global.log("isUnwanted: " + isUnwanted);
 
-        if (stream.is_virtual || appId === "org.freedesktop.libcanberra") {
+        if (stream.is_virtual || 
+            appId === "org.freedesktop.libcanberra" ||
+            isUnwanted
+        ) {
             // sort out unwanted streams
             return;
         }
@@ -2850,6 +2874,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 // hide submenus or sections if showing them is unnecessary
                 if (stream.type === "SinkInput") {
                     if (this._outputApplicationsMenu.menu.numMenuItems === 0) {
+                        this._outputApplicationsMenu.menu.close();
                         this._outputApplicationsMenu.actor.hide();
                         this._appVolumeSection.actor.hide();
                     }
@@ -2888,6 +2913,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (stream.type === "SinkInput") {
                 if (this._outputApplicationsMenu.menu.numMenuItems === 0) {
                     this._appVolumeSection.actor.hide();
+                    this._outputApplicationsMenu.menu.close();
                     this._outputApplicationsMenu.actor.hide();
                 }
             } else if (stream.type === "SourceOutput") {

@@ -1,3 +1,7 @@
+### v16.2.0~20260325
+  * Adds option "Apps Not to Display" in the Menu section of the General tab.
+  * Fixes [#8295](https://github.com/linuxmint/cinnamon-spices-applets/issues/8295)
+
 ### v16.1.2~20260320
   * Minor bug fixed.
 
