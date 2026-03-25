@@ -60,9 +60,9 @@ This applet also requires *imagemagick*. If this package is not installed, the u
 
 ## FAQ
 
-### How to resize the menu?
+### How do I resize the menu which is not displaying correctly?? 
 
-  * Resize the menu by grabbing its edges with the mouse.
+  * Resize the menu by grabbing its edges with the mouse. Try dragging the left or right edge of this applet's menu and pulling it to the side, just as you would enlarge a window.
 
 ### Keyboard shortcuts are not respecting volume step
 

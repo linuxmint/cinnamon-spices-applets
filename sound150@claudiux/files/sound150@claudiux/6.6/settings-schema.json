@@ -69,8 +69,10 @@
         "showMediaOptical",
         "viewFullAlbumArt",
         "shortenArtistTitle",
+        "doNotUsePlayerctld",
         "keepAppListOpen",
-        "doNotUsePlayerctld"
+        "appsNotToDisplayLabel",
+        "appsNotToDisplay"
       ]
     },
     "sectionMenu2": {
@@ -323,6 +325,31 @@
     "type": "switch",
     "default": false,
     "description": "Keep the App Volume Control open"
+  },
+  "appsNotToDisplayLabel": {
+     "type": "label",
+    "description": "Apps Not to Display:"
+  },
+  "appsNotToDisplay": {
+    "type": "list",
+    "default": [],
+    "description": "Apps Not to Display",
+    "columns": [
+      {
+        "id": "appMenu",
+        "title": "in\nApplications\nsubmenu",
+        "type": "boolean",
+        "align": 0.5,
+        "default": true
+      },
+      {
+        "id": "partOfName",
+        "title": "Part of the app name",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      }
+    ]
   },
   "keepOutputListOpen": {
     "type": "switch",
