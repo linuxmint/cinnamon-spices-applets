@@ -247,6 +247,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Swap_enabled", "Swap_enabled");
         this.settings.bind("Mem_chartType", "Mem_chartType");
         this.settings.bind("Mem_squared", "Mem_squared");
+        this.settings.bind("Mem_method", "Mem_method");
         this.settings.bind("Mem_width", "Mem_width", () => { this.adjust_Mem_width() });
         this.settings.bind("Mem_startAt12Oclock", "Mem_startAt12Oclock");
         this.settings.bind("Mem_showBytesInTooltip", "Mem_showBytesInTooltip");
@@ -579,7 +580,7 @@ class MCSM extends Applet.IconApplet {
             let children = this._applet_context_menu._getMenuItems();
             children[0].destroy();
         }
-        this.restart_menu_item = new Applet.MenuItem(_('Refresh All'), Gtk.STOCK_REFRESH, () => {
+        this.restart_menu_item = new Applet.MenuItem(_('Refresh All'), "view-refresh", () => {
             this.refreshAll()
         });
         this._applet_context_menu.addMenuItem(this.restart_menu_item, 0);
@@ -589,13 +590,13 @@ class MCSM extends Applet.IconApplet {
             children[1].destroy();
         }
         if (!this.without_any_graph) {
-            this.wo_graphs_item = new Applet.MenuItem(_('Without any graphics'), Gtk.STOCK_REMOVE, () => {
+            this.wo_graphs_item = new Applet.MenuItem(_('Without any graphics'), "list-remove", () => {
                 GLib.file_set_contents(this.metadata.path+"/WOGRAPH", "");
                 this.refreshAll()
             });
             this._applet_context_menu.addMenuItem(this.wo_graphs_item, 1);
         } else {
-            this.w_graphs_item = new Applet.MenuItem(_('With graphics'), Gtk.STOCK_REMOVE, () => {
+            this.w_graphs_item = new Applet.MenuItem(_('With graphics'), "list-remove", () => {
                 let file = Gio.file_new_for_path(this.metadata.path+"/WOGRAPH");
                 file.delete(null);
                 this.refreshAll()
@@ -1434,13 +1435,26 @@ class MemDataProvider {
 
     setData(total, used, memInfo) {
         const precision = 100000;
-        this.memTotal = memInfo["MemTotal"];
-        this.currentReadings = [
-            (memInfo["MemUsed"] - memInfo["Cached"] - memInfo["Buffers"]) / memInfo["MemTotal"],
-            memInfo["Cached"] / memInfo["MemTotal"],
-            memInfo["Buffers"] / memInfo["MemTotal"],
-            1 - memInfo["MemUsed"] / memInfo["MemTotal"]
-        ]
+        this.memTotal = 1 * memInfo["MemTotal"];
+        if (this.applet.Mem_method === "htop") { // htop:
+            this.currentReadings = [
+                (memInfo["MemUsed"] - memInfo["Cached"] - memInfo["Buffers"]) / memInfo["MemTotal"],
+                memInfo["Cached"] / memInfo["MemTotal"],
+                memInfo["Buffers"] / memInfo["MemTotal"],
+                1 - memInfo["MemUsed"] / memInfo["MemTotal"]
+            ]
+        } else { // System Monitor: https://github.com/JTourteau/gnome-system-monitor/blob/main/extension.js
+            let memAvailable = 1 * memInfo["MemAvailable"];
+            let memUsed = 1 * this.memTotal - memAvailable;
+            let memBuffers = 1 * memInfo["Buffers"];
+            let memCached = 1 * memInfo["Cached"];
+            this.currentReadings = [
+                memUsed / this.memTotal,
+                memCached / this.memTotal,
+                memBuffers / this.memTotal,
+                1.0 - ((memUsed + memBuffers + memCached) / this.memTotal)
+            ]
+        }
     }
 
     getTooltipString() {
@@ -1553,6 +1567,7 @@ class SwapDataProvider {
     }
 
     setData(total, value) {
+        if (isNaN(value)) value = 0;
         this.swapTotal = total;
         this.swapusage = parseInt(total) !== 0;
         if (TESTING)
