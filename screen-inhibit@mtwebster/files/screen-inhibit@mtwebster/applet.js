@@ -72,15 +72,15 @@ const versionCompare = (left, right) => {
     return 0;
 };
 
-const Cin_6dot6_or_more = versionCompare(GLib.getenv('CINNAMON_VERSION'), "6.6") >= 0;
+const Cin_6dot4_or_more = versionCompare(GLib.getenv('CINNAMON_VERSION'), "6.4") >= 0;
 
 const POWER_SCHEMA = "org.cinnamon.settings-daemon.plugins.power";
 var POWER_SCHEMA2 = "org.cinnamon.settings-daemon.plugins.power";
-if (Cin_6dot6_or_more)
+if (Cin_6dot4_or_more)
     POWER_SCHEMA2 = "org.cinnamon.desktop.session";
 
 var SLEEP_DISPLAY_AC_KEY = "sleep-display-ac";
-if (versionCompare(GLib.getenv('CINNAMON_VERSION'), "6.6") >= 0)
+if (Cin_6dot4_or_more >= 0)
     SLEEP_DISPLAY_AC_KEY = "idle-delay";
 
 const SLEEP_INACTIVE_AC_TIMEOUT_KEY = "sleep-inactive-ac-timeout";
@@ -142,8 +142,9 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             this.icon_path_off = false;
             this.locktype = "normal";
             this.lockinterval = 5;
-            this.old_sleep_display_ac = 0;
-            this.old_sleep_inactive_ac_timeout = 0;
+            //~ this.old_sleep_display_ac = 0;
+            this.old_sleep_display_ac = this.sleep_display_ac;
+            this.old_sleep_inactive_ac_timeout = this.sleep_inactive_ac_timeout;
         }
 
         try {
@@ -267,6 +268,10 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             this.set_applet_tooltip(ALLOW_TT);
             this.inhibited = false;
         } else {
+			if (this.sleep_display_ac != 0)
+				this.old_sleep_display_ac = this.sleep_display_ac;
+			if (this.sleep_inactive_ac_timeout != 0)
+				this.old_sleep_inactive_ac_timeout = this.sleep_inactive_ac_timeout;
             this.sleep_display_ac = 0;
             this.sleep_inactive_ac_timeout = 0;
             try {
@@ -345,7 +350,7 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
                         this.on_applet_clicked();
                     clearTimeout(id);
                 }
-            }, (this.seconds_after_startup === 0) ? 300 : this.seconds_after_startup*1000);
+            }, (this.seconds_after_startup === 0) ? 300 : 1000 * this.seconds_after_startup);
         }
     }
 
@@ -365,14 +370,14 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
     }
 
     get sleep_display_ac() {
-        if (Cin_6dot6_or_more)
+        if (Cin_6dot4_or_more)
             return this.power_settings2.get_uint(SLEEP_DISPLAY_AC_KEY);
         else
             return this.power_settings.get_int(SLEEP_DISPLAY_AC_KEY);
     }
 
     set sleep_display_ac(value) {
-        if (Cin_6dot6_or_more)
+        if (Cin_6dot4_or_more)
             this.power_settings2.set_uint(SLEEP_DISPLAY_AC_KEY, Math.abs(value));
         else
             this.power_settings.set_int(SLEEP_DISPLAY_AC_KEY, value);
@@ -383,7 +388,7 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
     }
 
     set sleep_inactive_ac_timeout(value) {
-        this.power_settings.set_int(SLEEP_INACTIVE_AC_TIMEOUT_KEY, value);
+        this.power_settings.set_int(SLEEP_INACTIVE_AC_TIMEOUT_KEY, Math.abs(value));
     }
 };
 
