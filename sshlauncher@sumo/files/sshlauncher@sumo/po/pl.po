@@ -97,6 +97,14 @@ msgstr ""
 "Zwykle powinno kończyć się opcją -e, tak aby uruchomić polecenie ssh. "
 "Sprawdź szczegóły w pomocy wybranego terminala."
 
+#. settings-schema.json->showConnectionNotification->description
+msgid "Show notification when launching SSH connection"
+msgstr "Pokazuj powiadomienie przy uruchamianiu połączenia SSH"
+
+#. settings-schema.json->showConnectionNotification->tooltip
+msgid "Display a notification message when SSH terminal is launched"
+msgstr "Wyświetlaj komunikat po uruchomieniu terminala SSH"
+
 #. metadata.json->description
 msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
 msgstr "Aplet do nawiązywania połączeń SSH skonfigurowanych w ~/.ssh/config"

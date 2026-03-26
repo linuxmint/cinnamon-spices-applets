@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-19 14:22+0800\n"
-"PO-Revision-Date: 2021-03-30 22:28+0200\n"
+"PO-Revision-Date: 2025-08-06 23:12+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. mylauncher@markbokil.com->metadata.json->name
 #: applet.js:64
@@ -24,7 +24,7 @@ msgstr "Saját indító"
 
 #: applet.js:183
 msgid "Edit launcher menu"
-msgstr "Indító menu szerkesztése"
+msgstr "Indítómenü szerkesztése"
 
 #: applet.js:190 mylauncher.properties:46
 msgid "Help"
@@ -140,7 +140,7 @@ msgstr "Böngésző"
 
 #: mylauncher.properties:41
 msgid "Run..."
-msgstr "Futtatás..."
+msgstr "Futtatás…"
 
 #: mylauncher.properties:42
 msgid "Toggle Desktop"

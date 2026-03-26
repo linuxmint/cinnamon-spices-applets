@@ -8,15 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-08 12:52+0100\n"
-"PO-Revision-Date: 2019-01-21 13:50+0100\n"
+"PO-Revision-Date: 2024-04-21 17:33+0200\n"
+"Last-Translator: qadzek\n"
 "Language-Team: \n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
-"Last-Translator: Jurien <Jurien@protonmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: nl_NL\n"
 
 #: applet.js:32
 msgid "Click here to restart Cinnamon"
@@ -42,3 +41,11 @@ msgstr "bimsebasse: symbolisch pictogram toegevoegd"
 #. restart-cinnamon@kolle->metadata.json->name
 msgid "Restart Cinnamon"
 msgstr "Herstart Cinnamon"
+
+#. metadata.json->contributors
+msgid "claudiux: OSD option"
+msgstr "claudiux: OSD optie"
+
+#. settings-schema.json->show-osd->description
+msgid "Show OSD"
+msgstr "OSD tonen"

@@ -1,16 +1,21 @@
-import { Logger } from "../../lib/logger";
+import { Logger } from "../../lib/services/logger";
 import { getTimes } from "suncalc";
-import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime, ImmediatePrecipitation } from "../../types";
+import type { WeatherData, HourlyForecastData, ForecastData, Condition, ImmediatePrecipitation } from "../../weather-data";
+import { type LocationData, type correctGetTimes, type SunTime, type WeatherProvider, ProviderErrorCode } from "../../types";
 import { CelsiusToKelvin, IsNight, OnSameDay, _ } from "../../utils";
 import { DateTime } from "luxon";
-import { BaseProvider } from "../BaseProvider";
-import { Conditions, conditionSeverity, TimeOfDay } from "./types/common";
-import { IsCovered, MetNorwayNowcastPayload } from "./types/nowcast";
-import { MetNorwayForecastData, MetNorwayForecastPayload } from "./types/forecast";
+import type { Conditions, TimeOfDay } from "./types/common";
+import { conditionSeverity } from "./types/common";
+import type { MetNorwayNowcastPayload } from "./types/nowcast";
+import { IsCovered } from "./types/nowcast";
+import type { MetNorwayForecastData, MetNorwayForecastPayload } from "./types/forecast";
+import { HttpLib } from "../../lib/httpLib";
+import { Services, type Config } from "../../config";
+import { GetMETNorwayAlerts } from "./alert";
 
-export class MetNorway extends BaseProvider {
+export class MetNorway implements WeatherProvider<Services.MetNorway> {
 	public readonly prettyName = _("MET Norway");
-	public readonly name = "MetNorway";
+	public readonly name = Services.MetNorway;
 	public readonly maxForecastSupport = 10;
 	public readonly website = "https://www.met.no/en";
 	public readonly maxHourlyForecastSupport = 48;
@@ -18,13 +23,23 @@ export class MetNorway extends BaseProvider {
 	public readonly remainingCalls: number | null = null;
 	public readonly supportHourlyPrecipChance = false;
 	public readonly supportHourlyPrecipVolume = true;
+	public readonly locationType = "coordinates";
 
 	private baseUrl = "https://api.met.no/weatherapi";
 
-	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
 		const [forecast, nowcast] = await Promise.all([
-			this.app.LoadJsonAsync<MetNorwayForecastPayload>(`${this.baseUrl}/locationforecast/2.0/complete`, {lat: loc.lat, lon: loc.lon}),
-			this.app.LoadJsonAsync<MetNorwayNowcastPayload>(`${this.baseUrl}/nowcast/2.0/complete`, {lat: loc.lat, lon: loc.lon}, (e) => e.ErrorData.code != 422),
+			HttpLib.Instance.LoadJsonSimple<MetNorwayForecastPayload>({
+				url: `${this.baseUrl}/locationforecast/2.0/complete`,
+				cancellable,
+				params: { lat: loc.lat, lon: loc.lon }
+			}),
+			HttpLib.Instance.LoadJsonSimple<MetNorwayNowcastPayload>({
+				url: `${this.baseUrl}/nowcast/2.0/complete`,
+				cancellable,
+				params: { lat: loc.lat, lon: loc.lon },
+				HandleError: (e) => e.ErrorData.code != 422
+			}),
 		]);
 
 		if (!forecast) {
@@ -51,7 +66,7 @@ export class MetNorway extends BaseProvider {
 
 					for (let i = 0; i < nowcast.properties.timeseries.length; i++) {
 						const element = nowcast.properties.timeseries[i];
-						const next = nowcast.properties.timeseries[i+1];
+						const next = nowcast.properties.timeseries[i + 1];
 						// Next element is already in the past, skip this one
 						if (next != null && DateTime.fromISO(next.time).diffNow().milliseconds < 0)
 							continue;
@@ -71,7 +86,21 @@ export class MetNorway extends BaseProvider {
 			}
 		}
 
+
+		if (config._showAlerts) {
+			const alerts = await GetMETNorwayAlerts(cancellable, loc.lat, loc.lon);
+			if (alerts == null) {
+				return null;
+			}
+
+			result.alerts = alerts;
+		}
+
 		return result;
+	}
+
+	public ValidConfiguration(): ProviderErrorCode {
+		return ProviderErrorCode.OK;
 	}
 
 	private RemoveEarlierElements(json: MetNorwayForecastPayload, loc: LocationData): MetNorwayForecastPayload {
@@ -127,7 +156,10 @@ export class MetNorway extends BaseProvider {
 				degree: current.data.instant.details.wind_from_direction,
 				speed: current.data.instant.details.wind_speed
 			},
-			location: {	},
+			uvIndex: current.data.instant.details.ultraviolet_index_clear_sky ?? null,
+			location: {
+				timeZone: loc.timeZone
+			},
 			forecasts: []
 		};
 
@@ -135,7 +167,7 @@ export class MetNorway extends BaseProvider {
 		for (const element of json.properties.timeseries) {
 
 			// Hourly forecast
-			if (!!element.data.next_1_hours) {
+			if (element.data.next_1_hours) {
 				hourlyForecasts.push({
 					date: DateTime.fromISO(element.time, { zone: loc.timeZone }),
 					temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
@@ -164,7 +196,7 @@ export class MetNorway extends BaseProvider {
 					icons: [],
 					main: ""
 				},
-				date: <any>null, // we will build it below
+				date: null as never, // we will build it below
 				temp_max: Number.NEGATIVE_INFINITY,
 				temp_min: Number.POSITIVE_INFINITY
 			}
@@ -241,7 +273,7 @@ export class MetNorway extends BaseProvider {
 		let result: number | null = null;
 		for (const key in count) {
 			if (result == null || count[result].count < count[key].count)
-				result = parseInt(key);
+				result = Number.parseInt(key);
 		}
 
 		if (result == null)
@@ -254,9 +286,9 @@ export class MetNorway extends BaseProvider {
 		// We want to know the worst condition
 		let result: number | null = null;
 		for (const key in conditions) {
-			const conditionID = parseInt(key);
+			const conditionID = Number.parseInt(key);
 			// Polar night id's are above 100, make sure to remove them for checking
-			const resultStripped = result == null ? -1 : (result > 100) ? result - 100 : result;
+			const resultStripped = result == null ? -1 : ((result > 100) ? result - 100 : result);
 			const conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
 			// Make the comparison, keep the polar night condition id
 			if (conditionIDStripped > resultStripped) result = conditionID;
@@ -593,7 +625,7 @@ export class MetNorway extends BaseProvider {
 					icons: ["weather-snow-scattered", "weather-snow"]
 				}
 			default:
-				Logger.Error("condition code not found: " + weather.condition);
+				Logger.Error("condition code not found: " + (weather.condition as string));
 				return {
 					customIcon: "cloud-refresh-symbolic",
 					main: _("Unknown"),

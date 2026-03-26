@@ -1,0 +1,8 @@
+{
+    "uuid": "click-clock@wernerstucky",
+    "name": "Click Clock",
+    "description": "A simple applet that shows a clock icon by default and displays the time when clicked.",
+    "author": "Werner Stucky",
+    "version": "1.0",
+    "max-instances": 1
+}

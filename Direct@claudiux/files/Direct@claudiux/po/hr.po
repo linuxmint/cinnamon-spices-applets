@@ -1,0 +1,549 @@
+# DIRECT
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Places Center 2.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-07 23:43+0100\n"
+"PO-Revision-Date: 2017-02-26 21:10+0100\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. applet.js:46 applet.js:654
+msgid "SYSTEM"
+msgstr "SUSTAV"
+
+#. applet.js:46 applet.js:694
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:46 applet.js:725
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:46 applet.js:756
+msgid "RECENT DOCUMENTS"
+msgstr "NEDAVNI DOKUMENTI"
+
+#. applet.js:46 applet.js:800
+msgid "CUSTOM"
+msgstr ""
+
+#. applet.js:189
+msgid "(Right click to open folder)"
+msgstr ""
+
+#. metadata.json->name
+#. applet.js:317
+msgid "Direct"
+msgstr "Izravno"
+
+#. applet.js:624
+msgid "Search Home Folder"
+msgstr "Pretraži osobnu mapu"
+
+#. applet.js:631 applet.js:671 applet.js:702 applet.js:733 applet.js:764
+#. applet.js:808
+msgid "Configure"
+msgstr ""
+
+#. applet.js:664
+msgid "Search File System"
+msgstr "Pretraži datotečni sustav"
+
+#. applet.js:778
+msgid "Clear"
+msgstr "Obriši"
+
+#. applet.js:785
+msgid "Recent"
+msgstr ""
+
+#. applet.js:862
+msgid "Computer"
+msgstr "Računalo"
+
+#. applet.js:868
+msgid "File System"
+msgstr "Datotečni sustav"
+
+#. applet.js:885
+msgid "Network"
+msgstr "Mreža"
+
+#. applet.js:900
+msgid "Logout"
+msgstr ""
+
+#. applet.js:907
+msgid "Quit"
+msgstr ""
+
+#. applet.js:1215
+msgid "Trash"
+msgstr "Smeće"
+
+#. search.py:43
+msgid "Open..."
+msgstr ""
+
+#. search.py:48
+msgid "Open Containing Folder..."
+msgstr ""
+
+#. search.py:85
+msgid "Search"
+msgstr ""
+
+#. search.py:106
+msgid "Start in"
+msgstr ""
+
+#. search.py:107
+#, fuzzy
+msgid "Select a folder"
+msgstr "Pretraži osobnu mapu"
+
+#. search.py:113
+msgid "Follow symlinks"
+msgstr ""
+
+#. search.py:117
+msgid "Search hidden"
+msgstr ""
+
+#. search.py:121
+msgid "Use regular expressions"
+msgstr ""
+
+#. search.py:125
+msgid "Stop"
+msgstr ""
+
+#. search.py:140
+msgid "File"
+msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. search.py:156
+msgid "Path"
+msgstr ""
+
+#. search.py:184
+msgid "Searching..."
+msgstr ""
+
+#. search.py:198 search.py:199
+#, fuzzy
+msgid "Search Stopped"
+msgstr "Pretraži osobnu mapu"
+
+#. search.py:215
+msgid "Searching: "
+msgstr ""
+
+#. search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+#. search.py:252
+#, fuzzy
+msgid "Search Completed"
+msgstr "Pretraži osobnu mapu"
+
+#. search.py:259
+msgid "Skipping"
+msgstr ""
+
+#. search.py:259
+msgid " - directory already searched"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Provides direct and easy access to your Directories, Favorites, Recent "
+"documents and System locations"
+msgstr ""
+
+#. metadata.json->comments
+msgid ""
+"The Direct@claudiux applet is a fork from the placesCenter@scollins applet, "
+"with improvements."
+msgstr ""
+
+#. settings-schema.json->generalPage->title
+msgid "General"
+msgstr "Općenito"
+
+#. settings-schema.json->userPage->title
+msgid "User"
+msgstr "Korisnik"
+
+#. settings-schema.json->systemPage->title
+msgid "System"
+msgstr "Sustav"
+
+#. settings-schema.json->favoritesPage->title
+msgid "Favorites"
+msgstr ""
+
+#. settings-schema.json->recentPage->title
+#. settings-schema.json->recentSection->title
+msgid "Recent documents"
+msgstr "Nedavni dokumenti"
+
+#. settings-schema.json->customPage->title
+#, fuzzy
+msgid "Custom"
+msgstr "Prilagođene lokacije"
+
+#. settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr "Postavke panela"
+
+#. settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr "Postavke izbornika"
+
+#. settings-schema.json->userSection->title
+msgid "User section"
+msgstr "Korisnikove mogućnosti"
+
+#. settings-schema.json->userSectionCustomPlaces->title
+#. settings-schema.json->systemSectionCustomPlaces->title
+#. settings-schema.json->listUserCustomPlaces->description
+#. settings-schema.json->listSystemCustomPlaces->description
+#. settings-schema.json->listCustomDocuments->description
+msgid "Custom places"
+msgstr "Prilagođene lokacije"
+
+#. settings-schema.json->systemSection->title
+msgid "System section"
+msgstr "Mogućnosti sustava"
+
+#. settings-schema.json->favoritesSection->title
+#, fuzzy
+msgid "Favorite documents"
+msgstr "Prikaži nedavne dokumente"
+
+#. settings-schema.json->favoriteAppsSection->title
+#, fuzzy
+msgid "Favorite apps"
+msgstr "Prikaži nedavne dokumente"
+
+#. settings-schema.json->customSection->title
+#, fuzzy
+msgid "Custom documents"
+msgstr "Prilagođene lokacije"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Ikona panela"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr "Upišite naziv ikone ili izravnu putanju (podržava simboličke ikone)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Tekst panela"
+
+#. settings-schema.json->openHoveringOver->description
+msgid "Open the menu by hovering over the icon"
+msgstr ""
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr "Prečac tipkovnice izbornika"
+
+#. settings-schema.json->iconSize->units
+#. settings-schema.json->textSize->units
+msgid "px"
+msgstr "pikseli"
+
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Veličina ikone izbornika"
+
+#. settings-schema.json->textSize->description
+msgid "Text width"
+msgstr ""
+
+#. settings-schema.json->textSize->tooltip
+msgid "0 means: automatic"
+msgstr ""
+
+#. settings-schema.json->displayOrderLabel->description
+msgid "Move these sections to rearrange the menu:"
+msgstr ""
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->favApps->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->displayOrder->description
+#. settings-schema.json->favoriteCustomList->description
+msgid "Display order in the menu"
+msgstr ""
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
+#. settings-schema.json->noIconOnPanel->description
+msgid "No icon on panel"
+msgstr ""
+
+#. settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "Otvori pri srednjem kliku"
+
+#. settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "Ostavi prazno za onemgućavanje"
+
+#. settings-schema.json->dontDisplayTooltip->description
+msgid "Do not display the tooltip"
+msgstr ""
+
+#. settings-schema.json->showUserSection->description
+#, fuzzy
+msgid "Show User section"
+msgstr "Korisnikove mogućnosti"
+
+#. settings-schema.json->showUserSettingsAccessIcon->description
+#. settings-schema.json->showSystemSettingsAccessIcon->description
+#. settings-schema.json->showFavoritesSettingsAccessIcon->description
+#. settings-schema.json->showRecentSettingsAccessIcon->description
+#. settings-schema.json->showCustomSettingsAccessIcon->description
+msgid "Show the settings access icon"
+msgstr ""
+
+#. settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "Prikaži radnu površinu"
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
+msgid "URI"
+msgstr ""
+
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
+msgid "Icon Name"
+msgstr ""
+
+#. settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "Prikaži smeće"
+
+#. settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "Nikada"
+
+#. settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "Uvijek"
+
+#. settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "Kada nije prazno"
+
+#. settings-schema.json->showSystemSection->description
+#, fuzzy
+msgid "Show System section"
+msgstr "Mogućnosti sustava"
+
+#. settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "Prikaži računalo"
+
+#. settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "Prikaži datotečni sustav"
+
+#. settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "Prikaži montirane uređaje"
+
+#. settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr "Prikaži samo montirane uređaje"
+
+#. settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "Prikaži mrežu"
+
+#. settings-schema.json->showFavorites->description
+#, fuzzy
+msgid "Show favorite documents"
+msgstr "Prikaži nedavne dokumente"
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->sortingMethod->options
+msgid "Added time"
+msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->options
+msgid "Custom Sort"
+msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->description
+#. settings-schema.json->sortingMethod->description
+msgid "Sorting method"
+msgstr ""
+
+#. settings-schema.json->favoriteLabel->description
+msgid ""
+"Below are the favorite documents displayed in the menu when checked.\n"
+"The Name can be changed here, but is unchanged in menu.\n"
+"The URI must not be changed.\n"
+"Favorite documents can only be managed by nemo."
+msgstr ""
+
+#. settings-schema.json->favoriteCustomList->columns->title
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->favoriteCustomList->columns->title
+msgid "⚠️ Name"
+msgstr ""
+
+#. settings-schema.json->favoriteCustomList->columns->title
+msgid "⚠️ URI"
+msgstr ""
+
+#. settings-schema.json->favoritePopulateButton->description
+#, fuzzy
+msgid "Add all your Favorite Documents"
+msgstr "Nedavni dokumenti"
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr ""
+
+#. settings-schema.json->favoriteSizeLimit->options
+#, fuzzy
+msgid "All Favorite Documents"
+msgstr "Nedavni dokumenti"
+
+#. settings-schema.json->favoriteSizeLimit->description
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Broj prikazanih nedavnih dokumenata"
+
+#. settings-schema.json->favoriteShowUri->description
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr ""
+
+#. settings-schema.json->favoriteIconIsStar->description
+msgid "Replace icons with stars"
+msgstr ""
+
+#. settings-schema.json->showFavoriteApps->description
+#, fuzzy
+msgid "Show favorite apps"
+msgstr "Prikaži nedavne dokumente"
+
+#. settings-schema.json->favAppsLabel->description
+msgid ""
+"Below are the favorite applications displayed in the menu when checked.\n"
+"The Name can be changed.\n"
+"The Launcher must not be changed."
+msgstr ""
+
+#. settings-schema.json->favApps->description
+msgid "Favorite apps shown"
+msgstr ""
+
+#. settings-schema.json->favApps->columns->title
+msgid "⚠️ Launcher"
+msgstr ""
+
+#. settings-schema.json->favAppsPopulateButton->description
+msgid "Add all your Favorite Apps"
+msgstr ""
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Prikaži nedavne dokumente"
+
+#. settings-schema.json->sortingMethod->options
+msgid "Access time"
+msgstr ""
+
+#. settings-schema.json->sortingMethod->options
+msgid "Modification time"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+#, fuzzy
+msgid "All Recent Documents"
+msgstr "Nedavni dokumenti"
+
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr ""
+
+#. settings-schema.json->btnIconBrowser->description
+msgid "Icon browser"
+msgstr ""
+
+#. settings-schema.json->showCustomDocuments->description
+#, fuzzy
+msgid "Show Custom documents"
+msgstr "Prikaži nedavne dokumente"
+
+#. settings-schema.json->labelCustomDocuments->description
+msgid ""
+"URI: Enter the link to your custom document or application-name.desktop here "
+"(as in /usr/share/applications/).\n"
+"To separate them into categories, you can add a line without a URI, but with "
+"a name as the category title (no icon is necessary)."
+msgstr ""

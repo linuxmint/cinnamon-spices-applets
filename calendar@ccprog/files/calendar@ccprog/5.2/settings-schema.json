@@ -30,6 +30,7 @@
                 "weekend-length",
                 "use-custom-format",
                 "custom-format",
+                "custom-tooltip-format",
                 "format-button"
             ]
         },
@@ -40,6 +41,7 @@
                 "country",
                 "has_region",
                 "region_aus",
+                "region_bel",
                 "region_can",
                 "region_deu",
                 "region_esp",
@@ -101,6 +103,13 @@
         "dependency": "use-custom-format",
         "tooltip": "Set your custom format here."
     },
+    "custom-tooltip-format" : {
+        "type" : "entry",
+        "default" : "%A, %B %e, %H:%M",
+        "description" : "Date format for tooltip",
+        "dependency" : "use-custom-format",
+        "tooltip" : "Set your custom tooltip format here."
+    },
     "format-button": {
         "type": "button",
         "description": "Show information on date format syntax",
@@ -126,8 +135,10 @@
             "China": "chn",
             "Colombia": "col",
             "Croatia": "hrv",
+            "Cyprus": "cyp",
             "Czech Republic": "cze",
             "Denmark": "dnk",
+            "El Salvador": "slv",
             "Estonia": "est",
             "Spain": "esp",
             "Finland": "fin",
@@ -148,6 +159,7 @@
             "Lithuania": "ltu",
             "Luxembourg": "lux",
             "Macedonia": "mkd",
+            "Montenegro": "mne",
             "Mexico": "mex",
             "Netherlands": "nld",
             "New Zealand": "nzl",
@@ -175,6 +187,7 @@
         "type": "generic",
         "default": [
             "aus",
+            "bel",
             "can",
             "deu",
             "esp",
@@ -200,6 +213,17 @@
             "Western Australia": "wa"
         },
         "dependency": "country=aus"
+    },
+    "region_bel": {
+        "type": "combobox",
+        "default": "bru",
+        "description": "Region",
+        "options": {
+            "Brussels": "bru",
+            "Flemish Region": "vlg",
+            "Walloon Region": "wal"
+        },
+        "dependency": "country=bel"
     },
     "region_can": {
         "type": "combobox",

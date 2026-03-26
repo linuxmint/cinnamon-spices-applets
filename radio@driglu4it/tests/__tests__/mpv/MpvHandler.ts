@@ -100,17 +100,31 @@ describe('Starting mpv with valid url is working', () => {
         initMpvListener({})
         await simulateValidMpvStart()
 
-        expect(onTitleChanged).toHaveBeenCalledTimes(2)
+    // first callback should already give fixed string
+    expect(onTitleChanged).toHaveBeenCalledWith("Müller - über");
 
-    })
+    // also the getter should normalise the value
+    expect(handler.getCurrentTitle()).toBe("Müller - über");
 
-    it('starting mpv with valid url should trigger OnUrlChanged once', async () => {
-        initMpvListener({})
-        await simulateValidMpvStart()
+    // simulate additional broken metadata update
+    simulateTitleChanged("SchrÃ¶dinger");
+    expect(onTitleChanged).toHaveBeenLastCalledWith("Schrödinger");
+  });
 
-        expect(onUrlChanged).toHaveBeenCalledWith(VALID_URL_1)
-        expect(onUrlChanged).toHaveBeenCalledTimes(1)
-    })
+  it("starting mpv with valid url should trigger OnUrlChanged once", async () => {
+    initMpvListener({});
+    await simulateValidMpvStart();
+
+    expect(onUrlChanged).toHaveBeenCalledWith(VALID_URL_1);
+    expect(onUrlChanged).toHaveBeenCalledTimes(1);
+  });
+
+  it("well-formed titles are left untouched", async () => {
+    const handler = initMpvListener({});
+    await simulateValidMpvStart('Hello World');
+    expect(onTitleChanged).toHaveBeenCalledWith('Hello World');
+    expect(handler.getCurrentTitle()).toBe('Hello World');
+  });
 });
 
 describe('Create Handler while mpv is already running is working', () => {

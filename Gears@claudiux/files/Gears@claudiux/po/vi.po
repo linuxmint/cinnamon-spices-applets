@@ -1,0 +1,116 @@
+# GEARS
+# This file is put in the public domain.
+# claudiux, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Gears@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-17 20:31+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:71
+msgid "Refresh"
+msgstr "Làm mới"
+
+#. settings-schema.json->alwaysOnTop->description
+#. applet.js:74
+msgid "Always on top"
+msgstr "Luôn hiển thị trên cùng"
+
+#. applet.js:85
+msgid "View logs"
+msgstr "Xem nhật ký"
+
+#. metadata.json->description
+msgid "Runs glxgears with options"
+msgstr "Chạy glxgears với các tùy chọn"
+
+#. metadata.json->name
+msgid "Gears"
+msgstr "Gears"
+
+#. settings-schema.json->pageGeneral->title
+msgid "glxgears"
+msgstr "glxgears"
+
+#. settings-schema.json->sectionOptions->title
+msgid "Options"
+msgstr "Tùy chọn"
+
+#. settings-schema.json->sectionLogging->title
+msgid "Logging"
+msgstr "Ghi nhật ký"
+
+#. settings-schema.json->useSymbolicIcon->description
+msgid "Use a symbolic icon"
+msgstr "Sử dụng biểu tượng ký hiệu"
+
+#. settings-schema.json->activeColor->description
+msgid "Icon color while glxgears is running"
+msgstr "Màu biểu tượng khi glxgears đang chạy"
+
+#. settings-schema.json->fullscreenMode->description
+msgid "Fullscreen Mode"
+msgstr "Chế độ toàn màn hình"
+
+#. settings-schema.json->fullscreenMode->tooltip
+msgid "Once in fullscreen mode, press the Esc key to quit glxgears."
+msgstr "Khi ở chế độ toàn màn hình, nhấn phím Esc để thoát glxgears."
+
+#. settings-schema.json->loopEvery->description
+msgid "Check glxgears status every (seconds)"
+msgstr "Kiểm tra trạng thái glxgears mỗi (giây)"
+
+#. settings-schema.json->loopEvery->options
+msgid "Never"
+msgstr "Không bao giờ"
+
+#. settings-schema.json->loopEvery->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->loopEvery->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->loopEvery->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->loopEvery->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->loopEvery->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->loopEvery->options
+msgid "60"
+msgstr "60"
+
+#. settings-schema.json->typeOfLogging->description
+msgid "Type of logging"
+msgstr "Loại ghi nhật ký"
+
+#. settings-schema.json->typeOfLogging->options
+msgid "None"
+msgstr "Không"
+
+#. settings-schema.json->typeOfLogging->options
+msgid "On hard disk"
+msgstr "Trên ổ cứng"
+
+#. settings-schema.json->typeOfLogging->options
+msgid "On RAM disk"
+msgstr "Trên RAM"

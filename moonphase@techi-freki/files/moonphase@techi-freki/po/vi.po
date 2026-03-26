@@ -1,0 +1,199 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: moonphase@techi-freki 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-05-05 18:11-0400\n"
+"PO-Revision-Date: 2025-10-12 11:04+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: js/compass.js:14
+msgid "North"
+msgstr "Bắc"
+
+#: js/compass.js:15
+msgid "North East"
+msgstr "Đông Bắc"
+
+#: js/compass.js:16
+msgid "East"
+msgstr "Đông"
+
+#: js/compass.js:17
+msgid "South East"
+msgstr "Đông Nam"
+
+#: js/compass.js:18
+msgid "South"
+msgstr "Nam"
+
+#: js/compass.js:19
+msgid "South West"
+msgstr "Tây Nam"
+
+#: js/compass.js:20
+msgid "West"
+msgstr "Tây"
+
+#: js/compass.js:21
+msgid "North West"
+msgstr "Tây Bắc"
+
+#: js/moon.js:32 js/moon.js:40
+msgid "New Moon"
+msgstr "Trăng non"
+
+#: js/moon.js:33
+msgid "Waxing Crescent"
+msgstr "Trăng khuyết đầu tháng"
+
+#: js/moon.js:34
+msgid "First Quarter"
+msgstr "Trăng bán nguyệt đầu"
+
+#: js/moon.js:35
+msgid "Waxing Gibbous"
+msgstr "Trăng lưỡi liềm lớn lên"
+
+#: js/moon.js:36
+msgid "Full Moon"
+msgstr "Trăng tròn"
+
+#: js/moon.js:37
+msgid "Waning Gibbous"
+msgstr "Trăng lưỡi liềm khuyết đi"
+
+#: js/moon.js:38
+msgid "Last Quarter"
+msgstr "Trăng bán nguyệt cuối"
+
+#: js/moon.js:39
+msgid "Waning Crescent"
+msgstr "Trăng khuyết cuối tháng"
+
+#: js/ui/currentPhaseUi.js:32
+msgid "illumination"
+msgstr "Độ sáng"
+
+#: js/ui/riseSetUi.js:55
+msgid "The moon is always down and will not rise today"
+msgstr "Mặt trăng luôn ở dưới chân trời và sẽ không mọc hôm nay"
+
+#: js/ui/riseSetUi.js:65
+msgid "The moon is always up and will not set today"
+msgstr "Mặt trăng luôn ở trên trời và sẽ không lặn hôm nay"
+
+#: js/ui/riseSetUi.js:76
+msgid "Moonrise"
+msgstr "Mặt trăng mọc"
+
+#: js/ui/riseSetUi.js:83
+msgid "Lunar Noon"
+msgstr "Trưa trăng"
+
+#: js/ui/riseSetUi.js:90
+msgid "Moonset"
+msgstr "Mặt trăng lặn"
+
+#: js/ui/elements/noRiseSetElement.js:54
+msgid "Next Moonrise"
+msgstr "Mặt trăng mọc tiếp theo"
+
+#: js/ui/elements/noRiseSetElement.js:66
+msgid "Next Moonset"
+msgstr "Mặt trăng lặn tiếp theo"
+
+#. metadata.json->name
+msgid "Moon Phase"
+msgstr "Pha Mặt Trăng"
+
+#. metadata.json->description
+msgid "A Cinnamon applet that displays up-to-date moon related information."
+msgstr "Một applet Cinnamon hiển thị thông tin cập nhật về Mặt Trăng."
+
+#. settings-schema.json->page-settings->title
+msgid "Settings"
+msgstr "Cài đặt"
+
+#. settings-schema.json->section-geolocation->title
+msgid "Geolocation Settings"
+msgstr "Cài đặt định vị"
+
+#. settings-schema.json->section-general->title
+msgid "General Settings"
+msgstr "Cài đặt chung"
+
+#. settings-schema.json->section-update->title
+msgid "Update Settings"
+msgstr "Cài đặt cập nhật"
+
+#. settings-schema.json->enableGeolocation->description
+msgid "Enable geolocation features"
+msgstr "Bật chức năng định vị"
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr "Vĩ độ"
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr "Kinh độ"
+
+#. settings-schema.json->enablePopup->description
+msgid "Enable popup menu"
+msgstr "Bật menu popup"
+
+#. settings-schema.json->showCurrentPhaseInfo->description
+msgid "Display the current phase information"
+msgstr "Hiển thị thông tin pha hiện tại"
+
+#. settings-schema.json->showRiseSet->description
+msgid "Display the moon rise, transit, and set times"
+msgstr "Hiển thị thời gian Mặt Trăng mọc, qua thiên đỉnh và lặn"
+
+#. settings-schema.json->showPhaseLabel->description
+msgid "Display the applet label"
+msgstr "Hiển thị nhãn applet"
+
+#. settings-schema.json->showNameLabel->description
+msgid "Display the name of the moon phase in the label"
+msgstr "Hiển thị tên pha Mặt Trăng trên nhãn"
+
+#. settings-schema.json->showPercentageLabel->description
+msgid "Display the percentage of the moon phase in the label"
+msgstr "Hiển thị tỷ lệ phần trăm pha Mặt Trăng trên nhãn"
+
+#. settings-schema.json->showTooltip->description
+msgid "Display a tooltip on hover"
+msgstr "Hiển thị gợi chú khi rê chuột"
+
+#. settings-schema.json->showPhaseTooltip->description
+msgid "Display the name of the moon phase in the tooltip"
+msgstr "Hiển thị tên pha Mặt Trăng trong gợi chú"
+
+#. settings-schema.json->showPercentageTooltip->description
+msgid "Display percentage of the moon phase in the tooltip"
+msgstr "Hiển thị tỷ lệ phần trăm pha Mặt Trăng trong gợi chú"
+
+#. settings-schema.json->useAltIcons->description
+msgid "Light theme"
+msgstr "Chủ đề sáng"
+
+#. settings-schema.json->updateInterval->units
+msgid "seconds"
+msgstr "giây"
+
+#. settings-schema.json->updateInterval->description
+msgid "Update interval"
+msgstr "Khoảng thời gian cập nhật"

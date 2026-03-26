@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+# SCREENSHOT+RECORD DESKTOP
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the Cinnamon package.
 # FIRST AUTHOR cClaude <cc@cclaude.rocks>, 2020.
@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-04 18:50+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-04 13:04-0400\n"
 "PO-Revision-Date: 2020-02-12 09:52+0100\n"
 "Last-Translator: cClaude <cc@cclaude.rocks>\n"
 "Language-Team: \n"
@@ -18,94 +19,94 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:28
+#. applet.js:27
 msgid "ScreenShot"
 msgstr "Capture d'écran"
 
-#: applet.js:33
+#. applet.js:32
 msgid "Current Window"
 msgstr "Fenêtre actuelle"
 
-#: applet.js:38
+#. applet.js:37
 msgid "Selected Area"
 msgstr "Zone sélectionnée"
 
-#: applet.js:44
+#. applet.js:43
 msgid "Whole Screen"
 msgstr "Écran complet"
 
-#: applet.js:46
+#. applet.js:45
 msgid "1 Second Delay"
 msgstr "Délai de 1 seconde"
 
-#: applet.js:50
+#. applet.js:49
 msgid "3 Second Delay"
 msgstr "Délai de 3 secondes"
 
-#: applet.js:54
+#. applet.js:53
 msgid "5 Second Delay"
 msgstr "Délai de 5 secondes"
 
-#: applet.js:61
+#. applet.js:60
 msgid "Record Screencast"
 msgstr "Enregistrement Screencast"
 
-#: applet.js:65
+#. applet.js:64
 msgid "Record Desktop With Audio"
 msgstr "Enregistrer le bureau avec audio"
 
-#: applet.js:68 applet.js:74 applet.js:81 applet.js:87
+#. applet.js:67 applet.js:73 applet.js:80 applet.js:86
 msgid "Recording"
 msgstr "Enregistrement"
 
-#: applet.js:68 applet.js:81
+#. applet.js:67 applet.js:80
 msgid "With-Audio"
 msgstr "Avec audio"
 
-#: applet.js:71
+#. applet.js:70
 msgid "Record Desktop Without Audio"
 msgstr "Enregistrer le bureau sans audio"
 
-#: applet.js:74 applet.js:87
+#. applet.js:73 applet.js:86
 msgid "No-Audio"
 msgstr "Sans audio"
 
-#: applet.js:78
+#. applet.js:77
 msgid "Record Current Window With Audio"
 msgstr "Enregistrer la fenêtre actuelle avec audio"
 
-#: applet.js:84
+#. applet.js:83
 msgid "Record Current Window Without Audio"
 msgstr "Enregistrer la fenêtre actuelle sans audio"
 
-#: applet.js:91
+#. applet.js:90
 msgid "Stop Recording"
 msgstr "Arrêter l'enregistrement"
 
-#: applet.js:96
+#. applet.js:95
 msgid "Recording-Stopped"
 msgstr "Enregistrement arrêté"
 
-#: applet.js:97
+#. applet.js:96
 msgid "Recording-Finished"
 msgstr "Enregistrement terminé"
 
-#: applet.js:107
+#. applet.js:106
 msgid "Take A Snapshot or Record Your Desktop"
 msgstr "Prendre un instantané ou enregistrer votre bureau"
 
-#: applet.js:124
+#. applet.js:123
 msgid "Pictures Folder"
 msgstr "Dossier des photos"
 
-#: applet.js:130
+#. applet.js:129
 msgid "Videos Folder"
 msgstr "Dossier des vidéos"
 
 #. metadata.json->description
 msgid ""
-"Take A Snapshot Or Record Your Desktop (recording requires the packages ffmpeg, "
-"xdotool & x11-utils to be installed)"
+"Take A Snapshot Or Record Your Desktop (recording requires the packages "
+"ffmpeg, xdotool & x11-utils to be installed)"
 msgstr ""
 "Prenez un instantané ou enregistrez votre bureau (l'enregistrement nécessite "
 "l'installation des packages ffmpeg, xdotool & x11-utils)"

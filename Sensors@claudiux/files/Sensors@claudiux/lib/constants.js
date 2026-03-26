@@ -9,6 +9,8 @@ const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const ICONS_DIR = APPLET_DIR + "/icons";
 
+const NVIDIA_SMI_VERSION_REGEX = /(?<=nvidia-smi version  : )\d+\.\d+\.\d+/gi;
+
 const versionCompare = (left, right) => {
   if (typeof left + typeof right != "stringstring")
     return false;
@@ -30,12 +32,11 @@ const versionCompare = (left, right) => {
   return 0;
 };
 
-var xs_path = "/usr/bin/xlet-settings";
-
-if (versionCompare(GLib.getenv('CINNAMON_VERSION').toString(), "4.2") < 0)
-  xs_path = SCRIPTS_DIR + "/xs.py";
-
-const XS_PATH = xs_path;
+//~ var xs_path = "/usr/bin/xlet-settings";
+//~ if (versionCompare(GLib.getenv('CINNAMON_VERSION').toString(), "4.2") < 0)
+  //~ xs_path = SCRIPTS_DIR + "/xs.py";
+//~ const XS_PATH = xs_path;
+const XS_PATH = "/usr/bin/xlet-settings";
 
 /**
  * DEBUG:
@@ -125,6 +126,7 @@ module.exports = {
   SCRIPTS_DIR,
   ICONS_DIR,
   XS_PATH,
+  NVIDIA_SMI_VERSION_REGEX,
   _,
   DEBUG,
   RELOAD,

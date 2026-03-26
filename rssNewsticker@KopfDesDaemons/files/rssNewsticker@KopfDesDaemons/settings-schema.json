@@ -1,0 +1,44 @@
+{
+    "head0": {
+        "type": "header",
+        "description": "General"
+    },
+    "rssURL": {
+        "type": "entry",
+        "default": "http://rss.cnn.com/rss/money_topstories.rss",
+        "description": "URL of RSS feed"
+    },
+    "head1": {
+        "type": "header",
+        "description": "Ticker"
+    },
+    "width": {
+        "type": "scale",
+        "default": 390,
+        "min": 50,
+        "max": 2000,
+        "step": 5,
+        "description": "Width of ticker in px"
+    },
+    "tickerSeperator": {
+        "type": "entry",
+        "default": "*****",
+        "description": "Separator between headlines"
+    },
+    "refreshInterval": {
+        "type": "scale",
+        "default": 300,
+        "min": 30,
+        "max": 900,
+        "step": 10,
+        "description": "Refresh interval in seconds"
+    },
+    "tickerSpeed": {
+        "type": "scale",
+        "default": 300,
+        "min": 100,
+        "max": 500,
+        "step": 10,
+        "description": "Speed of ticker in ms"
+    }
+}

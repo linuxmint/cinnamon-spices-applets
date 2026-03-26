@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-08 19:11+0530\n"
+"PO-Revision-Date: 2025-10-12 17:16+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+#: applet.js:81
+msgid "Wallpaper Slideshow"
+msgstr "Trình chiếu Hình nền"
+
+#: applet.js:207
+msgid "The wallpaper path does not exists!"
+msgstr "Đường dẫn hình nền không tồn tại!"
+
+#. settings-schema.json->head_delay->description
+#: applet.js:220
+msgid "Delay"
+msgstr "Độ trễ"
+
+#: applet.js:238
+msgid "Open wallpapers directory"
+msgstr "Mở thư mục hình nền"
+
+#: applet.js:251
+msgid "Next"
+msgstr "Tiếp theo"
+
+#: applet.js:260
+msgid "Previous"
+msgstr "Trước đó"
+
+#. settings-schema.json->head_paused->description
+#: applet.js:273
+msgid "Paused"
+msgstr "Đã tạm dừng"
+
+#: applet.js:287
+msgid "Preferences"
+msgstr "Tùy chọn"
+
+#. metadata.json->description
+msgid "Starts a wallpaper slideshow persisting across reboots"
+msgstr "Bắt đầu trình chiếu hình nền duy trì qua các lần khởi động lại"
+
+#. settings-schema.json->head_path->description
+msgid "Wallpaper path"
+msgstr "Đường dẫn hình nền"
+
+#. settings-schema.json->wallpaper_path->description
+msgid "Specify path of the wallpaper directory"
+msgstr "Chỉ định đường dẫn của thư mục hình nền"
+
+#. settings-schema.json->wallpaper_path->tooltip
+msgid "For example: /home/username/Pictures/wallpapers"
+msgstr "Ví dụ: /home/username/Pictures/wallpapers"
+
+#. settings-schema.json->wallpaper_delay->description
+msgid "Specify the delay to change the wallpaper (in seconds)"
+msgstr "Chỉ định độ trễ để thay đổi hình nền (tính bằng giây)"
+
+#. settings-schema.json->wallpaper_delay->tooltip
+msgid "For example: 86400 for 24hrs"
+msgstr "Ví dụ: 86400 cho 24 giờ"
+
+#. settings-schema.json->head_timer->description
+msgid "Custom interval"
+msgstr "Khoảng thời gian tùy chỉnh"
+
+#. settings-schema.json->wallpaper_custom_timer->description
+msgid "Specify a custom interval to check for updates"
+msgstr "Chỉ định khoảng thời gian tùy chỉnh để kiểm tra cập nhật"
+
+#. settings-schema.json->wallpaper_custom_timer->tooltip
+msgid "Default: 1hr"
+msgstr "Mặc định: 1 giờ"
+
+#. settings-schema.json->wallpaper_timer->description
+msgid "Specify the interval (in seconds) to check for updates"
+msgstr "Chỉ định khoảng thời gian (tính bằng giây) để kiểm tra cập nhật"
+
+#. settings-schema.json->wallpaper_timer->tooltip
+msgid "For example: 3600 for 1hr"
+msgstr "Ví dụ: 3600 cho 1 giờ"
+
+#. settings-schema.json->wallpaper_paused->description
+msgid "Pause the wallpaper slideshow"
+msgstr "Tạm dừng trình chiếu hình nền"

@@ -42,7 +42,7 @@ const {
   //killall,
   setTimeout,
   clearTimeout
-} = imports.misc.util; //Util
+} = require("./lib/util"); //Util
 
 const ByteArray = imports.byteArray;
 const to_string = function(data) {
@@ -96,6 +96,7 @@ function are_translations_installed() {
       }
     }
   }
+  po_children.close(null);
 
   // All is fine.
   //~ file_set_contents("./RESULT.txt", "po_files: "+po_files.join(", "));

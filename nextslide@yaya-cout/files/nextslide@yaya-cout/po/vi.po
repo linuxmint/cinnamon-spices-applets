@@ -1,0 +1,35 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nextslide@yaya-cout 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-10-12 11:25+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:18
+msgid "Click to change image"
+msgstr "Nhấn để đổi hình ảnh"
+
+#: applet.js:21
+msgid "The slideshow is disabled"
+msgstr "Trình chiếu bị vô hiệu hóa"
+
+#. metadata.json->name
+msgid "Next slide"
+msgstr "Trang tiếp theo"
+
+#. metadata.json->description
+msgid "Simple button to change background for the Cinnamon slideshow"
+msgstr "Nút đơn giản để thay đổi hình nền cho trình chiếu Cinnamon"

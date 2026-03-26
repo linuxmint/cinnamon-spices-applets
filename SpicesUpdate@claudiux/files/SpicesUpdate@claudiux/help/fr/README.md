@@ -2,7 +2,7 @@
 
 ## Résumé
 
-Les Spices de Cinnamon sont les Applets, Desklets, Extensions et Thèmes.
+Les Spices de Cinnamon sont les Applets, Desklets, Extensions, Thèmes et Actions (pour nemo).
 
 Habituellement, vous vérifiez si les Spices que vous avez installées disposent de mises à jour à l'aide des Paramètres système de Cinnamon.
 
@@ -13,17 +13,19 @@ L'applet **Spices Update** :
   * vous avertit dès lors que des Spices que vous avez installées disposent d'une mise à jour ;
   * peut vous avertir, si vous le désirez, lorsque de nouvelles Spices sont disponibles ;
   * vous donne un accès direct aux Paramètres système des Applets, Desklets, Extensions et Thèmes ;
-  * Et à partir de Cinnamon 3.8 :
+  * À partir de Cinnamon 3.8 :
     * vous permet de renouveler le téléchargement de la dernière version d'une Spice ;
     * vous garantit de télécharger réellement la toute dernière version d'une Spice ;
     * vous permet d'ignorer complètement les mises à jour disponibles pour les Spices que vous voulez préserver ;
     * vous permet, d'un clic-molette sur son icône, de forcer le rafraîchissement des données à propos des nouvelles Spices et des mises à jour disponibles, ou d'ouvrir toutes les fenêtres nécessaires pour effectuer ces mises à jour.
+  * À partir de Cinnamon 6.4 :
+    * ne vérifie pas les épices privées. Une épice privée est une épice qui n'est pas répertoriée sur le site web de Cinnamon Spices.
 
 ## État
 
-Disponible de Cinnamon 2.8 à Cinnamon 4.4.
+Disponible à partir de Cinnamon 2.8.
 
-Cette applet est active, c'est-à-dire développée et utilisée par l'auteur sur plusieurs machines fonctionnant sous **Linux Mint**, **Fedora**, **Archlinux** ou **Debian 10**.
+Cette applet est active, c'est-à-dire développée et utilisée par l'auteur sur plusieurs machines fonctionnant sous **Linux Mint**, **Fedora**, **Archlinux** ou **Debian** (et bien d'autres).
 
 À partir de la version v3.0.0 ~ 20190808:
 
@@ -90,7 +92,7 @@ Dans le menu de Spices Update (accessible par un clic sur son icône) :
     * une option _Oublier les nouveautés_ apparaît; en cliquant dessus, ces notifications de nouvelles Spices seront effacées jusqu'à l'arrivée d'autres;
   * lorsque de nouvelles Spices ou des mises à jour sont disponibles :
     * une option_Ouvrir les Paramètres système utiles_ (pour effectuer les mises à jour) apparaît;
-  * Un bouton _Configurer..._ ouvre la fenêtre de configuration de Spices Update.
+  * Une partie _Configurer_ permet d'ouvrir la fenêtre de configuration de Spices Update sur l'onglet désiré.
 
 ## Icône
 
@@ -122,18 +124,11 @@ Deux boutons sont présents : l'un pour ouvrir la page Paramètres système afin
 
 Toute traduction est la bienvenue. Merci de contribuer en traduisant les messages de l'applet dans de nouvelles langues ou en améliorant/complétant les traductions existantes.
 
-### Traductions disponibles et leurs auteurs
+### Traductions disponibles
 
-  * Croate (hr): muzena
-  * Néerlandais (nl): Jurien (French77)
-  * Finnois (fi): MahtiAnkka
-  * Français (fr): claudiux
-  * Allemand (de): Mintulix
-  * Italien (it): Dragone2
-  * Espagnol (es): claudiux
-  * Suédois (sv): Åke Engelbrektson (eson57)
+[Liste des traductions disponibles](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/SpicesUpdate@claudiux.md)
 
-Un grand merci à eux !
+Un grand merci aux traducteurs !
 
 ### Comment proposer une traduction
 
@@ -154,7 +149,7 @@ Utilisez le menu _Applets_ dans les Paramètres système de Cinnamon ou _Ajouter
 ### Installation manuelle :
 
   * Installer les programmes supplémentaires requis.
-  * Télécharger la [dernière version de Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?04831377-cbe4-482d-b035-b8ce9349632e).
+  * Télécharger la [dernière version de Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip).
   * Décompresser et extraire le dossier ```SpicesUpdate@claudiux``` dans ``` ~/.local/share/cinnamon/applets/```
   * Activer cette applet dans Paramètres système -> Applets.
   * Vous pouvez également accéder à la fenêtre de configuration à partir de Paramètres système -> Applets ou du menu de cet applet (en cliquant sur son icône).
@@ -163,4 +158,4 @@ Utilisez le menu _Applets_ dans les Paramètres système de Cinnamon ou _Ajouter
 
 Si vous appréciez les services rendus par Spices Update, n'offrez ni argent ni café à l'auteur, mais connectez-vous et cliquez sur l'étoile en haut de **[cette page](https://cinnamon-spices.linuxmint.com/applets/view/309)**.
 
-Merci à vous.
+Merci à vous. Profitez bien de **SpicesUpdate** !

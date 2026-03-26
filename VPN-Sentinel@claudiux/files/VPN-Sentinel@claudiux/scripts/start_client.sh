@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 #
 CLIENT=$1
 if [ "$CLIENT" = "" ]; then {

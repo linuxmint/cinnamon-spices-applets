@@ -1,0 +1,6 @@
+{
+    "uuid": "envycontrol@zamszowy",
+    "name": "EnvyControl GUI",
+    "description": "Switches between between GPU modes on Nvidia Optimus systems.",
+    "version": "1.2.0"
+}

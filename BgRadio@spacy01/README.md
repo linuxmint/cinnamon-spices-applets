@@ -1,14 +1,11 @@
 
 
-Applet for streaming some of the most famous bulgarian radio and tv streams.
+Applet for streaming some of bulgarian's radio and tv streams.
 
-Changes 23.12.2017:
+Changes 03.12.2025:
 
- - vlc player is replaced with mpv
- - radio and tv streams was updated
- - Add new tv and radio streams
- - Some tv streams was fixed
- - mpv and rtmpdump packages check
- - Updated localization
+ 
+ - No BNT, bTV and Nova TV streams. Have no time for that. I'm sorry, this is what it is.
+ - rtmpdump dependency is removed, because is no longer needed.
 
-In order to make tv and radio streams to work, you'll need to install rtmpdump and mpv. Some of the streams are avaivable only from Bulgaria.
+In order to make tv and radio streams to work, you'll need to install mpv. Some of the streams are avaivable only from Bulgaria.

@@ -1,0 +1,77 @@
+# MEDIA CONTROLS
+# This file is put in the public domain.
+# rbfraphael, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mediacontrols@rbfraphael 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-02-16 03:33-0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#. metadata.json->name
+msgid "Media Controls"
+msgstr "Controles multimedia"
+
+#. metadata.json->description
+msgid "Control your media players from your panel. Works with players that uses MPRIS2 protocol."
+msgstr "Controla tus reproductores multimedia desde tu panel. Funciona con reproductores que utilizan el protocolo MPRIS2."
+
+#. settings-schema.json->section_display_options->description
+msgid "Display Options"
+msgstr "Opciones de visualización"
+
+#. settings-schema.json->show_player_icon->description
+msgid "Show player icon?"
+msgstr "¿Mostrar el icono del reproductor?"
+
+#. settings-schema.json->show_track_info->description
+msgid "Show track info?"
+msgstr "¿Mostrar información de la pista?"
+
+#. settings-schema.json->track_info->options
+msgid "Song Name and Artist"
+msgstr "Título de la canción y artista"
+
+#. settings-schema.json->track_info->options
+msgid "Song Name Only"
+msgstr "Solo el título de la canción"
+
+#. settings-schema.json->track_info->options
+msgid "App Name"
+msgstr "Nombre de la aplicación"
+
+#. settings-schema.json->track_info->description
+msgid "Track info to show on the panel"
+msgstr "Información de la pista que se mostrará en el panel"
+
+#. settings-schema.json->truncate_track_info->description
+msgid "Limit track info length"
+msgstr "Limitar la longitud de la información de la pista"
+
+#. settings-schema.json->truncate_length->units
+msgid "characters"
+msgstr "caracteres"
+
+#. settings-schema.json->truncate_length->description
+msgid "Character limit"
+msgstr "Límite de caracteres"
+
+#. settings-schema.json->show_player_select_indicator->description
+msgid "Show icon to select player?"
+msgstr "¿Mostrar el icono para seleccionar el reproductor?"
+
+#. settings-schema.json->show_hover_color->description
+msgid "Show hover color on buttons?"
+msgstr "¿Mostrar el color al pasar el cursor por los botones?"
+
+#. settings-schema.json->hover_bg_color->description
+msgid "Button hover color"
+msgstr "Color al pasar el cursor por encima del botón"

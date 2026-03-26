@@ -1,11 +1,21 @@
 
 const Applet = imports.ui.applet;
-const Lang = imports.lang;
-const Mainloop = imports.mainloop;
 const St = imports.gi.St;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
+const {
+  _sourceIds,
+  timeout_add_seconds,
+  timeout_add,
+  setTimeout,
+  clearTimeout,
+  setInterval,
+  clearInterval,
+  source_exists,
+  source_remove,
+  remove_all_sources
+} = require("./mainloopTools");
 
 const uuid = 'download-and-upload-speed@cardsurf';
 let AppletGui, AppletConstants, ShellUtils, Dates, Translation, Infos;
@@ -30,17 +40,27 @@ function _(str) {
     return Gettext.dgettext(uuid, str);
 }
 
+function selectUnit(value, fixedIndex, sizes, units) {
+    if (fixedIndex != null) {
+        return [value / sizes[fixedIndex], units[fixedIndex]];
+    }
+    for (let i = sizes.length - 1; i >= 0; --i) {
+        if (value >= sizes[i])
+            return [value / sizes[i], units[i]];
+    }
+    return [value, units[0]];
+}
 
 
 
 
 
 
-function MyApplet(metadata, orientation, panel_height, instance_id) {
+function DownloadAndUploadSpeed(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
 };
 
-MyApplet.prototype = {
+DownloadAndUploadSpeed.prototype = {
     __proto__: Applet.Applet.prototype,
 
     _init: function(metadata, orientation, panel_height, instance_id) {
@@ -71,6 +91,7 @@ MyApplet.prototype = {
         this.settings_separator = ",";
 
         this.display_mode = AppletConstants.DisplayMode.SPEED;
+        this.unit = AppletConstants.Unit.AUTO;
         this.unit_type = AppletConstants.UnitType.BYTES;
         this.update_every = 1.0;
         this.update_available_interfaces_every = 5;
@@ -85,6 +106,9 @@ MyApplet.prototype = {
         this.data_limit_command = "";
         this.data_limit = 0;
         this.gui_text_css = "";
+        this.gui_enable_inactive_text_css = false;
+        this.gui_inactive_text_css = "";
+        this.gui_show_icons = true;
         this.gui_received_icon_filename = "";
         this.gui_symbolic_icon = false;
         this.gui_sent_icon_filename = "";
@@ -165,7 +189,9 @@ MyApplet.prototype = {
     _bind_settings: function () {
         for(let [binding, property_name, callback] of [
                         [Settings.BindingDirection.IN, "display_mode", null],
+                        [Settings.BindingDirection.IN, "unit", null],
                         [Settings.BindingDirection.IN, "unit_type", null],
+                        [Settings.BindingDirection.IN, "is_binary", null],
                         [Settings.BindingDirection.IN, "update_every", null],
                         [Settings.BindingDirection.IN, "update_available_interfaces_every", null],
                         [Settings.BindingDirection.IN, "launch_terminal", null],
@@ -183,6 +209,9 @@ MyApplet.prototype = {
                         [Settings.BindingDirection.IN, "show_hover", this.on_show_hover_changed],
                         [Settings.BindingDirection.IN, "gui_data_limit_type", this.on_gui_data_limit_type_changed],
                         [Settings.BindingDirection.IN, "gui_text_css", this.on_gui_css_changed],
+                        [Settings.BindingDirection.IN, "gui_enable_inactive_text_css", null],
+                        [Settings.BindingDirection.IN, "gui_inactive_text_css", null],
+                        [Settings.BindingDirection.IN, "gui_show_icons", this.on_gui_icon_visible_changed],
                         [Settings.BindingDirection.IN, "gui_received_icon_filename", this.on_gui_icon_changed],
                         [Settings.BindingDirection.IN, "gui_sent_icon_filename", this.on_gui_icon_changed],
                         [Settings.BindingDirection.IN, "gui_symbolic_icon", this.on_gui_icon_style_change],
@@ -197,8 +226,8 @@ MyApplet.prototype = {
     },
 
     _connect_signals: function() {
-        global.connect("shutdown", Lang.bind(this, this.on_shutdown));
-        global.connect("scale-changed", Lang.bind(this, this.on_panel_height_changed));
+        global.connect("shutdown", () => { this.on_shutdown() });
+        global.connect("scale-changed", () => { this.on_panel_height_changed() });
     },
 
     on_shutdown: function () {
@@ -292,6 +321,10 @@ MyApplet.prototype = {
         else {
             this.hover_popup.disable();
         }
+    },
+
+    on_gui_icon_visible_changed: function () {
+        this.gui_speed.set_icons_visible(this.gui_show_icons);
     },
 
     on_gui_icon_changed: function () {
@@ -558,9 +591,9 @@ MyApplet.prototype = {
     _init_menu_item_gui: function () {
         this.menu_item_gui = new AppletGui.RadioMenuItem(_("Gui"), [_("Compact"), _("Large")]);
         this.menu_item_gui.set_active_option(this.gui_speed_type);
-        this.menu_item_gui.set_callback_option_clicked(this, this.on_menu_item_gui_clicked);
+        this.menu_item_gui.set_callback_option_clicked(this, (option_name, option_index) => { this.on_menu_item_gui_clicked(option_name, option_index) });
         this._applet_context_menu.addMenuItem(this.menu_item_gui);
-        this._applet_context_menu.connect('open-state-changed', Lang.bind(this, this.on_context_menu_state_changed));
+        this._applet_context_menu.connect('open-state-changed', (actor, event) => { this.on_context_menu_state_changed(actor, event) });
     },
 
     on_menu_item_gui_clicked: function (option_name, option_index) {
@@ -671,7 +704,7 @@ MyApplet.prototype = {
     },
 
     _init_gui: function () {
-        this.gui_speed = new AppletGui.GuiSpeed(this._panelHeight, this.gui_speed_type, this.gui_value_order, this.decimal_places);
+        this.gui_speed = new AppletGui.GuiSpeed(this._panelHeight, this.gui_speed_type, this.gui_value_order, this.decimal_places, this.is_binary);
         this.gui_data_limit = new AppletGui.GuiDataLimit(this._panelHeight, this.gui_data_limit_type);
         this.actor.destroy_all_children();
         this._add_gui_speed();
@@ -682,6 +715,7 @@ MyApplet.prototype = {
         this.actor.add(this.gui_speed.actor,
                       { x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE, y_fill: false });
         this.on_gui_icon_changed();
+        this.on_gui_icon_visible_changed();
         this.on_gui_css_changed();
     },
 
@@ -709,7 +743,7 @@ MyApplet.prototype = {
 
     _run_calculate_speed: function () {
         this._calculate_speed();
-        Mainloop.timeout_add(this.update_every * 1000, Lang.bind(this, this._run_calculate_speed_running));
+        timeout_add(this.update_every * 1000, () => { this._run_calculate_speed_running() });
     },
 
     _calculate_speed: function () {
@@ -728,11 +762,13 @@ MyApplet.prototype = {
                 bytes_sent_total += info.bytes_sent_total;
             }
 
-            let received = this.get_bytes_received_iteration_string(bytes_received_iteration);
-            let sent = this.get_bytes_sent_iteration_string(bytes_sent_iteration);
+            let [received, is_received] = this.get_bytes_received_iteration_string(bytes_received_iteration);
+            let [sent, is_sent] = this.get_bytes_sent_iteration_string(bytes_sent_iteration);
             let received_total = this.convert_to_two_decimals_string(bytes_received_total);
             let sent_total = this.convert_to_two_decimals_string(bytes_sent_total);
 
+            this.gui_speed.set_received_text_style((is_received || !this.gui_enable_inactive_text_css) ? this.gui_text_css : this.gui_inactive_text_css);
+            this.gui_speed.set_sent_text_style((is_sent || !this.gui_enable_inactive_text_css) ? this.gui_text_css : this.gui_inactive_text_css);
             this.gui_speed.set_received_text(received);
             this.gui_speed.set_sent_text(sent);
             this.update_gui_data_limit(bytes_received_total, bytes_sent_total);
@@ -755,16 +791,15 @@ MyApplet.prototype = {
     get_bytes_received_iteration_string: function (bytes) {
         let received = this.replace_with_zero(bytes, this.minimum_bytes_received_to_display);
         received = this.scale(received);
-        received = this.convert_to_readable_string(received);
-        return received;
+        return this.convert_to_readable_string(received);
     },
 
     replace_with_zero: function (bytes, minimum) {
-        return bytes >= minimum ? bytes : 0;
+        return (bytes >= minimum) ? bytes : 0;
     },
 
     scale: function (bytes) {
-        return this.display_mode == AppletConstants.DisplayMode.SPEED ? Math.round(bytes / this.update_every) : bytes;
+        return (this.display_mode == AppletConstants.DisplayMode.SPEED) ? Math.round(bytes / this.update_every) : bytes;
     },
 
     convert_to_readable_string: function (bytes) {
@@ -774,7 +809,7 @@ MyApplet.prototype = {
         }
 
         let output = number.toString() + unit;
-        return output;
+        return [output, parseFloat(number) !== 0];
     },
 
     convert_to_readable_unit: function (bytes) {
@@ -790,39 +825,21 @@ MyApplet.prototype = {
     },
 
     convert_bytes_to_readable_unit: function (bytes) {
-        if(bytes >= 1000000000000) {
-            return [bytes/1000000000000, "TB"];
-        }
-        if(bytes >= 1000000000) {
-            return [bytes/1000000000, "GB"];
-        }
-        if(bytes >= 1000000) {
-            return [bytes/1000000, "MB"];
-        }
-        if(bytes >= 1000) {
-            return [bytes/1000, "kB"];
-        }
-        return [bytes, "B"];
+        const fixed = (this.unit === AppletConstants.Unit.AUTO) ? null : (this.unit - 1); // Unit.B == 1 maps to index 0
+        const sizes = this.is_binary ? AppletConstants.SIZE_BIN : AppletConstants.SIZE_DEC;
+        const units = this.is_binary ? AppletConstants.BYTE_UNITS_BIN : AppletConstants.BYTE_UNITS_DEC;
+        return selectUnit(bytes, fixed, sizes, units);
+    },
+
+    convert_bits_to_readable_unit: function (bits) {
+        const fixed = (this.unit === AppletConstants.Unit.AUTO) ? null : (this.unit - 1);
+        const sizes = this.is_binary ? AppletConstants.SIZE_BIN : AppletConstants.SIZE_DEC;
+        const units = this.is_binary ? AppletConstants.BIT_UNITS_BIN : AppletConstants.BIT_UNITS_DEC;
+        return selectUnit(bits, fixed, sizes, units);
     },
 
     convert_to_bits: function (bytes) {
         return bytes * 8;
-    },
-
-    convert_bits_to_readable_unit: function (bits) {
-        if(bits >= 1000000000000) {
-            return [bits/1000000000000, "Tb"];
-        }
-        if(bits >= 1000000000) {
-            return [bits/1000000000, "Gb"];
-        }
-        if(bits >= 1000000) {
-            return [bits/1000000, "Mb"];
-        }
-        if(bits >= 1000) {
-            return [bits/1000, "kb"];
-        }
-        return [bits, _("b")];
     },
 
     is_base: function (unit) {
@@ -830,7 +847,7 @@ MyApplet.prototype = {
     },
 
     round_output_number: function (number) {
-        let output_number = this.decimal_places == AppletConstants.DecimalPlaces.AUTO ?
+        let output_number = (this.decimal_places == AppletConstants.DecimalPlaces.AUTO) ?
                             this.round_output_number_auto(number) : number.toFixed(this.decimal_places);
         return output_number;
     },
@@ -848,8 +865,7 @@ MyApplet.prototype = {
     get_bytes_sent_iteration_string: function (bytes) {
         let sent = this.replace_with_zero(bytes, this.minimum_bytes_sent_to_display);
         sent = this.scale(sent);
-        sent = this.convert_to_readable_string(sent);
-        return sent;
+        return this.convert_to_readable_string(sent);
     },
 
     convert_to_two_decimals_string: function (bytes) {
@@ -896,10 +912,10 @@ MyApplet.prototype = {
     _run_write_bytes: function () {
         if(this.write_every > 0) {
             this._write_bytes_total();
-            Mainloop.timeout_add(this.write_every * 1000, Lang.bind(this, this._run_write_bytes_running));
+            timeout_add(this.write_every * 1000, () => { this._run_write_bytes_running() });
         }
         else {
-            Mainloop.timeout_add(1000, Lang.bind(this, this._run_write_bytes_running));
+            timeout_add(1000, () => { this._run_write_bytes_running() });
         }
     },
 
@@ -919,30 +935,24 @@ MyApplet.prototype = {
     _run_update_available_interfaces: function () {
         if(this.update_available_interfaces_every > 0) {
             this.update_network_interfaces();
-            Mainloop.timeout_add(this.update_available_interfaces_every * 1000,
-                                 Lang.bind(this, this._run_update_available_interfaces_running));
+            timeout_add(this.update_available_interfaces_every * 1000,
+                                 () => { this._run_update_available_interfaces_running() });
         }
         else {
-            Mainloop.timeout_add(1000, Lang.bind(this, this._run_update_available_interfaces_running));
+            timeout_add(1000, () => { this._run_update_available_interfaces_running() });
         }
+    },
+
+    on_applet_removed_from_panel: function () {
+        remove_all_sources()
     },
 
 };
 
-
-
-
-
-
-
-
-
-
-
-
 function main(metadata, orientation, panel_height, instance_id) {
-    let myApplet = new MyApplet(metadata, orientation, panel_height, instance_id);
-    return myApplet;
+    //~ let myApplet = new DownloadAndUploadSpeed(metadata, orientation, panel_height, instance_id);
+    //~ return myApplet;
+    return new DownloadAndUploadSpeed(metadata, orientation, panel_height, instance_id);
 }
 
 

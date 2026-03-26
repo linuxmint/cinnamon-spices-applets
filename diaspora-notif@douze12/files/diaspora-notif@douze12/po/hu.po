@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-24 13:59+0800\n"
-"PO-Revision-Date: 2021-03-29 20:28+0200\n"
+"PO-Revision-Date: 2025-08-07 19:50+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. diaspora-notif@douze12->metadata.json->description
 #. diaspora-notif@douze12->metadata.json->name
@@ -62,4 +62,4 @@ msgstr "Adja meg diaspora* bejelentkezési adatait"
 
 #. diaspora-notif@douze12->settings-schema.json->podUrl->tooltip
 msgid "Enter your diaspora*'s Pod Url"
-msgstr "Adja meg diaspora* Pod Url-jét"
+msgstr "Adja meg diaspora* Pod URL-címét"

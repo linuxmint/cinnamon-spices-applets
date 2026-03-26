@@ -45,7 +45,7 @@
         "recentSection": {
             "type": "section",
             "title": "Recent documents",
-            "keys": ["showRecentDocuments", "recentSizeLimit", "btnPrivacy"]
+            "keys": ["showRecentDocuments", "recentSizeLimit", "recentShowUri", "btnPrivacy"]
         }
     },
 
@@ -172,6 +172,12 @@
         "description": "Number to show",
         "indent": true,
         "dependency": "showRecentDocuments"
+    },
+
+    "recentShowUri": {
+        "type": "checkbox",
+        "description": "Show complete path in tooltips",
+        "default": true
     },
 
     "btnPrivacy": {

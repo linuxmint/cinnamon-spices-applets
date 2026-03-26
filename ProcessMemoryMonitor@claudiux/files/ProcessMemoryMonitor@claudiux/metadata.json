@@ -1,0 +1,7 @@
+{
+  "description": "Monitors memory usage of Cinnamon or any other process",
+  "max-instances": "10",
+  "version": "1.0.0",
+  "uuid": "ProcessMemoryMonitor@claudiux",
+  "name": "Process Memory Monitor"
+}

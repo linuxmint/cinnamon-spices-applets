@@ -72,13 +72,13 @@ MyApplet.prototype = {
 	},
 
 	_pad: function(percent) {
-		let str = "";
+        	let str = percent.toString();
 		let str_length = this.max_percentage.toString().length;
 		
-		while(str.length < str_length) {
-			str = " " + str;
+        	while(str.length < str_length) {
+			str = "\u2007" + str;
 		}
-		return (str + percent.toString()).slice(str_length);
+        	return (str);
 	},
 
 	_update: function() {
@@ -104,8 +104,15 @@ MyApplet.prototype = {
 
 	_runSysMon: function() {
 		let _appSys = Cinnamon.AppSystem.get_default();
-		let _gsmApp = _appSys.lookup_app('gnome-system-monitor.desktop');
-		_gsmApp.activate();
+        let _gsmApp = _appSys.lookup_app('org.gnome.SystemMonitor.desktop');
+        if(_gsmApp) {
+            _gsmApp.activate();
+            return
+        }
+        _gsmApp = _appSys.lookup_app('gnome-system-monitor.desktop');
+        if(_gsmApp) {
+            _gsmApp.activate();
+        }
 	},
 };
 

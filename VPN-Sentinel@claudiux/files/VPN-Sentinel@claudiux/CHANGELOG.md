@@ -1,3 +1,35 @@
+### v2.5.1~20260207
+  * Updates checkDependencies.js for Arch.
+
+### v2.5.0~20251212
+  * Use xlet-settings instead of cinnamon-settings to configure applet.
+
+### v2.4.3~20251121
+  * Updates to-string() function.
+
+### v2.4.2~20251109
+  * Updates loop management.
+
+### v2.4.1~20250413
+  * Uses mainloopTools.
+  * Updates checkDependencies.js.
+
+### v2.3.1~20250111
+  * Minor change in FileInfo.js.
+
+### v2.3.0~20241215
+  * Proper shutdown of flatpak internet applications when VPN is closed.
+
+### v2.2.3~20240726
+  * Solves dependency problem.
+
+### v2.2.1~20240202
+  * Changes icon.png and icon.svg.
+  * Updates README.md
+
+### v2.2.0~20240120
+  * Improves sub-processes.
+
 ### v2.1.1~20230528
   * Fixes a dependence issue for Arch: `dig` is in `bind` package and not in `bind-utils`.
 

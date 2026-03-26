@@ -1,0 +1,507 @@
+## FISH
+# This file is put in the public domain.
+# kriegcc, 2024
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fish@kriegcc 0.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-20 18:32+0100\n"
+"PO-Revision-Date: 2025-07-12 12:00+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. fish-applet.js:838
+msgid "Fish Applet"
+msgstr "Fish 小程式"
+
+#. fish-applet.js:895
+msgid "There's something fishy going on here:"
+msgstr "這裡有點不尋常："
+
+#. fish-applet.js:936
+msgid "Copy Error Messages"
+msgstr "複製錯誤訊息"
+
+#. fish-applet.js:939
+msgid "Copy Error Message"
+msgstr "複製錯誤訊息"
+
+#. fish-applet.js:955 fish-applet.js:1459
+msgid "Open Preferences"
+msgstr "開啟偏好設定"
+
+#. fish-applet.js:967
+msgid "Errors copied to the clipboard"
+msgstr "錯誤訊息已複製到剪貼簿"
+
+#. fish-applet.js:970
+msgid "Error copied to the clipboard"
+msgstr "錯誤訊息已複製到剪貼簿"
+
+#. fish-applet.js:1043
+msgid "Copy Message"
+msgstr "複製訊息"
+
+#. fish-applet.js:1055
+msgid "Speak again"
+msgstr "再說一次"
+
+#. fish-applet.js:1060
+msgid "Close"
+msgstr "關閉"
+
+#. fish-applet.js:1080
+#, javascript-format
+msgid "%s the Fish Says:"
+msgstr "%s 這條魚說："
+
+#. fish-applet.js:1088
+msgid "Message copied to the clipboard"
+msgstr "訊息已複製到剪貼簿"
+
+#. fish-applet.js:1116
+msgid "The water needs changing"
+msgstr "該換水了"
+
+#. fish-applet.js:1121
+msgid "Look at today's date!"
+msgstr "看看今天的日期！"
+
+#. fish-applet.js:1422
+#, javascript-format
+msgid "%s the Fish, the fortune teller"
+msgstr "預言家 %s 魚"
+
+#. fish-applet.js:1439
+#, javascript-format
+msgid ""
+"Warning: The command appears to be something actually useful. \n"
+"Since this is a useless applet, you may not want to do this. \n"
+"We strongly advise you against using %s for anything which would make the "
+"applet \"practical\" or useful."
+msgstr ""
+"警告：這個指令看起來真的有點用處。\n"
+"由於這是一個無用的小程式，您可能不會想這麼做。\n"
+"我們強烈建議不要用 %s 來做任何會讓這個小程式變得「實用」或有用的事情。"
+
+#. fish-applet.js:1447
+msgid ""
+"Normally, the Fish's wisdom is derived from the 'fortune' command-line "
+"utility. \n"
+"It seems that this dependency is missing on your system.\n"
+"However, it should be available for most distributions. \n"
+"Please refer to the documentation for instructions on how to install it. \n"
+"If you prefer not to install any additional packages, you can change the "
+"command in the applet's settings."
+msgstr ""
+"一般來說，這條魚的智慧來自 'fortune' 指令列工具。\n"
+"系統似乎缺少此相依套件。\n"
+"不過，大多數發行版都能取得此套件。\n"
+"請參考說明文件取得安裝指引。\n"
+"若不想安裝額外套件，也可在小程式設定中更改此指令。"
+
+#. fish-applet.js:1455
+msgid "Open Documentation"
+msgstr "開啟說明文件"
+
+#. ImageChooser.py:56
+msgid "File"
+msgstr "檔案"
+
+#. ImageChooser.py:61
+msgid "Select an animation"
+msgstr "選擇動畫"
+
+#. ImageChooser.py:66
+msgid "Images"
+msgstr "圖片"
+
+#. metadata.json->name
+msgid "Fish"
+msgstr "Fish"
+
+#. metadata.json->description
+msgid ""
+"Displays a small fish in your panel and does nothing useful whatsoever "
+"beyond that."
+msgstr "在面板上顯示一條小魚，除此之外沒有任何實質用途。"
+
+#. settings-schema.json->pagePreferences->title
+msgid "Preferences"
+msgstr "偏好設定"
+
+#. settings-schema.json->pageAdvancedSettings->title
+msgid "Advanced Settings"
+msgstr "進階設定"
+
+#. settings-schema.json->pageHelp->title
+msgid "Help"
+msgstr "說明"
+
+#. settings-schema.json->pageAbout->title
+msgid "About"
+msgstr "關於"
+
+#. settings-schema.json->sectionGeneral->title
+msgid "General"
+msgstr "一般"
+
+#. settings-schema.json->sectionAnimation->title
+msgid "Animation"
+msgstr "動畫"
+
+#. settings-schema.json->sectionAdvancedAnimationSettings->title
+msgid "Animation Settings"
+msgstr "動畫設定"
+
+#. settings-schema.json->sectionAdvancedAnimationSettingsMargin->title
+msgid "Animation Margin"
+msgstr "動畫邊距"
+
+#. settings-
+#. schema.json->sectionAdvancedAnimationSettingsCustomDimension->title
+msgid "Animation Custom Dimension"
+msgstr "動畫自訂尺寸"
+
+#. settings-schema.json->sectionDeveloperOptions->title
+msgid "Developer Options"
+msgstr "開發者選項"
+
+#. settings-schema.json->sectionInstruction->title
+msgid "Manual"
+msgstr "使用手冊"
+
+#. settings-schema.json->sectionReportIssue->title
+msgid "Report an Issue"
+msgstr "回報問題"
+
+#. settings-schema.json->sectionAbout->title
+msgid "About Fish Applet"
+msgstr "關於 Fish 小程式"
+
+#. settings-schema.json->sectionVersion->title
+msgid "Version"
+msgstr "版本"
+
+#. settings-schema.json->sectionLicense->title
+msgid "License"
+msgstr "授權條款"
+
+#. settings-schema.json->sectionCredits->title
+msgid "Credits"
+msgstr "貢獻者"
+
+#. settings-schema.json->sectionMaintainersAndContributors->title
+msgid "Maintainer and Contributors"
+msgstr "維護者與貢獻者"
+
+#. settings-schema.json->keyNameOfFish->description
+msgid "Name of fish"
+msgstr "魚的名稱"
+
+#. settings-schema.json->keyNameOfFish->tooltip
+msgid "Use this text box to specify the name of the fish."
+msgstr "請在此欄位輸入魚的名稱。"
+
+#. settings-schema.json->keyCommand->description
+msgid "Command to run when clicked"
+msgstr "點選時執行的指令"
+
+#. settings-schema.json->keyCommand->tooltip
+msgid ""
+"By default, Fish runs the 'fortune' command when you click on the applet. "
+"Use this text box to specify an alternative command to run."
+msgstr ""
+"預設情況下，Fish 會在點選小程式時執行 'fortune' 指令。"
+"請在此欄位指定其他要執行的指令。"
+
+#. settings-schema.json->keyFrames->units
+msgid "frames"
+msgstr "格"
+
+#. settings-schema.json->keyFrames->description
+msgid "Total frames in animation"
+msgstr "動畫總格數"
+
+#. settings-schema.json->keyFrames->tooltip
+msgid "Use this spin box to specify the number of frames in the animation."
+msgstr "請在此欄位設定動畫的格數。"
+
+#. settings-schema.json->keyPausePerFrameInSeconds->units
+msgid "seconds"
+msgstr "秒"
+
+#. settings-schema.json->keyPausePerFrameInSeconds->description
+msgid "Pause per frame"
+msgstr "每格間隔時間"
+
+#. settings-schema.json->keyPausePerFrameInSeconds->tooltip
+msgid ""
+"Use this spin box to specify the pause in seconds between each frame in the "
+"animation."
+msgstr "請在此欄位設定動畫每格之間的間隔秒數。"
+
+#. settings-schema.json->keyFlipSidewaysOnVerticalPanel->description
+msgid "Flip sideways on vertical panels"
+msgstr "在垂直面板時橫向翻轉"
+
+#. settings-schema.json->keyFlipSidewaysOnVerticalPanel->tooltip
+msgid ""
+"Select this option to rotate the applet image sideways when you add the "
+"applet to a vertical panel."
+msgstr "勾選此選項可在將小程式加入垂直面板時橫向翻轉圖像。"
+
+#. settings-schema.json->keyImagePath->tooltip
+msgid ""
+"Use this field to select the image to display in the applet. You can select "
+"an image that is supplied with the applet or a personal image."
+msgstr "請在此欄位選擇要在小程式中顯示的圖片，可選擇內建圖片或自訂圖片。"
+
+#. settings-schema.json->keyAnimationScalingMode->description
+msgid "Scaling Mode"
+msgstr "縮放模式"
+
+#. settings-schema.json->keyAnimationScalingMode->options
+msgid "Auto-fit"
+msgstr "自動適應"
+
+#. settings-schema.json->keyAnimationScalingMode->options
+msgid "Preserve original size"
+msgstr "保留原始大小"
+
+#. settings-schema.json->keyAnimationScalingMode->options
+msgid "Custom"
+msgstr "自訂"
+
+#. settings-schema.json->keyAnimationScalingMode->tooltip
+msgid "Select how the animation image in the panel should be scaled."
+msgstr "請選擇面板中動畫圖片的縮放方式。"
+
+#. settings-schema.json->keyAnimationMarginHint->description
+msgid ""
+"Margin options apply only when the 'auto-fit' option is enabled. For other "
+"settings, margins appear if the animation is smaller than the panel."
+msgstr ""
+"邊距選項僅在啟用「自動適應」時適用。其他設定下，若動畫小於面板則會顯示邊距。"
+
+#. settings-schema.json->keyAnimationAutoMargin->description
+msgid "Auto-margin"
+msgstr "自動邊距"
+
+#. settings-schema.json->keyAnimationAutoMargin->tooltip
+msgid "Check this to use the default margin from theme."
+msgstr "勾選此選項以使用主題預設邊距。"
+
+#. settings-schema.json->keyAnimationMargin->units
+#. settings-schema.json->keyAnimationHeight->units
+#. settings-schema.json->keyAnimationWidth->units
+msgid "px"
+msgstr "像素"
+
+#. settings-schema.json->keyAnimationMargin->description
+msgid "Margin around the animation frame"
+msgstr "動畫格邊距"
+
+#. settings-schema.json->keyAnimationMargin->tooltip
+msgid ""
+"Use this spin box to specify the margin around the animation frame shown in "
+"the panel."
+msgstr "請在此欄位設定面板動畫格的邊距。"
+
+#. settings-schema.json->keyAnimationHeight->description
+msgid "Height"
+msgstr "高度"
+
+#. settings-schema.json->keyAnimationHeight->tooltip
+msgid "Use this spin box to specify a custom height for the animation frame."
+msgstr "請在此欄位設定動畫格的自訂高度。"
+
+#. settings-schema.json->keyAnimationWidth->description
+msgid "Width"
+msgstr "寬度"
+
+#. settings-schema.json->keyAnimationWidth->tooltip
+msgid "Use this spin box to specify a custom width for the animation frame."
+msgstr "請在此欄位設定動畫格的自訂寬度。"
+
+#. settings-schema.json->keyAnimationPreserveAspectRatio->description
+msgid "Preserve aspect ratio"
+msgstr "保留長寬比"
+
+#. settings-schema.json->keyAnimationPreserveAspectRatio->tooltip
+msgid ""
+"Enable this option to maintain the original aspect ratio of the animation. "
+"If enabled, the specified width will be ignored."
+msgstr ""
+"啟用此選項可維持動畫原始長寬比。啟用後將忽略指定的寬度。"
+
+#. settings-schema.json->keyAnimationRotationHint->description
+msgid ""
+"If a rotation is selected, the image may also be flipped sideways depending "
+"on the 'Flip sideways on vertical panels' option."
+msgstr ""
+"若選擇旋轉，圖像也可能依據「在垂直面板時橫向翻轉」選項而橫向翻轉。"
+
+#. settings-schema.json->keyAnimationRotation->description
+msgid "Rotation"
+msgstr "旋轉"
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "0°"
+msgstr "0°"
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "90°"
+msgstr "90°"
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "180°"
+msgstr "180°"
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "270°"
+msgstr "270°"
+
+#. settings-schema.json->keyLogLevel->description
+msgid "Log Level"
+msgstr "日誌等級"
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Info"
+msgstr "資訊"
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Debug"
+msgstr "除錯"
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Warning"
+msgstr "警告"
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Error"
+msgstr "錯誤"
+
+#. settings-schema.json->keyForceFoolsDay->description
+msgid "Force Fool's Day"
+msgstr "強制愚人節模式"
+
+#. settings-schema.json->keyForceFoolsDay->tooltip
+msgid ""
+"Enforces Fool's Day mode for debugging purposes. Simulates Fool's Day (April "
+"1st) without modifying the system date."
+msgstr "強制啟用愚人節模式以便除錯。模擬 4 月 1 日但不會變更系統日期。"
+
+#. settings-schema.json->keyInstructionsText->description
+msgid ""
+"For instructions on how to use and configure this applet, please visit the "
+"applet's page on the Cinnamon Spices website."
+msgstr "如需使用與設定本小程式的說明，請造訪 Cinnamon Spices 網站上的小程式頁面。"
+
+#. settings-schema.json->keyReportIssueText->description
+msgid ""
+"If you encounter a problem with this applet, please file an issue report on "
+"GitHub. Note that a GitHub account is required to submit an issue. Before "
+"doing so, check if the issue has already been submitted by someone else. "
+"Since this applet is part of Linux Mint's `cinnamon-spices-applets` "
+"repository, it's important to follow their guidelines for this process. Make "
+"sure that the applet name (fish@kriegcc) is included in the title when "
+"opening a new issue. Follow the provided template for the description and "
+"provide as much information as possible about the issue."
+msgstr ""
+"若您在使用本小程式時遇到問題，請至 GitHub 回報。提交問題需使用 GitHub 帳號。"
+"回報前請先確認是否已有其他人提出相同問題。"
+"由於本小程式屬於 Linux Mint 的 `cinnamon-spices-applets` 專案，請務必遵循該專案的回報指引。"
+"開新問題時，標題請務必包含小程式名稱 (fish@kriegcc)。"
+"請依照提供的範本填寫問題描述，並盡可能提供詳細資訊。"
+
+#. settings-schema.json->keyButtonReportIssueInstructions->description
+msgid "Reporting Bugs Instructions of Cinnamon Spices applets"
+msgstr "Cinnamon Spices 小程式回報錯誤指引"
+
+#. settings-schema.json->keyButtonReportIssueInstructions->tooltip
+msgid ""
+"Opens the contributions guidelines of the Cinnamon Spices applets repository "
+"on Github."
+msgstr "開啟 Cinnamon Spices 小程式專案的 GitHub 貢獻指引。"
+
+#. settings-schema.json->keyAboutText->description
+msgid ""
+"The Fish applet displays a small fish, called Wanda, in the panel. Wanda "
+"does nothing useful. The applet has really no use what-so-ever. It only "
+"takes up disk space and compilation time, and if loaded it also takes up "
+"precious panel space and memory. Anybody found using it should be promptly "
+"sent for a psychiatric evaluation."
+msgstr ""
+"Fish 小程式會在面板上顯示一條名為 Wanda 的小魚。"
+"Wanda 完全沒有實質用途。"
+"這個小程式毫無用處，只會佔用磁碟空間和編譯時間，載入後還會佔用寶貴的面板空間和記憶體。"
+"任何被發現使用此小程式的人都應立即接受精神評估。"
+
+#. settings-schema.json->keyButtonWebsite->description
+msgid "Fish Applet at Cinnamon Spices Website"
+msgstr "Cinnamon Spices 網站上的 Fish 小程式"
+
+#. settings-schema.json->keyButtonWebsite->tooltip
+msgid "Opens the applet's page on Cinnamon Spices website."
+msgstr "開啟 Cinnamon Spices 網站上的小程式頁面。"
+
+#. settings-schema.json->keyVersion->description
+msgid "v0.2.0"
+msgstr "v0.2.0"
+
+#. settings-schema.json->keyLicenseText->description
+msgid "GPL-3.0-or-later"
+msgstr "GPL-3.0-or-later"
+
+#. settings-schema.json->keyCreditsText->description
+msgid ""
+"This project is an adaption of the Fish applet from GNOME and MATE desktops "
+"for Cinnamon desktop.\n"
+"The original Fish applet is licensed under the GNU General Public License "
+"(GPL).\n"
+"\n"
+"Original Authors:\n"
+"George Lebl\n"
+"Mark McLoughlin\n"
+"Vincent Untz\n"
+"Stefano Karapetsas\n"
+"\n"
+"Copyright:\n"
+"(C) 1998-2002 Free Software Foundation, Inc.\n"
+"(C) 2002-2005 Vincent Untz\n"
+"(C) 2012-2021 MATE developers"
+msgstr ""
+"本專案是將 GNOME 與 MATE 桌面環境的 Fish 小程式移植到 Cinnamon 桌面。\n"
+"原始 Fish 小程式採用 GNU 通用公共授權條款 (GPL)。\n"
+"\n"
+"原始作者：\n"
+"George Lebl\n"
+"Mark McLoughlin\n"
+"Vincent Untz\n"
+"Stefano Karapetsas\n"
+"\n"
+"版權所有：\n"
+"(C) 1998-2002 Free Software Foundation, Inc.\n"
+"(C) 2002-2005 Vincent Untz\n"
+"(C) 2012-2021 MATE 開發團隊"
+
+#. settings-schema.json->keyMaintainersAndContributorsText->description
+msgid ""
+"Maintainer:\n"
+"kriegcc\n"
+"\n"
+"Contributors:\n"
+msgstr ""
+"維護者：\n"
+"kriegcc\n"
+"\n"
+"貢獻者：\n"

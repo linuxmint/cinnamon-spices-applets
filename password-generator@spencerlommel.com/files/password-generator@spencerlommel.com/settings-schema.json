@@ -1,0 +1,62 @@
+
+
+{
+    "password-settings-header" : {
+        "type" : "header",
+        "description" : "Password Settings"
+     },    
+    "password-length": {
+        "type": "spinbutton",
+        "default": 12,
+        "min": 1,
+        "max": 32,
+        "step": 1,
+        "units": "characters",
+        "description": "Password Length",
+        "tooltip": "The password can be any length from 1 to 32 characters."
+    },
+    "include-lowercase": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Include Lowercase Letters"
+    },
+    "include-uppercase": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Include Uppercase Letters"
+    },
+    "include-numbers": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Include Numbers"
+    },
+    "include-symbols": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Include Symbols"
+    },
+    "copy-settings-header" : {
+        "type" : "header",
+        "description" : "Copy Settings"
+     }, 
+    "auto-copy": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Automatically Copy To Clipboard",
+        "tooltip": "When clicking the lock icon, instead of opening a window where the password can be copied it is instead automatically copied to your Clipboard."
+    },
+    "play-sound": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Play sound on copy",
+        "tooltip": "Toggles whether or not a sound is played when the password is copied to the Clipboard"
+    },
+    "sound-file": {
+        "type": "soundfilechooser",
+        "default": "/usr/share/sounds/freedesktop/stereo/map.oga",
+        "dependency": "play-sound",
+        "description": "Sound file",
+        "tooltip": "Select a sound to play when the password is copied"
+    }
+        
+}

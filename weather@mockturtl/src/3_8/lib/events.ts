@@ -10,10 +10,11 @@ interface IEvent<TSender, TArgs> {
 
 export class Event<TSender, TArgs> implements IEvent<TSender, TArgs> {
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private static eventStore: Event<any, any>[] = [];
 
 	/** Safe Unsubscription of all callbacks, Should be used on Applet removal. */
-	public static DisconnectAll() {
+	public static DisconnectAll(): void {
 		for (const event of this.eventStore) {
 			event.UnSubscribeAll();
 		}

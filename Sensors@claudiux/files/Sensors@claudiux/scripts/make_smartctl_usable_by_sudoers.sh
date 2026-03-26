@@ -1,22 +1,51 @@
-#!/bin/bash
+#!/usr/bin/env bash
 [[ $UID -eq 0 ]] || exit 1
 
 GROUP=$1
 [[ "none" == $GROUP ]] && exit 1
 
+SMARTCTLFILE="/etc/sudoers.d/smartctl"
+[[ -x /usr/bin/dnf ]] && {
+    # Distro is Fedora!
+    [[ -d /etc/sudoersSensors.d ]] || {
+        sudo mkdir -p /etc/sudoersSensors.d
+        sudo chmod 755 /etc/sudoersSensors.d
+        sudo chgrp -f wheel /etc/sudoersSensors.d
+    }
+    SMARTCTLFILE="/etc/sudoersSensors.d/smartctl"
+    line=$(sudo cat /etc/sudoers | grep sudoersSensors )
+    [[ -n "$line" ]] || {
+        echo "#includedir /etc/sudoersSensors.d" | sudo tee -a /etc/sudoers
+    }
+}
 
-echo "%sudo ALL = NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL: /usr/sbin/smartctl" | sudo tee "/etc/sudoers.d/smartctl"
-echo "%wheel ALL = NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL: /usr/sbin/smartctl" | sudo tee -a "/etc/sudoers.d/smartctl"
-#~ sudo chmod +r /etc/sudoers.d/smartctl
+[[ -x /usr/bin/pacman ]] && {
+    # Distro is Arch!
+    [[ -d /etc/sudoersSensors.d ]] || {
+        sudo mkdir -p /etc/sudoersSensors.d
+        sudo chmod 755 /etc/sudoersSensors.d
+        sudo chgrp -f wheel /etc/sudoersSensors.d
+    }
+    SMARTCTLFILE="/etc/sudoersSensors.d/smartctl"
+    line=$(sudo cat /etc/sudoers | grep sudoersSensors )
+    [[ -n "$line" ]] || {
+        echo "@includedir /etc/sudoersSensors.d" | sudo tee -a /etc/sudoers
+    }
+}
 
-#~ echo $(groups)
+sudo touch $SMARTCTLFILE
+sudo chmod 660 $SMARTCTLFILE
 
-#~ for gr in $(groups); do [[ "wheel" == $gr ]] && sudo chgrp -f wheel /etc/sudoers.d ; done
+[[ "wheel" == $GROUP ]] && {
+    echo "%wheel ALL = NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL: /usr/sbin/smartctl" | sudo tee $SMARTCTLFILE
+    sudo chgrp -f wheel $SMARTCTLFILE
+}
 
-#~ for gr in $(groups); do [[ "sudo" == $gr ]] && sudo chgrp -f sudo /etc/sudoers.d ; done
+[[ "sudo" == $GROUP ]] && {
+    echo "%sudo ALL = NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL: /usr/sbin/smartctl" | sudo tee $SMARTCTLFILE
+    sudo chgrp -f sudo $SMARTCTLFILE
+}
 
-[[ "wheel" == $GROUP ]] && sudo chgrp -f wheel /etc/sudoers.d /etc/sudoers.d/smartctl
-
-[[ "sudo" == $GROUP ]] && sudo chgrp -f sudo /etc/sudoers.d /etc/sudoers.d/smartctl
+sudo chmod 440 $SMARTCTLFILE
 
 exit 0

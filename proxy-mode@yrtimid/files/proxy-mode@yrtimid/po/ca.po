@@ -1,0 +1,31 @@
+# PROXY MODE SWITCHER
+# This file is put in the public domain.
+# yrtimiD, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: proxy-mode@yrtimid 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-05 00:09+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. metadata.json->name
+#. applet.js:35
+msgid "Proxy Mode Switcher"
+msgstr "Interruptor de mode de proxy"
+
+#. metadata.json->description
+msgid ""
+"Switch between system proxy modes (None, Manual, Automatic) from the panel."
+msgstr ""
+"Canvieu entre els diferents modes de proxy del sistema (Cap, Manual, "
+"Automàtic) des del tauler."

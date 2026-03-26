@@ -1,0 +1,9 @@
+{
+    "website":       "https://github.com/Feuerfuchs/GPaste-Reloaded-Cinnamon-Applet",
+    "uuid":          "gpaste-reloaded@feuerfuchs.eu",
+    "max-instances": -1,
+    "description":   "Instantly access and manage your clipboard history.",
+    "version":       "2.8",
+    "multiversion":  "true",
+    "name":          "GPaste Reloaded"
+}

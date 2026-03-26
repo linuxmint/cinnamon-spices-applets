@@ -1,0 +1,22 @@
+
+#
+# Each line should be written similar to:
+#
+# LauncherName: launcherbin ;; /usr/bin/launcherbin ;; ...
+#
+# Alternative paths where to find the binary can be separated
+# by double semicolon (;;)
+# 
+
+Bottles: flatpak:com.usebottles.bottles
+Lutris: lutris \
+    ;; /usr/games/lutris \
+    ;; /usr/bin/lutris \
+    ;; /usr/local/bin/lutris
+PlayOnLinux: playonlinux \
+    ;; /usr/bin/playonlinux \
+    ;; /usr/local/bin/playonlinux
+Q4Wine: q4wine \
+    ;; /usr/bin/q4wine \
+    ;; /usr/local/bin/q4wine
+

@@ -199,7 +199,7 @@ MyApplet.prototype = {
         }
 
         // Ensure is value
-        if (value > 100 || value <= 0) {
+        if (value > 100 || value < 0) {
             return;
         }
 
@@ -249,7 +249,7 @@ MyApplet.prototype = {
         }
 
         // Ensure is value
-        if (value > 100 || value <= 0) {
+        if (value > 100 || value < 0) {
             return;
         }
 

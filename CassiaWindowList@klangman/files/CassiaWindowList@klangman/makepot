@@ -1,3 +1,0 @@
-#!/bin/bash
-cinnamon-xlet-makepot .
-xgettext -o po/CassiaWindowList@klangman.pot -j -L glade SetupWizard.ui

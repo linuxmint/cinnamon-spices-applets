@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 20:18+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-15 02:01+0200\n"
 "PO-Revision-Date: 2017-12-20 20:20+0200\n"
 "Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
@@ -18,43 +19,51 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:178
+#: applet.js:150
+msgid "(Right click to open folder)"
+msgstr ""
+
+#: applet.js:172
 msgid "Places"
 msgstr "Места"
 
-#: applet.js:291
+#: applet.js:287
 msgid "Search Home Folder"
 msgstr "Търси в домашната папка"
 
-#: applet.js:305
+#: applet.js:310
 msgid "SYSTEM"
 msgstr "СИСТЕМА"
 
-#: applet.js:314
+#: applet.js:319
 msgid "Search File System"
 msgstr "Търси във файловата система"
 
-#: applet.js:330
+#: applet.js:344
 msgid "RECENT DOCUMENTS"
 msgstr "ПОСЛЕДНИ ДОКУМЕНТИ"
 
-#: applet.js:344
+#: applet.js:358
 msgid "Clear"
 msgstr "Изчисти"
 
-#: applet.js:388
+#: applet.js:364
+msgid "Recent"
+msgstr ""
+
+#: applet.js:407
 msgid "Computer"
 msgstr "Компютър"
 
-#: applet.js:394
+#: applet.js:413
 msgid "File System"
 msgstr "Файлова система"
 
-#: applet.js:410
+#: applet.js:429
 msgid "Network"
 msgstr "Мрежа"
 
-#: applet.js:513
+#: applet.js:569
 msgid "Trash"
 msgstr "Кошче"
 
@@ -127,8 +136,41 @@ msgid "Skipping"
 msgstr "Пропускане"
 
 #: search.py:259
-msgid " - direcotry already searched"
+#, fuzzy
+msgid " - directory already searched"
 msgstr " - директорията е вече претърсена"
+
+#. metadata.json->name
+msgid "Places Center"
+msgstr "Централни места"
+
+#. metadata.json->description
+msgid "Provides an easy-to-read layout to access your places"
+msgstr "Доставя лесна за ползване подредба за достъп до вашите места"
+
+#. metadata.json->comments
+msgid ""
+"Places Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy access to all of your most-used places. Feel free to "
+"contribute by submitting pull requests, bug reports and feature requests to "
+"my github repo."
+msgstr ""
+"Централни места е богат на функции, много платформен аплет за Cinnamon, "
+"който предоставя лесен достъп до най-използваните от вас места. Чувствайте "
+"се поканени да допринесете с pull request, искане за функции и отчет за "
+"грешки в моето github хранилище."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Автор: Стивън Колинс"
+
+#. metadata.json->contributors
+msgid "kehugter - Added configurability to middle click"
+msgstr "Добавка на конфигурация при клик с колелцето: kehugter"
+
+#. metadata.json->contributors
+msgid "claudiux - Improvements to the 'Recent' section."
+msgstr ""
 
 #. settings-schema.json->generalPage->title
 msgid "General"
@@ -258,34 +300,43 @@ msgstr "Показвай мрежа"
 msgid "Show recent documents"
 msgstr "Показване на последните документи"
 
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+#, fuzzy
+msgid "All Recent Documents"
+msgstr "Последни документи"
+
 #. settings-schema.json->recentSizeLimit->description
 msgid "Number to show"
 msgstr "Брой за показване"
 
-#. metadata.json->name
-msgid "Places Center"
-msgstr "Централни места"
-
-#. metadata.json->description
-msgid "Provides an easy-to-read layout to access your places"
-msgstr "Доставя лесна за ползване подредба за достъп до вашите места"
-
-#. metadata.json->comments
-msgid ""
-"Places Center is a feature-rich, cross-platform Cinnamon applet that "
-"provides easy access to all of your most-used places. Feel free to "
-"contribute by submitting pull requests, bug reports and feature requests to "
-"my github repo."
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
 msgstr ""
-"Централни места е богат на функции, много платформен аплет за Cinnamon, "
-"който предоставя лесен достъп до най-използваните от вас места. Чувствайте "
-"се поканени да допринесете с pull request, искане за функции и отчет за "
-"грешки в моето github хранилище."
 
-#. metadata.json->contributors
-msgid "Stephen Collins - Author"
-msgstr "Автор: Стивън Колинс"
-
-#. metadata.json->contributors
-msgid "kehugter - Added configurability to middle click"
-msgstr "Добавка на конфигурация при клик с колелцето: kehugter"
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr ""

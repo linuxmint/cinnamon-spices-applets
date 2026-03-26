@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 [[ $UID -eq 0 ]] || exit 1
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 RIGHTS=$(ls -l /usr/sbin/hddtemp | awk '{print $1}')

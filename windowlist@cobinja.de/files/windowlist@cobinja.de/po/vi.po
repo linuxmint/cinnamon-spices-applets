@@ -1,0 +1,339 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-22 20:01+0200\n"
+"PO-Revision-Date: 2025-10-12 17:30+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: 3.2/applet.js:1286 4.0/applet.js:1393
+msgid "Preferences"
+msgstr "Tùy chọn"
+
+#: 3.2/applet.js:1290 4.0/applet.js:1397
+msgid "About..."
+msgstr "Giới thiệu..."
+
+#: 3.2/applet.js:1294 4.0/applet.js:1401
+msgid "Configure..."
+msgstr "Cấu hình..."
+
+#: 3.2/applet.js:1298 4.0/applet.js:1405
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Xóa '%s'"
+
+#: 3.2/applet.js:1307 4.0/applet.js:1414
+msgid "Open new window"
+msgstr "Mở cửa sổ mới"
+
+#: 3.2/applet.js:1313 4.0/applet.js:1420
+msgid "Pin to this workspace"
+msgstr "Ghim vào workspace này"
+
+#: 3.2/applet.js:1327 4.0/applet.js:1434
+msgid "Pin to other workspaces"
+msgstr "Ghim vào các workspace khác"
+
+#: 3.2/applet.js:1359 4.0/applet.js:1507
+msgid "Only on this workspace"
+msgstr "Chỉ trên workspace này"
+
+#: 3.2/applet.js:1362 4.0/applet.js:1510
+msgid "Visible on all workspaces"
+msgstr "Hiển thị trên tất cả workspaces"
+
+#: 3.2/applet.js:1364 4.0/applet.js:1511
+msgid "Move to another workspace"
+msgstr "Di chuyển sang workspace khác"
+
+#: 3.2/applet.js:1384 4.0/applet.js:1530
+msgid "Move to another monitor"
+msgstr "Di chuyển sang màn hình khác"
+
+#: 3.2/applet.js:1392 4.0/applet.js:1538
+msgid "Monitor"
+msgstr "Màn hình"
+
+#: 3.2/applet.js:1404 4.0/applet.js:1554
+msgid "Restore"
+msgstr "Khôi phục"
+
+#: 3.2/applet.js:1409 4.0/applet.js:1559
+msgid "Minimize"
+msgstr "Thu nhỏ"
+
+#: 3.2/applet.js:1415 4.0/applet.js:1565
+msgid "Unmaximize"
+msgstr "Bỏ phóng to"
+
+#: 3.2/applet.js:1422 4.0/applet.js:1572
+msgid "Close others"
+msgstr "Đóng các cửa sổ khác"
+
+#: 3.2/applet.js:1433 4.0/applet.js:1583
+msgid "Close all"
+msgstr "Đóng tất cả"
+
+#: 3.2/applet.js:1442 4.0/applet.js:1592
+msgid "Close"
+msgstr "Đóng"
+
+#: 4.0/applet.js:1475
+msgid "Places"
+msgstr "Địa điểm"
+
+#. metadata.json->name
+msgid "CobiWindowList"
+msgstr "CobiWindowList"
+
+#. metadata.json->description
+msgid "A window list with app grouping and window previews"
+msgstr "Một danh sách cửa sổ với nhóm ứng dụng và xem trước cửa sổ"
+
+#. 3.2->settings-schema.json->section1->description
+#. 4.0->settings-schema.json->section1->description
+msgid "Captions"
+msgstr "Chú thích"
+
+#. 3.2->settings-schema.json->caption-type->options
+#. 4.0->settings-schema.json->caption-type->options
+msgid "Name"
+msgstr "Tên"
+
+#. 3.2->settings-schema.json->caption-type->options
+#. 4.0->settings-schema.json->caption-type->options
+msgid "Title"
+msgstr "Tiêu đề"
+
+#. 3.2->settings-schema.json->caption-type->description
+#. 4.0->settings-schema.json->caption-type->description
+msgid "Caption type"
+msgstr "Loại chú thích"
+
+#. 3.2->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+msgid "None"
+msgstr "Không có"
+
+#. 3.2->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+msgid "All"
+msgstr "Tất cả"
+
+#. 3.2->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+msgid "Running"
+msgstr "Đang chạy"
+
+#. 3.2->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+msgid "Focused"
+msgstr "Được tập trung"
+
+#. 3.2->settings-schema.json->display-caption-for->description
+#. 4.0->settings-schema.json->display-caption-for->description
+msgid "Display Caption For"
+msgstr "Hiển thị Chú thích Cho"
+
+#. 3.2->settings-schema.json->label-width->units
+#. 4.0->settings-schema.json->label-width->units
+msgid "pixels"
+msgstr "pixel"
+
+#. 3.2->settings-schema.json->label-width->description
+#. 4.0->settings-schema.json->label-width->description
+msgid "Label width"
+msgstr "Chiều rộng nhãn"
+
+#. 3.2->settings-schema.json->label-animation->description
+#. 4.0->settings-schema.json->label-animation->description
+msgid "Animate label"
+msgstr "Tạo hiệu ứng động cho nhãn"
+
+#. 3.2->settings-schema.json->label-animation-time->units
+#. 3.2->settings-schema.json->animation-time->units
+#. 3.2->settings-schema.json->preview-timeout-show->units
+#. 3.2->settings-schema.json->preview-timeout-hide->units
+#. 4.0->settings-schema.json->label-animation-time->units
+#. 4.0->settings-schema.json->animation-time->units
+#. 4.0->settings-schema.json->preview-timeout-show->units
+#. 4.0->settings-schema.json->preview-timeout-hide->units
+msgid "milliseconds"
+msgstr "mili giây"
+
+#. 3.2->settings-schema.json->label-animation-time->description
+#. 4.0->settings-schema.json->label-animation-time->description
+msgid "Label animation time"
+msgstr "Thời gian hiệu ứng động nhãn"
+
+#. 3.2->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+msgid "Never"
+msgstr "Không bao giờ"
+
+#. 3.2->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+msgid "Always"
+msgstr "Luôn luôn"
+
+#. 3.2->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+msgid "2 or more windows"
+msgstr "2 hoặc nhiều cửa sổ hơn"
+
+#. 3.2->settings-schema.json->display-number->description
+#. 4.0->settings-schema.json->display-number->description
+msgid "Display Number"
+msgstr "Hiển thị Số"
+
+#. 3.2->settings-schema.json->section2->description
+#. 4.0->settings-schema.json->section2->description
+msgid "Icons"
+msgstr "Biểu tượng"
+
+#. 3.2->settings-schema.json->group-windows->description
+#. 4.0->settings-schema.json->group-windows->description
+msgid "Group Windows"
+msgstr "Nhóm Cửa sổ"
+
+#. 3.2->settings-schema.json->group-windows->tooltip
+#. 4.0->settings-schema.json->group-windows->tooltip
+msgid ""
+"If windows are grouped, all windows from an application are managed by the "
+"same button,\n"
+"if not grouped, all windows get an own button"
+msgstr ""
+"Nếu cửa sổ được nhóm, tất cả cửa sổ từ một ứng dụng được quản lý bởi cùng một nút,\n"
+"nếu không được nhóm, tất cả cửa sổ nhận được nút riêng"
+
+#. 3.2->settings-schema.json->display-pinned->description
+#. 4.0->settings-schema.json->display-pinned->description
+msgid "Display Favorites"
+msgstr "Hiển thị Yêu thích"
+
+#. 3.2->settings-schema.json->animation-time->description
+#. 4.0->settings-schema.json->animation-time->description
+msgid "Animation Time"
+msgstr "Thời gian Hiệu ứng động"
+
+#. 3.2->settings-schema.json->animation-time->tooltip
+#. 4.0->settings-schema.json->animation-time->tooltip
+msgid "The flashing time when a new window is opened via a button"
+msgstr "Thời gian nhấp nháy khi một cửa sổ mới được mở thông qua một nút"
+
+#. 3.2->settings-schema.json->show-windows-for-current-monitor->description
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->description
+msgid "Only show windows on the same monitor"
+msgstr "Chỉ hiển thị cửa sổ trên cùng màn hình"
+
+#. 3.2->settings-schema.json->show-windows-for-current-monitor->tooltip
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->tooltip
+msgid ""
+"If enabled, this applet instance only manages windows\n"
+"that are displayed on the same monitor"
+msgstr ""
+"Nếu được bật, phiên bản applet này chỉ quản lý các cửa sổ\n"
+"được hiển thị trên cùng màn hình"
+
+#. 3.2->settings-schema.json->section3->description
+#. 4.0->settings-schema.json->section3->description
+msgid "Preview menu"
+msgstr "Menu xem trước"
+
+#. 3.2->settings-schema.json->menu-show-on-click->description
+#. 4.0->settings-schema.json->menu-show-on-click->description
+msgid "Show on click"
+msgstr "Hiển thị khi nhấp"
+
+#. 3.2->settings-schema.json->menu-show-on-click->tooltip
+#. 4.0->settings-schema.json->menu-show-on-click->tooltip
+msgid ""
+"If enabled, a popup menu with a list of current windows will show when "
+"clicking\n"
+"(Only with 2 or more windows)"
+msgstr ""
+"Nếu được bật, một menu popup với danh sách các cửa sổ hiện tại sẽ hiển thị khi nhấp\n"
+"(Chỉ với 2 hoặc nhiều cửa sổ hơn)"
+
+#. 3.2->settings-schema.json->menu-show-on-hover->description
+#. 4.0->settings-schema.json->menu-show-on-hover->description
+msgid "Show on hover"
+msgstr "Hiển thị khi di chuột"
+
+#. 3.2->settings-schema.json->menu-show-on-hover->tooltip
+#. 4.0->settings-schema.json->menu-show-on-hover->tooltip
+msgid ""
+"If enabled, a popup menu with a list of current windows will show when "
+"hovering"
+msgstr ""
+"Nếu được bật, một menu popup với danh sách các cửa sổ hiện tại sẽ hiển thị khi di chuột"
+
+#. 3.2->settings-schema.json->show-previews->description
+#. 4.0->settings-schema.json->show-previews->description
+msgid "Show previews"
+msgstr "Hiển thị xem trước"
+
+#. 3.2->settings-schema.json->show-previews->tooltip
+#. 4.0->settings-schema.json->show-previews->tooltip
+msgid ""
+"If enabled, the popup menu will show window previews\n"
+"(Always disabled when running Cinnamon in Software Rendering Mode)"
+msgstr ""
+"Nếu được bật, menu popup sẽ hiển thị xem trước cửa sổ\n"
+"(Luôn bị tắt khi chạy Cinnamon trong Chế độ Kết xuất Phần mềm)"
+
+#. 3.2->settings-schema.json->number-of-unshrunk-previews->units
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->units
+msgid "Windows"
+msgstr "Cửa sổ"
+
+#. 3.2->settings-schema.json->number-of-unshrunk-previews->description
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->description
+msgid "Number of unshrunk previews"
+msgstr "Số lượng xem trước không thu nhỏ"
+
+#. 3.2->settings-schema.json->preview-timeout-show->description
+#. 4.0->settings-schema.json->preview-timeout-show->description
+msgid "Timeout Show"
+msgstr "Thời gian chờ Hiển thị"
+
+#. 3.2->settings-schema.json->preview-timeout-show->tooltip
+#. 4.0->settings-schema.json->preview-timeout-show->tooltip
+msgid ""
+"The waiting time for the popup menu to show, when hovering a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"Thời gian chờ để menu popup hiển thị, khi di chuột qua một nút\n"
+"(Không được sử dụng khi di chuyển trực tiếp đến một nút khác trong danh sách)"
+
+#. 3.2->settings-schema.json->preview-timeout-hide->description
+#. 4.0->settings-schema.json->preview-timeout-hide->description
+msgid "Timeout Hide"
+msgstr "Thời gian chờ Ẩn"
+
+#. 3.2->settings-schema.json->preview-timeout-hide->tooltip
+#. 4.0->settings-schema.json->preview-timeout-hide->tooltip
+msgid ""
+"The waiting time for the popup menu to hide, when leaving a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"Thời gian chờ để menu popup ẩn, khi rời khỏi một nút\n"
+"(Không được sử dụng khi di chuyển trực tiếp đến một nút khác trong danh sách)"
+
+#. 3.2->settings-schema.json->preview-close-on-middle-click->description
+#. 4.0->settings-schema.json->preview-close-on-middle-click->description
+msgid "Close window on mouse-wheel click"
+msgstr "Đóng cửa sổ khi nhấp bánh xe chuột"

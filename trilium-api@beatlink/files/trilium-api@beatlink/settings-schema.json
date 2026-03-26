@@ -1,0 +1,169 @@
+{
+    "layout1": {
+        "type": "layout",
+        "pages": ["page1", "page2", "page3", "page4", "page5"],
+
+        "page1": {
+            "type": "page",
+            "title": "Trilium Location",
+            "sections": ["app_location"]
+        },
+
+        "page2": {
+            "type": "page",
+            "title": "API Settings",
+            "sections": ["api"]
+        },
+
+        "page3": {
+            "type": "page",
+            "title": "Label Display",
+            "sections": ["display"]
+        },
+
+        "page4": {
+            "type": "page",
+            "title": "Reminder Flash",
+            "sections": ["reminders"]
+        },
+
+        "page5": {
+            "type": "page",
+            "title": "Open On Click",
+            "sections": ["open_on_click"]
+        },
+
+        "app_location": {
+            "type": "section",
+            "title": "",
+            "keys": ["api_location", "api_url"]
+        },
+
+        "api": {
+            "type": "section",
+            "title": "",
+            "keys": ["api_endpoint", "api_key", "fetch_action", "click_action", "api_polling_interval"]
+        },
+    
+        "display": {
+            "type": "section",
+            "title": "",
+            "keys": ["prefix_string", "suffix_string", "text_width"]
+        },
+
+        "reminders": {
+            "type": "section",
+            "title": "",
+            "keys": ["reminder_enabled", "reminder_delay", "reminder_time", "reminder_color"]
+        },
+    
+        "open_on_click": {
+            "type": "section",
+            "title": "",
+            "keys": ["open_on_click_toggle", "open_command"]
+        }
+    },
+    "api_location" : {
+        "type": "combobox",
+        "default" : "local",
+        "description" : "App Location",
+        "options" : {
+            "This Computer" : "local",
+            "Remote Server" : "remote"
+        },
+        "tooltip" : "Please indicate whether this applet should point to the Trilium app installed locally or a remote URL"
+    },
+    "api_url": {
+        "type": "entry",
+        "default": "",
+        "description": "Remote Server URL",
+        "tooltip" : "Enter the URL for the Trilium Server this app should connect to. (e.g https://trilium.example.com)",
+        "dependency" : "api_location=remote"
+    },
+    "api_endpoint": {
+        "type": "entry",
+        "default": "",
+        "description": "API Endpoint",
+        "tooltip" : "The Trilium API Endpoint that requests are sent to (whatever comes after 'custom/')"
+    },
+    "api_key": {
+        "type": "entry",
+        "default": "",
+        "description": "API Key",
+        "tooltip": "The API Key used in Agenda Panel script"
+    },
+    "fetch_action": {
+        "type": "entry",
+        "default": "",
+        "description": "Fetch Action",
+        "tooltip" : "The action sent during fetch requests"
+    },
+    "click_action": {
+        "type": "entry",
+        "default": "",
+        "description": "Click Action",
+        "tooltip" : "The  action sent when the applet is clicked"
+    },
+    "api_polling_interval": {
+        "type": "scale",
+        "default": 5,
+        "min": 1,
+        "max": 3600,
+        "step": 1,
+        "description": "How often (in seconds) to check the API for new text."
+    },
+    "prefix_string": {
+        "type": "entry",
+        "default": "•  ",
+        "description": "The text added to the beginning of every panel message"
+    },
+    "suffix_string": {
+        "type": "entry",
+        "default": "  •",
+        "description": "The text added to the end of every panel message"
+    },
+    "text_width": {
+        "type": "scale",
+        "default": 50,
+        "min": 5,
+        "max": 500,
+        "step": 5,
+        "description": "The width of the panel text in characters"
+    },
+    "reminder_enabled": {
+        "type": "switch",
+        "default": false,
+        "description": "Sets whether the reminder flashes are enabled or not"
+    },
+    "reminder_delay": {
+        "type": "scale",
+        "default": 5,
+        "min": 1,
+        "max": 3600,
+        "step": 1,
+        "description": "How often (in seconds) to flash the applet periodically for reminders."
+    },
+    "reminder_time": {
+        "type": "scale",
+        "default": 200,
+        "min": 0,
+        "max": 10000,
+        "step": 100,
+        "description": "How long (in milliseconds) should the applet reminder color stay set. Set to 0 for infinity"
+    },
+    "reminder_color": {
+        "type": "entry",
+        "default": "#00ACFF",
+        "description": "The color used when reminding"
+    },
+    "open_on_click_toggle": {
+        "type": "switch",
+        "default": "true",
+        "description": "Open Trilium when the applet is clicked"
+    },
+    "open_command": {
+        "type": "entry",
+        "default": "trilium",
+        "description": "The command to open Trilium"
+    }
+}

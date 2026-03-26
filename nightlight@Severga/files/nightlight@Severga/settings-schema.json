@@ -1,0 +1,62 @@
+{
+	"common_label" : {
+		"type": "header",
+		"description": "Common"
+	},
+	"temperature" : {
+		"type": "spinbutton",
+		"default": 3500,
+		"min": 1000,
+		"max": 6500,
+		"step": 10,
+		"description": "Night Light temperature (K)",
+		"tooltip": "Night Light screen temperature"
+	},
+	"auto_label" : {
+		"type": "header",
+		"description": "Auto mode schedule"
+	},
+	"startH" : {
+		"type": "spinbutton",
+		"default": 21,
+		"min": 0,
+		"max": 23,
+		"step": 1,
+		"description": "Start time, hour",
+		"tooltip": "Start time (hour)"
+	},
+	"startM" : {
+		"type": "spinbutton",
+		"default": 0,
+		"min": 0,
+		"max": 59,
+		"step": 1,
+		"description": "Start time, minute",
+		"tooltip": "Start time (minute)"
+	},
+	"endH" : {
+		"type": "spinbutton",
+		"default": 9,
+		"min": 0,
+		"max": 23,
+		"step": 1,
+		"description": "End time, hour",
+		"tooltip": "End time (hour)"
+	},
+	"endM" : {
+		"type": "spinbutton",
+		"default": 0,
+		"min": 0,
+		"max": 59,
+		"step": 1,
+		"description": "End time, minute",
+		"tooltip": "End time (minute)"
+	},
+	"mode" : {
+		"type": "generic",
+		"default": 0,
+		"description": "mode",
+		"tooltip": "mode"
+	}
+}
+

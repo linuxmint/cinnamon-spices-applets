@@ -40,11 +40,11 @@ MyApplet.prototype = {
 
     	this.ArrayActions = {};
 		this.ArrayActions['lock-screen'] = 'Lock screen';
-		this.ArrayActions['log-out'] = 'Log Out';
+		this.ArrayActions['log-out'] = 'Logout';
 		this.ArrayActions['suspend'] = 'Suspend';
 		this.ArrayActions['hibernate'] = 'Hibernate';
 		this.ArrayActions['restart'] = 'Restart';
-		this.ArrayActions['shutdown'] = 'Shutdown';
+		this.ArrayActions['shutdown'] = 'Shut down';
 		this.ArrayActions['restart-cinnamon'] = 'Restart Cinnamon';
 
     		this.ArrayIcons = {};

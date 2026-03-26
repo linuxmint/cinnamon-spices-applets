@@ -7,7 +7,6 @@ const St = imports.gi.St;
 const Main = imports.ui.main;
 const ByteArray = imports.byteArray;
 const Cinnamon = imports.gi.Cinnamon;
-const {escapeRegExp} = imports.misc.util;
 const {addTween} = imports.ui.tweener;
 Gettext.bindtextdomain('Cinnamenu@json', GLib.get_home_dir() + '/.local/share/locale');
 
@@ -25,6 +24,11 @@ const graphemeBaseChars = s =>
 //decompose and remove discritics (blocks: Combining Diacritical Marks,
 //Combining Diacritical Marks Extended and Combining Diacritical Marks Supplement)
             s.normalize('NFKD').replace(/[\u0300-\u036F\u1AB0-\u1AFF\u1DC0-\u1DFF]/g, "");
+
+function escapeRegExp(str) {
+    // from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+    return str.replace(/[-\/.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
 
 //===========================================================
 
@@ -159,7 +163,7 @@ const searchStrPart = (q, str, noFuzzySearch, noSubStringSearch) => {
         foundLength = q.length;
     } else if (!noFuzzySearch){ //else fuzzy match
         //find longest substring of str2 made up of letters from q
-        const found = str2.match(new RegExp('[' + q + ']+','g'));
+        const found = str2.match(new RegExp('[' + escapeRegExp(q) + ']+','g'));
         let length = 0;
         let longest;
         if (found) {
@@ -191,6 +195,7 @@ const searchStrPart = (q, str, noFuzzySearch, noSubStringSearch) => {
             score = Math.min(longest.length / q.length, 1.0) * bigrams_score;
         }
     }
+    
     //reduce score if q is short
     //if (q.length === 1) score *= 0.5;
     //if (q.length === 2) score *= 0.75;

@@ -4271,7 +4271,7 @@ const notifyYouTubeDownloadFinished = (props) => {
         buttons: [
             {
                 text: "Play",
-                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open '${downloadPath}'`),
+                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open '${downloadPath.replaceAll("'", "'\\''")}'`),
             },
         ],
     });
@@ -4353,7 +4353,6 @@ const moveFileFromTmpDir = (props) => {
         onFileMoved({ targetFilePath, fileAlreadyExist: true });
         return;
     }
-    // @ts-ignore
     tmpFile.move(YoutubeDownloadManager_File.parse_name(targetFilePath), FileCopyFlags.BACKUP, null, null);
     onFileMoved({ targetFilePath, fileAlreadyExist: false });
 };

@@ -2,7 +2,7 @@
 
 ## Summary
 
-Cinnamon Spices are Applets, Desklets, Extensions and Themes.
+Cinnamon Spices are Applets, Desklets, Extensions, Themes and nemo Actions.
 
 You usually check updates for the Spices using Cinnamon Settings. But, like me, you do it too seldom.
 
@@ -16,13 +16,15 @@ The **Spices Update** applet, highly configurable, plays these roles:
     * It guarantees you to always download the latest version of a Spice when an update needs to be done.
     * It allows you to ignore the available updates for spices that you do not want to upgrade.
     * By a middle-click on its icon, it allows you to force refresh the data about new Spices and available updates, or open all system settings useful to perform the available updates.
+  * Only with Cinnamon 6.4 or greater:
+    * Does not check private spices. A private spice is a spice that is not listed on the Cinnamon Spices website.
 
 
 ## Status
 
-Usable from Cinnamon 2.8 to Cinnamon 4.4.
+Available from Cinnamon 2.8.
 
-Fully supported by the author, under continuing development and in continuous use on several machines, running with **Linux Mint**, **Fedora**,  **Archlinux** or **Debian 10**.
+Fully supported by the author, under continuing development and in continuous use on several machines, running with **Linux Mint**, **Fedora**,  **Archlinux** or **Debian 10** (and many others).
 
 From version v3.0.0 ~ 20190808:
 
@@ -129,18 +131,11 @@ Two buttons: firstly a button to open the System Settings page to download updat
 
 Any translation is welcome. Thank you for contributing to translate the applet's messages into new languages, or to improve or supplement existing translations.
 
-### Available translations and their authors
+### Available translations
 
-  * Croatian (hr): muzena
-  * Dutch (nl): Jurien (French77)
-  * Finnish (fi): MahtiAnkka
-  * French (fr): claudiux
-  * German (de): Mintulix
-  * Italian (it): Dragone2
-  * Spanish (es): claudiux
-  * Swedish (sv): Åke Engelbrektson (eson57)
+[List of available translations.](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/SpicesUpdate@claudiux.md)
 
-Many thanks to them!
+Many thanks to the translators!
 
 ### How to offer a translation
 
@@ -151,7 +146,7 @@ Many thanks to them!
   5. Clone your branch on your computer:
 
     `git clone -b SpicesUpdate-YOUR_LANGUAGE_CODE --single-branch https://github.com/YOUR_GITHUB_ACCOUNT/cinnamon-spices-applets.git SpicesUpdate-YOUR_LANGUAGE_CODE`
-  6. Open the `SpicesUpdate@claudiux.pot` file (which is in the `po` directory) with poedit and create your translation. You obtain a YOUR_LANGUAGE_CODE.po file.
+  6. Open the `SpicesUpdate@claudiux.pot` file (which is in the `po` directory) with poedit and create your translation. You obtain a `YOUR_LANGUAGE_CODE.po` file.
   7. On Github, upload this `YOUR_LANGUAGE_CODE.po` file at the right place into your branch then go to the root of your branch and make a Pull Request.
 
 ## Installation
@@ -163,7 +158,7 @@ Use the _Applets_ menu in Cinnamon Settings, or _Add Applets to Panel_ in the co
 ### Manual Installation:
 
    * Install the additional programs required.
-   * Download the **[latest version of Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?04831377-cbe4-482d-b035-b8ce9349632e)** from the Spices Web Site.
+   * Download the **[latest version of Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip)** from the Cinnamon Spices web site.
    * Unzip and extract the folder ```SpicesUpdate@claudiux``` into ```~/.local/share/cinnamon/applets/```
    * Enable this applet in System Settings -> Applets.
    * You can also access the Settings Screen from System Settings -> Applets, or from the context menu of this applet (right-clicking on its icon).

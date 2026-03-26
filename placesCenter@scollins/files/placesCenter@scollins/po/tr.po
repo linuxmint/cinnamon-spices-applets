@@ -5,56 +5,65 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-19 21:13-0700\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-15 02:01+0200\n"
 "PO-Revision-Date: 2018-11-05 00:37+0300\n"
-"Language-Team: Linux Mint Türkiye <gokhanlnx@gmail.com>\n"
-"\"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
 "Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Team: Linux Mint Türkiye <gokhanlnx@gmail.com>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"\"MIME-Version: 1.0\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:178
+#: applet.js:150
+msgid "(Right click to open folder)"
+msgstr ""
+
+#: applet.js:172
 msgid "Places"
 msgstr "Konumlar"
 
-#: applet.js:291
+#: applet.js:287
 msgid "Search Home Folder"
 msgstr "Ev Dizinini Ara"
 
-#: applet.js:305
+#: applet.js:310
 msgid "SYSTEM"
 msgstr "SİSTEM"
 
-#: applet.js:314
+#: applet.js:319
 msgid "Search File System"
 msgstr "Dosya Sistemi Ara"
 
-#: applet.js:330
+#: applet.js:344
 msgid "RECENT DOCUMENTS"
 msgstr "SON BELGELER"
 
-#: applet.js:344
+#: applet.js:358
 msgid "Clear"
 msgstr "Temizle"
 
-#: applet.js:388
+#: applet.js:364
+msgid "Recent"
+msgstr ""
+
+#: applet.js:407
 msgid "Computer"
 msgstr "Bilgiayar"
 
-#: applet.js:394
+#: applet.js:413
 msgid "File System"
 msgstr "Dosya Sistemi"
 
-#: applet.js:410
+#: applet.js:429
 msgid "Network"
 msgstr "Ağ"
 
-#: applet.js:513
+#: applet.js:569
 msgid "Trash"
 msgstr "Çöp"
 
@@ -127,8 +136,41 @@ msgid "Skipping"
 msgstr "Atlanıyor"
 
 #: search.py:259
-msgid " - direcotry already searched"
+#, fuzzy
+msgid " - directory already searched"
 msgstr " - dizin zaten arandı"
+
+#. metadata.json->name
+msgid "Places Center"
+msgstr "Konumlar Merkezi"
+
+#. metadata.json->description
+msgid "Provides an easy-to-read layout to access your places"
+msgstr "Konumlarınıza erişmek için kolay okunur bir düzen sağlar."
+
+#. metadata.json->comments
+msgid ""
+"Places Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy access to all of your most-used places. Feel free to "
+"contribute by submitting pull requests, bug reports and feature requests to "
+"my github repo."
+msgstr ""
+"Konum Merkezi, en çok kullandığınız yerlere kolay erişim kolaylığı sağlayan, "
+"zengin özelliklere sahip, çapraz platformlu bir Cinnamon uygulamacığıdır. "
+"Github deposuna işleme talepleri, hata raporları ve özellik istekleri "
+"göndererek katkıda bulunmaktan çekinmeyin."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Yazar"
+
+#. metadata.json->contributors
+msgid "kehugter - Added configurability to middle click"
+msgstr "kehugter - Orta tıklama için yapılandırılabilirlik ekledi"
+
+#. metadata.json->contributors
+msgid "claudiux - Improvements to the 'Recent' section."
+msgstr ""
 
 #. settings-schema.json->generalPage->title
 msgid "General"
@@ -169,7 +211,8 @@ msgstr "Panel simgesi"
 
 #. settings-schema.json->panelIcon->tooltip
 msgid "Accepts icon name or direct path (supports symbolic icons)"
-msgstr "Simge adını veya doğrudan hedefini kabul eder (sembolik simgeleri destekler)"
+msgstr ""
+"Simge adını veya doğrudan hedefini kabul eder (sembolik simgeleri destekler)"
 
 #. settings-schema.json->panelText->description
 msgid "Panel text"
@@ -258,34 +301,43 @@ msgstr "Ağı göster"
 msgid "Show recent documents"
 msgstr "Son belgeleri göster"
 
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+#, fuzzy
+msgid "All Recent Documents"
+msgstr "Son belgeler"
+
 #. settings-schema.json->recentSizeLimit->description
 msgid "Number to show"
 msgstr "Sayı göster"
 
-#. metadata.json->name
-msgid "Places Center"
-msgstr "Konumlar Merkezi"
-
-#. metadata.json->description
-msgid "Provides an easy-to-read layout to access your places"
-msgstr "Konumlarınıza erişmek için kolay okunur bir düzen sağlar."
-
-#. metadata.json->comments
-msgid ""
-"Places Center is a feature-rich, cross-platform Cinnamon applet that "
-"provides easy access to all of your most-used places. Feel free to "
-"contribute by submitting pull requests, bug reports and feature requests to "
-"my github repo."
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
 msgstr ""
-"Konum Merkezi, en çok kullandığınız yerlere kolay erişim kolaylığı sağlayan, "
-"zengin özelliklere sahip, çapraz platformlu bir Cinnamon uygulamacığıdır. "
-"Github deposuna işleme talepleri, hata raporları ve özellik istekleri "
-"göndererek katkıda bulunmaktan çekinmeyin."
 
-#. metadata.json->contributors
-msgid "Stephen Collins - Author"
-msgstr "Stephen Collins - Yazar"
-
-#. metadata.json->contributors
-msgid "kehugter - Added configurability to middle click"
-msgstr "kehugter - Orta tıklama için yapılandırılabilirlik ekledi"
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr ""

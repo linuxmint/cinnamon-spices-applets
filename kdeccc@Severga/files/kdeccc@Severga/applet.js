@@ -125,8 +125,13 @@ MyApplet.prototype = {
 				deviceMenuItem.menu.addCommandlineAction(_("    Force to Ring"), "kdeconnect-cli --ring -d " + id);
 				deviceMenuItem.menu.addAction(_("    Send File to..."), function() {
 					imports.misc.fileDialog.open(function(selection) {
-						if (selection != "") imports.misc.util.spawnCommandLine("kdeconnect-cli --share '" + (selection.charAt(selection.length-1) == "\n" ? selection.substring(0, selection.length-1) : selection) + "' -d " + id);
-					}, {});
+						if (selection != "") {
+							let filename = selection.slice(1, -2).split(", ");
+							for (let n in filename) {
+								imports.misc.util.spawnCommandLine("kdeconnect-cli --share " + filename[n] + " -d " + id);
+							}
+						}
+					}, {selectMultiple: true});
 				}.bind(this.pDeviceId[i]));
 				deviceMenuItem.menu.addAction(_("    Send SMS via..."), function() {
 					let dlg = new imports.ui.modalDialog.ModalDialog();

@@ -1,19 +1,19 @@
 // Custom Applications Menu Cinnamon Applet
-// Developed by Nicolas LLOBERA - nllobera@gmail.com
+// Developed by Nicolas LLOBERA
 // License: GPLv3
-// Copyright © 2012 Nicolas LLOBERA
+// Copyright © 2024 Nicolas LLOBERA
 
 /* Import */
-const Applet = imports.ui.applet;
-const Cinnamon = imports.gi.Cinnamon;
-const Gettext = imports.gettext;
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
-const Main = imports.ui.main;
+const Gettext   = imports.gettext;
+const Cinnamon  = imports.gi.Cinnamon;
+const Gio       = imports.gi.Gio;
+const GLib      = imports.gi.GLib;
+const Gtk       = imports.gi.Gtk;
+const St        = imports.gi.St;
+const Lang      = imports.lang;
+const Util      = imports.misc.util;
+const Applet    = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
-const St = imports.gi.St;
 
 const appletUUID = 'CustomApplicationsMenu@LLOBERA';
 const AppletDirectory = imports.ui.appletManager.appletMeta[appletUUID].path;
@@ -110,7 +110,7 @@ MyApplet.prototype = {
             this.set_applet_tooltip(_("Custom Applications Menu"));
 
             // watch settings file for changes
-            let file = Gio.file_new_for_path(SettingsFile);
+            var file = Gio.file_new_for_path(SettingsFile);
             this._monitor = file.monitor(Gio.FileMonitorFlags.NONE, null);
             this._monitor.connect('changed', Lang.bind(this, this._on_settingsfile_changed));
 
@@ -191,9 +191,9 @@ MyApplet.prototype = {
 
     // extract the command, the name and the icone name from the desktop file
     _getInfoFromDesktopFile: function(application) {
-        let appInfo = null;
-        let desktopFile = application.desktopFile + ".desktop";
-        let app = AppSys.lookup_app(desktopFile);
+        var appInfo = null;
+        var desktopFile = application.desktopFile + ".desktop";
+        var app = AppSys.lookup_app(desktopFile);
         if (app)
             appInfo = app.get_app_info();
         else {
@@ -208,7 +208,7 @@ MyApplet.prototype = {
             application.displayName = appInfo.get_name();
 
         if (typeof(application.iconName) === "undefined") {
-            let icon = appInfo.get_icon();
+            var icon = appInfo.get_icon();
             if (icon) {
                 if (icon instanceof(Gio.FileIcon))
                     application.iconName = icon.get_file().get_path();
@@ -223,7 +223,7 @@ MyApplet.prototype = {
 
     // parse the applications.json file into the applications variable
     _readSettings: function() {
-        let jsonFileContent = Cinnamon.get_file_contents_utf8_sync(SettingsFile);
+        var jsonFileContent = Cinnamon.get_file_contents_utf8_sync(SettingsFile);
         this.applications = JSON.parse(jsonFileContent);
     },
 
@@ -233,10 +233,10 @@ MyApplet.prototype = {
             // As application variable is not accessible here,
             // the application variable is passed to the PopupImageLeftMenuItem ctor to be accessible throw the actor argument
             // which is the menuItem itself
-            let commands = actor.command.split(";");
+            var commands = actor.command.split(";");
             for (var i=0; i<commands.length; i++)
             {
-                Main.Util.spawnCommandLine(commands[i]);
+                Util.spawnCommandLine(commands[i]);
             }
         });
         parentMenuItem.addMenuItem(menuItem);
@@ -244,17 +244,17 @@ MyApplet.prototype = {
 
     _createContextMenu: function() {
         this.edit_menu_item = new Applet.MenuItem(_("Edit"), "document-edit-symbolic", function() {
-            Main.Util.spawnCommandLine("xdg-open " + SettingsFile);
+            Util.spawnCommandLine("xdg-open " + SettingsFile);
         });
         this._applet_context_menu.addMenuItem(this.edit_menu_item);
 
         this.help_menu_item = new Applet.MenuItem(_("Help"), "help-faq-symbolic", function() {
-            Main.Util.spawnCommandLine("xdg-open " + AppletDirectory + "/README.md");
+            Util.spawnCommandLine("xdg-open " + AppletDirectory + "/README.md");
         });
         this._applet_context_menu.addMenuItem(this.help_menu_item);
 
         this.about_menu_item = new Applet.MenuItem(_("About"), "dialog-information-symbolic",  function() {
-            Main.Util.spawnCommandLine("xdg-open " + AppletDirectory + "/ABOUT.txt");
+            Util.spawnCommandLine("xdg-open " + AppletDirectory + "/ABOUT.txt");
         });
         this._applet_context_menu.addMenuItem(this.about_menu_item);
     }
@@ -262,6 +262,6 @@ MyApplet.prototype = {
 
 
 function main(metadata, orientation) {
-    let myApplet = new MyApplet(orientation);
+    var myApplet = new MyApplet(orientation);
     return myApplet;
 }

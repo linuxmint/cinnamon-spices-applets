@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-10 22:50-0400\n"
-"PO-Revision-Date: 2023-07-10 22:52-0400\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-05 14:36-0500\n"
+"PO-Revision-Date: 2024-01-21 17:50-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,33 +17,33 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.4\n"
 
-#: 5.4/applet.js:290 3.2/applet.js:135
+#: 5.4/applet.js:300 3.2/applet.js:130
 msgid "--%"
 msgstr ""
 
-#: 5.4/applet.js:291 3.2/applet.js:136
+#: 5.4/applet.js:301 3.2/applet.js:131
 msgid "Waiting"
 msgstr "Es wird gewartet"
 
-#: 5.4/applet.js:317 3.2/applet.js:165
-msgid "Some Dependencies not Installed"
-msgstr ""
-
-#: 5.4/applet.js:317
-msgid ""
-"Both 'sox' and 'zenity' are required for this applet to have all of its "
-"functionality including notifications and audible alerts .\n"
-"\n"
-"Please view the README for help on installing them."
-msgstr ""
-
-#: 5.4/applet.js:327 3.2/applet.js:198
-msgid "Battery Monitor Applet"
+#: 5.4/applet.js:327
+msgid "Some dependencies not installed."
 msgstr ""
 
 #: 5.4/applet.js:327
+msgid ""
+"Both 'sox' and 'zenity' are required for this applet to have all of its "
+"functionality including notifications and audible alerts.\n"
+"\n"
+"Please view the README for help on installing them.\n"
+msgstr ""
+
+#: 5.4/applet.js:337 3.2/applet.js:193
+msgid "Battery Monitor Applet"
+msgstr ""
+
+#: 5.4/applet.js:337
 msgid ""
 "A user-defined sound file has been specified for Low Battery.\n"
 "\n"
@@ -50,42 +51,46 @@ msgid ""
 "especially if a long or loud file is specified.\n"
 msgstr ""
 
-#: 5.4/applet.js:388 3.2/applet.js:297
+#: 5.4/applet.js:399 3.2/applet.js:307
 msgid "Open Power Statistics"
 msgstr "Energiestatistiken öffnen"
 
-#: 5.4/applet.js:394 3.2/applet.js:303
+#: 5.4/applet.js:405 3.2/applet.js:313
 msgid "Open System Monitor"
 msgstr "Systemüberwachung öffnen"
 
-#: 5.4/applet.js:403
+#: 5.4/applet.js:414
 msgid "Housekeeping and System Submenu"
 msgstr "Organisation und System-Untermenü"
 
-#: 5.4/applet.js:406 3.2/applet.js:315
+#: 5.4/applet.js:417 3.2/applet.js:325
 msgid "View the Changelog"
 msgstr "Das Änderungsprotokoll anschauen"
 
-#: 5.4/applet.js:412
+#: 5.4/applet.js:423
 msgid "Open the README"
 msgstr ""
 
-#: 5.4/applet.js:428 3.2/applet.js:348
+#: 5.4/applet.js:439 3.2/applet.js:358
 msgid "Waiting for battery information"
 msgstr ""
 
-#: 5.4/applet.js:534
+#: 5.4/applet.js:444
+#, fuzzy
+msgid "Alert/Suspend:"
+msgstr "Ruhezustand:"
+
+#: 5.4/applet.js:549
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Batterie Niedrig - Rechner ausschalten oder an das Netz anschließen"
 
-#: 5.4/applet.js:540 3.2/applet.js:433
+#: 5.4/applet.js:555
+#, fuzzy
 msgid ""
-"The Battery Level has fallen to your alert level\n"
+"The battery level has fallen to your alert level.\n"
 "\n"
-" either reconnect to a power source,\n"
-"\n"
-"close down your work and suspend or shutdown the machine\n"
-"\n"
+"Either connect to a power source or save or close down\n"
+"your work and suspend or shutdown the machine.\n"
 msgstr ""
 "Der Akkustand ist auf Ihre Alarmstufe gefallen\n"
 "\n"
@@ -93,47 +98,50 @@ msgstr ""
 "Rechner in den Ruhezustand versetzen oder herunterfahren\n"
 "\n"
 
-#: 5.4/applet.js:555
+#: 5.4/applet.js:570
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr ""
 "Akku kritisch - Rechner wird in Ruhezustand versetzt, wenn er nicht an das "
 "Netz angeschlossen wird"
 
-#: 5.4/applet.js:574
+#: 5.4/applet.js:589
 msgid "Time to Empty:"
 msgstr ""
 
-#: 5.4/applet.js:575
+#: 5.4/applet.js:590
 msgid "Time to Full:"
 msgstr ""
 
-#: 5.4/applet.js:578 5.4/applet.js:625
+#: 5.4/applet.js:593 5.4/applet.js:640
 #, fuzzy
-#| msgid "Percentage Charge:"
 msgid "Current Charge:"
 msgstr "Aufgeladener Prozentsatz:"
 
-#: 5.4/applet.js:578 3.2/applet.js:464
+#: 5.4/applet.js:593 3.2/applet.js:474
 msgid "Alert:"
 msgstr "Alarm:"
 
-#: 5.4/applet.js:578 3.2/applet.js:464
+#: 5.4/applet.js:593 3.2/applet.js:474
 msgid "Suspend:"
 msgstr "Ruhezustand:"
 
-#: 5.4/applet.js:625 3.2/applet.js:512
+#: 5.4/applet.js:640 3.2/applet.js:522
 msgid "Alert at:"
 msgstr "Alarmieren bei:"
 
-#: 5.4/applet.js:625 3.2/applet.js:512
+#: 5.4/applet.js:640 3.2/applet.js:522
 msgid "Suspend at:"
 msgstr "In Ruhezustand versetzen bei:"
 
-#: 5.4/applet.js:631
+#: 5.4/applet.js:646
 msgid "The battery level has been recharged to"
 msgstr ""
 
-#: 3.2/applet.js:165
+#: 3.2/applet.js:160
+msgid "Some Dependencies not Installed"
+msgstr ""
+
+#: 3.2/applet.js:160
 msgid ""
 "'upower', 'sox' and 'zenity' are required for this applet to have all its "
 "facilities including notifications and audible alerts .\n"
@@ -141,7 +149,7 @@ msgid ""
 "Please read the help file on how to install them."
 msgstr ""
 
-#: 3.2/applet.js:198
+#: 3.2/applet.js:193
 msgid ""
 "A User Defined Sound File has been Specified for Low Battery\n"
 "\n"
@@ -149,32 +157,32 @@ msgid ""
 "especially if a long loud file is specifed\n"
 msgstr ""
 
-#: 3.2/applet.js:312
+#: 3.2/applet.js:322
 msgid "Housekeeping and System Sub Menu"
 msgstr "Organisation und System-Untermenü"
 
-#: 3.2/applet.js:321
+#: 3.2/applet.js:331
 msgid "Open the Help file"
 msgstr "Die Hilfedatei öffnen"
 
-#: 3.2/applet.js:327
+#: 3.2/applet.js:337
 msgid "Open stylesheet.css (Advanced Function)"
 msgstr "stylesheet.css öffnen (Erweiterte Funktion)"
 
 #. metadata.json->name
-#: 3.2/applet.js:343
+#: 3.2/applet.js:353
 msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
 msgstr "Akku-Applet mit Überwachung und Herunterfahren (BAMS)"
 
-#: 3.2/applet.js:423
+#: 3.2/applet.js:433
 msgid "Battery Low - turn off or connect to mains"
 msgstr "Batterie Niedrig - Rechner ausschalten oder an das Netz anschließen"
 
-#: 3.2/applet.js:431
+#: 3.2/applet.js:441
 msgid "Battery Monitor Applet Alert"
 msgstr ""
 
-#: 3.2/applet.js:431
+#: 3.2/applet.js:441
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -189,22 +197,38 @@ msgstr ""
 "Rechner in den Ruhezustand versetzen oder herunterfahren\n"
 "\n"
 
-#: 3.2/applet.js:449
+#: 3.2/applet.js:443
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+" either reconnect to a power source,\n"
+"\n"
+"close down your work and suspend or shutdown the machine\n"
+"\n"
+msgstr ""
+"Der Akkustand ist auf Ihre Alarmstufe gefallen\n"
+"\n"
+"entweder an eine Stromquelle anschließen oder die Arbeit schließen und den "
+"Rechner in den Ruhezustand versetzen oder herunterfahren\n"
+"\n"
+
+#: 3.2/applet.js:459
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr ""
 "Akku kritisch - Rechner wird in Ruhezustand versetzt, wenn er nicht an das "
 "Netz angeschlossen wird"
 
-#: 3.2/applet.js:464
+#: 3.2/applet.js:474
 msgid "Charge:"
 msgstr "Aufladen:"
 
-#: 3.2/applet.js:512
+#: 3.2/applet.js:522
 msgid "Percentage Charge:"
 msgstr "Aufgeladener Prozentsatz:"
 
 #. metadata.json->description
-msgid "Displays Charge as Percentage and allows Alerts and Actions"
+#, fuzzy
+msgid "Displays charge as percentage and allows alerts and actions"
 msgstr ""
 "Zeigt Ladezustand in Prozent an und erlaubt Alarm und weitere Aktionen zu "
 "setzen"
@@ -316,8 +340,10 @@ msgid "Percentage threshold for visible recharged alert"
 msgstr ""
 
 #. 5.4->settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
 msgid "Classic"
-msgstr ""
+msgstr "klassisch"
 
 #. 5.4->settings-schema.json->displayType->options
 msgid "Classic Plus"
@@ -350,6 +376,21 @@ msgid ""
 "  Icon Only: The battery icon on a colored background indicating the current "
 "status"
 msgstr ""
+
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Light"
+msgstr ""
+
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Dark"
+msgstr ""
+
+#. 5.4->settings-schema.json->iconTheme->description
+#. 5.4->settings-schema.json->iconTheme->tooltip
+msgid "Icon Theme"
+msgstr "Symbolthema"
 
 #. 5.4->settings-schema.json->time_remaining_display->description
 msgid "Append estimated time remaining to chosen display type"
@@ -585,4 +626,25 @@ msgstr ""
 msgid ""
 "Versions prior to 1.4 used temporary files in the home directory. These are "
 "not needed any more and can be deleted."
+msgstr ""
+
+#: 5.4/suspendScript.sh:22
+msgid "WARNING: SUSPENDING SOON"
+msgstr ""
+
+#: 5.4/suspendScript.sh:23
+msgid "The battery level is critical. The machine will be suspended shortly."
+msgstr ""
+
+#: 5.4/suspendScript.sh:24
+msgid "Abort Suspension"
+msgstr ""
+
+#: 5.4/suspendScript.sh:25
+#, fuzzy
+msgid "Suspend Immediately"
+msgstr "In Ruhezustand versetzen bei:"
+
+#: 5.4/suspendScript.sh:26
+msgid "The machine was suspended as the battery level was critical."
 msgstr ""

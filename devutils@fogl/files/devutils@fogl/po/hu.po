@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-21 00:29+0800\n"
-"PO-Revision-Date: 2021-03-29 20:21+0200\n"
+"PO-Revision-Date: 2025-08-08 08:12+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: applet.js:38
 msgid "MySQL Browser"
@@ -56,7 +56,7 @@ msgstr ""
 
 #: applet.js:85
 msgid "Open Applet Settings"
-msgstr "Kisalkalmazás beállítások megynitása"
+msgstr "Kisalkalmazás beállítások megnyitása"
 
 #: applet.js:92
 msgid "Open Applet Source"
@@ -109,7 +109,7 @@ msgstr "Alapértelmezett nginx konfiguráció szerkesztése"
 
 #. devutils@fogl->metadata.json->description
 msgid "Development Utils Applet for Cinnamon"
-msgstr "Fejlesztési Segédlet Kisalkalmazás Cinnamonra"
+msgstr "Fejlesztési Segédlet Kisalkalmazás Cinnamon asztali környezethez"
 
 #. devutils@fogl->settings-schema.json->head_menu->description
 msgid "Menu Entries"

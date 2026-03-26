@@ -8,22 +8,29 @@ msgstr ""
 "Project-Id-Version: vpnLookOut@claudiux v3.3.1~20181122\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2017-12-02 19:59+0100\n"
-"PO-Revision-Date: 2019-01-22 12:31+0100\n"
+"PO-Revision-Date: 2024-04-22 09:51+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
-"Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
-"Language-Team: \n"
-"Language: nl\n"
 
 #: metadata.json:4
 msgid "VPN Look-Out Applet"
 msgstr "VPN Look-Out Applet"
 
 #: metadata.json:7
-msgid "A Cinnamon applet that watches over the VPN link, displays its status, allows to connect at start-up to the last VPN used, allows to reconnect the VPN link if it incidentally drops, and can stop or restart VPN-related apps according to the state of the VPN."
-msgstr "Een Cinnamon-applet die over de VPN-link waakt, de status ervan weergeeft, verbinding mogelijk maakt bij het opstarten van de laatst gebruikte VPN, verbinding verbreekt als deze incidenteel weg valt en VPN-gerelateerde apps kan stoppen of herstarten volgens de staat van de VPN."
+msgid ""
+"A Cinnamon applet that watches over the VPN link, displays its status, "
+"allows to connect at start-up to the last VPN used, allows to reconnect the "
+"VPN link if it incidentally drops, and can stop or restart VPN-related apps "
+"according to the state of the VPN."
+msgstr ""
+"Een Cinnamon-applet die over de VPN-link waakt, de status ervan weergeeft, "
+"verbinding mogelijk maakt bij het opstarten van de laatst gebruikte VPN, "
+"verbinding verbreekt als deze incidenteel weg valt en VPN-gerelateerde apps "
+"kan stoppen of herstarten volgens de staat van de VPN."
 
 #: 2.8/settings-schema.json:7
 msgid "Notifications"
@@ -58,8 +65,12 @@ msgid "VPN Network Interface"
 msgstr "VPN Netwerkinterface"
 
 #: 2.8/settings-schema.json:53
-msgid "You should be able to leave this field empty. This applet will try to detect this."
-msgstr "Je zou dit veld leeg moeten kunnen laten.VPN applet zal proberen dit te detecteren."
+msgid ""
+"You should be able to leave this field empty. This applet will try to detect "
+"this."
+msgstr ""
+"Je zou dit veld leeg moeten kunnen laten.VPN applet zal proberen dit te "
+"detecteren."
 
 #: 2.8/settings-schema.json:58
 msgid "VPN Name"
@@ -78,16 +89,26 @@ msgid "Connect to VPN as this applet starts."
 msgstr "Maak verbinding met VPN wanneer applet start."
 
 #: 2.8/settings-schema.json:66
-msgid "Checking this allows this applet to try to connect to the last VPN at start-up."
-msgstr "Als u dit aanvinkt, kan applet tijdens het opstarten proberen verbinding te maken met de laatste VPN."
+msgid ""
+"Checking this allows this applet to try to connect to the last VPN at start-"
+"up."
+msgstr ""
+"Als u dit aanvinkt, kan applet tijdens het opstarten proberen verbinding te "
+"maken met de laatste VPN."
 
 #: 2.8/settings-schema.json:72
 msgid "Try to reconnect to VPN when it shuts down incidentally."
-msgstr "Probeer opnieuw verbinding te maken met VPN wanneer het incidenteel wordt afgesloten."
+msgstr ""
+"Probeer opnieuw verbinding te maken met VPN wanneer het incidenteel wordt "
+"afgesloten."
 
 #: 2.8/settings-schema.json:73
-msgid "Checking this allows this applet to try to reconnect to VPN when it shuts down incidentally."
-msgstr "Als u dit aanvinkt, kan applet proberen opnieuw verbinding te maken met VPN wanneer deze incidenteel wordt afgesloten."
+msgid ""
+"Checking this allows this applet to try to reconnect to VPN when it shuts "
+"down incidentally."
+msgstr ""
+"Als u dit aanvinkt, kan applet proberen opnieuw verbinding te maken met VPN "
+"wanneer deze incidenteel wordt afgesloten."
 
 #: 2.8/settings-schema.json:81
 msgid "seconds"
@@ -98,8 +119,13 @@ msgid "Refresh Interval for Display:"
 msgstr "Ververs interval voor weergave:"
 
 #: 2.8/settings-schema.json:83
-msgid "Increase or decrease this spinner value to change the refresh interval - use a slow refresh (ie high value) if you have a slow machine."
-msgstr "Verhoog of verlaag deze spinner-waarde om het vernieuwingsinterval te wijzigen - gebruik een langzame verversing (dwz hoge waarde) als u een langzame machine hebt."
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh (ie high value) if you have a slow machine."
+msgstr ""
+"Verhoog of verlaag deze spinner-waarde om het vernieuwingsinterval te "
+"wijzigen - gebruik een langzame verversing (dwz hoge waarde) als u een "
+"langzame machine hebt."
 
 #: 2.8/settings-schema.json:90
 msgid "Classic - Icon and Text"
@@ -114,48 +140,75 @@ msgid "Type of Display"
 msgstr "Type weergave"
 
 #: 2.8/settings-schema.json:94
-msgid "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
-msgstr "Deze functie biedt de klassieke (standaard) weergave met pictogram en tekst en een compacte weergave (alleen pictogram)."
+msgid ""
+"This feature offers the Classic (default) display with icon and text, and "
+"compact display (Icon Only)."
+msgstr ""
+"Deze functie biedt de klassieke (standaard) weergave met pictogram en tekst "
+"en een compacte weergave (alleen pictogram)."
 
 #: 2.8/settings-schema.json:100
 msgid "Emit a sound alert when VPN shuts down."
 msgstr "Laat een geluidssignaal horen wanneer VPN wordt afgesloten."
 
 #: 2.8/settings-schema.json:101
-msgid "Checking this allows this applet to emit a sound alert when VPN shuts down."
-msgstr "Als u dit aanvinkt, laat applet een geluidssignaal horen wanneer VPN wordt afgesloten."
+msgid ""
+"Checking this allows this applet to emit a sound alert when VPN shuts down."
+msgstr ""
+"Als u dit aanvinkt, laat applet een geluidssignaal horen wanneer VPN wordt "
+"afgesloten."
 
 #: 2.8/settings-schema.json:107
 msgid "Emit this sound alert when this Applet starts, if VPN is down."
-msgstr "Laat dit geluidssignaal horen wanneer applet start, als VPN niet werkt."
+msgstr ""
+"Laat dit geluidssignaal horen wanneer applet start, als VPN niet werkt."
 
 #: 2.8/settings-schema.json:108
-msgid "Check this if you want to emit this sound alert when this Applet starts, if VPN is down."
-msgstr "Schakel dit selectievakje in als u dit geluidssignaal wilt laten horen wanneer applet wordt gestart, als VPN is uitgeschakeld."
+msgid ""
+"Check this if you want to emit this sound alert when this Applet starts, if "
+"VPN is down."
+msgstr ""
+"Schakel dit selectievakje in als u dit geluidssignaal wilt laten horen "
+"wanneer applet wordt gestart, als VPN is uitgeschakeld."
 
 #: 2.8/settings-schema.json:115
 msgid "Shut down properly Transmission as soon as VPN falls."
 msgstr "Overdracht netjes afsluiten zodra VPN wegvalt."
 
 #: 2.8/settings-schema.json:116
-msgid "Checking this allows this applet to shut down Transmission (if it's running) as soon as VPN falls."
-msgstr "Als u dit aanvinkt, kan applet overdracht uitschakelen (als deze actief is) zodra VPN wegvalt."
+msgid ""
+"Checking this allows this applet to shut down Transmission (if it's running) "
+"as soon as VPN falls."
+msgstr ""
+"Als u dit aanvinkt, kan applet overdracht uitschakelen (als deze actief is) "
+"zodra VPN wegvalt."
 
 #: 2.8/settings-schema.json:122
 msgid "Try to restart Transmission as soon as VPN restarts."
-msgstr "Probeer de overdracht opnieuw te starten zodra VPN opnieuw is opgestart."
+msgstr ""
+"Probeer de overdracht opnieuw te starten zodra VPN opnieuw is opgestart."
 
 #: 2.8/settings-schema.json:123
-msgid "Checking this allows this applet to restart Transmission (if it was stopped by this applet) as soon as VPN restarts."
-msgstr "Als u dit aanvinkt, kan applet de overdracht opnieuw starten (als deze was gestopt) zodra VPN opnieuw is opgestart."
+msgid ""
+"Checking this allows this applet to restart Transmission (if it was stopped "
+"by this applet) as soon as VPN restarts."
+msgstr ""
+"Als u dit aanvinkt, kan applet de overdracht opnieuw starten (als deze was "
+"gestopt) zodra VPN opnieuw is opgestart."
 
 #: 2.8/settings-schema.json:127
 msgid "Set the keybinding here to activate/deactivate the last used VPN."
-msgstr "Stel de sneltoets hier in om de laatst gebruikte VPN te activeren / deactiveren."
+msgstr ""
+"Stel de sneltoets hier in om de laatst gebruikte VPN te activeren / "
+"deactiveren."
 
 #: 2.8/applet.js:214
-msgid "You appear to be missing some of the programs required for this applet to have all its features including notifications and audible alerts."
-msgstr "Het lijkt erop dat sommige programma's die voor applet nodig zijn ontbreken, v.w.b functies,inclusief meldingen en hoorbare meldingen."
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features including notifications and audible alerts."
+msgstr ""
+"Het lijkt erop dat sommige programma's die voor applet nodig zijn ontbreken, "
+"v.w.b functies,inclusief meldingen en hoorbare meldingen."
 
 #: 2.8/applet.js:214
 msgid "Please execute, in the just opened terminal, the commands:"
@@ -242,44 +295,71 @@ msgid "Activity Logs"
 msgstr "Activiteitenlogboeken"
 
 #: 3.8/settings-schema.json:128
-msgid "Do not try to reconnect automatically if the VPN has been disconnected by the user."
-msgstr "Probeer niet automatisch opnieuw verbinding te maken als de VPN door de gebruiker is verbroken."
+msgid ""
+"Do not try to reconnect automatically if the VPN has been disconnected by "
+"the user."
+msgstr ""
+"Probeer niet automatisch opnieuw verbinding te maken als de VPN door de "
+"gebruiker is verbroken."
 
 #: 3.8/settings-schema.json:129
-msgid "If, by this applet only, the user disconnects the VPN, then no automatic reconnection will be tried."
-msgstr "Als de gebruiker m.b.v applet de verbinding met de VPN verbreekt, wordt er niet geprobeerd om automatisch te verbinden."
+msgid ""
+"If, by this applet only, the user disconnects the VPN, then no automatic "
+"reconnection will be tried."
+msgstr ""
+"Als de gebruiker m.b.v applet de verbinding met de VPN verbreekt, wordt er "
+"niet geprobeerd om automatisch te verbinden."
 
 #: 3.8/settings-schema.json:139
 msgid "Refresh interval:"
 msgstr "Interval verversen:"
 
 #: 3.8/settings-schema.json:140
-msgid "Time interval, in seconds, between two verifications of VPN link status. A low value increases security but causes more activity. Choose a value that is greater as your computer is slow."
-msgstr "Tijdsinterval, in seconden, tussen twee verificaties van de VPN-koppelingsstatus. Een lage waarde verhoogt de beveiliging, maar veroorzaakt meer activiteit. Kies een waarde die groter is wanneer uw computer traag is."
+msgid ""
+"Time interval, in seconds, between two verifications of VPN link status. A "
+"low value increases security but causes more activity. Choose a value that "
+"is greater as your computer is slow."
+msgstr ""
+"Tijdsinterval, in seconden, tussen twee verificaties van de VPN-"
+"koppelingsstatus. Een lage waarde verhoogt de beveiliging, maar veroorzaakt "
+"meer activiteit. Kies een waarde die groter is wanneer uw computer traag is."
 
 #: 3.8/settings-schema.json:156
 msgid "Emit an audible alert when VPN shuts down."
 msgstr "Zendt een hoorbare waarschuwing uit wanneer VPN wordt afgesloten."
 
 #: 3.8/settings-schema.json:157
-msgid "Checking this allows this applet to emit an audible alert when VPN shuts down."
-msgstr "Als u dit aanvinkt, kan applet een hoorbare waarschuwing geven wanneer VPN wordt afgesloten."
+msgid ""
+"Checking this allows this applet to emit an audible alert when VPN shuts "
+"down."
+msgstr ""
+"Als u dit aanvinkt, kan applet een hoorbare waarschuwing geven wanneer VPN "
+"wordt afgesloten."
 
 #: 3.8/settings-schema.json:163
 msgid "Emit this audible alert when this Applet starts, if VPN is down."
-msgstr "Zendt dit hoorbare alarm uit wanneer applet start, als VPN niet actief is."
+msgstr ""
+"Zendt dit hoorbare alarm uit wanneer applet start, als VPN niet actief is."
 
 #: 3.8/settings-schema.json:164
-msgid "Check this if you want to emit this audible alert when this Applet starts, if VPN is down."
-msgstr "Vink dit aan als u deze hoorbare waarschuwing wilt laten horen wanneer applet start, als VPN niet actief is."
+msgid ""
+"Check this if you want to emit this audible alert when this Applet starts, "
+"if VPN is down."
+msgstr ""
+"Vink dit aan als u deze hoorbare waarschuwing wilt laten horen wanneer "
+"applet start, als VPN niet actief is."
 
 #: 3.8/settings-schema.json:176
 msgid "Manage VPN-related Apps"
 msgstr "Beheer VPN-gerelateerde apps"
 
 #: 3.8/settings-schema.json:177
-msgid "This option allows this applet to manage the VPN-related applications you listed above."
-msgstr "Met deze optie kan applet de VPN-gerelateerde apps beheren die u hierboven hebt vermeld."
+msgid ""
+"This option allows this applet to manage the VPN-related applications you "
+"listed above."
+msgstr ""
+"Met deze optie kan applet de VPN-gerelateerde apps beheren die u hierboven "
+"hebt vermeld."
 
 #: 3.8/settings-schema.json:181
 msgid "Managed applications"
@@ -289,15 +369,21 @@ msgstr "Applicaties beheren"
 msgid ""
 "Name: What you want.\n"
 "Command: The command to run the application, without its path.\n"
-"Restart: Set to TRUE if you want to restart this application as soon as the VPN link becomes active again.\n"
-"Shutdown: Set to TRUE if you want to close the application as soon as the VPN link is stopped.\n"
-"VPN only: Set to TRUE if you want to quickly stop this application if it is started while the VPN is idle."
+"Restart: Set to TRUE if you want to restart this application as soon as the "
+"VPN link becomes active again.\n"
+"Shutdown: Set to TRUE if you want to close the application as soon as the "
+"VPN link is stopped.\n"
+"VPN only: Set to TRUE if you want to quickly stop this application if it is "
+"started while the VPN is idle."
 msgstr ""
 "Naam: Wat je wilt.\n"
 "Opdracht: het commando om de applicatie uit te voeren, zonder zijn pad.\n"
-"Opnieuw opstarten: instellen op WAAR als u deze toepassing opnieuw wilt opstarten zodra de VPN-verbinding weer actief wordt.\n"
-"Shutdown: stel in op TRUE als u de applicatie wilt sluiten zodra de VPN-link is gestopt.\n"
-"Alleen VPN: instellen op TRUE als u deze toepassing snel wilt stoppen als deze wordt gestart terwijl de VPN niet actief is."
+"Opnieuw opstarten: instellen op WAAR als u deze toepassing opnieuw wilt "
+"opstarten zodra de VPN-verbinding weer actief wordt.\n"
+"Shutdown: stel in op TRUE als u de applicatie wilt sluiten zodra de VPN-link "
+"is gestopt.\n"
+"Alleen VPN: instellen op TRUE als u deze toepassing snel wilt stoppen als "
+"deze wordt gestart terwijl de VPN niet actief is."
 
 #: 3.8/settings-schema.json:186
 msgid "Name"
@@ -321,14 +407,18 @@ msgstr "Alleen VPN"
 
 #: 3.8/settings-schema.json:225
 msgid "Log the VPN status changes and the VPN-related Apps status changes"
-msgstr "Log de VPN-statuswijzigingen en de statuswijzigingen van de VPN-gerelateerde apps "
+msgstr ""
+"Log de VPN-statuswijzigingen en de statuswijzigingen van de VPN-gerelateerde "
+"apps "
 
 #: 3.8/settings-schema.json:226
 msgid ""
-"This option allows this applet to log the VPN status changes and the VPN-related applications status changes.\n"
+"This option allows this applet to log the VPN status changes and the VPN-"
+"related applications status changes.\n"
 "You will can display the log file to make diagnostics."
 msgstr ""
-"Met deze optie kan applet de VPN-statuswijzigingen en de statuswijzigingen van de VPN-gerelateerde applicaties registreren.\n"
+"Met deze optie kan applet de VPN-statuswijzigingen en de statuswijzigingen "
+"van de VPN-gerelateerde applicaties registreren.\n"
 "U kunt het logbestand weergeven om diagnoses te stellen."
 
 #: 3.8/settings-schema.json:249
@@ -374,3 +464,132 @@ msgstr "of Midden-klik om verbinding te maken"
 #: 3.8/applet.js:1101
 msgid "Stopped by vpnLookOut: "
 msgstr "Gestopt door vpnLookOut:"
+
+#: 4.2/applet.js:370 4.2/applet.js:1072
+msgid "Deactivate vpnLookOut"
+msgstr "vpnLookOut deactiveren"
+
+#: 4.2/applet.js:445 4.2/applet.js:1075 4.2/applet.js:1084
+msgid "vpnLookOut deactivated"
+msgstr "vpnLookOut gedeactiveerd"
+
+#: 4.2/applet.js:445 4.2/applet.js:1084
+msgid "or Middle-Click to activate"
+msgstr "of Middelklik om te activeren"
+
+#: 4.2/applet.js:950
+msgid "vpnLookOut is deactivated"
+msgstr "vpnLookOut is gedeactiveerd"
+
+#: 4.2/applet.js:1072
+msgid "Activate vpnLookOut"
+msgstr "Activeer vpnLookOut"
+
+#: 4.2/applet.js:1086
+msgid "vpnLookOut reactivated"
+msgstr "vpnLookOut opnieuw geactiveerd"
+
+#. 4.2->settings-schema.json->deactivateAtStartup->description
+msgid "Deactivate this applet at startup"
+msgstr "Deactiveer deze applet bij opstarten"
+
+#. 4.2->settings-schema.json->deactivateAtStartup->tooltip
+msgid ""
+"When this option is checked, this applet starts in 'deactivated' state, "
+"saving resources but not monitoring anything. You can activate it from its "
+"menu."
+msgstr ""
+"Wanneer deze optie is aangevinkt, start deze applet in de 'gedeactiveerde' "
+"stand, waarbij hulpbronnen worden bespaard maar niets wordt gemonitord. U "
+"kunt het activeren vanuit het menu."
+
+#. 4.2->settings-schema.json->use_symbolic_icons->description
+msgid "Use Symbolic Icons"
+msgstr "Gebruik symbolische pictogrammen"
+
+#. 4.2->settings-schema.json->use_symbolic_icons->tooltip
+msgid ""
+"Select this option if you prefer Symbolic icons instead of Full Color icons."
+msgstr ""
+"Selecteer deze optie als u symbolische pictogrammen verkiest in plaats van "
+"volledige kleur pictogrammen."
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "1"
+msgstr "1"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "2"
+msgstr "2"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "3"
+msgstr "3"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "4"
+msgstr "4"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "5"
+msgstr "5"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "6"
+msgstr "6"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "7"
+msgstr "7"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "8"
+msgstr "8"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "9"
+msgstr "9"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "10"
+msgstr "10"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "15"
+msgstr "15"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "20"
+msgstr "20"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "30"
+msgstr "30"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "45"
+msgstr "45"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "60"
+msgstr "60"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "90"
+msgstr "90"

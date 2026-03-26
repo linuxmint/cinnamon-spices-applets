@@ -1,0 +1,6 @@
+Brightness: 0.1
+Brightness: 0.2
+Totoche
+Brightness: 0.3
+Brightness: 0.4
+Tatache

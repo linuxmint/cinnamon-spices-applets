@@ -5,6 +5,8 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Mainloop = imports.mainloop;
 const Lang = imports.lang;
+const PopupMenu = imports.ui.popupMenu;
+const St = imports.gi.St;
 
 const logging = false;
 
@@ -44,6 +46,12 @@ BingWallpaperApplet.prototype = {
             dir.make_directory(null);
         this.wallpaperPath = `${this.wallpaperDir}/BingWallpaper.jpg`;
         this.metaDataPath = `${this.wallpaperDir}/meta.json`;
+
+        let refreshBg = new PopupMenu.PopupIconMenuItem(_("Refresh Now"), "view-refresh", St.IconType.SYMBOLIC);
+        refreshBg.connect('activate', Lang.bind(this, function() {
+            this._downloadMetaData()
+        }));
+        this._applet_context_menu.addMenuItem(refreshBg);
 
         // Begin refresh loop
         this._refresh();
@@ -140,7 +148,7 @@ BingWallpaperApplet.prototype = {
 
     _downloadMetaData: function () {
         const process_result = data => {
-            
+
             // Write to meta data file
             let gFile = Gio.file_new_for_path(this.metaDataPath);
             let fStream = gFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
@@ -157,7 +165,7 @@ BingWallpaperApplet.prototype = {
             this._downloadImage();
 
         };
-            
+
         // Retrieve json metadata, either from local file or remote
         let request = Soup.Message.new('GET', `${bingHost}${bingRequestPath}`);
         if (Soup.MAJOR_VERSION === 2) {
@@ -168,7 +176,7 @@ BingWallpaperApplet.prototype = {
                     log(`Failed to acquire image metadata (${message.status_code})`);
                     this._setTimeout(60)  // Try again
                 }
-                
+
             });
         } else { //version 3
             _httpSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, (_httpSession, message) => {

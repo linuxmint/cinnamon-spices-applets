@@ -159,7 +159,8 @@
       "Hide the flag place": "NoLabel",
       "No flag, but leave its place": "LabelWithoutFlag",
       "Show my Country's Flag": "LabelWithFlag"
-    }
+    },
+    "tooltip": "(While VPN is OFF or in TRANSIENT mode)"
   },
   "useSoundAlert": {
     "type": "switch",

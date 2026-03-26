@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-26 05:28-0500\n"
+"PO-Revision-Date: 2024-01-06 22:59+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:21
+msgid "Currently preventing notifications"
+msgstr "Jelenleg tiltja értesítéseket"
+
+#: applet.js:22
+msgid "Currently allowing notifications"
+msgstr "Jelenleg engedélyezi értesítéseket"
+
+#: applet.js:92
+msgid "Notification settings"
+msgstr "Értesítési beállítások"
+
+#. metadata.json->name
+msgid "Notification Mute"
+msgstr "Értesítés Némítás"
+
+#. metadata.json->description
+msgid "Click to mute notifications, click again to unmute"
+msgstr "Kattintson az értesítések elnémításához, kattintson újra a némítás feloldásához"
+
+#. settings-schema.json->head->description
+msgid "Icons"
+msgstr "Ikonok"
+
+#. settings-schema.json->use-custom-off-icon->description
+msgid "Use a custom icon for when notifications are allowed."
+msgstr "Használjon egyéni ikont, ha az értesítések engedélyezve vannak."
+
+#. settings-schema.json->off-icon->description
+msgid "Notifications allowed icon:"
+msgstr "Engedélyezett értesítések ikon:"
+
+#. settings-schema.json->off-icon->tooltip
+#. settings-schema.json->on-icon->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr "Válasszon ki egy ikonfájlt, vagy írjon be egy ikonnevet a beviteli mezőbe"
+
+#. settings-schema.json->use-custom-on-icon->description
+msgid "Use a custom icon for when notifications are muted."
+msgstr "Használjon egyéni ikont, ha az értesítések el vannak némítva."
+
+#. settings-schema.json->on-icon->description
+msgid "Notifications muted icon:"
+msgstr "Lenémított értesítések ikon:"
+
+#. settings-schema.json->head1->description
+msgid "Keybinding"
+msgstr "Billentyűkombináció"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding for toggling notification mute"
+msgstr "Állítsa be a billentyűkombinációt az értesítés némítás változtatásához"

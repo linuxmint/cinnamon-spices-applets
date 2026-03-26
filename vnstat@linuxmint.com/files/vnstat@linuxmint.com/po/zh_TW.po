@@ -1,0 +1,118 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vnstat@linuxmint.com 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-09-16 02:18+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:192 4.0/applet.js:186
+msgid "Current Active Interface:"
+msgstr "目前啟用的網路介面："
+
+#: applet.js:192 4.0/applet.js:186
+msgid "Last update time is at top right"
+msgstr "最後更新時間顯示於右上角"
+
+#: applet.js:195 4.0/applet.js:189
+msgid "No interface devices currently active - Showing last update"
+msgstr "目前沒有已啟用的網路介面裝置 - 顯示最後更新"
+
+#: applet.js:205 4.0/applet.js:199
+msgid ""
+"Please make sure vnstat and vnstati are installed and that the vnstat daemon "
+"is running!"
+msgstr ""
+"請確認 vnstat 與 vnstati 皆已安裝，且 vnstat 的常駐服務正在執行！"
+
+#. metadata.json->name
+msgid "Network usage monitor"
+msgstr "網路用量監控"
+
+#. metadata.json->description
+msgid "Network usage monitor using vnstat"
+msgstr "使用 vnstat 的網路用量監控"
+
+#. settings-schema.json->head->description
+#. 4.0->settings-schema.json->head->description
+msgid "Settings for the Network Usage Applet (uses vnstati)"
+msgstr "網路用量小工具設定（使用 vnstati）"
+
+#. settings-schema.json->useExtendedDisplay->description
+#. 4.0->settings-schema.json->useExtendedDisplay->description
+msgid "Enable Extended Display Options"
+msgstr "啟用延伸顯示選項"
+
+#. settings-schema.json->useExtendedDisplay->tooltip
+#. 4.0->settings-schema.json->useExtendedDisplay->tooltip
+msgid "This is new option version 1.0.2"
+msgstr "此為 1.0.2 版的新選項"
+
+#. settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid "Classic - Summary of Data Usage for last Days and Months"
+msgstr "傳統 - 最近幾天與幾個月的資料用量摘要"
+
+#. settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid ""
+"Classic Plus - Classic with addition of breakdown by hour for last 24 hours"
+msgstr ""
+"傳統增強 - 傳統模式外加最近 24 小時的每小時明細"
+
+#. settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid "Custom Display - requires enabling below"
+msgstr "自訂顯示 - 需於下方啟用"
+
+#. settings-schema.json->extendedDisplay->description
+#. 4.0->settings-schema.json->extendedDisplay->description
+msgid "Type of Display - default 'classic'"
+msgstr "顯示類型 - 預設為「傳統」"
+
+#. settings-schema.json->extendedDisplay->tooltip
+#. 4.0->settings-schema.json->extendedDisplay->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional of adding "
+"an hourly breakdown over the last 24 hours and an experimental option of a "
+"user defined string for vnstati when enabled below"
+msgstr ""
+"此功能提供傳統（原始）顯示，可選擇加入最近 24 小時的每小時明細，"
+"以及一個實驗性選項，讓使用者在下方啟用時自訂 vnstati 字串"
+
+#. settings-schema.json->useVnstatiCommandString->description
+#. 4.0->settings-schema.json->useVnstatiCommandString->description
+msgid "Enable Custom Display Option"
+msgstr "啟用自訂顯示選項"
+
+#. settings-schema.json->useVnstatiCommandString->tooltip
+#. 4.0->settings-schema.json->useVnstatiCommandString->tooltip
+msgid "Check box"
+msgstr "核取方塊"
+
+#. settings-schema.json->vnstatiCommandString->description
+#. 4.0->settings-schema.json->vnstatiCommandString->description
+msgid "Custom options to pass to vnstati - default is '-vs' "
+msgstr "傳遞至 vnstati 的自訂選項 - 預設為「-vs」"
+
+#. settings-schema.json->vnstatiCommandString->tooltip
+#. 4.0->settings-schema.json->vnstatiCommandString->tooltip
+msgid ""
+"The default is the options used for the extended display. Note: this is not "
+"the whole vnstati option string - the interface and output file options are "
+"added to it automatically. Please read the vnstati manual for further "
+"information on options avaiilable"
+msgstr ""
+"預設為用於延伸顯示的選項。請注意：這不是完整的 vnstati 選項字串，"
+"系統會自動加入介面與輸出檔案的選項。請閱讀 vnstati 手冊以取得更多"
+"可用選項的資訊。"

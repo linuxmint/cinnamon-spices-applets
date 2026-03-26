@@ -72,8 +72,8 @@ class Weatherbit implements WeatherProvider {
     // A function as a function parameter 2 levels deep does not know
     // about the top level object information, has to pass it in as a parameter
     /**
-     * 
-     * @param baseUrl 
+     *
+     * @param baseUrl
      * @param ParseFunction returns WeatherData or ForecastData Object
      */
     private async GetData(baseUrl: string, loc: Location, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
@@ -257,7 +257,7 @@ class Weatherbit implements WeatherProvider {
      * Weatherbit does not consider Daylight saving time when returning Dates
      * in string format, but we can check if unix timestamp and date string has mismatch
      * to figure out if it's an incorrect Date.
-     * 
+     *
      * @param ts unix timestamp initialized as Date from payload
      * @param last_ob_time last refresh time in string format
      * @returns the hour difference of incorrect time from correct time
@@ -287,7 +287,7 @@ class Weatherbit implements WeatherProvider {
     private ConstructQuery(query: string, loc: Location): string {
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
-            this.app.log.Error("DarkSky: No API Key given");
+            this.app.log.Error("Weatherbit: No API Key given");
             this.app.HandleError({
                 type: "hard",
                 userError: true,
@@ -306,7 +306,7 @@ class Weatherbit implements WeatherProvider {
     };
 
     /**
-    * 
+    *
     * @param message Soup Message object
     * @returns null if custom error checking does not find anything
     */

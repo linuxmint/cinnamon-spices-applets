@@ -1,0 +1,109 @@
+{
+    "style": {
+        "type": "section",
+        "description": "Style"
+    },
+    "enable-panel-background-color-tweak": {
+        "type": "switch",
+        "description": "Tweak Background Color",
+        "default": false
+    },
+    "panel-background-color": {
+        "type": "colorchooser",
+        "description": "Background Color",
+        "dependency": "enable-panel-background-color-tweak",
+        "default": "#010101"
+    },
+    "enable-panel-shadow-tweak": {
+        "type": "switch",
+        "description": "Tweak Panel Shadow",
+        "default": false
+    },
+    "panel-shadow-color": {
+        "type": "colorchooser",
+        "description": "Panel Shadow Color",
+        "dependency": "enable-panel-shadow-tweak",
+        "default": "#010101"
+    },
+    "panel-shadow-bluriness": {
+        "type": "spinbutton",
+        "units": "px",
+        "dependency": "enable-panel-shadow-tweak",
+        "description": "Shadow Bluriness",
+        "default": 0.0,
+        "min": 0.0,
+        "max": 16.0,
+        "step": 0.05
+    },
+    "panel-shadow-x-axis-shift": {
+        "type": "spinbutton",
+        "units": "px",
+        "dependency": "enable-panel-shadow-tweak",
+        "description": "Shadow X-Axis Shift",
+        "default": 0.0,
+        "min": -10.0,
+        "max": 10.0,
+        "step": 0.05
+    },
+    "panel-shadow-y-axis-shift": {
+        "type": "spinbutton",
+        "units": "px",
+        "dependency": "enable-panel-shadow-tweak",
+        "description": "Shadow Y-Axis Shift",
+        "default": 0.0,
+        "min": -10.0,
+        "max": 10.0,
+        "step": 0.05
+    },
+    "enable-panel-border-tweak": {
+        "type": "switch",
+        "description": "Tweak Panel Border",
+        "default": false
+    },
+    "panel-border-color": {
+        "type": "colorchooser",
+        "description": "Border Color",
+        "dependency": "enable-panel-border-tweak",
+        "default": "#010101"
+    },
+    "panel-border-top-thickness": {
+        "type": "spinbutton",
+        "description": "Top Border Thickness",
+        "dependency": "enable-panel-border-tweak",
+        "units": "px",
+        "default": 0.0,
+        "min": 0.0,
+        "max": 8.0,
+        "step": 0.05
+    },
+    "panel-border-right-thickness": {
+        "type": "spinbutton",
+        "description": "Right Border Thickness",
+        "dependency": "enable-panel-border-tweak",
+        "units": "px",
+        "default": 0.0,
+        "min": 0.0,
+        "max": 8.0,
+        "step": 0.05
+    },
+    "panel-border-bottom-thickness": {
+        "type": "spinbutton",
+        "description": "Bottom Border Thickness",
+        "dependency": "enable-panel-border-tweak",
+        "units": "px",
+        "default": 0.0,
+        "min": 0.0,
+        "max": 8.0,
+        "step": 0.05
+    },
+    "panel-border-left-thickness": {
+        "type": "spinbutton",
+        "description": "Left Border Thickness",
+        "dependency": "enable-panel-border-tweak",
+        "units": "px",
+        "default": 0.0,
+        "min": 0.0,
+        "max": 8.0,
+        "step": 0.05
+    }
+}

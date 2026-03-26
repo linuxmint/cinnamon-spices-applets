@@ -1,0 +1,70 @@
+# ANY ALARM
+# This file is put in the public domain.
+# sophie-la-li, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: any-alarm@sophie-la-li 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-06-11 00:38+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:17 applet.js:56
+msgid "AnyAlarm"
+msgstr "AnyAlarm"
+
+#. metadata.json->name
+msgid "Any Alarm"
+msgstr "Any Alarm"
+
+#. metadata.json->description
+msgid "Will remind you regularly about something"
+msgstr "Te recordará algo regularmente"
+
+#. settings-schema.json->enabled->description
+msgid "Alarm enabled"
+msgstr "Alarma habilitada"
+
+#. settings-schema.json->mode->description
+msgid "When to trigger the alarm"
+msgstr "Cuándo activar la alarma"
+
+#. settings-schema.json->mode->options
+msgid "every # seconds (see option below)"
+msgstr "cada # segundos (ver opción más abajo)"
+
+#. settings-schema.json->mode->options
+msgid "every full minute"
+msgstr "cada minuto"
+
+#. settings-schema.json->mode->options
+msgid "every quarter hour"
+msgstr "cada cuarto de hora"
+
+#. settings-schema.json->mode->options
+msgid "every half hour"
+msgstr "cada media hora"
+
+#. settings-schema.json->mode->options
+msgid "every full hour"
+msgstr "cada hora completa"
+
+#. settings-schema.json->xs-mode-seconds->units
+msgid "seconds"
+msgstr "segundos"
+
+#. settings-schema.json->xs-mode-seconds->description
+msgid "Seconds for the \"every # seconds\" mode"
+msgstr "Segundos para el modo \"cada # segundos\""
+
+#. settings-schema.json->alarm-text->description
+msgid "Alarm Text"
+msgstr "Texto de la alarma"

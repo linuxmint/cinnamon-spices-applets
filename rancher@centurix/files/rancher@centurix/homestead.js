@@ -1,15 +1,15 @@
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
-const Main = imports.ui.main;
 const UUID = "rancher@centurix";
-let Util, HomesteadYamlReader, TerminalReader;
+const Util = imports.misc.util;
+let AppletUtil, HomesteadYamlReader, TerminalReader;
 if (typeof require !== 'undefined') {
-	Util = require('./util');
+	AppletUtil = require('./util');
 	HomesteadYamlReader = require('./homestead_yaml_reader');
 	TerminalReader = require('./terminal_reader');
 } else {
 	const AppletDir = imports.ui.appletManager.applets['rancher@centurix'];
-	Util = AppletDir.util;
+	AppletUtil = AppletDir.util;
 	HomesteadYamlReader = AppletDir.homestead_yaml_reader;
 	TerminalReader = AppletDir.terminal_reader;
 }
@@ -48,7 +48,7 @@ Homestead.prototype = {
 	setConfigFolder: function(folder) {
 		try {
 			// If this folder doesn't exist, default to the _project_folder
-			if (!GLib.file_test(Util.resolveHome(folder) + "/Homestead.yaml", GLib.FileTest.EXISTS)) {
+			if (!GLib.file_test(AppletUtil.resolveHome(folder) + "/Homestead.yaml", GLib.FileTest.EXISTS)) {
 				let folder = this._project_folder;
 			}
 			this._config_folder = folder;
@@ -67,7 +67,7 @@ Homestead.prototype = {
 
 	checkProjectExists: function() {
 		try {
-			return GLib.file_test(Util.resolveHome(this._project_folder) + "/Vagrantfile", GLib.FileTest.EXISTS);
+			return GLib.file_test(AppletUtil.resolveHome(this._project_folder) + "/Vagrantfile", GLib.FileTest.EXISTS);
 		} catch(e) {
 			global.log(UUID + "::checkProjectExists: " + e);
 		}
@@ -75,7 +75,7 @@ Homestead.prototype = {
 
 	checkConfigExists: function() {
 		try {
-			return GLib.file_test(Util.resolveHome(this._config_folder) + "/Homestead.yaml", GLib.FileTest.EXISTS);
+			return GLib.file_test(AppletUtil.resolveHome(this._config_folder) + "/Homestead.yaml", GLib.FileTest.EXISTS);
 		} catch(e) {
 			global.log(UUID + "::checkConfigExists: " + e);
 		}
@@ -101,7 +101,7 @@ Homestead.prototype = {
 
 	checkStatus: function(callback) {
 		try {
-			let reader = new TerminalReader.TerminalReader(Util.resolveHome(this._project_folder), this._vagrant_cmd + ' status', Lang.bind(this, function (command, status, stdout) {
+			let reader = new TerminalReader.TerminalReader(AppletUtil.resolveHome(this._project_folder), this._vagrant_cmd + ' status', Lang.bind(this, function (command, status, stdout) {
 				reader.destroy();
 				if (new RegExp('Please change your Vagrant version').test(stdout)) {
 					if (typeof callback == 'function') {
@@ -149,7 +149,7 @@ Homestead.prototype = {
 		callback = callback;
 		try {
 			let [exit, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(
-				Util.resolveHome(this._project_folder),
+				AppletUtil.resolveHome(this._project_folder),
 				[this._vagrant_cmd].concat(command),
 				null,
 				GLib.SpawnFlags.DO_NOT_REAP_CHILD,
@@ -191,18 +191,18 @@ Homestead.prototype = {
 	},
 
 	recompile: function(callback) {
-		Main.Util.spawnCommandLine("gnome-terminal --working-directory=" + Util.resolveHome(this._project_folder) + " -x sudo /sbin/rcvboxdrv setup");
+		Util.spawnCommandLine("gnome-terminal --working-directory=" + AppletUtil.resolveHome(this._project_folder) + " -x sudo /sbin/rcvboxdrv setup");
 	},
 
 	ssh: function() {
-		Main.Util.spawnCommandLine("gnome-terminal --working-directory=" + Util.resolveHome(this._project_folder) + " -x vagrant ssh");
+		Util.spawnCommandLine("gnome-terminal --working-directory=" + AppletUtil.resolveHome(this._project_folder) + " -x vagrant ssh");
 	},
 
 	edit: function() {
 		try {
 			GLib.spawn_async(
-				Util.resolveHome(this._config_folder),
-				[this._editor, Util.resolveHome(this._config_folder) + '/Homestead.yaml'],
+				AppletUtil.resolveHome(this._config_folder),
+				[this._editor, AppletUtil.resolveHome(this._config_folder) + '/Homestead.yaml'],
 				null,
 				GLib.SpawnFlags.DEFAULT,
 				null
@@ -214,7 +214,7 @@ Homestead.prototype = {
 
 	parseConfig: function() {
 		try {
-			let yaml = new HomesteadYamlReader.HomesteadYamlReader(Util.resolveHome(this._config_folder) + "/Homestead.yaml");
+			let yaml = new HomesteadYamlReader.HomesteadYamlReader(AppletUtil.resolveHome(this._config_folder) + "/Homestead.yaml");
 
 			return {
 				ip: yaml.ip,

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="16" xmlns="http://www.w3.org/2000/svg" version="1.1" height="16">
+ <title>Gnome Symbolic Icon Theme</title>
+ <g fill="#bebebe">
+  <path d="m3 4.001 4.5-2e-7v1l-3 3h3v1h-4.5v-1l3-3h-3z"/>
+ </g>
+ <path d="m8.5 4.002v1h3l-3 3h1.5l3-3v-1h-4.5z" fill="#bebebe"/>
+ <path d="m2 0.0019531c-1.0907 0-2 0.9093-2 2v9c0 1.091 0.9093 2 2 2h6v-2h-6v-9h12v6h2v-6c0-1.0908-0.909-2-2-2h-12z" fill="#bebebe"/>
+ <path d="m5 14.002c-0.5454 0-1 0.455-1 1v0.5h0.209c0.1787 0.28 0.4394 0.5 0.791 0.5h3v-2h-3z" fill="#bebebe"/>
+ <path fill="#ef2929" d="m12.5 9.002a3.5 3.5 0 0 0 -3.5 3.5 3.5 3.5 0 0 0 3.5 3.5 3.5 3.5 0 0 0 3.5 -3.5 3.5 3.5 0 0 0 -3.5 -3.5zm-2.5 3h5v1h-5v-1z" class="error"/>
+</svg>

@@ -1,0 +1,146 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-22 18:51+0200\n"
+"PO-Revision-Date: 2024-11-22 19:08+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:73
+msgid "Uptime : Shows the time that have passed since last reboot."
+msgstr ""
+"Käyttöaika : Näyttää ajan, joka on kulunut edellisestä käynnistyksestä."
+
+#: applet.js:97
+msgid "Y"
+msgstr "V"
+
+#: applet.js:97 applet.js:99 applet.js:103
+msgid "D"
+msgstr "PV"
+
+#: applet.js:103
+msgid "h"
+msgstr "h"
+
+#: applet.js:114
+msgid "years"
+msgstr "vuotta"
+
+#: applet.js:114 applet.js:116 applet.js:118
+msgid "and"
+msgstr "ja"
+
+#: applet.js:114 applet.js:116
+msgid "days"
+msgstr "päivää"
+
+#: applet.js:116 applet.js:118
+msgid "hours"
+msgstr "tuntia"
+
+#: applet.js:118 applet.js:120
+msgid "minutes"
+msgstr "minuuttia"
+
+#. metadata.json->description
+msgid "A simple applet that displays uptime."
+msgstr "Näyttää käyttöajan, joka on kulunut edellisestä käynnistyksestä."
+
+#. metadata.json->name
+msgid "Up Time"
+msgstr "Up Time"
+
+#. settings-schema.json->main-section->description
+msgid "Appearance"
+msgstr "Ulkoasu"
+
+#. settings-schema.json->display->options
+msgid "Classic"
+msgstr "Klassinen"
+
+#. settings-schema.json->display->options
+msgid "Simple"
+msgstr "Vakio"
+
+#. settings-schema.json->display->options
+msgid "Complex"
+msgstr "Pitkä"
+
+#. settings-schema.json->display->description
+msgid "Display mode"
+msgstr "Näyttömoodi"
+
+#. settings-schema.json->display->tooltip
+msgid ""
+"Classic mode: The way the Uptime applet have always worked.\n"
+"\n"
+"Simple mode: The first two non-zero values of year,day,hour and minute.\n"
+"\n"
+"Complex mode: Use %y,%d,%h and %m to insert time values into the pattern "
+"field. Use %H and %M to insert hours and minutes with a leading zero for "
+"values less than ten."
+msgstr ""
+"Klassinen: tapa, jolla Uptime on aina toiminut.\n"
+"\n"
+"Vakio: Kaksi ensimmäistä nollasta poikkeavaa arvoa vuosi, päivä, tunti ja "
+"minuutti.\n"
+"\n"
+"Pitkä: Käytä täydellisiä %y,%d,%h ja %m arvoja. Käytä %H ja %M tunnit ja "
+"minuutit."
+
+#. settings-schema.json->minimal_mode->description
+msgid "Minimal mode"
+msgstr "Minimitila"
+
+#. settings-schema.json->minimal_mode->tooltip
+msgid "Just an icon, uptime in tooltip."
+msgstr "Vihjeessä vain kuvake käyttöaika."
+
+#. settings-schema.json->show_icon->description
+msgid "Show icon"
+msgstr "Näytä kuvake"
+
+#. settings-schema.json->show_icon->tooltip
+msgid "Show or hide the icon. Not available in minimal mode."
+msgstr "Näytä tai piilota kuvake. Ei minitilassa."
+
+#. settings-schema.json->prefix->description
+msgid "Prefix (all display modes)"
+msgstr "Etuliite (kaikki näyttötavat)"
+
+#. settings-schema.json->prefix->tooltip
+msgid "Text shown before the uptime text, for example 'Uptime :'."
+msgstr "Ennen aikaa teksti, esimerkiksi \"Käyttöaika :\"."
+
+#. settings-schema.json->pattern->description
+msgid "Pattern (complex mode)"
+msgstr ""
+
+#. settings-schema.json->pattern->tooltip
+msgid ""
+"Use %y,%d,%h and %m to insert time values. Use %H and %M to insert hours and "
+"minutes with a leading zero for values less than ten."
+msgstr ""
+"Käytä %y,%d,%h ja %m aika-arvojen lisäämiseen. Käytä %H ja %M lisätäksesi "
+"tunnit ja minuutit."
+
+#. settings-schema.json->text_css->description
+msgid "Text CSS"
+msgstr "Teksti CSS"
+
+#. settings-schema.json->text_css->tooltip
+msgid "A CSS style applied to the text in the panel."
+msgstr "Paneelin tekstiin käytetty CSS."

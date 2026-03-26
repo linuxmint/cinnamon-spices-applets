@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+# SCREENSHOT+RECORD DESKTOP
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # gogo <trebelnik2@gmail.com>, 2017.
@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ScreenShot+RecordDesktop@tech71\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-04 18:50+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-04 13:04-0400\n"
 "PO-Revision-Date: 2019-06-04 18:52+0200\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: \n"
@@ -16,90 +17,90 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: applet.js:28
+#. applet.js:27
 msgid "ScreenShot"
 msgstr "Slikanje zaslona"
 
-#: applet.js:33
+#. applet.js:32
 msgid "Current Window"
 msgstr "Uslikaj trenutni prozor"
 
-#: applet.js:38
+#. applet.js:37
 msgid "Selected Area"
 msgstr "Uslikaj odabrano područje"
 
-#: applet.js:44
+#. applet.js:43
 msgid "Whole Screen"
 msgstr "Uslikaj cijeli zaslon"
 
-#: applet.js:46
+#. applet.js:45
 msgid "1 Second Delay"
 msgstr "1 sekunda odgode"
 
-#: applet.js:50
+#. applet.js:49
 msgid "3 Second Delay"
 msgstr "2 sekunde odgode"
 
-#: applet.js:54
+#. applet.js:53
 msgid "5 Second Delay"
 msgstr "5 sekundi odgode"
 
-#: applet.js:61
+#. applet.js:60
 msgid "Record Screencast"
 msgstr "Snimanje zaslona"
 
-#: applet.js:65
+#. applet.js:64
 msgid "Record Desktop With Audio"
 msgstr "Snimi radnu površinu sa zvukom"
 
-#: applet.js:68 applet.js:74 applet.js:81 applet.js:87
+#. applet.js:67 applet.js:73 applet.js:80 applet.js:86
 msgid "Recording"
 msgstr "Snimanje"
 
-#: applet.js:68 applet.js:81
+#. applet.js:67 applet.js:80
 msgid "With-Audio"
 msgstr "sa zvukom pokrenuto"
 
-#: applet.js:71
+#. applet.js:70
 msgid "Record Desktop Without Audio"
 msgstr "Snimi radnu površinu bez zvuka"
 
-#: applet.js:74 applet.js:87
+#. applet.js:73 applet.js:86
 msgid "No-Audio"
 msgstr "bez zvuka pokrenuto"
 
-#: applet.js:78
+#. applet.js:77
 msgid "Record Current Window With Audio"
 msgstr "Snimi trenutni prozor sa zvukom"
 
-#: applet.js:84
+#. applet.js:83
 msgid "Record Current Window Without Audio"
 msgstr "Snimi trenutni prozor bez zvuka"
 
-#: applet.js:91
+#. applet.js:90
 msgid "Stop Recording"
 msgstr "Zaustavi snimanje"
 
-#: applet.js:96
+#. applet.js:95
 msgid "Recording-Stopped"
 msgstr "Snimanje zaustavljeno"
 
-#: applet.js:97
+#. applet.js:96
 msgid "Recording-Finished"
 msgstr "Snimanje završeno"
 
-#: applet.js:107
+#. applet.js:106
 msgid "Take A Snapshot or Record Your Desktop"
 msgstr "Uslikajte ili snimite svoju radnu površinu"
 
-#: applet.js:124
+#. applet.js:123
 msgid "Pictures Folder"
 msgstr "Slike"
 
-#: applet.js:130
+#. applet.js:129
 msgid "Videos Folder"
 msgstr "Snimke"
 
@@ -108,30 +109,9 @@ msgid ""
 "Take A Snapshot Or Record Your Desktop (recording requires the packages "
 "ffmpeg, xdotool & x11-utils to be installed)"
 msgstr ""
-"Uslikajte ili snimite svoju radnu površinu (potrebno je instalirati "
-"ffmpeg, xdotool i x11-utils pakete)"
+"Uslikajte ili snimite svoju radnu površinu (potrebno je instalirati ffmpeg, "
+"xdotool i x11-utils pakete)"
 
 #. metadata.json->name
 msgid "ScreenShot+Record Desktop"
 msgstr "Slikanje+Snimanje radne površine"
-
-#~ msgid "Start No Audio"
-#~ msgstr "Snimi bez zvuka"
-
-#~ msgid "Recording Current Window with Audio"
-#~ msgstr "Snimi trenutni prozor sa zvukom"
-
-#~ msgid "Recording Current Window without Audio"
-#~ msgstr "Snimi trenutni prozor bez zvuka"
-
-#~ msgid "Stop"
-#~ msgstr "Zaustavi"
-
-#~ msgid "Take A Snapshot Or Record Your Desktop"
-#~ msgstr "Uslikajte ili snimite svoju radnu površinu"
-
-#~ msgid "Record Desktop"
-#~ msgstr "Snimi radnu površinu"
-
-#~ msgid "Start With Audio"
-#~ msgstr "Snimi sa zvukom"

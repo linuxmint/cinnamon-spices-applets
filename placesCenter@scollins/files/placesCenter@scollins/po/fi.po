@@ -6,59 +6,64 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-24 20:57+0100\n"
-"PO-Revision-Date: 2022-11-23 12:29+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-15 02:01+0200\n"
+"PO-Revision-Date: 2024-11-18 13:53+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
-"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: fi\n"
 
-#: applet.js:148
+#: applet.js:150
 msgid "(Right click to open folder)"
 msgstr "(hiiren oikea avaa kansion)"
 
-#: applet.js:170
+#: applet.js:172
 msgid "Places"
 msgstr "Sijainnit"
 
-#: applet.js:284
+#: applet.js:287
 msgid "Search Home Folder"
-msgstr "Haku Koti kansiosta"
+msgstr "Haku Koti"
 
-#: applet.js:307
+#: applet.js:310
 msgid "SYSTEM"
-msgstr "SYSTEM"
+msgstr "JÄRJESTELMÄ"
 
-#: applet.js:316
+#: applet.js:319
 msgid "Search File System"
-msgstr "Haku järjestelmästä"
+msgstr "Haku järjestelmä"
 
-#: applet.js:341
+#: applet.js:344
 msgid "RECENT DOCUMENTS"
 msgstr "VIIMEAIKAISET"
 
-#: applet.js:355
+#: applet.js:358
 msgid "Clear"
 msgstr "Tyhjennä"
 
-#: applet.js:398
+#: applet.js:364
+msgid "Recent"
+msgstr "Viimeisimmät"
+
+#: applet.js:407
 msgid "Computer"
 msgstr "Tietokone"
 
-#: applet.js:404
+#: applet.js:413
 msgid "File System"
 msgstr "Tiedostojärjestelmä"
 
-#: applet.js:420
+#: applet.js:429
 msgid "Network"
 msgstr "Verkko"
 
-#: applet.js:560
+#: applet.js:569
 msgid "Trash"
 msgstr "Roskakori"
 
@@ -68,7 +73,7 @@ msgstr "Avaa..."
 
 #: search.py:48
 msgid "Open Containing Folder..."
-msgstr "Avaa sisällön kansio..."
+msgstr "Avaa sisältävä kansio..."
 
 #: search.py:85
 msgid "Search"
@@ -140,7 +145,7 @@ msgstr "Places Center"
 
 #. metadata.json->description
 msgid "Provides an easy-to-read layout to access your places"
-msgstr "Tarjoaa helposti luettavan asettelun, jolla pääset kasoihin ja hakuun"
+msgstr "Tarjoaa helpon pääsyn kasoihin ja hakuun"
 
 #. metadata.json->comments
 msgid ""
@@ -149,9 +154,8 @@ msgid ""
 "contribute by submitting pull requests, bug reports and feature requests to "
 "my github repo."
 msgstr ""
-"Places Center on Cinnamon sovelma, joka tarjoaa helpon pääsyn kaikkiin "
-"eniten käytettyihin tiedostoihin ja kohteisiin. Voit osallistua kehitykseen "
-"tai lähettää virheraportteja tai pyytää ominaisuuksia minun github-repossa."
+"Places Center tarjoaa helpon pääsyn tiedostoihin eri tavoilla. Voit "
+"osallistua kehitykseen github:ssa."
 
 #. metadata.json->contributors
 msgid "Stephen Collins - Author"
@@ -159,11 +163,15 @@ msgstr "Tekijä - Stephen Collins"
 
 #. metadata.json->contributors
 msgid "kehugter - Added configurability to middle click"
-msgstr "kehugter - Lisätty konfigurointi hiiren keskipainikkeeseen"
+msgstr "kehugter - Määritys hiiren keskipainikkeelle"
+
+#. metadata.json->contributors
+msgid "claudiux - Improvements to the 'Recent' section."
+msgstr "claudiux - Viimeaikaiset tiedostot osuuden parannuksia."
 
 #. settings-schema.json->generalPage->title
 msgid "General"
-msgstr "Yleistä"
+msgstr "Yleinen"
 
 #. settings-schema.json->userPage->title
 msgid "User"
@@ -176,7 +184,7 @@ msgstr "Järjestelmä"
 #. settings-schema.json->recentPage->title
 #. settings-schema.json->recentSection->title
 msgid "Recent documents"
-msgstr "Viimeaikaiset asiakirjat"
+msgstr "Viimeaikaiset"
 
 #. settings-schema.json->panel->title
 msgid "Panel settings"
@@ -188,7 +196,7 @@ msgstr "Valikon asetukset"
 
 #. settings-schema.json->userSection->title
 msgid "User section"
-msgstr "Käyttä valinnat"
+msgstr "Käyttäjä valinnat"
 
 #. settings-schema.json->systemSection->title
 msgid "System section"
@@ -262,7 +270,7 @@ msgstr "Aina"
 
 #. settings-schema.json->showTrash->options
 msgid "When not empty"
-msgstr "Kun ei ole tyhjä"
+msgstr "Kun korissa on jotain"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"
@@ -286,7 +294,7 @@ msgstr "Näytä verkko"
 
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
-msgstr "Näytä viimeisimmät asiakirjat"
+msgstr "Näytä viimeaikaiset asiakirjat"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "5"
@@ -314,11 +322,15 @@ msgstr "30"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "All Recent Documents"
-msgstr "Kaikki viimeisimmät asiakirjat"
+msgstr "Kaikki"
 
 #. settings-schema.json->recentSizeLimit->description
 msgid "Number to show"
 msgstr "Näytettävä määrä"
+
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr "Näytä täydellinen polku työkaluvihjeessä"
 
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"

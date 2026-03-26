@@ -1,0 +1,171 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: temperature@fevimu 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-03 19:49+0200\n"
+"PO-Revision-Date: 2025-10-12 16:44+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:81 applet.js:160
+msgid "Temperature"
+msgstr "Nhiệt độ"
+
+#: applet.js:149
+msgid "Error"
+msgstr "Lỗi"
+
+#: applet.js:150
+msgid ""
+"Run sensors-detect as root. If it doesn't help, click here to report with "
+"your sensors output!"
+msgstr ""
+"Chạy sensors-detect với quyền root. Nếu không có tác dụng, nhấp vào đây để "
+"báo cáo với kết quả đầu ra sensors của bạn!"
+
+#: applet.js:152
+msgid "Warning"
+msgstr "Cảnh báo"
+
+#: applet.js:153
+msgid ""
+"Please install lm_sensors. If it doesn't help, click here to report with "
+"your sensors output!"
+msgstr ""
+"Vui lòng cài đặt lm_sensors. Nếu không có tác dụng, nhấp vào đây để báo cáo "
+"với kết quả đầu ra sensors của bạn!"
+
+#: applet.js:229
+msgid "Thresholds Info"
+msgstr "Thông tin Ngưỡng"
+
+#: applet.js:230
+msgid "High Temp"
+msgstr "Nhiệt độ Cao"
+
+#: applet.js:231
+msgid "Crit. Temp"
+msgstr "Nhiệt độ Tới hạn"
+
+#: applet.js:242
+msgid "Critical"
+msgstr "Tới hạn"
+
+#: applet.js:245
+msgid "High"
+msgstr "Cao"
+
+#: applet.js:258
+msgid "Current Temperature"
+msgstr "Nhiệt độ Hiện tại"
+
+#: applet.js:260
+msgid "Critical Temperature"
+msgstr "Nhiệt độ Tới hạn"
+
+#. metadata.json->name
+msgid "CPU Temperature Indicator"
+msgstr "Chỉ báo Nhiệt độ CPU"
+
+#. metadata.json->description
+msgid "Shows CPU Temperature"
+msgstr "Hiển thị Nhiệt độ CPU"
+
+#. settings-schema.json->use-fahrenheit->description
+msgid "Show temperature in Fahrenheit"
+msgstr "Hiển thị nhiệt độ theo Fahrenheit"
+
+#. settings-schema.json->only-integer-part->description
+msgid "Use integer values for temperature"
+msgstr "Sử dụng giá trị nguyên cho nhiệt độ"
+
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr "Hiển thị đơn vị"
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Whether or not show the unit after the temperature value."
+msgstr "Có hiển thị đơn vị sau giá trị nhiệt độ hay không."
+
+#. settings-schema.json->show-unit-letter->description
+msgid "Show unit letter"
+msgstr "Hiển thị ký tự đơn vị"
+
+#. settings-schema.json->show-unit-letter->tooltip
+msgid "Whether or not show the unit letter (C or F)."
+msgstr "Có hiển thị ký tự đơn vị (C hoặc F) hay không."
+
+#. settings-schema.json->show-label-prefix->description
+msgid "Show label prefix"
+msgstr "Hiển thị tiền tố nhãn"
+
+#. settings-schema.json->show-label-prefix->tooltip
+msgid "Whether or not to add a label before the temperature value."
+msgstr "Có thêm nhãn trước giá trị nhiệt độ hay không."
+
+#. settings-schema.json->label-prefix->description
+msgid "Label prefix"
+msgstr "Tiền tố nhãn"
+
+#. settings-schema.json->label-prefix->tooltip
+msgid "The label to be shown before the temperature value."
+msgstr "Nhãn được hiển thị trước giá trị nhiệt độ."
+
+#. settings-schema.json->interval->units
+msgid "ms"
+msgstr "ms"
+
+#. settings-schema.json->interval->description
+msgid "Update interval"
+msgstr "Khoảng thời gian cập nhật"
+
+#. settings-schema.json->change-color->description
+msgid "Change color when the temperature becomes High or Critical"
+msgstr "Thay đổi màu khi nhiệt độ trở thành Cao hoặc Tới hạn"
+
+#. settings-schema.json->change-color->tooltip
+msgid ""
+"Selecting this option, this applet becomes\n"
+" orange when the High Temperature Threshold is reached,\n"
+" red when the Critical Temperature Threshold is reached."
+msgstr ""
+"Chọn tùy chọn này, applet này sẽ chuyển thành\n"
+" màu cam khi đạt đến Ngưỡng Nhiệt độ Cao,\n"
+" màu đỏ khi đạt đến Ngưỡng Nhiệt độ Tới hạn."
+
+#. settings-schema.json->only-colors->description
+msgid "Only use colors to alert me"
+msgstr "Chỉ sử dụng màu sắc để cảnh báo"
+
+#. settings-schema.json->only-colors->tooltip
+msgid ""
+"Select this option to not display text alerts in horizontal panels.\n"
+"(No text alert is ever displayed on vertical panels.)"
+msgstr ""
+"Chọn tùy chọn này để không hiển thị cảnh báo văn bản trên panel ngang.\n"
+"(Không có cảnh báo văn bản nào được hiển thị trên panel dọc.)"
+
+#. settings-schema.json->keep_size->description
+msgid "Avoid size changes"
+msgstr "Tránh thay đổi kích thước"
+
+#. settings-schema.json->keep_size->tooltip
+msgid ""
+"Checked: The size of this applet remains constant, once all your preferences "
+"have been defined.\n"
+"Unchecked: The size of this applet is optimized, but it may change."
+msgstr ""
+"Đã chọn: Kích thước của applet này giữ nguyên không đổi, sau khi tất cả tùy "
+"chọn của bạn đã được xác định.\n"
+"Chưa chọn: Kích thước của applet này được tối ưu hóa, nhưng có thể thay đổi."

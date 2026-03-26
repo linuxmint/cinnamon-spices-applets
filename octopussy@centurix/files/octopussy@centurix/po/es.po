@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-04 20:17+1000\n"
-"PO-Revision-Date: 2023-05-25 20:50-0400\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-07-09 15:54-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,59 +17,83 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.6\n"
 
-#: applet.js:132
+#. applet.js:132
 msgid "OctoPussy: OctoPrint manager."
 msgstr "OctoPussy: Gestor OctoPrint."
 
-#: applet.js:205
+#. applet.js:205
 msgid "Settings"
 msgstr "Ajustes"
 
-#: applet.js:278 applet.js:351
+#. applet.js:278 applet.js:351
 msgid "Time lapsed: "
 msgstr "Tiempo transcurrido: "
 
-#: applet.js:282 applet.js:352
+#. applet.js:282 applet.js:352
 msgid "Estimated: "
 msgstr "Estimado: "
 
-#: applet.js:292 applet.js:353
+#. applet.js:292 applet.js:353
 msgid "Total time: "
 msgstr "Tiempo total: "
 
-#: applet.js:355
+#. applet.js:355
 msgid "Pause current print"
 msgstr "Pausar la impresión en curso"
 
-#: applet.js:356
+#. applet.js:356
 msgid "Continue current print"
 msgstr "Continuar impresión en curso"
 
-#: applet.js:358
+#. applet.js:358
 msgid "Change filament"
 msgstr "Cambiar filamento"
 
-#: applet.js:359
+#. applet.js:359
 msgid "Camera monitor"
 msgstr "Monitor de la cámara"
 
-#: applet.js:360
+#. applet.js:360
 msgid "Open OctoPrint web"
 msgstr "Abrir OctoPrint web"
 
-#: applet.js:362
+#. applet.js:362
 msgid "Restart OctoPrint"
 msgstr "Reiniciar OctoPrint"
 
-#: applet.js:363
+#. applet.js:363
 msgid "Shutdown OctoPrint"
 msgstr "Apagar OctoPrint"
 
-#: applet.js:364
+#. applet.js:364
 msgid "Configure..."
 msgstr "Configurar..."
+
+#. applet.js:400
+msgid "Restart"
+msgstr "Reiniciar"
+
+#. applet.js:404 applet.js:430
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. applet.js:426
+msgid "Shutdown"
+msgstr "Apagar"
+
+#. applet.js:474
+msgid "Please confirm your action!"
+msgstr "¡Por favor confirme su acción!"
+
+#. metadata.json->description
+msgid "An applet to manage OctoPrint."
+msgstr "Un applet para gestionar OctoPrint."
+
+#. metadata.json->name
+msgid "OctoPrint manager"
+msgstr "Gestor OctoPrint"
 
 #. settings-schema.json->octoprintUrl->description
 #. settings-schema.json->octoprintUrl->tooltip
@@ -101,11 +126,3 @@ msgstr ""
 msgid "Video command to use when showing the webcam. Defaults to vlc."
 msgstr ""
 "Comando de video a usar cuando se muestra la webcam. Por defecto es vlc."
-
-#. metadata.json->description
-msgid "An applet to manage OctoPrint."
-msgstr "Un applet para gestionar OctoPrint."
-
-#. metadata.json->name
-msgid "OctoPrint manager"
-msgstr "Gestor OctoPrint"

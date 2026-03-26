@@ -1,0 +1,215 @@
+{
+  "pmmlayout": {
+    "type": "layout",
+    "pages": [
+      "page-process",
+      "page-style",
+      "page-characters",
+      "page-abbrev"
+    ],
+    "page-process": {
+      "type": "page",
+      "title": "Process",
+      "sections": [
+        "section-process",
+        "section-sysmon"
+      ]
+    },
+    "page-characters": {
+      "type": "page",
+      "title": "Characters",
+      "sections": [
+        "section-char-var"
+      ]
+    },
+    "page-abbrev": {
+      "type": "page",
+      "title": "Abbreviations",
+      "sections": [
+        "section-abbrev"
+      ]
+    },
+    "page-style": {
+      "type": "page",
+      "title": "Style",
+      "sections": [
+        "section-style"
+      ]
+    },
+    "section-process": {
+      "type": "section",
+      "title": "Process to monitor",
+      "keys": [
+        "process-name",
+        "pn-button",
+        "reset-pn-button",
+        "style-label-width"
+      ]
+    },
+    "section-sysmon": {
+      "type": "section",
+      "title": "System Monitor",
+      "keys": [
+        "sysmon-button"
+      ]
+    },
+    "section-char-var": {
+      "type": "section",
+      "title": "Variation characters",
+      "keys": [
+        "char-max",
+        "char-up",
+        "char-flat",
+        "char-down",
+        "char-min",
+        "no-char-var",
+        "style-label-width"
+      ]
+    },
+    "section-abbrev": {
+      "type": "section",
+      "title": "Abbreviations",
+      "keys": [
+        "abbrev-MiB",
+        "abbrev-kpm",
+        "style-label-width"
+      ]
+    },
+    "section-style": {
+      "type": "section",
+      "title": "Style",
+      "keys": [
+        "style-font-weight",
+        "style-font-family",
+        "style-font-size",
+        "style-customized-width",
+        "style-label-width"
+      ]
+    }
+  },
+  "process-name": {
+    "type": "entry",
+    "default": "",
+    "width": 15,
+    "description": "Name of process or PID to be monitored (by default, the Cinnamon process is used)",
+    "tooltip": "Set the name of the process or PID you want to monitor here.\nNote that, for the moment, no consideration is given to multiple instances of the same program (undefined behavior).\nOpen the system monitor to see all running processes."
+  },
+  "pn-button": {
+    "type": "button",
+    "callback": "on_settings_changed",
+    "description": "Apply"
+  },
+  "reset-pn-button": {
+    "type": "button",
+    "dependency": "process-name!=",
+    "callback": "on_reset_pressed",
+    "description": "Reset to Cinnamon"
+  },
+  "sysmon-button": {
+    "type": "button",
+    "callback": "_runSysMon",
+    "description": "Open System Monitor"
+  },
+  "refresh-rate": {
+    "type": "generic",
+    "default": 1000
+  },
+  "char-max": {
+    "type": "entry",
+    "default": "🔺",
+    "description": "Max value exceeded ⬆",
+    "tooltip": "Emoji accepted. Empty to return to the default value."
+  },
+  "char-up": {
+    "type": "entry",
+    "default": "↗️",
+    "description": "Increasing ↗",
+    "tooltip": "Emoji accepted. Empty to return to the default value."
+  },
+  "char-flat": {
+    "type": "entry",
+    "default": "➡️",
+    "description": "Staying constant ➡",
+    "tooltip": "Emoji accepted. Empty to return to the default value."
+  },
+  "char-down": {
+    "type": "entry",
+    "default": "↘️",
+    "description": "Decreasing ↘",
+    "tooltip": "Emoji accepted. Empty to return to the default value."
+  },
+  "char-min": {
+    "type": "entry",
+    "default": "🔻",
+    "description": "Min value exceeded ⬇",
+    "tooltip": "Emoji accepted. Empty to return to the default value."
+  },
+  "no-char-var": {
+    "type": "switch",
+    "default": false,
+    "description": "Do not display any Variation character"
+  },
+  "abbrev-MiB": {
+    "type": "entry",
+    "default": "MiB",
+    "description": "Abbreviation for mebibyte (default: MiB)",
+    "tooltip": "1 MiB = 1024 kiB"
+  },
+  "abbrev-kpm": {
+    "type": "entry",
+    "default": "kiB/min",
+    "description": "Abbreviation for kibibyte per minute (default: kiB/min)",
+    "tooltip": "1 kiB = 1024 B"
+  },
+  "style-font-weight": {
+    "type": "combobox",
+    "default": "bold",
+    "description": "Font weight",
+    "options": {
+      "normal": "normal",
+      "bold": "bold"
+    }
+  },
+  "style-font-family": {
+    "type": "combobox",
+    "default": "sans-serif",
+    "description": "Font family",
+    "options": {
+      "monospace": "monospace",
+      "sans-serif": "sans-serif",
+      "serif": "serif",
+      "cursive": "cursive",
+      "fantasy": "fantasy"
+    },
+    "tooltip": "Select monospace to ensure display stability."
+  },
+  "style-font-size": {
+    "type": "combobox",
+    "default": "medium",
+    "description": "Font size",
+    "options": {
+      "xx-small": "xx-small",
+      "x-small": "x-small",
+      "small": "small",
+      "medium": "medium",
+      "large": "large",
+      "x-large": "x-large",
+      "xx-large": "xx-large"
+    }
+  },
+  "style-customized-width": {
+    "type": "switch",
+    "default": false,
+    "description": "Custom width"
+  },
+  "style-label-width": {
+    "type": "scale",
+    "dependency": "style-customized-width",
+    "default": 125,
+    "min": 80,
+    "max": 330,
+    "step": 5,
+    "show-value": true,
+    "description": "Label's width (pixels)"
+  }
+}

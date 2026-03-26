@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dgs-bpivaty@gmail.com 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-05-14 22:14+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:37
+msgid "Diplays DGS user games status"
+msgstr "顯示 DGS 使用者的棋局狀態"
+
+#. metadata.json->description
+msgid "Manage your DGS games"
+msgstr "管理 DGS 棋局"
+
+#. metadata.json->name
+msgid "DGS Applet"
+msgstr "DGS 小程式"
+
+#. settings-schema.json->head->description
+msgid "Settings DGS applet"
+msgstr "DGS 小程式設定"
+
+#. settings-schema.json->user-cred-n->description
+msgid "DGS user id"
+msgstr "DGS 使用者帳號"
+
+#. settings-schema.json->user-cred-n->tooltip
+msgid "Press 'Login to DGS' button to set up."
+msgstr "請點選 [登入 DGS] 按鈕進行設定。"
+
+#. settings-schema.json->login-button->description
+msgid "Login to DGS"
+msgstr "登入 DGS"
+
+#. settings-schema.json->login-button->tooltip
+msgid "Press this button to identify the DGS user."
+msgstr "請點選此按鈕以識別 DGS 使用者。"
+
+#. settings-schema.json->check-every->options
+msgid "2 minutes"
+msgstr "2 分鐘"
+
+#. settings-schema.json->check-every->options
+msgid "5 minutes"
+msgstr "5 分鐘"
+
+#. settings-schema.json->check-every->options
+msgid "10 minutes"
+msgstr "10 分鐘"
+
+#. settings-schema.json->check-every->options
+msgid "15 minutes"
+msgstr "15 分鐘"
+
+#. settings-schema.json->check-every->description
+msgid "Check games status every"
+msgstr "檢查棋局狀態的時間間隔"
+
+#. settings-schema.json->beep-when-notify->options
+msgid "Yes"
+msgstr "開啟"
+
+#. settings-schema.json->beep-when-notify->options
+msgid "No"
+msgstr "關閉"
+
+#. settings-schema.json->beep-when-notify->description
+msgid "Beep on notification"
+msgstr "通知時播放音效"

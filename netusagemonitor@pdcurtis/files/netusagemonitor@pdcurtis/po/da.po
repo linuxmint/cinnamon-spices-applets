@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-16 12:29+0100\n"
-"PO-Revision-Date: 2021-02-16 12:32+0100\n"
+"PO-Revision-Date: 2023-12-24 14:11+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:62 4.0/applet.js:56 3.2/applet.js:62
 msgid "Some Dependencies not Installed"
@@ -206,7 +206,7 @@ msgstr "Uploadet:"
 
 #: 4.0/applet.js:256
 msgid "Network Usage Monitor with Alerts - Stylesheet persistence active"
-msgstr ""
+msgstr "Overvågning af netværksdataforbrug med advarsler"
 
 #: 4.0/applet.js:842 3.2/applet.js:840
 msgid ""
@@ -220,15 +220,19 @@ msgid ""
 " Some connections using ppp0 may not have been disabled or may need to be "
 "restarted manually"
 msgstr ""
+"DATAFORBRUGSGRÆNSEN ER OVERSKREDET\n"
+"\n"
+"Alle netværksforbindelser, der administreres af Netværkshåndtering, er "
+"blevet deaktiveret.\n"
+"\n"
+"Du skal bruge panelprogrammet for at genaktivere dem,\n"
+"\n"
+"når problemet med dataforbruget er løst\n"
+"\n"
+" Nogle forbindelser, der bruger ppp0, er muligvis ikke blevet deaktiveret "
+"eller skal genstartes manuelt."
 
 #: 4.0/applet.js:859 3.2/applet.js:857
-#, fuzzy
-#| msgid ""
-#| "THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n"
-#| "\n"
-#| " Either set a new limit using right click -> Settings \n"
-#| "\n"
-#| "or disconnect using the Network Manager Applet"
 msgid ""
 "THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n"
 "\n"
@@ -241,9 +245,12 @@ msgid ""
 msgstr ""
 "DATAFORBRUGSGRÆNSEN ER OVERSKREDET\n"
 "\n"
-" Angiv en ny grænse med højreklik -> Indstillinger \n"
+" Angiv en ny grænse med \n"
 "\n"
-"eller afbryd forbindelsen med netværkshåndtering"
+"et højreklik på panelprogrammet -> Konfigurér \n"
+"\n"
+"eller afbryd forbindelsen med Netværkshåndtering\n"
+"\n"
 
 #. metadata.json->name
 msgid "Network Data Usage Monitor"
@@ -419,7 +426,7 @@ msgstr "GB"
 msgid "Data Unit used to set Alert Levels and Cumulative Offsets"
 msgstr ""
 "Dataenhed som anvendes til indstilling af advarselsgrænse og samlede "
-"forskydninger."
+"forskydninger"
 
 #. settings-schema.json->dataUnit->tooltip
 #. 4.0->settings-schema.json->dataUnit->tooltip
@@ -751,64 +758,60 @@ msgstr ""
 #. 4.0->settings-schema.json->page1->title
 #. 3.2->settings-schema.json->page1->title
 msgid "General"
-msgstr ""
+msgstr "Generelt"
 
 #. 4.0->settings-schema.json->page2->title
 #. 3.2->settings-schema.json->page2->title
 msgid "Data Use, Alerts and Responses"
-msgstr ""
+msgstr "Dataforbrug, advarsler og reaktioner"
 
 #. 4.0->settings-schema.json->page3->title
 #. 3.2->settings-schema.json->page3->title
-#, fuzzy
-#| msgid "Cumulative Data Use"
 msgid "Cumulative Data"
-msgstr "Samlet dataforbrug"
+msgstr "Samlet data"
 
 #. 4.0->settings-schema.json->page4->title
 #. 3.2->settings-schema.json->page4->title
 msgid "Longer Term Statistics"
-msgstr ""
+msgstr "Langtidsstatistik"
 
 #. 4.0->settings-schema.json->section4->title
 #. 3.2->settings-schema.json->section4->title
-#, fuzzy
-#| msgid "Settings for response to exceeding the current data usage limits"
 msgid "Response to exceeding the current data usage limit"
-msgstr ""
-"Indstillinger for reaktion på overskridelse af de aktuelle "
-"dataforbrugsgrænser"
+msgstr "Reaktion på overskridelse af de aktuelle dataforbrugsgrænser"
 
 #. 4.0->settings-schema.json->useExtendedDisplay->description
 #. 3.2->settings-schema.json->useExtendedDisplay->description
 msgid "Enable Extended Display Options"
-msgstr ""
+msgstr "Aktivér udvidede visningsindstillinger"
 
 #. 4.0->settings-schema.json->useExtendedDisplay->tooltip
 #. 3.2->settings-schema.json->useExtendedDisplay->tooltip
 msgid "This is new option version 1.0.2"
-msgstr ""
+msgstr "Dette er en ny mulighed fra og med version 1.0.2"
 
 #. 4.0->settings-schema.json->extendedDisplay->options
 #. 3.2->settings-schema.json->extendedDisplay->options
 msgid "Classic - Summary of Data Usage for last Days and Months"
-msgstr ""
+msgstr "Klassisk — Resumé af de sidste dages og måneders trafik"
 
 #. 4.0->settings-schema.json->extendedDisplay->options
 #. 3.2->settings-schema.json->extendedDisplay->options
 msgid ""
 "Classic Plus - Classic with addition of breakdown by hour for last 24 hours"
 msgstr ""
+"Klassisk plus — Klassisk med tilføjelse af opdeling efter timer for de "
+"sidste 24 timer"
 
 #. 4.0->settings-schema.json->extendedDisplay->options
 #. 3.2->settings-schema.json->extendedDisplay->options
 msgid "Custom Display - requires enabling below"
-msgstr ""
+msgstr "Tilpasset visning (kræver aktivering nedenfor)"
 
 #. 4.0->settings-schema.json->extendedDisplay->description
 #. 3.2->settings-schema.json->extendedDisplay->description
 msgid "Type of Display - default 'classic'"
-msgstr ""
+msgstr "Visningstype (som standard Klassisk)"
 
 #. 4.0->settings-schema.json->extendedDisplay->tooltip
 #. 3.2->settings-schema.json->extendedDisplay->tooltip
@@ -817,21 +820,25 @@ msgid ""
 "an hourly breakdown over the last 24 hours and an experimental option of a "
 "user defined string for vnstati when enabled below"
 msgstr ""
+"Denne funktion tilbyder den klassiske (oprindelige) visning med mulighed for "
+"at tilføje en timeopdeling over de sidste 24 timer og en eksperimentel "
+"mulighed for en brugerdefineret streng for vnstati, når den er aktiveret "
+"nedenfor"
 
 #. 4.0->settings-schema.json->useVnstatiCommandString->description
 #. 3.2->settings-schema.json->useVnstatiCommandString->description
 msgid "Enable Custom Display Option"
-msgstr ""
+msgstr "Aktivér tilpasset visningsindstilling"
 
 #. 4.0->settings-schema.json->useVnstatiCommandString->tooltip
 #. 3.2->settings-schema.json->useVnstatiCommandString->tooltip
 msgid "Check box"
-msgstr ""
+msgstr "Afkrydsningsfelt"
 
 #. 4.0->settings-schema.json->vnstatiCommandString->description
 #. 3.2->settings-schema.json->vnstatiCommandString->description
 msgid "Custom options to pass to vnstati - default is '-vs' "
-msgstr ""
+msgstr "Tilpasset tilvalg som sendes til vnstati (standard er “-vs”) "
 
 #. 4.0->settings-schema.json->vnstatiCommandString->tooltip
 #. 3.2->settings-schema.json->vnstatiCommandString->tooltip
@@ -841,15 +848,19 @@ msgid ""
 "added to it automatically. Please read the vnstati manual for further "
 "information on options avaiilable"
 msgstr ""
+"Standardindstillingen er de indstillinger, der bruges til den udvidede "
+"visning. Bemærk: Dette er ikke hele vnstati-tilvalgsstrengen - interface- og "
+"outputfiltilvalgene føjes automatisk til den. Læs vnstati-manualen for "
+"yderligere information om tilgængelige indstillinger."
 
 #. 4.0->settings-schema.json->alertSound->description
 #. 3.2->settings-schema.json->alertSound->description
 msgid "Choose alert sound file"
-msgstr ""
+msgstr "Vælg advarselslydfil"
 
 #. 4.0->settings-schema.json->alertSound->tooltip
 #. 3.2->settings-schema.json->alertSound->tooltip
-#, fuzzy
-#| msgid "Must have Sox installed. Most sound file types supported"
 msgid "Must have Sox installed. Limited file types supported (.oga and .wav)"
-msgstr "Sox skal være installeret. De fleste lydfiltyper understøttes"
+msgstr ""
+"Sox skal være installeret. Begrænset antal lydfiler understøttes (.oga og ."
+"wav)"

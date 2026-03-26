@@ -1,0 +1,84 @@
+# WAKATIME DISPLAY
+# This file is put in the public domain.
+# inventor96, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: wakatimedisplay@inventor96 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-09-16 02:00+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:91
+msgid "Click to open your WakaTime Dashboard"
+msgstr "點選開啟 WakaTime 儀表板"
+
+#. applet.js:94
+msgid "Open the Applet configuration to add your WakaTime API Key"
+msgstr "開啟小程式設定以新增您的 WakaTime API 金鑰"
+
+#. metadata.json->name
+msgid "WakaTime Display"
+msgstr "WakaTime 顯示"
+
+#. metadata.json->description
+msgid "Displays your statistics from WakaTime"
+msgstr "顯示您在 WakaTime 上的統計資料"
+
+#. settings-schema.json->wakatime-head->description
+msgid "WakaTime Settings"
+msgstr "WakaTime 設定"
+
+#. settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr "分鐘"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh interval"
+msgstr "重新整理間隔"
+
+#. settings-schema.json->refreshInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine."
+msgstr ""
+"增加或減少此數值以變更重新整理間隔；若電腦效能較慢，建議使用較長的間隔。"
+
+#. settings-schema.json->apiKey->description
+msgid "WakaTime API Key"
+msgstr "WakaTime API 金鑰"
+
+#. settings-schema.json->apiKey->tooltip
+msgid "The API key unique to your WakaTime account."
+msgstr "您 WakaTime 帳戶專屬的 API 金鑰。"
+
+#. settings-schema.json->getApiKey->description
+msgid "Open the WakaTime page to get your API key"
+msgstr "開啟 WakaTime 網站以取得您的 API 金鑰"
+
+#. settings-schema.json->getApiKey->tooltip
+msgid "Opens WakaTime API key webpage"
+msgstr "開啟 WakaTime API 金鑰網頁"
+
+#. settings-schema.json->display-head->description
+msgid "Display Settings"
+msgstr "顯示設定"
+
+#. settings-schema.json->logoColor->description
+msgid "WakaTime logo color"
+msgstr "WakaTime 圖示顏色"
+
+#. settings-schema.json->logoColor->options
+msgid "White"
+msgstr "白色"
+
+#. settings-schema.json->logoColor->options
+msgid "Black"
+msgstr "黑色"

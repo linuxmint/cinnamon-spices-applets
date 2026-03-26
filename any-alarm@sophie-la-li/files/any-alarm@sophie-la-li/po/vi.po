@@ -1,0 +1,71 @@
+# ANY ALARM
+# This file is put in the public domain.
+# sophie-la-li, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: any-alarm@sophie-la-li 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-08 19:42+0700\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:17 applet.js:56
+msgid "AnyAlarm"
+msgstr "AnyAlarm"
+
+#. metadata.json->name
+msgid "Any Alarm"
+msgstr "Any Alarm"
+
+#. metadata.json->description
+msgid "Will remind you regularly about something"
+msgstr "Sẽ nhắc nhở bạn thường xuyên về điều gì đó"
+
+#. settings-schema.json->enabled->description
+msgid "Alarm enabled"
+msgstr "Đã bật báo thức"
+
+#. settings-schema.json->mode->description
+msgid "When to trigger the alarm"
+msgstr "Khi kích hoạt báo thức"
+
+#. settings-schema.json->mode->options
+msgid "every # seconds (see option below)"
+msgstr "mỗi # giây (xem tùy chọn bên dưới)"
+
+#. settings-schema.json->mode->options
+msgid "every full minute"
+msgstr "mỗi phút"
+
+#. settings-schema.json->mode->options
+msgid "every quarter hour"
+msgstr "mỗi phần tư giờ"
+
+#. settings-schema.json->mode->options
+msgid "every half hour"
+msgstr "mỗi nửa giờ"
+
+#. settings-schema.json->mode->options
+msgid "every full hour"
+msgstr "mỗi giờ"
+
+#. settings-schema.json->xs-mode-seconds->units
+msgid "seconds"
+msgstr "giây"
+
+#. settings-schema.json->xs-mode-seconds->description
+msgid "Seconds for the \"every # seconds\" mode"
+msgstr "Giây cho chế độ \"mỗi # giây\""
+
+#. settings-schema.json->alarm-text->description
+msgid "Alarm Text"
+msgstr "Văn bản báo thức"

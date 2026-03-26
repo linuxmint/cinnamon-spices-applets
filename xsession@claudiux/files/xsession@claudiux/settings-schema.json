@@ -1,0 +1,51 @@
+{
+  "section1": {
+    "type": "section",
+    "description": "Icon size"
+  },
+
+  "icon_size": {
+    "type": "combobox",
+    "description": "Size (in pixels) of menu icons",
+    "default": 22,
+    "options": {
+      "16": 16,
+      "22": 22,
+      "24": 24,
+      "32": 32,
+      "48": 48,
+      "64": 64,
+      "96": 96,
+      "128": 128
+    }
+  },
+
+  "section2": {
+    "type": "section",
+    "description": "RELOAD ALL option"
+  },
+
+  "show_reload_all": {
+    "type": "switch",
+    "default": false,
+    "description": "Show the RELOAD ALL option in submenus",
+    "tooltip": "Caution! Reloading all spices of a given type may lead to errors."
+  },
+
+  "section3": {
+    "type": "section",
+    "description": "Latest messages"
+  },
+
+  "number_latest": {
+    "type": "scale",
+    "default": 50,
+    "min": 10,
+    "max": 250,
+    "step": 5,
+    "description": "Number of latest messages to show",
+    "tooltip": "(Including empty lines.)"
+  }
+
+
+}

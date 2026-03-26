@@ -1,0 +1,337 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-22 20:01+0200\n"
+"PO-Revision-Date: 2025-09-19 00:00+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: 3.2/applet.js:1286 4.0/applet.js:1393
+msgid "Preferences"
+msgstr "偏好設定"
+
+#: 3.2/applet.js:1290 4.0/applet.js:1397
+msgid "About..."
+msgstr "關於..."
+
+#: 3.2/applet.js:1294 4.0/applet.js:1401
+msgid "Configure..."
+msgstr "設定..."
+
+#: 3.2/applet.js:1298 4.0/applet.js:1405
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "移除「%s」"
+
+#: 3.2/applet.js:1307 4.0/applet.js:1414
+msgid "Open new window"
+msgstr "開啟新視窗"
+
+#: 3.2/applet.js:1313 4.0/applet.js:1420
+msgid "Pin to this workspace"
+msgstr "釘選到此工作區"
+
+#: 3.2/applet.js:1327 4.0/applet.js:1434
+msgid "Pin to other workspaces"
+msgstr "釘選到其他工作區"
+
+#: 3.2/applet.js:1359 4.0/applet.js:1507
+msgid "Only on this workspace"
+msgstr "僅在此工作區"
+
+#: 3.2/applet.js:1362 4.0/applet.js:1510
+msgid "Visible on all workspaces"
+msgstr "在所有工作區中顯示"
+
+#: 3.2/applet.js:1364 4.0/applet.js:1511
+msgid "Move to another workspace"
+msgstr "移動至其他工作區"
+
+#: 3.2/applet.js:1384 4.0/applet.js:1530
+msgid "Move to another monitor"
+msgstr "移動至其他螢幕"
+
+#: 3.2/applet.js:1392 4.0/applet.js:1538
+msgid "Monitor"
+msgstr "螢幕"
+
+#: 3.2/applet.js:1404 4.0/applet.js:1554
+msgid "Restore"
+msgstr "還原"
+
+#: 3.2/applet.js:1409 4.0/applet.js:1559
+msgid "Minimize"
+msgstr "最小化"
+
+#: 3.2/applet.js:1415 4.0/applet.js:1565
+msgid "Unmaximize"
+msgstr "取消最大化"
+
+#: 3.2/applet.js:1422 4.0/applet.js:1572
+msgid "Close others"
+msgstr "關閉其他視窗"
+
+#: 3.2/applet.js:1433 4.0/applet.js:1583
+msgid "Close all"
+msgstr "全部關閉"
+
+#: 3.2/applet.js:1442 4.0/applet.js:1592
+msgid "Close"
+msgstr "關閉"
+
+#: 4.0/applet.js:1475
+msgid "Places"
+msgstr "位置"
+
+#. metadata.json->name
+msgid "CobiWindowList"
+msgstr "CobiWindowList"
+
+#. metadata.json->description
+msgid "A window list with app grouping and window previews"
+msgstr "一個具有應用程式群組和視窗預覽的視窗清單"
+
+#. 3.2->settings-schema.json->section1->description
+#. 4.0->settings-schema.json->section1->description
+msgid "Captions"
+msgstr "標題"
+
+#. 3.2->settings-schema.json->caption-type->options
+#. 4.0->settings-schema.json->caption-type->options
+msgid "Name"
+msgstr "名稱"
+
+#. 3.2->settings-schema.json->caption-type->options
+#. 4.0->settings-schema.json->caption-type->options
+msgid "Title"
+msgstr "標題"
+
+#. 3.2->settings-schema.json->caption-type->description
+#. 4.0->settings-schema.json->caption-type->description
+msgid "Caption type"
+msgstr "標題類型"
+
+#. 3.2->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+msgid "None"
+msgstr "無"
+
+#. 3.2->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+msgid "All"
+msgstr "全部"
+
+#. 3.2->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+msgid "Running"
+msgstr "執行中"
+
+#. 3.2->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+msgid "Focused"
+msgstr "已聚焦"
+
+#. 3.2->settings-schema.json->display-caption-for->description
+#. 4.0->settings-schema.json->display-caption-for->description
+msgid "Display Caption For"
+msgstr "顯示標題的時機"
+
+#. 3.2->settings-schema.json->label-width->units
+#. 4.0->settings-schema.json->label-width->units
+msgid "pixels"
+msgstr "像素"
+
+#. 3.2->settings-schema.json->label-width->description
+#. 4.0->settings-schema.json->label-width->description
+msgid "Label width"
+msgstr "標籤寬度"
+
+#. 3.2->settings-schema.json->label-animation->description
+#. 4.0->settings-schema.json->label-animation->description
+msgid "Animate label"
+msgstr "標籤動畫"
+
+#. 3.2->settings-schema.json->label-animation-time->units
+#. 3.2->settings-schema.json->animation-time->units
+#. 3.2->settings-schema.json->preview-timeout-show->units
+#. 3.2->settings-schema.json->preview-timeout-hide->units
+#. 4.0->settings-schema.json->label-animation-time->units
+#. 4.0->settings-schema.json->animation-time->units
+#. 4.0->settings-schema.json->preview-timeout-show->units
+#. 4.0->settings-schema.json->preview-timeout-hide->units
+msgid "milliseconds"
+msgstr "毫秒"
+
+#. 3.2->settings-schema.json->label-animation-time->description
+#. 4.0->settings-schema.json->label-animation-time->description
+msgid "Label animation time"
+msgstr "標籤動畫時間"
+
+#. 3.2->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+msgid "Never"
+msgstr "永不"
+
+#. 3.2->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+msgid "Always"
+msgstr "一律"
+
+#. 3.2->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+msgid "2 or more windows"
+msgstr "2 個或更多視窗"
+
+#. 3.2->settings-schema.json->display-number->description
+#. 4.0->settings-schema.json->display-number->description
+msgid "Display Number"
+msgstr "顯示視窗數量"
+
+#. 3.2->settings-schema.json->section2->description
+#. 4.0->settings-schema.json->section2->description
+msgid "Icons"
+msgstr "圖示"
+
+#. 3.2->settings-schema.json->group-windows->description
+#. 4.0->settings-schema.json->group-windows->description
+msgid "Group Windows"
+msgstr "群組視窗"
+
+#. 3.2->settings-schema.json->group-windows->tooltip
+#. 4.0->settings-schema.json->group-windows->tooltip
+msgid ""
+"If windows are grouped, all windows from an application are managed by the same button,\n"
+"if not grouped, all windows get an own button"
+msgstr ""
+"若啟用視窗群組，同一應用程式的所有視窗將由同一個按鈕管理；\n"
+"若未啟用，則每個視窗都將有自己的按鈕。"
+
+#. 3.2->settings-schema.json->display-pinned->description
+#. 4.0->settings-schema.json->display-pinned->description
+msgid "Display Favorites"
+msgstr "顯示我的最愛"
+
+#. 3.2->settings-schema.json->animation-time->description
+#. 4.0->settings-schema.json->animation-time->description
+msgid "Animation Time"
+msgstr "動畫時間"
+
+#. 3.2->settings-schema.json->animation-time->tooltip
+#. 4.0->settings-schema.json->animation-time->tooltip
+msgid "The flashing time when a new window is opened via a button"
+msgstr "透過按鈕開啟新視窗時的閃爍時間"
+
+#. 3.2->settings-schema.json->show-windows-for-current-monitor->description
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->description
+msgid "Only show windows on the same monitor"
+msgstr "僅顯示在同一個螢幕上的視窗"
+
+#. 3.2->settings-schema.json->show-windows-for-current-monitor->tooltip
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->tooltip
+msgid ""
+"If enabled, this applet instance only manages windows\n"
+"that are displayed on the same monitor"
+msgstr ""
+"啟用後，此小工具實體將只管理\n"
+"顯示在同一個螢幕上的視窗"
+
+#. 3.2->settings-schema.json->section3->description
+#. 4.0->settings-schema.json->section3->description
+msgid "Preview menu"
+msgstr "預覽選單"
+
+#. 3.2->settings-schema.json->menu-show-on-click->description
+#. 4.0->settings-schema.json->menu-show-on-click->description
+msgid "Show on click"
+msgstr "點選時顯示"
+
+#. 3.2->settings-schema.json->menu-show-on-click->tooltip
+#. 4.0->settings-schema.json->menu-show-on-click->tooltip
+msgid ""
+"If enabled, a popup menu with a list of current windows will show when clicking\n"
+"(Only with 2 or more windows)"
+msgstr ""
+"啟用後，點選按鈕將顯示一個彈出式選單，其中包含目前的視窗清單\n"
+"（僅在有 2 個或更多視窗時有效）"
+
+#. 3.2->settings-schema.json->menu-show-on-hover->description
+#. 4.0->settings-schema.json->menu-show-on-hover->description
+msgid "Show on hover"
+msgstr "游標停留時顯示"
+
+#. 3.2->settings-schema.json->menu-show-on-hover->tooltip
+#. 4.0->settings-schema.json->menu-show-on-hover->tooltip
+msgid ""
+"If enabled, a popup menu with a list of current windows will show when "
+"hovering"
+msgstr ""
+"啟用後，當滑鼠游標停留在按鈕上時，"
+"將顯示一個包含目前視窗清單的彈出式選單"
+
+#. 3.2->settings-schema.json->show-previews->description
+#. 4.0->settings-schema.json->show-previews->description
+msgid "Show previews"
+msgstr "顯示預覽"
+
+#. 3.2->settings-schema.json->show-previews->tooltip
+#. 4.0->settings-schema.json->show-previews->tooltip
+msgid ""
+"If enabled, the popup menu will show window previews\n"
+"(Always disabled when running Cinnamon in Software Rendering Mode)"
+msgstr ""
+"啟用後，彈出式選單將顯示視窗預覽\n"
+"（在 Cinnamon 的軟體渲染模式下執行時，此功能將一律停用）"
+
+#. 3.2->settings-schema.json->number-of-unshrunk-previews->units
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->units
+msgid "Windows"
+msgstr "視窗"
+
+#. 3.2->settings-schema.json->number-of-unshrunk-previews->description
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->description
+msgid "Number of unshrunk previews"
+msgstr "未收合預覽的數量"
+
+#. 3.2->settings-schema.json->preview-timeout-show->description
+#. 4.0->settings-schema.json->preview-timeout-show->description
+msgid "Timeout Show"
+msgstr "顯示逾時"
+
+#. 3.2->settings-schema.json->preview-timeout-show->tooltip
+#. 4.0->settings-schema.json->preview-timeout-show->tooltip
+msgid ""
+"The waiting time for the popup menu to show, when hovering a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"當滑鼠游標停留在按鈕上時，彈出式選單顯示前的等待時間\n"
+"（當滑鼠直接在清單中不同按鈕之間移動時，此設定無效）"
+
+#. 3.2->settings-schema.json->preview-timeout-hide->description
+#. 4.0->settings-schema.json->preview-timeout-hide->description
+msgid "Timeout Hide"
+msgstr "隱藏逾時"
+
+#. 3.2->settings-schema.json->preview-timeout-hide->tooltip
+#. 4.0->settings-schema.json->preview-timeout-hide->tooltip
+msgid ""
+"The waiting time for the popup menu to hide, when leaving a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"當滑鼠離開按鈕時，彈出式選單隱藏前的等待時間\n"
+"（當滑鼠直接在清單中不同按鈕之間移動時，此設定無效）"
+
+#. 3.2->settings-schema.json->preview-close-on-middle-click->description
+#. 4.0->settings-schema.json->preview-close-on-middle-click->description
+msgid "Close window on mouse-wheel click"
+msgstr "點選滑鼠滾輪關閉視窗"

@@ -1,23 +1,23 @@
 // Shutdown Menu With Icons Cinnamon Applet
-// Developed by Nicolas LLOBERA - nllobera@gmail.com from the System Shutdown and Restart Applet by Shelley
-// version: 2.2 (28-08-2013)
+// Developed by Nicolas LLOBERA from the System Shutdown and Restart Applet by Shelley
+// version: 2.3 (08-02-2024)
 // License: GPLv3
-// Copyright © 2013 Nicolas LLOBERA
+// Copyright © 2024 Nicolas LLOBERA
 
-const Applet = imports.ui.applet;
 const Gettext = imports.gettext;
-const UUID = "ShutdownMenuWithIcons@LLOBERA";
-const Gtk = imports.gi.Gtk;
 const Gio = imports.gi.Gio;
-const Main = imports.ui.main;
-const PopupMenu = imports.ui.popupMenu;
-const Settings = imports.ui.settings;
+const GLib = imports.gi.GLib;
+const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
 const Util = imports.misc.util;
-const GLib = imports.gi.GLib;
-const AppletUUID = "ShutdownMenuWithIcons@LLOBERA";
-const AppletDirectory = imports.ui.appletManager.appletMeta[AppletUUID].path;
+const Applet = imports.ui.applet;
+const PopupMenu = imports.ui.popupMenu;
+const Settings = imports.ui.settings;
 
+const UUID = "ShutdownMenuWithIcons@LLOBERA";
+const AppletUUID = "ShutdownMenuWithIcons@LLOBERA";
+
+const AppletDirectory = imports.ui.appletManager.appletMeta[AppletUUID].path;
 imports.searchPath.push(AppletDirectory);
 const PopupMenuExtension = imports.popupImageLeftMenuItem;
 
@@ -167,7 +167,7 @@ MyApplet.prototype = {
     },
     
     createMenuItem: function(displayName, iconName, command) {
-        let menuItem = new PopupMenuExtension.PopupImageLeftMenuItem(displayName, iconName, command);
+        var menuItem = new PopupMenuExtension.PopupImageLeftMenuItem(displayName, iconName, command);
         menuItem.connect("activate", function(actor, event) {
             // As application variable is not accessible here, 
             // the application variable is passed to the PopupImageLeftMenuItem ctor to be accessible throw the actor argument
@@ -188,12 +188,12 @@ MyApplet.prototype = {
         this._applet_context_menu.addMenuItem(this.settings_menu_item);
         
         this.help_menu_item = new Applet.MenuItem(_("Help"), Gtk.STOCK_HELP, function() {
-            Main.Util.spawnCommandLine("xdg-open " + AppletDirectory + "/README.txt");
+            Util.spawnCommandLine("xdg-open " + AppletDirectory + "/README.txt");
         });
         this._applet_context_menu.addMenuItem(this.help_menu_item);
         
         this.about_menu_item = new Applet.MenuItem(_("About"), Gtk.STOCK_ABOUT,  function() {
-            Main.Util.spawnCommandLine("xdg-open " + AppletDirectory + "/ABOUT.txt");
+            Util.spawnCommandLine("xdg-open " + AppletDirectory + "/ABOUT.txt");
         });
         this._applet_context_menu.addMenuItem(this.about_menu_item);
     },
@@ -205,6 +205,6 @@ MyApplet.prototype = {
 };
 
 function main(metadata, orientation, panel_height, instanceId) {
-    let myApplet = new MyApplet(metadata, orientation, panel_height, instanceId);
+    var myApplet = new MyApplet(metadata, orientation, panel_height, instanceId);
     return myApplet;      
 }

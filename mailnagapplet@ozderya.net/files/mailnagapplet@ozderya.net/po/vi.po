@@ -1,0 +1,162 @@
+# MAILNAG
+# This file is put in the public domain.
+# hyOzd, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mailnagapplet@ozderya.net 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-26 12:36-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:169
+msgid "just now"
+msgstr "vừa xong"
+
+#. applet.js:177
+msgid " minutes ago"
+msgstr " phút trước"
+
+#. applet.js:185
+msgid " hours ago"
+msgstr " giờ trước"
+
+#. applet.js:192
+msgid "yesterday"
+msgstr "hôm qua"
+
+#. applet.js:196
+msgid " days ago"
+msgstr " ngày trước"
+
+#. applet.js:200
+msgid " weeks ago"
+msgstr " tuần trước"
+
+#. applet.js:285
+msgid "Configure Mailnag"
+msgstr "Cấu hình Mailnag"
+
+#. applet.js:370
+msgid "Mailnag daemon stopped working!"
+msgstr "Dịch vụ Mailnag ngừng hoạt động!"
+
+#. applet.js:374
+msgid "Mailnag daemon isn't running! Do you have it installed?"
+msgstr "Dịch vụ Mailnag không chạy! Bạn đã cài chưa?"
+
+#. applet.js:607
+#, javascript-format
+msgid "You have %d new mails!"
+msgstr "Bạn có %d thư mới!"
+
+#. applet.js:608 applet.js:653
+msgid "Mark All Read"
+msgstr "Đánh dấu tất cả là đã đọc"
+
+#. applet.js:616
+msgid "You have new mail!"
+msgstr "Bạn có thư mới!"
+
+#. applet.js:618
+msgid "Mark Read"
+msgstr "Đánh dấu là đã đọc"
+
+#. applet.js:701 applet.js:763
+msgid "No unread mails."
+msgstr "Không có thư chưa đọc."
+
+#. applet.js:739
+msgid "Mailnag daemon is not running!"
+msgstr "Dịch vụ Mailnag không chạy!"
+
+#. applet.js:752
+#, javascript-format
+msgid "You have a mail from %s!"
+msgstr "Bạn có thư từ %s!"
+
+#. applet.js:758
+#, javascript-format
+msgid "You have %d unread mails!"
+msgstr "Bạn có %d thư chưa đọc!"
+
+#. applet.js:774
+msgid "Click to see error!"
+msgstr "Nhấp để xem lỗi!"
+
+#. applet.js:775
+msgid "Error: "
+msgstr "Lỗi: "
+
+#. metadata.json->name
+msgid "Mailnag"
+msgstr "Mailnag"
+
+#. metadata.json->description
+msgid "Mailnag mail notifier applet"
+msgstr "Applet thông báo thư Mailnag"
+
+#. settings-schema.json->notifications->description
+msgid "Show notifications"
+msgstr "Hiển thị thông báo"
+
+#. settings-schema.json->notifications->tooltip
+msgid ""
+"Enables display of mail arrived notifications by applet. Make sure you "
+"disable mailnag notification plugin, otherwise you will have duplicates."
+msgstr "Bật hiển thị thông báo thư đến. Hãy tắt plugin thông báo của Mailnag để tránh trùng lặp."
+
+#. settings-schema.json->launch_client_on_click->description
+msgid "Launch mail client on click"
+msgstr "Mở ứng dụng thư khi nhấp"
+
+#. settings-schema.json->launch_client_on_click->tooltip
+msgid "Mail client is launched when clicked on a menu item."
+msgstr "Ứng dụng thư sẽ mở khi nhấp vào mục menu."
+
+#. settings-schema.json->middle_click->description
+msgid "On middle click:"
+msgstr "Khi nhấp giữa chuột:"
+
+#. settings-schema.json->middle_click->tooltip
+msgid "What to do when middle clicked on applet icon"
+msgstr "Thao tác khi nhấp giữa vào biểu tượng applet"
+
+#. settings-schema.json->middle_click->options
+msgid "Mark all read"
+msgstr "Đánh dấu tất cả là đã đọc"
+
+#. settings-schema.json->middle_click->options
+msgid "Launch mail client"
+msgstr "Mở ứng dụng thư"
+
+#. settings-schema.json->middle_click->options
+msgid "Do nothing"
+msgstr "Không làm gì"
+
+#. settings-schema.json->max_length->description
+msgid "Max sender / subject display length"
+msgstr "Chiều dài tối đa hiển thị người gửi / tiêu đề"
+
+#. settings-schema.json->max_length->tooltip
+msgid "Sender or subject lines longer than this will be cropped"
+msgstr "Các dòng người gửi hoặc tiêu đề dài hơn sẽ bị cắt"
+
+#. settings-schema.json->client->description
+msgid "Mail client to launch (or webpage)"
+msgstr "Ứng dụng thư để mở (hoặc trang web)"
+
+#. settings-schema.json->client->tooltip
+msgid ""
+"Enter the command to launch your mail client here. You can also enter a web "
+"address that starts with 'http'."
+msgstr "Nhập lệnh mở ứng dụng thư hoặc địa chỉ web bắt đầu bằng 'http'."

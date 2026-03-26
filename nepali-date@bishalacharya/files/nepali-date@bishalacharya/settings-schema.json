@@ -1,0 +1,24 @@
+{
+  "language": {
+    "type": "combobox",
+    "default": "en",
+    "description": "Language",
+    "options": {
+      "English": "en",
+      "Nepali": "ne"
+    }
+  },
+  "format": {
+    "type": "combobox",
+    "default": "Month DD, YYYY",
+    "description": "Date format",
+    "options": {
+      "YYYY/MM/DD": "YYYY/MM/DD",
+      "YYYY Month DD": "YYYY Month DD",
+      "Month DD, YYYY": "Month DD, YYYY"
+    }
+  
+  }
+  
+
+}

@@ -6,6 +6,7 @@ const Mainloop = imports.mainloop;
 const Lang = imports.lang;
 const PopupMenu = imports.ui.popupMenu;
 const Applet = imports.ui.applet;
+const Gettext = imports.gettext;
 
 const uuid = "disk-read-and-write-speed@cardsurf";
 let AppletConstants, CssStylization;
@@ -18,6 +19,9 @@ if (typeof require !== 'undefined') {
     CssStylization = AppletDirectory.cssStylization;
 }
 
+function _(str) {
+    return Gettext.dgettext(uuid, str);
+}
 
 
 
@@ -82,18 +86,19 @@ IconLabel.prototype = {
 
 
 
-function GuiSpeed(panel_height, gui_speed_type, decimal_places) {
-    this._init(panel_height, gui_speed_type, decimal_places);
+function GuiSpeed(panel_height, gui_speed_type, decimal_places, is_binary) {
+    this._init(panel_height, gui_speed_type, decimal_places, is_binary);
 };
 
 GuiSpeed.prototype = {
 
-    _init: function(panel_height, gui_speed_type, decimal_places) {
+    _init: function(panel_height, gui_speed_type, decimal_places, is_binary) {
 
         this.panel_height = panel_height;
         this.gui_speed_type = gui_speed_type;
         this.decimal_places = decimal_places;
         this.text_spacing = 5;
+        this.is_binary = is_binary;
 
         this.actor = new St.BoxLayout();
         this.iconlabel_received = new IconLabel();
@@ -207,10 +212,11 @@ GuiSpeed.prototype = {
     _get_fixed_width_text: function() {
         let text = "";
         if(this.decimal_places == AppletConstants.DecimalPlaces.AUTO) {
-            text = "99.9MB";
+            text = (this.is_binary) ? " 999.9 MiB " : " 999.9 MB ";
         }
         else {
-            text = "999." + this.repeat_string("9", this.decimal_places) + "MB";
+            text = " 999." + this.repeat_string("9", this.decimal_places);
+            text += (this.is_binary) ? " MiB " : " MB ";
         }
         return text;
     },

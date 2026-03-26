@@ -1,5 +1,6 @@
 {
     "name": "Desaturate All",
     "uuid": "desaturate-all@hkoosha",
-    "description": "Convert your screen to grayscale."
+    "description": "Convert your screen to gray-scale.",
+    "version": "1.1.1"
 }

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 [ $# -eq 1 ] || exit 1
 
 PID=$1

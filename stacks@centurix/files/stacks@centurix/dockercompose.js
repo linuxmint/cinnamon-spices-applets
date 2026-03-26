@@ -3,12 +3,12 @@ const Lang = imports.lang;
 const Gio = imports.gi.Gio;
 const ByteArray = imports.byteArray;
 const UUID = "stacks@centurix";
-let Util;
+let AppletUtil;
 if (typeof require !== 'undefined') {
-	Util = require('./util');
+	AppletUtil = require('./util');
 } else {
 	const AppletDir = imports.ui.appletManager.applets['stacks@centurix'];
-	Util = AppletDir.util;
+	AppletUtil = AppletDir.util;
 }
 
 
@@ -139,7 +139,7 @@ DockerCompose.prototype = {
 	},
 
     listDockerComposefiles: function() {
-        return this.findDockerComposeFiles(Gio.file_new_for_path(Util.resolveHome(this.docker_compose_project_folder)));
+        return this.findDockerComposeFiles(Gio.file_new_for_path(AppletUtil.resolveHome(this.docker_compose_project_folder)));
     },
 
 	/*

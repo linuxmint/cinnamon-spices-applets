@@ -38,6 +38,7 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
             this.settings.bind("show-events", "show_events", this._onSettingsChanged);
             this.settings.bind("use-custom-format", "use_custom_format", this._onSettingsChanged);
             this.settings.bind("custom-format", "custom_format", this._onSettingsChanged);
+            this.settings.bind("custom-tooltip-format", "custom_tooltip_format", this._onSettingsChanged);
             this.settings.bind("keyOpen", "keyOpen", this._setKeybinding);
             this._setKeybinding();
 
@@ -203,7 +204,7 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
     }
 
     on_custom_format_button_pressed() {
-        Util.spawnCommandLine("xdg-open http://www.foragoodstrftime.com/");
+        Util.spawnCommandLine("xdg-open https://cinnamon-spices.linuxmint.com/strftime.php");
     }
 
     _onLaunchSettings() {
@@ -267,13 +268,21 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
 
         this.set_applet_label(label_string);
 
-        let dateFormattedFull = this.clock.get_clock_for_format(DATE_FORMAT_FULL).capitalize();
+        let dateFormattedTooltip = this.clock.get_clock_for_format(DATE_FORMAT_FULL).capitalize();
+        if (this.use_custom_format) {
+            dateFormattedTooltip = this.clock.get_clock_for_format(this.custom_tooltip_format).capitalize();
+            if (!dateFormattedTooltip) {
+                global.logError("Calendar applet: bad tooltip time format string - check your string.");
+                dateFormattedTooltip = this.clock.get_clock_for_format("~CLOCK FORMAT ERROR~ %l:%M %p");
+            }
+        }
+
         let dateFormattedShort = this.clock.get_clock_for_format(DATE_FORMAT_SHORT).capitalize();
         let dayFormatted = this.clock.get_clock_for_format(DAY_FORMAT).capitalize();
 
         this._day.set_text(dayFormatted);
         this._date.set_text(dateFormattedShort);
-        this.set_applet_tooltip(dateFormattedFull);
+        this.set_applet_tooltip(dateFormattedTooltip);
 
         this.events_manager.select_date(this._calendar.getSelectedDate());
 

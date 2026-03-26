@@ -1,88 +1,88 @@
-# Sound 150%
+# Enhanced Sound applet
+
+ ▶︎ •၊၊||၊|။||||| 0:10 
+
 
 ## Summary
 
-This sound150@claudiux applet is an improvement of the sound@cinnamon.org applet.
+This *sound150@claudiux* applet is an enhancement of the Cinnamon system sound applet.
 
-An option allows you to control the volume up to 150% of its nominal value.
+**This applet works with Pulseaudio or Pipewire.**
 
-The icon and the slider are coloured according to the volume when it is greater than 100%.
+**It can display icons indicating that the microphone is muted or activated.**
 
-A mark on sliders signals the '100%' position of volume.
+**It avoids loud cracking sound at shutdown.**
 
-From 0 to 100%: standard icons.
+**Sound volume:**
 
-![sound_150_079](https://github.com/claudiux/docs/raw/master/sound150/images/sound_079.png) ![sound_150_100](https://github.com/claudiux/docs/raw/master/sound150/images/sound_100.png)
+  * **The Volume Step can be redefined** (from 1% to 10%).
+  * **All multiples of 25% (or only 100%) can be magnetized.**
+  * **The Balance can be adjusted** using the slider in the menu.
+  * Before Cinnamon 6.4, the **OSD** is compatible with the [Horizontal OSD](https://cinnamon-spices.linuxmint.com/extensions/view/93) Cinnamon extension.
+  * The **OSD** is compatible with Cinnamon 6.4 (use of the 'Horizontal OSD' extension, or 'OSD with numbers' extension, is not recommended).
+  * From Cinnamon 6.4, having a horizontal OSD requires the [OSD150@claudiux](https://cinnamon-spices.linuxmint.com/extensions/view/106) extension. Notifications are available to help you install and enable the OSD150@claudiux extension.
+  * From Cinnamon 6.6, users can try to avoid ads by recognizing certain words in the title, which they define themselves.
 
-From 101 to 115%: yellow icon.
+**The song's cover art** can be displayed when it is correctly embedded in the file (.mp3, .flac ...) or available from the **[Radio3.0 applet](https://cinnamon-spices.linuxmint.com/applets/view/360)**.
 
-![sound_150_115](https://github.com/claudiux/docs/raw/master/sound150/images/sound_115.png)
+**You can use the mouse wheel on this applet to control the sound volume. Use Ctrl+wheel or Shift+wheel to control the microphone volume.**
 
-From 116 to 130%: orange icon.
+You can reverse this scrolling effect at will. (Only available from Cinnamon 6.4 and version 8.0.0 of this applet).
 
-![sound_150_130](https://github.com/claudiux/docs/raw/master/sound150/images/sound_130.png)
+**The icon can be colored according to the volume when it exceeds 100%.**
 
-From 131 to 150%: red icon.
+From 0% to 100%: standard icon color.
 
-![sound_150_150](https://github.com/claudiux/docs/raw/master/sound150/images/sound_150.png)
+From 101 to 115%: yellow icon (by default).
 
-Note that the icons are those of the system.
+From 116 to 130%: orange icon (by default).
 
-An option in settings allows you to don't display colors.
+From 131 to 150%: red icon (by default).
 
-## Usage
+*You can select other colors or choose not to display colors.*
 
- * In the settings (accessed by right-clicking on the icon), the ***Maximum volume control*** option sets the percentage of
-nominal volume you want to limit the maximum volume. Possible values are between 30% and 150%. From Cinnamon 4.4, Cinnamon Settings are used to set this value.
+**You can redefine multimedia key bindings.**
 
-![sound_150-settings](https://github.com/claudiux/docs/raw/master/sound150/images/sound-settings.png)
+Successfully tested on Cinnamon versions 2.8 to 6.4 (Linux Mint 17.3 to 22.1). Does not work on Cinnamon prior to version 2.8 (Linux Mint prior to 17.3).
 
-Use with caution. Above 120%, saturation can make the sound very unpleasant, even agressive.
+## Dependencies
 
-In a meeting room or classroom, it is often useful to be able to increase the volume beyond 100%.
+This applet requires *playerctl*. If this package is not installed, the user can install it using the 'Install playerctl' option in the menu. If this option is absent from the menu, this means that *playerctrl* is already installed.
 
-On the computer of a child, reduce the maximum volume possible to take care of his hearing... and yours!
+This applet also requires *imagemagick*. If this package is not installed, the user can install it using the 'Install imagemagick' option in the menu. If this option is absent from the menu, this means that *imagemagick* is already installed.
 
 
- * You can also choose the value of incrementation/decrementation (+/-) of the volume (in % of nominal volume).
+## Settings
 
- * If you don't want colors, an option allows you to keep the standard color.
+ * Settings can be accessed by right-clicking on this applet icon (Configure... option of the context menu).
 
-## Cinnamon versions
+ * Since version 5.0.0, settings have been presented in a new way, with 4 tabs: *Behavior*, *Sound*, *Icon*, *Shortcuts*, making this applet highly configurable.
 
-Tested successfully on Cinnamon v2.8 to v5.8 (Linux Mint 17.3 to 21.2).
+## FAQ
 
-Does not work on Cinnamon prior to v2.8 (Linux Mint prior to 17.3).
+### How do I resize the menu which is not displaying correctly?? 
 
-## Themes
+  * Resize the menu by grabbing its edges with the mouse. Try dragging the left or right edge of this applet's menu and pulling it to the side, just as you would enlarge a window.
 
-Tested on themes :
+### Keyboard shortcuts are not respecting volume step
 
- * Cinnamon
- * Carta
- * CBlack
- * Graphite-Zero
- * Linux Mint
- * Mint-X (all themes)
- * Mint-Y and Mint-Y-Dark
- * Modern-Mint-2017
- * New-Minty
- * Numix-Cinnamon and Numix-Cinnamon-Transparent
- * Spider-Void
- * Void
- * Zukitwo-Cinnamon
+  1. Open the *Shortcuts* tab of this applet settings.
+  2. Check the *Redefine Multimedia Keyboard Shortcuts* option.
+  3. Click on the *Use the same shortcuts as those defined by Cinnamon* button.
+  4. Close this settings window.
+  5. If necessary, restart Cinnamon.
 
 ## Translations
 
-The **Sound 150%** applet is designed to allow translations of some messages (initially in English). A .pot template file is available, you can use it with software such as poedit to translate these messages.
+The **Sound 150%** applet is designed to allow translation. A .pot template file is available, which you can use with software such as *poedit* to translate into your own language. You can then submit your translation on github, by forking [this repo](https://github.com/linuxmint/cinnamon-spices-applets) and making a pull request containing your changes.
 
-The installation of the available languages is done automatically.
+Available translations are installed automatically when an update is performed.
 
-[Status of translations](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/sound150%40claudiux.md#)
+**[Status of translations](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/sound150%40claudiux.md#)**
 
 Many thanks to all of the translators!
 
-Any new translation is welcome.
+We welcome any new translations or updates.
 
 ## Contributors
 

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-04 21:15+0300\n"
-"PO-Revision-Date: 2021-02-06 21:15+0300\n"
+"PO-Revision-Date: 2023-12-25 10:54+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
 msgid "Fiat and cryptocurrency quote rates"
@@ -29,8 +29,8 @@ msgid ""
 "Monitoring daily percentage changes."
 msgstr ""
 "Viser den aktuelle pris og udvikling af kryptovalutaer (TOP 150 hos "
-"CoinMarketCap) og populære fiatvalutaer (dollar, euro, rubler osv.). "
-"Daglige procentvise ændringer overvåges."
+"CoinMarketCap) og populære fiatvalutaer (dollar, euro, rubler osv.). Daglige "
+"procentvise ændringer overvåges."
 
 #. settings-schema.json->layout->general->title
 msgid "General"
@@ -95,9 +95,9 @@ msgid ""
 "Determines how often to receive new data. Each update is one credit. For a "
 "free basic plan, an interval of 30+ minutes is recommended"
 msgstr ""
-"Bestemmer hvor tit nye data modtages. Hver opdateringer en kredit. Et "
-"interval på 30 eller flere minutter anbefales til et gratis \"basic\" "
-"abonnement"
+"Bestemmer, hvor tit nye data modtages. Hver opdateringer er en kredit. Et "
+"interval på 30 eller flere minutter anbefales til et gratis basalt "
+"abonnement."
 
 #. settings-schema.json->ApiInterval->options
 msgid "5 minutes"
@@ -433,7 +433,7 @@ msgstr "Opdatering: "
 
 #. modules/stringsForTranslation.js:47
 msgid "Rank: #"
-msgstr "Rang: nr"
+msgstr "Rang: nr."
 
 #. modules/stringsForTranslation.js:48
 msgid "1H:"
@@ -471,8 +471,9 @@ msgstr " dag"
 msgid " days"
 msgstr " dage"
 
+# TRANSLATORS: for some countries the third declension of the word
 #. modules/stringsForTranslation.js:57
-msgid " _days\" #for some countries the third declension of the wor"
+msgid " _days"
 msgstr " _dage"
 
 #. modules/stringsForTranslation.js:58

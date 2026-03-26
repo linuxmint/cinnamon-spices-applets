@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 #
 # This script verifies if vpn interface is connected and writes state ("on" or "off") to temporary files
 # which can be read by the VPNstatus applet

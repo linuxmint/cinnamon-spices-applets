@@ -1,0 +1,8 @@
+{
+    "uuid": "sysmon@rohan",
+    "name": "System Monitor",
+    "description": "Display CPU and Memory Usage.",
+    "max-instances": 1,
+    "version": 1.0
+}
+

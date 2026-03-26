@@ -1,0 +1,289 @@
+# PROCESS MEMORY MONITOR
+# This file is put in the public domain.
+# claudiux, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ProcessMemoryMonitor@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-29 14:35+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:58
+msgid "Click to reset or reconnect to the process"
+msgstr "Clicca per resettare o ricollegarti al processo"
+
+#. applet.js:62
+msgid "Variation:"
+msgstr "Variazione:"
+
+#. applet.js:63
+msgid "Process:"
+msgstr "Processo:"
+
+#. applet.js:64
+msgid "PID:"
+msgstr "PID:"
+
+#. applet.js:65
+msgid "Elapsed:"
+msgstr "Tempo trascorso:"
+
+#. applet.js:66
+msgid "Start:"
+msgstr "Inizio:"
+
+#. applet.js:67
+msgid "Diff:"
+msgstr "Diff:"
+
+#. applet.js:68
+msgid "Max:"
+msgstr "Max:"
+
+#. applet.js:69
+msgid "Value:"
+msgstr "Valore:"
+
+#. applet.js:70
+msgid "Min:"
+msgstr "Min:"
+
+#. applet.js:71
+msgid "Refresh interval:"
+msgstr "Intervallo di aggiornamento:"
+
+#. applet.js:204
+msgid "MiB"
+msgstr "MiB"
+
+#. applet.js:206
+msgid "kiB/min"
+msgstr "kiB/min"
+
+#. applet.js:431
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Rimuovi '%s'"
+
+#. applet.js:439
+msgid "About..."
+msgstr "Informazioni su..."
+
+#. applet.js:458
+msgid "Configure..."
+msgstr "Configura..."
+
+#. applet.js:475 applet.js:503
+#, javascript-format
+msgid "Refresh interval: %s seconds"
+msgstr "Intervallo di aggiornamento: %s secondi"
+
+#. settings-schema.json->sysmon-button->description
+#. applet.js:480
+msgid "Open System Monitor"
+msgstr "Apri Monitor di Sistema"
+
+#. metadata.json->description
+msgid "Monitors memory usage of Cinnamon or any other process"
+msgstr ""
+"Monitora l'utilizzo della memoria di Cinnamon o di qualsiasi altro processo"
+
+#. metadata.json->name
+msgid "Process Memory Monitor"
+msgstr "Monitor Memoria Processo"
+
+#. settings-schema.json->page-process->title
+msgid "Process"
+msgstr "Processo"
+
+#. settings-schema.json->page-characters->title
+msgid "Characters"
+msgstr "Caratteri"
+
+#. settings-schema.json->page-abbrev->title
+#. settings-schema.json->section-abbrev->title
+msgid "Abbreviations"
+msgstr "Abbreviazioni"
+
+#. settings-schema.json->page-style->title
+#. settings-schema.json->section-style->title
+msgid "Style"
+msgstr "Stile"
+
+#. settings-schema.json->section-process->title
+msgid "Process to monitor"
+msgstr "Processo da monitorare"
+
+#. settings-schema.json->section-sysmon->title
+msgid "System Monitor"
+msgstr "Monitor di Sistema"
+
+#. settings-schema.json->section-char-var->title
+msgid "Variation characters"
+msgstr "Caratteri di variazione"
+
+#. settings-schema.json->process-name->description
+msgid ""
+"Name of process or PID to be monitored (by default, the Cinnamon process is "
+"used)"
+msgstr ""
+"Nome del processo o PID da monitorare (per impostazione predefinita viene "
+"usato il processo di Cinnamon)"
+
+#. settings-schema.json->process-name->tooltip
+msgid ""
+"Set the name of the process or PID you want to monitor here.\n"
+"Note that, for the moment, no consideration is given to multiple instances "
+"of the same program (undefined behavior).\n"
+"Open the system monitor to see all running processes."
+msgstr ""
+"Imposta qui il nome del processo o il PID da monitorare.\n"
+"Nota che, al momento, non viene considerata la presenza di istanze multiple "
+"dello stesso programma (comportamento non definito).\n"
+"Apri il monitor di sistema per vedere tutti i processi in esecuzione."
+
+#. settings-schema.json->pn-button->description
+msgid "Apply"
+msgstr "Applica"
+
+#. settings-schema.json->reset-pn-button->description
+msgid "Reset to Cinnamon"
+msgstr "Ripristina a Cinnamon"
+
+#. settings-schema.json->char-max->description
+msgid "Max value exceeded ⬆"
+msgstr "Valore massimo superato ⬆"
+
+#. settings-schema.json->char-max->tooltip
+#. settings-schema.json->char-up->tooltip
+#. settings-schema.json->char-flat->tooltip
+#. settings-schema.json->char-down->tooltip
+#. settings-schema.json->char-min->tooltip
+msgid "Emoji accepted. Empty to return to the default value."
+msgstr "Emoji accettate. Lascia vuoto per tornare al valore predefinito."
+
+#. settings-schema.json->char-up->description
+msgid "Increasing ↗"
+msgstr "In aumento ↗"
+
+#. settings-schema.json->char-flat->description
+msgid "Staying constant ➡"
+msgstr "Costante ➡"
+
+#. settings-schema.json->char-down->description
+msgid "Decreasing ↘"
+msgstr "In diminuzione ↘"
+
+#. settings-schema.json->char-min->description
+msgid "Min value exceeded ⬇"
+msgstr "Valore minimo superato ⬇"
+
+#. settings-schema.json->no-char-var->description
+msgid "Do not display any Variation character"
+msgstr "Non mostrare alcun carattere di variazione"
+
+#. settings-schema.json->abbrev-MiB->description
+msgid "Abbreviation for mebibyte (default: MiB)"
+msgstr "Abbreviazione per mebibyte (predefinito: MiB)"
+
+#. settings-schema.json->abbrev-MiB->tooltip
+msgid "1 MiB = 1024 kiB"
+msgstr "1 MiB = 1024 kiB"
+
+#. settings-schema.json->abbrev-kpm->description
+msgid "Abbreviation for kibibyte per minute (default: kiB/min)"
+msgstr "Abbreviazione per kibibyte al minuto (predefinito: kiB/min)"
+
+#. settings-schema.json->abbrev-kpm->tooltip
+msgid "1 kiB = 1024 B"
+msgstr "1 kiB = 1024 B"
+
+#. settings-schema.json->style-font-weight->description
+msgid "Font weight"
+msgstr "Peso del carattere"
+
+#. settings-schema.json->style-font-weight->options
+msgid "normal"
+msgstr "normale"
+
+#. settings-schema.json->style-font-weight->options
+msgid "bold"
+msgstr "grassetto"
+
+#. settings-schema.json->style-font-family->description
+msgid "Font family"
+msgstr "Famiglia del carattere"
+
+#. settings-schema.json->style-font-family->options
+msgid "monospace"
+msgstr "monospace"
+
+#. settings-schema.json->style-font-family->options
+msgid "sans-serif"
+msgstr "sans-serif"
+
+#. settings-schema.json->style-font-family->options
+msgid "serif"
+msgstr "serif"
+
+#. settings-schema.json->style-font-family->options
+msgid "cursive"
+msgstr "corsivo"
+
+#. settings-schema.json->style-font-family->options
+msgid "fantasy"
+msgstr "fantasy"
+
+#. settings-schema.json->style-font-family->tooltip
+msgid "Select monospace to ensure display stability."
+msgstr "Seleziona monospace per garantire stabilità nella visualizzazione."
+
+#. settings-schema.json->style-font-size->description
+msgid "Font size"
+msgstr "Dimensione carattere"
+
+#. settings-schema.json->style-font-size->options
+msgid "xx-small"
+msgstr "xx-small"
+
+#. settings-schema.json->style-font-size->options
+msgid "x-small"
+msgstr "x-small"
+
+#. settings-schema.json->style-font-size->options
+msgid "small"
+msgstr "small"
+
+#. settings-schema.json->style-font-size->options
+msgid "medium"
+msgstr "medium"
+
+#. settings-schema.json->style-font-size->options
+msgid "large"
+msgstr "large"
+
+#. settings-schema.json->style-font-size->options
+msgid "x-large"
+msgstr "x-large"
+
+#. settings-schema.json->style-font-size->options
+msgid "xx-large"
+msgstr "xx-large"
+
+#. settings-schema.json->style-customized-width->description
+msgid "Custom width"
+msgstr "Larghezza personalizzata"
+
+#. settings-schema.json->style-label-width->description
+msgid "Label's width (pixels)"
+msgstr "Larghezza dell'etichetta (pixel)"

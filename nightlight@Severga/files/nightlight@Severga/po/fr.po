@@ -1,0 +1,113 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-10 18:26+0300\n"
+"PO-Revision-Date: 2024-04-03 15:20+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:45
+msgid "Night Light can't work properly: sct package not installed!"
+msgstr ""
+"Luminosité de Nuit (Night Light) ne peut pas fonctionner correctement : "
+"le paquet sct n'est pas installé !"
+
+#. metadata.json->name
+#: applet.js:46 applet.js:49 applet.js:81
+msgid "Night Light"
+msgstr "Luminosité de Nuit (Night Light)"
+
+#: applet.js:46
+msgid "error"
+msgstr "erreur"
+
+#: applet.js:49
+msgid ""
+"Warning: 'sct' command not found! This applet is a frontend for this "
+"command. Please, install 'sct' package and restart Cinnamon or reload the "
+"applet."
+msgstr ""
+"Attention : la commande 'sct' n'a pas été trouvée ! Cette applet est un "
+"frontal de cette commande. Veuillez installer le paquetage 'sct' et "
+"redémarrer Cinnamon ou recharger l'applet."
+
+#: applet.js:57
+msgid "off"
+msgstr "désactivé"
+
+#: applet.js:57
+msgid "on"
+msgstr "activé"
+
+#: applet.js:57
+msgid "auto"
+msgstr "auto"
+
+#. metadata.json->description
+msgid "Screen night light activating applet"
+msgstr "Applet d'activation de la Luminosité de Nuit pour l'écran"
+
+#. settings-schema.json->common_label->description
+msgid "Common"
+msgstr "Général"
+
+#. settings-schema.json->temperature->description
+msgid "Night Light temperature (K)"
+msgstr "Température (K) de la Luminosité de Nuit"
+
+#. settings-schema.json->temperature->tooltip
+msgid "Night Light screen temperature"
+msgstr "Température de l'écran pour la Luminosité de Nuit"
+
+#. settings-schema.json->auto_label->description
+msgid "Auto mode schedule"
+msgstr "Programmation du mode automatique"
+
+#. settings-schema.json->startH->description
+msgid "Start time, hour"
+msgstr "Début - Heure"
+
+#. settings-schema.json->startH->tooltip
+msgid "Start time (hour)"
+msgstr "Début (heure)"
+
+#. settings-schema.json->startM->description
+msgid "Start time, minute"
+msgstr "Début - Minute"
+
+#. settings-schema.json->startM->tooltip
+msgid "Start time (minute)"
+msgstr "Début (minute)"
+
+#. settings-schema.json->endH->description
+msgid "End time, hour"
+msgstr "Fin - Heure"
+
+#. settings-schema.json->endH->tooltip
+msgid "End time (hour)"
+msgstr "Fin (heure)"
+
+#. settings-schema.json->endM->description
+msgid "End time, minute"
+msgstr "Fin - Minute"
+
+#. settings-schema.json->endM->tooltip
+msgid "End time (minute)"
+msgstr "Fin (minute)"
+
+#. settings-schema.json->mode->description
+#. settings-schema.json->mode->tooltip
+msgid "mode"
+msgstr "mode"

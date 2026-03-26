@@ -19,7 +19,7 @@ img { max-width: 100%; }
 <h3>Date de dernière révision: 19 décembre 2022</h3>
 <hr>
 <h2>Aperçu</h2>
-<p>Radio3.0 est une applet * Récepteur &amp; Enregisteur de Radios Internet * pour Cinnamon.</p>
+<p>Radio3.0 est une applet <strong>Récepteur &amp; Enregisteur de Radios Internet</strong> pour Cinnamon.</p>
 <p>Avec Radio3.0 vous pouvez :</p>
 <ul>
 <li>
@@ -149,7 +149,7 @@ img { max-width: 100%; }
 <p><em>sox</em> (Sound eXchange) pour enregistrer dans un fichier le flux radio, ou plutôt le son sortant de votre carte son.</p>
 </li>
 <li>
-<p><em>pacmd</em> (PulseAudio Command) qui est un outil pour piloter <em>pulseaudio</em>.</p>
+<p><em>pacmd</em> (PulseAudio Command) qui est un outil pour piloter <em>pulseaudio</em>, fonctionnant également avec <em>pipewire</em>.</p>
 </li>
 <li>
 <p><em>at</em> pour programmer des enregistrements.</p>
@@ -158,7 +158,7 @@ img { max-width: 100%; }
 <p><em>libnotify-bin</em> pour afficher des notifications.</p>
 </li>
 <li>
-<p><em>youtube-dl</em> ou <em>yt-dlp</em> (plus rapide que <em>youtube-dl</em>) pour télécharger des vidéos à partir de YouTube.</p>
+<p><em>yt-dlp</em> (plus rapide que <em>youtube-dl</em>, qui n'existe d'ailleurs plus dans les distribs récentes) pour télécharger des vidéos à partir de YouTube.</p>
 </li>
 <li>
 <p><em>ffmpeg</em> et <em>ffmpegthumbnailer</em> pour extraire la bande son de la vidéo téléchargée.</p>
@@ -178,12 +178,12 @@ img { max-width: 100%; }
 <p><a name="DepMint"></a></p>
 <h3>Linux Mint, Ubuntu, Debian</h3>
 <p><code>sudo apt update</code></p>
-<p><code>sudo apt install mpv libmpv1 libmpv-dev sox libsox-fmt-all pulseaudio pulseaudio-utils at libnotify-bin youtube-dl ffmpeg ffmpegthumbnailer python3-polib python3-brotli</code></p>
+<p><code>sudo apt install mpv libmpv-dev sox libsox-fmt-all pulseaudio-utils at libnotify-bin ffmpeg ffmpegthumbnailer python3-polib python3-brotli</code></p>
 <p>Éventuellement:</p>
 <p><code>sudo apt install pulseeffects</code></p>
 <p><a name="DepArch"></a></p>
 <h3>Arch</h3>
-<p><code>sudo pacman -Syu mpv sox pulseaudio at libnotify youtube-dl ffmpeg ffmpegthumbnailer python-brotli</code></p>
+<p><code>sudo pacman -Syu mpv sox at libnotify youtube-dl ffmpeg ffmpegthumbnailer python-brotli</code></p>
 <p><code>yay -S python-polib</code></p>
 <p>Pour installer Yay sur Arch Linux et d'autres systèmes basés sur Arch, exécutez les commandes suivantes une par une :</p>
 <p><code>sudo pacman -S --needed git base-devel</code></p>
@@ -192,22 +192,22 @@ img { max-width: 100%; }
 <p><code>makepkg -si</code></p>
 <p><a name="DepFedora"></a></p>
 <h3>Fedora</h3>
-<p><code>sudo dnf install mpv sox pulseaudio at libnotify yt-dlp ffmpeg gstreamer1-libav python3-brotli python3-polib</code></p>
+<p><code>sudo dnf install mpv sox at libnotify yt-dlp ffmpeg gstreamer1-libav python3-brotli python3-polib</code></p>
 <p><a href="#TOC">Retour à la table des matières</a></p>
 <hr>
 <p><a name="InstallYtdlp"></a></p>
 <h2>Comment installer la dernière version de yt-dlp ?</h2>
-<p>Veuillez noter qu'à partir de sa version 1.0.3, Radio3.0 installe et met à jour automatiquement <em>yr-dlp</em> dans votre répertoire <code>~/bin/</code>.</p>
+<p>Veuillez noter qu'à partir de sa version 1.0.3, Radio3.0 installe et met à jour automatiquement <em>yr-dlp</em> dans votre répertoire <code>~/.local/bin/</code>.</p>
 <p><em>yt-dlp</em> est utilisé par <strong>Radio3.0</strong> pour télécharger des vidéos depuis YouTube.</p>
 <p>La dernière version de <em>yt-dlp</em> corrige des bugs et tient notamment mieux compte des cookies de votre navigateur pour ne pas vous priver du droit de télécharger des vidéos pour des raisons de limite d'âge.</p>
 <p>Voici comment installer sa dernière version :</p>
 <ol>
 <li>Commencer par installer la version de <em>yt-dlp</em> présente dans les dépôts de paquets de votre distribution, car cela installe également toutes ses dépendances. Par example: <code>sudo apt install yt-dlp</code></li>
-<li>Créer le répertoire <code>$HOME/bin</code> qui contiendra cette nouvelle version : <code>mkdir -p $HOME/bin</code></li>
-<li>Télécharger la dernière version pour Linux à partir de <a href="https://github.com/yt-dlp/yt-dlp/releases/latest">https://github.com/yt-dlp/yt-dlp/releases/latest</a> et l'enregistrer dans le répertoire <code>$HOME/bin</code> que vous venez de créer.</li>
-<li>Le rendre exécutable : <code>chmod +x $HOME/bin/yt-dlp</code></li>
+<li>Créer le répertoire <code>$HOME/.local/bin</code> qui contiendra cette nouvelle version : <code>mkdir -p $HOME/.local/bin</code></li>
+<li>Télécharger la dernière version pour Linux à partir de <a href="https://github.com/yt-dlp/yt-dlp/releases/latest">https://github.com/yt-dlp/yt-dlp/releases/latest</a> et l'enregistrer dans le répertoire <code>$HOME/.local/bin</code> que vous venez de créer.</li>
+<li>Le rendre exécutable : <code>chmod +x $HOME/.local/bin/yt-dlp</code></li>
 <li>Déconnectez-vous de votre session.</li>
-<li>Connectez-vous. Désormais, tout script de votre répertoire <code>$HOME/bin</code> a priorité sur tout autre script portant le même nom sur votre système.</li>
+<li>Connectez-vous. Désormais, tout script de votre répertoire <code>$HOME/.local/bin</code> a priorité sur tout autre script portant le même nom sur votre système.</li>
 </ol>
 <hr>
 <p><a name="InstallApplet"></a></p>
@@ -224,7 +224,7 @@ img { max-width: 100%; }
 <p><a name="UsingApplet"></a></p>
 <h2>Utilisation de l'applet Radio3.0</h2>
 <p>Cette applet possède un menu (clic gauche) et un menu contextuel (clic droit).</p>
-<p>Certaines actions peuvent être effectuées à l'aide d'un clic du milieu ou d'un défilement sur l'icône.</p>
+<p>Certaines actions peuvent être effectuées à l'aide d'un clic du milieu (allumer/arrêter ma radio) ou d'un défilement sur l'icône (changement du volume sonore).</p>
 <p><a name="HowToAdd"></a></p>
 <h3>Comment ajouter des radios à ma liste ?</h3>
 <p>Il existe quatre façons d'ajouter au moins une station de radio dans votre liste.</p>
@@ -261,7 +261,7 @@ img { max-width: 100%; }
 <p><a name="ListenLastRadio"></a></p>
 <h3>Allumer la dernière radio écoutée</h3>
 <p>Lorsqu'aucune radio ne joue, cliquez avec le bouton central sur l'icône.</p>
-<p>(Autre façon : Cliquez sur la première radio dans la section <em>Stations récemment écoutées</em> du menu.)</p>
+<p>Autre façon : Cliquez sur la première radio dans la section <em>Stations récemment écoutées</em> du menu.</p>
 <p><a name="ListenAtStartup"></a></p>
 <h3>Jouez au démarrage de Cinnamon la dernière radio que vous avez écoutée</h3>
 <p>Cochez l'option "Radio allumée au démarrage" dans le menu contextuel.</p>

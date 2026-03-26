@@ -1,0 +1,217 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: stopwatch@pdcurtis 2.3.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-10-12 16:23+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: 3.8/applet.js:205
+msgid "Name"
+msgstr "Tên"
+
+#: 3.8/applet.js:225
+msgid "Start   "
+msgstr "Bắt đầu   "
+
+#: 3.8/applet.js:233
+msgid "Pause   "
+msgstr "Tạm dừng   "
+
+#: 3.8/applet.js:241
+msgid "Reset   "
+msgstr "Đặt lại   "
+
+#: 3.8/applet.js:249
+msgid "Continue  "
+msgstr "Tiếp tục  "
+
+#: 3.8/applet.js:261
+msgid "Continue from Start"
+msgstr "Tiếp tục từ đầu"
+
+#: 3.8/applet.js:337 3.0/applet.js:205
+msgid "Housekeeping and System Sub Menu"
+msgstr "Menu phụ Hệ thống và Bảo trì"
+
+#: 3.8/applet.js:340 3.0/applet.js:208
+msgid "View the Changelog"
+msgstr "Xem nhật ký thay đổi"
+
+#: 3.8/applet.js:346 3.0/applet.js:214
+msgid "Open the Help file"
+msgstr "Mở tập tin trợ giúp"
+
+#: 3.8/applet.js:353 3.0/applet.js:221
+msgid "Open stylesheet.css  (Advanced Function)"
+msgstr "Mở stylesheet.css (Chức năng Nâng cao)"
+
+#: 3.8/applet.js:359 3.0/applet.js:227
+msgid "Open the gnome system monitor (Advanced testing function)"
+msgstr "Mở trình giám sát hệ thống gnome (Chức năng Kiểm thử Nâng cao)"
+
+#: 3.8/applet.js:368 3.0/applet.js:236
+msgid "Configure..."
+msgstr "Cấu hình..."
+
+#: 3.8/applet.js:413 3.0/applet.js:282
+msgid "days"
+msgstr "ngày"
+
+#: 3.8/applet.js:416 3.0/applet.js:285
+msgid "hours"
+msgstr "giờ"
+
+#: 3.8/applet.js:482 3.0/applet.js:340
+msgid "Running for"
+msgstr "Đã chạy"
+
+#: 3.8/applet.js:482 3.0/applet.js:340
+msgid "Click to Pause"
+msgstr "Nhấn để Tạm dừng"
+
+#: 3.8/applet.js:495 3.8/applet.js:497 3.0/applet.js:350 3.0/applet.js:352
+msgid "Paused at"
+msgstr "Đã tạm dừng lúc"
+
+#: 3.8/applet.js:495 3.0/applet.js:350
+msgid "Click to Continue Counting"
+msgstr "Nhấn để Tiếp tục Đếm"
+
+#: 3.8/applet.js:497 3.0/applet.js:352
+msgid "Click to Reset"
+msgstr "Nhấn để Đặt lại"
+
+#: 3.8/applet.js:508 3.0/applet.js:362
+msgid "Ready - Click to Start"
+msgstr "Sẵn sàng - Nhấn để Bắt đầu"
+
+#: 3.0/applet.js:159
+msgid "Start"
+msgstr "Bắt đầu"
+
+#: 3.0/applet.js:167
+msgid "Pause"
+msgstr "Tạm dừng"
+
+#: 3.0/applet.js:175
+msgid "Reset counter"
+msgstr "Đặt lại bộ đếm"
+
+#: 3.0/applet.js:182
+msgid "If paused, continue counting from now"
+msgstr "Nếu đã tạm dừng, tiếp tục đếm từ bây giờ"
+
+#: 3.0/applet.js:193
+msgid "If paused, continue counting from original start time"
+msgstr "Nếu đã tạm dừng, tiếp tục đếm từ thời gian bắt đầu ban đầu"
+
+#. metadata.json->description
+msgid ""
+"Allows one to time activities such as the time online with multiple "
+"instances possible"
+msgstr ""
+"Cho phép tính giờ các hoạt động như thời gian trực tuyến với khả năng chạy "
+"nhiều phiên bản"
+
+#. metadata.json->name
+msgid "Stopwatch for Cinnamon"
+msgstr "Đồng hồ bấm giờ cho Cinnamon"
+
+#. 3.8->settings-schema.json->head->description
+#. 3.0->settings-schema.json->head->description
+msgid "General Settings for the Stopwatch Applet"
+msgstr "Cài đặt Chung cho Applet Đồng hồ bấm giờ"
+
+#. 3.8->settings-schema.json->refreshInterval-spinner->units
+#. 3.0->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "giây"
+
+#. 3.8->settings-schema.json->refreshInterval-spinner->description
+#. 3.0->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Khoảng thời gian Làm mới Hiển thị:"
+
+#. 3.8->settings-schema.json->refreshInterval-spinner->tooltip
+#. 3.0->settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have multiple active counters and/or a slow machine"
+msgstr ""
+"Tăng hoặc giảm giá trị này để thay đổi khoảng thời gian làm mới - sử dụng "
+"tốc độ làm mới chậm nếu bạn có nhiều bộ đếm hoạt động và/hoặc máy chậm"
+
+#. 3.8->settings-schema.json->counterTitle->description
+#. 3.0->settings-schema.json->counterTitle->description
+msgid "Provide a meaningful title to the counter"
+msgstr "Cung cấp tiêu đề có ý nghĩa cho bộ đếm"
+
+#. 3.8->settings-schema.json->counterTitle->tooltip
+#. 3.0->settings-schema.json->counterTitle->tooltip
+msgid ""
+"This forms the first part of the tooltip and is useful for identification if "
+"you have multiple instances of counters - default is Stopwatch"
+msgstr ""
+"Đây là phần đầu tiên của chú giải công cụ và hữu ích để nhận diện nếu bạn có "
+"nhiều phiên bản bộ đếm - mặc định là Stopwatch"
+
+#. 3.8->settings-schema.json->modeContinueCounting->description
+#. 3.0->settings-schema.json->modeContinueCounting->description
+msgid "Check box to continue counting on clicking applet when paused"
+msgstr "Chọn để tiếp tục đếm khi nhấp vào applet khi đã tạm dừng"
+
+#. 3.8->settings-schema.json->modeContinueCounting->tooltip
+#. 3.0->settings-schema.json->modeContinueCounting->tooltip
+msgid ""
+"Normal sequence on clicking is 'start -> pause -> reset' this changes to "
+"'start -> pause -> continue -> pause -> continue etc'. In this mode one has "
+"to use the Right Click (Context) Menu to reset the counter"
+msgstr ""
+"Chuỗi thao tác nhấp thông thường là 'bắt đầu -> tạm dừng -> đặt lại' sẽ thay "
+"đổi thành 'bắt đầu -> tạm dừng -> tiếp tục -> tạm dừng -> tiếp tục, v.v.'. "
+"Trong chế độ này, bạn phải sử dụng Menu Chuột phải (Ngữ cảnh) để đặt lại bộ "
+"đếm"
+
+#. 3.8->settings-schema.json->displayFullPanel->description
+msgid "Check box to Display Title in Panel"
+msgstr "Chọn để Hiển thị Tiêu đề trên Panel"
+
+#. 3.8->settings-schema.json->displayFullPanel->tooltip
+msgid ""
+"This provides a more comprehensive panel display but may use more panel space"
+msgstr ""
+"Cung cấp hiển thị panel toàn diện hơn nhưng có thể sử dụng nhiều không gian "
+"panel hơn"
+
+#. 3.8->settings-schema.json->enableExperimentalFunctions->description
+msgid "Check box to enable some extra functions - Needs Cinnamon Restart"
+msgstr "Chọn để kích hoạt một số chức năng bổ sung - Cần khởi động lại Cinnamon"
+
+#. 3.8->settings-schema.json->enableExperimentalFunctions->tooltip
+msgid "Provides extra functions requested by users"
+msgstr "Cung cấp các chức năng bổ sung được yêu cầu bởi người dùng"
+
+#. 3.8->settings-schema.json->counterStatus->description
+#. 3.0->settings-schema.json->counterStatus->description
+msgid "Should not be changed"
+msgstr "Không nên thay đổi"
+
+#. 3.8->settings-schema.json->startTime->description
+#. 3.8->settings-schema.json->pausedAt->description
+#. 3.0->settings-schema.json->startTime->description
+#. 3.0->settings-schema.json->pausedAt->description
+msgid "Must not be changed"
+msgstr "Không được thay đổi"

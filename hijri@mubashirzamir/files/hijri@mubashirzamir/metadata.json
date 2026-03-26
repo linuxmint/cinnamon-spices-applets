@@ -1,0 +1,8 @@
+{
+  "uuid": "hijri@mubashirzamir",
+  "name": "Hijri Date",
+  "description": "Show today's date in the Hijri calendar.",
+  "version": "1.0",
+  "cinnamon-version": ["4.0", "5.0", "6.0"],
+  "author": "mubashirzamir"
+}

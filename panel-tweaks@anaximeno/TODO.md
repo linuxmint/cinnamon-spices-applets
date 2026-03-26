@@ -1,0 +1,4 @@
+- [ ] Add theme support (allow to select a specific theme file to add to the panel)
+- [ ] Allow to manually set the theme with a text entry (ideally a multiline text entry)
+- [ ] Allow to change the width of the panel (or height if it is horizontal), maybe in terms of % of the full size (maybe maybe the ideal solution would be add a padding to increase the size)
+    - [ ] Allow to dynamically resize the panel

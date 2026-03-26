@@ -1,0 +1,97 @@
+# WAKAPI DISPLAY
+# This file is put in the public domain.
+# babico, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: wakapidisplay@babico 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:47
+msgid "Click to open your Wakapi Dashboard"
+msgstr "Kattintson a Wakapi irányítópult megnyitásához"
+
+#. applet.js:50
+msgid "Open the Applet configuration to add your Wakapi API Key and link"
+msgstr ""
+"Nyissa meg a kisalkalmazás konfigurációját a Wakapi API-kulcs és -link "
+"hozzáadásához"
+
+#. metadata.json->name
+msgid "Wakapi Display"
+msgstr "Wakapi kijelző"
+
+#. metadata.json->description
+msgid "Displays your statistics from Wakapi"
+msgstr "Megjeleníti a Wakapi statisztikáit"
+
+#. settings-schema.json->wakapi-head->description
+msgid "Wakapi Settings"
+msgstr "Wakapi beállítások"
+
+#. settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr "perc"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh interval"
+msgstr "Frissítési időköz"
+
+#. settings-schema.json->refreshInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine."
+msgstr ""
+"Növeld vagy csökkentsd ezt a forgó értékét a frissítési intervallum "
+"megváltoztatásához - lassú frissítést használj, ha lassú géped van."
+
+#. settings-schema.json->apiLink->description
+msgid "Wakapi API Link"
+msgstr "Wakapi API hivatkozás"
+
+#. settings-schema.json->apiLink->tooltip
+msgid "The API link to your Wakapi instance."
+msgstr "Az API-hivatkozás a Wakapi-példányodra."
+
+#. settings-schema.json->apiKey->description
+msgid "Wakapi API Key"
+msgstr "Wakapi API kulcs"
+
+#. settings-schema.json->apiKey->tooltip
+msgid "The API key unique to your Wakapi account."
+msgstr "A Wakapi-fiókodhoz egyedi API-kulcs."
+
+#. settings-schema.json->getApiKey->description
+msgid "Open the Wakapi page to get your API key"
+msgstr "Nyisd meg a Wakapi oldalt az API-kulcs megszerzéséhez"
+
+#. settings-schema.json->getApiKey->tooltip
+msgid "Opens Wakapi API key webpage"
+msgstr "Megnyitja a Wakapi API kulcs weboldalát"
+
+#. settings-schema.json->display-head->description
+msgid "Display Settings"
+msgstr "Kijelzőbeállítások"
+
+#. settings-schema.json->logoColor->description
+msgid "Wakapi logo color"
+msgstr "Wakapi logó színe"
+
+#. settings-schema.json->logoColor->options
+msgid "White"
+msgstr "Fehér"
+
+#. settings-schema.json->logoColor->options
+msgid "Black"
+msgstr "Fekete"

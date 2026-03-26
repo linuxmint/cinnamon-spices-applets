@@ -1,0 +1,158 @@
+# NOTIFICATIONS-ENHANCED
+# This file is put in the public domain.
+# hilyxx, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-08-05 12:43+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:44
+msgid "Notifications applet conflict"
+msgstr "Xung đột applet thông báo"
+
+#. applet.js:45
+msgid ""
+"Conflict detected: notifications@cinnamon.org is active.\n"
+"Remove it and restart Cinnamon before using Notifications-Enhanced applet."
+msgstr ""
+"Phát hiện xung đột: notifications@cinnamon.org đang hoạt động.\n"
+"Hãy gỡ bỏ và khởi động lại Cinnamon trước khi sử dụng applet Notifications-Enhanced."
+
+#. applet.js:120
+msgid "Do not disturb"
+msgstr "Không làm phiền"
+
+#. applet.js:126
+msgid "No notifications"
+msgstr "Không có thông báo"
+
+#. settings-schema.json->keyClear->description
+#. applet.js:134
+msgid "Clear notifications"
+msgstr "Xóa thông báo"
+
+#. applet.js:157
+msgid "Enable notifications"
+msgstr "Bật thông báo"
+
+#. applet.js:168
+msgid "Notification Settings"
+msgstr "Cài đặt thông báo"
+
+#. applet.js:257 applet.js:431
+#, javascript-format
+msgid "%d notification"
+msgid_plural "%d notifications"
+msgstr[0] "%d thông báo"
+
+#. applet.js:287
+msgid "Notifications"
+msgstr "Thông báo"
+
+#. applet.js:300
+msgid "Notifications disabled"
+msgstr "Thông báo bị tắt"
+
+#. applet.js:447
+msgid "just now"
+msgstr "vừa xong"
+
+#. applet.js:450
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "cách đây %d giây"
+
+#. applet.js:454
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "cách đây %d phút"
+
+#. metadata.json->name
+msgid "Notifications-Enhanced"
+msgstr "Thông báo Nâng cao"
+
+#. metadata.json->description
+msgid "A notification applet but with more options"
+msgstr "Applet thông báo với nhiều tùy chọn hơn"
+
+#. settings-schema.json->section1->description
+msgid "Behavior"
+msgstr "Hành vi"
+
+#. settings-schema.json->ignoreTransientNotifications->description
+msgid "Ignore transient notifications"
+msgstr "Bỏ qua thông báo ngắn hạn"
+
+#. settings-schema.json->ignoreTransientNotifications->tooltip
+msgid "Check this to ignore transient notifications."
+msgstr "Chọn để bỏ qua các thông báo ngắn hạn."
+
+#. settings-schema.json->section2->description
+msgid "Display"
+msgstr "Hiển thị"
+
+#. settings-schema.json->showNotificationCount->description
+msgid "Show the number of notifications"
+msgstr "Hiển thị số lượng thông báo"
+
+#. settings-schema.json->showEmptyTray->description
+msgid "Show notification tray"
+msgstr "Hiển thị khay thông báo"
+
+#. settings-schema.json->showEmptyTray->tooltip
+msgid "Check this to always show the notification tray."
+msgstr "Chọn để luôn hiển thị khay thông báo."
+
+#. settings-schema.json->showDisturbIcon->description
+msgid "Always show 'Do Not Disturb' icon"
+msgstr "Luôn hiển thị biểu tượng 'Không làm phiền'"
+
+#. settings-schema.json->showDisturbIcon->tooltip
+msgid "Check this to show the 'Do Not Disturb icon' on the panel even when the 'Show notification tray' option is disabled."
+msgstr "Chọn để hiển thị biểu tượng 'Không làm phiền' trên panel ngay cả khi tùy chọn 'Hiển thị khay thông báo' bị tắt."
+
+#. settings-schema.json->showNotificationSettings->description
+msgid "Show notification settings in the menu"
+msgstr "Hiển thị cài đặt thông báo trong menu"
+
+#. settings-schema.json->section3->description
+msgid "Keyboard shortcuts"
+msgstr "Phím tắt"
+
+#. settings-schema.json->keyOpen->description
+msgid "Show notifications"
+msgstr "Hiển thị thông báo"
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the notification popup menu."
+msgstr "Thiết lập phím tắt để hiển thị menu thông báo bật lên."
+
+#. settings-schema.json->keyClear->tooltip
+msgid "Set keybinding(s) to clear all notifications."
+msgstr "Thiết lập phím tắt để xóa tất cả thông báo."
+
+#. settings-schema.json->keyMute->description
+msgid "Enable or disable notifications"
+msgstr "Bật hoặc tắt thông báo"
+
+#. settings-schema.json->keyMute->tooltip
+msgid "Set keybinding(s) to enable or disable notifications."
+msgstr "Thiết lập phím tắt để bật hoặc tắt thông báo."
+
+#. settings-schema.json->btnSystemSettings->description
+msgid "Open notification settings"
+msgstr "Mở cài đặt thông báo"

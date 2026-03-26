@@ -130,7 +130,7 @@ AzanApplet.prototype = {
                 bin.add_actor(prayLabel);
 
                 prayMenuItem.addActor(bin, {
-                    expand: true,
+                    expand: false,
                     span: -1,
                     align: St.Align.END
                 });

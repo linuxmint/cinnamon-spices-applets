@@ -1,0 +1,42 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-07 22:41+0000\n"
+"PO-Revision-Date: 2025-04-24 01:35+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "Power Consumption Display"
+msgstr "耗電量顯示"
+
+#. metadata.json->description
+msgid "Shows power consumption when in battery mode"
+msgstr "於電池模式時顯示耗電量"
+
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr "顯示單位"
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Show Watt symbol after the value."
+msgstr "於數值後顯示瓦特符號"
+
+#. settings-schema.json->interval->units
+msgid "ms"
+msgstr "毫秒"
+
+#. settings-schema.json->interval->description
+msgid "Update interval"
+msgstr "更新間隔"

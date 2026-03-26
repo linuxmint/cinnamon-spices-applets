@@ -10,7 +10,8 @@
       "sections": [
         "section-mouse",
         "section-keybinding",
-        "section-icon"
+        "section-icon",
+        "section-lock"
       ]
     },
     "section-mouse": {
@@ -33,6 +34,13 @@
       "keys": [
         "use-symbolic-icon",
         "icon-color"
+      ]
+    },
+    "section-lock": {
+      "type": "section",
+      "title": "Screen lock",
+      "keys": [
+        "screenlock"
       ]
     }
   },
@@ -62,5 +70,10 @@
     "default": "green",
     "description": "Color of the symbolic icon",
     "dependency": "use-symbolic-icon"
+  },
+  "screenlock": {
+    "type": "switch",
+    "default": false,
+    "description": "Lock also cinnamon session"
   }
 }

@@ -251,8 +251,8 @@ class Sidebar {
                     _('Quit'),
                     _('Shutdown the computer'),
                     () => {
-                        Util.spawnCommandLine('cinnamon-session-quit --power-off');
                         this.appThis.menu.close();
+                        this.appThis.sessionManager.ShutdownRemote();
                     }));
         this.items.push(new SidebarButton(
                     this.appThis, newSidebarIcon('system-log-out'),
@@ -260,8 +260,8 @@ class Sidebar {
                     _('Logout'),
                     _('Leave the session'),
                     () => {
-                        Util.spawnCommandLine('cinnamon-session-quit');
                         this.appThis.menu.close();
+                        this.appThis.sessionManager.LogoutRemote(0);
                     }));
         this.items.push(new SidebarButton(
             this.appThis,

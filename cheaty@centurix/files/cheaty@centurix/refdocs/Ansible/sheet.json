@@ -1,0 +1,308 @@
+{
+	"name": "Ansible",
+	"description": "Cheatsheet for the famous devops platform for automation. Original cheatsheet from Github user devops-cheat-sheets.",
+	"author": "Aymeric Deschard",
+	"email": "",
+	"repository": "https://github.com/devops-cheat-sheets/ansible-cheat-sheet/tree/main",
+	"version": "0.1",
+	"sections": {
+		"General": {
+			"version": {
+				"description": "Display the version of Ansible installed.",
+				"code": "ansible --version"
+			},
+			"ping": {
+				"description": "Ping all hosts to check if they are reachable.",
+				"code": "ansible -m ping all"
+			},
+			"shell": {
+				"description": "Run the 'free -m' shell command on all hosts.",
+				"code": "ansible -m shell -a 'free -m' all"
+			}
+		},
+		"PlaybookExecution": {
+			"run": {
+				"description": "Run the playbook named `playbook.yml`.",
+				"code": "ansible-playbook playbook.yml"
+			},
+			"inventory": {
+				"description": "Run a playbook with a specified inventory file.",
+				"code": "ansible-playbook -i inventory.ini playbook.yml"
+			},
+			"syntax": {
+				"description": "Perform a syntax check on the playbook.",
+				"code": "ansible-playbook playbook.yml --syntax-check"
+			},
+			"start": {
+				"description": "Start the playbook at the specified task.",
+				"code": "ansible-playbook playbook.yml --start-at-task='taskname'"
+			},
+			"step": {
+				"description": "Execute the playbook interactively, asking for confirmation at each step.",
+				"code": "ansible-playbook playbook.yml --step"
+			},
+			"check": {
+				"description": "Do a dry run of the playbook without making actual changes.",
+				"code": "ansible-playbook playbook.yml --check"
+			},
+			"diff": {
+				"description": "Show differences in files when running the playbook.",
+				"code": "ansible-playbook playbook.yml --diff"
+			},
+			"check-diff": {
+				"description": "Dry-run the playbook and show file differences.",
+				"code": "ansible-playbook playbook.yml --check --diff"
+			},
+			"verbose": {
+				"description": "Run the playbook in verbose mode. `-vvv` and `-vvvv` can be used for more verbosity.",
+				"code": "ansible-playbook playbook.yml -v"
+			}
+		},
+		"PlaybookControl": {
+			"list-hosts": {
+				"description": "List all hosts the playbook will run against.",
+				"code": "ansible-playbook playbook.yml --list-hosts"
+			},
+			"list-tasks": {
+				"description": "List all tasks the playbook will execute.",
+				"code": "ansible-playbook playbook.yml --list-tasks"
+			},
+			"tags": {
+				"description": "Run only the tasks tagged with tag1 and tag2.",
+				"code": "ansible-playbook playbook.yml --tags \"tag1,tag2\""
+			},
+			"skip-tags": {
+				"description": "Skip tasks tagged with tag3.",
+				"code": "ansible-playbook playbook.yml --skip-tags \"tag3\""
+			},
+			"limit": {
+				"description": "Limit the playbook execution to the group 'servers'.",
+				"code": "ansible-playbook playbook.yml --limit servers"
+			},
+			"extra-vars": {
+				"description": "Run the playbook with extra variables.",
+				"code": "ansible-playbook playbook.yml --extra-vars \"version=1.2.3\""
+			},
+			"forks": {
+				"description": "Set the number of parallel processes to 5.",
+				"code": "ansible-playbook playbook.yml --forks=5"
+			}
+		},
+		"Roles": {
+			"init": {
+				"description": "Initialize a new role structure with the specified name.",
+				"code": "ansible-galaxy init role_name"
+			},
+			"install": {
+				"description": "Install an Ansible role.",
+				"code": "ansible-galaxy install role_name"
+			}
+		},
+		"Vault": {
+			"create": {
+				"description": "Create a new encrypted file.",
+				"code": "ansible-vault create vault.yml"
+			},
+			"view": {
+				"description": "View an encrypted file.",
+				"code": "ansible-vault view vault.yml"
+			},
+			"edit": {
+				"description": "Edit an encrypted file.",
+				"code": "ansible-vault edit vault.yml"
+			},
+			"decrypt": {
+				"description": "Decrypt an encrypted file.",
+				"code": "ansible-vault decrypt vault.yml"
+			},
+			"encrypt": {
+				"description": "Encrypt a file.",
+				"code": "ansible-vault encrypt vault.yml"
+			},
+			"rekey": {
+				"description": "Change the password on a vault file.",
+				"code": "ansible-vault rekey vault.yml"
+			},
+			"encrypt-string": {
+				"description": "Encrypt a string and output it in a format ready for use with Ansible.",
+				"code": "ansible-vault encrypt_string --name 'var_name' 'string'"
+			},
+			"ask-pass": {
+				"description": "Run a playbook and prompt for the vault password.",
+				"code": "ansible-playbook playbook.yml --ask-vault-pass"
+			},
+			"password-file": {
+				"description": "Run a playbook using a file containing the vault password.",
+				"code": "ansible-playbook playbook.yml --vault-password-file vault.pass"
+			},
+			"stdin-name": {
+				"description": "Read the string from stdin and encrypt it.",
+				"code": "ansible-vault encrypt_string --stdin-name 'var_name'"
+			},
+			"encrypt-id": {
+				"description": "Encrypt a file using a prompt for the vault password.",
+				"code": "ansible-vault encrypt --vault-id dev@prompt vars.yml"
+			},
+			"vault-id": {
+				"description": "Run a playbook using a prompt for the vault password.",
+				"code": "ansible-playbook playbook.yml --vault-id dev@prompt"
+			}
+		},
+		"Configuration": {
+			"list": {
+				"description": "List all configuration options.",
+				"code": "ansible-config list"
+			},
+			"dump": {
+				"description": "Show the current configuration.",
+				"code": "ansible-config dump"
+			},
+			"view": {
+				"description": "View the current Ansible configuration.",
+				"code": "ansible-config view"
+			},
+			"dump-changed": {
+				"description": "Dump configuration items that have changed from the default.",
+				"code": "ansible-config dump --only-changed"
+			},
+			"set": {
+				"description": "Set a specific configuration item.",
+				"code": "ansible-config set ANSIBLE_HOST_KEY_CHECKING=False"
+			},
+			"unset": {
+				"description": "Unset a specific configuration item.",
+				"code": "ansible-config unset ANSIBLE_HOST_KEY_CHECKING"
+			}
+		},
+		"Console": {
+			"start": {
+				"description": "Start an interactive console for executing Ansible tasks.",
+				"code": "ansible-console"
+			},
+			"inventory": {
+				"description": "Start an interactive console using a specific inventory.",
+				"code": "ansible-console -i inventory.ini"
+			}
+		},
+		"Modules": {
+			"list": {
+				"description": "List available modules.",
+				"code": "ansible-doc -l"
+			},
+			"doc": {
+				"description": "Get documentation for a specific module.",
+				"code": "ansible-doc module_name"
+			},
+			"file-create": {
+				"description": "Create a new file on the local host using the file module.",
+				"code": "ansible localhost -m file -a \"path=/tmp/test state=touch\""
+			},
+			"package": {
+				"description": "Install a package on the local host using the package module.",
+				"code": "ansible localhost -m package -a \"name=vim state=present\""
+			},
+			"command": {
+				"description": "Run a command on the local host using the command module.",
+				"code": "ansible localhost -m command -a \"uptime\""
+			},
+			"user-remove": {
+				"description": "Remove user 'testuser' from the local host using the user module.",
+				"code": "ansible localhost -m user -a \"name=testuser state=absent\""
+			},
+			"service-restart": {
+				"description": "Restart the 'httpd' service on the local host using the service module.",
+				"code": "ansible localhost -m service -a \"name=httpd state=restarted\""
+			},
+			"copy": {
+				"description": "Copy '/etc/hosts' to '/tmp/hosts' on the local host using the copy module.",
+				"code": "ansible localhost -m copy -a \"src=/etc/hosts dest=/tmp/hosts\""
+			},
+			"file-remove": {
+				"description": "Remove file '/tmp/test' on the local host using the file module.",
+				"code": "ansible localhost -m file -a \"path=/tmp/test state=absent\""
+			},
+			"apt": {
+				"description": "Install the latest version of 'nginx' on the local host using the apt module (Debian-based systems).",
+				"code": "ansible localhost -m apt -a \"name=nginx state=latest\""
+			}
+		},
+		"Inventory": {
+			"list-yaml": {
+				"description": "List the inventory in YAML format.",
+				"code": "ansible-inventory --list -y"
+			},
+			"graph": {
+				"description": "Show a graph of the inventory.",
+				"code": "ansible-inventory --graph"
+			},
+			"ping-inventory": {
+				"description": "Use a specific inventory file and ping all hosts.",
+				"code": "ansible -i inventory.ini all -m ping"
+			},
+			"host": {
+				"description": "Display all variables for a specific host.",
+				"code": "ansible-inventory --host hostname"
+			},
+			"playbook-dir": {
+				"description": "Display a graph of the inventory from the current directory.",
+				"code": "ansible-inventory --playbook-dir . --graph"
+			},
+			"localhost": {
+				"description": "Ping localhost using local connection and ad-hoc inventory.",
+				"code": "ansible -i 'localhost,' -c local -m ping"
+			},
+			"yaml": {
+				"description": "List inventory in YAML format.",
+				"code": "ansible-inventory --list --yaml"
+			}
+		},
+		"Pull": {
+			"pull": {
+				"description": "Pull a Git repository of Ansible configurations on the target host.",
+				"code": "ansible-pull -U git_url"
+			}
+		},
+		"Galaxy": {
+			"collection-init": {
+				"description": "Initialize a new collection with the given namespace and name.",
+				"code": "ansible-galaxy collection init my_namespace.my_collection"
+			},
+			"collection-build": {
+				"description": "Build an Ansible collection package ready for distribution.",
+				"code": "ansible-galaxy collection build"
+			},
+			"collection-install": {
+				"description": "Install an Ansible collection from Galaxy.",
+				"code": "ansible-galaxy collection install my_namespace.my_collection"
+			},
+			"role-init": {
+				"description": "Initialize a new role with the given name.",
+				"code": "ansible-galaxy role init my_role"
+			},
+			"role-install": {
+				"description": "Install an Ansible role from Galaxy.",
+				"code": "ansible-galaxy role install my_role"
+			},
+			"list": {
+				"description": "List installed roles and collections.",
+				"code": "ansible-galaxy list"
+			},
+			"collection-install-req": {
+				"description": "Install collections from a requirements file.",
+				"code": "ansible-galaxy collection install -r requirements.yml"
+			},
+			"role-install-req": {
+				"description": "Install roles from a requirements file.",
+				"code": "ansible-galaxy role install -r requirements.yml"
+			},
+			"collection-publish": {
+				"description": "Publish a collection to Galaxy using an API token.",
+				"code": "ansible-galaxy collection publish ./namespace-collection-1.0.0.tar.gz --api-key=your_token"
+			},
+			"role-skeleton": {
+				"description": "Initialize a new role with a specified role skeleton.",
+				"code": "ansible-galaxy role init --role-skeleton skeleton my_role"
+			}
+		}
+	}
+}

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-03 14:53+0300\n"
-"PO-Revision-Date: 2021-09-26 07:39+0200\n"
+"PO-Revision-Date: 2025-08-09 18:53+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: 3.2/providers.js:15 3.8/providers.js:17
 msgid "Dependency missing"
@@ -33,7 +33,7 @@ msgid ""
 "\tFedora: libgtop2-devel\n"
 "\tArch: libgtop\n"
 msgstr ""
-"Kérem telepítse a következőket a használathoz: GTop package\n"
+"Kérem telepítse a következőket a használathoz: GTop csomag\n"
 "\tUbuntu / Mint: gir1.2-gtop-2.0\n"
 "\tFedora: libgtop2-devel\n"
 "\tArch: libgtop\n"
@@ -84,7 +84,7 @@ msgstr "Rendszerfigyelő megnyitása"
 
 #: 3.2/applet.js:91 3.8/applet.js:91
 msgid "Restart 'Graphical hardware monitor'"
-msgstr "'Grafikus Hardver Figyelő' újraindítása"
+msgstr "„Grafikus Hardver Figyelő” újraindítása"
 
 #. metadata.json->description
 msgid ""
@@ -262,7 +262,7 @@ msgstr "egyedi téma"
 msgid ""
 "Use 'custom theme' to select colors that matches your current desktop theme."
 msgstr ""
-"Az 'egyéni téma' segítségével választhat az aktuális asztali témához illő "
+"Az „egyéni téma” segítségével választhat az aktuális asztali témához illő "
 "színeket."
 
 #. 3.2->settings-schema.json->border_color->description

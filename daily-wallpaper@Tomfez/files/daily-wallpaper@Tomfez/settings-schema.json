@@ -1,0 +1,191 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "pageGeneral",
+            "pageHelp"
+        ],
+        "pageGeneral": {
+            "type": "page",
+            "title": "General",
+            "sections": [
+                "sectionEnableUpdate",
+                "sectionUpdatePreferences",
+                "section1"
+            ]
+        },
+        "pageHelp": {
+            "type": "page",
+            "title": "Help",
+            "sections": [
+                "sectionDebug"
+            ]
+        },
+        "sectionEnableUpdate": {
+            "type": "section",
+            "title": "",
+            "keys": [
+                "dailyRefreshState"
+            ]
+        },
+        "sectionUpdatePreferences": {
+            "type": "section",
+            "dependency": "dailyRefreshState",
+            "title": "Update preferences",
+            "keys": [
+                "currentSource",
+                "selectedImagePreferences",
+                "market",
+                "apiKey"
+            ]
+        },
+        "section1": {
+            "type": "section",
+            "title": "Image preferences",
+            "keys": [
+                "saveWallpaper",
+                "wallpaperNamePreferences",
+                "wallpaperDir",
+                "image-aspect-options"
+            ]
+        },
+        "sectionDebug": {
+            "type": "section",
+            "title": "Debug",
+            "keys": [
+                "refreshInterval",
+                "debugToggle"
+            ]
+        }
+    },
+    "currentSource": {
+        "type": "combobox",
+        "default": "Bing",
+        "description": "Source of images",
+        "options": {
+            "Bing": "Bing",
+            "Wikimedia": "Wikimedia",
+            "APOD": "APOD"
+        }
+    },
+    "refreshInterval": {
+        "default": 720,
+        "description": "Update interval to check new wallpaper",
+        "max": 1440,
+        "min": 1,
+        "step": 5,
+        "type": "spinbutton",
+        "units": "Minutes"
+    },
+    "saveWallpaper": {
+        "default": false,
+        "description": "Save wallpaper to image directory",
+        "type": "checkbox"
+    },
+    "wallpaperNamePreferences": {
+        "default": 1,
+        "dependency": "saveWallpaper",
+        "description": "Name of the file when saved to the image directory",
+        "type": "combobox",
+        "tooltip": "Original: original file name.\nCustom: source name + date (ex: BingWallpaper_20240801.jpg)",
+        "options": {
+            "Original": 0,
+            "Custom": 1
+        }
+    },
+    "wallpaperDir": {
+        "default": "~/.config/dailywallpaper",
+        "dependency": "saveWallpaper",
+        "description": "Image directory",
+        "select-dir": true,
+        "tooltip": "For example: /home/username/Pictures/wallpapers",
+        "type": "filechooser"
+    },
+    "dailyRefreshState": {
+        "default": true,
+        "description": "Enable daily refresh",
+        "type": "switch"
+    },
+    "selectedImagePreferences": {
+        "type": "combobox",
+        "default": 0,
+        "description": "Selected image",
+        "options": {
+            "Most recent": 0,
+            "Random": 1
+        },
+        "tooltip": "Select the most recent image or a random image when the applet is launched"
+    },
+    "market": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Bing locale",
+        "dependency": "currentSource=Bing",
+        "options": {
+            "auto-auto": "auto",
+            "da-DK, Denmark, Danish": "da-DK",
+            "de-AT, Austria, German": "de-AT",
+            "de-CH, Switzerland, German": "de-CH",
+            "de-DE, Germany, German": "de-DE",
+            "en-AU, Australia, English": "en-AU",
+            "en-CA, Canada, English": "en-CA",
+            "en-GB, United Kingdom, English": "en-GB",
+            "en-ID, Indonesia, English": "en-ID",
+            "en-IN, India, English": "en-IN",
+            "en-MY, Malaysia, English": "en-MY",
+            "en-NZ, New Zealand, English": "en-NZ",
+            "en-PH, Republic of the Philippines, English": "en-PH",
+            "en-US, United States, English": "en-US",
+            "en-ZA, South Africa, English": "en-ZA",
+            "es-AR, Argentina, Spanish": "es-AR",
+            "es-CL, Chile, Spanish": "es-CL",
+            "es-ES, Spain, Spanish": "es-ES",
+            "es-MX, Mexico, Spanish": "es-MX",
+            "es-US, United States, Spanish": "es-US",
+            "fi-FI, Finland, Finnish": "fi-FI",
+            "fr-BE, Belgium, French": "fr-BE",
+            "fr-CA, Canada, French": "fr-CA",
+            "fr-CH, Switzerland, French": "fr-CH",
+            "fr-FR, France, French": "fr-FR",
+            "it-IT, Italy, Italian": "it-IT",
+            "ja-JP, Japan, Japanese": "ja-JP",
+            "ko-KR, Korea, Korean": "ko-KR",
+            "nl-BE, Belgium, Dutch": "nl-BE",
+            "nl-NL, Netherlands, Dutch": "nl-NL",
+            "no-NO, Norway, Norwegian": "no-NO",
+            "pl-PL, Poland, Polish": "pl-PL",
+            "pt-BR, Brazil, Portuguese": "pt-BR",
+            "ru-RU, Russia, Russian": "ru-RU",
+            "sv-SE, Sweden, Swedish": "sv-SE",
+            "tr-TR, Türkiye, Turkish": "tr-TR",
+            "zh-CN, People's republic of China, Chinese": "zh-CN",
+            "zh-HK, Hong Kong SAR, Traditional Chinese": "zh-HK",
+            "zh-TW, Taiwan, Traditional Chinese": "zh-TW"
+        }
+    },
+    "apiKey": {
+        "type": "entry",
+        "default": "DEMO_KEY",
+        "description": "API key",
+        "dependency": "currentSource=APOD",
+        "tooltip": "Set your API key for APOD API. The default API key is used for initially exploring APIs prior to signing up, but it has much lower rate limits."
+    },
+    "image-aspect-options": {
+        "type": "combobox",
+        "default": "zoom",
+        "description": "Image aspect",
+        "options": {
+            "Zoom": "zoom",
+            "Centered": "centered",
+            "Scaled": "scaled",
+            "Stretched": "stretched",
+            "Spanned": "spanned",
+            "Mosaic": "mosaic"
+        }
+    },
+    "debugToggle": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Debug"
+    }
+}

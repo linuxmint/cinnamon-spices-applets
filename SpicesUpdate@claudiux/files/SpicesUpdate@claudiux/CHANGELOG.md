@@ -1,3 +1,187 @@
+### v7.11.1~20251217
+  * Animation improvements.
+
+### v7.11.0~20251217
+  * Uses better animation method.
+
+### v7.10.0~20251212
+  * Use xlet-settings instead of cinnamon-settings to configure applet.
+
+### v7.9.7~20251121
+  * Updates to-string() function.
+
+### v7.9.6~20251121
+  * Improves file monitoring.
+
+### v7.9.5~20251031
+  * Avoids 'destroy' errors.
+
+### v7.9.4~20251012
+  * Improves access to settings.
+  * Adds Apply button to settings about Spices.
+
+### v7.9.3~20251012
+  * Fixes a problem with a badge.
+
+### v7.9.2~20251012
+  * Fixes [#7090](https://github.com/linuxmint/cinnamon-spices-applets/issues/7090).
+
+### v7.9.1~20250908
+  * Better memory management.
+
+### v7.9.0
+  * Bugfix about themes.
+  * Added a “Check all the first boxes then refresh” button in each tab of this applet’s settings, except in the General tab.
+  * Please note: when certain boxes remain unchecked, it means that these spices are not included in the Cinnamon database.
+
+### v7.8.8~20250425
+  * Fixes [#7090](https://github.com/linuxmint/cinnamon-spices-applets/issues/7090).
+
+### v7.8.7~20250324
+  * Adapts constants.js for themes.
+  * Code cleanup.
+
+### v7.8.6~20250323
+  * Fixes #6992: Improves the appearance of the label in a horizontal panel.
+
+### v7.8.5~20250315
+  * BugFixes in a bash script.
+
+### v7.8.4~20250304
+  * Improved functioning.
+
+### v7.8.3~20250303
+  * Minor bugfix.
+
+### v7.8.2~20250303
+  * Does not try to translate null messages from other spices. This also helps avoid black screens.
+
+### v7.8.1~20250302
+  * Forces the use of 'cjs' even if 'gjs' is installed.
+  * Uses “try” for each “destroy” command.
+  * Fixes #6933.
+
+### v7.8.0~20250215
+  * Tooltip bug fixed.
+
+### v7.7.0~20250211
+  * Consider AlbumArt3.0@claudiux as a common desklet.
+
+### v7.6.7~20250204
+  * Avoids the use of Array.toString() in the code.
+
+### v7.6.6~20250203
+  * No more errors on restart.
+
+### v7.6.5~20250202
+  * Fixes #6776.
+  * Code: No 'bind(this)' calls anymore.
+
+### v7.6.4~20250131
+  * Improves directory and file management.
+  * Code clean-up.
+
+### v7.6.3~20250130
+  * Try to fix #6776.
+
+### v7.6.2~20250126
+  * Modification of the menu to fix #6781.
+
+### v7.6.1~20250120
+  * Fixes #6776.
+
+### v7.6.0~20250119
+  * Do not check private Spices. A private Spice is a Spice that is not listed on the Cinnamon Spices website.
+  * Code: Avoids using Lang.bind() in response to signals.
+
+### v7.5.3~20250116
+  * mainloopTools library: improvements.
+
+### v7.5.2~20250112
+  * Fixed minor bugs in animations.
+
+### v7.5.1~20250112
+  * Now use mainloopTools to optimize loop management.
+
+### v7.5.0~20250111
+  * Improved management of loops.
+
+### v7.4.7~20250105
+  * Now compatible with Cinnamon on Gentoo.
+  * Replaces apturl with xdg-open.
+  * Lets the user enter commands when dependencies are missing.
+
+### v7.4.6~20241230
+  * Spices not selected in the lists of settings are displayed first.
+
+### v7.4.5~20241114
+  * Soup2/Soup3: better detection.
+
+### v7.4.4~20240602
+  * Restarts httpLib when network interface status changes.
+
+### v7.4.3~20240531
+  * Wait a few seconds before refreshing data after a change in network status.
+
+### v7.4.2~20240805
+  * Saves memory.
+
+### v7.4.1~20240502
+  * Fixes #5969: Wait 20 seconds before executing the cache update loop, so that mintupdate runs correctly.
+
+### v7.4.0~20240423
+  * Now smoother so as not to be blocked by the cinnamon-spices.linuxmint.com server.
+  * New color when spices are updated or forgotten.
+  * Translations: New .pot file. New fr.po file.
+  * Seems to fix #5941.
+
+
+### v7.3.7~20240421
+  * Refresh action further improved.
+
+### v7.3.6~20240420
+  * Improved Refresh action.
+
+### v7.3.5~20240420
+  * Improved cache refresh management.
+
+### v7.3.4~20240419
+  * Prevents telescoping with mintupdate.
+  * Uses G. Translate to display help.
+
+### v7.3.3~20240416
+  * Code cleanup.
+
+### v7.3.2~20240415
+  * Bugfixes.
+  * Checks again after installing updates.
+
+### v7.3.1~20240415
+  * Takes into account the new location of themes.
+
+### v7.3.0~20240413
+  * Also manage Actions for nemo.
+  * Fixes #5683.
+
+### v7.2.0~20240412
+  * Removes the "Update" button from notifications for the time being. It will be available again when cinnamon-settings is compatible.
+  * Many bugfixes.
+  * TODO: Include Nemo Actions.
+
+### v7.1.2~20240412
+  * Fixes definitively #5682: now this applet also works on distributions that don't use mintupdate.
+
+### v7.1.1~20240412
+  * Fixed a bug that prevented SpiceUpdate from starting.
+
+### v7.1.0~20240411
+  * Fixes #5682 and many other bugs.
+  * TODO: Include Nemo Actions. Update all Spices of a given type.
+
+### v7.0.0~20240411
+  * Fixes #3773 #4584 #4850 #5167 #5216.
+  * This version works with Cinnamon 6.0! Even if a few adjustments need to be made.
+
 ### v6.4.3~20231209
   * Fixes #5167. Use of Soup3 (Cinnamon 6.0).
 .

@@ -1,18 +1,31 @@
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
-const Gio = imports.gi.Gio; // Needed for file infos
-const Mainloop = imports.mainloop;
+const Gio = imports.gi.Gio;
 const Applet = imports.ui.applet;
 const {AppletSettings} = imports.ui.settings;
-//const Gettext = imports.gettext;
-const Extension = imports.ui.extension; // Needed to reload this applet
+const Extension = imports.ui.extension;
 const ModalDialog = imports.ui.modalDialog;
-const Lang = imports.lang;
-
-const Util = require("./lib/util");
+const { WindowTracker } = imports.gi.Cinnamon;
+//util
+const {spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, unref} = require("./lib/util");
+//to-string
 const {to_string} = require("./lib/to-string");
+//checkDependencies
 const {Dependencies} = require("./lib/checkDependencies");
+//mainloopTools
+const {
+  _sourceIds,
+  timeout_add_seconds,
+  timeout_add,
+  setTimeout,
+  clearTimeout,
+  setInterval,
+  clearInterval,
+  source_exists,
+  source_remove,
+  remove_all_sources
+} = require("./lib/mainloopTools");
 
 const {
   UUID,
@@ -29,11 +42,22 @@ const {
   logError
 } = require("./lib/constants");
 
+const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
+
 const {SensorsReaper} = require("./lib/sensorsReaper");
 
 const ENABLED_APPLETS_KEY = "enabled-applets";
 
-const DEFAULT_APPLET_LABEL = ['🌡', '🤂', '🗲', '⮿'];
+var C_TEMP = '🌡'; //'⦿' '🌡'
+var C_FAN = '𖣘'; //'🤂'
+var C_VOLT = '⚡'; //'🗲' '🔌'
+var C_INTRU = '🪛'; // '⮿'
+var DEFAULT_APPLET_LABEL = [C_TEMP, C_FAN, C_VOLT, C_INTRU];
+
+const LOG_HIGH_SCRIPT = SCRIPTS_DIR+"/log_high_value.sh";
+const LOG_CRIT_SCRIPT = SCRIPTS_DIR+"/log_crit_value.sh";
+
+var COUNT_LOG = 0;
 
 /**
  * spawnCommandAsyncAndGetPid:
@@ -58,9 +82,112 @@ function spawnCommandAsyncAndGetPid(command, callback = null) {
 }
 
 /**
+ * Class LoggerTemp
+ */
+class LoggerTemp {
+  constructor() {
+    this.previous_values = {};
+  }
+
+  log(value, high_limit, crit_limit, sensor, unit="°C") {
+    if (!value || isNaN(value*100)) return;
+    let category = "Temperature";
+    let category_sensor = ""+category+"_"+sensor;
+    if (!this.previous_values[category_sensor])
+      this.previous_values[category_sensor] = 35;
+    let prev = this.previous_values[category_sensor];
+    this.previous_values[category_sensor] = value;
+    if (value == prev) return;
+    if (crit_limit && !isNaN(crit_limit) && (value >= crit_limit || (prev >= crit_limit && value < crit_limit))) {
+      spawnCommandLineAsync(LOG_CRIT_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value+unit);
+      return;
+    }
+    if (high_limit && !isNaN(high_limit) && (value >= high_limit || (prev >= high_limit && value < high_limit))) {
+      spawnCommandLineAsync(LOG_HIGH_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value+unit);
+    }
+  }
+}
+
+/**
+ * Class LoggerFan
+ */
+class LoggerFan {
+  constructor() {
+    this.previous_values = {};
+  }
+
+  log(value, min_limit, sensor, unit="rpm") {
+    if (!value || isNaN(value)) return;
+    if (!min_limit || isNaN(min_limit)) return;
+    let category = "Fan";
+    let category_sensor = ""+category+"_"+sensor;
+    if (!this.previous_values[category_sensor])
+      this.previous_values[category_sensor] = min_limit + 100;
+    let prev = this.previous_values[category_sensor];
+    this.previous_values[category_sensor] = value;
+    if (value == prev) return;
+    if (value <= min_limit || (prev <= min_limit && value > min_limit)) {
+      spawnCommandLineAsync(LOG_CRIT_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value+unit);
+    }
+  }
+}
+
+/**
+ * Class LoggerVoltage
+ */
+class LoggerVoltage {
+  constructor() {
+    this.previous_values = {};
+  }
+
+  log(value, min_limit, max_limit, sensor, unit="V") {
+    if (!value || Number.isNaN(Number(value*1000))) return;
+    if (!min_limit || Number.isNaN(Number(min_limit*1000))) return;
+    if (!max_limit || Number.isNaN(Number(max_limit*1000))) return;
+    let category = "Voltage";
+    let category_sensor = ""+category+"_"+sensor;
+    if (!this.previous_values[category_sensor])
+      this.previous_values[category_sensor] = (min_limit + max_limit) / 2;
+    let prev = this.previous_values[category_sensor];
+    this.previous_values[category_sensor] = value;
+    if (value == prev) return;
+    if (value <= min_limit || (prev <= min_limit && value > min_limit)) {
+      spawnCommandLineAsync(LOG_CRIT_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value+unit);
+      return
+    }
+    if (value >= max_limit || (prev >= max_limit && value < max_limit)) {
+      spawnCommandLineAsync(LOG_CRIT_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value+unit);
+    }
+  }
+}
+
+/**
+ * Class LoggerIntrusion
+ */
+class LoggerIntrusion {
+  constructor() {
+    this.previous_values = {};
+  }
+
+  log(value, sensor) {
+    if (!value || isNaN(value)) return;
+    let category = "Intrusion";
+    let category_sensor = ""+category+"_"+sensor;
+    if (!this.previous_values[category_sensor])
+      this.previous_values[category_sensor] = 0;
+    let prev = this.previous_values[category_sensor];
+    this.previous_values[category_sensor] = value;
+    if (value == prev) return;
+    if (value != 0) {
+      spawnCommandLineAsync(LOG_CRIT_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value);
+    }
+  }
+}
+
+/**
  * Class SensorsApplet
  */
-class SensorsApplet extends Applet.TextApplet {
+class SensorsApplet extends Applet.Applet {
 
   constructor(metadata, orientation, panelHeight, instance_id) {
     super(orientation, panelHeight, instance_id);
@@ -69,21 +196,27 @@ class SensorsApplet extends Applet.TextApplet {
     this.applet_version = metadata.version;
     this.applet_name = metadata.name;
     this._temp = [];
+    this.suspended = false;
+    this.loopId = null;
 
     // Both types of panel: horizontal and vertical:
     this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
     // To be sure that the scripts will be executable:
-    Util.spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR), null, null);
+    spawnCommandLineAsync(`/bin/bash -c 'cd ${SCRIPTS_DIR} && chmod 755 *.py *.sh'`, null, null);
+    
+    // Window Tracker:
+    this.tracker = WindowTracker.get_default();
 
     this.sudo_or_wheel = "none";
-    Util.spawnCommandLineAsyncIO("/bin/bash -c 'groups'", Lang.bind(this, (out, err, exitCode) => {
+    let subProcess = spawnCommandLineAsyncIO("/usr/bin/env bash -c 'groups'", (out, err, exitCode) => {
       if (exitCode == 0) {
         let groups = out.trim().split(' ');
         if (groups.indexOf("wheel") > -1) this.sudo_or_wheel = "wheel";
         if (groups.indexOf("sudo") > -1) this.sudo_or_wheel = "sudo";
       }
-    }));
+      subProcess.send_signal(9);
+    });
 
     // Detect language for numeric format:
     this.num_lang = this._get_lang();
@@ -92,8 +225,8 @@ class SensorsApplet extends Applet.TextApplet {
     this.dependencies = new Dependencies();
     //this.depCount = 0;
 
-    // Applet label:
-    this.set_applet_label(this._get_default_applet_label());
+    spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh 1 &");
+    //~ spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh 1 all &");
 
     // Applet tooltip:
     this.set_applet_tooltip(_('Sensors Monitor'));
@@ -102,6 +235,12 @@ class SensorsApplet extends Applet.TextApplet {
     } else {
       this._applet_tooltip._tooltip.set_style('text-align: left; font-family: monospace;');
     }
+
+    // Loggers:
+    this.loggerTemp = new LoggerTemp();
+    this.loggerFan = new LoggerFan();
+    this.loggerVoltage = new LoggerVoltage();
+    this.loggerIntrusion = new LoggerIntrusion();
 
     // Applet menu:
     this.pids = []; // pids of all opened windows, about settings, from the menu.
@@ -113,16 +252,19 @@ class SensorsApplet extends Applet.TextApplet {
     this.get_user_settings();
     this._variables();
 
+    // Run DisksDaemon:
+    this._on_temp_disks_modified();
+
+    // Applet default UI:
+    this.set_default_UI();
+
     // Style class name:
+    let _monospace = (this.keep_size) ? "sensors-monospace" : "applet-box"; //"applet-label";
     let _border_type = (this.remove_border) ? "-noborder" : "";
-    this.actor.set_style_class_name("sensors-label%s".format(_border_type));
+    this.actor.set_style_class_name("%s sensors-label%s vertalign-%s".format(_monospace, _border_type, this.vertical_align));
 
     // Initialize some properties:
     this.isRunning = false;
-
-    //~ // Permissions on hddtemp:
-    //~ this.future_hddtemp_check = Math.ceil(Date.now() / 1000) - 7200;
-    //~ this.check_disktemp_user_readable(true);
 
     // Sensors Reaper:
     this.reaper = new SensorsReaper(this, this.interval);
@@ -131,6 +273,7 @@ class SensorsApplet extends Applet.TextApplet {
       this.strictly_positive_fan ? 1 : 0,
       this.strictly_positive_volt ? 1 : 0
     );
+    this.reaper.reap_nvidia_smi();
 
     // Events:
     this._connectIds = [];
@@ -139,73 +282,182 @@ class SensorsApplet extends Applet.TextApplet {
     this._connectIds.push(this.actor.connect("leave-event", (actor, event) => this.on_leave_event(actor, event)));
   }
 
+  set_default_UI() {
+    this.actor.destroy_all_children();
+    for (let i=0; i<DEFAULT_APPLET_LABEL.length; i++) {
+      let layoutBin = new St.Bin();
+      let c = DEFAULT_APPLET_LABEL[i];
+      let l = new St.Label({text: c});
+      layoutBin.set_child(l);
+      this.actor.add(layoutBin, { y_align: St.Align.MIDDLE,
+                                  y_fill: false,
+                                });
+    }
+  }
+  
+  configureApplet(tab=0) {
+    //~ logDebug("tab=" + tab);
+    const HORIZONTAL = 1;
+    const VERTICAL = 2;
+    const BOTH = 3
+    let maximize_horizontally = this.window_maximizing == "horizontally";
+    let maximize_vertically = this.window_maximizing == "vertically";
+    let maximize_both = this.window_maximizing == "both";
+    let fixed = this.window_maximizing == "fixed";
+    if (fixed && (isNaN(parseInt(this.window_width)) || isNaN(parseInt(this.window_height)))) {
+      fixed = false;
+      this.window_maximizing = "none";
+    }
+    //~ let window_width = Math.min(this.window_width, global.screen_width);
+    //~ this.window_width = window_width;
+    this._applet_context_menu.close(false);
+    //~ this.closeSettingsWindow();
+
+    //~ let nemo_size_prefixes = get_nemo_size_prefixes();
+    //~ if (nemo_size_prefixes !== this.size_prefixes) {
+      //~ this.size_prefixes = nemo_size_prefixes
+    //~ }
+
+    //~ this._set_settings_options();
+
+    let pid = spawnCommandLine("xlet-settings applet " + UUID + " -i " + this.instance_id + " -t " + tab);
+    //~ let pid = spawnCommandLine(SCRIPTS_DIR + "/configRadio3.0.sh " + this.instance_id + " " + tab);
+
+    if (this.window_maximizing != "none") {
+      var app = null;
+      var intervalId = null;
+      intervalId = setTimeout(() => {
+        clearTimeout(intervalId);
+        app = this.tracker.get_app_from_pid(pid);
+        if (app != null) {
+          let window = app.get_windows()[0];
+          //~ this.settingsTab = tab;
+          //~ window.move_resize_frame(null, 0, 0, window_width, 800);
+          if (maximize_vertically)
+            window.maximize(VERTICAL);
+          else if (maximize_both)
+            window.maximize(BOTH);
+          else if (maximize_horizontally)
+            window.maximize(HORIZONTAL);
+          else if (fixed)
+            window.move_resize_frame(null, 1 * this.window_x, 1 * this.window_y, 1 * this.window_width, 1 * this.window_height);
+            
+          //~ this.settingsWindow = window;
+          //~ app.connect("windows-changed", () => { this.settingsWindow = undefined; });
+          
+          window.activate(300);
+        }
+      }, 1000);
+    }
+    // Returns the pid:
+    this.configWindowPid = pid;
+    return pid;
+  }
+  
+  _on_window_set_current_size() {
+    if (this.configWindowPid) {
+      let wins = global.get_window_actors();
+      wins.forEach( (w) => {
+        if (w.meta_window.get_pid() == this.configWindowPid) {
+          this.window_width = "" + (w.get_width() - 20).toString();
+          this.window_height = "" + (w.get_height() - 18).toString();
+          this.window_x = "" + w.get_x().toString();
+          this.window_y = "" + w.get_y().toString();
+        }
+      });
+    }
+  }
+
   get_user_settings() {
     this.s = new AppletSettings(this, UUID, this.instanceId);
 
     // General tab
-    this.s.bind("has_set_markup", "has_set_markup", null, null);
-    this.s.bind("interval", "interval", this.on_settings_changed, null);
-    this.s.bind("keep_size", "keep_size", this.updateUI, null);
-    this.s.bind("char_size", "char_size", this.updateUI, null);
-    this.s.bind("char_color", "char_color", this.updateUI, null);
-    this.s.bind("separator", "separator", this.updateUI, null);
-    this.s.bind("remove_border", "remove_border", this.updateUI, null);
-    this.s.bind("remove_icons", "remove_icons", this.updateUI, null);
-    this.s.bind("bold_values", "bold_values", this.updateUI, null);
-    this.s.bind("bold_italics_main_sensors", "bold_italics_main_sensors", this.updateUI, null);
-    this.s.bind("restart_in_menu", "restart_in_menu", null, null);
+    this.s.bind("show_tooltip", "show_tooltip", () => { this.on_settings_changed() });
+    this.s.bind("do_not_check_dependencies", "do_not_check_dependencies");
+    this.s.bind("window_maximizing", "window_maximizing");
+    this.s.bind("window_width", "window_width");
+    this.s.bind("window_height", "window_height");
+    this.s.bind("window_x", "window_x");
+    this.s.bind("window_y", "window_y");
+    this.s.bind("has_set_markup", "has_set_markup");
+    this.s.bind("interval", "interval", () => { this.on_settings_changed() });
+    this.s.bind("keep_size", "keep_size", () => { this.updateUI() });
+    this.s.bind("char_size", "char_size", () => { this.updateUI() });
+    this.s.bind("horizontal_width", "horizontal_width", () => { this.updateUI() });
+    this.s.bind("separator_type", "separator_type", () => { this.updateUI() });
+    this.s.bind("vertical-align", "vertical_align", () => { this.updateUI() });
+    this.s.bind("char_color_customized", "char_color_customized", () => { this.updateUI() });
+    this.s.bind("separator_color", "separator_color", () => { this.updateUI() });
+    this.s.bind("char_color", "char_color", () => { this.updateUI() });
+    this.s.bind("crit_color", "crit_color", () => { this.updateUI() });
+    this.s.bind("high_color", "high_color", () => { this.updateUI() });
+    this.s.bind("remove_border", "remove_border", () => { this.updateUI() });
+    this.s.bind("remove_icons", "remove_icons", () => { this.updateUI() });
+    this.s.bind("bold_values", "bold_values", () => { this.updateUI() });
+    this.s.bind("bold_italics_main_sensors", "bold_italics_main_sensors", () => { this.updateUI() });
+    this.s.bind("restart_in_menu", "restart_in_menu");
 
-    if (this._applet_tooltip.set_markup === undefined) {
-      this.bold_values = false;
-      this.bold_italics_main_sensors = false;
-      this.has_set_markup = false;
-    } else {
-      this.has_set_markup = true;
-    }
+    this.detect_markup();
 
     // Custom names (generic)
-    this.s.bind("custom_names", "custom_names", null, null);
+    this.s.bind("custom_names", "custom_names");
 
     // sensors version (generic)
-    this.s.bind("sensors_version", "sensors_version", null, null);
+    this.s.bind("sensors_version", "sensors_version");
 
     // Temperature tab
-    this.s.bind("show_temp", "show_temp", this.populate_temp_sensors_in_settings, null);
-    this.s.bind("show_temp_name", "show_temp_name", null, null);
-    this.s.bind("strictly_positive_temp", "strictly_positive_temp", this.populate_temp_sensors_in_settings, null);
-    this.s.bind("use_fahrenheit", "use_fahrenheit", this.updateUI, null);
-    this.s.bind("only_integer_part", "only_integer_part", this.updateUI, null);
-    this.s.bind("show_unit", "show_unit", this.updateUI, null);
-    this.s.bind("show_unit_letter", "show_unit_letter", this.updateUI, null);
-    this.s.bind("always_show_unit_in_line", "always_show_unit_in_line", this.updateUI, null);
-    this.s.bind("temp_sensors", "temp_sensors", null, null);
-    this.s.bind("numberOfTempSensors", "numberOfTempSensors", null, null);
-    this.s.bind("temp_disks", "temp_disks", null, null);
+    this.s.bind("show_disks_first", "show_disks_first");
+    this.s.bind("show_temp", "show_temp", () => { this.populate_temp_sensors_in_settings() });
+    this.s.bind("show_temp_name", "show_temp_name");
+    this.s.bind("chars_temp", "chars_temp", () => { this._on_chars_temp_modified() });
+    this._on_chars_temp_modified();
+    this.s.bind("strictly_positive_temp", "strictly_positive_temp", () => { this.populate_temp_sensors_in_settings() });
+    this.s.bind("use_fahrenheit", "use_fahrenheit", () => { this.updateUI() });
+    this.s.bind("only_integer_part", "only_integer_part", () => { this.updateUI() });
+    this.s.bind("show_unit", "show_unit", () => { this.updateUI() });
+    this.s.bind("show_unit_letter", "show_unit_letter", () => { this.updateUI() });
+    this.s.bind("always_show_unit_in_line", "always_show_unit_in_line", () => { this.updateUI() });
+    this.s.bind("temp_sensors", "temp_sensors");
+    this.s.bind("numberOfTempSensors", "numberOfTempSensors");
+    this.s.bind("temp_disks", "temp_disks", this._on_temp_disks_modified.bind(this));
+    this.s.bind("journalize_temp", "journalize_temp");
 
     // Fan tab
-    this.s.bind("show_fan", "show_fan", this.populate_fan_sensors_in_settings, null);
-    this.s.bind("show_fan_name", "show_fan_name", null, null);
-    this.s.bind("strictly_positive_fan", "strictly_positive_fan", this.populate_fan_sensors_in_settings, null);
-    this.s.bind("show_fan_unit", "show_fan_unit", this.updateUI, null);
-    this.s.bind("fan_unit", "fan_unit", this.updateUI, null);
-    this.s.bind("fan_sensors", "fan_sensors", null, null);
-    this.s.bind("numberOfFanSensors", "numberOfFanSensors", null, null);
+    this.s.bind("show_fan", "show_fan", () => { this.populate_fan_sensors_in_settings() });
+    this.s.bind("show_fan_name", "show_fan_name");
+    this.s.bind("chars_fan", "chars_fan", () => { this._on_chars_fan_modified() });
+    this._on_chars_fan_modified();
+    this.strictly_positive_fan = false;
+    this.s.bind("show_fan_unit", "show_fan_unit", () => { this.updateUI() });
+    this.s.bind("fan_unit", "fan_unit", () => { this.updateUI() });
+    this.s.bind("fan_sensors", "fan_sensors");
+    this.s.bind("numberOfFanSensors", "numberOfFanSensors");
+    this.s.bind("journalize_fan", "journalize_fan");
 
     // Voltage tab
-    this.s.bind("show_volt", "show_volt", this.populate_volt_sensors_in_settings, null);
-    this.s.bind("show_volt_name", "show_volt_name", null, null);
-    this.s.bind("strictly_positive_volt", "strictly_positive_volt", this.populate_volt_sensors_in_settings, null);
-    this.s.bind("show_volt_unit", "show_volt_unit", this.updateUI, null);
-    this.s.bind("volt_unit", "volt_unit", this.updateUI, null);
-    this.s.bind("volt_sensors", "volt_sensors", null, null);
-    this.s.bind("numberOfVoltageSensors", "numberOfVoltageSensors", null, null);
+    this.s.bind("show_volt", "show_volt", () => { this.populate_volt_sensors_in_settings() });
+    this.s.bind("show_volt_name", "show_volt_name");
+    this.s.bind("chars_volt", "chars_volt", () => { this._on_chars_volt_modified() });
+    this._on_chars_volt_modified();
+    this.s.bind("strictly_positive_volt", "strictly_positive_volt", () => { this.populate_volt_sensors_in_settings() });
+    this.s.bind("show_volt_unit", "show_volt_unit", () => { this.updateUI() });
+    this.s.bind("volt_unit", "volt_unit", () => { this.updateUI() });
+    this.s.bind("volt_sensors", "volt_sensors");
+    this.s.bind("numberOfVoltageSensors", "numberOfVoltageSensors");
+    this.s.bind("journalize_volt", "journalize_volt");
 
     // Intrusion tab
-    this.s.bind("show_intrusion", "show_intrusion", this.populate_intrusion_sensors_in_settings, null);
-    this.s.bind("show_intrusion_name", "show_intrusion_name", null, null);
-    this.s.bind("strictly_positive_intrusion", "strictly_positive_intrusion", this.updateUI, null);
-    this.s.bind("intrusion_sensors", "intrusion_sensors", null, null);
-    this.s.bind("numberOfIntrusionSensors", "numberOfIntrusionSensors", null, null);
+    this.s.bind("show_intrusion", "show_intrusion", () => { this.populate_intrusion_sensors_in_settings() });
+    this.s.bind("show_intrusion_name", "show_intrusion_name");
+    this.s.bind("chars_intrusion", "chars_intrusion", () => { this._on_chars_intrusion_modified() });
+    this._on_chars_intrusion_modified();
+    this.s.bind("strictly_positive_intrusion", "strictly_positive_intrusion", () => { this.updateUI() });
+    this.s.bind("intrusion_sensors", "intrusion_sensors");
+    this.s.bind("numberOfIntrusionSensors", "numberOfIntrusionSensors");
+    this.s.bind("journalize_intrusion", "journalize_intrusion");
+
+    // Custom tab
+    this.s.bind("custom_sensors", "custom_sensors");
 
     // Whether temperature@fevimu is loaded:
     let enabledApplets = global.settings.get_strv(ENABLED_APPLETS_KEY);
@@ -220,41 +472,201 @@ class SensorsApplet extends Applet.TextApplet {
     this.s.setValue("disktemp_is_user_readable", this.is_disktemp_user_readable());
   }
 
+  _on_chars_temp_modified() {
+    var selected = "⦿";
+    if (this.chars_temp.length > 0)
+      selected = this.chars_temp[0]["emoji"];
+    C_TEMP = "" + selected;
+    DEFAULT_APPLET_LABEL[0] = "" + selected;
+    this.set_default_UI();
+  }
+
+  _on_chars_fan_modified() {
+    var selected = "𖣘";
+    if (this.chars_fan.length > 0)
+      selected = this.chars_fan[0]["emoji"];
+    C_FAN = "" + selected;
+    DEFAULT_APPLET_LABEL[1] = "" + selected;
+    this.set_default_UI();
+  }
+
+  _on_chars_volt_modified() {
+    var selected = "⚡";
+    if (this.chars_volt.length > 0)
+      selected = this.chars_volt[0]["emoji"];
+    C_VOLT = "" + selected;
+    DEFAULT_APPLET_LABEL[2] = "" + selected;
+    this.set_default_UI();
+  }
+
+  _on_chars_intrusion_modified() {
+    var selected = "🪛";
+    if (this.chars_intrusion.length > 0)
+      selected = this.chars_intrusion[0]["emoji"];
+    C_INTRU = "" + selected;
+    DEFAULT_APPLET_LABEL[3] = "" + selected;
+    this.set_default_UI();
+  }
+
+  _on_temp_disks_modified() {
+    const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
+    const SENSORS_DISKSWITNESS=`${SENSORS_DIR}/DisksWitness`;
+    var checkDisks = false;
+    let disks = this.s.getValue('temp_disks');
+    if (!disks) return;
+
+    var disksToCheck = [];
+    for (let disk of disks) {
+      if (disk["show_in_panel"] === true || disk["show_in_tooltip"] === true) {
+        checkDisks = true;
+        disksToCheck.push(disk["disk"])
+      }
+    }
+    if (checkDisks) {
+      spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " " + disksToCheck.join(",") + " &");
+    } else {
+      let diskwitness = Gio.file_new_for_path(SENSORS_DISKSWITNESS);
+      if (diskwitness.query_exists(null))
+        diskwitness.delete(null);
+      diskwitness = null;
+    }
+    checkDisks = null;
+  }
+
   is_disktemp_user_readable() {
     var ret = false;
-    const sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
+    var sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
+    if (GLib.find_program_in_path("/usr/bin/dnf") || GLib.find_program_in_path("/usr/bin/pacman")) {
+      // Distro is Fedora or Arch based.
+      sudoers_smartctl_path = "/etc/sudoersSensors.d/smartctl";
+    }
     const sudoers_smartctl_file = Gio.file_new_for_path(sudoers_smartctl_path);
     if (sudoers_smartctl_file.query_exists(null)) {
-    try {
+      try {
         let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
-        if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL:"))
+        if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL:")) {
           ret = true;
+        }
+        GLib.free(contents);
       } catch (e) {
-      ret = false
+        ret = false
+      }
     }
-    }
-    log("is_disktemp_user_readable: "+ret);
+    //~ log("is_disktemp_user_readable: "+ret);
     return ret
   }
 
+  detect_markup() {
+    if (this._applet_tooltip.set_markup === undefined) {
+      this.bold_values = false;
+      this.bold_italics_main_sensors = false;
+      this.has_set_markup = false;
+    } else {
+      this.has_set_markup = true;
+    }
+  }
+
   reap_sensors() {
-    if (this.checkDepInterval) {
+    if (this.checkDepInterval != null) {
       clearTimeout(this.checkDepInterval);
-      this.checkDepInterval = undefined
+      this.checkDepInterval = null;
     }
 
-    if (!this.isLooping) return;
+    if (!this.isLooping) return false;
 
     // this.reaper.set_fahrenheit(this.use_fahrenheit); // Useless because toooo buggy! Let this applet do the job.
 
-    this.reaper.reap_sensors(
-      this.strictly_positive_temp ? 1 : 0,
-      this.strictly_positive_fan ? 1 : 0,
-      this.strictly_positive_volt ? 1 : 0
-    );
+    if (!this.suspended) {
+      this.reaper.reap_sensors(
+        this.strictly_positive_temp ? 1 : 0,
+        this.strictly_positive_fan ? 1 : 0,
+        this.strictly_positive_volt ? 1 : 0
+      );
+      this.reaper.reap_nvidia_smi();
+    } else {
+      this.set_applet_label(_("Suspended"));
+    }
 
-    this.loopId = Mainloop.timeout_add(this.interval * 1000, () => this.reap_sensors());
-    return false
+    this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
+    return this.isLooping
+  }
+
+  set_applet_label(label) {
+    var labels = label.split(this.separator);
+    this.actor.destroy_all_children();
+    for (let i=0; i<labels.length; i++) {
+      var high = false;
+      var crit = false;
+      let layoutBin = new St.Bin();
+      let sepBin = null;
+      let c = labels[i];
+      let l_style = null;
+      let color = null;
+      if (c.includes("#")) {
+        color = c.split("#")[1];
+        while (c.includes("#"))
+          c = c.slice(0, -1);
+        l_style = "color: #" + color + ";";
+      }
+      if (c.endsWith("$")) { // critical value
+        c = c.slice(0, -1);
+        l_style = "color: " + this.crit_color + ";";
+      } else if (c.endsWith("£")) { // high value
+        c = c.slice(0, -1);
+        l_style = "color: " + this.high_color + ";";
+      } else if (this.char_color_customized) {
+        l_style = "color: " + this.char_color + ";";
+      }
+      
+      //~ let l = new St.Label({text: (i===0 || this.separator == "NO_SEP") ? c : this.separator + c});
+      let l = new St.Label({text: c});
+      
+      let sep_l = null;
+      if (i !== 0 && this.separator !== "NO_SEP") {
+        sep_l = new St.Label({text: this.separator});
+      }
+      
+      if (l_style)
+        l.set_style(l_style);
+      
+      if (sep_l) {
+        sep_l.set_style(`color: ${this.separator_color}; `);
+        sepBin = new St.Bin();
+        sepBin.set_child(sep_l);
+      }
+      layoutBin.set_child(l);
+      if (sep_l) {
+        this.actor.add(sepBin, { y_align: St.Align.MIDDLE,
+                                  y_fill: false,
+                                });
+      }
+      this.actor.add(layoutBin, { y_align: St.Align.MIDDLE,
+                                  y_fill: false,
+                                });
+    }
+  }
+
+  get separator() {
+    let vertical = (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
+    if (vertical) {
+      switch (this.separator_type) {
+        case "bar":
+          return "───\n";
+        case "blank":
+          return "\r\n";
+        default:
+          return "NO_SEP";
+      }
+    } else {
+      switch (this.separator_type) {
+        case "bar":
+          return "│";
+        case "blank":
+          return " ";
+        default:
+          return "NO_SEP";
+      }
+    }
   }
 
   /**
@@ -275,6 +687,7 @@ class SensorsApplet extends Applet.TextApplet {
     var _known_keys = [];
 
     for (let k of this.sensors_list[type].get_value()) {
+      //~ let _sensor = k["sensor"].trim();
       let _sensor = k["sensor"];
 
       _known_keys.push(_sensor);
@@ -282,7 +695,8 @@ class SensorsApplet extends Applet.TextApplet {
       if (k["shown_name"].length > 0) {
         //if (this.custom_names[_sensor]) log("custom_names: \"" + this.custom_names[_sensor] + "\"", true);
 
-        if (this.custom_names[_sensor] && (_sensor.toString() === k["shown_name"].toString())) {
+        //~ if (this.custom_names[_sensor] && (_sensor.toString() === k["shown_name"].toString())) {
+        if (this.custom_names[_sensor] && (_sensor === k["shown_name"])) {
           delete this.custom_names[_sensor];
           k["shown_name"] = ""
         } else {
@@ -300,7 +714,9 @@ class SensorsApplet extends Applet.TextApplet {
     this.number_of_sensors[type].set_value(_sensors.length);
 
     for (let sensor of _sensors) {
-      name = sensor.toString().trim();
+      //~ name = sensor.toString().trim();
+      //~ name = sensor.trim();
+      name = sensor;
       toPush = {};
       index = _known_keys.indexOf(name);
       if (type === "temps") this.minimumIntegerDigitsTemp = 2;
@@ -333,15 +749,18 @@ class SensorsApplet extends Applet.TextApplet {
         ret.push(toPush);
     }
 
-    if (modified) {
-      this.sensors_list[type].set_value(ret);
-      this.updateUI();
-    }
-    Util.unref(ret);
-    _known_keys = null;
-    Util.unref(toPush);
-    name = null;
-    modified = null;
+    let _to = setTimeout( () => {
+      clearTimeout(_to);
+      if (modified) {
+        this.sensors_list[type].set_value(ret);
+        this.updateUI();
+      }
+      ret = null;
+      _known_keys = null;
+      toPush = null;
+      name = null;
+      modified = null;
+    }, 2100);
   }
 
   populate_temp_sensors_in_settings(force = true) {
@@ -350,30 +769,68 @@ class SensorsApplet extends Applet.TextApplet {
   }
 
   read_disk_temps() {
-    //~ var temp_disks = this.temp_disks;
+    if (!this.show_temp || this.temp_disks.length === 0) return;
+    const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
+    const _disks_temp_file_path = `${SENSORS_DIR}/disks.txt`;
+    const _disks_temp_file = Gio.file_new_for_path(_disks_temp_file_path);
+    var lines = [];
+    var temps = {};
+    if (_disks_temp_file.query_exists(null)) {
+      let [success, contents] = GLib.file_get_contents(_disks_temp_file_path);
+      if (success) {
+        if (typeof contents === "object")
+          lines = to_string(contents).split("\n");
+        else
+          lines = (""+contents).split("\n");
+
+        for (let line of lines) {
+          if (line.length === 0) continue;
+          let [name, temp] = line.trim().split(" ");
+          if (name.length > 0)
+            temps[name] = 1.0 * parseInt(temp);
+        }
+      }
+
+      for (let disk of this.temp_disks) {
+        if (!disk["show_in_tooltip"] && !disk["show_in_panel"]) continue;
+
+        let _disk_name = disk["disk"].trim();
+        var _temp = temps[_disk_name];
+        if (!isNaN(_temp)) {
+          if (disk["user_formula"] && disk["user_formula"].length > 0) {
+            let _user_formula = disk["user_formula"].replace(/\$/g, _temp);
+            _temp = 1.0 * eval(_user_formula)
+          }
+        }
+        if (typeof _temp === "number") {
+          disk["value"] = _temp;
+          this._temp[_disk_name] = _temp;
+        }
+      }
+      GLib.free(contents);
+    } else {
+      this.read_disk_temps_slow();
+    }
+  }
+
+  read_disk_temps_slow() {
     if (this.show_temp && this.temp_disks.length > 0) {
       for (let disk of this.temp_disks) {
         if (!disk["show_in_tooltip"] && !disk["show_in_panel"]) continue;
 
         let _disk_name = disk["disk"].trim();
-        //~ log(_disk_name, true);
-        let command = "bash -c '"+SCRIPTS_DIR+"/get_disk_temp.sh "+_disk_name+"'";
+        let command = "/usr/bin/env bash -c '"+SCRIPTS_DIR+"/get_disk_temp.sh "+_disk_name+"'";
 
         if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
         let _temp;
-        //~ if (disk["value"])
-          //~ _temp = disk["value"];
-        Util.spawnCommandLineAsyncIO(command, Lang.bind (this, function(stdout, stderr, exitCode) {
+        let subProcess = spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
           if (exitCode === 0) {
-            //~ this._temp[_disk_name] = stdout;
-
             if (typeof stdout === "object")
               _temp = to_string(stdout);
             else
               _temp = ""+stdout;
 
             _temp = 1.0*parseInt(_temp);
-            //~ this._temp[_disk_name] = _temp;
 
             if (!isNaN(_temp)) {
               if (disk["user_formula"] && disk["user_formula"].length > 0) {
@@ -387,7 +844,8 @@ class SensorsApplet extends Applet.TextApplet {
               this._temp[_disk_name] = _temp;
             }
           }
-        }));
+          subProcess.send_signal(9);
+        });
       }
     }
   }
@@ -395,9 +853,10 @@ class SensorsApplet extends Applet.TextApplet {
   populate_temp_disks_in_settings() {
     let command = SCRIPTS_DIR+"/get_disk_list.sh";
     var temp_disks = this.temp_disks;
-    Util.spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
+    let subProcess = spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
       if (exitCode === 0) {
-        let out = stdout.trim();
+        //~ let out = stdout.trim();
+        let out = stdout;
         let disks = out.split(" ");
         for (let d of disks) {
           var found = false;
@@ -408,8 +867,9 @@ class SensorsApplet extends Applet.TextApplet {
             temp_disks.push({"disk": d, "shown_name": d});
         }
         this.temp_disks = temp_disks
-      }
-    }))
+      };
+      subProcess.send_signal(9);
+    });
   }
 
   populate_fan_sensors_in_settings(force = true) {
@@ -431,6 +891,10 @@ class SensorsApplet extends Applet.TextApplet {
    * updateTooltip: updates the tooltil of this applet.
    */
   updateTooltip() {
+    if (!this.show_tooltip) {
+      this.set_applet_tooltip("");
+      return
+    }
     if (!this.isUpdatingUI) return;
 
     var _tooltip = "";
@@ -447,7 +911,8 @@ class SensorsApplet extends Applet.TextApplet {
         for (let t of this.temp_sensors) {
           if (this.data["temps"][t["sensor"]] !== undefined) {
             if (t["show_in_tooltip"]) {
-              if (t["shown_name"] && t["sensor"].toString() === t["shown_name"].toString()) {
+              //~ if (t["shown_name"] && t["sensor"].toString() === t["shown_name"].toString()) {
+              if (t["shown_name"] && t["sensor"] === t["shown_name"]) {
                 if (this.custom_names[t["sensor"]]) delete this.custom_names[t["sensor"]];
                 t["shown_name"] = ""
               }
@@ -459,10 +924,12 @@ class SensorsApplet extends Applet.TextApplet {
               _tooltip += (this.bold_values) ?
                 "  <b>" + str_value + "</b>" :
                 "  " + str_value;
-              let _max_temp = this._get_max_temp(this.data["temps"][t["sensor"]]);
-              _tooltip += "  "+ _("high:") + " " + ((_max_temp === 0) ? _("n/a") : this._formatted_temp(_max_temp));
-              let _crit_temp = this._get_crit_temp(this.data["temps"][t["sensor"]]);
-              _tooltip += "  "+ _("crit:") + " " + ((_crit_temp === 0) ? _("n/a") : this._formatted_temp(_crit_temp));
+              let _max_temp = (t["high_by_user"] && t["high_by_user"].length > 0 && !isNaN(t["high_by_user"])) ?
+                1.0*t["high_by_user"] : 1.0*this._get_max_temp(this.data["temps"][t["sensor"]]);
+              _tooltip += "  "+ _("high:") + " " + ((_max_temp < 0) ? _("n/a") : this._formatted_temp(_max_temp));
+              let _crit_temp = (t["crit_by_user"] && t["crit_by_user"].length > 0 && !isNaN(t["crit_by_user"])) ?
+                1.0*t["crit_by_user"] : 1.0*this._get_crit_temp(this.data["temps"][t["sensor"]]);
+              _tooltip += "  "+ _("crit:") + " " + ((_crit_temp < 0) ? _("n/a") : this._formatted_temp(_crit_temp));
               _tooltip += "\n";
               _crit_temp = null;
               _max_temp = null;
@@ -475,50 +942,48 @@ class SensorsApplet extends Applet.TextApplet {
 
       if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks.length > 0) {
         for (let disk of this.temp_disks) {
-          let _disk_name = disk["disk"].trim();
+          //~ let _disk_name = disk["disk"].trim();
+          let _disk_name = disk["disk"];
           if (disk["show_in_tooltip"]) {
-            //~ log(_disk_name, true);
-
             if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
             let _temp;
             if (disk["value"])
               _temp = disk["value"];
 
-              if (!isNaN(_temp)) {
+            if (!isNaN(_temp)) {
 
-                let _temp_max = 1*disk["high"];
-                let _temp_crit = 1*disk["crit"];
+              let _temp_max = 1*disk["high"];
+              let _temp_crit = 1*disk["crit"];
 
-                let _shown_name = "";
-                if (this.show_temp_name) _shown_name = disk["shown_name"]+" ";
-                else _shown_name = disk["disk"]+" ";
+              let _shown_name = "";
+              if (this.show_temp_name) _shown_name = disk["shown_name"]+" ";
+              else _shown_name = disk["disk"]+" ";
 
-                _tooltip +=  (disk["show_in_panel"] && this.bold_italics_main_sensors) ?
-                    " <i><b>" + _shown_name + "</b></i>\n" :
-                    " " + _shown_name + "\n";
+              _tooltip +=  (disk["show_in_panel"] && this.bold_italics_main_sensors) ?
+                  " <i><b>" + _shown_name + "</b></i>\n" :
+                  " " + _shown_name + "\n";
 
-                let str_value = this._formatted_temp(_temp).padStart(10, " ");
-                _tooltip += (this.bold_values) ?
-                  "  <b>" + str_value + "</b>" :
-                  "  " + str_value;
+              let str_value = this._formatted_temp(_temp).padStart(10, " ");
+              _tooltip += (this.bold_values) ?
+                "  <b>" + str_value + "</b>" :
+                "  " + str_value;
 
-                _tooltip += "  "+ _("high:") + " " + ((_temp_max === 0) ? _("n/a") : this._formatted_temp(_temp_max));
+              _tooltip += "  "+ _("high:") + " " + ((_temp_max === 0) ? _("n/a") : this._formatted_temp(_temp_max));
 
-                _tooltip += "  "+ _("crit:") + " " + ((_temp_crit === 0) ? _("n/a") : this._formatted_temp(_temp_crit));
-                _tooltip += "\n";
-                _temp_crit = null;
-                _temp_max = null;
-                str_value = null;
-                _shown_name = null
-              }
-            //~ }));
+              _tooltip += "  "+ _("crit:") + " " + ((_temp_crit === 0) ? _("n/a") : this._formatted_temp(_temp_crit));
+              _tooltip += "\n";
+              _temp_crit = null;
+              _temp_max = null;
+              str_value = null;
+              _shown_name = null
+            }
           }
         }
         this.read_disk_temps()
       }
 
       if (_tooltip.length !== 0) {
-        _tooltip = "🌡" + "\n" + _tooltip;
+        _tooltip = C_TEMP + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
     }
@@ -526,7 +991,8 @@ class SensorsApplet extends Applet.TextApplet {
     // Fans:
     _tooltip = "";
     if (this.show_fan && this.fan_sensors.length !== 0
-        && this.data !== undefined && Object.keys(this.data["fans"]).length != 0) {
+        && this.data !== undefined && Object.keys(this.data["fans"]).length != 0
+        && !this.nothingToShow(this.fan_sensors, true)) {
       if (this.fan_sensors.length > 0) {
         for (let f of this.fan_sensors) {
           if (this.data["fans"][f["sensor"]] !== undefined) {
@@ -554,8 +1020,8 @@ class SensorsApplet extends Applet.TextApplet {
           }
         }
       }
-      if (_tooltip !== "") {
-        _tooltip = "🤂" + "\n" + _tooltip;
+      if (_tooltip.length > 0) {
+        _tooltip = C_FAN + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
     }
@@ -563,7 +1029,8 @@ class SensorsApplet extends Applet.TextApplet {
     // Voltages:
     _tooltip = "";
     if (this.show_volt && this.volt_sensors.length !== 0
-        && this.data !== undefined && Object.keys(this.data["voltages"]).length != 0) {
+        && this.data !== undefined && Object.keys(this.data["voltages"]).length != 0
+        && !this.nothingToShow(this.volt_sensors, true)) {
       if (this.volt_sensors.length > 0) {
         for (let v of this.volt_sensors) {
           if (this.data["voltages"][v["sensor"]] !== undefined) {
@@ -585,8 +1052,8 @@ class SensorsApplet extends Applet.TextApplet {
               let _max_defined_by_user = v["max_by_user"];
               let _min_defined_by_user = v["min_by_user"];
 
-              let _voltage_max = (_max_defined_by_user && _max_defined_by_user.length > 0) ? 1.0*_max_defined_by_user : 1.0*this._get_max_voltage(this.data["voltages"][v["sensor"]]);
-              let _voltage_min = (_min_defined_by_user && _min_defined_by_user.length > 0) ? 1.0*_min_defined_by_user : 1.0*this._get_min_voltage(this.data["voltages"][v["sensor"]]);
+              let _voltage_max = (_max_defined_by_user && _max_defined_by_user.length > 0 && !isNaN(_max_defined_by_user)) ? 1.0*_max_defined_by_user : 1.0*this._get_max_voltage(this.data["voltages"][v["sensor"]]);
+              let _voltage_min = (_min_defined_by_user && _min_defined_by_user.length > 0 && !isNaN(_min_defined_by_user)) ? 1.0*_min_defined_by_user : 1.0*this._get_min_voltage(this.data["voltages"][v["sensor"]]);
 
               _tooltip += "  "+ _("min:") + " " + this._formatted_voltage(_voltage_min);
               _tooltip += " ";
@@ -598,8 +1065,8 @@ class SensorsApplet extends Applet.TextApplet {
           }
         }
       }
-      if (_tooltip !== "") {
-        _tooltip = "🗲" + "\n" + _tooltip;
+      if (_tooltip.length > 0) {
+        _tooltip = C_VOLT + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
     }
@@ -608,7 +1075,8 @@ class SensorsApplet extends Applet.TextApplet {
     //Intrusion:
     _tooltip = "";
     if (this.show_intrusion && this.intrusion_sensors.length !== 0
-        && this.data !== undefined && Object.keys(this.data["intrusions"]).length != 0) {
+        && this.data !== undefined && Object.keys(this.data["intrusions"]).length != 0
+        && !this.nothingToShow(this.intrusion_sensors, true)) {
       if (this.intrusion_sensors.length > 0) {
         for (let i of this.intrusion_sensors) {
           if (this.data["intrusions"][i["sensor"]] !== undefined) {
@@ -630,8 +1098,8 @@ class SensorsApplet extends Applet.TextApplet {
           }
         }
       }
-      if (_tooltip !== "") {
-        _tooltip = "⮿" + "\n" + _tooltip;
+      if (_tooltip.length > 0) {
+        _tooltip = C_INTRU + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
     }
@@ -645,10 +1113,128 @@ class SensorsApplet extends Applet.TextApplet {
     if (this._applet_tooltip.set_markup === undefined)
       this.set_applet_tooltip(_tooltip);
     else
-      this._applet_tooltip.set_markup(_tooltip);
+      this.set_applet_tooltip(_tooltip, true);
 
     _tooltip = null;
     _tooltips = null
+  }
+
+  nothingToShow(data, isForTooltip=false) {
+      if (data.length === 0) return true;
+      var nothing = true;
+      for (let d of data) {
+          if (!isForTooltip && d["show_in_panel"] === true) {
+              nothing = false;
+              break
+          }
+          if (isForTooltip && d["show_in_tooltip"] === true) {
+              nothing = false;
+              break
+          }
+      }
+      return nothing
+  }
+  
+  updateUI_sensors_temp(nbr_already_shown, _shown_name) {
+    let vertical = (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
+    if (this.show_temp //&& this.temp_sensors.length !== 0
+        && this.data !== undefined
+        && Object.keys(this.data["temps"]).length != 0
+        && !this.nothingToShow(this.temp_sensors)) {
+      for (let t of this.temp_sensors) {
+        if (this.data["temps"][t["sensor"]] !== undefined) {
+          if (t["show_in_panel"]) {
+            let _temp = 1.0*this.data["temps"][t["sensor"]]["input"];
+            _shown_name = "";
+            if (this.show_temp_name) {
+              if (vertical)
+                _shown_name = t["shown_name"]+"\n";
+              else
+                _shown_name = t["shown_name"]+" ";
+            }
+
+            if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push(C_TEMP);
+
+            if (t["user_formula"] && t["user_formula"].length > 0) {
+              let _formula_result = t["user_formula"].replace(/\$/g, _temp);
+              _temp = 1.0*eval(_formula_result)
+            }
+
+            let _temp_max = (t["high_by_user"] && t["high_by_user"].length > 0 && !isNaN(t["high_by_user"])) ?
+              1.0*t["high_by_user"] : 1.0*this._get_max_temp(this.data["temps"][t["sensor"]]);
+            let _temp_crit = (t["crit_by_user"] && t["crit_by_user"].length > 0 && !isNaN(t["crit_by_user"])) ?
+              1.0*t["crit_by_user"] : 1.0*this._get_crit_temp(this.data["temps"][t["sensor"]]);
+
+            if (isNaN(_temp_crit)) _temp_crit = null;
+            if (isNaN(_temp_max)) _temp_max = null;
+
+            if (this.journalize_temp)
+              this.loggerTemp.log(_temp, _temp_max, _temp_crit, t["sensor"], (this.use_fahrenheit) ? "°F" : "°C");
+
+            if (!isNaN(_temp_crit) && _temp_crit > 0 && _temp >= _temp_crit) {
+              this.label_parts.push(_shown_name + this._formatted_temp(_temp, vertical) + "$");
+            } else if (!isNaN(_temp_max) && _temp_max > 0 && _temp >= _temp_max) {
+              this.label_parts.push(_shown_name + this._formatted_temp(_temp, vertical) + "£");
+            } else {
+              if (t["color"] && t["color"].length > 3 && t["color"].startsWith("#")) {
+                this.label_parts.push(_shown_name + this._formatted_temp(_temp, vertical) + t["color"]);
+              } else {
+                this.label_parts.push(_shown_name + this._formatted_temp(_temp, vertical));
+              }
+            }
+
+            nbr_already_shown += 1;
+          }
+        }
+      }
+    }
+  }
+  
+  updateUI_disks_temp(nbr_already_shown, _shown_name) {
+    let vertical = (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
+    if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks && !this.nothingToShow(this.temp_disks)) {
+      for (let disk of this.temp_disks) {
+        //~ let _disk_name = disk["disk"].trim();
+        let _disk_name = disk["disk"];
+        if (disk["show_in_panel"] && _disk_name.length > 0) {
+          if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
+          if (disk["value"]) this._temp[_disk_name] = disk["value"];
+          let _temp;
+
+          _temp = (disk["value"]) ? disk["value"] : '??';
+          if (isNaN(_temp)) continue;
+          let _temp_max = disk["high"];
+          let _temp_crit = disk["crit"];
+
+          if (this.journalize_temp)
+            this.loggerTemp.log(_temp, _temp_max, _temp_crit, _disk_name, (this.use_fahrenheit) ? "°F" : "°C");
+
+          _shown_name = "";
+          if (this.show_temp_name) {
+            if (vertical)
+              _shown_name = (disk["shown_name"].length > 0) ? disk["shown_name"]+"\n" : _disk_name+"\n";
+            else
+              _shown_name = (disk["shown_name"].length > 0) ? disk["shown_name"]+" " : _disk_name+" ";
+          }
+          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push(C_TEMP);
+          let _label_part = _shown_name+this._formatted_temp(_temp, vertical);
+
+          if (_temp >= _temp_crit) {
+            this.label_parts.push(""+_label_part+"$");
+          } else if (_temp >= _temp_max) {
+            this.label_parts.push(""+_label_part+"£");
+          } else {
+            if (disk["color"] && disk["color"].length > 3 && disk["color"].startsWith("#")) {
+              this.label_parts.push(""+_label_part + disk["color"]);
+            } else {
+              this.label_parts.push(""+_label_part);
+            }
+          }
+          nbr_already_shown += 1;
+        }
+      }
+      this.read_disk_temps()
+    }
   }
 
   /**
@@ -659,96 +1245,80 @@ class SensorsApplet extends Applet.TextApplet {
 
     this.isUpdatingUI = true;
 
-    //~ this.check_disktemp_user_readable();
-
     var _appletLabel = "";
+    let _monospace = (this.keep_size) ? "sensors-monospace" : "applet-box";
     let _border_type = (this.remove_border) ? "-noborder" : "";
-    var _actor_style = "sensors-label%s sensors-size%s".format(_border_type, this.char_size);
+    var _actor_style = "%s sensors-label%s sensors-size%s vertalign-%s".format(_monospace, _border_type, this.char_size, this.vertical_align);
 
-    let vertical = (this._orientation == St.Side.LEFT || this._orientation == St.Side.RIGHT);
-    let sep = (vertical) ? "\n" : this.separator;
+    let vertical = (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
+    let sep = this.separator;
     let _shown_name;
     this.label_parts = [];
 
     this.data = this.reaper.get_sensors_data();
 
+    // Customs:
+    //~ if (this.custom_sensors.length !== 0) {
+      //~ for (let cs of this.custom_sensors) {
+        //~ let cs_sensor = "CUSTOM: "+cs.shown_name;
+        //~ switch (cs.sensor_type) {
+          //~ case "temperature":
+            //~ if (!this.data["temps"][cs_sensor]) continue;
+            //~ let dict = {};
+            //~ dict["sensor"] = cs_sensor;
+            //~ dict["shown_name"] = cs.shown_name;
+            //~ dict["show_in_panel"] = cs.show_in_panel;
+            //~ dict["show_in_tooltip"] = cs.show_in_tooltip;
+            //~ dict["high_by_user"] = cs.high_by_user;
+            //~ dict["crit_by_user"] = cs.crit_by_user;
+            //~ dict["user_formula"] = cs.user_formula;
+            //~ dict["input"] = this.data["temps"][cs_sensor]["input"];
+            //~ this.temp_sensors[cs_sensor] = dict;
+            //~ break;
+          //~ case "fan":
+
+            //~ break;
+          //~ case "voltage":
+
+            //~ break;
+          //~ case "intrusion":
+
+            //~ break;
+        //~ }
+      //~ }
+    //~ }
+
     // Temperatures:
     var nbr_already_shown = 0;
-    if (this.show_temp && this.temp_sensors.length !== 0
-        && this.data !== undefined && Object.keys(this.data["temps"]).length != 0) {
-      for (let t of this.temp_sensors) {
-        if (this.data["temps"][t["sensor"]] !== undefined) {
-          if (t["show_in_panel"]) {
-            let _temp = 1.0*this.data["temps"][t["sensor"]]["input"];
-            _shown_name = "";
-            if (this.show_temp_name && !vertical) _shown_name = t["shown_name"]+" ";
-
-            if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("🌡");
-
-            if (t["user_formula"] && t["user_formula"].length > 0) {
-              let _formula_result = t["user_formula"].replace(/\$/g, _temp);
-              _temp = 1.0*eval(_formula_result)
-            }
-
-            this.label_parts.push(_shown_name+this._formatted_temp(_temp, vertical));
-
-            let _temp_max = (t["high_by_user"] && t["high_by_user"].length > 0) ?
-              1.0*t["high_by_user"] : 1.0*this._get_max_temp(this.data["temps"][t["sensor"]]);
-            let _temp_crit = (t["crit_by_user"] && t["crit_by_user"].length > 0) ?
-              1.0*t["crit_by_user"] : 1.0*this._get_crit_temp(this.data["temps"][t["sensor"]]);
-
-            if (!isNaN(_temp_crit) && _temp_crit > 0 && _temp >= _temp_crit)
-              _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
-            else if (!isNaN(_temp_max) && _temp_max > 0 && _temp >= _temp_max)
-              _actor_style = "sensors-high%s sensors-size%s".format(_border_type, this.char_size);
-
-            nbr_already_shown += 1;
-          }
-        }
-      }
+    if (this.show_disks_first) {
+      this.updateUI_disks_temp(nbr_already_shown, _shown_name);
+      this.updateUI_sensors_temp(nbr_already_shown, _shown_name);
+    } else {
+      this.updateUI_sensors_temp(nbr_already_shown, _shown_name);
+      this.updateUI_disks_temp(nbr_already_shown, _shown_name);
     }
-    if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks && this.temp_disks.length > 0) {
-      for (let disk of this.temp_disks) {
-        let _disk_name = disk["disk"].trim();
-        if (disk["show_in_panel"] && _disk_name.length > 0) {
-          if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
-          if (disk["value"]) this._temp[_disk_name] = disk["value"];
-          let _temp;
-
-          _temp = (disk["value"]) ? disk["value"] : '??';
-          if (isNaN(_temp)) continue;
-          let _temp_max = disk["high"];
-          let _temp_crit = disk["crit"];
-          if (_temp >= _temp_crit)
-            _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
-          else if (_temp >= _temp_max)
-            _actor_style = "sensors-high%s sensors-size%s".format(_border_type, this.char_size);
-
-          _shown_name = "";
-          if (this.show_temp_name && !vertical)
-            _shown_name = (disk["shown_name"].length > 0) ? disk["shown_name"]+" " : _disk_name+" ";
-
-          let _label_part = _shown_name+this._formatted_temp(_temp, vertical);
-
-          this.label_parts.push(""+_label_part);
-          nbr_already_shown += 1;
-        }
-      }
-      this.read_disk_temps()
-    }
+    
+    
 
     // Fans:
-    nbr_already_shown = 0;
-    if (this.show_fan && this.fan_sensors.length !== 0
+    if (this.show_fan && !this.nothingToShow(this.fan_sensors)
         && this.data !== undefined && Object.keys(this.data["fans"]).length != 0) {
 
+      if (vertical && nbr_already_shown > 0)
+        this.label_parts.push("━");
+      nbr_already_shown = 0;
       // This pushed "" is useless when there is no sensor to display:
       if (this.label_parts.length > 0) this.label_parts.push("");
 
       for (let f of this.fan_sensors) {
         if (f["show_in_panel"]) {
           _shown_name = "";
-          if (this.show_fan_name && !vertical) _shown_name = f["shown_name"]+" ";
+          if (this.show_fan_name) {
+            if (vertical)
+              _shown_name = f["shown_name"]+"\n";
+            else
+              _shown_name = f["shown_name"]+" ";
+          }
 
           let _fan = 1.0*this.data["fans"][f["sensor"]]["input"];
           if (f["user_formula"] && f["user_formula"].length > 0) {
@@ -756,35 +1326,50 @@ class SensorsApplet extends Applet.TextApplet {
             _fan = 1.0*eval(_formula_result)
           }
 
-          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("🤂");
-          this.label_parts.push(_shown_name+this._formatted_fan(_fan, vertical));
+          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push(C_FAN); //✇
 
-          let _fan_min = (f["min_by_user"] && f["min_by_user"].length > 0) ?
+          let _fan_min = (f["min_by_user"] && f["min_by_user"].length > 0 && !isNaN(f["min_by_user"])) ?
             1.0*f["min_by_user"] : 1.0*this._get_min_fan(this.data["fans"][f["sensor"]]);
 
-          if (_fan < _fan_min)
-            _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
+          if (_fan < _fan_min) {
+            this.label_parts.push(_shown_name+this._formatted_fan(_fan, vertical)+"$");
+          } else {
+            if (f["color"] && f["color"].length > 3 && f["color"].startsWith("#")) {
+              this.label_parts.push(_shown_name+this._formatted_fan(_fan, vertical) + f["color"]);
+            } else {
+              this.label_parts.push(_shown_name+this._formatted_fan(_fan, vertical));
+            }
+          }
+
+          if (this.journalize_fan)
+            this.loggerFan.log(_fan, _fan_min, f["sensor"]);
+
 
           nbr_already_shown += 1;
         }
       }
-
-      //~ if (nbr_already_shown === 0) this.label_parts.pop(); // Deletes the useless "" pushed in this.label_parts.
     }
 
     // Voltages:
-    nbr_already_shown = 0;
-    if (this.show_volt && this.volt_sensors.length !== 0
+    if (this.show_volt && !this.nothingToShow(this.volt_sensors)
         && this.data !== undefined && Object.keys(this.data["voltages"]).length != 0) {
 
-      // This pushed "" is useless when there is no sensor to display:
+      if (vertical && nbr_already_shown > 0)
+        this.label_parts.push("━");
+      nbr_already_shown = 0;
+      // This pushed "" is useful when there is no sensor to display:
       if (this.label_parts.length > 0) this.label_parts.push("");
 
       for (let v of this.volt_sensors) {
         if (v["show_in_panel"]) {
           let _voltage = 1.0*this.data["voltages"][v["sensor"]]["input"];
           _shown_name = "";
-          if (this.show_volt_name && !vertical) _shown_name = v["shown_name"]+" ";
+          if (this.show_volt_name) {
+            if (vertical)
+            _shown_name = v["shown_name"]+"\n";
+            else
+              _shown_name = v["shown_name"]+" ";
+          }
 
           if (v["user_formula"] && v["user_formula"].length > 0) {
             let _formula_result = v["user_formula"].replace(/\$/g, _voltage);
@@ -792,29 +1377,39 @@ class SensorsApplet extends Applet.TextApplet {
           }
           let str_value = this._formatted_voltage(_voltage).padStart(10, " ");
 
-          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("🗲");
-          this.label_parts.push(_shown_name+this._formatted_voltage(_voltage, vertical));
+          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push(C_VOLT);
 
           let _max_defined_by_user = v["max_by_user"];
           let _min_defined_by_user = v["min_by_user"];
 
-          let _voltage_max = (_max_defined_by_user && _max_defined_by_user.length > 0) ? 1.0*_max_defined_by_user : 1.0*this._get_max_voltage(this.data["voltages"][v["sensor"]]);
-          let _voltage_min = (_min_defined_by_user && _min_defined_by_user.length > 0) ? 1.0*_min_defined_by_user : 1.0*this._get_min_voltage(this.data["voltages"][v["sensor"]]);
+          let _voltage_max = (_max_defined_by_user && _max_defined_by_user.length > 0 && !isNaN(_max_defined_by_user)) ? 1.0*_max_defined_by_user : 1.0*this._get_max_voltage(this.data["voltages"][v["sensor"]]);
+          let _voltage_min = (_min_defined_by_user && _min_defined_by_user.length > 0 && !isNaN(_min_defined_by_user)) ? 1.0*_min_defined_by_user : 1.0*this._get_min_voltage(this.data["voltages"][v["sensor"]]);
 
-          if (_voltage >= _voltage_max || _voltage < _voltage_min)
-            _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
+          if (_voltage >= _voltage_max || _voltage < _voltage_min) {
+            this.label_parts.push(_shown_name+this._formatted_voltage(_voltage, vertical)+"$");
+          } else {
+            if (v["color"] && v["color"].length > 3 && v["color"].startsWith("#")) {
+              this.label_parts.push(_shown_name+this._formatted_voltage(_voltage, vertical) + v["color"]);
+            } else {
+              this.label_parts.push(_shown_name+this._formatted_voltage(_voltage, vertical));
+            }
+          }
+
+          if (this.journalize_volt)
+            this.loggerVoltage.log(_voltage, _voltage_min, _voltage_max, v["sensor"]);
 
           nbr_already_shown += 1;
         }
       }
-
-      //~ if (nbr_already_shown === 0) this.label_parts.pop(); // Deletes the useless "" pushed in this.label_parts.
     }
 
     // Intrusion:
-    nbr_already_shown = 0;
-    if (this.show_intrusion && !this.strictly_positive_intrusion && this.intrusion_sensors.length !== 0
+    if (this.show_intrusion && !this.strictly_positive_intrusion && !this.nothingToShow(this.intrusion_sensors)
         && this.data !== undefined && Object.keys(this.data["intrusions"]).length != 0) {
+
+      if (vertical && nbr_already_shown > 0)
+        this.label_parts.push("━");
+      nbr_already_shown = 0;
 
       // This pushed "" is useless when there is no sensor to display:
       if (this.label_parts.length > 0) this.label_parts.push("");
@@ -823,21 +1418,28 @@ class SensorsApplet extends Applet.TextApplet {
         if (i["show_in_panel"]) {
           let _intrusion = this.data["intrusions"][i["sensor"]]["alarm"];
           _shown_name = "";
-          if (this.show_intrusion_name && !vertical) _shown_name = i["shown_name"]+" ";
+          if (this.show_intrusion_name) {
+            if (vertical)
+              _shown_name = i["shown_name"]+"\n";
+            else
+              _shown_name = i["shown_name"]+" ";
+          }
 
-          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("⮿");
+          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push(C_INTRU);
           this.label_parts.push(_shown_name+this._formatted_intrusion(_intrusion, vertical));
 
           let _intrusion_alarm = this._get_alarm_intrusion(this.data["intrusions"][i["sensor"]]);
 
           if (_intrusion_alarm)
-            _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
+            _actor_style = "%s sensors-critical%s sensors-size%s vertalign-%s".format(_monospace, _border_type, this.char_size, this.vertical_align);
+
+          if (this.journalize_intrusion)
+            this.loggerIntrusion.log(_intrusion_alarm, i["sensor"]);
+
 
           nbr_already_shown += 1;
         }
       }
-
-      //~ if (nbr_already_shown === 0) this.label_parts.pop(); // Deletes the useless "" pushed in this.label_parts.
     }
 
     if (this.label_parts.length === 0) {
@@ -845,16 +1447,26 @@ class SensorsApplet extends Applet.TextApplet {
     } else {
       _appletLabel = this.label_parts.join(sep);
       if (!this.keep_size) {
-        while (_appletLabel.includes("  ")) {
-          _appletLabel = _appletLabel.replace(/  /g, " ");
-        }
+        //~ while (_appletLabel.includes("  ")) {
+          //~ _appletLabel = _appletLabel.replace(/  /g, " ");
+        _appletLabel = _appletLabel.replace(/\ +/g, " ");
+        //~ }
       }
 
-      while (_appletLabel.includes("\n\n")) {
-        _appletLabel = _appletLabel.replace(/\n\n/g, "\n");
-      }
-      let sep_twice = "" + this.separator + this.separator;
+      //~ while (_appletLabel.includes("\n\n")) {
+        //~ _appletLabel = _appletLabel.replace(/\n\n/g, "\n");
+      _appletLabel = _appletLabel.replace(/\n+/g, "\n");
+      //~ }
+      var sep_twice = "" + this.separator.trim() + " " + this.separator.trim();
       if (sep_twice.length > 1) {
+        //~ _appletLabel = _appletLabel.replace(/${sep_twice}/g, this.separator.trim());
+        while (_appletLabel.indexOf(sep_twice) > -1) {
+          _appletLabel = _appletLabel.replace(sep_twice, this.separator.trim());
+        }
+      }
+      sep_twice = "" + this.separator + this.separator;
+      if (sep_twice.length > 1) {
+        //~ _appletLabel = _appletLabel.replace(/${sep_twice}/g, this.separator);
         while (_appletLabel.includes(sep_twice)) {
           _appletLabel = _appletLabel.replace(sep_twice, this.separator);
         }
@@ -863,11 +1475,13 @@ class SensorsApplet extends Applet.TextApplet {
         _appletLabel = _appletLabel.slice(0, -1)
       }
     }
-
     this.set_applet_label(_appletLabel);
 
     this.actor.set_style_class_name(_actor_style);
-    this._applet_label.set_style_class_name("tcolor"+this.char_color);
+    if (this.horizontal_width > 0 && (this.orientation == St.Side.TOP || this.orientation == St.Side.BOTTOM))
+      this.actor.set_style(`width: ${this.horizontal_width}px;`);
+    else
+      this.actor.set_style(null);
 
     if (this.tooltip_must_be_updated)
       this.updateTooltip();
@@ -884,6 +1498,7 @@ class SensorsApplet extends Applet.TextApplet {
    * updateMenu: updates the menu of the applet.
    */
   updateMenu() {
+    if (this.menu.isOpen) this.menu.close();
     this.menu.removeAll();
 
     // Head
@@ -904,51 +1519,104 @@ class SensorsApplet extends Applet.TextApplet {
     _general_button.connect("activate",
       (event) => {
         this.kill_all_pids();
-        this.pids.push(Util.spawnCommandLine("/usr/bin/xlet-settings applet %s &".format(UUID)))
+        let _to = setTimeout( () => {
+            clearTimeout(_to);
+            if (this.menu.isOpen) this.menu.close();
+            //~ this.pids.push(spawnCommandLine("xlet-settings applet %s".format(UUID)));
+            this.configureApplet(0)
+          },
+          300
+        );
       }
     );
     this.menu.addMenuItem(_general_button);
 
     // Button Temperature:
-    let _temp_button = new PopupMenu.PopupMenuItem("  " + _("🌡 Temperature sensors"));
+    let _temp_button = new PopupMenu.PopupMenuItem("  " + _("%s Temperature sensors").format(C_TEMP));
     _temp_button.connect("activate",
       (event) => {
         this.kill_all_pids();
-        Util.spawnCommandLineAsync("%s applet %s -t 1 &".format(XS_PATH, UUID))
+        let _to = setTimeout( () => {
+            clearTimeout(_to);
+            if (this.menu.isOpen) this.menu.close();
+            //~ this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 1".format(UUID)));
+            this.configureApplet(1)
+          },
+          300
+        );
       }
     );
     this.menu.addMenuItem(_temp_button);
 
     // Button Fan:
-    let _fan_button = new PopupMenu.PopupMenuItem("  " + _("🤂 Fan sensors"));
+    let _fan_button = new PopupMenu.PopupMenuItem("  " + _("%s Fan sensors").format(C_FAN));
     _fan_button.connect("activate",
       (event) => {
         this.kill_all_pids();
-        this.pids.push(Util.spawnCommandLine("%s applet %s -t 2 &".format(XS_PATH, UUID)))
+        let _to = setTimeout( () => {
+            clearTimeout(_to);
+            if (this.menu.isOpen) this.menu.close();
+            //~ this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 2".format(UUID)));
+            this.configureApplet(2)
+          },
+          300
+        );
       }
     );
     this.menu.addMenuItem(_fan_button);
 
     // Button Voltage:
-    let _voltage_button = new PopupMenu.PopupMenuItem("  " + _("🗲 Voltage sensors"));
+    let _voltage_button = new PopupMenu.PopupMenuItem("  " + _("%s Voltage sensors").format(C_VOLT));
     _voltage_button.connect("activate",
       (event) => {
         this.kill_all_pids();
-        this.pids.push(Util.spawnCommandLine("%s applet %s -t 3 &".format(XS_PATH, UUID)))
+        let _to = setTimeout( () => {
+            clearTimeout(_to);
+            if (this.menu.isOpen) this.menu.close();
+            //~ this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 3".format(UUID)));
+            this.configureApplet(3)
+          },
+          300
+        );
       }
     );
     this.menu.addMenuItem(_voltage_button);
 
     // Button Intrusion:
-    let _intrusion_button = new PopupMenu.PopupMenuItem("  " + _("⮿ Intrusion sensors"));
+    let _intrusion_button = new PopupMenu.PopupMenuItem("  " + _("%s Intrusion sensors").format(C_INTRU));
     _intrusion_button.connect("activate",
       (event) => {
         this.kill_all_pids();
-        this.pids.push(Util.spawnCommandLine("%s applet %s -t 4 &".format(XS_PATH, UUID)))
+        let _to = setTimeout( () => {
+            clearTimeout(_to);
+            if (this.menu.isOpen) this.menu.close();
+            //~ this.pids.push(spawnCommandLineAsync("xlet-settings applet %s -t 4".format(UUID)));
+            this.configureApplet(4)
+          },
+          300
+        );
       }
     );
     this.menu.addMenuItem(_intrusion_button);
+
+    // Button Custom:
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+    
+    // Maximizing mode:
+    //~ const items = ["none", "horizontally", "vertically", "both"];
+    //~ const translated_items = [_("none"), _("horizontally"), _("vertically"), _("both")];
+    //~ let maximize_combobox = new PopupMenu.PopupComboBoxMenuItem({});
+    //~ for (let i=0;i<items.length;i++) {
+      //~ maximize_combobox._menu.addMenuItem(new PopupMenu.PopupMenuItem(translated_items[i]), i);
+      //~ if (this.window_maximizing === items[i]) maximize_combobox._menu.setActiveItem(i);
+    //~ }
+    //~ maximize_combobox.connect('active-item-changed', (value) => {
+      //~ global.log("Item chosen: " + value);
+    //~ });
+    //~ this.menu.addMenuItem(maximize_combobox);
+    //~ maximize_combobox._menu.open(),
+    
+    //~ this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
     // Button xsensors
     let _values_in_real_time_button = new PopupMenu.PopupIconMenuItem(_("Run xsensors"),
@@ -957,6 +1625,15 @@ class SensorsApplet extends Applet.TextApplet {
     );
     _values_in_real_time_button.connect("activate", this._on_xsensors_pressed);
     this.menu.addMenuItem(_values_in_real_time_button);
+    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+    // Button suspend
+    let suspend_switch = new PopupMenu.PopupSwitchMenuItem(_("Suspend Sensors"), this.suspended);
+    suspend_switch.connect("toggled", () => {
+      this.menu.toggle();
+      this.suspended = !this.suspended;
+    });
+    this.menu.addMenuItem(suspend_switch);
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
     if (RELOAD() || this.restart_in_menu) {
@@ -1147,12 +1824,15 @@ class SensorsApplet extends Applet.TextApplet {
    */
   on_settings_changed() {
     this.isLooping = false;
-    if (this.loopId != undefined && this.loopId > 0) {
-        Mainloop.source_remove(this.loopId);
-        this.loopId = 0;
+    if (this.loopId != null) {
+        source_remove(this.loopId);
+        this.loopId = null;
     }
+    this.detect_markup();
+    spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval + " &");
+    this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
     this.isLooping = true;
-    this.reap_sensors();
+    this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
   }
 
   on_applet_clicked() {
@@ -1168,14 +1848,9 @@ class SensorsApplet extends Applet.TextApplet {
   on_applet_reloaded() {
     this.isLooping = false;
 
-    if ((this.loopId != undefined) && (this.loopId > 0)) {
-      Mainloop.source_remove(this.loopId);
-      this.loopId = 0;
-    }
-
-    if (this.checkDepInterval && (this.checkDepInterval != 0)) {
+    if (this.checkDepInterval != null) {
       clearInterval(this.checkDepInterval);
-      this.checkDepInterval = 0;
+      this.checkDepInterval = null;
     }
 
     if (this.reaper && this._connectReaperId) {
@@ -1191,24 +1866,59 @@ class SensorsApplet extends Applet.TextApplet {
     }
 
     this.kill_all_pids();
+
+    this.loggerTemp.previous_values = {};
+    this.loggerFan.previous_values = {};
+    this.loggerVoltage.previous_values = {};
+    this.loggerIntrusion.previous_values = {};
   }
 
   on_applet_removed_from_panel() {
+    //~ const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
+    const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
+    const SENSORS_WITNESS=`${SENSORS_DIR}/witness`;
+    const SENSORS_DISKSWITNESS=`${SENSORS_DIR}/DisksWitness`;
+    let witness = Gio.file_new_for_path(SENSORS_WITNESS);
+    if (witness.query_exists(null))
+      witness.delete(null);
+    witness = null;
+    let diskwitness = Gio.file_new_for_path(SENSORS_DISKSWITNESS);
+    if (diskwitness.query_exists(null))
+      diskwitness.delete(null);
+    diskwitness = null;
+
     this.on_applet_reloaded();
-    this.s.finalize();
+    remove_all_sources();
   }
 
   on_applet_added_to_panel(userEnabled) {
-    // Check about dependencies:
-    this.checkDepInterval = undefined;
-    if (this.dependencies.areDepMet()) {
-      // All dependencies are installed. Now, run the loop!:
+    if (!this.do_not_check_dependencies) {
+      // Check about dependencies:
+      this.checkDepInterval = null;
+      if (this.dependencies.areDepMet()) {
+        // All dependencies are installed. Now, run the loop!:
+        spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
+        this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
+        this.isLooping = true;
+        this.reap_sensors();
+      } else {
+        // Some dependencies are missing. Suggest to the user to install them.
+        this.isLooping = false;
+        this.checkDepInterval = setInterval(
+          () => {
+            clearInterval(this.checkDepInterval);
+            this.dependencies.check_dependencies();
+            this.checkDepInterval = null;
+          },
+          10000
+        );
+      }
+    } else {
+      this.checkDepInterval = null;
+      spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
+      this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
       this.isLooping = true;
       this.reap_sensors();
-    } else {
-      // Some dependencies are missing. Suggest to the user to install them.
-      this.isLooping = false;
-      this.checkDepInterval = setInterval(() => this.dependencies.check_dependencies(), 10000);
     }
   }
 
@@ -1217,12 +1927,13 @@ class SensorsApplet extends Applet.TextApplet {
 
     while (this.pids.length != 0) {
       let pid = this.pids.pop();
-      Util.spawnCommandLineAsync("kill -9 %s".format(pid.toString()));
+      if (pid != undefined)
+        spawnCommandLineAsync("kill -9 %s".format(pid.toString()));
     }
   }
 
   _get_default_applet_label() {
-    if (this._orientation == St.Side.LEFT || this._orientation == St.Side.RIGHT)
+    if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT)
       return DEFAULT_APPLET_LABEL.join("\n");
     else
       return DEFAULT_APPLET_LABEL.join("");
@@ -1232,6 +1943,7 @@ class SensorsApplet extends Applet.TextApplet {
    * Buttons in settings
    */
   on_option_menu_reload_this_applet_clicked() {
+    if (this.menu.isOpen) this.menu.close();
     // Reload this applet:
     Extension.reloadExtension(UUID, Extension.Type.APPLET);
   }
@@ -1242,16 +1954,46 @@ class SensorsApplet extends Applet.TextApplet {
   _on_report_button_pressed() {
     let text = this.reaper.get_sensors_data_formatted_text();
 
-    GLib.file_set_contents(SCRIPTS_DIR + "/report.txt", text);
-
-    Util.spawnCommandLineAsync("%s/show_sensor_values.sh".format(SCRIPTS_DIR));
+    GLib.file_set_contents(XDG_RUNTIME_DIR + "/Sensors_report.txt", text);
+    if (this.menu.isOpen) this.menu.close();
+    let _to = setTimeout( () => {
+        clearTimeout(_to);
+        spawnCommandLineAsync("%s/show_sensor_values.sh".format(SCRIPTS_DIR));
+      },
+      300
+    );
   }
 
   _on_xsensors_pressed() {
-    Util.spawnCommandLineAsync("/usr/bin/xsensors &");
+    let _to = setTimeout( () => {
+        clearTimeout(_to);
+        spawnCommandLineAsync("/usr/bin/xsensors &");
+      },
+      300
+    );
+  }
+  
+  _on_open_HTML_Colors_web_page() {
+    let _to = setTimeout( () => {
+        clearTimeout(_to);
+        spawnCommandLineAsync("xdg-open https://htmlcolorcodes.com/");
+      },
+      300
+    );
+  }
+
+  _on_open_README() {
+    if (this.menu.isOpen) this.menu.close();
+    let _to = setTimeout( () => {
+        clearTimeout(_to);
+        spawnCommandLineAsync("xdg-open "+APPLET_DIR+"/README.pdf");
+      },
+      300
+    );
   }
 
   _on_remove_temperatureATfevimu_from_panels() {
+    if (this.menu.isOpen) this.menu.close();
     let dialog = new ModalDialog.ConfirmDialog(
       _("Are you sure you want to remove '%s'?").format("temperature@fevimu"),
       () => {
@@ -1274,64 +2016,43 @@ class SensorsApplet extends Applet.TextApplet {
   }
 
   _on_disktemp_button_pressed() {
-    Util.spawnCommandLineAsyncIO(
-      "/bin/bash -c '%s/pkexec_make_smartctl_usable_by_sudoers.sh %s'".format(SCRIPTS_DIR, this.sudo_or_wheel),
-      Lang.bind(this, (out, err, exitCode) => {
+    let subProcess = spawnCommandLineAsyncIO(
+      "/usr/bin/env bash -c '%s/pkexec_make_smartctl_usable_by_sudoers.sh %s'".format(SCRIPTS_DIR, this.sudo_or_wheel),
+      (out, err, exitCode) => {
         this.s.setValue("disktemp_is_user_readable", this.is_disktemp_user_readable());
-    }));
+        subProcess.send_signal(9);
+    });
   }
-
-  //~ check_disktemp_user_readable(force=false) {
-    //~ let quickly = false;
-    //~ let now = 1*Math.ceil(Date.now() / 1000);
-    //~ let old_value = this.s.getValue("disktemp_is_user_readable");
-    //~ if (force || now - this.future_hddtemp_check > 0) {
-      //~ Util.spawnCommandLineAsyncIO("/bin/bash -c '%s/is_hddtemp_usable_by_user.sh'".format(SCRIPTS_DIR),
-                                    //~ (out, err, exitCode) => {
-        //~ if (exitCode == 0) {
-          //~ this.s.setValue("disktemp_is_user_readable", true);
-          //~ if (!old_value || force) {
-              //~ log(_("hddtemp is now executable by any user."), true);
-          //~ }
-        //~ } else {
-          //~ this.s.setValue("disktemp_is_user_readable", false);
-          //~ if (exitCode == 1) {
-            //~ logError(_("hddtemp is NOT executable by any user else root."));
-            //~ if (!force) {
-              //~ let userSettings = JSON.parse(to_string(GLib.file_get_contents(HOME_DIR + "/.cinnamon/configs/" + UUID + "/" + UUID + ".json")[1]));
-              //~ let tabTemperatures = 1*userSettings["layoutsensors"]["pages"].indexOf("page_Temperatures");
-              //~ userSettings = null;
-              //~ this.kill_all_pids();
-              //~ Util.spawnCommandLineAsync("%s applet %s -t %s &".format(XS_PATH, UUID, ""+tabTemperatures))
-            //~ }
-          //~ } else { //exitCode is 2.
-            //~ logError(_("hddtemp is NOT installed."));
-            //~ if (!force) {
-              //~ this.isLooping = false;
-              //~ this.checkDepInterval = setInterval(() => this.dependencies.check_dependencies(), 10000);
-              //~ quickly = true;
-            //~ }
-          //~ }
-        //~ }
-        //~ if (force)
-          //~ this.future_hddtemp_check = now;
-        //~ else if (quickly)
-          //~ this.future_hddtemp_check = now + 10;
-        //~ else
-          //~ this.future_hddtemp_check = now + 60;
-      //~ });
-    //~ }
-  //~ }
 
   /**
    * Events
    */
   on_enter_event(actor, event) {
-    this.tooltip_must_be_updated = true;
+    this.isActorEntered = true;
+    this.onEnterEventInterval = setInterval( () => {
+        this.tooltip_must_be_updated = true;
+        this.reap_sensors();
+        this.isUpdatingUI = false; //new
+        this.updateUI();
+        this.isUpdatingUI = true;
+        this.updateTooltip();
+        return this.isActorEntered;
+      },
+      1000
+    );
   }
 
   on_leave_event(actor, event) {
+    this.isActorEntered = false;
+    if (this.onEnterEventInterval != null) {
+      clearInterval(this.onEnterEventInterval);
+      this.onEnterEventInterval = false;
+    }
     this.tooltip_must_be_updated = false;
+    this.isUpdatingUI = false;
+    this.isActorEntered = false;
+    remove_all_sources();
+    this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
   }
 
   /**

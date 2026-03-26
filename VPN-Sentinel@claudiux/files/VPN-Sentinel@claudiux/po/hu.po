@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-30 21:56+0200\n"
-"PO-Revision-Date: 2023-07-01 14:18+0200\n"
-"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"POT-Creation-Date: 2024-02-03 15:53+0100\n"
+"PO-Revision-Date: 2024-02-08 15:02+0100\n"
+"Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -22,15 +22,15 @@ msgstr ""
 msgid "VPN Sentinel"
 msgstr "VPN Sentinel"
 
-#: applet.js:68
+#: applet.js:71
 msgid "Timestamp"
 msgstr "Időbélyeg"
 
-#: applet.js:69
+#: applet.js:72
 msgid "Date and Time"
 msgstr "Dátum és idő"
 
-#: applet.js:70
+#: applet.js:73
 msgid "Message"
 msgstr "Üzenet"
 
@@ -63,95 +63,95 @@ msgstr "%s el lett indítva."
 msgid "%s has just been stopped."
 msgstr "%s le lett állítva."
 
-#: applet.js:667
+#: applet.js:668
 #, javascript-format
 msgid "%s stopped because the VPN link is idle."
 msgstr "A(z) %s leállt, mert a VPN kapcsolat inaktív állapotba került."
 
-#: applet.js:759
+#: applet.js:760
 #, javascript-format
 msgid "Connection lost. Attempt to reconnect to: %s"
 msgstr "A kapcsolat megszakadt. Ismételt csatlakozás: %s"
 
-#: applet.js:769
+#: applet.js:770
 msgid "Connection to: "
 msgstr "Kapcsolódás: "
 
-#: applet.js:776
+#: applet.js:777
 msgid "Connected to: "
 msgstr "Kapcsolódva: "
 
-#: applet.js:790
+#: applet.js:791
 msgid "Disconnected from: "
 msgstr "Kapcsolat bontva: "
 
-#: applet.js:808
+#: applet.js:809
 msgid "Switching to: "
 msgstr "Átváltás: "
 
-#: applet.js:865 applet.js:890 applet.js:949 applet.js:963
+#: applet.js:866 applet.js:891 applet.js:950 applet.js:964
 msgid "(None)"
 msgstr "(Nincs)"
 
-#: applet.js:1058
+#: applet.js:1059
 msgid "ENABLED"
 msgstr "Engedélyezve"
 
-#: applet.js:1058
+#: applet.js:1059
 msgid "DISABLED"
 msgstr "Letiltva"
 
-#: applet.js:1058
+#: applet.js:1059
 msgid "TRANSIENT"
 msgstr "Átváltás"
 
-#: applet.js:1076
+#: applet.js:1077
 msgid "Other active VPN links (select to disable):"
 msgstr "Egyéb aktív VPN-kapcsolatok (válassza ki a letiltáshoz):"
 
-#: applet.js:1093
+#: applet.js:1094
 msgid "Connections"
 msgstr "Kapcsolatok"
 
-#: applet.js:1119
+#: applet.js:1120
 msgid "Connect to VPN as soon as this applet starts."
 msgstr "Kisalkalmazás indulásakor azonnali kapcsolódás a VPN-kiszolgálóhoz."
 
 #. settings-schema.json->reconnect->description
-#: applet.js:1127
+#: applet.js:1128
 msgid "Try to reconnect to VPN when it shuts down incidentally."
 msgstr "Újra kapcsolódás, amikor véletlenül leáll a VPN-kapcsolat."
 
-#: applet.js:1136
+#: applet.js:1137
 msgid "VPN Policy"
 msgstr "VPN házirend"
 
 #. settings-schema.json->InternetPolicy->title
-#: applet.js:1143
+#: applet.js:1144
 msgid "Internet Apps Manager"
 msgstr "Internet-alkamazások kezelője"
 
-#: applet.js:1151
+#: applet.js:1152
 msgid "Open Activity Logs"
 msgstr "Tevékenység napló megnyitása"
 
-#: applet.js:1160
+#: applet.js:1161
 msgid "Reload Country Flag"
 msgstr "Országzászló újratöltése"
 
-#: applet.js:1162
+#: applet.js:1163
 msgid "Confirm this Country Flag"
 msgstr "Országzászló jóváhagyása"
 
-#: applet.js:1178
+#: applet.js:1179
 msgid "Network Settings"
 msgstr "Hálózati beállítások"
 
-#: applet.js:1182
+#: applet.js:1183
 msgid "Network Connections"
 msgstr "Hálózati kapcsolatok"
 
-#: applet.js:1201
+#: applet.js:1202
 #, javascript-format
 msgid ""
 "VPN: %s\n"
@@ -162,7 +162,7 @@ msgstr ""
 " Eyzköz: %s\n"
 " Kapcsolódva: %s"
 
-#: applet.js:1207
+#: applet.js:1208
 #, javascript-format
 msgid ""
 "WIREGUARD: %s\n"
@@ -173,59 +173,59 @@ msgstr ""
 " Eyzköz: %s\n"
 " Kapcsolódva: %s"
 
-#: applet.js:1214
+#: applet.js:1215
 msgid "Disconnected"
 msgstr "Bontva"
 
-#: applet.js:1216
+#: applet.js:1217
 msgid "Transient"
 msgstr "Átváltás"
 
-#: applet.js:1218
+#: applet.js:1219
 msgid "Deactivated"
 msgstr "Kikapcsolva"
 
-#: applet.js:1348
+#: applet.js:1349
 msgid "VPN-Sentinel re-loading requested."
 msgstr "VPN-Sentinel kisalkalmazás újratöltését kezdeményezték."
 
-#: applet.js:1361
+#: applet.js:1362
 msgid "VPN-Sentinel was stopped."
 msgstr "VPN-Sentinel leállt."
 
-#: applet.js:1365
+#: applet.js:1366
 #, javascript-format
 msgid "Still connected to VPN: %s"
 msgstr "Továbbra is kapcsolódott a VPN-kapcsolattal: „%s”"
 
-#: applet.js:1367
+#: applet.js:1368
 #, javascript-format
 msgid "Still connected to WIREGUARD: %s"
 msgstr "Továbbra is kapcsolódott a WIREGUARD-kapcsolattal: „%s”"
 
-#: applet.js:1369
+#: applet.js:1370
 #, javascript-format
 msgid "Still connected to: %s"
 msgstr "Továbbra is kapcsolódott ehhez: „%s”"
 
-#: applet.js:1372
+#: applet.js:1373
 msgid "No VPN/WIREGUARD link."
 msgstr "Nincs VPN/WIREGUARD kapcsolat."
 
-#: applet.js:1374
+#: applet.js:1375
 msgid "VPN/WIREGUARD Status: Transient."
 msgstr "VPN/WIREGUARD állapot: Átmeneti."
 
-#: lib/checkDependencies.js:267
+#: lib/checkDependencies.js:292
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "A kisalkalmazás (%s) teljesen működőképes."
 
-#: lib/checkDependencies.js:268
+#: lib/checkDependencies.js:293
 msgid "All dependencies are installed"
 msgstr "Minden függőség telepítve van"
 
-#: lib/checkDependencies.js:293
+#: lib/checkDependencies.js:321
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -233,14 +233,19 @@ msgstr ""
 "Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a "
 "kisalkalmazás minden funkcióval rendelkezzen."
 
-#: lib/checkDependencies.js:294
+#: lib/checkDependencies.js:322
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 "Kérjük, a most megnyitott terminálban hajtsa végre a következő parancsokat:"
 
-#: lib/checkDependencies.js:295
+#: lib/checkDependencies.js:323
 msgid "Some dependencies are not installed!"
 msgstr "Néhány függőség nincs telepítve!"
+
+#: lib/util.js:245
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr "A '%s' végrehajtása sikertelen:"
 
 #. metadata.json->description
 msgid ""
@@ -331,6 +336,10 @@ msgstr "Nem jelenítse meg a zászlót, de hagyja meg a helyét"
 #. settings-schema.json->labelWhenVPNisOff->options
 msgid "Show my Country's Flag"
 msgstr "Saját országzászló megjelenítése"
+
+#. settings-schema.json->labelWhenVPNisOff->tooltip
+msgid "(While VPN is OFF or in TRANSIENT mode)"
+msgstr "(Amikor a VPN KI van kapcsolva vagy ÁTMENETI módban van)"
 
 #. settings-schema.json->useSoundAlert->description
 msgid "Emit an audible alert when VPN shuts down incidentally"

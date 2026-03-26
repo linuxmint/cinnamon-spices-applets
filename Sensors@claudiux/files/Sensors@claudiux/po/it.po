@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-16 17:17+0200\n"
-"PO-Revision-Date: 2023-10-29 16:41+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-03-22 19:51+0100\n"
+"PO-Revision-Date: 2025-08-27 18:03+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -16,98 +17,110 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
-#: applet.js:90
+#. applet.js:232
 msgid "Sensors Monitor"
 msgstr "Monitoraggio Sensori"
 
-#: applet.js:403 applet.js:455
+#. applet.js:587
+msgid "Suspended"
+msgstr "Sospeso"
+
+#. applet.js:929 applet.js:971
 msgid "high:"
 msgstr "alto:"
 
-#: applet.js:403 applet.js:405 applet.js:455 applet.js:457 applet.js:495
+#. applet.js:929 applet.js:932 applet.js:971 applet.js:973 applet.js:1014
 msgid "n/a"
 msgstr "n/d"
 
-#: applet.js:405 applet.js:457
+#. applet.js:932 applet.js:973
 msgid "crit:"
 msgstr "crit:"
 
-#: applet.js:495 applet.js:538
+#. applet.js:1014 applet.js:1058
 msgid "min:"
 msgstr "min:"
 
-#: applet.js:540
+#. applet.js:1060
 msgid "max:"
 msgstr "max:"
 
-#: applet.js:568
+#. applet.js:1089
 msgid "No intrusion detected"
 msgstr "Nessuna intrusione rilevata"
 
-#: applet.js:568
+#. applet.js:1089
 msgid "INTRUSION DETECTED!"
 msgstr "INTRUSIONE RILEVATA!"
 
-#: applet.js:588
+#. applet.js:1109
 msgid "Must be configured!"
 msgstr "Deve essere configurato!"
 
-#: applet.js:863
+#. applet.js:1511
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: applet.js:863
+#. applet.js:1511
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#: applet.js:870
+#. applet.js:1518
 msgid "⚙ General"
 msgstr "⚙ Generale"
 
-#: applet.js:880
-msgid "🌡 Temperature sensors"
-msgstr "🌡 Sensori di temperatura"
+#. applet.js:1535
+#, javascript-format
+msgid "%s Temperature sensors"
+msgstr "%s Sensori di temperatura"
 
-#: applet.js:890
-msgid "🤂 Fan sensors"
-msgstr "🤂 Sensori delle ventole"
+#. applet.js:1552
+#, javascript-format
+msgid "%s Fan sensors"
+msgstr "%s Sensori delle ventole"
 
-#: applet.js:900
-msgid "🗲 Voltage sensors"
-msgstr "🗲 Sensori di tensione"
+#. applet.js:1569
+#, javascript-format
+msgid "%s Voltage sensors"
+msgstr "%s Sensori di tensione"
 
-#: applet.js:910
-msgid "⮿ Intrusion sensors"
-msgstr "⮿ Sensori di intrusione"
+#. applet.js:1586
+#, javascript-format
+msgid "%s Intrusion sensors"
+msgstr "%s Sensori di intrusione"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:921
+#. applet.js:1622
 msgid "Run xsensors"
 msgstr "Esegui xsensors"
 
-#: applet.js:932
+#. applet.js:1631
+msgid "Suspend Sensors"
+msgstr "Sospendi i sensori"
+
+#. applet.js:1642
 msgid "Reload this applet"
 msgstr "Ricarica questa applet"
 
-#: applet.js:1224
+#. applet.js:1998
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Rimuovere '%s'?"
 
-#: lib/checkDependencies.js:303
+#. lib/checkDependencies.js:371
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "L'applet %s è totalmente funzionante."
 
-#: lib/checkDependencies.js:304
+#. lib/checkDependencies.js:372
 msgid "All dependencies are installed"
 msgstr "Tutte le dipendenze sono installate"
 
-#: lib/checkDependencies.js:332
+#. lib/checkDependencies.js:401
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -115,62 +128,66 @@ msgstr ""
 "Sembra che manchino alcuni dei programmi necessari affinché questa applet "
 "abbia tutte le sue funzionalità."
 
-#: lib/checkDependencies.js:333
-msgid "Please execute, in the just opened terminal, the commands:"
-msgstr "Si prega di eseguire, nel terminale appena aperto, i comandi:"
+#. lib/checkDependencies.js:403
+msgid "Please install these packages:"
+msgstr "Si prega di installare questi pacchetti:"
 
-#: lib/checkDependencies.js:334
+#. lib/checkDependencies.js:407 lib/checkDependencies.js:417
 msgid "Some dependencies are not installed!"
 msgstr "Alcune dipendenze non sono installate!"
 
-#: lib/util.js:243
+#. lib/checkDependencies.js:419
+msgid "Install these packages now"
+msgstr "Installa questi pacchetti ora"
+
+#. lib/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr "Esecuzione di '%s' fallita:"
 
-#: scripts/xs.py:206
+#. scripts/xs.py:206
 msgid "Previous instance"
 msgstr "Istanza precedente"
 
-#: scripts/xs.py:210
+#. scripts/xs.py:210
 msgid "Next instance"
 msgstr "Istanza successiva"
 
-#: scripts/xs.py:219
+#. scripts/xs.py:219
 msgid "More options"
 msgstr "Più opzioni"
 
-#: scripts/xs.py:225
+#. scripts/xs.py:225
 msgid "Import from a file"
 msgstr "Importa da un file"
 
-#: scripts/xs.py:230
+#. scripts/xs.py:230
 msgid "Export to a file"
 msgstr "Esporta su file"
 
-#: scripts/xs.py:235
+#. scripts/xs.py:235
 msgid "Reset to defaults"
 msgstr "Ripristina le impostazioni predefinite"
 
-#: scripts/xs.py:244
+#. scripts/xs.py:244
 #, python-format
 msgid "Reload %s"
 msgstr "Ricarica %s"
 
-#: scripts/xs.py:425
+#. scripts/xs.py:425
 #, python-format
 msgid "Settings for %s"
 msgstr "Impostazioni di %s"
 
-#: scripts/xs.py:517
+#. scripts/xs.py:517
 msgid "Select or enter file to export to"
 msgstr "Seleziona o inserisci il file in cui esportare"
 
-#: scripts/xs.py:525 scripts/xs.py:546
+#. scripts/xs.py:525 scripts/xs.py:546
 msgid "JSON files"
 msgstr "File JSON"
 
-#: scripts/xs.py:539
+#. scripts/xs.py:539
 msgid "Select a JSON file to import"
 msgstr "Seleziona un file JSON da importare"
 
@@ -184,12 +201,16 @@ msgstr ""
 "(CPU - GPU - Alimentatore), Velocità Ventole, Tensioni, Intrusioni. Avvisa "
 "con cambiamenti di colore quando un valore raggiunge o supera il suo limite."
 
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr "claudiux: Autore. JEleniel: supporto per schede video NVidia."
+
 #. settings-schema.json->page_Temperatures->title
-msgid "🌡 Temperature"
-msgstr "🌡 Temperatura"
+msgid "⦿ Temperature"
+msgstr "⦿ Temperatura"
 
 #. settings-schema.json->page_Fans->title
-msgid "🤂 Fan"
+msgid "𖣘 Fan"
 msgstr "🤂 Ventola"
 
 #. settings-schema.json->page_Voltages->title
@@ -200,6 +221,14 @@ msgstr "🗲 Voltaggio"
 msgid "⮿ Intrusion"
 msgstr "⮿ Intrusione"
 
+#. settings-schema.json->page_Custom->title
+msgid "⛓ Custom"
+msgstr "⛓ Personalizzato"
+
+#. settings-schema.json->section_SettingsWindow->title
+msgid "This settings window"
+msgstr ""
+
 #. settings-schema.json->section_Display->title
 #. settings-schema.json->section_tempOptions->title
 #. settings-schema.json->section_fanOptions->title
@@ -207,6 +236,10 @@ msgstr "⮿ Intrusione"
 #. settings-schema.json->section_intrusionOptions->title
 msgid "Options"
 msgstr "Opzioni"
+
+#. settings-schema.json->section_Tooltip->title
+msgid "Tooltip"
+msgstr "Tooltip"
 
 #. settings-schema.json->section_Report->title
 msgid "Sensors values"
@@ -216,6 +249,10 @@ msgstr "Valori dei sensori"
 msgid "Remove from panels certain applets that also use sensors"
 msgstr "Rimuove dal pannello certe applet che potrebbero utilizzare i sensori"
 
+#. settings-schema.json->section_dependencies->title
+msgid "Dependencies"
+msgstr ""
+
 #. settings-schema.json->section_tempDisktemp->title
 msgid "For the time being, disk temperature can only be read by root."
 msgstr "Per il momento la temperatura del disco può essere letta solo da root."
@@ -224,6 +261,7 @@ msgstr "Per il momento la temperatura del disco può essere letta solo da root."
 #. settings-schema.json->section_fanDisplay->title
 #. settings-schema.json->section_voltDisplay->title
 #. settings-schema.json->section_intrusionDisplay->title
+#. settings-schema.json->section_customDisplay->title
 msgid "Display"
 msgstr "Visualizzazione"
 
@@ -234,6 +272,10 @@ msgstr "Sensori di temperatura"
 #. settings-schema.json->section_tempDisks->title
 msgid "Disk temperature sensors"
 msgstr "Sensori di temperatura del disco"
+
+#. settings-schema.json->section_helpColors->title
+msgid "Help to select color"
+msgstr ""
 
 #. settings-schema.json->section_fanSensors->title
 msgid "Fan sensors"
@@ -246,6 +288,70 @@ msgstr "Sensori di tensione"
 #. settings-schema.json->section_intrusionSensors->title
 msgid "Intrusion sensors"
 msgstr "Sensori di intrusione"
+
+#. settings-schema.json->section_customDisclaimer->title
+msgid "Disclaimer"
+msgstr "Disclaimer"
+
+#. settings-schema.json->section_customSensors->title
+msgid "Custom sensors"
+msgstr "Sensori personalizzati"
+
+#. settings-schema.json->window_maximizing->description
+msgid "How to set its size"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "let it be"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize horizontally"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize vertically"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize everything"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "fixed"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->tooltip
+msgid "Future window openings."
+msgstr ""
+
+#. settings-schema.json->window_width->description
+msgid "Width"
+msgstr ""
+
+#. settings-schema.json->window_width->tooltip
+msgid ""
+"This number must match your screen configuration.\n"
+"Minimum value: 800."
+msgstr ""
+
+#. settings-schema.json->window_height->description
+msgid "Height"
+msgstr ""
+
+#. settings-schema.json->window_height->tooltip
+msgid ""
+"This number must match your screen configuration.\n"
+"Minimum value: 100."
+msgstr ""
+
+#. settings-schema.json->window_set_current_size->description
+msgid "Set to the approximate current size and position"
+msgstr ""
+
+#. settings-schema.json->window_label->description
+msgid "The exact size and position will depend on Cinnamon."
+msgstr ""
 
 #. settings-schema.json->interval->options
 msgid "1"
@@ -304,8 +410,40 @@ msgid "30"
 msgstr "30"
 
 #. settings-schema.json->interval->options
-msgid "60"
-msgstr "60"
+msgid "1 minute"
+msgstr "1 minuto"
+
+#. settings-schema.json->interval->options
+msgid "2 minutes"
+msgstr "2 minuti"
+
+#. settings-schema.json->interval->options
+msgid "3 minutes"
+msgstr "3 minuti"
+
+#. settings-schema.json->interval->options
+msgid "4 minutes"
+msgstr "4 minuti"
+
+#. settings-schema.json->interval->options
+msgid "5 minutes"
+msgstr "5 minuti"
+
+#. settings-schema.json->interval->options
+msgid "10 minutes"
+msgstr "10 minuti"
+
+#. settings-schema.json->interval->options
+msgid "15 minutes"
+msgstr "15 minuti"
+
+#. settings-schema.json->interval->options
+msgid "30 minutes"
+msgstr "30 minuti"
+
+#. settings-schema.json->interval->options
+msgid "1 hour"
+msgstr "1 ora"
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
@@ -330,40 +468,50 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Dimensione carattere (% della dimensione standard)"
 
-#. settings-schema.json->char_color->options
-msgid "Default"
-msgstr "Predefinito"
+#. settings-schema.json->horizontal_width->description
+msgid "Display width (pixels) for horizontal panels"
+msgstr "Larghezza di visualizzazione (pixel) per i pannelli orizzontali"
 
-#. settings-schema.json->char_color->options
-msgid "White"
-msgstr "Bianco"
+#. settings-schema.json->horizontal_width->tooltip
+msgid "0 means automatic. This value does not include border."
+msgstr "0 significa automatico. Questo valore non include il bordo."
 
-#. settings-schema.json->char_color->options
-msgid "Black"
-msgstr "Nero"
+#. settings-schema.json->separator_type->options
+msgid "(none)"
+msgstr "(nessuno)"
 
-#. settings-schema.json->char_color->options
-msgid "Grey"
-msgstr "Grigio"
+#. settings-schema.json->separator_type->options
+msgid "blank"
+msgstr "vuoto"
 
-#. settings-schema.json->char_color->options
-msgid "Light Grey"
-msgstr "Grigio Chiaro"
+#. settings-schema.json->separator_type->options
+msgid "bar"
+msgstr "barra"
+
+#. settings-schema.json->separator_type->description
+msgid "Separator"
+msgstr "Separatore"
+
+#. settings-schema.json->separator_color->description
+#, fuzzy
+msgid "Separator Color"
+msgstr "Separatore"
+
+#. settings-schema.json->char_color_customized->description
+msgid "Customize Text Color"
+msgstr "Personalizza il colore del testo"
 
 #. settings-schema.json->char_color->description
 msgid "Text Color"
 msgstr "Colore del testo"
 
-#. settings-schema.json->separator->description
-msgid "Separator"
-msgstr "Separatore"
+#. settings-schema.json->crit_color->description
+msgid "Critical Value Color"
+msgstr "Colore Valore Critico"
 
-#. settings-schema.json->separator->tooltip
-msgid ""
-"The string used to separate values in horizontal orientation. Default is '│'."
-msgstr ""
-"La stringa utilizzata per separare i valori nell'orientamento orizzontale. "
-"L'impostazione predefinita è '│'."
+#. settings-schema.json->high_color->description
+msgid "High Value Color"
+msgstr "Colore Valore Elevato"
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -380,6 +528,10 @@ msgstr "Rimuovi icone"
 #. settings-schema.json->remove_icons->tooltip
 msgid "Whether or not to remove icons in panel."
 msgstr "Se rimuovere o meno le icone dal pannello."
+
+#. settings-schema.json->show_tooltip->description
+msgid "Display a tooltip on mouseover"
+msgstr "Visualizza un suggerimento al passaggio del mouse"
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
@@ -409,6 +561,17 @@ msgstr "Mostra nel menù l'azione: Riavvia questa applet"
 msgid "Whether or not to display in menu the action: Restart this applet."
 msgstr "Mostra nel menu l'azione: Riavvia questa applet."
 
+#. settings-schema.json->do_not_check_dependencies->description
+msgid "Do not check dependencies"
+msgstr ""
+
+#. settings-schema.json->do_not_check_dependencies->tooltip
+msgid ""
+"If you do not want to install certain dependencies (e.g., fonts), check this "
+"box. Be careful with dependencies that are necessary for this applet to "
+"function properly."
+msgstr ""
+
 #. settings-schema.json->make_disktemp_readable_by_user->description
 msgid "Make disk temperature user-readable"
 msgstr "Rendi la temperatura del disco leggibile dall'utente"
@@ -417,6 +580,7 @@ msgstr "Rendi la temperatura del disco leggibile dall'utente"
 #. settings-schema.json->show_fan->description
 #. settings-schema.json->show_volt->description
 #. settings-schema.json->show_intrusion->description
+#. settings-schema.json->show_custom->description
 msgid "Display the values of these selected sensors"
 msgstr "Visualizza i valori di questi sensori selezionati"
 
@@ -424,6 +588,7 @@ msgstr "Visualizza i valori di questi sensori selezionati"
 #. settings-schema.json->show_fan->tooltip
 #. settings-schema.json->show_volt->tooltip
 #. settings-schema.json->show_intrusion->tooltip
+#. settings-schema.json->show_custom->tooltip
 msgid ""
 "Whether or not to display the values of the sensors selected in the list "
 "below."
@@ -435,6 +600,7 @@ msgstr ""
 #. settings-schema.json->show_fan_name->description
 #. settings-schema.json->show_volt_name->description
 #. settings-schema.json->show_intrusion_name->description
+#. settings-schema.json->show_custom_name->description
 msgid "Display the 'Shown name' of each of these selected sensors"
 msgstr ""
 "Visualizza il 'Nome visualizzato' di ciascuno di questi sensori selezionati"
@@ -450,8 +616,18 @@ msgstr ""
 "visualizzato' dei sensori selezionati nell'elenco sottostante. Senza effetto "
 "nei pannelli verticali."
 
+#. settings-schema.json->chars_temp->tooltip
+msgid "The first emoji in this list is used for temperature"
+msgstr "La prima emoji in questo elenco è usata per la temperatura"
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr "Emoji"
+
 #. settings-schema.json->strictly_positive_temp->description
-#. settings-schema.json->strictly_positive_fan->description
 #. settings-schema.json->strictly_positive_volt->description
 msgid "Show only strictly positive values"
 msgstr "Mostra solo valori rigorosamente positivi"
@@ -500,6 +676,18 @@ msgstr ""
 "Se mostrare o meno, in un pannello verticale, °C o °F sulla stessa riga del "
 "valore della temperatura."
 
+#. settings-schema.json->journalize_temp->description
+msgid "Log high and critical temperatures"
+msgstr "Registra temperature elevate e critiche"
+
+#. settings-schema.json->journalize_temp->tooltip
+msgid ""
+"When this option is checked, temperatures exceeding the high or critical "
+"limit are recorded in the system journal."
+msgstr ""
+"Quando questa opzione è selezionata, le temperature che superano il limite "
+"massimo o critico vengono registrate nel giornale di sistema."
+
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description
 #. settings-schema.json->btn_renew_volt_sensors_list->description
@@ -523,6 +711,7 @@ msgstr ""
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
 msgid ""
 "Show\n"
 "in panel"
@@ -535,6 +724,7 @@ msgstr ""
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
 msgid ""
 "Show\n"
 "in tooltip"
@@ -569,8 +759,22 @@ msgstr ""
 #. settings-schema.json->temp_disks->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
 msgid "Formula"
 msgstr "Formula"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
+#, fuzzy
+msgid ""
+"Color\n"
+"in panel"
+msgstr ""
+"Mostra\n"
+"sul pannello"
 
 #. settings-schema.json->temp_sensors->tooltip
 msgid ""
@@ -592,6 +796,11 @@ msgstr ""
 "   Utilizzare $ come valore restituito dal sensore.\n"
 "   È possibile utilizzare le 4 operazioni (+-*/) e le parentesi.\n"
 "   Esempio: $*1,1+0,5"
+
+#. settings-schema.json->show_disks_first->description
+#, fuzzy
+msgid "Display the disk temperatures before those of the other sensors"
+msgstr "Visualizza i valori di questi sensori selezionati"
 
 #. settings-schema.json->btn_renew_disks_list->description
 msgid "Renew the list of known disks"
@@ -621,9 +830,29 @@ msgstr ""
 "di consultare l'aiuto.\n"
 "Valori alti e critici: cfr. manuale tecnico del disco."
 
+#. settings-schema.json->chars_fan->tooltip
+msgid "The first emoji in this list is used for fan"
+msgstr "La prima emoji in questo elenco è usata per la ventola"
+
+#. settings-schema.json->strictly_positive_fan->description
+msgid "Show only positive or zero values"
+msgstr "Mostra solo valori positivi o zero"
+
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
 msgstr "Abbreviazione di \"Rotazioni al minuto\""
+
+#. settings-schema.json->journalize_fan->description
+msgid "Log critical fan speeds"
+msgstr "Registra le velocità critiche della ventola"
+
+#. settings-schema.json->journalize_fan->tooltip
+msgid ""
+"When this option is checked, fan speeds below the critical limit are "
+"recorded in the system log."
+msgstr ""
+"Quando questa opzione è selezionata, le velocità della ventola inferiori al "
+"limite critico vengono registrate nel registro di sistema."
 
 #. settings-schema.json->fan_sensors->columns->title
 msgid ""
@@ -653,6 +882,10 @@ msgstr ""
 "   È possibile utilizzare le 4 operazioni (+-*/) e le parentesi.\n"
 "   Esempio: $*1,1+0,5"
 
+#. settings-schema.json->chars_volt->tooltip
+msgid "The first emoji in this list is used for voltage"
+msgstr "La prima emoji in questo elenco è usata per la tensione"
+
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
 msgstr "Unità di tensione"
@@ -668,6 +901,18 @@ msgstr "Solo V"
 #. settings-schema.json->volt_unit->options
 msgid "mV only"
 msgstr "solo mV"
+
+#. settings-schema.json->journalize_volt->description
+msgid "Log critical voltages"
+msgstr "Registra le tensioni critiche"
+
+#. settings-schema.json->journalize_volt->tooltip
+msgid ""
+"When this option is checked, voltages below the minimum limit or above the "
+"maximum limit are recorded in the system log."
+msgstr ""
+"Quando questa opzione è selezionata, le tensioni inferiori al limite minimo "
+"o superiori al limite massimo vengono registrate nel registro di sistema."
 
 #. settings-schema.json->volt_sensors->columns->title
 msgid ""
@@ -706,6 +951,7 @@ msgstr ""
 "   Esempio: $*1,1+0,5"
 
 #. settings-schema.json->show_intrusion_name->tooltip
+#. settings-schema.json->show_custom_name->tooltip
 msgid ""
 " Whether or not to display into this applet label the 'Shown name' of the "
 "sensors selected in the list below. Without effect in vertical panels."
@@ -714,9 +960,23 @@ msgstr ""
 "visualizzato' dei sensori selezionati nell'elenco sottostante. Senza effetto "
 "nei pannelli verticali."
 
+#. settings-schema.json->chars_intrusion->tooltip
+msgid "The first emoji in this list is used for intrusion"
+msgstr "La prima emoji in questo elenco è usata per l'intrusione"
+
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"
 msgstr "Mostra nel pannello solo quando è stata rilevata un'intrusione"
+
+#. settings-schema.json->journalize_intrusion->description
+msgid "Log intrusions"
+msgstr "Registro Intrusioni"
+
+#. settings-schema.json->journalize_intrusion->tooltip
+msgid "When this option is checked, intrusions are recorded in the system log."
+msgstr ""
+"Quando questa opzione è selezionata, le intrusioni vengono registrate nel "
+"registro di sistema."
 
 #. settings-schema.json->intrusion_sensors->tooltip
 msgid ""
@@ -726,7 +986,60 @@ msgstr ""
 "Fare doppio clic su una riga per modificare il nome mostrato.\n"
 "Per ripristinare un nome mostrato, copiare/incollare il nome del sensore."
 
+#. settings-schema.json->custom_disclaimer->description
+msgid ""
+"These settings are for advanced users only!\n"
+"Please refer to the README file."
+msgstr ""
+"Queste impostazioni sono solo per utenti esperti!\n"
+"Fare riferimento al file README."
+
+#. settings-schema.json->custom_openREADME->description
+msgid "Open the README file"
+msgstr "Apri il file README"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Type"
+msgstr "Tipo"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Name"
+msgstr "Nome"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"File to\n"
+"monitor"
+msgstr ""
+"File da\n"
+"monitorare"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"High\n"
+"value"
+msgstr ""
+"Valore\n"
+"elevato"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"Critical\n"
+"value"
+msgstr ""
+"Valore\n"
+"critico"
+
+#. settings-schema.json->custom_sensors->tooltip
+msgid ""
+"Add a line by custom sensor to set the type, the name and the path of the "
+"file to monitor (/sys/class/...)."
+msgstr ""
+"Aggiungi una riga accanto al sensore personalizzato per impostarne il tipo, "
+"il nome e il percorso del file da monitorare (/sys/class/...)."
+
 #. settings-schema.json->report->description
+#. scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr "Esempio di valori del sensore da questo computer"
 
@@ -738,15 +1051,10 @@ msgstr "Utile per segnalare un problema."
 msgid "Update display"
 msgstr "Aggiorna visualizzazione"
 
+#. settings-schema.json->button_color_help->description
+msgid "Open HTML Colors web page"
+msgstr ""
+
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Rimuovere dal pannello l'applet temperature@fevimu"
-
-#~ msgid "hddtemp is for now only usable by root"
-#~ msgstr "hddtemp è attualmente utilizzabile solo da root"
-
-#~ msgid "Temperature scripts"
-#~ msgstr "Script di temperatura"
-
-#~ msgid "Make hddtemp usable by user"
-#~ msgstr "Rendi hddtemp utilizzabile dall'utente"

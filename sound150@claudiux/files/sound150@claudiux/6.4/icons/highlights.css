@@ -1,0 +1,36 @@
+/*
+* Change only colors, do not add more class, order or remove 
+* also dont change selectors definition
+*/
+
+.base {
+    fill: #000000;
+}
+
+.success {
+    fill: #009909;
+}
+
+.warning {
+    fill: #FF1990;
+}
+
+.error {
+    fill: #0099E6;
+}
+
+.dark .base {
+    fill: #EBEBEB;
+}
+
+.dark .success {
+    fill: #0ABF15;
+}
+
+.dark .warning {
+    fill: #FF1990;
+}
+
+.dark .error {
+    fill: #0099E6;
+}

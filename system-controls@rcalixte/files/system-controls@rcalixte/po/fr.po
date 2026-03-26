@@ -4,10 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-16 18:19-0400\n"
-"PO-Revision-Date: 2023-09-16 18:20-0400\n"
+"Project-Id-Version: 1.2.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-07 16:57-0500\n"
+"PO-Revision-Date: 2023-12-27 14:02-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,39 +19,39 @@ msgstr ""
 "X-Generator: Poedit 3.3.1\n"
 
 #. metadata.json->name
-#: 5.4/applet.js:28
+#: 5.4/applet.js:29
 msgid "System Controls"
 msgstr "Les contrôles du système"
 
-#: 5.4/applet.js:61
+#: 5.4/applet.js:64
 msgid "Restart Cinnamon"
 msgstr "Redémarrer Cinnamon"
 
-#: 5.4/applet.js:69
+#: 5.4/applet.js:72
 msgid "Lock Screen"
 msgstr "Verrouiller l'écran"
 
-#: 5.4/applet.js:91 5.4/applet.js:100 5.4/applet.js:108
+#: 5.4/applet.js:94 5.4/applet.js:103 5.4/applet.js:111
 msgid "Switch User"
 msgstr "Changer d'utilisateur"
 
-#: 5.4/applet.js:117
+#: 5.4/applet.js:121
 msgid "Log Out"
 msgstr "Se déconnecter"
 
-#: 5.4/applet.js:125
+#: 5.4/applet.js:129
 msgid "Suspend"
 msgstr "Mettre en veille"
 
-#: 5.4/applet.js:131
+#: 5.4/applet.js:135
 msgid "Hibernate"
 msgstr "Hiberner"
 
-#: 5.4/applet.js:139
+#: 5.4/applet.js:143
 msgid "Restart"
 msgstr "Redémarrer"
 
-#: 5.4/applet.js:145
+#: 5.4/applet.js:149
 msgid "Power Off"
 msgstr "Éteindre"
 

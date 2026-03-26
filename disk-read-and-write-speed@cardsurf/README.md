@@ -10,6 +10,7 @@ An applet that shows usage of a disk for Linux Mint Cinnamon
   * Two GUI types
   * Show average speed per second or amount of data transferred
   * Display values as multiples of bytes or bits  
+  * Display unit with decimal or binary form
   * Enable or disable a hover popup
   * Customize a command used to list current input and output information per process
 

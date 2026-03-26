@@ -1,0 +1,65 @@
+# RSS NEWSTICKER
+# This file is put in the public domain.
+# KopfDesDaemons, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: rssNewsticker@KopfDesDaemons 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-11-17 20:28+0100\n"
+"PO-Revision-Date: 2024-11-28 17:54+0100\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:20
+msgid "Loading Newsticker..."
+msgstr "Laden van Newsticker..."
+
+#. applet.js:89
+msgid "Could not load RSS-Feed"
+msgstr "RSS-feed kon niet worden geladen"
+
+#. applet.js:94
+msgid "Error while loading RSS"
+msgstr "Fout bij het laden van RSS"
+
+#. metadata.json->name
+msgid "RSS Newsticker"
+msgstr "RSS Newsticker"
+
+#. metadata.json->description
+msgid "Displays the headlines of an RSS feed"
+msgstr "Toont de koppen van een RSS-feed"
+
+#. settings-schema.json->head0->description
+msgid "General"
+msgstr "Algemeen"
+
+#. settings-schema.json->rssURL->description
+msgid "URL of RSS feed"
+msgstr "URL van de RSS-feed"
+
+#. settings-schema.json->head1->description
+msgid "Ticker"
+msgstr "Ticker"
+
+#. settings-schema.json->width->description
+msgid "Width of ticker in px"
+msgstr "Breedte van de ticker in px"
+
+#. settings-schema.json->tickerSeperator->description
+msgid "Separator between headlines"
+msgstr "Scheidingsteken tussen koppen"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh interval in seconds"
+msgstr "Vernieuwingsinterval in seconden"
+
+#. settings-schema.json->tickerSpeed->description
+msgid "Speed of ticker in ms"
+msgstr "Snelheid van de ticker in ms"

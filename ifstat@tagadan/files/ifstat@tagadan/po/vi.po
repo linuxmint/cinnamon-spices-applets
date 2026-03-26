@@ -1,0 +1,47 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ifstat@tagadan 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-10-12 10:45+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:23
+msgid ""
+"Device\n"
+"KB/s in: --\n"
+"KB/s out: --"
+msgstr "Thiết bị\n" 
+"KB/s vào: --\n" 
+"KB/s ra: --"
+
+#: applet.js:36
+msgid "please install ifstat and/or glib libraries"
+msgstr "Vui lòng cài đặt thư viện ifstat và/hoặc glib"
+
+#: applet.js:60
+msgid ""
+"\n"
+"KB/s in: "
+msgstr "\n"
+"KB/s vào: "
+
+#. metadata.json->description
+msgid "Show your internet usage in a smartphone style"
+msgstr "Hiển thị mức sử dụng internet theo phong cách smartphone"
+
+#. metadata.json->name
+msgid "Tight Network Usage Indicator"
+msgstr "Chỉ báo Sử dụng Mạng Nhẹ"

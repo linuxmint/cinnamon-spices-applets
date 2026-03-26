@@ -1,0 +1,188 @@
+# COLLAPSIBLE SYSTRAY
+# This file is put in the public domain.
+# feuerfuchs, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: collapsible-systray@feuerfuchs.eu 1.22\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-08-29 01:00+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. 4.0/CSCollapseBtn.js:98 3.2/CSCollapseBtn.js:104
+msgid "Collapse"
+msgstr "摺疊"
+
+#. 4.0/CSCollapseBtn.js:104 3.2/CSCollapseBtn.js:110
+msgid "Expand"
+msgstr "展開"
+
+#. 4.0/CSCollapseBtn.js:110 3.2/CSCollapseBtn.js:116
+msgid "No icons to hide/reveal"
+msgstr "沒有可隱藏或顯示的圖示"
+
+#. 4.0/applet.js:133 3.2/applet.js:143
+msgid "Active applications"
+msgstr "執行中的應用程式"
+
+#. 4.0/applet.js:134 3.2/applet.js:144
+msgid "Inactive applications"
+msgstr "非使用中的應用程式"
+
+#. metadata.json->description
+msgid "A replacement for the abandoned System Tray Collapsible Cinnamon applet"
+msgstr "用來取代已停止維護的 System Tray Collapsible Cinnamon 小程式"
+
+#. metadata.json->name
+msgid "Collapsible Systray"
+msgstr "Collapsible Systray"
+
+#. 4.0->settings-schema.json->behavior->title
+#. 4.0->settings-schema.json->behavior-section->title
+#. 3.2->settings-schema.json->behavior->title
+#. 3.2->settings-schema.json->behavior-section->title
+msgid "Behavior"
+msgstr "行為"
+
+#. 4.0->settings-schema.json->appearance->title
+#. 4.0->settings-schema.json->appearance-section->title
+#. 3.2->settings-schema.json->appearance->title
+#. 3.2->settings-schema.json->appearance-section->title
+msgid "Appearance"
+msgstr "外觀"
+
+#. 4.0->settings-schema.json->animation-support->description
+#. 3.2->settings-schema.json->animation-support->description
+msgid "Animation support (disable if icons stop updating)"
+msgstr "動畫效果（若圖示停止更新請停用）"
+
+#. 4.0->settings-schema.json->animation-support->tooltip
+#. 3.2->settings-schema.json->animation-support->tooltip
+msgid "Disable if you have issues with icons not updating themselves."
+msgstr "若遇到圖示無法自動更新的問題，請停用此功能。"
+
+#. 4.0->settings-schema.json->animation-duration->units
+#. 4.0->settings-schema.json->expand-on-hover-delay->units
+#. 4.0->settings-schema.json->collapse-on-leave-delay->units
+#. 3.2->settings-schema.json->animation-duration->units
+#. 3.2->settings-schema.json->expand-on-hover-delay->units
+#. 3.2->settings-schema.json->collapse-on-leave-delay->units
+msgid "milliseconds"
+msgstr "毫秒"
+
+#. 4.0->settings-schema.json->animation-duration->description
+#. 3.2->settings-schema.json->animation-duration->description
+msgid "Animation duration"
+msgstr "動畫持續時間"
+
+#. 4.0->settings-schema.json->expand-on-hover->description
+#. 3.2->settings-schema.json->expand-on-hover->description
+msgid "Expand on hover"
+msgstr "滑鼠停留時展開"
+
+#. 4.0->settings-schema.json->expand-on-hover-delay->description
+#. 3.2->settings-schema.json->expand-on-hover-delay->description
+msgid "Expand on hover delay"
+msgstr "滑鼠停留時延遲展開"
+
+#. 4.0->settings-schema.json->collapse-on-leave->description
+#. 3.2->settings-schema.json->collapse-on-leave->description
+msgid "Collapse on un-hover"
+msgstr "滑鼠移出時摺疊"
+
+#. 4.0->settings-schema.json->collapse-on-leave-delay->description
+#. 3.2->settings-schema.json->collapse-on-leave-delay->description
+msgid "Collapse on un-hover delay"
+msgstr "滑鼠移出時延遲摺疊"
+
+#. 4.0->settings-schema.json->init-delay->units
+#. 3.2->settings-schema.json->init-delay->units
+msgid "seconds"
+msgstr "秒"
+
+#. 4.0->settings-schema.json->init-delay->description
+#. 3.2->settings-schema.json->init-delay->description
+msgid "Startup collapse delay"
+msgstr "啟動時延遲摺疊"
+
+#. 4.0->settings-schema.json->init-delay->tooltip
+#. 3.2->settings-schema.json->init-delay->tooltip
+msgid "The delay until the applet automatically collapses upon startup"
+msgstr "小程式啟動後自動摺疊前的延遲時間"
+
+#. 4.0->settings-schema.json->sort-icons->description
+#. 3.2->settings-schema.json->sort-icons->description
+msgid "Sort icons by name"
+msgstr "依名稱排序圖示"
+
+#. 4.0->settings-schema.json->sort-icons->tooltip
+#. 3.2->settings-schema.json->sort-icons->tooltip
+msgid "If unchecked, the order of the icons will be pretty much random"
+msgstr "若未勾選，圖示將會隨機排序"
+
+#. 4.0->settings-schema.json->no-hover-for-tray-icons->description
+#. 3.2->settings-schema.json->no-hover-for-tray-icons->description
+msgid "Disable hover effect for tray icons"
+msgstr "停用通知區域圖示的滑鼠停留效果"
+
+#. 4.0->settings-schema.json->no-hover-for-tray-icons->tooltip
+#. 3.2->settings-schema.json->no-hover-for-tray-icons->tooltip
+msgid ""
+"If you have problems with the hover effect or it simply doesn't look good, "
+"you should enable this setting"
+msgstr ""
+"如果滑鼠停留效果有問題或顯示不佳，"
+"建議啟用此設定"
+
+#. 4.0->settings-schema.json->horizontal-expand-icon-name->description
+#. 3.2->settings-schema.json->horizontal-expand-icon-name->description
+msgid "Horizontal expand icon"
+msgstr "水平展開圖示"
+
+#. 4.0->settings-schema.json->horizontal-expand-icon-name->tooltip
+#. 4.0->settings-schema.json->horizontal-collapse-icon-name->tooltip
+#. 4.0->settings-schema.json->vertical-expand-icon-name->tooltip
+#. 4.0->settings-schema.json->vertical-collapse-icon-name->tooltip
+#. 3.2->settings-schema.json->horizontal-expand-icon-name->tooltip
+#. 3.2->settings-schema.json->horizontal-collapse-icon-name->tooltip
+#. 3.2->settings-schema.json->vertical-expand-icon-name->tooltip
+#. 3.2->settings-schema.json->vertical-collapse-icon-name->tooltip
+msgid "Enter either the icon's qualified name or it's full path"
+msgstr "請輸入圖示的完整名稱或完整路徑"
+
+#. 4.0->settings-schema.json->horizontal-collapse-icon-name->description
+#. 3.2->settings-schema.json->horizontal-collapse-icon-name->description
+msgid "Horizontal collapse icon"
+msgstr "水平摺疊圖示"
+
+#. 4.0->settings-schema.json->vertical-expand-icon-name->description
+#. 3.2->settings-schema.json->vertical-expand-icon-name->description
+msgid "Vertical expand icon"
+msgstr "垂直展開圖示"
+
+#. 4.0->settings-schema.json->vertical-collapse-icon-name->description
+#. 3.2->settings-schema.json->vertical-collapse-icon-name->description
+msgid "Vertical collapse icon"
+msgstr "垂直摺疊圖示"
+
+#. 4.0->settings-schema.json->tray-icon-padding->units
+#. 3.2->settings-schema.json->tray-icon-padding->units
+msgid "px"
+msgstr "px"
+
+#. 4.0->settings-schema.json->tray-icon-padding->description
+#. 3.2->settings-schema.json->tray-icon-padding->description
+msgid "Padding of tray icons"
+msgstr "通知區域圖示間距"
+
+#. 4.0->settings-schema.json->icon-visibility-list->description
+#. 3.2->settings-schema.json->icon-visibility-list->description
+msgid "Internal use"
+msgstr "內部使用"

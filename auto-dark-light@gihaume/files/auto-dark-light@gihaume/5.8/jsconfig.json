@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "checkJs": true,
+        "target": "ES2024",
+    },
+    "include": [
+        "**/*.js",
+        "**/*.d.ts"
+    ]
+}

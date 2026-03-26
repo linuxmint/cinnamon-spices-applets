@@ -1,0 +1,1 @@
+cat Sensors.html | grep -E -e "[0-9]+ Open" -m1 | awk '{print$1}'

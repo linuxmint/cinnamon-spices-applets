@@ -393,10 +393,10 @@ MyApplet.prototype = {
     on_mouse_scroll: function(actor, event) {
         if(this.update_scroll) {
             let direction = event.get_scroll_direction();
-            if (direction == Clutter.ScrollDirection.UP) {
+            if (direction === Clutter.ScrollDirection.UP) {
                 this.increase_brightness_scroll();
             }
-            else {
+            else if (direction === Clutter.ScrollDirection.DOWN) {
                 this.decrease_brightness_scroll();
             }
         }

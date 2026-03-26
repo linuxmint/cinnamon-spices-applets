@@ -1,0 +1,118 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "panel"
+        ],
+        "panel": {
+            "type": "page",
+            "title": "Cinnamon Vantage settings",
+            "sections": [
+                "fnLock-section",
+                "winkey-section",
+                "touchpad-section",
+                "conservationMode-section",
+                "rapidCharge-section",
+                "usbCharging-section",
+                "overdrive-section",
+                "gsync-section"
+            ]
+        },
+        "fnLock-section": {
+            "type": "section",
+            "title": "Fn Lock",
+            "keys": [
+                "fnLock"
+            ]
+        },
+        "winkey-section": {
+            "type": "section",
+            "title": "Super key",
+            "keys": [
+                "winkey"
+            ]
+        },
+        "touchpad-section": {
+            "type": "section",
+            "title": "Touchpad",
+            "keys": [
+                "touchpad"
+            ]
+        },
+        "conservationMode-section": {
+            "type": "section",
+            "title": "Battery conservation mode",
+            "keys": [
+                "conservationMode"
+            ]
+        },
+        "rapidCharge-section": {
+            "type": "section",
+            "title": "Battery fast charge mode",
+            "keys": [
+                "rapidCharge"
+            ]
+        },
+        "usbCharging-section": {
+            "type": "section",
+            "title": "Alway On USB",
+            "keys": [
+                "usbCharging"
+            ]
+        },
+        "overdrive-section": {
+            "type": "section",
+            "title": "Display Overdrive",
+            "keys": [
+                "overdrive"
+            ]
+        },
+        "gsync-section": {
+            "type": "section",
+            "title": "Hybrid graphics mode",
+            "keys": [
+                "gsync"
+            ]
+        }
+    },
+    "fnLock": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Access multimedia keys without holding Fn"
+    },
+    "winkey": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Enables the Super/Windows key"
+    },
+    "touchpad": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Enables the laptop's touchpad"
+    },
+    "conservationMode": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Limits the charge of the battery to extend its lifespan"
+    },
+    "rapidCharge": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Allow the battery to charge faster"
+    },
+    "usbCharging": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Keeps the USB ports always powered on"
+    },
+    "overdrive": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Reduces the laptop's display latency"
+    },
+    "gsync": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Enables the laptop's integrated graphics.\n This setting requires a reboot to take effect."
+    }
+}

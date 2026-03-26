@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 UUID="Radio3.0@claudiux"
 #~ RCONFIGDIR="$HOME/.cinnamon/configs/$UUID"
 RCONFIGDIR="$HOME/.local/share/cinnamon/applets/$UUID/radiodb"

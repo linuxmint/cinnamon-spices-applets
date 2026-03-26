@@ -1,0 +1,67 @@
+{
+  "layoutGears": {
+    "type": "layout",
+    "pages": ["pageGeneral"],
+    "pageGeneral": {
+      "type": "page",
+      "title": "glxgears",
+      "sections": ["sectionOptions", "sectionLogging"]
+      },
+      "sectionOptions": {
+        "type": "section",
+        "title": "Options",
+        "keys": ["useSymbolicIcon", "activeColor", "alwaysOnTop", "fullscreenMode", "loopEvery"]
+      },
+      "sectionLogging": {
+        "type": "section",
+        "title": "Logging",
+        "keys": ["typeOfLogging"]
+      }
+    },
+    "useSymbolicIcon": {
+      "type": "switch",
+      "default": true,
+      "description": "Use a symbolic icon"
+    },
+    "activeColor": {
+      "type": "colorchooser",
+      "default": "#FF0000",
+      "description": "Icon color while glxgears is running",
+      "dependency": "useSymbolicIcon"
+    },
+    "alwaysOnTop": {
+      "type": "switch",
+      "default": false,
+      "description": "Always on top"
+    },
+    "fullscreenMode": {
+      "type": "switch",
+      "default": false,
+      "description": "Fullscreen Mode",
+      "tooltip": "Once in fullscreen mode, press the Esc key to quit glxgears."
+    },
+    "loopEvery": {
+      "type": "combobox",
+      "default": 5,
+      "description": "Check glxgears status every (seconds)",
+      "options": {
+        "Never": 99999999,
+        "1": 1,
+        "3": 3,
+        "5": 5,
+        "10": 10,
+        "30": 30,
+        "60": 60
+      }
+    },
+    "typeOfLogging": {
+      "type": "combobox",
+      "default": "/dev/null",
+      "description": "Type of logging",
+      "options": {
+        "None": "/dev/null",
+        "On hard disk": "HOME/.config/cinnamon/spices/UUID/glxgears.log",
+        "On RAM disk": "XDG_RUNTIME_DIR/glxgears.log"
+      }
+    }
+}

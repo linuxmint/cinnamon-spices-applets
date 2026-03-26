@@ -1,23 +1,20 @@
-import { Logger } from "../../lib/logger";
-import { WeatherApplet } from "../../main";
-import { LocationData } from "../../types";
+import { LocationProvider } from "../../config";
+import { HttpLib } from "../../lib/httpLib";
+import { ErrorHandler } from "../../lib/services/error_handler";
+import { Logger } from "../../lib/services/logger";
+import type { LocationServiceResult } from "../../types";
 import { _ } from "../../utils";
-import { GeoIP } from "./base";
+import type { GeoIP } from "./base";
 
 /**
  * https://geoiplookup.io/api
  */
 export class GeoIPLookupIO implements GeoIP {
+	public readonly provider = LocationProvider.GeoIPLookup;
 	private readonly query = "https://json.geoiplookup.io/";
 
-	private app: WeatherApplet;
-
-	constructor(app: WeatherApplet) {
-		this.app = app;
-	}
-
-	public async GetLocation(): Promise<LocationData | null> {
-		const json = await this.app.LoadJsonAsync<GeoIPLookupPayload>(this.query);
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
+		const json = await HttpLib.Instance.LoadJsonSimple<GeoIPLookupPayload | GeoIPLookupFailurePayload>({ url: this.query, cancellable });
 
 		if (!json) {
 			return null;
@@ -31,9 +28,9 @@ export class GeoIPLookupIO implements GeoIP {
 		return this.ParseInformation(json);
 	}
 
-	private ParseInformation(json: GeoIPLookupPayload): LocationData | null {
+	private ParseInformation(json: GeoIPLookupPayload): LocationServiceResult | null {
 		try {
-			const result: LocationData = {
+			const result: LocationServiceResult = {
 				lat: json.latitude,
 				lon: json.longitude,
 				city: json.city,
@@ -45,15 +42,26 @@ export class GeoIPLookupIO implements GeoIP {
 			return result;
 		}
 		catch (e) {
-			Logger.Error("ip-api parsing error: " + e);
-			this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
+			if (e instanceof Error)
+				Logger.Error("geoiplookup.io parsing error: " + e.message, e);
+			ErrorHandler.Instance.PostError({
+				type: "hard",
+				detail: "no location",
+				service: this.provider,
+				message: _("Could not obtain location, please see the logs in Looking Glass")
+			})
 			return null;
 		}
 	};
 
-	HandleErrorResponse(json: any): void {
-		this.app.ShowError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" })
-		Logger.Error("ip-api responds with Error: " + json.reason);
+	HandleErrorResponse(json: GeoIPLookupFailurePayload): void {
+		ErrorHandler.Instance.PostError({
+			type: "hard",
+			detail: "bad api response",
+			message: _("Location Service responded with errors, please see the logs in Looking Glass"),
+			service: this.provider
+		})
+		Logger.Error("geoiplookup.io responded with data: " + JSON.stringify(json));
 	};
 }
 
@@ -65,20 +73,24 @@ interface GeoIPLookupPayload {
 	latitude: number;
 	longitude: number;
 	postal_code: string;
-    city: string;
-    country_code: string;
-    country_name: string;
-    continent_code: string;
-    continent_name: string;
-    region: string;
-    district: string;
-    timezone_name: string;
-    connection_type: string;
-    asn_number: number;
-    asn_org: string;
-    asn: string;
-    currency_code: string;
-    currency_name: string;
-    success: boolean;
-    premium: boolean;
+	city: string;
+	country_code: string;
+	country_name: string;
+	continent_code: string;
+	continent_name: string;
+	region: string;
+	district: string;
+	timezone_name: string;
+	connection_type: string;
+	asn_number: number;
+	asn_org: string;
+	asn: string;
+	currency_code: string;
+	currency_name: string;
+	success: true;
+	premium: boolean;
+}
+
+interface GeoIPLookupFailurePayload {
+	success: false;
 }

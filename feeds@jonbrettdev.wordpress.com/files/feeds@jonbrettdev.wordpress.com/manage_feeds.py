@@ -320,7 +320,7 @@ class MainWindow(Gtk.Window):
         """ Adds a new row to the bottom of the array / Grid """        
         self.config.feeds.append([ConfigFileManager.get_new_id(), True, "http://", "", True, 5, False, False])        
         self.treeview.set_cursor(len(self.config.feeds) - 1, self.treeview.get_column(0), True)
-        self.set_size_request(-1, 150 + len(self.config.feeds) * 20 )
+        self.gtk_window_set_default_size(-1, 150 + len(self.config.feeds) * 20 )
         
 
     def save_clicked(self, button):

@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: placesCenter@scollins\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-24 20:57+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-15 02:01+0200\n"
 "PO-Revision-Date: 2022-10-29 15:32+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -18,47 +19,51 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.1.1\n"
 
-#: applet.js:148
+#: applet.js:150
 msgid "(Right click to open folder)"
 msgstr "(Högerklicka för att öppna mapp)"
 
-#: applet.js:170
+#: applet.js:172
 msgid "Places"
 msgstr "Platser"
 
-#: applet.js:284
+#: applet.js:287
 msgid "Search Home Folder"
 msgstr "Sök i hemkatalogen"
 
-#: applet.js:307
+#: applet.js:310
 msgid "SYSTEM"
 msgstr "SYSTEM"
 
-#: applet.js:316
+#: applet.js:319
 msgid "Search File System"
 msgstr "Sök i filsystemet"
 
-#: applet.js:341
+#: applet.js:344
 msgid "RECENT DOCUMENTS"
 msgstr "TIDIGARE DOKUMENT"
 
-#: applet.js:355
+#: applet.js:358
 msgid "Clear"
 msgstr "Rensa"
 
-#: applet.js:398
+#: applet.js:364
+msgid "Recent"
+msgstr ""
+
+#: applet.js:407
 msgid "Computer"
 msgstr "Dator"
 
-#: applet.js:404
+#: applet.js:413
 msgid "File System"
 msgstr "Filsystem"
 
-#: applet.js:420
+#: applet.js:429
 msgid "Network"
 msgstr "Nätverk"
 
-#: applet.js:560
+#: applet.js:569
 msgid "Trash"
 msgstr "Papperskorg"
 
@@ -161,6 +166,10 @@ msgstr "Stephen Collins - Author"
 #. metadata.json->contributors
 msgid "kehugter - Added configurability to middle click"
 msgstr "kehugter - Lade till konfigurerbart mushjulsklick"
+
+#. metadata.json->contributors
+msgid "claudiux - Improvements to the 'Recent' section."
+msgstr ""
 
 #. settings-schema.json->generalPage->title
 msgid "General"
@@ -321,27 +330,10 @@ msgstr "Alla tidigare dokument"
 msgid "Number to show"
 msgstr "Antal att visa"
 
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr ""
+
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"
 msgstr "Sekretess"
-
-#~ msgid "General Settings"
-#~ msgstr "Allmänna inställningar"
-
-#~ msgid "Icon size"
-#~ msgstr "Ikonstorlek"
-
-#~ msgid ""
-#~ "List of uris/file paths to be included. Entries may be separated by "
-#~ "either a comma(,) or by a new-line. You can set the name to be displayed "
-#~ "by adding :customName after the location."
-#~ msgstr ""
-#~ "Lista över uri-/filsökvägar att inkludera. Posterna kan separeras med "
-#~ "antingen kommatecken eller med ny rad. Du kan ange namnet som skall "
-#~ "visas, genom att lägga till :AnpassatNamn efter platsen."
-
-#~ msgid "User Section"
-#~ msgstr "Användarsektion"
-
-#~ msgid "System Section"
-#~ msgstr "Systemsektion"

@@ -211,6 +211,7 @@ class Sidebar {
 
         this.sidebarScrollBox.add_actor(this.innerBox);
         this.sidebarScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
+        this.sidebarScrollBox.set_clip_to_allocation(true);
         this.sidebarScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
         this.sidebarScrollBox.set_mouse_scrolling(true);
         const style_class = this.appThis.settings.useBoxStyle ? 'menu-favorites-box' : '';

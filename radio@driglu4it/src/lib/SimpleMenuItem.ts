@@ -21,6 +21,7 @@ export function createSimpleMenuItem(args: SimpleMenuItemArguments) {
   const icon = new Icon({
     icon_type: IconType.SYMBOLIC,
     style_class: "popup-menu-icon",
+    style: "icon-size:16px;",
     pivot_point: new Point({ x: 0.5, y: 0.5 }),
     icon_name: iconName || "",
     visible: !!iconName,

@@ -3,6 +3,7 @@ const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
+const Meta = imports.gi.Meta;
 const PopupMenu = imports.ui.popupMenu;
 const ScreenSaver = imports.misc.screenSaver;
 const St = imports.gi.St;
@@ -58,59 +59,62 @@ class SystemControlsApplet extends Applet.TextIconApplet {
         this._contentSection = new PopupMenu.PopupMenuSection();
         this.menu.addMenuItem(this._contentSection);
 
-        let item = new PopupMenu.PopupIconMenuItem(_("Restart Cinnamon"), "cinnamon-symbolic", St.IconType.SYMBOLIC);
-        item.connect('activate', Lang.bind(this, function () {
-            global.reexec_self();
-        }));
-        this.menu.addMenuItem(item);
+        let item;
+        if (!Meta.is_wayland_compositor()) {
+            item = new PopupMenu.PopupIconMenuItem(_("Restart Cinnamon"), "cinnamon-symbolic", St.IconType.SYMBOLIC);
+            item.connect('activate', Lang.bind(this, function () {
+                global.reexec_self();
+            }));
+            this.menu.addMenuItem(item);
 
-        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        item = new PopupMenu.PopupIconMenuItem(_("Lock Screen"), "system-lock-screen-symbolic", St.IconType.SYMBOLIC);
-        item.connect('activate', Lang.bind(this, function () {
-            let screensaver_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.screensaver" });
-            let screensaver_dialog = Gio.file_new_for_path("/usr/bin/cinnamon-screensaver-command");
-            if (screensaver_dialog.query_exists(null)) {
-                if (screensaver_settings.get_boolean("ask-for-away-message")) {
-                    launcher.spawnv(["cinnamon-screensaver-lock-dialog"]);
+            item = new PopupMenu.PopupIconMenuItem(_("Lock Screen"), "system-lock-screen-symbolic", St.IconType.SYMBOLIC);
+            item.connect('activate', Lang.bind(this, function () {
+                let screensaver_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.screensaver" });
+                let screensaver_dialog = Gio.file_new_for_path("/usr/bin/cinnamon-screensaver-command");
+                if (screensaver_dialog.query_exists(null)) {
+                    if (screensaver_settings.get_boolean("ask-for-away-message")) {
+                        launcher.spawnv(["cinnamon-screensaver-lock-dialog"]);
+                    }
+                    else {
+                        launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
+                    }
                 }
                 else {
-                    launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
+                    this._screenSaverProxy.LockRemote();
                 }
-            }
-            else {
-                this._screenSaverProxy.LockRemote();
-            }
-        }));
-        this.menu.addMenuItem(item);
+            }));
+            this.menu.addMenuItem(item);
 
-        let lockdown_settings = new Gio.Settings({ schema_id: 'org.cinnamon.desktop.lockdown' });
-        if (!lockdown_settings.get_boolean('disable-user-switching')) {
-            if (GLib.getenv("XDG_SEAT_PATH")) {
-                // LightDM
-                item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
-                item.connect('activate', Lang.bind(this, function () {
-                    launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
-                    launcher.spawnv(["dm-tool", "switch-to-greeter"]);
-                }));
-                this.menu.addMenuItem(item);
-            }
-            else if (GLib.file_test("/usr/bin/mdmflexiserver", GLib.FileTest.EXISTS)) {
-                // MDM
-                item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
-                item.connect('activate', Lang.bind(this, function () {
-                    launcher.spawnv(["mdmflexiserver"]);
-                }));
-                this.menu.addMenuItem(item);
-            }
-            else if (GLib.file_test("/usr/bin/gdmflexiserver", GLib.FileTest.EXISTS)) {
-                // GDM
-                item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
-                item.connect('activate', Lang.bind(this, function () {
-                    launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
-                    launcher.spawnv(["gdmflexiserver"]);
-                }));
-                this.menu.addMenuItem(item);
+            let lockdown_settings = new Gio.Settings({ schema_id: 'org.cinnamon.desktop.lockdown' });
+            if (!lockdown_settings.get_boolean('disable-user-switching')) {
+                if (GLib.getenv("XDG_SEAT_PATH")) {
+                    // LightDM
+                    item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
+                    item.connect('activate', Lang.bind(this, function () {
+                        launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
+                        launcher.spawnv(["dm-tool", "switch-to-greeter"]);
+                    }));
+                    this.menu.addMenuItem(item);
+                }
+                else if (GLib.file_test("/usr/bin/mdmflexiserver", GLib.FileTest.EXISTS)) {
+                    // MDM
+                    item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
+                    item.connect('activate', Lang.bind(this, function () {
+                        launcher.spawnv(["mdmflexiserver"]);
+                    }));
+                    this.menu.addMenuItem(item);
+                }
+                else if (GLib.file_test("/usr/bin/gdmflexiserver", GLib.FileTest.EXISTS)) {
+                    // GDM
+                    item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
+                    item.connect('activate', Lang.bind(this, function () {
+                        launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
+                        launcher.spawnv(["gdmflexiserver"]);
+                    }));
+                    this.menu.addMenuItem(item);
+                }
             }
         }
 

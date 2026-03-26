@@ -1,1 +1,71 @@
-icons/vpn-sentinel-symbolic.svg
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="128.0px"
+   height="128.0px"
+   viewBox="0 0 128.0 128.0"
+   version="1.1"
+   id="SVGRoot"
+   sodipodi:docname="icon.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   inkscape:export-filename="/home/claude/.local/share/cinnamon/applets/VPN-Sentinel@claudiux/icon.png"
+   inkscape:export-xdpi="118.09861"
+   inkscape:export-ydpi="118.09861"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1727"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="5.5660494"
+     inkscape:cx="59.467672"
+     inkscape:cy="63.150715"
+     inkscape:window-width="1872"
+     inkscape:window-height="970"
+     inkscape:window-x="0"
+     inkscape:window-y="40"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1733" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1722" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path148"
+       d="m 48.866274,44.550247 c -0.357979,0.03363 -0.715994,0.04459 -1.074028,0.0453 -6.777052,0.0101 -12.283238,-4.584298 -12.293256,-10.477153 -0.01,-5.794462 5.480524,-10.503872 12.257576,-10.514042 6.892138,-0.01033 12.283412,4.682749 12.293264,10.477206 C 60.050349,34.387679 60.03775,34.693819 60,35 c -1.189782,-0.4902 -2.571493,-0.914513 -4.041985,-0.912309 -4.513775,0.0067 -8.178279,3.150037 -8.171721,7.009359 0.0022,1.25729 0.502832,2.437298 1.079975,3.453197 z M 23.173497,49.814751 C 17.181167,45.078837 13.169372,39.498108 11.270112,35.499497 c -0.423437,-0.863072 -0.425072,-1.825172 -0.0045,-2.689504 1.885826,-3.905903 5.878629,-9.498637 11.854662,-14.350909 6.014489,-4.797663 14.280772,-8.833397 24.61258,-8.8489 10.331811,-0.01553 18.611772,3.995409 24.639983,8.775004 5.992493,4.834313 10.001728,10.415044 11.910924,14.315248 0.421089,0.863073 0.422727,1.825176 0.0047,2.689503 -1.895765,4.004317 -5.886011,9.597048 -11.862211,14.350922 -6.011935,4.793284 -14.27821,8.833394 -24.61002,8.848898 -10.331804,0.01576 -18.61177,-3.999785 -24.642528,-8.775008 z m 24.62767,0.02883 c 10.165581,-0.01553 18.401143,-7.079546 18.386366,-15.771233 -0.0147,-8.69169 -8.274304,-15.731061 -18.439887,-15.715809 -10.165578,0.0153 -18.401138,7.079375 -18.386365,15.77106 0.01492,8.691691 8.274305,15.731059 18.439886,15.715811 z"
+       inkscape:connector-curvature="0"
+       style="fill:#eb9122;fill-opacity:1;stroke-width:0.118237"
+       inkscape:export-filename="/home/claude/.local/share/cinnamon/applets/VPN-Sentinel@claudiux/icon.png"
+       inkscape:export-xdpi="301.52173"
+       inkscape:export-ydpi="301.52173" />
+    <path
+       style="fill:#eb9122;fill-opacity:1;stroke-width:0.180475"
+       d="M 79.393609,99.565203 V 95.083668 H 70.437771 61.481936 V 81.554498 68.025325 h 2.964847 2.964847 l 0.09009,-3.255454 c 0.100285,-3.623574 0.289503,-4.498015 1.409521,-6.512357 2.115557,-3.80479 6.292053,-6.58764 11.772912,-7.844405 1.432613,-0.3285 2.156525,-0.386777 4.680036,-0.376684 2.587048,0.0107 3.24037,0.07138 4.897518,0.458032 5.904032,1.377433 10.413173,4.832895 12.173413,9.328808 0.49463,1.26335 0.53488,1.579628 0.60865,4.777483 l 0.0788,3.424571 h 2.96553 2.96549 v 13.529173 13.52917 h -8.95583 -8.955839 v 4.481535 4.481533 H 85.267897 79.393641 Z M 91.330486,65.277214 c -0.0048,-3.06696 -0.196175,-3.726802 -1.403003,-4.834867 -1.089763,-1.000594 -2.311977,-1.432833 -4.274423,-1.511659 -2.24675,-0.09023 -3.60154,0.318335 -4.933545,1.487942 -1.2775,1.121727 -1.518509,1.931289 -1.518509,5.100672 v 2.506023 h 6.066851 6.066859 z"
+       id="path1152"
+       inkscape:export-filename="/home/claude/.local/share/cinnamon/applets/VPN-Sentinel@claudiux/icon.png"
+       inkscape:export-xdpi="301.52173"
+       inkscape:export-ydpi="301.52173" />
+    <path
+       style="fill:#eb9122;fill-opacity:1;stroke-width:0.162402"
+       d="m 55.535484,108.06459 v -4.36056 H 85.267744 115 v 4.36056 4.36056 H 85.267744 55.535484 Z"
+       id="path1191"
+       inkscape:export-filename="/home/claude/.local/share/cinnamon/applets/VPN-Sentinel@claudiux/icon.png"
+       inkscape:export-xdpi="301.52173"
+       inkscape:export-ydpi="301.52173" />
+  </g>
+</svg>

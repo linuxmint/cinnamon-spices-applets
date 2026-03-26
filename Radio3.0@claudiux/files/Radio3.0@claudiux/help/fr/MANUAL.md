@@ -113,7 +113,7 @@ Radio3.0 utilise:
 
   * _libnotify-bin_ pour afficher des notifications.
 
-  * _youtube-dl_ ou _yt-dlp_ (plus rapide que _youtube-dl_) pour télécharger des vidéos à partir de YouTube.
+  * _yt-dlp_ (plus rapide que _youtube-dl_, qui n'existe d'ailleurs plus dans les distribs récentes) pour télécharger des vidéos à partir de YouTube.
 
   * _ffmpeg_ et _ffmpegthumbnailer_ pour extraire la bande son de la vidéo téléchargée.
 
@@ -135,7 +135,7 @@ Vous pouvez également installer _Pulse Effects_ pour utiliser plusieurs effets 
 
 `sudo apt update`
 
-`sudo apt install mpv libmpv-dev sox libsox-fmt-all pulseaudio-utils at libnotify-bin youtube-dl ffmpeg ffmpegthumbnailer python3-polib python3-brotli`
+`sudo apt install mpv libmpv-dev sox libsox-fmt-all pulseaudio-utils at libnotify-bin ffmpeg ffmpegthumbnailer python3-polib python3-brotli`
 
 Éventuellement:
 
@@ -168,7 +168,7 @@ Pour installer Yay sur Arch Linux et d'autres systèmes basés sur Arch, exécut
 ***
 <a name="InstallYtdlp"></a>
 ## Comment installer la dernière version de yt-dlp ?
-Veuillez noter qu'à partir de sa version 1.0.3, Radio3.0 installe et met à jour automatiquement _yr-dlp_ dans votre répertoire `~/bin/`.
+Veuillez noter qu'à partir de sa version 1.0.3, Radio3.0 installe et met à jour automatiquement _yr-dlp_ dans votre répertoire `~/.local/bin/`.
 
 _yt-dlp_ est utilisé par **Radio3.0** pour télécharger des vidéos depuis YouTube.
 
@@ -177,11 +177,11 @@ La dernière version de _yt-dlp_ corrige des bugs et tient notamment mieux compt
 Voici comment installer sa dernière version :
 
    1. Commencer par installer la version de _yt-dlp_ présente dans les dépôts de paquets de votre distribution, car cela installe également toutes ses dépendances. Par example: `sudo apt install yt-dlp`
-  1. Créer le répertoire `$HOME/bin` qui contiendra cette nouvelle version : `mkdir -p $HOME/bin`
-  1. Télécharger la dernière version pour Linux à partir de [https://github.com/yt-dlp/yt-dlp/releases/latest](https://github.com/yt-dlp/yt-dlp/releases/latest) et l'enregistrer dans le répertoire `$HOME/bin` que vous venez de créer.
-  1. Le rendre exécutable : `chmod +x $HOME/bin/yt-dlp`
+  1. Créer le répertoire `$HOME/bin` qui contiendra cette nouvelle version : `mkdir -p $HOME/.local/bin`
+  1. Télécharger la dernière version pour Linux à partir de [https://github.com/yt-dlp/yt-dlp/releases/latest](https://github.com/yt-dlp/yt-dlp/releases/latest) et l'enregistrer dans le répertoire `$HOME/.local/bin` que vous venez de créer.
+  1. Le rendre exécutable : `chmod +x $HOME/.local/bin/yt-dlp`
   1. Déconnectez-vous de votre session.
-  1. Connectez-vous. Désormais, tout script de votre répertoire `$HOME/bin` a priorité sur tout autre script portant le même nom sur votre système.
+  1. Connectez-vous. Désormais, tout script de votre répertoire `$HOME/.local/bin` a priorité sur tout autre script portant le même nom sur votre système.
 
 ***
 

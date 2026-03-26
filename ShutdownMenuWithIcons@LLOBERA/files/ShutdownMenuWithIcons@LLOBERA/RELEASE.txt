@@ -1,3 +1,7 @@
+v2.3 - 08-02-2024
+========
+Fix the "Main.Util is undefined" error
+
 v2.2 - 28-08-2013
 ========
 Add the "Switch users" menu

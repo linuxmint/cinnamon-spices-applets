@@ -1,0 +1,217 @@
+# XSESSION
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2022
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-03 18:30+0200\n"
+"PO-Revision-Date: 2025-10-06 21:12+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:54
+msgid "Applet"
+msgstr "Miniaplicació"
+
+#. applet.js:55
+msgid "Desklet"
+msgstr "Miniaplicació d'escriptori"
+
+#. applet.js:56
+msgid "Extension"
+msgstr "Extensió"
+
+#. applet.js:57
+msgid "Applets"
+msgstr "Miniaplicacions"
+
+#. applet.js:58
+msgid "Desklets"
+msgstr "Miniaplicacions d'escriptori"
+
+#. applet.js:59
+msgid "Extensions"
+msgstr "Extensions"
+
+#. applet.js:112
+msgid "RELOAD ALL"
+msgstr "RECARREGAR TOT"
+
+#. applet.js:248
+msgid "Middle-click: \n"
+msgstr "Clic del mig:\n"
+
+#. applet.js:248 applet.js:327
+msgid "Show .xsession-errors"
+msgstr "Mostrar .xsession-errors"
+
+#. applet.js:249
+msgid "Ctrl + Middle-click: \n"
+msgstr "Ctrl + Clic del mig: \n"
+
+#. applet.js:249 applet.js:341
+msgid "Show latest messages"
+msgstr "Mostra els darrers missatges"
+
+#. applet.js:311 applet.js:553
+#, javascript-format
+msgid "%s latest messages"
+msgstr "%s darrers missatges"
+
+#. applet.js:311 applet.js:553
+msgid "min: 10. max: 250."
+msgstr "mín: 10. màx: 250."
+
+#. applet.js:358
+msgid "Restart Cinnamon"
+msgstr "Reiniciar Cinnamon"
+
+#. applet.js:376
+msgid "Repeat last action"
+msgstr "Repetir l'última acció"
+
+#. applet.js:380
+msgid "--- Reload Spices ---"
+msgstr "--- Recarregar Espècies ---"
+
+#. applet.js:386
+msgid "Reload Applet:"
+msgstr "Recarregar la miniaplicació:"
+
+#. applet.js:413
+msgid "Reload Desklet:"
+msgstr "Recarregar la miniaplicació d'escriptori:"
+
+#. applet.js:440
+msgid "Reload Extension:"
+msgstr "Recarregar l'extensió:"
+
+#. applet.js:466
+msgid "Reload Current Theme"
+msgstr "Recarrega el tema actual"
+
+#. applet.js:480
+msgid "--- Settings for ---"
+msgstr "--- Opcions per ---"
+
+#. applet.js:486
+msgid "Applet:"
+msgstr "Miniaplicació:"
+
+#. applet.js:495
+msgid "Desklet:"
+msgstr "Miniaplicació d'escriptori:"
+
+#. applet.js:504
+msgid "Extension:"
+msgstr "Extensió:"
+
+#. applet.js:513
+msgid "--- View Code ---"
+msgstr "--- Veure el codi ---"
+
+#. applet.js:519
+msgid "View Applet Code for:"
+msgstr "Veure el codi de la miniaplicació:"
+
+#. applet.js:528
+msgid "View Desklet Code for:"
+msgstr "Veure el codi de la miniaplicació d'escriptori:"
+
+#. applet.js:537
+msgid "View Extension Code for:"
+msgstr "Veure el codi de l'extensió:"
+
+#. metadata.json->name
+msgid "Xsession"
+msgstr "Xsession"
+
+#. metadata.json->description
+msgid ""
+"Restart, access source code and configure your Spices (Applets, Desklets, "
+"Extensions). View the contents of your .xsession-errors file in real time. "
+"Restart Cinnamon."
+msgstr ""
+"Ús permet reiniciar o obrir el codi font d'espècies (miniaplicacions, "
+"miniaplicacions d'escriptori, extensions), veure el contingut del vostre "
+"fitxer .xsession-errors en temps real i reiniciar Cinnamon."
+
+#. settings-schema.json->section1->description
+msgid "Icon size"
+msgstr "Mida de la icona"
+
+#. settings-schema.json->icon_size->description
+msgid "Size (in pixels) of menu icons"
+msgstr "Mida (en píxels) de les icones del menú"
+
+#. settings-schema.json->icon_size->options
+msgid "16"
+msgstr "16"
+
+#. settings-schema.json->icon_size->options
+msgid "22"
+msgstr "22"
+
+#. settings-schema.json->icon_size->options
+msgid "24"
+msgstr "24"
+
+#. settings-schema.json->icon_size->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->icon_size->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->icon_size->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->icon_size->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->icon_size->options
+msgid "128"
+msgstr "128"
+
+#. settings-schema.json->section2->description
+msgid "RELOAD ALL option"
+msgstr "Opció de RECARREGAR TOT"
+
+#. settings-schema.json->show_reload_all->description
+msgid "Show the RELOAD ALL option in submenus"
+msgstr "Mostra la opció RECARREGAR TOT als submenús"
+
+#. settings-schema.json->show_reload_all->tooltip
+msgid "Caution! Reloading all spices of a given type may lead to errors."
+msgstr ""
+"Alerta! Recarregar totes les espècies d'un tipus determinat pot causar "
+"errors."
+
+#. settings-schema.json->section3->description
+msgid "Latest messages"
+msgstr "Últims missatges"
+
+#. settings-schema.json->number_latest->description
+msgid "Number of latest messages to show"
+msgstr "Número d'últims missatges a mostrar"
+
+#. settings-schema.json->number_latest->tooltip
+msgid "(Including empty lines.)"
+msgstr "(Incloent línies buides.)"
+
+#. scripts/watch-xse-latest.sh:10 scripts/watch-xse.sh:8
+msgid "-d"
+msgstr "-d"

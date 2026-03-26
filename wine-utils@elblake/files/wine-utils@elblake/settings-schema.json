@@ -1,0 +1,116 @@
+{
+    "head0": {
+        "type": "header",
+        "description": "Settings for wine-utils@elblake"
+    },
+
+    "head1": {
+        "type": "header",
+        "description": "General"
+    },
+
+    "show-launchers": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show Launchers",
+        "tooltip": "Show some of the Wine launchers if they are installed.",
+        "value": true
+    },
+    "show-run-command": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show 'Run Command...'",
+        "tooltip": "For running a Wine command.",
+        "value": true
+    },
+    "show-cmd": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show 'Command Prompt'",
+        "tooltip": "For easy access to the Wine command prompt.",
+        "value": true
+    },
+    "show-admin-programs-menu": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show the Configuration menu",
+        "tooltip": "Show a menu of useful Wine utilities that typically need to be accessed by CLI.",
+        "value": true
+    },
+    "show-programs-menu": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show the Programs menu",
+        "tooltip": "Show a menu to access programs directly from Wine's installed program shortcuts.",
+        "value": true
+    },
+
+    "use-dark-theme-icons": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use dark theme icons when available.",
+        "value": false
+    },
+    "icon-style": {
+        "type": "combobox",
+        "default": "",
+        "description": "Panel Icon Style",
+        "options": {
+            "default": "",
+            "style 1": "-style1",
+            "style 2": "-style2",
+            "style 3": "-style3"
+        }
+    },
+    "specify-custom-icon": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use custom panel icon",
+        "tooltip": "Use a custom icon for the applet.",
+        "value": false
+    },
+    "custom-icon": {
+        "type": "iconfilechooser",
+        "default": "",
+        "description": "Custom icon",
+        "allow-none" : true,
+        "indent": true,
+        "dependency": "specify-custom-icon"
+    },
+
+    "head2": {
+        "type": "header",
+        "description": "Advanced"
+    },
+    "prefix-file-list": {
+        "type": "filechooser",
+        "default": "",
+        "description": "Path to prefix list",
+        "tooltip": "Select a text file, each line in the file should contain the full path of a wine prefix directory. You can add a name followed by a colon at the beginning of each line to give that prefix path a label.",
+        "allow-none" : true
+    },
+    "specify-wine-exec": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Specify the wine executable",
+        "tooltip": "Specify the wine executable, by default 'wine' is used.",
+        "value": false
+    },
+    "wine-exec": {
+        "type": "entry",
+        "default": "wine",
+        "description": "Wine executable",
+        "indent": true,
+        "dependency": "specify-wine-exec",
+        "tooltip": "The wine executable to use."
+    },
+    "wineconsole-exec": {
+        "type": "entry",
+        "default": "wineconsole",
+        "description": "Wine console executable",
+        "indent": true,
+        "dependency": "specify-wine-exec",
+        "tooltip": "The wine console executable to use."
+    }
+}
+

@@ -1,0 +1,10 @@
+https://stackoverflow.com/questions/41224738/how-to-calculate-system-memory-usage-from-proc-meminfo-like-htop
+
+htop author here. These are the calculations I make to get the numbers for the green, blue and yellow bars in the memory meter:
+
+    Total used memory = MemTotal - MemFree
+    Non cache/buffer memory (green) = Total used memory - (Buffers + Cached memory)
+    Buffers (blue) = Buffers
+    Cached memory (yellow) = Cached + SReclaimable - Shmem
+    Swap = SwapTotal - SwapFree
+

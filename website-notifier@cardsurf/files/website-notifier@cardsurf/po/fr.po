@@ -1,0 +1,220 @@
+# French translations for website-notifier@cardsurf package
+# Traductions françaises du paquet website-notifier@cardsurf.
+# This file is put in the public domain.
+# Automatically generated, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: website-notifier@cardsurf 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-10-18 12:58+0200\n"
+"Last-Translator: FabRCT\n"
+"Language-Team:\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. metadata.json->description
+msgid "Shows a notification when a website updates"
+msgstr "Affiche une notification lorsqu'un site Web est mis à jour"
+
+#. metadata.json->name
+msgid "Website notifier"
+msgstr "Website notifier"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Configuration"
+
+#. settings-schema.json->update_every->units
+msgid "minutes"
+msgstr "minutes"
+
+#. settings-schema.json->update_every->description
+msgid "Refresh every"
+msgstr "Rafraîchir toutes les"
+
+#. settings-schema.json->update_every->tooltip
+msgid "How often to refresh a website. 0 means no refreshing."
+msgstr ""
+"À quelle fréquence actualiser un site Web.\n"
+"0 signifie aucune actualisation."
+
+#. settings-schema.json->notification_type->description
+msgid "Notification type"
+msgstr "Type de notification"
+
+#. settings-schema.json->notification_type->options
+msgid "System popup"
+msgstr "Fenêtre contextuelle système"
+
+#. settings-schema.json->notification_type->options
+msgid "Applet popup"
+msgstr "Fenêtre contextuelle de l'applet"
+
+#. settings-schema.json->notification_type->tooltip
+msgid "A user interface that shows notficiation text"
+msgstr "Une interface utilisateur qui affiche le texte de notification"
+
+#. settings-schema.json->tooltip_type->description
+msgid "Tooltip text"
+msgstr "Texte d'info-bulle"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Time left next refresh"
+msgstr "Temps restant avant la prochaine actualisation"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Next refresh time"
+msgstr "Heure de rafraîchissement suivant"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Last refresh time"
+msgstr "Heure du dernier rafraîchissement"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Last notification time"
+msgstr "Heure de la dernière notification"
+
+#. settings-schema.json->tooltip_type->options
+msgid "None"
+msgstr "Aucun"
+
+#. settings-schema.json->tooltip_type->tooltip
+msgid "Text shown in an applet tooltip"
+msgstr "Texte affiché dans une info-bulle d'applet"
+
+#. settings-schema.json->primary_button_type->description
+msgid "Primary button"
+msgstr "Bouton principal"
+
+#. settings-schema.json->primary_button_type->options
+msgid "Left"
+msgstr "Gauche"
+
+#. settings-schema.json->primary_button_type->options
+msgid "Middle"
+msgstr "Milieu"
+
+#. settings-schema.json->primary_button_type->tooltip
+msgid ""
+"A mouse button used to perform main actions.\n"
+"The primary button refreshes a website on demand.\n"
+"The secondary button toggles an applet popup."
+msgstr ""
+"Un bouton de souris utilisé pour effectuer des actions principales.\\n\n"
+"Le bouton principal actualise un site web à la demande.\\n\n"
+"Le bouton secondaire active/désactive une fenêtre contextuelle d'applet."
+
+#. settings-schema.json->applet_popup_click_type->description
+msgid "On popup clicked"
+msgstr "Au clic sur la fenêtre contextuelle"
+
+#. settings-schema.json->applet_popup_click_type->options
+msgid "Close popup and open browser"
+msgstr "Fermer la fenêtre contextuelle et ouvrir le navigateur"
+
+#. settings-schema.json->applet_popup_click_type->options
+msgid "Close popup"
+msgstr "Fermer la fenêtre contextuelle"
+
+#. settings-schema.json->applet_popup_click_type->tooltip
+msgid "An action to perform when an applet popup is clicked"
+msgstr "Action lorsqu'on clique sur une fenêtre contextuelle d'applet"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Interface utilisateur graphique"
+
+#. settings-schema.json->max_title_length->units
+#. settings-schema.json->max_message_length->units
+msgid "characters"
+msgstr "Caractère"
+
+#. settings-schema.json->max_title_length->description
+msgid "Title length"
+msgstr "Longueur du titre"
+
+#. settings-schema.json->max_title_length->tooltip
+msgid "A maximum number of characters in a notification title"
+msgstr "Nombre maximal de caractères dans un titre de notification"
+
+#. settings-schema.json->max_message_length->description
+msgid "Message length"
+msgstr "Longueur du message"
+
+#. settings-schema.json->max_message_length->tooltip
+msgid "A maximum number of characters in a notification message"
+msgstr "Un nombre maximal de caractères dans un message de notification"
+
+#. settings-schema.json->applet_popup_width->units
+#. settings-schema.json->applet_popup_height->units
+msgid "pixels"
+msgstr "pixels"
+
+#. settings-schema.json->applet_popup_width->description
+msgid "Popup width"
+msgstr "Largeur de la fenêtre contextuelle"
+
+#. settings-schema.json->applet_popup_width->tooltip
+msgid "A width of an applet popup"
+msgstr "Largeur de la fenêtre contextuelle d'applet"
+
+#. settings-schema.json->applet_popup_height->description
+msgid "Popup height"
+msgstr "Hauteur de la fenêtre contextuelle"
+
+#. settings-schema.json->applet_popup_height->tooltip
+msgid "A height of an applet popup"
+msgstr "Hauteur d'une fenêtre contextuelle d'applet"
+
+#. settings-schema.json->applet_popup_title_css->description
+msgid "Popup title CSS"
+msgstr "CSS du titre de la fenêtre contextuelle"
+
+#. settings-schema.json->applet_popup_title_css->tooltip
+msgid "A CSS style applied to a notification title in an applet popup"
+msgstr ""
+"Style CSS appliqué à un titre de notification\n"
+"dans une fenêtre contextuelle d'applet"
+
+#. settings-schema.json->applet_popup_message_css->description
+msgid "Popup message CSS"
+msgstr "CSS du message de la fenêtre contextuelle"
+
+#. settings-schema.json->applet_popup_message_css->tooltip
+msgid "A CSS style applied to a notification message in an applet popup"
+msgstr ""
+"Style CSS appliqué à un message de notification\n"
+"dans une fenêtre contextuelle d'applet"
+
+#. settings-schema.json->gui_icon_filepath->description
+msgid "Icon"
+msgstr "Icône"
+
+#. settings-schema.json->gui_icon_filepath->tooltip
+msgid "An icon displayed in a panel"
+msgstr "Icône affichée dans le panneau"
+
+#. settings-schema.json->scripts_start->description
+msgid "Scripts"
+msgstr "Scripts"
+
+#. settings-schema.json->script_filepath->description
+msgid "Script"
+msgstr "Script"
+
+#. settings-schema.json->script_filepath->tooltip
+msgid "A path to a script that refeshes a website"
+msgstr "Chemin vers un script qui actualise un site Web"
+
+#. settings-schema.json->script_separator->description
+msgid "Separator "
+msgstr "Séparateur "
+
+#. settings-schema.json->script_separator->tooltip
+msgid "A string that seperates values returned from the script"
+msgstr "Chaîne qui sépare les valeurs renvoyées par le script"

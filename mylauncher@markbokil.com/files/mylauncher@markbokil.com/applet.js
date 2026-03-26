@@ -15,6 +15,7 @@ const Cinnamon = imports.gi.Cinnamon;
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
+const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
 const Gtk = imports.gi.Gtk; //needed for context menu
 const Gio = imports.gi.Gio; // file monitor
@@ -22,10 +23,15 @@ const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const AppletMeta = imports.ui.appletManager.applets['mylauncher@markbokil.com'];
 const AppletDir = imports.ui.appletManager.appletMeta['mylauncher@markbokil.com'].path;
-const PropertiesFile = GLib.build_filenamev([global.userdatadir, 'applets/mylauncher@markbokil.com/mylauncher.properties']);
+
+// When no configuration exists
+const LegacyPropertiesFile = GLib.get_home_dir() + '/.cinnamon/configs/' + UUID;
+const DefaultPropertiesFile = GLib.build_filenamev([global.userdatadir, 'applets/mylauncher@markbokil.com/mylauncher.properties']);
+// Save all changes to this location, load this if the file exists
+const ConfigFilePath = GLib.get_home_dir() + '/.config/cinnamon/spices/' + UUID;
+const PropertiesFile = ConfigFilePath + '/mylauncher.properties';
+
 const SettingsJSON = GLib.build_filenamev([global.userdatadir, 'applets/mylauncher@markbokil.com/settings.js']);
-const HelpURL = "http://markbokil.com/downloads/mylauncher/help.php?appname=mylauncher&version=" + Version;
-const AboutURL = "http://markbokil.com/downloads/mylauncher/about.php?appname=mylauncher&version=" + Version;
 
 function PopupMenuItem(label, icon, callback) {
     this._init(label, icon, callback);
@@ -62,9 +68,29 @@ MyApplet.prototype = {
             }
             
             this.set_applet_tooltip(_("My Launcher"));
-            
-            // watch props file for changes
+
+            // Check to see if the config directory exists
+            let configFile = Gio.file_new_for_path(ConfigFilePath);
+            if (!configFile.query_exists(null)) {
+                // Make the directory
+                configFile.make_directory_with_parents(null);
+            }
+            // Does the configuration file exist in the user applet config directory?
             let file = Gio.file_new_for_path(PropertiesFile);
+            if (!file.query_exists(null)) {
+                // Is there a legacy configuration file?
+                let legacyFile = Gio.file_new_for_path(LegacyPropertiesFile);
+                if (legacyFile.query_exists(null)) {
+                    // Use the legacy configuration file to the new location
+                    legacyFile.copy(file, Gio.FileCopyFlags.OVERWRITE, null, null);
+                } else {
+                    // If not, duplicate the default file and monitor it for changes
+                    let defaultFile = Gio.file_new_for_path(DefaultPropertiesFile);
+                    defaultFile.copy(file, Gio.FileCopyFlags.OVERWRITE, null, null);
+                }
+            }
+
+            // watch props file for changes
             this._monitor = file.monitor(Gio.FileMonitorFlags.NONE, null);
             this._monitor.connect('changed', Lang.bind(this, this._on_file_changed));
             
@@ -83,12 +109,11 @@ MyApplet.prototype = {
             this._createContextMenu();
 
             this._setUIStates();
-        }
-        catch (e) {
+        } catch (e) {
             global.logError(e);
         }
     },
-    
+
     on_applet_clicked: function(event) {
         this.menu.toggle();        
     },
@@ -145,8 +170,6 @@ MyApplet.prototype = {
             } else if (propVal.indexOf('[MC]') != -1) { //add/remove applets 
                 propVal = "sh " + AppletDir + "/run-minecraft.sh";
                 sc = true;
-            } else if (propVal.indexOf('[EE]') != -1) { // ?
-                propVal = "xdg-open http://markbokil.com/downloads/mylauncher/mycat.jpg";
             } else {
                  sc = true;
             }
@@ -175,7 +198,7 @@ MyApplet.prototype = {
    
     callback: function () {
         //global.log(this.cmd);  
-        Main.Util.spawnCommandLine(this.cmd);
+        Util.spawnCommandLine(this.cmd);
     },
 
     _createContextMenu: function () {    
@@ -186,17 +209,6 @@ MyApplet.prototype = {
         
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem()); //separator
        
-        //help
-        this.help_menu_item = new Applet.MenuItem(_("Help"), Gtk.STOCK_HELP, 
-            Lang.bind(this, this._doHelp));     
-        this._applet_context_menu.addMenuItem(this.help_menu_item); 
-        //about
-        this.about_menu_item = new Applet.MenuItem(_("About"), Gtk.STOCK_ABOUT, 
-            Lang.bind(this, this._doAbout));     
-        this._applet_context_menu.addMenuItem(this.about_menu_item); 
-
-        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem()); //separator
-
         //tooltips
         this.toolTipsSwitch = new PopupMenu.PopupSwitchMenuItem(_("Tooltips"));
         this.toolTipsSwitch.connect('toggled', Lang.bind(this, this._doToolTips));
@@ -256,7 +268,7 @@ MyApplet.prototype = {
     },
 
     _editProperties: function () {
-        Main.Util.spawnCommandLine(this._json.OpenFileCmd + " " + PropertiesFile);
+        Util.spawnCommandLine(this._json.OpenFileCmd + " " + PropertiesFile);
     },
         
     _doRefresh: function () {
@@ -264,14 +276,6 @@ MyApplet.prototype = {
         this._createMenu();
     },
     
-    _doHelp: function () {
-        Main.Util.spawnCommandLine(this._json.OpenFileCmd + " " + HelpURL);
-    },
-    
-    _doAbout: function () {
-        Main.Util.spawnCommandLine(this._json.OpenFileCmd + " " + AboutURL);
-    },
-        
 };
 
 function main(metadata, orientation) {   

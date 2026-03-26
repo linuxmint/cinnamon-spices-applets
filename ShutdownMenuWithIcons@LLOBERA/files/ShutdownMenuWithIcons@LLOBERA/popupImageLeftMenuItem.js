@@ -1,6 +1,6 @@
 // Popup Image Left Menu Item for Cinnamon Applet
 // A Popup Menu Item with an icon to the left, the text to the right and a command associated to the menu
-// Developed by Nicolas LLOBERA <nllobera@gmail.com>
+// Developed by Nicolas LLOBERA
 // version: 1.1 (11-06-2013)
 // License: GPLv3
 // Copyright © 2013 Nicolas LLOBERA

@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-29 05:07+0100\n"
+"Project-Id-Version: moonphase@techi-freki 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-05-05 18:11-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,61 +17,152 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: js/moon.js:41 js/moon.js:49
+#: js/compass.js:14
+msgid "North"
+msgstr ""
+
+#: js/compass.js:15
+msgid "North East"
+msgstr ""
+
+#: js/compass.js:16
+msgid "East"
+msgstr ""
+
+#: js/compass.js:17
+msgid "South East"
+msgstr ""
+
+#: js/compass.js:18
+msgid "South"
+msgstr ""
+
+#: js/compass.js:19
+msgid "South West"
+msgstr ""
+
+#: js/compass.js:20
+msgid "West"
+msgstr ""
+
+#: js/compass.js:21
+msgid "North West"
+msgstr ""
+
+#: js/moon.js:32 js/moon.js:40
 msgid "New Moon"
 msgstr ""
 
-#: js/moon.js:42
+#: js/moon.js:33
 msgid "Waxing Crescent"
 msgstr ""
 
-#: js/moon.js:43
+#: js/moon.js:34
 msgid "First Quarter"
 msgstr ""
 
-#: js/moon.js:44
+#: js/moon.js:35
 msgid "Waxing Gibbous"
 msgstr ""
 
-#: js/moon.js:45
+#: js/moon.js:36
 msgid "Full Moon"
 msgstr ""
 
-#: js/moon.js:46
+#: js/moon.js:37
 msgid "Waning Gibbous"
 msgstr ""
 
-#: js/moon.js:47
+#: js/moon.js:38
 msgid "Last Quarter"
 msgstr ""
 
-#: js/moon.js:48
+#: js/moon.js:39
 msgid "Waning Crescent"
 msgstr ""
 
+#: js/ui/currentPhaseUi.js:32
+msgid "illumination"
+msgstr ""
+
+#: js/ui/riseSetUi.js:55
+msgid "The moon is always down and will not rise today"
+msgstr ""
+
+#: js/ui/riseSetUi.js:65
+msgid "The moon is always up and will not set today"
+msgstr ""
+
+#: js/ui/riseSetUi.js:76
+msgid "Moonrise"
+msgstr ""
+
+#: js/ui/riseSetUi.js:83
+msgid "Lunar Noon"
+msgstr ""
+
+#: js/ui/riseSetUi.js:90
+msgid "Moonset"
+msgstr ""
+
+#: js/ui/elements/noRiseSetElement.js:54
+msgid "Next Moonrise"
+msgstr ""
+
+#: js/ui/elements/noRiseSetElement.js:66
+msgid "Next Moonset"
+msgstr ""
+
 #. metadata.json->name
-#: js/moon.js:54
 msgid "Moon Phase"
 msgstr ""
 
 #. metadata.json->description
-msgid "A Cinnamon applet that displays the current moon phase."
+msgid "A Cinnamon applet that displays up-to-date moon related information."
 msgstr ""
 
 #. settings-schema.json->page-settings->title
 msgid "Settings"
 msgstr ""
 
-#. settings-schema.json->section-panel->title
+#. settings-schema.json->section-geolocation->title
+msgid "Geolocation Settings"
+msgstr ""
+
+#. settings-schema.json->section-general->title
 msgid "General Settings"
 msgstr ""
 
-#. settings-schema.json->section-menu->title
+#. settings-schema.json->section-update->title
 msgid "Update Settings"
 msgstr ""
 
+#. settings-schema.json->enableGeolocation->description
+msgid "Enable geolocation features"
+msgstr ""
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr ""
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr ""
+
+#. settings-schema.json->enablePopup->description
+msgid "Enable popup menu"
+msgstr ""
+
+#. settings-schema.json->showCurrentPhaseInfo->description
+msgid "Display the current phase information"
+msgstr ""
+
+#. settings-schema.json->showRiseSet->description
+msgid "Display the moon rise, transit, and set times"
+msgstr ""
+
 #. settings-schema.json->showPhaseLabel->description
-msgid "Display the moon phase as a string"
+msgid "Display the applet label"
 msgstr ""
 
 #. settings-schema.json->showNameLabel->description
@@ -86,7 +177,7 @@ msgstr ""
 msgid "Display a tooltip on hover"
 msgstr ""
 
-#. settings-schema.json->showNameTooltip->description
+#. settings-schema.json->showPhaseTooltip->description
 msgid "Display the name of the moon phase in the tooltip"
 msgstr ""
 

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-27 12:49+0800\n"
-"PO-Revision-Date: 2019-03-15 08:29+0100\n"
+"PO-Revision-Date: 2025-08-09 18:58+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: applet.js:58
 msgid "GPU: ??ᴼC"
@@ -47,7 +47,7 @@ msgstr "Illesztőprogram"
 
 #: applet.js:360
 msgid "Video Memory"
-msgstr "Videómemória"
+msgstr "Videomemória"
 
 #: applet.js:363
 msgid "Total"
@@ -79,7 +79,7 @@ msgstr "PCI sebesség"
 
 #: applet.js:403
 msgid "Fan "
-msgstr "Ventillátor"
+msgstr "Ventilátor "
 
 #: applet.js:411
 msgid "Displays:"
@@ -104,8 +104,7 @@ msgstr "A GPU hőmérséklete nem határozható meg."
 #: applet.js:848
 msgid "If you have a NVIDIA GPU, please try installing"
 msgstr ""
-"Amennyiben az NVIDIA gyártótól származó GPU-val rendelkezik, "
-"telepítse "
+"Amennyiben az NVIDIA gyártótól származó GPU-val rendelkezik, telepítse"
 
 #: applet.js:849
 msgid "the binary drivers from http://geforce.com/drivers"
@@ -116,18 +115,17 @@ msgstr ""
 #: applet.js:850
 msgid "and the nvidia-settings package for your distribution."
 msgstr ""
-"és az Linux terjesztésnek megfelelő „nvidia-settings” "
+"és a Linux terjesztésnek megfelelő „nvidia-settings” "
 "alkalmazáscsomagot."
 
 #: applet.js:852
 msgid "If you have an ATI GPU, please install the LM-SENSORS"
 msgstr ""
-"Amennyiben az AMD gyártótól származó GPU-val rendelkezik, telepítse "
+"Amennyiben az AMD gyártótól származó GPU-val rendelkezik, telepítse"
 
 #: applet.js:853
 msgid "packages for your distribution."
-msgstr ""
-"és az Linux terjesztésnek megfelelő LM-SENSORS alkalmazáscsomagot."
+msgstr "a Linux terjesztésnek megfelelő LM-SENSORS alkalmazáscsomagot."
 
 #. gputemperature@silentage.com->metadata.json->name
 msgid "GPU Temperature"

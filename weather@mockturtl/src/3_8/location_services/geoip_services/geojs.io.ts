@@ -1,22 +1,20 @@
-import { Logger } from "../../lib/logger";
-import { WeatherApplet } from "../../main";
-import { LocationData } from "../../types";
+import { LocationProvider } from "../../config";
+import { HttpLib } from "../../lib/httpLib";
+import { ErrorHandler } from "../../lib/services/error_handler";
+import { Logger } from "../../lib/services/logger";
+import type { LocationServiceResult } from "../../types";
 import { _ } from "../../utils";
-import { GeoIP } from "./base";
+import type { GeoIP } from "./base";
 
 /**
  * https://www.geojs.io/docs/v1/endpoints/geo/
  */
 export class GeoJS implements GeoIP {
+	public readonly provider = LocationProvider.GeoJS;
 	private readonly query = "https://get.geojs.io/v1/ip/geo.json";
-	private app: WeatherApplet;
 
-	constructor(_app: WeatherApplet) {
-		this.app = _app;
-	}
-
-	public async GetLocation(): Promise<LocationData | null> {
-		const json = await this.app.LoadJsonAsync<GeoJsPayload>(this.query);
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
+		const json = await HttpLib.Instance.LoadJsonSimple<GeoJsPayload>({ url: this.query, cancellable });
 
 		if (!json) {
 			return null;
@@ -31,16 +29,16 @@ export class GeoJS implements GeoIP {
 
 	};
 
-	private ParseInformation(json: GeoJsPayload): LocationData | null {
+	private ParseInformation(json: GeoJsPayload): LocationServiceResult | null {
 		try {
-			const lat = parseFloat(json.latitude);
-			const lon = parseFloat(json.longitude);
+			const lat = Number.parseFloat(json.latitude);
+			const lon = Number.parseFloat(json.longitude);
 			if (Number.isNaN(lat) || Number.isNaN(lon)) {
 				this.HandleErrorResponse(json);
 				return null;
 			}
 
-			const result: LocationData = {
+			const result: LocationServiceResult = {
 				lat: lat,
 				lon: lon,
 				city: json.city,
@@ -52,15 +50,26 @@ export class GeoJS implements GeoIP {
 			return result;
 		}
 		catch (e) {
-			Logger.Error("ip-api parsing error: " + e);
-			this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
+			if (e instanceof Error)
+				Logger.Error("ip-api parsing error: " + e.message, e);
+			ErrorHandler.Instance.PostError({
+				type: "hard",
+				detail: "no location",
+				service: "ipapi",
+				message: _("Could not obtain location, please see the logs in Looking Glass")
+			})
 			return null;
 		}
 	};
 
-	HandleErrorResponse(json: any): void {
-		this.app.ShowError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" })
-		Logger.Error("ip-api responds with Error: " + json.reason);
+	HandleErrorResponse(json: unknown): void {
+		ErrorHandler.Instance.PostError({
+			type: "hard",
+			detail: "bad api response",
+			message: _("Location Service responded with errors, please see the logs in Looking Glass"),
+			service: "ipapi"
+		})
+		Logger.Error("geojs.io responded with data: " + JSON.stringify(json));
 	};
 }
 

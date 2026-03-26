@@ -19,14 +19,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-23 19:47+0200\n"
-"PO-Revision-Date: 2021-04-04 16:51+0200\n"
+"PO-Revision-Date: 2025-08-09 17:19+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
 #: applet.js:54 applet.js:212
@@ -38,19 +38,18 @@ msgid ""
 "WireGuard configs directory /etc/wireguard does not exist, please make sure "
 "WireGuard is installed"
 msgstr ""
-"WireGuard konfigurációs mappa /etc/wireguard nem létezik, kérem ellenőrizze "
-"telepítve van-e a WireGuard"
+"WireGuard konfigurációs mappa („/etc/wireguard”) nem létezik, kérem "
+"ellenőrizze telepítve van-e a WireGuard"
 
 #: applet.js:135
 msgid "Failed toggling WireGuard interface"
 msgstr "Nem sikerült a WireGuard interfész bekapcsolása"
 
 #: applet.js:139
-msgid ""
-"Failed calling wg-quick, please make sure it is installed and accessible"
+msgid "Failed calling wg-quick, please make sure it is installed and accessible"
 msgstr ""
-"Nem sikerült a wg-quick hívása. Kérjük, ellenőrizze, hogy telepítve van-e "
-"és elérhető-e"
+"Nem sikerült a wg-quick hívása. Kérem, ellenőrizze, hogy telepítve van-e és "
+"elérhető-e"
 
 #: applet.js:174
 msgid "Failed reading network interfaces"
@@ -72,4 +71,4 @@ msgstr "Hiba részletei"
 
 #. metadata.json->description
 msgid "Enable/disable WireGuard connections."
-msgstr "WireGuard kapcsolatok be-/kikapcsolása."
+msgstr "WireGuard kapcsolatok be- és kikapcsolása."

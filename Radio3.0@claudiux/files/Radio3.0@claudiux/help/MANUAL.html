@@ -158,7 +158,7 @@ img { max-width: 100%; }
 <p><em>libnotify-bin</em> to display notifications.</p>
 </li>
 <li>
-<p><em>youtube-dl</em> or <em>yt-dlp</em> (faster than <em>youtube-dl</em>) to download videos from YT.</p>
+<p><em>yt-dlp</em> (faster than <em>youtube-dl</em>, which does not exist anymore in recent distros) to download videos from YT.</p>
 </li>
 <li>
 <p><em>ffmpeg</em> and <em>ffmpegthumbnailer</em> to extract the soundtrack from the downloaded video.</p>
@@ -178,7 +178,7 @@ img { max-width: 100%; }
 <p><a name="DepMint"></a></p>
 <h3>Linux Mint, Ubuntu, Debian</h3>
 <p><code>sudo apt update</code></p>
-<p><code>sudo apt install mpv libmpv-dev sox libsox-fmt-all pulseaudio-utils at libnotify-bin youtube-dl ffmpeg ffmpegthumbnailer python3-polib python3-brotli</code></p>
+<p><code>sudo apt install mpv libmpv-dev sox libsox-fmt-all pulseaudio-utils at libnotify-bin ffmpeg ffmpegthumbnailer python3-polib python3-brotli</code></p>
 <p>Optionally:</p>
 <p><code>sudo apt install pulseeffects</code></p>
 <p><a name="DepArch"></a></p>
@@ -197,17 +197,17 @@ img { max-width: 100%; }
 <hr>
 <p><a name="InstallYtdlp"></a></p>
 <h2>How to install the latest version of yt-dlp?</h2>
-<p>Please note that from version 1.0.3, Radio3.0 automatically installs and updates <em>yr-dlp</em> in your <code>~/bin/</code> directory.</p>
+<p>Please note that from version 1.0.3, Radio3.0 automatically installs and updates <em>yr-dlp</em> in your <code>~/.local/bin/</code> directory.</p>
 <p><em>yt-dlp</em> is used by <strong>Radio3.0</strong> to download videos from YouTube.</p>
 <p>The latest version of <em>yt-dlp</em> fixes bugs and in particular takes better account of your browser's cookies so as not to deprive you of the right to download videos for age limit reasons.</p>
 <p>Here's how to install its latest version:</p>
 <ol>
 <li>Start by installing the version of <em>yt-dlp</em> present in your distro's package repositories, as this also installs all of its dependencies. For example: <code>sudo apt install yt-dlp</code></li>
-<li>Create the <code>$HOME/bin</code> directory that will contain this new version: <code>mkdir -p $HOME/bin</code></li>
-<li>Download the latest version for Linux from <a href="https://github.com/yt-dlp/yt-dlp/releases/latest">https://github.com/yt-dlp/yt-dlp/releases/latest</a> and save it in the <code>$HOME/bin</code> directory that you just created.</li>
-<li>Make it executable: <code>chmod +x $HOME/bin/yt-dlp</code></li>
+<li>Create the <code>$HOME/.local/bin</code> directory that will contain this new version: <code>mkdir -p $HOME/.local/bin</code></li>
+<li>Download the latest version for Linux from <a href="https://github.com/yt-dlp/yt-dlp/releases/latest">https://github.com/yt-dlp/yt-dlp/releases/latest</a> and save it in the <code>$HOME/.local/bin</code> directory that you just created.</li>
+<li>Make it executable: <code>chmod +x $HOME/.local/bin/yt-dlp</code></li>
 <li>Log out from your session.</li>
-<li>Log in. Now any script in your <code>$HOME/bin</code> directory takes precedence over any other script with the same name on your system.</li>
+<li>Log in. Now any script in your <code>$HOME/.local/bin</code> directory takes precedence over any other script with the same name on your system.</li>
 </ol>
 <hr>
 <p><a name="InstallApplet"></a></p>

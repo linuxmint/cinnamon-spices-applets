@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-25 16:57+1000\n"
-"PO-Revision-Date: 2023-06-30 23:32+0200\n"
+"PO-Revision-Date: 2025-08-07 19:27+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: applet.js:147
 msgid "Settings"
@@ -76,7 +76,7 @@ msgstr ""
 
 #: applet.js:353
 msgid "Docker-compose not installed"
-msgstr "A Docker-compose nincs elepítve"
+msgstr "A „docker-compose” nincs telepítve"
 
 #: applet.js:354
 msgid "Click here for installation instructions"
@@ -88,7 +88,7 @@ msgstr "Egy kisalkalamazás a docker-compose környezetek kezeléséhez."
 
 #. metadata.json->name
 msgid "Docker compose manager"
-msgstr "Docker compose kezelő"
+msgstr "Docker Compose kezelő"
 
 #. settings-schema.json->dockerComposeProjectFolder->description
 msgid ""

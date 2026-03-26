@@ -1,0 +1,349 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-22 20:01+0200\n"
+"PO-Revision-Date: 2024-07-06 03:24+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: 3.2/applet.js:1286 4.0/applet.js:1393
+msgid "Preferences"
+msgstr "Preferències"
+
+#: 3.2/applet.js:1290 4.0/applet.js:1397
+msgid "About..."
+msgstr "Quant a..."
+
+#: 3.2/applet.js:1294 4.0/applet.js:1401
+msgid "Configure..."
+msgstr "Configura..."
+
+#: 3.2/applet.js:1298 4.0/applet.js:1405
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Elimina '%s'"
+
+#: 3.2/applet.js:1307 4.0/applet.js:1414
+msgid "Open new window"
+msgstr "Obre una nova finestra"
+
+#: 3.2/applet.js:1313 4.0/applet.js:1420
+msgid "Pin to this workspace"
+msgstr "Fixa a aquest espai de treball"
+
+#: 3.2/applet.js:1327 4.0/applet.js:1434
+msgid "Pin to other workspaces"
+msgstr "Fixa a altres espais de treball"
+
+#: 3.2/applet.js:1359 4.0/applet.js:1507
+msgid "Only on this workspace"
+msgstr "Només en aquest espai de treball"
+
+#: 3.2/applet.js:1362 4.0/applet.js:1510
+msgid "Visible on all workspaces"
+msgstr "Visible a tots els espais de treball"
+
+#: 3.2/applet.js:1364 4.0/applet.js:1511
+msgid "Move to another workspace"
+msgstr "Mou a un altre espai de treball"
+
+#: 3.2/applet.js:1384 4.0/applet.js:1530
+msgid "Move to another monitor"
+msgstr "Mou a un altre monitor"
+
+#: 3.2/applet.js:1392 4.0/applet.js:1538
+msgid "Monitor"
+msgstr "Monitor"
+
+#: 3.2/applet.js:1404 4.0/applet.js:1554
+msgid "Restore"
+msgstr "Restaura"
+
+#: 3.2/applet.js:1409 4.0/applet.js:1559
+msgid "Minimize"
+msgstr "Minimitza"
+
+#: 3.2/applet.js:1415 4.0/applet.js:1565
+msgid "Unmaximize"
+msgstr "Desmaximitza"
+
+#: 3.2/applet.js:1422 4.0/applet.js:1572
+msgid "Close others"
+msgstr "Tanca altres"
+
+#: 3.2/applet.js:1433 4.0/applet.js:1583
+msgid "Close all"
+msgstr "Tanca totes"
+
+#: 3.2/applet.js:1442 4.0/applet.js:1592
+msgid "Close"
+msgstr "Tanca"
+
+#: 4.0/applet.js:1475
+msgid "Places"
+msgstr "Llocs"
+
+#. metadata.json->name
+msgid "CobiWindowList"
+msgstr "Llista de finestres de Cobi"
+
+#. metadata.json->description
+msgid "A window list with app grouping and window previews"
+msgstr "Una llista de finestres amb grups i previsualitzacions"
+
+#. 3.2->settings-schema.json->section1->description
+#. 4.0->settings-schema.json->section1->description
+msgid "Captions"
+msgstr "Etiquetes"
+
+#. 3.2->settings-schema.json->caption-type->options
+#. 4.0->settings-schema.json->caption-type->options
+msgid "Name"
+msgstr "Nom"
+
+#. 3.2->settings-schema.json->caption-type->options
+#. 4.0->settings-schema.json->caption-type->options
+msgid "Title"
+msgstr "Títol"
+
+#. 3.2->settings-schema.json->caption-type->description
+#. 4.0->settings-schema.json->caption-type->description
+msgid "Caption type"
+msgstr "Tipus d'etiqueta"
+
+#. 3.2->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+msgid "None"
+msgstr "Cap"
+
+#. 3.2->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+msgid "All"
+msgstr "Totes"
+
+#. 3.2->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+msgid "Running"
+msgstr "Activa"
+
+#. 3.2->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+msgid "Focused"
+msgstr "En primer plà"
+
+#. 3.2->settings-schema.json->display-caption-for->description
+#. 4.0->settings-schema.json->display-caption-for->description
+msgid "Display Caption For"
+msgstr "Mostra l'etiqueta per"
+
+#. 3.2->settings-schema.json->label-width->units
+#. 4.0->settings-schema.json->label-width->units
+msgid "pixels"
+msgstr "píxels"
+
+#. 3.2->settings-schema.json->label-width->description
+#. 4.0->settings-schema.json->label-width->description
+msgid "Label width"
+msgstr "Amplada de l'etiqueta"
+
+#. 3.2->settings-schema.json->label-animation->description
+#. 4.0->settings-schema.json->label-animation->description
+msgid "Animate label"
+msgstr "Anima l'etiqueta"
+
+#. 3.2->settings-schema.json->label-animation-time->units
+#. 3.2->settings-schema.json->animation-time->units
+#. 3.2->settings-schema.json->preview-timeout-show->units
+#. 3.2->settings-schema.json->preview-timeout-hide->units
+#. 4.0->settings-schema.json->label-animation-time->units
+#. 4.0->settings-schema.json->animation-time->units
+#. 4.0->settings-schema.json->preview-timeout-show->units
+#. 4.0->settings-schema.json->preview-timeout-hide->units
+msgid "milliseconds"
+msgstr "mil·lisegons"
+
+#. 3.2->settings-schema.json->label-animation-time->description
+#. 4.0->settings-schema.json->label-animation-time->description
+msgid "Label animation time"
+msgstr "Temps d'animació de l'etiqueta"
+
+#. 3.2->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+msgid "Never"
+msgstr "Mai"
+
+#. 3.2->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+msgid "Always"
+msgstr "Sempre"
+
+#. 3.2->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+msgid "2 or more windows"
+msgstr "2 o més finestres"
+
+#. 3.2->settings-schema.json->display-number->description
+#. 4.0->settings-schema.json->display-number->description
+msgid "Display Number"
+msgstr "Mostra el número"
+
+#. 3.2->settings-schema.json->section2->description
+#. 4.0->settings-schema.json->section2->description
+msgid "Icons"
+msgstr "Icones"
+
+#. 3.2->settings-schema.json->group-windows->description
+#. 4.0->settings-schema.json->group-windows->description
+msgid "Group Windows"
+msgstr "Agrupa finestres"
+
+#. 3.2->settings-schema.json->group-windows->tooltip
+#. 4.0->settings-schema.json->group-windows->tooltip
+msgid ""
+"If windows are grouped, all windows from an application are managed by the "
+"same button,\n"
+"if not grouped, all windows get an own button"
+msgstr ""
+"Si les finestres estan agrupades, totes les del grup es gestionen amb el "
+"mateix botó;\n"
+"si no ho estan, totes tenen el seu propi botó"
+
+#. 3.2->settings-schema.json->display-pinned->description
+#. 4.0->settings-schema.json->display-pinned->description
+msgid "Display Favorites"
+msgstr "Mostra preferides"
+
+#. 3.2->settings-schema.json->animation-time->description
+#. 4.0->settings-schema.json->animation-time->description
+msgid "Animation Time"
+msgstr "Temps d'animació"
+
+#. 3.2->settings-schema.json->animation-time->tooltip
+#. 4.0->settings-schema.json->animation-time->tooltip
+msgid "The flashing time when a new window is opened via a button"
+msgstr ""
+"Durada de l'animació quan una finestra nova és oberta a través d'un botó"
+
+#. 3.2->settings-schema.json->show-windows-for-current-monitor->description
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->description
+msgid "Only show windows on the same monitor"
+msgstr "Mostra només finestres del mateix monitor"
+
+#. 3.2->settings-schema.json->show-windows-for-current-monitor->tooltip
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->tooltip
+msgid ""
+"If enabled, this applet instance only manages windows\n"
+"that are displayed on the same monitor"
+msgstr ""
+"Si s'activa, aquesta instància de la miniaplicació només gestionarà "
+"finestres\n"
+"que estiguin mostrant-se al mateix monitor"
+
+#. 3.2->settings-schema.json->section3->description
+#. 4.0->settings-schema.json->section3->description
+msgid "Preview menu"
+msgstr "Previsualitza el menú"
+
+#. 3.2->settings-schema.json->menu-show-on-click->description
+#. 4.0->settings-schema.json->menu-show-on-click->description
+msgid "Show on click"
+msgstr "Mostra en fer-hi clic"
+
+#. 3.2->settings-schema.json->menu-show-on-click->tooltip
+#. 4.0->settings-schema.json->menu-show-on-click->tooltip
+msgid ""
+"If enabled, a popup menu with a list of current windows will show when "
+"clicking\n"
+"(Only with 2 or more windows)"
+msgstr ""
+"Si s'activa, es mostrarà un menú emergent amb una llista de totes les "
+"finestres actuals en fer-hi clic\n"
+"(Només amb 2 o més finestres)"
+
+#. 3.2->settings-schema.json->menu-show-on-hover->description
+#. 4.0->settings-schema.json->menu-show-on-hover->description
+msgid "Show on hover"
+msgstr "Mostra en passar-hi el cursor per sobre"
+
+#. 3.2->settings-schema.json->menu-show-on-hover->tooltip
+#. 4.0->settings-schema.json->menu-show-on-hover->tooltip
+msgid ""
+"If enabled, a popup menu with a list of current windows will show when "
+"hovering"
+msgstr ""
+"Si s'activa, es mostrarà una finestra emergent amb una llista de totes les "
+"finestres actuals en passar-hi el cursor per sobre"
+
+#. 3.2->settings-schema.json->show-previews->description
+#. 4.0->settings-schema.json->show-previews->description
+msgid "Show previews"
+msgstr "Mostra previsualitzacions"
+
+#. 3.2->settings-schema.json->show-previews->tooltip
+#. 4.0->settings-schema.json->show-previews->tooltip
+msgid ""
+"If enabled, the popup menu will show window previews\n"
+"(Always disabled when running Cinnamon in Software Rendering Mode)"
+msgstr ""
+"Si s'activa, la finestra emergent mostrarà previsualitzacions de les "
+"finestres\n"
+"(Sempre desactivat si Cinnamon s'està executant en mode de presentació via "
+"programari)"
+
+#. 3.2->settings-schema.json->number-of-unshrunk-previews->units
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->units
+msgid "Windows"
+msgstr "Finestres"
+
+#. 3.2->settings-schema.json->number-of-unshrunk-previews->description
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->description
+msgid "Number of unshrunk previews"
+msgstr "Número de previsualitzacions sense encongir"
+
+#. 3.2->settings-schema.json->preview-timeout-show->description
+#. 4.0->settings-schema.json->preview-timeout-show->description
+msgid "Timeout Show"
+msgstr "Temps d'espera per mostrar"
+
+#. 3.2->settings-schema.json->preview-timeout-show->tooltip
+#. 4.0->settings-schema.json->preview-timeout-show->tooltip
+msgid ""
+"The waiting time for the popup menu to show, when hovering a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"El temps d'espera perquè es mostri el menú emergent en passar el cursor "
+"damunt d'un botó\n"
+"(No s'utilitza quan s'està movent directament a un botó diferent de la "
+"llista)"
+
+#. 3.2->settings-schema.json->preview-timeout-hide->description
+#. 4.0->settings-schema.json->preview-timeout-hide->description
+msgid "Timeout Hide"
+msgstr "Temps d'espera per amagar"
+
+#. 3.2->settings-schema.json->preview-timeout-hide->tooltip
+#. 4.0->settings-schema.json->preview-timeout-hide->tooltip
+msgid ""
+"The waiting time for the popup menu to hide, when leaving a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"El temps d'espera perquè s'amagui el menú emergent en la sortida del "
+"cursor de damunt d'un botó\n"
+"(No s'utilitza en moure's directament sobre un botó diferent de la llista)"
+
+#. 3.2->settings-schema.json->preview-close-on-middle-click->description
+#. 4.0->settings-schema.json->preview-close-on-middle-click->description
+msgid "Close window on mouse-wheel click"
+msgstr "Tanca la finestra en fer clic amb la roda del ratolí"

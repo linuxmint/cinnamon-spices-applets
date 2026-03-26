@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-24 20:57+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-15 02:01+0200\n"
 "PO-Revision-Date: 2021-02-24 21:50+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,47 +19,51 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:148
+#: applet.js:150
 msgid "(Right click to open folder)"
 msgstr "(Rechtsklick zum Öffnen des Ordners)"
 
-#: applet.js:170
+#: applet.js:172
 msgid "Places"
 msgstr "Orte"
 
-#: applet.js:284
+#: applet.js:287
 msgid "Search Home Folder"
 msgstr "Persönlichen Ordner durchsuchen"
 
-#: applet.js:307
+#: applet.js:310
 msgid "SYSTEM"
 msgstr "SYSTEM"
 
-#: applet.js:316
+#: applet.js:319
 msgid "Search File System"
 msgstr "Dateisystem durchsuchen"
 
-#: applet.js:341
+#: applet.js:344
 msgid "RECENT DOCUMENTS"
 msgstr "ZULETZT VERWENDETE DATEIEN"
 
-#: applet.js:355
+#: applet.js:358
 msgid "Clear"
 msgstr "Leeren"
 
-#: applet.js:398
+#: applet.js:364
+msgid "Recent"
+msgstr ""
+
+#: applet.js:407
 msgid "Computer"
 msgstr "Rechner"
 
-#: applet.js:404
+#: applet.js:413
 msgid "File System"
 msgstr "Dateisystem"
 
-#: applet.js:420
+#: applet.js:429
 msgid "Network"
 msgstr "Netzwerk"
 
-#: applet.js:560
+#: applet.js:569
 msgid "Trash"
 msgstr "Papierkorb"
 
@@ -161,6 +166,10 @@ msgstr "Stephen Collins - Autor"
 #. metadata.json->contributors
 msgid "kehugter - Added configurability to middle click"
 msgstr "kehugter - Konfigurierbarkeit für Mittelklick hinzugefügt"
+
+#. metadata.json->contributors
+msgid "claudiux - Improvements to the 'Recent' section."
+msgstr ""
 
 #. settings-schema.json->generalPage->title
 msgid "General"
@@ -323,28 +332,10 @@ msgstr "Alle kürzlich verwendeten Dateien"
 msgid "Number to show"
 msgstr "Anzuzeigende Anzahl"
 
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr ""
+
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"
 msgstr "Privatsphäre"
-
-#~ msgid "General Settings"
-#~ msgstr "Allgemeine Einstellungen"
-
-#~ msgid "Icon size"
-#~ msgstr "Symbolgröße"
-
-#~ msgid ""
-#~ "List of uris/file paths to be included. Entries may be separated by "
-#~ "either a comma(,) or by a new-line. You can set the name to be displayed "
-#~ "by adding :customName after the location."
-#~ msgstr ""
-#~ "Liste von URIs/Dateipfaden, welche eingefügt werden sollen. Einträge "
-#~ "können entweder durch ein Komma (,) oder durch eine neue Zeile getrennt "
-#~ "werden. Sie können den Namen, der angezeigt werden soll, durch Hinzufügen "
-#~ "von :ANZEIGENAME an das Pfadende festlegen."
-
-#~ msgid "User Section"
-#~ msgstr "Benutzer-Bereich"
-
-#~ msgid "System Section"
-#~ msgstr "System-Bereich"

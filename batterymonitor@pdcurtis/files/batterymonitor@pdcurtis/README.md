@@ -70,3 +70,9 @@ For full facilities including notifications and audible alerts the ```zenity sox
    * Install the additional programs required.
    * Enable the applet in System Settings -> Applets
    * You can also access the Settings Screen from System Settings -> Applets or from the Applets Context menu
+
+## License
+
+Yaru icon theme (C) Canonical distributed under the CC-BY-SA 4.0 license
+
+https://creativecommons.org/licenses/by-sa/4.0/

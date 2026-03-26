@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ScreenShot+RecordDesktop@tech71\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-04 18:50+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-04 13:04-0400\n"
 "PO-Revision-Date: 2020-02-28 09:32+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -18,87 +19,87 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:28
+#. applet.js:27
 msgid "ScreenShot"
 msgstr "Skärmklipp"
 
-#: applet.js:33
+#. applet.js:32
 msgid "Current Window"
 msgstr "Aktuellt fönster"
 
-#: applet.js:38
+#. applet.js:37
 msgid "Selected Area"
 msgstr "Markerat område"
 
-#: applet.js:44
+#. applet.js:43
 msgid "Whole Screen"
 msgstr "Hela skärmen"
 
-#: applet.js:46
+#. applet.js:45
 msgid "1 Second Delay"
 msgstr "1 sekunds fördröjning"
 
-#: applet.js:50
+#. applet.js:49
 msgid "3 Second Delay"
 msgstr "3 sekunders fördröjning"
 
-#: applet.js:54
+#. applet.js:53
 msgid "5 Second Delay"
 msgstr "5 sekunders fördröjning"
 
-#: applet.js:61
+#. applet.js:60
 msgid "Record Screencast"
 msgstr "Spela in"
 
-#: applet.js:65
+#. applet.js:64
 msgid "Record Desktop With Audio"
 msgstr "Spela in skrivbordet med ljud"
 
-#: applet.js:68 applet.js:74 applet.js:81 applet.js:87
+#. applet.js:67 applet.js:73 applet.js:80 applet.js:86
 msgid "Recording"
 msgstr "Spelar in"
 
-#: applet.js:68 applet.js:81
+#. applet.js:67 applet.js:80
 msgid "With-Audio"
 msgstr "Med ljud"
 
-#: applet.js:71
+#. applet.js:70
 msgid "Record Desktop Without Audio"
 msgstr "Spela in skrivbordet utan ljud"
 
-#: applet.js:74 applet.js:87
+#. applet.js:73 applet.js:86
 msgid "No-Audio"
 msgstr "Inget ljud"
 
-#: applet.js:78
+#. applet.js:77
 msgid "Record Current Window With Audio"
 msgstr "Spela in aktuellt fönster med ljud"
 
-#: applet.js:84
+#. applet.js:83
 msgid "Record Current Window Without Audio"
 msgstr "Spela in aktuellt fönster utan ljud"
 
-#: applet.js:91
+#. applet.js:90
 msgid "Stop Recording"
 msgstr "Stoppa inspelningen"
 
-#: applet.js:96
+#. applet.js:95
 msgid "Recording-Stopped"
 msgstr "Inspelning stoppad"
 
-#: applet.js:97
+#. applet.js:96
 msgid "Recording-Finished"
 msgstr "Inspelningen är avslutad"
 
-#: applet.js:107
+#. applet.js:106
 msgid "Take A Snapshot or Record Your Desktop"
 msgstr "Ta ett skärmklipp eller spela in ditt skrivbord"
 
-#: applet.js:124
+#. applet.js:123
 msgid "Pictures Folder"
 msgstr "Bilder"
 
-#: applet.js:130
+#. applet.js:129
 msgid "Videos Folder"
 msgstr "Video"
 
@@ -113,9 +114,3 @@ msgstr ""
 #. metadata.json->name
 msgid "ScreenShot+Record Desktop"
 msgstr "Skärmklipp+Skrivbordsinspelning"
-
-#~ msgid "Start No Audio"
-#~ msgstr "Starta utan ljud"
-
-#~ msgid "Take A Snapshot Or Record Your Desktop"
-#~ msgstr "Ta ett skärmklipp eller spela in ditt skrivbord"

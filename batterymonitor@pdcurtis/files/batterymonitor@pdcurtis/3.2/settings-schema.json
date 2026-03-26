@@ -39,6 +39,15 @@
         "description": "Type of Display in Toolbar",
         "tooltip": "This feature offers the Classic (original) display with optional battery icon and some more compact displays suitable for a vertical panel (CompactCompact Plus and Icon Only)"
     },
+    "iconTheme": {
+        "type": "combobox",
+        "default": "classic",
+        "options": {
+            "Classic": "classic",
+            "Yaru Light": "yaru-light",
+            "Yaru Dark": "yaru-dark"
+        }
+    },
     "head2": {
         "type": "header",
         "description": "Battery Low Alert Settings"

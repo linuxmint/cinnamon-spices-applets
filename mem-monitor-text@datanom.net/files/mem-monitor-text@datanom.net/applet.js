@@ -96,8 +96,15 @@ _update:
 _runSysMon:
     function() {
         let _appSys = Cinnamon.AppSystem.get_default();
-        let _gsmApp = _appSys.lookup_app('gnome-system-monitor.desktop');
-        _gsmApp.activate();
+        let _gsmApp = _appSys.lookup_app('org.gnome.SystemMonitor.desktop');
+        if(_gsmApp) {
+            _gsmApp.activate();
+            return
+        }
+        _gsmApp = _appSys.lookup_app('gnome-system-monitor.desktop');
+        if(_gsmApp) {
+            _gsmApp.activate();
+        }
     },
 };
 

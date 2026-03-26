@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-12 12:09+0800\n"
-"PO-Revision-Date: 2021-03-26 12:16+0100\n"
+"PO-Revision-Date: 2025-08-06 16:24+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. cryptocoin@guantanamoe->metadata.json->description
 msgid "Monitor current price and trends of cryptocurrencies"
@@ -185,16 +185,16 @@ msgstr "Riasztás, ha az érték csökkenése ez delta %"
 #. cryptocoin@guantanamoe->settings-schema.json->alert-delta-
 #. length->description
 msgid "Delta interval"
-msgstr "Delta intervallum"
+msgstr "Delta időköz"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-delta-unit->description
 msgid "Unit of interval"
-msgstr "Intervallum mértékegysége"
+msgstr "Időköz mértékegysége"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-delta-update-
 #. interval->description
 msgid "Update interval"
-msgstr "Frissítési intervallum"
+msgstr "Frissítési időköz"
 
 #. settings-schema.json->advanced-page->title
 msgid "Advanced"
@@ -222,7 +222,7 @@ msgstr "Nincs"
 
 #. settings-schema.json->rates-update-interval->description
 msgid "Rates update interval (in seconds)"
-msgstr "Az árfolyamok frissítési intervalluma (másodpercben)"
+msgstr "Az árfolyamok frissítési időköz (másodpercben megadva)"
 
 #. settings-schema.json->rates-update-interval->tooltip
 msgid "Set the delay between each rates update."
@@ -230,11 +230,11 @@ msgstr "Állítsa be az egyes árfolyamok frissítése közötti késleltetést.
 
 #. settings-schema.json->graph-type->description
 msgid "Graph Type"
-msgstr "Grafikon typus"
+msgstr "Grafikon típus"
 
 #. settings-schema.json->graph-type->options
 msgid "Candlestick"
-msgstr "Gyertyatartó"
+msgstr "Gyertya"
 
 #. settings-schema.json->graph-type->options
 msgid "Line"

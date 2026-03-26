@@ -3,6 +3,7 @@ const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Soup = imports.gi.Soup;
 const Util = imports.misc.util;
+const ByteArray = imports.byteArray;
 
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
@@ -11,8 +12,13 @@ const Lang = imports.lang;
 
 const APPLET_PATH = global.userdatadir + "/applets/" + UUID;
 
-const soupASyncSession = new Soup.SessionAsync();
-Soup.Session.prototype.add_feature.call(soupASyncSession, new Soup.ProxyResolverDefault());
+var soupASyncSession;
+if (Soup.MAJOR_VERSION === 2) {
+    soupASyncSession = new Soup.SessionAsync();
+    Soup.Session.prototype.add_feature.call(soupASyncSession, new Soup.ProxyResolverDefault());
+} else {
+    soupASyncSession = new Soup.Session();
+}
 
 const Secret = imports.gi.Secret;
 const PASSWORD_SCHEMA = new Secret.Schema("org.freedesktop.Secret.Generic",
@@ -206,16 +212,38 @@ MyApplet.prototype = {
       let request = Soup.Message.new("POST", "https://www.duolingo.com/login");
     
       let credentials_json = `{"login": "${self.credentials.split("|")[0]}", "password": "${self.credentials.split("|")[1]}"}`;
-      request.set_request("application/json", 2, credentials_json);
-    
-      soupASyncSession.queue_message(request, function(soupASyncSession, message){
-        if (message.status_code !== 200) {
-          self.set_applet_label("Connerror");
-          return;
-        };
-        self.token = message.response_headers.get_one("jwt");
-      callback(self.token);
-      });
+
+      if (Soup.MAJOR_VERSION === 2) {
+        request.set_request("application/json", 2, credentials_json);
+
+        soupASyncSession.queue_message(request, function(soupASyncSession, message){
+          if (message.status_code !== 200) {
+            self.set_applet_label("Connerror");
+            return;
+          };
+          self.token = message.response_headers.get_one("jwt");
+          callback(self.token);
+        });
+      } else {
+        const bytes = GLib.Bytes.new(ByteArray.fromString(credentials_json));
+        request.set_request_body_from_bytes('application/json', bytes);
+
+        soupASyncSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, (session, response) => {
+            if (request.get_status() !== 200) {
+                self.set_applet_label("Connerror");
+                return;
+            }
+
+            try {
+                session.send_and_read_finish(response);
+                self.token = message.response_headers.get_one("jwt");
+                callback(self.token);
+            } catch (err) {
+                self.set_applet_label("Connerror");
+                return;
+            }
+        });
+      }
     } else {
       callback(self.token);
     }
@@ -228,70 +256,96 @@ MyApplet.prototype = {
     request.request_headers.set_content_type("application/json", null);
 
     let self = this;
-    
-    soupASyncSession.queue_message(request, function(soupASyncSession, message) {
-      if (message.status_code !== 200) {
-        if (message.status_code == 401) {
-          self.set_applet_label("Unauthorized");
-          Secret.password_clear(PASSWORD_SCHEMA, { "site": "duolingo.com" },
-                              null, self.credentials_search.bind(self));
-          global.log("DUO 'unauthorized' error: " + message.status + " " + request.response_body.data);
-        }
-        return;
-      };
-      let responseParsed = JSON.parse(request.response_body.data);
+    let responseParsed;
 
-      let language_one = Object.keys(responseParsed.language_data)[0];
-
-      ////////// Crowns //////////
-      let skills = responseParsed.language_data[language_one].skills;
-
-      let crowns = 0;
-      for (let skill of skills){
-        crowns += skill.skill_progress.level;
-      }
-      self.crownLabel.set_text(crowns.toString());
-
-      ////////// Streak //////////
-      self.streakLabel.set_text((responseParsed.language_data[language_one].streak).toString());
-
-      ////////// Lingots //////////
-      self.lingotLabel.set_text((responseParsed.rupees).toString());
-
-      ////////// XP //////////
-      let daily_goal = responseParsed.daily_goal.toString();
-
-      // calculate epoch of last midnight
-      let d = new Date();
-      let midnight = d.getTime() - (d.getHours() * 3600 * 1000) - (d.getMinutes() * 60 * 1000) - (d.getSeconds() * 1000);
-
-      // collect exercises done since midnight into an array
-      let exercises_today = new Array();
-      for (let exercise of responseParsed.calendar) {
-        if (exercise.datetime > midnight) {
-          exercises_today.push(exercise);
+    if (Soup.MAJOR_VERSION === 2) {
+      soupASyncSession.queue_message(request, function(soupASyncSession, message) {
+        if (message.status_code !== 200) {
+          if (message.status_code == 401) {
+            self.set_applet_label("Unauthorized");
+            Secret.password_clear(PASSWORD_SCHEMA, { "site": "duolingo.com" },
+                                null, self.credentials_search.bind(self));
+            global.log("DUO 'unauthorized' error: " + message.status + " " + request.response_body.data);
+          }
+          return;
         };
-      };
 
-      // calculate XP gained since midnight
-      let xp_today = 0;
-      for (let exercise of exercises_today){
-        xp_today += exercise.improvement;
-      };
+        responseParsed = JSON.parse(request.response_body.data);
+        this.process_response(responseParsed);
 
-      // set icon color, display XP values
-      if (xp_today < daily_goal) {
-        self.set_applet_icon_path(APPLET_PATH + "/icon_red.png");
-      } else {
-        self.set_applet_icon_path(APPLET_PATH + "/icon.png");
-      }
-      self.set_applet_label(xp_today + "/" + daily_goal);
+      });
+    } else {
+      soupASyncSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, (session, response) => {
+        if (request.get_status() !== 200) {
+          if (request.get_status() === 401) {
+            self.set_applet_label("Unauthorized");
+            Secret.password_clear(PASSWORD_SCHEMA, { "site": "duolingo.com" },
+                                null, self.credentials_search.bind(self));
+            global.log("DUO 'unauthorized' error: " + message.status + " " + request.response_body.data);
+          }
+          return;
+        }
 
-      setTimeout(self.credentials_search.bind(self), 30000);
-
-    });
+        try {
+            const bytes = soupASyncSession.send_and_read_finish(response);
+            responseParsed = JSON.parse(ByteArray.toString(bytes.get_data()));
+            this.process_response(responseParsed);
+        } catch (err) {
+            global.log("DUO: " + err);
+        }
+      });
+    }
   },
 
+  processResponse:  function(responseParsed) {
+    let language_one = Object.keys(responseParsed.language_data)[0];
+  
+    ////////// Crowns //////////
+    let skills = responseParsed.language_data[language_one].skills;
+  
+    let crowns = 0;
+    for (let skill of skills){
+      crowns += skill.skill_progress.level;
+    }
+    self.crownLabel.set_text(crowns.toString());
+  
+    ////////// Streak //////////
+    self.streakLabel.set_text((responseParsed.language_data[language_one].streak).toString());
+  
+    ////////// Lingots //////////
+    self.lingotLabel.set_text((responseParsed.rupees).toString());
+  
+    ////////// XP //////////
+    let daily_goal = responseParsed.daily_goal.toString();
+  
+    // calculate epoch of last midnight
+    let d = new Date();
+    let midnight = d.getTime() - (d.getHours() * 3600 * 1000) - (d.getMinutes() * 60 * 1000) - (d.getSeconds() * 1000);
+  
+    // collect exercises done since midnight into an array
+    let exercises_today = new Array();
+    for (let exercise of responseParsed.calendar) {
+      if (exercise.datetime > midnight) {
+        exercises_today.push(exercise);
+      };
+    };
+  
+    // calculate XP gained since midnight
+    let xp_today = 0;
+    for (let exercise of exercises_today){
+      xp_today += exercise.improvement;
+    };
+  
+    // set icon color, display XP values
+    if (xp_today < daily_goal) {
+      self.set_applet_icon_path(APPLET_PATH + "/icon_red.png");
+    } else {
+      self.set_applet_icon_path(APPLET_PATH + "/icon.png");
+    }
+    self.set_applet_label(xp_today + "/" + daily_goal);
+
+    setTimeout(self.credentials_search.bind(self), 30000);
+  }
 };
 
 function main(metadata, orientation, panelHeight, instanceId) {

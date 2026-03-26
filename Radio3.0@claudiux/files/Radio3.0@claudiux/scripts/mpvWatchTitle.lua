@@ -55,12 +55,17 @@ function write_pid()
 end
 
 function write_song(songname)
-  if songname == old_songname then return end
-  old_songname = songname
+  new_songname = songname
+  --~ postitle = string.find(new_songname, "xml")
+  --~ if postitle then
+    --~ new_songname = ""
+  --~ end
+  if new_songname == old_songname then return end
+  old_songname = new_songname
   local file = io.open(title_file_path, "w")
   if file then
     --file:write(string.format([[%s]], songname), "") -- "\n"
-    file:write(utf8format("%30s", songname), "")
+    file:write(utf8format("%30s", new_songname), "")
     --msg.info("Saved: "..songname)
     file:close()
   else

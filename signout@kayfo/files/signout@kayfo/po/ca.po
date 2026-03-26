@@ -1,0 +1,41 @@
+# SIGNOUT@KAYFO
+# This file is put in the public domain.
+# kayfo, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: signout@kayfo 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-14 06:03-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:9 applet.js:10
+msgid "Sign Out"
+msgstr "Tanca la sessió"
+
+#. metadata.json->description
+msgid ""
+"Adds an obvious Sign Out button to the panel. Useful in public computing "
+"environments like libraries and computer labs where users are not tech "
+"savvy. Pair with your prefered ephemeral guest sessions solution to ensure "
+"that sessions are wiped between users. Not for use on vertical panels."
+msgstr ""
+"Afegeix un botó obvi de tancament de sessió al tauler. Útil en l'àmbit "
+"públic com ara en biblioteques o laboratoris d'ordinadors en els quals els "
+"usuaris no tenen coneixement tecnològic. Emparelleu-lo amb la vostra "
+"solució preferida de gestió de sessions de convidat per a assegurar-vos "
+"que les sessions són eliminades entre usuaris. No apte per a taulers "
+"verticals."
+
+#. metadata.json->name
+msgid "Signout@kayfo"
+msgstr "Signout@kayfo"

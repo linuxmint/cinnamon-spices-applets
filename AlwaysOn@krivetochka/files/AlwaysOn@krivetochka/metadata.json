@@ -1,0 +1,7 @@
+{
+    "uuid": "AlwaysOn@krivetochka",
+    "name": "AlwaysOn",
+    "description": "When AlwaysOn is activated, the screen will remain on, and the computer will not go to sleep. The behavior can be changed in the applet settings.",
+    "version": "1.1.0",
+    "author": "Krivetochka"
+}

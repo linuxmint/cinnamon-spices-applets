@@ -94,7 +94,7 @@ function dt_equals(dt1, dt2) {
 }
 
 class EventData {
-    constructor(data_var, last_request_timestamp) {
+    constructor(data_var, last_update_timestamp) {
         const [id, color, summary, all_day, start_time, end_time, mod_time] = data_var.deep_unpack();
         this.id = id;
         this.start = GLib.DateTime.new_from_unix_local(start_time);
@@ -105,6 +105,11 @@ class EventData {
             // An all day event can be from 00:00 to 00:00 the next day, which will end up
             // causing it to appear for two days.
             this.end = this.end.add_seconds(-1);
+        }
+        if (this.end.compare(this.start) == -1) {
+            // An all day event can be a single point in time at 00:00. The previous -1s
+            // will cause it to appear all the following days in the current view.
+            this.end = this.start;
         }
         this.start_date = date_only(this.start);
         this.end_date = date_only(this.end);
@@ -121,7 +126,7 @@ class EventData {
         this.modified = mod_time;
         // This is the last monotonic time we contacted our server to update our events. This
         // is used to cull deleted events.
-        this.last_request_timestamp = last_request_timestamp;
+        this.last_update_timestamp = last_update_timestamp;
     }
 
     starts_on_day(date) {
@@ -172,7 +177,7 @@ class EventDataList {
         this._events = {};
     }
 
-    add_or_update(event_data, last_request_timestamp) {
+    add_or_update(event_data, last_update_timestamp) {
         let existing = this._events[event_data.id];
 
         if (existing === undefined) {
@@ -180,7 +185,7 @@ class EventDataList {
         }
 
         if (existing !== undefined && event_data.equal(existing)) {
-            existing.last_request_timestamp = last_request_timestamp;
+            existing.last_update_timestamp = last_update_timestamp;
             existing.color = event_data.color;
             return false;
         }
@@ -205,12 +210,16 @@ class EventDataList {
         return true;
     }
 
-    cull_removed_events(last_request_timestamp) {
+    cull_removed_events(last_update_timestamp) {
         let to_remove = [];
         for (let id in this._events) {
-            if (this._events[id].last_request_timestamp < last_request_timestamp) {
+            if (this._events[id].last_update_timestamp < last_update_timestamp) {
                 to_remove.push(id);
             }
+        }
+
+        if (to_remove.length === 0) {
+            return false;
         }
 
         to_remove.forEach((id) => {
@@ -388,7 +397,7 @@ class EventsManager {
     _perform_gc() {
         let any_removed = false;
         for (let date in this.events_by_date) {
-            if (this.events_by_date[date].cull_removed_events(this.last_request_timestamp)) {
+            if (this.events_by_date[date].cull_removed_events(this.last_update_timestamp)) {
                 any_removed = true;
             }
         }
@@ -418,7 +427,7 @@ class EventsManager {
                     this.events_by_date[hash] = new EventDataList(date_iter);
                 }
 
-                if (this.events_by_date[hash].add_or_update(data, this.last_request_timestamp)) {
+                if (this.events_by_date[hash].add_or_update(data, this.last_update_timestamp)) {
                     if (dt_equals(date_iter, this.current_selected_date)) {
                         changed = true;
                     }
@@ -613,6 +622,7 @@ class EventList {
         this.selected_date = GLib.DateTime.new_now_local();
         this.desktop_settings = desktop_settings;
         this._no_events_timeout_id = 0;
+        this._scroll_to_idle_id = 0;
         this._rows = [];
         this._current_event_data_list_timestamp = 0;
 
@@ -735,6 +745,11 @@ class EventList {
     }
 
     set_events(event_data_list, delay_no_events_box) {
+        if (this._scroll_to_idle_id > 0) {
+            Mainloop.source_remove(this._scroll_to_idle_id);
+            this._scroll_to_idle_id = 0;
+        }
+
         if (event_data_list !== null && event_data_list.timestamp === this._current_event_data_list_timestamp) {
             this._rows.forEach((row) => {
                 row.update_variations();
@@ -806,7 +821,11 @@ class EventList {
             this._rows.push(row);
         }
 
-        Mainloop.idle_add(Lang.bind(this, function(row) {
+        if (scroll_to_row == null) {
+            return;
+        }
+
+        this._scroll_to_idle_id = Mainloop.idle_add(Lang.bind(this, function(row) {
             let vscroll = this.events_scroll_box.get_vscroll_bar();
 
             if (row != null) {
@@ -815,6 +834,9 @@ class EventList {
             } else {
                 vscroll.get_adjustment().set_value(0);
             }
+
+            this._scroll_to_idle_id = 0;
+            return GLib.SOURCE_REMOVE;
         }, scroll_to_row));
     }
 }

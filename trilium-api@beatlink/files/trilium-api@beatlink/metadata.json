@@ -1,0 +1,7 @@
+{
+    "description": "Applet for Displaying Text from a Trilium API Script",
+    "uuid": "trilium-api@beatlink",
+    "name": "Trilium API",
+    "author": "BeatLink",
+    "max-instances": -1
+}

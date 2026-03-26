@@ -1,4 +1,12 @@
-###1.2.2
+### 1.3.0
+- Thanks for multiple translations: blogdron for Russian, qadzek for Dutch, Odyssey for Catalan
+- Multiple fixes merged from upstream calendar@cinnamon
+- Included custom tooltip formatting from upstream calendar@cinnamon
+- Bugfix: correctly check cache whenever data are needed
+- Support for holidays in Cyprus, Montenegro and El Salvador, and for regional holidays in Belgium.  
+  **Users from Belgium will need to check their regional settings!**
+
+### 1.2.2
 - Thanks to Kimmo Kujansuu for the finnish translation
 - fredcw added support for libsup 3
 - Support for Kosovo holidays

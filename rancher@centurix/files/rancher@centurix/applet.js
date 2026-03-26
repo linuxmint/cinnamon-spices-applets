@@ -3,14 +3,13 @@ const PopupMenu = imports.ui.popupMenu;
 const Lang = imports.lang;
 const Settings = imports.ui.settings;
 const Gtk = imports.gi.Gtk;
-let Homestead, Util;
+const Util = imports.misc.util;
+let Homestead;
 if (typeof require !== 'undefined') {
 	Homestead = require('./homestead');
-	Util = require('./util');
 } else {
 	const AppletDir = imports.ui.appletManager.applets['rancher@centurix'];
 	Homestead = AppletDir.homestead;
-	Util = AppletDir.util;
 }
 const MessageTray = imports.ui.messageTray;
 const Main = imports.ui.main;
@@ -253,20 +252,20 @@ Rancher.prototype = {
 	openBrowser: function(url) {
 		let matches = (new RegExp('\\("(.*?)"\\)')).exec(url);
 		if (matches && matches.length > 0) {
-			Main.Util.spawnCommandLine("xdg-open http://" + matches[1]);
+			Util.spawnCommandLine("xdg-open http://" + matches[1]);
 		}
 	},
 
 	openHomesteadGithub: function() {
-		Main.Util.spawnCommandLine("xdg-open http://laravel.com/docs/homestead");
+		Util.spawnCommandLine("xdg-open http://laravel.com/docs/homestead");
 	},
 
 	openVagrantDownload: function() {
-		Main.Util.spawnCommandLine("xdg-open https://www.vagrantup.com/downloads.html");
+		Util.spawnCommandLine("xdg-open https://www.vagrantup.com/downloads.html");
 	},
 
 	editHosts: function() {
-		Main.Util.spawnCommandLine("gksudo " + this.editor + " /etc/hosts");
+		Util.spawnCommandLine("gksudo " + this.editor + " /etc/hosts");
 	},
 
 	updateApplet: function(exists, status) {

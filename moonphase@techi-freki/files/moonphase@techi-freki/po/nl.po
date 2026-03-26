@@ -1,0 +1,198 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-05-05 18:11-0400\n"
+"PO-Revision-Date: 2024-07-24 10:07+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: js/compass.js:14
+msgid "North"
+msgstr "Noord"
+
+#: js/compass.js:15
+msgid "North East"
+msgstr "Noordoost"
+
+#: js/compass.js:16
+msgid "East"
+msgstr "Oost"
+
+#: js/compass.js:17
+msgid "South East"
+msgstr "Zuidoost"
+
+#: js/compass.js:18
+msgid "South"
+msgstr "Zuid"
+
+#: js/compass.js:19
+msgid "South West"
+msgstr "Zuidwest"
+
+#: js/compass.js:20
+msgid "West"
+msgstr "West"
+
+#: js/compass.js:21
+msgid "North West"
+msgstr "Noordwest"
+
+#: js/moon.js:32 js/moon.js:40
+msgid "New Moon"
+msgstr "Nieuwe Maan"
+
+#: js/moon.js:33
+msgid "Waxing Crescent"
+msgstr "Wassende Sikkel"
+
+#: js/moon.js:34
+msgid "First Quarter"
+msgstr "Eerste Kwartier"
+
+#: js/moon.js:35
+msgid "Waxing Gibbous"
+msgstr "Wassende Maan"
+
+#: js/moon.js:36
+msgid "Full Moon"
+msgstr "Volle Maan"
+
+#: js/moon.js:37
+msgid "Waning Gibbous"
+msgstr "Afnemende Maan"
+
+#: js/moon.js:38
+msgid "Last Quarter"
+msgstr "Laatste Kwartier"
+
+#: js/moon.js:39
+msgid "Waning Crescent"
+msgstr "Afnemende Sikkel"
+
+#: js/ui/currentPhaseUi.js:32
+msgid "illumination"
+msgstr "verlichting"
+
+#: js/ui/riseSetUi.js:55
+msgid "The moon is always down and will not rise today"
+msgstr "De maan is altijd neer en zal vandaag niet opkomen"
+
+#: js/ui/riseSetUi.js:65
+msgid "The moon is always up and will not set today"
+msgstr "De maan is altijd op en zal vandaag niet ondergaan"
+
+#: js/ui/riseSetUi.js:76
+msgid "Moonrise"
+msgstr "Maanopkomst"
+
+#: js/ui/riseSetUi.js:83
+msgid "Lunar Noon"
+msgstr "Maansmiddag"
+
+#: js/ui/riseSetUi.js:90
+msgid "Moonset"
+msgstr "Maansondergang"
+
+#: js/ui/elements/noRiseSetElement.js:54
+msgid "Next Moonrise"
+msgstr "Volgende maanopkomst"
+
+#: js/ui/elements/noRiseSetElement.js:66
+msgid "Next Moonset"
+msgstr "Volgende maansondergang"
+
+#. metadata.json->name
+msgid "Moon Phase"
+msgstr "Maanfase"
+
+#. metadata.json->description
+msgid "A Cinnamon applet that displays up-to-date moon related information."
+msgstr "Een Cinnamon-applet die actuele maangerelateerde informatie weergeeft."
+
+#. settings-schema.json->page-settings->title
+msgid "Settings"
+msgstr "Instellingen"
+
+#. settings-schema.json->section-geolocation->title
+msgid "Geolocation Settings"
+msgstr "Geolocatie-instellingen"
+
+#. settings-schema.json->section-general->title
+msgid "General Settings"
+msgstr "Algemene Instellingen"
+
+#. settings-schema.json->section-update->title
+msgid "Update Settings"
+msgstr "Instellingen bijwerken"
+
+#. settings-schema.json->enableGeolocation->description
+msgid "Enable geolocation features"
+msgstr "Geolocatiefuncties inschakelen"
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr "Breedtegraad"
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr "Lengtegraad"
+
+#. settings-schema.json->enablePopup->description
+msgid "Enable popup menu"
+msgstr "Pop-upmenu inschakelen"
+
+#. settings-schema.json->showCurrentPhaseInfo->description
+msgid "Display the current phase information"
+msgstr "Toon de huidige fase-informatie"
+
+#. settings-schema.json->showRiseSet->description
+msgid "Display the moon rise, transit, and set times"
+msgstr "Toon de tijden van maanopkomst, -transit en -ondergang"
+
+#. settings-schema.json->showPhaseLabel->description
+msgid "Display the applet label"
+msgstr "Toon het appletlabel"
+
+#. settings-schema.json->showNameLabel->description
+msgid "Display the name of the moon phase in the label"
+msgstr "De naam van de maanfase weergeven in het label"
+
+#. settings-schema.json->showPercentageLabel->description
+msgid "Display the percentage of the moon phase in the label"
+msgstr "Het percentage van de maanfase weergeven in het label"
+
+#. settings-schema.json->showTooltip->description
+msgid "Display a tooltip on hover"
+msgstr "Een tooltip weergeven bij zweven met de muis"
+
+#. settings-schema.json->showPhaseTooltip->description
+msgid "Display the name of the moon phase in the tooltip"
+msgstr "De naam van de maanfase weergeven in de tooltip"
+
+#. settings-schema.json->showPercentageTooltip->description
+msgid "Display percentage of the moon phase in the tooltip"
+msgstr "Het percentage van de maanfase weergeven in de tooltip"
+
+#. settings-schema.json->useAltIcons->description
+msgid "Light theme"
+msgstr "Licht thema"
+
+#. settings-schema.json->updateInterval->units
+msgid "seconds"
+msgstr "seconden"
+
+#. settings-schema.json->updateInterval->description
+msgid "Update interval"
+msgstr "Bijwerkingsinterval"

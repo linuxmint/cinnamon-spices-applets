@@ -85,7 +85,10 @@ MyApplet.prototype = {
             this.clock = new CinnamonDesktop.WallClock();
             this.clock_notify_id = 0;
 
-            this._calendarArea = new St.BoxLayout({name: "calendarArea" });
+            this._calendarArea = new St.BoxLayout({
+                name: "calendarArea",
+                style_class: "calendar-area",
+            });
             this.menu.addActor(this._calendarArea);
 
             // Fill up the first column
@@ -95,7 +98,8 @@ MyApplet.prototype = {
 
             // Date
             this._date = new St.Label();
-            this._date.style_class = "datemenu-date-label";
+            this._date.style_class = "calendar-today-date-label";
+            this._date.x_align = Clutter.ActorAlign.CENTER;
             vbox.add(this._date);
 
             this._eventSource = null;
@@ -129,9 +133,9 @@ MyApplet.prototype = {
                     this._worldclocks[i][1] = GLib.TimeZone.new(this._worldclocks[i][1]);
 
                     let tz = new St.BoxLayout({vertical: false});
-                    let tz_label = new St.Label({ style_class: "calendar", text: _(this._worldclocks[i][0]) });
+                    let tz_label = new St.Label({ style_class: "world-clock-label", text: _(this._worldclocks[i][0]) });
                     tz.add(tz_label, {x_align: St.Align.START, expand: true, x_fill: false});
-                    this._worldclock_labels[i] = new St.Label({ style_class: "calendar" });
+                    this._worldclock_labels[i] = new St.Label({ style_class: "world-clock-value" });
                     tz.add(this._worldclock_labels[i], {x_align: St.Align.END, expand: true, x_fill: false});
                     this._worldclocks_box.add(tz);
                 }
@@ -140,7 +144,7 @@ MyApplet.prototype = {
 
             // Track changes to clock settings
             this._dateFormat = DEFAULT_FORMAT;
-            this._dateFormatFull = _("%A %B %e, %Y");
+            this._dateFormatFull = _("%A %B %-e, %Y");
 
             // connect to system clock settings
             this.desktop_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.interface" });

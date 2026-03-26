@@ -1,0 +1,249 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: hideable-applets@cardsurf 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-08 10:25+0100\n"
+"PO-Revision-Date: 2025-10-12 10:36+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->description
+msgid "Hides applets to tray"
+msgstr "Ẩn applet vào khay"
+
+#. metadata.json->name
+msgid "Hideable applets"
+msgstr "Applet ẩn được"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Cấu hình"
+
+#. settings-schema.json->action_type->description
+msgid "Action"
+msgstr "Hành động"
+
+#. settings-schema.json->action_type->options
+msgid "Open or close popup"
+msgstr "Mở hoặc đóng popup"
+
+#. settings-schema.json->action_type->options
+msgid "Toggle visibility applets"
+msgstr "Chuyển đổi hiển thị applet"
+
+#. settings-schema.json->action_type->tooltip
+msgid "An action to perform on trigger"
+msgstr "Hành động sẽ thực hiện khi kích hoạt"
+
+#. settings-schema.json->action_trigger_type->description
+msgid "Trigger"
+msgstr "Kích hoạt"
+
+#. settings-schema.json->action_trigger_type->options
+msgid "Left mouse click"
+msgstr "Nhấp chuột trái"
+
+#. settings-schema.json->action_trigger_type->options
+msgid "Mouse hover"
+msgstr "Di chuột qua"
+
+#. settings-schema.json->action_trigger_type->options
+msgid "None"
+msgstr "Không"
+
+#. settings-schema.json->action_trigger_type->tooltip
+msgid "An event that triggers the action"
+msgstr "Sự kiện kích hoạt hành động"
+
+#. settings-schema.json->side_type->description
+msgid "Applets location"
+msgstr "Vị trí applet"
+
+#. settings-schema.json->side_type->options
+msgid "Top"
+msgstr "Trên"
+
+#. settings-schema.json->side_type->options
+msgid "Right"
+msgstr "Phải"
+
+#. settings-schema.json->side_type->options
+msgid "Bottom"
+msgstr "Dưới"
+
+#. settings-schema.json->side_type->options
+msgid "Left"
+msgstr "Trái"
+
+#. settings-schema.json->side_type->tooltip
+msgid "A location of applets for which to toggle visibility"
+msgstr "Vị trí applet để thay đổi hiển thị"
+
+#. settings-schema.json->restore_hidden_string->description
+msgid "Restore as hidden"
+msgstr "Khôi phục ẩn"
+
+#. settings-schema.json->restore_hidden_string->tooltip
+msgid ""
+"A comma-separated list of applet UUIDs.\n"
+"An applet from this list will be hidden if the applet is configured as "
+"hidden and the applet shows up."
+msgstr ""
+"Danh sách UUID applet cách nhau bằng dấu phẩy.\n"
+"Một applet trong danh sách này sẽ bị ẩn nếu được cấu hình là ẩn và xuất hiện."
+
+#. settings-schema.json->save_every->units
+msgid "seconds"
+msgstr "giây"
+
+#. settings-schema.json->save_every->description
+msgid "Save every"
+msgstr "Lưu mỗi"
+
+#. settings-schema.json->save_every->tooltip
+msgid "How often to save last used values"
+msgstr "Tần suất lưu các giá trị đã sử dụng"
+
+#. settings-schema.json->tray_start->description
+msgid "Popup"
+msgstr "Popup"
+
+#. settings-schema.json->applet_popup_columns->description
+msgid "Columns"
+msgstr "Cột"
+
+#. settings-schema.json->applet_popup_columns->tooltip
+msgid "A number of columns in the applet popup"
+msgstr "Số cột trong popup của applet"
+
+#. settings-schema.json->applet_popup_icons_size->units
+msgid "pixels"
+msgstr "pixel"
+
+#. settings-schema.json->applet_popup_icons_size->description
+msgid "Icon size"
+msgstr "Kích thước icon"
+
+#. settings-schema.json->applet_popup_icons_size->tooltip
+msgid "A size of an icon in the applet popup"
+msgstr "Kích thước của icon trong popup của applet"
+
+#. settings-schema.json->applet_popup_icons_css->description
+msgid "Icon CSS"
+msgstr "CSS của icon"
+
+#. settings-schema.json->applet_popup_icons_css->tooltip
+msgid "A CSS style applied to the icons in the applet popup"
+msgstr "Kiểu CSS áp dụng cho các icon trong popup của applet"
+
+#. settings-schema.json->applet_popup_table_css->description
+msgid "Table CSS"
+msgstr "CSS của bảng"
+
+#. settings-schema.json->applet_popup_table_css->tooltip
+msgid "A CSS style applied to a table in the applet popup"
+msgstr "Kiểu CSS áp dụng cho bảng trong popup của applet"
+
+#. settings-schema.json->applet_popup_close_leave->description
+msgid "Auto close"
+msgstr "Tự đóng"
+
+#. settings-schema.json->applet_popup_close_leave->tooltip
+msgid "Close the applet popup when a mouse leaves the user interface"
+msgstr "Đóng popup của applet khi chuột rời giao diện người dùng"
+
+#. settings-schema.json->match_panel_icons_size->description
+msgid "Match panel size"
+msgstr "Khớp kích thước với panel"
+
+#. settings-schema.json->match_panel_icons_size->tooltip
+msgid "Match a size of an icon in the applet popup to a size of the panel"
+msgstr "Khớp kích thước icon trong popup với kích thước trên panel"
+
+#. settings-schema.json->show_icon_tooltips->description
+msgid "Show tooltips"
+msgstr "Hiển thị gợi ý"
+
+#. settings-schema.json->show_icon_tooltips->tooltip
+msgid "Show icon tooltips in the applet popup"
+msgstr "Hiển thị gợi ý cho icon trong popup của applet"
+
+#. settings-schema.json->show_grayscale_icons->description
+msgid "Show grayscale icons"
+msgstr "Hiển thị icon xám"
+
+#. settings-schema.json->show_grayscale_icons->tooltip
+msgid "Show icons of hidden applets in grayscale"
+msgstr "Hiển thị icon của applet ẩn dưới dạng xám"
+
+#. settings-schema.json->grayscale_brightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->grayscale_brightness->description
+msgid "Grayscale brightness"
+msgstr "Độ sáng icon xám"
+
+#. settings-schema.json->grayscale_brightness->tooltip
+msgid "A brightness level of grayscale icons"
+msgstr "Mức độ sáng của các icon xám"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Giao diện"
+
+#. settings-schema.json->gui_sort_type->description
+msgid "Sort"
+msgstr "Sắp xếp"
+
+#. settings-schema.json->gui_sort_type->options
+msgid "Alphabetically"
+msgstr "Theo chữ cái"
+
+#. settings-schema.json->gui_sort_type->options
+msgid "Panel position"
+msgstr "Theo vị trí trên panel"
+
+#. settings-schema.json->gui_sort_type->tooltip
+msgid "An order of items in the user interface"
+msgstr "Thứ tự các mục trong giao diện người dùng"
+
+#. settings-schema.json->gui_icon_type->description
+msgid "Panel icon"
+msgstr "Icon trên panel"
+
+#. settings-schema.json->gui_icon_type->options
+#. settings-schema.json->gui_icon_filepath->description
+msgid "Filepath"
+msgstr "Đường dẫn tập tin"
+
+#. settings-schema.json->gui_icon_type->options
+msgid "Symbolic"
+msgstr "Biểu tượng"
+
+#. settings-schema.json->gui_icon_type->tooltip
+msgid "A type of an icon displayed on the panel"
+msgstr "Loại icon hiển thị trên panel"
+
+#. settings-schema.json->gui_icon_filepath->tooltip
+msgid "A path to an icon displayed on a panel"
+msgstr "Đường dẫn đến icon hiển thị trên panel"
+
+#. settings-schema.json->gui_icon_symbolic_name->description
+msgid "Symbolic name"
+msgstr "Tên biểu tượng"
+
+#. settings-schema.json->gui_icon_symbolic_name->tooltip
+msgid "A name of a symbolic icon displayed on a panel"
+msgstr "Tên của icon biểu tượng hiển thị trên panel"

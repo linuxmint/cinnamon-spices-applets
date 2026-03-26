@@ -1,0 +1,36 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-14 01:34+0900\n"
+"PO-Revision-Date: 2024-04-21 20:40+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:48
+msgid "Click to sync"
+msgstr "Klik om te synchroniseren"
+
+#. metadata.json->description
+msgid ""
+"Monitor yet unwritten cached data. Click on the applet to sync (write out "
+"cached data). Useful when copying large files to slow removable medium(e.g. "
+"pendrive)."
+msgstr ""
+"Monitor nog niet geschreven gecachte gegevens. Klik op de applet om te "
+"synchroniseren (gecachte gegevens naar de schijf schrijven). Handig bij het "
+"kopiëren van grote bestanden naar een langzaam verwisselbaar medium (bijv. "
+"een USB-stick)."
+
+#. metadata.json->name
+msgid "Sync"
+msgstr "Synchroniseren"

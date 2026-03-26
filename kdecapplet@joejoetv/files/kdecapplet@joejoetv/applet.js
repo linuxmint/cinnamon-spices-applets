@@ -825,7 +825,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             } else {
                 this.warn("KDE Connect DBus service not found on session bus!", CommonUtils.LogLevel.NORMAL);
     
-                this.serviceOnBus = true;
+                this.serviceOnBus = false;
 
                 // KDE Connect DBus service is not available
     
@@ -1062,7 +1062,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
 
             if (this.serviceOnBus == false) {
                 // Add menu item to tell the user, that KDE Connect is currently unavailable to the applet
-                let kdecNotFoundMenuItem = new PopupMenu.PopupMenuItem(_("KDE Connect not available"), {reactive: false});
+                let kdecNotFoundMenuItem = new PopupMenu.PopupMenuItem(_("KDE Connect not available, make sure it's installed and running."), {reactive: false});
                 kdecNotFoundMenuItem.actor.add_style_pseudo_class('insensitive');
                 this.popupMenu.addMenuItem(kdecNotFoundMenuItem);
                 this.set_applet_tooltip(_("KDE Connect not available, make sure it's installed and running."), false);

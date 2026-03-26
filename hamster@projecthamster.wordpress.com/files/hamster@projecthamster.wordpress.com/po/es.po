@@ -6,66 +6,87 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-16 18:44-0500\n"
-"PO-Revision-Date: 2023-06-10 20:55-0400\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-04-12 21:25-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:98
+#: applet.js:103
 msgid "What are you doing?"
 msgstr "¿Qué estás haciendo?"
 
-#: applet.js:104
+#: applet.js:109
 msgid "Enter activity..."
 msgstr "Acceder a la actividad..."
 
-#: applet.js:120
+#: applet.js:125
 msgid "Todays activities"
 msgstr "Actividades del día"
 
-#: applet.js:287
+#: applet.js:293
 msgid "Loading..."
 msgstr "Cargando..."
 
-#: applet.js:311
+#: applet.js:317
 msgid "Show Overview"
 msgstr "Mostrar visión general"
 
-#: applet.js:316
+#: applet.js:322
 msgid "Stop Tracking"
 msgstr "Detener monitoreo"
 
-#: applet.js:321
+#: applet.js:327
 msgid "Add Earlier Activity"
 msgstr "Agregar actividad anterior"
 
-#: applet.js:327
+#: applet.js:333
 msgid "Tracking Settings"
 msgstr "Configuración de monitoreo"
 
-#: applet.js:332
-msgid "Applet Settings"
-msgstr "Configuración del applet"
-
-#: applet.js:514
+#: applet.js:516
 msgid "No Activity"
 msgstr "Sin actividad"
 
-#: convenience.js:20
-#, c-format
-msgid "Schema \"%s\" not found."
-msgstr "Esquema '%s' no encontrado."
-
-#. hamster@projecthamster.wordpress.com->metadata.json->description
+#. metadata.json->description
 msgid "Cinnamon applet for project hamster - the GNOME time tracker"
-msgstr "Applet de Cinnamon para el proyecto hamster - el monitor del tiempo de GNOME"
+msgstr ""
+"Applet de Cinnamon para el proyecto hamster - el monitor del tiempo de GNOME"
 
-#. hamster@projecthamster.wordpress.com->metadata.json->name
+#. metadata.json->name
 msgid "Project Hamster Applet"
 msgstr "Applet del Proyecto Hámster"
+
+#. settings-schema.json->head->description
+msgid "Settings"
+msgstr "Configuraciones"
+
+#. settings-schema.json->panel-appearance->description
+msgid "Appearance in the panel"
+msgstr "Apariencia en el panel"
+
+#. settings-schema.json->panel-appearance->options
+msgid "Label only"
+msgstr "Sólo etiqueta"
+
+#. settings-schema.json->panel-appearance->options
+msgid "Icon only"
+msgstr "Sólo icono"
+
+#. settings-schema.json->panel-appearance->options
+msgid "Label and icon"
+msgstr "Etiqueta e icono"
+
+#. settings-schema.json->show-hamster-dropdown->description
+msgid "Shortcut to show the menu"
+msgstr "Acceso directo para mostrar el menú"
+
+#, c-format
+#~ msgid "Schema \"%s\" not found."
+#~ msgstr "Esquema '%s' no encontrado."

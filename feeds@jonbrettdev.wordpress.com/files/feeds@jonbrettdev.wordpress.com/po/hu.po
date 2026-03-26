@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-21 19:10+0100\n"
-"PO-Revision-Date: 2021-09-26 07:38+0200\n"
+"PO-Revision-Date: 2025-08-08 08:10+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: feedreader.js:151
 msgid "Invalid feed url"
@@ -254,7 +254,7 @@ msgstr "Nem exportálható a fájl"
 
 #. metadata.json->description
 msgid "Displays RSS news feeds"
-msgstr "RSS-hírforrások megjelenítése"
+msgstr "RSS-hírfolyamok megjelenítése"
 
 #. metadata.json->name
 msgid "Feeds Reader"

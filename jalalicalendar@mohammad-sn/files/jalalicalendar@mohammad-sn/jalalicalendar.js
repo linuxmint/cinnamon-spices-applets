@@ -101,7 +101,7 @@ function persian_to_jd(year, month, day) {
 function jd_to_persian(jd) {
     var year, month, day, depoch, cycle, cyear, ycycle,
         aux1, aux2, yday;
-    jd = Math.floor(jd) + 0.5;
+    jd = Math.floor(jd) - 0.5; // Adjust the Julian Day to fix the offset
     depoch = jd - persian_to_jd(475, 1, 1);
     cycle = Math.floor(depoch / 1029983);
     cyear = mod(depoch, 1029983);

@@ -14,8 +14,10 @@ _A simple launcher for your panels_
 -   customize different properties of your applet:
     -   set/hide label
     -   set custom applet icon
+    -   bind menu to a specific workspace
     -   enable/disable **notification**
     -   set **hotkey** to open the menu
+    -   open with hotkey at mouse position
     -   show/hide application icons
     -   set application icon size
 

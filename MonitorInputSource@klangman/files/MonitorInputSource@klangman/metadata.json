@@ -4,5 +4,6 @@
    "description": "Change your monitors video input source directly from the cinnamon panel",
    "max-instances": -1,
    "author": "klangman",
-   "hide-configuration": true
+   "hide-configuration": true,
+   "version": "1.0.1"
 }

@@ -216,7 +216,8 @@ function spawnCommandLineAsyncIO(command, callback, opts = {}) {
     let subprocess = new Gio.Subprocess({
         argv: argv ? argv : ['bash', '-c', command],
         flags: flags ? flags
-            : Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDIN_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
+            : Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDIN_PIPE | Gio.SubprocessFlags.STDERR_PIPE | GLib.SpawnFlags.DO_NOT_REAP_CHILD | GLib.SpawnFlags.LEAVE_DESCRIPTORS_OPEN
+            //~ : Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDIN_PIPE | Gio.SubprocessFlags.STDERR_PIPE
     });
     subprocess.init(null);
     let cancellable = new Gio.Cancellable();
@@ -593,7 +594,10 @@ function setTimeout(callback, ms) {
  * Convenience wrapper for Mainloop.source_remove.
  */
 function clearTimeout(id) {
-    if (id) Mainloop.source_remove(id);
+    if (id) {
+        if (Mainloop.source_remove(id))
+            id = null;
+    }
 };
 
 
@@ -628,7 +632,10 @@ function setInterval(callback, ms) {
  * Convenience wrapper for Mainloop.source_remove.
  */
 function clearInterval(id) {
-    if (id) Mainloop.source_remove(id);
+    if (id) {
+        if (Mainloop.source_remove(id))
+            id = null;
+    }
 };
 
 /**

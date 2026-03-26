@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: internet-indicator@sangorys 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
 "POT-Creation-Date: 2022-11-07 21:43+0100\n"
-"PO-Revision-Date: 2022-11-23 11:03+0100\n"
+"PO-Revision-Date: 2024-07-28 07:55-0400\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -29,3 +29,28 @@ msgstr "Elindulás"
 
 msgid "Testing Internet connexion in progress..."
 msgstr "Az internet-kapcsolat ellenőrzése folyamatban…"
+
+#. metadata.json->name
+msgid "Internet connection Indicator"
+msgstr "Internet kapcsolat jelző"
+
+#. metadata.json->description
+msgid ""
+"Check your Internet connection (usefull to check if you are connected to "
+"Internet through a wifi hotspot. For instance when you are in a train)"
+msgstr ""
+"Ellenőrizze az internetkapcsolatot (hasznos annak ellenőrzésére, hogy wifi "
+"hotspoton keresztül csatlakozik-e az internethez. Például ha vonaton ül)"
+
+#. settings-schema.json->update-interval-when-no-internet->units
+#. settings-schema.json->update-interval-when-internet->units
+msgid "s"
+msgstr "mp"
+
+#. settings-schema.json->update-interval-when-no-internet->description
+msgid "Update interval when no internet connection"
+msgstr "Frissítési időköz, ha nincs internetkapcsolat"
+
+#. settings-schema.json->update-interval-when-internet->description
+msgid "Update interval when internet is detected"
+msgstr "Frissítési időköz az internet észlelésekor"

@@ -123,7 +123,7 @@ Panel buttons for all running windows.</property>
                 <child>
                   <object class="GtkRadioButton" id="launcher_radio">
                     <property name="label" translatable="yes">Panel Launcher (Quick launcher)
-Panel button only appear when you add items
+Panel buttons only appear when you pin items
 to the panel, no labels are shown, only icons.</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
@@ -190,7 +190,7 @@ backup</property>
                 <child>
                   <object class="GtkRadioButton" id="one_to_one_radio">
                     <property name="label" translatable="yes">Basic  -  Quick window access
-Every window gets it's own window list button.
+Every window gets its own window list button.
 Button labels are window titles.</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
@@ -234,8 +234,8 @@ Button labels are window titles.</property>
                 <child>
                   <object class="GtkRadioButton" id="pooled_radio">
                     <property name="label" translatable="yes">Pooling  -  Quick access &amp; compact
-Every window gets it's own window list button.
-Application buttons are pooled togeather.
+Every window gets its own window list button.
+Application buttons are pooled together.
 One button label per application pool.
 Button labels are application names.</property>
                     <property name="visible">True</property>
@@ -367,7 +367,7 @@ Button labels are application names.</property>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Unlike most Panel Launcher applets, this launcher keeps tack of 
+                    <property name="label" translatable="yes">Unlike most Panel Launcher applets, this launcher keeps track of 
 running windows and uses window Thumbnail menus.
 
 You can launch additional windows by clicking the 'Back' mouse 
@@ -505,7 +505,7 @@ windows already exist for a launcher button?</property>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">There are many more options and features to explorer in the
+                    <property name="label" translatable="yes">There are many more options and features to explore in the
 applet configurator and the window list button context menu,
 for example:
 

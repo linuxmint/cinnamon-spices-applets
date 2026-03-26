@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 PROGRAM=$(echo -n $(basename $1))
 PROGRAM=${PROGRAM:0:15}
 #sleep 1

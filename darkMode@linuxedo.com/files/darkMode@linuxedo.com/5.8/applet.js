@@ -178,11 +178,46 @@ MyApplet.prototype = {
         this.dark_mode_switch.connect('toggled', Lang.bind(this, this.on_change_theme));
         this.menu.addMenuItem(this.dark_mode_switch);
 
+        // Listen for suspend/resume signals
+        this._loginManager = Gio.DBusProxy.new_for_bus_sync(
+            Gio.BusType.SYSTEM,
+            Gio.DBusProxyFlags.NONE,
+            null,
+            'org.freedesktop.login1',
+            '/org/freedesktop/login1',
+            'org.freedesktop.login1.Manager',
+            null
+        );
+        this._prepareForSleepId = this._loginManager.connect('g-signal', (proxy, sender, signalName, params) => {
+            if (signalName === 'PrepareForSleep') {
+                // The signal sends `true` on suspend, `false` on resume.
+                let sleeping = params.get_child_value(0).get_boolean();
+                if (!sleeping) {
+                    // Waking up from suspend, re-check the theme.
+                    this.allow_auto_mode_change(); // Adicionado para permitir a mudança após suspensão
+                    this.change_mode_automatically();
+                }
+            }
+        });
+
         // Update the UI
         this.set_dark_mode(this.enable_dark_mode);
         this.refresh_themes();
         if (this.enable_auto_mode_switch) {
             this.change_mode_automatically();
+        }
+    },
+
+    on_applet_removed_from_panel: function() {
+        // Disconnect the suspend signal listener
+        if (this._prepareForSleepId) {
+            this._loginManager.disconnect(this._prepareForSleepId);
+            this._prepareForSleepId = 0;
+        }
+        // Remove the timer
+        if (this.timer) {
+            Mainloop.source_remove(this.timer);
+            this.timer = null;
         }
     },
 

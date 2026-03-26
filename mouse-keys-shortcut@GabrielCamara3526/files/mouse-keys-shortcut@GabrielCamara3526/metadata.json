@@ -1,0 +1,8 @@
+{
+    "uuid": "mouse-keys-shortcut@GabrielCamara3526",
+    "name": "Mouse Keys Shortcut",
+    "description": "Trigger this applet to control the pointer using the keypad",
+    "max-instances": -1,
+    "version": "1.3.0",
+    "author": "GabrielCamara3526"
+}

@@ -1,37 +1,53 @@
-import { WeatherApplet } from "./main";
-import { LocationData, WeatherProvider } from "./types";
+import type { WeatherApplet } from "./main";
+import type { LocationData, LocationServiceResult, RemovePrefix, WeatherProvider } from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
-import { Logger } from "./lib/logger";
-import { distanceUnitLocales, fahrenheitCountries, LogLevel, UUID, windSpeedUnitLocales } from "./consts";
+import { Logger } from "./lib/services/logger";
+import type { LogLevel } from "./consts";
+import { distanceUnitLocales, fahrenheitCountries, UUID, windSpeedUnitLocales } from "./consts";
 import { LocationStore } from "./location_services/locationstore";
 import { GeoLocation } from "./location_services/nominatim";
 import { DateTime } from "luxon";
 import { FileExists, LoadContents } from "./lib/io_lib";
-import { MetUk } from "./providers/met_uk";
-import { BaseProvider } from "./providers/BaseProvider";
-import { OpenWeatherMap } from "./providers/openWeatherMap";
+import { OpenWeatherMapOneCall } from "./providers/openweathermap/provider-closed";
 import { MetNorway } from "./providers/met_norway/provider";
-import { Weatherbit } from "./providers/weatherbit";
-import { ClimacellV4 } from "./providers/climacellV4";
-import { USWeather } from "./providers/us_weather";
-import { VisualCrossing } from "./providers/visualcrossing";
+import { Weatherbit } from "./providers/weatherbit/provider";
+import { ClimacellV4 } from "./providers/tomorrow_io/provider";
+import { USWeather } from "./providers/us_weather/provider";
+import { VisualCrossing } from "./providers/visualcrossing/provider";
 import { DanishMI } from "./providers/danishMI";
 import { AccuWeather } from "./providers/accuWeather";
-import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst";
+import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst/provider";
 import { WeatherUnderground } from "./providers/weatherUnderground";
 import { Event } from "./lib/events";
-import { GeoIP } from "./location_services/geoip_services/base";
-import { GeoJS } from "./location_services/geoip_services/geojs.io";
+import type { GeoIP } from "./location_services/geoip_services/base";
 import { PirateWeather } from "./providers/pirate_weather/pirateWeather";
+import { GeoClue } from "./location_services/geoip_services/geoclue";
+import { GeoIPFedora } from "./location_services/geoip_services/geoip.fedora";
+import { OpenMeteo } from "./providers/open-meteo/provider";
+import { OpenWeatherMapOpen } from "./providers/openweathermap/provider-open";
+import type settingsSchema from "../../files/weather@mockturtl/3.8/settings-schema.json";
+import { soupLib } from "./lib/soupLib";
+import { GeoTimezone } from "./location_services/tz_lookup";
+import { SwissMeteo } from "./providers/swiss-meteo/provider";
+import { MetUk } from "./providers/met_uk/provider";
+import { IpApi } from "./location_services/geoip_services/ipApi";
+import { GeoJS } from "./location_services/geoip_services/geojs.io";
+import { GeoIPLookupIO } from "./location_services/geoip_services/geoiplookup.io";
 
-const { get_home_dir, get_user_data_dir } = imports.gi.GLib;
+const { get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
-const Lang: typeof imports.lang = imports.lang;
-const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType } = imports.gi.St;
 const { get_language_names, TimeZone } = imports.gi.GLib;
 const { Settings } = imports.gi.Gio;
+
+type SettingsSchema = typeof settingsSchema;
+
+type SettingsSchemaWithValues = {
+	[key in keyof SettingsSchema]: SettingsSchema[key] & {
+		value: SettingsSchema[key] extends { columns: unknown[] } ? Record<string, unknown>[] : unknown;
+	}
+}
 
 /** Units Used in Options. Change Options list if You change this! */
 export type WeatherUnits = 'automatic' | 'celsius' | 'fahrenheit';
@@ -43,34 +59,52 @@ export type WeatherPressureUnits = 'hPa' | 'mm Hg' | 'in Hg' | 'Pa' | 'psi' | 'a
 export type DistanceUnits = 'automatic' | 'metric' | 'imperial';
 
 /** Change settings-schema if you change this */
-export type Services =
-	"OpenWeatherMap" |
-	"MetNorway" |
-	"Weatherbit" |
-	"Tomorrow.io" |
-	"Met Office UK" |
-	"US Weather" |
-	"Visual Crossing" |
-	"DanishMI" |
-	"AccuWeather" |
-	"DeutscherWetterdienst" |
-	"WeatherUnderground" |
-	"PirateWeather";
-
-export const ServiceClassMapping: ServiceClassMappingType = {
-	"OpenWeatherMap": (app) => new OpenWeatherMap(app),
-	"MetNorway": (app) => new MetNorway(app),
-	"Weatherbit": (app) => new Weatherbit(app),
-	"Tomorrow.io": (app) => new ClimacellV4(app),
-	"Met Office UK": (app) => new MetUk(app),
-	"US Weather": (app) => new USWeather(app),
-	"Visual Crossing": (app) => new VisualCrossing(app),
-	"DanishMI": (app) => new DanishMI(app),
-	"AccuWeather": (app) => new AccuWeather(app),
-	"DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
-	"WeatherUnderground": (app) => new WeatherUnderground(app),
-	"PirateWeather": (app) => new PirateWeather(app)
+export enum Services {
+	OpenWeatherMap_Open = "OpenWeatherMap_Open",
+	MetNorway = "MetNorway",
+	Weatherbit = "Weatherbit",
+	Tomorrow_IO = "Tomorrow.io",
+	MetOfficeUK = "Met Office UK",
+	USWeather = "US Weather",
+	VisualCrossing = "Visual Crossing",
+	DanishMI = "DanishMI",
+	AccuWeather = "AccuWeather",
+	DeutscherWetterdienst = "DeutscherWetterdienst",
+	WeatherUnderground = "WeatherUnderground",
+	PirateWeather = "PirateWeather",
+	OpenMeteo = "OpenMeteo",
+	OpenWeatherMap_OneCall = "OpenWeatherMap_OneCall",
+	SwissMeteo = "Swiss Meteo"
 }
+
+export enum LocationProvider {
+	FedoraGeoIP = "fedora",
+	IpApi = "ipapi",
+	GeoJS = "geojs",
+	GeoIPLookup = "geoiplookup",
+	GeoClue2 = "geoclue2"
+}
+
+export const ServiceClassMapping = {
+	[Services.OpenWeatherMap_Open]: () => new OpenWeatherMapOpen(),
+	[Services.OpenWeatherMap_OneCall]: () => new OpenWeatherMapOneCall(),
+	[Services.MetNorway]: () => new MetNorway(),
+	[Services.Weatherbit]: () => new Weatherbit(),
+	[Services.Tomorrow_IO]: () => new ClimacellV4(),
+	[Services.MetOfficeUK]: () => new MetUk(),
+	[Services.USWeather]: () => new USWeather(),
+	[Services.VisualCrossing]: () => new VisualCrossing(),
+	[Services.DanishMI]: () => new DanishMI(),
+	[Services.AccuWeather]: () => new AccuWeather(),
+	[Services.DeutscherWetterdienst]: () => new DeutscherWetterdienst(),
+	[Services.WeatherUnderground]: () => new WeatherUnderground(),
+	[Services.PirateWeather]: () => new PirateWeather(),
+	[Services.OpenMeteo]: () => new OpenMeteo(),
+	[Services.SwissMeteo]: () => new SwissMeteo(),
+} satisfies ServiceClassMappingType;
+
+type ServiceImplementation<T extends Services> = ReturnType<typeof ServiceClassMapping[T]>;
+type ServiceOption<T extends Services> = ServiceImplementation<T> extends WeatherProvider<T, infer U> ? U : never;
 
 export class Config {
 	private readonly WEATHER_LOCATION = "location";
@@ -81,15 +115,29 @@ export class Config {
 	private readonly _temperatureUnit!: WeatherUnits;
 	private readonly _windSpeedUnit!: WeatherWindSpeedUnits;
 	private readonly _distanceUnit!: DistanceUnits;
+	/**
+	 * @deprecated there are provider-specific api keys now, this is only kept for migration in configs
+	 */
 	private readonly _apiKey!: string;
+	private readonly _openweathermap_onecall_apikey!: string;
+	private readonly _metoffice_forecast_apikey!: string;
+	private readonly _metoffice_observations_apikey!: string;
+	private readonly _pirateweather_apikey!: string;
+	private readonly _visualcrossing_apikey!: string;
+	private readonly _weatherbit_apikey!: string;
+	private readonly _tomorrowio_apikey!: string;
+	private readonly _accuweather_apikey!: string;
+	private readonly _weatherunderground_apikey!: string;
 	private readonly _useSymbolicIcons!: boolean;
-	// No need to access this from the outside
-	private readonly keybinding!: string;
+	public readonly keybinding!: string;
 
 	// simple variables
 	public readonly _refreshInterval!: number;
 	public readonly _manualLocation!: boolean;
 	public readonly _dataService!: Services;
+	/**
+	 * Should the __API__ translate the condition
+	 */
 	public readonly _translateCondition!: boolean;
 	public readonly _pressureUnit!: WeatherPressureUnits;
 	public readonly _show24Hours!: boolean;
@@ -116,11 +164,29 @@ export class Config {
 	public readonly _alwaysShowHourlyWeather!: boolean;
 	public readonly _logLevel!: LogLevel;
 	public readonly _selectedLogPath!: string;
-	public readonly _panelTextOverride!: string;
+	public readonly _geoclue!: boolean;
+	public readonly _autoloc_provider!: LocationProvider;
+	/**
+	 * Panel text override
+	 */
+	public readonly _tempTextOverride!: string;
 	public readonly _tooltipTextOverride!: string;
+	public readonly _showAlerts!: boolean;
+	public readonly _userAgentStringOverride!: string;
+	public readonly _runScript!: string;
+	public readonly _uvIndex!: boolean;
 
 	public readonly DataServiceChanged = new Event<Config, Services>();
 	public readonly ApiKeyChanged = new Event<Config, string>();
+	public readonly OpenWeatherMapOneCallApiKeyChanged = new Event<Config, string>();
+	public readonly MetofficeForecastApiKeyChanged = new Event<Config, string>();
+	public readonly MetofficeObservationsApiKeyChanged = new Event<Config, string>();
+	public readonly PirateWeatherApiKeyChanged = new Event<Config, string>();
+	public readonly VisualCrossingApiKeyChanged = new Event<Config, string>();
+	public readonly WeatherbitApiKeyChanged = new Event<Config, string>();
+	public readonly TomorrowIOApiKeyChanged = new Event<Config, string>();
+	public readonly AccuWeatherApiKeyChanged = new Event<Config, string>();
+	public readonly WeatherUndergroundApiKeyChanged = new Event<Config, string>();
 	public readonly TemperatureUnitChanged = new Event<Config, WeatherUnits>();
 	public readonly TemperatureHighFirstChanged = new Event<Config, boolean>();
 	public readonly WindSpeedUnitChanged = new Event<Config, WeatherWindSpeedUnits>();
@@ -154,13 +220,25 @@ export class Config {
 	public readonly DisplayWindAsTextChanged = new Event<Config, boolean>();
 	public readonly AlwaysShowHourlyWeatherChanged = new Event<Config, boolean>();
 	public readonly TooltipTextOverrideChanged = new Event<Config, string>();
+	public readonly ShowAlertsChanged = new Event<Config, string>();
+	public readonly UserAgentStringOverrideChanged = new Event<Config, string>();
+	public readonly RunScriptChanged = new Event<Config, boolean>();
+	public readonly TempTextOverrideChanged = new Event<Config, string>();
+	public readonly UV_IndexChanged = new Event<Config, boolean>();
+	public readonly GeoClueChanged = new Event<Config, boolean>();
+	public readonly AutoLocProviderChanged = new Event<Config, LocationProvider>();
+
+	public readonly FontChanged = new Event<Config, void>();
+	public readonly HotkeyChanged = new Event<Config, void>();
+	public readonly SelectedLogPathChanged = new Event<Config, void>();
 
 	/** Timeout */
 	private doneTypingLocation: number | null = null;
 	private currentLocation: LocationData | null = null;
+	public readonly LocationChanged = new Event<Config, void>();
 
 	private settings: imports.ui.settings.AppletSettings;
-	private app: WeatherApplet;
+	private readonly instance_id: number;
 	public readonly countryCode: string | null;
 	public textColorStyle: string | null = null;
 	public ForegroundColor: imports.gi.Clutter.Color | null = null;
@@ -174,23 +252,37 @@ export class Config {
 			return TimeZone.new_local().get_identifier();
 	}
 
-	private timezone: string | undefined = undefined;
+	private autoLocProvider: GeoIP | null = null;
 
-	/**
-	 * Selected location's timezone
-	 */
-	public get Timezone() {
-		return this.timezone;
+	private get LocationProvider(): GeoIP {
+		if (this.autoLocProvider && this.autoLocProvider.provider === this._autoloc_provider) {
+			return this.autoLocProvider;
+		}
+
+		let provider;
+		switch (this._autoloc_provider) {
+			// GeoClue shouldn't show up here, so we return the default instead
+			case LocationProvider.GeoClue2:
+			case LocationProvider.FedoraGeoIP:
+				provider = new GeoIPFedora();
+				break;
+			case LocationProvider.IpApi:
+				provider = new IpApi();
+				break;
+			case LocationProvider.GeoJS:
+				provider = new GeoJS();
+				break;
+			case LocationProvider.GeoIPLookup:
+				provider = new GeoIPLookupIO();
+				break;
+		}
+
+		this.autoLocProvider = provider;
+		return provider;
 	}
-
-	public set Timezone(value: string | undefined) {
-		if (!value || value == "")
-			value = undefined;
-		this.timezone = value;
-	}
-
-	private readonly autoLocProvider: GeoIP;
+	private readonly geoClue: GeoClue;
 	private readonly geoLocationService: GeoLocation;
+	private readonly tzService = new GeoTimezone();
 
 	/** Stores and retrieves manual locations */
 	public readonly LocStore: LocationStore;
@@ -199,36 +291,32 @@ export class Config {
 	private readonly InterfaceSettings: imports.gi.Gio.Settings;
 	private currentFontSize: number;
 
-	constructor(app: WeatherApplet, instanceID: number) {
-		this.app = app;
+	constructor(instanceID: number) {
+		this.instance_id = instanceID;
 		this.settings = new AppletSettings(this, UUID, instanceID);
 		// Bind as early as possible so that we can update the log level asap
 		this.BindSettings();
 		this.onLogLevelUpdated();
-		this.currentLocale = ConstructJsLocale(get_language_names()[0]);
-		Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
+		this.currentLocale = ConstructJsLocale(get_language_names());
 		this.countryCode = this.GetCountryCode(this.currentLocale);
-		this.autoLocProvider = new GeoJS(app); // IP location lookup
-		this.geoLocationService = new GeoLocation(app);
+		this.autoLocProvider = new GeoIPFedora(); // IP location lookup
+		this.geoClue = new GeoClue();
+		this.geoLocationService = new GeoLocation();
 		this.InterfaceSettings = new Settings({ schema: "org.cinnamon.desktop.interface" });
 		this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
 		this.currentFontSize = this.GetCurrentFontSize();
-		this.LocStore = new LocationStore(this.app, this);
+		this.LocStore = new LocationStore(this);
 	}
 
 	public get CurrentFontSize(): number {
 		return this.currentFontSize;
 	}
 
-	public get CurrentLocation() {
+	public get CurrentLocation(): LocationData | null {
 		return this.currentLocation;
 	}
 
-	public get ApiKey() {
-		return this._apiKey.replace(" ", "");
-	}
-
-	public get Language() {
+	public get Language(): string | null {
 		return this.GetLanguage(this.currentLocale);
 	}
 
@@ -244,7 +332,7 @@ export class Config {
 	/**
 	 * @returns Units, automatic is already resolved here
 	 */
-	public get WindSpeedUnit(): WeatherWindSpeedUnits {
+	public get WindSpeedUnit(): Exclude<WeatherWindSpeedUnits, "automatic"> {
 		if (this._windSpeedUnit == "automatic")
 			return this.GetLocaleWindSpeedUnit(this.UserTimezone);
 		return this._windSpeedUnit;
@@ -280,6 +368,96 @@ export class Config {
 			IconType.FULLCOLOR;
 	}
 
+	public GetServiceConfig<T extends Services>(service: T): ServiceOption<T> {
+		const oldApiKey = this._apiKey.trim();
+
+		// Migration once from old key to new key, key goes to selected provider
+		let newApiKeyField: RemovePrefix<keyof Config, "_"> | null = null;
+		switch (service) {
+			case Services.OpenWeatherMap_OneCall:
+				newApiKeyField = Keys.OPENWEATHERMAP_ONECALL_API_KEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.PirateWeather:
+				newApiKeyField = Keys.PIRATEWEATHER_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.VisualCrossing:
+				newApiKeyField = Keys.VISUALCROSSING_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.Weatherbit:
+				newApiKeyField = Keys.WEATHERBIT_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.Tomorrow_IO:
+				newApiKeyField = Keys.TOMORROW_IO_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.AccuWeather:
+				newApiKeyField = Keys.ACCUWEATHER_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+			case Services.WeatherUnderground:
+				newApiKeyField = Keys.WEATHER_UNDERGROUND_APIKEY.key as RemovePrefix<keyof Config, "_">;
+				break;
+		}
+
+		if (newApiKeyField != null && !this[`_${newApiKeyField}`] && !!oldApiKey) {
+			this.settings.setValue(newApiKeyField, oldApiKey);
+			this.settings.setValue(Keys.API_KEY.key, "");
+			Logger.Info(`Migrating old API key to new field for service ${service}`);
+		}
+
+		switch (service) {
+			case Services.OpenWeatherMap_OneCall: {
+				const result: ServiceOption<Services.OpenWeatherMap_OneCall> = {
+					apiKey: this._openweathermap_onecall_apikey.trim() || oldApiKey
+				}
+				return result as ServiceOption<T>;
+			}
+			case Services.Weatherbit: {
+				const result: ServiceOption<Services.Weatherbit> = {
+					apiKey: this._weatherbit_apikey.trim() || oldApiKey
+				}
+				return result as ServiceOption<T>;
+			}
+			case Services.Tomorrow_IO: {
+				return {
+					apiKey: this._tomorrowio_apikey.trim() || oldApiKey
+				} satisfies ServiceOption<Services.Tomorrow_IO> as ServiceOption<T>;
+			}
+			case Services.MetOfficeUK: {
+				return {
+					forecastKey: this._metoffice_forecast_apikey.trim(),
+					observationKey: this._metoffice_observations_apikey.trim()
+				} satisfies ServiceOption<Services.MetOfficeUK> as ServiceOption<T>;
+			}
+			case Services.VisualCrossing: {
+				return {
+					apiKey: this._visualcrossing_apikey.trim() || oldApiKey
+				} satisfies ServiceOption<Services.VisualCrossing> as ServiceOption<T>;
+			}
+			case Services.AccuWeather: {
+				return {
+					apiKey: this._accuweather_apikey.trim() || oldApiKey
+				} satisfies ServiceOption<Services.AccuWeather> as ServiceOption<T>;
+			}
+			case Services.WeatherUnderground: {
+				return {
+					apiKey: this._weatherunderground_apikey.trim() || oldApiKey
+				} satisfies ServiceOption<Services.WeatherUnderground> as ServiceOption<T>;
+			}
+			case Services.PirateWeather: {
+				return {
+					apiKey: this._pirateweather_apikey.trim() || oldApiKey
+				} satisfies ServiceOption<Services.PirateWeather> as ServiceOption<T>;
+			}
+			case Services.OpenWeatherMap_Open:
+			case Services.DeutscherWetterdienst:
+			case Services.MetNorway:
+			case Services.OpenMeteo:
+			case Services.SwissMeteo:
+			case Services.USWeather:
+			case Services.DanishMI:
+				return null as ServiceOption<T>;
+		}
+	}
+
 	/** Called when user changed manual locations, automatically switches to manual location mode. */
 	public SwitchToNextLocation(): LocationData | null {
 		const nextLoc = this.LocStore.GetNextLocation(this.CurrentLocation);
@@ -296,10 +474,52 @@ export class Config {
 		return previousLoc;
 	}
 
-	public NoApiKey(): boolean {
-		const key = this._apiKey?.replace(" ", "");
-		return (!key || key == "");
-	};
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable, provider: WeatherProvider): Promise<LocationData | null> {
+		this.currentLocation = null;
+
+		let loc: LocationServiceResult | null = null;
+		switch (provider.locationType) {
+			case "postcode": {
+				const foundLoc = this.LocStore.FindLocation(this._location);
+				if (foundLoc != null) {
+					Logger.Debug("Manual Location exist in Saved Locations, retrieve.");
+					this.LocStore.SwitchToLocation(foundLoc);
+					this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
+					loc = foundLoc;
+				}
+				else {
+					loc = {
+						entryText: this._location,
+						lat: -1,
+						lon: -1,
+					}
+				}
+				break;
+			}
+			case "coordinates": {
+				loc = await this.EnsureLocation(cancellable);
+				break;
+			}
+		}
+
+		if (loc == null) {
+			return null;
+		}
+
+		// Disable Getting timezone for now, it has serious latency issues sometimes.
+		// const tz = loc.timeZone ?? await this.tzService.GetTimezone(loc.lat, loc.lon, cancellable);
+
+		// if (tz == null)
+		// 	return null;
+
+		const result = {
+			...loc,
+			timeZone: loc.timeZone ?? this.UserTimezone,
+		}
+
+		this.InjectLocationToConfig(result);
+		return result;
+	}
 
 	/**
 	 * @returns LocationData null if failed to obtain
@@ -307,75 +527,81 @@ export class Config {
 	 * else it returns coordinates if it was entered. If text was entered,
 	 * it looks up coordinates via geolocation api
 	 */
-	public async EnsureLocation(): Promise<LocationData | null> {
-		this.currentLocation = null;
-
-		// Automatic location
+	private async EnsureLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
 		if (!this._manualLocation) {
-			const location = await this.autoLocProvider.GetLocation();
-			// User facing errors handled by provider
-			if (!location) return null;
-
-			this.InjectLocationToConfig(location);
-			return location;
+			return await this.GetLocationAutomatically(cancellable);
 		}
-
-		// Manual Location
 
 		let loc = this._location;
 		if (loc == undefined || loc.trim() == "") {  // No location
-			this.app.ShowError({
-				type: "hard",
-				detail: "no location",
-				userError: true,
-				message: _("Make sure you entered a location or use Automatic location instead")
-			});
 			return null;
 		}
 
-		// Find location in storage
+		// Find location in storage, returning as is and switching to it
 		let location = this.LocStore.FindLocation(this._location);
 		if (location != null) {
-			Logger.Debug("location exist in locationstore, retrieve");
+			Logger.Debug("Manual Location exist in Saved Locations, retrieve.");
 			this.LocStore.SwitchToLocation(location);
-			this.InjectLocationToConfig(location, true);
+			this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
 			return location;
 		}
-		// location not in storage
-		else if (IsCoordinate(loc)) {
+
+		// Location is a coordinate, construct return object
+		if (IsCoordinate(loc)) {
 			// Get Location
 			loc = loc.replace(" ", "");
 			const latLong = loc.split(",");
-			const location: LocationData = {
-				lat: parseFloat(latLong[0]),
-				lon: parseFloat(latLong[1]),
-				timeZone: DateTime.now().zoneName,
+			const location: LocationServiceResult = {
+				lat: Number.parseFloat(latLong[0]),
+				lon: Number.parseFloat(latLong[1]),
 				entryText: loc,
 			}
-			this.InjectLocationToConfig(location);
+			Logger.Debug("Manual Location is a coordinate, using it directly.");
 			return location;
 		}
 
+		// Reverse geocoding, location is text
 		Logger.Debug("Location is text, geo locating...")
-		const locationData = await this.geoLocationService.GetLocation(loc);
+		const locationData = await this.geoLocationService.GetLocation(loc, cancellable);
 		// User facing errors are handled by service
-		if (locationData == null) return null;
-		if (!!locationData?.entryText) {
-			Logger.Debug("Address found via address search");
+		if (locationData == null) {
+			return null;
 		}
 
-		// Maybe location is in locationStore, first search
+		if (locationData?.entryText) {
+			Logger.Debug("Coordinates are found via Reverse address search");
+		}
+
+		// Reverse geocoding might give back a different entry text than what was entered,
+		// so we need to look that up in our store too.
 		location = this.LocStore.FindLocation(locationData.entryText);
 		if (location != null) {
-			Logger.Debug("Found location was found in locationStore, return that instead");
-			this.InjectLocationToConfig(location);
+			Logger.Debug("Entered location was found in Saved Location, switch to it instead.");
 			this.LocStore.SwitchToLocation(location);
 			return location;
 		}
 		else {
-			this.InjectLocationToConfig(locationData);
 			return locationData;
 		}
+	}
+
+	private async GetLocationAutomatically(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
+		if (this._geoclue) {
+			Logger.Info("Obtaining auto location via GeoClue2.");
+			const geoClue = await this.geoClue.GetLocation(cancellable);
+			if (geoClue != null) {
+				return geoClue;
+			}
+		}
+
+		Logger.Info("Obtaining auto location via IP lookup.");
+		const location = await this.LocationProvider.GetLocation(cancellable, this);
+		// User facing errors handled by provider
+		if (!location) {
+			return null;
+		}
+
+		return location;
 	}
 
 	/** Attaches settings to functions */
@@ -397,23 +623,20 @@ export class Config {
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
 
-		this.settings.bind("tempTextOverride", "_" + "panelTextOverride",
-			this.app.RefreshLabel)
-
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
 
 		this.settings.bindProperty(BindingDirection.IN, "keybinding",
-			"keybinding", this.OnKeySettingsUpdated, null);
+			"keybinding", () => this.HotkeyChanged.Invoke(this), null);
 
 		this.settings.bindProperty(BindingDirection.IN, "logLevel",
 			"_logLevel", this.onLogLevelUpdated, null);
 
 		this.settings.bind("selectedLogPath",
-			"_selectedLogPath", this.app.saveLog);
+			"_selectedLogPath", () => this.SelectedLogPathChanged.Invoke(this));
 
-		keybindingManager.addHotKey(
-			UUID, this.keybinding, () => this.app.on_applet_clicked(null));
+		void soupLib.SetUserAgent(this._userAgentStringOverride);
+		this.UserAgentStringOverrideChanged.Subscribe(() => soupLib.SetUserAgent(this._userAgentStringOverride));
 	}
 
 	// UTILS
@@ -426,16 +649,6 @@ export class Config {
 		if (switchToManual == true) this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
 	}
 
-	private OnKeySettingsUpdated = (): void => {
-		if (this.keybinding != null) {
-			keybindingManager.addHotKey(
-				UUID,
-				this.keybinding,
-				Lang.bind(this.app, this.app.on_applet_clicked)
-			);
-		}
-	}
-
 	private onLogLevelUpdated = () => {
 		Logger.ChangeLevel(this._logLevel);
 	}
@@ -444,7 +657,7 @@ export class Config {
 	private OnLocationChanged = () => {
 		Logger.Debug("User changed location, waiting 3 seconds...");
 		if (this.doneTypingLocation != null) clearTimeout(this.doneTypingLocation);
-		this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
+		this.doneTypingLocation = setTimeout(this.DoneTypingLocation, 3000);
 	}
 
 	private OnLocationStoreChanged = () => {
@@ -453,21 +666,21 @@ export class Config {
 
 	private OnFontChanged = () => {
 		this.currentFontSize = this.GetCurrentFontSize();
-		this.app.RefreshAndRebuild();
+		this.FontChanged.Invoke(this);
 	}
 
 	/** Called when 3 seconds is up with no change in location */
-	private DoneTypingLocation() {
+	private DoneTypingLocation = () => {
 		Logger.Debug("User has finished typing, beginning refresh");
 		this.doneTypingLocation = null;
-		this.app.Refresh();
+		this.LocationChanged.Invoke(this);
 	}
 
 	private SetLocation(value: string) {
 		this.settings.setValue(this.WEATHER_LOCATION, value);
 	}
 
-	public SetLocationList(list: LocationData[]) {
+	public SetLocationList(list: LocationData[]): void {
 		this.settings.setValue(this.WEATHER_LOCATION_LIST, list);
 	}
 
@@ -477,11 +690,11 @@ export class Config {
 		return "fahrenheit";
 	}
 
-	private GetLocaleWindSpeedUnit(code: string | null): WeatherWindSpeedUnits {
+	private GetLocaleWindSpeedUnit(code: string | null): Exclude<WeatherWindSpeedUnits, "automatic"> {
 		if (code == null)
 			return "kph";
 
-		let key: WeatherWindSpeedUnits;
+		let key: Exclude<WeatherWindSpeedUnits, "automatic">;
 		for (key in windSpeedUnitLocales) {
 			if (windSpeedUnitLocales[key]?.includes(code))
 				return key;
@@ -524,27 +737,28 @@ export class Config {
 	private GetCurrentFontSize() {
 		const nameString = this.InterfaceSettings.get_string("font-name");
 		const elements = nameString.split(" ");
-		const size = parseFloat(elements[elements.length - 1]);
+		const size = Number.parseFloat(elements[elements.length - 1]);
 		Logger.Debug("Font size changed to " + size.toString());
 		return size;
 	}
 
-	public async GetAppletConfigJson(): Promise<Record<string, any>> {
+	public async GetAppletConfigJson(): Promise<Record<string, unknown>> {
 		const home = get_home_dir() ?? "~";
-		let configFilePath = `${get_user_data_dir()}/cinnamon/spices/weather@mockturtl/${this.app.instance_id}.json`;
-		const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+		let configFilePath = `${get_user_config_dir()}/cinnamon/spices/weather@mockturtl/${this.instance_id}.json`;
+		const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.instance_id}.json`;
 		let configFile = File.new_for_path(configFilePath);
 		const oldConfigFile = File.new_for_path(oldConfigFilePath);
 
 		// Check if file exists
-		if (!await FileExists(configFile)) {
-			configFile = oldConfigFile;
-			configFilePath = oldConfigFilePath;
-			if (!await FileExists(configFile)) {
+		if (!FileExists(configFile)) {
+			if (!FileExists(oldConfigFile)) {
 				throw new Error(
 					_("Could not retrieve config, file was not found under paths\n {configFilePath}", { configFilePath: `${configFilePath}\n${oldConfigFilePath}` })
 				);
 			}
+
+			configFile = oldConfigFile;
+			configFilePath = oldConfigFilePath;
 		}
 
 		// Load file contents
@@ -555,7 +769,7 @@ export class Config {
 			);
 		}
 
-		const conf = JSON.parse(confString);
+		const conf = JSON.parse(confString) as SettingsSchemaWithValues;
 		if (conf?.apiKey?.value != null)
 			conf.apiKey.value = "REDACTED";
 
@@ -572,7 +786,7 @@ export class Config {
 		return conf;
 	}
 
-	public Destroy() {
+	public Destroy(): void {
 		this.settings.finalize?.();
 	}
 }
@@ -580,7 +794,7 @@ export class Config {
 /**
  * Keys matching the ones in settings-schema.json
  */
- const Keys = {
+const Keys = {
 	DATA_SERVICE: {
 		key: "dataService",
 		prop: "DataService"
@@ -588,6 +802,42 @@ export class Config {
 	API_KEY: {
 		key: "apiKey",
 		prop: "ApiKey"
+	},
+	OPENWEATHERMAP_ONECALL_API_KEY: {
+		key: "openweathermap_onecall_apikey",
+		prop: "OpenWeatherMapOneCallApiKey",
+	},
+	METOFFICE_FORECAST_APIKEY: {
+		key: "metoffice_forecast_apikey",
+		prop: "MetofficeForecastApiKey"
+	},
+	METOFFICE_OBSERVATIONS_APIKEY: {
+		key: "metoffice_observations_apikey",
+		prop: "MetofficeObservationsApiKey"
+	},
+	PIRATEWEATHER_APIKEY: {
+		key: "pirateweather_apikey",
+		prop: "PirateWeatherApiKey"
+	},
+	VISUALCROSSING_APIKEY: {
+		key: "visualcrossing_apikey",
+		prop: "VisualCrossingApiKey"
+	},
+	WEATHERBIT_APIKEY: {
+		key: "weatherbit_apikey",
+		prop: "WeatherbitApiKey"
+	},
+	TOMORROW_IO_APIKEY: {
+		key: "tomorrowio_apikey",
+		prop: "TomorrowIOApiKey"
+	},
+	ACCUWEATHER_APIKEY: {
+		key: "accuweather_apikey",
+		prop: "AccuWeatherApiKey"
+	},
+	WEATHER_UNDERGROUND_APIKEY: {
+		key: "weatherunderground_apikey",
+		prop: "WeatherUndergroundApiKey"
 	},
 	TEMPERATURE_UNIT_KEY: {
 		key: "temperatureUnit",
@@ -708,9 +958,38 @@ export class Config {
 	TOOLTIP_TEXT_OVERRIDE: {
 		key: "tooltipTextOverride",
 		prop: "TooltipTextOverride"
+	},
+	SHOW_ALERTS: {
+		key: "showAlerts",
+		prop: "ShowAlerts"
+	},
+	USER_AGENT_STRING_OVERRIDE: {
+		key: "userAgentStringOverride",
+		prop: "UserAgentStringOverride"
+	},
+	RUN_SCRIPT: {
+		key: "runScript",
+		prop: "RunScript"
+	},
+	TEMP_TEXT_OVERRIDE: {
+		key: "tempTextOverride",
+		prop: "TempTextOverride"
+	},
+	UV_INDEX: {
+		key: "uvIndex",
+		prop: "UV_Index"
+	},
+	GEO_CLUE: {
+		key: "geoclue",
+		prop: "GeoClue"
+	},
+	AUTOLOC_PROVIDER: {
+		key: "autoloc_provider",
+		prop: "AutoLocProvider"
 	}
 } as const;
 
 type ServiceClassMappingType = {
-	[key in Services]: (app: WeatherApplet) => BaseProvider;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	[key in Services]: (app: WeatherApplet) => WeatherProvider<any, any>;
 }

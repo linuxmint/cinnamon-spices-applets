@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-02 15:47+0100\n"
+"PO-Revision-Date: 2024-04-21 11:44+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:169
+msgid "Clear"
+msgstr "Wissen"
+
+#: applet.js:224
+msgid "Graphics"
+msgstr "Grafische toepassingen"
+
+#: applet.js:304
+msgid "LAUNCHERS"
+msgstr "STARTERS"
+
+#: applet.js:329
+msgid "PICTURES"
+msgstr "AFBEELDINGEN"
+
+#: applet.js:340
+msgid "Open folder"
+msgstr "Map openen"
+
+#: applet.js:367
+msgid "RECENT DOCUMENTS"
+msgstr "RECENTE DOCUMENTEN"
+
+#. graphicsCenter@scollins->settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Paneelicoon"
+
+#. graphicsCenter@scollins->settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr "Accepteert icoonnaam of direct pad (ondersteunt symbolische iconen)"
+
+#. graphicsCenter@scollins->settings-schema.json->showPictures->description
+msgid "Show contents of pictures directory"
+msgstr "Toon inhoud van de map Afbeeldingen"
+
+#. graphicsCenter@scollins->settings-schema.json->keyOpen->description
+msgid "Menu shorcut key"
+msgstr "Sneltoets voor menu"
+
+#. graphicsCenter@scollins->settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Pictogramgrootte van menu"
+
+#. graphicsCenter@scollins->settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. graphicsCenter@scollins->settings-schema.json->pictures->description
+msgid "Pictures"
+msgstr "Afbeeldingen"
+
+#. graphicsCenter@scollins->settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Aantal te tonen"
+
+#. graphicsCenter@scollins->settings-schema.json->pictureSize->description
+msgid "Thumbnail size"
+msgstr "Miniatuurgrootte"
+
+#. graphicsCenter@scollins->settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Algemene instellingen"
+
+#. graphicsCenter@scollins->settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Paneeltekst"
+
+#. graphicsCenter@scollins->settings-schema.json->recursePictures->description
+msgid "Show contents of subfolders"
+msgstr "Toon inhoud van submappen"
+
+#. graphicsCenter@scollins->settings-schema.json->altDir->description
+msgid "Use alternate directory"
+msgstr "Gebruik alternatieve map"
+
+#. graphicsCenter@scollins->settings-
+#. schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Toon recente documenten"
+
+#. graphicsCenter@scollins->settings-schema.json->recent->description
+msgid "Recent Documents"
+msgstr "Recente documenten"
+
+#. graphicsCenter@scollins->metadata.json->description
+msgid "Provides an easy and fast resource for all your picture needs"
+msgstr "Biedt een eenvoudige en snelle bron voor al uw afbeeldingsbehoeften"
+
+#. graphicsCenter@scollins->metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Auteur"
+
+#. graphicsCenter@scollins->metadata.json->comments
+msgid ""
+"Graphics Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy aceess to all of your graphics programs and pictures. Feel "
+"free to contribute by submitting pull requests, bug reports and feature "
+"requests to my github repo."
+msgstr ""
+"Graphics Center is een functierijke, platformonafhankelijke Cinnamon-applet "
+"die eenvoudige toegang biedt tot al uw grafische programma's en "
+"afbeeldingen. Voel je vrij om bij te dragen door pull requests, bugrapporten "
+"en functieverzoeken in te dienen bij mijn GitHub-repo."
+
+#. graphicsCenter@scollins->metadata.json->name
+msgid "Graphics Center"
+msgstr "Graphics Center"

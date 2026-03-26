@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# TURN OFF MONITOR
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# zablotski, 2017
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-01 20:00+0100\n"
-"PO-Revision-Date: 2023-03-13 19:01-0300\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-07 14:33-0400\n"
+"PO-Revision-Date: 2025-04-07 15:04-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,9 +17,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4.4\n"
 
-#: applet.js:45
+#. applet.js:45
 msgid "Turn off monitor"
 msgstr "Apagar el monitor"
 
@@ -46,6 +47,10 @@ msgstr "Atajos"
 msgid "Icon"
 msgstr "Iconos"
 
+#. settings-schema.json->section-lock->title
+msgid "Screen lock"
+msgstr "Bloqueo de pantalla"
+
 #. settings-schema.json->mouse-deactivation-duration->units
 msgid "seconds"
 msgstr "segundos"
@@ -59,9 +64,8 @@ msgid ""
 "To prevent the monitor from turning on too soon after turning it off, the "
 "mouse will be disabled for the number of seconds set here."
 msgstr ""
-"Para evitar que el monitor se encienda demasiado pronto después de "
-"apagarlo, el mouse se desactivará durante la cantidad de segundos "
-"establecida aquí."
+"Para evitar que el monitor se encienda demasiado pronto después de apagarlo, "
+"el mouse se desactivará durante la cantidad de segundos establecida aquí."
 
 #. settings-schema.json->keybinding->description
 msgid "Keyboard shortcut to turn off your monitor"
@@ -74,3 +78,7 @@ msgstr "Usar un icono simbólico"
 #. settings-schema.json->icon-color->description
 msgid "Color of the symbolic icon"
 msgstr "Color del icono simbólico"
+
+#. settings-schema.json->screenlock->description
+msgid "Lock also cinnamon session"
+msgstr "Bloquear también sesión de Cinnamon"

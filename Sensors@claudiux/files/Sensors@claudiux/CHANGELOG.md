@@ -1,3 +1,204 @@
+### v5.11.0~20260322
+  * In the Temperature tab of this applet settings:
+    * New option: Display the disk temperatures before those of the other sensors.
+  * For Temperature, Fan, Voltages tabs:
+    * Added "Color in panel" option to each sensor in the list.
+    * Color must be in html format. Ex: #FE246A
+    * The Custom Text Color defined in the General tab takes precedence on these colors.
+  * Fixes [#8454](https://github.com/linuxmint/cinnamon-spices-applets/issues/8454)
+
+### v5.10.7~20260314
+  * Avoid errors using Gentoo.
+  * Gentoo users must install all dependencies themselves. Please refer to the README file.
+
+### v5.10.6~20260304
+  * Added option: Separator Color.
+
+### v5.10.5~20260218
+  * Improved section "This settings window".
+  * From now on, the user can set the size and position of the settings window to its current (approximate) size and position. Then let Cinnamon decide the real values.
+
+### v5.10.4~20260218
+  * Added section "This settings window" to set its size.
+  * Fixes [#8324](https://github.com/linuxmint/cinnamon-spices-applets/issues/8324)
+
+### v5.10.3~20260215
+  * Added option "Do not check dependencies" in General tab.
+  * Fixes [#8325](https://github.com/linuxmint/cinnamon-spices-applets/issues/8325)
+
+### v5.10.2~20260214
+  * Fixes [#8316](https://github.com/linuxmint/cinnamon-spices-applets/issues/8316)
+
+### v5.10.1~20260130
+  * Ensures compatibility with several old versions of Cinnamon.
+
+### v5.10.0~20251212
+  * Use xlet-settings instead of cinnamon-settings to configure applet.
+
+### v5.9.3~20251121
+  * Updates to-string() function.
+
+### v5.9.2~20250919
+  * Fixes [#7761](https://github.com/linuxmint/cinnamon-spices-applets/issues/7761)
+
+### v5.9.1~20250917
+  * Fixes [#7761](https://github.com/linuxmint/cinnamon-spices-applets/issues/7761)
+
+### v5.9.0~20250913
+  * Improves the reading of disk temperatures.
+
+### v5.8.2~20250911
+  * Avoids any unnecessary work.
+  * Fixes [#7714](https://github.com/linuxmint/cinnamon-spices-applets/issues/7714)
+
+
+### v5.8.1~20250908
+  * Avoids memory leaks.
+
+### v5.8.0~20250907
+  * Increases the speed at which disk temperatures are read.
+
+### v5.7.3~20250906
+  * Takes into account the "Refresh interval" value in the `SensorsDaemon.sh` script.
+
+### v5.7.2~20250906
+  * Improves stability.
+  * Fixes [#7670](https://github.com/linuxmint/cinnamon-spices-applets/issues/7670)
+
+### v5.7.0~20250905
+  * Increases speed.
+
+### v5.6.1~20250701
+  * Fixes bad data in json file.
+
+### v5.6.0~20250630
+  * Ignores invalid sensors.
+
+### v5.5.0~20250620
+  * Add Devuan support.
+
+### v5.4.2~20250401
+  * Minor changes about font size.
+  * Code cleanup in applet.js.
+
+### v5.4.1~20250330
+  * Minor changes about applet width.
+
+### v5.4.0~20250329
+  * Now applet width can be fixed by user (for horizontal panels).
+  * Fixes #7005.
+
+### v5.3.2~20250228
+  * Fixes scenario where special characters would appear next to temperatures on the panel.
+
+### v5.3.1~20250223
+  * Removed option "Only show positive values" for fans. (Value fixed to false.)
+  * Fixes #6845.
+
+### v5.3.0~20250222
+  * Users can now choose the type of separator.
+
+### v5.2.0~20250221
+  * Separator is coming back!
+
+### v5.1.0~20250221
+  * Font size can now be set from 60% to 120% of standard size (instead of 80% to 120%).
+  * Fixes #6896.
+
+### v5.0.0~20250220
+  * Individual High/Critical Value Indications.
+  * High/Critical Value Color can be selected.
+  * Custom emoji can be added/selected.
+  * Fixes #6846.
+
+### v4.2.1~20250215
+  * Fixes #6868.
+
+### v4.2.0~20250205
+  * Fixes several issues.
+  * Fixes #6845.
+  * Fixes #6766.
+  * Fixes #6842.
+
+### v4.1.0~20250130
+  * Improves dependency installation.
+  * Fixes #6809 and #6818.
+
+### v4.0.3~20250126
+  * Improved code. Greater stability.
+  * Change of Fan symbol.
+
+### v4.0.2~20250116
+  * mainloopTools library: improvements.
+
+### v4.0.1~20250114
+  * As long as the icon is hovered over, the sensors are checked every second.
+
+### v4.0.0~20250114
+  * Now uses mainloopTools to improve loop management.
+  * Fixes #6744.
+
+### v3.9.0~20241109
+  * Fixes #6076: Ignores 'empty' sensors (sensors not sending data).
+
+### v3.8.3~20241029
+  * Fixes #6541. Adds FAQ about Nvidia video card temperature readings. Thanks to @JEleniel!
+
+### v3.8.2~20241011
+  * Adds support for Nvidia SMI temperatures. Thanks to @JEleniel!
+
+### v3.8.1~20240901
+  * Fixes #6353. Repairs tooltip.
+
+### v3.8.0~20240818
+  * Fixes #6300. Better display on a vertical panel.
+
+### v3.7.0~20240425
+  * Added option to record values exceeding limits.
+  * Fixes  #5606.
+
+### v3.6.2~20240402
+  * Displays the tooltip regardless of the refresh interval.
+
+### v3.6.1~20240331
+  * More refresh intervals.
+
+### v3.6.0~20240215
+  * Adds ability to choose the color of the text in panel.
+
+### v3.5.3~20240213
+  * Minor change in settings: A sensor's name can now be displayed in full.
+
+### v3.5.2~20240124
+  * Prevents display error.
+
+### v3.5.1~20240120
+  * Improves subprocesses (part2).
+
+### v3.5.0~20240119
+  * Improves subprocesses.
+
+### v3.4.0~20240107
+  * Fixes #5352.
+  * Added an option in the General tab to display a tooltip or not.
+
+### v3.3.0~20240102
+  * Fixes #4986.
+  * From now on, the monospace font style is only used when size must be preserved.
+
+### v3.2.1~20240102
+  * Toggle menu after selecting Suspend option.
+
+### v3.2.0~20240101
+  * Adds the ability to suspend this applet (menu option).
+
+### v3.1.3~20231231
+  * Adds the --icon parameter for zenity v4.
+  * Allows translations for messages in bash scripts.
+
+### v3.1.2~20231230
+  * Removes the --window-icon parameter for zenity v4.
+
 ### v3.1.1~20230708
   * Fixes #4929
 
