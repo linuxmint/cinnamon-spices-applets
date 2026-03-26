@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-03-25 19:18+0100\n"
-"PO-Revision-Date: 2026-03-20 21:28-0300\n"
+"PO-Revision-Date: 2026-03-25 19:32-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1262,24 +1262,25 @@ msgstr "Mantén abierto el control de volumen de la aplicación"
 
 #. 6.6->settings-schema.json->appsNotToDisplayLabel->description
 msgid "Apps Not to Display:"
-msgstr ""
+msgstr "Aplicaciones que no se mostrarán:"
 
 #. 6.6->settings-schema.json->appsNotToDisplay->description
 msgid "Apps Not to Display"
-msgstr ""
+msgstr "Aplicaciones que no se mostrarán"
 
 #. 6.6->settings-schema.json->appsNotToDisplay->columns->title
-#, fuzzy
 msgid ""
 "in\n"
 "Applications\n"
 "submenu"
-msgstr "Aplicaciones"
+msgstr ""
+"en\n"
+"el submenú\n"
+"Aplicaciones"
 
 #. 6.6->settings-schema.json->appsNotToDisplay->columns->title
-#, fuzzy
 msgid "Part of the app name"
-msgstr "Parte del nombre del dispositivo"
+msgstr "Parte del nombre de la aplicación"
 
 #. 6.6->settings-schema.json->keepOutputListOpen->description
 #. 6.4->settings-schema.json->keepOutputListOpen->description
