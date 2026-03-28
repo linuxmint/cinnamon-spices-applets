@@ -281,7 +281,7 @@ class DirectApplet extends Applet.TextIconApplet {
             this.favAppsSection = new PopupMenu.PopupMenuSection();
 
             //initiate settings
-            this.settings = new Settings.AppletSettings(this, this.metadata.uuid, this.instanceId);
+            this.settings = new Settings.AppletSettings(this, MODULE_UUID, this.instanceId);
             this.bindSettings();
 
             //set up panel
@@ -1317,7 +1317,7 @@ class DirectApplet extends Applet.TextIconApplet {
 
         this.closeSettingsWindow();
 
-        let pid = Util.spawnCommandLine(`xlet-settings applet ${this.metadata.uuid} -i ${this.instanceId} -t ${tab}`);
+        let pid = Util.spawnCommandLine(`xlet-settings applet ${MODULE_UUID} -i ${this.instanceId} -t ${tab}`);
 
         if (maximize_vertically) {
           var app = null;
@@ -1349,7 +1349,7 @@ class DirectApplet extends Applet.TextIconApplet {
 
 function main(metadata, orientation, panel_height, instanceId) {
     MODULE_UUID = metadata.uuid;
-    Gettext.bindtextdomain(MODULE_UUID, HOME_DIR + "/.local/share/locale");
+    Gettext.bindtextdomain(MODULE_UUID, GLib.get_user_data_dir() + "/locale");
     let directApplet = new DirectApplet(metadata, orientation, panel_height, instanceId);
     return directApplet;
 }
