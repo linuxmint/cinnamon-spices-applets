@@ -32,18 +32,19 @@ const ICONBROWSER_PROGRAM = "yad-icon-browser";
 
 var TEXTSIZE = 0;
 var MENU_ITEM_ICON_SIZE = 22;
-const UUID = "Direct@claudiux";
-Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
+
+let MODULE_UUID; // Populated by main function
 
 function _(str) {
-   let customTranslation = Gettext.dgettext(UUID, str);
+   let customTranslation = Gettext.dgettext(MODULE_UUID, str);
    if(customTranslation != str) {
       return customTranslation;
    }
    return Gettext.gettext(str);
 }
 
-const orig_names = [GLib.get_user_name().toUpperCase(), _("SYSTEM"), _("FAVORITES"), _("APPLICATIONS"), _("RECENT DOCUMENTS"), _("CUSTOM")];
+const orig_user_name = GLib.get_user_name().toUpperCase();
+const orig_names = ["SYSTEM", "FAVORITES", "APPLICATIONS", "RECENT DOCUMENTS", "CUSTOM"];
 const orig_sections = ["User", "System", "Favorites", "FavoriteApps", "RecentDocuments", "CustomDocuments"];
 
 function icon_exists( iconName ) {
@@ -264,6 +265,11 @@ class DirectApplet extends Applet.TextIconApplet {
             this.appSystem = Cinnamon.AppSystem.get_default();
             this.appFavorites = getAppFavorites();
 
+            // copy the section names, translating them
+            this.sectionNames = [];
+            this.sectionNames.push(orig_user_name);
+            for (let name of orig_names) this.sectionNames.push(_(name));
+
             //~ this.enterEventId = null;
             //~ this.leaveEventId = null;
             this.iconIsHovered = false;
@@ -275,7 +281,7 @@ class DirectApplet extends Applet.TextIconApplet {
             this.favAppsSection = new PopupMenu.PopupMenuSection();
 
             //initiate settings
-            this.settings = new Settings.AppletSettings(this, UUID, this.instanceId);
+            this.settings = new Settings.AppletSettings(this, this.metadata.uuid, this.instanceId);
             this.bindSettings();
 
             //set up panel
@@ -452,10 +458,10 @@ class DirectApplet extends Applet.TextIconApplet {
         var order = [];
         for (let d of this.displayOrder) {
             let section = d["id"];
-            if (order.indexOf(section) < 0 && orig_names.indexOf(section) >= 0) order.push(section);
+            if (order.indexOf(section) < 0 && this.sectionNames.indexOf(section) >= 0) order.push(section);
         }
-        if (order.length < orig_names.length) {
-            for (let name of orig_names) {
+        if (order.length < this.sectionNames.length) {
+            for (let name of this.sectionNames) {
                 if (order.indexOf(name) < 0 ) order.push(name);
             }
         }
@@ -571,7 +577,7 @@ class DirectApplet extends Applet.TextIconApplet {
         let order = [];
         for (let d of this.displayOrder) order.push(d["id"]);
         for (let o of order) {
-            switch(orig_sections[orig_names.indexOf(o)]) {
+            switch(orig_sections[this.sectionNames.indexOf(o)]) {
                 case "User":
                     if (this.showUserSection) {
                         mainBox.add_actor(userPaneBox);
@@ -1308,7 +1314,7 @@ class DirectApplet extends Applet.TextIconApplet {
 
         this.closeSettingsWindow();
 
-        let pid = Util.spawnCommandLine(`xlet-settings applet ${UUID} -i ${this.instanceId} -t ${tab}`);
+        let pid = Util.spawnCommandLine(`xlet-settings applet ${this.metadata.uuid} -i ${this.instanceId} -t ${tab}`);
 
         if (maximize_vertically) {
           var app = null;
@@ -1339,6 +1345,8 @@ class DirectApplet extends Applet.TextIconApplet {
 
 
 function main(metadata, orientation, panel_height, instanceId) {
+    MODULE_UUID = metadata.uuid;
+    Gettext.bindtextdomain(MODULE_UUID, HOME_DIR + "/.local/share/locale");
     let directApplet = new DirectApplet(metadata, orientation, panel_height, instanceId);
     return directApplet;
 }
