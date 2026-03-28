@@ -107,7 +107,8 @@
         "showRoot",
         "showVolumes",
         "onlyShowMounted",
-        "showNetwork"
+        "showNetwork",
+        "showSession"
       ]
     },
     "systemSectionCustomPlaces": {
@@ -347,6 +348,11 @@
   "showNetwork": {
     "type": "switch",
     "description": "Show network",
+    "default": true
+  },
+  "showSession": {
+    "type": "switch",
+    "description": "Show Logout and Quit",
     "default": true
   },
   "listSystemCustomPlaces": {
