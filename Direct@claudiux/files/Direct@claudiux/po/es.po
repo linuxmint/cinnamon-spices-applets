@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-03-29 12:10+0200\n"
-"PO-Revision-Date: 2026-01-07 20:14-0300\n"
+"PO-Revision-Date: 2026-03-29 10:39-0300\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #. applet.js:190
 msgid "(Right click to open folder)"
@@ -388,7 +388,7 @@ msgstr "Mostrar Red"
 
 #. settings-schema.json->showSession->description
 msgid "Show Logout and Quit"
-msgstr ""
+msgstr "Mostrar Cerrar sesión y Salir"
 
 #. settings-schema.json->showFavorites->description
 msgid "Show favorite documents"
