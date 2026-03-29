@@ -4167,14 +4167,25 @@ function notify(text, options) {
     isMarkup && notification["_bodyUrlHighlighter"].actor.clutter_text.set_markup(text);
     messageSource.notify(notification);
 }
-function notifyError(prefix, errMessage, options) {
-    const { showInternetInfo, showViewLogBtn = true, additionalBtns = [] } = options || {};
-    global.logError(errMessage);
-    const notificationSentences = [prefix];
+/**
+ *
+ * Function to notify the user of an error. It shows a notification with the notifyMessage plus
+ * some generic informations (e.g. the information to not hesitate to open an issue on github)
+ * and prints the logs. If
+ *
+ * @param notifyMessage
+ * @param log
+ * @param options
+ * @returns
+ */
+function notifyError(notifyMessage, log, options) {
+    const { showInternetInfo, showViewLogBtn = true, showInstallationInstructionBtn = true, additionalBtns = [] } = options || {};
+    global.logError(log);
+    const notificationSentences = [notifyMessage];
     if (showInternetInfo) {
         notificationSentences.push('Make sure you are connected to the internet and try again');
     }
-    notificationSentences.push("Don't hesitate to open an issue on github if the problem remains.");
+    notificationSentences.push("\n\nDon't hesitate to open an issue on github if the problem remains.");
     if (showViewLogBtn) {
         notificationSentences.push(`\n\nFor more information see the logs`);
     }
@@ -4184,6 +4195,12 @@ function notifyError(prefix, errMessage, options) {
         buttons.push({
             text: 'View Logs',
             onClick: () => notify_spawnCommandLine(`xdg-open ${notify_get_home_dir()}/.xsession-errors`)
+        });
+    }
+    if (showInstallationInstructionBtn) {
+        buttons.push({
+            text: 'View Installation Instruction',
+            onClick: () => notify_spawnCommandLine(`xdg-open ${APPLET_SITE} `)
         });
     }
     additionalBtns.forEach((additionalBtn) => buttons.push(additionalBtn));
@@ -4257,7 +4274,6 @@ function downloadWithYtDlp(props) {
 
 
 
-
 const { spawnCommandLine: YoutubeDownloadManager_spawnCommandLine } = imports.misc.util;
 const { get_home_dir: YoutubeDownloadManager_get_home_dir, dir_make_tmp, DateTime } = imports.gi.GLib;
 const { File: YoutubeDownloadManager_File, FileCopyFlags, FileQueryInfoFlags } = imports.gi.Gio;
@@ -4265,18 +4281,7 @@ const notifyYouTubeDownloadFailed = (props) => {
     const { youtubeCli, errorMessage } = props;
     notifyError(`Couldn't download Song from YouTube due to an Error. Make Sure you have the newest version of ${youtubeCli} installed. 
     \n<b>Important:</b> Don't use apt for the installation but follow the installation instruction given on the Radio Applet Site in the Cinnamon Store instead.
-    \nReview the logs for more information`, errorMessage, {
-        additionalBtns: [
-            {
-                text: "View Installation Instruction",
-                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open ${APPLET_SITE} `),
-            },
-            {
-                text: "View Logs",
-                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open ~/.xsession-errors`),
-            }
-        ],
-    });
+    \nReview the logs for more information.`, errorMessage);
 };
 const notifyYouTubeDownloadStarted = (title) => {
     notify(`Downloading ${title} ...`, {
@@ -4350,6 +4355,13 @@ function downloadSongFromYouTube(title) {
                         errorMessage: `Failed to copy download from tmp dir. The following error occurred: ${errorMessage}. The tmp dir Path is: ${tmpDirPath}. The download command is: ${downloadCommand}`,
                     });
                 },
+                onNoFileNameExtracted: () => {
+                    notifyError(`The filename couldn't be extracted from the Youtube Download Cli tool.\n\nThis usually happens because the YouTube search didn't return any results but can also be caused by other errors in the Youtube Download Cli tool. 
+             \nIf this happens consistently for songs that should be downloadable, check that your YouTube Download Cli tool is working correctly.`, "Failed to find any file in the temporary download directory. The tmp dir is: " +
+                        tmpDirPath +
+                        ". The used download command was: " +
+                        downloadCommand);
+                },
             });
         },
     };
@@ -4362,19 +4374,21 @@ function downloadSongFromYouTube(title) {
 }
 const moveFileFromTmpDir = (props) => {
     var _a, _b;
-    const { tmpDirPath, targetDirPath, onFileMoved, onError } = props;
+    const { tmpDirPath, targetDirPath, onFileMoved, onError, onNoFileNameExtracted } = props;
     try {
         const fileName = (_a = YoutubeDownloadManager_File.new_for_path(tmpDirPath)
             .enumerate_children("standard::*", FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null)
             .next_file(null)) === null || _a === void 0 ? void 0 : _a.get_name();
         if (!fileName) {
-            throw new Error(`filename couldn't be determined.This seems to be a problem with the used Youtube Download Cli tool.`);
+            onNoFileNameExtracted();
+            return;
         }
         const tmpFile = YoutubeDownloadManager_File.new_for_path(`${tmpDirPath}/${fileName}`);
         if ((_b = tmpFile.get_path()) === null || _b === void 0 ? void 0 : _b.endsWith(".webp")) {
             throw new Error("Only the cover image has been downloaded. This seems to be a problem with the used Youtube Download Cli tool.");
         }
-        if (!YoutubeDownloadManager_File.new_for_uri(targetDirPath).query_exists(null) && !YoutubeDownloadManager_File.new_for_path(targetDirPath).query_exists(null)) {
+        if (!YoutubeDownloadManager_File.new_for_uri(targetDirPath).query_exists(null) &&
+            !YoutubeDownloadManager_File.new_for_path(targetDirPath).query_exists(null)) {
             throw new Error("The Download Directory specified in the settings doesn't exist. Please create it manually or change the settings.");
         }
         const targetFilePath = `${targetDirPath}/${fileName}`;
@@ -4426,38 +4440,48 @@ function addDownloadingSongsChangeListener(callback) {
 
 
 
+
 const { PanelItemTooltip } = imports.ui.tooltips;
 const { markup_escape_text } = imports.gi.GLib;
 function createRadioAppletTooltip(args) {
-    const { appletContainer, } = args;
+    const { appletContainer } = args;
     const tooltip = new PanelItemTooltip(appletContainer, undefined, __meta.orientation);
-    tooltip['_tooltip'].set_style("text-align: left;");
-    const setRefreshTooltip = () => {
+    tooltip["_tooltip"].set_style("text-align: left;");
+    const getTooltipLines = () => {
         var _a;
-        // @ts-ignore
-        tooltip.orientation = __meta.orientation;
-        if (mpvHandler.getPlaybackStatus() === 'Stopped') {
-            tooltip.set_markup("Radio++");
-            return;
+        if (mpvHandler.getPlaybackStatus() === "Stopped") {
+            const lines = ["Radio++"];
+            const lastUrl = configs.settingsObject.lastUrl;
+            if (lastUrl) {
+                lines.push("");
+                lines.push("<b>Hint</b>: Middle click to play last station");
+            }
+            return lines;
         }
         const lines = [
-            [`<b>Volume</b>`],
-            [`${(_a = mpvHandler.getVolume()) === null || _a === void 0 ? void 0 : _a.toString()} %`],
-            [],
-            ['<b>Songtitle</b>'],
-            [`${markup_escape_text(mpvHandler.getCurrentTitle() || '', -1)}`],
-            [],
-            ['<b>Station</b>'],
-            [`${markup_escape_text(mpvHandler.getCurrentChannelName() || '', -1)} `],
+            `<b>Volume</b>`,
+            `${(_a = mpvHandler.getVolume()) === null || _a === void 0 ? void 0 : _a.toString()} %`,
+            "",
+            "<b>Songtitle</b>",
+            `${markup_escape_text(mpvHandler.getCurrentTitle() || "", -1)}`,
+            "",
+            "<b>Station</b>",
+            `${markup_escape_text(mpvHandler.getCurrentChannelName() || "", -1)} `,
         ];
         const currentDownloadingSongs = getCurrentDownloadingSongs();
         if (currentDownloadingSongs.length !== 0) {
             [
-                [],
-                ['<b>Songs downloading:</b>'],
-                ...currentDownloadingSongs.map(downloadingSong => [markup_escape_text(downloadingSong, -1)])
-            ].forEach(line => lines.push(line));
+                "",
+                "<b>Songs downloading:</b>",
+                ...currentDownloadingSongs.map((downloadingSong) => markup_escape_text(downloadingSong, -1)),
+            ].forEach((line) => lines.push(line));
         }
+        return lines;
+    };
+    const setRefreshTooltip = () => {
+        // @ts-ignore
+        tooltip.orientation = __meta.orientation;
+        const lines = getTooltipLines();
         const markupTxt = lines.join(`\n`);
         tooltip.set_markup(markupTxt);
     };
@@ -4467,8 +4491,8 @@ function createRadioAppletTooltip(args) {
         mpvHandler.addTitleChangeHandler,
         mpvHandler.addChannelChangeHandler,
         addDownloadingSongsChangeListener,
-        addOnAppletMovedCallback
-    ].forEach(cb => cb(setRefreshTooltip));
+        addOnAppletMovedCallback,
+    ].forEach((cb) => cb(setRefreshTooltip));
     setRefreshTooltip();
     return tooltip;
 }
@@ -5821,6 +5845,7 @@ function createRadioContextMenu(args) {
 
 
 
+
 const { ScrollDirection: RadioAppletContainer_ScrollDirection } = imports.gi.Clutter;
 let appletContainer;
 const getRadioAppletContainer = (props) => {
@@ -5833,7 +5858,7 @@ const getRadioAppletContainer = (props) => {
 };
 const createRadioAppletContainer = (props) => {
     let installationInProgress = false;
-    const appletContainer = createAppletContainer(Object.assign({ onMiddleClick: () => mpvHandler.togglePlayPause(), onRemoved: handleAppletRemoved, onClick: handleClick, onRightClick: () => {
+    const appletContainer = createAppletContainer(Object.assign({ onMiddleClick: handleMiddleClick, onRemoved: handleAppletRemoved, onClick: handleClick, onRightClick: () => {
             radioPopupMenu === null || radioPopupMenu === void 0 ? void 0 : radioPopupMenu.close();
             contextMenu === null || contextMenu === void 0 ? void 0 : contextMenu.toggle();
         }, onScroll: handleScroll }, props));
@@ -5855,6 +5880,16 @@ const createRadioAppletContainer = (props) => {
     function handleAppletRemoved() {
         mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.deactivateAllListener();
         mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.stop();
+    }
+    function handleMiddleClick() {
+        const lastUrl = configs.settingsObject.lastUrl;
+        if (mpvHandler.getPlaybackStatus() !== "Stopped") {
+            mpvHandler.togglePlayPause();
+            return;
+        }
+        if (mpvHandler.getPlaybackStatus() === 'Stopped' && lastUrl) {
+            mpvHandler.setUrl(lastUrl);
+        }
     }
     function handleScroll(scrollDirection) {
         if (scrollDirection === RadioAppletContainer_ScrollDirection.UP) {
