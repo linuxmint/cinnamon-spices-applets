@@ -1,3 +1,22 @@
+### v16.2.0~20260325
+  * Adds option "Apps Not to Display" in the Menu section of the General tab.
+  * Fixes [#8295](https://github.com/linuxmint/cinnamon-spices-applets/issues/8295)
+
+### v16.1.2~20260320
+  * Minor bug fixed.
+
+### v16.1.1~20260320
+  * Replaces the "Keep App selector open" option in the context menu with "Keep the App Volume Control open" in the main menu.
+
+### v16.1.0~20260318
+  * Application volume sliders are moved from the context menu to the main menu.
+  * Many improvements.
+  * Fixes [#8046](https://github.com/linuxmint/cinnamon-spices-applets/issues/8046)
+
+### v16.0.0~20260315
+  * The album cover is back!
+  * Fixes [#8383](https://github.com/linuxmint/cinnamon-spices-applets/issues/8383)
+
 ### v15.0.1~20260222
   * Improves asynchronous function calls.
 

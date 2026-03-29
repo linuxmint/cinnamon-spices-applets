@@ -127,9 +127,9 @@ class GraphVBars {
     if (providerName == 'SWAP' && this.applet.Mem_swapWidth === 0)
       return;
     if (!labelColor) {
-        labelColor = [1, 1, 1, 0.1];
+      labelColor = [1, 1, 1, 0.1];
     } else {
-        labelColor = RGBa2rgba(labelColor);
+      labelColor = RGBa2rgba(labelColor);
     }
 
     bgColor = RGBa2rgba(bgColor);
@@ -566,38 +566,65 @@ class GraphPieChart {
     areaContext.rectangle(_x_origin, _y_origin, _width, _height);
     areaContext.fill();
 
-    //Draw Pie Chart
-    let xcenter = _width / 2;
-    let ycenter = _height / 2;
-    let radius = Math.min(xcenter, ycenter) - 2;
+    if (this.applet.Mem_chartType === "pie") {
+      //Draw Pie Chart
+      let xcenter = _width / 2;
+      let ycenter = _height / 2;
+      let radius = Math.min(xcenter, ycenter) - 2;
 
-    var runningpercent = 0; //to make the arcs larger so that they becomes 1 after the next loop
+      var runningpercent = 0; //to make the arcs larger so that they becomes 1 after the next loop
 
-    areaContext.moveTo(xcenter, ycenter);
-    for (let i=0, len=currentReadings.length; i<len; i++) {
-      //use this to select datapointnum from our colorlist, its incase we have more datapointnums than colors
-      //This shouldnt happen but just incase, essentially we reuse colors from the beginning if we run out
-      let datapointnum = i % colorsList.length;
-      let r = colorsList[datapointnum][0];
-      let g = colorsList[datapointnum][1];
-      let b = colorsList[datapointnum][2];
-      let a = colorsList[datapointnum][3];
-
-      let origin = (this.applet.Mem_startAt12Oclock) ? -Math.PI / 2 : 0;
-
-      let startangle = TAU * runningpercent + origin;
-      let endangle = TAU * (runningpercent + currentReadings[i]) + origin;
-      runningpercent += currentReadings[i]; //update running percent
-
-      areaContext.setSourceRGBA(r, g, b, a);
-      areaContext.newPath();
       areaContext.moveTo(xcenter, ycenter);
+      for (let i=0, len=currentReadings.length; i<len; i++) {
+        //use this to select datapointnum from our colorlist, its incase we have more datapointnums than colors
+        //This shouldnt happen but just incase, essentially we reuse colors from the beginning if we run out
+        let datapointnum = i % colorsList.length;
+        let r = colorsList[datapointnum][0];
+        let g = colorsList[datapointnum][1];
+        let b = colorsList[datapointnum][2];
+        let a = colorsList[datapointnum][3];
 
-      areaContext.arc(xcenter, ycenter, radius, startangle, endangle);
+        let origin = (this.applet.Mem_startAt12Oclock) ? -Math.PI / 2 : 0;
 
-      areaContext.lineTo(xcenter, ycenter);
-      areaContext.closePath();
-      areaContext.fill();
+        let startangle = TAU * runningpercent + origin;
+        let endangle = TAU * (runningpercent + currentReadings[i]) + origin;
+        runningpercent += currentReadings[i]; //update running percent
+
+        areaContext.setSourceRGBA(r, g, b, a);
+        areaContext.newPath();
+        areaContext.moveTo(xcenter, ycenter);
+
+        areaContext.arc(xcenter, ycenter, radius, startangle, endangle);
+
+        areaContext.lineTo(xcenter, ycenter);
+        areaContext.closePath();
+        areaContext.fill();
+      }
+    } else {
+      // Bar chart
+      let vbarWidth = 0.8 * (_width - 6);
+      let r=1, g=1, b=1, a=1;
+      var old_height = 0;
+      var vbarHeight;
+      for (let i=0, len=currentReadings.length; i<len; i++) {
+        let currentR = parseFloat(currentReadings[i]);
+        vbarHeight = (height - 1) * currentR;
+        [r, g, b, a] = colorsList[i];
+        areaContext.setSourceRGBA(r, g, b, a);
+        let plus = 0;
+        if (i==0) plus = 1;
+        this.drawRoundedRectangle(
+          areaContext, 
+          1 + 0.2 * width, // x
+          height - (plus + old_height + vbarHeight), // y
+          vbarWidth, // width
+          vbarHeight, // height
+          1.0
+        );
+        areaContext.fill();
+        old_height = old_height + vbarHeight;
+      }
+      
     }
 
     // Label

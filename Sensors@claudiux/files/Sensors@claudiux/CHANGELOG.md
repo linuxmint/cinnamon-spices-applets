@@ -1,3 +1,16 @@
+### v5.11.0~20260322
+  * In the Temperature tab of this applet settings:
+    * New option: Display the disk temperatures before those of the other sensors.
+  * For Temperature, Fan, Voltages tabs:
+    * Added "Color in panel" option to each sensor in the list.
+    * Color must be in html format. Ex: #FE246A
+    * The Custom Text Color defined in the General tab takes precedence on these colors.
+  * Fixes [#8454](https://github.com/linuxmint/cinnamon-spices-applets/issues/8454)
+
+### v5.10.7~20260314
+  * Avoid errors using Gentoo.
+  * Gentoo users must install all dependencies themselves. Please refer to the README file.
+
 ### v5.10.6~20260304
   * Added option: Separator Color.
 

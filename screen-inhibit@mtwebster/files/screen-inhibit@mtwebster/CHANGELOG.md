@@ -1,3 +1,12 @@
+### v2.3.1~20260326
+  * Improves compatibility with Cinnamon 6.4+.
+  * Bug fix.
+  * Fixes [#8464](https://github.com/linuxmint/cinnamon-spices-applets/issues/8464)
+
+### v2.3.0~20260325
+  * Improves compatibility with Cinnamon 6.6+.
+  * Fixes [#8464](https://github.com/linuxmint/cinnamon-spices-applets/issues/8464)
+
 ### v2.2.0~20241001
   * Add a timer to end screen saver inhibition.
 
