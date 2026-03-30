@@ -93,14 +93,14 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         // Intercept _onNotify to capture notifications to history immediately,
         // before the banner is shown (notify-applet-update only fires after it closes).
         this._origOnNotify = Main.messageTray._onNotify;
-        Main.messageTray._onNotify = Lang.bind(this, function(source, notification) {
+        Main.messageTray._onNotify = (source, notification) => {
             // Record to history immediately
             if (this.historyEnabled && !notification._historyRecorded) {
                 notification._historyRecorded = true;
                 this._history.append(notification);
             }
             this._origOnNotify.call(Main.messageTray, source, notification);
-        });
+        };
 
         // States
         this._blinking = false;
@@ -215,14 +215,14 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this._historyHeaderItem.menu.addActor(this._historyBin);
 
         this._seeAllBtn = new St.Button({ label: _("See all notifications"), style_class: 'notification-history-seeall' });
-        this._seeAllBtn.connect('clicked', Lang.bind(this, this._open_history_viewer));
+        this._seeAllBtn.connect('clicked', () => this._open_history_viewer());
         this._historyHeaderItem.menu.addActor(this._seeAllBtn);
 
-        this._historyHeaderItem.menu.connect('open-state-changed', Lang.bind(this, function(menu, open) {
+        this._historyHeaderItem.menu.connect('open-state-changed', (menu, open) => {
             if (open) {
                 this._render_history();
             }
-        }));
+        });
 
         // this._render_history();
 
@@ -382,9 +382,7 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
      }
 
     _open_history_viewer() {
-        Util.spawnCommandLine(
-            "python3 '" + this._appletPath + "/history-viewer.py' " + this.historyPageSize + " '" + HISTORY_DIR + "'"
-        );
+        Util.spawn(["python3", this._appletPath + "/history-viewer.py", String(this.historyPageSize), HISTORY_DIR]);
     }
 
     _show_full_notification(item) {
@@ -412,9 +410,7 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
             dataStream.put_string(lines.join("\n"), null);
             dataStream.close(null);
 
-            Util.spawnCommandLine(
-                "zenity --text-info --title='Notification' --filename='" + tmpPath + "' --width=500 --height=300"
-            );
+            Util.spawn(["zenity", "--text-info", "--title=Notification", "--filename=" + tmpPath, "--width=500", "--height=300"]);
         } catch (e) {
             global.logError("_show_full_notification: " + e);
         }
@@ -435,8 +431,10 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
             return;
         }
 
-        let { items } = this._history.loadPage(0, 5);
+        this._history.loadPageAsync(0, 5, ({ items }) => {
+        if (!this._historyBin) return;
 
+        this._historyBin.destroy_all_children();
         this._seeAllBtn.visible = items.length > 0;
 
         if (items.length === 0) {
@@ -502,6 +500,7 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
                 this._historyBin.add(sep);
             }
         }
+        });
     }
 
      _clear_all() {
@@ -612,9 +611,12 @@ class HistoryManager {
 
     _ensureDir() {
         let dir = Gio.File.new_for_path(HISTORY_DIR);
-
-        if (!dir.query_exists(null)) {
+        try {
             dir.make_directory_with_parents(null);
+        } catch (e) {
+            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+                global.logError("HistoryManager._ensureDir: " + e);
+            }
         }
     }
 
@@ -656,85 +658,116 @@ class HistoryManager {
         }
     }
 
-    _dateKeys() {
+    _dateKeysAsync(callback) {
         let keys = [];
-
-        try {
-            let dir = Gio.File.new_for_path(HISTORY_DIR);
-            let enumerator = dir.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
-            let info;
-
-            while ((info = enumerator.next_file(null)) !== null) {
-                let name = info.get_name();
-
-                if (name.endsWith(".jsonl")) {
-                    keys.push(name.slice(0, -6)); // strip ".jsonl"
+        let dir = Gio.File.new_for_path(HISTORY_DIR);
+        dir.enumerate_children_async(
+            "standard::name",
+            Gio.FileQueryInfoFlags.NONE,
+            GLib.PRIORITY_DEFAULT,
+            null,
+            (source, result) => {
+                try {
+                    let enumerator = source.enumerate_children_finish(result);
+                    let collectNext = () => {
+                        enumerator.next_files_async(10, GLib.PRIORITY_DEFAULT, null, (en, r) => {
+                            try {
+                                let infos = en.next_files_finish(r);
+                                if (infos.length === 0) {
+                                    enumerator.close_async(GLib.PRIORITY_DEFAULT, null, () => {});
+                                    callback(keys.sort().reverse());
+                                    return;
+                                }
+                                for (let info of infos) {
+                                    let name = info.get_name();
+                                    if (name.endsWith(".jsonl")) {
+                                        keys.push(name.slice(0, -6)); // strip ".jsonl"
+                                    }
+                                }
+                                collectNext();
+                            } catch (e) {
+                                global.logError("HistoryManager._dateKeysAsync: " + e);
+                                callback(keys.sort().reverse());
+                            }
+                        });
+                    };
+                    collectNext();
+                } catch (e) {
+                    if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                        global.logError("HistoryManager._dateKeysAsync: " + e);
+                    }
+                    callback([]);
                 }
             }
-
-            enumerator.close(null);
-        } catch (e) {
-            global.logError("HistoryManager._dateKeys: " + e);
-        }
-
-        return keys.sort().reverse(); // newest first
+        );
     }
 
-    _readAllLines() {
-        let allLines = [];
-
-        for (let key of this._dateKeys()) {
-            try {
+    _readAllLinesAsync(callback) {
+        this._dateKeysAsync(keys => {
+            let allLines = [];
+            let readKey = (index) => {
+                if (index >= keys.length) {
+                    callback(allLines);
+                    return;
+                }
+                let key = keys[index];
                 let file = Gio.File.new_for_path(this._filePath(key));
-
-                if (!file.query_exists(null)) {
-                    continue;
-                }
-
-                let [, contents] = file.load_contents(null);
-                let text = imports.byteArray ? imports.byteArray.toString(contents) : contents.toString();
-
-                allLines = allLines.concat(text.split("\n").filter(l => l.trim() !== "").reverse());
-            } catch (e) {
-                global.logError("HistoryManager._readAllLines read " + key + ": " + e);
-            }
-        }
-
-        return allLines;
+                file.load_contents_async(null, (f, result) => {
+                    try {
+                        let [, contents] = f.load_contents_finish(result);
+                        let text = imports.byteArray ? imports.byteArray.toString(contents) : contents.toString();
+                        allLines = allLines.concat(text.split("\n").filter(l => l.trim() !== "").reverse());
+                    } catch (e) {
+                        if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                            global.logError("HistoryManager._readAllLines read " + key + ": " + e);
+                        }
+                    }
+                    readKey(index + 1);
+                });
+            };
+            readKey(0);
+        });
     }
 
-    // Returns {items: [...], totalPages: N} for the given 0-based page index and page size.
-    loadPage(page, pageSize) {
-        let allLines = this._readAllLines();
-        let totalPages = Math.max(1, Math.ceil(allLines.length / pageSize));
-        let pageLines = allLines.slice(page * pageSize, (page + 1) * pageSize);
+    // Returns {items: [...], totalPages: N} for the given 0-based page index and page size,
+    // delivered via callback.
+    loadPageAsync(page, pageSize, callback) {
+        this._readAllLinesAsync(allLines => {
+            let totalPages = Math.max(1, Math.ceil(allLines.length / pageSize));
+            let pageLines = allLines.slice(page * pageSize, (page + 1) * pageSize);
 
-        let items = pageLines.flatMap(line => {
-            try {
-                return [JSON.parse(line)];
-            } catch (_) {
-                return [];
-            }
+            let items = pageLines.flatMap(line => {
+                try {
+                    return [JSON.parse(line)];
+                } catch (_) {
+                    return [];
+                }
+            });
+
+            callback({ items, totalPages });
         });
-
-        return { items, totalPages };
     }
 
     purgeOlderThan(days) {
         try {
             let cutoff = new Date();
             cutoff.setDate(cutoff.getDate() - days);
-
             let cutoffKey = this._dateKey(cutoff);
-            let keys = this._dateKeys();
 
-            for (let key of keys) {
-                if (key < cutoffKey) {
-                    let file = Gio.File.new_for_path(this._filePath(key));
-
-                    file.delete(null);
+            this._dateKeysAsync(keys => {
+                for (let key of keys) {
+                    if (key < cutoffKey) {
+                        let file = Gio.File.new_for_path(this._filePath(key));
+                        file.delete_async(GLib.PRIORITY_DEFAULT, null, (f, result) => {
+                            try {
+                                f.delete_finish(result);
+                            } catch (e) {
+                                global.logError("HistoryManager.purgeOlderThan: " + e);
+                            }
+                        });
+                    }
                 }
-            }
+            });
         } catch (e) {
             global.logError("HistoryManager.purgeOlderThan: " + e);
         }
