@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-05 12:43+0200\n"
+"POT-Creation-Date: 2026-03-30 22:26+0200\n"
 "PO-Revision-Date: 2025-09-28 16:45+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -19,11 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.6\n"
 
-#. applet.js:44
+#. applet.js:46
 msgid "Notifications applet conflict"
 msgstr "Notificacions desactivades"
 
-#. applet.js:45
+#. applet.js:47
 msgid ""
 "Conflict detected: notifications@cinnamon.org is active.\n"
 "Remove it and restart Cinnamon before using Notifications-Enhanced applet."
@@ -32,54 +32,83 @@ msgstr ""
 "Elimineu la miniaplicació i reinicieu Cinnamon abans d'utilitzar la "
 "miniaplicació Notificacions-Millorades"
 
-#. applet.js:120
+#. applet.js:153
 msgid "Do not disturb"
 msgstr "No molestar"
 
-#. applet.js:126
+#. applet.js:159
 msgid "No notifications"
 msgstr "No hi ha notificacions"
 
 #. settings-schema.json->keyClear->description
-#. applet.js:134
+#. applet.js:167
 msgid "Clear notifications"
 msgstr "Netejar notificacions"
 
-#. applet.js:157
+#. applet.js:190
 msgid "Enable notifications"
 msgstr "Activar notificacions"
 
-#. applet.js:168
+#. applet.js:201
 msgid "Notification Settings"
 msgstr "Configuració de notificacions"
 
-#. applet.js:257 applet.js:431
+#. settings-schema.json->section4->description
+#. applet.js:211
+msgid "Notification history"
+msgstr "Historial de notificacions"
+
+#. applet.js:217
+msgid "See all notifications"
+msgstr "Veure totes les notificacions"
+
+#. applet.js:311 applet.js:749
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d notificació"
 msgstr[1] "%d notificacions"
 
-#. applet.js:287
+#. applet.js:341
 msgid "Notifications"
 msgstr "Notificacions"
 
-#. applet.js:300
+#. applet.js:354
 msgid "Notifications disabled"
 msgstr "Notificacions desactivades"
 
-#. applet.js:447
+#. applet.js:398
+msgid "From"
+msgstr "De"
+
+#. applet.js:430
+msgid "History is disabled"
+msgstr "L'historial està desactivat"
+
+#. applet.js:444
+msgid "No notification history"
+msgstr "Cap historial de notificacions"
+
+#. applet.js:455
+msgid "(no title)"
+msgstr "(sense títol)"
+
+#. applet.js:478
+msgid "read more"
+msgstr "llegir més"
+
+#. applet.js:765
 msgid "just now"
 msgstr "ara mateix"
 
-#. applet.js:450
+#. applet.js:768
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "fa %d segon"
 msgstr[1] "fa %d segons"
 
-#. applet.js:454
+#. applet.js:772
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -164,6 +193,33 @@ msgstr "Activa o desactiva les notificacions"
 msgid "Set keybinding(s) to enable or disable notifications."
 msgstr ""
 "Assigneu les dreceres del teclat per activar o desactivar les notificacions."
+
+#. settings-schema.json->historyEnabled->description
+msgid "Enable notification history"
+msgstr "Activa l'historial de notificacions"
+
+#. settings-schema.json->historyEnabled->tooltip
+msgid "Store notifications to disk for later review."
+msgstr "Emmagatzema les notificacions al disc per revisar-les més tard."
+
+#. settings-schema.json->historyRetentionDays->description
+msgid "Keep history for days"
+msgstr "Conserva l'historial durant dies"
+
+#. settings-schema.json->historyRetentionDays->tooltip
+msgid ""
+"Notification history files older than this will be deleted automatically."
+msgstr ""
+"Els fitxers d'historial de notificacions més antics que aquest valor "
+"s'eliminaran automàticament."
+
+#. settings-schema.json->historyPageSize->description
+msgid "Notifications per page"
+msgstr "Notificacions per pàgina"
+
+#. settings-schema.json->historyPageSize->tooltip
+msgid "How many historical notifications to show per page."
+msgstr "Quantes notificacions de l'historial es mostren per pàgina."
 
 #. settings-schema.json->btnSystemSettings->description
 msgid "Open notification settings"

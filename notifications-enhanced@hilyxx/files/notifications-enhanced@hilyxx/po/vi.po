@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2025-08-05 12:43+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-03-30 22:26+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -18,64 +19,94 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:44
+#. applet.js:46
 msgid "Notifications applet conflict"
 msgstr "Xung đột applet thông báo"
 
-#. applet.js:45
+#. applet.js:47
 msgid ""
 "Conflict detected: notifications@cinnamon.org is active.\n"
 "Remove it and restart Cinnamon before using Notifications-Enhanced applet."
 msgstr ""
 "Phát hiện xung đột: notifications@cinnamon.org đang hoạt động.\n"
-"Hãy gỡ bỏ và khởi động lại Cinnamon trước khi sử dụng applet Notifications-Enhanced."
+"Hãy gỡ bỏ và khởi động lại Cinnamon trước khi sử dụng applet Notifications-"
+"Enhanced."
 
-#. applet.js:120
+#. applet.js:153
 msgid "Do not disturb"
 msgstr "Không làm phiền"
 
-#. applet.js:126
+#. applet.js:159
 msgid "No notifications"
 msgstr "Không có thông báo"
 
 #. settings-schema.json->keyClear->description
-#. applet.js:134
+#. applet.js:167
 msgid "Clear notifications"
 msgstr "Xóa thông báo"
 
-#. applet.js:157
+#. applet.js:190
 msgid "Enable notifications"
 msgstr "Bật thông báo"
 
-#. applet.js:168
+#. applet.js:201
 msgid "Notification Settings"
 msgstr "Cài đặt thông báo"
 
-#. applet.js:257 applet.js:431
+#. settings-schema.json->section4->description
+#. applet.js:211
+msgid "Notification history"
+msgstr "Lịch sử thông báo"
+
+#. applet.js:217
+msgid "See all notifications"
+msgstr "Xem tất cả thông báo"
+
+#. applet.js:311 applet.js:749
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d thông báo"
 
-#. applet.js:287
+#. applet.js:341
 msgid "Notifications"
 msgstr "Thông báo"
 
-#. applet.js:300
+#. applet.js:354
 msgid "Notifications disabled"
 msgstr "Thông báo bị tắt"
 
-#. applet.js:447
+#. applet.js:398
+msgid "From"
+msgstr "Từ"
+
+#. applet.js:430
+msgid "History is disabled"
+msgstr "Lịch sử bị tắt"
+
+#. applet.js:444
+msgid "No notification history"
+msgstr "Không có lịch sử thông báo"
+
+#. applet.js:455
+msgid "(no title)"
+msgstr "(không có tiêu đề)"
+
+#. applet.js:478
+msgid "read more"
+msgstr "đọc thêm"
+
+#. applet.js:765
 msgid "just now"
 msgstr "vừa xong"
 
-#. applet.js:450
+#. applet.js:768
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "cách đây %d giây"
 
-#. applet.js:454
+#. applet.js:772
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -122,8 +153,12 @@ msgid "Always show 'Do Not Disturb' icon"
 msgstr "Luôn hiển thị biểu tượng 'Không làm phiền'"
 
 #. settings-schema.json->showDisturbIcon->tooltip
-msgid "Check this to show the 'Do Not Disturb icon' on the panel even when the 'Show notification tray' option is disabled."
-msgstr "Chọn để hiển thị biểu tượng 'Không làm phiền' trên panel ngay cả khi tùy chọn 'Hiển thị khay thông báo' bị tắt."
+msgid ""
+"Check this to show the 'Do Not Disturb icon' on the panel even when the "
+"'Show notification tray' option is disabled."
+msgstr ""
+"Chọn để hiển thị biểu tượng 'Không làm phiền' trên panel ngay cả khi tùy "
+"chọn 'Hiển thị khay thông báo' bị tắt."
 
 #. settings-schema.json->showNotificationSettings->description
 msgid "Show notification settings in the menu"
@@ -152,6 +187,31 @@ msgstr "Bật hoặc tắt thông báo"
 #. settings-schema.json->keyMute->tooltip
 msgid "Set keybinding(s) to enable or disable notifications."
 msgstr "Thiết lập phím tắt để bật hoặc tắt thông báo."
+
+#. settings-schema.json->historyEnabled->description
+msgid "Enable notification history"
+msgstr "Bật lịch sử thông báo"
+
+#. settings-schema.json->historyEnabled->tooltip
+msgid "Store notifications to disk for later review."
+msgstr "Lưu thông báo vào đĩa để xem lại sau."
+
+#. settings-schema.json->historyRetentionDays->description
+msgid "Keep history for days"
+msgstr "Lưu lịch sử trong vài ngày"
+
+#. settings-schema.json->historyRetentionDays->tooltip
+msgid ""
+"Notification history files older than this will be deleted automatically."
+msgstr "Các tệp lịch sử thông báo cũ hơn số ngày này sẽ tự động bị xóa."
+
+#. settings-schema.json->historyPageSize->description
+msgid "Notifications per page"
+msgstr "Thông báo mỗi trang"
+
+#. settings-schema.json->historyPageSize->tooltip
+msgid "How many historical notifications to show per page."
+msgstr "Số lượng thông báo lịch sử hiển thị trên mỗi trang."
 
 #. settings-schema.json->btnSystemSettings->description
 msgid "Open notification settings"

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-05 12:43+0200\n"
+"POT-Creation-Date: 2026-03-30 22:26+0200\n"
 "PO-Revision-Date: 2025-07-10 17:39-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.6\n"
 
-#. applet.js:44
+#. applet.js:46
 msgid "Notifications applet conflict"
 msgstr "Conflicto del applet de notificaciones"
 
-#. applet.js:45
+#. applet.js:47
 msgid ""
 "Conflict detected: notifications@cinnamon.org is active.\n"
 "Remove it and restart Cinnamon before using Notifications-Enhanced applet."
@@ -31,54 +31,83 @@ msgstr ""
 "Elimínalo y reinicia Cinnamon antes de usar el applet Notificaciones-"
 "Mejoradas."
 
-#. applet.js:120
+#. applet.js:153
 msgid "Do not disturb"
 msgstr "No molestar"
 
-#. applet.js:126
+#. applet.js:159
 msgid "No notifications"
 msgstr "Sin notificaciones"
 
 #. settings-schema.json->keyClear->description
-#. applet.js:134
+#. applet.js:167
 msgid "Clear notifications"
 msgstr "Borrar notificaciones"
 
-#. applet.js:157
+#. applet.js:190
 msgid "Enable notifications"
 msgstr "Habilitar notificaciones"
 
-#. applet.js:168
+#. applet.js:201
 msgid "Notification Settings"
 msgstr "Configuración de notificaciones"
 
-#. applet.js:257 applet.js:431
+#. settings-schema.json->section4->description
+#. applet.js:211
+msgid "Notification history"
+msgstr "Historial de notificaciones"
+
+#. applet.js:217
+msgid "See all notifications"
+msgstr "Ver todas las notificaciones"
+
+#. applet.js:311 applet.js:749
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d notificación"
 msgstr[1] "%d notificaciones"
 
-#. applet.js:287
+#. applet.js:341
 msgid "Notifications"
 msgstr "Notificaciones"
 
-#. applet.js:300
+#. applet.js:354
 msgid "Notifications disabled"
 msgstr "Notificaciones desactivadas"
 
-#. applet.js:447
+#. applet.js:398
+msgid "From"
+msgstr "De"
+
+#. applet.js:430
+msgid "History is disabled"
+msgstr "El historial está desactivado"
+
+#. applet.js:444
+msgid "No notification history"
+msgstr "Sin historial de notificaciones"
+
+#. applet.js:455
+msgid "(no title)"
+msgstr "(sin título)"
+
+#. applet.js:478
+msgid "read more"
+msgstr "leer más"
+
+#. applet.js:765
 msgid "just now"
 msgstr "ahora mismo"
 
-#. applet.js:450
+#. applet.js:768
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "hace %d segundo"
 msgstr[1] "hace %d segundos"
 
-#. applet.js:454
+#. applet.js:772
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -165,6 +194,33 @@ msgid "Set keybinding(s) to enable or disable notifications."
 msgstr ""
 "Establezca la(s) combinación(es) de teclas para activar o desactivar las "
 "notificaciones."
+
+#. settings-schema.json->historyEnabled->description
+msgid "Enable notification history"
+msgstr "Activar historial de notificaciones"
+
+#. settings-schema.json->historyEnabled->tooltip
+msgid "Store notifications to disk for later review."
+msgstr "Almacenar notificaciones en disco para revisarlas más tarde."
+
+#. settings-schema.json->historyRetentionDays->description
+msgid "Keep history for days"
+msgstr "Conservar historial durante días"
+
+#. settings-schema.json->historyRetentionDays->tooltip
+msgid ""
+"Notification history files older than this will be deleted automatically."
+msgstr ""
+"Los archivos del historial de notificaciones más antiguos que este valor se "
+"eliminarán automáticamente."
+
+#. settings-schema.json->historyPageSize->description
+msgid "Notifications per page"
+msgstr "Notificaciones por página"
+
+#. settings-schema.json->historyPageSize->tooltip
+msgid "How many historical notifications to show per page."
+msgstr "Número de notificaciones históricas a mostrar por página."
 
 #. settings-schema.json->btnSystemSettings->description
 msgid "Open notification settings"
