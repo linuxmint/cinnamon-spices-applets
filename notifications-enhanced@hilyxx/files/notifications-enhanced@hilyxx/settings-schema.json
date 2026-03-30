@@ -60,6 +60,34 @@
     },    
    "section4": {
         "type": "section",
+        "description": "Notification history"
+   },
+   "historyEnabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Enable notification history",
+        "tooltip": "Store notifications to disk for later review."
+    },
+    "historyRetentionDays": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 1,
+        "max": 365,
+        "step": 1,
+        "description": "Keep history for days",
+        "tooltip": "Notification history files older than this will be deleted automatically."
+    },
+    "historyPageSize": {
+        "type": "spinbutton",
+        "default": 20,
+        "min": 5,
+        "max": 100,
+        "step": 5,
+        "description": "Notifications per page",
+        "tooltip": "How many historical notifications to show per page."
+    },
+   "section5": {
+        "type": "section",
         "description": ""
    },
    "btnSystemSettings" : {
