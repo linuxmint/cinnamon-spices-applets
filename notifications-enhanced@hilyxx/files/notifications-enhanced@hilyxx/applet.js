@@ -17,6 +17,8 @@ const Util = imports.misc.util;
 const PANEL_EDIT_MODE_KEY = "panel-edit-mode";
 
 const UUID = "notifications-enhanced@hilyxx";
+const HISTORY_DIR = GLib.get_home_dir() + "/.notifications-enhanced-applet/history";
+
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
@@ -50,6 +52,7 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
             throw new Error("Conflict: notifications@cinnamon.org already active");
         }
         super(orientation, panel_height, instanceId);
+        this._appletPath = metadata.path;
 
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
@@ -63,7 +66,13 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this.settings.bind("keyMute", "keyMute", this._setKeybinding);
         this.settings.bind("showNotificationCount", "showNotificationCount", this.update_list);
         this.settings.bind("showNotificationSettings", "showNotificationSettings", this._show_settings_action);
+        this.settings.bind("historyEnabled", "historyEnabled");
+        this.settings.bind("historyRetentionDays", "historyRetentionDays");
+        this.settings.bind("historyPageSize", "historyPageSize");
         this._setKeybinding();
+
+        this._history = new HistoryManager();
+        this._history.purgeOlderThan(this.historyRetentionDays);
 
         this.notif_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.notifications" });
         this.notif_settings.connect('changed::display-notifications', Lang.bind(this, function() {
@@ -81,6 +90,18 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         Main.messageTray.connect('notify-applet-update', Lang.bind(this, this._notification_added));
         global.settings.connect('changed::' + PANEL_EDIT_MODE_KEY, Lang.bind(this, this._on_panel_edit_mode_changed));
 
+        // Intercept _onNotify to capture notifications to history immediately,
+        // before the banner is shown (notify-applet-update only fires after it closes).
+        this._origOnNotify = Main.messageTray._onNotify;
+        Main.messageTray._onNotify = Lang.bind(this, function(source, notification) {
+            // Record to history immediately
+            if (this.historyEnabled && !notification._historyRecorded) {
+                notification._historyRecorded = true;
+                this._history.append(notification);
+            }
+            this._origOnNotify.call(Main.messageTray, source, notification);
+        });
+
         // States
         this._blinking = false;
         this._blink_toggle = false;
@@ -97,6 +118,11 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         Main.keybindingManager.removeHotKey("notification-clear-" + this.instance_id);
         Main.keybindingManager.removeHotKey("notification-mute-" + this.instance_id);
 
+        // Restore the original _onNotify
+        if (this._origOnNotify) {
+            Main.messageTray._onNotify = this._origOnNotify;
+        }
+
         // Only used in cinnamon 6.6 and later
         if (MessageTray.extensionsHandlingNotifications !== undefined) {
             MessageTray.extensionsHandlingNotifications--;
@@ -109,6 +135,8 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
     }
 
     _display() {
+        this.menu.box.set_style('max-width: 600px;');
+
         // Always start the applet empty, void of any notifications.
         this.set_applet_icon_symbolic_name("empty-notification");
 
@@ -176,6 +204,27 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         }));
         this.menu.addMenuItem(this.item_action);
         this._show_settings_action();
+
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+        // Setup the notification history
+        this._historyHeaderItem = new PopupMenu.PopupSubMenuMenuItem(_("Notification history"));
+        this.menu.addMenuItem(this._historyHeaderItem);
+
+        this._historyBin = new St.BoxLayout({ vertical: true });
+        this._historyHeaderItem.menu.addActor(this._historyBin);
+
+        this._seeAllBtn = new St.Button({ label: _("See all notifications"), style_class: 'notification-history-seeall' });
+        this._seeAllBtn.connect('clicked', Lang.bind(this, this._open_history_viewer));
+        this._historyHeaderItem.menu.addActor(this._seeAllBtn);
+
+        this._historyHeaderItem.menu.connect('open-state-changed', Lang.bind(this, function(menu, open) {
+            if (open) {
+                this._render_history();
+            }
+        }));
+
+        // this._render_history();
 
         // Notification scroll
         this.scrollview = new St.ScrollView({ x_fill: true, y_fill: true, y_align: St.Align.START, style_class: "vfade"});
@@ -332,6 +381,129 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         }
      }
 
+    _open_history_viewer() {
+        Util.spawnCommandLine(
+            "python3 '" + this._appletPath + "/history-viewer.py' " + this.historyPageSize + " '" + HISTORY_DIR + "'"
+        );
+    }
+
+    _show_full_notification(item) {
+        try {
+            let lines = [];
+
+            if (item.title) {
+                lines.push(item.title);
+            }
+            if (item.app) {
+                lines.push(_("From") + ": " + item.app);
+            }
+
+            lines.push(timeify(new Date(item.ts)));
+            lines.push("");
+
+            if (item.body) {
+                lines.push(item.body);
+            }
+
+            let tmpPath = GLib.get_tmp_dir() + "/notification-detail.txt";
+            let tmpFile = Gio.File.new_for_path(tmpPath);
+            let stream = tmpFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
+            let dataStream = new Gio.DataOutputStream({ base_stream: stream });
+            dataStream.put_string(lines.join("\n"), null);
+            dataStream.close(null);
+
+            Util.spawnCommandLine(
+                "zenity --text-info --title='Notification' --filename='" + tmpPath + "' --width=500 --height=300"
+            );
+        } catch (e) {
+            global.logError("_show_full_notification: " + e);
+        }
+    }
+
+    _render_history() {
+        if (!this._historyBin) return;
+
+        this._historyBin.destroy_all_children();
+
+        if (!this.historyEnabled) {
+            let disabledLabel = new St.Label({
+                text: _("History is disabled"),
+                style_class: 'notification-history-empty'
+            });
+            this._historyBin.add(disabledLabel);
+            this._seeAllBtn.hide();
+            return;
+        }
+
+        let { items } = this._history.loadPage(0, 5);
+
+        this._seeAllBtn.visible = items.length > 0;
+
+        if (items.length === 0) {
+            let emptyLabel = new St.Label({
+                text: _("No notification history"),
+                style_class: 'notification-history-empty'
+            });
+            this._historyBin.add(emptyLabel);
+        } else {
+            for (let item of items) {
+                let row = new St.BoxLayout({ vertical: true, style_class: 'notification-history-item' });
+
+                // Title + app row
+                let headerBox = new St.BoxLayout();
+                let titleLabel = new St.Label({
+                    text: item.title || _("(no title)"),
+                    style_class: 'notification-history-title'
+                });
+                let appLabel = new St.Label({
+                    text: item.app ? " — " + item.app : "",
+                    style_class: 'notification-history-app'
+                });
+                headerBox.add(titleLabel);
+                headerBox.add(appLabel);
+                row.add(headerBox);
+
+                // Truncate long text and offer "read more"
+                if (item.body) {
+                    const TRUNCATE_AT = 150;
+                    const body = item.body.trim();
+                    const truncated = body.length > TRUNCATE_AT;
+                    let bodyLabel = new St.Label({
+                        text: truncated ? body.slice(0, TRUNCATE_AT).trimEnd() + "… " : body,
+                        style_class: 'notification-history-body'
+                    });
+                    bodyLabel.clutter_text.line_wrap = true;
+                    if (truncated) {
+                        let readMore = new St.Button({
+                            label: _("read more"),
+                            style_class: 'notification-history-readmore'
+                        });
+                        readMore.connect('clicked', () => this._show_full_notification(item));
+                        let bodyBox = new St.BoxLayout();
+                        bodyBox.add(bodyLabel);
+                        bodyBox.add(readMore);
+                        row.add(bodyBox);
+                    } else {
+                        row.add(bodyLabel);
+                    }
+                }
+
+                // Timestamp
+                let timeLabel = new St.Label({
+                    text: timeify(new Date(item.ts)),
+                    style_class: 'notification-history-time'
+                });
+                row.add(timeLabel);
+
+                this._historyBin.add(row);
+
+                // Separator between entries
+                let sep = new St.BoxLayout({ style_class: 'notification-history-separator' });
+                this._historyBin.add(sep);
+            }
+        }
+    }
+
      _clear_all() {
         let count = this.notifications.length;
         if (count > 0) {
@@ -430,6 +602,142 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         }
         this._blink_toggle = !this._blink_toggle;
         Mainloop.timeout_add_seconds(1, Lang.bind(this, this.critical_blink));
+    }
+}
+
+class HistoryManager {
+    constructor() {
+        this._ensureDir();
+    }
+
+    _ensureDir() {
+        let dir = Gio.File.new_for_path(HISTORY_DIR);
+
+        if (!dir.query_exists(null)) {
+            dir.make_directory_with_parents(null);
+        }
+    }
+
+    _dateKey(date) {
+        let y = date.getFullYear();
+        let m = String(date.getMonth() + 1).padStart(2, '0');
+        let d = String(date.getDate()).padStart(2, '0');
+
+        return `${y}-${m}-${d}`;
+    }
+
+    _filePath(dateKey) {
+        return HISTORY_DIR + "/" + dateKey + ".jsonl";
+    }
+
+    append(notification) {
+        try {
+            let now = new Date();
+
+            let record = JSON.stringify({
+                ts: now.getTime(),
+                title: (notification.title || "").trim(),
+                body: ((notification._bodyUrlHighlighter && notification._bodyUrlHighlighter.actor
+                        ? notification._bodyUrlHighlighter.actor.clutter_text.text
+                        : "") || "").trim(),
+                app: (notification.source && notification.source.title) ? notification.source.title : "",
+                urgency: notification.urgency != null ? notification.urgency : 1
+            });
+
+            let path = this._filePath(this._dateKey(now));
+            let file = Gio.File.new_for_path(path);
+            let baseStream = file.append_to(Gio.FileCreateFlags.NONE, null);
+            let dataStream = new Gio.DataOutputStream({ base_stream: baseStream });
+
+            dataStream.put_string(record + "\n", null);
+            dataStream.close(null);
+        } catch (e) {
+            global.logError("HistoryManager.append: " + e);
+        }
+    }
+
+    _dateKeys() {
+        let keys = [];
+
+        try {
+            let dir = Gio.File.new_for_path(HISTORY_DIR);
+            let enumerator = dir.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
+            let info;
+
+            while ((info = enumerator.next_file(null)) !== null) {
+                let name = info.get_name();
+
+                if (name.endsWith(".jsonl")) {
+                    keys.push(name.slice(0, -6)); // strip ".jsonl"
+                }
+            }
+
+            enumerator.close(null);
+        } catch (e) {
+            global.logError("HistoryManager._dateKeys: " + e);
+        }
+
+        return keys.sort().reverse(); // newest first
+    }
+
+    _readAllLines() {
+        let allLines = [];
+
+        for (let key of this._dateKeys()) {
+            try {
+                let file = Gio.File.new_for_path(this._filePath(key));
+
+                if (!file.query_exists(null)) {
+                    continue;
+                }
+
+                let [, contents] = file.load_contents(null);
+                let text = imports.byteArray ? imports.byteArray.toString(contents) : contents.toString();
+
+                allLines = allLines.concat(text.split("\n").filter(l => l.trim() !== "").reverse());
+            } catch (e) {
+                global.logError("HistoryManager._readAllLines read " + key + ": " + e);
+            }
+        }
+
+        return allLines;
+    }
+
+    // Returns {items: [...], totalPages: N} for the given 0-based page index and page size.
+    loadPage(page, pageSize) {
+        let allLines = this._readAllLines();
+        let totalPages = Math.max(1, Math.ceil(allLines.length / pageSize));
+        let pageLines = allLines.slice(page * pageSize, (page + 1) * pageSize);
+
+        let items = pageLines.flatMap(line => {
+            try {
+                return [JSON.parse(line)];
+            } catch (_) {
+                return [];
+            }
+        });
+
+        return { items, totalPages };
+    }
+
+    purgeOlderThan(days) {
+        try {
+            let cutoff = new Date();
+            cutoff.setDate(cutoff.getDate() - days);
+
+            let cutoffKey = this._dateKey(cutoff);
+            let keys = this._dateKeys();
+
+            for (let key of keys) {
+                if (key < cutoffKey) {
+                    let file = Gio.File.new_for_path(this._filePath(key));
+
+                    file.delete(null);
+                }
+            }
+        } catch (e) {
+            global.logError("HistoryManager.purgeOlderThan: " + e);
+        }
     }
 }
 
