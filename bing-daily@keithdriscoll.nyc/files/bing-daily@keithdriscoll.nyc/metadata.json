@@ -1,0 +1,11 @@
+{
+  "uuid": "bing-daily@keithdriscoll.nyc",
+  "name": "Bing Daily",
+  "description": "Sets your desktop wallpaper to the Bing Image of the Day. Supports history navigation, automatic daily updates via systemd, and works on Cinnamon 5.x and 6.x.",
+  "version": "1.0.1",
+  "author": "Keith Driscoll",
+  "website": "https://github.com/keithdriscoll/bing-daily",
+  "max-instances": -1,
+  "has-settings": true,
+  "cinnamon-version": ["5.4", "5.6", "6.0", "6.2", "6.4", "6.6"]
+}
