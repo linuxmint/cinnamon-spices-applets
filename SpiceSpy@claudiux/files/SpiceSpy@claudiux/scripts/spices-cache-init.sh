@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-cd $SCRIPTPATH/..
-UUID="$(basename $PWD)"
-cd $SCRIPTPATH
+cd "$SCRIPTPATH/.."
+UUID="$(basename "$PWD")"
+cd "$SCRIPTPATH"
 
 for type in action applet desklet extension theme; do {
         [[ -d ${HOME}/.cache/cinnamon/spices/${type} ]] || {

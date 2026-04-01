@@ -23,17 +23,17 @@ const { to_string } = require("./lib/to-string");
 //mainloopTools:
 const { timeout_add_seconds, setTimeout, clearTimeout, source_remove, remove_all_sources } = require("./lib/mainloopTools");
 
-var MODULE_UUID = "SpiceSpy@claudiux"; // Populated by main() function
+var MODULE_UUID; // Populated by main() function
 const USER_DATA_DIR = GLib.get_user_data_dir();
 
 const HOME_DIR = GLib.get_home_dir();
-
-const APPLET_DIR = USER_DATA_DIR + "/cinnamon/applets/" + MODULE_UUID;
-const SPICES_ICONS_DIR = GLib.get_user_config_dir() + "/cinnamon/spices/" + MODULE_UUID + "/icons";
-const SCRIPTS_DIR = APPLET_DIR + "/scripts";
-const CACHE_UPDATER = SCRIPTS_DIR + "/spices-cache-updater.py";
-const CACHE_INIT = SCRIPTS_DIR + "/spices-cache-init.sh";
-const COPY_PNG_SCRIPT = `${SCRIPTS_DIR}/copy-png-files.sh`;
+var APPLET_DIR;
+var SPICES_ICONS_DIR;
+var SCRIPTS_DIR;
+var CACHE_UPDATER;
+var CACHE_INIT;
+var COPY_PNG_SCRIPT;
+  
 
 const TYPES = ["actions", "applets", "desklets", "extensions", "themes"];
 const SPICES_URL = "https://cinnamon-spices.linuxmint.com";
@@ -43,11 +43,11 @@ const COMMENTS_REGEX = new RegExp(`<span id="${HTML_COUNT_ID}">([0-9]+)</span>`)
 const ISSUES_REGEX = new RegExp(`([0-9]+) Open`);
 
 const DIR_MAP = {
-  "applets": HOME_DIR + "/.local/share/cinnamon/applets",
+  "applets": USER_DATA_DIR + "/cinnamon/applets",
   "themes": HOME_DIR + "/.themes",
-  "desklets": HOME_DIR + "/.local/share/cinnamon/desklets",
-  "extensions": HOME_DIR + "/.local/share/cinnamon/extensions",
-  "actions": HOME_DIR + "/.local/share/nemo/actions"
+  "desklets": USER_DATA_DIR + "/cinnamon/desklets",
+  "extensions": USER_DATA_DIR + "/cinnamon/extensions",
+  "actions": USER_DATA_DIR + "/nemo/actions"
 }
 
 const Gettext = imports.gettext;
@@ -60,6 +60,16 @@ function _(str, uuid=MODULE_UUID) {
     return _str;
   // If the text was not found locally then try with system-wide translations:
   return Gettext.gettext(str);
+}
+
+function _padTime(n) { 
+  return (n < 10 ? "0" : "") + n;
+}
+function _formatHMS(h, m, s) {
+  if (h > 0)
+    return _padTime(h) + ":" + _padTime(m) + ":" + _padTime(s);
+  else
+    return _padTime(m) + ":" + _padTime(s);
 }
 
 const DEBUG = false;
@@ -358,7 +368,7 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.settings.setValue("update-interval", -1);
     }
     this.settings.bind("update-interruptible", "updateIsInterruptible");
-    this.settings.bind("coloredIcon", "coloredIcon");
+    //~ this.settings.bind("coloredIcon", "coloredIcon");
     this.settings.bind("colorWhileRefreshing", "colorWhileRefreshing");
     this.settings.bind("standard-opacity", "standard_opacity");
     this.settings.bind("color-on-change", "color_on_change", () => { this.make_menu() });
@@ -379,10 +389,10 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of get_user_settings
   
   setIconColorAndTooltip() {
-    if (!this.coloredIcon) {
-      this.actor.style = null;
-      return
-    }
+    //~ if (!this.coloredIcon) {
+      //~ this.actor.style = null;
+      //~ return
+    //~ }
     if (this.commentsJobsList.length > 0 || this.issuesJobsList.length > 0) {
       this.actor.style = `color: ${this.colorWhileRefreshing};`
     } else {
@@ -392,41 +402,30 @@ class SpiceSpy extends Applet.TextIconApplet {
     if (nbr_seconds > 0) {
       var nbr_minutes = Math.trunc(nbr_seconds / 60);
       nbr_seconds = nbr_seconds - 60 * nbr_minutes;
-      var str_minutes = nbr_minutes.toString();
-      if (nbr_minutes < 10) str_minutes = "0" + str_minutes;
-      var str_seconds = nbr_seconds.toString();
-      if (nbr_seconds < 10) str_seconds = "0" + str_seconds;
-      this.set_applet_tooltip(_("Check in progress.\nTime remaining:") + "\n<b>" + str_minutes + ":" + str_seconds + "</b>", true);
+      //~ var str_minutes = nbr_minutes.toString();
+      //~ if (nbr_minutes < 10) str_minutes = "0" + str_minutes;
+      //~ var str_seconds = nbr_seconds.toString();
+      //~ if (nbr_seconds < 10) str_seconds = "0" + str_seconds;
+      //~ this.set_applet_tooltip(_("Check in progress.\nTime remaining:") + "\n<b>" + str_minutes + ":" + str_seconds + "</b>", true);
+      this.set_applet_tooltip(_("Check in progress.\nTime remaining:") + "\n<b>" + _formatHMS(0, nbr_minutes, nbr_seconds) + "</b>", true);
     } else {
       if (this.future_loop_datetime != null) {
         let now = GLib.DateTime.new_now_local();
         
-        let diff = Math.trunc(this.future_loop_datetime.difference(now) / 1000000);
+        let diff = Math.max(0, Math.trunc(this.future_loop_datetime.difference(now) / 1000000));
         let _hour = Math.trunc(diff / 3600);
         let _minute = Math.trunc((diff - 3600 * _hour) / 60);
         let _second = diff - 3600 * _hour - 60 *_minute;
-        let hour_str = "" + _hour;
-        if (_hour < 10) hour_str = "0" + hour_str;
-        let minute_str = "" + _minute;
-        if (_minute < 10) minute_str = "0" + minute_str;
-        let second_str = "" + _second;
-        if (_second < 10) second_str = "0" + second_str;
         
         let future_hour = this.future_loop_datetime.get_hour();
         let future_minute = this.future_loop_datetime.get_minute();
         let future_second = this.future_loop_datetime.get_second();
-        let future_hour_str = "" + future_hour;
-        if (future_hour < 10) future_hour_str = "0" + future_hour_str;
-        let future_minute_str = "" + future_minute;
-        if (future_minute  < 10) future_minute_str = "0" + future_minute_str;
-        let future_second_str = "" + future_second;
-        if (future_second < 10) future_second_str = "0" + future_second_str;
         
         this.set_applet_tooltip(
           _("Time remaining until the next check:") + "\n" + 
-          "<b>" + hour_str + ":" + minute_str + ":" + second_str + "\n" + "</b>" +
+          "<b>" + _formatHMS(_hour, _minute, _second) + "\n" + "</b>" +
           _("Next check at:") + "\n" +
-          "<b>" + future_hour_str + ":" + future_minute_str + ":" + future_second_str + "</b>",
+          "<b>" + _formatHMS(future_hour, future_minute, future_second) + "</b>",
           true
         );
       } else {
@@ -443,6 +442,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     }
     this.loopId = null;
     this.is_looping = true;
+    this.future_loop_datetime = GLib.DateTime.new_now_local().add_seconds(sec);
     this.loopId = timeout_add_seconds(sec, () => { this.loop() });
   }
 
@@ -726,13 +726,7 @@ class SpiceSpy extends Applet.TextIconApplet {
       var now = GLib.DateTime.new_now_local();
       let sec = Math.round(this.update_interval * 3600);
       this.future_loop_datetime = now.add_seconds(sec);
-      let hour_str = "" + this.future_loop_datetime.get_hour();
-      if (this.future_loop_datetime.get_hour() < 10) hour_str = "0" + hour_str;
-      let minute_str = "" + this.future_loop_datetime.get_minute();
-      if (this.future_loop_datetime.get_minute() < 10) minute_str = "0" + minute_str;
-      let second_str = "" + this.future_loop_datetime.get_second();
-      if (this.future_loop_datetime.get_second() < 10) second_str = "0" + second_str;
-      this.set_applet_tooltip(_("Next check at:") + "\n<b>" + hour_str + ":" + minute_str + ":" + second_str + "</b>", true);
+      this.set_applet_tooltip(_("Next check at:") + "\n<b>" + _formatHMS(this.future_loop_datetime.get_hour(), this.future_loop_datetime.get_minute(), this.future_loop_datetime.get_second()) + "</b>", true);
       this.loopId = timeout_add_seconds(sec, () => { this.loop() });
     }
     if (this.issuesLoopId) {
@@ -1100,6 +1094,13 @@ class SpiceSpy extends Applet.TextIconApplet {
 
 function main(metadata, orientation, panel_height, instance_id) {
   MODULE_UUID = metadata.uuid;
+  APPLET_DIR = USER_DATA_DIR + "/cinnamon/applets/" + MODULE_UUID;
+  SPICES_ICONS_DIR = GLib.get_user_config_dir() + "/cinnamon/spices/" + MODULE_UUID + "/icons";
+  SCRIPTS_DIR = APPLET_DIR + "/scripts";
+  CACHE_UPDATER = SCRIPTS_DIR + "/spices-cache-updater.py";
+  CACHE_INIT = SCRIPTS_DIR + "/spices-cache-init.sh";
+  COPY_PNG_SCRIPT = `${SCRIPTS_DIR}/copy-png-files.sh`;
+  
   Gettext.bindtextdomain(MODULE_UUID, USER_DATA_DIR + "/locale");
   let spicespy = new SpiceSpy(metadata, orientation, panel_height, instance_id);
   return spicespy;
