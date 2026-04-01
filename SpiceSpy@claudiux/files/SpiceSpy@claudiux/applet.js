@@ -368,7 +368,8 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.settings.setValue("update-interval", -1);
     }
     this.settings.bind("update-interruptible", "updateIsInterruptible");
-    //~ this.settings.bind("coloredIcon", "coloredIcon");
+    this.settings.bind("coloredIcon", "coloredIcon");
+    this.coloredIcon = true; // forced.
     this.settings.bind("colorWhileRefreshing", "colorWhileRefreshing");
     this.settings.bind("standard-opacity", "standard_opacity");
     this.settings.bind("color-on-change", "color_on_change", () => { this.make_menu() });
@@ -389,10 +390,6 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of get_user_settings
   
   setIconColorAndTooltip() {
-    //~ if (!this.coloredIcon) {
-      //~ this.actor.style = null;
-      //~ return
-    //~ }
     if (this.commentsJobsList.length > 0 || this.issuesJobsList.length > 0) {
       this.actor.style = `color: ${this.colorWhileRefreshing};`
     } else {
@@ -402,11 +399,6 @@ class SpiceSpy extends Applet.TextIconApplet {
     if (nbr_seconds > 0) {
       var nbr_minutes = Math.trunc(nbr_seconds / 60);
       nbr_seconds = nbr_seconds - 60 * nbr_minutes;
-      //~ var str_minutes = nbr_minutes.toString();
-      //~ if (nbr_minutes < 10) str_minutes = "0" + str_minutes;
-      //~ var str_seconds = nbr_seconds.toString();
-      //~ if (nbr_seconds < 10) str_seconds = "0" + str_seconds;
-      //~ this.set_applet_tooltip(_("Check in progress.\nTime remaining:") + "\n<b>" + str_minutes + ":" + str_seconds + "</b>", true);
       this.set_applet_tooltip(_("Check in progress.\nTime remaining:") + "\n<b>" + _formatHMS(0, nbr_minutes, nbr_seconds) + "</b>", true);
     } else {
       if (this.future_loop_datetime != null) {
