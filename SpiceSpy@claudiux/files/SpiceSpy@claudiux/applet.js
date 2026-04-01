@@ -24,12 +24,12 @@ const { to_string } = require("./lib/to-string");
 const { timeout_add_seconds, setTimeout, clearTimeout, source_remove, remove_all_sources } = require("./lib/mainloopTools");
 
 var MODULE_UUID = "SpiceSpy@claudiux"; // Populated by main() function
-var USER_DATA_DIR = GLib.get_user_data_dir();
+const USER_DATA_DIR = GLib.get_user_data_dir();
 
 const HOME_DIR = GLib.get_home_dir();
 
-const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + MODULE_UUID;
-const SPICES_ICONS_DIR = HOME_DIR + "/.config/cinnamon/spices/" + MODULE_UUID + "/icons";
+const APPLET_DIR = USER_DATA_DIR + "/cinnamon/applets/" + MODULE_UUID;
+const SPICES_ICONS_DIR = GLib.get_user_config_dir() + "/cinnamon/spices/" + MODULE_UUID + "/icons";
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const CACHE_UPDATER = SCRIPTS_DIR + "/spices-cache-updater.py";
 const CACHE_INIT = SCRIPTS_DIR + "/spices-cache-init.sh";
