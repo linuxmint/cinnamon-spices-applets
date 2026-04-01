@@ -23,12 +23,13 @@ const { to_string } = require("./lib/to-string");
 //mainloopTools:
 const { timeout_add_seconds, setTimeout, clearTimeout, source_remove, remove_all_sources } = require("./lib/mainloopTools");
 
-const UUID = "SpiceSpy@claudiux";
+var MODULE_UUID = "SpiceSpy@claudiux"; // Populated by main() function
+var USER_DATA_DIR = GLib.get_user_data_dir();
 
 const HOME_DIR = GLib.get_home_dir();
 
-const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
-const SPICES_ICONS_DIR = HOME_DIR + "/.config/cinnamon/spices/" + UUID + "/icons";
+const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + MODULE_UUID;
+const SPICES_ICONS_DIR = HOME_DIR + "/.config/cinnamon/spices/" + MODULE_UUID + "/icons";
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const CACHE_UPDATER = SCRIPTS_DIR + "/spices-cache-updater.py";
 const CACHE_INIT = SCRIPTS_DIR + "/spices-cache-init.sh";
@@ -51,9 +52,9 @@ const DIR_MAP = {
 
 const Gettext = imports.gettext;
 
-function _(str, uuid=UUID) {
+function _(str, uuid=MODULE_UUID) {
   if (str == null) return "";
-  Gettext.bindtextdomain(uuid, HOME_DIR + "/.local/share/locale");
+  Gettext.bindtextdomain(uuid, USER_DATA_DIR + "/locale");
   let _str = Gettext.dgettext(uuid, str);
   if (_str !== str)
     return _str;
@@ -69,7 +70,7 @@ const DEBUG = false;
  * logError("Any error message") to log the error message regardless of the DEBUG value.
  */
 function log(message, alwaysLog=false) {
-  if (DEBUG || alwaysLog) Main._logInfo("[" + UUID + "]: " + message);
+  if (DEBUG || alwaysLog) Main._logInfo("[" + MODULE_UUID + "]: " + message);
 }
 
 function logDebug(message) {
@@ -77,7 +78,7 @@ function logDebug(message) {
 }
 
 function logError(error) {
-  global.logError("\n[" + UUID + "]: " + error + "\n")
+  global.logError("\n[" + MODULE_UUID + "]: " + error + "\n")
 }
 
 var SpiceSpyPopupSubMenuMenuItem = class SpiceSpyPopupSubMenuMenuItem extends PopupMenu.PopupSubMenuMenuItem {
@@ -328,6 +329,8 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.menuManager = new PopupMenu.PopupMenuManager(this);
     this.menu = new Applet.AppletPopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
+    
+    this.future_loop_datetime = null;
 
     this.issuesJsonLoopId = null;
     this.authors = [];
@@ -343,7 +346,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     
     this.iconColorLoopId = null;
 
-    this.settings = new Settings.AppletSettings(this, UUID, instance_id);
+    this.settings = new Settings.AppletSettings(this, MODULE_UUID, instance_id);
 
   } // End of constructor
 
@@ -375,7 +378,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.settings.bind("old_spices_to_spy", "old_spices_to_spy");
   } // End of get_user_settings
   
-  setIconColor() {
+  setIconColorAndTooltip() {
     if (!this.coloredIcon) {
       this.actor.style = null;
       return
@@ -385,7 +388,52 @@ class SpiceSpy extends Applet.TextIconApplet {
     } else {
       this.actor.style = null
     }
-  } // End of setIconColor
+    var nbr_seconds = 15 * this.commentsJobsList.length + 5 * this.issuesJobsList.length;
+    if (nbr_seconds > 0) {
+      var nbr_minutes = Math.trunc(nbr_seconds / 60);
+      nbr_seconds = nbr_seconds - 60 * nbr_minutes;
+      var str_minutes = nbr_minutes.toString();
+      if (nbr_minutes < 10) str_minutes = "0" + str_minutes;
+      var str_seconds = nbr_seconds.toString();
+      if (nbr_seconds < 10) str_seconds = "0" + str_seconds;
+      this.set_applet_tooltip(_("Check in progress.\nTime remaining:") + "\n<b>" + str_minutes + ":" + str_seconds + "</b>", true);
+    } else {
+      if (this.future_loop_datetime != null) {
+        let now = GLib.DateTime.new_now_local();
+        
+        let diff = Math.trunc(this.future_loop_datetime.difference(now) / 1000000);
+        let _hour = Math.trunc(diff / 3600);
+        let _minute = Math.trunc((diff - 3600 * _hour) / 60);
+        let _second = diff - 3600 * _hour - 60 *_minute;
+        let hour_str = "" + _hour;
+        if (_hour < 10) hour_str = "0" + hour_str;
+        let minute_str = "" + _minute;
+        if (_minute < 10) minute_str = "0" + minute_str;
+        let second_str = "" + _second;
+        if (_second < 10) second_str = "0" + second_str;
+        
+        let future_hour = this.future_loop_datetime.get_hour();
+        let future_minute = this.future_loop_datetime.get_minute();
+        let future_second = this.future_loop_datetime.get_second();
+        let future_hour_str = "" + future_hour;
+        if (future_hour < 10) future_hour_str = "0" + future_hour_str;
+        let future_minute_str = "" + future_minute;
+        if (future_minute  < 10) future_minute_str = "0" + future_minute_str;
+        let future_second_str = "" + future_second;
+        if (future_second < 10) future_second_str = "0" + future_second_str;
+        
+        this.set_applet_tooltip(
+          _("Time remaining until the next check:") + "\n" + 
+          "<b>" + hour_str + ":" + minute_str + ":" + second_str + "\n" + "</b>" +
+          _("Next check at:") + "\n" +
+          "<b>" + future_hour_str + ":" + future_minute_str + ":" + future_second_str + "</b>",
+          true
+        );
+      } else {
+        this.set_applet_tooltip(this.metadata.name + "\n" + _("Getting Started. Please wait..."));
+      }
+    }
+  } // End of setIconColorAndTooltip
 
   update_interval_value() {
     const sec = Math.round(this.update_interval * 3600); // From hours to seconds.
@@ -672,11 +720,19 @@ class SpiceSpy extends Applet.TextIconApplet {
       old_spices_to_spy = null;
     }
     this.fistTime = false;
-    this.set_applet_tooltip(this.metadata.name);
     this.make_menu();
 
     if (!this.loopId) {
+      var now = GLib.DateTime.new_now_local();
       let sec = Math.round(this.update_interval * 3600);
+      this.future_loop_datetime = now.add_seconds(sec);
+      let hour_str = "" + this.future_loop_datetime.get_hour();
+      if (this.future_loop_datetime.get_hour() < 10) hour_str = "0" + hour_str;
+      let minute_str = "" + this.future_loop_datetime.get_minute();
+      if (this.future_loop_datetime.get_minute() < 10) minute_str = "0" + minute_str;
+      let second_str = "" + this.future_loop_datetime.get_second();
+      if (this.future_loop_datetime.get_second() < 10) second_str = "0" + second_str;
+      this.set_applet_tooltip(_("Next check at:") + "\n<b>" + hour_str + ":" + minute_str + ":" + second_str + "</b>", true);
       this.loopId = timeout_add_seconds(sec, () => { this.loop() });
     }
     if (this.issuesLoopId) {
@@ -726,7 +782,6 @@ class SpiceSpy extends Applet.TextIconApplet {
         const currentTime = parseInt(new Date / 1000);
         const difference = currentTime - jsonModifTime;
         if (difference >= 900) { // 900s = 15 min.
-          //~ Util.spawnCommandLineAsync(CACHE_UPDATER+" --update-all");
           Util.spawnCommandLineAsync(CACHE_UPDATER);
         }
       } else {
@@ -953,19 +1008,8 @@ class SpiceSpy extends Applet.TextIconApplet {
         refresh_in_progress.connect("activate",
         () => {
           if (this.menu) this.menu.toggle(true);
-          //~ if (this.issuesLoopId != null) {
-            //~ source_remove(this.issuesLoopId);
-          //~ }
-          //~ this.issuesLoopId = null;
           this.issuesJobsList = [];
-          
-          //~ if (this.commentsJobsLoopId != null) {
-            //~ source_remove(this.commentsJobsLoopId);
-          //~ }
-          //~ this.commentsJobsLoopId = null;
           this.commentsJobsList = [];
-          //~ this.is_looping = true;
-          //~ this.fistTime = false;
         }
       );
       } else {
@@ -1016,7 +1060,7 @@ class SpiceSpy extends Applet.TextIconApplet {
 
     this.loopId = timeout_add_seconds(60, () => { this.loop() });
     this.commentsJobsLoopId = timeout_add_seconds(15, () => { this.commentsJobs_loop(); return this.is_looping; });
-    this.iconColorLoopId = timeout_add_seconds(1, () => { this.setIconColor(); return this.is_looping; });
+    this.iconColorLoopId = timeout_add_seconds(1, () => { this.setIconColorAndTooltip(); return this.is_looping; });
 
     this.update_issues_json();
     this.updateUI();
@@ -1046,7 +1090,7 @@ class SpiceSpy extends Applet.TextIconApplet {
   }
 
   _reload_this_applet(event=null) {
-    reloadExtension(UUID, Type.APPLET)
+    reloadExtension(MODULE_UUID, Type.APPLET)
   } // End of _reload_this_applet
 
   get is_vertical() {
@@ -1055,5 +1099,8 @@ class SpiceSpy extends Applet.TextIconApplet {
 }
 
 function main(metadata, orientation, panel_height, instance_id) {
-  return new SpiceSpy(metadata, orientation, panel_height, instance_id);
+  MODULE_UUID = metadata.uuid;
+  Gettext.bindtextdomain(MODULE_UUID, USER_DATA_DIR + "/locale");
+  let spicespy = new SpiceSpy(metadata, orientation, panel_height, instance_id);
+  return spicespy;
 }
