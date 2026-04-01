@@ -419,6 +419,17 @@ class BingWallpaperApplet extends Applet.IconApplet {
         if (this.settings) {
             this.settings.finalize();
         }
+
+        // Clean up systemd unit files left on disk
+        let systemdDir = GLib.get_user_config_dir() + '/systemd/user/';
+        for (let name of ['bing-daily.service', 'bing-daily.timer']) {
+            try {
+                Gio.File.new_for_path(systemdDir + name).delete(null);
+            } catch (e) {
+                // File may not exist — not an error
+            }
+        }
+        Util.spawn(['systemctl', '--user', 'daemon-reload']);
     }
 }
 
