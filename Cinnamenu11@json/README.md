@@ -1,9 +1,9 @@
-2026 Update to Cinnamenu By David Banting.
+2026 Update to Cinnamenu By David Banting - https://github.com/ForsetGump1952/Cinnamenu11-json.
 Updated originasl 5.8 version to allow a newer layout similar to windows 11 (similar ro Zorin OS Version).
 Added option in configuration settings to adjust look and feel to expans or correct different themes.
 Added mixed view to display Favorites (Pinned) and Recent files.
 
-This is a continuation of Cinnamenu by David Banting - https://github.com/ForsetGump1952/Cinnamenu11-json
+This is a continuation of Cinnamenu
 ====================
 Original Cinnamenu by Jason Hicks - https://github.com/jaszhix/Cinnamenu
 Cinnamenu is a full featured alternative to the standard Cinnamon menu with grid layout and customisation options.
