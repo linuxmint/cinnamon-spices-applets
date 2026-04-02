@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-28 16:21+0100\n"
+"POT-Creation-Date: 2026-04-01 20:28+0200\n"
 "PO-Revision-Date: 2025-08-27 18:06+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -18,53 +18,71 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:185
+#. applet.js:186
 msgid "score"
 msgstr "punteggio"
 
-#. applet.js:197
+#. applet.js:198
 msgid "comments"
 msgstr "commenti"
 
-#. applet.js:209
+#. applet.js:210
 msgid "recent issues"
 msgstr "problemi recenti"
 
-#. applet.js:222
+#. applet.js:223
 msgid "translations"
 msgstr "traduzioni"
 
-#. applet.js:297
+#. applet.js:298
 #, fuzzy
 msgid "Reload icons"
 msgstr "Ricarica questa applet"
 
-#. applet.js:303
+#. applet.js:304
 msgid "Visit website"
 msgstr ""
 
-#. applet.js:831
+#. applet.js:399
+msgid ""
+"Check in progress.\n"
+"Time remaining:"
+msgstr ""
+
+#. applet.js:426
+msgid "Time remaining until the next check:"
+msgstr ""
+
+#. applet.js:428 applet.js:735
+msgid "Next check at:"
+msgstr ""
+
+#. applet.js:433
+msgid "Getting Started. Please wait..."
+msgstr ""
+
+#. applet.js:887
 msgid "Spices"
 msgstr "Spice"
 
-#. applet.js:919
+#. applet.js:978
 msgid "Mark all as read"
 msgstr "Segna tutto come già letto"
 
-#. applet.js:930
+#. applet.js:989
 msgid "Refresh"
 msgstr "Aggiorna"
 
-#. applet.js:944
+#. applet.js:1003
 #, fuzzy
 msgid "Refreshing in progress - Click to stop"
 msgstr "Ricaricamento in corso"
 
-#. applet.js:969
+#. applet.js:1017
 msgid "Refreshing in progress"
 msgstr "Ricaricamento in corso"
 
-#. applet.js:981
+#. applet.js:1029
 msgid "Configure..."
 msgstr "Configura..."
 
@@ -199,6 +217,11 @@ msgstr "Numero di commenti (dal basso verso l'alto)"
 #. settings-schema.json->sort-by->options
 msgid "Number of comments (top-down)"
 msgstr "Numero di commenti (dall'alto verso il basso)"
+
+#. settings-schema.json->sort-by->options
+#, fuzzy
+msgid "Number of issues"
+msgstr "Mostra il numero di problemi nel menù"
 
 #. settings-schema.json->show-uuid->description
 msgid "Show UUID instead of name"

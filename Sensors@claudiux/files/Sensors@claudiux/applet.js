@@ -387,6 +387,7 @@ class SensorsApplet extends Applet.Applet {
     this.s.bind("separator_type", "separator_type", () => { this.updateUI() });
     this.s.bind("vertical-align", "vertical_align", () => { this.updateUI() });
     this.s.bind("char_color_customized", "char_color_customized", () => { this.updateUI() });
+    this.s.bind("separator_color", "separator_color", () => { this.updateUI() });
     this.s.bind("char_color", "char_color", () => { this.updateUI() });
     this.s.bind("crit_color", "crit_color", () => { this.updateUI() });
     this.s.bind("high_color", "high_color", () => { this.updateUI() });
@@ -405,6 +406,7 @@ class SensorsApplet extends Applet.Applet {
     this.s.bind("sensors_version", "sensors_version");
 
     // Temperature tab
+    this.s.bind("show_disks_first", "show_disks_first");
     this.s.bind("show_temp", "show_temp", () => { this.populate_temp_sensors_in_settings() });
     this.s.bind("show_temp_name", "show_temp_name");
     this.s.bind("chars_temp", "chars_temp", () => { this._on_chars_temp_modified() });
@@ -596,8 +598,16 @@ class SensorsApplet extends Applet.Applet {
       var high = false;
       var crit = false;
       let layoutBin = new St.Bin();
+      let sepBin = null;
       let c = labels[i];
       let l_style = null;
+      let color = null;
+      if (c.includes("#")) {
+        color = c.split("#")[1];
+        while (c.includes("#"))
+          c = c.slice(0, -1);
+        l_style = "color: #" + color + ";";
+      }
       if (c.endsWith("$")) { // critical value
         c = c.slice(0, -1);
         l_style = "color: " + this.crit_color + ";";
@@ -607,11 +617,29 @@ class SensorsApplet extends Applet.Applet {
       } else if (this.char_color_customized) {
         l_style = "color: " + this.char_color + ";";
       }
-      let l = new St.Label({text: (i===0 || this.separator == "NO_SEP") ? c : this.separator + c});
+      
+      //~ let l = new St.Label({text: (i===0 || this.separator == "NO_SEP") ? c : this.separator + c});
+      let l = new St.Label({text: c});
+      
+      let sep_l = null;
+      if (i !== 0 && this.separator !== "NO_SEP") {
+        sep_l = new St.Label({text: this.separator});
+      }
+      
       if (l_style)
         l.set_style(l_style);
-
+      
+      if (sep_l) {
+        sep_l.set_style(`color: ${this.separator_color}; `);
+        sepBin = new St.Bin();
+        sepBin.set_child(sep_l);
+      }
       layoutBin.set_child(l);
+      if (sep_l) {
+        this.actor.add(sepBin, { y_align: St.Align.MIDDLE,
+                                  y_fill: false,
+                                });
+      }
       this.actor.add(layoutBin, { y_align: St.Align.MIDDLE,
                                   y_fill: false,
                                 });
@@ -1106,6 +1134,108 @@ class SensorsApplet extends Applet.Applet {
       }
       return nothing
   }
+  
+  updateUI_sensors_temp(nbr_already_shown, _shown_name) {
+    let vertical = (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
+    if (this.show_temp //&& this.temp_sensors.length !== 0
+        && this.data !== undefined
+        && Object.keys(this.data["temps"]).length != 0
+        && !this.nothingToShow(this.temp_sensors)) {
+      for (let t of this.temp_sensors) {
+        if (this.data["temps"][t["sensor"]] !== undefined) {
+          if (t["show_in_panel"]) {
+            let _temp = 1.0*this.data["temps"][t["sensor"]]["input"];
+            _shown_name = "";
+            if (this.show_temp_name) {
+              if (vertical)
+                _shown_name = t["shown_name"]+"\n";
+              else
+                _shown_name = t["shown_name"]+" ";
+            }
+
+            if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push(C_TEMP);
+
+            if (t["user_formula"] && t["user_formula"].length > 0) {
+              let _formula_result = t["user_formula"].replace(/\$/g, _temp);
+              _temp = 1.0*eval(_formula_result)
+            }
+
+            let _temp_max = (t["high_by_user"] && t["high_by_user"].length > 0 && !isNaN(t["high_by_user"])) ?
+              1.0*t["high_by_user"] : 1.0*this._get_max_temp(this.data["temps"][t["sensor"]]);
+            let _temp_crit = (t["crit_by_user"] && t["crit_by_user"].length > 0 && !isNaN(t["crit_by_user"])) ?
+              1.0*t["crit_by_user"] : 1.0*this._get_crit_temp(this.data["temps"][t["sensor"]]);
+
+            if (isNaN(_temp_crit)) _temp_crit = null;
+            if (isNaN(_temp_max)) _temp_max = null;
+
+            if (this.journalize_temp)
+              this.loggerTemp.log(_temp, _temp_max, _temp_crit, t["sensor"], (this.use_fahrenheit) ? "°F" : "°C");
+
+            if (!isNaN(_temp_crit) && _temp_crit > 0 && _temp >= _temp_crit) {
+              this.label_parts.push(_shown_name + this._formatted_temp(_temp, vertical) + "$");
+            } else if (!isNaN(_temp_max) && _temp_max > 0 && _temp >= _temp_max) {
+              this.label_parts.push(_shown_name + this._formatted_temp(_temp, vertical) + "£");
+            } else {
+              if (t["color"] && t["color"].length > 3 && t["color"].startsWith("#")) {
+                this.label_parts.push(_shown_name + this._formatted_temp(_temp, vertical) + t["color"]);
+              } else {
+                this.label_parts.push(_shown_name + this._formatted_temp(_temp, vertical));
+              }
+            }
+
+            nbr_already_shown += 1;
+          }
+        }
+      }
+    }
+  }
+  
+  updateUI_disks_temp(nbr_already_shown, _shown_name) {
+    let vertical = (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
+    if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks && !this.nothingToShow(this.temp_disks)) {
+      for (let disk of this.temp_disks) {
+        //~ let _disk_name = disk["disk"].trim();
+        let _disk_name = disk["disk"];
+        if (disk["show_in_panel"] && _disk_name.length > 0) {
+          if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
+          if (disk["value"]) this._temp[_disk_name] = disk["value"];
+          let _temp;
+
+          _temp = (disk["value"]) ? disk["value"] : '??';
+          if (isNaN(_temp)) continue;
+          let _temp_max = disk["high"];
+          let _temp_crit = disk["crit"];
+
+          if (this.journalize_temp)
+            this.loggerTemp.log(_temp, _temp_max, _temp_crit, _disk_name, (this.use_fahrenheit) ? "°F" : "°C");
+
+          _shown_name = "";
+          if (this.show_temp_name) {
+            if (vertical)
+              _shown_name = (disk["shown_name"].length > 0) ? disk["shown_name"]+"\n" : _disk_name+"\n";
+            else
+              _shown_name = (disk["shown_name"].length > 0) ? disk["shown_name"]+" " : _disk_name+" ";
+          }
+          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push(C_TEMP);
+          let _label_part = _shown_name+this._formatted_temp(_temp, vertical);
+
+          if (_temp >= _temp_crit) {
+            this.label_parts.push(""+_label_part+"$");
+          } else if (_temp >= _temp_max) {
+            this.label_parts.push(""+_label_part+"£");
+          } else {
+            if (disk["color"] && disk["color"].length > 3 && disk["color"].startsWith("#")) {
+              this.label_parts.push(""+_label_part + disk["color"]);
+            } else {
+              this.label_parts.push(""+_label_part);
+            }
+          }
+          nbr_already_shown += 1;
+        }
+      }
+      this.read_disk_temps()
+    }
+  }
 
   /**
    * updateUI: updates the user interface (that is displayed in the panel).
@@ -1160,92 +1290,15 @@ class SensorsApplet extends Applet.Applet {
 
     // Temperatures:
     var nbr_already_shown = 0;
-    if (this.show_temp //&& this.temp_sensors.length !== 0
-        && this.data !== undefined
-        && Object.keys(this.data["temps"]).length != 0
-        && !this.nothingToShow(this.temp_sensors)) {
-      for (let t of this.temp_sensors) {
-        if (this.data["temps"][t["sensor"]] !== undefined) {
-          if (t["show_in_panel"]) {
-            let _temp = 1.0*this.data["temps"][t["sensor"]]["input"];
-            _shown_name = "";
-            if (this.show_temp_name) {
-              if (vertical)
-                _shown_name = t["shown_name"]+"\n";
-              else
-                _shown_name = t["shown_name"]+" ";
-            }
-
-            if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push(C_TEMP);
-
-            if (t["user_formula"] && t["user_formula"].length > 0) {
-              let _formula_result = t["user_formula"].replace(/\$/g, _temp);
-              _temp = 1.0*eval(_formula_result)
-            }
-
-            let _temp_max = (t["high_by_user"] && t["high_by_user"].length > 0 && !isNaN(t["high_by_user"])) ?
-              1.0*t["high_by_user"] : 1.0*this._get_max_temp(this.data["temps"][t["sensor"]]);
-            let _temp_crit = (t["crit_by_user"] && t["crit_by_user"].length > 0 && !isNaN(t["crit_by_user"])) ?
-              1.0*t["crit_by_user"] : 1.0*this._get_crit_temp(this.data["temps"][t["sensor"]]);
-
-            if (isNaN(_temp_crit)) _temp_crit = null;
-            if (isNaN(_temp_max)) _temp_max = null;
-
-            if (this.journalize_temp)
-              this.loggerTemp.log(_temp, _temp_max, _temp_crit, t["sensor"], (this.use_fahrenheit) ? "°F" : "°C");
-
-            if (!isNaN(_temp_crit) && _temp_crit > 0 && _temp >= _temp_crit) {
-              this.label_parts.push(_shown_name + this._formatted_temp(_temp, vertical) + "$");
-            } else if (!isNaN(_temp_max) && _temp_max > 0 && _temp >= _temp_max) {
-              this.label_parts.push(_shown_name + this._formatted_temp(_temp, vertical) + "£");
-            } else {
-              this.label_parts.push(_shown_name+this._formatted_temp(_temp, vertical));
-            }
-
-            nbr_already_shown += 1;
-          }
-        }
-      }
+    if (this.show_disks_first) {
+      this.updateUI_disks_temp(nbr_already_shown, _shown_name);
+      this.updateUI_sensors_temp(nbr_already_shown, _shown_name);
+    } else {
+      this.updateUI_sensors_temp(nbr_already_shown, _shown_name);
+      this.updateUI_disks_temp(nbr_already_shown, _shown_name);
     }
-    if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks && !this.nothingToShow(this.temp_disks)) {
-      for (let disk of this.temp_disks) {
-        //~ let _disk_name = disk["disk"].trim();
-        let _disk_name = disk["disk"];
-        if (disk["show_in_panel"] && _disk_name.length > 0) {
-          if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
-          if (disk["value"]) this._temp[_disk_name] = disk["value"];
-          let _temp;
-
-          _temp = (disk["value"]) ? disk["value"] : '??';
-          if (isNaN(_temp)) continue;
-          let _temp_max = disk["high"];
-          let _temp_crit = disk["crit"];
-
-          if (this.journalize_temp)
-            this.loggerTemp.log(_temp, _temp_max, _temp_crit, _disk_name, (this.use_fahrenheit) ? "°F" : "°C");
-
-          _shown_name = "";
-          if (this.show_temp_name) {
-            if (vertical)
-              _shown_name = (disk["shown_name"].length > 0) ? disk["shown_name"]+"\n" : _disk_name+"\n";
-            else
-              _shown_name = (disk["shown_name"].length > 0) ? disk["shown_name"]+" " : _disk_name+" ";
-          }
-          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push(C_TEMP);
-          let _label_part = _shown_name+this._formatted_temp(_temp, vertical);
-
-          if (_temp >= _temp_crit) {
-            this.label_parts.push(""+_label_part+"$");
-          } else if (_temp >= _temp_max) {
-            this.label_parts.push(""+_label_part+"£");
-          } else {
-            this.label_parts.push(""+_label_part);
-          }
-          nbr_already_shown += 1;
-        }
-      }
-      this.read_disk_temps()
-    }
+    
+    
 
     // Fans:
     if (this.show_fan && !this.nothingToShow(this.fan_sensors)
@@ -1281,7 +1334,11 @@ class SensorsApplet extends Applet.Applet {
           if (_fan < _fan_min) {
             this.label_parts.push(_shown_name+this._formatted_fan(_fan, vertical)+"$");
           } else {
-            this.label_parts.push(_shown_name+this._formatted_fan(_fan, vertical));
+            if (f["color"] && f["color"].length > 3 && f["color"].startsWith("#")) {
+              this.label_parts.push(_shown_name+this._formatted_fan(_fan, vertical) + f["color"]);
+            } else {
+              this.label_parts.push(_shown_name+this._formatted_fan(_fan, vertical));
+            }
           }
 
           if (this.journalize_fan)
@@ -1331,7 +1388,11 @@ class SensorsApplet extends Applet.Applet {
           if (_voltage >= _voltage_max || _voltage < _voltage_min) {
             this.label_parts.push(_shown_name+this._formatted_voltage(_voltage, vertical)+"$");
           } else {
-            this.label_parts.push(_shown_name+this._formatted_voltage(_voltage, vertical));
+            if (v["color"] && v["color"].length > 3 && v["color"].startsWith("#")) {
+              this.label_parts.push(_shown_name+this._formatted_voltage(_voltage, vertical) + v["color"]);
+            } else {
+              this.label_parts.push(_shown_name+this._formatted_voltage(_voltage, vertical));
+            }
           }
 
           if (this.journalize_volt)
@@ -1907,6 +1968,15 @@ class SensorsApplet extends Applet.Applet {
     let _to = setTimeout( () => {
         clearTimeout(_to);
         spawnCommandLineAsync("/usr/bin/xsensors &");
+      },
+      300
+    );
+  }
+  
+  _on_open_HTML_Colors_web_page() {
+    let _to = setTimeout( () => {
+        clearTimeout(_to);
+        spawnCommandLineAsync("xdg-open https://htmlcolorcodes.com/");
       },
       300
     );

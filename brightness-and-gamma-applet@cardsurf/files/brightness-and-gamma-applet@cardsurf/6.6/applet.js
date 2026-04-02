@@ -1426,7 +1426,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
             let output_indexes_string = this.output_indexes.join(this.output_indexes_separator);
             let row;
             if (this.useScreenTemp) {
-                row = new TempValues.TempLastValuesRow(this.screen_name, output_indexes_string, this.screen_temp);
+                row = new TempValues.TempLastValuesRow(this.screen_name, output_indexes_string, this.brightness, this.screen_temp);
                 this.last_values_string_temp = TempValues.to_csv_string_temp(row);
             } else {
                 row = new Values.LastValuesRow(this.screen_name, output_indexes_string, this.brightness,

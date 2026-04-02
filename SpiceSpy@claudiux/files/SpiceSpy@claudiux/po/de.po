@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 4.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-28 16:21+0100\n"
+"POT-Creation-Date: 2026-04-01 20:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,55 +17,73 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:185
+#. applet.js:186
 msgid "score"
 msgstr "Punktestand"
 
-#. applet.js:197
+#. applet.js:198
 msgid "comments"
 msgstr "Kommentare"
 
 # Better not translate "issue"?
-#. applet.js:209
+#. applet.js:210
 msgid "recent issues"
 msgstr "aktuelle Probleme"
 
-#. applet.js:222
+#. applet.js:223
 msgid "translations"
 msgstr "Übersetzungen"
 
-#. applet.js:297
+#. applet.js:298
 #, fuzzy
 msgid "Reload icons"
 msgstr "Applet neu Laden"
 
-#. applet.js:303
+#. applet.js:304
 msgid "Visit website"
 msgstr ""
 
-#. applet.js:831
+#. applet.js:399
+msgid ""
+"Check in progress.\n"
+"Time remaining:"
+msgstr ""
+
+#. applet.js:426
+msgid "Time remaining until the next check:"
+msgstr ""
+
+#. applet.js:428 applet.js:735
+msgid "Next check at:"
+msgstr ""
+
+#. applet.js:433
+msgid "Getting Started. Please wait..."
+msgstr ""
+
+#. applet.js:887
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:919
+#. applet.js:978
 msgid "Mark all as read"
 msgstr "Alle als gelesen markieren"
 
-#. applet.js:930
+#. applet.js:989
 msgid "Refresh"
 msgstr "Aktualisieren"
 
-#. applet.js:944
+#. applet.js:1003
 #, fuzzy
 msgid "Refreshing in progress - Click to stop"
 msgstr "Aktualisierung läuft"
 
-#. applet.js:969
+#. applet.js:1017
 msgid "Refreshing in progress"
 msgstr "Aktualisierung läuft"
 
 # Same wording as in context menu on applet right click.
-#. applet.js:981
+#. applet.js:1029
 msgid "Configure..."
 msgstr "Einrichten..."
 
@@ -204,6 +222,12 @@ msgstr "Anzahl der Kommentare (von unten nach oben)"
 #. settings-schema.json->sort-by->options
 msgid "Number of comments (top-down)"
 msgstr "Anzahl der Kommentare (von unten nach oben)"
+
+# Better not translate issue since it refers to Github issues?
+#. settings-schema.json->sort-by->options
+#, fuzzy
+msgid "Number of issues"
+msgstr "Zeige die Anzahl der Probleme im Menü an"
 
 #. settings-schema.json->show-uuid->description
 msgid "Show UUID instead of name"

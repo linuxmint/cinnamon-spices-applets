@@ -1,3 +1,9 @@
+### v5.8.0~20260401
+  * Improved tooltip displaying schedules.
+
+### v5.7.2~20260305
+  * Adds the ability to sort by number of issues.
+
 ### v5.7.1~20251230
   * Minor bugfixes.
 

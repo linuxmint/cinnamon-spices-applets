@@ -37,8 +37,7 @@
         "show-uuid",
         "translate-name",
         "display-on-panel",
-        "useful-only",
-        "coloredIcon"
+        "useful-only"
       ]
     },
     "section2": {
@@ -129,7 +128,8 @@
       "Score (bottom-up)": "score",
       "Score (top-down)": "dscore",
       "Number of comments (bottom-up)": "comments",
-      "Number of comments (top-down)": "dcomments"
+      "Number of comments (top-down)": "dcomments",
+      "Number of issues": "issues"
     }
   },
   "show-uuid": {
@@ -159,8 +159,7 @@
     "default": true
   },
   "coloredIcon": {
-    "type": "switch",
-    "description": "Change icon color while refreshing",
+    "type": "generic",
     "default": true
   },
   "colorWhileRefreshing": {

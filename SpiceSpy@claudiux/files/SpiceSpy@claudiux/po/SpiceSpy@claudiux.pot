@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: SpiceSpy@claudiux 5.7.0\n"
+"Project-Id-Version: SpiceSpy@claudiux 5.8.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-28 16:21+0100\n"
+"POT-Creation-Date: 2026-04-01 20:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,51 +17,69 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:185
+#. applet.js:186
 msgid "score"
 msgstr ""
 
-#. applet.js:197
+#. applet.js:198
 msgid "comments"
 msgstr ""
 
-#. applet.js:209
+#. applet.js:210
 msgid "recent issues"
 msgstr ""
 
-#. applet.js:222
+#. applet.js:223
 msgid "translations"
 msgstr ""
 
-#. applet.js:297
+#. applet.js:298
 msgid "Reload icons"
 msgstr ""
 
-#. applet.js:303
+#. applet.js:304
 msgid "Visit website"
 msgstr ""
 
-#. applet.js:831
+#. applet.js:399
+msgid ""
+"Check in progress.\n"
+"Time remaining:"
+msgstr ""
+
+#. applet.js:426
+msgid "Time remaining until the next check:"
+msgstr ""
+
+#. applet.js:428 applet.js:735
+msgid "Next check at:"
+msgstr ""
+
+#. applet.js:433
+msgid "Getting Started. Please wait..."
+msgstr ""
+
+#. applet.js:887
 msgid "Spices"
 msgstr ""
 
-#. applet.js:919
+#. applet.js:978
 msgid "Mark all as read"
 msgstr ""
 
-#. applet.js:930
+#. applet.js:989
 msgid "Refresh"
 msgstr ""
 
-#. applet.js:944
+#. applet.js:1003
 msgid "Refreshing in progress - Click to stop"
 msgstr ""
 
-#. applet.js:969
+#. applet.js:1017
 msgid "Refreshing in progress"
 msgstr ""
 
-#. applet.js:981
+#. applet.js:1029
 msgid "Configure..."
 msgstr ""
 
@@ -194,6 +212,10 @@ msgstr ""
 
 #. settings-schema.json->sort-by->options
 msgid "Number of comments (top-down)"
+msgstr ""
+
+#. settings-schema.json->sort-by->options
+msgid "Number of issues"
 msgstr ""
 
 #. settings-schema.json->show-uuid->description

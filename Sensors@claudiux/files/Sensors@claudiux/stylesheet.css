@@ -8,7 +8,7 @@
     padding: 2px;
     border: 2px;
     border-radius: 10px;
-    border-color: rgba(127,127,127,0.5);
+    border-color: rgba(127,127,127,1.0);
     text-align: center;
 }
 
@@ -18,7 +18,7 @@
     padding: 2px;
     border: 2px;
     border-radius: 10px;
-    border-color: rgba(255,141,0,0.5);
+    border-color: rgba(255,141,0,1.0);
     text-align: center;
 }
 
@@ -28,7 +28,7 @@
     padding: 2px;
     border: 2px;
     border-radius: 10px;
-    border-color: rgba(194,34,34,0.5);
+    border-color: rgba(194,34,34,1.0);
     text-align: center;
 }
 

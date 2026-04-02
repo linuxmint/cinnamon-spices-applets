@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 5.3.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-28 16:21+0100\n"
+"POT-Creation-Date: 2026-04-01 20:28+0200\n"
 "PO-Revision-Date: 2025-08-31 23:32+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -16,52 +16,70 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:185
+#. applet.js:186
 msgid "score"
 msgstr "評分"
 
-#. applet.js:197
+#. applet.js:198
 msgid "comments"
 msgstr "留言"
 
-#. applet.js:209
+#. applet.js:210
 msgid "recent issues"
 msgstr "最近議題"
 
-#. applet.js:222
+#. applet.js:223
 msgid "translations"
 msgstr "翻譯"
 
-#. applet.js:297
+#. applet.js:298
 msgid "Reload icons"
 msgstr "重新載入圖示"
 
-#. applet.js:303
+#. applet.js:304
 msgid "Visit website"
 msgstr "造訪網站"
 
-#. applet.js:831
+#. applet.js:399
+msgid ""
+"Check in progress.\n"
+"Time remaining:"
+msgstr ""
+
+#. applet.js:426
+msgid "Time remaining until the next check:"
+msgstr ""
+
+#. applet.js:428 applet.js:735
+msgid "Next check at:"
+msgstr ""
+
+#. applet.js:433
+msgid "Getting Started. Please wait..."
+msgstr ""
+
+#. applet.js:887
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:919
+#. applet.js:978
 msgid "Mark all as read"
 msgstr "全部標記為已讀"
 
-#. applet.js:930
+#. applet.js:989
 msgid "Refresh"
 msgstr "重新整理"
 
-#. applet.js:944
+#. applet.js:1003
 #, fuzzy
 msgid "Refreshing in progress - Click to stop"
 msgstr "正在重新整理"
 
-#. applet.js:969
+#. applet.js:1017
 msgid "Refreshing in progress"
 msgstr "正在重新整理"
 
-#. applet.js:981
+#. applet.js:1029
 msgid "Configure..."
 msgstr "設定..."
 
@@ -196,6 +214,11 @@ msgstr "留言數（由少到多）"
 #. settings-schema.json->sort-by->options
 msgid "Number of comments (top-down)"
 msgstr "留言數（由多到少）"
+
+#. settings-schema.json->sort-by->options
+#, fuzzy
+msgid "Number of issues"
+msgstr "在選單中顯示議題數量"
 
 #. settings-schema.json->show-uuid->description
 msgid "Show UUID instead of name"

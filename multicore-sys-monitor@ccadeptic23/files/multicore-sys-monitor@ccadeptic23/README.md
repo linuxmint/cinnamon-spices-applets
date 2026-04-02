@@ -21,6 +21,14 @@ You can display the CPU temperature in degrees Fahrenheit (°F), if you wish.
 
 You can set color warnings when the CPU temperature reaches a High or Critical level.
 
+## Memory
+
+The user can choose between the htop method (recommended) and the System Monitor method to calculate memory values.
+
+## Network
+
+Starting with Cinnamon 6.4, you can display the total amount transferred or the instantaneous transfer speed.
+
 
 ## Instructions for upgrading to Cinnamon 6.4
 
