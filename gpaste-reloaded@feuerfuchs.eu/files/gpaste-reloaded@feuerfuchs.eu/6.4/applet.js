@@ -481,6 +481,11 @@ class GPasteApplet extends Applet.IconApplet {
     _onClientUpdate(client, action, target, position) {
         debugLog("[" + uuid + "] Client event: _onClientUpdate");
 
+        if (this.reverseHistory) {
+            this.refresh(0);
+            return;
+        }
+
         switch (target) {
             case GPaste.UpdateTarget.ALL:
                 this.refresh(0);
@@ -489,7 +494,8 @@ class GPasteApplet extends Applet.IconApplet {
             case GPaste.UpdateTarget.POSITION:
                 switch (action) {
                     case GPaste.UpdateAction.REPLACE:
-                        this._historyItems[position].refresh();
+                        if (this._historyItems[position])
+                            this._historyItems[position].refresh();
                         break;
                     case GPaste.UpdateAction.REMOVE:
                         this.refresh(position);
