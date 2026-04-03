@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AlwaysOn@krivetochka 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-03 19:31-0400\n"
+"POT-Creation-Date: 2026-02-26 13:44+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -18,31 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:28
+#. applet.js:39
 msgid "Click here to activate AlwaysOn"
 msgstr "Clicca qui per attivare AlwaysOn"
 
-#. applet.js:66
+#. applet.js:110
 msgid "AlwaysOn activated"
 msgstr "AlwaysOn attivato"
 
-#. applet.js:66
+#. applet.js:110
 msgid "Your computer will now stay active."
 msgstr "Il computer ora rimarrà attivo."
 
-#. applet.js:74
+#. applet.js:114
 msgid "Deactivate AlwaysOn"
 msgstr "Disattiva AlwaysOn"
 
-#. applet.js:85
+#. applet.js:156
 msgid "AlwaysOn deactivated"
 msgstr "AlwaysOn disattivato"
 
-#. applet.js:85
+#. applet.js:156
 msgid "Now your computer can go to sleep."
 msgstr "Ora il computer può andare in sospensione."
 
-#. applet.js:93
+#. applet.js:160
 msgid "Activate AlwaysOn"
 msgstr "Attiva AlwaysOn"
 
@@ -60,14 +60,8 @@ msgstr ""
 "dell'applet."
 
 #. settings-schema.json->section-general->description
-msgid "General"
-msgstr "Generale"
-
-#. settings-schema.json->change-affected-settings->description
-msgid "Click to select which settings will be affected by this applet"
+msgid "Choose which parameters this applet affects"
 msgstr ""
-"Clicca per selezionare quali impostazioni verranno influenzate da questa "
-"applet"
 
 #. settings-schema.json->idle-dim-battery->description
 msgid "Dim the screen when idle"
@@ -81,9 +75,9 @@ msgstr "Sospensione quando inattivo"
 msgid "Turning off the screen when idle"
 msgstr "Spegni schermo quando inattivo"
 
-#. settings-schema.json->key-bind->description
-msgid "Select a combination to activate the applet"
-msgstr "Seleziona una combinazione per attivare l'applet"
+#. settings-schema.json->lid-close-action->description
+msgid "Do nothing when laptop lid is closed"
+msgstr ""
 
 #. settings-schema.json->section-not->description
 msgid "Notifications"
@@ -108,6 +102,10 @@ msgstr "Simbolica"
 #. settings-schema.json->choose-icon->options
 msgid "Colored"
 msgstr "Colorata"
+
+#. settings-schema.json->key-bind->description
+msgid "Select a combination to activate the applet"
+msgstr "Seleziona una combinazione per attivare l'applet"
 
 #. settings-schema.json->hide-applet->description
 msgid "Hide applet from the panel (works best with notifications enabled)"
