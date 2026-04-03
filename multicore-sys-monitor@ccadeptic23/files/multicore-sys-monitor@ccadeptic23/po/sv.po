@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-24 20:21+0100\n"
+"POT-Creation-Date: 2026-04-03 22:37+0200\n"
 "PO-Revision-Date: 2019-02-09 16:12+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -25,7 +25,7 @@ msgstr ""
 #. 5.6->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
 #. 3.2/prefs.js:187 3.4/DataProviders.js:58 3.4/prefs.js:195 5.6/applet.js:73
-#. 5.6/applet.js:628 5.6/applet.js:1619 5.6/applet.js:1671 5.6/applet.js:1679
+#. 5.6/applet.js:629 5.6/applet.js:1612 5.6/applet.js:1664 5.6/applet.js:1672
 #. 4.0/DataProviders.js:55 4.0/prefs.js:303 3.0/prefsui.glade:452
 #. 3.2/prefsui.glade:504 3.4/prefsui.glade:434 4.0/prefsui.glade:580
 msgid "CPU"
@@ -37,12 +37,12 @@ msgid "------------- CPU ------------"
 msgstr "--------------CPU-------------"
 
 #. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 3.4/DataProviders.js:129
-#. 5.6/applet.js:1681 4.0/DataProviders.js:126
+#. 5.6/applet.js:1674 4.0/DataProviders.js:126
 msgid "Core"
 msgstr "Kärna"
 
 #. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 3.4/DataProviders.js:141
-#. 5.6/applet.js:74 5.6/applet.js:1417 4.0/DataProviders.js:138
+#. 5.6/applet.js:74 5.6/applet.js:1412 4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "MINNE"
 
@@ -56,22 +56,22 @@ msgid "Usedup:"
 msgstr "Förbrukat:"
 
 #. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 3.4/DataProviders.js:162
-#. 5.6/applet.js:1477 4.0/DataProviders.js:159
+#. 5.6/applet.js:1472 4.0/DataProviders.js:159
 msgid "Cached:"
 msgstr "Cache-lagrat:"
 
 #. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 3.4/DataProviders.js:162
-#. 5.6/applet.js:1477 4.0/DataProviders.js:159
+#. 5.6/applet.js:1472 4.0/DataProviders.js:159
 msgid "Buffer:"
 msgstr "Buffert:"
 
 #. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 3.4/DataProviders.js:162
-#. 5.6/applet.js:49 5.6/applet.js:1477 4.0/DataProviders.js:159
+#. 5.6/applet.js:49 5.6/applet.js:1472 4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "Ledigt:"
 
 #. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 3.4/DataProviders.js:176
-#. 5.6/applet.js:1554 4.0/DataProviders.js:173
+#. 5.6/applet.js:1547 4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "VÄXLING"
 
@@ -82,14 +82,14 @@ msgstr "-------Växlingsutrymme--------"
 
 #. 5.6->settings-schema.json->Mem_colorSwap->description
 #. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 3.4/DataProviders.js:195
-#. 5.6/applet.js:50 5.6/applet.js:1583 4.0/DataProviders.js:194
+#. 5.6/applet.js:50 5.6/applet.js:1576 4.0/DataProviders.js:194
 #. 3.0/prefsui.glade:785 3.2/prefsui.glade:837 3.4/prefsui.glade:761
 #. 4.0/prefsui.glade:907
 msgid "Swap"
 msgstr "Växlingsutrymme"
 
 #. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 3.4/DataProviders.js:205
-#. 5.6/applet.js:75 5.6/applet.js:1705 5.6/lib/Graphs.js:906
+#. 5.6/applet.js:75 5.6/applet.js:1698 5.6/lib/Graphs.js:921
 #. 4.0/DataProviders.js:204
 msgid "NET"
 msgstr "NÄT"
@@ -100,8 +100,7 @@ msgid "---------- Networks ----------"
 msgstr "-----------Nätverk------------"
 
 #. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 3.4/DataProviders.js:300
-#. 5.6/applet.js:52 5.6/applet.js:1849 5.6/applet.js:1851
-#. 4.0/DataProviders.js:298
+#. 5.6/applet.js:52 5.6/applet.js:1841 4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "Ner:"
 
@@ -111,13 +110,12 @@ msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
 #. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 3.4/DataProviders.js:301
-#. 5.6/applet.js:53 5.6/applet.js:1853 5.6/applet.js:1855
-#. 4.0/DataProviders.js:299
+#. 5.6/applet.js:53 5.6/applet.js:1842 4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "Upp:"
 
 #. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 3.4/DataProviders.js:317
-#. 5.6/applet.js:76 5.6/applet.js:1873 5.6/applet.js:2019
+#. 5.6/applet.js:76 5.6/applet.js:1860 5.6/applet.js:2000
 #. 4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "DISK"
@@ -128,8 +126,7 @@ msgid "------------ Disks -----------"
 msgstr "------------Diskar------------"
 
 #. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 3.4/DataProviders.js:386
-#. 5.6/applet.js:54 5.6/applet.js:1995 5.6/applet.js:1997
-#. 4.0/DataProviders.js:384
+#. 5.6/applet.js:54 5.6/applet.js:1981 4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "Läs:"
 
@@ -139,8 +136,7 @@ msgid "(MiB/s)"
 msgstr "(MiB/s)"
 
 #. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 3.4/DataProviders.js:387
-#. 5.6/applet.js:55 5.6/applet.js:1999 5.6/applet.js:2001
-#. 4.0/DataProviders.js:385
+#. 5.6/applet.js:55 5.6/applet.js:1982 4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "Skriv:"
 
@@ -201,8 +197,8 @@ msgstr "Kunde inte spara filen:"
 msgid "/s"
 msgstr "/s"
 
-#. 3.4/DataProviders.js:162 5.6/applet.js:47 5.6/applet.js:1474
-#. 5.6/applet.js:1477 5.6/applet.js:1594 4.0/DataProviders.js:159
+#. 3.4/DataProviders.js:162 5.6/applet.js:47 5.6/applet.js:1469
+#. 5.6/applet.js:1472 5.6/applet.js:1587 4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "Använt:"
 
@@ -247,54 +243,54 @@ msgid "DISK USAGE"
 msgstr ""
 
 #. 5.6->settings-schema.json->RefreshAll_btn->description
-#. 5.6/applet.js:583
+#. 5.6/applet.js:584
 #, fuzzy
 msgid "Refresh All"
 msgstr "Uppdateringsfrekvens (ms)"
 
-#. 5.6/applet.js:593
+#. 5.6/applet.js:594
 msgid "Without any graphics"
 msgstr ""
 
-#. 5.6/applet.js:599
+#. 5.6/applet.js:600
 msgid "With graphics"
 msgstr ""
 
-#. 5.6/applet.js:610
+#. 5.6/applet.js:611
 msgid "Drop Memory Cache (needs root rights)"
 msgstr ""
 
-#. 5.6/applet.js:626
+#. 5.6/applet.js:627
 msgid "Configure..."
 msgstr ""
 
 #. 5.6->settings-schema.json->pageGeneral->title
-#. 5.6/applet.js:627 3.0/prefsui.glade:281 3.2/prefsui.glade:333
+#. 5.6/applet.js:628 3.0/prefsui.glade:281 3.2/prefsui.glade:333
 #. 3.4/prefsui.glade:264 4.0/prefsui.glade:299
 msgid "General"
 msgstr "Allmänt"
 
 #. 5.6->settings-schema.json->pageMem->title
-#. 5.6/applet.js:629 5.6/applet.js:1464 3.0/prefsui.glade:832
+#. 5.6/applet.js:630 5.6/applet.js:1459 3.0/prefsui.glade:832
 #. 3.2/prefsui.glade:884 3.4/prefsui.glade:808 4.0/prefsui.glade:954
 msgid "Memory"
 msgstr "Minne"
 
 #. 5.6->settings-schema.json->pageNetwork->title
-#. 5.6/applet.js:630 5.6/applet.js:1114 5.6/applet.js:1715
+#. 5.6/applet.js:631 5.6/applet.js:1115 5.6/applet.js:1708
 #. 3.0/prefsui.glade:1154 3.2/prefsui.glade:1206 3.4/prefsui.glade:1143
 #. 4.0/prefsui.glade:1289
 msgid "Network"
 msgstr "Nätverk"
 
 #. 5.6->settings-schema.json->pageDisk->title
-#. 5.6/applet.js:631 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
+#. 5.6/applet.js:632 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
 #. 3.4/prefsui.glade:1489 4.0/prefsui.glade:1635
 msgid "Disk IO"
 msgstr "Disk I/O"
 
 #. 5.6->settings-schema.json->pageDiskUsage->title
-#. 5.6/applet.js:632
+#. 5.6/applet.js:633
 #, fuzzy
 msgid "Disk Usage"
 msgstr "Disk I/O"
@@ -304,60 +300,60 @@ msgstr "Disk I/O"
 #. 5.6->settings-schema.json->sectionCPUColors->title
 #. 5.6->settings-schema.json->sectionMemoryColors->title
 #. 5.6->settings-schema.json->sectionDiskUsageColors->title
-#. 5.6/applet.js:633 3.0/prefsui.glade:411 3.0/prefsui.glade:584
+#. 5.6/applet.js:634 3.0/prefsui.glade:411 3.0/prefsui.glade:584
 #. 3.2/prefsui.glade:463 3.2/prefsui.glade:636 3.4/prefsui.glade:392
 #. 3.4/prefsui.glade:564 4.0/prefsui.glade:494 4.0/prefsui.glade:710
 msgid "Colors"
 msgstr "Färger"
 
-#. 5.6/applet.js:776 5.6/applet.js:819 5.6/applet.js:833
+#. 5.6/applet.js:777 5.6/applet.js:820 5.6/applet.js:834
 msgid "root"
 msgstr ""
 
-#. 5.6/applet.js:1222 5.6/applet.js:1882 5.6/applet.js:1962 5.6/applet.js:2066
-#. 5.6/applet.js:2068
+#. 5.6/applet.js:1223 5.6/applet.js:1869 5.6/applet.js:1949 5.6/applet.js:2047
+#. 5.6/applet.js:2049
 #, fuzzy
 msgid "Disks"
 msgstr "Disk I/O"
 
-#. 5.6/applet.js:1475 5.6/applet.js:1595
+#. 5.6/applet.js:1470 5.6/applet.js:1588
 msgid "Available:"
 msgstr ""
 
-#. 5.6/applet.js:1499
+#. 5.6/applet.js:1494
 msgid "Buffers/Cache/Shared"
 msgstr ""
 
-#. 5.6/applet.js:1527 5.6/applet.js:1601 5.6/applet.js:1661 5.6/applet.js:1845
-#. 5.6/applet.js:1846 5.6/applet.js:1991 5.6/applet.js:1992 5.6/applet.js:2045
+#. 5.6/applet.js:1522 5.6/applet.js:1594 5.6/applet.js:1654 5.6/applet.js:1838
+#. 5.6/applet.js:1839 5.6/applet.js:1978 5.6/applet.js:1979 5.6/applet.js:2026
 msgid ":"
 msgstr ""
 
-#. 5.6/applet.js:1529 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 5.6/applet.js:1524 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 3.4/prefsui.glade:663 4.0/prefsui.glade:809
 msgid "Buffer"
 msgstr "Buffert"
 
 #. 5.6->settings-schema.json->Mem_colorCache->description
-#. 5.6/applet.js:1529
+#. 5.6/applet.js:1524
 #, fuzzy
 msgid "Cache"
 msgstr "Cache-lagrat"
 
-#. 5.6/applet.js:1529
+#. 5.6/applet.js:1524
 msgid "Shared"
 msgstr ""
 
-#. 5.6/applet.js:1651
+#. 5.6/applet.js:1644
 msgid "CPUs"
 msgstr ""
 
-#. 5.6/applet.js:1816
+#. 5.6/applet.js:1809
 #, fuzzy
 msgid "Networks"
 msgstr "Nätverk"
 
-#. 5.6/applet.js:2040
+#. 5.6/applet.js:2021
 msgid "Usage"
 msgstr ""
 
@@ -864,6 +860,7 @@ msgid "25%, left side"
 msgstr ""
 
 #. 5.6->settings-schema.json->Mem_swapWidth->options
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
 msgid "None"
 msgstr ""
 
@@ -987,16 +984,16 @@ msgstr "Färger"
 msgid "Color Write"
 msgstr "Skriv"
 
-#. 5.6->settings-schema.json->DiskUsage_chartType->description
-msgid "Type of chart"
+#. 5.6->settings-schema.json->DiskUsage_value_display->description
+msgid "Display value"
 msgstr ""
 
-#. 5.6->settings-schema.json->DiskUsage_chartType->options
-msgid "Bar"
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
+msgid "Hovering over"
 msgstr ""
 
-#. 5.6->settings-schema.json->DiskUsage_chartType->options
-msgid "Pie"
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
+msgid "Always"
 msgstr ""
 
 #. 5.6->settings-schema.json->DiskUsage_colorAlert->description

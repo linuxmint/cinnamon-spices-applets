@@ -291,7 +291,8 @@
         "DiskUsage_labelOn",
         "DiskUsage_squared",
         "DiskUsage_width",
-        "DiskUsage_mergeAll"
+        "DiskUsage_mergeAll",
+        "DiskUsage_value_display"
       ]
     },
     "sectionDiskUsageColors": {
@@ -1195,13 +1196,14 @@
     "default": false,
     "description": "Merge all"
   },
-  "DiskUsage_chartType": {
+  "DiskUsage_value_display": {
     "type": "combobox",
-    "default": "bar",
-    "description": "Type of chart",
+    "default": "hover",
+    "description": "Display value",
     "options": {
-      "Bar": "bar",
-      "Pie": "pie"
+      "None": "none",
+      "Hovering over": "hover",
+      "Always": "always"
     }
   },
   "DiskUsage_colorUsed": {

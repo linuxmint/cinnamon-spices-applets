@@ -1,3 +1,9 @@
+### v3.10.2~20260403
+  * Disk usage: The user can choose whether or not to display the usage percentage for each disk in the panel.
+  * Fixes [#8487](https://github.com/linuxmint/cinnamon-spices-applets/issues/8487)
+  * Fixes errors related to tooltip display.
+  * Some improvements.
+
 ### v3.10.1~20260324
   * The user can choose between the htop method (recommended) and the System Monitor method to calculate memory values.
   * Fixes [#8457](https://github.com/linuxmint/cinnamon-spices-applets/issues/8457)
