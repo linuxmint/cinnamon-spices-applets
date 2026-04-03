@@ -1,0 +1,13 @@
+# This file is managed by the Bing Daily applet.
+# Manual edits will be overwritten when settings change.
+
+[Unit]
+Description=Bing Daily Wallpaper Refresh Timer
+
+[Timer]
+OnCalendar=*-*-* 08:00:00
+Persistent=true
+Unit=bing-daily.service
+
+[Install]
+WantedBy=timers.target
