@@ -226,7 +226,12 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_tempColorCrit", "CPU_tempColorCrit");
         this.settings.bind("CPU_tempCorner", "CPU_tempCorner");
         this.settings.bind("CPU_width", "CPU_width", () => { this.adjust_CPU_width() });
-        this.settings.bind("CPU_mergeAll", "CPU_mergeAll");
+        this.settings.bind("CPU_mergeAll", "CPU_mergeAll", (value) => {
+            if (value === false) {
+                this.CPU_showLoadOverTime = false;
+                this.CPU_ignoreHyperthreading = false;
+            }
+        });
         this.settings.bind("CPU_ignoreHyperthreading", "CPU_ignoreHyperthreading", (value) => {
             if (value === false) this.CPU_showLoadOverTime = false;
         });
@@ -280,8 +285,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("DiskUsage_squared", "DiskUsage_squared");
         this.settings.bind("DiskUsage_width", "DiskUsage_width", () => { this.adjust_DiskUsage_width() });
         this.settings.bind("DiskUsage_mergeAll", "DiskUsage_mergeAll");
-        //this.settings.bind("DiskUsage_chartType", "DiskUsage_chartType");
-        this.DiskUsage_chartType = "bar";
+        this.settings.bind("DiskUsage_value_display", "DiskUsage_value_display");
         this.settings.bind("DiskUsage_colorUsed", "DiskUsage_colorUsed");
         this.settings.bind("DiskUsage_colorFree", "DiskUsage_colorFree");
         this.settings.bind("DiskUsage_colorAlert", "DiskUsage_colorAlert");
@@ -369,10 +373,7 @@ class MCSM extends Applet.IconApplet {
         this.diskGraph.autoScale = this.Disk_autoscale;
         this.diskGraph.logScale = this.Disk_logscale;
 
-        if (this.DiskUsage_chartType === "bar")
-            this.diskUsageGraph = new Graphs.GraphVBars100(this.graphArea, this);
-        else
-            this.diskUsageGraph = new Graphs.GraphPieChart(this.graphArea, this);
+        this.diskUsageGraph = new Graphs.GraphVBars100(this.graphArea, this);
 
         this.actor.add_actor(this.graphArea);
         this.graphArea.connect('repaint', (area) => this.onGraphRepaint(area));
@@ -1252,23 +1253,17 @@ class MCSM extends Applet.IconApplet {
                 sumSize = sumSize + size;
                 sumUsed = sumUsed + used;
             } else {
-                if (this.DiskUsage_chartType === "bar")
-                    data.push({
-                        "value": 1.0 * used / size,
-                        "maxvalue": maxValue
-                    });
-                else
-                    data.push([size, used]);
+                data.push({
+                    "value": 1.0 * used / size,
+                    "maxvalue": maxValue
+                });
             }
         }
         if (this.DiskUsage_mergeAll) {
-            if (this.DiskUsage_chartType === "bar")
-                data.push({
-                    "value": 1.0 * sumUsed / sumSize,
-                    "maxvalue": 0.8
-                });
-            else
-                data.push([1 * sumSize, 1 * sumUsed]);
+            data.push({
+                "value": 1.0 * sumUsed / sumSize,
+                "maxvalue": 0.8
+            });
         }
         this.diskUsageProvider.setData(data);
     }
@@ -1388,14 +1383,14 @@ class MCSM extends Applet.IconApplet {
         return true;
     }
 
-    on_applet_added_to_panel() {
+    on_applet_added_to_panel(userEnabled) {
         this.isRunning = true;
         this._renew_network_devices_status();
         this.monitor_interfaces();
         this.run_main_loop();
     }
 
-    on_applet_removed_from_panel() {
+    on_applet_removed_from_panel(deleteConfig) {
         this.isRunning = false;
         this.disconnect_monitors();
         remove_all_sources();
@@ -1471,15 +1466,15 @@ class MemDataProvider {
         if (this.applet.Mem_showBytesInTooltip) {
             let [strMemUsed, unitMemUsed] = formatBytesValueUnit(this.memTotal * this.currentReadings[0], 2, false);
             let [strMemAvail, unitMemAvail] = formatBytesValueUnit(this.memTotal * (1 - this.currentReadings[0]), 2, false);
-            toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(strMemUsed).toFixed(2), 2).padStart(6, ' ') + " " + unitMemUsed.padStart(6, ' ') + '\n';
-            toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(strMemAvail).toFixed(2), 2).padStart(6, ' ') + " " + unitMemAvail.padStart(6, ' ') + '\n';
+            toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t'  + "" + formatNumber(parseFloat(strMemUsed).toFixed(2), 2).padStart(8, ' ') + " " + unitMemUsed.padStart(6, ' ') + '\n';
+            toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t'  + "" + formatNumber(parseFloat(strMemAvail).toFixed(2), 2).padStart(8, ' ') + " " + unitMemAvail.padStart(6, ' ') + '\n';
         }
         let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
         let percentChar = "%";
         if (this.applet.percentAtEndOfLine)
             percentChar = "%".padStart(6, " ");
         for (let i = 0; i < attributes.length; i++) {
-            toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + " " + formatNumber(parseFloat((Math.round(1000 * this.currentReadings[i])/10)).toFixed(2), 2).padStart(6, ' ') + " " + percentChar + '\n';
+            toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + "" + formatNumber(parseFloat((Math.round(1000 * this.currentReadings[i])/10)).toFixed(2), 2).padStart(8, ' ') + " " + percentChar + '\n';
         }
         return toolTipString;
     }
@@ -1531,10 +1526,8 @@ class BufferCacheSharedDataProvider {
         for (let i=0, len=attributes.length; i<len; i++) {
             let [value, unit] = formatBytesValueUnit(Math.round(this.currentReadings[i]), 2, false);
             value = formatNumber(parseFloat(value).toFixed(2), 2);
-            if ((""+value).length < 7)
-                toolTipString += attributes[i].padStart(spaces - lenColon, ' ') + colon + "\t" + " " + value.padStart(6, ' ') + " " + unit.padStart(6, ' ') + '\n';
-            else
-                toolTipString += attributes[i].padStart(spaces - lenColon, ' ') + colon + "\t" + "" + value.padStart(5, ' ') + " " + unit.padStart(6, ' ') + '\n';
+            let valueLen = (""+value).length;
+            toolTipString += attributes[i].padStart(spaces - lenColon, ' ') + colon + "\t" + "" + value.padStart(8, ' ') + " " + unit.padStart(6, ' ') + '\n';
         }
         return toolTipString;
     }
@@ -1591,8 +1584,8 @@ class SwapDataProvider {
         if (this.applet.Mem_showBytesInTooltip) {
             let [swapUsedAmount, swapUsedUnit] = formatBytesValueUnit(this.swapTotal * this.currentReadings[0], 2, false);
             let [swapAvailableAmount, swapAvailableUnit] = formatBytesValueUnit(this.swapTotal * (1 - this.currentReadings[0]), 2, false);
-            toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(swapUsedAmount).toFixed(2), 2).padStart(6, ' ') + " " + swapUsedUnit.padStart(6, ' ') + '\n';
-            toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t'  + " " + formatNumber(parseFloat(swapAvailableAmount).toFixed(2), 2).padStart(6, ' ') + " " + swapAvailableUnit.padStart(6, ' ') + '\n';
+            toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t'  + "" + formatNumber(parseFloat(swapUsedAmount).toFixed(2), 2).padStart(8, ' ') + " " + swapUsedUnit.padStart(6, ' ') + '\n';
+            toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t'  + "" + formatNumber(parseFloat(swapAvailableAmount).toFixed(2), 2).padStart(8, ' ') + " " + swapAvailableUnit.padStart(6, ' ') + '\n';
         }
         let percentChar = "%";
         if (this.applet.percentAtEndOfLine)
@@ -1600,7 +1593,7 @@ class SwapDataProvider {
         
         let colon = _(":");
         let lenColon = Math.max(colon.length - 1, 0);
-        toolTipString += trans.padStart(spaces - lenColon, ' ') + colon + '\t' + " " + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(6, ' ') + " " + percentChar + '\n';
+        toolTipString += trans.padStart(spaces - lenColon, ' ') + colon + '\t' + "" + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(8, ' ') + " " + percentChar + '\n';
         return toolTipString;
     }
 
@@ -1667,14 +1660,14 @@ class MultiCpuDataProvider {
         if (this.applet.CPU_showLoadOverTime) {
             let percentage = formatNumber(parseInt(100 * this.currentReadings[this.currentReadings.length - 1]), 0);
             var percentage_str = "" + percentage;
-            percentage_str = percentage_str.padStart(3);
+            percentage_str = percentage_str.padStart(4);
             toolTipString += (_('CPU') + ' ').padStart(spaces - lenColon, ' ');
             toolTipString += colon + '\t' + " " + percentage_str + " " + percentChar + '\n';
         } else {
             for (let i = 0; i < this.CPUCount; i++) {
                 let percentage = formatNumber(parseInt(100 * this.currentReadings[i]), 0);
                 var percentage_str = "" + percentage;
-                percentage_str = percentage_str.padStart(3);
+                percentage_str = percentage_str.padStart(4);
                 if (this.applet.CPU_mergeAll) {
                     toolTipString += (_('CPU') + ' ').padStart(spaces - lenColon, ' ');
                 } else {
@@ -1842,17 +1835,11 @@ class NetDataProvider {
             toolTipString += name.padEnd(22) + '\n';
             
             if (this.applet.Net_symbolsInTooltip) {
-                toolTipString += (' ▼︎' + _(':')).split(':')[0].padStart(spaces + 1, ' ') + ':' + "\t" + " " + down_value.padStart(6) + " " + down_unit.padStart(6, ' ') + '\n';
-                toolTipString += (' ▲' + _(':')).split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + " " + up_value.padStart(6) + " " + up_unit.padStart(6, ' ') + '\n';
+                toolTipString += (' ▼︎' + _(':')).split(':')[0].padStart(spaces + 1, ' ') + ':' + "\t" + "" + down_value.padStart(8) + " " + down_unit.padStart(6, ' ') + '\n';
+                toolTipString += (' ▲' + _(':')).split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + "" + up_value.padStart(8) + " " + up_unit.padStart(6, ' ') + '\n';
             } else {
-                if ((""+down_value).length < 7)
-                    toolTipString += _('Down:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + down_value.padStart(6) + " " + down_unit.padStart(6, ' ') + '\n';
-                else
-                    toolTipString += _('Down:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + down_value.padStart(5) + "" + down_unit.padStart(6, ' ') + '\n';
-                if ((""+up_value).length < 7)
-                    toolTipString += _('Up:').split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + " " + up_value.padStart(6) + " " + up_unit.padStart(6, ' ') + '\n';
-                else
-                    toolTipString += _('Up:').split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + "" + up_value.padStart(5) + " " + up_unit.padStart(6, ' ') + '\n';
+                toolTipString += _('Down:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + down_value.padStart(8) + " " + down_unit.padStart(6, ' ') + '\n';
+                toolTipString += _('Up:').split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + "" + up_value.padStart(8) + " " + up_unit.padStart(6, ' ') + '\n';
             }
         }
         return toolTipString;
@@ -1988,17 +1975,11 @@ class DiskDataProvider {
                 toolTipString += this.currentReadings[i].name.padEnd(22) + '\n';
                 
             if (this.applet.Disk_symbolsInTooltip) {
-                toolTipString += (' ▲' + _(':')).split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + read.padStart(6, " ") + " " + read_unit.padStart(6, " ") + '\n';
-                toolTipString += (' ▼︎' + _(':')).split(':')[0].padStart(spaces + 1, ' ') + ':' + "\t" + " " + write.padStart(6, " ") + " " + write_unit.padStart(6, " ") + '\n';
+                toolTipString += (' ▲' + _(':')).split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + read.padStart(8, " ") + " " + read_unit.padStart(6, " ") + '\n';
+                toolTipString += (' ▼︎' + _(':')).split(':')[0].padStart(spaces + 1, ' ') + ':' + "\t" + "" + write.padStart(8, " ") + " " + write_unit.padStart(6, " ") + '\n';
             } else {
-                if ((""+read).length < 7)
-                    toolTipString += _('Read:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + read.padStart(6, " ") + " " + read_unit.padStart(6, " ") + '\n';
-                else
-                    toolTipString += _('Read:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + read.padStart(5, " ") + " " + read_unit.padStart(6, " ") + '\n';
-                if ((""+write).length < 7)
-                    toolTipString += _('Write:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + " " + write.padStart(6, " ") + " " + write_unit.padStart(6, " ") + '\n';
-                else
-                    toolTipString += _('Write:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + write.padStart(5, " ") + " " + write_unit.padStart(6, " ") + '\n';
+                toolTipString += _('Read:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + read.padStart(8, " ") + " " + read_unit.padStart(6, " ") + '\n';
+                toolTipString += _('Write:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + write.padStart(8, " ") + " " + write_unit.padStart(6, " ") + '\n';
             }
         }
         return toolTipString;
@@ -2063,15 +2044,15 @@ class DiskUsageDataProvider {
             let maxPercentage = Math.round(100 * this.currentReadings[i].maxvalue, 2);
             if (this.applet.DiskUsage_mergeAll) {
                 if (percentage < maxPercentage)
-                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t ' + formatNumber(percentage, 0).padStart(3, ' ') + " " + percentChar + '\n';
+                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t ' + formatNumber(percentage, 0).padStart(4, ' ') + " " + percentChar + '\n';
                 else
-                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t <b>' + formatNumber(percentage, 0).padStart(3, ' ') + " " + percentChar + '</b>\n';
+                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t <b>' + formatNumber(percentage, 0).padStart(4, ' ') + " " + percentChar + '</b>\n';
             } else {
                 let name = names[i];
                 if (percentage < maxPercentage)
-                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t ' + formatNumber(percentage, 0).padStart(3, ' ') + " " + percentChar + '\n';
+                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t ' + formatNumber(percentage, 0).padStart(4, ' ') + " " + percentChar + '\n';
                 else
-                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t <b>' + formatNumber(percentage, 0).padStart(3, ' ') + " " + percentChar + '</b>\n';
+                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t <b>' + formatNumber(percentage, 0).padStart(4, ' ') + " " + percentChar + '</b>\n';
             }
         }
 

@@ -268,7 +268,6 @@ class GraphVBars {
       }
       areaContext.setSourceRGBA(r, g, b, a);
 
-      //~ this.drawRoundedRectangle(areaContext, vbarOffset, _height - vbarHeight, vbarWidth, vbarHeight, 1.5);
       this.drawRoundedRectangle(areaContext, vbarOffset, _height - vbarHeight, vbarWidth, vbarHeight, 1.0);
       areaContext.fill();
     }
@@ -486,6 +485,22 @@ class GraphVBars100 extends GraphVBars {
         areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
         areaContext.moveTo(_width / 2, 0); //place text in center of graph area
         PangoCairo.layout_path(areaContext, pangolayout);
+        areaContext.fill();
+      }
+
+      // Show the percentage value on each bar:
+      if (this.applet.DiskUsage_value_display === "always" || (this.applet.DiskUsage_value_display === "hover" && this.applet.hovered)) {
+        let percentValue = Math.round(currentReadings[i].value * 100) + "%";
+        let pangolayoutPerCent = area.create_pango_layout(percentValue);
+        pangolayoutPerCent.set_alignment(Pango.Alignment.CENTER);
+        pangolayoutPerCent.set_width(vbarWidth);
+        let fontsize_px = Math.trunc(1 / 3 * _height);
+        let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
+        pangolayoutPerCent.set_font_description(fontdesc);
+        areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
+        //place text in center of graph area
+        areaContext.moveTo(vbarOffset + vbarWidth / 2, _height / 2); 
+        PangoCairo.layout_path(areaContext, pangolayoutPerCent);
         areaContext.fill();
       }
     }
