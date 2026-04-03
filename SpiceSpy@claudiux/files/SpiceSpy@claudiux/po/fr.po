@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-06 01:25+0100\n"
-"PO-Revision-Date: 2026-03-06 01:26+0100\n"
+"POT-Creation-Date: 2026-04-01 20:28+0200\n"
+"PO-Revision-Date: 2026-04-01 20:31+0200\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,51 +18,71 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:185
+#. applet.js:186
 msgid "score"
 msgstr "score"
 
-#. applet.js:197
+#. applet.js:198
 msgid "comments"
 msgstr "commentaires"
 
-#. applet.js:209
+#. applet.js:210
 msgid "recent issues"
 msgstr "problèmes récents"
 
-#. applet.js:222
+#. applet.js:223
 msgid "translations"
 msgstr "traductions"
 
-#. applet.js:297
+#. applet.js:298
 msgid "Reload icons"
 msgstr "Recharger les icônes"
 
-#. applet.js:303
+#. applet.js:304
 msgid "Visit website"
 msgstr "Visiter le site web"
 
-#. applet.js:832
+#. applet.js:399
+msgid ""
+"Check in progress.\n"
+"Time remaining:"
+msgstr ""
+"Vérification en cours.\n"
+"Temps restant :"
+
+#. applet.js:426
+msgid "Time remaining until the next check:"
+msgstr "Temps restant avant la prochaine vérification :"
+
+#. applet.js:428 applet.js:735
+msgid "Next check at:"
+msgstr "Prochaine vérification à :"
+
+#. applet.js:433
+msgid "Getting Started. Please wait..."
+msgstr "Démarrage en cours. Veuillez patienter..."
+
+#. applet.js:887
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:923
+#. applet.js:978
 msgid "Mark all as read"
 msgstr "Tout marquer comme lu"
 
-#. applet.js:934
+#. applet.js:989
 msgid "Refresh"
 msgstr "Actualiser"
 
-#. applet.js:948
+#. applet.js:1003
 msgid "Refreshing in progress - Click to stop"
 msgstr "En cours d'actualisation - Clic pour arrêter"
 
-#. applet.js:973
+#. applet.js:1017
 msgid "Refreshing in progress"
 msgstr "En cours d'actualisation"
 
-#. applet.js:985
+#. applet.js:1029
 msgid "Configure..."
 msgstr "Configurer..."
 
