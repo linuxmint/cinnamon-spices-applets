@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: screen-inhibit@mtwebster 2.2.0\n"
+"Project-Id-Version: screen-inhibit@mtwebster 2.3.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-01 18:55+0200\n"
+"POT-Creation-Date: 2026-03-31 16:56+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,20 +17,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:21
+#. applet.js:31
 msgid "Currently preventing screensaver"
 msgstr ""
 
-#. applet.js:22
+#. applet.js:32
 msgid "Currently allowing screensaver"
 msgstr ""
 
-#. applet.js:134
+#. applet.js:188
 msgid "Screensaver settings"
 msgstr ""
 
+#. applet.js:192
+msgid "Power settings"
+msgstr ""
+
 #. settings-schema.json->inhibit-at-startup->description
-#. applet.js:138
+#. applet.js:196
 msgid "Inhibit screensaver at startup"
 msgstr ""
 
