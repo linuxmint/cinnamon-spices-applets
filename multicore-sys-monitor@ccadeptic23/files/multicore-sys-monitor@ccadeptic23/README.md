@@ -7,6 +7,8 @@ It also can display the CPU temperature.
 
 For Cinnamon version lesser than 6.4 you must install the `gir1.2-gtop-2.0` package to use this applet. This package is no longer needed with Cinnamon 6.4+.
 
+Better display using the `DejaVuSansMono-Bold.ttf` font from the `fonts-dejavu-mono` package.
+
 ## CPU temperature
 
 By default, this applet read the CPU temperature from the system file: 
