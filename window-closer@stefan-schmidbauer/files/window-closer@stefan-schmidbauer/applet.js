@@ -11,7 +11,7 @@ const Gettext = imports.gettext;
 
 const UUID = "window-closer@stefan-schmidbauer";
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 function _(str) {
     return Gettext.dgettext(UUID, str);
@@ -52,7 +52,7 @@ WindowCloserApplet.prototype = {
     },
 
     _getWindows: function() {
-        let workspaceManager = global.workspace_manager || global.screen;
+        let workspaceManager = global.workspace_manager;
         let windows = [];
         let nWorkspaces = workspaceManager.get_n_workspaces();
         for (let w = 0; w < nWorkspaces; w++) {
