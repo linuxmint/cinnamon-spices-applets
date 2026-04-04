@@ -70,15 +70,15 @@ const properties = [
 ];
 
 const orig_names = [
-    _("CPU"), 
-    _("MEM"), 
-    _("NET"), 
-    _("DISK"), 
+    _("CPU"),
+    _("MEM"),
+    _("NET"),
+    _("DISK"),
     _("DISK USAGE")
 ];
 const orig_charts = [
-    [properties[0]], 
-    [properties[1], properties[2]], 
+    [properties[0]],
+    [properties[1], properties[2]],
     [properties[3]],
     [properties[4]],
     [properties[5]]
@@ -166,7 +166,7 @@ class MCSM extends Applet.IconApplet {
 
         this.metadata = metadata;
         this.instance_id = instance_id;
-        
+
         this.hyperThreadingIsOn = false;
         readFileAsync("/sys/devices/system/cpu/smt/control").then( (status) => {
             let _status = status.trim();
@@ -294,8 +294,8 @@ class MCSM extends Applet.IconApplet {
         for (let i=0; i<nb_colors; i++)
             this.settings.bind(`color${i}`, `color${i}`, () => { this.on_color_changed() });
 
-        if (this.refreshRate < 500)
-            this.refreshRate = 500;
+        //~ if (this.refreshRate < 500)
+            //~ this.refreshRate = 500;
 
         this.on_color_changed();
         this.useSymbolicIcon = true;
@@ -379,7 +379,7 @@ class MCSM extends Applet.IconApplet {
         this.actor.add_actor(this.graphArea);
         this.graphArea.connect('repaint', (area) => this.onGraphRepaint(area));
     }
-    
+
     controlDisplayOrder(reinit=false) {
         var displayOrder = [];
         var order = [];
@@ -396,7 +396,7 @@ class MCSM extends Applet.IconApplet {
         } else {
             order = orig_names;
         }
-        
+
         for (let name of order)
             displayOrder.push({"id": name});
 
@@ -405,11 +405,11 @@ class MCSM extends Applet.IconApplet {
             this.displayOrder = displayOrder;
         }, 0);
     }
-    
+
     reinitDisplayOrder() {
         this.controlDisplayOrder(true);
     }
-    
+
     adjust_CPU_width() {
         if (this.graphStep === 1) return;
         let CPU_width = Math.max(
@@ -456,7 +456,7 @@ class MCSM extends Applet.IconApplet {
         );
         this.DiskUsage_width = DiskUsage_width;
     }
-    
+
     on_apply_width_multiple() {
         this.adjust_CPU_width();
         this.adjust_Mem_width();
@@ -471,7 +471,7 @@ class MCSM extends Applet.IconApplet {
             this.panelHeight = this.iconSize * global.ui_scale;
         } else if (this.graphHeightPercent) {
             this.graphHeight = Math.ceil(this._panelHeight * this.graphHeightPercent / 100);
-            
+
             this.panelHeight = this.graphHeight; // * global.ui_scale
         } else {
             this.panelHeight = this._panelHeight;
@@ -490,7 +490,8 @@ class MCSM extends Applet.IconApplet {
             this.mainLoopId = null;
         }
         this.isRunning = true;
-        this.mainLoopId = timeout_add(this.refreshRate, () => {
+        let rate = 1 * this.refreshRate;
+        this.mainLoopId = timeout_add(rate, () => {
             this.get_mem_info();
             this.get_cpu_info();
             this.get_net_info();
@@ -508,7 +509,7 @@ class MCSM extends Applet.IconApplet {
             return this.isRunning;
         });
     }
-    
+
     onGraphRepaint(area) {
         this._isHighlighted;
         if (this.without_any_graph) return;
@@ -524,7 +525,7 @@ class MCSM extends Applet.IconApplet {
                 _properties = _properties.concat(orig_charts[index]);
             }
         };
-        
+
         for (let i = 0, len = _properties.length; i < len; i++) {
             if (_properties[i].abbrev === 'Swap') {
                 continue;
@@ -725,7 +726,7 @@ class MCSM extends Applet.IconApplet {
             for (let child of children) {
                 let name = child.get_name();
                 let operstate_file_path = `${net_dir_path}/${name}/operstate`;
-                
+
                 readFileAsync(operstate_file_path).then( (net_status) => {
                     net_status = net_status.trim();
                     ret += `${name}:${net_status} `;
@@ -733,25 +734,25 @@ class MCSM extends Applet.IconApplet {
             }
         }
         let idto = setTimeout( () => {
-			clearTimeout(idto);
-			returnedDevices = ret.trim().split(" ");
-			for (let d of returnedDevices) {
-				let [dev, status] = d.split(":");
-				if (knownDevices.indexOf(dev) < 0) {
-					if (status === "up" || status === "down") {
-						new_Net_devicesList.push({
-							"enabled": status === "up",
-							"id": dev,
-							"name": dev,
-							"colorDown": (knownDevices.length * 2) % nb_colors,
-							"colorUp": (knownDevices.length * 2 + 1) % nb_colors
-						});
-						knownDevices.push(dev);
-					}
-				}
-			}
-			this.Net_devicesList = new_Net_devicesList;
-		}, 2100);
+            clearTimeout(idto);
+            returnedDevices = ret.trim().split(" ");
+            for (let d of returnedDevices) {
+                let [dev, status] = d.split(":");
+                if (knownDevices.indexOf(dev) < 0) {
+                    if (status === "up" || status === "down") {
+                        new_Net_devicesList.push({
+                            "enabled": status === "up",
+                            "id": dev,
+                            "name": dev,
+                            "colorDown": (knownDevices.length * 2) % nb_colors,
+                            "colorUp": (knownDevices.length * 2 + 1) % nb_colors
+                        });
+                        knownDevices.push(dev);
+                    }
+                }
+            }
+            this.Net_devicesList = new_Net_devicesList;
+        }, 2100);
     }
 
     on_Net_cleardevlist_btn_clicked() {
@@ -891,7 +892,7 @@ class MCSM extends Applet.IconApplet {
         if (!this.Mem_enabled) return;
         let old, duration;
         if (DEBUG) old = Date.now();
-        
+
         readFileAsync("/proc/meminfo").then((contents) => {
             var data = [];
             const lines = contents.split("\n");
@@ -939,10 +940,10 @@ class MCSM extends Applet.IconApplet {
         if (!this.CPU_enabled) return;
         let old, duration;
         if (DEBUG) old = Date.now();
-        
+
         if (
-            this.CPU_showTemp && 
-            this.CPU_tempPath.length > 0 && 
+            this.CPU_showTemp &&
+            this.CPU_tempPath.length > 0 &&
             GLib.file_test(this.CPU_tempPath, GLib.FileTest.EXISTS)
         ) {
             readFileAsync(this.CPU_tempPath).then((contents) => {
@@ -956,7 +957,7 @@ class MCSM extends Applet.IconApplet {
                 }
             }); //.catch(null)
         }
-        
+
         readFileAsync("/proc/stat").then((contents) => {
             var data = [];
             const lines = contents.split("\n");
@@ -1011,7 +1012,7 @@ class MCSM extends Applet.IconApplet {
                         let [totalValue, idleValue] = values[0].split(",");
                         totalValue = 1 * totalValue;
                         idleValue = 1 * idleValue;
-                        
+
                         data.splice(0, 1);
                         let total = totalValue - this.oldCPU_Total_Values[0];
                         let idle = idleValue - this.oldCPU_Idle_Values[0];
@@ -1062,14 +1063,14 @@ class MCSM extends Applet.IconApplet {
             this.oldCPUvalues = values;
 
             this.multiCpuProvider.setData(data);
-            
+
             if (DEBUG) {
                 duration = Date.now() - old;
                 global.log(UUID + " - get_cpu_info Duration: " + duration + " ms.");
             }
         });
     }
-    
+
     set_net_devices_data() {
         let dataNet = JSON.parse(JSON.stringify(this.lastDataNet, null, 4));
         var datastring = "";
@@ -1121,7 +1122,7 @@ class MCSM extends Applet.IconApplet {
         }
         this.networkProvider.setData(data, disabledDevices);
     }
-    
+
     _read_rx_tx_bytes(name, status) {
         if (status != "up") return;
         const net_dir_path = "/sys/class/net";
@@ -1161,12 +1162,12 @@ class MCSM extends Applet.IconApplet {
                     let net_status = output.trim();
                     this._read_rx_tx_bytes(name, net_status);
                 });
-                
+
             }
             children.close(null);
         }
         this.set_net_devices_data();
-        
+
         if (DEBUG) {
             duration = Date.now() - old;
             global.log(UUID + " - get_net_info Duration: " + duration + " ms.");
@@ -1193,7 +1194,7 @@ class MCSM extends Applet.IconApplet {
         var data = [];
         readFileAsync("/proc/diskstats").then( (result) => {
             let diskstats = result.trim().split("\n");
-            
+
             var sum_read = 0;
             var sum_write = 0;
             for (let line of diskstats) {
@@ -1216,7 +1217,7 @@ class MCSM extends Applet.IconApplet {
                         "write": _write
                     });
                 }
-    
+
             }
             if (this.Disk_mergeAll) {
                 data.push({
@@ -1354,7 +1355,7 @@ class MCSM extends Applet.IconApplet {
     on_applet_middle_clicked(event) {
         this.configureApplet(0);
     }
-    
+
     _onButtonPressEvent (actor, event) {
         if (!this._applet_enabled) {
             return false;
@@ -1591,7 +1592,7 @@ class SwapDataProvider {
         let percentChar = "%";
         if (this.applet.percentAtEndOfLine)
             percentChar = "%".padStart(6, " ");
-        
+
         let colon = _(":");
         let lenColon = Math.max(colon.length - 1, 0);
         toolTipString += trans.padStart(spaces - lenColon, ' ') + colon + '\t' + "" + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(8, ' ') + " " + percentChar + '\n';
@@ -1657,7 +1658,7 @@ class MultiCpuDataProvider {
         let percentChar = "%";
         if (this.applet.percentAtEndOfLine)
             percentChar = "%".padStart(9, " ");
-            
+
         if (this.applet.CPU_showLoadOverTime) {
             let percentage = formatNumber(parseInt(100 * this.currentReadings[this.currentReadings.length - 1]), 0);
             var percentage_str = "" + percentage;
@@ -1723,7 +1724,7 @@ class NetDataProvider {
             } else {
                 if (dev["inTotal"]) this.inTotalDevices.push(dev["id"]);
             }
-            
+
             this.currentReadings.push({
                 "id": dev["id"],
                 "name": (dev["name"].length === 0) ? dev["id"] : dev["name"],
@@ -1776,7 +1777,7 @@ class NetDataProvider {
                 currentAmount[0] = currentAmount[0] + this.currentReadings[i]["down"];
                 currentAmount[1] = currentAmount[1] + this.currentReadings[i]["up"];
             }
-            
+
             if (this.currentReadings[i].lastReading[0] === 0 && this.currentReadings[i].lastReading[1] === 0) {
                 this.currentReadings[i].lastReading[0] = this.currentReadings[i]["down"];
                 this.currentReadings[i].lastReading[1] = this.currentReadings[i]["up"];
@@ -1789,10 +1790,10 @@ class NetDataProvider {
             this.currentReadings[i].tooltipUp = Math.abs(Math.round(
                 ((this.currentReadings[i]["up"] - this.currentReadings[i].lastReading[1]) / secondsSinceLastUpdate)
             ));
-            
+
             this.currentReadings[i].lastReading[0] = this.currentReadings[i]["down"];
             this.currentReadings[i].lastReading[1] = this.currentReadings[i]["up"];
-            
+
             this.currentReadings[i].readingRatesList[0] = this.currentReadings[i].tooltipDown;
             this.currentReadings[i].readingRatesList[1] = this.currentReadings[i].tooltipUp;
         }
@@ -1834,7 +1835,7 @@ class NetDataProvider {
             }
             let name = (this.currentReadings[i]['name'].length === 0) ? this.currentReadings[i].id : this.currentReadings[i].name;
             toolTipString += name.padEnd(22) + '\n';
-            
+
             if (this.applet.Net_symbolsInTooltip) {
                 toolTipString += (' ▼︎' + _(':')).split(':')[0].padStart(spaces + 1, ' ') + ':' + "\t" + "" + down_value.padStart(8) + " " + down_unit.padStart(6, ' ') + '\n';
                 toolTipString += (' ▲' + _(':')).split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + "" + up_value.padStart(8) + " " + up_unit.padStart(6, ' ') + '\n';
@@ -1974,7 +1975,7 @@ class DiskDataProvider {
                 toolTipString += this.currentReadings[i].name.padStart(1, " ").padEnd(title.length - this.currentReadings[i].id.length - 1, " ") + this.currentReadings[i].id + '\n';
             else
                 toolTipString += this.currentReadings[i].name.padEnd(22) + '\n';
-                
+
             if (this.applet.Disk_symbolsInTooltip) {
                 toolTipString += (' ▲' + _(':')).split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + read.padStart(8, " ") + " " + read_unit.padStart(6, " ") + '\n';
                 toolTipString += (' ▼︎' + _(':')).split(':')[0].padStart(spaces + 1, ' ') + ':' + "\t" + "" + write.padStart(8, " ") + " " + write_unit.padStart(6, " ") + '\n';
