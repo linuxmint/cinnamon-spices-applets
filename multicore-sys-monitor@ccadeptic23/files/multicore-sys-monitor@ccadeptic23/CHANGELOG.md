@@ -1,3 +1,7 @@
+### v3.10.3~20260404
+  * Memory: The user can choose whether or not to display the memory usage percentage.
+  * Fixes [#8493](https://github.com/linuxmint/cinnamon-spices-applets/issues/8493)
+
 ### v3.10.2~20260403
   * Disk usage: The user can choose whether or not to display the usage percentage for each disk in the panel.
   * Fixes [#8487](https://github.com/linuxmint/cinnamon-spices-applets/issues/8487)

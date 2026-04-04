@@ -184,7 +184,8 @@
         "Mem_width",
         "Mem_chartType",
         "Mem_startAt12Oclock",
-        "Mem_showBytesInTooltip"
+        "Mem_showBytesInTooltip",
+        "Mem_value_display"
       ]
     },
     "sectionMemoryColors": {
@@ -733,6 +734,16 @@
     "type": "switch",
     "default": true,
     "description": "Show the amounts (in Bytes) of Total, Used and Available memory in the tooltip"
+  },
+  "Mem_value_display": {
+    "type": "combobox",
+    "default": "hover",
+    "description": "Display memory usage percentage",
+    "options": {
+      "None": "none",
+      "Hovering over": "hover",
+      "Always": "always"
+    }
   },
   "Mem_colorUsedup": {
     "type": "colorchooser",
