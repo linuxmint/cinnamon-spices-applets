@@ -276,7 +276,7 @@ class GPasteApplet extends Applet.IconApplet {
             }
         }
 
-        this.refresh(oldSize);
+        this.refresh();
     }
 
     /*
@@ -350,7 +350,7 @@ class GPasteApplet extends Applet.IconApplet {
     /*
      * Refresh the history items
      */
-    refresh (startID) {
+    refresh () {
         this._historyItems.forEach(item => item.actor.set_style(null));
 
         if (this._searchResults.length > 0) { // Search field isn't empty
@@ -364,7 +364,7 @@ class GPasteApplet extends Applet.IconApplet {
                     size = maxSize;
                 }
 
-                for (let i = startID; i < size; ++i) {
+                for (let i = 0; i < size; ++i) {
                     const idx = this.reverseHistory ? (size - 1 - i) : i;
                     this._historyItems[i].setIndex(idx);
                 }
@@ -423,7 +423,7 @@ class GPasteApplet extends Applet.IconApplet {
             this.mitemNoSearchResults.actor.hide();
 
             this._searchResults = [];
-            this.refresh(0);
+            this.refresh();
         }
     }
 
@@ -481,28 +481,7 @@ class GPasteApplet extends Applet.IconApplet {
     _onClientUpdate(client, action, target, position) {
         debugLog("[" + uuid + "] Client event: _onClientUpdate");
 
-        if (this.reverseHistory) {
-            this.refresh(0);
-            return;
-        }
-
-        switch (target) {
-            case GPaste.UpdateTarget.ALL:
-                this.refresh(0);
-                break;
-
-            case GPaste.UpdateTarget.POSITION:
-                switch (action) {
-                    case GPaste.UpdateAction.REPLACE:
-                        if (this._historyItems[position])
-                            this._historyItems[position].refresh();
-                        break;
-                    case GPaste.UpdateAction.REMOVE:
-                        this.refresh(position);
-                        break;
-                }
-                break;
-        }
+        this.refresh();
     }
 
     /*
@@ -591,7 +570,7 @@ class GPasteApplet extends Applet.IconApplet {
         if (this._searchResults.length > 0) {
             this.search(this.mitemSearch.getText());
         } else {
-            this.refresh(0);
+            this.refresh();
         }
     }
 
