@@ -473,13 +473,13 @@ class GraphVBars100 extends GraphVBars {
       areaContext.fill();
 
       // Label
+      let fontsize_px = Math.trunc(1 / 3 * _height);
+      let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
       if (labelsEnabled) {
         let pangolayout = area.create_pango_layout(providerName);
 
         pangolayout.set_alignment(Pango.Alignment.CENTER);
         pangolayout.set_width(_width);
-        let fontsize_px = Math.trunc(1 / 3 * _height);
-        let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
         pangolayout.set_font_description(fontdesc);
 
         areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
@@ -494,8 +494,6 @@ class GraphVBars100 extends GraphVBars {
         let pangolayoutPerCent = area.create_pango_layout(percentValue);
         pangolayoutPerCent.set_alignment(Pango.Alignment.CENTER);
         pangolayoutPerCent.set_width(vbarWidth);
-        let fontsize_px = Math.trunc(1 / 3 * _height);
-        let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
         pangolayoutPerCent.set_font_description(fontdesc);
         areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
         //place text in center of graph area
@@ -643,18 +641,34 @@ class GraphPieChart {
     }
 
     // Label
+    let fontsize_px = Math.trunc(1 / 3 * _height);
+    let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
     if (labelsEnabled) {
       let pangolayout = area.create_pango_layout(providerName);
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
       pangolayout.set_width(_width);
-      let fontsize_px = Math.trunc(1 / 3 * _height);
-      let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
       pangolayout.set_font_description(fontdesc);
 
       areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       areaContext.moveTo(_width / 2, 0); //place text in center of graph area
       PangoCairo.layout_path(areaContext, pangolayout);
+      areaContext.fill();
+    }
+
+    //Show percentage value in center of pie chart
+    //~ global.log("this.applet.Mem_value_display: " + this.applet.Mem_value_display + " - this.applet.hovered: " + this.applet.hovered);
+    if (this.applet.Mem_value_display === "always" || (this.applet.Mem_value_display === "hover" && this.applet.hovered)) {
+      let percentValue = (Math.round(currentReadings[0] * 100)) + "%";
+      let pangolayoutPerCent = area.create_pango_layout(percentValue);
+      pangolayoutPerCent.set_alignment(Pango.Alignment.CENTER);
+      pangolayoutPerCent.set_width(_width);
+      pangolayoutPerCent.set_font_description(fontdesc);
+
+      areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
+      //place text in center of graph area
+      areaContext.moveTo(_width / 2, _height / 2); 
+      PangoCairo.layout_path(areaContext, pangolayoutPerCent);
       areaContext.fill();
     }
   }
@@ -902,13 +916,13 @@ class GraphLineChart {
     }
 
     // Label
+    let fontsize_px = Math.trunc(1 / 3 * _height);
+    let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
     if (labelsEnabled) {
       let pangolayout = area.create_pango_layout(providerName);
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
       pangolayout.set_width(width);
-      let fontsize_px = Math.trunc(1 / 3 * _height);
-      let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
       pangolayout.set_font_description(fontdesc);
 
       areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
@@ -971,8 +985,6 @@ class GraphLineChart {
         pangolayout3.set_width(-1); // Required to display it on a single line.
         pangolayout3.set_height(1 / 3 * _height);
       }
-      let fontsize_px = Math.trunc(1 / 3 * _height);
-      let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
       pangolayout2.set_font_description(fontdesc);
       if (pangolayout3 != null)
         pangolayout3.set_font_description(fontdesc);
