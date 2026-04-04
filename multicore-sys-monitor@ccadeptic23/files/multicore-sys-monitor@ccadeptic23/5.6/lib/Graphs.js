@@ -471,7 +471,7 @@ class GraphVBars100 extends GraphVBars {
 
       this.drawRoundedRectangle(areaContext, vbarOffset, _height - vbarHeight, vbarWidth, vbarHeight, 1.0);
       areaContext.fill();
-      
+
       // Label
       let fontsize_px = Math.trunc(1 / 3 * _height);
       let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
@@ -639,7 +639,7 @@ class GraphPieChart {
       }
       
     }
-    
+
     // Label
     let fontsize_px = Math.trunc(1 / 3 * _height);
     let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
@@ -655,7 +655,7 @@ class GraphPieChart {
       PangoCairo.layout_path(areaContext, pangolayout);
       areaContext.fill();
     }
-    
+
     //Show percentage value in center of pie chart
     //~ global.log("this.applet.Mem_value_display: " + this.applet.Mem_value_display + " - this.applet.hovered: " + this.applet.hovered);
     if (this.applet.Mem_value_display === "always" || (this.applet.Mem_value_display === "hover" && this.applet.hovered)) {
