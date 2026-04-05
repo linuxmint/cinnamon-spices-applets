@@ -1,0 +1,11 @@
+{
+    "uuid": "window-closer@stefan-schmidbauer",
+    "name": "Window Closer",
+    "description": "Click to see all open windows. Click a window to close it.",
+    "version": "1.0",
+    "cinnamon-version": ["5.4", "5.6", "5.8", "6.0", "6.2"],
+    "max-instances": 1,
+    "icon": "icon",
+    "author": "Stefan Schmidbauer",
+    "website": "https://github.com/Stefan-Schmidbauer/cinnamon-window-closer"
+}

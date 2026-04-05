@@ -1,0 +1,36 @@
+# Window Closer Applet Translation Template
+# Copyright (C) 2026 Stefan Schmidbauer
+# This file is distributed under the same license as the window-closer@stefan-schmidbauer package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: window-closer@stefan-schmidbauer 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Stefan-Schmidbauer/cinnamon-window-closer/issues\n"
+"POT-Creation-Date: 2026-04-04 15:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:37 applet.js:122
+msgid "Window Closer"
+msgstr ""
+
+#: applet.js:130
+msgid "Click a window to close it"
+msgstr ""
+
+#: applet.js:130
+msgid "Esc to exit"
+msgstr ""
+
+#: applet.js:195
+msgid "No windows open"
+msgstr ""
+
+#: applet.js:363
+msgid "All windows closed!"
+msgstr ""

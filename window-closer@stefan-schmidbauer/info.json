@@ -1,0 +1,5 @@
+{
+    "author": "Stefan Schmidbauer",
+    "description": "A visual window manager applet. Click the panel icon to open a fullscreen overlay showing all open windows as cards with live thumbnails. Click any card to close that window instantly. The overlay stays open so you can close multiple windows in a row.",
+    "website": "https://github.com/Stefan-Schmidbauer/cinnamon-window-closer"
+}
