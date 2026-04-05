@@ -14,10 +14,13 @@
   - [4.1. Core logic](#41-core-logic)
   - [4.2. System/OS interfacing](#42-systemos-interfacing)
 - [5. Committing](#5-committing)
-- [6. Documentation](#6-documentation)
-- [7. Linting for Python widgets (experimental)](#7-linting-for-python-widgets-experimental)
-  - [7.1. Installation](#71-installation)
-  - [7.2. Setting up in VS Code](#72-setting-up-in-vs-code)
+- [6. Bumping dependencies](#6-bumping-dependencies)
+  - [6.1. Dependencies versions](#61-dependencies-versions)
+  - [6.2. Node.js version](#62-nodejs-version)
+- [7. Documentation](#7-documentation)
+- [8. Linting for Python widgets (experimental)](#8-linting-for-python-widgets-experimental)
+  - [8.1. Installation](#81-installation)
+  - [8.2. Setting up in VS Code](#82-setting-up-in-vs-code)
 
 <!-- /TOC -->
 
@@ -25,7 +28,7 @@
 
 ### 1.1. Global
 
-- [pnpm](https://pnpm.io/installation#on-posix-systems) (tested v10.26.2).
+- [pnpm](https://pnpm.io/installation#on-posix-systems)
 
 ### 1.2. Local
 
@@ -148,13 +151,23 @@ Before any commit:
   ./cinnamon-spices-makepot auto-dark-light@gihaume
   ```
 
-## 6. Documentation
+## 6. Bumping dependencies
+
+### 6.1. Dependencies versions
+
+The dependencies versions are defined in `package.json`. They are updated individually using the Dependi extension.
+
+### 6.2. Node.js version
+
+The Node.js version is defined in `pnpm-workspace.yaml`. The chosen version is the LTS stated on the [Node.js website](https://nodejs.org).
+
+## 7. Documentation
 
 Check [`doc/README.md`](./doc/README.md).
 
-## 7. Linting for Python widgets (experimental)
+## 8. Linting for Python widgets (experimental)
 
-### 7.1. Installation
+### 8.1. Installation
 
 - Create environment:
   ```sh
@@ -165,7 +178,7 @@ Check [`doc/README.md`](./doc/README.md).
   ./.venv/bin/pip install -r requirements.txt
   ```
 
-### 7.2. Setting up in VS Code
+### 8.2. Setting up in VS Code
 
 - Install the `ms-python.python` extension.
 - Select the Python interpreter from the `.venv` folder:

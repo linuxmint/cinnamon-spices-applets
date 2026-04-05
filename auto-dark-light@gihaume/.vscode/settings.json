@@ -1,8 +1,8 @@
 {
-    "typescript.tsdk": "node_modules/typescript/lib",
+    "js/ts.tsdk.path": "node_modules/typescript/lib",
+    "js/ts.preferences.quoteStyle": "single", // For imports autocompletion
+
     "python.analysis.extraPaths": [
         "/usr/share/cinnamon/cinnamon-settings/bin"
     ],
-    "javascript.preferences.quoteStyle": "single", // For imports autocompletion
-    "typescript.preferences.quoteStyle": "single" // For imports autocompletion
 }
