@@ -36,7 +36,12 @@
                 "currentSource",
                 "selectedImagePreferences",
                 "market",
-                "apiKey"
+                "apiKey",
+                "image-width-option",
+                "image-height-option",
+                "image-blur-option",
+                "image-blur-amount",
+                "image-grayscale-option"
             ]
         },
         "section1": {
@@ -65,7 +70,8 @@
         "options": {
             "Bing": "Bing",
             "Wikimedia": "Wikimedia",
-            "APOD": "APOD"
+            "APOD": "APOD",
+            "Picsum Photos": "Picsum Photos"
         }
     },
     "refreshInterval": {
@@ -110,6 +116,7 @@
         "type": "combobox",
         "default": 0,
         "description": "Selected image",
+        "dependency": "currentSource!=Picsum Photos",
         "options": {
             "Most recent": 0,
             "Random": 1
@@ -169,6 +176,40 @@
         "description": "API key",
         "dependency": "currentSource=APOD",
         "tooltip": "Set your API key for APOD API. The default API key is used for initially exploring APIs prior to signing up, but it has much lower rate limits."
+    },
+    "image-width-option": {
+        "type": "entry",
+        "default": "1920",
+        "description": "Set the prefered width for the image",
+        "dependency": "currentSource=Picsum Photos"
+    },
+    "image-height-option": {
+        "type": "entry",
+        "default": "1080",
+        "description": "Set the prefered height for the image",
+        "dependency": "currentSource=Picsum Photos"
+    },
+    "image-blur-option": {
+        "type": "checkbox",
+        "default": false,
+        "dependency": "currentSource=Picsum Photos",
+        "description": "Get a blurred image"
+    },
+    "image-blur-amount": {
+        "type": "spinbutton",
+        "min": 1,
+        "max": 10,
+        "units": "",
+        "step": 1,
+        "default": 1,
+        "dependency": "image-blur-option",
+        "description": "Adjust the amount of blur by providing a number between 1 and 10"
+    },
+    "image-grayscale-option": {
+        "type": "checkbox",
+        "default": false,
+        "dependency": "currentSource=Picsum Photos",
+        "description": "Get a grayscale image"
     },
     "image-aspect-options": {
         "type": "combobox",
