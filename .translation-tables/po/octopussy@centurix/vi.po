@@ -1,0 +1,120 @@
+# OCTOPRINT MANAGER
+# This file is put in the public domain.
+# centurix, 2020
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: octopussy@centurix 0.1.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:132
+msgid "OctoPussy: OctoPrint manager."
+msgstr "OctoPussy: Trình quản lý OctoPrint."
+
+#. applet.js:205
+msgid "Settings"
+msgstr "Cài đặt"
+
+#. applet.js:278 applet.js:351
+msgid "Time lapsed: "
+msgstr "Thời gian đã trôi: "
+
+#. applet.js:282 applet.js:352
+msgid "Estimated: "
+msgstr "Ước tính: "
+
+#. applet.js:292 applet.js:353
+msgid "Total time: "
+msgstr "Tổng thời gian: "
+
+#. applet.js:355
+msgid "Pause current print"
+msgstr "Tạm dừng bản in hiện tại"
+
+#. applet.js:356
+msgid "Continue current print"
+msgstr "Tiếp tục bản in hiện tại"
+
+#. applet.js:358
+msgid "Change filament"
+msgstr "Đổi sợi in"
+
+#. applet.js:359
+msgid "Camera monitor"
+msgstr "Giám sát camera"
+
+#. applet.js:360
+msgid "Open OctoPrint web"
+msgstr "Mở web OctoPrint"
+
+#. applet.js:362
+msgid "Restart OctoPrint"
+msgstr "Khởi động lại OctoPrint"
+
+#. applet.js:363
+msgid "Shutdown OctoPrint"
+msgstr "Tắt OctoPrint"
+
+#. applet.js:364
+msgid "Configure..."
+msgstr "Cấu hình..."
+
+#. applet.js:400
+msgid "Restart"
+msgstr "Khởi động lại"
+
+#. applet.js:404 applet.js:430
+msgid "Cancel"
+msgstr "Hủy"
+
+#. applet.js:426
+msgid "Shutdown"
+msgstr "Tắt"
+
+#. applet.js:474
+msgid "Please confirm your action!"
+msgstr "Vui lòng xác nhận hành động của bạn!"
+
+#. metadata.json->description
+msgid "An applet to manage OctoPrint."
+msgstr "Applet để quản lý OctoPrint."
+
+#. metadata.json->name
+msgid "OctoPrint manager"
+msgstr "Quản lý OctoPrint"
+
+#. settings-schema.json->octoprintUrl->description
+#. settings-schema.json->octoprintUrl->tooltip
+msgid "OctoPrint API Address"
+msgstr "Địa chỉ API OctoPrint"
+
+#. settings-schema.json->octoprintApiKey->description
+msgid "OctoPrint API Key. Get an API key from the OctoPrint site settings."
+msgstr "Khóa API OctoPrint. Lấy khóa API từ cài đặt trang OctoPrint."
+
+#. settings-schema.json->octoprintInterval->units
+msgid "seconds"
+msgstr "giây"
+
+#. settings-schema.json->octoprintInterval->description
+msgid "Refresh Interval:"
+msgstr "Khoảng thời gian làm mới:"
+
+#. settings-schema.json->octoprintInterval->tooltip
+msgid "Increase or decrease this spinner value to change the refresh interval - use a slow refresh if you have a slow machine"
+msgstr "Tăng hoặc giảm giá trị này để thay đổi khoảng thời gian làm mới - dùng chế độ làm mới chậm nếu máy của bạn chậm"
+
+#. settings-schema.json->octoprintVideoCommand->description
+msgid "Video command to use when showing the webcam. Defaults to vlc."
+msgstr "Lệnh video dùng khi hiển thị webcam. Mặc định là vlc."

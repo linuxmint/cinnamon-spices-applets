@@ -1,0 +1,207 @@
+# MULTI-CORE SYSTEM MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# ccadeptic23, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-04-04 12:32+0200\n"
+"PO-Revision-Date: 2026-03-16 17:37+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 5.6/applet.js:45
+msgid "Unrecoverable:"
+msgstr ""
+
+#. 5.6/applet.js:46
+msgid "Recoverable:"
+msgstr ""
+
+#. 5.6/applet.js:77
+msgid "DISK USAGE"
+msgstr ""
+
+#. 5.6/applet.js:778 5.6/applet.js:821 5.6/applet.js:835
+msgid "root"
+msgstr ""
+
+#. 5.6/applet.js:1471 5.6/applet.js:1589
+msgid "Available:"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_colorCache->description
+#. 5.6/applet.js:1525
+msgid "Cache"
+msgstr ""
+
+#. 4.0/prefs.js:335
+msgid "00-20"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_activity_20_40->description
+#. 4.0/prefs.js:335
+msgid "20-40"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_activity_40_60->description
+#. 4.0/prefs.js:335
+msgid "40-60"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_activity_60_80->description
+#. 4.0/prefs.js:335
+msgid "60-80"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_activity_80_100->description
+#. 4.0/prefs.js:335
+msgid "80-100"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionGeneralOrder->title
+msgid "Display Order"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionTooltip->title
+#. 5.6->settings-schema.json->sectionNetworkTooltip->title
+#. 5.6->settings-schema.json->sectionDiskTooltip->title
+msgid "Tooltip"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "1px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "2px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "4px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "8px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "16px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "32px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "64px"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_ignoreHyperthreading->description
+msgid "Ignore Hyper-Threading"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_ignoreHyperthreading->tooltip
+msgid ""
+"Example: An 8-core processor with Hyper-Threading technology appears to have "
+"16 cores, even though it does not."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTime->description
+msgid "Show only the CPU Load Over Time"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->description
+msgid "How many bars?"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "1"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "2"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "4"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "8"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "16"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "32"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "64"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->tooltip
+msgid "Related to CPU Load Over Time"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_activity_0_20->description
+msgid "0-20"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_chartType->description
+msgid "Chart Type"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_chartType->options
+msgid "Pie chart"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_chartType->options
+msgid "Bar chart"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_method->description
+msgid "Memory Calculation Method"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_method->options
+msgid "htop (recommended)"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_method->options
+msgid "Gnome System Monitor"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_value_display->description
+msgid "Display memory usage percentage"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_value_display->options
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
+msgid "Hovering over"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_value_display->options
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
+msgid "Always"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_colorBuffers->description
+msgid "Buffers"
+msgstr ""
+
+#. 5.6->settings-schema.json->DiskUsage_value_display->description
+msgid "Display value"
+msgstr ""

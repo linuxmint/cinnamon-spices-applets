@@ -1,0 +1,42 @@
+# ENHANCED SOUND APPLET
+# This file is put in the public domain.
+# claudiux, 2018
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux 6.16.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-03-25 19:18+0100\n"
+"PO-Revision-Date: 2026-02-26 14:38+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.8\n"
+
+#. 6.6->settings-schema.json->keepAppListOpen->description
+msgid "Keep the App Volume Control open"
+msgstr ""
+
+#. 6.6->settings-schema.json->appsNotToDisplayLabel->description
+msgid "Apps Not to Display:"
+msgstr ""
+
+#. 6.6->settings-schema.json->appsNotToDisplay->description
+msgid "Apps Not to Display"
+msgstr ""
+
+#. 6.6->settings-schema.json->appsNotToDisplay->columns->title
+msgid ""
+"in\n"
+"Applications\n"
+"submenu"
+msgstr ""
+
+#. 6.6->settings-schema.json->appsNotToDisplay->columns->title
+msgid "Part of the app name"
+msgstr ""

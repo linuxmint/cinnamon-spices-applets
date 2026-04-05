@@ -1,0 +1,18 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: applet.js:93
+msgid "Checking status"
+msgstr ""
+
+#. settings-schema.json->container->description
+msgid "container name"
+msgstr ""
+
+#. settings-schema.json->parameter->description
+msgid "parameter for the container"
+msgstr ""
