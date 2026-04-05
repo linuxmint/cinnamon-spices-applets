@@ -1,6 +1,6 @@
 const { GLib } = imports.gi;
 
-/** @typedef {import('../../../../types').Disposable} Disposable */
+/** @typedef {import('../../../types').Disposable} Disposable */
 import * as system_time from '../system_time.js';
 /** @typedef {import('../../../core/Time_of_day').Time_of_day} Time_of_day */
 import { Timer_absolute } from './Timer_absolute.js';

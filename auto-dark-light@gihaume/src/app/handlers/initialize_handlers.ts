@@ -8,18 +8,18 @@ import type { Applet } from '../ui/Applet';
 import { Background_handler } from './Background_handler';
 import { Commands_handler } from './Commands_handler';
 import type { Disposable } from '../../types';
-import { Event_scheduler } from '../../lib/sys/gnome/Event_scheduler';
-import { Keybinding_handler } from '../../lib/sys/cinnamon/Keybinding_handler';
+import { Event_scheduler } from '../../lib/gnome/Event_scheduler';
+import { Keybinding_handler } from '../../lib/cinnamon/Keybinding_handler';
 import { Location_handler } from './Location_handler';
 import { logger } from '../../globals';
 import type { Settings } from '../ui/Settings';
-import { sleep } from '../../lib/core/utils';
-import { Sleep_and_lock_handler } from '../../lib/sys/cinnamon/Sleep_and_lock_handler';
-import { Color_scheme_handler } from '../../lib/sys/cinnamon/Color_scheme_handler';
+import { sleep } from '../../lib/utils';
+import { Sleep_and_lock_handler } from '../../lib/cinnamon/Sleep_and_lock_handler';
+import { Color_scheme_handler } from '../../lib/cinnamon/Color_scheme_handler';
 import { Themes_handler } from './Themes_handler';
-import { Time_of_day } from '../../lib/core/Time_of_day';
+import { Time_of_day } from '../../core/Time_of_day';
 import { Twilights_handler } from './Twilights_handler';
-import { Wall_clock_adjustment_monitor } from '../../lib/sys/gnome/Wall_clock_adjustment_monitor';
+import { Wall_clock_adjustment_monitor } from '../../lib/gnome/Wall_clock_adjustment_monitor';
 
 const DURATION_TO_AWAIT_BEFORE_UPDATING_DERIVED_SETTING = 2000; // milliseconds (ms)
 

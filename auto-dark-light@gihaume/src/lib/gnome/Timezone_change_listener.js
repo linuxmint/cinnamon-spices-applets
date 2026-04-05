@@ -1,6 +1,6 @@
 const { Gio } = imports.gi;
 
-/** @typedef {import('../../../types').Observer} Observer */
+/** @typedef {import('../../types').Observer} Observer */
 
 /**
  * A listener for the system timezone changes.

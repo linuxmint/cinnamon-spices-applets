@@ -4,8 +4,8 @@ import * as mobx from 'mobx';
 
 import type { Disposable, Location } from "../../types";
 import { metadata } from '../../globals';
-import { Timezone_change_listener } from '../../lib/sys/gnome/Timezone_change_listener';
-import { Timezone_location_finder } from "../../lib/core/Timezone_location_finder/Timezone_location_finder";
+import { Timezone_change_listener } from '../../lib/gnome/Timezone_change_listener';
+import { Timezone_location_finder } from "../../core/Timezone_location_finder/Timezone_location_finder";
 
 export class Location_handler implements Disposable {
     private readonly _timezone_change_listener = new Timezone_change_listener(

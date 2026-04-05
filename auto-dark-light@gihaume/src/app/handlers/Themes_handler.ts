@@ -1,7 +1,7 @@
 import type { Applet } from '../ui/Applet';
-import { Color_scheme_handler as Color_scheme } from '../../lib/sys/cinnamon/Color_scheme_handler';
+import { Color_scheme_handler as Color_scheme } from '../../lib/cinnamon/Color_scheme_handler';
 import type { Settings } from '../ui/Settings';
-import { Themes_accessor as Themes } from '../../lib/sys/cinnamon/Themes_accessor';
+import { Themes_accessor as Themes } from '../../lib/cinnamon/Themes_accessor';
 
 export class Themes_handler {
     private readonly _settings: Settings;

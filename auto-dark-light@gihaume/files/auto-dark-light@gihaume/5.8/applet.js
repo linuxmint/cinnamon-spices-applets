@@ -3596,7 +3596,7 @@ if (typeof __MOBX_DEVTOOLS_GLOBAL_HOOK__ === "object") __MOBX_DEVTOOLS_GLOBAL_HO
 	$mobx
 });
 //#endregion
-//#region src/lib/core/Time_of_day.ts
+//#region src/core/Time_of_day.ts
 var SECONDS_PER_DAY$1 = 1440 * 60;
 /** An immutable 24-hour clock time representation. */
 var Time_of_day = class Time_of_day {
@@ -3675,8 +3675,8 @@ var Time_of_day = class Time_of_day {
 	}
 };
 //#endregion
-//#region src/lib/sys/gnome/system_time.js
-/** @typedef {import('../../../types').Time_hms} Time_hms */
+//#region src/lib/gnome/system_time.js
+/** @typedef {import('../../types').Time_hms} Time_hms */
 var { DateTime: DateTime$1 } = imports.gi.GLib;
 /** @returns {number} seconds (s) */
 function get_now_as_unix() {
@@ -3741,7 +3741,7 @@ var Appearance_handler = class {
 	}
 };
 //#endregion
-//#region src/lib/sys/cinnamon/Background_accessor.ts
+//#region src/lib/cinnamon/Background_accessor.ts
 var { Gio: Gio$6 } = imports.gi;
 var settings$2 = {
 	background: Gio$6.Settings.new("org.cinnamon.desktop.background"),
@@ -3809,7 +3809,7 @@ var Background_handler = class {
 	}
 };
 //#endregion
-//#region src/lib/sys/gnome/command_launching.js
+//#region src/lib/gnome/command_launching.js
 var { Gio: Gio$5, GLib: GLib$5 } = imports.gi;
 var Error_timed_out_by_sigterm = class extends Error {};
 var Error_timed_out_by_sigkill = class extends Error {};
@@ -3904,7 +3904,7 @@ var Commands_handler = class {
 	}
 };
 //#endregion
-//#region src/lib/sys/gnome/Event_scheduler/Timer_absolute.js
+//#region src/lib/gnome/Event_scheduler/Timer_absolute.js
 /** @typedef {import('../../../core/Time_of_day').Time_of_day} Time_of_day */
 /** A basic request-based absolute timer to be set for a next occurring time of day. */
 var Timer_absolute = class {
@@ -3931,8 +3931,8 @@ var Timer_absolute = class {
 	}
 };
 //#endregion
-//#region src/lib/sys/gnome/Event_scheduler/Event_scheduler.js
-/** @typedef {import('../../../../types').Disposable} Disposable */
+//#region src/lib/gnome/Event_scheduler/Event_scheduler.js
+/** @typedef {import('../../../types').Disposable} Disposable */
 /** @typedef {import('../../../core/Time_of_day').Time_of_day} Time_of_day */
 var { GLib: GLib$3 } = imports.gi;
 /**
@@ -3990,7 +3990,7 @@ var Event_scheduler = class {
 	}
 };
 //#endregion
-//#region src/lib/sys/cinnamon/Keybinding_handler.ts
+//#region src/lib/cinnamon/Keybinding_handler.ts
 var { keybindingManager } = imports.ui.main;
 /** A responsible handler to set a Cinnamon keybinding. */
 var Keybinding_handler = class Keybinding_handler {
@@ -4016,9 +4016,9 @@ var Keybinding_handler = class Keybinding_handler {
 	}
 };
 //#endregion
-//#region src/lib/sys/gnome/Timezone_change_listener.js
+//#region src/lib/gnome/Timezone_change_listener.js
 var { Gio: Gio$4 } = imports.gi;
-/** @typedef {import('../../../types').Observer} Observer */
+/** @typedef {import('../../types').Observer} Observer */
 /**
 * A listener for the system timezone changes.
 * @implements {Observer}
@@ -4049,7 +4049,7 @@ var Timezone_change_listener = class {
 	}
 };
 //#endregion
-//#region src/lib/core/Timezone_location_finder/Timezone_location_finder.ts
+//#region src/core/Timezone_location_finder/Timezone_location_finder.ts
 var { Gio: Gio$3 } = imports.gi;
 /** A finder of timezone's city coordinates using a local database. */
 var Timezone_location_finder = class {
@@ -4110,15 +4110,15 @@ var Location_handler = class {
 	}
 };
 //#endregion
-//#region src/lib/core/utils.ts
+//#region src/lib/utils.ts
 /** @param duration - The duration to sleep for, in milliseconds (ms) */
 async function sleep(duration) {
 	return new Promise((resolve) => setTimeout(resolve, duration));
 }
 //#endregion
-//#region src/lib/sys/cinnamon/Sleep_and_lock_handler/Screen_lock_change_listener.js
+//#region src/lib/cinnamon/Sleep_and_lock_handler/Screen_lock_change_listener.js
 var { ScreenSaverProxy } = imports.misc.screenSaver;
-/** @typedef {import('../../../../types').Observer} Observer */
+/** @typedef {import('../../../types').Observer} Observer */
 /**
 * An interface to read and listen to the screen locked state.
 *
@@ -4159,8 +4159,8 @@ var Screen_lock_change_listener = class {
 	}
 };
 //#endregion
-//#region src/lib/sys/cinnamon/Sleep_and_lock_handler/Screen_unlock_waiter.js
-/** @typedef {import('../../../../types').Disposable} Disposable */
+//#region src/lib/cinnamon/Sleep_and_lock_handler/Screen_unlock_waiter.js
+/** @typedef {import('../../../types').Disposable} Disposable */
 /**
 * A handler to wait until the screen is unlocked.
 * @implements {Disposable}
@@ -4202,9 +4202,9 @@ var Screen_unlock_waiter = class {
 	}
 };
 //#endregion
-//#region src/lib/sys/cinnamon/Sleep_and_lock_handler/Sleep_events_listener.js
+//#region src/lib/cinnamon/Sleep_and_lock_handler/Sleep_events_listener.js
 var { Gio: Gio$2 } = imports.gi;
-/** @typedef {import('../../../../types').Observer} Observer */
+/** @typedef {import('../../../types').Observer} Observer */
 /**
 * An interface to listen to the sleep entering and waking events.
 * @implements {Observer}
@@ -4232,8 +4232,8 @@ var Sleep_events_listener = class {
 	}
 };
 //#endregion
-//#region src/lib/sys/cinnamon/Sleep_and_lock_handler/Sleep_and_lock_handler.js
-/** @typedef {import('../../../../types.js').Observer} Observer */
+//#region src/lib/cinnamon/Sleep_and_lock_handler/Sleep_and_lock_handler.js
+/** @typedef {import('../../../types.js').Observer} Observer */
 /**
 * A handler to wait until the screen is unlocked.
 * @implements {Observer}
@@ -4265,7 +4265,7 @@ var Sleep_and_lock_handler = class {
 	}
 };
 //#endregion
-//#region src/lib/sys/cinnamon/Color_scheme_handler.ts
+//#region src/lib/cinnamon/Color_scheme_handler.ts
 var { Gio: Gio$1 } = imports.gi;
 var settings$1 = Gio$1.Settings.new("org.x.apps.portal");
 /** A listener and accessor to the Cinnamon system color scheme setting. */
@@ -4295,7 +4295,7 @@ var Color_scheme_handler = class Color_scheme_handler {
 	}
 };
 //#endregion
-//#region src/lib/sys/cinnamon/Themes_accessor.ts
+//#region src/lib/cinnamon/Themes_accessor.ts
 var { Gio } = imports.gi;
 var settings = {
 	desktop: Gio.Settings.new("org.cinnamon.desktop.interface"),
@@ -4369,7 +4369,7 @@ var Themes_handler = class {
 	}
 };
 //#endregion
-//#region src/lib/core/compute_twilights/uSunCalc.ts
+//#region src/core/compute_twilights/uSunCalc.ts
 /**
 * A minified and optimized version of the SunCalc library containing only the part needed for the `auto-dark-light` applet.
 */
@@ -4413,7 +4413,7 @@ function compute_twilights$1(unix_time, latitude, longitude) {
 	return [_to_unix(2 * julian_noon - julian_sunset), _to_unix(julian_sunset)];
 }
 //#endregion
-//#region src/lib/core/compute_twilights/compute_twilights.ts
+//#region src/core/compute_twilights/compute_twilights.ts
 function compute_twilights(date, location) {
 	const [sunrise, sunset] = compute_twilights$1(date.to_unix(), location.latitude, location.longitude);
 	return {
@@ -4463,9 +4463,9 @@ var Twilights_handler = class {
 	}
 };
 //#endregion
-//#region src/lib/sys/gnome/Wall_clock_adjustment_monitor.js
+//#region src/lib/gnome/Wall_clock_adjustment_monitor.js
 var { GLib: GLib$1 } = imports.gi;
-/** @typedef {import('../../../types').Observer} Observer */
+/** @typedef {import('../../types').Observer} Observer */
 /** @implements {Observer} */
 var Wall_clock_adjustment_monitor = class {
 	/** In seconds (s)

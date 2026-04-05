@@ -61,16 +61,15 @@
 
 ### 2.1. Files organization
 
-- `doc`: applet development documentation
 - `src`: source files
   - `app`: application specifics
-    - `core`: business logic
+    - `handlers`: features handlers
     - `ui`: user interface bindings
-  - `lib`: reusable generic library
-    - `core`: business logic
-    - `sys`: system/OS interfacing
-      - `cinnamon`: Cinnamon desktop environment specifics
-      - `gnome`: GNOME desktop environment specifics
+  - `core`: business logic
+  - `lib`: generic/reusable library
+    - `cinnamon`: Cinnamon desktop environment specifics
+    - `gnome`: GNOME desktop environment specifics
+- `doc`: applet development documentation
 
 Notes :
 - Nothing in `lib` depends on anything in `app`.

@@ -1,6 +1,6 @@
 const { ScreenSaverProxy } = imports.misc.screenSaver;
 
-/** @typedef {import('../../../../types').Observer} Observer */
+/** @typedef {import('../../../types').Observer} Observer */
 
 /**
  * An interface to read and listen to the screen locked state.

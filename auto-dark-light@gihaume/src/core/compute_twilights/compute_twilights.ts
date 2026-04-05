@@ -1,5 +1,5 @@
-import type { Location, Twilights } from '../../../types';
-import * as system_time from '../../sys/gnome/system_time';
+import type { Location, Twilights } from '../../types';
+import * as system_time from '../../lib/gnome/system_time';
 import * as uSunCalc from './uSunCalc';
 
 export function compute_twilights(
