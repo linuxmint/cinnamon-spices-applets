@@ -1,6 +1,7 @@
+import { Background_accessor as Background } from '../../lib/cinnamon/Background_accessor.ts';
+
 import type { Applet } from '../ui/Applet.ts';
 import type { Settings } from '../ui/Settings.ts';
-import { Background_accessor as Background } from '../../lib/cinnamon/Background_accessor.ts';
 
 export class Background_handler {
     private readonly _settings: Settings;
@@ -24,7 +25,7 @@ export class Background_handler {
         if (is_slideshow)
             this._settings.light_background_slideshow_folder =
                 Background.slideshow_folder
-                    .replace('directory://', "file://") // https://github.com/linuxmint/cinnamon/issues/12374
+                    .replace('directory://', "file://"); // https://github.com/linuxmint/cinnamon/issues/12374
         else
             this._settings.light_background_file = Background.picture_file;
     }

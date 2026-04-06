@@ -1,5 +1,6 @@
-import type { Applet } from '../ui/Applet.ts';
 import { launch_command } from '../launch_command.ts';
+
+import type { Applet } from '../ui/Applet.ts';
 import type { Settings } from '../ui/Settings.ts';
 
 export class Commands_handler {

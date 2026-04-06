@@ -69,6 +69,7 @@
   - `lib`: generic/reusable library
     - `cinnamon`: Cinnamon desktop environment specifics
     - `gnome`: GNOME desktop environment specifics
+- `files`: transpiled files to be used by the users
 - `doc`: applet development documentation
 
 Notes :

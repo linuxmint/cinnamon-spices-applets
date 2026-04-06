@@ -2,10 +2,11 @@ const { GLib } = imports.gi;
 
 import * as mobx from 'mobx';
 
-import type { Disposable, Location } from '../../types.d.ts';
+import { Timezone_location_finder } from '../../core/Timezone_location_finder/Timezone_location_finder.ts';
 import { metadata } from '../../globals.ts';
 import { Timezone_change_listener } from '../../lib/gnome/Timezone_change_listener.js';
-import { Timezone_location_finder } from '../../core/Timezone_location_finder/Timezone_location_finder.ts';
+
+import type { Disposable, Location } from '../../types.d.ts';
 
 export class Location_handler implements Disposable {
     private readonly _timezone_change_listener = new Timezone_change_listener(

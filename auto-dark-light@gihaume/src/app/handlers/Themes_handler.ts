@@ -1,7 +1,8 @@
-import type { Applet } from '../ui/Applet.ts';
 import { Color_scheme_handler as Color_scheme } from '../../lib/cinnamon/Color_scheme_handler.ts';
-import type { Settings } from '../ui/Settings.ts';
 import { Themes_accessor as Themes } from '../../lib/cinnamon/Themes_accessor.ts';
+
+import type { Applet } from '../ui/Applet.ts';
+import type { Settings } from '../ui/Settings.ts';
 
 export class Themes_handler {
     private readonly _settings: Settings;

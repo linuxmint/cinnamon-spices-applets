@@ -1,9 +1,10 @@
 const { IconApplet } = imports.ui.applet;
 
-import type { Applet } from './app/ui/Applet.ts';
-import { initialize_globals, logger } from './globals.ts';
 import { initialize_handlers } from './app/handlers/initialize_handlers.ts';
 import { initialize_applet_settings } from './app/initialize_applet_settings.ts';
+import { initialize_globals, logger } from './globals.ts';
+
+import type { Applet } from './app/ui/Applet.ts';
 
 function main(
     metadata: imports.ui.applet.AppletMetadata,

@@ -1,5 +1,6 @@
-/** @typedef {import('../../../types').Disposable} Disposable */
 import { Screen_lock_change_listener } from './Screen_lock_change_listener.js';
+
+/** @typedef {import('../../../types').Disposable} Disposable */
 
 /**
  * A handler to wait until the screen is unlocked.

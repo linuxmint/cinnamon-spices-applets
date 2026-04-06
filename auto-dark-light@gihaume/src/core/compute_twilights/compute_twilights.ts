@@ -1,6 +1,7 @@
-import type { Location, Twilights } from '../../types.d.ts';
 import * as system_time from '../../lib/gnome/system_time.js';
 import * as uSunCalc from './uSunCalc.ts';
+
+import type { Location, Twilights } from '../../types.d.ts';
 
 export function compute_twilights(
     date: imports.gi.GLib.DateTime, location: Location

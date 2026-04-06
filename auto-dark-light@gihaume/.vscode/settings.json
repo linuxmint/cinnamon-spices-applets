@@ -5,4 +5,6 @@
     "python.analysis.extraPaths": [
         "/usr/share/cinnamon/cinnamon-settings/bin"
     ],
+
+    "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 120,
 }

@@ -1,51 +1,3 @@
-//#region src/globals.ts
-var Gettext = imports.gettext;
-var { GLib: GLib$6 } = imports.gi;
-var Main = imports.ui.main;
-var { St } = imports.gi;
-var metadata = {
-	uuid: "",
-	name: "",
-	description: "",
-	path: "",
-	force_loaded: false
-};
-function _(text) {
-	return Gettext.dgettext(metadata.uuid, text);
-}
-var translated_applet_name = "";
-function initialize_globals(applet_metadata) {
-	Object.assign(metadata, applet_metadata);
-	const translations_dir_path = GLib$6.get_home_dir() + "/.local/share/locale";
-	Gettext.bindtextdomain(metadata.uuid, translations_dir_path);
-	translated_applet_name = _(metadata.name);
-}
-var icon_size = 24;
-var warning_icon = new St.Icon({
-	icon_name: "dialog-warning",
-	icon_type: St.IconType.SYMBOLIC,
-	icon_size
-});
-var error_icon = new St.Icon({
-	icon_name: "dialog-error",
-	icon_type: St.IconType.SYMBOLIC,
-	icon_size
-});
-var logger = {
-	info(msg) {
-		global.log(translated_applet_name + `${_(":")} ` + msg);
-		Main.notify(translated_applet_name, msg);
-	},
-	warn(msg) {
-		global.logWarning(translated_applet_name + `${_(":")} ` + msg);
-		Main.warningNotify(translated_applet_name, msg, warning_icon);
-	},
-	error(msg) {
-		global.logError(translated_applet_name + `${_(":")} ` + msg);
-		Main.criticalNotify(translated_applet_name, msg, error_icon);
-	}
-};
-//#endregion
 //#region node_modules/.pnpm/mobx@6.15.0/node_modules/mobx/dist/mobx.esm.js
 function die(error) {
 	for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) args[_key - 1] = arguments[_key];
@@ -3675,318 +3627,81 @@ var Time_of_day = class Time_of_day {
 	}
 };
 //#endregion
-//#region src/lib/gnome/system_time.js
-/** @typedef {import('../../types').Time_hms} Time_hms */
-var { DateTime: DateTime$1 } = imports.gi.GLib;
-/** @returns {number} seconds (s) */
-function get_now_as_unix() {
-	return DateTime$1.new_now_local().to_unix();
+//#region src/globals.ts
+var Gettext = imports.gettext;
+var { GLib: GLib$6 } = imports.gi;
+var Main = imports.ui.main;
+var { St } = imports.gi;
+var metadata = {
+	uuid: "",
+	name: "",
+	description: "",
+	path: "",
+	force_loaded: false
+};
+function _(text) {
+	return Gettext.dgettext(metadata.uuid, text);
 }
-/** @returns {Time_of_day} */
-function get_now_as_time_of_day() {
-	return new Time_of_day(_datetime_to_hms(DateTime$1.new_now_local()));
+var translated_applet_name = "";
+function initialize_globals(applet_metadata) {
+	Object.assign(metadata, applet_metadata);
+	const translations_dir_path = GLib$6.get_home_dir() + "/.local/share/locale";
+	Gettext.bindtextdomain(metadata.uuid, translations_dir_path);
+	translated_applet_name = _(metadata.name);
 }
-/**
-* @param {number} unix_time - seconds (s)
-* @returns {Time_of_day}
-*/
-function new_local_time_of_day_from_unix(unix_time) {
-	return new Time_of_day(_datetime_to_hms(DateTime$1.new_from_unix_local(unix_time)));
-}
-/**
-* @param {imports.gi.GLib.DateTime} datetime
-* @returns {Time_hms}
-*/
-function _datetime_to_hms(datetime) {
-	return {
-		h: datetime.get_hour(),
-		m: datetime.get_minute(),
-		s: datetime.get_second()
-	};
-}
-//#endregion
-//#region src/app/handlers/Appearance_handler.ts
-var Appearance_handler = class {
-	_time = get_now_as_time_of_day();
-	update_time() {
-		this._time = get_now_as_time_of_day();
-	}
-	twilights;
-	get auto_is_dark() {
-		return this._time.is_between(this.twilights.sunset, this.twilights.sunrise);
-	}
-	manual_is_dark;
-	toggle_is_dark() {
-		this.manual_is_dark = !this.manual_is_dark;
-	}
-	is_auto;
-	toggle_is_auto() {
-		this.is_auto = !this.is_auto;
-	}
-	get is_dark() {
-		return this.is_auto ? this.auto_is_dark : this.manual_is_dark;
-	}
-	get is_unsynced() {
-		return this.manual_is_dark !== this.auto_is_dark;
-	}
-	sync_is_dark() {
-		this.manual_is_dark = this.auto_is_dark;
-	}
-	get next_twilight() {
-		return this.auto_is_dark ? this.twilights.sunrise : this.twilights.sunset;
-	}
-	constructor(initial_controls) {
-		Object.assign(this, initial_controls);
-		makeAutoObservable(this);
+var icon_size = 24;
+var warning_icon = new St.Icon({
+	icon_name: "dialog-warning",
+	icon_type: St.IconType.SYMBOLIC,
+	icon_size
+});
+var error_icon = new St.Icon({
+	icon_name: "dialog-error",
+	icon_type: St.IconType.SYMBOLIC,
+	icon_size
+});
+var logger = {
+	info(msg) {
+		global.log(translated_applet_name + `${_(":")} ` + msg);
+		Main.notify(translated_applet_name, msg);
+	},
+	warn(msg) {
+		global.logWarning(translated_applet_name + `${_(":")} ` + msg);
+		Main.warningNotify(translated_applet_name, msg, warning_icon);
+	},
+	error(msg) {
+		global.logError(translated_applet_name + `${_(":")} ` + msg);
+		Main.criticalNotify(translated_applet_name, msg, error_icon);
 	}
 };
 //#endregion
-//#region src/lib/cinnamon/Background_accessor.ts
+//#region src/lib/cinnamon/Color_scheme_handler.ts
 var { Gio: Gio$6 } = imports.gi;
-var settings$2 = {
-	background: Gio$6.Settings.new("org.cinnamon.desktop.background"),
-	slideshow: Gio$6.Settings.new("org.cinnamon.desktop.background.slideshow")
-};
-/** An accessor to the Cinnamon system background settings. */
-var Background_accessor = class {
-	static get is_slideshow() {
-		return settings$2.slideshow.get_boolean("slideshow-enabled");
-	}
-	static set is_slideshow(value) {
-		settings$2.slideshow.set_boolean("slideshow-enabled", value);
-	}
-	/** Irrelevant to get when slideshow is enabled */
-	static get picture_file() {
-		return settings$2.background.get_string("picture-uri");
-	}
-	/** /!\ To not set when slideshow is enabled */
-	static set picture_file(value) {
-		settings$2.background.set_string("picture-uri", value);
-	}
-	/** Irrelevant to get when slideshow is disabled */
-	static get slideshow_folder() {
-		return settings$2.slideshow.get_string("image-source");
-	}
-	/** /!\ To not set when slideshow is disabled */
-	static set slideshow_folder(value) {
-		settings$2.slideshow.set_string("image-source", value);
-	}
-};
-//#endregion
-//#region src/app/handlers/Background_handler.ts
-var Background_handler = class {
-	_settings;
-	constructor(applet, settings) {
-		this._settings = settings;
-		applet.on_button_detect_background_light = () => this.detect_light_background();
-		applet.on_button_detect_background_dark = () => this.detect_dark_background();
-		applet.on_button_apply_background_light = () => this.apply_light_background();
-		applet.on_button_apply_background_dark = () => this.apply_dark_background();
-	}
-	detect_light_background() {
-		const is_slideshow = Background_accessor.is_slideshow;
-		this._settings.light_background_is_slideshow = is_slideshow;
-		if (is_slideshow) this._settings.light_background_slideshow_folder = Background_accessor.slideshow_folder.replace("directory://", "file://");
-		else this._settings.light_background_file = Background_accessor.picture_file;
-	}
-	detect_dark_background() {
-		const is_slideshow = Background_accessor.is_slideshow;
-		this._settings.dark_background_is_slideshow = is_slideshow;
-		if (is_slideshow) this._settings.dark_background_slideshow_folder = Background_accessor.slideshow_folder.replace("directory://", "file://");
-		else this._settings.dark_background_file = Background_accessor.picture_file;
-	}
-	apply_light_background() {
-		const is_slideshow = this._settings.light_background_is_slideshow;
-		Background_accessor.is_slideshow = is_slideshow;
-		if (is_slideshow) Background_accessor.slideshow_folder = decodeURIComponent(this._settings.light_background_slideshow_folder.replace("file://", "directory://"));
-		else Background_accessor.picture_file = this._settings.light_background_file;
-	}
-	apply_dark_background() {
-		const is_slideshow = this._settings.dark_background_is_slideshow;
-		Background_accessor.is_slideshow = is_slideshow;
-		if (is_slideshow) Background_accessor.slideshow_folder = decodeURIComponent(this._settings.dark_background_slideshow_folder.replace("file://", "directory://"));
-		else Background_accessor.picture_file = this._settings.dark_background_file;
-	}
-};
-//#endregion
-//#region src/lib/gnome/command_launching.js
-var { Gio: Gio$5, GLib: GLib$5 } = imports.gi;
-var Error_timed_out_by_sigterm = class extends Error {};
-var Error_timed_out_by_sigkill = class extends Error {};
-var Error_failed = class extends Error {};
-var GNU_TIMEOUT_EXIT_STATUS_WHEN_SIGTERM = 124;
-var GNU_TIMEOUT_EXIT_STATUS_WHEN_SIGKILL = 137;
-/**
-* Executes a command with a timeout and transmits any error on failure.
-* @param {string} command - The shell command to execute.
-* @param {number} sigterm_timeout - The delay in seconds (s) before cancelling the command with a SIGTERM. 0 means infinity/never. Defaults to 0.
-* @param {number} sigkill_timeout - The delay in seconds (s) after SIGTERM before cancelling the command with a SIGKILL. 0 means infinity/never. `sigterm_timeout` at 0 disables this. Defaults to 10.
-* @returns {Promise<void>} Resolves when the command has been executed or rejects if an error occurs.
-* @throws {GLib.Error} - If an error occurs during communication with the subprocess running the command.
-* @throws {Error_timed_out_by_sigterm} - If the command is cancelled due to a timeout by SIGTERM.
-* @throws {Error_timed_out_by_sigkill} - If the command is cancelled due to a timeout by SIGKILL.
-* @throws {Error_failed} - If the command fails with a non-zero exit code. The error message is the `stderr` output if any, otherwise the exit status.
-*/
-async function launch_command$1(command, sigterm_timeout = 0, sigkill_timeout = 10) {
-	const wrapped_command = `timeout --kill-after=${sigkill_timeout}s ${sigterm_timeout}s sh -c ${GLib$5.shell_quote(command)}`;
-	const [_ok, argvp] = GLib$5.shell_parse_argv(wrapped_command);
-	const process = new Gio$5.Subprocess({
-		argv: argvp,
-		flags: Gio$5.SubprocessFlags.STDERR_PIPE
-	});
-	const start_time = Date.now();
-	process.init(null);
-	const [_stdout, stderr] = await new Promise((resolve, reject) => {
-		process.communicate_utf8_async(null, null, (source, result) => {
-			try {
-				const [_ok, stdout, stderr] = source.communicate_utf8_finish(result);
-				resolve([stdout, stderr]);
-			} catch (error) {
-				reject(error);
-			}
+var settings$2 = Gio$6.Settings.new("org.x.apps.portal");
+/** A listener and accessor to the Cinnamon system color scheme setting. */
+var Color_scheme_handler = class Color_scheme_handler {
+	/** The function to be called when the color scheme has changed */
+	callback = null;
+	_signal_id = null;
+	enable() {
+		if (this._signal_id !== null) return;
+		this._signal_id = settings$2.connect("changed::color-scheme", () => {
+			this.callback?.(Color_scheme_handler.value);
 		});
-	});
-	const elapsed_time = (Date.now() - start_time) / 1e3;
-	const exit_status = process.get_exit_status();
-	switch (exit_status) {
-		case 0: break;
-		case GNU_TIMEOUT_EXIT_STATUS_WHEN_SIGTERM: throw new Error_timed_out_by_sigterm("The command may have been timed out by SIGTERM");
-		case GNU_TIMEOUT_EXIT_STATUS_WHEN_SIGKILL: throw new Error_timed_out_by_sigkill("The command was probably killed by an external SIGKILL");
-		case 1: if (sigterm_timeout > 0 && elapsed_time >= sigterm_timeout + sigkill_timeout) throw new Error_timed_out_by_sigkill("The command was probably timed out by SIGKILL");
-		default: throw new Error_failed(stderr ? stderr.trim() : "exit status: " + exit_status);
 	}
-}
-//#endregion
-//#region src/app/launch_command.ts
-var { GLib: GLib$4 } = imports.gi;
-/**
-* Launches a command with a timeout and logs any error on failure.
-* @param name - The name of the command to display in case of error. If empty, the command itself is used.
-* @param expiry - The delay in seconds before cancelling the command with a SIGTERM, then 10 seconds later with a SIGKILL. `0` means infinity/never.
-* @param command - The shell command to execute.
-* @returns Resolves when the command has been executed or rejects if an error occurs.
-*/
-async function launch_command(name, expiry, command) {
-	try {
-		await launch_command$1(command, expiry);
-	} catch (error) {
-		const name_for_error = name !== "" ? name : command;
-		let msg = `${_("Failed to run command")} '${name_for_error}'.\n`;
-		if (error instanceof Error_failed) msg += `${_("Reason")}${_(":")} ${_("command error")}.\n${_("Detail")}${_(":")} ${error.message}`;
-		else if (error instanceof Error_timed_out_by_sigterm) msg += `${_("Reason")}${_(":")} ${_("command timeout")}.\n${_("Detail")}${_(":")} ${error.message}`;
-		else if (error instanceof Error_timed_out_by_sigkill) msg += `${_("Reason")}${_(":")} ${_("command timeout (killed)")}.\n${_("Detail")}${_(":")} ${error.message}`;
-		else if (error instanceof GLib$4.Error) msg += `${_("Reason")}${_(":")} GLib error.\n${_("Detail")}${_(":")}\nDomain: ${error.domain}\nCode: ${error.code}\nMessage: ${error.message}`;
-		else if (error instanceof Error) msg += `${_("Reason")}${_(":")} ${_("Other error")}\n${_("Detail")}${_(":")}\nName: ${error.name}\nMessage: ${error.message}\nStack?:\n${error?.stack}`;
-		else msg += `${_("Unknown error type")}${_(":")} ${error}`;
-		logger.warn(msg);
-	}
-}
-//#endregion
-//#region src/app/handlers/Commands_handler.ts
-var Commands_handler = class {
-	_settings;
-	constructor(applet, settings) {
-		this._settings = settings;
-		applet.on_button_launch_commands_light = () => this.launch_light_commands();
-		applet.on_button_launch_commands_dark = () => this.launch_dark_commands();
-	}
-	launch_dark_commands() {
-		this._launch_commands(this._settings.dark_commands_list);
-	}
-	launch_light_commands() {
-		this._launch_commands(this._settings.light_commands_list);
-	}
-	_launch_commands(commands_list) {
-		for (const command of commands_list) {
-			if (!command.active) continue;
-			launch_command(command.name, command.expiry, command.command);
-		}
-	}
-};
-//#endregion
-//#region src/lib/gnome/Event_scheduler/Timer_absolute.js
-/** @typedef {import('../../../core/Time_of_day.ts').Time_of_day} Time_of_day */
-/** A basic request-based absolute timer to be set for a next occurring time of day. */
-var Timer_absolute = class {
-	/** @private Unix time in seconds (s) */
-	_expiration_time = 0;
-	/**
-	* The next time of day the timer has to expire.
-	* @param {Time_of_day} value
-	*/
-	set expiration_time(value) {
-		const due_delay = get_now_as_time_of_day().get_seconds_until_next_target(value);
-		this._expiration_time = get_now_as_unix() + due_delay;
-	}
-	/** @returns {boolean} */
-	get_if_has_expired() {
-		return get_now_as_unix() > this._expiration_time;
-	}
-	/**
-	* Ensures `get_if_has_expired` returns `true`
-	* @returns {void}
-	*/
-	reset() {
-		this._expiration_time = 0;
-	}
-};
-//#endregion
-//#region src/lib/gnome/Event_scheduler/Event_scheduler.js
-/** @typedef {import('../../../types').Disposable} Disposable */
-/** @typedef {import('../../../core/Time_of_day.ts').Time_of_day} Time_of_day */
-var { GLib: GLib$3 } = imports.gi;
-/**
-* A single-event scheduler which call a function at a specific next time of day.
-*
-* Under the hood it uses a monotonic timeout delay and so doesn't take into account system sleep or time changes. So to the user can check if the event should already have occurred with `get_if_should_be_expired`.
-*
-* When the instance is not wanted anymore, `dispose` must be called.
-*
-* @implements {Disposable}
-*/
-var Event_scheduler = class {
-	/** @private @type {number | null} */
-	_event_id = null;
-	/** @private @readonly */
-	_timer_absolute = new Timer_absolute();
-	/** @returns {boolean} `true` if the scheduled event should have already occurred, `false` otherwise. If the event is not set, `false` is returned. */
-	get_if_should_be_expired() {
-		return this._timer_absolute.get_if_has_expired();
-	}
-	/**
-	* Calls a function at a specific next time of day.
-	*
-	* Note: if the event is already scheduled, it will be replaced.
-	*
-	* @param {Time_of_day} time - When the event should occur.
-	* @param {() => void} callback_on_event - The function to be executed when the event occurs.
-	* @returns {void}
-	*/
-	set_the_event(time, callback_on_event) {
-		this.unset_the_event();
-		const due_delay = get_now_as_time_of_day().get_seconds_until_next_target(time);
-		this._event_id = GLib$3.timeout_add_seconds(GLib$3.PRIORITY_DEFAULT, due_delay, () => {
-			callback_on_event();
-			return GLib$3.SOURCE_REMOVE;
-		});
-		this._timer_absolute.expiration_time = time;
-	}
-	/** @returns {boolean} `true` if an event is currently scheduled, `false` otherwise. */
-	get is_set() {
-		return this._event_id !== null;
-	}
-	/**
-	* Note: if the event is not already scheduled, nothing is done.
-	* @returns {void}
-	*/
-	unset_the_event() {
-		if (this._event_id === null) return;
-		GLib$3.source_remove(this._event_id);
-		this._event_id = null;
-		this._timer_absolute.reset();
+	disable() {
+		if (this._signal_id === null) return;
+		settings$2.disconnect(this._signal_id);
+		this._signal_id = null;
 	}
 	dispose() {
-		this.unset_the_event();
+		this.disable();
+	}
+	static get value() {
+		return settings$2.get_string("color-scheme");
+	}
+	static set value(value) {
+		settings$2.set_string("color-scheme", value);
 	}
 };
 //#endregion
@@ -4015,106 +3730,6 @@ var Keybinding_handler = class Keybinding_handler {
 		this.unset();
 	}
 };
-//#endregion
-//#region src/lib/gnome/Timezone_change_listener.js
-var { Gio: Gio$4 } = imports.gi;
-/** @typedef {import('../../types').Observer} Observer */
-/**
-* A listener for the system timezone changes.
-* @implements {Observer}
-*/
-var Timezone_change_listener = class {
-	/** @private @type {number | null} */
-	_signal_id = null;
-	/** The function to call when the system timezone changes.
-	* @type {((new_timezone: string) => void) | null} */
-	callback = null;
-	enable() {
-		if (this._signal_id !== null) return;
-		this._signal_id = Gio$4.DBus.system.signal_subscribe("org.freedesktop.timedate1", "org.freedesktop.DBus.Properties", "PropertiesChanged", "/org/freedesktop/timedate1", null, Gio$4.DBusSignalFlags.NONE, (_1, _2, _3, _4, _5, parameters) => {
-			const changed_properties = parameters.deep_unpack()[1];
-			if (changed_properties["Timezone"]) {
-				const new_timezone = changed_properties["Timezone"].deep_unpack();
-				this.callback?.(new_timezone);
-			}
-		});
-	}
-	disable() {
-		if (this._signal_id === null) return;
-		Gio$4.DBus.system.signal_unsubscribe(this._signal_id);
-		this._signal_id = null;
-	}
-	dispose() {
-		this.disable();
-	}
-};
-//#endregion
-//#region src/core/Timezone_location_finder/Timezone_location_finder.ts
-var { Gio: Gio$3 } = imports.gi;
-/** A finder of timezone's city coordinates using a local database. */
-var Timezone_location_finder = class {
-	_database;
-	/**
-	* @param path - The absolute path where the `database.json` file is located.
-	* @throws {Error} - If the file cannot be loaded or JSON-parsed
-	*/
-	constructor(path) {
-		const file_path = `${path}/database.json`;
-		const [ok, file_content] = Gio$3.File.new_for_path(file_path).load_contents(null);
-		if (!ok) throw new Error(`failed to load file/contents of '${file_path}'`);
-		this._database = JSON.parse(new TextDecoder().decode(file_content));
-	}
-	/**
-	* Gets the latitude and longitude of the timezone's city.
-	* @param timezone - The timezone to get the coordinates from.
-	* @returns The system timezone's city coordinates.
-	*/
-	find(timezone) {
-		if (!timezone) throw new Error("timezone is required");
-		if (!(timezone in this._database)) throw new Error(`unknown timezone: '${timezone}'`);
-		return {
-			latitude: this._database[timezone][0],
-			longitude: this._database[timezone][1]
-		};
-	}
-};
-//#endregion
-//#region src/app/handlers/Location_handler.ts
-var { GLib: GLib$2 } = imports.gi;
-var Location_handler = class {
-	_timezone_change_listener = new Timezone_change_listener((new_timezone) => this._timezone = new_timezone);
-	_timezone = GLib$2.TimeZone.new_local().get_identifier();
-	get timezone() {
-		return this._timezone;
-	}
-	_timezone_location_finder = new Timezone_location_finder(`${metadata.path}/Timezone_location_finder`);
-	get auto_location() {
-		return this._timezone_location_finder.find(this.timezone);
-	}
-	manual_location;
-	is_location_auto;
-	get location() {
-		return this.is_location_auto ? this.auto_location : this.manual_location;
-	}
-	constructor(initial_values) {
-		Object.assign(this, initial_values);
-		makeAutoObservable(this, {
-			_timezone_change_listener: false,
-			_timezone_location_finder: false,
-			manual_location: observable.deep
-		});
-		this._timezone_change_listener.enable();
-	}
-	dispose() {
-		this._timezone_change_listener.dispose();
-	}
-};
-//#endregion
-//#region src/lib/utils.ts
-/** @param duration - In milliseconds (ms) */
-async function sleep(duration) {
-	return new Promise((resolve) => setTimeout(resolve, duration));
-}
 //#endregion
 //#region src/lib/cinnamon/Sleep_and_lock_handler/Screen_lock_change_listener.js
 var { ScreenSaverProxy } = imports.misc.screenSaver;
@@ -4203,7 +3818,7 @@ var Screen_unlock_waiter = class {
 };
 //#endregion
 //#region src/lib/cinnamon/Sleep_and_lock_handler/Sleep_events_listener.js
-var { Gio: Gio$2 } = imports.gi;
+var { Gio: Gio$5 } = imports.gi;
 /** @typedef {import('../../../types').Observer} Observer */
 /**
 * An interface to listen to the sleep entering and waking events.
@@ -4217,14 +3832,14 @@ var Sleep_events_listener = class {
 	callback = null;
 	enable() {
 		if (this._signal_id !== null) return;
-		this._signal_id = Gio$2.DBus.system.signal_subscribe("org.freedesktop.login1", "org.freedesktop.login1.Manager", "PrepareForSleep", "/org/freedesktop/login1", null, Gio$2.DBusSignalFlags.NONE, (_1, _2, _3, _4, _5, parameters) => {
+		this._signal_id = Gio$5.DBus.system.signal_subscribe("org.freedesktop.login1", "org.freedesktop.login1.Manager", "PrepareForSleep", "/org/freedesktop/login1", null, Gio$5.DBusSignalFlags.NONE, (_1, _2, _3, _4, _5, parameters) => {
 			const is_entering_sleep = parameters.deep_unpack()[0];
 			this.callback?.(is_entering_sleep);
 		});
 	}
 	disable() {
 		if (this._signal_id === null) return;
-		Gio$2.DBus.system.signal_unsubscribe(this._signal_id);
+		Gio$5.DBus.system.signal_unsubscribe(this._signal_id);
 		this._signal_id = null;
 	}
 	dispose() {
@@ -4265,33 +3880,490 @@ var Sleep_and_lock_handler = class {
 	}
 };
 //#endregion
-//#region src/lib/cinnamon/Color_scheme_handler.ts
-var { Gio: Gio$1 } = imports.gi;
-var settings$1 = Gio$1.Settings.new("org.x.apps.portal");
-/** A listener and accessor to the Cinnamon system color scheme setting. */
-var Color_scheme_handler = class Color_scheme_handler {
-	/** The function to be called when the color scheme has changed */
+//#region src/lib/gnome/system_time.js
+/** @typedef {import('../../types').Time_hms} Time_hms */
+var { DateTime: DateTime$1 } = imports.gi.GLib;
+/** @returns {number} seconds (s) */
+function get_now_as_unix() {
+	return DateTime$1.new_now_local().to_unix();
+}
+/** @returns {Time_of_day} */
+function get_now_as_time_of_day() {
+	return new Time_of_day(_datetime_to_hms(DateTime$1.new_now_local()));
+}
+/**
+* @param {number} unix_time - seconds (s)
+* @returns {Time_of_day}
+*/
+function new_local_time_of_day_from_unix(unix_time) {
+	return new Time_of_day(_datetime_to_hms(DateTime$1.new_from_unix_local(unix_time)));
+}
+/**
+* @param {imports.gi.GLib.DateTime} datetime
+* @returns {Time_hms}
+*/
+function _datetime_to_hms(datetime) {
+	return {
+		h: datetime.get_hour(),
+		m: datetime.get_minute(),
+		s: datetime.get_second()
+	};
+}
+//#endregion
+//#region src/lib/gnome/Event_scheduler/Timer_absolute.js
+/** @typedef {import('../../../core/Time_of_day.ts').Time_of_day} Time_of_day */
+/** A basic request-based absolute timer to be set for a next occurring time of day. */
+var Timer_absolute = class {
+	/** @private Unix time in seconds (s) */
+	_expiration_time = 0;
+	/**
+	* The next time of day the timer has to expire.
+	* @param {Time_of_day} value
+	*/
+	set expiration_time(value) {
+		const due_delay = get_now_as_time_of_day().get_seconds_until_next_target(value);
+		this._expiration_time = get_now_as_unix() + due_delay;
+	}
+	/** @returns {boolean} */
+	get_if_has_expired() {
+		return get_now_as_unix() > this._expiration_time;
+	}
+	/**
+	* Ensures `get_if_has_expired` returns `true`
+	* @returns {void}
+	*/
+	reset() {
+		this._expiration_time = 0;
+	}
+};
+//#endregion
+//#region src/lib/gnome/Event_scheduler/Event_scheduler.js
+var { GLib: GLib$5 } = imports.gi;
+/** @typedef {import('../../../types').Disposable} Disposable */
+/** @typedef {import('../../../core/Time_of_day.ts').Time_of_day} Time_of_day */
+/**
+* A single-event scheduler which call a function at a specific next time of day.
+*
+* Under the hood it uses a monotonic timeout delay and so doesn't take into account system sleep or time changes. So to the user can check if the event should already have occurred with `get_if_should_be_expired`.
+*
+* When the instance is not wanted anymore, `dispose` must be called.
+*
+* @implements {Disposable}
+*/
+var Event_scheduler = class {
+	/** @private @type {number | null} */
+	_event_id = null;
+	/** @private @readonly */
+	_timer_absolute = new Timer_absolute();
+	/** @returns {boolean} `true` if the scheduled event should have already occurred, `false` otherwise. If the event is not set, `false` is returned. */
+	get_if_should_be_expired() {
+		return this._timer_absolute.get_if_has_expired();
+	}
+	/**
+	* Calls a function at a specific next time of day.
+	*
+	* Note: if the event is already scheduled, it will be replaced.
+	*
+	* @param {Time_of_day} time - When the event should occur.
+	* @param {() => void} callback_on_event - The function to be executed when the event occurs.
+	* @returns {void}
+	*/
+	set_the_event(time, callback_on_event) {
+		this.unset_the_event();
+		const due_delay = get_now_as_time_of_day().get_seconds_until_next_target(time);
+		this._event_id = GLib$5.timeout_add_seconds(GLib$5.PRIORITY_DEFAULT, due_delay, () => {
+			callback_on_event();
+			return GLib$5.SOURCE_REMOVE;
+		});
+		this._timer_absolute.expiration_time = time;
+	}
+	/** @returns {boolean} `true` if an event is currently scheduled, `false` otherwise. */
+	get is_set() {
+		return this._event_id !== null;
+	}
+	/**
+	* Note: if the event is not already scheduled, nothing is done.
+	* @returns {void}
+	*/
+	unset_the_event() {
+		if (this._event_id === null) return;
+		GLib$5.source_remove(this._event_id);
+		this._event_id = null;
+		this._timer_absolute.reset();
+	}
+	dispose() {
+		this.unset_the_event();
+	}
+};
+//#endregion
+//#region src/lib/gnome/Wall_clock_adjustment_monitor.js
+var { GLib: GLib$4 } = imports.gi;
+/** @typedef {import('../../types').Observer} Observer */
+/** @implements {Observer} */
+var Wall_clock_adjustment_monitor = class {
+	/** In seconds (s)
+	* @private */
+	_monitoring_interval = 10;
+	/** Check interval, in integer seconds (s) greater or equal to 1, defaults to 10
+	* @returns {number} */
+	get monitoring_interval() {
+		return this._monitoring_interval;
+	}
+	set monitoring_interval(value) {
+		value = Math.max(1, value);
+		value = Math.round(value);
+		this._monitoring_interval = value;
+		if (this._timeout_id) {
+			this.disable();
+			this.enable();
+		}
+	}
+	/** Function to call when the wall clock has been modified, defaults to null
+	* @type {(() => void) | null} */
 	callback = null;
+	/** @private @type {ReturnType<typeof GLib.timeout_add_seconds> | null} */
+	_timeout_id = null;
+	/** In microseconds (µs)
+	* @private */
+	_last_wall_clock_time = Number();
+	/** In microseconds (µs)
+	* @private */
+	_last_monotonic_time = Number();
+	enable() {
+		if (this._timeout_id) return;
+		this._last_wall_clock_time = GLib$4.get_real_time();
+		this._last_monotonic_time = GLib$4.get_monotonic_time();
+		this._timeout_id = GLib$4.timeout_add_seconds(GLib$4.PRIORITY_DEFAULT, this._monitoring_interval, this._timeout_function);
+	}
+	/** In microseconds (µs)
+	* @private */
+	_time_difference_tolerance = 2e6;
+	/** Maximum for time difference between wall clock and monotonic times to not trigger the callback, in seconds (s) greater or equal to 1, defaults to 2
+	* @returns {number} */
+	get time_difference_tolerance() {
+		return this._time_difference_tolerance / 1e6;
+	}
+	set time_difference_tolerance(value) {
+		value *= 1e6;
+		value = Math.max(1, value);
+		this._time_difference_tolerance = value;
+	}
+	/** @private @type {Parameters<typeof GLib.timeout_add_seconds>[2]} */
+	_timeout_function = () => {
+		const wall_clock_time = GLib$4.get_real_time(), monotonic_time = GLib$4.get_monotonic_time();
+		const delta_wall_clock = wall_clock_time - this._last_wall_clock_time;
+		const delta_monotonic = monotonic_time - this._last_monotonic_time;
+		if (Math.abs(delta_wall_clock - delta_monotonic) > this._time_difference_tolerance) this.callback?.();
+		this._last_wall_clock_time = wall_clock_time;
+		this._last_monotonic_time = monotonic_time;
+		return GLib$4.SOURCE_CONTINUE;
+	};
+	disable() {
+		if (!this._timeout_id) return;
+		GLib$4.source_remove(this._timeout_id);
+		this._timeout_id = null;
+	}
+	dispose() {
+		this.disable();
+	}
+};
+//#endregion
+//#region src/lib/utils.ts
+/** @param duration - In milliseconds (ms) */
+async function sleep(duration) {
+	return new Promise((resolve) => setTimeout(resolve, duration));
+}
+//#endregion
+//#region src/app/handlers/Appearance_handler.ts
+var Appearance_handler = class {
+	_time = get_now_as_time_of_day();
+	update_time() {
+		this._time = get_now_as_time_of_day();
+	}
+	twilights;
+	get auto_is_dark() {
+		return this._time.is_between(this.twilights.sunset, this.twilights.sunrise);
+	}
+	manual_is_dark;
+	toggle_is_dark() {
+		this.manual_is_dark = !this.manual_is_dark;
+	}
+	is_auto;
+	toggle_is_auto() {
+		this.is_auto = !this.is_auto;
+	}
+	get is_dark() {
+		return this.is_auto ? this.auto_is_dark : this.manual_is_dark;
+	}
+	get is_unsynced() {
+		return this.manual_is_dark !== this.auto_is_dark;
+	}
+	sync_is_dark() {
+		this.manual_is_dark = this.auto_is_dark;
+	}
+	get next_twilight() {
+		return this.auto_is_dark ? this.twilights.sunrise : this.twilights.sunset;
+	}
+	constructor(initial_controls) {
+		Object.assign(this, initial_controls);
+		makeAutoObservable(this);
+	}
+};
+//#endregion
+//#region src/lib/cinnamon/Background_accessor.ts
+var { Gio: Gio$4 } = imports.gi;
+var settings$1 = {
+	background: Gio$4.Settings.new("org.cinnamon.desktop.background"),
+	slideshow: Gio$4.Settings.new("org.cinnamon.desktop.background.slideshow")
+};
+/** An accessor to the Cinnamon system background settings. */
+var Background_accessor = class {
+	static get is_slideshow() {
+		return settings$1.slideshow.get_boolean("slideshow-enabled");
+	}
+	static set is_slideshow(value) {
+		settings$1.slideshow.set_boolean("slideshow-enabled", value);
+	}
+	/** Irrelevant to get when slideshow is enabled */
+	static get picture_file() {
+		return settings$1.background.get_string("picture-uri");
+	}
+	/** /!\ To not set when slideshow is enabled */
+	static set picture_file(value) {
+		settings$1.background.set_string("picture-uri", value);
+	}
+	/** Irrelevant to get when slideshow is disabled */
+	static get slideshow_folder() {
+		return settings$1.slideshow.get_string("image-source");
+	}
+	/** /!\ To not set when slideshow is disabled */
+	static set slideshow_folder(value) {
+		settings$1.slideshow.set_string("image-source", value);
+	}
+};
+//#endregion
+//#region src/app/handlers/Background_handler.ts
+var Background_handler = class {
+	_settings;
+	constructor(applet, settings) {
+		this._settings = settings;
+		applet.on_button_detect_background_light = () => this.detect_light_background();
+		applet.on_button_detect_background_dark = () => this.detect_dark_background();
+		applet.on_button_apply_background_light = () => this.apply_light_background();
+		applet.on_button_apply_background_dark = () => this.apply_dark_background();
+	}
+	detect_light_background() {
+		const is_slideshow = Background_accessor.is_slideshow;
+		this._settings.light_background_is_slideshow = is_slideshow;
+		if (is_slideshow) this._settings.light_background_slideshow_folder = Background_accessor.slideshow_folder.replace("directory://", "file://");
+		else this._settings.light_background_file = Background_accessor.picture_file;
+	}
+	detect_dark_background() {
+		const is_slideshow = Background_accessor.is_slideshow;
+		this._settings.dark_background_is_slideshow = is_slideshow;
+		if (is_slideshow) this._settings.dark_background_slideshow_folder = Background_accessor.slideshow_folder.replace("directory://", "file://");
+		else this._settings.dark_background_file = Background_accessor.picture_file;
+	}
+	apply_light_background() {
+		const is_slideshow = this._settings.light_background_is_slideshow;
+		Background_accessor.is_slideshow = is_slideshow;
+		if (is_slideshow) Background_accessor.slideshow_folder = decodeURIComponent(this._settings.light_background_slideshow_folder.replace("file://", "directory://"));
+		else Background_accessor.picture_file = this._settings.light_background_file;
+	}
+	apply_dark_background() {
+		const is_slideshow = this._settings.dark_background_is_slideshow;
+		Background_accessor.is_slideshow = is_slideshow;
+		if (is_slideshow) Background_accessor.slideshow_folder = decodeURIComponent(this._settings.dark_background_slideshow_folder.replace("file://", "directory://"));
+		else Background_accessor.picture_file = this._settings.dark_background_file;
+	}
+};
+//#endregion
+//#region src/lib/gnome/command_launching.js
+var { Gio: Gio$3, GLib: GLib$3 } = imports.gi;
+var Error_timed_out_by_sigterm = class extends Error {};
+var Error_timed_out_by_sigkill = class extends Error {};
+var Error_failed = class extends Error {};
+var GNU_TIMEOUT_EXIT_STATUS_WHEN_SIGTERM = 124;
+var GNU_TIMEOUT_EXIT_STATUS_WHEN_SIGKILL = 137;
+/**
+* Executes a command with a timeout and transmits any error on failure.
+* @param {string} command - The shell command to execute.
+* @param {number} sigterm_timeout - The delay in seconds (s) before cancelling the command with a SIGTERM. 0 means infinity/never. Defaults to 0.
+* @param {number} sigkill_timeout - The delay in seconds (s) after SIGTERM before cancelling the command with a SIGKILL. 0 means infinity/never. `sigterm_timeout` at 0 disables this. Defaults to 10.
+* @returns {Promise<void>} Resolves when the command has been executed or rejects if an error occurs.
+* @throws {GLib.Error} - If an error occurs during communication with the subprocess running the command.
+* @throws {Error_timed_out_by_sigterm} - If the command is cancelled due to a timeout by SIGTERM.
+* @throws {Error_timed_out_by_sigkill} - If the command is cancelled due to a timeout by SIGKILL.
+* @throws {Error_failed} - If the command fails with a non-zero exit code. The error message is the `stderr` output if any, otherwise the exit status.
+*/
+async function launch_command$1(command, sigterm_timeout = 0, sigkill_timeout = 10) {
+	const wrapped_command = `timeout --kill-after=${sigkill_timeout}s ${sigterm_timeout}s sh -c ${GLib$3.shell_quote(command)}`;
+	const [_ok, argvp] = GLib$3.shell_parse_argv(wrapped_command);
+	const process = new Gio$3.Subprocess({
+		argv: argvp,
+		flags: Gio$3.SubprocessFlags.STDERR_PIPE
+	});
+	const start_time = Date.now();
+	process.init(null);
+	const [_stdout, stderr] = await new Promise((resolve, reject) => {
+		process.communicate_utf8_async(null, null, (source, result) => {
+			try {
+				const [_ok, stdout, stderr] = source.communicate_utf8_finish(result);
+				resolve([stdout, stderr]);
+			} catch (error) {
+				reject(error);
+			}
+		});
+	});
+	const elapsed_time = (Date.now() - start_time) / 1e3;
+	const exit_status = process.get_exit_status();
+	switch (exit_status) {
+		case 0: break;
+		case GNU_TIMEOUT_EXIT_STATUS_WHEN_SIGTERM: throw new Error_timed_out_by_sigterm("The command may have been timed out by SIGTERM");
+		case GNU_TIMEOUT_EXIT_STATUS_WHEN_SIGKILL: throw new Error_timed_out_by_sigkill("The command was probably killed by an external SIGKILL");
+		case 1: if (sigterm_timeout > 0 && elapsed_time >= sigterm_timeout + sigkill_timeout) throw new Error_timed_out_by_sigkill("The command was probably timed out by SIGKILL");
+		default: throw new Error_failed(stderr ? stderr.trim() : "exit status: " + exit_status);
+	}
+}
+//#endregion
+//#region src/app/launch_command.ts
+var { GLib: GLib$2 } = imports.gi;
+/**
+* Launches a command with a timeout and logs any error on failure.
+* @param name - The name of the command to display in case of error. If empty, the command itself is used.
+* @param expiry - The delay in seconds before cancelling the command with a SIGTERM, then 10 seconds later with a SIGKILL. `0` means infinity/never.
+* @param command - The shell command to execute.
+* @returns Resolves when the command has been executed or rejects if an error occurs.
+*/
+async function launch_command(name, expiry, command) {
+	try {
+		await launch_command$1(command, expiry);
+	} catch (error) {
+		const name_for_error = name !== "" ? name : command;
+		let msg = `${_("Failed to run command")} '${name_for_error}'.\n`;
+		if (error instanceof Error_failed) msg += `${_("Reason")}${_(":")} ${_("command error")}.\n${_("Detail")}${_(":")} ${error.message}`;
+		else if (error instanceof Error_timed_out_by_sigterm) msg += `${_("Reason")}${_(":")} ${_("command timeout")}.\n${_("Detail")}${_(":")} ${error.message}`;
+		else if (error instanceof Error_timed_out_by_sigkill) msg += `${_("Reason")}${_(":")} ${_("command timeout (killed)")}.\n${_("Detail")}${_(":")} ${error.message}`;
+		else if (error instanceof GLib$2.Error) msg += `${_("Reason")}${_(":")} GLib error.\n${_("Detail")}${_(":")}\nDomain: ${error.domain}\nCode: ${error.code}\nMessage: ${error.message}`;
+		else if (error instanceof Error) msg += `${_("Reason")}${_(":")} ${_("Other error")}\n${_("Detail")}${_(":")}\nName: ${error.name}\nMessage: ${error.message}\nStack?:\n${error?.stack}`;
+		else msg += `${_("Unknown error type")}${_(":")} ${error}`;
+		logger.warn(msg);
+	}
+}
+//#endregion
+//#region src/app/handlers/Commands_handler.ts
+var Commands_handler = class {
+	_settings;
+	constructor(applet, settings) {
+		this._settings = settings;
+		applet.on_button_launch_commands_light = () => this.launch_light_commands();
+		applet.on_button_launch_commands_dark = () => this.launch_dark_commands();
+	}
+	launch_dark_commands() {
+		this._launch_commands(this._settings.dark_commands_list);
+	}
+	launch_light_commands() {
+		this._launch_commands(this._settings.light_commands_list);
+	}
+	_launch_commands(commands_list) {
+		for (const command of commands_list) {
+			if (!command.active) continue;
+			launch_command(command.name, command.expiry, command.command);
+		}
+	}
+};
+//#endregion
+//#region src/core/Timezone_location_finder/Timezone_location_finder.ts
+var { Gio: Gio$2 } = imports.gi;
+/** A finder of timezone's city coordinates using a local database. */
+var Timezone_location_finder = class {
+	_database;
+	/**
+	* @param path - The absolute path where the `database.json` file is located.
+	* @throws {Error} - If the file cannot be loaded or JSON-parsed
+	*/
+	constructor(path) {
+		const file_path = `${path}/database.json`;
+		const [ok, file_content] = Gio$2.File.new_for_path(file_path).load_contents(null);
+		if (!ok) throw new Error(`failed to load file/contents of '${file_path}'`);
+		this._database = JSON.parse(new TextDecoder().decode(file_content));
+	}
+	/**
+	* Gets the latitude and longitude of the timezone's city.
+	* @param timezone - The timezone to get the coordinates from.
+	* @returns The system timezone's city coordinates.
+	*/
+	find(timezone) {
+		if (!timezone) throw new Error("timezone is required");
+		if (!(timezone in this._database)) throw new Error(`unknown timezone: '${timezone}'`);
+		return {
+			latitude: this._database[timezone][0],
+			longitude: this._database[timezone][1]
+		};
+	}
+};
+//#endregion
+//#region src/lib/gnome/Timezone_change_listener.js
+var { Gio: Gio$1 } = imports.gi;
+/** @typedef {import('../../types').Observer} Observer */
+/**
+* A listener for the system timezone changes.
+* @implements {Observer}
+*/
+var Timezone_change_listener = class {
+	/** @private @type {number | null} */
 	_signal_id = null;
+	/** The function to call when the system timezone changes.
+	* @type {((new_timezone: string) => void) | null} */
+	callback = null;
 	enable() {
 		if (this._signal_id !== null) return;
-		this._signal_id = settings$1.connect("changed::color-scheme", () => {
-			this.callback?.(Color_scheme_handler.value);
+		this._signal_id = Gio$1.DBus.system.signal_subscribe("org.freedesktop.timedate1", "org.freedesktop.DBus.Properties", "PropertiesChanged", "/org/freedesktop/timedate1", null, Gio$1.DBusSignalFlags.NONE, (_1, _2, _3, _4, _5, parameters) => {
+			const changed_properties = parameters.deep_unpack()[1];
+			if (changed_properties["Timezone"]) {
+				const new_timezone = changed_properties["Timezone"].deep_unpack();
+				this.callback?.(new_timezone);
+			}
 		});
 	}
 	disable() {
 		if (this._signal_id === null) return;
-		settings$1.disconnect(this._signal_id);
+		Gio$1.DBus.system.signal_unsubscribe(this._signal_id);
 		this._signal_id = null;
 	}
 	dispose() {
 		this.disable();
 	}
-	static get value() {
-		return settings$1.get_string("color-scheme");
+};
+//#endregion
+//#region src/app/handlers/Location_handler.ts
+var { GLib: GLib$1 } = imports.gi;
+var Location_handler = class {
+	_timezone_change_listener = new Timezone_change_listener((new_timezone) => this._timezone = new_timezone);
+	_timezone = GLib$1.TimeZone.new_local().get_identifier();
+	get timezone() {
+		return this._timezone;
 	}
-	static set value(value) {
-		settings$1.set_string("color-scheme", value);
+	_timezone_location_finder = new Timezone_location_finder(`${metadata.path}/Timezone_location_finder`);
+	get auto_location() {
+		return this._timezone_location_finder.find(this.timezone);
+	}
+	manual_location;
+	is_location_auto;
+	get location() {
+		return this.is_location_auto ? this.auto_location : this.manual_location;
+	}
+	constructor(initial_values) {
+		Object.assign(this, initial_values);
+		makeAutoObservable(this, {
+			_timezone_change_listener: false,
+			_timezone_location_finder: false,
+			manual_location: observable.deep
+		});
+		this._timezone_change_listener.enable();
+	}
+	dispose() {
+		this._timezone_change_listener.dispose();
 	}
 };
 //#endregion
@@ -4460,78 +4532,6 @@ var Twilights_handler = class {
 	constructor(initial_values) {
 		Object.assign(this, initial_values);
 		makeAutoObservable(this);
-	}
-};
-//#endregion
-//#region src/lib/gnome/Wall_clock_adjustment_monitor.js
-var { GLib: GLib$1 } = imports.gi;
-/** @typedef {import('../../types').Observer} Observer */
-/** @implements {Observer} */
-var Wall_clock_adjustment_monitor = class {
-	/** In seconds (s)
-	* @private */
-	_monitoring_interval = 10;
-	/** Check interval, in integer seconds (s) greater or equal to 1, defaults to 10
-	* @returns {number} */
-	get monitoring_interval() {
-		return this._monitoring_interval;
-	}
-	set monitoring_interval(value) {
-		value = Math.max(1, value);
-		value = Math.round(value);
-		this._monitoring_interval = value;
-		if (this._timeout_id) {
-			this.disable();
-			this.enable();
-		}
-	}
-	/** Function to call when the wall clock has been modified, defaults to null
-	* @type {(() => void) | null} */
-	callback = null;
-	/** @private @type {ReturnType<typeof GLib.timeout_add_seconds> | null} */
-	_timeout_id = null;
-	/** In microseconds (µs)
-	* @private */
-	_last_wall_clock_time = Number();
-	/** In microseconds (µs)
-	* @private */
-	_last_monotonic_time = Number();
-	enable() {
-		if (this._timeout_id) return;
-		this._last_wall_clock_time = GLib$1.get_real_time();
-		this._last_monotonic_time = GLib$1.get_monotonic_time();
-		this._timeout_id = GLib$1.timeout_add_seconds(GLib$1.PRIORITY_DEFAULT, this._monitoring_interval, this._timeout_function);
-	}
-	/** In microseconds (µs)
-	* @private */
-	_time_difference_tolerance = 2e6;
-	/** Maximum for time difference between wall clock and monotonic times to not trigger the callback, in seconds (s) greater or equal to 1, defaults to 2
-	* @returns {number} */
-	get time_difference_tolerance() {
-		return this._time_difference_tolerance / 1e6;
-	}
-	set time_difference_tolerance(value) {
-		value *= 1e6;
-		value = Math.max(1, value);
-		this._time_difference_tolerance = value;
-	}
-	/** @private @type {Parameters<typeof GLib.timeout_add_seconds>[2]} */
-	_timeout_function = () => {
-		const wall_clock_time = GLib$1.get_real_time(), monotonic_time = GLib$1.get_monotonic_time();
-		const delta_wall_clock = wall_clock_time - this._last_wall_clock_time;
-		const delta_monotonic = monotonic_time - this._last_monotonic_time;
-		if (Math.abs(delta_wall_clock - delta_monotonic) > this._time_difference_tolerance) this.callback?.();
-		this._last_wall_clock_time = wall_clock_time;
-		this._last_monotonic_time = monotonic_time;
-		return GLib$1.SOURCE_CONTINUE;
-	};
-	disable() {
-		if (!this._timeout_id) return;
-		GLib$1.source_remove(this._timeout_id);
-		this._timeout_id = null;
-	}
-	dispose() {
-		this.disable();
 	}
 };
 //#endregion

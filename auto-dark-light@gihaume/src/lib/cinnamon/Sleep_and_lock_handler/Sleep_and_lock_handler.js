@@ -1,6 +1,7 @@
-/** @typedef {import('../../../types').Observer} Observer */
 import { Screen_unlock_waiter } from './Screen_unlock_waiter.js';
 import { Sleep_events_listener } from './Sleep_events_listener.js';
+
+/** @typedef {import('../../../types').Observer} Observer */
 
 /**
  * A handler to wait until the screen is unlocked.

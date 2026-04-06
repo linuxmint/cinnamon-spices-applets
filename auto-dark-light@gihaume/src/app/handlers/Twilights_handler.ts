@@ -3,8 +3,9 @@ const { DateTime } = imports.gi.GLib; // Preferred over JS's `Date` to take into
 import * as mobx from 'mobx';
 
 import { compute_twilights } from '../../core/compute_twilights/compute_twilights.ts';
-import type { Location, Twilights } from '../../types.d.ts';
 import { Time_of_day } from '../../core/Time_of_day.ts';
+
+import type { Location, Twilights } from '../../types.d.ts';
 
 export class Twilights_handler {
     private _date = DateTime.new_now_local(); // TODO: could be `null` if timezone is bad or missing?
