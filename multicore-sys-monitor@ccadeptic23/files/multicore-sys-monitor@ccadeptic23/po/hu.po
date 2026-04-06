@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: multicore-sys-monitor@ccadeptic23 1.9.5\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-24 20:21+0100\n"
+"POT-Creation-Date: 2026-04-04 12:32+0200\n"
 "PO-Revision-Date: 2026-02-26 14:30+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -21,7 +21,7 @@ msgstr ""
 #. 5.6->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
 #. 3.2/prefs.js:187 3.4/DataProviders.js:58 3.4/prefs.js:195 5.6/applet.js:73
-#. 5.6/applet.js:628 5.6/applet.js:1619 5.6/applet.js:1671 5.6/applet.js:1679
+#. 5.6/applet.js:630 5.6/applet.js:1613 5.6/applet.js:1665 5.6/applet.js:1673
 #. 4.0/DataProviders.js:55 4.0/prefs.js:303 3.0/prefsui.glade:452
 #. 3.2/prefsui.glade:504 3.4/prefsui.glade:434 4.0/prefsui.glade:580
 msgid "CPU"
@@ -33,12 +33,12 @@ msgid "------------- CPU ------------"
 msgstr "------------- CPU ------------"
 
 #. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 3.4/DataProviders.js:129
-#. 5.6/applet.js:1681 4.0/DataProviders.js:126
+#. 5.6/applet.js:1675 4.0/DataProviders.js:126
 msgid "Core"
 msgstr "Mag"
 
 #. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 3.4/DataProviders.js:141
-#. 5.6/applet.js:74 5.6/applet.js:1417 4.0/DataProviders.js:138
+#. 5.6/applet.js:74 5.6/applet.js:1413 4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "MEM"
 
@@ -52,22 +52,22 @@ msgid "Usedup:"
 msgstr "Felhasznált:"
 
 #. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 3.4/DataProviders.js:162
-#. 5.6/applet.js:1477 4.0/DataProviders.js:159
+#. 5.6/applet.js:1473 4.0/DataProviders.js:159
 msgid "Cached:"
 msgstr "Gyorsítótárazott:"
 
 #. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 3.4/DataProviders.js:162
-#. 5.6/applet.js:1477 4.0/DataProviders.js:159
+#. 5.6/applet.js:1473 4.0/DataProviders.js:159
 msgid "Buffer:"
 msgstr "Puffer:"
 
 #. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 3.4/DataProviders.js:162
-#. 5.6/applet.js:49 5.6/applet.js:1477 4.0/DataProviders.js:159
+#. 5.6/applet.js:49 5.6/applet.js:1473 4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "Szabad:"
 
 #. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 3.4/DataProviders.js:176
-#. 5.6/applet.js:1554 4.0/DataProviders.js:173
+#. 5.6/applet.js:1548 4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "Cserehely"
 
@@ -78,14 +78,14 @@ msgstr "------------ Cserehely ------------"
 
 #. 5.6->settings-schema.json->Mem_colorSwap->description
 #. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 3.4/DataProviders.js:195
-#. 5.6/applet.js:50 5.6/applet.js:1583 4.0/DataProviders.js:194
+#. 5.6/applet.js:50 5.6/applet.js:1577 4.0/DataProviders.js:194
 #. 3.0/prefsui.glade:785 3.2/prefsui.glade:837 3.4/prefsui.glade:761
 #. 4.0/prefsui.glade:907
 msgid "Swap"
 msgstr "Cserehely"
 
 #. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 3.4/DataProviders.js:205
-#. 5.6/applet.js:75 5.6/applet.js:1705 5.6/lib/Graphs.js:906
+#. 5.6/applet.js:75 5.6/applet.js:1699 5.6/lib/Graphs.js:935
 #. 4.0/DataProviders.js:204
 msgid "NET"
 msgstr "NET"
@@ -96,8 +96,7 @@ msgid "---------- Networks ----------"
 msgstr "---------- Hálózatok ----------"
 
 #. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 3.4/DataProviders.js:300
-#. 5.6/applet.js:52 5.6/applet.js:1849 5.6/applet.js:1851
-#. 4.0/DataProviders.js:298
+#. 5.6/applet.js:52 5.6/applet.js:1842 4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "Le:"
 
@@ -107,13 +106,12 @@ msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
 #. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 3.4/DataProviders.js:301
-#. 5.6/applet.js:53 5.6/applet.js:1853 5.6/applet.js:1855
-#. 4.0/DataProviders.js:299
+#. 5.6/applet.js:53 5.6/applet.js:1843 4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "Fel:"
 
 #. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 3.4/DataProviders.js:317
-#. 5.6/applet.js:76 5.6/applet.js:1873 5.6/applet.js:2019
+#. 5.6/applet.js:76 5.6/applet.js:1861 5.6/applet.js:2001
 #. 4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "LEMEZ"
@@ -124,8 +122,7 @@ msgid "------------ Disks -----------"
 msgstr "------------ Lemezek -----------"
 
 #. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 3.4/DataProviders.js:386
-#. 5.6/applet.js:54 5.6/applet.js:1995 5.6/applet.js:1997
-#. 4.0/DataProviders.js:384
+#. 5.6/applet.js:54 5.6/applet.js:1982 4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "Olvasás:"
 
@@ -135,8 +132,7 @@ msgid "(MiB/s)"
 msgstr "(MiB/s)"
 
 #. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 3.4/DataProviders.js:387
-#. 5.6/applet.js:55 5.6/applet.js:1999 5.6/applet.js:2001
-#. 4.0/DataProviders.js:385
+#. 5.6/applet.js:55 5.6/applet.js:1983 4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "Írás:"
 
@@ -197,8 +193,8 @@ msgstr "Hiba a fájl mentése közben:"
 msgid "/s"
 msgstr "/s"
 
-#. 3.4/DataProviders.js:162 5.6/applet.js:47 5.6/applet.js:1474
-#. 5.6/applet.js:1477 5.6/applet.js:1594 4.0/DataProviders.js:159
+#. 3.4/DataProviders.js:162 5.6/applet.js:47 5.6/applet.js:1470
+#. 5.6/applet.js:1473 5.6/applet.js:1588 4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "Használt:"
 
@@ -242,53 +238,53 @@ msgid "DISK USAGE"
 msgstr ""
 
 #. 5.6->settings-schema.json->RefreshAll_btn->description
-#. 5.6/applet.js:583
+#. 5.6/applet.js:585
 msgid "Refresh All"
 msgstr "Összes frissítése"
 
-#. 5.6/applet.js:593
+#. 5.6/applet.js:595
 msgid "Without any graphics"
 msgstr "Mindenféle grafika nélkül"
 
-#. 5.6/applet.js:599
+#. 5.6/applet.js:601
 msgid "With graphics"
 msgstr "Grfikával"
 
-#. 5.6/applet.js:610
+#. 5.6/applet.js:612
 msgid "Drop Memory Cache (needs root rights)"
 msgstr "Memória gyorsítótár elvetése (rendszergazdai jogosultság szükséges)"
 
-#. 5.6/applet.js:626
+#. 5.6/applet.js:628
 msgid "Configure..."
 msgstr "Beállítás..."
 
 #. 5.6->settings-schema.json->pageGeneral->title
-#. 5.6/applet.js:627 3.0/prefsui.glade:281 3.2/prefsui.glade:333
+#. 5.6/applet.js:629 3.0/prefsui.glade:281 3.2/prefsui.glade:333
 #. 3.4/prefsui.glade:264 4.0/prefsui.glade:299
 msgid "General"
 msgstr "Általános"
 
 #. 5.6->settings-schema.json->pageMem->title
-#. 5.6/applet.js:629 5.6/applet.js:1464 3.0/prefsui.glade:832
+#. 5.6/applet.js:631 5.6/applet.js:1460 3.0/prefsui.glade:832
 #. 3.2/prefsui.glade:884 3.4/prefsui.glade:808 4.0/prefsui.glade:954
 msgid "Memory"
 msgstr "Memória"
 
 #. 5.6->settings-schema.json->pageNetwork->title
-#. 5.6/applet.js:630 5.6/applet.js:1114 5.6/applet.js:1715
+#. 5.6/applet.js:632 5.6/applet.js:1116 5.6/applet.js:1709
 #. 3.0/prefsui.glade:1154 3.2/prefsui.glade:1206 3.4/prefsui.glade:1143
 #. 4.0/prefsui.glade:1289
 msgid "Network"
 msgstr "Hálózat"
 
 #. 5.6->settings-schema.json->pageDisk->title
-#. 5.6/applet.js:631 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
+#. 5.6/applet.js:633 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
 #. 3.4/prefsui.glade:1489 4.0/prefsui.glade:1635
 msgid "Disk IO"
 msgstr "Lemez IO"
 
 #. 5.6->settings-schema.json->pageDiskUsage->title
-#. 5.6/applet.js:632
+#. 5.6/applet.js:634
 msgid "Disk Usage"
 msgstr "Lemezhasználat"
 
@@ -297,57 +293,57 @@ msgstr "Lemezhasználat"
 #. 5.6->settings-schema.json->sectionCPUColors->title
 #. 5.6->settings-schema.json->sectionMemoryColors->title
 #. 5.6->settings-schema.json->sectionDiskUsageColors->title
-#. 5.6/applet.js:633 3.0/prefsui.glade:411 3.0/prefsui.glade:584
+#. 5.6/applet.js:635 3.0/prefsui.glade:411 3.0/prefsui.glade:584
 #. 3.2/prefsui.glade:463 3.2/prefsui.glade:636 3.4/prefsui.glade:392
 #. 3.4/prefsui.glade:564 4.0/prefsui.glade:494 4.0/prefsui.glade:710
 msgid "Colors"
 msgstr "Színek"
 
-#. 5.6/applet.js:776 5.6/applet.js:819 5.6/applet.js:833
+#. 5.6/applet.js:778 5.6/applet.js:821 5.6/applet.js:835
 msgid "root"
 msgstr "root"
 
-#. 5.6/applet.js:1222 5.6/applet.js:1882 5.6/applet.js:1962 5.6/applet.js:2066
-#. 5.6/applet.js:2068
+#. 5.6/applet.js:1224 5.6/applet.js:1870 5.6/applet.js:1950 5.6/applet.js:2048
+#. 5.6/applet.js:2050
 msgid "Disks"
 msgstr "Lemezek"
 
-#. 5.6/applet.js:1475 5.6/applet.js:1595
+#. 5.6/applet.js:1471 5.6/applet.js:1589
 msgid "Available:"
 msgstr ""
 
-#. 5.6/applet.js:1499
+#. 5.6/applet.js:1495
 msgid "Buffers/Cache/Shared"
 msgstr "Pufferek/Gyorsítótár/Megosztott"
 
-#. 5.6/applet.js:1527 5.6/applet.js:1601 5.6/applet.js:1661 5.6/applet.js:1845
-#. 5.6/applet.js:1846 5.6/applet.js:1991 5.6/applet.js:1992 5.6/applet.js:2045
+#. 5.6/applet.js:1523 5.6/applet.js:1595 5.6/applet.js:1655 5.6/applet.js:1839
+#. 5.6/applet.js:1840 5.6/applet.js:1979 5.6/applet.js:1980 5.6/applet.js:2027
 msgid ":"
 msgstr ":"
 
-#. 5.6/applet.js:1529 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 5.6/applet.js:1525 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 3.4/prefsui.glade:663 4.0/prefsui.glade:809
 msgid "Buffer"
 msgstr "Puffer"
 
 #. 5.6->settings-schema.json->Mem_colorCache->description
-#. 5.6/applet.js:1529
+#. 5.6/applet.js:1525
 msgid "Cache"
 msgstr "Gyorsítótár"
 
-#. 5.6/applet.js:1529
+#. 5.6/applet.js:1525
 msgid "Shared"
 msgstr "Megosztott"
 
-#. 5.6/applet.js:1651
+#. 5.6/applet.js:1645
 msgid "CPUs"
 msgstr "CPU-k"
 
-#. 5.6/applet.js:1816
+#. 5.6/applet.js:1810
 msgid "Networks"
 msgstr "Hálózatok"
 
-#. 5.6/applet.js:2040
+#. 5.6/applet.js:2022
 msgid "Usage"
 msgstr "Használat"
 
@@ -825,6 +821,26 @@ msgid ""
 "tooltip"
 msgstr ""
 
+#. 5.6->settings-schema.json->Mem_value_display->description
+msgid "Display memory usage percentage"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_value_display->options
+#. 5.6->settings-schema.json->Mem_swapWidth->options
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
+msgid "None"
+msgstr "Semmi"
+
+#. 5.6->settings-schema.json->Mem_value_display->options
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
+msgid "Hovering over"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_value_display->options
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
+msgid "Always"
+msgstr ""
+
 #. 5.6->settings-schema.json->Mem_colorUsedup->description
 #. 5.6->settings-schema.json->DiskUsage_colorUsed->description
 #. 3.0/prefsui.glade:606 3.2/prefsui.glade:658 3.4/prefsui.glade:587
@@ -854,10 +870,6 @@ msgstr "100%"
 #. 5.6->settings-schema.json->Mem_swapWidth->options
 msgid "25%, left side"
 msgstr "25%, bal oldal"
-
-#. 5.6->settings-schema.json->Mem_swapWidth->options
-msgid "None"
-msgstr "Semmi"
 
 #. 5.6->settings-schema.json->Mem_swapWidth->tooltip
 msgid ""
@@ -979,17 +991,9 @@ msgstr "Szín Olvasás"
 msgid "Color Write"
 msgstr "Szín Írás"
 
-#. 5.6->settings-schema.json->DiskUsage_chartType->description
-msgid "Type of chart"
-msgstr "Diagram típusa"
-
-#. 5.6->settings-schema.json->DiskUsage_chartType->options
-msgid "Bar"
-msgstr "Sáv"
-
-#. 5.6->settings-schema.json->DiskUsage_chartType->options
-msgid "Pie"
-msgstr "Kör"
+#. 5.6->settings-schema.json->DiskUsage_value_display->description
+msgid "Display value"
+msgstr ""
 
 #. 5.6->settings-schema.json->DiskUsage_colorAlert->description
 msgid "Alert"
