@@ -1,6 +1,6 @@
 /** The names and types must match `settings-schema.json`.  */
 
-import type { Time_hms, Command } from "../../types";
+import type { Time_hms, Command } from '../../types.d.ts';
 
 export interface Settings extends imports.ui.settings.AppletSettings {
     is_appearance_dark: boolean;

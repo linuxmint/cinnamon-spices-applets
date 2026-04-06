@@ -1,6 +1,6 @@
 const { AppletSettings } = imports.ui.settings;
 
-import type { Settings } from "./ui/Settings";
+import type { Settings } from './ui/Settings.ts';
 
 export function initialize_applet_settings(
     uuid: string, instance_id: number

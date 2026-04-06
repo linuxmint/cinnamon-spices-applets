@@ -1,6 +1,6 @@
 const { Gio } = imports.gi;
 
-import type { Color_scheme, Observer } from '../../types';
+import type { Color_scheme, Observer } from '../../types.d.ts';
 
 const settings = Gio.Settings.new('org.x.apps.portal');
 

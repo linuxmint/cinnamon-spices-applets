@@ -1,6 +1,6 @@
 const { keybindingManager } = imports.ui.main;
 
-import type { Disposable } from '../../types';
+import type { Disposable } from '../../types.d.ts';
 
 /** A responsible handler to set a Cinnamon keybinding. */
 export class Keybinding_handler implements Disposable {

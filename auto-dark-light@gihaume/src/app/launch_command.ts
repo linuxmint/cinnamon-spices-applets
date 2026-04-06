@@ -1,7 +1,7 @@
 const { GLib } = imports.gi;
 
-import { _, logger } from '../globals';
-import * as cmd_launching from '../lib/gnome/command_launching';
+import { _, logger } from '../globals.ts';
+import * as cmd_launching from '../lib/gnome/command_launching.js';
 
 /**
  * Launches a command with a timeout and logs any error on failure.

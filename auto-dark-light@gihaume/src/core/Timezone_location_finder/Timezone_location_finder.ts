@@ -1,6 +1,6 @@
 const { Gio } = imports.gi;
 
-import { Location } from '../../types';
+import type { Location } from '../../types.d.ts';
 
 /** A finder of timezone's city coordinates using a local database. */
 export class Timezone_location_finder {

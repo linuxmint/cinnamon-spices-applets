@@ -1,8 +1,8 @@
 import * as mobx from 'mobx';
 
-import type { Twilights } from '../../types';
-import * as system_time from '../../lib/gnome/system_time';
-import type { Time_of_day } from '../../core/Time_of_day';
+import type { Twilights } from '../../types.d.ts';
+import * as system_time from '../../lib/gnome/system_time.js';
+import type { Time_of_day } from '../../core/Time_of_day.ts';
 
 export class Appearance_handler {
     private _time = system_time.get_now_as_time_of_day();

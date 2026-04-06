@@ -1,4 +1,4 @@
-import type { Time_hms } from '../types';
+import type { Time_hms } from '../types.d.ts';
 
 const SECONDS_PER_DAY = 24 * 60 * 60;
 

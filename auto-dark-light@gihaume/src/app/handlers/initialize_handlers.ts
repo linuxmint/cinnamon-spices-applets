@@ -2,24 +2,24 @@ const { GLib } = imports.gi;
 
 import * as mobx from 'mobx';
 
-import { _, metadata } from '../../globals';
-import { Appearance_handler } from './Appearance_handler';
-import type { Applet } from '../ui/Applet';
-import { Background_handler } from './Background_handler';
-import { Commands_handler } from './Commands_handler';
-import type { Disposable } from '../../types';
+import { _, metadata } from '../../globals.ts';
+import { Appearance_handler } from './Appearance_handler.ts';
+import type { Applet } from '../ui/Applet.ts';
+import { Background_handler } from './Background_handler.ts';
+import { Commands_handler } from './Commands_handler.ts';
+import type { Disposable } from '../../types.d.ts';
 import { Event_scheduler } from '../../lib/gnome/Event_scheduler';
-import { Keybinding_handler } from '../../lib/cinnamon/Keybinding_handler';
-import { Location_handler } from './Location_handler';
-import { logger } from '../../globals';
-import type { Settings } from '../ui/Settings';
-import { sleep } from '../../lib/utils';
+import { Keybinding_handler } from '../../lib/cinnamon/Keybinding_handler.ts';
+import { Location_handler } from './Location_handler.ts';
+import { logger } from '../../globals.ts';
+import type { Settings } from '../ui/Settings.ts';
+import { sleep } from '../../lib/utils.ts';
 import { Sleep_and_lock_handler } from '../../lib/cinnamon/Sleep_and_lock_handler';
-import { Color_scheme_handler } from '../../lib/cinnamon/Color_scheme_handler';
-import { Themes_handler } from './Themes_handler';
-import { Time_of_day } from '../../core/Time_of_day';
-import { Twilights_handler } from './Twilights_handler';
-import { Wall_clock_adjustment_monitor } from '../../lib/gnome/Wall_clock_adjustment_monitor';
+import { Color_scheme_handler } from '../../lib/cinnamon/Color_scheme_handler.ts';
+import { Themes_handler } from './Themes_handler.ts';
+import { Time_of_day } from '../../core/Time_of_day.ts';
+import { Twilights_handler } from './Twilights_handler.ts';
+import { Wall_clock_adjustment_monitor } from '../../lib/gnome/Wall_clock_adjustment_monitor.js';
 
 const DURATION_TO_AWAIT_BEFORE_UPDATING_DERIVED_SETTING = 2000; // milliseconds (ms)
 

@@ -3905,7 +3905,7 @@ var Commands_handler = class {
 };
 //#endregion
 //#region src/lib/gnome/Event_scheduler/Timer_absolute.js
-/** @typedef {import('../../../core/Time_of_day').Time_of_day} Time_of_day */
+/** @typedef {import('../../../core/Time_of_day.ts').Time_of_day} Time_of_day */
 /** A basic request-based absolute timer to be set for a next occurring time of day. */
 var Timer_absolute = class {
 	/** @private Unix time in seconds (s) */
@@ -3933,7 +3933,7 @@ var Timer_absolute = class {
 //#endregion
 //#region src/lib/gnome/Event_scheduler/Event_scheduler.js
 /** @typedef {import('../../../types').Disposable} Disposable */
-/** @typedef {import('../../../core/Time_of_day').Time_of_day} Time_of_day */
+/** @typedef {import('../../../core/Time_of_day.ts').Time_of_day} Time_of_day */
 var { GLib: GLib$3 } = imports.gi;
 /**
 * A single-event scheduler which call a function at a specific next time of day.
@@ -4111,7 +4111,7 @@ var Location_handler = class {
 };
 //#endregion
 //#region src/lib/utils.ts
-/** @param duration - The duration to sleep for, in milliseconds (ms) */
+/** @param duration - In milliseconds (ms) */
 async function sleep(duration) {
 	return new Promise((resolve) => setTimeout(resolve, duration));
 }
@@ -4233,7 +4233,7 @@ var Sleep_events_listener = class {
 };
 //#endregion
 //#region src/lib/cinnamon/Sleep_and_lock_handler/Sleep_and_lock_handler.js
-/** @typedef {import('../../../types.js').Observer} Observer */
+/** @typedef {import('../../../types').Observer} Observer */
 /**
 * A handler to wait until the screen is unlocked.
 * @implements {Observer}
