@@ -497,6 +497,8 @@ class ExitApplet extends Applet.IconApplet {
                 item.connect('activate', () => {
                     this.menu.close();
                     Util.spawnCommandLine(UNBLOCK_SCRIPT);
+                    if (this.lockOnSuspend)
+                        launcher.spawnv(["cinnamon-screensaver-command", "-l"]);
                     launcher.spawnv(["systemctl", "suspend"]);
                 });
                 this.menu.addMenuItem(item);
