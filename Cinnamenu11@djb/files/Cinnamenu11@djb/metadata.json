@@ -1,0 +1,11 @@
+{
+    "uuid": "Cinnamenu11@djb",
+    "name": "Cinnamenu11",
+    "description": "The flexible Cinnamenu configured with Windows 11 Layout.",
+    "max-instances": 1,
+    "version": "6.0",
+    "multiversion": true,
+    "website": "https://github.com/linuxmint/cinnamon-spices-applets",
+    "author": "davidbanting",
+    "last-edited": 1775264400
+}
