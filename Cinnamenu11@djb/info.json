@@ -1,0 +1,10 @@
+{
+  "uuid": "Cinnamenu11@djb",
+  "name": "Cinnamenu 11",
+  "description": "A replacement menu applet for Cinnamon",
+  "version": "6.0",
+  "files": ["files/Cinnamenu11@djb/6.0"],
+  "category": "Menu",
+  "author": "david banting",
+  "license": "GPL-3.0"
+}
