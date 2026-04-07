@@ -168,6 +168,10 @@ class ExitApplet extends Applet.IconApplet {
         });
 
         this.lockdown_settings = new Gio.Settings({ schema_id: 'org.cinnamon.desktop.lockdown' });
+        this.lockOnSuspend_settings = new Gio.Settings({ schema_id: 'org.cinnamon.settings-daemon.plugins.power' });
+        this.lockOnSuspend_system = this.lockOnSuspend_settings.get_boolean("lock-on-suspend");
+        this.lockOnSuspend_settings.connect("changed::lock-on-suspend", () => { this.lockOnSuspend = this.lockOnSuspend_settings.get_boolean("lock-on-suspend") });
+
 
         this.get_user_settings();
 
@@ -195,6 +199,8 @@ class ExitApplet extends Applet.IconApplet {
         this.s.bind("showOSD", "showOSD");
         this.s.bind("showRestartCinnamon", "showRestartCinnamon");
         this.s.bind("showSuspend", "showSuspend");
+        this.s.bind("lockOnSuspend", "lockOnSuspend", () => { this.on_lockOnSuspend_changed() } );
+        this.lockOnSuspend = this.lockOnSuspend_system;
         this.s.bind("showHibernate", "showHibernate");
         this.s.bind("hibernateNeedsSudo", "hibernateNeedsSudo");
         this.s.bind("showRestart", "showRestart");
@@ -643,6 +649,10 @@ class ExitApplet extends Applet.IconApplet {
         if (this.showScreenOff === false) {
             this.screenOffUsesXset = false;
         }
+    }
+
+    on_lockOnSuspend_changed() {
+        this.lockOnSuspend_settings.set_boolean("lock-on-suspend", this.lockOnSuspend);
     }
 
     on_keybinds_changed() {
