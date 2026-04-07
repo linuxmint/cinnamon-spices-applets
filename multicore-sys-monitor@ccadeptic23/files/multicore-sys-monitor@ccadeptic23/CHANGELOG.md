@@ -1,3 +1,8 @@
+### v3.10.4~20260404
+  * Panel display improvements. Better using the `DejaVuSansMono-Bold.ttf` font from the `fonts-dejavu-mono` package.
+  * Avoids changing Refresh Rate when updating applet.
+  * Fixes [#8495](https://github.com/linuxmint/cinnamon-spices-applets/issues/8495)
+
 ### v3.10.3~20260404
   * Memory: The user can choose whether or not to display the memory usage percentage.
   * Fixes [#8493](https://github.com/linuxmint/cinnamon-spices-applets/issues/8493)

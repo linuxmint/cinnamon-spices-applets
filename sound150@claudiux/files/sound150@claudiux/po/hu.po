@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-03-25 19:18+0100\n"
-"PO-Revision-Date: 2026-02-26 14:38+0100\n"
+"PO-Revision-Date: 2026-04-06 12:17+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 6.2/applet.js:138 4.4/applet.js:72 5.4/applet.js:132 4.6/applet.js:73
 #. 6.6/applet.js:196 2.8/applet.js:65 6.4/applet.js:190 3.4/applet.js:65
@@ -1250,30 +1250,30 @@ msgstr ""
 "csökkentett módban fog futni (előadó, cím vagy albumborító)."
 
 #. 6.6->settings-schema.json->keepAppListOpen->description
-#, fuzzy
 msgid "Keep the App Volume Control open"
-msgstr "Tartsa nyitva az alkalmazásválasztót"
+msgstr "Tartsa nyitva az Alkalmazás hangerőszabályzóját"
 
 #. 6.6->settings-schema.json->appsNotToDisplayLabel->description
 msgid "Apps Not to Display:"
-msgstr ""
+msgstr "Nem megjelenítendő alkalmazások:"
 
 #. 6.6->settings-schema.json->appsNotToDisplay->description
 msgid "Apps Not to Display"
-msgstr ""
+msgstr "Nem megjelenítendő alkalmazások"
 
 #. 6.6->settings-schema.json->appsNotToDisplay->columns->title
-#, fuzzy
 msgid ""
 "in\n"
 "Applications\n"
 "submenu"
-msgstr "Alkalmazások"
+msgstr ""
+"az\n"
+"Alkalmazások\n"
+"almenüben"
 
 #. 6.6->settings-schema.json->appsNotToDisplay->columns->title
-#, fuzzy
 msgid "Part of the app name"
-msgstr "Az eszköz nevének egy része"
+msgstr "Az alkalmazás nevének egy része"
 
 #. 6.6->settings-schema.json->keepOutputListOpen->description
 #. 6.4->settings-schema.json->keepOutputListOpen->description

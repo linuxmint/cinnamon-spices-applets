@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-04-04 12:32+0200\n"
-"PO-Revision-Date: 2026-02-26 14:30+0100\n"
+"PO-Revision-Date: 2026-04-06 12:14+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 5.6->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
@@ -229,13 +229,12 @@ msgid "Recoverable:"
 msgstr "Helyreállítható:"
 
 #. 5.6/applet.js:51
-#, fuzzy
 msgid "Swap:"
-msgstr "Cserehely"
+msgstr "Cserehely:"
 
 #. 5.6/applet.js:77
 msgid "DISK USAGE"
-msgstr ""
+msgstr "LEMEZHASZNÁLAT"
 
 #. 5.6->settings-schema.json->RefreshAll_btn->description
 #. 5.6/applet.js:585
@@ -310,7 +309,7 @@ msgstr "Lemezek"
 
 #. 5.6/applet.js:1471 5.6/applet.js:1589
 msgid "Available:"
-msgstr ""
+msgstr "Elérhető:"
 
 #. 5.6/applet.js:1495
 msgid "Buffers/Cache/Shared"
@@ -414,7 +413,7 @@ msgstr "Opciók"
 
 #. 5.6->settings-schema.json->sectionGeneralOrder->title
 msgid "Display Order"
-msgstr ""
+msgstr "Megjelenítési sorrend"
 
 #. 5.6->settings-schema.json->sectionTooltip->title
 #. 5.6->settings-schema.json->sectionNetworkTooltip->title
@@ -449,7 +448,7 @@ msgstr "Eszközök"
 
 #. 5.6->settings-schema.json->sectionNetworkTotal->title
 msgid "Total amount or instant speed"
-msgstr ""
+msgstr "Teljes összeg vagy azonnali sebesség"
 
 #. 5.6->settings-schema.json->sectionDiskUsagePaths->title
 msgid "Paths"
@@ -561,6 +560,8 @@ msgid ""
 "panel.\n"
 "Do not change these names!"
 msgstr ""
+"Válassza ki a panelen megjelenő mezők sorrendjét.\n"
+"Ne módosítsa a neveket!"
 
 #. 5.6->settings-schema.json->displayOrder->columns->title
 #. 5.6->settings-schema.json->Net_devicesList->columns->title
@@ -571,15 +572,15 @@ msgstr "Név"
 
 #. 5.6->settings-schema.json->displayOrder->description
 msgid "Display order in the panel"
-msgstr ""
+msgstr "Megjelenítési sorrend a panelen"
 
 #. 5.6->settings-schema.json->displayOrderApply->description
 msgid "Apply"
-msgstr ""
+msgstr "Alkalmaz"
 
 #. 5.6->settings-schema.json->displayOrderReinit->description
 msgid "Reset"
-msgstr ""
+msgstr "Visszaállítás"
 
 #. 5.6->settings-schema.json->CPU_labelOn->description
 #. 5.6->settings-schema.json->Mem_labelOn->description
@@ -620,56 +621,55 @@ msgstr "Összes egyesítése"
 
 #. 5.6->settings-schema.json->CPU_ignoreHyperthreading->description
 msgid "Ignore Hyper-Threading"
-msgstr ""
+msgstr "Hyper-Threading figyelmen kívül hagyása"
 
 #. 5.6->settings-schema.json->CPU_ignoreHyperthreading->tooltip
 msgid ""
 "Example: An 8-core processor with Hyper-Threading technology appears to have "
 "16 cores, even though it does not."
 msgstr ""
+"Példa: Egy 8 magos, Hyper-Threading technológiával rendelkező processzor "
+"látszólag 16 maggal rendelkezik, pedig nem."
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTime->description
 msgid "Show only the CPU Load Over Time"
-msgstr ""
+msgstr "Csak a CPU-terhelés időbeli megjelenítése"
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->description
 msgid "How many bars?"
-msgstr ""
+msgstr "Hány sáv?"
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
 msgid "8"
-msgstr ""
+msgstr "8"
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
-#, fuzzy
 msgid "16"
-msgstr "16px"
+msgstr "16"
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
-#, fuzzy
 msgid "32"
-msgstr "32px"
+msgstr "32"
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
-#, fuzzy
 msgid "64"
-msgstr "64px"
+msgstr "64"
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->tooltip
 msgid "Related to CPU Load Over Time"
-msgstr ""
+msgstr "A CPU terhelésével kapcsolatos időbeli összefüggés"
 
 #. 5.6->settings-schema.json->CPU_showTemp->description
 msgid "Show the CPU temperature"
@@ -706,27 +706,27 @@ msgstr ""
 
 #. 5.6->settings-schema.json->CPU_tempCorner->description
 msgid "Corner in which to display the temperature"
-msgstr ""
+msgstr "A hőmérséklet megjelenítésének sarka"
 
 #. 5.6->settings-schema.json->CPU_tempCorner->options
 #. 5.6->settings-schema.json->Net_totalCorner->options
 msgid "Top Right"
-msgstr ""
+msgstr "Jobb fent"
 
 #. 5.6->settings-schema.json->CPU_tempCorner->options
 #. 5.6->settings-schema.json->Net_totalCorner->options
 msgid "Top Left"
-msgstr ""
+msgstr "Bal fent"
 
 #. 5.6->settings-schema.json->CPU_tempCorner->options
 #. 5.6->settings-schema.json->Net_totalCorner->options
 msgid "Bottom Right"
-msgstr ""
+msgstr "Jobb lent"
 
 #. 5.6->settings-schema.json->CPU_tempCorner->options
 #. 5.6->settings-schema.json->Net_totalCorner->options
 msgid "Bottom Left"
-msgstr ""
+msgstr "Bal lent"
 
 #. 5.6->settings-schema.json->CPU_tempColor->description
 msgid "Normal Temperature Color"
@@ -781,35 +781,32 @@ msgid "0-20"
 msgstr "0-20"
 
 #. 5.6->settings-schema.json->Swap_enabled->description
-#, fuzzy
 msgid "Enable Swap"
-msgstr "Engedélyezés"
+msgstr "Cserehely engedélyezése"
 
 #. 5.6->settings-schema.json->Mem_chartType->description
 msgid "Chart Type"
-msgstr ""
-
-#. 5.6->settings-schema.json->Mem_chartType->options
-#, fuzzy
-msgid "Pie chart"
 msgstr "Diagram típusa"
 
 #. 5.6->settings-schema.json->Mem_chartType->options
+msgid "Pie chart"
+msgstr "Kördiagram"
+
+#. 5.6->settings-schema.json->Mem_chartType->options
 msgid "Bar chart"
-msgstr ""
+msgstr "Oszlopdiagram"
 
 #. 5.6->settings-schema.json->Mem_method->description
 msgid "Memory Calculation Method"
-msgstr ""
+msgstr "Memóriaszámítási módszer"
 
 #. 5.6->settings-schema.json->Mem_method->options
 msgid "htop (recommended)"
-msgstr ""
+msgstr "htop (ajánlott)"
 
 #. 5.6->settings-schema.json->Mem_method->options
-#, fuzzy
 msgid "Gnome System Monitor"
-msgstr "Többmagos Rendszerfigyelő"
+msgstr "Gnome Rendszerfigyelő"
 
 #. 5.6->settings-schema.json->Mem_startAt12Oclock->description
 msgid "Origin at 12 o'clock"
@@ -820,10 +817,12 @@ msgid ""
 "Show the amounts (in Bytes) of Total, Used and Available memory in the "
 "tooltip"
 msgstr ""
+"A teljes, a felhasznált és az elérhető memória mennyiségének (bájtban) "
+"megjelenítése az eszköztippben"
 
 #. 5.6->settings-schema.json->Mem_value_display->description
 msgid "Display memory usage percentage"
-msgstr ""
+msgstr "Memóriahasználat százalékos megjelenítése"
 
 #. 5.6->settings-schema.json->Mem_value_display->options
 #. 5.6->settings-schema.json->Mem_swapWidth->options
@@ -834,12 +833,12 @@ msgstr "Semmi"
 #. 5.6->settings-schema.json->Mem_value_display->options
 #. 5.6->settings-schema.json->DiskUsage_value_display->options
 msgid "Hovering over"
-msgstr ""
+msgstr "Lebegve fölötte"
 
 #. 5.6->settings-schema.json->Mem_value_display->options
 #. 5.6->settings-schema.json->DiskUsage_value_display->options
 msgid "Always"
-msgstr ""
+msgstr "Mindíg"
 
 #. 5.6->settings-schema.json->Mem_colorUsedup->description
 #. 5.6->settings-schema.json->DiskUsage_colorUsed->description
@@ -904,7 +903,7 @@ msgstr "Logaritmikus"
 #. 5.6->settings-schema.json->Net_symbolsInTooltip->description
 #. 5.6->settings-schema.json->Disk_symbolsInTooltip->description
 msgid "Use symbols instead of words"
-msgstr ""
+msgstr "Szimbólumokat használata szavak helyett"
 
 #. 5.6->settings-schema.json->Net_getdevlist_btn->description
 #. 5.6->settings-schema.json->Disk_getdevlist_btn->description
@@ -931,7 +930,7 @@ msgstr "Szín fel"
 
 #. 5.6->settings-schema.json->Net_devicesList->columns->title
 msgid "Part of total"
-msgstr ""
+msgstr "A teljes összeg egy része"
 
 #. 5.6->settings-schema.json->Net_cleardevlist_btn->description
 #. 5.6->settings-schema.json->Disk_cleardevlist_btn->description
@@ -940,40 +939,42 @@ msgstr "Eszközlista törlése"
 
 #. 5.6->settings-schema.json->Net_total_type->description
 msgid "Total amount or speed"
-msgstr ""
+msgstr "Teljes összeg vagy sebesség"
 
 #. 5.6->settings-schema.json->Net_total_type->options
 msgid "Total transfer amount (Bytes)"
-msgstr ""
+msgstr "Teljes átutalási összeg (bájt)"
 
 #. 5.6->settings-schema.json->Net_total_type->options
 msgid "Instant network speed (Bytes per second)"
-msgstr ""
+msgstr "Azonnali hálózati sebesség (bájt másodpercenként)"
 
 #. 5.6->settings-schema.json->Net_total_display->description
 msgid "Display that"
-msgstr ""
+msgstr "Mutasd meg, hogy"
 
 #. 5.6->settings-schema.json->Net_total_display->tooltip
 msgid ""
 "Be sure to check at least one “Part of total” box among the enabled devices."
 msgstr ""
+"Ügyeljen arra, hogy legalább egy „A teljes mennyiség része” jelölőnégyzetet "
+"bejelöljön az engedélyezett eszközök közül."
 
 #. 5.6->settings-schema.json->Net_total_hovering_only->description
 msgid "Only display when hovering over this applet"
-msgstr ""
+msgstr "Csak akkor jelenjen meg, ha az egérmutatót erre az appletre helyezi"
 
 #. 5.6->settings-schema.json->Net_totalCorner->description
 msgid "Corner in which to display that"
-msgstr ""
+msgstr "Sarok, ahol ki lehet helyezni"
 
 #. 5.6->settings-schema.json->Net_totalCorner->options
 msgid "Right Only"
-msgstr ""
+msgstr "Csak jobbra"
 
 #. 5.6->settings-schema.json->Net_totalCorner->options
 msgid "Left Only"
-msgstr ""
+msgstr "Csak balra"
 
 #. 5.6->settings-schema.json->Disk_devicesList->columns->title
 msgid "⚠️ Id"
@@ -993,7 +994,7 @@ msgstr "Szín Írás"
 
 #. 5.6->settings-schema.json->DiskUsage_value_display->description
 msgid "Display value"
-msgstr ""
+msgstr "Kijelzett érték"
 
 #. 5.6->settings-schema.json->DiskUsage_colorAlert->description
 msgid "Alert"
