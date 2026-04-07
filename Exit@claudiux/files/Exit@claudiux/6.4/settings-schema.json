@@ -53,6 +53,7 @@
         "showRestartCinnamon",
         "labelSeparator",
         "showSuspend",
+        "lockOnSuspend",
         "showHibernate",
         "hibernateNeedsSudo",
         "labelSeparator",
@@ -123,6 +124,12 @@
     "type": "switch",
     "default": true,
     "description": "Show the Suspend option"
+  },
+  "lockOnSuspend": {
+    "type": "switch",
+    "default": false,
+    "description": "Lock On Suspend",
+    "dependency": "showSuspend"
   },
   "showHibernate": {
     "type": "switch",
