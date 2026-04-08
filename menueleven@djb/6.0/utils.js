@@ -8,7 +8,7 @@ const Main = imports.ui.main;
 const ByteArray = imports.byteArray;
 const Cinnamon = imports.gi.Cinnamon;
 const {addTween} = imports.ui.tweener;
-Gettext.bindtextdomain('Cinnamenu11@djb', GLib.get_home_dir() + '/.local/share/locale');
+Gettext.bindtextdomain('menueleven@djb', GLib.get_home_dir() + '/.local/share/locale');
 
 function _(str) {
     let cinnamonTranslation = Gettext.gettext(str);

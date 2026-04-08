@@ -66,7 +66,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.menuManager = new PopupMenuManager(this);
         this.menu = new AppletPopupMenu(this, this.orientation);
         this.menuManager.addMenu(this.menu);
-        this.settings = new AppletSettings(this, "Cinnamenu11@djb", instance_id);
+        this.settings = new AppletSettings(this, "menueleven@djb", instance_id);
         this.settings.bind("menu-spacing", "menuSpacing", () => this._applyMenuStyle());
         if (this.menuSpacing) {
         this.menu.setCustomStyleClass('menu-background cinnamenu');//starkmenu-background');

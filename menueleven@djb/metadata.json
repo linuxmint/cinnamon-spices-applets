@@ -1,0 +1,11 @@
+{
+    "uuid": "menueleven@djb",
+    "name": "MenuEleven",
+    "description": "The flexible start menu for Cinnamon configured with Windows 11 Layout.",
+    "max-instances": 1,
+    "version": "6.0",
+    "multiversion": true,
+    "website": "https://github.com/linuxmint/cinnamon-spices-applets",
+    "author": "davidbanting",
+    "last-edited": 1775685600
+}
