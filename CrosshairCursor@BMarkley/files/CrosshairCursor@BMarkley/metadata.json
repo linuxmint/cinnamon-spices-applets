@@ -1,0 +1,7 @@
+{
+    "uuid": "CrosshairCursor@BMarkley",
+    "name": "CrosshairCursor@Bmarkley",
+    "description": "Activates a crosshair mouse cursor that spans the display.",
+    "max-instances": "1",
+    "author": "BMarkley"
+}
