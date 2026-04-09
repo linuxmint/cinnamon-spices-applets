@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-04-04 12:32+0200\n"
+"POT-Creation-Date: 2026-04-09 22:05+0200\n"
 "PO-Revision-Date: 2018-04-06 23:29+0200\n"
 "Last-Translator: xearonet\n"
 "Language-Team: \n"
@@ -22,8 +22,8 @@ msgstr ""
 
 #. 5.6->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
-#. 3.2/prefs.js:187 3.4/DataProviders.js:58 3.4/prefs.js:195 5.6/applet.js:73
-#. 5.6/applet.js:630 5.6/applet.js:1613 5.6/applet.js:1665 5.6/applet.js:1673
+#. 3.2/prefs.js:187 3.4/DataProviders.js:58 3.4/prefs.js:195 5.6/applet.js:79
+#. 5.6/applet.js:728 5.6/applet.js:1848 5.6/applet.js:1900 5.6/applet.js:1908
 #. 4.0/DataProviders.js:55 4.0/prefs.js:303 3.0/prefsui.glade:452
 #. 3.2/prefsui.glade:504 3.4/prefsui.glade:434 4.0/prefsui.glade:580
 msgid "CPU"
@@ -35,12 +35,12 @@ msgid "------------- CPU ------------"
 msgstr "------------- CPU ------------"
 
 #. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 3.4/DataProviders.js:129
-#. 5.6/applet.js:1675 4.0/DataProviders.js:126
+#. 5.6/applet.js:1910 4.0/DataProviders.js:126
 msgid "Core"
 msgstr "Rdzeń"
 
 #. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 3.4/DataProviders.js:141
-#. 5.6/applet.js:74 5.6/applet.js:1413 4.0/DataProviders.js:138
+#. 5.6/applet.js:80 5.6/applet.js:1635 4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "MEM"
 
@@ -49,27 +49,27 @@ msgstr "MEM"
 msgid "----------- Memory -----------"
 msgstr "----------- Pamięć -----------"
 
-#. 3.0/DataProviders.js:164 3.2/DataProviders.js:164 5.6/applet.js:48
+#. 3.0/DataProviders.js:164 3.2/DataProviders.js:164 5.6/applet.js:50
 msgid "Usedup:"
 msgstr "Użyta:"
 
 #. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 3.4/DataProviders.js:162
-#. 5.6/applet.js:1473 4.0/DataProviders.js:159
+#. 5.6/applet.js:1695 4.0/DataProviders.js:159
 msgid "Cached:"
 msgstr "Podręczna:"
 
 #. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 3.4/DataProviders.js:162
-#. 5.6/applet.js:1473 4.0/DataProviders.js:159
+#. 5.6/applet.js:1695 4.0/DataProviders.js:159
 msgid "Buffer:"
 msgstr "Buforowa:"
 
 #. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 3.4/DataProviders.js:162
-#. 5.6/applet.js:49 5.6/applet.js:1473 4.0/DataProviders.js:159
+#. 5.6/applet.js:51 5.6/applet.js:1695 4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "Wolna:"
 
 #. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 3.4/DataProviders.js:176
-#. 5.6/applet.js:1548 4.0/DataProviders.js:173
+#. 5.6/applet.js:1778 4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "SWAP"
 
@@ -80,14 +80,14 @@ msgstr "------------ Swap ------------"
 
 #. 5.6->settings-schema.json->Mem_colorSwap->description
 #. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 3.4/DataProviders.js:195
-#. 5.6/applet.js:50 5.6/applet.js:1577 4.0/DataProviders.js:194
+#. 5.6/applet.js:52 5.6/applet.js:1807 4.0/DataProviders.js:194
 #. 3.0/prefsui.glade:785 3.2/prefsui.glade:837 3.4/prefsui.glade:761
 #. 4.0/prefsui.glade:907
 msgid "Swap"
 msgstr "Swap"
 
 #. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 3.4/DataProviders.js:205
-#. 5.6/applet.js:75 5.6/applet.js:1699 5.6/lib/Graphs.js:935
+#. 5.6/applet.js:81 5.6/applet.js:1938 5.6/lib/Graphs.js:956
 #. 4.0/DataProviders.js:204
 msgid "NET"
 msgstr "NET"
@@ -98,7 +98,7 @@ msgid "---------- Networks ----------"
 msgstr "----------- Sieci ------------"
 
 #. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 3.4/DataProviders.js:300
-#. 5.6/applet.js:52 5.6/applet.js:1842 4.0/DataProviders.js:298
+#. 5.6/applet.js:54 5.6/applet.js:2081 4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "Pobieranie:"
 
@@ -108,12 +108,12 @@ msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
 #. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 3.4/DataProviders.js:301
-#. 5.6/applet.js:53 5.6/applet.js:1843 4.0/DataProviders.js:299
+#. 5.6/applet.js:55 5.6/applet.js:2082 4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "Wysyłanie:"
 
 #. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 3.4/DataProviders.js:317
-#. 5.6/applet.js:76 5.6/applet.js:1861 5.6/applet.js:2001
+#. 5.6/applet.js:82 5.6/applet.js:2104 5.6/applet.js:2262 5.6/lib/Graphs.js:957
 #. 4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "DISK"
@@ -124,7 +124,7 @@ msgid "------------ Disks -----------"
 msgstr "------------ Dyski -----------"
 
 #. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 3.4/DataProviders.js:386
-#. 5.6/applet.js:54 5.6/applet.js:1982 4.0/DataProviders.js:384
+#. 5.6/applet.js:56 5.6/applet.js:2239 4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "Odczyt:"
 
@@ -134,7 +134,7 @@ msgid "(MiB/s)"
 msgstr "(MiB/s)"
 
 #. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 3.4/DataProviders.js:387
-#. 5.6/applet.js:55 5.6/applet.js:1983 4.0/DataProviders.js:385
+#. 5.6/applet.js:57 5.6/applet.js:2240 4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "Zapis:"
 
@@ -160,6 +160,7 @@ msgstr ""
 #. 5.6->settings-schema.json->Net_enabled->description
 #. 5.6->settings-schema.json->Disk_enabled->description
 #. 5.6->settings-schema.json->DiskUsage_enabled->description
+#. 5.6->settings-schema.json->Battery_enabled->description
 #. 3.0/prefs.js:279 3.0/prefs.js:393 3.2/prefs.js:283 3.2/prefs.js:398
 #. 3.4/prefs.js:327 3.4/prefs.js:463 4.0/prefs.js:483 4.0/prefs.js:619
 #. 3.0/prefsui.glade:304 3.0/prefsui.glade:476 3.0/prefsui.glade:856
@@ -191,12 +192,12 @@ msgstr "Zapis "
 msgid "Error while saving file:"
 msgstr "Błąd podczas zapisywania pliku:"
 
-#. 3.4/DataProviders.js:49 5.6/applet.js:41 4.0/DataProviders.js:47
+#. 3.4/DataProviders.js:49 5.6/applet.js:43 4.0/DataProviders.js:47
 msgid "/s"
 msgstr "/s"
 
-#. 3.4/DataProviders.js:162 5.6/applet.js:47 5.6/applet.js:1470
-#. 5.6/applet.js:1473 5.6/applet.js:1588 4.0/DataProviders.js:159
+#. 3.4/DataProviders.js:162 5.6/applet.js:49 5.6/applet.js:1692
+#. 5.6/applet.js:1695 5.6/applet.js:1819 4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "Użyta:"
 
@@ -213,141 +214,168 @@ msgid ""
 "to use "
 msgstr ""
 
-#. 5.6/applet.js:44
+#. 5.6/applet.js:46
 #, fuzzy
 msgid "Core 128:"
 msgstr "Rdzeń"
 
-#. 5.6/applet.js:45
+#. 5.6/applet.js:47
 msgid "Unrecoverable:"
 msgstr ""
 
-#. 5.6/applet.js:46
+#. 5.6/applet.js:48
 msgid "Recoverable:"
 msgstr ""
 
-#. 5.6/applet.js:51
+#. 5.6/applet.js:53
 #, fuzzy
 msgid "Swap:"
 msgstr "Swap"
 
-#. 5.6/applet.js:77
+#. 5.6/applet.js:58
+msgid "Load:"
+msgstr ""
+
+#. 5.6/applet.js:59
+msgid "Unload:"
+msgstr ""
+
+#. 5.6/applet.js:83
 msgid "DISK USAGE"
 msgstr ""
 
+#. 5.6/applet.js:84
+msgid "BATTERY"
+msgstr ""
+
 #. 5.6->settings-schema.json->RefreshAll_btn->description
-#. 5.6/applet.js:585
+#. 5.6/applet.js:683
 #, fuzzy
 msgid "Refresh All"
 msgstr "Czas odświeżania"
 
-#. 5.6/applet.js:595
+#. 5.6/applet.js:693
 msgid "Without any graphics"
 msgstr ""
 
-#. 5.6/applet.js:601
+#. 5.6/applet.js:699
 msgid "With graphics"
 msgstr ""
 
-#. 5.6/applet.js:612
+#. 5.6/applet.js:710
 msgid "Drop Memory Cache (needs root rights)"
 msgstr ""
 
-#. 5.6/applet.js:628
+#. 5.6/applet.js:726
 msgid "Configure..."
 msgstr ""
 
 #. 5.6->settings-schema.json->pageGeneral->title
-#. 5.6/applet.js:629 3.0/prefsui.glade:281 3.2/prefsui.glade:333
+#. 5.6/applet.js:727 3.0/prefsui.glade:281 3.2/prefsui.glade:333
 #. 3.4/prefsui.glade:264 4.0/prefsui.glade:299
 msgid "General"
 msgstr "Ogólne"
 
 #. 5.6->settings-schema.json->pageMem->title
-#. 5.6/applet.js:631 5.6/applet.js:1460 3.0/prefsui.glade:832
+#. 5.6/applet.js:729 5.6/applet.js:1682 3.0/prefsui.glade:832
 #. 3.2/prefsui.glade:884 3.4/prefsui.glade:808 4.0/prefsui.glade:954
 msgid "Memory"
 msgstr "Pamięć"
 
 #. 5.6->settings-schema.json->pageNetwork->title
-#. 5.6/applet.js:632 5.6/applet.js:1116 5.6/applet.js:1709
+#. 5.6/applet.js:730 5.6/applet.js:1265 5.6/applet.js:1948
 #. 3.0/prefsui.glade:1154 3.2/prefsui.glade:1206 3.4/prefsui.glade:1143
 #. 4.0/prefsui.glade:1289
 msgid "Network"
 msgstr "Sieć"
 
 #. 5.6->settings-schema.json->pageDisk->title
-#. 5.6/applet.js:633 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
+#. 5.6/applet.js:731 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
 #. 3.4/prefsui.glade:1489 4.0/prefsui.glade:1635
 msgid "Disk IO"
 msgstr "Dysk"
 
 #. 5.6->settings-schema.json->pageDiskUsage->title
-#. 5.6/applet.js:634
+#. 5.6/applet.js:732
 #, fuzzy
 msgid "Disk Usage"
 msgstr "Dysk"
+
+#. 5.6->settings-schema.json->pageBattery->title
+#. 5.6/applet.js:733 5.6/applet.js:2366
+msgid "Battery"
+msgstr ""
 
 #. 5.6->settings-schema.json->pageColors->title
 #. 5.6->settings-schema.json->sectionGeneralColors->title
 #. 5.6->settings-schema.json->sectionCPUColors->title
 #. 5.6->settings-schema.json->sectionMemoryColors->title
 #. 5.6->settings-schema.json->sectionDiskUsageColors->title
-#. 5.6/applet.js:635 3.0/prefsui.glade:411 3.0/prefsui.glade:584
+#. 5.6->settings-schema.json->sectionBatteryColors->title
+#. 5.6/applet.js:734 3.0/prefsui.glade:411 3.0/prefsui.glade:584
 #. 3.2/prefsui.glade:463 3.2/prefsui.glade:636 3.4/prefsui.glade:392
 #. 3.4/prefsui.glade:564 4.0/prefsui.glade:494 4.0/prefsui.glade:710
 msgid "Colors"
 msgstr "Kolory"
 
-#. 5.6/applet.js:778 5.6/applet.js:821 5.6/applet.js:835
+#. 5.6/applet.js:877 5.6/applet.js:920 5.6/applet.js:934
 msgid "root"
 msgstr ""
 
-#. 5.6/applet.js:1224 5.6/applet.js:1870 5.6/applet.js:1950 5.6/applet.js:2048
-#. 5.6/applet.js:2050
+#. 5.6/applet.js:1373 5.6/applet.js:2115 5.6/applet.js:2207 5.6/applet.js:2309
+#. 5.6/applet.js:2311
 #, fuzzy
 msgid "Disks"
 msgstr "Dysk"
 
-#. 5.6/applet.js:1471 5.6/applet.js:1589
+#. 5.6/applet.js:1693 5.6/applet.js:1820
 msgid "Available:"
 msgstr ""
 
-#. 5.6/applet.js:1495
+#. 5.6/applet.js:1721
 msgid "Buffers/Cache/Shared"
 msgstr ""
 
-#. 5.6/applet.js:1523 5.6/applet.js:1595 5.6/applet.js:1655 5.6/applet.js:1839
-#. 5.6/applet.js:1840 5.6/applet.js:1979 5.6/applet.js:1980 5.6/applet.js:2027
+#. 5.6/applet.js:1749 5.6/applet.js:1826 5.6/applet.js:1890 5.6/applet.js:2078
+#. 5.6/applet.js:2079 5.6/applet.js:2236 5.6/applet.js:2237 5.6/applet.js:2288
+#. 5.6/applet.js:2371
 msgid ":"
 msgstr ""
 
-#. 5.6/applet.js:1525 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 5.6/applet.js:1751 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 3.4/prefsui.glade:663 4.0/prefsui.glade:809
 msgid "Buffer"
 msgstr "Buforowa"
 
 #. 5.6->settings-schema.json->Mem_colorCache->description
-#. 5.6/applet.js:1525
+#. 5.6/applet.js:1751
 #, fuzzy
 msgid "Cache"
 msgstr "Podręczna"
 
-#. 5.6/applet.js:1525
+#. 5.6/applet.js:1751
 msgid "Shared"
 msgstr ""
 
-#. 5.6/applet.js:1645
+#. 5.6/applet.js:1880
 msgid "CPUs"
 msgstr ""
 
-#. 5.6/applet.js:1810
+#. 5.6/applet.js:2049
 #, fuzzy
 msgid "Networks"
 msgstr "Sieć"
 
-#. 5.6/applet.js:2022
+#. 5.6/applet.js:2283
 msgid "Usage"
+msgstr ""
+
+#. 5.6/applet.js:2344 5.6/lib/Graphs.js:367
+msgid "BAT"
+msgstr ""
+
+#. 5.6/applet.js:2394 5.6/applet.js:2396
+msgid "Batteries"
 msgstr ""
 
 #. 4.0/applet.js:66
@@ -407,6 +435,7 @@ msgstr ""
 #. 5.6->settings-schema.json->sectionNetworkOptions->title
 #. 5.6->settings-schema.json->sectionDiskOptions->title
 #. 5.6->settings-schema.json->sectionDiskUsageOptions->title
+#. 5.6->settings-schema.json->sectionBatteryOptions->title
 msgid "Options"
 msgstr ""
 
@@ -450,7 +479,12 @@ msgid "Total amount or instant speed"
 msgstr ""
 
 #. 5.6->settings-schema.json->sectionDiskUsagePaths->title
+#. 5.6->settings-schema.json->sectionBatteryPaths->title
 msgid "Paths"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionDiskSpeed->title
+msgid "Instant speed"
 msgstr ""
 
 #. 5.6->settings-schema.json->sectionColors->title
@@ -565,6 +599,7 @@ msgstr ""
 #. 5.6->settings-schema.json->Net_devicesList->columns->title
 #. 5.6->settings-schema.json->Disk_devicesList->columns->title
 #. 5.6->settings-schema.json->DiskUsage_pathList->columns->title
+#. 5.6->settings-schema.json->Battery_devicesList->columns->title
 msgid "Name"
 msgstr ""
 
@@ -580,11 +615,22 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
+#. 5.6->settings-schema.json->CPU_enabledTooltip->description
+#. 5.6->settings-schema.json->Mem_enabledTooltip->description
+#. 5.6->settings-schema.json->Net_enabledTooltip->description
+#. 5.6->settings-schema.json->Disk_enabledTooltip->description
+#. 5.6->settings-schema.json->DiskUsage_enabledTooltip->description
+#. 5.6->settings-schema.json->Battery_enabledTooltip->description
+#, fuzzy
+msgid "Enable Tooltip"
+msgstr "Włącz"
+
 #. 5.6->settings-schema.json->CPU_labelOn->description
 #. 5.6->settings-schema.json->Mem_labelOn->description
 #. 5.6->settings-schema.json->Net_labelOn->description
 #. 5.6->settings-schema.json->Disk_labelOn->description
 #. 5.6->settings-schema.json->DiskUsage_labelOn->description
+#. 5.6->settings-schema.json->Battery_labelOn->description
 #, fuzzy
 msgid "Label"
 msgstr "Etykiety"
@@ -594,6 +640,7 @@ msgstr "Etykiety"
 #. 5.6->settings-schema.json->Net_squared->description
 #. 5.6->settings-schema.json->Disk_squared->description
 #. 5.6->settings-schema.json->DiskUsage_squared->description
+#. 5.6->settings-schema.json->Battery_squared->description
 msgid "Square view"
 msgstr ""
 
@@ -602,6 +649,7 @@ msgstr ""
 #. 5.6->settings-schema.json->Net_width->description
 #. 5.6->settings-schema.json->Disk_width->description
 #. 5.6->settings-schema.json->DiskUsage_width->description
+#. 5.6->settings-schema.json->Battery_width->description
 #. 3.0/prefsui.glade:360 3.0/prefsui.glade:533 3.0/prefsui.glade:912
 #. 3.0/prefsui.glade:1245 3.2/prefsui.glade:412 3.2/prefsui.glade:585
 #. 3.2/prefsui.glade:964 3.2/prefsui.glade:1297 3.4/prefsui.glade:341
@@ -615,6 +663,7 @@ msgstr "Szerokość"
 #. 5.6->settings-schema.json->Net_mergeAll->description
 #. 5.6->settings-schema.json->Disk_mergeAll->description
 #. 5.6->settings-schema.json->DiskUsage_mergeAll->description
+#. 5.6->settings-schema.json->Battery_mergeAll->description
 msgid "Merge all"
 msgstr ""
 
@@ -704,21 +753,25 @@ msgstr ""
 
 #. 5.6->settings-schema.json->CPU_tempCorner->options
 #. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
 msgid "Top Right"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_tempCorner->options
 #. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
 msgid "Top Left"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_tempCorner->options
 #. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
 msgid "Bottom Right"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_tempCorner->options
 #. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
 msgid "Bottom Left"
 msgstr ""
 
@@ -775,9 +828,18 @@ msgstr "Kolory"
 msgid "0-20"
 msgstr ""
 
+#. 5.6->settings-schema.json->Mem_enabledBufferCacheSharedTooltip->description
+msgid "Enable Buffer/Cache/Shared Tooltip"
+msgstr ""
+
 #. 5.6->settings-schema.json->Swap_enabled->description
 #, fuzzy
 msgid "Enable Swap"
+msgstr "Włącz"
+
+#. 5.6->settings-schema.json->Swap_enabledTooltip->description
+#, fuzzy
+msgid "Enable Swap Tooltip"
 msgstr "Włącz"
 
 #. 5.6->settings-schema.json->Mem_chartType->description
@@ -822,16 +884,19 @@ msgstr ""
 #. 5.6->settings-schema.json->Mem_value_display->options
 #. 5.6->settings-schema.json->Mem_swapWidth->options
 #. 5.6->settings-schema.json->DiskUsage_value_display->options
+#. 5.6->settings-schema.json->Battery_value_display->options
 msgid "None"
 msgstr ""
 
 #. 5.6->settings-schema.json->Mem_value_display->options
 #. 5.6->settings-schema.json->DiskUsage_value_display->options
+#. 5.6->settings-schema.json->Battery_value_display->options
 msgid "Hovering over"
 msgstr ""
 
 #. 5.6->settings-schema.json->Mem_value_display->options
 #. 5.6->settings-schema.json->DiskUsage_value_display->options
+#. 5.6->settings-schema.json->Battery_value_display->options
 msgid "Always"
 msgstr ""
 
@@ -898,17 +963,20 @@ msgstr ""
 
 #. 5.6->settings-schema.json->Net_getdevlist_btn->description
 #. 5.6->settings-schema.json->Disk_getdevlist_btn->description
+#. 5.6->settings-schema.json->Battery_getdevlist_btn->description
 msgid "Update this device list"
 msgstr ""
 
 #. 5.6->settings-schema.json->Net_devicesList->columns->title
 #. 5.6->settings-schema.json->Disk_devicesList->columns->title
 #. 5.6->settings-schema.json->DiskUsage_pathList->columns->title
+#. 5.6->settings-schema.json->Battery_devicesList->columns->title
 #, fuzzy
 msgid "Enabled"
 msgstr "Włącz"
 
 #. 5.6->settings-schema.json->Net_devicesList->columns->title
+#. 5.6->settings-schema.json->Battery_devicesList->columns->title
 msgid "⚠️ Id️"
 msgstr ""
 
@@ -928,6 +996,7 @@ msgstr ""
 
 #. 5.6->settings-schema.json->Net_cleardevlist_btn->description
 #. 5.6->settings-schema.json->Disk_cleardevlist_btn->description
+#. 5.6->settings-schema.json->Battery_cleardevlist_btn->description
 msgid "Clear this device list"
 msgstr ""
 
@@ -944,27 +1013,33 @@ msgid "Instant network speed (Bytes per second)"
 msgstr ""
 
 #. 5.6->settings-schema.json->Net_total_display->description
+#. 5.6->settings-schema.json->Disk_speed_display->description
 msgid "Display that"
 msgstr ""
 
 #. 5.6->settings-schema.json->Net_total_display->tooltip
+#. 5.6->settings-schema.json->Disk_speed_display->tooltip
 msgid ""
 "Be sure to check at least one “Part of total” box among the enabled devices."
 msgstr ""
 
 #. 5.6->settings-schema.json->Net_total_hovering_only->description
+#. 5.6->settings-schema.json->Disk_speed_hovering_only->description
 msgid "Only display when hovering over this applet"
 msgstr ""
 
 #. 5.6->settings-schema.json->Net_totalCorner->description
+#. 5.6->settings-schema.json->Disk_speedCorner->description
 msgid "Corner in which to display that"
 msgstr ""
 
 #. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
 msgid "Right Only"
 msgstr ""
 
 #. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
 msgid "Left Only"
 msgstr ""
 
@@ -987,10 +1062,12 @@ msgid "Color Write"
 msgstr "Zapis "
 
 #. 5.6->settings-schema.json->DiskUsage_value_display->description
+#. 5.6->settings-schema.json->Battery_value_display->description
 msgid "Display value"
 msgstr ""
 
 #. 5.6->settings-schema.json->DiskUsage_colorAlert->description
+#. 5.6->settings-schema.json->Battery_colorAlert->description
 msgid "Alert"
 msgstr ""
 
@@ -999,6 +1076,7 @@ msgid "Update this path list"
 msgstr ""
 
 #. 5.6->settings-schema.json->DiskUsage_pathList->columns->title
+#. 5.6->settings-schema.json->Battery_devicesList->columns->title
 msgid ""
 "Alert when\n"
 "value (in %)\n"
@@ -1007,6 +1085,14 @@ msgstr ""
 
 #. 5.6->settings-schema.json->DiskUsage_pathList->columns->title
 msgid "Path"
+msgstr ""
+
+#. 5.6->settings-schema.json->Battery_colorLoad->description
+msgid "Load"
+msgstr ""
+
+#. 5.6->settings-schema.json->Battery_colorUnload->description
+msgid "Unload"
 msgstr ""
 
 #. 5.6->settings-schema.json->color0->description

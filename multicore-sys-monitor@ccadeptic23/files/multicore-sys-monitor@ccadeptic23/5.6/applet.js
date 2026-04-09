@@ -38,6 +38,8 @@ const PATH2SCRIPTS = APPLET_DIR + "/scripts";
 const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
 const NETWORK_DEVICES_STATUS_PATH = XDG_RUNTIME_DIR + "/network_devices";
 
+const POWER_SUPPLY_PATH = "/sys/class/power_supply";
+
 const rate = _('/s');
 var spaces = 16;
 const translated_strings = [
@@ -52,7 +54,9 @@ const translated_strings = [
     _("Down:"),
     _("Up:"),
     _("Read:"),
-    _("Write:")
+    _("Write:"),
+    _("Load:"),
+    _("Unload:")
 ];
 for (let s of translated_strings) {
     let l = s.length + 1;
@@ -61,12 +65,14 @@ for (let s of translated_strings) {
 }
 
 const properties = [
-    {graph: 'multiCpuGraph', provider: 'multiCpuProvider', abbrev: 'CPU'},
-    {graph: 'memoryGraph', provider: 'memoryProvider', abbrev: 'Mem'},
-    {graph: 'swapGraph', provider: 'swapProvider', abbrev: 'Swap'},
-    {graph: 'networkGraph', provider: 'networkProvider', abbrev: 'Net'},
-    {graph: 'diskGraph', provider: 'diskProvider', abbrev: 'Disk'},
-    {graph: 'diskUsageGraph', provider: 'diskUsageProvider', abbrev: 'DiskUsage'}
+    {graph: "multiCpuGraph", provider: "multiCpuProvider", abbrev: "CPU"},
+    {graph: "memoryGraph", provider: "memoryProvider", abbrev: "Mem"},
+    {graph: "swapGraph", provider: "swapProvider", abbrev: "Swap"},
+    {graph: "networkGraph", provider: "networkProvider", abbrev: "Net"},
+    {graph: "diskGraph", provider: "diskProvider", abbrev: "Disk"},
+    {graph: "diskUsageGraph", provider: "diskUsageProvider", abbrev: "DiskUsage"},
+    //~ {graph: "diskUsageGraph", provider: "diskUsageProvider", abbrev: "DiskUsage"} //,
+    {graph: "batteryGraph", provider: "batteryProvider", abbrev: "Battery"}
 ];
 
 const orig_names = [
@@ -74,16 +80,27 @@ const orig_names = [
     _("MEM"),
     _("NET"),
     _("DISK"),
-    _("DISK USAGE")
+    _("DISK USAGE"),
+    _("BATTERY")
 ];
 const orig_charts = [
     [properties[0]],
     [properties[1], properties[2]],
     [properties[3]],
     [properties[4]],
-    [properties[5]]
+    [properties[5]],
+    [properties[6]]
 ];
 
+function conf2json(str) {
+    var _json = {};
+    var lines = str.split("\n");
+    for (let line of lines) {
+        let [varName, varValue] = line.split("=");
+        _json[varName] = varValue;
+    }
+    return _json;
+}
 
 function get_nemo_size_prefixes() {
     let _SETTINGS_SCHEMA='org.nemo.preferences';
@@ -215,6 +232,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("displayOrder", "displayOrder");
         this.controlDisplayOrder();
         this.settings.bind("CPU_enabled", "CPU_enabled");
+        this.settings.bind("CPU_enabledTooltip", "CPU_enabledTooltip");
         this.settings.bind("CPU_squared", "CPU_squared");
         this.settings.bind("CPU_showTemp", "CPU_showTemp");
         this.settings.bind("CPU_tempInFahrenheit", "CPU_tempInFahrenheit");
@@ -236,7 +254,10 @@ class MCSM extends Applet.IconApplet {
             if (value === false) this.CPU_showLoadOverTime = false;
         });
         this.settings.bind("CPU_showLoadOverTime", "CPU_showLoadOverTime", (value) => {
-            if (value === true) this.CPU_ignoreHyperthreading = true;
+            if (value === true) {
+                this.CPU_ignoreHyperthreading = true;
+                this.CPU_byActivity = true;
+            }
         });
         this.settings.bind("CPU_showLoadOverTimeHowManyBars", "CPU_showLoadOverTimeHowManyBars", () => { this.refreshAll() });
         this.settings.bind("CPU_color0", "CPU_color0");
@@ -249,7 +270,10 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_activity_60_80", "CPU_activity_60_80");
         this.settings.bind("CPU_activity_80_100", "CPU_activity_80_100");
         this.settings.bind("Mem_enabled", "Mem_enabled");
+        this.settings.bind("Mem_enabledTooltip", "Mem_enabledTooltip");
+        this.settings.bind("Mem_enabledBufferCacheSharedTooltip", "Mem_enabledBufferCacheSharedTooltip");
         this.settings.bind("Swap_enabled", "Swap_enabled");
+        this.settings.bind("Swap_enabledTooltip", "Swap_enabledTooltip");
         this.settings.bind("Mem_chartType", "Mem_chartType");
         this.settings.bind("Mem_squared", "Mem_squared");
         this.settings.bind("Mem_method", "Mem_method");
@@ -264,7 +288,10 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Mem_colorSwap", "Mem_colorSwap");
         this.settings.bind("Mem_swapWidth", "Mem_swapWidth");
         this.settings.bind("Net_enabled", "Net_enabled");
-        this.settings.bind("Net_squared", "Net_squared");
+        this.settings.bind("Net_enabledTooltip", "Net_enabledTooltip");
+        this.settings.bind("Net_squared", "Net_squared", (value) => {
+            if (value === true) this.Net_total_display = false;
+        });
         this.settings.bind("Net_width", "Net_width", () => { this.adjust_Net_width() });
         this.settings.bind("Net_mergeAll", "Net_mergeAll");
         this.settings.bind("Net_autoscale", "Net_autoscale");
@@ -272,16 +299,23 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Net_total_type", "Net_total_type");
         this.settings.bind("Net_total_display", "Net_total_display", () => { this.adjust_Net_width() });
         this.settings.bind("Net_total_hovering_only", "Net_total_hovering_only");
-        this.settings.bind("Net_totalCorner", "Net_totalCorner");
+        this.settings.bind("Net_totalCorner", "Net_totalCorner", () => { this.adjust_Net_width() });
         this.settings.bind("Net_symbolsInTooltip", "Net_symbolsInTooltip");
         this.settings.bind("Disk_enabled", "Disk_enabled");
-        this.settings.bind("Disk_squared", "Disk_squared");
+        this.settings.bind("Disk_enabledTooltip", "Disk_enabledTooltip");
+        this.settings.bind("Disk_squared", "Disk_squared", (value) => {
+            if (value === true) this.Disk_speed_display = false;
+        });
         this.settings.bind("Disk_width", "Disk_width", () => { this.adjust_Disk_width() });
         this.settings.bind("Disk_mergeAll", "Disk_mergeAll");
         this.settings.bind("Disk_autoscale", "Disk_autoscale");
         this.settings.bind("Disk_logscale", "Disk_logscale");
         this.settings.bind("Disk_symbolsInTooltip", "Disk_symbolsInTooltip");
+        this.settings.bind("Disk_speed_display", "Disk_speed_display");
+        this.settings.bind("Disk_speed_hovering_only", "Disk_speed_hovering_only");
+        this.settings.bind("Disk_speedCorner", "Disk_speedCorner", () => { this.adjust_Disk_width() });
         this.settings.bind("DiskUsage_enabled", "DiskUsage_enabled");
+        this.settings.bind("DiskUsage_enabledTooltip", "DiskUsage_enabledTooltip");
         this.settings.bind("DiskUsage_labelOn", "DiskUsage_labelOn");
         this.settings.bind("DiskUsage_squared", "DiskUsage_squared");
         this.settings.bind("DiskUsage_width", "DiskUsage_width", () => { this.adjust_DiskUsage_width() });
@@ -291,11 +325,47 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("DiskUsage_colorFree", "DiskUsage_colorFree");
         this.settings.bind("DiskUsage_colorAlert", "DiskUsage_colorAlert");
         this.settings.bind("DiskUsage_pathList", "DiskUsage_pathList");
+        this.settings.bind("Battery_enabled", "Battery_enabled");
+        this.settings.bind("Battery_enabledTooltip", "Battery_enabledTooltip");
+        this.settings.bind("Battery_labelOn", "Battery_labelOn");
+        this.settings.bind("Battery_squared", "Battery_squared");
+        this.settings.bind("Battery_width", "Battery_width", () => { this.adjust_Battery_width() });
+        this.settings.bind("Battery_mergeAll", "Battery_mergeAll");
+        this.settings.bind("Battery_value_display", "Battery_value_display");
+        this.settings.bind("Battery_colorLoad", "Battery_colorLoad");
+        this.settings.bind("Battery_colorUnload", "Battery_colorUnload");
+        this.settings.bind("Battery_colorAlert", "Battery_colorAlert");
+        this.settings.bind("Battery_devicesList", "Battery_devicesList");
+
         for (let i=0; i<nb_colors; i++)
             this.settings.bind(`color${i}`, `color${i}`, () => { this.on_color_changed() });
 
-        //~ if (this.refreshRate < 500)
-            //~ this.refreshRate = 500;
+        var nb_battery = 0;
+        for (let b of this.Battery_devicesList) nb_battery += 1;
+        if (nb_battery === 0) this.on_Battery_getdevlist_btn_clicked();
+
+        var nb_diskusage = 0;
+        for (let d of this.DiskUsage_pathList) nb_diskusage += 1;
+        if (nb_diskusage === 0) this.on_DiskUsage_getpathlist_btn_clicked();
+
+        var nb_diskdev = 0;
+        for (let d of this.Disk_devicesList) nb_diskdev += 1;
+        if (nb_diskdev === 0) this.on_Disk_getdevlist_btn_clicked();
+
+        var nb_netdev = 0;
+        for (let d of this.Net_devicesList) nb_netdev += 1;
+        if (nb_netdev === 0) this.on_Net_getdevlist_btn_clicked();
+
+        this.battery_energy = {};
+        this.battery_capacity = {};
+        for (let b of this.Battery_devicesList) {
+            let _id = b["id"];
+            if (_id.length === 0) continue;
+            this.battery_energy[_id] = [100, 50];
+            this.battery_usage(_id);
+            this.battery_capacity[_id] = [100, 50];
+            this.battery_health(_id);
+        }
 
         this.on_color_changed();
         this.useSymbolicIcon = true;
@@ -354,6 +424,7 @@ class MCSM extends Applet.IconApplet {
         this.networkProvider = new NetDataProvider(this);
         this.diskProvider = new DiskDataProvider(this);
         this.diskUsageProvider = new DiskUsageDataProvider(this);
+        this.batteryProvider = new BatteryDataProvider(this);
 
         this._initContextMenu();
 
@@ -375,6 +446,8 @@ class MCSM extends Applet.IconApplet {
         this.diskGraph.logScale = this.Disk_logscale;
 
         this.diskUsageGraph = new Graphs.GraphVBars100(this.graphArea, this);
+
+        this.batteryGraph = new Graphs.GraphVBars100(this.graphArea, this);
 
         this.actor.add_actor(this.graphArea);
         this.graphArea.connect('repaint', (area) => this.onGraphRepaint(area));
@@ -413,7 +486,8 @@ class MCSM extends Applet.IconApplet {
     adjust_CPU_width() {
         if (this.graphStep === 1) return;
         let CPU_width = Math.max(
-            Math.min(this.graphStep, 16),
+            //~ Math.min(this.graphStep, 16),
+            1,
             Math.round(this.CPU_width / this.graphStep) * this.graphStep
         );
         this.CPU_width = CPU_width;
@@ -422,39 +496,61 @@ class MCSM extends Applet.IconApplet {
     adjust_Mem_width() {
         if (this.graphStep === 1) return;
         let Mem_width = Math.max(
-            Math.min(this.graphStep, 16),
+            //~ Math.min(this.graphStep, 16),
+            1,
             Math.round(this.Mem_width / this.graphStep) * this.graphStep
         );
         this.Mem_width = Mem_width;
     }
 
     adjust_Net_width() {
-        if (this.graphStep === 1) return;
-        let Net_width = Math.max(
-            Math.min(this.graphStep, 16),
-            Math.round(this.Net_width / this.graphStep) * this.graphStep
-        );
-        if (this.Net_total_display && Net_width < 128)
-            Net_width = 128;
+        let Net_width = this.Net_width;
+        if (this.graphStep !== 1) {
+            Net_width = Math.max(
+                1,
+                Math.round(this.Net_width / this.graphStep) * this.graphStep
+            );
+        }
+        if (this.Net_total_display && this.Net_totalCorner.includes("O") && Net_width < 80)
+            Net_width = 80;
+        if (this.Net_total_display && !this.Net_totalCorner.includes("O") && Net_width < 160)
+            Net_width = 160;
         this.Net_width = Net_width;
     }
 
     adjust_Disk_width() {
-        if (this.graphStep === 1) return;
-        let Disk_width = Math.max(
-            Math.min(this.graphStep, 16),
-            Math.round(this.Disk_width / this.graphStep) * this.graphStep
-        );
+        let Disk_width = this.Disk_width;
+        if (this.graphStep !== 1) {
+            Disk_width = Math.max(
+                1,
+                Math.round(this.Disk_width / this.graphStep) * this.graphStep
+            );
+        }
+        if (this.Disk_speed_display && this.Disk_speedCorner.includes("O") && Disk_width < 80)
+            Disk_width = 80;
+        if (this.Disk_speed_display && !this.Disk_speedCorner.includes("O") && Disk_width < 160)
+            Disk_width = 160;
         this.Disk_width = Disk_width;
     }
 
     adjust_DiskUsage_width() {
         if (this.graphStep === 1) return;
         let DiskUsage_width = Math.max(
-            Math.min(this.graphStep, 16),
+            //~ Math.min(this.graphStep, 16),
+            1,
             Math.round(this.DiskUsage_width / this.graphStep) * this.graphStep
         );
         this.DiskUsage_width = DiskUsage_width;
+    }
+
+    adjust_Battery_width() {
+        if (this.graphStep === 1) return;
+        let Battery_width = Math.max(
+            //~ Math.min(this.graphStep, 16),
+            1,
+            Math.round(this.Battery_width / this.graphStep) * this.graphStep
+        );
+        this.Battery_width = Battery_width;
     }
 
     on_apply_width_multiple() {
@@ -497,6 +593,7 @@ class MCSM extends Applet.IconApplet {
             this.get_net_info();
             this.get_disk_info();
             this.get_disk_usage();
+            this.get_battery_usage();
             this._setTooltip();
             try {
                 if (this.graphArea && this.graphArea.queue_repaint)
@@ -633,7 +730,8 @@ class MCSM extends Applet.IconApplet {
             this.context_menu_item_configure.menu.addAction(_("Network"), () => { this.configureApplet(3) });
             this.context_menu_item_configure.menu.addAction(_("Disk IO"), () => { this.configureApplet(4) });
             this.context_menu_item_configure.menu.addAction(_("Disk Usage"), () => { this.configureApplet(5) });
-            this.context_menu_item_configure.menu.addAction(_("Colors"), () => { this.configureApplet(6) });
+            this.context_menu_item_configure.menu.addAction(_("Battery"), () => { this.configureApplet(6) });
+            this.context_menu_item_configure.menu.addAction(_("Colors"), () => { this.configureApplet(7) });
             this._applet_context_menu.addMenuItem(this.context_menu_item_configure, posConfigure);
         }
     }
@@ -848,6 +946,56 @@ class MCSM extends Applet.IconApplet {
         this.Disk_devicesList = [];
     }
 
+    on_Battery_getdevlist_btn_clicked() {
+        //~ const POWER_SUPPLY_PATH = "/sys/class/power_supply";
+        const POWER_SUPPLY = Gio.file_new_for_path(POWER_SUPPLY_PATH);
+        const children = POWER_SUPPLY.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
+        var knownDevices = [];
+        var new_Battery_devicesList = this.Battery_devicesList;
+        for (let d of this.Battery_devicesList) {
+            if (d["id"].length === 0) continue; // Prevents user mistakes.
+            knownDevices.push(d["id"]);
+        }
+
+        var ret = "";
+        var returnedDevices = [];
+        for (let child of children) {
+            let name = child.get_name();
+            global.log("name: " + name);
+            let uevent_file_path = `${POWER_SUPPLY_PATH}/${name}/uevent`;
+            if (!GLib.file_test(uevent_file_path, GLib.FileTest.EXISTS)) continue;
+            readFileAsync(uevent_file_path).then( (status) => {
+                status = status.trim();
+                let _json = conf2json(status);
+                if (_json["POWER_SUPPLY_TYPE"] === "Battery" && parseInt(_json["POWER_SUPPLY_PRESENT"]) === 1)
+                ret += `${name} `;
+            });
+        }
+        children.close(null);
+
+        let idto = setTimeout( () => {
+            clearTimeout(idto);
+            returnedDevices = ret.trim().split(" ");
+            for (let dev of returnedDevices) {
+                if (dev.length < 2) continue;
+                if (knownDevices.indexOf(dev) < 0) {
+                    new_Battery_devicesList.push({
+                            "enabled": true,
+                            "id": dev,
+                            "minvalue": 40,
+                            "name": dev
+                        });
+                        knownDevices.push(dev);
+                }
+            }
+            this.Battery_devicesList = new_Battery_devicesList;
+        }, 2100);
+    }
+
+    on_Battery_cleardevlist_btn_clicked() {
+        this.Battery_devicesList = [];
+    }
+
     _runSysMon() {
         let systemMonitoringCenter = appSystem.lookup_flatpak_app_id('io.github.hakandundar34coding.system-monitoring-center');
         if (systemMonitoringCenter) {
@@ -889,7 +1037,7 @@ class MCSM extends Applet.IconApplet {
 
     get_mem_info() {
         if (!this.isRunning) return;
-        if (!this.Mem_enabled) return;
+        if (!this.Mem_enabled && !this.Mem_enabledTooltip) return;
         let old, duration;
         if (DEBUG) old = Date.now();
 
@@ -937,7 +1085,7 @@ class MCSM extends Applet.IconApplet {
 
     get_cpu_info() {
         if (!this.isRunning) return;
-        if (!this.CPU_enabled) return;
+        if (!this.CPU_enabled && !this.CPU_enabledTooltip) return;
         let old, duration;
         if (DEBUG) old = Date.now();
 
@@ -1140,7 +1288,7 @@ class MCSM extends Applet.IconApplet {
 
     get_net_info() {
         if (!this.isRunning) return;
-        if (!this.Net_enabled) return;
+        if (!this.Net_enabled && !this.Net_enabledTooltip) return;
         const net_dir_path = "/sys/class/net";
         let old, duration;
         if (DEBUG) old = Date.now();
@@ -1176,7 +1324,7 @@ class MCSM extends Applet.IconApplet {
 
     get_disk_info() {
         if (!this.isRunning) return;
-        if (!this.Disk_enabled) return;
+        if (!this.Disk_enabled && !this.Disk_enabledTooltip) return;
         let old, duration;
         if (DEBUG) old = Date.now();
         var usedDevices = [];
@@ -1237,7 +1385,7 @@ class MCSM extends Applet.IconApplet {
 
     get_disk_usage() {
         if (!this.isRunning) return;
-        if (!this.DiskUsage_enabled) return;
+        if (!this.DiskUsage_enabled && !this.DiskUsage_enabledTooltip) return;
         var usedPaths = [];
         var sumSize = 0;
         var sumUsed = 0;
@@ -1272,7 +1420,7 @@ class MCSM extends Applet.IconApplet {
 
     disk_usage(path) {
         if (!this.isRunning) return [0, 0];
-        if (!this.DiskUsage_enabled) return [0, 0];
+        if (!this.DiskUsage_enabled && !this.DiskUsage_enabledTooltip) return [0, 0];
         try {
             let dir = Gio.file_new_for_path(""+path);
             let info = dir.query_filesystem_info('filesystem::used,filesystem::size', null);
@@ -1284,6 +1432,78 @@ class MCSM extends Applet.IconApplet {
             global.log(UUID + " - disk_usage("+path+"): "+e);
             return [0, 0];
         }
+    }
+
+    get_battery_usage() {
+        if (!this.isRunning) return;
+        if (!this.Battery_enabled && !this.Battery_enabledTooltip) return;
+        //~ const POWER_SUPPLY_PATH = "/sys/class/power_supply";
+        //~ const POWER_SUPPLY = Gio.file_new_for_path(POWER_SUPPLY_PATH);
+
+        var usedPaths = [];
+        var sumSize = 0;
+        var sumUsed = 0;
+        var data = [];
+        for (let b of this.Battery_devicesList) {
+            if (!b["enabled"] || b["id"].length === 0) continue;
+            let path = POWER_SUPPLY_PATH + "/" + b["id"] + "/uevent";
+            let minValue = 0.4;
+            if (b["minValue"] != null)
+                minValue = 0.01 * parseFloat(b["minValue"]);
+            if (! GLib.file_test(path, GLib.FileTest.EXISTS)) continue;
+            usedPaths.push(path);
+            let [size, used] = this.battery_usage(b["id"]);
+            if (this.Battery_mergeAll) {
+                sumSize = sumSize + size;
+                sumUsed = sumUsed + used;
+            } else {
+                data.push({
+                    "value": 1.0 * used / size,
+                    "minvalue": minValue
+                });
+            }
+        }
+        if (this.Battery_mergeAll) {
+            data.push({
+                "value": 1.0 * sumUsed / sumSize,
+                "minvalue": 0.4
+            });
+        }
+        this.batteryProvider.setData(data);
+    }
+
+    battery_usage(id) {
+        let path = `${POWER_SUPPLY_PATH}/${id}/uevent`;
+        readFileAsync(path).then( (status) => {
+            status = status.trim();
+            let _json = conf2json(status);
+            try {
+                if (_json["POWER_SUPPLY_TYPE"] === "Battery" && parseInt(_json["POWER_SUPPLY_PRESENT"]) === 1)
+                    this.battery_energy[id] = [1 * _json["POWER_SUPPLY_ENERGY_FULL"], 1 * _json["POWER_SUPPLY_ENERGY_NOW"]];
+                else
+                    this.battery_energy[id] = [100, 0];
+            } catch(e) {
+                this.battery_energy[id] = [100, 0];
+            }
+        });
+        return this.battery_energy[id];
+    }
+
+    battery_health(id) {
+        let path = `${POWER_SUPPLY_PATH}/${id}/uevent`;
+        readFileAsync(path).then( (status) => {
+            status = status.trim();
+            let _json = conf2json(status);
+            try {
+                if (_json["POWER_SUPPLY_TYPE"] === "Battery" && parseInt(_json["POWER_SUPPLY_PRESENT"]) === 1)
+                    this.battery_capacity[id] = [1 * _json["POWER_SUPPLY_ENERGY_FULL_DESIGN"], 1 * _json["POWER_SUPPLY_ENERGY_FULL"]];
+                else
+                    this.battery_capacity[id] = [100, 0];
+            } catch(e) {
+                this.battery_capacity[id] = [100, 0];
+            }
+        });
+        return this.battery_energy[id];
     }
 
     _setTooltip() {
@@ -1300,7 +1520,8 @@ class MCSM extends Applet.IconApplet {
             "buffcachesharedProvider",
             "networkProvider",
             "diskProvider",
-            "diskUsageProvider"
+            "diskUsageProvider",
+            "batteryProvider"
         ]) {
             appletTooltipString += this[provider].getTooltipString();
         }
@@ -1426,7 +1647,7 @@ class MemDataProvider {
     }
 
     getData() {
-        if (!this.isEnabled) return [];
+        if (!this.isEnabled && !this.isEnabledTooltip) return [];
         return this.currentReadings;
     }
 
@@ -1455,7 +1676,7 @@ class MemDataProvider {
     }
 
     getTooltipString() {
-        if (! this.isEnabled) return "";
+        if (! this.isEnabledTooltip) return "";
         if (! this.isRunning) return "";
         var sum_used = 0;
         let trans = _("Memory");
@@ -1485,6 +1706,10 @@ class MemDataProvider {
         return this.applet.Mem_enabled;
     }
 
+    get isEnabledTooltip() {
+        return this.applet.Mem_enabledTooltip;
+    }
+
     get isRunning() {
         return this.applet.isRunning;
     }
@@ -1502,7 +1727,7 @@ class BufferCacheSharedDataProvider {
     }
 
     getData() {
-        if (!this.isEnabled) return [];
+        if (!this.isEnabled && !this.isEnabledBufferCacheSharedTooltip) return [];
         return this.currentReadings;
     }
 
@@ -1515,7 +1740,7 @@ class BufferCacheSharedDataProvider {
     }
 
     getTooltipString() {
-        if (! this.isEnabled) return "";
+        if (! this.isEnabledTooltip || ! this.isEnabledBufferCacheSharedTooltip) return "";
         if (! this.isRunning) return "";
         let trans = this.name;
         let len = trans.length - 2;
@@ -1534,8 +1759,12 @@ class BufferCacheSharedDataProvider {
         return toolTipString;
     }
 
-    get isEnabled() {
-        return this.applet.Mem_enabled;
+    get isEnabledTooltip() {
+        return this.applet.Mem_enabledTooltip;
+    }
+
+    get isEnabledBufferCacheSharedTooltip() {
+        return this.applet.Mem_enabledBufferCacheSharedTooltip;
     }
 
     get isRunning() {
@@ -1557,7 +1786,7 @@ class SwapDataProvider {
     }
 
     getData() {
-        if (!this.isEnabled || !this.swapusage) return [0];
+        if ((!this.isEnabled && !this.isEnabledTooltip) || !this.swapusage) return [0];
         return this.currentReadings;
     }
 
@@ -1572,7 +1801,7 @@ class SwapDataProvider {
     }
 
     getTooltipString() {
-        if (!this.isEnabled || !this.swapusage) {
+        if (!this.isEnabledTooltip || !this.swapusage) {
             return '';
         }
         let trans = _("Swap");
@@ -1585,6 +1814,7 @@ class SwapDataProvider {
         let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans2 + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
         if (this.applet.Mem_showBytesInTooltip) {
             let [swapUsedAmount, swapUsedUnit] = formatBytesValueUnit(this.swapTotal * this.currentReadings[0], 2, false);
+            if (isNaN(parseFloat(swapUsedAmount))) swapUsedAmount = "0";
             let [swapAvailableAmount, swapAvailableUnit] = formatBytesValueUnit(this.swapTotal * (1 - this.currentReadings[0]), 2, false);
             toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t'  + "" + formatNumber(parseFloat(swapUsedAmount).toFixed(2), 2).padStart(8, ' ') + " " + swapUsedUnit.padStart(6, ' ') + '\n';
             toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t'  + "" + formatNumber(parseFloat(swapAvailableAmount).toFixed(2), 2).padStart(8, ' ') + " " + swapAvailableUnit.padStart(6, ' ') + '\n';
@@ -1601,6 +1831,10 @@ class SwapDataProvider {
 
     get isEnabled() {
         return this.applet.Swap_enabled;
+    }
+
+    get isEnabledTooltip() {
+        return this.applet.Swap_enabledTooltip;
     }
 
     get isRunning() {
@@ -1629,7 +1863,7 @@ class MultiCpuDataProvider {
     }
 
     getData() {
-        if (!this.isEnabled) return [];
+        if (!this.isEnabled && !this.isEnabledTooltip) return [];
         return this.currentReadings;
     }
 
@@ -1641,7 +1875,7 @@ class MultiCpuDataProvider {
     }
 
     getTooltipString() {
-        if (! this.isEnabled) return "";
+        if (! this.isEnabledTooltip) return "";
         if (! this.isRunning) return "";
         let trans = _("CPUs");
         if (this.applet.CPU_showTemp && this.applet.CPU_temperature) {
@@ -1687,6 +1921,10 @@ class MultiCpuDataProvider {
 
     get isEnabled() {
         return this.applet.CPU_enabled;
+    }
+
+    get isEnabledTooltip() {
+        return this.applet.CPU_enabledTooltip;
     }
 
     get isRunning() {
@@ -1750,7 +1988,7 @@ class NetDataProvider {
     }
 
     getData() {
-        if (!this.isEnabled) return [];
+        if (!this.isEnabled && !this.isEnabledTooltip) return [];
         return this.currentReadings;
     }
 
@@ -1806,7 +2044,7 @@ class NetDataProvider {
     }
 
     getTooltipString() {
-        if (! this.isEnabled) return "";
+        if (! this.isEnabledTooltip) return "";
         if (! this.isRunning) return "";
         let trans = _("Networks");
         let len = trans.length - 2;
@@ -1851,6 +2089,10 @@ class NetDataProvider {
         return this.applet.Net_enabled;
     }
 
+    get isEnabledTooltip() {
+        return this.applet.Net_enabledTooltip;
+    }
+
     get isRunning() {
         return this.applet.isRunning;
     }
@@ -1863,6 +2105,8 @@ class DiskDataProvider {
 
         this.disabledDevices = [];
         this.currentReadings = [];
+        this.totalAmountCurrent = [0, 0];
+        this.totalAmountPrevious = [0, 0];
         this.lastUpdatedTime = Date.now();
 
         if (this.applet.Disk_mergeAll) {
@@ -1916,11 +2160,18 @@ class DiskDataProvider {
         const newUpdateTime = Date.now();
         const secondsSinceLastUpdate = (newUpdateTime - this.lastUpdatedTime) / 1000;
 
+        var currentAmount = [0, 0];
+        var previousAmount = [0, 0];
+
         for (let i = 0, len = this.currentReadings.length; i < len; i++) {
             let data_index = dataIds.indexOf(this.currentReadings[i]["id"]);
             if (data_index < 0) continue;
             this.currentReadings[i].read = data[data_index]["read"];
             this.currentReadings[i].write = data[data_index]["write"];
+            currentAmount[0] = currentAmount[0] + this.currentReadings[i].read;
+            currentAmount[1] = currentAmount[1] + this.currentReadings[i].write;
+            previousAmount[0] = previousAmount[0] + this.currentReadings[i].lastReading[0];
+            previousAmount[1] = previousAmount[1] + this.currentReadings[i].lastReading[1];
 
             this.currentReadings[i].tooltipRead = Math.round(
                 ((this.currentReadings[i].read - this.currentReadings[i].lastReading[0]) / secondsSinceLastUpdate)
@@ -1936,16 +2187,21 @@ class DiskDataProvider {
               this.currentReadings[i].readingRatesList[1] = Math.round(this.currentReadings[i].tooltipWrite / 1024);
         }
 
+        this.totalAmountPrevious[0] = previousAmount[0];
+        this.totalAmountPrevious[1] = previousAmount[1];
+        this.totalAmountCurrent[0] = currentAmount[0];
+        this.totalAmountCurrent[1] = currentAmount[1];
+
         this.lastUpdatedTime = newUpdateTime;
     }
 
     getData() {
-        if (!this.isEnabled) return [];
+        if (!this.isEnabled && !this.isEnabledTooltip) return [];
         return this.currentReadings;
     }
 
     getTooltipString() {
-        if (!this.isEnabled) {
+        if (!this.isEnabledTooltip) {
             return "";
         }
         let trans = _("Disks");
@@ -1991,6 +2247,10 @@ class DiskDataProvider {
         return this.applet.Disk_enabled;
     }
 
+    get isEnabledTooltip() {
+        return this.applet.Disk_enabledTooltip;
+    }
+
     get isRunning() {
         return this.applet.isRunning;
     }
@@ -2012,12 +2272,12 @@ class DiskUsageDataProvider {
     }
 
     getData() {
-        if (!this.isEnabled) return [];
+        if (!this.isEnabled && !this.isEnabledTooltip) return [];
         return this.currentReadings;
     }
 
     getTooltipString() {
-        if (!this.isEnabled) {
+        if (!this.isEnabledTooltip) {
             return "";
         }
         let trans = _("Usage");
@@ -2067,6 +2327,96 @@ class DiskUsageDataProvider {
 
     get isEnabled() {
         return this.applet.DiskUsage_enabled;
+    }
+
+    get isEnabledTooltip() {
+        return this.applet.DiskUsage_enabledTooltip;
+    }
+
+    get isRunning() {
+        return this.applet.isRunning;
+    }
+}
+
+class BatteryDataProvider {
+    constructor(applet) {
+        this.applet = applet;
+        this.name = _('BAT');
+        this.currentReadings = [];
+    }
+
+    setData(data) {
+        this.currentReadings = data;
+    }
+
+    getColorList() {
+        //~ return [this.applet.Battery_colorLoad, this.applet.Battery_colorUnload];
+        return [this.applet.Battery_colorUnload, this.applet.Battery_colorLoad];
+    }
+
+    getData() {
+        if (!this.isEnabled && !this.isEnabledTooltip) return [];
+        return this.currentReadings;
+    }
+
+    getTooltipString() {
+        if (!this.isEnabledTooltip) {
+            return "";
+        }
+        let trans = _("Battery");
+        let len = trans.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
+        let title = "" + toolTipString;
+
+        let colon = _(":");
+        let lenColon = Math.max(colon.length - 1, 0);
+        let percentChar = "%";
+        if (this.applet.percentAtEndOfLine)
+            percentChar = "%".padStart(9, " ");
+
+        var names = [];
+        var health = [];
+        for (let b of this.applet.Battery_devicesList) {
+            if (! b["enabled"] || b["id"].length < 2) continue;
+            if (b["name"].length != 0) {
+                names.push(b["name"])
+            } else if (b["id"].length != 0) {
+                names.push(b["id"])
+            }
+            health.push(this.applet.battery_capacity[b["id"]]);
+        }
+
+        for (let i=0, len=this.currentReadings.length; i<len; i++) {
+            let percentage = Math.round(100 * this.currentReadings[i].value, 2);
+            let minPercentage = Math.round(100 * this.currentReadings[i].minvalue, 2);
+            if (this.applet.DiskUsage_mergeAll) {
+                if (percentage > minPercentage)
+                    toolTipString += (_('Batteries') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t ' + formatNumber(percentage, 0).padStart(4, ' ') + " " + percentChar + '\n';
+                else
+                    toolTipString += (_('Batteries') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t <b>' + formatNumber(percentage, 0).padStart(4, ' ') + " " + percentChar + '</b>\n';
+            } else {
+                let name = names[i];
+                let capacity = Math.round(health[i][1] / health[i][0] * 100);
+                if (percentage > minPercentage)
+                    toolTipString += (name + " (" + capacity.toString() + "%)").padStart(spaces - lenColon, ' ') + colon + '\t ' + formatNumber(percentage, 0).padStart(4, ' ') + " " + percentChar + '\n';
+                else
+                    toolTipString += (name + " (" + capacity.toString() + "%)").padStart(spaces - lenColon, ' ') + colon + '\t <b>' + formatNumber(percentage, 0).padStart(4, ' ') + " " + percentChar + '</b>\n';
+            }
+        }
+
+        return toolTipString;
+    }
+
+    get PathCount() {
+        return this.currentReadings.length;
+    }
+
+    get isEnabled() {
+        return this.applet.Battery_enabled;
+    }
+
+    get isEnabledTooltip() {
+        return this.applet.Battery_enabledTooltip;
     }
 
     get isRunning() {
