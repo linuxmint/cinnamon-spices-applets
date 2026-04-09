@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-04-09 22:05+0200\n"
-"PO-Revision-Date: 2026-04-04 12:35+0200\n"
+"PO-Revision-Date: 2026-04-09 17:22-0400\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.9\n"
 
 #. 5.6->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
@@ -235,11 +235,11 @@ msgstr "Swap:"
 
 #. 5.6/applet.js:58
 msgid "Load:"
-msgstr ""
+msgstr "Carga:"
 
 #. 5.6/applet.js:59
 msgid "Unload:"
-msgstr ""
+msgstr "Descarga:"
 
 #. 5.6/applet.js:83
 msgid "DISK USAGE"
@@ -247,7 +247,7 @@ msgstr "USO DEL DISCO"
 
 #. 5.6/applet.js:84
 msgid "BATTERY"
-msgstr ""
+msgstr "BATERÍA"
 
 #. 5.6->settings-schema.json->RefreshAll_btn->description
 #. 5.6/applet.js:683
@@ -303,7 +303,7 @@ msgstr "Uso de disco"
 #. 5.6->settings-schema.json->pageBattery->title
 #. 5.6/applet.js:733 5.6/applet.js:2366
 msgid "Battery"
-msgstr ""
+msgstr "Batería"
 
 #. 5.6->settings-schema.json->pageColors->title
 #. 5.6->settings-schema.json->sectionGeneralColors->title
@@ -368,11 +368,11 @@ msgstr "Uso"
 
 #. 5.6/applet.js:2344 5.6/lib/Graphs.js:367
 msgid "BAT"
-msgstr ""
+msgstr "BAT"
 
 #. 5.6/applet.js:2394 5.6/applet.js:2396
 msgid "Batteries"
-msgstr ""
+msgstr "Baterías"
 
 #. 4.0/applet.js:66
 msgid ""
@@ -485,7 +485,7 @@ msgstr "Rutas"
 
 #. 5.6->settings-schema.json->sectionDiskSpeed->title
 msgid "Instant speed"
-msgstr ""
+msgstr "Velocidad instantánea"
 
 #. 5.6->settings-schema.json->sectionColors->title
 msgid "Your colors"
@@ -623,9 +623,8 @@ msgstr "Restablecer"
 #. 5.6->settings-schema.json->Disk_enabledTooltip->description
 #. 5.6->settings-schema.json->DiskUsage_enabledTooltip->description
 #. 5.6->settings-schema.json->Battery_enabledTooltip->description
-#, fuzzy
 msgid "Enable Tooltip"
-msgstr "Información sobre herramientas"
+msgstr "Habilitar la información sobre herramientas"
 
 #. 5.6->settings-schema.json->CPU_labelOn->description
 #. 5.6->settings-schema.json->Mem_labelOn->description
@@ -834,18 +833,16 @@ msgid "0-20"
 msgstr "0-20"
 
 #. 5.6->settings-schema.json->Mem_enabledBufferCacheSharedTooltip->description
-#, fuzzy
 msgid "Enable Buffer/Cache/Shared Tooltip"
-msgstr "Búferes/Caché/Compartido"
+msgstr "Habilitar Búfer/Caché/Información sobre herramientas compartida"
 
 #. 5.6->settings-schema.json->Swap_enabled->description
 msgid "Enable Swap"
 msgstr "Habilitar Swap"
 
 #. 5.6->settings-schema.json->Swap_enabledTooltip->description
-#, fuzzy
 msgid "Enable Swap Tooltip"
-msgstr "Habilitar Swap"
+msgstr "Activar información sobre herramientas de la Swap"
 
 #. 5.6->settings-schema.json->Mem_chartType->description
 msgid "Chart Type"
@@ -1029,7 +1026,7 @@ msgstr "Mostrar esto"
 msgid ""
 "Be sure to check at least one “Part of total” box among the enabled devices."
 msgstr ""
-"Asegúrese de marcar al menos una casilla «Parte del total» entre los "
+"Asegúrese de marcar al menos una casilla \"Parte del total\" entre los "
 "dispositivos habilitados."
 
 #. 5.6->settings-schema.json->Net_total_hovering_only->description
@@ -1099,11 +1096,11 @@ msgstr "Ruta"
 
 #. 5.6->settings-schema.json->Battery_colorLoad->description
 msgid "Load"
-msgstr ""
+msgstr "Carga"
 
 #. 5.6->settings-schema.json->Battery_colorUnload->description
 msgid "Unload"
-msgstr ""
+msgstr "Descarga"
 
 #. 5.6->settings-schema.json->color0->description
 msgid "Color #0"
