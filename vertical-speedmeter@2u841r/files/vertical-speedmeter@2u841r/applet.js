@@ -9,7 +9,7 @@ const PopupMenu = imports.ui.popupMenu;
 
 const UUID = "vertical-speedmeter@2u841r";
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 function _(text) {
     return Gettext.dgettext(UUID, text);
