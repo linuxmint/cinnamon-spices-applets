@@ -21,10 +21,16 @@ function _splitLabel(raw) {
   return { spec: m[1].trim(), label: m[2].trim() };
 }
 
-function _normalizeSpec(raw) {
+function _lightNormalizeSpec(raw) {
   return raw
     .replace(/^[\s,;:.!?]+/, "")
     .replace(/^(set|add|new)\s+/i, "")
+    .replace(/^(at|for)\s+/i, "")
+    .trim();
+}
+
+function _normalizeSpec(raw) {
+  return _lightNormalizeSpec(raw)
     .replace(/^(an?\s+)?(alarm|reminder|timer)\s+/i, "")
     .replace(/^(at|for)\s+/i, "")
     .trim();
@@ -58,10 +64,15 @@ function _parseAbsoluteTime(part) {
 }
 
 function _parseRelative(spec) {
-  const s = spec.trim().toLowerCase();
+  const orig = spec.trim();
+  const s = orig.toLowerCase();
   let rest = s;
+  let restOrig = orig;
   const m = s.match(/^(in|after)\s+(.+)$/);
-  if (m) rest = m[2].trim();
+  if (m) {
+    rest = m[2].trim();
+    restOrig = orig.slice(orig.length - rest.length);
+  }
 
   // Important: order longest -> shortest so "seconds" doesn't match just "s".
   const re = /^(\d+)\s*(hours?|hrs?|hr|h|minutes?|mins?|min|m|seconds?|secs?|sec|s)\s*/;
@@ -84,12 +95,13 @@ function _parseRelative(spec) {
       totalMs += value * 1000;
     }
     rest = rest.slice(r[0].length);
+    restOrig = restOrig.slice(r[0].length);
   }
 
   if (!matchedAny) return null;
   if (totalMs <= 0) return null;
 
-  return { delayMs: totalMs, label: rest.trim(), showSeconds };
+  return { delayMs: totalMs, label: restOrig.trim(), showSeconds };
 }
 
 function parseAlarmSpec(input, now = new Date(), t = null) {
@@ -123,7 +135,31 @@ function parseAlarmSpec(input, now = new Date(), t = null) {
     spec = _normalizeSpec(dayMatch[2]);
   }
 
-  const rel = _parseRelative(spec);
+  function _tryRelativeWithLabelFirst(s) {
+    let r = _parseRelative(s);
+    if (r) return r;
+    // Support label-first relative input: "TEA 10 seconds", "Meeting in 5m"
+    const words = s.split(/\s+/);
+    for (let i = 1; i < words.length; i++) {
+      const candidate = words.slice(i).join(" ");
+      const tryRel = _parseRelative(candidate);
+      if (tryRel) {
+        const prefix = words.slice(0, i).join(" ");
+        const combined = [prefix, tryRel.label].filter(Boolean).join(" ");
+        return { delayMs: tryRel.delayMs, label: combined, showSeconds: tryRel.showSeconds };
+      }
+    }
+    return null;
+  }
+
+  // Try light-normalized spec first (keeps "alarm"/"reminder"/"timer" intact)
+  // so label-first inputs like "Alarm in 10s" preserve the full label.
+  // Fall back to fully normalized spec for command-style inputs like "add alarm 10m".
+  const lightSpec = dayHint ? spec : _lightNormalizeSpec(split.spec);
+  let rel = _tryRelativeWithLabelFirst(lightSpec);
+  if (!rel && lightSpec !== spec) {
+    rel = _tryRelativeWithLabelFirst(spec);
+  }
   if (rel) {
     return {
       ok: true,
@@ -187,7 +223,29 @@ function parseAlarmSpec(input, now = new Date(), t = null) {
   return { ok: true, due, label, showSeconds: false };
 }
 
+/**
+ * Formats the time remaining until a future date as a compact string for panel display.
+ * @param {Date} dueDate - The target date
+ * @param {number} nowMs - Current time in milliseconds (Date.now())
+ * @returns {string} Compact countdown string, e.g. "42s", "5m", "1m 30s", "1h 5m". Empty string if past.
+ */
+function formatCountdown(dueDate, nowMs) {
+  const diffMs = dueDate.getTime() - nowMs;
+  if (diffMs <= 0) return "";
+
+  const totalSec = Math.ceil(diffMs / 1000);
+  const h = Math.floor(totalSec / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  const s = totalSec % 60;
+
+  if (h > 0) return m > 0 ? `${h}h ${m}m` : `${h}h`;
+  if (m >= 2) return `${m}m`;
+  if (m === 1) return s > 0 ? `1m ${s}s` : "1m";
+  return `${s}s`;
+}
+
 var formatTime = formatTime;
 var formatTimeHHMM = formatTimeHHMM;
 var formatTimeHHMMSS = formatTimeHHMMSS;
+var formatCountdown = formatCountdown;
 var parseAlarmSpec = parseAlarmSpec;
