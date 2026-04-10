@@ -1,3 +1,40 @@
+### v5.11.0~20260322
+  * In the Temperature tab of this applet settings:
+    * New option: Display the disk temperatures before those of the other sensors.
+  * For Temperature, Fan, Voltages tabs:
+    * Added "Color in panel" option to each sensor in the list.
+    * Color must be in html format. Ex: #FE246A
+    * The Custom Text Color defined in the General tab takes precedence on these colors.
+  * Fixes [#8454](https://github.com/linuxmint/cinnamon-spices-applets/issues/8454)
+
+### v5.10.7~20260314
+  * Avoid errors using Gentoo.
+  * Gentoo users must install all dependencies themselves. Please refer to the README file.
+
+### v5.10.6~20260304
+  * Added option: Separator Color.
+
+### v5.10.5~20260218
+  * Improved section "This settings window".
+  * From now on, the user can set the size and position of the settings window to its current (approximate) size and position. Then let Cinnamon decide the real values.
+
+### v5.10.4~20260218
+  * Added section "This settings window" to set its size.
+  * Fixes [#8324](https://github.com/linuxmint/cinnamon-spices-applets/issues/8324)
+
+### v5.10.3~20260215
+  * Added option "Do not check dependencies" in General tab.
+  * Fixes [#8325](https://github.com/linuxmint/cinnamon-spices-applets/issues/8325)
+
+### v5.10.2~20260214
+  * Fixes [#8316](https://github.com/linuxmint/cinnamon-spices-applets/issues/8316)
+
+### v5.10.1~20260130
+  * Ensures compatibility with several old versions of Cinnamon.
+
+### v5.10.0~20251212
+  * Use xlet-settings instead of cinnamon-settings to configure applet.
+
 ### v5.9.3~20251121
   * Updates to-string() function.
 

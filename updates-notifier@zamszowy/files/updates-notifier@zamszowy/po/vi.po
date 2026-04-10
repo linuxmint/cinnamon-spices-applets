@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 2.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-29 10:49+0200\n"
+"POT-Creation-Date: 2025-12-01 10:57+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -22,36 +22,52 @@ msgstr ""
 msgid "missing dependencies"
 msgstr "thiếu phụ thuộc"
 
-#. applet.js:229
+#. applet.js:230
+msgid "View error details"
+msgstr ""
+
+#. applet.js:244
 msgid "Check for new updates"
 msgstr "Kiểm tra bản cập nhật mới"
 
-#. applet.js:243
+#. applet.js:258
 #, javascript-format
 msgid "View %s updates"
 msgstr "Xem %s bản cập nhật"
 
-#. applet.js:243
+#. applet.js:258
 msgid "No updates to view"
 msgstr "Không có bản cập nhật để xem"
 
-#. applet.js:258
+#. applet.js:273
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "Nâng cấp %s gói"
 
-#. applet.js:258
+#. applet.js:273
 msgid "No packages to upgrade"
 msgstr "Không có gói nào để nâng cấp"
 
-#. applet.js:283
+#. applet.js:299
+msgid "Error checking for updates"
+msgstr ""
+
+#. applet.js:307
 #, javascript-format
 msgid "%s updates available"
 msgstr "Có %s bản cập nhật"
 
-#. applet.js:284
+#. applet.js:308
 msgid "No updates available"
 msgstr "Không có bản cập nhật nào"
+
+#. error-window.js:16
+msgid "Error"
+msgstr "Lỗi"
+
+#. error-window.js:39
+msgid "Error log file not found."
+msgstr ""
 
 #. info-window.js:66 info-window.js:85
 msgid "No details available."
@@ -147,18 +163,22 @@ msgstr "Ẩn applet nếu không có cập nhật"
 
 #. settings-schema.json->different-levels->description
 msgid "Show different applet icon for different updgradeable packages count"
-msgstr "Hiển thị biểu tượng applet khác nhau cho số lượng gói có thể nâng cấp khác nhau"
+msgstr ""
+"Hiển thị biểu tượng applet khác nhau cho số lượng gói có thể nâng cấp khác "
+"nhau"
 
 #. settings-schema.json->level-1->description
 msgid "Show low level icon when updates count is between 0 and this value "
-msgstr "Hiển thị biểu tượng mức thấp khi số lượng cập nhật nằm giữa 0 và giá trị này"
+msgstr ""
+"Hiển thị biểu tượng mức thấp khi số lượng cập nhật nằm giữa 0 và giá trị này"
 
 #. settings-schema.json->level-2->description
 msgid ""
 "Show medium level icon when updates count is between low level value and "
 "this value. Show high level icon if it's higher than this value."
 msgstr ""
-"Hiển thị biểu tượng mức trung bình khi số lượng cập nhật nằm giữa giá trị mức thấp và giá trị này. Hiển thị biểu tượng mức cao nếu cao hơn giá trị này."
+"Hiển thị biểu tượng mức trung bình khi số lượng cập nhật nằm giữa giá trị "
+"mức thấp và giá trị này. Hiển thị biểu tượng mức cao nếu cao hơn giá trị này."
 
 #. settings-schema.json->show-label->description
 msgid "Show label with updates count"

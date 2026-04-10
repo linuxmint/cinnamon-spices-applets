@@ -89,17 +89,22 @@ GPasteHistoryItem.prototype = {
             this.actor.hide();
         }
     },
-
     /*
-     * Refresh history item's content
+     * Set specified uuid and get respective history item's content
      */
-    refresh: function() {
-            this._applet.client.get_element_at_index(this._index, Lang.bind(this, function(client, result) {
-                let item = client.get_element_at_index_finish(result);
-                this._uuid = item.get_uuid();
-                this.label.set_text(item.get_value().replace(/[\t\n\r]/g, ''));
-            }));
-        },
+    setUuid: function(uuid) {
+        this._uuid = uuid;
+        if (uuid != null) {
+            this._applet.client.get_element(uuid, (client, result) => {
+                const value = client.get_element_finish(result);
+                this.label.set_text(value.replace(/[\t\n\r]/g, ''));
+            });
+            this.actor.show();
+        } else {
+            this.actor.hide();
+        }
+    },
+
     
     /*
      * Remove history item

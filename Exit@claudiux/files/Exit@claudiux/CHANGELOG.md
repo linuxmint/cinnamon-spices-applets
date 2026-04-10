@@ -1,3 +1,10 @@
+### v1.8.5~20260407
+* Added option: Lock On Suspend.
+
+### v1.8.4~20251212
+* No longer blocked by systemd-inhibit.
+* Fixes [#8001](https://github.com/linuxmint/cinnamon-spices-applets/issues/8001)
+
 ### v1.8.3~20250926
 * Adds the option "Screen On/Off with Lock feature" to the menu and its shortcut to the settings.
 * Fixes [#7816](https://github.com/linuxmint/cinnamon-spices-applets/issues/7816)

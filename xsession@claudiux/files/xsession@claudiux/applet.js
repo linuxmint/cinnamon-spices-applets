@@ -486,7 +486,7 @@ class LGS extends Applet.IconApplet {
         sectionSettings.addMenuItem(subMenuSettingsApplets);
 
         for (let applet of this.get_active_spices("applets")) {
-            let s = new LGSMenuItem(this, "applets", applet, () => {Util.spawnCommandLineAsync(`/usr/bin/env bash -c "cinnamon-settings applets ${applet}"`)}, null);
+            let s = new LGSMenuItem(this, "applets", applet, () => {Util.spawnCommandLineAsync(`/usr/bin/env bash -c "xlet-settings applet ${applet}"`)}, null);
             subMenuSettingsApplets.menu.addMenuItem(s);
         }
 
@@ -495,7 +495,7 @@ class LGS extends Applet.IconApplet {
         sectionSettings.addMenuItem(subMenuSettingsDesklets);
 
         for (let desklet of this.get_active_spices("desklets")) {
-            let s = new LGSMenuItem(this, "desklets", desklet, () => {Util.spawnCommandLineAsync(`/usr/bin/env bash -c "cinnamon-settings desklets ${desklet}"`)}, null);
+            let s = new LGSMenuItem(this, "desklets", desklet, () => {Util.spawnCommandLineAsync(`/usr/bin/env bash -c "xlet-settings desklet ${desklet}"`)}, null);
             subMenuSettingsDesklets.menu.addMenuItem(s);
         }
 
@@ -504,7 +504,7 @@ class LGS extends Applet.IconApplet {
         sectionSettings.addMenuItem(subMenuSettingsExtensions);
 
         for (let extension of this.get_active_spices("extensions")) {
-            let s = new LGSMenuItem(this, "extensions", extension, () => {Util.spawnCommandLineAsync(`/usr/bin/env bash -c "cinnamon-settings extensions ${extension}"`)}, null);
+            let s = new LGSMenuItem(this, "extensions", extension, () => {Util.spawnCommandLineAsync(`/usr/bin/env bash -c "xlet-settings extension ${extension}"`)}, null);
             subMenuSettingsExtensions.menu.addMenuItem(s);
         }
 

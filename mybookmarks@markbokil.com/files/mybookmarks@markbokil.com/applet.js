@@ -21,8 +21,6 @@ const DefaultPropertiesFile = GLib.build_filenamev([global.userdatadir, 'applets
 const ConfigFilePath = GLib.get_home_dir() + '/.config/cinnamon/spices/' + UUID;
 const PropertiesFile = ConfigFilePath + '/mybookmarks.properties';
 
-const HelpURL = "http://markbokil.com/downloads/mybookmarks/help.php?appname=mybookmarks&version=" + Version;
-const AboutURL = "http://markbokil.com/downloads/mybookmarks/about.php?appname=mybookmarks&version=" + Version;
 const AppIcon = 'mybookmarks.svg';
 
 // external JS library options
@@ -156,10 +154,6 @@ MyApplet.prototype = {
                 propVal = OpenFileCmd + " " + propVal;
             }
 
-            if (propVal.indexOf('[EE]') != -1) { // ?
-                propVal = "xdg-open http://markbokil.com/downloads/mylauncher/mycat.jpg";
-            }
-
             this.console(propName + ", " + propVal); //debug
             this.menu.addAction(_(propName), function(event) {
                 Util.spawnCommandLine(propVal);
@@ -179,15 +173,6 @@ MyApplet.prototype = {
         this._applet_context_menu.addMenuItem(this.edit_menu_item);
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem()); //separator
-
-        //help
-        this.help_menu_item = new Applet.MenuItem(_("Help"), Gtk.STOCK_HELP,
-            Lang.bind(this, this.doHelp));
-        this._applet_context_menu.addMenuItem(this.help_menu_item);
-        //about
-        this.about_menu_item = new Applet.MenuItem(_("About"), Gtk.STOCK_ABOUT,
-            Lang.bind(this, this.doAbout));
-        this._applet_context_menu.addMenuItem(this.about_menu_item);
     },
 
     getProperties: function () {
@@ -204,14 +189,6 @@ MyApplet.prototype = {
     doRefresh: function () {
         this.menu.removeAll();
         this.createMenu();
-    },
-
-    doHelp: function () {
-        Util.spawnCommandLine(OpenFileCmd + " " + HelpURL);
-    },
-
-    doAbout: function () {
-        Util.spawnCommandLine(OpenFileCmd + " " + AboutURL);
     },
 
     // wrapper for global.log()

@@ -96,6 +96,11 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         Main.keybindingManager.removeHotKey("notification-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("notification-clear-" + this.instance_id);
         Main.keybindingManager.removeHotKey("notification-mute-" + this.instance_id);
+
+        // Only used in cinnamon 6.6 and later
+        if (MessageTray.extensionsHandlingNotifications !== undefined) {
+            MessageTray.extensionsHandlingNotifications--;
+        }
     }
 
     _openMenu() {
@@ -365,6 +370,11 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
 
     on_applet_added_to_panel() {
         this.on_orientation_changed(this._orientation);
+
+        // Only used in cinnamon 6.6 and later
+        if (MessageTray.extensionsHandlingNotifications !== undefined) {
+            MessageTray.extensionsHandlingNotifications++;
+        }
     }
 
     on_orientation_changed (orientation) {

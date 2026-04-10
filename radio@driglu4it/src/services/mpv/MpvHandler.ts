@@ -2,6 +2,26 @@ import { PlayPause, AdvancedPlaybackStatus, ChangeHandler } from '../../types'
 import { MPV_MPRIS_BUS_NAME, MEDIA_PLAYER_2_PATH, MPRIS_PLUGIN_PATH, MAX_VOLUME, MEDIA_PLAYER_2_NAME, MEDIA_PLAYER_2_PLAYER_NAME, MPV_CVC_NAME } from '../../consts'
 import { MprisMediaPlayerDbus, MprisPropsDbus } from '../../types';
 import { configs } from '../Config';
+
+// some streams send UTF-8 metadata that the MPRIS plugin decodes as
+// ISO‑8859‑1/ASCII, so characters like "ü" show up as "Ã¼".  We try to
+// undo that by running the string through a decoder; if it fails we return the
+// original value untouched.  The function is safe to call on normal strings as
+// well.
+function decodeMetadataString(str: string): string {
+    try {
+        const bytes = new Uint8Array(Array.from(str, (c) => c.charCodeAt(0)));
+        const Decoder = (globalThis as any).TextDecoder;
+        if (Decoder) {
+            return new Decoder('utf-8', { fatal: false }).decode(bytes);
+        }
+        // fallback used in existing code prior to adding TextDecoder
+        return decodeURIComponent(escape(str));
+    } catch {
+        return str;
+    }
+}
+
 const { getDBusProperties, getDBus, getDBusProxyWithOwner } = imports.misc.interfaces
 const { spawnCommandLine } = imports.misc.util;
 // see https://lazka.github.io/pgi-docs/Cvc-1.0/index.html
@@ -138,7 +158,10 @@ function createMpvHandler() {
                 const playbackStatus = props.PlaybackStatus?.unpack() as PlayPause
 
                 const url = metadata?.['xesam:url']
-                const title = metadata?.['xesam:title']
+                let title = metadata?.['xesam:title']
+
+                // repair common mis‑decoding from Latin‑1
+                title = title ? decodeMetadataString(title) : title
 
                 const length = metadata?.["mpris:length"]
                 const newUrlValid = checkUrlValid(url)
@@ -361,7 +384,8 @@ function createMpvHandler() {
     function getCurrentTitle(): string | undefined {
         if (getPlaybackStatus() === "Stopped") return
 
-        return mediaServerPlayer.Metadata["xesam:title"].unpack()
+        const raw = mediaServerPlayer.Metadata["xesam:title"].unpack()
+        return raw ? decodeMetadataString(raw) : raw
     }
 
     /**

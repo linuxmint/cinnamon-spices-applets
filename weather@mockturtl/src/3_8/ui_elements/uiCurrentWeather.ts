@@ -23,6 +23,7 @@ const STYLE_ICONBOX = 'weather-current-iconbox'
 const STYLE_DATABOX_CAPTIONS = 'weather-current-databox-captions'
 const STYLE_DATABOX_VALUES = 'weather-current-databox-values'
 const STYLE_LOCATION_SELECTOR = 'location-selector';
+const STYLE_LOCATION = 'weather-current-location';
 
 export class CurrentWeather {
 	public readonly actor: imports.gi.St.BoxLayout;
@@ -146,7 +147,7 @@ export class CurrentWeather {
 		middleColumn.add(this.weatherSummary, { expand: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, x_fill: false, y_fill: false })
 
 		this.immediatePrecipitationLabel = Label({ style_class: "weather-immediate-precipitation" });
-		this.immediatePrecipitationBox = new BoxLayout({x_align: ActorAlign.CENTER});
+		this.immediatePrecipitationBox = new BoxLayout({ x_align: ActorAlign.CENTER });
 		this.immediatePrecipitationBox.add_actor(this.immediatePrecipitationLabel)
 		this.immediatePrecipitationBox.hide();
 		middleColumn.add_actor(this.immediatePrecipitationBox);
@@ -238,11 +239,17 @@ export class CurrentWeather {
 	}
 
 	private BuildLocationSection() {
-		this.locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), x_expand: true, x_align: Align.MIDDLE });
+		this.locationButton = new WeatherButton({
+			reactive: true,
+			label: _('Refresh'),
+			x_expand: true,
+			x_align: Align.MIDDLE,
+			style_class: STYLE_LOCATION
+		});
 		this.location = this.locationButton.actor;
 		this.location.connect(SIGNAL_CLICKED, () => {
 			if (this.app.encounteredError)
-				void this.app.Refresh({rebuild: true});
+				void this.app.Refresh({ rebuild: true });
 			else if (this.locationButton.url == null)
 				return;
 			else
@@ -436,12 +443,12 @@ export class CurrentWeather {
 
 	private NextLocationClicked = () => {
 		const loc = this.app.config.SwitchToNextLocation();
-		void this.app.Refresh({location: loc ?? undefined});
+		void this.app.Refresh({ location: loc ?? undefined });
 	}
 
 	private PreviousLocationClicked = () => {
 		const loc = this.app.config.SwitchToPreviousLocation();
-		void this.app.Refresh({location: loc ?? undefined});
+		void this.app.Refresh({ location: loc ?? undefined });
 	}
 
 	private onLocationStorageChanged(sender: LocationStore, itemCount: number): void {

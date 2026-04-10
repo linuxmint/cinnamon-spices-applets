@@ -20,6 +20,7 @@
       "type": "page",
       "title": "Behavior",
       "sections": [
+        "sectionBehavior1",
         "sectionBehavior2",
         "sectionBehavior3"
       ]
@@ -56,6 +57,7 @@
       "type": "section",
       "title": "Menu",
       "keys": [
+        "userMenuWidth",
         "playerControl",
         "extendedPlayerControl",
         "keepPlayerListOpen",
@@ -78,6 +80,13 @@
         "keepCommandListOpen"
       ]
     },
+    "sectionBehavior1": {
+      "type": "section",
+      "title": "External commands and scripts",
+      "keys": [
+        "runAsync"
+      ]
+    },
     "sectionBehavior2": {
       "type": "section",
       "title": "Panel",
@@ -89,6 +98,9 @@
         "middleShiftClickAction",
         "horizontalScroll",
         "showalbum",
+        "keepAlbumArtIcon",
+        "showalbumButForSitesLabel",
+        "showalbumButForSites",
         "hideSystray"
       ]
     },
@@ -106,7 +118,9 @@
       "title": "Icon appearance",
       "keys": [
         "showalbum",
-        "showalbumDelay",
+        "keepAlbumArtIcon",
+        "showalbumButForSitesLabel",
+        "showalbumButForSites",
         "showVolumeLevelNearIcon",
         "showMicMutedOnIcon",
         "showMicUnmutedOnIcon"
@@ -208,6 +222,15 @@
         "button-reload-applet"
       ]
     }
+  },
+  "userMenuWidth": {
+    "type": "scale",
+    "default": 450,
+    "min": 450,
+    "max": 600,
+    "step": 10,
+    "description": "Menu width (in pixels)",
+    "show-value": true
   },
   "playerControl": {
     "type": "switch",
@@ -318,8 +341,15 @@
       "org.gnome.Totem",
       "mullvad browser",
       "io.gitlab.librewolf-community",
-      "LibreWolf"
+      "LibreWolf",
+      "org.strawberrymusicplayer.strawberry"
     ]
+  },
+  "runAsync": {
+    "type": "switch",
+    "default": true,
+    "description": "Execute asynchronously",
+    "tooltip": "Enabled by default (recommended).\nDisable this option if you encounter running issues (rare)."
   },
   "showtrack": {
     "type": "switch",
@@ -378,11 +408,63 @@
     "description": "Show album art as icon",
     "dependency": "playerControl"
   },
+  "keepAlbumArtIcon": {
+    "type": "switch",
+    "default": true,
+    "description": "Keep the album art as an icon when adjusting the volume",
+    "dependency": "showalbum"
+  },
+  "showalbumButForSitesLabel": {
+    "type": "label",
+    "description": "Do not display album art from these sites:"
+  },
+  "showalbumButForSites": {
+    "type": "list",
+    "default": [
+      {
+        "active": false,
+        "id": "youtube",
+        "icon": "~/.local/share/cinnamon/applets/sound150@claudiux/6.4/icons/youtube.png"
+      },
+      {
+        "active": false,
+        "id": "spotify",
+        "icon": "~/.local/share/cinnamon/applets/sound150@claudiux/6.4/icons/spotify.png"
+      },
+      {
+        "active": false,
+        "id": "strawberry",
+        "icon": "~/.local/share/cinnamon/applets/sound150@claudiux/6.4/icons/strawberry.png"
+      }
+    ],
+    "columns": [
+      {
+        "id": "active",
+        "title": "Activate",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "id": "id",
+        "title": "Site name",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      },
+      {
+        "id": "icon",
+        "title": "Local path to icon",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "description": "Do not display album art from these sites:"
+  },
   "showalbumDelay": {
     "type": "scale",
-    "default": 5,
+    "default": 0,
     "min": 0,
-    "max":10,
+    "max": 10,
     "step": 1,
     "description": "Delay between icon and album art display (seconds)",
     "dependency": "playerControl"
@@ -642,7 +724,9 @@
   "custom-commands-list": {
     "type": "list",
     "description": "Commands",
-    "default": [],
+    "default": [
+
+    ],
     "columns": [
       {
         "id": "title",

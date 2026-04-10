@@ -7,31 +7,36 @@ msgstr ""
 "Project-Id-Version: screen-inhibit@mtwebster 2.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-01 18:55+0200\n"
+"POT-Creation-Date: 2026-03-31 16:56+0200\n"
 "PO-Revision-Date: \n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
-"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: fi\n"
 
-#. applet.js:21
+#. applet.js:31
 msgid "Currently preventing screensaver"
 msgstr "Tällä hetkellä näytönsäästäjä estetään"
 
-#. applet.js:22
+#. applet.js:32
 msgid "Currently allowing screensaver"
 msgstr "Tällä hetkellä näytönsäästäjä sallitaan"
 
-#. applet.js:134
+#. applet.js:188
 msgid "Screensaver settings"
 msgstr "Säästäjän asetukset"
 
+#. applet.js:192
+#, fuzzy
+msgid "Power settings"
+msgstr "Säästäjän asetukset"
+
 #. settings-schema.json->inhibit-at-startup->description
-#. applet.js:138
+#. applet.js:196
 msgid "Inhibit screensaver at startup"
 msgstr "Estä säästäjä käynnistyksessä"
 

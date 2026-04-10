@@ -1,3 +1,87 @@
+### v16.2.0~20260325
+  * Adds option "Apps Not to Display" in the Menu section of the General tab.
+  * Fixes [#8295](https://github.com/linuxmint/cinnamon-spices-applets/issues/8295)
+
+### v16.1.2~20260320
+  * Minor bug fixed.
+
+### v16.1.1~20260320
+  * Replaces the "Keep App selector open" option in the context menu with "Keep the App Volume Control open" in the main menu.
+
+### v16.1.0~20260318
+  * Application volume sliders are moved from the context menu to the main menu.
+  * Many improvements.
+  * Fixes [#8046](https://github.com/linuxmint/cinnamon-spices-applets/issues/8046)
+
+### v16.0.0~20260315
+  * The album cover is back!
+  * Fixes [#8383](https://github.com/linuxmint/cinnamon-spices-applets/issues/8383)
+
+### v15.0.1~20260222
+  * Improves asynchronous function calls.
+
+### v15.0.0~20260221
+  * Functional improvements.
+
+### v14.1.1~20260221
+  * Better management of label (on vertical panel).
+
+### v14.1.0~20260212
+  * Resize the menu by grabbing its edges with the mouse.
+
+### v14.0.0~20260211
+  * Adds a Balance slider in the menu + keybindings.
+  * Fixes [#8052](https://github.com/linuxmint/cinnamon-spices-applets/issues/8052)
+
+### v13.10.0~20260121
+  * Try to avoid advertisements by detecting certain words in the title, defined by the user.
+
+### v13.9.3~20260114
+  * User can set menu width (for Cinnamon 6.4).
+  * Fixes [#8175](https://github.com/linuxmint/cinnamon-spices-applets/issues/8175)
+
+### v13.9.2~20260114
+  * Improves menu display for Cinnamon 6.4.
+  * Fixes [#8201](https://github.com/linuxmint/cinnamon-spices-applets/issues/8201)
+
+### v13.9.1~20260112
+  * Restore this applet for Cinnamon 6.4 (same as v13.8.2).
+  * Fixes [#8183](https://github.com/linuxmint/cinnamon-spices-applets/issues/8183)
+  * New features for Cinnamon 6.6.
+
+### v13.9.0~20251228
+  * Also displays OSD with commands like "pactl set-sink-volume ...".
+  * Fixes [#8045](https://github.com/linuxmint/cinnamon-spices-applets/issues/8045)
+
+### v13.8.2~20251225
+  * Fixes a nasty bug.
+  * Fixes [#8115](https://github.com/linuxmint/cinnamon-spices-applets/issues/8115)
+
+### v13.8.1~20251225
+  * Improves speed.
+  * Fixes [#8115](https://github.com/linuxmint/cinnamon-spices-applets/issues/8115)
+  * Transitional version. Some bugs need to be fixed, but it works.
+
+### v13.8.0~20251223
+  * Many improvements and several bug fixes.
+  * Fixes [#8052](https://github.com/linuxmint/cinnamon-spices-applets/issues/8052)
+  * Fixes [#8049](https://github.com/linuxmint/cinnamon-spices-applets/issues/8049)
+  * Fixes [#8029](https://github.com/linuxmint/cinnamon-spices-applets/issues/8029)
+
+### v13.7.7~20251206
+  * Bug fix: avoids errors about stream.
+
+### v13.7.6~20251205
+  * Bug fix: artist and title when the player does not provide them.
+
+### v13.7.5~20251204
+  * Improves execution speed.
+  * Fixes [#8029](https://github.com/linuxmint/cinnamon-spices-applets/issues/8029)
+
+### v13.7.4~20251201
+  * Avoids deleting the cover art after modifying the volume or the workspace.
+  * Fixes [#8020](https://github.com/linuxmint/cinnamon-spices-applets/issues/8020)
+
 ### v13.7.3~20251126
   * Avoids treating apostrophes as quotes (artist and title).
 

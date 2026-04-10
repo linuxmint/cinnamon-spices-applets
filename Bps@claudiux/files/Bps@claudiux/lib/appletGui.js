@@ -170,7 +170,7 @@ GuiSpeed.prototype = {
 
     _set_icon: function(iconlabel, icon_path) {
         let icon_file = this._load_icon_file(icon_path);
-           iconlabel.set_gicon(icon_file);
+        iconlabel.set_gicon(icon_file);
     },
 
     _load_icon_file: function(icon_path) {
@@ -195,7 +195,8 @@ GuiSpeed.prototype = {
     set_text_style: function(css_style) {
         css_style = this.add_font_size(css_style);
         for(let iconlabel of [this.iconlabel_received, this.iconlabel_sent]){
-            iconlabel.set_label_style(css_style);
+            if (iconlabel)
+                iconlabel.set_label_style(css_style);
         }
 
         this._resize_gui_elements_to_match_text(css_style);
@@ -231,7 +232,8 @@ GuiSpeed.prototype = {
     _set_icons_height_to_font_size: function(css_style) {
         let font_size = this.css_styler.get_numeric_value_or_null(css_style, "font-size");
         for(let iconlabel of [this.iconlabel_received, this.iconlabel_sent]){
-            iconlabel.set_icon_size(font_size);
+            if (iconlabel)
+                iconlabel.set_icon_size(font_size);
         }
     },
 
@@ -248,7 +250,8 @@ GuiSpeed.prototype = {
     _set_labels_fixed_width: function() {
         let fixed_width_text = this._get_fixed_width_text();
         for(let iconlabel of [this.iconlabel_received, this.iconlabel_sent]){
-            iconlabel.set_label_fixed_width(fixed_width_text);
+            if (iconlabel)
+                iconlabel.set_label_fixed_width(fixed_width_text);
         }
     },
 
@@ -272,18 +275,21 @@ GuiSpeed.prototype = {
 
     _set_labels_styled_width: function(width) {
         for(let iconlabel of [this.iconlabel_received, this.iconlabel_sent]){
-            iconlabel.set_label_width(width);
+            if (iconlabel)
+                iconlabel.set_label_width(width);
         }
     },
 
     set_received_text: function(text) {
         let label = this.iconlabel_received.label;
-        label.set_text(text);
+        if (label)
+            label.set_text(text);
     },
 
     set_sent_text: function(text) {
         let label = this.iconlabel_sent.label;
-        label.set_text(text);
+        if (label)
+            label.set_text(text);
     },
 
     set_decimal_places: function(decimal_places) {

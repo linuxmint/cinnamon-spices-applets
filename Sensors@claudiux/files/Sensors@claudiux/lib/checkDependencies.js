@@ -3,7 +3,8 @@ const GLib = imports.gi.GLib; // ++ Needed for starting programs and translation
 const Gio = imports.gi.Gio; // Needed for file infos
 const Extension = imports.ui.extension; // Needed to reload applets
 const MessageTray = imports.ui.messageTray; // ++ Needed for the criticalNotify() function in this script
-const Util = imports.misc.util; // Needed for spawnCommandLine()
+//~ const Util = imports.misc.util; // Needed for spawnCommandLine()
+const Util = require("./lib/util"); // Needed for spawnCommandLine()
 const Main = imports.ui.main; // ++ Needed for notify()
 const Gettext = imports.gettext;
 
@@ -117,7 +118,8 @@ var DEPENDENCIES = {
   "openSUSE": [
     ["sensors", "/usr/bin/sensors",  "sensors"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"]
-  ]
+  ],
+  "gentoo": []
 }
 
 
@@ -144,8 +146,8 @@ const UPDATE = {
   "debian": "apt-get update",
   "devuan": "apt-get update",
   "fedora": "sudo dnf update",
-  "openSUSE": ""//,
-  //"gentoo": "emerge --sync"
+  "openSUSE": "",
+  "gentoo": ""
 }
 
 const INSTALL = {
@@ -154,7 +156,8 @@ const INSTALL = {
   "debian": "apt-get install",
   "devuan": "apt-get install",
   "fedora": "sudo dnf install",
-  "openSUSE": "sudo zypper --non-interactive install"
+  "openSUSE": "sudo zypper --non-interactive install",
+  "gentoo": ""
 }
 
 //const HOME_DIR = GLib.get_home_dir();

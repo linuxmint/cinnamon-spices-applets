@@ -1,0 +1,436 @@
+# Combined Monitor Applet Translation Template
+# Copyright (C) 2025 danniboy
+# This file is distributed under the same license as the Combined Monitor Applet package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Combined Monitor Applet 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-15 21:36+0100\n"
+"PO-Revision-Date: 2026-01-02 13:36+0100\n"
+"Last-Translator: \n"
+"Language-Team: (none)\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+# applet.js strings
+msgid "Slot 1 (Standard)"
+msgstr "Foglalat 1 (standard)"
+
+msgid "Slot 2 (Empty)"
+msgstr "Foglalat 2 (üres)"
+
+msgid "Slot 3 (Empty)"
+msgstr "Foglalat 3 (üres)"
+
+msgid "Separator"
+msgstr "Elválasztó"
+
+msgid "No Separator"
+msgstr "Nincs elválasztó"
+
+msgid "Symbols"
+msgstr "Szimbólumok"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "Icon-White"
+msgstr "Ikon-Fehér"
+
+msgid "Icon-Dark"
+msgstr "Ikon-Sötét"
+
+msgid "No Symbol (Text Label)"
+msgstr "Nincs szimbólum (szöveges címke)"
+
+msgid "TEMP"
+msgstr "HŐMÉRSÉKLET"
+
+msgid "RAM"
+msgstr "RAM"
+
+msgid "SWAP"
+msgstr "Cserehely"
+
+msgid "Profile Management"
+msgstr "Profilkezelés"
+
+msgid "Activate (Load)"
+msgstr "Aktiválás (Betöltés)"
+
+msgid "Save Current Settings"
+msgstr "Aktuális beállítások mentése"
+
+msgid "System Monitor"
+msgstr "Rendszerfigyelő"
+
+msgid "Restart Cinnamon"
+msgstr "Cinnamon újraindítása"
+
+msgid "Profile Saved: %s"
+msgstr "Profil mentve: %s"
+
+msgid "Active: %s"
+msgstr "Aktív: %s"
+
+msgid "N/A"
+msgstr "Nem alkalmazható"
+
+# settings-schema.json strings (Descriptions, Tooltips, Options)
+# Page Titles
+msgid "CPU Temperature"
+msgstr "CPU Hőmérséklet"
+
+msgid "Profiles"
+msgstr "Profilok"
+
+msgid "General"
+msgstr "Általános"
+
+# Section Titles
+msgid "Order of Metrics"
+msgstr "Mutatók sorrendje"
+
+msgid "Display"
+msgstr "Kijelző"
+
+msgid "Thresholds"
+msgstr "Küszöbérték"
+
+msgid "Colors"
+msgstr "Színek"
+
+msgid "Thresholds (in °C)"
+msgstr "Küszöbértékek (°C-ban)"
+
+msgid "Settings"
+msgstr "Beállítások"
+
+msgid "Profiles (Slots 1 to 3)"
+msgstr "Profilok (Foglalatok 1-3)"
+
+msgid "Global"
+msgstr "Globális"
+
+# CPU
+msgid "Show CPU"
+msgstr "CPU megjelenítése"
+
+msgid "Text for CPU"
+msgstr "CPU  szövege"
+
+msgid "Custom symbol/icon for CPU. Leave empty for text label."
+msgstr "Egyéni szimbólum/ikon CPU-hoz. Szöveges címke esetén hagyja üresen."
+
+msgid "Show percentage sign (%) for CPU"
+msgstr "Százalékjel (%) megjelenítése a CPU esetében"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed without the percentage "
+"sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in "
+"the 'General' tab acts as a master switch."
+msgstr ""
+"Ha le van tiltva, csak az érték (pl. '45') jelenik meg a százalékjel (pl. "
+"'45%') nélkül. Az 'Általános' lapon található 'Százalékjel (%) megjelenítése "
+"(Főkapcsoló)' opció főkapcsolóként működik."
+
+msgid "Threshold LOW"
+msgstr "Küszöbérték ALACSONY"
+
+msgid "The LOW color is used below this value"
+msgstr "Az ALACSONY színt használja ezen érték alatt"
+
+msgid "Threshold MED"
+msgstr "Küszöbérték KÖZEPES"
+
+msgid "The MED color is used between LOW and MED"
+msgstr "A KÖZEPES színt használja ALACSONY és KÖZEPES között"
+
+msgid "Threshold HIGH"
+msgstr "Küszöbérték MAGAS"
+
+msgid "The HIGH color is used between MED and HIGH"
+msgstr "A MAGAS színt használja KÖZEPES és MAGAS között"
+
+msgid "Enable color change for CPU"
+msgstr "Színváltás engedélyezése CPU-hoz"
+
+msgid "Color LOW"
+msgstr "Szín ALACSONY"
+
+msgid "Color MED"
+msgstr "Szín KÖZEPES"
+
+msgid "Color HIGH"
+msgstr "Szín MAGAS"
+
+msgid "Color CRITICAL"
+msgstr "Szín KRITIKUS"
+
+msgid "Used above the HIGH threshold"
+msgstr "MAGAS küszöbérték felett használva"
+
+# TEMP
+msgid "Show Temperature"
+msgstr "Hőmérséklet megjelenítése"
+
+msgid ""
+"Enables the display of CPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Please refer to the "
+"instructions in the README.md."
+msgstr ""
+"Engedélyezi a CPU hőmérsékletének megjelenítését. **Fontos:** Sok rendszeren "
+"az 'lm-sensors' csomag telepítése és a 'sudo sensors-detect' futtatása "
+"szükséges a funkció megfelelő működéséhez. Kérjük, tekintse meg a README.md "
+"fájlban található utasításokat."
+
+msgid "Show °C symbol"
+msgstr "°C szimbólum megjelenítése"
+
+msgid ""
+"Controls whether the Celsius symbol (°C or °F) should be displayed after the "
+"value."
+msgstr ""
+"Azt szabályozza, hogy a Celsius szimbólum (°C vagy °F) megjelenjen-e az "
+"érték után."
+
+msgid "Text for Temperature"
+msgstr "Szöveg a hőmérséklethez"
+
+msgid "Custom symbol/icon for Temperature. Leave empty for text label."
+msgstr ""
+"Egyéni szimbólum/ikon a hőmérséklethez. Szöveges címke esetén hagyja üresen."
+
+msgid "Unit of Measurement"
+msgstr "Mértékegység"
+
+msgid "Celsius (°C)"
+msgstr "Celsius (°C)"
+
+msgid "Fahrenheit (°F)"
+msgstr "Fahrenheit (°F)"
+
+msgid ""
+"Choose whether the temperature should be displayed in Celsius or Fahrenheit. "
+"Threshold values must be adjusted accordingly."
+msgstr ""
+"Válassza ki, hogy a hőmérséklet Celsius vagy Fahrenheit fokban jelenjen meg. "
+"A küszöbértékeket ennek megfelelően kell beállítani."
+
+msgid "The LOW color is used below this value (applies to °C and °F)"
+msgstr "Az ALACSONY színt ezen érték alatt használjuk (°C és °F esetén)."
+
+msgid "The MED color is used between LOW and MED (applies to °C and °F)"
+msgstr ""
+"A KÖZEPES szín az ALACSONY és a KÖZEPES értékek között használatos (°C és °F "
+"értékekre vonatkozik)."
+
+msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+msgstr ""
+"A MAGAS szín a KÖZEPES és MAGAS fok között használatos (°C és °F értékekre "
+"vonatkozik)."
+
+msgid "Enable color change for TEMP"
+msgstr "Színváltás engedélyezése HŐM esetén"
+
+msgid "Color LOW (Green)"
+msgstr "Szín ALACSONY (Zöld)"
+
+msgid "Color MED (Orange)"
+msgstr "Szín KÖZEPES (Narancssárga)"
+
+msgid "Color HIGH (Red-Orange)"
+msgstr "Szín MAGAS (Vörös-Narancssárga)"
+
+msgid "Color CRITICAL (Red)"
+msgstr "Szín KRITIKUS (Vörös)"
+
+# RAM
+msgid "Show RAM"
+msgstr "RAM megjelenítése"
+
+msgid "Text for RAM"
+msgstr "RAM szövege"
+
+msgid "Custom symbol/icon for RAM. Leave empty for text label."
+msgstr "Egyéni szimbólum/ikon RAM-hoz. Szöveges címke esetén hagyja üresen."
+
+msgid "Show percentage sign (%) for RAM"
+msgstr "Százalékjel (%) megjelenítése a RAM esetében"
+
+msgid "Display Mode"
+msgstr "Kijelző mód"
+
+msgid "Percentage Usage (%)"
+msgstr "Százalékos felhasználás (%)"
+
+msgid "Used Memory (MB/GB)"
+msgstr "Felhasznált memória (MB/GB)"
+
+msgid "Free Memory (MB/GB)"
+msgstr "Szabad memória (MB/GB)"
+
+msgid ""
+"Choose whether percentage usage or used/free memory in MB/GB should be "
+"displayed."
+msgstr ""
+"Válassza ki, hogy a százalékos kihasználtság vagy a felhasznált/szabad "
+"memória MB/GB-ban jelenjen-e meg."
+
+msgid "Enable color change for RAM"
+msgstr "Színváltás engedélyezése a RAM számára"
+
+# SWAP
+msgid "Show SWAP"
+msgstr "Cserehely megjelenítése"
+
+msgid "Text for SWAP"
+msgstr "Cserehely szövege"
+
+msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+msgstr ""
+"Egyéni szimbólum/ikon a Cserehelyhez. Szöveges címke esetén hagyja üresen."
+
+msgid "Only show SWAP when used"
+msgstr "Csak akkor jelenítse meg a Cserehelyt, ha használatban van"
+
+msgid "If active, it only shows SWAP when usage is greater than 0%."
+msgstr ""
+"Ha aktív, akkor csak akkor jelenik meg a Cserehely, ha a kihasználtság "
+"nagyobb, mint 0%."
+
+msgid "Show percentage sign (%) for SWAP"
+msgstr "Százalékjel (%) megjelenítése a Cserehely esetében"
+
+msgid "Enable color change for SWAP"
+msgstr "Színváltás engedélyezése a Cserehely számára"
+
+msgid ""
+"If the value is less than or equal to the LOW threshold, the LOW color is "
+"used."
+msgstr ""
+"Ha az érték kisebb vagy egyenlő az ALACSONY küszöbértékkel, akkor az "
+"ALACSONY szín kerül felhasználásra."
+
+msgid ""
+"If the value is greater than LOW and less than or equal to the MED "
+"threshold, the MED color is used."
+msgstr ""
+"Ha az érték nagyobb, mint az ALACSONY, de kisebb vagy egyenlő, mint a "
+"KÖZEPES küszöbérték, akkor a KÖZEPES szín kerül felhasználásra."
+
+msgid ""
+"If the value is greater than MED and less than or equal to the HIGH "
+"threshold, the HIGH color is used."
+msgstr ""
+"Ha az érték nagyobb, mint a KÖZEPES, de kisebb vagy egyenlő, mint a MAGAS "
+"küszöbérték, akkor a MAGAS szín kerül felhasználásra."
+
+# Order
+msgid "CPU Position"
+msgstr "CPU pozíció"
+
+msgid "Position 1 (Left)"
+msgstr "Pozíció 1 (bal)"
+
+msgid "Position 2"
+msgstr "Pozíció 2"
+
+msgid "Position 3"
+msgstr "Pozíció 3"
+
+msgid "Position 4 (Right)"
+msgstr "Pozíció 4 (jobb)"
+
+msgid ""
+"Defines the display position of CPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr ""
+"Meghatározza a CPU megjelenítési pozícióját. A pozíció automatikusan "
+"felcserélődik az ugyanazon a pozíción lévő metrikával."
+
+msgid "TEMP Position"
+msgstr "HŐMÉRSÉKLET Pozíció"
+
+msgid "RAM Position"
+msgstr "RAM Pozíció"
+
+msgid "SWAP Position"
+msgstr "Cserehely Pozíció"
+
+# General
+msgid "Update Interval (ms)"
+msgstr "Frissítési időköz (ms)"
+
+msgid "Show separator between metrics"
+msgstr "Elválasztó megjelenítése a mutatók között"
+
+msgid "Separator Text"
+msgstr "Elválasztó szövege"
+
+msgid "Separator Color"
+msgstr "Elválasztó színe"
+
+msgid "Show percentage sign (%) (Master Switch)"
+msgstr "Százalékjel (%) megjelenítése (Főkapcsoló)"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed for all percentage "
+"displays without the percentage sign (e.g., '45%'). Individual switches for "
+"CPU/RAM/SWAP must also be active."
+msgstr ""
+"Ha le van tiltva, akkor csak az érték (pl. '45') jelenik meg az összes "
+"százalékos kijelzésnél, a százalékjel (pl. '45%') nélkül. A CPU/RAM/"
+"Cserehely egyes kapcsolóinak is aktívnak kell lenniük."
+
+# Profiles
+msgid "Profile Message Duration (Seconds)"
+msgstr "Profilüzenet időtartama (másodperc)"
+
+msgid ""
+"How long should the message ('Profile saved', 'Profile active') be displayed "
+"in the panel."
+msgstr ""
+"Mennyi ideig kell megjelennie a panelen az üzenetnek („Profil mentve”, "
+"„Profil aktív”)?"
+
+msgid "Profile 1 Name"
+msgstr "Profil 1 neve"
+
+msgid "Enter a custom profile name in the text field!"
+msgstr "Írj be egy egyéni profilnevet a szövegmezőbe!"
+
+msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+msgstr ""
+"Kattintson az „Aktiválás” vagy a „Mentés” gombra az 1. profilnál a felugró "
+"menüben."
+
+msgid "Saved data for Profile 1 (internal)"
+msgstr "Mentett adatok az 1. profilhoz (belső)"
+
+msgid "Profile 2 Name"
+msgstr "Profil 2 neve"
+
+msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+msgstr ""
+"Kattintson az „Aktiválás” vagy a „Mentés” gombra a 2. profilnál a felugró "
+"menüben."
+
+msgid "Saved data for Profile 2 (internal)"
+msgstr "Mentett adatok a 2. profilhoz (belső)"
+
+msgid "Profile 3 Name"
+msgstr "Profil 3 neve"
+
+msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+msgstr ""
+"Kattintson az „Aktiválás” vagy a „Mentés” gombra a 3. profilnál a felugró "
+"menüben."
+
+msgid "Saved data for Profile 3 (internal)"
+msgstr "Mentett adatok a 3. profilhoz (belső)"

@@ -12,10 +12,12 @@
       "type": "page",
       "title": "⚙ General",
       "sections": [
+        "section_SettingsWindow",
         "section_Display",
         "section_Tooltip",
         "section_Report",
-        "section_remove_incompatible_xlets"
+        "section_remove_incompatible_xlets",
+        "section_dependencies"
       ]
     },
     "page_Temperatures": {
@@ -26,7 +28,8 @@
         "section_tempOptions",
         "section_tempSensors",
         "section_tempDisktemp",
-        "section_tempDisks"
+        "section_tempDisks",
+        "section_helpColors"
       ]
     },
     "page_Fans": {
@@ -35,7 +38,8 @@
       "sections": [
         "section_fanDisplay",
         "section_fanOptions",
-        "section_fanSensors"
+        "section_fanSensors",
+        "section_helpColors"
       ]
     },
     "page_Voltages": {
@@ -44,7 +48,8 @@
       "sections": [
         "section_voltDisplay",
         "section_voltOptions",
-        "section_voltSensors"
+        "section_voltSensors",
+        "section_helpColors"
       ]
     },
     "page_Intrusion": {
@@ -62,7 +67,19 @@
       "sections": [
         "section_customDisclaimer",
         "section_customDisplay",
-        "section_customSensors"
+        "section_customSensors",
+        "section_helpColors"
+      ]
+    },
+    "section_SettingsWindow": {
+      "type": "section",
+      "title": "This settings window",
+      "keys": [
+        "window_maximizing",
+        "window_width",
+        "window_height",
+        "window_set_current_size",
+        "window_label"
       ]
     },
     "section_Display": {
@@ -74,6 +91,7 @@
         "char_size",
         "horizontal_width",
         "separator_type",
+        "separator_color",
         "char_color_customized",
         "char_color",
         "crit_color",
@@ -107,6 +125,13 @@
       "title": "Remove from panels certain applets that also use sensors",
       "keys": [
         "remove_temperatureATfevimu"
+      ]
+    },
+    "section_dependencies": {
+      "type": "section",
+      "title": "Dependencies",
+      "keys": [
+        "do_not_check_dependencies"
       ]
     },
     "section_tempDisktemp": {
@@ -152,11 +177,19 @@
       "type": "section",
       "title": "Disk temperature sensors",
       "keys": [
+        "show_disks_first",
         "btn_renew_disks_list",
         "temp_disks",
         "update_display"
       ],
       "dependency": "disktemp_is_user_readable"
+    },
+    "section_helpColors": {
+      "type": "section",
+      "title": "Help to select color",
+      "keys": [
+        "button_color_help"
+      ]
     },
     "section_fanDisplay": {
       "type": "section",
@@ -268,6 +301,52 @@
     "type": "generic",
     "default": false
   },
+  "window_maximizing": {
+    "type": "combobox",
+    "default": "none",
+    "description": "How to set its size",
+    "options": {
+      "let it be": "none",
+      "maximize horizontally": "horizontally",
+      "maximize vertically": "vertically",
+      "maximize everything": "both",
+      "fixed": "fixed"
+    },
+    "tooltip": "Future window openings."
+  },
+  "window_width": {
+    "type": "entry",
+    "default": "800",
+    "description": "Width",
+    "tooltip": "This number must match your screen configuration.\nMinimum value: 800.",
+    "dependency": "window_maximizing=fixed"
+  },
+  "window_height": {
+    "type": "entry",
+    "default": "600",
+    "description": "Height",
+    "tooltip": "This number must match your screen configuration.\nMinimum value: 100.",
+    "dependency": "window_maximizing=fixed"
+  },
+  "window_set_current_size": {
+    "type": "button",
+    "callback": "_on_window_set_current_size",
+    "description": "Set to the approximate current size and position",
+    "dependency": "window_maximizing=fixed"
+  },
+  "window_label": {
+    "type": "label",
+    "description": "The exact size and position will depend on Cinnamon.",
+    "dependency": "window_maximizing=fixed"
+  },
+  "window_x": {
+    "type": "generic",
+    "default": "0"
+  },
+  "window_y": {
+    "type": "generic",
+    "default": "0"
+  },
   "interval": {
     "type": "combobox",
     "default": 10,
@@ -331,6 +410,12 @@
     },
     "description": "Separator"
   },
+  "separator_color": {
+    "type": "colorchooser",
+    "default": "rgba(127,127,127, 1.0)",
+    "dependency": "separator_type!=none",
+    "description": "Separator Color"
+  },
   "vertical-align": {
     "type": "generic",
     "default": "text-bottom"
@@ -393,6 +478,12 @@
     "description": "Show in menu the action: Restart this applet",
     "tooltip": "Whether or not to display in menu the action: Restart this applet."
   },
+  "do_not_check_dependencies": {
+    "type": "switch",
+    "default": false,
+    "description": "Do not check dependencies",
+    "tooltip": "If you do not want to install certain dependencies (e.g., fonts), check this box. Be careful with dependencies that are necessary for this applet to function properly."
+  },
   "make_disktemp_readable_by_user": {
     "type": "button",
     "description": "Make disk temperature user-readable",
@@ -400,13 +491,13 @@
   },
   "show_temp": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_temp_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_temp"
@@ -536,6 +627,13 @@
         "align": 0.5,
         "type": "string",
         "default": ""
+      },
+      {
+        "id": "color",
+        "title": "Color\nin panel",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
@@ -543,6 +641,11 @@
     ],
     "tooltip": "Double-click on a line to change 'Shown name', 'High', 'Critical' or 'Formula'.\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\n'High' and 'Critical' (optional) must be valid numbers.\n'Formula' (optional):\n  Use $ as the value returned by the sensor.\n  You can use the 4 operations (+-*/) and parentheses.\n  Example: $*1.1+0.5",
     "show-buttons": true
+  },
+  "show_disks_first": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the disk temperatures before those of the other sensors"
   },
   "btn_renew_disks_list": {
     "type": "button",
@@ -601,6 +704,13 @@
         "align": 0.5,
         "type": "string",
         "default": ""
+      },
+      {
+        "id": "color",
+        "title": "Color\nin panel",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
@@ -615,13 +725,13 @@
   },
   "show_fan": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_fan_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_fan"
@@ -743,6 +853,13 @@
         "align": 0.5,
         "type": "string",
         "default": ""
+      },
+      {
+        "id": "color",
+        "title": "Color\nin panel",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
@@ -757,13 +874,13 @@
   },
   "show_volt": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_volt_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_volt"
@@ -868,6 +985,13 @@
         "align": 0.5,
         "type": "string",
         "default": ""
+      },
+      {
+        "id": "color",
+        "title": "Color\nin panel",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
@@ -882,13 +1006,13 @@
   },
   "show_intrusion": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
   "show_intrusion_name": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display the 'Shown name' of each of these selected sensors",
     "tooltip": " Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
     "dependency": "show_intrusion"
@@ -1069,6 +1193,13 @@
         "align": 0.5,
         "type": "string",
         "default": ""
+      },
+      {
+        "id": "color",
+        "title": "Color\nin panel",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
@@ -1092,6 +1223,11 @@
     "type": "button",
     "description": "Update display",
     "callback": "updateUI_from_settings"
+  },
+  "button_color_help": {
+    "type": "button",
+    "description": "Open HTML Colors web page",
+    "callback": "_on_open_HTML_Colors_web_page"
   },
   "custom_names": {
     "type": "generic",

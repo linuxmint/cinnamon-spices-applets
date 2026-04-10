@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.4.7
+
+* Simplify the Thumbnail open/close logic to fix several issues, primarily the issue where Thumbnail menus would not go away, leaving more than one open Thumbnail menu
+* Added an option to remove the hotkey combos from the tooltip text for window list buttons
+* Improved the animation for removing a window list button
+* Removed more deprecated Tweener uses and replaced them with ease calls (only two Tweeners left now)
+* Moved to common code for Cinnamon 5.4+ and will stop adding new features to the Cinnamon 4 version after this update
+
+## 2.4.6
+
+* Fix ghost thumbnail menu when running in Cinnamon 6.6
+
 ## 2.4.5
 
 * Avoids 'destroy()' errors.
