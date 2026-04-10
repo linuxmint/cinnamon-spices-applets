@@ -150,6 +150,7 @@
       "title": "CPU Temperature",
       "keys": [
         "CPU_showTemp",
+        "CPU_temp_hovering_only",
         "CPU_tempInFahrenheit",
         "CPU_tempPath",
         "CPU_tempHigh",
@@ -200,7 +201,8 @@
         "Mem_chartType",
         "Mem_startAt12Oclock",
         "Mem_showBytesInTooltip",
-        "Mem_value_display"
+        "Mem_value_display",
+        "Mem_valueCorner"
       ]
     },
     "sectionMemoryColors": {
@@ -311,7 +313,8 @@
         "DiskUsage_squared",
         "DiskUsage_width",
         "DiskUsage_mergeAll",
-        "DiskUsage_value_display"
+        "DiskUsage_value_display",
+        "DiskUsage_valueCorner"
       ]
     },
     "sectionDiskUsageColors": {
@@ -350,7 +353,8 @@
         "Battery_squared",
         "Battery_width",
         "Battery_mergeAll",
-        "Battery_value_display"
+        "Battery_value_display",
+        "Battery_valueCorner"
       ]
     },
     "sectionBatteryColors": {
@@ -628,6 +632,12 @@
     "default": true,
     "description": "Show the CPU temperature"
   },
+  "CPU_temp_hovering_only": {
+    "type": "switch",
+    "default": false,
+    "description": "Only display when hovering over this applet",
+    "dependency": "CPU_showTemp"
+  },
   "CPU_tempInFahrenheit": {
     "type": "switch",
     "default": false,
@@ -825,6 +835,16 @@
       "Hovering over": "hover",
       "Always": "always"
     }
+  },
+  "Mem_valueCorner": {
+    "type": "combobox",
+    "default": "B",
+    "description": "Where to display this",
+    "options": {
+      "Top": "T",
+      "Bottom": "B"
+    },
+    "dependency": "Mem_value_display!=none"
   },
   "Mem_colorUsedup": {
     "type": "colorchooser",
@@ -1338,6 +1358,16 @@
       "Always": "always"
     }
   },
+  "DiskUsage_valueCorner": {
+    "type": "combobox",
+    "default": "B",
+    "description": "Where to display this",
+    "options": {
+      "Top": "T",
+      "Bottom": "B"
+    },
+    "dependency": "DiskUsage_value_display!=none"
+  },
   "DiskUsage_colorUsed": {
     "type": "colorchooser",
     "default": "rgba(255, 255, 255, 1)",
@@ -1442,6 +1472,16 @@
       "Hovering over": "hover",
       "Always": "always"
     }
+  },
+  "Battery_valueCorner": {
+    "type": "combobox",
+    "default": "B",
+    "description": "Where to display this",
+    "options": {
+      "Top": "T",
+      "Bottom": "B"
+    },
+    "dependency": "Battery_value_display!=none"
   },
   "Battery_colorLoad": {
     "type": "colorchooser",
