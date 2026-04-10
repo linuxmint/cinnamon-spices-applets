@@ -289,7 +289,11 @@ class GraphVBars {
     }
 
     // Temperature
-    if (providerName != 'SWAP' && this.applet.CPU_showTemp && this.applet.CPU_temperature) {
+    if (providerName != 'SWAP' &&
+      this.applet.CPU_showTemp &&
+      (!this.applet.CPU_temp_hovering_only || (this.applet.CPU_temp_hovering_only && this.applet.hovered)) &&
+      this.applet.CPU_temperature
+    ) {
       let degrees = (this.applet.CPU_tempInFahrenheit) ? "°F" : "°C";
       let pangolayout2 = area.create_pango_layout("" + this.applet.CPU_temperature + degrees);
 
@@ -518,7 +522,14 @@ class GraphVBars100 extends GraphVBars {
         pangolayoutPerCent.set_font_description(fontdesc);
         areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
         //place text in center of graph area
-        areaContext.moveTo(vbarOffset + vbarWidth / 2, _height / 2);
+        if ((!isBAT && this.applet.DiskUsage_valueCorner === "T") ||
+            (isBAT && this.applet.Battery_valueCorner === "T")
+        )
+          areaContext.moveTo(vbarOffset + vbarWidth / 2, 1); // top.
+        if ((!isBAT && this.applet.DiskUsage_valueCorner === "B") ||
+            (isBAT && this.applet.Battery_valueCorner === "B")
+        )
+          areaContext.moveTo(vbarOffset + vbarWidth / 2, _height / 2); // bottom.
         PangoCairo.layout_path(areaContext, pangolayoutPerCent);
         areaContext.fill();
       }
@@ -636,7 +647,8 @@ class GraphPieChart {
       }
     } else {
       // Bar chart
-      let vbarWidth = 0.8 * (_width - 6);
+      //~ let vbarWidth = 0.8 * (_width - 6);
+      let vbarWidth = 0.6 * (_width - 6);
       let r=1, g=1, b=1, a=1;
       var old_height = 0;
       var vbarHeight;
@@ -649,7 +661,8 @@ class GraphPieChart {
         if (i==0) plus = 1;
         this.drawRoundedRectangle(
           areaContext,
-          1 + 0.2 * width, // x
+          //~ 1 + 0.2 * width, // x
+          1 + 0.25 * width, // x
           height - (plus + old_height + vbarHeight), // y
           vbarWidth, // width
           vbarHeight, // height
@@ -688,7 +701,10 @@ class GraphPieChart {
 
       areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       //place text in center of graph area
-      areaContext.moveTo(_width / 2, _height / 2);
+      if (this.applet.Mem_valueCorner === "T")
+        areaContext.moveTo(_width / 2, 1); // top.
+      else
+        areaContext.moveTo(_width / 2, _height / 2); // bottom.
       PangoCairo.layout_path(areaContext, pangolayoutPerCent);
       areaContext.fill();
     }

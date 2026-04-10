@@ -235,6 +235,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_enabledTooltip", "CPU_enabledTooltip");
         this.settings.bind("CPU_squared", "CPU_squared");
         this.settings.bind("CPU_showTemp", "CPU_showTemp");
+        this.settings.bind("CPU_temp_hovering_only", "CPU_temp_hovering_only");
         this.settings.bind("CPU_tempInFahrenheit", "CPU_tempInFahrenheit");
         this.settings.bind("CPU_tempPath", "CPU_tempPath");
         this.settings.bind("CPU_tempHigh", "CPU_tempHigh");
@@ -281,6 +282,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Mem_startAt12Oclock", "Mem_startAt12Oclock");
         this.settings.bind("Mem_showBytesInTooltip", "Mem_showBytesInTooltip");
         this.settings.bind("Mem_value_display", "Mem_value_display");
+        this.settings.bind("Mem_valueCorner", "Mem_valueCorner");
         this.settings.bind("Mem_colorUsedup", "Mem_colorUsedup");
         this.settings.bind("Mem_colorCache", "Mem_colorCache");
         this.settings.bind("Mem_colorBuffers", "Mem_colorBuffers");
@@ -321,6 +323,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("DiskUsage_width", "DiskUsage_width", () => { this.adjust_DiskUsage_width() });
         this.settings.bind("DiskUsage_mergeAll", "DiskUsage_mergeAll");
         this.settings.bind("DiskUsage_value_display", "DiskUsage_value_display");
+        this.settings.bind("DiskUsage_valueCorner", "DiskUsage_valueCorner");
         this.settings.bind("DiskUsage_colorUsed", "DiskUsage_colorUsed");
         this.settings.bind("DiskUsage_colorFree", "DiskUsage_colorFree");
         this.settings.bind("DiskUsage_colorAlert", "DiskUsage_colorAlert");
@@ -332,6 +335,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Battery_width", "Battery_width", () => { this.adjust_Battery_width() });
         this.settings.bind("Battery_mergeAll", "Battery_mergeAll");
         this.settings.bind("Battery_value_display", "Battery_value_display");
+        this.settings.bind("Battery_valueCorner", "Battery_valueCorner");
         this.settings.bind("Battery_colorLoad", "Battery_colorLoad");
         this.settings.bind("Battery_colorUnload", "Battery_colorUnload");
         this.settings.bind("Battery_colorAlert", "Battery_colorAlert");
