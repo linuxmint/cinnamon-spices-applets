@@ -38,6 +38,7 @@ WindowCloserApplet.prototype = {
 
         this._backdrop = null;
         this._dialog = null;
+        this._isModal = false;
         this._readyForInput = false;
         this._idleId = 0;
         this._timeoutId = 0;
@@ -127,7 +128,7 @@ WindowCloserApplet.prototype = {
         this._dialog.add_child(header);
 
         let subtitle = new St.Label({
-            text: _("Click a window to close it") + " \u00b7 " + _("Esc to exit"),
+            text: _("Click a window to close it \u00b7 Esc to exit"),
             style: "font-size: 12px; color: rgba(255,255,255,0.45); padding-bottom: 20px;"
         });
         subtitle.set_x_align(Clutter.ActorAlign.CENTER);
@@ -144,6 +145,7 @@ WindowCloserApplet.prototype = {
 
         this._dialog.add_child(this._cardContainer);
 
+        this._dialog.set_opacity(0);
         Main.layoutManager.addChrome(this._dialog);
 
         // Push modal to grab keyboard + pointer
@@ -174,6 +176,7 @@ WindowCloserApplet.prototype = {
                 m.x + Math.floor((m.width - dW) / 2),
                 m.y + Math.floor((m.height - dH) / 2)
             );
+            self._dialog.set_opacity(255);
             return GLib.SOURCE_REMOVE;
         });
 
