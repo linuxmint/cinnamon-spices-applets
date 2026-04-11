@@ -1,3 +1,7 @@
+### v3.11.1~20260410
+  * Set position of display markers (Memory, Disk Usage, Battery).
+  * Fixes [#8518](https://github.com/linuxmint/cinnamon-spices-applets/issues/8518)
+
 ### v3.11.0~20260409
   * Battery: New module fixing [#8485](https://github.com/linuxmint/cinnamon-spices-applets/issues/8485)
   * Swap: Display “0.00” instead of “NaN” when the swap amount used is zero.
