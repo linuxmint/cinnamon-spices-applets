@@ -170,7 +170,7 @@ msgstr ""
 #. settings-schema.json->level-1->description
 msgid "Show low level icon when updates count is between 0 and this value "
 msgstr ""
-"Alacsony szintű ikon megjelenítése, ha a frissítések száma 0 és a ezen "
+"Alacsony szintű ikon megjelenítése, ha a frissítések száma 0 és ezen "
 "megadott érték között van "
 
 #. settings-schema.json->level-2->description
