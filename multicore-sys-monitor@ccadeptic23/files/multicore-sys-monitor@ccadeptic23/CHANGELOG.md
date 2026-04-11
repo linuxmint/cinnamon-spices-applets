@@ -1,3 +1,7 @@
+### v3.11.2~20260412
+  * Bugfix.
+  * Fixes [#8527](https://github.com/linuxmint/cinnamon-spices-applets/issues/8527)
+
 ### v3.11.1~20260410
   * Set position of display markers (Memory, Disk Usage, Battery).
   * Fixes [#8518](https://github.com/linuxmint/cinnamon-spices-applets/issues/8518)
