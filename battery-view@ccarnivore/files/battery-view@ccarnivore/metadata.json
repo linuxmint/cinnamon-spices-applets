@@ -1,0 +1,6 @@
+{
+    "uuid": "battery-view@ccarnivore",
+    "name": "Solar Battery View",
+    "description": "Displays battery state of charge and power flow from a solar inverter (works with Fronius inverters via Solar API v1)",
+    "max-instances": 1
+}
