@@ -289,7 +289,11 @@ class GraphVBars {
     }
 
     // Temperature
-    if (providerName != 'SWAP' && this.applet.CPU_showTemp && this.applet.CPU_temperature) {
+    if (providerName != 'SWAP' &&
+      this.applet.CPU_showTemp &&
+      (!this.applet.CPU_temp_hovering_only || (this.applet.CPU_temp_hovering_only && this.applet.hovered)) &&
+      this.applet.CPU_temperature
+    ) {
       let degrees = (this.applet.CPU_tempInFahrenheit) ? "°F" : "°C";
       let pangolayout2 = area.create_pango_layout("" + this.applet.CPU_temperature + degrees);
 
@@ -363,6 +367,8 @@ class GraphVBars {
 
 class GraphVBars100 extends GraphVBars {
   paint(providerName, currentReadings, area, areaContext, labelsEnabled, width, height, labelColor, bgColor, colorsList) {
+    //~ global.log("providerName: " + providerName);
+    const isBAT = providerName === _("BAT");
     if (!labelColor) {
         labelColor = [1, 1, 1, 0.1];
     } else {
@@ -423,8 +429,11 @@ class GraphVBars100 extends GraphVBars {
         _width = width;
       }
       _height = height - 2;
-      _x_origin = 2;
-      _y_origin = 1;
+      //~ _height = height;
+      //~ _x_origin = 2;
+      _x_origin = 3;
+      //~ _y_origin = 1;
+      _y_origin = 2;
     }
 
 
@@ -442,8 +451,15 @@ class GraphVBars100 extends GraphVBars {
     let vbarWidth = (_width - interBar * nbInterBars) / len;
     for (let i=0; i<len; i++) {
       let currentR = Math.round(100 * currentReadings[i].value, 2) / 100;
-      let maxValue = Math.round(100 * currentReadings[i].maxvalue, 2) / 100;
-      let vbarHeight = (_height - 1) * currentR;
+      let maxValue = null;
+      let minValue = null;
+      if (!isBAT)
+        maxValue = Math.round(100 * currentReadings[i].maxvalue, 2) / 100;
+      if (isBAT) {
+        minValue = Math.round(100 * currentReadings[i].minvalue, 2) / 100;
+        //~ global.log("minValue: " + minValue + " & currentR: " + currentR);
+      }
+      let vbarHeight = (_height - 3) * currentR;
       let vbarOffset = i * (vbarWidth) + (i + 1) * interBar;
 
       let r=1, g=1, b=1, a=1;
@@ -456,8 +472,15 @@ class GraphVBars100 extends GraphVBars {
       areaContext.setSourceRGBA(r, g, b, a);
       this.drawRoundedRectangle(areaContext, vbarOffset, 1, vbarWidth, _height - 2, 1.0);
       areaContext.fill();
+      let alertColor;
+      if (isBAT && minValue != null && currentR <= minValue) {
+        alertColor = (!isBAT) ? RGBa2rgba(this.applet.DiskUsage_colorAlert) : RGBa2rgba(this.applet.Battery_colorAlert);
+        areaContext.setSourceRGBA(alertColor[0], alertColor[1], alertColor[2], alertColor[3]);
+        this.drawRoundedRectangle(areaContext, vbarOffset, 1, vbarWidth, _height - 2, 1.0);
+        areaContext.fill();
+      }
 
-      if(currentR < maxValue) {
+      if((maxValue != null && currentR < maxValue) || (minValue != null && currentR > minValue)) {
         barnum = 1;
         r = colorsList[barnum][0];
         g = colorsList[barnum][1];
@@ -465,7 +488,7 @@ class GraphVBars100 extends GraphVBars {
         a = (colorsList[barnum][3] != null) ? colorsList[barnum][3] : 1;
         areaContext.setSourceRGBA(r, g, b, a);
       } else {
-        let alertColor = RGBa2rgba(this.applet.DiskUsage_colorAlert);
+        alertColor = (!isBAT) ? RGBa2rgba(this.applet.DiskUsage_colorAlert) : RGBa2rgba(this.applet.Battery_colorAlert);
         areaContext.setSourceRGBA(alertColor[0], alertColor[1], alertColor[2], alertColor[3]);
       }
 
@@ -489,7 +512,9 @@ class GraphVBars100 extends GraphVBars {
       }
 
       // Show the percentage value on each bar:
-      if (this.applet.DiskUsage_value_display === "always" || (this.applet.DiskUsage_value_display === "hover" && this.applet.hovered)) {
+      if ((!isBAT && (this.applet.DiskUsage_value_display === "always" || (this.applet.DiskUsage_value_display === "hover" && this.applet.hovered))) ||
+          (isBAT && (this.applet.Battery_value_display === "always" || (this.applet.Battery_value_display === "hover" && this.applet.hovered)))
+      ) {
         let percentValue = Math.round(currentReadings[i].value * 100) + "%";
         let pangolayoutPerCent = area.create_pango_layout(percentValue);
         pangolayoutPerCent.set_alignment(Pango.Alignment.CENTER);
@@ -497,7 +522,14 @@ class GraphVBars100 extends GraphVBars {
         pangolayoutPerCent.set_font_description(fontdesc);
         areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
         //place text in center of graph area
-        areaContext.moveTo(vbarOffset + vbarWidth / 2, _height / 2);
+        if ((!isBAT && this.applet.DiskUsage_valueCorner === "T") ||
+            (isBAT && this.applet.Battery_valueCorner === "T")
+        )
+          areaContext.moveTo(vbarOffset + vbarWidth / 2, 1); // top.
+        if ((!isBAT && this.applet.DiskUsage_valueCorner === "B") ||
+            (isBAT && this.applet.Battery_valueCorner === "B")
+        )
+          areaContext.moveTo(vbarOffset + vbarWidth / 2, _height / 2); // bottom.
         PangoCairo.layout_path(areaContext, pangolayoutPerCent);
         areaContext.fill();
       }
@@ -615,7 +647,8 @@ class GraphPieChart {
       }
     } else {
       // Bar chart
-      let vbarWidth = 0.8 * (_width - 6);
+      //~ let vbarWidth = 0.8 * (_width - 6);
+      let vbarWidth = 0.6 * (_width - 6);
       let r=1, g=1, b=1, a=1;
       var old_height = 0;
       var vbarHeight;
@@ -628,7 +661,8 @@ class GraphPieChart {
         if (i==0) plus = 1;
         this.drawRoundedRectangle(
           areaContext,
-          1 + 0.2 * width, // x
+          //~ 1 + 0.2 * width, // x
+          1 + 0.25 * width, // x
           height - (plus + old_height + vbarHeight), // y
           vbarWidth, // width
           vbarHeight, // height
@@ -667,7 +701,10 @@ class GraphPieChart {
 
       areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       //place text in center of graph area
-      areaContext.moveTo(_width / 2, _height / 2);
+      if (this.applet.Mem_valueCorner === "T")
+        areaContext.moveTo(_width / 2, 1); // top.
+      else
+        areaContext.moveTo(_width / 2, _height / 2); // bottom.
       PangoCairo.layout_path(areaContext, pangolayoutPerCent);
       areaContext.fill();
     }
@@ -932,22 +969,47 @@ class GraphLineChart {
     }
 
     // Total
-    if (providerName == _('NET') && this.applet.Net_total_display) {
+    let totalNetOK = providerName == _('NET') && this.applet.Net_total_display;
+    let speedDiskOK = providerName == _('DISK') && this.applet.Disk_speed_display;
+    let isOnlyLeftOrRight, isRight, isTop;
+    var wantSpeed;
+    var total;
+    var previous;
+    const refreshRate = 0.001 * this.applet.refreshRate;
+
+    if (totalNetOK) {
       if (this.applet.Net_total_hovering_only && !this.applet.hovered) return;
-      const wantSpeed = this.applet.Net_total_type === "speed";
-      const refreshRate = 0.001 * this.applet.refreshRate;
+      wantSpeed = this.applet.Net_total_type === "speed";
 
-      let isOnlyLeftOrRight = this.applet.Net_totalCorner.includes("O");
-      let isRight = this.applet.Net_totalCorner.includes("R");
-      let isTop = this.applet.Net_totalCorner.includes("T");
+      isOnlyLeftOrRight = this.applet.Net_totalCorner.includes("O");
+      isRight = this.applet.Net_totalCorner.includes("R");
+      isTop = this.applet.Net_totalCorner.includes("T");
 
-      var total = this.applet.networkProvider.totalAmountCurrent;
-      var previous = this.applet.networkProvider.totalAmountPrevious;
+      total = this.applet.networkProvider.totalAmountCurrent;
+      previous = this.applet.networkProvider.totalAmountPrevious;
       if (wantSpeed) {
         total[0] = (total[0] - previous[0]) / refreshRate;
         total[1] = (total[1] - previous[1]) / refreshRate;
       }
+    }
 
+    if (speedDiskOK) {
+      if (this.applet.Disk_speed_hovering_only && !this.applet.hovered) return;
+      wantSpeed = true;
+
+      isOnlyLeftOrRight = this.applet.Disk_speedCorner.includes("O");
+      isRight = this.applet.Disk_speedCorner.includes("R");
+      isTop = this.applet.Disk_speedCorner.includes("T");
+
+      total = this.applet.diskProvider.totalAmountCurrent;
+      previous = this.applet.diskProvider.totalAmountPrevious;
+      if (wantSpeed) {
+        total[0] = (total[0] - previous[0]) / refreshRate;
+        total[1] = (total[1] - previous[1]) / refreshRate;
+      }
+    }
+
+    if (totalNetOK || speedDiskOK) {
       let _down = formatBytesValueUnit(total[0], 2, false);
       let down;
       if (isOnlyLeftOrRight) {

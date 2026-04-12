@@ -8,6 +8,7 @@
       "pageNetwork",
       "pageDisk",
       "pageDiskUsage",
+      "pageBattery",
       "pageColors"
     ],
     "pageGeneral": {
@@ -56,7 +57,8 @@
         "sectionDiskOptions",
         "sectionDiskScaling",
         "sectionDiskTooltip",
-        "sectionDiskDevices"
+        "sectionDiskDevices",
+        "sectionDiskSpeed"
       ]
     },
     "pageDiskUsage": {
@@ -66,6 +68,15 @@
         "sectionDiskUsageOptions",
         "sectionDiskUsageColors",
         "sectionDiskUsagePaths"
+      ]
+    },
+    "pageBattery": {
+      "type": "page",
+      "title": "Battery",
+      "sections": [
+        "sectionBatteryOptions",
+        "sectionBatteryColors",
+        "sectionBatteryPaths"
       ]
     },
     "pageColors": {
@@ -122,6 +133,7 @@
       "title": "Options",
       "keys": [
         "CPU_enabled",
+        "CPU_enabledTooltip",
         "CPU_labelOn",
         "CPU_squared",
         "CPU_width",
@@ -138,6 +150,7 @@
       "title": "CPU Temperature",
       "keys": [
         "CPU_showTemp",
+        "CPU_temp_hovering_only",
         "CPU_tempInFahrenheit",
         "CPU_tempPath",
         "CPU_tempHigh",
@@ -177,7 +190,10 @@
       "title": "Options",
       "keys": [
         "Mem_enabled",
+        "Mem_enabledTooltip",
+        "Mem_enabledBufferCacheSharedTooltip",
         "Swap_enabled",
+        "Swap_enabledTooltip",
         "Mem_labelOn",
         "Mem_method",
         "Mem_squared",
@@ -185,7 +201,8 @@
         "Mem_chartType",
         "Mem_startAt12Oclock",
         "Mem_showBytesInTooltip",
-        "Mem_value_display"
+        "Mem_value_display",
+        "Mem_valueCorner"
       ]
     },
     "sectionMemoryColors": {
@@ -223,6 +240,7 @@
       "type": "section",
       "title": "Tooltip",
       "keys": [
+        "Net_enabledTooltip",
         "Net_symbolsInTooltip"
       ]
     },
@@ -252,6 +270,7 @@
       "title": "Options",
       "keys": [
         "Disk_enabled",
+        "Disk_enabledTooltip",
         "Disk_labelOn",
         "Disk_squared",
         "Disk_width",
@@ -289,11 +308,13 @@
       "title": "Options",
       "keys": [
         "DiskUsage_enabled",
+        "DiskUsage_enabledTooltip",
         "DiskUsage_labelOn",
         "DiskUsage_squared",
         "DiskUsage_width",
         "DiskUsage_mergeAll",
-        "DiskUsage_value_display"
+        "DiskUsage_value_display",
+        "DiskUsage_valueCorner"
       ]
     },
     "sectionDiskUsageColors": {
@@ -311,6 +332,49 @@
       "keys": [
         "DiskUsage_getpathlist_btn",
         "DiskUsage_pathList"
+      ]
+    },
+    "sectionDiskSpeed": {
+      "type": "section",
+      "title": "Instant speed",
+      "keys": [
+        "Disk_speed_display",
+        "Disk_speed_hovering_only",
+        "Disk_speedCorner"
+      ]
+    },
+    "sectionBatteryOptions": {
+      "type": "section",
+      "title": "Options",
+      "keys": [
+        "Battery_enabled",
+        "Battery_enabledTooltip",
+        "Battery_labelOn",
+        "Battery_squared",
+        "Battery_width",
+        "Battery_mergeAll",
+        "Battery_value_display",
+        "Battery_valueCorner"
+      ]
+    },
+    "sectionBatteryColors": {
+      "type": "section",
+      "title": "Colors",
+      "keys": [
+        "Battery_colorLoad",
+        "Battery_colorUnload",
+        "Battery_colorAlert"
+      ]
+    },
+    "sectionBatteryPaths": {
+      "type": "section",
+      "title": "Paths",
+      "keys": [
+        "labelWarning",
+        "Battery_getdevlist_btn",
+        "Battery_devicesList",
+        "Battery_cleardevlist_btn",
+        "RefreshAll_btn"
       ]
     },
     "sectionColors": {
@@ -503,6 +567,11 @@
     "default": true,
     "description": "Enable"
   },
+  "CPU_enabledTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable Tooltip"
+  },
   "CPU_labelOn": {
     "type": "switch",
     "default": true,
@@ -562,6 +631,12 @@
     "type": "switch",
     "default": true,
     "description": "Show the CPU temperature"
+  },
+  "CPU_temp_hovering_only": {
+    "type": "switch",
+    "default": false,
+    "description": "Only display when hovering over this applet",
+    "dependency": "CPU_showTemp"
   },
   "CPU_tempInFahrenheit": {
     "type": "switch",
@@ -680,10 +755,26 @@
     "default": true,
     "description": "Enable"
   },
+  "Mem_enabledTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable Tooltip"
+  },
+  "Mem_enabledBufferCacheSharedTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable Buffer/Cache/Shared Tooltip",
+    "dependency": "Mem_enabledTooltip"
+  },
   "Swap_enabled": {
     "type": "switch",
     "default": true,
     "description": "Enable Swap"
+  },
+  "Swap_enabledTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable Swap Tooltip"
   },
   "Mem_labelOn": {
     "type": "switch",
@@ -745,6 +836,16 @@
       "Always": "always"
     }
   },
+  "Mem_valueCorner": {
+    "type": "combobox",
+    "default": "B",
+    "description": "Where to display this",
+    "options": {
+      "Top": "T",
+      "Bottom": "B"
+    },
+    "dependency": "Mem_value_display!=none"
+  },
   "Mem_colorUsedup": {
     "type": "colorchooser",
     "default": "rgba(255, 255, 255, 1)",
@@ -785,6 +886,11 @@
     "type": "switch",
     "default": true,
     "description": "Enable"
+  },
+  "Net_enabledTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable Tooltip"
   },
   "Net_labelOn": {
     "type": "switch",
@@ -995,6 +1101,11 @@
     "default": true,
     "description": "Enable"
   },
+  "Disk_enabledTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable Tooltip"
+  },
   "Disk_labelOn": {
     "type": "switch",
     "default": true,
@@ -1176,10 +1287,40 @@
     "description": "Clear this device list",
     "callback": "on_Disk_cleardevlist_btn_clicked"
   },
+  "Disk_speed_display": {
+    "type": "switch",
+    "default": true,
+    "description": "Display that",
+    "tooltip": "Be sure to check at least one “Part of total” box among the enabled devices."
+  },
+  "Disk_speed_hovering_only": {
+    "type": "switch",
+    "default": false,
+    "description": "Only display when hovering over this applet",
+    "dependency": "Disk_speed_display"
+  },
+  "Disk_speedCorner": {
+    "type": "combobox",
+    "default": "LO",
+    "description": "Corner in which to display that",
+    "options": {
+      "Top Right": "TR",
+      "Top Left": "TL",
+      "Bottom Right": "BR",
+      "Bottom Left": "BL",
+      "Right Only": "RO",
+      "Left Only": "LO"
+    }
+  },
   "DiskUsage_enabled": {
     "type": "switch",
     "default": false,
     "description": "Enable"
+  },
+  "DiskUsage_enabledTooltip": {
+    "type": "switch",
+    "default": false,
+    "description": "Enable Tooltip"
   },
   "DiskUsage_labelOn": {
     "type": "switch",
@@ -1216,6 +1357,16 @@
       "Hovering over": "hover",
       "Always": "always"
     }
+  },
+  "DiskUsage_valueCorner": {
+    "type": "combobox",
+    "default": "B",
+    "description": "Where to display this",
+    "options": {
+      "Top": "T",
+      "Bottom": "B"
+    },
+    "dependency": "DiskUsage_value_display!=none"
   },
   "DiskUsage_colorUsed": {
     "type": "colorchooser",
@@ -1275,6 +1426,126 @@
       }
     ],
     "show-buttons": true
+  },
+  "Battery_enabled": {
+    "type": "switch",
+    "default": false,
+    "description": "Enable"
+  },
+  "Battery_enabledTooltip": {
+    "type": "switch",
+    "default": false,
+    "description": "Enable Tooltip"
+  },
+  "Battery_labelOn": {
+    "type": "switch",
+    "default": true,
+    "description": "Label",
+    "dependency": "labelsOn"
+  },
+  "Battery_squared": {
+    "type": "switch",
+    "default": false,
+    "description": "Square view"
+  },
+  "Battery_width": {
+    "type": "scale",
+    "default": 32,
+    "description": "Width",
+    "min": 10,
+    "max": 320,
+    "step": 1,
+    "show-value": true,
+    "dependency": "!Battery_squared"
+  },
+  "Battery_mergeAll": {
+    "type": "switch",
+    "default": false,
+    "description": "Merge all"
+  },
+  "Battery_value_display": {
+    "type": "combobox",
+    "default": "hover",
+    "description": "Display value",
+    "options": {
+      "None": "none",
+      "Hovering over": "hover",
+      "Always": "always"
+    }
+  },
+  "Battery_valueCorner": {
+    "type": "combobox",
+    "default": "B",
+    "description": "Where to display this",
+    "options": {
+      "Top": "T",
+      "Bottom": "B"
+    },
+    "dependency": "Battery_value_display!=none"
+  },
+  "Battery_colorLoad": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 1)",
+    "description": "Load"
+  },
+  "Battery_colorUnload": {
+    "type": "colorchooser",
+    "default": "rgba(230, 230, 230, 0.1)",
+    "description": "Unload"
+  },
+  "Battery_colorAlert": {
+    "type": "colorchooser",
+    "default": "rgba(255, 0, 0, 1)",
+    "description": "Alert"
+  },
+  "Battery_getdevlist_btn": {
+    "type": "button",
+    "description": "Update this device list",
+    "callback": "on_Battery_getdevlist_btn_clicked"
+  },
+  "Battery_devicesList": {
+    "type": "list",
+    "default": [
+
+    ],
+    "columns": [
+      {
+        "id": "enabled",
+        "title": "Enabled",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "id",
+        "title": "⚠️ Id️",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      },
+      {
+        "id": "minvalue",
+        "title": "Alert when\nvalue (in %)\nreaches",
+        "type": "integer",
+        "default": 40,
+        "min": 0,
+        "max": 100,
+        "align": 0.5
+      },
+      {
+        "id": "name",
+        "title": "Name",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      }
+    ],
+    "show-buttons": true
+  },
+  "Battery_cleardevlist_btn": {
+    "type": "button",
+    "description": "Clear this device list",
+    "callback": "on_Battery_cleardevlist_btn_clicked"
   },
   "color0": {
     "type": "colorchooser",
