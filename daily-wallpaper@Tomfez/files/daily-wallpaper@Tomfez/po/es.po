@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #. metadata.json->name
 #. applet.js:47
@@ -119,7 +119,7 @@ msgstr "APOD"
 
 #. settings-schema.json->currentSource->options
 msgid "Picsum Photos"
-msgstr ""
+msgstr "Fotos de Picsum"
 
 #. settings-schema.json->refreshInterval->description
 msgid "Update interval to check new wallpaper"
@@ -360,24 +360,23 @@ msgstr ""
 
 #. settings-schema.json->image-width-option->description
 msgid "Set the prefered width for the image"
-msgstr ""
+msgstr "Establece el ancho deseado para la imagen"
 
 #. settings-schema.json->image-height-option->description
 msgid "Set the prefered height for the image"
-msgstr ""
+msgstr "Establece la altura deseada para la imagen"
 
 #. settings-schema.json->image-blur-option->description
-#, fuzzy
 msgid "Get a blurred image"
-msgstr "Imagen seleccionada"
+msgstr "Obtener una imagen borrosa"
 
 #. settings-schema.json->image-blur-amount->description
 msgid "Adjust the amount of blur by providing a number between 1 and 10"
-msgstr ""
+msgstr "Ajusta el grado de desenfoque introduciendo un número entre 1 y 10"
 
 #. settings-schema.json->image-grayscale-option->description
 msgid "Get a grayscale image"
-msgstr ""
+msgstr "Obtener una imagen en escala de grises"
 
 #. settings-schema.json->image-aspect-options->description
 msgid "Image aspect"
