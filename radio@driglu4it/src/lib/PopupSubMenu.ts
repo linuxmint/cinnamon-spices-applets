@@ -46,6 +46,7 @@ export function createSubMenu(args: Arguments) {
     style_class: "popup-sub-menu",
     vscrollbar_policy: PolicyType.AUTOMATIC,
     hscrollbar_policy: PolicyType.NEVER,
+    clip_to_allocation: true,
   });
 
   const box = new BoxLayout({
