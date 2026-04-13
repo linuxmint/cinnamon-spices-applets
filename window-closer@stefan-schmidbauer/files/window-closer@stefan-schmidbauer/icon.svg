@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Window frame -->
+  <rect x="6" y="10" width="52" height="44" rx="4" ry="4" fill="none" stroke="#d4d4d4" stroke-width="3"/>
+  <!-- Title bar -->
+  <rect x="6" y="10" width="52" height="12" rx="4" ry="0" fill="#d4d4d4"/>
+  <rect x="6" y="18" width="52" height="4" fill="#d4d4d4"/>
+  <!-- Title bar dots -->
+  <circle cx="13" cy="16" r="2.5" fill="#e74c3c"/>
+  <circle cx="21" cy="16" r="2.5" fill="#f39c12"/>
+  <circle cx="29" cy="16" r="2.5" fill="#2ecc71"/>
+  <!-- X mark -->
+  <line x1="22" y1="28" x2="42" y2="48" stroke="#e74c3c" stroke-width="4" stroke-linecap="round"/>
+  <line x1="42" y1="28" x2="22" y2="48" stroke="#e74c3c" stroke-width="4" stroke-linecap="round"/>
+</svg>

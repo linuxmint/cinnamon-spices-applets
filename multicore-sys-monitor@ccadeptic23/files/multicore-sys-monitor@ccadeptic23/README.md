@@ -5,7 +5,7 @@ It also can display the CPU temperature.
 
 ## Dependencies
 
-For Cinnamon version lesser than 6.4 you must install the `gir1.2-gtop-2.0` package to use this applet. This package is no longer needed with Cinnamon 6.4+.
+For Cinnamon version lesser than 5.6 you must install the `gir1.2-gtop-2.0` package to use this applet. This package is no longer needed with Cinnamon 5.6.+.
 
 Better display using the `DejaVuSansMono-Bold.ttf` font from the `fonts-dejavu-mono` package.
 
@@ -29,10 +29,17 @@ The user can choose between the htop method (recommended) and the System Monitor
 
 ## Network
 
-Starting with Cinnamon 6.4, you can display the total amount transferred or the instantaneous transfer speed.
+Starting with Cinnamon 5.6, you can display the total amount transferred or the instantaneous transfer speed.
+
+## Battery
+Starting with Cinnamon 5.6, you can display the percentage of charge for each battery.
+In the tooltip you can see info like this:
+  BAT0 (90%):     95%
+90% means that your BAT0 battery has a health status of 90% relative to its rated capacity. The older your battery gets, the lower this percentage becomes.
+95% means that your battery is charged to 95% of its current maximum capacity. This therefore represents 95% of 90% (i.e., 85.5%) of its rated capacity.
 
 
-## Instructions for upgrading to Cinnamon 6.4
+## Instructions for upgrading to Cinnamon 5.6
 
 From Applet Settings:
 

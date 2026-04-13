@@ -1,3 +1,18 @@
+### v3.11.2~20260412
+  * Bugfix.
+  * Fixes [#8527](https://github.com/linuxmint/cinnamon-spices-applets/issues/8527)
+
+### v3.11.1~20260410
+  * Set position of display markers (Memory, Disk Usage, Battery).
+  * Fixes [#8518](https://github.com/linuxmint/cinnamon-spices-applets/issues/8518)
+
+### v3.11.0~20260409
+  * Battery: New module fixing [#8485](https://github.com/linuxmint/cinnamon-spices-applets/issues/8485)
+  * Swap: Display “0.00” instead of “NaN” when the swap amount used is zero.
+  * Disk I/O: Show Read/Write average speed in panel.
+  * Fixes [#8500](https://github.com/linuxmint/cinnamon-spices-applets/issues/8500)
+  * Tooltip: Show or hide for each module.
+
 ### v3.10.4~20260404
   * Panel display improvements. Better using the `DejaVuSansMono-Bold.ttf` font from the `fonts-dejavu-mono` package.
   * Avoids changing Refresh Rate when updating applet.
