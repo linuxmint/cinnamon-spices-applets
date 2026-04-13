@@ -1,3 +1,5 @@
+-- Util to automatically reconnect on network change. 
+-- Based on: https://github.com/mpv-player/mpv/issues/5793#issuecomment-2495268210 
 local prev_pos = -1
 
 function reload_if_disconnected()
