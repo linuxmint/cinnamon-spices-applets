@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: daily-wallpaper@Tomfez 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-25 21:26+0200\n"
+"POT-Creation-Date: 2026-02-25 21:09+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,56 +23,56 @@ msgstr ""
 msgid "Daily desktop wallpaper"
 msgstr "Napi asztali háttérkép"
 
-#. applet.js:117
+#. applet.js:123
 msgid "Refresh"
 msgstr "Frissítés"
 
-#. applet.js:130
+#. applet.js:136
 msgid "Copy image URL to clipboard"
 msgstr "Kép URL-címének másolása a vágólapra"
 
-#. applet.js:131
+#. applet.js:137
 msgid "Open image folder"
 msgstr "Képmappa megnyitása"
 
-#. applet.js:133
+#. applet.js:139
 msgid "Settings"
 msgstr "Beállítások"
 
-#. applet.js:290
+#. applet.js:296
 msgid "Next refresh"
 msgstr "Következő frissítés"
 
-#. applet.js:336
+#. applet.js:343
 msgid "This is the most recent image."
 msgstr "Ez a legfrissebb kép."
 
-#. applet.js:344
+#. applet.js:351
 msgid "Last image. Unable to get more images."
 msgstr "Utolsó kép. Nem sikerült több képet beszerezni."
 
-#. applet.js:388
+#. applet.js:395
 msgid "Refresh deactivated"
 msgstr "Frissítés kikapcsolva"
 
-#. applet.js:448 applet.js:475
+#. applet.js:455 applet.js:482
 #, javascript-format
 msgid "Wallpaper of the day at %s for %s"
 msgstr "A nap háttérképe %s-ban %s-nak"
 
-#. source.js:83 source.js:102
+#. source.js:98 source.js:117
 msgid "No image today."
 msgstr "Ma nincs kép."
 
-#. utils.js:90 utils.js:93
+#. utils.js:96 utils.js:99
 msgid "minutes"
 msgstr "perc"
 
-#. utils.js:96
+#. utils.js:102
 msgid "days"
 msgstr "nap"
 
-#. utils.js:99
+#. utils.js:105
 msgid "hours"
 msgstr "óra"
 
@@ -116,6 +116,10 @@ msgstr "Wikimedia"
 #. settings-schema.json->currentSource->options
 msgid "APOD"
 msgstr "APOD"
+
+#. settings-schema.json->currentSource->options
+msgid "Picsum Photos"
+msgstr ""
 
 #. settings-schema.json->refreshInterval->description
 msgid "Update interval to check new wallpaper"
@@ -177,8 +181,7 @@ msgstr "Véletlenszerű"
 msgid ""
 "Select the most recent image or a random image when the applet is launched"
 msgstr ""
-"A legújabb kép vagy egy véletlenszerű kép kiválasztása az applet "
-"indításakor"
+"A legújabb kép vagy egy véletlenszerű kép kiválasztása az applet indításakor"
 
 #. settings-schema.json->market->description
 msgid "Bing locale"
@@ -352,6 +355,27 @@ msgstr ""
 "Állítsd be az APOD API-hoz tartozó API-kulcsot. Az alapértelmezett API-"
 "kulcsot a regisztráció előtti API-k felfedezéséhez használjuk, de ennek "
 "sokkal alacsonyabbak a sebességkorlátjai."
+
+#. settings-schema.json->image-width-option->description
+msgid "Set the prefered width for the image"
+msgstr ""
+
+#. settings-schema.json->image-height-option->description
+msgid "Set the prefered height for the image"
+msgstr ""
+
+#. settings-schema.json->image-blur-option->description
+#, fuzzy
+msgid "Get a blurred image"
+msgstr "Kiválasztott kép"
+
+#. settings-schema.json->image-blur-amount->description
+msgid "Adjust the amount of blur by providing a number between 1 and 10"
+msgstr ""
+
+#. settings-schema.json->image-grayscale-option->description
+msgid "Get a grayscale image"
+msgstr ""
 
 #. settings-schema.json->image-aspect-options->description
 msgid "Image aspect"

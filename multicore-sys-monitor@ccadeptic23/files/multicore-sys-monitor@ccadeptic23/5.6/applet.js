@@ -817,44 +817,48 @@ class MCSM extends Applet.IconApplet {
         }
         var ret = "";
         var returnedDevices = [];
-        if (GLib.file_test(NETWORK_DEVICES_STATUS_PATH, GLib.FileTest.EXISTS)) {
-            readFileAsync(NETWORK_DEVICES_STATUS_PATH).then((status) => {
-                ret += status.trim();
-            });
-        } else {
-            const net_dir_path = "/sys/class/net";
-            const net_dir = Gio.file_new_for_path(net_dir_path);
-            const children = net_dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
-            for (let child of children) {
-                let name = child.get_name();
-                let operstate_file_path = `${net_dir_path}/${name}/operstate`;
-
-                readFileAsync(operstate_file_path).then( (net_status) => {
-                    net_status = net_status.trim();
-                    ret += `${name}:${net_status} `;
+        try {
+            if (GLib.file_test(NETWORK_DEVICES_STATUS_PATH, GLib.FileTest.EXISTS)) {
+                readFileAsync(NETWORK_DEVICES_STATUS_PATH).then((status) => {
+                    ret += status.trim();
                 });
-            }
-        }
-        let idto = setTimeout( () => {
-            clearTimeout(idto);
-            returnedDevices = ret.trim().split(" ");
-            for (let d of returnedDevices) {
-                let [dev, status] = d.split(":");
-                if (knownDevices.indexOf(dev) < 0) {
-                    if (status === "up" || status === "down") {
-                        new_Net_devicesList.push({
-                            "enabled": status === "up",
-                            "id": dev,
-                            "name": dev,
-                            "colorDown": (knownDevices.length * 2) % nb_colors,
-                            "colorUp": (knownDevices.length * 2 + 1) % nb_colors
-                        });
-                        knownDevices.push(dev);
-                    }
+            } else {
+                const net_dir_path = "/sys/class/net";
+                const net_dir = Gio.file_new_for_path(net_dir_path);
+                const children = net_dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
+                for (let child of children) {
+                    let name = child.get_name();
+                    let operstate_file_path = `${net_dir_path}/${name}/operstate`;
+
+                    readFileAsync(operstate_file_path).then( (net_status) => {
+                        net_status = net_status.trim();
+                        ret += `${name}:${net_status} `;
+                    });
                 }
             }
-            this.Net_devicesList = new_Net_devicesList;
-        }, 2100);
+            let idto = setTimeout( () => {
+                clearTimeout(idto);
+                returnedDevices = ret.trim().split(" ");
+                for (let d of returnedDevices) {
+                    let [dev, status] = d.split(":");
+                    if (knownDevices.indexOf(dev) < 0) {
+                        if (status === "up" || status === "down") {
+                            new_Net_devicesList.push({
+                                "enabled": status === "up",
+                                "id": dev,
+                                "name": dev,
+                                "colorDown": (knownDevices.length * 2) % nb_colors,
+                                "colorUp": (knownDevices.length * 2 + 1) % nb_colors
+                            });
+                            knownDevices.push(dev);
+                        }
+                    }
+                }
+                this.Net_devicesList = new_Net_devicesList;
+            }, 2100);
+        } catch(e) {
+            global.logError("Unable to detect any network device!", e);
+        }
     }
 
     on_Net_cleardevlist_btn_clicked() {
@@ -963,37 +967,41 @@ class MCSM extends Applet.IconApplet {
 
         var ret = "";
         var returnedDevices = [];
-        for (let child of children) {
-            let name = child.get_name();
-            global.log("name: " + name);
-            let uevent_file_path = `${POWER_SUPPLY_PATH}/${name}/uevent`;
-            if (!GLib.file_test(uevent_file_path, GLib.FileTest.EXISTS)) continue;
-            readFileAsync(uevent_file_path).then( (status) => {
-                status = status.trim();
-                let _json = conf2json(status);
-                if (_json["POWER_SUPPLY_TYPE"] === "Battery" && parseInt(_json["POWER_SUPPLY_PRESENT"]) === 1)
-                ret += `${name} `;
-            });
-        }
-        children.close(null);
-
-        let idto = setTimeout( () => {
-            clearTimeout(idto);
-            returnedDevices = ret.trim().split(" ");
-            for (let dev of returnedDevices) {
-                if (dev.length < 2) continue;
-                if (knownDevices.indexOf(dev) < 0) {
-                    new_Battery_devicesList.push({
-                            "enabled": true,
-                            "id": dev,
-                            "minvalue": 40,
-                            "name": dev
-                        });
-                        knownDevices.push(dev);
-                }
+        try {
+            for (let child of children) {
+                let name = child.get_name();
+                global.log("name: " + name);
+                let uevent_file_path = `${POWER_SUPPLY_PATH}/${name}/uevent`;
+                if (!GLib.file_test(uevent_file_path, GLib.FileTest.EXISTS)) continue;
+                readFileAsync(uevent_file_path).then( (status) => {
+                    status = status.trim();
+                    let _json = conf2json(status);
+                    if (_json["POWER_SUPPLY_TYPE"] === "Battery" && parseInt(_json["POWER_SUPPLY_PRESENT"]) === 1)
+                    ret += `${name} `;
+                });
             }
-            this.Battery_devicesList = new_Battery_devicesList;
-        }, 2100);
+            children.close(null);
+
+            let idto = setTimeout( () => {
+                clearTimeout(idto);
+                returnedDevices = ret.trim().split(" ");
+                for (let dev of returnedDevices) {
+                    if (dev.length < 2) continue;
+                    if (knownDevices.indexOf(dev) < 0) {
+                        new_Battery_devicesList.push({
+                                "enabled": true,
+                                "id": dev,
+                                "minvalue": 40,
+                                "name": dev
+                            });
+                            knownDevices.push(dev);
+                    }
+                }
+                this.Battery_devicesList = new_Battery_devicesList;
+            }, 2100);
+        } catch(e) {
+            global.logError("Unable to detect any battery!", e);
+        }
     }
 
     on_Battery_cleardevlist_btn_clicked() {
