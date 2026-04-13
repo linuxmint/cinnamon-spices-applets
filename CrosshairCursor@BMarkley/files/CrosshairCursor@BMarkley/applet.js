@@ -4,7 +4,8 @@ const St = imports.gi.St;
 const Util = imports.misc.util;
 const HOME = GLib.get_home_dir();
 const UUID = "CrosshairCursor@BMarkley";
-const APPLET_DIR = HOME + "/.local/share/cinnamon/applets/" + UUID;
+const USER_DATA_DIR = GLib.get_user_data_dir()
+const APPLET_DIR = USER_DATA_DIR + "/cinnamon/applets/" + UUID;
 const CROSSHAIR_SCRIPT = APPLET_DIR + "/CCScript.sh";
 const CROSSHAIR_EXEC = APPLET_DIR + "/CrosshairCursor/CrosshairCursor";
 const DEBUG = false;
@@ -21,7 +22,7 @@ const {
 const { to_string } = require("./lib/to-string");
 
 const Gettext = imports.gettext;
-Gettext.bindtextdomain(UUID, HOME + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, USER_DATA_DIR + "/locale");
 
 function _(str) {
    let customTranslation = Gettext.dgettext(UUID, str);
@@ -39,14 +40,14 @@ class CrosshairCursorToggle extends Applet.IconApplet {
         this.updateIcon();
         this._tooltip_ok();
         // make executable the script CrosshairCursor.sh:
-        Util.spawnCommandLine(`/usr/bin/env bash -c 'chmod +x ${CROSSHAIR_SCRIPT}'`);
+        Util.spawn(["/usr/bin/env bash -c 'chmod", "+x ${CROSSHAIR_SCRIPT}"]);
         // make executable the CrosshairCursor executable program:
-        Util.spawnCommandLine(`/usr/bin/env bash -c 'chmod +x ${CROSSHAIR_EXEC}'`);
+        Util.spawn(["/usr/bin/env bash -c 'chmod", "+x ${CROSSHAIR_EXEC}"]);
     }
 
     on_applet_clicked(event) {
         //if (DEBUG) global.log(_("CrosshairCursorToggle is clicked"));
-        GLib.spawn_command_line_async(CROSSHAIR_SCRIPT);
+        Util.spawn(CROSSHAIR_SCRIPT);
         // Delay update to allow process start/stop
         timeout_add( 250, () => {
             this.updateIcon();
@@ -61,7 +62,7 @@ class CrosshairCursorToggle extends Applet.IconApplet {
     checkIfProgramRunning(programName) {
         // Runs pgrep synchronously, returns true/false
         try {
-            let [ok, stdout, stderr, status] = GLib.spawn_command_line_sync(`pgrep -x ${programName}`);
+            let [ok, stdout, stderr, status] = Util.spawn("pgrep", "-x ${programName}");
             if (ok && status === 0 && to_string(stdout).trim().length > 0) {
                 return true;
             }
