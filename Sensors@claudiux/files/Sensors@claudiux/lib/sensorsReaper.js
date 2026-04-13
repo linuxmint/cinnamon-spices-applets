@@ -169,7 +169,10 @@ class SensorsReaper {
     if (GLib.file_test(SENSORS_DATA, GLib.FileTest.EXISTS)) {
       let [success, contents] = GLib.file_get_contents(SENSORS_DATA);
       if (success) {
-        this._sensors_reaped(to_string(contents));
+        let _contents = to_string(contents);
+        _contents = _contents.replace(/\,\n\s+\}/g, "}");
+        this._sensors_reaped(_contents);
+        GLib.free(_contents);
       }
       GLib.free(contents);
     } else {
