@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-04-01 20:28+0200\n"
-"PO-Revision-Date: 2026-01-01 22:03+0100\n"
+"PO-Revision-Date: 2026-04-14 07:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #. applet.js:186
 msgid "score"
@@ -47,18 +47,20 @@ msgid ""
 "Check in progress.\n"
 "Time remaining:"
 msgstr ""
+"Ellenőrzés folyamatban.\n"
+"Hátralévő idő:"
 
 #. applet.js:426
 msgid "Time remaining until the next check:"
-msgstr ""
+msgstr "Hátralévő idő a következő ellenőrzésig:"
 
 #. applet.js:428 applet.js:735
 msgid "Next check at:"
-msgstr ""
+msgstr "Következő ellenőrzés ekkor:"
 
 #. applet.js:433
 msgid "Getting Started. Please wait..."
-msgstr ""
+msgstr "Kezdés. Kérlek várj..."
 
 #. applet.js:887
 msgid "Spices"
@@ -217,9 +219,8 @@ msgid "Number of comments (top-down)"
 msgstr "A megjegyzések száma (felülről lefelé)"
 
 #. settings-schema.json->sort-by->options
-#, fuzzy
 msgid "Number of issues"
-msgstr "A problémák számának megjelenítése a menüben"
+msgstr "A problémák száma"
 
 #. settings-schema.json->show-uuid->description
 msgid "Show UUID instead of name"
