@@ -1,3 +1,6 @@
+### v3.11.1~20260414
+  * Fixes certain dependency issues.
+
 ### v3.11.0~20260221
   * Smooth reading of certain files.
 
