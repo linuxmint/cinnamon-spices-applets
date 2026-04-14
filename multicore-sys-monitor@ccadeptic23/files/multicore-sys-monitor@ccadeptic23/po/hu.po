@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-04-10 15:27+0200\n"
-"PO-Revision-Date: 2026-04-06 12:14+0200\n"
+"PO-Revision-Date: 2026-04-14 07:26+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.9\n"
 
 #. 5.6->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
@@ -235,11 +235,11 @@ msgstr "Cserehely:"
 
 #. 5.6/applet.js:58
 msgid "Load:"
-msgstr ""
+msgstr "Betöltés:"
 
 #. 5.6/applet.js:59
 msgid "Unload:"
-msgstr ""
+msgstr "Kitöltés:"
 
 #. 5.6/applet.js:83
 msgid "DISK USAGE"
@@ -247,7 +247,7 @@ msgstr "LEMEZHASZNÁLAT"
 
 #. 5.6/applet.js:84
 msgid "BATTERY"
-msgstr ""
+msgstr "AKKUMULÁTOR"
 
 #. 5.6->settings-schema.json->RefreshAll_btn->description
 #. 5.6/applet.js:687
@@ -303,7 +303,7 @@ msgstr "Lemezhasználat"
 #. 5.6->settings-schema.json->pageBattery->title
 #. 5.6/applet.js:737 5.6/applet.js:2370
 msgid "Battery"
-msgstr ""
+msgstr "Akkumulátor"
 
 #. 5.6->settings-schema.json->pageColors->title
 #. 5.6->settings-schema.json->sectionGeneralColors->title
@@ -368,11 +368,11 @@ msgstr "Használat"
 
 #. 5.6/applet.js:2348 5.6/lib/Graphs.js:371
 msgid "BAT"
-msgstr ""
+msgstr "BAT"
 
 #. 5.6/applet.js:2398 5.6/applet.js:2400
 msgid "Batteries"
-msgstr ""
+msgstr "Akkumulátorok"
 
 #. 4.0/applet.js:66
 msgid ""
@@ -486,7 +486,7 @@ msgstr "Ütvonalak"
 
 #. 5.6->settings-schema.json->sectionDiskSpeed->title
 msgid "Instant speed"
-msgstr ""
+msgstr "Azonnali sebesség"
 
 #. 5.6->settings-schema.json->sectionColors->title
 msgid "Your colors"
@@ -623,9 +623,8 @@ msgstr "Visszaállítás"
 #. 5.6->settings-schema.json->Disk_enabledTooltip->description
 #. 5.6->settings-schema.json->DiskUsage_enabledTooltip->description
 #. 5.6->settings-schema.json->Battery_enabledTooltip->description
-#, fuzzy
 msgid "Enable Tooltip"
-msgstr "Eszköztipp"
+msgstr "Eszköztipp engedélyezése"
 
 #. 5.6->settings-schema.json->CPU_labelOn->description
 #. 5.6->settings-schema.json->Mem_labelOn->description
@@ -840,18 +839,16 @@ msgid "0-20"
 msgstr "0-20"
 
 #. 5.6->settings-schema.json->Mem_enabledBufferCacheSharedTooltip->description
-#, fuzzy
 msgid "Enable Buffer/Cache/Shared Tooltip"
-msgstr "Pufferek/Gyorsítótár/Megosztott"
+msgstr "Pufferek/Gyorsítótár/Megosztott eszköztipp engedélyezése"
 
 #. 5.6->settings-schema.json->Swap_enabled->description
 msgid "Enable Swap"
 msgstr "Cserehely engedélyezése"
 
 #. 5.6->settings-schema.json->Swap_enabledTooltip->description
-#, fuzzy
 msgid "Enable Swap Tooltip"
-msgstr "Cserehely engedélyezése"
+msgstr "Cserehely eszköztipp engedélyezése"
 
 #. 5.6->settings-schema.json->Mem_chartType->description
 msgid "Chart Type"
@@ -915,23 +912,20 @@ msgstr "Mindíg"
 #. 5.6->settings-schema.json->Mem_valueCorner->description
 #. 5.6->settings-schema.json->DiskUsage_valueCorner->description
 #. 5.6->settings-schema.json->Battery_valueCorner->description
-#, fuzzy
 msgid "Where to display this"
-msgstr "Sarok, ahol ki lehet helyezni"
+msgstr "Hol kell ezt megjeleníteni"
 
 #. 5.6->settings-schema.json->Mem_valueCorner->options
 #. 5.6->settings-schema.json->DiskUsage_valueCorner->options
 #. 5.6->settings-schema.json->Battery_valueCorner->options
-#, fuzzy
 msgid "Top"
-msgstr "Eszköztipp"
+msgstr "Fent"
 
 #. 5.6->settings-schema.json->Mem_valueCorner->options
 #. 5.6->settings-schema.json->DiskUsage_valueCorner->options
 #. 5.6->settings-schema.json->Battery_valueCorner->options
-#, fuzzy
 msgid "Bottom"
-msgstr "Bal lent"
+msgstr "Lent"
 
 #. 5.6->settings-schema.json->Mem_colorUsedup->description
 #. 5.6->settings-schema.json->DiskUsage_colorUsed->description
@@ -1121,11 +1115,11 @@ msgstr "Útvonal"
 
 #. 5.6->settings-schema.json->Battery_colorLoad->description
 msgid "Load"
-msgstr ""
+msgstr "Betöltés"
 
 #. 5.6->settings-schema.json->Battery_colorUnload->description
 msgid "Unload"
-msgstr ""
+msgstr "Kitöltés"
 
 #. 5.6->settings-schema.json->color0->description
 msgid "Color #0"
