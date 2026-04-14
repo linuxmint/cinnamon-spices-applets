@@ -1,3 +1,7 @@
+### v3.11.3~20260414
+  * Improved accuracy of the battery charge level and lifespan displayed in the tooltip.
+  * Fixes [#8542](https://github.com/linuxmint/cinnamon-spices-applets/issues/8542)
+
 ### v3.11.2~20260412
   * Bugfix.
   * Fixes [#8527](https://github.com/linuxmint/cinnamon-spices-applets/issues/8527)
