@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
 "POT-Creation-Date: 2023-12-08 05:01-0500\n"
-"PO-Revision-Date: 2025-08-08 08:03+0200\n"
+"PO-Revision-Date: 2026-04-14 07:16+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.9\n"
 
 #: applet.js:58
 msgid "%A %B %e, %Y"
@@ -25,6 +26,10 @@ msgstr "%Y. %B %e., %A"
 #: applet.js:149
 msgid "Settings"
 msgstr "Beállítások"
+
+#: applet.js:311
+msgid " Minutes until "
+msgstr "Ennyi perc múlva "
 
 #: applet.js:338
 msgid "It's time for "
@@ -229,3 +234,23 @@ msgstr "Shafi`i, Maliki, Ja`fari, Hanbali"
 #. settings-schema.json->juristic->options
 msgid "Hanafi"
 msgstr "Hanafi"
+
+#. settings-schema.json->reminder->description
+msgid "Reminder Settings"
+msgstr "Emlékeztető beállítások"
+
+#. settings-schema.json->extra_reminder->description
+msgid "Extra reminder before prayer time"
+msgstr "Extra emlékeztető az ima előtt"
+
+#. settings-schema.json->extra_reminder->options
+msgid "5 minutes"
+msgstr "5 perc"
+
+#. settings-schema.json->extra_reminder->options
+msgid "10 minutes"
+msgstr "10 perc"
+
+#. settings-schema.json->extra_reminder->options
+msgid "15 minutes"
+msgstr "15 perc"
