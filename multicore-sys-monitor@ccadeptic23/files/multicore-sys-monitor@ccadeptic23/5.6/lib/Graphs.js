@@ -752,15 +752,6 @@ class GraphLineChart {
     this.maxValueLoc = null;
     this.minMaxValue = 1.0;
 
-    //~ this.leds = {
-      //~ "idle": "⚫",
-      //~ "read": "🟢",
-      //~ "write": "🔴",
-      //~ "both": "🟤"
-    //~ }
-    //~ this.led = this.leds["idle"];
-    //~ this.led = "●";
-    //~ this.led = "◉";
     this.ledColor = RGBa2rgba("rgba(67, 67, 67, 1)");
     this.isReading = false;
     this.isWriting = false;
