@@ -1,3 +1,10 @@
+### v5.11.2~20260413
+  * Perform asynchronous data reads.
+
+### v5.11.1~20260413
+  * Fixes errors in json formatted data.
+  * Fixes [#8510](https://github.com/linuxmint/cinnamon-spices-applets/issues/8510)
+
 ### v5.11.0~20260322
   * In the Temperature tab of this applet settings:
     * New option: Display the disk temperatures before those of the other sensors.
