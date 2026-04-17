@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Multi-Core System Monitor 1.5\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-04-10 15:27+0200\n"
+"POT-Creation-Date: 2026-04-17 02:24+0200\n"
 "PO-Revision-Date: 2019-01-22 23:49+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian\n"
@@ -23,7 +23,7 @@ msgstr ""
 #. 5.6->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
 #. 3.2/prefs.js:187 3.4/DataProviders.js:58 3.4/prefs.js:195 5.6/applet.js:79
-#. 5.6/applet.js:732 5.6/applet.js:1852 5.6/applet.js:1904 5.6/applet.js:1912
+#. 5.6/applet.js:736 5.6/applet.js:1864 5.6/applet.js:1916 5.6/applet.js:1924
 #. 4.0/DataProviders.js:55 4.0/prefs.js:303 3.0/prefsui.glade:452
 #. 3.2/prefsui.glade:504 3.4/prefsui.glade:434 4.0/prefsui.glade:580
 msgid "CPU"
@@ -35,12 +35,12 @@ msgid "------------- CPU ------------"
 msgstr "--------------CPU-------------"
 
 #. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 3.4/DataProviders.js:129
-#. 5.6/applet.js:1914 4.0/DataProviders.js:126
+#. 5.6/applet.js:1926 4.0/DataProviders.js:126
 msgid "Core"
 msgstr "Jezgra"
 
 #. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 3.4/DataProviders.js:141
-#. 5.6/applet.js:80 5.6/applet.js:1639 4.0/DataProviders.js:138
+#. 5.6/applet.js:80 5.6/applet.js:1651 4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "MEM"
 
@@ -54,22 +54,22 @@ msgid "Usedup:"
 msgstr "Iskorišteno:\t\t"
 
 #. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 3.4/DataProviders.js:162
-#. 5.6/applet.js:1699 4.0/DataProviders.js:159
+#. 5.6/applet.js:1711 4.0/DataProviders.js:159
 msgid "Cached:"
 msgstr "Predmemorija:\t"
 
 #. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 3.4/DataProviders.js:162
-#. 5.6/applet.js:1699 4.0/DataProviders.js:159
+#. 5.6/applet.js:1711 4.0/DataProviders.js:159
 msgid "Buffer:"
 msgstr "Međuspremnik:\t"
 
 #. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 3.4/DataProviders.js:162
-#. 5.6/applet.js:51 5.6/applet.js:1699 4.0/DataProviders.js:159
+#. 5.6/applet.js:51 5.6/applet.js:1711 4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "Slobodno:\t\t"
 
 #. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 3.4/DataProviders.js:176
-#. 5.6/applet.js:1782 4.0/DataProviders.js:173
+#. 5.6/applet.js:1794 4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "SWAP"
 
@@ -80,15 +80,15 @@ msgstr "-------------SWAP-------------"
 
 #. 5.6->settings-schema.json->Mem_colorSwap->description
 #. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 3.4/DataProviders.js:195
-#. 5.6/applet.js:52 5.6/applet.js:1811 4.0/DataProviders.js:194
+#. 5.6/applet.js:52 5.6/applet.js:1823 4.0/DataProviders.js:194
 #. 3.0/prefsui.glade:785 3.2/prefsui.glade:837 3.4/prefsui.glade:761
 #. 4.0/prefsui.glade:907
 msgid "Swap"
 msgstr "Swap:"
 
 #. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 3.4/DataProviders.js:205
-#. 5.6/applet.js:81 5.6/applet.js:1942 5.6/lib/Graphs.js:972
-#. 4.0/DataProviders.js:204
+#. 5.6/applet.js:81 5.6/applet.js:1954 5.6/lib/Graphs.js:778
+#. 5.6/lib/Graphs.js:1016 4.0/DataProviders.js:204
 msgid "NET"
 msgstr "MREŽA"
 
@@ -98,7 +98,7 @@ msgid "---------- Networks ----------"
 msgstr "------------MREŽA-------------"
 
 #. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 3.4/DataProviders.js:300
-#. 5.6/applet.js:54 5.6/applet.js:2085 4.0/DataProviders.js:298
+#. 5.6/applet.js:54 5.6/applet.js:2097 4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "Preuzimanje:"
 
@@ -108,13 +108,13 @@ msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
 #. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 3.4/DataProviders.js:301
-#. 5.6/applet.js:55 5.6/applet.js:2086 4.0/DataProviders.js:299
+#. 5.6/applet.js:55 5.6/applet.js:2098 4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "Slanje:"
 
 #. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 3.4/DataProviders.js:317
-#. 5.6/applet.js:82 5.6/applet.js:2108 5.6/applet.js:2266 5.6/lib/Graphs.js:973
-#. 4.0/DataProviders.js:315
+#. 5.6/applet.js:82 5.6/applet.js:2120 5.6/applet.js:2278 5.6/lib/Graphs.js:773
+#. 5.6/lib/Graphs.js:1017 4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "DISK"
 
@@ -124,7 +124,7 @@ msgid "------------ Disks -----------"
 msgstr "------------DISKOVI-----------"
 
 #. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 3.4/DataProviders.js:386
-#. 5.6/applet.js:56 5.6/applet.js:2243 4.0/DataProviders.js:384
+#. 5.6/applet.js:56 5.6/applet.js:2255 4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "Čitanje:"
 
@@ -134,7 +134,7 @@ msgid "(MiB/s)"
 msgstr "(MiB/s)"
 
 #. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 3.4/DataProviders.js:387
-#. 5.6/applet.js:57 5.6/applet.js:2244 4.0/DataProviders.js:385
+#. 5.6/applet.js:57 5.6/applet.js:2256 4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "Zapisivanje:"
 
@@ -196,8 +196,8 @@ msgstr "Greška spremanja datoteke:"
 msgid "/s"
 msgstr "/s"
 
-#. 3.4/DataProviders.js:162 5.6/applet.js:49 5.6/applet.js:1696
-#. 5.6/applet.js:1699 5.6/applet.js:1823 4.0/DataProviders.js:159
+#. 3.4/DataProviders.js:162 5.6/applet.js:49 5.6/applet.js:1708
+#. 5.6/applet.js:1711 5.6/applet.js:1835 4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "Iskorišteno:"
 
@@ -254,60 +254,60 @@ msgid "BATTERY"
 msgstr ""
 
 #. 5.6->settings-schema.json->RefreshAll_btn->description
-#. 5.6/applet.js:687
+#. 5.6/applet.js:691
 #, fuzzy
 msgid "Refresh All"
 msgstr "Brzina osvježavanja (ms)"
 
-#. 5.6/applet.js:697
+#. 5.6/applet.js:701
 msgid "Without any graphics"
 msgstr ""
 
-#. 5.6/applet.js:703
+#. 5.6/applet.js:707
 msgid "With graphics"
 msgstr ""
 
-#. 5.6/applet.js:714
+#. 5.6/applet.js:718
 msgid "Drop Memory Cache (needs root rights)"
 msgstr ""
 
-#. 5.6/applet.js:730
+#. 5.6/applet.js:734
 msgid "Configure..."
 msgstr ""
 
 #. 5.6->settings-schema.json->pageGeneral->title
-#. 5.6/applet.js:731 3.0/prefsui.glade:281 3.2/prefsui.glade:333
+#. 5.6/applet.js:735 3.0/prefsui.glade:281 3.2/prefsui.glade:333
 #. 3.4/prefsui.glade:264 4.0/prefsui.glade:299
 msgid "General"
 msgstr "Općenito"
 
 #. 5.6->settings-schema.json->pageMem->title
-#. 5.6/applet.js:733 5.6/applet.js:1686 3.0/prefsui.glade:832
+#. 5.6/applet.js:737 5.6/applet.js:1698 3.0/prefsui.glade:832
 #. 3.2/prefsui.glade:884 3.4/prefsui.glade:808 4.0/prefsui.glade:954
 msgid "Memory"
 msgstr "Memorija"
 
 #. 5.6->settings-schema.json->pageNetwork->title
-#. 5.6/applet.js:734 5.6/applet.js:1269 5.6/applet.js:1952
+#. 5.6/applet.js:738 5.6/applet.js:1281 5.6/applet.js:1964
 #. 3.0/prefsui.glade:1154 3.2/prefsui.glade:1206 3.4/prefsui.glade:1143
 #. 4.0/prefsui.glade:1289
 msgid "Network"
 msgstr "Mreža"
 
 #. 5.6->settings-schema.json->pageDisk->title
-#. 5.6/applet.js:735 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
+#. 5.6/applet.js:739 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
 #. 3.4/prefsui.glade:1489 4.0/prefsui.glade:1635
 msgid "Disk IO"
 msgstr "Disk U/I"
 
 #. 5.6->settings-schema.json->pageDiskUsage->title
-#. 5.6/applet.js:736
+#. 5.6/applet.js:740
 #, fuzzy
 msgid "Disk Usage"
 msgstr "Disk U/I"
 
 #. 5.6->settings-schema.json->pageBattery->title
-#. 5.6/applet.js:737 5.6/applet.js:2370
+#. 5.6/applet.js:741 5.6/applet.js:2382
 msgid "Battery"
 msgstr ""
 
@@ -317,69 +317,69 @@ msgstr ""
 #. 5.6->settings-schema.json->sectionMemoryColors->title
 #. 5.6->settings-schema.json->sectionDiskUsageColors->title
 #. 5.6->settings-schema.json->sectionBatteryColors->title
-#. 5.6/applet.js:738 3.0/prefsui.glade:411 3.0/prefsui.glade:584
+#. 5.6/applet.js:742 3.0/prefsui.glade:411 3.0/prefsui.glade:584
 #. 3.2/prefsui.glade:463 3.2/prefsui.glade:636 3.4/prefsui.glade:392
 #. 3.4/prefsui.glade:564 4.0/prefsui.glade:494 4.0/prefsui.glade:710
 msgid "Colors"
 msgstr "Boje"
 
-#. 5.6/applet.js:881 5.6/applet.js:924 5.6/applet.js:938
+#. 5.6/applet.js:889 5.6/applet.js:932 5.6/applet.js:946
 msgid "root"
 msgstr ""
 
-#. 5.6/applet.js:1377 5.6/applet.js:2119 5.6/applet.js:2211 5.6/applet.js:2313
-#. 5.6/applet.js:2315
+#. 5.6/applet.js:1389 5.6/applet.js:2131 5.6/applet.js:2223 5.6/applet.js:2325
+#. 5.6/applet.js:2327
 #, fuzzy
 msgid "Disks"
 msgstr "Disk U/I"
 
-#. 5.6/applet.js:1697 5.6/applet.js:1824
+#. 5.6/applet.js:1709 5.6/applet.js:1836
 msgid "Available:"
 msgstr ""
 
-#. 5.6/applet.js:1725
+#. 5.6/applet.js:1737
 msgid "Buffers/Cache/Shared"
 msgstr ""
 
-#. 5.6/applet.js:1753 5.6/applet.js:1830 5.6/applet.js:1894 5.6/applet.js:2082
-#. 5.6/applet.js:2083 5.6/applet.js:2240 5.6/applet.js:2241 5.6/applet.js:2292
-#. 5.6/applet.js:2375
+#. 5.6/applet.js:1765 5.6/applet.js:1842 5.6/applet.js:1906 5.6/applet.js:2094
+#. 5.6/applet.js:2095 5.6/applet.js:2252 5.6/applet.js:2253 5.6/applet.js:2304
+#. 5.6/applet.js:2387
 msgid ":"
 msgstr ""
 
-#. 5.6/applet.js:1755 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 5.6/applet.js:1767 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 3.4/prefsui.glade:663 4.0/prefsui.glade:809
 msgid "Buffer"
 msgstr "Međuspremnik:\t"
 
 #. 5.6->settings-schema.json->Mem_colorCache->description
-#. 5.6/applet.js:1755
+#. 5.6/applet.js:1767
 #, fuzzy
 msgid "Cache"
 msgstr "Predmemorija:"
 
-#. 5.6/applet.js:1755
+#. 5.6/applet.js:1767
 msgid "Shared"
 msgstr ""
 
-#. 5.6/applet.js:1884
+#. 5.6/applet.js:1896
 msgid "CPUs"
 msgstr ""
 
-#. 5.6/applet.js:2053
+#. 5.6/applet.js:2065
 #, fuzzy
 msgid "Networks"
 msgstr "Mreža"
 
-#. 5.6/applet.js:2287
+#. 5.6/applet.js:2299
 msgid "Usage"
 msgstr ""
 
-#. 5.6/applet.js:2348 5.6/lib/Graphs.js:371
+#. 5.6/applet.js:2360 5.6/lib/Graphs.js:371
 msgid "BAT"
 msgstr ""
 
-#. 5.6/applet.js:2398 5.6/applet.js:2400
+#. 5.6/applet.js:2410 5.6/applet.js:2412
 msgid "Batteries"
 msgstr ""
 
@@ -559,6 +559,35 @@ msgstr ""
 #. 4.0/prefsui.glade:168
 msgid "Curves thickness"
 msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->description
+msgid "Led for curves"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->options
+msgid "●"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->options
+msgid "⬤"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->options
+msgid "◉"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledLocation->description
+msgid "Led location"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledLocation->options
+msgid "Left"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledLocation->options
+#, fuzzy
+msgid "Right"
+msgstr "Visina"
 
 #. 5.6->settings-schema.json->useIconSize->description
 msgid "Limit height to the size of a colored icon"
@@ -899,6 +928,8 @@ msgstr ""
 
 #. 5.6->settings-schema.json->Mem_value_display->options
 #. 5.6->settings-schema.json->Mem_swapWidth->options
+#. 5.6->settings-schema.json->Net_typeOfGraph->options
+#. 5.6->settings-schema.json->Disk_typeOfGraph->options
 #. 5.6->settings-schema.json->DiskUsage_value_display->options
 #. 5.6->settings-schema.json->Battery_value_display->options
 msgid "None"
@@ -972,6 +1003,26 @@ msgid ""
 "10%: The Swap graph is a bar that occupies 10% of the graph width, to the "
 "left of the circle.\n"
 "None: No Swap bar."
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->description
+#. 5.6->settings-schema.json->Disk_typeOfGraph->description
+msgid "Type of graph"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->options
+#. 5.6->settings-schema.json->Disk_typeOfGraph->options
+msgid "Curves only"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->options
+#. 5.6->settings-schema.json->Disk_typeOfGraph->options
+msgid "Led only"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->options
+#. 5.6->settings-schema.json->Disk_typeOfGraph->options
+msgid "Curves and Led"
 msgstr ""
 
 #. 5.6->settings-schema.json->Net_autoscale->description
