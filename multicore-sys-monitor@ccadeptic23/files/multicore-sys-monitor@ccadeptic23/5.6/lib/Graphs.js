@@ -961,8 +961,8 @@ class GraphLineChart {
 
         areaContext.setLineJoin(1); //rounded
         for (let j = 1; j < this.dataPointsList.length; j++) {
-          let x1 = this.pixelsPerDataPoint * (j - 0.5) + this.pixelsPerDataPoint / 4;
-          let x2 = this.pixelsPerDataPoint * j + this.pixelsPerDataPoint / 4;
+          let x1 = this.pixelsPerDataPoint * j + this.pixelsPerDataPoint / 4;
+          let x2 = this.pixelsPerDataPoint * (j + 0.5) + this.pixelsPerDataPoint / 4;
 
           if (this.dataPointsList[j][i] === undefined || this.dataPointsList[j - 1][i] === undefined) {
             continue;
@@ -980,6 +980,7 @@ class GraphLineChart {
 
           let y1 = _height - Math.floor((_height - 2) * (rawy1 * this.scale));
           let y2 = _height - Math.floor((_height - 2) * (rawy2 * this.scale));
+          if (y1 < 0 || y2 < 0) continue;
 
           areaContext.curveTo(x1, y1, x1, y2, x2, y2);
         }
