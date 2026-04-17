@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-04-17 02:24+0200\n"
-"PO-Revision-Date: 2026-04-10 10:41-0400\n"
+"PO-Revision-Date: 2026-04-16 21:02-0400\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -552,33 +552,31 @@ msgstr "Grosor de las curvas"
 
 #. 5.6->settings-schema.json->ledForCurves->description
 msgid "Led for curves"
-msgstr ""
+msgstr "Led para curvas"
 
 #. 5.6->settings-schema.json->ledForCurves->options
 msgid "●"
-msgstr ""
+msgstr "●"
 
 #. 5.6->settings-schema.json->ledForCurves->options
 msgid "⬤"
-msgstr ""
+msgstr "⬤"
 
 #. 5.6->settings-schema.json->ledForCurves->options
 msgid "◉"
-msgstr ""
+msgstr "◉"
 
 #. 5.6->settings-schema.json->ledLocation->description
 msgid "Led location"
-msgstr ""
+msgstr "Ubicación de los led"
 
 #. 5.6->settings-schema.json->ledLocation->options
-#, fuzzy
 msgid "Left"
-msgstr "Parte superior izquierda"
+msgstr "Izquierda"
 
 #. 5.6->settings-schema.json->ledLocation->options
-#, fuzzy
 msgid "Right"
-msgstr "Altura"
+msgstr "Derecha"
 
 #. 5.6->settings-schema.json->useIconSize->description
 msgid "Limit height to the size of a colored icon"
@@ -1006,23 +1004,22 @@ msgstr ""
 #. 5.6->settings-schema.json->Net_typeOfGraph->description
 #. 5.6->settings-schema.json->Disk_typeOfGraph->description
 msgid "Type of graph"
-msgstr ""
+msgstr "Tipo de gráfico"
 
 #. 5.6->settings-schema.json->Net_typeOfGraph->options
 #. 5.6->settings-schema.json->Disk_typeOfGraph->options
 msgid "Curves only"
-msgstr ""
+msgstr "Solo curvas"
 
 #. 5.6->settings-schema.json->Net_typeOfGraph->options
 #. 5.6->settings-schema.json->Disk_typeOfGraph->options
 msgid "Led only"
-msgstr ""
+msgstr "Solo LED"
 
 #. 5.6->settings-schema.json->Net_typeOfGraph->options
 #. 5.6->settings-schema.json->Disk_typeOfGraph->options
-#, fuzzy
 msgid "Curves and Led"
-msgstr "Grosor de las curvas"
+msgstr "Curvas y LED"
 
 #. 5.6->settings-schema.json->Net_autoscale->description
 #. 5.6->settings-schema.json->Disk_autoscale->description
