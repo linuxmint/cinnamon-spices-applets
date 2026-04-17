@@ -1,0 +1,104 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.TH CrosshairCursor 1
+.SH NAME CrosshairCursor
+Creates a Crosshair window that follows your cursor.
+.SH SYNOPSIS
+.B CrosshairCursor
+[\fB-help\fP]
+[\fB-horizontal\fP] [\fB-vertical\fP]
+[\fB-time\fP \fIn\fP] [\fB-width\fP \fIn\fP] [\fB-height\fP \fIn\fP]
+[\fB-name\fP \fIname\fP] [\fB-display\fP \fIname\fP]
+[\fB-offset\fP \fIgeometry\fP] [\fB-position\fP \fIgeometry\fP]
+[\fB-rv\fP] [\fB-fg\fP] [\fB-bg\fP] [\fB-nobg\fP] [\fB-sync\fP]
+.SH DESCRIPTION
+.I CrosshairCursor
+changes your mouse cursor into a crosshairs that can be used as a productivity or 
+assistive tool.
+.SS Options
+.TP
+.B -help
+Prints help message.
+.TP
+.BI \-fg " colour"
+Foreground colour.
+.TP
+.BI \-bg " colour"
+Background/outline colour.
+.TP
+.BI \-nobg
+no background/outline.
+.TP
+.B -rv
+Reverse background colour and foreground colour.
+.TP
+.BI \-offset " geometry"
+set x and y offset. ex: +2-12."
+.TP
+.BI \-position " geometry"
+set fixed x and y position. ex: 960x540."
+.TP
+.BI \-width " pixels"
+set width of the cursor."
+.TP
+.BI \-height " pixels"
+set height of the cursor."
+.TP
+.BI \-time " microseconds"
+Sets refresh rate in micro-second.
+.TP
+.BI \-display " name"
+name of display to draw window to
+.TP
+.BI \-name " name"
+Specify the name of the process.
+.TP
+.BI \-sync
+puts you in synchronous mode.
+
+.SH AUTHOR
+.I CrosshairCursor
+is written by Brian Markley PENG RSE after a code review of oneko and the 
+oneko-toggle applet for cinamon desktop.
+
+Special thanks to:
+Original
+.I xneko
+is written by Masayuki Koba and modified to 
+.I oneko
+by Tatsuya Kato, and modified furthermore by John Lerchey, Eric
+Anderson, Toshihiro Kanda and Kiichiroh Mukose.
+.I oneko-toggle
+ applet is written by kusch31
+
+.SH MAINTAINER
+Send questions or problems to me at the project Github Page.
+CrosshairCursor@BMarkley

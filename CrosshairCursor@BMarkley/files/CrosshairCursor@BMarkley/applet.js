@@ -7,7 +7,9 @@ const UUID = "CrosshairCursor@BMarkley";
 const USER_DATA_DIR = GLib.get_user_data_dir()
 const APPLET_DIR = USER_DATA_DIR + "/cinnamon/applets/" + UUID;
 const CROSSHAIR_SCRIPT = APPLET_DIR + "/CCScript.sh";
-const CROSSHAIR_EXEC = APPLET_DIR + "/CrosshairCursor/CrosshairCursor";
+const CROSSHAIR_DIR = APPLET_DIR + "/CrosshairCursor";
+const CROSSHAIR_COMPILE = CROSSHAIR_DIR + "/Compile.sh";
+const CROSSHAIR_EXEC = CROSSHAIR_DIR + "/CrosshairCursor";
 const DEBUG = false;
 const {
     timeout_add,
@@ -39,6 +41,9 @@ class CrosshairCursorToggle extends Applet.IconApplet {
         this.orientation = orientation;
         this.updateIcon();
         this._tooltip_ok();
+        // compile CrossHairCursor from source
+        Util.spawnCommandLine(`/usr/bin/env bash -c 'chmod +x ${CROSSHAIR_COMPILE}'`);
+        Util.spawnCommandLine(CROSSHAIR_COMPILE);
         // make executable the script CrosshairCursor.sh:
         Util.spawnCommandLine(`/usr/bin/env bash -c 'chmod +x ${CROSSHAIR_SCRIPT}'`);
         // make executable the CrosshairCursor executable program:

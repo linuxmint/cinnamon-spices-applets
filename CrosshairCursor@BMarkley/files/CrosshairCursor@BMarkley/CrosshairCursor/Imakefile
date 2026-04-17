@@ -1,0 +1,10 @@
+/**/# Cannot compile in using Gcc
+#             CC = cc
+
+LOCAL_LIBRARIES = $(XLIB)
+        DEPLIBS = $(DEPXLIB)
+        DEFINES = -DSHAPE
+
+SimpleProgramTarget(CrosshairCursor)
+
+/* InstallAppDefaults(CrosshairCursor) */
