@@ -1,3 +1,7 @@
+### v3.12.0~20260417
+  * Adding leds for Disk and for Network.
+  * Better take into account logarithmic scale and automatic scale.
+
 ### v3.11.3~20260414
   * Improved accuracy of the battery charge level and lifespan displayed in the tooltip.
   * Fixes [#8542](https://github.com/linuxmint/cinnamon-spices-applets/issues/8542)
