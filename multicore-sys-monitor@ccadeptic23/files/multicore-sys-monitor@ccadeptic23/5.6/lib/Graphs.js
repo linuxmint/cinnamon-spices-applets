@@ -751,14 +751,42 @@ class GraphLineChart {
     this.maxValue = 1.0;
     this.maxValueLoc = null;
     this.minMaxValue = 1.0;
+
+    //~ this.leds = {
+      //~ "idle": "⚫",
+      //~ "read": "🟢",
+      //~ "write": "🔴",
+      //~ "both": "🟤"
+    //~ }
+    //~ this.led = this.leds["idle"];
+    //~ this.led = "●";
+    //~ this.led = "◉";
+    this.ledColor = RGBa2rgba("rgba(67, 67, 67, 1)");
+    this.isReading = false;
+    this.isWriting = false;
+    this.typeOfGraph = "graphled";
   }
 
   refreshData(currentReadings, providerName) {
+    this.isReading = false;
+    this.isWriting = false;
+    if (providerName == _("DISK")) {
+      this.autoScale = this.applet.Disk_autoscale;
+      this.logScale = this.applet.Disk_logscale;
+      this.typeOfGraph = this.applet.Disk_typeOfGraph;
+    }
+    if (providerName == _("NET")) {
+      this.autoScale = this.applet.Net_autoscale;
+      this.logScale = this.applet.Net_logscale;
+      this.typeOfGraph = this.applet.Net_typeOfGraph;
+    }
     let dataPoints = [];
     for (let i=0, len=currentReadings.length; i<len; i++) {
       if (!currentReadings[i].readingRatesList) {
         continue;
       }
+      this.isReading = this.isReading || currentReadings[i].readingRatesList[0] > 0;
+      this.isWriting = this.isWriting || currentReadings[i].readingRatesList[1] > 0;
       dataPoints = dataPoints.concat(currentReadings[i].readingRatesList);
     }
     if (dataPoints.length === 0) {
@@ -782,6 +810,20 @@ class GraphLineChart {
         this.maxValueLoc = this.dataPointsListSize - 1;
         this.scale = 1.0 / this.maxValue;
       }
+    }
+
+    if (this.isReading && this.isWriting) {
+      //~ this.led = this.leds["both"];
+      this.ledColor = RGBa2rgba("rgba(184, 113, 88, 1)");
+    } else if (this.isReading) {
+      //~ this.led = this.leds["read"];
+      this.ledColor = RGBa2rgba("rgba(126, 180, 69, 1)");
+    } else if (this.isWriting) {
+      //~ this.led = this.leds["write"];
+      this.ledColor = RGBa2rgba("rgba(244, 67, 54, 1)");
+    } else {
+      //~ this.led = this.leds["idle"];
+      this.ledColor = RGBa2rgba("rgba(67, 67, 67, 1)");
     }
 
     if (this.autoScale && this.maxValueLoc < 0) {
@@ -901,55 +943,57 @@ class GraphLineChart {
     areaContext.fill();
 
     //data
-    let numLinesOnChart = 0;
-    if (this.dataPointsList.length > 0) {
-      numLinesOnChart = this.dataPointsList[0].length; //cheesy but it works
-    }
-
-    for (let i = 0; i < numLinesOnChart; i++) {
-      //use this to select datapointnum from our colorlist, its incase we have more datapointnums than colors
-      //This shouldnt happen but just incase, essentially we reuse colors from the beginning if we run out
-      let datapointnum = i % colorsList.length;
-      let r, g, b, a;
-      if (colorsList[datapointnum] == undefined) {
-        r = 1;
-        g = 1;
-        b = 1;
-        a = 1;
-      } else {
-        r = colorsList[datapointnum][0];
-        g = colorsList[datapointnum][1];
-        b = colorsList[datapointnum][2];
-        a = colorsList[datapointnum][3];
+    if (this.typeOfGraph.includes("graph")) {
+      let numLinesOnChart = 0;
+      if (this.dataPointsList.length > 0) {
+        numLinesOnChart = this.dataPointsList[0].length; //cheesy but it works
       }
-      areaContext.setSourceRGBA(r, g, b, a);
-      areaContext.setLineWidth(this.applet.thickness);
 
-      areaContext.setLineJoin(1); //rounded
-      for (let j = 1; j < this.dataPointsList.length; j++) {
-        let x1 = this.pixelsPerDataPoint * (j - 0.5) + this.pixelsPerDataPoint / 4;
-        let x2 = this.pixelsPerDataPoint * j + this.pixelsPerDataPoint / 4;
-
-        if (this.dataPointsList[j][i] === undefined || this.dataPointsList[j - 1][i] === undefined) {
-          continue;
+      for (let i = 0; i < numLinesOnChart; i++) {
+        //use this to select datapointnum from our colorlist, its incase we have more datapointnums than colors
+        //This shouldnt happen but just incase, essentially we reuse colors from the beginning if we run out
+        let datapointnum = i % colorsList.length;
+        let r, g, b, a;
+        if (colorsList[datapointnum] == undefined) {
+          r = 1;
+          g = 1;
+          b = 1;
+          a = 1;
+        } else {
+          r = colorsList[datapointnum][0];
+          g = colorsList[datapointnum][1];
+          b = colorsList[datapointnum][2];
+          a = colorsList[datapointnum][3];
         }
-        let rawy1 = this.dataPointsList[j - 1][i];
-        let rawy2 = this.dataPointsList[j][i];
-        if (this.logScale) {
-          if (rawy1 >= 1) {
-            rawy1 = Math.log(rawy1);
+        areaContext.setSourceRGBA(r, g, b, a);
+        areaContext.setLineWidth(this.applet.thickness);
+
+        areaContext.setLineJoin(1); //rounded
+        for (let j = 1; j < this.dataPointsList.length; j++) {
+          let x1 = this.pixelsPerDataPoint * (j - 0.5) + this.pixelsPerDataPoint / 4;
+          let x2 = this.pixelsPerDataPoint * j + this.pixelsPerDataPoint / 4;
+
+          if (this.dataPointsList[j][i] === undefined || this.dataPointsList[j - 1][i] === undefined) {
+            continue;
           }
-          if (rawy2 >= 1) {
-            rawy2 = Math.log(rawy2);
+          let rawy1 = this.dataPointsList[j - 1][i];
+          let rawy2 = this.dataPointsList[j][i];
+          if (this.logScale) {
+            if (rawy1 >= 1) {
+              rawy1 = Math.log(rawy1);
+            }
+            if (rawy2 >= 1) {
+              rawy2 = Math.log(rawy2);
+            }
           }
+
+          let y1 = _height - Math.floor((_height - 2) * (rawy1 * this.scale));
+          let y2 = _height - Math.floor((_height - 2) * (rawy2 * this.scale));
+
+          areaContext.curveTo(x1, y1, x1, y2, x2, y2);
         }
-
-        let y1 = _height - Math.floor((_height - 2) * (rawy1 * this.scale));
-        let y2 = _height - Math.floor((_height - 2) * (rawy2 * this.scale));
-
-        areaContext.curveTo(x1, y1, x1, y2, x2, y2);
+        areaContext.stroke();
       }
-      areaContext.stroke();
     }
 
     // Label
@@ -1097,6 +1141,31 @@ class GraphLineChart {
       }
       areaContext.fill();
     }
+
+    // led:
+    if (this.typeOfGraph.includes("led")) {
+      let pangolayout4 = area.create_pango_layout(this.led);
+      pangolayout4.set_single_paragraph_mode(true);
+      //~ pangolayout4.set_font_description(fontdesc);
+      if (this.ledLocation === "LO") {
+        pangolayout4.set_alignment(Pango.Alignment.LEFT);
+        areaContext.moveTo(8, _height / 3 - 3);
+      } else {
+        pangolayout4.set_alignment(Pango.Alignment.RIGHT);
+        areaContext.moveTo(1 * width  - 24, _height / 3 - 3);
+      }
+      areaContext.setSourceRGBA(this.ledColor[0], this.ledColor[1], this.ledColor[2], this.ledColor[3]);
+      PangoCairo.layout_path(areaContext, pangolayout4);
+      areaContext.fill();
+    }
+  }
+
+  get led() {
+    return this.applet.led;
+  }
+
+  get ledLocation() {
+    return this.applet.ledLocation;
   }
 
   drawRoundedRectangle(areaContext, x, y, width, height, radius) {

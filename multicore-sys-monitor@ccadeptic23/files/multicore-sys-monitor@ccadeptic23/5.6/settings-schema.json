@@ -98,6 +98,8 @@
         "graphStepApply",
         "graphSpacing",
         "thickness",
+        "ledForCurves",
+        "ledLocation",
         "useIconSize",
         "graphHeightPercent",
         "refreshRate"
@@ -225,7 +227,8 @@
         "Net_labelOn",
         "Net_squared",
         "Net_width",
-        "Net_mergeAll"
+        "Net_mergeAll",
+        "Net_typeOfGraph"
       ]
     },
     "sectionNetworkScaling": {
@@ -274,7 +277,8 @@
         "Disk_labelOn",
         "Disk_squared",
         "Disk_width",
-        "Disk_mergeAll"
+        "Disk_mergeAll",
+        "Disk_typeOfGraph"
       ]
     },
     "sectionDiskScaling": {
@@ -471,6 +475,25 @@
     "max": 5,
     "step": 1,
     "show-value": true
+  },
+  "ledForCurves": {
+    "type": "combobox",
+    "default": "●",
+    "description": "Led for curves",
+    "options": {
+      "●": "●",
+      "⬤": "⬤",
+      "◉": "◉"
+    }
+  },
+  "ledLocation": {
+    "type": "combobox",
+    "default": "LO",
+    "description": "Led location",
+    "options": {
+      "Left": "LO",
+      "Right": "RO"
+    }
   },
   "useIconSize": {
     "type": "switch",
@@ -918,6 +941,17 @@
     "default": false,
     "description": "Merge all"
   },
+  "Net_typeOfGraph": {
+    "type": "combobox",
+    "default": "graphled",
+    "description": "Type of graph",
+    "options": {
+      "None": "none",
+      "Curves only": "graph",
+      "Led only": "led",
+      "Curves and Led": "graphled"
+    }
+  },
   "Net_autoscale": {
     "type": "switch",
     "default": true,
@@ -1131,6 +1165,18 @@
     "type": "switch",
     "default": false,
     "description": "Merge all"
+  },
+
+  "Disk_typeOfGraph": {
+    "type": "combobox",
+    "default": "graphled",
+    "description": "Type of graph",
+    "options": {
+      "None": "none",
+      "Curves only": "graph",
+      "Led only": "led",
+      "Curves and Led": "graphled"
+    }
   },
   "Disk_autoscale": {
     "type": "switch",
