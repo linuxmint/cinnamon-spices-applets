@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 117.3 117.3"
+   enable-background="new 0 0 117.3 117.3"
+   xml:space="preserve"
+   sodipodi:docname="syncthing-scanning.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs8">
+	<linearGradient
+   id="SVGID_1_"
+   gradientUnits="userSpaceOnUse"
+   x1="58.666"
+   y1="117.332"
+   x2="58.666"
+   y2="0">
+		<stop
+   offset="0"
+   style="stop-color:#0882C8"
+   id="stop1" />
+		<stop
+   offset="1"
+   style="stop-color:#26B6DB"
+   id="stop2" />
+	</linearGradient>
+	
+	
+</defs><sodipodi:namedview
+   id="namedview8"
+   pagecolor="#000000"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   showgrid="false"
+   inkscape:zoom="7.7323101"
+   inkscape:cx="58.585338"
+   inkscape:cy="58.650002"
+   inkscape:current-layer="Layer_1" />
+<g
+   id="g7">
+		<circle
+   fill="none"
+   stroke="#ffffff"
+   stroke-width="6"
+   stroke-miterlimit="10"
+   cx="58.700001"
+   cy="58.5"
+   r="43.700001"
+   id="circle3"
+   style="stroke:#80b3ff" />
+		<g
+   id="g3">
+			<path
+   fill="#ffffff"
+   d="m 94.7,47.8 c 4.7,1.6 9.8,-0.9 11.4,-5.6 1.6,-4.7 -0.9,-9.8 -5.6,-11.4 -4.7,-1.6 -9.8,0.9 -11.4,5.6 -1.6,4.7 0.9,9.8 5.6,11.4 z"
+   id="path3"
+   style="fill:#80b3ff" />
+			<line
+   fill="none"
+   stroke="#ffffff"
+   stroke-width="6"
+   stroke-miterlimit="10"
+   x1="97.599998"
+   y1="39.400002"
+   x2="67.5"
+   y2="64.400002"
+   id="line3"
+   style="stroke:#80b3ff" />
+		</g>
+		<g
+   id="g4">
+			<path
+   fill="#ffffff"
+   d="m 77.6,91 c -0.4,4.9 3.2,9.3 8.2,9.8 5,0.4 9.3,-3.2 9.8,-8.2 C 96,87.7 92.4,83.3 87.4,82.8 82.4,82.4 78,86 77.6,91 Z"
+   id="path4"
+   style="fill:#80b3ff" />
+			<line
+   fill="none"
+   stroke="#ffffff"
+   stroke-width="6"
+   stroke-miterlimit="10"
+   x1="86.5"
+   y1="91.800003"
+   x2="67.5"
+   y2="64.400002"
+   id="line4"
+   style="stroke:#80b3ff" />
+		</g>
+		<path
+   fill="#ffffff"
+   d="m 60,69.3 c 2.7,4.2 8.3,5.4 12.4,2.7 4.2,-2.7 5.4,-8.3 2.7,-12.4 -2.7,-4.2 -8.3,-5.4 -12.4,-2.7 -4.2,2.6 -5.4,8.2 -2.7,12.4 z"
+   id="path5"
+   style="fill:#80b3ff" />
+		<g
+   id="g6">
+			<path
+   fill="#ffffff"
+   d="m 21.2,61.4 c -4.3,-2.5 -9.8,-1.1 -12.3,3.1 -2.5,4.3 -1.1,9.8 3.1,12.3 4.3,2.5 9.8,1.1 12.3,-3.1 2.5,-4.2 1.1,-9.7 -3.1,-12.3 z"
+   id="path6"
+   style="fill:#80b3ff" />
+			<line
+   fill="none"
+   stroke="#ffffff"
+   stroke-width="6"
+   stroke-miterlimit="10"
+   x1="16.6"
+   y1="69.099998"
+   x2="67.5"
+   y2="64.400002"
+   id="line6"
+   style="stroke:#80b3ff" />
+		</g>
+	</g>
+</svg>
