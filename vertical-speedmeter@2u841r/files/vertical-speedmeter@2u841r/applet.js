@@ -127,23 +127,31 @@ class VerticalPanelDownloadAndUploadSpeedApplet extends Applet.TextIconApplet {
         });
     }
 
-    _listInterfaces() {
-        let ifaces = [];
-        try {
-            let dir = Gio.File.new_for_path("/sys/class/net");
-            let enumerator = dir.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
-            let info;
-            while ((info = enumerator.next_file(null)) !== null) {
-                let name = info.get_name();
-                if (name !== "lo") {
-                    ifaces.push(name);
+    _listInterfaces(callback) {
+        let dir = Gio.File.new_for_path("/sys/class/net");
+        dir.enumerate_children_async(
+            "standard::name",
+            Gio.FileQueryInfoFlags.NONE,
+            GLib.PRIORITY_DEFAULT,
+            null,
+            (source, result) => {
+                let ifaces = [];
+                try {
+                    let enumerator = source.enumerate_children_finish(result);
+                    let info;
+                    while ((info = enumerator.next_file(null)) !== null) {
+                        let name = info.get_name();
+                        if (name !== "lo") {
+                            ifaces.push(name);
+                        }
+                    }
+                    enumerator.close(null);
+                } catch (e) {
+                    global.logError(e);
                 }
+                callback(ifaces.sort());
             }
-            enumerator.close(null);
-        } catch (e) {
-            global.logError(e);
-        }
-        return ifaces.sort();
+        );
     }
 
     _refreshInterfaceSubmenu() {
@@ -151,27 +159,29 @@ class VerticalPanelDownloadAndUploadSpeedApplet extends Applet.TextIconApplet {
 
         let preferred = (this.preferredInterface || "").trim();
 
-        let autoItem = new PopupMenu.PopupMenuItem(
-            (preferred === "" ? "✓ " : "    ") + _("Auto-detect")
-        );
-        autoItem.connect("activate", () => {
-            this.settings.setValue("preferred-interface", "");
-            this.preferredInterface = "";
-            this._onPreferredInterfaceChanged();
-        });
-        this.ifaceSubmenu.menu.addMenuItem(autoItem);
-
-        for (let iface of this._listInterfaces()) {
-            let item = new PopupMenu.PopupMenuItem(
-                (preferred === iface ? "✓ " : "    ") + iface
+        this._listInterfaces((ifaces) => {
+            let autoItem = new PopupMenu.PopupMenuItem(
+                (preferred === "" ? "✓ " : "    ") + _("Auto-detect")
             );
-            item.connect("activate", () => {
-                this.settings.setValue("preferred-interface", iface);
-                this.preferredInterface = iface;
+            autoItem.connect("activate", () => {
+                this.settings.setValue("preferred-interface", "");
+                this.preferredInterface = "";
                 this._onPreferredInterfaceChanged();
             });
-            this.ifaceSubmenu.menu.addMenuItem(item);
-        }
+            this.ifaceSubmenu.menu.addMenuItem(autoItem);
+
+            for (let iface of ifaces) {
+                let item = new PopupMenu.PopupMenuItem(
+                    (preferred === iface ? "✓ " : "    ") + iface
+                );
+                item.connect("activate", () => {
+                    this.settings.setValue("preferred-interface", iface);
+                    this.preferredInterface = iface;
+                    this._onPreferredInterfaceChanged();
+                });
+                this.ifaceSubmenu.menu.addMenuItem(item);
+            }
+        });
     }
 
     initNetworkManager() {
