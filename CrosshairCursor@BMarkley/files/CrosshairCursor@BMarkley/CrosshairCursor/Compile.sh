@@ -1,4 +1,7 @@
 #!/bin/bash
-##compile 
-cd ~/.local/share/cinnamon/applets/CrosshairCursor@BMarkley/CrosshairCursor/
-make
+##compile
+
+cd CrosshairCursor
+if [[ ! -f "CrosshairCursor" ]]; then #if the file doesn't exist
+    make
+fi
