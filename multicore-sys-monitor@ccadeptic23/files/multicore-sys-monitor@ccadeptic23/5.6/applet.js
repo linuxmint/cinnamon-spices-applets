@@ -594,7 +594,7 @@ class MCSM extends Applet.IconApplet {
             this.mainLoopId = null;
         }
         this.isRunning = true;
-        let rate = 1 * this.refreshRate;
+        const rate = 1 * this.refreshRate;
         this.mainLoopId = timeout_add(rate, () => {
             this.get_mem_info();
             this.get_cpu_info();

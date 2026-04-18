@@ -1,3 +1,6 @@
+### v3.12.1~20260417
+  * Avoid errors drawing curves.
+
 ### v3.12.0~20260417
   * Adding leds for Disk and for Network.
   * Better take into account logarithmic scale and automatic scale.
