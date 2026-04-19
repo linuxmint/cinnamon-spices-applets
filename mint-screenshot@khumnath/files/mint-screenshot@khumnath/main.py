@@ -177,21 +177,10 @@ class ScreenshotOverlay(Gtk.Window):
         # Load project metadata from metadata.json for versioning and about info.
         self.metadata = self._load_project_metadata()
 
-        # We detect the primary monitor to determine the window size.
-        # On Wayland, this can sometimes fail initially, so we have fallbacks.
-        display = Gdk.Display.get_default()
-        monitor = display.get_primary_monitor()
-        if monitor is None:
-            monitor = display.get_monitor(0) if display.get_n_monitors() > 0 else None
-        
-        if monitor:
-            geom = monitor.get_geometry()
-            self.width = geom.width
-            self.height = geom.height
-        else:
-            screen = Gdk.Screen.get_default()
-            self.width = screen.get_width()
-            self.height = screen.get_height()
+        # Detect the entire desktop size (for multi-monitor support).
+        screen = Gdk.Screen.get_default()
+        self.width = screen.get_width()
+        self.height = screen.get_height()
 
         # HiDPI support: capture the scale factor early for correct surface scaling.
         self.scale = self.get_scale_factor()
@@ -330,7 +319,30 @@ class ScreenshotOverlay(Gtk.Window):
         subtitle.get_style_context().add_class("launcher-subtitle")
         vbox.pack_start(subtitle, False, False, 4)
 
+        if self.is_wayland:
+            hint_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+            hint_box.set_center_widget(Gtk.Label())
+            hint_icon = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.MENU)
+            hint_label = Gtk.Label(label=_("Hint: Pick 'Screen' in the portal to capture overlapping windows."))
+            hint_label.get_style_context().add_class("launcher-subtitle")
+            hint_box.pack_start(hint_icon, False, False, 0)
+            hint_box.pack_start(hint_label, False, False, 0)
+            vbox.pack_start(hint_box, False, False, 0)
+
         vbox.pack_start(Gtk.Separator(), False, False, 8)
+
+        # Monitor selection for multi-monitor setups (X11 only)
+        if not self.is_wayland:
+            display = Gdk.Display.get_default()
+            n_monitors = display.get_n_monitors()
+            if n_monitors > 1:
+                vbox.pack_start(Gtk.Label(label=_("Select Monitor:")), False, False, 0)
+                self.monitor_combo = Gtk.ComboBoxText()
+                self.monitor_combo.append_text(_("All Monitors"))
+                for i in range(n_monitors):
+                    self.monitor_combo.append_text(_("Monitor {}").format(i + 1))
+                self.monitor_combo.set_active(0)
+                vbox.pack_start(self.monitor_combo, False, False, 0)
 
         # Action Buttons
         btn_full = Gtk.Button(label=_("📸  Capture Fullscreen"))
@@ -378,15 +390,19 @@ class ScreenshotOverlay(Gtk.Window):
     def _capture(self, interactive=False):
         """Dispatches the screenshot request to the appropriate backend based 
         on the current display server (Wayland Portals or X11 Pixel Read)."""
+        selected_monitor = -1 # Default to 'All'
+        if hasattr(self, 'monitor_combo'):
+            selected_monitor = self.monitor_combo.get_active() - 1
+            
         if hasattr(self, 'launcher') and self.launcher:
             self.launcher.hide()
             
         self._wants_selection = interactive
         self.is_full_capture = not interactive
+        self._target_monitor = selected_monitor
         
         if self.is_wayland:
-            # Short delay to ensure the launcher window is hidden before the 
-            # compositor freezes the screen for the portal.
+            # Short delay to ensure the launcher window is hidden.
             GLib.timeout_add(200, lambda: self._portal_screenshot(interactive=False))
         else:
             GLib.timeout_add(200, self._x11_screenshot)
@@ -421,26 +437,65 @@ class ScreenshotOverlay(Gtk.Window):
         return True
 
     def _x11_screenshot(self):
-        """Captures the screen pixels directly from the X11 root window. 
-        This is instant and doesn't require any permissions."""
+        """Captures the desktop pixels directly from the X11 root window. 
+        Supports multi-monitor setups with monitor-specific selection."""
+        screen = Gdk.Screen.get_default()
         display = Gdk.Display.get_default()
-        monitor = display.get_primary_monitor()
-        geom = monitor.get_geometry()
         window = Gdk.get_default_root_window()
-        self.full_pixbuf = Gdk.pixbuf_get_from_window(window, geom.x, geom.y, window.get_width(), window.get_height())
+        
+        m_idx = getattr(self, '_target_monitor', -1)
+        if m_idx >= 0:
+            # Capture a specific monitor
+            monitor = display.get_monitor(m_idx)
+            geom = monitor.get_geometry()
+            x, y, w, h = geom.x, geom.y, geom.width, geom.height
+        else:
+            # Capture all monitors (full screen)
+            x, y, w, h = 0, 0, screen.get_width(), screen.get_height()
+            
+        # We capture the requested area from the root window.
+        self.full_pixbuf = Gdk.pixbuf_get_from_window(window, x, y, w, h)
+        
+        # Update internal dimensions to match the capture area.
+        self.width = w
+        self.height = h
+        self.rect = (0, 0, self.width, self.height)
+        
         self._open_annotator()
         return False
 
     def _portal_screenshot(self, interactive=False):
-        """Communicates with org.freedesktop.portal.Screenshot to securely 
-        capture the screen on Wayland-based desktops."""
+        """Communicates with the display server to capture the screen. 
+        On Wayland, we prioritize the Shell's direct API for 'everything visible' captures."""
+        if not HAS_DBUS:
+            self._show_wayland_error(_("D-Bus is required for Wayland support."))
+            return False
+
+        # --- Priority 1: Private Shell API (GNOME/Cinnamon) ---
+        # This API allows capturing exactly what is visible without portal dialogs.
+        try:
+            bus = dbus.SessionBus()
+            obj = bus.get_object("org.gnome.Shell.Screenshot", "/org/gnome/Shell/Screenshot")
+            iface = dbus.Interface(obj, "org.gnome.Shell.Screenshot")
+            
+            temp_path = f"/tmp/mint-screenshot-{secrets.token_hex(4)}.png"
+            # Screenshot method: (include_frame, flash, filename)
+            # include_frame=True ensures we get the full desktop area.
+            iface.Screenshot(True, False, temp_path)
+            
+            # Wait a moment for the file to be written.
+            GLib.timeout_add(300, self._load_from_path, temp_path)
+            return False
+        except Exception:
+            pass # Fallback to Portal
+
+        # --- Priority 2: XDG Desktop Portal ---
         try:
             bus = dbus.SessionBus()
             token = secrets.token_hex(8)
             sender = bus.get_unique_name().replace('.', '_').replace(':', '')
             request_path = f"/org/freedesktop/portal/desktop/request/{sender}/{token}"
 
-            # We must listen for the response signal BEFORE making the request.
             bus.add_signal_receiver(
                 self._on_portal_response,
                 signal_name="Response",
@@ -448,10 +503,7 @@ class ScreenshotOverlay(Gtk.Window):
                 path=request_path
             )
 
-            obj = bus.get_object(
-                "org.freedesktop.portal.Desktop",
-                "/org/freedesktop/portal/desktop"
-            )
+            obj = bus.get_object("org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop")
             iface = dbus.Interface(obj, "org.freedesktop.portal.Screenshot")
 
             options = dbus.Dictionary({
@@ -461,9 +513,22 @@ class ScreenshotOverlay(Gtk.Window):
 
             iface.Screenshot("", options)
         except Exception as e:
-            self._show_wayland_error(f"Portal screenshot failed:\n{e}")
+            self._show_wayland_error(f"Capture failed:\n{e}")
             if hasattr(self, 'launcher') and self.launcher:
                 self.launcher.show()
+        return False
+
+    def _load_from_path(self, path):
+        """Loads a screenshot from a local path and enters the annotator."""
+        if not os.path.exists(path):
+            return True # Retry once?
+            
+        self.full_pixbuf = GdkPixbuf.Pixbuf.new_from_file(path)
+        self.width = self.full_pixbuf.get_width() / self.scale
+        self.height = self.full_pixbuf.get_height() / self.scale
+        self.rect = (0, 0, self.width, self.height)
+        
+        self._open_annotator()
         return False
 
     def _on_portal_response(self, response, results):
@@ -508,40 +573,26 @@ class ScreenshotOverlay(Gtk.Window):
         return False
 
     def _load_portal_image(self, path):
-        """Loads the image file saved by the portal into our annotation engine."""
-        try:
-            self.full_pixbuf = GdkPixbuf.Pixbuf.new_from_file(path)
-        except Exception as e:
-            self._show_wayland_error(f"Failed to load captured screenshot:\n{e}")
-            if hasattr(self, 'launcher') and self.launcher:
-                self.launcher.show()
-            return
-
-        # Set rect to full image size
-        self.rect = (0, 0, self.full_pixbuf.get_width(), self.full_pixbuf.get_height())
-        self.width = self.full_pixbuf.get_width()
-        self.height = self.full_pixbuf.get_height()
-
-        # Transition to annotation mode in a regular window
-        self._open_annotator()
-
-    def _load_portal_image(self, path):
         """Loads the image file saved by the portal into our internal buffer 
         and switches the application state to the annotation editor."""
         try:
             self.full_pixbuf = GdkPixbuf.Pixbuf.new_from_file(path)
         except Exception as e:
-            self._show_wayland_error(f"Failed to load captured screenshot:\n{e}")
+            self._show_wayland_error(_("Failed to load captured screenshot:\n{}").format(e))
             if hasattr(self, 'launcher') and self.launcher:
                 self.launcher.show()
             return
 
-        # Initialize the capture rectangle to match the full image dimensions.
-        self.rect = (0, 0, self.full_pixbuf.get_width(), self.full_pixbuf.get_height())
-        self.width = self.full_pixbuf.get_width()
-        self.height = self.full_pixbuf.get_height()
+        # HiDPI Fix: The portal image is at physical resolution. We must convert 
+        # these to logical units for our internal coordinate system.
+        s = self.scale
+        self.width = self.full_pixbuf.get_width() / s
+        self.height = self.full_pixbuf.get_height() / s
+        
+        # Initialize the capture rectangle to cover the full (logical) area.
+        self.rect = (0, 0, self.width, self.height)
 
-        # We now transition from the 'captured' file to the interactive editor.
+        # Transition to the interactive editor.
         self._open_annotator()
 
     # ──────────────────────────────────────────────────────────────────────────
@@ -565,8 +616,14 @@ class ScreenshotOverlay(Gtk.Window):
         visual = screen.get_rgba_visual()
         if visual:
             self.set_visual(visual)
-            
-        self.fullscreen_on_monitor(screen, 0)
+
+        # Position and size the window to cover the entire capture area.
+        self.set_default_size(int(self.width), int(self.height))
+        if not self.is_wayland:
+            # On X11, we try to span all monitors by using the full screen size.
+            self.fullscreen()
+        else:
+            self.fullscreen_on_monitor(screen, 0)
         
         # Clean up any residual widgets (like the launcher) before building the editor UI.
         for child in self.get_children():
@@ -1345,31 +1402,39 @@ class ScreenshotOverlay(Gtk.Window):
                 delattr(self, 'drag_start_pos')
                 return
                 
-            # If we were dragging a selection area, finalize the capture rectangle.
+            # Finalize capture rectangle after dragging.
             if self.state == AppState.SELECTING or (self.state == AppState.ANNOTATING and self.current_tool == 'select' and self.selection_start):
+                is_reselect = (self.state == AppState.ANNOTATING)
                 if self.selection_start:
                     x, y, w, h = self._get_rect(self.selection_start, (event.x, event.y))
-                    self.rect = (x, y, max(w, 1), max(h, 1))
+                    
+                    # Ignore tiny drags during re-selection to avoid accidental collapse.
+                    if is_reselect and w < 10 and h < 10:
+                        pass 
+                    else:
+                        self.rect = (x, y, max(w, 1), max(h, 1))
                 
-                # If the selection is large enough, we transition to annotation mode.
-                if self.rect and self.rect[2] > 20 and self.rect[3] > 20:
+                # Enter annotation mode if selection is valid.
+                if (self.rect and self.rect[2] > 20 and self.rect[3] > 20) or is_reselect:
+                    if self.state == AppState.SELECTING:
+                        self.annotations = [] # Clear only on new selection.
+                    
                     self.state = AppState.ANNOTATING
-                    # We clear old annotations if the user chooses to re-select 
-                    # a new area entirely.
-                    self.annotations = [] 
                     if self.toolbar_box: self.toolbar_box.show_all()
                 else:
-                    # If it was just a tiny click, stay in selection mode.
+                    # If it was just a tiny click in initial selection mode, stay there.
                     self.state = AppState.SELECTING
                     self.rect = None
 
                 self.selection_start = None
                 self.queue_draw()
             elif self.state == AppState.ANNOTATING:
-                # Commit the 'current' drawing to the permanent list.
+                # Commit the 'current' drawing to the permanent list and ensure 
+                # the toolbar remains visible.
                 if self.current_ann:
                     self.annotations.append(self.current_ann)
                     self.current_ann = None
+                    if self.toolbar_box: self.toolbar_box.show_all()
                     self.queue_draw()
 
     def on_motion_notify(self, widget, event):
@@ -1816,33 +1881,31 @@ class ScreenshotOverlay(Gtk.Window):
             return
             
         x, y, w, h = self.rect
+        s = self.scale
         
-        # Create a Cairo surface of the exact capture size.
-        surface = cairo.ImageSurface(cairo.Format.ARGB32, int(w), int(h))
+        # HiDPI surface creation at physical resolution.
+        surface = cairo.ImageSurface(cairo.Format.ARGB32, int(w * s), int(h * s))
         cr = cairo.Context(surface)
+        cr.scale(s, s) # Use logical coordinates for drawing.
         
-        # Draw the base screenshot, cropped to the selection area.
-        Gdk.cairo_set_source_pixbuf(cr, self.full_pixbuf, -x, -y)
+        # Calculate source pixbuf scale relative to logical units.
+        pix_s = self.full_pixbuf.get_width() / self.width if self.width > 0 else s
+        
+        # Composite base screenshot and annotations.
+        src_surface = Gdk.cairo_surface_create_from_pixbuf(self.full_pixbuf, pix_s, self.get_window())
+        cr.set_source_surface(src_surface, -x, -y)
         cr.paint()
         
-        # Overlay all user annotations.
         for ann in self.annotations:
             self._draw_annotation(cr, ann)
             
-        # --- Stage 1: Clipboard Handover ---
-        # We always push a high-quality copy to the clipboard.
-        timestamp = int(time.time())
-        temp_path = f"/tmp/mint-screenshot-{timestamp}.png"
-        surface.write_to_png(temp_path)
+        # Step 1: Clipboard Handover (Direct Pixbuf conversion).
+        pixbuf = Gdk.pixbuf_get_from_surface(surface, 0, 0, int(w * s), int(h * s))
         clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file(temp_path)
         clipboard.set_image(pixbuf)
         clipboard.store()
         
         if only_clipboard:
-            # On Wayland, clipboard ownership is tied to the process life.
-            # If we quit immediately, the data vanishes. We hide the UI 
-            # but wait 1 second before exiting to ensure handover.
             self.hide()
             if self.toolbar_box: self.toolbar_box.hide()
             GLib.timeout_add(1000, Gtk.main_quit)
@@ -1855,8 +1918,8 @@ class ScreenshotOverlay(Gtk.Window):
             quality_val = "75"
         elif self.settings['quality'] == 'small':
             quality_val = "50"
-            # For the 'Small' setting, we also downscale the physical dimensions.
-            final_pixbuf = pixbuf.scale_simple(w/2, h/2, GdkPixbuf.InterpType.BILINEAR)
+            # Scale down the physical dimensions for the 'Space Saver' setting.
+            final_pixbuf = pixbuf.scale_simple(int(w * s / 2), int(h * s / 2), GdkPixbuf.InterpType.BILINEAR)
 
         # --- Stage 3: Disk Save ---
         fmt = self.settings['format']
@@ -1865,7 +1928,6 @@ class ScreenshotOverlay(Gtk.Window):
         save_path = None
         
         if show_dialog:
-            # User explicitly requested a Save-As dialog.
             self.hide()
             if self.toolbar_box: self.toolbar_box.hide()
             
@@ -1885,18 +1947,15 @@ class ScreenshotOverlay(Gtk.Window):
             dialog.destroy()
             
             if not save_path:
-                # If canceled, return to editing.
                 self.show_all()
                 if self.toolbar_box: self.toolbar_box.show_all()
                 return
         else:
-            # Auto-save to the default directory.
             folder = self.settings['save_path']
             if not os.path.exists(folder): os.makedirs(folder)
             save_path = os.path.join(folder, filename)
 
         if save_path:
-            # Final export with specific format/quality parameters.
             if fmt == 'png':
                 final_pixbuf.savev(save_path, "png", [], [])
             elif fmt == 'jpg':
