@@ -13,6 +13,7 @@ const Settings = imports.ui.settings;
 class MintScreenshotApplet extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
+        this.metadata = metadata;
         this.set_applet_icon_symbolic_name("applets-screenshooter-symbolic");
         this.set_applet_tooltip(_("Mint Screenshot — Click to capture"));
 
@@ -22,12 +23,20 @@ class MintScreenshotApplet extends Applet.IconApplet {
     }
 
     _takeScreenshot() {
-        let pythonScript = GLib.get_home_dir() + "/projects/mint-screenshot/main.py";
-        let saveDir = this.save_directory || "~/Pictures/Screenshots";
-        saveDir = saveDir.replace("~", GLib.get_home_dir());
+        // Use the metadata path provided by Cinnamon to find main.py
+        let pythonScript = GLib.build_filenamev([this.metadata.path, "main.py"]);
+        
+        // Use standard GLib paths for the Pictures directory (works with non-English locales)
+        let picturesDir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES) || GLib.get_home_dir();
+        let defaultSaveDir = GLib.build_filenamev([picturesDir, "Screenshots"]);
+        
+        let saveDir = this.save_directory || defaultSaveDir;
+        if (saveDir.startsWith("~")) {
+            saveDir = saveDir.replace("~", GLib.get_home_dir());
+        }
 
-        let command = `python3 "${pythonScript}" "${saveDir}" > /tmp/mint-screenshot.log 2>&1`;
-        Util.spawnCommandLine(command);
+        // Use spawn([]) for better security instead of spawnCommandLine
+        Util.spawn(["python3", pythonScript, saveDir]);
     }
 
     on_applet_clicked(event) {
