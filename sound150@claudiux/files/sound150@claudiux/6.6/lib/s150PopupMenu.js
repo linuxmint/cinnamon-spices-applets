@@ -545,6 +545,23 @@ class Player extends PopupMenu.PopupMenuSection {
             canGoPrevious = false;
         }
     }
+    
+    _clean_str(str) {
+        var ret = "" + str;
+        const dico = {
+            "_": " ",
+            "&": "-",
+            "|": " ",
+            "'": " "
+        };
+        let keys = Object.keys(dico);
+        for (let k of keys) {
+            while (ret.includes(k)) {
+                ret = ret.replace(k, dico[k]);
+            }
+        }
+        return ret
+    }
 
     _setMetadata(metadata) {
         if (!metadata || (this._applet.actor.get_stage() == null))
@@ -564,11 +581,11 @@ class Player extends PopupMenu.PopupMenuSection {
             switch (metadata["xesam:artist"].get_type_string()) {
                 case "s":
                     // smplayer sends a string
-                    this._artist = metadata["xesam:artist"].unpack();
+                    this._artist = this._clean_str(metadata["xesam:artist"].unpack());
                     break;
                 case "as":
                     // others send an array of strings
-                    this._artist = metadata["xesam:artist"].deep_unpack().join(", ");
+                    this._artist = this._clean_str(metadata["xesam:artist"].deep_unpack().join(", "));
                     break;
                 default:
                     this._artist = _("Unknown Artist");
@@ -582,7 +599,7 @@ class Player extends PopupMenu.PopupMenuSection {
             this.artistLabel.set_text(this._artist);
 
         if (metadata["xesam:album"])
-            this._album = metadata["xesam:album"].unpack();
+            this._album = this._clean_str(metadata["xesam:album"].unpack());
         else
             this._album = _("Unknown Album");
 
@@ -599,12 +616,12 @@ class Player extends PopupMenu.PopupMenuSection {
                         let json_title = "" + json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Title"];
                         let json_artist = "" + json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Artist1"];
                         if (json_title) {
-                            this._title = json_title.capitalize();
+                            this._title = this._clean_str(json_title.capitalize());
                         } else {
                             this._title = _("Unknown Title");
                         }
                         if (json_artist) {
-                            this._artist = json_artist.capitalize();
+                            this._artist = this._clean_str(json_artist.capitalize());
                             if (this.artistLabel != null)
                                 this.artistLabel.set_text(this._artist);
                         } else {
