@@ -1,3 +1,6 @@
+### v16.3.0~20260419
+  * Sound tab in settings: Add button to open the settings of the OSD150@claudiux (v2+) extension when available.
+
 ### v16.2.0~20260325
   * Adds option "Apps Not to Display" in the Menu section of the General tab.
   * Fixes [#8295](https://github.com/linuxmint/cinnamon-spices-applets/issues/8295)

@@ -218,11 +218,11 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.metadata = metadata;
         this.instanceId = instanceId;
-        
+
         this.themeNode = null;
-        
+
         this.alreadyCalledBysetAppletTooltip = false;
-        
+
         this._appVolumeSection = new PopupMenu.PopupMenuSection();
 
         this.real_ui_scale = 1.0;
@@ -265,7 +265,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.players_without_seek_support = original_players_without_seek_support;
         this.players_with_seek_support = original_players_with_seek_support;
         this.PERCENT_CHAR = _("%");
-        
+
         this.gesturesManager = Main.gesturesManager;
 
         this.oldPlayerIcon0 = null;
@@ -309,10 +309,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._chooseActivePlayerItem = new PopupMenu.PopupSubMenuMenuItem(_("Choose player controls"));
 
         this.settings = new Settings.AppletSettings(this, UUID, this.instanceId);
-        
+
         this.settings.bind("userMenuWidth", "popup_width");
         this.settings.bind("userMenuHeight", "popup_height");
-        
+
         this.settings.bind("ignoredInputDevices", "ignoredInputDevices", () => {this._on_reload_this_applet_pressed();});
         this.settings.bind("ignoredOutputDevices", "ignoredOutputDevices", () => {this._on_reload_this_applet_pressed();});
         this.settings.bind("runAsync", "runAsync");
@@ -357,6 +357,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.PERCENT_CHAR = (this.showPercent) ? _("%") : "";
 
         this.settings.bind("showBarLevel", "showBarLevel");
+        this.settings.bind("showOSD150SettingsBtn", "showOSD150SettingsBtn");
         this.settings.bind("showVolumeValue", "showVolumeValue");
 
         this.settings.bind("OSDhorizontal", "OSDhorizontal",
@@ -540,7 +541,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         // Whether OsdWithNumber@JosephMcc is loaded:
         this.OsdWithNumberATJosephMcc_is_loaded = this.OsdWithNumberATJosephMcc_is_loaded_internal;
-        
+
         // Advertisements:
         this.settings.bind("adv_avoid", "adv_avoid");
         this.settings.bind("adv_volume", "adv_volume");
@@ -584,7 +585,6 @@ class Sound150Applet extends Applet.TextIconApplet {
         Interfaces.getDBusAsync((proxy, error) => {
             if (error) {
                 // ?? what else should we do if we fail completely here?
-                global.logError("sound150 - applet.js: 551 - " + error);
                 throw error;
             }
 
@@ -655,7 +655,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._output = null;
         this._outputMutedId = null;
         this._outputIcon = "audio-volume-muted-symbolic";
-        
+
         this._channelMap = null;
 
         this._input = null;
@@ -774,7 +774,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this._sound_settings.connect("changed::" + OVERAMPLIFICATION_KEY, () => this._on_sound_settings_change());
     }
-    
+
     _onBoxResized(width, height) {
         this.menu.actor.set_width(width);
         this.menu.actor.set_height(height);
@@ -801,19 +801,19 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.iconsMonitor = null;
         this.iconsMonitorId = null;
     }
-    
+
     monitor_art_dir() {
         this.unmonitor_art_dir();
         const icon_dir = Gio.file_new_for_path(ICONDIR);
         const art_dir = Gio.file_new_for_path(ARTDIR);
-        
+
         this.artsMonitor = art_dir.monitor_directory(Gio.FileMonitorFlags.WATCH_MOVES, new Gio.Cancellable());
         this.artsMonitorId = this.artsMonitor.connect("changed", () => { this.on_art_dir_changed() });
     }
 
      unmonitor_art_dir() {
         if (this.artsMonitor == null || this.artsMonitorId == null || this.artsMonitor.is_cancelled()) return;
-        
+
         //~ this.artsMonitor.disconnect(this.iconsMonitorId);
         this.artsMonitor.disconnect(this.artsMonitorId);
         if (! this.artsMonitor.is_cancelled() )
@@ -840,7 +840,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                         this._players[this._activePlayer]._showCover(_albumart_path);
                     }
                 }
-                
+
             }
             let idto = setTimeout( () => {
                     if (idto && source_exists(idto))
@@ -856,21 +856,21 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
         children.close(null);
     }
-    
+
     on_art_dir_changed() {
         const icon_dir = Gio.file_new_for_path(ICONDIR);
         const art_dir = Gio.file_new_for_path(ARTDIR);
         const make_icon_script = `${PATH2SCRIPTS}/make_icon.sh`;
         let children_icon = icon_dir.enumerate_children("standard::*", Gio.FileQueryInfoFlags.NONE, null);
         let children_art = art_dir.enumerate_children("standard::*", Gio.FileQueryInfoFlags.NONE, null);
-        
+
         let art = children_art.next_file(null);
         if (art == null) {
             children_art.close(null);
             children_icon.close(null);
             return
         }
-        
+
         let name = art.get_name();
         let _art_path = ARTDIR + "/" + name;
         let _art = Gio.File.new_for_path(_art_path);
@@ -881,13 +881,20 @@ class Sound150Applet extends Applet.TextIconApplet {
             _art_path = _art_path.replace("file://", "");
             Util.spawnCommandLineAsync(`${make_icon_script} "${_art_path}"`);
         }
-        
+
         children_art.close(null);
         children_icon.close(null);
     }
 
     on_enter_event(actor, event) {
         this.isActorEntered = true;
+        if (IS_OSD150_ENABLED() && GLib.file_test(HOME_DIR + "/.local/share/cinnamon/extensions/OSD150@claudiux/settings-schema.json", GLib.FileTest.EXISTS)) {
+            if (!this.showOSD150SettingsBtn)
+                this.showOSD150SettingsBtn = true;
+        } else {
+            if (this.showOSD150SettingsBtn)
+                this.showOSD150SettingsBtn = false;
+        }
         this.on_icon_dir_changed();
         if (this.context_menu_item_configDesklet != null)
             this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
@@ -1010,7 +1017,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 clearTimeout(_to);
             if (this.context_menu_item_configDesklet != null)
                 this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
-            if (this.context_menu_item_showDesklet != null)
+            if (this.context_menu_item_showDesklet != null && this.context_menu_item_showDesklet._switch != null)
                 this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
         }, 300);
     } // End of _on_context_menu_item_showDesklet_toggled
@@ -1160,7 +1167,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
         return commandline;
     }
-    
+
     _balanceLeft() {
         let bal = this.balance;
         this.balance = Math.max(
@@ -1170,7 +1177,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (this._channelMap)
             this._channelMap.set_balance(2 * this.balance - 1);
     }
-    
+
     _balanceRight() {
         let bal = this.balance;
         this.balance = Math.min(
@@ -1180,7 +1187,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (this._channelMap)
             this._channelMap.set_balance(2 * this.balance - 1);
     }
-    
+
     _balanceCenter() {
         this.balance = 0.5;
         if (this._channelMap)
@@ -1318,16 +1325,20 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._on_sound_settings_change();
     }
 
+    _on_open_OSD150_settings() {
+        Util.spawnCommandLineAsync("xlet-settings extension OSD150@claudiux");
+    }
+
     _on_sound_settings_change() {
         if (!this._sound_settings.get_boolean(OVERAMPLIFICATION_KEY) && this.maxVolume > 100) {
             this.maxVolume = 100;
         }
-        
+
         if (! this.showalbum) {
             this.keepAlbumArtIcon = false;
         }
         this._iconLooping = this.showalbum;
-        
+
         this._volumeMax = this.maxVolume / 100 * this._volumeNorm;
         if (this.maxVolume > 100) {
             if (this._outputVolumeSection)
@@ -1812,7 +1823,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 this.allowChangeArt = true;
                 //~ if (this._applet_tooltip)
                     //~ this._applet_tooltip.hide();
-                if (this.playerControl && this._activePlayer)  {
+                if (this.playerControl && this._activePlayer && this._players)  {
                     let dir = Gio.file_new_for_path(ALBUMART_PICS_DIR);
                     let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
                     let file = dir_children.next_file(null);
@@ -1833,10 +1844,6 @@ class Sound150Applet extends Applet.TextIconApplet {
                 }
             }, 0);
             //~ }, 1000 * this.showalbumDelay);
-        } else {
-
-            //~ if (this._applet_tooltip)
-                //~ this._applet_tooltip.hide();
         }
 
         this.volume_near_icon("_volumeChange()");
@@ -1903,7 +1910,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             else
                 this._playerIcon = [icon, source === "player-path"];
         }
-        
+
         if (! this.showalbum) {
             this.keepAlbumArtIcon = false;
             this._iconLooping = false;
@@ -1939,7 +1946,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                         this.set_applet_icon_path(this._playerIcon[0]);
                         this.oldPlayerIcon0 = this._playerIcon[0];
                         //~ logDebug("this.oldPlayerIcon0: " + this.oldPlayerIcon0);
-                        
+
                         // Copy the icon to the correct location to prevent it from disappearing when changing the volume:
                         const baseName = this.oldPlayerIcon0.split("/").pop();
                         if (! baseName.startsWith("R3SongArt")) {
@@ -2005,7 +2012,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (this._loopArtId != null) source_remove(this._loopArtId);
         this._loopArtId = null;
         if (!this._artLooping) return;
-        
+
         //~ if (this._playerctl && this._imagemagick && this.is_empty(ALBUMART_PICS_DIR)) {
         if (this._playerctl && this._imagemagick && this.is_empty(ARTDIR)) {
             if (this.runAsync) {
@@ -2051,7 +2058,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.loopArt();
         });
     }
-    
+
     get sitesNotDisplayingAlbumArt() {
         var sites = [];
         for (let s of this.showalbumButForSites) {
@@ -2060,7 +2067,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
         return sites;
     }
-    
+
     get iconsWhenNotDisplayingAlbumArt() {
         var icons = {};
         for (let s of this.showalbumButForSites) {
@@ -2088,13 +2095,13 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
 
         //~ if (this.old_player === player && this.old_path === path) return;
-        if ((this.old_player === player && 
-            (typeof(this.old_path) === "string" && typeof(path) === "string" && this.old_path.split("/").pop() === path.split("/").pop()))) 
+        if ((this.old_player === player &&
+            (typeof(this.old_path) === "string" && typeof(path) === "string" && this.old_path.split("/").pop() === path.split("/").pop())))
                 return;
         this.old_player = player;
         this.old_path = path;
         //~ logDebug("setAppletIcon(" + player + ", " + path +")");
-        
+
         if (!this.allowChangeArt) return;
 
         if (player && (player === true || player._playerStatus == 'Playing')) {
@@ -2177,7 +2184,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 if (tooltips.length != 0) tooltips.push("");
                 tooltips.push(this.player._name + " - " + _(this.player._playerStatus));
             }
-            
+
             let _title = this.player._title.replace(/\&/g, "&amp;").replace(/\"/g, "");
             this.tooltipForAdvDetectionOLD = this.tooltipForAdvDetection;
             this.tooltipForAdvDetection = this._clean_str(_title);
@@ -2219,7 +2226,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                     this.setIcon();
                 }
             }
-            
+
             if (this.tooltipShowArtistTitle) {
                 if (tooltips.length != 0) tooltips.push("");
                 if (!this.player._artist) {
@@ -2248,7 +2255,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
 
         //~ this._applet_tooltip.preventShow = false;
-        
+
         this.volume_near_icon("setAppletTooltip()");
         this.set_applet_tooltip(this._clean_str(tooltips.join("\n")), true);
     }
@@ -2423,19 +2430,19 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         this._outputVolumeSection = new VolumeSlider(this, null, _("Volume"), null);
         this._outputVolumeSection.connect("values-changed", (...args) => this._outputValuesChanged(...args));
-        
+
         // Applications, output and input volume sections:
         this._appVolumeSection.addMenuItem(this._outputApplicationsMenu);
         this._appVolumeSection.actor.show();
         this._outputApplicationsMenu.actor.show();
         this._outputApplicationsMenu.menu.open();
         this.menu.addMenuItem(this._appVolumeSection);
-        
+
         this.menu.addMenuItem(this._outputVolumeSection);
         this.menu.addMenuItem(this._inputVolumeSection);
-        
+
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        
+
         this._balanceSection = new BalanceSlider(this);
         this.menu.addMenuItem(this._balanceSection);
 
@@ -2605,7 +2612,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.color0_100 = color;
         let _style = `color: ${color};`;
         //~ logDebug("_style: "+_style);
-        
+
         //~ this.actor.style = _style;
         this.actor.style = null;
         this._setStyle();
@@ -2776,7 +2783,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             type: type,
             item: item
         });
-        
+
         if (isUnwanted) this._onDeviceRemoved(control, id, type);
     }
 
@@ -2812,13 +2819,13 @@ class Sound150Applet extends Applet.TextIconApplet {
         let stream = this._control.lookup_stream_id(id);
         let appId = stream.application_id;
         let name = stream.name;
-        
+
         var unwanted = [];
         for (let u of this.appsNotToDisplay) {
             if (u["appMenu"] === true && u["partOfName"].length > 0)
                 unwanted.push(u["partOfName"].toLowerCase());
         }
-        
+
         var isUnwanted = false;
         for (let n of unwanted) {
             if (name && name.toLowerCase().includes(n)) {
@@ -2826,10 +2833,8 @@ class Sound150Applet extends Applet.TextIconApplet {
                 break
             }
         }
-        global.log("name: " + name);
-        global.log("isUnwanted: " + isUnwanted);
 
-        if (stream.is_virtual || 
+        if (stream.is_virtual ||
             appId === "org.freedesktop.libcanberra" ||
             isUnwanted
         ) {
@@ -2972,10 +2977,10 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     volume_near_icon(comesFrom="") {
         if (!this.actor || this.actor.get_stage() == null) return;
-        
+
         //~ logDebug("volume_near_icon(comesFrom="+ comesFrom +")");
         if (this.showMediaKeysOSD &&
-            this.alreadyCalledBysetAppletTooltip && 
+            this.alreadyCalledBysetAppletTooltip &&
             comesFrom === "setAppletTooltip()" &&
             this.volume !== this.old_volume
         ) {
@@ -2995,10 +3000,10 @@ class Sound150Applet extends Applet.TextIconApplet {
                     iconName += "high";
                 else
                     iconName += "overamplified";
-    
+
                 if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state)) iconName += "-with-mic-disabled";
                 else if (this.showMicUnmutedOnIcon && (this.mute_in_switch && !this.mute_in_switch.state)) iconName += "-with-mic-enabled";
-    
+
                 iconName += "-symbolic";
                 this._outputIcon = iconName;
                 icon = Gio.Icon.new_for_string(this._outputIcon);

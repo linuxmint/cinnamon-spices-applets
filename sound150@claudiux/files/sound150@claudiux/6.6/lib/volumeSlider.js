@@ -350,9 +350,6 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         const cr = area.get_context();
         const themeNode = area.get_theme_node();
         var [width, height] = area.get_surface_size();
-        //~ global.log("width1: " + width);
-        //~ width = Math.trunc(width * this.applet.real_ui_scale);
-        //~ global.log("width2: " + width);
 
         const handleRadius = themeNode.get_length('-slider-handle-radius');
 

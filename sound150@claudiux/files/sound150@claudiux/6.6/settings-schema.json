@@ -33,7 +33,8 @@
       "sections": [
         "sectionIcon1",
         "sectionIcon2",
-        "sectionIcon3"
+        "sectionIcon3",
+        "sectionIcon4"
       ]
     },
     "page_sound": {
@@ -148,6 +149,17 @@
     },
     "sectionIcon2": {
       "type": "section",
+      "title": "Microphone Badge colors",
+      "keys": [
+        "LIGHTSUCCESSFILL",
+        "LIGHTWARNINGFILL",
+        "DARKSUCCESSFILL",
+        "DARKWARNINGFILL"
+      ],
+      "dependency": "showSectionIcon2"
+    },
+    "sectionIcon3": {
+      "type": "section",
       "title": "Icon colors",
       "keys": [
         "adaptColor",
@@ -158,7 +170,7 @@
         "resetColorsButton"
       ]
     },
-    "sectionIcon3": {
+    "sectionIcon4": {
       "type": "section",
       "title": "Scrolling",
       "keys": [
@@ -188,7 +200,8 @@
         "showVolumeValue",
         "showPercent",
         "OSDhorizontal",
-        "showBarLevel"
+        "showBarLevel",
+        "OSD150SettingsBtn"
       ]
     },
     "sectionSound3": {
@@ -757,6 +770,12 @@
     "description": "Show bar level in OSD",
     "default": true
   },
+  "OSD150SettingsBtn": {
+    "type": "button",
+    "description": "Change the OSD position offset",
+    "callback": "_on_open_OSD150_settings",
+    "dependency": "showOSD150SettingsBtn"
+  },
   "volumeSoundFile": {
     "type": "soundfilechooser",
     "description": "Which sound to play when the volume is changed",
@@ -956,5 +975,53 @@
   "userMenuHeight": {
     "type": "generic",
     "default": 800
+  },
+  "LIGHTBASEFILL": {
+    "type": "colorchooser",
+    "default": "#000000",
+    "description": "Light Theme: Base color"
+  },
+  "LIGHTSUCCESSFILL": {
+    "type": "colorchooser",
+    "default": "#009909",
+    "description": "Light Theme: Success color"
+  },
+  "LIGHTWARNINGFILL": {
+    "type": "colorchooser",
+    "default": "#FF7800",
+    "description": "Light Theme: Warning color"
+  },
+  "LIGHTERRORFILL": {
+    "type": "colorchooser",
+    "default": "#0099E6",
+    "description": "Light Theme: Error color"
+  },
+  "DARKBASEFILL": {
+    "type": "colorchooser",
+    "default": "#EBEBEB",
+    "description": "Dark Theme: Base color"
+  },
+  "DARKSUCCESSFILL": {
+    "type": "colorchooser",
+    "default": "#0ABF15",
+    "description": "Dark Theme: Success color"
+  },
+  "DARKWARNINGFILL": {
+    "type": "colorchooser",
+    "default": "#FF7800",
+    "description": "Dark Theme: Warning color"
+  },
+  "DARKERRORFILL": {
+    "type": "colorchooser",
+    "default": "#0099E6",
+    "description": "Dark Theme: Error color"
+  },
+  "showSectionIcon2": {
+    "type": "generic",
+    "default": false
+  },
+  "showOSD150SettingsBtn": {
+    "type": "generic",
+    "default": false
   }
 }
