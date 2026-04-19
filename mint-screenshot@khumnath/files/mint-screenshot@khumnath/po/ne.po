@@ -1,0 +1,144 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: mint-screenshot\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-19 14:52+0545\n"
+"PO-Revision-Date: 2026-04-19 14:52+0545\n"
+"Last-Translator: Antigravity\n"
+"Language-Team: Nepali\n"
+"Language: ne\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: main.py:102
+msgid "Reset Everything?"
+msgstr "सबै रिसेट गर्ने?"
+
+#: main.py:104
+msgid "This will clear all your annotations and return to the launcher screen."
+msgstr "यसले तपाइँका सबै एनोटेसनहरू मेटाउनेछ र लन्चर स्क्रिनमा फर्काउनेछ।"
+
+#: main.py:324 main.py:1755
+msgid "Mint Screenshot"
+msgstr "मिन्ट स्क्रिनसट"
+
+#: main.py:328
+msgid "Wayland Mode — Capture via Desktop Portal"
+msgstr "वेइल्याण्ड मोड — डेस्कटप पोर्टल मार्फत क्याप्चर"
+
+#: main.py:328
+msgid "X11 Mode — Instant Pixel Capture"
+msgstr "X11 मोड — तुरुन्तै पिक्सेल क्याप्चर"
+
+#: main.py:336
+msgid "📸  Capture Fullscreen"
+msgstr "📸  पूरा स्क्रिन क्याप्चर"
+
+#: main.py:341
+msgid "✂️  Select Area"
+msgstr "✂️  क्षेत्र छान्नुहोस्"
+
+#: main.py:348
+msgid "⏱  Timed Capture"
+msgstr "⏱  समय सेट गरी क्याप्चर"
+
+#: main.py:354
+msgid "sec"
+msgstr "सेकेन्ड"
+
+#: main.py:365 main.py:1616
+msgid "Close"
+msgstr "बन्द गर्नुहोस्"
+
+#: main.py:1542
+msgid "Pointer"
+msgstr "पोइन्टर"
+
+#: main.py:1543
+msgid "Rectangle"
+msgstr "आयत"
+
+#: main.py:1544
+msgid "Ellipse"
+msgstr "अण्डाकार"
+
+#: main.py:1545
+msgid "Arrow"
+msgstr "तीर"
+
+#: main.py:1546
+msgid "Text Tool"
+msgstr "लेख्ने टुल"
+
+#: main.py:1576
+msgid "Blue"
+msgstr "निलो"
+
+#: main.py:1577
+msgid "Red"
+msgstr "रातो"
+
+#: main.py:1578
+msgid "Green"
+msgstr "हरियो"
+
+#: main.py:1579
+msgid "Yellow"
+msgstr "पहेंलो"
+
+#: main.py:1580
+msgid "White"
+msgstr "सेतो"
+
+#: main.py:1598
+msgid "Size"
+msgstr "साइज"
+
+#: main.py:1611
+msgid "Reset All"
+msgstr "सबै रिसेट"
+
+#: main.py:1612
+msgid "Undo"
+msgstr "अन्डु"
+
+#: main.py:1613
+msgid "Copy"
+msgstr "कपी"
+
+#: main.py:1614
+msgid "Save"
+msgstr "बचत गर्नुहोस्"
+
+#: main.py:1615
+msgid "Settings"
+msgstr "सेटिङहरू"
+
+#: main.py:1657
+msgid "Save Format"
+msgstr "बचत गर्ने ढाँचा"
+
+#: main.py:1670
+msgid "Image Quality"
+msgstr "तस्विरको गुणस्तर"
+
+#: main.py:1695
+msgid "Show Toolbar Labels"
+msgstr "टुलबार लेबलहरू देखाउनुहोस्"
+
+#: main.py:1703
+msgid "About Mint Screenshot"
+msgstr "मिन्ट स्क्रिनसटको बारेमा"
+
+#: main.py:1757
+msgid ""
+"Screenshot & Annotation Tool for Cinnamon\n"
+"Capture, annotate, and share with ease."
+msgstr ""
+"सिनामोनका लागि स्क्रिनसट र एनोटेसन उपकरण\n"
+"सजिलै क्याप्चर, एनोटेट र साझा गर्नुहोस्।"
+
+#: applet.js:17
+msgid "Mint Screenshot — Click to capture"
+msgstr "मिन्ट स्क्रिनसट — क्याप्चर गर्न क्लिक गर्नुहोस्"

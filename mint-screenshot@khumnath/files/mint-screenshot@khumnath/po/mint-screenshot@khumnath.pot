@@ -1,0 +1,206 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-19 14:51+0545\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: main.py:102
+msgid "Reset Everything?"
+msgstr ""
+
+#: main.py:104
+msgid "This will clear all your annotations and return to the launcher screen."
+msgstr ""
+
+#: main.py:241
+msgid "Mint Screenshot — Wayland Error"
+msgstr ""
+
+#: main.py:324 main.py:1755
+msgid "Mint Screenshot"
+msgstr ""
+
+#: main.py:328
+msgid "Wayland Mode — Capture via Desktop Portal"
+msgstr ""
+
+#: main.py:328
+msgid "X11 Mode — Instant Pixel Capture"
+msgstr ""
+
+#: main.py:336
+msgid "📸  Capture Fullscreen"
+msgstr ""
+
+#: main.py:341
+msgid "✂️  Select Area"
+msgstr ""
+
+#: main.py:348
+msgid "⏱  Timed Capture"
+msgstr ""
+
+#: main.py:354
+msgid "sec"
+msgstr ""
+
+#: main.py:365 main.py:1616
+msgid "Close"
+msgstr ""
+
+#: main.py:1542
+msgid "Pointer"
+msgstr ""
+
+#: main.py:1543
+msgid "Rectangle"
+msgstr ""
+
+#: main.py:1544
+msgid "Ellipse"
+msgstr ""
+
+#: main.py:1545
+msgid "Arrow"
+msgstr ""
+
+#: main.py:1546
+msgid "Text Tool"
+msgstr ""
+
+#: main.py:1576
+msgid "Blue"
+msgstr ""
+
+#: main.py:1577
+msgid "Red"
+msgstr ""
+
+#: main.py:1578
+msgid "Green"
+msgstr ""
+
+#: main.py:1579
+msgid "Yellow"
+msgstr ""
+
+#: main.py:1580
+msgid "White"
+msgstr ""
+
+#: main.py:1598
+msgid "Size"
+msgstr ""
+
+#: main.py:1611
+msgid "Reset All"
+msgstr ""
+
+#: main.py:1612
+msgid "Undo"
+msgstr ""
+
+#: main.py:1613
+msgid "Copy"
+msgstr ""
+
+#: main.py:1614
+msgid "Save"
+msgstr ""
+
+#: main.py:1615
+msgid "Settings"
+msgstr ""
+
+#: main.py:1657
+msgid "Save Format"
+msgstr ""
+
+#: main.py:1670
+msgid "Image Quality"
+msgstr ""
+
+#: main.py:1675
+msgid "Space Saver (Small)"
+msgstr ""
+
+#: main.py:1677
+msgid "Medium"
+msgstr ""
+
+#: main.py:1679
+msgid "Original"
+msgstr ""
+
+#: main.py:1690
+msgid "Save Folder: {}..."
+msgstr ""
+
+#: main.py:1695
+msgid "Show Toolbar Labels"
+msgstr ""
+
+#: main.py:1703
+msgid "About Mint Screenshot"
+msgstr ""
+
+#: main.py:1726
+msgid "Select Default Save Folder"
+msgstr ""
+
+#: main.py:1730
+msgid "Select"
+msgstr ""
+
+#: main.py:1757
+msgid ""
+"Screenshot & Annotation Tool for Cinnamon\n"
+"Capture, annotate, and share with ease."
+msgstr ""
+
+#: main.py:1759
+msgid "Project on GitHub"
+msgstr ""
+
+#: main.py:1776
+msgid "Open External Website?"
+msgstr ""
+
+#: main.py:1779
+msgid "This will exit the current screenshot process. Do you want to continue?"
+msgstr ""
+
+#: main.py:1873
+msgid "Save Screenshot"
+msgstr ""
+
+#: main.py:1949
+msgid ""
+"The following packages are missing:\n"
+"\n"
+"{}\n"
+"\n"
+"Install with:\n"
+"  sudo apt install {}"
+msgstr ""
+
+#: main.py:1955
+msgid "Mint Screenshot \\u2014 Missing Dependencies"
+msgstr ""
+
+#: applet.js:17
+msgid "Mint Screenshot — Click to capture"
+msgstr ""
