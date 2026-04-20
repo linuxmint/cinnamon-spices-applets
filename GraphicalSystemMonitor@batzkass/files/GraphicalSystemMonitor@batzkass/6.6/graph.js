@@ -44,8 +44,8 @@ class Graph {
         this.tooltip_scale = 0.98;
 
         // EVENTS:
-        this.area.connect("repaint", Lang.bind(this, this.paint));
-        this._tooltip.area.connect("repaint", Lang.bind(this, this.paint_tooltip));
+        this.area.connect("repaint", ()=>this.paint());
+        this._tooltip.area.connect("repaint", ()=>this.paint_tooltip());
     }
 
     get tooltip_history_seconds() {

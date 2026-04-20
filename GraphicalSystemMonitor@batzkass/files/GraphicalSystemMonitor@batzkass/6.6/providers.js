@@ -137,7 +137,7 @@ class NetData extends Provider {
         catch(e) {
             this.devices = [];
             var d = Gio.File.new_for_path("/sys/class/net");
-            var en = d.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
+            var en = d.enumerate_children_async("standard::name", Gio.FileQueryInfoFlags.NONE, null);
             var info;
             while ((info = en.next_file(null)))
                 this.devices.push(info.get_name())

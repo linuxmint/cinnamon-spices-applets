@@ -17,12 +17,11 @@ You should have received a copy of the GNU General Public License along
 with Sysmonitor. If not, see http://www.gnu.org/licenses/.
 */
 
-const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Mainloop = imports.mainloop;
-const GLib = imports.gi.GLib;
 const St = imports.gi.St;
+const Util = imports.misc.util;
 
 const Graph = require('./graph').Graph;
 const Providers = require('./providers');
@@ -236,7 +235,7 @@ class TheApplet extends Applet.Applet {
                 g.obj.update();
             }
         })
-        this.update_timeout_id = Mainloop.timeout_add(Math.max(100, this.cfg_refresh_rate), Lang.bind(this, this.update));
+        this.update_timeout_id = Mainloop.timeout_add(Math.max(100, this.cfg_refresh_rate), ()=>this.update());
     }
     
     /*******************
@@ -244,7 +243,7 @@ class TheApplet extends Applet.Applet {
     ********************/
     on_applet_clicked() {
         if (this.cfg_onclick_program)
-            GLib.spawn_command_line_async(this.cfg_onclick_program);
+            Util.spawn_async([this.cfg_onclick_program]);
     }
 
     on_applet_removed_from_panel() {
