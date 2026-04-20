@@ -8,6 +8,5 @@
     "website": "https://khumnath.com.np",
     "url": "https://github.com/khumnath/mint-screenshot",
     "comments": "Capture, annotate, and share screenshots with ease. Supports timed capture, custom countdown, and Material Design toolbar.",
-    "icon": "applets-screenshooter-symbolic",
     "max-instances": 1
 }
