@@ -6,6 +6,7 @@ const ByteArray = imports.byteArray;
 const Gettext = imports.gettext;
 const NM = imports.gi.NM;
 const PopupMenu = imports.ui.popupMenu;
+const { AppletSettings } = imports.ui.settings;
 
 const UUID = "vertical-speedmeter@2u841r";
 
@@ -18,6 +19,9 @@ function _(text) {
 class VerticalPanelDownloadAndUploadSpeedApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
+
+        this.settings = new AppletSettings(this, UUID, instanceId);
+        this.settings.bind("preferred-interface", "preferredInterface", this._onPreferredInterfaceChanged.bind(this));
 
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
@@ -77,6 +81,16 @@ class VerticalPanelDownloadAndUploadSpeedApplet extends Applet.TextIconApplet {
         }
     }
 
+    _onPreferredInterfaceChanged() {
+        let preferred = (this.preferredInterface || "").trim();
+        if (this.ifaceSubmenu) {
+            this.ifaceSubmenu.label.text = preferred
+                ? _("Interface: %s").format(preferred)
+                : _("Interface: Auto");
+        }
+        this.refreshNow(true);
+    }
+
     buildMenu() {
         this.interfaceItem = new PopupMenu.PopupMenuItem(_("Interface: detecting..."));
         this.interfaceItem.actor.reactive = false;
@@ -95,6 +109,11 @@ class VerticalPanelDownloadAndUploadSpeedApplet extends Applet.TextIconApplet {
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
+        this.ifaceSubmenu = new PopupMenu.PopupSubMenuMenuItem(_("Interface: Auto"));
+        this.menu.addMenuItem(this.ifaceSubmenu);
+
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
         let resetItem = new PopupMenu.PopupMenuItem(_("Reset Session Stats"));
         resetItem.connect("activate", () => {
             this.sessionRX = 0;
@@ -102,6 +121,67 @@ class VerticalPanelDownloadAndUploadSpeedApplet extends Applet.TextIconApplet {
             this.updateMenuStats();
         });
         this.menu.addMenuItem(resetItem);
+
+        this.menu.connect("open-state-changed", (menu, open) => {
+            if (open) this._refreshInterfaceSubmenu();
+        });
+    }
+
+    _listInterfaces(callback) {
+        let dir = Gio.File.new_for_path("/sys/class/net");
+        dir.enumerate_children_async(
+            "standard::name",
+            Gio.FileQueryInfoFlags.NONE,
+            GLib.PRIORITY_DEFAULT,
+            null,
+            (source, result) => {
+                let ifaces = [];
+                try {
+                    let enumerator = source.enumerate_children_finish(result);
+                    let info;
+                    while ((info = enumerator.next_file(null)) !== null) {
+                        let name = info.get_name();
+                        if (name !== "lo") {
+                            ifaces.push(name);
+                        }
+                    }
+                    enumerator.close(null);
+                } catch (e) {
+                    global.logError(e);
+                }
+                callback(ifaces.sort());
+            }
+        );
+    }
+
+    _refreshInterfaceSubmenu() {
+        this.ifaceSubmenu.menu.removeAll();
+
+        let preferred = (this.preferredInterface || "").trim();
+
+        this._listInterfaces((ifaces) => {
+            let autoItem = new PopupMenu.PopupMenuItem(
+                (preferred === "" ? "✓ " : "    ") + _("Auto-detect")
+            );
+            autoItem.connect("activate", () => {
+                this.settings.setValue("preferred-interface", "");
+                this.preferredInterface = "";
+                this._onPreferredInterfaceChanged();
+            });
+            this.ifaceSubmenu.menu.addMenuItem(autoItem);
+
+            for (let iface of ifaces) {
+                let item = new PopupMenu.PopupMenuItem(
+                    (preferred === iface ? "✓ " : "    ") + iface
+                );
+                item.connect("activate", () => {
+                    this.settings.setValue("preferred-interface", iface);
+                    this.preferredInterface = iface;
+                    this._onPreferredInterfaceChanged();
+                });
+                this.ifaceSubmenu.menu.addMenuItem(item);
+            }
+        });
     }
 
     initNetworkManager() {
@@ -163,6 +243,12 @@ class VerticalPanelDownloadAndUploadSpeedApplet extends Applet.TextIconApplet {
     }
 
     detectPrimaryInterface(callback) {
+        let preferred = (this.preferredInterface || "").trim();
+        if (preferred) {
+            callback(preferred);
+            return;
+        }
+
         let nmIface = this.getNetworkManagerInterface();
         if (nmIface) {
             callback(nmIface);
