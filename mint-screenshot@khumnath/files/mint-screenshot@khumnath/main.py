@@ -262,40 +262,23 @@ class ScreenshotOverlay(Gtk.Window):
         menu_btn.set_popup(menu)
         hb.pack_end(menu_btn)
 
-        # Custom CSS for the premium 'Mint Dark' look.
+        # Custom CSS for structural sizing; we intentionally omit colors so it 
+        # flawlessly respects the user's system Light or Dark GTK theme.
         style_provider = Gtk.CssProvider()
         style_provider.load_from_data(b"""
-            window {
-                background: #1a1a2e;
-            }
             .launcher-title {
-                color: white;
                 font-size: 18px;
                 font-weight: bold;
             }
             .launcher-subtitle {
-                color: rgba(255,255,255,0.5);
                 font-size: 11px;
+                opacity: 0.6;
             }
             .launcher-btn {
-                background: #16213e;
-                color: white;
-                border: 1px solid rgba(52, 152, 219, 0.5);
                 border-radius: 10px;
                 padding: 14px 20px;
                 font-size: 14px;
                 font-weight: bold;
-            }
-            .launcher-btn:hover {
-                background: #1a2744;
-                border-color: rgba(52, 152, 219, 0.9);
-            }
-            .timer-spin {
-                background: #16213e;
-                color: white;
-                border: 1px solid rgba(52, 152, 219, 0.4);
-                border-radius: 6px;
-                padding: 4px;
             }
         """)
         Gtk.StyleContext.add_provider_for_screen(
@@ -1176,11 +1159,12 @@ class ScreenshotOverlay(Gtk.Window):
             cr.set_line_width(ann.width + 6)
             if ann.type == 'rect': cr.rectangle(ax, ay, aw, ah)
             elif ann.type == 'ellipse':
-                cr.save()
-                cr.translate(ax + aw/2, ay + ah/2)
-                cr.scale(aw/2, ah/2)
-                cr.arc(0, 0, 1, 0, 2*math.pi)
-                cr.restore()
+                if aw > 0 and ah > 0:
+                    cr.save()
+                    cr.translate(ax + aw/2, ay + ah/2)
+                    cr.scale(aw/2, ah/2)
+                    cr.arc(0, 0, 1, 0, 2*math.pi)
+                    cr.restore()
             cr.stroke()
             cr.restore()
 
@@ -1223,12 +1207,13 @@ class ScreenshotOverlay(Gtk.Window):
         elif ann.type == 'arrow':
             self._draw_arrow(cr, ann.start[0], ann.start[1], ann.end[0], ann.end[1])
         elif ann.type == 'ellipse':
-            cr.save()
-            cr.translate(ax + aw/2, ay + ah/2)
-            cr.scale(aw/2, ah/2)
-            cr.arc(0, 0, 1, 0, 2*math.pi)
-            cr.restore()
-            cr.stroke()
+            if aw > 0 and ah > 0:
+                cr.save()
+                cr.translate(ax + aw/2, ay + ah/2)
+                cr.scale(aw/2, ah/2)
+                cr.arc(0, 0, 1, 0, 2*math.pi)
+                cr.restore()
+                cr.stroke()
         elif ann.type == 'text':
             if hasattr(ann, 'text'):
                 layout = self.create_pango_layout(ann.text)
@@ -1583,7 +1568,7 @@ class ScreenshotOverlay(Gtk.Window):
                 border: 2px solid rgba(52, 152, 219, 0.5);
                 box-shadow: 0 8px 24px rgba(0,0,0,0.6);
             }}
-            button {{
+            #toolbar-box button {{
                 background: transparent;
                 border: 1px solid transparent;
                 border-radius: 8px;
@@ -1591,13 +1576,13 @@ class ScreenshotOverlay(Gtk.Window):
                 margin: 0 {margin};
                 color: white;
             }}
-            button image {{ color: white; }}
-            button:hover {{ background: rgba(255, 255, 255, 0.1); }}
-            button:checked {{
+            #toolbar-box button image {{ color: white; }}
+            #toolbar-box button:hover {{ background: rgba(255, 255, 255, 0.1); }}
+            #toolbar-box button:checked {{
                 background: rgba(52, 152, 219, 0.4);
                 border-color: rgba(52, 152, 219, 0.6);
             }}
-            separator {{ background: rgba(255, 255, 255, 0.1); margin: 0 8px; }}
+            #toolbar-box separator {{ background: rgba(255, 255, 255, 0.1); margin: 0 8px; }}
         """.encode())
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
         
@@ -1982,31 +1967,95 @@ def _check_dependencies(force=False):
     if config.get('deps_ok') and not force:
         return True
 
-    import subprocess
-    required = {
-        'python3-gi': 'Python GObject Introspection',
-        'python3-gi-cairo': 'Python GObject Cairo bindings',
-        'python3-cairo': 'Python Cairo library',
-    }
-    
-    # Check for backend-specific dependencies.
-    if IS_WAYLAND:
-        required['python3-dbus'] = 'D-Bus Python bindings (Wayland portal)'
-    else:
-        required['gir1.2-wnck-3.0'] = 'Window detection support'
-        
     missing = []
-    for pkg, desc in required.items():
-        result = subprocess.run(['dpkg', '-s', pkg], capture_output=True)
-        if result.returncode != 0:
-            missing.append((pkg, desc))
+    
+    try:
+        import gi
+    except ImportError:
+        missing.append(("gi", "Python GObject Introspection"))
+        
+    try:
+        import cairo
+    except ImportError:
+        missing.append(("cairo", "Python Cairo library"))
+        
+    try:
+        import gi
+        gi.require_foreign("cairo")
+    except Exception:
+        missing.append(("gi-cairo", "Python GObject Cairo bindings"))
+        
+    if IS_WAYLAND:
+        try:
+            import dbus
+        except ImportError:
+            missing.append(("dbus", "D-Bus Python bindings (Wayland portal)"))
+    else:
+        try:
+            import gi
+            gi.require_version('Wnck', '3.0')
+            from gi.repository import Wnck
+        except (ImportError, ValueError):
+            missing.append(("wnck", "Window detection support"))
 
     if missing:
-        # Show a friendly warning with the exact 'apt' command to fix it.
-        pkg_list = '\n'.join(f'  \u2022 {pkg}  ({desc})' for pkg, desc in missing)
-        pkg_names = ' '.join(pkg for pkg, _ in missing)
-        msg = (_("The following packages are missing:\n\n{}\n\nInstall with:\n  sudo apt install {}")
-               .format(pkg_list, pkg_names))
+        import shutil
+        pkg_manager = "unknown"
+        install_cmd = ""
+        
+        try:
+            if shutil.which("apt"):
+                pkg_manager = "apt"
+                install_cmd = "sudo apt install"
+            elif shutil.which("pacman"):
+                pkg_manager = "pacman"
+                install_cmd = "sudo pacman -S"
+            elif shutil.which("dnf"):
+                pkg_manager = "dnf"
+                install_cmd = "sudo dnf install"
+            elif shutil.which("zypper"):
+                pkg_manager = "zypper"
+                install_cmd = "sudo zypper install"
+        except Exception:
+            pass
+            
+        pkg_map = {
+            "apt": {
+                "gi": "python3-gi", "cairo": "python3-cairo", "gi-cairo": "python3-gi-cairo", 
+                "dbus": "python3-dbus", "wnck": "gir1.2-wnck-3.0"
+            },
+            "pacman": {
+                "gi": "python-gobject", "cairo": "python-cairo", "gi-cairo": "python-gobject", 
+                "dbus": "python-dbus", "wnck": "libwnck3"
+            },
+            "dnf": {
+                "gi": "python3-gobject", "cairo": "python3-cairo", "gi-cairo": "python3-gobject", 
+                "dbus": "python3-dbus", "wnck": "libwnck3"
+            },
+            "zypper": {
+                "gi": "python3-gobject", "cairo": "python3-cairo", "gi-cairo": "python3-gobject", 
+                "dbus": "python3-dbus", "wnck": "typelib-1_0-Wnck-3_0"
+            }
+        }
+        
+        suggested_pkgs = set()
+        pkg_list_str = []
+        
+        lookup_manager = pkg_manager if pkg_manager != "unknown" else "apt"
+        
+        for key, desc in missing:
+            pkg_name = pkg_map[lookup_manager][key]
+            suggested_pkgs.add(pkg_name)
+            pkg_list_str.append(f'  \u2022 {desc}  ({pkg_name})')
+            
+        pkg_names_str = ' '.join(sorted(suggested_pkgs))
+        
+        if pkg_manager == "unknown":
+            msg = (_("The following dependencies are missing:\n\n{}\n\nPlease install them using your system's package manager.\n(Debian/Ubuntu package names shown as reference)")
+                   .format('\n'.join(pkg_list_str)))
+        else:
+            msg = (_("The following dependencies are missing:\n\n{}\n\nPlease install them using your package manager:\n  {} {}")
+                   .format('\n'.join(pkg_list_str), install_cmd, pkg_names_str))
 
         dialog = Gtk.MessageDialog(
             message_type=Gtk.MessageType.WARNING,

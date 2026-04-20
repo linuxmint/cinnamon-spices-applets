@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-19 14:51+0545\n"
+"POT-Creation-Date: 2026-04-20 20:27+0545\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,182 +25,218 @@ msgstr ""
 msgid "This will clear all your annotations and return to the launcher screen."
 msgstr ""
 
-#: main.py:241
+#: main.py:230
 msgid "Mint Screenshot — Wayland Error"
 msgstr ""
 
-#: main.py:324 main.py:1755
+#: main.py:296 main.py:1805
 msgid "Mint Screenshot"
 msgstr ""
 
-#: main.py:328
+#: main.py:300
 msgid "Wayland Mode — Capture via Desktop Portal"
 msgstr ""
 
-#: main.py:328
+#: main.py:300
 msgid "X11 Mode — Instant Pixel Capture"
 msgstr ""
 
-#: main.py:336
+#: main.py:309
+msgid "Hint: Pick 'Screen' in the portal to capture overlapping windows."
+msgstr ""
+
+#: main.py:322
+msgid "Select Monitor:"
+msgstr ""
+
+#: main.py:324
+msgid "All Monitors"
+msgstr ""
+
+#: main.py:326
+msgid "Monitor {}"
+msgstr ""
+
+#: main.py:331
 msgid "📸  Capture Fullscreen"
 msgstr ""
 
-#: main.py:341
+#: main.py:336
 msgid "✂️  Select Area"
 msgstr ""
 
-#: main.py:348
+#: main.py:343
 msgid "⏱  Timed Capture"
 msgstr ""
 
-#: main.py:354
+#: main.py:349
 msgid "sec"
 msgstr ""
 
-#: main.py:365 main.py:1616
+#: main.py:360 main.py:1666
 msgid "Close"
 msgstr ""
 
-#: main.py:1542
+#: main.py:454
+msgid "D-Bus is required for Wayland support."
+msgstr ""
+
+#: main.py:564
+msgid ""
+"Failed to load captured screenshot:\n"
+"{}"
+msgstr ""
+
+#: main.py:1592
 msgid "Pointer"
 msgstr ""
 
-#: main.py:1543
+#: main.py:1593
 msgid "Rectangle"
 msgstr ""
 
-#: main.py:1544
+#: main.py:1594
 msgid "Ellipse"
 msgstr ""
 
-#: main.py:1545
+#: main.py:1595
 msgid "Arrow"
 msgstr ""
 
-#: main.py:1546
+#: main.py:1596
 msgid "Text Tool"
 msgstr ""
 
-#: main.py:1576
+#: main.py:1626
 msgid "Blue"
 msgstr ""
 
-#: main.py:1577
+#: main.py:1627
 msgid "Red"
 msgstr ""
 
-#: main.py:1578
+#: main.py:1628
 msgid "Green"
 msgstr ""
 
-#: main.py:1579
+#: main.py:1629
 msgid "Yellow"
 msgstr ""
 
-#: main.py:1580
+#: main.py:1630
 msgid "White"
 msgstr ""
 
-#: main.py:1598
+#: main.py:1648
 msgid "Size"
 msgstr ""
 
-#: main.py:1611
+#: main.py:1661
 msgid "Reset All"
 msgstr ""
 
-#: main.py:1612
+#: main.py:1662
 msgid "Undo"
 msgstr ""
 
-#: main.py:1613
+#: main.py:1663
 msgid "Copy"
 msgstr ""
 
-#: main.py:1614
+#: main.py:1664
 msgid "Save"
 msgstr ""
 
-#: main.py:1615
+#: main.py:1665
 msgid "Settings"
 msgstr ""
 
-#: main.py:1657
+#: main.py:1707
 msgid "Save Format"
 msgstr ""
 
-#: main.py:1670
+#: main.py:1720
 msgid "Image Quality"
 msgstr ""
 
-#: main.py:1675
+#: main.py:1725
 msgid "Space Saver (Small)"
 msgstr ""
 
-#: main.py:1677
+#: main.py:1727
 msgid "Medium"
 msgstr ""
 
-#: main.py:1679
+#: main.py:1729
 msgid "Original"
 msgstr ""
 
-#: main.py:1690
+#: main.py:1740
 msgid "Save Folder: {}..."
 msgstr ""
 
-#: main.py:1695
+#: main.py:1745
 msgid "Show Toolbar Labels"
 msgstr ""
 
-#: main.py:1703
+#: main.py:1753
 msgid "About Mint Screenshot"
 msgstr ""
 
-#: main.py:1726
+#: main.py:1776
 msgid "Select Default Save Folder"
 msgstr ""
 
-#: main.py:1730
+#: main.py:1780
 msgid "Select"
 msgstr ""
 
-#: main.py:1757
+#: main.py:1807
 msgid ""
 "Screenshot & Annotation Tool for Cinnamon\n"
 "Capture, annotate, and share with ease."
 msgstr ""
 
-#: main.py:1759
+#: main.py:1809
 msgid "Project on GitHub"
 msgstr ""
 
-#: main.py:1776
+#: main.py:1826
 msgid "Open External Website?"
 msgstr ""
 
-#: main.py:1779
+#: main.py:1829
 msgid "This will exit the current screenshot process. Do you want to continue?"
 msgstr ""
 
-#: main.py:1873
+#: main.py:1920
 msgid "Save Screenshot"
 msgstr ""
 
-#: main.py:1949
+#: main.py:2054
 msgid ""
-"The following packages are missing:\n"
+"The following dependencies are missing:\n"
 "\n"
 "{}\n"
 "\n"
-"Install with:\n"
-"  sudo apt install {}"
+"Please install them using your system's package manager.\n"
+"(Debian/Ubuntu package names shown as reference)"
 msgstr ""
 
-#: main.py:1955
+#: main.py:2057
+msgid ""
+"The following dependencies are missing:\n"
+"\n"
+"{}\n"
+"\n"
+"Please install them using your package manager:\n"
+"  {} {}"
+msgstr ""
+
+#: main.py:2063
 msgid "Mint Screenshot \\u2014 Missing Dependencies"
 msgstr ""
 
-#: applet.js:17
+#: applet.js:18
 msgid "Mint Screenshot — Click to capture"
 msgstr ""
