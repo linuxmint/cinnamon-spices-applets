@@ -640,7 +640,7 @@
   "maxVolume": {
     "type": "scale",
     "description": "Maximum volume (%)",
-    "default": 100,
+    "default": 150,
     "min": 30,
     "max": 150,
     "step": 5

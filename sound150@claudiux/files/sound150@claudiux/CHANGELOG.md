@@ -1,3 +1,7 @@
+### v16.3.1~20260420
+  * Max Volume fixed by user takes precedence on over-amplification setting.
+  * Fixes [#8567](https://github.com/linuxmint/cinnamon-spices-applets/issues/8567)
+
 ### v16.3.0~20260419
   * Sound tab in settings: Add button to open the settings of the OSD150@claudiux (v2+) extension when available.
 
