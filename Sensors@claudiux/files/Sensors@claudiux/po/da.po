@@ -2,7 +2,7 @@
 # Copyright (C) 2020 claudiux aka Claude Clerc
 # This file is distributed under the same license as the Sensors@claudiux package.
 # claudiux <claude.clerc@gmail.com>, 2020.
-# Alan Mortensen <alanmortensen.am@gmail.com>, 2020, 2023.
+# Alan Mortensen <over.tackiness223@passinbox.com>, 2020, 2023, 2026.
 #
 msgid ""
 msgstr ""
@@ -10,15 +10,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-03-22 19:51+0100\n"
-"PO-Revision-Date: 2023-12-23 16:27+0100\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"PO-Revision-Date: 2026-04-20 17:27+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
 #. applet.js:232
@@ -27,7 +27,7 @@ msgstr "Sensorovervågning"
 
 #. applet.js:587
 msgid "Suspended"
-msgstr ""
+msgstr "Hviletilstand"
 
 #. applet.js:929 applet.js:971
 msgid "high:"
@@ -75,24 +75,24 @@ msgid "⚙ General"
 msgstr "⚙ Generelt"
 
 #. applet.js:1535
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Temperature sensors"
-msgstr "Temperatursensorer"
+msgstr "%s Temperatursensorer"
 
 #. applet.js:1552
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Fan sensors"
-msgstr "Ventilatorsensorer"
+msgstr "%s Ventilatorsensorer"
 
 #. applet.js:1569
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Voltage sensors"
-msgstr "Spændingssensorer"
+msgstr "%s Spændingssensorer"
 
 #. applet.js:1586
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Intrusion sensors"
-msgstr "Indtrængningssensorer"
+msgstr "%s Indtrængningssensorer"
 
 #. settings-schema.json->xsensors->description
 #. applet.js:1622
@@ -100,9 +100,8 @@ msgid "Run xsensors"
 msgstr "Kør xsensors"
 
 #. applet.js:1631
-#, fuzzy
 msgid "Suspend Sensors"
-msgstr "Kør xsensors"
+msgstr "Suspendér Sensorovervågning"
 
 #. applet.js:1642
 msgid "Reload this applet"
@@ -132,7 +131,7 @@ msgstr ""
 
 #. lib/checkDependencies.js:403
 msgid "Please install these packages:"
-msgstr ""
+msgstr "Installér disse pakker:"
 
 #. lib/checkDependencies.js:407 lib/checkDependencies.js:417
 msgid "Some dependencies are not installed!"
@@ -140,7 +139,7 @@ msgstr "Nogle afhængigheder er ikke installeret!"
 
 #. lib/checkDependencies.js:419
 msgid "Install these packages now"
-msgstr ""
+msgstr "Installér disse pakker nu"
 
 #. lib/util.js:244
 #, javascript-format
@@ -205,17 +204,15 @@ msgstr ""
 
 #. metadata.json->contributors
 msgid "claudiux: Author. JEleniel: support for NVidia video cards."
-msgstr ""
+msgstr "claudiux: forfatter. JEleniel: understøttelse af NVidia-videokort."
 
 #. settings-schema.json->page_Temperatures->title
-#, fuzzy
 msgid "⦿ Temperature"
-msgstr "🌡 Temperatur"
+msgstr "⦿ Temperatur"
 
 #. settings-schema.json->page_Fans->title
-#, fuzzy
 msgid "𖣘 Fan"
-msgstr "🤂 Ventilator"
+msgstr "𖣘 Ventilator"
 
 #. settings-schema.json->page_Voltages->title
 msgid "🗲 Voltage"
@@ -227,11 +224,11 @@ msgstr "⮿ Indtrængen"
 
 #. settings-schema.json->page_Custom->title
 msgid "⛓ Custom"
-msgstr ""
+msgstr "⛓ Brugerdefineret"
 
 #. settings-schema.json->section_SettingsWindow->title
 msgid "This settings window"
-msgstr ""
+msgstr "Dette indstillingsvindue"
 
 #. settings-schema.json->section_Display->title
 #. settings-schema.json->section_tempOptions->title
@@ -243,7 +240,7 @@ msgstr "Valgmuligheder"
 
 #. settings-schema.json->section_Tooltip->title
 msgid "Tooltip"
-msgstr ""
+msgstr "Værktøjstip"
 
 #. settings-schema.json->section_Report->title
 msgid "Sensors values"
@@ -255,7 +252,7 @@ msgstr "Fjern fra panelet visse panelprogrammer, som også bruger sensorer"
 
 #. settings-schema.json->section_dependencies->title
 msgid "Dependencies"
-msgstr ""
+msgstr "Afhængigheder"
 
 #. settings-schema.json->section_tempDisktemp->title
 msgid "For the time being, disk temperature can only be read by root."
@@ -279,7 +276,7 @@ msgstr "Disktemperatursensorer"
 
 #. settings-schema.json->section_helpColors->title
 msgid "Help to select color"
-msgstr ""
+msgstr "Hjælp til valg af farve"
 
 #. settings-schema.json->section_fanSensors->title
 msgid "Fan sensors"
@@ -295,68 +292,71 @@ msgstr "Indtrængningssensorer"
 
 #. settings-schema.json->section_customDisclaimer->title
 msgid "Disclaimer"
-msgstr ""
+msgstr "Ansvarsfraskrivelse"
 
 #. settings-schema.json->section_customSensors->title
-#, fuzzy
 msgid "Custom sensors"
-msgstr "Indtrængningssensorer"
+msgstr "Brugerdefinerede sensorer"
 
 #. settings-schema.json->window_maximizing->description
 msgid "How to set its size"
-msgstr ""
+msgstr "Hvordan størrelsen skal indstilles"
 
 #. settings-schema.json->window_maximizing->options
 msgid "let it be"
-msgstr ""
+msgstr "lad det være"
 
 #. settings-schema.json->window_maximizing->options
 msgid "maximize horizontally"
-msgstr ""
+msgstr "maksimér vandret"
 
 #. settings-schema.json->window_maximizing->options
 msgid "maximize vertically"
-msgstr ""
+msgstr "maksimér lodret"
 
 #. settings-schema.json->window_maximizing->options
 msgid "maximize everything"
-msgstr ""
+msgstr "maksimér alt"
 
 #. settings-schema.json->window_maximizing->options
 msgid "fixed"
-msgstr ""
+msgstr "fast"
 
 #. settings-schema.json->window_maximizing->tooltip
 msgid "Future window openings."
-msgstr ""
+msgstr "Størrelsen på dette vindue, når det fremadrettet åbnes."
 
 #. settings-schema.json->window_width->description
 msgid "Width"
-msgstr ""
+msgstr "Bredde"
 
 #. settings-schema.json->window_width->tooltip
 msgid ""
 "This number must match your screen configuration.\n"
 "Minimum value: 800."
 msgstr ""
+"Dette tal skal svare til din skærmkonfiguration.\n"
+"Mindsteværdi: 800."
 
 #. settings-schema.json->window_height->description
 msgid "Height"
-msgstr ""
+msgstr "Højde"
 
 #. settings-schema.json->window_height->tooltip
 msgid ""
 "This number must match your screen configuration.\n"
 "Minimum value: 100."
 msgstr ""
+"Dette tal skal svare til din skærmkonfiguration.\n"
+"Mindsteværdi: 100."
 
 #. settings-schema.json->window_set_current_size->description
 msgid "Set to the approximate current size and position"
-msgstr ""
+msgstr "Indstil til den omtrentlige aktuelle størrelse og placering"
 
 #. settings-schema.json->window_label->description
 msgid "The exact size and position will depend on Cinnamon."
-msgstr ""
+msgstr "Den nøjagtige størrelse og placering afhænger af Cinnamon."
 
 #. settings-schema.json->interval->options
 msgid "1"
@@ -416,39 +416,39 @@ msgstr "30"
 
 #. settings-schema.json->interval->options
 msgid "1 minute"
-msgstr ""
+msgstr "1 minut"
 
 #. settings-schema.json->interval->options
 msgid "2 minutes"
-msgstr ""
+msgstr "2 minutter"
 
 #. settings-schema.json->interval->options
 msgid "3 minutes"
-msgstr ""
+msgstr "3 minutter"
 
 #. settings-schema.json->interval->options
 msgid "4 minutes"
-msgstr ""
+msgstr "4 minutter"
 
 #. settings-schema.json->interval->options
 msgid "5 minutes"
-msgstr ""
+msgstr "5 minutter"
 
 #. settings-schema.json->interval->options
 msgid "10 minutes"
-msgstr ""
+msgstr "10 minutter"
 
 #. settings-schema.json->interval->options
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minutter"
 
 #. settings-schema.json->interval->options
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minutter"
 
 #. settings-schema.json->interval->options
 msgid "1 hour"
-msgstr ""
+msgstr "1 time"
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
@@ -474,52 +474,47 @@ msgstr "Tegnstørrelse (% af standardstørrelse)"
 
 #. settings-schema.json->horizontal_width->description
 msgid "Display width (pixels) for horizontal panels"
-msgstr ""
+msgstr "Bredden (pixels) i vandrette paneler"
 
 #. settings-schema.json->horizontal_width->tooltip
 msgid "0 means automatic. This value does not include border."
-msgstr ""
+msgstr "0 er automatisk. Værdien inkluderer ikke kanter."
 
 #. settings-schema.json->separator_type->options
 msgid "(none)"
-msgstr ""
+msgstr "(ingen)"
 
 #. settings-schema.json->separator_type->options
 msgid "blank"
-msgstr ""
+msgstr "tom"
 
 #. settings-schema.json->separator_type->options
 msgid "bar"
-msgstr ""
+msgstr "bjælke"
 
 #. settings-schema.json->separator_type->description
 msgid "Separator"
-msgstr ""
+msgstr "Adskiller"
 
 #. settings-schema.json->separator_color->description
-#, fuzzy
 msgid "Separator Color"
-msgstr "Tekstfarve"
+msgstr "Adskillerfarve"
 
 #. settings-schema.json->char_color_customized->description
-#, fuzzy
 msgid "Customize Text Color"
-msgstr "Tekstfarve"
+msgstr "Tilpas tekstfarve"
 
 #. settings-schema.json->char_color->description
 msgid "Text Color"
 msgstr "Tekstfarve"
 
 #. settings-schema.json->crit_color->description
-#, fuzzy
 msgid "Critical Value Color"
-msgstr ""
-"Kritisk\n"
-"(°C)"
+msgstr "Farve for kritisk værdi"
 
 #. settings-schema.json->high_color->description
 msgid "High Value Color"
-msgstr ""
+msgstr "Farve for høj værdi"
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -539,7 +534,7 @@ msgstr "Om ikoner i panelet skal fjernes."
 
 #. settings-schema.json->show_tooltip->description
 msgid "Display a tooltip on mouseover"
-msgstr ""
+msgstr "Vis et værktøjstip, når markøren føres over"
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
@@ -571,7 +566,7 @@ msgstr "Om handlingen \"Genstart panelprogrammet” skal vises i menuen."
 
 #. settings-schema.json->do_not_check_dependencies->description
 msgid "Do not check dependencies"
-msgstr ""
+msgstr "Undersøg ikke afhængigheder"
 
 #. settings-schema.json->do_not_check_dependencies->tooltip
 msgid ""
@@ -579,6 +574,9 @@ msgid ""
 "box. Be careful with dependencies that are necessary for this applet to "
 "function properly."
 msgstr ""
+"Hvis du ikke ønsker at installere visse afhængigheder (f.eks. skrifttyper), "
+"skal du markere dette felt. Vær forsigtig med afhængigheder, der er "
+"nødvendige for, at dette panelprogram kan fungere korrekt."
 
 #. settings-schema.json->make_disktemp_readable_by_user->description
 msgid "Make disk temperature user-readable"
@@ -622,14 +620,14 @@ msgstr ""
 
 #. settings-schema.json->chars_temp->tooltip
 msgid "The first emoji in this list is used for temperature"
-msgstr ""
+msgstr "Den første emoji på listen bruges til temperaturen"
 
 #. settings-schema.json->chars_temp->columns->title
 #. settings-schema.json->chars_fan->columns->title
 #. settings-schema.json->chars_volt->columns->title
 #. settings-schema.json->chars_intrusion->columns->title
 msgid "Emoji"
-msgstr ""
+msgstr "Emoji"
 
 #. settings-schema.json->strictly_positive_temp->description
 #. settings-schema.json->strictly_positive_volt->description
@@ -682,13 +680,15 @@ msgstr ""
 
 #. settings-schema.json->journalize_temp->description
 msgid "Log high and critical temperatures"
-msgstr ""
+msgstr "Registrér høje og kritiske temperaturer"
 
 #. settings-schema.json->journalize_temp->tooltip
 msgid ""
 "When this option is checked, temperatures exceeding the high or critical "
 "limit are recorded in the system journal."
 msgstr ""
+"Når denne indstilling er markeret, registreres temperaturer, der overskrider "
+"den øvre eller kritiske grænse, i systemloggen."
 
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description
@@ -770,12 +770,11 @@ msgstr "Formel"
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->custom_sensors->columns->title
-#, fuzzy
 msgid ""
 "Color\n"
 "in panel"
 msgstr ""
-"Vis\n"
+"Farve\n"
 "i panel"
 
 #. settings-schema.json->temp_sensors->tooltip
@@ -799,9 +798,8 @@ msgstr ""
 "  Eksempel: $*1,1+0,5"
 
 #. settings-schema.json->show_disks_first->description
-#, fuzzy
 msgid "Display the disk temperatures before those of the other sensors"
-msgstr "Vis værdien af de valgte sensorer"
+msgstr "Vis disktemperaturen før de andre sensorer"
 
 #. settings-schema.json->btn_renew_disks_list->description
 msgid "Renew the list of known disks"
@@ -833,12 +831,11 @@ msgstr ""
 
 #. settings-schema.json->chars_fan->tooltip
 msgid "The first emoji in this list is used for fan"
-msgstr ""
+msgstr "Den første emoji på listen bruges til ventilatoren"
 
 #. settings-schema.json->strictly_positive_fan->description
-#, fuzzy
 msgid "Show only positive or zero values"
-msgstr "Vis kun strengt positive værdier"
+msgstr "Vis kun positive værdier eller nulværdier"
 
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
@@ -846,13 +843,15 @@ msgstr "Forkortelse for “rotationer i minuttet”"
 
 #. settings-schema.json->journalize_fan->description
 msgid "Log critical fan speeds"
-msgstr ""
+msgstr "Registrér kritiske ventilatorhastigheder"
 
 #. settings-schema.json->journalize_fan->tooltip
 msgid ""
 "When this option is checked, fan speeds below the critical limit are "
 "recorded in the system log."
 msgstr ""
+"Når denne indstilling er markeret, registreres ventilatorhastigheder under "
+"den kritiske grænse, i systemloggen."
 
 #. settings-schema.json->fan_sensors->columns->title
 msgid ""
@@ -882,7 +881,7 @@ msgstr ""
 
 #. settings-schema.json->chars_volt->tooltip
 msgid "The first emoji in this list is used for voltage"
-msgstr ""
+msgstr "Den første emoji på listen bruges til spænding"
 
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
@@ -902,13 +901,15 @@ msgstr "Kun mV"
 
 #. settings-schema.json->journalize_volt->description
 msgid "Log critical voltages"
-msgstr ""
+msgstr "Registrér kritiske spændinger"
 
 #. settings-schema.json->journalize_volt->tooltip
 msgid ""
 "When this option is checked, voltages below the minimum limit or above the "
 "maximum limit are recorded in the system log."
 msgstr ""
+"Når denne indstilling er markeret, registreres spændinger under den mindste "
+"værdi og over den største værdi, i systemloggen."
 
 #. settings-schema.json->volt_sensors->columns->title
 msgid ""
@@ -956,20 +957,20 @@ msgstr ""
 
 #. settings-schema.json->chars_intrusion->tooltip
 msgid "The first emoji in this list is used for intrusion"
-msgstr ""
+msgstr "Den første emoji på listen bruges til indtrængning"
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"
 msgstr "Vis kun i panelet, når en indtrængen detekteres"
 
 #. settings-schema.json->journalize_intrusion->description
-#, fuzzy
 msgid "Log intrusions"
-msgstr "⮿ Indtrængen"
+msgstr "Registrér indtrængen"
 
 #. settings-schema.json->journalize_intrusion->tooltip
 msgid "When this option is checked, intrusions are recorded in the system log."
 msgstr ""
+"Når denne indstilling er markeret, registreres indtrængen i systemloggen."
 
 #. settings-schema.json->intrusion_sensors->tooltip
 msgid ""
@@ -984,45 +985,50 @@ msgid ""
 "These settings are for advanced users only!\n"
 "Please refer to the README file."
 msgstr ""
+"Disse indstillinger er kun beregnet til erfarne brugere!\n"
+"Se venligst README-filen."
 
 #. settings-schema.json->custom_openREADME->description
 msgid "Open the README file"
-msgstr ""
+msgstr "Åbn README-filen"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid ""
 "File to\n"
 "monitor"
 msgstr ""
+"Fil der skal\n"
+"overvåges"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid ""
 "High\n"
 "value"
-msgstr ""
+msgstr "Høj værdi"
 
 #. settings-schema.json->custom_sensors->columns->title
-#, fuzzy
 msgid ""
 "Critical\n"
 "value"
 msgstr ""
 "Kritisk\n"
-"(°C)"
+"værdi"
 
 #. settings-schema.json->custom_sensors->tooltip
 msgid ""
 "Add a line by custom sensor to set the type, the name and the path of the "
 "file to monitor (/sys/class/...)."
 msgstr ""
+"Tilføj en linje for hver brugerdefineret sensor for at angive typen, navnet "
+"og stien til den fil, der skal overvåges (/sys/class/...)."
 
 #. settings-schema.json->report->description
 #. scripts/show_sensor_values.sh:5
@@ -1039,7 +1045,7 @@ msgstr "Opdatér visning"
 
 #. settings-schema.json->button_color_help->description
 msgid "Open HTML Colors web page"
-msgstr ""
+msgstr "Åbn HTML-farver-websiden"
 
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
