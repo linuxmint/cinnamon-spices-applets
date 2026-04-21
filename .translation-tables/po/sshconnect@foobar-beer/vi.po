@@ -1,0 +1,138 @@
+# SSH CONNECT
+# This file is put in the public domain.
+# foobar-beer, 2019
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sshconnect@foobar-beer 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:58
+msgid "Reload Config"
+msgstr "Tải lại Cấu hình"
+
+#. applet.js:96
+msgid "Connection opened for "
+msgstr "Kết nối đã mở cho "
+
+#. metadata.json->name
+msgid "SSH Connect"
+msgstr "Kết nối SSH"
+
+#. metadata.json->description
+msgid ""
+"Open SSH shell based on applet configuration table with optional "
+"configuration of console profile and flags per each connection."
+msgstr "Mở shell SSH dựa trên bảng cấu hình của tiện ích, với tùy chọn cấu hình profile console và các cờ cho từng kết nối."
+
+#. settings-schema.json->page-connections-list->title
+msgid "SSH Connections"
+msgstr "Kết nối SSH"
+
+#. settings-schema.json->page-terminal-settings->title
+#. settings-schema.json->section-terminal-app->title
+msgid "Terminal Application"
+msgstr "Ứng dụng Terminal"
+
+#. settings-schema.json->section-connections-list->title
+msgid "SSH Connections List"
+msgstr "Danh sách Kết nối SSH"
+
+#. settings-schema.json->section-setup-title-flag->title
+msgid "Terminal Title"
+msgstr "Tiêu đề Terminal"
+
+#. settings-schema.json->section-setup-profile-flag->title
+#. settings-schema.json->connections->columns->title
+msgid "Terminal Profile"
+msgstr "Profile Terminal"
+
+#. settings-schema.json->connections->description
+msgid "Connections List"
+msgstr "Danh sách Kết nối"
+
+#. settings-schema.json->connections->columns->title
+msgid "Connection Name"
+msgstr "Tên Kết nối"
+
+#. settings-schema.json->connections->columns->title
+msgid "Group Name"
+msgstr "Tên Nhóm"
+
+#. settings-schema.json->connections->columns->title
+msgid "Host"
+msgstr "Máy chủ"
+
+#. settings-schema.json->connections->columns->title
+msgid "SSH Flags"
+msgstr "Cờ SSH"
+
+#. settings-schema.json->terminal-exec->description
+msgid "Set terminal application executable"
+msgstr "Đặt ứng dụng Terminal thực thi"
+
+#. settings-schema.json->terminal-exec->tooltip
+msgid ""
+"Configure the command that will be used for launching the SSH connection."
+msgstr "Cấu hình lệnh được sử dụng để mở kết nối SSH."
+
+#. settings-schema.json->exec-flag->description
+msgid "Set terminal application execution flag"
+msgstr "Đặt cờ thực thi ứng dụng Terminal"
+
+#. settings-schema.json->exec-flag->tooltip
+msgid ""
+"Configure the application execution option flag used for passing through the "
+"command that should be executed."
+msgstr "Cấu hình cờ tùy chọn thực thi ứng dụng dùng để truyền lệnh cần thực thi."
+
+#. settings-schema.json->customize-title->description
+msgid "Customize teminal window title"
+msgstr "Tùy chỉnh tiêu đề cửa sổ Terminal"
+
+#. settings-schema.json->customize-title->tooltip
+msgid ""
+"Set this switch to configure the execution option flag for setting window "
+"title."
+msgstr "Bật tùy chọn này để cấu hình cờ thực thi cho việc đặt tiêu đề cửa sổ."
+
+#. settings-schema.json->title-flag->description
+msgid "Set terminal application title flag"
+msgstr "Đặt cờ tiêu đề ứng dụng Terminal"
+
+#. settings-schema.json->title-flag->tooltip
+msgid ""
+"Configure the application execution option flag used for setting window "
+"title."
+msgstr "Cấu hình cờ tùy chọn thực thi ứng dụng để đặt tiêu đề cửa sổ."
+
+#. settings-schema.json->customize-profile->description
+msgid "Customize teminal window profile"
+msgstr "Tùy chỉnh profile cửa sổ Terminal"
+
+#. settings-schema.json->customize-profile->tooltip
+msgid ""
+"Set this switch to configure the execution option flag for setting terminal "
+"window profile."
+msgstr "Bật tùy chọn này để cấu hình cờ thực thi ứng dụng cho profile cửa sổ Terminal."
+
+#. settings-schema.json->profile-flag->description
+msgid "Set Terminal application profile flag"
+msgstr "Đặt cờ profile ứng dụng Terminal"
+
+#. settings-schema.json->profile-flag->tooltip
+msgid ""
+"Configure the application execution option flag used for setting window "
+"profile"
+msgstr "Cấu hình cờ thực thi ứng dụng để đặt profile cửa sổ Terminal"

@@ -1,0 +1,47 @@
+# SESSION MANAGER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# collinss, 2016
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->menuOptions->description
+msgid "Menu Options"
+msgstr ""
+
+#. settings-schema.json->showLockScreen->description
+msgid "Show Lock Screen option"
+msgstr ""
+
+#. settings-schema.json->showSwitchUser->description
+msgid "Show Switch User option"
+msgstr ""
+
+#. settings-schema.json->showGuestSession->description
+msgid "Show Guest Session option"
+msgstr ""
+
+#. settings-schema.json->showLogOff->description
+msgid "Show Log Off option"
+msgstr ""
+
+#. settings-schema.json->showSuspend->description
+msgid "Show Suspend option"
+msgstr ""
+
+#. settings-schema.json->showSleep->description
+msgid "Show Sleep option"
+msgstr ""
+
+#. settings-schema.json->showHibernate->description
+msgid "Show Hibernate option"
+msgstr ""
+
+#. settings-schema.json->showRestart->description
+msgid "Show Restart option"
+msgstr ""
+
+#. settings-schema.json->showShutDown->description
+msgid "Show Shut Down option"
+msgstr ""
