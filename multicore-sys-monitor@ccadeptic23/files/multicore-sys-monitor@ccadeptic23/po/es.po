@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-04-21 19:34+0200\n"
-"PO-Revision-Date: 2026-04-16 21:02-0400\n"
+"PO-Revision-Date: 2026-04-21 14:29-0400\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -669,9 +669,8 @@ msgstr "Habilitar la información sobre herramientas"
 #. 5.6->settings-schema.json->Disk_labelOn->description
 #. 5.6->settings-schema.json->DiskUsage_labelOn->description
 #. 5.6->settings-schema.json->Battery_labelOn->description
-#, fuzzy
 msgid "Display this label"
-msgstr "Mostrar esto"
+msgstr "Mostrar esta etiqueta"
 
 #. 5.6->settings-schema.json->CPU_labelForeground->description
 #. 5.6->settings-schema.json->Mem_labelForeground->description
@@ -680,7 +679,7 @@ msgstr "Mostrar esto"
 #. 5.6->settings-schema.json->DiskUsage_labelForeground->description
 #. 5.6->settings-schema.json->Battery_labelForeground->description
 msgid "Bring this label to the foreground"
-msgstr ""
+msgstr "Pon esta etiqueta en primer plano"
 
 #. 5.6->settings-schema.json->CPU_labelPos->description
 #. 5.6->settings-schema.json->Mem_labelPos->description
@@ -689,7 +688,7 @@ msgstr ""
 #. 5.6->settings-schema.json->DiskUsage_labelPos->description
 #. 5.6->settings-schema.json->Battery_labelPos->description
 msgid "Vertical position offset (pixels)"
-msgstr ""
+msgstr "Desplazamiento vertical (píxeles)"
 
 #. 5.6->settings-schema.json->CPU_labelPos->tooltip
 #. 5.6->settings-schema.json->Mem_labelPos->tooltip
@@ -701,6 +700,8 @@ msgid ""
 "Negative: to the top.\n"
 "Positive: to the bottom."
 msgstr ""
+"Negativo: hacia arriba.\n"
+"Positivo: hacia abajo."
 
 #. 5.6->settings-schema.json->CPU_labelZoom->description
 #. 5.6->settings-schema.json->Mem_labelZoom->description
@@ -708,9 +709,8 @@ msgstr ""
 #. 5.6->settings-schema.json->Disk_labelZoom->description
 #. 5.6->settings-schema.json->DiskUsage_labelZoom->description
 #. 5.6->settings-schema.json->Battery_labelZoom->description
-#, fuzzy
 msgid "Label zoom"
-msgstr "Color de etiqueta"
+msgstr "Agrandar etiqueta"
 
 #. 5.6->settings-schema.json->CPU_labelZoom->options
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
@@ -738,9 +738,8 @@ msgstr "2"
 #. 5.6->settings-schema.json->Disk_labelZoom->options
 #. 5.6->settings-schema.json->DiskUsage_labelZoom->options
 #. 5.6->settings-schema.json->Battery_labelZoom->options
-#, fuzzy
 msgid "3"
-msgstr "32"
+msgstr "3"
 
 #. 5.6->settings-schema.json->CPU_labelZoom->options
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
@@ -759,7 +758,7 @@ msgstr "4"
 #. 5.6->settings-schema.json->DiskUsage_labelCustomized->description
 #. 5.6->settings-schema.json->Battery_labelCustomized->description
 msgid "Customize this label"
-msgstr ""
+msgstr "Personalizar esta etiqueta"
 
 #. 5.6->settings-schema.json->CPU_labelCustom->description
 #. 5.6->settings-schema.json->Mem_labelCustom->description
@@ -768,7 +767,7 @@ msgstr ""
 #. 5.6->settings-schema.json->DiskUsage_labelCustom->description
 #. 5.6->settings-schema.json->Battery_labelCustom->description
 msgid "Custom label"
-msgstr ""
+msgstr "Etiqueta personalizada"
 
 #. 5.6->settings-schema.json->CPU_labelCustom->tooltip
 #. 5.6->settings-schema.json->Mem_labelCustom->tooltip
@@ -777,7 +776,7 @@ msgstr ""
 #. 5.6->settings-schema.json->DiskUsage_labelCustom->tooltip
 #. 5.6->settings-schema.json->Battery_labelCustom->tooltip
 msgid "You can use emojis."
-msgstr ""
+msgstr "Puedes usar emojis."
 
 #. 5.6->settings-schema.json->CPU_squared->description
 #. 5.6->settings-schema.json->Mem_squared->description
