@@ -123,7 +123,23 @@ class GraphVBars {
     this.area = area;
   }
 
-  paint(providerName, currentReadings, area, areaContext, labelsEnabled, width, height, labelColor, bgColor, colorsList) {
+  paint(providerName, currentReadings, area, areaContext, labelProps, width, height, labelColor, bgColor, colorsList) {
+    function drawLabel(labelProps, fontsize_px, width, height) {
+      let fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + labelProps.zoom * fontsize_px + 'px');
+      if (labelProps.on) {
+        let pangolayout = area.create_pango_layout(labelProps.labelStr);
+
+        pangolayout.set_alignment(Pango.Alignment.CENTER);
+        pangolayout.set_width(_width);
+        pangolayout.set_font_description(fontdesc);
+
+        areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
+        areaContext.moveTo(_width / 2, labelProps.pos); //place text
+        PangoCairo.layout_path(areaContext, pangolayout);
+        areaContext.fill();
+      }
+    }
+
     if (providerName == 'SWAP' && this.applet.Mem_swapWidth === 0)
       return;
     if (!labelColor) {
@@ -208,6 +224,13 @@ class GraphVBars {
     areaContext.rectangle(_x_origin, _y_origin, _width, _height);
     areaContext.fill();
 
+    // Label
+    let fontsize_px = Math.trunc(1 / 3 * _height);
+    let fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + labelProps.zoom * fontsize_px + 'px');
+    if (!labelProps.fg)
+      drawLabel(labelProps, fontsize_px, width, _height);
+
+
     // Usage Data Bars
     let vbarWidth = (_width - 6) / currentReadings.length;
     for (let i=0, len=currentReadings.length; i<len; i++) {
@@ -272,23 +295,8 @@ class GraphVBars {
       areaContext.fill();
     }
 
-    // Label
-    let fontsize_px = Math.trunc(1 / 3 * _height);
-    let fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + fontsize_px + 'px');
-    if (labelsEnabled) {
-      let pangolayout = area.create_pango_layout(providerName);
-
-      pangolayout.set_alignment(Pango.Alignment.CENTER);
-      pangolayout.set_width(_width);
-      pangolayout.set_font_description(fontdesc);
-
-      areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
-      areaContext.moveTo(_width / 2, 0); //place text in center of graph area
-      PangoCairo.layout_path(areaContext, pangolayout);
-      areaContext.fill();
-    }
-
     // Temperature
+    fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + fontsize_px + 'px');
     if (providerName != 'SWAP' &&
       this.applet.CPU_showTemp &&
       (!this.applet.CPU_temp_hovering_only || (this.applet.CPU_temp_hovering_only && this.applet.hovered)) &&
@@ -327,17 +335,21 @@ class GraphVBars {
         if (isTop)
           areaContext.moveTo(_width, 0); //place text in top right corner of graph area
         else
-          areaContext.moveTo(_width, 2/3 * _height - 3); //place text in bottom right corner of graph area
+          areaContext.moveTo(_width, 0.6 * _height); //place text in bottom right corner of graph area
       } else {
         if (isTop)
           areaContext.moveTo(3, 0); //place text in top left corner of graph area
         else
-          areaContext.moveTo(3, 2/3 * _height - 3); //place text in bottom left corner of graph area
+          areaContext.moveTo(3, 0.6 * _height); //place text in bottom left corner of graph area
       }
 
       PangoCairo.layout_path(areaContext, pangolayout2);
       areaContext.fill();
     }
+
+    // Label
+    if (labelProps.fg)
+      drawLabel(labelProps, fontsize_px, width, _height);
   }
 
   drawRoundedRectangle(areaContext, x, y, width, height, radius) {
@@ -366,8 +378,23 @@ class GraphVBars {
 }
 
 class GraphVBars100 extends GraphVBars {
-  paint(providerName, currentReadings, area, areaContext, labelsEnabled, width, height, labelColor, bgColor, colorsList) {
-    //~ global.log("providerName: " + providerName);
+  paint(providerName, currentReadings, area, areaContext, labelProps, width, height, labelColor, bgColor, colorsList) {
+    function drawLabel(labelProps, fontsize_px, width, height) {
+      let fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + labelProps.zoom * fontsize_px + 'px');
+      if (labelProps.on) {
+        let pangolayout = area.create_pango_layout(labelProps.labelStr);
+
+        pangolayout.set_alignment(Pango.Alignment.CENTER);
+        pangolayout.set_width(_width);
+        pangolayout.set_font_description(fontdesc);
+
+        areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
+        areaContext.moveTo(_width / 2, labelProps.pos); //place text
+        PangoCairo.layout_path(areaContext, pangolayout);
+        areaContext.fill();
+      }
+    }
+
     const isBAT = providerName === _("BAT");
     if (!labelColor) {
         labelColor = [1, 1, 1, 0.1];
@@ -444,7 +471,14 @@ class GraphVBars100 extends GraphVBars {
     areaContext.rectangle(_x_origin, _y_origin, _width, _height);
     areaContext.fill();
 
+    let fontdesc;
+    let fontsize_px = Math.trunc(1 / 3 * _height);
+    // Label
+    if (!labelProps.fg)
+      drawLabel(labelProps, fontsize_px, width, _height);
+
     // Usage Data Bars
+    fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + fontsize_px + 'px');
     let interBar = 2; // 2 pixels
     let len = currentReadings.length;
     let nbInterBars = len + 1;
@@ -495,22 +529,6 @@ class GraphVBars100 extends GraphVBars {
       this.drawRoundedRectangle(areaContext, vbarOffset, _height - vbarHeight, vbarWidth, vbarHeight, 1.0);
       areaContext.fill();
 
-      // Label
-      let fontsize_px = Math.trunc(1 / 3 * _height);
-      let fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + fontsize_px + 'px');
-      if (labelsEnabled) {
-        let pangolayout = area.create_pango_layout(providerName);
-
-        pangolayout.set_alignment(Pango.Alignment.CENTER);
-        pangolayout.set_width(_width);
-        pangolayout.set_font_description(fontdesc);
-
-        areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
-        areaContext.moveTo(_width / 2, 0); //place text in center of graph area
-        PangoCairo.layout_path(areaContext, pangolayout);
-        areaContext.fill();
-      }
-
       // Show the percentage value on each bar:
       if ((!isBAT && (this.applet.DiskUsage_value_display === "always" || (this.applet.DiskUsage_value_display === "hover" && this.applet.hovered))) ||
           (isBAT && (this.applet.Battery_value_display === "always" || (this.applet.Battery_value_display === "hover" && this.applet.hovered)))
@@ -529,11 +547,15 @@ class GraphVBars100 extends GraphVBars {
         if ((!isBAT && this.applet.DiskUsage_valueCorner === "B") ||
             (isBAT && this.applet.Battery_valueCorner === "B")
         )
-          areaContext.moveTo(vbarOffset + vbarWidth / 2, _height / 2); // bottom.
+          areaContext.moveTo(vbarOffset + vbarWidth / 2, 0.6 * _height); // bottom.
         PangoCairo.layout_path(areaContext, pangolayoutPerCent);
         areaContext.fill();
       }
     }
+
+    // Label
+    if (labelProps.fg)
+      drawLabel(labelProps, fontsize_px, width, _height);
   }
 }
 
@@ -543,7 +565,23 @@ class GraphPieChart {
     this.area = area;
   }
 
-  paint(providerName, currentReadings, area, areaContext, labelsEnabled, width, height, labelColor, bgColor, colorsList) {
+  paint(providerName, currentReadings, area, areaContext, labelProps, width, height, labelColor, bgColor, colorsList) {
+    function drawLabel(labelProps, fontsize_px, width, height) {
+      if (labelProps.on) {
+        let fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + labelProps.zoom * fontsize_px + 'px');
+        let pangolayout = area.create_pango_layout(labelProps.labelStr);
+
+        pangolayout.set_alignment(Pango.Alignment.CENTER);
+        pangolayout.set_width(_width);
+        pangolayout.set_font_description(fontdesc);
+
+        areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
+        areaContext.moveTo(_width / 2, labelProps.pos); //place text
+        PangoCairo.layout_path(areaContext, pangolayout);
+        areaContext.fill();
+      }
+    }
+
     if (!labelColor) {
       labelColor = [1, 1, 1, 0.1];
     } else {
@@ -564,6 +602,10 @@ class GraphPieChart {
     let _height = height;
     let _x_origin = 0;
     let _y_origin = 0;
+
+    let fontsize_px = Math.trunc(1 / 3 * _height);
+    if (!labelProps.fg)
+      drawLabel(labelProps, fontsize_px, width, height);
 
     //Draw Border
     let borderColor;
@@ -675,23 +717,16 @@ class GraphPieChart {
     }
 
     // Label
-    let fontsize_px = Math.trunc(1 / 3 * _height);
-    let fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + fontsize_px + 'px');
-    if (labelsEnabled) {
-      let pangolayout = area.create_pango_layout(providerName);
+    //~ let fontsize_px = Math.trunc(1 / 3 * _height);
+    if (labelProps.fg)
+      drawLabel(labelProps, fontsize_px, width, height);
 
-      pangolayout.set_alignment(Pango.Alignment.CENTER);
-      pangolayout.set_width(_width);
-      pangolayout.set_font_description(fontdesc);
+    let fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + labelProps.zoom * fontsize_px + 'px');
 
-      areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
-      areaContext.moveTo(_width / 2, 0); //place text in center of graph area
-      PangoCairo.layout_path(areaContext, pangolayout);
-      areaContext.fill();
-    }
 
     //Show percentage value in center of pie chart
     //~ global.log("this.applet.Mem_value_display: " + this.applet.Mem_value_display + " - this.applet.hovered: " + this.applet.hovered);
+    fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + fontsize_px + 'px');
     if (this.applet.Mem_value_display === "always" || (this.applet.Mem_value_display === "hover" && this.applet.hovered)) {
       let percentValue = (Math.round(currentReadings[0] * 100)) + "%";
       let pangolayoutPerCent = area.create_pango_layout(percentValue);
@@ -704,7 +739,7 @@ class GraphPieChart {
       if (this.applet.Mem_valueCorner === "T")
         areaContext.moveTo(_width / 2, 1); // top.
       else
-        areaContext.moveTo(_width / 2, _height / 2); // bottom.
+        areaContext.moveTo(_width / 2, 0.6 * _height); // bottom.
       PangoCairo.layout_path(areaContext, pangolayoutPerCent);
       areaContext.fill();
     }
@@ -861,7 +896,24 @@ class GraphLineChart {
     this.dataPointsList = newdatapointslist;
   }
 
-  paint(providerName, currentReadings, area, areaContext, labelsEnabled, width, height, labelColor, bgColor, colorsList=[]) {
+  paint(providerName, currentReadings, area, areaContext, labelProps, width, height, labelColor, bgColor, colorsList=[]) {
+    function drawLabel(labelProps, fontsize_px, width, height) {
+      let fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + labelProps.zoom * fontsize_px + 'px');
+      if (labelProps.on) {
+        let pangolayout = area.create_pango_layout(labelProps.labelStr);
+
+        pangolayout.set_alignment(Pango.Alignment.CENTER);
+        pangolayout.set_width(width);
+        pangolayout.set_font_description(fontdesc);
+
+        areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
+
+        areaContext.moveTo(width / 2, labelProps.pos); //place text in center of graph area
+        PangoCairo.layout_path(areaContext, pangolayout);
+        areaContext.fill();
+      }
+    }
+
     this.refreshData(currentReadings, providerName);
     if (!labelColor) {
       labelColor = [1, 1, 1, 0.1];
@@ -933,6 +985,12 @@ class GraphLineChart {
     areaContext.rectangle(_x_origin, _y_origin, _width, _height);
     areaContext.fill();
 
+    // Label
+    let fontsize_px = Math.trunc(1 / 3 * _height);
+    if (!labelProps.fg) {
+      drawLabel(labelProps, fontsize_px, width, _height)
+    }
+
     //data
     if (this.typeOfGraph.includes("graph")) {
       let numLinesOnChart = 0;
@@ -989,20 +1047,12 @@ class GraphLineChart {
     }
 
     // Label
-    let fontsize_px = Math.trunc(1 / 3 * _height);
-    let fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + fontsize_px + 'px');
-    if (labelsEnabled) {
-      let pangolayout = area.create_pango_layout(providerName);
-
-      pangolayout.set_alignment(Pango.Alignment.CENTER);
-      pangolayout.set_width(width);
-      pangolayout.set_font_description(fontdesc);
-
-      areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
-      areaContext.moveTo(width / 2, 0); //place text in center of graph area
-      PangoCairo.layout_path(areaContext, pangolayout);
-      areaContext.fill();
+    fontsize_px = Math.trunc(1 / 3 * _height);
+    if (labelProps.fg) {
+      drawLabel(labelProps, fontsize_px, width, _height)
     }
+
+    let fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + fontsize_px + 'px');
 
     // Total
     let totalNetOK = providerName == _('NET') && this.applet.Net_total_display;
@@ -1122,12 +1172,12 @@ class GraphLineChart {
           if (isTop)
             areaContext.moveTo(1 * width - downupstr.length * 7.5, 0); //place text in top right corner of graph area
           else
-            areaContext.moveTo(1 * width  - downupstr.length * 7.5, 2/3 * _height - 3); //place text in bottom right corner of graph area
+            areaContext.moveTo(1 * width  - downupstr.length * 7.5, 0.6 * _height); //place text in bottom right corner of graph area
         } else {
           if (isTop)
             areaContext.moveTo(3, 0); //place text in top left corner of graph area
           else
-            areaContext.moveTo(3, 2/3 * _height - 3); //place text in bottom left corner of graph area
+            areaContext.moveTo(3, 0.6 * _height); //place text in bottom left corner of graph area
         }
         PangoCairo.layout_path(areaContext, pangolayout2);
       }

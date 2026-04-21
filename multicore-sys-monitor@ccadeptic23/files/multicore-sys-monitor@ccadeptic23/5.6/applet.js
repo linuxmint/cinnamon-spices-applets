@@ -218,9 +218,29 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("graphSpacing", "graphSpacing");
         this.settings.bind("percentAtEndOfLine", "percentAtEndOfLine");
         this.settings.bind("CPU_labelOn", "CPU_labelOn");
+        this.settings.bind("CPU_labelForeground", "CPU_labelForeground");
         this.settings.bind("Mem_labelOn", "Mem_labelOn");
+        this.settings.bind("Mem_labelForeground", "Mem_labelForeground");
         this.settings.bind("Net_labelOn", "Net_labelOn");
+        this.settings.bind("Net_labelForeground", "Net_labelForeground");
         this.settings.bind("Disk_labelOn", "Disk_labelOn");
+        this.settings.bind("Disk_labelForeground", "Disk_labelForeground");
+        this.settings.bind("CPU_labelPos", "CPU_labelPos");
+        this.settings.bind("CPU_labelZoom", "CPU_labelZoom");
+        this.settings.bind("Mem_labelPos", "Mem_labelPos");
+        this.settings.bind("Mem_labelZoom", "Mem_labelZoom");
+        this.settings.bind("Net_labelPos", "Net_labelPos");
+        this.settings.bind("Net_labelZoom", "Net_labelZoom");
+        this.settings.bind("Disk_labelPos", "Disk_labelPos");
+        this.settings.bind("Disk_labelZoom", "Disk_labelZoom");
+        this.settings.bind("CPU_labelCustomized", "CPU_labelCustomized");
+        this.settings.bind("Mem_labelCustomized", "Mem_labelCustomized");
+        this.settings.bind("Net_labelCustomized", "Net_labelCustomized");
+        this.settings.bind("Disk_labelCustomized", "Disk_labelCustomized");
+        this.settings.bind("CPU_labelCustom", "CPU_labelCustom");
+        this.settings.bind("Mem_labelCustom", "Mem_labelCustom");
+        this.settings.bind("Net_labelCustom", "Net_labelCustom");
+        this.settings.bind("Disk_labelCustom", "Disk_labelCustom");
         this.settings.bind("thickness", "thickness");
         this.settings.bind("ledForCurves", "led");
         this.settings.bind("ledLocation", "ledLocation");
@@ -323,6 +343,11 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("DiskUsage_enabled", "DiskUsage_enabled");
         this.settings.bind("DiskUsage_enabledTooltip", "DiskUsage_enabledTooltip");
         this.settings.bind("DiskUsage_labelOn", "DiskUsage_labelOn");
+        this.settings.bind("DiskUsage_labelForeground", "DiskUsage_labelForeground");
+        this.settings.bind("DiskUsage_labelPos", "DiskUsage_labelPos");
+        this.settings.bind("DiskUsage_labelZoom", "DiskUsage_labelZoom");
+        this.settings.bind("DiskUsage_labelCustomized", "DiskUsage_labelCustomized");
+        this.settings.bind("DiskUsage_labelCustom", "DiskUsage_labelCustom");
         this.settings.bind("DiskUsage_squared", "DiskUsage_squared");
         this.settings.bind("DiskUsage_width", "DiskUsage_width", () => { this.adjust_DiskUsage_width() });
         this.settings.bind("DiskUsage_mergeAll", "DiskUsage_mergeAll");
@@ -335,6 +360,11 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Battery_enabled", "Battery_enabled");
         this.settings.bind("Battery_enabledTooltip", "Battery_enabledTooltip");
         this.settings.bind("Battery_labelOn", "Battery_labelOn");
+        this.settings.bind("Battery_labelForeground", "Battery_labelForeground");
+        this.settings.bind("Battery_labelPos", "Battery_labelPos");
+        this.settings.bind("Battery_labelZoom", "Battery_labelZoom");
+        this.settings.bind("Battery_labelCustomized", "Battery_labelCustomized");
+        this.settings.bind("Battery_labelCustom", "Battery_labelCustom");
         this.settings.bind("Battery_squared", "Battery_squared");
         this.settings.bind("Battery_width", "Battery_width", () => { this.adjust_Battery_width() });
         this.settings.bind("Battery_mergeAll", "Battery_mergeAll");
@@ -658,12 +688,24 @@ class MCSM extends Applet.IconApplet {
                     );
                 }
                 let labelOn = this[`${_properties[i].abbrev}_labelOn`];
+                let labelForeground = this[`${_properties[i].abbrev}_labelForeground`];
+                let labelPos = this[`${_properties[i].abbrev}_labelPos`];
+                let labelZoom = this[`${_properties[i].abbrev}_labelZoom`];
+                let labelCustomized = this[`${_properties[i].abbrev}_labelCustomized`];
+                let labelCustom = this[`${_properties[i].abbrev}_labelCustom`];
+                let labelProps = {
+                    on: this.labelsOn && labelOn,
+                    fg: labelForeground,
+                    pos: labelPos,
+                    zoom: labelZoom,
+                    labelStr: (labelCustomized && labelCustom.length > 0) ? labelCustom : this[_properties[i].provider].name
+                };
                 this[_properties[i].graph].paint(
                     this[_properties[i].provider].name,
                     this[_properties[i].provider].currentReadings,
                     area,
                     areaContext,
-                    this.labelsOn && labelOn,
+                    labelProps,
                     width,
                     this.panelHeight - 2 * global.ui_scale,
                     this.labelColor,
