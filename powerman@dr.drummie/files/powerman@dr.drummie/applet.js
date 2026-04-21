@@ -134,8 +134,9 @@ function deviceKindToString(kind) {
             return _("Bluetooth device");
         default: {
             try {
-                return UPDevice.kind_to_string(kind).replaceAll("-", " ").capitalize();
-            } catch {
+                let raw = UPDevice.kind_to_string(kind).split("-").join(" ");
+                return raw.charAt(0).toUpperCase() + raw.slice(1);
+            } catch (e) {
                 return _("Unknown");
             }
         }
@@ -300,7 +301,7 @@ class BrightnessSlider extends PopupMenu.PopupSliderMenuItem {
             this._proxy.GetStepRemote((step, error) => {
                 if (error != null) {
                     if (error.code != CSD_BACKLIGHT_NOT_SUPPORTED_CODE) {
-                        global.logError(`Could not get backlight step for ${busName}: ${error.message}`);
+                        global.logError(`Could not get backlight step for ${this._busName}: ${error.message}`);
                         return;
                     } else {
                         this._step = 0.05;
@@ -318,8 +319,8 @@ class BrightnessSlider extends PopupMenu.PopupSliderMenuItem {
         this.actor.show();
 
         //get notified
-        this._proxy.connectSignal("Changed", Lang.bind(this, this._getBrightness));
-        this._applet.menu.connect("open-state-changed", Lang.bind(this, this._getBrightnessForcedUpdate));
+        this._changedSignalId = this._proxy.connectSignal("Changed", Lang.bind(this, this._getBrightness));
+        this._menuStateSignalId = this._applet.menu.connect("open-state-changed", Lang.bind(this, this._getBrightnessForcedUpdate));
     }
 
     _sliderChanged(slider, value) {
@@ -356,6 +357,7 @@ class BrightnessSlider extends PopupMenu.PopupSliderMenuItem {
      * Force update brightness from proxy, applying +1% correction for consistency
      */
     _getBrightnessForcedUpdate() {
+        if (!this._proxy) { return; }
         this._proxy.GetPercentageRemote(
             Lang.bind(this, function (b) {
                 let bNum = Number(b); // Parse to number to avoid string concatenation
@@ -385,7 +387,7 @@ class BrightnessSlider extends PopupMenu.PopupSliderMenuItem {
         this.tooltipText = this.label;
         if (value) this.tooltipText += ": " + value + "%";
         this.tooltip.set_text(this.tooltipText);
-        if (this._dragging) this.tooltip.show();
+        if (this._seeking) this.tooltip.show();
 
         // Trigger hook for brightness change in extension framework
         if (this._applet._extensionFramework && value && !this._internalChange) {
@@ -394,7 +396,24 @@ class BrightnessSlider extends PopupMenu.PopupSliderMenuItem {
         this._internalChange = false; // Reset flag after processing
     }
 
+    /**
+     * Disconnect DBus and menu signals to prevent memory leaks on applet removal
+     */
+    destroy() {
+        if (this._proxy && this._changedSignalId) {
+            this._proxy.disconnectSignal(this._changedSignalId);
+            this._changedSignalId = null;
+        }
+        if (this._applet && this._applet.menu && this._menuStateSignalId) {
+            this._applet.menu.disconnect(this._menuStateSignalId);
+            this._menuStateSignalId = null;
+        }
+        this._proxy = null;
+        super.destroy();
+    }
+
     _onScrollEvent(actor, event) {
+        if (!this._proxy) { return; }
         let direction = event.get_scroll_direction();
         if (direction == Clutter.ScrollDirection.DOWN) {
             this._proxy.StepDownRemote(function () {});
@@ -420,9 +439,9 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
 
         // === MINIMAL SETTINGS BINDING ===
         // Only bind essential display settings - automation handled by managers
-        this.settings.bind("labelinfo", "labelinfo", this._devicesChanged);
-        this.settings.bind("debug-logging", "debugLogging", this._onDebugSettingChanged);
-        this.settings.bind("showmulti", "showmulti", this._devicesChanged);
+        this.settings.bind("labelinfo", "labelinfo", Lang.bind(this, this._devicesChanged));
+        this.settings.bind("debug-logging", "debugLogging", Lang.bind(this, this._onDebugSettingChanged));
+        this.settings.bind("showmulti", "showmulti", Lang.bind(this, this._devicesChanged));
 
         // Initialize logging
         this._initializeLogging();
@@ -508,8 +527,8 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
         this.menu.addSettingsAction(_("Power Settings"), "power");
 
         // Event handlers
-        this.actor.connect("scroll-event", Lang.bind(this, this._onScrollEvent));
-        global.settings.connect("changed::" + PANEL_EDIT_MODE_KEY, Lang.bind(this, this._onPanelEditModeChanged));
+        this._scrollEventId = this.actor.connect("scroll-event", Lang.bind(this, this._onScrollEvent));
+        this._panelEditModeSignalId = global.settings.connect("changed::" + PANEL_EDIT_MODE_KEY, Lang.bind(this, this._onPanelEditModeChanged));
 
         // === DELAYED D-BUS CONNECTION SETUP ===
         // Add timeout to allow CSD Power service to start before attempting connection
@@ -609,9 +628,9 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
                         }
 
                         this._proxy = proxy;
-                        this._proxy.connect("g-properties-changed", Lang.bind(this, this._devicesChanged));
+                        this._proxyChangedId = this._proxy.connect("g-properties-changed", Lang.bind(this, this._devicesChanged));
 
-                        global.settings.connect(
+                        this._deviceAliasesSignalId = global.settings.connect(
                             "changed::device-aliases",
                             Lang.bind(this, this._on_device_aliases_changed)
                         );
@@ -711,7 +730,7 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
             // Patch original applet to work with framework
             this._extensionFramework.patchOriginalApplet();
 
-            this._log("Extension framework initialized with automation support");
+            this._debugLog("Extension framework initialized with automation support");
         } catch (e) {
             global.logError("Failed to initialize extension framework: " + e.message);
         }
@@ -736,7 +755,9 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
 
     _onButtonPressEvent(actor, event) {
         if (event.get_button() === 2) {
-            this.keyboard._proxy.ToggleRemote(function () {});
+            if (this.keyboard && this.keyboard._proxy) {
+                this.keyboard._proxy.ToggleRemote(function () {});
+            }
         }
         return Applet.Applet.prototype._onButtonPressEvent.call(this, actor, event);
     }
@@ -748,11 +769,17 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
     _onScrollEvent(actor, event) {
         let direction = event.get_scroll_direction();
         if (direction == Clutter.ScrollDirection.UP) {
-            this.brightness._proxy.StepUpRemote(function () {});
+            if (this.brightness && this.brightness._proxy) {
+                this.brightness._proxy.StepUpRemote(function () {});
+            }
         } else if (direction == Clutter.ScrollDirection.DOWN) {
-            this.brightness._proxy.StepDownRemote(function () {});
+            if (this.brightness && this.brightness._proxy) {
+                this.brightness._proxy.StepDownRemote(function () {});
+            }
         }
-        this.brightness._getBrightnessForcedUpdate();
+        if (this.brightness && this.brightness._proxy) {
+            this.brightness._getBrightnessForcedUpdate();
+        }
     }
 
     on_panel_height_changed() {
@@ -1213,8 +1240,25 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
 
         // Original cleanup
         Main.systrayManager.unregisterTrayIconReplacement(this.metadata.uuid);
+        if (this._panelEditModeSignalId) {
+            global.settings.disconnect(this._panelEditModeSignalId);
+            this._panelEditModeSignalId = 0;
+        }
+        if (this._deviceAliasesSignalId) {
+            global.settings.disconnect(this._deviceAliasesSignalId);
+            this._deviceAliasesSignalId = 0;
+        }
+        if (this._proxyChangedId && this._proxy) {
+            this._proxy.disconnect(this._proxyChangedId);
+            this._proxyChangedId = 0;
+        }
         if (this._proxyId && this._profilesProxy) {
             this._profilesProxy.disconnect(this._proxyId);
+            this._proxyId = 0;
+        }
+        if (this._scrollEventId) {
+            this.actor.disconnect(this._scrollEventId);
+            this._scrollEventId = 0;
         }
         this._proxy = null;
         this._profilesProxy = null;

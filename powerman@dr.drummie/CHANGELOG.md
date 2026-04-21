@@ -6,6 +6,12 @@
 - If dimming is enabled and screen is dimmed (user is idle), power profile would be switched immediately, but brightness will be switched after user become active again (to avoid screen brightness dimming bugs).
 - If you have dimming enabled for i.e. only battery mode, after auto switching from AC to battery, dimming would not be active until some user activity (couldn't find a way around that issue).
 
+## [1.9.6]
+
+- Fixed signal leaks on applet removal and brightness slider cleanup.
+- Fixed auto-hide logic for desktop and VM systems (no battery detected).
+- Various internal stability fixes.
+
 ## [1.9.5]
 
 - Extended default popup with switches for quickly enable / disable automation.

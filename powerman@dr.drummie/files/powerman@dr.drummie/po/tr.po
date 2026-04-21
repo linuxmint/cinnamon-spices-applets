@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: powerman@dr.drummie 1.0\n"
+"Project-Id-Version: powerman@dr.drummie 1.9.6\n"
 "Report-Msgid-Bugs-To: https://github.com/drdrummie/powerman-dr.drummie\n"
-"POT-Creation-Date: 2025-09-21 18:21+0200\n"
+"POT-Creation-Date: 2026-04-20 19:15+0200\n"
 "PO-Revision-Date: 2025-09-06 22:34+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -49,7 +49,7 @@ msgstr "Düşük pil"
 msgid "Critically low battery"
 msgstr "Kritik düşük pil"
 
-#: src/applet.js:73 src/applet.js:139
+#: src/applet.js:73 src/applet.js:140
 msgid "Unknown"
 msgstr "Bilinmiyor"
 
@@ -166,154 +166,154 @@ msgstr "Oyuncak"
 msgid "Bluetooth device"
 msgstr "Ses cihazı"
 
-#: src/applet.js:447 src/applet.js:1133
+#: src/applet.js:466 src/applet.js:1160
 msgid "Brightness"
 msgstr "Parlaklık"
 
-#: src/applet.js:448 src/applet.js:1138
+#: src/applet.js:467 src/applet.js:1165
 msgid "Keyboard backlight"
 msgstr "Klavye arka ışığı"
 
-#: src/applet.js:461
+#: src/applet.js:480
 msgid "Brightness Automation"
 msgstr "Parlaklık Otomasyonu"
 
-#: src/applet.js:473
+#: src/applet.js:492
 msgid "Power Profile Automation"
 msgstr "Güç Profili Otomasyonu"
 
-#: src/applet.js:499
+#: src/applet.js:518
 msgid "Automation Settings"
 msgstr "Otomasyon Ayarları"
 
-#: src/applet.js:508
+#: src/applet.js:527
 msgid "Power Settings"
 msgstr "Güç Ayarları"
 
-#: src/applet.js:775
+#: src/applet.js:802
 msgid "Charging"
 msgstr "Şarj oluyor"
 
-#: src/applet.js:779
+#: src/applet.js:806
 #, javascript-format
 msgid "Charging - %d hour until fully charged"
 msgid_plural "Charging - %d hours until fully charged"
 msgstr[0] "Şarj oluyor - %d saat sonra tamamen şarj olacak"
 msgstr[1] "Şarj oluyor - %d saat sonra tamamen şarj olacak"
 
-#: src/applet.js:784
+#: src/applet.js:811
 #, javascript-format
 msgid "Charging - %d %s %d %s until fully charged"
 msgstr "Şarj oluyor - %d %s %d %s sonra tamamen şarj olacak"
 
-#: src/applet.js:787 src/applet.js:815
+#: src/applet.js:814 src/applet.js:842
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "saat"
 msgstr[1] "saat"
 
-#: src/applet.js:789 src/applet.js:817
+#: src/applet.js:816 src/applet.js:844
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "dakika"
 msgstr[1] "dakika"
 
-#: src/applet.js:794
+#: src/applet.js:821
 #, javascript-format
 msgid "Charging - %d minute until fully charged"
 msgid_plural "Charging - %d minutes until fully charged"
 msgstr[0] "Şarj oluyor - %d dakika sonra tamamen şarj olacak"
 msgstr[1] "Şarj oluyor - %d dakika sonra tamamen şarj olacak"
 
-#: src/applet.js:800
+#: src/applet.js:827
 msgid "Fully charged"
 msgstr "Tamamen şarj oldu"
 
-#: src/applet.js:803
+#: src/applet.js:830
 msgid "Using battery power"
 msgstr "Pil gücü kullanılıyor"
 
-#: src/applet.js:807
+#: src/applet.js:834
 #, javascript-format
 msgid "Using battery power - %d hour remaining"
 msgid_plural "Using battery power - %d hours remaining"
 msgstr[0] "Pil gücü kullanılıyor - %d saat kaldı"
 msgstr[1] "Pil gücü kullanılıyor - %d saat kaldı"
 
-#: src/applet.js:812
+#: src/applet.js:839
 #, javascript-format
 msgid "Using battery power - %d %s %d %s remaining"
 msgstr "Pil gücü kullanılıyor - %d %s %d %s kaldı"
 
-#: src/applet.js:822
+#: src/applet.js:849
 #, javascript-format
 msgid "Using battery power - %d minute remaining"
 msgid_plural "Using battery power - %d minutes remaining"
 msgstr[0] "Pil gücü kullanılıyor - %d dakika kaldı"
 msgstr[1] "Pil gücü kullanılıyor - %d dakika kaldı"
 
-#: src/applet.js:828
+#: src/applet.js:855
 msgid "Fully discharged"
 msgstr "Tamamen boşaldı"
 
-#: src/applet.js:830
+#: src/applet.js:857
 msgid "Not charging"
 msgstr "Şarj olmuyor"
 
-#: src/applet.js:848 src/applet.js:858 src/applet.js:1091 src/applet.js:1101
+#: src/applet.js:875 src/applet.js:885 src/applet.js:1118 src/applet.js:1128
 #, javascript-format
 msgctxt "time of battery remaining"
 msgid "%d:%02d"
 msgstr "%d:%02d"
 
-#: src/applet.js:850 src/applet.js:856 src/applet.js:1093 src/applet.js:1099
+#: src/applet.js:877 src/applet.js:883 src/applet.js:1120 src/applet.js:1126
 #, javascript-format
 msgctxt "percent of battery remaining"
 msgid "%d%%"
 msgstr "%d%%"
 
-#: src/powerman-framework.js:964
+#: src/powerman-framework.js:987
 msgid "Critical Battery"
 msgstr "Kritik Pil"
 
-#: src/powerman-framework.js:965
+#: src/powerman-framework.js:988
 #, javascript-format
 msgid "Battery %s critically low"
 msgstr "Pil %s kritik düşük"
 
-#: src/powerman-framework.js:970
+#: src/powerman-framework.js:993
 msgid "Low Battery"
 msgstr "Düşük Pil"
 
-#: src/powerman-framework.js:971
+#: src/powerman-framework.js:994
 #, javascript-format
 msgid "Battery %s low"
 msgstr "Pil %s düşük"
 
-#: src/powerman-framework.js:1054 src/powerman-framework.js:1065
+#: src/powerman-framework.js:1077 src/powerman-framework.js:1088
 #, javascript-format
 msgid "brightness %d%%"
 msgstr "parlaklık %d%%"
 
-#: src/powerman-framework.js:1250
+#: src/powerman-framework.js:1273
 #, javascript-format
 msgid "power profile %s"
 msgstr "güç profili %s"
 
-#: src/powerman-framework.js:1368
+#: src/powerman-framework.js:1391
 #, javascript-format
 msgid "power-saver mode (battery low: %d%%)"
 msgstr "güç tasarrufu modu (pil düşük: %d%%)"
 
-#: src/powerman-framework.js:1488
+#: src/powerman-framework.js:1511
 msgid "AC power: "
 msgstr "AC gücü: "
 
-#: src/powerman-framework.js:1488
+#: src/powerman-framework.js:1511
 msgid "Battery power: "
 msgstr "Pil gücü: "
 
-#: src/powerman-framework.js:1513
+#: src/powerman-framework.js:1536
 msgid "Power Automation"
 msgstr "Güç Otomasyonu"
 

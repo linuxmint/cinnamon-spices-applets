@@ -74,6 +74,7 @@ PowerAppletExtensionFramework.prototype = {
      */
     _initializeSettings: function () {
         if (!this._originalApplet.settings) return;
+        this._boundSettingKeys = [];
 
         // Bind all automation settings with IN direction for code modifications
         const automationSettings = [
@@ -118,6 +119,7 @@ PowerAppletExtensionFramework.prototype = {
                     },
                     Gio.SettingsBindFlags.GET
                 );
+                this._boundSettingKeys.push(key);
             } catch (e) {
                 this._log(`Error binding setting ${key}: ${e.message}`);
             }
@@ -136,7 +138,7 @@ PowerAppletExtensionFramework.prototype = {
                 manager.initialize();
             }
 
-            this._log(`Manager '${name}' registered successfully`);
+            this._debugLog(`Manager '${name}' registered successfully`);
             return true;
         } catch (e) {
             global.logError(`Failed to register manager '${name}': ${e.message}`);
@@ -188,7 +190,7 @@ PowerAppletExtensionFramework.prototype = {
             );
             for (let callback of this._hooks.get(hookName)) {
                 try {
-                    callback.apply(null, args);
+                    callback(...args);
                 } catch (e) {
                     this._log(`Hook '${hookName}' error: ${e.message}`);
                 }
@@ -230,20 +232,21 @@ PowerAppletExtensionFramework.prototype = {
      */
     patchOriginalApplet: function () {
         let originalDevicesChanged = this._originalApplet._devicesChanged;
+        this._originalDevicesChanged = originalDevicesChanged;
 
         this._originalApplet._devicesChanged = Lang.bind(this._originalApplet, function () {
             // Trigger pre-scan hook before calling original
-            this._extensionFramework.triggerHook("device-scan-pre");
+            if (this._extensionFramework) {
+                this._extensionFramework.triggerHook("device-scan-pre");
+            }
 
-            // Call original _devicesChanged
-            originalDevicesChanged.apply(this._originalApplet, arguments);
-
-            // Trigger post-scan hook after original completes (devices populated)
-            this._extensionFramework.triggerHook("device-scan-post", this._originalApplet._devices);
+            // Call original _devicesChanged (async — device-scan-post is triggered
+            // inside its GetDevicesRemote callback once _devices is populated)
+            originalDevicesChanged.apply(this, arguments);
         });
 
         this._originalApplet._extensionFramework = this;
-        this._log("Original applet patched successfully");
+        this._debugLog("Original applet patched successfully");
     },
 
     // Logging functions
@@ -267,6 +270,26 @@ PowerAppletExtensionFramework.prototype = {
      * Cleanup
      */
     destroy: function () {
+        // Restore original _devicesChanged to prevent stale framework reference crashes
+        if (this._originalDevicesChanged && this._originalApplet) {
+            this._originalApplet._devicesChanged = this._originalDevicesChanged;
+            this._originalDevicesChanged = null;
+        }
+
+        // Unbind all tracked settings to remove dangling callbacks
+        if (this._boundSettingKeys && this._originalApplet && this._originalApplet.settings) {
+            for (let key of this._boundSettingKeys) {
+                try {
+                    if (typeof this._originalApplet.settings.unbindProperty === "function") {
+                        this._originalApplet.settings.unbindProperty(key);
+                    }
+                } catch (e) {
+                    this._log(`Error unbinding setting ${key}: ${e.message}`);
+                }
+            }
+            this._boundSettingKeys = [];
+        }
+
         for (let [name, manager] of this._managers) {
             if (manager.destroy) {
                 try {
@@ -395,7 +418,7 @@ class IdleManager extends BaseManager {
 
         // Listen for setting changes that affect idle monitoring
         this.addHook("setting-changed", this._onSettingChanged);
-        this.log("Idle Manager initialized");
+        this.debug("Idle Manager initialized");
     }
 
     /**
@@ -681,7 +704,7 @@ class BatteryManager extends BaseManager {
         this._vendorWorkarounds = this._detectVendorWorkarounds();
 
         this.addHook("device-scan-post", this._onDeviceUpdate);
-        this.log("Battery Manager initialized");
+        this.debug("Battery Manager initialized");
     }
 
     /**
@@ -692,21 +715,24 @@ class BatteryManager extends BaseManager {
 
         try {
             let dmiFile = Gio.File.new_for_path("/sys/devices/virtual/dmi/id/sys_vendor");
-            if (dmiFile.query_exists(null)) {
-                let [success, contents] = dmiFile.load_contents(null);
-                if (success) {
-                    let vendor = contents.toString().trim().toLowerCase();
-                    workarounds.vendor = vendor;
+            let [success, contents] = dmiFile.load_contents(null);
+            if (success) {
+                let vendor = contents.toString().trim().toLowerCase();
+                workarounds.vendor = vendor;
 
-                    // Vendor-specific workarounds and user preference for battery-based AC detection
-                    if (this.getSetting("prefer-battery-ac-detection")) {
-                        workarounds.ignoreLinePower = true;
-                        this.debug("Applied battery-based AC detection workarounds");
-                    }
+                // Vendor-specific workarounds and user preference for battery-based AC detection
+                if (this.getSetting("prefer-battery-ac-detection")) {
+                    workarounds.ignoreLinePower = true;
+                    this.debug("Applied battery-based AC detection workarounds");
                 }
             }
         } catch (e) {
-            this.debug(`Vendor detection failed: ${e.message}`);
+            // Silently ignore missing or inaccessible DMI files (normal on some systems)
+            if (!(e instanceof GLib.Error) ||
+                (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND) &&
+                 !e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.PERMISSION_DENIED))) {
+                this.debug(`Vendor detection failed: ${e.message}`);
+            }
         }
 
         return workarounds;
@@ -1020,7 +1046,7 @@ class BrightnessManager extends BaseManager {
 
         // Initialize cached brightness
         this._updateBrightnessFromProxy();
-        this.log("Brightness Manager initialized");
+        this.debug("Brightness Manager initialized");
     }
 
     /**
@@ -1219,7 +1245,7 @@ class PowerAutomationManager extends BaseManager {
         // Add battery saver trigger hook
         this.addHook("battery-saver-trigger", this._onBatterySaverTrigger);
 
-        this.log("Power Automation Manager initialized");
+        this.debug("Power Automation Manager initialized");
     }
 
     /**
@@ -1438,7 +1464,7 @@ class SystemManager extends BaseManager {
         this.addHook("setting-changed", this._onSettingChanged);
         this.addHook("automation-action", this._onAutomationAction);
 
-        this.log("System Manager initialized");
+        this.debug("System Manager initialized");
     }
 
     /**
