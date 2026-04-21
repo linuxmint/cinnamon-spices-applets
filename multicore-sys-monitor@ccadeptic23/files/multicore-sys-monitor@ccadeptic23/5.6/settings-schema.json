@@ -26,6 +26,7 @@
       "title": "CPU",
       "sections": [
         "sectionCPUOptions",
+        "sectionCPULabel",
         "sectionCPUColors",
         "sectionCPUColorsByActivity",
         "sectionCPUTemperature"
@@ -36,6 +37,7 @@
       "title": "Memory",
       "sections": [
         "sectionMemoryOptions",
+        "sectionMemoryLabel",
         "sectionMemoryColors"
       ]
     },
@@ -44,6 +46,7 @@
       "title": "Network",
       "sections": [
         "sectionNetworkOptions",
+        "sectionNetworkLabel",
         "sectionNetworkScaling",
         "sectionNetworkTooltip",
         "sectionNetworkDevices",
@@ -55,6 +58,7 @@
       "title": "Disk IO",
       "sections": [
         "sectionDiskOptions",
+        "sectionDiskLabel",
         "sectionDiskScaling",
         "sectionDiskTooltip",
         "sectionDiskDevices",
@@ -66,6 +70,7 @@
       "title": "Disk Usage",
       "sections": [
         "sectionDiskUsageOptions",
+        "sectionDiskUsageLabel",
         "sectionDiskUsageColors",
         "sectionDiskUsagePaths"
       ]
@@ -75,6 +80,7 @@
       "title": "Battery",
       "sections": [
         "sectionBatteryOptions",
+        "sectionBatteryLabel",
         "sectionBatteryColors",
         "sectionBatteryPaths"
       ]
@@ -136,7 +142,6 @@
       "keys": [
         "CPU_enabled",
         "CPU_enabledTooltip",
-        "CPU_labelOn",
         "CPU_squared",
         "CPU_width",
         "CPU_mergeAll",
@@ -162,6 +167,19 @@
         "CPU_tempColorCrit",
         "CPU_tempCorner"
       ]
+    },
+    "sectionCPULabel": {
+      "type": "section",
+      "title": "Label",
+      "keys": [
+        "CPU_labelOn",
+        "CPU_labelForeground",
+        "CPU_labelPos",
+        "CPU_labelZoom",
+        "CPU_labelCustomized",
+        "CPU_labelCustom"
+      ],
+      "dependency": "labelsOn"
     },
     "sectionCPUColors": {
       "type": "section",
@@ -196,7 +214,6 @@
         "Mem_enabledBufferCacheSharedTooltip",
         "Swap_enabled",
         "Swap_enabledTooltip",
-        "Mem_labelOn",
         "Mem_method",
         "Mem_squared",
         "Mem_width",
@@ -206,6 +223,19 @@
         "Mem_value_display",
         "Mem_valueCorner"
       ]
+    },
+    "sectionMemoryLabel": {
+      "type": "section",
+      "title": "Label",
+      "keys": [
+        "Mem_labelOn",
+        "Mem_labelForeground",
+        "Mem_labelPos",
+        "Mem_labelZoom",
+        "Mem_labelCustomized",
+        "Mem_labelCustom"
+      ],
+      "dependency": "labelsOn"
     },
     "sectionMemoryColors": {
       "type": "section",
@@ -224,12 +254,24 @@
       "title": "Options",
       "keys": [
         "Net_enabled",
-        "Net_labelOn",
         "Net_squared",
         "Net_width",
         "Net_mergeAll",
         "Net_typeOfGraph"
       ]
+    },
+    "sectionNetworkLabel": {
+      "type": "section",
+      "title": "Label",
+      "keys": [
+        "Net_labelOn",
+        "Net_labelForeground",
+        "Net_labelPos",
+        "Net_labelZoom",
+        "Net_labelCustomized",
+        "Net_labelCustom"
+      ],
+      "dependency": "labelsOn"
     },
     "sectionNetworkScaling": {
       "type": "section",
@@ -274,12 +316,24 @@
       "keys": [
         "Disk_enabled",
         "Disk_enabledTooltip",
-        "Disk_labelOn",
         "Disk_squared",
         "Disk_width",
         "Disk_mergeAll",
         "Disk_typeOfGraph"
       ]
+    },
+    "sectionDiskLabel": {
+      "type": "section",
+      "title": "Label",
+      "keys": [
+        "Disk_labelOn",
+        "Disk_labelForeground",
+        "Disk_labelPos",
+        "Disk_labelZoom",
+        "Disk_labelCustomized",
+        "Disk_labelCustom"
+      ],
+      "dependency": "labelsOn"
     },
     "sectionDiskScaling": {
       "type": "section",
@@ -313,13 +367,25 @@
       "keys": [
         "DiskUsage_enabled",
         "DiskUsage_enabledTooltip",
-        "DiskUsage_labelOn",
         "DiskUsage_squared",
         "DiskUsage_width",
         "DiskUsage_mergeAll",
         "DiskUsage_value_display",
         "DiskUsage_valueCorner"
       ]
+    },
+    "sectionDiskUsageLabel": {
+      "type": "section",
+      "title": "Label",
+      "keys": [
+        "DiskUsage_labelOn",
+        "DiskUsage_labelForeground",
+        "DiskUsage_labelPos",
+        "DiskUsage_labelZoom",
+        "DiskUsage_labelCustomized",
+        "DiskUsage_labelCustom"
+      ],
+    "dependency": "labelsOn"
     },
     "sectionDiskUsageColors": {
       "type": "section",
@@ -353,13 +419,25 @@
       "keys": [
         "Battery_enabled",
         "Battery_enabledTooltip",
-        "Battery_labelOn",
         "Battery_squared",
         "Battery_width",
         "Battery_mergeAll",
         "Battery_value_display",
         "Battery_valueCorner"
       ]
+    },
+    "sectionBatteryLabel": {
+      "type": "section",
+      "title": "Label",
+      "keys": [
+        "Battery_labelOn",
+        "Battery_labelForeground",
+        "Battery_labelPos",
+        "Battery_labelZoom",
+        "Battery_labelCustomized",
+        "Battery_labelCustom"
+      ],
+    "dependency": "labelsOn"
     },
     "sectionBatteryColors": {
       "type": "section",
@@ -598,8 +676,43 @@
   "CPU_labelOn": {
     "type": "switch",
     "default": true,
-    "description": "Label",
-    "dependency": "labelsOn"
+    "description": "Display this label"
+  },
+  "CPU_labelForeground": {
+    "type": "switch",
+    "default": true,
+    "description": "Bring this label to the foreground"
+  },
+  "CPU_labelPos": {
+    "type": "scale",
+    "default": 0,
+    "description": "Vertical position offset (pixels)",
+    "min": -20,
+    "max": 20,
+    "step": 1,
+    "tooltip": "Negative: to the top.\nPositive: to the bottom."
+  },
+  "CPU_labelZoom": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Label zoom",
+    "options": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4
+    }
+  },
+  "CPU_labelCustomized": {
+    "type": "switch",
+    "default": false,
+    "description": "Customize this label"
+  },
+  "CPU_labelCustom": {
+    "type": "entry",
+    "default": "𝄜",
+    "description": "Custom label",
+    "tooltip": "You can use emojis."
   },
   "CPU_squared": {
     "type": "switch",
@@ -802,8 +915,43 @@
   "Mem_labelOn": {
     "type": "switch",
     "default": true,
-    "description": "Label",
-    "dependency": "labelsOn"
+    "description": "Display this label"
+  },
+  "Mem_labelForeground": {
+    "type": "switch",
+    "default": true,
+    "description": "Bring this label to the foreground"
+  },
+  "Mem_labelPos": {
+    "type": "scale",
+    "default": 0,
+    "description": "Vertical position offset (pixels)",
+    "min": -20,
+    "max": 20,
+    "step": 1,
+    "tooltip": "Negative: to the top.\nPositive: to the bottom."
+  },
+  "Mem_labelZoom": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Label zoom",
+    "options": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4
+    }
+  },
+  "Mem_labelCustomized": {
+    "type": "switch",
+    "default": false,
+    "description": "Customize this label"
+  },
+  "Mem_labelCustom": {
+    "type": "entry",
+    "default": "𖡎",
+    "description": "Custom label",
+    "tooltip": "You can use emojis."
   },
   "Mem_chartType": {
     "type": "combobox",
@@ -918,8 +1066,43 @@
   "Net_labelOn": {
     "type": "switch",
     "default": true,
-    "description": "Label",
-    "dependency": "labelsOn"
+    "description": "Display this label"
+  },
+  "Net_labelForeground": {
+    "type": "switch",
+    "default": true,
+    "description": "Bring this label to the foreground"
+  },
+  "Net_labelPos": {
+    "type": "scale",
+    "default": 0,
+    "description": "Vertical position offset (pixels)",
+    "min": -20,
+    "max": 20,
+    "step": 1,
+    "tooltip": "Negative: to the top.\nPositive: to the bottom."
+  },
+  "Net_labelZoom": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Label zoom",
+    "options": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4
+    }
+  },
+  "Net_labelCustomized": {
+    "type": "switch",
+    "default": false,
+    "description": "Customize this label"
+  },
+  "Net_labelCustom": {
+    "type": "entry",
+    "default": "🖧",
+    "description": "Custom label",
+    "tooltip": "You can use emojis."
   },
   "Net_squared": {
     "type": "switch",
@@ -1143,8 +1326,43 @@
   "Disk_labelOn": {
     "type": "switch",
     "default": true,
-    "description": "Label",
-    "dependency": "labelsOn"
+    "description": "Display this label"
+  },
+  "Disk_labelForeground": {
+    "type": "switch",
+    "default": true,
+    "description": "Bring this label to the foreground"
+  },
+  "Disk_labelPos": {
+    "type": "scale",
+    "default": 0,
+    "description": "Vertical position offset (pixels)",
+    "min": -20,
+    "max": 20,
+    "step": 1,
+    "tooltip": "Negative: to the top.\nPositive: to the bottom."
+  },
+  "Disk_labelZoom": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Label zoom",
+    "options": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4
+    }
+  },
+  "Disk_labelCustomized": {
+    "type": "switch",
+    "default": false,
+    "description": "Customize this label"
+  },
+  "Disk_labelCustom": {
+    "type": "entry",
+    "default": "⛁",
+    "description": "Custom label",
+    "tooltip": "You can use emojis."
   },
   "Disk_squared": {
     "type": "switch",
@@ -1371,8 +1589,43 @@
   "DiskUsage_labelOn": {
     "type": "switch",
     "default": true,
-    "description": "Label",
-    "dependency": "labelsOn"
+    "description": "Display this label"
+  },
+  "DiskUsage_labelForeground": {
+    "type": "switch",
+    "default": true,
+    "description": "Bring this label to the foreground"
+  },
+  "DiskUsage_labelPos": {
+    "type": "scale",
+    "default": 0,
+    "description": "Vertical position offset (pixels)",
+    "min": -20,
+    "max": 20,
+    "step": 1,
+    "tooltip": "Negative: to the top.\nPositive: to the bottom."
+  },
+  "DiskUsage_labelZoom": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Label zoom",
+    "options": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4
+    }
+  },
+  "DiskUsage_labelCustomized": {
+    "type": "switch",
+    "default": false,
+    "description": "Customize this label"
+  },
+  "DiskUsage_labelCustom": {
+    "type": "entry",
+    "default": "⛃",
+    "description": "Custom label",
+    "tooltip": "You can use emojis."
   },
   "DiskUsage_squared": {
     "type": "switch",
@@ -1486,8 +1739,43 @@
   "Battery_labelOn": {
     "type": "switch",
     "default": true,
-    "description": "Label",
-    "dependency": "labelsOn"
+    "description": "Display this label"
+  },
+  "Battery_labelForeground": {
+    "type": "switch",
+    "default": true,
+    "description": "Bring this label to the foreground"
+  },
+  "Battery_labelPos": {
+    "type": "scale",
+    "default": 0,
+    "description": "Vertical position offset (pixels)",
+    "min": -20,
+    "max": 20,
+    "step": 1,
+    "tooltip": "Negative: to the top.\nPositive: to the bottom."
+  },
+  "Battery_labelZoom": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Label zoom",
+    "options": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4
+    }
+  },
+  "Battery_labelCustomized": {
+    "type": "switch",
+    "default": false,
+    "description": "Customize this label"
+  },
+  "Battery_labelCustom": {
+    "type": "entry",
+    "default": "🗲",
+    "description": "Custom label",
+    "tooltip": "You can use emojis."
   },
   "Battery_squared": {
     "type": "switch",

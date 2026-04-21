@@ -1,3 +1,6 @@
+### v3.13.0~20260420
+  * Customize the labels. Many enhancements. You can use emojis as characters and set the vertical offset (in pixels) for each of them. You can bring them to the background or to the foreground (use colors with transparency from 50% to 67%).
+
 ### v3.12.1~20260417
   * Avoid errors drawing curves.
 

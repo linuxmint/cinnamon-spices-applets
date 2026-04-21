@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-04-17 02:24+0200\n"
+"POT-Creation-Date: 2026-04-21 19:34+0200\n"
 "PO-Revision-Date: 2022-12-03 23:57+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,7 +22,7 @@ msgstr ""
 #. 5.6->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
 #. 3.2/prefs.js:187 3.4/DataProviders.js:58 3.4/prefs.js:195 5.6/applet.js:79
-#. 5.6/applet.js:736 5.6/applet.js:1864 5.6/applet.js:1916 5.6/applet.js:1924
+#. 5.6/applet.js:778 5.6/applet.js:1906 5.6/applet.js:1958 5.6/applet.js:1966
 #. 4.0/DataProviders.js:55 4.0/prefs.js:303 3.0/prefsui.glade:452
 #. 3.2/prefsui.glade:504 3.4/prefsui.glade:434 4.0/prefsui.glade:580
 msgid "CPU"
@@ -34,12 +34,12 @@ msgid "------------- CPU ------------"
 msgstr "------------- CPU ------------"
 
 #. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 3.4/DataProviders.js:129
-#. 5.6/applet.js:1926 4.0/DataProviders.js:126
+#. 5.6/applet.js:1968 4.0/DataProviders.js:126
 msgid "Core"
 msgstr "Core"
 
 #. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 3.4/DataProviders.js:141
-#. 5.6/applet.js:80 5.6/applet.js:1651 4.0/DataProviders.js:138
+#. 5.6/applet.js:80 5.6/applet.js:1693 4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "MEM"
 
@@ -53,22 +53,22 @@ msgid "Usedup:"
 msgstr "Usedup:"
 
 #. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 3.4/DataProviders.js:162
-#. 5.6/applet.js:1711 4.0/DataProviders.js:159
+#. 5.6/applet.js:1753 4.0/DataProviders.js:159
 msgid "Cached:"
 msgstr "Cached:"
 
 #. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 3.4/DataProviders.js:162
-#. 5.6/applet.js:1711 4.0/DataProviders.js:159
+#. 5.6/applet.js:1753 4.0/DataProviders.js:159
 msgid "Buffer:"
 msgstr "Buffer:"
 
 #. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 3.4/DataProviders.js:162
-#. 5.6/applet.js:51 5.6/applet.js:1711 4.0/DataProviders.js:159
+#. 5.6/applet.js:51 5.6/applet.js:1753 4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "Free:"
 
 #. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 3.4/DataProviders.js:176
-#. 5.6/applet.js:1794 4.0/DataProviders.js:173
+#. 5.6/applet.js:1836 4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "SWAP"
 
@@ -79,15 +79,15 @@ msgstr "------------ Swap ------------"
 
 #. 5.6->settings-schema.json->Mem_colorSwap->description
 #. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 3.4/DataProviders.js:195
-#. 5.6/applet.js:52 5.6/applet.js:1823 4.0/DataProviders.js:194
+#. 5.6/applet.js:52 5.6/applet.js:1865 4.0/DataProviders.js:194
 #. 3.0/prefsui.glade:785 3.2/prefsui.glade:837 3.4/prefsui.glade:761
 #. 4.0/prefsui.glade:907
 msgid "Swap"
 msgstr "スワップ"
 
 #. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 3.4/DataProviders.js:205
-#. 5.6/applet.js:81 5.6/applet.js:1954 5.6/lib/Graphs.js:778
-#. 5.6/lib/Graphs.js:1016 4.0/DataProviders.js:204
+#. 5.6/applet.js:81 5.6/applet.js:1996 5.6/lib/Graphs.js:804
+#. 5.6/lib/Graphs.js:1058 4.0/DataProviders.js:204
 msgid "NET"
 msgstr "NET"
 
@@ -97,7 +97,7 @@ msgid "---------- Networks ----------"
 msgstr "---------- Networks ----------"
 
 #. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 3.4/DataProviders.js:300
-#. 5.6/applet.js:54 5.6/applet.js:2097 4.0/DataProviders.js:298
+#. 5.6/applet.js:54 5.6/applet.js:2139 4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "Down:"
 
@@ -107,13 +107,13 @@ msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
 #. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 3.4/DataProviders.js:301
-#. 5.6/applet.js:55 5.6/applet.js:2098 4.0/DataProviders.js:299
+#. 5.6/applet.js:55 5.6/applet.js:2140 4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "Up:"
 
 #. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 3.4/DataProviders.js:317
-#. 5.6/applet.js:82 5.6/applet.js:2120 5.6/applet.js:2278 5.6/lib/Graphs.js:773
-#. 5.6/lib/Graphs.js:1017 4.0/DataProviders.js:315
+#. 5.6/applet.js:82 5.6/applet.js:2162 5.6/applet.js:2320 5.6/lib/Graphs.js:799
+#. 5.6/lib/Graphs.js:1059 4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "DISK"
 
@@ -123,7 +123,7 @@ msgid "------------ Disks -----------"
 msgstr "------------ Disks -----------"
 
 #. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 3.4/DataProviders.js:386
-#. 5.6/applet.js:56 5.6/applet.js:2255 4.0/DataProviders.js:384
+#. 5.6/applet.js:56 5.6/applet.js:2297 4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "Read:"
 
@@ -133,7 +133,7 @@ msgid "(MiB/s)"
 msgstr "(MiB/s)"
 
 #. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 3.4/DataProviders.js:387
-#. 5.6/applet.js:57 5.6/applet.js:2256 4.0/DataProviders.js:385
+#. 5.6/applet.js:57 5.6/applet.js:2298 4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "Write:"
 
@@ -195,8 +195,8 @@ msgstr "ファイル保存エラー:"
 msgid "/s"
 msgstr "/s"
 
-#. 3.4/DataProviders.js:162 5.6/applet.js:49 5.6/applet.js:1708
-#. 5.6/applet.js:1711 5.6/applet.js:1835 4.0/DataProviders.js:159
+#. 3.4/DataProviders.js:162 5.6/applet.js:49 5.6/applet.js:1750
+#. 5.6/applet.js:1753 5.6/applet.js:1877 4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "Used:"
 
@@ -253,60 +253,60 @@ msgid "BATTERY"
 msgstr ""
 
 #. 5.6->settings-schema.json->RefreshAll_btn->description
-#. 5.6/applet.js:691
+#. 5.6/applet.js:733
 #, fuzzy
 msgid "Refresh All"
 msgstr "更新頻度（ms）"
 
-#. 5.6/applet.js:701
+#. 5.6/applet.js:743
 msgid "Without any graphics"
 msgstr ""
 
-#. 5.6/applet.js:707
+#. 5.6/applet.js:749
 msgid "With graphics"
 msgstr ""
 
-#. 5.6/applet.js:718
+#. 5.6/applet.js:760
 msgid "Drop Memory Cache (needs root rights)"
 msgstr ""
 
-#. 5.6/applet.js:734
+#. 5.6/applet.js:776
 msgid "Configure..."
 msgstr ""
 
 #. 5.6->settings-schema.json->pageGeneral->title
-#. 5.6/applet.js:735 3.0/prefsui.glade:281 3.2/prefsui.glade:333
+#. 5.6/applet.js:777 3.0/prefsui.glade:281 3.2/prefsui.glade:333
 #. 3.4/prefsui.glade:264 4.0/prefsui.glade:299
 msgid "General"
 msgstr "一般"
 
 #. 5.6->settings-schema.json->pageMem->title
-#. 5.6/applet.js:737 5.6/applet.js:1698 3.0/prefsui.glade:832
+#. 5.6/applet.js:779 5.6/applet.js:1740 3.0/prefsui.glade:832
 #. 3.2/prefsui.glade:884 3.4/prefsui.glade:808 4.0/prefsui.glade:954
 msgid "Memory"
 msgstr "メモリ"
 
 #. 5.6->settings-schema.json->pageNetwork->title
-#. 5.6/applet.js:738 5.6/applet.js:1281 5.6/applet.js:1964
+#. 5.6/applet.js:780 5.6/applet.js:1323 5.6/applet.js:2006
 #. 3.0/prefsui.glade:1154 3.2/prefsui.glade:1206 3.4/prefsui.glade:1143
 #. 4.0/prefsui.glade:1289
 msgid "Network"
 msgstr "ネットワーク"
 
 #. 5.6->settings-schema.json->pageDisk->title
-#. 5.6/applet.js:739 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
+#. 5.6/applet.js:781 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
 #. 3.4/prefsui.glade:1489 4.0/prefsui.glade:1635
 msgid "Disk IO"
 msgstr "ディスク入出力"
 
 #. 5.6->settings-schema.json->pageDiskUsage->title
-#. 5.6/applet.js:740
+#. 5.6/applet.js:782
 #, fuzzy
 msgid "Disk Usage"
 msgstr "ディスク入出力"
 
 #. 5.6->settings-schema.json->pageBattery->title
-#. 5.6/applet.js:741 5.6/applet.js:2382
+#. 5.6/applet.js:783 5.6/applet.js:2424
 msgid "Battery"
 msgstr ""
 
@@ -316,69 +316,69 @@ msgstr ""
 #. 5.6->settings-schema.json->sectionMemoryColors->title
 #. 5.6->settings-schema.json->sectionDiskUsageColors->title
 #. 5.6->settings-schema.json->sectionBatteryColors->title
-#. 5.6/applet.js:742 3.0/prefsui.glade:411 3.0/prefsui.glade:584
+#. 5.6/applet.js:784 3.0/prefsui.glade:411 3.0/prefsui.glade:584
 #. 3.2/prefsui.glade:463 3.2/prefsui.glade:636 3.4/prefsui.glade:392
 #. 3.4/prefsui.glade:564 4.0/prefsui.glade:494 4.0/prefsui.glade:710
 msgid "Colors"
 msgstr "色"
 
-#. 5.6/applet.js:889 5.6/applet.js:932 5.6/applet.js:946
+#. 5.6/applet.js:931 5.6/applet.js:974 5.6/applet.js:988
 msgid "root"
 msgstr ""
 
-#. 5.6/applet.js:1389 5.6/applet.js:2131 5.6/applet.js:2223 5.6/applet.js:2325
-#. 5.6/applet.js:2327
+#. 5.6/applet.js:1431 5.6/applet.js:2173 5.6/applet.js:2265 5.6/applet.js:2367
+#. 5.6/applet.js:2369
 #, fuzzy
 msgid "Disks"
 msgstr "ディスク入出力"
 
-#. 5.6/applet.js:1709 5.6/applet.js:1836
+#. 5.6/applet.js:1751 5.6/applet.js:1878
 msgid "Available:"
 msgstr ""
 
-#. 5.6/applet.js:1737
+#. 5.6/applet.js:1779
 msgid "Buffers/Cache/Shared"
 msgstr ""
 
-#. 5.6/applet.js:1765 5.6/applet.js:1842 5.6/applet.js:1906 5.6/applet.js:2094
-#. 5.6/applet.js:2095 5.6/applet.js:2252 5.6/applet.js:2253 5.6/applet.js:2304
-#. 5.6/applet.js:2387
+#. 5.6/applet.js:1807 5.6/applet.js:1884 5.6/applet.js:1948 5.6/applet.js:2136
+#. 5.6/applet.js:2137 5.6/applet.js:2294 5.6/applet.js:2295 5.6/applet.js:2346
+#. 5.6/applet.js:2429
 msgid ":"
 msgstr ""
 
-#. 5.6/applet.js:1767 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 5.6/applet.js:1809 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 3.4/prefsui.glade:663 4.0/prefsui.glade:809
 msgid "Buffer"
 msgstr "バッファ"
 
 #. 5.6->settings-schema.json->Mem_colorCache->description
-#. 5.6/applet.js:1767
+#. 5.6/applet.js:1809
 #, fuzzy
 msgid "Cache"
 msgstr "キャッシュ"
 
-#. 5.6/applet.js:1767
+#. 5.6/applet.js:1809
 msgid "Shared"
 msgstr ""
 
-#. 5.6/applet.js:1896
+#. 5.6/applet.js:1938
 msgid "CPUs"
 msgstr ""
 
-#. 5.6/applet.js:2065
+#. 5.6/applet.js:2107
 #, fuzzy
 msgid "Networks"
 msgstr "ネットワーク"
 
-#. 5.6/applet.js:2299
+#. 5.6/applet.js:2341
 msgid "Usage"
 msgstr ""
 
-#. 5.6/applet.js:2360 5.6/lib/Graphs.js:371
+#. 5.6/applet.js:2402 5.6/lib/Graphs.js:398
 msgid "BAT"
 msgstr ""
 
-#. 5.6/applet.js:2410 5.6/applet.js:2412
+#. 5.6/applet.js:2452 5.6/applet.js:2454
 msgid "Batteries"
 msgstr ""
 
@@ -461,6 +461,16 @@ msgstr ""
 #. 5.6->settings-schema.json->sectionCPUTemperature->title
 msgid "CPU Temperature"
 msgstr ""
+
+#. 5.6->settings-schema.json->sectionCPULabel->title
+#. 5.6->settings-schema.json->sectionMemoryLabel->title
+#. 5.6->settings-schema.json->sectionNetworkLabel->title
+#. 5.6->settings-schema.json->sectionDiskLabel->title
+#. 5.6->settings-schema.json->sectionDiskUsageLabel->title
+#. 5.6->settings-schema.json->sectionBatteryLabel->title
+#, fuzzy
+msgid "Label"
+msgstr "ラベル"
 
 #. 5.6->settings-schema.json->sectionCPUColorsByActivity->title
 #. 4.0/prefsui.glade:538
@@ -669,9 +679,113 @@ msgstr "表示"
 #. 5.6->settings-schema.json->Disk_labelOn->description
 #. 5.6->settings-schema.json->DiskUsage_labelOn->description
 #. 5.6->settings-schema.json->Battery_labelOn->description
+msgid "Display this label"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelForeground->description
+#. 5.6->settings-schema.json->Mem_labelForeground->description
+#. 5.6->settings-schema.json->Net_labelForeground->description
+#. 5.6->settings-schema.json->Disk_labelForeground->description
+#. 5.6->settings-schema.json->DiskUsage_labelForeground->description
+#. 5.6->settings-schema.json->Battery_labelForeground->description
+msgid "Bring this label to the foreground"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelPos->description
+#. 5.6->settings-schema.json->Mem_labelPos->description
+#. 5.6->settings-schema.json->Net_labelPos->description
+#. 5.6->settings-schema.json->Disk_labelPos->description
+#. 5.6->settings-schema.json->DiskUsage_labelPos->description
+#. 5.6->settings-schema.json->Battery_labelPos->description
+msgid "Vertical position offset (pixels)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelPos->tooltip
+#. 5.6->settings-schema.json->Mem_labelPos->tooltip
+#. 5.6->settings-schema.json->Net_labelPos->tooltip
+#. 5.6->settings-schema.json->Disk_labelPos->tooltip
+#. 5.6->settings-schema.json->DiskUsage_labelPos->tooltip
+#. 5.6->settings-schema.json->Battery_labelPos->tooltip
+msgid ""
+"Negative: to the top.\n"
+"Positive: to the bottom."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->description
+#. 5.6->settings-schema.json->Mem_labelZoom->description
+#. 5.6->settings-schema.json->Net_labelZoom->description
+#. 5.6->settings-schema.json->Disk_labelZoom->description
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->description
+#. 5.6->settings-schema.json->Battery_labelZoom->description
 #, fuzzy
-msgid "Label"
-msgstr "ラベル"
+msgid "Label zoom"
+msgstr "ラベルの色"
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "1"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "2"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "3"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "4"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelCustomized->description
+#. 5.6->settings-schema.json->Mem_labelCustomized->description
+#. 5.6->settings-schema.json->Net_labelCustomized->description
+#. 5.6->settings-schema.json->Disk_labelCustomized->description
+#. 5.6->settings-schema.json->DiskUsage_labelCustomized->description
+#. 5.6->settings-schema.json->Battery_labelCustomized->description
+msgid "Customize this label"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelCustom->description
+#. 5.6->settings-schema.json->Mem_labelCustom->description
+#. 5.6->settings-schema.json->Net_labelCustom->description
+#. 5.6->settings-schema.json->Disk_labelCustom->description
+#. 5.6->settings-schema.json->DiskUsage_labelCustom->description
+#. 5.6->settings-schema.json->Battery_labelCustom->description
+msgid "Custom label"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelCustom->tooltip
+#. 5.6->settings-schema.json->Mem_labelCustom->tooltip
+#. 5.6->settings-schema.json->Net_labelCustom->tooltip
+#. 5.6->settings-schema.json->Disk_labelCustom->tooltip
+#. 5.6->settings-schema.json->DiskUsage_labelCustom->tooltip
+#. 5.6->settings-schema.json->Battery_labelCustom->tooltip
+msgid "You can use emojis."
+msgstr ""
 
 #. 5.6->settings-schema.json->CPU_squared->description
 #. 5.6->settings-schema.json->Mem_squared->description
@@ -721,18 +835,6 @@ msgstr ""
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->description
 msgid "How many bars?"
-msgstr ""
-
-#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
-msgid "1"
-msgstr ""
-
-#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
-msgid "2"
-msgstr ""
-
-#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
-msgid "4"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options

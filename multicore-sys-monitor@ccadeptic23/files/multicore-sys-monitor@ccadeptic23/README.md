@@ -46,6 +46,12 @@ Starting with Cinnamon 5.6, you can display:
   * Both
   * None
 
+## Labels
+You can customize the labels:
+
+  * You can use emojis as characters and set the vertical offset (in pixels) for each of them. 
+  * You can bring each label to the background or to the foreground (use module colors with transparency from 50% to 67%).
+
 ## Instructions for upgrading to Cinnamon 5.6
 
 From Applet Settings:
