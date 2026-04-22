@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-12-16 19:05+0100\n"
-"PO-Revision-Date: 2018-11-15 19:11+0200\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"PO-Revision-Date: 2026-04-22 12:55+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:104
 msgid "Num Lock"
@@ -73,7 +73,7 @@ msgstr "Indikator for låsenøgler med meddelelser"
 
 #. settings-schema.json->section1->description
 msgid "Indicators"
-msgstr ""
+msgstr "Indikatorer"
 
 #. settings-schema.json->show-num-lock-indicator->description
 msgid "Show num lock indicator"
@@ -89,27 +89,24 @@ msgstr "Vis indikator for scr lock"
 
 #. settings-schema.json->hide-inactive-indicators->description
 msgid "Hide inactive indicators"
-msgstr ""
+msgstr "Skjul inaktive indikatorer"
 
 #. settings-schema.json->toggle-on-click->description
 msgid "Toggle state when clicked"
-msgstr ""
+msgstr "Skift tilstand ved klik"
 
 #. settings-schema.json->section2->description
-#, fuzzy
 msgid "Notifications"
-msgstr "Vis meddelelser"
+msgstr "Meddelelser"
 
 #. settings-schema.json->show-osd-notifications->description
-#, fuzzy
 msgid "Show OSD notifications"
-msgstr "Vis meddelelser"
+msgstr "Vis meddelelser på skærm"
 
 #. settings-schema.json->show-toast-notifications->description
-#, fuzzy
 msgid "Show toast notifications"
-msgstr "Vis meddelelser"
+msgstr "Vis pop op-meddelelser"
 
 #. settings-schema.json->show-silent-notifications->description
 msgid "Silence system notification sound"
-msgstr ""
+msgstr "Deaktivér systemmeddelelseslyd"
