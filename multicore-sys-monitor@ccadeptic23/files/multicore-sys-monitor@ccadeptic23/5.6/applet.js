@@ -293,6 +293,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_activity_60_80", "CPU_activity_60_80");
         this.settings.bind("CPU_activity_80_100", "CPU_activity_80_100");
         this.settings.bind("Mem_enabled", "Mem_enabled");
+        this.settings.bind("Mem_onlyUsedAvailable", "Mem_onlyUsedAvailable");
         this.settings.bind("Mem_enabledTooltip", "Mem_enabledTooltip");
         this.settings.bind("Mem_enabledBufferCacheSharedTooltip", "Mem_enabledBufferCacheSharedTooltip");
         this.settings.bind("Swap_enabled", "Swap_enabled");
@@ -1698,6 +1699,8 @@ class MemDataProvider {
 
     getColorList() {
         let types = ["Usedup", "Cache", "Buffers", "Free", "Swap"];
+        if (this.applet.Mem_onlyUsedAvailable)
+            types = ["Usedup", "Free", "Free", "Free", "Swap"];
         var colorList = [];
         for (let t of types)
             colorList.push(this.applet[`Mem_color${t}`]);
@@ -1746,16 +1749,21 @@ class MemDataProvider {
         let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
         if (this.applet.Mem_showBytesInTooltip) {
             let [strMemUsed, unitMemUsed] = formatBytesValueUnit(this.memTotal * this.currentReadings[0], 2, false);
-            let [strMemAvail, unitMemAvail] = formatBytesValueUnit(this.memTotal * (1 - this.currentReadings[0]), 2, false);
+            let [strMemAvail, unitMemAvail] = formatBytesValueUnit(this.memTotal * (1.0 - this.currentReadings[0]), 2, false);
             toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t'  + "" + formatNumber(parseFloat(strMemUsed).toFixed(2), 2).padStart(8, ' ') + " " + unitMemUsed.padStart(6, ' ') + '\n';
             toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t'  + "" + formatNumber(parseFloat(strMemAvail).toFixed(2), 2).padStart(8, ' ') + " " + unitMemAvail.padStart(6, ' ') + '\n';
         }
-        let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
         let percentChar = "%";
         if (this.applet.percentAtEndOfLine)
             percentChar = "%".padStart(6, " ");
-        for (let i = 0; i < attributes.length; i++) {
-            toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + "" + formatNumber(parseFloat((Math.round(1000 * this.currentReadings[i])/10)).toFixed(2), 2).padStart(8, ' ') + " " + percentChar + '\n';
+        if (this.applet.Mem_onlyUsedAvailable) {
+            toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t' + "" + formatNumber(parseFloat((Math.round(1000 * this.currentReadings[0])/10)).toFixed(2), 2).padStart(8, ' ') + " " + percentChar + '\n';
+            toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t' + "" + formatNumber(parseFloat((Math.round(1000 * (1 - this.currentReadings[0]))/10)).toFixed(2), 2).padStart(8, ' ') + " " + percentChar + '\n';
+        } else {
+            let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
+            for (let i = 0; i < attributes.length; i++) {
+                toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + "" + formatNumber(parseFloat((Math.round(1000 * this.currentReadings[i])/10)).toFixed(2), 2).padStart(8, ' ') + " " + percentChar + '\n';
+            }
         }
         return toolTipString;
     }

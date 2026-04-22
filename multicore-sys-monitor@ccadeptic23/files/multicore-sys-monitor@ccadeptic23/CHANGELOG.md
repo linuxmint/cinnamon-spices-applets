@@ -1,3 +1,7 @@
+### v3.13.1~20260422
+  * Memory: Can display only Used and Available memory, for users who are not familiar with concepts such as Cache, Buffers, Shared etc.
+
+
 ### v3.13.0~20260420
   * Customize the labels. Many enhancements. You can use emojis as characters and set the vertical offset (in pixels) for each of them. You can bring them to the background or to the foreground (use colors with transparency from 50% to 67%).
 
