@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-22 21:37+0100\n"
-"PO-Revision-Date: 2025-04-03 19:17+0300\n"
+"PO-Revision-Date: 2026-04-23 13:11+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -63,51 +63,50 @@ msgstr "Sininen"
 
 #. 6.6/applet.js:48 6.6/applet.js:1188 6.4/applet.js:47 6.4/applet.js:1009
 msgid "Sunrise"
-msgstr ""
+msgstr "Auringonousu"
 
 #. 6.6/applet.js:49 6.6/applet.js:1190 6.4/applet.js:48 6.4/applet.js:1011
 msgid "Sunset"
-msgstr ""
+msgstr "Auringonlasku"
 
 #. 6.6->settings-schema.json->preset_list_temp->columns->title
 #. 6.6/applet.js:50 6.6/lib/appletGui.js:212
 msgid "Temperature"
-msgstr ""
+msgstr "Lämpötila"
 
 #. 6.6/applet.js:52
 msgid "Standard values"
-msgstr ""
+msgstr "Vakioarvot"
 
 #. 6.6/applet.js:53
 msgid "Day-time comfort"
-msgstr ""
+msgstr "Silmien mukavuus päivällä"
 
 #. 6.6/applet.js:54
 msgid "Night-time comfort"
-msgstr ""
+msgstr "Silmien mukavuus illalla"
 
 #. 6.6/applet.js:55
 msgid "All values at maximum"
-msgstr ""
+msgstr "Kaikki arvot maksimissaan"
 
 #. 6.6/applet.js:848 6.4/applet.js:760
 msgid "Toggle On / Off"
-msgstr ""
+msgstr "Vaihda päälle/pois"
 
 #. 6.6/applet.js:858 6.4/applet.js:770
 msgid "Reload"
-msgstr ""
+msgstr "Lataa uudelleen"
 
 #. 6.6/applet.js:868 6.4/applet.js:780
-#, fuzzy
 msgid "Configure Presets"
-msgstr "Määritykset"
+msgstr "Esiasetusten määritys"
 
 #. 6.6->settings-schema.json->page_presets->title
 #. 6.4->settings-schema.json->page_presets->title
 #. 6.6/applet.js:970 6.4/applet.js:824
 msgid "Presets"
-msgstr ""
+msgstr "Esiasetukset"
 
 #. metadata.json->description
 msgid "Sets brightness and gamma levels of a screen"
@@ -324,7 +323,7 @@ msgstr "Paneelissa näkyvä kuvake"
 #. 6.6->settings-schema.json->page_general->title
 #. 6.4->settings-schema.json->page_general->title
 msgid "General"
-msgstr ""
+msgstr "Yleinen"
 
 #. 6.6->settings-schema.json->section_presets->title
 #. 6.6->settings-schema.json->preset_list->description
@@ -332,7 +331,7 @@ msgstr ""
 #. 6.4->settings-schema.json->section_presets->title
 #. 6.4->settings-schema.json->preset_list->description
 msgid "Your presets"
-msgstr ""
+msgstr "Esiasetuksesi"
 
 #. 6.6->settings-schema.json->disable_nightmode->description
 #. 6.4->settings-schema.json->disable_nightmode->description
@@ -359,26 +358,33 @@ msgid ""
 "0 means instantaneous changes.\n"
 "Recommended value: between 200 and 300."
 msgstr ""
+"Muutokset tehdään askel askeleelta.\n"
+"Määrität askeleen keston (ms), jonka aikana arvoja muutetaan yhden yksikön "
+"verran, jos tarpeen.\n"
+"0 tarkoittaa välittömiä muutoksia.\n"
+"Suositeltu arvo: 200–300."
 
 #. 6.6->settings-schema.json->smooth_duration->description
 #. 6.4->settings-schema.json->smooth_duration->description
 msgid "Step duration (ms)"
-msgstr ""
+msgstr "Askeleen kesto (ms)"
 
 #. 6.6->settings-schema.json->all100OnFullscreen->description
 msgid "Set all to 100% in full-screen mode"
-msgstr ""
+msgstr "Aseta kaikki näyttötilaan 100%"
 
 #. 6.6->settings-schema.json->all100OnFullscreen->tooltip
 msgid ""
 "When an application switches to full-screen mode, all values are set to "
 "100%. Useful for games and videos."
 msgstr ""
+"Kun sovellus siirtyy koko näytön tilaan, kaikki arvot asetetaan 100%. "
+"Hyödyllinen peleille ja videoille."
 
 #. 6.6->settings-schema.json->apply_changing_monitors->description
 #. 6.4->settings-schema.json->apply_changing_monitors->description
 msgid "Apply when the number of monitors changes"
-msgstr ""
+msgstr "Käytä, kun näyttöjen määrä muuttuu"
 
 #. 6.6->settings-schema.json->brightness_up_shortcut->description
 #. 6.4->settings-schema.json->brightness_up_shortcut->description
@@ -393,79 +399,74 @@ msgstr "Pikanäppäin kirkkauden laskeminen"
 #. 6.6->settings-schema.json->toggle_on_off_shortcut->description
 #. 6.4->settings-schema.json->toggle_on_off_shortcut->description
 msgid "Hotkey to Toggle On/Off this applet"
-msgstr ""
+msgstr "Pikanäppäin päälle/pois"
 
 #. 6.6->settings-schema.json->way_to_set_off->options
 #. 6.4->settings-schema.json->way_to_set_off->options
 msgid "No change"
-msgstr ""
+msgstr "Ei muutosta"
 
 #. 6.6->settings-schema.json->way_to_set_off->options
 #. 6.4->settings-schema.json->way_to_set_off->options
 msgid "All values set to 100%"
-msgstr ""
+msgstr "Kaikki arvot asetettu arvoon 100%"
 
 #. 6.6->settings-schema.json->way_to_set_off->description
 #. 6.4->settings-schema.json->way_to_set_off->description
 msgid "Way to set this applet off"
-msgstr ""
+msgstr "Tapa sulkea tämä sovelma"
 
 #. 6.6->settings-schema.json->gamma_or_temp->options
-#, fuzzy
 msgid "Gamma Red-Green-Blue"
-msgstr "Vihreä"
+msgstr "Gamma punainen vihreä sininen"
 
 #. 6.6->settings-schema.json->gamma_or_temp->options
 msgid "Screen Temperature (K)"
-msgstr ""
+msgstr "Näytön värilämpötila (K)"
 
 #. 6.6->settings-schema.json->gamma_or_temp->description
 msgid "Setting Method"
-msgstr ""
+msgstr "Asetusmenetelmä"
 
 #. 6.6->settings-schema.json->minimum_temp->units
 #. 6.6->settings-schema.json->maximum_temp->units
 msgid "K"
-msgstr ""
+msgstr "K"
 
 #. 6.6->settings-schema.json->minimum_temp->description
-#, fuzzy
 msgid "Minimum temperature"
-msgstr "Pienin gamma"
+msgstr "Minimivärilämpötila"
 
 #. 6.6->settings-schema.json->minimum_temp->tooltip
-#, fuzzy
 msgid "A minimum value of temperature. Value from 700 K to 6500 K."
-msgstr "Gamman pienin arvo 10% - 50%."
+msgstr "Värilämpötilan minimiarvo 700 K - 6500 K."
 
 #. 6.6->settings-schema.json->maximum_temp->description
-#, fuzzy
 msgid "Maximum temperature"
-msgstr "Suurin gamma"
+msgstr "Maksimivärilämpötila"
 
 #. 6.6->settings-schema.json->maximum_temp->tooltip
-#, fuzzy
 msgid "A maximum value of temperature. Value from 6500 K to 22000 K."
-msgstr "Gamman suurin arvo 51% - 200%."
+msgstr "Värilämpötilan maksimiarvo 6500 K - 22000 K."
 
 #. 6.6->settings-schema.json->options_type->options
 msgid "Gamma / Temperature"
-msgstr ""
+msgstr "Gamma / Värilämpötila"
 
 #. 6.6->settings-schema.json->baga_icon->options
 #. 6.4->settings-schema.json->baga_icon->options
 msgid "Only sun"
-msgstr ""
+msgstr "Vain aurinkoa"
 
 #. 6.6->settings-schema.json->baga_icon->options
 #. 6.4->settings-schema.json->baga_icon->options
 msgid "Screen with sun"
-msgstr ""
+msgstr "Näyttö auringolla"
 
 #. 6.6->settings-schema.json->baga_icon->options
 #. 6.4->settings-schema.json->baga_icon->options
 msgid "Symbolic"
-msgstr ""
+msgstr "Symbolinen"
 
 #. 6.6->settings-schema.json->preset_label->description
 #. 6.4->settings-schema.json->preset_label->description
@@ -475,12 +476,15 @@ msgid ""
 "Only the first Start at Sunrise and Start at Sunset checked boxes are taken "
 "into account."
 msgstr ""
+"Voit muokata alla olevia esiasetuksia, joihin pääsee käsiksi sovelman "
+"kontekstivalikon kautta.\n"
+"Aloita valintaruuduista auringonnoususta ja auringonlaskuun."
 
 #. 6.6->settings-schema.json->preset_list->columns->title
 #. 6.6->settings-schema.json->preset_list_temp->columns->title
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Nimi"
 
 #. 6.6->settings-schema.json->preset_list->columns->title
 #. 6.6->settings-schema.json->preset_list_temp->columns->title
@@ -488,31 +492,34 @@ msgstr ""
 msgid ""
 "Show\n"
 "in menu"
-msgstr ""
+msgstr "Näytä paneelissa"
 
 #. 6.6->settings-schema.json->preset_list->columns->title
 #. 6.4->settings-schema.json->preset_list->columns->title
-#, fuzzy
 msgid ""
 "Gamma\n"
 "Red"
-msgstr "Gamma"
+msgstr ""
+"Gamma\n"
+"Punainen"
 
 #. 6.6->settings-schema.json->preset_list->columns->title
 #. 6.4->settings-schema.json->preset_list->columns->title
-#, fuzzy
 msgid ""
 "Gamma\n"
 "Green"
-msgstr "Vihreä"
+msgstr ""
+"Gamma\n"
+"Vihreä"
 
 #. 6.6->settings-schema.json->preset_list->columns->title
 #. 6.4->settings-schema.json->preset_list->columns->title
-#, fuzzy
 msgid ""
 "Gamma\n"
 "Blue"
-msgstr "Gamma"
+msgstr ""
+"Gamma\n"
+"Sininen"
 
 #. 6.6->settings-schema.json->preset_list->columns->title
 #. 6.6->settings-schema.json->preset_list_temp->columns->title
@@ -521,6 +528,8 @@ msgid ""
 "Start at\n"
 "Sunrise"
 msgstr ""
+"Aloita\n"
+"Auringonnoususta"
 
 #. 6.6->settings-schema.json->preset_list->columns->title
 #. 6.6->settings-schema.json->preset_list_temp->columns->title
@@ -529,20 +538,22 @@ msgid ""
 "Start at\n"
 "Sunset"
 msgstr ""
+"Aloita\n"
+"Auringonlaskusta"
 
 #. 6.6->settings-schema.json->preset_list->columns->title
 #. 6.6->settings-schema.json->preset_list_temp->columns->title
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Hotkey"
-msgstr ""
+msgstr "Pikanäppäin"
 
 #. 6.6->settings-schema.json->show_shortcuts_in_menu->description
 msgid "Show shortcuts in the menu"
-msgstr ""
+msgstr "Näytä pikanäppäimet valikossa"
 
 #. 6.6->settings-schema.json->preset_selected_keybind->description
 msgid "Choose a shortcut to copy"
-msgstr ""
+msgstr "Valitse pikanäppäin kopiolle"
 
 #. 6.6->settings-schema.json->preset_selected_keybind->tooltip
 msgid ""
@@ -551,21 +562,24 @@ msgid ""
 "Once selected, click on the button below, then edit the item to paste "
 "(Ctrl+V) this shortcut."
 msgstr ""
+"Auttaa valitsemaan pikanäppäimen missä tahansa yllä olevista kohteista.\n"
+"Kun olet valinnut pikanäppäimen, paina painiketta ja muokkaa kohdetta "
+"liittääksesi (Ctrl+V) tähän pikanäppäimeen."
 
 #. 6.6->settings-schema.json->preset_copy_keybind->description
 msgid "Copy this shortcut to the clipboard"
-msgstr ""
+msgstr "Kopioi pikanäppäin leikepöydälle"
 
 #. 6.6->settings-schema.json->preset_sunrise_sunset_button->description
 #. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
 msgid "Set Sunrise and Sunset times"
-msgstr ""
+msgstr "Aseta auringonnousu- ja laskuaika"
 
 #. 6.6->settings-schema.json->preset_reload->description
 #. 6.4->settings-schema.json->preset_reload->description
 msgid "Apply all changes"
-msgstr ""
+msgstr "Käytä kaikki muutokset"
 
 #. 6.6->settings-schema.json->values_reload->description
 msgid "Apply the selected method"
-msgstr ""
+msgstr "Käytä valittu menetelmä"
