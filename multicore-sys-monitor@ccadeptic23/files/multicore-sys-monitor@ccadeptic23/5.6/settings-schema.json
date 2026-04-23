@@ -210,6 +210,7 @@
       "title": "Options",
       "keys": [
         "Mem_enabled",
+        "Mem_onlyUsedAvailable",
         "Mem_enabledTooltip",
         "Mem_enabledBufferCacheSharedTooltip",
         "Swap_enabled",
@@ -891,6 +892,11 @@
     "default": true,
     "description": "Enable"
   },
+  "Mem_onlyUsedAvailable": {
+    "type": "switch",
+    "default": false,
+    "description": "Display only Used and Available memory"
+  },
   "Mem_enabledTooltip": {
     "type": "switch",
     "default": true,
@@ -1025,12 +1031,14 @@
   "Mem_colorCache": {
     "type": "colorchooser",
     "default": "rgba(148, 114, 219, 1)",
-    "description": "Cache"
+    "description": "Cache",
+    "dependency": "!Mem_onlyUsedAvailable"
   },
   "Mem_colorBuffers": {
     "type": "colorchooser",
     "default": "rgba(254, 140, 2, 1)",
-    "description": "Buffers"
+    "description": "Buffers",
+    "dependency": "!Mem_onlyUsedAvailable"
   },
   "Mem_colorFree": {
     "type": "colorchooser",
