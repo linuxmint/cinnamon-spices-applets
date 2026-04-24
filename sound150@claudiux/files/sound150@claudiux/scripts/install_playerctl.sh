@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 ### Installs playerctl with password dialog:
-pkexec pkcon -y install playerctl
+[ -x /usr/bin/pkcon ] && {
+    pkexec pkcon -y install playerctl
+} || {
+    [ -x /usr/bin/pkgcli ] && pkexec pkgcli -y install playerctl
+}
 ### Pause 1 second:
 sleep 1
 ### Restarts the sound150 applet:
