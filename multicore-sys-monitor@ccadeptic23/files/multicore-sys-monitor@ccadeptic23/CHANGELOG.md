@@ -1,3 +1,7 @@
+### v3.13.2~20260424
+  * Battery: uses several methods to obtain its measurements.
+  * Fixes [#8588](https://github.com/linuxmint/cinnamon-spices-applets/issues/8588)
+
 ### v3.13.1~20260422
   * Memory: Can display only Used and Available memory, for users who are not familiar with concepts such as Cache, Buffers, Shared etc.
 
