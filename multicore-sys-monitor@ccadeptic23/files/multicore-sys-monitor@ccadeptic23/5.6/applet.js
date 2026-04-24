@@ -1560,9 +1560,9 @@ class MCSM extends Applet.IconApplet {
             try {
                 if (_json["POWER_SUPPLY_TYPE"] === "Battery" && parseInt(_json["POWER_SUPPLY_PRESENT"]) === 1) {
                     if (_json["POWER_SUPPLY_ENERGY_FULL_DESIGN"] && _json["POWER_SUPPLY_ENERGY_FULL"])
-                    this.battery_capacity[id] = [1 * _json["POWER_SUPPLY_ENERGY_FULL_DESIGN"], 1 * _json["POWER_SUPPLY_ENERGY_FULL"]];
-                else
-                    this.battery_capacity[id] = [1 * _json["POWER_SUPPLY_CHARGE_FULL_DESIGN"], 1 * _json["POWER_SUPPLY_CHARGE_FULL"]];
+                        this.battery_capacity[id] = [1 * _json["POWER_SUPPLY_ENERGY_FULL_DESIGN"], 1 * _json["POWER_SUPPLY_ENERGY_FULL"]];
+                    else
+                        this.battery_capacity[id] = [1 * _json["POWER_SUPPLY_CHARGE_FULL_DESIGN"], 1 * _json["POWER_SUPPLY_CHARGE_FULL"]];
                 } else {
                     this.battery_capacity[id] = [100, 0];
                 }
