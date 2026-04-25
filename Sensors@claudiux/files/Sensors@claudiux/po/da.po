@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-22 19:51+0100\n"
+"POT-Creation-Date: 2026-04-26 01:27+0200\n"
 "PO-Revision-Date: 2026-04-20 17:27+0200\n"
 "Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
@@ -25,89 +25,89 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Sensorovervågning"
 
-#. applet.js:587
+#. applet.js:594
 msgid "Suspended"
 msgstr "Hviletilstand"
 
-#. applet.js:929 applet.js:971
+#. applet.js:936 applet.js:978
 msgid "high:"
 msgstr "høj:"
 
-#. applet.js:929 applet.js:932 applet.js:971 applet.js:973 applet.js:1014
+#. applet.js:936 applet.js:939 applet.js:978 applet.js:980 applet.js:1021
 msgid "n/a"
 msgstr "—"
 
-#. applet.js:932 applet.js:973
+#. applet.js:939 applet.js:980
 msgid "crit:"
 msgstr "krit:"
 
-#. applet.js:1014 applet.js:1058
+#. applet.js:1021 applet.js:1065
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:1060
+#. applet.js:1067
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:1089
+#. applet.js:1096
 msgid "No intrusion detected"
 msgstr "Ingen indtrængen detekteret"
 
-#. applet.js:1089
+#. applet.js:1096
 msgid "INTRUSION DETECTED!"
 msgstr "INDTRÆNGEN DETEKTERET!"
 
-#. applet.js:1109
+#. applet.js:1116
 msgid "Must be configured!"
 msgstr "Skal konfigureres!"
 
-#. applet.js:1511
+#. applet.js:1518
 msgid "Settings"
 msgstr "Indstillinger"
 
-#. applet.js:1511
+#. applet.js:1518
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1518
+#. applet.js:1525
 msgid "⚙ General"
 msgstr "⚙ Generelt"
 
-#. applet.js:1535
+#. applet.js:1542
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Temperatursensorer"
 
-#. applet.js:1552
+#. applet.js:1559
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Ventilatorsensorer"
 
-#. applet.js:1569
+#. applet.js:1576
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Spændingssensorer"
 
-#. applet.js:1586
+#. applet.js:1593
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Indtrængningssensorer"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1622
+#. applet.js:1629
 msgid "Run xsensors"
 msgstr "Kør xsensors"
 
-#. applet.js:1631
+#. applet.js:1638
 msgid "Suspend Sensors"
 msgstr "Suspendér Sensorovervågning"
 
-#. applet.js:1642
+#. applet.js:1649
 msgid "Reload this applet"
 msgstr "Genindlæs panelprogrammet"
 
-#. applet.js:1998
+#. applet.js:2005
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Er du sikker på at du vil fjerne “%s”?"
@@ -555,6 +555,10 @@ msgid ""
 msgstr ""
 "Om hovedsensorernes navne (vises i panelet) skal vises med fed, kursiv "
 "skrift i værktøjstips."
+
+#. settings-schema.json->tooltip_font_size->description
+msgid "Font size (px)"
+msgstr ""
 
 #. settings-schema.json->restart_in_menu->description
 msgid "Show in menu the action: Restart this applet"

@@ -204,7 +204,7 @@ class SensorsApplet extends Applet.Applet {
 
     // To be sure that the scripts will be executable:
     spawnCommandLineAsync(`/bin/bash -c 'cd ${SCRIPTS_DIR} && chmod 755 *.py *.sh'`, null, null);
-    
+
     // Window Tracker:
     this.tracker = WindowTracker.get_default();
 
@@ -230,12 +230,7 @@ class SensorsApplet extends Applet.Applet {
 
     // Applet tooltip:
     this.set_applet_tooltip(_('Sensors Monitor'));
-    if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
-      this._applet_tooltip._tooltip.set_style('text-align: right; font-family: monospace;');
-    } else {
-      this._applet_tooltip._tooltip.set_style('text-align: left; font-family: monospace;');
-    }
-
+    this.set_tooltip_font_size();
     // Loggers:
     this.loggerTemp = new LoggerTemp();
     this.loggerFan = new LoggerFan();
@@ -282,6 +277,16 @@ class SensorsApplet extends Applet.Applet {
     this._connectIds.push(this.actor.connect("leave-event", (actor, event) => this.on_leave_event(actor, event)));
   }
 
+  set_tooltip_font_size() {
+    const fontSize = (this.tooltip_font_size != null) ? this.tooltip_font_size : 16;
+    if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
+      this._applet_tooltip._tooltip.set_style(`text-align: right; font-family: monospace; font-size: ${fontSize}px;`);
+    } else {
+      this._applet_tooltip._tooltip.set_style(`text-align: left; font-family: monospace; font-size: ${fontSize}px;`);
+    }
+
+  }
+
   set_default_UI() {
     this.actor.destroy_all_children();
     for (let i=0; i<DEFAULT_APPLET_LABEL.length; i++) {
@@ -294,7 +299,7 @@ class SensorsApplet extends Applet.Applet {
                                 });
     }
   }
-  
+
   configureApplet(tab=0) {
     //~ logDebug("tab=" + tab);
     const HORIZONTAL = 1;
@@ -341,10 +346,10 @@ class SensorsApplet extends Applet.Applet {
             window.maximize(HORIZONTAL);
           else if (fixed)
             window.move_resize_frame(null, 1 * this.window_x, 1 * this.window_y, 1 * this.window_width, 1 * this.window_height);
-            
+
           //~ this.settingsWindow = window;
           //~ app.connect("windows-changed", () => { this.settingsWindow = undefined; });
-          
+
           window.activate(300);
         }
       }, 1000);
@@ -353,7 +358,7 @@ class SensorsApplet extends Applet.Applet {
     this.configWindowPid = pid;
     return pid;
   }
-  
+
   _on_window_set_current_size() {
     if (this.configWindowPid) {
       let wins = global.get_window_actors();
@@ -373,6 +378,8 @@ class SensorsApplet extends Applet.Applet {
 
     // General tab
     this.s.bind("show_tooltip", "show_tooltip", () => { this.on_settings_changed() });
+    this.s.bind("tooltip_font_size", "tooltip_font_size", () => { this.set_tooltip_font_size() });
+    this.set_tooltip_font_size();
     this.s.bind("do_not_check_dependencies", "do_not_check_dependencies");
     this.s.bind("window_maximizing", "window_maximizing");
     this.s.bind("window_width", "window_width");
@@ -617,18 +624,18 @@ class SensorsApplet extends Applet.Applet {
       } else if (this.char_color_customized) {
         l_style = "color: " + this.char_color + ";";
       }
-      
+
       //~ let l = new St.Label({text: (i===0 || this.separator == "NO_SEP") ? c : this.separator + c});
       let l = new St.Label({text: c});
-      
+
       let sep_l = null;
       if (i !== 0 && this.separator !== "NO_SEP") {
         sep_l = new St.Label({text: this.separator});
       }
-      
+
       if (l_style)
         l.set_style(l_style);
-      
+
       if (sep_l) {
         sep_l.set_style(`color: ${this.separator_color}; `);
         sepBin = new St.Bin();
@@ -1134,7 +1141,7 @@ class SensorsApplet extends Applet.Applet {
       }
       return nothing
   }
-  
+
   updateUI_sensors_temp(nbr_already_shown, _shown_name) {
     let vertical = (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
     if (this.show_temp //&& this.temp_sensors.length !== 0
@@ -1189,7 +1196,7 @@ class SensorsApplet extends Applet.Applet {
       }
     }
   }
-  
+
   updateUI_disks_temp(nbr_already_shown, _shown_name) {
     let vertical = (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
     if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks && !this.nothingToShow(this.temp_disks)) {
@@ -1297,8 +1304,8 @@ class SensorsApplet extends Applet.Applet {
       this.updateUI_sensors_temp(nbr_already_shown, _shown_name);
       this.updateUI_disks_temp(nbr_already_shown, _shown_name);
     }
-    
-    
+
+
 
     // Fans:
     if (this.show_fan && !this.nothingToShow(this.fan_sensors)
@@ -1601,7 +1608,7 @@ class SensorsApplet extends Applet.Applet {
 
     // Button Custom:
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-    
+
     // Maximizing mode:
     //~ const items = ["none", "horizontally", "vertically", "both"];
     //~ const translated_items = [_("none"), _("horizontally"), _("vertically"), _("both")];
@@ -1615,7 +1622,7 @@ class SensorsApplet extends Applet.Applet {
     //~ });
     //~ this.menu.addMenuItem(maximize_combobox);
     //~ maximize_combobox._menu.open(),
-    
+
     //~ this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
     // Button xsensors
@@ -1972,7 +1979,7 @@ class SensorsApplet extends Applet.Applet {
       300
     );
   }
-  
+
   _on_open_HTML_Colors_web_page() {
     let _to = setTimeout( () => {
         clearTimeout(_to);
