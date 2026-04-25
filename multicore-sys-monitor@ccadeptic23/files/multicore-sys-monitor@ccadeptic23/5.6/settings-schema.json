@@ -166,7 +166,8 @@
         "CPU_tempColor",
         "CPU_tempColorHigh",
         "CPU_tempColorCrit",
-        "CPU_tempCorner"
+        "CPU_tempCorner",
+        "CPU_tempFontFactor"
       ]
     },
     "sectionCPULabel": {
@@ -223,7 +224,8 @@
         "Mem_startAt12Oclock",
         "Mem_showBytesInTooltip",
         "Mem_value_display",
-        "Mem_valueCorner"
+        "Mem_valueCorner",
+        "percentFontFactor"
       ]
     },
     "sectionMemoryLabel": {
@@ -309,7 +311,8 @@
         "Net_total_type",
         "Net_total_display",
         "Net_total_hovering_only",
-        "Net_totalCorner"
+        "Net_totalCorner",
+        "flowFontFactor"
       ]
     },
     "sectionDiskOptions": {
@@ -373,7 +376,8 @@
         "DiskUsage_width",
         "DiskUsage_mergeAll",
         "DiskUsage_value_display",
-        "DiskUsage_valueCorner"
+        "DiskUsage_valueCorner",
+        "percentFontFactor"
       ]
     },
     "sectionDiskUsageLabel": {
@@ -412,7 +416,8 @@
       "keys": [
         "Disk_speed_display",
         "Disk_speed_hovering_only",
-        "Disk_speedCorner"
+        "Disk_speedCorner",
+        "flowFontFactor"
       ]
     },
     "sectionBatteryOptions": {
@@ -425,7 +430,8 @@
         "Battery_width",
         "Battery_mergeAll",
         "Battery_value_display",
-        "Battery_valueCorner"
+        "Battery_valueCorner",
+        "percentFontFactor"
       ]
     },
     "sectionBatteryLabel": {
@@ -820,6 +826,15 @@
       "Bottom Right": "BR",
       "Bottom Left": "BL"
     }
+  },
+  "CPU_tempFontFactor": {
+    "type": "scale",
+    "default": 33,
+    "min": 20,
+    "max": 60,
+    "step": 1,
+    "units": "%",
+    "description": "Font size: percentage of the box height"
   },
   "CPU_tempColor": {
     "type": "colorchooser",
@@ -1897,6 +1912,24 @@
     "type": "button",
     "description": "Clear this device list",
     "callback": "on_Battery_cleardevlist_btn_clicked"
+  },
+  "percentFontFactor": {
+    "type": "scale",
+    "default": 33,
+    "min": 20,
+    "max": 60,
+    "step": 1,
+    "units": "%",
+    "description": "Font size: percentage of the box height"
+  },
+  "flowFontFactor": {
+    "type": "scale",
+    "default": 40,
+    "min": 20,
+    "max": 50,
+    "step": 1,
+    "units": "%",
+    "description": "Font size: percentage of the box height"
   },
   "color0": {
     "type": "colorchooser",
