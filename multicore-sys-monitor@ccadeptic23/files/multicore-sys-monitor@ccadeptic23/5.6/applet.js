@@ -201,6 +201,8 @@ class MCSM extends Applet.IconApplet {
 
         this.settings = new AppletSettings(this, UUID, this.instance_id);
         this.settings.bind("isHighlighted", "isHighlighted");
+        this.settings.bind("percentFontFactor", "percentFontFactor");
+        this.settings.bind("flowFontFactor", "flowFontFactor");
         this.settings.bind("CPU_useProgressiveColors", "CPU_useProgressiveColors");
         this.settings.bind("CPU_byActivity", "CPU_byActivity", () => { this.on_CPU_byActivity_changed(); });
         this.settings.bind("Net_devicesList", "Net_devicesList");
@@ -262,6 +264,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_tempColorHigh", "CPU_tempColorHigh");
         this.settings.bind("CPU_tempColorCrit", "CPU_tempColorCrit");
         this.settings.bind("CPU_tempCorner", "CPU_tempCorner");
+        this.settings.bind("CPU_tempFontFactor", "CPU_tempFontFactor");
         this.settings.bind("CPU_width", "CPU_width", () => { this.adjust_CPU_width() });
         this.settings.bind("CPU_mergeAll", "CPU_mergeAll", (value) => {
             if (value === false) {
