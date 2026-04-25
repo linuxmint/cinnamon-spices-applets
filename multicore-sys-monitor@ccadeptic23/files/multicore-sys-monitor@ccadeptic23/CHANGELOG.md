@@ -1,3 +1,7 @@
+### v3.13.4~20260425
+  * Adds ability to modify the size of the display font, for each type of graph.
+  * Fixes [#8595](https://github.com/linuxmint/cinnamon-spices-applets/issues/8595)
+
 ### v3.13.3~20260425
   * Adds ability to select the size of the tooltip font.
   * Fixes [#8593](https://github.com/linuxmint/cinnamon-spices-applets/issues/8593)

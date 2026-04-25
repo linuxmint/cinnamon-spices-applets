@@ -296,6 +296,7 @@ class GraphVBars {
     }
 
     // Temperature
+    fontsize_px = Math.trunc(this.applet.CPU_tempFontFactor / 100 * _height);
     fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + fontsize_px + 'px');
     if (providerName != 'SWAP' &&
       this.applet.CPU_showTemp &&
@@ -478,6 +479,7 @@ class GraphVBars100 extends GraphVBars {
       drawLabel(labelProps, fontsize_px, width, _height);
 
     // Usage Data Bars
+    fontsize_px = Math.trunc(this.applet.percentFontFactor / 100 * _height);
     fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + fontsize_px + 'px');
     let interBar = 2; // 2 pixels
     let len = currentReadings.length;
@@ -533,6 +535,7 @@ class GraphVBars100 extends GraphVBars {
       if ((!isBAT && (this.applet.DiskUsage_value_display === "always" || (this.applet.DiskUsage_value_display === "hover" && this.applet.hovered))) ||
           (isBAT && (this.applet.Battery_value_display === "always" || (this.applet.Battery_value_display === "hover" && this.applet.hovered)))
       ) {
+
         let percentValue = Math.round(currentReadings[i].value * 100) + "%";
         let pangolayoutPerCent = area.create_pango_layout(percentValue);
         pangolayoutPerCent.set_alignment(Pango.Alignment.CENTER);
@@ -547,7 +550,7 @@ class GraphVBars100 extends GraphVBars {
         if ((!isBAT && this.applet.DiskUsage_valueCorner === "B") ||
             (isBAT && this.applet.Battery_valueCorner === "B")
         )
-          areaContext.moveTo(vbarOffset + vbarWidth / 2, 0.6 * _height); // bottom.
+          areaContext.moveTo(vbarOffset + vbarWidth / 2, (1.0 - this.applet.percentFontFactor / 100) * _height - 1); // bottom.
         PangoCairo.layout_path(areaContext, pangolayoutPerCent);
         areaContext.fill();
       }
@@ -726,6 +729,7 @@ class GraphPieChart {
 
     //Show percentage value in center of pie chart
     //~ global.log("this.applet.Mem_value_display: " + this.applet.Mem_value_display + " - this.applet.hovered: " + this.applet.hovered);
+    fontsize_px = Math.trunc(this.applet.percentFontFactor / 100 * _height);
     fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + fontsize_px + 'px');
     if (this.applet.Mem_value_display === "always" || (this.applet.Mem_value_display === "hover" && this.applet.hovered)) {
       let percentValue = (Math.round(currentReadings[0] * 100)) + "%";
@@ -737,9 +741,9 @@ class GraphPieChart {
       areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       //place text in center of graph area
       if (this.applet.Mem_valueCorner === "T")
-        areaContext.moveTo(_width / 2, 1); // top.
+        areaContext.moveTo(width / 2, 1); // top.
       else
-        areaContext.moveTo(_width / 2, 0.6 * _height); // bottom.
+        areaContext.moveTo(width / 2, (1.0 - this.applet.percentFontFactor / 100) * _height - 1); // bottom.
       PangoCairo.layout_path(areaContext, pangolayoutPerCent);
       areaContext.fill();
     }
@@ -1052,6 +1056,7 @@ class GraphLineChart {
       drawLabel(labelProps, fontsize_px, width, _height)
     }
 
+    fontsize_px = Math.trunc(this.applet.flowFontFactor / 100 * _height);
     let fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + fontsize_px + 'px');
 
     // Total
@@ -1143,11 +1148,11 @@ class GraphLineChart {
 
       pangolayout2.set_ellipsize(Pango.EllipsizeMode.NONE);
       pangolayout2.set_width(-1); // Required to display it on a single line.
-      pangolayout2.set_height(1 / 3 * _height);
+      pangolayout2.set_height(this.applet.flowFontFactor / 100 * _height);
       if (pangolayout3 != null) {
         pangolayout3.set_ellipsize(Pango.EllipsizeMode.NONE);
         pangolayout3.set_width(-1); // Required to display it on a single line.
-        pangolayout3.set_height(1 / 3 * _height);
+        pangolayout3.set_height(this.applet.flowFontFactor / 100 * _height);
       }
       pangolayout2.set_font_description(fontdesc);
       if (pangolayout3 != null)
@@ -1159,25 +1164,25 @@ class GraphLineChart {
         if (isRight) {
           areaContext.moveTo(1 * width - downstr.length * 7.5, 0);
           PangoCairo.layout_path(areaContext, pangolayout2);
-          areaContext.moveTo(1 * width  - upstr.length * 7.5, 2/3 * _height - 3);
+          areaContext.moveTo(1 * width  - upstr.length * 7.5, (1.0 - this.applet.flowFontFactor / 100) * _height - 1);
           PangoCairo.layout_path(areaContext, pangolayout3);
         } else {
           areaContext.moveTo(3, 0);
           PangoCairo.layout_path(areaContext, pangolayout2);
-          areaContext.moveTo(3, 2/3 * _height - 3);
+          areaContext.moveTo(3, (1.0 - this.applet.flowFontFactor / 100) * _height - 1);
           PangoCairo.layout_path(areaContext, pangolayout3);
         }
       } else {
         if (isRight) {
           if (isTop)
-            areaContext.moveTo(1 * width - downupstr.length * 7.5, 0); //place text in top right corner of graph area
+            areaContext.moveTo(1 * width - downupstr.length * 7.5, 1); //place text in top right corner of graph area
           else
-            areaContext.moveTo(1 * width  - downupstr.length * 7.5, 0.6 * _height); //place text in bottom right corner of graph area
+            areaContext.moveTo(1 * width  - downupstr.length * 7.5, (1.0 - this.applet.flowFontFactor / 100) * _height - 1); //place text in bottom right corner of graph area
         } else {
           if (isTop)
             areaContext.moveTo(3, 0); //place text in top left corner of graph area
           else
-            areaContext.moveTo(3, 0.6 * _height); //place text in bottom left corner of graph area
+            areaContext.moveTo(3, (1.0 - this.applet.flowFontFactor / 100) * _height - 1); //place text in bottom left corner of graph area
         }
         PangoCairo.layout_path(areaContext, pangolayout2);
       }
