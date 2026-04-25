@@ -1,3 +1,7 @@
+### v3.13.3~20260425
+  * Adds ability to select the size of the tooltip font.
+  * Fixes [#8593](https://github.com/linuxmint/cinnamon-spices-applets/issues/8593)
+
 ### v3.13.2~20260424
   * Battery: uses several methods to obtain its measurements.
   * Fixes [#8588](https://github.com/linuxmint/cinnamon-spices-applets/issues/8588)
