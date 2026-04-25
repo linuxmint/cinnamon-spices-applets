@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: powerman@dr.drummie 1.9.6\n"
+"Project-Id-Version: powerman@dr.drummie 1.9.10\n"
 "Report-Msgid-Bugs-To: https://github.com/drdrummie/powerman-dr.drummie\n"
-"POT-Creation-Date: 2026-04-20 19:15+0200\n"
+"POT-Creation-Date: 2026-04-25 10:21+0200\n"
 "PO-Revision-Date: 2025-09-06 22:34+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,314 +17,321 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/applet.js:54 src/powerman-framework.js:29
+#: src/applet.js:52
+#, javascript-format
+msgctxt "time of battery remaining"
+msgid "%d:%02d"
+msgstr "%d:%02d"
+
+#: src/applet.js:74 src/powerman-framework.js:29
 msgid "Power Saver"
 msgstr "Ahorro de energía"
 
-#: src/applet.js:55 src/powerman-framework.js:30
+#: src/applet.js:75 src/powerman-framework.js:30
 msgid "Balanced"
 msgstr "Equilibrado"
 
-#: src/applet.js:56 src/powerman-framework.js:31
+#: src/applet.js:76 src/powerman-framework.js:31
 msgid "Performance"
 msgstr "Rendimiento"
 
-#: src/applet.js:63
+#: src/applet.js:83
 msgid "Battery full"
 msgstr "Batería llena"
 
-#: src/applet.js:65
+#: src/applet.js:85
 msgid "Battery almost full"
 msgstr "Batería casi llena"
 
-#: src/applet.js:67
+#: src/applet.js:87
 msgid "Battery good"
 msgstr "Batería buena"
 
-#: src/applet.js:69
+#: src/applet.js:89
 msgid "Low battery"
 msgstr "Batería baja"
 
-#: src/applet.js:71
+#: src/applet.js:91
 msgid "Critically low battery"
 msgstr "Batería críticamente baja"
 
-#: src/applet.js:73 src/applet.js:140
+#: src/applet.js:93 src/applet.js:160
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: src/applet.js:80
+#: src/applet.js:100
 msgid "AC adapter"
 msgstr "Adaptador de CA"
 
-#: src/applet.js:82
+#: src/applet.js:102
 msgid "Laptop battery"
 msgstr "Batería de portátil"
 
-#: src/applet.js:84
+#: src/applet.js:104
 msgid "UPS"
 msgstr "SAI"
 
-#: src/applet.js:86
+#: src/applet.js:106
 msgid "Monitor"
 msgstr "Monitor"
 
-#: src/applet.js:88
+#: src/applet.js:108
 msgid "Mouse"
 msgstr "Ratón"
 
-#: src/applet.js:90
+#: src/applet.js:110
 msgid "Keyboard"
 msgstr "Teclado"
 
-#: src/applet.js:92
+#: src/applet.js:112
 msgid "PDA"
 msgstr "PDA"
 
-#: src/applet.js:94
+#: src/applet.js:114
 msgid "Cell phone"
 msgstr "Teléfono móvil"
 
-#: src/applet.js:96
+#: src/applet.js:116
 msgid "Media player"
 msgstr "Reproductor multimedia"
 
-#: src/applet.js:98
+#: src/applet.js:118
 msgid "Tablet"
 msgstr "Tableta"
 
-#: src/applet.js:100
+#: src/applet.js:120
 msgid "Computer"
 msgstr "Ordenador"
 
-#: src/applet.js:102
+#: src/applet.js:122
 msgid "Gaming input"
 msgstr "Entrada de juego"
 
-#: src/applet.js:104
+#: src/applet.js:124
 msgid "Pen"
 msgstr "Lápiz"
 
-#: src/applet.js:106
+#: src/applet.js:126
 msgid "Touchpad"
 msgstr "Panel táctil"
 
-#: src/applet.js:108
+#: src/applet.js:128
 msgid "Modem"
 msgstr "Módem"
 
-#: src/applet.js:110
+#: src/applet.js:130
 msgid "Network"
 msgstr "Red"
 
-#: src/applet.js:112
+#: src/applet.js:132
 msgid "Headset"
 msgstr "Auriculares"
 
-#: src/applet.js:114
+#: src/applet.js:134
 msgid "Speakers"
 msgstr "Altavoces"
 
-#: src/applet.js:116
+#: src/applet.js:136
 msgid "Headphones"
 msgstr "Auriculares"
 
-#: src/applet.js:118
+#: src/applet.js:138
 msgid "Video"
 msgstr "Vídeo"
 
-#: src/applet.js:120
+#: src/applet.js:140
 msgid "Audio device"
 msgstr "Dispositivo de audio"
 
-#: src/applet.js:122
+#: src/applet.js:142
 msgid "Remote control"
 msgstr "Mando a distancia"
 
-#: src/applet.js:124
+#: src/applet.js:144
 msgid "Printer"
 msgstr "Impresora"
 
-#: src/applet.js:126
+#: src/applet.js:146
 msgid "Scanner"
 msgstr "Escáner"
 
-#: src/applet.js:128
+#: src/applet.js:148
 msgid "Camera"
 msgstr "Cámara"
 
-#: src/applet.js:130
+#: src/applet.js:150
 msgid "Wearable"
 msgstr "Dispositivo wearable"
 
-#: src/applet.js:132
+#: src/applet.js:152
 msgid "Toy"
 msgstr "Juguete"
 
-#: src/applet.js:134
-#, fuzzy
+#: src/applet.js:154
 msgid "Bluetooth device"
-msgstr "Dispositivo de audio"
+msgstr "Dispositivo Bluetooth"
 
-#: src/applet.js:466 src/applet.js:1160
+#: src/applet.js:512 src/applet.js:1242
 msgid "Brightness"
 msgstr "Brillo"
 
-#: src/applet.js:467 src/applet.js:1165
+#: src/applet.js:513 src/applet.js:1247
 msgid "Keyboard backlight"
 msgstr "Retroiluminación del teclado"
 
-#: src/applet.js:480
+#: src/applet.js:526
 msgid "Brightness Automation"
 msgstr "Automatización de brillo"
 
-#: src/applet.js:492
+#: src/applet.js:538
 msgid "Power Profile Automation"
 msgstr "Automatización del perfil de energía"
 
-#: src/applet.js:518
+#: src/applet.js:569
+msgid "Remove power applet"
+msgstr "Eliminar applet de energía"
+
+#: src/applet.js:584
 msgid "Automation Settings"
 msgstr "Configuración de automatización"
 
-#: src/applet.js:527
+#: src/applet.js:593
 msgid "Power Settings"
 msgstr "Configuración de energía"
 
-#: src/applet.js:802
+#: src/applet.js:878
 msgid "Charging"
 msgstr "Cargando"
 
-#: src/applet.js:806
+#: src/applet.js:882
 #, javascript-format
 msgid "Charging - %d hour until fully charged"
 msgid_plural "Charging - %d hours until fully charged"
 msgstr[0] "Cargando - %d hora hasta carga completa"
 msgstr[1] "Cargando - %d horas hasta carga completa"
 
-#: src/applet.js:811
+#: src/applet.js:887
 #, javascript-format
 msgid "Charging - %d %s %d %s until fully charged"
 msgstr "Cargando - %d %s %d %s hasta carga completa"
 
-#: src/applet.js:814 src/applet.js:842
+#: src/applet.js:890 src/applet.js:918
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "hora"
 msgstr[1] "horas"
 
-#: src/applet.js:816 src/applet.js:844
+#: src/applet.js:892 src/applet.js:920
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuto"
 msgstr[1] "minutos"
 
-#: src/applet.js:821
+#: src/applet.js:897
 #, javascript-format
 msgid "Charging - %d minute until fully charged"
 msgid_plural "Charging - %d minutes until fully charged"
 msgstr[0] "Cargando - %d minuto hasta carga completa"
 msgstr[1] "Cargando - %d minutos hasta carga completa"
 
-#: src/applet.js:827
+#: src/applet.js:903
 msgid "Fully charged"
 msgstr "Completamente cargado"
 
-#: src/applet.js:830
+#: src/applet.js:906
 msgid "Using battery power"
 msgstr "Usando batería"
 
-#: src/applet.js:834
+#: src/applet.js:910
 #, javascript-format
 msgid "Using battery power - %d hour remaining"
 msgid_plural "Using battery power - %d hours remaining"
 msgstr[0] "Usando batería - %d hora restante"
 msgstr[1] "Usando batería - %d horas restantes"
 
-#: src/applet.js:839
+#: src/applet.js:915
 #, javascript-format
 msgid "Using battery power - %d %s %d %s remaining"
 msgstr "Usando batería - %d %s %d %s restantes"
 
-#: src/applet.js:849
+#: src/applet.js:925
 #, javascript-format
 msgid "Using battery power - %d minute remaining"
 msgid_plural "Using battery power - %d minutes remaining"
 msgstr[0] "Usando batería - %d minuto restante"
 msgstr[1] "Usando batería - %d minutos restantes"
 
-#: src/applet.js:855
+#: src/applet.js:931
 msgid "Fully discharged"
 msgstr "Completamente descargado"
 
-#: src/applet.js:857
+#: src/applet.js:933
 msgid "Not charging"
 msgstr "No cargando"
 
-#: src/applet.js:875 src/applet.js:885 src/applet.js:1118 src/applet.js:1128
-#, javascript-format
-msgctxt "time of battery remaining"
-msgid "%d:%02d"
-msgstr "%d:%02d"
-
-#: src/applet.js:877 src/applet.js:883 src/applet.js:1120 src/applet.js:1126
+#: src/applet.js:954 src/applet.js:957 src/applet.js:1205 src/applet.js:1208
 #, javascript-format
 msgctxt "percent of battery remaining"
 msgid "%d%%"
 msgstr "%d%%"
 
-#: src/powerman-framework.js:987
+#: src/applet.js:1283
+#, javascript-format
+msgid "Are you sure you want to remove '%s'?"
+msgstr "¿Estás seguro de que quieres eliminar '%s'?"
+
+#: src/powerman-framework.js:1017
 msgid "Critical Battery"
 msgstr "Batería crítica"
 
-#: src/powerman-framework.js:988
+#: src/powerman-framework.js:1018
 #, javascript-format
 msgid "Battery %s critically low"
 msgstr "Batería %s críticamente baja"
 
-#: src/powerman-framework.js:993
+#: src/powerman-framework.js:1023
 msgid "Low Battery"
 msgstr "Batería baja"
 
-#: src/powerman-framework.js:994
+#: src/powerman-framework.js:1024
 #, javascript-format
 msgid "Battery %s low"
 msgstr "Batería %s baja"
 
-#: src/powerman-framework.js:1077 src/powerman-framework.js:1088
+#: src/powerman-framework.js:1116 src/powerman-framework.js:1127
 #, javascript-format
 msgid "brightness %d%%"
 msgstr "brillo %d%%"
 
-#: src/powerman-framework.js:1273
+#: src/powerman-framework.js:1312
 #, javascript-format
 msgid "power profile %s"
 msgstr "perfil de energía %s"
 
-#: src/powerman-framework.js:1391
+#: src/powerman-framework.js:1429
 #, javascript-format
 msgid "power-saver mode (battery low: %d%%)"
 msgstr "modo ahorro de energía (batería baja: %d%%)"
 
-#: src/powerman-framework.js:1511
+#: src/powerman-framework.js:1562
 msgid "AC power: "
 msgstr "Alimentación de CA: "
 
-#: src/powerman-framework.js:1511
+#: src/powerman-framework.js:1562
 msgid "Battery power: "
 msgstr "Batería: "
 
-#: src/powerman-framework.js:1536
+#: src/powerman-framework.js:1587
 msgid "Power Automation"
 msgstr "Automatización de energía"
 
-# Metadata strings from metadata.json
 msgid ""
-"Enhanced power management with separate AC/Battery settings for brightness, "
-"power profiles, and automation - based on original power applet for Cinnamon"
-msgstr ""
+"Enhanced power applet with automatic brightness and power profiles for AC/"
+"Battery"
+msgstr "Applet de energía mejorado con brillo automático y perfiles de energía para AC/Batería"
 
-msgid "PowerMan - Enhanced Power Manager"
-msgstr ""
+msgid "PowerMan - Power Automation"
+msgstr "PowerMan - Automatización de energía"
 
 # Settings UI strings from settings-schema.json
 msgid "10 minutes"
@@ -431,11 +438,6 @@ msgstr "Oscurecer pantalla en inactividad con CA"
 msgid "Dim screen when idle on battery"
 msgstr "Oscurecer pantalla en inactividad con batería"
 
-msgid "Disable default Cinnamon power applet and use PowerMan instead"
-msgstr ""
-"Desactivar applet de energía predeterminado de Cinnamon y usar PowerMan en "
-"su lugar"
-
 msgid "Display"
 msgstr "Pantalla"
 
@@ -502,14 +504,12 @@ msgstr "Perfil de energía a usar con CA"
 msgid "Power profile to use when on battery power"
 msgstr "Perfil de energía a usar con batería"
 
-msgid "Prefer battery-based AC detection"
-msgstr ""
-
 msgid "Remember user brightness changes"
 msgstr ""
 
-msgid "Replace system power applet"
-msgstr "Reemplazar applet de energía del sistema"
+msgid ""
+"Replaced by remove button in applet menu (kept for schema compatibility)"
+msgstr ""
 
 msgid ""
 "Screen brightness control is not available on this system. Brightness "
@@ -542,7 +542,3 @@ msgstr "El nivel de brillo a usar al oscurecer la pantalla"
 msgid "Time before screen dims when idle"
 msgstr "Tiempo antes de oscurecer la pantalla en inactividad"
 
-msgid ""
-"Use battery state for AC detection instead of LINE_POWER (recommended for "
-"most laptops)"
-msgstr ""

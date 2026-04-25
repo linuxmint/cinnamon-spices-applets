@@ -64,7 +64,7 @@
     "section-notifications": {
       "type": "section",
       "title": "Notifications and System Integration",
-      "keys": ["show-notifications", "replace-system-tray-icon", "prefer-battery-ac-detection"]
+      "keys": ["show-notifications"]
     },
     "section-debug": {
       "type": "section",
@@ -200,10 +200,9 @@
   },
 
   "replace-system-tray-icon": {
-    "type": "switch",
+    "type": "generic",
     "default": false,
-    "description": "Replace system power applet",
-    "tooltip": "Disable default Cinnamon power applet and use PowerMan instead"
+    "description": "Replaced by remove button in applet menu (kept for schema compatibility)"
   },
 
   "labelinfo": {
@@ -229,12 +228,6 @@
     "default": false,
     "description": "Hide applet icon from panel",
     "tooltip": "Hide applet icon from panel"
-  },
-  "prefer-battery-ac-detection": {
-    "type": "switch",
-    "default": true,
-    "description": "Prefer battery-based AC detection",
-    "tooltip": "Use battery state for AC detection instead of LINE_POWER (recommended for most laptops)"
   },
 
   "debug-logging": {

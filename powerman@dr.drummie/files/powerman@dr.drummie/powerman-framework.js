@@ -15,7 +15,7 @@ const Gettext = imports.gettext;
 
 // Configuration constants
 const UUID = "powerman@dr.drummie";
-const LOCALE_DIR = GLib.get_home_dir() + "/.local/share/locale";
+const LOCALE_DIR = GLib.get_user_data_dir() + "/locale";
 
 // Set up translations
 Gettext.bindtextdomain(UUID, LOCALE_DIR);
@@ -33,6 +33,9 @@ const POWER_PROFILES = {
 
 // UPower enums for easier access
 const { DeviceKind: UPDeviceKind, DeviceState: UPDeviceState, DeviceLevel: UPDeviceLevel } = UPowerGlib;
+
+// Delay for brightness detection retries (ms)
+var BRIGHTNESS_DETECTION_DELAY_MS = 2000;
 
 /**
  * Main Extension Framework
@@ -93,7 +96,6 @@ PowerAppletExtensionFramework.prototype = {
             "debug-logging",
             "replace-system-tray-icon",
             "hide-applet-icon",
-            "prefer-battery-ac-detection",
             "original-power-applets",
         ];
 
@@ -116,8 +118,7 @@ PowerAppletExtensionFramework.prototype = {
                             this._settings.set(key, newValue);
                             this.triggerHook("setting-changed", key, newValue, oldValue);
                         }
-                    },
-                    Gio.SettingsBindFlags.GET
+                    }
                 );
                 this._boundSettingKeys.push(key);
             } catch (e) {
@@ -294,7 +295,7 @@ PowerAppletExtensionFramework.prototype = {
             if (manager.destroy) {
                 try {
                     manager.destroy();
-                    this._log(`Manager '${name}' destroyed`);
+                    this._debugLog(`Manager '${name}' destroyed`);
                 } catch (e) {
                     this._log(`Error destroying manager '${name}': ${e.message}`);
                 }
@@ -303,7 +304,7 @@ PowerAppletExtensionFramework.prototype = {
         this._managers.clear();
         this._hooks.clear();
         this._settings.clear();
-        this._log("Extension framework destroyed");
+        this._log("Extension framework destroyed - applet removed");
     },
 };
 
@@ -702,6 +703,8 @@ class BatteryManager extends BaseManager {
         this._batteryStates = new Map(); // Device state tracking
         this._batteryModels = new Map(); // Battery models by deviceId
         this._vendorWorkarounds = this._detectVendorWorkarounds();
+        this._upowerProxy = null; // UPower top-level proxy for OnBattery property
+        this._initUPowerProxy();
 
         this.addHook("device-scan-post", this._onDeviceUpdate);
         this.debug("Battery Manager initialized");
@@ -719,16 +722,10 @@ class BatteryManager extends BaseManager {
             if (success) {
                 let vendor = contents.toString().trim().toLowerCase();
                 workarounds.vendor = vendor;
-
-                // Vendor-specific workarounds and user preference for battery-based AC detection
-                if (this.getSetting("prefer-battery-ac-detection")) {
-                    workarounds.ignoreLinePower = true;
-                    this.debug("Applied battery-based AC detection workarounds");
-                }
             }
         } catch (e) {
             // Silently ignore missing or inaccessible DMI files (normal on some systems)
-            if (!(e instanceof GLib.Error) ||
+            if (typeof e.matches !== "function" ||
                 (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND) &&
                  !e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.PERMISSION_DENIED))) {
                 this.debug(`Vendor detection failed: ${e.message}`);
@@ -739,69 +736,99 @@ class BatteryManager extends BaseManager {
     }
 
     /**
-     * Handle device updates - use existing device data from applet
+     * Initialize a lightweight D-Bus proxy for the UPower OnBattery property.
+     * This is the authoritative AC/battery source — same as gnome-power-statistics.
+     * Falls back gracefully if UPower is unavailable (e.g. VM, nested session).
      */
-    _onDeviceUpdate(devices) {
-        // Use devices from the applet's _devicesChanged scan instead of making new request
-        this._processExistingDeviceData();
+    _initUPowerProxy() {
+        var UPowerIface, UPowerProxyCtor;
+        try {
+            UPowerIface = `<node>
+              <interface name="org.freedesktop.UPower">
+                <property name="OnBattery" type="b" access="read"/>
+              </interface>
+            </node>`;
+            UPowerProxyCtor = Gio.DBusProxy.makeProxyWrapper(UPowerIface);
+            this._upowerProxy = new UPowerProxyCtor(
+                Gio.DBus.system,
+                "org.freedesktop.UPower",
+                "/org/freedesktop/UPower"
+            );
+            this.debug("UPower OnBattery proxy ready, OnBattery=" + this._upowerProxy.OnBattery);
+        } catch (e) {
+            this._upowerProxy = null;
+            this.debug("UPower proxy unavailable: " + e.message);
+        }
     }
 
     /**
-     * Process device data that's already been scanned by the applet
+     * Handle device updates from device-scan-post hook
+     * @param {Array} rawDevices - raw device array from UPower GetDevicesRemote
      */
-    _processExistingDeviceData() {
-        if (!this._applet._proxy) return;
+    _onDeviceUpdate(rawDevices) {
+        if (!rawDevices || rawDevices.length === 0) {
+            this.debug("No raw devices in hook, skipping");
+            return;
+        }
+        this._processDeviceData(rawDevices);
+    }
 
-        // Get fresh device data using the same method as _devicesChanged
-        this._applet._proxy.GetDevicesRemote(
-            Lang.bind(this, function (result, error) {
-                if (error) {
-                    this.debug(`Error getting devices for power state: ${error.message}`);
-                    return;
-                }
+    /**
+     * Process raw device data received via device-scan-post hook
+     * @param {Array} rawDevices - raw device array from UPower
+     */
+    _processDeviceData(rawDevices) {
+        var batteryDevices = [];
+        var linePowerDevices = [];
+        var hasBatteries = false;
 
-                let devices = result[0];
-                let batteryDevices = [];
-                let linePowerDevices = [];
-                let hasBatteries = false;
+        this.debug("[BatteryManager] Processing " + rawDevices.length + " devices from hook (no extra D-Bus call)");
 
-                this.debug(`Processing ${devices.length} devices for power state detection`);
+        // Process all raw devices
+        for (var i = 0; i < rawDevices.length; i++) {
+            var device = rawDevices[i];
+            var deviceId = device[0];
+            var vendor = device[1];
+            var model = device[2];
+            var deviceKind = device[3];
+            var percentage = device[5];
+            var state = device[6];
+            var batteryLevel = device[7];
 
-                // Process all raw devices
-                for (let device of devices) {
-                    let [deviceId, vendor, model, deviceKind, icon, percentage, state, batteryLevel, seconds] = device;
+            if (deviceKind === UPDeviceKind.BATTERY && state !== UPDeviceState.UNKNOWN) {
+                batteryDevices.push({ deviceId: deviceId, percentage: percentage, state: state, vendor: vendor, model: model });
+                hasBatteries = true;
+                this._batteryModels.set(deviceId, { vendor: vendor, model: model });
+                this._trackBatteryState(deviceId, percentage, state, batteryLevel);
+                this.debug("Battery device: " + deviceId + ", " + Math.round(percentage) + "%, state: " + state);
+            } else if (deviceKind === UPDeviceKind.LINE_POWER) {
+                var online = percentage > 0 || state !== UPDeviceState.UNKNOWN;
+                linePowerDevices.push({ deviceId: deviceId, online: online, state: state, percentage: percentage });
+                this.debug("LINE_POWER device: " + deviceId + ", online: " + online);
+            }
+        }
 
-                    if (deviceKind === UPDeviceKind.BATTERY && state !== UPDeviceState.UNKNOWN) {
-                        batteryDevices.push({ deviceId, percentage, state, vendor, model });
-                        hasBatteries = true;
-                        // Store battery model for later retrieval
-                        this._batteryModels.set(deviceId, { vendor, model });
-                        this._trackBatteryState(deviceId, percentage, state, batteryLevel);
-                        this.debug(`Battery device: ${deviceId}, ${Math.round(percentage)}%, state: ${state}`);
-                    } else if (deviceKind === UPDeviceKind.LINE_POWER) {
-                        // For LINE_POWER, online status is usually derived from percentage or state
-                        let online = percentage > 0 || state !== UPDeviceState.UNKNOWN;
-                        linePowerDevices.push({ deviceId, online, state, percentage });
-                        this.debug(
-                            `LINE_POWER device: ${deviceId}, online: ${online}, percentage: ${percentage}, state: ${state}`
-                        );
-                    }
-                }
-
-                // Determine AC state using hybrid approach
-                let acState = this._determineACState(batteryDevices, linePowerDevices, hasBatteries);
-                this._checkPowerStateChange(acState);
-            })
-        );
+        var acState = this._determineACState(batteryDevices, linePowerDevices, hasBatteries);
+        this._checkPowerStateChange(acState);
     }
 
     /**
      * Hybrid AC detection - battery state primary, LINE_POWER fallback
      */
     _determineACState(batteryDevices, linePowerDevices, hasBatteries) {
+        var onBattery;
         this.debug(
             `Determining AC state: ${batteryDevices.length} batteries, ${linePowerDevices.length} line power devices`
         );
+
+        // PRIMARY: UPower top-level OnBattery — authoritative, avoids DISCHARGING@100% false negative
+        if (this._upowerProxy !== null) {
+            onBattery = this._upowerProxy.OnBattery;
+            if (onBattery !== null && onBattery !== undefined) {
+                this.debug("AC state from UPower.OnBattery: " + (onBattery ? "Battery" : "AC"));
+                return !onBattery;
+            }
+        }
 
         // Desktop/VM fallback - no batteries means constant AC (moved to top)
         if (!hasBatteries) {
@@ -1022,6 +1049,15 @@ class BatteryManager extends BaseManager {
     getVendorInfo() {
         return this._vendorWorkarounds.vendor;
     }
+
+    /**
+     * Clean up UPower proxy reference on applet removal.
+     */
+    destroy() {
+        this._upowerProxy = null;
+        this.debug("BatteryManager destroyed");
+        super.destroy();
+    }
 }
 
 /**
@@ -1193,11 +1229,11 @@ class BrightnessManager extends BaseManager {
     }
 
     isBrightnessSupported() {
-        return this._applet.brightness && this._applet.brightness.actor && this._applet.brightness.actor.visible;
+        return this._applet.brightness && this._applet.brightness._isSupported === true;
     }
 
     isKeyboardBrightnessSupported() {
-        return this._applet.keyboard && this._applet.keyboard.actor && this._applet.keyboard.actor.visible;
+        return this._applet.keyboard && this._applet.keyboard._isSupported === true;
     }
 
     /**
@@ -1220,12 +1256,12 @@ class BrightnessManager extends BaseManager {
         }
 
         this._applet.brightness._proxy.GetPercentageRemote(
-            Lang.bind(this, function (b, error) {
+            (b, error) => {
                 if (!error) {
                     let bNum = Number(b); // Parse to number to avoid string issues
                     this._lastScreenBrightness = bNum < 100 ? bNum + 1 : 100; // Apply correction for consistency
                 }
-            })
+            }
         );
     }
 }
@@ -1280,20 +1316,19 @@ class PowerAutomationManager extends BaseManager {
     }
 
     /**
-     * Handle battery level changes
-     * @param {*} deviceId
-     * @param {*} newLevel
-     * @param {*} oldLevel
-     * @returns
+     * Handle significant battery level changes — trigger saver on threshold crossing
+     * @param {string} deviceId - Battery device ID
+     * @param {number} newLevel - Current battery percentage
+     * @param {number} oldLevel - Previous battery percentage
      */
     _onBatteryLevelChanged(deviceId, newLevel, oldLevel) {
-        let batteryManager = this._getBatteryManager();
-        if (!batteryManager) {
-            this.debug("Battery manager not available");
-            return;
+        if (!this.getSetting("enable-battery-saver")) { return; }
+        var threshold = this.getSetting("battery-low-threshold") || 20;
+        // Trigger only when descending past the threshold, not on every update
+        if (newLevel !== null && newLevel <= threshold && (oldLevel === null || oldLevel > threshold)) {
+            this.debug("Battery level " + newLevel + "% crossed threshold " + threshold + "% — triggering battery saver");
+            this._onBatterySaverTrigger(deviceId, newLevel, threshold);
         }
-
-        // TODO: Add battery level change logic here if needed
     }
 
     /**
@@ -1457,12 +1492,25 @@ class SystemManager extends BaseManager {
         this._notificationTimer = null;
         // Last notification time for cooldown
         this._lastNotificationTime = null;
+        // Timer for delayed brightness capability re-check
+        this._brightnessDetectionTimer = null;
 
         // Update capabilities after devices are scanned
         this.addHook("device-scan-post", this._updateSystemIntegration.bind(this));
 
         this.addHook("setting-changed", this._onSettingChanged);
         this.addHook("automation-action", this._onAutomationAction);
+
+        // Delayed re-check: brightness D-Bus proxy may not resolve before device-scan-post
+        this._brightnessDetectionTimer = GLib.timeout_add(
+            GLib.PRIORITY_DEFAULT,
+            BRIGHTNESS_DETECTION_DELAY_MS,
+            () => {
+                this._brightnessDetectionTimer = null;
+                this._updateCapabilitySettings();
+                return false; // single shot
+            }
+        );
 
         this.debug("System Manager initialized");
     }
@@ -1685,6 +1733,11 @@ class SystemManager extends BaseManager {
             GLib.source_remove(this._notificationTimer);
             this._notificationTimer = null;
             this.debug("Notification timer cleaned up");
+        }
+
+        if (this._brightnessDetectionTimer) {
+            GLib.source_remove(this._brightnessDetectionTimer);
+            this._brightnessDetectionTimer = null;
         }
 
         super.destroy();

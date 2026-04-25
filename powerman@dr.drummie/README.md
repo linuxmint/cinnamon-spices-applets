@@ -1,6 +1,6 @@
-# PowerMan - Enhanced Power Manager for Cinnamon
+# PowerMan - Power Automation for Cinnamon
 
-**An enhanced power management applet for Cinnamon 6.x that extends the default power applet with automation features for brightness and power profiles. Designed primarily for laptop systems.**
+**A laptop-focused power applet for Cinnamon 6.x with automatic brightness and power profile switching for AC/Battery — extends the default Cinnamon power applet.**
 
 ![screenshot](screenshot.png)
 
@@ -8,7 +8,7 @@
 
 ### 🔋 **Enhanced Power Management**
 
-- **Power source detection** (AC/Battery) with automatic profile switching
+- **Reliable power source detection** (AC/Battery) via UPower — works correctly even on laptops with battery charge-protection circuits that report `DISCHARGING` at full charge while plugged in
 - **Battery level notifications** with customizable thresholds
 - **Battery monitoring** with detailed device information — based on the original `power@cinnamon.org` applet
 
@@ -29,7 +29,7 @@
 ### ⚙️ **Configuration**
 
 - Settings and options appear only when supported hardware is detected
-- **System integration** - option to replace or hide alongside the default Cinnamon power applet
+- **System integration** - one-click removal of the default Cinnamon power applet directly from the popup menu
 - **Debug logging** - for troubleshooting
 
 ## Installation
@@ -55,7 +55,7 @@ Access settings by right-clicking the applet and selecting "Configure..." or dir
 
 - **Panel Display**: Choose what information to show (battery percentage, time remaining, etc.)
 - **Notifications**: Enable/disable automation notifications
-- **System Integration**: Replace default power applet or hide this one
+  - **System Integration**: Remove the default Cinnamon power applet via a button in the popup menu (visible only while the original applet is active)
 - **Debug Logging**: Enable detailed logging for troubleshooting
 
 ### **Brightness Control** _(available only if brightness control detected)_
@@ -78,7 +78,7 @@ PowerMan automatically detects available hardware and shows only relevant settin
 
 ## Compatibility
 
-- **Cinnamon Desktop**: 6.0, 6.2, 6.4+ (Linux Mint and other Cinnamon-based distributions)
+- **Cinnamon Desktop**: 6.4, 6.6+ (Linux Mint 22.1+ and other Cinnamon-based distributions)
 - **Brightness automation** requires `cinnamon-settings-daemon` — standard on Linux Mint; present on most Cinnamon-based distros. The applet auto-detects availability and disables features gracefully if not found.
 - **Power profiles** require `power-profiles-daemon`
 

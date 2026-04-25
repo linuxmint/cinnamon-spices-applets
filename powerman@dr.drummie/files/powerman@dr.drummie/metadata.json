@@ -1,11 +1,11 @@
 {
   "uuid": "powerman@dr.drummie",
-  "name": "PowerMan - Enhanced Power Manager",
-  "description": "Enhanced power management with separate AC/Battery settings for brightness, power profiles, and automation - based on original power applet for Cinnamon",
+  "name": "PowerMan - Power Automation",
+  "description": "Enhanced power applet with automatic brightness and power profiles for AC/Battery",
   "author": "drdrummie",
   "url": "https://github.com/drdrummie/cinnamon-spices-applets/tree/master/powerman@dr.drummie",
-  "version": "1.9.6",
-  "cinnamon-version": ["6.0", "6.2", "6.4"],
+  "version": "1.9.10",
+  "cinnamon-version": ["6.4", "6.6"],
   "multiversion": true,
   "max-instances": 1
 }

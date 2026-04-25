@@ -8,6 +8,8 @@ const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
 const Settings = imports.ui.settings;
 const Tooltips = imports.ui.tooltips;
+const ModalDialog = imports.ui.modalDialog;
+const Extension = imports.ui.extension;
 
 // GI imports
 const Clutter = imports.gi.Clutter;
@@ -23,7 +25,7 @@ const Gettext = imports.gettext;
 
 // Configuration constants
 const UUID = "powerman@dr.drummie";
-const LOCALE_DIR = GLib.get_home_dir() + "/.local/share/locale";
+const LOCALE_DIR = GLib.get_user_data_dir() + "/locale";
 
 // Import the refactored framework
 const Framework = require("./powerman-framework.js");
@@ -32,6 +34,24 @@ const Framework = require("./powerman-framework.js");
 const BrightnessBusName = "org.cinnamon.SettingsDaemon.Power.Screen";
 const KeyboardBusName = "org.cinnamon.SettingsDaemon.Power.Keyboard";
 const CSD_BACKLIGHT_NOT_SUPPORTED_CODE = 1;
+/** Default step size for brightness adjustment if device doesn't report its own */
+const BRIGHTNESS_DEFAULT_STEP = 0.05;
+const STARTUP_DELAY_MS = 500;
+/** Some backlight drivers report 0-99 range; add 1 to normalize to 0-100 */
+const BRIGHTNESS_DISPLAY_CORRECTION = 1;
+
+/**
+ * Format battery time remaining as "H:MM".
+ * @param {number} seconds - Time in seconds.
+ * @returns {string} Formatted time string, e.g. "1:45".
+ */
+function formatTimeRemaining(seconds) {
+    let time = Math.round(seconds / 60);
+    let minutes = time % 60;
+    let hours = Math.floor(time / 60);
+    return C_("time of battery remaining", "%d:%02d").format(hours, minutes);
+}
+
 const PANEL_EDIT_MODE_KEY = "panel-edit-mode";
 
 // UPower enums
@@ -180,15 +200,15 @@ function deviceKindToIcon(kind, icon) {
     }
 }
 
-function reportsPreciseLevels(battery_level) {
-    return battery_level == UPDeviceLevel.NONE;
+function reportsPreciseLevels(batteryLevel) {
+    return batteryLevel == UPDeviceLevel.NONE;
 }
 
 // Device item class (unchanged from original)
 class DeviceItem extends PopupMenu.PopupBaseMenuItem {
     constructor(device, status, aliases) {
         super({ reactive: false });
-        let [device_id, vendor, model, device_kind, icon, percentage, state, battery_level, time] = device;
+        let [device_id, vendor, model, device_kind, icon, percentage, state, batteryLevel, time] = device;
 
         this._box = new St.BoxLayout({ style_class: "popup-device-menu-item" });
         this._vbox = new St.BoxLayout({ style_class: "popup-device-menu-item", vertical: true });
@@ -211,13 +231,13 @@ class DeviceItem extends PopupMenu.PopupBaseMenuItem {
         }
 
         let statusLabel = null;
-        if (battery_level == UPDeviceLevel.NONE) {
+        if (batteryLevel == UPDeviceLevel.NONE) {
             this.label = new St.Label({ text: "%s %d%%".format(description, Math.round(percentage)) });
             statusLabel = new St.Label({ text: "%s".format(status), style_class: "popup-inactive-menu-item" });
         } else {
             this.label = new St.Label({ text: "%s".format(description) });
             statusLabel = new St.Label({
-                text: "%s".format(deviceLevelToString(battery_level)),
+                text: "%s".format(deviceLevelToString(batteryLevel)),
                 style_class: "popup-inactive-menu-item",
             });
         }
@@ -259,17 +279,17 @@ class BrightnessSlider extends PopupMenu.PopupSliderMenuItem {
         this._step = 0.05;
         this._internalChange = false; // Flag to prevent hook triggering on internal changes
 
-        this.connect(
+        this._dragBeginId = this.connect(
             "drag-begin",
-            Lang.bind(this, function () {
+            () => {
                 this._seeking = true;
-            })
+            }
         );
-        this.connect(
+        this._dragEndId = this.connect(
             "drag-end",
-            Lang.bind(this, function () {
+            () => {
                 this._seeking = false;
-            })
+            }
         );
 
         this.icon = new St.Icon({ icon_name: icon, icon_type: St.IconType.SYMBOLIC, icon_size: 16 });
@@ -283,14 +303,14 @@ class BrightnessSlider extends PopupMenu.PopupSliderMenuItem {
 
         Interfaces.getDBusProxyAsync(
             busName,
-            Lang.bind(this, function (proxy, error) {
+            (proxy, error) => {
                 if (error) {
                     this._debugLog(`DBus proxy error for ${busName}: ${error.message}`);
                     return;
                 }
                 this._proxy = proxy;
                 this._proxy.GetPercentageRemote(Lang.bind(this, this._dbusAcquired));
-            })
+            }
         );
     }
 
@@ -302,20 +322,23 @@ class BrightnessSlider extends PopupMenu.PopupSliderMenuItem {
                 if (error != null) {
                     if (error.code != CSD_BACKLIGHT_NOT_SUPPORTED_CODE) {
                         global.logError(`Could not get backlight step for ${this._busName}: ${error.message}`);
-                        return;
-                    } else {
-                        this._step = 0.05;
                     }
+                    this._step = BRIGHTNESS_DEFAULT_STEP;
+                    return;
                 }
-                this._step = step / 100;
+                if (typeof step === "number") {
+                    this._step = step / 100;
+                }
             });
         } catch (e) {
-            this._step = 0.05;
+            // GetStepRemote not available on this CSD version — use default step
+            this._step = BRIGHTNESS_DEFAULT_STEP;
         }
 
         this._updateBrightnessLabel(b);
         this.setValue(b / 100);
-        this.connect("value-changed", Lang.bind(this, this._sliderChanged));
+        this._valueChangedId = this.connect("value-changed", Lang.bind(this, this._sliderChanged));
+        this._isSupported = true;  // Set before actor.show() to avoid capability race
         this.actor.show();
 
         //get notified
@@ -359,26 +382,39 @@ class BrightnessSlider extends PopupMenu.PopupSliderMenuItem {
     _getBrightnessForcedUpdate() {
         if (!this._proxy) { return; }
         this._proxy.GetPercentageRemote(
-            Lang.bind(this, function (b) {
+            (b) => {
                 let bNum = Number(b); // Parse to number to avoid string concatenation
-                let _b = bNum < 100 ? bNum + 1 : 100;
+                let _b = bNum < 100 ? bNum + BRIGHTNESS_DISPLAY_CORRECTION : 100;
                 //this._debugLog(`Brightness raw from ${this._busName}: ${bNum}, corrected: ${_b}`);
                 //this._debugLog(`Brightness updated from ${this._busName}: ${_b}%`);
                 this._updateBrightnessLabel(_b);
                 this.setValue(_b / 100);
-            })
+            }
         );
     }
 
     _setBrightness(value) {
-        this._internalChange = true; // Mark as internal change
+        if (!this._proxy) {
+            this._debugLog("Brightness proxy not available, skipping brightness set");
+            return;
+        }
+        // Use a counter instead of a boolean flag to correctly handle multiple concurrent in-flight calls.
+        // A boolean would be reset by the first callback, allowing subsequent callbacks to fire the hook
+        // as if they were external events (race condition).
+        this._pendingInternalChanges = (this._pendingInternalChanges || 0) + 1;
         this._proxy.SetPercentageRemote(
             value,
             Lang.bind(this, function (b, error) {
+                this._pendingInternalChanges = Math.max(0, (this._pendingInternalChanges || 0) - 1);
+                // Unwrap D-Bus array return value and apply +1% display correction,
+                // consistent with _getBrightnessForcedUpdate. Without Number(), b arrives
+                // as a GJS array [value] which would pass through as Array(1) to the hook.
+                let bNum = Number(b);
+                let _b = bNum < 100 ? bNum + BRIGHTNESS_DISPLAY_CORRECTION : 100;
                 this._debugLog(
-                    `SetBrightness: sent ${value}%, received ${b}% (error: ${error ? error.message : "none"})`
+                    `SetBrightness: sent ${value}%, received ${_b}% (error: ${error ? error.message : "none"})`
                 );
-                this._updateBrightnessLabel(b);
+                this._updateBrightnessLabel(_b);
             })
         );
     }
@@ -389,11 +425,9 @@ class BrightnessSlider extends PopupMenu.PopupSliderMenuItem {
         this.tooltip.set_text(this.tooltipText);
         if (this._seeking) this.tooltip.show();
 
-        // Trigger hook for brightness change in extension framework
-        if (this._applet._extensionFramework && value && !this._internalChange) {
+        if (this._applet._extensionFramework && value && !this._pendingInternalChanges) {
             this._applet._extensionFramework.triggerHook("brightness-changed", value);
         }
-        this._internalChange = false; // Reset flag after processing
     }
 
     /**
@@ -409,6 +443,18 @@ class BrightnessSlider extends PopupMenu.PopupSliderMenuItem {
             this._menuStateSignalId = null;
         }
         this._proxy = null;
+        if (this._dragBeginId) {
+            try { this.disconnect(this._dragBeginId); } catch (e) {}
+            this._dragBeginId = null;
+        }
+        if (this._dragEndId) {
+            try { this.disconnect(this._dragEndId); } catch (e) {}
+            this._dragEndId = null;
+        }
+        if (this._valueChangedId) {
+            try { this.disconnect(this._valueChangedId); } catch (e) {}
+            this._valueChangedId = null;
+        }
         super.destroy();
     }
 
@@ -459,7 +505,7 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
         this._deviceItems = [];
         this._devices = [];
         this._primaryDeviceId = null;
-        this.panel_icon_name = "";
+        this.panelIconName = "";
 
         // Menu setup
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -514,15 +560,35 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
             Lang.bind(this, this._onProfileAutoChanged)
         );
 
+        // Show remove button only if the original power applet is still active in panels
+        this._removeAppletItem = null;
+        this._removeAppletItemId = null;
+        this._removeAppletSeparator = null;
+        if (this._detectOriginalPowerApplet()) {
+            this._removeAppletItem = new PopupMenu.PopupIconMenuItem(
+                _("Remove power applet"),
+                "edit-delete-symbolic",
+                St.IconType.SYMBOLIC
+            );
+            this._removeAppletItemId = this._removeAppletItem.connect(
+                "activate",
+                Lang.bind(this, this._onRemoveOriginalPowerApplet)
+            );
+            this.menu.addMenuItem(this._removeAppletItem);
+            this._removeAppletSeparator = new PopupMenu.PopupSeparatorMenuItem();
+            this.menu.addMenuItem(this._removeAppletSeparator);
+        }
+
         // Add automation settings menu item
-        let settingsItem = new PopupMenu.PopupMenuItem(_("Automation Settings"));
-        settingsItem.connect(
+        // Store the menu item and its signal id so we can disconnect it in destroy()
+        this._settingsItem = new PopupMenu.PopupMenuItem(_("Automation Settings"));
+        this._settingsItemActivateId = this._settingsItem.connect(
             "activate",
             Lang.bind(this, function () {
                 this.configureApplet();
             })
         );
-        this.menu.addMenuItem(settingsItem);
+        this.menu.addMenuItem(this._settingsItem);
 
         this.menu.addSettingsAction(_("Power Settings"), "power");
 
@@ -533,13 +599,14 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
         // === DELAYED D-BUS CONNECTION SETUP ===
         // Add timeout to allow CSD Power service to start before attempting connection
         // This fixes early detection issues, especially in VM environments and laptops
-        GLib.timeout_add(
+        this._startupTimeoutId = GLib.timeout_add(
             GLib.PRIORITY_DEFAULT,
-            500,
-            Lang.bind(this, () => {
+            STARTUP_DELAY_MS,
+            () => {
+                this._startupTimeoutId = null;
                 this._setupDBusConnections();
-                return false; // Run once
-            })
+                return GLib.SOURCE_REMOVE;
+            }
         );
 
         this.set_show_label_in_vertical_panels(false);
@@ -624,6 +691,10 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
                             this._debugLog(
                                 `Could not connect to csd-power (may be expected in VM/laptop): ${error.message}`
                             );
+                            // Ensure framework is initialized even if proxy is unavailable
+                            if (!this._extensionFramework) {
+                                this._initializeExtensionFramework();
+                            }
                             return;
                         }
 
@@ -632,7 +703,7 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
 
                         this._deviceAliasesSignalId = global.settings.connect(
                             "changed::device-aliases",
-                            Lang.bind(this, this._on_device_aliases_changed)
+                            Lang.bind(this, this._onDeviceAliasesChanged)
                         );
 
                         this._debugLog("Connected to CSD Power service");
@@ -647,7 +718,12 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
                     })
                 );
             }),
-            null
+            () => {
+                if (!this._extensionFramework) {
+                    this._debugLog("CSD Power service not available - initializing framework without proxy");
+                    this._initializeExtensionFramework();
+                }
+            }
         );
     }
 
@@ -748,7 +824,7 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
         }
     }
 
-    _on_device_aliases_changed() {
+    _onDeviceAliasesChanged() {
         this.aliases = global.settings.get_strv("device-aliases");
         this._devicesChanged();
     }
@@ -789,7 +865,7 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
     // === DEVICE STATUS AND DISPLAY ===
     _getDeviceStatus(device) {
         let status = "";
-        let [device_id, vendor, model, device_kind, icon, percentage, state, battery_level, seconds] = device;
+        let [device_id, vendor, model, device_kind, icon, percentage, state, batteryLevel, seconds] = device;
 
         let time = Math.round(seconds / 60);
         let minutes = time % 60;
@@ -860,8 +936,12 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
         return status;
     }
 
+    /**
+     * Update panel icon, tooltip and label for a single primary device.
+     * @param {Array} device - Device tuple from UPower proxy.
+     */
     showDeviceInPanel(device) {
-        let [device_id, vendor, model, device_kind, icon, percentage, state, battery_level, seconds] = device;
+        let [device_id, vendor, model, device_kind, icon, percentage, state, batteryLevel, seconds] = device;
         let status = this._getDeviceStatus(device);
         this.set_applet_tooltip(status);
 
@@ -869,35 +949,29 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
         if (this.labelinfo == "nothing") {
             // Show nothing
         } else if (this.labelinfo == "time" && seconds != 0) {
-            let time = Math.round(seconds / 60);
-            let minutes = time % 60;
-            let hours = Math.floor(time / 60);
-            labelText = C_("time of battery remaining", "%d:%02d").format(hours, minutes);
+            labelText = formatTimeRemaining(seconds);
         } else if (this.labelinfo == "percentage" || (this.labelinfo == "percentage_time" && seconds == 0)) {
             labelText = C_("percent of battery remaining", "%d%%").format(Math.round(percentage));
         } else if (this.labelinfo == "percentage_time") {
-            let time = Math.round(seconds / 60);
-            let minutes = Math.floor(time % 60);
-            let hours = Math.floor(time / 60);
             labelText =
                 C_("percent of battery remaining", "%d%%").format(Math.round(percentage)) +
                 " (" +
-                C_("time of battery remaining", "%d:%02d").format(hours, minutes) +
+                formatTimeRemaining(seconds) +
                 ")";
         }
 
         this.set_applet_label(labelText);
 
         if (icon) {
-            if (this.panel_icon_name != icon) {
-                this.panel_icon_name = icon;
+            if (this.panelIconName != icon) {
+                this.panelIconName = icon;
                 this.set_applet_icon_symbolic_name("battery-full");
                 let gicon = Gio.icon_new_for_string(icon);
                 this._applet_icon.gicon = gicon;
             }
         } else {
-            if (this.panel_icon_name != "battery-full") {
-                this.panel_icon_name = "battery-full";
+            if (this.panelIconName != "battery-full") {
+                this.panelIconName = "battery-full";
                 this.set_applet_icon_symbolic_name("battery-full");
             }
         }
@@ -923,10 +997,10 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
                 item = new PopupMenu.PopupMenuItem(POWER_PROFILES[profileName]);
                 item.connect(
                     "activate",
-                    Lang.bind(this, function () {
+                    () => {
                         this._changeProfile(profileName);
                         this.menu.toggle();
-                    })
+                    }
                 );
             }
             this.contentSection.addMenuItem(item);
@@ -936,9 +1010,17 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
     }
 
     _changeProfile(newProfile) {
+        if (!this._profilesProxy) {
+            this._debugLog("Profiles proxy not available, skipping profile change");
+            return;
+        }
         let oldProfile = this.ActiveProfile;
-        this._profilesProxy.ActiveProfile = newProfile;
-        this.ActiveProfile = this._profilesProxy.ActiveProfile;
+        try {
+            this._profilesProxy.ActiveProfile = newProfile;
+            this.ActiveProfile = this._profilesProxy.ActiveProfile;
+        } catch (e) {
+            global.logError("PowerMan: failed to change power profile: " + (e && e.message ? e.message : e));
+        }
         this._debugLog(`Power profile changed to: ${newProfile}`);
     }
 
@@ -954,14 +1036,14 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
 
         // Get primary device
         this._proxy.GetPrimaryDeviceRemote(
-            Lang.bind(this, function (device, error) {
+            (device, error) => {
                 if (error) {
                     this._primaryDeviceId = null;
                 } else {
                     if (device.length == 1) {
                         device = device[0];
                     }
-                    let [device_id, vendor, model, device_kind, icon, percentage, state, battery_level, seconds] =
+                    let [device_id, vendor, model, device_kind, icon, percentage, state, batteryLevel, seconds] =
                         device;
                     this._primaryDeviceId = device_id;
                     this._debugLog(`Primary device: ${device_id}`);
@@ -969,7 +1051,7 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
 
                 // Scan all devices
                 this._proxy.GetDevicesRemote(
-                    Lang.bind(this, function (result, error) {
+                    (result, error) => {
                         this._deviceItems.forEach(function (i) {
                             i.destroy();
                         });
@@ -978,9 +1060,10 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
                         let pct_support_count = 0;
                         let _devices = [];
                         let _deviceItems = [];
+                        var devices; // declared with var before the if block (GJS scoping)
 
                         if (!error) {
-                            let devices = result[0];
+                            devices = result[0];
                             let position = 0;
 
                             this._debugLog(
@@ -994,7 +1077,7 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
                                             icon,
                                             percentage,
                                             state,
-                                            battery_level,
+                                            batteryLevel,
                                             seconds,
                                         ] = device;
                                         try {
@@ -1024,7 +1107,7 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
                                     icon,
                                     percentage,
                                     state,
-                                    battery_level,
+                                    batteryLevel,
                                     seconds,
                                 ] = devices[i];
 
@@ -1033,7 +1116,7 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
                                 // Ignore devices with unknown state
                                 if (state == UPDeviceState.UNKNOWN) continue;
 
-                                if (reportsPreciseLevels(battery_level)) {
+                                if (reportsPreciseLevels(batteryLevel)) {
                                     pct_support_count++;
                                 }
 
@@ -1085,25 +1168,30 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
 
                         // Trigger post-scan hook after devices are populated
                         if (this._extensionFramework) {
-                            this._extensionFramework.triggerHook("device-scan-post", this._devices);
+                            this._extensionFramework.triggerHook("device-scan-post", devices);
                         }
 
                         this._debugLog("Device scan completed");
-                    })
+                    }
                 );
-            })
+            }
         );
     }
 
+    /**
+     * Build and update the panel label for multiple battery devices.
+     * @param {string[]} devices_stats - Status strings for each device.
+     * @param {number} pct_support_count - Number of devices that report percentage.
+     */
     _showMultiDeviceSummary(devices_stats, pct_support_count) {
         let labelText = "";
         if (this.labelinfo !== "nothing") {
             let num = 0;
 
             for (let i = 0; i < this._devices.length; i++) {
-                let [, , , , , percentage, , battery_level, seconds] = this._devices[i];
+                let [, , , , , percentage, , batteryLevel, seconds] = this._devices[i];
 
-                if (!reportsPreciseLevels(battery_level)) {
+                if (!reportsPreciseLevels(batteryLevel)) {
                     continue;
                 }
 
@@ -1112,20 +1200,14 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
                 }
 
                 if (this.labelinfo == "time" && seconds !== 0) {
-                    let time = Math.round(seconds / 60);
-                    let minutes = time % 60;
-                    let hours = Math.floor(time / 60);
-                    labelText += C_("time of battery remaining", "%d:%02d").format(hours, minutes);
+                    labelText += formatTimeRemaining(seconds);
                 } else if (this.labelinfo == "percentage" || (this.labelinfo == "percentage_time" && seconds === 0)) {
                     labelText += C_("percent of battery remaining", "%d%%").format(Math.round(percentage));
                 } else if (this.labelinfo == "percentage_time") {
-                    let time = Math.round(seconds / 60);
-                    let minutes = Math.floor(time % 60);
-                    let hours = Math.floor(time / 60);
                     labelText +=
                         C_("percent of battery remaining", "%d%%").format(Math.round(percentage)) +
                         " (" +
-                        C_("time of battery remaining", "%d:%02d").format(hours, minutes) +
+                        formatTimeRemaining(seconds) +
                         ")";
                 }
 
@@ -1140,15 +1222,15 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
 
         let icon = this._proxy.Icon;
         if (icon) {
-            if (icon != this.panel_icon_name) {
-                this.panel_icon_name = icon;
+            if (icon != this.panelIconName) {
+                this.panelIconName = icon;
                 this.set_applet_icon_symbolic_name("battery-full");
                 let gicon = Gio.icon_new_for_string(icon);
                 this._applet_icon.gicon = gicon;
             }
         } else {
-            if (this.panel_icon_name != "battery-full") {
-                this.panel_icon_name = "battery-full";
+            if (this.panelIconName != "battery-full") {
+                this.panelIconName = "battery-full";
                 this.set_applet_icon_symbolic_name("battery-full");
             }
         }
@@ -1156,14 +1238,14 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
 
     _showNoBatteryState() {
         this.set_applet_label("");
-        if (this.brightness.actor.visible) {
+        if (this.brightness && this.brightness._isSupported === true) {
             this.set_applet_tooltip(_("Brightness"));
-            this.panel_icon_name = "display-brightness";
+            this.panelIconName = "display-brightness";
             this.set_applet_icon_symbolic_name("display-brightness");
             this.set_applet_enabled(true);
-        } else if (this.keyboard.actor.visible) {
+        } else if (this.keyboard && this.keyboard._isSupported === true) {
             this.set_applet_tooltip(_("Keyboard backlight"));
-            this.panel_icon_name = "keyboard-brightness";
+            this.panelIconName = "keyboard-brightness";
             this.set_applet_icon_symbolic_name("keyboard-brightness");
             this.set_applet_enabled(true);
         } else {
@@ -1171,60 +1253,139 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
         }
     }
 
+    // === ORIGINAL POWER APPLET REMOVAL ===
+
+    /**
+     * Checks if power@cinnamon.org or battery@cinnamon.org is currently
+     * active in any panel by reading global.settings "enabled-applets".
+     * @returns {boolean} True if the original power applet is present.
+     */
+    _detectOriginalPowerApplet() {
+        var enabledApplets = global.settings.get_strv("enabled-applets");
+        var i, uuid;
+        for (i = 0; i < enabledApplets.length; i++) {
+            uuid = enabledApplets[i].split(":")[3];
+            if (uuid === "power@cinnamon.org" || uuid === "battery@cinnamon.org") {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Handles activation of the "Remove original power applet" menu item.
+     * Shows a confirmation dialog; on confirmation, immediately unloads
+     * the applet and removes it from enabled-applets permanently.
+     */
+    _onRemoveOriginalPowerApplet() {
+        const TO_REMOVE = "power@cinnamon.org"; // 6.x+ original applet 
+        var dialog = new ModalDialog.ConfirmDialog(
+            _("Are you sure you want to remove '%s'?").format(TO_REMOVE),
+            () => {
+                var TARGETS = ["power@cinnamon.org", "battery@cinnamon.org"]; 
+                var oldList, newList, i, uuid;
+
+                // Immediately unload from the current session
+                for (i = 0; i < TARGETS.length; i++) {
+                    try {
+                        Extension.unloadExtension(TARGETS[i], Extension.Type.APPLET, false, false);
+                    } catch (e) {
+                        // Applet may already be unloaded or not present
+                    }
+                }
+
+                // Remove from enabled-applets to persist across restarts
+                oldList = global.settings.get_strv("enabled-applets");
+                newList = [];
+                for (i = 0; i < oldList.length; i++) {
+                    uuid = oldList[i].split(":")[3];
+                    if (TARGETS.indexOf(uuid) === -1) {
+                        newList.push(oldList[i]);
+                    }
+                }
+                global.settings.set_strv("enabled-applets", newList);
+
+                // Hide the remove button — the original applet is gone
+                if (this._removeAppletItem) {
+                    this._removeAppletItem.actor.visible = false;
+                }
+                if (this._removeAppletSeparator) {
+                    this._removeAppletSeparator.actor.visible = false;
+                }
+            }
+        );
+        dialog.open();
+    }
+
     // === CLEANUP ===
     /**
      * Cleanup method for proper signal disconnection
      */
     destroy() {
-        // Disconnect brightness switch signal
+        if (this.brightness) {
+            this.brightness.destroy();
+            this.brightness = null;
+        }
+
+        if (this.keyboard) {
+            this.keyboard.destroy();
+            this.keyboard = null;
+        }
+
         if (this._brightnessAutoSwitch && this._brightnessAutoSwitchId) {
             try {
                 this._brightnessAutoSwitch.disconnect(this._brightnessAutoSwitchId);
-                this._debugLog("Disconnected brightness switch signal");
-            } catch (e) {
-                this._debugLog(`Error disconnecting brightness switch: ${e.message}`);
-            }
+            } catch (e) { /* widget may already be gone */ }
+            this._brightnessAutoSwitchId = null;
         }
 
-        // Disconnect profile switch signal
         if (this._profileAutoSwitch && this._profileAutoSwitchId) {
             try {
                 this._profileAutoSwitch.disconnect(this._profileAutoSwitchId);
-                this._debugLog("Disconnected profile switch signal");
-            } catch (e) {
-                this._debugLog(`Error disconnecting profile switch: ${e.message}`);
-            }
+            } catch (e) { /* widget may already be gone */ }
+            this._profileAutoSwitchId = null;
         }
 
-        // Disconnect settings change signals
         if (this._brightnessAutoChangedId) {
             try {
                 this.settings.disconnect(this._brightnessAutoChangedId);
-                this._debugLog("Disconnected brightness setting change signal");
-            } catch (e) {
-                this._debugLog(`Error disconnecting brightness setting change: ${e.message}`);
-            }
+            } catch (e) { /* settings may already be gone */ }
+            this._brightnessAutoChangedId = null;
         }
 
         if (this._profileAutoChangedId) {
             try {
                 this.settings.disconnect(this._profileAutoChangedId);
-                this._debugLog("Disconnected profile setting change signal");
-            } catch (e) {
-                this._debugLog(`Error disconnecting profile setting change: ${e.message}`);
-            }
+            } catch (e) { /* settings may already be gone */ }
+            this._profileAutoChangedId = null;
         }
 
-        // Call parent destroy if available
+        if (this._removeAppletItem && this._removeAppletItemId) {
+            try {
+                this._removeAppletItem.disconnect(this._removeAppletItemId);
+            } catch (e) { /* widget may already be gone */ }
+            this._removeAppletItemId = null;
+        }
+
+        // Disconnect settings item signal if present
+        if (this._settingsItem && this._settingsItemActivateId) {
+            try { this._settingsItem.disconnect(this._settingsItemActivateId); } catch (e) { /* widget may already be gone */ }
+            this._settingsItemActivateId = null;
+        }
+
         if (super.destroy) {
             super.destroy();
         }
-
-        this._debugLog("Applet destroyed");
     }
 
     on_applet_removed_from_panel() {
         this._log("Enhanced Power Applet shutting down");
+
+        // Cancel pending startup timeout to avoid callbacks on dead objects
+        if (this._startupTimeoutId) {
+            GLib.source_remove(this._startupTimeoutId);
+            this._startupTimeoutId = null;
+        }
 
         // Stop D-Bus watch
         if (this.csd_power_watch_id) {
@@ -1232,7 +1393,15 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
             this.csd_power_watch_id = 0;
         }
 
-        // Cleanup framework
+        if (this._brightnessAutoChangedId) {
+            this.settings.disconnect(this._brightnessAutoChangedId);
+            this._brightnessAutoChangedId = null;
+        }
+        if (this._profileAutoChangedId) {
+            this.settings.disconnect(this._profileAutoChangedId);
+            this._profileAutoChangedId = null;
+        }
+
         if (this._extensionFramework) {
             this._extensionFramework.destroy();
             this._extensionFramework = null;
