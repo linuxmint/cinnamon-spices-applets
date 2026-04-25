@@ -1,3 +1,7 @@
+### v16.3.2~20260424
+  * Uses the httpLib method to download certain cover art.
+  * Prepares this applet for Linux Mint 23.
+
 ### v16.3.1~20260420
   * Max Volume fixed by user takes precedence on over-amplification setting.
   * Fixes [#8567](https://github.com/linuxmint/cinnamon-spices-applets/issues/8567)

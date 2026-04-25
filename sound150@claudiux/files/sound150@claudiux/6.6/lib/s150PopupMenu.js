@@ -22,6 +22,8 @@ const PopupMenu = imports.ui.popupMenu;
 const { del_song_arts } = require("./lib/del_song_arts");
 const { ControlButton } = require("./lib/controlButton");
 const { VolumeSlider } = require("./lib/volumeSlider");
+const { HttpLib } = require("./lib/httpLib");
+
 const Interfaces = imports.misc.interfaces;
 const Clutter = imports.gi.Clutter;
 const GdkPixbuf = imports.gi.GdkPixbuf;
@@ -371,7 +373,7 @@ class Player extends PopupMenu.PopupMenuSection {
             _("Previous"),
             () => {
                 if (this._seeker) {
-                    if (this._seeker.status === "Playing" && this._seeker.posLabel) 
+                    if (this._seeker.status === "Playing" && this._seeker.posLabel)
                         this._seeker.posLabel.set_text(" 00:00:00 ");
                     this._seeker.startingDate = Date.now();
                     this._seeker._setPosition(0);
@@ -545,7 +547,7 @@ class Player extends PopupMenu.PopupMenuSection {
             canGoPrevious = false;
         }
     }
-    
+
     _clean_str(str) {
         var ret = "" + str;
         const dico = {
@@ -563,7 +565,7 @@ class Player extends PopupMenu.PopupMenuSection {
         return ret
     }
 
-    _setMetadata(metadata) {
+    async _setMetadata(metadata) {
         if (!metadata || (this._applet.actor.get_stage() == null))
             return;
 
@@ -656,7 +658,7 @@ class Player extends PopupMenu.PopupMenuSection {
         if (this.titleLabel != null)
             this.titleLabel.set_text(this._title);
         this._seeker.setTrack(trackid, trackLength, old_title != this._title);
-        
+
         if (metadata["xesam:url"]) {
             let dontDisplayArtSites = this._applet.sitesNotDisplayingAlbumArt;
             for (let site of dontDisplayArtSites) {
@@ -670,17 +672,17 @@ class Player extends PopupMenu.PopupMenuSection {
                         return;
                     } else {
                         switch (site) {
-                            case "youtube": 
+                            case "youtube":
                                 this._trackCoverFile = `file://${APPLET_DIR}/6.4/icons/youtube.png`;
                                 this._applet._icon_path = `${APPLET_DIR}/6.4/icons/youtube.png`;
                                 this._applet.setAppletIcon(true, true);
                                 return;
-                            case "spotify": 
+                            case "spotify":
                                 this._trackCoverFile = `file://${APPLET_DIR}/6.4/icons/spotify.png`;
                                 this._applet._icon_path = `${APPLET_DIR}/6.4/icons/spotify.png`;
                                 this._applet.setAppletIcon(true, true);
                                 return;
-                            case "strawberry": 
+                            case "strawberry":
                                 this._trackCoverFile = `file://${APPLET_DIR}/6.4/icons/strawberry.png`;
                                 this._applet._icon_path = `${APPLET_DIR}/6.4/icons/strawberry.png`;
                                 this._applet.setAppletIcon(true, true);
@@ -692,7 +694,7 @@ class Player extends PopupMenu.PopupMenuSection {
                                 return;
                         }
                     }
-                    
+
                 }
             }
         }
@@ -762,7 +764,20 @@ class Player extends PopupMenu.PopupMenuSection {
                 if (this._trackCoverFile.match(/^http/)) {
                     if (!this._trackCoverFileTmp)
                         this._trackCoverFileTmp = Gio.file_new_tmp("XXXXXX.mediaplayer-cover")[0];
-                    Util.spawn_async(["wget", this._trackCoverFile, "-O", this._trackCoverFileTmp.get_path()], () => this._onDownloadedCover());
+
+                    // Method using wget:
+                    //~ Util.spawn_async(["wget", this._trackCoverFile, "-O", this._trackCoverFileTmp.get_path()], () => this._onDownloadedCover());
+
+                    // Method using HttpLib:
+                    global.log("!!! Using HttpLib !!!");
+                    var http = new HttpLib();
+                    let response = await http.LoadAsync(this._trackCoverFile);
+                    let _trackCoverFilePath = this._trackCoverFileTmp.get_path();
+                    if (response.Success) {
+                        GLib.file_set_contents(_trackCoverFilePath, response.Data);
+                    } else {
+                        global.logError(`Unable to download ${this._trackCoverFile} in ${_trackCoverFilePath}`);
+                    }
                 } else if (this._trackCoverFile.match(/data:image\/(png|jpeg);base64,/)) {
                     if (!this._trackCoverFileTmp)
                         this._trackCoverFileTmp = Gio.file_new_tmp("XXXXXX.mediaplayer-cover")[0];
@@ -947,7 +962,7 @@ class Player extends PopupMenu.PopupMenuSection {
                         Math.trunc(300 * this._applet.real_ui_scale)
                     );
                 }
-                
+
                 if (pixbuf) {
                     let image = new Clutter.Image();
                     image.set_data(
@@ -1306,7 +1321,7 @@ class Seeker extends Slider.Slider {
                     this.setValue(this._currentTime / this._length);
                 } else {
                     this.setValue(0);
-                    if (this.status === "Playing" && this.posLabel != null) 
+                    if (this.status === "Playing" && this.posLabel != null)
                         this.posLabel.set_text(" 00:00:00 ");
                 }
             }
@@ -1346,7 +1361,7 @@ class Seeker extends Slider.Slider {
                 }
             } else {
                 this.setValue(0);
-                if (!this.destroyed && this.status === "Playing" && this.posLabel != null) 
+                if (!this.destroyed && this.status === "Playing" && this.posLabel != null)
                     this.posLabel.set_text(" 00:00:00 ");
                 this.hideAll();
             }
