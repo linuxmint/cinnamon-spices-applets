@@ -193,12 +193,6 @@ class MCSM extends Applet.IconApplet {
 
         Util.spawnCommandLineAsync("/usr/bin/env bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
 
-        if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
-            this._applet_tooltip._tooltip.set_style('text-align: right; font-family: monospace;');
-        } else {
-            this._applet_tooltip._tooltip.set_style('text-align: left; font-family: monospace;');
-        }
-
         this.monitors = [];
         this.netMonitor = null;
         this.isCurrentlyCheckingStatus = false;
@@ -217,6 +211,8 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("graphStep", "graphStep");
         this.settings.bind("graphSpacing", "graphSpacing");
         this.settings.bind("percentAtEndOfLine", "percentAtEndOfLine");
+        this.settings.bind("tooltipFontSize", "tooltipFontSize", () => { this.setTooltipStyle(); });
+        this.setTooltipStyle();
         this.settings.bind("CPU_labelOn", "CPU_labelOn");
         this.settings.bind("CPU_labelForeground", "CPU_labelForeground");
         this.settings.bind("Mem_labelOn", "Mem_labelOn");
@@ -490,6 +486,15 @@ class MCSM extends Applet.IconApplet {
 
         this.actor.add_actor(this.graphArea);
         this.graphArea.connect('repaint', (area) => this.onGraphRepaint(area));
+    }
+
+    setTooltipStyle() {
+        const fontSize = (this.tooltipFontSize != null) ? this.tooltipFontSize : 16;
+        if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
+            this._applet_tooltip._tooltip.set_style(`text-align: right; font-family: monospace; font-size: ${fontSize}px;`);
+        } else {
+            this._applet_tooltip._tooltip.set_style(`text-align: left; font-family: monospace; font-size: ${fontSize}px;`);
+        }
     }
 
     controlDisplayOrder(reinit=false) {

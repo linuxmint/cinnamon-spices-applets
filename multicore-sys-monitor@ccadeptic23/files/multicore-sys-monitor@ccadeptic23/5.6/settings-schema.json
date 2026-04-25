@@ -133,7 +133,8 @@
       "type": "section",
       "title": "Tooltip",
       "keys": [
-        "percentAtEndOfLine"
+        "percentAtEndOfLine",
+        "tooltipFontSize"
       ]
     },
     "sectionCPUOptions": {
@@ -622,6 +623,14 @@
     "type": "switch",
     "default": false,
     "description": "Place % at the very end of the line"
+  },
+  "tooltipFontSize": {
+    "type": "scale",
+    "default": 16,
+    "min": 8,
+    "max": 32,
+    "step": 1,
+    "description": "Font size (px)"
   },
   "removeEnlightenment": {
     "type": "button",
