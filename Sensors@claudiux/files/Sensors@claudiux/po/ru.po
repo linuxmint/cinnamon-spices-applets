@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux 5.4.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-22 19:51+0100\n"
+"POT-Creation-Date: 2026-04-26 01:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,89 +22,89 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr ""
 
-#. applet.js:587
+#. applet.js:594
 msgid "Suspended"
 msgstr ""
 
-#. applet.js:929 applet.js:971
+#. applet.js:936 applet.js:978
 msgid "high:"
 msgstr ""
 
-#. applet.js:929 applet.js:932 applet.js:971 applet.js:973 applet.js:1014
+#. applet.js:936 applet.js:939 applet.js:978 applet.js:980 applet.js:1021
 msgid "n/a"
 msgstr ""
 
-#. applet.js:932 applet.js:973
+#. applet.js:939 applet.js:980
 msgid "crit:"
 msgstr ""
 
-#. applet.js:1014 applet.js:1058
+#. applet.js:1021 applet.js:1065
 msgid "min:"
 msgstr ""
 
-#. applet.js:1060
+#. applet.js:1067
 msgid "max:"
 msgstr ""
 
-#. applet.js:1089
+#. applet.js:1096
 msgid "No intrusion detected"
 msgstr ""
 
-#. applet.js:1089
+#. applet.js:1096
 msgid "INTRUSION DETECTED!"
 msgstr ""
 
-#. applet.js:1109
+#. applet.js:1116
 msgid "Must be configured!"
 msgstr "Необходимо настроить!"
 
-#. applet.js:1511
+#. applet.js:1518
 msgid "Settings"
 msgstr "Настройки"
 
-#. applet.js:1511
+#. applet.js:1518
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1518
+#. applet.js:1525
 msgid "⚙ General"
 msgstr "⚙ Общие"
 
-#. applet.js:1535
+#. applet.js:1542
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Датчики температуры"
 
-#. applet.js:1552
+#. applet.js:1559
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Датчики вентилятора"
 
-#. applet.js:1569
+#. applet.js:1576
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Датчики напряжения"
 
-#. applet.js:1586
+#. applet.js:1593
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr ""
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1622
+#. applet.js:1629
 msgid "Run xsensors"
 msgstr "Запустить xsensors"
 
-#. applet.js:1631
+#. applet.js:1638
 msgid "Suspend Sensors"
 msgstr ""
 
-#. applet.js:1642
+#. applet.js:1649
 msgid "Reload this applet"
 msgstr "Перезагрузить этот апплет"
 
-#. applet.js:1998
+#. applet.js:2005
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
@@ -541,6 +541,10 @@ msgstr ""
 msgid ""
 "Whether or not to display the names of the main sensors (those displayed in "
 "the panel) in bold italics in the tooltip."
+msgstr ""
+
+#. settings-schema.json->tooltip_font_size->description
+msgid "Font size (px)"
 msgstr ""
 
 #. settings-schema.json->restart_in_menu->description

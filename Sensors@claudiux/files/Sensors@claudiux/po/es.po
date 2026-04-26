@@ -8,105 +8,105 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-22 19:51+0100\n"
-"PO-Revision-Date: 2026-03-22 16:28-0300\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2026-04-26 01:27+0200\n"
+"PO-Revision-Date: 2026-04-26 01:30+0200\n"
+"Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
 #. applet.js:232
 msgid "Sensors Monitor"
 msgstr "Monitor de sensores"
 
-#. applet.js:587
+#. applet.js:594
 msgid "Suspended"
 msgstr "Suspendido"
 
-#. applet.js:929 applet.js:971
+#. applet.js:936 applet.js:978
 msgid "high:"
 msgstr "alto:"
 
-#. applet.js:929 applet.js:932 applet.js:971 applet.js:973 applet.js:1014
+#. applet.js:936 applet.js:939 applet.js:978 applet.js:980 applet.js:1021
 msgid "n/a"
 msgstr "n/a"
 
-#. applet.js:932 applet.js:973
+#. applet.js:939 applet.js:980
 msgid "crit:"
 msgstr "crít:"
 
-#. applet.js:1014 applet.js:1058
+#. applet.js:1021 applet.js:1065
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:1060
+#. applet.js:1067
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:1089
+#. applet.js:1096
 msgid "No intrusion detected"
 msgstr "No se detectó intrusión"
 
-#. applet.js:1089
+#. applet.js:1096
 msgid "INTRUSION DETECTED!"
 msgstr "¡INTRUSIÓN DETECTADA!"
 
-#. applet.js:1109
+#. applet.js:1116
 msgid "Must be configured!"
 msgstr "¡Debe estar configurado!"
 
-#. applet.js:1511
+#. applet.js:1518
 msgid "Settings"
 msgstr "Ajustes"
 
-#. applet.js:1511
+#. applet.js:1518
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1518
+#. applet.js:1525
 msgid "⚙ General"
 msgstr "⚙ General"
 
-#. applet.js:1535
+#. applet.js:1542
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Sensores de temperatura"
 
-#. applet.js:1552
+#. applet.js:1559
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Sensores de ventilador"
 
-#. applet.js:1569
+#. applet.js:1576
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Sensores de voltaje"
 
-#. applet.js:1586
+#. applet.js:1593
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Sensores de intrusión"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1622
+#. applet.js:1629
 msgid "Run xsensors"
 msgstr "Lanzar xsensors"
 
-#. applet.js:1631
+#. applet.js:1638
 msgid "Suspend Sensors"
 msgstr "Suspender sensores"
 
-#. applet.js:1642
+#. applet.js:1649
 msgid "Reload this applet"
 msgstr "Recargar este applet"
 
-#. applet.js:1998
+#. applet.js:2005
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "¿Está seguro de que desea eliminar \"%s\"?"
@@ -559,6 +559,10 @@ msgid ""
 msgstr ""
 "Mostrar o no los nombres de los sensores principales (los que se muestran en "
 "el panel) en negrita y cursiva en la ventana emergente."
+
+#. settings-schema.json->tooltip_font_size->description
+msgid "Font size (px)"
+msgstr "Tamaño de la fuente (px)"
 
 #. settings-schema.json->restart_in_menu->description
 msgid "Show in menu the action: Restart this applet"

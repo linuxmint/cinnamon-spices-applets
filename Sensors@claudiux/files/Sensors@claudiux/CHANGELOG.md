@@ -1,3 +1,7 @@
+### v5.11.3~20260426
+  * Adds ability to select the size of the tooltip font.
+  * Fixes [#8599](https://github.com/linuxmint/cinnamon-spices-applets/issues/8599)
+
 ### v5.11.2~20260413
   * Perform asynchronous data reads.
 
