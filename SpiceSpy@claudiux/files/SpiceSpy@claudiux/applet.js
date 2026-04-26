@@ -33,7 +33,7 @@ var SCRIPTS_DIR;
 var CACHE_UPDATER;
 var CACHE_INIT;
 var COPY_PNG_SCRIPT;
-  
+
 
 const TYPES = ["actions", "applets", "desklets", "extensions", "themes"];
 const SPICES_URL = "https://cinnamon-spices.linuxmint.com";
@@ -62,7 +62,7 @@ function _(str, uuid=MODULE_UUID) {
   return Gettext.gettext(str);
 }
 
-function _padTime(n) { 
+function _padTime(n) {
   return (n < 10 ? "0" : "") + n;
 }
 function _formatHMS(h, m, s) {
@@ -133,8 +133,8 @@ var SpiceSpyPopupSubMenuMenuItem = class SpiceSpyPopupSubMenuMenuItem extends Po
   }
 
   _subMenuOpenStateChanged(menu, open) {
-	if (this.actor.get_stage() == null) return;
-    this.actor.change_style_pseudo_class('open', open);
+    if (this.actor.get_stage() == null) return;
+      this.actor.change_style_pseudo_class('open', open);
   }
 
   _needsScrollbar() {
@@ -142,15 +142,15 @@ var SpiceSpyPopupSubMenuMenuItem = class SpiceSpyPopupSubMenuMenuItem extends Po
   }
 
   _boxGetPreferredWidth (actor, forHeight, alloc) {
-	let columnWidths = this.getColumnWidths();
-	this.setColumnWidths(columnWidths);
+    let columnWidths = this.getColumnWidths();
+    this.setColumnWidths(columnWidths);
 
-	// Now they will request the right sizes
-	[alloc.min_size, alloc.natural_size] = this.box.get_preferred_width(forHeight || 0);
+    // Now they will request the right sizes
+    [alloc.min_size, alloc.natural_size] = this.box.get_preferred_width(forHeight || 0);
   }
 
   _boxGetPreferredHeight (actor, forWidth, alloc) {
-	[alloc.min_size, alloc.natural_size] = this.box.get_preferred_height(forWidth || 0);
+    [alloc.min_size, alloc.natural_size] = this.box.get_preferred_height(forWidth || 0);
   }
 }
 
@@ -339,7 +339,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.menuManager = new PopupMenu.PopupMenuManager(this);
     this.menu = new Applet.AppletPopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
-    
+
     this.future_loop_datetime = null;
 
     this.issuesJsonLoopId = null;
@@ -353,7 +353,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.commentsJobsLoopId = null;
     this.issuesLoopId = null;
     this.is_looping = true;
-    
+
     this.iconColorLoopId = null;
 
     this.settings = new Settings.AppletSettings(this, MODULE_UUID, instance_id);
@@ -388,14 +388,22 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.settings.bind("spices_to_spy", "spices_to_spy");
     this.settings.bind("old_spices_to_spy", "old_spices_to_spy");
   } // End of get_user_settings
-  
+
   setIconColorAndTooltip() {
     if (this.commentsJobsList.length > 0 || this.issuesJobsList.length > 0) {
       this.actor.style = `color: ${this.colorWhileRefreshing};`
     } else {
       this.actor.style = null
     }
-    var nbr_seconds = 15 * this.commentsJobsList.length + 5 * this.issuesJobsList.length;
+    var nbr_seconds;
+    const nbCommentsJobs = this.commentsJobsList.length;
+    const nbIssuesJobs = this.issuesJobsList.length;
+    if (3 * nbIssuesJobs > nbCommentsJobs) {
+      //~ nbr_seconds = 15 * nbCommentsJobs + 5 * (3 * nbIssuesJobs - nbCommentsJobs);
+      nbr_seconds = 15 * nbCommentsJobs + 5 * Math.trunc(nbIssuesJobs - nbCommentsJobs / 3);
+    } else {
+      nbr_seconds = 15 * nbCommentsJobs;
+    }
     if (nbr_seconds > 0) {
       var nbr_minutes = Math.trunc(nbr_seconds / 60);
       nbr_seconds = nbr_seconds - 60 * nbr_minutes;
@@ -403,18 +411,18 @@ class SpiceSpy extends Applet.TextIconApplet {
     } else {
       if (this.future_loop_datetime != null) {
         let now = GLib.DateTime.new_now_local();
-        
+
         let diff = Math.max(0, Math.trunc(this.future_loop_datetime.difference(now) / 1000000));
         let _hour = Math.trunc(diff / 3600);
         let _minute = Math.trunc((diff - 3600 * _hour) / 60);
         let _second = diff - 3600 * _hour - 60 *_minute;
-        
+
         let future_hour = this.future_loop_datetime.get_hour();
         let future_minute = this.future_loop_datetime.get_minute();
         let future_second = this.future_loop_datetime.get_second();
-        
+
         this.set_applet_tooltip(
-          _("Time remaining until the next check:") + "\n" + 
+          _("Time remaining until the next check:") + "\n" +
           "<b>" + _formatHMS(_hour, _minute, _second) + "\n" + "</b>" +
           _("Next check at:") + "\n" +
           "<b>" + _formatHMS(future_hour, future_minute, future_second) + "</b>",
@@ -726,9 +734,9 @@ class SpiceSpy extends Applet.TextIconApplet {
       source_remove(id);
     }
     this.issuesLoopId = null;
-    this.issuesLoopId = timeout_add_seconds(5, () => { 
-      this.issuesJobs_loop(); 
-      return (this.issuesJobsList.length > 0 && this.is_looping); 
+    this.issuesLoopId = timeout_add_seconds(5, () => {
+      this.issuesJobs_loop();
+      return (this.issuesJobsList.length > 0 && this.is_looping);
     });
 
     return this.is_looping;
@@ -1092,7 +1100,7 @@ function main(metadata, orientation, panel_height, instance_id) {
   CACHE_UPDATER = SCRIPTS_DIR + "/spices-cache-updater.py";
   CACHE_INIT = SCRIPTS_DIR + "/spices-cache-init.sh";
   COPY_PNG_SCRIPT = `${SCRIPTS_DIR}/copy-png-files.sh`;
-  
+
   Gettext.bindtextdomain(MODULE_UUID, USER_DATA_DIR + "/locale");
   let spicespy = new SpiceSpy(metadata, orientation, panel_height, instance_id);
   return spicespy;
