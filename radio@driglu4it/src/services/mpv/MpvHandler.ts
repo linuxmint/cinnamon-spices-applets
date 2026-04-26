@@ -321,8 +321,9 @@ function createMpvHandler() {
                 initialVolume = 50
             }
 
-            const command = `mpv --config=no --no-video --script=${MPRIS_PLUGIN_PATH} ${url} 
-                --volume=${initialVolume}`
+            const command = `mpv --config=no --no-video --script=${MPRIS_PLUGIN_PATH} 
+                --scripts-append=${__meta.path}/mpv-reconnect.lua 
+                ${url} --volume=${initialVolume}`
             spawnCommandLine(command)
             return
         }
