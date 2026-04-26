@@ -5,6 +5,10 @@
 - If dimming is enabled and screen is dimmed (user is idle), power profile would be switched immediately, but brightness will be switched after user become active again (to avoid screen brightness dimming bugs).
 - If you have dimming enabled for i.e. only battery mode, after auto switching from AC to battery, dimming would not be active until some user activity (couldn't find a way around that issue).
 
+## [1.9.11]
+
+- Fixed (#8601): **`hide-applet-icon` setting reset on every state change**: `_updateCapabilitySettings()` was unconditionally overwriting the user's hide preference on every `device-scan-post` event (power source change, UPower signal, notification), causing the applet icon to reappear even when explicitly hidden by the user; replaced the bidirectional override with a one-way auto-hide that only sets the flag on feature-less systems (no battery and no brightness, e.g. VM)
+
 ## [1.9.10]
 
 - Fixed AC source detection on laptops where battery charge-protection circuits report `DISCHARGING` at full charge while the charger is connected — now uses the authoritative UPower `OnBattery` property directly.
