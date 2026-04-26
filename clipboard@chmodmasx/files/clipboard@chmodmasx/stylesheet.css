@@ -1,0 +1,17 @@
+.clipboard-menu .clipboard-search-box {
+    padding: 6px 16px 6px 10px;
+}
+
+.clipboard-menu #appmenu-search-entry {
+    padding: 6px 8px;
+    margin-left: 4px;
+    margin-right: 14px;
+}
+
+.clipboard-history-item {
+    font-family: monospace;
+}
+
+.clipboard-history-empty {
+    opacity: 0.6;
+}
