@@ -161,7 +161,6 @@ class TheApplet extends Applet.Applet {
             else {
                 width = this._get_widget_size()
                 height = this[`cfg_${g.type}_override_graph_width`] ? this[`cfg_${g.type}_graph_width`] : this[`cfg_graph_width`];
-                global.log(width, height)
             }
             g.obj._set_prop('width', width, callback)
             g.obj._set_prop('height', height, callback)

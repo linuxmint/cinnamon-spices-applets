@@ -173,7 +173,6 @@ class Graph {
                     this.label_top_right.set_text(max+'↥')
                 } else this.label_top_right.set_text("")
             }
-            // global.log(this.label_top_right.width)
             this.label_top_right.set_position(graph_width-this.label_top_right.width+2,0)
             if(this.applet.vertical && this.data_type=='NetData') this.label_bottom.set_text(this.provider.getShortText()[1].replace(' ','\n').replace('iB/s', '')) // compact net data in vertical panel
             else this.label_bottom.set_text(this.provider.getShortText()[1])
