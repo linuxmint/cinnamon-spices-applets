@@ -1,3 +1,7 @@
+### v5.8.2~20260427
+  * Further improves the calculation of remaining time during updates.
+  * Eliminates unnecessary calculation time.
+
 ### v5.8.1~20260426
   * Improved calculation of the remaining time when refreshing.
 

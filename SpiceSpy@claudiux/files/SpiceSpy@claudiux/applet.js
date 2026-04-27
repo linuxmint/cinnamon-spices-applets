@@ -335,6 +335,9 @@ class SpiceSpy extends Applet.TextIconApplet {
     Util.spawnCommandLine("/usr/bin/env bash -c 'cd "+ SCRIPTS_DIR + " && chmod 755 *.sh'");
     Util.spawnCommandLine(COPY_PNG_SCRIPT);
 
+    this.hovered = false;
+    this.actor.connect('enter-event', (actor, event) => { this.hovered = true });
+    this.actor.connect('leave-event', (actor, event) => { this.hovered = false });
 
     this.menuManager = new PopupMenu.PopupMenuManager(this);
     this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -395,19 +398,28 @@ class SpiceSpy extends Applet.TextIconApplet {
     } else {
       this.actor.style = null
     }
+    if (!this.hovered) return;
+
     var nbr_seconds;
     const nbCommentsJobs = this.commentsJobsList.length;
     const nbIssuesJobs = this.issuesJobsList.length;
-    if (3 * nbIssuesJobs > nbCommentsJobs) {
-      //~ nbr_seconds = 15 * nbCommentsJobs + 5 * (3 * nbIssuesJobs - nbCommentsJobs);
-      nbr_seconds = 15 * nbCommentsJobs + 5 * Math.trunc(nbIssuesJobs - nbCommentsJobs / 3);
-    } else {
-      nbr_seconds = 15 * nbCommentsJobs;
-    }
+    nbr_seconds = 15 * nbCommentsJobs;
     if (nbr_seconds > 0) {
+      let end_time = GLib.DateTime.new_now_local().add_seconds(Math.trunc(nbr_seconds / 15) * 15);
+      let end_hour = end_time.get_hour();
+      let end_minute = end_time.get_minute();
+      let end_second = Math.trunc(end_time.get_second() / 15) * 15;
+
       var nbr_minutes = Math.trunc(nbr_seconds / 60);
       nbr_seconds = nbr_seconds - 60 * nbr_minutes;
-      this.set_applet_tooltip(_("Check in progress.\nTime remaining:") + "\n<b>" + _formatHMS(0, nbr_minutes, nbr_seconds) + "</b>", true);
+
+      this.set_applet_tooltip(
+        _("Check in progress.\nTime remaining:") +
+        "\n<b>" + _formatHMS(0, nbr_minutes, nbr_seconds) +
+        "</b>\n" +
+        _("Ends around:") +
+        "\n<b>" + _formatHMS(end_hour, end_minute, end_second) +
+        "</b>\n", true);
     } else {
       if (this.future_loop_datetime != null) {
         let now = GLib.DateTime.new_now_local();
