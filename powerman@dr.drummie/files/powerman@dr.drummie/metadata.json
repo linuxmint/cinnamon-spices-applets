@@ -4,7 +4,7 @@
   "description": "Enhanced power applet with automatic brightness and power profiles for AC/Battery",
   "author": "drdrummie",
   "url": "https://github.com/drdrummie/cinnamon-spices-applets/tree/master/powerman@dr.drummie",
-  "version": "1.9.10",
+  "version": "1.9.11",
   "cinnamon-version": ["6.4", "6.6"],
   "multiversion": true,
   "max-instances": 1

@@ -1,3 +1,6 @@
+### v5.8.1~20260426
+  * Improved calculation of the remaining time when refreshing.
+
 ### v5.8.0~20260401
   * Improved tooltip displaying schedules.
 

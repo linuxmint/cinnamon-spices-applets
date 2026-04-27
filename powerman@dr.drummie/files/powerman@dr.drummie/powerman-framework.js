@@ -1701,7 +1701,11 @@ class SystemManager extends BaseManager {
             this.setSetting("power-control-available", hasPowerProfiles && hasBattery);
             this.setSetting("power-control-not-available", !(hasPowerProfiles && hasBattery));
             this.setSetting("battery-available", hasBattery);
-            this.setSetting("hide-applet-icon", !(hasBrightness && hasBattery));
+            // Only auto-hide on feature-less systems (e.g. VM); never force-show so
+            // the user's explicit hide preference is preserved across state changes.
+            if (!hasBrightness && !hasBattery) {
+                this.setSetting("hide-applet-icon", true);
+            }
 
             // Enhanced debug logging with flexible profile details
             let profileDetails =
