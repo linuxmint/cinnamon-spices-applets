@@ -1,0 +1,984 @@
+# Traditional Chinese translation for crypto-tracker@danipin
+# Copyright (C) 2025
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: crypto-tracker@danipin 1.1.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-17 22:08+0200\n"
+"PO-Revision-Date: 2025-01-24 22:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: Chinese (Traditional)\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Row 2: Total Value
+#: applet.js:442 applet.js:445 applet.js:789 portfolio.js:699 utils.js:106
+msgid "Loading..."
+msgstr "正在載入..."
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Price Alarm: %s"
+msgstr "價格警報："
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Target %s reached! Price: %s"
+msgstr " 已達到！價格："
+
+#: applet.js:742 alarm.js:336
+msgid "risen"
+msgstr "上漲"
+
+#: applet.js:742 alarm.js:336
+msgid "fallen"
+msgstr "下跌"
+
+#: applet.js:743 alarm.js:337
+#, fuzzy, javascript-format
+msgid "Volatility Alarm: %s"
+msgstr "波動警報："
+
+#: applet.js:743 alarm.js:337
+#, javascript-format
+msgid "%s has %s by %s%%"
+msgstr ""
+
+#: applet.js:857
+msgid "Colors reset to default values."
+msgstr "顏色已重置為預設值。"
+
+#: applet.js:917
+msgid "List updated! Please reopen settings."
+msgstr "列表已更新！請重新開啟設定。"
+
+#: applet.js:1468
+msgid "NEW ALL TIME HIGH 🚀"
+msgstr "歷史新高 🚀"
+
+#: applet.js:1977
+msgid "API Limit Reached"
+msgstr "API 限制已達到"
+
+#: applet.js:1977
+#, fuzzy, javascript-format
+msgid "You have used 100% of your monthly limit (10k)."
+msgstr "您已使用 100% 的月度限制 (10k)。"
+
+#: applet.js:1984
+msgid "Power Saving Enabled"
+msgstr "省電模式已啟用"
+
+#: applet.js:1984
+msgid "Interval set to 5 min to avoid API ban."
+msgstr "間隔設定為 5 分鐘以避免 API 封禁。"
+
+#: applet.js:1987
+msgid "API Limit Warning"
+msgstr "API 限制警告"
+
+#: applet.js:1987
+#, fuzzy, javascript-format
+msgid "You have reached 90% of your limit."
+msgstr "您已達到限制的 90%。"
+
+#: applet.js:1990
+msgid "API Limit Info"
+msgstr "API 限制資訊"
+
+#: applet.js:1990
+#, fuzzy, javascript-format
+msgid "You have reached 80% of your limit."
+msgstr "您已達到限制的 80%。"
+
+#. Set base texts
+#: footer.js:94
+msgid "API: Active"
+msgstr "API：活動"
+
+#: footer.js:94
+msgid "Basic Mode"
+msgstr "基礎模式"
+
+#: footer.js:98
+msgid "Source: CoinGecko"
+msgstr "來源：CoinGecko"
+
+#: footer.js:101
+msgid "Get Free API Key"
+msgstr "獲取免費 API 金鑰"
+
+#: footer.js:111
+#, fuzzy, javascript-format
+msgid "Month: %s"
+msgstr "月份："
+
+#: footer.js:112
+#, javascript-format
+msgid "Ø: %s"
+msgstr ""
+
+#: footer.js:115
+#, fuzzy, javascript-format
+msgid "Alarms: %s"
+msgstr "警報："
+
+#: header.js:117 header.js:275
+msgid "Portfolio Tracker"
+msgstr "投資組合追蹤器"
+
+#: header.js:119 header.js:276
+msgid "Alarm Management"
+msgstr "警報管理"
+
+#: header.js:121 header.js:278
+msgid "API Usage & Stats"
+msgstr "API 使用情況與統計"
+
+#: header.js:123
+msgid "Support Development"
+msgstr "支持開發"
+
+# Strings from JS files
+#. IMPORTANT: For the drawing loop we need the pure text without markup!
+#: header.js:128 header.js:274 header.js:641
+msgid "Market Dashboard"
+msgstr "市場儀表板"
+
+#: header.js:130 header.js:642
+msgid "24H Price Change [%]"
+msgstr "24小時價格變化 [%]"
+
+#: header.js:280
+msgid "Support"
+msgstr "支持"
+
+#: header.js:284
+msgid "Settings"
+msgstr "設定"
+
+#: alarm.js:242
+msgid "Alarm Archive Full"
+msgstr "警報存檔已滿"
+
+#: alarm.js:242
+#, fuzzy, javascript-format
+msgid "Oldest alarm for %s was deleted."
+msgstr "最舊的警報 "
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Background Alarm: %s"
+msgstr "背景警報："
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Target price %s reached! Current: %s"
+msgstr " 已達到！目前："
+
+#: alarm.js:469
+msgid "Alarm Settings"
+msgstr "警報設定"
+
+#: alarm.js:573
+#, fuzzy, javascript-format
+msgid "Target Price (%s):"
+msgstr "目標價格 ("
+
+#: alarm.js:574
+msgid "Change (%):"
+msgstr "變化 (%)："
+
+#: alarm.js:577
+msgid "Press ENTER to save."
+msgstr "按 ENTER 儲存。"
+
+#: alarm.js:643 alarm.js:652
+msgid "Search alarms..."
+msgstr "搜尋警報..."
+
+#: alarm.js:739 portfolio.js:1262
+msgid "No matches."
+msgstr "無匹配項。"
+
+#: alarm.js:739
+msgid "No alarms here yet."
+msgstr "此處尚無警報。"
+
+#: alarm.js:856
+#, fuzzy, javascript-format
+msgid "Target: %s"
+msgstr "目標："
+
+#: alarm.js:857
+#, fuzzy, javascript-format
+msgid "Vol: %s%%"
+msgstr "24小時成交量："
+
+#: alarm.js:860
+#, fuzzy, javascript-format
+msgid "Current: %s"
+msgstr "目前："
+
+#: alarm.js:865
+#, fuzzy, javascript-format
+msgid "Created: %s"
+msgstr "建立於："
+
+#. Price Input
+#: alarm.js:1023
+msgid "Target:"
+msgstr "目標："
+
+#. Vol Input
+#: alarm.js:1044
+msgid "Vol %:"
+msgstr "波動 %："
+
+#: alarm.js:1058
+msgid "ENTER to save"
+msgstr "ENTER 儲存"
+
+#. Sort options
+#: alarm.js:1102 portfolio.js:1008
+msgid "Date"
+msgstr "日期"
+
+#: alarm.js:1103
+msgid "Name"
+msgstr "名稱"
+
+#: alarm.js:1166 alarm.js:1218
+msgid "Delete all"
+msgstr "全部刪除"
+
+#: alarm.js:1174 alarm.js:1182 alarm.js:1190 alarm.js:1213 portfolio.js:1212
+#: portfolio.js:1219
+msgid "Sure?"
+msgstr "確定？"
+
+#: alarm.js:1230
+#, fuzzy, javascript-format
+msgid "Alarms %s of %s"
+msgstr "警報 "
+
+#: donate.js:35
+msgid ""
+"If you like this applet, you can support\n"
+"its development with a donation."
+msgstr ""
+"如果您喜歡這個小程式，可以透過捐贈\n"
+"支持其開發。"
+
+#: donate.js:181
+msgid "Address:"
+msgstr "地址："
+
+#: donate.js:212
+msgid "Copied"
+msgstr "已複製"
+
+#: donate.js:212
+#, fuzzy, javascript-format
+msgid "%s address copied."
+msgstr " 地址已複製。"
+
+#: search.js:33
+msgid "Search..."
+msgstr "搜尋..."
+
+#: search.js:172
+msgid "No results..."
+msgstr "無結果..."
+
+#: portfolio.js:316
+msgid "Converting..."
+msgstr "正在轉換..."
+
+#: portfolio.js:365
+msgid "Error"
+msgstr "錯誤"
+
+#: portfolio.js:365
+msgid "Currency conversion failed."
+msgstr "貨幣轉換失敗。"
+
+#: portfolio.js:603
+msgid "Total Balance"
+msgstr "總餘額"
+
+#. FIX: expand: false for label, insert spacer instead
+#: portfolio.js:720
+msgid "Select Currency"
+msgstr "選擇貨幣"
+
+#: portfolio.js:790 portfolio.js:798
+msgid "Filter portfolio..."
+msgstr "過濾投資組合..."
+
+#: portfolio.js:1006
+msgid "Amount"
+msgstr "數量"
+
+#: portfolio.js:1007
+msgid "Buy Price"
+msgstr "買入價格"
+
+#. Add TX Button
+#: portfolio.js:1199
+msgid "+ Transaction"
+msgstr "+ 交易"
+
+#. Delete Coin Button
+#: portfolio.js:1208 portfolio.js:1224
+msgid "Remove Position"
+msgstr "移除倉位"
+
+#: portfolio.js:1262
+msgid "No positions here yet."
+msgstr "此處尚無倉位。"
+
+#: portfolio.js:1288
+msgid "Add Coin"
+msgstr "新增代幣"
+
+#: portfolio.js:1305 portfolio.js:1311
+msgid "Search (e.g. Bitcoin)..."
+msgstr "搜尋 (例如 Bitcoin)..."
+
+#: portfolio.js:1398
+msgid "No results"
+msgstr "無結果"
+
+#: seasonal.js:80
+msgid "HAPPY HALLOWEEN !"
+msgstr "萬聖節快樂！"
+
+#: seasonal.js:378
+msgid "MERRY CHRISTMAS 🎄"
+msgstr "聖誕快樂 🎄"
+
+#. Straighten up
+#: seasonal.js:486
+msgid "HAPPY BITCOIN PIZZA DAY 🍕"
+msgstr "比特幣披薩日快樂 🍕"
+
+#: charts.js:181
+msgid "?"
+msgstr ""
+
+#: charts.js:228
+msgid "Rank:"
+msgstr "排名："
+
+#: charts.js:228
+msgid "M.Cap:"
+msgstr "市值："
+
+#: charts.js:229
+msgid "24h High:"
+msgstr "24小時最高："
+
+#: charts.js:229
+msgid "24h Vol:"
+msgstr "24小時成交量："
+
+#: charts.js:230
+msgid "24h Low:"
+msgstr "24小時最低："
+
+#: charts.js:230
+msgid "ATH:"
+msgstr "歷史最高："
+
+#: utils.js:348
+msgid " (Rate Limit)"
+msgstr " (速率限制)"
+
+#: utils.js:349
+msgid " (API Key invalid)"
+msgstr " (API 金鑰無效)"
+
+#: utils.js:350
+msgid " (Network)"
+msgstr " (網路)"
+
+#: utils.js:352
+msgid "Crypto-Tracker Error"
+msgstr "Crypto-Tracker 錯誤"
+
+#: utils.js:352
+#, fuzzy, javascript-format
+msgid "An error was intercepted%s. See log."
+msgstr "攔截到一個錯誤"
+
+#: api.js:67
+msgid "API successfully activated."
+msgstr "API 已成功啟用。"
+
+#: api.js:73
+msgid "No internet connection"
+msgstr "無網路連線"
+
+#: api.js:75
+msgid "Key invalid"
+msgstr "金鑰無效"
+
+#: api.js:77
+msgid "Key blocked"
+msgstr "金鑰被封鎖"
+
+#: api.js:79
+msgid "Limit reached"
+msgstr "達到限制"
+
+#: api.js:81
+msgid "Server error"
+msgstr "伺服器錯誤"
+
+#: api.js:85
+#, fuzzy, javascript-format
+msgid "API Error: %s"
+msgstr "API 錯誤："
+
+#: api.js:90
+msgid "System error"
+msgstr "系統錯誤"
+
+#: api.js:131
+msgid "System Diagnosis"
+msgstr "系統診斷"
+
+#: api.js:143
+msgid "API Connection: Active & Valid"
+msgstr "API 連線：活動且有效"
+
+#: api.js:145
+msgid "Not configured"
+msgstr "未配置"
+
+#: api.js:146
+#, fuzzy, javascript-format
+msgid "API Status: %s"
+msgstr "API 狀態："
+
+#: api.js:154
+#, fuzzy, javascript-format
+msgid "Quota critical: %s%% used"
+msgstr "配額嚴重："
+
+#: api.js:156
+#, fuzzy, javascript-format
+msgid "Quota high: %s%% used"
+msgstr "配額高："
+
+#: api.js:158
+#, fuzzy, javascript-format
+msgid "Quota: %s%% (In the green)"
+msgstr "(正常)"
+
+#: api.js:165
+#, fuzzy, javascript-format
+msgid "Period: %s days left in month."
+msgstr " 天本月剩餘。"
+
+#: api.js:171
+#, fuzzy, javascript-format
+msgid "Tip: Interval (%ss) is aggressive for Free Tier."
+msgstr "s) 對於免費層級來說過於激進。"
+
+#: api.js:178
+msgid "Note: Error log exists."
+msgstr "注意：存在錯誤日誌。"
+
+#: api.js:180
+msgid "System: No crashes logged."
+msgstr "系統：未記錄崩潰。"
+
+#: api.js:202 api.js:397
+msgid "Free API (Basic)"
+msgstr "免費 API (基礎)"
+
+#: api.js:203 api.js:210
+msgid "Today:"
+msgstr "今天："
+
+#: api.js:204 api.js:211
+msgid "Month:"
+msgstr "本月："
+
+#: api.js:205 api.js:212
+msgid "Ø per Day:"
+msgstr "日均："
+
+#: api.js:209 api.js:398
+msgid "Key API (Pro)"
+msgstr "金鑰 API (專業)"
+
+#: api.js:224
+msgid "Distribution (Key Calls)"
+msgstr "分佈 (金鑰呼叫)"
+
+#: api.js:239
+msgid "Charts"
+msgstr "圖表"
+
+#. Blue
+#: api.js:240
+msgid "Details"
+msgstr "詳情"
+
+#. Purple
+#: api.js:241
+msgid "Search"
+msgstr "搜尋"
+
+#. Yellow
+#: api.js:242
+msgid "Portfolio"
+msgstr "投資組合"
+
+#. Cyan
+#: api.js:243
+msgid "Alarms"
+msgstr "警報"
+
+#. Red/Pink
+#: api.js:244
+msgid "Updates"
+msgstr "更新"
+
+#: api.js:294
+msgid "History (Last 14 Days)"
+msgstr "歷史 (最近 14 天)"
+
+#: api.js:417
+#, fuzzy, javascript-format
+msgid "Error Log (%s KB)"
+msgstr "錯誤日誌 ("
+
+#: api.js:420
+msgid "The system prevented and logged crashes."
+msgstr "系統已阻止並記錄了崩潰。"
+
+#: api.js:426
+msgid "Delete"
+msgstr "刪除"
+
+#: api.js:439
+msgid "Dismiss"
+msgstr "忽略"
+
+#, fuzzy
+#~ msgid "Ø:"
+#~ msgstr "Ø: "
+
+#~ msgid " was deleted."
+#~ msgstr " 已被刪除。"
+
+#~ msgid "Target price "
+#~ msgstr "目標價格 "
+
+#, fuzzy
+#~ msgid " has "
+#~ msgstr "已 "
+
+#~ msgid " by "
+#~ msgstr " 幅度 "
+
+#~ msgid " of "
+#~ msgstr " / "
+
+#~ msgid ". See log."
+#~ msgstr "。查看日誌。"
+
+#~ msgid "% used"
+#~ msgstr "% 已使用"
+
+#~ msgid "Quota: "
+#~ msgstr "配額："
+
+#~ msgid "Period: "
+#~ msgstr "週期："
+
+#~ msgid "Tip: Interval ("
+#~ msgstr "提示：間隔 ("
+
+#~ msgid " KB)"
+#~ msgstr " KB)"
+
+#~ msgid "Crypto Tracker"
+#~ msgstr "加密貨幣追蹤器"
+
+#~ msgid ""
+#~ "A comprehensive cryptocurrency dashboard providing real-time market data, "
+#~ "portfolio management, interactive charts, and advanced alerting "
+#~ "capabilities, enhanced with seasonal visual elements."
+#~ msgstr ""
+#~ "一個全面的加密貨幣儀表板，提供即時市場數據、投資組合管理、互動圖表和進階警"
+#~ "報功能，並增強了季節性視覺元素。"
+
+#~ msgid "Metric 1 (Primary)"
+#~ msgstr "指標 1 (主要)"
+
+#~ msgid "Metric 2"
+#~ msgstr "指標 2"
+
+#~ msgid "Metric 3"
+#~ msgstr "指標 3"
+
+#~ msgid "General"
+#~ msgstr "一般"
+
+#~ msgid "DevTools (Debug)"
+#~ msgstr "開發者工具 (除錯)"
+
+#~ msgid "Developer Options"
+#~ msgstr "開發者選項"
+
+#~ msgid "Applet Settings"
+#~ msgstr "小程式設定"
+
+#~ msgid "CoinGecko API Configuration"
+#~ msgstr "CoinGecko API 配置"
+
+#~ msgid "Display and Activation"
+#~ msgstr "顯示與啟用"
+
+#~ msgid "Data Source (API)"
+#~ msgstr "資料來源 (API)"
+
+#~ msgid "Color Settings"
+#~ msgstr "顏色設定"
+
+#~ msgid "Changes will activate on the next API update interval."
+#~ msgstr "變更將在下一次 API 更新間隔生效。"
+
+#~ msgid "CoinGecko API Key (Demo or Pro)"
+#~ msgstr "CoinGecko API 金鑰 (演示或專業版)"
+
+#~ msgid "Unlocks higher limits and more stable data queries."
+#~ msgstr "解鎖更高的限制和更穩定的數據查詢。"
+
+#~ msgid ""
+#~ "CALL TRACKING OVERVIEW:\n"
+#~ "\n"
+#~ "• BASIC CALLS: Run via public servers (approx. 5-15 calls/min). \n"
+#~ "  Used for: Standard price queries (saves key quota).\n"
+#~ "\n"
+#~ "• KEY CALLS: Run via your Demo Key quota.\n"
+#~ "  Used for: Charts, coin details & more stable queries.\n"
+#~ "\n"
+#~ "LIMITS (DEMO KEY):\n"
+#~ "• Total: 10,000 calls per month\n"
+#~ "• Speed: Max. 30 requests per minute\n"
+#~ "\n"
+#~ "The tracking in the footer shows you in real-time how many requests have "
+#~ "been used so you can keep an eye on your monthly 10k limit."
+#~ msgstr ""
+#~ "呼叫追蹤概覽：\n"
+#~ "\n"
+#~ "• 基本呼叫：透過公共伺服器執行（約 5-15 次呼叫/分鐘）。\n"
+#~ "  用於：標準價格查詢（節省金鑰配額）。\n"
+#~ "\n"
+#~ "• 金鑰呼叫：透過您的演示金鑰配額執行。\n"
+#~ "  用於：圖表、代幣詳情和更穩定的查詢。\n"
+#~ "\n"
+#~ "限制（演示金鑰）：\n"
+#~ "• 總計：每月 10,000 次呼叫\n"
+#~ "• 速度：每分鐘最多 30 個請求\n"
+#~ "\n"
+#~ "頁尾中的追蹤即時顯示已使用的請求數量，以便您隨時關注每月的 10k 限制。"
+
+#~ msgid "Show Active Alarms"
+#~ msgstr "顯示活動警報"
+
+#~ msgid "Shows the count of active alarms in the footer."
+#~ msgstr "在頁尾顯示活動警報的數量。"
+
+#~ msgid "Show Monthly Statistics"
+#~ msgstr "顯示月度統計"
+
+#~ msgid "Shows total API key calls this month."
+#~ msgstr "顯示本月 API 金鑰呼叫總數。"
+
+#~ msgid "Show Daily Average"
+#~ msgstr "顯示每日平均值"
+
+#~ msgid "Shows the calculated average per day."
+#~ msgstr "顯示計算出的每日平均值。"
+
+#~ msgid "Candle Charts as Default"
+#~ msgstr "預設使用蠟燭圖"
+
+#~ msgid "Shows charts as candlesticks by default where possible."
+#~ msgstr "盡可能預設將圖表顯示為蠟燭圖。"
+
+#~ msgid "Chart: Bullish Candle Color (Up)"
+#~ msgstr "圖表：看漲蠟燭顏色 (上漲)"
+
+#~ msgid "Color for rising candles."
+#~ msgstr "上漲蠟燭的顏色。"
+
+#~ msgid "Chart: Bearish Candle Color (Down)"
+#~ msgstr "圖表：看跌蠟燭顏色 (下跌)"
+
+#~ msgid "Color for falling candles."
+#~ msgstr "下跌蠟燭的顏色。"
+
+#~ msgid "Price Alarm"
+#~ msgstr "價格警報"
+
+#~ msgid "Notification when this price is reached."
+#~ msgstr "達到此價格時的通知。"
+
+#~ msgid "Enter the target price e.g. 5 or 2598. 0 disables the alarm."
+#~ msgstr "輸入目標價格，例如 5 或 2598。0 禁用警報。"
+
+#~ msgid "Percent Alarm"
+#~ msgstr "百分比警報"
+
+#~ msgid "Alarm on percentage change (24h)."
+#~ msgstr "百分比變化警報 (24小時)。"
+
+#~ msgid "Enter a percentage value e.g. 5. 0 disables the alarm."
+#~ msgstr "輸入百分比值，例如 5。0 禁用警報。"
+
+#~ msgid "Compact Mode"
+#~ msgstr "緊湊模式"
+
+#~ msgid "Space-saving display in panel (BTC $85.5K)."
+#~ msgstr "面板上的節省空間顯示 (BTC $85.5K)。"
+
+#~ msgid "Enable Seasonal Theme"
+#~ msgstr "啟用季節性主題"
+
+#~ msgid ""
+#~ "Automatically activates festive designs (e.g. Christmas) at certain times."
+#~ msgstr "在特定時間自動啟用節日設計（例如聖誕節）。"
+
+#~ msgid "Show Decimals"
+#~ msgstr "顯示小數"
+
+#~ msgid "Toggles the display of cent amounts on or off."
+#~ msgstr "切換分幣金額的顯示開/關。"
+
+#~ msgid "Show Trend Arrows"
+#~ msgstr "顯示趨勢箭頭"
+
+#~ msgid "Shows or hides trend arrows for price changes."
+#~ msgstr "顯示或隱藏價格變化的趨勢箭頭。"
+
+#~ msgid "Icon Opacity"
+#~ msgstr "圖示不透明度"
+
+#~ msgid "Controls the visibility of crypto icons."
+#~ msgstr "控制加密貨幣圖示的可見性。"
+
+#~ msgid "Update Interval"
+#~ msgstr "更新間隔"
+
+#~ msgid "How often prices are fetched from CoinGecko."
+#~ msgstr "從 CoinGecko 獲取價格的頻率。"
+
+#~ msgid "Reset Colors"
+#~ msgstr "重置顏色"
+
+#~ msgid "Resets all custom colors (charts & metrics) to default values."
+#~ msgstr "將所有自訂顏色（圖表和指標）重置為預設值。"
+
+#~ msgid "Update Top Coins List"
+#~ msgstr "更新熱門代幣列表"
+
+#~ msgid ""
+#~ "Loads the current top 50 coins from CoinGecko and updates the selection "
+#~ "lists (requires settings restart)."
+#~ msgstr "從 CoinGecko 載入目前前 50 種代幣並更新選擇列表（需要重啟設定）。"
+
+#~ msgid "Force ATH Rocket"
+#~ msgstr "強制顯示 ATH 火箭"
+
+#~ msgid "Always show the rocket animation (for testing purposes)."
+#~ msgstr "始終顯示火箭動畫（用於測試目的）。"
+
+#~ msgid "Force Seasonal Theme"
+#~ msgstr "強制季節性主題"
+
+#~ msgid "Override the date-based theme selection."
+#~ msgstr "覆蓋基於日期的主題選擇。"
+
+#~ msgid "Debug Frames (Layout)"
+#~ msgstr "除錯框架 (佈局)"
+
+#~ msgid "Draws colorful frames around menu elements for layout inspection."
+#~ msgstr "在選單元素周圍繪製彩色框架以進行佈局檢查。"
+
+#~ msgid "Show Error Notifications"
+#~ msgstr "顯示錯誤通知"
+
+#~ msgid "Sends a desktop notification when an internal error is caught."
+#~ msgstr "捕獲內部錯誤時發送桌面通知。"
+
+#~ msgid "Test Crash (Safe)"
+#~ msgstr "測試崩潰 (安全)"
+
+#~ msgid "Provokes an error to test logging and notifications."
+#~ msgstr "引發錯誤以測試日誌記錄和通知。"
+
+#~ msgid "Show Icon"
+#~ msgstr "顯示圖示"
+
+#~ msgid "Shows the crypto icon next to the price."
+#~ msgstr "在價格旁邊顯示加密貨幣圖示。"
+
+#~ msgid "Toggles the display of decimal places on/off."
+#~ msgstr "切換小數位的顯示開/關。"
+
+#~ msgid "Number of Decimals"
+#~ msgstr "小數位數"
+
+#~ msgid "Number of decimal places (2-8)."
+#~ msgstr "小數位數 (2-8)。"
+
+#~ msgid "Color the Arrow Only"
+#~ msgstr "僅為箭頭著色"
+
+#~ msgid "If active, the price text remains white."
+#~ msgstr "如果啟用，價格文字保持白色。"
+
+#~ msgid "Show Currency Symbol (e.g. $ or €)"
+#~ msgstr "顯示貨幣符號（例如 $ 或 €）"
+
+#~ msgid "Replaces the currency code with the symbol."
+#~ msgstr "用符號替換貨幣代碼。"
+
+#~ msgid "Enabled"
+#~ msgstr "已啟用"
+
+#~ msgid "Toggles the display of this metric on/off."
+#~ msgstr "切換此指標的顯示/隱藏。"
+
+#~ msgid "Currency ID (CoinGecko)"
+#~ msgstr "貨幣 ID (CoinGecko)"
+
+#~ msgid "Select the cryptocurrency from the top list."
+#~ msgstr "從頂部列表中選擇加密貨幣。"
+
+#~ msgid "Custom Currency ID"
+#~ msgstr "自訂貨幣 ID"
+
+#~ msgid "CoinGecko ID (e.g. 'litecoin')"
+#~ msgstr "CoinGecko ID (例如 'litecoin')"
+
+#~ msgid "Comparison Currency"
+#~ msgstr "比較貨幣"
+
+#~ msgid "Select the currency for the price comparison."
+#~ msgstr "選擇用於價格比較的貨幣。"
+
+#~ msgid "Display Symbol"
+#~ msgstr "顯示符號"
+
+#~ msgid "The symbol displayed on the panel (e.g. BTC)."
+#~ msgstr "面板上顯示的符號（例如 BTC）。"
+
+#~ msgid "Color for Rising Price (▲)"
+#~ msgstr "價格上漲顏色 (▲)"
+
+#~ msgid "Select the color for positive price movement."
+#~ msgstr "選擇價格上漲時的顏色。"
+
+#~ msgid "Color for Falling Price (▼)"
+#~ msgstr "價格下跌顏色 (▼)"
+
+#~ msgid "Select the color for negative price movement."
+#~ msgstr "選擇價格下跌時的顏色。"
+
+#~ msgid "15 Seconds (Minimum)"
+#~ msgstr "15 秒 (最小)"
+
+#~ msgid "30 Seconds"
+#~ msgstr "30 秒"
+
+#~ msgid "60 Seconds (1 Minute)"
+#~ msgstr "60 秒 (1 分鐘)"
+
+#~ msgid "120 Seconds (2 Minutes)"
+#~ msgstr "120 秒 (2 分鐘)"
+
+#~ msgid "300 Seconds (5 Minutes)"
+#~ msgstr "300 秒 (5 分鐘)"
+
+#~ msgid "Automatic (Date based)"
+#~ msgstr "Automatic (Date based)"
+
+#~ msgid "New Year"
+#~ msgstr "New Year"
+
+#~ msgid "Christmas (General)"
+#~ msgstr "Christmas (General)"
+
+#~ msgid "Christmas (Eve & Day)"
+#~ msgstr "Christmas (Eve & Day)"
+
+#~ msgid "Halloween"
+#~ msgstr "Halloween"
+
+#~ msgid "Valentine's Day"
+#~ msgstr "Valentine's Day"
+
+#~ msgid "Bitcoin Pizza Day"
+#~ msgstr "Bitcoin Pizza Day"
+
+#~ msgid "Easter"
+#~ msgstr "Easter"
+
+#~ msgid "Custom ID"
+#~ msgstr "自訂 ID"
+
+#~ msgid "US Dollar (USD)"
+#~ msgstr "美元 (USD)"
+
+#~ msgid "Euro (EUR)"
+#~ msgstr "歐元 (EUR)"
+
+#~ msgid "Canadian Dollar (CAD)"
+#~ msgstr "加拿大元 (CAD)"
+
+#~ msgid "British Pound (GBP)"
+#~ msgstr "英鎊 (GBP)"
+
+#~ msgid "Japanese Yen (JPY)"
+#~ msgstr "日圓 (JPY)"
+
+#~ msgid "Swiss Franc (CHF)"
+#~ msgstr "瑞士法郎 (CHF)"
+
+#~ msgid "Australian Dollar (AUD)"
+#~ msgstr "澳元 (AUD)"
+
+#~ msgid "Happy New Year"
+#~ msgstr "新年快樂"
+
+#~ msgid " Loading..."
+#~ msgstr " 正在載入..."
+
+#~ msgid "Target "
+#~ msgstr "目標 "
+
+#~ msgid "Search Coin"
+#~ msgstr "搜尋代幣"
+
+#~ msgid "Loading market data..."
+#~ msgstr "正在載入市場數據..."
+
+#~ msgid "Power Saving Disabled"
+#~ msgstr "省電模式已禁用"
+
+#~ msgid "New month: Interval reset to 120s."
+#~ msgstr "新月份：間隔重置為 120 秒。"

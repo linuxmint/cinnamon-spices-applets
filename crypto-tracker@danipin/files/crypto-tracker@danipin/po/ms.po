@@ -1,0 +1,998 @@
+# Malay translation for crypto-tracker@danipin
+# Copyright (C) 2025
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: crypto-tracker@danipin 1.1.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-17 22:08+0200\n"
+"PO-Revision-Date: 2025-01-24 22:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: Malay\n"
+"Language: ms\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Row 2: Total Value
+#: applet.js:442 applet.js:445 applet.js:789 portfolio.js:699 utils.js:106
+msgid "Loading..."
+msgstr "Memuatkan..."
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Price Alarm: %s"
+msgstr "Penggera Harga: "
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Target %s reached! Price: %s"
+msgstr " dicapai! Harga: "
+
+#: applet.js:742 alarm.js:336
+msgid "risen"
+msgstr "naik"
+
+#: applet.js:742 alarm.js:336
+msgid "fallen"
+msgstr "jatuh"
+
+#: applet.js:743 alarm.js:337
+#, fuzzy, javascript-format
+msgid "Volatility Alarm: %s"
+msgstr "Penggera Volatiliti: "
+
+#: applet.js:743 alarm.js:337
+#, javascript-format
+msgid "%s has %s by %s%%"
+msgstr ""
+
+#: applet.js:857
+msgid "Colors reset to default values."
+msgstr "Warna ditetapkan semula kepada nilai lalai."
+
+#: applet.js:917
+msgid "List updated! Please reopen settings."
+msgstr "Senarai dikemas kini! Sila buka semula tetapan."
+
+#: applet.js:1468
+msgid "NEW ALL TIME HIGH 🚀"
+msgstr "REKOD TERTINGGI BARU 🚀"
+
+#: applet.js:1977
+msgid "API Limit Reached"
+msgstr "Had API Dicapai"
+
+#: applet.js:1977
+#, fuzzy, javascript-format
+msgid "You have used 100% of your monthly limit (10k)."
+msgstr "Anda telah menggunakan 100% had bulanan anda (10k)."
+
+#: applet.js:1984
+msgid "Power Saving Enabled"
+msgstr "Penjimatan Kuasa Didayakan"
+
+#: applet.js:1984
+msgid "Interval set to 5 min to avoid API ban."
+msgstr "Selang ditetapkan kepada 5 min untuk mengelakkan larangan API."
+
+#: applet.js:1987
+msgid "API Limit Warning"
+msgstr "Amaran Had API"
+
+#: applet.js:1987
+#, javascript-format
+msgid "You have reached 90% of your limit."
+msgstr "Anda telah mencapai 90% daripada had anda."
+
+#: applet.js:1990
+msgid "API Limit Info"
+msgstr "Info Had API"
+
+#: applet.js:1990
+#, javascript-format
+msgid "You have reached 80% of your limit."
+msgstr "Anda telah mencapai 80% daripada had anda."
+
+#. Set base texts
+#: footer.js:94
+msgid "API: Active"
+msgstr "API: Aktif"
+
+#: footer.js:94
+msgid "Basic Mode"
+msgstr "Mod Asas"
+
+#: footer.js:98
+msgid "Source: CoinGecko"
+msgstr "Sumber: CoinGecko"
+
+#: footer.js:101
+msgid "Get Free API Key"
+msgstr "Dapatkan Kunci API Percuma"
+
+#: footer.js:111
+#, fuzzy, javascript-format
+msgid "Month: %s"
+msgstr "Bulan: "
+
+#: footer.js:112
+#, javascript-format
+msgid "Ø: %s"
+msgstr ""
+
+#: footer.js:115
+#, fuzzy, javascript-format
+msgid "Alarms: %s"
+msgstr "Penggera: "
+
+#: header.js:117 header.js:275
+msgid "Portfolio Tracker"
+msgstr "Penjejak Portfolio"
+
+#: header.js:119 header.js:276
+msgid "Alarm Management"
+msgstr "Pengurusan Penggera"
+
+#: header.js:121 header.js:278
+msgid "API Usage & Stats"
+msgstr "Penggunaan API & Statistik"
+
+#: header.js:123
+msgid "Support Development"
+msgstr "Sokong Pembangunan"
+
+# Strings from JS files
+#. IMPORTANT: For the drawing loop we need the pure text without markup!
+#: header.js:128 header.js:274 header.js:641
+msgid "Market Dashboard"
+msgstr "Papan Pemuka Pasaran"
+
+#: header.js:130 header.js:642
+msgid "24H Price Change [%]"
+msgstr "Perubahan Harga 24J [%]"
+
+#: header.js:280
+msgid "Support"
+msgstr "Sokongan"
+
+#: header.js:284
+msgid "Settings"
+msgstr "Tetapan"
+
+#: alarm.js:242
+msgid "Alarm Archive Full"
+msgstr "Arkib Penggera Penuh"
+
+#: alarm.js:242
+#, fuzzy, javascript-format
+msgid "Oldest alarm for %s was deleted."
+msgstr "Penggera tertua untuk "
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Background Alarm: %s"
+msgstr "Penggera Latar Belakang: "
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Target price %s reached! Current: %s"
+msgstr " dicapai! Semasa: "
+
+#: alarm.js:469
+msgid "Alarm Settings"
+msgstr "Tetapan Penggera"
+
+#: alarm.js:573
+#, fuzzy, javascript-format
+msgid "Target Price (%s):"
+msgstr "Harga Sasaran ("
+
+#: alarm.js:574
+msgid "Change (%):"
+msgstr "Perubahan (%):"
+
+#: alarm.js:577
+msgid "Press ENTER to save."
+msgstr "Tekan ENTER untuk simpan."
+
+#: alarm.js:643 alarm.js:652
+msgid "Search alarms..."
+msgstr "Cari penggera..."
+
+#: alarm.js:739 portfolio.js:1262
+msgid "No matches."
+msgstr "Tiada padanan."
+
+#: alarm.js:739
+msgid "No alarms here yet."
+msgstr "Tiada penggera di sini lagi."
+
+#: alarm.js:856
+#, fuzzy, javascript-format
+msgid "Target: %s"
+msgstr "Sasaran:"
+
+#: alarm.js:857
+#, fuzzy, javascript-format
+msgid "Vol: %s%%"
+msgstr "Vol 24j:"
+
+#: alarm.js:860
+#, fuzzy, javascript-format
+msgid "Current: %s"
+msgstr "Semasa: "
+
+#: alarm.js:865
+#, fuzzy, javascript-format
+msgid "Created: %s"
+msgstr "Dicipta: "
+
+#. Price Input
+#: alarm.js:1023
+msgid "Target:"
+msgstr "Sasaran:"
+
+#. Vol Input
+#: alarm.js:1044
+msgid "Vol %:"
+msgstr "Vol %:"
+
+#: alarm.js:1058
+msgid "ENTER to save"
+msgstr "ENTER untuk simpan"
+
+#. Sort options
+#: alarm.js:1102 portfolio.js:1008
+msgid "Date"
+msgstr "Tarikh"
+
+#: alarm.js:1103
+msgid "Name"
+msgstr "Nama"
+
+#: alarm.js:1166 alarm.js:1218
+msgid "Delete all"
+msgstr "Padam semua"
+
+#: alarm.js:1174 alarm.js:1182 alarm.js:1190 alarm.js:1213 portfolio.js:1212
+#: portfolio.js:1219
+msgid "Sure?"
+msgstr "Pasti?"
+
+#: alarm.js:1230
+#, fuzzy, javascript-format
+msgid "Alarms %s of %s"
+msgstr "Penggera "
+
+#: donate.js:35
+msgid ""
+"If you like this applet, you can support\n"
+"its development with a donation."
+msgstr ""
+"Jika anda menyukai aplet ini, anda boleh menyokong\n"
+"pembangunannya dengan sumbangan."
+
+#: donate.js:181
+msgid "Address:"
+msgstr "Alamat:"
+
+#: donate.js:212
+msgid "Copied"
+msgstr "Disalin"
+
+#: donate.js:212
+#, fuzzy, javascript-format
+msgid "%s address copied."
+msgstr " alamat disalin."
+
+#: search.js:33
+msgid "Search..."
+msgstr "Cari..."
+
+#: search.js:172
+msgid "No results..."
+msgstr "Tiada hasil..."
+
+#: portfolio.js:316
+msgid "Converting..."
+msgstr "Menukar..."
+
+#: portfolio.js:365
+msgid "Error"
+msgstr "Ralat"
+
+#: portfolio.js:365
+msgid "Currency conversion failed."
+msgstr "Penukaran mata wang gagal."
+
+#: portfolio.js:603
+msgid "Total Balance"
+msgstr "Jumlah Baki"
+
+#. FIX: expand: false for label, insert spacer instead
+#: portfolio.js:720
+msgid "Select Currency"
+msgstr "Pilih Mata Wang"
+
+#: portfolio.js:790 portfolio.js:798
+msgid "Filter portfolio..."
+msgstr "Tapis portfolio..."
+
+#: portfolio.js:1006
+msgid "Amount"
+msgstr "Jumlah"
+
+#: portfolio.js:1007
+msgid "Buy Price"
+msgstr "Harga Beli"
+
+#. Add TX Button
+#: portfolio.js:1199
+msgid "+ Transaction"
+msgstr "+ Transaksi"
+
+#. Delete Coin Button
+#: portfolio.js:1208 portfolio.js:1224
+msgid "Remove Position"
+msgstr "Alih Keluar Posisi"
+
+#: portfolio.js:1262
+msgid "No positions here yet."
+msgstr "Tiada posisi di sini lagi."
+
+#: portfolio.js:1288
+msgid "Add Coin"
+msgstr "Tambah Syiling"
+
+#: portfolio.js:1305 portfolio.js:1311
+msgid "Search (e.g. Bitcoin)..."
+msgstr "Cari (cth. Bitcoin)..."
+
+#: portfolio.js:1398
+msgid "No results"
+msgstr "Tiada hasil"
+
+#: seasonal.js:80
+msgid "HAPPY HALLOWEEN !"
+msgstr "SELAMAT HALLOWEEN !"
+
+#: seasonal.js:378
+msgid "MERRY CHRISTMAS 🎄"
+msgstr "SELAMAT HARI KRISMAS 🎄"
+
+#. Straighten up
+#: seasonal.js:486
+msgid "HAPPY BITCOIN PIZZA DAY 🍕"
+msgstr "SELAMAT HARI PIZZA BITCOIN 🍕"
+
+#: charts.js:181
+msgid "?"
+msgstr ""
+
+#: charts.js:228
+msgid "Rank:"
+msgstr "Pangkat:"
+
+#: charts.js:228
+msgid "M.Cap:"
+msgstr "Pasaran:"
+
+#: charts.js:229
+msgid "24h High:"
+msgstr "Tinggi 24j:"
+
+#: charts.js:229
+msgid "24h Vol:"
+msgstr "Vol 24j:"
+
+#: charts.js:230
+msgid "24h Low:"
+msgstr "Rendah 24j:"
+
+#: charts.js:230
+msgid "ATH:"
+msgstr "ATH:"
+
+#: utils.js:348
+msgid " (Rate Limit)"
+msgstr " (Had Kadar)"
+
+#: utils.js:349
+msgid " (API Key invalid)"
+msgstr " (Kunci API tidak sah)"
+
+#: utils.js:350
+msgid " (Network)"
+msgstr " (Rangkaian)"
+
+#: utils.js:352
+msgid "Crypto-Tracker Error"
+msgstr "Ralat Crypto-Tracker"
+
+#: utils.js:352
+#, fuzzy, javascript-format
+msgid "An error was intercepted%s. See log."
+msgstr "Satu ralat telah dipintas"
+
+#: api.js:67
+msgid "API successfully activated."
+msgstr "API berjaya diaktifkan."
+
+#: api.js:73
+msgid "No internet connection"
+msgstr "Tiada sambungan internet"
+
+#: api.js:75
+msgid "Key invalid"
+msgstr "Kunci tidak sah"
+
+#: api.js:77
+msgid "Key blocked"
+msgstr "Kunci disekat"
+
+#: api.js:79
+msgid "Limit reached"
+msgstr "Had dicapai"
+
+#: api.js:81
+msgid "Server error"
+msgstr "Ralat pelayan"
+
+#: api.js:85
+#, fuzzy, javascript-format
+msgid "API Error: %s"
+msgstr "Ralat API: "
+
+#: api.js:90
+msgid "System error"
+msgstr "Ralat sistem"
+
+#: api.js:131
+msgid "System Diagnosis"
+msgstr "Diagnosis Sistem"
+
+#: api.js:143
+msgid "API Connection: Active & Valid"
+msgstr "Sambungan API: Aktif & Sah"
+
+#: api.js:145
+msgid "Not configured"
+msgstr "Tidak dikonfigurasi"
+
+#: api.js:146
+#, fuzzy, javascript-format
+msgid "API Status: %s"
+msgstr "Status API: "
+
+#: api.js:154
+#, fuzzy, javascript-format
+msgid "Quota critical: %s%% used"
+msgstr "Kuota kritikal: "
+
+#: api.js:156
+#, fuzzy, javascript-format
+msgid "Quota high: %s%% used"
+msgstr "Kuota tinggi: "
+
+#: api.js:158
+#, fuzzy, javascript-format
+msgid "Quota: %s%% (In the green)"
+msgstr "(Dalam keadaan baik)"
+
+#: api.js:165
+#, fuzzy, javascript-format
+msgid "Period: %s days left in month."
+msgstr " hari tinggal dalam bulan."
+
+#: api.js:171
+#, fuzzy, javascript-format
+msgid "Tip: Interval (%ss) is aggressive for Free Tier."
+msgstr "s) adalah agresif untuk Tahap Percuma."
+
+#: api.js:178
+msgid "Note: Error log exists."
+msgstr "Nota: Log ralat wujud."
+
+#: api.js:180
+msgid "System: No crashes logged."
+msgstr "Sistem: Tiada kerosakan direkodkan."
+
+#: api.js:202 api.js:397
+msgid "Free API (Basic)"
+msgstr "API Percuma (Asas)"
+
+#: api.js:203 api.js:210
+msgid "Today:"
+msgstr "Hari ini:"
+
+#: api.js:204 api.js:211
+msgid "Month:"
+msgstr "Bulan:"
+
+#: api.js:205 api.js:212
+msgid "Ø per Day:"
+msgstr "Ø setiap Hari:"
+
+#: api.js:209 api.js:398
+msgid "Key API (Pro)"
+msgstr "API Kunci (Pro)"
+
+#: api.js:224
+msgid "Distribution (Key Calls)"
+msgstr "Pengagihan (Panggilan Kunci)"
+
+#: api.js:239
+msgid "Charts"
+msgstr "Carta"
+
+#. Blue
+#: api.js:240
+msgid "Details"
+msgstr "Butiran"
+
+#. Purple
+#: api.js:241
+msgid "Search"
+msgstr "Cari"
+
+#. Yellow
+#: api.js:242
+msgid "Portfolio"
+msgstr "Portfolio"
+
+#. Cyan
+#: api.js:243
+msgid "Alarms"
+msgstr "Penggera"
+
+#. Red/Pink
+#: api.js:244
+msgid "Updates"
+msgstr "Kemas kini"
+
+#: api.js:294
+msgid "History (Last 14 Days)"
+msgstr "Sejarah (14 Hari Terakhir)"
+
+#: api.js:417
+#, fuzzy, javascript-format
+msgid "Error Log (%s KB)"
+msgstr "Log Ralat ("
+
+#: api.js:420
+msgid "The system prevented and logged crashes."
+msgstr "Sistem menghalang dan merekodkan kerosakan."
+
+#: api.js:426
+msgid "Delete"
+msgstr "Padam"
+
+#: api.js:439
+msgid "Dismiss"
+msgstr "Abaikan"
+
+#, fuzzy
+#~ msgid "Ø:"
+#~ msgstr "Ø: "
+
+#~ msgid " was deleted."
+#~ msgstr " telah dipadamkan."
+
+#~ msgid "Target price "
+#~ msgstr "Harga sasaran "
+
+#, fuzzy
+#~ msgid " has "
+#~ msgstr "telah "
+
+#~ msgid " by "
+#~ msgstr " sebanyak "
+
+#~ msgid " of "
+#~ msgstr " daripada "
+
+#~ msgid ". See log."
+#~ msgstr ". Lihat log."
+
+#~ msgid "% used"
+#~ msgstr "% digunakan"
+
+#~ msgid "Quota: "
+#~ msgstr "Kuota: "
+
+#~ msgid "Period: "
+#~ msgstr "Tempoh: "
+
+#~ msgid "Tip: Interval ("
+#~ msgstr "Petua: Selang ("
+
+#~ msgid " KB)"
+#~ msgstr " KB)"
+
+#~ msgid "Crypto Tracker"
+#~ msgstr "Penjejak Kripto"
+
+#~ msgid ""
+#~ "A comprehensive cryptocurrency dashboard providing real-time market data, "
+#~ "portfolio management, interactive charts, and advanced alerting "
+#~ "capabilities, enhanced with seasonal visual elements."
+#~ msgstr ""
+#~ "Papan pemuka mata wang kripto komprehensif yang menyediakan data pasaran "
+#~ "masa nyata, pengurusan portfolio, carta interaktif, dan keupayaan amaran "
+#~ "lanjutan, dipertingkatkan dengan elemen visual bermusim."
+
+#~ msgid "Metric 1 (Primary)"
+#~ msgstr "Metrik 1 (Utama)"
+
+#~ msgid "Metric 2"
+#~ msgstr "Metrik 2"
+
+#~ msgid "Metric 3"
+#~ msgstr "Metrik 3"
+
+#~ msgid "General"
+#~ msgstr "Umum"
+
+#~ msgid "DevTools (Debug)"
+#~ msgstr "Alat Pembangun (Nyahpepijat)"
+
+#~ msgid "Developer Options"
+#~ msgstr "Pilihan Pembangun"
+
+#~ msgid "Applet Settings"
+#~ msgstr "Tetapan Aplet"
+
+#~ msgid "CoinGecko API Configuration"
+#~ msgstr "Konfigurasi API CoinGecko"
+
+#~ msgid "Display and Activation"
+#~ msgstr "Paparan dan Pengaktifan"
+
+#~ msgid "Data Source (API)"
+#~ msgstr "Sumber Data (API)"
+
+#~ msgid "Color Settings"
+#~ msgstr "Tetapan Warna"
+
+#~ msgid "Changes will activate on the next API update interval."
+#~ msgstr "Perubahan akan diaktifkan pada selang kemas kini API seterusnya."
+
+#~ msgid "CoinGecko API Key (Demo or Pro)"
+#~ msgstr "Kunci API CoinGecko (Demo atau Pro)"
+
+#~ msgid "Unlocks higher limits and more stable data queries."
+#~ msgstr ""
+#~ "Membuka had yang lebih tinggi dan pertanyaan data yang lebih stabil."
+
+#~ msgid ""
+#~ "CALL TRACKING OVERVIEW:\n"
+#~ "\n"
+#~ "• BASIC CALLS: Run via public servers (approx. 5-15 calls/min). \n"
+#~ "  Used for: Standard price queries (saves key quota).\n"
+#~ "\n"
+#~ "• KEY CALLS: Run via your Demo Key quota.\n"
+#~ "  Used for: Charts, coin details & more stable queries.\n"
+#~ "\n"
+#~ "LIMITS (DEMO KEY):\n"
+#~ "• Total: 10,000 calls per month\n"
+#~ "• Speed: Max. 30 requests per minute\n"
+#~ "\n"
+#~ "The tracking in the footer shows you in real-time how many requests have "
+#~ "been used so you can keep an eye on your monthly 10k limit."
+#~ msgstr ""
+#~ "GAMBARAN KESELURUHAN PENJEJAKAN PANGGILAN:\n"
+#~ "\n"
+#~ "• PANGGILAN ASAS: Dijalankan melalui pelayan awam (kira-kira 5-15 "
+#~ "panggilan/min). \n"
+#~ "  Digunakan untuk: Pertanyaan harga standard (menjimatkan kuota kunci).\n"
+#~ "\n"
+#~ "• PANGGILAN KUNCI: Dijalankan melalui kuota Kunci Demo anda.\n"
+#~ "  Digunakan untuk: Carta, butiran syiling & pertanyaan yang lebih "
+#~ "stabil.\n"
+#~ "\n"
+#~ "HAD (KUNCI DEMO):\n"
+#~ "• Jumlah: 10,000 panggilan sebulan\n"
+#~ "• Kelajuan: Maks. 30 permintaan seminit\n"
+#~ "\n"
+#~ "Penjejakan di bahagian bawah menunjukkan kepada anda dalam masa nyata "
+#~ "berapa banyak permintaan telah digunakan supaya anda boleh memantau had "
+#~ "bulanan 10k anda."
+
+#~ msgid "Show Active Alarms"
+#~ msgstr "Tunjukkan Penggera Aktif"
+
+#~ msgid "Shows the count of active alarms in the footer."
+#~ msgstr "Menunjukkan bilangan penggera aktif di bahagian bawah."
+
+#~ msgid "Show Monthly Statistics"
+#~ msgstr "Tunjukkan Statistik Bulanan"
+
+#~ msgid "Shows total API key calls this month."
+#~ msgstr "Menunjukkan jumlah panggilan kunci API bulan ini."
+
+#~ msgid "Show Daily Average"
+#~ msgstr "Tunjukkan Purata Harian"
+
+#~ msgid "Shows the calculated average per day."
+#~ msgstr "Menunjukkan purata yang dikira setiap hari."
+
+#~ msgid "Candle Charts as Default"
+#~ msgstr "Carta Lilin sebagai Lalai"
+
+#~ msgid "Shows charts as candlesticks by default where possible."
+#~ msgstr "Menunjukkan carta sebagai batang lilin secara lalai jika boleh."
+
+#~ msgid "Chart: Bullish Candle Color (Up)"
+#~ msgstr "Carta: Warna Lilin Bullish (Naik)"
+
+#~ msgid "Color for rising candles."
+#~ msgstr "Warna untuk lilin yang naik."
+
+#~ msgid "Chart: Bearish Candle Color (Down)"
+#~ msgstr "Carta: Warna Lilin Bearish (Turun)"
+
+#~ msgid "Color for falling candles."
+#~ msgstr "Warna untuk lilin yang jatuh."
+
+#~ msgid "Price Alarm"
+#~ msgstr "Penggera Harga"
+
+#~ msgid "Notification when this price is reached."
+#~ msgstr "Pemberitahuan apabila harga ini dicapai."
+
+#~ msgid "Enter the target price e.g. 5 or 2598. 0 disables the alarm."
+#~ msgstr "Masukkan harga sasaran cth. 5 atau 2598. 0 melumpuhkan penggera."
+
+#~ msgid "Percent Alarm"
+#~ msgstr "Penggera Peratus"
+
+#~ msgid "Alarm on percentage change (24h)."
+#~ msgstr "Penggera pada perubahan peratusan (24j)."
+
+#~ msgid "Enter a percentage value e.g. 5. 0 disables the alarm."
+#~ msgstr "Masukkan nilai peratusan cth. 5. 0 melumpuhkan penggera."
+
+#~ msgid "Compact Mode"
+#~ msgstr "Mod Kompak"
+
+#~ msgid "Space-saving display in panel (BTC $85.5K)."
+#~ msgstr "Paparan jimat ruang dalam panel (BTC $85.5K)."
+
+#~ msgid "Enable Seasonal Theme"
+#~ msgstr "Dayakan Tema Bermusim"
+
+#~ msgid ""
+#~ "Automatically activates festive designs (e.g. Christmas) at certain times."
+#~ msgstr ""
+#~ "Mengaktifkan reka bentuk perayaan secara automatik (cth. Krismas) pada "
+#~ "masa tertentu."
+
+#~ msgid "Show Decimals"
+#~ msgstr "Tunjukkan Perpuluhan"
+
+#~ msgid "Toggles the display of cent amounts on or off."
+#~ msgstr "Menogol paparan jumlah sen hidup atau mati."
+
+#~ msgid "Show Trend Arrows"
+#~ msgstr "Tunjukkan Anak Panah Trend"
+
+#~ msgid "Shows or hides trend arrows for price changes."
+#~ msgstr ""
+#~ "Menunjukkan atau menyembunyikan anak panah trend untuk perubahan harga."
+
+#~ msgid "Icon Opacity"
+#~ msgstr "Kelegapan Ikon"
+
+#~ msgid "Controls the visibility of crypto icons."
+#~ msgstr "Mengawal keterlihatan ikon kripto."
+
+#~ msgid "Update Interval"
+#~ msgstr "Selang Kemas Kini"
+
+#~ msgid "How often prices are fetched from CoinGecko."
+#~ msgstr "Berapa kerap harga diambil dari CoinGecko."
+
+#~ msgid "Reset Colors"
+#~ msgstr "Tetapkan Semula Warna"
+
+#~ msgid "Resets all custom colors (charts & metrics) to default values."
+#~ msgstr ""
+#~ "Menetapkan semula semua warna tersuai (carta & metrik) kepada nilai lalai."
+
+#~ msgid "Update Top Coins List"
+#~ msgstr "Kemas Kini Senarai Syiling Teratas"
+
+#~ msgid ""
+#~ "Loads the current top 50 coins from CoinGecko and updates the selection "
+#~ "lists (requires settings restart)."
+#~ msgstr ""
+#~ "Memuatkan 50 syiling teratas semasa dari CoinGecko dan mengemas kini "
+#~ "senarai pilihan (memerlukan tetapan dimulakan semula)."
+
+#~ msgid "Force ATH Rocket"
+#~ msgstr "Paksa Roket ATH"
+
+#~ msgid "Always show the rocket animation (for testing purposes)."
+#~ msgstr "Sentiasa tunjukkan animasi roket (untuk tujuan ujian)."
+
+#~ msgid "Force Seasonal Theme"
+#~ msgstr "Paksa Tema Bermusim"
+
+#~ msgid "Override the date-based theme selection."
+#~ msgstr "Gantikan pemilihan tema berasaskan tarikh."
+
+#~ msgid "Debug Frames (Layout)"
+#~ msgstr "Bingkai Nyahpepijat (Susun Atur)"
+
+#~ msgid "Draws colorful frames around menu elements for layout inspection."
+#~ msgstr ""
+#~ "Melukis bingkai berwarna-warni di sekeliling elemen menu untuk "
+#~ "pemeriksaan susun atur."
+
+#~ msgid "Show Error Notifications"
+#~ msgstr "Tunjukkan Pemberitahuan Ralat"
+
+#~ msgid "Sends a desktop notification when an internal error is caught."
+#~ msgstr "Menghantar pemberitahuan desktop apabila ralat dalaman ditangkap."
+
+#~ msgid "Test Crash (Safe)"
+#~ msgstr "Uji Kerosakan (Selamat)"
+
+#~ msgid "Provokes an error to test logging and notifications."
+#~ msgstr "Mencetuskan ralat untuk menguji pengelogan dan pemberitahuan."
+
+#~ msgid "Show Icon"
+#~ msgstr "Tunjukkan Ikon"
+
+#~ msgid "Shows the crypto icon next to the price."
+#~ msgstr "Menunjukkan ikon kripto di sebelah harga."
+
+#~ msgid "Toggles the display of decimal places on/off."
+#~ msgstr "Menogol paparan tempat perpuluhan hidup/mati."
+
+#~ msgid "Number of Decimals"
+#~ msgstr "Bilangan Perpuluhan"
+
+#~ msgid "Number of decimal places (2-8)."
+#~ msgstr "Bilangan tempat perpuluhan (2-8)."
+
+#~ msgid "Color the Arrow Only"
+#~ msgstr "Warnakan Anak Panah Sahaja"
+
+#~ msgid "If active, the price text remains white."
+#~ msgstr "Jika aktif, teks harga kekal putih."
+
+#~ msgid "Show Currency Symbol (e.g. $ or €)"
+#~ msgstr "Tunjukkan Simbol Mata Wang (cth. $ atau €)"
+
+#~ msgid "Replaces the currency code with the symbol."
+#~ msgstr "Menggantikan kod mata wang dengan simbol."
+
+#~ msgid "Enabled"
+#~ msgstr "Didayakan"
+
+#~ msgid "Toggles the display of this metric on/off."
+#~ msgstr "Menogol paparan metrik ini hidup/mati."
+
+#~ msgid "Currency ID (CoinGecko)"
+#~ msgstr "ID Mata Wang (CoinGecko)"
+
+#~ msgid "Select the cryptocurrency from the top list."
+#~ msgstr "Pilih mata wang kripto dari senarai teratas."
+
+#~ msgid "Custom Currency ID"
+#~ msgstr "ID Mata Wang Tersuai"
+
+#~ msgid "CoinGecko ID (e.g. 'litecoin')"
+#~ msgstr "ID CoinGecko (cth. 'litecoin')"
+
+#~ msgid "Comparison Currency"
+#~ msgstr "Mata Wang Perbandingan"
+
+#~ msgid "Select the currency for the price comparison."
+#~ msgstr "Pilih mata wang untuk perbandingan harga."
+
+#~ msgid "Display Symbol"
+#~ msgstr "Simbol Paparan"
+
+#~ msgid "The symbol displayed on the panel (e.g. BTC)."
+#~ msgstr "Simbol yang dipaparkan pada panel (cth. BTC)."
+
+#~ msgid "Color for Rising Price (▲)"
+#~ msgstr "Warna untuk Harga Naik (▲)"
+
+#~ msgid "Select the color for positive price movement."
+#~ msgstr "Pilih warna untuk pergerakan harga positif."
+
+#~ msgid "Color for Falling Price (▼)"
+#~ msgstr "Warna untuk Harga Jatuh (▼)"
+
+#~ msgid "Select the color for negative price movement."
+#~ msgstr "Pilih warna untuk pergerakan harga negatif."
+
+#~ msgid "15 Seconds (Minimum)"
+#~ msgstr "15 Saat (Minimum)"
+
+#~ msgid "30 Seconds"
+#~ msgstr "30 Saat"
+
+#~ msgid "60 Seconds (1 Minute)"
+#~ msgstr "60 Saat (1 Minit)"
+
+#~ msgid "120 Seconds (2 Minutes)"
+#~ msgstr "120 Saat (2 Minit)"
+
+#~ msgid "300 Seconds (5 Minutes)"
+#~ msgstr "300 Saat (5 Minit)"
+
+#~ msgid "Automatic (Date based)"
+#~ msgstr "Automatic (Date based)"
+
+#~ msgid "New Year"
+#~ msgstr "New Year"
+
+#~ msgid "Christmas (General)"
+#~ msgstr "Christmas (General)"
+
+#~ msgid "Christmas (Eve & Day)"
+#~ msgstr "Christmas (Eve & Day)"
+
+#~ msgid "Halloween"
+#~ msgstr "Halloween"
+
+#~ msgid "Valentine's Day"
+#~ msgstr "Valentine's Day"
+
+#~ msgid "Bitcoin Pizza Day"
+#~ msgstr "Bitcoin Pizza Day"
+
+#~ msgid "Easter"
+#~ msgstr "Easter"
+
+#~ msgid "Custom ID"
+#~ msgstr "ID Tersuai"
+
+#~ msgid "US Dollar (USD)"
+#~ msgstr "Dolar AS (USD)"
+
+#~ msgid "Euro (EUR)"
+#~ msgstr "Euro (EUR)"
+
+#~ msgid "Canadian Dollar (CAD)"
+#~ msgstr "Dolar Kanada (CAD)"
+
+#~ msgid "British Pound (GBP)"
+#~ msgstr "Pound British (GBP)"
+
+#~ msgid "Japanese Yen (JPY)"
+#~ msgstr "Yen Jepun (JPY)"
+
+#~ msgid "Swiss Franc (CHF)"
+#~ msgstr "Franc Swiss (CHF)"
+
+#~ msgid "Australian Dollar (AUD)"
+#~ msgstr "Dolar Australia (AUD)"
+
+#~ msgid "Happy New Year"
+#~ msgstr "Selamat Tahun Baru"
+
+#~ msgid " Loading..."
+#~ msgstr " Memuatkan..."
+
+#~ msgid "Target "
+#~ msgstr "Sasaran "
+
+#~ msgid "Search Coin"
+#~ msgstr "Cari Syiling"
+
+#~ msgid "Loading market data..."
+#~ msgstr "Memuatkan data pasaran..."
+
+#~ msgid "Power Saving Disabled"
+#~ msgstr "Penjimatan Kuasa Dilumpuhkan"
+
+#~ msgid "New month: Interval reset to 120s."
+#~ msgstr "Bulan baru: Selang ditetapkan semula kepada 120s."
