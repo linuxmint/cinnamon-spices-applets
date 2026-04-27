@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 3.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-04-01 20:28+0200\n"
+"POT-Creation-Date: 2026-04-27 17:11+0200\n"
 "PO-Revision-Date: 2026-04-14 07:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,31 +18,31 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.9\n"
 
-#. applet.js:186
+#. applet.js:196
 msgid "score"
 msgstr "pontszám"
 
-#. applet.js:198
+#. applet.js:208
 msgid "comments"
 msgstr "megjegyzések"
 
-#. applet.js:210
+#. applet.js:220
 msgid "recent issues"
 msgstr "legutóbbi kiadások"
 
-#. applet.js:223
+#. applet.js:233
 msgid "translations"
 msgstr "fordítások"
 
-#. applet.js:298
+#. applet.js:308
 msgid "Reload icons"
 msgstr "Ikonok újratöltése"
 
-#. applet.js:304
+#. applet.js:314
 msgid "Visit website"
 msgstr "Látogassa meg a weboldalt"
 
-#. applet.js:399
+#. applet.js:417
 msgid ""
 "Check in progress.\n"
 "Time remaining:"
@@ -50,39 +50,43 @@ msgstr ""
 "Ellenőrzés folyamatban.\n"
 "Hátralévő idő:"
 
-#. applet.js:426
+#. applet.js:420
+msgid "Ends around:"
+msgstr ""
+
+#. applet.js:437
 msgid "Time remaining until the next check:"
 msgstr "Hátralévő idő a következő ellenőrzésig:"
 
-#. applet.js:428 applet.js:735
+#. applet.js:439 applet.js:741
 msgid "Next check at:"
 msgstr "Következő ellenőrzés ekkor:"
 
-#. applet.js:433
+#. applet.js:444
 msgid "Getting Started. Please wait..."
 msgstr "Kezdés. Kérlek várj..."
 
-#. applet.js:887
+#. applet.js:893
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:978
+#. applet.js:984
 msgid "Mark all as read"
 msgstr "Összes megjelölése olvasottként"
 
-#. applet.js:989
+#. applet.js:995
 msgid "Refresh"
 msgstr "Frissítés"
 
-#. applet.js:1003
+#. applet.js:1009
 msgid "Refreshing in progress - Click to stop"
 msgstr "Frissítés folyamatban - Kattintson a leállításhoz"
 
-#. applet.js:1017
+#. applet.js:1023
 msgid "Refreshing in progress"
 msgstr "Frissítés folyamatban"
 
-#. applet.js:1029
+#. applet.js:1035
 msgid "Configure..."
 msgstr "Beállítások…"
 
@@ -249,10 +253,6 @@ msgstr "Ne mutasson semmit"
 #. settings-schema.json->useful-only->description
 msgid "Show only non-zero values in panel"
 msgstr "Csak a nem nulla értékek megjelenítése a panelen"
-
-#. settings-schema.json->coloredIcon->description
-msgid "Change icon color while refreshing"
-msgstr "Ikon színének módosítása frissítés közben"
 
 #. settings-schema.json->colorWhileRefreshing->description
 msgid "Icon color while refreshing"
