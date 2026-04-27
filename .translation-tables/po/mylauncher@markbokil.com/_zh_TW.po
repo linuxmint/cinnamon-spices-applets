@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: applet.js:183
+msgid "Edit launcher menu"
+msgstr ""
+
+#: applet.js:190 mylauncher.properties:46
+msgid "Help"
+msgstr ""
+
+#: applet.js:194
+msgid "About"
+msgstr ""
+
+#: applet.js:201
+msgid "Tooltips"
+msgstr ""
+
+#: mylauncher.properties:6
+msgid "Apps"
+msgstr ""
+
+#: mylauncher.properties:7
+msgid "Messenger"
+msgstr ""
+
+#: mylauncher.properties:9
+msgid "Office Suite"
+msgstr ""
+
+#: mylauncher.properties:10
+msgid "Audio Player"
+msgstr ""
+
+#: mylauncher.properties:11
+msgid "Text Editor"
+msgstr ""
+
+#: mylauncher.properties:12
+msgid "Image Editor"
+msgstr ""
+
+#: mylauncher.properties:16
+msgid "Calculator"
+msgstr ""
+
+#: mylauncher.properties:18
+msgid "My Computer"
+msgstr ""
+
+#: mylauncher.properties:20
+msgid "Startup Applications"
+msgstr ""
+
+#: mylauncher.properties:21
+msgid "System Monitor"
+msgstr ""
+
+#: mylauncher.properties:22
+msgid "System Settings"
+msgstr ""
+
+#: mylauncher.properties:25
+msgid "Screenshot"
+msgstr ""
+
+#: mylauncher.properties:26
+msgid "Search for files"
+msgstr ""
+
+#: mylauncher.properties:32
+msgid "Reload Theme"
+msgstr ""
+
+#: mylauncher.properties:36
+msgid "Suspend"
+msgstr ""
+
+#: mylauncher.properties:38
+msgid "Home"
+msgstr ""
+
+#: mylauncher.properties:39
+msgid "Terminal"
+msgstr ""
+
+#: mylauncher.properties:40
+msgid "Browser"
+msgstr ""
+
+#: mylauncher.properties:42
+msgid "Toggle Desktop"
+msgstr ""
+
+#. mylauncher@markbokil.com->metadata.json->description
+msgid "Personal app launcher."
+msgstr ""

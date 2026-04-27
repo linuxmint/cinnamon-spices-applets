@@ -1,0 +1,210 @@
+# BLUETOOTH BATTERY
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# zamszowy, 2022
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-29 21:28+0200\n"
+"PO-Revision-Date: 2023-12-28 10:36+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. applet.js:84
+msgid "Show devices battery levels"
+msgstr "Vis enheders batteriniveau"
+
+#. settings-schema.json->notification-warn-demo->description
+#. settings-schema.json->notification-crit-demo->description
+#. applet.js:161 applet.js:166
+msgid "Test notification"
+msgstr "Test underretning"
+
+#. applet.js:161 applet.js:166 applet.js:257 applet.js:267
+msgid "Battery dropped below %d%"
+msgstr ""
+
+#. metadata.json->name
+msgid "Bluetooth battery"
+msgstr "Bluetooth-batteri"
+
+#. metadata.json->description
+msgid "Shows battery levels of different devices"
+msgstr "Vis forskellige enheders batteriniveau"
+
+#. settings-schema.json->page1->title
+msgid "Settings"
+msgstr "Indstillinger"
+
+#. settings-schema.json->page2->title
+msgid "Notifications"
+msgstr "Underretninger"
+
+#. settings-schema.json->page3->title
+msgid "Blacklist"
+msgstr "Blacklist"
+
+#. settings-schema.json->section0->title
+msgid "Enable battery monitoring for:"
+msgstr "Aktivér batteriovervågning for:"
+
+#. settings-schema.json->section1->title
+msgid "Icon/Text:"
+msgstr "Ikon/tekst:"
+
+#. settings-schema.json->section2->title
+msgid "Device to display"
+msgstr "Enhed der skal vises"
+
+#. settings-schema.json->section3->title
+msgid ""
+"Disable monitoring for selected devices. You can use model or serial of the "
+"device.\n"
+"Comment starts with '#'"
+msgstr ""
+"Deaktivér overvågning af udvalgte enheder. Du kan bruge enhedens model eller "
+"serienummer.\n"
+"Kommentar starter med “#”"
+
+#. settings-schema.json->section4->title
+msgid "Warning notifications"
+msgstr "Underretning om lavt niveau"
+
+#. settings-schema.json->section5->title
+msgid "Critical notifications"
+msgstr "Underretning om kritisk niveau"
+
+#. settings-schema.json->section6->title
+msgid ""
+"Ignore small changes of battery levels - if device reports small battery "
+"changes back and forth, this setting would help"
+msgstr ""
+"Ignorér små ændringer i batteriniveauet. Hvis enheden rapporterer små "
+"batteriskift frem og tilbage, vil denne indstilling hjælpe."
+
+#. settings-schema.json->section7->title
+msgid "Showing of configured applet icon/text"
+msgstr "Visning af ikon/tekst"
+
+#. settings-schema.json->enable-keyboards->description
+msgid "Keyboards"
+msgstr "Tastaturer"
+
+#. settings-schema.json->enable-mice->description
+msgid "Mice"
+msgstr "Mus"
+
+#. settings-schema.json->enable-headphones->description
+msgid "Headphones"
+msgstr "Hovedtelefoner"
+
+#. settings-schema.json->enable-others->description
+msgid "Other devices"
+msgstr "Andre enheder"
+
+#. settings-schema.json->applet-icon->description
+msgid "Display"
+msgstr "Visning"
+
+#. settings-schema.json->applet-icon->options
+msgid "Icon and Text"
+msgstr "Ikon og tekst"
+
+#. settings-schema.json->applet-icon->options
+msgid "Icon"
+msgstr "Ikon"
+
+#. settings-schema.json->applet-icon->options
+msgid "Text"
+msgstr "Tekst"
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr ""
+
+#. settings-schema.json->blacklist->tooltip
+msgid "tooltip"
+msgstr "Værktøjstip"
+
+#. settings-schema.json->blacklist-apply->description
+msgid "Apply"
+msgstr "Anvend"
+
+#. settings-schema.json->blacklist-apply->tooltip
+msgid "Apply changes"
+msgstr "Udfør ændringer"
+
+#. settings-schema.json->override-enable->description
+msgid ""
+"Manually select main device to display (instead of the one with lowest "
+"battery)"
+msgstr "Vælg enheden, der skal vises (i stedet for den med lavest batteri)"
+
+#. settings-schema.json->override-entry->description
+msgid "Selected device:"
+msgstr "Valgt enhed:"
+
+#. settings-schema.json->override-select->description
+msgid "Select device to display"
+msgstr "Vælg enhed"
+
+#. settings-schema.json->notification-warn-enable->description
+msgid "Enable notification for battery warning level"
+msgstr "Aktivér underretning om lavt batteriniveau"
+
+#. settings-schema.json->notification-warn-level->description
+#. settings-schema.json->notification-crit-level->description
+msgid "Notify when battery below [%]"
+msgstr "Underret, når batteriet er under [%]"
+
+#. settings-schema.json->notification-crit-enable->description
+msgid "Enable notification for battery critical level"
+msgstr "Aktivér underretning om kritisk batteriniveau"
+
+#. settings-schema.json->notification-applet-icon->description
+msgid "Show icon/text only if:"
+msgstr "Vis kun ikon/tekst:"
+
+#. settings-schema.json->notification-applet-icon->options
+msgid "show always"
+msgstr "altid"
+
+#. settings-schema.json->notification-applet-icon->options
+msgid "battery below warning level"
+msgstr "ved lavt batteriniveau"
+
+#. settings-schema.json->notification-applet-icon->options
+msgid "battery below critical level"
+msgstr "ved kritisk batteriniveau"
+
+#. settings-schema.json->notification-filter->description
+msgid ""
+"Notify again only if battery increased above configured level by at least: "
+msgstr ""
+"Underret kun igen, hvis batteriniveauet er steget med mindst det angivne "
+"niveau: "
+
+#. settings-schema.json->notification-filter->units
+msgid "%"
+msgstr "%"

@@ -1,0 +1,141 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: googledrive@pbojan 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-10-12 10:30+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+msgid "Google Drive"
+msgstr "Google Drive"
+
+#. metadata.json->description
+msgid ""
+"A simple applet to be able to sync Google Drive folders and files with just "
+"a few clicks."
+msgstr "Một applet đơn giản để đồng bộ thư mục và tệp Google Drive chỉ với vài cú nhấp chuột."
+
+#. settings-schema.json->pageConfiguration->title
+msgid "Configuration"
+msgstr "Cấu hình"
+
+#. settings-schema.json->pageHelp->title
+msgid "Help"
+msgstr "Trợ giúp"
+
+#. settings-schema.json->sectionGeneralOptions->title
+msgid "Google Drive Options"
+msgstr "Tùy chọn Google Drive"
+
+#. settings-schema.json->sectionWhitelist->title
+msgid "Whitelisted Folders"
+msgstr "Thư mục được phép"
+
+#. settings-schema.json->sectionNote->title
+msgid "Important Message"
+msgstr "Thông điệp quan trọng"
+
+#. settings-schema.json->sectionHelp->title
+msgid "About/Help"
+msgstr "Giới thiệu/Trợ giúp"
+
+#. settings-schema.json->sectionIssues->title
+msgid "Bugs/Issues"
+msgstr "Lỗi/Vấn đề"
+
+#. settings-schema.json->location->description
+msgid "Drive Sync Location"
+msgstr "Vị trí đồng bộ Drive"
+
+#. settings-schema.json->location->tooltip
+msgid ""
+"Location to an empty folder where it will sync the Google Drive data to e.g. "
+"~/Documents/Drive."
+msgstr "Chọn một thư mục trống để đồng bộ dữ liệu Google Drive, ví dụ: ~/Documents/Drive."
+
+#. settings-schema.json->whitelistHelp->description
+msgid ""
+"Note: If you want to sync only specific folders please make sure to add them "
+"on the list above. Please enter the names exactly as they are named in your "
+"Drive! It is also possible to add subfolders e.g. Documents/Work/Projects."
+msgstr "Lưu ý: Nếu bạn chỉ muốn đồng bộ một số thư mục cụ thể, hãy chắc chắn thêm chúng vào danh sách trên. Nhập chính xác tên thư mục như trên Drive! Có thể thêm cả thư mục con, ví dụ: Documents/Work/Projects."
+
+#. settings-schema.json->whitelist->columns->title
+msgid "Folder Name"
+msgstr "Tên thư mục"
+
+#. settings-schema.json->whitelist->description
+msgid "Whitelist Folders"
+msgstr "Thư mục được phép đồng bộ"
+
+#. settings-schema.json->whitelist->tooltip
+msgid ""
+"Whitelist folders that will be sycned from Google Drive e.g. Documents, "
+"Photos"
+msgstr "Các thư mục được phép đồng bộ từ Google Drive, ví dụ: Documents, Photos"
+
+#. settings-schema.json->note->description
+msgid ""
+"Note: This is a new release of this Applet, so your feedback and ideas are "
+"very important to make this applet better in the future. Please consider "
+"reporting any issues, bugs, instabilities, or ideas for general improvements "
+"on the links below! Thank you!"
+msgstr "Lưu ý: Đây là phiên bản mới của Applet này, vì vậy phản hồi và ý tưởng của bạn rất quan trọng để cải thiện applet trong tương lai. Hãy cân nhắc báo cáo bất kỳ vấn đề, lỗi, sự cố hoặc đề xuất cải tiến trên các liên kết dưới đây! Cảm ơn bạn!"
+
+#. settings-schema.json->website->description
+msgid ""
+"To learn more about the applet please click the button below to visit the "
+"official repository for this applet."
+msgstr "Để tìm hiểu thêm về applet, nhấn nút bên dưới để truy cập kho chính thức của applet này."
+
+#. settings-schema.json->websiteButton->description
+msgid "Visit GitHub website"
+msgstr "Truy cập GitHub"
+
+#. settings-schema.json->websiteButton->tooltip
+msgid "Opens GitHub website to learn more about this applet."
+msgstr "Mở trang GitHub để tìm hiểu thêm về applet này."
+
+#. settings-schema.json->helpAbout->description
+msgid ""
+"To learn more about the applet please click the button below to visit the "
+"official Cinnamon Spices website for this applet. You can also leave "
+"feedback in the comment section below."
+msgstr "Để tìm hiểu thêm về applet, nhấn nút bên dưới để truy cập trang chính thức của Cinnamon Spices cho applet này. Bạn cũng có thể để lại phản hồi ở phần bình luận phía dưới."
+
+#. settings-schema.json->helpAboutButton->description
+msgid "Visit Cinnamon Spices website"
+msgstr "Truy cập trang Cinnamon Spices"
+
+#. settings-schema.json->helpAboutButton->tooltip
+msgid "Opens Cinnamon Spices website to learn more about this applet."
+msgstr "Mở trang Cinnamon Spices để tìm hiểu thêm về applet này."
+
+#. settings-schema.json->helpIssue->description
+msgid ""
+"If you find an issue with this applet please make a report on GitHub by "
+"clicking the button below. Please make sure that the issue doesn't already "
+"exists"
+msgstr "Nếu bạn phát hiện vấn đề với applet này, hãy báo cáo trên GitHub bằng cách nhấn nút bên dưới. Hãy chắc chắn rằng vấn đề chưa tồn tại."
+
+#. settings-schema.json->helpSubmitIssue->description
+msgid "Submit an Issue"
+msgstr "Gửi báo cáo vấn đề"
+
+#. settings-schema.json->helpSubmitIssue->tooltip
+msgid ""
+"Opens GitHub project page where you can submit a new issue for this applet."
+msgstr "Mở trang dự án GitHub nơi bạn có thể gửi báo cáo vấn đề mới cho applet này."

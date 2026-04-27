@@ -1,0 +1,44 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: vertical-speedmeter@2u841r 1.0.0\n"
+"POT-Creation-Date: 2026-04-10 00:00+0000\n"
+"PO-Revision-Date: 2026-04-12 15:41+0200\n"
+"Last-Translator: FabRCT\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: applet.js:29
+msgid "Detecting active interface..."
+msgstr "Détection de l'interface active..."
+
+#: applet.js:82
+msgid "No active network interface detected."
+msgstr "Aucune interface réseau active détectée."
+
+#: applet.js:93
+msgid "Failed to read network counters."
+msgstr "Impossible de lire les compteurs réseau."
+
+#: applet.js:217
+msgid "Monitoring %s"
+msgstr "Surveillance %s"
+
+#: applet.js:219 applet.js:238
+msgid "Top line is upload. Bottom line is download."
+msgstr "Envoi sur la première ligne. Réception sur la seconde ligne."
+
+#: applet.js:236
+msgid "Interface: %s"
+msgstr "Interface: %s"
+
+#: applet.js:240
+msgid "Upload: %s/s"
+msgstr "Envoi: %s/s"
+
+#: applet.js:242
+msgid "Download: %s/s"
+msgstr "Réception: %s/s"

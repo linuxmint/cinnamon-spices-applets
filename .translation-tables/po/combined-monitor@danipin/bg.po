@@ -1,0 +1,367 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Combined Monitor Applet 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-15 21:36+0100\n"
+"PO-Revision-Date: 2025-12-15 22:02+0100\n"
+"Last-Translator: Automated Translator <example@example.com>\n"
+"Language-Team: Bulgarian <bg@li.org>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# applet.js strings
+msgid "Slot 1 (Standard)"
+msgstr "Слот 1 (Стандартен)"
+
+msgid "Slot 2 (Empty)"
+msgstr "Слот 2 (Празен)"
+
+msgid "Slot 3 (Empty)"
+msgstr "Слот 3 (Празен)"
+
+msgid "Separator"
+msgstr "Разделител"
+
+msgid "No Separator"
+msgstr "Без Разделител"
+
+msgid "Symbols"
+msgstr "Символи"
+
+msgid "CPU"
+msgstr "ЦПУ"
+
+msgid "Icon-White"
+msgstr "Икона-Бяла"
+
+msgid "Icon-Dark"
+msgstr "Икона-Тъмна"
+
+msgid "No Symbol (Text Label)"
+msgstr "Без Символ (Текстов Етикет)"
+
+msgid "TEMP"
+msgstr "ТЕМП"
+
+msgid "RAM"
+msgstr "ОЗУ"
+
+msgid "SWAP"
+msgstr "SWAP"
+
+msgid "Profile Management"
+msgstr "Управление на Профили"
+
+msgid "Activate (Load)"
+msgstr "Активиране (Зареждане)"
+
+msgid "Save Current Settings"
+msgstr "Запазване на Текущите Настройки"
+
+msgid "System Monitor"
+msgstr "Системен Монитор"
+
+msgid "Restart Cinnamon"
+msgstr "Рестартиране на Cinnamon"
+
+msgid "Profile Saved: %s"
+msgstr "Профилът е Запазен: %s"
+
+msgid "Active: %s"
+msgstr "Активен: %s"
+
+msgid "N/A"
+msgstr "Н/П"
+
+# settings-schema.json strings (Descriptions, Tooltips, Options)
+
+# Page Titles
+msgid "CPU Temperature"
+msgstr "Температура на ЦПУ"
+
+msgid "Profiles"
+msgstr "Профили"
+
+msgid "General"
+msgstr "Общи"
+
+# Section Titles
+msgid "Order of Metrics"
+msgstr "Ред на Метриките"
+
+msgid "Display"
+msgstr "Дисплей"
+
+msgid "Thresholds"
+msgstr "Прагове"
+
+msgid "Colors"
+msgstr "Цветове"
+
+msgid "Thresholds (in °C)"
+msgstr "Прагове (в °C)"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Profiles (Slots 1 to 3)"
+msgstr "Профили (Слотове от 1 до 3)"
+
+msgid "Global"
+msgstr "Глобални"
+
+# CPU
+msgid "Show CPU"
+msgstr "Показване на ЦПУ"
+
+msgid "Text for CPU"
+msgstr "Текст за ЦПУ"
+
+msgid "Custom symbol/icon for CPU. Leave empty for text label."
+msgstr "Персонализиран символ/икона за ЦПУ. Оставете празно за текстов етикет."
+
+msgid "Show percentage sign (%) for CPU"
+msgstr "Показване на знак за процент (%) за ЦПУ"
+
+msgid "If disabled, only the value (e.g., '45') is displayed without the percentage sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in the 'General' tab acts as a master switch."
+msgstr "Ако е деактивирано, се показва само стойността (напр. '45') без знака за процент (напр. '45%'). Опцията 'Показване на знак за процент (%) (Главен Превключвател)' в раздела 'Общи' действа като главен превключвател."
+
+msgid "Threshold LOW"
+msgstr "Праг НИСЪК"
+
+msgid "The LOW color is used below this value"
+msgstr "Цветът НИСЪК се използва под тази стойност"
+
+msgid "Threshold MED"
+msgstr "Праг СРЕДЕН"
+
+msgid "The MED color is used between LOW and MED"
+msgstr "Цветът СРЕДЕН се използва между НИСЪК и СРЕДЕН"
+
+msgid "Threshold HIGH"
+msgstr "Праг ВИСОК"
+
+msgid "The HIGH color is used between MED and HIGH"
+msgstr "Цветът ВИСОК се използва между СРЕДЕН и ВИСОК"
+
+msgid "Enable color change for CPU"
+msgstr "Активиране на промяна на цвета за ЦПУ"
+
+msgid "Color LOW"
+msgstr "Цвят НИСЪК"
+
+msgid "Color MED"
+msgstr "Цвят СРЕДЕН"
+
+msgid "Color HIGH"
+msgstr "Цвят ВИСОК"
+
+msgid "Color CRITICAL"
+msgstr "Цвят КРИТИЧЕН"
+
+msgid "Used above the HIGH threshold"
+msgstr "Използва се над прага ВИСОК"
+
+# TEMP
+msgid "Show Temperature"
+msgstr "Показване на Температурата"
+
+msgid "Enables the display of CPU temperature. **Important:** On many systems, installing the 'lm-sensors' package and running 'sudo sensors-detect' is necessary for this function to work correctly. Please refer to the instructions in the README.md."
+msgstr "Активира показването на температурата на ЦПУ. **Важно:** В много системи е необходимо инсталирането на пакета 'lm-sensors' и изпълнението на 'sudo sensors-detect', за да работи тази функция правилно. Моля, вижте инструкциите в README.md."
+
+msgid "Show °C symbol"
+msgstr "Показване на символ °C"
+
+msgid "Controls whether the Celsius symbol (°C or °F) should be displayed after the value."
+msgstr "Контролира дали символът за Целзий (°C или °F) трябва да се показва след стойността."
+
+msgid "Text for Temperature"
+msgstr "Текст за Температура"
+
+msgid "Custom symbol/icon for Temperature. Leave empty for text label."
+msgstr "Персонализиран символ/икона за Температура. Оставете празно за текстов етикет."
+
+msgid "Unit of Measurement"
+msgstr "Мерна Единица"
+
+msgid "Celsius (°C)"
+msgstr "Целзий (°C)"
+
+msgid "Fahrenheit (°F)"
+msgstr "Фаренхайт (°F)"
+
+msgid "Choose whether the temperature should be displayed in Celsius or Fahrenheit. Threshold values must be adjusted accordingly."
+msgstr "Изберете дали температурата да се показва в Целзий или Фаренхайт. Стойностите на праговете трябва да бъдат коригирани съответно."
+
+msgid "The LOW color is used below this value (applies to °C and °F)"
+msgstr "Цветът НИСЪК се използва под тази стойност (приложимо за °C и °F)"
+
+msgid "The MED color is used between LOW and MED (applies to °C and °F)"
+msgstr "Цветът СРЕДЕН се използва между НИСЪК и СРЕДЕН (приложимо за °C и °F)"
+
+msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+msgstr "Цветът ВИСОК се използва между СРЕДЕН и ВИСОК (приложимо за °C и °F)"
+
+msgid "Enable color change for TEMP"
+msgstr "Активиране на промяна на цвета за ТЕМП"
+
+msgid "Color LOW (Green)"
+msgstr "Цвят НИСЪК (Зелен)"
+
+msgid "Color MED (Orange)"
+msgstr "Цвят СРЕДЕН (Оранжев)"
+
+msgid "Color HIGH (Red-Orange)"
+msgstr "Цвят ВИСОК (Червено-Оранжев)"
+
+msgid "Color CRITICAL (Red)"
+msgstr "Цвят КРИТИЧЕН (Червен)"
+
+# RAM
+msgid "Show RAM"
+msgstr "Показване на ОЗУ"
+
+msgid "Text for RAM"
+msgstr "Текст за ОЗУ"
+
+msgid "Custom symbol/icon for RAM. Leave empty for text label."
+msgstr "Персонализиран символ/икона за ОЗУ. Оставете празно за текстов етикет."
+
+msgid "Show percentage sign (%) for RAM"
+msgstr "Показване на знак за процент (%) за ОЗУ"
+
+msgid "Display Mode"
+msgstr "Режим на Дисплея"
+
+msgid "Percentage Usage (%)"
+msgstr "Процентно Използване (%)"
+
+msgid "Used Memory (MB/GB)"
+msgstr "Използвана Памет (MB/GB)"
+
+msgid "Free Memory (MB/GB)"
+msgstr "Свободна Памет (MB/GB)"
+
+msgid "Choose whether percentage usage or used/free memory in MB/GB should be displayed."
+msgstr "Изберете дали да се показва процентното използване или използваната/свободната памет в MB/GB."
+
+msgid "Enable color change for RAM"
+msgstr "Активиране на промяна на цвета за ОЗУ"
+
+# SWAP
+msgid "Show SWAP"
+msgstr "Показване на SWAP"
+
+msgid "Text for SWAP"
+msgstr "Текст за SWAP"
+
+msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+msgstr "Персонализиран символ/икона за SWAP. Оставете празно за текстов етикет."
+
+msgid "Only show SWAP when used"
+msgstr "Показване на SWAP само когато се използва"
+
+msgid "If active, it only shows SWAP when usage is greater than 0%."
+msgstr "Ако е активно, показва SWAP само когато използването е по-голямо от 0%."
+
+msgid "Show percentage sign (%) for SWAP"
+msgstr "Показване на знак за процент (%) за SWAP"
+
+msgid "Enable color change for SWAP"
+msgstr "Активиране на промяна на цвета за SWAP"
+
+msgid "If the value is less than or equal to the LOW threshold, the LOW color is used."
+msgstr "Ако стойността е по-малка или равна на прага НИСЪК, се използва цветът НИСЪК."
+
+msgid "If the value is greater than LOW and less than or equal to the MED threshold, the MED color is used."
+msgstr "Ако стойността е по-голяма от НИСЪК и по-малка или равна на прага СРЕДЕН, се използва цветът СРЕДЕН."
+
+msgid "If the value is greater than MED and less than or equal to the HIGH threshold, the HIGH color is used."
+msgstr "Ако стойността е по-голяма от СРЕДЕН и по-малка или равна на прага ВИСОК, се използва цветът ВИСОК."
+
+# Order
+msgid "CPU Position"
+msgstr "Позиция на ЦПУ"
+
+msgid "Position 1 (Left)"
+msgstr "Позиция 1 (Ляво)"
+
+msgid "Position 2"
+msgstr "Позиция 2"
+
+msgid "Position 3"
+msgstr "Позиция 3"
+
+msgid "Position 4 (Right)"
+msgstr "Позиция 4 (Дясно)"
+
+msgid "Defines the display position of CPU. The position is automatically swapped with the metric at the same position."
+msgstr "Определя позицията на показване на ЦПУ. Позицията автоматично се разменя с метриката на същата позиция."
+
+msgid "TEMP Position"
+msgstr "Позиция на ТЕМП"
+
+msgid "RAM Position"
+msgstr "Позиция на ОЗУ"
+
+msgid "SWAP Position"
+msgstr "Позиция на SWAP"
+
+# General
+msgid "Update Interval (ms)"
+msgstr "Интервал на Обновяване (ms)"
+
+msgid "Show separator between metrics"
+msgstr "Показване на разделител между метриките"
+
+msgid "Separator Text"
+msgstr "Текст на Разделителя"
+
+msgid "Separator Color"
+msgstr "Цвят на Разделителя"
+
+msgid "Show percentage sign (%) (Master Switch)"
+msgstr "Показване на знак за процент (%) (Главен Превключвател)"
+
+msgid "If disabled, only the value (e.g., '45') is displayed for all percentage displays without the percentage sign (e.g., '45%'). Individual switches for CPU/RAM/SWAP must also be active."
+msgstr "Ако е деактивирано, се показва само стойността (напр. '45') за всички процентни дисплеи без знака за процент (напр. '45%'). Индивидуалните превключватели за ЦПУ/ОЗУ/SWAP също трябва да са активни."
+
+# Profiles
+msgid "Profile Message Duration (Seconds)"
+msgstr "Продължителност на Съобщението за Профил (Секунди)"
+
+msgid "How long should the message ('Profile saved', 'Profile active') be displayed in the panel."
+msgstr "Колко дълго трябва да се показва съобщението ('Профилът е запазен', 'Профилът е активен') в панела."
+
+msgid "Profile 1 Name"
+msgstr "Име на Профил 1"
+
+msgid "Enter a custom profile name in the text field!"
+msgstr "Въведете персонализирано име на профил в текстовото поле!"
+
+msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+msgstr "Кликнете 'Активиране' или 'Запазване' за Профил 1 в изскачащото меню."
+
+msgid "Saved data for Profile 1 (internal)"
+msgstr "Запазени данни за Профил 1 (вътрешни)"
+
+msgid "Profile 2 Name"
+msgstr "Име на Профил 2"
+
+msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+msgstr "Кликнете 'Активиране' или 'Запазване' за Профил 2 в изскачащото меню."
+
+msgid "Saved data for Profile 2 (internal)"
+msgstr "Запазени данни за Профил 2 (вътрешни)"
+
+msgid "Profile 3 Name"
+msgstr "Име на Профил 3"
+
+msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+msgstr "Кликнете 'Активиране' или 'Запазване' за Профил 3 в изскачащото меню."
+
+msgid "Saved data for Profile 3 (internal)"
+msgstr "Запазени данни за Профил 3 (вътрешни)"

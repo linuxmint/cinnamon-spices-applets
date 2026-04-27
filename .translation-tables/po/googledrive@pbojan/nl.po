@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: googledrive@pbojan 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-04-21 11:07+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "Google Drive"
+msgstr "Google Drive"
+
+#. metadata.json->description
+msgid ""
+"A simple applet to be able to sync Google Drive folders and files with just "
+"a few clicks."
+msgstr ""
+"Een eenvoudige applet om Google Drive-mappen en -bestanden te synchroniseren "
+"met slechts een paar klikken."
+
+#. settings-schema.json->pageConfiguration->title
+msgid "Configuration"
+msgstr "Configuratie"
+
+#. settings-schema.json->pageHelp->title
+msgid "Help"
+msgstr "Hulp"
+
+#. settings-schema.json->sectionGeneralOptions->title
+msgid "Google Drive Options"
+msgstr "Google Drive-opties"
+
+#. settings-schema.json->sectionWhitelist->title
+msgid "Whitelisted Folders"
+msgstr "Whitelist Mappen"
+
+#. settings-schema.json->sectionNote->title
+msgid "Important Message"
+msgstr "Belangrijke boodschap"
+
+#. settings-schema.json->sectionHelp->title
+msgid "About/Help"
+msgstr "Over/Hulp"
+
+#. settings-schema.json->sectionIssues->title
+msgid "Bugs/Issues"
+msgstr "Fouten/Problemen"
+
+#. settings-schema.json->location->description
+msgid "Drive Sync Location"
+msgstr "Drive Synchronisatielocatie"
+
+#. settings-schema.json->location->tooltip
+msgid ""
+"Location to an empty folder where it will sync the Google Drive data to e.g. "
+"~/Documents/Drive."
+msgstr ""
+"Locatie naar een lege map waar de Google Drive-gegevens naartoe worden "
+"gesynchroniseerd, bijv. ~/Documenten/Drive."
+
+#. settings-schema.json->whitelistHelp->description
+msgid ""
+"Note: If you want to sync only specific folders please make sure to add them "
+"on the list above. Please enter the names exactly as they are named in your "
+"Drive! It is also possible to add subfolders e.g. Documents/Work/Projects."
+msgstr ""
+"Opmerking: Als u alleen specifieke mappen wilt synchroniseren, zorg er dan "
+"voor dat u ze toevoegt aan de bovenstaande lijst. Voer de namen exact in "
+"zoals ze genoemd in uw Drive zijn! Het is ook mogelijk om submappen toe te "
+"voegen, bijv. Documenten/Werk/Projecten."
+
+#. settings-schema.json->whitelist->columns->title
+msgid "Folder Name"
+msgstr "Mapnaam"
+
+#. settings-schema.json->whitelist->description
+msgid "Whitelist Folders"
+msgstr "Whitelist Mappen"
+
+#. settings-schema.json->whitelist->tooltip
+msgid ""
+"Whitelist folders that will be sycned from Google Drive e.g. Documents, "
+"Photos"
+msgstr ""
+"Whitelist mappen die zullen worden gesynchroniseerd vanuit Google Drive, "
+"bijv. Documenten, Foto's"
+
+#. settings-schema.json->note->description
+msgid ""
+"Note: This is a new release of this Applet, so your feedback and ideas are "
+"very important to make this applet better in the future. Please consider "
+"reporting any issues, bugs, instabilities, or ideas for general improvements "
+"on the links below! Thank you!"
+msgstr ""
+"Opmerking: Dit is een nieuwe release van deze Applet, dus uw feedback en "
+"ideeën zijn erg belangrijk om deze applet in de toekomst te verbeteren. "
+"Overweeg alstublieft om eventuele problemen, bugs, instabiliteiten of ideeën "
+"voor algemene verbeteringen te rapporteren op de onderstaande links! Bedankt!"
+
+#. settings-schema.json->website->description
+msgid ""
+"To learn more about the applet please click the button below to visit the "
+"official repository for this applet."
+msgstr ""
+"Om meer te weten te komen over de applet, klik op de knop hieronder om de "
+"officiële repository voor deze applet te bezoeken."
+
+#. settings-schema.json->websiteButton->description
+msgid "Visit GitHub website"
+msgstr "Bezoek GitHub-website"
+
+#. settings-schema.json->websiteButton->tooltip
+msgid "Opens GitHub website to learn more about this applet."
+msgstr "Opent de GitHub-website om meer te weten te komen over deze applet."
+
+#. settings-schema.json->helpAbout->description
+msgid ""
+"To learn more about the applet please click the button below to visit the "
+"official Cinnamon Spices website for this applet. You can also leave "
+"feedback in the comment section below."
+msgstr ""
+"Om meer te weten te komen over de applet, klik op de knop hieronder om de "
+"officiële Cinnamon Spices-website voor deze applet te bezoeken. U kunt ook "
+"feedback achterlaten in de opmerkingensectie hieronder."
+
+#. settings-schema.json->helpAboutButton->description
+msgid "Visit Cinnamon Spices website"
+msgstr "Bezoek Cinnamon Spices-website"
+
+#. settings-schema.json->helpAboutButton->tooltip
+msgid "Opens Cinnamon Spices website to learn more about this applet."
+msgstr ""
+"Opent de Cinnamon Spices-website om meer te weten te komen over deze applet."
+
+#. settings-schema.json->helpIssue->description
+msgid ""
+"If you find an issue with this applet please make a report on GitHub by "
+"clicking the button below. Please make sure that the issue doesn't already "
+"exists"
+msgstr ""
+"Als u een probleem met deze applet vindt, maak dan een melding op GitHub "
+"door op de onderstaande knop te klikken. Zorg ervoor dat het probleem nog "
+"niet bestaat."
+
+#. settings-schema.json->helpSubmitIssue->description
+msgid "Submit an Issue"
+msgstr "Meld een probleem"
+
+#. settings-schema.json->helpSubmitIssue->tooltip
+msgid ""
+"Opens GitHub project page where you can submit a new issue for this applet."
+msgstr ""
+"Opent de GitHub-projectpagina waar u een nieuw probleem voor deze applet "
+"kunt indienen."

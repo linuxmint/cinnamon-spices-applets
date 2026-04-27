@@ -1,0 +1,38 @@
+# MAXIMUS BUTTONS
+# This file is put in the public domain.
+# hanspr, 2025
+#
+msgid ""
+msgstr ""
+
+#. metadata.json->contributors
+msgid "Hans Peyrot"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->options
+msgid "Default"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->options
+msgid "Mac-OS-X"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->options
+msgid "Mint-X"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->options
+msgid "Radiance"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->options
+msgid "UniMetro"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->options
+msgid "UniMetro-Black"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->options
+msgid "Vimix"
+msgstr ""

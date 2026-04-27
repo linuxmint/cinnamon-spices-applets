@@ -1,0 +1,86 @@
+# DESATURATE ALL
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# hkoosha, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-17 10:44-0400\n"
+"PO-Revision-Date: 2024-11-13 14:22+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:62
+msgid "Click to disable effect"
+msgstr ""
+
+#. applet.js:64
+msgid "Click to desaturate the desktop"
+msgstr ""
+
+#. applet.js:72
+msgid "Will automatically desaturate in"
+msgstr ""
+
+#. applet.js:74
+msgid "Will automatically disable in"
+msgstr ""
+
+#. applet.js:76
+msgid "minutes"
+msgstr ""
+
+#. applet.js:79
+msgid "Will automatically desaturate at"
+msgstr ""
+
+#. applet.js:81
+msgid "Will automatically disable at"
+msgstr ""
+
+#. metadata.json->description
+msgid "Convert your screen to gray-scale."
+msgstr ""
+
+#. settings-schema.json->saturation->description
+msgid "Color saturation"
+msgstr ""
+
+#. settings-schema.json->keybinding->description
+msgid "Shortcut to toggle desaturation effect"
+msgstr ""
+
+#. settings-schema.json->automatic->description
+msgid "Automatic"
+msgstr ""
+
+#. settings-schema.json->automatic->tooltip
+msgid ""
+"Automatically enable and disable the desaturation effect based on the time "
+"of day"
+msgstr ""
+
+#. settings-schema.json->start-timechooser->description
+msgid "Time of day to automatically enable"
+msgstr ""
+
+#. settings-schema.json->end-timechooser->description
+msgid "Time of day to automatically disable"
+msgstr ""
+
+#. settings-schema.json->resume-on-startup->description
+msgid "Restore desaturation effect state on startup"
+msgstr ""
+
+#. settings-schema.json->resume-on-startup->tooltip
+msgid "Restore the previously set desaturation state when cinnamon starts"
+msgstr ""

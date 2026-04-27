@@ -1,0 +1,362 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-01-16 03:29-0100\n"
+"PO-Revision-Date: 2025-08-20 03:31+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:239
+msgid "Reload Applet"
+msgstr "重新載入小程式"
+
+#: applet.js:250
+msgid "Recompile Translations"
+msgstr "重新編譯翻譯檔"
+
+#: applet.js:302
+msgid "REDSHIFT NOT INSTALLED!"
+msgstr "尚未安裝 Redshift！"
+
+#: applet.js:305
+msgid "Requires Redshift: yay -S redshift-minimal"
+msgstr "需要 Redshift：請執行 yay -S redshift-minimal 安裝"
+
+#: applet.js:308
+msgid "Requires Redshift: sudo apt-get install redshift"
+msgstr "需要 Redshift：請執行 sudo apt-get install redshift 安裝"
+
+#: applet.js:460 applet.js:489
+msgid "should be removed."
+msgstr "應該移除。"
+
+#: applet.js:482
+msgid "should be replaced by redshift-minimal"
+msgstr "應該改用 redshift-minimal"
+
+#. settings-schema.json->enabled->description
+#: applet.js:652
+msgid "Enabled"
+msgstr "啟用"
+
+#: applet.js:660 applet.js:705
+msgid "Temp:"
+msgstr "色溫："
+
+#: applet.js:671 applet.js:716
+msgid "Bright:"
+msgstr "亮度："
+
+#: applet.js:682 applet.js:1018
+msgid "Gamma:"
+msgstr "伽瑪值："
+
+#. settings-schema.json->enabledNight->description
+#: applet.js:697
+msgid "Night Enabled"
+msgstr "啟用夜間模式"
+
+#. settings-schema.json->iconLabel->description
+#: applet.js:759
+msgid "Show Label"
+msgstr "顯示標籤"
+
+#: applet.js:976 applet.js:1001
+msgid "Transition to day"
+msgstr "切換至白天"
+
+#: applet.js:977 applet.js:1002
+msgid "Transition to night"
+msgstr "切換至夜間"
+
+#: applet.js:978 applet.js:1003
+msgid "Night"
+msgstr "夜間"
+
+#: applet.js:979 applet.js:1004
+msgid "Day"
+msgstr "白天"
+
+#: applet.js:993
+msgid "On"
+msgstr "開啟"
+
+#: applet.js:993 applet.js:995
+msgid "Off"
+msgstr "關閉"
+
+#: applet.js:1009
+msgid "Day Temperature"
+msgstr "白天色溫"
+
+#: applet.js:1010
+msgid "Day Brightness"
+msgstr "白天亮度"
+
+#: applet.js:1012
+msgid "Night Temperature"
+msgstr "夜間色溫"
+
+#: applet.js:1013
+msgid "Night Brightness"
+msgstr "夜間亮度"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->dayTemp->description
+#. settings-schema.json->nightTemp->description
+#: applet.js:1015
+msgid "Temperature"
+msgstr "色溫"
+
+#. settings-schema.json->dayBrightness->description
+#. settings-schema.json->nightBrightness->description
+#: applet.js:1016
+msgid "Brightness"
+msgstr "亮度"
+
+#. metadata.json->name
+msgid "QRedshift"
+msgstr "QRedshift"
+
+#. metadata.json->description
+msgid ""
+"It makes the color of your computer's display adapt to the time of day, warm "
+"at night and like sunlight during the day."
+msgstr "讓您的電腦螢幕顏色能隨時間自動調整，夜間呈現暖色，白天則模擬日光。"
+
+#. settings-schema.json->panel-options->title
+msgid "Settings"
+msgstr "設定"
+
+#. settings-schema.json->panel-location->title
+msgid "Location"
+msgstr "位置"
+
+#. settings-schema.json->panel-shortcuts->title
+msgid "Shortcuts"
+msgstr "快捷鍵"
+
+#. settings-schema.json->info-section->title
+msgid "Tips"
+msgstr "提示"
+
+#. settings-schema.json->opt-section->title
+msgid "Options"
+msgstr "選項"
+
+#. settings-schema.json->day-section->title
+msgid "Day Settings"
+msgstr "日間設定"
+
+#. settings-schema.json->night-section->title
+msgid "Night Settings"
+msgstr "夜間設定"
+
+#. settings-schema.json->keybind-section->title
+msgid "Key Bindings"
+msgstr "按鍵綁定"
+
+#. settings-schema.json->location-section->title
+msgid "Location Settings"
+msgstr "位置設定"
+
+#. settings-schema.json->enabled->tooltip
+msgid ""
+"Automatically disabled under Wayland due to redshift not being yet supported "
+"by Wayland"
+msgstr "由於 Redshift 尚未支援 Wayland，在 Wayland 環境下將會自動停用。"
+
+#. settings-schema.json->enableAtStartup->description
+msgid "Reactivate QRedshift as soon as Cinnamon starts up"
+msgstr "Cinnamon 啟動時自動重新啟用 QRedshift"
+
+#. settings-schema.json->enableAtStartup->tooltip
+msgid ""
+"Won't work under Wayland due to redshift not being yet supported by Wayland"
+msgstr "由於 Redshift 尚未支援 Wayland，在 Wayland 環境下將無法運作。"
+
+#. settings-schema.json->autoUpdate->description
+msgid "Auto Update"
+msgstr "自動更新"
+
+#. settings-schema.json->autoUpdate->tooltip
+msgid "Continuously adjust color temperature"
+msgstr "持續調整色溫"
+
+#. settings-schema.json->autoUpdateInterval->units
+msgid "Seconds"
+msgstr "秒"
+
+#. settings-schema.json->autoUpdateInterval->description
+msgid "Update interval"
+msgstr "更新間隔"
+
+#. settings-schema.json->adjustmentMethod->description
+msgid "Adjustment Method"
+msgstr "調整方式"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "needload"
+msgstr "needload"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "randr"
+msgstr "randr"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "vidmode"
+msgstr "vidmode"
+
+#. settings-schema.json->adjustmentMethod->tooltip
+msgid "Method to use to set color temperature"
+msgstr "設定色溫時所使用的方法"
+
+#. settings-schema.json->labelScrollAction->description
+msgid "Icon Scroll Action"
+msgstr "圖示捲動操作"
+
+#. settings-schema.json->labelScrollAction->options
+msgid "Disabled"
+msgstr "停用"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->keyToggle->description
+msgid "On/Off"
+msgstr "開啟/關閉"
+
+#. settings-schema.json->labelScrollAction->options
+msgid "Bright"
+msgstr "亮度"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->gammaMix->description
+msgid "Gamma"
+msgstr "伽瑪值"
+
+#. settings-schema.json->labelScrollAction->tooltip
+msgid "Action when scroll on applet icon."
+msgstr "在小程式圖示上捲動時所要執行的操作。"
+
+#. settings-schema.json->symbolicIcon->description
+msgid "Use symbolic icon"
+msgstr "使用符號圖示"
+
+#. settings-schema.json->keyBrightnessUp->description
+msgid "Increase brightness level"
+msgstr "增加亮度等級"
+
+#. settings-schema.json->keyBrightnessDown->description
+msgid "Decrease brightness level"
+msgstr "降低亮度等級"
+
+#. settings-schema.json->keyTempUp->description
+msgid "Increase temperature level"
+msgstr "增加色溫等級"
+
+#. settings-schema.json->keyTempDown->description
+msgid "Decrease temperature level"
+msgstr "降低色溫等級"
+
+#. settings-schema.json->keyGammaUp->description
+msgid "Increase gamma level"
+msgstr "增加伽瑪值等級"
+
+#. settings-schema.json->keyGammaDown->description
+msgid "Decrease gamma level"
+msgstr "降低伽瑪值等級"
+
+#. settings-schema.json->dayTemp->units
+#. settings-schema.json->nightTemp->units
+msgid "K"
+msgstr "K"
+
+#. settings-schema.json->dayBrightness->units
+#. settings-schema.json->nightBrightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->smoothTransition->description
+msgid "Smooth transition between day and night"
+msgstr "讓白天與夜間模式之間的轉換更平順"
+
+#. settings-schema.json->transitionDuration->units
+msgid "Minutes"
+msgstr "分鐘"
+
+#. settings-schema.json->transitionDuration->description
+msgid "Transition Duration"
+msgstr "轉換持續時間"
+
+#. settings-schema.json->manualNightTime->description
+msgid "Use Manual Night Time"
+msgstr "使用自訂夜間時段"
+
+#. settings-schema.json->nightTimeStart->description
+msgid "Choose Start Time"
+msgstr "選擇開始時間"
+
+#. settings-schema.json->nightTimeEnd->description
+msgid "Choose End Time"
+msgstr "選擇結束時間"
+
+#. settings-schema.json->locationRemote->description
+msgid "Remote Location"
+msgstr "遠端位置"
+
+#. settings-schema.json->locationRemote->tooltip
+#. settings-schema.json->locationUpdate->tooltip
+msgid "Native geoclue on redshift can make the experience slow."
+msgstr "Redshift 的原生 geoclue 功能可能會拖慢執行速度。"
+
+#. settings-schema.json->locationUpdate->description
+msgid "Update Location"
+msgstr "更新位置"
+
+#. settings-schema.json->locationLatitude->description
+msgid "Latitude"
+msgstr "緯度"
+
+#. settings-schema.json->locationLongitude->description
+msgid "Longitude"
+msgstr "經度"
+
+#. settings-schema.json->aboutLocation->description
+msgid ""
+"Native geoclue on redshift can make the experience slow.\n"
+"Using: https://geolocation-db.com/"
+msgstr ""
+"Redshift 的原生 geoclue 功能可能會拖慢執行速度。\n"
+"使用：https://geolocation-db.com/"
+
+#. settings-schema.json->textTips->description
+msgid "* Right-click the sliders to reset the default (neutral) value."
+msgstr "* 在滑桿上按一下右鍵來重設為預設（中性）值。"
+
+#. settings-schema.json->textHelp->description
+msgid ""
+"When update to a new version make sure you reset the configs to default by "
+"deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
+"You will lost all your configs."
+msgstr ""
+"更新至新版本時，請務必刪除 `~/.cinnamon/configs/qredshift@quintao/"
+"qredshift@quintao.json` 來將設定重設為預設值。\n"
+"請注意：您目前所有的設定將會遺失。"
+
+#. settings-schema.json->textInfo->description
+msgid ""
+"If you like and use this applet take the time to visit it's page on Cinnamon "
+"Spices and give it a star. You only need a github account to do this."
+msgstr ""
+"如果您喜歡並使用這個小程式，歡迎前往 Cinnamon Spices 頁面給予星級評價，您只需"
+"要有一個 GitHub 帳號即可。"

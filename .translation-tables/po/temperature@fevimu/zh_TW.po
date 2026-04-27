@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: temperature@fevimu 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-03 19:49+0200\n"
+"PO-Revision-Date: 2025-09-16 01:59+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:81 applet.js:160
+msgid "Temperature"
+msgstr "溫度"
+
+#: applet.js:149
+msgid "Error"
+msgstr "錯誤"
+
+#: applet.js:150
+msgid ""
+"Run sensors-detect as root. If it doesn't help, click here to report with "
+"your sensors output!"
+msgstr ""
+"請以 root 權限執行 sensors-detect。若仍無法解決，請點選此處並附上"
+"感測器輸出以回報！"
+
+#: applet.js:152
+msgid "Warning"
+msgstr "警告"
+
+#: applet.js:153
+msgid ""
+"Please install lm_sensors. If it doesn't help, click here to report with "
+"your sensors output!"
+msgstr ""
+"請安裝 lm_sensors。若仍無法解決，請點選此處並附上"
+"感測器輸出以回報！"
+
+#: applet.js:229
+msgid "Thresholds Info"
+msgstr "閾值資訊"
+
+#: applet.js:230
+msgid "High Temp"
+msgstr "高溫"
+
+#: applet.js:231
+msgid "Crit. Temp"
+msgstr "臨界溫度"
+
+#: applet.js:242
+msgid "Critical"
+msgstr "臨界"
+
+#: applet.js:245
+msgid "High"
+msgstr "高"
+
+#: applet.js:258
+msgid "Current Temperature"
+msgstr "目前溫度"
+
+#: applet.js:260
+msgid "Critical Temperature"
+msgstr "臨界溫度"
+
+#. metadata.json->name
+msgid "CPU Temperature Indicator"
+msgstr "CPU 溫度指示器"
+
+#. metadata.json->description
+msgid "Shows CPU Temperature"
+msgstr "顯示 CPU 溫度"
+
+#. settings-schema.json->use-fahrenheit->description
+msgid "Show temperature in Fahrenheit"
+msgstr "以華氏溫度顯示"
+
+#. settings-schema.json->only-integer-part->description
+msgid "Use integer values for temperature"
+msgstr "以整數顯示溫度"
+
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr "顯示單位"
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Whether or not show the unit after the temperature value."
+msgstr "是否要在溫度值後面顯示單位。"
+
+#. settings-schema.json->show-unit-letter->description
+msgid "Show unit letter"
+msgstr "顯示單位字母"
+
+#. settings-schema.json->show-unit-letter->tooltip
+msgid "Whether or not show the unit letter (C or F)."
+msgstr "是否要顯示單位字母（C 或 F）。"
+
+#. settings-schema.json->show-label-prefix->description
+msgid "Show label prefix"
+msgstr "顯示標籤前綴"
+
+#. settings-schema.json->show-label-prefix->tooltip
+msgid "Whether or not to add a label before the temperature value."
+msgstr "是否要在溫度值前面加上標籤。"
+
+#. settings-schema.json->label-prefix->description
+msgid "Label prefix"
+msgstr "標籤前綴"
+
+#. settings-schema.json->label-prefix->tooltip
+msgid "The label to be shown before the temperature value."
+msgstr "顯示在溫度值前面的標籤。"
+
+#. settings-schema.json->interval->units
+msgid "ms"
+msgstr "毫秒"
+
+#. settings-schema.json->interval->description
+msgid "Update interval"
+msgstr "更新間隔"
+
+#. settings-schema.json->change-color->description
+msgid "Change color when the temperature becomes High or Critical"
+msgstr "在溫度達到高溫或臨界時變更顏色"
+
+#. settings-schema.json->change-color->tooltip
+msgid ""
+"Selecting this option, this applet becomes\n"
+" orange when the High Temperature Threshold is reached,\n"
+" red when the Critical Temperature Threshold is reached."
+msgstr ""
+"選取此選項後，此小工具會在\n"
+" 達到高溫閾值時變為橘色，\n"
+" 達到臨界溫度閾值時則變為紅色。"
+
+#. settings-schema.json->only-colors->description
+msgid "Only use colors to alert me"
+msgstr "僅使用顏色提醒"
+
+#. settings-schema.json->only-colors->tooltip
+msgid ""
+"Select this option to not display text alerts in horizontal panels.\n"
+"(No text alert is ever displayed on vertical panels.)"
+msgstr ""
+"選取此選項以不在水平面板中顯示文字警示。\n"
+"（垂直面板永遠不會顯示任何文字警示。）"
+
+#. settings-schema.json->keep_size->description
+msgid "Avoid size changes"
+msgstr "避免大小變更"
+
+#. settings-schema.json->keep_size->tooltip
+msgid ""
+"Checked: The size of this applet remains constant, once all your preferences "
+"have been defined.\n"
+"Unchecked: The size of this applet is optimized, but it may change."
+msgstr ""
+"勾選：在定義好所有偏好設定後，此小工具的大小會保持不變。\n"
+"取消勾選：此小工具的大小會經過最佳化，但可能會變動。"

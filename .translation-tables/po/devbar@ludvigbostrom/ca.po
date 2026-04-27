@@ -1,0 +1,33 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+msgid "DevBar"
+msgstr "DevBar"
+
+#. metadata.json->description
+msgid "This applet helps you keep track of your development workflow."
+msgstr "Aquesta miniaplicació us ajuda a mantenir-vos al dia pel que fa al vostre mètode de desenvolupament."
+
+#. settings-schema.json->url->description
+msgid "Url to fetch information from"
+msgstr "Url de la qual obtenir la informació"
+
+#. settings-schema.json->appendUsername->description
+msgid "Append your username to url"
+msgstr "Afegiu el vostre nom d'usuari a la url"
+
+#. settings-schema.json->interval->description
+msgid "Update interval in seconds"
+msgstr "Interval d'actualitzacions en segons"

@@ -1,0 +1,216 @@
+# XSESSION
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2022
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-03 18:30+0200\n"
+"PO-Revision-Date: 2025-10-05 15:09-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.7\n"
+
+#. applet.js:54
+msgid "Applet"
+msgstr "Applet"
+
+#. applet.js:55
+msgid "Desklet"
+msgstr "Desklet"
+
+#. applet.js:56
+msgid "Extension"
+msgstr "Extensión"
+
+#. applet.js:57
+msgid "Applets"
+msgstr "Applets"
+
+#. applet.js:58
+msgid "Desklets"
+msgstr "Desklets"
+
+#. applet.js:59
+msgid "Extensions"
+msgstr "Extensiones"
+
+#. applet.js:112
+msgid "RELOAD ALL"
+msgstr "RECARGAR TODO"
+
+#. applet.js:248
+msgid "Middle-click: \n"
+msgstr "Click medio: \n"
+
+#. applet.js:248 applet.js:327
+msgid "Show .xsession-errors"
+msgstr "Mostrar .xsession-errors"
+
+#. applet.js:249
+msgid "Ctrl + Middle-click: \n"
+msgstr "Ctrl + Click medio: \n"
+
+#. applet.js:249 applet.js:341
+msgid "Show latest messages"
+msgstr "Mostrar los últimos mensajes"
+
+#. applet.js:311 applet.js:553
+#, javascript-format
+msgid "%s latest messages"
+msgstr "%s últimos mensajes"
+
+#. applet.js:311 applet.js:553
+msgid "min: 10. max: 250."
+msgstr "mín: 10. máx: 250."
+
+#. applet.js:358
+msgid "Restart Cinnamon"
+msgstr "Reiniciar Cinnamon"
+
+#. applet.js:376
+msgid "Repeat last action"
+msgstr "Repetir la última acción"
+
+#. applet.js:380
+msgid "--- Reload Spices ---"
+msgstr "--- Recargar Especias ---"
+
+#. applet.js:386
+msgid "Reload Applet:"
+msgstr "Recargar Applet:"
+
+#. applet.js:413
+msgid "Reload Desklet:"
+msgstr "Recargar Desklet:"
+
+#. applet.js:440
+msgid "Reload Extension:"
+msgstr "Recargar Extensión:"
+
+#. applet.js:466
+msgid "Reload Current Theme"
+msgstr "Recargar el tema actual"
+
+#. applet.js:480
+msgid "--- Settings for ---"
+msgstr "--- Ajustes para ---"
+
+#. applet.js:486
+msgid "Applet:"
+msgstr "Applet:"
+
+#. applet.js:495
+msgid "Desklet:"
+msgstr "Desklet:"
+
+#. applet.js:504
+msgid "Extension:"
+msgstr "Extensión:"
+
+#. applet.js:513
+msgid "--- View Code ---"
+msgstr "--- Ver Código ---"
+
+#. applet.js:519
+msgid "View Applet Code for:"
+msgstr "Ver código del Applet para:"
+
+#. applet.js:528
+msgid "View Desklet Code for:"
+msgstr "Ver código del Desklet para:"
+
+#. applet.js:537
+msgid "View Extension Code for:"
+msgstr "Ver código de la Extensión para:"
+
+#. metadata.json->name
+msgid "Xsession"
+msgstr "Xsession"
+
+#. metadata.json->description
+msgid ""
+"Restart, access source code and configure your Spices (Applets, Desklets, "
+"Extensions). View the contents of your .xsession-errors file in real time. "
+"Restart Cinnamon."
+msgstr ""
+"Reinicie, acceda al código fuente y configure sus Especias (Applets, "
+"Desklets, Extensiones). Vea el contenido de su archivo .xsession-errors en "
+"tiempo real. Reinicie Cinnamon."
+
+#. settings-schema.json->section1->description
+msgid "Icon size"
+msgstr "Tamaño del icono"
+
+#. settings-schema.json->icon_size->description
+msgid "Size (in pixels) of menu icons"
+msgstr "Tamaño (en píxeles) de los iconos de menú"
+
+#. settings-schema.json->icon_size->options
+msgid "16"
+msgstr "16"
+
+#. settings-schema.json->icon_size->options
+msgid "22"
+msgstr "22"
+
+#. settings-schema.json->icon_size->options
+msgid "24"
+msgstr "24"
+
+#. settings-schema.json->icon_size->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->icon_size->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->icon_size->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->icon_size->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->icon_size->options
+msgid "128"
+msgstr "128"
+
+#. settings-schema.json->section2->description
+msgid "RELOAD ALL option"
+msgstr "Opción RECARGAR TODO"
+
+#. settings-schema.json->show_reload_all->description
+msgid "Show the RELOAD ALL option in submenus"
+msgstr "Mostrar la opción RECARGAR TODO en los submenús"
+
+#. settings-schema.json->show_reload_all->tooltip
+msgid "Caution! Reloading all spices of a given type may lead to errors."
+msgstr ""
+"¡Atención! Recargar todas las especias de un tipo determinado puede dar "
+"lugar a errores."
+
+#. settings-schema.json->section3->description
+msgid "Latest messages"
+msgstr "Últimos mensajes"
+
+#. settings-schema.json->number_latest->description
+msgid "Number of latest messages to show"
+msgstr "Número de últimos mensajes a mostrar"
+
+#. settings-schema.json->number_latest->tooltip
+msgid "(Including empty lines.)"
+msgstr "(Incluidas las líneas vacías)"
+
+#. scripts/watch-xse-latest.sh:10 scripts/watch-xse.sh:8
+msgid "-d"
+msgstr "-d"

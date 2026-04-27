@@ -1,0 +1,92 @@
+# WAKAPI DISPLAY
+# This file is put in the public domain.
+# babico, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: wakapidisplay@babico 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-09-21 14:40+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:47
+msgid "Click to open your Wakapi Dashboard"
+msgstr "點選以開啟 Wakapi 儀表板"
+
+#. applet.js:50
+msgid "Open the Applet configuration to add your Wakapi API Key and link"
+msgstr "開啟小程式設定以新增 Wakapi API 金鑰和連結"
+
+#. metadata.json->name
+msgid "Wakapi Display"
+msgstr "Wakapi 顯示"
+
+#. metadata.json->description
+msgid "Displays your statistics from Wakapi"
+msgstr "顯示 Wakapi 統計資料"
+
+#. settings-schema.json->wakapi-head->description
+msgid "Wakapi Settings"
+msgstr "Wakapi 設定"
+
+#. settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr "分鐘"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh interval"
+msgstr "重新整理間隔"
+
+#. settings-schema.json->refreshInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine."
+msgstr ""
+"調整此旋鈕的數值以變更重新整理間隔；若裝置效能較為有限，請改用較長的間隔。"
+
+#. settings-schema.json->apiLink->description
+msgid "Wakapi API Link"
+msgstr "Wakapi API 連結"
+
+#. settings-schema.json->apiLink->tooltip
+msgid "The API link to your Wakapi instance."
+msgstr "Wakapi 實體的 API 連結。"
+
+#. settings-schema.json->apiKey->description
+msgid "Wakapi API Key"
+msgstr "Wakapi API 金鑰"
+
+#. settings-schema.json->apiKey->tooltip
+msgid "The API key unique to your Wakapi account."
+msgstr "Wakapi 帳戶的專屬 API 金鑰。"
+
+#. settings-schema.json->getApiKey->description
+msgid "Open the Wakapi page to get your API key"
+msgstr "開啟 Wakapi 頁面以取得 API 金鑰"
+
+#. settings-schema.json->getApiKey->tooltip
+msgid "Opens Wakapi API key webpage"
+msgstr "開啟 Wakapi API 金鑰網頁"
+
+#. settings-schema.json->display-head->description
+msgid "Display Settings"
+msgstr "顯示設定"
+
+#. settings-schema.json->logoColor->description
+msgid "Wakapi logo color"
+msgstr "Wakapi Logo 顏色"
+
+#. settings-schema.json->logoColor->options
+msgid "White"
+msgstr "白色"
+
+#. settings-schema.json->logoColor->options
+msgid "Black"
+msgstr "黑色"

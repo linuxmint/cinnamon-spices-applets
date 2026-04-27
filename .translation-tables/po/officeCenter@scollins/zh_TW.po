@@ -1,0 +1,124 @@
+# OFFICE CENTER
+# This file is put in the public domain.
+# collinss, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: officeCenter@scollins 2.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-09-23 01:50+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:127
+msgid "Clear"
+msgstr "清除"
+
+#. applet.js:162
+msgid "Office"
+msgstr "辦公工具"
+
+#. applet.js:241
+msgid "LAUNCHERS"
+msgstr "啟動器"
+
+#. applet.js:257
+msgid "DOCUMENTS"
+msgstr "文件"
+
+#. applet.js:268
+msgid "Open folder"
+msgstr "開啟資料夾"
+
+#. applet.js:294
+msgid "RECENT DOCUMENTS"
+msgstr "最近使用的文件"
+
+#. metadata.json->name
+msgid "Office Center"
+msgstr "Office Center"
+
+#. metadata.json->description
+msgid "Provides an easy and fast resource for all your office needs"
+msgstr "提供簡單又快速的辦公資源，滿足各式辦公需求"
+
+#. metadata.json->comments
+msgid ""
+"Office Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy aceess to all of your office programs and documents. Feel free "
+"to contribute by submitting pull requests, bug reports and feature requests "
+"to my github repo."
+msgstr ""
+"Office Center 是一款功能豐富且跨平台的 Cinnamon 小程式，能讓您輕鬆存取所有"
+"辦公應用程式與文件。歡迎透過 GitHub 專案提交合併請求（pull request）、"
+"錯誤回報與功能建議，一同參與貢獻。"
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - 作者"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "一般設定"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "面板圖示"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr "接受圖示名稱或直接路徑（支援符號圖示）"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "面板文字"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shorcut key"
+msgstr "選單快捷鍵"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Icon size"
+msgstr "圖示大小"
+
+#. settings-schema.json->documents->description
+msgid "Documents"
+msgstr "文件"
+
+#. settings-schema.json->showDocuments->description
+msgid "Show contents of documents folder"
+msgstr "顯示文件資料夾內容"
+
+#. settings-schema.json->recurseDocuments->description
+msgid "Include subfolders"
+msgstr "包含子資料夾"
+
+#. settings-schema.json->altDir->description
+msgid "Use alternate directory"
+msgstr "使用其他目錄"
+
+#. settings-schema.json->docMax->description
+msgid "Limit number of documents shown to"
+msgstr "限制顯示的文件數量為"
+
+#. settings-schema.json->recent->description
+msgid "Recent Documents"
+msgstr "最近使用的文件"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "顯示最近使用的文件"
+
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "顯示數量"

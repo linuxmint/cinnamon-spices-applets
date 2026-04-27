@@ -1,0 +1,2499 @@
+# SPICES UPDATE
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2019
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-12 18:05+0200\n"
+"PO-Revision-Date: 2024-04-15 12:02+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. 4.2/SU_messageTray.js:1282 4.8/SU_messageTray.js:1282
+#. 4.6/SU_messageTray.js:1282 5.6/SU_messageTray.js:1282
+msgid "Open"
+msgstr ""
+
+#. 4.2/SU_messageTray.js:1289 4.8/SU_messageTray.js:1289
+#. 4.6/SU_messageTray.js:1289 5.6/SU_messageTray.js:1289
+#. cs/4.4/modules/cs_applets.py:57 cs/4.4/modules/cs_desklets.py:77
+#. cs/6.0_FUTURE/modules/cs_applets.py:57
+#. cs/6.0_FUTURE/modules/cs_desklets.py:77 cs/4.2/modules/cs_applets.py:56
+#. cs/4.2/modules/cs_desklets.py:76 cs/3.8/modules/cs_applets.py:56
+#. cs/3.8/modules/cs_desklets.py:76 cs/4.6/modules/cs_applets.py:57
+#. cs/4.6/modules/cs_desklets.py:77 cs/4.0/modules/cs_applets.py:56
+#. cs/4.0/modules/cs_desklets.py:76
+msgid "Remove"
+msgstr ""
+
+#. 4.2/SU_messageTray.js:1913 4.8/SU_messageTray.js:1913
+#. 4.6/SU_messageTray.js:1913 5.6/SU_messageTray.js:1913
+msgid "System Information"
+msgstr ""
+
+#. 4.2/applet.js:141
+msgid "You are advised to restart Cinnamon"
+msgstr ""
+
+#. 4.2/applet.js:142
+msgid "To be sure to use the right code, you are advised to restart Cinnamon."
+msgstr ""
+
+#. 4.2/applet.js:148
+msgid "Restart Cinnamon"
+msgstr ""
+
+#. metadata.json->name
+#. 4.2/applet.js:162 4.2/applet.js:580 4.2/applet.js:599 4.2/applet.js:725
+#. 4.2/applet.js:1080 4.8/applet.js:213 4.8/applet.js:717 4.8/applet.js:736
+#. 4.8/applet.js:1233 6.0/applet.js:232 6.0/applet.js:855 6.0/applet.js:883
+#. 6.0/applet.js:1520 6.0/applet_OLD.js:149 6.0/applet_OLD.js:677
+#. 6.0/applet_OLD.js:696 6.0/applet_OLD.js:1200 3.8/applet.js:212
+#. 3.8/applet.js:242 3.8/applet.js:664 3.8/applet.js:743 3.8/applet.js:1174
+#. 3.8/applet.js:1739 4.6/applet.js:214 4.6/applet.js:716 4.6/applet.js:735
+#. 4.6/applet.js:1229 2.8/applet.js:171 2.8/applet.js:192 2.8/applet.js:555
+#. 2.8/applet.js:1004 2.8/applet.js:1582 6.4/applet.js:235 6.4/applet.js:866
+#. 6.4/applet.js:895 6.4/applet.js:1546 5.6/applet.js:211 5.6/applet.js:725
+#. 5.6/applet.js:744 5.6/applet.js:1245
+msgid "Spices Update"
+msgstr "Spices Update"
+
+#. 4.2/applet.js:163 4.2/applet.js:1900 4.2/applet.js:1906 4.8/applet.js:214
+#. 4.8/applet.js:2099 4.8/applet.js:2107 6.0/applet.js:237 6.0/applet.js:2709
+#. 6.0/applet.js:2728 6.0/applet_OLD.js:150 6.0/applet_OLD.js:2140
+#. 6.0/applet_OLD.js:2148 3.8/applet.js:243 3.8/applet.js:1913
+#. 3.8/applet.js:1919 4.6/applet.js:215 4.6/applet.js:2093 4.6/applet.js:2101
+#. 2.8/applet.js:1709 2.8/applet.js:1715 6.4/applet.js:240 6.4/applet.js:2820
+#. 6.4/applet.js:2839 5.6/applet.js:212 5.6/applet.js:2113 5.6/applet.js:2121
+msgid "Middle-Click to Refresh"
+msgstr "Click-mijloc pentru Reîmprospătare"
+
+#. 4.2/applet.js:297 4.8/applet.js:362 6.0/applet.js:460 6.0/applet_OLD.js:320
+#. 4.6/applet.js:363 6.4/applet.js:467 5.6/applet.js:360
+msgid "Spices Update has just been installed or upgraded"
+msgstr ""
+
+#. 4.2/applet.js:298 4.8/applet.js:363 6.0/applet.js:462 6.0/applet_OLD.js:321
+#. 4.6/applet.js:364 6.4/applet.js:469 5.6/applet.js:361
+msgid ""
+"Certain parameters require your vigilance: some may have been modified; "
+"others are new."
+msgstr ""
+
+#. 4.2/applet.js:299 4.8/applet.js:364 6.0/applet.js:466 6.0/applet_OLD.js:322
+#. 4.6/applet.js:365 6.4/applet.js:473 5.6/applet.js:362
+msgid ""
+"Please check your settings using the menu of the SpicesUpdate applet or the "
+"button below."
+msgstr ""
+
+#. 4.2/applet.js:301 4.8/applet.js:366 6.0/applet.js:470 6.0/applet_OLD.js:324
+#. 4.6/applet.js:367 6.4/applet.js:477 5.6/applet.js:364
+#, fuzzy
+msgid "Spices Update Settings"
+msgstr "Spices Update"
+
+#. 4.2/applet.js:625 4.8/applet.js:762 6.0/applet.js:923 6.0/applet_OLD.js:722
+#. 4.6/applet.js:761 6.4/applet.js:936 5.6/applet.js:770
+msgid "Update It Now!"
+msgstr ""
+
+#. 4.2/applet.js:625 4.8/applet.js:762 6.0/applet.js:924 6.0/applet_OLD.js:722
+#. 4.6/applet.js:761 6.4/applet.js:937 5.6/applet.js:770
+msgid "Update Them All Now!"
+msgstr ""
+
+#. 4.2/applet.js:631 4.8/applet.js:768 6.0/applet.js:934 6.0/applet_OLD.js:728
+#. 4.6/applet.js:767 6.4/applet.js:947 5.6/applet.js:776
+msgid "Forget It"
+msgstr ""
+
+#. 4.2/applet.js:631 4.8/applet.js:768 6.0/applet.js:935 6.0/applet_OLD.js:728
+#. 4.6/applet.js:767 6.4/applet.js:948 5.6/applet.js:776
+msgid "Forget Them All"
+msgstr ""
+
+#. 4.2->settings-schema.json->btn_refresh_applets->description
+#. 4.2->settings-schema.json->btn_refresh_desklets->description
+#. 4.2->settings-schema.json->btn_refresh_extensions->description
+#. 4.2->settings-schema.json->btn_refresh_themes->description
+#. 4.8->settings-schema.json->btn_refresh_applets->description
+#. 4.8->settings-schema.json->btn_refresh_desklets->description
+#. 4.8->settings-schema.json->btn_refresh_extensions->description
+#. 4.8->settings-schema.json->btn_refresh_themes->description
+#. 6.0->settings-schema.json->btn_refresh_applets->description
+#. 6.0->settings-schema.json->btn_refresh_desklets->description
+#. 6.0->settings-schema.json->btn_refresh_extensions->description
+#. 6.0->settings-schema.json->btn_refresh_themes->description
+#. 6.0->settings-schema.json->btn_refresh_actions->description
+#. 3.8->settings-schema.json->btn_refresh_applets->description
+#. 3.8->settings-schema.json->btn_refresh_desklets->description
+#. 3.8->settings-schema.json->btn_refresh_extensions->description
+#. 3.8->settings-schema.json->btn_refresh_themes->description
+#. 4.6->settings-schema.json->btn_refresh_applets->description
+#. 4.6->settings-schema.json->btn_refresh_desklets->description
+#. 4.6->settings-schema.json->btn_refresh_extensions->description
+#. 4.6->settings-schema.json->btn_refresh_themes->description
+#. 6.4->settings-schema.json->btn_refresh_applets->description
+#. 6.4->settings-schema.json->btn_refresh_desklets->description
+#. 6.4->settings-schema.json->btn_refresh_extensions->description
+#. 6.4->settings-schema.json->btn_refresh_themes->description
+#. 6.4->settings-schema.json->btn_refresh_actions->description
+#. 5.6->settings-schema.json->btn_refresh_applets->description
+#. 5.6->settings-schema.json->btn_refresh_desklets->description
+#. 5.6->settings-schema.json->btn_refresh_extensions->description
+#. 5.6->settings-schema.json->btn_refresh_themes->description
+#. 4.2/applet.js:635 4.2/applet.js:1682 4.8/applet.js:772 4.8/applet.js:1838
+#. 6.0/applet.js:939 6.0/applet.js:2243 6.0/applet_OLD.js:732
+#. 6.0/applet_OLD.js:1879 3.8/applet.js:682 3.8/applet.js:1747
+#. 4.6/applet.js:771 4.6/applet.js:1832 2.8/applet.js:574 2.8/applet.js:1590
+#. 6.4/applet.js:952 6.4/applet.js:2321 5.6/applet.js:780 5.6/applet.js:1852
+#. cs/4.2/bin/SUExtensionCore.py:795
+msgid "Refresh"
+msgstr "Reîmprospătare"
+
+#. 4.2/applet.js:807 4.8/applet.js:945 6.0/applet.js:1104 6.0/applet_OLD.js:906
+#. 3.8/applet.js:847 4.6/applet.js:944 2.8/applet.js:729 6.4/applet.js:1120
+#. 5.6/applet.js:953
+msgid "With details here, when available."
+msgstr "Cu detalii aici, când sunt disponibile."
+
+#. 4.2/applet.js:808 4.2/constants.js:133 4.8/applet.js:946
+#. 4.8/constants.js:140 6.0/applet.js:1106 6.0/applet_OLD.js:907
+#. 6.0/constants.js:150 3.8/applet.js:146 3.8/applet.js:848 4.6/applet.js:945
+#. 4.6/constants.js:140 2.8/applet.js:105 2.8/applet.js:730 6.4/applet.js:1122
+#. 6.4/constants.js:150 5.6/applet.js:954 5.6/constants.js:134
+msgid "One applet needs update:"
+msgstr "Un applet are nevoie de actualizare:"
+
+#. 4.2/applet.js:809 4.8/applet.js:947 6.0/applet.js:1109 6.0/applet_OLD.js:908
+#. 3.8/applet.js:848 4.6/applet.js:946 2.8/applet.js:730 6.4/applet.js:1125
+#. 5.6/applet.js:955
+msgid "Do not matter. This is a FAKE notification, just for the test."
+msgstr "Nu contează. Este o notificare falsă, pentru test."
+
+#. 4.2/applet.js:1080 4.8/applet.js:1233 6.0/applet.js:1520
+#. 6.0/applet_OLD.js:1200 3.8/applet.js:1174 4.6/applet.js:1229
+#. 2.8/applet.js:1004 6.4/applet.js:1546 5.6/applet.js:1245
+msgid "is fully functional."
+msgstr "este complet funcțional."
+
+#. 4.2/applet.js:1081 4.8/applet.js:1234 6.0/applet.js:1521
+#. 6.0/applet_OLD.js:1201 3.8/applet.js:1175 4.6/applet.js:1230
+#. 2.8/applet.js:1005 6.4/applet.js:1547 5.6/applet.js:1246
+msgid "All dependencies are installed"
+msgstr "Toate dependințele sunt instalate"
+
+#. 4.2/applet.js:1104 4.8/applet.js:1259 6.0/applet.js:1568
+#. 6.0/applet_OLD.js:1226 3.8/applet.js:1199 4.6/applet.js:1253
+#. 2.8/applet.js:1029 6.4/applet.js:1594 5.6/applet.js:1271
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Se pare că îți lipsesc unele programe necesare pentru toate "
+"funcționalitățile acestui applet."
+
+#. 4.2/applet.js:1105 4.8/applet.js:1260 6.0/applet.js:1574
+#. 6.0/applet_OLD.js:1227 3.8/applet.js:1200 4.6/applet.js:1254
+#. 2.8/applet.js:1030 6.4/applet.js:1600 5.6/applet.js:1272
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr "Execută, într-un terminal, comenzile:"
+
+#. 4.2/applet.js:1106 4.8/applet.js:1261 6.0/applet.js:1581
+#. 6.0/applet_OLD.js:1228 3.8/applet.js:1201 4.6/applet.js:1255
+#. 2.8/applet.js:1031 6.4/applet.js:1607 5.6/applet.js:1273
+msgid "Some dependencies are not installed!"
+msgstr "Unele dependințe nu sunt instalate!"
+
+#. 4.2/applet.js:1504 4.8/applet.js:1659 6.0/applet.js:1983
+#. 6.0/applet_OLD.js:1700 3.8/applet.js:1582 4.6/applet.js:1653
+#. 2.8/applet.js:1423 6.4/applet.js:2020 5.6/applet.js:1673
+msgid "(Description unavailable)"
+msgstr "(Fără descriere)"
+
+#. 4.2/applet.js:1706 4.8/applet.js:1862 6.0/applet.js:2274
+#. 6.0/applet_OLD.js:1903 3.8/applet.js:1770 4.6/applet.js:1856
+#. 2.8/applet.js:1614 6.4/applet.js:2352 5.6/applet.js:1876
+msgid "Forget new Spices"
+msgstr "Uită Spice-uri noi"
+
+#. 4.2/applet.js:1712 4.8/applet.js:1868 6.0/applet.js:2286
+#. 6.0/applet_OLD.js:1909 3.8/applet.js:1776 4.6/applet.js:1862
+#. 2.8/applet.js:1620 6.4/applet.js:2364 5.6/applet.js:1882
+msgid "Open useful Cinnamon Settings"
+msgstr "Deschide setări utile pentru Cinnamon"
+
+#. 4.2/applet.js:1719 4.8/applet.js:1875 6.0/applet.js:2300
+#. 6.0/applet_OLD.js:1916 3.8/applet.js:1783 4.6/applet.js:1869
+#. 2.8/applet.js:1627 6.4/applet.js:2378 5.6/applet.js:1889
+#. cs/4.2/bin/SUExtensionCore.py:240
+msgid "Configure"
+msgstr "Configurează"
+
+#. 4.2->settings-schema.json->General->title
+#. 4.8->settings-schema.json->General->title
+#. 6.0->settings-schema.json->General->title
+#. 3.8->settings-schema.json->General->title
+#. 4.6->settings-schema.json->General->title
+#. 2.8->settings-schema.json->head5->description
+#. 6.4->settings-schema.json->General->title
+#. 5.6->settings-schema.json->General->title
+#. 4.2/applet.js:1722 4.8/applet.js:1878 6.0/applet.js:2308
+#. 6.0/applet_OLD.js:1919 4.6/applet.js:1872 6.4/applet.js:2386
+#. 5.6/applet.js:1892
+msgid "General"
+msgstr "General"
+
+#. 4.2->settings-schema.json->Applets->title
+#. 4.8->settings-schema.json->Applets->title
+#. 6.0->settings-schema.json->Applets->title
+#. 3.8->settings-schema.json->Applets->title
+#. 4.6->settings-schema.json->Applets->title
+#. 2.8->settings-schema.json->head1->description
+#. 6.4->settings-schema.json->Applets->title
+#. 5.6->settings-schema.json->Applets->title
+#. 4.2/applet.js:1722 4.2/constants.js:128 4.8/applet.js:1878
+#. 4.8/constants.js:135 6.0/applet.js:2309 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:144 3.8/applet.js:141 4.6/applet.js:1872
+#. 4.6/constants.js:135 2.8/applet.js:100 6.4/applet.js:2387
+#. 6.4/constants.js:144 5.6/applet.js:1892 5.6/constants.js:129
+#. cs/4.4/modules/cs_applets.py:35 cs/6.0_FUTURE/modules/cs_applets.py:35
+#. cs/4.2/modules/cs_applets.py:34 cs/3.8/modules/cs_applets.py:34
+#. cs/4.6/modules/cs_applets.py:35 cs/4.0/modules/cs_applets.py:34
+msgid "Applets"
+msgstr "Appleturi"
+
+#. 4.2->settings-schema.json->Desklets->title
+#. 4.8->settings-schema.json->Desklets->title
+#. 6.0->settings-schema.json->Desklets->title
+#. 3.8->settings-schema.json->Desklets->title
+#. 4.6->settings-schema.json->Desklets->title
+#. 2.8->settings-schema.json->head2->description
+#. 6.4->settings-schema.json->Desklets->title
+#. 5.6->settings-schema.json->Desklets->title
+#. 4.2/applet.js:1722 4.2/constants.js:129 4.8/applet.js:1878
+#. 4.8/constants.js:136 6.0/applet.js:2310 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:145 3.8/applet.js:142 4.6/applet.js:1872
+#. 4.6/constants.js:136 2.8/applet.js:101 6.4/applet.js:2388
+#. 6.4/constants.js:145 5.6/applet.js:1892 5.6/constants.js:130
+#. cs/4.4/modules/cs_desklets.py:33 cs/6.0_FUTURE/modules/cs_desklets.py:33
+#. cs/4.2/modules/cs_desklets.py:32 cs/3.8/modules/cs_desklets.py:32
+#. cs/4.6/modules/cs_desklets.py:33 cs/4.0/modules/cs_desklets.py:32
+msgid "Desklets"
+msgstr "Deskleturi"
+
+#. 4.2->settings-schema.json->Extensions->title
+#. 4.8->settings-schema.json->Extensions->title
+#. 6.0->settings-schema.json->Extensions->title
+#. 3.8->settings-schema.json->Extensions->title
+#. 4.6->settings-schema.json->Extensions->title
+#. 2.8->settings-schema.json->head3->description
+#. 6.4->settings-schema.json->Extensions->title
+#. 5.6->settings-schema.json->Extensions->title
+#. 4.2/applet.js:1722 4.2/constants.js:130 4.8/applet.js:1878
+#. 4.8/constants.js:137 6.0/applet.js:2311 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:146 3.8/applet.js:143 4.6/applet.js:1872
+#. 4.6/constants.js:137 2.8/applet.js:102 6.4/applet.js:2389
+#. 6.4/constants.js:146 5.6/applet.js:1892 5.6/constants.js:131
+#. cs/4.4/modules/cs_extensions.py:33 cs/6.0_FUTURE/modules/cs_extensions.py:33
+#. cs/4.2/modules/cs_extensions.py:32 cs/3.8/modules/cs_extensions.py:32
+#. cs/4.6/modules/cs_extensions.py:33 cs/4.0/modules/cs_extensions.py:32
+msgid "Extensions"
+msgstr "Extensii"
+
+#. 4.2->settings-schema.json->Themes->title
+#. 4.8->settings-schema.json->Themes->title
+#. 6.0->settings-schema.json->Themes->title
+#. 3.8->settings-schema.json->Themes->title
+#. 4.6->settings-schema.json->Themes->title
+#. 2.8->settings-schema.json->head4->description
+#. 6.4->settings-schema.json->Themes->title
+#. 5.6->settings-schema.json->Themes->title
+#. 4.2/applet.js:1722 4.2/constants.js:131 4.8/applet.js:1878
+#. 4.8/constants.js:138 6.0/applet.js:2312 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:147 3.8/applet.js:144 4.6/applet.js:1872
+#. 4.6/constants.js:138 2.8/applet.js:103 6.4/applet.js:2390
+#. 6.4/constants.js:147 5.6/applet.js:1892 5.6/constants.js:132
+#. cs/4.4/modules/cs_themes.py:42 cs/4.4/modules/cs_themes.py:72
+#. cs/4.4/modules/cs_themes.py:74 cs/6.0_FUTURE/modules/cs_themes.py:44
+#. cs/6.0_FUTURE/modules/cs_themes.py:75 cs/6.0_FUTURE/modules/cs_themes.py:77
+#. cs/4.2/modules/cs_themes.py:38 cs/4.2/modules/cs_themes.py:61
+#. cs/4.2/modules/cs_themes.py:63 cs/3.8/modules/cs_themes.py:23
+#. cs/3.8/modules/cs_themes.py:46 cs/3.8/modules/cs_themes.py:48
+#. cs/4.6/modules/cs_themes.py:44 cs/4.6/modules/cs_themes.py:75
+#. cs/4.6/modules/cs_themes.py:77 cs/4.0/modules/cs_themes.py:36
+#. cs/4.0/modules/cs_themes.py:59 cs/4.0/modules/cs_themes.py:61
+msgid "Themes"
+msgstr "Teme"
+
+#. 4.2/applet.js:1748 4.8/applet.js:1904 6.0/applet.js:2364
+#. 6.0/applet_OLD.js:1945 3.8/applet.js:1798 4.6/applet.js:1898
+#. 2.8/applet.js:1642 6.4/applet.js:2445 5.6/applet.js:1918
+msgid "Help"
+msgstr "Ajutor"
+
+#. 4.2/applet.js:1891 4.8/applet.js:2090 6.0/applet.js:2689
+#. 6.0/applet_OLD.js:2131 3.8/applet.js:1904 4.6/applet.js:2084
+#. 2.8/applet.js:1700 6.4/applet.js:2800 5.6/applet.js:2104
+msgid "Middle-Click to open useful Cinnamon Settings"
+msgstr "Click-mijloc pentru a deschide setări utile pentru Cinnamon"
+
+#. 4.2/constants.js:124 4.8/constants.js:131 6.0/constants.js:140
+#. 3.8/applet.js:137 4.6/constants.js:131 2.8/applet.js:96 6.4/constants.js:140
+#. 5.6/constants.js:125
+msgid "Applet"
+msgstr "Applet"
+
+#. 4.2/constants.js:125 4.8/constants.js:132 6.0/constants.js:141
+#. 3.8/applet.js:138 4.6/constants.js:132 2.8/applet.js:97 6.4/constants.js:141
+#. 5.6/constants.js:126
+msgid "Desklet"
+msgstr "Desklet"
+
+#. 4.2/constants.js:126 4.8/constants.js:133 6.0/constants.js:142
+#. 3.8/applet.js:139 4.6/constants.js:133 2.8/applet.js:98 6.4/constants.js:142
+#. 5.6/constants.js:127
+msgid "Extension"
+msgstr "Extensie"
+
+#. 4.2/constants.js:127 4.8/constants.js:134 6.0/constants.js:143
+#. 3.8/applet.js:140 4.6/constants.js:134 2.8/applet.js:99 6.4/constants.js:143
+#. 5.6/constants.js:128
+msgid "Theme"
+msgstr "Temă"
+
+#. 4.2/constants.js:132 4.8/constants.js:139 6.0/constants.js:149
+#. 3.8/applet.js:145 4.6/constants.js:139 2.8/applet.js:104
+#. 6.4/constants.js:149 5.6/constants.js:133
+msgid "One desklet needs update:"
+msgstr "Un desklet are nevoie de actualizare:"
+
+#. 4.2/constants.js:134 4.8/constants.js:141 6.0/constants.js:151
+#. 3.8/applet.js:147 4.6/constants.js:141 2.8/applet.js:106
+#. 6.4/constants.js:151 5.6/constants.js:135
+msgid "One extension needs update:"
+msgstr "O extensie are nevoie de actualizare:"
+
+#. 4.2/constants.js:135 4.8/constants.js:142 6.0/constants.js:152
+#. 3.8/applet.js:148 4.6/constants.js:142 2.8/applet.js:107
+#. 6.4/constants.js:152 5.6/constants.js:136
+msgid "One theme needs update:"
+msgstr "O temă are nevoie de actualizare:"
+
+#. 4.2/constants.js:136 4.8/constants.js:143 6.0/constants.js:154
+#. 3.8/applet.js:149 4.6/constants.js:143 2.8/applet.js:108
+#. 6.4/constants.js:154 5.6/constants.js:137
+msgid "Some desklets need update:"
+msgstr "Unele deskleturi au nevoie de actualizare:"
+
+#. 4.2/constants.js:137 4.8/constants.js:144 6.0/constants.js:155
+#. 3.8/applet.js:150 4.6/constants.js:144 2.8/applet.js:109
+#. 6.4/constants.js:155 5.6/constants.js:138
+msgid "Some applets need update:"
+msgstr "Unele appleturi au nevoie de actualizare:"
+
+#. 4.2/constants.js:138 4.8/constants.js:145 6.0/constants.js:156
+#. 3.8/applet.js:151 4.6/constants.js:145 2.8/applet.js:110
+#. 6.4/constants.js:156 5.6/constants.js:139
+msgid "Some extensions need update:"
+msgstr "Unele extensii au nevoie de actualizare:"
+
+#. 4.2/constants.js:139 4.8/constants.js:146 6.0/constants.js:157
+#. 3.8/applet.js:152 4.6/constants.js:146 2.8/applet.js:111
+#. 6.4/constants.js:157 5.6/constants.js:140
+msgid "Some themes need update:"
+msgstr "Unele teme au nevoie de actualizare:"
+
+#. 4.2/constants.js:140 4.8/constants.js:147 6.0/constants.js:159
+#. 3.8/applet.js:153 4.6/constants.js:147 2.8/applet.js:112
+#. 6.4/constants.js:159 5.6/constants.js:141
+msgid "New desklet available:"
+msgstr "Desklet nou disponibil:"
+
+#. 4.2/constants.js:141 4.8/constants.js:148 6.0/constants.js:160
+#. 3.8/applet.js:154 4.6/constants.js:148 2.8/applet.js:113
+#. 6.4/constants.js:160 5.6/constants.js:142
+msgid "New applet available:"
+msgstr "Applet nou disponibil:"
+
+#. 4.2/constants.js:142 4.8/constants.js:149 6.0/constants.js:161
+#. 3.8/applet.js:155 4.6/constants.js:149 2.8/applet.js:114
+#. 6.4/constants.js:161 5.6/constants.js:143
+msgid "New extension available:"
+msgstr "Extensie nouă disponibilă:"
+
+#. 4.2/constants.js:143 4.8/constants.js:150 6.0/constants.js:162
+#. 3.8/applet.js:156 4.6/constants.js:150 2.8/applet.js:115
+#. 6.4/constants.js:162 5.6/constants.js:144
+msgid "New theme available:"
+msgstr "Temă nouă disponibilă:"
+
+#. 4.2/constants.js:144 4.8/constants.js:151 6.0/constants.js:164
+#. 3.8/applet.js:157 4.6/constants.js:151 2.8/applet.js:116
+#. 6.4/constants.js:164 5.6/constants.js:145
+msgid "New desklets available:"
+msgstr "Deskleturi noi disponibile:"
+
+#. 4.2/constants.js:145 4.8/constants.js:152 6.0/constants.js:165
+#. 3.8/applet.js:158 4.6/constants.js:152 2.8/applet.js:117
+#. 6.4/constants.js:165 5.6/constants.js:146
+msgid "New applets available:"
+msgstr "Appleturi noi disponibile:"
+
+#. 4.2/constants.js:146 4.8/constants.js:153 6.0/constants.js:166
+#. 3.8/applet.js:159 4.6/constants.js:153 2.8/applet.js:118
+#. 6.4/constants.js:166 5.6/constants.js:147
+msgid "New extensions available:"
+msgstr "Extensii noi disponibile:"
+
+#. 4.2/constants.js:147 4.8/constants.js:154 6.0/constants.js:167
+#. 3.8/applet.js:160 4.6/constants.js:154 2.8/applet.js:119
+#. 6.4/constants.js:167 5.6/constants.js:148
+msgid "New themes available:"
+msgstr "Teme noi disponibile:"
+
+#. 4.2/constants.js:151 4.8/constants.js:158 6.0/constants.js:172
+#. 4.6/constants.js:158 6.4/constants.js:172 5.6/constants.js:152
+msgid "If you do not want an applet to be checked, uncheck its first box."
+msgstr "Dacă nu vrei ca un applet să fie verificat, de-bifează-i prima căsuță."
+
+#. 4.2/constants.js:152 4.8/constants.js:159 6.0/constants.js:173
+#. 4.6/constants.js:159 6.4/constants.js:173 5.6/constants.js:153
+msgid "If you do not want a desklet to be checked, uncheck its first box."
+msgstr ""
+"Dacă nu vrei ca un desklet să fie verificat, de-bifează-i prima căsuță."
+
+#. 4.2/constants.js:153 4.8/constants.js:160 6.0/constants.js:174
+#. 4.6/constants.js:160 6.4/constants.js:174 5.6/constants.js:154
+msgid "If you do not want an extension to be checked, uncheck its first box."
+msgstr ""
+"Dacă nu vrei ca o extensie să fie verificată, de-bifează-i prima căsuță."
+
+#. 4.2/constants.js:154 4.8/constants.js:161 6.0/constants.js:175
+#. 4.6/constants.js:161 6.4/constants.js:175 5.6/constants.js:155
+msgid "If you do not want a theme to be checked, uncheck its first box."
+msgstr "Dacă nu vrei ca o temă să fie verificată, de-bifează-i prima căsuță."
+
+#. 4.2/constants.js:158 4.8/constants.js:165 6.0/constants.js:180
+#. 4.6/constants.js:165 6.4/constants.js:180 5.6/constants.js:159
+msgid ""
+"If you want to get the latest version of an applet now, check both boxes."
+msgstr ""
+"Dacă vrei să primești ultima versiune a unui applet acum, bifează ambele "
+"căsuțe."
+
+#. 4.2/constants.js:159 4.8/constants.js:166 6.0/constants.js:181
+#. 4.6/constants.js:166 6.4/constants.js:181 5.6/constants.js:160
+msgid ""
+"If you want to get the latest version of a desklet now, check both boxes."
+msgstr ""
+"Dacă vrei să primești ultima versiune a unui desklet acum, bifează ambele "
+"căsuțe."
+
+#. 4.2/constants.js:160 4.8/constants.js:167 6.0/constants.js:182
+#. 4.6/constants.js:167 6.4/constants.js:182 5.6/constants.js:161
+msgid ""
+"If you want to get the latest version of an extension now, check both boxes."
+msgstr ""
+"Dacă vrei să primești ultima versiune a unei extensii acum, bifează ambele "
+"căsuțe."
+
+#. 4.2/constants.js:161 4.8/constants.js:168 6.0/constants.js:183
+#. 4.6/constants.js:168 6.4/constants.js:183 5.6/constants.js:162
+msgid "If you want to get the latest version of a theme now, check both boxes."
+msgstr ""
+"Dacă vrei să primești ultima versiune a unei teme acum, bifează ambele "
+"căsuțe."
+
+#. 4.2/constants.js:164 4.8/constants.js:171 6.0/constants.js:187
+#. 3.8/applet.js:93 4.6/constants.js:171 6.4/constants.js:187
+#. 5.6/constants.js:165
+msgid "When all your choices are made, click the Refresh button."
+msgstr "Când ai făcut toate deciziile, click pe butonul Reîmprospătare."
+
+#. 4.8/applet.js:2104 6.0/applet.js:2719 6.0/applet_OLD.js:2145
+#. 4.6/applet.js:2098 6.4/applet.js:2830 5.6/applet.js:2118
+msgid "The Cinnamon Server seems to be DOWN!"
+msgstr ""
+
+#. 4.8/applet.js:2104 6.0/applet.js:2720 6.0/applet_OLD.js:2145
+#. 4.6/applet.js:2098 6.4/applet.js:2831 5.6/applet.js:2118
+#, fuzzy
+msgid "Middle-Click to Retry"
+msgstr "Click-mijloc pentru Reîmprospătare"
+
+#. 6.0->settings-schema.json->Actions->title
+#. 6.4->settings-schema.json->Actions->title
+#. 6.0/applet.js:2313 6.0/constants.js:148 6.4/applet.js:2391
+#. 6.4/constants.js:148 cs/6.0_FUTURE/modules/cs_actions.py:35
+#, fuzzy
+msgid "Actions"
+msgstr "Notificări"
+
+#. 6.0/constants.js:153 6.4/constants.js:153
+#, fuzzy
+msgid "One action needs update:"
+msgstr "O extensie are nevoie de actualizare:"
+
+#. 6.0/constants.js:158 6.4/constants.js:158
+#, fuzzy
+msgid "Some actions need update:"
+msgstr "Unele extensii au nevoie de actualizare:"
+
+#. 6.0/constants.js:163 6.4/constants.js:163
+#, fuzzy
+msgid "New action available:"
+msgstr "Extensie nouă disponibilă:"
+
+#. 6.0/constants.js:168 6.4/constants.js:168
+#, fuzzy
+msgid "New actions available:"
+msgstr "Extensii noi disponibile:"
+
+#. 6.0/constants.js:176 6.4/constants.js:176
+#, fuzzy
+msgid "If you do not want a nemo action to be checked, uncheck its first box."
+msgstr ""
+"Dacă nu vrei ca o extensie să fie verificată, de-bifează-i prima căsuță."
+
+#. 6.0/constants.js:184 6.4/constants.js:184
+#, fuzzy
+msgid ""
+"If you want to get the latest version of a nemo action now, check both boxes."
+msgstr ""
+"Dacă vrei să primești ultima versiune a unei extensii acum, bifează ambele "
+"căsuțe."
+
+#. 6.0/constants.js:187 6.4/constants.js:187
+msgid "For private Spices, both boxes will be considered unchecked."
+msgstr ""
+
+#. 3.8/applet.js:80
+msgid ""
+"If you do not want an applet to be checked, set its first switch to FALSE."
+msgstr ""
+"Dacă nu vrei ca un applet să fie verificat, pune-i primul comutator pe FALSE."
+
+#. 3.8/applet.js:81
+msgid ""
+"If you do not want a desklet to be checked, set its first switch to FALSE."
+msgstr ""
+"Dacă nu vrei ca un desklet să fie verificat, pune-i primul comutator pe "
+"FALSE."
+
+#. 3.8/applet.js:82
+msgid ""
+"If you do not want an extension to be checked, set its first switch to FALSE."
+msgstr ""
+"Dacă nu vrei ca o extensie să fie verificată, pune-i primul comutator pe "
+"FALSE."
+
+#. 3.8/applet.js:83
+msgid ""
+"If you do not want a theme to be checked, set its first switch to FALSE."
+msgstr ""
+"Dacă nu vrei ca o temă să fie verificată, pune-i primul comutator pe FALSE."
+
+#. 3.8/applet.js:87
+msgid ""
+"If you want to get the latest version of an applet now, set its two switches "
+"to TRUE."
+msgstr ""
+"Dacă vrei să primești ultima versiune a unui applet acum, pune-i ambele "
+"comutatoare pe TRUE."
+
+#. 3.8/applet.js:88
+msgid ""
+"If you want to get the latest version of a desklet now, set its two switches "
+"to TRUE."
+msgstr ""
+"Dacă vrei să primești ultima versiune a unui desklet acum, pune-i ambele "
+"comutatoare pe TRUE."
+
+#. 3.8/applet.js:89
+msgid ""
+"If you want to get the latest version of an extension now, set its two "
+"switches to TRUE."
+msgstr ""
+"Dacă vrei să primești ultima versiune a unei extensii, pune-i ambele "
+"comutatoare pe TRUE."
+
+#. 3.8/applet.js:90
+msgid ""
+"If you want to get the latest version of a theme now, set its two switches "
+"to TRUE."
+msgstr ""
+"Dacă vrei să primești ultima versiune a unei teme acum, pune-i ambele "
+"comutatoare pe TRUE."
+
+#. cs/4.4/cinnamon-settings.py:50 cs/4.4/cinnamon-settings.py:380
+#. cs/4.4/cinnamon-settings.py:718 cs/6.0_FUTURE/cinnamon-settings.py:41
+#. cs/6.0_FUTURE/cinnamon-settings.py:387
+#. cs/6.0_FUTURE/cinnamon-settings.py:784
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:57
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:403
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:815 cs/4.2/cinnamon-settings.py:50
+#. cs/4.2/cinnamon-settings.py:379 cs/4.2/cinnamon-settings.py:717
+#. cs/3.8/cinnamon-settings.py:48 cs/3.8/cinnamon-settings.py:312
+#. cs/3.8/cinnamon-settings.py:591 cs/4.6/cinnamon-settings.py:50
+#. cs/4.6/cinnamon-settings.py:380 cs/4.6/cinnamon-settings.py:718
+#. cs/4.0/cinnamon-settings.py:48 cs/4.0/cinnamon-settings.py:316
+#. cs/4.0/cinnamon-settings.py:603
+#, fuzzy
+msgid "System Settings"
+msgstr "Spices Update"
+
+#. cs/4.4/cinnamon-settings.py:51 cs/6.0_FUTURE/cinnamon-settings.py:42
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:58 cs/4.2/cinnamon-settings.py:51
+#. cs/3.8/cinnamon-settings.py:49 cs/4.6/cinnamon-settings.py:51
+#. cs/4.0/cinnamon-settings.py:49
+msgid "Control Center"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:66 cs/6.0_FUTURE/cinnamon-settings.py:64
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:80 cs/4.2/cinnamon-settings.py:66
+#. cs/3.8/cinnamon-settings.py:64 cs/4.6/cinnamon-settings.py:66
+#. cs/4.0/cinnamon-settings.py:64
+msgid "Appearance"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:67 cs/6.0_FUTURE/cinnamon-settings.py:65
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:81 cs/4.2/cinnamon-settings.py:67
+#. cs/3.8/cinnamon-settings.py:65 cs/4.6/cinnamon-settings.py:67
+#. cs/4.0/cinnamon-settings.py:65
+msgid "Preferences"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:68 cs/6.0_FUTURE/cinnamon-settings.py:66
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:82 cs/4.2/cinnamon-settings.py:68
+#. cs/3.8/cinnamon-settings.py:66 cs/4.6/cinnamon-settings.py:68
+#. cs/4.0/cinnamon-settings.py:66
+msgid "Hardware"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:69 cs/6.0_FUTURE/cinnamon-settings.py:67
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:83 cs/4.2/cinnamon-settings.py:69
+#. cs/3.8/cinnamon-settings.py:67 cs/4.6/cinnamon-settings.py:69
+#. cs/4.0/cinnamon-settings.py:67
+msgid "Administration"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:74 cs/6.0_FUTURE/cinnamon-settings.py:72
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:88 cs/4.2/cinnamon-settings.py:74
+#. cs/3.8/cinnamon-settings.py:72 cs/4.6/cinnamon-settings.py:74
+#. cs/4.0/cinnamon-settings.py:72
+msgid "Network"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:74 cs/6.0_FUTURE/cinnamon-settings.py:72
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:88 cs/4.2/cinnamon-settings.py:74
+#. cs/3.8/cinnamon-settings.py:72 cs/4.6/cinnamon-settings.py:74
+#. cs/4.0/cinnamon-settings.py:72
+msgid "network, wireless, wifi, ethernet, broadband, internet"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:75 cs/6.0_FUTURE/cinnamon-settings.py:73
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:89 cs/4.2/cinnamon-settings.py:76
+#. cs/3.8/cinnamon-settings.py:74 cs/4.6/cinnamon-settings.py:75
+#. cs/4.0/cinnamon-settings.py:74
+msgid "Color"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:75 cs/6.0_FUTURE/cinnamon-settings.py:73
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:89 cs/4.2/cinnamon-settings.py:76
+#. cs/3.8/cinnamon-settings.py:74 cs/4.6/cinnamon-settings.py:75
+#. cs/4.0/cinnamon-settings.py:74
+msgid "color, profile, display, printer, output"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:76 cs/6.0_FUTURE/cinnamon-settings.py:74
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:90 cs/4.2/cinnamon-settings.py:77
+#. cs/3.8/cinnamon-settings.py:75 cs/4.6/cinnamon-settings.py:76
+#. cs/4.0/cinnamon-settings.py:75
+msgid "Graphics Tablet"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:76 cs/6.0_FUTURE/cinnamon-settings.py:74
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:90 cs/4.2/cinnamon-settings.py:77
+#. cs/3.8/cinnamon-settings.py:75 cs/4.6/cinnamon-settings.py:76
+#. cs/4.0/cinnamon-settings.py:75
+msgid "wacom, digitize, tablet, graphics, calibrate, stylus"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:81 cs/6.0_FUTURE/cinnamon-settings.py:79
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:95 cs/4.2/cinnamon-settings.py:82
+#. cs/3.8/cinnamon-settings.py:80 cs/4.6/cinnamon-settings.py:81
+#. cs/4.0/cinnamon-settings.py:80
+msgid "Printers"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:81 cs/6.0_FUTURE/cinnamon-settings.py:79
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:95 cs/4.2/cinnamon-settings.py:82
+#. cs/3.8/cinnamon-settings.py:80 cs/4.6/cinnamon-settings.py:81
+#. cs/4.0/cinnamon-settings.py:80
+msgid "printers, laser, inkjet"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:82 cs/4.4/cinnamon-settings.py:83
+#. cs/6.0_FUTURE/cinnamon-settings.py:80 cs/6.0_FUTURE/cinnamon-settings.py:81
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:96
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:97 cs/4.2/cinnamon-settings.py:83
+#. cs/4.2/cinnamon-settings.py:84 cs/3.8/cinnamon-settings.py:81
+#. cs/3.8/cinnamon-settings.py:82 cs/4.6/cinnamon-settings.py:82
+#. cs/4.6/cinnamon-settings.py:83 cs/4.0/cinnamon-settings.py:81
+#. cs/4.0/cinnamon-settings.py:82
+msgid "Firewall"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:82 cs/4.4/cinnamon-settings.py:83
+#. cs/6.0_FUTURE/cinnamon-settings.py:80 cs/6.0_FUTURE/cinnamon-settings.py:81
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:96
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:97 cs/4.2/cinnamon-settings.py:83
+#. cs/4.2/cinnamon-settings.py:84 cs/3.8/cinnamon-settings.py:81
+#. cs/3.8/cinnamon-settings.py:82 cs/4.6/cinnamon-settings.py:82
+#. cs/4.6/cinnamon-settings.py:83 cs/4.0/cinnamon-settings.py:81
+#. cs/4.0/cinnamon-settings.py:82
+msgid "firewall, block, filter, programs"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:84 cs/6.0_FUTURE/cinnamon-settings.py:82
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:98 cs/4.2/cinnamon-settings.py:85
+#. cs/3.8/cinnamon-settings.py:83 cs/4.6/cinnamon-settings.py:84
+#. cs/4.0/cinnamon-settings.py:83
+msgid "Languages"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:84 cs/6.0_FUTURE/cinnamon-settings.py:82
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:98 cs/4.2/cinnamon-settings.py:85
+#. cs/3.8/cinnamon-settings.py:83 cs/4.6/cinnamon-settings.py:84
+#. cs/4.0/cinnamon-settings.py:83
+msgid "language, install, foreign"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:85 cs/6.0_FUTURE/cinnamon-settings.py:83
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:99 cs/4.2/cinnamon-settings.py:86
+#. cs/3.8/cinnamon-settings.py:84 cs/4.6/cinnamon-settings.py:85
+#. cs/4.0/cinnamon-settings.py:84
+msgid "Input Method"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:85 cs/6.0_FUTURE/cinnamon-settings.py:83
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:99 cs/4.2/cinnamon-settings.py:86
+#. cs/3.8/cinnamon-settings.py:84 cs/4.6/cinnamon-settings.py:85
+#. cs/4.0/cinnamon-settings.py:84
+msgid ""
+"language, install, foreign, input, method, chinese, korean, japanese, typing"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:86 cs/4.4/cinnamon-settings.py:87
+#. cs/6.0_FUTURE/cinnamon-settings.py:84 cs/6.0_FUTURE/cinnamon-settings.py:85
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:100
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:101 cs/4.2/cinnamon-settings.py:87
+#. cs/4.2/cinnamon-settings.py:88 cs/3.8/cinnamon-settings.py:85
+#. cs/3.8/cinnamon-settings.py:86 cs/4.6/cinnamon-settings.py:86
+#. cs/4.6/cinnamon-settings.py:87 cs/4.0/cinnamon-settings.py:85
+#. cs/4.0/cinnamon-settings.py:86
+msgid "Login Window"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:86 cs/6.0_FUTURE/cinnamon-settings.py:84
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:100 cs/4.2/cinnamon-settings.py:87
+#. cs/3.8/cinnamon-settings.py:85 cs/4.6/cinnamon-settings.py:86
+#. cs/4.0/cinnamon-settings.py:85
+msgid "login, lightdm, mdm, gdm, manager, user, password, startup, switch"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:87 cs/6.0_FUTURE/cinnamon-settings.py:85
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:101 cs/4.2/cinnamon-settings.py:88
+#. cs/3.8/cinnamon-settings.py:86 cs/4.6/cinnamon-settings.py:87
+#. cs/4.0/cinnamon-settings.py:86
+msgid "login, lightdm, manager, settings, editor"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:88 cs/6.0_FUTURE/cinnamon-settings.py:86
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:102 cs/4.2/cinnamon-settings.py:89
+#. cs/3.8/cinnamon-settings.py:87 cs/4.6/cinnamon-settings.py:88
+#. cs/4.0/cinnamon-settings.py:87
+msgid "Driver Manager"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:88 cs/6.0_FUTURE/cinnamon-settings.py:86
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:102 cs/4.2/cinnamon-settings.py:89
+#. cs/3.8/cinnamon-settings.py:87 cs/4.6/cinnamon-settings.py:88
+#. cs/4.0/cinnamon-settings.py:87
+msgid ""
+"video, driver, wifi, card, hardware, proprietary, nvidia, radeon, nouveau, "
+"fglrx"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:89 cs/6.0_FUTURE/cinnamon-settings.py:87
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:103 cs/4.2/cinnamon-settings.py:90
+#. cs/3.8/cinnamon-settings.py:88 cs/4.6/cinnamon-settings.py:89
+#. cs/4.0/cinnamon-settings.py:88
+#, fuzzy
+msgid "Nvidia Settings"
+msgstr "Spices Update"
+
+#. cs/4.4/cinnamon-settings.py:89 cs/6.0_FUTURE/cinnamon-settings.py:87
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:103 cs/4.2/cinnamon-settings.py:90
+#. cs/3.8/cinnamon-settings.py:88 cs/4.6/cinnamon-settings.py:89
+#. cs/4.0/cinnamon-settings.py:88
+msgid "video, driver, proprietary, nvidia, settings"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:90 cs/6.0_FUTURE/cinnamon-settings.py:88
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:104 cs/4.2/cinnamon-settings.py:91
+#. cs/3.8/cinnamon-settings.py:89 cs/4.6/cinnamon-settings.py:90
+#. cs/4.0/cinnamon-settings.py:89
+msgid "Software Sources"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:90 cs/6.0_FUTURE/cinnamon-settings.py:88
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:104 cs/4.2/cinnamon-settings.py:91
+#. cs/3.8/cinnamon-settings.py:89 cs/4.6/cinnamon-settings.py:90
+#. cs/4.0/cinnamon-settings.py:89
+msgid "ppa, repository, package, source, download"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:91 cs/4.4/cinnamon-settings.py:92
+#. cs/6.0_FUTURE/cinnamon-settings.py:89 cs/6.0_FUTURE/cinnamon-settings.py:90
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:105
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:106 cs/4.2/cinnamon-settings.py:92
+#. cs/4.2/cinnamon-settings.py:93 cs/3.8/cinnamon-settings.py:90
+#. cs/3.8/cinnamon-settings.py:91 cs/4.6/cinnamon-settings.py:91
+#. cs/4.6/cinnamon-settings.py:92 cs/4.0/cinnamon-settings.py:90
+#. cs/4.0/cinnamon-settings.py:91
+msgid "Package Management"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:91 cs/4.4/cinnamon-settings.py:92
+#. cs/6.0_FUTURE/cinnamon-settings.py:89 cs/6.0_FUTURE/cinnamon-settings.py:90
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:105
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:106 cs/4.2/cinnamon-settings.py:92
+#. cs/4.2/cinnamon-settings.py:93 cs/3.8/cinnamon-settings.py:90
+#. cs/3.8/cinnamon-settings.py:91 cs/4.6/cinnamon-settings.py:91
+#. cs/4.6/cinnamon-settings.py:92 cs/4.0/cinnamon-settings.py:90
+#. cs/4.0/cinnamon-settings.py:91
+msgid "update, install, repository, package, source, download"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:93 cs/6.0_FUTURE/cinnamon-settings.py:91
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:107 cs/4.2/cinnamon-settings.py:94
+#. cs/3.8/cinnamon-settings.py:92 cs/4.6/cinnamon-settings.py:93
+#. cs/4.0/cinnamon-settings.py:92
+msgid "Users and Groups"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:93 cs/6.0_FUTURE/cinnamon-settings.py:91
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:107 cs/4.2/cinnamon-settings.py:94
+#. cs/3.8/cinnamon-settings.py:92 cs/4.6/cinnamon-settings.py:93
+#. cs/4.0/cinnamon-settings.py:92
+msgid "user, users, account, accounts, group, groups, password"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:94 cs/6.0_FUTURE/cinnamon-settings.py:92
+#. cs/6.0_FUTURE/cinnamon-settings.py:93
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:108
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:109 cs/4.2/cinnamon-settings.py:95
+#. cs/3.8/cinnamon-settings.py:93 cs/4.6/cinnamon-settings.py:94
+#. cs/4.0/cinnamon-settings.py:93
+msgid "Bluetooth"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:94 cs/6.0_FUTURE/cinnamon-settings.py:92
+#. cs/6.0_FUTURE/cinnamon-settings.py:93
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:108
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:109 cs/4.2/cinnamon-settings.py:95
+#. cs/3.8/cinnamon-settings.py:93 cs/4.6/cinnamon-settings.py:94
+#. cs/4.0/cinnamon-settings.py:93
+msgid "bluetooth, dongle, transfer, mobile"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:95 cs/6.0_FUTURE/cinnamon-settings.py:94
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:110 cs/4.2/cinnamon-settings.py:96
+#. cs/3.8/cinnamon-settings.py:94 cs/4.6/cinnamon-settings.py:95
+#. cs/4.0/cinnamon-settings.py:94
+msgid "Manage Services and Units"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:95 cs/6.0_FUTURE/cinnamon-settings.py:94
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:110 cs/4.2/cinnamon-settings.py:96
+#. cs/3.8/cinnamon-settings.py:94 cs/4.6/cinnamon-settings.py:95
+#. cs/4.0/cinnamon-settings.py:94
+msgid "systemd, units, services, systemctl, init"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:96 cs/6.0_FUTURE/cinnamon-settings.py:95
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:111 cs/4.6/cinnamon-settings.py:96
+msgid "Disks"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:96 cs/6.0_FUTURE/cinnamon-settings.py:95
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:111 cs/4.6/cinnamon-settings.py:96
+msgid ""
+"disks, manage, hardware, management, hard, hdd, pendrive, format, erase, "
+"test, create, iso, ISO, disk, image"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:290 cs/6.0_FUTURE/cinnamon-settings.py:295
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:311 cs/4.2/cinnamon-settings.py:289
+#. cs/3.8/cinnamon-settings.py:215 cs/4.6/cinnamon-settings.py:290
+#. cs/4.0/cinnamon-settings.py:223
+msgid "Back to all settings"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:297 cs/6.0_FUTURE/cinnamon-settings.py:302
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:318 cs/4.2/cinnamon-settings.py:296
+#. cs/4.2/bin/SUExtensionCore.py:370 cs/4.2/bin/SUExtensionCore.py:730
+#. cs/3.8/cinnamon-settings.py:225 cs/4.6/cinnamon-settings.py:297
+#. cs/4.0/cinnamon-settings.py:233
+msgid "Search"
+msgstr ""
+
+#. cs/4.4/bin/SUSpices.py:136 cs/6.0_FUTURE/bin/SUSpices.py:136
+#. cs/6.0_FUTURE/bin/Spices.py:705 cs/4.2/bin/SUSpices.py:136
+#. cs/3.8/bin/SUSpices.py:132 cs/4.6/bin/SUSpices.py:136
+#. cs/4.0/bin/SUSpices.py:132
+#, python-format
+msgid ""
+"An error occurred during the installation of %s. Please report this incident "
+"to its developer."
+msgstr ""
+
+#. cs/4.4/modules/cs_applets.py:14 cs/6.0_FUTURE/modules/cs_applets.py:14
+#. cs/4.2/modules/cs_applets.py:13 cs/3.8/modules/cs_applets.py:13
+#. cs/4.6/modules/cs_applets.py:14 cs/4.0/modules/cs_applets.py:13
+#, fuzzy
+msgid "Manage Cinnamon applets"
+msgstr "Deschide setări utile pentru Cinnamon"
+
+#. cs/4.4/modules/cs_applets.py:33 cs/6.0_FUTURE/modules/cs_applets.py:33
+#. cs/4.2/modules/cs_applets.py:32 cs/3.8/modules/cs_applets.py:32
+#. cs/4.6/modules/cs_applets.py:33 cs/4.0/modules/cs_applets.py:32
+msgid ""
+"You can remove specific instances in panel edit mode via the context menu."
+msgstr ""
+
+#. cs/4.4/modules/cs_applets.py:35 cs/6.0_FUTURE/modules/cs_applets.py:35
+#. cs/4.2/modules/cs_applets.py:34 cs/3.8/modules/cs_applets.py:34
+#. cs/4.6/modules/cs_applets.py:35 cs/4.0/modules/cs_applets.py:34
+#, fuzzy
+msgid "applet"
+msgstr "Applet"
+
+#. cs/4.4/modules/cs_applets.py:47 cs/4.4/modules/cs_desklets.py:45
+#. cs/4.4/modules/cs_extensions.py:45 cs/6.0_FUTURE/modules/cs_actions.py:48
+#. cs/6.0_FUTURE/modules/cs_applets.py:47
+#. cs/6.0_FUTURE/modules/cs_desklets.py:45
+#. cs/6.0_FUTURE/modules/cs_extensions.py:45 cs/4.2/modules/cs_applets.py:46
+#. cs/4.2/modules/cs_desklets.py:44 cs/4.2/modules/cs_extensions.py:44
+#. cs/3.8/modules/cs_applets.py:46 cs/3.8/modules/cs_desklets.py:44
+#. cs/3.8/modules/cs_extensions.py:44 cs/4.6/modules/cs_applets.py:47
+#. cs/4.6/modules/cs_desklets.py:45 cs/4.6/modules/cs_extensions.py:45
+#. cs/4.0/modules/cs_applets.py:46 cs/4.0/modules/cs_desklets.py:44
+#. cs/4.0/modules/cs_extensions.py:44
+msgid "Manage"
+msgstr ""
+
+#. cs/4.4/modules/cs_applets.py:50 cs/4.4/modules/cs_desklets.py:48
+#. cs/4.4/modules/cs_extensions.py:48 cs/6.0_FUTURE/modules/cs_actions.py:51
+#. cs/6.0_FUTURE/modules/cs_applets.py:50
+#. cs/6.0_FUTURE/modules/cs_desklets.py:48
+#. cs/6.0_FUTURE/modules/cs_extensions.py:48 cs/4.2/modules/cs_applets.py:49
+#. cs/4.2/modules/cs_desklets.py:47 cs/4.2/modules/cs_extensions.py:47
+#. cs/3.8/modules/cs_applets.py:49 cs/3.8/modules/cs_desklets.py:47
+#. cs/3.8/modules/cs_extensions.py:47 cs/4.6/modules/cs_applets.py:50
+#. cs/4.6/modules/cs_desklets.py:48 cs/4.6/modules/cs_extensions.py:48
+#. cs/4.0/modules/cs_applets.py:49 cs/4.0/modules/cs_desklets.py:47
+#. cs/4.0/modules/cs_extensions.py:47
+msgid "Download"
+msgstr ""
+
+#. cs/4.4/modules/cs_applets.py:55 cs/6.0_FUTURE/modules/cs_applets.py:55
+#. cs/4.2/modules/cs_applets.py:54 cs/3.8/modules/cs_applets.py:54
+#. cs/4.6/modules/cs_applets.py:55 cs/4.0/modules/cs_applets.py:54
+#, fuzzy
+msgid "Installed applets"
+msgstr "Extensii"
+
+#. cs/4.4/modules/cs_applets.py:56 cs/4.4/modules/cs_desklets.py:76
+#. cs/6.0_FUTURE/modules/cs_applets.py:56
+#. cs/6.0_FUTURE/modules/cs_desklets.py:76 cs/4.2/modules/cs_applets.py:55
+#. cs/4.2/modules/cs_desklets.py:75 cs/3.8/modules/cs_applets.py:55
+#. cs/3.8/modules/cs_desklets.py:75 cs/4.6/modules/cs_applets.py:56
+#. cs/4.6/modules/cs_desklets.py:76 cs/4.0/modules/cs_applets.py:55
+#. cs/4.0/modules/cs_desklets.py:75
+msgid "Add"
+msgstr ""
+
+#. cs/4.4/modules/cs_applets.py:58 cs/4.4/modules/cs_desklets.py:78
+#. cs/4.4/modules/cs_extensions.py:56 cs/6.0_FUTURE/modules/cs_actions.py:60
+#. cs/6.0_FUTURE/modules/cs_applets.py:58
+#. cs/6.0_FUTURE/modules/cs_desklets.py:78
+#. cs/6.0_FUTURE/modules/cs_extensions.py:56 cs/4.2/bin/SUExtensionCore.py:782
+#. cs/4.2/modules/cs_applets.py:57 cs/4.2/modules/cs_desklets.py:77
+#. cs/4.2/modules/cs_extensions.py:55 cs/3.8/modules/cs_applets.py:57
+#. cs/3.8/modules/cs_desklets.py:77 cs/3.8/modules/cs_extensions.py:55
+#. cs/4.6/modules/cs_applets.py:58 cs/4.6/modules/cs_desklets.py:78
+#. cs/4.6/modules/cs_extensions.py:56 cs/4.0/modules/cs_applets.py:57
+#. cs/4.0/modules/cs_desklets.py:77 cs/4.0/modules/cs_extensions.py:55
+msgid "Uninstall"
+msgstr ""
+
+#. cs/4.4/modules/cs_applets.py:59 cs/6.0_FUTURE/modules/cs_applets.py:59
+#. cs/4.2/modules/cs_applets.py:58 cs/3.8/modules/cs_applets.py:58
+#. cs/4.6/modules/cs_applets.py:59 cs/4.0/modules/cs_applets.py:58
+msgid "Reset all"
+msgstr ""
+
+#. cs/4.4/modules/cs_applets.py:74 cs/6.0_FUTURE/modules/cs_applets.py:74
+#. cs/4.2/modules/cs_applets.py:73 cs/3.8/modules/cs_applets.py:73
+#. cs/4.6/modules/cs_applets.py:74 cs/4.0/modules/cs_applets.py:73
+msgid "Previous Panel"
+msgstr ""
+
+#. cs/4.4/modules/cs_applets.py:78 cs/6.0_FUTURE/modules/cs_applets.py:78
+#. cs/4.2/modules/cs_applets.py:77 cs/3.8/modules/cs_applets.py:77
+#. cs/4.6/modules/cs_applets.py:78 cs/4.0/modules/cs_applets.py:77
+msgid "Next Panel"
+msgstr ""
+
+#. cs/4.4/modules/cs_desklets.py:10 cs/6.0_FUTURE/modules/cs_desklets.py:10
+#. cs/4.2/modules/cs_desklets.py:9 cs/3.8/modules/cs_desklets.py:9
+#. cs/4.6/modules/cs_desklets.py:10 cs/4.0/modules/cs_desklets.py:9
+#, fuzzy
+msgid "Manage your Cinnamon desklets"
+msgstr "Deschide setări utile pentru Cinnamon"
+
+#. cs/4.4/modules/cs_desklets.py:30 cs/6.0_FUTURE/modules/cs_desklets.py:30
+#. cs/4.2/modules/cs_desklets.py:29 cs/3.8/modules/cs_desklets.py:29
+#. cs/4.6/modules/cs_desklets.py:30 cs/4.0/modules/cs_desklets.py:29
+msgid ""
+"You can remove specific instances from the desktop via that desklet's "
+"context menu"
+msgstr ""
+
+#. cs/4.4/modules/cs_desklets.py:31 cs/6.0_FUTURE/modules/cs_desklets.py:31
+#. cs/4.2/modules/cs_desklets.py:30 cs/3.8/modules/cs_desklets.py:30
+#. cs/4.6/modules/cs_desklets.py:31 cs/4.0/modules/cs_desklets.py:30
+msgid "desklet, desktop, slideshow"
+msgstr ""
+
+#. cs/4.4/modules/cs_desklets.py:51 cs/6.0_FUTURE/modules/cs_desklets.py:51
+#. cs/4.2/modules/cs_desklets.py:50 cs/3.8/modules/cs_desklets.py:50
+#. cs/4.6/modules/cs_desklets.py:51 cs/4.0/modules/cs_desklets.py:50
+#, fuzzy
+msgid "General Settings"
+msgstr "General"
+
+#. cs/4.4/modules/cs_desklets.py:53 cs/6.0_FUTURE/modules/cs_desklets.py:53
+#. cs/4.2/modules/cs_desklets.py:52 cs/3.8/modules/cs_desklets.py:52
+#. cs/4.6/modules/cs_desklets.py:53 cs/4.0/modules/cs_desklets.py:52
+#, fuzzy
+msgid "General Desklets Settings"
+msgstr "General"
+
+#. cs/4.4/modules/cs_desklets.py:55 cs/6.0_FUTURE/modules/cs_desklets.py:55
+#. cs/4.2/modules/cs_desklets.py:54 cs/3.8/modules/cs_desklets.py:54
+#. cs/4.6/modules/cs_desklets.py:55 cs/4.0/modules/cs_desklets.py:54
+#, fuzzy
+msgid "No decoration"
+msgstr "Notificări"
+
+#. cs/4.4/modules/cs_desklets.py:55 cs/6.0_FUTURE/modules/cs_desklets.py:55
+#. cs/4.2/modules/cs_desklets.py:54 cs/3.8/modules/cs_desklets.py:54
+#. cs/4.6/modules/cs_desklets.py:55 cs/4.0/modules/cs_desklets.py:54
+msgid "Border only"
+msgstr ""
+
+#. cs/4.4/modules/cs_desklets.py:55 cs/6.0_FUTURE/modules/cs_desklets.py:55
+#. cs/4.2/modules/cs_desklets.py:54 cs/3.8/modules/cs_desklets.py:54
+#. cs/4.6/modules/cs_desklets.py:55 cs/4.0/modules/cs_desklets.py:54
+msgid "Border and header"
+msgstr ""
+
+#. cs/4.4/modules/cs_desklets.py:57 cs/6.0_FUTURE/modules/cs_desklets.py:57
+#. cs/4.2/modules/cs_desklets.py:56 cs/3.8/modules/cs_desklets.py:56
+#. cs/4.6/modules/cs_desklets.py:57 cs/4.0/modules/cs_desklets.py:56
+msgid "Decoration of desklets"
+msgstr ""
+
+#. cs/4.4/modules/cs_desklets.py:60 cs/6.0_FUTURE/modules/cs_desklets.py:60
+#. cs/4.2/modules/cs_desklets.py:59 cs/3.8/modules/cs_desklets.py:59
+#. cs/4.6/modules/cs_desklets.py:60 cs/4.0/modules/cs_desklets.py:59
+msgid "Note: Some desklets require the border/header to be always present"
+msgstr ""
+
+#. cs/4.4/modules/cs_desklets.py:64 cs/6.0_FUTURE/modules/cs_desklets.py:64
+#. cs/4.2/modules/cs_desklets.py:63 cs/3.8/modules/cs_desklets.py:63
+#. cs/4.6/modules/cs_desklets.py:64 cs/4.0/modules/cs_desklets.py:63
+msgid "Such requirements override the settings selected here"
+msgstr ""
+
+#. cs/4.4/modules/cs_desklets.py:69 cs/6.0_FUTURE/modules/cs_desklets.py:69
+#. cs/4.2/modules/cs_desklets.py:68 cs/3.8/modules/cs_desklets.py:68
+#. cs/4.6/modules/cs_desklets.py:69 cs/4.0/modules/cs_desklets.py:68
+msgid "Snap desklets to grid"
+msgstr ""
+
+#. cs/4.4/modules/cs_desklets.py:70 cs/6.0_FUTURE/modules/cs_desklets.py:70
+#. cs/4.2/modules/cs_desklets.py:69 cs/3.8/modules/cs_desklets.py:69
+#. cs/4.6/modules/cs_desklets.py:70 cs/4.0/modules/cs_desklets.py:69
+msgid "Width of desklet snap grid"
+msgstr ""
+
+#. cs/4.4/modules/cs_desklets.py:75 cs/6.0_FUTURE/modules/cs_desklets.py:75
+#. cs/4.2/modules/cs_desklets.py:74 cs/3.8/modules/cs_desklets.py:74
+#. cs/4.6/modules/cs_desklets.py:75 cs/4.0/modules/cs_desklets.py:74
+#, fuzzy
+msgid "Installed desklets"
+msgstr "Extensii"
+
+#. cs/4.4/modules/cs_desklets.py:79 cs/6.0_FUTURE/modules/cs_actions.py:61
+#. cs/6.0_FUTURE/modules/cs_desklets.py:79 cs/4.2/modules/cs_desklets.py:78
+#. cs/3.8/modules/cs_desklets.py:78 cs/4.6/modules/cs_desklets.py:79
+#. cs/4.0/modules/cs_desklets.py:78
+msgid "Remove all"
+msgstr ""
+
+#. cs/4.4/modules/cs_extensions.py:12 cs/6.0_FUTURE/modules/cs_extensions.py:12
+#. cs/4.2/modules/cs_extensions.py:11 cs/3.8/modules/cs_extensions.py:11
+#. cs/4.6/modules/cs_extensions.py:12 cs/4.0/modules/cs_extensions.py:11
+#, fuzzy
+msgid "Manage your Cinnamon extensions"
+msgstr "Deschide setări utile pentru Cinnamon"
+
+#. cs/4.4/modules/cs_extensions.py:31 cs/6.0_FUTURE/modules/cs_extensions.py:31
+#. cs/4.2/modules/cs_extensions.py:30 cs/3.8/modules/cs_extensions.py:30
+#. cs/4.6/modules/cs_extensions.py:31 cs/4.0/modules/cs_extensions.py:30
+#, fuzzy
+msgid "extension, addon"
+msgstr "Extensie"
+
+#. cs/4.4/modules/cs_extensions.py:53 cs/6.0_FUTURE/modules/cs_extensions.py:53
+#. cs/4.2/modules/cs_extensions.py:52 cs/3.8/modules/cs_extensions.py:52
+#. cs/4.6/modules/cs_extensions.py:53 cs/4.0/modules/cs_extensions.py:52
+#, fuzzy
+msgid "Installed extensions"
+msgstr "Extensii"
+
+#. cs/4.4/modules/cs_extensions.py:54 cs/6.0_FUTURE/modules/cs_actions.py:57
+#. cs/6.0_FUTURE/modules/cs_extensions.py:54 cs/4.2/modules/cs_extensions.py:53
+#. cs/3.8/modules/cs_extensions.py:53 cs/4.6/modules/cs_extensions.py:54
+#. cs/4.0/modules/cs_extensions.py:53
+msgid "Enable"
+msgstr ""
+
+#. cs/4.4/modules/cs_extensions.py:55 cs/6.0_FUTURE/modules/cs_actions.py:58
+#. cs/6.0_FUTURE/modules/cs_extensions.py:55 cs/4.2/modules/cs_extensions.py:54
+#. cs/3.8/modules/cs_extensions.py:54 cs/4.6/modules/cs_extensions.py:55
+#. cs/4.0/modules/cs_extensions.py:54
+msgid "Disable"
+msgstr ""
+
+#. cs/4.4/modules/cs_extensions.py:57 cs/6.0_FUTURE/modules/cs_extensions.py:57
+#. cs/4.2/modules/cs_extensions.py:56 cs/3.8/modules/cs_extensions.py:56
+#. cs/4.6/modules/cs_extensions.py:57 cs/4.0/modules/cs_extensions.py:56
+msgid "Disable all"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:34 cs/6.0_FUTURE/modules/cs_themes.py:36
+#. cs/4.2/modules/cs_themes.py:30 cs/3.8/modules/cs_themes.py:15
+#. cs/4.6/modules/cs_themes.py:36 cs/4.0/modules/cs_themes.py:28
+msgid "Manage themes to change how your desktop looks"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:39 cs/6.0_FUTURE/modules/cs_themes.py:41
+#. cs/4.2/modules/cs_themes.py:35 cs/3.8/modules/cs_themes.py:20
+#. cs/4.6/modules/cs_themes.py:41 cs/4.0/modules/cs_themes.py:33
+msgid "themes, style"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:76 cs/6.0_FUTURE/modules/cs_themes.py:79
+#. cs/4.2/modules/cs_themes.py:65 cs/3.8/modules/cs_themes.py:50
+#. cs/4.6/modules/cs_themes.py:79 cs/4.0/modules/cs_themes.py:63
+msgid "Window borders"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:79 cs/6.0_FUTURE/modules/cs_themes.py:82
+#. cs/4.2/modules/cs_themes.py:68 cs/3.8/modules/cs_themes.py:53
+#. cs/4.6/modules/cs_themes.py:82 cs/4.0/modules/cs_themes.py:66
+msgid "Icons"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:82 cs/6.0_FUTURE/modules/cs_themes.py:85
+#. cs/4.2/modules/cs_themes.py:71 cs/3.8/modules/cs_themes.py:56
+#. cs/4.6/modules/cs_themes.py:85 cs/4.0/modules/cs_themes.py:69
+msgid "Controls"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:85 cs/6.0_FUTURE/modules/cs_themes.py:88
+#. cs/4.2/modules/cs_themes.py:74 cs/3.8/modules/cs_themes.py:59
+#. cs/4.6/modules/cs_themes.py:88 cs/4.0/modules/cs_themes.py:72
+msgid "Mouse Pointer"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:88 cs/6.0_FUTURE/modules/cs_themes.py:91
+#. cs/4.2/modules/cs_themes.py:77 cs/3.8/modules/cs_themes.py:62
+#. cs/4.6/modules/cs_themes.py:91 cs/4.0/modules/cs_themes.py:75
+#, fuzzy
+msgid "Desktop"
+msgstr "Desklet"
+
+#. cs/4.4/modules/cs_themes.py:92 cs/6.0_FUTURE/modules/cs_themes.py:95
+#. cs/4.2/modules/cs_themes.py:81 cs/3.8/modules/cs_themes.py:66
+#. cs/4.6/modules/cs_themes.py:95 cs/4.0/modules/cs_themes.py:79
+msgid "Add/Remove"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:95 cs/6.0_FUTURE/modules/cs_themes.py:98
+#. cs/4.2/modules/cs_themes.py:84 cs/3.8/modules/cs_themes.py:69
+#. cs/4.6/modules/cs_themes.py:98 cs/4.0/modules/cs_themes.py:82
+#, fuzzy
+msgid "Settings"
+msgstr "General"
+
+#. cs/4.4/modules/cs_themes.py:97 cs/6.0_FUTURE/modules/cs_themes.py:100
+#. cs/4.2/modules/cs_themes.py:86 cs/3.8/modules/cs_themes.py:71
+#. cs/4.6/modules/cs_themes.py:100 cs/4.0/modules/cs_themes.py:84
+msgid "Miscellaneous options"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:99 cs/6.0_FUTURE/modules/cs_themes.py:102
+#. cs/4.2/modules/cs_themes.py:88 cs/3.8/modules/cs_themes.py:73
+#. cs/4.6/modules/cs_themes.py:102 cs/4.0/modules/cs_themes.py:86
+msgid "Show icons in menus"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:102 cs/6.0_FUTURE/modules/cs_themes.py:105
+#. cs/4.2/modules/cs_themes.py:91 cs/3.8/modules/cs_themes.py:76
+#. cs/4.6/modules/cs_themes.py:105 cs/4.0/modules/cs_themes.py:89
+msgid "Show icons on buttons"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:105 cs/6.0_FUTURE/modules/cs_themes.py:114
+#. cs/4.2/modules/cs_themes.py:94 cs/4.6/modules/cs_themes.py:114
+msgid "Scrollbar behavior"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:110 cs/6.0_FUTURE/modules/cs_themes.py:119
+#. cs/4.2/modules/cs_themes.py:99 cs/4.6/modules/cs_themes.py:119
+msgid "Jump to position when clicking in a trough"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:113 cs/6.0_FUTURE/modules/cs_themes.py:122
+#. cs/4.2/modules/cs_themes.py:102 cs/4.6/modules/cs_themes.py:122
+msgid "Use overlay scroll bars"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:118 cs/6.0_FUTURE/modules/cs_themes.py:127
+#. cs/4.2/modules/cs_themes.py:107 cs/4.6/modules/cs_themes.py:127
+msgid "Override the current theme's scrollbar width"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:122 cs/6.0_FUTURE/modules/cs_themes.py:131
+#. cs/4.2/modules/cs_themes.py:111 cs/4.6/modules/cs_themes.py:131
+msgid "Scrollbar width"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:137 cs/6.0_FUTURE/modules/cs_themes.py:146
+#. cs/4.2/modules/cs_themes.py:126 cs/4.6/modules/cs_themes.py:146
+msgid ""
+"Changes will take effect the next time you log in and may not affect all "
+"applications."
+msgstr ""
+
+#. cs/6.0_FUTURE/bin/SettingsWidgets.py:174
+msgid "Checking dependencies"
+msgstr ""
+
+#. cs/6.0_FUTURE/bin/SettingsWidgets.py:175
+#, python-format
+msgid "Please install: %s"
+msgstr ""
+
+#. cs/6.0_FUTURE/bin/SettingsWidgets.py:374
+msgid "_Cancel"
+msgstr ""
+
+#. cs/6.0_FUTURE/bin/SettingsWidgets.py:375
+msgid "_Open"
+msgstr ""
+
+#. cs/6.0_FUTURE/bin/SettingsWidgets.py:388
+msgid "Sound files"
+msgstr ""
+
+#. cs/6.0_FUTURE/bin/Spices.py:328
+msgid "Downloading images:"
+msgstr ""
+
+#. cs/6.0_FUTURE/bin/Spices.py:402
+msgid ""
+"An error occurred while trying to access the server. Please try again in a "
+"little while."
+msgstr ""
+
+#. cs/6.0_FUTURE/bin/Spices.py:586
+msgid ""
+"Something went wrong with the spices download. Please try refreshing the "
+"list again."
+msgstr ""
+
+#. cs/6.0_FUTURE/bin/Spices.py:601
+msgid "Refreshing the cache"
+msgstr ""
+
+#. cs/6.0_FUTURE/bin/Spices.py:681
+#, fuzzy, python-format
+msgid "Installing %s"
+msgstr "Extensii"
+
+#. cs/6.0_FUTURE/bin/Spices.py:786
+#, python-format
+msgid "Uninstalling %s"
+msgstr ""
+
+#. cs/6.0_FUTURE/bin/Spices.py:820
+#, python-format
+msgid "A problem occurred while removing %s."
+msgstr ""
+
+#. cs/6.0_FUTURE/bin/Spices.py:842
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Details:  %s"
+msgstr ""
+
+#. cs/6.0_FUTURE/modules/cs_actions.py:11
+#, fuzzy
+msgid "Manage your actions"
+msgstr "Deschide setări utile pentru Cinnamon"
+
+#. cs/6.0_FUTURE/modules/cs_actions.py:33
+#, fuzzy
+msgid "action"
+msgstr "Notificări"
+
+#. cs/6.0_FUTURE/modules/cs_actions.py:59
+#, fuzzy
+msgid "Installed actions"
+msgstr "Extensii"
+
+#. 4.8->settings-schema.json->section_general4->title
+#. 6.0->settings-schema.json->section_general4->title
+#. 4.6->settings-schema.json->section_general4->title
+#. 6.4->settings-schema.json->section_general4->title
+#. 5.6->settings-schema.json->section_general4->title
+#. cs/4.2/cinnamon-settings.py:75 cs/3.8/cinnamon-settings.py:73
+#. cs/4.0/cinnamon-settings.py:73
+#, fuzzy
+msgid "Display"
+msgstr "Tip de afișaj"
+
+#. cs/4.2/cinnamon-settings.py:75 cs/3.8/cinnamon-settings.py:73
+#. cs/4.0/cinnamon-settings.py:73
+msgid "display, screen, monitor, layout, resolution, dual, lcd"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:247
+msgid "This is a system applet. It cannot be removed."
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:249
+msgid "This is a system desklet. It cannot be removed."
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:251
+msgid "This is a system extension. It cannot be removed."
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:302
+msgid "This applet is currently enabled"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:304
+msgid "This desklet is currently enabled"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:306
+msgid "This extension is currently enabled"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:345
+msgid ""
+"This applet contains function calls that could potentially cause Cinnamon to "
+"crash or freeze. If you are experiencing crashes or freezing, please try "
+"removing it."
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:347
+msgid ""
+"This desklet contains function calls that could potentially cause Cinnamon "
+"to crash or freeze. If you are experiencing crashes or freezing, please try "
+"removing it."
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:349
+msgid ""
+"This extension contains function calls that could potentially cause Cinnamon "
+"to crash or freeze. If you are experiencing crashes or freezing, please try "
+"removing it."
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:458
+msgid "About"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:514
+#, python-format
+msgid ""
+"Extension %s is not compatible with current version of cinnamon. Using it "
+"may break your system. Load anyway?"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:528
+msgid ""
+"There are multiple instances enabled. Are you sure you want to remove all of "
+"them?"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:536 cs/4.2/bin/SUExtensionCore.py:885
+#, python-format
+msgid "Are you sure you want to completely remove %s?"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:544
+msgid ""
+"This will restore the default set of enabled applets. Are you sure you want "
+"to do this?"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:546
+msgid ""
+"This will restore the default set of enabled desklets. Are you sure you want "
+"to do this?"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:548
+msgid ""
+"This will disable all active extensions. Are you sure you want to do this?"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:581
+#, python-format
+msgid ""
+"Something went wrong while loading %s. Please make sure you are using the "
+"latest version, and then report the issue to its developer."
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:656
+msgid "Install"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:662
+#, fuzzy
+msgid "Update"
+msgstr "Spices Update"
+
+#. cs/4.2/bin/SUExtensionCore.py:665 cs/4.2/bin/SUExtensionCore.py:722
+#, fuzzy
+msgid "Installed"
+msgstr "Extensii"
+
+#. cs/4.2/bin/SUExtensionCore.py:709
+msgid "Sort by"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:719
+msgid "Name"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:720
+msgid "Popularity"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:721
+msgid "Date"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:723
+msgid "Upgradable"
+msgstr "Actualizabil"
+
+#. cs/4.2/bin/SUExtensionCore.py:775
+msgid "More info"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:915
+#, fuzzy
+msgid "Update all"
+msgstr "Spices Update"
+
+#. cs/4.2/bin/SUExtensionCore.py:915
+#, fuzzy, python-format
+msgid "%d update available"
+msgid_plural "%d updates available"
+msgstr[0] "Temă nouă disponibilă:"
+msgstr[1] "Temă nouă disponibilă:"
+msgstr[2] "Temă nouă disponibilă:"
+
+#. cs/4.2/bin/SUExtensionCore.py:917
+#, fuzzy
+msgid "No updates available"
+msgstr "Teme noi disponibile:"
+
+#. cs/4.2/bin/SUExtensionCore.py:934
+msgid "Your cache is out of date. Would you like to update it now?"
+msgstr ""
+
+#. metadata.json->description
+#, fuzzy
+msgid ""
+"Warns you when installed Spices (actions, applets, desklets, extensions, "
+"themes) require an update or new Spices are available."
+msgstr ""
+"Îți aduce la cunoștință când Spice-urile instalate (appleturi, deskleturi, "
+"extensii, teme) au nevoie de actualizare, sau sunt disponibile Spice-uri noi."
+
+#. 4.2->settings-schema.json->section_applets1->title
+#. 4.2->settings-schema.json->section_desklets1->title
+#. 4.2->settings-schema.json->section_extensions1->title
+#. 4.2->settings-schema.json->section_themes1->title
+#. 4.8->settings-schema.json->section_applets1->title
+#. 4.8->settings-schema.json->section_desklets1->title
+#. 4.8->settings-schema.json->section_extensions1->title
+#. 4.8->settings-schema.json->section_themes1->title
+#. 6.0->settings-schema.json->section_applets1->title
+#. 6.0->settings-schema.json->section_desklets1->title
+#. 6.0->settings-schema.json->section_extensions1->title
+#. 6.0->settings-schema.json->section_themes1->title
+#. 6.0->settings-schema.json->section_actions1->title
+#. 3.8->settings-schema.json->section_applets1->title
+#. 3.8->settings-schema.json->section_desklets1->title
+#. 3.8->settings-schema.json->section_extensions1->title
+#. 3.8->settings-schema.json->section_themes1->title
+#. 4.6->settings-schema.json->section_applets1->title
+#. 4.6->settings-schema.json->section_desklets1->title
+#. 4.6->settings-schema.json->section_extensions1->title
+#. 4.6->settings-schema.json->section_themes1->title
+#. 6.4->settings-schema.json->section_applets1->title
+#. 6.4->settings-schema.json->section_desklets1->title
+#. 6.4->settings-schema.json->section_extensions1->title
+#. 6.4->settings-schema.json->section_themes1->title
+#. 6.4->settings-schema.json->section_actions1->title
+#. 5.6->settings-schema.json->section_applets1->title
+#. 5.6->settings-schema.json->section_desklets1->title
+#. 5.6->settings-schema.json->section_extensions1->title
+#. 5.6->settings-schema.json->section_themes1->title
+msgid "Checking"
+msgstr "Se verifică"
+
+#. 4.2->settings-schema.json->section_applets2->title
+#. 4.2->settings-schema.json->section_desklets2->title
+#. 4.2->settings-schema.json->section_extensions2->title
+#. 4.2->settings-schema.json->section_themes2->title
+#. 4.8->settings-schema.json->section_applets2->title
+#. 4.8->settings-schema.json->section_desklets2->title
+#. 4.8->settings-schema.json->section_extensions2->title
+#. 4.8->settings-schema.json->section_themes2->title
+#. 6.0->settings-schema.json->section_applets2->title
+#. 6.0->settings-schema.json->section_desklets2->title
+#. 6.0->settings-schema.json->section_extensions2->title
+#. 6.0->settings-schema.json->section_themes2->title
+#. 6.0->settings-schema.json->section_actions2->title
+#. 3.8->settings-schema.json->section_applets2->title
+#. 3.8->settings-schema.json->section_desklets2->title
+#. 3.8->settings-schema.json->section_extensions2->title
+#. 3.8->settings-schema.json->section_themes2->title
+#. 4.6->settings-schema.json->section_applets2->title
+#. 4.6->settings-schema.json->section_desklets2->title
+#. 4.6->settings-schema.json->section_extensions2->title
+#. 4.6->settings-schema.json->section_themes2->title
+#. 6.4->settings-schema.json->section_applets2->title
+#. 6.4->settings-schema.json->section_desklets2->title
+#. 6.4->settings-schema.json->section_extensions2->title
+#. 6.4->settings-schema.json->section_themes2->title
+#. 6.4->settings-schema.json->section_actions2->title
+#. 5.6->settings-schema.json->section_applets2->title
+#. 5.6->settings-schema.json->section_desklets2->title
+#. 5.6->settings-schema.json->section_extensions2->title
+#. 5.6->settings-schema.json->section_themes2->title
+msgid "Monitoring"
+msgstr "Se monitorizează"
+
+#. 4.2->settings-schema.json->section_general1->title
+#. 4.8->settings-schema.json->section_general1->title
+#. 6.0->settings-schema.json->section_general1->title
+#. 3.8->settings-schema.json->section_general1->title
+#. 4.6->settings-schema.json->section_general1->title
+#. 6.4->settings-schema.json->section_general1->title
+#. 5.6->settings-schema.json->section_general1->title
+msgid "Frequency"
+msgstr "Frecvență"
+
+#. 4.2->settings-schema.json->section_general2->title
+#. 4.8->settings-schema.json->section_general2->title
+#. 6.0->settings-schema.json->section_general2->title
+#. 3.8->settings-schema.json->section_general2->title
+#. 4.6->settings-schema.json->section_general2->title
+#. 6.4->settings-schema.json->section_general2->title
+#. 5.6->settings-schema.json->section_general2->title
+msgid "Notifications"
+msgstr "Notificări"
+
+#. 4.2->settings-schema.json->section_general3->title
+#. 4.8->settings-schema.json->section_general3->title
+#. 6.0->settings-schema.json->section_general3->title
+#. 4.6->settings-schema.json->section_general3->title
+#. 6.4->settings-schema.json->section_general3->title
+#. 5.6->settings-schema.json->section_general3->title
+#, fuzzy
+msgid "Notification contents"
+msgstr "Stilul notificării"
+
+#. 4.2->settings-schema.json->section_general4->title
+#. 3.8->settings-schema.json->section_general3->title
+msgid "Display type"
+msgstr "Tip de afișaj"
+
+#. 4.2->settings-schema.json->check_applets->description
+#. 4.8->settings-schema.json->check_applets->description
+#. 6.0->settings-schema.json->check_applets->description
+#. 3.8->settings-schema.json->check_applets->description
+#. 4.6->settings-schema.json->check_applets->description
+#. 2.8->settings-schema.json->check_applets->description
+#. 6.4->settings-schema.json->check_applets->description
+#. 5.6->settings-schema.json->check_applets->description
+msgid "Check regularly whether your applets are up to date"
+msgstr "Verifică regulat dacă appleturile tale sunt la zi"
+
+#. 4.2->settings-schema.json->check_applets->tooltip
+#. 4.8->settings-schema.json->check_applets->tooltip
+#. 6.0->settings-schema.json->check_applets->tooltip
+#. 3.8->settings-schema.json->check_applets->tooltip
+#. 4.6->settings-schema.json->check_applets->tooltip
+#. 2.8->settings-schema.json->check_applets->tooltip
+#. 6.4->settings-schema.json->check_applets->tooltip
+#. 5.6->settings-schema.json->check_applets->tooltip
+msgid "If applets updates do not concern you, uncheck this box."
+msgstr ""
+"Dacă nu te interesează actualizarea appleturilor, debifează această căsuță."
+
+#. 4.2->settings-schema.json->check_new_applets->description
+#. 4.8->settings-schema.json->check_new_applets->description
+#. 6.0->settings-schema.json->check_new_applets->description
+#. 3.8->settings-schema.json->check_new_applets->description
+#. 4.6->settings-schema.json->check_new_applets->description
+#. 2.8->settings-schema.json->check_new_applets->description
+#. 6.4->settings-schema.json->check_new_applets->description
+#. 5.6->settings-schema.json->check_new_applets->description
+msgid "Check regularly whether new applets are available"
+msgstr "Verifică regulat dacă sunt disponibile noi appleturi"
+
+#. 4.2->settings-schema.json->check_new_applets->tooltip
+#. 4.8->settings-schema.json->check_new_applets->tooltip
+#. 6.0->settings-schema.json->check_new_applets->tooltip
+#. 3.8->settings-schema.json->check_new_applets->tooltip
+#. 4.6->settings-schema.json->check_new_applets->tooltip
+#. 2.8->settings-schema.json->check_new_applets->tooltip
+#. 6.4->settings-schema.json->check_new_applets->tooltip
+#. 5.6->settings-schema.json->check_new_applets->tooltip
+msgid "If new applets do not concern you, uncheck this box."
+msgstr "Dacă nu te interesează appleturi noi, debifează această căsuță."
+
+#. 4.2->settings-schema.json->unprotected_applets->description
+#. 4.8->settings-schema.json->unprotected_applets->description
+#. 6.0->settings-schema.json->unprotected_applets->description
+#. 3.8->settings-schema.json->unprotected_applets->description
+#. 4.6->settings-schema.json->unprotected_applets->description
+#. 6.4->settings-schema.json->unprotected_applets->description
+#. 5.6->settings-schema.json->unprotected_applets->description
+msgid "Update these applets:"
+msgstr "Actualizează aceste appleturi:"
+
+#. 4.2->settings-schema.json->unprotected_applets->columns->title
+#. 4.8->settings-schema.json->unprotected_applets->columns->title
+#. 6.0->settings-schema.json->unprotected_applets->columns->title
+#. 3.8->settings-schema.json->unprotected_applets->columns->title
+#. 4.6->settings-schema.json->unprotected_applets->columns->title
+#. 6.4->settings-schema.json->unprotected_applets->columns->title
+#. 5.6->settings-schema.json->unprotected_applets->columns->title
+msgid "Your Applets"
+msgstr "Appleturile tale"
+
+#. 4.2->settings-schema.json->unprotected_applets->columns->title
+#. 4.2->settings-schema.json->unprotected_desklets->columns->title
+#. 4.2->settings-schema.json->unprotected_extensions->columns->title
+#. 4.2->settings-schema.json->unprotected_themes->columns->title
+#. 4.8->settings-schema.json->unprotected_applets->columns->title
+#. 4.8->settings-schema.json->unprotected_desklets->columns->title
+#. 4.8->settings-schema.json->unprotected_extensions->columns->title
+#. 4.8->settings-schema.json->unprotected_themes->columns->title
+#. 6.0->settings-schema.json->unprotected_applets->columns->title
+#. 6.0->settings-schema.json->unprotected_desklets->columns->title
+#. 6.0->settings-schema.json->unprotected_extensions->columns->title
+#. 6.0->settings-schema.json->unprotected_themes->columns->title
+#. 6.0->settings-schema.json->unprotected_actions->columns->title
+#. 3.8->settings-schema.json->unprotected_applets->columns->title
+#. 3.8->settings-schema.json->unprotected_desklets->columns->title
+#. 3.8->settings-schema.json->unprotected_extensions->columns->title
+#. 3.8->settings-schema.json->unprotected_themes->columns->title
+#. 4.6->settings-schema.json->unprotected_applets->columns->title
+#. 4.6->settings-schema.json->unprotected_desklets->columns->title
+#. 4.6->settings-schema.json->unprotected_extensions->columns->title
+#. 4.6->settings-schema.json->unprotected_themes->columns->title
+#. 6.4->settings-schema.json->unprotected_applets->columns->title
+#. 6.4->settings-schema.json->unprotected_desklets->columns->title
+#. 6.4->settings-schema.json->unprotected_extensions->columns->title
+#. 6.4->settings-schema.json->unprotected_themes->columns->title
+#. 6.4->settings-schema.json->unprotected_actions->columns->title
+#. 5.6->settings-schema.json->unprotected_applets->columns->title
+#. 5.6->settings-schema.json->unprotected_desklets->columns->title
+#. 5.6->settings-schema.json->unprotected_extensions->columns->title
+#. 5.6->settings-schema.json->unprotected_themes->columns->title
+msgid "Check for updates?"
+msgstr "Caută actualizări?"
+
+#. 4.2->settings-schema.json->unprotected_applets->columns->title
+#. 4.2->settings-schema.json->unprotected_desklets->columns->title
+#. 4.2->settings-schema.json->unprotected_extensions->columns->title
+#. 4.2->settings-schema.json->unprotected_themes->columns->title
+#. 4.8->settings-schema.json->unprotected_applets->columns->title
+#. 4.8->settings-schema.json->unprotected_desklets->columns->title
+#. 4.8->settings-schema.json->unprotected_extensions->columns->title
+#. 4.8->settings-schema.json->unprotected_themes->columns->title
+#. 6.0->settings-schema.json->unprotected_applets->columns->title
+#. 6.0->settings-schema.json->unprotected_desklets->columns->title
+#. 6.0->settings-schema.json->unprotected_extensions->columns->title
+#. 6.0->settings-schema.json->unprotected_themes->columns->title
+#. 6.0->settings-schema.json->unprotected_actions->columns->title
+#. 3.8->settings-schema.json->unprotected_applets->columns->title
+#. 3.8->settings-schema.json->unprotected_desklets->columns->title
+#. 3.8->settings-schema.json->unprotected_extensions->columns->title
+#. 3.8->settings-schema.json->unprotected_themes->columns->title
+#. 4.6->settings-schema.json->unprotected_applets->columns->title
+#. 4.6->settings-schema.json->unprotected_desklets->columns->title
+#. 4.6->settings-schema.json->unprotected_extensions->columns->title
+#. 4.6->settings-schema.json->unprotected_themes->columns->title
+#. 6.4->settings-schema.json->unprotected_applets->columns->title
+#. 6.4->settings-schema.json->unprotected_desklets->columns->title
+#. 6.4->settings-schema.json->unprotected_extensions->columns->title
+#. 6.4->settings-schema.json->unprotected_themes->columns->title
+#. 6.4->settings-schema.json->unprotected_actions->columns->title
+#. 5.6->settings-schema.json->unprotected_applets->columns->title
+#. 5.6->settings-schema.json->unprotected_desklets->columns->title
+#. 5.6->settings-schema.json->unprotected_extensions->columns->title
+#. 5.6->settings-schema.json->unprotected_themes->columns->title
+msgid "Get the latest version now"
+msgstr "Ia ultima versiune acum"
+
+#. 4.2->settings-schema.json->btn_cs_applets->description
+#. 4.8->settings-schema.json->btn_cs_applets->description
+#. 6.0->settings-schema.json->btn_cs_applets->description
+#. 3.8->settings-schema.json->btn_cs_applets->description
+#. 4.6->settings-schema.json->btn_cs_applets->description
+#. 2.8->settings-schema.json->btn_cs_applets->description
+#. 6.4->settings-schema.json->btn_cs_applets->description
+#. 5.6->settings-schema.json->btn_cs_applets->description
+msgid "Open Cinnamon Settings to manage all the Applets"
+msgstr ""
+"Deschide setările pentru Cinnamon pentru a administra toate appleturile"
+
+#. 4.2->settings-schema.json->check_desklets->description
+#. 4.8->settings-schema.json->check_desklets->description
+#. 6.0->settings-schema.json->check_desklets->description
+#. 3.8->settings-schema.json->check_desklets->description
+#. 4.6->settings-schema.json->check_desklets->description
+#. 2.8->settings-schema.json->check_desklets->description
+#. 6.4->settings-schema.json->check_desklets->description
+#. 5.6->settings-schema.json->check_desklets->description
+msgid "Check regularly whether your desklets are up to date"
+msgstr "Verifică regulat dacă deskleturile tale sunt la zi"
+
+#. 4.2->settings-schema.json->check_desklets->tooltip
+#. 4.8->settings-schema.json->check_desklets->tooltip
+#. 6.0->settings-schema.json->check_desklets->tooltip
+#. 3.8->settings-schema.json->check_desklets->tooltip
+#. 4.6->settings-schema.json->check_desklets->tooltip
+#. 2.8->settings-schema.json->check_desklets->tooltip
+#. 6.4->settings-schema.json->check_desklets->tooltip
+#. 5.6->settings-schema.json->check_desklets->tooltip
+msgid "If desklets updates do not concern you, uncheck this box."
+msgstr ""
+"Dacă nu te interesează actualizarea deskleturilor, debifează această căsuță."
+
+#. 4.2->settings-schema.json->check_new_desklets->description
+#. 4.8->settings-schema.json->check_new_desklets->description
+#. 6.0->settings-schema.json->check_new_desklets->description
+#. 3.8->settings-schema.json->check_new_desklets->description
+#. 4.6->settings-schema.json->check_new_desklets->description
+#. 2.8->settings-schema.json->check_new_desklets->description
+#. 6.4->settings-schema.json->check_new_desklets->description
+#. 5.6->settings-schema.json->check_new_desklets->description
+msgid "Check regularly whether new desklets are available"
+msgstr "Verifică regulat dacă sunt disponibile noi deskleturi"
+
+#. 4.2->settings-schema.json->check_new_desklets->tooltip
+#. 4.8->settings-schema.json->check_new_desklets->tooltip
+#. 6.0->settings-schema.json->check_new_desklets->tooltip
+#. 3.8->settings-schema.json->check_new_desklets->tooltip
+#. 4.6->settings-schema.json->check_new_desklets->tooltip
+#. 2.8->settings-schema.json->check_new_desklets->tooltip
+#. 6.4->settings-schema.json->check_new_desklets->tooltip
+#. 5.6->settings-schema.json->check_new_desklets->tooltip
+msgid "If new desklets do not concern you, uncheck this box."
+msgstr "Dacă nu te interesează deskleturi noi, debifează această căsuță."
+
+#. 4.2->settings-schema.json->unprotected_desklets->description
+#. 4.8->settings-schema.json->unprotected_desklets->description
+#. 6.0->settings-schema.json->unprotected_desklets->description
+#. 3.8->settings-schema.json->unprotected_desklets->description
+#. 4.6->settings-schema.json->unprotected_desklets->description
+#. 6.4->settings-schema.json->unprotected_desklets->description
+#. 5.6->settings-schema.json->unprotected_desklets->description
+msgid "Update these desklets:"
+msgstr "Actualizează aceste deskleturi:"
+
+#. 4.2->settings-schema.json->unprotected_desklets->columns->title
+#. 4.8->settings-schema.json->unprotected_desklets->columns->title
+#. 6.0->settings-schema.json->unprotected_desklets->columns->title
+#. 3.8->settings-schema.json->unprotected_desklets->columns->title
+#. 4.6->settings-schema.json->unprotected_desklets->columns->title
+#. 6.4->settings-schema.json->unprotected_desklets->columns->title
+#. 5.6->settings-schema.json->unprotected_desklets->columns->title
+msgid "Your Desklets"
+msgstr "Deskleturile tale"
+
+#. 4.2->settings-schema.json->btn_cs_desklets->description
+#. 4.8->settings-schema.json->btn_cs_desklets->description
+#. 6.0->settings-schema.json->btn_cs_desklets->description
+#. 3.8->settings-schema.json->btn_cs_desklets->description
+#. 4.6->settings-schema.json->btn_cs_desklets->description
+#. 2.8->settings-schema.json->btn_cs_desklets->description
+#. 6.4->settings-schema.json->btn_cs_desklets->description
+#. 5.6->settings-schema.json->btn_cs_desklets->description
+msgid "Open Cinnamon Settings to manage all the Desklets"
+msgstr ""
+"Deschide setările pentru Cinnamon pentru a administra toate deskleturile"
+
+#. 4.2->settings-schema.json->check_extensions->description
+#. 4.8->settings-schema.json->check_extensions->description
+#. 6.0->settings-schema.json->check_extensions->description
+#. 3.8->settings-schema.json->check_extensions->description
+#. 4.6->settings-schema.json->check_extensions->description
+#. 2.8->settings-schema.json->check_extensions->description
+#. 6.4->settings-schema.json->check_extensions->description
+#. 5.6->settings-schema.json->check_extensions->description
+msgid "Check regularly whether your extensions are up to date"
+msgstr "Verifică regulat dacă extensiile tale sunt la zi"
+
+#. 4.2->settings-schema.json->check_extensions->tooltip
+#. 4.8->settings-schema.json->check_extensions->tooltip
+#. 6.0->settings-schema.json->check_extensions->tooltip
+#. 3.8->settings-schema.json->check_extensions->tooltip
+#. 4.6->settings-schema.json->check_extensions->tooltip
+#. 2.8->settings-schema.json->check_extensions->tooltip
+#. 6.4->settings-schema.json->check_extensions->tooltip
+#. 5.6->settings-schema.json->check_extensions->tooltip
+msgid "If extensions updates do not concern you, uncheck this box."
+msgstr ""
+"Dacă nu te interesează actualizarea extensiilor, debifează această căsuță."
+
+#. 4.2->settings-schema.json->check_new_extensions->description
+#. 4.8->settings-schema.json->check_new_extensions->description
+#. 6.0->settings-schema.json->check_new_extensions->description
+#. 3.8->settings-schema.json->check_new_extensions->description
+#. 4.6->settings-schema.json->check_new_extensions->description
+#. 2.8->settings-schema.json->check_new_extensions->description
+#. 6.4->settings-schema.json->check_new_extensions->description
+#. 5.6->settings-schema.json->check_new_extensions->description
+msgid "Check regularly whether new extensions are available"
+msgstr "Verifică regulat dacă sunt disponibile noi extensii"
+
+#. 4.2->settings-schema.json->check_new_extensions->tooltip
+#. 4.8->settings-schema.json->check_new_extensions->tooltip
+#. 6.0->settings-schema.json->check_new_extensions->tooltip
+#. 3.8->settings-schema.json->check_new_extensions->tooltip
+#. 4.6->settings-schema.json->check_new_extensions->tooltip
+#. 2.8->settings-schema.json->check_new_extensions->tooltip
+#. 6.4->settings-schema.json->check_new_extensions->tooltip
+#. 5.6->settings-schema.json->check_new_extensions->tooltip
+msgid "If new extensions do not concern you, uncheck this box."
+msgstr "Dacă nu te interesează extensii noi, debifează această căsuță."
+
+#. 4.2->settings-schema.json->unprotected_extensions->description
+#. 4.8->settings-schema.json->unprotected_extensions->description
+#. 6.0->settings-schema.json->unprotected_extensions->description
+#. 3.8->settings-schema.json->unprotected_extensions->description
+#. 4.6->settings-schema.json->unprotected_extensions->description
+#. 6.4->settings-schema.json->unprotected_extensions->description
+#. 5.6->settings-schema.json->unprotected_extensions->description
+msgid "Update these extensions:"
+msgstr "Actualizează aceste extensii:"
+
+#. 4.2->settings-schema.json->unprotected_extensions->columns->title
+#. 4.8->settings-schema.json->unprotected_extensions->columns->title
+#. 6.0->settings-schema.json->unprotected_extensions->columns->title
+#. 3.8->settings-schema.json->unprotected_extensions->columns->title
+#. 4.6->settings-schema.json->unprotected_extensions->columns->title
+#. 6.4->settings-schema.json->unprotected_extensions->columns->title
+#. 5.6->settings-schema.json->unprotected_extensions->columns->title
+msgid "Your Extensions"
+msgstr "Extensiile tale"
+
+#. 4.2->settings-schema.json->btn_cs_extensions->description
+#. 4.8->settings-schema.json->btn_cs_extensions->description
+#. 6.0->settings-schema.json->btn_cs_extensions->description
+#. 3.8->settings-schema.json->btn_cs_extensions->description
+#. 4.6->settings-schema.json->btn_cs_extensions->description
+#. 2.8->settings-schema.json->btn_cs_extensions->description
+#. 6.4->settings-schema.json->btn_cs_extensions->description
+#. 5.6->settings-schema.json->btn_cs_extensions->description
+msgid "Open Cinnamon Settings to manage all the Extensions"
+msgstr "Deschide setările pentru Cinnamon pentru a administra toate extensiile"
+
+#. 4.2->settings-schema.json->check_themes->description
+#. 4.8->settings-schema.json->check_themes->description
+#. 6.0->settings-schema.json->check_themes->description
+#. 3.8->settings-schema.json->check_themes->description
+#. 4.6->settings-schema.json->check_themes->description
+#. 2.8->settings-schema.json->check_themes->description
+#. 6.4->settings-schema.json->check_themes->description
+#. 5.6->settings-schema.json->check_themes->description
+msgid "Check regularly whether your themes are up to date"
+msgstr "Verifică regulat dacă temele tale sunt la zi"
+
+#. 4.2->settings-schema.json->check_themes->tooltip
+#. 4.8->settings-schema.json->check_themes->tooltip
+#. 6.0->settings-schema.json->check_themes->tooltip
+#. 3.8->settings-schema.json->check_themes->tooltip
+#. 4.6->settings-schema.json->check_themes->tooltip
+#. 2.8->settings-schema.json->check_themes->tooltip
+#. 6.4->settings-schema.json->check_themes->tooltip
+#. 5.6->settings-schema.json->check_themes->tooltip
+msgid "If themes updates do not concern you, uncheck this box."
+msgstr "Dacă nu te interesează actualizarea temelor, debifează această căsuță."
+
+#. 4.2->settings-schema.json->check_new_themes->description
+#. 4.8->settings-schema.json->check_new_themes->description
+#. 6.0->settings-schema.json->check_new_themes->description
+#. 3.8->settings-schema.json->check_new_themes->description
+#. 4.6->settings-schema.json->check_new_themes->description
+#. 2.8->settings-schema.json->check_new_themes->description
+#. 6.4->settings-schema.json->check_new_themes->description
+#. 5.6->settings-schema.json->check_new_themes->description
+msgid "Check regularly whether new themes are available"
+msgstr "Verifică regulat dacă sunt disponibile noi teme"
+
+#. 4.2->settings-schema.json->check_new_themes->tooltip
+#. 4.8->settings-schema.json->check_new_themes->tooltip
+#. 6.0->settings-schema.json->check_new_themes->tooltip
+#. 3.8->settings-schema.json->check_new_themes->tooltip
+#. 4.6->settings-schema.json->check_new_themes->tooltip
+#. 2.8->settings-schema.json->check_new_themes->tooltip
+#. 6.4->settings-schema.json->check_new_themes->tooltip
+#. 5.6->settings-schema.json->check_new_themes->tooltip
+msgid "If new themes do not concern you, uncheck this box."
+msgstr "Dacă nu te interesează teme noi, debifează această căsuță."
+
+#. 4.2->settings-schema.json->unprotected_themes->description
+#. 4.8->settings-schema.json->unprotected_themes->description
+#. 6.0->settings-schema.json->unprotected_themes->description
+#. 3.8->settings-schema.json->unprotected_themes->description
+#. 4.6->settings-schema.json->unprotected_themes->description
+#. 6.4->settings-schema.json->unprotected_themes->description
+#. 5.6->settings-schema.json->unprotected_themes->description
+msgid "Update these themes:"
+msgstr "Actualizează aceste teme:"
+
+#. 4.2->settings-schema.json->unprotected_themes->columns->title
+#. 4.8->settings-schema.json->unprotected_themes->columns->title
+#. 6.0->settings-schema.json->unprotected_themes->columns->title
+#. 3.8->settings-schema.json->unprotected_themes->columns->title
+#. 4.6->settings-schema.json->unprotected_themes->columns->title
+#. 6.4->settings-schema.json->unprotected_themes->columns->title
+#. 5.6->settings-schema.json->unprotected_themes->columns->title
+msgid "Your Themes"
+msgstr "Temele tale"
+
+#. 4.2->settings-schema.json->btn_cs_themes->description
+#. 4.8->settings-schema.json->btn_cs_themes->description
+#. 6.0->settings-schema.json->btn_cs_themes->description
+#. 3.8->settings-schema.json->btn_cs_themes->description
+#. 4.6->settings-schema.json->btn_cs_themes->description
+#. 2.8->settings-schema.json->btn_cs_themes->description
+#. 6.4->settings-schema.json->btn_cs_themes->description
+#. 5.6->settings-schema.json->btn_cs_themes->description
+msgid "Open Cinnamon Settings to manage all the Themes"
+msgstr "Deschide setările pentru Cinnamon pentru a administra toate temele"
+
+#. 4.2->settings-schema.json->general_frequency->units
+#. 4.8->settings-schema.json->general_frequency->units
+#. 6.0->settings-schema.json->general_frequency->units
+#. 4.6->settings-schema.json->general_frequency->units
+#. 6.4->settings-schema.json->general_frequency->units
+#. 5.6->settings-schema.json->general_frequency->units
+msgid "hours"
+msgstr "ore"
+
+#. 4.2->settings-schema.json->general_frequency->description
+#. 4.8->settings-schema.json->general_frequency->description
+#. 6.0->settings-schema.json->general_frequency->description
+#. 4.6->settings-schema.json->general_frequency->description
+#. 6.4->settings-schema.json->general_frequency->description
+#. 5.6->settings-schema.json->general_frequency->description
+msgid "Time interval between two checks"
+msgstr "Interval de timp între verificări"
+
+#. 4.2->settings-schema.json->general_frequency->tooltip
+#. 4.8->settings-schema.json->general_frequency->tooltip
+#. 6.0->settings-schema.json->general_frequency->tooltip
+#. 4.6->settings-schema.json->general_frequency->tooltip
+#. 6.4->settings-schema.json->general_frequency->tooltip
+#. 5.6->settings-schema.json->general_frequency->tooltip
+msgid "Min value: 1 hour. Max value: 720 hours (30 days)."
+msgstr "Valoare minimă: o oră. Valoare maximă: 720 ore (30 de zile)."
+
+#. 4.2->settings-schema.json->general_first_check->description
+#. 4.8->settings-schema.json->general_first_check->description
+#. 6.0->settings-schema.json->general_first_check->description
+#. 4.6->settings-schema.json->general_first_check->description
+#. 6.4->settings-schema.json->general_first_check->description
+#. 5.6->settings-schema.json->general_first_check->description
+msgid "Make a first check one minute after starting"
+msgstr "Fă o primă verificare la un minut după pornire"
+
+#. 4.2->settings-schema.json->general_first_check->tooltip
+#. 4.8->settings-schema.json->general_first_check->tooltip
+#. 6.0->settings-schema.json->general_first_check->tooltip
+#. 4.6->settings-schema.json->general_first_check->tooltip
+#. 6.4->settings-schema.json->general_first_check->tooltip
+#. 5.6->settings-schema.json->general_first_check->tooltip
+msgid ""
+"By checking this box, the first check will take place one minute after "
+"starting this applet."
+msgstr ""
+"Bifând această căsuță, prima verificare va avea loc la un minut după "
+"pornirea acestui applet."
+
+#. 4.2->settings-schema.json->general_warning->description
+#. 4.8->settings-schema.json->general_warning->description
+#. 6.0->settings-schema.json->general_warning->description
+#. 3.8->settings-schema.json->general_warning->description
+#. 4.6->settings-schema.json->general_warning->description
+#. 2.8->settings-schema.json->general_warning->description
+#. 6.4->settings-schema.json->general_warning->description
+#. 5.6->settings-schema.json->general_warning->description
+msgid "Notify me by changing the icon when Spices need an update"
+msgstr ""
+"Semnalează prin schimbarea pictogramei când Spice-urile au nevoie de o "
+"actualizare"
+
+#. 4.2->settings-schema.json->general_warning->tooltip
+#. 4.8->settings-schema.json->general_warning->tooltip
+#. 6.0->settings-schema.json->general_warning->tooltip
+#. 3.8->settings-schema.json->general_warning->tooltip
+#. 4.6->settings-schema.json->general_warning->tooltip
+#. 2.8->settings-schema.json->general_warning->tooltip
+#. 6.4->settings-schema.json->general_warning->tooltip
+#. 5.6->settings-schema.json->general_warning->tooltip
+msgid ""
+"By checking this box, you allow this applet to modify its icon to warn you "
+"when at least one of the Spices requires an update."
+msgstr ""
+"Bifând această căsuță, permiți acestui applet să își modifice pictograma ca "
+"să îți aducă la cunoștință că cel puțin un Spice are nevoie de actualizare."
+
+#. 4.2->settings-schema.json->events_color->description
+#. 4.8->settings-schema.json->events_color->description
+#. 6.0->settings-schema.json->events_color->description
+#. 3.8->settings-schema.json->events_color->description
+#. 4.6->settings-schema.json->events_color->description
+#. 2.8->settings-schema.json->events_color->description
+#. 6.4->settings-schema.json->events_color->description
+#. 5.6->settings-schema.json->events_color->description
+msgid "The icon color when Spices need an update"
+msgstr "Culoarea pictogramei când Spice-urile au nevoie de o actualizare"
+
+#. 4.2->settings-schema.json->events_color->tooltip
+#. 4.8->settings-schema.json->events_color->tooltip
+#. 6.0->settings-schema.json->events_color->tooltip
+#. 6.0->settings-schema.json->processing_color->tooltip
+#. 3.8->settings-schema.json->events_color->tooltip
+#. 4.6->settings-schema.json->events_color->tooltip
+#. 2.8->settings-schema.json->events_color->tooltip
+#. 6.4->settings-schema.json->events_color->tooltip
+#. 6.4->settings-schema.json->processing_color->tooltip
+#. 5.6->settings-schema.json->events_color->tooltip
+msgid "Click the button to select another color."
+msgstr "Click pe buton pentru a alege altă culoare."
+
+#. 4.2->settings-schema.json->general_notifications->description
+#. 4.8->settings-schema.json->general_notifications->description
+#. 6.0->settings-schema.json->general_notifications->description
+#. 3.8->settings-schema.json->general_notifications->description
+#. 4.6->settings-schema.json->general_notifications->description
+#. 2.8->settings-schema.json->general_notifications->description
+#. 6.4->settings-schema.json->general_notifications->description
+#. 5.6->settings-schema.json->general_notifications->description
+msgid "Show notification messages about Spices updates"
+msgstr "Arată mesaje de notificare despre actualizarea Spice-urilor"
+
+#. 4.2->settings-schema.json->general_notifications->tooltip
+#. 4.8->settings-schema.json->general_notifications->tooltip
+#. 6.0->settings-schema.json->general_notifications->tooltip
+#. 3.8->settings-schema.json->general_notifications->tooltip
+#. 4.6->settings-schema.json->general_notifications->tooltip
+#. 2.8->settings-schema.json->general_notifications->tooltip
+#. 6.4->settings-schema.json->general_notifications->tooltip
+#. 5.6->settings-schema.json->general_notifications->tooltip
+msgid ""
+"By checking this box, you allow this applet to display messages about Spices "
+"updates in notifications viewer."
+msgstr ""
+"Bifând această căsuță, permiți acestui applet să afișeze mesaje despre "
+"actualizările Spice-urilor în afișierul de notificări."
+
+#. 4.2->settings-schema.json->general_details_requested->description
+#. 4.8->settings-schema.json->general_details_requested->description
+#. 6.0->settings-schema.json->general_details_requested->description
+#. 3.8->settings-schema.json->general_details_requested->description
+#. 4.6->settings-schema.json->general_details_requested->description
+#. 2.8->settings-schema.json->general_details_requested->description
+#. 6.4->settings-schema.json->general_details_requested->description
+#. 5.6->settings-schema.json->general_details_requested->description
+msgid "Display the description of each update or new Spice"
+msgstr "Afișează descrierea fiecărei actualizări noi sau Spice nou"
+
+#. 4.2->settings-schema.json->general_details_requested->tooltip
+#. 4.8->settings-schema.json->general_details_requested->tooltip
+#. 6.0->settings-schema.json->general_details_requested->tooltip
+#. 3.8->settings-schema.json->general_details_requested->tooltip
+#. 4.6->settings-schema.json->general_details_requested->tooltip
+#. 2.8->settings-schema.json->general_details_requested->tooltip
+#. 6.4->settings-schema.json->general_details_requested->tooltip
+#. 5.6->settings-schema.json->general_details_requested->tooltip
+msgid ""
+"By checking this box, you'll know why an update is available, and get a "
+"description of any new Spice.\n"
+"This information will be displayed in English."
+msgstr ""
+"Bifând această căsuță, vei știi când este disponibilă o actualizare, și vei "
+"primi o descriere a oricărui Spice nou,\n"
+"Această informație va fi afișată în engleză."
+
+#. 4.2->settings-schema.json->general_type_notif->options
+#. 4.8->settings-schema.json->general_type_notif->options
+#. 6.0->settings-schema.json->general_type_notif->options
+#. 3.8->settings-schema.json->general_type_notif->options
+#. 4.6->settings-schema.json->general_type_notif->options
+#. 2.8->settings-schema.json->general_type_notif->options
+#. 6.4->settings-schema.json->general_type_notif->options
+#. 5.6->settings-schema.json->general_type_notif->options
+msgid "Minimal (text only)"
+msgstr "Minim (doar text)"
+
+#. 4.2->settings-schema.json->general_type_notif->options
+#. 4.8->settings-schema.json->general_type_notif->options
+#. 6.0->settings-schema.json->general_type_notif->options
+#. 4.6->settings-schema.json->general_type_notif->options
+#. 6.4->settings-schema.json->general_type_notif->options
+#. 5.6->settings-schema.json->general_type_notif->options
+msgid "With action buttons"
+msgstr ""
+
+#. 4.2->settings-schema.json->general_type_notif->options
+#. 4.8->settings-schema.json->general_type_notif->options
+#. 6.0->settings-schema.json->general_type_notif->options
+#. 4.6->settings-schema.json->general_type_notif->options
+#. 6.4->settings-schema.json->general_type_notif->options
+#. 5.6->settings-schema.json->general_type_notif->options
+msgid "With action buttons as icons"
+msgstr ""
+
+#. 4.2->settings-schema.json->general_type_notif->description
+#. 4.8->settings-schema.json->general_type_notif->description
+#. 6.0->settings-schema.json->general_type_notif->description
+#. 3.8->settings-schema.json->general_type_notif->description
+#. 4.6->settings-schema.json->general_type_notif->description
+#. 2.8->settings-schema.json->general_type_notif->description
+#. 6.4->settings-schema.json->general_type_notif->description
+#. 5.6->settings-schema.json->general_type_notif->description
+msgid "Notification style"
+msgstr "Stilul notificării"
+
+#. 4.2->settings-schema.json->general_type_notif->tooltip
+#. 4.8->settings-schema.json->general_type_notif->tooltip
+#. 6.0->settings-schema.json->general_type_notif->tooltip
+#. 4.6->settings-schema.json->general_type_notif->tooltip
+#. 6.4->settings-schema.json->general_type_notif->tooltip
+#. 5.6->settings-schema.json->general_type_notif->tooltip
+msgid ""
+"Minimal:\n"
+"\tDisplays simple and short notifications.\n"
+"With action buttons:\n"
+"\tNotifications also contain some buttons which have these roles:\n"
+"\t\tThe leftmost button opens the Download tab in System Settings for the "
+"concerned Spices, which are sorted by date (most recent first). So you can "
+"update the Spices you want.\n"
+"\t\tThe rightmost button refreshes the cache and notifications, if "
+"necessary.\n"
+"\t\tOptionally, a central button allows you to forget new spices or update "
+"the installed ones, depending on the case."
+msgstr ""
+
+#. 4.2->settings-schema.json->general_show_updateall_button->description
+#. 4.8->settings-schema.json->general_show_updateall_button->description
+#. 4.6->settings-schema.json->general_show_updateall_button->description
+#. 5.6->settings-schema.json->general_show_updateall_button->description
+msgid "Show the 'Update Now' button in notifications"
+msgstr ""
+
+#. 4.2->settings-schema.json->general_show_updateall_button->tooltip
+#. 4.8->settings-schema.json->general_show_updateall_button->tooltip
+#. 4.6->settings-schema.json->general_show_updateall_button->tooltip
+#. 5.6->settings-schema.json->general_show_updateall_button->tooltip
+msgid ""
+"By checking this box, a button 'Update All' appears in notifications.\n"
+"By pressing this button:\n"
+" 1. The Download tab of the System Settings concerning this type of Spices "
+"appears.\n"
+" 2. The cache is updated.\n"
+" 3. Your Spices are updated.\n"
+" 4. When all updates are made, just close the window."
+msgstr ""
+
+#. 4.2->settings-schema.json->general_test_notif->description
+#. 4.8->settings-schema.json->general_test_notif->description
+#. 6.0->settings-schema.json->general_test_notif->description
+#. 3.8->settings-schema.json->general_test_notif->description
+#. 4.6->settings-schema.json->general_test_notif->description
+#. 2.8->settings-schema.json->general_test_notif->description
+#. 6.4->settings-schema.json->general_test_notif->description
+#. 5.6->settings-schema.json->general_test_notif->description
+msgid "Send a fake notification to test the style"
+msgstr "Trimite o notificare falsă pentru a testa stilul"
+
+#. 4.2->settings-schema.json->displayType->options
+#. 3.8->settings-schema.json->displayType->options
+#. 2.8->settings-schema.json->displayType->options
+msgid "Classic - Icon and Text"
+msgstr "Clasic - Pictogramă și text"
+
+#. 4.2->settings-schema.json->displayType->options
+#. 3.8->settings-schema.json->displayType->options
+#. 2.8->settings-schema.json->displayType->options
+msgid "Compact - Icon Only"
+msgstr "Compact - Doar pictogramă"
+
+#. 4.2->settings-schema.json->displayType->description
+#. 3.8->settings-schema.json->displayType->description
+#. 2.8->settings-schema.json->displayType->description
+msgid "Type of Display"
+msgstr "Tip de afișaj"
+
+#. 4.2->settings-schema.json->displayType->tooltip
+#. 3.8->settings-schema.json->displayType->tooltip
+#. 2.8->settings-schema.json->displayType->tooltip
+msgid ""
+"This feature offers the Classic (default) display with icon and text, and "
+"compact display (Icon Only)."
+msgstr ""
+"Această funcționalitate oferă afișajul Clasic (implicit) cu pictogramă și "
+"text, și afișaj compact (Doar pictogramă)."
+
+#. 4.2->settings-schema.json->general_hide->description
+#. 4.8->settings-schema.json->general_hide->description
+#. 6.0->settings-schema.json->general_hide->description
+#. 3.8->settings-schema.json->general_hide->description
+#. 4.6->settings-schema.json->general_hide->description
+#. 2.8->settings-schema.json->general_hide->description
+#. 6.4->settings-schema.json->general_hide->description
+#. 5.6->settings-schema.json->general_hide->description
+msgid "Hide the icon as long as nothing is to report"
+msgstr "Ascunde pictograma câtă vreme nu e nimic de raportat"
+
+#. 4.2->settings-schema.json->general_hide->tooltip
+#. 4.8->settings-schema.json->general_hide->tooltip
+#. 6.0->settings-schema.json->general_hide->tooltip
+#. 3.8->settings-schema.json->general_hide->tooltip
+#. 4.6->settings-schema.json->general_hide->tooltip
+#. 2.8->settings-schema.json->general_hide->tooltip
+#. 6.4->settings-schema.json->general_hide->tooltip
+#. 5.6->settings-schema.json->general_hide->tooltip
+msgid ""
+"By checking this box, as long as nothing is to report the icon of Spices "
+"Update does not appear on the panel."
+msgstr ""
+"Bifând această căsuță, câtă vreme nu e nimic de raportat pictograma Spices "
+"Update nu va apărea pe panou."
+
+#. 4.8->settings-schema.json->tooltip_max_width_screen_percentage->units
+#. 6.0->settings-schema.json->tooltip_max_width_screen_percentage->units
+#. 4.6->settings-schema.json->tooltip_max_width_screen_percentage->units
+#. 6.4->settings-schema.json->tooltip_max_width_screen_percentage->units
+#. 5.6->settings-schema.json->tooltip_max_width_screen_percentage->units
+msgid "% of screen width"
+msgstr ""
+
+#. 4.8->settings-schema.json->tooltip_max_width_screen_percentage->description
+#. 6.0->settings-schema.json->tooltip_max_width_screen_percentage->description
+#. 4.6->settings-schema.json->tooltip_max_width_screen_percentage->description
+#. 6.4->settings-schema.json->tooltip_max_width_screen_percentage->description
+#. 5.6->settings-schema.json->tooltip_max_width_screen_percentage->description
+msgid "Tooltip: Maximum width"
+msgstr ""
+
+#. 4.8->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
+#. 6.0->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
+#. 4.6->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
+#. 6.4->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
+#. 5.6->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
+msgid ""
+"What is the maximum percentage of your screen width that the tooltip can "
+"occupy?"
+msgstr ""
+
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_applets->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_desklets->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_extensions->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_themes->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_actions->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_applets->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_desklets->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_extensions->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_themes->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_actions->description
+msgid "Tick all the first boxes then refresh"
+msgstr ""
+
+#. 6.0->settings-schema.json->check_actions->description
+#. 6.4->settings-schema.json->check_actions->description
+#, fuzzy
+msgid "Check regularly whether your nemo actions are up to date"
+msgstr "Verifică regulat dacă extensiile tale sunt la zi"
+
+#. 6.0->settings-schema.json->check_actions->tooltip
+#. 6.4->settings-schema.json->check_actions->tooltip
+#, fuzzy
+msgid "If nemo actions updates do not concern you, uncheck this box."
+msgstr ""
+"Dacă nu te interesează actualizarea extensiilor, debifează această căsuță."
+
+#. 6.0->settings-schema.json->check_new_actions->description
+#. 6.4->settings-schema.json->check_new_actions->description
+#, fuzzy
+msgid "Check regularly whether new nemo actions are available"
+msgstr "Verifică regulat dacă sunt disponibile noi extensii"
+
+#. 6.0->settings-schema.json->check_new_actions->tooltip
+#. 6.4->settings-schema.json->check_new_actions->tooltip
+#, fuzzy
+msgid "If new nemo actions do not concern you, uncheck this box."
+msgstr "Dacă nu te interesează extensii noi, debifează această căsuță."
+
+#. 6.0->settings-schema.json->unprotected_actions->description
+#. 6.4->settings-schema.json->unprotected_actions->description
+#, fuzzy
+msgid "Update these nemo actions:"
+msgstr "Actualizează aceste extensii:"
+
+#. 6.0->settings-schema.json->unprotected_actions->columns->title
+#. 6.4->settings-schema.json->unprotected_actions->columns->title
+#, fuzzy
+msgid "Your nemo actions"
+msgstr "Extensiile tale"
+
+#. 6.0->settings-schema.json->btn_cs_actions->description
+#. 6.4->settings-schema.json->btn_cs_actions->description
+#, fuzzy
+msgid "Open Cinnamon Settings to manage all the nemo actions"
+msgstr "Deschide setările pentru Cinnamon pentru a administra toate extensiile"
+
+#. 6.0->settings-schema.json->processing_color->description
+#. 6.4->settings-schema.json->processing_color->description
+#, fuzzy
+msgid "The icon color while SpicesUpdate is processing"
+msgstr "Culoarea pictogramei când Spice-urile au nevoie de o actualizare"
+
+#. 3.8->settings-schema.json->general_frequency->description
+#. 2.8->settings-schema.json->general_frequency->description
+msgid "Time interval between two checks (hours)"
+msgstr "Interval de timp între verificări (ore)"
+
+#. 3.8->settings-schema.json->general_frequency->tooltip
+#. 2.8->settings-schema.json->general_frequency->tooltip
+msgid ""
+"Please note that the first check will take place one minute after starting "
+"this applet."
+msgstr ""
+"Notă: prima verificare va avea loc la un minut după pornirea acestui applet."
+
+#. 3.8->settings-schema.json->general_force_notifications->description
+#. 2.8->settings-schema.json->general_force_notifications->description
+msgid "Show notification messages even if they are unchanged"
+msgstr "Arată mesaje de notificare chiar și dacă sunt neschimbate"
+
+#. 3.8->settings-schema.json->general_force_notifications->tooltip
+#. 2.8->settings-schema.json->general_force_notifications->tooltip
+msgid ""
+"By checking this box, all notification messages will be displayed, even if "
+"they are identical to the previous ones."
+msgstr ""
+"Bifând această căsuță, toate mesajele de notificare vor fi afișate, chiar și "
+"dacă sunt identice cu cele de dinainte."
+
+#. 3.8->settings-schema.json->general_type_notif->options
+#. 2.8->settings-schema.json->general_type_notif->options
+msgid "With button opening the System Settings"
+msgstr "Cu buton care deschide Setări sistem"
+
+#. 3.8->settings-schema.json->general_type_notif->tooltip
+#. 2.8->settings-schema.json->general_type_notif->tooltip
+msgid ""
+"Minimal:\n"
+"\tDisplays simple and short notifications.\n"
+"With button opening the System Settings:\n"
+"\tNotifications also contain a button which has the same role of the menu "
+"one:\n"
+"\tOpen the Download tab in System Settings for the concerned type of Spices, "
+"with the Spices sorted by date."
+msgstr ""
+"Minim:\n"
+"\tAfișează notificări simple și scurte.\n"
+"Cu buton care deschide Setări sistem\n"
+"\tNotificările conțin și un buton care are același rol ca cel din meniuȘ\n"
+"\tDeschide fila Descarcă din Setări sistem pentru tipul de Spice în cauză, "
+"cu Spice-urile sortate după dată."
+
+#. 6.4->settings-schema.json->section_general5->title
+msgid "Dependencies"
+msgstr ""
+
+#. 6.4->settings-schema.json->btn_apply_applets->description
+#. 6.4->settings-schema.json->btn_apply_desklets->description
+#. 6.4->settings-schema.json->btn_apply_extensions->description
+#. 6.4->settings-schema.json->btn_apply_themes->description
+#. 6.4->settings-schema.json->btn_apply_actions->description
+#, fuzzy
+msgid "Apply"
+msgstr "Applet"
+
+#. 6.4->settings-schema.json->dont_check_dependencies->description
+msgid "Do not check dependencies"
+msgstr ""

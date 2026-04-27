@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-26 22:50+0200\n"
+"PO-Revision-Date: 2021-02-16 11:24+0100\n"
+"Last-Translator: Serdar Sağlam <teknomobil@yandex.com>\n"
+"Language-Team: Türkçe Çeviri <LL@li.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+
+#: applet.js:35
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
+#: applet.js:143
+msgid "%A %B %e, %Y"
+msgstr "%A %B %e, %Y"
+
+#: applet.js:333
+msgid "Edit World Clocks"
+msgstr "Dünya Saatlerini Düzenle"
+
+#: applet.js:335
+msgid "Date and Time Settings"
+msgstr "Tarih ve Zaman Ayarları"
+
+#: world_clock_calendar_settings.py:78
+msgid "Display Name"
+msgstr "Ekran Adı"
+
+#: world_clock_calendar_settings.py:90
+msgid "Timezone"
+msgstr "Saat Dilimi"
+
+#: world_clock_calendar_settings.py:128
+msgid "Time format for World Clocks"
+msgstr "Dünya saatleri için zaman formatı"
+
+#: world_clock_calendar_settings.py:137
+msgid "Browse valid timezone values by country (online)"
+msgstr "Ülkeye göre geçerli saat dilimi değerlerine göz atın (çevrimiçi)"
+
+#: world_clock_calendar_settings.py:216
+msgid "Coordinated Universal Time"
+msgstr "Koordineli Evrensel Zaman"
+
+#. metadata.json->name
+msgid "World Clock Calendar"
+msgstr "Dünya Saati Takvimi"
+
+#. metadata.json->description
+msgid ""
+"Fork of the Cinnamon calendar applet with support for displaying multiple "
+"timezones"
+msgstr ""
+"Birden fazla görüntüleme desteği ile Cinnamon takvim uygulamasızaman "
+"dilimleri"
+
+#. settings-schema.json->show-week-numbers->description
+msgid "Show week numbers in calendar"
+msgstr "Takvimde hafta numaralarını göster"
+
+#. settings-schema.json->show-week-numbers->tooltip
+msgid "Check this to show week numbers in the calendar."
+msgstr "Hafta numaralarını göstermek için bunu kontrol edin."
+
+#. settings-schema.json->use-custom-format->description
+msgid "Use a custom date format"
+msgstr "Özel bir tarih formatı kullan"
+
+#. settings-schema.json->use-custom-format->tooltip
+msgid ""
+"Check this to define a custom format for the date in the calendar applet."
+msgstr ""
+"Takvim uygulamasında tarih için özel biçim tanımlamak için bunu kontrol edin."
+
+#. settings-schema.json->custom-format->description
+msgid "Date format:"
+msgstr "Tarih biçimi:"
+
+#. settings-schema.json->custom-format->tooltip
+msgid "Set your custom format here."
+msgstr "Özel biçiminizi ayarlayın."
+
+#. settings-schema.json->format-button->description
+msgid "Show information on date format syntax"
+msgstr "Tarih biçimi sözdizimi hakkında bilgi göster"
+
+#. settings-schema.json->format-button->tooltip
+msgid "Click this button to know more about the syntax for date formats."
+msgstr "Tarih biçimlerinin sözdizimi hakkında bilgi için bu düğmeye tıklayın."
+
+#. settings-schema.json->keybindings->description
+msgid "Keybindings"
+msgstr ""
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr ""
+
+#. settings-schema.json->header->description
+msgid "World-Clock Settings"
+msgstr "Dünya Saati Ayarları"
+
+#. settings-schema.json->worldclock-setup-button->description
+msgid "Configure World-clocks"
+msgstr "Dünya Saatlerini Yapılandır"
+
+#. settings-schema.json->worldclock-setup-button->tooltip
+msgid "Add, remove and configure additional clocks and format."
+msgstr "Ek saatler ekleyip kaldırın ve biçimlendirin."
