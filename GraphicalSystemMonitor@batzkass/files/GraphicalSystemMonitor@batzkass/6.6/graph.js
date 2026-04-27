@@ -8,8 +8,7 @@ class Graph {
 
         this.provider = new provider_cls(applet.cfg_refresh_rate);
         this.actor = actor;
-        this.applet = applet;
-        this.actor._applet = applet // needed for the tooltip
+        this._applet = applet; // needed for the tooltip /!\ "_applet" prop name must not be changed.
         this.area = new St.DrawingArea();
         this.label_top = new St.Label();
         this.label_bottom = new St.Label();
@@ -49,7 +48,7 @@ class Graph {
     }
 
     get tooltip_history_seconds() {
-        return this.applet.cfg_tooltip_history_seconds
+        return this._applet.cfg_tooltip_history_seconds
     }
 
     get data_type() {
@@ -163,18 +162,18 @@ class Graph {
         {
             this.label_top.set_text(this.provider.getShortText()[0])
             if(this.data_type=="NetData"){
-                if(this.applet.horizontal){
+                if(this._applet.horizontal){
                     var max = (1/this.scale/1024/1024).toFixed(1);
                     this.label_top_right.set_text(max+'M↥')
                 } else this.label_top_right.set_text("")
             }else if(this.data_type=="LoadAvgData"){
-                if(this.applet.horizontal){
+                if(this._applet.horizontal){
                     var max = (1/this.scale).toFixed(1);
                     this.label_top_right.set_text(max+'↥')
                 } else this.label_top_right.set_text("")
             }
             this.label_top_right.set_position(graph_width-this.label_top_right.width+2,0)
-            if(this.applet.vertical && this.data_type=='NetData') this.label_bottom.set_text(this.provider.getShortText()[1].replace(' ','\n').replace('iB/s', '')) // compact net data in vertical panel
+            if(this._applet.vertical && this.data_type=='NetData') this.label_bottom.set_text(this.provider.getShortText()[1].replace(' ','\n').replace('iB/s', '')) // compact net data in vertical panel
             else this.label_bottom.set_text(this.provider.getShortText()[1])
         } else {
             this.label_top.set_text("")
@@ -233,7 +232,7 @@ class Graph {
         cr.moveTo(bl[0],graph_height - max_v);
         cr.lineTo(br[0],graph_height - max_v);
         cr.stroke();
-        this._set_source_color(cr, this.applet.cfg_tooltip_tick_labels_border_color)
+        this._set_source_color(cr, this._applet.cfg_tooltip_tick_labels_border_color)
         const label_y = graph_height-max_v>20 ? graph_height - max_v - 2 : graph_height - max_v + 12
         var text
         if(this.data_type=='NetData'){
@@ -249,7 +248,7 @@ class Graph {
 
         // BORDER
         cr.setLineWidth(1);
-        this._set_source_color(cr, this.applet.cfg_tooltip_tick_labels_border_color);
+        this._set_source_color(cr, this._applet.cfg_tooltip_tick_labels_border_color);
         cr.rectangle(tl[0]+0.5, tl[1]+0.5, graph_width, graph_height);
         cr.stroke();
 
@@ -265,7 +264,7 @@ class Graph {
             // Ticks
             var tx = Math.round(br[0]-t/this.tooltip_history_seconds*graph_width);
             if(previous_tick-tx<20) continue; // don't draw ticks too close from each other
-            this._set_source_color(cr, this.applet.cfg_tooltip_tick_labels_border_color);
+            this._set_source_color(cr, this._applet.cfg_tooltip_tick_labels_border_color);
             cr.setDash([],0);
             cr.moveTo(tx+0.5,br[1]);
             cr.relLineTo(0,5);
@@ -273,7 +272,7 @@ class Graph {
             // Grid
             cr.setDash(grid_dashes, grid_dashes.length);
             if(t!=0 && t!=this.tooltip_history_seconds){
-                this._set_source_color(cr, this.applet.cfg_tooltip_grid_color);
+                this._set_source_color(cr, this._applet.cfg_tooltip_grid_color);
                 cr.moveTo(tx+0.5,br[1]);
                 cr.lineTo(tx+0.5,1)
                 cr.stroke();
@@ -288,7 +287,7 @@ class Graph {
                     cr.moveTo(tx+0.5-3, br[1]+10+5)
                 else // general case
                     cr.moveTo(tx+0.5-5, br[1]+10+5)
-                    this._set_source_color(cr, this.applet.cfg_tooltip_tick_labels_border_color);
+                    this._set_source_color(cr, this._applet.cfg_tooltip_tick_labels_border_color);
                 cr.showText(String(t)+'s');
                 previous_label = tx
             }
@@ -297,7 +296,7 @@ class Graph {
         // HORIZONTAL TICKS / GRID
         cr.setLineWidth(1);
         cr.setFontSize(10);
-        this._set_source_color(cr, this.applet.cfg_tooltip_grid_color);
+        this._set_source_color(cr, this._applet.cfg_tooltip_grid_color);
         // Configure potential grid, note that values must be pushed in decreasing order.
         // How it works:
         // - horizontal lines that exceeds the graph height will have vy<0 (don't show)
@@ -321,14 +320,14 @@ class Graph {
         h_lines.forEach(hl=>{
             var vy = Math.round(graph_height-graph_height*this.tooltip_scale*hl[0])+0.5
             if(vy<0 || vy-previous_vy<20) return //too high value || too close from previous line.
-            this._set_source_color(cr, this.applet.cfg_tooltip_tick_labels_border_color);
+            this._set_source_color(cr, this._applet.cfg_tooltip_tick_labels_border_color);
             // In-graph labels
             if(vy<12) cr.moveTo(bl[0]+2,vy+10); //under the grid line
             else if(vy>graph_height-12) cr.moveTo(bl[0]+2,vy-2); //above the grid line
             else cr.moveTo(bl[0]+2,vy+4); //on the grid line
             cr.showText(hl[1]);
             // Actual grid lines
-            this._set_source_color(cr, this.applet.cfg_tooltip_grid_color);
+            this._set_source_color(cr, this._applet.cfg_tooltip_grid_color);
             cr.moveTo(bl[0]+0.5,vy);
             cr.lineTo(br[0],vy);
             cr.stroke();
@@ -365,7 +364,7 @@ class Graph {
         var border_style = '';
         var margin_style = '';
         if(this.draw_border){
-            if(this.applet.horizontal) {
+            if(this._applet.horizontal) {
                 border_style = `
                 border-top: 1px solid ${this.border_color};
                 border-bottom: 1px solid ${this.border_color};
@@ -388,7 +387,7 @@ class Graph {
             }
         }
         if (this.spacing>0 && this.location!="first") {
-            if(this.applet.horizontal) {
+            if(this._applet.horizontal) {
                 margin_style = `margin-left: ${this.spacing}px;`
             } else {
                 margin_style = `margin-top: ${this.spacing}px;`
@@ -497,7 +496,7 @@ class Graph {
 class GraphicTooltip extends BoxLayoutTooltip {
     constructor(panelItem, initTitle, orientation){
         super(panelItem, initTitle, orientation);
-        this.applet = panelItem.applet
+        this.applet = panelItem._applet
         this.label = new St.Label();
         this.label.set_style(`
             margin-left: 5px;
