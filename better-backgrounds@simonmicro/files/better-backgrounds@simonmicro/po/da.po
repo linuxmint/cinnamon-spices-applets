@@ -9,29 +9,27 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-04-13 04:55+0100\n"
-"PO-Revision-Date: 2023-12-28 15:26+0100\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"PO-Revision-Date: 2026-04-29 16:53+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
 msgid "Better Backgrounds"
 msgstr "Bedr skrivebordsbaggrunde"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "Apply new backgrounds from Bing, Himawari 8, Picsum Photos, or even whole "
 "websites"
 msgstr ""
-"Anvend nye skrivebordsbaggrunde fra Bing, Himawari 8, Picsum Photos, "
-"PlaceKitten.com, Unsplash.com eller endda hele hjemmesider. Angiv "
-"søgemærkater, udløsere og meget mere!"
+"Anvend nye skrivebordsbaggrunde fra Bing, Himawari 8, Picsum Photos eller "
+"endda hele websteder"
 
 #. settings-schema.json->pageBehaviour->title
 msgid "Behaviour"
@@ -181,7 +179,6 @@ msgid "None"
 msgstr "Ingen"
 
 #. settings-schema.json->image-source->description
-#, fuzzy
 msgid "Image Source"
 msgstr "Billedkilde"
 
