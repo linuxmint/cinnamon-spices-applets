@@ -9,28 +9,27 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-04-13 04:55+0100\n"
-"PO-Revision-Date: 2023-12-08 19:21-0300\n"
+"PO-Revision-Date: 2026-04-29 10:57-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.9\n"
 
 #. metadata.json->name
 msgid "Better Backgrounds"
 msgstr "Mejores fondos"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "Apply new backgrounds from Bing, Himawari 8, Picsum Photos, or even whole "
 "websites"
 msgstr ""
 "Aplique nuevos fondos de Bing, Himawari 8, Picsum Photos, PlaceKitten.com, "
 "Unsplash.com o incluso sitios web completos: especifique etiquetas de "
-"búsqueda, activadores y más!"
+"búsqueda, activadores y más"
 
 #. settings-schema.json->pageBehaviour->title
 msgid "Behaviour"
@@ -177,7 +176,6 @@ msgid "None"
 msgstr "Ninguno"
 
 #. settings-schema.json->image-source->description
-#, fuzzy
 msgid "Image Source"
 msgstr "Fuente de la imagen"
 
