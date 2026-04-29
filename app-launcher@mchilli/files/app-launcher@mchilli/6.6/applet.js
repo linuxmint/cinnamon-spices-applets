@@ -656,7 +656,7 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
             this.actor.remove_actor(this.box);
 
             // Create a scrollable container for the menu
-            this._scrollView = new St.ScrollView({ hscrollbar_policy: 2, vscrollbar_policy: 1 });
+            this._scrollView = new St.ScrollView({ hscrollbar_policy: St.PolicyType.NEVER, vscrollbar_policy: St.PolicyType.AUTOMATIC });
 
             // Add the box to the scrollview and add the scrollview to the actor
             this._scrollView.add_actor(this.box);
