@@ -652,6 +652,23 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
             this.pointerY = 0;
             this.actorPlaced = false;
 
+            // Remove the menu box to wrap it in a ScrollView
+            this.actor.remove_actor(this.box);
+
+            // Create a scrollable container for the menu
+            this._scrollView = new St.ScrollView({ hscrollbar_policy: 2, vscrollbar_policy: 1 });
+
+            // Add the box to the scrollview and add the scrollview to the actor
+            this._scrollView.add_actor(this.box);
+            this.actor.add_actor(this._scrollView);
+
+            // Limit menu height to 90% of screen to prevent it from going off-screen
+            this._signals.connect(this.actor, 'notify::visible', () => {
+                let monitor = Main.layoutManager.primaryMonitor;
+                let maxHeight = Math.round(monitor.height * 0.9);
+                this._scrollView.set_style(`max-height: ${maxHeight}px;`);
+            });
+
             this._signals.connect(this.actor, 'enter-event', this.onMouseEnter, this);
             this._signals.connect(this.actor, 'leave-event', this.onMouseLeave, this);
         } catch (error) {
