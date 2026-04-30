@@ -3881,8 +3881,8 @@ var Sleep_and_lock_handler = class {
 };
 //#endregion
 //#region src/lib/gnome/system_time.js
-/** @typedef {import('../../types').Time_hms} Time_hms */
 var { DateTime: DateTime$1 } = imports.gi.GLib;
+/** @typedef {import('../../types').Time_hms} Time_hms */
 /** @returns {number} seconds (s) */
 function get_now_as_unix() {
 	return DateTime$1.new_now_local().to_unix();
@@ -4535,10 +4535,10 @@ var Twilights_handler = class {
 	}
 };
 //#endregion
-//#region src/app/handlers/initialize_handlers.ts
+//#region src/app/app.ts
 var { GLib } = imports.gi;
 var DURATION_TO_AWAIT_BEFORE_UPDATING_DERIVED_SETTING = 2e3;
-function initialize_handlers(applet, settings) {
+function initialize(applet, settings) {
 	const disposables = [];
 	applet.on_applet_removed_from_panel = () => {
 		disposables.forEach((element) => element.dispose());
@@ -4787,7 +4787,7 @@ function main(metadata, orientation, panel_height, instance_id) {
 	const applet = new IconApplet(orientation, panel_height, instance_id);
 	const settings = initialize_applet_settings(metadata.uuid, instance_id);
 	try {
-		initialize_handlers(applet, settings);
+		initialize(applet, settings);
 	} catch (error) {
 		applet.set_applet_icon_symbolic_name("on-error-symbolic");
 		if (error instanceof Error) logger.error(error.message);

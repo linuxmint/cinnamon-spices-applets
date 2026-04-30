@@ -2,29 +2,29 @@ const { GLib } = imports.gi;
 
 import * as mobx from 'mobx';
 
-import { Time_of_day } from '../../core/Time_of_day.ts';
-import { _, logger, metadata } from '../../globals.ts';
-import { Color_scheme_handler } from '../../lib/cinnamon/Color_scheme_handler.ts';
-import { Keybinding_handler } from '../../lib/cinnamon/Keybinding_handler.ts';
-import { Sleep_and_lock_handler } from '../../lib/cinnamon/Sleep_and_lock_handler';
-import { Event_scheduler } from '../../lib/gnome/Event_scheduler';
-import { Wall_clock_adjustment_monitor } from '../../lib/gnome/Wall_clock_adjustment_monitor.js';
-import { sleep } from '../../lib/utils.ts';
-import { Appearance_handler } from './Appearance_handler.ts';
-import { Background_handler } from './Background_handler.ts';
-import { Commands_handler } from './Commands_handler.ts';
-import { Location_handler } from './Location_handler.ts';
-import { Themes_handler } from './Themes_handler.ts';
-import { Twilights_handler } from './Twilights_handler.ts';
+import { Time_of_day } from '../core/Time_of_day.ts';
+import { _, logger, metadata } from '../globals.ts';
+import { Color_scheme_handler } from '../lib/cinnamon/Color_scheme_handler.ts';
+import { Keybinding_handler } from '../lib/cinnamon/Keybinding_handler.ts';
+import { Sleep_and_lock_handler } from '../lib/cinnamon/Sleep_and_lock_handler/index.js';
+import { Event_scheduler } from '../lib/gnome/Event_scheduler/index.js';
+import { Wall_clock_adjustment_monitor } from '../lib/gnome/Wall_clock_adjustment_monitor.js';
+import { sleep } from '../lib/utils.ts';
+import { Appearance_handler } from './handlers/Appearance_handler.ts';
+import { Background_handler } from './handlers/Background_handler.ts';
+import { Commands_handler } from './handlers/Commands_handler.ts';
+import { Location_handler } from './handlers/Location_handler.ts';
+import { Themes_handler } from './handlers/Themes_handler.ts';
+import { Twilights_handler } from './handlers/Twilights_handler.ts';
 
-import type { Applet } from '../ui/Applet.ts';
-import type { Disposable } from '../../types.d.ts';
-import type { Settings } from '../ui/Settings.ts';
+import type { Applet } from './ui/Applet.ts';
+import type { Disposable } from '../types';
+import type { Settings } from './ui/Settings.ts';
 
 
 const DURATION_TO_AWAIT_BEFORE_UPDATING_DERIVED_SETTING = 2000; // milliseconds (ms)
 
-export function initialize_handlers(applet: Applet, settings: Settings): void {
+export function initialize(applet: Applet, settings: Settings): void {
     const disposables: Disposable[] = [];
     applet.on_applet_removed_from_panel = () => {
         disposables.forEach(element => element.dispose());

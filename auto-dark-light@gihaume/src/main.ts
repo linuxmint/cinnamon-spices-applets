@@ -1,6 +1,6 @@
 const { IconApplet } = imports.ui.applet;
 
-import { initialize_handlers } from './app/handlers/initialize_handlers.ts';
+import * as app from './app/app.ts';
 import { initialize_applet_settings } from './app/initialize_applet_settings.ts';
 import { initialize_globals, logger } from './globals.ts';
 
@@ -21,7 +21,7 @@ function main(
     const settings = initialize_applet_settings(metadata.uuid, instance_id);
 
     try {
-        initialize_handlers(applet, settings);
+        app.initialize(applet, settings);
     } catch (error) {
         applet.set_applet_icon_symbolic_name('on-error-symbolic');
         if (error instanceof Error)
