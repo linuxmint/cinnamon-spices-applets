@@ -1,0 +1,12 @@
+{
+    "default-save-directory": {
+        "type": "directory",
+        "default": "~/Pictures/Screenshots",
+        "description": "Default Save Directory"
+    },
+    "auto-copy-to-clipboard": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Automatically copy to clipboard on save"
+    }
+}
