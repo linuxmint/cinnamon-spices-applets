@@ -1,0 +1,130 @@
+# DESCRIPTION IN FILE LANGUAGE / DESCRIPTION IN ENGLISH
+
+
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: <filipekaue@protonmail.com> \n"
+"POT-Creation-Date: 2020-07-25 14:50-0300\n"
+"PO-Revision-Date: 2025-05-04 14:46+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org> \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: applet.js:43 icons/backup.js:40
+msgid "Show Desklets"
+msgstr "顯示桌面小工具"
+
+#. metadata.json->name
+msgid "Clean Show Desktop"
+msgstr "Clean Show Desktop"
+
+#. metadata.json->description
+msgid "An Applet to show the Desktop just like in Windows 10, but completely customizable"
+msgstr "一個類似 Windows 10 顯示桌面功能、且可完全自訂的小程式"
+
+#. settings-schema.json->head->description
+msgid "Settings"
+msgstr "設定"
+
+#. settings-schema.json->peek-desktop->description
+msgid "Peek at the desktop on hover"
+msgstr "滑鼠游標停留時預覽桌面"
+
+#. settings-schema.json->peek-desktop->tooltip
+msgid "Peek at the desktop when hovering the applet"
+msgstr "當滑鼠游標停留在小程式上時預覽桌面"
+
+#. settings-schema.json->peek-blur->description
+msgid "Blur effect"
+msgstr "模糊特效"
+
+#. settings-schema.json->peek-blur->tooltip
+msgid "Blur windows when peeking at the desktop"
+msgstr "預覽桌面時將視窗套用模糊特效"
+
+#. settings-schema.json->peek-delay->units
+msgid "milliseconds"
+msgstr "毫秒"
+
+#. settings-schema.json->peek-delay->description
+msgid "Hover delay"
+msgstr "停留延遲"
+
+#. settings-schema.json->peek-delay->tooltip
+msgid "Delay before Peek shows desktop"
+msgstr "預覽桌面顯示前的延遲時間"
+
+#. settings-schema.json->peek-opacity->description
+msgid "Window opacity"
+msgstr "視窗透明度"
+
+#. settings-schema.json->peek-opacity->tooltip
+msgid "Change the opacity of windows when peeking at the desktop"
+msgstr "調整預覽桌面時的視窗透明度"
+
+#. settings-schema.json->width->units
+#. settings-schema.json->border-width->units
+msgid "pixels"
+msgstr "像素"
+
+#. settings-schema.json->width->description
+msgid "Applet size"
+msgstr "小程式寬度"
+
+#. settings-schema.json->width->tooltip
+msgid "Adjust this to increase or decrease the width of this applet"
+msgstr "調整此數值以增加或減少此小程式的寬度"
+
+#. settings-schema.json->background->description
+msgid "Fill color"
+msgstr "填滿色彩"
+
+#. settings-schema.json->background->tooltip
+msgid "Select a fill color"
+msgstr "選取填滿色彩"
+
+#. settings-schema.json->border->description
+msgid "Border color"
+msgstr "邊框色彩"
+
+#. settings-schema.json->border->tooltip
+msgid "Select a border color"
+msgstr "選取邊框色彩"
+
+#. settings-schema.json->on-hover-background->description
+msgid "Fill color on mouse hover"
+msgstr "滑鼠游標停留時的填滿色彩"
+
+#. settings-schema.json->on-hover-background->tooltip
+msgid "Change the fill color when mouse hover"
+msgstr "變更滑鼠游標停留時的填滿色彩"
+
+#. settings-schema.json->on-hover-border->description
+msgid "Border color on mouse hover"
+msgstr "滑鼠游標停留時的邊框色彩"
+
+#. settings-schema.json->on-hover-border->tooltip
+msgid "Change the Border color when mouse hover"
+msgstr "變更滑鼠游標停留時的邊框色彩"
+
+#. settings-schema.json->border-width->description
+msgid "Border width"
+msgstr "邊框寬度"
+
+#. settings-schema.json->border-width->tooltip
+msgid "Select the border width"
+msgstr "選取邊框寬度"
+
+#. settings-schema.json->custom-color->description
+msgid "Customize the applet colors"
+msgstr "自訂小程式色彩設定"
+
+#. settings-schema.json->custom-color->tooltip
+msgid "When this option is disabled, the applet will try to find the accent color color of the theme"
+msgstr "停用此選項時，小程式會自動採用佈景主題的強調色彩"

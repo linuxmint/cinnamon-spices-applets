@@ -1,0 +1,69 @@
+# CINNAMON MULTI-LINE TASKBAR
+# This file is put in the public domain.
+# posto, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cinnamon-multi-line-taskbar-applet 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-08-26 08:43+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:65
+msgid "Close"
+msgstr "Sluiten"
+
+#. applet.js:68
+msgid "Close all"
+msgstr "Alles sluiten"
+
+#. applet.js:71
+msgid "Close others"
+msgstr "Andere sluiten"
+
+#. applet.js:75 applet.js:907
+msgid "Restore"
+msgstr "Herstellen"
+
+#. applet.js:77 applet.js:912
+msgid "Minimize"
+msgstr "Minimaliseren"
+
+#. applet.js:80 applet.js:141
+msgid "Maximize"
+msgstr "Maximaliseren"
+
+#. applet.js:83
+msgid "Move to left workspace"
+msgstr "Verplaats naar linker werkruimte"
+
+#. applet.js:86
+msgid "Move to right workspace"
+msgstr "Verplaats naar rechter werkruimte"
+
+#. applet.js:89 applet.js:127
+msgid "Visible on all workspaces"
+msgstr "Zichtbaar op alle werkruimten"
+
+#. applet.js:123
+msgid "Only on this workspace"
+msgstr "Alleen op deze werkruimte"
+
+#. applet.js:139
+msgid "Unmaximize"
+msgstr "Ontmaximaliseren"
+
+#. metadata.json->name
+msgid "Cinnamon Multi-Line Taskbar"
+msgstr "Cinnamon Multi-Line Taakbalk"
+
+#. metadata.json->description
+msgid "https://github.com/posto/cinnamon-multi-line-taskbar-applet"
+msgstr "https://github.com/posto/cinnamon-multi-line-taskbar-applet"

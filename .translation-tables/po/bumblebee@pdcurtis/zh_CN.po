@@ -1,0 +1,219 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2023-02-07 23:18+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. applet.js:152
+msgid "Bumblebee program not installed"
+msgstr "未安装 Bumblebee 程序"
+
+#. applet.js:152
+msgid ""
+"You appear to be missing some of the required programs for 'bumblebee' to "
+"switch graphics processors using NVIDIA Optimus."
+msgstr ""
+"你似乎缺少一些 “bumblebee” 使用 NVIDIA Optimus 切换图形处理器所需要的程序。"
+
+#. applet.js:152
+msgid "Please read the help file."
+msgstr "请阅读帮助文件。"
+
+#. applet.js:172
+msgid "Waiting for Bumblebee"
+msgstr "等待 Bumblebee"
+
+#. applet.js:232
+msgid "Open nVidia Settings Program"
+msgstr "打开 nVidia 设置程序"
+
+#. applet.js:238
+msgid "Open Power Statistics"
+msgstr "打开电源统计"
+
+#. applet.js:244
+msgid "Open System Monitor"
+msgstr "打开系统监视器"
+
+#. applet.js:253
+msgid "Housekeeping and System Sub Menu"
+msgstr "维护与系统子菜单"
+
+#. applet.js:256
+msgid "View the Changelog"
+msgstr "查看变更日志"
+
+#. applet.js:262
+msgid "Open the Help file"
+msgstr "打开帮助文件"
+
+#. applet.js:278
+msgid "Launch programs using the nVidia Graphics Processor"
+msgstr "使用 nVidia 图形处理器启动程序"
+
+#. applet.js:359
+msgid "NVidia based GPU is Off"
+msgstr "基于 NVidia 的 GPU 已关闭"
+
+#. applet.js:384
+msgid "NVidia based GPU is On and Core Temperature is"
+msgstr "基于 NVidia 的 GPU 已打开且核心温度是"
+
+#. applet.js:392
+msgid "Err"
+msgstr "错误"
+
+#. applet.js:393
+msgid ""
+"Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia "
+"drivers installed?"
+msgstr ""
+"Bumblebee 没有正确设置 - 是否安装了 bbswitch、bumblebee 和 nvidia驱动？"
+
+#. metadata.json->description
+msgid ""
+"Displays Status of Bumblebee and nVidia GPU Temperature with associated "
+"support functions including starting selected programs with optirun or "
+"primusrun"
+msgstr ""
+"显示 Bumblebee 的状态和 nVidia GPU 温度，以及相关的支持功能，包括使用 "
+"optirun 或 primusrun 启动特定的程序"
+
+#. metadata.json->name
+msgid "Bumblebee Status with NVidia Temperature Display"
+msgstr "Bumblebee 状态与 NVidia 温度显示"
+
+#. settings-schema.json->head->description
+msgid "General Settings for the nVidia Monitoring Applet"
+msgstr "nVidia 监视小程序的常规设置"
+
+#. settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "秒"
+
+#. settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "显示刷新间隔："
+
+#. settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"增大或减小这个值来更改刷新间隔 - 如果您有一台较慢的机器请使用较低的刷新频率"
+
+#. settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature as well as icon"
+msgstr "显示 GPU 温度和图标"
+
+#. settings-schema.json->showGpuTemp->tooltip
+msgid ""
+"Available in Horizontal and Vertical Panels. Display is in Degrees "
+"Centigrade."
+msgstr "可用于水平和垂直面板，以摄氏温度显示。"
+
+#. settings-schema.json->head2->description
+msgid "Programs settings for Optimus"
+msgstr "Optimus 的程序设置"
+
+#. settings-schema.json->description1->description
+msgid "Display Name of Program 1 to be run using Optimus technology"
+msgstr "使用 Optimus 技术运行的程序 1 的显示名称"
+
+#. settings-schema.json->description1->tooltip
+msgid ""
+"Put the name of the program here or null if you do not want it displayed"
+msgstr "在此输入程序名称，如果您不想显示名称则留空。"
+
+#. settings-schema.json->commandString1->description
+msgid "Command String for Program 1"
+msgstr "程序 1 的启动命令"
+
+#. settings-schema.json->commandString1->tooltip
+#. settings-schema.json->commandString2->tooltip
+#. settings-schema.json->commandString3->tooltip
+#. settings-schema.json->commandString4->tooltip
+#. settings-schema.json->commandString5->tooltip
+msgid ""
+"Put the command string to run the program here starting with optirun or "
+"primusrun"
+msgstr "在这里输入运行程序的命令，以 optirun 或 primusrun 开头"
+
+#. settings-schema.json->description2->description
+msgid "Display Name of Program 2 to be run using Optimus technology"
+msgstr "使用 Optimus 技术运行的程序 2 的显示名称"
+
+#. settings-schema.json->description2->tooltip
+#. settings-schema.json->description3->tooltip
+#. settings-schema.json->description4->tooltip
+#. settings-schema.json->description5->tooltip
+msgid ""
+"Put the name of the program here or none if you do not want it displayed"
+msgstr "在此输入程序名称，如果您不想显示名称则留空。"
+
+#. settings-schema.json->commandString2->description
+msgid "Command String for Program 2"
+msgstr "程序 2 的启动命令"
+
+#. settings-schema.json->description3->description
+msgid "Display Name of Program 3 to be run using Optimus technology"
+msgstr "使用 Optimus 技术运行的程序 3 的显示名称"
+
+#. settings-schema.json->commandString3->description
+msgid "Command String for Program 3"
+msgstr "程序 3 的启动命令"
+
+#. settings-schema.json->description4->description
+msgid "Display Name of Program 4 to be run using Optimus technology"
+msgstr "使用 Optimus 技术运行的程序 4 的显示名称"
+
+#. settings-schema.json->commandString4->description
+msgid "Command String for Program 4"
+msgstr "程序 4 的启动命令"
+
+#. settings-schema.json->description5->description
+msgid "Display Name of Program 5 to be run using Optimus technology"
+msgstr "使用 Optimus 技术运行的程序 5 的显示名称"
+
+#. settings-schema.json->commandString5->description
+msgid "Command String for Program 5"
+msgstr "程序 5 的启动命令"
+
+#~ msgid "ERROR"
+#~ msgstr "错误"
+
+#~ msgid "Bumblebee is not installed so applet willl not work"
+#~ msgstr "未安装Bumblebee，因此小程序不会工作"
+
+#~ msgid "GPU OFF"
+#~ msgstr "GPU关"
+
+#~ msgid "NVidia based GPU is"
+#~ msgstr "基于NVidia的GPU是"
+
+#~ msgid "GPU"
+#~ msgstr "GPU"
+
+#~ msgid "and Core Temperature is"
+#~ msgstr "和核心温度是"
+
+#~ msgid "Displays Status of Bumblebee and nVidia GPU Temperature"
+#~ msgstr "显示Bumblebee和nVidia GPU温度的状态"
+
+#~ msgid "Bumblebee and nVidia Display"
+#~ msgstr "Bumblebee和nVidia显示"

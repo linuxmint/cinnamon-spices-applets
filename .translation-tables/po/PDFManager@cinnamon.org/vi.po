@@ -1,0 +1,121 @@
+# PDFMANAGER
+# This file is put in the public domain.
+# mickaelalbertus, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PDFManager@cinnamon.org 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:51
+msgid "Manage your PDF"
+msgstr "Quản lý PDF của bạn"
+
+#. applet.js:70
+msgid "Merge PDF"
+msgstr "Gộp PDF"
+
+#. applet.js:75 pdf-manager.py:157
+msgid "Extract PDF"
+msgstr "Trích xuất PDF"
+
+#. applet.js:82
+msgid "Reduce size of PDF"
+msgstr "Giảm kích thước PDF"
+
+#. applet.js:89
+msgid "Rotate left PDF"
+msgstr "Xoay trái PDF"
+
+#. applet.js:94
+msgid "Rotate right PDF"
+msgstr "Xoay phải PDF"
+
+#. applet.js:99
+msgid "Flip vertically PDF"
+msgstr "Lật dọc PDF"
+
+#. applet.js:107
+msgid "Open Document Viewer"
+msgstr "Mở Trình xem Tài liệu"
+
+#. applet.js:114
+msgid "Open Evince"
+msgstr "Mở Evince"
+
+#. applet.js:121
+msgid "Open PDF Mod"
+msgstr "Mở PDF Mod"
+
+#. applet.js:128
+msgid "Open PDF Editor"
+msgstr "Mở Trình chỉnh sửa PDF"
+
+#. pdf-manager.py:33
+msgid "Installation of PDF Toolkit necessary"
+msgstr "Cần cài đặt PDF Toolkit"
+
+#. pdf-manager.py:35
+msgid ""
+"Do you want to install PDF toolkit? Your operations will be performed after "
+"the installation."
+msgstr "Bạn có muốn cài đặt PDF Toolkit không? Các thao tác của bạn sẽ được thực hiện sau khi cài đặt."
+
+#. pdf-manager.py:37
+msgid ""
+"Installation failed. Do you want to try again? Your operations will be "
+"performed after the installation."
+msgstr "Cài đặt thất bại. Bạn có muốn thử lại không? Các thao tác của bạn sẽ được thực hiện sau khi cài đặt."
+
+#. pdf-manager.py:47 pdf-manager.py:88 pdf-manager.py:140 pdf-manager.py:205
+#. pdf-manager.py:225 pdf-manager.py:246
+msgid "Select your PDF..."
+msgstr "Chọn PDF của bạn..."
+
+#. pdf-manager.py:55 pdf-manager.py:96 pdf-manager.py:147 pdf-manager.py:213
+#. pdf-manager.py:233 pdf-manager.py:254
+msgid "PDF Files"
+msgstr "Tệp PDF"
+
+#. pdf-manager.py:67
+msgid "Reducing PDF"
+msgstr "Đang giảm kích thước PDF"
+
+#. pdf-manager.py:69
+msgid "Your PDF are reducing... Don't manipulate selected files!"
+msgstr "PDF của bạn đang được giảm kích thước... Không thao tác trên các tệp đã chọn!"
+
+#. pdf-manager.py:106 pdf-manager.py:184
+msgid "Save as..."
+msgstr "Lưu thành..."
+
+#. pdf-manager.py:162
+msgid "Extract following pages (example: 1-10 15-17):"
+msgstr "Trích xuất các trang sau (ví dụ: 1-10 15-17):"
+
+#. pdf-manager.py:164
+msgid "Extract even pages"
+msgstr "Trích xuất các trang chẵn"
+
+#. pdf-manager.py:166
+msgid "Extract odd pages"
+msgstr "Trích xuất các trang lẻ"
+
+#. metadata.json->name
+msgid "PDFManager"
+msgstr "Quản lý PDF"
+
+#. metadata.json->description
+msgid "A handy applet for manipulating PDF"
+msgstr "Một applet tiện dụng để thao tác với PDF"

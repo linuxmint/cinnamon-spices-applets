@@ -1,0 +1,89 @@
+# CINNAMON PANEL TWEAKER
+# This file is put in the public domain.
+# anaximeno, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: panel-tweaks@anaximeno 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-09 21:27-0100\n"
+"PO-Revision-Date: 2025-05-19 22:15+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "Cinnamon Panel Tweaker"
+msgstr "Cinnamon Panel Tweaker"
+
+#. metadata.json->description
+msgid ""
+"Make some additional tweaks to each panel like color, shadow, border, etc"
+msgstr ""
+"可對各個面板進行額外調整，例如顏色、陰影、邊框等"
+
+#. 5.4->settings-schema.json->style->description
+msgid "Style"
+msgstr "樣式"
+
+#. 5.4->settings-schema.json->enable-panel-background-color-tweak->description
+msgid "Tweak Background Color"
+msgstr "調整背景顏色"
+
+#. 5.4->settings-schema.json->panel-background-color->description
+msgid "Background Color"
+msgstr "背景顏色"
+
+#. 5.4->settings-schema.json->enable-panel-shadow-tweak->description
+msgid "Tweak Panel Shadow"
+msgstr "調整面板陰影"
+
+#. 5.4->settings-schema.json->panel-shadow-x-axis-shift->units
+#. 5.4->settings-schema.json->panel-shadow-y-axis-shift->units
+#. 5.4->settings-schema.json->panel-shadow-bluriness->units
+msgid "px"
+msgstr "像素"
+
+#. 5.4->settings-schema.json->panel-shadow-x-axis-shift->description
+msgid "Shadow X-Axis Shift"
+msgstr "陰影 X 軸位移"
+
+#. 5.4->settings-schema.json->panel-shadow-y-axis-shift->description
+msgid "Shadow Y-Axis Shift"
+msgstr "陰影 Y 軸位移"
+
+#. 5.4->settings-schema.json->panel-shadow-bluriness->description
+msgid "Shadow Bluriness"
+msgstr "陰影模糊程度"
+
+#. 5.4->settings-schema.json->panel-shadow-color->description
+msgid "Panel Shadow Color"
+msgstr "面板陰影顏色"
+
+#. 5.4->settings-schema.json->enable-panel-border-tweak->description
+msgid "Tweak Panel Border"
+msgstr "調整面板邊框"
+
+#. 5.4->settings-schema.json->panel-border-color->description
+msgid "Border Color"
+msgstr "邊框顏色"
+
+#. 5.4->settings-schema.json->panel-border-top-thickness->description
+msgid "Top Border Thickness"
+msgstr "上邊框粗細"
+
+#. 5.4->settings-schema.json->panel-border-right-thickness->description
+msgid "Right Border Thickness"
+msgstr "右邊框粗細"
+
+#. 5.4->settings-schema.json->panel-border-bottom-thickness->description
+msgid "Bottom Border Thickness"
+msgstr "下邊框粗細"
+
+#. 5.4->settings-schema.json->panel-border-left-thickness->description
+msgid "Left Border Thickness"
+msgstr "左邊框粗細"

@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nightscout@ranneft 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-04-21 13:51+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->description
+msgid "Fetches API from your Nightscout site and showing BG"
+msgstr "Haalt de API op van je Nightscout-site en toont BG"
+
+#. metadata.json->name
+msgid "Nightscout"
+msgstr "Nightscout"
+
+#. settings-schema.json->head->description
+msgid "General Settings for the Nighscout Applet"
+msgstr "Algemene instellingen voor de Nightscout-applet"
+
+#. settings-schema.json->refreshInterval->units
+#. settings-schema.json->showMissingInterval->units
+msgid "minutes"
+msgstr "minuten"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh Interval for your Nightscout applet:"
+msgstr "Vernieuwingsinterval voor je Nightscout-applet:"
+
+#. settings-schema.json->refreshInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine."
+msgstr ""
+"Verhoog of verlaag deze spinnerwaarde om de vernieuwingsinterval te wijzigen "
+"- gebruik een langzame vernieuwing als je een langzame machine hebt."
+
+#. settings-schema.json->head1->description
+msgid "Nightscout host"
+msgstr "Nightscout-host"
+
+#. settings-schema.json->host->description
+msgid "Nighscout host (including http(s))"
+msgstr "Nightscout-host (inclusief http(s))"
+
+#. settings-schema.json->host->tooltip
+msgid "A host where your CGM information gonna be queried"
+msgstr "Een host waar je CGM-informatie wordt opgevraagd"
+
+#. settings-schema.json->head2->description
+msgid "Various settings"
+msgstr "Diverse instellingen"
+
+#. settings-schema.json->showMissing->description
+msgid "Show missing readings"
+msgstr "Ontbrekende metingen tonen"
+
+#. settings-schema.json->showMissing->tooltip
+msgid "Add information about missing readings in the text"
+msgstr "Informatie toevoegen over ontbrekende metingen in de tekst"
+
+#. settings-schema.json->showMissingInterval->description
+msgid "When start to show missing readings alert"
+msgstr ""
+"Wanneer beginnen met het tonen van de waarschuwing voor ontbrekende metingen"
+
+#. settings-schema.json->showMissingInterval->tooltip
+msgid ""
+"Time which is taken to decide when to show alert of missing readings. Will "
+"apply only if above checkbox is enabled"
+msgstr ""
+"Tijd die nodig is om te beslissen wanneer de waarschuwing voor ontbrekende "
+"metingen moet worden weergegeven. Wordt alleen toegepast als het "
+"bovenstaande selectievakje is ingeschakeld."
+
+#. settings-schema.json->showiob->description
+msgid "Show IoB"
+msgstr "IoB tonen"
+
+#. settings-schema.json->showiob->tooltip
+msgid "Enable/disable IoB (insulin on board) in the text"
+msgstr "IoB (insuline on board) in de tekst in- of uitschakelen"
+
+#. settings-schema.json->usemmol->description
+msgid "Use mmol/l"
+msgstr "Mmol/l gebruiken"
+
+#. settings-schema.json->usemmol->tooltip
+msgid "Use mmol/l instead of mg/dl"
+msgstr "Mmol/l gebruiken in plaats van mg/dl"

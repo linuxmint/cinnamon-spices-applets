@@ -1,0 +1,543 @@
+# Dutch translations for powerman@dr.drummie package.
+# Copyright (C) 2025 THE powerman@dr.drummie'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the powerman@dr.drummie package.
+# Automatically generated, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: powerman@dr.drummie 1.9.10\n"
+"Report-Msgid-Bugs-To: https://github.com/drdrummie/powerman-dr.drummie\n"
+"POT-Creation-Date: 2026-04-25 10:21+0200\n"
+"PO-Revision-Date: 2025-09-06 22:34+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/applet.js:52
+#, javascript-format
+msgctxt "time of battery remaining"
+msgid "%d:%02d"
+msgstr "%d:%02d"
+
+#: src/applet.js:74 src/powerman-framework.js:29
+msgid "Power Saver"
+msgstr "Energiebesparing"
+
+#: src/applet.js:75 src/powerman-framework.js:30
+msgid "Balanced"
+msgstr "Gebalanceerd"
+
+#: src/applet.js:76 src/powerman-framework.js:31
+msgid "Performance"
+msgstr "Prestaties"
+
+#: src/applet.js:83
+msgid "Battery full"
+msgstr "Batterij vol"
+
+#: src/applet.js:85
+msgid "Battery almost full"
+msgstr "Batterij bijna vol"
+
+#: src/applet.js:87
+msgid "Battery good"
+msgstr "Batterij goed"
+
+#: src/applet.js:89
+msgid "Low battery"
+msgstr "Lage batterij"
+
+#: src/applet.js:91
+msgid "Critically low battery"
+msgstr "Kritisch lage batterij"
+
+#: src/applet.js:93 src/applet.js:160
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: src/applet.js:100
+msgid "AC adapter"
+msgstr "AC-adapter"
+
+#: src/applet.js:102
+msgid "Laptop battery"
+msgstr "Laptopbatterij"
+
+#: src/applet.js:104
+msgid "UPS"
+msgstr "UPS"
+
+#: src/applet.js:106
+msgid "Monitor"
+msgstr "Monitor"
+
+#: src/applet.js:108
+msgid "Mouse"
+msgstr "Muis"
+
+#: src/applet.js:110
+msgid "Keyboard"
+msgstr "Toetsenbord"
+
+#: src/applet.js:112
+msgid "PDA"
+msgstr "PDA"
+
+#: src/applet.js:114
+msgid "Cell phone"
+msgstr "Mobiele telefoon"
+
+#: src/applet.js:116
+msgid "Media player"
+msgstr "Mediaspeler"
+
+#: src/applet.js:118
+msgid "Tablet"
+msgstr "Tablet"
+
+#: src/applet.js:120
+msgid "Computer"
+msgstr "Computer"
+
+#: src/applet.js:122
+msgid "Gaming input"
+msgstr "Gaming invoer"
+
+#: src/applet.js:124
+msgid "Pen"
+msgstr "Pen"
+
+#: src/applet.js:126
+msgid "Touchpad"
+msgstr "Touchpad"
+
+#: src/applet.js:128
+msgid "Modem"
+msgstr "Modem"
+
+#: src/applet.js:130
+msgid "Network"
+msgstr "Netwerk"
+
+#: src/applet.js:132
+msgid "Headset"
+msgstr "Hoofdtelefoon"
+
+#: src/applet.js:134
+msgid "Speakers"
+msgstr "Luidsprekers"
+
+#: src/applet.js:136
+msgid "Headphones"
+msgstr "Koptelefoon"
+
+#: src/applet.js:138
+msgid "Video"
+msgstr "Video"
+
+#: src/applet.js:140
+msgid "Audio device"
+msgstr "Audiapparaat"
+
+#: src/applet.js:142
+msgid "Remote control"
+msgstr "Afstandsbediening"
+
+#: src/applet.js:144
+msgid "Printer"
+msgstr "Printer"
+
+#: src/applet.js:146
+msgid "Scanner"
+msgstr "Scanner"
+
+#: src/applet.js:148
+msgid "Camera"
+msgstr "Camera"
+
+#: src/applet.js:150
+msgid "Wearable"
+msgstr "Draagbaar"
+
+#: src/applet.js:152
+msgid "Toy"
+msgstr "Speelgoed"
+
+#: src/applet.js:154
+msgid "Bluetooth device"
+msgstr "Bluetooth-apparaat"
+
+#: src/applet.js:512 src/applet.js:1242
+msgid "Brightness"
+msgstr "Helderheid"
+
+#: src/applet.js:513 src/applet.js:1247
+msgid "Keyboard backlight"
+msgstr "Toetsenbordverlichting"
+
+#: src/applet.js:526
+msgid "Brightness Automation"
+msgstr "Helderheidsautomatisering"
+
+#: src/applet.js:538
+msgid "Power Profile Automation"
+msgstr "Energieprofiel automatisering"
+
+#: src/applet.js:569
+msgid "Remove power applet"
+msgstr "Verwijder stroom-applet"
+
+#: src/applet.js:584
+msgid "Automation Settings"
+msgstr "Automatiseringsinstellingen"
+
+#: src/applet.js:593
+msgid "Power Settings"
+msgstr "Energie-instellingen"
+
+#: src/applet.js:878
+msgid "Charging"
+msgstr "Opladen"
+
+#: src/applet.js:882
+#, javascript-format
+msgid "Charging - %d hour until fully charged"
+msgid_plural "Charging - %d hours until fully charged"
+msgstr[0] "Opladen - %d uur tot volledig opgeladen"
+msgstr[1] "Opladen - %d uur tot volledig opgeladen"
+
+#: src/applet.js:887
+#, javascript-format
+msgid "Charging - %d %s %d %s until fully charged"
+msgstr "Opladen - %d %s %d %s tot volledig opgeladen"
+
+#: src/applet.js:890 src/applet.js:918
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "uur"
+msgstr[1] "uur"
+
+#: src/applet.js:892 src/applet.js:920
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minuut"
+msgstr[1] "minuten"
+
+#: src/applet.js:897
+#, javascript-format
+msgid "Charging - %d minute until fully charged"
+msgid_plural "Charging - %d minutes until fully charged"
+msgstr[0] "Opladen - %d minuut tot volledig opgeladen"
+msgstr[1] "Opladen - %d minuten tot volledig opgeladen"
+
+#: src/applet.js:903
+msgid "Fully charged"
+msgstr "Volledig opgeladen"
+
+#: src/applet.js:906
+msgid "Using battery power"
+msgstr "Gebruikt batterijstroom"
+
+#: src/applet.js:910
+#, javascript-format
+msgid "Using battery power - %d hour remaining"
+msgid_plural "Using battery power - %d hours remaining"
+msgstr[0] "Gebruikt batterijstroom - %d uur resterend"
+msgstr[1] "Gebruikt batterijstroom - %d uur resterend"
+
+#: src/applet.js:915
+#, javascript-format
+msgid "Using battery power - %d %s %d %s remaining"
+msgstr "Gebruikt batterijstroom - %d %s %d %s resterend"
+
+#: src/applet.js:925
+#, javascript-format
+msgid "Using battery power - %d minute remaining"
+msgid_plural "Using battery power - %d minutes remaining"
+msgstr[0] "Gebruikt batterijstroom - %d minuut resterend"
+msgstr[1] "Gebruikt batterijstroom - %d minuten resterend"
+
+#: src/applet.js:931
+msgid "Fully discharged"
+msgstr "Volledig ontladen"
+
+#: src/applet.js:933
+msgid "Not charging"
+msgstr "Niet opladen"
+
+#: src/applet.js:954 src/applet.js:957 src/applet.js:1205 src/applet.js:1208
+#, javascript-format
+msgctxt "percent of battery remaining"
+msgid "%d%%"
+msgstr "%d%%"
+
+#: src/applet.js:1283
+#, javascript-format
+msgid "Are you sure you want to remove '%s'?"
+msgstr "Weet u zeker dat u '%s' wilt verwijderen?"
+
+#: src/powerman-framework.js:1017
+msgid "Critical Battery"
+msgstr "Kritische batterij"
+
+#: src/powerman-framework.js:1018
+#, javascript-format
+msgid "Battery %s critically low"
+msgstr "Batterij %s kritisch laag"
+
+#: src/powerman-framework.js:1023
+msgid "Low Battery"
+msgstr "Lage batterij"
+
+#: src/powerman-framework.js:1024
+#, javascript-format
+msgid "Battery %s low"
+msgstr "Batterij %s laag"
+
+#: src/powerman-framework.js:1116 src/powerman-framework.js:1127
+#, javascript-format
+msgid "brightness %d%%"
+msgstr "helderheid %d%%"
+
+#: src/powerman-framework.js:1312
+#, javascript-format
+msgid "power profile %s"
+msgstr "energieprofiel %s"
+
+#: src/powerman-framework.js:1429
+#, javascript-format
+msgid "power-saver mode (battery low: %d%%)"
+msgstr "energiebesparingsmodus (batterij laag: %d%%)"
+
+#: src/powerman-framework.js:1562
+msgid "AC power: "
+msgstr "AC-stroom: "
+
+#: src/powerman-framework.js:1562
+msgid "Battery power: "
+msgstr "Batterijstroom: "
+
+#: src/powerman-framework.js:1587
+msgid "Power Automation"
+msgstr "Energie-automatisering"
+
+msgid ""
+"Enhanced power applet with automatic brightness and power profiles for AC/"
+"Battery"
+msgstr "Verbeterde energie-applet met automatische helderheid en energieprofielen voor AC/Batterij"
+
+msgid "PowerMan - Power Automation"
+msgstr "PowerMan - Energieautomatisering"
+
+# Settings UI strings from settings-schema.json
+msgid "10 minutes"
+msgstr "10 minuten"
+
+msgid "10 seconds"
+msgstr "10 seconden"
+
+msgid "15 seconds"
+msgstr "15 seconden"
+
+msgid "1 minute"
+msgstr "1 minuut"
+
+msgid "2 minutes"
+msgstr "2 minuten"
+
+msgid "30 seconds"
+msgstr "30 seconden"
+
+msgid "5 minutes"
+msgstr "5 minuten"
+
+msgid "5 seconds"
+msgstr "5 seconden"
+
+msgid "60 seconds"
+msgstr "60 seconden"
+
+msgid "90 seconds"
+msgstr "90 seconden"
+
+msgid "AC brightness level (%)"
+msgstr "AC helderheidsniveau (%)"
+
+msgid "AC power profile"
+msgstr "AC energieprofiel"
+
+msgid "Always show all batteries"
+msgstr "Altijd alle batterijen tonen"
+
+msgid "Always show multiple batteries in panel"
+msgstr "Altijd meerdere batterijen in paneel tonen"
+
+msgid "Auto dim screen when idle on battery power"
+msgstr "Automatisch scherm dimmen bij inactiviteit op batterijstroom"
+
+msgid "Automatically adjust brightness for AC/Battery"
+msgstr "Automatisch helderheid aanpassen voor AC/Batterij"
+
+msgid "Automatically dim the screen when idle while on AC power"
+msgstr "Automatisch scherm dimmen bij inactiviteit op AC-stroom"
+
+msgid "Automatically switch power profiles for AC/Battery"
+msgstr "Automatisch energieprofielen schakelen voor AC/Batterij"
+
+msgid "Automatically switch to power-saver mode when battery is low"
+msgstr ""
+"Automatisch schakelen naar energiebesparingsmodus wanneer batterij laag is"
+
+msgid ""
+"Automatically update AC/Battery brightness settings when user manually "
+"changes brightness"
+msgstr ""
+
+msgid "Auto power-saver on low battery"
+msgstr "Automatische energiebesparing bij lage batterij"
+
+msgid "Battery brightness level (%)"
+msgstr "Batterij helderheidsniveau (%)"
+
+msgid "Battery percentage below which to automatically enable power-saver mode"
+msgstr ""
+"Batterijpercentage waaronder automatisch energiebesparingsmodus inschakelen"
+
+msgid "Battery power profile"
+msgstr "Batterij energieprofiel"
+
+msgid "Battery Power Saving"
+msgstr "Batterij energiebesparing"
+
+msgid "Brightness Control"
+msgstr "Helderheidscontrole"
+
+msgid "Brightness Control Status"
+msgstr "Helderheidscontrole status"
+
+msgid "Brightness level to use when on AC power"
+msgstr "Helderheidsniveau om te gebruiken op AC-stroom"
+
+msgid "Brightness level to use when on battery power"
+msgstr "Helderheidsniveau om te gebruiken op batterijstroom"
+
+msgid "Brightness level when dimmed (%)"
+msgstr "Helderheidsniveau wanneer gedimd (%)"
+
+msgid "Debug and Logging"
+msgstr "Debug en logging"
+
+msgid "Dim screen when idle on AC power"
+msgstr "Scherm dimmen bij inactiviteit op AC-stroom"
+
+msgid "Dim screen when idle on battery"
+msgstr "Scherm dimmen bij inactiviteit op batterij"
+
+msgid "Display"
+msgstr "Weergave"
+
+msgid "Display and Advanced"
+msgstr "Weergave en geavanceerd"
+
+msgid "Display notifications when power automation actions are performed"
+msgstr ""
+"Meldingen weergeven wanneer energie-automatiseringsacties worden uitgevoerd"
+
+msgid ""
+"Enable automatic switching between different power profiles for AC and "
+"Battery"
+msgstr ""
+"Automatisch schakelen tussen verschillende energieprofielen voor AC en "
+"batterij inschakelen"
+
+msgid "Enable debug logging"
+msgstr "Debug logging inschakelen"
+
+msgid "Enable detailed logging for troubleshooting power automation"
+msgstr ""
+"Gedetailleerde logging voor probleemoplossing energie-automatisering "
+"inschakelen"
+
+msgid "Enable separate brightness levels for AC power and battery power"
+msgstr ""
+"Afzonderlijke helderheidsniveaus voor AC-stroom en batterijstroom inschakelen"
+
+msgid "Hide applet icon from panel"
+msgstr "Applet-icoon verbergen van paneel"
+
+msgid "Hide label"
+msgstr "Label verbergen"
+
+msgid "List of original power applets that were disabled"
+msgstr ""
+
+msgid "Low battery threshold (%)"
+msgstr "Lage batterij drempel (%)"
+
+msgid "Notifications and System Integration"
+msgstr "Meldingen en systeemintegratie"
+
+msgid "Panel Display Options"
+msgstr "Paneel weergave opties"
+
+msgid "Power Control"
+msgstr "Energiecontrole"
+
+msgid "Power Control Status"
+msgstr "Energiecontrole status"
+
+msgid ""
+"Power profile automation is not available. No power profiles daemon or "
+"battery devices detected."
+msgstr ""
+"Energieprofiel automatisering is niet beschikbaar. Geen energieprofielen "
+"daemon of batterijapparaten gedetecteerd."
+
+msgid "Power profile to use when on AC power"
+msgstr "Energieprofiel om te gebruiken op AC-stroom"
+
+msgid "Power profile to use when on battery power"
+msgstr "Energieprofiel om te gebruiken op batterijstroom"
+
+msgid "Remember user brightness changes"
+msgstr ""
+
+msgid ""
+"Replaced by remove button in applet menu (kept for schema compatibility)"
+msgstr ""
+
+msgid ""
+"Screen brightness control is not available on this system. Brightness "
+"automation is disabled."
+msgstr ""
+"Scherm helderheidscontrole is niet beschikbaar op dit systeem. "
+"Helderheidsautomatisering is uitgeschakeld."
+
+msgid "Screen Dimming Settings"
+msgstr "Scherm dim instellingen"
+
+msgid "Screen dim timeout"
+msgstr "Scherm dim timeout"
+
+msgid "Show automation notifications"
+msgstr "Automatiseringsmeldingen tonen"
+
+msgid "Show percentage"
+msgstr "Percentage tonen"
+
+msgid "Show percentage and time remaining"
+msgstr "Percentage en resterende tijd tonen"
+
+msgid "Show time remaining"
+msgstr "Resterende tijd tonen"
+
+msgid "The brightness level to use when dimming the screen"
+msgstr "Helderheidsniveau om te gebruiken bij dimmen van het scherm"
+
+msgid "Time before screen dims when idle"
+msgstr "Tijd voordat scherm dimt bij inactiviteit"
+

@@ -1,0 +1,136 @@
+# DESCRIPTION IN FILE LANGUAGE / DESCRIPTION IN ENGLISH
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: <filipekaue@protonmail.com> \n"
+"POT-Creation-Date: 2020-07-25 14:50-0300\n"
+"PO-Revision-Date: 2022-03-27 18:18+0300\n"
+"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
+"Language-Team: NAME <name@domain.com>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:43 icons/backup.js:40
+msgid "Show Desklets"
+msgstr "Uygulamacıkları Göster"
+
+#. metadata.json->name
+msgid "Clean Show Desktop"
+msgstr "Masaüstünü Temizle Göster"
+
+#. metadata.json->description
+msgid ""
+"An Applet to show the Desktop just like in Windows 10, but completely "
+"customizable"
+msgstr ""
+"Windows 10'daki gibi Masaüstünü gösterecek, ancak tamamen özelleştirilebilir "
+"bir Uygulama"
+
+#. settings-schema.json->head->description
+msgid "Settings"
+msgstr "Ayarlar"
+
+#. settings-schema.json->peek-desktop->description
+msgid "Peek at the desktop on hover"
+msgstr "Üstüne geldiğinde masaüstüne gözat"
+
+#. settings-schema.json->peek-desktop->tooltip
+msgid "Peek at the desktop when hovering the applet"
+msgstr "Uygulamacığın üstüne geldiğinizde masaüstüne gözatmanızı sağlar"
+
+#. settings-schema.json->peek-blur->description
+msgid "Blur effect"
+msgstr "Bulanıklık efekti"
+
+#. settings-schema.json->peek-blur->tooltip
+msgid "Blur windows when peeking at the desktop"
+msgstr "Masaüstüne gözatarken pencereleri bulanıklaştırma"
+
+#. settings-schema.json->peek-delay->units
+msgid "milliseconds"
+msgstr "milisaniye"
+
+#. settings-schema.json->peek-delay->description
+msgid "Hover delay"
+msgstr "Üstüne gelme gecikmesi"
+
+#. settings-schema.json->peek-delay->tooltip
+msgid "Delay before Peek shows desktop"
+msgstr "Masaüstü gözatma gösterimi öncesinde gecikme"
+
+#. settings-schema.json->peek-opacity->description
+msgid "Window opacity"
+msgstr "Pencere matlığı"
+
+#. settings-schema.json->peek-opacity->tooltip
+msgid "Change the opacity of windows when peeking at the desktop"
+msgstr "Masaüstüne gözatarken pencerelerin şeffaflık seviyesini değiştirin"
+
+#. settings-schema.json->width->units
+#. settings-schema.json->border-width->units
+msgid "pixels"
+msgstr "piksel"
+
+#. settings-schema.json->width->description
+msgid "Applet size"
+msgstr "Uygulama boyutu"
+
+#. settings-schema.json->width->tooltip
+msgid "Adjust this to increase or decrease the width of this applet"
+msgstr "Bu uygulamanın genişliğini artırmak veya azaltmak için bunu ayarlayın"
+
+#. settings-schema.json->background->description
+msgid "Fill color"
+msgstr "Dolgu rengi"
+
+#. settings-schema.json->background->tooltip
+msgid "Select a fill color"
+msgstr "Dolgu rengini seç"
+
+#. settings-schema.json->border->description
+msgid "Border color"
+msgstr "Kenarlık rengi"
+
+#. settings-schema.json->border->tooltip
+msgid "Select a border color"
+msgstr "Kenarlık rengini seç"
+
+#. settings-schema.json->on-hover-background->description
+msgid "Fill color on mouse hover"
+msgstr "Fareyle üzerine gelindiğinde dolgu rengi"
+
+#. settings-schema.json->on-hover-background->tooltip
+msgid "Change the fill color when mouse hover"
+msgstr "Fare üzerine gelindiğinde dolgu rengini değiştirin"
+
+#. settings-schema.json->on-hover-border->description
+msgid "Border color on mouse hover"
+msgstr "Fareyle üzerine gelindiğinde kenarlık rengi"
+
+#. settings-schema.json->on-hover-border->tooltip
+msgid "Change the Border color when mouse hover"
+msgstr "Fare üzerine gelindiğinde Kenarlık rengini değiştirin"
+
+#. settings-schema.json->border-width->description
+msgid "Border width"
+msgstr "Kenarlığın genişliği"
+
+#. settings-schema.json->border-width->tooltip
+msgid "Select the border width"
+msgstr "Kenarlık genişliğini seçin"
+
+#. settings-schema.json->custom-color->description
+msgid "Customize the applet colors"
+msgstr "Uygulama renklerini özelleştirin"
+
+#. settings-schema.json->custom-color->tooltip
+msgid ""
+"When this option is disabled, the applet will try to find the accent color "
+"color of the theme"
+msgstr ""
+"Bu seçenek devre dışı bırakıldığında, uygulama temanın vurgu rengi rengini "
+"bulmaya çalışacaktır"

@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-06 12:05+0200\n"
+"PO-Revision-Date: 2023-04-27 12:56+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:103 3.2/applet.js:92
+msgid "Date and Time Settings"
+msgstr "Paramètres date et heure"
+
+#. Track changes to clock settings
+#: 3.2/applet.js:105
+msgid "%A %B %-e, %Y"
+msgstr "%A %-e %B %Y"
+
+#. 3.2->settings-schema.json->use-custom-format->description
+msgid "Use a custom date format"
+msgstr "Utiliser un format de date personnalisé"
+
+#. 3.2->settings-schema.json->use-custom-format->tooltip
+msgid "Check this to define a custom format for the date in the calendar applet."
+msgstr "Cochez cette case pour définir un format personnalisé pour la date dans l'applet de calendrier."
+
+#. 3.2->settings-schema.json->format-button->description
+msgid "Show information on date format syntax"
+msgstr "Afficher des informations sur la syntaxe du format de date"
+
+#. 3.2->settings-schema.json->format-button->tooltip
+msgid "Click this button to know more about the syntax for date formats."
+msgstr "Cliquez sur ce bouton pour en savoir plus sur la syntaxe des formats de date."
+
+#. 3.2->settings-schema.json->show-week-numbers->description
+msgid "Show week numbers in calendar"
+msgstr "Afficher les numéros de semaine dans le calendrier"
+
+#. 3.2->settings-schema.json->show-week-numbers->tooltip
+msgid "Check this to show week numbers in the calendar."
+msgstr "Cochez cette case pour afficher les numéros de semaine dans le calendrier."
+
+#. 3.2->settings-schema.json->custom-format->description
+msgid "Date format"
+msgstr "Format de date"
+
+#. 3.2->settings-schema.json->custom-format->tooltip
+msgid "Set your custom format here."
+msgstr "Définissez votre format personnalisé ici."
+
+#. 3.2->settings-schema.json->section1->description
+msgid "Display"
+msgstr "Affichage"
+
+#. binaryclock@entelechy->metadata.json->name
+msgid "Cinnamon Binary Clock"
+msgstr "Horloge binaire (Cinnamon Binary Clock)"
+
+#. binaryclock@entelechy->metadata.json->description
+msgid "The Cinnamon calendar applet, with the time displayed in binary"
+msgstr "L'applet de calendrier Cinnamon, avec l'heure affichée en binaire"

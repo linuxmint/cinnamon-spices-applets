@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-12-08 00:21+0000\n"
+"PO-Revision-Date: 2024-06-27 13:11+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. metadata.json->name
+msgid "Mini-Calc Applet"
+msgstr "Mini-laskin sovelma"
+
+#. metadata.json->description
+msgid ""
+"Very simple and minimalistic but yet powerful calculator that evaluates "
+"JavaScript expressions."
+msgstr ""
+"Minimalistinen, mutta silti tehokas laskin, joka arvioi JavaScript-"
+"lausekkeita."
+
+#. settings-schema.json->panel-options->title
+msgid "Settings"
+msgstr "Asetukset"
+
+#. settings-schema.json->keyboard-section->title
+msgid "Keyboard"
+msgstr "Näppäimistö"
+
+#. settings-schema.json->input-section->title
+msgid "Number Format"
+msgstr "Numeroiden formaatti"
+
+#. settings-schema.json->history-section->title
+msgid "Expression and Result History"
+msgstr "Ilmaisu- ja tuloshistoria"
+
+#. settings-schema.json->keyToggle->description
+msgid "Show / hide mini calculator"
+msgstr "Näytä tai piilota laskin"
+
+#. settings-schema.json->convertLocaleNumberSeparators->description
+msgid "Convert numbers in current locale's format to JS numbers"
+msgstr "Muunna luvut nykyisessä kielimuodossa JS-luvuiksi"
+
+#. settings-schema.json->convertLocaleNumberSeparatorsHelp->description
+msgid ""
+"e.g. for the German locale convert `1,2 + 3,4` to `1.2 + 3.4`. Makes pasting "
+"number easier."
+msgstr ""
+"esim. saksa kielialueelle muunna `1,2 + 3,4` arvoksi `1.2 + 3.4`. Helpottaa "
+"numeroiden liittämistä."
+
+#. settings-schema.json->recentHistoryMaxLength->description
+msgid "Max number of recent expressions"
+msgstr "Edellisten lauseiden maksimi"
+
+#. settings-schema.json->historyMaxDisplayLength->description
+msgid "Max length of expression history"
+msgstr "Historian maksimi"

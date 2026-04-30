@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-26 22:50+0200\n"
+"PO-Revision-Date: 2024-07-22 00:48+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:35
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
+#: applet.js:143
+msgid "%A %B %e, %Y"
+msgstr "%A %B %e, %Y"
+
+#: applet.js:333
+msgid "Edit World Clocks"
+msgstr "Editar rellotges mundials"
+
+#: applet.js:335
+msgid "Date and Time Settings"
+msgstr "Configuració de data i hora"
+
+#: world_clock_calendar_settings.py:78
+msgid "Display Name"
+msgstr "Nom de mostra"
+
+#: world_clock_calendar_settings.py:90
+msgid "Timezone"
+msgstr "Franja horària"
+
+#: world_clock_calendar_settings.py:128
+msgid "Time format for World Clocks"
+msgstr "Format de temps pels rellotges mundials"
+
+#: world_clock_calendar_settings.py:137
+msgid "Browse valid timezone values by country (online)"
+msgstr "Examineu valors de franges horàries vàlids per país (online)"
+
+#: world_clock_calendar_settings.py:216
+msgid "Coordinated Universal Time"
+msgstr "Temps universal coordinat"
+
+#. metadata.json->name
+msgid "World Clock Calendar"
+msgstr "Calendari amb rellotge mundial"
+
+#. metadata.json->description
+msgid ""
+"Fork of the Cinnamon calendar applet with support for displaying multiple "
+"timezones"
+msgstr ""
+"Variant de l'aplicació de calendari de Cinnamon amb suport per mostrar "
+"múltiples franges horàries"
+
+#. settings-schema.json->show-week-numbers->description
+msgid "Show week numbers in calendar"
+msgstr "Mostrar el número de setmana al calendari"
+
+#. settings-schema.json->show-week-numbers->tooltip
+msgid "Check this to show week numbers in the calendar."
+msgstr "Marqueu això per mostrar el número de la setmana al calendari."
+
+#. settings-schema.json->use-custom-format->description
+msgid "Use a custom date format"
+msgstr "Utilitzar un format de data personalitzat"
+
+#. settings-schema.json->use-custom-format->tooltip
+msgid ""
+"Check this to define a custom format for the date in the calendar applet."
+msgstr "Marqueu això per definir un format de data personalitzat."
+
+#. settings-schema.json->custom-format->description
+msgid "Date format:"
+msgstr "Format de data:"
+
+#. settings-schema.json->custom-format->tooltip
+msgid "Set your custom format here."
+msgstr "Establiu el vostre format personalitzat aquí."
+
+#. settings-schema.json->format-button->description
+msgid "Show information on date format syntax"
+msgstr "Mostrar informació de la sintaxi del format de dates"
+
+#. settings-schema.json->format-button->tooltip
+msgid "Click this button to know more about the syntax for date formats."
+msgstr ""
+"Cliqueu aquest botó per saber més sobre la sintaxi dels formats de dates."
+
+#. settings-schema.json->keybindings->description
+msgid "Keybindings"
+msgstr "Dreceres del teclat"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "Establiu la drecera del teclat per obrir el menú"
+
+#. settings-schema.json->header->description
+msgid "World-Clock Settings"
+msgstr "Configuració del rellotge mundial"
+
+#. settings-schema.json->worldclock-setup-button->description
+msgid "Configure World-clocks"
+msgstr "Configureu els rellotges mundials"
+
+#. settings-schema.json->worldclock-setup-button->tooltip
+msgid "Add, remove and configure additional clocks and format."
+msgstr "Afegiu, elimineu i configureu rellotges i formats addicionals."

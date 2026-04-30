@@ -1,0 +1,367 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Combined Monitor Applet 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-15 21:36+0100\n"
+"PO-Revision-Date: 2025-12-15 22:07+0100\n"
+"Last-Translator: Automated Translator <example@example.com>\n"
+"Language-Team: Japanese <ja@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# applet.js strings
+msgid "Slot 1 (Standard)"
+msgstr "スロット 1 (標準)"
+
+msgid "Slot 2 (Empty)"
+msgstr "スロット 2 (空)"
+
+msgid "Slot 3 (Empty)"
+msgstr "スロット 3 (空)"
+
+msgid "Separator"
+msgstr "セパレーター"
+
+msgid "No Separator"
+msgstr "セパレーターなし"
+
+msgid "Symbols"
+msgstr "シンボル"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "Icon-White"
+msgstr "アイコン - 白"
+
+msgid "Icon-Dark"
+msgstr "アイコン - 濃い色"
+
+msgid "No Symbol (Text Label)"
+msgstr "シンボルなし (テキストラベル)"
+
+msgid "TEMP"
+msgstr "温度"
+
+msgid "RAM"
+msgstr "RAM"
+
+msgid "SWAP"
+msgstr "SWAP"
+
+msgid "Profile Management"
+msgstr "プロファイル管理"
+
+msgid "Activate (Load)"
+msgstr "有効化 (読み込み)"
+
+msgid "Save Current Settings"
+msgstr "現在の設定を保存"
+
+msgid "System Monitor"
+msgstr "システムモニター"
+
+msgid "Restart Cinnamon"
+msgstr "Cinnamon を再起動"
+
+msgid "Profile Saved: %s"
+msgstr "プロファイルが保存されました: %s"
+
+msgid "Active: %s"
+msgstr "有効: %s"
+
+msgid "N/A"
+msgstr "N/A"
+
+# settings-schema.json strings (Descriptions, Tooltips, Options)
+
+# Page Titles
+msgid "CPU Temperature"
+msgstr "CPU 温度"
+
+msgid "Profiles"
+msgstr "プロファイル"
+
+msgid "General"
+msgstr "一般"
+
+# Section Titles
+msgid "Order of Metrics"
+msgstr "メトリクスの順序"
+
+msgid "Display"
+msgstr "表示"
+
+msgid "Thresholds"
+msgstr "しきい値"
+
+msgid "Colors"
+msgstr "色"
+
+msgid "Thresholds (in °C)"
+msgstr "しきい値 (単位 °C)"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Profiles (Slots 1 to 3)"
+msgstr "プロファイル (スロット 1 から 3)"
+
+msgid "Global"
+msgstr "グローバル"
+
+# CPU
+msgid "Show CPU"
+msgstr "CPU を表示"
+
+msgid "Text for CPU"
+msgstr "CPU のテキスト"
+
+msgid "Custom symbol/icon for CPU. Leave empty for text label."
+msgstr "CPU のカスタムシンボル/アイコン。テキストラベルの場合は空のままにします。"
+
+msgid "Show percentage sign (%) for CPU"
+msgstr "CPU のパーセンテージ記号 (%) を表示"
+
+msgid "If disabled, only the value (e.g., '45') is displayed without the percentage sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in the 'General' tab acts as a master switch."
+msgstr "無効にすると、パーセンテージ記号（例: '45%'）なしで値（例: '45'）のみが表示されます。「一般」タブの「パーセンテージ記号 (%) を表示 (マスター スイッチ)」オプションがマスター スイッチとして機能します。"
+
+msgid "Threshold LOW"
+msgstr "しきい値 低"
+
+msgid "The LOW color is used below this value"
+msgstr "この値未満で低の色が使用されます"
+
+msgid "Threshold MED"
+msgstr "しきい値 中"
+
+msgid "The MED color is used between LOW and MED"
+msgstr "低としきい値 中の間で中の色が使用されます"
+
+msgid "Threshold HIGH"
+msgstr "しきい値 高"
+
+msgid "The HIGH color is used between MED and HIGH"
+msgstr "中としきい値 高の間で高の色が使用されます"
+
+msgid "Enable color change for CPU"
+msgstr "CPU の色変更を有効にする"
+
+msgid "Color LOW"
+msgstr "色 低"
+
+msgid "Color MED"
+msgstr "色 中"
+
+msgid "Color HIGH"
+msgstr "色 高"
+
+msgid "Color CRITICAL"
+msgstr "色 危機的"
+
+msgid "Used above the HIGH threshold"
+msgstr "高しきい値を超えると使用されます"
+
+# TEMP
+msgid "Show Temperature"
+msgstr "温度を表示"
+
+msgid "Enables the display of CPU temperature. **Important:** On many systems, installing the 'lm-sensors' package and running 'sudo sensors-detect' is necessary for this function to work correctly. Please refer to the instructions in the README.md."
+msgstr "CPU 温度の表示を有効にします。**重要:** 多くのシステムでは、この機能が正しく動作するために 'lm-sensors' パッケージをインストールし、'sudo sensors-detect' を実行する必要があります。README.md の手順を参照してください。"
+
+msgid "Show °C symbol"
+msgstr "°C 記号を表示"
+
+msgid "Controls whether the Celsius symbol (°C or °F) should be displayed after the value."
+msgstr "値の後に摂氏 (°C) または華氏 (°F) の記号を表示するかどうかを制御します。"
+
+msgid "Text for Temperature"
+msgstr "温度のテキスト"
+
+msgid "Custom symbol/icon for Temperature. Leave empty for text label."
+msgstr "温度のカスタムシンボル/アイコン。テキストラベルの場合は空のままにします。"
+
+msgid "Unit of Measurement"
+msgstr "測定単位"
+
+msgid "Celsius (°C)"
+msgstr "摂氏 (°C)"
+
+msgid "Fahrenheit (°F)"
+msgstr "華氏 (°F)"
+
+msgid "Choose whether the temperature should be displayed in Celsius or Fahrenheit. Threshold values must be adjusted accordingly."
+msgstr "温度を摂氏または華氏で表示するかを選択します。しきい値はそれに応じて調整する必要があります。"
+
+msgid "The LOW color is used below this value (applies to °C and °F)"
+msgstr "この値未満で低の色が使用されます (°C および °F に適用)"
+
+msgid "The MED color is used between LOW and MED (applies to °C and °F)"
+msgstr "低としきい値 中の間で中の色が使用されます (°C および °F に適用)"
+
+msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+msgstr "中としきい値 高の間で高の色が使用されます (°C および °F に適用)"
+
+msgid "Enable color change for TEMP"
+msgstr "温度の色変更を有効にする"
+
+msgid "Color LOW (Green)"
+msgstr "色 低 (緑)"
+
+msgid "Color MED (Orange)"
+msgstr "色 中 (オレンジ)"
+
+msgid "Color HIGH (Red-Orange)"
+msgstr "色 高 (赤橙)"
+
+msgid "Color CRITICAL (Red)"
+msgstr "色 危機的 (赤)"
+
+# RAM
+msgid "Show RAM"
+msgstr "RAM を表示"
+
+msgid "Text for RAM"
+msgstr "RAM のテキスト"
+
+msgid "Custom symbol/icon for RAM. Leave empty for text label."
+msgstr "RAM のカスタムシンボル/アイコン。テキストラベルの場合は空のままにします。"
+
+msgid "Show percentage sign (%) for RAM"
+msgstr "RAM のパーセンテージ記号 (%) を表示"
+
+msgid "Display Mode"
+msgstr "表示モード"
+
+msgid "Percentage Usage (%)"
+msgstr "使用率 (%)"
+
+msgid "Used Memory (MB/GB)"
+msgstr "使用済みメモリ (MB/GB)"
+
+msgid "Free Memory (MB/GB)"
+msgstr "空きメモリ (MB/GB)"
+
+msgid "Choose whether percentage usage or used/free memory in MB/GB should be displayed."
+msgstr "使用率または使用済み/空きメモリ (MB/GB) のどちらを表示するかを選択します。"
+
+msgid "Enable color change for RAM"
+msgstr "RAM の色変更を有効にする"
+
+# SWAP
+msgid "Show SWAP"
+msgstr "SWAP を表示"
+
+msgid "Text for SWAP"
+msgstr "SWAP のテキスト"
+
+msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+msgstr "SWAP のカスタムシンボル/アイコン。テキストラベルの場合は空のままにします。"
+
+msgid "Only show SWAP when used"
+msgstr "使用時のみ SWAP を表示"
+
+msgid "If active, it only shows SWAP when usage is greater than 0%."
+msgstr "有効な場合、使用率が 0% より大きい場合にのみ SWAP を表示します。"
+
+msgid "Show percentage sign (%) for SWAP"
+msgstr "SWAP のパーセンテージ記号 (%) を表示"
+
+msgid "Enable color change for SWAP"
+msgstr "SWAP の色変更を有効にする"
+
+msgid "If the value is less than or equal to the LOW threshold, the LOW color is used."
+msgstr "値が低しきい値以下の場合は、低の色が使用されます。"
+
+msgid "If the value is greater than LOW and less than or equal to the MED threshold, the MED color is used."
+msgstr "値が低より大きく、中しきい値以下の場合は、中の色が使用されます。"
+
+msgid "If the value is greater than MED and less than or equal to the HIGH threshold, the HIGH color is used."
+msgstr "値が中より大きく、高しきい値以下の場合は、高の色が使用されます。"
+
+# Order
+msgid "CPU Position"
+msgstr "CPU 位置"
+
+msgid "Position 1 (Left)"
+msgstr "位置 1 (左)"
+
+msgid "Position 2"
+msgstr "位置 2"
+
+msgid "Position 3"
+msgstr "位置 3"
+
+msgid "Position 4 (Right)"
+msgstr "位置 4 (右)"
+
+msgid "Defines the display position of CPU. The position is automatically swapped with the metric at the same position."
+msgstr "CPU の表示位置を定義します。位置は同じ位置のメトリックと自動的に交換されます。"
+
+msgid "TEMP Position"
+msgstr "温度位置"
+
+msgid "RAM Position"
+msgstr "RAM 位置"
+
+msgid "SWAP Position"
+msgstr "SWAP 位置"
+
+# General
+msgid "Update Interval (ms)"
+msgstr "更新間隔 (ms)"
+
+msgid "Show separator between metrics"
+msgstr "メトリクス間にセパレーターを表示"
+
+msgid "Separator Text"
+msgstr "セパレーター テキスト"
+
+msgid "Separator Color"
+msgstr "セパレーター 色"
+
+msgid "Show percentage sign (%) (Master Switch)"
+msgstr "パーセンテージ記号 (%) を表示 (マスター スイッチ)"
+
+msgid "If disabled, only the value (e.g., '45') is displayed for all percentage displays without the percentage sign (e.g., '45%'). Individual switches for CPU/RAM/SWAP must also be active."
+msgstr "無効にすると、すべてのパーセンテージ表示で、パーセンテージ記号（例: '45%'）なしで値（例: '45'）のみが表示されます。CPU/RAM/SWAP の個別のスイッチも有効である必要があります。"
+
+# Profiles
+msgid "Profile Message Duration (Seconds)"
+msgstr "プロファイル メッセージの表示時間 (秒)"
+
+msgid "How long should the message ('Profile saved', 'Profile active') be displayed in the panel."
+msgstr "メッセージ（「プロファイルが保存されました」、「プロファイルが有効です」）をパネルに表示する期間。"
+
+msgid "Profile 1 Name"
+msgstr "プロファイル 1 の名前"
+
+msgid "Enter a custom profile name in the text field!"
+msgstr "テキストフィールドにカスタムプロファイル名を入力してください!"
+
+msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+msgstr "ポップアップメニューでプロファイル 1 の「有効化」または「保存」をクリックします。"
+
+msgid "Saved data for Profile 1 (internal)"
+msgstr "プロファイル 1 の保存されたデータ (内部)"
+
+msgid "Profile 2 Name"
+msgstr "プロファイル 2 の名前"
+
+msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+msgstr "ポップアップメニューでプロファイル 2 の「有効化」または「保存」をクリックします。"
+
+msgid "Saved data for Profile 2 (internal)"
+msgstr "プロファイル 2 の保存されたデータ (内部)"
+
+msgid "Profile 3 Name"
+msgstr "プロファイル 3 の名前"
+
+msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+msgstr "ポップアップメニューでプロファイル 3 の「有効化」または「保存」をクリックします。"
+
+msgid "Saved data for Profile 3 (internal)"
+msgstr "プロファイル 3 の保存されたデータ (内部)"

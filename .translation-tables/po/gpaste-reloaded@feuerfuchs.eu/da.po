@@ -1,0 +1,134 @@
+# GPASTE RELOADED
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# feuerfuchs, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-12-27 14:39-0500\n"
+"PO-Revision-Date: 2023-12-24 13:35+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. GPasteNewItemDialog.js:53
+msgid "Please enter the text you want to add to the current history:"
+msgstr "Indtast teksten, du vil tilføje til den nuværende historik:"
+
+#. GPasteNewItemDialog.js:59 GPasteNotInstalledDialog.js:32
+msgid "OK"
+msgstr "OK"
+
+#. GPasteNewItemDialog.js:63
+msgid "Cancel"
+msgstr "Annullér"
+
+#. GPasteNotInstalledDialog.js:27
+msgid ""
+"GPaste is not installed. Please install the necessary packages and then "
+"restart Cinnamon for this applet to start working."
+msgstr ""
+"GPaste er ikke installeret. De nødvendige pakker skal installeres og "
+"Cinnamon genstartes, før panelprogrammet virker."
+
+#. GPasteSearchItem.js:34
+msgid "Type to search..."
+msgstr "Skriv for at søge …"
+
+#. applet.js:73
+msgid "[GPaste is not installed]"
+msgstr "[GPaste er ikke installeret]"
+
+#. applet.js:109
+msgid "GPaste clipboard"
+msgstr "GPaste-udklipsholder"
+
+#. settings-schema.json->gpaste-settings->description
+#. applet.js:115 applet.js:153
+msgid "GPaste Main Program"
+msgstr "GPaste-hovedprogram"
+
+#. applet.js:120
+msgid "Select History"
+msgstr "Vælg historik"
+
+#. applet.js:129
+msgid "Track clipboard changes"
+msgstr "Spor ændringer til udklipsholderen"
+
+#. applet.js:137
+msgid "(Empty)"
+msgstr "(Tom)"
+
+#. applet.js:140
+msgid "(No results)"
+msgstr "(Ingen resultater)"
+
+#. applet.js:145
+msgid "New item"
+msgstr "Nyt element"
+
+#. applet.js:148
+msgid "Empty history"
+msgstr "Tom historik"
+
+#. applet.js:471
+msgid "Do you really want to empty the current history?"
+msgstr "Vil du virkelig slette den nuværende historik?"
+
+#. metadata.json->description
+#, fuzzy
+msgid "Instantly access and manage your clipboard history."
+msgstr "Få øjeblikkelig adgang til og styr på din udklipsholderhistorik"
+
+#. metadata.json->name
+msgid "GPaste Reloaded"
+msgstr "GPaste genopfundet"
+
+#. settings-schema.json->shown-entries->description
+msgid "Shown entries"
+msgstr "Viste poster"
+
+#. settings-schema.json->always-show-icon->description
+msgid "Show tray icon, even when the applet is not in use"
+msgstr ""
+
+#. settings-schema.json->display-track-switch->description
+msgid "Display 'Track clipboard changes'"
+msgstr "Vis \"Spor ændringer til udklipsholderen\""
+
+#. settings-schema.json->display-new-item->description
+msgid "Display 'New item'"
+msgstr "Vis \"Nyt element\""
+
+#. settings-schema.json->display-searchbar->description
+msgid "Display search bar"
+msgstr "Vis søgebjælken"
+
+#. settings-schema.json->display-gpaste-ui->description
+msgid "Display 'GPaste Main Program'"
+msgstr "Vis \"GPaste-hovedprogram\""
+
+#. settings-schema.json->display-empty-history->description
+msgid "Display 'Empty history'"
+msgstr "Vis \"Tom historik\""
+
+#. settings-schema.json->key-bindings->description
+msgid "Key bindings"
+msgstr "Tastaturgenveje"
+
+#. settings-schema.json->kb-show-history->description
+msgid "Show history"
+msgstr "Vis historik"
+
+#. settings-schema.json->other->description
+msgid "Other"
+msgstr "Andet"

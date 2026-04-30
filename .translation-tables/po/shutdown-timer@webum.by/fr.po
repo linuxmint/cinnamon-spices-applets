@@ -1,0 +1,79 @@
+# French translations for shutdown-timer@webum.by package
+# Traductions françaises du paquet shutdown-timer@webum.by.
+# This file is put in the public domain.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: shutdown-timer@webum.by 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-10-16 14:10+0200\n"
+"Last-Translator: FabRCT\n"
+"Language-Team:\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: applet.js:71 applet.js:200
+msgid "Shutdown-timer"
+msgstr "Minuterie d'arrêt"
+
+#: applet.js:77 applet.js:204 applet.js:293
+msgid "Minutes"
+msgstr "Minutes"
+
+#: applet.js:98
+msgid "Timer"
+msgstr "Minuteur"
+
+#: applet.js:128
+msgid "Show time on panel"
+msgstr "Afficher l'heure sur le panneau"
+
+#: applet.js:290
+msgid "Minutes to <click action>"
+msgstr "Minutes avant <cliquez sur l'action>"
+
+#. metadata.json->name
+msgid "Shutdown timer"
+msgstr "Shutdown timer"
+
+#. metadata.json->description
+msgid "Applet to help you shutdown, restart and suspend your system with timer"
+msgstr ""
+"Applet pour vous aider à arrêter, redémarrer et\n"
+"suspendre votre système avec une minuterie"
+
+#. settings-schema.json->shutdown->description
+msgid "Shutdown event on menu"
+msgstr "Événement d'arrêt sur le menu"
+
+#. settings-schema.json->restart->description
+msgid "Restart event on menu"
+msgstr "Événement de redémarrage sur le menu"
+
+#. settings-schema.json->log-out->description
+msgid "Log out event on menu"
+msgstr "Événement de déconnexion sur le menu"
+
+#. settings-schema.json->hibernate->description
+msgid "Hibernate event on menu"
+msgstr "Événement d'hibernation sur le menu"
+
+#. settings-schema.json->suspend->description
+msgid "Suspend event on menu"
+msgstr "Événement de veille sur le menu"
+
+#. settings-schema.json->lock-screen->description
+msgid "Lock screen event on menu"
+msgstr "Événement de verrouillage d'écron sur le menu"
+
+#. settings-schema.json->restart-cinnamon->description
+msgid "Restart Cinnamon event on menu"
+msgstr "Événement de redémarrage de Cinnamon sur le menu"
+
+#. settings-schema.json->show-time-on-panel->description
+msgid "Show timer in panel"
+msgstr "Afficher la minuterie dans le panneau"

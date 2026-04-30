@@ -1,0 +1,212 @@
+# DOWNLOAD AND UPLOAD SPEED
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <serkanonder@outlook.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Bps@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-02-28 17:40+0100\n"
+"PO-Revision-Date: 2020-06-16 14:18+0300\n"
+"Last-Translator: serkan önder <serkanonder@outlook.com>\n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:77
+msgid "Does not work on vertical panel!"
+msgstr ""
+
+#. applet.js:244 applet.js:304 applet.js:318
+msgid "   B"
+msgstr ""
+
+#. applet.js:247 applet.js:293
+msgid " TiB"
+msgstr ""
+
+#. applet.js:249 applet.js:296
+msgid " GiB"
+msgstr ""
+
+#. applet.js:251 applet.js:299
+msgid " MiB"
+msgstr ""
+
+#. applet.js:253 applet.js:302
+msgid " kiB"
+msgstr ""
+
+#. applet.js:256 applet.js:307
+msgid " TB"
+msgstr ""
+
+#. applet.js:258 applet.js:310
+#, fuzzy
+msgid " GB"
+msgstr "Arayüz"
+
+#. applet.js:260 applet.js:313
+#, fuzzy
+msgid " MB"
+msgstr "MB"
+
+#. applet.js:262 applet.js:316
+msgid " kB"
+msgstr ""
+
+#. applet.js:265 applet.js:335 applet.js:349
+msgid "   b"
+msgstr ""
+
+#. applet.js:269 applet.js:324
+msgid " Tib"
+msgstr ""
+
+#. applet.js:271 applet.js:327
+msgid " Gib"
+msgstr ""
+
+#. applet.js:273 applet.js:330
+msgid " Mib"
+msgstr ""
+
+#. applet.js:275 applet.js:333
+msgid " kib"
+msgstr ""
+
+#. applet.js:278 applet.js:338
+#, fuzzy
+msgid " Tb"
+msgstr "b"
+
+#. applet.js:280 applet.js:341
+#, fuzzy
+msgid " Gb"
+msgstr "b"
+
+#. applet.js:282 applet.js:344
+#, fuzzy
+msgid " Mb"
+msgstr "b"
+
+#. applet.js:284 applet.js:347
+#, fuzzy
+msgid " kb"
+msgstr "b"
+
+#. metadata.json->description
+msgid "Instant Network Speed is a simple network monitor"
+msgstr "Instant Network Speed is a simple network monitor"
+
+#. metadata.json->name
+msgid "Bps: Instant Network Speed"
+msgstr "Bps: Instant Network Speed"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Yapılandırma"
+
+#. settings-schema.json->unit_type->description
+msgid "Unit"
+msgstr "Birim"
+
+#. settings-schema.json->unit_type->options
+msgid "Bytes"
+msgstr "Bayt"
+
+#. settings-schema.json->unit_type->options
+msgid "Bits"
+msgstr "Bit"
+
+#. settings-schema.json->unit_type->tooltip
+msgid "Base data unit shown in the panel"
+msgstr "Panelde gösterilen temel veri birimi"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr ""
+
+#. settings-schema.json->is_binary->options
+#, fuzzy
+msgid "Decimal"
+msgstr "Ondalık"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr ""
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Arayüz"
+
+#. settings-schema.json->gui_value_order->description
+msgid "Value order"
+msgstr "Değer sırası"
+
+#. settings-schema.json->gui_value_order->options
+msgid "Download first"
+msgstr "Önce indirme"
+
+#. settings-schema.json->gui_value_order->options
+msgid "Upload first"
+msgstr "Önce yükleme"
+
+#. settings-schema.json->gui_value_order->tooltip
+#, fuzzy
+msgid "An order of values shown in the panel"
+msgstr "Panelde gösterilen değerler"
+
+#. settings-schema.json->minimum_start->description
+#, fuzzy
+msgid "Minimum displayed value"
+msgstr "Görüntülenen minimum yükleme değeri"
+
+#. settings-schema.json->display_minimum_quantity->description
+#, fuzzy
+msgid "Value"
+msgstr "Değer sırası"
+
+#. settings-schema.json->display_minimum_quantity->tooltip
+msgid "Value between 0 and 999 (decimal) or 1023 (binary)."
+msgstr ""
+
+#. settings-schema.json->display_minimum_unit_multiple->description
+msgid "Multiple"
+msgstr ""
+
+#. settings-schema.json->display_minimum_unit_multiple->options
+msgid "1"
+msgstr ""
+
+#. settings-schema.json->display_minimum_unit_multiple->options
+msgid "k"
+msgstr ""
+
+#. settings-schema.json->display_minimum_unit_multiple->options
+msgid "M"
+msgstr ""
+
+#. settings-schema.json->display_minimum_unit_multiple->options
+msgid "G"
+msgstr ""
+
+#. settings-schema.json->display_minimum_unit_multiple->options
+msgid "T"
+msgstr ""
+
+#. settings-schema.json->display_minimum_button->description
+msgid "Apply"
+msgstr ""

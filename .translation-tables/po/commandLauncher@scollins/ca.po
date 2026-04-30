@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: commandLauncher@scollins 1.4\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-07-22 01:39+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+#: applet.js:96 applet.js:149
+msgid "Command Launcher"
+msgstr "Llançador d'ordres"
+
+#: applet.js:96
+msgid "Process started"
+msgstr "Procés iniciat"
+
+#. settings-schema.json->command->description
+#: applet.js:96 applet.js:149
+msgid "Command"
+msgstr "Ordre"
+
+#: applet.js:97 applet.js:150
+msgid "Process Id"
+msgstr "Id del procés"
+
+#: applet.js:100
+#, javascript-format
+msgid "Error while trying to run \"%s\""
+msgstr "Error intentant executar \"%s\""
+
+#: applet.js:149
+msgid "Process ended"
+msgstr "Procés finalitzat"
+
+#. metadata.json->description
+msgid "Lets you to run command-line commands with the click of a button"
+msgstr "Us permet executar ordres al terminal amb el clic d'un botó"
+
+#. metadata.json->comments
+msgid ""
+"This is a simple multi-instance applet for Cinnamon which allows the user to "
+"launch commands as though from a command prompt with the click of a button. "
+"Unlike a program launcher, which typically uses a .desktop to launch a "
+"program, Command Launcher uses a direct command-line command. This means you "
+"can use any command you could use from a terminal (eg run a script, launch "
+"program with complicated command-line arguments, etc)."
+msgstr ""
+"Miniaplicació multi-instància per Cinnamon que permet que l'usuari executi "
+"ordres al terminal amb el clic d'un botó. No utilitza fitxers .desktop per a "
+"llançar les ordres, sinó un terminal, de manera que podeu usar qualsevol "
+"ordre que sigui utilitzable des del terminal (per exemple: executar un "
+"script, un programa amb arguments complicats, etc)."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Autor - Stephen Collins"
+
+#. settings-schema.json->apearance->description
+msgid "Appearance and behavior"
+msgstr "Aparença i comportament"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr "Icona del tauler"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid ""
+"Supports both icon name and icon path.\n"
+"To use a symbolic icon, include '-symbolic' (or '-symbolic.svg') at the end."
+msgstr ""
+"Suporta un nom d'icona o una ruta completa.\n"
+"Per utilitzar una icona simbòlica, afegiu '-symbolic' o '-symbolic.svg' al "
+"final."
+
+#. settings-schema.json->tooltipText->description
+msgid "Tooltip"
+msgstr "Informació d'eines"
+
+#. settings-schema.json->keyLaunch->description
+msgid "Keyboard shortcut"
+msgstr "Drecera del teclat"
+
+#. settings-schema.json->showNotifications->description
+msgid "Show notifications on completion"
+msgstr "Mostrar notificacions en acabar l'execució"
+
+#. settings-schema.json->commandTitle->description
+msgid "Command settings"
+msgstr "Opcions d'ordre"
+
+#. settings-schema.json->useRoot->description
+msgid "Run as root"
+msgstr "Executar com a root"
+
+#. settings-schema.json->useAltEnv->description
+msgid "Run in alternate directory"
+msgstr "Executar a un directori alternatiu"
+
+#. settings-schema.json->altEnv->description
+msgid "Environment path"
+msgstr "Ruta de l'entorn (Path)"

@@ -1,0 +1,185 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: window-list@sangorys 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-09-17 01:24+0000\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:1273
+msgid "Window information"
+msgstr "視窗資訊"
+
+#: applet.js:1309
+msgid "Move to the other monitor"
+msgstr "移至另一個螢幕"
+
+#: applet.js:1319
+#, javascript-format
+msgid "Move to monitor %d"
+msgstr "移至第 %d 個螢幕"
+
+#: applet.js:1330
+msgid "Only on this workspace"
+msgstr "僅在此工作區顯示"
+
+#: applet.js:1336
+msgid "Visible on all workspaces"
+msgstr "在所有工作區顯示"
+
+#: applet.js:1342
+msgid "Move to another workspace"
+msgstr "移至其他工作區"
+
+#: applet.js:1365
+msgid "Preferences"
+msgstr "偏好設定"
+
+#: applet.js:1368
+msgid "About..."
+msgstr "關於…"
+
+#: applet.js:1372
+msgid "Configure..."
+msgstr "設定…"
+
+#: applet.js:1376
+msgid "Remove 'Window list'"
+msgstr "移除「視窗清單」"
+
+#: applet.js:1383
+msgid "Close all"
+msgstr "全部關閉"
+
+#: applet.js:1392
+msgid "Close others"
+msgstr "關閉其他視窗"
+
+#: applet.js:1406
+msgid "Restore to full opacity"
+msgstr "還原為完全不透明"
+
+#: applet.js:1414
+msgid "Restore"
+msgstr "還原"
+
+#: applet.js:1419
+msgid "Minimize"
+msgstr "最小化"
+
+#: applet.js:1427
+msgid "Unmaximize"
+msgstr "取消最大化"
+
+#: applet.js:1432
+msgid "Maximize"
+msgstr "最大化"
+
+#: applet.js:1440
+msgid "Close"
+msgstr "關閉"
+
+#. metadata.json->name
+msgid "My perfect window-list applet"
+msgstr "我的完美視窗清單小程式"
+
+#. metadata.json->description
+msgid ""
+"Based on the original Cinnamon window list, the window order is memorized "
+"and restored. The next huge feature is to also group window like Google "
+"Chrome groups tab. This is my definition of a perfect window list applet"
+msgstr ""
+"這個小程式以 Cinnamon 原本的視窗清單為基礎，會記憶並還原視窗順序。"
+"下一個重要功能是仿照 Google Chrome 的分頁群組功能，將視窗分組。"
+"這就是我心目中完美的視窗清單小程式。"
+
+#. settings-schema.json->section1->description
+msgid "Behavior"
+msgstr "行為"
+
+#. settings-schema.json->show-all-workspaces->description
+msgid "Show windows from all workspaces"
+msgstr "顯示所有工作區的視窗"
+
+#. settings-schema.json->enable-alerts->description
+msgid ""
+"Show an alert in the window list when a window from another workspace "
+"requires attention"
+msgstr ""
+"當其他工作區的視窗需要您注意時，在視窗清單中顯示提醒"
+
+#. settings-schema.json->enable-scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
+msgstr "在視窗清單中啟用滑鼠滾輪捲動"
+
+#. settings-schema.json->reverse-scrolling->description
+msgid "Reverse the direction of mouse-wheel scrolling in the window list"
+msgstr "反轉視窗清單中滑鼠滾輪的捲動方向"
+
+#. settings-schema.json->left-click-minimize->description
+msgid "Left click to minimize window"
+msgstr "按一下滑鼠左鍵來最小化視窗"
+
+#. settings-schema.json->middle-click-close->description
+msgid "Middle click to close window"
+msgstr "按一下滑鼠中鍵來關閉視窗"
+
+#. settings-schema.json->section2->description
+msgid "Display"
+msgstr "顯示"
+
+#. settings-schema.json->panel-show-label->description
+msgid "Show window names in the panel"
+msgstr "在面板上顯示視窗名稱"
+
+#. settings-schema.json->button-width->units
+msgid "pixels"
+msgstr "像素"
+
+#. settings-schema.json->button-width->description
+msgid "Window button width in the panel"
+msgstr "面板中視窗按鈕的寬度"
+
+#. settings-schema.json->buttons-use-entire-space->description
+msgid ""
+"Window buttons can have different sizes and use the entire space available"
+msgstr ""
+"視窗按鈕可以採用不同大小並佔滿全部可用空間"
+
+#. settings-schema.json->window-preview->description
+msgid "Show window thumbnails on hover"
+msgstr "滑鼠游標移至上方時顯示視窗縮圖"
+
+#. settings-schema.json->window-preview-show-label->description
+msgid "Show title above thumbnail"
+msgstr "在縮圖上方顯示標題"
+
+#. settings-schema.json->window-preview-scale->description
+msgid "Thumbnail size"
+msgstr "縮圖大小"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Small"
+msgstr "小"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Medium"
+msgstr "中"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Large"
+msgstr "大"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Largest"
+msgstr "最大"

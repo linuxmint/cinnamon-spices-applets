@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidiaprime@pdcurtis 3.3.5\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-10-12 11:30+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:123 3.8/applet.js:123
+msgid "Waiting for nvidia"
+msgstr "Đang chờ nvidia"
+
+#: applet.js:183 3.8/applet.js:183
+msgid "Open Power Statistics"
+msgstr "Mở Thống kê Năng lượng"
+
+#: applet.js:189 3.8/applet.js:189
+msgid "Open System Monitor"
+msgstr "Mở Trình giám sát Hệ thống"
+
+#: applet.js:207 3.8/applet.js:207
+msgid "Housekeeping and System Sub Menu"
+msgstr "Menu phụ Quản lý và Hệ thống"
+
+#: applet.js:210 3.8/applet.js:210
+msgid "View the Changelog"
+msgstr "Xem Nhật ký thay đổi"
+
+#: applet.js:216 3.8/applet.js:216
+msgid "Open the Help file"
+msgstr "Mở Tệp Trợ giúp"
+
+#: applet.js:258 3.8/applet.js:258
+msgid "NVidia based GPU is Off"
+msgstr "GPU dựa trên NVidia đang Tắt"
+
+#: applet.js:281 3.8/applet.js:281
+msgid "NVidia based GPU is On and Core Temperature is"
+msgstr "GPU dựa trên NVidia đang Bật và Nhiệt độ lõi là"
+
+#: applet.js:289 3.8/applet.js:289
+msgid "Err"
+msgstr "Lỗi"
+
+#: applet.js:290 3.8/applet.js:290
+msgid "Nvidia Prime is not set up correctly - are the nvidia drivers and nvidia-prime  installed?"
+msgstr "Nvidia Prime chưa được cài đặt đúng - đã cài driver nvidia và nvidia-prime chưa?"
+
+#. metadata.json->description
+msgid "Displays which Graphics processor is active and nVidia GPU Temperature when active and in a horizontal panel"
+msgstr "Hiển thị GPU đang hoạt động và nhiệt độ GPU Nvidia khi hoạt động trên thanh ngang"
+
+#. metadata.json->name
+msgid "nVidia Prime GPU Display"
+msgstr "Hiển thị GPU nVidia Prime"
+
+#. settings-schema.json->head->description
+#. 3.8->settings-schema.json->head->description
+msgid "General Settings for the nVidia Prime Monitoring Applet"
+msgstr "Cài đặt chung cho Applet Giám sát nVidia Prime"
+
+#. settings-schema.json->refreshInterval-spinner->units
+#. 3.8->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "giây"
+
+#. settings-schema.json->refreshInterval-spinner->description
+#. 3.8->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Khoảng thời gian làm mới hiển thị:"
+
+#. settings-schema.json->refreshInterval-spinner->tooltip
+#. 3.8->settings-schema.json->refreshInterval-spinner->tooltip
+msgid "Increase or decrease this spinner value to change the refresh interval - use a slow refresh if you have a slow machine"
+msgstr "Tăng hoặc giảm giá trị này để thay đổi khoảng thời gian làm mới - dùng chế độ làm mới chậm nếu máy của bạn chậm"
+
+#. settings-schema.json->showGpuTemp->description
+#. 3.8->settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature as well as icon"
+msgstr "Hiển thị nhiệt độ GPU cùng biểu tượng"
+
+#. settings-schema.json->showGpuTemp->tooltip
+#. 3.8->settings-schema.json->showGpuTemp->tooltip
+msgid "Available in Horizontal and Vertical Panels. Display is in Degrees Centigrade."
+msgstr "Có thể sử dụng trên thanh ngang và dọc. Nhiệt độ hiển thị bằng độ C."
+
+#. settings-schema.json->head2->description
+#. 3.8->settings-schema.json->head2->description
+msgid "Additional Functionality"
+msgstr "Chức năng bổ sung"
+
+#. settings-schema.json->displayExtra->description
+#. 3.8->settings-schema.json->displayExtra->description
+msgid "Access enhanced functionality through Context Menu - needs Cinnamon Restart"
+msgstr "Truy cập chức năng nâng cao qua Menu Ngữ cảnh - cần khởi động lại Cinnamon"
+
+#. settings-schema.json->displayExtra->tooltip
+#. 3.8->settings-schema.json->displayExtra->tooltip
+msgid "Currently  adds glxspheres64 Graphics Processor Test - VirtualGL needs to be installed"
+msgstr "Hiện thêm bài kiểm tra GPU glxspheres64 - cần cài đặt VirtualGL"
