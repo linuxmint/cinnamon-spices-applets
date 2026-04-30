@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-04-01 20:28+0200\n"
+"POT-Creation-Date: 2026-04-27 17:11+0200\n"
 "PO-Revision-Date: 2025-08-27 18:06+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -18,71 +18,75 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:186
+#. applet.js:196
 msgid "score"
 msgstr "punteggio"
 
-#. applet.js:198
+#. applet.js:208
 msgid "comments"
 msgstr "commenti"
 
-#. applet.js:210
+#. applet.js:220
 msgid "recent issues"
 msgstr "problemi recenti"
 
-#. applet.js:223
+#. applet.js:233
 msgid "translations"
 msgstr "traduzioni"
 
-#. applet.js:298
+#. applet.js:308
 #, fuzzy
 msgid "Reload icons"
 msgstr "Ricarica questa applet"
 
-#. applet.js:304
+#. applet.js:314
 msgid "Visit website"
 msgstr ""
 
-#. applet.js:399
+#. applet.js:417
 msgid ""
 "Check in progress.\n"
 "Time remaining:"
 msgstr ""
 
-#. applet.js:426
+#. applet.js:420
+msgid "Ends around:"
+msgstr ""
+
+#. applet.js:437
 msgid "Time remaining until the next check:"
 msgstr ""
 
-#. applet.js:428 applet.js:735
+#. applet.js:439 applet.js:741
 msgid "Next check at:"
 msgstr ""
 
-#. applet.js:433
+#. applet.js:444
 msgid "Getting Started. Please wait..."
 msgstr ""
 
-#. applet.js:887
+#. applet.js:893
 msgid "Spices"
 msgstr "Spice"
 
-#. applet.js:978
+#. applet.js:984
 msgid "Mark all as read"
 msgstr "Segna tutto come già letto"
 
-#. applet.js:989
+#. applet.js:995
 msgid "Refresh"
 msgstr "Aggiorna"
 
-#. applet.js:1003
+#. applet.js:1009
 #, fuzzy
 msgid "Refreshing in progress - Click to stop"
 msgstr "Ricaricamento in corso"
 
-#. applet.js:1017
+#. applet.js:1023
 msgid "Refreshing in progress"
 msgstr "Ricaricamento in corso"
 
-#. applet.js:1029
+#. applet.js:1035
 msgid "Configure..."
 msgstr "Configura..."
 
@@ -250,10 +254,6 @@ msgstr "Non mostrare nulla"
 #. settings-schema.json->useful-only->description
 msgid "Show only non-zero values in panel"
 msgstr "Mostra solo i valori non nulli nel pannello"
-
-#. settings-schema.json->coloredIcon->description
-msgid "Change icon color while refreshing"
-msgstr ""
 
 #. settings-schema.json->colorWhileRefreshing->description
 msgid "Icon color while refreshing"

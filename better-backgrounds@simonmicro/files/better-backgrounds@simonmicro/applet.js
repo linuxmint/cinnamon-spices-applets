@@ -4,7 +4,7 @@ const Soup = imports.gi.Soup;
 const ByteArray = imports.byteArray;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const Tweener = imports.ui.tweener;
+const Clutter = imports.gi.Clutter;
 const PopupMenu = imports.ui.popupMenu;
 
 const uuid = "better-backgrounds@simonmicro";
@@ -14,7 +14,7 @@ function log(msg) {
     global.log('[' + uuid + '] ' + msg);
 };
 
-class UnsplashBackgroundApplet extends Applet.TextIconApplet {
+class BetterBackgroundsApplet extends Applet.TextIconApplet {
     constructor(orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
@@ -24,12 +24,12 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         this.menuManager.addMenu(this.menu);
         this.paused = false;
         this.menuSwtchPaused = new PopupMenu.PopupSwitchMenuItem('Pause all change triggers', this.paused);
-        this.menuSwtchPaused.connect('toggled', imports.lang.bind(this, this._toggle_paused));
+        this.menuSwtchPaused.connect('toggled', this._toggle_paused.bind(this));
         this.menu.addMenuItem(this.menuSwtchPaused);
         this.menuBtnChangeBack = new PopupMenu.PopupMenuItem('Change background now');
         this.menuBtnSavePic = new PopupMenu.PopupMenuItem('Save current background');
-        this.menuBtnChangeBack.connect('activate', imports.lang.bind(this, this._change_background));
-        this.menuBtnSavePic.connect('activate', imports.lang.bind(this, this._store_background));
+        this.menuBtnChangeBack.connect('activate', this._change_background.bind(this));
+        this.menuBtnSavePic.connect('activate', this._store_background.bind(this));
         this.menu.addMenuItem(this.menuBtnChangeBack);
         this.menu.addMenuItem(this.menuBtnSavePic);
 
@@ -49,8 +49,6 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         this.settings.bind("image-res-height", "image_res_height", this.on_settings_changed);
         this.settings.bind("image-res-himawari", "image_res_himawari", this.on_settings_changed);
         this.settings.bind("image-uri", "image_uri", this.on_settings_changed);
-        this.settings.bind("image-tag", "image_tag", this.on_settings_changed);
-        this.settings.bind("image-tag-data", "image_tag_data", this.on_settings_changed);
 
         this.set_applet_icon_name("applet");
         this._applet_icon.set_pivot_point(0.5, 0.5);
@@ -60,8 +58,7 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         } else { //version 3
             this.httpAsyncSession = new Soup.Session();
         }
-        this.swapChainSwapped = false;
-        
+
         const defaultSavePath = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES) + '/';
         if(this.applet_save_location == '')
             //Default path is the users picture dir
@@ -93,7 +90,7 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
 
     _timeout_enable() {
         this._timeout_disable();
-        this._timeout = imports.mainloop.timeout_add_seconds(this.change_time * 60, imports.lang.bind(this, this._auto_change_background));
+        this._timeout = imports.mainloop.timeout_add_seconds(this.change_time * 60, this._auto_change_background.bind(this));
     }
 
     _toggle_paused() {
@@ -102,21 +99,21 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
     }
 
     _set_icon_rotation(newValue, seconds) {
-        if(this.applet_icon_animation)
-            Tweener.addTween(this._applet_icon, {
-                'rotation-angle-z': newValue,
-//                skipUpdates: 4, //Only render every 4th frame - this does sadly not improve the cpu usage...
-                time: seconds,
-                transition: 'easeInOutQuad'
-            });
+        if (this.applet_icon_animation) {
+        this._applet_icon.ease({
+            rotation_angle_z: newValue,
+            duration: seconds * 1000,
+            mode: Clutter.AnimationMode.EASE_IN_OUT_QUAD,
+        });
+    }
     }
 
     _icon_animate() {
-        this._set_icon_rotation(0, 0);
+        this._applet_icon.rotation_angle_z = 0;
         this._set_icon_rotation(360, 2);
 
         //And queue next step...
-        this._animator = imports.mainloop.timeout_add_seconds(2.5, imports.lang.bind(this, this._icon_animate));
+        this._animator = imports.mainloop.timeout_add_seconds(2.5, this._icon_animate.bind(this));
     }
 
     _icon_start() {
@@ -200,7 +197,7 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
                     tileId++;
                     that.set_applet_label(Math.floor(tileId / (zoomLvl * zoomLvl) * 100) + '%');
                     that._download_image('https://himawari8-dl.nict.go.jp/himawari8/img/D531106/' +
-                        zoomLvl + 'd/550/' + latestDate.getFullYear() + '/' + ('0' + (latestDate.getMonth() + 1)).slice(-2) + 
+                        zoomLvl + 'd/550/' + latestDate.getFullYear() + '/' + ('0' + (latestDate.getMonth() + 1)).slice(-2) +
                         '/' + ('0' + latestDate.getDate()).slice(-2) + '/' + ('0' + latestDate.getHours()).slice(-2) +
                         ('0' + latestDate.getMinutes()).slice(-2) + ('0' + latestDate.getSeconds()).slice(-2) + '_' +
                         y + '_' + x + '.png', tileName)
@@ -236,7 +233,7 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
                 }
                 downloadTiles();
             }
-            
+
             let request = Soup.Message.new('GET', 'https://himawari8-dl.nict.go.jp/himawari8/img/D531106/latest.json');
             if (Soup.MAJOR_VERSION === 2) {
                 this.httpAsyncSession.queue_message(request, function(http, msg) {
@@ -256,19 +253,6 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
                     }
                 });
             }
-        } else if(this.image_source == 'unsplash') {
-            let resStr = 'featured';
-            if(this.image_res_manual)
-                resStr = this.image_res_width + 'x' + this.image_res_height;
-            let tagStr = '';
-            if(this.image_tag)
-                tagStr = '?' + this.image_tag_data;
-            this._download_image('https://source.unsplash.com/' + resStr + '/' + tagStr).then(defaultEnd).catch(errorEnd);
-        } else if(this.image_source == 'placekitten') {
-            let resStr = '1920/1080';
-            if(this.image_res_manual)
-                resStr = this.image_res_width + '/' + this.image_res_height;
-            this._download_image('http://placekitten.com/' + resStr).then(defaultEnd).catch(errorEnd);
         } else if(this.image_source == 'picsum') {
             let resStr = '1920/1080';
             if(this.image_res_manual)
@@ -293,13 +277,10 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
     }
 
     _store_background() {
-        let targetPath = Math.floor(Math.random() * 899999 + 100000) + '.png'; //Random int between 100000 and 999999
-        if(this.applet_save_location.startsWith('file://'))
-            //Strip the "file://" prefix
-            targetPath = this.applet_save_location.substr(7) + '/' + targetPath
-        else 
-            targetPath = this.applet_save_location + '/' + targetPath
-    
+        let fileName = "bg_" + Date.now() + ".png";
+        let baseDir = this.applet_save_location.replace('file://', '');
+        let targetPath = baseDir + '/' + fileName;
+
         //Copy the background to users picture folder with random name and show the stored notification
         var that = this;
         this._run_cmd(['convert', this._get_swap_chain_image_current(), '-write', targetPath]).then(function() {
@@ -320,8 +301,13 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
     }
 
     _swap_chain_image_swap() {
-        //Replace current with next
-        this._run_cmd(['mv', this._get_swap_chain_image_next(), this._get_swap_chain_image_current()]);
+        let source = Gio.File.new_for_path(this._get_swap_chain_image_next());
+        let dest = Gio.File.new_for_path(this._get_swap_chain_image_current());
+        try {
+            source.move(dest, Gio.FileCopyFlags.OVERWRITE, null, null);
+        } catch (e) {
+            log("Failed to move file: " + e.message);
+        }
     }
 
     _apply_image() {
@@ -428,5 +414,5 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
 };
 
 function main(metadata, orientation, panel_height, instance_id) {
-    return new UnsplashBackgroundApplet(orientation, panel_height, instance_id);
+    return new BetterBackgroundsApplet(orientation, panel_height, instance_id);
 }
