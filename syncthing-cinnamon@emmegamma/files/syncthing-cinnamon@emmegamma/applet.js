@@ -39,7 +39,6 @@ Syncthing.prototype = {
 
             let openWebUI = new PopupMenu.PopupMenuItem("Open Web UI", { reactive: true });
             openWebUI.connect('activate', () => {
-               //Util.spawnCommandLine(`xdg-open http://${this.syncthing_url}:${this.syncthing_port}`);
                Util.spawn(["xdg-open", `http://${this.syncthing_url}:${this.syncthing_port}`]);
              });
 
@@ -47,7 +46,6 @@ Syncthing.prototype = {
             restart.connect('activate', () => {
                 this._get_syncthingstatus_async((status) => {
                     if (status.includes("Stopped") || status.includes("failed")) {
-                      //Util.spawnCommandLineAsync(`${this.syncthing_command} ${this.syncthing_args}`, global.log(`${UUID}: syncthing started successfully`), global.logError(`${UUID}: error on starting syncthing`));
                         try {
                           let [, argv] = GLib.shell_parse_argv(`${this.syncthing_command} ${this.syncthing_args}`);
                           Util.spawn(argv);
