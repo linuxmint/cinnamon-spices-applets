@@ -786,6 +786,7 @@ class GraphLineChart {
 
     this.autoScale = false;
     this.logScale = false;
+    this.minPrefix = "B";
     this.scale = 1.0;
     this.maxValue = 1.0;
     this.maxValueLoc = null;
@@ -797,6 +798,14 @@ class GraphLineChart {
     this.typeOfGraph = "graphled";
   }
 
+  get minNetShownValue() {
+    return this.applet.minNetShownValue;
+  }
+
+  get minDiskShownValue() {
+    return this.applet.minDiskShownValue;
+  }
+
   refreshData(currentReadings, providerName) {
     this.isReading = false;
     this.isWriting = false;
@@ -804,11 +813,13 @@ class GraphLineChart {
       this.autoScale = this.applet.Disk_autoscale;
       this.logScale = this.applet.Disk_logscale;
       this.typeOfGraph = this.applet.Disk_typeOfGraph;
+      this.minPrefix = this.applet.Disk_minPrefix;
     }
     if (providerName == _("NET")) {
       this.autoScale = this.applet.Net_autoscale;
       this.logScale = this.applet.Net_logscale;
       this.typeOfGraph = this.applet.Net_typeOfGraph;
+      this.minPrefix = this.applet.Net_minPrefix;
     }
     let dataPoints = [];
     for (let i=0, len=currentReadings.length; i<len; i++) {
@@ -833,8 +844,18 @@ class GraphLineChart {
     this.dataPointsList.shift();
     this.maxValueLoc--;
 
-    //double check what we just added isnt greater than our max (for all lines)
     for (let i=0, len=dataPoints.length; i<len; i++) {
+      //check what we just added isnt lesser than our min (for all lines)
+      if (
+        (providerName == _("NET") && dataPoints[i] < this.minNetShownValue) ||
+        (providerName == _("DISK") && dataPoints[i] < this.minDiskShownValue)
+      )
+        dataPoints[i] = 0;
+
+      //~ if (providerName == _("DISK") && dataPoints[i] < this.minDiskShownValue)
+        //~ dataPoints[i] = 0;
+
+      //double check what we just added isnt greater than our max (for all lines)
       if (dataPoints[i] > this.maxValue && dataPoints[i] > this.minMaxValue) {
         this.maxValue = dataPoints[i];
         this.maxValueLoc = this.dataPointsListSize - 1;
@@ -843,16 +864,12 @@ class GraphLineChart {
     }
 
     if (this.isReading && this.isWriting) {
-      //~ this.led = this.leds["both"];
       this.ledColor = RGBa2rgba("rgba(184, 113, 88, 1)");
     } else if (this.isReading) {
-      //~ this.led = this.leds["read"];
       this.ledColor = RGBa2rgba("rgba(126, 180, 69, 1)");
     } else if (this.isWriting) {
-      //~ this.led = this.leds["write"];
       this.ledColor = RGBa2rgba("rgba(244, 67, 54, 1)");
     } else {
-      //~ this.led = this.leds["idle"];
       this.ledColor = RGBa2rgba("rgba(67, 67, 67, 1)");
     }
 
@@ -1100,25 +1117,55 @@ class GraphLineChart {
       }
     }
 
+    var unit0 = "B", unit1 = "B";
+    const PREFIXES = ["B", "K", "M", "G", "T", "P", "E", "Z", "Y"];
+    var UNITS;
+    if (get_nemo_size_prefixes().startsWith("base-2"))
+      UNITS = ["B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"];
+    else
+      UNITS = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+
+    if (providerName == _("NET") && this.minPrefix !== "B") {
+      if (total[0] < this.minNetShownValue) {
+        total[0] = 0;
+        unit0 = UNITS[PREFIXES.indexOf(this.minPrefix)];
+      }
+      if (total[1] < this.minNetShownValue) {
+        total[1] = 0;
+        unit1 = UNITS[PREFIXES.indexOf(this.minPrefix)];
+      }
+    }
+
+    if (providerName == _("DISK") && this.minPrefix !== "B") {
+      if (total[0] < this.minDiskShownValue) {
+        total[0] = 0;
+        unit0 = UNITS[PREFIXES.indexOf(this.minPrefix)];
+      }
+      if (total[1] < this.minDiskShownValue) {
+        total[1] = 0;
+        unit1 = UNITS[PREFIXES.indexOf(this.minPrefix)];
+      }
+    }
+
     if (totalNetOK || speedDiskOK) {
       let _down = formatBytesValueUnit(total[0], 2, false);
       let down;
       if (isOnlyLeftOrRight) {
         down = Math.round(_down[0]).toString().padStart(4, " ") + " " + _down[1].trim().padStart(3, " ");
-        if (_down[0] == 0) down = "0".padStart(4, " ") + " " + "B".padStart(3, " ");
+        if (_down[0] == 0) down = "0".padStart(4, " ") + " " + unit0.padStart(3, " ");
       } else {
         down =  Math.round(_down[0]).toString().padStart(4, " ") + " " + _down[1].padStart(3, " ");
-        if (_down[0] == 0) down = "0".padStart(4, " ") + " " + "B".padStart(3, " ");
+        if (_down[0] == 0) down = "0".padStart(4, " ") + " " + unit0.padStart(3, " ");
       }
 
       let _up = formatBytesValueUnit(total[1], 2, false);
       let up;
       if (isOnlyLeftOrRight) {
         up =  Math.round(_up[0]).toString().padStart(4, " ") + " " + _up[1].trim().padStart(3, " ");
-        if (_up[0] == 0) up = "0".padStart(4, " ") + " " + "B".padStart(3, " ");
+        if (_up[0] == 0) up = "0".padStart(4, " ") + " " + unit1.padStart(3, " ");
       } else {
         up =  Math.round(_up[0]).toString().padStart(4, " ") + " " + _up[1].padStart(3, " ");
-        if (_up[0] == 0) up = "0".padStart(4, " ") + " " + "B".padStart(3, " ");
+        if (_up[0] == 0) up = "0".padStart(4, " ") + " " + unit1.padStart(3, " ");
       }
 
       let downstr = '▼ ' + down;

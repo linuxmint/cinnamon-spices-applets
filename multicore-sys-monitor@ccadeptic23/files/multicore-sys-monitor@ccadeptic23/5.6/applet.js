@@ -22,7 +22,7 @@ const {
 
 const { to_string } = require("./lib/tostring");
 const { readFileAsync } = require("./lib/readFileAsync");
-const Graphs = require('./lib/Graphs');
+const Graphs = require("./lib/Graphs");
 const {
   timeout_add,
   setTimeout,
@@ -31,7 +31,7 @@ const {
   source_remove,
   remove_all_sources } = require("./lib/mainloopTools");
 
-const UUID = 'multicore-sys-monitor@ccadeptic23';
+const UUID = "multicore-sys-monitor@ccadeptic23";
 const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const PATH2SCRIPTS = APPLET_DIR + "/scripts";
@@ -40,7 +40,7 @@ const NETWORK_DEVICES_STATUS_PATH = XDG_RUNTIME_DIR + "/network_devices";
 
 const POWER_SUPPLY_PATH = "/sys/class/power_supply";
 
-const rate = _('/s');
+const rate = _("/s");
 var spaces = 16;
 const translated_strings = [
     _("Core 128:"),
@@ -103,8 +103,8 @@ function conf2json(str) {
 }
 
 function get_nemo_size_prefixes() {
-    let _SETTINGS_SCHEMA='org.nemo.preferences';
-    let _SETTINGS_KEY = 'size-prefixes';
+    let _SETTINGS_SCHEMA="org.nemo.preferences";
+    let _SETTINGS_KEY = "size-prefixes";
     let _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
     return _interface_settings.get_string(_SETTINGS_KEY)
 }
@@ -139,18 +139,18 @@ const formatNumber = (value, decimals=2) => {
 const formatBytesValueUnit = (bytes, decimals=2, withRate=true) => {
     let _rate = (withRate === true) ? rate : "";
     if (bytes < 1) {
-        return '0'.padStart(spaces/2 - 1) + '.00'.padEnd(spaces/2 - 1) + 'B'.padStart(3, ' ') + _rate;
+        return "0".padStart(spaces/2 - 1) + ".00".padEnd(spaces/2 - 1) + "B".padStart(3, " ") + _rate;
     }
     let dm = (decimals + 1) || 3;
-    let isBinary = get_nemo_size_prefixes().startsWith('base-2');
+    let isBinary = get_nemo_size_prefixes().startsWith("base-2");
     let k, sizes, i;
     if (!isBinary) {
         k = 1000;
-        sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
         i = Math.min(Math.max(0, Math.trunc(Math.log10(bytes) / 3)), 8); // Math.log10(k) = 3.
     } else {
         k = 1024;
-        sizes = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+        sizes = ["B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"];
         i = Math.min(Math.max(0, Math.trunc(Math.log2(bytes) / 10)), 8); // Math.log2(k) = 10.
     }
     let value;
@@ -198,6 +198,9 @@ class MCSM extends Applet.IconApplet {
         this.isCurrentlyCheckingStatus = false;
 
         this.mainLoopId = null;
+
+        this.get_minNetShownValue();
+        this.get_minDiskShownValue();
 
         this.settings = new AppletSettings(this, UUID, this.instance_id);
         this.settings.bind("isHighlighted", "isHighlighted");
@@ -321,6 +324,11 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Net_typeOfGraph", "Net_typeOfGraph");
         this.settings.bind("Net_autoscale", "Net_autoscale");
         this.settings.bind("Net_logscale", "Net_logscale");
+        this.settings.bind("Net_minPrefix", "Net_minPrefix", (value) => {
+            this.networkGraph.minPrefix = value;
+            this.get_minNetShownValue();
+        });
+        this.get_minNetShownValue();
         this.settings.bind("Net_total_type", "Net_total_type");
         this.settings.bind("Net_total_display", "Net_total_display", () => { this.adjust_Net_width() });
         this.settings.bind("Net_total_hovering_only", "Net_total_hovering_only");
@@ -336,6 +344,11 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Disk_typeOfGraph", "Disk_typeOfGraph");
         this.settings.bind("Disk_autoscale", "Disk_autoscale");
         this.settings.bind("Disk_logscale", "Disk_logscale");
+        this.settings.bind("Disk_minPrefix", "Disk_minPrefix", (value) => {
+            this.diskGraph.minPrefix = value;
+            this.get_minDiskShownValue();
+        });
+        this.get_minDiskShownValue();
         this.settings.bind("Disk_symbolsInTooltip", "Disk_symbolsInTooltip");
         this.settings.bind("Disk_speed_display", "Disk_speed_display");
         this.settings.bind("Disk_speed_hovering_only", "Disk_speed_hovering_only");
@@ -435,17 +448,23 @@ class MCSM extends Applet.IconApplet {
         this.oldCPU_Idle_Values = [];
 
         this.hovered = false;
-        this.actor.connect('enter-event', (actor, event) => {
+        this.actor.connect("enter-event", (actor, event) => {
             this.hovered = true;
             // Work around hovering over a PangoCairo canvas instance triggering a false positive panel leave event
-            if (this.panel._autohideSettings !== 'false') {
+            if (this.panel._autohideSettings !== "false") {
                 this.originalAutoHideSetting = this.panel._autohideSettings;
-                this.panel._autohideSettings = 'true';
+                this.panel._autohideSettings = "true";
                 this.panel._updatePanelVisibility();
             }
+            this._applet_tooltip.preventShow = false;
+            this._setTooltip();
+            this._applet_tooltip.show();
         });
-        this.actor.connect('leave-event', (actor, event) => {
+        this.actor.connect("leave-event", (actor, event) => {
             this.hovered = false;
+            this._applet_tooltip.hide();
+            //~ this._applet_tooltip.preventShow = true;
+            this._applet_tooltip.preventShow = false;
             if (this.originalAutoHideSetting) {
                 this.panel._autohideSettings = this.originalAutoHideSetting;
                 this.originalAutoHideSetting = null;
@@ -478,17 +497,65 @@ class MCSM extends Applet.IconApplet {
         //For us this means the heighest point wont represent a valuelower than 1Kb/s
         this.networkGraph.autoScale = this.Net_autoscale;
         this.networkGraph.logScale = this.Net_logscale;
+        this.networkGraph.minPrefix = this.Net_minPrefix;
 
         this.diskGraph = new Graphs.GraphLineChart(this.graphArea, this.Disk_width, this);
         this.diskGraph.autoScale = this.Disk_autoscale;
         this.diskGraph.logScale = this.Disk_logscale;
+        this.diskGraph.minPrefix = this.Disk_minPrefix;
 
         this.diskUsageGraph = new Graphs.GraphVBars100(this.graphArea, this);
 
         this.batteryGraph = new Graphs.GraphVBars100(this.graphArea, this);
 
         this.actor.add_actor(this.graphArea);
-        this.graphArea.connect('repaint', (area) => this.onGraphRepaint(area));
+        this.graphArea.connect("repaint", (area) => this.onGraphRepaint(area));
+    }
+
+    get_minNetShownValue() {
+        if (this.Net_minPrefix == null) {
+            this.minNetShownValue = 0;
+            return;
+        }
+        let k = 1000;
+        let isBinary = get_nemo_size_prefixes().startsWith("base-2");
+        if (isBinary) k = 1024;
+        var minFromPrefix;
+        switch (this.Net_minPrefix) {
+            case "B": minFromPrefix = 0; break;
+            case "K": minFromPrefix = k; break;
+            case "M": minFromPrefix = k ** 2; break;
+            case "G": minFromPrefix = k ** 3; break;
+            case "T": minFromPrefix = k ** 4; break;
+            case "P": minFromPrefix = k ** 5; break;
+            case "E": minFromPrefix = k ** 6; break;
+            case "Z": minFromPrefix = k ** 7; break;
+            case "Y": minFromPrefix = k ** 8; break;
+        }
+        this.minNetShownValue = minFromPrefix;
+    }
+
+    get_minDiskShownValue() {
+        if (this.Disk_minPrefix == null) {
+            this.minDiskShownValue = 0;
+            return;
+        }
+        let k = 1000;
+        let isBinary = get_nemo_size_prefixes().startsWith("base-2");
+        if (isBinary) k = 1024;
+        var minFromPrefix;
+        switch (this.Disk_minPrefix) {
+            case "B": minFromPrefix = 0; break;
+            case "K": minFromPrefix = k; break;
+            case "M": minFromPrefix = k ** 2; break;
+            case "G": minFromPrefix = k ** 3; break;
+            case "T": minFromPrefix = k ** 4; break;
+            case "P": minFromPrefix = k ** 5; break;
+            case "E": minFromPrefix = k ** 6; break;
+            case "Z": minFromPrefix = k ** 7; break;
+            case "Y": minFromPrefix = k ** 8; break;
+        }
+        this.minDiskShownValue = minFromPrefix;
     }
 
     setTooltipStyle() {
@@ -671,7 +738,7 @@ class MCSM extends Applet.IconApplet {
         };
 
         for (let i = 0, len = _properties.length; i < len; i++) {
-            if (_properties[i].abbrev === 'Swap') {
+            if (_properties[i].abbrev === "Swap") {
                 continue;
             }
             if (this[_properties[i].provider].isEnabled) {
@@ -679,7 +746,7 @@ class MCSM extends Applet.IconApplet {
                 let areaContext = area.get_context();
                 areaContext.translate(xOffset, yOffset);
                 let width = (this[`${_properties[i].abbrev}_squared`] === true) ? this.panelHeight : this[`${_properties[i].abbrev}_width`] * global.ui_scale;
-                if (_properties[i].abbrev === 'Mem') {
+                if (_properties[i].abbrev === "Mem") {
                     // paint the "swap" backdrop
                     this.swapGraph.paint(
                         this.swapProvider.name,
@@ -739,7 +806,7 @@ class MCSM extends Applet.IconApplet {
             let children = this._applet_context_menu._getMenuItems();
             children[0].destroy();
         }
-        this.restart_menu_item = new Applet.MenuItem(_('Refresh All'), "view-refresh", () => {
+        this.restart_menu_item = new Applet.MenuItem(_("Refresh All"), "view-refresh", () => {
             this.refreshAll()
         });
         this._applet_context_menu.addMenuItem(this.restart_menu_item, 0);
@@ -749,13 +816,13 @@ class MCSM extends Applet.IconApplet {
             children[1].destroy();
         }
         if (!this.without_any_graph) {
-            this.wo_graphs_item = new Applet.MenuItem(_('Without any graphics'), "list-remove", () => {
+            this.wo_graphs_item = new Applet.MenuItem(_("Without any graphics"), "list-remove", () => {
                 GLib.file_set_contents(this.metadata.path+"/WOGRAPH", "");
                 this.refreshAll()
             });
             this._applet_context_menu.addMenuItem(this.wo_graphs_item, 1);
         } else {
-            this.w_graphs_item = new Applet.MenuItem(_('With graphics'), "list-remove", () => {
+            this.w_graphs_item = new Applet.MenuItem(_("With graphics"), "list-remove", () => {
                 let file = Gio.file_new_for_path(this.metadata.path+"/WOGRAPH");
                 file.delete(null);
                 this.refreshAll()
@@ -768,7 +835,7 @@ class MCSM extends Applet.IconApplet {
             let drop_cache_item = new Applet.MenuItem(
                 _("Drop Memory Cache (needs root rights)"),
                 "go-bottom", //"view-bottom-pane",
-                () => { Util.spawnCommandLineAsync('pkexec sysctl vm.drop_caches=3') }
+                () => { Util.spawnCommandLineAsync("pkexec sysctl vm.drop_caches=3") }
             );
             this._applet_context_menu.addMenuItem(drop_cache_item, 2);
         }
@@ -1064,22 +1131,22 @@ class MCSM extends Applet.IconApplet {
     }
 
     _runSysMon() {
-        let systemMonitoringCenter = appSystem.lookup_flatpak_app_id('io.github.hakandundar34coding.system-monitoring-center');
+        let systemMonitoringCenter = appSystem.lookup_flatpak_app_id("io.github.hakandundar34coding.system-monitoring-center");
         if (systemMonitoringCenter) {
             systemMonitoringCenter.activate();
             return
         }
-        systemMonitoringCenter = appSystem.lookup_app('io.github.hakandundar34coding.system-monitoring-center.desktop');
+        systemMonitoringCenter = appSystem.lookup_app("io.github.hakandundar34coding.system-monitoring-center.desktop");
         if (systemMonitoringCenter) {
             systemMonitoringCenter.activate();
             return
         }
-        let gnomeSystemMonitor = appSystem.lookup_app('gnome-system-monitor.desktop');
+        let gnomeSystemMonitor = appSystem.lookup_app("gnome-system-monitor.desktop");
         if (gnomeSystemMonitor) {
             gnomeSystemMonitor.activate();
             return
         }
-        gnomeSystemMonitor = appSystem.lookup_app('org.gnome.SystemMonitor.desktop');
+        gnomeSystemMonitor = appSystem.lookup_app("org.gnome.SystemMonitor.desktop");
         if (gnomeSystemMonitor) {
             gnomeSystemMonitor.activate();
         }
@@ -1490,10 +1557,10 @@ class MCSM extends Applet.IconApplet {
         if (!this.DiskUsage_enabled && !this.DiskUsage_enabledTooltip) return [0, 0];
         try {
             let dir = Gio.file_new_for_path(""+path);
-            let info = dir.query_filesystem_info('filesystem::used,filesystem::size', null);
+            let info = dir.query_filesystem_info("filesystem::used,filesystem::size", null);
             if (info == null) return [0, 0];
-            let used = info.get_attribute_as_string('filesystem::used');
-            let size = info.get_attribute_as_string('filesystem::size');
+            let used = info.get_attribute_as_string("filesystem::used");
+            let size = info.get_attribute_as_string("filesystem::size");
             return [parseInt(size), parseInt(used)];
         } catch(e) {
             global.log(UUID + " - disk_usage("+path+"): "+e);
@@ -1611,7 +1678,7 @@ class MCSM extends Applet.IconApplet {
         try {
             this.netMonitor = Gio.network_monitor_get_default();
             let netMonitorId = this.netMonitor.connect(
-                'network-changed',
+                "network-changed",
                 (monitor, network_available) => this.on_network_changed()
             );
             this.monitors.push([this.netMonitor, netMonitorId]);
@@ -1707,7 +1774,7 @@ class MCSM extends Applet.IconApplet {
 class MemDataProvider {
     constructor(applet) {
         this.applet = applet;
-        this.name = _('MEM');
+        this.name = _("MEM");
         this.memusage = 0;
         this.memTotal = 0;
         this.currentReadings = [0, 0, 0, 0];
@@ -1762,23 +1829,23 @@ class MemDataProvider {
             trans += " " + strMemTotal + " " + unitMemTotal;
         }
         let len = trans.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
+        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
         if (this.applet.Mem_showBytesInTooltip) {
             let [strMemUsed, unitMemUsed] = formatBytesValueUnit(this.memTotal * this.currentReadings[0], 2, false);
             let [strMemAvail, unitMemAvail] = formatBytesValueUnit(this.memTotal * (1.0 - this.currentReadings[0]), 2, false);
-            toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t'  + "" + formatNumber(parseFloat(strMemUsed).toFixed(2), 2).padStart(8, ' ') + " " + unitMemUsed.padStart(6, ' ') + '\n';
-            toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t'  + "" + formatNumber(parseFloat(strMemAvail).toFixed(2), 2).padStart(8, ' ') + " " + unitMemAvail.padStart(6, ' ') + '\n';
+            toolTipString += _("Used:").split(":")[0].padStart(spaces, " ") + ":\t"  + "" + formatNumber(parseFloat(strMemUsed).toFixed(2), 2).padStart(8, " ") + " " + unitMemUsed.padStart(6, " ") + "\n";
+            toolTipString += _("Available:").split(":")[0].padStart(spaces, " ") + ":\t"  + "" + formatNumber(parseFloat(strMemAvail).toFixed(2), 2).padStart(8, " ") + " " + unitMemAvail.padStart(6, " ") + "\n";
         }
         let percentChar = "%";
         if (this.applet.percentAtEndOfLine)
             percentChar = "%".padStart(6, " ");
         if (this.applet.Mem_onlyUsedAvailable) {
-            toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t' + "" + formatNumber(parseFloat((Math.round(1000 * this.currentReadings[0])/10)).toFixed(2), 2).padStart(8, ' ') + " " + percentChar + '\n';
-            toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t' + "" + formatNumber(parseFloat((Math.round(1000 * (1 - this.currentReadings[0]))/10)).toFixed(2), 2).padStart(8, ' ') + " " + percentChar + '\n';
+            toolTipString += _("Used:").split(":")[0].padStart(spaces, " ") + ":\t" + "" + formatNumber(parseFloat((Math.round(1000 * this.currentReadings[0])/10)).toFixed(2), 2).padStart(8, " ") + " " + percentChar + "\n";
+            toolTipString += _("Available:").split(":")[0].padStart(spaces, " ") + ":\t" + "" + formatNumber(parseFloat((Math.round(1000 * (1 - this.currentReadings[0]))/10)).toFixed(2), 2).padStart(8, " ") + " " + percentChar + "\n";
         } else {
-            let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
+            let attributes = [_("Used:"), _("Cached:"), _("Buffer:"), _("Free:")];
             for (let i = 0; i < attributes.length; i++) {
-                toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + "" + formatNumber(parseFloat((Math.round(1000 * this.currentReadings[i])/10)).toFixed(2), 2).padStart(8, ' ') + " " + percentChar + '\n';
+                toolTipString += (attributes[i]).split(":")[0].padStart(spaces, " ") + ":\t" + "" + formatNumber(parseFloat((Math.round(1000 * this.currentReadings[i])/10)).toFixed(2), 2).padStart(8, " ") + " " + percentChar + "\n";
             }
         }
         return toolTipString;
@@ -1800,7 +1867,7 @@ class MemDataProvider {
 class BufferCacheSharedDataProvider {
     constructor(applet) {
         this.applet = applet;
-        this.name = _('Buffers/Cache/Shared');
+        this.name = _("Buffers/Cache/Shared");
         this.currentReadings = [0, 0];
     }
 
@@ -1826,17 +1893,17 @@ class BufferCacheSharedDataProvider {
         if (! this.isRunning) return "";
         let trans = this.name;
         let len = trans.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
+        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
 
         let colon = _(":");
         let lenColon = Math.max(colon.length - 1, 0);
-        let attributes = [_('Buffer'), _('Cache'), _("Shared")];
+        let attributes = [_("Buffer"), _("Cache"), _("Shared")];
 
         for (let i=0, len=attributes.length; i<len; i++) {
             let [value, unit] = formatBytesValueUnit(Math.round(this.currentReadings[i]), 2, false);
             value = formatNumber(parseFloat(value).toFixed(2), 2);
             let valueLen = (""+value).length;
-            toolTipString += attributes[i].padStart(spaces - lenColon, ' ') + colon + "\t" + "" + value.padStart(8, ' ') + " " + unit.padStart(6, ' ') + '\n';
+            toolTipString += attributes[i].padStart(spaces - lenColon, " ") + colon + "\t" + "" + value.padStart(8, " ") + " " + unit.padStart(6, " ") + "\n";
         }
         return toolTipString;
     }
@@ -1857,7 +1924,7 @@ class BufferCacheSharedDataProvider {
 class SwapDataProvider {
     constructor(applet) {
         this.applet = applet;
-        this.name = _('SWAP');
+        this.name = _("SWAP");
         this.swapusage = true;
         this.swapTotal = 0;
         this.currentReadings = [0];
@@ -1884,7 +1951,7 @@ class SwapDataProvider {
 
     getTooltipString() {
         if (!this.isEnabledTooltip || !this.swapusage) {
-            return '';
+            return "";
         }
         let trans = _("Swap");
         let [strSwapTotal, unitSwapTotal] = formatBytesValueUnit(this.swapTotal, 2, false);
@@ -1893,13 +1960,13 @@ class SwapDataProvider {
             trans2 = trans + " " + strSwapTotal + " " + unitSwapTotal;
         }
         let len = trans2.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans2 + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
+        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans2 + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
         if (this.applet.Mem_showBytesInTooltip) {
             let [swapUsedAmount, swapUsedUnit] = formatBytesValueUnit(this.swapTotal * this.currentReadings[0], 2, false);
             if (isNaN(parseFloat(swapUsedAmount))) swapUsedAmount = "0";
             let [swapAvailableAmount, swapAvailableUnit] = formatBytesValueUnit(this.swapTotal * (1 - this.currentReadings[0]), 2, false);
-            toolTipString += _('Used:').split(':')[0].padStart(spaces, ' ') + ':\t'  + "" + formatNumber(parseFloat(swapUsedAmount).toFixed(2), 2).padStart(8, ' ') + " " + swapUsedUnit.padStart(6, ' ') + '\n';
-            toolTipString += _('Available:').split(':')[0].padStart(spaces, ' ') + ':\t'  + "" + formatNumber(parseFloat(swapAvailableAmount).toFixed(2), 2).padStart(8, ' ') + " " + swapAvailableUnit.padStart(6, ' ') + '\n';
+            toolTipString += _("Used:").split(":")[0].padStart(spaces, " ") + ":\t"  + "" + formatNumber(parseFloat(swapUsedAmount).toFixed(2), 2).padStart(8, " ") + " " + swapUsedUnit.padStart(6, " ") + "\n";
+            toolTipString += _("Available:").split(":")[0].padStart(spaces, " ") + ":\t"  + "" + formatNumber(parseFloat(swapAvailableAmount).toFixed(2), 2).padStart(8, " ") + " " + swapAvailableUnit.padStart(6, " ") + "\n";
         }
         let percentChar = "%";
         if (this.applet.percentAtEndOfLine)
@@ -1907,7 +1974,7 @@ class SwapDataProvider {
 
         let colon = _(":");
         let lenColon = Math.max(colon.length - 1, 0);
-        toolTipString += trans.padStart(spaces - lenColon, ' ') + colon + '\t' + "" + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(8, ' ') + " " + percentChar + '\n';
+        toolTipString += trans.padStart(spaces - lenColon, " ") + colon + "\t" + "" + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(8, " ") + " " + percentChar + "\n";
         return toolTipString;
     }
 
@@ -1927,7 +1994,7 @@ class SwapDataProvider {
 class MultiCpuDataProvider {
     constructor(applet) {
         this.applet = applet;
-        this.name = _('CPU');
+        this.name = _("CPU");
         this.prevData = [];
         this.currentReadings = [];
     }
@@ -1967,7 +2034,7 @@ class MultiCpuDataProvider {
             trans += " " + temperature;
         }
         let len = trans.length - 2;
-        var toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
+        var toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
 
         let colon = _(":");
         let lenColon = Math.max(colon.length - 1, 0);
@@ -1979,19 +2046,19 @@ class MultiCpuDataProvider {
             let percentage = formatNumber(parseInt(100 * this.currentReadings[this.currentReadings.length - 1]), 0);
             var percentage_str = "" + percentage;
             percentage_str = percentage_str.padStart(4);
-            toolTipString += (_('CPU') + ' ').padStart(spaces - lenColon, ' ');
-            toolTipString += colon + '\t' + " " + percentage_str + " " + percentChar + '\n';
+            toolTipString += (_("CPU") + " ").padStart(spaces - lenColon, " ");
+            toolTipString += colon + "\t" + " " + percentage_str + " " + percentChar + "\n";
         } else {
             for (let i = 0; i < this.CPUCount; i++) {
                 let percentage = formatNumber(parseInt(100 * this.currentReadings[i]), 0);
                 var percentage_str = "" + percentage;
                 percentage_str = percentage_str.padStart(4);
                 if (this.applet.CPU_mergeAll) {
-                    toolTipString += (_('CPU') + ' ').padStart(spaces - lenColon, ' ');
+                    toolTipString += (_("CPU") + " ").padStart(spaces - lenColon, " ");
                 } else {
-                    toolTipString += (_('Core') + ' ' + i).padStart(spaces - lenColon, ' ');
+                    toolTipString += (_("Core") + " " + i).padStart(spaces - lenColon, " ");
                 }
-                toolTipString += colon + '\t' + " " + percentage_str + " " + percentChar + '\n';
+                toolTipString += colon + "\t" + " " + percentage_str + " " + percentChar + "\n";
             }
         }
         return toolTipString;
@@ -2017,7 +2084,7 @@ class MultiCpuDataProvider {
 class NetDataProvider {
     constructor(applet) {
         this.applet = applet;
-        this.name = _('NET');
+        this.name = _("NET");
         this.disabledDevices = [];
         this.inTotalDevices = [];
         this.totalAmountCurrent = [0, 0];
@@ -2086,6 +2153,7 @@ class NetDataProvider {
 
         var currentAmount = [0, 0];
         var previousAmount = [0, 0];
+        var minFromPrefix = this.minNetShownValue;
         for (let i = 0, len = this.currentReadings.length; i < len; i++) {
             let data_index = dataIds.indexOf(this.currentReadings[i]["id"]);
             if (data_index < 0) continue;
@@ -2107,9 +2175,16 @@ class NetDataProvider {
             this.currentReadings[i].tooltipDown = Math.abs(Math.round(
                 ((this.currentReadings[i]["down"] - this.currentReadings[i].lastReading[0]) / secondsSinceLastUpdate)
             ));
+
+            if (this.currentReadings[i].tooltipDown < minFromPrefix)
+                this.currentReadings[i].tooltipDown = 0;
+
             this.currentReadings[i].tooltipUp = Math.abs(Math.round(
                 ((this.currentReadings[i]["up"] - this.currentReadings[i].lastReading[1]) / secondsSinceLastUpdate)
             ));
+
+            if (this.currentReadings[i].tooltipUp < minFromPrefix)
+                this.currentReadings[i].tooltipUp = 0;
 
             this.currentReadings[i].lastReading[0] = this.currentReadings[i]["down"];
             this.currentReadings[i].lastReading[1] = this.currentReadings[i]["up"];
@@ -2130,7 +2205,7 @@ class NetDataProvider {
         if (! this.isRunning) return "";
         let trans = _("Networks");
         let len = trans.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
+        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
 
         for (let i = 0, len = this.currentReadings.length; i < len; i++) {
             if (!this.currentReadings[i].tooltipDown) {
@@ -2153,15 +2228,32 @@ class NetDataProvider {
             } else {
                 up_value = formatNumber(parseFloat(up_value).toFixed(2), 2);
             }
-            let name = (this.currentReadings[i]['name'].length === 0) ? this.currentReadings[i].id : this.currentReadings[i].name;
-            toolTipString += name.padEnd(22) + '\n';
+            let name = (this.currentReadings[i]["name"].length === 0) ? this.currentReadings[i].id : this.currentReadings[i].name;
+            toolTipString += name.padEnd(22) + "\n";
+
+            const PREFIXES = ["B", "K", "M", "G", "T", "P", "E", "Z", "Y"];
+            var UNITS;
+            if (get_nemo_size_prefixes().startsWith("base-2"))
+                UNITS = ["B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"];
+            else
+                UNITS = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+
+            let p;
+            if (this.applet.Net_minPrefix !== "B") {
+                p = down_unit[0];
+                if (PREFIXES.indexOf(p) < PREFIXES.indexOf(this.applet.Net_minPrefix))
+                    down_unit = UNITS[PREFIXES.indexOf(this.applet.Net_minPrefix)]  + rate;
+                p = up_unit[0];
+                if (PREFIXES.indexOf(p) < PREFIXES.indexOf(this.applet.Net_minPrefix))
+                    up_unit = UNITS[PREFIXES.indexOf(this.applet.Net_minPrefix)]  + rate;
+            }
 
             if (this.applet.Net_symbolsInTooltip) {
-                toolTipString += (' ▼︎' + _(':')).split(':')[0].padStart(spaces + 1, ' ') + ':' + "\t" + "" + down_value.padStart(8) + " " + down_unit.padStart(6, ' ') + '\n';
-                toolTipString += (' ▲' + _(':')).split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + "" + up_value.padStart(8) + " " + up_unit.padStart(6, ' ') + '\n';
+                toolTipString += (" ▼︎" + _(":")).split(":")[0].padStart(spaces + 1, " ") + ":" + "\t" + "" + down_value.padStart(8) + " " + down_unit.padStart(6, " ") + "\n";
+                toolTipString += (" ▲" + _(":")).split(":")[0].padStart(spaces, " ") + ":"  + "\t" + "" + up_value.padStart(8) + " " + up_unit.padStart(6, " ") + "\n";
             } else {
-                toolTipString += _('Down:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + down_value.padStart(8) + " " + down_unit.padStart(6, ' ') + '\n';
-                toolTipString += _('Up:').split(':')[0].padStart(spaces, ' ') + ':'  + "\t" + "" + up_value.padStart(8) + " " + up_unit.padStart(6, ' ') + '\n';
+                toolTipString += _("Down:").split(":")[0].padStart(spaces, " ") + ":" + "\t" + "" + down_value.padStart(8) + " " + down_unit.padStart(6, " ") + "\n";
+                toolTipString += _("Up:").split(":")[0].padStart(spaces, " ") + ":"  + "\t" + "" + up_value.padStart(8) + " " + up_unit.padStart(6, " ") + "\n";
             }
         }
         return toolTipString;
@@ -2183,7 +2275,7 @@ class NetDataProvider {
 class DiskDataProvider {
     constructor(applet) {
         this.applet = applet;
-        this.name = _('DISK');
+        this.name = _("DISK");
 
         this.disabledDevices = [];
         this.currentReadings = [];
@@ -2288,7 +2380,7 @@ class DiskDataProvider {
         }
         let trans = _("Disks");
         let len = trans.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
+        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
         let title = "" + toolTipString;
 
         for (let i = 0, len = this.currentReadings.length; i < len; i++) {
@@ -2309,17 +2401,35 @@ class DiskDataProvider {
             } else {
                 write = formatNumber(parseFloat(write).toFixed(2), 2);
             }
-            if (this.currentReadings[i].name != this.currentReadings[i].id)
-                toolTipString += this.currentReadings[i].name.padStart(1, " ").padEnd(title.length - this.currentReadings[i].id.length - 1, " ") + this.currentReadings[i].id + '\n';
+
+            const PREFIXES = ["B", "K", "M", "G", "T", "P", "E", "Z", "Y"];
+            var UNITS;
+            if (get_nemo_size_prefixes().startsWith("base-2"))
+                UNITS = ["B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"];
             else
-                toolTipString += this.currentReadings[i].name.padEnd(22) + '\n';
+                UNITS = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+
+            let p;
+            if (this.applet.Disk_minPrefix !== "B") {
+                p = read_unit[0];
+                if (PREFIXES.indexOf(p) < PREFIXES.indexOf(this.applet.Disk_minPrefix))
+                    read_unit = UNITS[PREFIXES.indexOf(this.applet.Disk_minPrefix)]  + rate;
+                p = write_unit[0];
+                if (PREFIXES.indexOf(p) < PREFIXES.indexOf(this.applet.Disk_minPrefix))
+                    write_unit = UNITS[PREFIXES.indexOf(this.applet.Disk_minPrefix)]  + rate;
+            }
+
+            if (this.currentReadings[i].name != this.currentReadings[i].id)
+                toolTipString += this.currentReadings[i].name.padStart(1, " ").padEnd(title.length - this.currentReadings[i].id.length - 1, " ") + this.currentReadings[i].id + "\n";
+            else
+                toolTipString += this.currentReadings[i].name.padEnd(22) + "\n";
 
             if (this.applet.Disk_symbolsInTooltip) {
-                toolTipString += (' ▲' + _(':')).split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + read.padStart(8, " ") + " " + read_unit.padStart(6, " ") + '\n';
-                toolTipString += (' ▼︎' + _(':')).split(':')[0].padStart(spaces + 1, ' ') + ':' + "\t" + "" + write.padStart(8, " ") + " " + write_unit.padStart(6, " ") + '\n';
+                toolTipString += (" ▲" + _(":")).split(":")[0].padStart(spaces, " ") + ":" + "\t" + "" + read.padStart(8, " ") + " " + read_unit.padStart(6, " ") + "\n";
+                toolTipString += (" ▼︎" + _(":")).split(":")[0].padStart(spaces + 1, " ") + ":" + "\t" + "" + write.padStart(8, " ") + " " + write_unit.padStart(6, " ") + "\n";
             } else {
-                toolTipString += _('Read:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + read.padStart(8, " ") + " " + read_unit.padStart(6, " ") + '\n';
-                toolTipString += _('Write:').split(':')[0].padStart(spaces, ' ') + ':' + "\t" + "" + write.padStart(8, " ") + " " + write_unit.padStart(6, " ") + '\n';
+                toolTipString += _("Read:").split(":")[0].padStart(spaces, " ") + ":" + "\t" + "" + read.padStart(8, " ") + " " + read_unit.padStart(6, " ") + "\n";
+                toolTipString += _("Write:").split(":")[0].padStart(spaces, " ") + ":" + "\t" + "" + write.padStart(8, " ") + " " + write_unit.padStart(6, " ") + "\n";
             }
         }
         return toolTipString;
@@ -2341,7 +2451,7 @@ class DiskDataProvider {
 class DiskUsageDataProvider {
     constructor(applet) {
         this.applet = applet;
-        this.name = _('DISK');
+        this.name = _("DISK");
         this.currentReadings = [];
     }
 
@@ -2364,7 +2474,7 @@ class DiskUsageDataProvider {
         }
         let trans = _("Usage");
         let len = trans.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
+        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
         let title = "" + toolTipString;
 
         let colon = _(":");
@@ -2388,15 +2498,15 @@ class DiskUsageDataProvider {
             let maxPercentage = Math.round(100 * this.currentReadings[i].maxvalue, 2);
             if (this.applet.DiskUsage_mergeAll) {
                 if (percentage < maxPercentage)
-                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t ' + formatNumber(percentage, 0).padStart(4, ' ') + " " + percentChar + '\n';
+                    toolTipString += (_("Disks") + " ").padStart(spaces - lenColon, " ") + colon + "\t " + formatNumber(percentage, 0).padStart(4, " ") + " " + percentChar + "\n";
                 else
-                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t <b>' + formatNumber(percentage, 0).padStart(4, ' ') + " " + percentChar + '</b>\n';
+                    toolTipString += (_("Disks") + " ").padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 0).padStart(4, " ") + " " + percentChar + "</b>\n";
             } else {
                 let name = names[i];
                 if (percentage < maxPercentage)
-                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t ' + formatNumber(percentage, 0).padStart(4, ' ') + " " + percentChar + '\n';
+                    toolTipString += name.padStart(spaces - lenColon, " ") + colon + "\t " + formatNumber(percentage, 0).padStart(4, " ") + " " + percentChar + "\n";
                 else
-                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t <b>' + formatNumber(percentage, 0).padStart(4, ' ') + " " + percentChar + '</b>\n';
+                    toolTipString += name.padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 0).padStart(4, " ") + " " + percentChar + "</b>\n";
             }
         }
 
@@ -2423,7 +2533,7 @@ class DiskUsageDataProvider {
 class BatteryDataProvider {
     constructor(applet) {
         this.applet = applet;
-        this.name = _('BAT');
+        this.name = _("BAT");
         this.currentReadings = [];
     }
 
@@ -2447,7 +2557,7 @@ class BatteryDataProvider {
         }
         let trans = _("Battery");
         let len = trans.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + '\n';
+        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
         let title = "" + toolTipString;
 
         let colon = _(":");
@@ -2473,19 +2583,19 @@ class BatteryDataProvider {
             let minPercentage = Math.round(10000 * this.currentReadings[i].minvalue) / 100;
             if (this.applet.DiskUsage_mergeAll) {
                 if (percentage > minPercentage)
-                    toolTipString += (_('Batteries') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t ' + formatNumber(percentage, 0).padStart(4, ' ') + " " + percentChar + '\n';
+                    toolTipString += (_("Batteries") + " ").padStart(spaces - lenColon, " ") + colon + "\t " + formatNumber(percentage, 0).padStart(4, " ") + " " + percentChar + "\n";
                 else
-                    toolTipString += (_('Batteries') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t <b>' + formatNumber(percentage, 0).padStart(4, ' ') + " " + percentChar + '</b>\n';
+                    toolTipString += (_("Batteries") + " ").padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 0).padStart(4, " ") + " " + percentChar + "</b>\n";
             } else {
                 let name = names[i];
                 //~ let capacity = Math.round(health[i][1] / health[i][0] * 10000) / 100;
                 let capacity = formatNumber(health[i][1] / health[i][0] * 100, 1);
                 if (percentage > minPercentage) {
-                    //~ toolTipString += (name + " (" + capacity.toString() + "%)").padStart(spaces - lenColon, ' ') + colon + '\t ' + formatNumber(percentage, 2).padStart(7, ' ') + " " + percentChar + '\n';
-                    toolTipString += (name + " (" + capacity + "%)").padStart(spaces - lenColon, ' ') + colon + '\t ' + formatNumber(percentage, 2).padStart(7, ' ') + " " + percentChar + '\n';
+                    //~ toolTipString += (name + " (" + capacity.toString() + "%)").padStart(spaces - lenColon, " ") + colon + "\t " + formatNumber(percentage, 2).padStart(7, " ") + " " + percentChar + "\n";
+                    toolTipString += (name + " (" + capacity + "%)").padStart(spaces - lenColon, " ") + colon + "\t " + formatNumber(percentage, 2).padStart(7, " ") + " " + percentChar + "\n";
                 } else {
-                    //~ toolTipString += (name + " (" + capacity.toString() + "%)").padStart(spaces - lenColon, ' ') + colon + '\t <b>' + formatNumber(percentage, 2).padStart(7, ' ') + " " + percentChar + '</b>\n';
-                    toolTipString += (name + " (" + capacity.toString() + "%)").padStart(spaces - lenColon, ' ') + colon + '\t <b>' + formatNumber(percentage, 2).padStart(7, ' ') + " " + percentChar + '</b>\n';
+                    //~ toolTipString += (name + " (" + capacity.toString() + "%)").padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 2).padStart(7, " ") + " " + percentChar + "</b>\n";
+                    toolTipString += (name + " (" + capacity.toString() + "%)").padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 2).padStart(7, " ") + " " + percentChar + "</b>\n";
                 }
             }
         }
