@@ -1,4 +1,5 @@
 const Applet = imports.ui.applet;
+const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
@@ -38,39 +39,50 @@ Syncthing.prototype = {
 
             let openWebUI = new PopupMenu.PopupMenuItem("Open Web UI", { reactive: true });
             openWebUI.connect('activate', () => {
-               Util.spawnCommandLine(`xdg-open http://${this.syncthing_url}:${this.syncthing_port}`);
+               //Util.spawnCommandLine(`xdg-open http://${this.syncthing_url}:${this.syncthing_port}`);
+               Util.spawn(["xdg-open", `http://${this.syncthing_url}:${this.syncthing_port}`]);
              });
 
             let restart = new PopupMenu.PopupMenuItem("Start/restart", { reactive: true });
             restart.connect('activate', () => {
-               let status = this._get_syncthingstatus();
-               // if syncthing is not running, syncthingctl is not available, so run syncthing command
-               if (status.includes("Stopped") || status.includes("failed")) {
-                    Util.spawnCommandLineAsync(`${this.syncthing_command} ${this.syncthing_args}`,
-                        global.log(`${UUID}: syncthing started successfully`),
-                        global.logError(`${UUID}: error on starting syncthing`)
-                        );
-                }
-                else {
-                    //Util.spawnCommandLine("syncthingctl restart");
-                    this._run_cmd(`${this.syncthingctl_command} restart`);
-                    global.log(`${UUID}: syncthing restarted`);
-                }
-               this._updateAppletStatus();
-             });
+                this._get_syncthingstatus_async((status) => {
+                    if (status.includes("Stopped") || status.includes("failed")) {
+                      //Util.spawnCommandLineAsync(`${this.syncthing_command} ${this.syncthing_args}`, global.log(`${UUID}: syncthing started successfully`), global.logError(`${UUID}: error on starting syncthing`));
+                        try {
+                          let [, argv] = GLib.shell_parse_argv(`${this.syncthing_command} ${this.syncthing_args}`);
+                          Util.spawn(argv);
+                          global.log(`${UUID}: syncthing started`);
+                        } catch (err) {
+                          global.log(`${UUID}: failed to start syncthing: ${err}`)
+                        }
+                    } else {
+                        this._run_cmd_async(`${this.syncthingctl_command} restart`, () => {
+                            global.log(`${UUID}: syncthing restarted`);
+                            this._updateAppletStatus(); // update applet immediately (show it's stopped)
+                        });
+                        return;
+                    }
+
+                    GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 3, () => { //wait 3s and update applet
+                        this._updateAppletStatus();
+                        return GLib.SOURCE_REMOVE;
+                    });
+                });
+            });
 
             let stop = new PopupMenu.PopupMenuItem("Stop", { reactive: true });
             stop.connect('activate', () => {
-               //Util.spawnCommandLine("syncthingctl stop");
-               this._run_cmd(`${this.syncthingctl_command} stop`);
-               global.log(`${UUID}: syncthing stopped`);
-               this._updateAppletStatus();
-             });
+                this._run_cmd_async(`${this.syncthingctl_command} stop`, () => {
+                    global.log(`${UUID}: syncthing stopped`);
+                    this._updateAppletStatus();
+                });
+            });
 
             let showlog = new PopupMenu.PopupMenuItem("Show log", { reactive: true });
             showlog.connect('activate', () => {
                 // show the log in terminal with 'less'; should find a better way in the future
-               Util.spawnCommandLine(`x-terminal-emulator -e bash -c "${this.syncthingctl_command} log | less"`);
+               let cmd = `${this.syncthingctl_command} log | less`; //echo; read -p "Press enter to close..."`;
+               Util.spawn(["x-terminal-emulator", "-e", "bash", "-c", cmd]);
              });
 
             this.menu.addMenuItem(openWebUI);
@@ -104,40 +116,56 @@ Syncthing.prototype = {
     },
 
 
-   _run_cmd: function(command) {
+    _run_cmd_async: function(command, callback_func) {
         try {
-            let [ok, stdout, stderr] = GLib.spawn_command_line_sync(command);
+            let argv = GLib.shell_parse_argv(command)[1];
 
-            // GLib returns ByteArray-like objects; convert safely
-            let out = stdout ? stdout.toString() : "";
-            let err = stderr ? stderr.toString() : "";
+            let proc = new Gio.Subprocess({
+                argv: argv,
+                flags: Gio.SubprocessFlags.STDOUT_PIPE |
+                       Gio.SubprocessFlags.STDERR_PIPE
+            });
 
-            // Return both to be able to detect errors printed to stderr
-            return (out + "\n" + err).trim();
+            proc.init(null);
+
+            proc.communicate_utf8_async(null, null, (proc, res) => {
+                try {
+                    let [, stdout, stderr] = proc.communicate_utf8_finish(res);
+
+                    let out = stdout ? stdout : "";
+                    let err = stderr ? stderr : "";
+
+                    callback_func((out + "\n" + err).trim());
+                } catch (err) {
+                    global.log(`${UUID}: ${err}`);
+                    callback_func("");
+                }
+            });
 
         } catch (err) {
             global.log(`${UUID}: ${err}`);
-            return ""; // keep it predictable
+            callback_func("");
         }
     },
 
 
-    _get_syncthingstatus: function() {
-        //let status = this._run_cmd("syncthingctl status | grep Status | head -n1  | awk '{print $NF}'");
-        let status;
-        try {
-            let status_output = this._run_cmd("syncthingctl status");
-            if (/Connection refused/i.test(status_output) || /^Error:/m.test(status_output)) {
-                status = "Stopped";
-            } else {
-                status = this._extractOverallStatus(status_output);
+    _get_syncthingstatus_async: function(callback_func) {
+        this._run_cmd_async(`${this.syncthingctl_command} status`, (status_output) => {
+            let status;
+
+            try {
+                if (/Connection refused/i.test(status_output) || /^Error:/m.test(status_output)) {
+                    status = "Stopped";
+                } else {
+                    status = this._extractOverallStatus(status_output) || "Command failed (err)";
+                }
+            } catch (err) {
+                status = "Command failed (err)";
+                global.log(`${UUID}: ${err}`);
             }
-        }
-        catch (err) {
-            status = "Command failed (err)";
-            global.log(`${UUID}: ${err}`);
-        }
-        return status;
+
+            callback_func(status);
+        });
     },
 
 
@@ -151,7 +179,6 @@ Syncthing.prototype = {
 
 
     _stripAnsi: function(s) {
-        // Robust ANSI/VT100 escape stripper
         return s.replace(/\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])/g, '');
     },
 
@@ -181,9 +208,10 @@ Syncthing.prototype = {
 
 
     _updateAppletStatus: function() {
-        let status = this._get_syncthingstatus();
-        this.set_applet_tooltip(`Syncthing status: ${status}`);
-        this._updateIcon(status);
+        this._get_syncthingstatus_async((status) => {
+            this.set_applet_tooltip(`Syncthing status: ${status}`);
+            this._updateIcon(status);
+        });
     },
 
 
