@@ -282,7 +282,8 @@
       "title": "Scaling",
       "keys": [
         "Net_autoscale",
-        "Net_logscale"
+        "Net_logscale",
+        "Net_minPrefix"
       ]
     },
     "sectionNetworkTooltip": {
@@ -345,7 +346,8 @@
       "title": "Scaling",
       "keys": [
         "Disk_autoscale",
-        "Disk_logscale"
+        "Disk_logscale",
+        "Disk_minPrefix"
       ]
     },
     "sectionDiskTooltip": {
@@ -1177,6 +1179,23 @@
     "default": true,
     "description": "Logarithmic"
   },
+  "Net_minPrefix": {
+    "type": "combobox",
+    "default": "B",
+    "description": "Minimal prefix",
+    "options": {
+      "Byte": "B",
+      "kilo": "K",
+      "Mega": "M",
+      "Giga": "G",
+      "Tera": "T",
+      "Peta": "P",
+      "Exa": "E",
+      "Zetta": "Z",
+      "Yotta": "Y"
+    },
+    "tooltip": "You can specify the minimum unit of measurement of your choice for the amount of data transferred: byte, kilobyte, megabyte, etc."
+  },
   "Net_symbolsInTooltip": {
     "type": "switch",
     "default": false,
@@ -1437,6 +1456,23 @@
     "type": "switch",
     "default": true,
     "description": "Logarithmic"
+  },
+  "Disk_minPrefix": {
+    "type": "combobox",
+    "default": "B",
+    "description": "Minimal prefix",
+    "options": {
+      "Byte": "B",
+      "kilo": "K",
+      "Mega": "M",
+      "Giga": "G",
+      "Tera": "T",
+      "Peta": "P",
+      "Exa": "E",
+      "Zetta": "Z",
+      "Yotta": "Y"
+    },
+    "tooltip": "You can specify the minimum unit of measurement of your choice for the amount of data transferred: byte, kilobyte, megabyte, etc."
   },
   "Disk_symbolsInTooltip": {
     "type": "switch",

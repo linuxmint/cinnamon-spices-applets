@@ -1,3 +1,12 @@
+### v3.13.6~20260430
+  * You can specify the minimum unit of measurement of your choice for the amount of data transferred: byte, kilobyte, megabyte, etc.
+  * Displays the tooltip instantly when the applet is hovered over.
+  * Fixes [#8617](https://github.com/linuxmint/cinnamon-spices-applets/issues/8617)
+  * Code cleanup.
+
+### v3.13.5~20260426
+  * Flow (Network, Disk I/O): Select minimum unit (k, M, G etc.)
+
 ### v3.13.4~20260425
   * Adds ability to modify the size of the display font, for each type of graph.
   * Fixes [#8595](https://github.com/linuxmint/cinnamon-spices-applets/issues/8595)
