@@ -1,0 +1,115 @@
+# FANCTRL
+# This file is put in the public domain.
+# not-a-feature, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: fw_fanctrl@juleskreuer.eu 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. metadata.json->name
+msgid "FanCTRL"
+msgstr "VentilátorCTRL"
+
+#. metadata.json->description
+msgid "Applet to control the framework fan-speed strategy using fw_fanctrl."
+msgstr ""
+"Kisalkalmazás a Framework ventilátorsebesség-stratégiájának vezérléséhez "
+"az fw_fanctrl használatával."
+
+#. settings-schema.json->header->description
+msgid ""
+"Framework FanCTRL - Fan Strategy Control Applet for Cinnamon \n"
+"\n"
+"List of valid strategies:"
+msgstr ""
+"Framework VentilátorCTRL - Ventilátor Stratégia vezérlő kisalkalmazás "
+"Cinnamonhoz \n"
+"\n"
+"Érvényes stratégiák listája:"
+
+#. settings-schema.json->sleep-label->description
+msgid "Sleep"
+msgstr "Alvó"
+
+#. settings-schema.json->sleep->description
+#. settings-schema.json->lazyest->description
+#. settings-schema.json->lazy->description
+#. settings-schema.json->medium->description
+#. settings-schema.json->agile->description
+#. settings-schema.json->very-agile->description
+#. settings-schema.json->deaf->description
+#. settings-schema.json->aeolus->description
+msgid "Visible"
+msgstr "Látható"
+
+#. settings-schema.json->sleep-icon->description
+msgid "Icon for 'Sleep'"
+msgstr "'Alvó' ikon"
+
+#. settings-schema.json->lazyest-label->description
+msgid "Laziest"
+msgstr "Leglustább"
+
+#. settings-schema.json->lazyest-icon->description
+msgid "Icon for 'Laziest'"
+msgstr "'Leglustább' ikon"
+
+#. settings-schema.json->lazy-label->description
+msgid "Lazy"
+msgstr "Lusta"
+
+#. settings-schema.json->lazy-icon->description
+msgid "Icon for 'Lazy'"
+msgstr "'Lusta' ikon"
+
+#. settings-schema.json->medium-label->description
+msgid "Medium"
+msgstr "Közepes"
+
+#. settings-schema.json->medium-icon->description
+msgid "Icon for 'Medium'"
+msgstr "'Közepes' ikon"
+
+#. settings-schema.json->agile-label->description
+msgid "Agile"
+msgstr "Fürge"
+
+#. settings-schema.json->agile-icon->description
+msgid "Icon for 'Agile'"
+msgstr "'Fürge' ikon"
+
+#. settings-schema.json->very-agile-label->description
+msgid "Very Agile"
+msgstr "Nagyon fürge"
+
+#. settings-schema.json->very-agile-icon->description
+msgid "Icon for 'Very Agile'"
+msgstr "'Nagyon Fürge' ikon"
+
+#. settings-schema.json->deaf-label->description
+msgid "Deaf"
+msgstr "Süket"
+
+#. settings-schema.json->deaf-icon->description
+msgid "Icon for 'Deaf'"
+msgstr "'Süket' ikon"
+
+#. settings-schema.json->aeolus-label->description
+msgid "Aeolus"
+msgstr "Aiolosz a szelek ura"
+
+#. settings-schema.json->aeolus-icon->description
+msgid "Icon for 'Aeolus'"
+msgstr "'Aiolosz' ikon"

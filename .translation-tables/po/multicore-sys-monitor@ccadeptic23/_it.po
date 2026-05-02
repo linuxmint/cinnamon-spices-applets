@@ -1,0 +1,666 @@
+# MULTI-CORE SYSTEM MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# ccadeptic23, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-05-02 04:59+0200\n"
+"PO-Revision-Date: 2025-08-27 18:50+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 5.6/applet.js:53
+msgid "Swap:"
+msgstr ""
+
+#. 5.6/applet.js:58
+msgid "Load:"
+msgstr ""
+
+#. 5.6/applet.js:59
+msgid "Unload:"
+msgstr ""
+
+#. 5.6/applet.js:83
+msgid "DISK USAGE"
+msgstr ""
+
+#. 5.6/applet.js:84
+msgid "BATTERY"
+msgstr ""
+
+#. 5.6/applet.js:873
+msgid "Configure..."
+msgstr ""
+
+#. 5.6->settings-schema.json->pageBattery->title
+#. 5.6/applet.js:880 5.6/applet.js:2594
+msgid "Battery"
+msgstr ""
+
+#. 5.6/applet.js:1858 5.6/applet.js:1865 5.6/applet.js:1990
+msgid "Available:"
+msgstr ""
+
+#. 5.6/applet.js:2572 5.6/lib/Graphs.js:399
+msgid "BAT"
+msgstr ""
+
+#. 5.6/applet.js:2622 5.6/applet.js:2624
+msgid "Batteries"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionGeneralOrder->title
+msgid "Display Order"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionTooltip->title
+#. 5.6->settings-schema.json->sectionNetworkTooltip->title
+#. 5.6->settings-schema.json->sectionDiskTooltip->title
+msgid "Tooltip"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionCPUTemperature->title
+msgid "CPU Temperature"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionNetworkTotal->title
+msgid "Total amount or instant speed"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionDiskSpeed->title
+msgid "Instant speed"
+msgstr ""
+
+#. 5.6->settings-schema.json->borderRadius->description
+msgid "Radius of curvature in corners"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "1px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "2px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "4px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "8px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "16px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "32px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "64px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->description
+msgid "The width of each graphic must be a multiple of:"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStepApply->description
+msgid "Apply this multiple"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->description
+msgid "Led for curves"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->options
+msgid "●"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->options
+msgid "⬤"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->options
+msgid "◉"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledLocation->description
+msgid "Led location"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledLocation->options
+msgid "Left"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledLocation->options
+msgid "Right"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphHeightPercent->description
+msgid "Graph height (% of panel height)"
+msgstr ""
+
+#. 5.6->settings-schema.json->percentAtEndOfLine->description
+msgid "Place % at the very end of the line"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipFontSize->description
+msgid "Font size (px)"
+msgstr ""
+
+#. 5.6->settings-schema.json->widthWhithoutAnyGraph->description
+msgid "Width when no graph is displayed (px)"
+msgstr ""
+
+#. 5.6->settings-schema.json->widthWhithoutAnyGraph->tooltip
+msgid ""
+"This is useful for preventing the tooltip from disappearing too soon when "
+"you move the pointer.\n"
+"Refresh All after making changes."
+msgstr ""
+
+#. 5.6->settings-schema.json->displayOrderLabel->description
+msgid ""
+"Choose the order in which the boxes of this applet are displayed in the "
+"panel.\n"
+"Do not change these names!"
+msgstr ""
+
+#. 5.6->settings-schema.json->displayOrder->description
+msgid "Display order in the panel"
+msgstr ""
+
+#. 5.6->settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
+#. 5.6->settings-schema.json->displayOrderReinit->description
+msgid "Reset"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_enabledTooltip->description
+#. 5.6->settings-schema.json->Mem_enabledTooltip->description
+#. 5.6->settings-schema.json->Net_enabledTooltip->description
+#. 5.6->settings-schema.json->Disk_enabledTooltip->description
+#. 5.6->settings-schema.json->DiskUsage_enabledTooltip->description
+#. 5.6->settings-schema.json->Battery_enabledTooltip->description
+msgid "Enable Tooltip"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelOn->description
+#. 5.6->settings-schema.json->Mem_labelOn->description
+#. 5.6->settings-schema.json->Net_labelOn->description
+#. 5.6->settings-schema.json->Disk_labelOn->description
+#. 5.6->settings-schema.json->DiskUsage_labelOn->description
+#. 5.6->settings-schema.json->Battery_labelOn->description
+msgid "Display this label"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelForeground->description
+#. 5.6->settings-schema.json->Mem_labelForeground->description
+#. 5.6->settings-schema.json->Net_labelForeground->description
+#. 5.6->settings-schema.json->Disk_labelForeground->description
+#. 5.6->settings-schema.json->DiskUsage_labelForeground->description
+#. 5.6->settings-schema.json->Battery_labelForeground->description
+msgid "Bring this label to the foreground"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelPos->description
+#. 5.6->settings-schema.json->Mem_labelPos->description
+#. 5.6->settings-schema.json->Net_labelPos->description
+#. 5.6->settings-schema.json->Disk_labelPos->description
+#. 5.6->settings-schema.json->DiskUsage_labelPos->description
+#. 5.6->settings-schema.json->Battery_labelPos->description
+msgid "Vertical position offset (pixels)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelPos->tooltip
+#. 5.6->settings-schema.json->Mem_labelPos->tooltip
+#. 5.6->settings-schema.json->Net_labelPos->tooltip
+#. 5.6->settings-schema.json->Disk_labelPos->tooltip
+#. 5.6->settings-schema.json->DiskUsage_labelPos->tooltip
+#. 5.6->settings-schema.json->Battery_labelPos->tooltip
+msgid ""
+"Negative: to the top.\n"
+"Positive: to the bottom."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->description
+#. 5.6->settings-schema.json->Mem_labelZoom->description
+#. 5.6->settings-schema.json->Net_labelZoom->description
+#. 5.6->settings-schema.json->Disk_labelZoom->description
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->description
+#. 5.6->settings-schema.json->Battery_labelZoom->description
+msgid "Label zoom"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "1"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "2"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "3"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "4"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelCustomized->description
+#. 5.6->settings-schema.json->Mem_labelCustomized->description
+#. 5.6->settings-schema.json->Net_labelCustomized->description
+#. 5.6->settings-schema.json->Disk_labelCustomized->description
+#. 5.6->settings-schema.json->DiskUsage_labelCustomized->description
+#. 5.6->settings-schema.json->Battery_labelCustomized->description
+msgid "Customize this label"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelCustom->description
+#. 5.6->settings-schema.json->Mem_labelCustom->description
+#. 5.6->settings-schema.json->Net_labelCustom->description
+#. 5.6->settings-schema.json->Disk_labelCustom->description
+#. 5.6->settings-schema.json->DiskUsage_labelCustom->description
+#. 5.6->settings-schema.json->Battery_labelCustom->description
+msgid "Custom label"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelCustom->tooltip
+#. 5.6->settings-schema.json->Mem_labelCustom->tooltip
+#. 5.6->settings-schema.json->Net_labelCustom->tooltip
+#. 5.6->settings-schema.json->Disk_labelCustom->tooltip
+#. 5.6->settings-schema.json->DiskUsage_labelCustom->tooltip
+#. 5.6->settings-schema.json->Battery_labelCustom->tooltip
+msgid "You can use emojis."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_groupInSetsOf4->description
+msgid "Group in sets of 4 in tooltip"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_ignoreHyperthreading->description
+msgid "Ignore Hyper-Threading"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_ignoreHyperthreading->tooltip
+msgid ""
+"Example: An 8-core processor with Hyper-Threading technology appears to have "
+"16 cores, even though it does not."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTime->description
+msgid "Show only the CPU Load Over Time"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->description
+msgid "How many bars?"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "8"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "16"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "32"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "64"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->tooltip
+msgid "Related to CPU Load Over Time"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showTemp->description
+msgid "Show the CPU temperature"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_temp_hovering_only->description
+#. 5.6->settings-schema.json->Net_total_hovering_only->description
+#. 5.6->settings-schema.json->Disk_speed_hovering_only->description
+msgid "Only display when hovering over this applet"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempInFahrenheit->description
+msgid "Fahrenheit degrees"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempPath->description
+msgid "Path to the system file used to check the CPU temperature"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempHigh->description
+msgid "High CPU Temperature (°C)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempHigh->tooltip
+msgid "Refer to your CPU documentation."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempCrit->description
+msgid "Critical CPU Temperature (°C)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempCrit->tooltip
+msgid ""
+"Refer to your CPU documentation.\n"
+"Must be greater than the High CPU Temperature."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempCorner->description
+msgid "Corner in which to display the temperature"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Top Right"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Top Left"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Bottom Right"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Bottom Left"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempFontFactor->units
+#. 5.6->settings-schema.json->percentFontFactor->units
+#. 5.6->settings-schema.json->flowFontFactor->units
+msgid "%"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempFontFactor->description
+#. 5.6->settings-schema.json->percentFontFactor->description
+#. 5.6->settings-schema.json->flowFontFactor->description
+msgid "Font size: percentage of the box height"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempColor->description
+msgid "Normal Temperature Color"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempColorHigh->description
+msgid "High Temperature Color"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempColorCrit->description
+msgid "Critical Temperature Color"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_onlyUsedAvailable->description
+msgid "Display only Used and Available memory"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_enabledBufferCacheSharedTooltip->description
+msgid "Enable Buffer/Cache/Shared Tooltip"
+msgstr ""
+
+#. 5.6->settings-schema.json->Swap_enabled->description
+msgid "Enable Swap"
+msgstr ""
+
+#. 5.6->settings-schema.json->Swap_enabledTooltip->description
+msgid "Enable Swap Tooltip"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_chartType->description
+msgid "Chart Type"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_chartType->options
+msgid "Pie chart"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_chartType->options
+msgid "Bar chart"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_method->description
+msgid "Memory Calculation Method"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_method->options
+msgid "htop (recommended)"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_method->options
+msgid "Gnome System Monitor"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_showBytesInTooltip->description
+msgid ""
+"Show the amounts (in Bytes) of Total, Used and Available memory in the "
+"tooltip"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_value_display->description
+msgid "Display memory usage percentage"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_value_display->options
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
+#. 5.6->settings-schema.json->Battery_value_display->options
+msgid "Hovering over"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_value_display->options
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
+#. 5.6->settings-schema.json->Battery_value_display->options
+msgid "Always"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_valueCorner->description
+#. 5.6->settings-schema.json->DiskUsage_valueCorner->description
+#. 5.6->settings-schema.json->Battery_valueCorner->description
+msgid "Where to display this"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_valueCorner->options
+#. 5.6->settings-schema.json->DiskUsage_valueCorner->options
+#. 5.6->settings-schema.json->Battery_valueCorner->options
+msgid "Top"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_valueCorner->options
+#. 5.6->settings-schema.json->DiskUsage_valueCorner->options
+#. 5.6->settings-schema.json->Battery_valueCorner->options
+msgid "Bottom"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_colorBuffers->description
+msgid "Buffers"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->description
+#. 5.6->settings-schema.json->Disk_typeOfGraph->description
+msgid "Type of graph"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->options
+#. 5.6->settings-schema.json->Disk_typeOfGraph->options
+msgid "Curves only"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->options
+#. 5.6->settings-schema.json->Disk_typeOfGraph->options
+msgid "Led only"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->options
+#. 5.6->settings-schema.json->Disk_typeOfGraph->options
+msgid "Curves and Led"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->description
+#. 5.6->settings-schema.json->Disk_minPrefix->description
+msgid "Minimal prefix"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Byte"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "kilo"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Mega"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Giga"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Tera"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Peta"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Exa"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Zetta"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Yotta"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->tooltip
+#. 5.6->settings-schema.json->Disk_minPrefix->tooltip
+msgid ""
+"You can specify the minimum unit of measurement of your choice for the "
+"amount of data transferred: byte, kilobyte, megabyte, etc."
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_symbolsInTooltip->description
+#. 5.6->settings-schema.json->Disk_symbolsInTooltip->description
+msgid "Use symbols instead of words"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_devicesList->columns->title
+msgid "Part of total"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_total_type->description
+msgid "Total amount or speed"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_total_type->options
+msgid "Total transfer amount (Bytes)"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_total_type->options
+msgid "Instant network speed (Bytes per second)"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_total_display->description
+#. 5.6->settings-schema.json->Disk_speed_display->description
+msgid "Display that"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_total_display->tooltip
+#. 5.6->settings-schema.json->Disk_speed_display->tooltip
+msgid ""
+"Be sure to check at least one “Part of total” box among the enabled devices."
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_totalCorner->description
+#. 5.6->settings-schema.json->Disk_speedCorner->description
+msgid "Corner in which to display that"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Right Only"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Left Only"
+msgstr ""
+
+#. 5.6->settings-schema.json->DiskUsage_value_display->description
+#. 5.6->settings-schema.json->Battery_value_display->description
+msgid "Display value"
+msgstr ""
+
+#. 5.6->settings-schema.json->Battery_colorLoad->description
+msgid "Load"
+msgstr ""
+
+#. 5.6->settings-schema.json->Battery_colorUnload->description
+msgid "Unload"
+msgstr ""

@@ -1,0 +1,47 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 23:50+0800\n"
+"PO-Revision-Date: 2025-05-03 23:04+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: applet.js:37 applet.js:63
+msgid "Shutdown"
+msgstr "關機"
+
+#: applet.js:44
+msgid "Screen Lock"
+msgstr "螢幕鎖定"
+
+#: applet.js:50
+msgid "Suspend"
+msgstr "暫停"
+
+#: applet.js:55
+msgid "Restart"
+msgstr "重新啟動"
+
+#: applet.js:59
+msgid "Log Out"
+msgstr "登出"
+
+#. ShutdownApplet@DeathMD->metadata.json->description
+msgid "An applet to shutdown, restart and suspend your system."
+msgstr "一個可讓您關機、重新啟動與暫停系統的小程式。"
+
+#. ShutdownApplet@DeathMD->metadata.json->name
+msgid "Shutdown Applet"
+msgstr "Shutdown Applet"
+

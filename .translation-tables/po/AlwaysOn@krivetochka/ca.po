@@ -1,0 +1,116 @@
+# ALWAYSON
+# This file is put in the public domain.
+# Krivetochka, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: AlwaysOn@krivetochka 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-03 19:31-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:28
+msgid "Click here to activate AlwaysOn"
+msgstr "Feu clic aquí per activar AlwaysOn"
+
+#. applet.js:66
+msgid "AlwaysOn activated"
+msgstr "AlwaysOn activat"
+
+#. applet.js:66
+msgid "Your computer will now stay active."
+msgstr "Ara, l'ordinador romandrà actiu."
+
+#. applet.js:74
+msgid "Deactivate AlwaysOn"
+msgstr "Desactivar AlwaysOn"
+
+#. applet.js:85
+msgid "AlwaysOn deactivated"
+msgstr "AlwaysOn desactivat"
+
+#. applet.js:85
+msgid "Now your computer can go to sleep."
+msgstr "Ara, l'ordinador pot entrar en mode de suspensió."
+
+#. applet.js:93
+msgid "Activate AlwaysOn"
+msgstr "Activar AlwaysOn"
+
+#. metadata.json->name
+msgid "AlwaysOn"
+msgstr "AlwaysOn"
+
+#. metadata.json->description
+msgid ""
+"When AlwaysOn is activated, the screen will remain on, and the computer will "
+"not go to sleep. The behavior can be changed in the applet settings."
+msgstr ""
+"Quan s'activa AlwaysOn, la pantalla romandrà encesa i l'ordinador no entrarà "
+"en mode de suspensió. Aquest comportament pot canviar-se a la configuració "
+"de la miniaplicació."
+
+#. settings-schema.json->section-general->description
+msgid "General"
+msgstr "General"
+
+#. settings-schema.json->change-affected-settings->description
+msgid "Click to select which settings will be affected by this applet"
+msgstr ""
+"Feu clic per seleccionar quines opcions seran afectades per aquesta "
+"miniaplicació"
+
+#. settings-schema.json->idle-dim-battery->description
+msgid "Dim the screen when idle"
+msgstr "Atenua la pantalla en estat d'inactivitat"
+
+#. settings-schema.json->sleep-inactive->description
+msgid "Sleep mode when idle"
+msgstr "Entra en suspensió en estat d'inactivitat"
+
+#. settings-schema.json->sleep-display->description
+msgid "Turning off the screen when idle"
+msgstr "Apaga la pantalla en estat d'inactivitat"
+
+#. settings-schema.json->key-bind->description
+msgid "Select a combination to activate the applet"
+msgstr "Seleccioneu una combinació per activar la miniaplicació"
+
+#. settings-schema.json->section-not->description
+msgid "Notifications"
+msgstr "Notificacions"
+
+#. settings-schema.json->notificate->description
+msgid "Send notifications from this applet"
+msgstr "Envia notificacions des d'aquesta miniaplicació"
+
+#. settings-schema.json->section-icon->description
+msgid "Appearance"
+msgstr "Aparença"
+
+#. settings-schema.json->choose-icon->description
+msgid "Choose icon type"
+msgstr "Trieu el tipus d'icona"
+
+#. settings-schema.json->choose-icon->options
+msgid "Symbolic"
+msgstr "Simbòlica"
+
+#. settings-schema.json->choose-icon->options
+msgid "Colored"
+msgstr "Acolorida"
+
+#. settings-schema.json->hide-applet->description
+msgid "Hide applet from the panel (works best with notifications enabled)"
+msgstr ""
+"Oculta la miniaplicació al tauler (funciona millor amb les notificacions "
+"activades)"

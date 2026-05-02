@@ -1,0 +1,47 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Marcelo Aof, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 23:50+0800\n"
+"PO-Revision-Date: 2021-11-05 16:30-0300\n"
+"Last-Translator: Marcelo Aof\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: applet.js:37 applet.js:63
+msgid "Shutdown"
+msgstr "Desligar"
+
+#: applet.js:44
+msgid "Screen Lock"
+msgstr "Bloquear tela"
+
+#: applet.js:50
+msgid "Suspend"
+msgstr "Suspender"
+
+#: applet.js:55
+msgid "Restart"
+msgstr "Reiniciar"
+
+#: applet.js:59
+msgid "Log Out"
+msgstr "Sair"
+
+#. ShutdownApplet@DeathMD->metadata.json->description
+msgid "An applet to shutdown, restart and suspend your system."
+msgstr "Um applet para desligar, reiniciar e suspender o seu sistema."
+
+#. ShutdownApplet@DeathMD->metadata.json->name
+msgid "Shutdown Applet"
+msgstr "Applet de desligamento"

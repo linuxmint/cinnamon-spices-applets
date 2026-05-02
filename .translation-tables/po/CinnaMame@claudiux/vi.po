@@ -1,0 +1,126 @@
+# CINNAMAME
+# This file is put in the public domain.
+# claudiux, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: CinnaMame@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-06-27 18:56+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:36
+msgid ""
+"Once you've downloaded your roms from your library,\n"
+"you need to copy them to the local folder named here\n"
+"‘Local Mame Roms’.\n"
+"\n"
+"Then go to the ‘Games to show’ tab."
+msgstr ""
+"Sau khi tải rom từ thư viện xuống,\n"
+"bạn cần sao chép chúng vào thư mục cục bộ có tên là\n"
+"‘Local Mame Roms’.\n"
+"\n"
+"Sau đó, hãy chuyển đến tab ‘Games to show’."
+
+#. applet.js:37
+msgid ""
+"Do not use [+]; use the 'Refresh Games' button instead.\n"
+"Disable games you don't want in the menu.\n"
+"Removing a line do not remove the game from the menu.\n"
+"You can change Titles but not Ids.\n"
+"You can change order to change that of the menu."
+msgstr ""
+"Không sử dụng [+]; thay vào đó hãy sử dụng nút 'Làm mới Trò chơi'.\n"
+"Vô hiệu hóa các trò chơi bạn không muốn có trong menu.\n"
+"Xóa một dòng không có nghĩa là xóa trò chơi khỏi menu.\n"
+"Bạn có thể thay đổi Tiêu đề nhưng không thể thay đổi ID.\n"
+"Bạn có thể thay đổi thứ tự của menu."
+
+#. applet.js:78
+msgid "Install mame"
+msgstr "Cài đặt mame"
+
+#. metadata.json->description
+#. metadata.json->name
+msgid "CinnaMame"
+msgstr "CinnaMame"
+
+#. settings-schema.json->pageRoms->title
+msgid "Roms"
+msgstr "Rom"
+
+#. settings-schema.json->pageGames->title
+msgid "Games to show"
+msgstr "Trò chơi để hiển thị"
+
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr "Chung"
+
+#. settings-schema.json->sectionLink->title
+msgid "Rom Library"
+msgstr "Thư viện Rom"
+
+#. settings-schema.json->sectionTips->title
+#. settings-schema.json->sectionGamesTips->title
+msgid "Tips"
+msgstr "Mẹo"
+
+#. settings-schema.json->sectionMameRoms->title
+#. settings-schema.json->sectionGamesToShow->title
+msgid "Local Mame Roms"
+msgstr "Rom Mame cục bộ"
+
+#. settings-schema.json->sectionIcon->title
+msgid "Icon"
+msgstr "Biểu tượng"
+
+#. settings-schema.json->linkURL->description
+msgid "URL of your Rom Library"
+msgstr "URL của Thư viện Rom của bạn"
+
+#. settings-schema.json->linkButton->description
+msgid "Open your Rom Library"
+msgstr "Mở Thư viện Rom"
+
+#. settings-schema.json->linkReset->description
+msgid "Reset Rom Library URL to default"
+msgstr "Đặt lại URL Thư viện Rom về mặc định"
+
+#. settings-schema.json->mameRomsButton->description
+msgid "Open Local Mame Roms"
+msgstr "Mở Rom Mame cục bộ"
+
+#. settings-schema.json->refreshGamesButton->description
+msgid "Refresh Games"
+msgstr "Làm mới trò chơi"
+
+#. settings-schema.json->gamesToShow->columns->title
+msgid "Enabled"
+msgstr "Bật"
+
+#. settings-schema.json->gamesToShow->columns->title
+msgid ""
+"Id\n"
+"Do not change!"
+msgstr ""
+"Id\n"
+"Không thay đổi!"
+
+#. settings-schema.json->gamesToShow->columns->title
+msgid "Title"
+msgstr "TIêu đề"
+
+#. settings-schema.json->useSymbolicIcon->description
+msgid "Use symbolic icon"
+msgstr "Sử dụng biểu tượng tượng trưng"

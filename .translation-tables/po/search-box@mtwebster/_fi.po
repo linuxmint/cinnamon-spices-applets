@@ -1,0 +1,23 @@
+# INTERNET SEARCH BOX
+# This file is put in the public domain.
+# mtwebster, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: search-box@mtwebster 2.3.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-25 21:36+0200\n"
+"PO-Revision-Date: 2024-11-21 14:34+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. settings-schema.json->section-keybinding->title
+msgid "Keyboard shortcuts"
+msgstr ""

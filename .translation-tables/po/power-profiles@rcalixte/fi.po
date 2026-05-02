@@ -1,0 +1,182 @@
+# POWER PROFILES
+# This file is put in the public domain.
+# rcalixte, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: power-profiles@rcalixte 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-15 02:11-0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 5.4/applet.js:28
+msgid "Power Saver"
+msgstr "Virransäästö"
+
+#. 5.4/applet.js:29
+msgid "Balanced"
+msgstr "Tasapainotettu"
+
+#. 5.4/applet.js:30
+msgid "Performance"
+msgstr "Suorituskyky"
+
+#. 5.4/applet.js:63 5.4/applet.js:70
+msgid ""
+"Please make sure the power-profiles-daemon package is installed and the "
+"service is running."
+msgstr ""
+"Varmista, että power-profiles-daemon ohjelmisto on asennettu ja palvelu on "
+"käynnissä."
+
+#. 5.4/applet.js:64
+msgid "exception:"
+msgstr "poikkeus:"
+
+#. 5.4/applet.js:117
+msgid "Power Profiles Applet Error"
+msgstr "Virtaprofiilin sovelusvirhe"
+
+#. 5.4/applet.js:118
+msgid ""
+"The system package 'power-profiles-daemon' is not installed.\n"
+"\n"
+"Please install it and reload the applet."
+msgstr ""
+"Ohjelmaa \"power-profiles-daemon\" ei ole asennettu.\n"
+"\n"
+"Asenna se ensin ja lataa sovelma uudelleen."
+
+#. 5.4/applet.js:120
+msgid "Open README"
+msgstr "Avaa README"
+
+#. 5.4/applet.js:121
+msgid "Open Website"
+msgstr "Avaa sivusto"
+
+#. 5.4/applet.js:151
+msgid "Current Profile:"
+msgstr "Profiili:"
+
+#. 5.4/applet.js:156
+msgid "Performance Degraded:"
+msgstr "Suorituskyky heikentynyt:"
+
+#. 5.4/applet.js:167
+msgid "Active Profile Holds:"
+msgstr "Aktiivinen profiili pidossa:"
+
+#. metadata.json->description
+msgid ""
+"An applet to modify the current system power profile as determined by power-"
+"profiles-daemon"
+msgstr ""
+"Sovelma tietokoneen tehoprofiilin muuttamiseen power-profiles-daemon "
+"määrittämänä"
+
+#. metadata.json->name
+msgid "Power Profiles"
+msgstr "Power Profiles"
+
+#. 5.4->settings-schema.json->section0->description
+msgid "General"
+msgstr ""
+
+#. 5.4->settings-schema.json->cycleProfiles->description
+#, fuzzy
+msgid "Cycle through profiles when using keyboard shortcuts or scroll wheel"
+msgstr "Selaa profiileja pikanäppäimillä"
+
+#. 5.4->settings-schema.json->cycleProfiles->tooltip
+msgid ""
+"If enabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the next profile would be "
+"'Performance' (or 'Balanced' on some systems).\n"
+"\n"
+"If disabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the profile would not change."
+msgstr ""
+"Jos tämä profiili on käytössä ja profiili on \"Virransäästö\" ja \"Edellinen "
+"profiili\" pikanäppäintä käytetään, seuraava profiili on "
+"\"Suorituskyky\" (tai \"Tasapainoinen\").\n"
+"\n"
+"Jos ei ole käytössä, profiili ei muutu vaikka profiili olisi "
+"\"Virransäästö\" ja \"Edellinen profiili\" pikanäppäintä painettaisiin"
+
+#. 5.4->settings-schema.json->scrollBehavior->description
+msgid "Scroll wheel behavior"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Nothing"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+#, fuzzy
+msgid "Switch profiles"
+msgstr "Seuraava profiili"
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles (reversed)"
+msgstr ""
+
+#. 5.4->settings-schema.json->section1->description
+msgid "Keyboard Shortcuts"
+msgstr "Pikanäppäimet"
+
+#. 5.4->settings-schema.json->previousProfileKey->description
+msgid "Previous profile"
+msgstr "Edellinen profiili"
+
+#. 5.4->settings-schema.json->previousProfileKey->tooltip
+msgid "Set keybinding(s) to switch to previous power profile."
+msgstr "Pikanäppäin edelliseen tehoprofiiliin."
+
+#. 5.4->settings-schema.json->nextProfileKey->description
+msgid "Next profile"
+msgstr "Seuraava profiili"
+
+#. 5.4->settings-schema.json->nextProfileKey->tooltip
+msgid "Set keybinding(s) to switch to next power profile."
+msgstr "Pikanäppäin seuraavaan tehoprofiiliin."
+
+#. 5.4->settings-schema.json->showOSD->description
+msgid "On-screen display for keyboard shortcuts"
+msgstr "Näyttö pikanäppäimiä varten"
+
+#. 5.4->settings-schema.json->showOSD->tooltip
+msgid ""
+"Show on-screen display of the new profile when using the keyboard shortcuts"
+msgstr "Näytä uuden profiilin näyttö, kun käytät pikanäppäimiä"
+
+#. 5.4->settings-schema.json->section2->description
+msgid "Appearance"
+msgstr "Ulkoasu"
+
+#. 5.4->settings-schema.json->iconStyle->description
+msgid "Icon Style"
+msgstr "Kuvakkeet"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Classic"
+msgstr "Klassinen"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Papirus"
+msgstr "Papirus"
+
+#. 5.4->settings-schema.json->iconStyle->tooltip
+msgid ""
+"Choose the style of the applet's icon. This is used for the panel and the on-"
+"screen display."
+msgstr "Valitse sovelman kuvake. Käytetään paneelissa ja näytössä."

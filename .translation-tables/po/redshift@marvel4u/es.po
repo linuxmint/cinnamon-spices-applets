@@ -1,0 +1,151 @@
+# REDSHIFT
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# marvel4u, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-28 05:35-0400\n"
+"PO-Revision-Date: 2025-04-28 09:42-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. settings-schema.json->brightness->description
+#. applet.js:65 applet.js:235 applet.js:340
+msgid "Brightness"
+msgstr "Brillo"
+
+#. metadata.json->name
+#. applet.js:84 applet.js:341
+msgid "Redshift"
+msgstr "Redshift"
+
+#. applet.js:103
+msgid "Transition on night"
+msgstr "Transición entre día y noche"
+
+#. applet.js:214
+msgid "Redshift day colour"
+msgstr "Color de Redshift de día"
+
+#. applet.js:219
+msgid "Redshift day brightness"
+msgstr "Brillo de Redshift de día"
+
+#. applet.js:224
+msgid "Redshift night colour"
+msgstr "Color de Redshift de noche"
+
+#. applet.js:229
+msgid "Redshift night brightness"
+msgstr "Brillo de Redshift de noche"
+
+#. applet.js:341
+msgid "On"
+msgstr "Activar"
+
+#. applet.js:345
+msgid "Day colour temperature"
+msgstr "Temperatura de color diurna"
+
+#. applet.js:346
+msgid "Night colour temperature"
+msgstr "Temperatura de color nocturna"
+
+#. applet.js:347
+msgid "Day Redshift brightness"
+msgstr "Brillo del día de Redshift"
+
+#. applet.js:348
+msgid "Night Redshift brightness"
+msgstr "Brillo de noche de Redshift"
+
+#. applet.js:350
+msgid "Colour temperature"
+msgstr "Temperatura de color"
+
+#. applet.js:351
+msgid "Redshift brightness"
+msgstr "Brillo de Redshift"
+
+#. metadata.json->description
+msgid ""
+"An app to change the red filter level for late night screen time. Requires "
+"redshift: sudo apt-get install redshift"
+msgstr ""
+"Una aplicación para cambiar el nivel de filtro rojo durante la noche. "
+"Requiere Redshift: sudo apt-get install redshift"
+
+#. settings-schema.json->panel->title
+msgid "Redshift settings"
+msgstr "Ajustes de Redshift"
+
+#. settings-schema.json->brightness-section->title
+msgid "Brightness level"
+msgstr "Nivel de brillo"
+
+#. settings-schema.json->redshift-section->title
+msgid "Redshift configuration"
+msgstr "Configuración de Redshift"
+
+#. settings-schema.json->redshift-transition-section->title
+msgid "Transition between day and night configuration"
+msgstr "Configuración de la transición entre día y noche"
+
+#. settings-schema.json->brightness->units
+#. settings-schema.json->redshiftDayBrightness->units
+#. settings-schema.json->redshiftNightBrightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->enabledOnStartup->description
+msgid "Redshift Enabled"
+msgstr "Redshift activado"
+
+#. settings-schema.json->dayColour->units
+#. settings-schema.json->nightColour->units
+msgid "K"
+msgstr "K"
+
+#. settings-schema.json->dayColour->description
+msgid "Redshift Day colour temperature"
+msgstr "Temperatura de color de Redshfit de día"
+
+#. settings-schema.json->redshiftDayBrightness->description
+msgid "Redshift Day Brightness"
+msgstr "Brillo de Redshift de día"
+
+#. settings-schema.json->changeOnNight->description
+msgid "Change temperature colour and Redshift brightness between day and night"
+msgstr ""
+"Cambiar temperatura de color y brillo de Redshift entre el día y la noche"
+
+#. settings-schema.json->nightColour->description
+msgid "Redshift Night colour temperature"
+msgstr "Temperatura de color de Redshift de noche"
+
+#. settings-schema.json->redshiftNightBrightness->description
+msgid "Redshift Night Brightness"
+msgstr "Brillo de Redshift de noche"
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr "Latitud"
+
+#. settings-schema.json->latitude->tooltip
+#. settings-schema.json->longitude->tooltip
+msgid "If not entered Redshift would use GeoClue2 provider"
+msgstr "Si no se introduce Redshift usará el proveedor GeoGlue2"
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr "Longitud"

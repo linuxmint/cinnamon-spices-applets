@@ -1,0 +1,124 @@
+# CINNAMON VANTAGE
+# This file is put in the public domain.
+# Garlayntoji, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cinnamonvantage@garlayntoji 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-08 17:23-0400\n"
+"PO-Revision-Date: 2025-06-13 02:35+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#: applet.js:66
+msgid "Cinnamon Vantage"
+msgstr "Cinnamon Vantage"
+
+#. settings-schema.json->fnLock-section->title
+#: applet.js:77
+msgid "Fn Lock"
+msgstr "Fn 鎖定"
+
+#: applet.js:81
+msgid "Super/Windows key"
+msgstr "超級鍵/Windows 鍵"
+
+#. settings-schema.json->touchpad-section->title
+#: applet.js:85
+msgid "Touchpad"
+msgstr "觸控板"
+
+#. settings-schema.json->conservationMode-section->title
+#: applet.js:89
+msgid "Battery conservation mode"
+msgstr "電池保養模式"
+
+#. settings-schema.json->rapidCharge-section->title
+#: applet.js:93
+msgid "Battery fast charge mode"
+msgstr "電池快速充電模式"
+
+#: applet.js:97
+msgid "Always On USB"
+msgstr "USB 持續供電"
+
+#. settings-schema.json->overdrive-section->title
+#: applet.js:101
+msgid "Display Overdrive"
+msgstr "顯示器 Overdrive(OD)"
+
+#. settings-schema.json->gsync-section->title
+#: applet.js:105
+msgid "Hybrid graphics mode"
+msgstr "混合顯示卡模式"
+
+#: applet.js:248
+msgid "CinnamonVantage"
+msgstr "CinnamonVantage"
+
+#: applet.js:249
+msgid "System reboot required"
+msgstr "需要重新啟動系統"
+
+#: applet.js:250
+msgid "A system reboot is required for this change to take effect."
+msgstr "此變更需重新啟動系統後才會生效。"
+
+#. metadata.json->description
+msgid "Displays information and togglables about Lenovo Legion hardware"
+msgstr "顯示 Lenovo Legion 硬體資訊與可切換選項"
+
+#. settings-schema.json->panel->title
+msgid "Cinnamon Vantage settings"
+msgstr "Cinnamon Vantage 設定"
+
+#. settings-schema.json->winkey-section->title
+msgid "Super key"
+msgstr "超級鍵"
+
+#. settings-schema.json->usbCharging-section->title
+msgid "Alway On USB"
+msgstr "USB 持續供電"
+
+#. settings-schema.json->fnLock->description
+msgid "Access multimedia keys without holding Fn"
+msgstr "無需按住 Fn 鍵即可使用多媒體鍵"
+
+#. settings-schema.json->winkey->description
+msgid "Enables the Super/Windows key"
+msgstr "啟用超級鍵/Windows 鍵"
+
+#. settings-schema.json->touchpad->description
+msgid "Enables the laptop's touchpad"
+msgstr "啟用筆記型電腦的觸控板"
+
+#. settings-schema.json->conservationMode->description
+msgid "Limits the charge of the battery to extend its lifespan"
+msgstr "限制電池充電量以延長其使用壽命"
+
+#. settings-schema.json->rapidCharge->description
+msgid "Allow the battery to charge faster"
+msgstr "允許電池快速充電"
+
+#. settings-schema.json->usbCharging->description
+msgid "Keeps the USB ports always powered on"
+msgstr "保持 USB 連接埠持續供電"
+
+#. settings-schema.json->overdrive->description
+msgid "Reduces the laptop's display latency"
+msgstr "降低筆記型電腦顯示器的延遲"
+
+#. settings-schema.json->gsync->description
+msgid ""
+"Enables the laptop's integrated graphics.\n"
+" This setting requires a reboot to take effect."
+msgstr ""
+"啟用筆記型電腦的內建顯示卡。\n"
+"此設定需重新啟動系統後才會生效。"

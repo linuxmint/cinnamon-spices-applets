@@ -1,0 +1,111 @@
+# ALWAYSON
+# This file is put in the public domain.
+# Krivetochka, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: AlwaysOn@krivetochka 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-08 19:32+0700\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:28
+msgid "Click here to activate AlwaysOn"
+msgstr "Nhấp vào đây để kích hoạt AlwaysOn"
+
+#. applet.js:66
+msgid "AlwaysOn activated"
+msgstr "AlwaysOn được kích hoạt"
+
+#. applet.js:66
+msgid "Your computer will now stay active."
+msgstr "Bây giờ máy tính của bạn sẽ vẫn hoạt động."
+
+#. applet.js:74
+msgid "Deactivate AlwaysOn"
+msgstr "Tắt AlwaysOn"
+
+#. applet.js:85
+msgid "AlwaysOn deactivated"
+msgstr "AlwaysOn đã tắt"
+
+#. applet.js:85
+msgid "Now your computer can go to sleep."
+msgstr "Bây giờ máy tính của bạn có thể chuyển sang chế độ ngủ."
+
+#. applet.js:93
+msgid "Activate AlwaysOn"
+msgstr "Kích hoạt AlwaysOn"
+
+#. metadata.json->name
+msgid "AlwaysOn"
+msgstr "AlwaysOn"
+
+#. metadata.json->description
+msgid ""
+"When AlwaysOn is activated, the screen will remain on, and the computer will "
+"not go to sleep. The behavior can be changed in the applet settings."
+msgstr ""
+"Khi AlwaysOn được kích hoạt, màn hình sẽ vẫn sáng và máy tính sẽ không "
+"chuyển sang chế độ ngủ. Bạn có thể thay đổi chế độ này trong cài đặt applet."
+
+#. settings-schema.json->section-general->description
+msgid "General"
+msgstr "Chung"
+
+#. settings-schema.json->change-affected-settings->description
+msgid "Click to select which settings will be affected by this applet"
+msgstr "Nhấp để chọn cài đặt nào sẽ bị ảnh hưởng bởi applet này"
+
+#. settings-schema.json->idle-dim-battery->description
+msgid "Dim the screen when idle"
+msgstr "Làm mờ màn hình khi không sử dụng"
+
+#. settings-schema.json->sleep-inactive->description
+msgid "Sleep mode when idle"
+msgstr "Chế độ ngủ khi không sử dụng"
+
+#. settings-schema.json->sleep-display->description
+msgid "Turning off the screen when idle"
+msgstr "Tắt màn hình khi không sử dụng"
+
+#. settings-schema.json->key-bind->description
+msgid "Select a combination to activate the applet"
+msgstr "Chọn một tổ hợp phím để kích hoạt applet"
+
+#. settings-schema.json->section-not->description
+msgid "Notifications"
+msgstr "Thông báo"
+
+#. settings-schema.json->notificate->description
+msgid "Send notifications from this applet"
+msgstr "Gửi thông báo từ applet này"
+
+#. settings-schema.json->section-icon->description
+msgid "Appearance"
+msgstr "Giao diện"
+
+#. settings-schema.json->choose-icon->description
+msgid "Choose icon type"
+msgstr "Chọn loại icon"
+
+#. settings-schema.json->choose-icon->options
+msgid "Symbolic"
+msgstr "Biểu tượng"
+
+#. settings-schema.json->choose-icon->options
+msgid "Colored"
+msgstr "Màu sắc"
+
+#. settings-schema.json->hide-applet->description
+msgid "Hide applet from the panel (works best with notifications enabled)"
+msgstr "Ẩn applet khỏi bảng điều khiển (hoạt động tốt nhất khi bật thông báo)"

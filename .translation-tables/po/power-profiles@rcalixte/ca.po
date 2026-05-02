@@ -1,0 +1,187 @@
+# POWER PROFILES
+# This file is put in the public domain.
+# rcalixte, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: power-profiles@rcalixte 1.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-15 02:11-0100\n"
+"PO-Revision-Date: 2024-09-17 02:17+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 5.4/applet.js:28
+msgid "Power Saver"
+msgstr "Conservador"
+
+#. 5.4/applet.js:29
+msgid "Balanced"
+msgstr "Equilibrat"
+
+#. 5.4/applet.js:30
+msgid "Performance"
+msgstr "Rendiment"
+
+#. 5.4/applet.js:63 5.4/applet.js:70
+msgid ""
+"Please make sure the power-profiles-daemon package is installed and the "
+"service is running."
+msgstr ""
+"Si us plau, assegureu-vos d'haver instal·lat power-profiles-daemon i de què "
+"el servei estigui en marxa."
+
+#. 5.4/applet.js:64
+msgid "exception:"
+msgstr "excepció:"
+
+#. 5.4/applet.js:117
+msgid "Power Profiles Applet Error"
+msgstr "Error de la miniaplicació de perfils d'energia"
+
+#. 5.4/applet.js:118
+msgid ""
+"The system package 'power-profiles-daemon' is not installed.\n"
+"\n"
+"Please install it and reload the applet."
+msgstr ""
+"El paquet de sistema 'power-profiles-daemon' no està instal·lat.\n"
+"\n"
+"Si us plau, instal·leu-lo i recarregueu la miniaplicació."
+
+#. 5.4/applet.js:120
+msgid "Open README"
+msgstr "Obrir README"
+
+#. 5.4/applet.js:121
+msgid "Open Website"
+msgstr "Obrir Web"
+
+#. 5.4/applet.js:151
+msgid "Current Profile:"
+msgstr "Perfil actual:"
+
+#. 5.4/applet.js:156
+msgid "Performance Degraded:"
+msgstr "Rendiment degradat:"
+
+#. 5.4/applet.js:167
+msgid "Active Profile Holds:"
+msgstr "Conservacions del perfil actiu:"
+
+#. metadata.json->description
+msgid ""
+"An applet to modify the current system power profile as determined by power-"
+"profiles-daemon"
+msgstr ""
+"Una miniaplicació per modificar la configuració d'estalvi d'energia i "
+"rendiment del sistema (utilitza power-profiles-daemon)"
+
+#. metadata.json->name
+msgid "Power Profiles"
+msgstr "Plans d'energia"
+
+#. 5.4->settings-schema.json->section0->description
+msgid "General"
+msgstr ""
+
+#. 5.4->settings-schema.json->cycleProfiles->description
+#, fuzzy
+msgid "Cycle through profiles when using keyboard shortcuts or scroll wheel"
+msgstr ""
+"Canviar entre perfils de plans d'energia quan s'utilitzin dreceres del teclat"
+
+#. 5.4->settings-schema.json->cycleProfiles->tooltip
+msgid ""
+"If enabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the next profile would be 'Performance' "
+"(or 'Balanced' on some systems).\n"
+"\n"
+"If disabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the profile would not change."
+msgstr ""
+"Si s'activa i el perfil actual es 'Conservador' i la drecera del pla "
+"d'energia anterior és utilitzada, el proper perfil seria 'Rendiment' (o "
+"'Equilibrat' en alguns sistemes).\n"
+"\n"
+"Si està desactivat, el pla d'energia no canviarà en utilitzar les dreceres "
+"assignades."
+
+#. 5.4->settings-schema.json->scrollBehavior->description
+msgid "Scroll wheel behavior"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Nothing"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+#, fuzzy
+msgid "Switch profiles"
+msgstr "Següent pla d'energia"
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles (reversed)"
+msgstr ""
+
+#. 5.4->settings-schema.json->section1->description
+msgid "Keyboard Shortcuts"
+msgstr "Dreceres del teclat"
+
+#. 5.4->settings-schema.json->previousProfileKey->description
+msgid "Previous profile"
+msgstr "Pla d'energia anterior"
+
+#. 5.4->settings-schema.json->previousProfileKey->tooltip
+msgid "Set keybinding(s) to switch to previous power profile."
+msgstr "Assigneu drecera(es) del teclat per canviar al pla d'energia anterior."
+
+#. 5.4->settings-schema.json->nextProfileKey->description
+msgid "Next profile"
+msgstr "Següent pla d'energia"
+
+#. 5.4->settings-schema.json->nextProfileKey->tooltip
+msgid "Set keybinding(s) to switch to next power profile."
+msgstr "Assigneu drecera(es) del teclat per canviar al pla d'energia següent."
+
+#. 5.4->settings-schema.json->showOSD->description
+msgid "On-screen display for keyboard shortcuts"
+msgstr "Mostrar els canvis via dreceres del teclat a la pantalla"
+
+#. 5.4->settings-schema.json->showOSD->tooltip
+msgid ""
+"Show on-screen display of the new profile when using the keyboard shortcuts"
+msgstr ""
+"Mostrarà el nou pla d'energia a la pantalla en haver canviat de pla "
+"mitjançant dreceres del teclat"
+
+#. 5.4->settings-schema.json->section2->description
+msgid "Appearance"
+msgstr "Aparença"
+
+#. 5.4->settings-schema.json->iconStyle->description
+msgid "Icon Style"
+msgstr "Estil de la icona"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Classic"
+msgstr "Clàssic"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Papirus"
+msgstr "Papirus"
+
+#. 5.4->settings-schema.json->iconStyle->tooltip
+msgid ""
+"Choose the style of the applet's icon. This is used for the panel and the on-"
+"screen display."
+msgstr ""
+"Trieu l'estil de la icona de la miniaplicació. S'utilitzarà al tauler i a la "
+"visualització en pantalla."

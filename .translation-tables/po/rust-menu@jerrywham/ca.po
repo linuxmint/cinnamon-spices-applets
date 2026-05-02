@@ -1,0 +1,130 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2020-04-13 12:38+0800\n"
+"PO-Revision-Date: 2024-07-11 03:59+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:82
+msgid "Open cook book"
+msgstr "Obrir cook book"
+
+#: applet.js:86
+msgid "Open projects directory"
+msgstr "Obrir directori de projectes"
+
+#: applet.js:93
+msgid "First edition of cook book"
+msgstr "Primera edició del cook book"
+
+#: applet.js:96
+msgid "Rust by example"
+msgstr "Rust per exemple"
+
+#: applet.js:99
+msgid "Cargo book"
+msgstr "Cargo book"
+
+#: applet.js:102
+msgid "Rustc book"
+msgstr "Rustc book"
+
+#: applet.js:105
+msgid "Rustdoc book"
+msgstr "Rustdoc book"
+
+#: applet.js:112
+msgid "Create std"
+msgstr "Crear std"
+
+#: applet.js:115
+msgid "Create alloc"
+msgstr "Crear alloc"
+
+#: applet.js:118
+msgid "Create core"
+msgstr "Crear core"
+
+#: applet.js:121
+msgid "Create proc_macro"
+msgstr "Crear proc_macro"
+
+#: applet.js:124
+msgid "Create test"
+msgstr "Crear test"
+
+#: applet.js:131
+msgid "Edition guide"
+msgstr "Guia d'edició"
+
+#: applet.js:134
+msgid "Reference guide"
+msgstr "Guia de referència"
+
+#: applet.js:137
+msgid "Embedded book"
+msgstr "Embedded book"
+
+#: applet.js:140
+msgid "Rustonomicon book"
+msgstr "Rustonomicon book"
+
+#: applet.js:143
+msgid "Unstable book"
+msgstr "Unstable book"
+
+#: applet.js:150
+msgid "Launch Nursery"
+msgstr "Executar Nursery"
+
+#. rust-menu@jerrywham->metadata.json->description
+msgid "A Menu for Rust Developers"
+msgstr "Un menú per desenvolupadors de Rust"
+
+#. rust-menu@jerrywham->settings-schema.json->head->description
+msgid "Applet Settings"
+msgstr "Configuració de la miniaplicació"
+
+#. rust-menu@jerrywham->settings-schema.json->use-custom-directory->description
+msgid "Check this to use a custom directory"
+msgstr "Marqueu això per a usar un directori personalitzat"
+
+#. rust-menu@jerrywham->settings-schema.json->use-custom-directory->tooltip
+msgid ""
+"Checking this box allows you to set a custom directory in the field below"
+msgstr ""
+"Marcant això us permet establir un directori personalitzat al camp de sota"
+
+#. rust-menu@jerrywham->settings-schema.json->custom-directory->description
+msgid "Custom Directory Projects"
+msgstr "Directori de projectes personalitzat"
+
+#. rust-menu@jerrywham->settings-schema.json->custom-directory->tooltip
+msgid ""
+"Set your custom directory here.  This field is unavailable unless the switch "
+"above is enabled"
+msgstr ""
+"Establiu el vostre directori personalitzat aquí.  Aquest camp és "
+"inaccessible si l'interruptor de dalt no s'ha activat"
+
+#. rust-menu@jerrywham->settings-schema.json->keybinding-project->description
+msgid "Keybinding, which open the documentation"
+msgstr "Drecera del teclat per obrir la documentació"
+
+#. rust-menu@jerrywham->settings-schema.json->keybinding-documentation->description
+msgid "Keybinding, which open the RUST projects directory"
+msgstr "Drecera del teclat per a obrir el directori de projectes RUST"

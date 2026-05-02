@@ -1,0 +1,586 @@
+# Chinese (Traditional) translation for kdecapplet@joejoetv
+# Copyright (C) 2025
+# This file is distributed under the same license as the kdecapplet@joejoetv package.
+# Peter Dave Hello <hsu@peterdavehello.org>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdecapplet@joejoetv 2025\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-28 05:49-0400\n"
+"PO-Revision-Date: 2025-08-02 00:57+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. applet.js:574
+msgid "No Modules available"
+msgstr "沒有可用的模組"
+
+#. applet.js:1065 applet.js:1068
+msgid "KDE Connect not available, make sure it's installed and running."
+msgstr "KDE Connect 無法使用，請確認已正確安裝並且為執行狀態。"
+
+#. applet.js:1072 applet.js:1085 applet.js:1270
+msgid "Reload Applet"
+msgstr "重新載入小程式"
+
+#. applet.js:1077
+msgid "Invalid KDE Connect version returned!"
+msgstr "KDE Connect 回傳的版本無效！"
+
+#. applet.js:1078 applet.js:1081
+msgid ""
+"The KDE Connect DBus service returned an invalid version, please try "
+"reloading the Applet!"
+msgstr "KDE Connect DBus 服務回傳的版本無效，請嘗試重新載入小程式！"
+
+#. applet.js:1120
+msgid "No connected Devices!"
+msgstr "沒有已連線的裝置！"
+
+#. applet.js:1120
+msgid "Add them in the KDE Connect settings"
+msgstr "請在 KDE Connect 設定中新增裝置"
+
+#. applet.js:1165
+msgid "Debug Stuff, don't touch!"
+msgstr "除錯專用，請勿碰觸！"
+
+#. applet.js:1254
+msgid "KDE Connect Version: {version}"
+msgstr "KDE Connect 版本：{version}"
+
+#. applet.js:1261
+msgid "Own ID: {own_id}"
+msgstr "本機 ID: {own_id}"
+
+#. applet.js:1263
+msgid "own ID"
+msgstr "本機 ID"
+
+#. applet.js:1265
+msgid "Click to copy own ID"
+msgstr "點選以複製本機 ID"
+
+#. applet.js:1275
+msgid "Configure KDE Connect"
+msgstr "設定 KDE Connect"
+
+#. applet.js:1277
+msgid "Click to open KDE Connect Configuration"
+msgstr "點選以開啟 KDE Connect 設定"
+
+#. applet.js:1321
+msgid "No available devices"
+msgstr "沒有可用的裝置"
+
+#. applet.js:1323
+msgid "{deviceCount} available device"
+msgstr "{deviceCount} 部可用裝置"
+
+#. applet.js:1325
+msgid "{deviceCount} available devices"
+msgstr "{deviceCount} 部可用裝置"
+
+#. js/commonUtils.js:223
+msgid "Copied {typestring} to the clipboard"
+msgstr "已將 {typestring} 複製到剪貼簿"
+
+#. js/modules.js:656
+msgid "Charging"
+msgstr "充電中"
+
+#. js/modules.js:739
+msgid "ID: {id}"
+msgstr "ID: {id}"
+
+#. js/modules.js:743
+msgid "Device ID"
+msgstr "裝置 ID"
+
+#. js/modules.js:747
+msgid "Click to copy ID"
+msgstr "點選以複製 ID"
+
+#. js/modules.js:820
+msgid "No Signal"
+msgstr "沒有訊號"
+
+#. js/modules.js:823
+msgid "Low"
+msgstr "弱"
+
+#. js/modules.js:826
+msgid "Ok"
+msgstr "普通"
+
+#. js/modules.js:829
+msgid "Good"
+msgstr "良好"
+
+#. js/modules.js:832
+msgid "Excellent"
+msgstr "極佳"
+
+#. js/modules.js:844
+msgid "Unknown"
+msgstr "未知"
+
+#. js/modules.js:898
+msgid "Ring device"
+msgstr "尋找裝置"
+
+#. js/modules.js:899
+msgid "Click to ring the device"
+msgstr "點選讓裝置響鈴"
+
+#. js/modules.js:978
+msgid "Photo received from '{deviceName}'"
+msgstr "已從「{deviceName}」收到照片"
+
+#. js/modules.js:978 js/modules.js:1154
+msgid "Click to open in default application"
+msgstr "點選以使用預設應用程式開啟"
+
+#. js/modules.js:987
+msgid "Request Photo"
+msgstr "請求照片"
+
+#. js/modules.js:988
+msgid "Click to request a photo from the device"
+msgstr "點選以向裝置請求照片"
+
+#. js/modules.js:1038
+msgid "Ping!"
+msgstr "Ping!"
+
+#. js/modules.js:1045
+msgid "Sent ping to device '{deviceName}'"
+msgstr "已傳送 ping 到「{deviceName}」"
+
+#. js/modules.js:1051
+msgid "Ping Device"
+msgstr "Ping 裝置"
+
+#. js/modules.js:1052
+msgid "Click to send a ping to the device"
+msgstr "點選以傳送 ping 到裝置"
+
+#. js/modules.js:1154
+msgid "Share received from '{deviceName}'"
+msgstr "已從「{deviceName}」收到分享內容"
+
+#. js/modules.js:1189
+msgid "Share"
+msgstr "分享"
+
+#. js/modules.js:1202
+msgid "Send URL"
+msgstr "傳送網址"
+
+#. js/modules.js:1203
+msgid "Click to send a URL to the device"
+msgstr "點選以傳送網址到裝置"
+
+#. js/modules.js:1212
+msgid "Send Text"
+msgstr "傳送文字"
+
+#. js/modules.js:1213 js/modules.js:1488
+msgid "Click to send text to the device"
+msgstr "點選以傳送文字到裝置"
+
+#. js/modules.js:1222
+msgid "Send File(s)"
+msgstr "傳送檔案"
+
+#. js/modules.js:1223
+msgid "Click to send file(s) to the device"
+msgstr "點選以傳送檔案到裝置"
+
+#. js/modules.js:1279
+msgid "Unmount"
+msgstr "卸除"
+
+#. js/modules.js:1281
+msgid "Mount"
+msgstr "掛載"
+
+#. js/modules.js:1287
+msgid "Click to unmount"
+msgstr "點選以卸除"
+
+#. js/modules.js:1289
+msgid "Click to mount"
+msgstr "點選以掛載"
+
+#. js/modules.js:1362
+msgid "Click to browse files"
+msgstr "點選以瀏覽檔案"
+
+#. js/modules.js:1466
+msgid "SMS"
+msgstr "SMS"
+
+#. js/modules.js:1479
+msgid "Launch SMS App"
+msgstr "啟動 SMS 應用程式"
+
+#. js/modules.js:1480
+msgid "Click to open the KDE Connect SMS App"
+msgstr "點選以開啟 KDE Connect SMS 應用程式"
+
+#. js/modules.js:1487
+msgid "Send SMS"
+msgstr "傳送 SMS"
+
+#. settingsWidgets.py:153
+msgid "Move selected entry up"
+msgstr "將選取的項目上移"
+
+#. settingsWidgets.py:160
+msgid "Move selected entry down"
+msgstr "將選取的項目下移"
+
+#. py/dialogs.py:40
+#, python-brace-format
+msgid "Send URL to '{device_name}'"
+msgstr "傳送網址到「{device_name}」"
+
+#. py/dialogs.py:47 py/dialogs.py:103 py/dialogs.py:166
+msgid "Cancel"
+msgstr "取消"
+
+#. py/dialogs.py:50 py/dialogs.py:106 py/dialogs.py:169
+msgid "Send"
+msgstr "傳送"
+
+#. py/dialogs.py:57
+#, python-brace-format
+msgid "Enter a URL to send to '{device_name}'"
+msgstr "請輸入要傳送到「{device_name}」的網址"
+
+#. py/dialogs.py:61
+msgid "URL"
+msgstr "網址"
+
+#. py/dialogs.py:96
+#, python-brace-format
+msgid "Send SMS using '{device_name}'"
+msgstr "使用「{device_name}」傳送 SMS"
+
+#. py/dialogs.py:113
+msgid "Phone Number:"
+msgstr "電話號碼："
+
+#. py/dialogs.py:117
+msgid "Phone Number"
+msgstr "電話號碼"
+
+#. py/dialogs.py:119
+msgid "Message:"
+msgstr "訊息："
+
+#. py/dialogs.py:159
+#, python-brace-format
+msgid "Send text to '{device_name}'"
+msgstr "傳送文字到「{device_name}」"
+
+#. py/dialogs.py:176
+msgid "Text to send:"
+msgstr "要傳送的文字："
+
+#. py/dialogs.py:222
+#, python-brace-format
+msgid "Select files to send to '{deviceName}'"
+msgstr "選取要傳送到「{deviceName}」的檔案"
+
+#. py/dialogs.py:283
+#, python-brace-format
+msgid "Select where to save photo received from '{deviceName}'"
+msgstr "選取從「{deviceName}」收到的照片要儲存的位置"
+
+#. py/dialogs.py:287
+msgid "photo.jpg"
+msgstr "photo.jpg"
+
+#. py/dialogs.py:290
+msgid "JPEG Photo"
+msgstr "JPEG 照片"
+
+#. metadata.json->name
+msgid "KDE Connect Applet"
+msgstr "KDE Connect 小程式"
+
+#. metadata.json->description
+msgid "Enables interacting with devices connected via KDE Connect"
+msgstr "可與透過 KDE Connect 連線的裝置互動"
+
+#. metadata.json->comments
+msgid ""
+"KDE Connect Applet makes it easy to use the various features provided by KDE "
+"Connect to interact with connected devices, like sending files, sending SMS "
+"messages, browsing the storage of the device and more"
+msgstr ""
+"KDE Connect 小程式讓您能輕鬆使用 KDE Connect 提供的多種功能來與連線裝置互動，"
+"例如傳送檔案、傳送 SMS 訊息、瀏覽裝置儲存空間等"
+
+#. metadata.json->contributors
+msgid "Johannes Schoeneberger - Author"
+msgstr "Johannes Schoeneberger - 作者"
+
+#. metadata.json->contributors
+msgid "Severga - Inspiration for the Applet"
+msgstr "Severga - 小程式靈感來源"
+
+#. settings-schema.json->page_general->title
+msgid "General"
+msgstr "一般"
+
+#. settings-schema.json->page_modules->title
+msgid "Modules"
+msgstr "功能模組"
+
+#. settings-schema.json->section_contextmenu->title
+msgid "Context Menu"
+msgstr "右鍵選單"
+
+#. settings-schema.json->section_panel->title
+msgid "Panel"
+msgstr "面板"
+
+#. settings-schema.json->section_devices->title
+msgid "Devices"
+msgstr "裝置"
+
+#. settings-schema.json->section_info-modules->title
+msgid "Info Modules"
+msgstr "資訊模組"
+
+#. settings-schema.json->section_action-modules->title
+msgid "Action Modules"
+msgstr "動作模組"
+
+#. settings-schema.json->section_module_battery->title
+msgid "Battery Info Module"
+msgstr "電池資訊模組"
+
+#. settings-schema.json->section_module_deviceinfo->title
+msgid "Device-Info Info Module"
+msgstr "裝置資訊模組"
+
+#. settings-schema.json->section_module_connectivity->title
+msgid "Connectivity Info Module"
+msgstr "連線狀態資訊模組"
+
+#. settings-schema.json->section_module_findmyphone->title
+msgid "FindMyPhone Action Module"
+msgstr "尋找我的手機動作模組"
+
+#. settings-schema.json->section_module_requestphoto->title
+msgid "Request-Photo Action Module"
+msgstr "請求照片動作模組"
+
+#. settings-schema.json->section_module_ping->title
+msgid "Ping Action Module"
+msgstr "Ping 動作模組"
+
+#. settings-schema.json->section_module_share->title
+msgid "Share Action Module"
+msgstr "分享動作模組"
+
+#. settings-schema.json->section_module_sftp->title
+msgid "SFTP Action Module"
+msgstr "SFTP 動作模組"
+
+#. settings-schema.json->section_module_sms->title
+msgid "SMS Action Module"
+msgstr "SMS 動作模組"
+
+#. settings-schema.json->switch_show-own-id->description
+msgid "Show own ID in the context menu of the applet"
+msgstr "在小程式的右鍵選單中顯示本機 ID"
+
+#. settings-schema.json->switch_show-kdec-version->description
+msgid "Show KDE Connect version in the context menu of the applet"
+msgstr "在小程式的右鍵選單中顯示 KDE Connect 版本"
+
+#. settings-schema.json->switch_show-device-count->description
+msgid "Show the number of connected devices next to the icon in the panel"
+msgstr "在面板圖示旁顯示已連線的裝置數量"
+
+#. settings-schema.json->switch_show-device-count-tooltip->description
+msgid "Show the device count in the tooltip of the applet"
+msgstr "在小程式的工具提示中顯示裝置數量"
+
+#. settings-schema.json->combobox_icon-type->description
+msgid "Icon type"
+msgstr "圖示類型"
+
+#. settings-schema.json->combobox_icon-type->options
+msgid "Symbolic"
+msgstr "符號式"
+
+#. settings-schema.json->combobox_icon-type->options
+msgid "Color"
+msgstr "彩色"
+
+#. settings-schema.json->switch_use-custom-icon->description
+msgid "Use custom icon"
+msgstr "使用自訂圖示"
+
+#. settings-schema.json->icon_custom-icon->description
+msgid "Custom icon to use"
+msgstr "要使用的自訂圖示"
+
+#. settings-schema.json->button_open-kdec-settings->description
+msgid "Open KDE Connect Configuration"
+msgstr "開啟 KDE Connect 設定"
+
+#. settings-schema.json->switch_expand-only-device->description
+msgid ""
+"Expand the device sub menu automatically, if only one device is available"
+msgstr "若只有一部裝置可用，則自動展開裝置子選單"
+
+#. settings-schema.json->orderlist_device-order->columns->title
+#. settings-schema.json->oderlist_info-modules->columns->title
+#. settings-schema.json->oderlist_action-modules->columns->title
+msgid "Name"
+msgstr "名稱"
+
+#. settings-schema.json->orderlist_device-order->columns->title
+msgid "Expand"
+msgstr "展開"
+
+#. settings-schema.json->orderlist_device-order->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. settings-schema.json->oderlist_info-modules->columns->title
+#. settings-schema.json->oderlist_action-modules->columns->title
+msgid "Enabled"
+msgstr "啟用"
+
+#. settings-schema.json->oderlist_info-modules->columns->title
+#. settings-schema.json->oderlist_action-modules->columns->title
+msgid "ID"
+msgstr "ID"
+
+#. settings-schema.json->module_battery_description->description
+msgid "Shows the current battery charge and charging status of the device"
+msgstr "顯示裝置目前的電池電量與充電狀態"
+
+#. settings-schema.json->module_deviceinfo_description->description
+msgid "Shows the device icon along with its ID"
+msgstr "顯示裝置圖示及其 ID"
+
+#. settings-schema.json->module_connectivity_description->description
+msgid "Shows the current connectivity status and network type of the device"
+msgstr "顯示裝置目前連線狀態與網路類型"
+
+#. settings-schema.json->module_connectivity_showNetworkType->description
+msgid "Show the mobile network type"
+msgstr "顯示行動網路類型"
+
+#. settings-schema.json->module_findmyphone_description->description
+msgid ""
+"Lets you make the device ring, so you can find it, if you have misplaced it"
+msgstr "讓裝置響鈴，方便在遺失或放錯位置時尋找裝置"
+
+#. settings-schema.json->module_requestphoto_description->description
+msgid ""
+"Lets you request a photo from the remote device and save it on this device"
+msgstr "讓您能向遠端裝置請求照片並將其儲存在此裝置上"
+
+#. settings-schema.json->module_requestphoto_saveToDir->description
+msgid "Save received photos directly to directory"
+msgstr "將收到的照片直接儲存到目錄"
+
+#. settings-schema.json->module_requestphoto_saveDirectory->description
+msgid "The directory to save received photos to"
+msgstr "儲存收到照片的目錄"
+
+#. settings-schema.json->module_ping_description->description
+msgid "Lets you ping the the device to make sure it's connected"
+msgstr "讓您能對裝置發送 ping 以確認其連線狀態"
+
+#. settings-schema.json->module_ping_useCustomMessage->description
+msgid "Use custom message for ping"
+msgstr "使用自訂訊息進行 ping"
+
+#. settings-schema.json->module_ping_customMessage->description
+msgid "Custom message"
+msgstr "自訂訊息"
+
+#. settings-schema.json->module_share_description->description
+msgid "Lets you share URLs, files or text to the device"
+msgstr "讓您能分享網址、檔案或文字到裝置"
+
+#. settings-schema.json->module_share_useSubMenu->description
+#. settings-schema.json->module_sms_useSubMenu->description
+msgid "Show menu items in sub menu"
+msgstr "在子選單中顯示選單選項"
+
+#. settings-schema.json->module_share_enableSendURL->description
+msgid "Enable the menu item to send a URL"
+msgstr "啟用傳送網址的選單選項"
+
+#. settings-schema.json->module_share_enableSendText->description
+msgid "Enable the menu item to send some text"
+msgstr "啟用傳送文字的選單選項"
+
+#. settings-schema.json->module_share_enableSendFiles->description
+msgid "Enable the menu item to send file(s)"
+msgstr "啟用傳送檔案的選單選項"
+
+#. settings-schema.json->module_sftp_description->description
+msgid "Lets you remotely browse the storage selected on the device"
+msgstr "讓您能遠端瀏覽在裝置上選取的儲存空間"
+
+#. settings-schema.json->module_sms_description->description
+msgid "Lets you remotely send SMS messages from the device"
+msgstr "讓您能從裝置遠端傳送 SMS 訊息"
+
+#. settings-schema.json->module_sms_enableSendSMS->description
+msgid "Enable the menu item to send an SMS message"
+msgstr "啟用傳送 SMS 訊息的選單選項"
+
+#. settings-schema.json->module_sms_enableLaunchSMSApp->description
+msgid "Enable the menu item to launch the KDE Connect SMS app"
+msgstr "啟用啟動 KDE Connect SMS 應用程式的選單選項"
+
+#~ msgid "KDE Connect not available"
+#~ msgstr "KDE Connect 無法使用"
+
+#~ msgid "Battery Module"
+#~ msgstr "電池模組"
+
+#~ msgid "Device-Info Module"
+#~ msgstr "裝置資訊模組"
+
+#~ msgid "Connectivity Module"
+#~ msgstr "連線狀態模組"
+
+#~ msgid "FindMyPhone Module"
+#~ msgstr "尋找手機模組"
+
+#~ msgid "Request Photo Module"
+#~ msgstr "請求照片模組"
+
+#~ msgid "Ping Module"
+#~ msgstr "Ping 模組"
+
+#~ msgid "Share Module"
+#~ msgstr "分享模組"
+
+#~ msgid "SFTP Module"
+#~ msgstr "SFTP 模組"
+
+#~ msgid "SMS Module"
+#~ msgstr "SMS 模組"

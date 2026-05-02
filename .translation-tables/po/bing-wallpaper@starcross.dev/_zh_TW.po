@@ -1,0 +1,10 @@
+# BING DESKTOP WALLPAPER
+# This file is put in the public domain.
+# Starcross, 2019
+#
+msgid ""
+msgstr ""
+
+#. applet.js:50
+msgid "Refresh Now"
+msgstr ""

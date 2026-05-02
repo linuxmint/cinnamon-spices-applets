@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-05 13:20-0400\n"
+"PO-Revision-Date: 2024-07-14 03:46+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:32
+msgid "Open System Monitor"
+msgstr "Obrir el monitor del sistema"
+
+#. metadata.json->name
+msgid "Network Monitor"
+msgstr "Monitor de xarxa"
+
+#. metadata.json->description
+msgid "Monitor network traffic"
+msgstr "Monitorar el trànsit de xarxa"
+
+#. settings-schema.json->head->description
+msgid "Settings"
+msgstr "Opcions"
+
+#. settings-schema.json->display-style->description
+msgid "Speed display style"
+msgstr "Estil de visualització de la velocitat"
+
+#. settings-schema.json->display-style->options
+msgid "Combined"
+msgstr "Combinat"
+
+#. settings-schema.json->display-style->options
+msgid "Column"
+msgstr "Columna"
+
+#. settings-schema.json->display-style->options
+msgid "Side by side"
+msgstr "Adjaçent"
+
+#. settings-schema.json->display-style->options
+msgid "Download only"
+msgstr "Només la baixada"
+
+#. settings-schema.json->display-style->options
+msgid "Upload only"
+msgstr "Només la pujada"
+
+#. settings-schema.json->display-style->tooltip
+msgid "Whether to show download and upload speeds separately or combined"
+msgstr ""
+"Determina si cal mostrar les velocitats de baixada i pujada per separat o "
+"combinades"
+
+#. settings-schema.json->refresh-interval->units
+msgid "milliseconds"
+msgstr "mil·lisegons"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh interval"
+msgstr "Freqüència d'actualització"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid "Time between data refeshes"
+msgstr "Temps entre actualitzacions de la informació"
+
+#. settings-schema.json->decimal-places->description
+msgid "Decimal places"
+msgstr "Números decimals"
+
+#. settings-schema.json->decimal-places->tooltip
+msgid "Number of decimal places to show"
+msgstr "Número de decimals a mostrar"
+
+#. settings-schema.json->hide-umbral->units
+msgid "bytes per second"
+msgstr "bytes per segon"
+
+#. settings-schema.json->hide-umbral->description
+msgid "Hide speed if network traffic is less than"
+msgstr "Ocultar la velocitat si el trànsit de la xarxa és menor de"
+
+#. settings-schema.json->hide-umbral->tooltip
+msgid ""
+"Use a compact display style if network traffic is less than the specified "
+"amount"
+msgstr ""
+"Utilitza un estil de visualització compacte si el trànsit de la xarxa és "
+"menor que la quantitat establerta"

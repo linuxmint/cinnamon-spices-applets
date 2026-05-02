@@ -1,0 +1,1634 @@
+# MULTI-CORE SYSTEM MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# ccadeptic23, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-05-02 04:59+0200\n"
+"PO-Revision-Date: 2024-11-15 23:57+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. 5.6->settings-schema.json->pageCPU->title
+#. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
+#. 3.2/prefs.js:187 3.4/DataProviders.js:58 3.4/prefs.js:195 5.6/applet.js:79
+#. 5.6/applet.js:875 5.6/applet.js:2018 5.6/applet.js:2073 5.6/applet.js:2084
+#. 4.0/DataProviders.js:55 4.0/prefs.js:303 3.0/prefsui.glade:452
+#. 3.2/prefsui.glade:504 3.4/prefsui.glade:434 4.0/prefsui.glade:580
+msgid "CPU"
+msgstr "CPU"
+
+#. 3.0/DataProviders.js:113 3.2/DataProviders.js:113 3.4/DataProviders.js:126
+#. 4.0/DataProviders.js:123
+msgid "------------- CPU ------------"
+msgstr "------------- CPU ------------"
+
+#. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 3.4/DataProviders.js:129
+#. 5.6/applet.js:2093 4.0/DataProviders.js:126
+msgid "Core"
+msgstr "Core"
+
+#. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 3.4/DataProviders.js:141
+#. 5.6/applet.js:80 5.6/applet.js:1798 4.0/DataProviders.js:138
+msgid "MEM"
+msgstr "MEM"
+
+#. 3.0/DataProviders.js:163 3.2/DataProviders.js:163 3.4/DataProviders.js:161
+#. 4.0/DataProviders.js:158
+msgid "----------- Memory -----------"
+msgstr "----------- Muisti -----------"
+
+#. 3.0/DataProviders.js:164 3.2/DataProviders.js:164 5.6/applet.js:50
+msgid "Usedup:"
+msgstr "Käytetty:"
+
+#. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 3.4/DataProviders.js:162
+#. 5.6/applet.js:1867 4.0/DataProviders.js:159
+msgid "Cached:"
+msgstr "Välimuisti:"
+
+#. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 3.4/DataProviders.js:162
+#. 5.6/applet.js:1867 4.0/DataProviders.js:159
+msgid "Buffer:"
+msgstr "Puskuri:"
+
+#. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 3.4/DataProviders.js:162
+#. 5.6/applet.js:51 5.6/applet.js:1867 4.0/DataProviders.js:159
+msgid "Free:"
+msgstr "Vapaa:"
+
+#. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 3.4/DataProviders.js:176
+#. 5.6/applet.js:1948 4.0/DataProviders.js:173
+msgid "SWAP"
+msgstr "SWAP"
+
+#. 3.0/DataProviders.js:199 3.2/DataProviders.js:199 3.4/DataProviders.js:194
+#. 4.0/DataProviders.js:193
+msgid "------------ Swap ------------"
+msgstr "------------ Swap ------------"
+
+#. 5.6->settings-schema.json->Mem_colorSwap->description
+#. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 3.4/DataProviders.js:195
+#. 5.6/applet.js:52 5.6/applet.js:1977 4.0/DataProviders.js:194
+#. 3.0/prefsui.glade:785 3.2/prefsui.glade:837 3.4/prefsui.glade:761
+#. 4.0/prefsui.glade:907
+msgid "Swap"
+msgstr "Swap"
+
+#. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 3.4/DataProviders.js:205
+#. 5.6/applet.js:81 5.6/applet.js:2123 5.6/lib/Graphs.js:818
+#. 5.6/lib/Graphs.js:850 5.6/lib/Graphs.js:1080 5.6/lib/Graphs.js:1128
+#. 4.0/DataProviders.js:204
+msgid "NET"
+msgstr "LAN"
+
+#. 3.0/DataProviders.js:305 3.2/DataProviders.js:305 3.4/DataProviders.js:289
+#. 4.0/DataProviders.js:287
+msgid "---------- Networks ----------"
+msgstr "----------- Verkko -----------"
+
+#. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 3.4/DataProviders.js:300
+#. 5.6/applet.js:54 5.6/applet.js:2291 4.0/DataProviders.js:298
+msgid "Down:"
+msgstr "Alas:"
+
+#. 3.0/DataProviders.js:308 3.0/DataProviders.js:309 3.2/DataProviders.js:308
+#. 3.2/DataProviders.js:309
+msgid "(KiB/s)"
+msgstr "(KiB/s)"
+
+#. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 3.4/DataProviders.js:301
+#. 5.6/applet.js:55 5.6/applet.js:2292 4.0/DataProviders.js:299
+msgid "Up:"
+msgstr "Ylös:"
+
+#. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 3.4/DataProviders.js:317
+#. 5.6/applet.js:82 5.6/applet.js:2314 5.6/applet.js:2490 5.6/lib/Graphs.js:812
+#. 5.6/lib/Graphs.js:851 5.6/lib/Graphs.js:1081 5.6/lib/Graphs.js:1139
+#. 4.0/DataProviders.js:315
+msgid "DISK"
+msgstr "DISK"
+
+#. 3.0/DataProviders.js:408 3.2/DataProviders.js:408 3.4/DataProviders.js:378
+#. 4.0/DataProviders.js:376
+msgid "------------ Disks -----------"
+msgstr "------------ Levyt -----------"
+
+#. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 3.4/DataProviders.js:386
+#. 5.6/applet.js:56 5.6/applet.js:2467 4.0/DataProviders.js:384
+msgid "Read:"
+msgstr "Luku:"
+
+#. 3.0/DataProviders.js:411 3.0/DataProviders.js:412 3.2/DataProviders.js:411
+#. 3.2/DataProviders.js:412
+msgid "(MiB/s)"
+msgstr "(MiB/s)"
+
+#. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 3.4/DataProviders.js:387
+#. 5.6/applet.js:57 5.6/applet.js:2468 4.0/DataProviders.js:385
+msgid "Write:"
+msgstr "Kirjoitus:"
+
+#. 3.0/ErrorApplet.js:28 3.0/ErrorApplet.js:34 3.2/ErrorApplet.js:28
+#. 3.2/ErrorApplet.js:34
+msgid "Multi-Core System Monitor Error."
+msgstr "Multi-Core System Monitor virhe."
+
+#. 3.0/applet.js:141 3.2/applet.js:139 3.4/applet.js:264 4.0/applet.js:275
+msgid "Preferences"
+msgstr "Asetukset"
+
+#. 3.0/applet.js:323 3.2/applet.js:334
+msgid "Please install \"gir1.2-gtop-2.0\" package."
+msgstr "Asenna uudestaan\"gir1.2-gtop-2.0\" paketti."
+
+#. 3.0/applet.js:328 3.2/applet.js:339
+msgid "Reload this applet"
+msgstr "Lataa sovelma uudelleen"
+
+#. 5.6->settings-schema.json->CPU_enabled->description
+#. 5.6->settings-schema.json->Mem_enabled->description
+#. 5.6->settings-schema.json->Net_enabled->description
+#. 5.6->settings-schema.json->Disk_enabled->description
+#. 5.6->settings-schema.json->DiskUsage_enabled->description
+#. 5.6->settings-schema.json->Battery_enabled->description
+#. 3.0/prefs.js:279 3.0/prefs.js:393 3.2/prefs.js:283 3.2/prefs.js:398
+#. 3.4/prefs.js:327 3.4/prefs.js:463 4.0/prefs.js:483 4.0/prefs.js:619
+#. 3.0/prefsui.glade:304 3.0/prefsui.glade:476 3.0/prefsui.glade:856
+#. 3.0/prefsui.glade:1178 3.2/prefsui.glade:356 3.2/prefsui.glade:528
+#. 3.2/prefsui.glade:908 3.2/prefsui.glade:1230 3.4/prefsui.glade:286
+#. 3.4/prefsui.glade:457 3.4/prefsui.glade:831 3.4/prefsui.glade:1166
+#. 4.0/prefsui.glade:321 4.0/prefsui.glade:603 4.0/prefsui.glade:977
+#. 4.0/prefsui.glade:1312
+msgid "Enable"
+msgstr "Käytä"
+
+#. 3.0/prefs.js:290 3.2/prefs.js:294 3.4/prefs.js:338 4.0/prefs.js:494
+msgid "Down"
+msgstr "Alas"
+
+#. 3.0/prefs.js:298 3.2/prefs.js:302 3.4/prefs.js:346 4.0/prefs.js:502
+msgid "Up"
+msgstr "Ylös"
+
+#. 3.0/prefs.js:406 3.2/prefs.js:414 3.4/prefs.js:479 4.0/prefs.js:635
+msgid "Read"
+msgstr "Luku"
+
+#. 3.0/prefs.js:414 3.2/prefs.js:423 3.4/prefs.js:488 4.0/prefs.js:644
+msgid "Write"
+msgstr "Kirjoitus"
+
+#. 3.0/prefs.js:530 3.2/prefs.js:540
+msgid "Error while saving file:"
+msgstr "Virhe tiedoston tallennuksessa:"
+
+#. 3.4/DataProviders.js:49 5.6/applet.js:43 4.0/DataProviders.js:47
+msgid "/s"
+msgstr "/s"
+
+#. 3.4/DataProviders.js:162 5.6/applet.js:49 5.6/applet.js:1857
+#. 5.6/applet.js:1864 5.6/applet.js:1867 5.6/applet.js:1989
+#. 4.0/DataProviders.js:159
+msgid "Used:"
+msgstr "Käytetty:"
+
+#. 3.4/applet.js:60 4.0/applet.js:64
+msgid "Dependency missing"
+msgstr "Puuttuvat riippuvuudet"
+
+#. 3.4/applet.js:62
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"to use "
+msgstr ""
+"Suositus asenna  GTop paketti\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"käyttöön. "
+
+#. 5.6/applet.js:46
+#, fuzzy
+msgid "Core 128:"
+msgstr "Core"
+
+#. 5.6/applet.js:47
+msgid "Unrecoverable:"
+msgstr ""
+
+#. 5.6/applet.js:48
+msgid "Recoverable:"
+msgstr ""
+
+#. 5.6/applet.js:53
+#, fuzzy
+msgid "Swap:"
+msgstr "Swap"
+
+#. 5.6/applet.js:58
+msgid "Load:"
+msgstr ""
+
+#. 5.6/applet.js:59
+msgid "Unload:"
+msgstr ""
+
+#. 5.6/applet.js:83
+msgid "DISK USAGE"
+msgstr ""
+
+#. 5.6/applet.js:84
+msgid "BATTERY"
+msgstr ""
+
+#. 5.6->settings-schema.json->RefreshAll_btn->description
+#. 5.6/applet.js:830
+#, fuzzy
+msgid "Refresh All"
+msgstr "Päivitä kaaviot"
+
+#. 5.6/applet.js:840
+msgid "Without any graphics"
+msgstr "Ilman grafiikkaa"
+
+#. 5.6/applet.js:846
+msgid "With graphics"
+msgstr "Grafiikan kanssa"
+
+#. 5.6/applet.js:857
+msgid "Drop Memory Cache (needs root rights)"
+msgstr ""
+
+#. 5.6/applet.js:873
+msgid "Configure..."
+msgstr ""
+
+#. 5.6->settings-schema.json->pageGeneral->title
+#. 5.6/applet.js:874 3.0/prefsui.glade:281 3.2/prefsui.glade:333
+#. 3.4/prefsui.glade:264 4.0/prefsui.glade:299
+msgid "General"
+msgstr "Yleinen"
+
+#. 5.6->settings-schema.json->pageMem->title
+#. 5.6/applet.js:876 5.6/applet.js:1847 3.0/prefsui.glade:832
+#. 3.2/prefsui.glade:884 3.4/prefsui.glade:808 4.0/prefsui.glade:954
+msgid "Memory"
+msgstr "Muisti"
+
+#. 5.6->settings-schema.json->pageNetwork->title
+#. 5.6/applet.js:877 5.6/applet.js:1420 5.6/applet.js:2133
+#. 3.0/prefsui.glade:1154 3.2/prefsui.glade:1206 3.4/prefsui.glade:1143
+#. 4.0/prefsui.glade:1289
+msgid "Network"
+msgstr "Verkko"
+
+#. 5.6->settings-schema.json->pageDisk->title
+#. 5.6/applet.js:878 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
+#. 3.4/prefsui.glade:1489 4.0/prefsui.glade:1635
+msgid "Disk IO"
+msgstr "Kiintolevy"
+
+#. 5.6->settings-schema.json->pageDiskUsage->title
+#. 5.6/applet.js:879
+#, fuzzy
+msgid "Disk Usage"
+msgstr "Kiintolevy"
+
+#. 5.6->settings-schema.json->pageBattery->title
+#. 5.6/applet.js:880 5.6/applet.js:2594
+msgid "Battery"
+msgstr ""
+
+#. 5.6->settings-schema.json->pageColors->title
+#. 5.6->settings-schema.json->sectionGeneralColors->title
+#. 5.6->settings-schema.json->sectionCPUColors->title
+#. 5.6->settings-schema.json->sectionMemoryColors->title
+#. 5.6->settings-schema.json->sectionDiskUsageColors->title
+#. 5.6->settings-schema.json->sectionBatteryColors->title
+#. 5.6/applet.js:881 3.0/prefsui.glade:411 3.0/prefsui.glade:584
+#. 3.2/prefsui.glade:463 3.2/prefsui.glade:636 3.4/prefsui.glade:392
+#. 3.4/prefsui.glade:564 4.0/prefsui.glade:494 4.0/prefsui.glade:710
+msgid "Colors"
+msgstr "Värit"
+
+#. 5.6/applet.js:1028 5.6/applet.js:1071 5.6/applet.js:1085
+msgid "root"
+msgstr ""
+
+#. 5.6/applet.js:1528 5.6/applet.js:2325 5.6/applet.js:2417 5.6/applet.js:2537
+#. 5.6/applet.js:2539
+#, fuzzy
+msgid "Disks"
+msgstr "Kiintolevy"
+
+#. 5.6/applet.js:1858 5.6/applet.js:1865 5.6/applet.js:1990
+msgid "Available:"
+msgstr ""
+
+#. 5.6/applet.js:1891
+msgid "Buffers/Cache/Shared"
+msgstr ""
+
+#. 5.6/applet.js:1919 5.6/applet.js:1996 5.6/applet.js:2060 5.6/applet.js:2288
+#. 5.6/applet.js:2289 5.6/applet.js:2464 5.6/applet.js:2465 5.6/applet.js:2516
+#. 5.6/applet.js:2599
+msgid ":"
+msgstr ""
+
+#. 5.6/applet.js:1921 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 3.4/prefsui.glade:663 4.0/prefsui.glade:809
+msgid "Buffer"
+msgstr "Puskuri"
+
+#. 5.6->settings-schema.json->Mem_colorCache->description
+#. 5.6/applet.js:1921
+#, fuzzy
+msgid "Cache"
+msgstr "Välimuisti"
+
+#. 5.6/applet.js:1921
+msgid "Shared"
+msgstr ""
+
+#. 5.6/applet.js:2050
+msgid "CPUs"
+msgstr ""
+
+#. 5.6/applet.js:2242
+#, fuzzy
+msgid "Networks"
+msgstr "Verkko"
+
+#. 5.6/applet.js:2511
+msgid "Usage"
+msgstr ""
+
+#. 5.6/applet.js:2572 5.6/lib/Graphs.js:399
+msgid "BAT"
+msgstr ""
+
+#. 5.6/applet.js:2622 5.6/applet.js:2624
+msgid "Batteries"
+msgstr ""
+
+#. 4.0/applet.js:66
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"to use "
+msgstr ""
+"Asenna gtop suraavasti\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\tOpenSUSE: libgtop-devel\n"
+" "
+
+#. 4.0/applet.js:277
+msgid "Refresh graphs"
+msgstr "Päivitä kaaviot"
+
+#. 4.0/prefs.js:335
+msgid "00-20"
+msgstr "00-20"
+
+#. 5.6->settings-schema.json->CPU_activity_20_40->description
+#. 4.0/prefs.js:335
+msgid "20-40"
+msgstr "20-40"
+
+#. 5.6->settings-schema.json->CPU_activity_40_60->description
+#. 4.0/prefs.js:335
+msgid "40-60"
+msgstr "40-60"
+
+#. 5.6->settings-schema.json->CPU_activity_60_80->description
+#. 4.0/prefs.js:335
+msgid "60-80"
+msgstr "60-80"
+
+#. 5.6->settings-schema.json->CPU_activity_80_100->description
+#. 4.0/prefs.js:335
+msgid "80-100"
+msgstr "80-100"
+
+#. metadata.json->name
+msgid "Multi-Core System Monitor"
+msgstr "Multi-Core System Monitor"
+
+#. metadata.json->description
+msgid ""
+"Displays in realtime the cpu usage for each core/cpu and overall memory "
+"usage."
+msgstr "Näyttää reaaliajassa prosessorin, muistin ja kiintolevyn käyttöasteen."
+
+#. 5.6->settings-schema.json->sectionGeneralOptions->title
+#. 5.6->settings-schema.json->sectionCPUOptions->title
+#. 5.6->settings-schema.json->sectionMemoryOptions->title
+#. 5.6->settings-schema.json->sectionNetworkOptions->title
+#. 5.6->settings-schema.json->sectionDiskOptions->title
+#. 5.6->settings-schema.json->sectionDiskUsageOptions->title
+#. 5.6->settings-schema.json->sectionBatteryOptions->title
+msgid "Options"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionGeneralOrder->title
+msgid "Display Order"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionTooltip->title
+#. 5.6->settings-schema.json->sectionNetworkTooltip->title
+#. 5.6->settings-schema.json->sectionDiskTooltip->title
+msgid "Tooltip"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionCPUTemperature->title
+msgid "CPU Temperature"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionCPULabel->title
+#. 5.6->settings-schema.json->sectionMemoryLabel->title
+#. 5.6->settings-schema.json->sectionNetworkLabel->title
+#. 5.6->settings-schema.json->sectionDiskLabel->title
+#. 5.6->settings-schema.json->sectionDiskUsageLabel->title
+#. 5.6->settings-schema.json->sectionBatteryLabel->title
+#, fuzzy
+msgid "Label"
+msgstr "Merkitse nimet"
+
+#. 5.6->settings-schema.json->sectionCPUColorsByActivity->title
+#. 4.0/prefsui.glade:538
+msgid "by activity level (in %):"
+msgstr "Aktiivisuus (%):"
+
+#. 5.6->settings-schema.json->sectionNetworkScaling->title
+#. 5.6->settings-schema.json->sectionDiskScaling->title
+#. 3.0/prefsui.glade:972 3.0/prefsui.glade:1305 3.2/prefsui.glade:1024
+#. 3.2/prefsui.glade:1357 3.4/prefsui.glade:947 3.4/prefsui.glade:1293
+#. 4.0/prefsui.glade:1093 4.0/prefsui.glade:1439
+msgid "Scaling"
+msgstr "Skaalaus"
+
+#. 5.6->settings-schema.json->sectionNetworkDevices->title
+#. 5.6->settings-schema.json->sectionDiskDevices->title
+#. 3.0/prefsui.glade:1110 3.0/prefsui.glade:1443 3.2/prefsui.glade:1162
+#. 3.2/prefsui.glade:1495 3.4/prefsui.glade:1082 3.4/prefsui.glade:1428
+#. 4.0/prefsui.glade:1228 4.0/prefsui.glade:1574
+msgid "Devices"
+msgstr "Laitteet"
+
+#. 5.6->settings-schema.json->sectionNetworkTotal->title
+msgid "Total amount or instant speed"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionDiskUsagePaths->title
+#. 5.6->settings-schema.json->sectionBatteryPaths->title
+msgid "Paths"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionDiskSpeed->title
+msgid "Instant speed"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionColors->title
+msgid "Your colors"
+msgstr ""
+
+#. 5.6->settings-schema.json->labelsOn->description
+#. 3.0/prefsui.glade:81 3.2/prefsui.glade:81 3.4/prefsui.glade:83
+#. 4.0/prefsui.glade:90
+msgid "Labels"
+msgstr "Merkitse nimet"
+
+#. 5.6->settings-schema.json->borderOn->description
+msgid "Add a border to each graph"
+msgstr ""
+
+#. 5.6->settings-schema.json->borderRadius->description
+msgid "Radius of curvature in corners"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "1px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "2px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "4px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "8px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "16px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "32px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "64px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->description
+msgid "The width of each graphic must be a multiple of:"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStepApply->description
+msgid "Apply this multiple"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphSpacing->description
+msgid "Graph spacing"
+msgstr ""
+
+#. 5.6->settings-schema.json->thickness->description
+#. 4.0/prefsui.glade:168
+msgid "Curves thickness"
+msgstr "Viivan paksuus"
+
+#. 5.6->settings-schema.json->ledForCurves->description
+msgid "Led for curves"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->options
+msgid "●"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->options
+msgid "⬤"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->options
+msgid "◉"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledLocation->description
+msgid "Led location"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledLocation->options
+msgid "Left"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledLocation->options
+#, fuzzy
+msgid "Right"
+msgstr "Korkeus"
+
+#. 5.6->settings-schema.json->useIconSize->description
+msgid "Limit height to the size of a colored icon"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphHeightPercent->description
+msgid "Graph height (% of panel height)"
+msgstr ""
+
+#. 5.6->settings-schema.json->refreshRate->description
+#. 3.0/prefsui.glade:132 3.2/prefsui.glade:132 3.4/prefsui.glade:133
+#. 4.0/prefsui.glade:140
+msgid "Refresh Rate (ms)"
+msgstr "Virkistystaajuus (ms)"
+
+#. 5.6->settings-schema.json->labelColor->description
+#. 3.2/prefsui.glade:245 3.4/prefsui.glade:177 4.0/prefsui.glade:212
+msgid "Label Color"
+msgstr "Väri"
+
+#. 5.6->settings-schema.json->borderColor->description
+#, fuzzy
+msgid "Border Color"
+msgstr "Taustaväri"
+
+#. 5.6->settings-schema.json->backgroundColor->description
+#. 3.0/prefsui.glade:245 3.2/prefsui.glade:297 3.4/prefsui.glade:228
+#. 4.0/prefsui.glade:263
+msgid "Background Color"
+msgstr "Taustaväri"
+
+#. 5.6->settings-schema.json->percentAtEndOfLine->description
+msgid "Place % at the very end of the line"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipFontSize->description
+msgid "Font size (px)"
+msgstr ""
+
+#. 5.6->settings-schema.json->widthWhithoutAnyGraph->description
+msgid "Width when no graph is displayed (px)"
+msgstr ""
+
+#. 5.6->settings-schema.json->widthWhithoutAnyGraph->tooltip
+msgid ""
+"This is useful for preventing the tooltip from disappearing too soon when "
+"you move the pointer.\n"
+"Refresh All after making changes."
+msgstr ""
+
+#. 5.6->settings-schema.json->removeEnlightenment->description
+#, fuzzy
+msgid "Remove Enlightenment of this applet"
+msgstr "Lataa sovelma uudelleen"
+
+#. 5.6->settings-schema.json->displayOrderLabel->description
+msgid ""
+"Choose the order in which the boxes of this applet are displayed in the "
+"panel.\n"
+"Do not change these names!"
+msgstr ""
+
+#. 5.6->settings-schema.json->displayOrder->columns->title
+#. 5.6->settings-schema.json->Net_devicesList->columns->title
+#. 5.6->settings-schema.json->Disk_devicesList->columns->title
+#. 5.6->settings-schema.json->DiskUsage_pathList->columns->title
+#. 5.6->settings-schema.json->Battery_devicesList->columns->title
+msgid "Name"
+msgstr ""
+
+#. 5.6->settings-schema.json->displayOrder->description
+msgid "Display order in the panel"
+msgstr ""
+
+#. 5.6->settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
+#. 5.6->settings-schema.json->displayOrderReinit->description
+msgid "Reset"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_enabledTooltip->description
+#. 5.6->settings-schema.json->Mem_enabledTooltip->description
+#. 5.6->settings-schema.json->Net_enabledTooltip->description
+#. 5.6->settings-schema.json->Disk_enabledTooltip->description
+#. 5.6->settings-schema.json->DiskUsage_enabledTooltip->description
+#. 5.6->settings-schema.json->Battery_enabledTooltip->description
+#, fuzzy
+msgid "Enable Tooltip"
+msgstr "Käytä"
+
+#. 5.6->settings-schema.json->CPU_labelOn->description
+#. 5.6->settings-schema.json->Mem_labelOn->description
+#. 5.6->settings-schema.json->Net_labelOn->description
+#. 5.6->settings-schema.json->Disk_labelOn->description
+#. 5.6->settings-schema.json->DiskUsage_labelOn->description
+#. 5.6->settings-schema.json->Battery_labelOn->description
+msgid "Display this label"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelForeground->description
+#. 5.6->settings-schema.json->Mem_labelForeground->description
+#. 5.6->settings-schema.json->Net_labelForeground->description
+#. 5.6->settings-schema.json->Disk_labelForeground->description
+#. 5.6->settings-schema.json->DiskUsage_labelForeground->description
+#. 5.6->settings-schema.json->Battery_labelForeground->description
+msgid "Bring this label to the foreground"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelPos->description
+#. 5.6->settings-schema.json->Mem_labelPos->description
+#. 5.6->settings-schema.json->Net_labelPos->description
+#. 5.6->settings-schema.json->Disk_labelPos->description
+#. 5.6->settings-schema.json->DiskUsage_labelPos->description
+#. 5.6->settings-schema.json->Battery_labelPos->description
+msgid "Vertical position offset (pixels)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelPos->tooltip
+#. 5.6->settings-schema.json->Mem_labelPos->tooltip
+#. 5.6->settings-schema.json->Net_labelPos->tooltip
+#. 5.6->settings-schema.json->Disk_labelPos->tooltip
+#. 5.6->settings-schema.json->DiskUsage_labelPos->tooltip
+#. 5.6->settings-schema.json->Battery_labelPos->tooltip
+msgid ""
+"Negative: to the top.\n"
+"Positive: to the bottom."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->description
+#. 5.6->settings-schema.json->Mem_labelZoom->description
+#. 5.6->settings-schema.json->Net_labelZoom->description
+#. 5.6->settings-schema.json->Disk_labelZoom->description
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->description
+#. 5.6->settings-schema.json->Battery_labelZoom->description
+#, fuzzy
+msgid "Label zoom"
+msgstr "Väri"
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "1"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "2"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "3"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "4"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelCustomized->description
+#. 5.6->settings-schema.json->Mem_labelCustomized->description
+#. 5.6->settings-schema.json->Net_labelCustomized->description
+#. 5.6->settings-schema.json->Disk_labelCustomized->description
+#. 5.6->settings-schema.json->DiskUsage_labelCustomized->description
+#. 5.6->settings-schema.json->Battery_labelCustomized->description
+msgid "Customize this label"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelCustom->description
+#. 5.6->settings-schema.json->Mem_labelCustom->description
+#. 5.6->settings-schema.json->Net_labelCustom->description
+#. 5.6->settings-schema.json->Disk_labelCustom->description
+#. 5.6->settings-schema.json->DiskUsage_labelCustom->description
+#. 5.6->settings-schema.json->Battery_labelCustom->description
+msgid "Custom label"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelCustom->tooltip
+#. 5.6->settings-schema.json->Mem_labelCustom->tooltip
+#. 5.6->settings-schema.json->Net_labelCustom->tooltip
+#. 5.6->settings-schema.json->Disk_labelCustom->tooltip
+#. 5.6->settings-schema.json->DiskUsage_labelCustom->tooltip
+#. 5.6->settings-schema.json->Battery_labelCustom->tooltip
+msgid "You can use emojis."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_squared->description
+#. 5.6->settings-schema.json->Mem_squared->description
+#. 5.6->settings-schema.json->Net_squared->description
+#. 5.6->settings-schema.json->Disk_squared->description
+#. 5.6->settings-schema.json->DiskUsage_squared->description
+#. 5.6->settings-schema.json->Battery_squared->description
+msgid "Square view"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_width->description
+#. 5.6->settings-schema.json->Mem_width->description
+#. 5.6->settings-schema.json->Net_width->description
+#. 5.6->settings-schema.json->Disk_width->description
+#. 5.6->settings-schema.json->DiskUsage_width->description
+#. 5.6->settings-schema.json->Battery_width->description
+#. 3.0/prefsui.glade:360 3.0/prefsui.glade:533 3.0/prefsui.glade:912
+#. 3.0/prefsui.glade:1245 3.2/prefsui.glade:412 3.2/prefsui.glade:585
+#. 3.2/prefsui.glade:964 3.2/prefsui.glade:1297 3.4/prefsui.glade:341
+#. 3.4/prefsui.glade:513 3.4/prefsui.glade:886 3.4/prefsui.glade:1232
+#. 4.0/prefsui.glade:376 4.0/prefsui.glade:659 4.0/prefsui.glade:1032
+#. 4.0/prefsui.glade:1378
+msgid "Width"
+msgstr "Alueen leveys"
+
+#. 5.6->settings-schema.json->CPU_mergeAll->description
+#. 5.6->settings-schema.json->Net_mergeAll->description
+#. 5.6->settings-schema.json->Disk_mergeAll->description
+#. 5.6->settings-schema.json->DiskUsage_mergeAll->description
+#. 5.6->settings-schema.json->Battery_mergeAll->description
+msgid "Merge all"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_groupInSetsOf4->description
+msgid "Group in sets of 4 in tooltip"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_ignoreHyperthreading->description
+msgid "Ignore Hyper-Threading"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_ignoreHyperthreading->tooltip
+msgid ""
+"Example: An 8-core processor with Hyper-Threading technology appears to have "
+"16 cores, even though it does not."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTime->description
+msgid "Show only the CPU Load Over Time"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->description
+msgid "How many bars?"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "8"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "16"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "32"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "64"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->tooltip
+msgid "Related to CPU Load Over Time"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showTemp->description
+msgid "Show the CPU temperature"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_temp_hovering_only->description
+#. 5.6->settings-schema.json->Net_total_hovering_only->description
+#. 5.6->settings-schema.json->Disk_speed_hovering_only->description
+msgid "Only display when hovering over this applet"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempInFahrenheit->description
+msgid "Fahrenheit degrees"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempPath->description
+msgid "Path to the system file used to check the CPU temperature"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempHigh->description
+msgid "High CPU Temperature (°C)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempHigh->tooltip
+msgid "Refer to your CPU documentation."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempCrit->description
+msgid "Critical CPU Temperature (°C)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempCrit->tooltip
+msgid ""
+"Refer to your CPU documentation.\n"
+"Must be greater than the High CPU Temperature."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempCorner->description
+msgid "Corner in which to display the temperature"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Top Right"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Top Left"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Bottom Right"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Bottom Left"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempFontFactor->units
+#. 5.6->settings-schema.json->percentFontFactor->units
+#. 5.6->settings-schema.json->flowFontFactor->units
+msgid "%"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempFontFactor->description
+#. 5.6->settings-schema.json->percentFontFactor->description
+#. 5.6->settings-schema.json->flowFontFactor->description
+msgid "Font size: percentage of the box height"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempColor->description
+msgid "Normal Temperature Color"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempColorHigh->description
+msgid "High Temperature Color"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempColorCrit->description
+msgid "Critical Temperature Color"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_byActivity->description
+#. 4.0/prefsui.glade:433
+msgid "Color by activity level"
+msgstr "Väri aktiivisuustason mukaan"
+
+#. 5.6->settings-schema.json->CPU_useProgressiveColors->description
+#. 4.0/prefsui.glade:460
+msgid "Use automatic colors"
+msgstr "Automaattiset värit"
+
+#. 5.6->settings-schema.json->CPU_colorExplanation->description
+msgid ""
+"The CPUs are colored in groups of four: CPU0, CPU1, CPU2, and CPU3.\n"
+"The fifth, named CPU4, will have the same color as CPU0; the sixth, CPU5, "
+"will have the same color as CPU1, and so on."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_color0->description
+#, fuzzy
+msgid "CPU0 Color"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->CPU_color1->description
+#, fuzzy
+msgid "CPU1 Color"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->CPU_color2->description
+#, fuzzy
+msgid "CPU2 Color"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->CPU_color3->description
+#, fuzzy
+msgid "CPU3 Color"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->CPU_activity_0_20->description
+#, fuzzy
+msgid "0-20"
+msgstr "00-20"
+
+#. 5.6->settings-schema.json->Mem_onlyUsedAvailable->description
+msgid "Display only Used and Available memory"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_enabledBufferCacheSharedTooltip->description
+msgid "Enable Buffer/Cache/Shared Tooltip"
+msgstr ""
+
+#. 5.6->settings-schema.json->Swap_enabled->description
+#, fuzzy
+msgid "Enable Swap"
+msgstr "Käytä"
+
+#. 5.6->settings-schema.json->Swap_enabledTooltip->description
+#, fuzzy
+msgid "Enable Swap Tooltip"
+msgstr "Käytä"
+
+#. 5.6->settings-schema.json->Mem_chartType->description
+msgid "Chart Type"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_chartType->options
+msgid "Pie chart"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_chartType->options
+msgid "Bar chart"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_method->description
+msgid "Memory Calculation Method"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_method->options
+msgid "htop (recommended)"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_method->options
+#, fuzzy
+msgid "Gnome System Monitor"
+msgstr "Multi-Core System Monitor"
+
+#. 5.6->settings-schema.json->Mem_startAt12Oclock->description
+msgid "Origin at 12 o'clock"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_showBytesInTooltip->description
+msgid ""
+"Show the amounts (in Bytes) of Total, Used and Available memory in the "
+"tooltip"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_value_display->description
+msgid "Display memory usage percentage"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_value_display->options
+#. 5.6->settings-schema.json->Mem_swapWidth->options
+#. 5.6->settings-schema.json->Net_typeOfGraph->options
+#. 5.6->settings-schema.json->Disk_typeOfGraph->options
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
+#. 5.6->settings-schema.json->Battery_value_display->options
+msgid "None"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_value_display->options
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
+#. 5.6->settings-schema.json->Battery_value_display->options
+msgid "Hovering over"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_value_display->options
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
+#. 5.6->settings-schema.json->Battery_value_display->options
+msgid "Always"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_valueCorner->description
+#. 5.6->settings-schema.json->DiskUsage_valueCorner->description
+#. 5.6->settings-schema.json->Battery_valueCorner->description
+msgid "Where to display this"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_valueCorner->options
+#. 5.6->settings-schema.json->DiskUsage_valueCorner->options
+#. 5.6->settings-schema.json->Battery_valueCorner->options
+msgid "Top"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_valueCorner->options
+#. 5.6->settings-schema.json->DiskUsage_valueCorner->options
+#. 5.6->settings-schema.json->Battery_valueCorner->options
+msgid "Bottom"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_colorUsedup->description
+#. 5.6->settings-schema.json->DiskUsage_colorUsed->description
+#. 3.0/prefsui.glade:606 3.2/prefsui.glade:658 3.4/prefsui.glade:587
+#. 4.0/prefsui.glade:733
+msgid "Usedup"
+msgstr "Käytetty"
+
+#. 5.6->settings-schema.json->Mem_colorBuffers->description
+#, fuzzy
+msgid "Buffers"
+msgstr "Puskuri"
+
+#. 5.6->settings-schema.json->Mem_colorFree->description
+#. 5.6->settings-schema.json->DiskUsage_colorFree->description
+#. 3.0/prefsui.glade:723 3.2/prefsui.glade:775 3.4/prefsui.glade:701
+#. 4.0/prefsui.glade:847
+msgid "Free"
+msgstr "Vapaa"
+
+#. 5.6->settings-schema.json->Mem_swapWidth->description
+msgid "Relative width for Swap graph"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_swapWidth->options
+msgid "100%"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_swapWidth->options
+msgid "25%, left side"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_swapWidth->tooltip
+msgid ""
+"100%: The Swap graph is a bar that spans the entire width of the graph, "
+"behind the circle.\n"
+"10%: The Swap graph is a bar that occupies 10% of the graph width, to the "
+"left of the circle.\n"
+"None: No Swap bar."
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->description
+#. 5.6->settings-schema.json->Disk_typeOfGraph->description
+msgid "Type of graph"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->options
+#. 5.6->settings-schema.json->Disk_typeOfGraph->options
+msgid "Curves only"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->options
+#. 5.6->settings-schema.json->Disk_typeOfGraph->options
+msgid "Led only"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->options
+#. 5.6->settings-schema.json->Disk_typeOfGraph->options
+#, fuzzy
+msgid "Curves and Led"
+msgstr "Viivan paksuus"
+
+#. 5.6->settings-schema.json->Net_autoscale->description
+#. 5.6->settings-schema.json->Disk_autoscale->description
+#. 3.0/prefsui.glade:1019 3.0/prefsui.glade:1352 3.2/prefsui.glade:1071
+#. 3.2/prefsui.glade:1404 3.4/prefsui.glade:993 3.4/prefsui.glade:1339
+#. 4.0/prefsui.glade:1139 4.0/prefsui.glade:1485
+msgid "Auto Scale"
+msgstr "Autom. skaalaaminen"
+
+#. 5.6->settings-schema.json->Net_logscale->description
+#. 5.6->settings-schema.json->Disk_logscale->description
+#. 3.0/prefsui.glade:1058 3.0/prefsui.glade:1391 3.2/prefsui.glade:1110
+#. 3.2/prefsui.glade:1443 3.4/prefsui.glade:1031 3.4/prefsui.glade:1377
+#. 4.0/prefsui.glade:1177 4.0/prefsui.glade:1523
+msgid "Logarithmic"
+msgstr "Logaritminen"
+
+#. 5.6->settings-schema.json->Net_minPrefix->description
+#. 5.6->settings-schema.json->Disk_minPrefix->description
+msgid "Minimal prefix"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Byte"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "kilo"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Mega"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Giga"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Tera"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Peta"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Exa"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Zetta"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Yotta"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->tooltip
+#. 5.6->settings-schema.json->Disk_minPrefix->tooltip
+msgid ""
+"You can specify the minimum unit of measurement of your choice for the "
+"amount of data transferred: byte, kilobyte, megabyte, etc."
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_symbolsInTooltip->description
+#. 5.6->settings-schema.json->Disk_symbolsInTooltip->description
+msgid "Use symbols instead of words"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_getdevlist_btn->description
+#. 5.6->settings-schema.json->Disk_getdevlist_btn->description
+#. 5.6->settings-schema.json->Battery_getdevlist_btn->description
+msgid "Update this device list"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_devicesList->columns->title
+#. 5.6->settings-schema.json->Disk_devicesList->columns->title
+#. 5.6->settings-schema.json->DiskUsage_pathList->columns->title
+#. 5.6->settings-schema.json->Battery_devicesList->columns->title
+#, fuzzy
+msgid "Enabled"
+msgstr "Käytä"
+
+#. 5.6->settings-schema.json->Net_devicesList->columns->title
+#. 5.6->settings-schema.json->Battery_devicesList->columns->title
+msgid "⚠️ Id️"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_devicesList->columns->title
+#, fuzzy
+msgid "Color Down"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->Net_devicesList->columns->title
+#, fuzzy
+msgid "Color Up"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->Net_devicesList->columns->title
+msgid "Part of total"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_cleardevlist_btn->description
+#. 5.6->settings-schema.json->Disk_cleardevlist_btn->description
+#. 5.6->settings-schema.json->Battery_cleardevlist_btn->description
+msgid "Clear this device list"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_total_type->description
+msgid "Total amount or speed"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_total_type->options
+msgid "Total transfer amount (Bytes)"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_total_type->options
+msgid "Instant network speed (Bytes per second)"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_total_display->description
+#. 5.6->settings-schema.json->Disk_speed_display->description
+msgid "Display that"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_total_display->tooltip
+#. 5.6->settings-schema.json->Disk_speed_display->tooltip
+msgid ""
+"Be sure to check at least one “Part of total” box among the enabled devices."
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_totalCorner->description
+#. 5.6->settings-schema.json->Disk_speedCorner->description
+msgid "Corner in which to display that"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Right Only"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Left Only"
+msgstr ""
+
+#. 5.6->settings-schema.json->Disk_devicesList->columns->title
+msgid "⚠️ Id"
+msgstr ""
+
+#. 5.6->settings-schema.json->Disk_devicesList->columns->title
+msgid "⚠️ Sector Size"
+msgstr ""
+
+#. 5.6->settings-schema.json->Disk_devicesList->columns->title
+#, fuzzy
+msgid "Color Read"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->Disk_devicesList->columns->title
+#, fuzzy
+msgid "Color Write"
+msgstr "Kirjoitus"
+
+#. 5.6->settings-schema.json->DiskUsage_value_display->description
+#. 5.6->settings-schema.json->Battery_value_display->description
+msgid "Display value"
+msgstr ""
+
+#. 5.6->settings-schema.json->DiskUsage_colorAlert->description
+#. 5.6->settings-schema.json->Battery_colorAlert->description
+msgid "Alert"
+msgstr ""
+
+#. 5.6->settings-schema.json->DiskUsage_getpathlist_btn->description
+msgid "Update this path list"
+msgstr ""
+
+#. 5.6->settings-schema.json->DiskUsage_pathList->columns->title
+#. 5.6->settings-schema.json->Battery_devicesList->columns->title
+msgid ""
+"Alert when\n"
+"value (in %)\n"
+"reaches"
+msgstr ""
+
+#. 5.6->settings-schema.json->DiskUsage_pathList->columns->title
+msgid "Path"
+msgstr ""
+
+#. 5.6->settings-schema.json->Battery_colorLoad->description
+msgid "Load"
+msgstr ""
+
+#. 5.6->settings-schema.json->Battery_colorUnload->description
+msgid "Unload"
+msgstr ""
+
+#. 5.6->settings-schema.json->color0->description
+#, fuzzy
+msgid "Color #0"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color1->description
+#, fuzzy
+msgid "Color #1"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color2->description
+#, fuzzy
+msgid "Color #2"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color3->description
+#, fuzzy
+msgid "Color #3"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color4->description
+#, fuzzy
+msgid "Color #4"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color5->description
+#, fuzzy
+msgid "Color #5"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color6->description
+#, fuzzy
+msgid "Color #6"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color7->description
+#, fuzzy
+msgid "Color #7"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color8->description
+#, fuzzy
+msgid "Color #8"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color9->description
+#, fuzzy
+msgid "Color #9"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color10->description
+#, fuzzy
+msgid "Color #10"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color11->description
+#, fuzzy
+msgid "Color #11"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color12->description
+#, fuzzy
+msgid "Color #12"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color13->description
+#, fuzzy
+msgid "Color #13"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color14->description
+#, fuzzy
+msgid "Color #14"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color15->description
+#, fuzzy
+msgid "Color #15"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color16->description
+#, fuzzy
+msgid "Color #16"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color17->description
+#, fuzzy
+msgid "Color #17"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color18->description
+#, fuzzy
+msgid "Color #18"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color19->description
+#, fuzzy
+msgid "Color #19"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color20->description
+#, fuzzy
+msgid "Color #20"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color21->description
+#, fuzzy
+msgid "Color #21"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color22->description
+#, fuzzy
+msgid "Color #22"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color23->description
+#, fuzzy
+msgid "Color #23"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color24->description
+#, fuzzy
+msgid "Color #24"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color25->description
+#, fuzzy
+msgid "Color #25"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color26->description
+#, fuzzy
+msgid "Color #26"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color27->description
+#, fuzzy
+msgid "Color #27"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color28->description
+#, fuzzy
+msgid "Color #28"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color29->description
+#, fuzzy
+msgid "Color #29"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color30->description
+#, fuzzy
+msgid "Color #30"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->color31->description
+#, fuzzy
+msgid "Color #31"
+msgstr "Värit"
+
+#. 5.6->settings-schema.json->labelWarning->description
+msgid "Data marked with ⚠️ must not be changed!"
+msgstr ""
+
+#. 3.0/prefsui.glade:49 3.2/prefsui.glade:49 3.4/prefsui.glade:49
+#. 4.0/prefsui.glade:56
+msgid "Multi-Core System Monitor Preferences"
+msgstr "Multi-Core System Monitor asetukset"
+
+#. 3.0/prefsui.glade:189 3.2/prefsui.glade:189
+msgid "Height"
+msgstr "Korkeus"
+
+#. 3.0/prefsui.glade:645 3.2/prefsui.glade:697 3.4/prefsui.glade:625
+#. 4.0/prefsui.glade:771
+msgid "Cached"
+msgstr "Välimuisti"
+
+#. 3.0/prefsui.glade:1550 3.2/prefsui.glade:1602 3.4/prefsui.glade:1549
+#. 4.0/prefsui.glade:1695
+msgid "Scaling Description"
+msgstr "Skaalaamisen kuvaus"
+
+#. 3.0/prefsui.glade:1562 3.2/prefsui.glade:1614 3.4/prefsui.glade:1564
+#. 4.0/prefsui.glade:1710
+msgid "Close"
+msgstr "Sulje"
+
+#. 3.0/prefsui.glade:1592 3.2/prefsui.glade:1644 3.4/prefsui.glade:1594
+msgid ""
+"Auto Scaling:\n"
+"\tThis will scale the line graph by the largest reading within the\n"
+"\tdisplayed area. Once the largest reading is no longer displayed\n"
+"\tthe next largest becomes the new value by which the readings\n"
+"\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"\tHowever, it also means that if there is a large reading small readings\n"
+"\tmay become indistinguishable from 0. And if there are only small readings\n"
+"\tthen slightly larger readings may appear larger than they should.\n"
+"\tIf not enabled the largest value used will be the largest reading since\n"
+"\tcinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"\tThis transforms the readings so that they are displayed using a\n"
+"\tlogarithmic scale. If you are not familiar basically, it reduces the\n"
+"\tlarge values so that they dont dominate the smaller readings."
+msgstr ""
+"Autom. skaalaus:\n"
+"\tTämä skaalaa viivakaavion suurimmalla mahdollisella näytettävällä "
+"alueella.\n"
+"\tKun suurinta lukemaa ei enää näytetä seuraavasta suurimmasta tulee uusi\n"
+"\tarvo, jolla lukemat ovat skaalattuja. Kuvaajan avulla \"zoom\" näyttää\n"
+"\tkuvaajan yksityiskohdat..\n"
+"\tSe tarkoittaa kuitenkin myös sitä, että suurin ja pienin lukema, voivat\n"
+"\terottua nollasta. Jos on vain pieniä lukemia, hiukan suuremmat lukemat\n"
+"\tsaattavat näyttää suurempina kuin pitäisi. Jos tätä ei käytetä, suurin\n"
+"\tkäytetty arvo on suurin lukema mittauksen aloittamisen jälkeen.\n"
+"\n"
+"Logaritminen skaalaus:\n"
+"\tTämä muuttaa lukemia siten, että ne näytetään painikkeella logaritminen\n"
+"\tasteikko. Jos et tunne termiä, se vähentää suuret arvot niin, että ne "
+"eivät\n"
+"\thallitse pienempiä lukemia."
+
+#. 4.0/prefsui.glade:508
+msgid "by CPU:"
+msgstr "prosessorille:"
+
+#. 4.0/prefsui.glade:1740
+msgid ""
+"Auto Scaling:\n"
+"    This will scale the line graph by the largest reading within the\n"
+"    displayed area. Once the largest reading is no longer displayed\n"
+"    the next largest becomes the new value by which the readings\n"
+"    are scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"    However, it also means that if there is a large reading small readings\n"
+"    may become indistinguishable from 0. And if there are only small "
+"readings\n"
+"    then slightly larger readings may appear larger than they should.\n"
+"    If not enabled the largest value used will be the largest reading since\n"
+"    cinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"    This transforms the readings so that they are displayed using a\n"
+"    logarithmic scale. If you are not familiar basically, it reduces the\n"
+"    large values so that they dont dominate the smaller readings."
+msgstr ""
+"Autom. skaalaus:\n"
+"    Skaalaa viivan kokonaan näytettävälle alueelle.\n"
+"    Kun mitattava lukema loppuu, seuraava aloitaa uuden\n"
+"    arvon skaalattuna. Kuvaajan näyttää arvojen tulokset\n"
+"    \n"
+"    Suurin ja pienin lukema, voi erottua nollasta vain vähän.\n"
+"    Jos tulee vain pieniä lukemia niin hieman suuremmat\n"
+"    saattavat näyttää isompina kuin pitäisi. Jos skaalausta ei käytetä,\n"
+"    suurin arvo on ohjelman aloittamisen jälkeen saatu arvo.\n"
+"\n"
+"Logaritminen skaalaus:\n"
+"    Lukemia näytetään käyttämällä logaritmi asteikkoa.\n"
+"    Jos et tunne termiä, se vähentää suuria arvoja, jotta ne eivät\n"
+"    hallitse pienempiä lukemia."
