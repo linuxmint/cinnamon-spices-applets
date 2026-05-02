@@ -219,6 +219,14 @@ MyApplet.prototype = {
             Main.notify(_("Watching %s").format(tvstation12));
         });
 
+        //EuronewsBG
+        var tvstation13 = _("Euronews Bulgaria");
+        this.TvItem.menu.addAction(tvstation13, () => {
+            Util.spawnCommandLine("killall -9 mpv");
+            Util.spawnCommandLine("mpv --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='Euronews Bulgaria' 'https://e102-ts.cdn.bg/euronews/fls/euronews.stream/at=O0M9MjEzLjkxLjE5OS4yMjU7RT0xNzc3Njc2OTIyO0E9MTtLPTM7UD0wMTExMDtTPTI3ZDMwYzUwNjNjNmIzYmM1MTJlZDg3NzgxNjliNzc2MWNhYTM4YzE=/chunklist.m3u8'");
+            Main.notify(_("Watching %s").format(tvstation));
+        });
+
         //end tv drop down menu                
         this.menu.addMenuItem(this.TvItem);
 
