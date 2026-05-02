@@ -1,3 +1,10 @@
+### v3.14.0~20260502
+  * Improvements to tooltips:
+    * CPUs: option to group them in sets of 4.
+    * Do not hide the tooltip too early.
+  * Fixes [#8622](https://github.com/linuxmint/cinnamon-spices-applets/issues/8622)
+  * Fixes [#8629](https://github.com/linuxmint/cinnamon-spices-applets/issues/8629)
+
 ### v3.13.6~20260430
   * You can specify the minimum unit of measurement of your choice for the amount of data transferred: byte, kilobyte, megabyte, etc.
   * Displays the tooltip instantly when the applet is hovered over.

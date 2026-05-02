@@ -41,7 +41,7 @@ const NETWORK_DEVICES_STATUS_PATH = XDG_RUNTIME_DIR + "/network_devices";
 const POWER_SUPPLY_PATH = "/sys/class/power_supply";
 
 const rate = _("/s");
-var spaces = 16;
+var spaces = 20;
 const translated_strings = [
     _("Core 128:"),
     _("Unrecoverable:"),
@@ -215,9 +215,11 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("borderRadius", "borderRadius");
         this.settings.bind("graphStep", "graphStep");
         this.settings.bind("graphSpacing", "graphSpacing");
+        this.settings.bind("CPU_groupInSetsOf4", "CPU_groupInSetsOf4");
         this.settings.bind("percentAtEndOfLine", "percentAtEndOfLine");
         this.settings.bind("tooltipFontSize", "tooltipFontSize", () => { this.setTooltipStyle(); });
         this.setTooltipStyle();
+        this.settings.bind("widthWhithoutAnyGraph", "widthWhithoutAnyGraph");
         this.settings.bind("CPU_labelOn", "CPU_labelOn");
         this.settings.bind("CPU_labelForeground", "CPU_labelForeground");
         this.settings.bind("Mem_labelOn", "Mem_labelOn");
@@ -420,8 +422,10 @@ class MCSM extends Applet.IconApplet {
 
         this.on_color_changed();
         this.useSymbolicIcon = true;
-        if (this.without_any_graph)
+        if (this.without_any_graph) {
+            this.actor.set_style(`width: ${this.widthWhithoutAnyGraph}px;`);
             this.setIcon();
+        }
 
         this.set_panelHeight();
 
@@ -448,8 +452,22 @@ class MCSM extends Applet.IconApplet {
         this.oldCPU_Idle_Values = [];
 
         this.hovered = false;
+        this.actor.connect("motion-event", (actor, event) => {
+            this.hovered = true;
+            this._applet_tooltip.preventShow = false;
+            this._applet_tooltip.show()
+        });
+        this._applet_tooltip._onMotionEvent = function(actor, event) {
+            this.hovered = true;
+            this._applet_tooltip.preventShow = false;
+            this._applet_tooltip.show()
+        };
         this.actor.connect("enter-event", (actor, event) => {
             this.hovered = true;
+            //~ if (this.without_any_graph === true) {
+                //~ this._applet_tooltip.preventShow = false;
+                //~ return;
+            //~ }
             // Work around hovering over a PangoCairo canvas instance triggering a false positive panel leave event
             if (this.panel._autohideSettings !== "false") {
                 this.originalAutoHideSetting = this.panel._autohideSettings;
@@ -462,6 +480,9 @@ class MCSM extends Applet.IconApplet {
         });
         this.actor.connect("leave-event", (actor, event) => {
             this.hovered = false;
+            //~ if (this.without_any_graph) {
+                //~ return;
+            //~ }
             this._applet_tooltip.hide();
             //~ this._applet_tooltip.preventShow = true;
             this._applet_tooltip.preventShow = false;
@@ -2039,7 +2060,10 @@ class MultiCpuDataProvider {
         let colon = _(":");
         let lenColon = Math.max(colon.length - 1, 0);
         let percentChar = "%";
-        if (this.applet.percentAtEndOfLine)
+        let percentAtEndOfLine = this.applet.percentAtEndOfLine;
+        if (this.applet.CPU_groupInSetsOf4 && !this.applet.CPU_mergeAll)
+            percentAtEndOfLine = false;
+        if (percentAtEndOfLine)
             percentChar = "%".padStart(9, " ");
 
         if (this.applet.CPU_showLoadOverTime) {
@@ -2052,13 +2076,25 @@ class MultiCpuDataProvider {
             for (let i = 0; i < this.CPUCount; i++) {
                 let percentage = formatNumber(parseInt(100 * this.currentReadings[i]), 0);
                 var percentage_str = "" + percentage;
-                percentage_str = percentage_str.padStart(4);
+                if (this.applet.CPU_groupInSetsOf4)
+                    percentage_str = percentage_str.padStart(2);
+                else
+                    percentage_str = percentage_str.padStart(4);
                 if (this.applet.CPU_mergeAll) {
                     toolTipString += (_("CPU") + " ").padStart(spaces - lenColon, " ");
+                    toolTipString += colon + "\t" + " " + percentage_str + " " + percentChar + "\n";
                 } else {
-                    toolTipString += (_("Core") + " " + i).padStart(spaces - lenColon, " ");
+                    if (this.applet.CPU_groupInSetsOf4) {
+                        toolTipString += ("" + i).padStart("100".length + lenColon, " ");
+                        toolTipString += colon + " " + percentage_str + " " + percentChar;
+                        if (i % 4 === 3)
+                            toolTipString += "\n";
+                    } else {
+                        toolTipString += (_("Core") + " " + i).padStart(spaces - lenColon, " ");
+                        toolTipString += colon + "\t" + " " + percentage_str + " " + percentChar + "\n";
+                    }
                 }
-                toolTipString += colon + "\t" + " " + percentage_str + " " + percentChar + "\n";
+
             }
         }
         return toolTipString;

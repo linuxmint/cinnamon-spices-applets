@@ -134,7 +134,9 @@
       "title": "Tooltip",
       "keys": [
         "percentAtEndOfLine",
-        "tooltipFontSize"
+        "tooltipFontSize",
+        "widthWhithoutAnyGraph",
+        "RefreshAll_btn"
       ]
     },
     "sectionCPUOptions": {
@@ -146,6 +148,7 @@
         "CPU_squared",
         "CPU_width",
         "CPU_mergeAll",
+        "CPU_groupInSetsOf4",
         "CPU_ignoreHyperthreading",
         "CPU_showLoadOverTime",
         "CPU_showLoadOverTimeHowManyBars",
@@ -640,6 +643,15 @@
     "step": 1,
     "description": "Font size (px)"
   },
+  "widthWhithoutAnyGraph": {
+    "type": "scale",
+    "default": 40,
+    "min": 20,
+    "max": 80,
+    "step": 5,
+    "description": "Width when no graph is displayed (px)",
+    "tooltip": "This is useful for preventing the tooltip from disappearing too soon when you move the pointer.\nRefresh All after making changes."
+  },
   "removeEnlightenment": {
     "type": "button",
     "dependency": "isHighlighted",
@@ -751,6 +763,12 @@
     "type": "switch",
     "default": false,
     "description": "Merge all"
+  },
+  "CPU_groupInSetsOf4": {
+    "type": "switch",
+    "default": false,
+    "description": "Group in sets of 4 in tooltip",
+    "dependency": "!CPU_mergeAll"
   },
   "CPU_ignoreHyperthreading": {
     "type": "switch",
