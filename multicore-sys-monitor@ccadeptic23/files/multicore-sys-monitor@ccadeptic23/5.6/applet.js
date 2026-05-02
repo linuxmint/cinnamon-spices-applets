@@ -1031,7 +1031,7 @@ class MCSM extends Applet.IconApplet {
                             mntPoint = _mntPoint.pop();
                         }
                         let mntName = child["kname"];
-                        let discGran = child["disc-gran"];
+                        let discGran = child["disc-gran"] ? child["disc-gran"] : child["log-sec"];
                         if (knownDevices.indexOf(mntName) < 0) {
                             new_Disk_devicesList.push({
                                 "enabled": true,
