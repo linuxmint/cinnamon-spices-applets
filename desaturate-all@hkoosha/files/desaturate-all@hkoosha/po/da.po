@@ -9,83 +9,84 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-05-17 10:44-0400\n"
-"PO-Revision-Date: 2023-12-28 15:43+0100\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"PO-Revision-Date: 2026-04-30 17:01+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:62
 msgid "Click to disable effect"
-msgstr ""
+msgstr "Klik for at deaktivere effekt"
 
 #. applet.js:64
 msgid "Click to desaturate the desktop"
-msgstr ""
+msgstr "Klik for at fjerne skrivebordets mætning"
 
 #. applet.js:72
 msgid "Will automatically desaturate in"
-msgstr ""
+msgstr "Mætning fjernes automatisk om"
 
 #. applet.js:74
 msgid "Will automatically disable in"
-msgstr ""
+msgstr "Deaktiveres automatisk om"
 
 #. applet.js:76
 msgid "minutes"
-msgstr ""
+msgstr "minutter"
 
 #. applet.js:79
 msgid "Will automatically desaturate at"
-msgstr ""
+msgstr "Mætning fjernes automatisk kl."
 
 #. applet.js:81
 msgid "Will automatically disable at"
-msgstr ""
+msgstr "Deaktiveres automatisk kl."
 
 #. metadata.json->name
 msgid "Desaturate All"
 msgstr "Fjern farver overalt"
 
 #. metadata.json->description
-#, fuzzy
 msgid "Convert your screen to gray-scale."
-msgstr "Konvertér alle farver til gråtoner og tilbage igen med et enkelt klik."
+msgstr "Konvertér din skærm til gråtoner."
 
 #. settings-schema.json->saturation->description
 msgid "Color saturation"
-msgstr ""
+msgstr "Farvemætning"
 
 #. settings-schema.json->keybinding->description
 msgid "Shortcut to toggle desaturation effect"
-msgstr ""
+msgstr "Genvej til at slå mætning til/fra"
 
 #. settings-schema.json->automatic->description
 msgid "Automatic"
-msgstr ""
+msgstr "Automatisk"
 
 #. settings-schema.json->automatic->tooltip
 msgid ""
 "Automatically enable and disable the desaturation effect based on the time "
 "of day"
 msgstr ""
+"Aktivér og deaktiver automatisk mætningsseffekten afhængigt af tidspunktet "
+"på dagen"
 
 #. settings-schema.json->start-timechooser->description
 msgid "Time of day to automatically enable"
-msgstr ""
+msgstr "Tidspunkt på dagen hvor funktionen automatisk skal aktiveres"
 
 #. settings-schema.json->end-timechooser->description
 msgid "Time of day to automatically disable"
-msgstr ""
+msgstr "Tidspunkt på dagen hvor funktionen automatisk skal deaktiveres"
 
 #. settings-schema.json->resume-on-startup->description
 msgid "Restore desaturation effect state on startup"
-msgstr ""
+msgstr "Gendan tilstanden ved opstart"
 
 #. settings-schema.json->resume-on-startup->tooltip
 msgid "Restore the previously set desaturation state when cinnamon starts"
-msgstr ""
+msgstr "Gendan den tidligere indstillede tilstand, når Cinnamon starter"
