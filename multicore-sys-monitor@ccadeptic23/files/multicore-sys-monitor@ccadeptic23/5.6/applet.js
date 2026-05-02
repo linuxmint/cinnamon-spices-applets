@@ -203,6 +203,10 @@ class MCSM extends Applet.IconApplet {
         this.get_minDiskShownValue();
 
         this.settings = new AppletSettings(this, UUID, this.instance_id);
+        for (let _mod of ["CPUs", "Memory", "Swap", "Networks", "Disks", "Usage", "Battery"]) {
+            this.settings.bind(`tooltip${_mod}UseCustomTranslation`, `tooltip${_mod}UseCustomTranslation`);
+            this.settings.bind(`tooltip${_mod}CustomTranslation`, `tooltip${_mod}CustomTranslation`);
+        }
         this.settings.bind("isHighlighted", "isHighlighted");
         this.settings.bind("percentFontFactor", "percentFontFactor");
         this.settings.bind("flowFontFactor", "flowFontFactor");
@@ -1113,7 +1117,7 @@ class MCSM extends Applet.IconApplet {
         try {
             for (let child of children) {
                 let name = child.get_name();
-                global.log("name: " + name);
+                //~ global.log("name: " + name);
                 let uevent_file_path = `${POWER_SUPPLY_PATH}/${name}/uevent`;
                 if (!GLib.file_test(uevent_file_path, GLib.FileTest.EXISTS)) continue;
                 readFileAsync(uevent_file_path).then( (status) => {
@@ -1844,7 +1848,11 @@ class MemDataProvider {
         if (! this.isEnabledTooltip) return "";
         if (! this.isRunning) return "";
         var sum_used = 0;
-        let trans = _("Memory");
+        let trans;
+        if (this.applet.tooltipMemoryUseCustomTranslation && this.applet.tooltipMemoryCustomTranslation.length > 0)
+            trans = this.applet.tooltipMemoryCustomTranslation;
+        else
+            trans = _("Memory");
         let [strMemTotal, unitMemTotal] = formatBytesValueUnit(this.memTotal, 2, false);
         if (this.applet.Mem_showBytesInTooltip) {
             trans += " " + strMemTotal + " " + unitMemTotal;
@@ -1912,7 +1920,11 @@ class BufferCacheSharedDataProvider {
     getTooltipString() {
         if (! this.isEnabledTooltip || ! this.isEnabledBufferCacheSharedTooltip) return "";
         if (! this.isRunning) return "";
-        let trans = this.name;
+        let trans;
+        if (this.applet.tooltipMemoryUseCustomTranslation && this.applet.tooltipMemoryCustomTranslation.length > 0)
+            trans = this.applet.tooltipMemoryCustomTranslation;
+        else
+            trans = this.name;
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
 
@@ -1974,12 +1986,17 @@ class SwapDataProvider {
         if (!this.isEnabledTooltip || !this.swapusage) {
             return "";
         }
-        let trans = _("Swap");
+        let trans;
+        if (this.applet.tooltipSwapUseCustomTranslation && this.applet.tooltipSwapCustomTranslation.length > 0)
+            trans = this.applet.tooltipSwapCustomTranslation;
+        else
+            trans = _("Swap");
         let [strSwapTotal, unitSwapTotal] = formatBytesValueUnit(this.swapTotal, 2, false);
         let trans2 = trans + "";
         if (this.applet.Mem_showBytesInTooltip) {
             trans2 = trans + " " + strSwapTotal + " " + unitSwapTotal;
         }
+        trans2 += " (" + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(5, " ") + " %)"
         let len = trans2.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans2 + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
         if (this.applet.Mem_showBytesInTooltip) {
@@ -1989,13 +2006,13 @@ class SwapDataProvider {
             toolTipString += _("Used:").split(":")[0].padStart(spaces, " ") + ":\t"  + "" + formatNumber(parseFloat(swapUsedAmount).toFixed(2), 2).padStart(8, " ") + " " + swapUsedUnit.padStart(6, " ") + "\n";
             toolTipString += _("Available:").split(":")[0].padStart(spaces, " ") + ":\t"  + "" + formatNumber(parseFloat(swapAvailableAmount).toFixed(2), 2).padStart(8, " ") + " " + swapAvailableUnit.padStart(6, " ") + "\n";
         }
-        let percentChar = "%";
-        if (this.applet.percentAtEndOfLine)
-            percentChar = "%".padStart(6, " ");
+        //~ let percentChar = "%";
+        //~ if (this.applet.percentAtEndOfLine)
+            //~ percentChar = "%".padStart(6, " ");
 
-        let colon = _(":");
-        let lenColon = Math.max(colon.length - 1, 0);
-        toolTipString += trans.padStart(spaces - lenColon, " ") + colon + "\t" + "" + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(8, " ") + " " + percentChar + "\n";
+        //~ let colon = _(":");
+        //~ let lenColon = Math.max(colon.length - 1, 0);
+        //~ toolTipString += trans.padStart(spaces - lenColon, " ") + colon + "\t" + "" + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(8, " ") + " " + percentChar + "\n";
         return toolTipString;
     }
 
@@ -2047,7 +2064,20 @@ class MultiCpuDataProvider {
     getTooltipString() {
         if (! this.isEnabledTooltip) return "";
         if (! this.isRunning) return "";
-        let trans = _("CPUs");
+        let trans;
+        if (this.applet.tooltipCPUsUseCustomTranslation && this.applet.tooltipCPUsCustomTranslation.length > 0)
+            trans = this.applet.tooltipCPUsCustomTranslation;
+        else
+            trans = _("CPUs");
+        if (!this.applet.CPU_mergeAll) {
+            var loadAverage = 0;
+            for (let i = 0; i < this.CPUCount; i++) {
+                loadAverage += 100 * this.currentReadings[i];
+            }
+            //~ loadAverage = formatNumber(parseInt(loadAverage / this.CPUCount), 0);
+            loadAverage = parseInt(loadAverage / this.CPUCount).toString().padStart(2);
+            trans += " (" + loadAverage + " %)";
+        }
         if (this.applet.CPU_showTemp && this.applet.CPU_temperature) {
             let temperature = 1 * this.applet.CPU_temperature;
             let degree = (this.applet.CPU_tempInFahrenheit) ?  "°F" : "°C";
@@ -2239,7 +2269,11 @@ class NetDataProvider {
     getTooltipString() {
         if (! this.isEnabledTooltip) return "";
         if (! this.isRunning) return "";
-        let trans = _("Networks");
+        let trans;
+        if (this.applet.tooltipNetworksUseCustomTranslation && this.applet.tooltipNetworksCustomTranslation.length > 0)
+            trans = this.applet.tooltipNetworksCustomTranslation;
+        else
+            trans = _("Networks");
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
 
@@ -2414,7 +2448,11 @@ class DiskDataProvider {
         if (!this.isEnabledTooltip) {
             return "";
         }
-        let trans = _("Disks");
+        let trans;
+        if (this.applet.tooltipDisksUseCustomTranslation && this.applet.tooltipDisksCustomTranslation.length > 0)
+            trans = this.applet.tooltipDisksCustomTranslation;
+        else
+            trans = _("Disks");
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
         let title = "" + toolTipString;
@@ -2508,7 +2546,11 @@ class DiskUsageDataProvider {
         if (!this.isEnabledTooltip) {
             return "";
         }
-        let trans = _("Usage");
+        let trans;
+        if (this.applet.tooltipUsageUseCustomTranslation && this.applet.tooltipUsageCustomTranslation.length > 0)
+            trans = this.applet.tooltipUsageCustomTranslation;
+        else
+            trans = _("Usage");
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
         let title = "" + toolTipString;
@@ -2591,7 +2633,11 @@ class BatteryDataProvider {
         if (!this.isEnabledTooltip) {
             return "";
         }
-        let trans = _("Battery");
+        let trans;
+        if (this.applet.tooltipBatteryUseCustomTranslation && this.applet.tooltipBatteryCustomTranslation.length > 0)
+            trans = this.applet.tooltipBatteryCustomTranslation;
+        else
+            trans = _("Battery");
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
         let title = "" + toolTipString;

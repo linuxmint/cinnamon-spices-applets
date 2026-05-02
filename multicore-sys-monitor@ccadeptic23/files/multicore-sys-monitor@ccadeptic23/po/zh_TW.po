@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-05-02 04:59+0200\n"
+"POT-Creation-Date: 2026-05-02 21:09+0200\n"
 "PO-Revision-Date: 2025-06-15 23:34+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -20,7 +20,7 @@ msgstr ""
 #. 5.6->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
 #. 3.2/prefs.js:187 3.4/DataProviders.js:58 3.4/prefs.js:195 5.6/applet.js:79
-#. 5.6/applet.js:875 5.6/applet.js:2018 5.6/applet.js:2073 5.6/applet.js:2084
+#. 5.6/applet.js:879 5.6/applet.js:2035 5.6/applet.js:2103 5.6/applet.js:2114
 #. 4.0/DataProviders.js:55 4.0/prefs.js:303 3.0/prefsui.glade:452
 #. 3.2/prefsui.glade:504 3.4/prefsui.glade:434 4.0/prefsui.glade:580
 msgid "CPU"
@@ -32,12 +32,12 @@ msgid "------------- CPU ------------"
 msgstr "------------- CPU ------------"
 
 #. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 3.4/DataProviders.js:129
-#. 5.6/applet.js:2093 4.0/DataProviders.js:126
+#. 5.6/applet.js:2123 4.0/DataProviders.js:126
 msgid "Core"
 msgstr "核心"
 
 #. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 3.4/DataProviders.js:141
-#. 5.6/applet.js:80 5.6/applet.js:1798 4.0/DataProviders.js:138
+#. 5.6/applet.js:80 5.6/applet.js:1802 4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "MEM"
 
@@ -51,22 +51,22 @@ msgid "Usedup:"
 msgstr "已使用："
 
 #. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 3.4/DataProviders.js:162
-#. 5.6/applet.js:1867 4.0/DataProviders.js:159
+#. 5.6/applet.js:1875 4.0/DataProviders.js:159
 msgid "Cached:"
 msgstr "快取："
 
 #. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 3.4/DataProviders.js:162
-#. 5.6/applet.js:1867 4.0/DataProviders.js:159
+#. 5.6/applet.js:1875 4.0/DataProviders.js:159
 msgid "Buffer:"
 msgstr "緩衝："
 
 #. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 3.4/DataProviders.js:162
-#. 5.6/applet.js:51 5.6/applet.js:1867 4.0/DataProviders.js:159
+#. 5.6/applet.js:51 5.6/applet.js:1875 4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "可用："
 
 #. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 3.4/DataProviders.js:176
-#. 5.6/applet.js:1948 4.0/DataProviders.js:173
+#. 5.6/applet.js:1960 4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "SWAP"
 
@@ -77,14 +77,14 @@ msgstr "------------ Swap ------------"
 
 #. 5.6->settings-schema.json->Mem_colorSwap->description
 #. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 3.4/DataProviders.js:195
-#. 5.6/applet.js:52 5.6/applet.js:1977 4.0/DataProviders.js:194
+#. 5.6/applet.js:52 5.6/applet.js:1993 4.0/DataProviders.js:194
 #. 3.0/prefsui.glade:785 3.2/prefsui.glade:837 3.4/prefsui.glade:761
 #. 4.0/prefsui.glade:907
 msgid "Swap"
 msgstr "虛擬記憶體"
 
 #. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 3.4/DataProviders.js:205
-#. 5.6/applet.js:81 5.6/applet.js:2123 5.6/lib/Graphs.js:818
+#. 5.6/applet.js:81 5.6/applet.js:2153 5.6/lib/Graphs.js:818
 #. 5.6/lib/Graphs.js:850 5.6/lib/Graphs.js:1080 5.6/lib/Graphs.js:1128
 #. 4.0/DataProviders.js:204
 msgid "NET"
@@ -96,7 +96,7 @@ msgid "---------- Networks ----------"
 msgstr "------------ 網路 ------------"
 
 #. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 3.4/DataProviders.js:300
-#. 5.6/applet.js:54 5.6/applet.js:2291 4.0/DataProviders.js:298
+#. 5.6/applet.js:54 5.6/applet.js:2325 4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "下載："
 
@@ -106,12 +106,12 @@ msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
 #. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 3.4/DataProviders.js:301
-#. 5.6/applet.js:55 5.6/applet.js:2292 4.0/DataProviders.js:299
+#. 5.6/applet.js:55 5.6/applet.js:2326 4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "上傳："
 
 #. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 3.4/DataProviders.js:317
-#. 5.6/applet.js:82 5.6/applet.js:2314 5.6/applet.js:2490 5.6/lib/Graphs.js:812
+#. 5.6/applet.js:82 5.6/applet.js:2348 5.6/applet.js:2528 5.6/lib/Graphs.js:812
 #. 5.6/lib/Graphs.js:851 5.6/lib/Graphs.js:1081 5.6/lib/Graphs.js:1139
 #. 4.0/DataProviders.js:315
 msgid "DISK"
@@ -123,7 +123,7 @@ msgid "------------ Disks -----------"
 msgstr "------------ 磁碟 ------------"
 
 #. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 3.4/DataProviders.js:386
-#. 5.6/applet.js:56 5.6/applet.js:2467 4.0/DataProviders.js:384
+#. 5.6/applet.js:56 5.6/applet.js:2505 4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "讀取："
 
@@ -133,7 +133,7 @@ msgid "(MiB/s)"
 msgstr "(MiB/s)"
 
 #. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 3.4/DataProviders.js:387
-#. 5.6/applet.js:57 5.6/applet.js:2468 4.0/DataProviders.js:385
+#. 5.6/applet.js:57 5.6/applet.js:2506 4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "寫入："
 
@@ -195,8 +195,8 @@ msgstr "存檔時發生錯誤："
 msgid "/s"
 msgstr "/s"
 
-#. 3.4/DataProviders.js:162 5.6/applet.js:49 5.6/applet.js:1857
-#. 5.6/applet.js:1864 5.6/applet.js:1867 5.6/applet.js:1989
+#. 3.4/DataProviders.js:162 5.6/applet.js:49 5.6/applet.js:1865
+#. 5.6/applet.js:1872 5.6/applet.js:1875 5.6/applet.js:2006
 #. 4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "已使用："
@@ -253,60 +253,60 @@ msgid "BATTERY"
 msgstr ""
 
 #. 5.6->settings-schema.json->RefreshAll_btn->description
-#. 5.6/applet.js:830
+#. 5.6/applet.js:834
 #, fuzzy
 msgid "Refresh All"
 msgstr "重新整理圖表"
 
-#. 5.6/applet.js:840
+#. 5.6/applet.js:844
 msgid "Without any graphics"
 msgstr "不顯示圖表"
 
-#. 5.6/applet.js:846
+#. 5.6/applet.js:850
 msgid "With graphics"
 msgstr "顯示圖表"
 
-#. 5.6/applet.js:857
+#. 5.6/applet.js:861
 msgid "Drop Memory Cache (needs root rights)"
 msgstr "清除記憶體快取 (需要 root 權限)"
 
-#. 5.6/applet.js:873
+#. 5.6/applet.js:877
 msgid "Configure..."
 msgstr ""
 
 #. 5.6->settings-schema.json->pageGeneral->title
-#. 5.6/applet.js:874 3.0/prefsui.glade:281 3.2/prefsui.glade:333
+#. 5.6/applet.js:878 3.0/prefsui.glade:281 3.2/prefsui.glade:333
 #. 3.4/prefsui.glade:264 4.0/prefsui.glade:299
 msgid "General"
 msgstr "一般"
 
 #. 5.6->settings-schema.json->pageMem->title
-#. 5.6/applet.js:876 5.6/applet.js:1847 3.0/prefsui.glade:832
+#. 5.6/applet.js:880 5.6/applet.js:1855 3.0/prefsui.glade:832
 #. 3.2/prefsui.glade:884 3.4/prefsui.glade:808 4.0/prefsui.glade:954
 msgid "Memory"
 msgstr "記憶體"
 
 #. 5.6->settings-schema.json->pageNetwork->title
-#. 5.6/applet.js:877 5.6/applet.js:1420 5.6/applet.js:2133
+#. 5.6/applet.js:881 5.6/applet.js:1424 5.6/applet.js:2163
 #. 3.0/prefsui.glade:1154 3.2/prefsui.glade:1206 3.4/prefsui.glade:1143
 #. 4.0/prefsui.glade:1289
 msgid "Network"
 msgstr "網路"
 
 #. 5.6->settings-schema.json->pageDisk->title
-#. 5.6/applet.js:878 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
+#. 5.6/applet.js:882 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
 #. 3.4/prefsui.glade:1489 4.0/prefsui.glade:1635
 msgid "Disk IO"
 msgstr "磁碟讀寫"
 
 #. 5.6->settings-schema.json->pageDiskUsage->title
-#. 5.6/applet.js:879
+#. 5.6/applet.js:883
 #, fuzzy
 msgid "Disk Usage"
 msgstr "磁碟讀寫"
 
 #. 5.6->settings-schema.json->pageBattery->title
-#. 5.6/applet.js:880 5.6/applet.js:2594
+#. 5.6/applet.js:884 5.6/applet.js:2640
 msgid "Battery"
 msgstr ""
 
@@ -316,69 +316,68 @@ msgstr ""
 #. 5.6->settings-schema.json->sectionMemoryColors->title
 #. 5.6->settings-schema.json->sectionDiskUsageColors->title
 #. 5.6->settings-schema.json->sectionBatteryColors->title
-#. 5.6/applet.js:881 3.0/prefsui.glade:411 3.0/prefsui.glade:584
+#. 5.6/applet.js:885 3.0/prefsui.glade:411 3.0/prefsui.glade:584
 #. 3.2/prefsui.glade:463 3.2/prefsui.glade:636 3.4/prefsui.glade:392
 #. 3.4/prefsui.glade:564 4.0/prefsui.glade:494 4.0/prefsui.glade:710
 msgid "Colors"
 msgstr "顏色"
 
-#. 5.6/applet.js:1028 5.6/applet.js:1071 5.6/applet.js:1085
+#. 5.6/applet.js:1032 5.6/applet.js:1075 5.6/applet.js:1089
 msgid "root"
 msgstr ""
 
-#. 5.6/applet.js:1528 5.6/applet.js:2325 5.6/applet.js:2417 5.6/applet.js:2537
-#. 5.6/applet.js:2539
+#. 5.6/applet.js:1532 5.6/applet.js:2359 5.6/applet.js:2455 5.6/applet.js:2579
+#. 5.6/applet.js:2581
 #, fuzzy
 msgid "Disks"
 msgstr "磁碟讀寫"
 
-#. 5.6/applet.js:1858 5.6/applet.js:1865 5.6/applet.js:1990
+#. 5.6/applet.js:1866 5.6/applet.js:1873 5.6/applet.js:2007
 msgid "Available:"
 msgstr ""
 
-#. 5.6/applet.js:1891
+#. 5.6/applet.js:1899
 msgid "Buffers/Cache/Shared"
 msgstr ""
 
-#. 5.6/applet.js:1919 5.6/applet.js:1996 5.6/applet.js:2060 5.6/applet.js:2288
-#. 5.6/applet.js:2289 5.6/applet.js:2464 5.6/applet.js:2465 5.6/applet.js:2516
-#. 5.6/applet.js:2599
+#. 5.6/applet.js:1931 5.6/applet.js:2090 5.6/applet.js:2322 5.6/applet.js:2323
+#. 5.6/applet.js:2502 5.6/applet.js:2503 5.6/applet.js:2558 5.6/applet.js:2645
 msgid ":"
 msgstr ""
 
-#. 5.6/applet.js:1921 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 5.6/applet.js:1933 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 3.4/prefsui.glade:663 4.0/prefsui.glade:809
 msgid "Buffer"
 msgstr "緩衝區"
 
 #. 5.6->settings-schema.json->Mem_colorCache->description
-#. 5.6/applet.js:1921
+#. 5.6/applet.js:1933
 #, fuzzy
 msgid "Cache"
 msgstr "快取"
 
-#. 5.6/applet.js:1921
+#. 5.6/applet.js:1933
 msgid "Shared"
 msgstr ""
 
-#. 5.6/applet.js:2050
+#. 5.6/applet.js:2071
 msgid "CPUs"
 msgstr ""
 
-#. 5.6/applet.js:2242
+#. 5.6/applet.js:2276
 #, fuzzy
 msgid "Networks"
 msgstr "網路"
 
-#. 5.6/applet.js:2511
+#. 5.6/applet.js:2553
 msgid "Usage"
 msgstr ""
 
-#. 5.6/applet.js:2572 5.6/lib/Graphs.js:399
+#. 5.6/applet.js:2614 5.6/lib/Graphs.js:399
 msgid "BAT"
 msgstr ""
 
-#. 5.6/applet.js:2622 5.6/applet.js:2624
+#. 5.6/applet.js:2668 5.6/applet.js:2670
 msgid "Batteries"
 msgstr ""
 
@@ -454,6 +453,10 @@ msgstr ""
 #. 5.6->settings-schema.json->sectionNetworkTooltip->title
 #. 5.6->settings-schema.json->sectionDiskTooltip->title
 msgid "Tooltip"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionTooltipCustomTranslations->title
+msgid "Custom translations in tooltip"
 msgstr ""
 
 #. 5.6->settings-schema.json->sectionCPUTemperature->title
@@ -643,6 +646,69 @@ msgid ""
 "This is useful for preventing the tooltip from disappearing too soon when "
 "you move the pointer.\n"
 "Refresh All after making changes."
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipCustomTranslationsLabel->description
+msgid ""
+"You can use your own translations, or emojis, to replace words in the "
+"tooltip."
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipCPUsUseCustomTranslation->description
+msgid "Change translation for CPUs"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipCPUsCustomTranslation->description
+msgid "CPUs becomes:"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipMemoryUseCustomTranslation->description
+msgid "Change translation for Memory"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipMemoryCustomTranslation->description
+msgid "Memory becomes:"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipSwapUseCustomTranslation->description
+msgid "Change translation for Swap"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipSwapCustomTranslation->description
+msgid "Swap becomes:"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipNetworksUseCustomTranslation->description
+msgid "Change translation for Networks"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipNetworksCustomTranslation->description
+#, fuzzy
+msgid "Networks becomes:"
+msgstr "網路"
+
+#. 5.6->settings-schema.json->tooltipDisksUseCustomTranslation->description
+msgid "Change translation for Disks"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipDisksCustomTranslation->description
+msgid "Disks becomes:"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipUsageUseCustomTranslation->description
+msgid "Change translation for Usage"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipUsageCustomTranslation->description
+msgid "Usage becomes:"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipBatteryUseCustomTranslation->description
+msgid "Change translation for Battery"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipBatteryCustomTranslation->description
+msgid "Battery becomes:"
 msgstr ""
 
 #. 5.6->settings-schema.json->removeEnlightenment->description
