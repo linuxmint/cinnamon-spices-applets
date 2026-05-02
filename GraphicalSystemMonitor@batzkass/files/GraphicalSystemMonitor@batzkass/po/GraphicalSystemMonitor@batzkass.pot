@@ -1,0 +1,302 @@
+# GRAPHICAL SYSTEM MONITOR
+# This file is put in the public domain.
+# batzkass, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: GraphicalSystemMonitor@batzkass 0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-04-20 17:45+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. 6.6/providers.js:42
+msgid "CPU:"
+msgstr ""
+
+#. 6.6->settings-schema.json->cpu->title
+#. 6.6/providers.js:43
+msgid "CPU"
+msgstr ""
+
+#. 6.6/providers.js:44
+msgid "%"
+msgstr ""
+
+#. 6.6/providers.js:82
+msgid "Memory:"
+msgstr ""
+
+#. 6.6/providers.js:83
+msgid "MEM"
+msgstr ""
+
+#. 6.6/providers.js:84 6.6/providers.js:108
+msgid "GiB"
+msgstr ""
+
+#. 6.6/providers.js:106
+msgid "Swap:"
+msgstr ""
+
+#. 6.6/providers.js:107
+msgid "SW"
+msgstr ""
+
+#. 6.6/providers.js:129
+msgid "Network:"
+msgstr ""
+
+#. 6.6/providers.js:130
+msgid "NET"
+msgstr ""
+
+#. 6.6/providers.js:131
+msgid "KiB/s"
+msgstr ""
+
+#. 6.6->settings-schema.json->net_minimum_graph_scale->units
+#. 6.6/providers.js:132
+msgid "MiB/s"
+msgstr ""
+
+#. 6.6/providers.js:199 6.6/providers.js:221
+msgid "Load average:"
+msgstr ""
+
+#. 6.6/providers.js:200
+msgid "LOAD"
+msgstr ""
+
+#. metadata.json->description
+msgid "Displays CPU, memory, swap and network usage and load in graphs"
+msgstr ""
+
+#. metadata.json->name
+msgid "Graphical System Monitor"
+msgstr ""
+
+#. 6.6->settings-schema.json->common->title
+msgid "Common"
+msgstr ""
+
+#. 6.6->settings-schema.json->common_g->title
+#. 6.6->settings-schema.json->cpu_g->title
+#. 6.6->settings-schema.json->mem_g->title
+#. 6.6->settings-schema.json->swap_g->title
+#. 6.6->settings-schema.json->net_g->title
+#. 6.6->settings-schema.json->load_g->title
+#. 6.6->settings-schema.json->tooltip_g->title
+msgid "General"
+msgstr ""
+
+#. 6.6->settings-schema.json->common_c->title
+#. 6.6->settings-schema.json->cpu_c->title
+#. 6.6->settings-schema.json->mem_c->title
+#. 6.6->settings-schema.json->swap_c->title
+#. 6.6->settings-schema.json->net_c->title
+#. 6.6->settings-schema.json->load_c->title
+msgid "Colors"
+msgstr ""
+
+#. 6.6->settings-schema.json->mem->title
+msgid "Memory"
+msgstr ""
+
+#. 6.6->settings-schema.json->swap->title
+msgid "Swap"
+msgstr ""
+
+#. 6.6->settings-schema.json->net->title
+msgid "Network"
+msgstr ""
+
+#. 6.6->settings-schema.json->load->title
+msgid "Load"
+msgstr ""
+
+#. 6.6->settings-schema.json->tooltip_page->title
+msgid "Tooltip"
+msgstr ""
+
+#. 6.6->settings-schema.json->onclick_program->description
+msgid "Program to launch on click"
+msgstr ""
+
+#. 6.6->settings-schema.json->draw_border->description
+msgid "Draw border"
+msgstr ""
+
+#. 6.6->settings-schema.json->graph_width->description
+msgid "Common graph size"
+msgstr ""
+
+#. 6.6->settings-schema.json->graph_width->units
+#. 6.6->settings-schema.json->graph_spacing->units
+#. 6.6->settings-schema.json->padding_lr->units
+#. 6.6->settings-schema.json->padding_tb->units
+#. 6.6->settings-schema.json->values_fontsize->units
+#. 6.6->settings-schema.json->cpu_graph_width->units
+#. 6.6->settings-schema.json->mem_graph_width->units
+#. 6.6->settings-schema.json->swap_graph_width->units
+#. 6.6->settings-schema.json->net_graph_width->units
+#. 6.6->settings-schema.json->load_graph_width->units
+msgid "pixels"
+msgstr ""
+
+#. 6.6->settings-schema.json->graph_width->tooltip
+msgid "Graphs width for horizontal panel, graphs height for vertical panel."
+msgstr ""
+
+#. 6.6->settings-schema.json->graph_spacing->description
+msgid "Graph spacing"
+msgstr ""
+
+#. 6.6->settings-schema.json->graph_spacing->tooltip
+msgid "The number of pixels between each graph."
+msgstr ""
+
+#. 6.6->settings-schema.json->refresh_rate->description
+msgid "Refresh rate"
+msgstr ""
+
+#. 6.6->settings-schema.json->refresh_rate->units
+msgid "ms"
+msgstr ""
+
+#. 6.6->settings-schema.json->use_padding->description
+msgid "Use custom applet padding"
+msgstr ""
+
+#. 6.6->settings-schema.json->padding_lr->description
+msgid "Left/right padding"
+msgstr ""
+
+#. 6.6->settings-schema.json->padding_tb->description
+msgid "Top/bottom padding"
+msgstr ""
+
+#. 6.6->settings-schema.json->show_values->description
+msgid "Show data on the graphs"
+msgstr ""
+
+#. 6.6->settings-schema.json->values_fontsize->description
+msgid "Data font size"
+msgstr ""
+
+#. 6.6->settings-schema.json->values_color->description
+msgid "Text color"
+msgstr ""
+
+#. 6.6->settings-schema.json->bg_color->description
+msgid "Background color"
+msgstr ""
+
+#. 6.6->settings-schema.json->border_color->description
+msgid "Border color"
+msgstr ""
+
+#. 6.6->settings-schema.json->cpu_enabled->description
+#. 6.6->settings-schema.json->mem_enabled->description
+#. 6.6->settings-schema.json->swap_enabled->description
+#. 6.6->settings-schema.json->net_enabled->description
+#. 6.6->settings-schema.json->load_enabled->description
+msgid "Enable"
+msgstr ""
+
+#. 6.6->settings-schema.json->cpu_override_graph_width->description
+#. 6.6->settings-schema.json->mem_override_graph_width->description
+#. 6.6->settings-schema.json->swap_override_graph_width->description
+#. 6.6->settings-schema.json->net_override_graph_width->description
+#. 6.6->settings-schema.json->load_override_graph_width->description
+msgid "Override graph size"
+msgstr ""
+
+#. 6.6->settings-schema.json->cpu_graph_width->description
+#. 6.6->settings-schema.json->mem_graph_width->description
+#. 6.6->settings-schema.json->swap_graph_width->description
+#. 6.6->settings-schema.json->net_graph_width->description
+#. 6.6->settings-schema.json->load_graph_width->description
+msgid "Graph size"
+msgstr ""
+
+#. 6.6->settings-schema.json->cpu_color_0->description
+msgid "User color"
+msgstr ""
+
+#. 6.6->settings-schema.json->cpu_color_1->description
+msgid "Nice color"
+msgstr ""
+
+#. 6.6->settings-schema.json->cpu_color_2->description
+msgid "Kernel color"
+msgstr ""
+
+#. 6.6->settings-schema.json->cpu_color_3->description
+msgid "IOWait color"
+msgstr ""
+
+#. 6.6->settings-schema.json->mem_color_0->description
+#. 6.6->settings-schema.json->swap_color_0->description
+msgid "Used color"
+msgstr ""
+
+#. 6.6->settings-schema.json->mem_color_1->description
+msgid "Cached color"
+msgstr ""
+
+#. 6.6->settings-schema.json->net_minimum_graph_scale->description
+msgid "Minimum graph scale"
+msgstr ""
+
+#. 6.6->settings-schema.json->net_minimum_graph_scale->tooltip
+msgid ""
+"The minimum scale for the graph in Megabits per second.\n"
+"The graph will not scale below this minimum, but it will automatically scale "
+"if the network speed exceeds this value.\n"
+"\n"
+"To always automatically scale, set the value to 0."
+msgstr ""
+
+#. 6.6->settings-schema.json->net_color_0->description
+msgid "Download color"
+msgstr ""
+
+#. 6.6->settings-schema.json->net_color_1->description
+msgid "Upload color"
+msgstr ""
+
+#. 6.6->settings-schema.json->load_color_0->description
+msgid "Color"
+msgstr ""
+
+#. 6.6->settings-schema.json->tooltip_background_color->description
+msgid "Tooltip background color"
+msgstr ""
+
+#. 6.6->settings-schema.json->tooltip_label_color->description
+msgid "Tooltip label color"
+msgstr ""
+
+#. 6.6->settings-schema.json->tooltip_tick_labels_border_color->description
+msgid "Tooltip tick labels and border color"
+msgstr ""
+
+#. 6.6->settings-schema.json->tooltip_grid_color->description
+msgid "Tooltip horizontal and vertical grid color"
+msgstr ""
+
+#. 6.6->settings-schema.json->tooltip_history_seconds->description
+msgid "Tooltip graph horizontal scale"
+msgstr ""
+
+#. 6.6->settings-schema.json->tooltip_history_seconds->units
+msgid "seconds"
+msgstr ""
