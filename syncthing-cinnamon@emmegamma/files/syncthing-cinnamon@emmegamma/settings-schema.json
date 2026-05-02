@@ -1,0 +1,68 @@
+{
+    "section0": {
+        "type": "section",
+        "description": "Applet settings"
+    },
+    "update-interval" : {
+        "type": "spinbutton",
+        "default" : 3,
+        "min" : 0.5,
+        "max" : 600,
+        "step" : 0.1,
+        "units" : "seconds",
+        "description" : "Update interval",
+        "tooltip" : "Time interval between syncthing status/applet updates"
+    },
+
+    "section1": {
+        "type": "section",
+        "description": "Syncthing interface settings"
+    },
+    "use-custom-commands" : {
+        "type" : "switch",
+        "default" : false,
+        "description": "Customize the syncthing commands",
+        "tooltip": "Custom commands for Syncthing. By default the applet executes 'syncthing' and 'syncthingctl', which must be in the global path"
+    },
+    "syncthing-command" : {
+        "type" : "entry",
+        "default" : "syncthing",
+        "description" : "Syncthing command",
+        "dependency" : "use-custom-commands",
+        "tooltip" : "Custom syncthing command (bare command or full path, e.g. /usr/bin/syncthing)"
+    },
+    "syncthing-args" : {
+        "type" : "entry",
+        "default" : "--no-browser",
+        "description" : "-- arguments",
+        "dependency" : "use-custom-commands",
+        "tooltip" : "Arguments for syncthing command (default: --no-browser)"
+    },
+    "syncthingctl-command" : {
+        "type" : "entry",
+        "default" : "syncthingctl",
+        "description" : "Syncthingctl command",
+        "dependency" : "use-custom-commands",
+        "tooltip" : "Custom syncthingctl command (bare command or full path, e.g. /usr/bin/syncthingctl)"
+    },
+    "use-custom-url" : {
+        "type" : "switch",
+        "default" : false,
+        "description": "Customize the web UI's URL/port",
+        "tooltip": "Custom URL and port for syncthing's web interface"
+    },
+    "syncthing-url" : {
+        "type" : "entry",
+        "default" : "127.0.0.1",
+        "description" : "URL",
+        "dependency" : "use-custom-url",
+        "tooltip" : "Custom URL (_without_ http://) (default: 127.0.0.1)"
+    },
+    "syncthing-port" : {
+        "type": "entry",
+        "default" : "8384",
+        "description" : "Port",
+        "dependency" : "use-custom-url",
+        "tooltip" : "Custom port (default: 8384)"
+    }
+}
