@@ -18,7 +18,8 @@
         "sectionGeneralOptions",
         "sectionGeneralOrder",
         "sectionGeneralColors",
-        "sectionTooltip"
+        "sectionTooltip",
+        "sectionTooltipCustomTranslations"
       ]
     },
     "pageCPU": {
@@ -137,6 +138,27 @@
         "tooltipFontSize",
         "widthWhithoutAnyGraph",
         "RefreshAll_btn"
+      ]
+    },
+    "sectionTooltipCustomTranslations": {
+      "type": "section",
+      "title": "Custom translations in tooltip",
+      "keys": [
+        "tooltipCustomTranslationsLabel",
+        "tooltipCPUsUseCustomTranslation",
+        "tooltipCPUsCustomTranslation",
+        "tooltipMemoryUseCustomTranslation",
+        "tooltipMemoryCustomTranslation",
+        "tooltipSwapUseCustomTranslation",
+        "tooltipSwapCustomTranslation",
+        "tooltipNetworksUseCustomTranslation",
+        "tooltipNetworksCustomTranslation",
+        "tooltipDisksUseCustomTranslation",
+        "tooltipDisksCustomTranslation",
+        "tooltipUsageUseCustomTranslation",
+        "tooltipUsageCustomTranslation",
+        "tooltipBatteryUseCustomTranslation",
+        "tooltipBatteryCustomTranslation"
       ]
     },
     "sectionCPUOptions": {
@@ -396,7 +418,7 @@
         "DiskUsage_labelCustomized",
         "DiskUsage_labelCustom"
       ],
-    "dependency": "labelsOn"
+      "dependency": "labelsOn"
     },
     "sectionDiskUsageColors": {
       "type": "section",
@@ -450,7 +472,7 @@
         "Battery_labelCustomized",
         "Battery_labelCustom"
       ],
-    "dependency": "labelsOn"
+      "dependency": "labelsOn"
     },
     "sectionBatteryColors": {
       "type": "section",
@@ -651,6 +673,80 @@
     "step": 5,
     "description": "Width when no graph is displayed (px)",
     "tooltip": "This is useful for preventing the tooltip from disappearing too soon when you move the pointer.\nRefresh All after making changes."
+  },
+  "tooltipCustomTranslationsLabel": {
+    "type": "label",
+    "description": "You can use your own translations, or emojis, to replace words in the tooltip."
+  },
+  "tooltipCPUsUseCustomTranslation": {
+    "type": "switch",
+    "default": false,
+    "description": "Change translation for CPUs"
+  },
+  "tooltipCPUsCustomTranslation": {
+    "type": "entry",
+    "default": "𝄜",
+    "description": "CPUs becomes:"
+  },
+  "tooltipMemoryUseCustomTranslation": {
+    "type": "switch",
+    "default": false,
+    "description": "Change translation for Memory"
+  },
+  "tooltipMemoryCustomTranslation": {
+    "type": "entry",
+    "default": "𖡎",
+    "description": "Memory becomes:"
+  },
+  "tooltipSwapUseCustomTranslation": {
+    "type": "switch",
+    "default": false,
+    "description": "Change translation for Swap"
+  },
+  "tooltipSwapCustomTranslation": {
+    "type": "entry",
+    "default": "⇄",
+    "description": "Swap becomes:"
+  },
+  "tooltipNetworksUseCustomTranslation": {
+    "type": "switch",
+    "default": false,
+    "description": "Change translation for Networks"
+  },
+  "tooltipNetworksCustomTranslation": {
+    "type": "entry",
+    "default": "🖧",
+    "description": "Networks becomes:"
+  },
+  "tooltipDisksUseCustomTranslation": {
+    "type": "switch",
+    "default": false,
+    "description": "Change translation for Disks"
+  },
+  "tooltipDisksCustomTranslation": {
+    "type": "entry",
+    "default": "⛁",
+    "description": "Disks becomes:"
+  },
+  "tooltipUsageUseCustomTranslation": {
+    "type": "switch",
+    "default": false,
+    "description": "Change translation for Usage"
+  },
+  "tooltipUsageCustomTranslation": {
+    "type": "entry",
+    "default": "⛁",
+    "description": "Usage becomes:"
+  },
+  "tooltipBatteryUseCustomTranslation": {
+    "type": "switch",
+    "default": false,
+    "description": "Change translation for Battery"
+  },
+  "tooltipBatteryCustomTranslation": {
+    "type": "entry",
+    "default": "🗲",
+    "description": "Battery becomes:"
   },
   "removeEnlightenment": {
     "type": "button",
@@ -1453,7 +1549,6 @@
     "default": false,
     "description": "Merge all"
   },
-
   "Disk_typeOfGraph": {
     "type": "combobox",
     "default": "graphled",

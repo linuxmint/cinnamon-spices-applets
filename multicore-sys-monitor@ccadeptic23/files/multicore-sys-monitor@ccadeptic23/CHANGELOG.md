@@ -1,3 +1,8 @@
+### v3.14.1~20260502
+  * CPUs (tooltip): Display load average (%) next the temperature.
+  * Custom translations in tooltip (see bottom of the General tab).
+  * Fixes [#8616](https://github.com/linuxmint/cinnamon-spices-applets/issues/8616)
+
 ### v3.14.0~20260502
   * Improvements to tooltips:
     * CPUs: option to group them in sets of 4.
