@@ -1,0 +1,8 @@
+{
+    "uuid": "screen-recorder@kprakesh",
+    "name": "Screen Recorder",
+    "description": "Click to record screen and audio",
+    "author": "kprakesh",
+    "icon": "icon.svg",
+    "license": "GPL-3.0"
+}
