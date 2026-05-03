@@ -1,3 +1,6 @@
+### v16.3.3~20260503
+  * Uses the wget method instead of the httpLib one to download certain cover art (Spotify).
+
 ### v16.3.2~20260424
   * Uses the httpLib method to download certain cover art.
   * Prepares this applet for Linux Mint 23.
