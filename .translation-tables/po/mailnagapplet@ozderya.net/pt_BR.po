@@ -1,0 +1,174 @@
+# MAILNAG
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Marcelo Aof, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-26 12:36-0500\n"
+"PO-Revision-Date: 2021-11-06 13:55-0300\n"
+"Last-Translator: Marcelo Aof\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. applet.js:169
+msgid "just now"
+msgstr "agora mesmo"
+
+#. applet.js:177
+msgid " minutes ago"
+msgstr " minutos atrás"
+
+#. applet.js:185
+msgid " hours ago"
+msgstr " horas atrás"
+
+#. applet.js:192
+msgid "yesterday"
+msgstr "ontem"
+
+#. applet.js:196
+msgid " days ago"
+msgstr " dias atrás"
+
+#. applet.js:200
+msgid " weeks ago"
+msgstr " semanas atrás"
+
+#. applet.js:285
+msgid "Configure Mailnag"
+msgstr "Configurar o Mailnag"
+
+#. applet.js:370
+msgid "Mailnag daemon stopped working!"
+msgstr "O processo do Mailnag parou de funcionar!"
+
+#. applet.js:374
+msgid "Mailnag daemon isn't running! Do you have it installed?"
+msgstr ""
+"O processo do Mailnag não está em execução! Você realmente instalou o applet?"
+
+#. applet.js:607
+#, javascript-format
+msgid "You have %d new mails!"
+msgstr "Você recebeu %d novos e-mails!"
+
+#. applet.js:608 applet.js:653
+msgid "Mark All Read"
+msgstr "Marcar tudo como lido"
+
+#. applet.js:616
+msgid "You have new mail!"
+msgstr "Você recebeu um novo e-mail!"
+
+#. applet.js:618
+msgid "Mark Read"
+msgstr "Marcar como lido"
+
+#. applet.js:701 applet.js:763
+msgid "No unread mails."
+msgstr "Nenhum e-mail novo."
+
+#. applet.js:739
+msgid "Mailnag daemon is not running!"
+msgstr "O processo do Mailnag não está em execução!"
+
+#. applet.js:752
+#, javascript-format
+msgid "You have a mail from %s!"
+msgstr "Você recebeu um e-mail de %s!"
+
+#. applet.js:758
+#, javascript-format
+msgid "You have %d unread mails!"
+msgstr "Você tem %d e-mails não lidos!"
+
+#. applet.js:774
+msgid "Click to see error!"
+msgstr "Clique para ver o erro!"
+
+#. applet.js:775
+msgid "Error: "
+msgstr "Erro: "
+
+#. metadata.json->name
+msgid "Mailnag"
+msgstr "Mailnag"
+
+#. metadata.json->description
+msgid "Mailnag mail notifier applet"
+msgstr "Mailnag, applet de notificação de e-mails"
+
+#. settings-schema.json->notifications->description
+msgid "Show notifications"
+msgstr "Mostrar notificações"
+
+#. settings-schema.json->notifications->tooltip
+msgid ""
+"Enables display of mail arrived notifications by applet. Make sure you "
+"disable mailnag notification plugin, otherwise you will have duplicates."
+msgstr ""
+"Exibe notificações do applet quando você receber e-mails. Se você ativar "
+"essa opção, lembre-se de desativar outros plugins de notificação de e-mail, "
+"como por exemplo: outras extensões do mailnag. Caso contrário, você receberá "
+"notificações duplicadas."
+
+#. settings-schema.json->launch_client_on_click->description
+msgid "Launch mail client on click"
+msgstr "Abrir um cliente de e-mail ao clicar"
+
+#. settings-schema.json->launch_client_on_click->tooltip
+msgid "Mail client is launched when clicked on a menu item."
+msgstr ""
+"Um cliente de e-mail é aberto quando você clicar em um e-mail no menu do "
+"Mailnag."
+
+#. settings-schema.json->middle_click->description
+msgid "On middle click:"
+msgstr "Ao clicar com o botão do meio:"
+
+#. settings-schema.json->middle_click->tooltip
+msgid "What to do when middle clicked on applet icon"
+msgstr ""
+"Define o que acontece quando você clicar com o botão do meio no ícone do "
+"applet"
+
+#. settings-schema.json->middle_click->options
+msgid "Mark all read"
+msgstr "Marcar tudo como lido"
+
+#. settings-schema.json->middle_click->options
+msgid "Launch mail client"
+msgstr "Abrir o cliente de e-mail"
+
+#. settings-schema.json->middle_click->options
+msgid "Do nothing"
+msgstr "Fazer nada"
+
+#. settings-schema.json->max_length->description
+msgid "Max sender / subject display length"
+msgstr ""
+
+#. settings-schema.json->max_length->tooltip
+msgid "Sender or subject lines longer than this will be cropped"
+msgstr ""
+
+#. settings-schema.json->client->description
+msgid "Mail client to launch (or webpage)"
+msgstr "Cliente de e-mail para abrir (ou página da web)"
+
+#. settings-schema.json->client->tooltip
+msgid ""
+"Enter the command to launch your mail client here. You can also enter a web "
+"address that starts with 'http'."
+msgstr ""
+"Digite aqui o comando para abrir o seu cliente de e-mail preferido. Em vez "
+"disso, você também pode inserir um endereço da web que comece com 'http'."

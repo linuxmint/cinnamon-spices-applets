@@ -1,0 +1,115 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: commandLauncher@scollins 1.4\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-04-20 17:24+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#: applet.js:96 applet.js:149
+msgid "Command Launcher"
+msgstr "Commando Launcher"
+
+#: applet.js:96
+msgid "Process started"
+msgstr "Proces gestart"
+
+#. settings-schema.json->command->description
+#: applet.js:96 applet.js:149
+msgid "Command"
+msgstr "Commando"
+
+#: applet.js:97 applet.js:150
+msgid "Process Id"
+msgstr "Proces-ID"
+
+#: applet.js:100
+#, javascript-format
+msgid "Error while trying to run \"%s\""
+msgstr "Fout bij het proberen uit te voeren van \"%s\""
+
+#: applet.js:149
+msgid "Process ended"
+msgstr "Proces beëindigd"
+
+#. metadata.json->description
+msgid "Lets you to run command-line commands with the click of a button"
+msgstr "Hiermee kunt u opdrachtregelcommando's uitvoeren met een muisklik"
+
+#. metadata.json->comments
+msgid ""
+"This is a simple multi-instance applet for Cinnamon which allows the user to "
+"launch commands as though from a command prompt with the click of a button. "
+"Unlike a program launcher, which typically uses a .desktop to launch a "
+"program, Command Launcher uses a direct command-line command. This means you "
+"can use any command you could use from a terminal (eg run a script, launch "
+"program with complicated command-line arguments, etc)."
+msgstr ""
+"Dit is een eenvoudige applet voor meerdere instanties voor Cinnamon waarmee "
+"de gebruiker opdrachten kan uitvoeren alsof ze vanuit een opdrachtprompt "
+"komen met een muisklik. In tegenstelling tot een programmalauncher, die "
+"meestal een .desktop-bestand gebruikt om een programma te starten, gebruikt "
+"Commando Launcher een direct opdrachtregelcommando. Dit betekent dat u elk "
+"commando kunt gebruiken dat u vanuit een terminal zou kunnen gebruiken (bv. "
+"een script uitvoeren, een programma starten met ingewikkelde "
+"opdrachtregelargumenten, enz.)."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Auteur"
+
+#. settings-schema.json->apearance->description
+msgid "Appearance and behavior"
+msgstr "Uiterlijk en gedrag"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr "Paneelpictogram"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid ""
+"Supports both icon name and icon path.\n"
+"To use a symbolic icon, include '-symbolic' (or '-symbolic.svg') at the end."
+msgstr ""
+"Ondersteunt zowel pictogramnaam als pictogrampad.\n"
+"Om een symbolisch pictogram te gebruiken, voeg '-symbolic' (of '-symbolic."
+"svg') toe aan het einde."
+
+#. settings-schema.json->tooltipText->description
+msgid "Tooltip"
+msgstr "Tooltip"
+
+#. settings-schema.json->keyLaunch->description
+msgid "Keyboard shortcut"
+msgstr "Sneltoets"
+
+#. settings-schema.json->showNotifications->description
+msgid "Show notifications on completion"
+msgstr "Meldingen weergeven bij voltooiing"
+
+#. settings-schema.json->commandTitle->description
+msgid "Command settings"
+msgstr "Commando instellingen"
+
+#. settings-schema.json->useRoot->description
+msgid "Run as root"
+msgstr "Als root uitvoeren"
+
+#. settings-schema.json->useAltEnv->description
+msgid "Run in alternate directory"
+msgstr "Uitvoeren in een andere map"
+
+#. settings-schema.json->altEnv->description
+msgid "Environment path"
+msgstr "Omgevingspad"

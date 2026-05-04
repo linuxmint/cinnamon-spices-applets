@@ -1,0 +1,127 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-08-28 11:34+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:132
+msgid "OctoPussy: OctoPrint manager."
+msgstr "OctoPussy: OctoPrint-beheerder."
+
+#. applet.js:205
+msgid "Settings"
+msgstr "Instellingen"
+
+#. applet.js:278 applet.js:351
+msgid "Time lapsed: "
+msgstr "Verstreken tijd: "
+
+#. applet.js:282 applet.js:352
+msgid "Estimated: "
+msgstr "Geschat: "
+
+#. applet.js:292 applet.js:353
+msgid "Total time: "
+msgstr "Totale tijd: "
+
+#. applet.js:355
+msgid "Pause current print"
+msgstr "Pauzeer huidige print"
+
+#. applet.js:356
+msgid "Continue current print"
+msgstr "Hervat huidige print"
+
+#. applet.js:358
+msgid "Change filament"
+msgstr "Vervang filament"
+
+#. applet.js:359
+msgid "Camera monitor"
+msgstr "Camera-monitor"
+
+#. applet.js:360
+msgid "Open OctoPrint web"
+msgstr "Open OctoPrint-web"
+
+#. applet.js:362
+msgid "Restart OctoPrint"
+msgstr "Herstart OctoPrint"
+
+#. applet.js:363
+msgid "Shutdown OctoPrint"
+msgstr "Schakel OctoPrint uit"
+
+#. applet.js:364
+msgid "Configure..."
+msgstr "Configureren..."
+
+#. applet.js:400
+msgid "Restart"
+msgstr "Herstarten"
+
+#. applet.js:404 applet.js:430
+msgid "Cancel"
+msgstr "Annuleren"
+
+#. applet.js:426
+msgid "Shutdown"
+msgstr "Uitschakelen"
+
+#. applet.js:474
+msgid "Please confirm your action!"
+msgstr "Bevestig uw actie alstublieft!"
+
+#. metadata.json->description
+msgid "An applet to manage OctoPrint."
+msgstr "Een applet om OctoPrint te beheren."
+
+#. metadata.json->name
+msgid "OctoPrint manager"
+msgstr "OctoPrint-beheerder"
+
+#. settings-schema.json->octoprintUrl->description
+#. settings-schema.json->octoprintUrl->tooltip
+msgid "OctoPrint API Address"
+msgstr "OctoPrint API-adres"
+
+#. settings-schema.json->octoprintApiKey->description
+msgid "OctoPrint API Key. Get an API key from the OctoPrint site settings."
+msgstr ""
+"OctoPrint API-sleutel. Haal een API-sleutel op van de OctoPrint site "
+"instellingen."
+
+#. settings-schema.json->octoprintInterval->units
+msgid "seconds"
+msgstr "seconden"
+
+#. settings-schema.json->octoprintInterval->description
+msgid "Refresh Interval:"
+msgstr "Vernieuwingsinterval:"
+
+#. settings-schema.json->octoprintInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"Verhoog of verlaag deze spinnerwaarde om de vernieuwingsinterval te wijzigen "
+"- gebruik een langzame vernieuwing als je een langzame machine hebt"
+
+#. settings-schema.json->octoprintVideoCommand->description
+msgid "Video command to use when showing the webcam. Defaults to vlc."
+msgstr ""
+"Video-commando om te gebruiken bij het tonen van de webcam. Standaard is dit "
+"vlc."

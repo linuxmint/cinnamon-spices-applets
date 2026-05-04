@@ -1,0 +1,243 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-02 12:12+0300\n"
+"PO-Revision-Date: 2023-12-29 15:15+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:32 applet.js:58
+msgid "Required GTop package missing!"
+msgstr "Krævet GTop-pakke mangler!"
+
+#: applet.js:56
+msgid "Error!"
+msgstr "Fejl!"
+
+#: applet.js:61
+msgid "Reset Peak Temperature"
+msgstr "Nulstil toptemperatur"
+
+#: applet.js:64
+msgid "Clear Cache"
+msgstr "Ryd cache"
+
+#: applet.js:161
+msgid "CPUs"
+msgstr "CPU'er"
+
+#: applet.js:161
+msgid "°C max; "
+msgstr "°C maks; "
+
+#: applet.js:161
+msgid "°C peak"
+msgstr "°C top"
+
+#: applet.js:164
+msgid "Memory"
+msgstr "Hukommelse"
+
+#: applet.js:164
+msgid "GB"
+msgstr "GB"
+
+#: applet.js:164
+msgid "GB swap"
+msgstr "GB swap"
+
+#: applet.js:167
+msgid "Network"
+msgstr "Netværk"
+
+#: applet.js:321
+msgid "Core "
+msgstr "Kerne"
+
+#: applet.js:366
+msgid "Used:   "
+msgstr "Brugt:"
+
+#: applet.js:367
+msgid "Cache:  "
+msgstr "Cache:  "
+
+#: applet.js:368
+msgid "Buffer: "
+msgstr "Buffer: "
+
+#: applet.js:372
+msgid "Swap:   "
+msgstr "Swap:   "
+
+#: applet.js:442
+msgid "Up:      "
+msgstr "Op:      "
+
+#: applet.js:442 applet.js:443
+msgid "B/s"
+msgstr "B/s"
+
+#: applet.js:443
+msgid "Down:    "
+msgstr "Ned:     "
+
+#: applet.js:444
+msgid "Data:    "
+msgstr "Data:    "
+
+#: applet.js:444
+msgid "B"
+msgstr "B"
+
+#: applet.js:448
+msgid "no interfaces to show"
+msgstr "ingen grænseflade at vise"
+
+#: applet.js:453
+msgid "k"
+msgstr "k"
+
+#: applet.js:453
+msgid "M"
+msgstr "M"
+
+#: applet.js:453
+msgid "G"
+msgstr "G"
+
+#: applet.js:453
+msgid "T"
+msgstr "T"
+
+#. metadata.json->name
+msgid "Simplified System Monitor"
+msgstr "Forenklet systemovervågning"
+
+#. metadata.json->description
+msgid "Applet to show system load and state"
+msgstr "Viser systembelastning og tilstand"
+
+#. settings-schema.json->common_label->description
+msgid "Common"
+msgstr "Generelt"
+
+#. settings-schema.json->refresh->description
+msgid "Sections info refresh rate (seconds)"
+msgstr "Opdateringsinterval (sekunder)"
+
+#. settings-schema.json->refresh->tooltip
+msgid "CPUs, memory, network info refresh rate"
+msgstr "Opdateringsinterval for CPU'er, hukommelse og netværk"
+
+#. settings-schema.json->cpu_label->description
+msgid "CPUs and memory sections"
+msgstr "CPU'er og hukommelse"
+
+#. settings-schema.json->size->description
+msgid "CPUs and memory panel sections widths (px)"
+msgstr "Bredden af CPU og hukommelse i panelet (px)"
+
+#. settings-schema.json->size->tooltip
+msgid "CPUs and memory panel sections widths"
+msgstr "Bredden af CPU og hukommelse i panelet"
+
+#. settings-schema.json->temp_refresh->description
+msgid "CPUs temperature refresh rate (seconds)"
+msgstr "Opdateringsinterval for CPU-temperatur (sekunder)"
+
+#. settings-schema.json->temp_refresh->tooltip
+msgid "CPUs temperature refresh rate"
+msgstr "Opdateringsinterval for CPU-temperatur"
+
+#. settings-schema.json->cold_temp->description
+msgid "CPU cold temperature (°C)"
+msgstr "Kold CPU-temperatur (°C)"
+
+#. settings-schema.json->cold_temp->tooltip
+msgid ""
+"CPUs' temperature below which they are regarded as cold (for color "
+"representation in the panel)"
+msgstr ""
+"CPU'ernes temperatur under hvilken de betragtes som kolde (til "
+"farvegengivelse i panelet)"
+
+#. settings-schema.json->color_cold->description
+msgid "Color for CPU cold temperature"
+msgstr "Farve for kold CPU-temperatur"
+
+#. settings-schema.json->hot_temp->description
+msgid "CPU hot temperature (°C)"
+msgstr "Varm CPU-temperatur (°C)"
+
+#. settings-schema.json->hot_temp->tooltip
+msgid ""
+"CPUs' temperature above which they are regarded as hot (for color "
+"representation in the panel)"
+msgstr ""
+"CPU'ernes temperatur over hvilken de betragtes som varme (til "
+"farvegengivelse i panelet)"
+
+#. settings-schema.json->color_hot->description
+msgid "Color for CPU hot temperature"
+msgstr "Farve for varm CPU-temperatur"
+
+#. settings-schema.json->sensors_cmd->description
+msgid "Command to start 'sensors'"
+msgstr "Kommando til start af “sensors”"
+
+#. settings-schema.json->sensors_cmd->tooltip
+msgid ""
+"Command to start 'sensors'. Use 'which sensors' command to find it. Install "
+"'lmsensors' package, if not found"
+msgstr ""
+"Kommando til at starte “sensors”. Brug kommandoen “which sensors” til at "
+"finde den. Installér pakken “lmsensors”, hvis den ikke findes"
+
+#. settings-schema.json->net_label->description
+msgid "Network section"
+msgstr "Netværk"
+
+#. settings-schema.json->net_size->description
+msgid "Network panel section width (px)"
+msgstr "Bredden af netværk i panelet (px)"
+
+#. settings-schema.json->net_size->tooltip
+msgid "Network panel section width"
+msgstr "Bredden af netværk i panelet"
+
+#. settings-schema.json->net_style->description
+msgid "Network panel section style"
+msgstr "Stil for netværk i panelet"
+
+#. settings-schema.json->net_style->tooltip
+msgid ""
+"Network panel section HTML style (e.g.: text-align: left; margin-left: 5px; "
+"font-size: 8pt;)"
+msgstr ""
+"Netværkspanelets HTML-stil (f.eks.: text-align: left; margin-left: 5px; "
+"font-size: 8pt;)"
+
+#. settings-schema.json->net_black_list->description
+msgid "Network interfaces blacklist"
+msgstr "Sortliste over netværksgrænseflader"
+
+#. settings-schema.json->net_black_list->tooltip
+msgid ""
+"Semicolon-separated network interfaces list not to consider for counting "
+"traffic"
+msgstr ""
+"Semikolon-adskilt liste over netværksgrænseflader, der ikke skal tages i "
+"betragtning til at tælle trafik"

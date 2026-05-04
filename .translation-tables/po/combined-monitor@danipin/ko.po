@@ -1,0 +1,367 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Combined Monitor Applet 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-15 21:36+0100\n"
+"PO-Revision-Date: 2025-12-15 22:04+0100\n"
+"Last-Translator: Automated Translator <example@example.com>\n"
+"Language-Team: Korean <ko@li.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# applet.js strings
+msgid "Slot 1 (Standard)"
+msgstr "슬롯 1 (표준)"
+
+msgid "Slot 2 (Empty)"
+msgstr "슬롯 2 (비어 있음)"
+
+msgid "Slot 3 (Empty)"
+msgstr "슬롯 3 (비어 있음)"
+
+msgid "Separator"
+msgstr "구분 기호"
+
+msgid "No Separator"
+msgstr "구분 기호 없음"
+
+msgid "Symbols"
+msgstr "기호"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "Icon-White"
+msgstr "아이콘-흰색"
+
+msgid "Icon-Dark"
+msgstr "아이콘-어두운색"
+
+msgid "No Symbol (Text Label)"
+msgstr "기호 없음 (텍스트 라벨)"
+
+msgid "TEMP"
+msgstr "온도"
+
+msgid "RAM"
+msgstr "RAM"
+
+msgid "SWAP"
+msgstr "SWAP"
+
+msgid "Profile Management"
+msgstr "프로필 관리"
+
+msgid "Activate (Load)"
+msgstr "활성화 (불러오기)"
+
+msgid "Save Current Settings"
+msgstr "현재 설정 저장"
+
+msgid "System Monitor"
+msgstr "시스템 모니터"
+
+msgid "Restart Cinnamon"
+msgstr "Cinnamon 다시 시작"
+
+msgid "Profile Saved: %s"
+msgstr "프로필 저장됨: %s"
+
+msgid "Active: %s"
+msgstr "활성: %s"
+
+msgid "N/A"
+msgstr "해당 없음"
+
+# settings-schema.json strings (Descriptions, Tooltips, Options)
+
+# Page Titles
+msgid "CPU Temperature"
+msgstr "CPU 온도"
+
+msgid "Profiles"
+msgstr "프로필"
+
+msgid "General"
+msgstr "일반"
+
+# Section Titles
+msgid "Order of Metrics"
+msgstr "메트릭 순서"
+
+msgid "Display"
+msgstr "표시"
+
+msgid "Thresholds"
+msgstr "임계값"
+
+msgid "Colors"
+msgstr "색상"
+
+msgid "Thresholds (in °C)"
+msgstr "임계값 (단위 °C)"
+
+msgid "Settings"
+msgstr "설정"
+
+msgid "Profiles (Slots 1 to 3)"
+msgstr "프로필 (슬롯 1 ~ 3)"
+
+msgid "Global"
+msgstr "전역"
+
+# CPU
+msgid "Show CPU"
+msgstr "CPU 표시"
+
+msgid "Text for CPU"
+msgstr "CPU 텍스트"
+
+msgid "Custom symbol/icon for CPU. Leave empty for text label."
+msgstr "CPU에 대한 사용자 정의 기호/아이콘. 텍스트 라벨을 위해 비워 두세요."
+
+msgid "Show percentage sign (%) for CPU"
+msgstr "CPU에 대한 퍼센트 기호(%) 표시"
+
+msgid "If disabled, only the value (e.g., '45') is displayed without the percentage sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in the 'General' tab acts as a master switch."
+msgstr "비활성화된 경우, 퍼센트 기호(예: '45%') 없이 값(예: '45')만 표시됩니다. '일반' 탭의 '퍼센트 기호(%) 표시 (마스터 스위치)' 옵션은 마스터 스위치 역할을 합니다."
+
+msgid "Threshold LOW"
+msgstr "임계값 낮음"
+
+msgid "The LOW color is used below this value"
+msgstr "이 값 미만에서는 낮음 색상이 사용됩니다"
+
+msgid "Threshold MED"
+msgstr "임계값 중간"
+
+msgid "The MED color is used between LOW and MED"
+msgstr "낮음과 중간 사이에서는 중간 색상이 사용됩니다"
+
+msgid "Threshold HIGH"
+msgstr "임계값 높음"
+
+msgid "The HIGH color is used between MED and HIGH"
+msgstr "중간과 높음 사이에서는 높음 색상이 사용됩니다"
+
+msgid "Enable color change for CPU"
+msgstr "CPU 색상 변경 활성화"
+
+msgid "Color LOW"
+msgstr "색상 낮음"
+
+msgid "Color MED"
+msgstr "색상 중간"
+
+msgid "Color HIGH"
+msgstr "색상 높음"
+
+msgid "Color CRITICAL"
+msgstr "색상 위험"
+
+msgid "Used above the HIGH threshold"
+msgstr "높음 임계값보다 높을 때 사용됩니다"
+
+# TEMP
+msgid "Show Temperature"
+msgstr "온도 표시"
+
+msgid "Enables the display of CPU temperature. **Important:** On many systems, installing the 'lm-sensors' package and running 'sudo sensors-detect' is necessary for this function to work correctly. Please refer to the instructions in the README.md."
+msgstr "CPU 온도 표시를 활성화합니다. **중요:** 많은 시스템에서 이 기능이 올바르게 작동하려면 'lm-sensors' 패키지를 설치하고 'sudo sensors-detect'를 실행해야 합니다. README.md의 지침을 참조하십시오."
+
+msgid "Show °C symbol"
+msgstr "°C 기호 표시"
+
+msgid "Controls whether the Celsius symbol (°C or °F) should be displayed after the value."
+msgstr "값 뒤에 섭씨 기호(°C 또는 °F)를 표시할지 여부를 제어합니다."
+
+msgid "Text for Temperature"
+msgstr "온도 텍스트"
+
+msgid "Custom symbol/icon for Temperature. Leave empty for text label."
+msgstr "온도에 대한 사용자 정의 기호/아이콘. 텍스트 라벨을 위해 비워 두세요."
+
+msgid "Unit of Measurement"
+msgstr "측정 단위"
+
+msgid "Celsius (°C)"
+msgstr "섭씨 (°C)"
+
+msgid "Fahrenheit (°F)"
+msgstr "화씨 (°F)"
+
+msgid "Choose whether the temperature should be displayed in Celsius or Fahrenheit. Threshold values must be adjusted accordingly."
+msgstr "온도를 섭씨 또는 화씨로 표시할지 선택하십시오. 임계값은 이에 따라 조정되어야 합니다."
+
+msgid "The LOW color is used below this value (applies to °C and °F)"
+msgstr "이 값 미만에서는 낮음 색상이 사용됩니다 (°C 및 °F에 적용)"
+
+msgid "The MED color is used between LOW and MED (applies to °C and °F)"
+msgstr "낮음과 중간 사이에서는 중간 색상이 사용됩니다 (°C 및 °F에 적용)"
+
+msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+msgstr "중간과 높음 사이에서는 높음 색상이 사용됩니다 (°C 및 °F에 적용)"
+
+msgid "Enable color change for TEMP"
+msgstr "온도 색상 변경 활성화"
+
+msgid "Color LOW (Green)"
+msgstr "색상 낮음 (녹색)"
+
+msgid "Color MED (Orange)"
+msgstr "색상 중간 (주황색)"
+
+msgid "Color HIGH (Red-Orange)"
+msgstr "색상 높음 (적-주황색)"
+
+msgid "Color CRITICAL (Red)"
+msgstr "색상 위험 (빨간색)"
+
+# RAM
+msgid "Show RAM"
+msgstr "RAM 표시"
+
+msgid "Text for RAM"
+msgstr "RAM 텍스트"
+
+msgid "Custom symbol/icon for RAM. Leave empty for text label."
+msgstr "RAM에 대한 사용자 정의 기호/아이콘. 텍스트 라벨을 위해 비워 두세요."
+
+msgid "Show percentage sign (%) for RAM"
+msgstr "RAM에 대한 퍼센트 기호(%) 표시"
+
+msgid "Display Mode"
+msgstr "표시 모드"
+
+msgid "Percentage Usage (%)"
+msgstr "퍼센트 사용량 (%)"
+
+msgid "Used Memory (MB/GB)"
+msgstr "사용된 메모리 (MB/GB)"
+
+msgid "Free Memory (MB/GB)"
+msgstr "사용 가능한 메모리 (MB/GB)"
+
+msgid "Choose whether percentage usage or used/free memory in MB/GB should be displayed."
+msgstr "퍼센트 사용량 또는 MB/GB 단위의 사용된/사용 가능한 메모리를 표시할지 선택하십시오."
+
+msgid "Enable color change for RAM"
+msgstr "RAM 색상 변경 활성화"
+
+# SWAP
+msgid "Show SWAP"
+msgstr "SWAP 표시"
+
+msgid "Text for SWAP"
+msgstr "SWAP 텍스트"
+
+msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+msgstr "SWAP에 대한 사용자 정의 기호/아이콘. 텍스트 라벨을 위해 비워 두세요."
+
+msgid "Only show SWAP when used"
+msgstr "사용 중일 때만 SWAP 표시"
+
+msgid "If active, it only shows SWAP when usage is greater than 0%."
+msgstr "활성화된 경우, 사용량이 0%보다 클 때만 SWAP을 표시합니다."
+
+msgid "Show percentage sign (%) for SWAP"
+msgstr "SWAP에 대한 퍼센트 기호(%) 표시"
+
+msgid "Enable color change for SWAP"
+msgstr "SWAP 색상 변경 활성화"
+
+msgid "If the value is less than or equal to the LOW threshold, the LOW color is used."
+msgstr "값이 낮음 임계값보다 작거나 같으면 낮음 색상이 사용됩니다."
+
+msgid "If the value is greater than LOW and less than or equal to the MED threshold, the MED color is used."
+msgstr "값이 낮음보다 크고 중간 임계값보다 작거나 같으면 중간 색상이 사용됩니다."
+
+msgid "If the value is greater than MED and less than or equal to the HIGH threshold, the HIGH color is used."
+msgstr "값이 중간보다 크고 높음 임계값보다 작거나 같으면 높음 색상이 사용됩니다."
+
+# Order
+msgid "CPU Position"
+msgstr "CPU 위치"
+
+msgid "Position 1 (Left)"
+msgstr "위치 1 (왼쪽)"
+
+msgid "Position 2"
+msgstr "위치 2"
+
+msgid "Position 3"
+msgstr "위치 3"
+
+msgid "Position 4 (Right)"
+msgstr "위치 4 (오른쪽)"
+
+msgid "Defines the display position of CPU. The position is automatically swapped with the metric at the same position."
+msgstr "CPU의 표시 위치를 정의합니다. 위치는 동일한 위치의 메트릭과 자동으로 교환됩니다."
+
+msgid "TEMP Position"
+msgstr "온도 위치"
+
+msgid "RAM Position"
+msgstr "RAM 위치"
+
+msgid "SWAP Position"
+msgstr "SWAP 위치"
+
+# General
+msgid "Update Interval (ms)"
+msgstr "업데이트 간격 (ms)"
+
+msgid "Show separator between metrics"
+msgstr "메트릭 사이에 구분 기호 표시"
+
+msgid "Separator Text"
+msgstr "구분 기호 텍스트"
+
+msgid "Separator Color"
+msgstr "구분 기호 색상"
+
+msgid "Show percentage sign (%) (Master Switch)"
+msgstr "퍼센트 기호(%) 표시 (마스터 스위치)"
+
+msgid "If disabled, only the value (e.g., '45') is displayed for all percentage displays without the percentage sign (e.g., '45%'). Individual switches for CPU/RAM/SWAP must also be active."
+msgstr "비활성화된 경우, 모든 퍼센트 표시에 대해 퍼센트 기호(예: '45%') 없이 값(예: '45')만 표시됩니다. CPU/RAM/SWAP에 대한 개별 스위치도 활성화되어야 합니다."
+
+# Profiles
+msgid "Profile Message Duration (Seconds)"
+msgstr "프로필 메시지 지속 시간 (초)"
+
+msgid "How long should the message ('Profile saved', 'Profile active') be displayed in the panel."
+msgstr "패널에 ('프로필 저장됨', '프로필 활성') 메시지를 얼마나 오래 표시해야 합니까?"
+
+msgid "Profile 1 Name"
+msgstr "프로필 1 이름"
+
+msgid "Enter a custom profile name in the text field!"
+msgstr "텍스트 필드에 사용자 정의 프로필 이름을 입력하십시오!"
+
+msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+msgstr "팝업 메뉴에서 프로필 1에 대해 '활성화' 또는 '저장'을 클릭하십시오."
+
+msgid "Saved data for Profile 1 (internal)"
+msgstr "프로필 1에 저장된 데이터 (내부)"
+
+msgid "Profile 2 Name"
+msgstr "프로필 2 이름"
+
+msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+msgstr "팝업 메뉴에서 프로필 2에 대해 '활성화' 또는 '저장'을 클릭하십시오."
+
+msgid "Saved data for Profile 2 (internal)"
+msgstr "프로필 2에 저장된 데이터 (내부)"
+
+msgid "Profile 3 Name"
+msgstr "프로필 3 이름"
+
+msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+msgstr "팝업 메뉴에서 프로필 3에 대해 '활성화' 또는 '저장'을 클릭하십시오."
+
+msgid "Saved data for Profile 3 (internal)"
+msgstr "프로필 3에 저장된 데이터 (내부)"

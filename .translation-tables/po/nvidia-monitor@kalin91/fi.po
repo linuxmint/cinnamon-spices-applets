@@ -1,0 +1,532 @@
+# Rules:
+#  1. The following strings should only be replaced with 3-character equivalent strings. They can be translations or comprehensible abbreviations of the original words in the target language; otherwise, they should remain unaltered.
+#    - GPU
+#    - Fan
+#    - mem
+#  2. The string "Hi!" is meant to be displayed in a very small container (up to 4 lines with a maximum of 4 characters per line). It should be translated into a friendly, playful, and non-offensive phrase in the target language, respecting this size limit. Regional slang or expressions that could be perceived as insulting must be avoided. If no suitable translation can be created within these constraints, preserve the original "Hi!".
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidia-monitor@kalin91 v1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-02 22:56-0600\n"
+"PO-Revision-Date: 2026-02-03 00:00+0000\n"
+"Last-Translator: Carlos Alberto Morales Ortega <carlos.mor.ort@gmail.com>\n"
+"Language-Team: Finnish <AI generated>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:43
+msgid "nvidia-smi not found"
+msgstr "nvidia-smi ei löytynyt"
+
+#: applet.js:44
+msgid ""
+"nvidia-smi not found in PATH.\n"
+"Please ensure NVIDIA drivers are installed."
+msgstr ""
+"nvidia-smi ei löytynyt PATH-muuttujasta.\n"
+"Varmista, että NVIDIA-ajurit on asennettu."
+
+#: applet.js:49
+msgid "Displays NVIDIA GPU monitor"
+msgstr "Näyttää NVIDIA GPU -valvonnan"
+
+#: applet.js:54
+msgid "Error initializing applet"
+msgstr "Virhe sovelman alustuksessa"
+
+#: applet.js:55
+msgid "Init Error"
+msgstr "Alustusvirhe"
+
+#: applet.js:80
+msgid "Open Monitor Graph"
+msgstr "Avaa monitorikaavio"
+
+#: applet.js:84
+msgid "Settings"
+msgstr "Asetukset"
+
+#. settings-schema.json->Applet->title
+#: applet.js:89
+msgid "Applet Settings"
+msgstr "Sovelman asetukset"
+
+#. settings-schema.json->Monitor->title
+#: applet.js:92
+msgid "Monitor Settings"
+msgstr "Monitorin asetukset"
+
+#: applet.js:95
+msgid "Reset All Settings"
+msgstr "Palauta kaikki asetukset"
+
+#: applet.js:97
+#, javascript-format
+msgid "Are you sure you want to reset all settings of '%s' to default?"
+msgstr "Haluatko varmasti palauttaa '%s':n kaikki asetukset oletusarvoihin?"
+
+#: applet.js:108 applet.js:109
+msgid "Error resetting settings"
+msgstr "Virhe asetuksia nollattaessa"
+
+#: applet.js:118
+msgid "Error building menu: "
+msgstr "Virhe valikkoa luotaessa: "
+
+#: applet.js:171
+msgid "Launching"
+msgstr "Käynnistyy"
+
+#: applet.js:183
+msgid "Sending"
+msgstr "Lähetetään"
+
+#: applet.js:183
+msgid "history points"
+msgstr "historiapistettä"
+
+#: applet.js:194
+msgid "subprocess exited with error"
+msgstr "aliprosessi päättyi virheeseen"
+
+#: applet.js:196
+msgid "Monitor subprocess exited"
+msgstr "Monitorin aliprosessi päättyi"
+
+#: applet.js:202
+msgid "Error starting monitor"
+msgstr "Virhe monitorin käynnistyksessä"
+
+#: applet.js:203
+msgid "Could not start monitor script"
+msgstr "Monitoriskriptiä ei voitu käynnistää"
+
+#: applet.js:213
+msgid "Error closing monitor"
+msgstr "Virhe monitorin sulkemisessa"
+
+#: applet.js:241
+msgid "Error sending to monitor"
+msgstr "Virhe lähetettäessä monitorille"
+
+#: applet.js:254 applet.js:509
+msgid "Error"
+msgstr "Virhe"
+
+#: applet.js:271
+msgid "Initializing..."
+msgstr "Alustetaan..."
+
+#: applet.js:281
+msgid "Mem"
+msgstr "Mem"
+
+#: applet.js:290 applet.js:681
+msgid "GPU"
+msgstr "GPU"
+
+#: applet.js:299 applet.js:689
+msgid "Fan"
+msgstr "Fan"
+
+#: applet.js:510
+msgid "Failed to run nvidia-smi.\n"
+msgstr "nvidia-smi:n suoritus epäonnistui.\n"
+
+#: applet.js:510 applet.js:511
+msgid "Unknown"
+msgstr "Tuntematon"
+
+#: applet.js:511
+msgid "Failed to run nvidia-smi"
+msgstr "nvidia-smi:n suoritus epäonnistui"
+
+#: applet.js:515
+msgid "An unexpected error occurred while running nvidia-smi.\n"
+msgstr "Odottamaton virhe suoritettaessa nvidia-smi:tä.\n"
+
+#: applet.js:516
+msgid "Err"
+msgstr "Vir"
+
+#: applet.js:673
+msgid "MEM"
+msgstr "MEM"
+
+#: applet.js:689
+msgid "FAN"
+msgstr "FAN"
+
+#: applet.js:706
+msgid "Hi!"
+msgstr "Hei"
+
+#: applet.js:739
+msgid "Error terminating monitor subprocess"
+msgstr "Virhe monitorin aliprosessin lopettamisessa"
+
+#: applet.js:753
+msgid "Menu toggled on click."
+msgstr "Valikko vaihdettu klikkaamalla."
+
+#. metadata.json->name
+#: ui/monitor_window.glade:7
+msgid "NVIDIA Monitor"
+msgstr "NVIDIA Monitor"
+
+#. metadata.json->description
+msgid ""
+"Monitors GPU temperature, memory, utilization, and fan speed using nvidia-smi"
+msgstr ""
+"Valvoo GPU:n lämpötilaa, muistia, käyttöä ja tuulettimen nopeutta nvidia-smi:"
+"n avulla"
+
+#. settings-schema.json->section_general->title
+msgid "General Settings"
+msgstr "Yleiset asetukset"
+
+#. settings-schema.json->section_temp->title
+msgid "Temperature"
+msgstr "Lämpötila"
+
+#. settings-schema.json->section_memory->title
+msgid "Memory Usage"
+msgstr "Muistin käyttö"
+
+#. settings-schema.json->section_gpu->title
+msgid "GPU Utilization"
+msgstr "GPU:n käyttöaste"
+
+#. settings-schema.json->section_fan->title
+msgid "Fan Speed"
+msgstr "Tuulettimen nopeus"
+
+#. settings-schema.json->top_note->title
+msgid "Note"
+msgstr "Huomautus"
+
+#. settings-schema.json->metric_colors_section->title
+msgid "Metric Colors"
+msgstr "Mittarien värit"
+
+#. settings-schema.json->layout_colors_section->title
+msgid "Layout Colors"
+msgstr "Ulkoasun värit"
+
+#. settings-schema.json->y_axis_section->title
+msgid "Y-Axis Settings"
+msgstr "Y-akselin asetukset"
+
+#. settings-schema.json->x_axis_section->title
+msgid "X-Axis Settings"
+msgstr "X-akselin asetukset"
+
+#. settings-schema.json->monitor-note->description
+msgid ""
+"Changes to monitor settings will take effect after restarting the monitor."
+msgstr "Muutokset tulevat voimaan, kun monitori käynnistetään uudelleen."
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "1 Line (50%)"
+msgstr "1 viiva (50%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "2 Lines (33%, 66%)"
+msgstr "2 viivaa (33%, 66%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "3 Lines (25%, 50%, 75%)"
+msgstr "3 viivaa (25%, 50%, 75%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "4 Lines (20%, 40%, 60%, 80%)"
+msgstr "4 viivaa (20%, 40%, 60%, 80%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "5 Lines (16%, 33%, 50%, 66%, 83%)"
+msgstr "5 viivaa (16%, 33%, 50%, 66%, 83%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "9 Lines (Every 10%)"
+msgstr "9 viivaa (joka 10%)"
+
+#. settings-schema.json->y-axis-steps->description
+msgid "Y-Axis Guides"
+msgstr "Y-akselin apuviivat"
+
+#. settings-schema.json->y-axis-steps->tooltip
+msgid "Number of guide lines for the Y-Axis."
+msgstr "Apuviivojen määrä Y-akselilla."
+
+#. settings-schema.json->y-axis-temp-unit->options
+#. settings-schema.json->temp-unit->options
+msgid "Celsius (°C)"
+msgstr "Celsius (°C)"
+
+#. settings-schema.json->y-axis-temp-unit->options
+#. settings-schema.json->temp-unit->options
+msgid "Fahrenheit (°F)"
+msgstr "Fahrenheit (°F)"
+
+#. settings-schema.json->y-axis-temp-unit->description
+msgid "Y-Axis Temperature Unit"
+msgstr "Y-akselin lämpötilayksikkö"
+
+#. settings-schema.json->y-axis-temp-unit->tooltip
+msgid "Unit for the temperature axis in the monitor."
+msgstr "Lämpötila-akselin yksikkö monitorissa."
+
+#. settings-schema.json->x-axis-steps->description
+msgid "X-Axis Guides"
+msgstr "X-akselin apuviivat"
+
+#. settings-schema.json->x-axis-steps->tooltip
+msgid "Number of vertical guide lines for the X-Axis."
+msgstr "Pystysuorien apuviivojen määrä X-akselilla."
+
+#. settings-schema.json->x-axis-unit->options
+msgid "Seconds"
+msgstr "Sekunnit"
+
+#. settings-schema.json->x-axis-unit->options
+msgid "Minutes"
+msgstr "Minuutit"
+
+#. settings-schema.json->x-axis-unit->options
+msgid "Hours"
+msgstr "Tunnit"
+
+#. settings-schema.json->x-axis-unit->description
+msgid "X-Axis Unit"
+msgstr "X-akselin yksikkö"
+
+#. settings-schema.json->x-axis-unit->tooltip
+msgid "Unit of time for the X-Axis."
+msgstr "X-akselin aikayksikkö."
+
+#. settings-schema.json->x-axis-length-sec->units
+#. settings-schema.json->refresh-interval->units
+msgid "s"
+msgstr "s"
+
+#. settings-schema.json->x-axis-length-sec->description
+msgid "X-Axis Length (Seconds)"
+msgstr "X-akselin pituus (sekuntia)"
+
+#. settings-schema.json->x-axis-length-sec->tooltip
+#. settings-schema.json->x-axis-length-min->tooltip
+#. settings-schema.json->x-axis-length-hour->tooltip
+msgid "Total duration shown on the graph."
+msgstr "Kokonaiskesto, joka näytetään kaaviossa."
+
+#. settings-schema.json->x-axis-length-min->units
+msgid "m"
+msgstr "m"
+
+#. settings-schema.json->x-axis-length-min->description
+msgid "X-Axis Length (Minutes)"
+msgstr "X-akselin pituus (minuuttia)"
+
+#. settings-schema.json->x-axis-length-hour->units
+msgid "h"
+msgstr "h"
+
+#. settings-schema.json->x-axis-length-hour->description
+msgid "X-Axis Length (Hours)"
+msgstr "X-akselin pituus (tuntia)"
+
+#. settings-schema.json->temp-color->description
+msgid "Temperature Color"
+msgstr "Lämpötilan väri"
+
+#. settings-schema.json->temp-color->tooltip
+msgid "Color used for temperature in the graph."
+msgstr "Kaaviossa käytetty lämpötilan väri."
+
+#. settings-schema.json->mem_color->description
+msgid "Memory Usage Color"
+msgstr "Muistin käytön väri"
+
+#. settings-schema.json->mem_color->tooltip
+msgid "Color used for memory usage in the graph."
+msgstr "Kaaviossa käytetty muistin käytön väri."
+
+#. settings-schema.json->gpu_color->description
+msgid "GPU Utilization Color"
+msgstr "GPU:n käytön väri"
+
+#. settings-schema.json->gpu_color->tooltip
+msgid "Color used for GPU utilization in the graph."
+msgstr "Kaaviossa käytetty GPU:n käytön väri."
+
+#. settings-schema.json->fan_color->description
+msgid "Fan Speed Color"
+msgstr "Tuulettimen nopeuden väri"
+
+#. settings-schema.json->fan_color->tooltip
+msgid "Color used for fan speed in the graph."
+msgstr "Kaaviossa käytetty tuulettimen nopeuden väri."
+
+#. settings-schema.json->background_color->description
+msgid "Background Color"
+msgstr "Taustaväri"
+
+#. settings-schema.json->background_color->tooltip
+msgid "Background color of the graph."
+msgstr "Kaavion taustaväri."
+
+#. settings-schema.json->temp-axis-color->description
+msgid "Temperature Axis Color"
+msgstr "Lämpötila-akselin väri"
+
+#. settings-schema.json->temp-axis-color->tooltip
+msgid "Color for the temperature axis labels."
+msgstr "Lämpötila-akselin otsikoiden väri."
+
+#. settings-schema.json->percent-axis-color->description
+msgid "Percentage Axis Color"
+msgstr "Prosenttiakselin väri"
+
+#. settings-schema.json->percent-axis-color->tooltip
+msgid "Color for the percentage axis labels."
+msgstr "Prosenttiakselin otsikoiden väri."
+
+#. settings-schema.json->x-axis-color->description
+msgid "X-Axis Color"
+msgstr "X-akselin väri"
+
+#. settings-schema.json->x-axis-color->tooltip
+msgid "Color for the X-axis labels (Time)."
+msgstr "X-akselin otsikoiden väri (aika)."
+
+#. settings-schema.json->guidelines-color->description
+msgid "Guidelines Color"
+msgstr "Apuviivojen väri"
+
+#. settings-schema.json->guidelines-color->tooltip
+msgid "Color for the grid/guide lines."
+msgstr "Ruudukon ja apuviivojen väri."
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh Interval"
+msgstr "Päivitysväli"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid "How often to update the GPU stats (in seconds)."
+msgstr "Kuinka usein GPU-tilastot päivitetään (sekunteina)."
+
+#. settings-schema.json->border-color->description
+msgid "Applet Border Color"
+msgstr "Appletin reunaväri"
+
+#. settings-schema.json->border-color->tooltip
+msgid "Color of the applet border. Set alpha to 0 for no border."
+msgstr "Appletin reunan väri. Aseta alfa-arvo 0 poistaaksesi reunan."
+
+#. settings-schema.json->encoding->options
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#. settings-schema.json->encoding->options
+msgid "macintosh"
+msgstr "macintosh"
+
+#. settings-schema.json->encoding->options
+msgid "ASCII"
+msgstr "ASCII"
+
+#. settings-schema.json->encoding->description
+msgid "nvidia-smi Output Encoding"
+msgstr "nvidia-smi:n tulosteen merkistökoodaus"
+
+#. settings-schema.json->encoding->tooltip
+msgid "Select the character encoding used by nvidia-smi output."
+msgstr "Valitse nvidia-smi:n tulosteen merkistökoodaus."
+
+#. settings-schema.json->show-temp->description
+msgid "Show Temperature"
+msgstr "Näytä lämpötila"
+
+#. settings-schema.json->show-temp->tooltip
+msgid "Show GPU temperature in the panel."
+msgstr "Näytä GPU:n lämpötila paneelissa."
+
+#. settings-schema.json->temp-unit->description
+msgid "Temperature Unit"
+msgstr "Lämpötilayksikkö"
+
+#. settings-schema.json->temp-unit->tooltip
+msgid "Choose the unit for displaying GPU temperature."
+msgstr "Valitse yksikkö GPU:n lämpötilan näyttämiseen."
+
+#. settings-schema.json->show-memory->description
+msgid "Show Memory Usage"
+msgstr "Näytä muistin käyttö"
+
+#. settings-schema.json->show-memory->tooltip
+msgid "Show GPU memory usage in the panel."
+msgstr "Näytä GPU:n muistin käyttö paneelissa."
+
+#. settings-schema.json->memory-display-mode->options
+msgid "Text (Used / Total)"
+msgstr "Teksti (käytetty / yhteensä)"
+
+#. settings-schema.json->memory-display-mode->options
+#. settings-schema.json->gpu-display-mode->options
+#. settings-schema.json->fan-display-mode->options
+msgid "Pie Chart"
+msgstr "Ympyräkaavio"
+
+#. settings-schema.json->memory-display-mode->description
+msgid "Memory Display Mode"
+msgstr "Muistin näyttötila"
+
+#. settings-schema.json->memory-display-mode->tooltip
+msgid "Choose how to display memory usage: as text or as a pie chart."
+msgstr "Valitse muistin näyttötapa: tekstinä tai ympyräkaaviona."
+
+#. settings-schema.json->show-gpu-util->description
+msgid "Show GPU Utilization"
+msgstr "Näytä GPU:n käyttö"
+
+#. settings-schema.json->show-gpu-util->tooltip
+msgid "Show GPU utilization percentage in the panel."
+msgstr "Näytä GPU:n käyttöaste prosentteina paneelissa."
+
+#. settings-schema.json->gpu-display-mode->options
+#. settings-schema.json->fan-display-mode->options
+msgid "Text (Percent)"
+msgstr "Teksti (prosentti)"
+
+#. settings-schema.json->gpu-display-mode->description
+msgid "GPU Display Mode"
+msgstr "GPU:n näyttötila"
+
+#. settings-schema.json->gpu-display-mode->tooltip
+msgid "Choose how to display GPU utilization: as text or as a pie chart."
+msgstr "Valitse GPU:n käyttöasteen näyttötapa: tekstinä tai ympyräkaaviona."
+
+#. settings-schema.json->show-fan-speed->description
+msgid "Show Fan Speed"
+msgstr "Näytä tuulettimen nopeus"
+
+#. settings-schema.json->show-fan-speed->tooltip
+msgid "Show GPU fan speed percentage in the panel."
+msgstr "Näytä GPU:n tuulettimen nopeus prosentteina paneelissa."
+
+#. settings-schema.json->fan-display-mode->description
+msgid "Fan Display Mode"
+msgstr "Tuulettimen näyttötila"
+
+#. settings-schema.json->fan-display-mode->tooltip
+msgid "Choose how to display fan speed: as text or as a pie chart."
+msgstr "Valitse tuulettimen nopeuden näyttötapa: tekstinä tai ympyräkaaviona."

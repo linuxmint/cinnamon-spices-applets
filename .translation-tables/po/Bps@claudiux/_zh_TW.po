@@ -1,0 +1,78 @@
+# BPS: INSTANT NETWORK SPEED
+# This file is put in the public domain.
+# claudiux, 2025
+#
+msgid ""
+msgstr ""
+
+#. applet.js:77
+msgid "Does not work on vertical panel!"
+msgstr ""
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr ""
+
+#. settings-schema.json->unit_type->description
+msgid "Unit"
+msgstr ""
+
+#. settings-schema.json->unit_type->options
+msgid "Bytes"
+msgstr ""
+
+#. settings-schema.json->unit_type->options
+msgid "Bits"
+msgstr ""
+
+#. settings-schema.json->unit_type->tooltip
+msgid "Base data unit shown in the panel"
+msgstr ""
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr ""
+
+#. settings-schema.json->is_binary->options
+msgid "Decimal"
+msgstr ""
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr ""
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr ""
+
+#. settings-schema.json->gui_value_order->description
+msgid "Value order"
+msgstr ""
+
+#. settings-schema.json->gui_value_order->options
+msgid "Download first"
+msgstr ""
+
+#. settings-schema.json->gui_value_order->options
+msgid "Upload first"
+msgstr ""
+
+#. settings-schema.json->gui_value_order->tooltip
+msgid "An order of values shown in the panel"
+msgstr ""
+
+#. settings-schema.json->minimum_start->description
+msgid "Minimum displayed value"
+msgstr ""
+
+#. settings-schema.json->display_minimum_quantity->description
+msgid "Value"
+msgstr ""
+
+#. settings-schema.json->display_minimum_unit_multiple->description
+msgid "Multiple"
+msgstr ""
+
+#. settings-schema.json->display_minimum_button->description
+msgid "Apply"
+msgstr ""

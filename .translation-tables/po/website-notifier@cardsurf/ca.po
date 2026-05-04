@@ -1,0 +1,216 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: website-notifier@cardsurf 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-07-06 02:54+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->description
+msgid "Shows a notification when a website updates"
+msgstr "Mostra una notificació quan un lloc web s'actualitza"
+
+#. metadata.json->name
+msgid "Website notifier"
+msgstr "Notificador de llocs web"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Configuració"
+
+#. settings-schema.json->update_every->units
+msgid "minutes"
+msgstr "minuts"
+
+#. settings-schema.json->update_every->description
+msgid "Refresh every"
+msgstr "Refresca cada"
+
+#. settings-schema.json->update_every->tooltip
+msgid "How often to refresh a website. 0 means no refreshing."
+msgstr "Interval de temps entre actualitzacions. 0 = no s'actualitza."
+
+#. settings-schema.json->notification_type->description
+msgid "Notification type"
+msgstr "Tipus de notificació"
+
+#. settings-schema.json->notification_type->options
+msgid "System popup"
+msgstr "Finestra emergent del sistema"
+
+#. settings-schema.json->notification_type->options
+msgid "Applet popup"
+msgstr "Finestra emergent de la miniaplicació"
+
+#. settings-schema.json->notification_type->tooltip
+msgid "A user interface that shows notficiation text"
+msgstr "Una interfície d'usuari que mostra una notificació de text"
+
+#. settings-schema.json->tooltip_type->description
+msgid "Tooltip text"
+msgstr "Text d'informació sobre eines"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Time left next refresh"
+msgstr "Temps restant per a la propera actualització"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Next refresh time"
+msgstr "Hora de la propera actualització"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Last refresh time"
+msgstr "Hora de l'última actualització"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Last notification time"
+msgstr "Hora de l'última notificació"
+
+#. settings-schema.json->tooltip_type->options
+msgid "None"
+msgstr "Cap"
+
+#. settings-schema.json->tooltip_type->tooltip
+msgid "Text shown in an applet tooltip"
+msgstr "Text mostrat a la informació sobre eines de la miniaplicació"
+
+#. settings-schema.json->primary_button_type->description
+msgid "Primary button"
+msgstr "Botó primari"
+
+#. settings-schema.json->primary_button_type->options
+msgid "Left"
+msgstr "Esquerre"
+
+#. settings-schema.json->primary_button_type->options
+msgid "Middle"
+msgstr "Mig"
+
+#. settings-schema.json->primary_button_type->tooltip
+msgid ""
+"A mouse button used to perform main actions.\n"
+"The primary button refreshes a website on demand.\n"
+"The secondary button toggles an applet popup."
+msgstr ""
+"Un botó del ratolí utilitzat per a realitzar les accions principals.\n"
+"El botó primari refresca un lloc web en demanda.\n"
+"El botó secundari activa una miniaplicació emergent."
+
+#. settings-schema.json->applet_popup_click_type->description
+msgid "On popup clicked"
+msgstr "En fer clic a una finestra emergent"
+
+#. settings-schema.json->applet_popup_click_type->options
+msgid "Close popup and open browser"
+msgstr "Tanca la finestra emergent i obre el navegador"
+
+#. settings-schema.json->applet_popup_click_type->options
+msgid "Close popup"
+msgstr "Tanca la finestra emergent"
+
+#. settings-schema.json->applet_popup_click_type->tooltip
+msgid "An action to perform when an applet popup is clicked"
+msgstr ""
+"Acció a realitzar en fer clic a una finestra emergent de la miniaplicació"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Interfície"
+
+#. settings-schema.json->max_title_length->units
+#. settings-schema.json->max_message_length->units
+msgid "characters"
+msgstr "caràcters"
+
+#. settings-schema.json->max_title_length->description
+msgid "Title length"
+msgstr "Longitud del títol"
+
+#. settings-schema.json->max_title_length->tooltip
+msgid "A maximum number of characters in a notification title"
+msgstr "Número màxim de caràcters al títol d'una notificació"
+
+#. settings-schema.json->max_message_length->description
+msgid "Message length"
+msgstr "Longitud del missatge"
+
+#. settings-schema.json->max_message_length->tooltip
+msgid "A maximum number of characters in a notification message"
+msgstr "Número màxim de caràcters al missatge d'una notificació"
+
+#. settings-schema.json->applet_popup_width->units
+#. settings-schema.json->applet_popup_height->units
+msgid "pixels"
+msgstr "píxels"
+
+#. settings-schema.json->applet_popup_width->description
+msgid "Popup width"
+msgstr "Amplada de les finestres emergents"
+
+#. settings-schema.json->applet_popup_width->tooltip
+msgid "A width of an applet popup"
+msgstr "Amplada de les finestresemergents de la miniaplicació"
+
+#. settings-schema.json->applet_popup_height->description
+msgid "Popup height"
+msgstr "Alçada de les finestres emergents"
+
+#. settings-schema.json->applet_popup_height->tooltip
+msgid "A height of an applet popup"
+msgstr "Alçada de les finestres emergents de la miniaplicació"
+
+#. settings-schema.json->applet_popup_title_css->description
+msgid "Popup title CSS"
+msgstr "CSS del títol de les finestres emergents"
+
+#. settings-schema.json->applet_popup_title_css->tooltip
+msgid "A CSS style applied to a notification title in an applet popup"
+msgstr "Estil CSS aplicat al títol de les finestres emergents"
+
+#. settings-schema.json->applet_popup_message_css->description
+msgid "Popup message CSS"
+msgstr "CSS del missatge de les finestres emergents"
+
+#. settings-schema.json->applet_popup_message_css->tooltip
+msgid "A CSS style applied to a notification message in an applet popup"
+msgstr "Estil CSS aplicat al títol de les finestres emergents"
+
+#. settings-schema.json->gui_icon_filepath->description
+msgid "Icon"
+msgstr "Icona"
+
+#. settings-schema.json->gui_icon_filepath->tooltip
+msgid "An icon displayed in a panel"
+msgstr "Icona mostrada al tauler"
+
+#. settings-schema.json->scripts_start->description
+msgid "Scripts"
+msgstr "Scripts"
+
+#. settings-schema.json->script_filepath->description
+msgid "Script"
+msgstr "Script"
+
+#. settings-schema.json->script_filepath->tooltip
+msgid "A path to a script that refeshes a website"
+msgstr "Ruta cap a un script que refresca un lloc web"
+
+#. settings-schema.json->script_separator->description
+msgid "Separator "
+msgstr "Separador "
+
+#. settings-schema.json->script_separator->tooltip
+msgid "A string that seperates values returned from the script"
+msgstr "Una cadena de text que separa valors retornats per l'script"

@@ -1,0 +1,75 @@
+# STANDARD ICON NAMES
+# This file is put in the public domain.
+# Cyril MAGUIRE, 2020
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: standardIconNames@jerrywham 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-10-16 14:28+0200\n"
+"Last-Translator: FabRCT\n"
+"Language-Team:\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. applet.js:66
+msgid "Standard Action Icons"
+msgstr "Icônes Standard d'Action"
+
+#. applet.js:172
+msgid "Standard Animation Icons"
+msgstr "Icônes Standard d'Animation"
+
+#. applet.js:186
+msgid "Standard Applications Icons"
+msgstr "Icônes Standard d'Applications"
+
+#. applet.js:217
+msgid "Standard Category Icons"
+msgstr "Icônes Standard de Catégorie"
+
+#. applet.js:243
+msgid "Standard Device Icons"
+msgstr "Icônes Standard de Périphérique"
+
+#. applet.js:285
+msgid "Standard Emblem Icons"
+msgstr "Icônes Standard d'Emblème"
+
+#. applet.js:307
+msgid "Standard Emotion Icons"
+msgstr "Icônes Standard d'Émotion"
+
+#. applet.js:343
+msgid "Standard MIME Type Icons"
+msgstr "Icônes Standard de Type MIME"
+
+#. applet.js:370
+msgid "Standard Place Icons"
+msgstr "Icônes Standard d'Emplacement"
+
+#. applet.js:394
+msgid "Standard Status Icons"
+msgstr "Icônes Standard d'État"
+
+#. applet.js:466
+#, javascript-format
+msgid "Please install the '%s' package."
+msgstr "Veuillez installer le paquet '%s'."
+
+#. applet.js:484
+#, javascript-format
+msgid "Item '%s' copied to clipboard."
+msgstr "L'élément '%s' a été copié dans le presse-papiers."
+
+#. metadata.json->name
+msgid "Standard icon names"
+msgstr "Noms standard d'icônes"
+
+#. metadata.json->description
+msgid "All standard icon names for applet developers"
+msgstr "Tous les noms d'icônes standard pour les développeurs d'applets"

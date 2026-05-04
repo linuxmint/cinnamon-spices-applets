@@ -1,0 +1,1686 @@
+# MULTI-CORE SYSTEM MONITOR
+# This file is put in the public domain.
+# ccadeptic23, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: multicore-sys-monitor@ccadeptic23 1.9.5\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-05-04 13:08+0200\n"
+"PO-Revision-Date: 2026-04-14 07:26+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.9\n"
+
+#. 5.6->settings-schema.json->pageCPU->title
+#. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
+#. 3.2/prefs.js:187 3.4/DataProviders.js:58 3.4/prefs.js:195 5.6/applet.js:79
+#. 5.6/applet.js:879 5.6/applet.js:2039 5.6/applet.js:2107 5.6/applet.js:2118
+#. 4.0/DataProviders.js:55 4.0/prefs.js:303 3.0/prefsui.glade:452
+#. 3.2/prefsui.glade:504 3.4/prefsui.glade:434 4.0/prefsui.glade:580
+msgid "CPU"
+msgstr "CPU"
+
+#. 3.0/DataProviders.js:113 3.2/DataProviders.js:113 3.4/DataProviders.js:126
+#. 4.0/DataProviders.js:123
+msgid "------------- CPU ------------"
+msgstr "------------- CPU ------------"
+
+#. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 3.4/DataProviders.js:129
+#. 5.6/applet.js:2127 4.0/DataProviders.js:126
+msgid "Core"
+msgstr "Mag"
+
+#. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 3.4/DataProviders.js:141
+#. 5.6/applet.js:80 5.6/applet.js:1806 4.0/DataProviders.js:138
+msgid "MEM"
+msgstr "MEM"
+
+#. 3.0/DataProviders.js:163 3.2/DataProviders.js:163 3.4/DataProviders.js:161
+#. 4.0/DataProviders.js:158
+msgid "----------- Memory -----------"
+msgstr "----------- Memória -----------"
+
+#. 3.0/DataProviders.js:164 3.2/DataProviders.js:164 5.6/applet.js:50
+msgid "Usedup:"
+msgstr "Felhasznált:"
+
+#. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 3.4/DataProviders.js:162
+#. 5.6/applet.js:1879 4.0/DataProviders.js:159
+msgid "Cached:"
+msgstr "Gyorsítótárazott:"
+
+#. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 3.4/DataProviders.js:162
+#. 5.6/applet.js:1879 4.0/DataProviders.js:159
+msgid "Buffer:"
+msgstr "Puffer:"
+
+#. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 3.4/DataProviders.js:162
+#. 5.6/applet.js:51 5.6/applet.js:1879 4.0/DataProviders.js:159
+msgid "Free:"
+msgstr "Szabad:"
+
+#. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 3.4/DataProviders.js:176
+#. 5.6/applet.js:1964 4.0/DataProviders.js:173
+msgid "SWAP"
+msgstr "Cserehely"
+
+#. 3.0/DataProviders.js:199 3.2/DataProviders.js:199 3.4/DataProviders.js:194
+#. 4.0/DataProviders.js:193
+msgid "------------ Swap ------------"
+msgstr "------------ Cserehely ------------"
+
+#. 5.6->settings-schema.json->Mem_colorSwap->description
+#. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 3.4/DataProviders.js:195
+#. 5.6/applet.js:52 5.6/applet.js:1997 4.0/DataProviders.js:194
+#. 3.0/prefsui.glade:785 3.2/prefsui.glade:837 3.4/prefsui.glade:761
+#. 4.0/prefsui.glade:907
+msgid "Swap"
+msgstr "Cserehely"
+
+#. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 3.4/DataProviders.js:205
+#. 5.6/applet.js:81 5.6/applet.js:2157 5.6/lib/Graphs.js:818
+#. 5.6/lib/Graphs.js:850 5.6/lib/Graphs.js:1080 5.6/lib/Graphs.js:1128
+#. 4.0/DataProviders.js:204
+msgid "NET"
+msgstr "NET"
+
+#. 3.0/DataProviders.js:305 3.2/DataProviders.js:305 3.4/DataProviders.js:289
+#. 4.0/DataProviders.js:287
+msgid "---------- Networks ----------"
+msgstr "---------- Hálózatok ----------"
+
+#. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 3.4/DataProviders.js:300
+#. 5.6/applet.js:54 5.6/applet.js:2329 4.0/DataProviders.js:298
+msgid "Down:"
+msgstr "Le:"
+
+#. 3.0/DataProviders.js:308 3.0/DataProviders.js:309 3.2/DataProviders.js:308
+#. 3.2/DataProviders.js:309
+msgid "(KiB/s)"
+msgstr "(KiB/s)"
+
+#. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 3.4/DataProviders.js:301
+#. 5.6/applet.js:55 5.6/applet.js:2330 4.0/DataProviders.js:299
+msgid "Up:"
+msgstr "Fel:"
+
+#. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 3.4/DataProviders.js:317
+#. 5.6/applet.js:82 5.6/applet.js:2352 5.6/applet.js:2532 5.6/lib/Graphs.js:812
+#. 5.6/lib/Graphs.js:851 5.6/lib/Graphs.js:1081 5.6/lib/Graphs.js:1139
+#. 4.0/DataProviders.js:315
+msgid "DISK"
+msgstr "LEMEZ"
+
+#. 3.0/DataProviders.js:408 3.2/DataProviders.js:408 3.4/DataProviders.js:378
+#. 4.0/DataProviders.js:376
+msgid "------------ Disks -----------"
+msgstr "------------ Lemezek -----------"
+
+#. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 3.4/DataProviders.js:386
+#. 5.6/applet.js:56 5.6/applet.js:2509 4.0/DataProviders.js:384
+msgid "Read:"
+msgstr "Olvasás:"
+
+#. 3.0/DataProviders.js:411 3.0/DataProviders.js:412 3.2/DataProviders.js:411
+#. 3.2/DataProviders.js:412
+msgid "(MiB/s)"
+msgstr "(MiB/s)"
+
+#. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 3.4/DataProviders.js:387
+#. 5.6/applet.js:57 5.6/applet.js:2510 4.0/DataProviders.js:385
+msgid "Write:"
+msgstr "Írás:"
+
+#. 3.0/ErrorApplet.js:28 3.0/ErrorApplet.js:34 3.2/ErrorApplet.js:28
+#. 3.2/ErrorApplet.js:34
+msgid "Multi-Core System Monitor Error."
+msgstr "Többmagos rendszerfigyelő hiba."
+
+#. 3.0/applet.js:141 3.2/applet.js:139 3.4/applet.js:264 4.0/applet.js:275
+msgid "Preferences"
+msgstr "Beállítások"
+
+#. 3.0/applet.js:323 3.2/applet.js:334
+msgid "Please install \"gir1.2-gtop-2.0\" package."
+msgstr "Kérjük, telepítse a \"gir1.2-gtop-2.0\" csomagot."
+
+#. 3.0/applet.js:328 3.2/applet.js:339
+msgid "Reload this applet"
+msgstr "Kisalkalmazás újratöltése"
+
+#. 5.6->settings-schema.json->CPU_enabled->description
+#. 5.6->settings-schema.json->Mem_enabled->description
+#. 5.6->settings-schema.json->Net_enabled->description
+#. 5.6->settings-schema.json->Disk_enabled->description
+#. 5.6->settings-schema.json->DiskUsage_enabled->description
+#. 5.6->settings-schema.json->Battery_enabled->description
+#. 3.0/prefs.js:279 3.0/prefs.js:393 3.2/prefs.js:283 3.2/prefs.js:398
+#. 3.4/prefs.js:327 3.4/prefs.js:463 4.0/prefs.js:483 4.0/prefs.js:619
+#. 3.0/prefsui.glade:304 3.0/prefsui.glade:476 3.0/prefsui.glade:856
+#. 3.0/prefsui.glade:1178 3.2/prefsui.glade:356 3.2/prefsui.glade:528
+#. 3.2/prefsui.glade:908 3.2/prefsui.glade:1230 3.4/prefsui.glade:286
+#. 3.4/prefsui.glade:457 3.4/prefsui.glade:831 3.4/prefsui.glade:1166
+#. 4.0/prefsui.glade:321 4.0/prefsui.glade:603 4.0/prefsui.glade:977
+#. 4.0/prefsui.glade:1312
+msgid "Enable"
+msgstr "Engedélyezés"
+
+#. 3.0/prefs.js:290 3.2/prefs.js:294 3.4/prefs.js:338 4.0/prefs.js:494
+msgid "Down"
+msgstr "Le"
+
+#. 3.0/prefs.js:298 3.2/prefs.js:302 3.4/prefs.js:346 4.0/prefs.js:502
+msgid "Up"
+msgstr "Fel"
+
+#. 3.0/prefs.js:406 3.2/prefs.js:414 3.4/prefs.js:479 4.0/prefs.js:635
+msgid "Read"
+msgstr "Olvasás"
+
+#. 3.0/prefs.js:414 3.2/prefs.js:423 3.4/prefs.js:488 4.0/prefs.js:644
+msgid "Write"
+msgstr "Írás"
+
+#. 3.0/prefs.js:530 3.2/prefs.js:540
+msgid "Error while saving file:"
+msgstr "Hiba a fájl mentése közben:"
+
+#. 3.4/DataProviders.js:49 5.6/applet.js:43 4.0/DataProviders.js:47
+msgid "/s"
+msgstr "/s"
+
+#. 3.4/DataProviders.js:162 5.6/applet.js:49 5.6/applet.js:1869
+#. 5.6/applet.js:1876 5.6/applet.js:1879 5.6/applet.js:2010
+#. 4.0/DataProviders.js:159
+msgid "Used:"
+msgstr "Használt:"
+
+#. 3.4/applet.js:60 4.0/applet.js:64
+msgid "Dependency missing"
+msgstr "Függőség hiányzik"
+
+#. 3.4/applet.js:62
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"to use "
+msgstr ""
+"Kérem telepítse a GTop csomagot\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"a használathoz "
+
+#. 5.6/applet.js:46
+msgid "Core 128:"
+msgstr "Core 128:"
+
+#. 5.6/applet.js:47
+msgid "Unrecoverable:"
+msgstr "Helyreállíthatatlan:"
+
+#. 5.6/applet.js:48
+msgid "Recoverable:"
+msgstr "Helyreállítható:"
+
+#. 5.6/applet.js:53
+msgid "Swap:"
+msgstr "Cserehely:"
+
+#. 5.6/applet.js:58
+msgid "Load:"
+msgstr "Betöltés:"
+
+#. 5.6/applet.js:59
+msgid "Unload:"
+msgstr "Kitöltés:"
+
+#. 5.6/applet.js:83
+msgid "DISK USAGE"
+msgstr "LEMEZHASZNÁLAT"
+
+#. 5.6/applet.js:84
+msgid "BATTERY"
+msgstr "AKKUMULÁTOR"
+
+#. 5.6->settings-schema.json->RefreshAll_btn->description
+#. 5.6/applet.js:834
+msgid "Refresh All"
+msgstr "Összes frissítése"
+
+#. 5.6/applet.js:844
+msgid "Without any graphics"
+msgstr "Mindenféle grafika nélkül"
+
+#. 5.6/applet.js:850
+msgid "With graphics"
+msgstr "Grfikával"
+
+#. 5.6/applet.js:861
+msgid "Drop Memory Cache (needs root rights)"
+msgstr "Memória gyorsítótár elvetése (rendszergazdai jogosultság szükséges)"
+
+#. 5.6/applet.js:877
+msgid "Configure..."
+msgstr "Beállítás..."
+
+#. 5.6->settings-schema.json->pageGeneral->title
+#. 5.6/applet.js:878 3.0/prefsui.glade:281 3.2/prefsui.glade:333
+#. 3.4/prefsui.glade:264 4.0/prefsui.glade:299
+msgid "General"
+msgstr "Általános"
+
+#. 5.6->settings-schema.json->pageMem->title
+#. 5.6/applet.js:880 5.6/applet.js:1859 3.0/prefsui.glade:832
+#. 3.2/prefsui.glade:884 3.4/prefsui.glade:808 4.0/prefsui.glade:954
+msgid "Memory"
+msgstr "Memória"
+
+#. 5.6->settings-schema.json->pageNetwork->title
+#. 5.6/applet.js:881 5.6/applet.js:1424 5.6/applet.js:2167
+#. 3.0/prefsui.glade:1154 3.2/prefsui.glade:1206 3.4/prefsui.glade:1143
+#. 4.0/prefsui.glade:1289
+msgid "Network"
+msgstr "Hálózat"
+
+#. 5.6->settings-schema.json->pageDisk->title
+#. 5.6/applet.js:882 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
+#. 3.4/prefsui.glade:1489 4.0/prefsui.glade:1635
+msgid "Disk IO"
+msgstr "Lemez IO"
+
+#. 5.6->settings-schema.json->pageDiskUsage->title
+#. 5.6/applet.js:883
+msgid "Disk Usage"
+msgstr "Lemezhasználat"
+
+#. 5.6->settings-schema.json->pageBattery->title
+#. 5.6/applet.js:884 5.6/applet.js:2644
+msgid "Battery"
+msgstr "Akkumulátor"
+
+#. 5.6->settings-schema.json->pageColors->title
+#. 5.6->settings-schema.json->sectionGeneralColors->title
+#. 5.6->settings-schema.json->sectionCPUColors->title
+#. 5.6->settings-schema.json->sectionMemoryColors->title
+#. 5.6->settings-schema.json->sectionDiskUsageColors->title
+#. 5.6->settings-schema.json->sectionBatteryColors->title
+#. 5.6/applet.js:885 3.0/prefsui.glade:411 3.0/prefsui.glade:584
+#. 3.2/prefsui.glade:463 3.2/prefsui.glade:636 3.4/prefsui.glade:392
+#. 3.4/prefsui.glade:564 4.0/prefsui.glade:494 4.0/prefsui.glade:710
+msgid "Colors"
+msgstr "Színek"
+
+#. 5.6/applet.js:1032 5.6/applet.js:1075 5.6/applet.js:1089
+msgid "root"
+msgstr "root"
+
+#. 5.6/applet.js:1532 5.6/applet.js:2363 5.6/applet.js:2459 5.6/applet.js:2583
+#. 5.6/applet.js:2585
+msgid "Disks"
+msgstr "Lemezek"
+
+#. 5.6/applet.js:1870 5.6/applet.js:1877 5.6/applet.js:2011
+msgid "Available:"
+msgstr "Elérhető:"
+
+#. 5.6/applet.js:1903
+msgid "Buffers/Cache/Shared"
+msgstr "Pufferek/Gyorsítótár/Megosztott"
+
+#. 5.6/applet.js:1935 5.6/applet.js:2094 5.6/applet.js:2326 5.6/applet.js:2327
+#. 5.6/applet.js:2506 5.6/applet.js:2507 5.6/applet.js:2562 5.6/applet.js:2649
+msgid ":"
+msgstr ":"
+
+#. 5.6/applet.js:1937 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 3.4/prefsui.glade:663 4.0/prefsui.glade:809
+msgid "Buffer"
+msgstr "Puffer"
+
+#. 5.6->settings-schema.json->Mem_colorCache->description
+#. 5.6/applet.js:1937
+msgid "Cache"
+msgstr "Gyorsítótár"
+
+#. 5.6/applet.js:1937
+msgid "Shared"
+msgstr "Megosztott"
+
+#. 5.6/applet.js:2075
+msgid "CPUs"
+msgstr "CPU-k"
+
+#. 5.6/applet.js:2280
+msgid "Networks"
+msgstr "Hálózatok"
+
+#. 5.6/applet.js:2557
+msgid "Usage"
+msgstr "Használat"
+
+#. 5.6/applet.js:2618 5.6/lib/Graphs.js:399
+msgid "BAT"
+msgstr "BAT"
+
+#. 5.6/applet.js:2672 5.6/applet.js:2674
+msgid "Batteries"
+msgstr "Akkumulátorok"
+
+#. 4.0/applet.js:66
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"to use "
+msgstr ""
+"Telepítse a GTop csomagot:\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"a használathoz "
+
+#. 4.0/applet.js:277
+msgid "Refresh graphs"
+msgstr "Grafikonok frissítése"
+
+#. 4.0/prefs.js:335
+msgid "00-20"
+msgstr "00-20"
+
+#. 5.6->settings-schema.json->CPU_activity_20_40->description
+#. 4.0/prefs.js:335
+msgid "20-40"
+msgstr "20-40"
+
+#. 5.6->settings-schema.json->CPU_activity_40_60->description
+#. 4.0/prefs.js:335
+msgid "40-60"
+msgstr "40-60"
+
+#. 5.6->settings-schema.json->CPU_activity_60_80->description
+#. 4.0/prefs.js:335
+msgid "60-80"
+msgstr "60-80"
+
+#. 5.6->settings-schema.json->CPU_activity_80_100->description
+#. 4.0/prefs.js:335
+msgid "80-100"
+msgstr "80-100"
+
+#. metadata.json->name
+msgid "Multi-Core System Monitor"
+msgstr "Többmagos Rendszerfigyelő"
+
+#. metadata.json->description
+msgid ""
+"Displays in realtime the cpu usage for each core/cpu and overall memory "
+"usage."
+msgstr ""
+"Valós időben jeleníti meg az egyes magok/cpu-k processzorhasználatát és a "
+"teljes memóriahasználatot."
+
+#. 5.6->settings-schema.json->sectionGeneralOptions->title
+#. 5.6->settings-schema.json->sectionCPUOptions->title
+#. 5.6->settings-schema.json->sectionMemoryOptions->title
+#. 5.6->settings-schema.json->sectionNetworkOptions->title
+#. 5.6->settings-schema.json->sectionDiskOptions->title
+#. 5.6->settings-schema.json->sectionDiskUsageOptions->title
+#. 5.6->settings-schema.json->sectionBatteryOptions->title
+msgid "Options"
+msgstr "Opciók"
+
+#. 5.6->settings-schema.json->sectionGeneralOrder->title
+msgid "Display Order"
+msgstr "Megjelenítési sorrend"
+
+#. 5.6->settings-schema.json->sectionTooltip->title
+#. 5.6->settings-schema.json->sectionNetworkTooltip->title
+#. 5.6->settings-schema.json->sectionDiskTooltip->title
+msgid "Tooltip"
+msgstr "Eszköztipp"
+
+#. 5.6->settings-schema.json->sectionTooltipCustomTranslations->title
+msgid "Custom translations in tooltip"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionCPUTemperature->title
+msgid "CPU Temperature"
+msgstr "CPU Hőmérséklet"
+
+#. 5.6->settings-schema.json->sectionCPULabel->title
+#. 5.6->settings-schema.json->sectionMemoryLabel->title
+#. 5.6->settings-schema.json->sectionNetworkLabel->title
+#. 5.6->settings-schema.json->sectionDiskLabel->title
+#. 5.6->settings-schema.json->sectionDiskUsageLabel->title
+#. 5.6->settings-schema.json->sectionBatteryLabel->title
+msgid "Label"
+msgstr "Címke"
+
+#. 5.6->settings-schema.json->sectionCPUColorsByActivity->title
+#. 4.0/prefsui.glade:538
+msgid "by activity level (in %):"
+msgstr "aktivitás szerinti szín (százalékban megadva)"
+
+#. 5.6->settings-schema.json->sectionNetworkScaling->title
+#. 5.6->settings-schema.json->sectionDiskScaling->title
+#. 3.0/prefsui.glade:972 3.0/prefsui.glade:1305 3.2/prefsui.glade:1024
+#. 3.2/prefsui.glade:1357 3.4/prefsui.glade:947 3.4/prefsui.glade:1293
+#. 4.0/prefsui.glade:1093 4.0/prefsui.glade:1439
+msgid "Scaling"
+msgstr "Méretezés"
+
+#. 5.6->settings-schema.json->sectionNetworkDevices->title
+#. 5.6->settings-schema.json->sectionDiskDevices->title
+#. 3.0/prefsui.glade:1110 3.0/prefsui.glade:1443 3.2/prefsui.glade:1162
+#. 3.2/prefsui.glade:1495 3.4/prefsui.glade:1082 3.4/prefsui.glade:1428
+#. 4.0/prefsui.glade:1228 4.0/prefsui.glade:1574
+msgid "Devices"
+msgstr "Eszközök"
+
+#. 5.6->settings-schema.json->sectionNetworkTotal->title
+msgid "Total amount or instant speed"
+msgstr "Teljes összeg vagy azonnali sebesség"
+
+#. 5.6->settings-schema.json->sectionDiskUsagePaths->title
+#. 5.6->settings-schema.json->sectionBatteryPaths->title
+msgid "Paths"
+msgstr "Ütvonalak"
+
+#. 5.6->settings-schema.json->sectionDiskSpeed->title
+msgid "Instant speed"
+msgstr "Azonnali sebesség"
+
+#. 5.6->settings-schema.json->sectionColors->title
+msgid "Your colors"
+msgstr "A színeid"
+
+#. 5.6->settings-schema.json->labelsOn->description
+#. 3.0/prefsui.glade:81 3.2/prefsui.glade:81 3.4/prefsui.glade:83
+#. 4.0/prefsui.glade:90
+msgid "Labels"
+msgstr "Címkék"
+
+#. 5.6->settings-schema.json->borderOn->description
+msgid "Add a border to each graph"
+msgstr "Adjon hozzá egy szegélyt minden grafikonhoz"
+
+#. 5.6->settings-schema.json->borderRadius->description
+msgid "Radius of curvature in corners"
+msgstr "Sarkok görbületi sugara"
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "1px"
+msgstr "1px"
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "2px"
+msgstr "2px"
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "4px"
+msgstr "4px"
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "8px"
+msgstr "8px"
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "16px"
+msgstr "16px"
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "32px"
+msgstr "32px"
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "64px"
+msgstr "64px"
+
+#. 5.6->settings-schema.json->graphStep->description
+msgid "The width of each graphic must be a multiple of:"
+msgstr "Minden grafika szélességének a következők többszörösének kell lennie:"
+
+#. 5.6->settings-schema.json->graphStepApply->description
+msgid "Apply this multiple"
+msgstr "Alkalmazd ezt a többszöröst"
+
+#. 5.6->settings-schema.json->graphSpacing->description
+msgid "Graph spacing"
+msgstr "Grafikon térköz"
+
+#. 5.6->settings-schema.json->thickness->description
+#. 4.0/prefsui.glade:168
+msgid "Curves thickness"
+msgstr "Görbevastagság"
+
+#. 5.6->settings-schema.json->ledForCurves->description
+msgid "Led for curves"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->options
+msgid "●"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->options
+msgid "⬤"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->options
+msgid "◉"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledLocation->description
+msgid "Led location"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledLocation->options
+#, fuzzy
+msgid "Left"
+msgstr "Bal fent"
+
+#. 5.6->settings-schema.json->ledLocation->options
+#, fuzzy
+msgid "Right"
+msgstr "Magasság"
+
+#. 5.6->settings-schema.json->useIconSize->description
+msgid "Limit height to the size of a colored icon"
+msgstr "A magasság korlátozása egy színes ikon méretére"
+
+#. 5.6->settings-schema.json->graphHeightPercent->description
+msgid "Graph height (% of panel height)"
+msgstr "Grafikon magassága (a panel magasságának %-ában)"
+
+#. 5.6->settings-schema.json->refreshRate->description
+#. 3.0/prefsui.glade:132 3.2/prefsui.glade:132 3.4/prefsui.glade:133
+#. 4.0/prefsui.glade:140
+msgid "Refresh Rate (ms)"
+msgstr "Frissítési gyakoriság (ms)"
+
+#. 5.6->settings-schema.json->labelColor->description
+#. 3.2/prefsui.glade:245 3.4/prefsui.glade:177 4.0/prefsui.glade:212
+msgid "Label Color"
+msgstr "Címke színe"
+
+#. 5.6->settings-schema.json->borderColor->description
+msgid "Border Color"
+msgstr "Szegély színe"
+
+#. 5.6->settings-schema.json->backgroundColor->description
+#. 3.0/prefsui.glade:245 3.2/prefsui.glade:297 3.4/prefsui.glade:228
+#. 4.0/prefsui.glade:263
+msgid "Background Color"
+msgstr "Háttérszín"
+
+#. 5.6->settings-schema.json->percentAtEndOfLine->description
+msgid "Place % at the very end of the line"
+msgstr "Írd a % jelet a sor végére"
+
+#. 5.6->settings-schema.json->tooltipFontSize->description
+msgid "Font size (px)"
+msgstr ""
+
+#. 5.6->settings-schema.json->widthWhithoutAnyGraph->description
+msgid "Width when no graph is displayed (px)"
+msgstr ""
+
+#. 5.6->settings-schema.json->widthWhithoutAnyGraph->tooltip
+msgid ""
+"This is useful for preventing the tooltip from disappearing too soon when "
+"you move the pointer.\n"
+"Refresh All after making changes."
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipCustomTranslationsLabel->description
+msgid ""
+"You can use your own translations, or emojis, to replace words in the "
+"tooltip."
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipCPUsUseCustomTranslation->description
+msgid "Change translation for CPUs"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipCPUsCustomTranslation->description
+msgid "CPUs becomes:"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipMemoryUseCustomTranslation->description
+msgid "Change translation for Memory"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipMemoryCustomTranslation->description
+msgid "Memory becomes:"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipSwapUseCustomTranslation->description
+msgid "Change translation for Swap"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipSwapCustomTranslation->description
+msgid "Swap becomes:"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipNetworksUseCustomTranslation->description
+msgid "Change translation for Networks"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipNetworksCustomTranslation->description
+#, fuzzy
+msgid "Networks becomes:"
+msgstr "Hálózatok"
+
+#. 5.6->settings-schema.json->tooltipDisksUseCustomTranslation->description
+msgid "Change translation for Disks"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipDisksCustomTranslation->description
+msgid "Disks becomes:"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipUsageUseCustomTranslation->description
+msgid "Change translation for Usage"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipUsageCustomTranslation->description
+msgid "Usage becomes:"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipBatteryUseCustomTranslation->description
+msgid "Change translation for Battery"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipBatteryCustomTranslation->description
+#, fuzzy
+msgid "Battery becomes:"
+msgstr "Akkumulátorok"
+
+#. 5.6->settings-schema.json->emojidb_btn->description
+msgid "Open emoji database"
+msgstr ""
+
+#. 5.6->settings-schema.json->removeEnlightenment->description
+msgid "Remove Enlightenment of this applet"
+msgstr "Kisalkalmazás megvilágosításának eltávolítása"
+
+#. 5.6->settings-schema.json->displayOrderLabel->description
+msgid ""
+"Choose the order in which the boxes of this applet are displayed in the "
+"panel.\n"
+"Do not change these names!"
+msgstr ""
+"Válassza ki a panelen megjelenő mezők sorrendjét.\n"
+"Ne módosítsa a neveket!"
+
+#. 5.6->settings-schema.json->displayOrder->columns->title
+#. 5.6->settings-schema.json->Net_devicesList->columns->title
+#. 5.6->settings-schema.json->Disk_devicesList->columns->title
+#. 5.6->settings-schema.json->DiskUsage_pathList->columns->title
+#. 5.6->settings-schema.json->Battery_devicesList->columns->title
+msgid "Name"
+msgstr "Név"
+
+#. 5.6->settings-schema.json->displayOrder->description
+msgid "Display order in the panel"
+msgstr "Megjelenítési sorrend a panelen"
+
+#. 5.6->settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr "Alkalmaz"
+
+#. 5.6->settings-schema.json->displayOrderReinit->description
+msgid "Reset"
+msgstr "Visszaállítás"
+
+#. 5.6->settings-schema.json->CPU_enabledTooltip->description
+#. 5.6->settings-schema.json->Mem_enabledTooltip->description
+#. 5.6->settings-schema.json->Net_enabledTooltip->description
+#. 5.6->settings-schema.json->Disk_enabledTooltip->description
+#. 5.6->settings-schema.json->DiskUsage_enabledTooltip->description
+#. 5.6->settings-schema.json->Battery_enabledTooltip->description
+msgid "Enable Tooltip"
+msgstr "Eszköztipp engedélyezése"
+
+#. 5.6->settings-schema.json->CPU_labelOn->description
+#. 5.6->settings-schema.json->Mem_labelOn->description
+#. 5.6->settings-schema.json->Net_labelOn->description
+#. 5.6->settings-schema.json->Disk_labelOn->description
+#. 5.6->settings-schema.json->DiskUsage_labelOn->description
+#. 5.6->settings-schema.json->Battery_labelOn->description
+#, fuzzy
+msgid "Display this label"
+msgstr "Mutasd meg, hogy"
+
+#. 5.6->settings-schema.json->CPU_labelForeground->description
+#. 5.6->settings-schema.json->Mem_labelForeground->description
+#. 5.6->settings-schema.json->Net_labelForeground->description
+#. 5.6->settings-schema.json->Disk_labelForeground->description
+#. 5.6->settings-schema.json->DiskUsage_labelForeground->description
+#. 5.6->settings-schema.json->Battery_labelForeground->description
+msgid "Bring this label to the foreground"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelPos->description
+#. 5.6->settings-schema.json->Mem_labelPos->description
+#. 5.6->settings-schema.json->Net_labelPos->description
+#. 5.6->settings-schema.json->Disk_labelPos->description
+#. 5.6->settings-schema.json->DiskUsage_labelPos->description
+#. 5.6->settings-schema.json->Battery_labelPos->description
+msgid "Vertical position offset (pixels)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelPos->tooltip
+#. 5.6->settings-schema.json->Mem_labelPos->tooltip
+#. 5.6->settings-schema.json->Net_labelPos->tooltip
+#. 5.6->settings-schema.json->Disk_labelPos->tooltip
+#. 5.6->settings-schema.json->DiskUsage_labelPos->tooltip
+#. 5.6->settings-schema.json->Battery_labelPos->tooltip
+msgid ""
+"Negative: to the top.\n"
+"Positive: to the bottom."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->description
+#. 5.6->settings-schema.json->Mem_labelZoom->description
+#. 5.6->settings-schema.json->Net_labelZoom->description
+#. 5.6->settings-schema.json->Disk_labelZoom->description
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->description
+#. 5.6->settings-schema.json->Battery_labelZoom->description
+#, fuzzy
+msgid "Label zoom"
+msgstr "Címke színe"
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "1"
+msgstr "1"
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "2"
+msgstr "2"
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+#, fuzzy
+msgid "3"
+msgstr "32"
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "4"
+msgstr "4"
+
+#. 5.6->settings-schema.json->CPU_labelCustomized->description
+#. 5.6->settings-schema.json->Mem_labelCustomized->description
+#. 5.6->settings-schema.json->Net_labelCustomized->description
+#. 5.6->settings-schema.json->Disk_labelCustomized->description
+#. 5.6->settings-schema.json->DiskUsage_labelCustomized->description
+#. 5.6->settings-schema.json->Battery_labelCustomized->description
+msgid "Customize this label"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelCustom->description
+#. 5.6->settings-schema.json->Mem_labelCustom->description
+#. 5.6->settings-schema.json->Net_labelCustom->description
+#. 5.6->settings-schema.json->Disk_labelCustom->description
+#. 5.6->settings-schema.json->DiskUsage_labelCustom->description
+#. 5.6->settings-schema.json->Battery_labelCustom->description
+msgid "Custom label"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelCustom->tooltip
+#. 5.6->settings-schema.json->Mem_labelCustom->tooltip
+#. 5.6->settings-schema.json->Net_labelCustom->tooltip
+#. 5.6->settings-schema.json->Disk_labelCustom->tooltip
+#. 5.6->settings-schema.json->DiskUsage_labelCustom->tooltip
+#. 5.6->settings-schema.json->Battery_labelCustom->tooltip
+msgid "You can use emojis."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_squared->description
+#. 5.6->settings-schema.json->Mem_squared->description
+#. 5.6->settings-schema.json->Net_squared->description
+#. 5.6->settings-schema.json->Disk_squared->description
+#. 5.6->settings-schema.json->DiskUsage_squared->description
+#. 5.6->settings-schema.json->Battery_squared->description
+msgid "Square view"
+msgstr "Négyzet alakú nézet"
+
+#. 5.6->settings-schema.json->CPU_width->description
+#. 5.6->settings-schema.json->Mem_width->description
+#. 5.6->settings-schema.json->Net_width->description
+#. 5.6->settings-schema.json->Disk_width->description
+#. 5.6->settings-schema.json->DiskUsage_width->description
+#. 5.6->settings-schema.json->Battery_width->description
+#. 3.0/prefsui.glade:360 3.0/prefsui.glade:533 3.0/prefsui.glade:912
+#. 3.0/prefsui.glade:1245 3.2/prefsui.glade:412 3.2/prefsui.glade:585
+#. 3.2/prefsui.glade:964 3.2/prefsui.glade:1297 3.4/prefsui.glade:341
+#. 3.4/prefsui.glade:513 3.4/prefsui.glade:886 3.4/prefsui.glade:1232
+#. 4.0/prefsui.glade:376 4.0/prefsui.glade:659 4.0/prefsui.glade:1032
+#. 4.0/prefsui.glade:1378
+msgid "Width"
+msgstr "Szélesség"
+
+#. 5.6->settings-schema.json->CPU_mergeAll->description
+#. 5.6->settings-schema.json->Net_mergeAll->description
+#. 5.6->settings-schema.json->Disk_mergeAll->description
+#. 5.6->settings-schema.json->DiskUsage_mergeAll->description
+#. 5.6->settings-schema.json->Battery_mergeAll->description
+msgid "Merge all"
+msgstr "Összes egyesítése"
+
+#. 5.6->settings-schema.json->CPU_groupInSetsOf4->description
+msgid "Group in sets of 4 in tooltip"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_ignoreHyperthreading->description
+msgid "Ignore Hyper-Threading"
+msgstr "Hyper-Threading figyelmen kívül hagyása"
+
+#. 5.6->settings-schema.json->CPU_ignoreHyperthreading->tooltip
+msgid ""
+"Example: An 8-core processor with Hyper-Threading technology appears to have "
+"16 cores, even though it does not."
+msgstr ""
+"Példa: Egy 8 magos, Hyper-Threading technológiával rendelkező processzor "
+"látszólag 16 maggal rendelkezik, pedig nem."
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTime->description
+msgid "Show only the CPU Load Over Time"
+msgstr "Csak a CPU-terhelés időbeli megjelenítése"
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->description
+msgid "How many bars?"
+msgstr "Hány sáv?"
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "8"
+msgstr "8"
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "16"
+msgstr "16"
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "32"
+msgstr "32"
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "64"
+msgstr "64"
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->tooltip
+msgid "Related to CPU Load Over Time"
+msgstr "A CPU terhelésével kapcsolatos időbeli összefüggés"
+
+#. 5.6->settings-schema.json->CPU_showTemp->description
+msgid "Show the CPU temperature"
+msgstr "Mutassa meg a CPU hőmérsékletét"
+
+#. 5.6->settings-schema.json->CPU_temp_hovering_only->description
+#. 5.6->settings-schema.json->Net_total_hovering_only->description
+#. 5.6->settings-schema.json->Disk_speed_hovering_only->description
+msgid "Only display when hovering over this applet"
+msgstr "Csak akkor jelenjen meg, ha az egérmutatót erre az appletre helyezi"
+
+#. 5.6->settings-schema.json->CPU_tempInFahrenheit->description
+msgid "Fahrenheit degrees"
+msgstr "Fahrenheit fok"
+
+#. 5.6->settings-schema.json->CPU_tempPath->description
+msgid "Path to the system file used to check the CPU temperature"
+msgstr ""
+"A CPU hőmérsékletének ellenőrzéséhez használt rendszerfájl elérési útja"
+
+#. 5.6->settings-schema.json->CPU_tempHigh->description
+msgid "High CPU Temperature (°C)"
+msgstr "Magas CPU-hőmérséklet (°C)"
+
+#. 5.6->settings-schema.json->CPU_tempHigh->tooltip
+msgid "Refer to your CPU documentation."
+msgstr "Lásd a CPU dokumentációját."
+
+#. 5.6->settings-schema.json->CPU_tempCrit->description
+msgid "Critical CPU Temperature (°C)"
+msgstr "Kritikus CPU-hőmérséklet (°C)"
+
+#. 5.6->settings-schema.json->CPU_tempCrit->tooltip
+msgid ""
+"Refer to your CPU documentation.\n"
+"Must be greater than the High CPU Temperature."
+msgstr ""
+"Lásd a CPU dokumentációját.\n"
+"Magasabbnak kell lennie, mint a magas CPU hőmérséklet."
+
+#. 5.6->settings-schema.json->CPU_tempCorner->description
+msgid "Corner in which to display the temperature"
+msgstr "A hőmérséklet megjelenítésének sarka"
+
+#. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Top Right"
+msgstr "Jobb fent"
+
+#. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Top Left"
+msgstr "Bal fent"
+
+#. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Bottom Right"
+msgstr "Jobb lent"
+
+#. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Bottom Left"
+msgstr "Bal lent"
+
+#. 5.6->settings-schema.json->CPU_tempFontFactor->units
+#. 5.6->settings-schema.json->percentFontFactor->units
+#. 5.6->settings-schema.json->flowFontFactor->units
+msgid "%"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempFontFactor->description
+#. 5.6->settings-schema.json->percentFontFactor->description
+#. 5.6->settings-schema.json->flowFontFactor->description
+msgid "Font size: percentage of the box height"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempColor->description
+msgid "Normal Temperature Color"
+msgstr "Normál hőmérséklet szín"
+
+#. 5.6->settings-schema.json->CPU_tempColorHigh->description
+msgid "High Temperature Color"
+msgstr "Magas hőmérséklet szín"
+
+#. 5.6->settings-schema.json->CPU_tempColorCrit->description
+msgid "Critical Temperature Color"
+msgstr "Kritikus hőmérséklet szín"
+
+#. 5.6->settings-schema.json->CPU_byActivity->description
+#. 4.0/prefsui.glade:433
+msgid "Color by activity level"
+msgstr "Aktivitás szerinti szín"
+
+#. 5.6->settings-schema.json->CPU_useProgressiveColors->description
+#. 4.0/prefsui.glade:460
+msgid "Use automatic colors"
+msgstr "Automatikus színek használata"
+
+#. 5.6->settings-schema.json->CPU_colorExplanation->description
+msgid ""
+"The CPUs are colored in groups of four: CPU0, CPU1, CPU2, and CPU3.\n"
+"The fifth, named CPU4, will have the same color as CPU0; the sixth, CPU5, "
+"will have the same color as CPU1, and so on."
+msgstr ""
+"A CPU-k négyes csoportokban vannak színezve: CPU0, CPU1, CPU2 és CPU3.\n"
+"Az ötödik, CPU4, ugyanolyan színű lesz, mint a CPU0; a hatodik, CPU5, "
+"ugyanolyan színű lesz, mint a CPU1, és így tovább."
+
+#. 5.6->settings-schema.json->CPU_color0->description
+msgid "CPU0 Color"
+msgstr "CPU0 Color szín"
+
+#. 5.6->settings-schema.json->CPU_color1->description
+msgid "CPU1 Color"
+msgstr "CPU1 Color szín"
+
+#. 5.6->settings-schema.json->CPU_color2->description
+msgid "CPU2 Color"
+msgstr "CPU2 Color szín"
+
+#. 5.6->settings-schema.json->CPU_color3->description
+msgid "CPU3 Color"
+msgstr "CPU3 Color szín"
+
+#. 5.6->settings-schema.json->CPU_activity_0_20->description
+msgid "0-20"
+msgstr "0-20"
+
+#. 5.6->settings-schema.json->Mem_onlyUsedAvailable->description
+msgid "Display only Used and Available memory"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_enabledBufferCacheSharedTooltip->description
+msgid "Enable Buffer/Cache/Shared Tooltip"
+msgstr "Pufferek/Gyorsítótár/Megosztott eszköztipp engedélyezése"
+
+#. 5.6->settings-schema.json->Swap_enabled->description
+msgid "Enable Swap"
+msgstr "Cserehely engedélyezése"
+
+#. 5.6->settings-schema.json->Swap_enabledTooltip->description
+msgid "Enable Swap Tooltip"
+msgstr "Cserehely eszköztipp engedélyezése"
+
+#. 5.6->settings-schema.json->Mem_chartType->description
+msgid "Chart Type"
+msgstr "Diagram típusa"
+
+#. 5.6->settings-schema.json->Mem_chartType->options
+msgid "Pie chart"
+msgstr "Kördiagram"
+
+#. 5.6->settings-schema.json->Mem_chartType->options
+msgid "Bar chart"
+msgstr "Oszlopdiagram"
+
+#. 5.6->settings-schema.json->Mem_method->description
+msgid "Memory Calculation Method"
+msgstr "Memóriaszámítási módszer"
+
+#. 5.6->settings-schema.json->Mem_method->options
+msgid "htop (recommended)"
+msgstr "htop (ajánlott)"
+
+#. 5.6->settings-schema.json->Mem_method->options
+msgid "Gnome System Monitor"
+msgstr "Gnome Rendszerfigyelő"
+
+#. 5.6->settings-schema.json->Mem_startAt12Oclock->description
+msgid "Origin at 12 o'clock"
+msgstr "Eredet 12 órakor"
+
+#. 5.6->settings-schema.json->Mem_showBytesInTooltip->description
+msgid ""
+"Show the amounts (in Bytes) of Total, Used and Available memory in the "
+"tooltip"
+msgstr ""
+"A teljes, a felhasznált és az elérhető memória mennyiségének (bájtban) "
+"megjelenítése az eszköztippben"
+
+#. 5.6->settings-schema.json->Mem_value_display->description
+msgid "Display memory usage percentage"
+msgstr "Memóriahasználat százalékos megjelenítése"
+
+#. 5.6->settings-schema.json->Mem_value_display->options
+#. 5.6->settings-schema.json->Mem_swapWidth->options
+#. 5.6->settings-schema.json->Net_typeOfGraph->options
+#. 5.6->settings-schema.json->Disk_typeOfGraph->options
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
+#. 5.6->settings-schema.json->Battery_value_display->options
+msgid "None"
+msgstr "Semmi"
+
+#. 5.6->settings-schema.json->Mem_value_display->options
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
+#. 5.6->settings-schema.json->Battery_value_display->options
+msgid "Hovering over"
+msgstr "Lebegve fölötte"
+
+#. 5.6->settings-schema.json->Mem_value_display->options
+#. 5.6->settings-schema.json->DiskUsage_value_display->options
+#. 5.6->settings-schema.json->Battery_value_display->options
+msgid "Always"
+msgstr "Mindíg"
+
+#. 5.6->settings-schema.json->Mem_valueCorner->description
+#. 5.6->settings-schema.json->DiskUsage_valueCorner->description
+#. 5.6->settings-schema.json->Battery_valueCorner->description
+msgid "Where to display this"
+msgstr "Hol kell ezt megjeleníteni"
+
+#. 5.6->settings-schema.json->Mem_valueCorner->options
+#. 5.6->settings-schema.json->DiskUsage_valueCorner->options
+#. 5.6->settings-schema.json->Battery_valueCorner->options
+msgid "Top"
+msgstr "Fent"
+
+#. 5.6->settings-schema.json->Mem_valueCorner->options
+#. 5.6->settings-schema.json->DiskUsage_valueCorner->options
+#. 5.6->settings-schema.json->Battery_valueCorner->options
+msgid "Bottom"
+msgstr "Lent"
+
+#. 5.6->settings-schema.json->Mem_colorUsedup->description
+#. 5.6->settings-schema.json->DiskUsage_colorUsed->description
+#. 3.0/prefsui.glade:606 3.2/prefsui.glade:658 3.4/prefsui.glade:587
+#. 4.0/prefsui.glade:733
+msgid "Usedup"
+msgstr "Felhasznált"
+
+#. 5.6->settings-schema.json->Mem_colorBuffers->description
+msgid "Buffers"
+msgstr "Pufferek"
+
+#. 5.6->settings-schema.json->Mem_colorFree->description
+#. 5.6->settings-schema.json->DiskUsage_colorFree->description
+#. 3.0/prefsui.glade:723 3.2/prefsui.glade:775 3.4/prefsui.glade:701
+#. 4.0/prefsui.glade:847
+msgid "Free"
+msgstr "Szabad"
+
+#. 5.6->settings-schema.json->Mem_swapWidth->description
+msgid "Relative width for Swap graph"
+msgstr "Relatív szélesség a cserehely grafikonhoz"
+
+#. 5.6->settings-schema.json->Mem_swapWidth->options
+msgid "100%"
+msgstr "100%"
+
+#. 5.6->settings-schema.json->Mem_swapWidth->options
+msgid "25%, left side"
+msgstr "25%, bal oldal"
+
+#. 5.6->settings-schema.json->Mem_swapWidth->tooltip
+msgid ""
+"100%: The Swap graph is a bar that spans the entire width of the graph, "
+"behind the circle.\n"
+"10%: The Swap graph is a bar that occupies 10% of the graph width, to the "
+"left of the circle.\n"
+"None: No Swap bar."
+msgstr ""
+"100%: A Cserediagram egy sáv, amely a grafikon teljes szélességét átfogja, a "
+"kör mögött.\n"
+"10%: A Cserediagram egy sáv, amely a grafikon szélességének 10%-át foglalja "
+"el, a körtől balra.\n"
+"Nincs: Nincs Cserediagram."
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->description
+#. 5.6->settings-schema.json->Disk_typeOfGraph->description
+msgid "Type of graph"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->options
+#. 5.6->settings-schema.json->Disk_typeOfGraph->options
+msgid "Curves only"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->options
+#. 5.6->settings-schema.json->Disk_typeOfGraph->options
+msgid "Led only"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_typeOfGraph->options
+#. 5.6->settings-schema.json->Disk_typeOfGraph->options
+#, fuzzy
+msgid "Curves and Led"
+msgstr "Görbevastagság"
+
+#. 5.6->settings-schema.json->Net_autoscale->description
+#. 5.6->settings-schema.json->Disk_autoscale->description
+#. 3.0/prefsui.glade:1019 3.0/prefsui.glade:1352 3.2/prefsui.glade:1071
+#. 3.2/prefsui.glade:1404 3.4/prefsui.glade:993 3.4/prefsui.glade:1339
+#. 4.0/prefsui.glade:1139 4.0/prefsui.glade:1485
+msgid "Auto Scale"
+msgstr "Automatikus méretezés"
+
+#. 5.6->settings-schema.json->Net_logscale->description
+#. 5.6->settings-schema.json->Disk_logscale->description
+#. 3.0/prefsui.glade:1058 3.0/prefsui.glade:1391 3.2/prefsui.glade:1110
+#. 3.2/prefsui.glade:1443 3.4/prefsui.glade:1031 3.4/prefsui.glade:1377
+#. 4.0/prefsui.glade:1177 4.0/prefsui.glade:1523
+msgid "Logarithmic"
+msgstr "Logaritmikus"
+
+#. 5.6->settings-schema.json->Net_minPrefix->description
+#. 5.6->settings-schema.json->Disk_minPrefix->description
+msgid "Minimal prefix"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Byte"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "kilo"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Mega"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Giga"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Tera"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Peta"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Exa"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Zetta"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Yotta"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->tooltip
+#. 5.6->settings-schema.json->Disk_minPrefix->tooltip
+msgid ""
+"You can specify the minimum unit of measurement of your choice for the "
+"amount of data transferred: byte, kilobyte, megabyte, etc."
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_symbolsInTooltip->description
+#. 5.6->settings-schema.json->Disk_symbolsInTooltip->description
+msgid "Use symbols instead of words"
+msgstr "Szimbólumokat használata szavak helyett"
+
+#. 5.6->settings-schema.json->Net_getdevlist_btn->description
+#. 5.6->settings-schema.json->Disk_getdevlist_btn->description
+#. 5.6->settings-schema.json->Battery_getdevlist_btn->description
+msgid "Update this device list"
+msgstr "Eszközlista frissítése"
+
+#. 5.6->settings-schema.json->Net_devicesList->columns->title
+#. 5.6->settings-schema.json->Disk_devicesList->columns->title
+#. 5.6->settings-schema.json->DiskUsage_pathList->columns->title
+#. 5.6->settings-schema.json->Battery_devicesList->columns->title
+msgid "Enabled"
+msgstr "Engedélyezve"
+
+#. 5.6->settings-schema.json->Net_devicesList->columns->title
+#. 5.6->settings-schema.json->Battery_devicesList->columns->title
+msgid "⚠️ Id️"
+msgstr "⚠️ azonosító"
+
+#. 5.6->settings-schema.json->Net_devicesList->columns->title
+msgid "Color Down"
+msgstr "Szín le"
+
+#. 5.6->settings-schema.json->Net_devicesList->columns->title
+msgid "Color Up"
+msgstr "Szín fel"
+
+#. 5.6->settings-schema.json->Net_devicesList->columns->title
+msgid "Part of total"
+msgstr "A teljes összeg egy része"
+
+#. 5.6->settings-schema.json->Net_cleardevlist_btn->description
+#. 5.6->settings-schema.json->Disk_cleardevlist_btn->description
+#. 5.6->settings-schema.json->Battery_cleardevlist_btn->description
+msgid "Clear this device list"
+msgstr "Eszközlista törlése"
+
+#. 5.6->settings-schema.json->Net_total_type->description
+msgid "Total amount or speed"
+msgstr "Teljes összeg vagy sebesség"
+
+#. 5.6->settings-schema.json->Net_total_type->options
+msgid "Total transfer amount (Bytes)"
+msgstr "Teljes átutalási összeg (bájt)"
+
+#. 5.6->settings-schema.json->Net_total_type->options
+msgid "Instant network speed (Bytes per second)"
+msgstr "Azonnali hálózati sebesség (bájt másodpercenként)"
+
+#. 5.6->settings-schema.json->Net_total_display->description
+#. 5.6->settings-schema.json->Disk_speed_display->description
+msgid "Display that"
+msgstr "Mutasd meg, hogy"
+
+#. 5.6->settings-schema.json->Net_total_display->tooltip
+#. 5.6->settings-schema.json->Disk_speed_display->tooltip
+msgid ""
+"Be sure to check at least one “Part of total” box among the enabled devices."
+msgstr ""
+"Ügyeljen arra, hogy legalább egy „A teljes mennyiség része” jelölőnégyzetet "
+"bejelöljön az engedélyezett eszközök közül."
+
+#. 5.6->settings-schema.json->Net_totalCorner->description
+#. 5.6->settings-schema.json->Disk_speedCorner->description
+msgid "Corner in which to display that"
+msgstr "Sarok, ahol ki lehet helyezni"
+
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Right Only"
+msgstr "Csak jobbra"
+
+#. 5.6->settings-schema.json->Net_totalCorner->options
+#. 5.6->settings-schema.json->Disk_speedCorner->options
+msgid "Left Only"
+msgstr "Csak balra"
+
+#. 5.6->settings-schema.json->Disk_devicesList->columns->title
+msgid "⚠️ Id"
+msgstr "⚠️ azonosító"
+
+#. 5.6->settings-schema.json->Disk_devicesList->columns->title
+msgid "⚠️ Sector Size"
+msgstr "⚠️ Szektorméret"
+
+#. 5.6->settings-schema.json->Disk_devicesList->columns->title
+msgid "Color Read"
+msgstr "Szín Olvasás"
+
+#. 5.6->settings-schema.json->Disk_devicesList->columns->title
+msgid "Color Write"
+msgstr "Szín Írás"
+
+#. 5.6->settings-schema.json->DiskUsage_value_display->description
+#. 5.6->settings-schema.json->Battery_value_display->description
+msgid "Display value"
+msgstr "Kijelzett érték"
+
+#. 5.6->settings-schema.json->DiskUsage_colorAlert->description
+#. 5.6->settings-schema.json->Battery_colorAlert->description
+msgid "Alert"
+msgstr "Riasztás"
+
+#. 5.6->settings-schema.json->DiskUsage_getpathlist_btn->description
+msgid "Update this path list"
+msgstr "Frissítse ezt az elérési útlistát"
+
+#. 5.6->settings-schema.json->DiskUsage_pathList->columns->title
+#. 5.6->settings-schema.json->Battery_devicesList->columns->title
+msgid ""
+"Alert when\n"
+"value (in %)\n"
+"reaches"
+msgstr ""
+"Riasztás, amikor\n"
+"az érték (%-ban)\n"
+"eléri a"
+
+#. 5.6->settings-schema.json->DiskUsage_pathList->columns->title
+msgid "Path"
+msgstr "Útvonal"
+
+#. 5.6->settings-schema.json->Battery_colorLoad->description
+msgid "Load"
+msgstr "Betöltés"
+
+#. 5.6->settings-schema.json->Battery_colorUnload->description
+msgid "Unload"
+msgstr "Kitöltés"
+
+#. 5.6->settings-schema.json->color0->description
+msgid "Color #0"
+msgstr "Szín #0"
+
+#. 5.6->settings-schema.json->color1->description
+msgid "Color #1"
+msgstr "Szín #1"
+
+#. 5.6->settings-schema.json->color2->description
+msgid "Color #2"
+msgstr "Szín #2"
+
+#. 5.6->settings-schema.json->color3->description
+msgid "Color #3"
+msgstr "Szín #3"
+
+#. 5.6->settings-schema.json->color4->description
+msgid "Color #4"
+msgstr "Szín #4"
+
+#. 5.6->settings-schema.json->color5->description
+msgid "Color #5"
+msgstr "Szín #5"
+
+#. 5.6->settings-schema.json->color6->description
+msgid "Color #6"
+msgstr "Szín #6"
+
+#. 5.6->settings-schema.json->color7->description
+msgid "Color #7"
+msgstr "Szín #7"
+
+#. 5.6->settings-schema.json->color8->description
+msgid "Color #8"
+msgstr "Szín #8"
+
+#. 5.6->settings-schema.json->color9->description
+msgid "Color #9"
+msgstr "Szín #9"
+
+#. 5.6->settings-schema.json->color10->description
+msgid "Color #10"
+msgstr "Szín #10"
+
+#. 5.6->settings-schema.json->color11->description
+msgid "Color #11"
+msgstr "Szín #11"
+
+#. 5.6->settings-schema.json->color12->description
+msgid "Color #12"
+msgstr "Szín #12"
+
+#. 5.6->settings-schema.json->color13->description
+msgid "Color #13"
+msgstr "Szín #13"
+
+#. 5.6->settings-schema.json->color14->description
+msgid "Color #14"
+msgstr "Szín #14"
+
+#. 5.6->settings-schema.json->color15->description
+msgid "Color #15"
+msgstr "Szín #15"
+
+#. 5.6->settings-schema.json->color16->description
+msgid "Color #16"
+msgstr "Szín #16"
+
+#. 5.6->settings-schema.json->color17->description
+msgid "Color #17"
+msgstr "Szín #17"
+
+#. 5.6->settings-schema.json->color18->description
+msgid "Color #18"
+msgstr "Szín #18"
+
+#. 5.6->settings-schema.json->color19->description
+msgid "Color #19"
+msgstr "Szín #19"
+
+#. 5.6->settings-schema.json->color20->description
+msgid "Color #20"
+msgstr "Szín #20"
+
+#. 5.6->settings-schema.json->color21->description
+msgid "Color #21"
+msgstr "Szín #21"
+
+#. 5.6->settings-schema.json->color22->description
+msgid "Color #22"
+msgstr "Szín #22"
+
+#. 5.6->settings-schema.json->color23->description
+msgid "Color #23"
+msgstr "Szín #23"
+
+#. 5.6->settings-schema.json->color24->description
+msgid "Color #24"
+msgstr "Szín #24"
+
+#. 5.6->settings-schema.json->color25->description
+msgid "Color #25"
+msgstr "Szín #25"
+
+#. 5.6->settings-schema.json->color26->description
+msgid "Color #26"
+msgstr "Szín #26"
+
+#. 5.6->settings-schema.json->color27->description
+msgid "Color #27"
+msgstr "Szín #27"
+
+#. 5.6->settings-schema.json->color28->description
+msgid "Color #28"
+msgstr "Szín #28"
+
+#. 5.6->settings-schema.json->color29->description
+msgid "Color #29"
+msgstr "Szín #29"
+
+#. 5.6->settings-schema.json->color30->description
+msgid "Color #30"
+msgstr "Szín #30"
+
+#. 5.6->settings-schema.json->color31->description
+msgid "Color #31"
+msgstr "Szín #31"
+
+#. 5.6->settings-schema.json->labelWarning->description
+msgid "Data marked with ⚠️ must not be changed!"
+msgstr "A ⚠️-gal jelölt adatokat tilos megváltoztatni!"
+
+#. 3.0/prefsui.glade:49 3.2/prefsui.glade:49 3.4/prefsui.glade:49
+#. 4.0/prefsui.glade:56
+msgid "Multi-Core System Monitor Preferences"
+msgstr "Többmagos rendszerfigyelő beállításai"
+
+#. 3.0/prefsui.glade:189 3.2/prefsui.glade:189
+msgid "Height"
+msgstr "Magasság"
+
+#. 3.0/prefsui.glade:645 3.2/prefsui.glade:697 3.4/prefsui.glade:625
+#. 4.0/prefsui.glade:771
+msgid "Cached"
+msgstr "Gyorsítótárazott"
+
+#. 3.0/prefsui.glade:1550 3.2/prefsui.glade:1602 3.4/prefsui.glade:1549
+#. 4.0/prefsui.glade:1695
+msgid "Scaling Description"
+msgstr "Méretezés leírása"
+
+#. 3.0/prefsui.glade:1562 3.2/prefsui.glade:1614 3.4/prefsui.glade:1564
+#. 4.0/prefsui.glade:1710
+msgid "Close"
+msgstr "Bezárás"
+
+#. 3.0/prefsui.glade:1592 3.2/prefsui.glade:1644 3.4/prefsui.glade:1594
+msgid ""
+"Auto Scaling:\n"
+"\tThis will scale the line graph by the largest reading within the\n"
+"\tdisplayed area. Once the largest reading is no longer displayed\n"
+"\tthe next largest becomes the new value by which the readings\n"
+"\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"\tHowever, it also means that if there is a large reading small readings\n"
+"\tmay become indistinguishable from 0. And if there are only small readings\n"
+"\tthen slightly larger readings may appear larger than they should.\n"
+"\tIf not enabled the largest value used will be the largest reading since\n"
+"\tcinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"\tThis transforms the readings so that they are displayed using a\n"
+"\tlogarithmic scale. If you are not familiar basically, it reduces the\n"
+"\tlarge values so that they dont dominate the smaller readings."
+msgstr ""
+"Automatikus méretezés:\n"
+"\tEz a vonaldiagramot a legnagyobb értékkel méretezi\n"
+"\ta megjelenített területen belül. Miután a legnagyobb érték már nem jelenik "
+"meg\n"
+"\ta következő legnagyobb lesz az az új érték, amellyel a diagram\n"
+"\tméreteződik. Ez lehetővé teszi a diagram \"nagyítását\" a grafikon "
+"részleteinek megjelenítéséhez.\n"
+"\tEz azonban azt is jelenti, hogy ha van egy nagy érték, akkor a kicsi "
+"értékek\n"
+"\ta 0-tól megkülönböztethetetlenné válhatnak. Továbbá, ha csak kis értékek "
+"vannak\n"
+"\takkor a valamivel nagyobb értékek nagyobbnak tűnhetnek a kelleténél.\n"
+"\tHa nincs engedélyezve, akkor a Cinnamon indítása óta mért legnagyobb "
+"érték\n"
+"\tlesz a meghatározó.\n"
+"\n"
+"Logaritmikus méretezés:\n"
+"\tEz átalakítja az értékeket úgy, hogy azok logaritmikus skála "
+"segítségével \n"
+"\tjelenjenek meg. Ha nem ismerné, ez csökkenti a nagy értékeket, \n"
+"\tígy azok nem nyomják el a kisebb értékeket."
+
+#. 4.0/prefsui.glade:508
+msgid "by CPU:"
+msgstr "CPU:"
+
+#. 4.0/prefsui.glade:1740
+msgid ""
+"Auto Scaling:\n"
+"    This will scale the line graph by the largest reading within the\n"
+"    displayed area. Once the largest reading is no longer displayed\n"
+"    the next largest becomes the new value by which the readings\n"
+"    are scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"    However, it also means that if there is a large reading small readings\n"
+"    may become indistinguishable from 0. And if there are only small "
+"readings\n"
+"    then slightly larger readings may appear larger than they should.\n"
+"    If not enabled the largest value used will be the largest reading since\n"
+"    cinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"    This transforms the readings so that they are displayed using a\n"
+"    logarithmic scale. If you are not familiar basically, it reduces the\n"
+"    large values so that they dont dominate the smaller readings."
+msgstr ""
+"Automatikus méretezés:\n"
+"\tEz a vonaldiagramot a legnagyobb értékkel méretezi\n"
+"\ta megjelenített területen belül. Miután a legnagyobb érték már nem jelenik "
+"meg\n"
+"\ta következő legnagyobb lesz az az új érték, amellyel a diagram\n"
+"\tméreteződik. Ez lehetővé teszi a diagram \"nagyítását\" a grafikon "
+"részleteinek megjelenítéséhez.\n"
+"\tEz azonban azt is jelenti, hogy ha van egy nagy érték, akkor a kicsi "
+"értékek\n"
+"\ta 0-tól megkülönböztethetetlenné válhatnak. Továbbá, ha csak kis értékek "
+"vannak\n"
+"\takkor a valamivel nagyobb értékek nagyobbnak tűnhetnek a kelleténél.\n"
+"\tHa nincs engedélyezve, akkor a Cinnamon indítása óta mért legnagyobb "
+"érték\n"
+"\tlesz a meghatározó.\n"
+"\n"
+"Logaritmikus méretezés:\n"
+"\tEz átalakítja az értékeket úgy, hogy azok logaritmikus skála "
+"segítségével \n"
+"\tjelenjenek meg. Ha nem ismerné, ez csökkenti a nagy értékeket, \n"
+"\tígy azok nem nyomják el a kisebb értékeket."

@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-23 10:37+0800\n"
+"PO-Revision-Date: 2025-05-06 23:26+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: applet.js:47
+msgid "Your local IPs."
+msgstr "您的本機 IP 位址。"
+
+#. localipswithsettings@edaubert->metadata.json->description
+msgid "Shows local IP addresses."
+msgstr "顯示本機 IP 位址。"
+
+#. localipswithsettings@edaubert->metadata.json->name
+msgid "Local IPs with settings"
+msgstr "本機 IP 位址與設定"
+
+#. localipswithsettings@edaubert->settings-
+#. schema.json->refreshInterval->description
+msgid "Update interval"
+msgstr "更新間隔時間"
+
+#. localipswithsettings@edaubert->settings-schema.json->refreshInterval->units
+msgid "seconds"
+msgstr "秒"
+
+#. localipswithsettings@edaubert->settings-schema.json->IPv4->description
+msgid "Display IPv4 information"
+msgstr "顯示 IPv4 資訊"
+
+#. localipswithsettings@edaubert->settings-schema.json->inet->description
+msgid ""
+"List all interfaces we want to display.\n"
+"Separated by comma.\n"
+"Regex is accepted (usefull to list all docker interfaces for example)"
+msgstr ""
+"列出所有要顯示的介面。\n"
+"以逗號分隔。\n"
+"支援正規表示式（例如用於列出所有 docker 介面）"
+
+#. localipswithsettings@edaubert->settings-schema.json->IPv6->description
+msgid "Display IPv6 information"
+msgstr "顯示 IPv6 資訊"

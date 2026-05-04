@@ -1,0 +1,107 @@
+# SYSTEM MONITOR
+# This file is put in the public domain.
+# 222rohan, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sysmon@rohan 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-15 01:04+0530\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:20
+msgid "Required GTop package missing!: "
+msgstr "Es necessita el paquet GTop!: "
+
+#. applet.js:36
+msgid "Error!"
+msgstr "Error!"
+
+#. applet.js:42
+msgid "Required GTop package missing!"
+msgstr "Es necessita el paquet GTop!"
+
+#. applet.js:47
+msgid "Clear Cache"
+msgstr "Eliminar cau"
+
+#. applet.js:157
+msgid "CPUs"
+msgstr "CPUs"
+
+#. applet.js:169
+msgid "Memory"
+msgstr "Memòria"
+
+#. applet.js:169
+msgid "GB"
+msgstr "GB"
+
+#. applet.js:169
+msgid "GB swap"
+msgstr "GB intercanvi"
+
+#. applet.js:257
+msgid "Core "
+msgstr "Nucli "
+
+#. applet.js:299
+msgid "Used:   "
+msgstr "Utilitzat:   "
+
+#. applet.js:299 applet.js:300 applet.js:301 applet.js:302 applet.js:305
+msgid " GB"
+msgstr " GB"
+
+#. applet.js:300
+msgid "Cache:  "
+msgstr "Cau:  "
+
+#. applet.js:301
+msgid "Buffer: "
+msgstr "Buffer: "
+
+#. applet.js:302
+msgid "Free:   "
+msgstr "Lliure:   "
+
+#. applet.js:305
+msgid "Swap:   "
+msgstr "Intercanvi:   "
+
+#. metadata.json->name
+msgid "System Monitor"
+msgstr "Monitor del sistema"
+
+#. metadata.json->description
+msgid "Display CPU and Memory Usage."
+msgstr "Mostra l'ús de CPU i memòria"
+
+#. settings-schema.json->displayCpu->description
+msgid "Show CPU usage"
+msgstr "Mostra l'ús de CPU"
+
+#. settings-schema.json->displayRam->description
+msgid "Show RAM usage"
+msgstr "Mostra l'ús de la memòria"
+
+#. settings-schema.json->toggleRam->description
+msgid "Display RAM usage in Bytes"
+msgstr "Mostra l'ús de la memòria en Bytes"
+
+#. settings-schema.json->updateInterval->units
+msgid "seconds"
+msgstr "segons"
+
+#. settings-schema.json->updateInterval->description
+msgid "Update Interval:"
+msgstr "Interval de refresc:"

@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2024-04-21 11:44+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:125
+msgid "Clear"
+msgstr "Wissen"
+
+#. applet.js:158
+msgid "Graphics"
+msgstr "Grafische toepassingen"
+
+#. applet.js:237
+msgid "LAUNCHERS"
+msgstr "STARTERS"
+
+#. applet.js:262
+msgid "PICTURES"
+msgstr "AFBEELDINGEN"
+
+#. applet.js:273
+msgid "Open folder"
+msgstr "Map openen"
+
+#. applet.js:300
+msgid "RECENT DOCUMENTS"
+msgstr "RECENTE DOCUMENTEN"
+
+#. metadata.json->name
+msgid "Graphics Center"
+msgstr "Graphics Center"
+
+#. metadata.json->description
+msgid "Provides an easy and fast resource for all your picture needs"
+msgstr "Biedt een eenvoudige en snelle bron voor al uw afbeeldingsbehoeften"
+
+#. metadata.json->comments
+msgid ""
+"Graphics Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy aceess to all of your graphics programs and pictures. Feel "
+"free to contribute by submitting pull requests, bug reports and feature "
+"requests to my github repo."
+msgstr ""
+"Graphics Center is een functierijke, platformonafhankelijke Cinnamon-applet "
+"die eenvoudige toegang biedt tot al uw grafische programma's en "
+"afbeeldingen. Voel je vrij om bij te dragen door pull requests, bugrapporten "
+"en functieverzoeken in te dienen bij mijn GitHub-repo."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Auteur"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Algemene instellingen"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Paneelicoon"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr "Accepteert icoonnaam of direct pad (ondersteunt symbolische iconen)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Paneeltekst"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shorcut key"
+msgstr "Sneltoets voor menu"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Pictogramgrootte van menu"
+
+#. settings-schema.json->pictures->description
+msgid "Pictures"
+msgstr "Afbeeldingen"
+
+#. settings-schema.json->showPictures->description
+msgid "Show contents of pictures directory"
+msgstr "Toon inhoud van de map Afbeeldingen"
+
+#. settings-schema.json->recursePictures->description
+msgid "Show contents of subfolders"
+msgstr "Toon inhoud van submappen"
+
+#. settings-schema.json->altDir->description
+msgid "Use alternate directory"
+msgstr "Gebruik alternatieve map"
+
+#. settings-schema.json->pictureSize->description
+msgid "Thumbnail size"
+msgstr "Miniatuurgrootte"
+
+#. settings-schema.json->recent->description
+msgid "Recent Documents"
+msgstr "Recente documenten"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Toon recente documenten"
+
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Aantal te tonen"
