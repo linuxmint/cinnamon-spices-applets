@@ -559,7 +559,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._resizer = new Applet.PopupResizeHandler(
             this.menu.actor,
             () => this.orientation,
-            (w,h) => this._onBoxResized(w,h),
+            (w,h) => this._onBoxResized(Math.max(w, 300 * this.real_ui_scale), h),
             () => this.popup_width * this.real_ui_scale,
             () => this.popup_height * this.real_ui_scale
         );

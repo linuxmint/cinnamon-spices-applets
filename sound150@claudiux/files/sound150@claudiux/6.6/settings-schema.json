@@ -61,6 +61,7 @@
       "type": "section",
       "title": "Menu",
       "keys": [
+        "userMenuWidth",
         "playerControl",
         "extendedPlayerControl",
         "keepPlayerListOpen",
@@ -969,8 +970,12 @@
     "default": 0.05
   },
   "userMenuWidth": {
-    "type": "generic",
-    "default": 450
+    "type": "scale",
+    "default": 450,
+    "min": 300,
+    "max": 1900,
+    "step": 1,
+    "description": "Menu width (in pixels)"
   },
   "userMenuHeight": {
     "type": "generic",
