@@ -1787,6 +1787,10 @@ class MCSM extends Applet.IconApplet {
         this.closeSettingsWindow();
     }
 
+    openEmojiDB() {
+        Util.spawn_async(["xdg-open", "https://emojidb.org/"], null)
+    }
+
     get _isHighlighted() {
         let isHL = this.actor.has_style_pseudo_class("highlight");
         if (this.isHighlighted !== isHL)
@@ -2499,8 +2503,8 @@ class DiskDataProvider {
                 toolTipString += this.currentReadings[i].name.padEnd(22) + "\n";
 
             if (this.applet.Disk_symbolsInTooltip) {
-                toolTipString += (" ▲" + _(":")).split(":")[0].padStart(spaces, " ") + ":" + "\t" + "" + read.padStart(8, " ") + " " + read_unit.padStart(6, " ") + "\n";
-                toolTipString += (" ▼︎" + _(":")).split(":")[0].padStart(spaces + 1, " ") + ":" + "\t" + "" + write.padStart(8, " ") + " " + write_unit.padStart(6, " ") + "\n";
+                toolTipString += (" ▼" + _(":")).split(":")[0].padStart(spaces, " ") + ":" + "\t" + "" + read.padStart(8, " ") + " " + read_unit.padStart(6, " ") + "\n";
+                toolTipString += (" ︎▲" + _(":")).split(":")[0].padStart(spaces + 1, " ") + ":" + "\t" + "" + write.padStart(8, " ") + " " + write_unit.padStart(6, " ") + "\n";
             } else {
                 toolTipString += _("Read:").split(":")[0].padStart(spaces, " ") + ":" + "\t" + "" + read.padStart(8, " ") + " " + read_unit.padStart(6, " ") + "\n";
                 toolTipString += _("Write:").split(":")[0].padStart(spaces, " ") + ":" + "\t" + "" + write.padStart(8, " ") + " " + write_unit.padStart(6, " ") + "\n";
