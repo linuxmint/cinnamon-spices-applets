@@ -158,7 +158,8 @@
         "tooltipUsageUseCustomTranslation",
         "tooltipUsageCustomTranslation",
         "tooltipBatteryUseCustomTranslation",
-        "tooltipBatteryCustomTranslation"
+        "tooltipBatteryCustomTranslation",
+        "emojidb_btn"
       ]
     },
     "sectionCPUOptions": {
@@ -747,6 +748,11 @@
     "type": "entry",
     "default": "🗲",
     "description": "Battery becomes:"
+  },
+  "emojidb_btn": {
+    "type": "button",
+    "description": "Open emoji database",
+    "callback": "openEmojiDB"
   },
   "removeEnlightenment": {
     "type": "button",
