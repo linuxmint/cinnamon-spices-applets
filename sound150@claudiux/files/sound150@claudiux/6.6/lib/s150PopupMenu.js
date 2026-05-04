@@ -766,18 +766,18 @@ class Player extends PopupMenu.PopupMenuSection {
                         this._trackCoverFileTmp = Gio.file_new_tmp("XXXXXX.mediaplayer-cover")[0];
 
                     // Method using wget:
-                    //~ Util.spawn_async(["wget", this._trackCoverFile, "-O", this._trackCoverFileTmp.get_path()], () => this._onDownloadedCover());
+                    Util.spawn_async(["wget", this._trackCoverFile, "-O", this._trackCoverFileTmp.get_path()], () => this._onDownloadedCover());
 
-                    // Method using HttpLib:
-                    global.log("!!! Using HttpLib !!!");
-                    var http = new HttpLib();
-                    let response = await http.LoadAsync(this._trackCoverFile);
-                    let _trackCoverFilePath = this._trackCoverFileTmp.get_path();
-                    if (response.Success) {
-                        GLib.file_set_contents(_trackCoverFilePath, response.Data);
-                    } else {
-                        global.logError(`Unable to download ${this._trackCoverFile} in ${_trackCoverFilePath}`);
-                    }
+                    // Method using HttpLib://FIXME!!! No image is loaded!
+                    //~ global.log("!!! Using HttpLib !!!");
+                    //~ var http = new HttpLib();
+                    //~ let response = await http.LoadAsync(this._trackCoverFile);
+                    //~ let _trackCoverFilePath = this._trackCoverFileTmp.get_path();
+                    //~ if (response.Success) {
+                        //~ GLib.file_set_contents(_trackCoverFilePath, response.Data);
+                    //~ } else {
+                        //~ global.logError(`Unable to download ${this._trackCoverFile} in ${_trackCoverFilePath}`);
+                    //~ }
                 } else if (this._trackCoverFile.match(/data:image\/(png|jpeg);base64,/)) {
                     if (!this._trackCoverFileTmp)
                         this._trackCoverFileTmp = Gio.file_new_tmp("XXXXXX.mediaplayer-cover")[0];
