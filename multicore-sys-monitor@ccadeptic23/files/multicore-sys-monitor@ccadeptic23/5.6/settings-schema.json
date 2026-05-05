@@ -30,7 +30,8 @@
         "sectionCPULabel",
         "sectionCPUColors",
         "sectionCPUColorsByActivity",
-        "sectionCPUTemperature"
+        "sectionCPUTemperature",
+        "sectionCPULoadAverage"
       ]
     },
     "pageMem": {
@@ -194,6 +195,21 @@
         "CPU_tempColorCrit",
         "CPU_tempCorner",
         "CPU_tempFontFactor"
+      ]
+    },
+    "sectionCPULoadAverage": {
+      "type": "section",
+      "title": "Average Load",
+      "keys": [
+        "CPU_showLoadAverage",
+        "CPU_loadAverage_hovering_only",
+        "CPU_loadAverageHigh",
+        "CPU_loadAverageCrit",
+        "CPU_loadAverageColor",
+        "CPU_loadAverageColorHigh",
+        "CPU_loadAverageColorCrit",
+        "CPU_loadAverageCorner",
+        "CPU_loadAverageFontFactor"
       ]
     },
     "sectionCPULabel": {
@@ -950,6 +966,66 @@
     }
   },
   "CPU_tempFontFactor": {
+    "type": "scale",
+    "default": 33,
+    "min": 20,
+    "max": 60,
+    "step": 1,
+    "units": "%",
+    "description": "Font size: percentage of the box height"
+  },
+  "CPU_showLoadAverage": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the CPU average load"
+  },
+  "CPU_loadAverage_hovering_only": {
+    "type": "switch",
+    "default": false,
+    "description": "Only display when hovering over this applet",
+    "dependency": "CPU_showLoadAverage"
+  },
+  "CPU_loadAverageHigh": {
+    "type": "entry",
+    "default": "75",
+    "expand-width": true,
+    "description": "High CPU Load (%)",
+    "tooltip": "Refer to your CPU documentation."
+  },
+  "CPU_loadAverageCrit": {
+    "type": "entry",
+    "default": "90",
+    "expand-width": true,
+    "description": "Critical CPU Load (%)",
+    "tooltip": "Refer to your CPU documentation.\nMust be greater than the High CPU Load."
+  },
+  "CPU_loadAverageColor": {
+    "type": "colorchooser",
+    "default": "rgba(238, 238, 236, 1)",
+    "description": "Normal Average Load Color"
+  },
+  "CPU_loadAverageColorHigh": {
+    "type": "colorchooser",
+    "default": "rgba(255, 120, 0, 1)",
+    "description": "High Average Load Color"
+  },
+  "CPU_loadAverageColorCrit": {
+    "type": "colorchooser",
+    "default": "rgba(224, 27, 36, 1)",
+    "description": "Critical Average Load Color"
+  },
+  "CPU_loadAverageCorner": {
+    "type": "combobox",
+    "default": "TL",
+    "description": "Corner in which to display the average load",
+    "options": {
+      "Top Right": "TR",
+      "Top Left": "TL",
+      "Bottom Right": "BR",
+      "Bottom Left": "BL"
+    }
+  },
+  "CPU_loadAverageFontFactor": {
     "type": "scale",
     "default": 33,
     "min": 20,

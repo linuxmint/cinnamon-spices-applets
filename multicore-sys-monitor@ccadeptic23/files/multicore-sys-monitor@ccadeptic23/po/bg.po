@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-05-04 13:08+0200\n"
+"POT-Creation-Date: 2026-05-05 19:36+0200\n"
 "PO-Revision-Date: 2017-11-19 20:23+0200\n"
 "Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
@@ -21,8 +21,8 @@ msgstr ""
 
 #. 5.6->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
-#. 3.2/prefs.js:187 3.4/DataProviders.js:58 3.4/prefs.js:195 5.6/applet.js:79
-#. 5.6/applet.js:879 5.6/applet.js:2039 5.6/applet.js:2107 5.6/applet.js:2118
+#. 3.2/prefs.js:187 3.4/DataProviders.js:58 3.4/prefs.js:195 5.6/applet.js:78
+#. 5.6/applet.js:879 5.6/applet.js:2034 5.6/applet.js:2094 5.6/applet.js:2105
 #. 4.0/DataProviders.js:55 4.0/prefs.js:303 3.0/prefsui.glade:452
 #. 3.2/prefsui.glade:504 3.4/prefsui.glade:434 4.0/prefsui.glade:580
 msgid "CPU"
@@ -34,12 +34,12 @@ msgid "------------- CPU ------------"
 msgstr "------------- ЦПУ ------------"
 
 #. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 3.4/DataProviders.js:129
-#. 5.6/applet.js:2127 4.0/DataProviders.js:126
+#. 5.6/applet.js:2114 4.0/DataProviders.js:126
 msgid "Core"
 msgstr "Ядро"
 
 #. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 3.4/DataProviders.js:141
-#. 5.6/applet.js:80 5.6/applet.js:1806 4.0/DataProviders.js:138
+#. 5.6/applet.js:79 5.6/applet.js:1808 4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "ПМТ"
 
@@ -53,22 +53,22 @@ msgid "Usedup:"
 msgstr "Използвана:"
 
 #. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 3.4/DataProviders.js:162
-#. 5.6/applet.js:1879 4.0/DataProviders.js:159
+#. 5.6/applet.js:1881 4.0/DataProviders.js:159
 msgid "Cached:"
 msgstr "Кеширана:"
 
 #. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 3.4/DataProviders.js:162
-#. 5.6/applet.js:1879 4.0/DataProviders.js:159
+#. 5.6/applet.js:1881 4.0/DataProviders.js:159
 msgid "Buffer:"
 msgstr "Буфер:"
 
 #. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 3.4/DataProviders.js:162
-#. 5.6/applet.js:51 5.6/applet.js:1879 4.0/DataProviders.js:159
+#. 5.6/applet.js:51 5.6/applet.js:1881 4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "Свободна:"
 
 #. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 3.4/DataProviders.js:176
-#. 5.6/applet.js:1964 4.0/DataProviders.js:173
+#. 5.6/applet.js:1966 4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "SWAP"
 
@@ -79,15 +79,15 @@ msgstr "------------ Swap ------------"
 
 #. 5.6->settings-schema.json->Mem_colorSwap->description
 #. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 3.4/DataProviders.js:195
-#. 5.6/applet.js:52 5.6/applet.js:1997 4.0/DataProviders.js:194
+#. 5.6/applet.js:52 5.6/applet.js:1999 4.0/DataProviders.js:194
 #. 3.0/prefsui.glade:785 3.2/prefsui.glade:837 3.4/prefsui.glade:761
 #. 4.0/prefsui.glade:907
 msgid "Swap"
 msgstr "Swap"
 
 #. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 3.4/DataProviders.js:205
-#. 5.6/applet.js:81 5.6/applet.js:2157 5.6/lib/Graphs.js:818
-#. 5.6/lib/Graphs.js:850 5.6/lib/Graphs.js:1080 5.6/lib/Graphs.js:1128
+#. 5.6/applet.js:80 5.6/applet.js:2144 5.6/lib/Graphs.js:864
+#. 5.6/lib/Graphs.js:896 5.6/lib/Graphs.js:1123 5.6/lib/Graphs.js:1171
 #. 4.0/DataProviders.js:204
 msgid "NET"
 msgstr "МРЖ"
@@ -98,7 +98,7 @@ msgid "---------- Networks ----------"
 msgstr "----------- Мрежи ------------"
 
 #. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 3.4/DataProviders.js:300
-#. 5.6/applet.js:54 5.6/applet.js:2329 4.0/DataProviders.js:298
+#. 5.6/applet.js:54 5.6/applet.js:2316 4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "Сваляне:"
 
@@ -108,13 +108,13 @@ msgid "(KiB/s)"
 msgstr "(КиБ/с)"
 
 #. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 3.4/DataProviders.js:301
-#. 5.6/applet.js:55 5.6/applet.js:2330 4.0/DataProviders.js:299
+#. 5.6/applet.js:55 5.6/applet.js:2317 4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "Качване:"
 
 #. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 3.4/DataProviders.js:317
-#. 5.6/applet.js:82 5.6/applet.js:2352 5.6/applet.js:2532 5.6/lib/Graphs.js:812
-#. 5.6/lib/Graphs.js:851 5.6/lib/Graphs.js:1081 5.6/lib/Graphs.js:1139
+#. 5.6/applet.js:81 5.6/applet.js:2339 5.6/applet.js:2519 5.6/lib/Graphs.js:858
+#. 5.6/lib/Graphs.js:897 5.6/lib/Graphs.js:1124 5.6/lib/Graphs.js:1182
 #. 4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "ДИСК"
@@ -125,7 +125,7 @@ msgid "------------ Disks -----------"
 msgstr "----------- Дискове ----------"
 
 #. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 3.4/DataProviders.js:386
-#. 5.6/applet.js:56 5.6/applet.js:2509 4.0/DataProviders.js:384
+#. 5.6/applet.js:56 5.6/applet.js:2496 4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "Четене:"
 
@@ -135,7 +135,7 @@ msgid "(MiB/s)"
 msgstr "(МиБ/с)"
 
 #. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 3.4/DataProviders.js:387
-#. 5.6/applet.js:57 5.6/applet.js:2510 4.0/DataProviders.js:385
+#. 5.6/applet.js:57 5.6/applet.js:2497 4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "Запис:"
 
@@ -197,8 +197,8 @@ msgstr "Грешка при запазването на файла:"
 msgid "/s"
 msgstr "/с"
 
-#. 3.4/DataProviders.js:162 5.6/applet.js:49 5.6/applet.js:1869
-#. 5.6/applet.js:1876 5.6/applet.js:1879 5.6/applet.js:2010
+#. 3.4/DataProviders.js:162 5.6/applet.js:49 5.6/applet.js:1871
+#. 5.6/applet.js:1878 5.6/applet.js:1881 5.6/applet.js:2012
 #. 4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "Използвани:"
@@ -242,11 +242,11 @@ msgstr ""
 msgid "Unload:"
 msgstr ""
 
-#. 5.6/applet.js:83
+#. 5.6/applet.js:82
 msgid "DISK USAGE"
 msgstr ""
 
-#. 5.6/applet.js:84
+#. 5.6/applet.js:83
 msgid "BATTERY"
 msgstr ""
 
@@ -279,13 +279,13 @@ msgid "General"
 msgstr "Общи"
 
 #. 5.6->settings-schema.json->pageMem->title
-#. 5.6/applet.js:880 5.6/applet.js:1859 3.0/prefsui.glade:832
+#. 5.6/applet.js:880 5.6/applet.js:1861 3.0/prefsui.glade:832
 #. 3.2/prefsui.glade:884 3.4/prefsui.glade:808 4.0/prefsui.glade:954
 msgid "Memory"
 msgstr "Памет"
 
 #. 5.6->settings-schema.json->pageNetwork->title
-#. 5.6/applet.js:881 5.6/applet.js:1424 5.6/applet.js:2167
+#. 5.6/applet.js:881 5.6/applet.js:1428 5.6/applet.js:2154
 #. 3.0/prefsui.glade:1154 3.2/prefsui.glade:1206 3.4/prefsui.glade:1143
 #. 4.0/prefsui.glade:1289
 msgid "Network"
@@ -304,7 +304,7 @@ msgid "Disk Usage"
 msgstr "Диск В/И"
 
 #. 5.6->settings-schema.json->pageBattery->title
-#. 5.6/applet.js:884 5.6/applet.js:2644
+#. 5.6/applet.js:884 5.6/applet.js:2630
 msgid "Battery"
 msgstr ""
 
@@ -324,58 +324,58 @@ msgstr "Цветове"
 msgid "root"
 msgstr ""
 
-#. 5.6/applet.js:1532 5.6/applet.js:2363 5.6/applet.js:2459 5.6/applet.js:2583
-#. 5.6/applet.js:2585
+#. 5.6/applet.js:1536 5.6/applet.js:2350 5.6/applet.js:2446 5.6/applet.js:2570
+#. 5.6/applet.js:2572
 #, fuzzy
 msgid "Disks"
 msgstr "Диск В/И"
 
-#. 5.6/applet.js:1870 5.6/applet.js:1877 5.6/applet.js:2011
+#. 5.6/applet.js:1872 5.6/applet.js:1879 5.6/applet.js:2013
 msgid "Available:"
 msgstr ""
 
-#. 5.6/applet.js:1903
+#. 5.6/applet.js:1905
 msgid "Buffers/Cache/Shared"
 msgstr ""
 
-#. 5.6/applet.js:1935 5.6/applet.js:2094 5.6/applet.js:2326 5.6/applet.js:2327
-#. 5.6/applet.js:2506 5.6/applet.js:2507 5.6/applet.js:2562 5.6/applet.js:2649
+#. 5.6/applet.js:1937 5.6/applet.js:2081 5.6/applet.js:2313 5.6/applet.js:2314
+#. 5.6/applet.js:2493 5.6/applet.js:2494 5.6/applet.js:2549 5.6/applet.js:2635
 msgid ":"
 msgstr ""
 
-#. 5.6/applet.js:1937 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 5.6/applet.js:1939 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 3.4/prefsui.glade:663 4.0/prefsui.glade:809
 msgid "Buffer"
 msgstr "Буфер"
 
 #. 5.6->settings-schema.json->Mem_colorCache->description
-#. 5.6/applet.js:1937
+#. 5.6/applet.js:1939
 #, fuzzy
 msgid "Cache"
 msgstr "Кеширани"
 
-#. 5.6/applet.js:1937
+#. 5.6/applet.js:1939
 msgid "Shared"
 msgstr ""
 
-#. 5.6/applet.js:2075
+#. 5.6/applet.js:2070
 msgid "CPUs"
 msgstr ""
 
-#. 5.6/applet.js:2280
+#. 5.6/applet.js:2267
 #, fuzzy
 msgid "Networks"
 msgstr "Мрежа"
 
-#. 5.6/applet.js:2557
+#. 5.6/applet.js:2544
 msgid "Usage"
 msgstr ""
 
-#. 5.6/applet.js:2618 5.6/lib/Graphs.js:399
+#. 5.6/applet.js:2605 5.6/lib/Graphs.js:453
 msgid "BAT"
 msgstr ""
 
-#. 5.6/applet.js:2672 5.6/applet.js:2674
+#. 5.6/applet.js:2658 5.6/applet.js:2660
 msgid "Batteries"
 msgstr ""
 
@@ -456,6 +456,10 @@ msgstr ""
 
 #. 5.6->settings-schema.json->sectionCPUTemperature->title
 msgid "CPU Temperature"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionCPULoadAverage->title
+msgid "Average Load"
 msgstr ""
 
 #. 5.6->settings-schema.json->sectionCPULabel->title
@@ -944,6 +948,7 @@ msgid "Show the CPU temperature"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_temp_hovering_only->description
+#. 5.6->settings-schema.json->CPU_loadAverage_hovering_only->description
 #. 5.6->settings-schema.json->Net_total_hovering_only->description
 #. 5.6->settings-schema.json->Disk_speed_hovering_only->description
 msgid "Only display when hovering over this applet"
@@ -962,6 +967,7 @@ msgid "High CPU Temperature (°C)"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_tempHigh->tooltip
+#. 5.6->settings-schema.json->CPU_loadAverageHigh->tooltip
 msgid "Refer to your CPU documentation."
 msgstr ""
 
@@ -980,39 +986,79 @@ msgid "Corner in which to display the temperature"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->CPU_loadAverageCorner->options
 #. 5.6->settings-schema.json->Net_totalCorner->options
 #. 5.6->settings-schema.json->Disk_speedCorner->options
 msgid "Top Right"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->CPU_loadAverageCorner->options
 #. 5.6->settings-schema.json->Net_totalCorner->options
 #. 5.6->settings-schema.json->Disk_speedCorner->options
 msgid "Top Left"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->CPU_loadAverageCorner->options
 #. 5.6->settings-schema.json->Net_totalCorner->options
 #. 5.6->settings-schema.json->Disk_speedCorner->options
 msgid "Bottom Right"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_tempCorner->options
+#. 5.6->settings-schema.json->CPU_loadAverageCorner->options
 #. 5.6->settings-schema.json->Net_totalCorner->options
 #. 5.6->settings-schema.json->Disk_speedCorner->options
 msgid "Bottom Left"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_tempFontFactor->units
+#. 5.6->settings-schema.json->CPU_loadAverageFontFactor->units
 #. 5.6->settings-schema.json->percentFontFactor->units
 #. 5.6->settings-schema.json->flowFontFactor->units
 msgid "%"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_tempFontFactor->description
+#. 5.6->settings-schema.json->CPU_loadAverageFontFactor->description
 #. 5.6->settings-schema.json->percentFontFactor->description
 #. 5.6->settings-schema.json->flowFontFactor->description
 msgid "Font size: percentage of the box height"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadAverage->description
+msgid "Show the CPU average load"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_loadAverageHigh->description
+msgid "High CPU Load (%)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_loadAverageCrit->description
+msgid "Critical CPU Load (%)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_loadAverageCrit->tooltip
+msgid ""
+"Refer to your CPU documentation.\n"
+"Must be greater than the High CPU Load."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_loadAverageColor->description
+msgid "Normal Average Load Color"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_loadAverageColorHigh->description
+msgid "High Average Load Color"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_loadAverageColorCrit->description
+msgid "Critical Average Load Color"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_loadAverageCorner->description
+msgid "Corner in which to display the average load"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_tempColor->description
