@@ -1,3 +1,7 @@
+### v3.14.2~20260504
+  * Disk I/O: Fixes tooltip when using symbols.
+  * Adds access to emoji database (bottom of the General tab).
+
 ### v3.14.1~20260502
   * CPUs (tooltip): Display load average (%) next the temperature.
   * Custom translations in tooltip (see bottom of the General tab).
