@@ -1,3 +1,6 @@
+### v3.15.1~20260506
+  * CPU: Show average load. Fixes a bug.
+
 ### v3.15.0~20260505
   * CPU: Show average load.
 
