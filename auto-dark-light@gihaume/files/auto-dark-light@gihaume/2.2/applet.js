@@ -16,8 +16,8 @@ class ThisApplet extends Applet.IconApplet {
         const _ = text => Gettext.dgettext(applet_name, text);
 
         const critical_message =
-            `${_("Critical error")}${_(":")}`
-            + `${_("this applet is only supported by")} Cinnamon >= 5.8.`;
+            `${_("Critical error")}${_(":")} `
+            + `${_("this applet only supports")} Cinnamon >= 5.8.`;
         Main.criticalNotify(applet_name, critical_message);
         this.set_applet_tooltip(critical_message);
 
