@@ -296,6 +296,7 @@ class GraphVBars {
     }
 
     // Temperature
+    var isRight, isTop;
     fontsize_px = Math.trunc(this.applet.CPU_tempFontFactor / 100 * _height);
     fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + fontsize_px + 'px');
     if (providerName != 'SWAP' &&
@@ -306,8 +307,8 @@ class GraphVBars {
       let degrees = (this.applet.CPU_tempInFahrenheit) ? "°F" : "°C";
       let pangolayout2 = area.create_pango_layout("" + this.applet.CPU_temperature + degrees);
 
-      let isRight = this.applet.CPU_tempCorner.includes("R");
-      let isTop = this.applet.CPU_tempCorner.includes("T");
+      isRight = this.applet.CPU_tempCorner.includes("R");
+      isTop = this.applet.CPU_tempCorner.includes("T");
       if (isRight)
         pangolayout2.set_alignment(Pango.Alignment.RIGHT);
       else
@@ -345,6 +346,59 @@ class GraphVBars {
       }
 
       PangoCairo.layout_path(areaContext, pangolayout2);
+      areaContext.fill();
+    }
+
+    // Average Load
+    var isRightLA, isTopLA;
+    fontsize_px = Math.trunc(this.applet.CPU_loadAverageFontFactor / 100 * _height);
+    fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + fontsize_px + 'px');
+    if (providerName != 'SWAP' &&
+        this.applet.CPU_showLoadAverage &&
+        (!this.applet.CPU_loadAverage_hovering_only || (this.applet.CPU_loadAverage_hovering_only && this.applet.hovered))
+      ) {
+      let loadAverage = this.applet.CPU_loadAverage.toString() + "%";
+      let pangolayout5 = area.create_pango_layout(loadAverage);
+
+      isRightLA = this.applet.CPU_loadAverageCorner.includes("R");
+      isTopLA = this.applet.CPU_loadAverageCorner.includes("T");
+      if (isRight != null && isTop != null && isRight===isRightLA && isTop===isTopLA) {
+        if (isTopLA) isRightLA = !isRight;
+        else isTopLA = true;
+      }
+      if (isRightLA)
+        pangolayout5.set_alignment(Pango.Alignment.RIGHT);
+      else
+        pangolayout5.set_alignment(Pango.Alignment.LEFT);
+
+      pangolayout5.set_width(_width);
+      pangolayout5.set_font_description(fontdesc);
+
+      let loadAverageColor;
+      let CPU_loadAverageHigh = 1 * this.applet.CPU_loadAverageHigh;
+      let CPU_loadAverageCrit = 1 * this.applet.CPU_loadAverageCrit;
+      if (1 * this.applet.CPU_loadAverage < 1 * CPU_loadAverageHigh)
+        loadAverageColor = RGBa2rgba(this.applet.CPU_loadAverageColor);
+      else if (1 * this.applet.CPU_loadAverage < 1 * CPU_loadAverageCrit)
+        loadAverageColor = RGBa2rgba(this.applet.CPU_loadAverageColorHigh);
+      else
+        loadAverageColor = RGBa2rgba(this.applet.CPU_loadAverageColorCrit);
+
+      areaContext.setSourceRGBA(loadAverageColor[0], loadAverageColor[1], loadAverageColor[2], loadAverageColor[3]);
+
+      if (isRightLA) {
+        if (isTopLA)
+          areaContext.moveTo(_width, 0); //place text in top right corner of graph area
+        else
+          areaContext.moveTo(_width, 0.6 * _height); //place text in bottom right corner of graph area
+      } else {
+        if (isTopLA)
+          areaContext.moveTo(3, 0); //place text in top left corner of graph area
+        else
+          areaContext.moveTo(3, 0.6 * _height); //place text in bottom left corner of graph area
+      }
+
+      PangoCairo.layout_path(areaContext, pangolayout5);
       areaContext.fill();
     }
 
@@ -457,10 +511,7 @@ class GraphVBars100 extends GraphVBars {
         _width = width;
       }
       _height = height - 2;
-      //~ _height = height;
-      //~ _x_origin = 2;
       _x_origin = 3;
-      //~ _y_origin = 1;
       _y_origin = 2;
     }
 
@@ -493,7 +544,6 @@ class GraphVBars100 extends GraphVBars {
         maxValue = Math.round(100 * currentReadings[i].maxvalue, 2) / 100;
       if (isBAT) {
         minValue = Math.round(100 * currentReadings[i].minvalue, 2) / 100;
-        //~ global.log("minValue: " + minValue + " & currentR: " + currentR);
       }
       let vbarHeight = (_height - 3) * currentR;
       let vbarOffset = i * (vbarWidth) + (i + 1) * interBar;
@@ -692,7 +742,6 @@ class GraphPieChart {
       }
     } else {
       // Bar chart
-      //~ let vbarWidth = 0.8 * (_width - 6);
       let vbarWidth = 0.6 * (_width - 6);
       let r=1, g=1, b=1, a=1;
       var old_height = 0;
@@ -706,7 +755,6 @@ class GraphPieChart {
         if (i==0) plus = 1;
         this.drawRoundedRectangle(
           areaContext,
-          //~ 1 + 0.2 * width, // x
           1 + 0.25 * width, // x
           height - (plus + old_height + vbarHeight), // y
           vbarWidth, // width
@@ -720,7 +768,6 @@ class GraphPieChart {
     }
 
     // Label
-    //~ let fontsize_px = Math.trunc(1 / 3 * _height);
     if (labelProps.fg)
       drawLabel(labelProps, fontsize_px, width, height);
 
@@ -728,7 +775,6 @@ class GraphPieChart {
 
 
     //Show percentage value in center of pie chart
-    //~ global.log("this.applet.Mem_value_display: " + this.applet.Mem_value_display + " - this.applet.hovered: " + this.applet.hovered);
     fontsize_px = Math.trunc(this.applet.percentFontFactor / 100 * _height);
     fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + fontsize_px + 'px');
     if (this.applet.Mem_value_display === "always" || (this.applet.Mem_value_display === "hover" && this.applet.hovered)) {
@@ -851,9 +897,6 @@ class GraphLineChart {
         (providerName == _("DISK") && dataPoints[i] < this.minDiskShownValue)
       )
         dataPoints[i] = 0;
-
-      //~ if (providerName == _("DISK") && dataPoints[i] < this.minDiskShownValue)
-        //~ dataPoints[i] = 0;
 
       //double check what we just added isnt greater than our max (for all lines)
       if (dataPoints[i] > this.maxValue && dataPoints[i] > this.minMaxValue) {
@@ -1240,7 +1283,6 @@ class GraphLineChart {
     if (this.typeOfGraph.includes("led")) {
       let pangolayout4 = area.create_pango_layout(this.led);
       pangolayout4.set_single_paragraph_mode(true);
-      //~ pangolayout4.set_font_description(fontdesc);
       if (this.ledLocation === "LO") {
         pangolayout4.set_alignment(Pango.Alignment.LEFT);
         areaContext.moveTo(8, _height / 3 - 3);

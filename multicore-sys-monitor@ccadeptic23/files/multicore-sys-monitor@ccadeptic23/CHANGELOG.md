@@ -1,3 +1,6 @@
+### v3.15.0~20260505
+  * CPU: Show average load.
+
 ### v3.14.2~20260504
   * Disk I/O: Fixes tooltip when using symbols.
   * Adds access to emoji database (bottom of the General tab).

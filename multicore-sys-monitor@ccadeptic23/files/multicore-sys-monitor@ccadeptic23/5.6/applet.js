@@ -71,7 +71,6 @@ const properties = [
     {graph: "networkGraph", provider: "networkProvider", abbrev: "Net"},
     {graph: "diskGraph", provider: "diskProvider", abbrev: "Disk"},
     {graph: "diskUsageGraph", provider: "diskUsageProvider", abbrev: "DiskUsage"},
-    //~ {graph: "diskUsageGraph", provider: "diskUsageProvider", abbrev: "DiskUsage"} //,
     {graph: "batteryGraph", provider: "batteryProvider", abbrev: "Battery"}
 ];
 
@@ -184,6 +183,7 @@ class MCSM extends Applet.IconApplet {
         this.metadata = metadata;
         this.instance_id = instance_id;
 
+        this.CPU_loadAverage = 0;
         this.hyperThreadingIsOn = false;
         readFileAsync("/sys/devices/system/cpu/smt/control").then( (status) => {
             let _status = status.trim();
@@ -263,6 +263,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_enabled", "CPU_enabled");
         this.settings.bind("CPU_enabledTooltip", "CPU_enabledTooltip");
         this.settings.bind("CPU_squared", "CPU_squared");
+
         this.settings.bind("CPU_showTemp", "CPU_showTemp");
         this.settings.bind("CPU_temp_hovering_only", "CPU_temp_hovering_only");
         this.settings.bind("CPU_tempInFahrenheit", "CPU_tempInFahrenheit");
@@ -274,6 +275,17 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_tempColorCrit", "CPU_tempColorCrit");
         this.settings.bind("CPU_tempCorner", "CPU_tempCorner");
         this.settings.bind("CPU_tempFontFactor", "CPU_tempFontFactor");
+
+        this.settings.bind("CPU_showLoadAverage", "CPU_showLoadAverage");
+        this.settings.bind("CPU_loadAverage_hovering_only", "CPU_loadAverage_hovering_only");
+        this.settings.bind("CPU_loadAverageHigh", "CPU_loadAverageHigh");
+        this.settings.bind("CPU_loadAverageCrit", "CPU_loadAverageCrit");
+        this.settings.bind("CPU_loadAverageColor", "CPU_loadAverageColor");
+        this.settings.bind("CPU_loadAverageColorHigh", "CPU_loadAverageColorHigh");
+        this.settings.bind("CPU_loadAverageColorCrit", "CPU_loadAverageColorCrit");
+        this.settings.bind("CPU_loadAverageCorner", "CPU_loadAverageCorner");
+        this.settings.bind("CPU_loadAverageFontFactor", "CPU_loadAverageFontFactor");
+
         this.settings.bind("CPU_width", "CPU_width", () => { this.adjust_CPU_width() });
         this.settings.bind("CPU_mergeAll", "CPU_mergeAll", (value) => {
             if (value === false) {
@@ -468,10 +480,6 @@ class MCSM extends Applet.IconApplet {
         };
         this.actor.connect("enter-event", (actor, event) => {
             this.hovered = true;
-            //~ if (this.without_any_graph === true) {
-                //~ this._applet_tooltip.preventShow = false;
-                //~ return;
-            //~ }
             // Work around hovering over a PangoCairo canvas instance triggering a false positive panel leave event
             if (this.panel._autohideSettings !== "false") {
                 this.originalAutoHideSetting = this.panel._autohideSettings;
@@ -484,11 +492,7 @@ class MCSM extends Applet.IconApplet {
         });
         this.actor.connect("leave-event", (actor, event) => {
             this.hovered = false;
-            //~ if (this.without_any_graph) {
-                //~ return;
-            //~ }
             this._applet_tooltip.hide();
-            //~ this._applet_tooltip.preventShow = true;
             this._applet_tooltip.preventShow = false;
             if (this.originalAutoHideSetting) {
                 this.panel._autohideSettings = this.originalAutoHideSetting;
@@ -625,7 +629,6 @@ class MCSM extends Applet.IconApplet {
     adjust_CPU_width() {
         if (this.graphStep === 1) return;
         let CPU_width = Math.max(
-            //~ Math.min(this.graphStep, 16),
             1,
             Math.round(this.CPU_width / this.graphStep) * this.graphStep
         );
@@ -635,7 +638,6 @@ class MCSM extends Applet.IconApplet {
     adjust_Mem_width() {
         if (this.graphStep === 1) return;
         let Mem_width = Math.max(
-            //~ Math.min(this.graphStep, 16),
             1,
             Math.round(this.Mem_width / this.graphStep) * this.graphStep
         );
@@ -675,7 +677,6 @@ class MCSM extends Applet.IconApplet {
     adjust_DiskUsage_width() {
         if (this.graphStep === 1) return;
         let DiskUsage_width = Math.max(
-            //~ Math.min(this.graphStep, 16),
             1,
             Math.round(this.DiskUsage_width / this.graphStep) * this.graphStep
         );
@@ -685,7 +686,6 @@ class MCSM extends Applet.IconApplet {
     adjust_Battery_width() {
         if (this.graphStep === 1) return;
         let Battery_width = Math.max(
-            //~ Math.min(this.graphStep, 16),
             1,
             Math.round(this.Battery_width / this.graphStep) * this.graphStep
         );
@@ -1102,7 +1102,6 @@ class MCSM extends Applet.IconApplet {
     }
 
     on_Battery_getdevlist_btn_clicked() {
-        //~ const POWER_SUPPLY_PATH = "/sys/class/power_supply";
         const POWER_SUPPLY = Gio.file_new_for_path(POWER_SUPPLY_PATH);
         const children = POWER_SUPPLY.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
         var knownDevices = [];
@@ -1117,7 +1116,6 @@ class MCSM extends Applet.IconApplet {
         try {
             for (let child of children) {
                 let name = child.get_name();
-                //~ global.log("name: " + name);
                 let uevent_file_path = `${POWER_SUPPLY_PATH}/${name}/uevent`;
                 if (!GLib.file_test(uevent_file_path, GLib.FileTest.EXISTS)) continue;
                 readFileAsync(uevent_file_path).then( (status) => {
@@ -1358,6 +1356,12 @@ class MCSM extends Applet.IconApplet {
                         this.oldCPU_Total_Values[i] = totalValue;
                         this.oldCPU_Idle_Values[i] = idleValue;
                         if (i === 0) {
+                            if (total != 0)
+                                this.CPU_loadAverage = Math.round(100 * (total - idle) / total);
+                            else
+                                this.CPU_loadAverage = 0;
+                            if (isNaN(this.CPU_loadAverage))
+                                this.CPU_loadAverage = 0;
                             i++;
                             continue;
                         }
@@ -1596,8 +1600,6 @@ class MCSM extends Applet.IconApplet {
     get_battery_usage() {
         if (!this.isRunning) return;
         if (!this.Battery_enabled && !this.Battery_enabledTooltip) return;
-        //~ const POWER_SUPPLY_PATH = "/sys/class/power_supply";
-        //~ const POWER_SUPPLY = Gio.file_new_for_path(POWER_SUPPLY_PATH);
 
         var usedPaths = [];
         var sumSize = 0;
@@ -2010,13 +2012,6 @@ class SwapDataProvider {
             toolTipString += _("Used:").split(":")[0].padStart(spaces, " ") + ":\t"  + "" + formatNumber(parseFloat(swapUsedAmount).toFixed(2), 2).padStart(8, " ") + " " + swapUsedUnit.padStart(6, " ") + "\n";
             toolTipString += _("Available:").split(":")[0].padStart(spaces, " ") + ":\t"  + "" + formatNumber(parseFloat(swapAvailableAmount).toFixed(2), 2).padStart(8, " ") + " " + swapAvailableUnit.padStart(6, " ") + "\n";
         }
-        //~ let percentChar = "%";
-        //~ if (this.applet.percentAtEndOfLine)
-            //~ percentChar = "%".padStart(6, " ");
-
-        //~ let colon = _(":");
-        //~ let lenColon = Math.max(colon.length - 1, 0);
-        //~ toolTipString += trans.padStart(spaces - lenColon, " ") + colon + "\t" + "" + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(8, " ") + " " + percentChar + "\n";
         return toolTipString;
     }
 
@@ -2073,15 +2068,7 @@ class MultiCpuDataProvider {
             trans = this.applet.tooltipCPUsCustomTranslation;
         else
             trans = _("CPUs");
-        if (!this.applet.CPU_mergeAll) {
-            var loadAverage = 0;
-            for (let i = 0; i < this.CPUCount; i++) {
-                loadAverage += 100 * this.currentReadings[i];
-            }
-            //~ loadAverage = formatNumber(parseInt(loadAverage / this.CPUCount), 0);
-            loadAverage = parseInt(loadAverage / this.CPUCount).toString().padStart(2);
-            trans += " (" + loadAverage + " %)";
-        }
+            trans += " (" + this.applet.CPU_loadAverage.toString().padStart(2) + " %)";
         if (this.applet.CPU_showTemp && this.applet.CPU_temperature) {
             let temperature = 1 * this.applet.CPU_temperature;
             let degree = (this.applet.CPU_tempInFahrenheit) ?  "°F" : "°C";
@@ -2624,7 +2611,6 @@ class BatteryDataProvider {
     }
 
     getColorList() {
-        //~ return [this.applet.Battery_colorLoad, this.applet.Battery_colorUnload];
         return [this.applet.Battery_colorUnload, this.applet.Battery_colorLoad];
     }
 
@@ -2674,13 +2660,10 @@ class BatteryDataProvider {
                     toolTipString += (_("Batteries") + " ").padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 0).padStart(4, " ") + " " + percentChar + "</b>\n";
             } else {
                 let name = names[i];
-                //~ let capacity = Math.round(health[i][1] / health[i][0] * 10000) / 100;
                 let capacity = formatNumber(health[i][1] / health[i][0] * 100, 1);
                 if (percentage > minPercentage) {
-                    //~ toolTipString += (name + " (" + capacity.toString() + "%)").padStart(spaces - lenColon, " ") + colon + "\t " + formatNumber(percentage, 2).padStart(7, " ") + " " + percentChar + "\n";
                     toolTipString += (name + " (" + capacity + "%)").padStart(spaces - lenColon, " ") + colon + "\t " + formatNumber(percentage, 2).padStart(7, " ") + " " + percentChar + "\n";
                 } else {
-                    //~ toolTipString += (name + " (" + capacity.toString() + "%)").padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 2).padStart(7, " ") + " " + percentChar + "</b>\n";
                     toolTipString += (name + " (" + capacity.toString() + "%)").padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 2).padStart(7, " ") + " " + percentChar + "</b>\n";
                 }
             }
