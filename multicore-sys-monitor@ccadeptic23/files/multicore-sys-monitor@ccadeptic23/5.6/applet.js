@@ -1321,10 +1321,13 @@ class MCSM extends Applet.IconApplet {
                         data.splice(0, 1);
                         let total = totalValue - this.oldCPU_Total_Values[0];
                         let idle = idleValue - this.oldCPU_Idle_Values[0];
-                        if (total != 0)
+                        if (total != 0) {
                             data.push(2 * (total - idle) / total);
-                        else
+                            this.CPU_loadAverage = Math.round(200 * (total - idle) / total);
+                        } else {
                             data.push(0);
+                            this.CPU_loadAverage = 0;
+                        }
                         this.oldCPU_Total_Values.splice(0, 1);
                         this.oldCPU_Total_Values.push(totalValue);
                         this.oldCPU_Idle_Values.splice(0, 1);
@@ -1335,8 +1338,10 @@ class MCSM extends Applet.IconApplet {
                         idleValue = 1 * idleValue;
                         let total = totalValue - this.oldCPU_Total_Values[0];
                         let idle = idleValue - this.oldCPU_Idle_Values[0];
-                        if (total != 0)
+                        if (total != 0) {
                             data.push((total - idle) / total);
+                            this.CPU_loadAverage = Math.round(100 * (total - idle) / total);
+                        }
                         this.oldCPU_Total_Values[0] = totalValue;
                         this.oldCPU_Idle_Values[0] = idleValue;
                         for (let i=1, len=values.length; i < len; i++) {
