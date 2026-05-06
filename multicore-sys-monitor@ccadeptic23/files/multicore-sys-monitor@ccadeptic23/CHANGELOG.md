@@ -1,3 +1,7 @@
+### v3.15.2~20260506
+  * Tooltip: Can change background color.
+  * Without Any Graphics mode: Display change, improving tooltip stability.
+
 ### v3.15.1~20260506
   * CPU: Show average load. Fixes a bug.
 
