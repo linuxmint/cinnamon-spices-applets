@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-05-06 22:48+0200\n"
-"PO-Revision-Date: 2026-03-16 17:37+0100\n"
+"PO-Revision-Date: 2026-05-07 19:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -31,7 +31,7 @@ msgstr "CPU"
 #. 3.0/DataProviders.js:113 3.2/DataProviders.js:113 3.4/DataProviders.js:126
 #. 4.0/DataProviders.js:123
 msgid "------------- CPU ------------"
-msgstr "------- Prozessor (CPU) ------"
+msgstr "------- CPU ------"
 
 #. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 3.4/DataProviders.js:129
 #. 5.6/applet.js:2140 4.0/DataProviders.js:126
@@ -46,7 +46,7 @@ msgstr "MEM"
 #. 3.0/DataProviders.js:163 3.2/DataProviders.js:163 3.4/DataProviders.js:161
 #. 4.0/DataProviders.js:158
 msgid "----------- Memory -----------"
-msgstr "------- Speicher (MEM) -------"
+msgstr "------- Speicher -------"
 
 #. 3.0/DataProviders.js:164 3.2/DataProviders.js:164 5.6/applet.js:50
 msgid "Usedup:"
@@ -75,7 +75,7 @@ msgstr "SWAP"
 #. 3.0/DataProviders.js:199 3.2/DataProviders.js:199 3.4/DataProviders.js:194
 #. 4.0/DataProviders.js:193
 msgid "------------ Swap ------------"
-msgstr "--------- Swap (SWAP) --------"
+msgstr "--------- Swap --------"
 
 #. 5.6->settings-schema.json->Mem_colorSwap->description
 #. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 3.4/DataProviders.js:195
@@ -95,7 +95,7 @@ msgstr "NET"
 #. 3.0/DataProviders.js:305 3.2/DataProviders.js:305 3.4/DataProviders.js:289
 #. 4.0/DataProviders.js:287
 msgid "---------- Networks ----------"
-msgstr "------- Networks (NET) -------"
+msgstr "------- Netzwerke -------"
 
 #. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 3.4/DataProviders.js:300
 #. 5.6/applet.js:54 5.6/applet.js:2342 4.0/DataProviders.js:298
@@ -122,7 +122,7 @@ msgstr "DISK"
 #. 3.0/DataProviders.js:408 3.2/DataProviders.js:408 3.4/DataProviders.js:378
 #. 4.0/DataProviders.js:376
 msgid "------------ Disks -----------"
-msgstr "----- Festplatte (DISK) ------"
+msgstr "----- Festplatten ------"
 
 #. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 3.4/DataProviders.js:386
 #. 5.6/applet.js:56 5.6/applet.js:2522 4.0/DataProviders.js:384
@@ -227,11 +227,11 @@ msgstr "Kern 128:"
 
 #. 5.6/applet.js:47
 msgid "Unrecoverable:"
-msgstr ""
+msgstr "Nicht wiederherstellbar:"
 
 #. 5.6/applet.js:48
 msgid "Recoverable:"
-msgstr ""
+msgstr "Wiederherstellbar:"
 
 #. 5.6/applet.js:53
 msgid "Swap:"
@@ -239,19 +239,19 @@ msgstr "Swap:"
 
 #. 5.6/applet.js:58
 msgid "Load:"
-msgstr ""
+msgstr "Laden:"
 
 #. 5.6/applet.js:59
 msgid "Unload:"
-msgstr ""
+msgstr "Entladen:"
 
 #. 5.6/applet.js:82
 msgid "DISK USAGE"
-msgstr ""
+msgstr "FESTPLATTENBELEGUNG"
 
 #. 5.6/applet.js:83
 msgid "BATTERY"
-msgstr ""
+msgstr "AKKU"
 
 #. 5.6->settings-schema.json->RefreshAll_btn->description
 #. 5.6/applet.js:855
@@ -307,7 +307,7 @@ msgstr "Festplattenbelegung"
 #. 5.6->settings-schema.json->pageBattery->title
 #. 5.6/applet.js:905 5.6/applet.js:2656
 msgid "Battery"
-msgstr ""
+msgstr "Akku"
 
 #. 5.6->settings-schema.json->pageColors->title
 #. 5.6->settings-schema.json->sectionGeneralColors->title
@@ -332,7 +332,7 @@ msgstr "Festplatten"
 
 #. 5.6/applet.js:1898 5.6/applet.js:1905 5.6/applet.js:2039
 msgid "Available:"
-msgstr ""
+msgstr "Verfügbar:"
 
 #. 5.6/applet.js:1931
 msgid "Buffers/Cache/Shared"
@@ -372,11 +372,11 @@ msgstr "Belegung"
 
 #. 5.6/applet.js:2631 5.6/lib/Graphs.js:453
 msgid "BAT"
-msgstr ""
+msgstr "AKK"
 
 #. 5.6/applet.js:2684 5.6/applet.js:2686
 msgid "Batteries"
-msgstr ""
+msgstr "Akkus"
 
 #. 4.0/applet.js:66
 msgid ""
@@ -446,17 +446,17 @@ msgstr "Optionen"
 
 #. 5.6->settings-schema.json->sectionGeneralOrder->title
 msgid "Display Order"
-msgstr ""
+msgstr "Anzeigereihenfolge"
 
 #. 5.6->settings-schema.json->sectionTooltip->title
 #. 5.6->settings-schema.json->sectionNetworkTooltip->title
 #. 5.6->settings-schema.json->sectionDiskTooltip->title
 msgid "Tooltip"
-msgstr ""
+msgstr "Tooltip"
 
 #. 5.6->settings-schema.json->sectionTooltipCustomTranslations->title
 msgid "Custom translations in tooltip"
-msgstr ""
+msgstr "Angepasste Übersetzungen im Tooltip"
 
 #. 5.6->settings-schema.json->sectionCPUTemperature->title
 msgid "CPU Temperature"
@@ -464,7 +464,7 @@ msgstr "CPU-Temperatur"
 
 #. 5.6->settings-schema.json->sectionCPULoadAverage->title
 msgid "Average Load"
-msgstr ""
+msgstr "Durchschnittliche Last"
 
 #. 5.6->settings-schema.json->sectionCPULabel->title
 #. 5.6->settings-schema.json->sectionMemoryLabel->title
@@ -507,7 +507,7 @@ msgstr "Pfade"
 
 #. 5.6->settings-schema.json->sectionDiskSpeed->title
 msgid "Instant speed"
-msgstr ""
+msgstr "Aktuelle Geschwindigkeit"
 
 #. 5.6->settings-schema.json->sectionColors->title
 msgid "Your colors"
@@ -574,7 +574,7 @@ msgstr "Linienstärke"
 
 #. 5.6->settings-schema.json->ledForCurves->description
 msgid "Led for curves"
-msgstr ""
+msgstr "LED für Kurven"
 
 #. 5.6->settings-schema.json->ledForCurves->options
 msgid "●"
@@ -590,17 +590,15 @@ msgstr ""
 
 #. 5.6->settings-schema.json->ledLocation->description
 msgid "Led location"
-msgstr ""
+msgstr "LED-Position"
 
 #. 5.6->settings-schema.json->ledLocation->options
-#, fuzzy
 msgid "Left"
-msgstr "Oben links"
+msgstr "Links"
 
 #. 5.6->settings-schema.json->ledLocation->options
-#, fuzzy
 msgid "Right"
-msgstr "Höhe"
+msgstr "Rechts"
 
 #. 5.6->settings-schema.json->useIconSize->description
 msgid "Limit height to the size of a colored icon"
@@ -637,26 +635,26 @@ msgstr "% ganz am Ende der Zeile anzeigen"
 
 #. 5.6->settings-schema.json->tooltipFontSize->description
 msgid "Font size (px)"
-msgstr ""
+msgstr "Schriftgröße (px)"
 
 #. 5.6->settings-schema.json->tooltipChangeBackgroundColor->description
-#, fuzzy
 msgid "Change Tooltip Background Color"
-msgstr "Hintergrundfarbe"
+msgstr "Hintergrundfarbe des Tooltips ändern"
 
 #. 5.6->settings-schema.json->tooltipChangeBackgroundColor->tooltip
 msgid ""
 "Uncheck this box to use the Tooltip Background Color defined by the theme."
 msgstr ""
+"Deaktivieren Sie diesen Schalter um die Hintergrundfarbe des Themes für den "
+"Tooltip zu verwenden."
 
 #. 5.6->settings-schema.json->tooltipBackgroundColor->description
-#, fuzzy
 msgid "Tooltip Background Color"
-msgstr "Hintergrundfarbe"
+msgstr "Hintergrundfarbe des Tooltips"
 
 #. 5.6->settings-schema.json->widthWhithoutAnyGraph->description
 msgid "Width when no graph is displayed (px)"
-msgstr ""
+msgstr "Breite wenn kein Diagramm angezeigt wird (px)"
 
 #. 5.6->settings-schema.json->widthWhithoutAnyGraph->tooltip
 msgid ""
@@ -664,73 +662,77 @@ msgid ""
 "you move the pointer.\n"
 "Refresh All after making changes."
 msgstr ""
+"Das ist nützlich um zu verhindern, dass der Tooltip zu früh verschwindet, "
+"wenn man den Zeiger bewegt.\n"
+"Alles Aktualisieren nachdem Änderungen gemacht wurden."
 
 #. 5.6->settings-schema.json->tooltipCustomTranslationsLabel->description
 msgid ""
 "You can use your own translations, or emojis, to replace words in the "
 "tooltip."
 msgstr ""
+"Sie können die Texte im Tooltip mit Ihren eigenen Übersetzungen oder Emojis "
+"ersetzen."
 
 #. 5.6->settings-schema.json->tooltipCPUsUseCustomTranslation->description
 msgid "Change translation for CPUs"
-msgstr ""
+msgstr "Übersetzung für CPUs ändern"
 
 #. 5.6->settings-schema.json->tooltipCPUsCustomTranslation->description
 msgid "CPUs becomes:"
-msgstr ""
+msgstr "CPUs wird zu:"
 
 #. 5.6->settings-schema.json->tooltipMemoryUseCustomTranslation->description
 msgid "Change translation for Memory"
-msgstr ""
+msgstr "Übersetzung für Speicher ändern"
 
 #. 5.6->settings-schema.json->tooltipMemoryCustomTranslation->description
 msgid "Memory becomes:"
-msgstr ""
+msgstr "Speicher wird zu:"
 
 #. 5.6->settings-schema.json->tooltipSwapUseCustomTranslation->description
 msgid "Change translation for Swap"
-msgstr ""
+msgstr "Übersetzung für Swap ändern"
 
 #. 5.6->settings-schema.json->tooltipSwapCustomTranslation->description
 msgid "Swap becomes:"
-msgstr ""
+msgstr "Swap wird zu:"
 
 #. 5.6->settings-schema.json->tooltipNetworksUseCustomTranslation->description
 msgid "Change translation for Networks"
-msgstr ""
+msgstr "Übersetzung für Netzwerke ändern"
 
 #. 5.6->settings-schema.json->tooltipNetworksCustomTranslation->description
-#, fuzzy
 msgid "Networks becomes:"
-msgstr "Netzwerke"
+msgstr "Netzwerke wird zu:"
 
 #. 5.6->settings-schema.json->tooltipDisksUseCustomTranslation->description
 msgid "Change translation for Disks"
-msgstr ""
+msgstr "Übersetzung für Festplatten ändern"
 
 #. 5.6->settings-schema.json->tooltipDisksCustomTranslation->description
 msgid "Disks becomes:"
-msgstr ""
+msgstr "Festplatten wird zu:"
 
 #. 5.6->settings-schema.json->tooltipUsageUseCustomTranslation->description
 msgid "Change translation for Usage"
-msgstr ""
+msgstr "Übersetzung für Belegung"
 
 #. 5.6->settings-schema.json->tooltipUsageCustomTranslation->description
 msgid "Usage becomes:"
-msgstr ""
+msgstr "Belegung wird zu:"
 
 #. 5.6->settings-schema.json->tooltipBatteryUseCustomTranslation->description
 msgid "Change translation for Battery"
-msgstr ""
+msgstr "Übersetzung für Akku ändern"
 
 #. 5.6->settings-schema.json->tooltipBatteryCustomTranslation->description
 msgid "Battery becomes:"
-msgstr ""
+msgstr "Akku wird zu:"
 
 #. 5.6->settings-schema.json->emojidb_btn->description
 msgid "Open emoji database"
-msgstr ""
+msgstr "Emoji Datenbank öffnen"
 
 #. 5.6->settings-schema.json->removeEnlightenment->description
 msgid "Remove Enlightenment of this applet"
@@ -772,9 +774,8 @@ msgstr "Zurücksetzen"
 #. 5.6->settings-schema.json->Disk_enabledTooltip->description
 #. 5.6->settings-schema.json->DiskUsage_enabledTooltip->description
 #. 5.6->settings-schema.json->Battery_enabledTooltip->description
-#, fuzzy
 msgid "Enable Tooltip"
-msgstr "Swap aktivieren"
+msgstr "Tooltip aktivieren"
 
 #. 5.6->settings-schema.json->CPU_labelOn->description
 #. 5.6->settings-schema.json->Mem_labelOn->description
@@ -782,9 +783,8 @@ msgstr "Swap aktivieren"
 #. 5.6->settings-schema.json->Disk_labelOn->description
 #. 5.6->settings-schema.json->DiskUsage_labelOn->description
 #. 5.6->settings-schema.json->Battery_labelOn->description
-#, fuzzy
 msgid "Display this label"
-msgstr "Diesen Wert anzeigen"
+msgstr "Diese Beschriftung anzeigen"
 
 #. 5.6->settings-schema.json->CPU_labelForeground->description
 #. 5.6->settings-schema.json->Mem_labelForeground->description
@@ -793,7 +793,7 @@ msgstr "Diesen Wert anzeigen"
 #. 5.6->settings-schema.json->DiskUsage_labelForeground->description
 #. 5.6->settings-schema.json->Battery_labelForeground->description
 msgid "Bring this label to the foreground"
-msgstr ""
+msgstr "Diese Beschriftung in den Vordergrund bringen"
 
 #. 5.6->settings-schema.json->CPU_labelPos->description
 #. 5.6->settings-schema.json->Mem_labelPos->description
@@ -802,7 +802,7 @@ msgstr ""
 #. 5.6->settings-schema.json->DiskUsage_labelPos->description
 #. 5.6->settings-schema.json->Battery_labelPos->description
 msgid "Vertical position offset (pixels)"
-msgstr ""
+msgstr "Offset der vertikalen Position (Pixel)"
 
 #. 5.6->settings-schema.json->CPU_labelPos->tooltip
 #. 5.6->settings-schema.json->Mem_labelPos->tooltip
@@ -813,7 +813,7 @@ msgstr ""
 msgid ""
 "Negative: to the top.\n"
 "Positive: to the bottom."
-msgstr ""
+msgstr "Negativ: zum oberen Rand. Positiv: zum unteren Rand."
 
 #. 5.6->settings-schema.json->CPU_labelZoom->description
 #. 5.6->settings-schema.json->Mem_labelZoom->description
@@ -821,9 +821,8 @@ msgstr ""
 #. 5.6->settings-schema.json->Disk_labelZoom->description
 #. 5.6->settings-schema.json->DiskUsage_labelZoom->description
 #. 5.6->settings-schema.json->Battery_labelZoom->description
-#, fuzzy
 msgid "Label zoom"
-msgstr "Farbe der Beschriftungen"
+msgstr "Vergrößerung der Beschriftung"
 
 #. 5.6->settings-schema.json->CPU_labelZoom->options
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
@@ -871,7 +870,7 @@ msgstr ""
 #. 5.6->settings-schema.json->DiskUsage_labelCustomized->description
 #. 5.6->settings-schema.json->Battery_labelCustomized->description
 msgid "Customize this label"
-msgstr ""
+msgstr "Diese Beschriftung anpassen"
 
 #. 5.6->settings-schema.json->CPU_labelCustom->description
 #. 5.6->settings-schema.json->Mem_labelCustom->description
@@ -880,7 +879,7 @@ msgstr ""
 #. 5.6->settings-schema.json->DiskUsage_labelCustom->description
 #. 5.6->settings-schema.json->Battery_labelCustom->description
 msgid "Custom label"
-msgstr ""
+msgstr "Angepasste Beschriftung"
 
 #. 5.6->settings-schema.json->CPU_labelCustom->tooltip
 #. 5.6->settings-schema.json->Mem_labelCustom->tooltip
@@ -889,7 +888,7 @@ msgstr ""
 #. 5.6->settings-schema.json->DiskUsage_labelCustom->tooltip
 #. 5.6->settings-schema.json->Battery_labelCustom->tooltip
 msgid "You can use emojis."
-msgstr ""
+msgstr "Sie können Emojis verwenden."
 
 #. 5.6->settings-schema.json->CPU_squared->description
 #. 5.6->settings-schema.json->Mem_squared->description
@@ -925,25 +924,27 @@ msgstr "Alles zusammenführen"
 
 #. 5.6->settings-schema.json->CPU_groupInSetsOf4->description
 msgid "Group in sets of 4 in tooltip"
-msgstr ""
+msgstr "Im Tooltip in 4-er Gruppen anzeigen"
 
 #. 5.6->settings-schema.json->CPU_ignoreHyperthreading->description
 msgid "Ignore Hyper-Threading"
-msgstr ""
+msgstr "Hyper-Threading ignorieren"
 
 #. 5.6->settings-schema.json->CPU_ignoreHyperthreading->tooltip
 msgid ""
 "Example: An 8-core processor with Hyper-Threading technology appears to have "
 "16 cores, even though it does not."
 msgstr ""
+"Beispiel: Ein 8-Kern Prozessor mit Hyper-Threading Technologie scheint 16 "
+"Kerne zu haben, obwohl dem nicht so ist."
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTime->description
 msgid "Show only the CPU Load Over Time"
-msgstr ""
+msgstr "Nur Zeitverlauf der CPU-Last anzeigen"
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->description
 msgid "How many bars?"
-msgstr ""
+msgstr "Wie viele Balken?"
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
 msgid "8"
@@ -963,7 +964,7 @@ msgstr ""
 
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->tooltip
 msgid "Related to CPU Load Over Time"
-msgstr ""
+msgstr "Bezogen auf den Zeitverlauf der CPU-Last"
 
 #. 5.6->settings-schema.json->CPU_showTemp->description
 msgid "Show the CPU temperature"
@@ -1049,51 +1050,43 @@ msgstr ""
 #. 5.6->settings-schema.json->percentFontFactor->description
 #. 5.6->settings-schema.json->flowFontFactor->description
 msgid "Font size: percentage of the box height"
-msgstr ""
+msgstr "Schriftgröße: Prozent der Höhe des Kästchens"
 
 #. 5.6->settings-schema.json->CPU_showLoadAverage->description
-#, fuzzy
 msgid "Show the CPU average load"
-msgstr "CPU-Temperatur anzeigen"
+msgstr "Durchschnittliche CPU-Last anzeigen"
 
 #. 5.6->settings-schema.json->CPU_loadAverageHigh->description
-#, fuzzy
 msgid "High CPU Load (%)"
-msgstr "Hohe CPU-Temperatur (°C)"
+msgstr "Hohe CPU-Last (°C)"
 
 #. 5.6->settings-schema.json->CPU_loadAverageCrit->description
-#, fuzzy
 msgid "Critical CPU Load (%)"
-msgstr "Kritische CPU-Temperatur (°C)"
+msgstr "Kritische CPU-Last (°C)"
 
 #. 5.6->settings-schema.json->CPU_loadAverageCrit->tooltip
-#, fuzzy
 msgid ""
 "Refer to your CPU documentation.\n"
 "Must be greater than the High CPU Load."
 msgstr ""
 "Siehe CPU-Dokumentation.\n"
-"Muss höher sein als die hohe CPU-Temperatur."
+"Muss höher sein als die hohe CPU-Last."
 
 #. 5.6->settings-schema.json->CPU_loadAverageColor->description
-#, fuzzy
 msgid "Normal Average Load Color"
-msgstr "Farbe normale Temperatur"
+msgstr "Farbe normale Durschnittslast"
 
 #. 5.6->settings-schema.json->CPU_loadAverageColorHigh->description
-#, fuzzy
 msgid "High Average Load Color"
-msgstr "Farbe hohe Temperatur"
+msgstr "Farbe hohe Durschnittslast"
 
 #. 5.6->settings-schema.json->CPU_loadAverageColorCrit->description
-#, fuzzy
 msgid "Critical Average Load Color"
-msgstr "Farbe kritische Temperatur"
+msgstr "Farbe kritische Durschnittslast"
 
 #. 5.6->settings-schema.json->CPU_loadAverageCorner->description
-#, fuzzy
 msgid "Corner in which to display the average load"
-msgstr "Ecke, in der die Temperatur angezeigt werden soll"
+msgstr "Ecke, in der die Durschnittslast angezeigt werden soll"
 
 #. 5.6->settings-schema.json->CPU_tempColor->description
 msgid "Normal Temperature Color"
@@ -1150,47 +1143,43 @@ msgstr ""
 
 #. 5.6->settings-schema.json->Mem_onlyUsedAvailable->description
 msgid "Display only Used and Available memory"
-msgstr ""
+msgstr "Nur belegten und verfügbaren Speicher anzeigen"
 
 #. 5.6->settings-schema.json->Mem_enabledBufferCacheSharedTooltip->description
-#, fuzzy
 msgid "Enable Buffer/Cache/Shared Tooltip"
-msgstr "Buffer/Cache/Shared"
+msgstr "Buffer/Cache/Shared-Tooltip aktivieren"
 
 #. 5.6->settings-schema.json->Swap_enabled->description
 msgid "Enable Swap"
 msgstr "Swap aktivieren"
 
 #. 5.6->settings-schema.json->Swap_enabledTooltip->description
-#, fuzzy
 msgid "Enable Swap Tooltip"
-msgstr "Swap aktivieren"
+msgstr "Swap-Tooltip aktivieren"
 
 #. 5.6->settings-schema.json->Mem_chartType->description
 msgid "Chart Type"
-msgstr ""
-
-#. 5.6->settings-schema.json->Mem_chartType->options
-#, fuzzy
-msgid "Pie chart"
 msgstr "Diagrammtyp"
 
 #. 5.6->settings-schema.json->Mem_chartType->options
+msgid "Pie chart"
+msgstr "Kuchendiagramm"
+
+#. 5.6->settings-schema.json->Mem_chartType->options
 msgid "Bar chart"
-msgstr ""
+msgstr "Balkendiagramm"
 
 #. 5.6->settings-schema.json->Mem_method->description
 msgid "Memory Calculation Method"
-msgstr ""
+msgstr "Berechnungsmethode Speicher"
 
 #. 5.6->settings-schema.json->Mem_method->options
 msgid "htop (recommended)"
-msgstr ""
+msgstr "htop (empfohlen)"
 
 #. 5.6->settings-schema.json->Mem_method->options
-#, fuzzy
 msgid "Gnome System Monitor"
-msgstr "Multikern-Systemmonitor"
+msgstr "Gnome-Systemmonitor"
 
 #. 5.6->settings-schema.json->Mem_startAt12Oclock->description
 msgid "Origin at 12 o'clock"
@@ -1206,7 +1195,7 @@ msgstr ""
 
 #. 5.6->settings-schema.json->Mem_value_display->description
 msgid "Display memory usage percentage"
-msgstr ""
+msgstr "Prozentuale Speicherbelegung anzeigen"
 
 #. 5.6->settings-schema.json->Mem_value_display->options
 #. 5.6->settings-schema.json->Mem_swapWidth->options
@@ -1221,40 +1210,38 @@ msgstr "Keine"
 #. 5.6->settings-schema.json->DiskUsage_value_display->options
 #. 5.6->settings-schema.json->Battery_value_display->options
 msgid "Hovering over"
-msgstr ""
+msgstr "Beim Überfahren"
 
 #. 5.6->settings-schema.json->Mem_value_display->options
 #. 5.6->settings-schema.json->DiskUsage_value_display->options
 #. 5.6->settings-schema.json->Battery_value_display->options
 msgid "Always"
-msgstr ""
+msgstr "Immer"
 
 #. 5.6->settings-schema.json->Mem_valueCorner->description
 #. 5.6->settings-schema.json->DiskUsage_valueCorner->description
 #. 5.6->settings-schema.json->Battery_valueCorner->description
-#, fuzzy
 msgid "Where to display this"
-msgstr "Ecke, in der der Wert angezeigt wird"
+msgstr "Wo das angezeigt wird"
 
 #. 5.6->settings-schema.json->Mem_valueCorner->options
 #. 5.6->settings-schema.json->DiskUsage_valueCorner->options
 #. 5.6->settings-schema.json->Battery_valueCorner->options
 msgid "Top"
-msgstr ""
+msgstr "Oben"
 
 #. 5.6->settings-schema.json->Mem_valueCorner->options
 #. 5.6->settings-schema.json->DiskUsage_valueCorner->options
 #. 5.6->settings-schema.json->Battery_valueCorner->options
-#, fuzzy
 msgid "Bottom"
-msgstr "Unten links"
+msgstr "Unten"
 
 #. 5.6->settings-schema.json->Mem_colorUsedup->description
 #. 5.6->settings-schema.json->DiskUsage_colorUsed->description
 #. 3.0/prefsui.glade:606 3.2/prefsui.glade:658 3.4/prefsui.glade:587
 #. 4.0/prefsui.glade:733
 msgid "Usedup"
-msgstr "Benutzt"
+msgstr "Verbraucht"
 
 #. 5.6->settings-schema.json->Mem_colorBuffers->description
 #, fuzzy
@@ -1297,23 +1284,22 @@ msgstr ""
 #. 5.6->settings-schema.json->Net_typeOfGraph->description
 #. 5.6->settings-schema.json->Disk_typeOfGraph->description
 msgid "Type of graph"
-msgstr ""
+msgstr "Diagrammtyp"
 
 #. 5.6->settings-schema.json->Net_typeOfGraph->options
 #. 5.6->settings-schema.json->Disk_typeOfGraph->options
 msgid "Curves only"
-msgstr ""
+msgstr "Nur Kurven"
 
 #. 5.6->settings-schema.json->Net_typeOfGraph->options
 #. 5.6->settings-schema.json->Disk_typeOfGraph->options
 msgid "Led only"
-msgstr ""
+msgstr "Nur LED"
 
 #. 5.6->settings-schema.json->Net_typeOfGraph->options
 #. 5.6->settings-schema.json->Disk_typeOfGraph->options
-#, fuzzy
 msgid "Curves and Led"
-msgstr "Linienstärke"
+msgstr "Kurven und LED"
 
 #. 5.6->settings-schema.json->Net_autoscale->description
 #. 5.6->settings-schema.json->Disk_autoscale->description
@@ -1334,7 +1320,7 @@ msgstr "Logarithmisch"
 #. 5.6->settings-schema.json->Net_minPrefix->description
 #. 5.6->settings-schema.json->Disk_minPrefix->description
 msgid "Minimal prefix"
-msgstr ""
+msgstr "Kleinste Präfix"
 
 #. 5.6->settings-schema.json->Net_minPrefix->options
 #. 5.6->settings-schema.json->Disk_minPrefix->options
@@ -1387,11 +1373,13 @@ msgid ""
 "You can specify the minimum unit of measurement of your choice for the "
 "amount of data transferred: byte, kilobyte, megabyte, etc."
 msgstr ""
+"Sie können die kleinste Maßeinheit für das übertragene Datenvolumen wählen: "
+"Byte, Kilobyte, Megabyte, usw."
 
 #. 5.6->settings-schema.json->Net_symbolsInTooltip->description
 #. 5.6->settings-schema.json->Disk_symbolsInTooltip->description
 msgid "Use symbols instead of words"
-msgstr "Symbole statt Worten verwenden"
+msgstr "Symbole statt Text verwenden"
 
 #. 5.6->settings-schema.json->Net_getdevlist_btn->description
 #. 5.6->settings-schema.json->Disk_getdevlist_btn->description
@@ -1487,9 +1475,8 @@ msgstr "Farbe Schreiben"
 
 #. 5.6->settings-schema.json->DiskUsage_value_display->description
 #. 5.6->settings-schema.json->Battery_value_display->description
-#, fuzzy
 msgid "Display value"
-msgstr "Diesen Wert anzeigen"
+msgstr "Wert anzeigen"
 
 #. 5.6->settings-schema.json->DiskUsage_colorAlert->description
 #. 5.6->settings-schema.json->Battery_colorAlert->description
@@ -1517,11 +1504,11 @@ msgstr "Pfad"
 
 #. 5.6->settings-schema.json->Battery_colorLoad->description
 msgid "Load"
-msgstr ""
+msgstr "Laden"
 
 #. 5.6->settings-schema.json->Battery_colorUnload->description
 msgid "Unload"
-msgstr ""
+msgstr "Entladen"
 
 #. 5.6->settings-schema.json->color0->description
 msgid "Color #0"
@@ -1667,7 +1654,7 @@ msgstr "Höhe"
 #. 3.0/prefsui.glade:645 3.2/prefsui.glade:697 3.4/prefsui.glade:625
 #. 4.0/prefsui.glade:771
 msgid "Cached"
-msgstr "Cache"
+msgstr "Gecached"
 
 #. 3.0/prefsui.glade:1550 3.2/prefsui.glade:1602 3.4/prefsui.glade:1549
 #. 4.0/prefsui.glade:1695
