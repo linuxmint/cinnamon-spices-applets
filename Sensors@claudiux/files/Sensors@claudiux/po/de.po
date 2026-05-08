@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-04-26 01:27+0200\n"
-"PO-Revision-Date: 2026-02-18 07:51+0100\n"
+"PO-Revision-Date: 2026-05-07 19:55+0200\n"
 "Last-Translator: Michael Härtl <haertl.mike@gmail.com>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -275,7 +275,7 @@ msgstr "Laufwerk-Temperatursensoren"
 
 #. settings-schema.json->section_helpColors->title
 msgid "Help to select color"
-msgstr ""
+msgstr "Auswahlhilfe für Farben"
 
 #. settings-schema.json->section_fanSensors->title
 msgid "Fan sensors"
@@ -351,11 +351,11 @@ msgstr ""
 
 #. settings-schema.json->window_set_current_size->description
 msgid "Set to the approximate current size and position"
-msgstr ""
+msgstr "Auf die ungefähre aktuelle Position und Größe setzen"
 
 #. settings-schema.json->window_label->description
 msgid "The exact size and position will depend on Cinnamon."
-msgstr ""
+msgstr "Die genaue Größe und Position hängt von Cinnamon ab."
 
 #. settings-schema.json->interval->options
 msgid "1"
@@ -496,9 +496,8 @@ msgid "Separator"
 msgstr "Trennzeichen"
 
 #. settings-schema.json->separator_color->description
-#, fuzzy
 msgid "Separator Color"
-msgstr "Trennzeichen"
+msgstr "Trennzeichenfarbe"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
@@ -558,7 +557,7 @@ msgstr ""
 
 #. settings-schema.json->tooltip_font_size->description
 msgid "Font size (px)"
-msgstr ""
+msgstr "Schriftgröße (px)"
 
 #. settings-schema.json->restart_in_menu->description
 msgid "Show in menu the action: Restart this applet"
@@ -768,11 +767,10 @@ msgstr "Formel"
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->custom_sensors->columns->title
-#, fuzzy
 msgid ""
 "Color\n"
 "in panel"
-msgstr "Im Panel anzeigen"
+msgstr "Farbe im Panel"
 
 #. settings-schema.json->temp_sensors->tooltip
 msgid ""
@@ -795,9 +793,8 @@ msgstr ""
 "  Beispiel: $*1.1+0.5"
 
 #. settings-schema.json->show_disks_first->description
-#, fuzzy
 msgid "Display the disk temperatures before those of the other sensors"
-msgstr "Werte der ausgewählten Sensoren anzeigen"
+msgstr "Festplattentemperatur vor der von anderen Sensoren anzeigen"
 
 #. settings-schema.json->btn_renew_disks_list->description
 msgid "Renew the list of known disks"
@@ -1048,7 +1045,7 @@ msgstr "Anzeige aktualisieren"
 
 #. settings-schema.json->button_color_help->description
 msgid "Open HTML Colors web page"
-msgstr ""
+msgstr "Website mit HTML-Farben öffnen"
 
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"

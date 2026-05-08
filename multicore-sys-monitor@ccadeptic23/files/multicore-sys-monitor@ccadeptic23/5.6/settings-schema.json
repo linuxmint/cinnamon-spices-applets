@@ -137,7 +137,8 @@
       "keys": [
         "percentAtEndOfLine",
         "tooltipFontSize",
-        "widthWhithoutAnyGraph",
+        "tooltipChangeBackgroundColor",
+        "tooltipBackgroundColor",
         "RefreshAll_btn"
       ]
     },
@@ -678,9 +679,21 @@
     "type": "scale",
     "default": 16,
     "min": 8,
-    "max": 32,
+    "max": 35,
     "step": 1,
     "description": "Font size (px)"
+  },
+  "tooltipChangeBackgroundColor": {
+    "type": "switch",
+    "default": false,
+    "description": "Change Tooltip Background Color",
+    "tooltip": "Uncheck this box to use the Tooltip Background Color defined by the theme."
+  },
+  "tooltipBackgroundColor": {
+    "type": "colorchooser",
+    "default": "rgba(106, 109, 116, 0.95)",
+    "description": "Tooltip Background Color",
+    "dependency": "tooltipChangeBackgroundColor"
   },
   "widthWhithoutAnyGraph": {
     "type": "scale",

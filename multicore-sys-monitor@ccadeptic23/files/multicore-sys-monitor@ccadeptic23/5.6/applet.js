@@ -173,7 +173,7 @@ function _(str) {
     return Gettext.gettext(str);
 }
 
-class MCSM extends Applet.IconApplet {
+class MCSM extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
@@ -222,8 +222,10 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("CPU_groupInSetsOf4", "CPU_groupInSetsOf4");
         this.settings.bind("percentAtEndOfLine", "percentAtEndOfLine");
         this.settings.bind("tooltipFontSize", "tooltipFontSize", () => { this.setTooltipStyle(); });
+        this.settings.bind("tooltipChangeBackgroundColor", "tooltipChangeBackgroundColor", () => { this.setTooltipStyle(); });
+        this.settings.bind("tooltipBackgroundColor", "tooltipBackgroundColor", () => { this.setTooltipStyle(); });
         this.setTooltipStyle();
-        this.settings.bind("widthWhithoutAnyGraph", "widthWhithoutAnyGraph");
+        //~ this.settings.bind("widthWhithoutAnyGraph", "widthWhithoutAnyGraph");
         this.settings.bind("CPU_labelOn", "CPU_labelOn");
         this.settings.bind("CPU_labelForeground", "CPU_labelForeground");
         this.settings.bind("Mem_labelOn", "Mem_labelOn");
@@ -439,8 +441,19 @@ class MCSM extends Applet.IconApplet {
         this.on_color_changed();
         this.useSymbolicIcon = true;
         if (this.without_any_graph) {
-            this.actor.set_style(`width: ${this.widthWhithoutAnyGraph}px;`);
-            this.setIcon();
+            let border = "";
+            if (this.borderOn) {
+                border = ` border: 1px solid ${this.borderColor}; border-radius: ${this.borderRadius}px;`;
+                this.actor.set_style(`${border}`);
+            } else {
+                this.actor.set_style(null);
+            }
+            //~ this.actor.set_style(`width: ${this.widthWhithoutAnyGraph}px;${border}`);
+
+            //~ this.setIcon();
+            this.set_applet_label("📈📊📉")
+        } else {
+            this.set_applet_label("")
         }
 
         this.set_panelHeight();
@@ -468,6 +481,11 @@ class MCSM extends Applet.IconApplet {
         this.oldCPU_Idle_Values = [];
 
         this.hovered = false;
+        this._applet_label.connect("motion-event", (actor, event) => {
+            this.hovered = true;
+            this._applet_tooltip.preventShow = false;
+            this._applet_tooltip.show()
+        });
         this.actor.connect("motion-event", (actor, event) => {
             this.hovered = true;
             this._applet_tooltip.preventShow = false;
@@ -588,11 +606,14 @@ class MCSM extends Applet.IconApplet {
     }
 
     setTooltipStyle() {
+        var bgColor = "";
+        if (this.tooltipChangeBackgroundColor)
+            bgColor = ` background-color: ${this.tooltipBackgroundColor};`;
         const fontSize = (this.tooltipFontSize != null) ? this.tooltipFontSize : 16;
         if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
-            this._applet_tooltip._tooltip.set_style(`text-align: right; font-family: monospace; font-size: ${fontSize}px;`);
+            this._applet_tooltip._tooltip.set_style(`text-align: right; font-family: monospace; font-size: ${fontSize}px;${bgColor}`);
         } else {
-            this._applet_tooltip._tooltip.set_style(`text-align: left; font-family: monospace; font-size: ${fontSize}px;`);
+            this._applet_tooltip._tooltip.set_style(`text-align: left; font-family: monospace; font-size: ${fontSize}px;${bgColor}`);
         }
     }
 
@@ -760,7 +781,7 @@ class MCSM extends Applet.IconApplet {
                 let index = orig_names.indexOf(box);
                 _properties = _properties.concat(orig_charts[index]);
             }
-        };
+        }
 
         for (let i = 0, len = _properties.length; i < len; i++) {
             if (_properties[i].abbrev === "Swap") {
