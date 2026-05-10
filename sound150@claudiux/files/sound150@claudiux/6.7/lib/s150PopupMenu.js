@@ -3,12 +3,13 @@ const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const Signals = imports.signals;
+const Extension = imports.ui.extension;
+var Me = Extension.getCurrentExtension();
+
 const UUID = "sound150@claudiux";
 const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const PATH2SCRIPTS = APPLET_DIR + "/scripts";
-
-let HtmlEncodeDecode = require("./lib/htmlEncodeDecode");
 
 const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
 const TMP_ALBUMART_DIR = XDG_RUNTIME_DIR + "/AlbumArt";
@@ -21,10 +22,10 @@ const ARTS_DIR = XDG_RUNTIME_DIR + "/sound150/arts";
 const MPV_RADIO_PID = XDG_RUNTIME_DIR + "/mpv_radio_PID";
 
 const PopupMenu = imports.ui.popupMenu;
-const { del_song_arts } = require("./lib/del_song_arts");
-const { ControlButton } = require("./lib/controlButton");
-const { VolumeSlider } = require("./lib/volumeSlider");
-const { HttpLib } = require("./lib/httpLib");
+const { del_song_arts } = Me.imports["./lib/del_song_arts"];
+const { ControlButton } = Me.imports["./lib/controlButton"];
+const { VolumeSlider } = Me.imports["./lib/volumeSlider"];
+const { HttpLib } = Me.imports["./lib/httpLib"];
 
 const Interfaces = imports.misc.interfaces;
 const Clutter = imports.gi.Clutter;
@@ -39,7 +40,7 @@ const {
     setTimeout,
     clearTimeout,
     source_remove
-} = require("./lib/mainloopTools");
+} = Me.imports["./lib/mainloopTools"];
 
 const ICON_SIZE = Math.trunc(28 * global.ui_scale);
 const superRND = (2**31-1)**2;
@@ -119,7 +120,7 @@ function _(str) {
 
 var players_without_seek_support = [];
 
-class StreamMenuSection extends PopupMenu.PopupMenuSection {
+var StreamMenuSection = class StreamMenuSection extends PopupMenu.PopupMenuSection {
     constructor(applet, stream) {
         super();
 
@@ -166,7 +167,7 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
 }
 Signals.addSignalMethods(StreamMenuSection.prototype);
 
-class Player extends PopupMenu.PopupMenuSection {
+var Player = class Player extends PopupMenu.PopupMenuSection {
     constructor(applet, busname, owner) {
         super();
         this._owner = owner;
@@ -1089,7 +1090,7 @@ class Player extends PopupMenu.PopupMenuSection {
 }
 Signals.addSignalMethods(Player.prototype);
 
-class Seeker extends Slider.Slider {
+var Seeker = class Seeker extends Slider.Slider {
     constructor(mediaServerPlayer, props, playerName) {
         super(0, true);
 
@@ -1536,7 +1537,7 @@ Signals.addSignalMethods(Seeker.prototype);
 
 
 
-class MediaPlayerLauncher extends PopupMenu.PopupBaseMenuItem {
+var MediaPlayerLauncher = class MediaPlayerLauncher extends PopupMenu.PopupBaseMenuItem {
     constructor(app, menu) {
         super({});
 
@@ -1570,10 +1571,3 @@ class MediaPlayerLauncher extends PopupMenu.PopupBaseMenuItem {
     }
 }
 Signals.addSignalMethods(MediaPlayerLauncher.prototype);
-
-module.exports = {
-    StreamMenuSection,
-    Player,
-    MediaPlayerLauncher,
-    Seeker
-}
