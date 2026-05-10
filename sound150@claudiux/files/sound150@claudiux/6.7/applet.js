@@ -38,10 +38,13 @@ const Pango = imports.gi.Pango;
 const ModalDialog = imports.ui.modalDialog;
 const Signals = imports.signals;
 
+var Me = Extension.getCurrentExtension();
 
+
+let HtmlEncodeDecode = Me.imports["./lib/htmlEncodeDecode"];
 const {
     xml2json
-} = require("./lib/xml2json.min");
+} = Me.imports["./lib/xml2json.min"];
 const {
     timeout_add_seconds,
     setTimeout,
@@ -51,15 +54,15 @@ const {
     source_exists,
     source_remove,
     remove_all_sources
-} = require("./lib/mainloopTools");
-const { del_song_arts } = require("./lib/del_song_arts");
+} = Me.imports["./lib/mainloopTools"];
+const { del_song_arts } = Me.imports["./lib/del_song_arts"];
 
-const { getRealScale } = require("./lib/get-real-scale");
+const { getRealScale } = Me.imports["./lib/get-real-scale"];
 
-const { VolumeSlider } = require("./lib/volumeSlider");
-const { BalanceSlider } = require("./lib/balanceSlider");
-const { ControlButton } = require("./lib/controlButton");
-const { StreamMenuSection, Player, MediaPlayerLauncher, Seeker } = require("./lib/s150PopupMenu");
+const { VolumeSlider } = Me.imports["./lib/volumeSlider"];
+const { BalanceSlider } = Me.imports["./lib/balanceSlider"];
+const { ControlButton } = Me.imports["./lib/controlButton"];
+const { StreamMenuSection, Player, MediaPlayerLauncher, Seeker } = Me.imports["./lib/s150PopupMenu"];
 
 
 const UUID = "sound150@claudiux";

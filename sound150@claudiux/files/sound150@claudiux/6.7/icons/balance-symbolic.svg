@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="16"
+   height="16"
+   version="1.1"
+   id="svg379"
+   sodipodi:docname="balance-symbolic.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs383" />
+  <sodipodi:namedview
+     id="namedview381"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="49.25"
+     inkscape:cx="6.0609137"
+     inkscape:cy="8.0304569"
+     inkscape:window-width="1860"
+     inkscape:window-height="963"
+     inkscape:window-x="0"
+     inkscape:window-y="40"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg379" />
+  <path
+     style="fill:#444444;stroke-width:1.14735"
+     d="m 1.0821979,3.0846137 -0.00857,0.044121 0.011204,-0.066546 z m 7.9914309,2.6769431 v 1.3164111 h -8 v 2.6328212 h 8 V 11.027201 H 11.073629 V 5.7615568 Z m 3.0000002,1.3164111 v 2.6328212 h 3 V 7.0779679 Z"
+     id="path377"
+     sodipodi:nodetypes="cccccccccccccccccc" />
+</svg>
