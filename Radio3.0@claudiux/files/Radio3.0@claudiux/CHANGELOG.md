@@ -1,3 +1,6 @@
+### v3.11.2~20260508
+  * Installing dependencies: Use pkgcli when available
+
 ### v3.11.1~20260414
   * Fixes certain dependency issues.
 

@@ -1,3 +1,6 @@
+### v5.11.4~20260508
+  * Installing dependencies: Use pkgcli when available.
+
 ### v5.11.3~20260426
   * Adds ability to select the size of the tooltip font.
   * Fixes [#8599](https://github.com/linuxmint/cinnamon-spices-applets/issues/8599)
