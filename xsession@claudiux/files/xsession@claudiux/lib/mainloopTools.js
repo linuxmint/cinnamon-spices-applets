@@ -1,4 +1,8 @@
 const  GLib = imports.gi.GLib;
+const Util = imports.misc.util;
+const CINNAMON_VERSION = GLib.getenv("CINNAMON_VERSION");
+const isCin67plus = Util.version_exceeds(CINNAMON_VERSION, "6.7");
+
 
 /**
  * _sourceIds
@@ -165,15 +169,17 @@ function remove_all_sources() {
   }
 }
 
-module.exports = {
-  _sourceIds,
-  timeout_add_seconds,
-  timeout_add,
-  setTimeout,
-  clearTimeout,
-  setInterval,
-  clearInterval,
-  source_exists,
-  source_remove,
-  remove_all_sources
+if (!isCin67plus) {
+  module.exports = {
+    _sourceIds,
+    timeout_add_seconds,
+    timeout_add,
+    setTimeout,
+    clearTimeout,
+    setInterval,
+    clearInterval,
+    source_exists,
+    source_remove,
+    remove_all_sources
+  }
 }

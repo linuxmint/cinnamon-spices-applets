@@ -12,21 +12,36 @@ const Gettext = imports.gettext;
 const Util = imports.misc.util;
 const Tooltips = imports.ui.tooltips;
 const Pango = imports.gi.Pango;
-const {
-  reloadExtension,
-  Type
-} = imports.ui.extension; //Extension
+const Extension = imports.ui.extension;
+
+const CINNAMON_VERSION = GLib.getenv("CINNAMON_VERSION");
+const isCin67plus = Util.version_exceeds(CINNAMON_VERSION, "6.7");
+var Me;
+if (isCin67plus) {
+  Me = Extension.getCurrentExtension();
+}
+
 const { restartCinnamon } = imports.ui.main; // Main
 
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 
-const {to_string} = require("./lib/to-string");
-const {
-  setTimeout,
-  clearTimeout,
-  remove_all_sources
-} = require("./lib/mainloopTools");
+if (!isCin67plus) {
+  var {to_string} = require("./lib/to-string");
+  var {
+    setTimeout,
+    clearTimeout,
+    remove_all_sources
+  } = require("./lib/mainloopTools");
+} else {
+  var {to_string} = Me.imports["./lib/to-string"];
+  var {
+    setTimeout,
+    clearTimeout,
+    remove_all_sources
+  } = Me.imports["./lib/mainloopTools"];
+}
+
 
 // ++ Set DEBUG to true to display log messages in ~/.xsession-errors
 // ++ Set DEBUG to false in production.
@@ -395,7 +410,7 @@ class LGS extends Applet.IconApplet {
               let id = setTimeout( () => {
                 clearTimeout(id);
                 for (let applet of this.get_active_spices("applets")) {
-                  reloadExtension(applet, Type.APPLET);
+                  Extension.reloadExtension(applet, Extension.Type.APPLET);
                 }
               },
               0);
@@ -405,7 +420,7 @@ class LGS extends Applet.IconApplet {
         }
 
         for (let applet of this.get_active_spices("applets")) {
-            let s = new LGSMenuItem(this, "applets", applet, () => {reloadExtension(applet, Type.APPLET);}, null);
+            let s = new LGSMenuItem(this, "applets", applet, () => {Extension.reloadExtension(applet, Extension.Type.APPLET);}, null);
             subMenuReloadApplets.menu.addMenuItem(s);
         }
 
@@ -421,7 +436,7 @@ class LGS extends Applet.IconApplet {
               let id = setTimeout( () => {
                 clearTimeout(id);
                 for (let desklet of this.get_active_spices("desklets")) {
-                  reloadExtension(desklet, Type.DESKLET);
+                  Extension.reloadExtension(desklet, Extension.Type.DESKLET);
                 }
               },
               0);
@@ -431,7 +446,7 @@ class LGS extends Applet.IconApplet {
         }
 
         for (let desklet of this.get_active_spices("desklets")) {
-            let s = new LGSMenuItem(this, "desklets", desklet, () => {reloadExtension(desklet, Type.DESKLET);}, null);
+            let s = new LGSMenuItem(this, "desklets", desklet, () => {Extension.reloadExtension(desklet, Extension.Type.DESKLET);}, null);
             subMenuReloadDesklets.menu.addMenuItem(s);
         }
 
@@ -447,7 +462,7 @@ class LGS extends Applet.IconApplet {
               let id = setTimeout( () => {
                 clearTimeout(id);
                 for (let extension of this.get_active_spices("extensions")) {
-                  reloadExtension(extension, Type.EXTENSION);
+                  Extension.reloadExtension(extension, Extension.Type.EXTENSION);
                 }
               },
               0);
@@ -457,7 +472,7 @@ class LGS extends Applet.IconApplet {
         }
 
         for (let extension of this.get_active_spices("extensions")) {
-            let s = new LGSMenuItem(this, "extensions", extension, () => {reloadExtension(extension, Type.EXTENSION);}, null);
+            let s = new LGSMenuItem(this, "extensions", extension, () => {Extension.reloadExtension(extension, Extension.Type.EXTENSION);}, null);
             subMenuReloadExtensions.menu.addMenuItem(s);
         }
 
