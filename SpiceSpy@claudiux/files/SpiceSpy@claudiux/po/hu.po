@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-04-27 17:11+0200\n"
-"PO-Revision-Date: 2026-04-14 07:14+0200\n"
+"PO-Revision-Date: 2026-05-11 18:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -52,7 +52,7 @@ msgstr ""
 
 #. applet.js:420
 msgid "Ends around:"
-msgstr ""
+msgstr "Vége körülbelül:"
 
 #. applet.js:437
 msgid "Time remaining until the next check:"

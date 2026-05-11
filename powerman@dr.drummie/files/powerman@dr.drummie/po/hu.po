@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: powerman@dr.drummie 1.9.10\n"
 "Report-Msgid-Bugs-To: https://github.com/drdrummie/powerman-dr.drummie\n"
 "POT-Creation-Date: 2026-04-25 10:21+0200\n"
-"PO-Revision-Date: 2025-09-06 22:34+0200\n"
+"PO-Revision-Date: 2026-05-11 19:22+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: hu\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.9\n"
 
 #: src/applet.js:52
 #, javascript-format
@@ -61,7 +62,7 @@ msgstr "Ismeretlen"
 
 #: src/applet.js:100
 msgid "AC adapter"
-msgstr "AC adapter"
+msgstr "Hálózati adapter"
 
 #: src/applet.js:102
 msgid "Laptop battery"
@@ -315,7 +316,7 @@ msgstr "energiatakarékos mód (akkumulátor alacsony: %d%%)"
 
 #: src/powerman-framework.js:1562
 msgid "AC power: "
-msgstr "AC áram: "
+msgstr "Hálózati áram: "
 
 #: src/powerman-framework.js:1562
 msgid "Battery power: "
@@ -328,7 +329,9 @@ msgstr "Energia automatizálás"
 msgid ""
 "Enhanced power applet with automatic brightness and power profiles for AC/"
 "Battery"
-msgstr "Továbbfejlesztett energiakezelő aplet automatikus fényerővel és energiaprofilokkal AC/Akkumulátor"
+msgstr ""
+"Továbbfejlesztett energiakezelő kisalkalmazás automatikus fényerővel és AC/"
+"Akkumulátor energiaprofilokkal"
 
 msgid "PowerMan - Power Automation"
 msgstr "PowerMan - Energiagazdálkodás automatizálása"
@@ -365,10 +368,10 @@ msgid "90 seconds"
 msgstr "90 másodperc"
 
 msgid "AC brightness level (%)"
-msgstr "AC fényerő szint (%)"
+msgstr "Hálózati fényerő szint (%)"
 
 msgid "AC power profile"
-msgstr "AC energia profil"
+msgstr "Hálózati energia profil"
 
 msgid "Always show all batteries"
 msgstr "Mindig mutasson minden akkumulátort"
@@ -377,16 +380,16 @@ msgid "Always show multiple batteries in panel"
 msgstr "Mindig mutasson több akkumulátort a panelen"
 
 msgid "Auto dim screen when idle on battery power"
-msgstr "Automatikusan tompítsa a képernyőt tétlenségkor akkumulátoron"
+msgstr "Automatikusan sötétítse a képernyőt tétlenségkor akkumulátoron"
 
 msgid "Automatically adjust brightness for AC/Battery"
-msgstr "Automatikusan állítsa a fényerőt AC/Akkumulátorhoz"
+msgstr "Automatikusan állítsa a fényerőt hálózaton/akkumulátoron"
 
 msgid "Automatically dim the screen when idle while on AC power"
-msgstr "Automatikusan tompítsa a képernyőt tétlenségkor AC áramon"
+msgstr "Automatikusan sötétítse a képernyőt tétlenségkor hálózati áramon"
 
 msgid "Automatically switch power profiles for AC/Battery"
-msgstr "Automatikusan váltson energia profilokat AC/Akkumulátorhoz"
+msgstr "Automatikusan váltson hálózati/akkumulátoros energia profilokat"
 
 msgid "Automatically switch to power-saver mode when battery is low"
 msgstr ""
@@ -396,6 +399,8 @@ msgid ""
 "Automatically update AC/Battery brightness settings when user manually "
 "changes brightness"
 msgstr ""
+"Automatikusan frissíti a hálózati/akkumulátoros fényerő-beállításokat, "
+"amikor a felhasználó manuálisan módosítja a fényerőt"
 
 msgid "Auto power-saver on low battery"
 msgstr "Automatikus energiatakarékos alacsony akkumulátoron"
@@ -421,28 +426,28 @@ msgid "Brightness Control Status"
 msgstr "Fényerő vezérlés állapot"
 
 msgid "Brightness level to use when on AC power"
-msgstr "Fényerő szint AC áramon használva"
+msgstr "Fényerő szint a hálózati áramot használva"
 
 msgid "Brightness level to use when on battery power"
 msgstr "Fényerő szint akkumulátoron használva"
 
 msgid "Brightness level when dimmed (%)"
-msgstr "Fényerő szint tompításkor (%)"
+msgstr "Fényerő szint sötétítéskor (%)"
 
 msgid "Debug and Logging"
 msgstr "Hibakeresés és naplózás"
 
 msgid "Dim screen when idle on AC power"
-msgstr "Tompítsa a képernyőt tétlenségkor AC áramon"
+msgstr "Sötétítése a képernyőt tétlenségkor hálózati áramon"
 
 msgid "Dim screen when idle on battery"
-msgstr "Tompítsa a képernyőt tétlenségkor akkumulátoron"
+msgstr "Sötétítése a képernyőt tétlenségkor akkumulátoron"
 
 msgid "Display"
 msgstr "Kijelző"
 
 msgid "Display and Advanced"
-msgstr "Kijelző és haladó"
+msgstr "Kijelző és Haladó"
 
 msgid "Display notifications when power automation actions are performed"
 msgstr ""
@@ -453,8 +458,8 @@ msgid ""
 "Enable automatic switching between different power profiles for AC and "
 "Battery"
 msgstr ""
-"Engedélyezze az automatikus váltást különböző energia profilok között AC és "
-"akkumulátorhoz"
+"Engedélyezze az automatikus váltást különböző energia profilok között "
+"hálózathoz és akkumulátorhoz"
 
 msgid "Enable debug logging"
 msgstr "Engedélyezze a hibakeresési naplózást"
@@ -473,7 +478,7 @@ msgid "Hide label"
 msgstr "Rejtse el a címkét"
 
 msgid "List of original power applets that were disabled"
-msgstr ""
+msgstr "Az eredeti, letiltott energia kisalkalmazások listája"
 
 msgid "Low battery threshold (%)"
 msgstr "Alacsony akkumulátor küszöb (%)"
@@ -498,17 +503,19 @@ msgstr ""
 "akkumulátor eszköz észlelve."
 
 msgid "Power profile to use when on AC power"
-msgstr "Energia profil AC áramon használva"
+msgstr "Energia profil hálózati áramot használva"
 
 msgid "Power profile to use when on battery power"
-msgstr "Energia profil akkumulátoron használva"
+msgstr "Energia profil akkumulátort használva"
 
 msgid "Remember user brightness changes"
-msgstr ""
+msgstr "Emlékezz a felhasználói fényerő-változásokra"
 
 msgid ""
 "Replaced by remove button in applet menu (kept for schema compatibility)"
 msgstr ""
+"Helyettesítette az eltávolítás gomb a kisalkalmazás menüben (a séma "
+"kompatibilitása érdekében megtartva)"
 
 msgid ""
 "Screen brightness control is not available on this system. Brightness "
@@ -518,10 +525,10 @@ msgstr ""
 "automatizálás letiltva."
 
 msgid "Screen Dimming Settings"
-msgstr "Képernyő tompítás beállítások"
+msgstr "Képernyő sötétítés beállítások"
 
 msgid "Screen dim timeout"
-msgstr "Képernyő tompítás időkorlát"
+msgstr "Képernyő sötétítés időkorlát"
 
 msgid "Show automation notifications"
 msgstr "Mutassa az automatizálási értesítéseket"
@@ -536,8 +543,7 @@ msgid "Show time remaining"
 msgstr "Mutassa a hátralévő időt"
 
 msgid "The brightness level to use when dimming the screen"
-msgstr "Fényerő szint képernyő tompításkor használva"
+msgstr "Fényerő szintje a képernyő sötétítése esetén"
 
 msgid "Time before screen dims when idle"
-msgstr "Idő képernyő tompítása előtt tétlenségkor"
-
+msgstr "Időtartam képernyő sötétítés előtt ha tétlen"
