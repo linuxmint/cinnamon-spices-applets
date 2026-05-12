@@ -41,6 +41,8 @@ msgid ""
 "Missing dependency.\n"
 "'lpq' command is missing! Please install 'cups-bsd' package (if available)."
 msgstr ""
+"Manglende afhængighed.\n"
+"Kommandoen “lpq” mangler! Installér venligst pakken “cups-bsd” (hvis den er tilgængelig)."
 
 #. metadata.json->description
 msgid "Manage Jobs and Printers"
@@ -48,7 +50,7 @@ msgstr "Håndtér udskrivningsopgaver og printere"
 
 #. metadata.json->contributors
 msgid "Caldas Lopes"
-msgstr ""
+msgstr "Caldas Lopes"
 
 #. settings-schema.json->show-icon->description
 msgid "Show icon"
