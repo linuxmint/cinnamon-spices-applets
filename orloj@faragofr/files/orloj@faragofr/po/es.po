@@ -1,0 +1,64 @@
+# ORLOJ
+# This file is put in the public domain.
+# faragofr, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: orloj@faragofr 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-05-11 22:18+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#. ..->..->..->orloj@faragofr->files->orloj@faragofr->metadata.json->name
+msgid "Orloj"
+msgstr "Orloj"
+
+#. ..->..->..->orloj@faragofr->files->orloj@faragofr->metadata.json->description
+msgid "Prague-style astronomical clock applet"
+msgstr "Aplicación del reloj astronómico al estilo de Praga"
+
+#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
+#. schema.json->latitude->description
+msgid "Latitude (decimal degrees, north positive)"
+msgstr "Latitud (grados decimales, norte positivo)"
+
+#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
+#. schema.json->latitude->tooltip
+msgid "Your geographic latitude in decimal degrees, e.g. 50.0875 for Prague"
+msgstr ""
+"Tu latitud geográfica en grados decimales, p. ej., 50,0875 para Praga"
+
+#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
+#. schema.json->longitude->description
+msgid "Longitude (decimal degrees, east positive)"
+msgstr "Longitud (grados decimales, con el este como valor positivo)"
+
+#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
+#. schema.json->longitude->tooltip
+msgid "Your geographic longitude in decimal degrees, e.g. 14.4214 for Prague"
+msgstr ""
+"Tu longitud geográfica en grados decimales, p. ej., 14,4214 para Praga"
+
+#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
+#. schema.json->refresh-seconds->units
+msgid "seconds"
+msgstr "segundos"
+
+#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
+#. schema.json->refresh-seconds->description
+msgid "Refresh interval"
+msgstr "Intervalo de actualización"
+
+#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
+#. schema.json->accent-color->description
+msgid "Accent color"
+msgstr "Color de contraste"
