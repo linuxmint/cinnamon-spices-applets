@@ -1,3 +1,6 @@
+### v16.4.0~20260510
+  * Ready for Linux Mint 23.
+
 ### v16.3.4~20260504
   * You can set the menu width using an option available in this applet's settings.
   * Fixes [#8645](https://github.com/linuxmint/cinnamon-spices-applets/issues/8645)

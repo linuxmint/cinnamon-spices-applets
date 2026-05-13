@@ -1,0 +1,8 @@
+{
+    "uuid": "orloj@faragofr",
+    "name": "Orloj",
+    "description": "Prague-style astronomical clock applet",
+    "author": "faragofr",
+    "website": "https://github.com/faragofr/orloj-widget",
+    "version": "1.0.0"
+}

@@ -1276,7 +1276,7 @@ msgstr "Walisisk"
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options
 msgid "Asturianu"
-msgstr "Asurisk"
+msgstr "Asturisk"
 
 #. 5.8->settings-schema.json->wikipedia-language->options
 #. 4.0->settings-schema.json->wikipedia-language->options

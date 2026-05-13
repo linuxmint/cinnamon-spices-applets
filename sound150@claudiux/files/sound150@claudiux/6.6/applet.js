@@ -39,7 +39,6 @@ const ModalDialog = imports.ui.modalDialog;
 const Signals = imports.signals;
 
 
-let HtmlEncodeDecode = require("./lib/htmlEncodeDecode");
 const {
     xml2json
 } = require("./lib/xml2json.min");

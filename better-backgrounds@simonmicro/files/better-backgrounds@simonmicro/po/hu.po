@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-04-13 04:55+0100\n"
-"PO-Revision-Date: 2023-12-13 16:40+0100\n"
+"PO-Revision-Date: 2026-05-11 18:32+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -17,21 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.9\n"
 
 #. metadata.json->name
 msgid "Better Backgrounds"
 msgstr "Jobb hátterek"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "Apply new backgrounds from Bing, Himawari 8, Picsum Photos, or even whole "
 "websites"
 msgstr ""
-"Alkalmazzon új háttereket a Bing, a Himawari 8, a Picsum Photos, a "
-"PlaceKitten.com, az Unsplash.com vagy akár a teljes webhelyekről – adjon meg "
-"keresési címkéket, triggereket és egyebeket!"
+"Új hátterek alkalmazása Bingből, Himawari 8-ból, Picsum Photosból vagy akár "
+"teljes weboldalakról"
 
 #. settings-schema.json->pageBehaviour->title
 msgid "Behaviour"
@@ -178,7 +176,6 @@ msgid "None"
 msgstr "Nincs"
 
 #. settings-schema.json->image-source->description
-#, fuzzy
 msgid "Image Source"
 msgstr "Kép forrása"
 

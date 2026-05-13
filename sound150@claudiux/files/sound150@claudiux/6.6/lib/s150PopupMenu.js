@@ -8,6 +8,8 @@ const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const PATH2SCRIPTS = APPLET_DIR + "/scripts";
 
+let HtmlEncodeDecode = require("./lib/htmlEncodeDecode");
+
 const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
 const TMP_ALBUMART_DIR = XDG_RUNTIME_DIR + "/AlbumArt";
 const ALBUMART_ON = TMP_ALBUMART_DIR + "/ON";
