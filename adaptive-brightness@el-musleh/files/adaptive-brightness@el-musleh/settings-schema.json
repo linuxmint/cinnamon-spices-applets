@@ -45,8 +45,7 @@
   "calibrate-min-lux": {
     "type": "button",
     "default": false,
-    "title": "Calibrate Dark Level",
-    "description": "Click when in your dimmest environment — records noise floor over 60s"
+    "description": "Calibrate Dark Level - click when in your dimmest environment (60s reading)"
   },
   "min-lux": {
     "type": "spinbutton",
@@ -60,8 +59,7 @@
   "calibrate-max-lux": {
     "type": "button",
     "default": false,
-    "title": "Calibrate Bright Level",
-    "description": "Click when in your brightest environment — records peak lux over 60s"
+    "description": "Calibrate Bright Level - click when in your brightest environment (60s reading)"
   },
   "max-lux": {
     "type": "spinbutton",
