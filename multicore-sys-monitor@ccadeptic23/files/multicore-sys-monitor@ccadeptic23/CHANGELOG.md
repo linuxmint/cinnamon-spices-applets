@@ -1,3 +1,7 @@
+### v3.15.3~20260514
+  * New option: Display the temperature unit.
+  * Fixes [#8679](https://github.com/linuxmint/cinnamon-spices-applets/issues/8679)
+
 ### v3.15.2~20260506
   * Tooltip: Can change background color.
   * Without Any Graphics mode: Display change, improving tooltip stability.

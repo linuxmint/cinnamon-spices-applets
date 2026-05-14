@@ -186,6 +186,7 @@
       "title": "CPU Temperature",
       "keys": [
         "CPU_showTemp",
+        "CPU_showTempUnit",
         "CPU_temp_hovering_only",
         "CPU_tempInFahrenheit",
         "CPU_tempPath",
@@ -934,6 +935,12 @@
     "type": "switch",
     "default": true,
     "description": "Show the CPU temperature"
+  },
+  "CPU_showTempUnit": {
+    "type": "switch",
+    "default": true,
+    "description": "Display the temperature unit",
+    "dependency": "CPU_showTemp"
   },
   "CPU_temp_hovering_only": {
     "type": "switch",

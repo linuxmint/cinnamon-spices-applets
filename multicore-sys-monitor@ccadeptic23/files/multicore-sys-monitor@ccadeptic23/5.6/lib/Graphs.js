@@ -304,7 +304,9 @@ class GraphVBars {
       (!this.applet.CPU_temp_hovering_only || (this.applet.CPU_temp_hovering_only && this.applet.hovered)) &&
       this.applet.CPU_temperature
     ) {
-      let degrees = (this.applet.CPU_tempInFahrenheit) ? "°F" : "°C";
+      let degrees = "°";
+      if (this.applet.CPU_showTempUnit)
+        degrees = (this.applet.CPU_tempInFahrenheit) ? "°F" : "°C";
       let pangolayout2 = area.create_pango_layout("" + this.applet.CPU_temperature + degrees);
 
       isRight = this.applet.CPU_tempCorner.includes("R");
