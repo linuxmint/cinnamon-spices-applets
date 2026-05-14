@@ -110,18 +110,19 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             this.set_applet_label("🌤");
             this._update_tooltip();
             this._schedule_next_loop();
-
-            // Add context menu with Configure option
-            this._buildContextMenu();
         } catch (e) {
             global.logError("[AB] Constructor: " + (e && e.message ? e.message : e));
             this.set_applet_label("⚠");
         }
     }
 
-    _buildContextMenu() {
+    // Override getContextMenuItems to add Configure option
+    getContextMenuItems() {
         try {
-            this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            const items = Applet.TextApplet.prototype.getContextMenuItems.call(this);
+
+            items.push(new PopupMenu.PopupSeparatorMenuItem());
+
             const configureItem = new PopupMenu.PopupMenuItem("Configure...");
             const self = this;
             configureItem.connect('activate', function() {
@@ -135,9 +136,12 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
                     global.logError("[AB] Configure click failed: " + (e && e.message ? e.message : e));
                 }
             });
-            this._applet_context_menu.addMenuItem(configureItem);
+            items.push(configureItem);
+
+            return items;
         } catch (e) {
-            global.logError("[AB] Context menu setup failed: " + (e && e.message ? e.message : e));
+            global.logError("[AB] getContextMenuItems failed: " + (e && e.message ? e.message : e));
+            return Applet.TextApplet.prototype.getContextMenuItems.call(this);
         }
     }
 
