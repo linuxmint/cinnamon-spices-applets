@@ -18,20 +18,22 @@ const Mainloop = imports.mainloop;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Settings = imports.ui.settings;
-
-// Candidate sysfs locations for ambient light sensors. We try each
-// path and pick the first that exposes both 'raw' and 'scale'.
-const ALS_PATHS = [
-    { raw: "/sys/bus/iio/devices/iio:device0/in_illuminance_raw", scale: "/sys/bus/iio/devices/iio:device0/in_illuminance_scale" },
-    { raw: "/sys/bus/iio/devices/iio:device1/in_illuminance_raw", scale: "/sys/bus/iio/devices/iio:device1/in_illuminance_scale" },
-    { raw: "/sys/class/sensors/light/in_illuminance_raw", scale: "/sys/class/sensors/light/in_illuminance_scale" }
-];
+const Main = imports.ui.main;
 
 // Constraints and defaults
 const POLL_INTERVAL = { MIN: 100, DEFAULT: 1000, MAX: 60000 };
 const BRIGHTNESS = { MIN: 1, MAX: 100, DEFAULT_MIN: 10, DEFAULT_MAX: 100 };
 const SMOOTHING = { MIN: 0, MAX: 1, DEFAULT: 0.2 };
-const LUX = { DEFAULT_MAX: 10000, MIN_MAX: 100 };
+const LUX = {
+    DEFAULT_MAX: 10000,
+    DEFAULT_MIN: 0,
+    MIN_MAX: 100,
+    MIN_MIN: 0,
+    MAX_MIN: 5000,
+    MIN_RANGE_RATIO: 0.05
+};
+
+const CAL_PHASE = { NONE: "none", DARK: "dark", BRIGHT: "bright" };
 
 class AdaptiveBrightnessApplet extends Applet.TextApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
@@ -51,6 +53,12 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             this._errorCount = 0;          // consecutive error count
             this._lastError = null;        // last error message logged
             this._lastPollInterval = undefined; // tracks poll interval changes
+            this._calPhase         = CAL_PHASE.NONE;
+            this._calTimerId       = null;
+            this._calCountdownId   = null;
+            this._calDarkSamples   = [];
+            this._calBrightMax     = 0;
+            this._calCountdown     = 0;
 
             // Settings with safe defaults
             this.min_brightness = BRIGHTNESS.DEFAULT_MIN;
@@ -58,6 +66,10 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             this.smoothing_factor = SMOOTHING.DEFAULT;
             this.max_lux = LUX.DEFAULT_MAX;
             this.poll_interval = POLL_INTERVAL.DEFAULT;
+            this.calibrate_max_lux = false;
+            this.min_lux = LUX.DEFAULT_MIN;
+            this.sensor_path = "";
+            this.calibrate_min_lux = false;
 
             // Bind settings to local fields and validate on change
             try {
@@ -68,6 +80,17 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
                 this.settings.bind("smoothing-factor", "smoothing_factor", validator);
                 this.settings.bind("max-lux", "max_lux", validator);
                 this.settings.bind("poll-interval", "poll_interval", validator);
+                this.settings.bind("min-lux", "min_lux", validator);
+                this.settings.bind("sensor-path", "sensor_path", () => {
+                    this._sensorAvailable = false;
+                    this._sensorPath = null;
+                    this._locate_sensor();
+                    this._update_tooltip();
+                });
+                this.settings.bind("calibrate-min-lux", "calibrate_min_lux",
+                    this._start_dark_calibration.bind(this));
+                this.settings.bind("calibrate-max-lux", "calibrate_max_lux",
+                    this._start_bright_calibration.bind(this));
 
                 // Initial validation applies defaults and may trigger an immediate
                 // brightness computation if a recent lux exists.
@@ -87,24 +110,246 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
         }
     }
 
-    // Try to find a sysfs sensor path from ALS_PATHS; mark the applet disabled
-    // if no usable sensor exists. We log failures rather than silently ignoring
-    // them so maintainers can diagnose hardware differences.
+    _start_dark_calibration() {
+        if (!this.calibrate_min_lux) return;
+        if (this._calPhase !== CAL_PHASE.NONE) {
+            global.log("[AB] Calibration already running, ignoring DARK start.");
+            return;
+        }
+        if (!this._sensorAvailable) {
+            Main.notify("Adaptive Brightness", "No sensor found — cannot calibrate.");
+            return;
+        }
+
+        global.log("[AB] DARK calibration phase started.");
+        this._calPhase = CAL_PHASE.DARK;
+        this._calDarkSamples = [];
+        this._calCountdown = 60;
+
+        Main.notify("Adaptive Brightness",
+            "DARK phase started.\nGo to your dimmest environment.\nReading for 60 seconds.");
+
+        this._calCountdownId = Mainloop.timeout_add(1000, this._cal_tick_dark.bind(this));
+        this._calTimerId = Mainloop.timeout_add(60000, () => {
+            this._calTimerId = null;
+            this._finish_dark_calibration();
+            return false;
+        });
+    }
+
+    _cal_tick_dark() {
+        if (this._calPhase !== CAL_PHASE.DARK) return false;
+        this._calCountdown = Math.max(0, this._calCountdown - 1);
+        const cur = this._lastLux >= 0 ? this._lastLux.toFixed(1) + " lux" : "reading…";
+        this.set_applet_tooltip(
+            "[Calibrating DARK] " + cur + " | " + this._calCountdown + "s remaining"
+        );
+        if (this._calCountdown <= 0) { this._calCountdownId = null; return false; }
+        return true;
+    }
+
+    _finish_dark_calibration() {
+        if (this._calPhase !== CAL_PHASE.DARK) return;
+        this._calPhase = CAL_PHASE.NONE;
+
+        if (this._calCountdownId) {
+            Mainloop.source_remove(this._calCountdownId);
+            this._calCountdownId = null;
+        }
+        if (this._calTimerId) {
+            Mainloop.source_remove(this._calTimerId);
+            this._calTimerId = null;
+        }
+        this.calibrate_min_lux = false;
+
+        const samples = this._calDarkSamples;
+
+        if (samples.length < 3) {
+            Main.notify("Adaptive Brightness",
+                "DARK calibration failed: too few samples (" + samples.length + ").\n" +
+                "Ensure the sensor is active and the poll interval is under 5000ms.");
+            this._update_tooltip();
+            return;
+        }
+
+        samples.sort((a, b) => a - b);
+        const floorIdx = Math.floor(samples.length * 0.25);
+        const noiseFloor = samples[floorIdx];
+
+        const maxAllowed = this.max_lux * LUX.MIN_RANGE_RATIO;
+        if (noiseFloor > maxAllowed) {
+            Main.notify("Adaptive Brightness",
+                "DARK calibration: noise floor (" + noiseFloor.toFixed(1) + " lux) " +
+                "exceeds 5% of max-lux (" + this.max_lux + ").\n" +
+                "The environment may not be dark enough, or max-lux is too low.\n" +
+                "min-lux not updated.");
+            this._update_tooltip();
+            return;
+        }
+
+        const newMinLux = Math.round(noiseFloor * 1.10);
+        this.min_lux = newMinLux;
+        this.settings.setValue("min-lux", newMinLux);
+
+        global.log("[AB] DARK calibration complete. min-lux=" + newMinLux);
+        Main.notify("Adaptive Brightness",
+            "DARK calibration complete.\nmin-lux set to " + newMinLux + " lux.\n" +
+            "Now calibrate BRIGHT level if needed.");
+        this._update_tooltip();
+    }
+
+    _start_bright_calibration() {
+        if (!this.calibrate_max_lux) return;
+        if (this._calPhase !== CAL_PHASE.NONE) {
+            global.log("[AB] Calibration already running, ignoring BRIGHT start.");
+            return;
+        }
+        if (!this._sensorAvailable) {
+            Main.notify("Adaptive Brightness", "No sensor found — cannot calibrate.");
+            return;
+        }
+
+        global.log("[AB] BRIGHT calibration phase started.");
+        this._calPhase = CAL_PHASE.BRIGHT;
+        this._calBrightMax = 0;
+        this._calCountdown = 60;
+
+        Main.notify("Adaptive Brightness",
+            "BRIGHT phase started.\nGo to your brightest environment.\nReading for 60 seconds.");
+
+        this._calCountdownId = Mainloop.timeout_add(1000, this._cal_tick_bright.bind(this));
+        this._calTimerId = Mainloop.timeout_add(60000, () => {
+            this._calTimerId = null;
+            this._finish_bright_calibration();
+            return false;
+        });
+    }
+
+    _cal_tick_bright() {
+        if (this._calPhase !== CAL_PHASE.BRIGHT) return false;
+        this._calCountdown = Math.max(0, this._calCountdown - 1);
+        const cur = this._lastLux >= 0 ? this._lastLux.toFixed(1) + " lux" : "reading…";
+        this.set_applet_tooltip(
+            "[Calibrating BRIGHT] " + cur + " | " + this._calCountdown + "s remaining"
+        );
+        if (this._calCountdown <= 0) { this._calCountdownId = null; return false; }
+        return true;
+    }
+
+    _finish_bright_calibration() {
+        if (this._calPhase !== CAL_PHASE.BRIGHT) return;
+        this._calPhase = CAL_PHASE.NONE;
+
+        if (this._calCountdownId) {
+            Mainloop.source_remove(this._calCountdownId);
+            this._calCountdownId = null;
+        }
+        if (this._calTimerId) {
+            Mainloop.source_remove(this._calTimerId);
+            this._calTimerId = null;
+        }
+        this.calibrate_max_lux = false;
+
+        if (this._calBrightMax < LUX.MIN_MAX) {
+            Main.notify("Adaptive Brightness",
+                "BRIGHT calibration failed: peak lux (" + this._calBrightMax.toFixed(1) +
+                ") below minimum threshold (" + LUX.MIN_MAX + ").\n" +
+                "Ensure sensor is exposed to bright light during calibration.");
+            this._update_tooltip();
+            return;
+        }
+
+        const minGap = Math.max(10, Math.round(this._calBrightMax * LUX.MIN_RANGE_RATIO));
+        if (this._calBrightMax - this.min_lux < minGap) {
+            Main.notify("Adaptive Brightness",
+                "BRIGHT calibration: range too narrow (max=" + this._calBrightMax.toFixed(1) +
+                ", min=" + this.min_lux + ").\n" +
+                "Please calibrate DARK level first, or expose sensor to brighter light.");
+            this._update_tooltip();
+            return;
+        }
+
+        const newMaxLux = Math.round(this._calBrightMax);
+        this.max_lux = newMaxLux;
+        this.settings.setValue("max-lux", newMaxLux);
+
+        global.log("[AB] BRIGHT calibration complete. max-lux=" + newMaxLux);
+        Main.notify("Adaptive Brightness",
+            "BRIGHT calibration complete.\nmax-lux set to " + newMaxLux + " lux.");
+        this._update_tooltip();
+    }
+
+    // Try to find a usable ambient light sensor. Priority order:
+    // 1. User-provided sensor path override
+    // 2. Enumerate iio:device0-9 (raw+scale, then input)
+    // 3. Legacy /sys/class/sensors/light path
     _locate_sensor() {
-        for (const path of ALS_PATHS) {
+        const checkPath = (rawPath, scalePath, offsetPath, inputPath) => {
             try {
-                const raw = Gio.file_new_for_path(path.raw);
-                const scale = Gio.file_new_for_path(path.scale);
+                const raw = Gio.file_new_for_path(rawPath);
+                const scale = Gio.file_new_for_path(scalePath);
+                const input = inputPath ? Gio.file_new_for_path(inputPath) : null;
 
                 if (raw.query_exists(null) && scale.query_exists(null)) {
-                    this._sensorPath = path;
+                    const offset = offsetPath ? Gio.file_new_for_path(offsetPath) : null;
+                    this._sensorPath = {
+                        raw: rawPath,
+                        scale: scalePath,
+                        offset: offset && offset.query_exists(null) ? offsetPath : null,
+                        input: null
+                    };
                     this._sensorAvailable = true;
-                    global.log("[AB] Found sensor at: " + path.raw);
-                    return;
+                    global.log("[AB] Found sensor (raw+scale) at: " + rawPath);
+                    return true;
+                }
+                if (input && input.query_exists(null)) {
+                    this._sensorPath = { raw: null, scale: null, offset: null, input: inputPath };
+                    this._sensorAvailable = true;
+                    global.log("[AB] Found sensor (direct input) at: " + inputPath);
+                    return true;
                 }
             } catch (e) {
-                global.log("[AB] _locate_sensor check failed for " + path.raw + ": " + (e && e.message ? e.message : e));
+                global.log("[AB] Sensor check failed for " + rawPath + ": " + (e && e.message ? e.message : e));
             }
+            return false;
+        };
+
+        // Try user override if provided
+        if (this.sensor_path && this.sensor_path.trim() !== "") {
+            const base = this.sensor_path.trim();
+            if (checkPath(
+                base + "/in_illuminance_raw",
+                base + "/in_illuminance_scale",
+                base + "/in_illuminance_offset",
+                base + "/in_illuminance_input"
+            )) {
+                return;
+            }
+        }
+
+        // Enumerate iio:device0 through iio:device9
+        const IIO_BASE = "/sys/bus/iio/devices/";
+        for (let i = 0; i <= 9; i++) {
+            const dir = IIO_BASE + "iio:device" + i;
+            if (checkPath(
+                dir + "/in_illuminance_raw",
+                dir + "/in_illuminance_scale",
+                dir + "/in_illuminance_offset",
+                dir + "/in_illuminance_input"
+            )) {
+                return;
+            }
+        }
+
+        // Legacy fallback
+        const legacyBase = "/sys/class/sensors/light";
+        if (checkPath(
+            legacyBase + "/in_illuminance_raw",
+            legacyBase + "/in_illuminance_scale",
+            null,
+            legacyBase + "/in_illuminance_input"
+        )) {
+            return;
         }
 
         global.logError("[AB] No light sensor found");
@@ -130,6 +375,12 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             this.max_brightness = Math.max(this.min_brightness + 1, Math.min(BRIGHTNESS.MAX, parseInt(this.max_brightness) || BRIGHTNESS.DEFAULT_MAX));
             this.smoothing_factor = Math.max(SMOOTHING.MIN, Math.min(SMOOTHING.MAX, parseFloat(this.smoothing_factor) || SMOOTHING.DEFAULT));
             this.max_lux = Math.max(LUX.MIN_MAX, parseInt(this.max_lux) || LUX.DEFAULT_MAX);
+            this.min_lux = Math.max(LUX.MIN_MIN, Math.min(LUX.MAX_MIN, parseInt(this.min_lux) || LUX.DEFAULT_MIN));
+            const minGap = Math.max(10, Math.round(this.max_lux * 0.05));
+            if (this.min_lux >= this.max_lux - minGap) {
+                this.min_lux = Math.max(0, this.max_lux - minGap);
+                this.settings.setValue("min-lux", this.min_lux);
+            }
             let interval = parseInt(this.poll_interval) || POLL_INTERVAL.DEFAULT;
             this.poll_interval = Math.max(POLL_INTERVAL.MIN, Math.min(POLL_INTERVAL.MAX, interval));
 
@@ -221,9 +472,15 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             if (!isFinite(lux) || lux < 0 || !isFinite(this.max_lux) || this.max_lux <= 0) {
                 return this.min_brightness;
             }
-            const normalized = Math.log(lux + 1) / Math.log(this.max_lux + 1);
-            const clamped = Math.max(0, Math.min(1, normalized));
-            const brightness = Math.round(this.min_brightness + clamped * (this.max_brightness - this.min_brightness));
+            if (lux <= this.min_lux) return this.min_brightness;
+            if (lux >= this.max_lux)  return this.max_brightness;
+
+            const numerator   = Math.log(lux - this.min_lux + 1);
+            const denominator = Math.log(this.max_lux - this.min_lux + 1);
+            const normalized  = Math.max(0, Math.min(1, numerator / denominator));
+            const brightness  = Math.round(
+                this.min_brightness + normalized * (this.max_brightness - this.min_brightness)
+            );
             return Math.max(BRIGHTNESS.MIN, Math.min(BRIGHTNESS.MAX, brightness));
         } catch (e) {
             global.logError("[AB] Lux mapping error: " + (e && e.message ? e.message : e));
@@ -273,9 +530,15 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             }
 
             // Read sensor values safely
-            const raw = this._readNumber(this._sensorPath.raw);
-            const scale = this._readNumber(this._sensorPath.scale);
-            const lux = raw * scale;
+            let lux;
+            if (this._sensorPath.input) {
+                lux = this._readNumber(this._sensorPath.input);
+            } else {
+                const raw    = this._readNumber(this._sensorPath.raw);
+                const scale  = this._readNumber(this._sensorPath.scale);
+                const offset = this._sensorPath.offset ? this._readNumber(this._sensorPath.offset) : 0;
+                lux = (raw + offset) * scale;
+            }
 
             if (!isFinite(lux) || lux < 0) {
                 this._schedule_next_loop();
@@ -283,6 +546,13 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             }
 
             let targetBrightness = this._luxToBrightness(lux);
+
+            // Collect calibration samples
+            if (this._calPhase === CAL_PHASE.DARK && isFinite(lux)) {
+                this._calDarkSamples.push(lux);
+            } else if (this._calPhase === CAL_PHASE.BRIGHT && lux > this._calBrightMax) {
+                this._calBrightMax = lux;
+            }
 
             // Exponential smoothing: blends previous value with the new target
             if (this._brightness === null) {
@@ -341,6 +611,14 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             if (this._loopId) {
                 Mainloop.source_remove(this._loopId);
                 this._loopId = null;
+            }
+            if (this._calTimerId) {
+                Mainloop.source_remove(this._calTimerId);
+                this._calTimerId = null;
+            }
+            if (this._calCountdownId) {
+                Mainloop.source_remove(this._calCountdownId);
+                this._calCountdownId = null;
             }
             if (this.settings) {
                 this.settings.finalize();

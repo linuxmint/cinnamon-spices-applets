@@ -28,15 +28,6 @@
     "title": "Smoothing Factor",
     "description": "Brightness transition smoothness: 0=instant, 1=very smooth"
   },
-  "max-lux": {
-    "type": "spinbutton",
-    "default": 10000,
-    "min": 100,
-    "max": 100000,
-    "step": 100,
-    "title": "Maximum Lux",
-    "description": "Reference ambient light level for maximum brightness"
-  },
   "poll-interval": {
     "type": "spinbutton",
     "default": 1000,
@@ -46,6 +37,46 @@
     "units": "ms",
     "title": "Poll Interval",
     "description": "Sensor check frequency in milliseconds"
+  },
+  "calibration-header": {
+    "type": "header",
+    "description": "Sensor Calibration"
+  },
+  "calibrate-min-lux": {
+    "type": "button",
+    "default": false,
+    "title": "Calibrate Dark Level",
+    "description": "Click when in your dimmest environment — records noise floor over 60s"
+  },
+  "min-lux": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 5000,
+    "step": 10,
+    "title": "Minimum Lux",
+    "description": "Ambient lux at or below which minimum brightness is applied"
+  },
+  "calibrate-max-lux": {
+    "type": "button",
+    "default": false,
+    "title": "Calibrate Bright Level",
+    "description": "Click when in your brightest environment — records peak lux over 60s"
+  },
+  "max-lux": {
+    "type": "spinbutton",
+    "default": 10000,
+    "min": 100,
+    "max": 100000,
+    "step": 100,
+    "title": "Maximum Lux",
+    "description": "Reference ambient light level (set manually or via calibration)"
+  },
+  "sensor-path": {
+    "type": "entry",
+    "default": "",
+    "title": "Sensor Path Override",
+    "description": "Leave blank for auto-detect. Example: /sys/bus/iio/devices/iio:device3"
   }
 }
 
