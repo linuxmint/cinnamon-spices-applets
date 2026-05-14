@@ -431,7 +431,7 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
         }
     }
 
-    // Toggle applet enabled/disabled on click. When enabling, run an immediate
+    // Toggle applet enabled/disabled on left click. When enabling, run an immediate
     // poll so the UI reflects adaptive behaviour without waiting for the next
     // scheduled timeout.
     on_applet_clicked() {
@@ -455,6 +455,20 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             }
         } catch (e) {
             global.logError("[AB] Click: " + (e && e.message ? e.message : e));
+        }
+    }
+
+    // Open the settings dialog on right-click
+    on_applet_right_click() {
+        try {
+            if (typeof this.openSettings === 'function') {
+                this.openSettings();
+            } else {
+                global.log("[AB] openSettings not available, trying Cinnamon launcher...");
+                GLib.spawn_command_line_async('cinnamon-settings applets adaptive-brightness@el-musleh');
+            }
+        } catch (e) {
+            global.logError("[AB] Settings dialog failed: " + (e && e.message ? e.message : e));
         }
     }
 
