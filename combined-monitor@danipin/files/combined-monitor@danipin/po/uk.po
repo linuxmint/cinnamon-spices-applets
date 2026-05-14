@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Combined Monitor Applet 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-15 21:36+0100\n"
+"POT-Creation-Date: 2026-05-14 22:09+0300\n"
 "PO-Revision-Date: 2025-12-15 22:09+0100\n"
 "Last-Translator: Automated Translator <example@example.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -10,358 +10,474 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 # applet.js strings
+#: ../combined-monitor@danipin/applet.js:155
 msgid "Slot 1 (Standard)"
 msgstr "Слот 1 (Стандартний)"
 
+#: ../combined-monitor@danipin/applet.js:157
 msgid "Slot 2 (Empty)"
 msgstr "Слот 2 (Порожній)"
 
+#: ../combined-monitor@danipin/applet.js:159
 msgid "Slot 3 (Empty)"
 msgstr "Слот 3 (Порожній)"
 
+#: ../combined-monitor@danipin/applet.js:329
 msgid "Separator"
 msgstr "Роздільник"
 
+#: ../combined-monitor@danipin/applet.js:350
+msgid "Space"
+msgstr "Пробіл"
+
+#: ../combined-monitor@danipin/applet.js:352
 msgid "No Separator"
 msgstr "Без Роздільника"
 
+#: ../combined-monitor@danipin/applet.js:362
 msgid "Symbols"
 msgstr "Символи"
 
+#: ../combined-monitor@danipin/applet.js:434
 msgid "CPU"
 msgstr "ЦП"
 
+#: ../combined-monitor@danipin/applet.js:438
+#: ../combined-monitor@danipin/applet.js:448
+#: ../combined-monitor@danipin/applet.js:458
+#: ../combined-monitor@danipin/applet.js:468
 msgid "Icon-White"
 msgstr "Іконка-Біла"
 
+#: ../combined-monitor@danipin/applet.js:439
+#: ../combined-monitor@danipin/applet.js:449
+#: ../combined-monitor@danipin/applet.js:459
+#: ../combined-monitor@danipin/applet.js:469
 msgid "Icon-Dark"
 msgstr "Іконка-Темна"
 
+#: ../combined-monitor@danipin/applet.js:440
+#: ../combined-monitor@danipin/applet.js:450
+#: ../combined-monitor@danipin/applet.js:460
+#: ../combined-monitor@danipin/applet.js:470
 msgid "No Symbol (Text Label)"
 msgstr "Без Символу (Текстовий Напис)"
 
+#: ../combined-monitor@danipin/applet.js:444
 msgid "TEMP"
 msgstr "ТЕМП"
 
+#: ../combined-monitor@danipin/applet.js:454
 msgid "RAM"
 msgstr "ОЗП"
 
+#: ../combined-monitor@danipin/applet.js:464
 msgid "SWAP"
 msgstr "SWAP"
 
+#: ../combined-monitor@danipin/applet.js:476
 msgid "Profile Management"
 msgstr "Керування Профілями"
 
+#: ../combined-monitor@danipin/applet.js:489
 msgid "Activate (Load)"
 msgstr "Активувати (Завантажити)"
 
+#: ../combined-monitor@danipin/applet.js:495
 msgid "Save Current Settings"
 msgstr "Зберегти Поточні Налаштування"
 
+#: ../combined-monitor@danipin/applet.js:514
 msgid "System Monitor"
 msgstr "Системний Монітор"
 
+#: ../combined-monitor@danipin/applet.js:525
 msgid "Restart Cinnamon"
 msgstr "Перезапустити Cinnamon"
 
-msgid "Profile Saved: %s"
-msgstr "Профіль Збережено: %s"
+#: ../combined-monitor@danipin/applet.js:860
+msgid "Slot is empty - Ready to save"
+msgstr "Слот порожній - готовий до збереження"
 
-msgid "Active: %s"
-msgstr "Активний: %s"
-
+#: ../combined-monitor@danipin/applet.js:1325
+#: ../combined-monitor@danipin/applet.js:1423
 msgid "N/A"
 msgstr "Н/Д"
 
+# settings-schema.json strings
+msgid "Decimal places for temperature"
+msgstr "Десяткові знаки для температури"
+
+msgid "Number of decimal places to display for temperature. Set to 0 for whole numbers."
+msgstr "Кількість десяткових знаків для відображення температури. Встановіть 0 для цілих чисел."
+
+msgid "decimal places"
+msgstr "десяткові знаки"
+
+#~ msgid "Profile Saved: %s"
+#~ msgstr "Профіль Збережено: %s"
+
+#~ msgid "Active: %s"
+#~ msgstr "Активний: %s"
+
 # settings-schema.json strings (Descriptions, Tooltips, Options)
-
 # Page Titles
-msgid "CPU Temperature"
-msgstr "Температура ЦП"
+#~ msgid "CPU Temperature"
+#~ msgstr "Температура ЦП"
 
-msgid "Profiles"
-msgstr "Профілі"
+#~ msgid "Profiles"
+#~ msgstr "Профілі"
 
-msgid "General"
-msgstr "Загальне"
+#~ msgid "General"
+#~ msgstr "Загальне"
 
 # Section Titles
-msgid "Order of Metrics"
-msgstr "Порядок Метрик"
+#~ msgid "Order of Metrics"
+#~ msgstr "Порядок Метрик"
 
-msgid "Display"
-msgstr "Відображення"
+#~ msgid "Display"
+#~ msgstr "Відображення"
 
-msgid "Thresholds"
-msgstr "Пороги"
+#~ msgid "Thresholds"
+#~ msgstr "Пороги"
 
-msgid "Colors"
-msgstr "Кольори"
+#~ msgid "Colors"
+#~ msgstr "Кольори"
 
-msgid "Thresholds (in °C)"
-msgstr "Пороги (у °C)"
+#~ msgid "Thresholds (in °C)"
+#~ msgstr "Пороги (у °C)"
 
-msgid "Settings"
-msgstr "Налаштування"
+#~ msgid "Settings"
+#~ msgstr "Налаштування"
 
-msgid "Profiles (Slots 1 to 3)"
-msgstr "Профілі (Слоти 1 до 3)"
+#~ msgid "Profiles (Slots 1 to 3)"
+#~ msgstr "Профілі (Слоти 1 до 3)"
 
-msgid "Global"
-msgstr "Глобальне"
+#~ msgid "Global"
+#~ msgstr "Глобальне"
 
 # CPU
-msgid "Show CPU"
-msgstr "Показати ЦП"
+#~ msgid "Show CPU"
+#~ msgstr "Показати ЦП"
 
-msgid "Text for CPU"
-msgstr "Текст для ЦП"
+#~ msgid "Text for CPU"
+#~ msgstr "Текст для ЦП"
 
-msgid "Custom symbol/icon for CPU. Leave empty for text label."
-msgstr "Користувацький символ/іконка для ЦП. Залиште порожнім для текстового напису."
+#~ msgid "Custom symbol/icon for CPU. Leave empty for text label."
+#~ msgstr ""
+#~ "Користувацький символ/іконка для ЦП. Залиште порожнім для текстового "
+#~ "напису."
 
-msgid "Show percentage sign (%) for CPU"
-msgstr "Показати знак відсотка (%) для ЦП"
+#~ msgid "Show percentage sign (%) for CPU"
+#~ msgstr "Показати знак відсотка (%) для ЦП"
 
-msgid "If disabled, only the value (e.g., '45') is displayed without the percentage sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in the 'General' tab acts as a master switch."
-msgstr "Якщо вимкнено, відображається лише значення (наприклад, '45') без знака відсотка (наприклад, '45%'). Опція 'Показати знак відсотка (%) (Головний Перемикач)' на вкладці 'Загальне' діє як головний перемикач."
+#~ msgid ""
+#~ "If disabled, only the value (e.g., '45') is displayed without the "
+#~ "percentage sign (e.g., '45%'). The 'Show percentage sign (%) (Master "
+#~ "Switch)' option in the 'General' tab acts as a master switch."
+#~ msgstr ""
+#~ "Якщо вимкнено, відображається лише значення (наприклад, '45') без знака "
+#~ "відсотка (наприклад, '45%'). Опція 'Показати знак відсотка (%) (Головний "
+#~ "Перемикач)' на вкладці 'Загальне' діє як головний перемикач."
 
-msgid "Threshold LOW"
-msgstr "Поріг НИЗЬКИЙ"
+#~ msgid "Threshold LOW"
+#~ msgstr "Поріг НИЗЬКИЙ"
 
-msgid "The LOW color is used below this value"
-msgstr "НИЗЬКИЙ колір використовується нижче цього значення"
+#~ msgid "The LOW color is used below this value"
+#~ msgstr "НИЗЬКИЙ колір використовується нижче цього значення"
 
-msgid "Threshold MED"
-msgstr "Поріг СЕРЕДНІЙ"
+#~ msgid "Threshold MED"
+#~ msgstr "Поріг СЕРЕДНІЙ"
 
-msgid "The MED color is used between LOW and MED"
-msgstr "СЕРЕДНІЙ колір використовується між НИЗЬКИМ та СЕРЕДНІМ"
+#~ msgid "The MED color is used between LOW and MED"
+#~ msgstr "СЕРЕДНІЙ колір використовується між НИЗЬКИМ та СЕРЕДНІМ"
 
-msgid "Threshold HIGH"
-msgstr "Поріг ВИСОКИЙ"
+#~ msgid "Threshold HIGH"
+#~ msgstr "Поріг ВИСОКИЙ"
 
-msgid "The HIGH color is used between MED and HIGH"
-msgstr "ВИСОКИЙ колір використовується між СЕРЕДНІМ та ВИСОКИМ"
+#~ msgid "The HIGH color is used between MED and HIGH"
+#~ msgstr "ВИСОКИЙ колір використовується між СЕРЕДНІМ та ВИСОКИМ"
 
-msgid "Enable color change for CPU"
-msgstr "Увімкнути зміну кольору для ЦП"
+#~ msgid "Enable color change for CPU"
+#~ msgstr "Увімкнути зміну кольору для ЦП"
 
-msgid "Color LOW"
-msgstr "Колір НИЗЬКИЙ"
+#~ msgid "Color LOW"
+#~ msgstr "Колір НИЗЬКИЙ"
 
-msgid "Color MED"
-msgstr "Колір СЕРЕДНІЙ"
+#~ msgid "Color MED"
+#~ msgstr "Колір СЕРЕДНІЙ"
 
-msgid "Color HIGH"
-msgstr "Колір ВИСОКИЙ"
+#~ msgid "Color HIGH"
+#~ msgstr "Колір ВИСОКИЙ"
 
-msgid "Color CRITICAL"
-msgstr "Колір КРИТИЧНИЙ"
+#~ msgid "Color CRITICAL"
+#~ msgstr "Колір КРИТИЧНИЙ"
 
-msgid "Used above the HIGH threshold"
-msgstr "Використовується вище порогу ВИСОКИЙ"
+#~ msgid "Used above the HIGH threshold"
+#~ msgstr "Використовується вище порогу ВИСОКИЙ"
 
 # TEMP
-msgid "Show Temperature"
-msgstr "Показати Температуру"
+#~ msgid "Show Temperature"
+#~ msgstr "Показати Температуру"
 
-msgid "Enables the display of CPU temperature. **Important:** On many systems, installing the 'lm-sensors' package and running 'sudo sensors-detect' is necessary for this function to work correctly. Please refer to the instructions in the README.md."
-msgstr "Увімкнути відображення температури ЦП. **Важливо:** На багатьох системах для коректної роботи цієї функції необхідно встановити пакет 'lm-sensors' та виконати 'sudo sensors-detect'. Будь ласка, зверніться до інструкцій у README.md."
+#~ msgid ""
+#~ "Enables the display of CPU temperature. **Important:** On many systems, "
+#~ "installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+#~ "necessary for this function to work correctly. Please refer to the "
+#~ "instructions in the README.md."
+#~ msgstr ""
+#~ "Увімкнути відображення температури ЦП. **Важливо:** На багатьох системах "
+#~ "для коректної роботи цієї функції необхідно встановити пакет 'lm-sensors' "
+#~ "та виконати 'sudo sensors-detect'. Будь ласка, зверніться до інструкцій у "
+#~ "README.md."
 
-msgid "Show °C symbol"
-msgstr "Показати символ °C"
+#~ msgid "Show °C symbol"
+#~ msgstr "Показати символ °C"
 
-msgid "Controls whether the Celsius symbol (°C or °F) should be displayed after the value."
-msgstr "Контролює, чи повинен відображатися символ Цельсія (°C або °F) після значення."
+#~ msgid ""
+#~ "Controls whether the Celsius symbol (°C or °F) should be displayed after "
+#~ "the value."
+#~ msgstr ""
+#~ "Контролює, чи повинен відображатися символ Цельсія (°C або °F) після "
+#~ "значення."
 
-msgid "Text for Temperature"
-msgstr "Текст для Температури"
+#~ msgid "Text for Temperature"
+#~ msgstr "Текст для Температури"
 
-msgid "Custom symbol/icon for Temperature. Leave empty for text label."
-msgstr "Користувацький символ/іконка для Температури. Залиште порожнім для текстового напису."
+#~ msgid "Custom symbol/icon for Temperature. Leave empty for text label."
+#~ msgstr ""
+#~ "Користувацький символ/іконка для Температури. Залиште порожнім для "
+#~ "текстового напису."
 
-msgid "Unit of Measurement"
-msgstr "Одиниця Вимірювання"
+#~ msgid "Unit of Measurement"
+#~ msgstr "Одиниця Вимірювання"
 
-msgid "Celsius (°C)"
-msgstr "Цельсій (°C)"
+#~ msgid "Celsius (°C)"
+#~ msgstr "Цельсій (°C)"
 
-msgid "Fahrenheit (°F)"
-msgstr "Фаренгейт (°F)"
+#~ msgid "Fahrenheit (°F)"
+#~ msgstr "Фаренгейт (°F)"
 
-msgid "Choose whether the temperature should be displayed in Celsius or Fahrenheit. Threshold values must be adjusted accordingly."
-msgstr "Оберіть, чи повинна температура відображатися в Цельсіях або Фаренгейтах. Значення порогів мають бути скориговані відповідно."
+#~ msgid ""
+#~ "Choose whether the temperature should be displayed in Celsius or "
+#~ "Fahrenheit. Threshold values must be adjusted accordingly."
+#~ msgstr ""
+#~ "Оберіть, чи повинна температура відображатися в Цельсіях або Фаренгейтах. "
+#~ "Значення порогів мають бути скориговані відповідно."
 
-msgid "The LOW color is used below this value (applies to °C and °F)"
-msgstr "НИЗЬКИЙ колір використовується нижче цього значення (застосовується до °C та °F)"
+#~ msgid "The LOW color is used below this value (applies to °C and °F)"
+#~ msgstr ""
+#~ "НИЗЬКИЙ колір використовується нижче цього значення (застосовується до °C "
+#~ "та °F)"
 
-msgid "The MED color is used between LOW and MED (applies to °C and °F)"
-msgstr "СЕРЕДНІЙ колір використовується між НИЗЬКИМ та СЕРЕДНІМ (застосовується до °C та °F)"
+#~ msgid "The MED color is used between LOW and MED (applies to °C and °F)"
+#~ msgstr ""
+#~ "СЕРЕДНІЙ колір використовується між НИЗЬКИМ та СЕРЕДНІМ (застосовується "
+#~ "до °C та °F)"
 
-msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
-msgstr "ВИСОКИЙ колір використовується між СЕРЕДНІМ та ВИСОКИМ (застосовується до °C та °F)"
+#~ msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+#~ msgstr ""
+#~ "ВИСОКИЙ колір використовується між СЕРЕДНІМ та ВИСОКИМ (застосовується до "
+#~ "°C та °F)"
 
-msgid "Enable color change for TEMP"
-msgstr "Увімкнути зміну кольору для ТЕМП"
+#~ msgid "Enable color change for TEMP"
+#~ msgstr "Увімкнути зміну кольору для ТЕМП"
 
-msgid "Color LOW (Green)"
-msgstr "Колір НИЗЬКИЙ (Зелений)"
+#~ msgid "Color LOW (Green)"
+#~ msgstr "Колір НИЗЬКИЙ (Зелений)"
 
-msgid "Color MED (Orange)"
-msgstr "Колір СЕРЕДНІЙ (Помаранчевий)"
+#~ msgid "Color MED (Orange)"
+#~ msgstr "Колір СЕРЕДНІЙ (Помаранчевий)"
 
-msgid "Color HIGH (Red-Orange)"
-msgstr "Колір ВИСОКИЙ (Червоно-Помаранчевий)"
+#~ msgid "Color HIGH (Red-Orange)"
+#~ msgstr "Колір ВИСОКИЙ (Червоно-Помаранчевий)"
 
-msgid "Color CRITICAL (Red)"
-msgstr "Колір КРИТИЧНИЙ (Червоний)"
+#~ msgid "Color CRITICAL (Red)"
+#~ msgstr "Колір КРИТИЧНИЙ (Червоний)"
 
 # RAM
-msgid "Show RAM"
-msgstr "Показати ОЗП"
+#~ msgid "Show RAM"
+#~ msgstr "Показати ОЗП"
 
-msgid "Text for RAM"
-msgstr "Текст для ОЗП"
+#~ msgid "Text for RAM"
+#~ msgstr "Текст для ОЗП"
 
-msgid "Custom symbol/icon for RAM. Leave empty for text label."
-msgstr "Користувацький символ/іконка для ОЗП. Залиште порожнім для текстового напису."
+#~ msgid "Custom symbol/icon for RAM. Leave empty for text label."
+#~ msgstr ""
+#~ "Користувацький символ/іконка для ОЗП. Залиште порожнім для текстового "
+#~ "напису."
 
-msgid "Show percentage sign (%) for RAM"
-msgstr "Показати знак відсотка (%) для ОЗП"
+#~ msgid "Show percentage sign (%) for RAM"
+#~ msgstr "Показати знак відсотка (%) для ОЗП"
 
-msgid "Display Mode"
-msgstr "Режим Відображення"
+#~ msgid "Display Mode"
+#~ msgstr "Режим Відображення"
 
-msgid "Percentage Usage (%)"
-msgstr "Використання у Відсотках (%)"
+#~ msgid "Percentage Usage (%)"
+#~ msgstr "Використання у Відсотках (%)"
 
-msgid "Used Memory (MB/GB)"
-msgstr "Використана Пам'ять (МБ/ГБ)"
+#~ msgid "Used Memory (MB/GB)"
+#~ msgstr "Використана Пам'ять (МБ/ГБ)"
 
-msgid "Free Memory (MB/GB)"
-msgstr "Вільна Пам'ять (МБ/ГБ)"
+#~ msgid "Free Memory (MB/GB)"
+#~ msgstr "Вільна Пам'ять (МБ/ГБ)"
 
-msgid "Choose whether percentage usage or used/free memory in MB/GB should be displayed."
-msgstr "Оберіть, чи має відображатися використання у відсотках, чи використана/вільна пам'ять у МБ/ГБ."
+#~ msgid ""
+#~ "Choose whether percentage usage or used/free memory in MB/GB should be "
+#~ "displayed."
+#~ msgstr ""
+#~ "Оберіть, чи має відображатися використання у відсотках, чи використана/"
+#~ "вільна пам'ять у МБ/ГБ."
 
-msgid "Enable color change for RAM"
-msgstr "Увімкнути зміну кольору для ОЗП"
+#~ msgid "Enable color change for RAM"
+#~ msgstr "Увімкнути зміну кольору для ОЗП"
 
 # SWAP
-msgid "Show SWAP"
-msgstr "Показати SWAP"
+#~ msgid "Show SWAP"
+#~ msgstr "Показати SWAP"
 
-msgid "Text for SWAP"
-msgstr "Текст для SWAP"
+#~ msgid "Text for SWAP"
+#~ msgstr "Текст для SWAP"
 
-msgid "Custom symbol/icon for SWAP. Leave empty for text label."
-msgstr "Користувацький символ/іконка для SWAP. Залиште порожнім для текстового напису."
+#~ msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+#~ msgstr ""
+#~ "Користувацький символ/іконка для SWAP. Залиште порожнім для текстового "
+#~ "напису."
 
-msgid "Only show SWAP when used"
-msgstr "Показувати SWAP лише при використанні"
+#~ msgid "Only show SWAP when used"
+#~ msgstr "Показувати SWAP лише при використанні"
 
-msgid "If active, it only shows SWAP when usage is greater than 0%."
-msgstr "Якщо активно, відображає SWAP лише коли використання більше 0%."
+#~ msgid "If active, it only shows SWAP when usage is greater than 0%."
+#~ msgstr "Якщо активно, відображає SWAP лише коли використання більше 0%."
 
-msgid "Show percentage sign (%) for SWAP"
-msgstr "Показати знак відсотка (%) для SWAP"
+#~ msgid "Show percentage sign (%) for SWAP"
+#~ msgstr "Показати знак відсотка (%) для SWAP"
 
-msgid "Enable color change for SWAP"
-msgstr "Увімкнути зміну кольору для SWAP"
+#~ msgid "Enable color change for SWAP"
+#~ msgstr "Увімкнути зміну кольору для SWAP"
 
-msgid "If the value is less than or equal to the LOW threshold, the LOW color is used."
-msgstr "Якщо значення менше або дорівнює порогу НИЗЬКИЙ, використовується НИЗЬКИЙ колір."
+#~ msgid ""
+#~ "If the value is less than or equal to the LOW threshold, the LOW color is "
+#~ "used."
+#~ msgstr ""
+#~ "Якщо значення менше або дорівнює порогу НИЗЬКИЙ, використовується НИЗЬКИЙ "
+#~ "колір."
 
-msgid "If the value is greater than LOW and less than or equal to the MED threshold, the MED color is used."
-msgstr "Якщо значення більше НИЗЬКОГО і менше або дорівнює порогу СЕРЕДНІЙ, використовується СЕРЕДНІЙ колір."
+#~ msgid ""
+#~ "If the value is greater than LOW and less than or equal to the MED "
+#~ "threshold, the MED color is used."
+#~ msgstr ""
+#~ "Якщо значення більше НИЗЬКОГО і менше або дорівнює порогу СЕРЕДНІЙ, "
+#~ "використовується СЕРЕДНІЙ колір."
 
-msgid "If the value is greater than MED and less than or equal to the HIGH threshold, the HIGH color is used."
-msgstr "Якщо значення більше СЕРЕДНЬОГО і менше або дорівнює порогу ВИСОКИЙ, використовується ВИСОКИЙ колір."
+#~ msgid ""
+#~ "If the value is greater than MED and less than or equal to the HIGH "
+#~ "threshold, the HIGH color is used."
+#~ msgstr ""
+#~ "Якщо значення більше СЕРЕДНЬОГО і менше або дорівнює порогу ВИСОКИЙ, "
+#~ "використовується ВИСОКИЙ колір."
 
 # Order
-msgid "CPU Position"
-msgstr "Позиція ЦП"
+#~ msgid "CPU Position"
+#~ msgstr "Позиція ЦП"
 
-msgid "Position 1 (Left)"
-msgstr "Позиція 1 (Зліва)"
+#~ msgid "Position 1 (Left)"
+#~ msgstr "Позиція 1 (Зліва)"
 
-msgid "Position 2"
-msgstr "Позиція 2"
+#~ msgid "Position 2"
+#~ msgstr "Позиція 2"
 
-msgid "Position 3"
-msgstr "Позиція 3"
+#~ msgid "Position 3"
+#~ msgstr "Позиція 3"
 
-msgid "Position 4 (Right)"
-msgstr "Позиція 4 (Справа)"
+#~ msgid "Position 4 (Right)"
+#~ msgstr "Позиція 4 (Справа)"
 
-msgid "Defines the display position of CPU. The position is automatically swapped with the metric at the same position."
-msgstr "Визначає позицію відображення ЦП. Позиція автоматично міняється місцями з метрикою на тій же позиції."
+#~ msgid ""
+#~ "Defines the display position of CPU. The position is automatically "
+#~ "swapped with the metric at the same position."
+#~ msgstr ""
+#~ "Визначає позицію відображення ЦП. Позиція автоматично міняється місцями з "
+#~ "метрикою на тій же позиції."
 
-msgid "TEMP Position"
-msgstr "Позиція ТЕМП"
+#~ msgid "TEMP Position"
+#~ msgstr "Позиція ТЕМП"
 
-msgid "RAM Position"
-msgstr "Позиція ОЗП"
+#~ msgid "RAM Position"
+#~ msgstr "Позиція ОЗП"
 
-msgid "SWAP Position"
-msgstr "Позиція SWAP"
+#~ msgid "SWAP Position"
+#~ msgstr "Позиція SWAP"
 
 # General
-msgid "Update Interval (ms)"
-msgstr "Інтервал Оновлення (мс)"
+#~ msgid "Update Interval (ms)"
+#~ msgstr "Інтервал Оновлення (мс)"
 
-msgid "Show separator between metrics"
-msgstr "Показати роздільник між метриками"
+#~ msgid "Show separator between metrics"
+#~ msgstr "Показати роздільник між метриками"
 
-msgid "Separator Text"
-msgstr "Текст Роздільника"
+#~ msgid "Separator Text"
+#~ msgstr "Текст Роздільника"
 
-msgid "Separator Color"
-msgstr "Колір Роздільника"
+#~ msgid "Separator Color"
+#~ msgstr "Колір Роздільника"
 
-msgid "Show percentage sign (%) (Master Switch)"
-msgstr "Показати знак відсотка (%) (Головний Перемикач)"
+#~ msgid "Show percentage sign (%) (Master Switch)"
+#~ msgstr "Показати знак відсотка (%) (Головний Перемикач)"
 
-msgid "If disabled, only the value (e.g., '45') is displayed for all percentage displays without the percentage sign (e.g., '45%'). Individual switches for CPU/RAM/SWAP must also be active."
-msgstr "Якщо вимкнено, відображається лише значення (наприклад, '45') для всіх відображень відсотків без знака відсотка (наприклад, '45%'). Індивідуальні перемикачі для ЦП/ОЗП/SWAP також мають бути активними."
+#~ msgid ""
+#~ "If disabled, only the value (e.g., '45') is displayed for all percentage "
+#~ "displays without the percentage sign (e.g., '45%'). Individual switches "
+#~ "for CPU/RAM/SWAP must also be active."
+#~ msgstr ""
+#~ "Якщо вимкнено, відображається лише значення (наприклад, '45') для всіх "
+#~ "відображень відсотків без знака відсотка (наприклад, '45%'). "
+#~ "Індивідуальні перемикачі для ЦП/ОЗП/SWAP також мають бути активними."
 
 # Profiles
-msgid "Profile Message Duration (Seconds)"
-msgstr "Тривалість Повідомлення Профілю (Секунди)"
+#~ msgid "Profile Message Duration (Seconds)"
+#~ msgstr "Тривалість Повідомлення Профілю (Секунди)"
 
-msgid "How long should the message ('Profile saved', 'Profile active') be displayed in the panel."
-msgstr "Як довго має відображатися повідомлення ('Профіль збережено', 'Профіль активний') на панелі."
+#~ msgid ""
+#~ "How long should the message ('Profile saved', 'Profile active') be "
+#~ "displayed in the panel."
+#~ msgstr ""
+#~ "Як довго має відображатися повідомлення ('Профіль збережено', 'Профіль "
+#~ "активний') на панелі."
 
-msgid "Profile 1 Name"
-msgstr "Назва Профілю 1"
+#~ msgid "Profile 1 Name"
+#~ msgstr "Назва Профілю 1"
 
-msgid "Enter a custom profile name in the text field!"
-msgstr "Введіть користувацьку назву профілю в текстове поле!"
+#~ msgid "Enter a custom profile name in the text field!"
+#~ msgstr "Введіть користувацьку назву профілю в текстове поле!"
 
-msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
-msgstr "Натисніть 'Активувати' або 'Зберегти' для Профілю 1 у спливаючому меню."
+#~ msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+#~ msgstr ""
+#~ "Натисніть 'Активувати' або 'Зберегти' для Профілю 1 у спливаючому меню."
 
-msgid "Saved data for Profile 1 (internal)"
-msgstr "Збережені дані для Профілю 1 (внутрішні)"
+#~ msgid "Saved data for Profile 1 (internal)"
+#~ msgstr "Збережені дані для Профілю 1 (внутрішні)"
 
-msgid "Profile 2 Name"
-msgstr "Назва Профілю 2"
+#~ msgid "Profile 2 Name"
+#~ msgstr "Назва Профілю 2"
 
-msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
-msgstr "Натисніть 'Активувати' або 'Зберегти' для Профілю 2 у спливаючому меню."
+#~ msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+#~ msgstr ""
+#~ "Натисніть 'Активувати' або 'Зберегти' для Профілю 2 у спливаючому меню."
 
-msgid "Saved data for Profile 2 (internal)"
-msgstr "Збережені дані для Профілю 2 (внутрішні)"
+#~ msgid "Saved data for Profile 2 (internal)"
+#~ msgstr "Збережені дані для Профілю 2 (внутрішні)"
 
-msgid "Profile 3 Name"
-msgstr "Назва Профілю 3"
+#~ msgid "Profile 3 Name"
+#~ msgstr "Назва Профілю 3"
 
-msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
-msgstr "Натисніть 'Активувати' або 'Зберегти' для Профілю 3 у спливаючому меню."
+#~ msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+#~ msgstr ""
+#~ "Натисніть 'Активувати' або 'Зберегти' для Профілю 3 у спливаючому меню."
 
-msgid "Saved data for Profile 3 (internal)"
-msgstr "Збережені дані для Профілю 3 (внутрішні)"
+#~ msgid "Saved data for Profile 3 (internal)"
+#~ msgstr "Збережені дані для Профілю 3 (внутрішні)"

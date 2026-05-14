@@ -10,7 +10,7 @@ const Util = imports.misc.util;
 const Gettext = imports.gettext;
 
 const UUID = "combined-monitor@danipin";
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+const DECODER = new TextDecoder(); // Globaler Decoder spart Speicher-Allokationen
 
 function _(str) {
     return Gettext.dgettext(UUID, str);
@@ -45,11 +45,8 @@ const CONFIGURABLE_KEYS = [
     // GENERAL - Order
     "cpu-order", "temp-order", "ram-order", "swap-order", // NEW: For flexible order
     // GENERAL - Other
-    "enable-separator", "separator-text", "separator-color", 
-    "display-percentage",
-    // PROFILE - Profile keys that are used for saving/loading data
-    "profile-1-name", "profile-1-data", "profile-2-name", "profile-2-data",
-    "profile-3-name", "profile-3-data", "profile-message-duration"
+    "update-interval", "enable-separator", "separator-text", "separator-color",
+    "display-percentage"
 ];
 
 
@@ -64,8 +61,15 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             this.settings = new Settings.AppletSettings(this, this.metadata.uuid, instanceId);
             
             // NEW: Aggressively set all margins and paddings left and right to 0
-            this.actor.style = "margin-left: 0px !important; padding-left: 0px !important; margin-right: 0px !important; padding-right: 0px !important;"; 
+            this.actor.style = "margin-left: 0px !important; padding-left: 0px !important; margin-right: 0px !important; padding-right: 4px !important;"; 
             
+            this.actor.set_x_align(Clutter.ActorAlign.START); // Ensure main actor aligns to the start
+            this.actor.x_fill = false;                        // Set property directly (no setter function)
+
+            // NEW: Hide the default icon and label bins of the TextIconApplet 
+            // to remove the large gap before our custom UI.
+            if (this._applet_icon_bin) this._applet_icon_bin.hide();
+            if (this._applet_label) this._applet_label.hide();
         } catch (e) {
             global.logError("CombinedMonitor: could not create AppletSettings: " + e);
             this.settings = null;
@@ -97,6 +101,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         this.tempLabel = "TEMP"; 
         this.tempSymbol = ""; 
         this.tempUnit = 0; // 0=Celsius, 1=Fahrenheit
+        this.tempDecimalPlaces = 1; // NEW: Default to 1 decimal place
         this.showCelsiusSymbol = true; // Use unit symbol (°C or °F)
         this.tempLow = 55; 
         this.tempMed = 70;
@@ -173,6 +178,9 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         this._prevTotal = 0;
         this._prevIdle = 0;
         this._timeoutId = 0;
+        
+        this._cachedCpuTempPath = null; // NEW: Cache for the best CPU temp sensor path
+        this._cachedFallbackTempPath = null; // NEW: Cache for a general fallback temp sensor path
 
         // Actors
         this._cpuActor = null;
@@ -189,16 +197,17 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
     // FUNCTIONS WITH SAFETY GUARDS FOR BINDINGS
     // ============================================================
     
-    _guardedUpdate() {
+    _guardedUpdate(force = false) {
         if (this._isSettingsLoading) return;
         this._clearProfileMessage(); 
-        this._updateNow();
+        this._updateNow(force);
     }
     
-    _guardedVisibilityChanged() {
+    _guardedVisibilityChanged(force) {
         if (this._isSettingsLoading) return;
         this._clearProfileMessage(); 
-        this._onVisibilityChanged();
+        const shouldForce = (force === true);
+        this._onVisibilityChanged(shouldForce);
     }
     
     // This is called by the separator bindings
@@ -314,6 +323,33 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         
         this._buildPopupMenu(); 
         this._updateNow(); 
+    }
+
+    /**
+     * Ensures that only one sub-menu is open at a time within a parent menu.
+     * When one is opened, others are closed with animation.
+     */
+    _makeMenuExclusive(parentMenu) {
+        let items = parentMenu._getMenuItems();
+        let subMenus = items.filter(item => item instanceof PopupMenu.PopupSubMenuMenuItem);
+        
+        subMenus.forEach(item => {
+            item.menu.connect('open-state-changed', (menu, isOpen) => {
+                if (isOpen) {
+                    // Darken the background of the expanded sub-menu
+                    item.menu.actor.style = "background-color: rgba(0, 0, 0, 0.15); border-radius: 4px; margin-top: 2px; margin-bottom: 2px;";
+
+                    subMenus.forEach(other => {
+                        if (other !== item && other.menu.isOpen) {
+                            other.menu.close(true); // true triggers the smooth animation
+                        }
+                    });
+                } else {
+                    // Reset style when closed
+                    item.menu.actor.style = "";
+                }
+            });
+        });
     }
 
     // -------------------------
@@ -504,6 +540,10 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             _addProfileItem(3);
 
             this.menu.addMenuItem(profileSection);
+            
+            // Make slots inside profile section exclusive
+            this._makeMenuExclusive(profileSection.menu);
+
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             // END: PROFILE MANAGEMENT SECTION
 
@@ -528,6 +568,9 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                 global.reexec_self();
             });
             this.menu.addMenuItem(restartItem);
+
+            // Make main menu sub-menus (Separator, Symbols, Profiles) exclusive
+            this._makeMenuExclusive(this.menu);
 
         } catch (e) {
             global.logError("CombinedMonitor: _buildPopupMenu failed: " + e);
@@ -587,8 +630,11 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
      */
     _buildUI() {
         this._box = new St.BoxLayout({ reactive: true });
+        this._box.set_x_align(Clutter.ActorAlign.START); // Align to start for precise control
+
+        this._box.spacing = 0;                  // Reset global spacing to 0
         // Aggressive override for the inner box to eliminate left margin/padding.
-        this._box.style = "margin-left: 0px !important; padding-left: 0px !important;";
+        this._box.style = "margin-left: 0px !important; padding-left: 0px !important; margin-right: 0px !important; padding-right: 4px !important;";
         
         this.actor.add_child(this._box); // Add the box to the applet here
 
@@ -609,16 +655,16 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         // HERE YOU CAN ADJUST THE SPACING INDIVIDUALLY (in pixels)
         
         const cpuPadR = 4;  // CPU: Right (to the value)
-        const cpuPadL = 4;  // CPU: Left (to the separator)
+        const cpuPadL = 0;  // CPU: Left (to the separator)
         
         const ramPadR = 3;  // RAM: Right (to the value)
-        const ramPadL = 4;  // RAM: Left (to the separator)
+        const ramPadL = 0;  // RAM: Left (to the separator)
         
         const swapPadR = 3; // SWAP: Right (to the value)
-        const swapPadL = 4; // SWAP: Left (to the separator)
+        const swapPadL = 0; // SWAP: Left (to the separator)
         
         const tempPadR = 0; // TEMP: Right (to the value)
-        const tempPadL = 4; // TEMP: Left (to the separator)
+        const tempPadL = 0; // TEMP: Left (to the separator)
         // **********************************************
         
         let padR = 0;
@@ -666,11 +712,11 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
     /**
      * Callback for changes in visibility or mode.
      */
-    _onVisibilityChanged() {
+    _onVisibilityChanged(force = false) {
         // 1. Apply layout order
         this._applyOrderToBox();
         // 2. Force immediate update of contents
-        this._updateNow();
+        this._updateNow(force);
     }
 
 
@@ -710,6 +756,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         this.settings.bind("show-celsius-symbol", "showCelsiusSymbol", this._guardedUpdate.bind(this)); 
         this.settings.bind("temp-low", "tempLow", this._guardedUpdate.bind(this));
         this.settings.bind("temp-med", "tempMed", this._guardedUpdate.bind(this));
+        this.settings.bind("temp-decimal-places", "tempDecimalPlaces", this._guardedUpdate.bind(this)); // NEW binding
         this.settings.bind("temp-high", "tempHigh", this._guardedUpdate.bind(this));
         this.settings.bind("temp-enable-colors", "tempColorsEnabled", this._guardedUpdate.bind(this));
         this.settings.bind("temp-color-low", "tempColorLow", this._guardedUpdate.bind(this));
@@ -792,20 +839,29 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
 
         try {
             const settingsToSave = {};
-
-            // IMPORTANT: Use the predefined list CONFIGURABLE_KEYS
             for (const key of CONFIGURABLE_KEYS) { 
-                settingsToSave[key] = this.settings.getValue(key);
+                const val = this.settings.getValue(key);
+                if (val !== undefined && val !== null) {
+                    settingsToSave[key] = val;
+                }
             }
 
+            global.log(`CombinedMonitor: Saving ${Object.keys(settingsToSave).length} settings to Slot ${index}`);
             const dataKey = `profile-${index}-data`;
             const dataString = JSON.stringify(settingsToSave);
             this.settings.setValue(dataKey, dataString);
 
-            // 5. Activate Message Mode: Blocks _updateNow()
+            this._activeProfileIndex = index; // Set as active immediately on save
             this._isMessageActive = true; 
             const profileName = this.settings.getValue(`profile-${index}-name`);
             this.set_applet_label(_(`Profile Saved: ${profileName}`)); 
+
+            // Small delay to ensure settings are fully committed
+            Mainloop.timeout_add(100, () => {
+                this._onVisibilityChanged(true);
+                this._buildPopupMenu();
+                return GLib.SOURCE_REMOVE;
+            });
 
             // 6. Timer to deactivate the message (Variable Duration)
             // Duration is in seconds for Mainloop.timeout_add_seconds
@@ -836,40 +892,50 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
 
         this._clearProfileMessage(); // Ensure old timer is gone
 
-        // 1. Set loading flag to suppress binding triggers
-        this._isSettingsLoading = true; 
-
         try {
             const dataKey = `profile-${index}-data`;
             const dataString = this.settings.getValue(dataKey);
-            const loadedSettings = JSON.parse(dataString);
+            let loadedSettings = null;
+            try { loadedSettings = JSON.parse(dataString); } catch(e) {}
             
-            if (Object.keys(loadedSettings).length === 0) {
-                global.logWarning(`CombinedMonitor: Profile ${index} is empty. Load aborted.`);
+            if (!loadedSettings || typeof loadedSettings !== 'object' || Object.keys(loadedSettings).length === 0) {
+                this._activeProfileIndex = index; // Erlaube das Wechseln des Fokus auch bei leeren Slots
+                this._isMessageActive = true;
+                this.set_applet_label(_("Slot is empty - Ready to save"));
+                
+                this._profileMessageTimeoutId = Mainloop.timeout_add_seconds(2, () => {
+                    this._clearProfileMessage();
+                    this._updateNow();
+                    return GLib.SOURCE_REMOVE;
+                });
+                this._onVisibilityChanged(true);
+                this._buildPopupMenu(); // Refresh menu anyway
                 return;
             }
 
-            // 2. Reset all saved values. 
-            // ATTENTION: The global setting profile-message-duration is NOT overwritten
+            // 1. Set loading flag to suppress binding triggers
+            this._isSettingsLoading = true; 
+
             for (const key of CONFIGURABLE_KEYS) {
                 if (loadedSettings.hasOwnProperty(key)) {
                     this.settings.setValue(key, loadedSettings[key]);
                 }
             }
 
-            // 3. Fully update the UI (layout and values)
-            // Must be called here, as bindings were ignored due to this._isSettingsLoading=true
-            this._onVisibilityChanged(); 
-
-            // NEW: Store the index of the actively loaded profile
             this._activeProfileIndex = index;
-
-            // 4. Activate Message Mode: Blocks _updateNow() for the configured time
+            this._isSettingsLoading = false;
             this._isMessageActive = true; 
+
             const profileName = this.settings.getValue(`profile-${index}-name`);
             this.set_applet_label(_(`Active: ${profileName}`)); 
 
-            // 5. Timer to deactivate the message (Variable Duration)
+            // CRITICAL: Wait 100ms so Cinnamon can sync all 50+ bindings to variables
+            Mainloop.timeout_add(100, () => {
+                this._onVisibilityChanged(true);
+                this._buildPopupMenu();
+                return GLib.SOURCE_REMOVE;
+            });
+
             this._profileMessageTimeoutId = Mainloop.timeout_add_seconds(this.profileMessageDuration, () => { 
                 this._clearProfileMessage(); // Deactivates message mode and timer
                 this._updateNow(); // Performs a normal update
@@ -901,18 +967,29 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         };
         
         try {
-            const content = GLib.file_get_contents(PROC_STAT)[1].toString();
-            const lines = content.trim().split('\n');
+            const [success, contents] = GLib.file_get_contents(PROC_STAT);
+            if (!success) return cpuData;
+
+            const content = DECODER.decode(contents);
+            // Optimization: Only process the first line and avoid splitting the whole file
+            const cpuLine = content.split('\n', 1)[0];
+            const fields = cpuLine.trim().split(/\s+/);
             
-            // The first line contains the overall statistics
-            const cpuLine = lines[0];
-            
-            // "cpu  user nice system idle iowait irq softirq steal guest guest_nice"
-            const parts = cpuLine.trim().split(/\s+/).slice(1).map(x => parseInt(x));
-            
-            // parts[3] is idle, the rest is busy (total - idle)
-            const idle = parts[3];
-            const total = parts.reduce((a, b) => a + b, 0);
+            // Index mapping for /proc/stat:
+            // 1:user, 2:nice, 3:system, 4:idle, 5:iowait, 6:irq, 7:softirq, 8:steal
+            const user = parseInt(fields[1]) || 0;
+            const nice = parseInt(fields[2]) || 0;
+            const system = parseInt(fields[3]) || 0;
+            const idleVal = parseInt(fields[4]) || 0;
+            const iowait = parseInt(fields[5]) || 0;
+            const irq = parseInt(fields[6]) || 0;
+            const softirq = parseInt(fields[7]) || 0;
+            const steal = parseInt(fields[8]) || 0;
+
+            // Better Accuracy: Idle time is idle + iowait
+            const idle = idleVal + iowait;
+            // Total time includes all fields (excluding guests as they are usually in user/nice)
+            const total = user + nice + system + idleVal + iowait + irq + softirq + steal;
             
             // CORRECTION: On the first run (initial 0 state), immediately return 0%
             if (this._prevTotal === 0 && total > 0) {
@@ -925,8 +1002,10 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             if (this._prevTotal > 0 && total > this._prevTotal) {
                 const totalDiff = total - this._prevTotal;
                 const idleDiff = idle - this._prevIdle;
-                const load = (totalDiff - idleDiff) / totalDiff;
-                cpuData.loadPercent = Math.round(load * 100);
+                if (totalDiff > 0) {
+                    const load = (totalDiff - idleDiff) / totalDiff;
+                    cpuData.loadPercent = Math.max(0, Math.min(100, Math.round(load * 100)));
+                }
             }
             
             this._prevTotal = total;
@@ -952,20 +1031,31 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         let swapTotal = 0;
         let swapFree = 0;
         
+        let found = 0; // Counter zum vorzeitigen Abbruch der Schleife
+        
         try {
-            const content = GLib.file_get_contents(PROC_MEM)[1].toString();
+            const [success, contents] = GLib.file_get_contents(PROC_MEM);
+            if (!success) return { memPercent: 0, swapPercent: 0, memUsedKB: 0, memTotalKB: 0, swapUsedKB: 0, swapTotalKB: 0 };
+
+            const content = DECODER.decode(contents);
             const lines = content.trim().split('\n');
             
             for (const line of lines) {
                 if (line.startsWith("MemTotal:")) {
                     memTotal = parseInt(line.split(/\s+/)[1]) || 0;
+                    found++;
                 } else if (line.startsWith("MemAvailable:")) {
                     memAvailable = parseInt(line.split(/\s+/)[1]) || 0;
+                    found++;
                 } else if (line.startsWith("SwapTotal:")) {
                     swapTotal = parseInt(line.split(/\s+/)[1]) || 0;
+                    found++;
                 } else if (line.startsWith("SwapFree:")) {
                     swapFree = parseInt(line.split(/\s+/)[1]) || 0;
+                    found++;
                 }
+                
+                if (found === 4) break; // Alle gesuchten Werte gefunden
             }
         } catch (e) {
             global.logError("CombinedMonitor: Error reading /proc/meminfo: " + e);
@@ -998,7 +1088,10 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             const file = Gio.File.new_for_path(path);
             if (!file.query_exists(null)) return -1;
             
-            const content = GLib.file_get_contents(path)[1].toString().trim();
+            const [success, contents] = GLib.file_get_contents(path);
+            if (!success) return -1;
+
+            const content = DECODER.decode(contents).trim();
             // Ensures the value is positive and a number
             const value = parseInt(content);
             return (value > 0 && !isNaN(value)) ? value : -1;
@@ -1015,6 +1108,28 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         let tempMilliC = -1; // Temperature in millidegrees Celsius
         let bestTempMilliC = -1;
         
+        // --- Try cached paths first ---
+        if (this._cachedCpuTempPath) {
+            tempMilliC = this._readTempFromFile(this._cachedCpuTempPath);
+            if (tempMilliC > 0) {
+                return tempMilliC / 1000; // Return as float
+            } else {
+                // Cached path failed, clear it and try fallback or re-scan
+                this._cachedCpuTempPath = null;
+            }
+        }
+
+        if (this._cachedFallbackTempPath) {
+            tempMilliC = this._readTempFromFile(this._cachedFallbackTempPath);
+            if (tempMilliC > 0) {
+                return tempMilliC / 1000; // Return as float
+            } else {
+                // Cached path failed, clear it and re-scan
+                this._cachedFallbackTempPath = null;
+            }
+        }
+
+        // --- If no cached path or cached path failed, perform full scan ---
         // Prioritized keywords that identify a CPU/Package temperature
         const priorityKeywords = ['package', 'cpu', 'core', 'die', 'tdie'];
 
@@ -1034,21 +1149,26 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                     // Added check for type file existence
                     const typeFile = Gio.File.new_for_path(typePath);
                     if (typeFile.query_exists(null)) {
-                        type = GLib.file_get_contents(typePath)[1].toString().trim().toLowerCase();
+                        const [success, contents] = GLib.file_get_contents(typePath);
+                        if (success) {
+                            type = DECODER.decode(contents).trim().toLowerCase();
+                        }
                     }
                 } catch (e) {}
                 
+                // Ignore known non-CPU thermal zones (SSD, WiFi, PCH)
+                if (type.includes("nvme") || type.includes("iwlwifi") || type.includes("pch")) continue;
+
                 tempMilliC = this._readTempFromFile(tempPath);
                 
                 if (tempMilliC > 0) {
                     // If the type contains a keyword, we use it immediately as the best result
                     if (priorityKeywords.some(keyword => type.includes(keyword))) {
-                        return Math.round(tempMilliC / 1000); // Degrees Celsius
+                        this._cachedCpuTempPath = tempPath; // Cache this path
+                        return tempMilliC / 1000; // Degrees Celsius (as float)
                     }
                     // Otherwise, we save it as a fallback (will be overwritten by HWMON if better)
-                    if (bestTempMilliC === -1) {
-                         bestTempMilliC = tempMilliC;
-                    }
+                    if (bestTempMilliC === -1) { bestTempMilliC = tempMilliC; this._cachedFallbackTempPath = tempPath; } // Cache this path
                 }
             }
         } catch (e) {
@@ -1064,6 +1184,21 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
              while ((fileInfo = enumerator.next_file(null))) {
                  const hwmonPath = GLib.build_filenamev([SYS_HWMON, fileInfo.get_name()]);
                  
+                 // Check driver name to exclude SSDs/GPUs/WiFi/PCH
+                 let hwmonName = "";
+                 try {
+                     const namePath = GLib.build_filenamev([hwmonPath, 'name']);
+                     const nameFile = Gio.File.new_for_path(namePath);
+                     if (nameFile.query_exists(null)) {
+                         const [success, contents] = GLib.file_get_contents(namePath);
+                         if (success) {
+                             hwmonName = DECODER.decode(contents).trim().toLowerCase();
+                         }
+                     }
+                 } catch (e) {}
+
+                 if (hwmonName === "nvme" || hwmonName === "nouveau" || hwmonName === "amdgpu" || hwmonName === "iwlwifi" || hwmonName === "pch") continue;
+
                  for (let i = 1; i <= 10; i++) { // Check max 10 sensors per folder
                      const tempPath = GLib.build_filenamev([hwmonPath, `temp${i}_input`]);
                      tempMilliC = this._readTempFromFile(tempPath);
@@ -1074,19 +1209,21 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                          try {
                             const labelFile = Gio.File.new_for_path(labelPath);
                             if (labelFile.query_exists(null)) {
-                                tempLabel = GLib.file_get_contents(labelPath)[1].toString().trim().toLowerCase();
+                                const [success, contents] = GLib.file_get_contents(labelPath);
+                                if (success) {
+                                    tempLabel = DECODER.decode(contents).trim().toLowerCase();
+                                }
                             }
                          } catch (e) {}
 
                          // High Priority: Finds the correct CPU/Package Sensor
                          if (priorityKeywords.some(keyword => tempLabel.includes(keyword))) {
-                             return Math.round(tempMilliC / 1000); // Degrees Celsius
+                             this._cachedCpuTempPath = tempPath; // Cache this path
+                             return tempMilliC / 1000; // Degrees Celsius (as float)
                          }
                          
                          // Low Priority: Save as general fallback, if no better result has been found yet
-                         if (bestTempMilliC === -1) {
-                              bestTempMilliC = tempMilliC;
-                         }
+                         if (bestTempMilliC === -1) { bestTempMilliC = tempMilliC; this._cachedFallbackTempPath = tempPath; } // Cache this path
                      }
                  }
              }
@@ -1096,7 +1233,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
 
         // 3. Last Fallback: The best result found (may be a less specific sensor)
         if (bestTempMilliC > 0) {
-            return Math.round(bestTempMilliC / 1000); 
+            return bestTempMilliC / 1000; // Return as float
         }
 
         return -1;
@@ -1106,11 +1243,11 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
     /**
      * The main update function. Called regularly or upon settings changes.
      */
-    _updateNow() {
+    _updateNow(force = false) {
         if (!this.settings) return true; // Stops the timer if settings are missing
         
         // Blocks the normal update if a profile message is currently active
-        if (this._isMessageActive) {
+        if (this._isMessageActive && !force) {
             return true; // Continues the loop
         }
 
@@ -1227,13 +1364,17 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         let tempDisplayValue = tempValue;
         let unitSymbol = "°C";
 
-        if (this.tempUnit === 1 && tempValue !== -1) { // Conversion to Fahrenheit (assuming tempUnit 1 is F)
-            tempDisplayValue = Math.round(tempValue * 9 / 5 + 32);
+        if (this.tempUnit === 1 && tempValue !== -1) { // Conversion to Fahrenheit
+            tempDisplayValue = tempValue * 9 / 5 + 32;
             unitSymbol = "°F";
         }
         
+        // Format to one decimal place if it's a valid temperature
+        if (tempValue !== -1) {
+            tempDisplayValue = tempDisplayValue.toFixed(this.tempDecimalPlaces);
+        }
+        
         let tempDisplayText = tempValue === -1 ? _("N/A") : tempDisplayValue + (this.showCelsiusSymbol ? unitSymbol : "");
-
 
         this._updateMetric(
             'temp', 
@@ -1357,22 +1498,30 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                  text = `${label} ${text}`; // Fallback to text label (no colon)
             }
             
-            valueLabel.set_text(text);
+            // Dirty check: Nur setzen wenn Text wirklich anders (spart UI-Layout Rechenzeit)
+            if (valueLabel.get_text() !== text) valueLabel.set_text(text);
             
         } else {
             // Use text label
             icon.visible = false;
-            valueLabel.set_text(`${label} ${text}`); // NEW LINE WITHOUT COLON
+            if (label) {
+                let fullText = `${label} ${text}`;
+                if (valueLabel.get_text() !== fullText) valueLabel.set_text(fullText);
+            } else {
+                if (valueLabel.get_text() !== text) valueLabel.set_text(text);
+            }
         }
         
         // 3. Determine color
         const colorsEnabled = this[`${metric}ColorsEnabled`];
         const col = this._pickColor(value, low, med, high, cLow, cMed, cHigh, cCrit);
         
-        let style = "";
+        let style = colorsEnabled ? `color: ${col};` : "";
         
-        if (colorsEnabled) style += ` color: ${col};`;
-        try { valueLabel.style = style; } catch (e) {}
+        try { 
+            // Nur anwenden, wenn sich der Style-String geändert hat
+            if (valueLabel.style !== style) valueLabel.style = style; 
+        } catch (e) {}
         
         // 4. Visibility of the entire actor (finalized in _applyOrderToBox)
     }
@@ -1443,6 +1592,13 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             // Set visibility of the actor
             actor.visible = true; 
             
+            // NEW: Apply 4px left spacing to metrics at positions 2, 3, and 4.
+            if (i > 0) {
+                actor.style = "margin-left: 4px;";
+            } else {
+                actor.style = "margin-left: 0px;";
+            }
+
             this._box.add_child(actor);
 
             // Add separator, except after the last element
@@ -1450,7 +1606,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                 const sep = new St.Label({ 
                     text: separatorText,
                     y_align: Clutter.ActorAlign.CENTER,
-                    style: `padding-left: 4px; padding-right: 4px; color: ${separatorColor};` 
+                    style: `color: ${separatorColor};` 
                 });
                 this._box.add_child(sep);
             }
@@ -1489,5 +1645,6 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
 var APPLET_UUID = UUID;
 
 function main(metadata, orientation, panelHeight, instanceId) { 
+    Gettext.bindtextdomain(UUID, metadata.path + "/locale");
     return new CombinedMonitorApplet(metadata, orientation, panelHeight, instanceId);
 }
