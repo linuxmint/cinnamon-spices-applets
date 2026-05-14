@@ -81,12 +81,16 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
                 this.settings.bind("max-lux", "max_lux", validator);
                 this.settings.bind("poll-interval", "poll_interval", validator);
                 this.settings.bind("min-lux", "min_lux", validator);
-                this.settings.bind("sensor-path", "sensor_path", () => {
-                    this._sensorAvailable = false;
-                    this._sensorPath = null;
-                    this._locate_sensor();
-                    this._update_tooltip();
-                });
+                this.settings.bind("sensor-path", "sensor_path", function() {
+                    try {
+                        this._sensorAvailable = false;
+                        this._sensorPath = null;
+                        this._locate_sensor();
+                        this._update_tooltip();
+                    } catch (e) {
+                        global.logError("[AB] sensor-path binding callback: " + (e && e.message ? e.message : e));
+                    }
+                }.bind(this));
                 this.settings.bind("calibrate-min-lux", "calibrate_min_lux",
                     this._start_dark_calibration.bind(this));
                 this.settings.bind("calibrate-max-lux", "calibrate_max_lux",
@@ -130,9 +134,10 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             "DARK phase started.\nGo to your dimmest environment.\nReading for 60 seconds.");
 
         this._calCountdownId = Mainloop.timeout_add(1000, this._cal_tick_dark.bind(this));
-        this._calTimerId = Mainloop.timeout_add(60000, () => {
-            this._calTimerId = null;
-            this._finish_dark_calibration();
+        const self = this;
+        this._calTimerId = Mainloop.timeout_add(60000, function() {
+            self._calTimerId = null;
+            self._finish_dark_calibration();
             return false;
         });
     }
@@ -172,7 +177,7 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             return;
         }
 
-        samples.sort((a, b) => a - b);
+        samples.sort(function(a, b) { return a - b; });
         const floorIdx = Math.floor(samples.length * 0.25);
         const noiseFloor = samples[floorIdx];
 
@@ -218,9 +223,10 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             "BRIGHT phase started.\nGo to your brightest environment.\nReading for 60 seconds.");
 
         this._calCountdownId = Mainloop.timeout_add(1000, this._cal_tick_bright.bind(this));
-        this._calTimerId = Mainloop.timeout_add(60000, () => {
-            this._calTimerId = null;
-            this._finish_bright_calibration();
+        const self = this;
+        this._calTimerId = Mainloop.timeout_add(60000, function() {
+            self._calTimerId = null;
+            self._finish_bright_calibration();
             return false;
         });
     }
@@ -284,7 +290,8 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
     // 2. Enumerate iio:device0-9 (raw+scale, then input)
     // 3. Legacy /sys/class/sensors/light path
     _locate_sensor() {
-        const checkPath = (rawPath, scalePath, offsetPath, inputPath) => {
+        const self = this;
+        const checkPath = function(rawPath, scalePath, offsetPath, inputPath) {
             try {
                 const raw = Gio.file_new_for_path(rawPath);
                 const scale = Gio.file_new_for_path(scalePath);
@@ -292,19 +299,19 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
 
                 if (raw.query_exists(null) && scale.query_exists(null)) {
                     const offset = offsetPath ? Gio.file_new_for_path(offsetPath) : null;
-                    this._sensorPath = {
+                    self._sensorPath = {
                         raw: rawPath,
                         scale: scalePath,
                         offset: offset && offset.query_exists(null) ? offsetPath : null,
                         input: null
                     };
-                    this._sensorAvailable = true;
+                    self._sensorAvailable = true;
                     global.log("[AB] Found sensor (raw+scale) at: " + rawPath);
                     return true;
                 }
                 if (input && input.query_exists(null)) {
-                    this._sensorPath = { raw: null, scale: null, offset: null, input: inputPath };
-                    this._sensorAvailable = true;
+                    self._sensorPath = { raw: null, scale: null, offset: null, input: inputPath };
+                    self._sensorAvailable = true;
                     global.log("[AB] Found sensor (direct input) at: " + inputPath);
                     return true;
                 }
@@ -498,17 +505,19 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             }
             let interval = this.poll_interval || POLL_INTERVAL.DEFAULT;
             interval = Math.max(POLL_INTERVAL.MIN, Math.min(POLL_INTERVAL.MAX, interval));
-            this._loopId = Mainloop.timeout_add(interval, () => {
-                this._loopId = null;
-                this._do_loop();
+            const self = this;
+            this._loopId = Mainloop.timeout_add(interval, function() {
+                self._loopId = null;
+                self._do_loop();
                 return false;
             });
         } catch (e) {
             global.logError("[AB] Schedule: " + (e && e.message ? e.message : e));
             if (this._loopId) Mainloop.source_remove(this._loopId);
-            this._loopId = Mainloop.timeout_add(POLL_INTERVAL.DEFAULT, () => {
-                this._loopId = null;
-                this._schedule_next_loop();
+            const self = this;
+            this._loopId = Mainloop.timeout_add(POLL_INTERVAL.DEFAULT, function() {
+                self._loopId = null;
+                self._schedule_next_loop();
                 return false;
             });
         }
