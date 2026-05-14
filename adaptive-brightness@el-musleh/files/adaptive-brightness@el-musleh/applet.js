@@ -19,6 +19,8 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Settings = imports.ui.settings;
 const Main = imports.ui.main;
+const PopupMenu = imports.ui.popupMenu;
+const St = imports.gi.St;
 
 // Constraints and defaults
 const POLL_INTERVAL = { MIN: 100, DEFAULT: 1000, MAX: 60000 };
@@ -108,9 +110,34 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             this.set_applet_label("🌤");
             this._update_tooltip();
             this._schedule_next_loop();
+
+            // Add context menu with Configure option
+            this._buildContextMenu();
         } catch (e) {
             global.logError("[AB] Constructor: " + (e && e.message ? e.message : e));
             this.set_applet_label("⚠");
+        }
+    }
+
+    _buildContextMenu() {
+        try {
+            this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            const configureItem = new PopupMenu.PopupMenuItem("Configure...");
+            const self = this;
+            configureItem.connect('activate', function() {
+                try {
+                    if (typeof self.openSettings === 'function') {
+                        self.openSettings();
+                    } else {
+                        GLib.spawn_command_line_async('cinnamon-settings applets adaptive-brightness@el-musleh');
+                    }
+                } catch (e) {
+                    global.logError("[AB] Configure click failed: " + (e && e.message ? e.message : e));
+                }
+            });
+            this._applet_context_menu.addMenuItem(configureItem);
+        } catch (e) {
+            global.logError("[AB] Context menu setup failed: " + (e && e.message ? e.message : e));
         }
     }
 
@@ -455,20 +482,6 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             }
         } catch (e) {
             global.logError("[AB] Click: " + (e && e.message ? e.message : e));
-        }
-    }
-
-    // Open the settings dialog on right-click
-    on_applet_right_click() {
-        try {
-            if (typeof this.openSettings === 'function') {
-                this.openSettings();
-            } else {
-                global.log("[AB] openSettings not available, trying Cinnamon launcher...");
-                GLib.spawn_command_line_async('cinnamon-settings applets adaptive-brightness@el-musleh');
-            }
-        } catch (e) {
-            global.logError("[AB] Settings dialog failed: " + (e && e.message ? e.message : e));
         }
     }
 
