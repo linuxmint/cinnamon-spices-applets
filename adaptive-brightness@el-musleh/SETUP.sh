@@ -7,7 +7,15 @@ echo "🌤 Adaptive Brightness Setup Script"
 echo "===================================="
 echo ""
 
+# Step 0: Install applet files
+echo "0️⃣  Installing applet files..."
+APPLET_DIR="$HOME/.local/share/cinnamon/applets/adaptive-brightness@el-musleh"
+mkdir -p "$APPLET_DIR"
+cp -r files/adaptive-brightness@el-musleh/* "$APPLET_DIR/"
+echo "   ✓ Applet files installed"
+
 # Step 1: Install brightnessctl
+echo ""
 echo "1️⃣  Installing brightnessctl..."
 if command -v brightnessctl &> /dev/null; then
     echo "   ✓ brightnessctl already installed"

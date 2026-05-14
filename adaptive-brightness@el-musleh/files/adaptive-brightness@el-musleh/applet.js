@@ -19,8 +19,6 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Settings = imports.ui.settings;
 const Main = imports.ui.main;
-const PopupMenu = imports.ui.popupMenu;
-const St = imports.gi.St;
 
 // Constraints and defaults
 const POLL_INTERVAL = { MIN: 100, DEFAULT: 1000, MAX: 60000 };
@@ -116,35 +114,6 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
         }
     }
 
-    // Override getContextMenuItems to add Configure option
-    getContextMenuItems() {
-        try {
-            const items = Applet.TextApplet.prototype.getContextMenuItems.call(this);
-
-            items.push(new PopupMenu.PopupSeparatorMenuItem());
-
-            const configureItem = new PopupMenu.PopupMenuItem("Configure...");
-            const self = this;
-            configureItem.connect('activate', function() {
-                try {
-                    if (typeof self.openSettings === 'function') {
-                        self.openSettings();
-                    } else {
-                        GLib.spawn_command_line_async('cinnamon-settings applets adaptive-brightness@el-musleh');
-                    }
-                } catch (e) {
-                    global.logError("[AB] Configure click failed: " + (e && e.message ? e.message : e));
-                }
-            });
-            items.push(configureItem);
-
-            return items;
-        } catch (e) {
-            global.logError("[AB] getContextMenuItems failed: " + (e && e.message ? e.message : e));
-            return Applet.TextApplet.prototype.getContextMenuItems.call(this);
-        }
-    }
-
     _start_dark_calibration() {
         if (!this.calibrate_min_lux) return;
         if (this._calPhase !== CAL_PHASE.NONE) {
@@ -152,7 +121,7 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             return;
         }
         if (!this._sensorAvailable) {
-            Main.notify("Adaptive Brightness", "No sensor found — cannot calibrate.");
+            Main.notify("Adaptive Brightness", "No sensor found - cannot calibrate.");
             return;
         }
 
@@ -241,7 +210,7 @@ class AdaptiveBrightnessApplet extends Applet.TextApplet {
             return;
         }
         if (!this._sensorAvailable) {
-            Main.notify("Adaptive Brightness", "No sensor found — cannot calibrate.");
+            Main.notify("Adaptive Brightness", "No sensor found - cannot calibrate.");
             return;
         }
 

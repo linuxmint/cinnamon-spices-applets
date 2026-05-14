@@ -1,109 +1,19 @@
 # Adaptive Brightness - Cinnamon Applet
 
-Automatically adjusts your laptop's screen brightness based on the ambient light sensor (ALS). Never manually adjust brightness again!
-
-## Features
-
-✨ **Smart Auto-Adjust** - Real-time brightness control based on ambient light readings  
-🎚️ **Smooth Transitions** - Logarithmic scaling with smoothing algorithm for natural adjustments  
-🌙 **Easy Toggle** - Click the applet to pause/resume auto-brightness control  
-⚡ **Lightweight** - Minimal CPU/battery usage with 1-second polling interval  
-🔒 **Secure** - Uses `sudo` with `brightnessctl` (sudo password required on first use)  
-
-## Requirements
-
-- Cinnamon desktop environment
-- Ambient Light Sensor (ALS) device (`/sys/bus/iio/devices/iio:device0/`)
-- `brightnessctl` package installed
-- Linux-based system
+Automatically adjusts your laptop's screen brightness based on the ambient light sensor (ALS).
 
 ## Installation
 
-### From Cinnamon Spices
+1. Copy the `adaptive-brightness@el-musleh` folder to your Cinnamon applets directory:
+   `cp -r adaptive-brightness@el-musleh ~/.local/share/cinnamon/applets/`
 
-1. Open **Cinnamon Settings → Applets**
-2. Search for **"Auto Brightness (ALS)"**
-3. Click **Install** and follow the prompts
-4. Enable the applet from the list
-5. Add it to your panel
+2. **Crucial**: Ensure `metadata.json` is at the root:
+   `~/.local/share/cinnamon/applets/adaptive-brightness@el-musleh/metadata.json`
 
-### Manual Installation
+3. Restart Cinnamon (`Alt + F2` → `r` → `Enter`).
 
-```bash
-git clone https://github.com/el-musleh/auto-brightness-als
-cp -r auto-brightness-als ~/.local/share/cinnamon/applets/auto-brightness-als@el-musleh/
-```
+4. Open **Cinnamon Settings → Applets** and enable "Adaptive Brightness".
 
-Then restart Cinnamon: `Alt + F2 → r → Enter`
-
-## Usage
-
-- **Enable/Disable**: Click the applet in the panel
-  - 🌤 **Auto** = Auto-brightness is active
-  - 🌙 **Off** = Auto-brightness is disabled (manual control)
-  
-- **Hover** over the applet to see current ambient light level and brightness percentage
-
-## Setup Instructions
-
-### 1. Install Required Package
-```bash
-sudo apt install brightnessctl
-```
-
-### 2. Grant Permission (Choose ONE method):
-
-**Option A: Add user to video group (Recommended)**
-```bash
-sudo usermod -a -G video $USER
-# Then log out and back in
-```
-
-**Option B: Password-less sudo (For Cinnamon applet)**
-```bash
-echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/brightnessctl" | sudo tee /etc/sudoers.d/brightnessctl-applet
-```
-
-### 3. Reload Cinnamon
-Press `Alt+F2`, type `r`, press `Enter`
-
-## Configuration
-
-Right-click the applet icon and select "Open settings" to customize:
-
-- **Minimum Brightness** - Lowest brightness level (default: 10%)
-- **Maximum Brightness** - Highest brightness level (default: 100%)
-- **Smoothing Factor** - Transition smoothness (0=instant, 1=very smooth)
-- **Maximum Lux** - Reference light level for calculations
-- **Poll Interval** - How often to check sensor (100-60000ms)
-
-```javascript
-const MIN_BRIGHTNESS = 10;    // Minimum brightness (%)
-const MAX_BRIGHTNESS = 90;    // Maximum brightness (%)
-const SMOOTHING = 0.2;        // Smoothing factor (0.0-1.0)
-const POLL_MS = 1000;         // Update interval (milliseconds)
-```
-
-## Troubleshooting
-
-### Applet doesn't appear after installation
-- Restart Cinnamon: `Alt + F2 → r → Enter`
-- Check if ALS sensor exists: `cat /sys/bus/iio/devices/iio:device0/in_illuminance_raw`
-- If file doesn't exist, your laptop may not have an ALS device
-
-### Brightness doesn't change
-- Verify `brightnessctl` is installed: `which brightnessctl`
-- Check permissions: First click may ask for sudo password
-- Review logs: `journalctl -f | grep cinnamon`
-
-### Sensor not found
-Your device may use a different path. Check:
-```bash
-find /sys -name "in_illuminance*" 2>/dev/null
-```
-
-And update the paths in `applet.js`:
-```javascript
-const ALS_RAW = "/path/to/your/in_illuminance_raw";
-const ALS_SCALE = "/path/to/your/in_illuminance_scale";
-```
+## Setup
+Run the included setup script:
+`cd ~/.local/share/cinnamon/applets/adaptive-brightness@el-musleh/ && bash SETUP.sh`
