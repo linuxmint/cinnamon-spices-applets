@@ -62,7 +62,7 @@
     "section-temp-display": {
       "type": "section",
       "title": "Display",
-      "keys": ["show-temp", "show-celsius-symbol", "temp-label-text", "temp-symbol", "temp-unit"]
+      "keys": ["show-temp", "show-celsius-symbol", "temp-label-text", "temp-symbol", "temp-unit", "temp-decimal-places"]
     },
     "section-temp-thresholds": {
       "type": "section",
@@ -242,6 +242,16 @@
     },
     "description": "Unit of Measurement",
     "tooltip": "Choose whether the temperature should be displayed in Celsius or Fahrenheit. Threshold values must be adjusted accordingly."
+  },
+  "temp-decimal-places": {
+    "type": "spinbutton",
+    "default": 1,
+    "min": 0,
+    "max": 2,
+    "step": 1,
+    "units": "decimal places",
+    "description": "Decimal places for temperature",
+    "tooltip": "Number of decimal places to display for temperature. Set to 0 for whole numbers."
   },
   "temp-low": {
     "type": "spinbutton",
