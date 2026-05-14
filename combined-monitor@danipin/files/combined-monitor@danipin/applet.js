@@ -867,7 +867,10 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             // Duration is in seconds for Mainloop.timeout_add_seconds
             this._profileMessageTimeoutId = Mainloop.timeout_add_seconds(this.profileMessageDuration, () => { 
                 this._clearProfileMessage(); // Deactivates message mode and timer
-                this._updateNow(); // Performs a normal update
+                // Fire and forget async update
+                this._updateNow().catch(e => {
+                    global.logError("CombinedMonitor: Async update failed in profile timer: " + e);
+                });
                 return GLib.SOURCE_REMOVE; // Important: return value for Mainloop
             });
 
@@ -938,7 +941,10 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
 
             this._profileMessageTimeoutId = Mainloop.timeout_add_seconds(this.profileMessageDuration, () => { 
                 this._clearProfileMessage(); // Deactivates message mode and timer
-                this._updateNow(); // Performs a normal update
+                // Fire and forget async update
+                this._updateNow().catch(e => {
+                    global.logError("CombinedMonitor: Async update failed in load timeout: " + e);
+                });
                 return GLib.SOURCE_REMOVE; // Important: return value for Mainloop
             });
             
@@ -955,11 +961,28 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         }
     }
 
+    /**
+     * Helper to read file contents asynchronously.
+     * @param {Gio.File} file 
+     * @returns {Promise<[boolean, Uint8Array]>}
+     */
+    _getFileContentsAsync(file) {
+        return new Promise((resolve) => {
+            file.load_contents_async(null, (f, res) => {
+                try {
+                    let [success, contents] = f.load_contents_finish(res);
+                    resolve([success, contents]);
+                } catch (e) {
+                    resolve([false, null]);
+                }
+            });
+        });
+    }
 
     /**
      * Determines the current CPU load.
      */
-    _getCPUData() {
+    async _getCPUData() {
         let cpuData = {
             total: 0,
             idle: 0,
@@ -967,7 +990,8 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         };
         
         try {
-            const [success, contents] = GLib.file_get_contents(PROC_STAT);
+            const file = Gio.File.new_for_path(PROC_STAT);
+            const [success, contents] = await this._getFileContentsAsync(file);
             if (!success) return cpuData;
 
             const content = DECODER.decode(contents);
@@ -1025,7 +1049,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
     /**
      * Determines RAM and SWAP usage.
      */
-    _getMemData() {
+    async _getMemData() {
         let memTotal = 0;
         let memAvailable = 0; 
         let swapTotal = 0;
@@ -1034,7 +1058,8 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         let found = 0; // Counter zum vorzeitigen Abbruch der Schleife
         
         try {
-            const [success, contents] = GLib.file_get_contents(PROC_MEM);
+            const file = Gio.File.new_for_path(PROC_MEM);
+            const [success, contents] = await this._getFileContentsAsync(file);
             if (!success) return { memPercent: 0, swapPercent: 0, memUsedKB: 0, memTotalKB: 0, swapUsedKB: 0, swapTotalKB: 0 };
 
             const content = DECODER.decode(contents);
@@ -1082,13 +1107,10 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
      * @param {string} path - The path to the sensor file.
      * @returns {number} The temperature in millidegrees Celsius or -1 on error.
      */
-    _readTempFromFile(path) {
+    async _readTempFromFile(path) {
         try {
-            // Added check for file existence
             const file = Gio.File.new_for_path(path);
-            if (!file.query_exists(null)) return -1;
-            
-            const [success, contents] = GLib.file_get_contents(path);
+            const [success, contents] = await this._getFileContentsAsync(file);
             if (!success) return -1;
 
             const content = DECODER.decode(contents).trim();
@@ -1104,13 +1126,13 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
      * Finds the best available temperature sensor (prioritizes 'package' or 'cpu' sensors).
      * @returns {number} The temperature in degrees Celsius (rounded) or -1 on error.
      */
-    _getTempData() {
+    async _getTempData() {
         let tempMilliC = -1; // Temperature in millidegrees Celsius
         let bestTempMilliC = -1;
         
         // --- Try cached paths first ---
         if (this._cachedCpuTempPath) {
-            tempMilliC = this._readTempFromFile(this._cachedCpuTempPath);
+            tempMilliC = await this._readTempFromFile(this._cachedCpuTempPath);
             if (tempMilliC > 0) {
                 return tempMilliC / 1000; // Return as float
             } else {
@@ -1120,7 +1142,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         }
 
         if (this._cachedFallbackTempPath) {
-            tempMilliC = this._readTempFromFile(this._cachedFallbackTempPath);
+            tempMilliC = await this._readTempFromFile(this._cachedFallbackTempPath);
             if (tempMilliC > 0) {
                 return tempMilliC / 1000; // Return as float
             } else {
@@ -1146,20 +1168,17 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                 
                 let type = "";
                 try {
-                    // Added check for type file existence
                     const typeFile = Gio.File.new_for_path(typePath);
-                    if (typeFile.query_exists(null)) {
-                        const [success, contents] = GLib.file_get_contents(typePath);
-                        if (success) {
-                            type = DECODER.decode(contents).trim().toLowerCase();
-                        }
+                    const [success, contents] = await this._getFileContentsAsync(typeFile);
+                    if (success) {
+                        type = DECODER.decode(contents).trim().toLowerCase();
                     }
                 } catch (e) {}
                 
                 // Ignore known non-CPU thermal zones (SSD, WiFi, PCH)
                 if (type.includes("nvme") || type.includes("iwlwifi") || type.includes("pch")) continue;
 
-                tempMilliC = this._readTempFromFile(tempPath);
+                tempMilliC = await this._readTempFromFile(tempPath);
                 
                 if (tempMilliC > 0) {
                     // If the type contains a keyword, we use it immediately as the best result
@@ -1189,11 +1208,9 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                  try {
                      const namePath = GLib.build_filenamev([hwmonPath, 'name']);
                      const nameFile = Gio.File.new_for_path(namePath);
-                     if (nameFile.query_exists(null)) {
-                         const [success, contents] = GLib.file_get_contents(namePath);
-                         if (success) {
-                             hwmonName = DECODER.decode(contents).trim().toLowerCase();
-                         }
+                     const [success, contents] = await this._getFileContentsAsync(nameFile);
+                     if (success) {
+                         hwmonName = DECODER.decode(contents).trim().toLowerCase();
                      }
                  } catch (e) {}
 
@@ -1201,18 +1218,16 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
 
                  for (let i = 1; i <= 10; i++) { // Check max 10 sensors per folder
                      const tempPath = GLib.build_filenamev([hwmonPath, `temp${i}_input`]);
-                     tempMilliC = this._readTempFromFile(tempPath);
+                     tempMilliC = await this._readTempFromFile(tempPath);
                      
                      if (tempMilliC > 0) {
                          const labelPath = GLib.build_filenamev([hwmonPath, `temp${i}_label`]);
                          let tempLabel = "";
                          try {
                             const labelFile = Gio.File.new_for_path(labelPath);
-                            if (labelFile.query_exists(null)) {
-                                const [success, contents] = GLib.file_get_contents(labelPath);
-                                if (success) {
-                                    tempLabel = DECODER.decode(contents).trim().toLowerCase();
-                                }
+                            const [success, contents] = await this._getFileContentsAsync(labelFile);
+                            if (success) {
+                                tempLabel = DECODER.decode(contents).trim().toLowerCase();
                             }
                          } catch (e) {}
 
@@ -1243,7 +1258,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
     /**
      * The main update function. Called regularly or upon settings changes.
      */
-    _updateNow(force = false) {
+    async _updateNow(force = false) {
         if (!this.settings) return true; // Stops the timer if settings are missing
         
         // Blocks the normal update if a profile message is currently active
@@ -1252,9 +1267,11 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         }
 
         // 1. Fetch data
-        const cpuData = this._getCPUData();
-        const memData = this._getMemData();
-        const tempData = this._getTempData();
+        const [cpuData, memData, tempData] = await Promise.all([
+            this._getCPUData(),
+            this._getMemData(),
+            this._getTempData()
+        ]);
         
         // 2. Format and display values
         
@@ -1633,10 +1650,18 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             this._timeoutId = 0;
         }
 
-        this._updateNow(); // Immediate Update
+        // Initial async call
+        this._updateNow().catch(e => {
+            global.logError("CombinedMonitor: Initial update failed: " + e);
+        });
 
         if (this.updateInterval > 0) {
-            this._timeoutId = Mainloop.timeout_add(this.updateInterval, this._updateNow.bind(this));
+            this._timeoutId = Mainloop.timeout_add(this.updateInterval, () => {
+                this._updateNow().catch(e => {
+                    global.logError("CombinedMonitor: Async loop update failed: " + e);
+                });
+                return true;
+            });
         }
     }
 }
