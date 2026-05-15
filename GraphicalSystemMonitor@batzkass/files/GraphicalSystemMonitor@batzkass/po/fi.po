@@ -248,8 +248,8 @@ msgid "Kernel color"
 msgstr "Kernel-prosessit"
 
 #. 6.6->settings-schema.json->cpu_color_3->description
-msgid "IOWait color"
-msgstr "IOWait-prosessit"
+msgid "Other color"
+msgstr "Other-prosessit"
 
 #. 6.6->settings-schema.json->mem_color_0->description
 #. 6.6->settings-schema.json->swap_color_0->description

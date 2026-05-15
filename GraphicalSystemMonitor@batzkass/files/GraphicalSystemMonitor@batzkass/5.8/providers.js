@@ -35,9 +35,9 @@ class CpuData extends Provider {
         super(refresh_rate)
         this.gtop = new GTop.glibtop_cpu();
         this.idle_last = 0;
+        this.user_last = 0;
         this.nice_last = 0;
         this.sys_last = 0;
-        this.iowait_last = 0;
         this.total_last = 0;
         this.full_title = _("CPU:");
         this.short_title = _("CPU");
@@ -50,28 +50,33 @@ class CpuData extends Provider {
     
     getData() {
         GTop.glibtop_get_cpu(this.gtop);
-        var delta = (this.gtop.total - this.total_last);
+
         var idle = 0;
+        var user = 0;
         var nice = 0;
         var sys = 0;
-        var iowait = 0;
+        var other = 0;
+
+        var delta = (this.gtop.total - this.total_last);
         if (delta > 0) {
 	        idle = (this.gtop.idle - this.idle_last) / delta;
+            user = (this.gtop.user - this.user_last) / delta;
 	        nice = (this.gtop.nice - this.nice_last) / delta;
 	        sys = (this.gtop.sys - this.sys_last) / delta;
-	        iowait = (this.gtop.iowait - this.iowait_last) / delta;
+            other = 1-user-nice-sys-idle;
         }
+
         this.idle_last = this.gtop.idle;
+        this.user_last = this.gtop.user;
         this.nice_last = this.gtop.nice;
         this.sys_last = this.gtop.sys;
-        this.iowait_last = this.gtop.iowait;
         this.total_last = this.gtop.total;
-        var used = 1-idle-nice-sys-iowait;
-        this.text = (100 * used).toFixed();
+
+        this.text = (100 * (1-idle)).toFixed();
         this.short_text = this.text + this.unity
         this.text += ' '+this.unity
         // map below to avoid -0 sometimes
-        return [used, nice, sys, iowait].map(v=>Math.max(0,v));
+        return [user, nice, sys, other].map(v=>Math.max(0,v));
     }
 }
 

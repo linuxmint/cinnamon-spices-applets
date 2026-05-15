@@ -245,8 +245,8 @@ msgid "Kernel color"
 msgstr "Couleur Noyau"
 
 #. 6.6->settings-schema.json->cpu_color_3->description
-msgid "IOWait color"
-msgstr "Couleur IOWait"
+msgid "Other color"
+msgstr "Couleur Other"
 
 #. 6.6->settings-schema.json->mem_color_0->description
 #. 6.6->settings-schema.json->swap_color_0->description

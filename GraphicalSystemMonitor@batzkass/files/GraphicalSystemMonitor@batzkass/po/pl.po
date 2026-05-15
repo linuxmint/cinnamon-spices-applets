@@ -252,8 +252,8 @@ msgid "Kernel color"
 msgstr "Kolor jądra"
 
 #. 6.6->settings-schema.json->cpu_color_3->description
-msgid "IOWait color"
-msgstr "Kolor oczekiwania wejścia wyjścia (IOWait)"
+msgid "Other color"
+msgstr "Kolor oczekiwania wejścia wyjścia (Other)"
 
 #. 6.6->settings-schema.json->mem_color_0->description
 #. 6.6->settings-schema.json->swap_color_0->description
