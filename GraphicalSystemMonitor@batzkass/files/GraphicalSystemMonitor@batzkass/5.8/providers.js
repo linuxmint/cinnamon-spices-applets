@@ -88,14 +88,23 @@ class MemData extends Provider {
         return 2;
     }
     
+    debug_show(gt) {
+        if(MemData.already_shown!=true){
+            function f(v){return (v/1024/1024/1024).toFixed(2)}
+            global.log('total:',f(gt.total),'| used:',f(gt.used),'| free:',f(gt.free),'| shared:',f(gt.shared),'| buff:',f(gt.buffer),'| cache:',f(gt.cached),'| user:',f(gt.user),'| locked:',f(gt.locked))
+            MemData.already_shown = true
+        }
+    }
+    
     getData() {
         GTop.glibtop_get_mem(this.gtop);
-        var used = this.gtop.used / this.gtop.total;
+        // this.debug_show(this.gtop)
+        var used = this.gtop.user / this.gtop.total;
         var cached = (this.gtop.buffer + this.gtop.cached) / this.gtop.total;
-        var val = (this.gtop.used - this.gtop.cached - this.gtop.buffer) / (1024 * 1024 * 1024)
+        var val = this.gtop.user / (1024 * 1024 * 1024)
         this.text = val.toFixed(1)+ " / " + (this.gtop.total / (1024 * 1024 * 1024)).toFixed(1) + ' ' + this.unity;
         this.short_text = Math.round(100*val/this.gtop.total*(1024 * 1024 * 1024))+'%'
-        return [used-cached, cached];
+        return [used, cached];
     }
 }
 
