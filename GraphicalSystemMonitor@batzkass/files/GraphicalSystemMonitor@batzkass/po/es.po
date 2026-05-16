@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-04-20 17:45+0200\n"
-"PO-Revision-Date: 2025-03-22 09:49-0300\n"
+"PO-Revision-Date: 2026-05-16 11:22-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.9\n"
 
 #. 6.6/providers.js:42
 msgid "CPU:"
@@ -30,7 +30,7 @@ msgstr "CPU"
 
 #. 6.6/providers.js:44
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #. 6.6/providers.js:82
 msgid "Memory:"
@@ -38,11 +38,11 @@ msgstr "Memoria:"
 
 #. 6.6/providers.js:83
 msgid "MEM"
-msgstr ""
+msgstr "MEM"
 
 #. 6.6/providers.js:84 6.6/providers.js:108
 msgid "GiB"
-msgstr ""
+msgstr "GiB"
 
 #. 6.6/providers.js:106
 msgid "Swap:"
@@ -50,25 +50,24 @@ msgstr "Swap:"
 
 #. 6.6/providers.js:107
 msgid "SW"
-msgstr ""
+msgstr "SW"
 
 #. 6.6/providers.js:129
-#, fuzzy
 msgid "Network:"
-msgstr "Red"
+msgstr "Red:"
 
 #. 6.6/providers.js:130
 msgid "NET"
-msgstr ""
+msgstr "RED"
 
 #. 6.6/providers.js:131
 msgid "KiB/s"
-msgstr ""
+msgstr "KiB/s"
 
 #. 6.6->settings-schema.json->net_minimum_graph_scale->units
 #. 6.6/providers.js:132
 msgid "MiB/s"
-msgstr ""
+msgstr "MiB/s"
 
 #. 6.6/providers.js:199 6.6/providers.js:221
 msgid "Load average:"
@@ -76,16 +75,15 @@ msgstr "Promedio de carga:"
 
 #. 6.6/providers.js:200
 msgid "LOAD"
-msgstr ""
+msgstr "CARGA"
 
 #. metadata.json->description
 msgid "Displays CPU, memory, swap and network usage and load in graphs"
 msgstr "Muestra gráficos del uso de la CPU, memoria, swap y red"
 
 #. metadata.json->name
-#, fuzzy
 msgid "Graphical System Monitor"
-msgstr "Monitor del sistema"
+msgstr "Monitor gráfico del sistema"
 
 #. 6.6->settings-schema.json->common->title
 msgid "Common"
@@ -128,7 +126,7 @@ msgstr "Carga"
 
 #. 6.6->settings-schema.json->tooltip_page->title
 msgid "Tooltip"
-msgstr ""
+msgstr "Información sobre herramientas"
 
 #. 6.6->settings-schema.json->onclick_program->description
 msgid "Program to launch on click"
@@ -139,9 +137,8 @@ msgid "Draw border"
 msgstr "Dibujar el borde"
 
 #. 6.6->settings-schema.json->graph_width->description
-#, fuzzy
 msgid "Common graph size"
-msgstr "Ancho del Gráfico General"
+msgstr "Tamaño de gráfico común"
 
 #. 6.6->settings-schema.json->graph_width->units
 #. 6.6->settings-schema.json->graph_spacing->units
@@ -159,6 +156,8 @@ msgstr "píxeles"
 #. 6.6->settings-schema.json->graph_width->tooltip
 msgid "Graphs width for horizontal panel, graphs height for vertical panel."
 msgstr ""
+"Ancho de los gráficos para el panel horizontal, altura de los gráficos para "
+"el panel vertical."
 
 #. 6.6->settings-schema.json->graph_spacing->description
 msgid "Graph spacing"
@@ -166,7 +165,7 @@ msgstr "Espaciado de los gráficos"
 
 #. 6.6->settings-schema.json->graph_spacing->tooltip
 msgid "The number of pixels between each graph."
-msgstr ""
+msgstr "El número de píxeles entre cada gráfico."
 
 #. 6.6->settings-schema.json->refresh_rate->description
 msgid "Refresh rate"
@@ -189,18 +188,16 @@ msgid "Top/bottom padding"
 msgstr "Espaciado superior/inferior"
 
 #. 6.6->settings-schema.json->show_values->description
-#, fuzzy
 msgid "Show data on the graphs"
-msgstr "Gráficos suavizados"
+msgstr "Mostrar datos en los gráficos"
 
 #. 6.6->settings-schema.json->values_fontsize->description
 msgid "Data font size"
-msgstr ""
+msgstr "Tamaño de fuente de datos"
 
 #. 6.6->settings-schema.json->values_color->description
-#, fuzzy
 msgid "Text color"
-msgstr "Color para User"
+msgstr "Color del texto"
 
 #. 6.6->settings-schema.json->bg_color->description
 msgid "Background color"
@@ -223,18 +220,16 @@ msgstr "Activar"
 #. 6.6->settings-schema.json->swap_override_graph_width->description
 #. 6.6->settings-schema.json->net_override_graph_width->description
 #. 6.6->settings-schema.json->load_override_graph_width->description
-#, fuzzy
 msgid "Override graph size"
-msgstr "Cambiar ancho del gráfico"
+msgstr "Anular el tamaño del gráfico"
 
 #. 6.6->settings-schema.json->cpu_graph_width->description
 #. 6.6->settings-schema.json->mem_graph_width->description
 #. 6.6->settings-schema.json->swap_graph_width->description
 #. 6.6->settings-schema.json->net_graph_width->description
 #. 6.6->settings-schema.json->load_graph_width->description
-#, fuzzy
 msgid "Graph size"
-msgstr "Espaciado de los gráficos"
+msgstr "Tamaño del gráfico"
 
 #. 6.6->settings-schema.json->cpu_color_0->description
 msgid "User color"
@@ -292,26 +287,28 @@ msgid "Color"
 msgstr "Color"
 
 #. 6.6->settings-schema.json->tooltip_background_color->description
-#, fuzzy
 msgid "Tooltip background color"
-msgstr "Color del fondo"
+msgstr "Color de fondo de la información sobre herramientas"
 
 #. 6.6->settings-schema.json->tooltip_label_color->description
 msgid "Tooltip label color"
-msgstr ""
+msgstr "Color de la etiqueta de información sobre herramientas"
 
 #. 6.6->settings-schema.json->tooltip_tick_labels_border_color->description
 msgid "Tooltip tick labels and border color"
 msgstr ""
+"Etiquetas de marcas de información sobre herramientas y color del borde"
 
 #. 6.6->settings-schema.json->tooltip_grid_color->description
 msgid "Tooltip horizontal and vertical grid color"
 msgstr ""
+"Color de la cuadrícula horizontal y vertical de la información sobre "
+"herramientas"
 
 #. 6.6->settings-schema.json->tooltip_history_seconds->description
 msgid "Tooltip graph horizontal scale"
-msgstr ""
+msgstr "Escala horizontal del gráfico de información sobre herramientas"
 
 #. 6.6->settings-schema.json->tooltip_history_seconds->units
 msgid "seconds"
-msgstr ""
+msgstr "segundos"
