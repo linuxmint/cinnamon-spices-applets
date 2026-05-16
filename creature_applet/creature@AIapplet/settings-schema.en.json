@@ -1,0 +1,451 @@
+{
+  "layoutSettings": {
+    "type": "layout",
+    "pages": [
+      "pageCreature",
+      "pageAnimation",
+      "pageTamagotchi",
+      "pageClipboard"
+    ],
+    "pageCreature": {
+      "type": "page",
+      "title": "Creature",
+      "sections": [
+        "sectionCreatureIdentity",
+        "sectionCreatureDetails",
+        "sectionLanguage"
+      ]
+    },
+    "pageAnimation": {
+      "type": "page",
+      "title": "Animation",
+      "sections": [
+        "sectionAnimation"
+      ]
+    },
+    "sectionCreatureIdentity": {
+      "type": "section",
+      "title": "Creature identity",
+      "keys": [
+        "keyCreatureSlug",
+        "keyCreatureName",
+        "keyProfileImagePath",
+        "keyProfileImageSize"
+      ]
+    },
+    "sectionCreatureDetails": {
+      "type": "section",
+      "title": "Preferences",
+      "keys": [
+        "keyFavoriteColor",
+        "keyCountry",
+        "keyBirthdayDay",
+        "keyBirthdayMonth"
+      ]
+    },
+    "sectionAnimation": {
+      "type": "section",
+      "title": "Animated sprite",
+      "keys": [
+        "keyImagePath",
+        "keyFrames",
+        "keyPausePerFrameInSeconds"
+      ]
+    },
+    "sectionBehaviour": {
+      "type": "section",
+      "title": "Affective memory",
+      "keys": [
+        "keyResetMemory"
+      ]
+    },
+    "pageClipboard": {
+      "type": "page",
+      "title": "Clipboard",
+      "sections": [
+        "sectionClipboard"
+      ]
+    },
+    "sectionClipboard": {
+      "type": "section",
+      "title": "Clipboard history",
+        "keys": [
+        "keyClipboardEnabled",
+        "keyClipboardLimit",
+        "keySmartClipboardDetection"
+      ]
+    },
+    "sectionProgression": {
+      "type": "section",
+      "title": "Creature progression",
+      "keys": [
+        "keyAchievementsEnabled",
+        "keyRpgEnabled"
+      ]
+    },
+    "sectionReactions": {
+      "type": "section",
+      "title": "Smart reactions",
+      "keys": [
+        "keyMoodEnabled",
+        "keyContextualClipboardQuotes"
+      ]
+    },
+    "sectionSystem": {
+      "type": "section",
+      "title": "Linux/Cinnamon reactions",
+      "keys": [
+        "keySystemReactionsEnabled",
+        "keySystemNotificationsEnabled"
+      ]
+    },
+    "sectionCare": {
+      "type": "section",
+      "title": "Hunger and cleanliness",
+      "keys": [
+        "keyFeedCooldownEnabled",
+        "keyFeedCooldownHours",
+        "keyDailyCareMoodEnabled"
+      ]
+    },
+    "sectionMemory": {
+      "type": "section",
+      "title": "Memories and special dates",
+      "keys": [
+        "keyMemoryJournalEnabled",
+        "keyBirthdayDay",
+        "keyBirthdayMonth",
+        "keyHolidayMessagesEnabled"
+      ]
+    },
+    "pageTamagotchi": {
+      "type": "page",
+      "title": "Tamagotchi",
+      "sections": [
+        "sectionProgression",
+        "sectionReactions",
+        "sectionSystem",
+        "sectionCare",
+        "sectionMemory",
+        "sectionBehaviour"
+      ]
+    },
+    "sectionLanguage": {
+      "type": "section",
+      "title": "Language",
+      "keys": [
+        "keyLanguage"
+      ]
+    }
+  },
+  "keyCreatureSlug": {
+    "type": "custom",
+    "file": "CreatureChooser.py",
+    "widget": "CreatureChooser",
+    "default": "pigeon",
+    "tooltip": "Choose the creature through category → type → environment → family → creature."
+  },
+  "keyCreatureName": {
+    "type": "entry",
+    "default": "Roberto",
+    "description": "Creature name",
+    "tooltip": "Name shown in the popup and used in some quotes."
+  },
+  "keyFavoriteColor": {
+    "type": "combobox",
+    "default": "vert",
+    "description": "Favorite color",
+    "options": {
+      "Green": "vert",
+      "Blue": "bleu",
+      "Red": "rouge",
+      "Yellow": "jaune",
+      "Purple": "violet",
+      "Pink": "rose",
+      "Orange": "orange",
+      "Turquoise": "turquoise",
+      "White": "blanc",
+      "Black": "noir",
+      "Gray": "gris",
+      "Brown": "marron"
+    },
+    "tooltip": "Creature favorite color."
+  },
+  "keyCountry": {
+    "type": "entry",
+    "default": "Italy",
+    "description": "Origin country",
+    "tooltip": "Where the creature comes from."
+  },
+  "keyImagePath": {
+    "type": "custom",
+    "file": "ImageChooser.py",
+    "widget": "ImageChooser",
+    "default": "~/.local/share/cinnamon/applets/creature@AIapplet/animations/roberto.png",
+    "tooltip": "Choose the horizontal sprite used for animation."
+  },
+  "keyFrames": {
+    "type": "spinbutton",
+    "default": 9,
+    "min": 1,
+    "max": 120,
+    "step": 1,
+    "units": "frames",
+    "description": "Number of frames",
+    "tooltip": "Default animation: 9 frames."
+  },
+  "keyPausePerFrameInSeconds": {
+    "type": "spinbutton",
+    "default": 0.2,
+    "min": 0.1,
+    "max": 10.0,
+    "step": 0.1,
+    "units": "seconds",
+    "description": "Pause per frame",
+    "tooltip": "Default animation speed: 0.2 seconds."
+  },
+  "keyResetMemory": {
+    "type": "button",
+    "description": "Reset friendship and quote stock",
+    "callback": "resetFriendshipState"
+  },
+  "keyFriendshipLevel": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyFeedCount": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyUsedQuoteIds": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keyFallbackRepeatsLeft": {
+    "type": "generic",
+    "default": 3
+  },
+  "keyLastMessage": {
+    "type": "generic",
+    "default": ""
+  },
+  "keyLastCreatureSlug": {
+    "type": "generic",
+    "default": "pigeon"
+  },
+  "keyClipboardEnabled": {
+    "type": "switch",
+    "default": false,
+    "description": "Enable clipboard",
+    "tooltip": "Keep copied text history and show it in the creature popup."
+  },
+  "keyClipboardLimit": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 1,
+    "max": 10,
+    "step": 1,
+    "units": "items",
+    "description": "Number of kept items",
+    "tooltip": "Choose how many copied items to keep, between 1 and 10."
+  },
+  "keyClipboardHistory": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keySmartClipboardDetection": {
+    "type": "switch",
+    "default": true,
+    "description": "Smart content detection",
+    "tooltip": "Adds icons depending on copied content: link, text, code, image or file path."
+  },
+  "keyAchievementsEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable achievements",
+    "tooltip": "Unlock achievements according to quotes, friendship level, copies and RPG level."
+  },
+  "keyMoodEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable dynamic mood",
+    "tooltip": "Creature mood changes according to time, inactivity, clipboard and events."
+  },
+  "keyContextualClipboardQuotes": {
+    "type": "switch",
+    "default": true,
+    "description": "React to copied items",
+    "tooltip": "The creature comments on copied content: code, YouTube link, long text, file path, image."
+  },
+  "keyRpgEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable RPG system",
+    "tooltip": "Adds XP with copies, food and usage, then evolves the creature."
+  },
+  "keySystemReactionsEnabled": {
+    "type": "switch",
+    "default": false,
+    "description": "System event reactions",
+    "tooltip": "React to low battery and network connection. Disabled by default to stay lightweight."
+  },
+  "keySystemNotificationsEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Achievement/system notifications",
+    "tooltip": "Show Cinnamon notifications for achievements and important system reactions."
+  },
+  "keyTotalCopies": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyXp": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyUnlockedAchievements": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keyLastInteractionAt": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyLastSystemEvent": {
+    "type": "generic",
+    "default": ""
+  },
+  "keyFeedCooldownEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Limit feedings",
+    "tooltip": "Prevents feeding too often. If it is not hungry, it answers without consuming a quote."
+  },
+  "keyFeedCooldownHours": {
+    "type": "spinbutton",
+    "default": 2,
+    "min": 0,
+    "max": 24,
+    "step": 1,
+    "units": "hours",
+    "description": "Time between feedings",
+    "tooltip": "Minimum time between real feedings. Default: 2 hours."
+  },
+  "keyDailyCareMoodEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Daily care mood",
+    "tooltip": "Mood depends on feeding the creature at least once a day, not clipboard usage."
+  },
+  "keyMemoryJournalEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable memory journal",
+    "tooltip": "Keeps important memories: first meeting, birthdays and holidays."
+  },
+  "keyBirthdayDay": {
+    "type": "spinbutton",
+    "default": 21,
+    "min": 1,
+    "max": 31,
+    "step": 1,
+    "units": "day",
+    "description": "Birthday day",
+    "tooltip": "Day of the month for the creature birthday."
+  },
+  "keyBirthdayMonth": {
+    "type": "combobox",
+    "default": "4",
+    "description": "Birthday month",
+    "options": {
+      "January": "1",
+      "February": "2",
+      "March": "3",
+      "April": "4",
+      "May": "5",
+      "June": "6",
+      "July": "7",
+      "August": "8",
+      "September": "9",
+      "October": "10",
+      "November": "11",
+      "December": "12"
+    },
+    "tooltip": "Month of the creature birthday."
+  },
+  "keyHolidayMessagesEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Holiday messages",
+    "tooltip": "The creature can celebrate Christmas, New Year, Valentine’s Day and its birthday."
+  },
+  "keyLastFedAt": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyLastFedDay": {
+    "type": "generic",
+    "default": ""
+  },
+  "keyFirstEncounterAt": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyMemoryJournal": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keyLastHolidayKey": {
+    "type": "generic",
+    "default": ""
+  },
+  "keyHunger": {
+    "type": "generic",
+    "default": 100
+  },
+  "keyCleanliness": {
+    "type": "generic",
+    "default": 100
+  },
+  "keyLastCareDecayAt": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyTreasures": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keyPlaylists": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keyProfileImagePath": {
+    "type": "custom",
+    "file": "ImageChooser.py",
+    "widget": "ImageChooser",
+    "default": "/home/manigael/.local/share/cinnamon/applets/creature@AIapplet/profil_picture/roberto.png",
+    "description": "Creature profile picture",
+    "tooltip": "PNG/JPG shown to the left of the creature name in the applet popup."
+  },
+  "keyLanguage": {
+    "type": "combobox",
+    "default": "fr",
+    "description": "Language",
+    "options": {
+      "French": "fr",
+      "English": "en",
+      "Automatic": "auto"
+    },
+    "tooltip": "Choose the interface language. French is the original default language."
+  },
+  "keyProfileImageSize": {
+    "type": "spinbutton",
+    "default": 48,
+    "min": 24,
+    "max": 128,
+    "step": 1,
+    "units": "px",
+    "description": "Profile picture size",
+    "tooltip": "Size of the square shown to the left of the creature name."
+  }
+}

@@ -1,0 +1,577 @@
+{
+  "default_slug": "pigeon",
+  "tree": {
+    "animal": {
+      "label": "Animal",
+      "children": {
+        "mammifere": {
+          "label": "Mammifère",
+          "children": {
+            "terre": {
+              "label": "Terre",
+              "children": {
+                "canide": {
+                  "label": "Canidé",
+                  "creatures": [
+                    { "slug": "chien", "label": "Chien" },
+                    { "slug": "loup", "label": "Loup" },
+                    { "slug": "renard", "label": "Renard" }
+                  ]
+                },
+                "felin": {
+                  "label": "Félin",
+                  "creatures": [
+                    { "slug": "chat", "label": "Chat" },
+                    { "slug": "lion", "label": "Lion" },
+                    { "slug": "tigre", "label": "Tigre" }
+                  ]
+                },
+                "equide": {
+                  "label": "Équidé",
+                  "creatures": [
+                    { "slug": "cheval", "label": "Cheval" },
+                    { "slug": "zebre", "label": "Zèbre" }
+                  ]
+                },
+                "primate": {
+                  "label": "Primate",
+                  "creatures": [
+                    { "slug": "chimpanze", "label": "Chimpanzé" },
+                    { "slug": "gorille", "label": "Gorille" },
+                    { "slug": "lemurien", "label": "Lémurien" }
+                  ]
+                }
+              }
+            },
+            "eau": {
+              "label": "Eau",
+              "children": {
+                "cetace": {
+                  "label": "Cétacé",
+                  "creatures": [
+                    { "slug": "baleine", "label": "Baleine" },
+                    { "slug": "dauphin", "label": "Dauphin" },
+                    { "slug": "orque", "label": "Orque" }
+                  ]
+                },
+                "pinnipede": {
+                  "label": "Pinnipède",
+                  "creatures": [
+                    { "slug": "phoque", "label": "Phoque" },
+                    { "slug": "morse", "label": "Morse" }
+                  ]
+                }
+              }
+            },
+            "air": {
+              "label": "Air",
+              "children": {
+                "chiroptere": {
+                  "label": "Chiroptère",
+                  "creatures": [
+                    { "slug": "chauve-souris", "label": "Chauve-souris" }
+                  ]
+                },
+                "planeur": {
+                  "label": "Planeur",
+                  "creatures": [
+                    { "slug": "ecureuil-volant", "label": "Écureuil volant" }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "ovipaire": {
+          "label": "Ovipare",
+          "children": {
+            "air": {
+              "label": "Air",
+              "children": {
+                "oiseau": {
+                  "label": "Oiseau",
+                  "creatures": [
+                    { "slug": "pigeon", "label": "Pigeon" },
+                    { "slug": "moineau", "label": "Moineau" },
+                    { "slug": "rouge-gorge", "label": "Rouge-gorge" },
+                    { "slug": "aigle", "label": "Aigle" },
+                    { "slug": "perroquet", "label": "Perroquet" }
+                  ]
+                },
+                "insecte-volant": {
+                  "label": "Insecte volant",
+                  "creatures": [
+                    { "slug": "papillon", "label": "Papillon" },
+                    { "slug": "abeille", "label": "Abeille" },
+                    { "slug": "libellule", "label": "Libellule" }
+                  ]
+                }
+              }
+            },
+            "terre": {
+              "label": "Terre",
+              "children": {
+                "oiseau-coureur": {
+                  "label": "Oiseau coureur",
+                  "creatures": [
+                    { "slug": "autruche", "label": "Autruche" }
+                  ]
+                },
+                "reptile": {
+                  "label": "Reptile",
+                  "creatures": [
+                    { "slug": "tortue", "label": "Tortue" },
+                    { "slug": "serpent", "label": "Serpent" },
+                    { "slug": "lezard", "label": "Lézard" },
+                    { "slug": "crocodile", "label": "Crocodile" }
+                  ]
+                },
+                "amphibien": {
+                  "label": "Amphibien",
+                  "creatures": [
+                    { "slug": "grenouille", "label": "Grenouille" },
+                    { "slug": "salamandre", "label": "Salamandre" }
+                  ]
+                },
+                "insecte-rampant": {
+                  "label": "Insecte rampant",
+                  "creatures": [
+                    { "slug": "fourmi", "label": "Fourmi" },
+                    { "slug": "scarabee", "label": "Scarabée" },
+                    { "slug": "coccinelle", "label": "Coccinelle" }
+                  ]
+                }
+              }
+            },
+            "eau": {
+              "label": "Eau",
+              "children": {
+                "poisson": {
+                  "label": "Poisson",
+                  "creatures": [
+                    { "slug": "saumon", "label": "Saumon" },
+                    { "slug": "requin", "label": "Requin" },
+                    { "slug": "poisson-clown", "label": "Poisson-clown" },
+                    { "slug": "hippocampe", "label": "Hippocampe" },
+                    { "slug": "raie", "label": "Raie" }
+                  ]
+                },
+                "crustace": {
+                  "label": "Crustacé",
+                  "creatures": [
+                    { "slug": "crabe", "label": "Crabe" },
+                    { "slug": "homard", "label": "Homard" },
+                    { "slug": "crevette", "label": "Crevette" }
+                  ]
+                },
+                "cephalopode": {
+                  "label": "Céphalopode",
+                  "creatures": [
+                    { "slug": "pieuvre", "label": "Pieuvre" },
+                    { "slug": "seiche", "label": "Seiche" }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "vegetal": {
+      "label": "Végétal",
+      "children": {
+        "arbre": {
+          "label": "Arbre",
+          "children": {
+            "terre": {
+              "label": "Terre",
+              "children": {
+                "feuillu": {
+                  "label": "Feuillu",
+                  "creatures": [
+                    { "slug": "chene", "label": "Chêne" },
+                    { "slug": "bouleau", "label": "Bouleau" },
+                    { "slug": "erable", "label": "Érable" },
+                    { "slug": "saule", "label": "Saule" }
+                  ]
+                },
+                "fruitier": {
+                  "label": "Fruitier",
+                  "creatures": [
+                    { "slug": "pommier", "label": "Pommier" },
+                    { "slug": "cerisier", "label": "Cerisier" },
+                    { "slug": "olivier", "label": "Olivier" }
+                  ]
+                },
+                "conifere": {
+                  "label": "Conifère",
+                  "creatures": [
+                    { "slug": "sapin", "label": "Sapin" },
+                    { "slug": "pin", "label": "Pin" }
+                  ]
+                }
+              }
+            },
+            "eau": {
+              "label": "Eau",
+              "children": {
+                "mangrove": {
+                  "label": "Mangrove",
+                  "creatures": [
+                    { "slug": "paletuvier", "label": "Palétuvier" }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "fleur": {
+          "label": "Fleur",
+          "children": {
+            "terre": {
+              "label": "Terre",
+              "children": {
+                "jardin": {
+                  "label": "Jardin",
+                  "creatures": [
+                    { "slug": "rose", "label": "Rose" },
+                    { "slug": "tulipe", "label": "Tulipe" },
+                    { "slug": "tournesol", "label": "Tournesol" },
+                    { "slug": "pivoine", "label": "Pivoine" }
+                  ]
+                },
+                "sauvage": {
+                  "label": "Sauvage",
+                  "creatures": [
+                    { "slug": "coquelicot", "label": "Coquelicot" },
+                    { "slug": "marguerite", "label": "Marguerite" },
+                    { "slug": "bleuet", "label": "Bleuet" }
+                  ]
+                }
+              }
+            },
+            "eau": {
+              "label": "Eau",
+              "children": {
+                "aquatique": {
+                  "label": "Aquatique",
+                  "creatures": [
+                    { "slug": "nenuphar", "label": "Nénuphar" },
+                    { "slug": "lotus", "label": "Lotus" }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "plante-potagere": {
+          "label": "Plante potagère",
+          "children": {
+            "terre": {
+              "label": "Terre",
+              "children": {
+                "legume-feuille": {
+                  "label": "Légume feuille",
+                  "creatures": [
+                    { "slug": "laitue", "label": "Laitue" },
+                    { "slug": "chou", "label": "Chou" },
+                    { "slug": "epinard", "label": "Épinard" }
+                  ]
+                },
+                "legume-fruit": {
+                  "label": "Légume fruit",
+                  "creatures": [
+                    { "slug": "tomate", "label": "Tomate" },
+                    { "slug": "courgette", "label": "Courgette" },
+                    { "slug": "poivron", "label": "Poivron" }
+                  ]
+                },
+                "racine": {
+                  "label": "Racine",
+                  "creatures": [
+                    { "slug": "carotte", "label": "Carotte" },
+                    { "slug": "betterave", "label": "Betterave" },
+                    { "slug": "radis", "label": "Radis" }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "plante-aromatique": {
+          "label": "Plante aromatique",
+          "children": {
+            "terre": {
+              "label": "Terre",
+              "children": {
+                "herbe": {
+                  "label": "Herbe aromatique",
+                  "creatures": [
+                    { "slug": "basilic", "label": "Basilic" },
+                    { "slug": "menthe", "label": "Menthe" },
+                    { "slug": "lavande", "label": "Lavande" },
+                    { "slug": "romarin", "label": "Romarin" }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "champignon": {
+      "label": "Champignon",
+      "children": {
+        "comestible": {
+          "label": "Comestible",
+          "children": {
+            "terre": {
+              "label": "Terre",
+              "children": {
+                "foret": {
+                  "label": "Forêt",
+                  "creatures": [
+                    { "slug": "cepe", "label": "Cèpe" },
+                    { "slug": "girolle", "label": "Girolle" },
+                    { "slug": "morille", "label": "Morille" }
+                  ]
+                },
+                "prairie": {
+                  "label": "Prairie",
+                  "creatures": [
+                    { "slug": "champignon-de-paris", "label": "Champignon de Paris" }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "forestier": {
+          "label": "Forestier",
+          "children": {
+            "terre": {
+              "label": "Terre",
+              "children": {
+                "lamellaire": {
+                  "label": "Lamellaire",
+                  "creatures": [
+                    { "slug": "amanite-tue-mouches", "label": "Amanite tue-mouches" },
+                    { "slug": "coprin", "label": "Coprin" }
+                  ]
+                },
+                "bolet": {
+                  "label": "Bolet",
+                  "creatures": [
+                    { "slug": "bolet-bai", "label": "Bolet bai" }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "fantastique": {
+          "label": "Fantastique",
+          "children": {
+            "nuit": {
+              "label": "Nuit",
+              "children": {
+                "luminescent": {
+                  "label": "Luminescent",
+                  "creatures": [
+                    { "slug": "mycene-lumineuse", "label": "Mycène lumineuse" }
+                  ]
+                },
+                "mythique": {
+                  "label": "Mythique",
+                  "creatures": [
+                    { "slug": "champignon-lunaire", "label": "Champignon lunaire" },
+                    { "slug": "truffe-des-songes", "label": "Truffe des songes" }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "non_vivant": {
+      "label": "Non vivant",
+      "children": {
+        "objet": {
+          "label": "Objet",
+          "children": {
+            "terre": {
+              "label": "Terre",
+              "children": {
+                "glisse": {
+                  "label": "Glisse",
+                  "creatures": [
+                    { "slug": "skateboard", "label": "Skateboard" },
+                    { "slug": "trottinette", "label": "Trottinette" }
+                  ]
+                },
+                "rangement": {
+                  "label": "Rangement",
+                  "creatures": [
+                    { "slug": "coffre", "label": "Coffre" },
+                    { "slug": "valise", "label": "Valise" }
+                  ]
+                },
+                "musique": {
+                  "label": "Musique",
+                  "creatures": [
+                    { "slug": "guitare", "label": "Guitare" },
+                    { "slug": "tambour", "label": "Tambour" }
+                  ]
+                }
+              }
+            },
+            "eau": {
+              "label": "Eau",
+              "children": {
+                "nautique": {
+                  "label": "Nautique",
+                  "creatures": [
+                    { "slug": "bateau", "label": "Bateau" },
+                    { "slug": "bouteille", "label": "Bouteille" }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "mineral": {
+          "label": "Minéral",
+          "children": {
+            "terre": {
+              "label": "Terre",
+              "children": {
+                "pierre": {
+                  "label": "Pierre",
+                  "creatures": [
+                    { "slug": "galet", "label": "Galet" },
+                    { "slug": "granit", "label": "Granit" },
+                    { "slug": "pierre-ponce", "label": "Pierre ponce" }
+                  ]
+                },
+                "precieux": {
+                  "label": "Précieux",
+                  "creatures": [
+                    { "slug": "quartz", "label": "Quartz" },
+                    { "slug": "amethyste", "label": "Améthyste" },
+                    { "slug": "obsidienne", "label": "Obsidienne" }
+                  ]
+                },
+                "volcanique": {
+                  "label": "Volcanique",
+                  "creatures": [
+                    { "slug": "lave-solidifiee", "label": "Lave solidifiée" }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "esprit": {
+      "label": "Esprit",
+      "children": {
+        "bienveillant": {
+          "label": "Bienveillant",
+          "children": {
+            "air": {
+              "label": "Air",
+              "children": {
+                "fee": {
+                  "label": "Fée",
+                  "creatures": [
+                    { "slug": "fee", "label": "Fée" },
+                    { "slug": "sylphe", "label": "Sylphe" }
+                  ]
+                },
+                "gardien": {
+                  "label": "Gardien",
+                  "creatures": [
+                    { "slug": "ange-gardien", "label": "Ange gardien" },
+                    { "slug": "esprit-du-vent", "label": "Esprit du vent" }
+                  ]
+                }
+              }
+            },
+            "foret": {
+              "label": "Forêt",
+              "children": {
+                "nature": {
+                  "label": "Nature",
+                  "creatures": [
+                    { "slug": "dryade", "label": "Dryade" },
+                    { "slug": "kodama", "label": "Kodama" }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "nocturne": {
+          "label": "Nocturne",
+          "children": {
+            "ombre": {
+              "label": "Ombre",
+              "children": {
+                "fantome": {
+                  "label": "Fantôme",
+                  "creatures": [
+                    { "slug": "fantome", "label": "Fantôme" },
+                    { "slug": "revenant", "label": "Revenant" }
+                  ]
+                },
+                "feu-follet": {
+                  "label": "Feu follet",
+                  "creatures": [
+                    { "slug": "feu-follet", "label": "Feu follet" },
+                    { "slug": "ombre-douce", "label": "Ombre douce" }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "ancestral": {
+          "label": "Ancestral",
+          "children": {
+            "temple": {
+              "label": "Temple",
+              "children": {
+                "sage": {
+                  "label": "Sage",
+                  "creatures": [
+                    { "slug": "ancetre", "label": "Ancêtre" },
+                    { "slug": "oracle", "label": "Oracle" }
+                  ]
+                }
+              }
+            },
+            "riviere": {
+              "label": "Rivière",
+              "children": {
+                "eau-esprit": {
+                  "label": "Eau",
+                  "creatures": [
+                    { "slug": "nymphe", "label": "Nymphe" },
+                    { "slug": "esprit-de-la-source", "label": "Esprit de la source" }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

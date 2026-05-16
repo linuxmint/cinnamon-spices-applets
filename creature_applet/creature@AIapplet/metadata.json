@@ -1,0 +1,10 @@
+{
+  "uuid": "creature@AIapplet",
+  "name": "Créature",
+  "description": "Un presse-papiers, un Tamagotchi personnalisable, ainsi qu’un raccourci vers des émojis et symboles simples et utiles.",
+  "version": "1.5.2-final-public",
+  "max-instances": -1,
+  "author": "Okai",
+  "last-edited": 1784208000,
+  "license": "Okai-NC"
+}

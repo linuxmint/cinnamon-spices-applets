@@ -1,0 +1,384 @@
+.creature-menu .creature-popup-container {
+    max-width: 38em;
+    max-height: 28em;
+    padding: 0.6em;
+    spacing: 0.55em;
+}
+
+.creature-menu .creature-title-label {
+    font-weight: bold;
+    font-size: 1.15em;
+}
+
+.creature-menu .creature-subtitle-label {
+    font-size: 0.95em;
+    opacity: 0.9;
+}
+
+.creature-menu .creature-friendship-label {
+    font-weight: bold;
+}
+
+.creature-menu .creature-hearts-label {
+    font-size: 1.1em;
+}
+
+.creature-menu .creature-bio-label {
+    opacity: 0.92;
+}
+
+.creature-menu .creature-quote-scroll {
+    min-height: 7em;
+    max-height: 14em;
+    padding: 0.5em;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 8px;
+}
+
+.creature-menu .creature-quote-label {
+    font-size: 1em;
+    line-height: 1.35;
+}
+
+.creature-menu .creature-status-label {
+    opacity: 0.88;
+    font-size: 0.92em;
+}
+
+.creature-menu .creature-button-row {
+    spacing: 0.7em;
+}
+
+.creature-menu .creature-feed-button,
+.creature-menu .creature-reset-button {
+    padding: 0.45em 0.9em;
+}
+
+.creature-applet .creature-animation {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.creature-animation-error {
+    font-size: 1.1em;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+
+
+.creature-menu .creature-main-column {
+    width: 34em;
+    spacing: 0.55em;
+}
+
+.creature-menu .creature-clipboard-column {
+    width: 22em;
+    max-height: 28em;
+    padding-left: 0.7em;
+    spacing: 0.45em;
+}
+
+.creature-menu .creature-clipboard-title {
+    font-weight: bold;
+    font-size: 1.05em;
+}
+
+.creature-menu .creature-clipboard-list {
+    spacing: 0.45em;
+}
+
+.creature-menu .creature-clipboard-item {
+    padding: 0.45em;
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 8px;
+    spacing: 0.35em;
+}
+
+.creature-menu .creature-clipboard-text {
+    font-size: 0.9em;
+}
+
+.creature-menu .creature-clipboard-empty {
+    opacity: 0.75;
+    font-size: 0.9em;
+}
+
+.creature-menu .creature-clipboard-copy-button {
+    padding: 0.3em 0.65em;
+}
+
+.creature-menu .creature-rpg-label,
+.creature-menu .creature-mood-label {
+    opacity: 0.92;
+    font-size: 0.92em;
+}
+
+.creature-menu .creature-achievements-button {
+    padding: 0.45em 0.9em;
+}
+
+.creature-menu .creature-achievement-list {
+    spacing: 0.3em;
+    padding-top: 0.4em;
+}
+
+.creature-menu .creature-achievement-unlocked {
+    font-size: 0.9em;
+    opacity: 0.98;
+}
+
+.creature-menu .creature-achievement-locked {
+    font-size: 0.9em;
+    opacity: 0.55;
+}
+
+.creature-menu .creature-clipboard-image-preview {
+    width: 96px;
+    height: 64px;
+    border-radius: 6px;
+    margin-top: 0.25em;
+}
+
+/* Version rebuild propre : citations adaptatives, inventaire, succès lisibles */
+.creature-menu .creature-quote-scroll {
+    min-height: 0em;
+    max-height: 7em;
+    padding: 0.45em;
+}
+
+.creature-menu .creature-inventory-column {
+    width: 24em;
+    max-height: 28em;
+    padding-left: 0.7em;
+    spacing: 0.5em;
+}
+
+.creature-menu .creature-inventory-tabs {
+    spacing: 0.45em;
+}
+
+.creature-menu .creature-inventory-tab-button {
+    padding: 0.35em 0.7em;
+}
+
+.creature-menu .creature-achievement-list {
+    spacing: 0.7em;
+    padding-top: 0.6em;
+}
+
+.creature-menu .creature-achievement-unlocked {
+    font-size: 0.92em;
+    line-height: 1.35;
+    padding: 0.35em 0.2em;
+    opacity: 0.98;
+}
+
+.creature-menu .creature-care-choice-box {
+    spacing: 0.35em;
+    padding-top: 0.35em;
+}
+
+.creature-menu .creature-care-choice-row {
+    spacing: 0.35em;
+}
+
+.creature-menu .creature-care-emoji-button {
+    padding: 0.35em 0.55em;
+    font-size: 1.15em;
+}
+
+/* Ajustements interface : onglets emoji, soins séparés, boutons en bulles */
+.creature-menu .creature-care-status-label {
+    opacity: 0.95;
+    font-size: 0.95em;
+    line-height: 1.35;
+    padding: 0.45em 0.55em;
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 999px;
+}
+
+.creature-menu .creature-feed-button,
+.creature-menu .creature-reset-button,
+.creature-menu .creature-achievements-button,
+.creature-menu .creature-clipboard-copy-button,
+.creature-menu .creature-inventory-tab-button {
+    border-radius: 999px;
+    padding: 0.45em 0.8em;
+    border: 1px solid rgba(255,255,255,0.18);
+}
+
+.creature-menu .creature-inventory-tab-button {
+    min-width: 2.2em;
+    font-size: 1.05em;
+}
+
+
+
+
+/* v1.3.0 — photo de profil carrée, visible et redimensionnable */
+.creature-menu .creature-header-row {
+    spacing: 0.75em;
+    padding-bottom: 0.3em;
+}
+
+.creature-menu .creature-header-text-column {
+    spacing: 0.15em;
+}
+
+.creature-menu .creature-profile-frame {
+    width: 48px;
+    height: 48px;
+    min-width: 24px;
+    min-height: 24px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 6px;
+    padding: 2px;
+    background-color: rgba(255,255,255,0.06);
+}
+
+.creature-menu .creature-profile-image {
+    padding: 0px;
+}
+
+.creature-menu .creature-profile-fallback {
+    font-size: 1.8em;
+    text-align: center;
+}
+
+/* v1.4.0 — profil par défaut + zone de soins stable */
+.creature-menu .creature-care-choice-area {
+    min-height: 4.6em;
+    spacing: 0.35em;
+    padding-top: 0.35em;
+}
+
+.creature-menu .creature-care-choice-box {
+    min-height: 3.7em;
+    spacing: 0.35em;
+    padding-top: 0.2em;
+}
+
+.creature-menu .creature-profile-frame {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 8px;
+    padding: 2px;
+    border: 1px solid rgba(255,255,255,0.22);
+}
+
+.creature-menu .creature-profile-image {
+    border-radius: 6px;
+}
+
+.creature-menu .creature-profile-fallback {
+    font-size: 1.35em;
+}
+
+
+
+
+/* v1.4.2 — layout soins adaptatif sans chevauchement */
+.creature-menu .creature-popup-container {
+    max-height: 36em;
+}
+
+.creature-menu .creature-main-column {
+    spacing: 0.45em;
+}
+
+.creature-menu .creature-care-choice-area {
+    min-height: 0em;
+    spacing: 0.3em;
+    padding-top: 0.35em;
+    padding-bottom: 0.15em;
+}
+
+.creature-menu .creature-care-choice-box {
+    min-height: 0em;
+    spacing: 0.3em;
+    padding-top: 0.15em;
+}
+
+.creature-menu .creature-care-choice-row {
+    spacing: 0.3em;
+}
+
+.creature-menu .creature-care-emoji-button {
+    min-width: 2.2em;
+    padding: 0.35em 0.48em;
+}
+
+.creature-menu .creature-achievement-list {
+    padding-top: 0.25em;
+}
+
+
+/* v1.5.0-public — layout adaptatif sans espace réservé permanent */
+.creature-menu .creature-popup-container {
+    max-height: 32em;
+}
+
+.creature-menu .creature-care-choice-area {
+    min-height: 0px;
+    spacing: 0.35em;
+    padding-top: 0.25em;
+}
+
+.creature-menu .creature-care-choice-box {
+    min-height: 0px;
+    spacing: 0.35em;
+    padding-top: 0.15em;
+}
+
+.creature-menu .creature-care-choice-row {
+    spacing: 0.35em;
+}
+
+.creature-menu .creature-care-emoji-button {
+    min-width: 2.2em;
+}
+
+.creature-menu .creature-quote-scroll {
+    max-height: 8em;
+}
+
+
+/* v1.5.1-final-safe — banques emoji/symboles sans dépassement à droite */
+.creature-menu .creature-popup-container {
+    max-width: 52em;
+}
+
+.creature-menu .creature-main-column {
+    width: 28em;
+}
+
+.creature-menu .creature-inventory-column {
+    width: 19em;
+    max-width: 19em;
+    min-width: 19em;
+}
+
+.creature-menu .creature-clipboard-list {
+    max-width: 18.2em;
+}
+
+.creature-menu .creature-bank-row {
+    spacing: 0.25em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+}
+
+.creature-menu .creature-bank-button {
+    min-width: 1.9em;
+    padding: 0.25em 0.32em;
+    font-size: 1.05em;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.14);
+}
+
+.creature-menu .creature-clipboard-empty {
+    max-width: 18em;
+}
