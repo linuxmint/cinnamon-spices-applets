@@ -1,0 +1,451 @@
+{
+  "layoutSettings": {
+    "type": "layout",
+    "pages": [
+      "pageCreature",
+      "pageAnimation",
+      "pageTamagotchi",
+      "pageClipboard"
+    ],
+    "pageCreature": {
+      "type": "page",
+      "title": "Créature",
+      "sections": [
+        "sectionCreatureIdentity",
+        "sectionCreatureDetails",
+        "sectionLanguage"
+      ]
+    },
+    "pageAnimation": {
+      "type": "page",
+      "title": "Animation",
+      "sections": [
+        "sectionAnimation"
+      ]
+    },
+    "sectionCreatureIdentity": {
+      "type": "section",
+      "title": "Identité de la créature",
+      "keys": [
+        "keyCreatureSlug",
+        "keyCreatureName",
+        "keyProfileImagePath",
+        "keyProfileImageSize"
+      ]
+    },
+    "sectionCreatureDetails": {
+      "type": "section",
+      "title": "Préférences",
+      "keys": [
+        "keyFavoriteColor",
+        "keyCountry",
+        "keyBirthdayDay",
+        "keyBirthdayMonth"
+      ]
+    },
+    "sectionAnimation": {
+      "type": "section",
+      "title": "Sprite animé",
+      "keys": [
+        "keyImagePath",
+        "keyFrames",
+        "keyPausePerFrameInSeconds"
+      ]
+    },
+    "sectionBehaviour": {
+      "type": "section",
+      "title": "Mémoire affective",
+      "keys": [
+        "keyResetMemory"
+      ]
+    },
+    "pageClipboard": {
+      "type": "page",
+      "title": "Presse-papier",
+      "sections": [
+        "sectionClipboard"
+      ]
+    },
+    "sectionClipboard": {
+      "type": "section",
+      "title": "Historique du presse-papier",
+        "keys": [
+        "keyClipboardEnabled",
+        "keyClipboardLimit",
+        "keySmartClipboardDetection"
+      ]
+    },
+    "sectionProgression": {
+      "type": "section",
+      "title": "Progression de la créature",
+      "keys": [
+        "keyAchievementsEnabled",
+        "keyRpgEnabled"
+      ]
+    },
+    "sectionReactions": {
+      "type": "section",
+      "title": "Réactions intelligentes",
+      "keys": [
+        "keyMoodEnabled",
+        "keyContextualClipboardQuotes"
+      ]
+    },
+    "sectionSystem": {
+      "type": "section",
+      "title": "Réactions Linux/Cinnamon",
+      "keys": [
+        "keySystemReactionsEnabled",
+        "keySystemNotificationsEnabled"
+      ]
+    },
+    "sectionCare": {
+      "type": "section",
+      "title": "Faim et propreté",
+      "keys": [
+        "keyFeedCooldownEnabled",
+        "keyFeedCooldownHours",
+        "keyDailyCareMoodEnabled"
+      ]
+    },
+    "sectionMemory": {
+      "type": "section",
+      "title": "Souvenirs et dates spéciales",
+      "keys": [
+        "keyMemoryJournalEnabled",
+        "keyBirthdayDay",
+        "keyBirthdayMonth",
+        "keyHolidayMessagesEnabled"
+      ]
+    },
+    "pageTamagotchi": {
+      "type": "page",
+      "title": "Tamagotchi",
+      "sections": [
+        "sectionProgression",
+        "sectionReactions",
+        "sectionSystem",
+        "sectionCare",
+        "sectionMemory",
+        "sectionBehaviour"
+      ]
+    },
+    "sectionLanguage": {
+      "type": "section",
+      "title": "Langue",
+      "keys": [
+        "keyLanguage"
+      ]
+    }
+  },
+  "keyCreatureSlug": {
+    "type": "custom",
+    "file": "CreatureChooser.py",
+    "widget": "CreatureChooser",
+    "default": "pigeon",
+    "tooltip": "Choisis la créature avec une logique catégorie → type → milieu → famille → créature."
+  },
+  "keyCreatureName": {
+    "type": "entry",
+    "default": "Roberto",
+    "description": "Nom de la créature",
+    "tooltip": "Nom affiché dans la popup et utilisé dans certaines citations."
+  },
+  "keyFavoriteColor": {
+    "type": "combobox",
+    "default": "vert",
+    "description": "Couleur préférée",
+    "options": {
+      "Vert": "vert",
+      "Bleu": "bleu",
+      "Rouge": "rouge",
+      "Jaune": "jaune",
+      "Violet": "violet",
+      "Rose": "rose",
+      "Orange": "orange",
+      "Turquoise": "turquoise",
+      "Blanc": "blanc",
+      "Noir": "noir",
+      "Gris": "gris",
+      "Marron": "marron"
+    },
+    "tooltip": "Couleur préférée de la créature."
+  },
+  "keyCountry": {
+    "type": "entry",
+    "default": "Italie",
+    "description": "Pays d'origine",
+    "tooltip": "Pays d'où vient la créature."
+  },
+  "keyImagePath": {
+    "type": "custom",
+    "file": "ImageChooser.py",
+    "widget": "ImageChooser",
+    "default": "~/.local/share/cinnamon/applets/creature@AIapplet/animations/roberto.png",
+    "tooltip": "Choisis l'image sprite horizontale utilisée pour l'animation."
+  },
+  "keyFrames": {
+    "type": "spinbutton",
+    "default": 9,
+    "min": 1,
+    "max": 120,
+    "step": 1,
+    "units": "frames",
+    "description": "Nombre de frames",
+    "tooltip": "Animation par défaut : 9 frames."
+  },
+  "keyPausePerFrameInSeconds": {
+    "type": "spinbutton",
+    "default": 0.2,
+    "min": 0.1,
+    "max": 10.0,
+    "step": 0.1,
+    "units": "secondes",
+    "description": "Pause par frame",
+    "tooltip": "Vitesse d'animation par défaut : 0.2 seconde."
+  },
+  "keyResetMemory": {
+    "type": "button",
+    "description": "Réinitialiser l'amitié et le stock de citations",
+    "callback": "resetFriendshipState"
+  },
+  "keyFriendshipLevel": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyFeedCount": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyUsedQuoteIds": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keyFallbackRepeatsLeft": {
+    "type": "generic",
+    "default": 3
+  },
+  "keyLastMessage": {
+    "type": "generic",
+    "default": ""
+  },
+  "keyLastCreatureSlug": {
+    "type": "generic",
+    "default": "pigeon"
+  },
+  "keyClipboardEnabled": {
+    "type": "switch",
+    "default": false,
+    "description": "Activer le presse-papier",
+    "tooltip": "Garde en mémoire les derniers textes copiés et les affiche dans la popup de la créature."
+  },
+  "keyClipboardLimit": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 1,
+    "max": 10,
+    "step": 1,
+    "units": "éléments",
+    "description": "Nombre d’éléments gardés",
+    "tooltip": "Choisis combien d’éléments copiés garder en mémoire, entre 1 et 10."
+  },
+  "keyClipboardHistory": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keySmartClipboardDetection": {
+    "type": "switch",
+    "default": true,
+    "description": "Détection intelligente du contenu",
+    "tooltip": "Ajoute des icônes selon le contenu copié : lien, texte, code, image ou chemin de fichier."
+  },
+  "keyAchievementsEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Activer les succès",
+    "tooltip": "Débloque des succès selon les citations vues, le niveau d’amitié, le nombre de copies et le niveau RPG."
+  },
+  "keyMoodEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Activer l’humeur dynamique",
+    "tooltip": "La créature change d’humeur selon l’heure, l’inactivité, le presse-papier et certains événements."
+  },
+  "keyContextualClipboardQuotes": {
+    "type": "switch",
+    "default": true,
+    "description": "Réactions aux éléments copiés",
+    "tooltip": "La créature commente certains contenus copiés : code, lien YouTube, long texte, chemin de fichier, image."
+  },
+  "keyRpgEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Activer le système RPG",
+    "tooltip": "Ajoute de l’XP avec les copies, la nourriture et l’usage, puis fait évoluer la créature."
+  },
+  "keySystemReactionsEnabled": {
+    "type": "switch",
+    "default": false,
+    "description": "Réactions aux événements système",
+    "tooltip": "Réagit à la batterie faible et à la connexion réseau. Désactivé par défaut pour rester léger."
+  },
+  "keySystemNotificationsEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Notifications de succès et système",
+    "tooltip": "Affiche des notifications Cinnamon pour les succès et les réactions système importantes."
+  },
+  "keyTotalCopies": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyXp": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyUnlockedAchievements": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keyLastInteractionAt": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyLastSystemEvent": {
+    "type": "generic",
+    "default": ""
+  },
+  "keyFeedCooldownEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Limiter les nourrissages",
+    "tooltip": "Empêche de nourrir trop souvent la créature. Si elle n’a pas faim, elle répond sans consommer de citation."
+  },
+  "keyFeedCooldownHours": {
+    "type": "spinbutton",
+    "default": 2,
+    "min": 0,
+    "max": 24,
+    "step": 1,
+    "units": "heures",
+    "description": "Temps entre deux nourrissages",
+    "tooltip": "Durée minimale entre deux vrais nourrissages. 2 heures par défaut."
+  },
+  "keyDailyCareMoodEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Humeur liée au soin quotidien",
+    "tooltip": "L’humeur dépend du fait de nourrir la créature au moins une fois par jour, pas du presse-papier."
+  },
+  "keyMemoryJournalEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Activer le journal mémoire",
+    "tooltip": "Garde les souvenirs importants : première rencontre, anniversaires et fêtes."
+  },
+  "keyBirthdayDay": {
+    "type": "spinbutton",
+    "default": 21,
+    "min": 1,
+    "max": 31,
+    "step": 1,
+    "units": "jour",
+    "description": "Jour d’anniversaire",
+    "tooltip": "Jour du mois pour l’anniversaire de la créature."
+  },
+  "keyBirthdayMonth": {
+    "type": "combobox",
+    "default": "4",
+    "description": "Mois d’anniversaire",
+    "options": {
+      "Janvier": "1",
+      "Février": "2",
+      "Mars": "3",
+      "Avril": "4",
+      "Mai": "5",
+      "Juin": "6",
+      "Juillet": "7",
+      "Août": "8",
+      "Septembre": "9",
+      "Octobre": "10",
+      "Novembre": "11",
+      "Décembre": "12"
+    },
+    "tooltip": "Mois de l’anniversaire de la créature."
+  },
+  "keyHolidayMessagesEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Messages de fête",
+    "tooltip": "La créature peut souhaiter Noël, le Nouvel An, la Saint-Valentin et son anniversaire."
+  },
+  "keyLastFedAt": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyLastFedDay": {
+    "type": "generic",
+    "default": ""
+  },
+  "keyFirstEncounterAt": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyMemoryJournal": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keyLastHolidayKey": {
+    "type": "generic",
+    "default": ""
+  },
+  "keyHunger": {
+    "type": "generic",
+    "default": 100
+  },
+  "keyCleanliness": {
+    "type": "generic",
+    "default": 100
+  },
+  "keyLastCareDecayAt": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyTreasures": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keyPlaylists": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keyProfileImagePath": {
+    "type": "custom",
+    "file": "ImageChooser.py",
+    "widget": "ImageChooser",
+    "default": "/home/manigael/.local/share/cinnamon/applets/creature@AIapplet/profil_picture/roberto.png",
+    "description": "Photo de profil de la créature",
+    "tooltip": "Image PNG/JPG affichée à gauche du nom de la créature dans la fenêtre de l’applet."
+  },
+  "keyLanguage": {
+    "type": "combobox",
+    "default": "fr",
+    "description": "Langue",
+    "options": {
+      "Français": "fr",
+      "English": "en",
+      "Automatique": "auto"
+    },
+    "tooltip": "Choisis la langue de l’interface. Français est la langue originale par défaut."
+  },
+  "keyProfileImageSize": {
+    "type": "spinbutton",
+    "default": 48,
+    "min": 24,
+    "max": 128,
+    "step": 1,
+    "units": "px",
+    "description": "Taille de la photo de profil",
+    "tooltip": "Taille du carré affiché à gauche du nom de la créature."
+  }
+}
