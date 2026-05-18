@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-05-14 15:34+0200\n"
-"PO-Revision-Date: 2026-05-06 17:12+0200\n"
+"PO-Revision-Date: 2026-05-18 17:22+0200\n"
 "Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
 "Language: da\n"
@@ -242,11 +242,11 @@ msgstr "Swap:"
 
 #. 5.6/applet.js:58
 msgid "Load:"
-msgstr ""
+msgstr "Belastning:"
 
 #. 5.6/applet.js:59
 msgid "Unload:"
-msgstr ""
+msgstr "Ingen belastning:"
 
 #. 5.6/applet.js:82
 msgid "DISK USAGE"
@@ -466,7 +466,7 @@ msgstr "CPU-temperatur"
 
 #. 5.6->settings-schema.json->sectionCPULoadAverage->title
 msgid "Average Load"
-msgstr ""
+msgstr "Gennemsnitlig belastning"
 
 #. 5.6->settings-schema.json->sectionCPULabel->title
 #. 5.6->settings-schema.json->sectionMemoryLabel->title
@@ -640,19 +640,19 @@ msgid "Font size (px)"
 msgstr "Skriftstørrelse (px)"
 
 #. 5.6->settings-schema.json->tooltipChangeBackgroundColor->description
-#, fuzzy
 msgid "Change Tooltip Background Color"
-msgstr "Baggrundsfarve"
+msgstr "Ændr værktøjstips baggrundsfarve"
 
 #. 5.6->settings-schema.json->tooltipChangeBackgroundColor->tooltip
 msgid ""
 "Uncheck this box to use the Tooltip Background Color defined by the theme."
 msgstr ""
+"Fjern markeringen i dette felt for at bruge den baggrundsfarve til "
+"værktøjstip, der er defineret i temaet."
 
 #. 5.6->settings-schema.json->tooltipBackgroundColor->description
-#, fuzzy
 msgid "Tooltip Background Color"
-msgstr "Baggrundsfarve"
+msgstr "Baggrundsfarve for værktøjstip"
 
 #. 5.6->settings-schema.json->widthWhithoutAnyGraph->description
 msgid "Width when no graph is displayed (px)"
@@ -817,7 +817,7 @@ msgid ""
 "Positive: to the bottom."
 msgstr ""
 "Negativ: op.\n"
-"Positiv: ned"
+"Positiv: ned."
 
 #. 5.6->settings-schema.json->CPU_labelZoom->description
 #. 5.6->settings-schema.json->Mem_labelZoom->description
@@ -975,9 +975,8 @@ msgid "Show the CPU temperature"
 msgstr "Vis CPU-temperaturen"
 
 #. 5.6->settings-schema.json->CPU_showTempUnit->description
-#, fuzzy
 msgid "Display the temperature unit"
-msgstr "Hjørnet hvor temperaturen vises"
+msgstr "Vis temperaturenheden"
 
 #. 5.6->settings-schema.json->CPU_temp_hovering_only->description
 #. 5.6->settings-schema.json->CPU_loadAverage_hovering_only->description
@@ -1062,48 +1061,40 @@ msgid "Font size: percentage of the box height"
 msgstr "Skriftstørrelse: procent af rammehøjden"
 
 #. 5.6->settings-schema.json->CPU_showLoadAverage->description
-#, fuzzy
 msgid "Show the CPU average load"
-msgstr "Vis CPU-temperaturen"
+msgstr "Vis den gennemsnitlige CPU-belastning"
 
 #. 5.6->settings-schema.json->CPU_loadAverageHigh->description
-#, fuzzy
 msgid "High CPU Load (%)"
-msgstr "Høj CPU-temperatur (°C)"
+msgstr "Høj CPU-belastning (°C)"
 
 #. 5.6->settings-schema.json->CPU_loadAverageCrit->description
-#, fuzzy
 msgid "Critical CPU Load (%)"
-msgstr "Kritisk CPU-temperatur (°C)"
+msgstr "Kritisk CPU-belastning (°C)"
 
 #. 5.6->settings-schema.json->CPU_loadAverageCrit->tooltip
-#, fuzzy
 msgid ""
 "Refer to your CPU documentation.\n"
 "Must be greater than the High CPU Load."
 msgstr ""
 "Se din CPU-dokumentation.\n"
-"Skal være større end Høj CPU-temperatur."
+"Skal være større end Høj CPU-belstning."
 
 #. 5.6->settings-schema.json->CPU_loadAverageColor->description
-#, fuzzy
 msgid "Normal Average Load Color"
-msgstr "Farve til normal temperatur"
+msgstr "Farve til normal gennemsnitlig belastning"
 
 #. 5.6->settings-schema.json->CPU_loadAverageColorHigh->description
-#, fuzzy
 msgid "High Average Load Color"
-msgstr "Farve til høj temperatur"
+msgstr "Farve til høj gennemsnitlig belastning"
 
 #. 5.6->settings-schema.json->CPU_loadAverageColorCrit->description
-#, fuzzy
 msgid "Critical Average Load Color"
-msgstr "Farve til kritisk temperatur"
+msgstr "Farve til kritisk gennemsnitlig belastning"
 
 #. 5.6->settings-schema.json->CPU_loadAverageCorner->description
-#, fuzzy
 msgid "Corner in which to display the average load"
-msgstr "Hjørnet hvor temperaturen vises"
+msgstr "Hjørnet hvor den gennemsnitlige belastning vises"
 
 #. 5.6->settings-schema.json->CPU_tempColor->description
 msgid "Normal Temperature Color"
@@ -1519,11 +1510,11 @@ msgstr "Sti"
 
 #. 5.6->settings-schema.json->Battery_colorLoad->description
 msgid "Load"
-msgstr ""
+msgstr "Belastning"
 
 #. 5.6->settings-schema.json->Battery_colorUnload->description
 msgid "Unload"
-msgstr ""
+msgstr "Ingen belastning"
 
 #. 5.6->settings-schema.json->color0->description
 msgid "Color #0"
