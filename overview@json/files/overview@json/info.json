@@ -1,4 +1,14 @@
 {
-    "author": "utnapishtim2026",
-    "license": "GPL-3.0"
+    "uuid": "Cinnamenu@json",
+    "name": "Cinnamenu",
+    "description": "A full-featured modern menu with app grid, categories, search, favorites, file browser, and fullscreen overview",
+    "max-instances": 2,
+    "version": "4.8.0",
+    "cinnamon-version": ["4.0", "4.2", "4.4", "4.6", "4.8", "5.0", "5.2", "5.4", "5.6", "5.8", "6.0", "6.2", "6.4"],
+    "author": "json, Odyseus, and Cinnamenu contributors",
+    "website": "https://cinnamon-spices.linuxmint.com/applets/view/319",
+    "contributors": [
+        "Odyseus - Original Cinnamenu author",
+        "json - Current maintainer"
+    ]
 }
