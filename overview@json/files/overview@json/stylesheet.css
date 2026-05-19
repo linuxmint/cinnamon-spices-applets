@@ -1,0 +1,1118 @@
+/* ============================================================
+   Cinnamenu@json — Built-in Stylesheet  v6
+   Cinnamon 6.x / Linux Mint 22.x
+
+   This file lives INSIDE the applet package and is loaded by
+   Cinnamon ALONGSIDE your active cinnamon.css theme.
+   Rules here are more specific (scoped to .cinnamenu /
+   .cinnamon-overview-* / palette classes) and therefore
+   OVERRIDE your theme for anything inside the menu/overview.
+
+   Palette modes (self-contained — no cinnamon.css required):
+     .menu-palette-light  / .overview-palette-light
+     .menu-palette-dark   / .overview-palette-dark
+
+   Font stack: SF Pro Display → SF Pro Text → Segoe UI →
+               Cantarell → system-ui → sans-serif
+
+   macOS Monterey/Ventura Metro palette used for 'metro' mode.
+   ============================================================ */
+
+
+/* ============================================================
+   §0  GLOBAL FONT OVERRIDE inside menu + overview
+   ============================================================ */
+.cinnamenu,
+.cinnamenu * {
+    font-family: "SF Pro Display", "SF Pro Text", "Helvetica Neue",
+                 "Segoe UI", Cantarell, sans-serif;
+}
+.cinnamon-overview-background,
+.cinnamon-overview-background * {
+    font-family: "SF Pro Display", "SF Pro Text", "Helvetica Neue",
+                 "Segoe UI", Cantarell, sans-serif;
+}
+
+
+/* ============================================================
+   §1  CINNAMENU — BASE LAYOUT (structure, no colours)
+   ============================================================ */
+
+/* Strip all padding from the popup wrapper so the menu starts
+   flush left — no gap between the panel button and the favbox.
+   Cinnamon injects padding at multiple levels; zero them all. */
+.cinnamenu.popup-menu-content,
+.cinnamenu .popup-menu-content,
+.cinnamenu .popup-menu-section,
+.cinnamenu .popup-menu-section > StBoxLayout,
+.cinnamenu .popup-menu-inner-box {
+    padding: 0 !important;
+    margin:  0 !important;
+    border:  0 !important;
+}
+
+.cinnamenu .menu-applications-outer-box,
+.cinnamenu .menu-applications-box {
+    background-color: transparent;
+    border: none; padding: 0; margin: 0; spacing: 0;
+}
+.cinnamenu .menu-sidebar-panel {
+    padding: 0 0 14px 0; spacing: 0; min-width: 190px; max-width: 220px; border: none; margin: 0;
+}
+/* Sidebar search entries must not push sidebar wider */
+.cinnamenu .menu-sidebar-search-top #menu-search-entry,
+.cinnamenu .menu-sidebar-search-row #menu-search-entry {
+    min-width: 0;
+    max-width: 170px;
+}
+.cinnamenu .menu-sidebar-title-row {
+    padding: 12px 16px 10px 16px; spacing: 0; min-height: 46px;
+}
+.cinnamenu .menu-sidebar-categories-title {
+    font-size: 0.68em; font-weight: bold; min-width: 130px;
+}
+.cinnamenu .menu-system-buttons-box {
+    padding: 6px 6px 8px 6px; spacing: 0;
+}
+.cinnamenu .menu-system-button {
+    border-radius: 8px; padding: 8px 9px; transition-duration: 100ms;
+}
+.cinnamenu .menu-right-pane { padding: 0; spacing: 0; }
+.cinnamenu .menu-search-row {
+    /* Left/right padding matches .menu-applications-inner-box (8px)
+       so search entry aligns with the tile grid edges.
+       Top/bottom padding centres the entry vertically in the same height
+       as the sidebar CATEGORIES header row (min-height:46px). */
+    padding: 10px 8px 8px 8px; spacing: 0; min-height: 46px;
+}
+.cinnamenu .menu-search-box { padding: 0; spacing: 0; }
+.cinnamenu #menu-search-entry {
+    border-radius: 8px; padding: 7px 14px 7px 10px; transition-duration: 130ms;
+}
+.cinnamenu .menu-categories-scrollbox,
+.cinnamenu .vfade.menu-categories-scrollbox {
+    background-color: transparent; border: none; padding: 0; margin: 0;
+}
+.cinnamenu .menu-categories-box {
+    background-color: transparent; border: none;
+    padding: 0 6px 4px 6px; spacing: 0;
+}
+.cinnamenu .menu-category-button {
+    background-color: transparent; border: none;
+    border-radius: 6px; padding: 8px 10px; spacing: 10px;
+    transition-duration: 100ms;
+}
+.cinnamenu .menu-category-button-label { font-size: 0.90em; }
+.cinnamenu .menu-category-button:highlighted,
+.cinnamenu .menu-category-button-selected:highlighted { font-weight: bold; }
+.cinnamenu .menu-applications-scrollbox,
+.cinnamenu .vfade.menu-applications-scrollbox {
+    background-color: transparent; border: none; padding: 0; margin: 0;
+}
+.cinnamenu .menu-applications-inner-box,
+.cinnamenu .menu-applications-box {
+    background-color: transparent; padding: 4px 8px 8px 8px; spacing: 0;
+}
+.cinnamenu .menu-applications-grid-box { spacing: 0; padding: 0; }
+.cinnamenu .menu-applications-grid-box .menu-application-button {
+    border-radius: 10px; padding: 8px 2px; transition-duration: 120ms;
+}
+.cinnamenu .menu-applications-grid-box .menu-application-button-selected {
+    border-radius: 10px; padding: 8px 2px; transition-duration: 120ms;
+}
+.cinnamenu .menu-application-button-label,
+.cinnamenu .menu-applications-grid-box .menu-application-button-label {
+    font-size: 0.77em; padding: 2px 2px 0; text-align: center;
+}
+.cinnamenu .menu-application-button:highlighted,
+.cinnamenu .menu-application-button-selected:highlighted { font-weight: bold; }
+.cinnamenu .menu-favorites-scrollbox,
+.cinnamenu .menu-favorites-box {
+    background-color: transparent; border: none; padding: 2px 0;
+}
+.cinnamenu .menu-favorites-button {
+    background-color: transparent; border: none;
+    border-radius: 8px; padding: 6px; transition-duration: 100ms;
+}
+
+/* Sidebar search row (search-placement = sidebar) */
+.cinnamenu .menu-sidebar-search-row {
+    padding: 6px 10px 4px 10px; spacing: 0;
+}
+.cinnamenu .menu-sidebar-search-row #menu-search-entry {
+    border-radius: 6px; padding: 5px 10px 5px 8px; transition-duration: 130ms;
+}
+
+
+
+/* ── sidebar-top search: search row replaces CATEGORIES header ──────────── */
+/* Same height as catTitleRow via shared .menu-sidebar-title-row class.
+   The entry is compact and spans the full sidebar width minus small inset. */
+.cinnamenu .menu-sidebar-search-top {
+    /* inherits padding/min-height from .menu-sidebar-title-row */
+}
+.cinnamenu .menu-sidebar-search-top #menu-search-entry {
+    border-radius: 6px;
+    padding: 5px 10px 5px 8px;
+    transition-duration: 130ms;
+}
+/* Light palette sidebar-top search */
+.menu-palette-light .menu-sidebar-search-top #menu-search-entry {
+    background-color: rgba(0,0,0,0.07);
+    border: 1px solid rgba(0,0,0,0.11);
+    color: #1d1d1f;
+}
+.menu-palette-light .menu-sidebar-search-top #menu-search-entry:focus {
+    background-color: rgba(255,255,255,0.90);
+    border-color: #007AFF; color: #1d1d1f;
+}
+/* Dark palette sidebar-top search */
+.menu-palette-dark .menu-sidebar-search-top #menu-search-entry {
+    background-color: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.16);
+    color: rgba(255,255,255,0.88);
+}
+.menu-palette-dark .menu-sidebar-search-top #menu-search-entry:focus {
+    background-color: rgba(255,255,255,0.17);
+    border-color: #0A84FF; color: #ffffff;
+}
+
+/* ============================================================
+   §2  CINNAMENU — LIGHT PALETTE  (.menu-palette-light)
+   White frosted glass sidebar.
+   App grid: very transparent so wallpaper shows through.
+   Tiles: frosted white glass, DARK labels.
+   System buttons: full-width when search is in sidebar.
+   ============================================================ */
+
+/* Override any theme background on the outer menu box */
+.menu-palette-light.menu-applications-outer-box,
+.menu-palette-light.menu-applications-box,
+.menu-palette-light .menu-applications-outer-box,
+.menu-palette-light .menu-applications-box {
+    background-color: transparent;
+    border: none;
+}
+
+.menu-palette-light .menu-sidebar-panel {
+    background-color: rgba(255,255,255,0.88);
+}
+.menu-palette-light .menu-sidebar-categories-title { color: rgba(0,0,0,0.50); }
+.menu-palette-light .menu-category-button { color: rgba(0,0,0,0.62); }
+.menu-palette-light .menu-category-button-label { color: rgba(0,0,0,0.62); }
+.menu-palette-light .menu-category-button:hover {
+    background-color: rgba(0,0,0,0.06); border-image: none; color: rgba(0,0,0,0.88);
+}
+.menu-palette-light .menu-category-button-selected {
+    background-color: rgba(0,122,255,0.10);
+    border: none; border-left: 3px solid rgba(0,122,255,0.85);
+    border-radius: 0 6px 6px 0;
+    padding: 8px 10px 8px 7px; spacing: 10px; color: #007AFF;
+}
+.menu-palette-light .menu-category-button-selected .menu-category-button-label {
+    color: #007AFF; font-weight: bold;
+}
+.menu-palette-light .menu-category-button-greyed { color: rgba(0,0,0,0.22); }
+.menu-palette-light .menu-system-buttons-box {
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding: 6px 6px 8px 6px; spacing: 0;
+}
+/* System buttons: distributed full-width — each button expands equally */
+.menu-palette-light .menu-system-button {
+    background-color: rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 8px; padding: 9px 0;
+    color: rgba(0,0,0,0.55);
+}
+.menu-palette-light .menu-system-button:hover {
+    background-color: rgba(255,59,48,0.12); border-color: rgba(255,59,48,0.25);
+    color: rgba(255,59,48,0.90); border-image: none;
+}
+.menu-palette-light .menu-right-pane { background-color: transparent; }
+.menu-palette-light #menu-search-entry {
+    background-color: rgba(255,255,255,0.75);
+    border: 1px solid rgba(0,0,0,0.12); color: #1d1d1f;
+}
+.menu-palette-light #menu-search-entry:focus {
+    background-color: rgba(255,255,255,0.95); border-color: #007AFF; color: #1d1d1f;
+}
+.menu-palette-light .menu-search-entry-icon { color: rgba(0,0,0,0.32); icon-size: 14px; }
+/* Sidebar search */
+.menu-palette-light .menu-sidebar-search-row #menu-search-entry {
+    background-color: rgba(0,0,0,0.07); border: 1px solid rgba(0,0,0,0.11); color: #1d1d1f;
+}
+.menu-palette-light .menu-sidebar-search-row #menu-search-entry:focus {
+    background-color: rgba(255,255,255,0.90); border-color: #007AFF; color: #1d1d1f;
+}
+
+/* App grid: very transparent background */
+.menu-palette-light .menu-applications-grid-box .menu-application-button {
+    background-color: transparent; color: #1d1d1f;
+}
+.menu-palette-light .menu-applications-grid-box .menu-application-button-selected {
+    background-color: rgba(0,122,255,0.12);
+    border: 1px solid rgba(0,122,255,0.22); color: #1d1d1f;
+}
+.menu-palette-light .menu-application-button-label,
+.menu-palette-light .menu-applications-grid-box .menu-application-button-label { color: #1d1d1f; }
+
+/* tile-light: frosted white, dark labels */
+.menu-palette-light .menu-applications-grid-box .menu-application-button.tile-light {
+    background-color: rgba(255,255,255,0.55);
+    border: 1px solid rgba(255,255,255,0.80); border-radius: 10px; padding: 6px 2px;
+}
+.menu-palette-light .menu-applications-grid-box .menu-application-button.tile-light:hover {
+    background-color: rgba(255,255,255,0.78); border-color: rgba(0,122,255,0.22);
+}
+.menu-palette-light .menu-applications-grid-box .menu-application-button-selected.tile-light {
+    background-color: rgba(0,122,255,0.16);
+    border: 2px solid rgba(0,122,255,0.45); border-radius: 10px; padding: 5px 1px;
+}
+.menu-palette-light .menu-applications-grid-box .menu-application-button.tile-light .menu-application-button-label,
+.menu-palette-light .menu-applications-grid-box .menu-application-button-selected.tile-light .menu-application-button-label {
+    color: rgba(0,0,0,0.85); font-size: 11px; font-weight: 500;
+}
+
+/* tile-dark (on light menu): dark frosted, white labels */
+.menu-palette-light .menu-applications-grid-box .menu-application-button.tile-dark {
+    background-color: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 10px; padding: 6px 2px;
+}
+.menu-palette-light .menu-applications-grid-box .menu-application-button.tile-dark .menu-application-button-label,
+.menu-palette-light .menu-applications-grid-box .menu-application-button-selected.tile-dark .menu-application-button-label {
+    color: rgba(255,255,255,0.92); font-size: 11px; font-weight: 500;
+}
+
+/* tile-metro: white labels always (JS sets bg) */
+.menu-palette-light .menu-applications-grid-box .menu-application-button.tile-metro .menu-application-button-label,
+.menu-palette-light .menu-applications-grid-box .menu-application-button-selected.tile-metro .menu-application-button-label,
+.menu-palette-light .menu-applications-grid-box .menu-application-button.tile-style .menu-application-button-label,
+.menu-palette-light .menu-applications-grid-box .menu-application-button-selected.tile-style .menu-application-button-label {
+    color: #ffffff; font-size: 11px; font-weight: 500;
+}
+
+.menu-palette-light .menu-favorites-button { color: rgba(0,0,0,0.62); }
+.menu-palette-light .menu-favorites-button:hover {
+    background-color: rgba(0,0,0,0.07); border-image: none;
+}
+
+
+/* ============================================================
+   §3  CINNAMENU — DARK PALETTE  (.menu-palette-dark)
+   Full black frosted glass — entire menu is dark.
+   App grid: very transparent (dark tint).
+   Tiles: frosted dark glass, WHITE labels.
+   ============================================================ */
+
+.menu-palette-dark.menu-applications-outer-box,
+.menu-palette-dark.menu-applications-box,
+.menu-palette-dark .menu-applications-outer-box,
+.menu-palette-dark .menu-applications-box {
+    background-color: transparent;
+    border: none;
+}
+
+.menu-palette-dark .menu-sidebar-panel {
+    background-color: rgba(0,0,0,0.82);
+}
+.menu-palette-dark .menu-sidebar-categories-title { color: rgba(255,255,255,0.50); }
+.menu-palette-dark .menu-category-button { color: rgba(255,255,255,0.62); }
+.menu-palette-dark .menu-category-button-label { color: rgba(255,255,255,0.62); }
+.menu-palette-dark .menu-category-button:hover {
+    background-color: rgba(255,255,255,0.10); border-image: none; color: rgba(255,255,255,0.92);
+}
+.menu-palette-dark .menu-category-button-selected {
+    background-color: rgba(10,132,255,0.22);
+    border: none; border-left: 3px solid rgba(10,132,255,0.90);
+    border-radius: 0 6px 6px 0;
+    padding: 8px 10px 8px 7px; spacing: 10px; color: #0A84FF;
+}
+.menu-palette-dark .menu-category-button-selected .menu-category-button-label {
+    color: #0A84FF; font-weight: bold;
+}
+.menu-palette-dark .menu-category-button-greyed { color: rgba(255,255,255,0.20); }
+.menu-palette-dark .menu-system-buttons-box {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 6px 6px 8px 6px; spacing: 0;
+}
+/* System buttons: distributed full-width on dark */
+.menu-palette-dark .menu-system-button {
+    background-color: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px; padding: 9px 0;
+    color: rgba(255,255,255,0.72);
+}
+.menu-palette-dark .menu-system-button:hover {
+    background-color: rgba(255,69,58,0.22); border-color: rgba(255,69,58,0.35);
+    color: rgba(255,120,110,0.98); border-image: none;
+}
+
+/* Right pane: very dark translucent so wallpaper shows through */
+.menu-palette-dark .menu-right-pane {
+    background-color: rgba(0,0,0,0.55);
+}
+.menu-palette-dark #menu-search-entry {
+    background-color: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.90);
+}
+.menu-palette-dark #menu-search-entry:focus {
+    background-color: rgba(255,255,255,0.14); border-color: #0A84FF; color: #ffffff;
+}
+.menu-palette-dark .menu-search-entry-icon { color: rgba(255,255,255,0.36); icon-size: 14px; }
+/* Sidebar search */
+.menu-palette-dark .menu-sidebar-search-row #menu-search-entry {
+    background-color: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.88);
+}
+.menu-palette-dark .menu-sidebar-search-row #menu-search-entry:focus {
+    background-color: rgba(255,255,255,0.17); border-color: #0A84FF; color: #ffffff;
+}
+
+/* App grid: transparent on dark */
+.menu-palette-dark .menu-applications-grid-box .menu-application-button {
+    background-color: transparent; color: rgba(255,255,255,0.90);
+}
+.menu-palette-dark .menu-applications-grid-box .menu-application-button-selected {
+    background-color: rgba(10,132,255,0.25);
+    border: 1px solid rgba(10,132,255,0.50); color: #ffffff;
+}
+.menu-palette-dark .menu-application-button-label,
+.menu-palette-dark .menu-applications-grid-box .menu-application-button-label {
+    color: rgba(255,255,255,0.90);
+}
+
+/* tile-dark: dark frosted, white labels */
+.menu-palette-dark .menu-applications-grid-box .menu-application-button.tile-dark {
+    background-color: rgba(0, 0, 0,0.4);
+    border: 1px solid rgba(255,255,255,0.16); border-radius: 10px; padding: 6px 2px;
+}
+.menu-palette-dark .menu-applications-grid-box .menu-application-button.tile-dark:hover {
+    background-color: rgba(255,255,255,0.18); border-color: rgba(10,132,255,0.45);
+}
+.menu-palette-dark .menu-applications-grid-box .menu-application-button-selected.tile-dark {
+    background-color: rgba(10,132,255,0.32);
+    border: 2px solid rgba(10,132,255,0.65); border-radius: 10px; padding: 5px 1px;
+}
+.menu-palette-dark .menu-applications-grid-box .menu-application-button.tile-dark .menu-application-button-label,
+.menu-palette-dark .menu-applications-grid-box .menu-application-button-selected.tile-dark .menu-application-button-label {
+    color: rgba(255,255,255,0.92); font-size: 11px; font-weight: 500;
+}
+
+/* tile-light (on dark menu): frosted white, dark labels */
+.menu-palette-dark .menu-applications-grid-box .menu-application-button.tile-light {
+    background-color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.80);
+    border-radius: 10px; padding: 6px 2px;
+}
+.menu-palette-dark .menu-applications-grid-box .menu-application-button.tile-light .menu-application-button-label,
+.menu-palette-dark .menu-applications-grid-box .menu-application-button-selected.tile-light .menu-application-button-label {
+    color: rgba(0,0,0,0.85); font-size: 11px; font-weight: 500;
+}
+
+/* tile-metro: white labels always */
+.menu-palette-dark .menu-applications-grid-box .menu-application-button.tile-metro .menu-application-button-label,
+.menu-palette-dark .menu-applications-grid-box .menu-application-button-selected.tile-metro .menu-application-button-label,
+.menu-palette-dark .menu-applications-grid-box .menu-application-button.tile-style .menu-application-button-label,
+.menu-palette-dark .menu-applications-grid-box .menu-application-button-selected.tile-style .menu-application-button-label {
+    color: #ffffff; font-size: 11px; font-weight: 500;
+}
+
+.menu-palette-dark .menu-favorites-button { color: rgba(255,255,255,0.68); }
+.menu-palette-dark .menu-favorites-button:hover {
+    background-color: rgba(255,255,255,0.10); border-image: none;
+}
+
+
+/* ============================================================
+   §4  SYSTEM BUTTONS base
+   ============================================================ */
+.cinnamenu .menu-system-buttons-box {
+    spacing: 2px;
+}
+
+
+/* ============================================================
+   §5  OVERVIEW — BASE LAYOUT
+   ============================================================ */
+
+.cinnamon-overview-background { color: #1d1d1f; }
+.cinnamon-overview-categories-title {
+    font-weight: bold; font-size: 0.68em; padding: 0 8px 10px 16px;
+}
+.cinnamon-overview-category {
+    border-radius: 6px; border: none; background-color: transparent; transition-duration: 120ms;
+}
+.cinnamon-overview-category-sel { border-radius: 6px; border: none; transition-duration: 120ms; }
+.cinnamon-overview-cat-accent { background-color: transparent; }
+.cinnamon-overview-search {
+    border-radius: 8px; padding: 3px 14px; transition-duration: 150ms;
+}
+.cinnamon-overview-section-title { font-size: 11px; font-weight: bold; }
+.cinnamon-overview-tile { border-radius: 2px; border: none; transition-duration: 120ms; }
+.cinnamon-overview-power-btn { border-radius: 8px; border: none; transition-duration: 120ms; }
+.cinnamon-overview-tooltip { border-radius: 6px; padding: 4px 9px; }
+.cinnamon-overview-context-menu { border-radius: 10px; padding: 5px 0; min-width: 200px; }
+.cinnamon-overview-context-item {
+    padding: 6px 12px;
+    background-color: transparent;
+    border: none;
+    white-space: nowrap;
+}
+.cinnamon-overview-context-sep { height: 1px; margin: 3px 12px; }
+
+
+/* ============================================================
+   §6  OVERVIEW — LIGHT PALETTE  (.overview-palette-light)
+   White frosted glass. Sidebar white. Tiles: frosted, dark text.
+   ============================================================ */
+
+.overview-palette-light {
+    background-color: rgba(242,242,247,0.85);
+    color: #1d1d1f;
+}
+.overview-palette-light .cinnamon-overview-sidebar {
+    background-color: rgba(255,255,255,0.75);
+    border-right: 1px solid rgba(0,0,0,0.08);
+}
+.overview-palette-light .cinnamon-overview-categories-title { color: rgba(0,0,0,0.50); }
+.overview-palette-light .cinnamon-overview-category:hover { background-color: rgba(0,0,0,0.06); }
+.overview-palette-light .cinnamon-overview-category-sel { background-color: rgba(0,122,255,0.10); }
+.overview-palette-light .cinnamon-overview-cat-label { color: rgba(0,0,0,0.62); font-size: 13px; }
+.overview-palette-light .cinnamon-overview-cat-label-sel { color: #007AFF; font-size: 13px; font-weight: bold; }
+.overview-palette-light .cinnamon-overview-cat-icon      { color: rgba(0,0,0,0.55); opacity: 0.80; }
+.overview-palette-light .cinnamon-overview-cat-icon-sel  { color: #007AFF; opacity: 1; }
+.overview-palette-light .cinnamon-overview-cat-accent-sel { background-color: #007AFF; }
+.overview-palette-light .cinnamon-overview-search {
+    background-color: rgba(255,255,255,0.88);
+    border: 1px solid rgba(0,0,0,0.12); color: #1d1d1f;
+    }
+.overview-palette-light .cinnamon-overview-search:focus,
+.overview-palette-light .cinnamon-overview-search:hover {
+    background-color: #ffffff; border-color: #007AFF;
+    }
+.overview-palette-light .cinnamon-overview-section-title { color: rgba(0,0,0,0.42); }
+/* metro tiles on light: always white label */
+.overview-palette-light .cinnamon-overview-tile-label { color: #ffffff; font-size: 10px; text-align: center; }
+/* tile-light: frosted white, dark labels */
+.overview-palette-light .cinnamon-overview-tile.tile-light {
+    background-color: rgba(255,255,255,0.62);
+    border: 1px solid rgba(255,255,255,0.85); border-radius: 10px; padding: 3px;
+}
+.overview-palette-light .cinnamon-overview-tile.tile-light:hover {
+    background-color: rgba(255,255,255,0.82); border-color: rgba(0,122,255,0.22);
+}
+.overview-palette-light .cinnamon-overview-tile.tile-light:focus,
+.overview-palette-light .cinnamon-overview-tile.tile-light:selected {
+    background-color: rgba(0,122,255,0.16);
+    border: 2px solid rgba(0,122,255,0.45); border-radius: 10px; padding: 1px;
+}
+.overview-palette-light .cinnamon-overview-tile.tile-light .cinnamon-overview-tile-label {
+    color: rgba(0,0,0,0.85); font-size: 11px; font-weight: 500;
+}
+/* tile-dark on light overview */
+.overview-palette-light .cinnamon-overview-tile.tile-dark {
+    background-color: rgba(0,0,0,0.55);
+    border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 3px;
+}
+.overview-palette-light .cinnamon-overview-tile.tile-dark .cinnamon-overview-tile-label {
+    color: rgba(255,255,255,0.92); font-size: 11px; font-weight: 500;
+}
+.overview-palette-light .cinnamon-overview-status-label { color: rgba(0,0,0,0.42); font-size: 13px; }
+.overview-palette-light .cinnamon-overview-power-btn {
+    background-color: rgba(255,255,255,0.62); border: 1px solid rgba(0,0,0,0.09);
+}
+.overview-palette-light .cinnamon-overview-power-btn:hover {
+    background-color: rgba(255,59,48,0.12); border-color: rgba(255,59,48,0.25);
+}
+.overview-palette-light .cinnamon-overview-power-icon { color: rgba(0,0,0,0.60); icon-size: 28px; }
+.overview-palette-light .cinnamon-overview-tooltip {
+    background-color: rgba(255,255,255,0.97); border: 1px solid rgba(0,0,0,0.09); color: #1d1d1f;
+}
+.overview-palette-light .cinnamon-overview-context-menu {
+    background-color: rgba(255,255,255,0.97); border: 1px solid rgba(0,0,0,0.09);
+}
+.overview-palette-light .cinnamon-overview-context-item { color: #1d1d1f; }
+.overview-palette-light .cinnamon-overview-context-item:hover {
+    background-color: rgba(0,122,255,0.08); color: #007AFF;
+}
+.overview-palette-light .cinnamon-overview-context-sep { background-color: rgba(0,0,0,0.08); }
+
+
+/* ============================================================
+   §7  OVERVIEW — DARK PALETTE  (.overview-palette-dark)
+   Full black frosted glass. All dark. Tiles: frosted dark, white text.
+   ============================================================ */
+
+.overview-palette-dark {
+    background-color: rgba(0,0,0,0.88);
+    color: rgba(255,255,255,0.92);
+}
+.overview-palette-dark .cinnamon-overview-sidebar {
+    background-color: rgba(0,0,0,0.80);
+    border-right: 1px solid rgba(255,255,255,0.07);
+}
+.overview-palette-dark .cinnamon-overview-categories-title { color: rgba(255,255,255,0.50); }
+.overview-palette-dark .cinnamon-overview-category:hover { background-color: rgba(255,255,255,0.10); }
+.overview-palette-dark .cinnamon-overview-category-sel { background-color: rgba(10,132,255,0.22); }
+.overview-palette-dark .cinnamon-overview-cat-label { color: rgba(255,255,255,0.60); font-size: 13px; }
+.overview-palette-dark .cinnamon-overview-cat-label-sel { color: #0A84FF; font-size: 13px; font-weight: bold; }
+.overview-palette-dark .cinnamon-overview-cat-icon      { color: rgba(255,255,255,0.55); opacity: 0.80; }
+.overview-palette-dark .cinnamon-overview-cat-icon-sel  { color: #0A84FF; opacity: 1; }
+.overview-palette-dark .cinnamon-overview-cat-accent-sel { background-color: #0A84FF; }
+.overview-palette-dark .cinnamon-overview-search {
+    background-color: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.92);
+    padding: 3px 14px;
+}
+.overview-palette-dark .cinnamon-overview-search:focus,
+.overview-palette-dark .cinnamon-overview-search:hover {
+    background-color: rgba(255,255,255,0.14); border-color: #0A84FF;
+    }
+.overview-palette-dark .cinnamon-overview-section-title { color: rgba(255,255,255,0.42); }
+/* metro tiles on dark: always white labels */
+.overview-palette-dark .cinnamon-overview-tile-label { color: #ffffff; font-size: 10px; text-align: center; }
+/* tile-dark: frosted dark glass, white labels */
+.overview-palette-dark .cinnamon-overview-tile.tile-dark {
+    background-color: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.16); border-radius: 10px; padding: 3px;
+}
+.overview-palette-dark .cinnamon-overview-tile.tile-dark:hover {
+    background-color: rgba(255,255,255,0.18); border-color: rgba(10,132,255,0.45);
+}
+.overview-palette-dark .cinnamon-overview-tile.tile-dark:focus,
+.overview-palette-dark .cinnamon-overview-tile.tile-dark:selected {
+    background-color: rgba(10,132,255,0.32);
+    border: 2px solid rgba(10,132,255,0.65); border-radius: 10px; padding: 1px;
+}
+.overview-palette-dark .cinnamon-overview-tile.tile-dark .cinnamon-overview-tile-label {
+    color: rgba(255,255,255,0.92); font-size: 11px; font-weight: 500;
+}
+/* tile-light on dark overview */
+.overview-palette-dark .cinnamon-overview-tile.tile-light {
+    background-color: rgba(255,255,255,0.62);
+    border: 1px solid rgba(255,255,255,0.80); border-radius: 10px; padding: 3px;
+}
+.overview-palette-dark .cinnamon-overview-tile.tile-light .cinnamon-overview-tile-label {
+    color: rgba(0,0,0,0.85); font-size: 11px; font-weight: 500;
+}
+.overview-palette-dark .cinnamon-overview-status-label { color: rgba(255,255,255,0.42); font-size: 13px; }
+.overview-palette-dark .cinnamon-overview-power-btn {
+    background-color: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14);
+}
+.overview-palette-dark .cinnamon-overview-power-btn:hover {
+    background-color: rgba(255,69,58,0.22); border-color: rgba(255,69,58,0.35);
+}
+.overview-palette-dark .cinnamon-overview-power-icon { color: rgba(255,255,255,0.72); icon-size: 28px; }
+.overview-palette-dark .cinnamon-overview-tooltip {
+    background-color: rgba(20,20,28,0.97); border: 1px solid rgba(255,255,255,0.10);
+    color: rgba(255,255,255,0.92);
+}
+.overview-palette-dark .cinnamon-overview-context-menu {
+    border-radius: 10px;
+    padding: 5px 0;
+    min-width: 0;
+    max-width: 260px;
+    background-color: rgba(18,18,24,0.97); border: 1px solid rgba(255,255,255,0.09);
+}
+.overview-palette-dark .cinnamon-overview-context-item { color: rgba(255,255,255,0.85); }
+.overview-palette-dark .cinnamon-overview-context-item:hover {
+    background-color: rgba(10,132,255,0.18); color: #0A84FF;
+}
+.overview-palette-dark .cinnamon-overview-context-sep { background-color: rgba(255,255,255,0.08); }
+
+
+/* ============================================================
+   §8  METRO TILES — frosted glass macOS palette
+   Geometry/colour set inline by JS (appsview.js / overview.js).
+   CSS ensures labels are ALWAYS white regardless of active theme.
+   ============================================================ */
+
+/* Cinnamenu metro tiles: white labels always */
+.cinnamenu .menu-applications-grid-box .menu-application-button.tile-metro .menu-application-button-label,
+.cinnamenu .menu-applications-grid-box .menu-application-button-selected.tile-metro .menu-application-button-label,
+.cinnamenu .menu-applications-grid-box .menu-application-button.tile-metro:hover .menu-application-button-label {
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Overview metro tiles: white labels always, regardless of palette or theme */
+.cinnamon-overview-tile.tile-metro .cinnamon-overview-tile-label {
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Overview tile-metro hover: white border (geometry only, no colour change — JS handles it) */
+.cinnamon-overview-tile.tile-metro:hover {
+    border: 2px solid rgba(255,255,255,0.50);
+}
+
+.popup-menu-item {
+    transition-duration: 0ms !important;
+    padding: 2px 10px !important;
+}
+
+.popup-menu-icon {
+    icon-size: 1.1em !important;
+}
+
+
+/* ============================================================
+   §9  FAVOURITE BOX — mintmenu-style left sidebar
+   FavBox sys bottom-pad = 14px → aligns with sidebar-panel bottom
+   ============================================================ */
+
+/* Outer column */
+.menu-favbox {
+    background-color: rgba(0, 0, 0, 0.22);
+    border-right:     1px solid rgba(255,255,255, 0.08);
+    width:      100px;   /* fixed — must match FAV_BOX_W constant in display.js */
+    min-width:  100px;
+    max-width:  150px;
+    padding:    8px 0 0 0;
+    margin:     0;
+    spacing:    0;
+}
+
+/* Avatar box */
+.menu-favbox-userbox {
+    padding: 6px 4px 6px 4px;
+    spacing: 0;
+}
+/* Avatar button wrapper */
+.menu-favbox-avatar-btn {
+    border-radius:       50%;
+    padding:             4px;
+    transition-duration: 100ms;
+}
+.menu-favbox-avatar-btn:hover {
+    background-color: rgba(255,255,255, 0.10);
+}
+
+/* Avatar icon — size is set inline by JS via icon_size property */
+.menu-favbox-avatar-icon {
+    border-radius: 50%;
+}
+
+/* Username label */
+.menu-favbox-username {
+    color:       rgba(255,255,255, 0.0);
+    font-size:   0.72em;
+    font-weight: 500;
+    padding:     2px 0 0 0;
+}
+
+
+/* Fav apps scroll view */
+.menu-favbox-scrollview {
+    padding: 0;
+    margin:  0;
+}
+
+/* Fav app buttons */
+.appmenu-sidebar-button {
+    border-radius:       8px;
+    padding:             7px 8px;
+    spacing:             0;
+    transition-duration: 100ms;
+}
+.appmenu-sidebar-button:hover {
+    background-color: rgba(255,255,255, 0.10);
+}
+
+/* System buttons box — vertical (default) */
+.menu-favbox-sysbtnbox {
+    padding: 6px 0 14px 0;
+    spacing: 2px;
+}
+/* System buttons box — horizontal */
+.menu-favbox-sysbtnbox-h {
+    padding: 6px 0 14px 0;
+    spacing: 6px;
+}
+
+/* System buttons — always FULLCOLOR to avoid greyed look */
+.appmenu-system-button {
+    border-radius:       8px;
+    padding:             7px 8px;
+    spacing:             0;
+    transition-duration: 100ms;
+}
+.appmenu-system-button:hover {
+    background-color: rgba(255,255,255, 0.12);
+}
+
+/* ============================================================
+   §10 OVERVIEW TOOLTIP FIX - Prevent tooltip from breaking menu
+   ============================================================ */
+
+/* Fix tooltip positioning to not break the overview */
+.cinnamon-overview-tooltip {
+    position: fixed;
+    z-index: 1000;
+    background-color: rgba(20, 20, 28, 0.95);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 11px;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+}
+
+/* Light palette tooltip */
+.overview-palette-light .cinnamon-overview-tooltip {
+    background-color: rgba(255, 255, 255, 0.97);
+    color: #1d1d1f;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* Dark palette tooltip */
+.overview-palette-dark .cinnamon-overview-tooltip {
+    background-color: rgba(20, 20, 28, 0.97);
+    color: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+/* Power bar button hover effect - no tooltip crash */
+.cinnamon-overview-power-btn {
+    transition-duration: 100ms;
+}
+
+.cinnamon-overview-power-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ============================================================
+   §11 AVATAR SPACING FIX - Better padding between avatar and fav apps
+   ============================================================ */
+
+/* User box container */
+.appmenu-sidebar-user-box {
+    padding: 12px 4px 8px 4px !important;
+    spacing: 8px !important;
+    margin-bottom: 0 !important;
+}
+
+/* Avatar button styling */
+.menu-favbox-avatar-btn {
+    border-radius: 50%;
+    padding: 2px;
+    margin: 0 auto;
+    transition-duration: 100ms;
+}
+
+.menu-favbox-avatar-btn:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Avatar icon styling */
+.menu-favbox-avatar-icon {
+    border-radius: 50%;
+}
+
+/* Ensure proper spacing between avatar and separator */
+.appmenu-sidebar-user-box + .menu-favbox-separator {
+    margin-top: 4px;
+}
+
+/* Fix scrollview spacing */
+.appmenu-sidebar-scrollview {
+    padding: 0;
+    margin: 0;
+}
+
+.appmenu-sidebar-scrollbox {
+    spacing: 4px;
+    padding: 4px 0;
+}
+
+/* System buttons box spacing */
+.appmenu-system-box {
+    padding: 8px 0 14px 0 !important;
+    spacing: 6px !important;
+    margin-top: 4px !important;
+}
+
+/* ============================================================
+   §12 FAVORITE BOX - Fix username display (only one, centered)
+   ============================================================ */
+
+/* The UserWidget already includes the username, so we just need
+   to style it properly. Remove any duplicate username labels. */
+.appmenu-sidebar-user-box .user-widget-label {
+    text-align: center;
+    font-size: 10px;
+    font-weight: 500;
+    margin-top: 4px;
+    color: rgba(255, 255, 255, 0.0);
+}
+
+/* Light palette username */
+.menu-palette-light .appmenu-sidebar-user-box .user-widget-label {
+    color: rgba(0, 0, 0, 0.0);
+}
+
+/* Dark palette username */
+.menu-palette-dark .appmenu-sidebar-user-box .user-widget-label {
+    color: rgba(255, 255, 255, 0.0);
+}
+
+/* ============================================================
+   §13 USERNAME FONT & SPACING FIXES
+   ============================================================ */
+
+/* Increase username font size and spacing */
+.appmenu-sidebar-user-box .user-widget-label {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    margin-top: 2px !important;
+    margin-bottom: 4px !important;
+    text-align: center;
+    letter-spacing: 0.3px;
+}
+
+/* Light palette username */
+.menu-palette-light .appmenu-sidebar-user-box .user-widget-label {
+    color: rgba(0, 0, 0, 0.0);
+}
+
+/* Dark palette username */
+.menu-palette-dark .appmenu-sidebar-user-box .user-widget-label {
+    color: rgba(255, 255, 255, 0.0);
+}
+
+/* Increase space between favorite box and sidebar horizontally */
+.menu-favbox {
+    margin-right: 4px !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Ensure proper spacing between fav box and sidebar panel */
+.menu-applications-outer-box > .menu-favbox + .menu-sidebar-panel {
+    margin-left: 2px;
+}
+
+/* Increase vertical space between avatar section and favorite apps */
+.appmenu-sidebar-user-box {
+    padding-bottom: 4px !important;
+    margin-bottom: 10px !important;
+}
+
+/* Separator styling for better visual separation */
+.appmenu-sidebar-user-box + .menu-favbox-separator,
+.menu-favbox-separator {
+    margin: 8px 8px 12px 8px !important;
+    opacity: 0.5;
+}
+
+/* Increase spacing in scrollbox for better readability */
+.appmenu-sidebar-scrollbox {
+    spacing: 6px !important;
+    padding: 6px 0 !important;
+}
+
+/* System buttons spacing */
+.appmenu-system-box {
+    padding: 12px 0 16px 0 !important;
+    spacing: 8px !important;
+    margin-top: 8px !important;
+}
+
+
+/* ============================================================
+   §14  OVERVIEW — macOS TAHOE PALETTE  (.overview-palette-tahoe)
+
+   Liquid Glass aesthetic: Sonoma/Tahoe-era Apple design.
+   • Background: deep slate blur with a subtle warm-cool gradient tint
+   • Sidebar:    frosted ultraThin glass, very light border
+   • Tiles:      translucent glass capsules, iridescent edge highlight
+   • Accent:     Apple Blue #007AFF (light) / #0A84FF (dark variant)
+   • Labels:     near-white, medium weight, SF Pro stack
+   ============================================================ */
+
+/* ── Root background ───────────────────────────────────────── */
+.overview-palette-tahoe {
+    /* Deep dark slate + subtle indigo tint — simulates Tahoe blurred wallpaper */
+    background-color: rgba(18, 18, 32, 0.92);
+    color: rgba(255,255,255,0.92);
+}
+
+/* ── Sidebar ───────────────────────────────────────────────── */
+.overview-palette-tahoe .cinnamon-overview-sidebar {
+    background-color: rgba(255,255,255,0.07);
+    border-right: 1px solid rgba(255,255,255,0.10);
+}
+.overview-palette-tahoe .cinnamon-overview-categories-title {
+    color: rgba(255,255,255,0.38);
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+}
+.overview-palette-tahoe .cinnamon-overview-category {
+    border-radius: 10px;
+    transition-duration: 150ms;
+}
+.overview-palette-tahoe .cinnamon-overview-category:hover {
+    background-color: rgba(255,255,255,0.10);
+}
+.overview-palette-tahoe .cinnamon-overview-category-sel {
+    background-color: rgba(0,122,255,0.20);
+    border-radius: 10px;
+}
+.overview-palette-tahoe .cinnamon-overview-cat-label {
+    color: rgba(255,255,255,0.60);
+    font-size: 13px;
+}
+.overview-palette-tahoe .cinnamon-overview-cat-label-sel {
+    color: #60A5FA;
+    font-size: 13px;
+    font-weight: 600;
+}
+.overview-palette-tahoe .cinnamon-overview-cat-icon {
+    color: rgba(255,255,255,0.50);
+}
+.overview-palette-tahoe .cinnamon-overview-cat-icon-sel {
+    color: #60A5FA;
+}
+.overview-palette-tahoe .cinnamon-overview-cat-accent-sel {
+    background-color: #60A5FA;
+}
+
+/* ── Search bar ────────────────────────────────────────────── */
+.overview-palette-tahoe .cinnamon-overview-search {
+    background-color: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 14px;
+    color: rgba(255,255,255,0.92);
+    padding: 2px 12px;
+        transition-duration: 180ms;
+}
+.overview-palette-tahoe .cinnamon-overview-search:focus,
+.overview-palette-tahoe .cinnamon-overview-search:hover {
+    background-color: rgba(255,255,255,0.16);
+    border-color: rgba(96,165,250,0.70);
+    }
+
+/* ── Section titles ────────────────────────────────────────── */
+.overview-palette-tahoe .cinnamon-overview-section-title {
+    color: rgba(255,255,255,0.35);
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+}
+
+/* ── Tile labels (all tahoe tiles) ────────────────────────── */
+.overview-palette-tahoe .cinnamon-overview-tile-label {
+    color: rgba(255,255,255,0.92);
+    font-size: 11px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* ── tile-tahoe: Liquid Glass capsule ──────────────────────── */
+/*
+   The signature Tahoe/Sonoma look:
+   • Base: very low-opacity white (simulates blurred glass)
+   • Border: iridescent thin edge — top half lighter, overall subtle
+   • Border-radius: generous, pill-like (16px)
+   • Hover: brightens glass + blue glow ring
+   • Selected/focus: strong blue tint + vivid ring
+*/
+.overview-palette-tahoe .cinnamon-overview-tile.tile-tahoe {
+    background-color: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 16px;
+    padding: 3px;
+    transition-duration: 150ms;
+}
+.overview-palette-tahoe .cinnamon-overview-tile.tile-tahoe:hover {
+    background-color: rgba(255,255,255,0.18);
+    border-color: rgba(96,165,250,0.55);
+    border-width: 1px;
+}
+.overview-palette-tahoe .cinnamon-overview-tile.tile-tahoe:focus,
+.overview-palette-tahoe .cinnamon-overview-tile.tile-tahoe:selected {
+    background-color: rgba(0,122,255,0.22);
+    border: 2px solid rgba(96,165,250,0.80);
+    border-radius: 16px;
+    padding: 1px;
+}
+.overview-palette-tahoe .cinnamon-overview-tile.tile-tahoe .cinnamon-overview-tile-label {
+    color: rgba(255,255,255,0.90);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* ── Status label ──────────────────────────────────────────── */
+.overview-palette-tahoe .cinnamon-overview-status-label {
+    color: rgba(255,255,255,0.38);
+    font-size: 13px;
+}
+
+/* ── Power bar buttons ─────────────────────────────────────── */
+.overview-palette-tahoe .cinnamon-overview-power-btn {
+    background-color: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 12px;
+    transition-duration: 150ms;
+}
+.overview-palette-tahoe .cinnamon-overview-power-btn:hover {
+    background-color: rgba(255,69,58,0.25);
+    border-color: rgba(255,69,58,0.45);
+}
+.overview-palette-tahoe .cinnamon-overview-power-icon {
+    color: rgba(255,255,255,0.68);
+    icon-size: 28px;
+}
+
+/* ── Tooltip ───────────────────────────────────────────────── */
+.overview-palette-tahoe .cinnamon-overview-tooltip {
+    background-color: rgba(20,20,36,0.97);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    color: rgba(255,255,255,0.90);
+    padding: 5px 11px;
+}
+
+/* ── Context menu ──────────────────────────────────────────── */
+.overview-palette-tahoe .cinnamon-overview-context-menu {
+    background-color: rgba(22,22,38,0.97);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 14px;
+    padding: 5px 0;
+    min-width: 200px;
+}
+.overview-palette-tahoe .cinnamon-overview-context-item {
+    color: rgba(255,255,255,0.85);
+    border-radius: 8px;
+    padding: 7px 14px;
+}
+.overview-palette-tahoe .cinnamon-overview-context-item:hover {
+    background-color: rgba(96,165,250,0.18);
+    color: #60A5FA;
+}
+.overview-palette-tahoe .cinnamon-overview-context-sep {
+    background-color: rgba(255,255,255,0.08);
+    margin: 3px 12px;
+}
+
+/* ── News feed horizontal scrollbars — uniform 4px height on all rows ── */
+.cinnamon-overview-news-scroll StScrollBar {
+    min-height: 4px;
+    max-height: 4px;
+}
+.cinnamon-overview-news-scroll StScrollBar StBin {
+    min-height: 4px;
+    max-height: 4px;
+}
+.cinnamon-overview-news-scroll StScrollBar StButton {
+    min-height: 4px;
+    max-height: 4px;
+    background-color: rgba(255,255,255,0.25);
+    border-radius: 2px;
+    border: none;
+}
+.cinnamon-overview-news-scroll StScrollBar StButton:hover {
+    background-color: rgba(255,255,255,0.45);
+}
