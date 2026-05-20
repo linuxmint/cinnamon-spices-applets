@@ -33,7 +33,7 @@ const {
 
 const UUID = "multicore-sys-monitor@ccadeptic23";
 const HOME_DIR = GLib.get_home_dir();
-const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+const APPLET_DIR = GLib.get_user_data_dir() + "/cinnamon/applets/" + UUID;
 const PATH2SCRIPTS = APPLET_DIR + "/scripts";
 const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
 const NETWORK_DEVICES_STATUS_PATH = XDG_RUNTIME_DIR + "/network_devices";
@@ -267,6 +267,7 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("CPU_squared", "CPU_squared");
 
         this.settings.bind("CPU_showTemp", "CPU_showTemp");
+        this.settings.bind("CPU_showTempUnit", "CPU_showTempUnit");
         this.settings.bind("CPU_temp_hovering_only", "CPU_temp_hovering_only");
         this.settings.bind("CPU_tempInFahrenheit", "CPU_tempInFahrenheit");
         this.settings.bind("CPU_tempPath", "CPU_tempPath");
@@ -2097,7 +2098,9 @@ class MultiCpuDataProvider {
             trans += " (" + this.applet.CPU_loadAverage.toString().padStart(2) + " %)";
         if (this.applet.CPU_showTemp && this.applet.CPU_temperature) {
             let temperature = 1 * this.applet.CPU_temperature;
-            let degree = (this.applet.CPU_tempInFahrenheit) ?  "°F" : "°C";
+            let degree = "°";
+            if (this.applet.CPU_showTempUnit)
+                degree = (this.applet.CPU_tempInFahrenheit) ?  "°F" : "°C";
             temperature = "" + temperature + degree;
             trans += " " + temperature;
         }
