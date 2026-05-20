@@ -1210,11 +1210,15 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         // --- 1. /sys/class/thermal (Standard kernel interface) ---
         try {
             const thermalDir = Gio.File.new_for_path(SYS_THERMAL);
-            if (thermalDir.query_exists(null)) {
-                const enumerator = thermalDir.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
-                let fileInfo;
-                
-                while ((fileInfo = enumerator.next_file(null)) !== null) {
+            const enumerator = await this._enumerateChildrenAsync(thermalDir);
+            if (enumerator) {
+                const files = await new Promise(res => {
+                    enumerator.next_files_async(100, GLib.PRIORITY_DEFAULT, null, (obj, result) => {
+                        try { res(obj.next_files_finish(result)); } catch (e) { res([]); }
+                    });
+                });
+
+                for (const fileInfo of files) {
                 const zoneName = fileInfo.get_name();
                 const typePath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'type']);
                 const tempPath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'temp']);
@@ -1239,18 +1243,22 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                     }
                 }
             }
-                enumerator.close(null);
+                enumerator.close_async(GLib.PRIORITY_DEFAULT, null, null);
             }
         } catch (e) {}
         
         // --- 2. /sys/class/hwmon ---
         try {
             const hwmonDir = Gio.File.new_for_path(SYS_HWMON);
-            if (hwmonDir.query_exists(null)) {
-                const enumerator = hwmonDir.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
-                let fileInfo;
+            const enumerator = await this._enumerateChildrenAsync(hwmonDir);
+            if (enumerator) {
+                const files = await new Promise(res => {
+                    enumerator.next_files_async(100, GLib.PRIORITY_DEFAULT, null, (obj, result) => {
+                        try { res(obj.next_files_finish(result)); } catch (e) { res([]); }
+                    });
+                });
 
-                while ((fileInfo = enumerator.next_file(null)) !== null) {
+                for (const fileInfo of files) {
                 const hwmonPath = GLib.build_filenamev([SYS_HWMON, fileInfo.get_name()]);
                 let hwmonName = "";
                 try {
@@ -1264,11 +1272,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
 
                 for (let i = 1; i <= 25; i++) { // Increased limit for complex mainboards
                     const tempPath = GLib.build_filenamev([hwmonPath, `temp${i}_input`]);
-                    if (!Gio.File.new_for_path(tempPath).query_exists(null)) {
-                        continue;
-                    }
                     tempMilliC = await this._readTempFromFile(tempPath);
-                    
                     if (tempMilliC > 0) {
                         let tempLabel = "";
                         try {
@@ -1288,7 +1292,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                     }
                 }
             }
-                enumerator.close(null);
+                enumerator.close_async(GLib.PRIORITY_DEFAULT, null, null);
             }
         } catch (e) {}
 
@@ -1314,11 +1318,15 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         // --- 1. /sys/class/thermal (Standard kernel interface) ---
         try {
             const thermalDir = Gio.File.new_for_path(SYS_THERMAL);
-            if (thermalDir.query_exists(null)) {
-                const enumerator = thermalDir.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
-                let fileInfo;
-                
-                while ((fileInfo = enumerator.next_file(null)) !== null) {
+            const enumerator = await this._enumerateChildrenAsync(thermalDir);
+            if (enumerator) {
+                const files = await new Promise(res => {
+                    enumerator.next_files_async(100, GLib.PRIORITY_DEFAULT, null, (obj, result) => {
+                        try { res(obj.next_files_finish(result)); } catch (e) { res([]); }
+                    });
+                });
+
+                for (const fileInfo of files) {
                 const zoneName = fileInfo.get_name();
                 const typePath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'type']);
                 const tempPath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'temp']);
@@ -1341,18 +1349,22 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                     }
                 }
             }
-                enumerator.close(null);
+                enumerator.close_async(GLib.PRIORITY_DEFAULT, null, null);
             }
         } catch (e) {}
         
         // --- 2. /sys/class/hwmon ---
         try {
             const hwmonDir = Gio.File.new_for_path(SYS_HWMON);
-            if (hwmonDir.query_exists(null)) {
-                const enumerator = hwmonDir.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
-                let fileInfo;
+            const enumerator = await this._enumerateChildrenAsync(hwmonDir);
+            if (enumerator) {
+                const files = await new Promise(res => {
+                    enumerator.next_files_async(100, GLib.PRIORITY_DEFAULT, null, (obj, result) => {
+                        try { res(obj.next_files_finish(result)); } catch (e) { res([]); }
+                    });
+                });
 
-                while ((fileInfo = enumerator.next_file(null)) !== null) {
+                for (const fileInfo of files) {
                 const hwmonPath = GLib.build_filenamev([SYS_HWMON, fileInfo.get_name()]);
                 let hwmonName = "";
                 try {
@@ -1366,12 +1378,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
 
                 for (let i = 1; i <= 25; i++) {
                     const tempPath = GLib.build_filenamev([hwmonPath, `temp${i}_input`]);
-                    const tempFile = Gio.File.new_for_path(tempPath);
-                    if (!tempFile.query_exists(null)) {
-                        continue;
-                    }
                     tempMilliC = await this._readTempFromFile(tempPath);
-                    
                     if (tempMilliC > 0) {
                         let tempLabel = "";
                         try {
@@ -1391,7 +1398,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                     }
                 }
             }
-                enumerator.close(null);
+                enumerator.close_async(GLib.PRIORITY_DEFAULT, null, null);
             }
         } catch (e) {}
 
