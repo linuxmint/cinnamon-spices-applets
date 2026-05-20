@@ -207,6 +207,9 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         this._tempActor = null; 
         this._gpuActor = null; // NEW: GPU Actor
 
+        this._currentTemp = -1; 
+        this._currentGpu = -1;
+
         this._buildUI(); 
         this._bindSettings();
         this._start();
@@ -1202,16 +1205,16 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         let bestIsPriority = false;
 
         const priorityKeywords = ['package', 'cpu', 'core', 'die', 'tdie', 'tctl'];
-        const blacklist = ['nvme', 'iwlwifi', 'pch', 'gpu', 'nouveau', 'nvidia', 'amdgpu', 'wireless'];
+        const blacklist = ['nvme', 'iwlwifi', 'pch', 'nouveau', 'nvidia', 'wireless'];
 
         // --- 1. /sys/class/thermal (Standard kernel interface) ---
         try {
             const thermalDir = Gio.File.new_for_path(SYS_THERMAL);
-            const enumerator = await this._enumerateChildrenAsync(thermalDir);
-            let fileInfo;
-            
-            if (enumerator) {
-                while ((fileInfo = enumerator.next_file(null))) {
+            if (thermalDir.query_exists(null)) {
+                const enumerator = thermalDir.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
+                let fileInfo;
+                
+                while ((fileInfo = enumerator.next_file(null)) !== null) {
                 const zoneName = fileInfo.get_name();
                 const typePath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'type']);
                 const tempPath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'temp']);
@@ -1236,17 +1239,18 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                     }
                 }
             }
+                enumerator.close(null);
             }
         } catch (e) {}
         
         // --- 2. /sys/class/hwmon ---
         try {
             const hwmonDir = Gio.File.new_for_path(SYS_HWMON);
-            const enumerator = await this._enumerateChildrenAsync(hwmonDir);
-            let fileInfo;
-            
-            if (enumerator) {
-                while ((fileInfo = enumerator.next_file(null))) {
+            if (hwmonDir.query_exists(null)) {
+                const enumerator = hwmonDir.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
+                let fileInfo;
+
+                while ((fileInfo = enumerator.next_file(null)) !== null) {
                 const hwmonPath = GLib.build_filenamev([SYS_HWMON, fileInfo.get_name()]);
                 let hwmonName = "";
                 try {
@@ -1260,6 +1264,9 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
 
                 for (let i = 1; i <= 25; i++) { // Increased limit for complex mainboards
                     const tempPath = GLib.build_filenamev([hwmonPath, `temp${i}_input`]);
+                    if (!Gio.File.new_for_path(tempPath).query_exists(null)) {
+                        continue;
+                    }
                     tempMilliC = await this._readTempFromFile(tempPath);
                     
                     if (tempMilliC > 0) {
@@ -1281,6 +1288,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                     }
                 }
             }
+                enumerator.close(null);
             }
         } catch (e) {}
 
@@ -1306,11 +1314,11 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         // --- 1. /sys/class/thermal (Standard kernel interface) ---
         try {
             const thermalDir = Gio.File.new_for_path(SYS_THERMAL);
-            const enumerator = await this._enumerateChildrenAsync(thermalDir);
-            let fileInfo;
-            
-            if (enumerator) {
-                while ((fileInfo = await new Promise(res => enumerator.next_file_async(GLib.PRIORITY_DEFAULT, null, (e, r) => res(e.next_file_finish(r)))))) {
+            if (thermalDir.query_exists(null)) {
+                const enumerator = thermalDir.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
+                let fileInfo;
+                
+                while ((fileInfo = enumerator.next_file(null)) !== null) {
                 const zoneName = fileInfo.get_name();
                 const typePath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'type']);
                 const tempPath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'temp']);
@@ -1322,9 +1330,6 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                     if (success) type = DECODER.decode(contents).trim().toLowerCase();
                 } catch (e) {}
                 
-                // Modified condition: Only blacklist truly non-GPU sensors.
-                // We want to consider all other sensors as potential GPU candidates,
-                // and then prioritize those with GPU keywords.
                 if (blacklist.some(b => type.includes(b))) continue;
 
                 tempMilliC = await this._readTempFromFile(tempPath);
@@ -1336,17 +1341,18 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                     }
                 }
             }
+                enumerator.close(null);
             }
         } catch (e) {}
         
         // --- 2. /sys/class/hwmon ---
         try {
             const hwmonDir = Gio.File.new_for_path(SYS_HWMON);
-            const enumerator = await this._enumerateChildrenAsync(hwmonDir);
-            let fileInfo;
-            
-            if (enumerator) {
-                while ((fileInfo = enumerator.next_file(null))) {
+            if (hwmonDir.query_exists(null)) {
+                const enumerator = hwmonDir.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
+                let fileInfo;
+
+                while ((fileInfo = enumerator.next_file(null)) !== null) {
                 const hwmonPath = GLib.build_filenamev([SYS_HWMON, fileInfo.get_name()]);
                 let hwmonName = "";
                 try {
@@ -1356,11 +1362,14 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                     if (success) hwmonName = DECODER.decode(contents).trim().toLowerCase();
                 } catch (e) {}
 
-                // Modified condition: Only blacklist truly non-GPU sensors.
                 if (blacklist.some(b => hwmonName.includes(b))) continue;
 
                 for (let i = 1; i <= 25; i++) {
                     const tempPath = GLib.build_filenamev([hwmonPath, `temp${i}_input`]);
+                    const tempFile = Gio.File.new_for_path(tempPath);
+                    if (!tempFile.query_exists(null)) {
+                        continue;
+                    }
                     tempMilliC = await this._readTempFromFile(tempPath);
                     
                     if (tempMilliC > 0) {
@@ -1372,7 +1381,6 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                             if (success) tempLabel = DECODER.decode(contents).trim().toLowerCase();
                         } catch (e) {}
 
-                        // Modified condition: Only blacklist truly non-GPU sensors.
                         if (blacklist.some(b => tempLabel.includes(b))) continue;
 
                         const isPriority = priorityKeywords.some(k => tempLabel.includes(k) || hwmonName.includes(k));
@@ -1383,33 +1391,35 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                     }
                 }
             }
+                enumerator.close(null);
             }
         } catch (e) {}
 
         // --- 3. nvidia-smi Fallback (Proprietary Drivers) ---
         if (bestTempMilliC <= 0) {
-            try {
-                let proc = new Gio.Subprocess({
-                    argv: ['nvidia-smi', '--query-gpu=temperature.gpu', '--format=csv,noheader,nounits'],
-                    flags: Gio.SubprocessFlags.STDOUT_PIPE
-                });
-                proc.init(null);
-                let [stdout] = await new Promise((resolve, reject) => {
-                    proc.communicate_utf8_async(null, null, (p, res) => {
-                        try {
-                            resolve(p.communicate_utf8_finish(res));
-                        } catch (e) {
-                            reject(e);
-                        }
+            if (GLib.find_program_in_path('nvidia-smi')) {
+                try {
+                    let proc = Gio.Subprocess.new(
+                        ['nvidia-smi', '--query-gpu=temperature.gpu', '--format=csv,noheader,nounits'],
+                        Gio.SubprocessFlags.STDOUT_PIPE
+                    );
+                    let [stdout] = await new Promise((resolve) => {
+                        proc.communicate_utf8_async(null, null, (p, res) => {
+                            try {
+                                resolve(p.communicate_utf8_finish(res));
+                            } catch (e) {
+                                resolve([null, null]);
+                            }
+                        });
                     });
-                });
-                if (stdout) {
-                    let val = parseInt(stdout.trim());
-                    if (!isNaN(val) && val > 0) {
-                        return val;
+                    if (stdout) {
+                        let val = parseInt(stdout.trim());
+                        if (!isNaN(val) && val > 0) {
+                            return val;
+                        }
                     }
-                }
-            } catch (e) {}
+                } catch (e) {}
+            }
         }
 
         if (bestTempMilliC > 0) return bestTempMilliC / 1000;
@@ -1436,6 +1446,9 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             this._getGPUTempData() // NEW: GPU Temp
         ]);
         
+        this._currentTemp = tempData;
+        this._currentGpu = gpuData;
+
         // 2. Format and display values
         
         // CPU
@@ -1608,18 +1621,11 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             gpuDisplayText 
         );
 
-        // 3. Re-apply layout, as SWAP visibility might have changed
-        if (this._hasRunOnce) {
-            // Only execute if there was a change in SWAP visibility
-            const currentSwapVisible = this._swapActor.visible;
-            const expectedSwapVisible = this.showSwap && (!this.swapOnlyWhenUsed || this._lastSwapPercent > 0);
-            
-            // Check visibility change against the last known actor state (not strictly accurate as 'visible' is set later, but captures the intent)
-            if (currentSwapVisible !== expectedSwapVisible) {
-                this._applyOrderToBox();
-            }
-        } else {
-            // Always apply layout on the first run
+        // 3. Layout neu anwenden, wenn sich Sichtbarkeiten (SWAP, TEMP, GPU) geändert haben
+        const currentSwapVisible = this._swapActor.visible;
+        const expectedSwapVisible = this.showSwap && (!this.swapOnlyWhenUsed || this._lastSwapPercent > 0);
+
+        if (currentSwapVisible !== expectedSwapVisible || !this._hasRunOnce) {
             this._applyOrderToBox();
             this._hasRunOnce = true;
         }
