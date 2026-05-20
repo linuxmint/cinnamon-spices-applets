@@ -10,7 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../combined-monitor@danipin/applet.js:155
 msgid "Slot 1 (Standard)"
@@ -110,8 +111,264 @@ msgstr "Н/Д"
 msgid "Decimal places for temperature"
 msgstr "Десятичные знаки для температуры"
 
-msgid "Number of decimal places to display for temperature. Set to 0 for whole numbers."
-msgstr "Количество десятичных знаков для отображения температуры. Установите 0 для целых чисел."
+msgid ""
+"Number of decimal places to display for temperature. Set to 0 for whole "
+"numbers."
+msgstr ""
+"Количество десятичных знаков для отображения температуры. Установите 0 для "
+"целых чисел."
 
 msgid "decimal places"
 msgstr "десятичных знака"
+
+# Page Titles
+msgid "CPU Temperature"
+msgstr "Температура ЦП"
+
+msgid "GPU Temperature"
+msgstr "Температура ГПУ"
+
+msgid "Profiles"
+msgstr "Профили"
+
+msgid "General"
+msgstr "Общие"
+
+# Section Titles
+msgid "Order of Metrics"
+msgstr "Порядок метрик"
+
+msgid "Display"
+msgstr "Экран"
+
+# CPU
+msgid "Show CPU"
+msgstr "Показывать ЦП"
+
+msgid "Text for CPU"
+msgstr "Текст для ЦП"
+
+msgid "Custom symbol/icon for CPU. Leave empty for text label."
+msgstr ""
+"Пользовательский символ/иконка для ЦП. Оставьте пустым для текстовой метки."
+
+msgid "Show percentage sign (%) for CPU"
+msgstr "Показывать знак процента (%) для ЦП"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed without the percentage "
+"sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in "
+"the 'General' tab acts as a master switch."
+msgstr ""
+"Если отключено, отображается только значение (например, '45') без знака "
+"процента (например, '45%'). Опция 'Показывать знак процента (%) (Главный "
+"переключатель)' на вкладке 'Общие' действует как главный переключатель."
+
+msgid "Threshold LOW"
+msgstr "Низкий порог"
+
+msgid "The LOW color is used below this value"
+msgstr "Цвет НИЗКОГО уровня используется ниже этого значения"
+
+msgid "Threshold MED"
+msgstr "Средний порог"
+
+msgid "The MED color is used between LOW and MED"
+msgstr "Цвет СРЕДНЕГО уровня используется между НИЗКИМ и СРЕДНИМ"
+
+msgid "Threshold HIGH"
+msgstr "Высокий порог"
+
+msgid "The HIGH color is used between MED and HIGH"
+msgstr "Цвет ВЫСОКОГО уровня используется между СРЕДНИМ и ВЫСОКИМ"
+
+msgid "Color LOW"
+msgstr "Цвет: НИЗКИЙ"
+
+msgid "Color MED"
+msgstr "Цвет: СРЕДНИЙ"
+
+msgid "Color HIGH"
+msgstr "Цвет: ВЫСОКИЙ"
+
+msgid "Color CRITICAL"
+msgstr "Цвет: КРИТИЧЕСКИЙ"
+
+msgid "Enable color change for CPU"
+msgstr "Включить изменение цвета для ЦП"
+
+msgid "Used above the HIGH threshold"
+msgstr "Используется выше ВЫСОКОГО порога"
+
+# TEMP
+msgid "Show Temperature"
+msgstr "Показывать температуру"
+
+msgid ""
+"Enables the display of CPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Please refer to the "
+"instructions in the README.md."
+msgstr ""
+"Включает отображение температуры ЦП. **Важно:** Во многих системах для "
+"корректной работы этой функции необходимо установить пакет 'lm-sensors' и "
+"запустить 'sudo sensors-detect'. Пожалуйста, ознакомьтесь с инструкциями в "
+"README.md."
+
+msgid "Enable color change for TEMP"
+msgstr "Включить изменение цвета для ТЕМП"
+
+# RAM
+msgid "Show RAM"
+msgstr "Показывать ОЗУ"
+
+msgid "Text for RAM"
+msgstr "Текст для ОЗУ"
+
+msgid "Custom symbol/icon for RAM. Leave empty for text label."
+msgstr ""
+"Пользовательский символ/иконка для ОЗУ. Оставьте пустым для текстовой метки."
+
+msgid "Show percentage sign (%) for RAM"
+msgstr "Показывать знак процента (%) для ОЗУ"
+
+msgid "Display Mode"
+msgstr "Режим отображения"
+
+msgid "Percentage Usage (%)"
+msgstr "Процент использования (%)"
+
+msgid "Used Memory (MB/GB)"
+msgstr "Использованная память (МБ/ГБ)"
+
+msgid "Free Memory (MB/GB)"
+msgstr "Свободная память (МБ/ГБ)"
+
+msgid ""
+"Choose whether percentage usage or used/free memory in MB/GB should be "
+"displayed."
+msgstr ""
+"Выберите, что отображать: процент использования или объем использованной/"
+"свободной памяти в МБ/ГБ."
+
+# SWAP
+msgid "Show SWAP"
+msgstr "Показывать SWAP"
+
+msgid "Text for SWAP"
+msgstr "Текст для SWAP"
+
+msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+msgstr ""
+"Пользовательский символ/иконка для SWAP. Оставьте пустым для текстовой метки."
+
+msgid "Only show SWAP when used"
+msgstr "Показывать SWAP только когда используется"
+
+msgid "If active, it only shows SWAP when usage is greater than 0%."
+msgstr "Если активно, SWAP отображается только при использовании более 0%."
+
+# Order
+msgid "CPU Position"
+msgstr "Позиция ЦП"
+
+msgid "Position 1 (Left)"
+msgstr "Позиция 1 (Слева)"
+
+msgid "Position 2"
+msgstr "Позиция 2"
+
+msgid "Position 3"
+msgstr "Позиция 3"
+
+msgid "Position 4 (Right)"
+msgstr "Позиция 4 (Справа)"
+
+msgid "Position 5"
+msgstr "Позиция 5"
+
+msgid ""
+"Defines the display position of CPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr ""
+"Определяет позицию отображения ЦП. Позиция автоматически меняется местами с "
+"метрикой, находящейся на той же позиции."
+
+msgid "TEMP Position"
+msgstr "Позиция ТЕМП"
+
+msgid "RAM Position"
+msgstr "Позиция ОЗУ"
+
+msgid "SWAP Position"
+msgstr "Позиция SWAP"
+
+# General
+msgid "Show separator between metrics"
+msgstr "Показывать разделитель между метриками"
+
+msgid "Separator Text"
+msgstr "Текст разделителя"
+
+msgid "Separator Color"
+msgstr "Цвет разделителя"
+
+msgid "Show percentage sign (%) (Master Switch)"
+msgstr "Показывать знак процента (%) (Главный переключатель)"
+
+# Profiles
+msgid "Profile Message Duration (Seconds)"
+msgstr "Длительность сообщения профиля (секунды)"
+
+msgid "Profile 1 Name"
+msgstr "Имя профиля 1"
+
+msgid "Enter a custom profile name in the text field!"
+msgstr "Введите пользовательское имя профиля в текстовое поле!"
+
+msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+msgstr ""
+"Нажмите 'Активировать' или 'Сохранить' для Профиля 1 во всплывающем меню."
+
+msgid "Saved data for Profile 1 (internal)"
+msgstr "Сохраненные данные для Профиля 1 (внутренние)"
+
+msgid "Profile 2 Name"
+msgstr "Имя профиля 2"
+
+msgid "Profile 3 Name"
+msgstr "Имя профиля 3"
+
+# metadata.json strings
+msgid "Combined Monitor"
+msgstr "Комбинированный монитор"
+
+msgid ""
+"A compact and comprehensive system monitor for Cinnamon. Displays CPU, RAM, "
+"and SWAP usage in a single panel element. Configure colors, thresholds, "
+"separators, and the order of metrics. Supports displaying text, theme icons, "
+"or custom symbols for perfect integration into your panel."
+msgstr ""
+"Компактный и всеобъемлющий системный монитор для Cinnamon. Отображает "
+"использование ЦП, ОЗУ и SWAP в одном элементе панели. Настройте цвета, "
+"пороговые значения, разделители и порядок метрик. Поддерживает отображение "
+"текста, тематических значков или пользовательских символов для идеальной "
+"интеграции в вашу панель."
+
+# GPU
+msgid "Show GPU Temperature"
+msgstr "Показывать температуру ГПУ"
+
+msgid ""
+"Enables the display of GPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Integrated GPUs (iGPUs) may "
+"report their temperature as part of the CPU temperature."
+msgstr ""
+"Включает отображение температуры ГПУ. **Важно:** Во многих системах для "
+"корректной работы этой функции необходимо установить пакет 'lm-sensors' и "
+"запустить 'sudo sensors-detect'. Интегрированные ГПУ (iGPU) могут сообщать "
+"свою температуру как часть температуры ЦП."
+
+msgid "GPU Position"
+msgstr "Позиция ГПУ"
