@@ -1,0 +1,326 @@
+# Chinese Simplified translation for mint-screenshot.
+# Copyright (C) 2026 mint-screenshot contributors
+# This file is distributed under the same license as the mint-screenshot package.
+# Auto-generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mint-screenshot\n"
+"Report-Msgid-Bugs-To: khumnath@gmail.com\n"
+"POT-Creation-Date: 2026-04-23 19:12+0545\n"
+"PO-Revision-Date: 2026-04-22 18:27+0545\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: app.py:49
+msgid "Reset Everything?"
+msgstr "重置所有内容？"
+
+#: app.py:51
+msgid "This will clear all annotations and return to the launcher."
+msgstr "这将清除所有标注并返回启动器。"
+
+#: app.py:191
+msgid "Mint Screenshot — Wayland Error"
+msgstr "Mint 截图 — Wayland 错误"
+
+#: canvas.py:461
+msgid "Edit Text:"
+msgstr "编辑文本："
+
+#: canvas.py:461
+msgid "Enter text to insert:"
+msgstr "请输入要插入的文本："
+
+#: capture.py:53
+msgid "D-Bus is required for Wayland support."
+msgstr "Wayland 支持需要 D-Bus。"
+
+#: capture.py:171
+msgid ""
+"Failed to load captured screenshot:\n"
+"{}"
+msgstr ""
+"无法加载捕获的截图：\n"
+"{}"
+
+#: editor.py:119
+msgid "Custom Timer"
+msgstr "自定义计时器"
+
+#: editor.py:133
+msgid "Enter delay in seconds:"
+msgstr "请输入延迟秒数："
+
+#: editor.py:338 editor.py:795
+msgid "Saving..."
+msgstr "正在保存..."
+
+#: editor.py:455
+msgid "Pointer"
+msgstr "指针"
+
+#: editor.py:456
+msgid "Rectangle"
+msgstr "矩形"
+
+#: editor.py:457
+msgid "Ellipse"
+msgstr "椭圆"
+
+#: editor.py:458
+msgid "Arrow"
+msgstr "箭头"
+
+#: editor.py:459
+msgid "Draw"
+msgstr "画笔"
+
+#: editor.py:460
+msgid "Highlight"
+msgstr "荧光笔"
+
+#: editor.py:461
+msgid "Text Tool"
+msgstr "文本工具"
+
+#: editor.py:494
+msgid "Blue"
+msgstr "蓝色"
+
+#: editor.py:495
+msgid "Red"
+msgstr "红色"
+
+#: editor.py:496
+msgid "Green"
+msgstr "绿色"
+
+#: editor.py:497
+msgid "Yellow"
+msgstr "黄色"
+
+#: editor.py:498
+msgid "White"
+msgstr "白色"
+
+#: editor.py:499
+msgid "Black"
+msgstr "黑色"
+
+#: editor.py:529
+msgid "Size"
+msgstr "大小"
+
+#: editor.py:542
+msgid "Reset All"
+msgstr "全部重置"
+
+#: editor.py:543
+msgid "Undo"
+msgstr "撤销"
+
+#: editor.py:544
+msgid "Copy"
+msgstr "复制"
+
+#: editor.py:545
+msgid "Save"
+msgstr "保存"
+
+#: editor.py:546
+msgid "Settings"
+msgstr "设置"
+
+#: editor.py:547 launcher.py:144
+msgid "Close"
+msgstr "关闭"
+
+#: editor.py:573
+msgid "Move Toolbar Top/Bottom"
+msgstr "工具栏移至顶部/底部"
+
+#: editor.py:596
+msgid "Save Format"
+msgstr "保存格式"
+
+#: editor.py:609
+msgid "Image Quality"
+msgstr "图像质量"
+
+#: editor.py:614
+msgid "Space Saver (Small)"
+msgstr "节省空间（小）"
+
+#: editor.py:616
+msgid "Medium"
+msgstr "中等"
+
+#: editor.py:618
+msgid "Original"
+msgstr "原始"
+
+#: editor.py:629
+msgid "Save Folder: {}..."
+msgstr "保存文件夹：{}..."
+
+#: editor.py:634
+msgid "Show Toolbar Labels"
+msgstr "显示工具栏标签"
+
+#: editor.py:642
+msgid "About Mint Screenshot"
+msgstr "关于 Mint 截图"
+
+#: editor.py:663
+msgid "Select Default Save Folder"
+msgstr "选择默认保存文件夹"
+
+#: editor.py:667
+msgid "Select"
+msgstr "选择"
+
+#: editor.py:692 launcher.py:79 main.py:159
+msgid "Mint Screenshot"
+msgstr "Mint 截图"
+
+#: editor.py:694
+msgid ""
+"Screenshot & Annotation Tool\n"
+"Capture, annotate, and share with ease."
+msgstr ""
+"Cinnamon 截图与标注工具\n"
+"轻松截图、标注和分享。"
+
+#: editor.py:696
+msgid "Project on GitHub"
+msgstr "GitHub 上的项目"
+
+#: editor.py:718
+msgid "Open External Website?"
+msgstr "打开外部网站？"
+
+#: editor.py:721
+msgid "This will exit the current screenshot process. Do you want to continue?"
+msgstr "这将退出当前截图流程。是否要继续？"
+
+#: editor.py:765
+msgid "Save Screenshot"
+msgstr "保存截图"
+
+#: editor.py:795
+msgid "Copying..."
+msgstr "正在复制..."
+
+#: editor.py:855
+msgid "Copied"
+msgstr "已复制"
+
+#: editor.py:864
+msgid "Screenshot Saved"
+msgstr "截图已保存"
+
+#: editor.py:865
+msgid "Saved to {}"
+msgstr "已保存至 {}"
+
+#: launcher.py:83
+msgid "Wayland Mode — Capture via Desktop Portal"
+msgstr "Wayland 模式 — 通过桌面门户截图"
+
+#: launcher.py:83
+msgid "X11 Mode — Instant Pixel Capture"
+msgstr "X11 模式 — 即时像素截图"
+
+#: launcher.py:92
+msgid "Hint: Pick 'Screen' in the portal to capture overlapping windows."
+msgstr "提示：在门户中选择 'Screen' 以捕获重叠窗口。"
+
+#: launcher.py:105
+msgid "Select Monitor:"
+msgstr "选择显示器："
+
+#: launcher.py:107
+msgid "All Monitors"
+msgstr "所有显示器"
+
+#: launcher.py:109
+msgid "Monitor {}"
+msgstr "显示器 {}"
+
+#: launcher.py:115
+msgid "📸  Capture Fullscreen"
+msgstr "📸  全屏截图"
+
+#: launcher.py:120
+msgid "✂️  Select Area"
+msgstr "✂️  选择区域"
+
+#: launcher.py:127
+msgid "⏱  Timed Capture"
+msgstr "⏱  定时截图"
+
+#: launcher.py:134
+msgid "sec"
+msgstr "秒"
+
+#: main.py:117
+msgid ""
+"The following dependencies are missing:\n"
+"\n"
+"{}\n"
+"\n"
+"Please install them using your system's package manager.\n"
+"(Debian/Ubuntu package names shown as reference)"
+msgstr ""
+"缺少以下依赖项：\n"
+"\n"
+"{}\n"
+"\n"
+"请使用系统的包管理器安装。\n"
+"（显示的是 Debian/Ubuntu 包名，仅供参考）"
+
+#: main.py:120
+msgid ""
+"The following dependencies are missing:\n"
+"\n"
+"{}\n"
+"\n"
+"Please install them using your package manager:\n"
+"  {} {}"
+msgstr ""
+"缺少以下依赖项：\n"
+"\n"
+"{}\n"
+"\n"
+"请使用包管理器安装：\n"
+"  {} {}"
+
+#: main.py:126
+msgid "Mint Screenshot \\u2014 Missing Dependencies"
+msgstr "Mint 截图 \\u2014 缺少依赖项"
+
+#~ msgid "Mint Screenshot — Click to capture"
+#~ msgstr "Mint 截图 — 点击截图"
+
+#~ msgid ""
+#~ "Screenshot & annotation tool for Cinnamon. Timed capture, region "
+#~ "selection, and drawing tools."
+#~ msgstr "Cinnamon 截图与标注工具。支持定时截图、区域选择和绘图工具。"
+
+#~ msgid ""
+#~ "Capture, annotate, and share screenshots with ease. Supports timed "
+#~ "capture, custom countdown, and Material Design toolbar."
+#~ msgstr ""
+#~ "轻松截图、标注和分享。支持定时截图、自定义倒计时和 Material Design 工具"
+#~ "栏。"
+
+#~ msgid "Default Save Directory"
+#~ msgstr "默认保存目录"
+
+#~ msgid "Automatically copy to clipboard on save"
+#~ msgstr "保存时自动复制到剪贴板"
