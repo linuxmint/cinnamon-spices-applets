@@ -1,8 +1,9 @@
 {
     "default-save-directory": {
-        "type": "directory",
+        "type": "filechooser",
         "default": "~/Pictures/Screenshots",
-        "description": "Default Save Directory"
+        "description": "Default Save Directory",
+        "select-dir": true
     },
     "auto-copy-to-clipboard": {
         "type": "checkbox",

@@ -3,6 +3,7 @@ import sys
 import os
 import json
 import time
+import signal
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -152,7 +153,49 @@ def _cleanup_tmp_files():
                 os.remove(f)
     except Exception: pass
 
+LOCK_FILE = os.path.join("/tmp", "mint-screenshot.lock")
+
+def _is_already_running():
+    """Check if another instance is running. If so, signal it to raise its window."""
+    if os.path.exists(LOCK_FILE):
+        try:
+            with open(LOCK_FILE) as f:
+                old_pid = int(f.read().strip())
+            # Send SIGUSR1 to the running instance — it will raise its own window
+            os.kill(old_pid, signal.SIGUSR1)
+        except (ValueError, ProcessLookupError, PermissionError, OSError):
+            # Stale lock file — previous instance is gone
+            return False
+        return True
+    return False
+
+def _write_lock():
+    """Write our PID to the lock file."""
+    try:
+        with open(LOCK_FILE, 'w') as f:
+            f.write(str(os.getpid()))
+    except Exception:
+        pass
+
+def _remove_lock():
+    """Remove the lock file on exit."""
+    try:
+        if os.path.exists(LOCK_FILE):
+            with open(LOCK_FILE) as f:
+                pid = int(f.read().strip())
+            if pid == os.getpid():
+                os.remove(LOCK_FILE)
+    except Exception:
+        pass
+
 if __name__ == "__main__":
+    # --- Single-instance guard ---
+    if _is_already_running():
+        sys.exit(0)
+    _write_lock()
+    import atexit
+    atexit.register(_remove_lock)
+
     # Set identification for the window manager (Cinnamon panel/taskbar)
     from gi.repository import GLib
     GLib.set_prgname("mint-screenshot-tool")
@@ -194,8 +237,46 @@ if __name__ == "__main__":
         # argv[1] is an optional save directory override passed by applet.js
         save_dir = sys.argv[1] if len(sys.argv) > 1 else None
         overlay = ScreenshotOverlay(save_dir_override=save_dir)
+
+        # Handle SIGUSR1 from duplicate launches: present and focus our window
+        def _on_raise_signal(signum, frame):
+            from gi.repository import GLib
+            def _present():
+                def _raise_win(w):
+                    """Raise and focus a window, handling both X11 and Wayland."""
+                    w.deiconify()
+                    if IS_WAYLAND:
+                        w.present()
+                    else:
+                        from gi.repository import Gdk
+                        try:
+                            ts = Gdk.x11_get_server_time(
+                                Gdk.get_default_root_window())
+                        except Exception:
+                            ts = 0
+                        w.present_with_time(ts)
+
+                # The visible window depends on the current state:
+                # launcher state → overlay.launcher, editor state → overlay itself
+                win = getattr(overlay, 'launcher', None)
+                if win and win.get_visible():
+                    _raise_win(win)
+                elif win and not win.get_visible():
+                    win.show_all()
+                    _raise_win(win)
+                elif overlay.get_visible():
+                    _raise_win(overlay)
+                else:
+                    overlay._show_launcher()
+                return False
+            GLib.idle_add(_present)
+
+        signal.signal(signal.SIGUSR1, _on_raise_signal)
+
         Gtk.main()
     except Exception as e:
         # If startup crashes, re-check deps in case something is missing
         _check_dependencies(force=True)
         raise
+    finally:
+        _remove_lock()
