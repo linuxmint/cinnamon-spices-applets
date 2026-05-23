@@ -1,3 +1,9 @@
+### v3.16.0~20260523
+  * Ready for Linux Mint 23.
+
+### v3.15.4~20260520
+  * New option: Show the tooltip immediately.
+
 ### v3.15.3~20260514
   * New option: Display the temperature unit.
   * Fixes [#8679](https://github.com/linuxmint/cinnamon-spices-applets/issues/8679)

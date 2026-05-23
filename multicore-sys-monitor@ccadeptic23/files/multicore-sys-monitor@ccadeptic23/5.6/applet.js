@@ -15,21 +15,30 @@ const windowTracker = imports.gi.Cinnamon.WindowTracker.get_default();
 const Util = imports.misc.util;
 const St = imports.gi.St;
 const Gtk = imports.gi.Gtk;
-const {
-  reloadExtension,
-  Type
-} = imports.ui.extension; //Extension
+const Extension = imports.ui.extension;
+//~ const {
+  //~ reloadExtension,
+  //~ Type
+//~ } = imports.ui.extension; //Extension
 
-const { to_string } = require("./lib/tostring");
-const { readFileAsync } = require("./lib/readFileAsync");
-const Graphs = require("./lib/Graphs");
-const {
+function _require(relPath) {
+    if (Extension.getCurrentExtension) {
+        var Me = Extension.getCurrentExtension();
+        return Me.imports[relPath];
+    } else {
+        return require(relPath);
+    }
+}
+var { to_string } = _require("./lib/tostring");
+var { readFileAsync } = _require("./lib/readFileAsync");
+var Graphs = _require("./lib/Graphs");
+var {
   timeout_add,
   setTimeout,
   clearTimeout,
   source_exists,
   source_remove,
-  remove_all_sources } = require("./lib/mainloopTools");
+  remove_all_sources } = _require("./lib/mainloopTools");
 
 const UUID = "multicore-sys-monitor@ccadeptic23";
 const HOME_DIR = GLib.get_home_dir();
@@ -220,6 +229,7 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("graphStep", "graphStep");
         this.settings.bind("graphSpacing", "graphSpacing");
         this.settings.bind("CPU_groupInSetsOf4", "CPU_groupInSetsOf4");
+        this.settings.bind("quickTooltip", "quickTooltip");
         this.settings.bind("percentAtEndOfLine", "percentAtEndOfLine");
         this.settings.bind("tooltipFontSize", "tooltipFontSize", () => { this.setTooltipStyle(); });
         this.settings.bind("tooltipChangeBackgroundColor", "tooltipChangeBackgroundColor", () => { this.setTooltipStyle(); });
@@ -485,16 +495,19 @@ class MCSM extends Applet.TextIconApplet {
         this._applet_label.connect("motion-event", (actor, event) => {
             this.hovered = true;
             this._applet_tooltip.preventShow = false;
+            if (!this.quickTooltip) return;
             this._applet_tooltip.show()
         });
         this.actor.connect("motion-event", (actor, event) => {
             this.hovered = true;
             this._applet_tooltip.preventShow = false;
+            if (!this.quickTooltip) return;
             this._applet_tooltip.show()
         });
         this._applet_tooltip._onMotionEvent = function(actor, event) {
             this.hovered = true;
             this._applet_tooltip.preventShow = false;
+            if (!this.quickTooltip) return;
             this._applet_tooltip.show()
         };
         this.actor.connect("enter-event", (actor, event) => {
@@ -507,6 +520,7 @@ class MCSM extends Applet.TextIconApplet {
             }
             this._applet_tooltip.preventShow = false;
             this._setTooltip();
+            if (!this.quickTooltip) return;
             this._applet_tooltip.show();
         });
         this.actor.connect("leave-event", (actor, event) => {
@@ -1758,7 +1772,7 @@ class MCSM extends Applet.TextIconApplet {
     }
 
     refreshAll() {
-        reloadExtension(UUID, Type.APPLET);
+        Extension.reloadExtension(UUID, Extension.Type.APPLET);
     }
 
     on_panel_height_changed() {

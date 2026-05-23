@@ -2,8 +2,9 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const ByteArray = imports.byteArray;
+const Extension = imports.ui.extension;
 
-const readFileAsync = function(file, opts = {utf8: true}) {
+var readFileAsync = function(file, opts = {utf8: true}) {
     const {utf8} = opts;
     return new Promise(function(resolve, reject) {
         if (typeof file === 'string' || file instanceof String) {
@@ -26,10 +27,12 @@ const readFileAsync = function(file, opts = {utf8: true}) {
     });
 };
 
-const readJSONAsync = function(file) {
+var readJSONAsync = function(file) {
     return readFileAsync(file).then(function(json) {
         return JSON.parse(json);
     });
 };
 
-module.exports = { readFileAsync, readJSONAsync }
+if (!Extension.getCurrentExtension) {
+    module.exports = { readFileAsync, readJSONAsync }
+}
