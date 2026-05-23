@@ -1,6 +1,7 @@
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
+const Util = imports.misc.util;
 const St = imports.gi.St;
 const Soup = imports.gi.Soup;
 const Gio = imports.gi.Gio;
@@ -12,7 +13,7 @@ const UUID = "duolingo-helper@nodeengineer.com";
 const APPLET_PATH = global.userdatadir + "/applets/" + UUID;
 const UPDATE_INTERVAL_SECONDS = 300;
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 function _(str) {
   return Gettext.dgettext(UUID, str);
@@ -317,7 +318,7 @@ MyApplet.prototype = {
 
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
     let openDuolingo = new PopupMenu.PopupMenuItem(_("Open Duolingo"));
-    openDuolingo.connect("activate", () => GLib.spawn_command_line_async("xdg-open 'https://duolingo.com'"));
+    openDuolingo.connect("activate", () => Util.spawn(["xdg-open", "https://duolingo.com"]));
     this.menu.addMenuItem(openDuolingo);
 
     let refreshNow = new PopupMenu.PopupMenuItem(_("Refresh now"));
@@ -327,7 +328,7 @@ MyApplet.prototype = {
 
   openProfile: function(username) {
     let url = "https://www.duolingo.com/profile/" + encodeURIComponent(username);
-    GLib.spawn_command_line_async("xdg-open " + GLib.shell_quote(url));
+    Util.spawn(["xdg-open", url]);
   }
 };
 
