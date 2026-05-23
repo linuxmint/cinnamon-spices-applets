@@ -220,6 +220,7 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("graphStep", "graphStep");
         this.settings.bind("graphSpacing", "graphSpacing");
         this.settings.bind("CPU_groupInSetsOf4", "CPU_groupInSetsOf4");
+        this.settings.bind("quickTooltip", "quickTooltip");
         this.settings.bind("percentAtEndOfLine", "percentAtEndOfLine");
         this.settings.bind("tooltipFontSize", "tooltipFontSize", () => { this.setTooltipStyle(); });
         this.settings.bind("tooltipChangeBackgroundColor", "tooltipChangeBackgroundColor", () => { this.setTooltipStyle(); });
@@ -485,16 +486,19 @@ class MCSM extends Applet.TextIconApplet {
         this._applet_label.connect("motion-event", (actor, event) => {
             this.hovered = true;
             this._applet_tooltip.preventShow = false;
+            if (!this.quickTooltip) return;
             this._applet_tooltip.show()
         });
         this.actor.connect("motion-event", (actor, event) => {
             this.hovered = true;
             this._applet_tooltip.preventShow = false;
+            if (!this.quickTooltip) return;
             this._applet_tooltip.show()
         });
         this._applet_tooltip._onMotionEvent = function(actor, event) {
             this.hovered = true;
             this._applet_tooltip.preventShow = false;
+            if (!this.quickTooltip) return;
             this._applet_tooltip.show()
         };
         this.actor.connect("enter-event", (actor, event) => {
@@ -507,6 +511,7 @@ class MCSM extends Applet.TextIconApplet {
             }
             this._applet_tooltip.preventShow = false;
             this._setTooltip();
+            if (!this.quickTooltip) return;
             this._applet_tooltip.show();
         });
         this.actor.connect("leave-event", (actor, event) => {

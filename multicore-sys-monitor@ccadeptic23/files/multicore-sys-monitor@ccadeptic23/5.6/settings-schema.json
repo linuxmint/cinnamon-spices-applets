@@ -135,6 +135,7 @@
       "type": "section",
       "title": "Tooltip",
       "keys": [
+        "quickTooltip",
         "percentAtEndOfLine",
         "tooltipFontSize",
         "tooltipChangeBackgroundColor",
@@ -670,6 +671,11 @@
     "type": "colorchooser",
     "default": "rgba(48, 48, 48, 0.1)",
     "description": "Background Color"
+  },
+  "quickTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the tooltip immediately"
   },
   "percentAtEndOfLine": {
     "type": "switch",
