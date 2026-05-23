@@ -1,3 +1,6 @@
+### v3.16.0~20260523
+  * Ready for Linux Mint 23.
+
 ### v3.15.4~20260520
   * New option: Show the tooltip immediately.
 
