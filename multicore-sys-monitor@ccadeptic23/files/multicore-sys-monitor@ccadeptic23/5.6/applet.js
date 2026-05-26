@@ -963,7 +963,7 @@ class MCSM extends Applet.TextIconApplet {
                     this.settingsWindow = window;
                     app.connect("windows-changed", () => { this.settingsWindow = undefined; });
                 }
-            }, 600);
+            }, 1000);
         }
         // Returns the pid:
         return pid;
