@@ -946,16 +946,22 @@ class MCSM extends Applet.TextIconApplet {
           var intervalId = null;
           intervalId = setTimeout(() => {
                 clearTimeout(intervalId);
+                this._removeEnlightenment();
                 app = windowTracker.get_app_from_pid(pid);
                 if (app != null) {
                     let window = app.get_windows()[0];
                     this.settingsTab = tab;
 
-                    window.maximize(VERTICAL);
+                    //~ window.maximize(VERTICAL);
                     window.activate(300);
+                    if (window.set_maximize_flags) {
+                        window.set_maximize_flags(VERTICAL);
+                        window.maximize();
+                    } else {
+                        window.maximize(VERTICAL);
+                    }
                     this.settingsWindow = window;
                     app.connect("windows-changed", () => { this.settingsWindow = undefined; });
-                    this._removeEnlightenment();
                 }
             }, 600);
         }
