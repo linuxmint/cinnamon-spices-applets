@@ -1,5 +1,6 @@
 /*
- * Pantalla — applet de Cinnamon para brillo y temperatura de color.
+ * Brillo — applet de Cinnamon para brillo y temperatura de color.
+ * (UUID interno: pantallas@jorge)
  * Copyright (C) 2026 Jorge Senosiain — apps.culturoscope.es
  * Licencia: GPL-3.0-or-later. Ver el archivo LICENSE.
  *
@@ -18,7 +19,6 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 const Util = imports.misc.util;
-const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Mainloop = imports.mainloop;
 const Main = imports.ui.main;
@@ -27,15 +27,6 @@ const Main = imports.ui.main;
 const TEMP_MIN = 2500;   // K, muy cálido
 const TEMP_MAX = 6500;   // K, neutro (sin tinte)
 const APPLY_DEBOUNCE_MS = 150;
-
-// D-Bus del Night Light de Cinnamon (para el modo automático día/noche).
-const COLOR_BUS  = "org.cinnamon.SettingsDaemon.Color";
-const COLOR_PATH = "/org/cinnamon/SettingsDaemon/Color";
-
-function _toStr(data) {
-    if (data instanceof Uint8Array) return new TextDecoder().decode(data);
-    return ("" + data);
-}
 
 function _clamp(v, lo, hi) {
     return Math.max(lo, Math.min(hi, v));
@@ -82,10 +73,11 @@ PantallaApplet.prototype = {
 
         this._outputs = [];
         this._applyTimeoutId = 0;
-        this._colorProxy = null;
-        this._colorSignalId = 0;
+        this._autoTimerId = 0;
+        this._lastAutoPeriod = null;
         this._monitorsChangedId = 0;
         this._version = (metadata && metadata.version) || "?";
+        this._name = (metadata && metadata.name) || "Brillo";
 
         try {
             this.set_applet_icon_symbolic_name("display-brightness");
@@ -102,6 +94,10 @@ PantallaApplet.prototype = {
             this.settings.bind("auto-day", "autoDay", () => this._onAutoToggled());
             this.settings.bind("night-mode", "nightModeName");
             this.settings.bind("day-mode", "dayModeName");
+            this.settings.bind("night-hour", "nightHour", () => this._onAutoToggled());
+            this.settings.bind("night-minute", "nightMinute", () => this._onAutoToggled());
+            this.settings.bind("day-hour", "dayHour", () => this._onAutoToggled());
+            this.settings.bind("day-minute", "dayMinute", () => this._onAutoToggled());
 
             // Menú (uso diario).
             this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -110,16 +106,15 @@ PantallaApplet.prototype = {
             this.menu.connect("open-state-changed", (m, open) => { if (open) this._collapseSubmenus(); });
 
             this._buildMenu();
-            this._detectOutputs();
 
             this._monitorsChangedId = Main.layoutManager.connect(
-                "monitors-changed", () => { this._detectOutputs(); this._apply(); });
+                "monitors-changed", () => this._detectOutputs(() => this._apply()));
 
-            // Reaplicar el último estado guardado al cargar (al iniciar sesión).
+            // Detección de salidas asíncrona; al terminar, reaplica el estado guardado.
             this._syncSlidersFromState();
-            this._apply();
+            this._detectOutputs(() => this._apply());
 
-            if (this.autoNight || this.autoDay) this._startAutoWatch();
+            if (this.autoNight || this.autoDay) this._startAutoTimer();
         } catch (e) {
             global.logError("[pantallas@jorge] error en _init: " + e);
         }
@@ -258,7 +253,7 @@ PantallaApplet.prototype = {
         if (this.temperatureLabel)
             this.temperatureLabel.label.text = "🌙 Temperatura: " + Math.round(this.temperature) + " K";
         this.set_applet_tooltip(
-            "Pantalla v" + (this._version || "?") +
+            (this._name || "Brillo") + " v" + (this._version || "?") +
             " · Brillo " + Math.round(this.brightness) + "% · " + Math.round(this.temperature) + " K");
         this._updateActiveMarks();
     },
@@ -303,19 +298,31 @@ PantallaApplet.prototype = {
 
     // ---- Aplicación vía xrandr -------------------------------------------
 
-    _detectOutputs: function() {
-        this._outputs = [];
+    _detectOutputs: function(done) {
         try {
-            let [ok, out] = GLib.spawn_command_line_sync("xrandr --query");
-            if (ok && out) {
-                let lines = _toStr(out).split("\n");
-                for (let line of lines) {
-                    let m = line.match(/^(\S+)\s+connected/);
-                    if (m) this._outputs.push(m[1]);
+            let proc = new Gio.Subprocess({
+                argv: ["xrandr", "--query"],
+                flags: Gio.SubprocessFlags.STDOUT_PIPE
+            });
+            proc.init(null);
+            proc.communicate_utf8_async(null, null, (p, res) => {
+                this._outputs = [];
+                try {
+                    let [, stdout] = p.communicate_utf8_finish(res);
+                    if (stdout) {
+                        for (let line of stdout.split("\n")) {
+                            let m = line.match(/^(\S+)\s+connected/);
+                            if (m) this._outputs.push(m[1]);
+                        }
+                    }
+                } catch (e) {
+                    global.logError("[pantallas@jorge] parseo de xrandr: " + e);
                 }
-            }
+                if (done) done();
+            });
         } catch (e) {
             global.logError("[pantallas@jorge] no se pudieron detectar salidas: " + e);
+            if (done) done();
         }
     },
 
@@ -331,61 +338,60 @@ PantallaApplet.prototype = {
     _apply: function() {
         if (!this._outputs.length) return;
         let floor = (this.minBrightness || 10) / 100;
-        let b = _clamp(this.brightness / 100, floor, 1);
+        let b = _clamp(this.brightness / 100, floor, 1).toFixed(3);
         let gamma = kelvinToGamma(this.temperature);
 
-        let parts = ["xrandr"];
+        let argv = ["xrandr"];
         for (let o of this._outputs)
-            parts.push("--output " + o + " --brightness " + b.toFixed(3) + " --gamma " + gamma);
+            argv.push("--output", o, "--brightness", b, "--gamma", gamma);
 
         try {
-            Util.spawnCommandLine(parts.join(" "));
+            Util.spawn(argv);
         } catch (e) {
             global.logError("[pantallas@jorge] fallo al aplicar xrandr: " + e);
         }
     },
 
-    // ---- Automático día/noche (Night Light de Cinnamon) -------------------
+    // ---- Automático día/noche (horario fijo) ------------------------------
 
     _onAutoToggled: function() {
-        if (this.autoNight || this.autoDay) this._startAutoWatch();
-        else this._stopAutoWatch();
-        if (this._colorProxy) this._onNightLightChanged();
+        if (this.autoNight || this.autoDay) this._startAutoTimer();
+        else this._stopAutoTimer();
     },
 
-    _startAutoWatch: function() {
-        if (this._colorProxy) return;
-        try {
-            this._colorProxy = Gio.DBusProxy.new_for_bus_sync(
-                Gio.BusType.SESSION, Gio.DBusProxyFlags.NONE, null,
-                COLOR_BUS, COLOR_PATH, COLOR_BUS, null);
-
-            this._colorSignalId = this._colorProxy.connect(
-                "g-properties-changed", () => this._onNightLightChanged());
-
-            this._onNightLightChanged();
-        } catch (e) {
-            global.logError("[pantallas@jorge] no se pudo conectar al Night Light de Cinnamon: " + e);
-            this._colorProxy = null;
+    _startAutoTimer: function() {
+        this._lastAutoPeriod = null;   // fuerza aplicar el periodo actual en el primer tick
+        if (!this._autoTimerId) {
+            this._autoTimerId = Mainloop.timeout_add_seconds(60, () => { this._autoTick(); return true; });
         }
+        this._autoTick();
     },
 
-    _stopAutoWatch: function() {
-        if (this._colorProxy && this._colorSignalId) {
-            try { this._colorProxy.disconnect(this._colorSignalId); } catch (e) {}
-        }
-        this._colorSignalId = 0;
-        this._colorProxy = null;
+    _stopAutoTimer: function() {
+        if (this._autoTimerId) { Mainloop.source_remove(this._autoTimerId); this._autoTimerId = 0; }
+        this._lastAutoPeriod = null;
     },
 
-    _onNightLightChanged: function() {
-        if (!this._colorProxy) return;
-        let v = this._colorProxy.get_cached_property("NightLightActive");
-        if (!v) return;
-        let isNight = v.get_boolean();
+    _isNightNow: function() {
+        let n = (this.nightHour || 0) * 60 + (this.nightMinute || 0);
+        let d = (this.dayHour || 0) * 60 + (this.dayMinute || 0);
+        let t = new Date();
+        let now = t.getHours() * 60 + t.getMinutes();
+        if (n === d) return false;
+        if (n < d) return (now >= n && now < d);   // periodo de noche [noche, día)
+        return (now >= n || now < d);               // la noche cruza la medianoche
+    },
+
+    // Aplica el modo solo al CRUZAR la transición (no en cada tic), para no
+    // pisar los ajustes manuales que hagas dentro de un periodo.
+    _autoTick: function() {
+        if (!this.autoNight && !this.autoDay) return;
+        let period = this._isNightNow() ? "night" : "day";
+        if (period === this._lastAutoPeriod) return;
+        this._lastAutoPeriod = period;
         let mode = null;
-        if (isNight && this.autoNight) mode = this._findMode(this.nightModeName);
-        else if (!isNight && this.autoDay) mode = this._findMode(this.dayModeName);
+        if (period === "night" && this.autoNight) mode = this._findMode(this.nightModeName);
+        else if (period === "day" && this.autoDay) mode = this._findMode(this.dayModeName);
         if (mode) this._applyMode(mode);
     },
 
@@ -395,7 +401,7 @@ PantallaApplet.prototype = {
         if (this._applyTimeoutId) Mainloop.source_remove(this._applyTimeoutId);
         if (this._monitorsChangedId)
             Main.layoutManager.disconnect(this._monitorsChangedId);
-        this._stopAutoWatch();
+        this._stopAutoTimer();
         if (this.settings) this.settings.finalize();
     }
 };

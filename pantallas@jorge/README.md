@@ -1,4 +1,4 @@
-# Pantalla — Cinnamon applet
+# Brillo — Cinnamon applet
 
 Control the **brightness** and **color temperature** of your monitors from the Cinnamon panel, with customizable **modes** (Day, Night, or your own) and **automatic** day/night switching.
 

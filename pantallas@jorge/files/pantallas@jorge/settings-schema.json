@@ -32,32 +32,55 @@
 
     "head-auto": {
         "type": "header",
-        "description": "Automático día/noche"
+        "description": "Automático día/noche (horario fijo)"
     },
     "auto-night": {
         "type": "switch",
         "default": false,
-        "description": "Aplicar el modo de noche automáticamente al anochecer",
-        "tooltip": "Sigue el Night Light de Cinnamon (atardecer). Requiere activar el Night Light en Configuración del sistema."
+        "description": "Aplicar el modo de noche a una hora fija",
+        "tooltip": "Cambia de modo a horas fijas. No usa el Night Light de Cinnamon; apágalo para que no peleen por el color."
     },
     "night-mode": {
         "type": "combobox",
         "default": "Noche",
-        "description": "Modo a aplicar de noche",
+        "description": "Modo de noche",
         "options": { "Día": "Día", "Noche": "Noche" },
+        "dependency": "auto-night"
+    },
+    "night-hour": {
+        "type": "spinbutton",
+        "default": 21, "min": 0, "max": 23, "step": 1, "units": "h",
+        "description": "Hora de noche",
+        "dependency": "auto-night"
+    },
+    "night-minute": {
+        "type": "spinbutton",
+        "default": 0, "min": 0, "max": 59, "step": 5, "units": "min",
+        "description": "Minuto de noche",
         "dependency": "auto-night"
     },
     "auto-day": {
         "type": "switch",
         "default": false,
-        "description": "Aplicar el modo de día automáticamente al amanecer",
-        "tooltip": "Independiente del de noche. Si lo dejas apagado, al amanecer la pantalla se queda como esté hasta que cambies de modo a mano."
+        "description": "Aplicar el modo de día a una hora fija"
     },
     "day-mode": {
         "type": "combobox",
         "default": "Día",
-        "description": "Modo a aplicar de día",
+        "description": "Modo de día",
         "options": { "Día": "Día", "Noche": "Noche" },
+        "dependency": "auto-day"
+    },
+    "day-hour": {
+        "type": "spinbutton",
+        "default": 8, "min": 0, "max": 23, "step": 1, "units": "h",
+        "description": "Hora de día",
+        "dependency": "auto-day"
+    },
+    "day-minute": {
+        "type": "spinbutton",
+        "default": 0, "min": 0, "max": 59, "step": 5, "units": "min",
+        "description": "Minuto de día",
         "dependency": "auto-day"
     },
 

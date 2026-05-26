@@ -1,4 +1,4 @@
-# Pantalla — applet de Cinnamon
+# Brillo — applet de Cinnamon
 
 Controla el **brillo** y la **temperatura de color** de tus monitores desde el panel de Cinnamon, con **modos** personalizables (Día, Noche, los que quieras) y cambio **automático** día/noche.
 
@@ -12,7 +12,7 @@ Funciona por software: aplica brillo y temperatura sobre la tabla de color del G
 ## Instalación
 
 1. Copia la carpeta `pantallas@jorge` a `~/.local/share/cinnamon/applets/`.
-2. Clic derecho en el panel → **Applets** → busca **«Pantalla»** → añádelo al panel.
+2. Clic derecho en el panel → **Applets** → busca **«Brillo»** → añádelo al panel.
 
 Si algo no aparece, recarga Cinnamon: `Alt+F2` → `r` → Enter.
 

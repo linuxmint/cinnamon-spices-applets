@@ -1,9 +1,14 @@
 {
     "uuid": "pantallas@jorge",
-    "name": "Pantalla",
+    "name": "Brillo",
     "description": "Brillo y temperatura de color de los monitores, con modos personalizables y cambio automático día/noche. Ligero, vía xrandr, para Cinnamon en X11.",
-    "version": "1.8.3",
-    "cinnamon-version": ["6.0", "6.2", "6.4"],
+    "version": "1.10.1",
+    "cinnamon-version": [
+        "6.0",
+        "6.2",
+        "6.4"
+    ],
     "max-instances": 1,
-    "icon": "display-brightness"
+    "icon": "display-brightness",
+    "url": "https://apps.culturoscope.es"
 }
