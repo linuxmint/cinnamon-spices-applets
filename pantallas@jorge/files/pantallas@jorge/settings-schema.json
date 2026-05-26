@@ -1,0 +1,72 @@
+{
+    "head-general": {
+        "type": "header",
+        "description": "General"
+    },
+    "min-brightness": {
+        "type": "scale",
+        "default": 10,
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "description": "Brillo mínimo permitido (%)",
+        "tooltip": "Suelo del slider de brillo, para no dejar la pantalla totalmente negra."
+    },
+
+    "head-modes": {
+        "type": "header",
+        "description": "Modos (nombre, brillo %, temperatura K)"
+    },
+    "modes": {
+        "type": "list",
+        "columns": [
+            { "id": "name", "title": "Nombre", "type": "string" },
+            { "id": "brightness", "title": "Brillo (%)", "type": "integer", "min": 1, "max": 100, "step": 1, "default": 80, "align": 0.5 },
+            { "id": "temperature", "title": "Temperatura (K)", "type": "integer", "min": 2500, "max": 6500, "step": 100, "default": 5000, "align": 0.5 }
+        ],
+        "default": [
+            { "name": "Día", "brightness": 100, "temperature": 6500 },
+            { "name": "Noche", "brightness": 60, "temperature": 3400 }
+        ]
+    },
+
+    "head-auto": {
+        "type": "header",
+        "description": "Automático día/noche"
+    },
+    "auto-night": {
+        "type": "switch",
+        "default": false,
+        "description": "Aplicar el modo de noche automáticamente al anochecer",
+        "tooltip": "Sigue el Night Light de Cinnamon (atardecer). Requiere activar el Night Light en Configuración del sistema."
+    },
+    "night-mode": {
+        "type": "combobox",
+        "default": "Noche",
+        "description": "Modo a aplicar de noche",
+        "options": { "Día": "Día", "Noche": "Noche" },
+        "dependency": "auto-night"
+    },
+    "auto-day": {
+        "type": "switch",
+        "default": false,
+        "description": "Aplicar el modo de día automáticamente al amanecer",
+        "tooltip": "Independiente del de noche. Si lo dejas apagado, al amanecer la pantalla se queda como esté hasta que cambies de modo a mano."
+    },
+    "day-mode": {
+        "type": "combobox",
+        "default": "Día",
+        "description": "Modo a aplicar de día",
+        "options": { "Día": "Día", "Noche": "Noche" },
+        "dependency": "auto-day"
+    },
+
+    "brightness": {
+        "type": "generic",
+        "default": 100
+    },
+    "temperature": {
+        "type": "generic",
+        "default": 6500
+    }
+}
