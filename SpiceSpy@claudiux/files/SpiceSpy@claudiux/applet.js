@@ -302,7 +302,7 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
 };
 
-class TitleSeparatorMenuItem extends PopupMenu.PopupBaseMenuItem {
+var TitleSeparatorMenuItem = class TitleSeparatorMenuItem extends PopupMenu.PopupBaseMenuItem {
   constructor(type, title, icon_name) {
     super({ reactive: true });
     if (typeof icon_name === "string") {
@@ -328,7 +328,7 @@ const FLAG_CHAR = "⚑";
 const ISSUE_CHAR = " ⚠"; //ⓘ: too strong!
 const COMMIT_CHAR = "↻";
 
-class SpiceSpy extends Applet.TextIconApplet {
+var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
   constructor(metadata, orientation, panel_height, instance_id) {
     super(orientation, panel_height, instance_id);
     this.metadata = metadata;
