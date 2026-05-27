@@ -1,0 +1,71 @@
+# Traditional Chinese translations for PACKAGE package
+# PACKAGE Display CPU, memory and real-time network speed.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# user <ty18710388929@163.com>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: system-monitor-cinnamon@MainPoser 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-02-11 15:06+0800\n"
+"PO-Revision-Date: 2026-02-14 06:17:16+0000\n"
+"Last-Translator: user <ty18710388929@163.com>\n"
+"Language-Team: Traditional Chinese\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:34 applet.js:36
+msgid "Loading..."
+msgstr "載入中..."
+
+#. metadata.json->name
+msgid "System Monitor Cinnamon"
+msgstr "Cinnamon 資源監視器"
+
+#. metadata.json->description
+msgid "Display CPU, memory and real-time network speed"
+msgstr "顯示 CPU、記憶體、即時網路速度"
+
+#. settings-schema.json->show_network->description
+msgid "Show network speed"
+msgstr "顯示網速"
+
+#. settings-schema.json->refresh_interval->units
+msgid "seconds"
+msgstr "秒"
+
+#. settings-schema.json->refresh_interval->description
+msgid "Refresh interval"
+msgstr "刷新頻率"
+
+#. settings-schema.json->icon_theme->description
+msgid "Icon theme"
+msgstr "圖示主題"
+
+#. settings-schema.json->icon_theme->options
+msgid "Follow system"
+msgstr "跟隨系統"
+
+#. settings-schema.json->icon_theme->options
+msgid "White"
+msgstr "白色"
+
+#. settings-schema.json->icon_theme->options
+msgid "Black"
+msgstr "黑色"
+
+#. settings-schema.json->runner->description
+msgid "Animation icon"
+msgstr "動畫圖示"
+
+#. settings-schema.json->runner->options
+msgid "Cat"
+msgstr "貓咪"
+
+#. settings-schema.json->runner->options
+msgid "Horse"
+msgstr "小馬"

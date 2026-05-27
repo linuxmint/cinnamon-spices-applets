@@ -1,0 +1,6 @@
+{
+    "uuid": "system-monitor-cinnamon@MainPoser",
+    "name": "System Monitor Cinnamon",
+    "version": "1.0.0",
+    "description": "Display CPU, memory and real-time network speed"
+}
