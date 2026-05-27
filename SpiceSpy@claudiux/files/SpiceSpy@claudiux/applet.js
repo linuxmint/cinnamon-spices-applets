@@ -13,15 +13,20 @@ const Gio = imports.gi.Gio;
 
 const Lang = imports.lang;
 
-const {
-  reloadExtension,
-  Type
-} = imports.ui.extension; //Extension
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
 
-const { HttpLib } = require("./lib/httpLib");
-const { to_string } = require("./lib/to-string");
+const { HttpLib } = _require("./lib/httpLib");
+const { to_string } = _require("./lib/to-string");
 //mainloopTools:
-const { timeout_add_seconds, setTimeout, clearTimeout, source_remove, remove_all_sources } = require("./lib/mainloopTools");
+const { timeout_add_seconds, setTimeout, clearTimeout, source_remove, remove_all_sources } = _require("./lib/mainloopTools");
 
 var MODULE_UUID; // Populated by main() function
 const USER_DATA_DIR = GLib.get_user_data_dir();
@@ -1096,7 +1101,7 @@ class SpiceSpy extends Applet.TextIconApplet {
   }
 
   _reload_this_applet(event=null) {
-    reloadExtension(MODULE_UUID, Type.APPLET)
+    Extension.reloadExtension(MODULE_UUID, Extension.Type.APPLET)
   } // End of _reload_this_applet
 
   get is_vertical() {
