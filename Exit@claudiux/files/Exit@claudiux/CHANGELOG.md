@@ -1,3 +1,6 @@
+### v1.8.6~20260527
+* Ready for Linux Mint 23.
+
 ### v1.8.5~20260407
 * Added option: Lock On Suspend.
 
