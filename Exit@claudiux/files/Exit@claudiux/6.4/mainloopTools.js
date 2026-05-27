@@ -166,7 +166,7 @@ function remove_all_sources() {
   }
 }
 
-if (Extension.getCurrentExtension) {
+if (!Extension.getCurrentExtension) {
   module.exports = {
     _sourceIds,
     timeout_add_seconds,
