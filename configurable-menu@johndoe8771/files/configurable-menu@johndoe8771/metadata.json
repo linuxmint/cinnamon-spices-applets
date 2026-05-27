@@ -1,0 +1,7 @@
+{
+ "uuid": "configurable-menu@johndoe8771",
+ "name": "Configurable Menu",
+ "description": "Main Cinnamon menu with additional configuration options",
+ "max-instances": -1,
+ "version": "1.0.2"
+}

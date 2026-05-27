@@ -1,3 +1,15 @@
+### v1.6.3~20260329
+* Changes made by [timfeierabend](https://github.com/timfeierabend) on [#8474](https://github.com/linuxmint/cinnamon-spices-applets/pull/8474).
+* Updated translation files.
+* Updated README and CHANGELOG files.
+
+### v1.6.2~20260107
+* System section: Add Quit and Logout buttons.
+
+### v1.6.1~20251223
+* "Text size" becomes "Text width".
+* Changes the method to open the menu.
+
 ### v1.6.0~20251222
 * Add Custom section: You can now add your own local links and applications,also using categories.
 * You are now able to set the width of a section in the menu.

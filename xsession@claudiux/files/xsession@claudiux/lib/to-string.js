@@ -1,6 +1,10 @@
 const ByteArray = imports.byteArray;
+const GLib = imports.gi.GLib;
+const Util = imports.misc.util;
+const CINNAMON_VERSION = GLib.getenv("CINNAMON_VERSION");
+const isCin67plus = Util.version_exceeds(CINNAMON_VERSION, "6.7");
 
-const to_string = function(data) {
+var to_string = function(data) {
   if (ByteArray.hasOwnProperty("toString")) {
     return ""+ByteArray.toString(data);
   } else {
@@ -43,6 +47,8 @@ const to_string = function(data) {
   //~ return str;
 //~ }
 
-module.exports = {
-  to_string
+if (!isCin67plus) {
+  module.exports = {
+    to_string
+  }
 }

@@ -3,7 +3,8 @@ const GLib = imports.gi.GLib; // ++ Needed for starting programs and translation
 const Gio = imports.gi.Gio; // Needed for file infos
 const Extension = imports.ui.extension; // Needed to reload applets
 const MessageTray = imports.ui.messageTray; // ++ Needed for the criticalNotify() function in this script
-const Util = imports.misc.util; // Needed for spawnCommandLine()
+//~ const Util = imports.misc.util; // Needed for spawnCommandLine()
+const Util = require("./lib/util"); // Needed for spawnCommandLine()
 const Main = imports.ui.main; // ++ Needed for notify()
 const Gettext = imports.gettext;
 
@@ -117,7 +118,8 @@ var DEPENDENCIES = {
   "openSUSE": [
     ["sensors", "/usr/bin/sensors",  "sensors"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"]
-  ]
+  ],
+  "gentoo": []
 }
 
 
@@ -144,8 +146,8 @@ const UPDATE = {
   "debian": "apt-get update",
   "devuan": "apt-get update",
   "fedora": "sudo dnf update",
-  "openSUSE": ""//,
-  //"gentoo": "emerge --sync"
+  "openSUSE": "",
+  "gentoo": ""
 }
 
 const INSTALL = {
@@ -154,7 +156,8 @@ const INSTALL = {
   "debian": "apt-get install",
   "devuan": "apt-get install",
   "fedora": "sudo dnf install",
-  "openSUSE": "sudo zypper --non-interactive install"
+  "openSUSE": "sudo zypper --non-interactive install",
+  "gentoo": ""
 }
 
 //const HOME_DIR = GLib.get_home_dir();
@@ -269,6 +272,11 @@ function is_pkcon_present() {
   return (GLib.find_program_in_path("pkcon") != null && GLib.find_program_in_path("pkexec") != null)
 } // End of is_pkcon_present
 
+function is_pkgcli_present() {
+  //~ return GLib.find_program_in_path("apturl")
+  return (GLib.find_program_in_path("pkgcli") != null && GLib.find_program_in_path("pkexec") != null)
+} // End of is_pkgcli_present
+
 function get_distro() {
   let distro = DISTRO();
   switch (distro) {
@@ -380,6 +388,7 @@ Dependencies.prototype = {
       let separator = get_default_terminal_separator();
       // apturl is it present?
       let _is_pkcon_present = is_pkcon_present();
+      let _is_pkgcli_present = is_pkgcli_present();
       // Detects the distrib in use and make adapted message and notification:
       let _isFedora = isFedora();
       let _isArchlinux = isArchLinux();
@@ -400,7 +409,7 @@ Dependencies.prototype = {
       let criticalMessage = criticalMessagePart1+"\n\n" + _("Please install these packages:") +" "+ _pkg_to_install.join(" ") +"\n\n";
       //~ this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
 
-      if (!_is_pkcon_present) {
+      if (!_is_pkcon_present && !_is_pkgcli_present) {
         this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
         //~ if (terminal != "") {
           //~ // TRANSLATORS: The next messages should not be translated.
@@ -410,7 +419,7 @@ Dependencies.prototype = {
             //~ GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
           //~ }
         //~ }
-      } else {
+      } else if (_is_pkcon_present) {
         this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon,
           [
             _("Install these packages now"),
@@ -419,6 +428,13 @@ Dependencies.prototype = {
         );
         //~ Util.spawnCommandLine("apturl apt:%s".format(_pkg_to_install.join(",")));
 
+      } else { //_is_pkgcli_present is true:
+        this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon,
+          [
+            _("Install these packages now"),
+            () => { Util.spawnCommandLineAsync(terminal + separator + "pkexec pkgcli -y install %s".format(_pkg_to_install.join(" "))) }
+          ]
+        );
       }
       this.depAreMet = false;
     }

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-22 09:17+0100\n"
+"POT-Creation-Date: 2026-03-29 12:10+0200\n"
 "PO-Revision-Date: 2023-08-24 12:12+0300\n"
 "Last-Translator: DmytroVoytko <Dmytro.Voytko@gmail.com>\n"
 "Language-Team: \n"
@@ -18,69 +18,77 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.3.2\n"
 
-#. applet.js:45 applet.js:636
-msgid "SYSTEM"
-msgstr "СИСТЕМА"
-
-#. applet.js:45 applet.js:676
-msgid "FAVORITES"
-msgstr ""
-
-#. applet.js:45 applet.js:707
-msgid "APPLICATIONS"
-msgstr ""
-
-#. applet.js:45 applet.js:738
-msgid "RECENT DOCUMENTS"
-msgstr "ОСТАННІ ДОКУМЕНТИ"
-
-#. applet.js:45 applet.js:782
-msgid "CUSTOM"
-msgstr ""
-
-#. applet.js:185
+#. applet.js:190
 msgid "(Right click to open folder)"
 msgstr "(Клацніть правою кнопкою миші, щоб відкрити папку)"
 
 #. metadata.json->name
-#. applet.js:311
+#. applet.js:323
 msgid "Direct"
 msgstr "Прямий"
 
-#. applet.js:606
+#. applet.js:631
 msgid "Search Home Folder"
 msgstr "Пошук у домашній папці"
 
-#. applet.js:613 applet.js:653 applet.js:684 applet.js:715 applet.js:746
-#. applet.js:790
+#. applet.js:638 applet.js:678 applet.js:709 applet.js:740 applet.js:771
+#. applet.js:815
 msgid "Configure"
 msgstr ""
 
-#. applet.js:646
+#. applet.js:661
+msgid "SYSTEM"
+msgstr "СИСТЕМА"
+
+#. applet.js:671
 msgid "Search File System"
 msgstr "Пошук у файловій системі"
 
-#. applet.js:760
+#. applet.js:701
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:732
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:763
+msgid "RECENT DOCUMENTS"
+msgstr "ОСТАННІ ДОКУМЕНТИ"
+
+#. applet.js:785
 msgid "Clear"
 msgstr "Очистити"
 
-#. applet.js:767
+#. applet.js:792
 msgid "Recent"
 msgstr ""
 
-#. applet.js:844
+#. applet.js:807
+msgid "CUSTOM"
+msgstr ""
+
+#. applet.js:869
 msgid "Computer"
 msgstr "Комп'ютер"
 
-#. applet.js:850
+#. applet.js:875
 msgid "File System"
 msgstr "Файлова система"
 
-#. applet.js:867
+#. applet.js:892
 msgid "Network"
 msgstr "Мережа"
 
-#. applet.js:1179
+#. applet.js:908
+msgid "Logout"
+msgstr ""
+
+#. applet.js:915
+msgid "Quit"
+msgstr ""
+
+#. applet.js:1224
 msgid "Trash"
 msgstr "Смітник"
 
@@ -265,11 +273,11 @@ msgid "Menu icon size"
 msgstr "Розмір значка меню"
 
 #. settings-schema.json->textSize->description
-msgid "Text size (in pixels)"
+msgid "Text width"
 msgstr ""
 
 #. settings-schema.json->textSize->tooltip
-msgid "0 means automatic"
+msgid "0 means: automatic"
 msgstr ""
 
 #. settings-schema.json->displayOrderLabel->description
@@ -379,6 +387,10 @@ msgstr "Показати лише підключені диски"
 #. settings-schema.json->showNetwork->description
 msgid "Show network"
 msgstr "Показати мережу"
+
+#. settings-schema.json->showSession->description
+msgid "Show Logout and Quit"
+msgstr ""
 
 #. settings-schema.json->showFavorites->description
 #, fuzzy

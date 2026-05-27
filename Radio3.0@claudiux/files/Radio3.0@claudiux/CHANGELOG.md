@@ -1,3 +1,20 @@
+### v3.11.2~20260508
+  * Installing dependencies: Use pkgcli when available
+
+### v3.11.1~20260414
+  * Fixes certain dependency issues.
+
+### v3.11.0~20260221
+  * Smooth reading of certain files.
+
+### v3.10.2~20260112
+  * Repairs the "Configure..." menu for Cinnamon 6.6.
+  * Adds the ability to set the width of the configuration window. See the Behavior tab.
+
+### v3.10.1~20260105
+  * Repairs notifications.
+  * Add option "Fastest" for "Quality of downloaded Album Art".
+
 ### v3.10.0~20251211
   * Working well with Cinnamon 6.6.
 

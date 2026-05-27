@@ -1,0 +1,8 @@
+{
+    "uuid": "storage-act-led@mrbartblog",
+    "name": "Storage activity LED indicator",
+    "description": "Emulates HDD/SDD activity LED indicator, for computers without one",
+    "author": "Bartlomiej Zarzycki",
+    "website": "https://zarzyc.wordpress.com",
+    "version": "1.0.2"
+}

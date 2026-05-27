@@ -7,21 +7,24 @@
 //////////////////////////////////////////////////////////////
 
 import { DateTime } from "luxon";
-import type { ErrorResponse, HTTPParams} from "../../lib/httpLib";
+import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/services/logger";
 import type { WeatherData, ForecastData, HourlyForecastData, BuiltinIcons, CustomIcons, AlertData, AlertLevel } from "../../weather-data";
 import { _, IsLangSupported } from "../../utils";
-import { BaseProvider } from "../BaseProvider";
 import { Services, type Config } from "../../config";
 import type { WeatherbitAlertsResponse } from "./alerts";
 import type { WeatherBitCurrentWeatherData } from "./current";
 import type { WeatherBitDailyWeatherDataResponse } from "./daily";
 import type { WeatherBitHourlyWeatherDataResponse } from "./hourly";
-import type { LocationData } from "../../types";
+import { ProviderErrorCode, type LocationData, type WeatherProvider } from "../../types";
 import { ErrorHandler } from "../../lib/services/error_handler";
 
-export class Weatherbit extends BaseProvider {
+export interface WeatherbitOptions {
+	apiKey: string;
+}
+
+export class Weatherbit implements WeatherProvider<Services.Weatherbit, WeatherbitOptions> {
 
 	//--------------------------------------------------------
 	//  Properties
@@ -34,6 +37,7 @@ export class Weatherbit extends BaseProvider {
 	public readonly needsApiKey = true;
 	public readonly supportHourlyPrecipChance = true;
 	public readonly supportHourlyPrecipVolume = true;
+	public readonly locationType = "coordinates";
 
 	public get remainingCalls(): number | null {
 		return null;
@@ -55,11 +59,11 @@ export class Weatherbit extends BaseProvider {
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
-		const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable, config);
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config, options: WeatherbitOptions): Promise<WeatherData | null> {
+		const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable, config, options);
 		let hourlyPromise = null;
-		if (this.hourlyAccess) hourlyPromise = this.GetHourlyData(this.hourly_url, loc, cancellable, config);
-		const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent, cancellable, config);
+		if (this.hourlyAccess) hourlyPromise = this.GetHourlyData(this.hourly_url, loc, cancellable, config, options);
+		const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent, cancellable, config, options);
 		if (!currentResult) return null;
 
 		const forecastResult = await forecastPromise;
@@ -68,7 +72,7 @@ export class Weatherbit extends BaseProvider {
 		currentResult.hourlyForecasts = hourlyResult ?? [];
 
 		if (config._showAlerts) {
-			const alertResult = await this.GetData(this.alerts_url, loc, this.ParseAlerts, cancellable, config);
+			const alertResult = await this.GetData(this.alerts_url, loc, this.ParseAlerts, cancellable, config, options);
 			if (alertResult == null)
 				return null;
 
@@ -77,6 +81,14 @@ export class Weatherbit extends BaseProvider {
 		return currentResult;
 	};
 
+	public ValidConfiguration(config: Config, options: WeatherbitOptions): ProviderErrorCode {
+		if (!options.apiKey) {
+			return ProviderErrorCode.NO_KEY;
+		}
+		return ProviderErrorCode.OK;
+	}
+
+
 	// A function as a function parameter 2 levels deep does not know
 	// about the top level object information, has to pass it in as a parameter
 	/**
@@ -84,8 +96,8 @@ export class Weatherbit extends BaseProvider {
 	 * @param baseUrl
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
-	private async GetData<T, K>(baseUrl: string, loc: LocationData, ParseFunction: (json: K, translated: boolean) => T, cancellable: imports.gi.Gio.Cancellable, config: Config) {
-		const query = this.ConstructQuery(loc, config);
+	private async GetData<T, K>(baseUrl: string, loc: LocationData, ParseFunction: (json: K, translated: boolean) => T, cancellable: imports.gi.Gio.Cancellable, config: Config, options: WeatherbitOptions) {
+		const query = this.ConstructQuery(loc, config, options);
 		if (query == null)
 			return null;
 
@@ -102,8 +114,8 @@ export class Weatherbit extends BaseProvider {
 		return ParseFunction(json as K, !!query.lang);
 	}
 
-	private async GetHourlyData(baseUrl: string, loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config) {
-		const query = this.ConstructQuery(loc, config);
+	private async GetHourlyData(baseUrl: string, loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config, options: WeatherbitOptions) {
+		const query = this.ConstructQuery(loc, config, options);
 		if (query == null)
 			return null;
 
@@ -322,9 +334,9 @@ export class Weatherbit extends BaseProvider {
 		return lang;
 	}
 
-	private ConstructQuery(loc: LocationData, config: Config): HTTPParams {
+	private ConstructQuery(loc: LocationData, config: Config, options: WeatherbitOptions): HTTPParams {
 		const result: HTTPParams = {
-			key: config.ApiKey,
+			key: options.apiKey,
 			lat: loc.lat,
 			lon: loc.lon,
 			units: "S"

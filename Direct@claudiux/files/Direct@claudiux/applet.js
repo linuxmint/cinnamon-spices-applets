@@ -4,7 +4,8 @@ const Gtk = imports.gi.Gtk;
 const Clutter = imports.gi.Clutter;
 const Pango = imports.gi.Pango;
 const St = imports.gi.St;
-
+const GnomeSession = imports.misc.gnomeSession;
+const {SignalManager} = imports.misc.signalManager;
 const windowTracker = imports.gi.Cinnamon.WindowTracker.get_default();
 
 const CMenu = imports.gi.CMenu;
@@ -30,19 +31,20 @@ const MENU_ITEM_TEXT_LENGTH = 25;
 const ICONBROWSER_PROGRAM = "yad-icon-browser";
 
 var TEXTSIZE = 0;
-var menu_item_icon_size;
-const UUID = "Direct@claudiux";
-Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
+var MENU_ITEM_ICON_SIZE = 22;
+
+let MODULE_UUID; // Populated by main function
 
 function _(str) {
-   let customTranslation = Gettext.dgettext(UUID, str);
+   let customTranslation = Gettext.dgettext(MODULE_UUID, str);
    if(customTranslation != str) {
       return customTranslation;
    }
    return Gettext.gettext(str);
 }
 
-const orig_names = [GLib.get_user_name().toUpperCase(), _("SYSTEM"), _("FAVORITES"), _("APPLICATIONS"), _("RECENT DOCUMENTS"), _("CUSTOM")];
+const orig_user_name = GLib.get_user_name().toUpperCase();
+const orig_names = ["SYSTEM", "FAVORITES", "APPLICATIONS", "RECENT DOCUMENTS", "CUSTOM"];
 const orig_sections = ["User", "System", "Favorites", "FavoriteApps", "RecentDocuments", "CustomDocuments"];
 
 function icon_exists( iconName ) {
@@ -56,7 +58,7 @@ class IconMenuItem extends PopupMenu.PopupBaseMenuItem {
         this.actor.add_style_class_name("xCenter-menuItem");
 
         if ( typeof icon == "string" ) {
-            icon = new St.Icon({icon_name: icon, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
+            icon = new St.Icon({icon_name: icon, icon_size: MENU_ITEM_ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
         }
 
         this.addActor(icon);
@@ -92,12 +94,15 @@ class FolderTypeMenuItem extends PopupMenu.PopupBaseMenuItem {
 class VolumeMenuItem extends IconMenuItem {
     constructor(volume, mounted) {
         let icon = volume.get_icon();
-        super(volume.get_name(), St.TextureCache.get_default().load_gicon(null, icon, menu_item_icon_size));
+        super(volume.get_name(), St.TextureCache.get_default().load_gicon(null, icon, MENU_ITEM_ICON_SIZE));
 
         if ( mounted ) {
-            let ejectIcon = new St.Icon({ icon_name: "media-eject", icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR });
+            let ejectIcon = new St.Icon({ icon_name: "media-eject", icon_size: MENU_ITEM_ICON_SIZE, icon_type: St.IconType.FULLCOLOR });
             let ejectButton = new St.Button({ child: ejectIcon });
-            this.addActor(ejectButton, { span: -1, align: St.Align.END });
+            try {
+                this.addActor(ejectButton, { span: -1, expand: false, align: St.Align.END, position: 2 });
+                //~ this.addActor(ejectButton);
+            } catch(e) {}
 
             ejectButton.connect("clicked", function() {
                 let mount = volume.get_mount();
@@ -126,10 +131,10 @@ class PlaceMenuItem extends FolderTypeMenuItem {
         let icon;
         if (uri == null) {
             if ( iconName && icon_exists(iconName) ) {
-                icon = new St.Icon({icon_name: iconName, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
+                icon = new St.Icon({icon_name: iconName, icon_size: MENU_ITEM_ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
             }
             else {
-                icon = new St.Icon({icon_name: "window-minimize-symbolic", icon_size: menu_item_icon_size, icon_type: St.IconType.SYMBOLIC});
+                icon = new St.Icon({icon_name: "window-minimize-symbolic", icon_size: MENU_ITEM_ICON_SIZE, icon_type: St.IconType.SYMBOLIC});
             }
             super(text, icon);
             this.uri = null;
@@ -139,12 +144,12 @@ class PlaceMenuItem extends FolderTypeMenuItem {
         }
         let fileInfo = Gio.File.new_for_uri(uri).query_info("*", 0, null);
 
-        
+
         if ( iconName && icon_exists(iconName) ) {
-            icon = new St.Icon({icon_name: iconName, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
+            icon = new St.Icon({icon_name: iconName, icon_size: MENU_ITEM_ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
         }
         else {
-            icon = St.TextureCache.get_default().load_gicon(null, fileInfo.get_icon(), menu_item_icon_size)
+            icon = St.TextureCache.get_default().load_gicon(null, fileInfo.get_icon(), MENU_ITEM_ICON_SIZE)
         }
 
         if ( !text ) text = fileInfo.get_name();
@@ -165,7 +170,7 @@ class PlaceMenuItem extends FolderTypeMenuItem {
 class RecentFileMenuItem extends IconMenuItem {
     constructor(text, icon, gicon = null, uri, folderApp, showUri=false){
         if ( gicon ) {
-            icon = new St.Icon({gicon: gicon, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
+            icon = new St.Icon({gicon: gicon, icon_size: MENU_ITEM_ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
         }
 
         super(text, icon);
@@ -255,11 +260,18 @@ class DirectApplet extends Applet.TextIconApplet {
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
             this.on_orientation_changed(orientation);
 
+            this.sessionManager = new GnomeSession.SessionManager();
+            this.signals = new SignalManager(null);
             this.appSystem = Cinnamon.AppSystem.get_default();
             this.appFavorites = getAppFavorites();
 
-            this.enterEventId = null;
-            this.leaveEventId = null;
+            // copy the section names, translating them
+            this.sectionNames = [];
+            this.sectionNames.push(orig_user_name);
+            for (let name of orig_names) this.sectionNames.push(_(name));
+
+            //~ this.enterEventId = null;
+            //~ this.leaveEventId = null;
             this.iconIsHovered = false;
             this.userSection = new PopupMenu.PopupMenuSection();
             this.systemSection = new PopupMenu.PopupMenuSection();
@@ -269,7 +281,7 @@ class DirectApplet extends Applet.TextIconApplet {
             this.favAppsSection = new PopupMenu.PopupMenuSection();
 
             //initiate settings
-            this.settings = new Settings.AppletSettings(this, UUID, this.instanceId);
+            this.settings = new Settings.AppletSettings(this, MODULE_UUID, this.instanceId);
             this.bindSettings();
 
             //set up panel
@@ -328,10 +340,16 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     on_applet_added_to_panel() {
-        this.enterEventId = this.actor.connect("enter-event", (actor, event) => {
+        this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
+        if (this.signals.isConnected("enter-event", this.actor)) {
+            this.signals.disconnect("enter-event", this.actor);
+            this.signals.disconnect("leave-event", this.actor);
+        }
+        //~ this.enterEventId = this.actor.connect("enter-event", (actor, event) => {
+        this.signals.connect(this.actor, "enter-event", () => {
             this.iconIsHovered = true;
             this.controlDisplayOrder();
-            if ( ! this.menu.isOpen ) {
+            if ( ! this.menu || ! this.menu.isOpen ) {
                 this.buildMenu();
                 if ( this.openHoveringOver ) {
                     let _to = setTimeout( () => {
@@ -343,15 +361,21 @@ class DirectApplet extends Applet.TextIconApplet {
                 }
             }
         });
-        this.leaveEventId = this.actor.connect("leave-event", (actor, event) => { this.iconIsHovered = false } );
-        this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
+        //~ this.leaveEventId = this.actor.connect("leave-event", (actor, event) => { this.iconIsHovered = false } );
+        this.signals.connect(this.actor, "leave-event", () => { this.iconIsHovered = false } );
     }
 
     on_applet_removed_from_panel() {
-        if ( this.enterEventId )
-            this.actor.disconnect(this.enterEventId); // "enter-event"
-        if ( this.leaveEventId )
-            this.actor.disconnect(this.leaveEventId); // "leave-event"
+        //~ if ( this.enterEventId )
+            //~ this.actor.disconnect(this.enterEventId); // "enter-event"
+        //~ if ( this.leaveEventId )
+            //~ this.actor.disconnect(this.leaveEventId); // "leave-event"
+        if (this.signals.isConnected('enter-event', this.actor)) {
+            this.signals.disconnect('enter-event', this.actor);
+        }
+        if (this.signals.isConnected('leave-event', this.actor)) {
+            this.signals.disconnect('leave-event', this.actor);
+        }
         if ( this.keyId ) {
             Main.keybindingManager.removeHotKey(this.keyId);
             this.keyId = null;
@@ -398,6 +422,7 @@ class DirectApplet extends Applet.TextIconApplet {
         this.settings.bind("showVolumes", "showVolumes");
         this.settings.bind("onlyShowMounted", "onlyShowMounted");
         this.settings.bind("showNetwork", "showNetwork");
+        this.settings.bind("showSession", "showSession");
         this.settings.bind("listSystemCustomPlaces", "listSystemCustomPlaces");
         this.settings.bind("showRecentDocuments", "showRecentDocuments");
         this.settings.bind("showRecentSettingsAccessIcon", "showRecentSettingsAccessIcon");
@@ -425,7 +450,7 @@ class DirectApplet extends Applet.TextIconApplet {
         if ( favoriteSizeLimit % 5 !== 0 ) this.favoriteSizeLimit = Math.ceil(favoriteSizeLimit / 5) * 5;
         this.setKeybinding();
     }
-    
+
     setPangoTextSize() {
         TEXTSIZE = this.textSize;
     }
@@ -434,10 +459,10 @@ class DirectApplet extends Applet.TextIconApplet {
         var order = [];
         for (let d of this.displayOrder) {
             let section = d["id"];
-            if (order.indexOf(section) < 0 && orig_names.indexOf(section) >= 0) order.push(section);
+            if (order.indexOf(section) < 0 && this.sectionNames.indexOf(section) >= 0) order.push(section);
         }
-        if (order.length < orig_names.length) {
-            for (let name of orig_names) {
+        if (order.length < this.sectionNames.length) {
+            for (let name of this.sectionNames) {
                 if (order.indexOf(name) < 0 ) order.push(name);
             }
         }
@@ -460,7 +485,7 @@ class DirectApplet extends Applet.TextIconApplet {
         this.keyId = "Direct-open";
         Main.keybindingManager.addHotKey(this.keyId, this.keyOpen, () => this.openMenu());
     }
-    
+
     favoritePopulateList() {
         var infos = this.favorites.get_favorites(null);
         var favoriteCustomList = this.favoriteCustomList;
@@ -503,7 +528,7 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     buildMenu() {
-        menu_item_icon_size = this.iconSize;
+        MENU_ITEM_ICON_SIZE = this.iconSize;
 
         if ( this.menu ) {
             this.menu.removeAll();
@@ -548,12 +573,12 @@ class DirectApplet extends Applet.TextIconApplet {
         let favAppsSettingsButton = new St.Button();
         let recentSettingsButton = new St.Button();
         let customSettingsButton = new St.Button();
-        
-        
+
+
         let order = [];
         for (let d of this.displayOrder) order.push(d["id"]);
         for (let o of order) {
-            switch(orig_sections[orig_names.indexOf(o)]) {
+            switch(orig_sections[this.sectionNames.indexOf(o)]) {
                 case "User":
                     if (this.showUserSection) {
                         mainBox.add_actor(userPaneBox);
@@ -604,7 +629,7 @@ class DirectApplet extends Applet.TextIconApplet {
                 userSearchButton.add_actor(userSearchImage);
                 userSearchButton.connect("clicked", (a, b) => this.search(a, b, HOME_DIR));
                 new Tooltips.Tooltip(userSearchButton, _("Search Home Folder"));
-                
+
                 //add link to user settings tab
                 if (this.showUserSettingsAccessIcon) {
 	                userTitle.addActor(userSettingsButton);
@@ -644,7 +669,7 @@ class DirectApplet extends Applet.TextIconApplet {
                 systemSearchButton.add_actor(systemSearchImage);
                 systemSearchButton.connect("clicked", (a, b) => this.search(a, b));
                 new Tooltips.Tooltip(systemSearchButton, _("Search File System"));
-                
+
                 //add link to system settings tab
                 if (this.showSystemSettingsAccessIcon) {
 					systemTitle.addActor(systemSettingsButton);
@@ -675,7 +700,7 @@ class DirectApplet extends Applet.TextIconApplet {
 
                 let favoritesTitle = new PopupMenu.PopupMenuItem(_("FAVORITES"), { style_class: "xCenter-title", reactive: false });
                 favoritesPane.addMenuItem(favoritesTitle);
-                
+
                 //add link to favorites settings tab
                 if (this.showFavoritesSettingsAccessIcon) {
 					favoritesTitle.addActor(favoritesSettingsButton);
@@ -737,7 +762,7 @@ class DirectApplet extends Applet.TextIconApplet {
 
                 let recentTitle = new PopupMenu.PopupMenuItem(_("RECENT DOCUMENTS"), { style_class: "xCenter-title", reactive: false });
                 recentPane.addMenuItem(recentTitle);
-                
+
                 //add link to recent documents settings tab
                 if (this.showRecentSettingsAccessIcon) {
 					recentTitle.addActor(recentSettingsButton);
@@ -781,7 +806,7 @@ class DirectApplet extends Applet.TextIconApplet {
 
                 let customTitle = new PopupMenu.PopupMenuItem(_("CUSTOM"), { style_class: "xCenter-title", reactive: false });
                 customPane.addMenuItem(customTitle);
-                
+
                 //add link to custom documents settings tab
                 if (this.showCustomSettingsAccessIcon) {
 					customTitle.addActor(customSettingsButton);
@@ -820,7 +845,7 @@ class DirectApplet extends Applet.TextIconApplet {
         bookmarks = bookmarks.concat(Main.placesManager.getBookmarks());
 
         for ( let bookmark of bookmarks ) {
-            let bookmarkItem = new FolderTypeMenuItem(bookmark.name, bookmark.iconFactory(menu_item_icon_size));
+            let bookmarkItem = new FolderTypeMenuItem(bookmark.name, bookmark.iconFactory(MENU_ITEM_ICON_SIZE));
             this.userSection.addMenuItem(bookmarkItem);
             let launch = bookmark.launch;
             bookmarkItem.connect("activate", Lang.bind(this, function() {
@@ -869,19 +894,38 @@ class DirectApplet extends Applet.TextIconApplet {
 
             if (Main.placesManager.getDefaultPlaces().length > 2) {
                 let bookmark = Main.placesManager.getDefaultPlaces()[2];
-                let connectToItem = new IconMenuItem(bookmark.name, bookmark.iconFactory(menu_item_icon_size));
+                let connectToItem = new IconMenuItem(bookmark.name, bookmark.iconFactory(MENU_ITEM_ICON_SIZE));
                 this.systemSection.addMenuItem(connectToItem);
                 connectToItem.connect("activate", Lang.bind(this, function() {
                     bookmark.launch();
                 }));
             }
         }
+
+        //session items
+        if ( this.showSession ) {
+            this.systemSection.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            let logoutItem = new PopupMenu.PopupIconMenuItem(_("Logout"), "system-log-out", St.IconType.SYMBOLIC);
+            logoutItem._icon.set_icon_size(this.iconSize);
+            this.systemSection.addMenuItem(logoutItem);
+            logoutItem.connect("activate", Lang.bind(this, function() {
+                this.menu.close();
+                this.sessionManager.LogoutRemote(0);
+            }));
+            let quitItem = new PopupMenu.PopupIconMenuItem(_("Quit"), "system-shutdown", St.IconType.SYMBOLIC);
+            quitItem._icon.set_icon_size(this.iconSize);
+            this.systemSection.addMenuItem(quitItem);
+            quitItem.connect("activate", Lang.bind(this, function() {
+                this.menu.close();
+                this.sessionManager.ShutdownRemote();
+            }));
+        }
     }
-    
+
     buildCustomSection() {
         if ( this.customSection ) this.customSection.removeAll();
         else this.customSection = new PopupMenu.PopupMenuSection();
-        
+
         //custom places
         this.buildCustomPlaces(this.listCustomDocuments, this.customSection);
     }
@@ -907,7 +951,7 @@ class DirectApplet extends Applet.TextIconApplet {
                         button.app.activate();
                         this.menu.toggle();
                     })
-    
+
                     container.addMenuItem(button);
                 }
                 continue;
@@ -949,7 +993,8 @@ class DirectApplet extends Applet.TextIconApplet {
         else this.favoriteSection = new PopupMenu.PopupMenuSection();
 
         for (let i = 0; i < this._favoriteButtons.length; i ++) {
-            this._favoriteButtons[i].destroy();
+            if (this._favoriteButtons[i])
+                this._favoriteButtons[i].destroy();
         }
         this._favoriteButtons = [];
         var infos = this.favorites.get_favorites(null);
@@ -997,7 +1042,7 @@ class DirectApplet extends Applet.TextIconApplet {
                 for (let i = 0; i < this.favoriteCustomList.length; i++) {
                     let _info = this.favoriteCustomList[i];
                     if (_info["menu"] == false) continue;
-    
+
                     var info = null;
                     for (let _inf of infos) {
                         if (_inf.uri === _info["uri"]) {
@@ -1005,16 +1050,16 @@ class DirectApplet extends Applet.TextIconApplet {
                             break
                         }
                     }
-                    
+
                     if (info == null) continue;
-                    
+
                     let button = new FavoriteMenuItem(info, this);
-    
+
                     button.connect("activate", (button, event)=> {
                         this.favorites.launch(button.info.uri, event.get_time());
                         this.menu.toggle();
                     })
-    
+
                     this._favoriteButtons.push(button);
                     this.favoriteSection.addMenuItem(button);
                 }
@@ -1023,14 +1068,14 @@ class DirectApplet extends Applet.TextIconApplet {
             if (infos.length > 0) {
                 for (let i = 0; i < infos.length; i++) {
                     let info = infos[i];
-    
+
                     let button = new FavoriteMenuItem(info, this);
-    
+
                     button.connect("activate", (button, event)=> {
                         this.favorites.launch(button.info.uri, event.get_time());
                         this.menu.toggle();
                     })
-    
+
                     this._favoriteButtons.push(button);
                     this.favoriteSection.addMenuItem(button);
                 }
@@ -1254,7 +1299,7 @@ class DirectApplet extends Applet.TextIconApplet {
     on_btnIconBrowser_pressed() {
         Util.spawnCommandLineAsync(ICONBROWSER_PROGRAM);
     }
-    
+
     closeSettingsWindow() {
         if (this.settingsWindow != undefined) {
             try {
@@ -1265,13 +1310,14 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     configureApplet(tab=0) {
+        this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
         const maximize_vertically = true;
         const VERTICAL = 2;
         this._applet_context_menu.close(false);
 
         this.closeSettingsWindow();
 
-        let pid = Util.spawnCommandLine(`xlet-settings applet ${UUID} -i ${this.instanceId} -t ${tab}`);
+        let pid = Util.spawnCommandLine(`xlet-settings applet ${MODULE_UUID} -i ${this.instanceId} -t ${tab}`);
 
         if (maximize_vertically) {
           var app = null;
@@ -1302,6 +1348,8 @@ class DirectApplet extends Applet.TextIconApplet {
 
 
 function main(metadata, orientation, panel_height, instanceId) {
+    MODULE_UUID = metadata.uuid;
+    Gettext.bindtextdomain(MODULE_UUID, GLib.get_user_data_dir() + "/locale");
     let directApplet = new DirectApplet(metadata, orientation, panel_height, instanceId);
     return directApplet;
 }

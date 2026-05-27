@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-06-11 16:17+0200\n"
-"PO-Revision-Date: 2025-04-03 18:58+0300\n"
+"PO-Revision-Date: 2026-04-23 12:20+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -117,31 +117,31 @@ msgstr "Lisää erotin"
 
 #. widgets.py:58
 msgid "Edit selected entry"
-msgstr "Muokkaa valittua merkintää"
+msgstr "Muokkaa valittua"
 
 #. widgets.py:61
 msgid "Duplicate selected entry"
-msgstr "Monista valittu merkintä"
+msgstr "Monista valittu"
 
 #. widgets.py:64
 msgid "Move selected entry up"
-msgstr "Siirrä merkintää ylöspäin"
+msgstr "Siirrä ylöspäin"
 
 #. widgets.py:67
 msgid "Move selected entry down"
-msgstr "Siirrä merkintää alaspäin"
+msgstr "Siirrä alaspäin"
 
 #. widgets.py:70
 msgid "Remove selected entry"
-msgstr "Poista valittu merkintä"
+msgstr "Poista valittu"
 
 #. widgets.py:76
 msgid "Save?"
-msgstr "Tallentaa?"
+msgstr "Tallenna?"
 
 #. widgets.py:77
 msgid "Save the current configuration"
-msgstr "Tallenna nykyinen kokoonpano"
+msgstr "Tallentaa kokoonpanon"
 
 #. widgets.py:230
 msgid "Separator"
@@ -153,7 +153,7 @@ msgstr "App Launcher"
 
 #. metadata.json->description
 msgid "A simple App Launcher"
-msgstr "Helppo sovellusten käynnistysohjelma"
+msgstr "Valitse sovellukset omaan käynnistysvalikkoon omilla asetuksilla."
 
 #. settings-schema.json->page-applications->title
 #. settings-schema.json->section-applications->title
@@ -168,11 +168,11 @@ msgstr "Yleiset asetukset"
 #. settings-schema.json->page-settings-application->title
 #. settings-schema.json->section-settings-applications->title
 msgid "Application Settings"
-msgstr "Sovelluksen asetukset"
+msgstr "Sovellusten asetukset"
 
 #. settings-schema.json->visible-launcher-label->description
 msgid "Show Label"
-msgstr "Näytä nimi"
+msgstr "Nimi näytetään"
 
 #. settings-schema.json->launcher-label->description
 msgid "Label"
@@ -188,7 +188,7 @@ msgstr "Näytä ilmoitukset"
 
 #. settings-schema.json->notification-enabled->tooltip
 msgid "Show notification on application launch"
-msgstr "Näytä ilmoitus sovelluksen käynnistyessä"
+msgstr "Näytä sovelluksen avaamisesta ilmoitus"
 
 #. settings-schema.json->notification-text->description
 msgid "Notification Text"
@@ -196,7 +196,7 @@ msgstr "Ilmoitusteksti"
 
 #. settings-schema.json->notification-text->tooltip
 msgid "%s will be your application name"
-msgstr "%s on sovelluksesi nimi"
+msgstr "%s on antamasi sovelluksen nimi"
 
 #. settings-schema.json->hotkeys-enabled->description
 msgid "Enable Hotkeys"
@@ -216,23 +216,23 @@ msgstr "Valikko hiiren kohdalla"
 
 #. settings-schema.json->menu-at-pointer->tooltip
 msgid "Show the menu next to the cursor when triggered by hotkey"
-msgstr "Näytä valikko kohdistimen vieressä kun se aukeaa ​​pikanäppäimellä"
+msgstr "Näytä kohdistin valikon vieressä kun se aukeaa ​​pikanäppäimillä"
 
 #. settings-schema.json->open-by-hover->description
 msgid "Open menus by hovering over them"
-msgstr ""
+msgstr "Avaa valikot osoittamalla"
 
 #. settings-schema.json->open-by-hover->tooltip
 msgid "Open all menus when you move the mouse pointer over them"
-msgstr ""
+msgstr "Avaa valikot viemällä hiiri niiden päälle"
 
 #. settings-schema.json->open-by-hover-delay->description
 msgid "Hover delay"
-msgstr ""
+msgstr "Valintaviive"
 
 #. settings-schema.json->open-by-hover-delay->units
 msgid "milliseconds"
-msgstr ""
+msgstr "ms"
 
 #. settings-schema.json->bind-to-workspace->description
 msgid "Bind to workspace"
@@ -244,7 +244,7 @@ msgstr "Näytä sovelma vain valitussa työtilassa"
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"
-msgstr "Kiinteä valikon leveys"
+msgstr "Valikon kiinteä leveys"
 
 #. settings-schema.json->fixed-menu-width->tooltip
 msgid "Based on the largest submenu item, to prevent menu width flickering"
@@ -256,7 +256,7 @@ msgstr "Näytä kuvakkeet"
 
 #. settings-schema.json->visible-app-icons->tooltip
 msgid "Show Application Icons in Popup-Menu"
-msgstr "Näytä sovellusten kuvakkeet ponnahdusvalikossa"
+msgstr "Näytä sovellusten kuvakkeet"
 
 #. settings-schema.json->use-symbolic-icons->description
 msgid "Use Symbolic Application Icons"

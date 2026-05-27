@@ -2,7 +2,7 @@
     "uuid": "app-drawer@mostlynick3",
     "name": "App Drawer",
     "description": "Full-screen app launcher with animations, transparency, a search box, and more.",
-    "version": "1.0",
+    "version": "1.1",
     "author": "mostlynick3",
     "cinnamon-version": ["6.0"]
 }

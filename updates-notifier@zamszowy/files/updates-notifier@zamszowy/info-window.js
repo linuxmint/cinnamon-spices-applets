@@ -46,13 +46,22 @@ function capitalize(str) {
     return str.charAt(0).toLocaleUpperCase() + str.slice(1);
 }
 
-function getPkconDetails(pkgid, callback) {
+function getPkgDetails(pkgid, callback) {
+    let pkg_cmd = [];
+    if (GLib.find_program_in_path("pkgcli")) {
+        pkg_cmd = ["pkgcli", "show-update", pkgid];
+    } else if (GLib.find_program_in_path("pkgctl")) {
+        pkg_cmd = ["pkgctl", "show-update", pkgid];
+    } else {
+        pkg_cmd = ["pkcon", "get-update-detail", pkgid];
+    }
+
     let launcher = new Gio.SubprocessLauncher({
         flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
     });
     launcher.setenv("LANG", "en_US.UTF-8", true);
     try {
-        let subprocess = launcher.spawnv(["pkcon", "get-update-detail", pkgid]);
+        let subprocess = launcher.spawnv(pkg_cmd);
         subprocess.communicate_utf8_async(null, null, (proc, res) => {
             let [ok, stdout, stderr] = proc.communicate_utf8_finish(res);
             if (ok) {
@@ -147,7 +156,7 @@ function showDetails(item) {
     };
 
     if (!isFirmware) {
-        getPkconDetails(item.values.pkgid, setText);
+        getPkgDetails(item.values.pkgid, setText);
     } else {
         getFirmwareDetails(item.values.deviceid, setText)
     }

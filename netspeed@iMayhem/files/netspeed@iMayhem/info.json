@@ -1,0 +1,10 @@
+{
+  "uuid": "netspeed@iMayhem",
+  "name": "Net Speed (Text Only)",
+  "description": "Text-only network speed indicator for Linux Mint Cinnamon",
+  "author": "iMayhem",
+  "version": 1,
+  "icon": "network-transmit-receive",
+  "max-instances": 1
+}
+

@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
-"POT-Creation-Date: 2024-10-08 19:45-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-06 23:30+0000\n"
 "PO-Revision-Date: 2021-02-16 11:18+0100\n"
 "Last-Translator: João Lopes <joao.caldas.lopes@gmail.com>\n"
 "Language-Team: Portuguese\n"
@@ -20,22 +19,30 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 
 #. metadata.json->name
-#. applet.js:59 applet.js:173
+#: applet.js:59 applet.js:178 cups-bsd_warning.py:26
 msgid "Printers"
 msgstr "Impressoras"
 
-#. applet.js:198
+#: applet.js:203
 msgid "Cancel all jobs"
 msgstr "Cancelar todos os trabalhos"
 
-#. applet.js:225
+#: applet.js:230
 msgid "at"
 msgstr "em"
 
 #. settings-schema.json->send-to-front->description
-#. applet.js:239
+#: applet.js:244
 msgid "Send to front"
 msgstr "Enviar para a frente"
+
+#: cups-bsd_warning.py:27
+msgid ""
+"Missing dependency.\n"
+"'lpq' command is missing! Please install 'cups-bsd' package (if available)."
+msgstr ""
+"Dependência em falta.\n"
+"O comando 'lpq' não foi encontrado! Por favor instale o pacote 'cups-bsd' (se disponível)."
 
 #. metadata.json->description
 msgid "Manage Jobs and Printers"

@@ -91,6 +91,11 @@ DailyWallpaperApplet.prototype = {
         this._settings.bindProperty(null, "selectedImagePreferences", "selectedImagePreferences", null, null);
         this._settings.bindProperty(null, "market", "market", null, null);
         this._settings.bindProperty(null, "apiKey", "apiKey", null, null);
+        this._settings.bindProperty(null, "image-width-option", "imageWidth", null, null);
+        this._settings.bindProperty(null, "image-height-option", "imageHeight", null, null);
+        this._settings.bindProperty(null, "image-blur-option", "imageBlur", null, null);
+        this._settings.bindProperty(null, "image-blur-amount", "imageBlurAmount", null, null);
+        this._settings.bindProperty(null, "image-grayscale-option", "imageGrayscale", null, null);
         this._settings.bindProperty(null, "image-aspect-options", "pictureOptions", this._setBackground, null);
         this._settings.bindProperty(null, 'debugToggle', 'debug', (val) => { global.DEBUG = val; }, null);
         this._settings.bindProperty(null, 'currentSource', 'currentSource', this._changeCurrentSource, null);
@@ -490,6 +495,18 @@ DailyWallpaperApplet.prototype = {
             let date = currentDateTime.add_days(-_idxWallpaper);
             date = date.format("%Y-%m-%d");
             url = `${this.apiKey}&date=${date}`;
+        } else if (this.currentSource === "Picsum Photos") {
+            if (this.imageGrayscale === true)
+                url += "?&grayscale";
+
+            if (this.imageGrayscale === true && this.imageBlur === true)
+                url += `&blur=${this.imageBlurAmount}`;
+
+            if (this.imageGrayscale === false && this.imageBlur === true)
+                url += `?&blur=${this.imageBlurAmount}`;
+
+            this.Source.callUrl(url, write_file, () => this._setTimeout(1));
+            return;
         }
 
         this.Source.getMetaData(url, write_file, () => this._setTimeout(1));

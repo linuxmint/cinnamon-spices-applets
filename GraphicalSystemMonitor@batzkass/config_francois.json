@@ -1,0 +1,520 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "common",
+            "cpu",
+            "mem",
+            "swap",
+            "net",
+            "load",
+            "tooltip_page"
+        ],
+        "common": {
+            "type": "page",
+            "title": "Common",
+            "sections": [
+                "common_g",
+                "common_c"
+            ]
+        },
+        "common_g": {
+            "type": "section",
+            "title": "General",
+            "keys": [
+                "onclick_program",
+                "draw_border",
+                "graph_width",
+                "graph_spacing",
+                "refresh_rate",
+                "use_padding",
+                "padding_lr",
+                "padding_tb",
+                "show_values",
+                "values_fontsize",
+                "values_color"
+            ]
+        },
+        "common_c": {
+            "type": "section",
+            "title": "Colors",
+            "keys": [
+                "bg_color",
+                "border_color"
+            ]
+        },
+        "cpu": {
+            "type": "page",
+            "title": "CPU",
+            "sections": [
+                "cpu_g",
+                "cpu_c"
+            ]
+        },
+        "cpu_g": {
+            "type": "section",
+            "title": "General",
+            "keys": [
+                "cpu_enabled",
+                "cpu_override_graph_width",
+                "cpu_graph_width"
+            ]
+        },
+        "cpu_c": {
+            "type": "section",
+            "title": "Colors",
+            "keys": [
+                "cpu_color_0",
+                "cpu_color_1",
+                "cpu_color_2",
+                "cpu_color_3"
+            ]
+        },
+        "mem": {
+            "type": "page",
+            "title": "Memory",
+            "sections": [
+                "mem_g",
+                "mem_c"
+            ]
+        },
+        "mem_g": {
+            "type": "section",
+            "title": "General",
+            "keys": [
+                "mem_enabled",
+                "mem_override_graph_width",
+                "mem_graph_width"
+            ]
+        },
+        "mem_c": {
+            "type": "section",
+            "title": "Colors",
+            "keys": [
+                "mem_color_0",
+                "mem_color_1"
+            ]
+        },
+        "swap": {
+            "type": "page",
+            "title": "Swap",
+            "sections": [
+                "swap_g",
+                "swap_c"
+            ]
+        },
+        "swap_g": {
+            "type": "section",
+            "title": "General",
+            "keys": [
+                "swap_enabled",
+                "swap_override_graph_width",
+                "swap_graph_width"
+            ]
+        },
+        "swap_c": {
+            "type": "section",
+            "title": "Colors",
+            "keys": [
+                "swap_color_0"
+            ]
+        },
+        "net": {
+            "type": "page",
+            "title": "Network",
+            "sections": [
+                "net_g",
+                "net_c"
+            ]
+        },
+        "net_g": {
+            "type": "section",
+            "title": "General",
+            "keys": [
+                "net_enabled",
+                "net_override_graph_width",
+                "net_graph_width",
+                "net_minimum_graph_scale"
+            ]
+        },
+        "net_c": {
+            "type": "section",
+            "title": "Colors",
+            "keys": [
+                "net_color_0",
+                "net_color_1"
+            ]
+        },
+        "load": {
+            "type": "page",
+            "title": "Load",
+            "sections": [
+                "load_g",
+                "load_c"
+            ]
+        },
+        "load_g": {
+            "type": "section",
+            "title": "General",
+            "keys": [
+                "load_enabled",
+                "load_override_graph_width",
+                "load_graph_width"
+            ]
+        },
+        "load_c": {
+            "type": "section",
+            "title": "Colors",
+            "keys": [
+                "load_color_0"
+            ]
+        },
+        "tooltip_page": {
+            "type": "page",
+            "title": "Tooltip",
+            "sections": [
+                "tooltip_g"
+            ]
+        },
+        "tooltip_g": {
+            "type": "section",
+            "title": "General",
+            "keys": [
+                "tooltip_background_color",
+                "tooltip_label_color",
+                "tooltip_tick_labels_border_color",
+                "tooltip_grid_color",
+                "tooltip_history_seconds"
+            ]
+        }
+    },
+    "onclick_program": {
+        "type": "entry",
+        "default": "gnome-system-monitor",
+        "description": "Program to launch on click",
+        "value": "gnome-system-monitor"
+    },
+    "draw_border": {
+        "type": "switch",
+        "default": true,
+        "description": "Draw border",
+        "value": true
+    },
+    "graph_width": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 10,
+        "max": 1000,
+        "step": 1,
+        "description": "Common graph size",
+        "units": "pixels",
+        "tooltip": "Graphs width for horizontal panel, graphs height for vertical panel.",
+        "value": 100.0
+    },
+    "graph_spacing": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "description": "Graph spacing",
+        "units": "pixels",
+        "tooltip": "The number of pixels between each graph.",
+        "value": 0.0
+    },
+    "refresh_rate": {
+        "type": "spinbutton",
+        "default": 250,
+        "min": 100,
+        "max": 60000,
+        "step": 50,
+        "description": "Refresh rate",
+        "units": "ms",
+        "value": 250
+    },
+    "use_padding": {
+        "type": "switch",
+        "default": false,
+        "description": "Use custom applet padding",
+        "value": false
+    },
+    "padding_lr": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "description": "Left/right padding",
+        "units": "pixels",
+        "dependency": "use_padding",
+        "value": 0.0
+    },
+    "padding_tb": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "description": "Top/bottom padding",
+        "units": "pixels",
+        "dependency": "use_padding",
+        "value": 0.0
+    },
+    "show_values": {
+        "type": "switch",
+        "default": true,
+        "description": "Show data on the graphs",
+        "value": true
+    },
+    "values_fontsize": {
+        "type": "spinbutton",
+        "default": 8,
+        "min": 6,
+        "max": 20,
+        "step": 1,
+        "description": "Data font size",
+        "units": "pixels",
+        "dependency": "show_values",
+        "value": 8.0
+    },
+    "values_color": {
+        "type": "colorchooser",
+        "default": "rgb(255,255,255)",
+        "description": "Text color",
+        "dependency": "show_values",
+        "value": "rgb(255,255,255)"
+    },
+    "bg_color": {
+        "type": "colorchooser",
+        "default": "rgba(0,0,0,0)",
+        "description": "Background color",
+        "value": "rgba(0,0,0,0)"
+    },
+    "border_color": {
+        "type": "colorchooser",
+        "default": "rgb(128,128,128)",
+        "description": "Border color",
+        "value": "rgb(255,120,0)"
+    },
+    "cpu_enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Enable",
+        "value": true
+    },
+    "cpu_override_graph_width": {
+        "type": "switch",
+        "default": false,
+        "description": "Override graph size",
+        "value": false
+    },
+    "cpu_graph_width": {
+        "type": "spinbutton",
+        "default": 40,
+        "min": 10,
+        "max": 1000,
+        "step": 1,
+        "description": "Graph size",
+        "units": "pixels",
+        "dependency": "cpu_override_graph_width",
+        "value": 40
+    },
+    "cpu_color_0": {
+        "type": "colorchooser",
+        "default": "rgb(53,132,228)",
+        "description": "User color",
+        "value": "rgb(53,132,228)"
+    },
+    "cpu_color_1": {
+        "type": "colorchooser",
+        "default": "rgb(53,132,228)",
+        "description": "User nice color",
+        "value": "rgb(53,132,228)"
+    },
+    "cpu_color_2": {
+        "type": "colorchooser",
+        "default": "rgb(22,80,151)",
+        "description": "Kernel color",
+        "value": "rgb(22,80,151)"
+    },
+    "cpu_color_3": {
+        "type": "colorchooser",
+        "default": "rgb(175,207,245)",
+        "description": "Other color",
+        "value": "rgb(175,207,245)"
+    },
+    "mem_enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Enable",
+        "value": true
+    },
+    "mem_override_graph_width": {
+        "type": "switch",
+        "default": false,
+        "description": "Override graph size",
+        "value": false
+    },
+    "mem_graph_width": {
+        "type": "spinbutton",
+        "default": 40,
+        "min": 10,
+        "max": 1000,
+        "step": 1,
+        "description": "Graph size",
+        "units": "pixels",
+        "dependency": "mem_override_graph_width",
+        "value": 40
+    },
+    "mem_color_0": {
+        "type": "colorchooser",
+        "default": "rgb(38,162,105)",
+        "description": "Used color",
+        "value": "rgb(38,162,105)"
+    },
+    "mem_color_1": {
+        "type": "colorchooser",
+        "default": "rgba(38,162,105,0.3)",
+        "description": "Cached color",
+        "value": "rgba(38,162,105,0.3)"
+    },
+    "swap_enabled": {
+        "type": "switch",
+        "default": false,
+        "description": "Enable",
+        "value": true
+    },
+    "swap_override_graph_width": {
+        "type": "switch",
+        "default": true,
+        "description": "Override graph size",
+        "value": true
+    },
+    "swap_graph_width": {
+        "type": "spinbutton",
+        "default": 40,
+        "min": 10,
+        "max": 1000,
+        "step": 1,
+        "description": "Graph size",
+        "units": "pixels",
+        "dependency": "swap_override_graph_width",
+        "value": 40
+    },
+    "swap_color_0": {
+        "type": "colorchooser",
+        "default": "rgb(145,65,172)",
+        "description": "Used color",
+        "value": "rgb(145,65,172)"
+    },
+    "net_enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Enable",
+        "value": true
+    },
+    "net_override_graph_width": {
+        "type": "switch",
+        "default": false,
+        "description": "Override graph size",
+        "value": false
+    },
+    "net_graph_width": {
+        "type": "spinbutton",
+        "default": 40,
+        "min": 10,
+        "max": 1000,
+        "step": 1,
+        "description": "Graph size",
+        "units": "pixels",
+        "dependency": "net_override_graph_width",
+        "value": 40
+    },
+    "net_minimum_graph_scale": {
+        "type": "spinbutton",
+        "default": 1.1,
+        "min": 0,
+        "max": 100,
+        "step": 0.1,
+        "description": "Minimum graph scale",
+        "units": "MiB/s",
+        "tooltip": "The minimum scale for the graph in Megabits per second.\nThe graph will not scale below this minimum, but it will automatically scale if the network speed exceeds this value.\n\nTo always automatically scale, set the value to 0.",
+        "value": 1.0999999999999999
+    },
+    "net_color_0": {
+        "type": "colorchooser",
+        "default": "rgb(230,97,0)",
+        "description": "Download color",
+        "value": "rgb(230,97,0)"
+    },
+    "net_color_1": {
+        "type": "colorchooser",
+        "default": "rgb(245,194,17)",
+        "description": "Upload color",
+        "value": "rgb(245,194,17)"
+    },
+    "load_enabled": {
+        "type": "switch",
+        "default": false,
+        "description": "Enable",
+        "value": false
+    },
+    "load_override_graph_width": {
+        "type": "switch",
+        "default": false,
+        "description": "Override graph size",
+        "value": false
+    },
+    "load_graph_width": {
+        "type": "spinbutton",
+        "default": 40,
+        "min": 10,
+        "max": 1000,
+        "step": 1,
+        "description": "Graph size",
+        "units": "pixels",
+        "dependency": "load_override_graph_width",
+        "value": 40
+    },
+    "load_color_0": {
+        "type": "colorchooser",
+        "default": "rgb(204,0,0)",
+        "description": "Color",
+        "value": "rgb(204,0,0)"
+    },
+    "tooltip_background_color": {
+        "type": "colorchooser",
+        "default": "rgb(245,245,245)",
+        "description": "Tooltip background color",
+        "value": "rgb(246,245,244)"
+    },
+    "tooltip_label_color": {
+        "type": "colorchooser",
+        "default": "rgb(0,0,0)",
+        "description": "Tooltip label color",
+        "value": "rgb(0,0,0)"
+    },
+    "tooltip_tick_labels_border_color": {
+        "type": "colorchooser",
+        "default": "rgb(0,0,0)",
+        "description": "Tooltip tick labels and border color",
+        "value": "rgb(0,0,0)"
+    },
+    "tooltip_grid_color": {
+        "type": "colorchooser",
+        "default": "rgba(0,0,0,0.2)",
+        "description": "Tooltip horizontal and vertical grid color",
+        "value": "rgba(0,0,0,0.185053)"
+    },
+    "tooltip_history_seconds": {
+        "type": "spinbutton",
+        "default": 60,
+        "min": 10,
+        "max": 300,
+        "step": 10,
+        "description": "Tooltip graph horizontal scale",
+        "units": "seconds",
+        "value": 60.0
+    },
+    "__md5__": "07793497824c5246c03334002cff4f80"
+}

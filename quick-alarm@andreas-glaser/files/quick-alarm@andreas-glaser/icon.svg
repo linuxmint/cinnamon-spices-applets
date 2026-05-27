@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="128"
+   height="128"
+   viewBox="0 0 128 128"
+   version="1.1"
+   id="svg112"
+   sodipodi:docname="icon.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview114"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="3.6875"
+     inkscape:cx="48"
+     inkscape:cy="44.474576"
+     inkscape:window-width="1440"
+     inkscape:window-height="828"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg112" />
+  <title
+     id="title2">Alarm Clock Icon</title>
+  <defs
+     id="defs32">
+    <linearGradient
+       id="gBell"
+       x1="0"
+       y1="0"
+       x2="0"
+       y2="1">
+      <stop
+         offset="0"
+         stop-color="#ffd37a"
+         id="stop4" />
+      <stop
+         offset="1"
+         stop-color="#f2a81d"
+         id="stop6" />
+    </linearGradient>
+    <linearGradient
+       id="gRing"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="1">
+      <stop
+         offset="0"
+         stop-color="#3b414d"
+         id="stop9" />
+      <stop
+         offset="1"
+         stop-color="#262a33"
+         id="stop11" />
+    </linearGradient>
+    <radialGradient
+       id="gFace"
+       cx="52.45"
+       cy="56.600001"
+       r="57.75"
+       fx="52.45"
+       fy="56.600001"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0408626,0,0,1.0408626,-2.3742179,-3.1125581)">
+      <stop
+         offset="0"
+         stop-color="#ffffff"
+         id="stop14" />
+      <stop
+         offset="1"
+         stop-color="#f3f5f7"
+         id="stop16" />
+    </radialGradient>
+    <filter
+       id="softShadow"
+       x="-0.088530445"
+       y="-0.051764707"
+       width="1.1770609"
+       height="1.1633333">
+      <feGaussianBlur
+         in="SourceAlpha"
+         stdDeviation="2.2"
+         result="b"
+         id="feGaussianBlur19" />
+      <feOffset
+         in="b"
+         dx="0"
+         dy="2"
+         result="o"
+         id="feOffset21" />
+      <feColorMatrix
+         in="o"
+         type="matrix"
+         values="0 0 0 0 0                 0 0 0 0 0                 0 0 0 0 0                 0 0 0 .18 0"
+         result="s"
+         id="feColorMatrix23" />
+      <feMerge
+         id="feMerge29">
+        <feMergeNode
+           in="s"
+           id="feMergeNode25" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode27" />
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Ground shadow -->
+  <ellipse
+     cx="64"
+     cy="113"
+     rx="36"
+     ry="8"
+     fill="#000"
+     opacity="0.10"
+     id="ellipse34" />
+  <g
+     stroke="#2f343f"
+     stroke-width="8.2"
+     stroke-linecap="round"
+     id="g108"
+     inkscape:label="legs">
+    <path
+       d="M46 104 L36 118"
+       id="path104" />
+    <path
+       d="M82 104 L92 118"
+       id="path106" />
+  </g>
+  <g
+     filter="url(#softShadow)"
+     id="g110">
+    <!-- Bells (slightly tilted) -->
+    <g
+       stroke="#2f343f"
+       stroke-width="5.5"
+       stroke-linejoin="round"
+       id="g48">
+      <g
+         transform="translate(34 38) rotate(-18)"
+         id="g40">
+        <path
+           d="M-16 0c0-10 8-18 18-18S20-10 20 0 12 18 2 18-16 10-16 0Z"
+           fill="url(#gBell)"
+           id="path36" />
+        <path
+           d="M-10 2c4 7 13 10 22 7"
+           fill="none"
+           opacity="0.25"
+           id="path38" />
+      </g>
+      <g
+         transform="translate(94 38) rotate(18)"
+         id="g46">
+        <path
+           d="M-20 0c0-10 8-18 18-18S16-10 16 0 8 18-2 18-20 10-20 0Z"
+           fill="url(#gBell)"
+           id="path42" />
+        <path
+           d="M-14 2c4 7 13 10 22 7"
+           fill="none"
+           opacity="0.25"
+           id="path44" />
+      </g>
+    </g>
+    <!-- Top knob -->
+    <g
+       id="g54">
+      <rect
+         x="54"
+         y="16"
+         width="20"
+         height="10"
+         rx="5"
+         fill="#2f343f"
+         id="rect50" />
+      <rect
+         x="60.5"
+         y="20"
+         width="7"
+         height="10"
+         rx="3.5"
+         fill="#2f343f"
+         id="rect52" />
+    </g>
+    <!-- Clock body -->
+    <g
+       id="g62">
+      <!-- Outer ring -->
+      <circle
+         cx="64"
+         cy="72"
+         r="44"
+         fill="none"
+         stroke="url(#gRing)"
+         stroke-width="10"
+         id="circle56" />
+      <!-- Inner face -->
+      <circle
+         cx="64.240997"
+         cy="71.829552"
+         r="39.55278"
+         fill="url(#gFace)"
+         stroke="#2f343f"
+         stroke-opacity="0.08"
+         stroke-width="1.04086"
+         id="circle58"
+         style="fill:url(#gFace)" />
+      <!-- Subtle face highlight -->
+      <path
+         d="M33 68c2-20 18-33 33-34"
+         fill="none"
+         stroke="#ffffff"
+         stroke-opacity="0.55"
+         stroke-width="3"
+         stroke-linecap="round"
+         id="path60" />
+    </g>
+    <!-- Ticks -->
+    <g
+       stroke="#2f343f"
+       stroke-linecap="round"
+       id="g90">
+      <!-- cardinal -->
+      <line
+         x1="64"
+         y1="38"
+         x2="64"
+         y2="46"
+         stroke-width="5.2"
+         id="line64" />
+      <line
+         x1="64"
+         y1="98"
+         x2="64"
+         y2="106"
+         stroke-width="5.2"
+         id="line66" />
+      <line
+         x1="38"
+         y1="72"
+         x2="46"
+         y2="72"
+         stroke-width="5.2"
+         id="line68" />
+      <line
+         x1="82"
+         y1="72"
+         x2="90"
+         y2="72"
+         stroke-width="5.2"
+         id="line70" />
+      <!-- diagonals (lighter) -->
+      <g
+         opacity="0.55"
+         stroke-width="3.6"
+         id="g88">
+        <line
+           x1="77.5"
+           y1="43.7"
+           x2="74.2"
+           y2="49.6"
+           id="line72" />
+        <line
+           x1="88.3"
+           y1="54.5"
+           x2="82.4"
+           y2="57.8"
+           id="line74" />
+        <line
+           x1="88.3"
+           y1="89.5"
+           x2="82.4"
+           y2="86.2"
+           id="line76" />
+        <line
+           x1="77.5"
+           y1="100.3"
+           x2="74.2"
+           y2="94.4"
+           id="line78" />
+        <line
+           x1="50.5"
+           y1="100.3"
+           x2="53.8"
+           y2="94.4"
+           id="line80" />
+        <line
+           x1="39.7"
+           y1="89.5"
+           x2="45.6"
+           y2="86.2"
+           id="line82" />
+        <line
+           x1="39.7"
+           y1="54.5"
+           x2="45.6"
+           y2="57.8"
+           id="line84" />
+        <line
+           x1="50.5"
+           y1="43.7"
+           x2="53.8"
+           y2="49.6"
+           id="line86" />
+      </g>
+    </g>
+    <!-- Hands (10:10) -->
+    <g
+       stroke="#2f343f"
+       stroke-linecap="round"
+       id="g98">
+      <!-- hour hand -->
+      <line
+         x1="64"
+         y1="72"
+         x2="50"
+         y2="63"
+         stroke-width="7.4"
+         id="line92" />
+      <!-- minute hand -->
+      <line
+         x1="64"
+         y1="72"
+         x2="82.5"
+         y2="53.5"
+         stroke-width="7.4"
+         id="line94" />
+      <!-- hand shadow hint -->
+      <circle
+         cx="64"
+         cy="72"
+         r="10"
+         fill="#2f343f"
+         opacity="0.06"
+         id="circle96" />
+    </g>
+    <!-- Center cap -->
+    <circle
+       cx="64"
+       cy="72"
+       r="7.3"
+       fill="#f6b73c"
+       stroke="#2f343f"
+       stroke-width="4.2"
+       id="circle100" />
+    <circle
+       cx="62.2"
+       cy="70.3"
+       r="2.2"
+       fill="#fff"
+       opacity="0.45"
+       id="circle102" />
+    <!-- Feet -->
+  </g>
+  <metadata
+     id="metadata1054">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Alarm Clock Icon</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

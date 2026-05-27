@@ -107,7 +107,8 @@
         "showRoot",
         "showVolumes",
         "onlyShowMounted",
-        "showNetwork"
+        "showNetwork",
+        "showSession"
       ]
     },
     "systemSectionCustomPlaces": {
@@ -205,8 +206,8 @@
     "max": 500,
     "units": "px",
     "step": 10,
-    "description": "Text size (in pixels)",
-    "tooltip": "0 means automatic"
+    "description": "Text width",
+    "tooltip": "0 means: automatic"
   },
   "displayOrderLabel": {
     "type": "label",
@@ -347,6 +348,11 @@
   "showNetwork": {
     "type": "switch",
     "description": "Show network",
+    "default": true
+  },
+  "showSession": {
+    "type": "switch",
+    "description": "Show Logout and Quit",
     "default": true
   },
   "listSystemCustomPlaces": {

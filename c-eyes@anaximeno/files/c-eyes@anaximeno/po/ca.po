@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: c-eyes@anaximeno 2.1.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-20 06:52-0100\n"
+"POT-Creation-Date: 2026-03-01 21:29-0100\n"
 "PO-Revision-Date: 2024-09-25 18:49+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -32,15 +32,15 @@ msgstr ""
 "instal·lada en l'actualitat\n"
 "a les opcions de les extensions de Cinnamon per versions >= 5.4"
 
-#. 4.2/applet.js:396 5.4/applet.js:393
+#. 4.2/applet.js:396 5.4/applet.js:392
 msgid "click to deactivate the eye"
 msgstr "cliqueu per desactivar l'ull"
 
-#. 4.2/applet.js:396 5.4/applet.js:393
+#. 4.2/applet.js:396 5.4/applet.js:392
 msgid "click to activate the eye"
 msgstr "cliqueu per activar l'ull"
 
-#. 4.2/applet.js:397 5.4/applet.js:394
+#. 4.2/applet.js:397 5.4/applet.js:393
 msgid "TIP"
 msgstr "TIP"
 
@@ -67,7 +67,7 @@ msgstr "Ull"
 
 #. 4.2->settings-schema.json->effects->title
 #. 5.4->settings-schema.json->effects->title
-#. 6.2->settings-schema.json->effects-page->title
+#. 6.2->settings-schema.json->effects-section->title
 msgid "Effects"
 msgstr "Efectes"
 
@@ -77,7 +77,6 @@ msgstr "Efectes"
 #. 5.4->settings-schema.json->click-generic->title
 #. 6.2->settings-schema.json->general-page->title
 #. 6.2->settings-schema.json->general-section->title
-#. 6.2->settings-schema.json->general-effects-section->title
 msgid "General"
 msgstr "General"
 
@@ -133,7 +132,6 @@ msgstr "px"
 
 #. 4.2->settings-schema.json->eye-margin->description
 #. 5.4->settings-schema.json->eye-margin->description
-#. 6.2->settings-schema.json->margin->description
 msgid "Margin"
 msgstr "Marge"
 
@@ -148,9 +146,6 @@ msgstr "Padding"
 #. 5.4->settings-schema.json->eye-repaint-interval->units
 #. 5.4->settings-schema.json->fade-timeout->units
 #. 6.2->settings-schema.json->repaint-interval->units
-#. 6.2->settings-schema.json->blink-period->units
-#. 6.2->settings-schema.json->blink-gap->units
-#. 6.2->settings-schema.json->idle-delay->units
 msgid "ms"
 msgstr "ms"
 
@@ -228,8 +223,6 @@ msgstr "Color de la pupil·la"
 #. 4.2->settings-schema.json->fill-bulb-color-painting->description
 #. 5.4->settings-schema.json->fill-lids-color-painting->description
 #. 5.4->settings-schema.json->fill-bulb-color-painting->description
-#. 6.2->settings-schema.json->fill-lids-color-painting->description
-#. 6.2->settings-schema.json->fill-bulb-color-painting->description
 msgid "Fill the Colors Inside the Eye"
 msgstr "Omple els colors de dins de l'ull"
 
@@ -431,6 +424,26 @@ msgstr "Optimitzacions"
 msgid "Eye Mode"
 msgstr "Tipus d'ull"
 
+#. 6.2->settings-schema.json->pupil-shape->description
+msgid "Pupil Shape"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Round"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Vertical"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Horizontal"
+msgstr ""
+
+#. 6.2->settings-schema.json->pupil-shape->options
+msgid "Star"
+msgstr ""
+
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
 msgstr "Missatge de barra d'eines en passar el cursor per sobre de l'ull"
@@ -454,6 +467,25 @@ msgstr "Rendiment"
 #. 6.2->settings-schema.json->optimization-mode->options
 msgid "Manual"
 msgstr "Manual"
+
+#. 6.2->settings-schema.json->margin->description
+#, fuzzy
+msgid "Width"
+msgstr "Amplada de línia"
+
+#. 6.2->settings-schema.json->margin->tooltip
+msgid ""
+"This setting controls the width of the area around the eye within which the "
+"eye will follow the mouse cursor. Positive values increase the area, while "
+"negative values decrease it."
+msgstr ""
+
+#. 6.2->settings-schema.json->padding->tooltip
+msgid ""
+"This setting controls the padding around the eye within which the eye will "
+"follow the mouse cursor. Increasing the padding decreases the radius of the "
+"eye, while decreasing the padding increases the radius of the eye."
+msgstr ""
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
@@ -479,21 +511,14 @@ msgstr "Color de l'iris"
 msgid "Pupil Color"
 msgstr "Color de la pupil·la"
 
-#. 6.2->settings-schema.json->blink-effect->description
+#. 6.2->settings-schema.json->blink-effect-enabled->description
 #, fuzzy
 msgid "Blink Effect"
 msgstr "Efectes"
 
-#. 6.2->settings-schema.json->blink-effect->options
-msgid "None"
-msgstr ""
-
-#. 6.2->settings-schema.json->blink-effect->options
-msgid "When Idle"
-msgstr ""
-
-#. 6.2->settings-schema.json->blink-effect->options
-msgid "Always"
+#. 6.2->settings-schema.json->blink-period->units
+#. 6.2->settings-schema.json->blink-gap->units
+msgid "seconds"
 msgstr ""
 
 #. 6.2->settings-schema.json->blink-period->description
@@ -503,7 +528,7 @@ msgstr ""
 #. 6.2->settings-schema.json->blink-period->tooltip
 msgid ""
 "This setting controls the duration of a full blink cycle (closing and "
-"opening). Measured in milliseconds."
+"opening)."
 msgstr ""
 
 #. 6.2->settings-schema.json->blink-gap->description
@@ -512,9 +537,22 @@ msgid "Blink Gap"
 msgstr "Parpelleig"
 
 #. 6.2->settings-schema.json->blink-gap->tooltip
+msgid "This setting controls the time gap between two consecutive blinks."
+msgstr ""
+
+#. 6.2->settings-schema.json->sleep-effect-enabled->description
+#, fuzzy
+msgid "Sleep Effect"
+msgstr "Activar efectes"
+
+#. 6.2->settings-schema.json->sleep-effect-enabled->tooltip
 msgid ""
-"This setting controls the time gap between two consecutive blinks. Measured "
-"in milliseconds."
+"When enabled, the eyes will slowly close when the system is idle and open "
+"again when activity is detected."
+msgstr ""
+
+#. 6.2->settings-schema.json->idle-delay->units
+msgid "minutes"
 msgstr ""
 
 #. 6.2->settings-schema.json->idle-delay->description
@@ -524,5 +562,5 @@ msgstr ""
 #. 6.2->settings-schema.json->idle-delay->tooltip
 msgid ""
 "This setting controls the time of inactivity (no mouse or keyboard input) "
-"after which the system is considered idle. Measured in milliseconds."
+"after which the system is considered idle."
 msgstr ""

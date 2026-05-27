@@ -1,0 +1,126 @@
+{
+  "section1": {
+    "type": "section",
+    "description": "Appearance"
+  },
+  "iconTheme": {
+    "type": "combobox",
+    "default": "arrows",
+    "options": {
+      "Arrows (↓ ↑)": "arrows",
+      "Small Arrows (▾ ▴)": "small_arrows",
+      "Triangles (▼ ▲)": "triangles",
+      "Chevrons (∨ ∧)": "chevrons",
+      "Guillemets (» «)": "guillemets"
+    },
+    "description": "Icon Theme"
+  },
+  "verticalLayout": {
+    "type": "switch",
+    "default": false,
+    "description": "Vertical Layout (Stacked)"
+  },
+  "compactMode": {
+    "type": "switch",
+    "default": false,
+    "description": "Compact Mode (e.g. 1.2M instead of 1.2 MB/s)"
+  },
+  "section2": {
+    "type": "section",
+    "description": "Monitoring"
+  },
+  "refreshRate": {
+    "type": "spinbutton",
+    "default": 1,
+    "min": 1,
+    "max": 10,
+    "step": 1,
+    "description": "Refresh Interval (seconds)"
+  },
+  "overrideInterface": {
+    "type": "entry",
+    "default": "",
+    "description": "Network Interface (Leave empty for Auto)"
+  },
+  "ignoreLocalTraffic": {
+    "type": "switch",
+    "default": true,
+    "description": "Ignore Local Loopback Traffic"
+  },
+  "showSessionStats": {
+    "type": "switch",
+    "default": true,
+    "description": "Show Session Stats in Tooltip"
+  },
+  "dailyLogRetention": {
+    "type": "spinbutton",
+    "default": 30,
+    "min": 7,
+    "max": 90,
+    "step": 1,
+    "description": "Daily Usage Log Retention (Days)"
+  },
+  "section3": {
+    "type": "section",
+    "description": "Data Plan & Alerts"
+  },
+  "showPing": {
+    "type": "switch",
+    "default": true,
+    "description": "Show Latency/Ping"
+  },
+  "pingAlways": {
+    "type": "switch",
+    "default": false,
+    "description": "Continuous Ping (High Battery Usage)"
+  },
+  "pingServer": {
+    "type": "entry",
+    "default": "8.8.8.8",
+    "description": "Ping Server Info"
+  },
+  "dataLimitType": {
+    "type": "combobox",
+    "default": "None",
+    "options": {
+      "None": "None",
+      "Daily": "Daily Limit",
+      "Monthly": "Monthly Limit"
+    },
+    "description": "Data Limit Type"
+  },
+  "dataLimitValue": {
+    "type": "spinbutton",
+    "default": 1024,
+    "min": 1,
+    "max": 100000,
+    "step": 1,
+    "description": "Limit Amount"
+  },
+  "dataLimitUnit": {
+    "type": "combobox",
+    "default": "MB",
+    "options": {
+      "MB": "MB",
+      "GB": "GB"
+    },
+    "description": "Unit"
+  },
+  "alertPercentage": {
+    "type": "spinbutton",
+    "default": 80,
+    "min": 50,
+    "max": 100,
+    "step": 5,
+    "description": "Alert Threshold (%)"
+  },
+  "section_actions": {
+    "type": "section",
+    "description": "Actions"
+  },
+  "applySettings": {
+    "type": "button",
+    "description": "Save / Apply Settings",
+    "callback": "onSaveButton"
+  }
+}

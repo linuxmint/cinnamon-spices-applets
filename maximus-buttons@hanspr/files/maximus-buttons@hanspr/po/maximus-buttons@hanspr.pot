@@ -1,0 +1,82 @@
+# MAXIMUS BUTTONS
+# This file is put in the public domain.
+# hanspr, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: maximus-buttons@hanspr 0.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-11 16:54-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->description
+msgid "Maximus buttons"
+msgstr ""
+
+#. metadata.json->name
+msgid "Maximus Buttons"
+msgstr ""
+
+#. metadata.json->contributors
+msgid "Hans Peyrot"
+msgstr ""
+
+#. settings-schema.json->head->description
+msgid "Window Buttons Settings"
+msgstr ""
+
+#. settings-schema.json->buttons-style->description
+msgid "Window Buttons Style  (Example: minimize:maximize:close:icon)"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->description
+msgid "Buttons Theme  (Needs Restart Cinnamon)"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->options
+msgid "Default"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->options
+msgid "Mac-OS-X"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->options
+msgid "Mint-X"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->options
+msgid "Radiance"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->options
+msgid "UniMetro"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->options
+msgid "UniMetro-Black"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->options
+msgid "Vimix"
+msgstr ""
+
+#. settings-schema.json->buttons-theme->tooltip
+msgid "Please select a theme for window buttons"
+msgstr ""
+
+#. settings-schema.json->hide-buttons->description
+msgid "Hide buttons: instead of removing (no applets jump left right)"
+msgstr ""
+
+#. settings-schema.json->only-maximized->description
+msgid "Show buttons: only when focused window is maximized"
+msgstr ""
