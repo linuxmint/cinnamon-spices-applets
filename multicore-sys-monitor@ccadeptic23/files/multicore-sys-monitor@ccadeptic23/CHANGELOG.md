@@ -1,3 +1,6 @@
+### v3.16.2~20260528
+  * Ready for Linux Mint 23.
+
 ### v3.16.1~20260526
   * Maximize vertically this settings window.
   * Replaces `window.maximize(2);` with `window.set_maximize_flags(2); window.maximize();` when the `window.set_maximize_flags()` function exists.
