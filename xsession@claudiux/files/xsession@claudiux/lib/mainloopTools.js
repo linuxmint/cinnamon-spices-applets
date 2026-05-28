@@ -1,8 +1,6 @@
-const  GLib = imports.gi.GLib;
+const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
-const CINNAMON_VERSION = GLib.getenv("CINNAMON_VERSION");
-const isCin67plus = Util.version_exceeds(CINNAMON_VERSION, "6.7");
-
+const Extension = imports.ui.extension;
 
 /**
  * _sourceIds
@@ -169,7 +167,7 @@ function remove_all_sources() {
   }
 }
 
-if (!isCin67plus) {
+if (!Extension.getCurrentExtension) {
   module.exports = {
     _sourceIds,
     timeout_add_seconds,

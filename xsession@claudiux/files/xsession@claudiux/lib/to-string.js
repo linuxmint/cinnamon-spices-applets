@@ -1,8 +1,6 @@
 const ByteArray = imports.byteArray;
-const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
-const CINNAMON_VERSION = GLib.getenv("CINNAMON_VERSION");
-const isCin67plus = Util.version_exceeds(CINNAMON_VERSION, "6.7");
+const Extension = imports.ui.extension;
 
 var to_string = function(data) {
   if (ByteArray.hasOwnProperty("toString")) {
@@ -12,42 +10,7 @@ var to_string = function(data) {
   }
 }
 
-//~ const to_string = function(data) {
-  //~ return stringFromUTF8Array(data);
-//~ }
-
-//~ const stringFromUTF8Array = function(data) {
-  //~ const extraByteMap = [ 1, 1, 1, 1, 2, 2, 3, 0 ];
-  //~ var count = data.length;
-  //~ var str = "";
-
-  //~ for (var index = 0;index < count;)
-  //~ {
-    //~ var ch = data[index++];
-    //~ if (ch & 0x80)
-    //~ {
-      //~ var extra = extraByteMap[(ch >> 3) & 0x07];
-      //~ if (!(ch & 0x40) || !extra || ((index + extra) > count))
-        //~ return null;
-
-      //~ ch = ch & (0x3F >> extra);
-      //~ for (;extra > 0;extra -= 1)
-      //~ {
-        //~ var chx = data[index++];
-        //~ if ((chx & 0xC0) != 0x80)
-          //~ return null;
-
-        //~ ch = (ch << 6) | (chx & 0x3F);
-      //~ }
-    //~ }
-
-    //~ str += String.fromCharCode(ch);
-  //~ }
-
-  //~ return str;
-//~ }
-
-if (!isCin67plus) {
+if (!Extension.getCurrentExtension) {
   module.exports = {
     to_string
   }
