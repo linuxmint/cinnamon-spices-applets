@@ -135,6 +135,7 @@
       "type": "section",
       "title": "Tooltip",
       "keys": [
+        "quickTooltip",
         "percentAtEndOfLine",
         "tooltipFontSize",
         "tooltipChangeBackgroundColor",
@@ -186,6 +187,7 @@
       "title": "CPU Temperature",
       "keys": [
         "CPU_showTemp",
+        "CPU_showTempUnit",
         "CPU_temp_hovering_only",
         "CPU_tempInFahrenheit",
         "CPU_tempPath",
@@ -670,6 +672,11 @@
     "default": "rgba(48, 48, 48, 0.1)",
     "description": "Background Color"
   },
+  "quickTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the tooltip immediately"
+  },
   "percentAtEndOfLine": {
     "type": "switch",
     "default": false,
@@ -934,6 +941,12 @@
     "type": "switch",
     "default": true,
     "description": "Show the CPU temperature"
+  },
+  "CPU_showTempUnit": {
+    "type": "switch",
+    "default": true,
+    "description": "Display the temperature unit",
+    "dependency": "CPU_showTemp"
   },
   "CPU_temp_hovering_only": {
     "type": "switch",

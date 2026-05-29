@@ -24,7 +24,7 @@ function get_nemo_size_prefixes() {
   return _interface_settings.get_string(_SETTINGS_KEY)
 }
 
-const formatBytesValueUnit = (bytes, decimals=2, withRate=true) => {
+var formatBytesValueUnit = (bytes, decimals=2, withRate=true) => {
   const spaces = 16;
   let _rate = (withRate === true) ? rate : "";
   if (bytes < 1) {
@@ -117,7 +117,7 @@ function pc2RGB(percentage) {
   return [r, g, b, a]
 }
 
-class GraphVBars {
+var GraphVBars = class GraphVBars {
   constructor(area, applet) {
     this.applet = applet;
     this.area = area;
@@ -304,7 +304,9 @@ class GraphVBars {
       (!this.applet.CPU_temp_hovering_only || (this.applet.CPU_temp_hovering_only && this.applet.hovered)) &&
       this.applet.CPU_temperature
     ) {
-      let degrees = (this.applet.CPU_tempInFahrenheit) ? "°F" : "°C";
+      let degrees = "°";
+      if (this.applet.CPU_showTempUnit)
+        degrees = (this.applet.CPU_tempInFahrenheit) ? "°F" : "°C";
       let pangolayout2 = area.create_pango_layout("" + this.applet.CPU_temperature + degrees);
 
       isRight = this.applet.CPU_tempCorner.includes("R");
@@ -432,7 +434,7 @@ class GraphVBars {
   }
 }
 
-class GraphVBars100 extends GraphVBars {
+var GraphVBars100 = class GraphVBars100 extends GraphVBars {
   paint(providerName, currentReadings, area, areaContext, labelProps, width, height, labelColor, bgColor, colorsList) {
     function drawLabel(labelProps, fontsize_px, width, height) {
       let fontdesc = Pango.font_description_from_string('Dejavu Sans Mono Bold ' + labelProps.zoom * fontsize_px + 'px');
@@ -612,7 +614,7 @@ class GraphVBars100 extends GraphVBars {
   }
 }
 
-class GraphPieChart {
+var GraphPieChart = class GraphPieChart {
   constructor(area, applet) {
     this.applet = applet;
     this.area = area;
@@ -821,7 +823,7 @@ class GraphPieChart {
   }
 };
 
-class GraphLineChart {
+var GraphLineChart = class GraphLineChart {
   constructor(area, width, applet) {
     this.applet = applet;
     this.area = area;

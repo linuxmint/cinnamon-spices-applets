@@ -1,3 +1,17 @@
+### v3.16.1~20260526
+  * Maximize vertically this settings window.
+  * Replaces `window.maximize(2);` with `window.set_maximize_flags(2); window.maximize();` when the `window.set_maximize_flags()` function exists.
+
+### v3.16.0~20260523
+  * Ready for Linux Mint 23.
+
+### v3.15.4~20260520
+  * New option: Show the tooltip immediately.
+
+### v3.15.3~20260514
+  * New option: Display the temperature unit.
+  * Fixes [#8679](https://github.com/linuxmint/cinnamon-spices-applets/issues/8679)
+
 ### v3.15.2~20260506
   * Tooltip: Can change background color.
   * Without Any Graphics mode: Display change, improving tooltip stability.
