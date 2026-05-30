@@ -1,43 +1,40 @@
 #!/bin/bash
 # Uninstall script for Adaptive Brightness Applet
 
-set -e
+echo "🗑️  Uninstalling Adaptive Brightness Applet"
+echo "============================================"
+echo ""
 
-echo "🗑 Adaptive Brightness Uninstall Script"
-echo "======================================"
-
-# 1. Remove sudoers entry
-SUDOERS_FILE="/etc/sudoers.d/brightnessctl-applet"
-if [ -f "$SUDOERS_FILE" ]; then
-    echo "1️⃣ Removing sudoers entry..."
-    sudo rm "$SUDOERS_FILE"
-    echo "   ✓ Sudoers entry removed"
-else
-    echo "1️⃣ Sudoers entry not found. Skipping."
-fi
-
-# 2. Remove applet folder
 APPLET_DIR="$HOME/.local/share/cinnamon/applets/adaptive-brightness@el-musleh"
+SUDOERS_FILE="/etc/sudoers.d/brightnessctl-applet"
+
+# Remove applet files
 if [ -d "$APPLET_DIR" ]; then
-    echo "2️⃣ Removing applet folder..."
+    echo "Removing applet files..."
     rm -rf "$APPLET_DIR"
-    echo "   ✓ Applet folder removed"
+    echo "   ✓ Applet files removed"
 else
-    echo "2️⃣ Applet folder not found at $APPLET_DIR. Skipping."
+    echo "   ℹ Applet not installed in user directory"
 fi
 
-# 3. Optional: Remove brightnessctl
-echo ""
-echo "3️⃣ Would you like to remove 'brightnessctl'?"
-read -p "Type 'yes' to remove: " confirm
-if [ "$confirm" == "yes" ]; then
-    echo "   Removing brightnessctl..."
-    sudo apt remove -y brightnessctl
-    echo "   ✓ brightnessctl removed"
-else
-    echo "   Skipping brightnessctl removal."
+# Ask about sudoers
+if sudo test -f "$SUDOERS_FILE"; then
+    echo ""
+    read -p "Remove password-less sudo configuration? (y/N): " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        sudo rm -f "$SUDOERS_FILE"
+        echo "   ✓ Sudo configuration removed"
+    else
+        echo "   ℹ Sudo configuration kept"
+    fi
 fi
 
 echo ""
-echo "✅ Uninstall complete!"
-echo "   You may want to restart Cinnamon to apply changes."
+echo "✅ Uninstall complete"
+echo ""
+echo "Note: brightnessctl package was not removed."
+echo "To remove it manually: sudo apt remove brightnessctl"
+echo "If you want to clear applet settings too: rm -f ~/.config/cinnamon/spices/adaptive-brightness@el-musleh/*.json"
+echo ""
+echo "Please restart Cinnamon (Alt+F2 → r → Enter)"

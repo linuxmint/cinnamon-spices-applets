@@ -1,56 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gsettings-schema>
-    <key type="i" name="min-brightness">
-        <default>10</default>
-        <summary>Minimum Brightness</summary>
-        <description>Minimum brightness level in percentage (1-100)</description>
-    </key>
-    
-    <key type="i" name="max-brightness">
-        <default>100</default>
-        <summary>Maximum Brightness</summary>
-        <description>Maximum brightness level in percentage (1-100)</description>
-    </key>
-    
-    <key type="d" name="smoothing-factor">
-        <default>0.2</default>
-        <summary>Smoothing Factor</summary>
-        <description>How smooth the brightness transitions are (0.0-1.0)</description>
-    </key>
-    
-    <key type="b" name="calibrate-max-lux">
-        <default>false</default>
-        <summary>Start Auto-Calibration</summary>
-        <description>Click to detect maximum light level over 30s</description>
-    </key>
-    
-    <key type="i" name="max-lux">
-        <default>10000</default>
-        <summary>Maximum Lux</summary>
-        <description>Maximum ambient light value (100-100000)</description>
-    </key>
-    
-    <key type="i" name="poll-interval">
-        <default>1000</default>
-        <summary>Poll Interval</summary>
-        <description>How often to check sensor in milliseconds (100-60000)</description>
-    </key>
+<schemalist>
+    <schema id="org.cinnamon.applet.adaptive-brightness@el-musleh" path="/org/cinnamon/applets/adaptive-brightness@el-musleh/">
+        <key type="i" name="min-brightness">
+            <default>5</default>
+            <summary>Minimum Brightness</summary>
+            <description>Minimum brightness level in percentage (1-100)</description>
+        </key>
+        
+        <key type="i" name="max-brightness">
+            <default>100</default>
+            <summary>Maximum Brightness</summary>
+            <description>Maximum brightness level in percentage (1-100)</description>
+        </key>
+        
+        <key type="d" name="smoothing-factor">
+            <default>0.7</default>
+            <summary>Smoothing Factor</summary>
+            <description>Brightness transition smoothness: 0=instant, 1=very smooth (0.0-1.0)</description>
+        </key>
+        
+        <key type="i" name="max-lux">
+            <default>700</default>
+            <summary>Bright Reference Lux</summary>
+            <description>Reference ambient light level at or above which maximum brightness is applied (100-100000)</description>
+        </key>
+        
+        <key type="i" name="poll-interval">
+            <default>1000</default>
+            <summary>Poll Interval</summary>
+            <description>How often to check sensor in milliseconds (100-60000)</description>
+        </key>
 
-    <key type="i" name="min-lux">
-        <default>0</default>
-        <summary>Minimum Lux</summary>
-        <description>Ambient lux at or below which minimum brightness is applied</description>
-    </key>
+        <key type="i" name="lux-change-threshold">
+            <default>3</default>
+            <summary>Lux Stability Threshold</summary>
+            <description>Minimum lux change required before recalculating brightness (0-50)</description>
+        </key>
 
-    <key type="b" name="calibrate-min-lux">
-        <default>false</default>
-        <summary>Calibrate Dark Level</summary>
-        <description>Triggers dark-phase calibration to detect noise floor</description>
-    </key>
+        <key type="i" name="min-lux">
+            <default>1</default>
+            <summary>Dark Reference Lux</summary>
+            <description>Reference ambient light level at or below which minimum brightness is applied (can be set manually or updated by calibration)</description>
+        </key>
 
-    <key type="s" name="sensor-path">
-        <default>''</default>
-        <summary>Sensor Path Override</summary>
-        <description>Manual IIO device path; empty = auto-detect</description>
-    </key>
-</gsettings-schema>
+        <key type="s" name="sensor-path">
+            <default>''</default>
+            <summary>Sensor Path Override</summary>
+            <description>Manual IIO device path; empty = auto-detect</description>
+        </key>
+
+        <key type="s" name="show-label">
+            <default>'live_status'</default>
+            <summary>Panel Display Mode</summary>
+            <description>Controls the visibility and content of the panel applet</description>
+        </key>
+
+        <key type="s" name="label-display-mode">
+            <default>'brightness_lux'</default>
+            <summary>Panel Label Content</summary>
+            <description>Which live value to show in the panel label: brightness, lux, or brightness_lux</description>
+        </key>
+
+        <enum id="org.cinnamon.applet.adaptive-brightness@el-musleh.response-curve">
+            <value nick="logarithmic" value="0"/>
+            <value nick="linear" value="1"/>
+            <value nick="sigmoidal" value="2"/>
+        </enum>
+
+        <key name="response-curve" enum="org.cinnamon.applet.adaptive-brightness@el-musleh.response-curve">
+            <default>'logarithmic'</default>
+            <summary>Response Curve Type</summary>
+            <description>Mathematical curve type to map lux to brightness</description>
+        </key>
+        <key type="b" name="adaptive-calibration-enabled">
+            <default>false</default>
+            <summary>Adaptive Calibration Enabled</summary>
+            <description>Whether background lux bound adjustment is enabled</description>
+        </key>
+
+        <key type="i" name="adaptive-calibration-threshold">
+            <default>15</default>
+            <summary>Adaptive Calibration Threshold</summary>
+            <description>How many consecutive out-of-range samples are needed before updating lux bounds</description>
+        </key>
+
+        <!-- NOTE: log-level default must match settings-schema.json and applet.js constructor -->
+        <key type="s" name="log-level">
+            <default>'off'</default>
+            <summary>Log Level</summary>
+            <description>Verbosity for the file logger</description>
+        </key>
+    </schema>
+</schemalist>

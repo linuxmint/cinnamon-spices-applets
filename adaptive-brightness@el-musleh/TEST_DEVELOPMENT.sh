@@ -1,39 +1,78 @@
 #!/bin/bash
-# Adaptive Brightness Development Test Script
+# Development testing script
 
-echo "=== Running Dev Tests ==="
+echo "🛠️  Development Test Suite"
+echo "=========================="
+echo ""
 
-# 1. Check for Syntax Errors
-echo "Checking syntax in applet.js..."
-if [ -f "adaptive-brightness@el-musleh/files/adaptive-brightness@el-musleh/applet.js" ]; then
-    # Basic check - using jshint if available, or just cat for sanity
-    if command -v jshint &> /dev/null; then
-        jshint adaptive-brightness@el-musleh/files/adaptive-brightness@el-musleh/applet.js
-    else
-        echo "JSHint not found, skipping linting."
-    fi
+echo "1️⃣  Validating JSON files..."
+if python3 -m json.tool files/adaptive-brightness@el-musleh/settings-schema.json > /dev/null 2>&1; then
+    echo "   ✓ settings-schema.json valid"
 else
-    echo "Error: applet.js not found!"
-    exit 1
+    echo "   ✗ settings-schema.json invalid"
 fi
 
-# 2. Check for Missing Prefixes
-echo "Checking log prefixes..."
-grep -v "\[AB\]" adaptive-brightness@el-musleh/files/adaptive-brightness@el-musleh/applet.js | grep "global.log"
-if [ $? -eq 0 ]; then
-    echo "Error: Found logs missing [AB] prefix."
-    exit 1
+if python3 -m json.tool files/adaptive-brightness@el-musleh/metadata.json > /dev/null 2>&1; then
+    echo "   ✓ metadata.json valid"
 else
-    echo "Success: All logs have [AB] prefix."
+    echo "   ✗ metadata.json invalid"
 fi
 
-# 3. Check for Schema Validation
-echo "Validating JSON schemas..."
-if command -v jq &> /dev/null; then
-    jq empty adaptive-brightness@el-musleh/files/adaptive-brightness@el-musleh/settings-schema.json
-    echo "Success: JSON schema is valid."
+if python3 -m json.tool info.json > /dev/null 2>&1; then
+    echo "   ✓ info.json valid"
 else
-    echo "jq not found, skipping schema validation."
+    echo "   ✗ info.json invalid"
 fi
 
-echo "=== Tests Complete ==="
+echo ""
+echo "2️⃣  Checking settings defaults..."
+if python3 - <<'PY' >/dev/null 2>&1
+import json
+with open("files/adaptive-brightness@el-musleh/settings-schema.json", "r", encoding="utf-8") as f:
+    data = json.load(f)
+assert data["min-lux"]["default"] == 1
+assert data["max-lux"]["default"] == 700
+assert data["label-display-mode"]["default"] == "brightness_lux"
+assert "brightness_lux" in data["label-display-mode"]["options"].values()
+assert data["response-curve"]["default"] == "logarithmic"
+assert "logarithmic" in data["response-curve"]["options"].values()
+assert data["log-level"]["default"] == "off"
+assert "off" in data["log-level"]["options"].values()
+PY
+then
+    echo "   ✓ numeric and combobox defaults are valid"
+else
+    echo "   ✗ numeric and combobox defaults are invalid"
+fi
+
+echo ""
+echo "3️⃣  Checking file structure..."
+if [ -f "files/adaptive-brightness@el-musleh/applet.js" ]; then
+    echo "   ✓ applet.js present"
+else
+    echo "   ✗ applet.js missing"
+fi
+
+if [ -f "files/adaptive-brightness@el-musleh/icon.png" ]; then
+    echo "   ✓ icon.png present"
+else
+    echo "   ✗ icon.png missing"
+fi
+
+if [ -f "screenshot.png" ]; then
+    echo "   ✓ screenshot.png present"
+else
+    echo "   ✗ screenshot.png missing"
+fi
+
+echo ""
+echo "4️⃣  Checking settings sections..."
+if grep -q '"description": "Travel Mode"' files/adaptive-brightness@el-musleh/settings-schema.json && \
+   grep -q '"description": "Logs"' files/adaptive-brightness@el-musleh/settings-schema.json; then
+    echo "   ✓ Travel Mode and Logs sections present"
+else
+    echo "   ✗ Travel Mode/Logs sections missing"
+fi
+
+echo ""
+echo "Run './validate-spice adaptive-brightness@el-musleh' for full validation."

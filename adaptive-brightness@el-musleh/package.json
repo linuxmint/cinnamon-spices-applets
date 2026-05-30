@@ -1,0 +1,13 @@
+{
+  "name": "adaptive-brightness-applet",
+  "version": "1.4.1",
+  "description": "Cinnamon applet for adaptive brightness control",
+  "scripts": {
+    "lint": "eslint files/adaptive-brightness@el-musleh/applet.js",
+    "lint:fix": "eslint files/adaptive-brightness@el-musleh/applet.js --fix",
+    "test": "./TEST_PRODUCTION.sh"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
+}

@@ -1,32 +1,117 @@
 {
+  "general-header": {
+    "type": "header",
+    "description": "General"
+  },
   "min-brightness": {
     "type": "spinbutton",
-    "default": 10,
+    "default": 5,
     "min": 1,
     "max": 100,
     "step": 1,
     "units": "%",
     "title": "Minimum Brightness",
-    "description": "Minimum brightness level (percentage)"
+    "description": "Minimum brightness level (percentage)",
+    "tooltip": "Floor brightness applied in complete darkness. Must be at least 1% lower than Maximum Brightness."
   },
   "max-brightness": {
     "type": "spinbutton",
-    "default": 90,
+    "default": 100,
     "min": 1,
     "max": 100,
     "step": 1,
     "units": "%",
     "title": "Maximum Brightness",
-    "description": "Maximum brightness level (percentage)"
+    "description": "Maximum brightness level (percentage)",
+    "tooltip": "Ceiling brightness applied at maximum ambient light. Must be at least 1% higher than Minimum Brightness."
   },
-  "smoothing-factor": {
-    "type": "scale",
-    "default": 0.2,
-    "min": 0.0,
-    "max": 1.0,
-    "step": 0.05,
-    "title": "Smoothing Factor",
-    "description": "Brightness transition smoothness: 0=instant, 1=very smooth"
+  "show-label": {
+    "type": "combobox",
+    "default": "live_status",
+    "title": "Panel Display Mode",
+    "description": "Choose how the applet appears in the panel. Show live status displays brightness percentage, icon-only shows just the icon, or hide to completely hide the applet from the panel.",
+    "tooltip": "Controls the visibility and content of the panel applet.",
+    "options": {
+      "Show live status": "live_status",
+      "Only Icon": "icon_only",
+      "Hide (actor.hide)": "hide_actor"
+    }
+  },
+  "label-display-mode": {
+    "type": "combobox",
+    "default": "brightness_lux",
+    "title": "Panel Label Content",
+    "description": "Choose what the panel label shows while auto mode is running.",
+    "tooltip": "Only available when 'Show live status' is selected in Panel Display Mode.",
+    "dependency": "show-label=live_status",
+    "options": {
+      "Brightness and lux": "brightness_lux",
+      "Ambient lux": "lux",
+      "Brightness percentage": "brightness"
+    }
+  },
+  "response-curve": {
+    "type": "combobox",
+    "default": "logarithmic",
+    "title": "Response Curve",
+    "description": "Mathematical curve for mapping lux to brightness. Choose based on your environment and preference.",
+    "tooltip": "Logarithmic (default): Best for natural human perception, more sensitive to changes in dim light. Linear: Simple 1:1 mapping for predictable control in consistent environments. Sigmoidal: Sharp transition zone for environments with distinct lighting states (e.g., indoor vs outdoor).",
+    "options": {
+      "Logarithmic (natural eye response)": "logarithmic",
+      "Linear (direct proportion)": "linear",
+      "Sigmoidal (smooth S-curve)": "sigmoidal"
+    }
+  },
+  "general-separator": {
+    "type": "separator"
+  },
+  "calibration-header": {
+    "type": "header",
+    "description": "Environment Bounds (Calibration)"
+  },
+  "calibration-guide": {
+    "type": "label",
+    "title": "Calibration Instructions",
+    "description": "1. Dark calibration: Go to your dimmest environment (e.g., dark room at night).\n2. Click 'Calibrate Dark Level' and wait 10 seconds.\n3. Bright calibration: Go to your brightest environment (e.g., direct sunlight).\n4. Click 'Calibrate Bright Level' and wait 10 seconds.\n\nThese bounds define the lux range used by Logarithmic, Linear, and Sigmoidal curves."
+  },
+  "calibrate-min-lux": {
+    "type": "button",
+    "description": "Calibrate Dark Level",
+    "tooltip": "Click when in your dimmest environment (starts a 10s high-speed reading)",
+    "callback": "_start_dark_calibration"
+  },
+  "min-lux": {
+    "type": "spinbutton",
+    "default": 1,
+    "min": 0,
+    "max": 5000,
+    "step": 10,
+    "title": "Dark Reference Lux",
+    "description": "Reference ambient light level at or below which minimum brightness is applied.",
+    "tooltip": "Used as the lux range floor for all response curves. Calibrate automatically or set manually."
+  },
+  "calibrate-max-lux": {
+    "type": "button",
+    "description": "Calibrate Bright Level",
+    "tooltip": "Click when in your brightest environment (starts a 10s high-speed reading)",
+    "callback": "_start_bright_calibration"
+  },
+  "max-lux": {
+    "type": "spinbutton",
+    "default": 700,
+    "min": 100,
+    "max": 100000,
+    "step": 100,
+    "title": "Bright Reference Lux",
+    "description": "Reference ambient light level at or above which maximum brightness is applied.",
+    "tooltip": "Used as the lux range ceiling for all response curves. Calibrate automatically or set manually."
+  },
+  "sensor-path": {
+    "type": "entry",
+    "default": "",
+    "title": "Sensor Path Override",
+    "description": "Leave blank for auto-detect. Example: /sys/bus/iio/devices/iio:device3",
+    "tooltip": "Only use this if auto-detection fails. Find your sensor by running 'find /sys -name illuminance' in terminal. Common paths are in /sys/bus/iio/devices/."
   },
   "poll-interval": {
     "type": "spinbutton",
@@ -36,45 +121,87 @@
     "step": 100,
     "units": "ms",
     "title": "Poll Interval",
-    "description": "Sensor check frequency in milliseconds"
+    "description": "Sensor check frequency in milliseconds",
+    "tooltip": "How often the ambient light sensor is read. Lower values are more responsive but use slightly more CPU."
   },
-  "calibration-header": {
-    "type": "header",
-    "description": "Sensor Calibration"
+  "smoothing-factor": {
+    "type": "scale",
+    "default": 0.7,
+    "min": 0.0,
+    "max": 1.0,
+    "step": 0.05,
+    "title": "Smoothing Factor",
+    "description": "Brightness transition smoothness: 0=instant, 1=very smooth",
+    "tooltip": "Controls how quickly brightness follows sensor changes. Higher values reduce flickering but slow response."
   },
-  "calibrate-min-lux": {
-    "type": "button",
-    "default": false,
-    "description": "Calibrate Dark Level - click when in your dimmest environment (60s reading)"
-  },
-  "min-lux": {
+  "lux-change-threshold": {
     "type": "spinbutton",
-    "default": 0,
+    "default": 3,
     "min": 0,
-    "max": 5000,
-    "step": 10,
-    "title": "Minimum Lux",
-    "description": "Ambient lux at or below which minimum brightness is applied"
+    "max": 50,
+    "step": 1,
+    "units": "lux",
+    "title": "Lux Stability Threshold",
+    "description": "Minimum lux change required before recalculating brightness. Suppresses sensor noise-driven fluctuation.",
+    "tooltip": "When the ambient lux reading changes by less than this value, brightness is not recalculated. Set to 0 to react to every sensor reading. Increase (e.g. 5-10) if brightness flickers in stable lighting conditions."
   },
-  "calibrate-max-lux": {
-    "type": "button",
+  "calibration-separator": {
+    "type": "separator"
+  },
+  "travel-header": {
+    "type": "header",
+    "description": "Travel Mode"
+  },
+  "adaptive-calibration-enabled": {
+    "type": "switch",
     "default": false,
-    "description": "Calibrate Bright Level - click when in your brightest environment (60s reading)"
+    "title": "Travel Mode",
+    "description": "Enable when traveling or frequently changing environments. Automatically adjusts lux bounds when readings consistently exceed current range. Recommended for mobile users, not stationary office setups.",
+    "tooltip": "When enabled, min-lux and max-lux are silently adjusted if readings consistently fall outside the configured range. Disable to prevent temporary lighting conditions from permanently affecting your calibration."
   },
-  "max-lux": {
+  "adaptive-calibration-threshold": {
     "type": "spinbutton",
-    "default": 10000,
-    "min": 100,
-    "max": 100000,
-    "step": 100,
-    "title": "Maximum Lux",
-    "description": "Reference ambient light level (set manually or via calibration)"
+    "default": 15,
+    "min": 1,
+    "max": 60,
+    "step": 1,
+    "title": "Travel Mode Threshold",
+    "description": "Consecutive out-of-range samples required before updating min-lux or max-lux.",
+    "tooltip": "Higher values make Travel Mode more stable but slower to respond to environmental changes. Lower values adapt faster but may trigger on temporary lighting fluctuations.",
+    "dependency": "adaptive-calibration-enabled=true"
   },
-  "sensor-path": {
-    "type": "entry",
-    "default": "",
-    "title": "Sensor Path Override",
-    "description": "Leave blank for auto-detect. Example: /sys/bus/iio/devices/iio:device3"
+  "travel-separator": {
+    "type": "separator"
+  },
+  "logs-header": {
+    "type": "header",
+    "description": "Logs"
+  },
+  "log-level": {
+    "type": "combobox",
+    "default": "off",
+    "title": "Log Level",
+    "description": "Controls verbosity of the log file. Debug logs every sensor read.",
+    "tooltip": "OFF: Logging disabled. Debug: Logs every sensor read (verbose, use for short troubleshooting). Info: Logs calibration events and errors (recommended for monitoring). Error: Only logs failures (minimal output).",
+    "options": {
+      "OFF": "off",
+      "Debug (verbose - every poll)": "debug",
+      "Info (recommended)": "info",
+      "Errors only": "error"
+    }
+  },
+  "show-log-file": {
+    "type": "button",
+    "description": "Open Log File",
+    "tooltip": "Opens adaptive-brightness.log in the default text editor",
+    "callback": "_open_log_file"
+  },
+  "log-path-label": {
+    "type": "label",
+    "title": "Log File Location",
+    "description": "~/.local/share/cinnamon/applets/adaptive-brightness@el-musleh/logs/adaptive-brightness.log"
+  },
+  "logs-separator": {
+    "type": "separator"
   }
 }
-
