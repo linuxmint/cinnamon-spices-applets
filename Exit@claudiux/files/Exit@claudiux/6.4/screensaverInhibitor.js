@@ -34,7 +34,7 @@ function SessionManager(initCallback, cancellable) {
   return new SessionManagerProxy(DBus.session, 'org.gnome.SessionManager', '/org/gnome/SessionManager', initCallback, cancellable);
 }
 
-class ScreensaverInhibitor {
+var ScreensaverInhibitor = class ScreensaverInhibitor {
   constructor(applet) {
     this.applet = applet;
 

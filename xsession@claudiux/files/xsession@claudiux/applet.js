@@ -13,12 +13,13 @@ const Util = imports.misc.util;
 const Tooltips = imports.ui.tooltips;
 const Pango = imports.gi.Pango;
 const Extension = imports.ui.extension;
-
-const CINNAMON_VERSION = GLib.getenv("CINNAMON_VERSION");
-const isCin67plus = Util.version_exceeds(CINNAMON_VERSION, "6.7");
-var Me;
-if (isCin67plus) {
-  Me = Extension.getCurrentExtension();
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
 }
 
 const { restartCinnamon } = imports.ui.main; // Main
@@ -26,21 +27,13 @@ const { restartCinnamon } = imports.ui.main; // Main
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 
-if (!isCin67plus) {
-  var {to_string} = require("./lib/to-string");
-  var {
+var {to_string} = _require("./lib/to-string");
+var {
     setTimeout,
     clearTimeout,
     remove_all_sources
-  } = require("./lib/mainloopTools");
-} else {
-  var {to_string} = Me.imports["./lib/to-string"];
-  var {
-    setTimeout,
-    clearTimeout,
-    remove_all_sources
-  } = Me.imports["./lib/mainloopTools"];
-}
+} = _require("./lib/mainloopTools");
+
 
 
 // ++ Set DEBUG to true to display log messages in ~/.xsession-errors

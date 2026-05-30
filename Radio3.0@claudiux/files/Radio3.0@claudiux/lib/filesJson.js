@@ -1,10 +1,22 @@
+const GLib = imports.gi.GLib;
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
 const {
   free,
   get_home_dir,
   file_get_contents
 } = imports.gi.GLib; //GLib
 
-const {to_string} = require("./lib/to-string");
+
+var { to_string } = _require("./lib/to-string");
 
 /** Constants
  */
@@ -18,7 +30,7 @@ const DEFAULT_JSON_PATH = RADIO_LISTS_DIR + "/Radio3.0_EXAMPLES.json";
 /**
  * class StationsFileJson
  */
-class StationsFileJson {
+var StationsFileJson = class StationsFileJson {
   constructor (path = DEFAULT_JSON_PATH) {
     this.path = path;
     let [, _contents] = file_get_contents(this.path);

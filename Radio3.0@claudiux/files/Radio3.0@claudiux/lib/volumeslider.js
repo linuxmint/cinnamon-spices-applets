@@ -96,7 +96,7 @@ const IS_AT_LEAST_CINNAMON6DOT4 = version_exceeds(CINNAMON_VERSION, "6.4");
 /**
  * Class VolumeSlider
  */
-class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
+var VolumeSlider = class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
     constructor(applet, stream, tooltip, app_icon = null) {
 
         super(applet.percentage);
@@ -314,7 +314,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
 /**
  * Class StreamMenuSection
  */
-class StreamMenuSection extends PopupMenu.PopupMenuSection {
+var StreamMenuSection = class StreamMenuSection extends PopupMenu.PopupMenuSection {
     constructor(applet, stream) {
         //log("VolumeSlider: StreamMenuSection constructor");
         super();

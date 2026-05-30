@@ -12,7 +12,18 @@ const PopupMenu = imports.ui.popupMenu;
 const ScreenSaver = imports.misc.screenSaver;
 const St = imports.gi.St;
 const { restartCinnamon } = imports.ui.main;
-const ScreensaverInhibitor = require("./screensaverInhibitor");
+
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
+const ScreensaverInhibitor = _require("./screensaverInhibitor");
 //mainloopTools:
 const {
   _sourceIds,
@@ -25,7 +36,7 @@ const {
   source_exists,
   source_remove,
   remove_all_sources
-} = require("mainloopTools");
+} = _require("mainloopTools");
 
 const UUID = "Exit@claudiux";
 const SCRIPTS_DIR = GLib.get_home_dir()+"/.local/share/cinnamon/applets/"+UUID+"/scripts";
@@ -133,7 +144,7 @@ var ExitPopupMenu = class ExitPopupMenu extends Applet.AppletPopupMenu {
     }
 }
 
-class ExitApplet extends Applet.IconApplet {
+var ExitApplet = class ExitApplet extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 

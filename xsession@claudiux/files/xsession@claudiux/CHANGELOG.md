@@ -1,3 +1,6 @@
+### v5.3.1~20260528
+  * Ready for Linux Mint 23 with some improvements.
+
 ### v5.3.0~20260510
   * Ready for Linux Mint 23.
 
