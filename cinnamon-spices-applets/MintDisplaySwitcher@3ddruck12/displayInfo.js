@@ -1,6 +1,6 @@
-// displayInfo.js — Normalisiertes Display-Datenmodell und Modus-Erkennung (backend-neutral)
+// displayInfo.js — Normalised display data model and mode detection (backend-neutral)
 
-/** Anzeigemodi — entsprechen den Menüeinträgen */
+/** Display modes — correspond to the menu entries */
 const MODES = {
     LAPTOP: 'laptop',
     EXTERNAL: 'external',
@@ -16,21 +16,21 @@ const MODE_ICONS = {
 };
 
 const MODE_LABELS = {
-    laptop: 'Nur Laptop-Bildschirm',
-    external: 'Nur externer Bildschirm',
-    mirror: 'Bildschirm spiegeln',
-    extend: 'Bildschirm erweitern'
+    laptop: 'Laptop only',
+    external: 'External only',
+    mirror: 'Mirror',
+    extend: 'Extend'
 };
 
-/** Regex: typische interne Laptop-Panels (Embedded DisplayPort, LVDS, DSI) */
+/** Regex: typical internal laptop panels (Embedded DisplayPort, LVDS, DSI) */
 const INTERNAL_OUTPUT_PATTERN = /^(eDP-|LVDS-|DSI-)/i;
 
-/** Regex: typische externe Anschlüsse (HDMI, DisplayPort, DVI, VGA) */
+/** Regex: typical external connectors (HDMI, DisplayPort, DVI, VGA) */
 const EXTERNAL_OUTPUT_PATTERN = /^(HDMI-|DP-\d|DVI-|VGA-|DisplayPort-)/i;
 
 /**
- * Klassifiziert einen xrandr-Output-Namen als intern oder extern.
- * @param {string} name — z. B. "eDP-1" oder "HDMI-1"
+ * Classifies an xrandr output name as internal or external.
+ * @param {string} name — e.g. "eDP-1" or "HDMI-1"
  * @returns {'internal'|'external'|'unknown'}
  */
 function classifyOutputRole(name) {
@@ -42,7 +42,7 @@ function classifyOutputRole(name) {
 }
 
 /**
- * Erzeugt ein leeres Output-Objekt für den DisplaySnapshot.
+ * Creates an empty output object for the DisplaySnapshot.
  */
 function emptyOutput(name, role) {
     return {
@@ -60,16 +60,16 @@ function emptyOutput(name, role) {
 }
 
 /**
- * Erkennt den aktiven Anzeigemodus aus einem normalisierten DisplaySnapshot.
+ * Detects the active display mode from a normalised DisplaySnapshot.
  *
- * Logik:
- * - Nur intern aktiv           → laptop
- * - Nur extern aktiv            → external
- * - Beide aktiv, gleiche Position → mirror
- * - Beide aktiv, verschiedene Position → extend
+ * Logic:
+ * - Only internal active            → laptop
+ * - Only external active            → external
+ * - Both active, same position      → mirror
+ * - Both active, different position → extend
  *
- * @param {object} snapshot — DisplaySnapshot vom Backend
- * @returns {string} MODES-Wert
+ * @param {object} snapshot — DisplaySnapshot from the backend
+ * @returns {string} MODES value
  */
 function detectMode(snapshot) {
     if (!snapshot)
@@ -88,7 +88,7 @@ function detectMode(snapshot) {
         return MODES.EXTERNAL;
 
     if (internalActive && externalActive) {
-        // Gleiche Position und Auflösung → Spiegeln
+        // Same position and resolution → mirror
         if (internal.x === external.x &&
             internal.y === external.y &&
             internal.width === external.width &&
@@ -98,13 +98,13 @@ function detectMode(snapshot) {
         return MODES.EXTEND;
     }
 
-    // Fallback: nur Laptop, wenn nichts erkannt
+    // Fallback: laptop only when nothing is detected
     return MODES.LAPTOP;
 }
 
 /**
- * Prüft, ob ein Modus für das aktuelle Setup gültig ist.
- * @param {string} mode — MODES-Wert
+ * Checks whether a mode is available for the current display setup.
+ * @param {string} mode — MODES value
  * @param {object} snapshot — DisplaySnapshot
  * @returns {boolean}
  */
@@ -131,7 +131,7 @@ function isModeAvailable(mode, snapshot) {
 }
 
 /**
- * Formatiert die Infozeile für das Popup-Menü.
+ * Formats the info line for the popup menu.
  * @param {object} snapshot — DisplaySnapshot
  * @returns {string}
  */
@@ -140,17 +140,17 @@ function formatInfoLine(snapshot) {
         return '';
 
     const internalName = snapshot.internal
-        ? snapshot.internal.name + (snapshot.internal.active ? '' : ' (aus)')
+        ? snapshot.internal.name + (snapshot.internal.active ? '' : ' (off)')
         : '—';
     const externalName = snapshot.external
         ? (snapshot.external.connected
-            ? snapshot.external.name + (snapshot.external.active ? '' : ' (aus)')
-            : snapshot.external.name + ' (nicht verbunden)')
-        : '— (kein externer Anschluss)';
+            ? snapshot.external.name + (snapshot.external.active ? '' : ' (off)')
+            : snapshot.external.name + ' (not connected)')
+        : '— (no external output)';
 
     const backendLabel = snapshot.backend === 'wayland'
-        ? 'Wayland (experimentell)'
+        ? 'Wayland (experimental)'
         : 'X11';
 
-    return `Intern: ${internalName} · Extern: ${externalName} · ${backendLabel}`;
+    return `Internal: ${internalName} · External: ${externalName} · ${backendLabel}`;
 }

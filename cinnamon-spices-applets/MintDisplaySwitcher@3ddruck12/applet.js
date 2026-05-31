@@ -17,10 +17,10 @@ const Util = imports.misc.util;
 const DisplayBackend = require('./displayBackend');
 const DisplayInfo = require('./displayInfo');
 
-/** Debounce-Zeit nach monitors-changed (ms), damit xrandr nach Hotplug stabil ist */
+/** Debounce time after monitors-changed (ms) to let xrandr settle after hotplug */
 const HOTPLUG_DEBOUNCE_MS = 300;
 
-/** Alle konfigurierbaren Tastenkürzel: [id, settingsKey, callback] */
+/** All configurable keybindings: [id, settingsKey, callback] */
 const KEY_BINDINGS = [
     ['display-switcher-open', 'keyOpen', '_onKeyOpen'],
     ['display-switcher-laptop', 'keyLaptop', '_onKeyLaptop'],
@@ -36,10 +36,10 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         this._metadata = metadata;
         this._instance_id = instance_id;
 
-        // Display-Backend (X11 oder Wayland)
+        // Display backend (X11 or Wayland)
         this._backend = DisplayBackend.createDisplayBackend();
 
-        // Applet-Einstellungen binden
+        // Bind applet settings
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.settings.bind('autoApplyOnConnect', 'autoApplyOnConnect');
         this.settings.bind('revertOnDisconnect', 'revertOnDisconnect');
@@ -53,7 +53,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         this.settings.bind('keyMirror', 'keyMirror', () => this._setKeybindings());
         this.settings.bind('keyExtend', 'keyExtend', () => this._setKeybindings());
 
-        // Popup-Menü einrichten
+        // Set up popup menu
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
@@ -70,12 +70,12 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         this._chooserKeyHandlerId = 0;
         this._chooserBandKeyHandlerId = 0;
 
-        // Hotplug: Meta.MonitorManager (X11 + Wayland)
+        // Hotplug: Meta.MonitorManager (X11 + Wayland detection)
         this._monitorManager = Meta.MonitorManager.get();
         this._monitorsChangedId = this._monitorManager.connect(
             'monitors-changed', () => this._scheduleHotplugRefresh());
 
-        // Initialer Display-Status
+        // Initial display state
         this._refreshDisplays();
         this._externalWasConnected = this._hasConnectedExternal();
 
@@ -84,7 +84,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         this._applyIconVisibility();
     }
 
-    /** Panel-Icon je nach Einstellung ein- oder ausblenden */
+    /** Show or hide the panel icon based on the setting */
     _applyIconVisibility() {
         if (!this.actor)
             return;
@@ -94,7 +94,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
             this.actor.show();
     }
 
-    /** Optionen aus den Einstellungen für Backend-Aufrufe */
+    /** Build options object from settings for backend calls */
     _getBackendOptions() {
         return {
             extendPosition: this.extendPosition || 'right-of',
@@ -102,7 +102,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         };
     }
 
-    /** Alle Tastenkürzel entfernen und neu registrieren */
+    /** Remove and re-register all keybindings */
     _setKeybindings() {
         for (const [id, settingsKey, handlerName] of KEY_BINDINGS) {
             Main.keybindingManager.removeXletHotKey(this, id);
@@ -110,8 +110,8 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
             if (binding) {
                 const registered = Main.keybindingManager.addXletHotKey(
                     this, id, binding, () => this[handlerName]());
-                // If registration failed, the binding is likely taken by the system
-                // (e.g. switch-monitor). Warn once so the user can free it manually via
+                // If registration failed the binding is likely taken by a system shortcut
+                // (e.g. switch-monitor). Warn the user once so they can free it via
                 // System Settings → Keyboard → Shortcuts → Hardware → Toggle displays.
                 if (!registered)
                     this._warnKeybindingConflict(binding);
@@ -145,42 +145,42 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
     _onKeyMirror() { this._applyModeFromHotkey(DisplayInfo.MODES.MIRROR); }
     _onKeyExtend() { this._applyModeFromHotkey(DisplayInfo.MODES.EXTEND); }
 
-    /** Direkt Modus per Tastenkürzel anwenden */
+    /** Apply a mode directly via hotkey */
     _applyModeFromHotkey(mode) {
         if (!this._backend.canApplyModes())
             return;
         if (!DisplayInfo.isModeAvailable(mode, this._snapshot)) {
             Main.notify(
                 _('Display Switcher'),
-                _('Modus „%s“ ist gerade nicht verfügbar').format(DisplayInfo.MODE_LABELS[mode]));
+                _('Mode "%s" is not available right now').format(DisplayInfo.MODE_LABELS[mode]));
             return;
         }
         this._applyMode(mode, true);
     }
 
-    /** Panel-Icon und Tooltip je nach aktivem Modus */
+    /** Update panel icon and tooltip to reflect the active mode */
     _updatePanelIcon(mode) {
         const icon = DisplayInfo.MODE_ICONS[mode] || 'display';
-        const label = DisplayInfo.MODE_LABELS[mode] || 'Unbekannt';
+        const label = DisplayInfo.MODE_LABELS[mode] || 'Unknown';
         this.set_applet_icon_symbolic_name(icon);
-        this.set_applet_tooltip(_('Display Switcher — %s').format(label));
+        this.set_applet_tooltip(_('Display Switcher — %s').format(_(label)));
     }
 
-    /** Display-Status vom Backend einlesen und Modus erkennen */
+    /** Read display state from backend and detect current mode */
     _refreshDisplays() {
         this._snapshot = this._backend.getSnapshot(this._getBackendOptions());
         this._currentMode = DisplayInfo.detectMode(this._snapshot);
         this._updatePanelIcon(this._currentMode);
     }
 
-    /** Ist ein externes Display physisch verbunden (auch wenn aus)? */
+    /** Is an external display physically connected (even if off)? */
     _hasConnectedExternal() {
         return this._snapshot &&
             this._snapshot.external &&
             this._snapshot.external.connected;
     }
 
-    /** Debounced Refresh nach Hotplug */
+    /** Debounced refresh after hotplug */
     _scheduleHotplugRefresh() {
         if (this._hotplugTimeoutId)
             Mainloop.source_remove(this._hotplugTimeoutId);
@@ -193,7 +193,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
             });
     }
 
-    /** Reagiert auf An-/Abstecken eines externen Displays */
+    /** React to an external display being connected or disconnected */
     _onMonitorsChanged() {
         const wasConnected = this._externalWasConnected;
 
@@ -217,9 +217,9 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
     }
 
     /**
-     * Wendet einen Anzeigemodus an und speichert ihn.
+     * Apply a display mode and persist it.
      * @param {string} mode
-     * @param {boolean} notify — Benachrichtigung anzeigen
+     * @param {boolean} notify — show desktop notification
      */
     _applyMode(mode, notify = true) {
         const result = this._backend.applyMode(mode, this._getBackendOptions());
@@ -228,7 +228,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
             if (result.fallback === 'settings-opened') {
                 Main.notify(
                     _('Display Switcher'),
-                    _('Wayland: Bitte Anzeige-Einstellungen verwenden'));
+                    _('Wayland: please use Display Settings to switch modes'));
             } else {
                 Main.notifyError(_('Display Switcher'), result.error);
             }
@@ -241,7 +241,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         if (notify) {
             Main.notify(
                 _('Display Switcher'),
-                _('%s aktiviert').format(DisplayInfo.MODE_LABELS[mode]));
+                _('%s activated').format(_(DisplayInfo.MODE_LABELS[mode])));
         }
 
         this.menu.close();
@@ -256,8 +256,8 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
     }
 
     /**
-     * Zentriertes Band-Overlay im Win+P-Stil öffnen.
-     * Vier Modus-Kacheln + Einstellungen im Band, Pfeiltasten ← →.
+     * Open the centred Win+P-style band overlay.
+     * Four mode tiles + settings tile in the band, navigable with ← → arrow keys.
      */
     _openModeChooser() {
         if (this._chooser) {
@@ -277,7 +277,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
 
         // Titelzeile
         const title = new St.Label({
-            text: _('Projizieren'),
+            text: _('Project'),
             style_class: 'display-switcher-band-title',
             x_align: Clutter.ActorAlign.CENTER
         });
@@ -323,7 +323,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         this._focusChooserTile(startIndex);
     }
 
-    /** Startindex für Tastaturfokus: aktiver Modus oder erste Kachel */
+    /** Start index for keyboard focus: active mode or first tile */
     _findChooserStartIndex() {
         const currentIdx = this._chooserTiles.findIndex(
             t => t.mode === this._currentMode && t.enabled);
@@ -333,7 +333,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         return firstEnabled >= 0 ? firstEnabled : 0;
     }
 
-    /** Pfeiltasten-Navigation und Enter/Esc im Band-Overlay */
+    /** Arrow-key navigation and Enter/Esc handling for the band overlay */
     _setupChooserKeyNav(dialog, band) {
         const handler = (actor, event) => {
             const symbol = event.get_key_symbol();
@@ -374,16 +374,16 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         });
     }
 
-    /** Fokus visuell und per Tastatur auf Kachel setzen */
+    /** Set visual and keyboard focus on a tile */
     _focusChooserTile(index) {
         if (!this._chooserTiles.length)
             return;
 
-        // Alten Fokus-Stil entfernen
+        // Remove focus style from all tiles
         for (const tile of this._chooserTiles)
             tile.button.remove_style_class_name('display-switcher-tile-focused');
 
-        // Index begrenzen
+        // Clamp index
         index = ((index % this._chooserTiles.length) + this._chooserTiles.length) % this._chooserTiles.length;
         this._chooserFocusIndex = index;
 
@@ -392,7 +392,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         tile.button.grab_key_focus();
     }
 
-    /** Pfeiltaste: zum nächsten/vorherigen Modus springen (deaktivierte überspringen) */
+    /** Arrow key: jump to next/previous tile, skipping disabled ones */
     _moveChooserFocus(delta) {
         const count = this._chooserTiles.length;
         if (!count)
@@ -406,11 +406,11 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
                 return;
             }
         }
-        // Keine aktive Kachel — trotzdem Fokus setzen
+        // No enabled tile found — focus anyway
         this._focusChooserTile(idx);
     }
 
-    /** Enter: fokussierte Kachel aktivieren */
+    /** Enter: activate the focused tile */
     _activateFocusedTile() {
         const tile = this._chooserTiles[this._chooserFocusIndex];
         if (!tile || !tile.enabled)
@@ -429,7 +429,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         this._applyMode(tile.mode, true);
     }
 
-    /** Band-Overlay schließen */
+    /** Close the band overlay */
     _closeModeChooser() {
         if (!this._chooser)
             return;
@@ -439,7 +439,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
     }
 
     /**
-     * Erstellt eine Modus-Kachel (großes Symbol + Beschriftung) für das Band.
+     * Create a mode tile (large icon + label) for the band.
      * @param {string} mode
      * @param {boolean} enabled
      * @returns {St.Button}
@@ -491,7 +491,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         return button;
     }
 
-    /** Einstellungs-Kachel im Band (Zahnrad + Beschriftung) */
+    /** Settings tile in the band (gear icon + label) */
     _createSettingsTile() {
         const box = new St.BoxLayout({
             vertical: true,
@@ -507,7 +507,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         box.add_child(icon);
 
         const label = new St.Label({
-            text: _('Einstellungen'),
+            text: _('Settings'),
             style_class: 'display-switcher-tile-label',
             x_align: Clutter.ActorAlign.CENTER
         });
@@ -532,7 +532,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         return button;
     }
 
-    /** Einstellungsseite im Popup-Menü anzeigen */
+    /** Show the settings page in the popup menu */
     _openSettingsPage() {
         this._menuPage = 'settings';
         this._buildMenu();
@@ -556,7 +556,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         });
     }
 
-    /** Formatiert ein Tastenkürzel für die Anzeige im Menü */
+    /** Format a keybinding for display in the menu */
     _formatKeyHint(settingsKey) {
         const binding = this[settingsKey];
         if (!binding)
@@ -581,7 +581,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         this._buildMainPage();
     }
 
-    /** Hauptseite: Display-Modi */
+    /** Main page: display modes */
     _buildMainPage() {
         const infoText = DisplayInfo.formatInfoLine(this._snapshot);
         const infoItem = new PopupMenu.PopupMenuItem(infoText, {
@@ -593,9 +593,9 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        // Prominenter Einstellungen-Button oben
+        // Settings button at the top
         const settingsBtn = new PopupMenu.PopupIconMenuItem(
-            _('Einstellungen'),
+            _('Settings'),
             'xsi-preferences',
             St.IconType.SYMBOLIC);
         settingsBtn.connect('activate', () => this._openSettingsPage());
@@ -643,15 +643,15 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        this.menu.addAction(_('Anzeige konfigurieren…'), () => {
+        this.menu.addAction(_('Configure display…'), () => {
             Util.spawnCommandLineAsync('cinnamon-settings display');
         });
     }
 
-    /** Einstellungsseite: alles direkt im Menü, ohne externen Dialog */
+    /** Settings page: everything inline in the menu, no external dialog */
     _buildSettingsPage() {
         const backItem = new PopupMenu.PopupIconMenuItem(
-            _('Zurück zu Display-Modi'),
+            _('Back to display modes'),
             'go-previous',
             St.IconType.SYMBOLIC);
         backItem.connect('activate', () => {
@@ -662,22 +662,22 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        const titleItem = new PopupMenu.PopupMenuItem(_('Einstellungen'), {
+        const titleItem = new PopupMenu.PopupMenuItem(_('Settings'), {
             reactive: false,
             style_class: 'display-switcher-info'
         });
         this.menu.addMenuItem(titleItem);
 
-        // Verhalten
+        // 
         const autoApplyItem = new PopupMenu.PopupSwitchMenuItem(
-            _('Auto-Apply beim Anstecken'), this.autoApplyOnConnect);
+            _('Auto-apply on connect'), this.autoApplyOnConnect);
         autoApplyItem.connect('toggled', (item, checked) => {
             this.settings.setValue('autoApplyOnConnect', checked);
         });
         this.menu.addMenuItem(autoApplyItem);
 
         const revertItem = new PopupMenu.PopupSwitchMenuItem(
-            _('Beim Trennen: Nur Laptop'), this.revertOnDisconnect);
+            _('Revert to laptop-only on disconnect'), this.revertOnDisconnect);
         revertItem.connect('toggled', (item, checked) => {
             this.settings.setValue('revertOnDisconnect', checked);
         });
@@ -685,18 +685,18 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        // Position beim Erweitern
-        const extendLabel = new PopupMenu.PopupMenuItem(_('Position beim Erweitern'), {
+        // Extend position
+        const extendLabel = new PopupMenu.PopupMenuItem(_('Extend position'), {
             reactive: false,
             style_class: 'display-switcher-info'
         });
         this.menu.addMenuItem(extendLabel);
 
         const positions = [
-            ['right-of', _('Extern rechts vom Laptop')],
-            ['left-of', _('Extern links vom Laptop')],
-            ['above', _('Extern über dem Laptop')],
-            ['below', _('Extern unter dem Laptop')]
+            ['right-of', _('External right of laptop')],
+            ['left-of', _('External left of laptop')],
+            ['above', _('External above laptop')],
+            ['below', _('External below laptop')]
         ];
 
         for (const [value, label] of positions) {
@@ -712,15 +712,15 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        // Tastenkürzel anzeigen
-        const keysLabel = new PopupMenu.PopupMenuItem(_('Tastenkürzel'), {
+        // Show keybindings
+        const keysLabel = new PopupMenu.PopupMenuItem(_('Shortcuts'), {
             reactive: false,
             style_class: 'display-switcher-info'
         });
         this.menu.addMenuItem(keysLabel);
 
         const keyRows = [
-            ['keyOpen', _('Menü öffnen')],
+            ['keyOpen', _('Open menu')],
             ['keyLaptop', DisplayInfo.MODE_LABELS.laptop],
             ['keyExternal', DisplayInfo.MODE_LABELS.external],
             ['keyMirror', DisplayInfo.MODE_LABELS.mirror],
@@ -728,25 +728,25 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         ];
 
         for (const [key, label] of keyRows) {
-            const hint = this._formatKeyHint(key) || _('nicht gesetzt');
+            const hint = this._formatKeyHint(key) || _('not set');
             const item = new PopupMenu.PopupMenuItem(label + ': ' + hint, { reactive: false });
             this.menu.addMenuItem(item);
         }
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        // Button: externen Dialog für Tastenkürzel (Fallback)
+        // Button: open external settings dialog for keybindings (fallback)
         const keyDialogBtn = new PopupMenu.PopupIconMenuItem(
-            _('Tastenkürzel ändern…'),
+            _('Change shortcuts…'),
             'input-keyboard',
             St.IconType.SYMBOLIC);
         keyDialogBtn.connect('activate', () => this._openExternalSettingsDialog());
         this.menu.addMenuItem(keyDialogBtn);
 
-        // Bevorzugter externer Anschluss (Anzeige)
+        // Preferred external output (display)
         if (this.preferredExternal) {
             const extItem = new PopupMenu.PopupMenuItem(
-                _('Externer Anschluss: %s').format(this.preferredExternal),
+                _('External output: %s').format(this.preferredExternal),
                 { reactive: false });
             this.menu.addMenuItem(extItem);
         }

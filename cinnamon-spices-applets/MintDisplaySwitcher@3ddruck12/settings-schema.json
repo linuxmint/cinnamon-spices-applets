@@ -1,96 +1,96 @@
 {
     "section-behavior": {
         "type": "section",
-        "description": "Verhalten"
+        "description": "Behaviour"
     },
     "autoApplyOnConnect": {
         "type": "switch",
         "default": true,
-        "description": "Letzten Modus beim Anstecken anwenden",
-        "tooltip": "Beamer anschließen → gespeicherter Modus wird automatisch aktiviert"
+        "description": "Auto-apply last mode on connect",
+        "tooltip": "Connect a display → saved mode is applied automatically"
     },
     "revertOnDisconnect": {
         "type": "switch",
         "default": true,
-        "description": "Beim Trennen auf Nur-Laptop umschalten",
-        "tooltip": "Beamer abziehen → nur Laptop-Bildschirm aktiv"
+        "description": "Revert to laptop-only on disconnect",
+        "tooltip": "Unplug display → laptop screen only"
     },
     "hidePanelIcon": {
         "type": "switch",
         "default": false,
-        "description": "Panel-Icon ausblenden (nur Super+P)",
-        "tooltip": "Blendet das Icon in der Leiste aus. Das Menü öffnest du dann nur über das Tastenkürzel (Super+P)."
+        "description": "Hide panel icon (shortcut only)",
+        "tooltip": "Hides the panel icon. The overlay can then only be opened via the keyboard shortcut (Super+P)."
     },
     "lastMode": {
         "type": "combobox",
         "default": "extend",
         "options": {
-            "laptop": "Nur Laptop-Bildschirm",
-            "external": "Nur externer Bildschirm",
-            "mirror": "Bildschirm spiegeln",
-            "extend": "Bildschirm erweitern"
+            "laptop": "Laptop only",
+            "external": "External only",
+            "mirror": "Mirror",
+            "extend": "Extend"
         },
-        "description": "Gespeicherter Modus",
-        "tooltip": "Wird automatisch aktualisiert, wenn du einen Modus wählst"
+        "description": "Saved mode",
+        "tooltip": "Updated automatically when you choose a mode"
     },
     "extendPosition": {
         "type": "combobox",
         "default": "right-of",
         "options": {
-            "right-of": "Extern rechts vom Laptop",
-            "left-of": "Extern links vom Laptop",
-            "above": "Extern über dem Laptop",
-            "below": "Extern unter dem Laptop"
+            "right-of": "External right of laptop",
+            "left-of": "External left of laptop",
+            "above": "External above laptop",
+            "below": "External below laptop"
         },
-        "description": "Position beim Erweitern",
-        "tooltip": "Wo der externe Bildschirm relativ zum Laptop platziert wird"
+        "description": "Extend position",
+        "tooltip": "Where the external display is placed relative to the laptop"
     },
     "preferredExternal": {
         "type": "entry",
         "default": "",
-        "description": "Bevorzugter externer Anschluss",
-        "tooltip": "Optional: z. B. HDMI-1 oder DP-1 — leer lassen für automatische Erkennung"
+        "description": "Preferred external output",
+        "tooltip": "Optional: e.g. HDMI-1 or DP-1 — leave empty for auto-detection"
     },
     "section-shortcuts": {
         "type": "section",
-        "description": "Tastenkürzel"
+        "description": "Shortcuts"
     },
     "keyOpen": {
         "type": "keybinding",
-        "description": "Menü öffnen",
+        "description": "Open menu",
         "default": "<Super>p",
-        "tooltip": "Win+P-äquivalent — öffnet das Display-Menü"
+        "tooltip": "Win+P equivalent — opens the display overlay"
     },
     "keyLaptop": {
         "type": "keybinding",
-        "description": "Nur Laptop-Bildschirm",
+        "description": "Laptop only",
         "default": "",
-        "tooltip": "Direkt auf Nur-Laptop umschalten (leer = deaktiviert)"
+        "tooltip": "Switch directly to laptop-only (empty = disabled)"
     },
     "keyExternal": {
         "type": "keybinding",
-        "description": "Nur externer Bildschirm",
+        "description": "External only",
         "default": "",
-        "tooltip": "Direkt auf Nur-extern umschalten (leer = deaktiviert)"
+        "tooltip": "Switch directly to external-only (empty = disabled)"
     },
     "keyMirror": {
         "type": "keybinding",
-        "description": "Bildschirm spiegeln",
+        "description": "Mirror",
         "default": "",
-        "tooltip": "Direkt Spiegeln aktivieren (leer = deaktiviert)"
+        "tooltip": "Activate mirror directly (empty = disabled)"
     },
     "keyExtend": {
         "type": "keybinding",
-        "description": "Bildschirm erweitern",
+        "description": "Extend",
         "default": "",
-        "tooltip": "Direkt Erweitern aktivieren (leer = deaktiviert)"
+        "tooltip": "Activate extend directly (empty = disabled)"
     },
     "section-help": {
         "type": "section",
-        "description": "Hinweis"
+        "description": "Note"
     },
     "shortcutHelp": {
         "type": "label",
-        "description": "Tastenkürzel kannst du hier ändern. Rechtsklick auf das Applet → „Konfigurieren…“ öffnet ebenfalls dieses Fenster. Leere Felder = kein Shortcut."
+        "description": "Shortcuts kannst du hier ändern. Rechtsklick auf das Applet → „Konfigurieren…“ öffnet ebenfalls dieses Fenster. Leere Felder = kein Shortcut."
     }
 }
