@@ -1,22 +1,25 @@
 # Display Switcher — Cinnamon Applet
 
-Win+P-ähnlicher Anzeigemodus-Wechsler für Linux Mint (Cinnamon). Schaltet per xrandr zwischen Laptop, externem Bildschirm, Spiegeln und Erweitern um.
+A Win+P-style display mode switcher for Linux Mint (Cinnamon). Switches between laptop, external display, mirror and extend modes using `xrandr`.
 
 ## Features
 
-- Panel-Icon mit **dynamischem Modus-Icon** (Laptop / Monitor / Spiegeln / Erweitern)
-- Popup-Menü mit vier Anzeigemodi
-- **Automatische Display-Erkennung** (z. B. `eDP-1`, `HDMI-1`)
-- **Letzten Modus speichern** und beim Anstecken automatisch anwenden
-- **Super+P** Tastenkürzel (konfigurierbar)
-- **Hotplug:** reagiert auf An-/Abstecken von Beamer/Monitor
-- **Wayland-vorbereitet:** Backend-Abstraktion; v1 voll unter X11
+- **Band overlay** in the centre of the screen (Win+P style) — keyboard-navigable with ← → arrow keys and Enter
+- **4 display modes**: laptop only, external only, mirror, extend
+- **Configurable keyboard shortcuts** (default: Super+P)
+- **Dynamic panel icon** reflecting the active mode
+- **Auto-apply on reconnect**: remembers last mode and applies it when an external display is plugged in
+- **Revert on disconnect**: switches back to laptop-only when the display is unplugged
+- **Hotplug detection** via `Meta.MonitorManager` `monitors-changed` signal
+- **Wayland-ready**: backend abstraction layer; v1 fully functional under X11
+- **Panel icon can be hidden** for shortcut-only use
+- **Desktop notifications** on mode change
 
-## Voraussetzungen
+## Requirements
 
-- Linux Mint 22.x mit Cinnamon 6.x (getestet: Mint 22.3 / Cinnamon 6.6.7)
-- `xrandr` (Paket `x11-xserver-utils`, in Mint vorinstalliert)
-- X11-Session für vollständige Umschalt-Funktion
+- Linux Mint 22.x with Cinnamon 6.x (tested: Mint 22.3 / Cinnamon 6.6.7)
+- `xrandr` (package `x11-xserver-utils`, pre-installed on Mint)
+- X11 session for full switching functionality
 
 ## Installation
 
@@ -24,78 +27,81 @@ Win+P-ähnlicher Anzeigemodus-Wechsler für Linux Mint (Cinnamon). Schaltet per 
 cp -r MintDisplaySwitcher@3ddruck12 ~/.local/share/cinnamon/applets/
 ```
 
-Cinnamon neu laden: **Alt+F2** → `r` → Enter
+Reload Cinnamon: **Alt+F2** → type `r` → Enter
 
-Applet hinzufügen: **Systemeinstellungen → Applets → Display Switcher** zum Panel ziehen
+Add applet: **System Settings → Applets → Display Switcher** → drag to panel
 
-## Nutzung
+## Usage
 
-| Aktion | Ergebnis |
+| Action | Result |
 |---|---|
-| Klick auf Panel-Icon | Menü mit vier Modi öffnen |
-| **Super+P** | Menü öffnen (Win+P-äquivalent) |
-| Modus wählen | xrandr-Umschaltung + Benachrichtigung |
-| Beamer anschließen | Gespeicherter Modus wird automatisch angewendet |
-| Beamer trennen | Optional: zurück auf Nur-Laptop |
+| Click panel icon | Open overlay with four modes |
+| **Super+P** | Open overlay (Win+P equivalent) |
+| Select a mode | xrandr switch + notification |
+| Plug in external display | Saved mode is applied automatically |
+| Unplug display | Optionally reverts to laptop-only |
 
-### Applet-Einstellungen
+### Applet Settings
 
-**Drei Wege zum Einstellungsmenü:**
+**Three ways to open settings:**
 
-1. Im Popup-Menü: **„Einstellungen…“** (unten)
-2. Rechtsklick auf das Applet → **„Konfigurieren…“**
-3. Systemeinstellungen → Applets → Display Switcher → Zahnrad
+1. In the overlay: click the **Settings** tile (gear icon)
+2. Right-click on the applet → **"Configure…"**
+3. System Settings → Applets → Display Switcher → gear icon
 
-**Konfigurierbar:**
+**Configurable options:**
 
-| Einstellung | Beschreibung |
+| Setting | Description |
 |---|---|
-| Tastenkürzel Menü öffnen | Standard: Super+P |
-| Tastenkürzel pro Modus | Laptop / extern / Spiegeln / Erweitern (optional) |
-| Auto-Apply beim Anstecken | Gespeicherter Modus automatisch |
-| Beim Trennen: Nur Laptop | Beamer ab → Laptop-Modus |
-| Position beim Erweitern | rechts / links / oben / unten |
-| Bevorzugter externer Anschluss | z. B. `HDMI-1` wenn Auto-Erkennung falsch liegt |
+| Open menu shortcut | Default: Super+P |
+| Per-mode shortcuts | Laptop / external / mirror / extend (optional) |
+| Auto-apply on connect | Apply saved mode automatically |
+| Revert on disconnect | Switch to laptop-only when display is unplugged |
+| Extend position | right / left / above / below |
+| Preferred external output | e.g. `HDMI-1` if auto-detection picks the wrong port |
+| Hide panel icon | Use shortcut-only mode |
 
-Leere Tastenkürzel-Felder = Shortcut deaktiviert.
+Empty shortcut fields = shortcut disabled.
 
-## Projektstruktur
+## Project structure
 
 ```
 MintDisplaySwitcher@3ddruck12/
 ├── metadata.json
-├── applet.js              # UI, Settings, Hotplug
+├── applet.js              # UI, settings, hotplug
 ├── displayBackend.js      # Factory X11/Wayland
-├── displayInfo.js         # Datenmodell + Modus-Erkennung
-├── x11Backend.js          # xrandr (voll)
-├── waylandBackend.js      # Stub (Status lesen)
+├── displayInfo.js         # Data model + mode detection
+├── x11Backend.js          # xrandr (full)
+├── waylandBackend.js      # Stub (reads status)
 ├── settings-schema.json
-└── stylesheet.css
+├── stylesheet.css
+├── icon.png
+└── po/
+    └── de.po              # German translation
 ```
 
-## Bekannte Einschränkungen
+## Known limitations
 
-- **v1 voll unter X11** — Standard-Session unter Mint 22.3
-- **Wayland experimentell** — Applet lädt und zeigt Status; Umschalten öffnet Anzeige-Einstellungen
-- **cinnamon-settings-daemon** kann gelegentlich Einstellungen aus `~/.config/monitors.xml` zurücksetzen
-- **Ein externes Display** — bei mehreren Ports wird das erste verbundene gesteuert
-- **Super+P** kann mit anderen Shortcuts kollidieren — in den Applet-Einstellungen änderbar
+- **v1 fully under X11** — default session on Mint 22.3
+- **Wayland experimental** — applet loads and shows status; switching opens Display Settings
+- **One external display** — with multiple ports the first connected one is used
+- **Super+P** may conflict with other shortcuts — change it in applet settings if needed
 
-## Wayland-Roadmap
+## Wayland roadmap
 
-1. **Phase 1 (v1):** Backend-Abstraktion + Wayland-Stub
-2. **Phase 2:** `monitors.xml`-Generierung + Settings Daemon
-3. **Phase 3:** Native Muffin-API in Cinnamon GJS
+1. **Phase 1 (v1):** Backend abstraction + Wayland stub
+2. **Phase 2:** `monitors.xml` generation + Settings Daemon
+3. **Phase 3:** Native Muffin API in Cinnamon GJS
 
-## Testen
+## Testing
 
-1. Applet installieren und zum Panel hinzufügen
-2. Nur Laptop: Icon = Laptop, externe Modi deaktiviert
-3. Beamer anschließen: Auto-Apply des gespeicherten Modus
-4. Modus „Spiegeln“ wählen: Icon wechselt, Benachrichtigung erscheint
-5. **Super+P** drücken: Menü öffnet sich
-6. Beamer trennen: optional zurück auf Nur-Laptop
+1. Install applet and add it to the panel
+2. Laptop only: icon = laptop, external modes disabled
+3. Plug in display: auto-apply of saved mode
+4. Select "Mirror": icon changes, notification appears
+5. Press **Super+P**: overlay opens
+6. Unplug display: optional revert to laptop-only
 
-## Lizenz
+## License
 
-Freie Nutzung und Anpassung.
+MIT License — see [LICENSE](LICENSE)
