@@ -42,7 +42,7 @@ const SidebarPlacement = Object.freeze({TOP: 0, BOTTOM: 1, LEFT: 2, RIGHT: 3});
                   │                     ├── class Sidebar ────────┬── class SidebarButton
                   │                     │                         └── class Separator
 class             │                     │
-CinnamenuApplet ──┼                     ├── class ContextMenu ─────── class ContextMenuItem
+OverviewApplet  ──┼                     ├── class ContextMenu ─────── class ContextMenuItem
                   │                     │
                   │                     └── class SearchView
                   │
@@ -52,10 +52,25 @@ CinnamenuApplet ──┼                     ├── class ContextMenu ──
 
 */
 
-class CinnamenuApplet extends TextIconApplet {
+class OverviewApplet extends TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
         this.setAllowedLayout(AllowedLayout.BOTH);
+        // Load the applet's own stylesheet into Cinnamon's theme engine.
+        // Cinnamon auto-loads stylesheet.css only from the root applet dir,
+        // not from versioned subfolders. We inject it explicitly so that
+        // all .cinnamon-overview-* CSS rules take effect.
+        // load_stylesheet() takes a plain string path — NOT a Gio.File object.
+        try {
+            const stylesheetPath = __meta.path + '/stylesheet.css';
+            if (imports.gi.GLib.file_test(stylesheetPath, imports.gi.GLib.FileTest.EXISTS)) {
+                const themeContext = imports.gi.St.ThemeContext.get_for_stage(global.stage);
+                const theme = themeContext.get_theme();
+                theme.load_stylesheet(stylesheetPath);
+                this._overviewStylesheet = stylesheetPath;
+            }
+        } catch(e) { global.logWarning('Overview: could not load stylesheet: ' + e); }
+
         if (orientation === St.Side.BOTTOM || orientation === St.Side.TOP) {
             this.set_applet_label(_('Initializing'));
         }
@@ -67,13 +82,13 @@ class CinnamenuApplet extends TextIconApplet {
         this.menuManager = new PopupMenuManager(this);
         this.menu = new AppletPopupMenu(this, this.orientation);
         this.menuManager.addMenu(this.menu);
-        this.menu.setCustomStyleClass('menu-background cinnamenu');//starkmenu-background');
+        this.menu.setCustomStyleClass('menu-background overview-menu');//starkmenu-background');
         this.signals = new SignalManager(null);
         this.appSystem = Cinnamon.AppSystem.get_default();
         this._canUninstallApps = GLib.file_test("/usr/bin/cinnamon-remove-application",
                                                 GLib.FileTest.EXISTS);
         this._pamacManagerAvailable = GLib.file_test("/usr/bin/pamac-manager", GLib.FileTest.EXISTS);
-        this._applet_context_menu.actor.add_style_class_name('cinnamenu-context-menu');
+        this._applet_context_menu.actor.add_style_class_name('overview-context-menu');
 
         this.resizer = new PopupResizeHandler(this.menu.actor,
                                               () => this.orientation,
@@ -232,14 +247,34 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'use-box-style',             value: 'useBoxStyle',           cb: refreshDisplay },
         { key: 'use-tile-style',            value: 'useTileStyle',          cb: refreshDisplay },
         { key: 'overview-tile-style',       value: 'overviewTileStyle',     cb: refreshDisplay },
+        { key: 'overview-color-theme',      value: 'overviewColorTheme',    cb: refreshDisplay },
         { key: 'show-news-feed',            value: 'showNewsFeed',          cb: refreshDisplay },
         { key: 'news-rows',                 value: 'newsRows',              cb: refreshDisplay },
+        { key: 'show-recent-files',         value: 'showRecentFiles',       cb: refreshDisplay },
+        { key: 'recent-files-count',        value: 'recentFilesCount',      cb: refreshDisplay },
+        { key: 'search-web-enabled',        value: 'searchWebEnabled',      cb: null },
+        { key: 'search-web-new-tab',        value: 'searchWebNewTab',       cb: null },
+        { key: 'search-web-rows',           value: 'searchWebRows',         cb: null },
+        { key: 'search-engine-google',      value: 'searchGoogle',          cb: null },
+        { key: 'search-engine-youtube',     value: 'searchYoutube',         cb: null },
+        { key: 'search-engine-duckduckgo',  value: 'searchDuckduckgo',      cb: null },
+        { key: 'search-engine-bing',        value: 'searchBing',            cb: null },
+        { key: 'search-engine-wikipedia',   value: 'searchWikipedia',       cb: null },
+        { key: 'search-engine-github',      value: 'searchGithub',          cb: null },
+        { key: 'search-engine-stackoverflow',value:'searchStackoverflow',   cb: null },
+        { key: 'search-engine-reddit',      value: 'searchReddit',          cb: null },
+        { key: 'search-engine-imdb',        value: 'searchImdb',            cb: null },
+        { key: 'search-engine-openstreetmap',value:'searchOpenstreetmap',   cb: null },
         { key: 'weather-city',              value: 'weatherCity',           cb: () => {
             if (this._overview) {
                 this._overview._weatherLatLon = null;
                 this._overview._refreshWeather();
             }
         } },
+        { key: 'enable-dictionary',          value: 'enableDictionary',       cb: null },
+        { key: 'enable-ai-summary',           value: 'enableAiSummary',        cb: null },
+        { key: 'enable-newsletter',            value: 'enableNewsletter',       cb: null },
+        { key: 'groq-api-key',                value: 'groqApiKey',             cb: null },
         { key: 'use-menu-tile-style',       value: 'useMenuTileStyle',      cb: refreshDisplay },
         { key: 'menu-tile-style',           value: 'menuTileStyle',         cb: refreshDisplay },
         { key: 'overview-hot-corner',       value: 'overviewHotCorner',     cb: () => {
@@ -388,7 +423,7 @@ class CinnamenuApplet extends TextIconApplet {
                 /*let iconName = global.settings.get_string('app-menu-icon-name');*/
             }
         } catch(e) {
-            global.logWarning('Cinnamenu: Could not load icon file ' + this.settings.menuIcon +
+            global.logWarning('Overview: Could not load icon file ' + this.settings.menuIcon +
                                                                             ' for menu button');
         }
         if (this.settings.menuIconCustom && this.settings.menuIcon === '' ||
@@ -1435,7 +1470,7 @@ class CinnamenuApplet extends TextIconApplet {
                     try {
                         enumerator = source.enumerate_children_finish(result);
                     } catch(e) {
-                        global.logWarning('Cinnamenu file search:' + e.message);
+                        global.logWarning('Overview file search:' + e.message);
                     }
                     if (!this.searchActive || thisSearchId !== this.currentSearchId) {
                         if (enumerator) {
@@ -2078,5 +2113,5 @@ class RecentApps {// Simple class to remember the last 20 used apps which are sh
 }
 
 function main(metadata, orientation, panel_height, instance_id) {
-    return new CinnamenuApplet(metadata, orientation, panel_height, instance_id);
+    return new OverviewApplet(metadata, orientation, panel_height, instance_id);
 }
