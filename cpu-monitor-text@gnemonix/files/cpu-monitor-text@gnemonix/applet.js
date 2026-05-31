@@ -41,6 +41,12 @@ MyApplet.prototype = {
 			this.gtop = new GTop.glibtop_cpu();
 	
 			this._applet_label.set_style('min-width: 2.5em; text-align: left');
+			this.styleString = 0;
+			this.minWidth = 0;
+			this.minWidthMatch = 0;
+			this.styleString = this._applet_label.get_style();
+			this.minWidthMatch = this.styleString.match(/min-width:\s*(\d*\.?\d*)em/);
+			this.minWidth = parseFloat(this.minWidthMatch[1]);
 	
 			this.current = 0;
 			this.last = 0;
@@ -94,7 +100,16 @@ MyApplet.prototype = {
 
 		this.last_total = this.gtop.total;
 		let percent = Math.round(this.max_percentage - this.usage);
-		this.set_applet_label(this.cpu_label + " " + this._pad(percent) + "%");
+		let adjusted_min_width = this.minWidth;
+		if (this.cpu_label.length > 0) {
+			adjusted_min_width += this.cpu_label.length * 0.6;
+		}
+		if (this.max_percentage.toString().length > 0) {
+			adjusted_min_width += (this.max_percentage.toString().length - 3) * 0.6;
+		}
+		this._applet_label.set_style('min-width: ' + adjusted_min_width + 'em; text-align: left');
+
+		this.set_applet_label(this.cpu_label + this._pad(percent) + "%");
 	},
 
 	_updateLoop: function () {
