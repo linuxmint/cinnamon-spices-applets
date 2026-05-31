@@ -148,7 +148,7 @@ class AppButton {
     }
 
     _addTileStyle() {
-        /* Cinnamenu tile modes:
+        /* Overview tile modes:
          *   settings.useMenuTileStyle  — master on/off
          *   settings.menuTileStyle     — 'light-palette' | 'dark-palette' | 'metro' | 'css'
          *
