@@ -1,10 +1,10 @@
 /* ============================================================
-   Cinnamenu@json — Built-in Stylesheet  v6
+   overview@json — Built-in Stylesheet  v6
    Cinnamon 6.x / Linux Mint 22.x
 
    This file lives INSIDE the applet package and is loaded by
    Cinnamon ALONGSIDE your active cinnamon.css theme.
-   Rules here are more specific (scoped to .cinnamenu /
+   Rules here are more specific (scoped to .overview-menu /
    .cinnamon-overview-* / palette classes) and therefore
    OVERRIDE your theme for anything inside the menu/overview.
 
@@ -22,124 +22,125 @@
 /* ============================================================
    §0  GLOBAL FONT OVERRIDE inside menu + overview
    ============================================================ */
-.cinnamenu,
-.cinnamenu * {
+.overview-menu,
+.overview-menu * {
     font-family: "SF Pro Display", "SF Pro Text", "Helvetica Neue",
                  "Segoe UI", Cantarell, sans-serif;
 }
-.cinnamon-overview-background,
-.cinnamon-overview-background * {
+/* Font applied to overview backdrop only — NOT to sidebar (no * wildcard).
+   Sidebar is a fully independent actor; it must not inherit from here. */
+.cinnamon-overview-background {
     font-family: "SF Pro Display", "SF Pro Text", "Helvetica Neue",
                  "Segoe UI", Cantarell, sans-serif;
 }
 
 
 /* ============================================================
-   §1  CINNAMENU — BASE LAYOUT (structure, no colours)
+   §1  OVERVIEW — BASE LAYOUT (structure, no colours)
    ============================================================ */
 
 /* Strip all padding from the popup wrapper so the menu starts
    flush left — no gap between the panel button and the favbox.
    Cinnamon injects padding at multiple levels; zero them all. */
-.cinnamenu.popup-menu-content,
-.cinnamenu .popup-menu-content,
-.cinnamenu .popup-menu-section,
-.cinnamenu .popup-menu-section > StBoxLayout,
-.cinnamenu .popup-menu-inner-box {
+.overview-menu.popup-menu-content,
+.overview-menu .popup-menu-content,
+.overview-menu .popup-menu-section,
+.overview-menu .popup-menu-section > StBoxLayout,
+.overview-menu .popup-menu-inner-box {
     padding: 0 !important;
     margin:  0 !important;
     border:  0 !important;
 }
 
-.cinnamenu .menu-applications-outer-box,
-.cinnamenu .menu-applications-box {
+.overview-menu .menu-applications-outer-box,
+.overview-menu .menu-applications-box {
     background-color: transparent;
     border: none; padding: 0; margin: 0; spacing: 0;
 }
-.cinnamenu .menu-sidebar-panel {
+.overview-menu .menu-sidebar-panel {
     padding: 0 0 14px 0; spacing: 0; min-width: 190px; max-width: 220px; border: none; margin: 0;
 }
 /* Sidebar search entries must not push sidebar wider */
-.cinnamenu .menu-sidebar-search-top #menu-search-entry,
-.cinnamenu .menu-sidebar-search-row #menu-search-entry {
+.overview-menu .menu-sidebar-search-top #menu-search-entry,
+.overview-menu .menu-sidebar-search-row #menu-search-entry {
     min-width: 0;
     max-width: 170px;
 }
-.cinnamenu .menu-sidebar-title-row {
+.overview-menu .menu-sidebar-title-row {
     padding: 12px 16px 10px 16px; spacing: 0; min-height: 46px;
 }
-.cinnamenu .menu-sidebar-categories-title {
+.overview-menu .menu-sidebar-categories-title {
     font-size: 0.68em; font-weight: bold; min-width: 130px;
 }
-.cinnamenu .menu-system-buttons-box {
+.overview-menu .menu-system-buttons-box {
     padding: 6px 6px 8px 6px; spacing: 0;
 }
-.cinnamenu .menu-system-button {
+.overview-menu .menu-system-button {
     border-radius: 8px; padding: 8px 9px; transition-duration: 100ms;
 }
-.cinnamenu .menu-right-pane { padding: 0; spacing: 0; }
-.cinnamenu .menu-search-row {
+.overview-menu .menu-right-pane { padding: 0; spacing: 0; }
+.overview-menu .menu-search-row {
     /* Left/right padding matches .menu-applications-inner-box (8px)
        so search entry aligns with the tile grid edges.
        Top/bottom padding centres the entry vertically in the same height
        as the sidebar CATEGORIES header row (min-height:46px). */
     padding: 10px 8px 8px 8px; spacing: 0; min-height: 46px;
 }
-.cinnamenu .menu-search-box { padding: 0; spacing: 0; }
-.cinnamenu #menu-search-entry {
+.overview-menu .menu-search-box { padding: 0; spacing: 0; }
+.overview-menu #menu-search-entry {
     border-radius: 8px; padding: 7px 14px 7px 10px; transition-duration: 130ms;
 }
-.cinnamenu .menu-categories-scrollbox,
-.cinnamenu .vfade.menu-categories-scrollbox {
+.overview-menu .menu-categories-scrollbox,
+.overview-menu .vfade.menu-categories-scrollbox {
     background-color: transparent; border: none; padding: 0; margin: 0;
 }
-.cinnamenu .menu-categories-box {
+.overview-menu .menu-categories-box {
     background-color: transparent; border: none;
     padding: 0 6px 4px 6px; spacing: 0;
 }
-.cinnamenu .menu-category-button {
+.overview-menu .menu-category-button {
     background-color: transparent; border: none;
     border-radius: 6px; padding: 8px 10px; spacing: 10px;
     transition-duration: 100ms;
 }
-.cinnamenu .menu-category-button-label { font-size: 0.90em; }
-.cinnamenu .menu-category-button:highlighted,
-.cinnamenu .menu-category-button-selected:highlighted { font-weight: bold; }
-.cinnamenu .menu-applications-scrollbox,
-.cinnamenu .vfade.menu-applications-scrollbox {
+.overview-menu .menu-category-button-label { font-size: 0.90em; }
+.overview-menu .menu-category-button:highlighted,
+.overview-menu .menu-category-button-selected:highlighted { font-weight: bold; }
+.overview-menu .menu-applications-scrollbox,
+.overview-menu .vfade.menu-applications-scrollbox {
     background-color: transparent; border: none; padding: 0; margin: 0;
 }
-.cinnamenu .menu-applications-inner-box,
-.cinnamenu .menu-applications-box {
+.overview-menu .menu-applications-inner-box,
+.overview-menu .menu-applications-box {
     background-color: transparent; padding: 4px 8px 8px 8px; spacing: 0;
 }
-.cinnamenu .menu-applications-grid-box { spacing: 0; padding: 0; }
-.cinnamenu .menu-applications-grid-box .menu-application-button {
+.overview-menu .menu-applications-grid-box { spacing: 0; padding: 0; }
+.overview-menu .menu-applications-grid-box .menu-application-button {
     border-radius: 10px; padding: 8px 2px; transition-duration: 120ms;
 }
-.cinnamenu .menu-applications-grid-box .menu-application-button-selected {
+.overview-menu .menu-applications-grid-box .menu-application-button-selected {
     border-radius: 10px; padding: 8px 2px; transition-duration: 120ms;
 }
-.cinnamenu .menu-application-button-label,
-.cinnamenu .menu-applications-grid-box .menu-application-button-label {
+.overview-menu .menu-application-button-label,
+.overview-menu .menu-applications-grid-box .menu-application-button-label {
     font-size: 0.77em; padding: 2px 2px 0; text-align: center;
 }
-.cinnamenu .menu-application-button:highlighted,
-.cinnamenu .menu-application-button-selected:highlighted { font-weight: bold; }
-.cinnamenu .menu-favorites-scrollbox,
-.cinnamenu .menu-favorites-box {
+.overview-menu .menu-application-button:highlighted,
+.overview-menu .menu-application-button-selected:highlighted { font-weight: bold; }
+.overview-menu .menu-favorites-scrollbox,
+.overview-menu .menu-favorites-box {
     background-color: transparent; border: none; padding: 2px 0;
 }
-.cinnamenu .menu-favorites-button {
+.overview-menu .menu-favorites-button {
     background-color: transparent; border: none;
     border-radius: 8px; padding: 6px; transition-duration: 100ms;
 }
 
 /* Sidebar search row (search-placement = sidebar) */
-.cinnamenu .menu-sidebar-search-row {
+.overview-menu .menu-sidebar-search-row {
     padding: 6px 10px 4px 10px; spacing: 0;
 }
-.cinnamenu .menu-sidebar-search-row #menu-search-entry {
+.overview-menu .menu-sidebar-search-row #menu-search-entry {
     border-radius: 6px; padding: 5px 10px 5px 8px; transition-duration: 130ms;
 }
 
@@ -148,10 +149,10 @@
 /* ── sidebar-top search: search row replaces CATEGORIES header ──────────── */
 /* Same height as catTitleRow via shared .menu-sidebar-title-row class.
    The entry is compact and spans the full sidebar width minus small inset. */
-.cinnamenu .menu-sidebar-search-top {
+.overview-menu .menu-sidebar-search-top {
     /* inherits padding/min-height from .menu-sidebar-title-row */
 }
-.cinnamenu .menu-sidebar-search-top #menu-search-entry {
+.overview-menu .menu-sidebar-search-top #menu-search-entry {
     border-radius: 6px;
     padding: 5px 10px 5px 8px;
     transition-duration: 130ms;
@@ -178,7 +179,7 @@
 }
 
 /* ============================================================
-   §2  CINNAMENU — LIGHT PALETTE  (.menu-palette-light)
+   §2  OVERVIEW — LIGHT PALETTE  (.menu-palette-light)
    White frosted glass sidebar.
    App grid: very transparent so wallpaper shows through.
    Tiles: frosted white glass, DARK labels.
@@ -298,7 +299,7 @@
 
 
 /* ============================================================
-   §3  CINNAMENU — DARK PALETTE  (.menu-palette-dark)
+   §3  OVERVIEW — DARK PALETTE  (.menu-palette-dark)
    Full black frosted glass — entire menu is dark.
    App grid: very transparent (dark tint).
    Tiles: frosted dark glass, WHITE labels.
@@ -425,7 +426,7 @@
 /* ============================================================
    §4  SYSTEM BUTTONS base
    ============================================================ */
-.cinnamenu .menu-system-buttons-box {
+.overview-menu .menu-system-buttons-box {
     spacing: 2px;
 }
 
@@ -434,6 +435,7 @@
    §5  OVERVIEW — BASE LAYOUT
    ============================================================ */
 
+/* color for overview backdrop only — sidebar overrides this via its own rule */
 .cinnamon-overview-background { color: #1d1d1f; }
 .cinnamon-overview-categories-title {
     font-weight: bold; font-size: 0.68em; padding: 0 8px 10px 16px;
@@ -444,11 +446,21 @@
 .cinnamon-overview-category-sel { border-radius: 6px; border: none; transition-duration: 120ms; }
 .cinnamon-overview-cat-accent { background-color: transparent; }
 .cinnamon-overview-search {
-    border-radius: 8px; padding: 3px 14px; transition-duration: 150ms;
+    border-radius:    10px;
+    padding:          3px 14px;
+    /* cinnamon-css mode defaults — JS overrides bg/border for light/dark modes */
+    background-color: rgba(255,255,255,0.09);
+    border:           1px solid rgba(255,255,255,0.14);
+    color:            rgba(255,255,255,0.92);
+}
+.cinnamon-overview-search:focus,
+.cinnamon-overview-search:hover {
+    background-color: rgba(255,255,255,0.22);
+    border-color: rgba(255,255,255,0.45);
 }
 .cinnamon-overview-section-title { font-size: 11px; font-weight: bold; }
 .cinnamon-overview-tile { border-radius: 2px; border: none; transition-duration: 120ms; }
-.cinnamon-overview-power-btn { border-radius: 8px; border: none; transition-duration: 120ms; }
+.cinnamon-overview-power-btn { border-radius: 8px; border: none; background-color: transparent; transition-duration: 120ms; }
 .cinnamon-overview-tooltip { border-radius: 6px; padding: 4px 9px; }
 .cinnamon-overview-context-menu { border-radius: 10px; padding: 5px 0; min-width: 200px; }
 .cinnamon-overview-context-item {
@@ -461,35 +473,227 @@
 
 
 /* ============================================================
-   §6  OVERVIEW — LIGHT PALETTE  (.overview-palette-light)
-   White frosted glass. Sidebar white. Tiles: frosted, dark text.
+   §6  OVERVIEW — SIDEBAR BASE (no theme class = cinnamon-css mode)
    ============================================================ */
 
-.overview-palette-light {
+/* Base sidebar — transparent fallback; theme rules below override this.
+   In cinnamon-css mode the user's cinnamon.css bare rules control it.   */
+.cinnamon-overview-sidebar {
+    background-color: transparent;
+    color:            rgba(255,255,255,0.85);
+    font-family:      "SF Pro Display","SF Pro Text","Helvetica Neue",
+                      "Segoe UI", Cantarell, sans-serif;
+    border-right:     1px solid rgba(255,255,255,0.08);
+}
+
+
+/* ============================================================
+   §7  OVERVIEW — THEME PALETTE (overview-theme-light / -dark)
+   Controls: sidebar bg, right-pane bg, categories, search bar,
+   section titles, status labels, power bar, tooltip, context menu,
+   dictionary text, avatar name, news row labels.
+   Does NOT control tile colours — those are §8 (tile palette).
+   ============================================================ */
+/* ── SF Pro font stack for all overview text ────────────────────────────── */
+.cinnamon-overview-sidebar,
+.cinnamon-overview-right-pane,
+.cinnamon-overview-search,
+.cinnamon-overview-cat-label,
+.cinnamon-overview-cat-label-sel,
+.cinnamon-overview-section-title,
+.cinnamon-overview-status-label,
+.cinnamon-overview-avatar-name,
+.cinnamon-overview-news-row-label,
+.cinnamon-overview-dict-panel,
+.cinnamon-overview-tooltip {
+    font-family: "SF Pro Display","SF Pro Text","SF Pro",".AppleSystemUIFont","Helvetica Neue","Segoe UI",Cantarell,sans-serif;
+}
+
+
+/* ── DARK THEME (default when neither class set — same as explicit dark) ─ */
+.cinnamon-overview-sidebar {
+    color:        rgba(255,255,255,0.85);
+    border-right: 1px solid rgba(255,255,255,0.08);
+}
+.cinnamon-overview-background {
+    color: rgba(255,255,255,0.85);
+}
+
+/* ── LIGHT THEME ─────────────────────────────────────────────────────── */
+
+/* Sidebar: your exact spec, correct transparency 0.60 */
+.overview-theme-light .cinnamon-overview-sidebar {
+    background-color: rgba(245,255,255,0.60) !important;
+    border-right:     1px solid rgba(0,0,0,0.06) !important;
+    border-radius:    0 !important;
+    box-shadow:       0 10px 30px rgba(0,0,0,0.06) !important;
+    color:            rgba(0,0,0,0.85);
+}
+/* Right pane: your exact spec, correct start 0.80 / end 0.95 */
+.overview-theme-light .cinnamon-overview-right-pane {
+    background-gradient-direction: vertical;
+    background-gradient-start:     rgba(245,255,255,0.80);
+    background-gradient-end:       rgba(245,255,255,0.95);
+    border:                        none !important;
+    border-top-left-radius:        0    !important;
+    border-top-right-radius:       0    !important;
+    border-bottom-left-radius:     16px !important;
+    border-bottom-right-radius:    16px !important;
+    margin:                        0 24px 24px 0 !important;
+    padding:                       16px !important;
+    box-shadow:                    0 10px 30px rgba(0,0,0,0.06) !important;
+    color:                         rgba(0,0,0,0.85);
+}
+/* Background canvas */
+.overview-theme-light.cinnamon-overview-background,
+.overview-theme-light .cinnamon-overview-background {
     background-color: rgba(242,242,247,0.85);
-    color: #1d1d1f;
+    color: rgba(0,0,0,0.85);
 }
-.overview-palette-light .cinnamon-overview-sidebar {
-    background-color: rgba(255,255,255,0.75);
-    border-right: 1px solid rgba(0,0,0,0.08);
+/* Dict panel has a fixed dark-blue bg regardless of theme — always white text.
+   Explicit rule needed to block the rgba(0,0,0,0.85) colour inheritance above. */
+.overview-theme-light .cinnamon-overview-dict-panel,
+.overview-theme-light .cinnamon-overview-dict-panel * {
+    color: rgba(255,255,255,0.92) !important;
 }
-.overview-palette-light .cinnamon-overview-categories-title { color: rgba(0,0,0,0.50); }
-.overview-palette-light .cinnamon-overview-category:hover { background-color: rgba(0,0,0,0.06); }
-.overview-palette-light .cinnamon-overview-category-sel { background-color: rgba(0,122,255,0.10); }
-.overview-palette-light .cinnamon-overview-cat-label { color: rgba(0,0,0,0.62); font-size: 13px; }
-.overview-palette-light .cinnamon-overview-cat-label-sel { color: #007AFF; font-size: 13px; font-weight: bold; }
-.overview-palette-light .cinnamon-overview-cat-icon      { color: rgba(0,0,0,0.55); opacity: 0.80; }
-.overview-palette-light .cinnamon-overview-cat-icon-sel  { color: #007AFF; opacity: 1; }
-.overview-palette-light .cinnamon-overview-cat-accent-sel { background-color: #007AFF; }
-.overview-palette-light .cinnamon-overview-search {
+/* Categories */
+.overview-theme-light .cinnamon-overview-categories-title { color: rgba(0,0,0,0.50); }
+.overview-theme-light .cinnamon-overview-category:hover   { background-color: rgba(0,0,0,0.06); }
+.overview-theme-light .cinnamon-overview-category-sel     { background-color: rgba(0,122,255,0.10); }
+.overview-theme-light .cinnamon-overview-cat-label        { color: rgba(0,0,0,0.62); font-size: 13px; }
+.overview-theme-light .cinnamon-overview-cat-label-sel    { color: #007AFF; font-size: 13px; font-weight: bold; }
+.overview-theme-light .cinnamon-overview-cat-icon         { color: rgba(0,0,0,0.55); opacity: 0.80; }
+.overview-theme-light .cinnamon-overview-cat-icon-sel     { color: #007AFF; opacity: 1; }
+.overview-theme-light .cinnamon-overview-cat-accent-sel   { background-color: #007AFF; }
+/* Search bar — dark text on white background */
+.overview-theme-light .cinnamon-overview-search {
     background-color: rgba(255,255,255,0.88);
-    border: 1px solid rgba(0,0,0,0.12); color: #1d1d1f;
-    }
-.overview-palette-light .cinnamon-overview-search:focus,
-.overview-palette-light .cinnamon-overview-search:hover {
-    background-color: #ffffff; border-color: #007AFF;
-    }
-.overview-palette-light .cinnamon-overview-section-title { color: rgba(0,0,0,0.42); }
+    border:           1px solid rgba(0,0,0,0.12);
+    color:            rgba(0,0,0,0.85);
+}
+.overview-theme-light .cinnamon-overview-search:focus,
+.overview-theme-light .cinnamon-overview-search:hover {
+    background-color: #ffffff;
+    border-color:     #007AFF;
+    color:            rgba(0,0,0,0.90);
+}
+/* Section titles, status, power bar */
+.overview-theme-light .cinnamon-overview-section-title  { color: rgba(0,0,0,0.42); }
+.overview-theme-light .cinnamon-overview-status-label   { color: rgba(0,0,0,0.42); font-size: 13px; }
+.overview-theme-light .cinnamon-overview-power-btn      { background-color: transparent; border: none; }
+.overview-theme-light .cinnamon-overview-power-btn:hover{ background-color: rgba(255,59,48,0.12);   border-color: rgba(255,59,48,0.25); }
+.overview-theme-light .cinnamon-overview-power-icon     { color: rgba(0,0,0,0.60); icon-size: 28px; }
+/* Tooltip */
+.overview-theme-light .cinnamon-overview-tooltip {
+    background-color: rgba(255,255,255,0.97);
+    border:           1px solid rgba(0,0,0,0.09);
+    color:            rgba(0,0,0,0.85);
+}
+/* Context menu */
+.overview-theme-light .cinnamon-overview-context-menu {
+    background-color: rgba(255,255,255,0.97);
+    border:           1px solid rgba(0,0,0,0.09);
+    border-radius:    10px; padding: 5px 0; min-width:0; max-width:260px;
+}
+.overview-theme-light .cinnamon-overview-context-item       { color: rgba(0,0,0,0.85); }
+.overview-theme-light .cinnamon-overview-context-item:hover { background-color: rgba(0,122,255,0.08); color: #007AFF; }
+.overview-theme-light .cinnamon-overview-context-sep        { background-color: rgba(0,0,0,0.08); }
+/* Dictionary / AI text — panel has dark blue bg regardless of theme; text is always white via ClutterText */
+/* Avatar name */
+.overview-theme-light .cinnamon-overview-avatar-name { color: rgba(30,30,30,0.90); }
+/* News row labels */
+.overview-theme-light .cinnamon-overview-news-row-label { color: rgba(30,30,30,0.45); }
+
+
+/* ── DARK THEME explicit ─────────────────────────────────────────────── */
+
+/* Sidebar: your exact spec */
+.overview-theme-dark .cinnamon-overview-sidebar {
+    background-color: rgba(40,40,40,0.60) !important;
+    border-right:     1px solid rgba(0,0,0,0.06) !important;
+    border-radius:    0 !important;
+    box-shadow:       0 10px 30px rgba(0,0,0,0.06) !important;
+    color:            rgba(255,255,255,0.85);
+}
+/* Right pane: your exact spec */
+.overview-theme-dark .cinnamon-overview-right-pane {
+    background-gradient-direction: vertical;
+    background-gradient-start:     rgba(27,27,27,0.90);
+    background-gradient-end:       rgba(27,27,27,0.99);
+    border:                        none !important;
+    border-top-left-radius:        0    !important;
+    border-top-right-radius:       0    !important;
+    border-bottom-left-radius:     16px !important;
+    border-bottom-right-radius:    16px !important;
+    margin:                        0 24px 24px 0 !important;
+    padding:                       16px !important;
+    box-shadow:                    0 10px 30px rgba(0,0,0,0.06) !important;
+    color:                         rgba(255,255,255,0.85);
+}
+/* Background canvas */
+.overview-theme-dark.cinnamon-overview-background,
+.overview-theme-dark .cinnamon-overview-background {
+    background-color: rgba(0,0,0,0.88);
+    color: rgba(255,255,255,0.92);
+}
+/* Categories */
+.overview-theme-dark .cinnamon-overview-categories-title { color: rgba(255,255,255,0.50); }
+.overview-theme-dark .cinnamon-overview-category:hover   { background-color: rgba(255,255,255,0.10); }
+.overview-theme-dark .cinnamon-overview-category-sel     { background-color: rgba(10,132,255,0.22); }
+.overview-theme-dark .cinnamon-overview-cat-label        { color: rgba(255,255,255,0.60); font-size: 13px; }
+.overview-theme-dark .cinnamon-overview-cat-label-sel    { color: #0A84FF; font-size: 13px; font-weight: bold; }
+.overview-theme-dark .cinnamon-overview-cat-icon         { color: rgba(255,255,255,0.55); opacity: 0.80; }
+.overview-theme-dark .cinnamon-overview-cat-icon-sel     { color: #0A84FF; opacity: 1; }
+.overview-theme-dark .cinnamon-overview-cat-accent-sel   { background-color: #0A84FF; }
+/* Search bar — white text on dark background */
+.overview-theme-dark .cinnamon-overview-search {
+    background-color: rgba(255,255,255,0.09);
+    border:           1px solid rgba(255,255,255,0.14);
+    color:            rgba(255,255,255,0.92);
+    padding:          3px 14px;
+}
+.overview-theme-dark .cinnamon-overview-search:focus,
+.overview-theme-dark .cinnamon-overview-search:hover {
+    background-color: rgba(255,255,255,0.14);
+    border-color:     #0A84FF;
+    color:            rgba(255,255,255,0.95);
+}
+/* Section titles, status, power bar */
+.overview-theme-dark .cinnamon-overview-section-title  { color: rgba(255,255,255,0.42); }
+.overview-theme-dark .cinnamon-overview-status-label   { color: rgba(255,255,255,0.42); font-size: 13px; }
+.overview-theme-dark .cinnamon-overview-power-btn      { background-color: transparent; border: none; }
+.overview-theme-dark .cinnamon-overview-power-btn:hover{ background-color: rgba(255,69,58,0.22); border-color: rgba(255,69,58,0.35); }
+.overview-theme-dark .cinnamon-overview-power-icon     { color: rgba(255,255,255,0.72); icon-size: 28px; }
+/* Tooltip */
+.overview-theme-dark .cinnamon-overview-tooltip {
+    background-color: rgba(20,20,28,0.97);
+    border:           1px solid rgba(255,255,255,0.10);
+    color:            rgba(255,255,255,0.92);
+}
+/* Context menu */
+.overview-theme-dark .cinnamon-overview-context-menu {
+    background-color: rgba(18,18,24,0.97);
+    border:           1px solid rgba(255,255,255,0.09);
+    border-radius:    10px; padding: 5px 0; min-width:0; max-width:260px;
+}
+.overview-theme-dark .cinnamon-overview-context-item       { color: rgba(255,255,255,0.85); }
+.overview-theme-dark .cinnamon-overview-context-item:hover { background-color: rgba(10,132,255,0.18); color: #0A84FF; }
+.overview-theme-dark .cinnamon-overview-context-sep        { background-color: rgba(255,255,255,0.08); }
+/* Dictionary / AI text — dark theme (white text already set via ClutterText) */
+/* Avatar name */
+.overview-theme-dark .cinnamon-overview-avatar-name { color: rgba(255,255,255,0.90); }
+/* News row labels */
+.overview-theme-dark .cinnamon-overview-news-row-label { color: rgba(255,255,255,0.38); }
+
+
+/* ============================================================
+   §8  TILE PALETTE (overview-palette-light / -dark / -tahoe)
+   Controls ONLY tile colours and styles.
+   Never touches: sidebar, right-pane, categories, search bar,
+   section titles, status labels, power bar, tooltip, context menu.
+   ============================================================ */
+
+/* ── LIGHT TILE PALETTE ──────────────────────────────────────────────── */
 /* metro tiles on light: always white label */
 .overview-palette-light .cinnamon-overview-tile-label { color: #ffffff; font-size: 10px; text-align: center; }
 /* tile-light: frosted white, dark labels */
@@ -508,7 +712,7 @@
 .overview-palette-light .cinnamon-overview-tile.tile-light .cinnamon-overview-tile-label {
     color: rgba(0,0,0,0.85); font-size: 11px; font-weight: 500;
 }
-/* tile-dark on light overview */
+/* tile-dark on light tile palette */
 .overview-palette-light .cinnamon-overview-tile.tile-dark {
     background-color: rgba(0,0,0,0.55);
     border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 3px;
@@ -516,58 +720,8 @@
 .overview-palette-light .cinnamon-overview-tile.tile-dark .cinnamon-overview-tile-label {
     color: rgba(255,255,255,0.92); font-size: 11px; font-weight: 500;
 }
-.overview-palette-light .cinnamon-overview-status-label { color: rgba(0,0,0,0.42); font-size: 13px; }
-.overview-palette-light .cinnamon-overview-power-btn {
-    background-color: rgba(255,255,255,0.62); border: 1px solid rgba(0,0,0,0.09);
-}
-.overview-palette-light .cinnamon-overview-power-btn:hover {
-    background-color: rgba(255,59,48,0.12); border-color: rgba(255,59,48,0.25);
-}
-.overview-palette-light .cinnamon-overview-power-icon { color: rgba(0,0,0,0.60); icon-size: 28px; }
-.overview-palette-light .cinnamon-overview-tooltip {
-    background-color: rgba(255,255,255,0.97); border: 1px solid rgba(0,0,0,0.09); color: #1d1d1f;
-}
-.overview-palette-light .cinnamon-overview-context-menu {
-    background-color: rgba(255,255,255,0.97); border: 1px solid rgba(0,0,0,0.09);
-}
-.overview-palette-light .cinnamon-overview-context-item { color: #1d1d1f; }
-.overview-palette-light .cinnamon-overview-context-item:hover {
-    background-color: rgba(0,122,255,0.08); color: #007AFF;
-}
-.overview-palette-light .cinnamon-overview-context-sep { background-color: rgba(0,0,0,0.08); }
 
-
-/* ============================================================
-   §7  OVERVIEW — DARK PALETTE  (.overview-palette-dark)
-   Full black frosted glass. All dark. Tiles: frosted dark, white text.
-   ============================================================ */
-
-.overview-palette-dark {
-    background-color: rgba(0,0,0,0.88);
-    color: rgba(255,255,255,0.92);
-}
-.overview-palette-dark .cinnamon-overview-sidebar {
-    background-color: rgba(0,0,0,0.80);
-    border-right: 1px solid rgba(255,255,255,0.07);
-}
-.overview-palette-dark .cinnamon-overview-categories-title { color: rgba(255,255,255,0.50); }
-.overview-palette-dark .cinnamon-overview-category:hover { background-color: rgba(255,255,255,0.10); }
-.overview-palette-dark .cinnamon-overview-category-sel { background-color: rgba(10,132,255,0.22); }
-.overview-palette-dark .cinnamon-overview-cat-label { color: rgba(255,255,255,0.60); font-size: 13px; }
-.overview-palette-dark .cinnamon-overview-cat-label-sel { color: #0A84FF; font-size: 13px; font-weight: bold; }
-.overview-palette-dark .cinnamon-overview-cat-icon      { color: rgba(255,255,255,0.55); opacity: 0.80; }
-.overview-palette-dark .cinnamon-overview-cat-icon-sel  { color: #0A84FF; opacity: 1; }
-.overview-palette-dark .cinnamon-overview-cat-accent-sel { background-color: #0A84FF; }
-.overview-palette-dark .cinnamon-overview-search {
-    background-color: rgba(255,255,255,0.09);
-    border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.92);
-    padding: 3px 14px;
-}
-.overview-palette-dark .cinnamon-overview-search:focus,
-.overview-palette-dark .cinnamon-overview-search:hover {
-    background-color: rgba(255,255,255,0.14); border-color: #0A84FF;
-    }
-.overview-palette-dark .cinnamon-overview-section-title { color: rgba(255,255,255,0.42); }
+/* ── DARK TILE PALETTE ───────────────────────────────────────────────── */
 /* metro tiles on dark: always white labels */
 .overview-palette-dark .cinnamon-overview-tile-label { color: #ffffff; font-size: 10px; text-align: center; }
 /* tile-dark: frosted dark glass, white labels */
@@ -586,7 +740,7 @@
 .overview-palette-dark .cinnamon-overview-tile.tile-dark .cinnamon-overview-tile-label {
     color: rgba(255,255,255,0.92); font-size: 11px; font-weight: 500;
 }
-/* tile-light on dark overview */
+/* tile-light on dark tile palette */
 .overview-palette-dark .cinnamon-overview-tile.tile-light {
     background-color: rgba(255,255,255,0.62);
     border: 1px solid rgba(255,255,255,0.80); border-radius: 10px; padding: 3px;
@@ -594,30 +748,6 @@
 .overview-palette-dark .cinnamon-overview-tile.tile-light .cinnamon-overview-tile-label {
     color: rgba(0,0,0,0.85); font-size: 11px; font-weight: 500;
 }
-.overview-palette-dark .cinnamon-overview-status-label { color: rgba(255,255,255,0.42); font-size: 13px; }
-.overview-palette-dark .cinnamon-overview-power-btn {
-    background-color: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14);
-}
-.overview-palette-dark .cinnamon-overview-power-btn:hover {
-    background-color: rgba(255,69,58,0.22); border-color: rgba(255,69,58,0.35);
-}
-.overview-palette-dark .cinnamon-overview-power-icon { color: rgba(255,255,255,0.72); icon-size: 28px; }
-.overview-palette-dark .cinnamon-overview-tooltip {
-    background-color: rgba(20,20,28,0.97); border: 1px solid rgba(255,255,255,0.10);
-    color: rgba(255,255,255,0.92);
-}
-.overview-palette-dark .cinnamon-overview-context-menu {
-    border-radius: 10px;
-    padding: 5px 0;
-    min-width: 0;
-    max-width: 260px;
-    background-color: rgba(18,18,24,0.97); border: 1px solid rgba(255,255,255,0.09);
-}
-.overview-palette-dark .cinnamon-overview-context-item { color: rgba(255,255,255,0.85); }
-.overview-palette-dark .cinnamon-overview-context-item:hover {
-    background-color: rgba(10,132,255,0.18); color: #0A84FF;
-}
-.overview-palette-dark .cinnamon-overview-context-sep { background-color: rgba(255,255,255,0.08); }
 
 
 /* ============================================================
@@ -626,10 +756,10 @@
    CSS ensures labels are ALWAYS white regardless of active theme.
    ============================================================ */
 
-/* Cinnamenu metro tiles: white labels always */
-.cinnamenu .menu-applications-grid-box .menu-application-button.tile-metro .menu-application-button-label,
-.cinnamenu .menu-applications-grid-box .menu-application-button-selected.tile-metro .menu-application-button-label,
-.cinnamenu .menu-applications-grid-box .menu-application-button.tile-metro:hover .menu-application-button-label {
+/* Overview metro tiles: white labels always */
+.overview-menu .menu-applications-grid-box .menu-application-button.tile-metro .menu-application-button-label,
+.overview-menu .menu-applications-grid-box .menu-application-button-selected.tile-metro .menu-application-button-label,
+.overview-menu .menu-applications-grid-box .menu-application-button.tile-metro:hover .menu-application-button-label {
     color: #ffffff;
     font-size: 11px;
     font-weight: 500;
@@ -760,19 +890,7 @@
     white-space: nowrap;
 }
 
-/* Light palette tooltip */
-.overview-palette-light .cinnamon-overview-tooltip {
-    background-color: rgba(255, 255, 255, 0.97);
-    color: #1d1d1f;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-}
-
-/* Dark palette tooltip */
-.overview-palette-dark .cinnamon-overview-tooltip {
-    background-color: rgba(20, 20, 28, 0.97);
-    color: rgba(255, 255, 255, 0.92);
-    border: 1px solid rgba(255, 255, 255, 0.10);
-}
+/* Tooltip colours are now controlled by overview-theme-light/dark in §7. */
 
 /* Power bar button hover effect - no tooltip crash */
 .cinnamon-overview-power-btn {
@@ -921,94 +1039,14 @@
 
 
 /* ============================================================
-   §14  OVERVIEW — macOS TAHOE PALETTE  (.overview-palette-tahoe)
-
-   Liquid Glass aesthetic: Sonoma/Tahoe-era Apple design.
-   • Background: deep slate blur with a subtle warm-cool gradient tint
-   • Sidebar:    frosted ultraThin glass, very light border
-   • Tiles:      translucent glass capsules, iridescent edge highlight
-   • Accent:     Apple Blue #007AFF (light) / #0A84FF (dark variant)
-   • Labels:     near-white, medium weight, SF Pro stack
-   ============================================================ */
-
-/* ── Root background ───────────────────────────────────────── */
-.overview-palette-tahoe {
-    /* Deep dark slate + subtle indigo tint — simulates Tahoe blurred wallpaper */
-    background-color: rgba(18, 18, 32, 0.92);
-    color: rgba(255,255,255,0.92);
-}
-
+   §14  OVERVIEW — macOS TAHOE PALETTE  (
 /* ── Sidebar ───────────────────────────────────────────────── */
-.overview-palette-tahoe .cinnamon-overview-sidebar {
-    background-color: rgba(255,255,255,0.07);
-    border-right: 1px solid rgba(255,255,255,0.10);
-}
-.overview-palette-tahoe .cinnamon-overview-categories-title {
-    color: rgba(255,255,255,0.38);
-    font-size: 10px;
-    font-weight: bold;
-    letter-spacing: 0.8px;
-}
-.overview-palette-tahoe .cinnamon-overview-category {
-    border-radius: 10px;
-    transition-duration: 150ms;
-}
-.overview-palette-tahoe .cinnamon-overview-category:hover {
-    background-color: rgba(255,255,255,0.10);
-}
-.overview-palette-tahoe .cinnamon-overview-category-sel {
-    background-color: rgba(0,122,255,0.20);
-    border-radius: 10px;
-}
-.overview-palette-tahoe .cinnamon-overview-cat-label {
-    color: rgba(255,255,255,0.60);
-    font-size: 13px;
-}
-.overview-palette-tahoe .cinnamon-overview-cat-label-sel {
-    color: #60A5FA;
-    font-size: 13px;
-    font-weight: 600;
-}
-.overview-palette-tahoe .cinnamon-overview-cat-icon {
-    color: rgba(255,255,255,0.50);
-}
-.overview-palette-tahoe .cinnamon-overview-cat-icon-sel {
-    color: #60A5FA;
-}
-.overview-palette-tahoe .cinnamon-overview-cat-accent-sel {
-    background-color: #60A5FA;
-}
 
 /* ── Search bar ────────────────────────────────────────────── */
-.overview-palette-tahoe .cinnamon-overview-search {
-    background-color: rgba(255,255,255,0.10);
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 14px;
-    color: rgba(255,255,255,0.92);
-    padding: 2px 12px;
-        transition-duration: 180ms;
-}
-.overview-palette-tahoe .cinnamon-overview-search:focus,
-.overview-palette-tahoe .cinnamon-overview-search:hover {
-    background-color: rgba(255,255,255,0.16);
-    border-color: rgba(96,165,250,0.70);
-    }
 
 /* ── Section titles ────────────────────────────────────────── */
-.overview-palette-tahoe .cinnamon-overview-section-title {
-    color: rgba(255,255,255,0.35);
-    font-size: 10px;
-    font-weight: bold;
-    letter-spacing: 0.6px;
-}
 
 /* ── Tile labels (all tahoe tiles) ────────────────────────── */
-.overview-palette-tahoe .cinnamon-overview-tile-label {
-    color: rgba(255,255,255,0.92);
-    font-size: 11px;
-    font-weight: 500;
-    text-align: center;
-}
 
 /* ── tile-tahoe: Liquid Glass capsule ──────────────────────── */
 /*
@@ -1019,83 +1057,14 @@
    • Hover: brightens glass + blue glow ring
    • Selected/focus: strong blue tint + vivid ring
 */
-.overview-palette-tahoe .cinnamon-overview-tile.tile-tahoe {
-    background-color: rgba(255,255,255,0.09);
-    border: 1px solid rgba(255,255,255,0.22);
-    border-radius: 16px;
-    padding: 3px;
-    transition-duration: 150ms;
-}
-.overview-palette-tahoe .cinnamon-overview-tile.tile-tahoe:hover {
-    background-color: rgba(255,255,255,0.18);
-    border-color: rgba(96,165,250,0.55);
-    border-width: 1px;
-}
-.overview-palette-tahoe .cinnamon-overview-tile.tile-tahoe:focus,
-.overview-palette-tahoe .cinnamon-overview-tile.tile-tahoe:selected {
-    background-color: rgba(0,122,255,0.22);
-    border: 2px solid rgba(96,165,250,0.80);
-    border-radius: 16px;
-    padding: 1px;
-}
-.overview-palette-tahoe .cinnamon-overview-tile.tile-tahoe .cinnamon-overview-tile-label {
-    color: rgba(255,255,255,0.90);
-    font-size: 11px;
-    font-weight: 500;
-}
 
 /* ── Status label ──────────────────────────────────────────── */
-.overview-palette-tahoe .cinnamon-overview-status-label {
-    color: rgba(255,255,255,0.38);
-    font-size: 13px;
-}
 
 /* ── Power bar buttons ─────────────────────────────────────── */
-.overview-palette-tahoe .cinnamon-overview-power-btn {
-    background-color: rgba(255,255,255,0.09);
-    border: 1px solid rgba(255,255,255,0.16);
-    border-radius: 12px;
-    transition-duration: 150ms;
-}
-.overview-palette-tahoe .cinnamon-overview-power-btn:hover {
-    background-color: rgba(255,69,58,0.25);
-    border-color: rgba(255,69,58,0.45);
-}
-.overview-palette-tahoe .cinnamon-overview-power-icon {
-    color: rgba(255,255,255,0.68);
-    icon-size: 28px;
-}
 
 /* ── Tooltip ───────────────────────────────────────────────── */
-.overview-palette-tahoe .cinnamon-overview-tooltip {
-    background-color: rgba(20,20,36,0.97);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 8px;
-    color: rgba(255,255,255,0.90);
-    padding: 5px 11px;
-}
 
 /* ── Context menu ──────────────────────────────────────────── */
-.overview-palette-tahoe .cinnamon-overview-context-menu {
-    background-color: rgba(22,22,38,0.97);
-    border: 1px solid rgba(255,255,255,0.10);
-    border-radius: 14px;
-    padding: 5px 0;
-    min-width: 200px;
-}
-.overview-palette-tahoe .cinnamon-overview-context-item {
-    color: rgba(255,255,255,0.85);
-    border-radius: 8px;
-    padding: 7px 14px;
-}
-.overview-palette-tahoe .cinnamon-overview-context-item:hover {
-    background-color: rgba(96,165,250,0.18);
-    color: #60A5FA;
-}
-.overview-palette-tahoe .cinnamon-overview-context-sep {
-    background-color: rgba(255,255,255,0.08);
-    margin: 3px 12px;
-}
 
 /* ── News feed horizontal scrollbars — uniform 4px height on all rows ── */
 .cinnamon-overview-news-scroll StScrollBar {
@@ -1115,4 +1084,42 @@
 }
 .cinnamon-overview-news-scroll StScrollBar StButton:hover {
     background-color: rgba(255,255,255,0.45);
+}
+
+
+/* ── Avatar name: dark default → white; light theme → dark ─────────── */
+.cinnamon-overview-avatar-name {
+    font-size:   12px;
+    font-weight: bold;
+    color:       rgba(255,255,255,0.90);
+    margin-top:  4px;
+}
+.overview-theme-light .cinnamon-overview-avatar-name {
+    color: rgba(30,30,30,0.90);
+}
+
+/* ── News row header label: dark default → dim white; light → dim dark ─ */
+.cinnamon-overview-news-row-label {
+    font-size:   10px;
+    font-weight: 700;
+    color:       rgba(255,255,255,0.38);
+}
+.overview-theme-light .cinnamon-overview-news-row-label {
+    color: rgba(30,30,30,0.45);
+}
+
+/* ── Recent files card ──────────────────────────────────────────────────── */
+.cinnamon-overview-recent-card {
+    background-color: transparent;
+    transition-duration: 120ms;
+}
+.cinnamon-overview-recent-card:hover {
+    background-color: rgba(255,255,255,0.10);
+}
+.overview-theme-light .cinnamon-overview-recent-card:hover {
+    background-color: rgba(0,0,0,0.08);
+}
+/* Section header label inherits news-row-label colour */
+.overview-theme-light .cinnamon-overview-recent-card StLabel {
+    color: rgba(30,30,30,0.80);
 }
