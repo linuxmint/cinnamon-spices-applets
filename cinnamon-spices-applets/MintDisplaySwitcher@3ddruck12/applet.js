@@ -540,17 +540,19 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
             this.menu.open(true);
     }
 
-    /** Externen xlet-settings-Dialog öffnen (Fallback) */
+    /** Open the external xlet-settings dialog (fallback) */
     _openExternalSettingsDialog() {
         this.menu.close();
         Mainloop.idle_add(() => {
             const uuid = this._uuid || this._metadata.uuid;
-            const cmd = 'xlet-settings applet ' + uuid + ' -i ' + this.instance_id + ' -t 0';
             try {
-                GLib.spawn_command_line_async(cmd);
+                Util.trySpawn([
+                    'xlet-settings', 'applet', uuid,
+                    '-i', String(this.instance_id), '-t', '0'
+                ]);
             } catch (e) {
-                global.logError('[MintDisplaySwitcher] xlet-settings fehlgeschlagen: ' + e.message);
-                Util.spawnCommandLineAsync('cinnamon-settings applets');
+                global.logError('[MintDisplaySwitcher] xlet-settings failed: ' + e.message);
+                Util.trySpawn(['cinnamon-settings', 'applets']);
             }
             return GLib.SOURCE_REMOVE;
         });
@@ -644,7 +646,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         this.menu.addAction(_('Configure display…'), () => {
-            Util.spawnCommandLineAsync('cinnamon-settings display');
+            Util.trySpawn(['cinnamon-settings', 'display']);
         });
     }
 

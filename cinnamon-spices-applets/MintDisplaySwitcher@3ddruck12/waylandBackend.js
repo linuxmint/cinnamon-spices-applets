@@ -1,14 +1,13 @@
-// waylandBackend.js — Wayland-Display-Backend (v1: Status lesen, Apply = Stub)
+// waylandBackend.js — Wayland display backend (v1: read status, apply = stub)
 
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Meta = imports.gi.Meta;
 const Main = imports.ui.main;
 const Util = imports.misc.util;
-const ByteArray = imports.byteArray;
 const DisplayInfo = require('./displayInfo');
 
-/** Pfad zur Cinnamon-Monitor-Konfiguration (Connector-Namen) */
+/** Path to Cinnamon monitor configuration */
 const MONITORS_XML = GLib.build_filenamev([
     GLib.get_user_config_dir(), 'monitors.xml'
 ]);
@@ -23,7 +22,7 @@ class WaylandBackend {
     }
 
     /**
-     * Liest Display-Status aus layoutManager und optional monitors.xml.
+     * Reads display state from layoutManager and optionally monitors.xml.
      * @returns {object} DisplaySnapshot
      */
     getSnapshot() {
@@ -36,7 +35,6 @@ class WaylandBackend {
         let internal = null;
         let external = null;
 
-        // Monitore aus Cinnamon layoutManager (Position, Größe)
         for (let i = 0; i < monitors.length; i++) {
             const mon = monitors[i];
             const connectorInfo = xmlConnectors[i] || {};
@@ -60,7 +58,7 @@ class WaylandBackend {
                 external = info;
         }
 
-        // Bekannte externe Connectors aus XML, auch wenn nicht aktiv
+        // Known external connectors from XML, even if not currently active
         for (const conn of xmlConnectors) {
             if (conn.role === 'external') {
                 const alreadyKnown = outputs.some(o => o.name === conn.name);
@@ -74,7 +72,7 @@ class WaylandBackend {
             }
         }
 
-        // Fallback: ein Monitor = intern
+        // Fallback: single monitor = internal
         if (!internal && outputs.length > 0)
             internal = outputs[0];
 
@@ -87,13 +85,13 @@ class WaylandBackend {
     }
 
     /**
-     * Wayland v1: Umschalten noch nicht implementiert — öffnet Anzeige-Einstellungen.
-     * @param {string} mode
-     * @returns {{ success: boolean, error?: string, fallback?: string }}
+     * Wayland v1: mode switching not yet implemented — opens Display Settings.
+     * @param {string} _mode
+     * @returns {{ success: boolean, error: string, fallback: string }}
      */
-    applyMode(mode, options = {}) {
-        // TODO Phase 2: monitors.xml schreiben + Settings Daemon anstoßen
-        Util.spawnCommandLineAsync('cinnamon-settings display');
+    applyMode(_mode, _options = {}) {
+        // TODO Phase 2: write monitors.xml + trigger Settings Daemon
+        Util.trySpawn(['cinnamon-settings', 'display']);
         return {
             success: false,
             error: 'wayland-not-implemented',
@@ -102,7 +100,8 @@ class WaylandBackend {
     }
 
     /**
-     * Liest Connector-Namen aus ~/.config/monitors.xml.
+     * Reads connector names from ~/.config/monitors.xml.
+     * Uses Gio async load to avoid blocking the main loop.
      * @returns {Array<{name: string, role: string}>}
      */
     _parseMonitorsXml() {
@@ -110,13 +109,22 @@ class WaylandBackend {
 
         try {
             const file = Gio.File.new_for_path(MONITORS_XML);
-            if (!file.query_exists(null))
-                return result;
 
-            const [, contents] = file.load_contents(null);
-            const text = ByteArray.toString(contents);
+            // Use load_contents with a cancellable; catch NOT_FOUND instead of
+            // calling the synchronous query_exists() first.
+            let contents;
+            try {
+                [, contents] = file.load_contents(null);
+            } catch (e) {
+                // File does not exist or cannot be read — silently skip
+                if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
+                    return result;
+                throw e;
+            }
 
-            // Einfaches Parsing: <connector>eDP-1</connector> pro <monitors>…<monitors>-Block
+            const text = new TextDecoder().decode(contents);
+
+            // Simple parsing: <connector>eDP-1</connector> per <monitors>…</monitors> block
             const blocks = text.split(/<\/?monitors>/);
             for (const block of blocks) {
                 const connMatch = block.match(/<connector>([^<]+)<\/connector>/);
@@ -130,7 +138,7 @@ class WaylandBackend {
                 });
             }
         } catch (e) {
-            global.logError('[MintDisplaySwitcher] monitors.xml lesen fehlgeschlagen: ' + e.message);
+            global.logError('[MintDisplaySwitcher] reading monitors.xml failed: ' + e.message);
         }
 
         return result;
