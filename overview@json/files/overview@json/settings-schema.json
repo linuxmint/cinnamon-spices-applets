@@ -2,7 +2,8 @@
     "layout": {
         "type": "layout",
         "pages": [
-            "overview"
+            "overview",
+            "search-engines-page"
         ],
         "overview": {
             "type": "page",
@@ -10,7 +11,9 @@
             "sections": [
                 "overview-controls",
                 "overview-tiles",
-                "panel-appear"
+                "panel-appear",
+                "dictionary-section",
+                "newsletter-section"
             ]
         },
         "overview-controls": {
@@ -25,11 +28,14 @@
             "type": "section",
             "title": "Tiles & Style",
             "keys": [
+                "overview-color-theme",
                 "use-tile-style",
                 "overview-tile-style",
                 "show-news-feed",
                 "news-rows",
-                "weather-city"
+                "weather-city",
+                "show-recent-files",
+                "recent-files-count"
             ]
         },
         "panel-appear": {
@@ -41,6 +47,55 @@
                 "menu-icon-size-custom",
                 "menu-icon-size",
                 "menu-label"
+            ]
+        },
+        "search-engines-page": {
+            "type": "page",
+            "title": "Search Engines",
+            "sections": [
+                "search-engines-section",
+                "search-options-section"
+            ]
+        },
+        "search-engines-section": {
+            "type": "section",
+            "title": "Web Search Engines",
+            "keys": [
+                "search-engine-google",
+                "search-engine-youtube",
+                "search-engine-duckduckgo",
+                "search-engine-bing",
+                "search-engine-wikipedia",
+                "search-engine-github",
+                "search-engine-stackoverflow",
+                "search-engine-reddit",
+                "search-engine-imdb",
+                "search-engine-openstreetmap"
+            ]
+        },
+        "search-options-section": {
+            "type": "section",
+            "title": "Search Options",
+            "keys": [
+                "search-web-enabled",
+                "search-web-new-tab",
+                "search-web-rows"
+            ]
+        },
+        "dictionary-section": {
+            "type": "section",
+            "title": "Dictionary",
+            "keys": [
+                "enable-dictionary",
+                "enable-ai-summary",
+                "groq-api-key"
+            ]
+        },
+        "newsletter-section": {
+            "type": "section",
+            "title": "AI Newsletter",
+            "keys": [
+                "enable-newsletter"
             ]
         }
     },
@@ -281,15 +336,25 @@
         "dependency": "use-tile-style",
         "type": "combobox",
         "default": "metro",
-        "description": "Tile colour palette",
+        "description": "Tile style",
         "options": {
             "Light Palette": "light-palette",
             "Dark Palette": "dark-palette",
             "Metro": "metro",
-            "macOS Tahoe": "tahoe",
             "CSS Only": "css"
         },
-        "tooltip": "Colour palette for overview app tiles"
+        "tooltip": "Colour palette for overview app tiles (tile colours and style only)"
+    },
+    "overview-color-theme": {
+        "type": "combobox",
+        "default": "light",
+        "description": "Theme palette",
+        "options": {
+            "Light": "light",
+            "Dark": "dark",
+            "Use cinnamon.css": "cinnamon-css"
+        },
+        "tooltip": "Controls the overall background and text colours of the overview panel. 'Use cinnamon.css' lets your desktop theme fully control it."
     },
     "menu-icon-custom": {
         "type": "switch",
@@ -358,5 +423,127 @@
         "units": "px",
         "description": "Sidebar icon size",
         "tooltip": "Size of category icons in the sidebar"
+    },
+    "search-engine-google": {
+        "type": "switch",
+        "default": true,
+        "description": "Google",
+        "tooltip": "Include Google in web search results"
+    },
+    "search-engine-youtube": {
+        "type": "switch",
+        "default": true,
+        "description": "YouTube",
+        "tooltip": "Include YouTube in web search results"
+    },
+    "search-engine-duckduckgo": {
+        "type": "switch",
+        "default": true,
+        "description": "DuckDuckGo",
+        "tooltip": "Include DuckDuckGo in web search results"
+    },
+    "search-engine-bing": {
+        "type": "switch",
+        "default": false,
+        "description": "Bing",
+        "tooltip": "Include Bing in web search results"
+    },
+    "search-engine-wikipedia": {
+        "type": "switch",
+        "default": true,
+        "description": "Wikipedia",
+        "tooltip": "Include Wikipedia in web search results"
+    },
+    "search-engine-github": {
+        "type": "switch",
+        "default": true,
+        "description": "GitHub",
+        "tooltip": "Include GitHub in web search results"
+    },
+    "search-engine-stackoverflow": {
+        "type": "switch",
+        "default": false,
+        "description": "Stack Overflow",
+        "tooltip": "Include Stack Overflow in web search results"
+    },
+    "search-engine-reddit": {
+        "type": "switch",
+        "default": false,
+        "description": "Reddit",
+        "tooltip": "Include Reddit in web search results"
+    },
+    "search-engine-imdb": {
+        "type": "switch",
+        "default": false,
+        "description": "IMDb",
+        "tooltip": "Include IMDb in web search results"
+    },
+    "search-engine-openstreetmap": {
+        "type": "switch",
+        "default": false,
+        "description": "OpenStreetMap",
+        "tooltip": "Include OpenStreetMap in web search results"
+    },
+    "search-web-enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Show web search results",
+        "tooltip": "Show web search engine shortcuts below app results"
+    },
+    "search-web-new-tab": {
+        "type": "switch",
+        "default": true,
+        "description": "Open searches in new tab",
+        "tooltip": "Open web searches in a new browser tab"
+    },
+    "search-web-rows": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "units": "rows",
+        "description": "Search engine rows",
+        "tooltip": "Number of rows of web search engine cards to show (1\u20133)"
+    },
+    "enable-dictionary": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show dictionary panel when searching a word",
+        "tooltip": "When you type a single word, show its Oxford definition, phonetic transcription, and example sentence below the search bar."
+    },
+    "enable-ai-summary": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show AI word summary (free, no API key needed)",
+        "tooltip": "Shows AI-generated answers and word summaries. Uses Pollinations.ai (free, no key). Add a free Groq key below for a reliable fallback."
+    },
+    "groq-api-key": {
+        "type": "entry",
+        "default": "",
+        "description": "Groq API key (optional \u2014 fast free fallback AI)",
+        "tooltip": "Free key at console.groq.com \u2014 no credit card needed. Used as fallback when Pollinations.ai is down. Leave blank to use Pollinations only."
+    },
+    "enable-newsletter": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show AI Newsletter (daily news summary)",
+        "tooltip": "Shows an AI-generated summary of today's top news in politics, science, and culture at the top of the Favourites view. Refreshes once per session."
+    },
+    "show-recent-files": {
+        "type": "switch",
+        "default": true,
+        "description": "Show recently used files",
+        "tooltip": "Shows a scrollable row of your most recently opened files at the top of the Favourites view. Click a file to open it."
+    },
+    "recent-files-count": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 3,
+        "max": 20,
+        "step": 1,
+        "units": "files",
+        "description": "Number of recent files to show",
+        "tooltip": "How many recently used files to display in the strip."
     }
 }
