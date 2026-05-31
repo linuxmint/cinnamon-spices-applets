@@ -13,6 +13,12 @@ const MONITORS_XML = GLib.build_filenamev([
 ]);
 
 class WaylandBackend {
+    constructor() {
+        /** Cached connector list from monitors.xml — refreshed asynchronously */
+        this._xmlCache = [];
+        this._refreshXmlCacheAsync();
+    }
+
     getName() {
         return 'wayland';
     }
@@ -29,7 +35,9 @@ class WaylandBackend {
         const monitors = Main.layoutManager.monitors;
         const monitorManager = Meta.MonitorManager.get();
         const primaryIndex = monitorManager.get_primary_monitor_index();
-        const xmlConnectors = this._parseMonitorsXml();
+        // Trigger a background refresh so the cache stays warm after hotplug events
+        this._refreshXmlCacheAsync();
+        const xmlConnectors = this._xmlCache;
 
         const outputs = [];
         let internal = null;
@@ -100,47 +108,41 @@ class WaylandBackend {
     }
 
     /**
-     * Reads connector names from ~/.config/monitors.xml.
-     * Uses Gio async load to avoid blocking the main loop.
+     * Loads ~/.config/monitors.xml asynchronously and stores the parsed
+     * connector list in this._xmlCache.  Subsequent getSnapshot() calls
+     * use the cached value so the main loop is never blocked.
+     */
+    _refreshXmlCacheAsync() {
+        const file = Gio.File.new_for_path(MONITORS_XML);
+        file.load_contents_async(null, (source, result) => {
+            try {
+                const [, contents] = source.load_contents_finish(result);
+                this._xmlCache = this._parseXmlText(new TextDecoder().decode(contents));
+            } catch (e) {
+                // NOT_FOUND is normal when no external display has ever been configured
+                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
+                    global.logError('[MintDisplaySwitcher] reading monitors.xml failed: ' + e.message);
+                this._xmlCache = [];
+            }
+        });
+    }
+
+    /**
+     * Parses raw monitors.xml text into a connector list.
+     * @param {string} text
      * @returns {Array<{name: string, role: string}>}
      */
-    _parseMonitorsXml() {
+    _parseXmlText(text) {
         const result = [];
-
-        try {
-            const file = Gio.File.new_for_path(MONITORS_XML);
-
-            // Use load_contents with a cancellable; catch NOT_FOUND instead of
-            // calling the synchronous query_exists() first.
-            let contents;
-            try {
-                [, contents] = file.load_contents(null);
-            } catch (e) {
-                // File does not exist or cannot be read — silently skip
-                if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
-                    return result;
-                throw e;
-            }
-
-            const text = new TextDecoder().decode(contents);
-
-            // Simple parsing: <connector>eDP-1</connector> per <monitors>…</monitors> block
-            const blocks = text.split(/<\/?monitors>/);
-            for (const block of blocks) {
-                const connMatch = block.match(/<connector>([^<]+)<\/connector>/);
-                if (!connMatch)
-                    continue;
-
-                const name = connMatch[1].trim();
-                result.push({
-                    name: name,
-                    role: DisplayInfo.classifyOutputRole(name)
-                });
-            }
-        } catch (e) {
-            global.logError('[MintDisplaySwitcher] reading monitors.xml failed: ' + e.message);
+        // Simple parsing: <connector>eDP-1</connector> per <monitors>…</monitors> block
+        const blocks = text.split(/<\/?monitors>/);
+        for (const block of blocks) {
+            const connMatch = block.match(/<connector>([^<]+)<\/connector>/);
+            if (!connMatch)
+                continue;
+            const name = connMatch[1].trim();
+            result.push({ name, role: DisplayInfo.classifyOutputRole(name) });
         }
-
         return result;
     }
 }
