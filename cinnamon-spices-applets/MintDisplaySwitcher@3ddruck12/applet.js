@@ -275,15 +275,7 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         this._chooserTiles = [];
         this._chooserFocusIndex = 0;
 
-        // Titelzeile
-        const title = new St.Label({
-            text: _('Project'),
-            style_class: 'display-switcher-band-title',
-            x_align: Clutter.ActorAlign.CENTER
-        });
-        dialog.contentLayout.add_child(title);
-
-        // Horizontales Band: vier Modi + Einstellungen
+        // Horizontal band: four modes + settings
         const band = new St.BoxLayout({
             vertical: false,
             style_class: 'display-switcher-band'
