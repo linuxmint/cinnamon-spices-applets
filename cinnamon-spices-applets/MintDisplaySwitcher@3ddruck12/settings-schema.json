@@ -1,0 +1,96 @@
+{
+    "section-behavior": {
+        "type": "section",
+        "description": "Verhalten"
+    },
+    "autoApplyOnConnect": {
+        "type": "switch",
+        "default": true,
+        "description": "Letzten Modus beim Anstecken anwenden",
+        "tooltip": "Beamer anschließen → gespeicherter Modus wird automatisch aktiviert"
+    },
+    "revertOnDisconnect": {
+        "type": "switch",
+        "default": true,
+        "description": "Beim Trennen auf Nur-Laptop umschalten",
+        "tooltip": "Beamer abziehen → nur Laptop-Bildschirm aktiv"
+    },
+    "hidePanelIcon": {
+        "type": "switch",
+        "default": false,
+        "description": "Panel-Icon ausblenden (nur Super+P)",
+        "tooltip": "Blendet das Icon in der Leiste aus. Das Menü öffnest du dann nur über das Tastenkürzel (Super+P)."
+    },
+    "lastMode": {
+        "type": "combobox",
+        "default": "extend",
+        "options": {
+            "laptop": "Nur Laptop-Bildschirm",
+            "external": "Nur externer Bildschirm",
+            "mirror": "Bildschirm spiegeln",
+            "extend": "Bildschirm erweitern"
+        },
+        "description": "Gespeicherter Modus",
+        "tooltip": "Wird automatisch aktualisiert, wenn du einen Modus wählst"
+    },
+    "extendPosition": {
+        "type": "combobox",
+        "default": "right-of",
+        "options": {
+            "right-of": "Extern rechts vom Laptop",
+            "left-of": "Extern links vom Laptop",
+            "above": "Extern über dem Laptop",
+            "below": "Extern unter dem Laptop"
+        },
+        "description": "Position beim Erweitern",
+        "tooltip": "Wo der externe Bildschirm relativ zum Laptop platziert wird"
+    },
+    "preferredExternal": {
+        "type": "entry",
+        "default": "",
+        "description": "Bevorzugter externer Anschluss",
+        "tooltip": "Optional: z. B. HDMI-1 oder DP-1 — leer lassen für automatische Erkennung"
+    },
+    "section-shortcuts": {
+        "type": "section",
+        "description": "Tastenkürzel"
+    },
+    "keyOpen": {
+        "type": "keybinding",
+        "description": "Menü öffnen",
+        "default": "<Super>p",
+        "tooltip": "Win+P-äquivalent — öffnet das Display-Menü"
+    },
+    "keyLaptop": {
+        "type": "keybinding",
+        "description": "Nur Laptop-Bildschirm",
+        "default": "",
+        "tooltip": "Direkt auf Nur-Laptop umschalten (leer = deaktiviert)"
+    },
+    "keyExternal": {
+        "type": "keybinding",
+        "description": "Nur externer Bildschirm",
+        "default": "",
+        "tooltip": "Direkt auf Nur-extern umschalten (leer = deaktiviert)"
+    },
+    "keyMirror": {
+        "type": "keybinding",
+        "description": "Bildschirm spiegeln",
+        "default": "",
+        "tooltip": "Direkt Spiegeln aktivieren (leer = deaktiviert)"
+    },
+    "keyExtend": {
+        "type": "keybinding",
+        "description": "Bildschirm erweitern",
+        "default": "",
+        "tooltip": "Direkt Erweitern aktivieren (leer = deaktiviert)"
+    },
+    "section-help": {
+        "type": "section",
+        "description": "Hinweis"
+    },
+    "shortcutHelp": {
+        "type": "label",
+        "description": "Tastenkürzel kannst du hier ändern. Rechtsklick auf das Applet → „Konfigurieren…“ öffnet ebenfalls dieses Fenster. Leere Felder = kein Shortcut."
+    }
+}
