@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-05-20 20:21+0200\n"
-"PO-Revision-Date: 2026-05-11 19:10+0200\n"
+"PO-Revision-Date: 2026-06-01 16:06+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 5.6->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
@@ -629,7 +629,7 @@ msgstr "Háttérszín"
 
 #. 5.6->settings-schema.json->quickTooltip->description
 msgid "Show the tooltip immediately"
-msgstr ""
+msgstr "Azonnal jelenítse meg az eszköztippet"
 
 #. 5.6->settings-schema.json->percentAtEndOfLine->description
 msgid "Place % at the very end of the line"
@@ -891,7 +891,7 @@ msgstr "Egyéni címke"
 #. 5.6->settings-schema.json->DiskUsage_labelCustom->tooltip
 #. 5.6->settings-schema.json->Battery_labelCustom->tooltip
 msgid "You can use emojis."
-msgstr "Használhatsz Emoji-ket"
+msgstr "Használhatsz Emoji-ket."
 
 #. 5.6->settings-schema.json->CPU_squared->description
 #. 5.6->settings-schema.json->Mem_squared->description
@@ -974,9 +974,8 @@ msgid "Show the CPU temperature"
 msgstr "Mutassa meg a CPU hőmérsékletét"
 
 #. 5.6->settings-schema.json->CPU_showTempUnit->description
-#, fuzzy
 msgid "Display the temperature unit"
-msgstr "A hőmérséklet megjelenítésének sarka"
+msgstr "A hőmérséklet mértékegységének megjelenítése"
 
 #. 5.6->settings-schema.json->CPU_temp_hovering_only->description
 #. 5.6->settings-schema.json->CPU_loadAverage_hovering_only->description
