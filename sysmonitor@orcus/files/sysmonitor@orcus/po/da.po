@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-03-22 07:52-0400\n"
-"PO-Revision-Date: 2019-12-07 16:32+0100\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"PO-Revision-Date: 2026-05-29 09:47+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 3.0/providers.js:49 3.2/providers.js:56
 msgid "CPU:"
@@ -301,11 +301,11 @@ msgstr "Farver"
 
 #. 3.2->settings-schema.json->net_minimum_graph_scale->description
 msgid "Minimum graph scale"
-msgstr ""
+msgstr "Mindste grafskala"
 
 #. 3.2->settings-schema.json->net_minimum_graph_scale->units
 msgid "Mb/s"
-msgstr ""
+msgstr "Mb/s"
 
 #. 3.2->settings-schema.json->net_minimum_graph_scale->tooltip
 msgid ""
@@ -315,3 +315,8 @@ msgid ""
 "\n"
 "To always automatically scale, set the value to 0."
 msgstr ""
+"Den mindste skala for grafen angivet i megabit pr. sekund.\n"
+"Grafen skaleres ikke under dette minimum, men den skaleres automatisk, hvis "
+"netværkshastigheden overstiger denne værdi.\n"
+"\n"
+"Indstil værdien til 0 for altid at skalere automatisk."
