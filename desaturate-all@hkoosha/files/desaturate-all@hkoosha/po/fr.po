@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-05-31 21:52-0400\n"
-"PO-Revision-Date: 2025-10-13 14:46+0200\n"
+"PO-Revision-Date: 2026-06-02 08:52+0200\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -57,6 +57,8 @@ msgstr "Convertir votre écran en niveaux de gris."
 #. settings-schema.json->saturation->description
 msgid "Color saturation when desaturation effect is enabled (percent)"
 msgstr ""
+"Saturation des couleurs lorsque l'effet de désaturation est "
+"activé (pourcentage)"
 
 #. settings-schema.json->keybinding->description
 msgid "Shortcut to toggle desaturation effect"
@@ -93,4 +95,4 @@ msgstr ""
 
 #. settings-schema.json->fade-time->description
 msgid "Saturation fade in/out duration (seconds)"
-msgstr ""
+msgstr "Durée du fondu d'entrée/sortie de la saturation (secondes)"
