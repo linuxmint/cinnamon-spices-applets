@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-05-30 14:40+0200\n"
-"PO-Revision-Date: 2026-01-13 13:55-0300\n"
+"PO-Revision-Date: 2026-06-02 10:12-0400\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #. applet.js:308
 msgid "unassigned"
@@ -1504,15 +1504,15 @@ msgstr ""
 
 #. settings-schema.json->fixHeightCat->description
 msgid "Fix the height of these lists"
-msgstr ""
+msgstr "Ajustar la altura de estas listas"
 
 #. settings-schema.json->heightCat->units
 msgid " px"
-msgstr ""
+msgstr " px"
 
 #. settings-schema.json->heightCat->description
 msgid "Height of these lists"
-msgstr ""
+msgstr "Altura de estas listas"
 
 #. settings-schema.json->show-system-items->description
 msgid "Show system items in the menu"
