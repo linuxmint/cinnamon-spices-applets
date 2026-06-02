@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-05-04 12:10+0200\n"
-"PO-Revision-Date: 2023-12-25 11:24+0100\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"PO-Revision-Date: 2026-05-28 17:49+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 6.2/applet.js:138 4.4/applet.js:72 5.4/applet.js:132 4.6/applet.js:73
 #. 6.6/applet.js:196 2.8/applet.js:65 6.4/applet.js:190 3.4/applet.js:65
@@ -54,11 +54,11 @@ msgstr "Lydstyrke"
 #. 6.2/applet.js:277 5.4/applet.js:264 6.6/lib/volumeSlider.js:78
 #. 6.4/lib/volumeSlider.js:77
 msgid "Mute"
-msgstr ""
+msgstr "Lydløs"
 
 #. 6.2/applet.js:1018 6.6/lib/s150PopupMenu.js:150 6.4/lib/s150PopupMenu.js:132
 msgid "Videos"
-msgstr ""
+msgstr "Videoer"
 
 #. 6.2/applet.js:1146 6.2/applet.js:1443 6.2/applet.js:1446 6.2/applet.js:1449
 #. 6.2/applet.js:1483 6.2/applet.js:1492 6.2/applet.js:2927 6.2/applet.js:2961
@@ -212,25 +212,25 @@ msgstr "Inputenhed"
 
 #. 6.2/applet.js:2057 5.4/applet.js:1979 6.6/applet.js:702 6.4/applet.js:618
 msgid "Easy Effects"
-msgstr ""
+msgstr "Lette effekter"
 
 #. 6.2/applet.js:2064 5.4/applet.js:1986 6.6/applet.js:711 6.4/applet.js:627
 msgid "Pulse Effects"
-msgstr ""
+msgstr "Pulseffekter"
 
 #. 6.2/applet.js:2116 5.4/applet.js:2030 6.6/applet.js:1087 6.6/applet.js:1110
 #. 6.4/applet.js:915 6.4/applet.js:938
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
-msgstr ""
+msgstr "Er du sikker på, at du vil fjerne “%s”?"
 
 #. 6.2/applet.js:2970 5.4/applet.js:2758 6.6/applet.js:2249 6.4/applet.js:1928
 msgid "The 'playerctl' package is required!"
-msgstr ""
+msgstr "Pakken “playerctl” er krævet!"
 
 #. 6.2/applet.js:2971 5.4/applet.js:2759 6.6/applet.js:2250 6.4/applet.js:1929
 msgid "Please select 'Install playerctl' in this menu"
-msgstr ""
+msgstr "Vælg “Installér playerctl” i denne menu"
 
 #. 6.2/applet.js:3110 4.4/applet.js:1397 5.4/applet.js:2890 4.6/applet.js:1417
 #. 6.6/applet.js:310 2.8/applet.js:1644 6.4/applet.js:262 3.4/applet.js:1571
@@ -258,121 +258,125 @@ msgstr "Lydindstillinger"
 #. 6.4->settings-schema.json->button-reload-applet->description
 #. 6.2/applet.js:3135 5.4/applet.js:2915 6.6/applet.js:161 6.4/applet.js:155
 msgid "Reload this applet"
-msgstr ""
+msgstr "Genindlæs panelprogrammet"
 
 #. 6.2/applet.js:3141 5.4/applet.js:2921 6.6/applet.js:2458 6.4/applet.js:2124
 msgid "Remove sound applet"
-msgstr ""
+msgstr "Fjern lydpanelprogrammet"
 
 #. 6.2/applet.js:3150 5.4/applet.js:2930 6.6/applet.js:2478 6.4/applet.js:2144
 msgid "Install playerctl"
-msgstr ""
+msgstr "Installér playerctl"
 
 #. 6.6/applet.js:270 6.6/applet.js:358 6.6/applet.js:360 6.4/applet.js:226
 #. 6.4/applet.js:305 6.4/applet.js:307
-#, fuzzy
 msgid "%"
-msgstr "9 %"
+msgstr "%"
 
 #. 6.6->settings-schema.json->custom-commands-list->description
 #. 6.4->settings-schema.json->custom-commands-list->description
 #. 6.6/applet.js:720 6.4/applet.js:636
 msgid "Commands"
-msgstr ""
+msgstr "Kommandoer"
 
 #. 6.6/applet.js:733 6.4/applet.js:649
 msgid "Album Art desklet settings"
-msgstr ""
+msgstr "Indstillinger for skrivebordsprogrammet Albumcover"
 
 #. 6.6/applet.js:740 6.4/applet.js:656
-#, fuzzy
 msgid "Show Album Art on desktop"
-msgstr "Vis albumcover som ikon"
+msgstr "Vis Albumcover på skrivebordet"
 
 #. 6.6/applet.js:975 6.4/applet.js:804
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Skrivebordsprogrammet “Albumcover 3.0” er krævet"
 
 #. 6.6/applet.js:976 6.4/applet.js:805
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
 msgstr ""
+"Du kan installere det ved at klikke på \"Skrivebordsprogrammer” nedenfor og "
+"derefter søge efter “Album”."
 
 #. 6.6/applet.js:977 6.6/applet.js:996 6.4/applet.js:806 6.4/applet.js:825
 msgid "Desklets"
-msgstr ""
+msgstr "Skrivebordsprogrammer"
 
 #. 6.6/applet.js:978 6.6/applet.js:997 6.6/applet.js:1029 6.4/applet.js:807
 #. 6.4/applet.js:826 6.4/applet.js:857
 msgid "Cancel"
-msgstr ""
+msgstr "Annullér"
 
 #. 6.6/applet.js:994 6.4/applet.js:823
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Du skal aktivere skrivebordsprogrammet “Albumcover 3.0”"
 
 #. 6.6/applet.js:995 6.4/applet.js:824
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
+"Du kan aktivere det ved at klikke på den første knap, søge efter “Album” og "
+"tilføje det med plusknappen.."
 
 #. metadata.json->name
 #. 6.6/applet.js:1030 6.4/applet.js:858
 msgid "Enhanced Sound applet"
-msgstr ""
+msgstr "Forbedret lyd-panelprogram"
 
 #. 6.6/applet.js:1033 6.4/applet.js:861
 msgid "Enable the OSD150 extension"
-msgstr ""
+msgstr "Aktivér OSD150-udvidelsen"
 
 #. 6.6/applet.js:1034 6.4/applet.js:862
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
-msgstr ""
+msgstr "For at få et vandret OSD skal du aktivere OSD150-udvidelsen."
 
 #. 6.6/applet.js:1050 6.4/applet.js:878
 msgid "Download the OSD150 extension"
-msgstr ""
+msgstr "Hent OSD150-udvidelsen"
 
 #. 6.6/applet.js:1051 6.4/applet.js:879
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
+"For at få et vandret OSD skal du hente OSD150-udvidelsen.\n"
+"Klik på knappen “Download”, søg efter OSD150 og klik på ⤓."
 
 #. 6.6/applet.js:2254 6.4/applet.js:1933
 msgid "The 'imagemagick' package is required!"
-msgstr ""
+msgstr "Pakken “imagemagick” er krævet!"
 
 #. 6.6/applet.js:2255 6.4/applet.js:1934
 msgid "Please select 'Install imagemagick' in this menu"
-msgstr ""
+msgstr "Vælg “Installér imagemagick” i denne menu"
 
 #. 6.6->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
 #. 6.4->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
 #. 6.6/applet.js:2466 6.4/applet.js:2132
 msgid "Remove the OsdWithNumber extension"
-msgstr ""
+msgstr "Fjern udvidelsen “OSD med tal”"
 
 #. 6.6/applet.js:2483 6.4/applet.js:2149
 msgid "Install imagemagick"
-msgstr ""
+msgstr "Installér imagemagick"
 
 #. 6.6/lib/balanceSlider.js:20
 msgid "Balance"
-msgstr ""
+msgstr "Balance"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
-msgstr ""
+msgstr "Forbedret lyd-panelprogram"
 
 #. 6.2->settings-schema.json->page_behavior->title
 #. 5.4->settings-schema.json->page_behavior->title
 #. 6.6->settings-schema.json->page_behavior->title
 #. 6.4->settings-schema.json->page_behavior->title
 msgid "Behavior"
-msgstr ""
+msgstr "Opførsel"
 
 #. 6.2->settings-schema.json->page_icon->title
 #. 6.2->settings-schema.json->sectionIcon1->title
@@ -387,9 +391,8 @@ msgstr "Ikon"
 #. 5.4->settings-schema.json->page_sound->title
 #. 6.6->settings-schema.json->page_sound->title
 #. 6.4->settings-schema.json->page_sound->title
-#, fuzzy
 msgid "Sound"
-msgstr "Lyd 150 %"
+msgstr "Lyd"
 
 #. 6.2->settings-schema.json->page_shortcuts->title
 #. 6.2->settings-schema.json->sectionShortcuts1->title
@@ -400,7 +403,7 @@ msgstr "Lyd 150 %"
 #. 6.4->settings-schema.json->page_shortcuts->title
 #. 6.4->settings-schema.json->sectionShortcuts1->title
 msgid "Shortcuts"
-msgstr ""
+msgstr "Genveje"
 
 #. 6.2->settings-schema.json->sectionBehavior1->title
 #. 4.4->settings-schema.json->section1->description
@@ -434,22 +437,21 @@ msgstr "Værktøjstip"
 #. 6.6->settings-schema.json->sectionSound2->title
 #. 6.4->settings-schema.json->sectionSound2->title
 msgid "OSD"
-msgstr ""
+msgstr "OSD"
 
 #. 6.2->settings-schema.json->sectionSound3->title
 #. 5.4->settings-schema.json->sectionSound3->title
 #. 6.6->settings-schema.json->sectionSound3->title
 #. 6.4->settings-schema.json->sectionSound3->title
-#, fuzzy
 msgid "Sounds"
-msgstr "Lyd 150 %"
+msgstr "Lyde"
 
 #. 6.2->settings-schema.json->sectionSound4->title
 #. 5.4->settings-schema.json->sectionSound4->title
 #. 6.6->settings-schema.json->sectionSound4->title
 #. 6.4->settings-schema.json->sectionSound4->title
 msgid "Remove incompatible applets"
-msgstr ""
+msgstr "Fjern inkompatible panelprogrammer"
 
 #. 6.2->settings-schema.json->playerControl->description
 #. 4.4->settings-schema.json->playerControl->description
@@ -478,31 +480,31 @@ msgstr "Vis knapper til gentagelse og blanding"
 #. 6.6->settings-schema.json->keepPlayerListOpen->description
 #. 6.4->settings-schema.json->keepPlayerListOpen->description
 msgid "Keep the player list open"
-msgstr ""
+msgstr "Hold afspilningslisten åben"
 
 #. 6.2->settings-schema.json->keepChoosePlayerOpen->description
 #. 5.4->settings-schema.json->keepChoosePlayerOpen->description
 #. 6.6->settings-schema.json->keepChoosePlayerOpen->description
 #. 6.4->settings-schema.json->keepChoosePlayerOpen->description
 msgid "Keep the player controller selector open"
-msgstr ""
+msgstr "Hold vælgeren til afspilningsknapper åben"
 
 #. 6.2->settings-schema.json->avoidTwice->description
 #. 5.4->settings-schema.json->avoidTwice->description
 #. 6.6->settings-schema.json->avoidTwice->description
 #. 6.4->settings-schema.json->avoidTwice->description
 msgid "Avoid displaying controllers twice"
-msgstr ""
+msgstr "Undgå at vise afspilningsknapper to gange"
 
 #. 6.2->settings-schema.json->seekerTooltipDelay->units
 #. 5.4->settings-schema.json->seekerTooltipDelay->units
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #. 6.2->settings-schema.json->seekerTooltipDelay->description
 #. 5.4->settings-schema.json->seekerTooltipDelay->description
 msgid "Seeker tooltip: time to disappear"
-msgstr ""
+msgstr "Søgerværktøjstip: tid til forsvinding"
 
 #. 6.2->settings-schema.json->keyOpen->description
 #. 5.4->settings-schema.json->keyOpen->description
@@ -525,15 +527,15 @@ msgstr "Indstil tastegenveje til visning af lydpanelprogrammets menu."
 #. 6.6->settings-schema.json->keySwitchPlayer->description
 #. 6.4->settings-schema.json->keySwitchPlayer->description
 msgid "Switch to next player"
-msgstr ""
+msgstr "Skift til næste afspiller"
 
 #. 6.2->settings-schema.json->keySwitchPlayer->tooltip
 #. 5.4->settings-schema.json->keySwitchPlayer->tooltip
 #. 6.6->settings-schema.json->keySwitchPlayer->tooltip
 #. 6.4->settings-schema.json->keySwitchPlayer->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to switch to the next player if it exists."
-msgstr "Indstil tastegenveje til visning af lydpanelprogrammets menu."
+msgstr ""
+"Indstil tastegenveje til skift til den næste afspiller, hvis den findes."
 
 #. 6.2->settings-schema.json->showtrack->description
 #. 4.4->settings-schema.json->showtrack->description
@@ -715,14 +717,14 @@ msgstr "Vis lydstyrkeniveau nær ikonet"
 #. 6.6->settings-schema.json->showMicMutedOnIcon->description
 #. 6.4->settings-schema.json->showMicMutedOnIcon->description
 msgid "Display icon indicating that the microphone is muted, if applicable"
-msgstr ""
+msgstr "Vis ikon, som indikerer, at mikrofonen er slukket (hvis muligt)"
 
 #. 6.2->settings-schema.json->showMicUnmutedOnIcon->description
 #. 5.4->settings-schema.json->showMicUnmutedOnIcon->description
 #. 6.6->settings-schema.json->showMicUnmutedOnIcon->description
 #. 6.4->settings-schema.json->showMicUnmutedOnIcon->description
 msgid "Display icon indicating that the microphone is activated, if applicable"
-msgstr ""
+msgstr "Vis ikon, som indikerer, at mikrofonen er tændt (hvis muligt)"
 
 #. 6.2->settings-schema.json->setAmplification->description
 #. 4.4->settings-schema.json->setAmplification->description
@@ -736,28 +738,26 @@ msgstr "Maksimale lydstyrke"
 #. 6.2->settings-schema.json->openSystemSoundSettings->description
 #. 6.6->settings-schema.json->openSystemSoundSettings->description
 #. 6.4->settings-schema.json->openSystemSoundSettings->description
-#, fuzzy
 msgid "System Sound Settings"
-msgstr "Lydindstillinger"
+msgstr "Systemets lydindstillinger"
 
 #. 6.2->settings-schema.json->maxVolume->description
 #. 6.6->settings-schema.json->maxVolume->description
 #. 6.4->settings-schema.json->maxVolume->description
-#, fuzzy
 msgid "Maximum volume (%)"
-msgstr "Maksimale lydstyrke"
+msgstr "Maksimal lydstyrke (%)"
 
 #. 6.2->settings-schema.json->startupVolume->description
 #. 6.6->settings-schema.json->startupVolume->description
 #. 6.4->settings-schema.json->startupVolume->description
 msgid "Volume at start-up (%)"
-msgstr ""
+msgstr "Lydstyrke ved opstart (%)"
 
 #. 6.2->settings-schema.json->startupVolume->tooltip
 #. 6.6->settings-schema.json->startupVolume->tooltip
 #. 6.4->settings-schema.json->startupVolume->tooltip
 msgid "Value -1 means \"No change\""
-msgstr ""
+msgstr "-1 betyder ”Ingen ændring”"
 
 #. 6.2->settings-schema.json->stepVolume->options
 #. 5.4->settings-schema.json->stepVolume->options
@@ -925,7 +925,7 @@ msgstr ""
 #. 6.6->settings-schema.json->magnetic25On->description
 #. 6.4->settings-schema.json->magnetic25On->description
 msgid "Magnetize all multiples of 25%"
-msgstr ""
+msgstr "Gør alle multipla af 25 % magnetiske"
 
 #. 6.2->settings-schema.json->adaptColor->description
 #. 4.4->settings-schema.json->adaptColor->description
@@ -940,35 +940,35 @@ msgstr "Justér farven på lydstyrkeikonet"
 
 #. 6.2->settings-schema.json->color0_100->description
 msgid "Icon color: 0%-100%"
-msgstr ""
+msgstr "Ikonfarve: 0–100 %"
 
 #. 6.2->settings-schema.json->color101_115->description
 #. 5.4->settings-schema.json->color101_115->description
 #. 6.6->settings-schema.json->color101_115->description
 #. 6.4->settings-schema.json->color101_115->description
 msgid "Icon color: 101%-115%"
-msgstr ""
+msgstr "Ikonfarve: 101–115 %"
 
 #. 6.2->settings-schema.json->color116_130->description
 #. 5.4->settings-schema.json->color116_130->description
 #. 6.6->settings-schema.json->color116_130->description
 #. 6.4->settings-schema.json->color116_130->description
 msgid "Icon color: 116%-130%"
-msgstr ""
+msgstr "Ikonfarve: 116–130 %"
 
 #. 6.2->settings-schema.json->color131_150->description
 #. 5.4->settings-schema.json->color131_150->description
 #. 6.6->settings-schema.json->color131_150->description
 #. 6.4->settings-schema.json->color131_150->description
 msgid "Icon color: 131%-150%"
-msgstr ""
+msgstr "Ikonfarve: 131–150 %"
 
 #. 6.2->settings-schema.json->resetColorsButton->description
 #. 5.4->settings-schema.json->resetColorsButton->description
 #. 6.6->settings-schema.json->resetColorsButton->description
 #. 6.4->settings-schema.json->resetColorsButton->description
 msgid "Set colors to default values (yellow, orange, red)"
-msgstr ""
+msgstr "Indstil farverne til standardværdierne (gul, orange, rød)"
 
 #. 6.2->settings-schema.json->alwaysCanChangeMic->description
 #. 5.4->settings-schema.json->alwaysCanChangeMic->description
@@ -988,7 +988,7 @@ msgstr "Vis altid “Slå lyden fra input”-kontakten i genvejsmenuen."
 #. 6.6->settings-schema.json->muteSoundOnClosing->description
 #. 6.4->settings-schema.json->muteSoundOnClosing->description
 msgid "Mute sound on closing"
-msgstr ""
+msgstr "Slå lyden fra, når der lukkes"
 
 #. 6.2->settings-schema.json->muteSoundOnClosing->tooltip
 #. 6.6->settings-schema.json->muteSoundOnClosing->tooltip
@@ -999,80 +999,83 @@ msgid ""
 "applet's icon.\n"
 "It is NOT recommended to check this box."
 msgstr ""
+"Hvis du bemærker en ubehagelig lyd, når vinduet lukkes, skal du aktivere "
+"denne indstillin.\n"
+"Du skal genaktivere lyden ved opstart ved at midterklikke på "
+"panelprogrammets ikon.\n"
+"Det anbefales IKKE at aktivere denne indstilling."
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->options
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "disabled"
-msgstr ""
+msgstr "deaktiveret"
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->options
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "small"
-msgstr ""
+msgstr "lille"
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->options
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "medium"
-msgstr ""
+msgstr "mellem"
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->options
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "large"
-msgstr ""
+msgstr "stor"
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->description
 #. 5.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether the media keys OSD is disabled or its relative display size"
-msgstr ""
+msgstr "Om medietaster skal vises på skærmen eller den relative størrelse"
 
 #. 6.2->settings-schema.json->showOSDonStartup->description
 #. 5.4->settings-schema.json->showOSDonStartup->description
 #. 6.6->settings-schema.json->showOSDonStartup->description
 #. 6.4->settings-schema.json->showOSDonStartup->description
-#, fuzzy
 msgid "Show volume level in OSD on startup"
-msgstr "Vis lydstyrke i værktøjstip"
+msgstr "Vis lydstyrke på skærmen ved opstart"
 
 #. 6.2->settings-schema.json->volumeSoundFile->description
 #. 5.4->settings-schema.json->volumeSoundFile->description
 #. 6.6->settings-schema.json->volumeSoundFile->description
 #. 6.4->settings-schema.json->volumeSoundFile->description
 msgid "Which sound to play when the volume is changed"
-msgstr ""
+msgstr "Lyd der skal afspilles, når lydstyrken ændres"
 
 #. 6.2->settings-schema.json->volumeSoundEnabled->description
 #. 5.4->settings-schema.json->volumeSoundEnabled->description
 #. 6.6->settings-schema.json->volumeSoundEnabled->description
 #. 6.4->settings-schema.json->volumeSoundEnabled->description
 msgid "Whether to play a sound when the volume is changed"
-msgstr ""
+msgstr "Om der skal afspilles en lyd, når lydstyrken ændres"
 
 #. 6.2->settings-schema.json->redefine-volume-keybindings->description
 #. 5.4->settings-schema.json->redefine-volume-keybindings->description
 #. 6.6->settings-schema.json->redefine-volume-keybindings->description
 #. 6.4->settings-schema.json->redefine-volume-keybindings->description
 msgid "Redefine Multimedia Keyboard Shortcuts"
-msgstr ""
+msgstr "Omdefinér multimedietaster"
 
 #. 6.2->settings-schema.json->button-set-to-default-keybindings->description
 #. 5.4->settings-schema.json->button-set-to-default-keybindings->description
 #. 6.6->settings-schema.json->button-set-to-default-keybindings->description
 #. 6.4->settings-schema.json->button-set-to-default-keybindings->description
 msgid "Use the same shortcuts as those defined by Cinnamon"
-msgstr ""
+msgstr "Brug genvejene defineret af Cinnamon"
 
 #. 6.2->settings-schema.json->pause-on-off->description
 #. 5.4->settings-schema.json->pause-on-off->description
 #. 6.6->settings-schema.json->pause-on-off->description
 #. 6.4->settings-schema.json->pause-on-off->description
 msgid "Pause/Play toggle"
-msgstr ""
+msgstr "Skift mellem afspilning/pause"
 
 #. 6.2->settings-schema.json->volume-mute->description
 #. 5.4->settings-schema.json->volume-mute->description
 #. 6.6->settings-schema.json->volume-mute->description
 #. 6.4->settings-schema.json->volume-mute->description
-#, fuzzy
 msgid "Volume Mute"
 msgstr "Lydløs til/fra"
 
@@ -1080,39 +1083,36 @@ msgstr "Lydløs til/fra"
 #. 5.4->settings-schema.json->volume-up->description
 #. 6.6->settings-schema.json->volume-up->description
 #. 6.4->settings-schema.json->volume-up->description
-#, fuzzy
 msgid "Volume Up"
-msgstr "Lydstyrke"
+msgstr "Lydstyrke op"
 
 #. 6.2->settings-schema.json->volume-down->description
 #. 5.4->settings-schema.json->volume-down->description
 #. 6.6->settings-schema.json->volume-down->description
 #. 6.4->settings-schema.json->volume-down->description
-#, fuzzy
 msgid "Volume Down"
-msgstr "Lydstyrke"
+msgstr "Lydstyrke ned"
 
 #. 6.2->settings-schema.json->audio-next->description
 #. 5.4->settings-schema.json->audio-next->description
 #. 6.6->settings-schema.json->audio-next->description
 #. 6.4->settings-schema.json->audio-next->description
 msgid "Next Track"
-msgstr ""
+msgstr "Næste nummer"
 
 #. 6.2->settings-schema.json->audio-prev->description
 #. 5.4->settings-schema.json->audio-prev->description
 #. 6.6->settings-schema.json->audio-prev->description
 #. 6.4->settings-schema.json->audio-prev->description
-#, fuzzy
 msgid "Previous Track"
-msgstr "Forrige"
+msgstr "Forrige nummer"
 
 #. 6.2->settings-schema.json->remove_soundATcinnamonDOTorg->description
 #. 5.4->settings-schema.json->remove_soundATcinnamonDOTorg->description
 #. 6.6->settings-schema.json->remove_soundATcinnamonDOTorg->description
 #. 6.4->settings-schema.json->remove_soundATcinnamonDOTorg->description
 msgid "Remove from panel the sound@cinnamon.org applet"
-msgstr ""
+msgstr "Fjern panelprogrammet sound@cinnamon.org fra panelet"
 
 #. 4.4->settings-schema.json->adaptColor->tooltip
 #. 4.6->settings-schema.json->adaptColor->tooltip
@@ -1124,76 +1124,74 @@ msgstr ""
 
 #. 6.6->settings-schema.json->page_menus->title
 #. 6.4->settings-schema.json->page_menus->title
-#, fuzzy
 msgid "Menus"
-msgstr "Menu"
+msgstr "Menuer"
 
 #. 6.6->settings-schema.json->sectionMenu2->title
 #. 6.4->settings-schema.json->sectionMenu2->title
 msgid "Context Menu"
-msgstr ""
+msgstr "Genvejsmenu"
 
 #. 6.6->settings-schema.json->sectionMenu3->title
 msgid "Output Devices Not Displayed In The Context Menu"
-msgstr ""
+msgstr "Outputenheder som ikke skal vises i genvejsmenuen"
 
 #. 6.6->settings-schema.json->sectionMenu4->title
 msgid "Input Devices Not Displayed In The Context Menu"
-msgstr ""
+msgstr "Inputenheder som ikke skal vises i genvejsmenuen"
 
 #. 6.6->settings-schema.json->sectionBehavior1->title
 #. 6.4->settings-schema.json->sectionBehavior1->title
 msgid "External commands and scripts"
-msgstr ""
+msgstr "Eksterne kommandoer og programmer"
 
 #. 6.6->settings-schema.json->sectionIcon1->title
 #. 6.4->settings-schema.json->sectionIcon1->title
 msgid "Icon appearance"
-msgstr ""
+msgstr "Ikonudseende"
 
 #. 6.6->settings-schema.json->sectionIcon2->title
-#, fuzzy
 msgid "Microphone Badge colors"
-msgstr "Mikrofon"
+msgstr "Mikrofonbadgefarver"
 
 #. 6.6->settings-schema.json->sectionIcon3->title
 #. 6.4->settings-schema.json->sectionIcon2->title
 msgid "Icon colors"
-msgstr ""
+msgstr "Ikonfarver"
 
 #. 6.6->settings-schema.json->sectionIcon4->title
 #. 6.4->settings-schema.json->sectionIcon3->title
 msgid "Scrolling"
-msgstr ""
+msgstr "Rulning"
 
 #. 6.6->settings-schema.json->sectionSound5->title
 #. 6.4->settings-schema.json->sectionSound5->title
 msgid "Remove incompatible extensions"
-msgstr ""
+msgstr "Fjern inkompatible udvidelser"
 
 #. 6.6->settings-schema.json->sectionSound6->title
 msgid "Advertisement"
-msgstr ""
+msgstr "Reklame"
 
 #. 6.6->settings-schema.json->sectionCommands->title
 #. 6.4->settings-schema.json->sectionCommands->title
 msgid "Custom commands"
-msgstr ""
+msgstr "Brugerdefinerede kommandoer"
 
 #. 6.6->settings-schema.json->dontShowAnyImageInMenu->description
 #. 6.4->settings-schema.json->dontShowAnyImageInMenu->description
 msgid "Do not show any cover art in the menu"
-msgstr ""
+msgstr "Vis ingen albumcovere i menuen"
 
 #. 6.6->settings-schema.json->showMediaOptical->description
 #. 6.4->settings-schema.json->showMediaOptical->description
 msgid "Show Media-Optical icon"
-msgstr ""
+msgstr "Vis optisk medie-ikon"
 
 #. 6.6->settings-schema.json->viewFullAlbumArt->description
 #. 6.4->settings-schema.json->viewFullAlbumArt->description
 msgid "View Full Album Art"
-msgstr ""
+msgstr "Vis hele albumcoveret"
 
 #. 6.6->settings-schema.json->viewFullAlbumArt->tooltip
 #. 6.4->settings-schema.json->viewFullAlbumArt->tooltip
@@ -1201,44 +1199,46 @@ msgid ""
 "When unchecked, Album Art in the menu may be partially covered by Artist and "
 "Title."
 msgstr ""
+"Hvis den ikke er aktiveret, kan albumcoveret i menuen blive delvist dækket "
+"af kunstner og titel."
 
 #. 6.6->settings-schema.json->shortenArtistTitle->description
 #. 6.4->settings-schema.json->shortenArtistTitle->description
-#, fuzzy
 msgid "Shorten Artist and Title"
-msgstr "Vis kunstner og titel i værktøjstip"
+msgstr "Forkort kunstner og titel"
 
 #. 6.6->settings-schema.json->shortenArtistTitle->options
 #. 6.4->settings-schema.json->shortenArtistTitle->options
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 #. 6.6->settings-schema.json->shortenArtistTitle->options
 #. 6.4->settings-schema.json->shortenArtistTitle->options
 msgid "Start"
-msgstr ""
+msgstr "Begyndelsen"
 
 #. 6.6->settings-schema.json->shortenArtistTitle->options
 #. 6.4->settings-schema.json->shortenArtistTitle->options
 msgid "Middle"
-msgstr ""
+msgstr "Midten"
 
 #. 6.6->settings-schema.json->shortenArtistTitle->options
 #. 6.4->settings-schema.json->shortenArtistTitle->options
 msgid "End"
-msgstr ""
+msgstr "Slutningen"
 
 #. 6.6->settings-schema.json->shortenArtistTitle->tooltip
 #. 6.4->settings-schema.json->shortenArtistTitle->tooltip
 msgid ""
 "When the artist name or title is too long, you can choose how to shorten it."
 msgstr ""
+"Når kunstnerens navn eller titlen er for lang, kan du vælge, hvordan det "
+"skal forkortes."
 
 #. 6.6->settings-schema.json->doNotUsePlayerctld->description
 #. 6.4->settings-schema.json->doNotUsePlayerctld->description
-#, fuzzy
 msgid "Do not use playerctl"
-msgstr "Vælg kontrolelementer til afspiller"
+msgstr "Brug ikke playerctl"
 
 #. 6.6->settings-schema.json->doNotUsePlayerctld->tooltip
 #. 6.4->settings-schema.json->doNotUsePlayerctld->tooltip
@@ -1247,45 +1247,50 @@ msgid ""
 "installation is not required; playerctl will not be used, so this applet "
 "will run in degraded mode (artist, title or album art)."
 msgstr ""
+"Når denne indstilling er markeret – hvilket ikke anbefales – er det ikke "
+"nødvendigt at installere playerctl; playerctl vil ikke blive brugt, så dette "
+"panelprogram kører i begrænset tilstand (kunstner, titel eller albumcover)."
 
 #. 6.6->settings-schema.json->keepAppListOpen->description
 msgid "Keep the App Volume Control open"
-msgstr ""
+msgstr "Hold lydstyrkekontrollen åben"
 
 #. 6.6->settings-schema.json->appsNotToDisplayLabel->description
 msgid "Apps Not to Display:"
-msgstr ""
+msgstr "Programmer som ikke skal vises:"
 
 #. 6.6->settings-schema.json->appsNotToDisplay->description
 msgid "Apps Not to Display"
-msgstr ""
+msgstr "Programmer som ikke skal vises:"
 
 #. 6.6->settings-schema.json->appsNotToDisplay->columns->title
-#, fuzzy
 msgid ""
 "in\n"
 "Applications\n"
 "submenu"
-msgstr "Programmer"
+msgstr ""
+"i\n"
+"program-\n"
+"undermenuen"
 
 #. 6.6->settings-schema.json->appsNotToDisplay->columns->title
 msgid "Part of the app name"
-msgstr ""
+msgstr "Del af programnavnet"
 
 #. 6.6->settings-schema.json->keepOutputListOpen->description
 #. 6.4->settings-schema.json->keepOutputListOpen->description
 msgid "Keep the Output Device selector open"
-msgstr ""
+msgstr "Hold outputenhedsvælgeren åben"
 
 #. 6.6->settings-schema.json->keepInputListOpen->description
 #. 6.4->settings-schema.json->keepInputListOpen->description
 msgid "Keep the Input Device selector open"
-msgstr ""
+msgstr "Hold inputenhedsvælgeren åben"
 
 #. 6.6->settings-schema.json->keepCommandListOpen->description
 #. 6.4->settings-schema.json->keepCommandListOpen->description
 msgid "Keep the Command selector open"
-msgstr ""
+msgstr "Hold kommandovælgeren åben"
 
 #. 6.6->settings-schema.json->labelIgnoredOutputDevices->description
 #. 6.6->settings-schema.json->labelIgnoredInputDevices->description
@@ -1293,50 +1298,49 @@ msgid ""
 "In the list below, add a line containing part of its name (case sensitive) "
 "for each unwanted device."
 msgstr ""
+"I listen nedenfor skal du tilføje en linje, der indeholder en del af navnet "
+"(forskel mellem store og små bogstaver) for hver uønsket enhed."
 
 #. 6.6->settings-schema.json->ignoredOutputDevices->description
 #. 6.6->settings-schema.json->ignoredInputDevices->description
-#, fuzzy
 msgid "Unwanted devices"
-msgstr "Inputenhed"
+msgstr "Uønskede enheder"
 
 #. 6.6->settings-schema.json->ignoredOutputDevices->columns->title
 #. 6.6->settings-schema.json->ignoredInputDevices->columns->title
 msgid "Part of the device name"
-msgstr ""
+msgstr "Del af enhedsnavnet"
 
 #. 6.6->settings-schema.json->keyBalanceLeft->description
 msgid "Balance: to the left"
-msgstr ""
+msgstr "Balance: venstre"
 
 #. 6.6->settings-schema.json->keyBalanceLeft->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to increase the volume on the left side."
-msgstr "Indstil tastegenveje til visning af lydpanelprogrammets menu."
+msgstr "Indstil tastegenveje til forøgelse af lydstyrken i venstre side."
 
 #. 6.6->settings-schema.json->keyBalanceRight->description
 msgid "Balance: to the right"
-msgstr ""
+msgstr "Balance: højre"
 
 #. 6.6->settings-schema.json->keyBalanceRight->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to increase the volume on the right side."
-msgstr "Indstil tastegenveje til visning af lydpanelprogrammets menu."
+msgstr "Indstil tastegenveje til forøgelse af lydstyrken i højre side."
 
 #. 6.6->settings-schema.json->keyBalanceCenter->description
 msgid "Balance: re-init"
-msgstr ""
+msgstr "Balance: nulstil"
 
 #. 6.6->settings-schema.json->keyBalanceCenter->tooltip
-#, fuzzy
 msgid ""
 "Set keybinding(s) to rebalance the volume between the left and right sides."
-msgstr "Indstil tastegenveje til visning af lydpanelprogrammets menu."
+msgstr ""
+"Indstil tastegenveje til rebalancering af lydstyrken i venstre og højre side."
 
 #. 6.6->settings-schema.json->runAsync->description
 #. 6.4->settings-schema.json->runAsync->description
 msgid "Execute asynchronously"
-msgstr ""
+msgstr "Kør asynkront"
 
 #. 6.6->settings-schema.json->runAsync->tooltip
 #. 6.4->settings-schema.json->runAsync->tooltip
@@ -1344,92 +1348,90 @@ msgid ""
 "Enabled by default (recommended).\n"
 "Disable this option if you encounter running issues (rare)."
 msgstr ""
+"Aktiveret som standard (anbefales).\n"
+"Deaktivér denne indstilling, hvis du oplever problemer med programmet "
+"(sjældent)."
 
 #. 6.6->settings-schema.json->toolongchars->description
 #. 6.4->settings-schema.json->toolongchars->description
 msgid "If the title is too long, end it with:"
-msgstr ""
+msgstr "Hvis titlen er for lang, så afslut den med:"
 
 #. 6.6->settings-schema.json->toolongchars->tooltip
 #. 6.4->settings-schema.json->toolongchars->tooltip
 msgid "Emoji accepted"
-msgstr ""
+msgstr "Emojier kan bruges"
 
 #. 6.6->settings-schema.json->keepAlbumArtIcon->description
 #. 6.4->settings-schema.json->keepAlbumArtIcon->description
 msgid "Keep the album art as an icon when adjusting the volume"
-msgstr ""
+msgstr "Vis albumcover som et ikon, når lydstyrken justeres"
 
 #. 6.6->settings-schema.json->showalbumButForSitesLabel->description
 #. 6.6->settings-schema.json->showalbumButForSites->description
 #. 6.4->settings-schema.json->showalbumButForSitesLabel->description
 #. 6.4->settings-schema.json->showalbumButForSites->description
 msgid "Do not display album art from these sites:"
-msgstr ""
+msgstr "Vis ikke albumcovere fra disse steder:"
 
 #. 6.6->settings-schema.json->showalbumButForSites->columns->title
 #. 6.4->settings-schema.json->showalbumButForSites->columns->title
 msgid "Activate"
-msgstr ""
+msgstr "Aktivér"
 
 #. 6.6->settings-schema.json->showalbumButForSites->columns->title
 #. 6.4->settings-schema.json->showalbumButForSites->columns->title
 msgid "Site name"
-msgstr ""
+msgstr "Navn"
 
 #. 6.6->settings-schema.json->showalbumButForSites->columns->title
 #. 6.4->settings-schema.json->showalbumButForSites->columns->title
-#, fuzzy
 msgid "Local path to icon"
-msgstr "Vis albumcover som ikon"
+msgstr "Lokal sti til ikon"
 
 #. 6.6->settings-schema.json->showalbumDelay->description
 #. 6.4->settings-schema.json->showalbumDelay->description
 msgid "Delay between icon and album art display (seconds)"
-msgstr ""
+msgstr "Forsinkelse mellem visning af ikon og albumcover (skunder)"
 
 #. 6.6->settings-schema.json->reverseScrolling->description
 #. 6.4->settings-schema.json->reverseScrolling->description
 msgid "Reverse scrolling effect"
-msgstr ""
+msgstr "Omvendt rulning-effekt"
 
 #. 6.6->settings-schema.json->showMediaKeysOSD->description
 #. 6.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether or not to show the media keys OSD"
-msgstr ""
+msgstr "Om medietaster skal vises på skærmen"
 
 #. 6.6->settings-schema.json->showVolumeValue->description
 #. 6.4->settings-schema.json->showVolumeValue->description
-#, fuzzy
 msgid "Show volume level in OSD"
-msgstr "Vis lydstyrke i værktøjstip"
+msgstr "Vis lydstyrke på skærmen"
 
 #. 6.6->settings-schema.json->showPercent->description
 #. 6.4->settings-schema.json->showPercent->description
 msgid "Show '%' in OSD"
-msgstr ""
+msgstr "Vis “%” på skærmen"
 
 #. 6.6->settings-schema.json->OSDhorizontal->description
 #. 6.4->settings-schema.json->OSDhorizontal->description
-#, fuzzy
 msgid "Show horizontal OSD"
-msgstr "Vis lydstyrke i værktøjstip"
+msgstr "Vandret visning på skærmen"
 
 #. 6.6->settings-schema.json->showBarLevel->description
 #. 6.4->settings-schema.json->showBarLevel->description
-#, fuzzy
 msgid "Show bar level in OSD"
-msgstr "Vis lydstyrke i værktøjstip"
+msgstr "Vis søjleindikator på skærmen"
 
 #. 6.6->settings-schema.json->OSD150SettingsBtn->description
 msgid "Change the OSD position offset"
-msgstr ""
+msgstr "Ændr forskydningen af skærmvisningen"
 
 #. 6.6->settings-schema.json->mic-mute->description
 #. 6.4->settings-schema.json->mic-mute->description
-#, fuzzy
 msgid "Microphone Mute"
-msgstr "Mikrofon"
+msgstr "Mikrofon slået fra"
 
 #. 6.6->settings-schema.json->custom-commands-label->description
 #. 6.4->settings-schema.json->custom-commands-label->description
@@ -1437,28 +1439,30 @@ msgid ""
 "These commands will appear in the context menu once you've reloaded this "
 "applet."
 msgstr ""
+"Disse kommandoer vil vises i genvejsmenuen, når panelprogrammet er "
+"genstartet."
 
 #. 6.6->settings-schema.json->custom-commands-list->columns->title
 #. 6.4->settings-schema.json->custom-commands-list->columns->title
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #. 6.6->settings-schema.json->custom-commands-list->columns->title
 #. 6.4->settings-schema.json->custom-commands-list->columns->title
 msgid "Command"
-msgstr ""
+msgstr "Kommando"
 
 #. 6.6->settings-schema.json->adv_avoid->description
 msgid "Try to avoid advertisement"
-msgstr ""
+msgstr "Prøv at undgå reklamer"
 
 #. 6.6->settings-schema.json->adv_volume->description
 msgid "Volume during advertisements"
-msgstr ""
+msgstr "Lydstyrke under reklamer"
 
 #. 6.6->settings-schema.json->adv_icon->description
 msgid "Symbolic icon displayed during advertisements"
-msgstr ""
+msgstr "Symbolsk ikon som vises under reklamer"
 
 #. 6.6->settings-schema.json->adv_label->description
 msgid ""
@@ -1467,51 +1471,55 @@ msgid ""
 "the value indicated above.\n"
 "The volume is restored at the end of the advertisement."
 msgstr ""
+"Reklamer genkendes ud fra titlen.\n"
+"Når en titel indeholder mindst et af disse ord, sænkes lydstyrken til den "
+"oven for angivne værdi.\n"
+"Lydstyrken genoprettes, når reklamen er slut."
 
 #. 6.6->settings-schema.json->adv_list->description
 msgid "Advertisement list"
-msgstr ""
+msgstr "Reklameliste"
 
 #. 6.6->settings-schema.json->adv_list->columns->title
 msgid "Part of title"
-msgstr ""
+msgstr "Del af titel"
 
 #. 6.6->settings-schema.json->userMenuWidth->description
 #. 6.4->settings-schema.json->userMenuWidth->description
 msgid "Menu width (in pixels)"
-msgstr ""
+msgstr "Menubredde (i pixels)"
 
 #. 6.6->settings-schema.json->LIGHTBASEFILL->description
 msgid "Light Theme: Base color"
-msgstr ""
+msgstr "Lyst tema: grundfarve"
 
 #. 6.6->settings-schema.json->LIGHTSUCCESSFILL->description
 msgid "Light Theme: Success color"
-msgstr ""
+msgstr "Lyst tema: farve for gennemført"
 
 #. 6.6->settings-schema.json->LIGHTWARNINGFILL->description
 msgid "Light Theme: Warning color"
-msgstr ""
+msgstr "Lyst tema: advarselsfarve"
 
 #. 6.6->settings-schema.json->LIGHTERRORFILL->description
 msgid "Light Theme: Error color"
-msgstr ""
+msgstr "Lyst tema: fejlfarve"
 
 #. 6.6->settings-schema.json->DARKBASEFILL->description
 msgid "Dark Theme: Base color"
-msgstr ""
+msgstr "Mørkt tema: grundfarve"
 
 #. 6.6->settings-schema.json->DARKSUCCESSFILL->description
 msgid "Dark Theme: Success color"
-msgstr ""
+msgstr "Mørkt tema: farve for gennemført"
 
 #. 6.6->settings-schema.json->DARKWARNINGFILL->description
 msgid "Dark Theme: Warning color"
-msgstr ""
+msgstr "Mørkt tema: advarselsfarve"
 
 #. 6.6->settings-schema.json->DARKERRORFILL->description
 msgid "Dark Theme: Error color"
-msgstr ""
+msgstr "Mørkt tema: fejlfarve"
 
 #. 2.8->settings-schema.json->percentMaxVol->options
 #. 3.4->settings-schema.json->percentMaxVol->options
@@ -1591,7 +1599,7 @@ msgstr ""
 
 #. 6.4->settings-schema.json->keepAppListOpen->description
 msgid "Keep the App selector open"
-msgstr ""
+msgstr "Hold programvælgeren åben"
 
 #. 3.4->settings-schema.json->alwaysShowInput->description
 msgid "Always show input controls"

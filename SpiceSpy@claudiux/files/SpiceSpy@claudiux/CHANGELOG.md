@@ -1,3 +1,6 @@
+### v5.8.3~20260527
+  * Ready for Linux Mint 23.
+
 ### v5.8.2~20260427
   * Further improves the calculation of remaining time during updates.
   * Eliminates unnecessary calculation time.

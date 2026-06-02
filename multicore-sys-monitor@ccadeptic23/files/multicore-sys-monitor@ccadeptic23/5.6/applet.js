@@ -16,11 +16,6 @@ const Util = imports.misc.util;
 const St = imports.gi.St;
 const Gtk = imports.gi.Gtk;
 const Extension = imports.ui.extension;
-//~ const {
-  //~ reloadExtension,
-  //~ Type
-//~ } = imports.ui.extension; //Extension
-
 function _require(relPath) {
     if (Extension.getCurrentExtension) {
         var Me = Extension.getCurrentExtension();
@@ -29,6 +24,7 @@ function _require(relPath) {
         return require(relPath);
     }
 }
+
 var { to_string } = _require("./lib/tostring");
 var { readFileAsync } = _require("./lib/readFileAsync");
 var Graphs = _require("./lib/Graphs");
@@ -182,7 +178,7 @@ function _(str) {
     return Gettext.gettext(str);
 }
 
-class MCSM extends Applet.TextIconApplet {
+var MCSM = class MCSM extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
@@ -1849,7 +1845,7 @@ class MCSM extends Applet.TextIconApplet {
 
 }
 
-class MemDataProvider {
+var MemDataProvider = class MemDataProvider {
     constructor(applet) {
         this.applet = applet;
         this.name = _("MEM");
@@ -1946,7 +1942,7 @@ class MemDataProvider {
     }
 }
 
-class BufferCacheSharedDataProvider {
+var BufferCacheSharedDataProvider = class BufferCacheSharedDataProvider {
     constructor(applet) {
         this.applet = applet;
         this.name = _("Buffers/Cache/Shared");
@@ -2007,7 +2003,7 @@ class BufferCacheSharedDataProvider {
     }
 }
 
-class SwapDataProvider {
+var SwapDataProvider = class SwapDataProvider {
     constructor(applet) {
         this.applet = applet;
         this.name = _("SWAP");
@@ -2075,7 +2071,7 @@ class SwapDataProvider {
     }
 }
 
-class MultiCpuDataProvider {
+var MultiCpuDataProvider = class MultiCpuDataProvider {
     constructor(applet) {
         this.applet = applet;
         this.name = _("CPU");
@@ -2187,7 +2183,7 @@ class MultiCpuDataProvider {
     }
 }
 
-class NetDataProvider {
+var NetDataProvider = class NetDataProvider {
     constructor(applet) {
         this.applet = applet;
         this.name = _("NET");
@@ -2382,7 +2378,7 @@ class NetDataProvider {
     }
 }
 
-class DiskDataProvider {
+var DiskDataProvider = class DiskDataProvider {
     constructor(applet) {
         this.applet = applet;
         this.name = _("DISK");
@@ -2562,7 +2558,7 @@ class DiskDataProvider {
     }
 }
 
-class DiskUsageDataProvider {
+var DiskUsageDataProvider = class DiskUsageDataProvider {
     constructor(applet) {
         this.applet = applet;
         this.name = _("DISK");
@@ -2648,7 +2644,7 @@ class DiskUsageDataProvider {
     }
 }
 
-class BatteryDataProvider {
+var BatteryDataProvider = class BatteryDataProvider {
     constructor(applet) {
         this.applet = applet;
         this.name = _("BAT");
