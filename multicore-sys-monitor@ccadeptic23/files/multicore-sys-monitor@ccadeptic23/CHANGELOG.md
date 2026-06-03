@@ -1,3 +1,7 @@
+### v3.16.3~20260602
+  * Fixes a bug in the display of line charts.
+  * Fixes [#8733](https://github.com/linuxmint/cinnamon-spices-applets/issues/8733)
+
 ### v3.16.2~20260528
   * Ready for Linux Mint 23.
 

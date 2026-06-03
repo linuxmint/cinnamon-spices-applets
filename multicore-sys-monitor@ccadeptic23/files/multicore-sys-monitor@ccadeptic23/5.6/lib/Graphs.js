@@ -1126,8 +1126,8 @@ var GraphLineChart = class GraphLineChart {
     let speedDiskOK = providerName == _('DISK') && this.applet.Disk_speed_display;
     let isOnlyLeftOrRight, isRight, isTop;
     var wantSpeed;
-    var total;
-    var previous;
+    var total = [0, 0];
+    var previous = [0, 0];
     const refreshRate = 0.001 * this.applet.refreshRate;
 
     if (totalNetOK) {
