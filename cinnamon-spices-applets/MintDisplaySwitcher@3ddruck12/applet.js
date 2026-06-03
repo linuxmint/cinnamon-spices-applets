@@ -363,6 +363,11 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         dialog.connect('opened', () => {
             this._chooserKeyHandlerId = dialog.actor.connect('key-press-event', handler);
             this._chooserBandKeyHandlerId = band.connect('key-press-event', handler);
+
+            // Also attach the handler directly to every tile button so that
+            // Esc/Enter/arrows work regardless of which actor holds focus.
+            this._chooserTileHandlerIds = this._chooserTiles.map(
+                t => t.button.connect('key-press-event', handler));
         });
 
         dialog.connect('closed', () => {
@@ -373,6 +378,13 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
             if (this._chooserBandKeyHandlerId) {
                 band.disconnect(this._chooserBandKeyHandlerId);
                 this._chooserBandKeyHandlerId = 0;
+            }
+            if (this._chooserTileHandlerIds) {
+                this._chooserTiles.forEach((t, i) => {
+                    if (this._chooserTileHandlerIds[i])
+                        t.button.disconnect(this._chooserTileHandlerIds[i]);
+                });
+                this._chooserTileHandlerIds = [];
             }
         });
     }
