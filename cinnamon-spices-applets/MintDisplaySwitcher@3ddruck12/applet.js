@@ -82,6 +82,10 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
         this._setKeybindings();
         this._updatePanelIcon(this._currentMode);
         this._applyIconVisibility();
+
+        // Record startup time so monitors-changed noise from Cinnamon reloads
+        // (which fire within the first few seconds) is silently ignored.
+        this._startupTime = GLib.get_monotonic_time();
     }
 
     /** Show or hide the panel icon based on the setting */
@@ -195,6 +199,13 @@ class MintDisplaySwitcherApplet extends Applet.IconApplet {
 
     /** React to an external display being connected or disconnected */
     _onMonitorsChanged() {
+        // Ignore signals fired within 3 s of startup — Cinnamon emits
+        // monitors-changed as a side-effect of reloading any applet, which
+        // would otherwise trigger spurious auto-apply notifications.
+        const elapsedSec = (GLib.get_monotonic_time() - this._startupTime) / 1000000;
+        if (elapsedSec < 3)
+            return;
+
         const wasConnected = this._externalWasConnected;
 
         this._refreshDisplays();
