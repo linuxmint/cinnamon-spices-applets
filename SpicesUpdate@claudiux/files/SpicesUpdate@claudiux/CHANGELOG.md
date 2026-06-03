@@ -1,3 +1,6 @@
+### v7.11.2~20260603
+  * Ready for Linux Mint 23.
+
 ### v7.11.1~20251217
   * Animation improvements.
 
