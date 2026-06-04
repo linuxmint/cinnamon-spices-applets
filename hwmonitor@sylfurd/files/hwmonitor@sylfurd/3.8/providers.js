@@ -222,6 +222,7 @@ class DiskDataProvider {
         this.device_name = device_name;
         this.sample_size = sample_size;
         this.sample_history = [];
+        this.udevClient = new GUdev.Client();
 
         [this.read_last, this.written_last] = this.getDiskLoad();
     }
@@ -257,7 +258,7 @@ class DiskDataProvider {
 
     getDiskLoad() {
         try {
-            let device = new GUdev.Client().query_by_subsystem_and_name("block", this.device_name);
+            let device = this.udevClient.query_by_subsystem_and_name("block", this.device_name);
             let stats_data = device.get_sysfs_attr_as_strv("stat");
             let read = stats_data[2] * 512;
             let written = stats_data[6] * 512;
