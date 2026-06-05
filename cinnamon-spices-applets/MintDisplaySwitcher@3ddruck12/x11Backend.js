@@ -194,9 +194,10 @@ class X11Backend {
             if (!DisplayInfo.isModeAvailable(mode, snapshot))
                 return null;
             if (ext && external.connected)
-                return ['xrandr', '--output', ext, '--off',
-                    '--output', int, '--auto', '--primary'];
-            return ['xrandr', '--output', int, '--auto', '--primary'];
+                return ['xrandr',
+                    '--output', int, '--auto', '--primary', '--pos', '0x0',
+                    '--output', ext, '--off'];
+            return ['xrandr', '--output', int, '--auto', '--primary', '--pos', '0x0'];
 
         case DisplayInfo.MODES.EXTERNAL:
             if (!ext || !DisplayInfo.isModeAvailable(mode, snapshot))
