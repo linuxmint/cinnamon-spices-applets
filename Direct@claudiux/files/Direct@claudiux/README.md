@@ -17,6 +17,7 @@ The Direct@claudiux applet is a fork from the placesCenter@scollins applet, with
 * Option to show **favorite** documents. This section is not displayed when the number of favorites is zero.
 * Option to show **favorite** applications. This section is not displayed when the number of favorite applications is zero.
 * Option to show **recent** documents (click on a recent document to open it; right-click to open the folder that contains it).
+* Option to show **session** links: Logout and Quit.
 * Option to open **custom** documents and applications. You can separate them with *categories*.
 * Quick keyboard access (choose your **shortcut**).
 * **Search tool** that allows you to quickly search for files and folders (supports regular expressions).
@@ -33,6 +34,8 @@ This icon browser, once installed, can then be accessed via a button in the User
 ## Special thanks
 
 Special thanks to [Stephen Collins](https://github.com/collinss), the author of the [placesCenter@scollins applet](https://cinnamon-spices.linuxmint.com/applets/view/128) from which this applet is derived.
+
+Special thanks to [Timothy Feierabend](https://github.com/timfeierabend) for rewriting part of this applet to add a feature for showing / hiding the session, and to make this applet compatible with the `test-spice` script.
 
 ## Translations
 

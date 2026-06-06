@@ -23,11 +23,11 @@ Any suggestion to improve this _Sensors@claudiux_ applet is welcome.
 
   * All values are displayed in your local format.
 
-  * Many display options are present in the settings.
+  * The settings offer a wide range of display options, as well as the ability to choose the color of each sensor if you wish.
 
   * The menu of this applet gives you direct access to the different kinds of settings, and contains useful shortcuts.
 
-  * Avoid wasted processor time and memory leaks.
+  * Avoids wasted processor time and memory leaks.
 
 ## Dependencies
 

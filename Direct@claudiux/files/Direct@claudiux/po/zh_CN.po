@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-01-07 23:43+0100\n"
+"POT-Creation-Date: 2026-03-29 12:10+0200\n"
 "PO-Revision-Date: 2017-05-02 21:02+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,77 +19,77 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#. applet.js:46 applet.js:654
-msgid "SYSTEM"
-msgstr "系统"
-
-#. applet.js:46 applet.js:694
-msgid "FAVORITES"
-msgstr ""
-
-#. applet.js:46 applet.js:725
-msgid "APPLICATIONS"
-msgstr ""
-
-#. applet.js:46 applet.js:756
-msgid "RECENT DOCUMENTS"
-msgstr "最近的文档"
-
-#. applet.js:46 applet.js:800
-msgid "CUSTOM"
-msgstr ""
-
-#. applet.js:189
+#. applet.js:190
 msgid "(Right click to open folder)"
 msgstr ""
 
 #. metadata.json->name
-#. applet.js:317
+#. applet.js:323
 msgid "Direct"
 msgstr "直接"
 
-#. applet.js:624
+#. applet.js:631
 msgid "Search Home Folder"
 msgstr "搜索主目录文件夹"
 
-#. applet.js:631 applet.js:671 applet.js:702 applet.js:733 applet.js:764
-#. applet.js:808
+#. applet.js:638 applet.js:678 applet.js:709 applet.js:740 applet.js:771
+#. applet.js:815
 msgid "Configure"
 msgstr ""
 
-#. applet.js:664
+#. applet.js:661
+msgid "SYSTEM"
+msgstr "系统"
+
+#. applet.js:671
 msgid "Search File System"
 msgstr "搜索文件系统"
 
-#. applet.js:778
+#. applet.js:701
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:732
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:763
+msgid "RECENT DOCUMENTS"
+msgstr "最近的文档"
+
+#. applet.js:785
 msgid "Clear"
 msgstr "清除"
 
-#. applet.js:785
+#. applet.js:792
 msgid "Recent"
 msgstr ""
 
-#. applet.js:862
+#. applet.js:807
+msgid "CUSTOM"
+msgstr ""
+
+#. applet.js:869
 msgid "Computer"
 msgstr "计算机"
 
-#. applet.js:868
+#. applet.js:875
 msgid "File System"
 msgstr "文件系统"
 
-#. applet.js:885
+#. applet.js:892
 msgid "Network"
 msgstr "网络"
 
-#. applet.js:900
+#. applet.js:908
 msgid "Logout"
 msgstr ""
 
-#. applet.js:907
+#. applet.js:915
 msgid "Quit"
 msgstr ""
 
-#. applet.js:1215
+#. applet.js:1224
 msgid "Trash"
 msgstr "回收站"
 
@@ -395,6 +395,10 @@ msgstr "仅显示已挂载的驱动器"
 #. settings-schema.json->showNetwork->description
 msgid "Show network"
 msgstr "显示网络"
+
+#. settings-schema.json->showSession->description
+msgid "Show Logout and Quit"
+msgstr ""
 
 #. settings-schema.json->showFavorites->description
 #, fuzzy

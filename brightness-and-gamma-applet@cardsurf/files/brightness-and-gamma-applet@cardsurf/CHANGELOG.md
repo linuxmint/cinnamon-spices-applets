@@ -1,3 +1,9 @@
+### v3.2.2~20260415
+* Toggle on/off this applet middle-clicking on its icon.
+
+### v3.2.1~20260317
+* Fixed a major bug. The screen no longer stays blank when using Brightness and Temperature.
+
 ### v3.2.0~20260222
 * Added option "Set all to 100% in full-screen mode". Useful for games and videos.
 

@@ -6,6 +6,8 @@ An applet that sets brightness and gamma levels of a screen for Linux Mint Cinna
 * Set Red-Green-Blue Gamma of the screen
 * Set Screen Temperature (K)
 * Tooltip displaying current values, as well as sunrise and sunset times.
+* Toggle on/off this applet middle-clicking on its icon.
+* Context menu gives you access to all the options.
 * Customizable:
  * Customize an icon shown in a panel.
  * Show: all values, brightness or gamma (or screen temperature).
@@ -66,6 +68,14 @@ An applet that sets brightness and gamma levels of a screen for Linux Mint Cinna
 
 1. Right click on the applet
 2. Select the *Reload* option. Wait 1 second.
+
+### To toggle on/off this applet
+
+* Right click on the applet and select "Toggle On / Off"
+
+or
+
+* Middle-click on the applet.
 
 
 

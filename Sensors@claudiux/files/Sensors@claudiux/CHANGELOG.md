@@ -1,3 +1,33 @@
+### v5.11.4~20260508
+  * Installing dependencies: Use pkgcli when available.
+
+### v5.11.3~20260426
+  * Adds ability to select the size of the tooltip font.
+  * Fixes [#8599](https://github.com/linuxmint/cinnamon-spices-applets/issues/8599)
+
+### v5.11.2~20260413
+  * Perform asynchronous data reads.
+
+### v5.11.1~20260413
+  * Fixes errors in json formatted data.
+  * Fixes [#8510](https://github.com/linuxmint/cinnamon-spices-applets/issues/8510)
+
+### v5.11.0~20260322
+  * In the Temperature tab of this applet settings:
+    * New option: Display the disk temperatures before those of the other sensors.
+  * For Temperature, Fan, Voltages tabs:
+    * Added "Color in panel" option to each sensor in the list.
+    * Color must be in html format. Ex: #FE246A
+    * The Custom Text Color defined in the General tab takes precedence on these colors.
+  * Fixes [#8454](https://github.com/linuxmint/cinnamon-spices-applets/issues/8454)
+
+### v5.10.7~20260314
+  * Avoid errors using Gentoo.
+  * Gentoo users must install all dependencies themselves. Please refer to the README file.
+
+### v5.10.6~20260304
+  * Added option: Separator Color.
+
 ### v5.10.5~20260218
   * Improved section "This settings window".
   * From now on, the user can set the size and position of the settings window to its current (approximate) size and position. Then let Cinnamon decide the real values.

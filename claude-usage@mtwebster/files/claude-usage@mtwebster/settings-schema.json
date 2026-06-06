@@ -14,5 +14,9 @@
         "default": "",
         "description": "Alternate credentials file path",
         "tooltip": "Path to Claude credentials JSON file (defaults to ~/.claude/.credentials.json otherwise)"
+    },
+    "last-api-call-time": {
+        "type": "generic",
+        "default": 0
     }
 }
