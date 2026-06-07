@@ -358,6 +358,7 @@
         "Net_total_display",
         "Net_total_hovering_only",
         "Net_totalCorner",
+        "Net_total1decimal",
         "flowFontFactor"
       ]
     },
@@ -464,6 +465,7 @@
         "Disk_speed_display",
         "Disk_speed_hovering_only",
         "Disk_speedCorner",
+        "Disk_speed1decimal",
         "flowFontFactor"
       ]
     },
@@ -2178,6 +2180,16 @@
     "step": 1,
     "units": "%",
     "description": "Font size: percentage of the box height"
+  },
+  "Net_total1decimal": {
+    "type": "switch",
+    "default": false,
+    "description": "Show 1 decimal"
+  },
+  "Disk_speed1decimal": {
+    "type": "switch",
+    "default": false,
+    "description": "Show 1 decimal"
   },
   "flowFontFactor": {
     "type": "scale",

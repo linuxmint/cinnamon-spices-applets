@@ -1,3 +1,6 @@
+### v3.16.4~20260607
+  * Allows you to display one decimal place for values shown on line charts.
+
 ### v3.16.3~20260602
   * Fixes a bug in the display of line charts.
   * Fixes [#8733](https://github.com/linuxmint/cinnamon-spices-applets/issues/8733)
