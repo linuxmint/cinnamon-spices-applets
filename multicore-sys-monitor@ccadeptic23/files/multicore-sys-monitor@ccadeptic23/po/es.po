@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-06-07 12:11+0200\n"
-"PO-Revision-Date: 2026-05-21 10:52-0400\n"
+"PO-Revision-Date: 2026-06-07 10:38-0400\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1519,7 +1519,7 @@ msgstr "Descarga"
 #. 5.6->settings-schema.json->Net_total1decimal->description
 #. 5.6->settings-schema.json->Disk_speed1decimal->description
 msgid "Show 1 decimal"
-msgstr ""
+msgstr "Mostrar 1 decimal"
 
 #. 5.6->settings-schema.json->color0->description
 msgid "Color #0"
