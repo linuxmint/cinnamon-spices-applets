@@ -385,7 +385,7 @@ UpdatesNotifier.prototype = {
 
             if (stdout !== '') {
                 this.checkingInProgress = false;
-                global.logError(`${UUID}: pkcon get-updates failed`);
+                global.logError(`${UUID}: getting list of updates failed`);
                 this.hasError = true;
                 this._update();
                 return;

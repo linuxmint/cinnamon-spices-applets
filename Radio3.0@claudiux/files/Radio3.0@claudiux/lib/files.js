@@ -6,33 +6,22 @@
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
 
-const {to_string} = require("./lib/to-string");
-
-/** Constants
- */
-//const {
-    //UUID,
-    //HOME_DIR,
-    //APPLET_DIR,
-    //SCRIPTS_DIR,
-    //ICONS_DIR,
-    //FLAGS_DIR,
-    //IFACES_DIR,
-    //SOUNDS_DIR,
-    //DEFAULT_SYMBOLIC_ICON,
-    //_,
-    //exists,
-    //DEBUG,
-    //RELOAD,
-    //log,
-    //logError
-//} = require("./constants");
+var {to_string} = _require("./lib/to-string");
 
 /**
  * class File
  */
-class File {
+var File = class File {
 
     constructor (path) {
         this.newline = "\n";
@@ -100,7 +89,7 @@ class File {
 /**
  * class Directory
  */
-class Directory {
+var Directory = class Directory {
 
     constructor (path) {
         this.separator = "/";
@@ -153,6 +142,3 @@ class Directory {
         return this.directory.delete(null, null);
     }
 };
-
-
-

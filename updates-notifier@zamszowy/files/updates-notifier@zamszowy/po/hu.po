@@ -33,7 +33,7 @@ msgstr "Új frissítések keresése"
 #. applet.js:258
 #, javascript-format
 msgid "View %s updates"
-msgstr "%s frissítések megtekintése"
+msgstr "%s frissítés megtekintése"
 
 #. applet.js:258
 msgid "No updates to view"
@@ -67,7 +67,7 @@ msgstr "Hiba"
 
 #. error-window.js:39
 msgid "Error log file not found."
-msgstr "A hibanaplófájl nem található."
+msgstr "Nem található naplófájl."
 
 #. info-window.js:66 info-window.js:85
 msgid "No details available."
@@ -91,7 +91,7 @@ msgstr ""
 
 #. info-window.js:108
 msgid "Loading update details…"
-msgstr "Frissítési részletek betöltése…"
+msgstr "Frissítés részleteinek betöltése…"
 
 #. info-window.js:173
 msgid "Updates"
@@ -99,18 +99,18 @@ msgstr "Frissítések"
 
 #. info-window.js:188
 msgid "Search updates…"
-msgstr "Keresés frissítései…"
+msgstr "Frissítések keresése…"
 
 #. info-window.js:223
 msgid "{0} updates"
-msgstr "{0} frissítések"
+msgstr "{0} frissítés"
 
 #. info-window.js:251
 msgid ""
 "Failed to read updates file:\n"
 "{0}"
 msgstr ""
-"Nem sikerült beolvasni a frissítőfájlt:\n"
+"Nem sikerült beolvasni a frissítési fájlt:\n"
 "{0}"
 
 #. metadata.json->name
@@ -119,7 +119,7 @@ msgstr "Frissítésértesítő"
 
 #. metadata.json->description
 msgid "Shows icons for pending update packages"
-msgstr "Megjeleníti a függőben lévő frissítőcsomagok ikonjait"
+msgstr "Megjeleníti a frissítésre váró csomagok ikonjait"
 
 #. settings-schema.json->pageBehavior->title
 msgid "Behavior"
@@ -127,7 +127,7 @@ msgstr "Viselkedés"
 
 #. settings-schema.json->pageAppearance->title
 msgid "Appearance"
-msgstr "Megjelenítés"
+msgstr "Megjelenés"
 
 #. settings-schema.json->sectionSettings->title
 msgid "Settings"
@@ -139,7 +139,7 @@ msgstr "Ikon/Címke"
 
 #. settings-schema.json->sectionClick->title
 msgid "Applet click"
-msgstr "Kisalkalmazás kattintása"
+msgstr "Kattintás a kisalkalmazásra"
 
 #. settings-schema.json->sectionMenu->title
 msgid "Menu"
@@ -151,7 +151,7 @@ msgstr "Téma"
 
 #. settings-schema.json->update-refresh->description
 msgid "Minutes to wait before refreshing updates"
-msgstr "Percekig kell várni a frissítések frissítése előtt"
+msgstr "Várakozási idő a frissítések ellenőrzése előtt (perc)"
 
 #. settings-schema.json->show-firmware->description
 msgid "Show firmware updates"
@@ -159,32 +159,32 @@ msgstr "Firmware-frissítések megjelenítése"
 
 #. settings-schema.json->hide-applet->description
 msgid "Hide applet if there are no updates"
-msgstr "Rejtse el az kisalkalmazás, ha nincsenek frissítések"
+msgstr "Kisalkalmazás elrejtése, ha nincsenek frissítések"
 
 #. settings-schema.json->different-levels->description
 msgid "Show different applet icon for different updgradeable packages count"
 msgstr ""
-"Különböző kisalkalmazás ikonok megjelenítése a frissíthető csomagok számának "
+"Különböző kisalkalmazás-ikonok megjelenítése a frissíthető csomagok számának "
 "függvényében"
 
 #. settings-schema.json->level-1->description
 msgid "Show low level icon when updates count is between 0 and this value "
 msgstr ""
-"Alacsony szintű ikon megjelenítése, ha a frissítések száma 0 és ez az érték "
-"között van "
+"Alacsony szintű ikon megjelenítése, ha a frissítések száma 0 és ezen "
+"megadott érték között van "
 
 #. settings-schema.json->level-2->description
 msgid ""
-"Show medium level icon when updates count is between low level value and "
-"this value. Show high level icon if it's higher than this value."
+"Show medium level icon when updates count is between low level value and this "
+"value. Show high level icon if it's higher than this value."
 msgstr ""
 "Közepes szintű ikon megjelenítése, ha a frissítések száma az alacsony szintű "
-"érték és ez az érték között van. Magas szintű ikon megjelenítése, ha ennél "
-"az értéknél magasabb."
+"érték és ezen megadott érték között van. Magas szintű ikon megjelenítése, ha "
+"ennél az értéknél magasabb."
 
 #. settings-schema.json->show-label->description
 msgid "Show label with updates count"
-msgstr "Frissítések számával ellátott címke megjelenítése"
+msgstr "Címke megjelenítése a frissítések számával"
 
 #. settings-schema.json->label-font-size->description
 msgid "Label font size"
@@ -201,17 +201,18 @@ msgstr "Címke függőleges pozíciója"
 #. settings-schema.json->show-window-on-click->description
 msgid "Show updates window on left click and menu entries on right click"
 msgstr ""
-"Frissítési ablak megjelenítése bal kattintásra és menüelemek megjelenítése "
-"jobb kattintásra"
+"Bal egérgombbal a frissítések ablaka, jobb egérgombbal a menüpontok "
+"jelenjenek meg"
 
 #. settings-schema.json->refresh-when-no-updates->description
 msgid "Refresh updates list on left click if there are no updates"
 msgstr ""
-"Frissítse a frissítések listáját a bal gombbal, ha nincsenek frissítések"
+"Ha nincs frissítés, a bal egérgombbal kattintva frissüljön a frissítések "
+"listája"
 
 #. settings-schema.json->commandUpdate-show->description
 msgid "Show \"Check for new updates\" command"
-msgstr "Az „Új frissítések keresése” parancs megjelenítése"
+msgstr "„Új frissítések keresése” parancs megjelenítése"
 
 #. settings-schema.json->commandUpgrade-show->description
 msgid "Show \"Upgrade packages\" command"
@@ -219,11 +220,11 @@ msgstr "„Csomagok frissítése” parancs megjelenítése"
 
 #. settings-schema.json->commandUpgrade->description
 msgid "Upgrade packages command:"
-msgstr "Csomagok frissítése parancs:"
+msgstr "Parancs a csomagok frissítéséhez:"
 
 #. settings-schema.json->icon-style->description
 msgid "Icon style"
-msgstr "Ikon stílus"
+msgstr "Ikonstílus"
 
 #. settings-schema.json->icon-style->options
 msgid "dark"

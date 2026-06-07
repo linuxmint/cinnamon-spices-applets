@@ -166,5 +166,9 @@
   "starting-time-in-minutes": {
     "type": "generic",
     "default": 0
+  },
+  "old-idle-delay": {
+    "type": "generic",
+    "default": 0
   }
 }

@@ -188,7 +188,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
 
         if (this.applet.showOSD && (rounded_volume != Math.round(this.oldValue) || this.isMic)) {
             if (IS_OSD150_ENABLED())
-                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
+                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.applet.OSDhorizontal);
             else
                 Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level);
         }
@@ -350,9 +350,6 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         const cr = area.get_context();
         const themeNode = area.get_theme_node();
         var [width, height] = area.get_surface_size();
-        //~ global.log("width1: " + width);
-        //~ width = Math.trunc(width * this.applet.real_ui_scale);
-        //~ global.log("width2: " + width);
 
         const handleRadius = themeNode.get_length('-slider-handle-radius');
 

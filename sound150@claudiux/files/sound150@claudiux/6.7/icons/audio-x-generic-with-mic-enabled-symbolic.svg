@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   id="svg7384"
+   version="1.1"
+   height="16"
+   width="16.000002"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <metadata
+     id="metadata90">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Gnome Symbolic Icon Theme</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <title
+     id="title9167">Gnome Symbolic Icon Theme</title>
+  <defs
+     id="defs7386">
+    <linearGradient
+       xlink:href="#linearGradient3031"
+       id="linearGradient3033"
+       x1="-0.23810679"
+       y1="8"
+       x2="16.238132"
+       y2="8"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient3031">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop3029" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient3031"
+       id="linearGradient1279"
+       gradientUnits="userSpaceOnUse"
+       x1="-0.23810679"
+       y1="8"
+       x2="16.238132"
+       y2="8" />
+    <linearGradient
+       xlink:href="#linearGradient3031"
+       id="linearGradient1281"
+       gradientUnits="userSpaceOnUse"
+       x1="-0.23810679"
+       y1="8"
+       x2="16.238132"
+       y2="8" />
+  </defs>
+  <g
+     transform="translate(-482,-176)"
+     id="layer9"
+     style="display:inline" />
+  <g
+     transform="translate(-482,-176)"
+     id="layer10" />
+  <g
+     transform="translate(-482,-176)"
+     id="layer11" />
+  <g
+     transform="translate(-482,-176)"
+     id="layer12" />
+  <g
+     transform="translate(-482,-176)"
+     id="layer13">
+    <g
+       transform="translate(254.0002,-820)"
+       id="g40072" />
+    <path
+       style="display:inline;opacity:1;fill:#bebebe;fill-opacity:1;stroke:#4b4b4b;stroke-width:0;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 487,178 v 0.97461 1.02539 1 6.40234 A 2.5,2 0 0 0 485.5,187 a 2.5,2 0 0 0 -2.5,2 2.5,2 0 0 0 2.5,2 2.5,2 0 0 0 2.5,-2 v -8 h 7 v 5.40234 A 2.5,2 0 0 0 493.5,186 a 2.5,2 0 0 0 -2.5,2 2.5,2 0 0 0 2.5,2 2.5,2 0 0 0 2.5,-2 v -7 -1 -2 h -0.90039 z"
+       id="rect4067-4-5" />
+  </g>
+  <g
+     transform="translate(-482,-176)"
+     id="layer14" />
+  <g
+     transform="translate(-482,-176)"
+     id="layer15"
+     style="display:inline" />
+  <g
+     id="layer7"
+     class="success"
+     fill="#009909"
+     transform="matrix(1,0,0,0.976554,-0.05780475,5.821869)">
+    <path
+       id="path6332"
+       d="M 16.07655,5.006928 A 4.8579774,5.426724 0 0 1 11.220535,10.433651 4.8579774,5.426724 0 0 1 6.3605968,5.0113114 4.8579774,5.426724 0 0 1 11.212687,-0.41979201 4.8579774,5.426724 0 0 1 16.076544,4.9981611"
+       class="success" />
+  </g>
+  <g
+     fill="#2e3436"
+     id="g8"
+     transform="matrix(0.6,0,0,0.6,6.3858895,5.9433016)"
+     style="fill:#cccccc">
+    <path
+       transform="translate(-112,32)"
+       d="m 119,-19 v 3 h 2 v -3 z"
+       font-family="sans-serif"
+       font-weight="400"
+       overflow="visible"
+       style="font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#cccccc"
+       id="path2-3" />
+    <path
+       transform="translate(-112,32)"
+       d="m 120,-32 c 1.662,0 3,1.338 3,3 v 5 c 0,1.662 -1.338,3 -3,3 -1.662,0 -3,-1.338 -3,-3 v -5 c 0,-1.662 1.338,-3 3,-3 z"
+       id="path4-6"
+       style="fill:#cccccc" />
+    <path
+       transform="translate(-112,32)"
+       d="m 114,-26 v 2.0098 c 0,3.3066 2.6897,5.9902 6,5.9902 3.3103,0 6,-2.6837 6,-5.9902 V -26 h -1.5 v 2.0098 c 0,2.5001 -1.9933,4.4902 -4.5,4.4902 -2.5067,0 -4.5,-1.9901 -4.5,-4.4902 V -26 Z"
+       font-family="sans-serif"
+       font-weight="400"
+       overflow="visible"
+       style="font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#cccccc"
+       id="path6-7" />
+  </g>
+</svg>

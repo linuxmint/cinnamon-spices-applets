@@ -1,3 +1,52 @@
+### v16.4.0~20260529
+  * Ready for Linux Mint 23.
+
+### v16.3.4~20260504
+  * You can set the menu width using an option available in this applet's settings.
+  * Fixes [#8645](https://github.com/linuxmint/cinnamon-spices-applets/issues/8645)
+
+### v16.3.3~20260503
+  * Uses the wget method instead of the httpLib one to download certain cover art (Spotify).
+
+### v16.3.2~20260424
+  * Uses the httpLib method to download certain cover art.
+  * Prepares this applet for Linux Mint 23.
+
+### v16.3.1~20260420
+  * Max Volume fixed by user takes precedence on over-amplification setting.
+  * Fixes [#8567](https://github.com/linuxmint/cinnamon-spices-applets/issues/8567)
+
+### v16.3.0~20260419
+  * Sound tab in settings: Add button to open the settings of the OSD150@claudiux (v2+) extension when available.
+
+### v16.2.0~20260325
+  * Adds option "Apps Not to Display" in the Menu section of the General tab.
+  * Fixes [#8295](https://github.com/linuxmint/cinnamon-spices-applets/issues/8295)
+
+### v16.1.2~20260320
+  * Minor bug fixed.
+
+### v16.1.1~20260320
+  * Replaces the "Keep App selector open" option in the context menu with "Keep the App Volume Control open" in the main menu.
+
+### v16.1.0~20260318
+  * Application volume sliders are moved from the context menu to the main menu.
+  * Many improvements.
+  * Fixes [#8046](https://github.com/linuxmint/cinnamon-spices-applets/issues/8046)
+
+### v16.0.0~20260315
+  * The album cover is back!
+  * Fixes [#8383](https://github.com/linuxmint/cinnamon-spices-applets/issues/8383)
+
+### v15.0.1~20260222
+  * Improves asynchronous function calls.
+
+### v15.0.0~20260221
+  * Functional improvements.
+
+### v14.1.1~20260221
+  * Better management of label (on vertical panel).
+
 ### v14.1.0~20260212
   * Resize the menu by grabbing its edges with the mouse.
 

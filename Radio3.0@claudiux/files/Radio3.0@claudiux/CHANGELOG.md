@@ -1,3 +1,17 @@
+### v3.11.3~20260523
+  * Ready for Linux Mint 23.
+  * Fixes a bug in menu size.
+  * Fixes [#8687](https://github.com/linuxmint/cinnamon-spices-applets/issues/#8687).
+
+### v3.11.2~20260508
+  * Installing dependencies: Use pkgcli when available
+
+### v3.11.1~20260414
+  * Fixes certain dependency issues.
+
+### v3.11.0~20260221
+  * Smooth reading of certain files.
+
 ### v3.10.2~20260112
   * Repairs the "Configure..." menu for Cinnamon 6.6.
   * Adds the ability to set the width of the configuration window. See the Behavior tab.

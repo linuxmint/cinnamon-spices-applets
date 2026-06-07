@@ -5,14 +5,17 @@ An applet that sets brightness and gamma levels of a screen for Linux Mint Cinna
 * Set Brightness of the screen
 * Set Red-Green-Blue Gamma of the screen
 * Set Screen Temperature (K)
-* From Cinnamon 6.4: tooltip displaying current values, as well as sunrise and sunset times.
+* Tooltip displaying current values, as well as sunrise and sunset times.
+* Toggle on/off this applet middle-clicking on its icon.
+* Context menu gives you access to all the options.
 * Customizable:
- * Customize an icon shown in a panel
- * Show: all values, brightness or gamma (or screen temperature)
- * Set: minimum and maximum value thresholds
- * From Cinnamon 6.6: set screen temperature (in K)
- * From Cinnamon 6.4: disable Night Light Mode
- * From Cinnamon 6.4: set hotkeys to Increase/Decrease brightness
+ * Customize an icon shown in a panel.
+ * Show: all values, brightness or gamma (or screen temperature).
+ * Set: minimum and maximum value thresholds.
+ * From Cinnamon 6.6: set screen temperature (in K).
+ * From Cinnamon 6.6: can set all values to 100% when an application switches to full-screen mode. Useful for games and videos.
+ * From Cinnamon 6.4: disable Night Light Mode.
+ * From Cinnamon 6.4: set hotkeys to Increase/Decrease brightness.
  * From Cinnamon 6.4: take into account sunrise and sunset times.
  * From Cinnamon 6.4: take into account the connection/disconnection of monitors.
  * You can set *presets* with specific brightness and gamma (or screen temperature) values; you can also choose keyboard shortcuts to activate each preset.
@@ -65,6 +68,14 @@ An applet that sets brightness and gamma levels of a screen for Linux Mint Cinna
 
 1. Right click on the applet
 2. Select the *Reload* option. Wait 1 second.
+
+### To toggle on/off this applet
+
+* Right click on the applet and select "Toggle On / Off"
+
+or
+
+* Middle-click on the applet.
 
 
 

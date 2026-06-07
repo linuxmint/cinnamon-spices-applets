@@ -77,7 +77,9 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.baga_icon = "baga"; //"sun"; //"baga";
         this.set_applet_icon_name(this.baga_icon + "-on");
         this.settingsWindow = undefined;
-        
+
+        this.isInFullscreenMode = false;
+
         this._clipboard = St.Clipboard.get_default();
 
         this.bagaShortcuts = [];
@@ -224,7 +226,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
     _xrandr_version_satisfied() {
         return GLib.find_program_in_path(this.xrandr_name) != null;
     }
-    
+
     _check_xsct() {
         if (this.gamma_or_temp !== "temp") return true;
         let xsct_satisfied = this._xsct_available();
@@ -235,7 +237,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
         }
         return true;
     }
-    
+
     _xsct_available() {
         return GLib.find_program_in_path(this.xsct_name) != null;
     }
@@ -343,6 +345,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ["smooth_duration", null],
                         ["apply_startup", null],
                         ["apply_every", null],
+                        ["all100OnFullscreen", null],
                         ["apply_changing_monitors", null],
                         ["save_every", null],
                         ["update_scroll", null],
@@ -422,7 +425,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
             this.update_xrandr();
         }
     }
-    
+
     on_temp_range_changed() {
         let value = this.get_range_value(this.minimum_temp, this.maximum_temp, this.screen_temp);
         if (this.screen_temp != value) {
@@ -430,7 +433,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
             //~ this.set_screen_temp();
         }
     }
-    
+
     //~ set_screen_temp() {
         //~ global.log("set_screen_temp()");
     //~ }
@@ -636,6 +639,38 @@ class BrightnessAndGamma extends Applet.IconApplet {
     on_applet_clicked(event) {
         this.menu_sliders._init_items_presets();
         this.menu_sliders.toggle();
+        //~ global.log("Is fullscreen: " + this.is_fullscreen());
+    }
+
+    on_applet_middle_clicked(event) {
+        this.toggle_on_off_applet()
+    }
+
+    _check_fullscreen_mode() {
+        if (!this.all100OnFullscreen) return;
+        let fullscreen = this.is_fullscreen();
+        if (fullscreen === this.isInFullscreenMode) return;
+        if (fullscreen === true) {
+            //~ this.is_running = false;
+            //~ this.set_applet_icon_name(this.baga_icon + "-full");
+            this.brightness = 100;
+            if (this.useScreenTemp) {
+                this.screen_temp = 6500;
+                this.update_xsct();
+            } else {
+                this.gamma_red = 100;
+                this.gamma_green = 100;
+                this.gamma_blue = 100;
+                this.update_xrandr();
+            }
+            this.isInFullscreenMode = true;
+            this.save_last_values();
+        } else {
+            this.is_running = true;
+            this.isInFullscreenMode = false;
+            //~ this.set_applet_icon_name(this.baga_icon + "-on");
+            this.on_applet_added_to_panel();
+        }
     }
 
     // Override
@@ -647,6 +682,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this._applet_tooltip._tooltip.set_style('font-family: monospace;');
         this._check_sunrise_sunset(true);
         this.update_tooltip();
+        timeout_add_seconds(5, () => { this._check_fullscreen_mode(); return this.is_running; });
         timeout_add_seconds(900, () => { this._check_sunrise_sunset(); return this.is_running; });
         Main.layoutManager.connect('monitors-changed', () => { if (this.apply_changing_monitors) this.on_preset_reload_button_clicked(); });
     }
@@ -850,9 +886,9 @@ class BrightnessAndGamma extends Applet.IconApplet {
                 ) {
                     clearInterval(_interval);
                 }
-                
+
                 this.brightness += Math.sign(this.target_brightness - this.brightness);
-                
+
                 let diff_temp = this.target_temperature - this.screen_temp;
                 //~ global.log("diff_temp: " + diff_temp);
                 if (Math.abs(diff_temp) < 10)
@@ -863,7 +899,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                     this.screen_temp += 100 * Math.sign(diff_temp);
                 else
                     this.screen_temp += 1000 * Math.sign(diff_temp);
-                
+
                 this._needed_updates();
                 if (menuItem) {
                     menuItem.setOrnament(
@@ -885,12 +921,12 @@ class BrightnessAndGamma extends Applet.IconApplet {
                 ) {
                     clearInterval(_interval);
                 }
-    
+
                 this.brightness += Math.sign(this.target_brightness - this.brightness);
                 this.gamma_red += Math.sign(this.target_gamma_red - this.gamma_red);
                 this.gamma_green += Math.sign(this.target_gamma_green - this.gamma_green);
                 this.gamma_blue += Math.sign(this.target_gamma_blue - this.gamma_blue);
-    
+
                 this._needed_updates();
                 if (menuItem) {
                     menuItem.setOrnament(
@@ -904,15 +940,15 @@ class BrightnessAndGamma extends Applet.IconApplet {
             }, this.smooth_duration);
         }
     }
-    
+
     _translate_preset_names() {
         var new_preset_list = this.preset_list;
         for (let i=0; i < new_preset_list.length; i++) {
             let preset = new_preset_list[i];
             let name = preset["name"];
-            global.log("name: " + name + "(" + name.length + ") -> " + _(name));
+            //~ global.log("name: " + name + "(" + name.length + ") -> " + _(name));
             if (name.length > 0 && name != _(name)) {
-                global.log("Changing.");
+                //~ global.log("Changing.");
                 new_preset_list[i]["name"] = _(name);
             }
         }
@@ -921,9 +957,9 @@ class BrightnessAndGamma extends Applet.IconApplet {
         for (let i=0; i < new_preset_list.length; i++) {
             let preset = new_preset_list[i];
             let name = preset["name"];
-            global.log("name: " + name + " -> " + _(name));
+            //~ global.log("name: " + name + " -> " + _(name));
             if (name.length > 0 && name != _(name)) {
-                global.log("Changing.");
+                //~ global.log("Changing.");
                 new_preset_list[i]["name"] = _(name);
             }
         }
@@ -1157,7 +1193,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
         tips.push(" ".repeat(MAX_TR_LENGTH - TR_SUNRISE.length) + str_sunrise);
         let str_sunset = _("Sunset") + " " + this.frac_to_h_m(this.sunset);
         tips.push(" ".repeat(MAX_TR_LENGTH - TR_SUNSET.length) + str_sunset);
-        
+
         if (this.useScreenTemp) {
             for (let preset of this.preset_list_temp) {
                 if (this.brightness == preset["brightness"] &&
@@ -1181,7 +1217,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
         }
         this.set_applet_tooltip(tips.join("\n"), true);
     }
-    
+
     update_temperature(value) {
         this.screen_temp = value;
         this.update_xsct();
@@ -1234,7 +1270,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
             }
         }
     }
-    
+
     update_xsct() {
         let xsct_temp = this.screen_temp;
         let xsct_brightness = Math.min(this.brightness / 100, 1.0);
@@ -1296,12 +1332,22 @@ class BrightnessAndGamma extends Applet.IconApplet {
         return parameter;
     }
 
+    _get_number_of_monitors() {
+        let nMonitors = Main.layoutManager.monitors.length;
+        return nMonitors;
+    }
+
     _get_gamma_parameter() {
         let parameter_red = this._get_scaled_parameter(this.gamma_red);
         let parameter_green = this._get_scaled_parameter(this.gamma_green);
         let parameter_blue = this._get_scaled_parameter(this.gamma_blue);
         let parameter = parameter_red + this.gamma_separator + parameter_green + this.gamma_separator + parameter_blue;
         return parameter;
+    }
+
+    is_fullscreen() {
+        //~ global.log("this.panel.monitorIndex: " + this.panel.monitorIndex);
+        return global.display.get_monitor_in_fullscreen(this.panel.monitorIndex);
     }
 
     spawn_xrandr_process(argv) {
@@ -1384,7 +1430,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
             let output_indexes_string = this.output_indexes.join(this.output_indexes_separator);
             let row;
             if (this.useScreenTemp) {
-                row = new TempValues.TempLastValuesRow(this.screen_name, output_indexes_string, this.screen_temp);
+                row = new TempValues.TempLastValuesRow(this.screen_name, output_indexes_string, this.brightness, this.screen_temp);
                 this.last_values_string_temp = TempValues.to_csv_string_temp(row);
             } else {
                 row = new Values.LastValuesRow(this.screen_name, output_indexes_string, this.brightness,
@@ -1424,16 +1470,16 @@ class BrightnessAndGamma extends Applet.IconApplet {
                 if (preset.show && preset.start_at_sunrise) {
                     this.target_brightness = preset.brightness;
                     this.target_temperature = preset.temperature;
-                    
+
                     _interval = setInterval( () => {
                         if (this.target_brightness === this.brightness &&
                             this.target_temperature ===  this.screen_temp
                         ) {
                             clearInterval(_interval);
                         }
-    
+
                         this.brightness += Math.sign(this.target_brightness - this.brightness);
-                        
+
                         let diff_temp = this.target_temperature - this.screen_temp;
                         //~ global.log("diff_temp: " + diff_temp);
                         if (Math.abs(diff_temp) < 10)
@@ -1444,7 +1490,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                             this.screen_temp += 100 * Math.sign(diff_temp);
                         else
                             this.screen_temp += 1000 * Math.sign(diff_temp);
-    
+
                         this._needed_updates();
                     }, this.smooth_duration);
                     break;
@@ -1457,7 +1503,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                     this.target_gamma_blue = preset.gamma_blue;
                     this.target_gamma_green = preset.gamma_green;
                     this.target_gamma_red = preset.gamma_red;
-    
+
                     _interval = setInterval( () => {
                         if (this.target_brightness === this.brightness &&
                             this.target_gamma_red ===  this.gamma_red &&
@@ -1466,12 +1512,12 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ) {
                             clearInterval(_interval);
                         }
-    
+
                         this.brightness += Math.sign(this.target_brightness - this.brightness);
                         this.gamma_red += Math.sign(this.target_gamma_red - this.gamma_red);
                         this.gamma_green += Math.sign(this.target_gamma_green - this.gamma_green);
                         this.gamma_blue += Math.sign(this.target_gamma_blue - this.gamma_blue);
-    
+
                         this._needed_updates();
                     }, this.smooth_duration);
                     break;
@@ -1488,16 +1534,16 @@ class BrightnessAndGamma extends Applet.IconApplet {
                 if (preset.show && preset.start_at_sunset) {
                     this.target_brightness = preset.brightness;
                     this.target_temperature = preset.temperature;
-                    
+
                     _interval = setInterval( () => {
                         if (this.target_brightness === this.brightness &&
                             this.target_temperature ===  this.screen_temp
                         ) {
                             clearInterval(_interval);
                         }
-                        
+
                         this.brightness += Math.sign(this.target_brightness - this.brightness);
-                        
+
                         let diff_temp = this.target_temperature - this.screen_temp;
                         //~ global.log("diff_temp: " + diff_temp);
                         if (Math.abs(diff_temp) < 10)
@@ -1508,7 +1554,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                             this.screen_temp += 100 * Math.sign(diff_temp);
                         else
                             this.screen_temp += 1000 * Math.sign(diff_temp);
-                        
+
                         this._needed_updates();
                     }, this.smooth_duration);
                     break;
@@ -1521,7 +1567,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                     this.target_gamma_blue = preset.gamma_blue;
                     this.target_gamma_green = preset.gamma_green;
                     this.target_gamma_red = preset.gamma_red;
-    
+
                     _interval = setInterval( () => {
                         if (this.target_brightness === this.brightness &&
                             this.target_gamma_red ===  this.gamma_red &&
@@ -1530,12 +1576,12 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ) {
                             clearInterval(_interval);
                         }
-    
+
                         this.brightness += Math.sign(this.target_brightness - this.brightness);
                         this.gamma_red += Math.sign(this.target_gamma_red - this.gamma_red);
                         this.gamma_green += Math.sign(this.target_gamma_green - this.gamma_green);
                         this.gamma_blue += Math.sign(this.target_gamma_blue - this.gamma_blue);
-    
+
                         this._needed_updates();
                     }, this.smooth_duration);
                     break;
@@ -1558,7 +1604,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.update_tooltip();
         this._init_menu_item_presets();
     }
-    
+
     on_preset_copy_shortcut() {
         this._clipboard.set_text(St.ClipboardType.CLIPBOARD, this.preset_selected_keybind);
     }
@@ -1573,7 +1619,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
             Extension.reloadExtension(uuid, Extension.Type.APPLET);
         }, 1000);
     }
-    
+
     on_values_reload_button_clicked() {
         let to = setTimeout(() => {
             clearTimeout(to);
@@ -1626,7 +1672,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
     _removeEnlightenment() {
         this.highlight(false);
     }
-    
+
     get useScreenTemp() {
         return this.gamma_or_temp === "temp";
     }

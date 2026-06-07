@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-01-30 01:58-0100\n"
-"PO-Revision-Date: 2025-06-20 18:52+0200\n"
+"PO-Revision-Date: 2026-02-24 09:43+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #. 6.6/cassettoneNative.js:292 popup_menu.py:95
 msgid "Open Folder"
@@ -28,11 +28,11 @@ msgstr "Megnyitás terminálban"
 
 #. 6.6/cassettoneNative.js:540
 msgid "Empty or Access Denied"
-msgstr ""
+msgstr "Üres vagy Hozzáférés megtagadva"
 
 #. 6.6/cassettoneNative.js:602
 msgid "Empty"
-msgstr ""
+msgstr "Üres"
 
 #. metadata.json->name
 msgid "Directory Menu"
@@ -158,25 +158,27 @@ msgstr "Állítsa be a billentyűkombináció(ka)t a menü megjelenítéséhez."
 
 #. 6.6->settings-schema.json->menu-type->options
 msgid "Classic"
-msgstr ""
+msgstr "Klasszikus"
 
 #. 6.6->settings-schema.json->menu-type->options
 msgid "Native"
-msgstr ""
+msgstr "Natív"
 
 #. 6.6->settings-schema.json->menu-type->description
 msgid "Menu type"
-msgstr ""
+msgstr "Menü típusa"
 
 #. 6.6->settings-schema.json->menu-type->tooltip
 msgid ""
 "Classic uses a GTK-based menu, while Native uses Cinnamon's native popup "
 "menu."
 msgstr ""
+"A Klasszikus egy GTK-alapú menüt használ, míg a natív a Cinnamon natív "
+"felugró menüjét."
 
 #. 6.6->settings-schema.json->prefer-native-wayland->description
 msgid "Prefer native menu type on Wayland"
-msgstr ""
+msgstr "Natív menütípus előnyben részesítése a Waylandon"
 
 #. 6.6->settings-schema.json->prefer-native-wayland->tooltip
 msgid ""
@@ -184,3 +186,7 @@ msgid ""
 "The classic GTK-based menu has limitations on Wayland sessions due to "
 "restricted window positioning and focus handling in the protocol."
 msgstr ""
+"Automatikusan használja a natív menü implementációját Wayland alatt "
+"futtatva. A klasszikus GTK-alapú menü korlátozásokkal rendelkezik a Wayland "
+"munkamenetekben a protokollban korlátozott ablakpozicionálás és "
+"fókuszkezelés miatt."

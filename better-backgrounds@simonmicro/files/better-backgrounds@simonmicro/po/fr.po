@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# BETTER BACKGROUNDS
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# simonmicro, 2020
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-07 19:16+0000\n"
-"PO-Revision-Date: 2023-12-25 14:05+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-04-13 04:55+0100\n"
+"PO-Revision-Date: 2026-04-30 11:57+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -24,8 +25,8 @@ msgstr "Meilleurs fonds d'écrans"
 
 #. metadata.json->description
 msgid ""
-"Apply new backgrounds from Bing, Himawari 8, Picsum Photos, PlaceKitten.com, "
-"Unsplash.com or even whole websites - specify search tags, triggers and more!"
+"Apply new backgrounds from Bing, Himawari 8, Picsum Photos, or even whole "
+"websites"
 msgstr ""
 "Appliquez de nouveaux fonds d'écran à partir de Bing, Himawari 8, Picsum "
 "Photos, PlaceKitten.com, Unsplash.com ou même des sites Web entiers - "
@@ -46,8 +47,6 @@ msgstr "Source"
 
 #. settings-schema.json->pageResolution->title
 #. settings-schema.json->imageresbing->title
-#. settings-schema.json->imageresunsplash->title
-#. settings-schema.json->imageresplacekitten->title
 #. settings-schema.json->imageresplacecutycapt->title
 #. settings-schema.json->imagerespicsum->title
 #. settings-schema.json->imagereshimawari->title
@@ -70,10 +69,6 @@ msgstr "Effets d'image"
 msgid "Triggers"
 msgstr "Déclencheurs"
 
-#. settings-schema.json->imagetags->title
-msgid "Tags"
-msgstr "Mots-clés"
-
 #. settings-schema.json->imageapply->title
 msgid "Apply"
 msgstr "Appliquer"
@@ -95,16 +90,6 @@ msgid "Bad network? Faulty setup? The applet will notify you. Every time."
 msgstr ""
 "Mauvais réseau ? Configuration défectueuse ? L'applet vous en informera. A "
 "chaque fois."
-
-#. settings-schema.json->applet-info-issues->description
-msgid ""
-"You found a bug or want to suggest a missing feature? Just checkout the "
-"source code at https://github.com/simonmicro/better-backgrounds right over "
-"on Github!"
-msgstr ""
-"Vous avez trouvé un bug ou vous voulez suggérer une fonctionnalité "
-"manquante ? Consultez le code source à l'adresse https://github.com/"
-"simonmicro/better-backgrounds sur Github !"
 
 #. settings-schema.json->applet-store-location->description
 msgid "Picture save location"
@@ -196,7 +181,7 @@ msgid "None"
 msgstr "Aucun"
 
 #. settings-schema.json->image-source->description
-msgid "Image source"
+msgid "Image Source"
 msgstr "Source de l'image"
 
 #. settings-schema.json->image-source->options
@@ -212,16 +197,8 @@ msgid "Himawari 8"
 msgstr "Himawari 8"
 
 #. settings-schema.json->image-source->options
-msgid "Placekitten"
-msgstr "Placekitten"
-
-#. settings-schema.json->image-source->options
 msgid "Picsum Photos"
 msgstr "Picsum Photos"
-
-#. settings-schema.json->image-source->options
-msgid "Unsplash"
-msgstr "Unsplash"
 
 #. settings-schema.json->source-supports-info->description
 msgid ""
@@ -247,18 +224,6 @@ msgstr ""
 "Cette fonctionnalité utilise la commande \"montage\" du paquetage "
 "\"imagemagick\". Veuillez vous assurer que ce paquetage ou cette commande "
 "est installé(e)."
-
-#. settings-schema.json->source-warn-unsplash->description
-msgid ""
-"This source is known to cause trouble, especially during times of high "
-"demand. Please be patient and try again later if you experience problems. "
-"More information can be found at: https://status.unsplash.com/"
-msgstr ""
-"Cette source est connue pour causer des problèmes, en particulier pendant "
-"les périodes de forte demande. Veuillez faire preuve de patience et "
-"réessayer plus tard si vous rencontrez des problèmes. De plus amples "
-"informations sont disponibles à l'adresse suivante : https://status.unsplash."
-"com/"
 
 #. settings-schema.json->image-res-manual->description
 msgid "Use custom resolution"
@@ -288,14 +253,6 @@ msgstr "pixels"
 #. settings-schema.json->image-res-height->description
 msgid "Height"
 msgstr "Hauteur"
-
-#. settings-schema.json->image-tag->description
-msgid "Use own search tags"
-msgstr "Utiliser vos propres mots-clé de recherche"
-
-#. settings-schema.json->image-tag->tooltip
-msgid "Specify own tags to look for..."
-msgstr "Précisez vos propres mots-clé de recherche."
 
 #. settings-schema.json->image-res-himawari->description
 msgid ""
@@ -333,26 +290,6 @@ msgid "Sorry, the selected source does not support resolution modifiers."
 msgstr ""
 "Désolé, la source sélectionnée ne prend pas en charge les modificateurs de "
 "résolution."
-
-#. settings-schema.json->image-tag-info->description
-msgid ""
-"Please make sure to choose an available tag, otherwise the background can't "
-"be changed! Make sure to seperate the tags by a ',' and not spaces, also the "
-"tags are understood as AND - not as OR! A valid search term could be 'nature,"
-"water'..."
-msgstr ""
-"Veillez à choisir une balise disponible, sinon l'arrière-plan ne pourra pas "
-"être modifié ! Veillez à séparer les balises par un ',' et non par des "
-"espaces. Les balises sont également comprises comme AND - et non comme OR ! "
-"Un terme de recherche valide pourrait être 'nature,eau'..."
-
-#. settings-schema.json->image-tag-data->description
-msgid "Search tags"
-msgstr "Mots-clé de recherche"
-
-#. settings-schema.json->image-tag-data->tooltip
-msgid "Enter your topic filters"
-msgstr "Saisissez vos filtres thématiques"
 
 #. settings-schema.json->image-align-info->description
 msgid ""

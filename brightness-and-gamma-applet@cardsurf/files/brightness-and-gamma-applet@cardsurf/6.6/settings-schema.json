@@ -19,6 +19,7 @@
                 "disable_nightmode",
                 "apply_startup",
                 "apply_every",
+                "all100OnFullscreen",
                 "apply_changing_monitors",
                 "update_scroll",
                 "scroll_step",
@@ -109,6 +110,12 @@
         "step": 50,
         "show-value": true,
         "description": "Step duration (ms)"
+    },
+    "all100OnFullscreen" : {
+        "type" : "switch",
+        "default" : false,
+        "description": "Set all to 100% in full-screen mode",
+        "tooltip": "When an application switches to full-screen mode, all values are set to 100%. Useful for games and videos."
     },
     "apply_changing_monitors" : {
         "type" : "switch",
@@ -345,7 +352,7 @@
                 "show": true,
                 "brightness": 80,
                 "temperature": 4000,
-                "start_at_sunrise": false,
+                "start_at_sunrise": true,
                 "start_at_sunset": false
             },
             {
@@ -354,7 +361,7 @@
                 "brightness": 70,
                 "gamma_red": 2700,
                 "start_at_sunrise": false,
-                "start_at_sunset": false
+                "start_at_sunset": true
             }
         ]
     },
@@ -399,12 +406,12 @@
 
     "last_values_string_temp" : {
         "type": "generic",
-        "default" : ""
+        "default" : "Screen 0,0,100,6500"
     },
 
     "last_values_string" : {
         "type": "generic",
-        "default" : ""
+        "default" : "Screen 0,0,100,100,100,100"
     },
 
     "numberOfMonitors" : {

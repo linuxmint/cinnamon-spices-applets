@@ -58,6 +58,10 @@ To check if a spice with UUID satifies those requirements run the `validate-spic
 ./validate-spice UUID
 ```
 
+### AI-assisted coding
+
+All submissions may be subject to AI code review as well as human review. If you are 'coding' using an AI tool, it is highly recommended you use [our review agent's instructions](.github/copilot-instructions.md) as a context guide and perform your own code review based on it prior to submission. You, the human, should read it as well.
+
 ## Development
 
 To facilitate easier testing of Applets locally, run the `test-spice` script in this repo:

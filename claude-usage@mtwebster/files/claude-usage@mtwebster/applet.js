@@ -30,6 +30,7 @@ ClaudeUsageApplet.prototype = {
             this.settings = new Settings.AppletSettings(this, UUID, instance_id);
             this.settings.bind("update-interval", "updateInterval", this.onUpdateIntervalChanged.bind(this));
             this.settings.bind("credentials-path", "credentialsPath", this.onCredentialsPathChanged.bind(this));
+            this.settings.bind("last-api-call-time", "lastApiCallTime");
 
             this.credentials = null;
             this.tokenExpired = false;
@@ -63,11 +64,10 @@ ClaudeUsageApplet.prototype = {
 
             this.lastUpdateTime = null;
             this.updateTimer = 0;
+            this.initialFetch = true;
 
             this._setupFileMonitor();
             this._readCredentials();
-
-            this.startTimer();
         }
         catch (e) {
             this.handleError("Initialization failed: " + e);
@@ -122,7 +122,6 @@ ClaudeUsageApplet.prototype = {
                         global.log(UUID, "Loaded credentials");
                         this.tokenExpired = false;
                         this.startTimer();
-                        this.fetchUsageData();
                     } else {
                         throw new Error("Expected claudeAiOauth.accessToken");
                     }
@@ -160,13 +159,15 @@ ClaudeUsageApplet.prototype = {
             request.request_headers.append('anthropic-beta', 'oauth-2025-04-20');
             request.request_headers.append('Content-Type', 'application/json');
 
+            this.lastApiCallTime = GLib.get_real_time() / 1000000;
+
             this._httpSession.send_and_read_async(
                 request,
                 GLib.PRIORITY_DEFAULT,
                 null,
                 (session, result) => {
                     try {
-                        const status = request.get_status();
+                        const status = request.status_code;
                         if (status === 200) {
                             const bytes = this._httpSession.send_and_read_finish(result);
                             const data = JSON.parse(ByteArray.toString(bytes.get_data()));
@@ -186,6 +187,10 @@ ClaudeUsageApplet.prototype = {
                                 this.handleError("Got 403 Forbidden");
                                 this.set_applet_tooltip("Error: Access forbidden (403)");
                             }
+                        } else if (status === 429) {
+                            global.log(UUID, "Got 429 Too Many Requests, stopping timer.");
+                            this.stopTimer();
+                            this.handleError("Rate limited (429). Will retry at next interval.");
                         } else {
                             this.handleError("API request failed: HTTP " + status);
                         }
@@ -321,6 +326,13 @@ ClaudeUsageApplet.prototype = {
 
     updateLoop: function() {
         this.fetchUsageData();
+
+        if (this.initialFetch) {
+            this.initialFetch = false;
+            this.startTimer();
+            return GLib.SOURCE_REMOVE;
+        }
+
         return GLib.SOURCE_CONTINUE;
     },
 
@@ -334,8 +346,26 @@ ClaudeUsageApplet.prototype = {
     startTimer: function() {
         this.stopTimer();
 
-        const intervalSeconds = this.updateInterval * 60;
-        this.updateTimer = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, intervalSeconds, this.updateLoop.bind(this));
+        let intervalSeconds;
+        if (this.initialFetch && this.lastApiCallTime > 0) {
+            const nowSeconds = GLib.get_real_time() / 1000000;
+            const elapsed = nowSeconds - this.lastApiCallTime;
+            const remaining = (this.updateInterval * 60) - elapsed;
+            intervalSeconds = Math.max(Math.ceil(remaining), 0);
+        } else {
+            intervalSeconds = this.updateInterval * 60;
+        }
+
+        if (this.initialFetch && intervalSeconds === 0) {
+            this.updateLoop();
+        } else {
+            if (this.initialFetch) {
+                global.log(UUID, "Deferring first fetch by " + intervalSeconds + " seconds");
+            }
+            this.updateTimer = GLib.timeout_add_seconds(
+                GLib.PRIORITY_DEFAULT, intervalSeconds, this.updateLoop.bind(this)
+            );
+        }
     },
 
     onUpdateIntervalChanged: function() {
@@ -378,6 +408,7 @@ ClaudeUsageApplet.prototype = {
         if (this.tokenExpired) {
             this._readCredentials();
         } else {
+            this.initialFetch = false;
             this.fetchUsageData();
             this.startTimer();
         }
