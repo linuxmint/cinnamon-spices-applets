@@ -77,28 +77,29 @@ class AlwaysOn extends Applet.IconApplet {
     }
 
     _activateAlwaysOn() {
+        this._idleDimBat = giosettings.get_boolean('idle-dim-battery');
         if (this.idle_dim_battery_switch) {
-            this._idleDimBat = giosettings.get_boolean('idle-dim-battery');
             giosettings.set_boolean('idle-dim-battery', false);
         }
 
+        
+        this._sleepAcTime = giosettings.get_int('sleep-inactive-ac-timeout');
+        this._sleepBatTime = giosettings.get_int('sleep-inactive-battery-timeout');
         if (this.sleep_inactive_switch) {
-            this._sleepAcTime = giosettings.get_int('sleep-inactive-ac-timeout');
-            this._sleepBatTime = giosettings.get_int('sleep-inactive-battery-timeout');
             giosettings.set_int('sleep-inactive-ac-timeout', 0);
             giosettings.set_int('sleep-inactive-battery-timeout', 0);
         }
 
+        this._sleepDispAcTime = giosettings.get_int('sleep-display-ac');
+        this._sleepDispBatTime = giosettings.get_int('sleep-display-battery');
         if (this.sleep_display_switch) {
-            this._sleepDispAcTime = giosettings.get_int('sleep-display-ac');
-            this._sleepDispBatTime = giosettings.get_int('sleep-display-battery');
             giosettings.set_int('sleep-display-ac', 0);
             giosettings.set_int('sleep-display-battery', 0);
         }
 
+        this._lidCloseAcAction = giosettings.get_string('lid-close-ac-action');
+        this._lidCloseBatAction = giosettings.get_string('lid-close-battery-action');
         if (this.lid_close_action_switch) {
-            this._lidCloseAcAction = giosettings.get_string('lid-close-ac-action');
-            this._lidCloseBatAction = giosettings.get_string('lid-close-battery-action');
             giosettings.set_string('lid-close-ac-action', 'nothing');
             giosettings.set_string('lid-close-battery-action', 'nothing');
         }
