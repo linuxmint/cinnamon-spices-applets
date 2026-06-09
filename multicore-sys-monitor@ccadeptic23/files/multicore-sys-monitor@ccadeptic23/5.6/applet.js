@@ -215,6 +215,8 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
         this.settings.bind("isHighlighted", "isHighlighted");
         this.settings.bind("percentFontFactor", "percentFontFactor");
         this.settings.bind("flowFontFactor", "flowFontFactor");
+        this.settings.bind("Net_total1decimal", "Net_total1decimal");
+        this.settings.bind("Disk_speed1decimal", "Disk_speed1decimal");
         this.settings.bind("CPU_useProgressiveColors", "CPU_useProgressiveColors");
         this.settings.bind("CPU_byActivity", "CPU_byActivity", () => { this.on_CPU_byActivity_changed(); });
         this.settings.bind("Net_devicesList", "Net_devicesList");
