@@ -1,7 +1,6 @@
 const UUID = "cryptocoin@guantanamoe";
 
 const St = imports.gi.St;
-const Lang = imports.lang;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
 const GLib = imports.gi.GLib;
@@ -43,16 +42,16 @@ MyApplet.prototype = {
         this.menuManager.addMenu(this.menu);
 
         this.graph = new St.DrawingArea({reactive: false});
-        this.graph.connect('repaint', Lang.bind(this, this._drawGraph));
+        this.graph.connect('repaint', () => this._drawGraph());
         this.menu.addActor(this.graph); //TODO: Remove top/bottom margin
         this.graphData = {}
 
-        this.menu.connect('open-state-changed', Lang.bind(this, function(menu, isOpen) {
+        this.menu.connect('open-state-changed', (menu, isOpen) => {
             if (isOpen) {
                 this.graphData = {};
                 this._loadHistory(this.graph_unit, this.graph_length, this._parseGraphJSON);
             }
-        }));
+        });
 
         this.notificationSource = new MessageTray.SystemNotificationSource();
         Main.messageTray.add(this.notificationSource);
@@ -204,7 +203,7 @@ MyApplet.prototype = {
                 Data: mappedData
             };
 
-            Lang.bind(this, callback)(JSON.stringify(responseObj));
+            callback.call(this, JSON.stringify(responseObj));
         } catch (e) {
             global.logError('Error processing history data: ' + e);
         }
@@ -326,7 +325,7 @@ MyApplet.prototype = {
             this.rates_update_interval = 30;
         }
 
-        this._updateTimeout = Mainloop.timeout_add(this.rates_update_interval * 1000, Lang.bind(this, this._update_value));
+        this._updateTimeout = Mainloop.timeout_add(this.rates_update_interval * 1000, () => this._update_value());
     },
 
     _updateGraphSettings: function() {
@@ -352,7 +351,7 @@ MyApplet.prototype = {
             if (this._alertTimeout) {
                 Mainloop.source_remove(this._alertTimeout);
             }
-            this._alertTimeout = Mainloop.timeout_add(this.alert_delta_update_interval * 1000, Lang.bind(this, this._scheduleAlert));
+            this._alertTimeout = Mainloop.timeout_add(this.alert_delta_update_interval * 1000, () => this._scheduleAlert());
         }
     },
 
