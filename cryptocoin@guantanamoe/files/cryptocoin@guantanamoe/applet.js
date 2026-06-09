@@ -103,25 +103,110 @@ MyApplet.prototype = {
         this._update_settings();
     },
 
-    _loadHistory: function(unit, length, callback) {
-        let message = Soup.Message.new('GET', `https://min-api.cryptocompare.com/data/${unit}?fsym=${this.ticker}&tsym=${this.currency}&limit=${length}`);
-        if (Soup.MAJOR_VERSION == 2) {
+    _httpGet: function(url, callback) {
+        let message = Soup.Message.new('GET', url);
+        let userAgent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36';
+        if (Soup.MAJOR_VERSION === 2) {
+            message.request_headers.append('User-Agent', userAgent);
             this.httpSession.queue_message(message, (session, response) => {
                 if (response.status_code !== 200) {
-                    global.logWarning('Failure to receive valid response from remote api');
+                    callback(null, `HTTP Status ${response.status_code}`);
                 } else {
-                    Lang.bind(this, callback)(response.response_body.data);
+                    callback(response.response_body.data, null);
                 }
             });
         } else { //version 3
+            message.get_request_headers().append('User-Agent', userAgent);
             this.httpSession.send_and_read_async(message, Soup.MessagePriority.NORMAL, null, (session, response) => {
                 if (message.get_status() !== 200) {
-                    global.logWarning('Failure to receive valid response from remote api');
+                    callback(null, `HTTP Status ${message.get_status()}`);
                 } else {
-                    const bytes = this.httpSession.send_and_read_finish(response);
-                    Lang.bind(this, callback)(ByteArray.toString(bytes.get_data()));
+                    try {
+                        const bytes = session.send_and_read_finish(response);
+                        callback(ByteArray.toString(bytes.get_data()), null);
+                    } catch (e) {
+                        callback(null, e.toString());
+                    }
                 }
             });
+        }
+    },
+
+    _loadHistory: function(unit, length, callback) {
+        let granularity = 3600;
+        if (unit === 'histominute') {
+            granularity = 60;
+        } else if (unit === 'histoday') {
+            granularity = 86400;
+        }
+
+        let directCurrencies = ['USD', 'EUR', 'GBP'];
+        let useDirect = directCurrencies.indexOf(this.currency) !== -1;
+
+        if (useDirect) {
+            let url = `https://api.exchange.coinbase.com/products/${this.ticker}-${this.currency}/candles?granularity=${granularity}`;
+            this._httpGet(url, (data, error) => {
+                if (error || !data) {
+                    global.logWarning('Failure to receive valid response from remote api: ' + error);
+                } else {
+                    this._processHistoryData(data, 1.0, length, callback);
+                }
+            });
+        } else {
+            let spotUrl = `https://api.coinbase.com/v2/prices/${this.ticker}-USD/spot`;
+            this._httpGet(spotUrl, (spotData, spotError) => {
+                if (spotError || !spotData) {
+                    global.logWarning('Failure to receive spot price for scaling history: ' + spotError);
+                } else {
+                    try {
+                        let spotRes = JSON.parse(spotData);
+                        let spotUSD = parseFloat(spotRes.data.amount);
+                        let currentPrice = this.value || spotUSD;
+                        let scale = spotUSD > 0 ? (currentPrice / spotUSD) : 1.0;
+
+                        let url = `https://api.exchange.coinbase.com/products/${this.ticker}-USD/candles?granularity=${granularity}`;
+                        this._httpGet(url, (candlesData, candlesError) => {
+                            if (candlesError || !candlesData) {
+                                global.logWarning('Failure to receive valid response from remote api: ' + candlesError);
+                            } else {
+                                this._processHistoryData(candlesData, scale, length, callback);
+                            }
+                        });
+                    } catch (e) {
+                        global.logError('Error parsing spot price JSON: ' + e);
+                    }
+                }
+            });
+        }
+    },
+
+    _processHistoryData: function(rawData, scale, length, callback) {
+        try {
+            let candles = JSON.parse(rawData);
+            if (!Array.isArray(candles)) {
+                throw new Error("Candles response is not an array");
+            }
+            candles = candles.slice(0, length);
+            candles.reverse();
+
+            let mappedData = candles.map(c => {
+                return {
+                    time: c[0],
+                    low: c[1] * scale,
+                    high: c[2] * scale,
+                    open: c[3] * scale,
+                    close: c[4] * scale
+                };
+            });
+
+            let responseObj = {
+                Response: "Success",
+                Data: mappedData
+            };
+
+            Lang.bind(this, callback)(JSON.stringify(responseObj));
+        } catch (e) {
+            global.logError('Error processing history data: ' + e);
         }
     },
 
@@ -232,7 +317,7 @@ MyApplet.prototype = {
     },
 
     _update_value: function () {
-        this._loadTrackers(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${this.ticker}&tsyms=${this.currency}`);
+        this._loadTrackers(`https://api.coinbase.com/v2/prices/${this.ticker}-${this.currency}/spot`);
         if (this._updateTimeout) {
             Mainloop.source_remove(this._updateTimeout);
         }
@@ -284,12 +369,18 @@ MyApplet.prototype = {
     },
 
     _parseJSON: function (data) {
-        const response = Json.json_parse(data, null);
-        if (response.hasOwnProperty('Response') && response['Response'] === 'Error') {
+        try {
+            const response = JSON.parse(data);
+            if (response && response.data && response.data.amount) {
+                let val = parseFloat(response.data.amount);
+                this._updateValue(val);
+            } else {
+                this.set_applet_label('Error loading prices...');
+                global.logError("Error response from Coinbase API: " + data);
+            }
+        } catch (e) {
             this.set_applet_label('Error loading prices...');
-            global.logError(response.Message);
-        } else {
-            this._updateValue(response[this.ticker][this.currency]);
+            global.logError("Error parsing price response: " + e);
         }
     },
 
@@ -381,28 +472,14 @@ MyApplet.prototype = {
     },
 
     _loadTrackers: function(url) {
-        let this_ = this;
-        let message = Soup.Message.new('GET', url);
-        if (Soup.MAJOR_VERSION === 2) {
-            this.httpSession.queue_message(message, (session, response) => {
-                if (response.status_code !== 200) {
-                    this.set_applet_label('Loading...');
-                    global.logWarning('Failure to receive valid response from remote api');
-                } else {
-                    this._parseJSON(response.response_body.data);
-                }
-            });
-        } else { //version 3
-            this.httpSession.send_and_read_async(message, Soup.MessagePriority.NORMAL, null, (session, response) => {
-                if (message.get_status() !== 200) {
-                    this.set_applet_label('Loading...');
-                    global.logWarning('Failure to receive valid response from remote api');
-                } else {
-                    const bytes = session.send_and_read_finish(response);
-                    this._parseJSON(ByteArray.toString(bytes.get_data()));
-                }
-            });
-        }
+        this._httpGet(url, (data, error) => {
+            if (error || !data) {
+                this.set_applet_label('Loading...');
+                global.logWarning('Failure to receive valid response from remote api: ' + error);
+            } else {
+                this._parseJSON(data);
+            }
+        });
     },
 
     _loadIcon: function() {
@@ -411,50 +488,16 @@ MyApplet.prototype = {
             return;
         }
 
-        let this_ = this;
-        let message = Soup.Message.new('GET', 'https://min-api.cryptocompare.com/data/all/coinlist');
-        if (Soup.MAJOR_VERSION === 2) {
-            this.httpSession.queue_message(message, (session, response) => {
-                if (response.status_code !== 200) {
-                    this.hide_applet_icon();
-                    global.logWarning('Failure to receive valid response from remote api');
-                } else {
-                    this._parseIconJSON(response.response_body.data);
-                }
-            });
-        } else { //version 3
-            this.httpSession.send_and_read_async(message, Soup.MessagePriority.NORMAL, null, (session, response) => {
-                if (message.get_status() !== 200) {
-                    this.hide_applet_icon();
-                    global.logWarning('Failure to receive valid response from remote api');
-                } else {
-                    const bytes = session.send_and_read_finish(response);
-                    this._parseIconJSON(ByteArray.toString(bytes.get_data()));
-                }
-            });
-        }
-
-    },
-
-    _parseIconJSON: function (data) {
-        const response = Json.json_parse(data, null);
-        if (response.hasOwnProperty('Response') && response['Response'] === 'Error') {
+        try {
+            let iconUrl = `https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/${this.ticker.toLowerCase()}.png`;
+            let iconFile = Gio.file_new_for_uri(iconUrl);
+            let gicon = new Gio.FileIcon({ file: iconFile });
+            if (this._applet_icon_box.child) this._applet_icon_box.child.destroy();
+            this._applet_icon = new St.Icon({gicon, style_class: "applet-icon"});
+            this._applet_icon_box.child = this._applet_icon;
+        } catch (e) {
             this.hide_applet_icon();
-            global.logError(response.Message);
-        } else {
-            if (response.hasOwnProperty('Data') && 
-                response.Data.hasOwnProperty(this.ticker) &&
-                response.Data[this.ticker].hasOwnProperty('ImageUrl')) {
-                let iconPath = response.Data[this.ticker].ImageUrl;
-                let iconFile = Gio.file_new_for_uri(`https://www.cryptocompare.com${iconPath}`);
-                let gicon = new Gio.FileIcon({ file: iconFile });
-                if (this._applet_icon_box.child) this._applet_icon_box.child.destroy();
-                this._applet_icon = new St.Icon({gicon, style_class: "applet-icon"});
-                this._applet_icon_box.child = this._applet_icon;
-            } else {
-                this.hide_applet_icon();
-                global.logWarning('Missing icon URL');
-            }
+            global.logWarning('Error loading icon: ' + e);
         }
     },
 
