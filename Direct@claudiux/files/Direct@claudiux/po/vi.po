@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Direct@claudiux 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-01-07 23:43+0100\n"
+"POT-Creation-Date: 2026-03-29 12:10+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -18,77 +18,77 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:46 applet.js:654
-msgid "SYSTEM"
-msgstr "HỆ THỐNG"
-
-#. applet.js:46 applet.js:694
-msgid "FAVORITES"
-msgstr "YÊU THÍCH"
-
-#. applet.js:46 applet.js:725
-msgid "APPLICATIONS"
-msgstr ""
-
-#. applet.js:46 applet.js:756
-msgid "RECENT DOCUMENTS"
-msgstr "TÀI LIỆU GẦN ĐÂY"
-
-#. applet.js:46 applet.js:800
-msgid "CUSTOM"
-msgstr ""
-
-#. applet.js:189
+#. applet.js:190
 msgid "(Right click to open folder)"
 msgstr "(Nhấn chuột phải để mở thư mục)"
 
 #. metadata.json->name
-#. applet.js:317
+#. applet.js:323
 msgid "Direct"
 msgstr "Truy Cập Nhanh"
 
-#. applet.js:624
+#. applet.js:631
 msgid "Search Home Folder"
 msgstr "Tìm trong Thư mục Cá nhân"
 
-#. applet.js:631 applet.js:671 applet.js:702 applet.js:733 applet.js:764
-#. applet.js:808
+#. applet.js:638 applet.js:678 applet.js:709 applet.js:740 applet.js:771
+#. applet.js:815
 msgid "Configure"
 msgstr ""
 
-#. applet.js:664
+#. applet.js:661
+msgid "SYSTEM"
+msgstr "HỆ THỐNG"
+
+#. applet.js:671
 msgid "Search File System"
 msgstr "Tìm trong Hệ thống tập tin"
 
-#. applet.js:778
+#. applet.js:701
+msgid "FAVORITES"
+msgstr "YÊU THÍCH"
+
+#. applet.js:732
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:763
+msgid "RECENT DOCUMENTS"
+msgstr "TÀI LIỆU GẦN ĐÂY"
+
+#. applet.js:785
 msgid "Clear"
 msgstr "Xóa"
 
-#. applet.js:785
+#. applet.js:792
 msgid "Recent"
 msgstr "Gần đây"
 
-#. applet.js:862
+#. applet.js:807
+msgid "CUSTOM"
+msgstr ""
+
+#. applet.js:869
 msgid "Computer"
 msgstr "Máy tính"
 
-#. applet.js:868
+#. applet.js:875
 msgid "File System"
 msgstr "Hệ thống tập tin"
 
-#. applet.js:885
+#. applet.js:892
 msgid "Network"
 msgstr "Mạng"
 
-#. applet.js:900
+#. applet.js:908
 msgid "Logout"
 msgstr ""
 
-#. applet.js:907
+#. applet.js:915
 msgid "Quit"
 msgstr ""
 
-#. applet.js:1215
+#. applet.js:1224
 msgid "Trash"
 msgstr "Thùng rác"
 
@@ -389,6 +389,10 @@ msgstr "Chỉ hiển thị ổ đĩa đã gắn kết"
 #. settings-schema.json->showNetwork->description
 msgid "Show network"
 msgstr "Hiển thị Mạng"
+
+#. settings-schema.json->showSession->description
+msgid "Show Logout and Quit"
+msgstr ""
 
 #. settings-schema.json->showFavorites->description
 msgid "Show favorite documents"

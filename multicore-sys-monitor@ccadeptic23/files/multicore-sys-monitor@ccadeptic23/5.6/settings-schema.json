@@ -8,6 +8,7 @@
       "pageNetwork",
       "pageDisk",
       "pageDiskUsage",
+      "pageBattery",
       "pageColors"
     ],
     "pageGeneral": {
@@ -17,7 +18,8 @@
         "sectionGeneralOptions",
         "sectionGeneralOrder",
         "sectionGeneralColors",
-        "sectionTooltip"
+        "sectionTooltip",
+        "sectionTooltipCustomTranslations"
       ]
     },
     "pageCPU": {
@@ -25,9 +27,11 @@
       "title": "CPU",
       "sections": [
         "sectionCPUOptions",
+        "sectionCPULabel",
         "sectionCPUColors",
         "sectionCPUColorsByActivity",
-        "sectionCPUTemperature"
+        "sectionCPUTemperature",
+        "sectionCPULoadAverage"
       ]
     },
     "pageMem": {
@@ -35,6 +39,7 @@
       "title": "Memory",
       "sections": [
         "sectionMemoryOptions",
+        "sectionMemoryLabel",
         "sectionMemoryColors"
       ]
     },
@@ -43,6 +48,7 @@
       "title": "Network",
       "sections": [
         "sectionNetworkOptions",
+        "sectionNetworkLabel",
         "sectionNetworkScaling",
         "sectionNetworkTooltip",
         "sectionNetworkDevices",
@@ -54,9 +60,11 @@
       "title": "Disk IO",
       "sections": [
         "sectionDiskOptions",
+        "sectionDiskLabel",
         "sectionDiskScaling",
         "sectionDiskTooltip",
-        "sectionDiskDevices"
+        "sectionDiskDevices",
+        "sectionDiskSpeed"
       ]
     },
     "pageDiskUsage": {
@@ -64,8 +72,19 @@
       "title": "Disk Usage",
       "sections": [
         "sectionDiskUsageOptions",
+        "sectionDiskUsageLabel",
         "sectionDiskUsageColors",
         "sectionDiskUsagePaths"
+      ]
+    },
+    "pageBattery": {
+      "type": "page",
+      "title": "Battery",
+      "sections": [
+        "sectionBatteryOptions",
+        "sectionBatteryLabel",
+        "sectionBatteryColors",
+        "sectionBatteryPaths"
       ]
     },
     "pageColors": {
@@ -87,6 +106,8 @@
         "graphStepApply",
         "graphSpacing",
         "thickness",
+        "ledForCurves",
+        "ledLocation",
         "useIconSize",
         "graphHeightPercent",
         "refreshRate"
@@ -114,7 +135,34 @@
       "type": "section",
       "title": "Tooltip",
       "keys": [
-        "percentAtEndOfLine"
+        "quickTooltip",
+        "percentAtEndOfLine",
+        "tooltipFontSize",
+        "tooltipChangeBackgroundColor",
+        "tooltipBackgroundColor",
+        "RefreshAll_btn"
+      ]
+    },
+    "sectionTooltipCustomTranslations": {
+      "type": "section",
+      "title": "Custom translations in tooltip",
+      "keys": [
+        "tooltipCustomTranslationsLabel",
+        "tooltipCPUsUseCustomTranslation",
+        "tooltipCPUsCustomTranslation",
+        "tooltipMemoryUseCustomTranslation",
+        "tooltipMemoryCustomTranslation",
+        "tooltipSwapUseCustomTranslation",
+        "tooltipSwapCustomTranslation",
+        "tooltipNetworksUseCustomTranslation",
+        "tooltipNetworksCustomTranslation",
+        "tooltipDisksUseCustomTranslation",
+        "tooltipDisksCustomTranslation",
+        "tooltipUsageUseCustomTranslation",
+        "tooltipUsageCustomTranslation",
+        "tooltipBatteryUseCustomTranslation",
+        "tooltipBatteryCustomTranslation",
+        "emojidb_btn"
       ]
     },
     "sectionCPUOptions": {
@@ -122,10 +170,11 @@
       "title": "Options",
       "keys": [
         "CPU_enabled",
-        "CPU_labelOn",
+        "CPU_enabledTooltip",
         "CPU_squared",
         "CPU_width",
         "CPU_mergeAll",
+        "CPU_groupInSetsOf4",
         "CPU_ignoreHyperthreading",
         "CPU_showLoadOverTime",
         "CPU_showLoadOverTimeHowManyBars",
@@ -138,6 +187,8 @@
       "title": "CPU Temperature",
       "keys": [
         "CPU_showTemp",
+        "CPU_showTempUnit",
+        "CPU_temp_hovering_only",
         "CPU_tempInFahrenheit",
         "CPU_tempPath",
         "CPU_tempHigh",
@@ -145,8 +196,37 @@
         "CPU_tempColor",
         "CPU_tempColorHigh",
         "CPU_tempColorCrit",
-        "CPU_tempCorner"
+        "CPU_tempCorner",
+        "CPU_tempFontFactor"
       ]
+    },
+    "sectionCPULoadAverage": {
+      "type": "section",
+      "title": "Average Load",
+      "keys": [
+        "CPU_showLoadAverage",
+        "CPU_loadAverage_hovering_only",
+        "CPU_loadAverageHigh",
+        "CPU_loadAverageCrit",
+        "CPU_loadAverageColor",
+        "CPU_loadAverageColorHigh",
+        "CPU_loadAverageColorCrit",
+        "CPU_loadAverageCorner",
+        "CPU_loadAverageFontFactor"
+      ]
+    },
+    "sectionCPULabel": {
+      "type": "section",
+      "title": "Label",
+      "keys": [
+        "CPU_labelOn",
+        "CPU_labelForeground",
+        "CPU_labelPos",
+        "CPU_labelZoom",
+        "CPU_labelCustomized",
+        "CPU_labelCustom"
+      ],
+      "dependency": "labelsOn"
     },
     "sectionCPUColors": {
       "type": "section",
@@ -177,15 +257,34 @@
       "title": "Options",
       "keys": [
         "Mem_enabled",
+        "Mem_onlyUsedAvailable",
+        "Mem_enabledTooltip",
+        "Mem_enabledBufferCacheSharedTooltip",
         "Swap_enabled",
-        "Mem_labelOn",
+        "Swap_enabledTooltip",
         "Mem_method",
         "Mem_squared",
         "Mem_width",
         "Mem_chartType",
         "Mem_startAt12Oclock",
-        "Mem_showBytesInTooltip"
+        "Mem_showBytesInTooltip",
+        "Mem_value_display",
+        "Mem_valueCorner",
+        "percentFontFactor"
       ]
+    },
+    "sectionMemoryLabel": {
+      "type": "section",
+      "title": "Label",
+      "keys": [
+        "Mem_labelOn",
+        "Mem_labelForeground",
+        "Mem_labelPos",
+        "Mem_labelZoom",
+        "Mem_labelCustomized",
+        "Mem_labelCustom"
+      ],
+      "dependency": "labelsOn"
     },
     "sectionMemoryColors": {
       "type": "section",
@@ -204,24 +303,39 @@
       "title": "Options",
       "keys": [
         "Net_enabled",
-        "Net_labelOn",
         "Net_squared",
         "Net_width",
-        "Net_mergeAll"
+        "Net_mergeAll",
+        "Net_typeOfGraph"
       ]
+    },
+    "sectionNetworkLabel": {
+      "type": "section",
+      "title": "Label",
+      "keys": [
+        "Net_labelOn",
+        "Net_labelForeground",
+        "Net_labelPos",
+        "Net_labelZoom",
+        "Net_labelCustomized",
+        "Net_labelCustom"
+      ],
+      "dependency": "labelsOn"
     },
     "sectionNetworkScaling": {
       "type": "section",
       "title": "Scaling",
       "keys": [
         "Net_autoscale",
-        "Net_logscale"
+        "Net_logscale",
+        "Net_minPrefix"
       ]
     },
     "sectionNetworkTooltip": {
       "type": "section",
       "title": "Tooltip",
       "keys": [
+        "Net_enabledTooltip",
         "Net_symbolsInTooltip"
       ]
     },
@@ -243,7 +357,9 @@
         "Net_total_type",
         "Net_total_display",
         "Net_total_hovering_only",
-        "Net_totalCorner"
+        "Net_totalCorner",
+        "Net_total1decimal",
+        "flowFontFactor"
       ]
     },
     "sectionDiskOptions": {
@@ -251,18 +367,33 @@
       "title": "Options",
       "keys": [
         "Disk_enabled",
-        "Disk_labelOn",
+        "Disk_enabledTooltip",
         "Disk_squared",
         "Disk_width",
-        "Disk_mergeAll"
+        "Disk_mergeAll",
+        "Disk_typeOfGraph"
       ]
+    },
+    "sectionDiskLabel": {
+      "type": "section",
+      "title": "Label",
+      "keys": [
+        "Disk_labelOn",
+        "Disk_labelForeground",
+        "Disk_labelPos",
+        "Disk_labelZoom",
+        "Disk_labelCustomized",
+        "Disk_labelCustom"
+      ],
+      "dependency": "labelsOn"
     },
     "sectionDiskScaling": {
       "type": "section",
       "title": "Scaling",
       "keys": [
         "Disk_autoscale",
-        "Disk_logscale"
+        "Disk_logscale",
+        "Disk_minPrefix"
       ]
     },
     "sectionDiskTooltip": {
@@ -288,11 +419,27 @@
       "title": "Options",
       "keys": [
         "DiskUsage_enabled",
-        "DiskUsage_labelOn",
+        "DiskUsage_enabledTooltip",
         "DiskUsage_squared",
         "DiskUsage_width",
-        "DiskUsage_mergeAll"
+        "DiskUsage_mergeAll",
+        "DiskUsage_value_display",
+        "DiskUsage_valueCorner",
+        "percentFontFactor"
       ]
+    },
+    "sectionDiskUsageLabel": {
+      "type": "section",
+      "title": "Label",
+      "keys": [
+        "DiskUsage_labelOn",
+        "DiskUsage_labelForeground",
+        "DiskUsage_labelPos",
+        "DiskUsage_labelZoom",
+        "DiskUsage_labelCustomized",
+        "DiskUsage_labelCustom"
+      ],
+      "dependency": "labelsOn"
     },
     "sectionDiskUsageColors": {
       "type": "section",
@@ -309,6 +456,64 @@
       "keys": [
         "DiskUsage_getpathlist_btn",
         "DiskUsage_pathList"
+      ]
+    },
+    "sectionDiskSpeed": {
+      "type": "section",
+      "title": "Instant speed",
+      "keys": [
+        "Disk_speed_display",
+        "Disk_speed_hovering_only",
+        "Disk_speedCorner",
+        "Disk_speed1decimal",
+        "flowFontFactor"
+      ]
+    },
+    "sectionBatteryOptions": {
+      "type": "section",
+      "title": "Options",
+      "keys": [
+        "Battery_enabled",
+        "Battery_enabledTooltip",
+        "Battery_squared",
+        "Battery_width",
+        "Battery_mergeAll",
+        "Battery_value_display",
+        "Battery_valueCorner",
+        "percentFontFactor"
+      ]
+    },
+    "sectionBatteryLabel": {
+      "type": "section",
+      "title": "Label",
+      "keys": [
+        "Battery_labelOn",
+        "Battery_labelForeground",
+        "Battery_labelPos",
+        "Battery_labelZoom",
+        "Battery_labelCustomized",
+        "Battery_labelCustom"
+      ],
+      "dependency": "labelsOn"
+    },
+    "sectionBatteryColors": {
+      "type": "section",
+      "title": "Colors",
+      "keys": [
+        "Battery_colorLoad",
+        "Battery_colorUnload",
+        "Battery_colorAlert"
+      ]
+    },
+    "sectionBatteryPaths": {
+      "type": "section",
+      "title": "Paths",
+      "keys": [
+        "labelWarning",
+        "Battery_getdevlist_btn",
+        "Battery_devicesList",
+        "Battery_cleardevlist_btn",
+        "RefreshAll_btn"
       ]
     },
     "sectionColors": {
@@ -406,6 +611,25 @@
     "step": 1,
     "show-value": true
   },
+  "ledForCurves": {
+    "type": "combobox",
+    "default": "●",
+    "description": "Led for curves",
+    "options": {
+      "●": "●",
+      "⬤": "⬤",
+      "◉": "◉"
+    }
+  },
+  "ledLocation": {
+    "type": "combobox",
+    "default": "LO",
+    "description": "Led location",
+    "options": {
+      "Left": "LO",
+      "Right": "RO"
+    }
+  },
   "useIconSize": {
     "type": "switch",
     "default": false,
@@ -450,10 +674,123 @@
     "default": "rgba(48, 48, 48, 0.1)",
     "description": "Background Color"
   },
+  "quickTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the tooltip immediately"
+  },
   "percentAtEndOfLine": {
     "type": "switch",
     "default": false,
     "description": "Place % at the very end of the line"
+  },
+  "tooltipFontSize": {
+    "type": "scale",
+    "default": 16,
+    "min": 8,
+    "max": 35,
+    "step": 1,
+    "description": "Font size (px)"
+  },
+  "tooltipChangeBackgroundColor": {
+    "type": "switch",
+    "default": false,
+    "description": "Change Tooltip Background Color",
+    "tooltip": "Uncheck this box to use the Tooltip Background Color defined by the theme."
+  },
+  "tooltipBackgroundColor": {
+    "type": "colorchooser",
+    "default": "rgba(106, 109, 116, 0.95)",
+    "description": "Tooltip Background Color",
+    "dependency": "tooltipChangeBackgroundColor"
+  },
+  "widthWhithoutAnyGraph": {
+    "type": "scale",
+    "default": 40,
+    "min": 20,
+    "max": 80,
+    "step": 5,
+    "description": "Width when no graph is displayed (px)",
+    "tooltip": "This is useful for preventing the tooltip from disappearing too soon when you move the pointer.\nRefresh All after making changes."
+  },
+  "tooltipCustomTranslationsLabel": {
+    "type": "label",
+    "description": "You can use your own translations, or emojis, to replace words in the tooltip."
+  },
+  "tooltipCPUsUseCustomTranslation": {
+    "type": "switch",
+    "default": false,
+    "description": "Change translation for CPUs"
+  },
+  "tooltipCPUsCustomTranslation": {
+    "type": "entry",
+    "default": "𝄜",
+    "description": "CPUs becomes:"
+  },
+  "tooltipMemoryUseCustomTranslation": {
+    "type": "switch",
+    "default": false,
+    "description": "Change translation for Memory"
+  },
+  "tooltipMemoryCustomTranslation": {
+    "type": "entry",
+    "default": "𖡎",
+    "description": "Memory becomes:"
+  },
+  "tooltipSwapUseCustomTranslation": {
+    "type": "switch",
+    "default": false,
+    "description": "Change translation for Swap"
+  },
+  "tooltipSwapCustomTranslation": {
+    "type": "entry",
+    "default": "⇄",
+    "description": "Swap becomes:"
+  },
+  "tooltipNetworksUseCustomTranslation": {
+    "type": "switch",
+    "default": false,
+    "description": "Change translation for Networks"
+  },
+  "tooltipNetworksCustomTranslation": {
+    "type": "entry",
+    "default": "🖧",
+    "description": "Networks becomes:"
+  },
+  "tooltipDisksUseCustomTranslation": {
+    "type": "switch",
+    "default": false,
+    "description": "Change translation for Disks"
+  },
+  "tooltipDisksCustomTranslation": {
+    "type": "entry",
+    "default": "⛁",
+    "description": "Disks becomes:"
+  },
+  "tooltipUsageUseCustomTranslation": {
+    "type": "switch",
+    "default": false,
+    "description": "Change translation for Usage"
+  },
+  "tooltipUsageCustomTranslation": {
+    "type": "entry",
+    "default": "⛁",
+    "description": "Usage becomes:"
+  },
+  "tooltipBatteryUseCustomTranslation": {
+    "type": "switch",
+    "default": false,
+    "description": "Change translation for Battery"
+  },
+  "tooltipBatteryCustomTranslation": {
+    "type": "entry",
+    "default": "🗲",
+    "description": "Battery becomes:"
+  },
+  "emojidb_btn": {
+    "type": "button",
+    "description": "Open emoji database",
+    "callback": "openEmojiDB"
   },
   "removeEnlightenment": {
     "type": "button",
@@ -501,11 +838,51 @@
     "default": true,
     "description": "Enable"
   },
+  "CPU_enabledTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable Tooltip"
+  },
   "CPU_labelOn": {
     "type": "switch",
     "default": true,
-    "description": "Label",
-    "dependency": "labelsOn"
+    "description": "Display this label"
+  },
+  "CPU_labelForeground": {
+    "type": "switch",
+    "default": true,
+    "description": "Bring this label to the foreground"
+  },
+  "CPU_labelPos": {
+    "type": "scale",
+    "default": 0,
+    "description": "Vertical position offset (pixels)",
+    "min": -20,
+    "max": 20,
+    "step": 1,
+    "tooltip": "Negative: to the top.\nPositive: to the bottom."
+  },
+  "CPU_labelZoom": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Label zoom",
+    "options": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4
+    }
+  },
+  "CPU_labelCustomized": {
+    "type": "switch",
+    "default": false,
+    "description": "Customize this label"
+  },
+  "CPU_labelCustom": {
+    "type": "entry",
+    "default": "𝄜",
+    "description": "Custom label",
+    "tooltip": "You can use emojis."
   },
   "CPU_squared": {
     "type": "switch",
@@ -526,6 +903,12 @@
     "type": "switch",
     "default": false,
     "description": "Merge all"
+  },
+  "CPU_groupInSetsOf4": {
+    "type": "switch",
+    "default": false,
+    "description": "Group in sets of 4 in tooltip",
+    "dependency": "!CPU_mergeAll"
   },
   "CPU_ignoreHyperthreading": {
     "type": "switch",
@@ -560,6 +943,18 @@
     "type": "switch",
     "default": true,
     "description": "Show the CPU temperature"
+  },
+  "CPU_showTempUnit": {
+    "type": "switch",
+    "default": true,
+    "description": "Display the temperature unit",
+    "dependency": "CPU_showTemp"
+  },
+  "CPU_temp_hovering_only": {
+    "type": "switch",
+    "default": false,
+    "description": "Only display when hovering over this applet",
+    "dependency": "CPU_showTemp"
   },
   "CPU_tempInFahrenheit": {
     "type": "switch",
@@ -597,6 +992,75 @@
       "Bottom Right": "BR",
       "Bottom Left": "BL"
     }
+  },
+  "CPU_tempFontFactor": {
+    "type": "scale",
+    "default": 33,
+    "min": 20,
+    "max": 60,
+    "step": 1,
+    "units": "%",
+    "description": "Font size: percentage of the box height"
+  },
+  "CPU_showLoadAverage": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the CPU average load"
+  },
+  "CPU_loadAverage_hovering_only": {
+    "type": "switch",
+    "default": false,
+    "description": "Only display when hovering over this applet",
+    "dependency": "CPU_showLoadAverage"
+  },
+  "CPU_loadAverageHigh": {
+    "type": "entry",
+    "default": "75",
+    "expand-width": true,
+    "description": "High CPU Load (%)",
+    "tooltip": "Refer to your CPU documentation."
+  },
+  "CPU_loadAverageCrit": {
+    "type": "entry",
+    "default": "90",
+    "expand-width": true,
+    "description": "Critical CPU Load (%)",
+    "tooltip": "Refer to your CPU documentation.\nMust be greater than the High CPU Load."
+  },
+  "CPU_loadAverageColor": {
+    "type": "colorchooser",
+    "default": "rgba(238, 238, 236, 1)",
+    "description": "Normal Average Load Color"
+  },
+  "CPU_loadAverageColorHigh": {
+    "type": "colorchooser",
+    "default": "rgba(255, 120, 0, 1)",
+    "description": "High Average Load Color"
+  },
+  "CPU_loadAverageColorCrit": {
+    "type": "colorchooser",
+    "default": "rgba(224, 27, 36, 1)",
+    "description": "Critical Average Load Color"
+  },
+  "CPU_loadAverageCorner": {
+    "type": "combobox",
+    "default": "TL",
+    "description": "Corner in which to display the average load",
+    "options": {
+      "Top Right": "TR",
+      "Top Left": "TL",
+      "Bottom Right": "BR",
+      "Bottom Left": "BL"
+    }
+  },
+  "CPU_loadAverageFontFactor": {
+    "type": "scale",
+    "default": 33,
+    "min": 20,
+    "max": 60,
+    "step": 1,
+    "units": "%",
+    "description": "Font size: percentage of the box height"
   },
   "CPU_tempColor": {
     "type": "colorchooser",
@@ -678,16 +1142,72 @@
     "default": true,
     "description": "Enable"
   },
+  "Mem_onlyUsedAvailable": {
+    "type": "switch",
+    "default": false,
+    "description": "Display only Used and Available memory"
+  },
+  "Mem_enabledTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable Tooltip"
+  },
+  "Mem_enabledBufferCacheSharedTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable Buffer/Cache/Shared Tooltip",
+    "dependency": "Mem_enabledTooltip"
+  },
   "Swap_enabled": {
     "type": "switch",
     "default": true,
     "description": "Enable Swap"
   },
+  "Swap_enabledTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable Swap Tooltip"
+  },
   "Mem_labelOn": {
     "type": "switch",
     "default": true,
-    "description": "Label",
-    "dependency": "labelsOn"
+    "description": "Display this label"
+  },
+  "Mem_labelForeground": {
+    "type": "switch",
+    "default": true,
+    "description": "Bring this label to the foreground"
+  },
+  "Mem_labelPos": {
+    "type": "scale",
+    "default": 0,
+    "description": "Vertical position offset (pixels)",
+    "min": -20,
+    "max": 20,
+    "step": 1,
+    "tooltip": "Negative: to the top.\nPositive: to the bottom."
+  },
+  "Mem_labelZoom": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Label zoom",
+    "options": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4
+    }
+  },
+  "Mem_labelCustomized": {
+    "type": "switch",
+    "default": false,
+    "description": "Customize this label"
+  },
+  "Mem_labelCustom": {
+    "type": "entry",
+    "default": "𖡎",
+    "description": "Custom label",
+    "tooltip": "You can use emojis."
   },
   "Mem_chartType": {
     "type": "combobox",
@@ -733,6 +1253,26 @@
     "default": true,
     "description": "Show the amounts (in Bytes) of Total, Used and Available memory in the tooltip"
   },
+  "Mem_value_display": {
+    "type": "combobox",
+    "default": "hover",
+    "description": "Display memory usage percentage",
+    "options": {
+      "None": "none",
+      "Hovering over": "hover",
+      "Always": "always"
+    }
+  },
+  "Mem_valueCorner": {
+    "type": "combobox",
+    "default": "B",
+    "description": "Where to display this",
+    "options": {
+      "Top": "T",
+      "Bottom": "B"
+    },
+    "dependency": "Mem_value_display!=none"
+  },
   "Mem_colorUsedup": {
     "type": "colorchooser",
     "default": "rgba(255, 255, 255, 1)",
@@ -741,12 +1281,14 @@
   "Mem_colorCache": {
     "type": "colorchooser",
     "default": "rgba(148, 114, 219, 1)",
-    "description": "Cache"
+    "description": "Cache",
+    "dependency": "!Mem_onlyUsedAvailable"
   },
   "Mem_colorBuffers": {
     "type": "colorchooser",
     "default": "rgba(254, 140, 2, 1)",
-    "description": "Buffers"
+    "description": "Buffers",
+    "dependency": "!Mem_onlyUsedAvailable"
   },
   "Mem_colorFree": {
     "type": "colorchooser",
@@ -774,11 +1316,51 @@
     "default": true,
     "description": "Enable"
   },
+  "Net_enabledTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable Tooltip"
+  },
   "Net_labelOn": {
     "type": "switch",
     "default": true,
-    "description": "Label",
-    "dependency": "labelsOn"
+    "description": "Display this label"
+  },
+  "Net_labelForeground": {
+    "type": "switch",
+    "default": true,
+    "description": "Bring this label to the foreground"
+  },
+  "Net_labelPos": {
+    "type": "scale",
+    "default": 0,
+    "description": "Vertical position offset (pixels)",
+    "min": -20,
+    "max": 20,
+    "step": 1,
+    "tooltip": "Negative: to the top.\nPositive: to the bottom."
+  },
+  "Net_labelZoom": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Label zoom",
+    "options": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4
+    }
+  },
+  "Net_labelCustomized": {
+    "type": "switch",
+    "default": false,
+    "description": "Customize this label"
+  },
+  "Net_labelCustom": {
+    "type": "entry",
+    "default": "🖧",
+    "description": "Custom label",
+    "tooltip": "You can use emojis."
   },
   "Net_squared": {
     "type": "switch",
@@ -800,6 +1382,17 @@
     "default": false,
     "description": "Merge all"
   },
+  "Net_typeOfGraph": {
+    "type": "combobox",
+    "default": "graphled",
+    "description": "Type of graph",
+    "options": {
+      "None": "none",
+      "Curves only": "graph",
+      "Led only": "led",
+      "Curves and Led": "graphled"
+    }
+  },
   "Net_autoscale": {
     "type": "switch",
     "default": true,
@@ -809,6 +1402,23 @@
     "type": "switch",
     "default": true,
     "description": "Logarithmic"
+  },
+  "Net_minPrefix": {
+    "type": "combobox",
+    "default": "B",
+    "description": "Minimal prefix",
+    "options": {
+      "Byte": "B",
+      "kilo": "K",
+      "Mega": "M",
+      "Giga": "G",
+      "Tera": "T",
+      "Peta": "P",
+      "Exa": "E",
+      "Zetta": "Z",
+      "Yotta": "Y"
+    },
+    "tooltip": "You can specify the minimum unit of measurement of your choice for the amount of data transferred: byte, kilobyte, megabyte, etc."
   },
   "Net_symbolsInTooltip": {
     "type": "switch",
@@ -983,11 +1593,51 @@
     "default": true,
     "description": "Enable"
   },
+  "Disk_enabledTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable Tooltip"
+  },
   "Disk_labelOn": {
     "type": "switch",
     "default": true,
-    "description": "Label",
-    "dependency": "labelsOn"
+    "description": "Display this label"
+  },
+  "Disk_labelForeground": {
+    "type": "switch",
+    "default": true,
+    "description": "Bring this label to the foreground"
+  },
+  "Disk_labelPos": {
+    "type": "scale",
+    "default": 0,
+    "description": "Vertical position offset (pixels)",
+    "min": -20,
+    "max": 20,
+    "step": 1,
+    "tooltip": "Negative: to the top.\nPositive: to the bottom."
+  },
+  "Disk_labelZoom": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Label zoom",
+    "options": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4
+    }
+  },
+  "Disk_labelCustomized": {
+    "type": "switch",
+    "default": false,
+    "description": "Customize this label"
+  },
+  "Disk_labelCustom": {
+    "type": "entry",
+    "default": "⛁",
+    "description": "Custom label",
+    "tooltip": "You can use emojis."
   },
   "Disk_squared": {
     "type": "switch",
@@ -1009,6 +1659,17 @@
     "default": false,
     "description": "Merge all"
   },
+  "Disk_typeOfGraph": {
+    "type": "combobox",
+    "default": "graphled",
+    "description": "Type of graph",
+    "options": {
+      "None": "none",
+      "Curves only": "graph",
+      "Led only": "led",
+      "Curves and Led": "graphled"
+    }
+  },
   "Disk_autoscale": {
     "type": "switch",
     "default": true,
@@ -1018,6 +1679,23 @@
     "type": "switch",
     "default": true,
     "description": "Logarithmic"
+  },
+  "Disk_minPrefix": {
+    "type": "combobox",
+    "default": "B",
+    "description": "Minimal prefix",
+    "options": {
+      "Byte": "B",
+      "kilo": "K",
+      "Mega": "M",
+      "Giga": "G",
+      "Tera": "T",
+      "Peta": "P",
+      "Exa": "E",
+      "Zetta": "Z",
+      "Yotta": "Y"
+    },
+    "tooltip": "You can specify the minimum unit of measurement of your choice for the amount of data transferred: byte, kilobyte, megabyte, etc."
   },
   "Disk_symbolsInTooltip": {
     "type": "switch",
@@ -1164,16 +1842,81 @@
     "description": "Clear this device list",
     "callback": "on_Disk_cleardevlist_btn_clicked"
   },
+  "Disk_speed_display": {
+    "type": "switch",
+    "default": true,
+    "description": "Display that",
+    "tooltip": "Be sure to check at least one “Part of total” box among the enabled devices."
+  },
+  "Disk_speed_hovering_only": {
+    "type": "switch",
+    "default": false,
+    "description": "Only display when hovering over this applet",
+    "dependency": "Disk_speed_display"
+  },
+  "Disk_speedCorner": {
+    "type": "combobox",
+    "default": "LO",
+    "description": "Corner in which to display that",
+    "options": {
+      "Top Right": "TR",
+      "Top Left": "TL",
+      "Bottom Right": "BR",
+      "Bottom Left": "BL",
+      "Right Only": "RO",
+      "Left Only": "LO"
+    }
+  },
   "DiskUsage_enabled": {
     "type": "switch",
     "default": false,
     "description": "Enable"
   },
+  "DiskUsage_enabledTooltip": {
+    "type": "switch",
+    "default": false,
+    "description": "Enable Tooltip"
+  },
   "DiskUsage_labelOn": {
     "type": "switch",
     "default": true,
-    "description": "Label",
-    "dependency": "labelsOn"
+    "description": "Display this label"
+  },
+  "DiskUsage_labelForeground": {
+    "type": "switch",
+    "default": true,
+    "description": "Bring this label to the foreground"
+  },
+  "DiskUsage_labelPos": {
+    "type": "scale",
+    "default": 0,
+    "description": "Vertical position offset (pixels)",
+    "min": -20,
+    "max": 20,
+    "step": 1,
+    "tooltip": "Negative: to the top.\nPositive: to the bottom."
+  },
+  "DiskUsage_labelZoom": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Label zoom",
+    "options": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4
+    }
+  },
+  "DiskUsage_labelCustomized": {
+    "type": "switch",
+    "default": false,
+    "description": "Customize this label"
+  },
+  "DiskUsage_labelCustom": {
+    "type": "entry",
+    "default": "⛃",
+    "description": "Custom label",
+    "tooltip": "You can use emojis."
   },
   "DiskUsage_squared": {
     "type": "switch",
@@ -1195,14 +1938,25 @@
     "default": false,
     "description": "Merge all"
   },
-  "DiskUsage_chartType": {
+  "DiskUsage_value_display": {
     "type": "combobox",
-    "default": "bar",
-    "description": "Type of chart",
+    "default": "hover",
+    "description": "Display value",
     "options": {
-      "Bar": "bar",
-      "Pie": "pie"
+      "None": "none",
+      "Hovering over": "hover",
+      "Always": "always"
     }
+  },
+  "DiskUsage_valueCorner": {
+    "type": "combobox",
+    "default": "B",
+    "description": "Where to display this",
+    "options": {
+      "Top": "T",
+      "Bottom": "B"
+    },
+    "dependency": "DiskUsage_value_display!=none"
   },
   "DiskUsage_colorUsed": {
     "type": "colorchooser",
@@ -1262,6 +2016,189 @@
       }
     ],
     "show-buttons": true
+  },
+  "Battery_enabled": {
+    "type": "switch",
+    "default": false,
+    "description": "Enable"
+  },
+  "Battery_enabledTooltip": {
+    "type": "switch",
+    "default": false,
+    "description": "Enable Tooltip"
+  },
+  "Battery_labelOn": {
+    "type": "switch",
+    "default": true,
+    "description": "Display this label"
+  },
+  "Battery_labelForeground": {
+    "type": "switch",
+    "default": true,
+    "description": "Bring this label to the foreground"
+  },
+  "Battery_labelPos": {
+    "type": "scale",
+    "default": 0,
+    "description": "Vertical position offset (pixels)",
+    "min": -20,
+    "max": 20,
+    "step": 1,
+    "tooltip": "Negative: to the top.\nPositive: to the bottom."
+  },
+  "Battery_labelZoom": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Label zoom",
+    "options": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4
+    }
+  },
+  "Battery_labelCustomized": {
+    "type": "switch",
+    "default": false,
+    "description": "Customize this label"
+  },
+  "Battery_labelCustom": {
+    "type": "entry",
+    "default": "🗲",
+    "description": "Custom label",
+    "tooltip": "You can use emojis."
+  },
+  "Battery_squared": {
+    "type": "switch",
+    "default": false,
+    "description": "Square view"
+  },
+  "Battery_width": {
+    "type": "scale",
+    "default": 32,
+    "description": "Width",
+    "min": 10,
+    "max": 320,
+    "step": 1,
+    "show-value": true,
+    "dependency": "!Battery_squared"
+  },
+  "Battery_mergeAll": {
+    "type": "switch",
+    "default": false,
+    "description": "Merge all"
+  },
+  "Battery_value_display": {
+    "type": "combobox",
+    "default": "hover",
+    "description": "Display value",
+    "options": {
+      "None": "none",
+      "Hovering over": "hover",
+      "Always": "always"
+    }
+  },
+  "Battery_valueCorner": {
+    "type": "combobox",
+    "default": "B",
+    "description": "Where to display this",
+    "options": {
+      "Top": "T",
+      "Bottom": "B"
+    },
+    "dependency": "Battery_value_display!=none"
+  },
+  "Battery_colorLoad": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 1)",
+    "description": "Load"
+  },
+  "Battery_colorUnload": {
+    "type": "colorchooser",
+    "default": "rgba(230, 230, 230, 0.1)",
+    "description": "Unload"
+  },
+  "Battery_colorAlert": {
+    "type": "colorchooser",
+    "default": "rgba(255, 0, 0, 1)",
+    "description": "Alert"
+  },
+  "Battery_getdevlist_btn": {
+    "type": "button",
+    "description": "Update this device list",
+    "callback": "on_Battery_getdevlist_btn_clicked"
+  },
+  "Battery_devicesList": {
+    "type": "list",
+    "default": [
+
+    ],
+    "columns": [
+      {
+        "id": "enabled",
+        "title": "Enabled",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "id",
+        "title": "⚠️ Id️",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      },
+      {
+        "id": "minvalue",
+        "title": "Alert when\nvalue (in %)\nreaches",
+        "type": "integer",
+        "default": 40,
+        "min": 0,
+        "max": 100,
+        "align": 0.5
+      },
+      {
+        "id": "name",
+        "title": "Name",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      }
+    ],
+    "show-buttons": true
+  },
+  "Battery_cleardevlist_btn": {
+    "type": "button",
+    "description": "Clear this device list",
+    "callback": "on_Battery_cleardevlist_btn_clicked"
+  },
+  "percentFontFactor": {
+    "type": "scale",
+    "default": 33,
+    "min": 20,
+    "max": 60,
+    "step": 1,
+    "units": "%",
+    "description": "Font size: percentage of the box height"
+  },
+  "Net_total1decimal": {
+    "type": "switch",
+    "default": false,
+    "description": "Show 1 decimal"
+  },
+  "Disk_speed1decimal": {
+    "type": "switch",
+    "default": false,
+    "description": "Show 1 decimal"
+  },
+  "flowFontFactor": {
+    "type": "scale",
+    "default": 40,
+    "min": 20,
+    "max": 50,
+    "step": 1,
+    "units": "%",
+    "description": "Font size: percentage of the box height"
   },
   "color0": {
     "type": "colorchooser",

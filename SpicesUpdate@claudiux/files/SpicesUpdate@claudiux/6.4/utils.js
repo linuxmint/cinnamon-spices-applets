@@ -1,4 +1,6 @@
 //!/usr/bin/cjs
+const Extension = imports.ui.extension;
+
 const versionCompare = (left, right) => {
   if (typeof left + typeof right != "stringstring")
     return false;
@@ -22,6 +24,7 @@ const versionCompare = (left, right) => {
   return 0;
 };
 
+if (!Extension.getCurrentExtension)
 module.exports = {
   versionCompare
 };

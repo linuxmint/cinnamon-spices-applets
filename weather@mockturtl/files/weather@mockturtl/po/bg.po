@@ -11,14 +11,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-14 14:22+0000\n"
-"PO-Revision-Date: 2023-03-23 12:17+0200\n"
+"PO-Revision-Date: 2026-05-01 22:49+0300\n"
 "Last-Translator: Angel Ivanov <angel.ivanov@outlook.com>\n"
 "Language-Team: български <>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.6\n"
 
 #. 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #. 3.8/weather-applet.js:20974
@@ -1541,7 +1541,7 @@ msgstr ""
 
 #. 3.8/weather-applet.js:9462
 msgid "Low"
-msgstr ""
+msgstr "Ниско"
 
 #. 3.8/weather-applet.js:9465
 msgid "Moderate"
@@ -1549,15 +1549,13 @@ msgstr "Умерена"
 
 #. 3.8/weather-applet.js:9468
 msgid "High"
-msgstr ""
+msgstr "Високо"
 
 #. 3.8/weather-applet.js:9471
-#, fuzzy
 msgid "Very High"
 msgstr "Много добра"
 
 #. 3.8/weather-applet.js:9474
-#, fuzzy
 msgid "Extreme"
 msgstr "Порой"
 
@@ -1570,12 +1568,11 @@ msgstr "мили/ч"
 #. 3.8->settings-schema.json->windSpeedUnit->options
 #. 3.8/weather-applet.js:9607
 msgid "km/h"
-msgstr ""
+msgstr "км/ч"
 
 #. 3.8/weather-applet.js:9609
-#, fuzzy
 msgid "Knots"
-msgstr "възела"
+msgstr "Възела"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
@@ -1588,18 +1585,18 @@ msgid ""
 "Address to location lookup service is blocked. You can try to change your "
 "User-Agent in help to see if it resolves the issue."
 msgstr ""
+"Адреса към сервиза за локация е блокиран. Опитайте да смените потребителския "
+"агент и вижте дали това ще реши проблема."
 
 #. 3.8/weather-applet.js:10862
 msgid "Ash"
-msgstr ""
+msgstr "Прах"
 
 #. 3.8/weather-applet.js:10864
-#, fuzzy
 msgid "Squall"
 msgstr "Шквалове"
 
 #. 3.8/weather-applet.js:10941
-#, fuzzy
 msgid "Light shower sleet"
 msgstr "Слаб сняг"
 
@@ -1625,22 +1622,18 @@ msgid "Heavy drizzle"
 msgstr "Силно ръмене"
 
 #. 3.8/weather-applet.js:12462
-#, fuzzy
 msgid "Light shower rain"
 msgstr "Слаб сняг"
 
 #. 3.8/weather-applet.js:12466
-#, fuzzy
 msgid "Heavy shower rain"
 msgstr "Силен сняг"
 
 #. 3.8/weather-applet.js:12474
-#, fuzzy
 msgid "Mix snow/rain"
 msgstr "Сняг"
 
 #. 3.8/weather-applet.js:12476
-#, fuzzy
 msgid "Snow shower"
 msgstr "Сняг"
 
@@ -1851,118 +1844,101 @@ msgid "Mostly Clear"
 msgstr "Предимно ясно"
 
 #. 3.8/weather-applet.js:15974
-#, fuzzy
 msgid "Pirate Weather"
-msgstr "US Weather"
+msgstr "Pirate Weather"
 
 #. 3.8/weather-applet.js:16002
-#, fuzzy
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
 "Моля проверете дали сте\n"
-"въвели правилния API ключ от Climacell"
+"въвели правилния API ключ от Pirate Weather"
 
 #. 3.8/weather-applet.js:16458
-#, fuzzy
 msgid ""
 "Location Service couldn't find your location, please see the logs in Looking "
 "Glass"
 msgstr ""
-"Услугата за получаване на местоположението отговори с грешка, моля проверете "
-"логовете в Looking Glass"
+"Услугата за местоположение не може да намери вашата, моля проверете логовете "
+"в Looking Glass"
 
 #. 3.8/weather-applet.js:16621
-#, fuzzy
 msgid "Snow grains"
 msgstr "Сняг"
 
 #. 3.8/weather-applet.js:16628
-#, fuzzy
 msgid "Light showers"
 msgstr "Слаб сняг"
 
 #. 3.8/weather-applet.js:16642
-#, fuzzy
 msgid "Heavy showers"
 msgstr "Силен сняг"
 
 #. 3.8/weather-applet.js:16670
-#, fuzzy
 msgid "Thunderstorm with slight hail"
 msgstr "Гръмотевици с слаб дъжд"
 
 #. 3.8/weather-applet.js:16677
-#, fuzzy
 msgid "Thunderstorm with hail"
 msgstr "Гръмотевици с дъжд"
 
 #. 3.8/weather-applet.js:16704 3.8/weather-applet.js:16870
-#, fuzzy
 msgid "Feels like"
 msgstr "Усеща се като"
 
 #. 3.8->settings-schema.json->dataService->options
 #. 3.8/weather-applet.js:16773
 msgid "Open-Meteo"
-msgstr ""
+msgstr "Open-Meteo"
 
 #. 3.8/weather-applet.js:17053 3.8/weather-applet.js:17054
 #. 3.8/weather-applet.js:17060 3.8/weather-applet.js:17061
 #. 3.8/weather-applet.js:17304 3.8/weather-applet.js:17305
 #. 3.8/weather-applet.js:17311 3.8/weather-applet.js:17312
-#, fuzzy
 msgid "Scattered Sleet"
 msgstr "Частични валижи"
 
 #. 3.8/weather-applet.js:17123 3.8/weather-applet.js:17124
 #. 3.8/weather-applet.js:17130 3.8/weather-applet.js:17131
 #. 3.8/weather-applet.js:17224 3.8/weather-applet.js:17225
-#, fuzzy
 msgid "Chance of Thunderstorms"
 msgstr "Гръмотевици"
 
 #. 3.8/weather-applet.js:17152 3.8/weather-applet.js:17153
-#, fuzzy
 msgid "Light Rain"
 msgstr "Слаб дъжд"
 
 #. 3.8/weather-applet.js:17160 3.8/weather-applet.js:17161
-#, fuzzy
 msgid "Light Sleet"
 msgstr "Суграшица"
 
 #. 3.8/weather-applet.js:17176 3.8/weather-applet.js:17177
 msgid "Intermittent Rain"
-msgstr ""
+msgstr "Преваляване"
 
 #. 3.8/weather-applet.js:17184 3.8/weather-applet.js:17185
 msgid "Intermittent Sleet"
-msgstr ""
+msgstr "Скреж на моменти"
 
 #. 3.8/weather-applet.js:17192 3.8/weather-applet.js:17193
 msgid "Intermittent Snow"
-msgstr ""
+msgstr "Сняг на моменти"
 
 #. 3.8/weather-applet.js:17240 3.8/weather-applet.js:17241
-#, fuzzy
 msgid "Frequent Thunderstorms"
 msgstr "Силни гръмотевици"
 
 #. 3.8/weather-applet.js:17247 3.8/weather-applet.js:17248
 #. 3.8/weather-applet.js:17254 3.8/weather-applet.js:17255
-#, fuzzy
 msgid "High Clouds"
 msgstr "Облачно"
 
 #. 3.8/weather-applet.js:17262 3.8/weather-applet.js:17263
-#, fuzzy
 msgid "Low Clouds"
 msgstr "Облачно"
 
 #. 3.8/weather-applet.js:17361 3.8/weather-applet.js:17362
-#, fuzzy
 msgid "Overcast and Dry"
 msgstr "Облачно и ветровито"
 
@@ -1970,99 +1946,88 @@ msgstr "Облачно и ветровито"
 #. 3.8/weather-applet.js:17375 3.8/weather-applet.js:17376
 #. 3.8/weather-applet.js:17425 3.8/weather-applet.js:17426
 #. 3.8/weather-applet.js:17433 3.8/weather-applet.js:17434
-#, fuzzy
 msgid "Slightly Stormy"
 msgstr "Слаб сняг"
 
 #. 3.8/weather-applet.js:17382 3.8/weather-applet.js:17383
 #. 3.8/weather-applet.js:17389 3.8/weather-applet.js:17390
-#, fuzzy
 msgid "Stormy Snow Showers"
 msgstr "Частичен снеговалеж"
 
 #. 3.8/weather-applet.js:17396 3.8/weather-applet.js:17397
 #. 3.8/weather-applet.js:17403 3.8/weather-applet.js:17404
-#, fuzzy
 msgid "Thundery Showers"
 msgstr "Гръмотевици"
 
 #. 3.8/weather-applet.js:17410 3.8/weather-applet.js:17411
 #. 3.8/weather-applet.js:17417 3.8/weather-applet.js:17418
 #. 3.8/weather-applet.js:17441 3.8/weather-applet.js:17442
-#, fuzzy
 msgid "Thundery Snow Showers"
 msgstr "Гръмотевици"
 
 #. 3.8/weather-applet.js:17530
-#, fuzzy
 msgid "Wind Warning"
-msgstr "Предупреждение"
+msgstr "Предупреждение за вятър"
 
 #. 3.8/weather-applet.js:17532
-#, fuzzy
 msgid "Thunderstorm Warning"
-msgstr "Гръмотевици с дъжд"
+msgstr "Предупреждение за гръмотевици"
 
 #. 3.8/weather-applet.js:17534
-#, fuzzy
 msgid "Rain Warning"
-msgstr "Предупреждение"
+msgstr "Предупреждение за дъжд"
 
 #. 3.8/weather-applet.js:17536
-#, fuzzy
 msgid "Snow Warning"
-msgstr "Предупреждение"
+msgstr "Предупреждение за сняг"
 
 #. 3.8/weather-applet.js:17538
 msgid "Slippery Roads Warning"
-msgstr ""
+msgstr "Предупреждение за хлъзгави пътища"
 
 #. 3.8/weather-applet.js:17540
-#, fuzzy
 msgid "Frost Warning"
-msgstr "Предупреждение"
+msgstr "Предупреждение за студ"
 
 #. 3.8/weather-applet.js:17542
 msgid "Mass Movements Warning"
-msgstr ""
+msgstr "Предупреждение за свлияания"
 
 #. 3.8/weather-applet.js:17544
-#, fuzzy
 msgid "Heat Warning"
-msgstr "Предупреждение"
+msgstr "Предупреждение за жега"
 
 #. 3.8/weather-applet.js:17546
 msgid "Avalanche Warning"
-msgstr ""
+msgstr "Предупреждение за валини"
 
 #. 3.8/weather-applet.js:17548
 msgid "Earthquake Warning"
-msgstr ""
+msgstr "Предупреждение за земетресение"
 
 #. 3.8/weather-applet.js:17550
 msgid "Forest Fire Warning"
-msgstr ""
+msgstr "Предупреждение за горски пожар"
 
 #. 3.8/weather-applet.js:17552
-#, fuzzy
 msgid "Flood Warning"
-msgstr "Предупреждение"
+msgstr "Предупреждение за порой"
 
 #. 3.8/weather-applet.js:17572
 msgid "Swiss Météo"
-msgstr ""
+msgstr "Swiss Météo"
 
 #. 3.8/weather-applet.js:17591
 msgid "For this provider, you need to use a postcode."
-msgstr ""
+msgstr "За този доставчик е нужен пощенски код."
 
 #. 3.8/weather-applet.js:17603
 msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
-msgstr ""
+msgstr "За този доставчик е нужен швейцарски пощенски код между 1000-9999."
 
 #. 3.8/weather-applet.js:17625
 msgid "Switzerland"
-msgstr ""
+msgstr "Швейцария"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8/weather-applet.js:17698
@@ -2070,11 +2035,9 @@ msgid "Met Office UK"
 msgstr "Met Office UK"
 
 #. 3.8/weather-applet.js:18216 3.8/weather-applet.js:18276
-#, fuzzy
 msgid "Could not obtain location, please see the logs in Looking Glass"
 msgstr ""
-"Услугата за получаване на местоположението отговори с грешка, моля проверете "
-"логовете в Looking Glass"
+"Не може да се определи локацията, моля проверете логовете в Looking Glass"
 
 #. 3.8/weather-applet.js:18821
 msgid ""
@@ -2093,11 +2056,10 @@ msgstr ""
 " {configFilePath}"
 
 #. 3.8/weather-applet.js:19146
-#, fuzzy
 msgid "Make sure you entered a location or use Automatic location instead."
 msgstr ""
-"Проверете дали сте въвели местоположение или използвайте\n"
-"Автоматичното му определяне"
+"Проверете дали сте въвели местоположение или използвайте автоматичното му "
+"определяне."
 
 #. 3.8/weather-applet.js:19164
 msgid "This provider requires an API key to operate"
@@ -2121,23 +2083,23 @@ msgstr "Валежът ще започне след {precipStart} минути"
 
 #. 3.8/weather-applet.js:19791
 msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Слаб риск при излагане на слънце, UV индекс: {uvIndex}"
 
 #. 3.8/weather-applet.js:19795
 msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Умерен риск при излагане на слънце, UV индекс: {uvIndex}"
 
 #. 3.8/weather-applet.js:19799
 msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Висок риск при излагане на слънце, UV индекс: {uvIndex}"
 
 #. 3.8/weather-applet.js:19803
 msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
-msgstr ""
+msgstr "Много висок риск при излагане на слънце, UV индекс: {uvIndex}"
 
 #. 3.8/weather-applet.js:19807
 msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Екстремен риск при излагане на слънце, UV индекс: {uvIndex}"
 
 #. 3.8/weather-applet.js:19925
 msgid "Forecast parsing failed, see logs for more details."
@@ -2163,7 +2125,7 @@ msgstr "Област: {stationArea}"
 
 #. 3.8/weather-applet.js:20541
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "{count} предупреждение/я за времето"
 
 #. 3.8/weather-applet.js:20936 3.8/weather-applet.js:20946
 #. 3.8/weather-applet.js:20953
@@ -2171,9 +2133,8 @@ msgid "Error Saving Debug Information"
 msgstr "Грешка при запазването на дебъг информацията"
 
 #. 3.8/weather-applet.js:20953
-#, fuzzy
 msgid "Could not open file {filePath} for writing"
-msgstr "Неуспешно зареждане на прогнозата"
+msgstr "Неуспешно отваряне на файла {filePath}  за запис"
 
 #. 3.8/weather-applet.js:20962
 msgid "Debug Information saved successfully"
@@ -2184,47 +2145,44 @@ msgid "Saved to {filePath}"
 msgstr "Запазен в {filePath}"
 
 #. 3.8/weather-applet.js:20991
-#, fuzzy
 msgid "Location Service Blocked"
-msgstr "Запазване на Местоположение"
+msgstr "Услугата за локация е блокирана"
 
 #. 3.8/weather-applet.js:21185
 msgid "No Script Provided"
-msgstr ""
+msgstr "Няма абонамент"
 
 #. 3.8/weather-applet.js:21185
 msgid "You need to add a script first."
-msgstr ""
+msgstr "Трябва първо да добавите абонамент."
 
 #. 3.8/weather-applet.js:21189
-#, fuzzy
 msgid "No Weather Data"
-msgstr "US Weather"
+msgstr "Няма данни за времето"
 
 #. 3.8/weather-applet.js:21189
 msgid "No weather data to run script with"
-msgstr ""
+msgstr "Няма данни за показване с този абонамент"
 
 #. 3.8/weather-applet.js:21197
 msgid "Script Executed Successfully"
-msgstr ""
+msgstr "Абонамента е приложен успешно"
 
 #. 3.8/weather-applet.js:21197
 msgid "Your script has been executed successfully."
-msgstr ""
+msgstr "Вашият абонамент беше приложен успешно."
 
 #. 3.8/weather-applet.js:21200
 msgid "Error Running Script"
-msgstr ""
+msgstr "Грешка в абонамента"
 
 #. 3.8/weather-applet.js:21200
 msgid "Script returned error, see logs for more information"
-msgstr ""
+msgstr "Скрипта върна грешка, вижте отчета за повече информация"
 
 #. 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "Аплет за Времето"
+msgstr "Предупреждения на аплета за времето"
 
 #. 3.8/LogSaver.py:16
 msgid "Save to File"
@@ -2651,7 +2609,7 @@ msgstr "Настройки за местоположението"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "Технология и автоматизатиция"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
@@ -2715,22 +2673,19 @@ msgstr "US National Weather (само за САЩ)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Swiss Météo (Switzerland only)"
-msgstr ""
+msgstr "Swiss Météo (само за Швейцария)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "Met Office UK (key needed)"
-msgstr "Met Office UK (само за Обединеното Кралство)"
+msgstr "Met Office UK (необходим е ключ)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "OpenWeatherMap OneCall (key needed)"
-msgstr "Weatherbit (необходим е ключ)"
+msgstr "OpenWeatherMap OneCall (необходим е ключ)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "Pirate Weather (key needed)"
-msgstr "Weatherbit (необходим е ключ)"
+msgstr "Pirate Weather (необходим е ключ)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Visual Crossing (key needed)"
@@ -2754,12 +2709,17 @@ msgid ""
 "provides global weather data with various parameters and forecast lengths. "
 "More information can be found at open-meteo.com."
 msgstr ""
+"Open-Meteo е свободна услуга за прогноза, която не изисква API ключ. Тя "
+"доставя данни за времето от цял свят с различни параметри и дължина на "
+"прогнозата. Повече информация е налична на open-meteo.com."
 
 #. 3.8->settings-schema.json->openweathermap_label->description
 msgid ""
 "Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with "
 "headquarters in London UK. Read more about the service at openweathermap.org."
 msgstr ""
+"Worldwide Online Weather услугата е създадена през 2012 от OpenWeather Ltd, "
+"с адрес Лондон, ОК. Повече на openweathermap.org."
 
 #. 3.8->settings-schema.json->metnorway_label->description
 msgid ""
@@ -2773,6 +2733,15 @@ msgid ""
 "there is a possibility that they are inaccurate sometimes.\n"
 " - Alerts are only available in Norway"
 msgstr ""
+"Свободна метеопрогноза и метеорологични данни от норвежкия метеорологичен "
+"институт, основан през 1866. Повече за услугата може да прочетете на  "
+"www.met.no/en.\n"
+"\n"
+" - Nowcast (Непосредствени наблюдения на валежите и подробни данни) не е "
+"налична извън Норвегия. Ако сте там, имате почасова прогноза.\n"
+"- Ежедневната прогноза се генерира за шест часа напред (ежечасно), има "
+"вероятност на моменти да не е точна.\n"
+"- Предупрежнията са налични само в Норвегия"
 
 #. 3.8->settings-schema.json->dmidenmark_label->description
 msgid ""
@@ -2780,12 +2749,16 @@ msgid ""
 "forecasts and observations for Denmark, Greenland, and the Faroe Islands. "
 "Read more about the institute at www.dmi.dk."
 msgstr ""
+"Датския метеорологичен институт е формиран през 1872 и прави прогнози и "
+"наблюдения на времето за Дания, Гренландия и островите Фаро. Прочетете "
+"повече на www.dmi.dk."
 
 #. 3.8->settings-schema.json->deutscherwetterdienst_label->description
 msgid ""
 "German National Weather Provider. Read more about the institute at "
 "www.dwd.de."
 msgstr ""
+"Националния немски доставчик. Прочете повече за института на www.dwd.de."
 
 #. 3.8->settings-schema.json->usweather_label->description
 msgid ""
@@ -2798,6 +2771,14 @@ msgid ""
 " - Observations are quite spotty so it combines multiple observation "
 "stations if needed in a 50km area"
 msgstr ""
+"Националната метеорологична служба на Щатите е агенция на федералното "
+"правителство от 1861. Прочетете повече за тях на www.weather.gov.\n"
+"\n"
+"- Само за територията на САЩ\n"
+"- Понякога са нужни 10-15 секунди за прогноза, моля бъдете търпеливи когато "
+"се зарежда за първи път\n"
+"- Наблюденията са доста точни, защото за покриване на площ от 50 км. при "
+"нужда се комбинират данните от няколко наблюдателни станции"
 
 #. 3.8->settings-schema.json->swissmeteo_label->description
 msgid ""
@@ -2807,6 +2788,11 @@ msgid ""
 " - Only covers Switzerland\n"
 " - You need to use your post code instead of coordinates"
 msgstr ""
+"Швейцарската национална метеорологична служба. Прочетете повече за тях на  "
+"www.meteoswiss.admin.ch.\n"
+"\n"
+" - Само за Швейцария\n"
+" - Използва се пощенски код вместо координати"
 
 #. 3.8->settings-schema.json->metoffice_label->description
 msgid ""
@@ -2818,6 +2804,12 @@ msgid ""
 "minimum of 15 minutes refresh time is recommended.\n"
 " - To get API keys, register at datahub.metoffice.gov.uk"
 msgstr ""
+"Метеорологичния офис, съкратено Met Office, е кралското национално метео "
+"дружество, основано през 1854. Прочетете повече на www.metoffice.gov.uk.\n"
+"\n"
+" - Имате  право на 360 безплатни проверки дневно. Аплета използва по две "
+"наведнъж, препоръчва се проверка не по-често от през 15 мин.\n"
+"- За да получите API ключове се регистрирайте на datahub.metoffice.gov.uk"
 
 #. 3.8->settings-schema.json->openweathermap_onecall_label->description
 msgid ""
@@ -2825,6 +2817,9 @@ msgid ""
 "an API key. Make sure your call limit is 1000 calls/day to avoid charges. "
 "Read more about the service at openweathermap.org/api/one-call-api."
 msgstr ""
+"Версия на OpenWeatherMap, която предлага повече възможности (от преди), но "
+"изисква API ключ. Уверете че имате до 100 проверки дневно, за да избегнете "
+"такси. Прочете повече на openweathermap.org/api/one-call-api."
 
 #. 3.8->settings-schema.json->pirateweather_label->description
 msgid ""
@@ -2832,6 +2827,9 @@ msgid ""
 "data that is compatible with the Dark Sky API. Read more about the service "
 "at pirateweather.net."
 msgstr ""
+"Pirate Weather е безплатна метео услуга с отворен код, която доставя данни "
+"за времето и е съвместима с Dark Sky API. Прочетете повече на "
+"pirateweather.net."
 
 #. 3.8->settings-schema.json->visualcrossing_label->description
 msgid ""
@@ -2842,6 +2840,11 @@ msgid ""
 " - Provides 1000 Free calls a day\n"
 " - Needs an API key"
 msgstr ""
+"Метео услуга от Visual Crossing корпорация, основана през 2003 със седалища "
+"в САЩ и Германия. Прочетете повече на visualcrossing.com.\n"
+"\n"
+" - 1000 безплатни проверки дневно\n"
+"- Изисква API ключ"
 
 #. 3.8->settings-schema.json->weatherbit_label->description
 msgid ""
@@ -2854,6 +2857,15 @@ msgid ""
 " - Using alerts will increase call usage by 33%\n"
 " - Hourly Weather forecast is supported but requires a non-free account."
 msgstr ""
+"Услуга за исторически и метео данни, доставена от  Weatherbit LLC, САЩ. "
+"Прочетете повече на weatherbit.io.\n"
+"\n"
+" - Препоръчва се проверка поне през час, защото иначе рискувате да "
+"надхвърлите дневния лимит. Безплатният абонаментен API ключ има ограничение "
+"от 50 проверки дневно.\n"
+"- Нужен е API ключ\n"
+"- Има аларма при надвишаване на потреблението с 33%\n"
+"- Почасовата прогноза е налична, но не е безплатна."
 
 #. 3.8->settings-schema.json->tomorrowio_label->description
 msgid ""
@@ -2864,6 +2876,11 @@ msgid ""
 " - Free plan includes 1000 calls per day\n"
 " - Needs an API key"
 msgstr ""
+"Метеорологични данни от американска технологична компания, основана през "
+"2016 със седалище Бостън. Прочетете повече на tomorrow.io.\n"
+"\n"
+" - Безплатния план включва 1000 проверки дневно\n"
+"- Изисква се API ключ"
 
 #. 3.8->settings-schema.json->accuweather_label->description
 msgid ""
@@ -2875,6 +2892,12 @@ msgid ""
 "day, remaining number of calls are shown in the applet tooltip\n"
 " - Needs an API key"
 msgstr ""
+"Онлайн услуга от компанията AccuWeather Inc, основана през 1962, със "
+"седалище САЩ. Прочетете повече на accuweather.com.\n"
+"\n"
+" - Безплатният план предлага много ограничен брой проверки на ден, затова "
+"оставащите проверки се показват в аплета като подсказка.\n"
+"- Изисква се API ключ"
 
 #. 3.8->settings-schema.json->weatherunderground_label->description
 msgid ""
@@ -2887,120 +2910,108 @@ msgid ""
 " - Needs an API key\n"
 " - Current weather condition come from forecast"
 msgstr ""
+"Weather Underground е частна уеб базирана информационна компания. Тя доставя "
+"наблюдение на времето и прогноза на много локации по цял свят. Седалището ѝ "
+"е в Ан Арбър, САЩ. Прочете повече на wunderground.com.\n"
+"\n"
+" - Имате около 1500 проверки на ден. Препоръчва се проверка през 15 мин\n"
+"- Изисква се API ключ\n"
+"- Текущото време се взема от прогнозата"
 
 #. 3.8->settings-schema.json->metoffice_forecast_apikey->description
-#, fuzzy
 msgid "Forecasts API Key"
-msgstr "Неправилен API ключ"
+msgstr "API ключ за прогнозата"
 
 #. 3.8->settings-schema.json->metoffice_forecast_apikey->tooltip
 msgid ""
 "Subscribe to 'Site Specific' -> 'Global Spot' Free plan to get this key."
 msgstr ""
+"За да получите ключ, направете безплатен абонамент за 'Site Specific' -> "
+"'Global Spot' ."
 
 #. 3.8->settings-schema.json->metoffice_observations_apikey->description
 msgid "Observations API Key"
-msgstr ""
+msgstr "API ключ за наблюдение"
 
 #. 3.8->settings-schema.json->metoffice_observations_apikey->tooltip
 msgid ""
 "Subscribe to 'Observations' -> 'Land Observations' Free plan to get this key."
 msgstr ""
+"За да получите ключ се абонирайте за 'Observations' -> 'Land Observations' ."
 
 #. 3.8->settings-schema.json->openweathermap_onecall_apikey->description
-#, fuzzy
 msgid "OpenWeatherMap OneCall API Key"
-msgstr "Weatherbit (необходим е ключ)"
+msgstr "Ключ за OpenWeatherMap OneCall API"
 
 #. 3.8->settings-schema.json->openweathermap_onecall_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at openweathermap.org and paste it here."
 msgstr ""
-"Копирайте ключа от регистрацията ви за Доставчик на прогнозата и го "
-"поставете тук."
+"Копирайте ключа от регистрацията ви в openweathermap.org и го поставете тук."
 
 #. 3.8->settings-schema.json->pirateweather_apikey->description
-#, fuzzy
 msgid "Pirate Weather API Key"
-msgstr "US Weather"
+msgstr "Ключ за Pirate Weather"
 
 #. 3.8->settings-schema.json->pirateweather_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at pirateweather.net and paste it here."
 msgstr ""
-"Копирайте ключа от регистрацията ви за Доставчик на прогнозата и го "
-"поставете тук."
+"Копирайте ключа от регистрацията ви в pirateweather.net и го поставете тук."
 
 #. 3.8->settings-schema.json->visualcrossing_apikey->description
-#, fuzzy
 msgid "Visual Crossing API Key"
-msgstr "Visual Crossing"
+msgstr "Ключ за Visual Crossing"
 
 #. 3.8->settings-schema.json->visualcrossing_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at visualcrossing.com and paste it here."
-msgstr ""
-"Копирайте ключа от регистрацията ви за Доставчик на прогнозата и го "
-"поставете тук."
+msgstr "Копирайте ключа от visualcrossing.com и го поставете тук."
 
 #. 3.8->settings-schema.json->weatherbit_apikey->description
-#, fuzzy
 msgid "Weatherbit API Key"
-msgstr "WeatherBit"
+msgstr "Ключ за WeatherBit"
 
 #. 3.8->settings-schema.json->weatherbit_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at weatherbit.io and paste it here."
 msgstr ""
-"Копирайте ключа от регистрацията ви за Доставчик на прогнозата и го "
-"поставете тук."
+"Копирайте ключа от регистрацията ви в  weatherbit.io и го поставете тук."
 
 #. 3.8->settings-schema.json->tomorrowio_apikey->description
-#, fuzzy
 msgid "Tomorrow.io API Key"
-msgstr "Tomorrow.io"
+msgstr "Ключ за Tomorrow.io"
 
 #. 3.8->settings-schema.json->tomorrowio_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at tomorrow.io and paste it here."
-msgstr ""
-"Копирайте ключа от регистрацията ви за Доставчик на прогнозата и го "
-"поставете тук."
+msgstr "Копирайте ключа от регистрацията ви в tomorrow.io  и го поставете тук."
 
 #. 3.8->settings-schema.json->accuweather_apikey->description
-#, fuzzy
 msgid "AccuWeather API Key"
-msgstr "AccuWeather"
+msgstr "Ключ за AccuWeather"
 
 #. 3.8->settings-schema.json->accuweather_apikey->tooltip
-#, fuzzy
 msgid ""
 "Copy this from your account at developer.accuweather.com and paste it here."
 msgstr ""
-"Копирайте ключа от регистрацията ви за Доставчик на прогнозата и го "
+"Копирайте ключа от регистрацията ви в developer.accuweather.com и го "
 "поставете тук."
 
 #. 3.8->settings-schema.json->weatherunderground_apikey->description
-#, fuzzy
 msgid "Weather Underground API Key"
-msgstr "Weather Underground"
+msgstr "Ключ за Weather Underground"
 
 #. 3.8->settings-schema.json->weatherunderground_apikey->tooltip
-#, fuzzy
 msgid ""
 "Copy this from your account at www.wunderground.com/weather/api and paste it "
 "here."
 msgstr ""
-"Копирайте ключа от регистрацията ви за Доставчик на прогнозата и го "
+"Копирайте ключа от регистрацията ви в www.wunderground.com/weather/api и го "
 "поставете тук."
 
 #. 3.8->settings-schema.json->apiKey->description
 msgid "API Key - Hidden, only for backwards compatibility"
-msgstr ""
+msgstr "API ключ - Скрит, използва се само за обратна съвместимост"
 
 #. 3.8->settings-schema.json->geoclue->description
 msgid "Prioritize GeoClue for location detection"
-msgstr ""
+msgstr "Приоритизиране на GeoClue за намиране на локация"
 
 #. 3.8->settings-schema.json->geoclue->tooltip
 msgid ""
@@ -3010,35 +3021,42 @@ msgid ""
 "fall back to IP-based location detection if GeoClue is not available or "
 "fails to provide location information."
 msgstr ""
+"Включете това за да използвате GeoClue за автоматично засичане на локация, "
+"ако е възможно. Това може да предостави по-точна информация за локацията, "
+"ако хадуера го поддържа. Но без съвместим хардуер ще е много неточно. Ако "
+"GeoClue не е налично или не може да предостави локация, ще бъдете върнати "
+"обратно на IP-базирана локация."
 
 #. 3.8->settings-schema.json->autoloc_provider->description
 msgid "IP-based automatic location provider"
-msgstr ""
+msgstr "IP базиран автоматичен доставчик на локация"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geoip.fedoraproject.org"
-msgstr ""
+msgstr "geoip.fedoraproject.org"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "ipapi.com"
-msgstr ""
+msgstr "ipapi.com"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geojs.io"
-msgstr ""
+msgstr "geojs.io"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geoiplookup.io"
-msgstr ""
+msgstr "geoiplookup.io"
 
 #. 3.8->settings-schema.json->autoloc_provider->tooltip
 msgid ""
 "Usually this doesn't need changed, some users have reported better accuracy, "
 "corporate network support or various country-wide bans with one or other."
 msgstr ""
+"Това обикновено няма нужда да бъде променяно. Някои потребители докладват за "
+"по-добра точност, корпоративен мрежов съпорт или различни базирани на "
+"държава забрани."
 
 #. 3.8->settings-schema.json->location->tooltip
-#, fuzzy
 msgid ""
 "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
@@ -3049,16 +3067,19 @@ msgid ""
 msgstr ""
 "Може да въведете координати 'Географска Ширина, Географска Дължина' "
 "(например 51.5085,-0.1257) или 'Град,Код на Държава' (например София, БГ) "
-"или опитайте да въведете {Номер} {Улица} {Град} {Пощенски код} {Държава}. "
+"или опитайте да въведете {Номер} {Street} {Град} {Postcode} {Country}. "
 "Алгоритъмът за търсене е много гъвкав спрямо използвания формат. 3 секунди "
 "след спирането на въвеждане на данни, адреса който сте въвели ще бъде "
-"автоматично променен и ще можете да го потвърдите."
+"автоматично променен и ще можете да го потвърдите. Благодарение на "
+"nominatim.openstreetmap.org."
 
 #. 3.8->settings-schema.json->locationDescription->description
 msgid ""
 "If the location field matches a saved location's 'Search Entry' field, the "
 "saved location will be used instead."
 msgstr ""
+"Ако полето за локация съвпада със запазената локация в полето 'Търси "
+"локация', ще бъде използвана запазената локация."
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
@@ -3107,32 +3128,31 @@ msgid "Enable minutely precipitation forecast"
 msgstr "Включи минутно обновление на валежите"
 
 #. 3.8->settings-schema.json->immediatePrecip->tooltip
-#, fuzzy
 msgid ""
 "If you'd like to use this make sure you use your exact coordinates/address "
 "as location to help its accuracy. See Feature map on website on support for "
 "your provider"
 msgstr ""
 "Ако желаете да използвате това, използвайте точни координати/адрес като "
-"местоположение с цел подобряване на точността. За момента се поддържа само "
-"от OpenWeatherMap и MET Norway."
+"местоположение с цел подобряване на точността. Проверете развитието в "
+"уебсайта, за да видите дали вече има поддръжка на вашият доставчик"
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Включване на предупрежденията"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
 msgstr ""
+"Ако има активни предупреждения, ще бъде показван бутон в изскачащото меню."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
 msgstr "Показване на температурата с двете единици"
 
 #. 3.8->settings-schema.json->tempTextOverride->tooltip
-#, fuzzy
 msgid ""
 "Some of the available values are: {c} is condition, {t} is temperature and "
 "{u} is unit. Full list of values are available on the Cinnamon spices "
@@ -3141,8 +3161,10 @@ msgid ""
 "things."
 msgstr ""
 "Някои от възможните параметри са: {c} за метеорологично условие, {t} за "
-"температура и {u} за мерна единица.\n"
-"Използването е невъзможно ако няма място във вертикалния панел."
+"температура и {u} за мерна единица. Пълният списък със стойности е наличен "
+"на уебсайта за добавки на Cinnamon.\n"
+"Може да се използва, ако във вертикалния панел няма място за заглавието, "
+"наред с други умни неща."
 
 #. 3.8->settings-schema.json->tooltipTextOverride->description
 msgid "Override tooltip on panel"
@@ -3215,7 +3237,7 @@ msgstr "Като ЮИ, С вместо със стрелки указващи п
 
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
-msgstr ""
+msgstr "Доставчикът да преведе състоянието, ако е възможно"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
@@ -3223,6 +3245,8 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"Дали доставчика да преведе прогнозата на вашият език, ако е налично. В "
+"противен случай ще бъде използван превода доставен от този аплет."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
@@ -3260,9 +3284,8 @@ msgstr ""
 "Моля, проверете, че проблемът вече не е изпратен."
 
 #. 3.8->settings-schema.json->maintainer->description
-#, fuzzy
 msgid "Current maintainer: ---"
-msgstr "Поддържа се от: Gr3q"
+msgstr "Поддържа се от: ---"
 
 #. 3.8->settings-schema.json->issue-reporting-explanation->description
 msgid ""
@@ -3298,8 +3321,8 @@ msgstr ""
 "Определянето на местоположението ви в повечето случай ще е автоматично. Може "
 "да го въведете и ръчно, като въведете координати 'Географска Ширина, "
 "Географска Дължина' (например 51.5085,-0.1257) или 'Град,Код на Държава' "
-"(например София,БГ) или опитайте да въведете {Номер} {Улица} {Град} "
-"{Пощенски код} {Държава}. Алгоритъмът за търсене е много гъвкав спрямо "
+"(например София,БГ) или опитайте да въведете {Номер} {Street} {Град} "
+"{Postcode} {Country}. Алгоритъмът за търсене е много гъвкав спрямо "
 "използвания формат. 3 секунди след спирането на въвеждане на данни, адреса "
 "който сте въвели ще бъде автоматично променен и ще можете да го потвърдите."
 
@@ -3341,7 +3364,7 @@ msgstr "Изберете път за запазване на лог файлов
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "Презапис на User Agent-а"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -3350,10 +3373,13 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"Ако имате проблеми с аплета и знаете че User Agent-а е проблемен, може да "
+"опитате да го презапишете. Променете го само ако знаете какво правите. Това "
+"се изпраща от аплета до сървъра, за да се вземат данните за времето."
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "Изпълни команда, когато информацията за времето се промени"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -3373,14 +3399,29 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"The applet will run the command you provide every time the weather data is "
+"updated. The command will be interpolated with the same values with the same "
+"format you can get in any of the overrides, in addition you get {full_data} "
+"which is the full current weather data. Interpolation with single brackets "
+"{xxx} will not be escaped, with double brackets {{xxxx}} they are wrapped in "
+"single quotes (') and all other single quotes are escaped inside. You can "
+"use this to integrate the weather data with other parts of your system. You "
+"can look up the full weather data structure via the link in the README.\n"
+"\n"
+"Example: 'notify-send \"The weather is {c} and the temperature is {t}{u}\"' "
+"will show a notification with the current weather condition and "
+"temperature.\n"
+"\n"
+"Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
+"data to a file in /tmp."
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "Тествай командата"
 
 #. 3.8->settings-schema.json->uvIndex->description
 msgid "Enable displaying UV Index"
-msgstr ""
+msgstr "Включване показването на UV индекс"
 
 #. 3.8->settings-schema.json->uvIndex->tooltip
 msgid ""
@@ -3388,3 +3429,5 @@ msgid ""
 "next to sunrise/sunset times. It will not show if the UV index is low risk "
 "(0-2)."
 msgstr ""
+"Ако е налично от доставчика, UV индекса ще бъде показван в изскачащото меню, "
+"близо да времето за изгрев/залез. Няма да се показва при нисък индекс (0-2)."

@@ -1,3 +1,126 @@
+### v3.16.5~20260609
+  * Fixes #8760: Network width always increases to 160 pixels.
+  * Fixes [#8760](https://github.com/linuxmint/cinnamon-spices-applets/issues/8760)
+
+### v3.16.4~20260607
+  * Allows you to display one decimal place for values shown on line charts.
+
+### v3.16.3~20260602
+  * Fixes a bug in the display of line charts.
+  * Fixes [#8733](https://github.com/linuxmint/cinnamon-spices-applets/issues/8733)
+
+### v3.16.2~20260528
+  * Ready for Linux Mint 23.
+
+### v3.16.1~20260526
+  * Maximize vertically this settings window.
+  * Replaces `window.maximize(2);` with `window.set_maximize_flags(2); window.maximize();` when the `window.set_maximize_flags()` function exists.
+
+### v3.16.0~20260523
+  * Ready for Linux Mint 23.
+
+### v3.15.4~20260520
+  * New option: Show the tooltip immediately.
+
+### v3.15.3~20260514
+  * New option: Display the temperature unit.
+  * Fixes [#8679](https://github.com/linuxmint/cinnamon-spices-applets/issues/8679)
+
+### v3.15.2~20260506
+  * Tooltip: Can change background color.
+  * Without Any Graphics mode: Display change, improving tooltip stability.
+
+### v3.15.1~20260506
+  * CPU: Show average load. Fixes a bug.
+
+### v3.15.0~20260505
+  * CPU: Show average load.
+
+### v3.14.2~20260504
+  * Disk I/O: Fixes tooltip when using symbols.
+  * Adds access to emoji database (bottom of the General tab).
+
+### v3.14.1~20260502
+  * CPUs (tooltip): Display load average (%) next the temperature.
+  * Custom translations in tooltip (see bottom of the General tab).
+  * Fixes [#8616](https://github.com/linuxmint/cinnamon-spices-applets/issues/8616)
+
+### v3.14.0~20260502
+  * Improvements to tooltips:
+    * CPUs: option to group them in sets of 4.
+    * Do not hide the tooltip too early.
+  * Fixes [#8622](https://github.com/linuxmint/cinnamon-spices-applets/issues/8622)
+  * Fixes [#8629](https://github.com/linuxmint/cinnamon-spices-applets/issues/8629)
+
+### v3.13.6~20260430
+  * You can specify the minimum unit of measurement of your choice for the amount of data transferred: byte, kilobyte, megabyte, etc.
+  * Displays the tooltip instantly when the applet is hovered over.
+  * Fixes [#8617](https://github.com/linuxmint/cinnamon-spices-applets/issues/8617)
+  * Code cleanup.
+
+### v3.13.5~20260426
+  * Flow (Network, Disk I/O): Select minimum unit (k, M, G etc.)
+
+### v3.13.4~20260425
+  * Adds ability to modify the size of the display font, for each type of graph.
+  * Fixes [#8595](https://github.com/linuxmint/cinnamon-spices-applets/issues/8595)
+
+### v3.13.3~20260425
+  * Adds ability to select the size of the tooltip font.
+  * Fixes [#8593](https://github.com/linuxmint/cinnamon-spices-applets/issues/8593)
+
+### v3.13.2~20260424
+  * Battery: uses several methods to obtain its measurements.
+  * Fixes [#8588](https://github.com/linuxmint/cinnamon-spices-applets/issues/8588)
+
+### v3.13.1~20260422
+  * Memory: Can display only Used and Available memory, for users who are not familiar with concepts such as Cache, Buffers, Shared etc.
+
+
+### v3.13.0~20260420
+  * Customize the labels. Many enhancements. You can use emojis as characters and set the vertical offset (in pixels) for each of them. You can bring them to the background or to the foreground (use colors with transparency from 50% to 67%).
+
+### v3.12.1~20260417
+  * Avoid errors drawing curves.
+
+### v3.12.0~20260417
+  * Adding leds for Disk and for Network.
+  * Better take into account logarithmic scale and automatic scale.
+
+### v3.11.3~20260414
+  * Improved accuracy of the battery charge level and lifespan displayed in the tooltip.
+  * Fixes [#8542](https://github.com/linuxmint/cinnamon-spices-applets/issues/8542)
+
+### v3.11.2~20260412
+  * Bugfix.
+  * Fixes [#8527](https://github.com/linuxmint/cinnamon-spices-applets/issues/8527)
+
+### v3.11.1~20260410
+  * Set position of display markers (Memory, Disk Usage, Battery).
+  * Fixes [#8518](https://github.com/linuxmint/cinnamon-spices-applets/issues/8518)
+
+### v3.11.0~20260409
+  * Battery: New module fixing [#8485](https://github.com/linuxmint/cinnamon-spices-applets/issues/8485)
+  * Swap: Display “0.00” instead of “NaN” when the swap amount used is zero.
+  * Disk I/O: Show Read/Write average speed in panel.
+  * Fixes [#8500](https://github.com/linuxmint/cinnamon-spices-applets/issues/8500)
+  * Tooltip: Show or hide for each module.
+
+### v3.10.4~20260404
+  * Panel display improvements. Better using the `DejaVuSansMono-Bold.ttf` font from the `fonts-dejavu-mono` package.
+  * Avoids changing Refresh Rate when updating applet.
+  * Fixes [#8495](https://github.com/linuxmint/cinnamon-spices-applets/issues/8495)
+
+### v3.10.3~20260404
+  * Memory: The user can choose whether or not to display the memory usage percentage.
+  * Fixes [#8493](https://github.com/linuxmint/cinnamon-spices-applets/issues/8493)
+
+### v3.10.2~20260403
+  * Disk usage: The user can choose whether or not to display the usage percentage for each disk in the panel.
+  * Fixes [#8487](https://github.com/linuxmint/cinnamon-spices-applets/issues/8487)
+  * Fixes errors related to tooltip display.
+  * Some improvements.
+
 ### v3.10.1~20260324
   * The user can choose between the htop method (recommended) and the System Monitor method to calculate memory values.
   * Fixes [#8457](https://github.com/linuxmint/cinnamon-spices-applets/issues/8457)

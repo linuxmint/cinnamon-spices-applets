@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AlwaysOn@krivetochka 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-03 19:31-0400\n"
+"POT-Creation-Date: 2026-02-26 13:44+0200\n"
 "PO-Revision-Date: 2025-09-05 00:06+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,31 +16,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:28
+#. applet.js:39
 msgid "Click here to activate AlwaysOn"
 msgstr "點此啟用 AlwaysOn"
 
-#. applet.js:66
+#. applet.js:110
 msgid "AlwaysOn activated"
 msgstr "AlwaysOn 已啟用"
 
-#. applet.js:66
+#. applet.js:110
 msgid "Your computer will now stay active."
 msgstr "電腦現在會保持運作。"
 
-#. applet.js:74
+#. applet.js:114
 msgid "Deactivate AlwaysOn"
 msgstr "停用 AlwaysOn"
 
-#. applet.js:85
+#. applet.js:156
 msgid "AlwaysOn deactivated"
 msgstr "AlwaysOn 已停用"
 
-#. applet.js:85
+#. applet.js:156
 msgid "Now your computer can go to sleep."
 msgstr "電腦現在可以進入睡眠模式。"
 
-#. applet.js:93
+#. applet.js:160
 msgid "Activate AlwaysOn"
 msgstr "啟用 AlwaysOn"
 
@@ -53,16 +53,12 @@ msgid ""
 "When AlwaysOn is activated, the screen will remain on, and the computer will "
 "not go to sleep. The behavior can be changed in the applet settings."
 msgstr ""
-"啟用 AlwaysOn 時，螢幕會持續亮著，且電腦不會進入睡眠。此行為可在小程式"
-"設定中調整。"
+"啟用 AlwaysOn 時，螢幕會持續亮著，且電腦不會進入睡眠。此行為可在小程式設定中"
+"調整。"
 
 #. settings-schema.json->section-general->description
-msgid "General"
-msgstr "一般"
-
-#. settings-schema.json->change-affected-settings->description
-msgid "Click to select which settings will be affected by this applet"
-msgstr "點此選取此小程式將影響的設定"
+msgid "Choose which parameters this applet affects"
+msgstr ""
 
 #. settings-schema.json->idle-dim-battery->description
 msgid "Dim the screen when idle"
@@ -76,9 +72,9 @@ msgstr "閒置時進入睡眠模式"
 msgid "Turning off the screen when idle"
 msgstr "閒置時關閉螢幕"
 
-#. settings-schema.json->key-bind->description
-msgid "Select a combination to activate the applet"
-msgstr "選擇啟用此小程式的組合鍵"
+#. settings-schema.json->lid-close-action->description
+msgid "Do nothing when laptop lid is closed"
+msgstr ""
 
 #. settings-schema.json->section-not->description
 msgid "Notifications"
@@ -103,6 +99,10 @@ msgstr "符號圖示"
 #. settings-schema.json->choose-icon->options
 msgid "Colored"
 msgstr "彩色圖示"
+
+#. settings-schema.json->key-bind->description
+msgid "Select a combination to activate the applet"
+msgstr "選擇啟用此小程式的組合鍵"
 
 #. settings-schema.json->hide-applet->description
 msgid "Hide applet from the panel (works best with notifications enabled)"
