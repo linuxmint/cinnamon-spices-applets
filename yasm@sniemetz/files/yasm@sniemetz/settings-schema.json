@@ -1,0 +1,542 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "general",
+      "uptime",
+      "battery",
+      "cpu",
+      "memory",
+      "disk",
+      "network",
+      "fan",
+      "gpu"
+    ],
+    "general": {
+      "type": "page",
+      "title": "General",
+      "sections": [
+        "general-section"
+      ]
+    },
+    "uptime": {
+      "type": "page",
+      "title": "Load",
+      "sections": [
+        "uptime-section",
+        "load-section"
+      ]
+    },
+    "battery": {
+      "type": "page",
+      "title": "Power",
+      "sections": [
+        "battery-section"
+      ]
+    },
+    "cpu": {
+      "type": "page",
+      "title": "CPU",
+      "sections": [
+        "cpu-section"
+      ]
+    },
+    "memory": {
+      "type": "page",
+      "title": "Memory",
+      "sections": [
+        "memory-section"
+      ]
+    },
+    "disk": {
+      "type": "page",
+      "title": "Disk",
+      "sections": [
+        "disk-section"
+      ]
+    },
+    "network": {
+      "type": "page",
+      "title": "Network",
+      "sections": [
+        "network-section"
+      ]
+    },
+    "fan": {
+      "type": "page",
+      "title": "Fan",
+      "sections": [
+        "fan-section"
+      ]
+    },
+    "gpu": {
+      "type": "page",
+      "title": "GPU",
+      "sections": [
+        "gpu-section"
+      ]
+    },
+    "general-section": {
+      "type": "section",
+      "title": "General Settings",
+      "keys": [
+        "applet-description",
+        "refresh-interval",
+        "panel-separator"
+      ]
+    },
+    "uptime-section": {
+      "type": "section",
+      "title": "Uptime",
+      "keys": [
+        "uptime-enabled",
+        "uptime-display",
+        "uptime-label"
+      ]
+    },
+    "load-section": {
+      "type": "section",
+      "title": "Load Average",
+      "keys": [
+        "load-display",
+        "uptime-load-label",
+        "load-warn",
+        "load-alert"
+      ]
+    },
+    "battery-section": {
+      "type": "section",
+      "title": "Power",
+      "keys": [
+        "battery-enabled",
+        "battery-display",
+        "battery-label",
+        "battery-list",
+        "rapl-enable",
+        "bat-warn",
+        "bat-alert"
+      ]
+    },
+    "cpu-section": {
+      "type": "section",
+      "title": "CPU",
+      "keys": [
+        "cpu-enabled",
+        "cpu-display",
+        "cpu-label",
+        "cpu-temp-warn",
+        "cpu-temp-alert",
+        "cpu-temp-alert-notify",
+        "cpu-use-warn",
+        "cpu-use-alert"
+      ]
+    },
+    "memory-section": {
+      "type": "section",
+      "title": "Memory",
+      "keys": [
+        "memory-enabled",
+        "memory-display",
+        "memory-label"
+      ]
+    },
+    "disk-section": {
+      "type": "section",
+      "title": "Disk",
+      "keys": [
+        "disk-enabled",
+        "disk-display",
+        "disk-label",
+        "disk-list"
+      ]
+    },
+    "network-section": {
+      "type": "section",
+      "title": "Network",
+      "keys": [
+        "network-enabled",
+        "network-display",
+        "network-label",
+        "net-list"
+      ]
+    },
+    "fan-section": {
+      "type": "section",
+      "title": "Fan",
+      "keys": [
+        "fan-enabled",
+        "fan-display",
+        "fan-label",
+        "fan-hwmon-list"
+      ]
+    },
+    "gpu-section": {
+      "type": "section",
+      "title": "GPU",
+      "keys": [
+        "gpu-enabled",
+        "gpu-display",
+        "gpu-label",
+        "gpu-temp-warn",
+        "gpu-temp-alert",
+        "gpu-temp-alert-notify"
+      ]
+    }
+  },
+  "applet-description": {
+    "type": "label",
+    "description": "YASM displays live system metrics directly in your Cinnamon panel — uptime, load average, battery charge and power draw, CPU and GPU temperature and usage, memory, disk utilisation and throughput, network transfer rates, and fan speeds.\n\nEach tile shows a compact sparkline history graph on hover. Metrics are collected every few seconds and thresholds can be configured per tile to colour-code warn and alert states."
+  },
+  "load-warn": {
+    "type": "spinbutton",
+    "default": 70,
+    "min": 10,
+    "max": 200,
+    "step": 5,
+    "units": "%",
+    "description": "Load warn (% per core)"
+  },
+  "load-alert": {
+    "type": "spinbutton",
+    "default": 90,
+    "min": 10,
+    "max": 200,
+    "step": 5,
+    "units": "%",
+    "description": "Load alert (% per core)"
+  },
+  "cpu-temp-warn": {
+    "type": "spinbutton",
+    "default": 70,
+    "min": 40,
+    "max": 100,
+    "step": 5,
+    "description": "CPU temp warn (°C)"
+  },
+  "cpu-temp-alert": {
+    "type": "spinbutton",
+    "default": 85,
+    "min": 40,
+    "max": 100,
+    "step": 5,
+    "description": "CPU temp alert (°C)"
+  },
+  "cpu-use-warn": {
+    "type": "spinbutton",
+    "default": 50,
+    "min": 10,
+    "max": 95,
+    "step": 5,
+    "description": "CPU usage warn %"
+  },
+  "cpu-use-alert": {
+    "type": "spinbutton",
+    "default": 80,
+    "min": 10,
+    "max": 95,
+    "step": 5,
+    "description": "CPU usage alert %"
+  },
+  "bat-warn": {
+    "type": "spinbutton",
+    "default": 30,
+    "min": 5,
+    "max": 80,
+    "step": 5,
+    "description": "Battery warn %"
+  },
+  "bat-alert": {
+    "type": "spinbutton",
+    "default": 15,
+    "min": 5,
+    "max": 80,
+    "step": 5,
+    "description": "Battery alert %"
+  },
+  "cpu-temp-alert-notify": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Notify when CPU temperature is critical"
+  },
+  "gpu-temp-warn": {
+    "type": "spinbutton",
+    "default": 70,
+    "min": 40,
+    "max": 100,
+    "step": 5,
+    "description": "GPU temp warn (°C)"
+  },
+  "gpu-temp-alert": {
+    "type": "spinbutton",
+    "default": 85,
+    "min": 40,
+    "max": 100,
+    "step": 5,
+    "description": "GPU temp alert (°C)"
+  },
+  "gpu-temp-alert-notify": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Notify when GPU temperature is critical"
+  },
+  "refresh-interval": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 1,
+    "max": 30,
+    "step": 1,
+    "units": "seconds",
+    "description": "Refresh interval"
+  },
+  "panel-separator": {
+    "type": "entry",
+    "default": "",
+    "description": "Separator between panel sections (blank = none)"
+  },
+  "uptime-enabled": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show uptime & load"
+  },
+  "uptime-display": {
+    "type": "switch",
+    "default": true,
+    "description": "Show icon (off = show label)"
+  },
+  "uptime-label": {
+    "type": "entry",
+    "default": "",
+    "dependency": "!uptime-display",
+    "description": "Label text"
+  },
+  "load-display": {
+    "type": "switch",
+    "default": true,
+    "description": "Show icon (off = show label)"
+  },
+  "uptime-load-label": {
+    "type": "entry",
+    "default": "Load",
+    "dependency": "!load-display",
+    "description": "Label before load average value"
+  },
+  "battery-enabled": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show battery"
+  },
+  "battery-display": {
+    "type": "switch",
+    "default": true,
+    "description": "Show icon (off = show label)"
+  },
+  "battery-label": {
+    "type": "entry",
+    "default": "",
+    "dependency": "!battery-display",
+    "description": "Label text"
+  },
+  "rapl-enable": {
+    "type": "button",
+    "description": "Enable CPU power monitoring (requires admin password)",
+    "callback": "enableRapl"
+  },
+  "battery-list": {
+    "type": "list",
+    "description": "Battery devices to monitor (use Scan button to discover)",
+    "columns": [
+      {
+        "id": "enabled",
+        "title": "Show",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "device",
+        "title": "Device",
+        "type": "string",
+        "default": "BAT0",
+        "expand-width": true
+      },
+      {
+        "id": "label",
+        "title": "Label",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "default": []
+  },
+  "cpu-enabled": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show CPU"
+  },
+  "cpu-display": {
+    "type": "switch",
+    "default": true,
+    "description": "Show icon (off = show label)"
+  },
+  "cpu-label": {
+    "type": "entry",
+    "default": "",
+    "dependency": "!cpu-display",
+    "description": "Label text"
+  },
+  "memory-enabled": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show memory"
+  },
+  "memory-display": {
+    "type": "switch",
+    "default": true,
+    "description": "Show icon (off = show label)"
+  },
+  "memory-label": {
+    "type": "entry",
+    "default": "",
+    "dependency": "!memory-display",
+    "description": "Label text"
+  },
+  "disk-enabled": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show disk"
+  },
+  "disk-display": {
+    "type": "switch",
+    "default": true,
+    "description": "Show icon (off = show label)"
+  },
+  "disk-label": {
+    "type": "entry",
+    "default": "",
+    "dependency": "!disk-display",
+    "description": "Label text"
+  },
+  "disk-list": {
+    "type": "list",
+    "description": "Disk devices to show (auto-discovered on first run)",
+    "columns": [
+      {
+        "id": "enabled",
+        "title": "Show",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "device",
+        "title": "Device",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      }
+    ],
+    "default": []
+  },
+  "network-enabled": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show network"
+  },
+  "network-display": {
+    "type": "switch",
+    "default": true,
+    "description": "Show icon (off = show label)"
+  },
+  "network-label": {
+    "type": "entry",
+    "default": "",
+    "dependency": "!network-display",
+    "description": "Label text"
+  },
+  "net-list": {
+    "type": "list",
+    "description": "Network interfaces to monitor (use Scan button to discover)",
+    "columns": [
+      {
+        "id": "enabled",
+        "title": "Show",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "iface",
+        "title": "Interface",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      },
+      {
+        "id": "label",
+        "title": "Label",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "default": []
+  },
+  "fan-enabled": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show fan speeds"
+  },
+  "fan-display": {
+    "type": "switch",
+    "default": true,
+    "description": "Show icon (off = show label)"
+  },
+  "fan-label": {
+    "type": "entry",
+    "default": "",
+    "dependency": "!fan-display",
+    "description": "Label text"
+  },
+  "fan-hwmon-list": {
+    "type": "list",
+    "description": "Fan controller chips (auto-discovered on first run)",
+    "columns": [
+      {
+        "id": "enabled",
+        "title": "Show",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "hwmon",
+        "title": "hwmon",
+        "type": "string",
+        "default": "0"
+      },
+      {
+        "id": "name",
+        "title": "Chip",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      }
+    ],
+    "default": []
+  },
+  "gpu-enabled": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show GPU"
+  },
+  "gpu-display": {
+    "type": "switch",
+    "default": true,
+    "description": "Show icon (off = show label)"
+  },
+  "gpu-label": {
+    "type": "entry",
+    "default": "",
+    "dependency": "!gpu-display",
+    "description": "Label text"
+  }
+}
