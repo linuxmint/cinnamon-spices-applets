@@ -1543,7 +1543,7 @@ msgstr "110%"
 #. 2.8->settings-schema.json->percentMaxVol->options
 #. 3.4->settings-schema.json->percentMaxVol->options
 msgid "100%"
-msgstr 100%"
+msgstr "100%"
 
 #. 2.8->settings-schema.json->percentMaxVol->options
 #. 3.4->settings-schema.json->percentMaxVol->options
