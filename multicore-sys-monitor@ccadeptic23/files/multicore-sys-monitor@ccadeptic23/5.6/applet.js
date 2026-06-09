@@ -686,10 +686,10 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
                 Math.round(this.Net_width / this.graphStep) * this.graphStep
             );
         }
-        if (this.Net_total_display && this.Net_totalCorner.includes("O") && Net_width < 80)
-            Net_width = 80;
-        if (this.Net_total_display && !this.Net_totalCorner.includes("O") && Net_width < 160)
-            Net_width = 160;
+        //~ if (this.Net_total_display && this.Net_totalCorner.includes("O") && Net_width < 80)
+            //~ Net_width = 80;
+        //~ if (this.Net_total_display && !this.Net_totalCorner.includes("O") && Net_width < 160)
+            //~ Net_width = 160;
         this.Net_width = Net_width;
     }
 
@@ -701,10 +701,10 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
                 Math.round(this.Disk_width / this.graphStep) * this.graphStep
             );
         }
-        if (this.Disk_speed_display && this.Disk_speedCorner.includes("O") && Disk_width < 80)
-            Disk_width = 80;
-        if (this.Disk_speed_display && !this.Disk_speedCorner.includes("O") && Disk_width < 160)
-            Disk_width = 160;
+        //~ if (this.Disk_speed_display && this.Disk_speedCorner.includes("O") && Disk_width < 80)
+            //~ Disk_width = 80;
+        //~ if (this.Disk_speed_display && !this.Disk_speedCorner.includes("O") && Disk_width < 160)
+            //~ Disk_width = 160;
         this.Disk_width = Disk_width;
     }
 

@@ -1,3 +1,7 @@
+### v3.16.5~20260609
+  * Fixes #8760: Network width always increases to 160 pixels.
+  * Fixes [#8760](https://github.com/linuxmint/cinnamon-spices-applets/issues/8760)
+
 ### v3.16.4~20260607
   * Allows you to display one decimal place for values shown on line charts.
 
