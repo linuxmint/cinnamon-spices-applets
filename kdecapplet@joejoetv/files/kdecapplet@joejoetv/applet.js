@@ -1712,15 +1712,18 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         if (versionArray.length >= 2) {
             if (versionArray[0] == 1) {
                 if (versionArray[1] == 3) {
-                    // Version 1.3
+                    // Version == 1.3
                     return 0;
                 } else if (versionArray[1] > 3) {
                     // Version >= 1.4
                     return 1;
                 }
-            } else if (versionArray[0] > 1) {
-                // Version > 21.x.x
+            } else if (versionArray[0] == 21) {
+                // Version == 21.x.x
                 return 2;
+            } else if (versionArray[0] > 21) {
+                // Version > 21.x.x
+                return 3;
             }
         }
 
@@ -1774,24 +1777,38 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      * Opens the KDE Connect configuration
      */
     openKDECConfiguration() {
+        // Try to open the KDE Connect settings via different commands
+        const tryOpenCommands = () => {
+            const commands = ["kdeconnect-settings", "kcmshell5 kcm_kdeconnect", "kcmshell6 kcm_kdeconnect"]
+            for (const command of commands){
+                this.info("Trying command '" + command + "' to open KDE Connect Configuration...", CommonUtils.LogLevel.VERBOSE);
+                try {
+                    Util.trySpawnCommandLine(command);
+                    this.info("Opened KDE Connect Configuration via command!", CommonUtils.LogLevel.INFO);
+                    return;
+                } catch (error) {
+                    this.warn("Spawning command failed with error: " + error, CommonUtils.LogLevel.MINIMAL);
+                    continue;
+                }
+            }
+            this.error("Could not open the KDE Connect Configuration!", CommonUtils.LogLevel.MINIMAL);
+        }
+
         try {
-            if (this.compatMode.versionLevel > 1) {
+            // Depending on KDE Connect version and environment, different methods for opening the setting are required
+            if (1 < this.compatMode.versionLevel/*  && this.compatMode.versionLevel < 3 */) {
                 if (this.kdecProxy) {
-                    this.kdecProxy.openConfigurationRemote(Lang.bind(this, function(returnValue, errorObj) {
+                    this.kdecProxy.openConfigurationRemote((returnValue, errorObj) => {
                         if (errorObj === null) {
-                            this.info("Opened KDE Connect Configuration!", CommonUtils.LogLevel.INFO);
+                            this.info("Opened KDE Connect Configuration via DBus!", CommonUtils.LogLevel.INFO);
                         } else {
-                            Util.spawnCommandLineAsync("kcmshell5 kcm_kdeconnect", null, Lang.bind(this, function() {
-                                this.error("Error while opening KDE Connect Configuration!", CommonUtils.LogLevel.MINIMAL);
-                            }));
+                            this.warn("Count not open the KDE Connect Configuration using DBus, trying commands...", CommonUtils.LogLevel.MINIMAL);
+                            tryOpenCommands();
                         }
-                    }));
+                    });
                 }
             } else {
-                Util.spawnCommandLineAsync("kcmshell5 kcm_kdeconnect", null, Lang.bind(this, function() {
-                    this.error("Error while opening KDE Connect Configuration!", CommonUtils.LogLevel.MINIMAL);
-                }));
-                this.info("Opening KDE Connect Configuration...", CommonUtils.LogLevel.INFO);
+                tryOpenCommands();
             }
         } catch (error) {
             this.error("Error while opening KDE Connect configuration: " + error, CommonUtils.LogLevel.MINIMAL);
