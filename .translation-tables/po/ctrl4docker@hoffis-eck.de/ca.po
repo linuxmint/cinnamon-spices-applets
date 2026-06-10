@@ -1,0 +1,43 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ctrl4docker@hoffis-eck.de 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-07-05 00:36+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:93
+msgid "Checking status"
+msgstr "Comprovant estat"
+
+#. metadata.json->name
+msgid "Docker Control"
+msgstr "Control de Docker"
+
+#. metadata.json->description
+msgid "Activates/Deactivates Docker Container"
+msgstr "Activa/Desactiva el contenidor de Docker"
+
+#. settings-schema.json->image->description
+msgid "docker image"
+msgstr "imatge de docker"
+
+#. settings-schema.json->container->description
+msgid "container name"
+msgstr "nom del contenidor"
+
+#. settings-schema.json->parameter->description
+msgid "parameter for the container"
+msgstr "paràmetre pel contenidor"

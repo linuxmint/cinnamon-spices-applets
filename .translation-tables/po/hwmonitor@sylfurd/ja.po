@@ -1,0 +1,816 @@
+# GRAPHICAL HARDWARE MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# sylfurd, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: hwmonitor@sylfurd 1.3.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2021-03-03 14:53+0300\n"
+"PO-Revision-Date: 2025-11-18 23:59+0900\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#: 3.2/providers.js:15 3.8/providers.js:17
+msgid "Dependency missing"
+msgstr "必要なライブラリがありません"
+
+#: 3.2/providers.js:19 3.8/providers.js:21
+#, javascript-format
+msgid "to use the applet %s"
+msgstr "がアプレット %s を使用するために必要です"
+
+#: 3.2/providers.js:15 3.8/providers.js:17
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+msgstr ""
+"GTop パッケージをインストールしてください\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+
+#. 3.2->settings-schema.json->CPU->title
+#. 3.8->settings-schema.json->CPU->title
+#: 3.2/providers.js:36 3.8/providers.js:34
+msgid "CPU"
+msgstr "CPU"
+
+#. 3.2->settings-schema.json->MEM->title
+#. 3.8->settings-schema.json->MEM->title
+#: 3.2/providers.js:82 3.8/providers.js:76
+msgid "MEM"
+msgstr "メモリ"
+
+#. 3.2->settings-schema.json->NET_IN->title
+#. 3.8->settings-schema.json->NET_IN->title
+#: 3.2/providers.js:113 3.8/providers.js:102
+msgid "NET (in)"
+msgstr "ネット (受信)"
+
+#. 3.2->settings-schema.json->NET_OUT->title
+#. 3.8->settings-schema.json->NET_OUT->title
+#: 3.2/providers.js:117 3.8/providers.js:106
+msgid "NET (out)"
+msgstr "ネット (送信)"
+
+#. 3.2->settings-schema.json->DISK_READ->title
+#. 3.8->settings-schema.json->DISK_READ->title
+#: 3.2/providers.js:232 3.8/providers.js:214
+msgid "DISK (read)"
+msgstr "ディスク (読取)"
+
+#. 3.2->settings-schema.json->DISK_WRITE->title
+#. 3.8->settings-schema.json->DISK_WRITE->title
+#: 3.2/providers.js:235 3.8/providers.js:217
+msgid "DISK (write)"
+msgstr "ディスク (書込)"
+
+#: 3.2/providers.js:318 3.8/providers.js:290
+msgid "BAT"
+msgstr "電池"
+
+#: 3.2/applet.js:87 3.8/applet.js:87
+msgid "Open System Monitor"
+msgstr "システムモニターを開く"
+
+#: 3.2/applet.js:91 3.8/applet.js:91
+msgid "Restart 'Graphical hardware monitor'"
+msgstr "'グラフィカルハードウェアモニター' を再起動"
+
+#. metadata.json->description
+msgid ""
+"Displaying realtime system information (CPU, memory, network and disk load)."
+msgstr ""
+"システムの情報をリアルタイムに表示します (CPU・メモリ・ネットワーク・ディスク"
+"負荷)"
+
+#. metadata.json->name
+msgid "Graphical hardware monitor"
+msgstr "グラフィカルハードウェアモニター"
+
+#. 3.2->settings-schema.json->General->title
+#. 3.8->settings-schema.json->General->title
+msgid "General"
+msgstr "全般"
+
+#. 3.2->settings-schema.json->BAT->title
+#. 3.8->settings-schema.json->BAT->title
+msgid "BAT (battery)"
+msgstr "電池 (バッテリー)"
+
+#. 3.2->settings-schema.json->general_settings->title
+#. 3.8->settings-schema.json->general_settings->title
+msgid "General settings"
+msgstr "全般設定"
+
+#. 3.2->settings-schema.json->theme_settings->title
+#. 3.2->settings-schema.json->theme->description
+#. 3.8->settings-schema.json->theme_settings->title
+#. 3.8->settings-schema.json->theme->description
+msgid "Theme (graph)"
+msgstr "テーマ (グラフ)"
+
+#. 3.2->settings-schema.json->theme_data_settings->title
+#. 3.2->settings-schema.json->theme_data->description
+#. 3.8->settings-schema.json->theme_data_settings->title
+#. 3.8->settings-schema.json->theme_data->description
+msgid "Theme (graph data)"
+msgstr "テーマ (グラフのデータ)"
+
+#. 3.2->settings-schema.json->CPU_settings->title
+#. 3.8->settings-schema.json->CPU_settings->title
+msgid "CPU settings"
+msgstr "CPU の設定"
+
+#. 3.2->settings-schema.json->MEM_settings->title
+#. 3.8->settings-schema.json->MEM_settings->title
+msgid "MEM settings"
+msgstr "メモリの設定"
+
+#. 3.2->settings-schema.json->NET_IN_settings->title
+#. 3.8->settings-schema.json->NET_IN_settings->title
+msgid "NET (in) settings"
+msgstr "ネット (受信) の設定"
+
+#. 3.2->settings-schema.json->NET_OUT_settings->title
+#. 3.8->settings-schema.json->NET_OUT_settings->title
+msgid "NET (out) settings"
+msgstr "ネット (送信) の設定"
+
+#. 3.2->settings-schema.json->DISK_READ_settings->title
+#. 3.8->settings-schema.json->DISK_READ_settings->title
+msgid "DISK (read) settings"
+msgstr "ディスク (読取) の設定"
+
+#. 3.2->settings-schema.json->DISK_WRITE_settings->title
+#. 3.8->settings-schema.json->DISK_WRITE_settings->title
+msgid "DISK (write) settings"
+msgstr "ディスク (書込) の設定"
+
+#. 3.2->settings-schema.json->BAT_settings->title
+#. 3.8->settings-schema.json->BAT_settings->title
+msgid "BAT (battery) settings"
+msgstr "電池 (バッテリー) の設定"
+
+#. 3.2->settings-schema.json->frequency->options
+#. 3.8->settings-schema.json->frequency->options
+msgid "0.5"
+msgstr "0.5"
+
+#. 3.2->settings-schema.json->frequency->options
+#. 3.8->settings-schema.json->frequency->options
+msgid "1.0"
+msgstr "1.0"
+
+#. 3.2->settings-schema.json->frequency->options
+#. 3.8->settings-schema.json->frequency->options
+msgid "2.0"
+msgstr "2.0"
+
+#. 3.2->settings-schema.json->frequency->options
+#. 3.8->settings-schema.json->frequency->options
+msgid "3.0"
+msgstr "3.0"
+
+#. 3.2->settings-schema.json->frequency->options
+#. 3.8->settings-schema.json->frequency->options
+msgid "4.0"
+msgstr "4.0"
+
+#. 3.2->settings-schema.json->frequency->options
+#. 3.8->settings-schema.json->frequency->options
+msgid "5.0"
+msgstr "5.0"
+
+#. 3.2->settings-schema.json->frequency->options
+#. 3.8->settings-schema.json->frequency->options
+msgid "10.0"
+msgstr "10.0"
+
+#. 3.2->settings-schema.json->frequency->description
+#. 3.8->settings-schema.json->frequency->description
+msgid "Update frequency (seconds)"
+msgstr "更新する頻度 (秒)"
+
+#. 3.2->settings-schema.json->frequency->tooltip
+#. 3.8->settings-schema.json->frequency->tooltip
+msgid "The amount of time (in seconds) between the graph updates."
+msgstr "何秒ごとにグラフを更新するかです。"
+
+#. 3.2->settings-schema.json->graph_line_mode->options
+#. 3.8->settings-schema.json->graph_line_mode->options
+msgid "Don't draw grid lines"
+msgstr "グリッドの線を描画しない"
+
+#. 3.2->settings-schema.json->graph_line_mode->options
+#. 3.8->settings-schema.json->graph_line_mode->options
+msgid "Draw graph over grid lines"
+msgstr "グラフをグリッドの線の上に描画"
+
+#. 3.2->settings-schema.json->graph_line_mode->options
+#. 3.8->settings-schema.json->graph_line_mode->options
+msgid "Draw grid lines over graph"
+msgstr "グリッドの線をグラフの上に描画"
+
+#. 3.2->settings-schema.json->graph_line_mode->description
+#. 3.8->settings-schema.json->graph_line_mode->description
+msgid "Grid lines"
+msgstr "グリッドの線"
+
+#. 3.2->settings-schema.json->graph_line_mode->tooltip
+#. 3.8->settings-schema.json->graph_line_mode->tooltip
+msgid "How to draw the graph grid lines."
+msgstr "どうグリッドの線を描画するかです。"
+
+#. 3.2->settings-schema.json->theme->options
+#. 3.8->settings-schema.json->theme->options
+msgid "dark theme"
+msgstr "暗いテーマ"
+
+#. 3.2->settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme_data->options
+#. 3.8->settings-schema.json->theme->options
+#. 3.8->settings-schema.json->theme_data->options
+msgid "gray theme"
+msgstr "灰色のテーマ"
+
+#. 3.2->settings-schema.json->theme->options
+#. 3.8->settings-schema.json->theme->options
+msgid "light theme"
+msgstr "明るいテーマ"
+
+#. 3.2->settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme_data->options
+#. 3.8->settings-schema.json->theme->options
+#. 3.8->settings-schema.json->theme_data->options
+msgid "custom theme"
+msgstr "任意のテーマ"
+
+#. 3.2->settings-schema.json->theme->tooltip
+#. 3.2->settings-schema.json->theme_data->tooltip
+#. 3.8->settings-schema.json->theme->tooltip
+#. 3.8->settings-schema.json->theme_data->tooltip
+msgid ""
+"Use 'custom theme' to select colors that matches your current desktop theme."
+msgstr ""
+"'任意のテーマ' を使用すると、お使いのデスクトップのテーマに合った色を選択でき"
+"ます。"
+
+#. 3.2->settings-schema.json->border_color->description
+#. 3.8->settings-schema.json->border_color->description
+msgid "Border color"
+msgstr "罫線の色"
+
+#. 3.2->settings-schema.json->border_color->tooltip
+#. 3.8->settings-schema.json->border_color->tooltip
+msgid "Click the button to select a border color for the graphs"
+msgstr "ボタンをクリックすると、グラフの罫線の色を選択できます。"
+
+#. 3.2->settings-schema.json->background_color1->description
+#. 3.8->settings-schema.json->background_color1->description
+msgid "Background color 1"
+msgstr "背景色 1"
+
+#. 3.2->settings-schema.json->background_color1->tooltip
+#. 3.8->settings-schema.json->background_color1->tooltip
+msgid ""
+"Click the button to select a starting color for the linear gradient of the "
+"graph background"
+msgstr ""
+"ボタンをクリックすると、グラフの背景にかけるグラデーションの始まりの色を選択"
+"できます。"
+
+#. 3.2->settings-schema.json->background_color2->description
+#. 3.8->settings-schema.json->background_color2->description
+msgid "Background color 2"
+msgstr "背景色 2"
+
+#. 3.2->settings-schema.json->background_color2->tooltip
+#. 3.8->settings-schema.json->background_color2->tooltip
+msgid ""
+"Click the button to select a ending color for the linear gradient of the "
+"graph background"
+msgstr ""
+"ボタンをクリックすると、グラフの背景にかけるグラデーションの終わりの色を選択"
+"できます。"
+
+#. 3.2->settings-schema.json->label_color->description
+#. 3.8->settings-schema.json->label_color->description
+msgid "Label color"
+msgstr "ラベルの色"
+
+#. 3.2->settings-schema.json->label_color->tooltip
+#. 3.8->settings-schema.json->label_color->tooltip
+msgid "Click the button to select a label color"
+msgstr "ボタンをクリックすると、ラベルの色を選択できます。"
+
+#. 3.2->settings-schema.json->label_size->description
+#. 3.8->settings-schema.json->label_size->description
+msgid "Label font size"
+msgstr "ラベルのフォントサイズ"
+
+#. 3.2->settings-schema.json->label_size->tooltip
+#. 3.8->settings-schema.json->label_size->tooltip
+msgid "Set the font size for the main label."
+msgstr "メインラベルのフォントサイズを設定します。"
+
+#. 3.2->settings-schema.json->detail_label_color->description
+#. 3.8->settings-schema.json->detail_label_color->description
+msgid "Detail label color"
+msgstr "詳細ラベルの色"
+
+#. 3.2->settings-schema.json->detail_label_color->tooltip
+#. 3.8->settings-schema.json->detail_label_color->tooltip
+msgid "Click the button to select a detail label color"
+msgstr "ボタンをクリックすると、詳細ラベルの色を選択できます。"
+
+#. 3.2->settings-schema.json->detail_label_size->description
+#. 3.8->settings-schema.json->detail_label_size->description
+msgid "Detail label font size"
+msgstr "詳細ラベルのフォントサイズ"
+
+#. 3.2->settings-schema.json->detail_label_size->tooltip
+#. 3.8->settings-schema.json->detail_label_size->tooltip
+msgid "Set the font size for the detail label."
+msgstr "詳細ラベルのフォントサイズを設定します。"
+
+#. 3.2->settings-schema.json->theme_data->options
+#. 3.8->settings-schema.json->theme_data->options
+msgid "default theme"
+msgstr "既定のテーマ"
+
+#. 3.2->settings-schema.json->theme_data->options
+#. 3.8->settings-schema.json->theme_data->options
+msgid "blue theme"
+msgstr "青いテーマ"
+
+#. 3.2->settings-schema.json->graph_color1->description
+#. 3.8->settings-schema.json->graph_color1->description
+msgid "Graph color 1"
+msgstr "グラフの色 1"
+
+#. 3.2->settings-schema.json->graph_color1->tooltip
+#. 3.8->settings-schema.json->graph_color1->tooltip
+msgid ""
+"Click the button to select a starting color for the linear gradient of the "
+"graph colors. Offset for the first color is always 0."
+msgstr ""
+"ボタンをクリックすると、グラフの色にかけるグラデーションの始まりの色を選択で"
+"きます。最初の色の開始位置は常に 0 です。"
+
+#. 3.2->settings-schema.json->graph_color2->description
+#. 3.8->settings-schema.json->graph_color2->description
+msgid "Graph color 2"
+msgstr "グラフの色 2"
+
+#. 3.2->settings-schema.json->graph_color2->tooltip
+#. 3.8->settings-schema.json->graph_color2->tooltip
+msgid ""
+"Click the button to select a first middle color for the linear gradient of "
+"the graph colors."
+msgstr ""
+"ボタンをクリックすると、グラフの色にかけるグラデーション 1 つ目の中間色を選択"
+"できます。"
+
+#. 3.2->settings-schema.json->graph_offset2->description
+#. 3.8->settings-schema.json->graph_offset2->description
+msgid "Offset for graph color 2"
+msgstr "グラフの色 2 の開始位置"
+
+#. 3.2->settings-schema.json->graph_offset2->tooltip
+#. 3.8->settings-schema.json->graph_offset2->tooltip
+msgid "Offset for first middle color of the linear gradient"
+msgstr "グラデーション 1 つ目の中間色の開始位置です。"
+
+#. 3.2->settings-schema.json->graph_color3->description
+#. 3.8->settings-schema.json->graph_color3->description
+msgid "Graph color 3"
+msgstr "グラフの色 3"
+
+#. 3.2->settings-schema.json->graph_color3->tooltip
+#. 3.8->settings-schema.json->graph_color3->tooltip
+msgid ""
+"Click the button to select a second middle color for the linear gradient of "
+"the graph colors."
+msgstr ""
+"ボタンをクリックすると、グラフの色にかけるグラデーション 2 つ目の中間色を選択"
+"できます。"
+
+#. 3.2->settings-schema.json->graph_offset3->description
+#. 3.8->settings-schema.json->graph_offset3->description
+msgid "Offset for graph color 3"
+msgstr "グラフの色 3 の開始位置"
+
+#. 3.2->settings-schema.json->graph_offset3->tooltip
+#. 3.8->settings-schema.json->graph_offset3->tooltip
+msgid "Offset for second middle color of the linear gradient"
+msgstr "グラデーション 2 つ目の中間色の開始位置です。"
+
+#. 3.2->settings-schema.json->graph_color4->description
+#. 3.8->settings-schema.json->graph_color4->description
+msgid "Graph color 4"
+msgstr "グラフの色 4"
+
+#. 3.2->settings-schema.json->graph_color4->tooltip
+#. 3.8->settings-schema.json->graph_color4->tooltip
+msgid ""
+"Click the button to select a ending color for the linear gradient of the "
+"graph colors. Offset for the last color is always 1."
+msgstr ""
+"ボタンをクリックすると、グラフの色にかけるグラデーションの終わりの色を選択で"
+"きます。最後の色の開始位置は常に 1 です。"
+
+#. 3.2->settings-schema.json->cpu_enable_graph->description
+#. 3.8->settings-schema.json->cpu_enable_graph->description
+msgid "Show CPU graph"
+msgstr "CPU グラフを表示"
+
+#. 3.2->settings-schema.json->cpu_enable_graph->tooltip
+#. 3.8->settings-schema.json->cpu_enable_graph->tooltip
+msgid "Show or hide the CPU graph"
+msgstr "CPU グラフを表示/非表示にします。"
+
+#. 3.2->settings-schema.json->cpu_size->description
+#. 3.8->settings-schema.json->cpu_size->description
+msgid "Horizontal panel width or vertical panel height"
+msgstr "水平パネルでの幅、または垂直パネルでの高さ"
+
+#. 3.2->settings-schema.json->cpu_size->tooltip
+#. 3.2->settings-schema.json->mem_size->tooltip
+#. 3.2->settings-schema.json->netin_size->tooltip
+#. 3.2->settings-schema.json->netout_size->tooltip
+#. 3.2->settings-schema.json->diskread_size->tooltip
+#. 3.2->settings-schema.json->diskwrite_size->tooltip
+#. 3.2->settings-schema.json->bat_size->tooltip
+#. 3.8->settings-schema.json->cpu_size->tooltip
+#. 3.8->settings-schema.json->mem_size->tooltip
+#. 3.8->settings-schema.json->netin_size->tooltip
+#. 3.8->settings-schema.json->netout_size->tooltip
+#. 3.8->settings-schema.json->diskread_size->tooltip
+#. 3.8->settings-schema.json->diskwrite_size->tooltip
+#. 3.8->settings-schema.json->bat_size->tooltip
+msgid ""
+"Set the width of the graph for horizontal panels, or the height of the graph "
+"for vertical panels."
+msgstr ""
+"水平パネルにおけるグラフの幅か、垂直パネルにおけるグラフの高さを設定します。"
+
+#. 3.2->settings-schema.json->cpu_use_custom_label->description
+#. 3.2->settings-schema.json->mem_use_custom_label->description
+#. 3.2->settings-schema.json->netin_use_custom_label->description
+#. 3.2->settings-schema.json->netout_use_custom_label->description
+#. 3.8->settings-schema.json->cpu_use_custom_label->description
+#. 3.8->settings-schema.json->mem_use_custom_label->description
+#. 3.8->settings-schema.json->netin_use_custom_label->description
+#. 3.8->settings-schema.json->netout_use_custom_label->description
+msgid "Use custom graph label"
+msgstr "グラフに任意のラベルを付ける"
+
+#. 3.2->settings-schema.json->cpu_use_custom_label->tooltip
+#. 3.8->settings-schema.json->cpu_use_custom_label->tooltip
+msgid "Choose your own label for the CPU graph"
+msgstr "CPU グラフに独自のラベルを付けます。"
+
+#. 3.2->settings-schema.json->cpu_custom_label->description
+#. 3.8->settings-schema.json->cpu_custom_label->description
+msgid "Set the custom label for the CPU graph"
+msgstr "CPU グラフに付けるラベル"
+
+#. 3.2->settings-schema.json->cpu_show_detail_label->description
+#. 3.2->settings-schema.json->mem_show_detail_label->description
+#. 3.2->settings-schema.json->netin_show_detail_label->description
+#. 3.2->settings-schema.json->netout_show_detail_label->description
+#. 3.8->settings-schema.json->cpu_show_detail_label->description
+#. 3.8->settings-schema.json->mem_show_detail_label->description
+#. 3.8->settings-schema.json->netin_show_detail_label->description
+#. 3.8->settings-schema.json->netout_show_detail_label->description
+msgid "Show details"
+msgstr "詳細を表示"
+
+#. 3.2->settings-schema.json->cpu_show_detail_label->tooltip
+#. 3.8->settings-schema.json->cpu_show_detail_label->tooltip
+msgid "Show or hide the CPU usage label"
+msgstr "CPU 使用率のラベルを表示/非表示にします。"
+
+#. 3.2->settings-schema.json->mem_enable_graph->description
+#. 3.8->settings-schema.json->mem_enable_graph->description
+msgid "Show the memory graph"
+msgstr "メモリグラフを表示"
+
+#. 3.2->settings-schema.json->mem_enable_graph->tooltip
+#. 3.8->settings-schema.json->mem_enable_graph->tooltip
+msgid "Show or hide the memory graph"
+msgstr "メモリグラフを表示/非表示にします。"
+
+#. 3.2->settings-schema.json->mem_size->description
+#. 3.2->settings-schema.json->netin_size->description
+#. 3.2->settings-schema.json->netout_size->description
+#. 3.2->settings-schema.json->diskread_size->description
+#. 3.2->settings-schema.json->diskwrite_size->description
+#. 3.2->settings-schema.json->bat_size->description
+#. 3.8->settings-schema.json->mem_size->description
+#. 3.8->settings-schema.json->netin_size->description
+#. 3.8->settings-schema.json->netout_size->description
+#. 3.8->settings-schema.json->diskread_size->description
+#. 3.8->settings-schema.json->diskwrite_size->description
+#. 3.8->settings-schema.json->bat_size->description
+msgid "Horizontal panel width or vertical panel height."
+msgstr "水平パネルでの幅、または垂直パネルでの高さ"
+
+#. 3.2->settings-schema.json->mem_use_custom_label->tooltip
+#. 3.8->settings-schema.json->mem_use_custom_label->tooltip
+msgid "Choose your own label for the memory graph"
+msgstr "メモリグラフに独自のラベルを付けます。"
+
+#. 3.2->settings-schema.json->mem_custom_label->description
+#. 3.8->settings-schema.json->mem_custom_label->description
+msgid "Set the custom label for the memory graph"
+msgstr "メモリグラフに付けるラベル"
+
+#. 3.2->settings-schema.json->mem_show_detail_label->tooltip
+#. 3.8->settings-schema.json->mem_show_detail_label->tooltip
+msgid "Show or hide the memory usage label"
+msgstr "メモリ使用率のラベルを表示/非表示にします。"
+
+#. 3.2->settings-schema.json->netin_enable_graph->description
+#. 3.8->settings-schema.json->netin_enable_graph->description
+msgid "Show NET (in) graph"
+msgstr "ネット (受信) グラフを表示"
+
+#. 3.2->settings-schema.json->netin_enable_graph->tooltip
+#. 3.8->settings-schema.json->netin_enable_graph->tooltip
+msgid "Show or hide the NET (in) graph"
+msgstr "ネット (受信) グラフを表示/非表示にします。"
+
+#. 3.2->settings-schema.json->netin_speed->units
+#. 3.2->settings-schema.json->netout_speed->units
+#. 3.8->settings-schema.json->netin_speed->units
+#. 3.8->settings-schema.json->netout_speed->units
+msgid "Mbit/s"
+msgstr "Mbps"
+
+#. 3.2->settings-schema.json->netin_speed->description
+#. 3.8->settings-schema.json->netin_speed->description
+msgid "Internet speed (in)."
+msgstr "インターネット速度 (下り)"
+
+#. 3.2->settings-schema.json->netin_speed->tooltip
+#. 3.8->settings-schema.json->netin_speed->tooltip
+msgid ""
+"Set your internet speed (in) in Mbit/s. Note that sometimes ISP:s delivers "
+"better or worse speed than what you have paid for. You might need to adjust "
+"this value up or down, to make it look right to you."
+msgstr ""
+"お使いのインターネットの速度 (下り) を Mbps 単位で設定してください。ただし、"
+"インターネットサービスプロバイダー (ISP) が公表している速度は理論値であること"
+"もあり、実際に出る速度は変動するかもしれません。現在の環境に合った値を計測・"
+"調整してみてください。"
+
+#. 3.2->settings-schema.json->netin_use_custom_label->tooltip
+#. 3.8->settings-schema.json->netin_use_custom_label->tooltip
+msgid "Choose your own label for the NET (in) graph"
+msgstr "ネット (受信) グラフに独自のラベルを付けます。"
+
+#. 3.2->settings-schema.json->netin_custom_label->description
+#. 3.8->settings-schema.json->netin_custom_label->description
+msgid "Set the custom label for the NET (in) graph"
+msgstr "ネット (受信) グラフに付けるラベル"
+
+#. 3.2->settings-schema.json->netin_linlog->options
+#. 3.2->settings-schema.json->netout_linlog->options
+#. 3.8->settings-schema.json->netin_linlog->options
+#. 3.8->settings-schema.json->netout_linlog->options
+msgid "logarithmic"
+msgstr "対数"
+
+#. 3.2->settings-schema.json->netin_linlog->options
+#. 3.2->settings-schema.json->netout_linlog->options
+#. 3.8->settings-schema.json->netin_linlog->options
+#. 3.8->settings-schema.json->netout_linlog->options
+msgid "linear"
+msgstr "線形"
+
+#. 3.2->settings-schema.json->netin_linlog->description
+#. 3.2->settings-schema.json->netout_linlog->description
+#. 3.8->settings-schema.json->netin_linlog->description
+#. 3.8->settings-schema.json->netout_linlog->description
+msgid "Scale"
+msgstr "目盛"
+
+#. 3.2->settings-schema.json->netin_linlog->tooltip
+#. 3.2->settings-schema.json->netout_linlog->tooltip
+#. 3.8->settings-schema.json->netin_linlog->tooltip
+#. 3.8->settings-schema.json->netout_linlog->tooltip
+msgid "Use linear or logarithmic scale."
+msgstr "線形目盛か対数目盛のどちらかを使用します。"
+
+#. 3.2->settings-schema.json->netin_show_detail_label->tooltip
+#. 3.8->settings-schema.json->netin_show_detail_label->tooltip
+msgid "Show or hide the NET (in) usage label"
+msgstr "ネット (受信) 通信量のラベルを表示/非表示にします。"
+
+#. 3.2->settings-schema.json->netout_enable_graph->description
+#. 3.8->settings-schema.json->netout_enable_graph->description
+msgid "Show NET (out) graph"
+msgstr "ネット (送信) グラフを表示"
+
+#. 3.2->settings-schema.json->netout_enable_graph->tooltip
+#. 3.8->settings-schema.json->netout_enable_graph->tooltip
+msgid "Show or hide the NET (out) graph"
+msgstr "ネット (送信) グラフを表示/非表示にします。"
+
+#. 3.2->settings-schema.json->netout_speed->description
+#. 3.8->settings-schema.json->netout_speed->description
+msgid "Internet speed (out)."
+msgstr "インターネット速度 (上り)"
+
+#. 3.2->settings-schema.json->netout_speed->tooltip
+#. 3.8->settings-schema.json->netout_speed->tooltip
+msgid ""
+"Set your internet speed (out) in Mbit/s. Note that sometimes ISP:s delivers "
+"better or worse speed than what you have paid for. You might need to adjust "
+"this value up or down, to make it look right to you."
+msgstr ""
+"お使いのインターネットの速度 (上り) を Mbps 単位で設定してください。ただし、"
+"インターネットサービスプロバイダー (ISP) が公表している速度は理論値であること"
+"もあり、実際に出る速度は変動するかもしれません。現在の環境に合った値を計測・"
+"調整してみてください。"
+
+#. 3.2->settings-schema.json->netout_use_custom_label->tooltip
+#. 3.8->settings-schema.json->netout_use_custom_label->tooltip
+msgid "Choose your own label for the NET (out) graph"
+msgstr "ネット (送信) グラフに独自のラベルを付けます。"
+
+#. 3.2->settings-schema.json->netout_custom_label->description
+#. 3.8->settings-schema.json->netout_custom_label->description
+msgid "Set the custom label for the NET (out) graph"
+msgstr "ネット (送信) グラフに付けるラベル"
+
+#. 3.2->settings-schema.json->netout_show_detail_label->tooltip
+#. 3.8->settings-schema.json->netout_show_detail_label->tooltip
+msgid "Show or hide the NET (out) usage label"
+msgstr "ネット (送信) 通信量のラベルを表示/非表示にします。"
+
+#. 3.2->settings-schema.json->diskread_enable_graph->description
+#. 3.8->settings-schema.json->diskread_enable_graph->description
+msgid "Show DISK (read) graph"
+msgstr "ディスク (読取) グラフを表示"
+
+#. 3.2->settings-schema.json->diskread_enable_graph->tooltip
+#. 3.8->settings-schema.json->diskread_enable_graph->tooltip
+msgid ""
+"Show or hide the DISK (read) graph. Shows usage of the drive specified below."
+msgstr ""
+"ディスク (読取) グラフを表示/非表示にします。下で指定したドライブの負荷率が表"
+"示されます。"
+
+#. 3.2->settings-schema.json->diskread_device_name->options
+#. 3.2->settings-schema.json->diskwrite_device_name->options
+msgid "sda"
+msgstr "sda"
+
+#. 3.2->settings-schema.json->diskread_device_name->options
+#. 3.2->settings-schema.json->diskwrite_device_name->options
+msgid "sdb"
+msgstr "sdb"
+
+#. 3.2->settings-schema.json->diskread_device_name->options
+#. 3.2->settings-schema.json->diskwrite_device_name->options
+msgid "sdc"
+msgstr "sdc"
+
+#. 3.2->settings-schema.json->diskread_device_name->description
+#. 3.2->settings-schema.json->diskread_device_name->tooltip
+msgid "Set the device name to monitor for the DISK (read) graph."
+msgstr "ディスク (読取) グラフで監視するデバイス名を設定します。"
+
+#. 3.2->settings-schema.json->diskread_use_custom_label->description
+#. 3.2->settings-schema.json->diskwrite_use_custom_label->description
+#. 3.2->settings-schema.json->bat_use_custom_label->description
+#. 3.8->settings-schema.json->diskread_use_custom_label->description
+#. 3.8->settings-schema.json->diskwrite_use_custom_label->description
+#. 3.8->settings-schema.json->bat_use_custom_label->description
+msgid "Use custom graph label."
+msgstr "グラフに任意のラベルを付ける"
+
+#. 3.2->settings-schema.json->diskread_use_custom_label->tooltip
+#. 3.8->settings-schema.json->diskread_use_custom_label->tooltip
+msgid "Choose your own label for the DISK (read) graph."
+msgstr "ディスク (読取) グラフに独自のラベルを付けます。"
+
+#. 3.2->settings-schema.json->diskread_custom_label->description
+#. 3.8->settings-schema.json->diskread_custom_label->description
+msgid "Set the custom label for the DISK (read) graph."
+msgstr "ディスク (読取) グラフに付けるラベル"
+
+#. 3.2->settings-schema.json->diskread_show_detail_label->description
+#. 3.2->settings-schema.json->diskwrite_show_detail_label->description
+#. 3.2->settings-schema.json->bat_show_detail_label->description
+#. 3.8->settings-schema.json->diskread_show_detail_label->description
+#. 3.8->settings-schema.json->diskwrite_show_detail_label->description
+#. 3.8->settings-schema.json->bat_show_detail_label->description
+msgid "Show details."
+msgstr "詳細を表示"
+
+#. 3.2->settings-schema.json->diskread_show_detail_label->tooltip
+#. 3.8->settings-schema.json->diskread_show_detail_label->tooltip
+msgid "Show or hide the DISK (read) usage label."
+msgstr "ディスク (読取) 負荷率のラベルを表示/非表示にします。"
+
+#. 3.2->settings-schema.json->diskwrite_enable_graph->description
+#. 3.8->settings-schema.json->diskwrite_enable_graph->description
+msgid "Show DISK (write) graph."
+msgstr "ディスク (書込) グラフを表示"
+
+#. 3.2->settings-schema.json->diskwrite_enable_graph->tooltip
+#. 3.8->settings-schema.json->diskwrite_enable_graph->tooltip
+msgid ""
+"Show or hide the DISK (write) graph. Shows usage of the drive specified "
+"below."
+msgstr ""
+"ディスク (書込) グラフを表示/非表示にします。下で指定したドライブの負荷率が表"
+"示されます。"
+
+#. 3.2->settings-schema.json->diskwrite_device_name->description
+#. 3.2->settings-schema.json->diskwrite_device_name->tooltip
+msgid "Set the device name to monitor for the DISK (write) graph."
+msgstr "ディスク (書込) グラフで監視するデバイス名を設定します。"
+
+#. 3.2->settings-schema.json->diskwrite_use_custom_label->tooltip
+#. 3.8->settings-schema.json->diskwrite_use_custom_label->tooltip
+msgid "Choose your own label for the DISK (write) graph."
+msgstr "ディスク (書込) グラフに独自のラベルを付けます。"
+
+#. 3.2->settings-schema.json->diskwrite_custom_label->description
+#. 3.8->settings-schema.json->diskwrite_custom_label->description
+msgid "Set the custom label for the DISK (write) graph."
+msgstr "ディスク (書込) グラフに付けるラベル"
+
+#. 3.2->settings-schema.json->diskwrite_show_detail_label->tooltip
+#. 3.8->settings-schema.json->diskwrite_show_detail_label->tooltip
+msgid "Show or hide the DISK (write) usage label."
+msgstr "ディスク (書込) 負荷率のラベルを表示/非表示にします。"
+
+#. 3.2->settings-schema.json->bat_enable_graph->description
+#. 3.8->settings-schema.json->bat_enable_graph->description
+msgid "Show BAT (battery) graph."
+msgstr "電池 (バッテリー) グラフを表示"
+
+#. 3.2->settings-schema.json->bat_enable_graph->tooltip
+#. 3.8->settings-schema.json->bat_enable_graph->tooltip
+msgid "Show or hide the BAT (battery) graph. Shows battery level."
+msgstr ""
+"電池 (バッテリー) グラフを表示/非表示にします。バッテリーの残量が表示されま"
+"す。"
+
+#. 3.2->settings-schema.json->bat_use_custom_label->tooltip
+#. 3.8->settings-schema.json->bat_use_custom_label->tooltip
+msgid "Choose your own label for the BAT (battery) graph."
+msgstr "電池 (バッテリー) グラフに独自のラベルを付けます。"
+
+#. 3.2->settings-schema.json->bat_custom_label->description
+#. 3.8->settings-schema.json->bat_custom_label->description
+msgid "Set the custom label for the BAT (battery) graph."
+msgstr "電池 (バッテリー) グラフに付けるラベル"
+
+#. 3.2->settings-schema.json->bat_show_detail_label->tooltip
+#. 3.8->settings-schema.json->bat_show_detail_label->tooltip
+msgid "Show or hide the BAT (battery) detail label."
+msgstr "電池 (バッテリー) 詳細のラベルを表示/非表示にします。"
+
+#. 3.8->settings-schema.json->diskread_device_name->options
+#. 3.8->settings-schema.json->diskwrite_device_name->options
+msgid "Select a device"
+msgstr "デバイスを選択"
+
+#. 3.8->settings-schema.json->diskread_device_name->description
+#. 3.8->settings-schema.json->diskread_device_name->tooltip
+msgid "Set the device to monitor for the DISK (read) graph."
+msgstr "ディスク (読取) グラフで監視するデバイス"
+
+#. 3.8->settings-schema.json->diskwrite_device_name->description
+#. 3.8->settings-schema.json->diskwrite_device_name->tooltip
+msgid "Set the device to monitor for the DISK (write) graph."
+msgstr "ディスク (書込) グラフで監視するデバイス"
+
+#~ msgid "Memory"
+#~ msgstr "メモリ"
+
+#~ msgid "Network"
+#~ msgstr "ネットワーク"
+
+#~ msgid "Disk"
+#~ msgstr "ディスク"
+
+#~ msgid "Battery"
+#~ msgstr "バッテリー"

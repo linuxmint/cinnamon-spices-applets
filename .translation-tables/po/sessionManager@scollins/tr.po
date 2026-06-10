@@ -1,0 +1,157 @@
+# SESSION MANAGER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Gökhan GÖKKAYA <gokhanlnx@gmail.com>.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-27 10:12+0200\n"
+"PO-Revision-Date: 2018-11-06 17:06+0300\n"
+"Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
+"Language-Team: Linux Mint Türkiye <gokhanlnx@gmail.com>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:154
+msgid "Session"
+msgstr "Oturum"
+
+#. applet.js:240
+msgid "Lock Screen"
+msgstr "Ekran Kilidi"
+
+#. applet.js:246
+msgid "Switch User"
+msgstr "Kullanıcı Değiştir"
+
+#. applet.js:252
+msgid "Guest Session"
+msgstr "Misafir Oturumu"
+
+#. applet.js:258
+msgid "Log Off"
+msgstr "Oturum Kapat"
+
+#. applet.js:269
+msgid "Suspend"
+msgstr "Askı"
+
+#. applet.js:275
+msgid "Sleep"
+msgstr "Uyku"
+
+#. applet.js:281
+msgid "Hibernate"
+msgstr "Derin Uyku"
+
+#. applet.js:292
+msgid "Restart"
+msgstr "Yeniden Başlat"
+
+#. applet.js:298
+msgid "Shut Down"
+msgstr "Kapat"
+
+#. metadata.json->name
+msgid "Session Manager"
+msgstr "Oturum Yöneticisi"
+
+#. metadata.json->description
+msgid "Provides easy access to shut down, restart, etc"
+msgstr "Kapatma, yeniden başlatma vb. için kolay erişim sunar"
+
+#. metadata.json->comments
+msgid ""
+"Session Manager is an applet that provides easy access to session controls "
+"such as shut down, restart, log off, switch user, etc. It has been tested in "
+"Arch, Fedora and Linux Mint, and supports a wide variety of software "
+"configurations. If your particular configuration is not supported, please "
+"submit a feature request on github, and I will add it at my earliest "
+"convenience."
+msgstr ""
+"Oturum Yöneticisi, kapatma, yeniden başlatma, oturumdan çıkma, kullanıcı "
+"değiştirme vb. gibi oturum kontrollerine kolay erişim sağlayan bir "
+"uygulamadır. Arch, Fedora ve Linux Mint'te test edilmiştir ve çok çeşitli "
+"yazılım konfigürasyonlarını destekler. Özel yapılandırmanız "
+"desteklenmiyorsa, lütfen Github'da bir özellik isteği gönderebilirsiniz ve "
+"böylece bunu en kısa zamanda ekleyebilirim."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Yazar"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Genel Ayarlar"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr "Panel Simgesi"
+
+#. settings-schema.json->panelText->description
+msgid "Panel Text"
+msgstr "Panel Metni"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "piksel"
+
+#. settings-schema.json->iconSize->description
+msgid "Icon Size"
+msgstr "Simge Boyutu"
+
+#. settings-schema.json->symbolicMenuIcons->description
+msgid "Symbolic icons in menu"
+msgstr "Menüde sembolik simge kullan"
+
+#. settings-schema.json->menuOptions->description
+msgid "Menu Options"
+msgstr ""
+
+#. settings-schema.json->showLockScreen->description
+#, fuzzy
+msgid "Show Lock Screen option"
+msgstr "Ekran Kilidi"
+
+#. settings-schema.json->showSwitchUser->description
+#, fuzzy
+msgid "Show Switch User option"
+msgstr "Kullanıcı Değiştir"
+
+#. settings-schema.json->showGuestSession->description
+#, fuzzy
+msgid "Show Guest Session option"
+msgstr "Misafir Oturumu"
+
+#. settings-schema.json->showLogOff->description
+msgid "Show Log Off option"
+msgstr ""
+
+#. settings-schema.json->showSuspend->description
+msgid "Show Suspend option"
+msgstr ""
+
+#. settings-schema.json->showSleep->description
+msgid "Show Sleep option"
+msgstr ""
+
+#. settings-schema.json->showHibernate->description
+#, fuzzy
+msgid "Show Hibernate option"
+msgstr "Derin Uyku"
+
+#. settings-schema.json->showRestart->description
+msgid "Show Restart option"
+msgstr ""
+
+#. settings-schema.json->showShutDown->description
+#, fuzzy
+msgid "Show Shut Down option"
+msgstr "Kapat"

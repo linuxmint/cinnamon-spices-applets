@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-26 05:28-0500\n"
+"PO-Revision-Date: 2024-02-11 18:36+0100\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:21
+msgid "Currently preventing notifications"
+msgstr "Empêche actuellement toute notification"
+
+#: applet.js:22
+msgid "Currently allowing notifications"
+msgstr "Autorise actuellement les notifications"
+
+#: applet.js:92
+msgid "Notification settings"
+msgstr "Préférences des notifications"
+
+#. metadata.json->name
+msgid "Notification Mute"
+msgstr "Notifications Interdites/Autorisées (Notification Mute)"
+
+#. metadata.json->description
+msgid "Click to mute notifications, click again to unmute"
+msgstr "Cliquez sur pour mettre les notifications en veilleuse, cliquez à nouveau pour les remettre en service"
+
+#. settings-schema.json->head->description
+msgid "Icons"
+msgstr "Icônes"
+
+#. settings-schema.json->use-custom-off-icon->description
+msgid "Use a custom icon for when notifications are allowed."
+msgstr "Vous pouvez choisir une icône personnalisée pour signaler que les notifications sont autorisées."
+
+#. settings-schema.json->off-icon->description
+msgid "Notifications allowed icon:"
+msgstr "Icône notifications autorisées :"
+
+#. settings-schema.json->off-icon->tooltip
+#. settings-schema.json->on-icon->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr "Sélectionnez un fichier d'icône ou tapez un nom d'icône dans la zone de saisie"
+
+#. settings-schema.json->use-custom-on-icon->description
+msgid "Use a custom icon for when notifications are muted."
+msgstr "Vous pouvez choisir une icône personnalisée pour signaler que les notifications sont interdites."
+
+#. settings-schema.json->on-icon->description
+msgid "Notifications muted icon:"
+msgstr "Icône notifications interdites :"
+
+#. settings-schema.json->head1->description
+msgid "Keybinding"
+msgstr "Raccourci-clavier"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding for toggling notification mute"
+msgstr "Définir le raccourci clavier pour la bascule Autoriser/Interdire les notifications"

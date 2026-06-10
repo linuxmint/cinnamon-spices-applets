@@ -1,0 +1,29 @@
+# PROXY MODE SWITCHER
+# This file is put in the public domain.
+# yrtimiD, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: proxy-mode@yrtimid 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-05 00:09+0300\n"
+"PO-Revision-Date: 2025-08-26 10:23+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#. applet.js:35
+msgid "Proxy Mode Switcher"
+msgstr "Proxy Modus Switcher"
+
+#. metadata.json->description
+msgid ""
+"Switch between system proxy modes (None, Manual, Automatic) from the panel."
+msgstr ""
+"Schakel tussen systeemproxy-modi (Geen, Handmatig, Automatisch) vanaf het "
+"paneel."

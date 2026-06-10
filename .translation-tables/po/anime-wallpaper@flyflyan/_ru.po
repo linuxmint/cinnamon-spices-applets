@@ -1,0 +1,20 @@
+# ANIME DESKTOP WALLPAPER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# fly206, 2023
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->section1->description
+msgid "Configure"
+msgstr ""
+
+#. settings-schema.json->delay->units
+msgid "minutes"
+msgstr ""
+
+#. settings-schema.json->delay->description
+#. settings-schema.json->delay->tooltip
+msgid "Delay"
+msgstr ""

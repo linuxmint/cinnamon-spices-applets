@@ -1,0 +1,197 @@
+# BUMBLEBEE STATUS WITH NVIDIA TEMPERATURE DISPLAY
+# This file is put in the public domain.
+# pdcurtis, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bumblebee@pdcurtis 3.2.5\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-09-23 01:52+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:152
+msgid "Bumblebee program not installed"
+msgstr "尚未安裝 Bumblebee 程式"
+
+#. applet.js:152
+msgid ""
+"You appear to be missing some of the required programs for 'bumblebee' to "
+"switch graphics processors using NVIDIA Optimus."
+msgstr ""
+"系統似乎缺少部分必要程式，導致 Bumblebee 無法透過 NVIDIA Optimus 切換顯示卡。"
+
+#. applet.js:152
+msgid "Please read the help file."
+msgstr "請參閱說明文件。"
+
+#. applet.js:172
+msgid "Waiting for Bumblebee"
+msgstr "正在等待 Bumblebee"
+
+#. applet.js:232
+msgid "Open nVidia Settings Program"
+msgstr "開啟 nVidia 設定程式"
+
+#. applet.js:238
+msgid "Open Power Statistics"
+msgstr "開啟電源統計資訊"
+
+#. applet.js:244
+msgid "Open System Monitor"
+msgstr "開啟系統監控程式"
+
+#. applet.js:253
+msgid "Housekeeping and System Sub Menu"
+msgstr "系統維護子選單"
+
+#. applet.js:256
+msgid "View the Changelog"
+msgstr "檢視更新紀錄"
+
+#. applet.js:262
+msgid "Open the Help file"
+msgstr "開啟說明文件"
+
+#. applet.js:278
+msgid "Launch programs using the nVidia Graphics Processor"
+msgstr "使用 nVidia 顯示卡執行程式"
+
+#. applet.js:359
+msgid "NVidia based GPU is Off"
+msgstr "NVidia 顯示卡已關閉"
+
+#. applet.js:384
+msgid "NVidia based GPU is On and Core Temperature is"
+msgstr "NVidia 顯示卡已啟用，核心溫度為"
+
+#. applet.js:392
+msgid "Err"
+msgstr "錯誤"
+
+#. applet.js:393
+msgid ""
+"Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia "
+"drivers installed?"
+msgstr ""
+"Bumblebee 設定不正確，請確認是否已安裝 bbswitch、bumblebee 與 nvidia "
+"驅動程式。"
+
+#. metadata.json->description
+msgid ""
+"Displays Status of Bumblebee and nVidia GPU Temperature with associated "
+"support functions including starting selected programs with optirun or "
+"primusrun"
+msgstr ""
+"顯示 Bumblebee 狀態與 nVidia GPU 溫度，並提供以 optirun 或 primusrun "
+"啟動指定程式等相關功能"
+
+#. metadata.json->name
+msgid "Bumblebee Status with NVidia Temperature Display"
+msgstr "Bumblebee 狀態與 NVidia 溫度顯示"
+
+#. settings-schema.json->head->description
+msgid "General Settings for the nVidia Monitoring Applet"
+msgstr "nVidia 監控小程式的一般設定"
+
+#. settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "秒"
+
+#. settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "顯示更新間隔："
+
+#. settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"調整數值以變更更新間隔，若您的電腦效能為受限，請使用較長的更新間隔"
+
+#. settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature as well as icon"
+msgstr "同時顯示 GPU 溫度與圖示"
+
+#. settings-schema.json->showGpuTemp->tooltip
+msgid ""
+"Available in Horizontal and Vertical Panels. Display is in Degrees "
+"Centigrade."
+msgstr ""
+"可於橫向及直向面板顯示，溫度單位為攝氏。"
+
+#. settings-schema.json->head2->description
+msgid "Programs settings for Optimus"
+msgstr "Optimus 程式設定"
+
+#. settings-schema.json->description1->description
+msgid "Display Name of Program 1 to be run using Optimus technology"
+msgstr "使用 Optimus 技術執行的程式 1 顯示名稱"
+
+#. settings-schema.json->description1->tooltip
+msgid ""
+"Put the name of the program here or null if you do not want it displayed"
+msgstr ""
+"請在此填入程式名稱，若無需顯示請填 null"
+
+#. settings-schema.json->commandString1->description
+msgid "Command String for Program 1"
+msgstr "程式 1 的執行指令"
+
+#. settings-schema.json->commandString1->tooltip
+#. settings-schema.json->commandString2->tooltip
+#. settings-schema.json->commandString3->tooltip
+#. settings-schema.json->commandString4->tooltip
+#. settings-schema.json->commandString5->tooltip
+msgid ""
+"Put the command string to run the program here starting with optirun or "
+"primusrun"
+msgstr ""
+"請在此處填入以 optirun 或 primusrun 開頭的程式執行指令"
+
+#. settings-schema.json->description2->description
+msgid "Display Name of Program 2 to be run using Optimus technology"
+msgstr "使用 Optimus 技術執行的程式 2 顯示名稱"
+
+#. settings-schema.json->description2->tooltip
+#. settings-schema.json->description3->tooltip
+#. settings-schema.json->description4->tooltip
+#. settings-schema.json->description5->tooltip
+msgid ""
+"Put the name of the program here or none if you do not want it displayed"
+msgstr ""
+"請在此填入程式名稱，若無需顯示請填 none"
+
+#. settings-schema.json->commandString2->description
+msgid "Command String for Program 2"
+msgstr "程式 2 的執行指令"
+
+#. settings-schema.json->description3->description
+msgid "Display Name of Program 3 to be run using Optimus technology"
+msgstr "使用 Optimus 技術執行的程式 3 顯示名稱"
+
+#. settings-schema.json->commandString3->description
+msgid "Command String for Program 3"
+msgstr "程式 3 的執行指令"
+
+#. settings-schema.json->description4->description
+msgid "Display Name of Program 4 to be run using Optimus technology"
+msgstr "使用 Optimus 技術執行的程式 4 顯示名稱"
+
+#. settings-schema.json->commandString4->description
+msgid "Command String for Program 4"
+msgstr "程式 4 的執行指令"
+
+#. settings-schema.json->description5->description
+msgid "Display Name of Program 5 to be run using Optimus technology"
+msgstr "使用 Optimus 技術執行的程式 5 顯示名稱"
+
+#. settings-schema.json->commandString5->description
+msgid "Command String for Program 5"
+msgstr "程式 5 的執行指令"

@@ -1,0 +1,1056 @@
+# SENSORS MONITOR
+# This file is put in the public domain.
+# claudiux, 2020
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sensors@claudiux 5.4.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-04-26 01:27+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+#. applet.js:232
+msgid "Sensors Monitor"
+msgstr "Trình giám sát cảm biến"
+
+#. applet.js:594
+msgid "Suspended"
+msgstr "Đã tạm dừng"
+
+#. applet.js:936 applet.js:978
+msgid "high:"
+msgstr "cao:"
+
+#. applet.js:936 applet.js:939 applet.js:978 applet.js:980 applet.js:1021
+msgid "n/a"
+msgstr "không có"
+
+#. applet.js:939 applet.js:980
+msgid "crit:"
+msgstr "nguy hiểm:"
+
+#. applet.js:1021 applet.js:1065
+msgid "min:"
+msgstr "thấp:"
+
+#. applet.js:1067
+msgid "max:"
+msgstr "cao:"
+
+#. applet.js:1096
+msgid "No intrusion detected"
+msgstr "Không phát hiện xâm nhập"
+
+#. applet.js:1096
+msgid "INTRUSION DETECTED!"
+msgstr "PHÁT HIỆN XÂM NHẬP!"
+
+#. applet.js:1116
+msgid "Must be configured!"
+msgstr "Cần được cấu hình!"
+
+#. applet.js:1518
+msgid "Settings"
+msgstr "Cài đặt"
+
+#. applet.js:1518
+msgid ":"
+msgstr ":"
+
+#. settings-schema.json->page_General->title
+#. applet.js:1525
+msgid "⚙ General"
+msgstr "⚙ Chung"
+
+#. applet.js:1542
+#, javascript-format
+msgid "%s Temperature sensors"
+msgstr "Cảm biến nhiệt độ %s"
+
+#. applet.js:1559
+#, javascript-format
+msgid "%s Fan sensors"
+msgstr "Cảm biến quạt %s"
+
+#. applet.js:1576
+#, javascript-format
+msgid "%s Voltage sensors"
+msgstr "Cảm biến điện áp %s"
+
+#. applet.js:1593
+#, javascript-format
+msgid "%s Intrusion sensors"
+msgstr "Cảm biến xâm nhập %s"
+
+#. settings-schema.json->xsensors->description
+#. applet.js:1629
+msgid "Run xsensors"
+msgstr "Chạy xsensors"
+
+#. applet.js:1638
+msgid "Suspend Sensors"
+msgstr "Tạm dừng cảm biến"
+
+#. applet.js:1649
+msgid "Reload this applet"
+msgstr "Tải lại applet này"
+
+#. applet.js:2005
+#, javascript-format
+msgid "Are you sure you want to remove '%s'?"
+msgstr "Bạn có chắc muốn xóa '%s' không?"
+
+#. lib/checkDependencies.js:371
+#, javascript-format
+msgid "The applet %s is fully functional."
+msgstr "Applet %s đang hoạt động đầy đủ."
+
+#. lib/checkDependencies.js:372
+msgid "All dependencies are installed"
+msgstr "Tất cả các gói phụ thuộc đã được cài đặt"
+
+#. lib/checkDependencies.js:401
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Có vẻ bạn đang thiếu một số chương trình cần thiết để applet này hoạt động "
+"đầy đủ."
+
+#. lib/checkDependencies.js:403
+msgid "Please install these packages:"
+msgstr "Vui lòng cài đặt các gói sau:"
+
+#. lib/checkDependencies.js:407 lib/checkDependencies.js:417
+msgid "Some dependencies are not installed!"
+msgstr "Một số gói phụ thuộc chưa được cài đặt!"
+
+#. lib/checkDependencies.js:419
+msgid "Install these packages now"
+msgstr "Cài đặt các gói này ngay"
+
+#. lib/util.js:244
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr "Thực thi '%s' thất bại:"
+
+#. scripts/xs.py:206
+msgid "Previous instance"
+msgstr "Phiên bản trước"
+
+#. scripts/xs.py:210
+msgid "Next instance"
+msgstr "Phiên bản kế tiếp"
+
+#. scripts/xs.py:219
+msgid "More options"
+msgstr "Tùy chọn khác"
+
+#. scripts/xs.py:225
+msgid "Import from a file"
+msgstr "Nhập từ tệp"
+
+#. scripts/xs.py:230
+msgid "Export to a file"
+msgstr "Xuất ra tệp"
+
+#. scripts/xs.py:235
+msgid "Reset to defaults"
+msgstr "Đặt lại về mặc định"
+
+#. scripts/xs.py:244
+#, python-format
+msgid "Reload %s"
+msgstr "Tải lại %s"
+
+#. scripts/xs.py:425
+#, python-format
+msgid "Settings for %s"
+msgstr "Cài đặt cho %s"
+
+#. scripts/xs.py:517
+msgid "Select or enter file to export to"
+msgstr "Chọn hoặc nhập tệp để xuất ra"
+
+#. scripts/xs.py:525 scripts/xs.py:546
+msgid "JSON files"
+msgstr "Tệp JSON"
+
+#. scripts/xs.py:539
+msgid "Select a JSON file to import"
+msgstr "Chọn một tệp JSON để nhập vào"
+
+#. metadata.json->description
+msgid ""
+"Displays the values of many computer sensors concerning Temperatures (CPU - "
+"GPU - Power Supply), Fan Speed, Voltages, Intrusions. Notifies you with "
+"color changes when a value reaches or exceeds its limit."
+msgstr ""
+"Hiển thị giá trị từ nhiều cảm biến hệ thống như nhiệt độ (CPU - GPU - "
+"nguồn), tốc độ quạt, điện áp và xâm nhập. Thông báo bằng cách thay đổi màu "
+"khi một giá trị đạt hoặc vượt ngưỡng giới hạn."
+
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr "claudiux: Tác giả. JEleniel: hỗ trợ cho card đồ họa NVidia."
+
+#. settings-schema.json->page_Temperatures->title
+msgid "⦿ Temperature"
+msgstr "⦿ Nhiệt độ"
+
+#. settings-schema.json->page_Fans->title
+msgid "𖣘 Fan"
+msgstr "𖣘 Quạt"
+
+#. settings-schema.json->page_Voltages->title
+msgid "🗲 Voltage"
+msgstr "🗲 Điện áp"
+
+#. settings-schema.json->page_Intrusion->title
+msgid "⮿ Intrusion"
+msgstr "⮿ Xâm nhập"
+
+#. settings-schema.json->page_Custom->title
+msgid "⛓ Custom"
+msgstr "⛓ Tùy chỉnh"
+
+#. settings-schema.json->section_SettingsWindow->title
+msgid "This settings window"
+msgstr ""
+
+#. settings-schema.json->section_Display->title
+#. settings-schema.json->section_tempOptions->title
+#. settings-schema.json->section_fanOptions->title
+#. settings-schema.json->section_voltOptions->title
+#. settings-schema.json->section_intrusionOptions->title
+msgid "Options"
+msgstr "Tùy chọn"
+
+#. settings-schema.json->section_Tooltip->title
+msgid "Tooltip"
+msgstr "Chú giải"
+
+#. settings-schema.json->section_Report->title
+msgid "Sensors values"
+msgstr "Giá trị cảm biến"
+
+#. settings-schema.json->section_remove_incompatible_xlets->title
+msgid "Remove from panels certain applets that also use sensors"
+msgstr "Xóa khỏi bảng một số applet cũng sử dụng cảm biến"
+
+#. settings-schema.json->section_dependencies->title
+msgid "Dependencies"
+msgstr ""
+
+#. settings-schema.json->section_tempDisktemp->title
+msgid "For the time being, disk temperature can only be read by root."
+msgstr "Hiện tại, chỉ người dùng root mới có thể đọc nhiệt độ ổ đĩa."
+
+#. settings-schema.json->section_tempDisplay->title
+#. settings-schema.json->section_fanDisplay->title
+#. settings-schema.json->section_voltDisplay->title
+#. settings-schema.json->section_intrusionDisplay->title
+#. settings-schema.json->section_customDisplay->title
+msgid "Display"
+msgstr "Hiển thị"
+
+#. settings-schema.json->section_tempSensors->title
+msgid "Temperature sensors"
+msgstr "Cảm biến nhiệt độ"
+
+#. settings-schema.json->section_tempDisks->title
+msgid "Disk temperature sensors"
+msgstr "Cảm biến nhiệt độ ổ đĩa"
+
+#. settings-schema.json->section_helpColors->title
+msgid "Help to select color"
+msgstr ""
+
+#. settings-schema.json->section_fanSensors->title
+msgid "Fan sensors"
+msgstr "Cảm biến quạt"
+
+#. settings-schema.json->section_voltSensors->title
+msgid "Voltage sensors"
+msgstr "Cảm biến điện áp"
+
+#. settings-schema.json->section_intrusionSensors->title
+msgid "Intrusion sensors"
+msgstr "Cảm biến xâm nhập"
+
+#. settings-schema.json->section_customDisclaimer->title
+msgid "Disclaimer"
+msgstr "Tuyên bố miễn trừ"
+
+#. settings-schema.json->section_customSensors->title
+msgid "Custom sensors"
+msgstr "Cảm biến tùy chỉnh"
+
+#. settings-schema.json->window_maximizing->description
+msgid "How to set its size"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "let it be"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize horizontally"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize vertically"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "maximize everything"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->options
+msgid "fixed"
+msgstr ""
+
+#. settings-schema.json->window_maximizing->tooltip
+msgid "Future window openings."
+msgstr ""
+
+#. settings-schema.json->window_width->description
+msgid "Width"
+msgstr ""
+
+#. settings-schema.json->window_width->tooltip
+msgid ""
+"This number must match your screen configuration.\n"
+"Minimum value: 800."
+msgstr ""
+
+#. settings-schema.json->window_height->description
+msgid "Height"
+msgstr ""
+
+#. settings-schema.json->window_height->tooltip
+msgid ""
+"This number must match your screen configuration.\n"
+"Minimum value: 100."
+msgstr ""
+
+#. settings-schema.json->window_set_current_size->description
+msgid "Set to the approximate current size and position"
+msgstr ""
+
+#. settings-schema.json->window_label->description
+msgid "The exact size and position will depend on Cinnamon."
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->interval->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->interval->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->interval->options
+msgid "4"
+msgstr "4"
+
+#. settings-schema.json->interval->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->interval->options
+msgid "6"
+msgstr "6"
+
+#. settings-schema.json->interval->options
+msgid "7"
+msgstr "7"
+
+#. settings-schema.json->interval->options
+msgid "8"
+msgstr "8"
+
+#. settings-schema.json->interval->options
+msgid "9"
+msgstr "9"
+
+#. settings-schema.json->interval->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->interval->options
+msgid "12"
+msgstr "12"
+
+#. settings-schema.json->interval->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->interval->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->interval->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->interval->options
+msgid "1 minute"
+msgstr "1 phút"
+
+#. settings-schema.json->interval->options
+msgid "2 minutes"
+msgstr "2 phút"
+
+#. settings-schema.json->interval->options
+msgid "3 minutes"
+msgstr "3 phút"
+
+#. settings-schema.json->interval->options
+msgid "4 minutes"
+msgstr "4 phút"
+
+#. settings-schema.json->interval->options
+msgid "5 minutes"
+msgstr "5 phút"
+
+#. settings-schema.json->interval->options
+msgid "10 minutes"
+msgstr "10 phút"
+
+#. settings-schema.json->interval->options
+msgid "15 minutes"
+msgstr "15 phút"
+
+#. settings-schema.json->interval->options
+msgid "30 minutes"
+msgstr "30 phút"
+
+#. settings-schema.json->interval->options
+msgid "1 hour"
+msgstr "1 giờ"
+
+#. settings-schema.json->interval->description
+msgid "Refresh interval (seconds)"
+msgstr "Chu kỳ làm mới (giây)"
+
+#. settings-schema.json->keep_size->description
+msgid "Avoid size changes"
+msgstr "Giữ nguyên kích thước"
+
+#. settings-schema.json->keep_size->tooltip
+msgid ""
+"Checked: The size of this applet remains constant, once all your preferences "
+"have been defined.\n"
+"Unchecked: The size of this applet is optimized, but it may change."
+msgstr ""
+"Đánh dấu: Kích thước của applet sẽ giữ nguyên sau khi bạn thiết lập xong các "
+"tùy chọn.\n"
+"Bỏ đánh dấu: Kích thước của applet được tối ưu tự động nhưng có thể thay đổi."
+
+#. settings-schema.json->char_size->description
+msgid "Character size (% of standard size)"
+msgstr "Kích thước ký tự (% so với tiêu chuẩn)"
+
+#. settings-schema.json->horizontal_width->description
+msgid "Display width (pixels) for horizontal panels"
+msgstr "Chiều rộng hiển thị (pixel) cho bảng ngang"
+
+#. settings-schema.json->horizontal_width->tooltip
+msgid "0 means automatic. This value does not include border."
+msgstr "0 nghĩa là tự động. Giá trị này không bao gồm viền."
+
+#. settings-schema.json->separator_type->options
+msgid "(none)"
+msgstr "(không có)"
+
+#. settings-schema.json->separator_type->options
+msgid "blank"
+msgstr "trống"
+
+#. settings-schema.json->separator_type->options
+msgid "bar"
+msgstr "thanh"
+
+#. settings-schema.json->separator_type->description
+msgid "Separator"
+msgstr "Dấu tách"
+
+#. settings-schema.json->separator_color->description
+#, fuzzy
+msgid "Separator Color"
+msgstr "Dấu tách"
+
+#. settings-schema.json->char_color_customized->description
+msgid "Customize Text Color"
+msgstr "Tùy chỉnh màu chữ"
+
+#. settings-schema.json->char_color->description
+msgid "Text Color"
+msgstr "Màu chữ"
+
+#. settings-schema.json->crit_color->description
+msgid "Critical Value Color"
+msgstr "Màu giá trị tới hạn"
+
+#. settings-schema.json->high_color->description
+msgid "High Value Color"
+msgstr "Màu giá trị cao"
+
+#. settings-schema.json->remove_border->description
+msgid "Remove border line"
+msgstr "Xóa đường viền"
+
+#. settings-schema.json->remove_border->tooltip
+msgid "Whether or not to remove the border line around this applet."
+msgstr "Bật/tắt việc xóa đường viền bao quanh applet này."
+
+#. settings-schema.json->remove_icons->description
+msgid "Remove icons"
+msgstr "Xóa biểu tượng"
+
+#. settings-schema.json->remove_icons->tooltip
+msgid "Whether or not to remove icons in panel."
+msgstr "Bật/tắt việc hiển thị biểu tượng trên bảng."
+
+#. settings-schema.json->show_tooltip->description
+msgid "Display a tooltip on mouseover"
+msgstr "Hiển thị chú giải khi di chuột"
+
+#. settings-schema.json->bold_values->description
+msgid "Show values in bold in the tooltip"
+msgstr "Hiển thị giá trị in đậm trong chú giải"
+
+#. settings-schema.json->bold_values->tooltip
+msgid "Whether or not to show values in bold in the tooltip."
+msgstr "Bật/tắt hiển thị giá trị in đậm trong chú giải."
+
+#. settings-schema.json->bold_italics_main_sensors->description
+msgid "Show main sensors in bold italics in the tooltip"
+msgstr "Hiển thị cảm biến chính bằng kiểu chữ in đậm và nghiêng trong chú giải"
+
+#. settings-schema.json->bold_italics_main_sensors->tooltip
+msgid ""
+"Whether or not to display the names of the main sensors (those displayed in "
+"the panel) in bold italics in the tooltip."
+msgstr ""
+"Bật/tắt việc hiển thị tên của các cảm biến chính (những cảm biến hiển thị "
+"trên bảng) bằng kiểu chữ in đậm và nghiêng trong chú giải."
+
+#. settings-schema.json->tooltip_font_size->description
+msgid "Font size (px)"
+msgstr ""
+
+#. settings-schema.json->restart_in_menu->description
+msgid "Show in menu the action: Restart this applet"
+msgstr "Hiển thị trong menu tùy chọn: Khởi động lại applet này"
+
+#. settings-schema.json->restart_in_menu->tooltip
+msgid "Whether or not to display in menu the action: Restart this applet."
+msgstr "Bật/tắt việc hiển thị tùy chọn khởi động lại applet trong menu."
+
+#. settings-schema.json->do_not_check_dependencies->description
+msgid "Do not check dependencies"
+msgstr ""
+
+#. settings-schema.json->do_not_check_dependencies->tooltip
+msgid ""
+"If you do not want to install certain dependencies (e.g., fonts), check this "
+"box. Be careful with dependencies that are necessary for this applet to "
+"function properly."
+msgstr ""
+
+#. settings-schema.json->make_disktemp_readable_by_user->description
+msgid "Make disk temperature user-readable"
+msgstr "Cho phép người dùng đọc được nhiệt độ ổ đĩa"
+
+#. settings-schema.json->show_temp->description
+#. settings-schema.json->show_fan->description
+#. settings-schema.json->show_volt->description
+#. settings-schema.json->show_intrusion->description
+#. settings-schema.json->show_custom->description
+msgid "Display the values of these selected sensors"
+msgstr "Hiển thị giá trị của các cảm biến được chọn"
+
+#. settings-schema.json->show_temp->tooltip
+#. settings-schema.json->show_fan->tooltip
+#. settings-schema.json->show_volt->tooltip
+#. settings-schema.json->show_intrusion->tooltip
+#. settings-schema.json->show_custom->tooltip
+msgid ""
+"Whether or not to display the values of the sensors selected in the list "
+"below."
+msgstr ""
+"Bật/tắt hiển thị giá trị của các cảm biến được chọn trong danh sách bên dưới."
+
+#. settings-schema.json->show_temp_name->description
+#. settings-schema.json->show_fan_name->description
+#. settings-schema.json->show_volt_name->description
+#. settings-schema.json->show_intrusion_name->description
+#. settings-schema.json->show_custom_name->description
+msgid "Display the 'Shown name' of each of these selected sensors"
+msgstr "Hiển thị 'Tên hiển thị' của từng cảm biến được chọn"
+
+#. settings-schema.json->show_temp_name->tooltip
+#. settings-schema.json->show_fan_name->tooltip
+#. settings-schema.json->show_volt_name->tooltip
+msgid ""
+"Whether or not to display into this applet label the 'Shown name' of the "
+"sensors selected in the list below. Without effect in vertical panels."
+msgstr ""
+"Bật/tắt việc hiển thị 'Tên hiển thị' của các cảm biến đã chọn trên nhãn "
+"applet. Không áp dụng cho bảng dọc."
+
+#. settings-schema.json->chars_temp->tooltip
+msgid "The first emoji in this list is used for temperature"
+msgstr "Biểu tượng emoji đầu tiên trong danh sách này được dùng cho nhiệt độ"
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr "Biểu tượng"
+
+#. settings-schema.json->strictly_positive_temp->description
+#. settings-schema.json->strictly_positive_volt->description
+msgid "Show only strictly positive values"
+msgstr "Chỉ hiển thị giá trị dương"
+
+#. settings-schema.json->use_fahrenheit->description
+msgid "Show temperature in Fahrenheit"
+msgstr "Hiển thị nhiệt độ theo thang Fahrenheit"
+
+#. settings-schema.json->only_integer_part->description
+msgid "Display integer values"
+msgstr "Chỉ hiển thị phần nguyên"
+
+#. settings-schema.json->only_integer_part->tooltip
+msgid "Whether or not to round the values."
+msgstr "Bật/tắt việc làm tròn giá trị."
+
+#. settings-schema.json->show_unit->description
+#. settings-schema.json->show_fan_unit->description
+#. settings-schema.json->show_volt_unit->description
+msgid "Show unit"
+msgstr "Hiển thị đơn vị"
+
+#. settings-schema.json->show_unit->tooltip
+#. settings-schema.json->show_fan_unit->tooltip
+#. settings-schema.json->show_volt_unit->tooltip
+msgid "Whether or not to show the unit after the value."
+msgstr "Bật/tắt hiển thị đơn vị sau giá trị."
+
+#. settings-schema.json->show_unit_letter->description
+msgid "Show unit character"
+msgstr "Hiển thị ký hiệu đơn vị"
+
+#. settings-schema.json->show_unit_letter->tooltip
+msgid "Whether or not to show the unit character (C or F)."
+msgstr "Bật/tắt hiển thị ký hiệu đơn vị (C hoặc F)."
+
+#. settings-schema.json->always_show_unit_in_line->description
+msgid "Vertical panel: Temperature value and °C / °F on one line"
+msgstr "Bảng dọc: Hiển thị giá trị nhiệt độ và °C/°F trên cùng một dòng"
+
+#. settings-schema.json->always_show_unit_in_line->tooltip
+msgid ""
+"Whether or not to show, in a vertical panel, °C or °F on the same line as "
+"the temperature value."
+msgstr ""
+"Bật/tắt hiển thị °C hoặc °F trên cùng một dòng với giá trị nhiệt độ trong "
+"bảng dọc."
+
+#. settings-schema.json->journalize_temp->description
+msgid "Log high and critical temperatures"
+msgstr "Ghi nhật ký các nhiệt độ cao và tới hạn"
+
+#. settings-schema.json->journalize_temp->tooltip
+msgid ""
+"When this option is checked, temperatures exceeding the high or critical "
+"limit are recorded in the system journal."
+msgstr ""
+"Khi được bật, các giá trị nhiệt độ vượt ngưỡng cao hoặc tới hạn sẽ được ghi "
+"lại trong nhật ký hệ thống."
+
+#. settings-schema.json->btn_renew_temp_sensors_list->description
+#. settings-schema.json->btn_renew_fan_sensors_list->description
+#. settings-schema.json->btn_renew_volt_sensors_list->description
+#. settings-schema.json->btn_renew_intrusion_sensors_list->description
+msgid "Renew the list of sensors"
+msgstr "Làm mới danh sách cảm biến"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+msgid ""
+"Sensor name\n"
+"(Do not modify!)"
+msgstr ""
+"Tên cảm biến\n"
+"(Không chỉnh sửa!)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"Show\n"
+"in panel"
+msgstr ""
+"Hiển thị\n"
+"trên bảng"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"Show\n"
+"in tooltip"
+msgstr ""
+"Hiển thị\n"
+"trong chú giải"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+msgid "Shown name"
+msgstr "Tên hiển thị"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+msgid ""
+"High\n"
+"(°C)"
+msgstr ""
+"Cao\n"
+"(°C)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+msgid ""
+"Critical\n"
+"(°C)"
+msgstr ""
+"Nguy cấp\n"
+"(°C)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Formula"
+msgstr "Công thức"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
+#, fuzzy
+msgid ""
+"Color\n"
+"in panel"
+msgstr ""
+"Hiển thị\n"
+"trên bảng"
+
+#. settings-schema.json->temp_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'High', 'Critical' or "
+"'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'High' and 'Critical' (optional) must be valid numbers.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Nhấp đúp vào một dòng để thay đổi 'Tên hiển thị', 'Cao', 'Nguy cấp' hoặc "
+"'Công thức'.\n"
+"Để đặt lại 'Tên hiển thị', sao chép/dán 'Tên cảm biến'.\n"
+"'Cao' và 'Nguy cấp' (tùy chọn) phải là số hợp lệ.\n"
+"'Công thức' (tùy chọn):\n"
+"  Sử dụng $ làm giá trị do cảm biến trả về.\n"
+"  Có thể dùng 4 phép toán (+-*/) và dấu ngoặc đơn.\n"
+"  Ví dụ: $*1.1+0.5"
+
+#. settings-schema.json->show_disks_first->description
+#, fuzzy
+msgid "Display the disk temperatures before those of the other sensors"
+msgstr "Hiển thị giá trị của các cảm biến được chọn"
+
+#. settings-schema.json->btn_renew_disks_list->description
+msgid "Renew the list of known disks"
+msgstr "Làm mới danh sách đĩa đã nhận diện"
+
+#. settings-schema.json->temp_disks->columns->title
+msgid "Disk name"
+msgstr "Tên đĩa"
+
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+msgid ""
+"Shown\n"
+"name"
+msgstr ""
+"Tên\n"
+"hiển thị"
+
+#. settings-schema.json->temp_disks->tooltip
+msgid ""
+"Disk name: The name of the disk, as returned by the 'lsblk' command. Please "
+"see help.\n"
+"High and Critical values: Cf. technical manual of your disk."
+msgstr ""
+"Tên đĩa: Tên của thiết bị lưu trữ được lệnh 'lsblk' trả về. Xem thêm trong "
+"phần trợ giúp.\n"
+"Các giá trị Cao và Nguy cấp: Tham khảo hướng dẫn kỹ thuật của ổ đĩa."
+
+#. settings-schema.json->chars_fan->tooltip
+msgid "The first emoji in this list is used for fan"
+msgstr "Biểu tượng cảm xúc đầu tiên trong danh sách được dùng cho quạt"
+
+#. settings-schema.json->strictly_positive_fan->description
+msgid "Show only positive or zero values"
+msgstr "Chỉ hiển thị giá trị dương hoặc bằng 0"
+
+#. settings-schema.json->fan_unit->description
+msgid "Abbreviation of \"Rotations per minute\""
+msgstr "Viết tắt của \"Vòng quay mỗi phút\""
+
+#. settings-schema.json->journalize_fan->description
+msgid "Log critical fan speeds"
+msgstr "Ghi nhật ký tốc độ quạt nguy cấp"
+
+#. settings-schema.json->journalize_fan->tooltip
+msgid ""
+"When this option is checked, fan speeds below the critical limit are "
+"recorded in the system log."
+msgstr ""
+"Khi bật tùy chọn này, tốc độ quạt thấp hơn giới hạn nguy cấp sẽ được ghi vào "
+"nhật ký hệ thống."
+
+#. settings-schema.json->fan_sensors->columns->title
+msgid ""
+"Min\n"
+"(rpm)"
+msgstr ""
+"Tối thiểu\n"
+"(vòng/phút)"
+
+#. settings-schema.json->fan_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'Min' or 'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'Min' (optional) must be valid number.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Nhấp đúp vào một dòng để thay đổi 'Tên hiển thị', 'Tối thiểu' hoặc 'Công "
+"thức'.\n"
+"Để đặt lại 'Tên hiển thị', sao chép/dán 'Tên cảm biến'.\n"
+"'Tối thiểu' (tùy chọn) phải là số hợp lệ.\n"
+"'Công thức' (tùy chọn):\n"
+"  Sử dụng $ làm giá trị cảm biến trả về.\n"
+"  Có thể dùng 4 phép toán (+-*/) và dấu ngoặc đơn.\n"
+"  Ví dụ: $*1.1+0.5"
+
+#. settings-schema.json->chars_volt->tooltip
+msgid "The first emoji in this list is used for voltage"
+msgstr "Biểu tượng cảm xúc đầu tiên trong danh sách được dùng cho điện áp"
+
+#. settings-schema.json->volt_unit->description
+msgid "Voltage unit"
+msgstr "Đơn vị điện áp"
+
+#. settings-schema.json->volt_unit->options
+msgid "Most appropriate (V or mV)"
+msgstr "Phù hợp nhất (V hoặc mV)"
+
+#. settings-schema.json->volt_unit->options
+msgid "V only"
+msgstr "Chỉ V"
+
+#. settings-schema.json->volt_unit->options
+msgid "mV only"
+msgstr "Chỉ mV"
+
+#. settings-schema.json->journalize_volt->description
+msgid "Log critical voltages"
+msgstr "Ghi nhật ký điện áp nguy cấp"
+
+#. settings-schema.json->journalize_volt->tooltip
+msgid ""
+"When this option is checked, voltages below the minimum limit or above the "
+"maximum limit are recorded in the system log."
+msgstr ""
+"Khi bật tùy chọn này, các mức điện áp thấp hơn giới hạn tối thiểu hoặc cao "
+"hơn giới hạn tối đa sẽ được ghi vào nhật ký hệ thống."
+
+#. settings-schema.json->volt_sensors->columns->title
+msgid ""
+"Min\n"
+"(V)"
+msgstr ""
+"Tối thiểu\n"
+"(V)"
+
+#. settings-schema.json->volt_sensors->columns->title
+msgid ""
+"Max\n"
+"(V)"
+msgstr ""
+"Tối đa\n"
+"(V)"
+
+#. settings-schema.json->volt_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'Min', 'Max' or 'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'Min' and 'Max' (optional) must be valid numbers.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Nhấp đúp vào một dòng để thay đổi 'Tên hiển thị', 'Tối thiểu', 'Tối đa' hoặc "
+"'Công thức'.\n"
+"Để đặt lại 'Tên hiển thị', sao chép/dán 'Tên cảm biến'.\n"
+"'Tối thiểu' và 'Tối đa' (tùy chọn) phải là số hợp lệ.\n"
+"'Công thức' (tùy chọn):\n"
+"  Sử dụng $ làm giá trị cảm biến trả về.\n"
+"  Có thể dùng 4 phép toán (+-*/) và dấu ngoặc đơn.\n"
+"  Ví dụ: $*1.1+0.5"
+
+#. settings-schema.json->show_intrusion_name->tooltip
+#. settings-schema.json->show_custom_name->tooltip
+msgid ""
+" Whether or not to display into this applet label the 'Shown name' of the "
+"sensors selected in the list below. Without effect in vertical panels."
+msgstr ""
+" Có hiển thị hay không 'Tên hiển thị' của các cảm biến được chọn trong danh "
+"sách bên dưới trong nhãn của tiểu dụng này. Không có tác dụng trên bảng điều "
+"khiển dọc."
+
+#. settings-schema.json->chars_intrusion->tooltip
+msgid "The first emoji in this list is used for intrusion"
+msgstr ""
+"Biểu tượng cảm xúc đầu tiên trong danh sách được dùng cho cảm biến xâm nhập"
+
+#. settings-schema.json->strictly_positive_intrusion->description
+msgid "Show in the panel only when an intrusion was detected"
+msgstr "Chỉ hiển thị trên bảng khi phát hiện có xâm nhập"
+
+#. settings-schema.json->journalize_intrusion->description
+msgid "Log intrusions"
+msgstr "Ghi nhật ký xâm nhập"
+
+#. settings-schema.json->journalize_intrusion->tooltip
+msgid "When this option is checked, intrusions are recorded in the system log."
+msgstr ""
+"Khi bật tùy chọn này, các sự kiện xâm nhập sẽ được ghi vào nhật ký hệ thống."
+
+#. settings-schema.json->intrusion_sensors->tooltip
+msgid ""
+"Double-click on a line to change Shown name.\n"
+"To reset a Shown name, copy/paste the Sensor name."
+msgstr ""
+"Nhấp đúp vào một dòng để thay đổi Tên hiển thị.\n"
+"Để đặt lại Tên hiển thị, sao chép/dán Tên cảm biến."
+
+#. settings-schema.json->custom_disclaimer->description
+msgid ""
+"These settings are for advanced users only!\n"
+"Please refer to the README file."
+msgstr ""
+"Các thiết lập này chỉ dành cho người dùng nâng cao!\n"
+"Vui lòng tham khảo tệp README."
+
+#. settings-schema.json->custom_openREADME->description
+msgid "Open the README file"
+msgstr "Mở tệp README"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Type"
+msgstr "Loại"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Name"
+msgstr "Tên"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"File to\n"
+"monitor"
+msgstr ""
+"Tệp cần\n"
+"giám sát"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"High\n"
+"value"
+msgstr ""
+"Giá trị\n"
+"cao"
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid ""
+"Critical\n"
+"value"
+msgstr ""
+"Giá trị\n"
+"nguy cấp"
+
+#. settings-schema.json->custom_sensors->tooltip
+msgid ""
+"Add a line by custom sensor to set the type, the name and the path of the "
+"file to monitor (/sys/class/...)."
+msgstr ""
+"Thêm một dòng cho cảm biến tùy chỉnh để đặt loại, tên và đường dẫn đến tệp "
+"cần giám sát (/sys/class/...)."
+
+#. settings-schema.json->report->description
+#. scripts/show_sensor_values.sh:5
+msgid "Example of sensor values from this computer"
+msgstr "Ví dụ về giá trị cảm biến từ máy tính này"
+
+#. settings-schema.json->report->tooltip
+msgid "Useful for reporting an issue."
+msgstr "Hữu ích khi cần báo cáo sự cố."
+
+#. settings-schema.json->update_display->description
+msgid "Update display"
+msgstr "Cập nhật hiển thị"
+
+#. settings-schema.json->button_color_help->description
+msgid "Open HTML Colors web page"
+msgstr ""
+
+#. settings-schema.json->remove_temperatureATfevimu->description
+msgid "Remove from panel the temperature@fevimu applet"
+msgstr "Xóa tiểu dụng temperature@fevimu khỏi bảng"

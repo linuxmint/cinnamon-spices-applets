@@ -1,0 +1,112 @@
+# FANCTRL
+# This file is put in the public domain.
+# not-a-feature, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: fw_fanctrl@juleskreuer.eu 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+msgid "FanCTRL"
+msgstr "FanCTRL"
+
+#. metadata.json->description
+msgid "Applet to control the framework fan-speed strategy using fw_fanctrl."
+msgstr "Applet per controllare la strategia di velocità della ventola Framework usando fw_fanctrl."
+
+#. settings-schema.json->header->description
+msgid ""
+"Framework FanCTRL - Fan Strategy Control Applet for Cinnamon \n"
+"\n"
+"List of valid strategies:"
+msgstr ""
+"Framework FanCTRL - Applet di controllo della strategia della ventola per Cinnamon \n"
+"\n"
+"Elenco delle strategie valide:"
+
+#. settings-schema.json->sleep-label->description
+msgid "Sleep"
+msgstr "Sospendi"
+
+#. settings-schema.json->sleep->description
+#. settings-schema.json->lazyest->description
+#. settings-schema.json->lazy->description
+#. settings-schema.json->medium->description
+#. settings-schema.json->agile->description
+#. settings-schema.json->very-agile->description
+#. settings-schema.json->deaf->description
+#. settings-schema.json->aeolus->description
+msgid "Visible"
+msgstr "Visibile"
+
+#. settings-schema.json->sleep-icon->description
+msgid "Icon for 'Sleep'"
+msgstr "Icona per 'Sospendi'"
+
+#. settings-schema.json->lazyest-label->description
+msgid "Laziest"
+msgstr "Pigrissima"
+
+#. settings-schema.json->lazyest-icon->description
+msgid "Icon for 'Laziest'"
+msgstr "Icona per 'Pigrissima'"
+
+#. settings-schema.json->lazy-label->description
+msgid "Lazy"
+msgstr "Pigra"
+
+#. settings-schema.json->lazy-icon->description
+msgid "Icon for 'Lazy'"
+msgstr "Icona per 'Pigra'"
+
+#. settings-schema.json->medium-label->description
+msgid "Medium"
+msgstr "Medio"
+
+#. settings-schema.json->medium-icon->description
+msgid "Icon for 'Medium'"
+msgstr "Icona per 'Medio'"
+
+#. settings-schema.json->agile-label->description
+msgid "Agile"
+msgstr "Agile"
+
+#. settings-schema.json->agile-icon->description
+msgid "Icon for 'Agile'"
+msgstr "Icona per 'Agile'"
+
+#. settings-schema.json->very-agile-label->description
+msgid "Very Agile"
+msgstr "Molto agile"
+
+#. settings-schema.json->very-agile-icon->description
+msgid "Icon for 'Very Agile'"
+msgstr "Icona per 'Molto agile'"
+
+#. settings-schema.json->deaf-label->description
+msgid "Deaf"
+msgstr "Sorda"
+
+#. settings-schema.json->deaf-icon->description
+msgid "Icon for 'Deaf'"
+msgstr "Icona per 'Sorda'"
+
+#. settings-schema.json->aeolus-label->description
+msgid "Aeolus"
+msgstr "Eolo"
+
+#. settings-schema.json->aeolus-icon->description
+msgid "Icon for 'Aeolus'"
+msgstr "Icona per 'Eolo'"

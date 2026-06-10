@@ -1,0 +1,537 @@
+# Rules:
+#  1. The following strings should only be replaced with 3-character equivalent strings. They can be translations or comprehensible abbreviations of the original words in the target language; otherwise, they should remain unaltered.
+#    - GPU
+#    - Fan
+#    - mem
+#  2. The string "Hi!" is meant to be displayed in a very small container (up to 4 lines with a maximum of 4 characters per line). It should be translated into a friendly, playful, and non-offensive phrase in the target language, respecting this size limit. Regional slang or expressions that could be perceived as insulting must be avoided. If no suitable translation can be created within these constraints, preserve the original "Hi!".
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidia-monitor@kalin91 v1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-02 22:56-0600\n"
+"PO-Revision-Date: 2026-02-03 00:00+0000\n"
+"Last-Translator: Carlos Alberto Morales Ortega <carlos.mor.ort@gmail.com>\n"
+"Language-Team: Greek <AI generated>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:43
+msgid "nvidia-smi not found"
+msgstr "Το nvidia-smi δεν βρέθηκε"
+
+#: applet.js:44
+msgid ""
+"nvidia-smi not found in PATH.\n"
+"Please ensure NVIDIA drivers are installed."
+msgstr ""
+"Το nvidia-smi δεν βρέθηκε στο PATH.\n"
+"Βεβαιωθείτε ότι έχουν εγκατασταθεί οι οδηγοί NVIDIA."
+
+#: applet.js:49
+msgid "Displays NVIDIA GPU monitor"
+msgstr "Εμφανίζει την παρακολούθηση NVIDIA GPU"
+
+#: applet.js:54
+msgid "Error initializing applet"
+msgstr "Σφάλμα αρχικοποίησης του applet"
+
+#: applet.js:55
+msgid "Init Error"
+msgstr "Σφάλμα εκκίνησης"
+
+#: applet.js:80
+msgid "Open Monitor Graph"
+msgstr "Άνοιγμα γραφήματος παρακολούθησης"
+
+#: applet.js:84
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#. settings-schema.json->Applet->title
+#: applet.js:89
+msgid "Applet Settings"
+msgstr "Ρυθμίσεις Applet"
+
+#. settings-schema.json->Monitor->title
+#: applet.js:92
+msgid "Monitor Settings"
+msgstr "Ρυθμίσεις παρακολούθησης"
+
+#: applet.js:95
+msgid "Reset All Settings"
+msgstr "Επαναφορά όλων των ρυθμίσεων"
+
+#: applet.js:97
+#, javascript-format
+msgid "Are you sure you want to reset all settings of '%s' to default?"
+msgstr ""
+"Είστε σίγουροι ότι θέλετε να επαναφέρετε όλες τις ρυθμίσεις του '%s' στις "
+"προεπιλεγμένες τιμές;"
+
+#: applet.js:108 applet.js:109
+msgid "Error resetting settings"
+msgstr "Σφάλμα επαναφοράς ρυθμίσεων"
+
+#: applet.js:118
+msgid "Error building menu: "
+msgstr "Σφάλμα δημιουργίας μενού: "
+
+#: applet.js:171
+msgid "Launching"
+msgstr "Εκκίνηση"
+
+#: applet.js:183
+msgid "Sending"
+msgstr "Αποστολή"
+
+#: applet.js:183
+msgid "history points"
+msgstr "σημεία ιστορικού"
+
+#: applet.js:194
+msgid "subprocess exited with error"
+msgstr "η υποδιεργασία τερματίστηκε με σφάλμα"
+
+#: applet.js:196
+msgid "Monitor subprocess exited"
+msgstr "Η υποδιεργασία παρακολούθησης τερματίστηκε"
+
+#: applet.js:202
+msgid "Error starting monitor"
+msgstr "Σφάλμα εκκίνησης παρακολούθησης"
+
+#: applet.js:203
+msgid "Could not start monitor script"
+msgstr "Αδυναμία εκκίνησης σεναρίου παρακολούθησης"
+
+#: applet.js:213
+msgid "Error closing monitor"
+msgstr "Σφάλμα κλεισίματος παρακολούθησης"
+
+#: applet.js:241
+msgid "Error sending to monitor"
+msgstr "Σφάλμα αποστολής στην παρακολούθηση"
+
+#: applet.js:254 applet.js:509
+msgid "Error"
+msgstr "Σφάλμα"
+
+#: applet.js:271
+msgid "Initializing..."
+msgstr "Αρχικοποίηση..."
+
+#: applet.js:281
+msgid "Mem"
+msgstr "Mem"
+
+#: applet.js:290 applet.js:681
+msgid "GPU"
+msgstr "GPU"
+
+#: applet.js:299 applet.js:689
+msgid "Fan"
+msgstr "Fan"
+
+#: applet.js:510
+msgid "Failed to run nvidia-smi.\n"
+msgstr "Αποτυχία εκτέλεσης του nvidia-smi.\n"
+
+#: applet.js:510 applet.js:511
+msgid "Unknown"
+msgstr "Άγνωστο"
+
+#: applet.js:511
+msgid "Failed to run nvidia-smi"
+msgstr "Αποτυχία εκτέλεσης του nvidia-smi"
+
+#: applet.js:515
+msgid "An unexpected error occurred while running nvidia-smi.\n"
+msgstr "Παρουσιάστηκε απρόσμενο σφάλμα κατά την εκτέλεση του nvidia-smi.\n"
+
+#: applet.js:516
+msgid "Err"
+msgstr "Err"
+
+#: applet.js:673
+msgid "MEM"
+msgstr "MEM"
+
+#: applet.js:689
+msgid "FAN"
+msgstr "FAN"
+
+#: applet.js:706
+msgid "Hi!"
+msgstr "Γει"
+
+#: applet.js:739
+msgid "Error terminating monitor subprocess"
+msgstr "Σφάλμα τερματισμού υποδιεργασίας παρακολούθησης"
+
+#: applet.js:753
+msgid "Menu toggled on click."
+msgstr "Το μενού εναλλάχθηκε με κλικ."
+
+#. metadata.json->name
+#: ui/monitor_window.glade:7
+msgid "NVIDIA Monitor"
+msgstr "Παρακολούθηση NVIDIA"
+
+#. metadata.json->description
+msgid ""
+"Monitors GPU temperature, memory, utilization, and fan speed using nvidia-smi"
+msgstr ""
+"Παρακολουθεί τη θερμοκρασία GPU, τη μνήμη, τη χρήση και την ταχύτητα "
+"ανεμιστήρα μέσω του nvidia-smi"
+
+#. settings-schema.json->section_general->title
+msgid "General Settings"
+msgstr "Γενικές ρυθμίσεις"
+
+#. settings-schema.json->section_temp->title
+msgid "Temperature"
+msgstr "Θερμοκρασία"
+
+#. settings-schema.json->section_memory->title
+msgid "Memory Usage"
+msgstr "Χρήση μνήμης"
+
+#. settings-schema.json->section_gpu->title
+msgid "GPU Utilization"
+msgstr "Χρήση GPU"
+
+#. settings-schema.json->section_fan->title
+msgid "Fan Speed"
+msgstr "Ταχύτητα ανεμιστήρα"
+
+#. settings-schema.json->top_note->title
+msgid "Note"
+msgstr "Σημείωση"
+
+#. settings-schema.json->metric_colors_section->title
+msgid "Metric Colors"
+msgstr "Χρώματα μετρήσεων"
+
+#. settings-schema.json->layout_colors_section->title
+msgid "Layout Colors"
+msgstr "Χρώματα διάταξης"
+
+#. settings-schema.json->y_axis_section->title
+msgid "Y-Axis Settings"
+msgstr "Ρυθμίσεις άξονα Y"
+
+#. settings-schema.json->x_axis_section->title
+msgid "X-Axis Settings"
+msgstr "Ρυθμίσεις άξονα X"
+
+#. settings-schema.json->monitor-note->description
+msgid ""
+"Changes to monitor settings will take effect after restarting the monitor."
+msgstr ""
+"Οι αλλαγές στις ρυθμίσεις θα εφαρμοστούν μετά την επανεκκίνηση της "
+"παρακολούθησης."
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "1 Line (50%)"
+msgstr "1 γραμμή (50%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "2 Lines (33%, 66%)"
+msgstr "2 γραμμές (33%, 66%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "3 Lines (25%, 50%, 75%)"
+msgstr "3 γραμμές (25%, 50%, 75%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "4 Lines (20%, 40%, 60%, 80%)"
+msgstr "4 γραμμές (20%, 40%, 60%, 80%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "5 Lines (16%, 33%, 50%, 66%, 83%)"
+msgstr "5 γραμμές (16%, 33%, 50%, 66%, 83%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "9 Lines (Every 10%)"
+msgstr "9 γραμμές (κάθε 10%)"
+
+#. settings-schema.json->y-axis-steps->description
+msgid "Y-Axis Guides"
+msgstr "Οδηγοί άξονα Y"
+
+#. settings-schema.json->y-axis-steps->tooltip
+msgid "Number of guide lines for the Y-Axis."
+msgstr "Αριθμός γραμμών οδηγού για τον άξονα Y."
+
+#. settings-schema.json->y-axis-temp-unit->options
+#. settings-schema.json->temp-unit->options
+msgid "Celsius (°C)"
+msgstr "Κελσίου (°C)"
+
+#. settings-schema.json->y-axis-temp-unit->options
+#. settings-schema.json->temp-unit->options
+msgid "Fahrenheit (°F)"
+msgstr "Φαρενάιτ (°F)"
+
+#. settings-schema.json->y-axis-temp-unit->description
+msgid "Y-Axis Temperature Unit"
+msgstr "Μονάδα θερμοκρασίας άξονα Y"
+
+#. settings-schema.json->y-axis-temp-unit->tooltip
+msgid "Unit for the temperature axis in the monitor."
+msgstr "Μονάδα για τον άξονα θερμοκρασίας στην παρακολούθηση."
+
+#. settings-schema.json->x-axis-steps->description
+msgid "X-Axis Guides"
+msgstr "Οδηγοί άξονα X"
+
+#. settings-schema.json->x-axis-steps->tooltip
+msgid "Number of vertical guide lines for the X-Axis."
+msgstr "Αριθμός κάθετων γραμμών οδηγού για τον άξονα X."
+
+#. settings-schema.json->x-axis-unit->options
+msgid "Seconds"
+msgstr "Δευτερόλεπτα"
+
+#. settings-schema.json->x-axis-unit->options
+msgid "Minutes"
+msgstr "Λεπτά"
+
+#. settings-schema.json->x-axis-unit->options
+msgid "Hours"
+msgstr "Ώρες"
+
+#. settings-schema.json->x-axis-unit->description
+msgid "X-Axis Unit"
+msgstr "Μονάδα άξονα X"
+
+#. settings-schema.json->x-axis-unit->tooltip
+msgid "Unit of time for the X-Axis."
+msgstr "Μονάδα χρόνου για τον άξονα X."
+
+#. settings-schema.json->x-axis-length-sec->units
+#. settings-schema.json->refresh-interval->units
+msgid "s"
+msgstr "s"
+
+#. settings-schema.json->x-axis-length-sec->description
+msgid "X-Axis Length (Seconds)"
+msgstr "Μήκος άξονα X (δευτερόλεπτα)"
+
+#. settings-schema.json->x-axis-length-sec->tooltip
+#. settings-schema.json->x-axis-length-min->tooltip
+#. settings-schema.json->x-axis-length-hour->tooltip
+msgid "Total duration shown on the graph."
+msgstr "Συνολική διάρκεια στο γράφημα."
+
+#. settings-schema.json->x-axis-length-min->units
+msgid "m"
+msgstr "m"
+
+#. settings-schema.json->x-axis-length-min->description
+msgid "X-Axis Length (Minutes)"
+msgstr "Μήκος άξονα X (λεπτά)"
+
+#. settings-schema.json->x-axis-length-hour->units
+msgid "h"
+msgstr "h"
+
+#. settings-schema.json->x-axis-length-hour->description
+msgid "X-Axis Length (Hours)"
+msgstr "Μήκος άξονα X (ώρες)"
+
+#. settings-schema.json->temp-color->description
+msgid "Temperature Color"
+msgstr "Χρώμα θερμοκρασίας"
+
+#. settings-schema.json->temp-color->tooltip
+msgid "Color used for temperature in the graph."
+msgstr "Χρώμα που χρησιμοποιείται για τη θερμοκρασία στο γράφημα."
+
+#. settings-schema.json->mem_color->description
+msgid "Memory Usage Color"
+msgstr "Χρώμα χρήσης μνήμης"
+
+#. settings-schema.json->mem_color->tooltip
+msgid "Color used for memory usage in the graph."
+msgstr "Χρώμα που χρησιμοποιείται για τη χρήση μνήμης στο γράφημα."
+
+#. settings-schema.json->gpu_color->description
+msgid "GPU Utilization Color"
+msgstr "Χρώμα χρήσης GPU"
+
+#. settings-schema.json->gpu_color->tooltip
+msgid "Color used for GPU utilization in the graph."
+msgstr "Χρώμα που χρησιμοποιείται για τη χρήση GPU στο γράφημα."
+
+#. settings-schema.json->fan_color->description
+msgid "Fan Speed Color"
+msgstr "Χρώμα ταχύτητας ανεμιστήρα"
+
+#. settings-schema.json->fan_color->tooltip
+msgid "Color used for fan speed in the graph."
+msgstr "Χρώμα που χρησιμοποιείται για την ταχύτητα ανεμιστήρα στο γράφημα."
+
+#. settings-schema.json->background_color->description
+msgid "Background Color"
+msgstr "Χρώμα φόντου"
+
+#. settings-schema.json->background_color->tooltip
+msgid "Background color of the graph."
+msgstr "Χρώμα φόντου του γραφήματος."
+
+#. settings-schema.json->temp-axis-color->description
+msgid "Temperature Axis Color"
+msgstr "Χρώμα άξονα θερμοκρασίας"
+
+#. settings-schema.json->temp-axis-color->tooltip
+msgid "Color for the temperature axis labels."
+msgstr "Χρώμα ετικετών άξονα θερμοκρασίας."
+
+#. settings-schema.json->percent-axis-color->description
+msgid "Percentage Axis Color"
+msgstr "Χρώμα άξονα ποσοστού"
+
+#. settings-schema.json->percent-axis-color->tooltip
+msgid "Color for the percentage axis labels."
+msgstr "Χρώμα ετικετών ποσοστού."
+
+#. settings-schema.json->x-axis-color->description
+msgid "X-Axis Color"
+msgstr "Χρώμα άξονα X"
+
+#. settings-schema.json->x-axis-color->tooltip
+msgid "Color for the X-axis labels (Time)."
+msgstr "Χρώμα ετικετών άξονα X (Χρόνος)."
+
+#. settings-schema.json->guidelines-color->description
+msgid "Guidelines Color"
+msgstr "Χρώμα οδηγών"
+
+#. settings-schema.json->guidelines-color->tooltip
+msgid "Color for the grid/guide lines."
+msgstr "Χρώμα γραμμών πλέγματος/οδηγών."
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh Interval"
+msgstr "Διάστημα ανανέωσης"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid "How often to update the GPU stats (in seconds)."
+msgstr "Συχνότητα ενημέρωσης των στατιστικών GPU (σε δευτερόλεπτα)."
+
+#. settings-schema.json->border-color->description
+msgid "Applet Border Color"
+msgstr "Χρώμα περιγράμματος applet"
+
+#. settings-schema.json->border-color->tooltip
+msgid "Color of the applet border. Set alpha to 0 for no border."
+msgstr "Χρώμα περιγράμματος. Ορίστε το alpha σε 0 για καθόλου περίγραμμα."
+
+#. settings-schema.json->encoding->options
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#. settings-schema.json->encoding->options
+msgid "macintosh"
+msgstr "macintosh"
+
+#. settings-schema.json->encoding->options
+msgid "ASCII"
+msgstr "ASCII"
+
+#. settings-schema.json->encoding->description
+msgid "nvidia-smi Output Encoding"
+msgstr "Κωδικοποίηση εξόδου nvidia-smi"
+
+#. settings-schema.json->encoding->tooltip
+msgid "Select the character encoding used by nvidia-smi output."
+msgstr "Επιλογή κωδικοποίησης χαρακτήρων εξόδου nvidia-smi."
+
+#. settings-schema.json->show-temp->description
+msgid "Show Temperature"
+msgstr "Εμφάνιση θερμοκρασίας"
+
+#. settings-schema.json->show-temp->tooltip
+msgid "Show GPU temperature in the panel."
+msgstr "Εμφάνιση θερμοκρασίας GPU στο πάνελ."
+
+#. settings-schema.json->temp-unit->description
+msgid "Temperature Unit"
+msgstr "Μονάδα θερμοκρασίας"
+
+#. settings-schema.json->temp-unit->tooltip
+msgid "Choose the unit for displaying GPU temperature."
+msgstr "Επιλέξτε μονάδα για την εμφάνιση της θερμοκρασίας GPU."
+
+#. settings-schema.json->show-memory->description
+msgid "Show Memory Usage"
+msgstr "Εμφάνιση χρήσης μνήμης"
+
+#. settings-schema.json->show-memory->tooltip
+msgid "Show GPU memory usage in the panel."
+msgstr "Εμφάνιση χρήσης μνήμης GPU στο πάνελ."
+
+#. settings-schema.json->memory-display-mode->options
+msgid "Text (Used / Total)"
+msgstr "Κείμενο (Χρήση / Σύνολο)"
+
+#. settings-schema.json->memory-display-mode->options
+#. settings-schema.json->gpu-display-mode->options
+#. settings-schema.json->fan-display-mode->options
+msgid "Pie Chart"
+msgstr "Κυκλικό γράφημα"
+
+#. settings-schema.json->memory-display-mode->description
+msgid "Memory Display Mode"
+msgstr "Λειτουργία εμφάνισης μνήμης"
+
+#. settings-schema.json->memory-display-mode->tooltip
+msgid "Choose how to display memory usage: as text or as a pie chart."
+msgstr "Επιλογή τρόπου εμφάνισης χρήσης μνήμης: ως κείμενο ή κυκλικό γράφημα."
+
+#. settings-schema.json->show-gpu-util->description
+msgid "Show GPU Utilization"
+msgstr "Εμφάνιση χρήσης GPU"
+
+#. settings-schema.json->show-gpu-util->tooltip
+msgid "Show GPU utilization percentage in the panel."
+msgstr "Εμφάνιση ποσοστού χρήσης GPU στο πάνελ."
+
+#. settings-schema.json->gpu-display-mode->options
+#. settings-schema.json->fan-display-mode->options
+msgid "Text (Percent)"
+msgstr "Κείμενο (%)"
+
+#. settings-schema.json->gpu-display-mode->description
+msgid "GPU Display Mode"
+msgstr "Λειτουργία εμφάνισης GPU"
+
+#. settings-schema.json->gpu-display-mode->tooltip
+msgid "Choose how to display GPU utilization: as text or as a pie chart."
+msgstr "Επιλογή τρόπου εμφάνισης χρήσης GPU: ως κείμενο ή κυκλικό γράφημα."
+
+#. settings-schema.json->show-fan-speed->description
+msgid "Show Fan Speed"
+msgstr "Εμφάνιση ταχύτητας ανεμιστήρα"
+
+#. settings-schema.json->show-fan-speed->tooltip
+msgid "Show GPU fan speed percentage in the panel."
+msgstr "Εμφάνιση ποσοστού ταχύτητας ανεμιστήρα GPU στο πάνελ."
+
+#. settings-schema.json->fan-display-mode->description
+msgid "Fan Display Mode"
+msgstr "Λειτουργία εμφάνισης ανεμιστήρα"
+
+#. settings-schema.json->fan-display-mode->tooltip
+msgid "Choose how to display fan speed: as text or as a pie chart."
+msgstr ""
+"Επιλογή τρόπου εμφάνισης ταχύτητας ανεμιστήρα: ως κείμενο ή κυκλικό γράφημα."

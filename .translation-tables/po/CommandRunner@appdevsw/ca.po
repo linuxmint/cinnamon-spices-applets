@@ -1,0 +1,169 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 21:57+0800\n"
+"PO-Revision-Date: 2024-07-22 00:25+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. CommandRunner@appdevsw->metadata.json->name
+#: applet.js:47
+msgid "CommandRunner"
+msgstr "ExecutaOrdres"
+
+#: applet.js:102
+msgid "<no text>"
+msgstr "<no hi ha text>"
+
+#: applet.js:136
+msgid "starting..."
+msgstr "començant..."
+
+#: appletgui.js:142
+msgid "Compare error "
+msgstr "Comparar error "
+
+#: appletgui.js:255 appletgui.js:283
+msgid "XML/JSON error: missing tag "
+msgstr "Error XML/JSON: etiqueta faltant "
+
+#: appletgui.js:291
+msgid "xml error:"
+msgstr "error xml:"
+
+#: appletgui.js:316 appletgui.js:325
+msgid "property not found "
+msgstr "propietat no trobada "
+
+#: cmdrunner.js:51
+msgid "undefined command!"
+msgstr "ordre no definida!"
+
+#: cmdrunner.js:143
+msgid "cannot execute command!"
+msgstr "no es pot executar l'ordre!"
+
+#: simplexml.js:259
+msgid "xml parse error at pos "
+msgstr "error de l'intèrpret xml a la posició "
+
+#: simplexml.js:259
+msgid ", level "
+msgstr ", nivell "
+
+#: simplexml.js:259
+msgid ", inside tag "
+msgstr ", etiqueta interna "
+
+#. CommandRunner@appdevsw->metadata.json->description
+msgid ""
+"Applet runs script or application periodically and displays its output on "
+"the taskbar"
+msgstr ""
+"Miniaplicació que executa scripts o aplicacions periòdicament i en mostra "
+"el resultat o la sortida a la barra d'eines"
+
+#. CommandRunner@appdevsw->settings-
+#. schema.json->form_interval_unit->description
+msgid "Unit"
+msgstr "Unitat"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval_unit->tooltip
+msgid "Unit of the interval: seconds or milliseconds"
+msgstr "Unitat de l'interval: segons o mil·lisegons"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval_unit->options
+msgid " milliseconds"
+msgstr " mil·lisegons"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval_unit->options
+msgid " seconds"
+msgstr " segons"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval->description
+msgid "Run interval"
+msgstr "Interval d'execució"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval->tooltip
+msgid "Specifies how often the command is run"
+msgstr "Indica cada quan s'executen les ordres"
+
+#. CommandRunner@appdevsw->settings-schema.json->head_title->description
+msgid "CommandRunner settings"
+msgstr "Opcions d'ExecutaOrdres"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_suffix->description
+msgid "Suffix"
+msgstr "Sufix"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_suffix->tooltip
+msgid ""
+"Text or character displayed at the end of the command result (in text mode "
+"only)."
+msgstr ""
+"Text mostrat al final del resultat de les ordres (només en mode de text)."
+
+#. CommandRunner@appdevsw->settings-schema.json->form_command->description
+msgid "Command"
+msgstr "Ordre"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_command->tooltip
+msgid ""
+"Command or script or applitaction to run.\n"
+"e.g.\n"
+" /home/user/myscript.sh\n"
+" echo Hello\n"
+"\n"
+"The command should print the result to the standard output, which will be "
+"displayed on the taskbar.\n"
+"\n"
+"You can use predefined parameters:\n"
+" $counter$ - number of command executions\n"
+" $appletdir$ - applet directory\n"
+"\n"
+"  e.g. echo \"I was executed $counter$ times\""
+msgstr ""
+"Ordre o script o aplicació a executar.\n"
+"ex:\n"
+"/home/user/myscript.sh\n"
+" echo Hola\n"
+"\n"
+"L'ordre hauria d'escriure el resultat a la sortida estàndard, que es "
+"mostrarà a la barra d'eines.\n"
+"\n"
+"Podeu utilitzar paràmetres predefinits:\n"
+" $counter$ - número d'execucions de l'ordre\n"
+" $appletdir$ - directori de la miniaplicació\n"
+"\n"
+" ex: echo \"L'ordre ha estat executada $counter$ vegades\""
+
+#. CommandRunner@appdevsw->settings-schema.json->form_prefix->description
+msgid "Prefix"
+msgstr "Prefix"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_prefix->tooltip
+msgid ""
+"Text or character displayed at the beginning of the command result (in text "
+"mode only)."
+msgstr ""
+"Text mostrat al principi del resultat de l'ordre (només en mode de text)."
+
+#. CommandRunner@appdevsw->settings-schema.json->apply->description
+msgid "Apply"
+msgstr "Aplicar"
+
+#. CommandRunner@appdevsw->settings-schema.json->apply->tooltip
+msgid "Apply changes"
+msgstr "Aplica els canvis"

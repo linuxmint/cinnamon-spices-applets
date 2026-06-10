@@ -1,0 +1,104 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: password-generator@spencerlommel.com 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-05-07 20:32-0500\n"
+"PO-Revision-Date: 2024-07-24 00:16+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:33
+msgid "Generate Random Password"
+msgstr "Genereer Willekeurig Wachtwoord"
+
+#: applet.js:42
+msgid "Please enable at least one value in settings."
+msgstr "Schakel ten minste één waarde in de instellingen in."
+
+#: applet.js:49
+msgid "Copy"
+msgstr "Kopieer"
+
+#. metadata.json->description
+msgid "Configurable Password Generator"
+msgstr "Configureerbare Wachtwoordgenerator"
+
+#. metadata.json->name
+msgid "Password Generator"
+msgstr "Wachtwoordgenerator"
+
+#. settings-schema.json->password-settings-header->description
+msgid "Password Settings"
+msgstr "Wachtwoordinstellingen"
+
+#. settings-schema.json->password-length->units
+msgid "characters"
+msgstr "tekens"
+
+#. settings-schema.json->password-length->description
+msgid "Password Length"
+msgstr "Wachtwoordlengte"
+
+#. settings-schema.json->password-length->tooltip
+msgid "The password can be any length from 1 to 32 characters."
+msgstr "Het wachtwoord kan elke lengte hebben van 1 tot 32 tekens."
+
+#. settings-schema.json->include-lowercase->description
+msgid "Include Lowercase Letters"
+msgstr "Voeg kleine letters toe"
+
+#. settings-schema.json->include-uppercase->description
+msgid "Include Uppercase Letters"
+msgstr "Voeg hoofdletters toe"
+
+#. settings-schema.json->include-numbers->description
+msgid "Include Numbers"
+msgstr "Voeg cijfers toe"
+
+#. settings-schema.json->include-symbols->description
+msgid "Include Symbols"
+msgstr "Voeg symbolen toe"
+
+#. settings-schema.json->copy-settings-header->description
+msgid "Copy Settings"
+msgstr "Kopieer instellingen"
+
+#. settings-schema.json->auto-copy->description
+msgid "Automatically Copy To Clipboard"
+msgstr "Automatisch kopiëren naar klembord"
+
+#. settings-schema.json->auto-copy->tooltip
+msgid ""
+"When clicking the lock icon, instead of opening a window where the password "
+"can be copied it is instead automatically copied to your Clipboard."
+msgstr ""
+"Wanneer je op het sloticoon klikt, wordt het wachtwoord automatisch naar je "
+"klembord gekopieerd, in plaats van een venster te openen waar je het "
+"wachtwoord kunt kopiëren."
+
+#. settings-schema.json->play-sound->description
+#. settings-schema.json->sound-file->description
+msgid "Play sound on copy"
+msgstr "Speel geluid af bij kopiëren"
+
+#. settings-schema.json->play-sound->tooltip
+msgid ""
+"Toggles whether or not a sound is played when the password is copied to the "
+"Clipboard"
+msgstr ""
+"Schakelt in of een geluid wordt afgespeeld wanneer het wachtwoord naar het "
+"klembord wordt gekopieerd."
+
+#. settings-schema.json->sound-file->tooltip
+msgid "Select a sound to play when the password is copied"
+msgstr ""
+"Selecteer een geluid om af te spelen wanneer het wachtwoord wordt gekopieerd"
