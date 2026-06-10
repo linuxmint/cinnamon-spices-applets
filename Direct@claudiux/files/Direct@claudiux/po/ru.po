@@ -198,7 +198,7 @@ msgstr "Избранное"
 #. settings-schema.json->recentPage->title
 #. settings-schema.json->recentSection->title
 msgid "Recent documents"
-sgstr "Недавние документы"
+msgstr "Недавние документы"
 
 #. settings-schema.json->customPage->title
 msgid "Custom"
