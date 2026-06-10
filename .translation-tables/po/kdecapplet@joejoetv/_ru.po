@@ -7,79 +7,79 @@ msgstr ""
 
 #. js/modules.js:656
 msgid "Charging"
-msgstr ""
+msgstr "Заряжается"
 
 #. js/modules.js:823
 msgid "Low"
-msgstr ""
+msgstr "Низкий"
 
 #. js/modules.js:826
 msgid "Ok"
-msgstr ""
+msgstr "Нормальный"
 
 #. js/modules.js:829
 msgid "Good"
-msgstr ""
+msgstr "Хороший"
 
 #. js/modules.js:832
 msgid "Excellent"
-msgstr ""
+msgstr "Отличный"
 
 #. js/modules.js:844
 msgid "Unknown"
-msgstr ""
+msgstr "Неизвестно"
 
 #. js/modules.js:1279
 msgid "Unmount"
-msgstr ""
+msgstr "Отключить"
 
 #. js/modules.js:1281
 msgid "Mount"
-msgstr ""
+msgstr "Подключить"
 
 #. py/dialogs.py:47 py/dialogs.py:103 py/dialogs.py:166
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
 #. py/dialogs.py:50 py/dialogs.py:106 py/dialogs.py:169
 msgid "Send"
-msgstr ""
+msgstr "Отправить"
 
 #. settings-schema.json->page_general->title
 msgid "General"
-msgstr ""
+msgstr "Общие"
 
 #. settings-schema.json->page_modules->title
 msgid "Modules"
-msgstr ""
+msgstr "Модули"
 
 #. settings-schema.json->section_panel->title
 msgid "Panel"
-msgstr ""
+msgstr "Панель"
 
 #. settings-schema.json->section_devices->title
 msgid "Devices"
-msgstr ""
+msgstr "Устройства"
 
 #. settings-schema.json->combobox_icon-type->options
 msgid "Symbolic"
-msgstr ""
+msgstr "Символический"
 
 #. settings-schema.json->combobox_icon-type->options
 msgid "Color"
-msgstr ""
+msgstr "Цветной"
 
 #. settings-schema.json->orderlist_device-order->columns->title
 #. settings-schema.json->oderlist_info-modules->columns->title
 #. settings-schema.json->oderlist_action-modules->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Название"
 
 #. settings-schema.json->orderlist_device-order->columns->title
 msgid "Expand"
-msgstr ""
+msgstr "Раскрывать"
 
 #. settings-schema.json->oderlist_info-modules->columns->title
 #. settings-schema.json->oderlist_action-modules->columns->title
 msgid "Enabled"
-msgstr ""
+msgstr "Включено"
