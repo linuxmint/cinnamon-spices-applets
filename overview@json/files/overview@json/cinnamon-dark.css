@@ -1,0 +1,342 @@
+/* =============================================================================
+   Cinnamenu — Dark Theme
+   Standalone: affects .cinnamenu only, zero effect on AppMenu or PopupMenu.
+   Mirror of cinnamon-light.css with inverted palette.
+   ============================================================================= */
+
+/* ── 0. RESET ───────────────────────────────────────────────────────────── */
+.cinnamenu,
+.cinnamenu .popup-menu,
+.cinnamenu .popup-menu-content {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+/* ── 1. OUTER SHELL ─────────────────────────────────────────────────────── */
+.cinnamenu .menu-applications-outer-box,
+.cinnamenu .menu-applications-box {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    spacing: 0;
+    box-shadow: none;
+}
+
+/* ── 2. SIDEBAR PANEL ───────────────────────────────────────────────────── */
+.cinnamenu .menu-sidebar-panel {
+    background-color: rgba(20, 20, 28, 0.97);
+    border: none;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+    min-width: 195px;
+}
+
+/* ── 3. "CATEGORIES" HEADER ROW ─────────────────────────────────────────── */
+.cinnamenu .menu-sidebar-title-row {
+    background-color: transparent;
+    padding: 12px 16px 10px 16px;
+    spacing: 0;
+    min-height: 46px;
+}
+
+.cinnamenu .menu-sidebar-categories-title {
+    color: rgba(255, 255, 255, 0.32);
+    font-size: 0.72em;
+    font-weight: bold;
+    min-width: 120px;
+}
+
+/* ── 4. CATEGORIES LIST ─────────────────────────────────────────────────── */
+.cinnamenu .menu-categories-scrollbox,
+.cinnamenu .vfade.menu-categories-scrollbox {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cinnamenu .menu-categories-box {
+    background-color: transparent;
+    border: none;
+    padding: 0 8px 4px 8px;
+    spacing: 0;
+}
+
+.cinnamenu .menu-category-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 10px 8px 10px;
+    spacing: 10px;
+    color: rgba(255, 255, 255, 0.58);
+    transition-duration: 100ms;
+}
+.cinnamenu .menu-category-button-label {
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 0.90em;
+}
+.cinnamenu .menu-category-button:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    border-image: none;
+    color: rgba(255, 255, 255, 0.90);
+}
+.cinnamenu .menu-category-button:hover .menu-category-button-label {
+    color: rgba(255, 255, 255, 0.90);
+}
+
+.cinnamenu .menu-category-button-selected {
+    background-color: rgba(80, 150, 255, 0.14);
+    border: none;
+    border-left: 3px solid rgba(90, 160, 255, 0.82);
+    border-radius: 0 6px 6px 0;
+    padding: 8px 10px 8px 7px;
+    spacing: 10px;
+    color: #7ab8ff;
+}
+.cinnamenu .menu-category-button-selected .menu-category-button-label {
+    color: #7ab8ff;
+    font-weight: bold;
+    font-size: 0.90em;
+}
+
+.cinnamenu .menu-category-button-greyed {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.20);
+    padding: 8px 10px;
+    spacing: 10px;
+}
+
+.cinnamenu .menu-category-button:highlighted,
+.cinnamenu .menu-category-button-selected:highlighted {
+    font-weight: bold;
+}
+
+/* ── 5. SYSTEM BUTTONS ──────────────────────────────────────────────────── */
+.cinnamenu .menu-system-buttons-box {
+    background-color: transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 8px 8px 10px 10px;
+    spacing: 2px;
+}
+
+.cinnamenu .menu-system-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 8px;
+    transition-duration: 100ms;
+    color: rgba(255, 255, 255, 0.40);
+}
+.cinnamenu .menu-system-button:hover {
+    background-color: rgba(255, 60, 60, 0.18);
+    color: rgba(255, 110, 110, 0.95);
+    border-radius: 8px;
+    border-image: none;
+}
+
+/* ── 6. RIGHT PANE ──────────────────────────────────────────────────────── */
+.cinnamenu .menu-right-pane {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    spacing: 0;
+}
+
+/* ── 7. SEARCH ROW ──────────────────────────────────────────────────────── */
+.cinnamenu .menu-search-row {
+    background-color: transparent;
+    padding: 12px 12px 10px 12px;
+    spacing: 0;
+    min-height: 46px;
+}
+
+.cinnamenu .menu-search-box {
+    background-color: transparent;
+    padding: 0;
+    spacing: 0;
+}
+
+.cinnamenu #menu-search-entry {
+    background-color: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.90);
+    padding: 6px 14px 6px 10px;
+    caret-color: rgba(255, 255, 255, 0.75);
+    selection-background-color: rgba(90, 160, 255, 0.28);
+    transition-duration: 130ms;
+}
+.cinnamenu #menu-search-entry:focus {
+    background-color: rgba(255, 255, 255, 0.14);
+    border-color: rgba(90, 160, 255, 0.55);
+    color: #ffffff;
+}
+
+.cinnamenu .menu-search-entry-icon {
+    color: rgba(255, 255, 255, 0.35);
+    icon-size: 14px;
+}
+
+/* ── 8. APPS GRID ───────────────────────────────────────────────────────── */
+.cinnamenu .menu-applications-scrollbox,
+.cinnamenu .vfade.menu-applications-scrollbox {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cinnamenu .menu-applications-inner-box,
+.cinnamenu .menu-applications-box {
+    background-color: transparent;
+    padding: 4px 8px 8px 8px;
+    spacing: 0;
+}
+
+.cinnamenu .menu-applications-grid-box {
+    background-color: transparent;
+    spacing: 0;
+    padding: 0;
+}
+
+.cinnamenu .menu-applications-grid-box .menu-application-button {
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 8px 2px;
+    transition-duration: 120ms;
+    color: rgba(255, 255, 255, 0.85);
+}
+.cinnamenu .menu-applications-grid-box .menu-application-button:hover {
+    background-color: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+.cinnamenu .menu-application-button-selected,
+.cinnamenu .menu-applications-grid-box .menu-application-button-selected {
+    background-color: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(90, 160, 255, 0.35);
+    border-radius: 8px;
+    padding: 8px 2px;
+    color: #ffffff;
+    transition-duration: 120ms;
+}
+
+.cinnamenu .menu-application-button-label,
+.cinnamenu .menu-applications-grid-box .menu-application-button-label {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.77em;
+    padding: 2px 2px 0;
+    text-align: center;
+}
+.cinnamenu .menu-application-button-selected .menu-application-button-label {
+    color: #ffffff;
+}
+
+.cinnamenu .menu-application-button StIcon,
+.cinnamenu .menu-application-button-selected StIcon {
+    icon-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+}
+
+.cinnamenu .menu-application-button:highlighted,
+.cinnamenu .menu-application-button-selected:highlighted {
+    font-weight: bold;
+}
+
+.cinnamenu .menu-applications-header-text {
+    font-weight: bold;
+    font-size: 103%;
+    color: rgba(255, 255, 255, 0.45);
+    padding: 4px 8px 2px;
+}
+.cinnamenu .menu-applications-subheading {
+    font-weight: bold;
+    font-size: 92%;
+    color: rgba(255, 255, 255, 0.35);
+    padding: 0.3em 0.3em 0;
+}
+
+/* ── 9. TILE MODES ──────────────────────────────────────────────────────── */
+.cinnamenu .menu-applications-grid-box .menu-application-button.tile-css {
+    background-color: rgba(55, 60, 85, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 8px;
+}
+.cinnamenu .menu-applications-grid-box .menu-application-button-selected.tile-css {
+    background-color: rgba(80, 95, 140, 0.90);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.cinnamenu .menu-applications-grid-box .menu-application-button.tile-accent {
+    background-color: rgba(80, 145, 230, 0.65);
+    border-radius: 8px;
+}
+.cinnamenu .menu-applications-grid-box .menu-application-button-selected.tile-accent {
+    background-color: rgba(65, 125, 215, 0.85);
+}
+
+/* ── 10. SCROLLBARS ─────────────────────────────────────────────────────── */
+.cinnamenu StScrollBar { color: rgba(255, 255, 255, 0.25); }
+.cinnamenu StScrollBar StButton {
+    background-color: rgba(255, 255, 255, 0.10);
+    border-radius: 4px;
+}
+.cinnamenu StScrollBar StButton:hover {
+    background-color: rgba(255, 255, 255, 0.22);
+}
+
+/* ── 11. FAVORITES ──────────────────────────────────────────────────────── */
+.cinnamenu .menu-favorites-scrollbox,
+.cinnamenu .menu-favorites-box {
+    background-color: transparent;
+    border: none;
+    padding: 2px 0;
+}
+.cinnamenu .menu-favorites-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 6px;
+    transition-duration: 100ms;
+    color: rgba(255, 255, 255, 0.68);
+}
+.cinnamenu .menu-favorites-button:hover {
+    background-color: rgba(255, 255, 255, 0.10);
+    color: rgba(255, 255, 255, 0.95);
+    border-image: none;
+}
+
+/* ── 12. CONTEXT MENU ───────────────────────────────────────────────────── */
+.cinnamenu .popup-menu.popup-context-menu {
+    background-color: rgba(28, 28, 38, 0.97);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 8px;
+    padding: 4px 0;
+}
+.cinnamenu .popup-menu-item {
+    padding: 7px 14px;
+    color: rgba(255, 255, 255, 0.82);
+    border-radius: 4px;
+}
+.cinnamenu .popup-menu-item:hover {
+    background-color: rgba(90, 160, 255, 0.14);
+}
+
+/* ── 13. OVERVIEW ───────────────────────────────────────────────────────── */
+.overview-search-entry {}
+.overview-tile {}
+.overview-tile-label {}
+.overview-scroll { background-color: transparent; }
+
+/* §9  FAVORITE BOX */
+.cinnamenu.popup-menu-content, .cinnamenu .popup-menu-content { padding:0 !important; margin:0 !important; }
+.menu-favbox { min-width:52px; max-width:64px; padding:4px 0px; margin:0; spacing:0; background-color:rgba(0,0,0,0.20); border-right:1px solid rgba(255,255,255,0.07); }
+.appmenu-sidebar-user-box { padding:6px 4px 4px 4px; spacing:2px; }
+.appmenu-sidebar-scrollbox { spacing:0px; padding:2px 0px; }
+.appmenu-sidebar-button { border-radius:6px; padding:5px 6px; spacing:0; transition-duration:100ms; }
+.appmenu-sidebar-button:hover { background-color:rgba(255,255,255,0.14); }
+.appmenu-system-box { padding:4px 0px 6px 0px; spacing:2px; }
+.appmenu-system-button { border-radius:6px; padding:5px 6px; spacing:0; transition-duration:100ms; }
+.appmenu-system-button:hover { background-color:rgba(255,255,255,0.14); }

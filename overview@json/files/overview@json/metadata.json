@@ -1,0 +1,11 @@
+{
+    "uuid": "overview@json",
+    "name": "Overview Dashboard",
+    "description": "A sleek, macOS Launchpad-style applet for Cinnamon. Blends modern minimalism with traditional utility, featuring a startup content feed, smart weather tracking, and Hot Corner integration.",
+    "icon": "view-app-grid-symbolic",
+    "version": "1.0.0",
+    "max-instances": 1,
+    "cinnamon-version": [
+        "6.4.0"
+    ]
+}
