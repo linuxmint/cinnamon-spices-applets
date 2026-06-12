@@ -1,0 +1,566 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2026-06-09 11:20+0200\n"
+"PO-Revision-Date: 2026-06-10 23:18+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ca_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: python/config_handler.py:1448
+msgid "New"
+msgstr "Noves"
+
+#: python/config_handler.py:1455
+msgid "Removed"
+msgstr "Eliminades"
+
+#: python/config_handler.py:1461
+msgid "Total library"
+msgstr "Total Llibreria"
+
+#: python/config_handler.py:1488
+msgid "Action"
+msgstr "Acció"
+
+#: python/help_viewer.py:33 applet.js:195
+msgid "Help"
+msgstr "Ajuda"
+
+#: python/help_viewer.py:157
+msgid "Help file not found."
+msgstr "No s'ha trobat el fitxer d'ajuda."
+
+#: python/help_viewer.py:164
+msgid "Could not read help file:"
+msgstr "No s'ha pogut llegir el fitxer d'ajuda:"
+
+#: python/debug_log_viewer.py:68
+msgid "Debug Log Viewer"
+msgstr "Visualitzador de registre de depuració"
+
+#: python/debug_log_viewer.py:93
+msgid "Origin"
+msgstr "Origen"
+
+#: python/debug_log_viewer.py:106
+msgid "Level"
+msgstr "Nivell"
+
+#: python/debug_log_viewer.py:119
+msgid "Reason"
+msgstr "Raó"
+
+#: python/debug_log_viewer.py:135
+msgid "Filter by text"
+msgstr "Filtra per text"
+
+#: python/debug_log_viewer.py:176
+msgid "Clear log"
+msgstr "Esborra el registre"
+
+#: python/debug_log_viewer.py:184
+msgid "Auto-scroll"
+msgstr "Desplaçament automàtic"
+
+#: python/debug_log_viewer.py:194
+msgid "Reverse order"
+msgstr "Ordre invers"
+
+#: python/debug_log_viewer.py:254
+msgid "Clear debug log?"
+msgstr "Voleu esborrar el registre de depuració?"
+
+#: python/debug_log_viewer.py:256
+msgid "All log entries will be permanently deleted."
+msgstr "Totes les entrades del registre s'eliminaran permanentment."
+
+#: python/nemo_add_bookmark.py:61
+msgid "Error adding to favorites"
+msgstr "S'ha produït un error en afegir als preferits"
+
+#: python/nemo_add_bookmark.py:62
+msgid "Could not process image:"
+msgstr "No s'ha pogut processar la imatge:"
+
+#: python/nemo_add_bookmark.py:74
+msgid "Image is already in favorites."
+msgstr "La imatge ja és als preferits."
+
+#: python/main.py:250
+msgid "Favorite deleted"
+msgstr "Preferit eliminat"
+
+#: python/main.py:251
+msgid "Preset"
+msgstr "Preset"
+
+#: python/main.py:251
+msgid "deleted successfully."
+msgstr "s'ha eliminat correctament."
+
+#: python/main.py:276
+msgid "Changes detected"
+msgstr "S'han detectat canvis"
+
+#: python/main.py:278
+msgid "No changes"
+msgstr "Sense canvis"
+
+#: python/main.py:285
+msgid "Synchronization"
+msgstr "Sincronització"
+
+#: python/main.py:321
+msgid "Favorite added"
+msgstr "Preferit afegit"
+
+#: python/main.py:322
+msgid "added successfully."
+msgstr "s'ha afegit correctament."
+
+#: python/main.py:480
+msgid "Cycle aborted: not enough images available to complete selection."
+msgstr ""
+"Cicle avortat: no hi ha prou imatges disponibles per completar la selecció."
+
+#: python/main.py:483
+msgid "No images available"
+msgstr "No hi ha imatges disponibles"
+
+#: python/main.py:484
+msgid "Check status of Image Sources in Control Panel."
+msgstr "Comproveu l'estat de les fonts d'imatge al Tauler de control."
+
+#: python/main.py:515
+#, python-brace-format
+msgid "Image: '{image}' from preset: '{preset}' not found."
+msgstr "Imatge: '{image}' del Preset: '{preset}' no s'ha trobat."
+
+#: python/main.py:518
+msgid "PRESET image not found"
+msgstr "No s'ha trobat cap imatge"
+
+#: python/main.py:519
+msgid "Assigning a random one"
+msgstr "Assignar-ne un a l'atzar"
+
+#: python/add_bookmark.py:55
+msgid "Add Favorite Preset"
+msgstr "Afegeix un preset preferit"
+
+#: python/add_bookmark.py:103
+msgid "Error loading data. Please restart panel"
+msgstr "S'ha produït un error en carregar les dades. Reinicieu el tauler"
+
+#: python/add_bookmark.py:118
+msgid "Preset name:"
+msgstr "Nom del preset:"
+
+#: python/add_bookmark.py:187 python/panel.py:777
+msgid "A Preset with that name already exists!"
+msgstr "Ja existeix un preset amb aquest nom!"
+
+#: python/add_bookmark.py:189
+msgid "Error saving"
+msgstr "S'ha produït un error en desar"
+
+#: python/panel.py:255
+msgid "Restart engine and panel"
+msgstr "Reinicia el motor i el panell"
+
+#: python/panel.py:261
+msgid "Open Debug Log Viewer"
+msgstr "Obre el visor de registre de depuració"
+
+#: python/panel.py:267
+msgid "Open Help"
+msgstr "Obre l'ajuda"
+
+#: python/panel.py:275
+msgid ""
+"If enabled, the wallpaper is changed at startup; if disabled, the last "
+"wallpaper is kept."
+msgstr ""
+"Si s'activa, el fons de pantalla es canvia a l'inici; si es desactiva, es "
+"manté l'últim fons de pantalla."
+
+#: python/panel.py:278
+msgid "Change wallpaper on startup"
+msgstr "Canvia el fons de pantalla a l'inici"
+
+#: python/panel.py:283
+msgid "Span image across all active screens (Only if more than one)"
+msgstr ""
+"Distribueix la imatge en tots els monitors actius (Només si n'hi ha més d'un)"
+
+#: python/panel.py:306
+msgid "Image Effect:"
+msgstr "Efecte d'imatge:"
+
+#: python/panel.py:316
+msgid "Background Effect:"
+msgstr "Efecte de fons:"
+
+#: python/panel.py:326
+msgid "Gradient H"
+msgstr "Degradat H"
+
+#: python/panel.py:326
+msgid "Gradient V"
+msgstr "Degradat V"
+
+#: python/panel.py:338
+msgid "Horizontal gradient start color"
+msgstr "Color d'inici del degradat horitzontal"
+
+#: python/panel.py:341
+msgid "Horizontal gradient end color"
+msgstr "Color final del degradat horitzontal"
+
+#: python/panel.py:345
+msgid "Vertical gradient start color"
+msgstr "Color d'inici del degradat vertical"
+
+#: python/panel.py:348
+msgid "Vertical gradient end color"
+msgstr "Color final del degradat vertical"
+
+#: python/panel.py:360
+msgid "Enable/Disable Timer"
+msgstr "Activa/Desactiva la presentació de diapositives"
+
+#: python/panel.py:368
+msgid "Max. Frequency"
+msgstr "Freqüència màx"
+
+#: python/panel.py:377
+msgid "Slideshow every"
+msgstr "Diapositives cada"
+
+#: python/panel.py:386
+msgid "Sync: All Screens change at once"
+msgstr "Síncron: Tots els monitors canvien alhora"
+
+#: python/panel.py:386
+msgid "Async: Change by turns"
+msgstr "Asíncron: Canvien per torns"
+
+#: python/panel.py:390
+msgid "Slideshow mode:"
+msgstr "Mode de presentació:"
+
+#: python/panel.py:590
+msgid "Synchronized"
+msgstr "Sincronitzat"
+
+#: python/panel.py:591 python/panel.py:643
+msgid "Presets"
+msgstr "Presets"
+
+#: python/panel.py:591
+msgid "All"
+msgstr "Tots"
+
+#: python/panel.py:593
+msgid "Asynchronous"
+msgstr "Asíncron"
+
+#: python/panel.py:594
+msgid "Single"
+msgstr "Individual"
+
+#: python/panel.py:630
+msgid "Slideshow only among favorite images"
+msgstr "Presentació de diapositives només entre imatges preferides"
+
+#: python/panel.py:668
+msgid "Delete selected preset/image"
+msgstr "Suprimeix el preset o la imatge seleccionada"
+
+#: python/panel.py:703
+msgid "Delete selected image from favorites"
+msgstr "Suprimeix la imatge seleccionada dels preferits"
+
+#: python/panel.py:800
+msgid "Delete preset"
+msgstr "Suprimeix el preset"
+
+#: python/panel.py:802
+msgid "Load on screens"
+msgstr "Carrega als monitors"
+
+#: python/panel.py:810
+msgid "Delete image"
+msgstr "Suprimeix la imatge"
+
+#: python/panel.py:911
+msgid "Editing"
+msgstr "Editant"
+
+#: python/panel.py:994
+msgid "images"
+msgstr "imatges"
+
+#: python/panel.py:1098
+msgid "Image Sources"
+msgstr "Fonts d'imatges"
+
+#: python/panel.py:1107
+msgid "Source"
+msgstr "Font"
+
+#: python/panel.py:1118
+msgid "Recursive"
+msgstr "Recursiu"
+
+#: python/panel.py:1130
+msgid "Resync Image Sources"
+msgstr "Torna a sincronitzar les fonts d'imatges"
+
+#: python/panel.py:1147
+msgid "Add Image Source"
+msgstr "Afegeix una font d'imatge"
+
+#: python/panel.py:1150
+msgid "Delete Image Source"
+msgstr "Suprimeix la font d'imatge"
+
+#: python/panel.py:1313 python/panel.py:1468 python/panel.py:1474
+msgid "Scanning"
+msgstr "Escanejant"
+
+#: python/panel.py:1313
+msgid "folders"
+msgstr "carpetes"
+
+#: python/panel.py:1332
+msgid "Activate subfolders"
+msgstr "Activa les subcarpetes"
+
+#: python/panel.py:1336
+msgid "Deactivate subfolders"
+msgstr "Desactiva les subcarpetes"
+
+#: python/panel.py:1342
+msgid "Deactivate folder"
+msgstr "Desactiva la carpeta"
+
+#: python/panel.py:1342
+msgid "Activate folder"
+msgstr "Activa la carpeta"
+
+#: python/panel.py:1348
+msgid "Delete cache"
+msgstr "Suprimeix la memòria cau"
+
+#: python/panel.py:1372
+msgid "Delete cache of this folder?"
+msgstr "Voleu suprimir la memòria cau d'aquesta carpeta?"
+
+#: python/panel.py:1375
+msgid "Will be removed from your library"
+msgstr "Se suprimirà de la vostra biblioteca"
+
+#: python/panel.py:1377 python/panel.py:1500
+msgid "Images will no longer be available"
+msgstr "Les imatges deixaran d'estar disponibles"
+
+#: python/panel.py:1386
+msgid "Cache deleted"
+msgstr "S'ha suprimit la memòria cau"
+
+#: python/panel.py:1387
+msgid "thumbnails have been removed from cache"
+msgstr "s'han suprimit miniatures de la memòria cau"
+
+#: python/panel.py:1392
+msgid "No cache"
+msgstr "Sense memòria cau"
+
+#: python/panel.py:1393
+msgid "No thumbnails found in cache for this folder."
+msgstr "No s'han trobat miniatures a la memòria cau per a aquesta carpeta."
+
+#: python/panel.py:1423
+msgid "Resynchronizing library"
+msgstr "S'està tornant a sincronitzar la biblioteca"
+
+#: python/panel.py:1426
+msgid "Scanning sources"
+msgstr "Escanejant fonts"
+
+#: python/panel.py:1438
+msgid "Select Image Folder"
+msgstr "Seleccioneu la carpeta d'imatges"
+
+#: python/panel.py:1443
+msgid "Add Source"
+msgstr "Afegeix una font"
+
+#: python/panel.py:1453
+msgid "Include subfolders (Recursive)"
+msgstr "Inclou les subcarpetes (recursiu)"
+
+#: python/panel.py:1496
+msgid "Delete image source?"
+msgstr "Voleu suprimir la font d'imatge?"
+
+#: python/panel.py:1499
+msgid "will be removed from your library"
+msgstr "se suprimirà de la vostra biblioteca"
+
+#: python/panel.py:1518 applet.js:142 applet.js:181 applet.js:240
+msgid "Displays"
+msgstr "Monitors"
+
+#: python/panel.py:1606
+msgid "Enable/disable screen editing mode"
+msgstr "Activa/desactiva el mode d'edició de monitors"
+
+#: python/panel.py:1613 python/panel.py:1617
+msgid "Editing Mode"
+msgstr "Mode d'edició"
+
+#: python/panel.py:1630
+msgid "Span image across all active screens"
+msgstr "Distribueix la imatge en tots els monitors actius"
+
+#: python/panel.py:1636
+msgid "for current composition"
+msgstr "per a la composició actual"
+
+#: python/panel.py:1655
+msgid "Aspect ratio:"
+msgstr "Rel. d'aspecte:"
+
+#: python/panel.py:1675
+msgid "Create/update preset on accept"
+msgstr "Crea/actualitza el preset en acceptar"
+
+#: python/panel.py:1680
+msgid "Save composition as preset"
+msgstr "Desa la composició com a preset"
+
+#: python/panel.py:1686
+msgid "Refresh real display status"
+msgstr "Actualitza l'estat real dels monitors"
+
+#: python/panel.py:1918
+msgid "Enable/disable image"
+msgstr "Activa/desactiva la imatge"
+
+#: python/panel.py:2243
+msgid "editing"
+msgstr "editant"
+
+#: python/panel.py:2360
+msgid "Horizontal"
+msgstr "Horitzontal"
+
+#: python/panel.py:2367
+msgid "Vertical"
+msgstr "Vertical"
+
+#: python/panel.py:2373
+msgid "Reload thumbnails"
+msgstr "Torna a carregar les miniatures"
+
+#: python/panel.py:2402 python/panel.py:2453
+msgid "No images found."
+msgstr "No s'ha trobat cap imatge."
+
+#: python/panel.py:2407
+msgid "Generating thumbnails"
+msgstr "Generant miniatures"
+
+#: python/panel.py:2423
+msgid "Processing"
+msgstr "Processant"
+
+#: python/nemo_send_to_monitor.py:68
+msgid "Send to Monitor"
+msgstr "Enviar a una pantalla"
+
+#: python/nemo_send_to_monitor.py:85
+msgid "Select a monitor:"
+msgstr "Seleccioneu una pantalla:"
+
+#: python/nemo_send_to_monitor.py:197
+msgid "No monitors"
+msgstr "Sense monitors"
+
+#: python/nemo_send_to_monitor.py:198
+msgid "No active monitors found"
+msgstr "No s'han trobat monitors actius"
+
+#: python/nemo_send_to_monitor.py:238
+msgid "Image sent to monitor"
+msgstr "Imatge enviada a la pantalla"
+
+#: python/nemo_send_to_monitor.py:239
+msgid "Image '{name}' assigned to monitor {monitor}."
+msgstr "Imatge '{name}' assignada a la pantalla {monitor}."
+
+#: wmm_platform/cinnamon.py:158
+msgid "Configuration issue"
+msgstr "Problema de configuració"
+
+#: wmm_platform/cinnamon.py:159
+msgid ""
+"For WMM to function correctly, please check the following settings in "
+"'System Settings > Backgrounds':"
+msgstr ""
+"Perquè WMM funcioni correctament, comproveu la configuració següent a "
+"Configuració del sistema > Fons de Pantalla:"
+
+#: applet.js:48
+msgid "Wallpaper Multi-Monitor Manager"
+msgstr "Gestor de fons de pantalla per a múltiples monitors"
+
+#: applet.js:99
+msgid "Favorites Only"
+msgstr "Només preferits"
+
+#: applet.js:111
+msgid "Add Preset Favorite"
+msgstr "Afegeix un preset preferit"
+
+#: applet.js:142 applet.js:181 applet.js:240
+msgid "ASYNC (One)"
+msgstr "ASÍNCRON (un)"
+
+#: applet.js:146
+msgid "Spanned Mode"
+msgstr "Mode distribuït"
+
+#: applet.js:181 applet.js:240
+msgid "SYNC (All)"
+msgstr "SÍNCRON (tots)"
+
+#: applet.js:188
+msgid "Sync Library"
+msgstr "Sincronitza la biblioteca"
+
+#: applet.js:274
+msgid "Error loading favorites"
+msgstr "S'ha produït un error en carregar els preferits"
+
+#: applet.js:282
+msgid "No saved favorites"
+msgstr "No hi ha preferits desats"
+
+#: applet.js:356
+msgid "Delete favorite"
+msgstr "Suprimeix el preferit"

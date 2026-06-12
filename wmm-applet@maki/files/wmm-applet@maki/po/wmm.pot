@@ -1,0 +1,559 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: linuxmint\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2026-01-08 08:35+0000\n"
+"Last-Translator: Isidro Pisa <isidro@pisa.red>\n"
+"Language-Team: Catalan <ca@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2026-01-08 15:36+0000\n"
+"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
+
+#: python/config_handler.py:1448
+msgid "New"
+msgstr ""
+
+#: python/config_handler.py:1455
+msgid "Removed"
+msgstr ""
+
+#: python/config_handler.py:1461
+msgid "Total library"
+msgstr ""
+
+#: python/config_handler.py:1488
+msgid "Action"
+msgstr ""
+
+#: python/help_viewer.py:33 applet.js:195
+msgid "Help"
+msgstr ""
+
+#: python/help_viewer.py:157
+msgid "Help file not found."
+msgstr ""
+
+#: python/help_viewer.py:164
+msgid "Could not read help file:"
+msgstr ""
+
+#: python/debug_log_viewer.py:68
+msgid "Debug Log Viewer"
+msgstr ""
+
+#: python/debug_log_viewer.py:93
+msgid "Origin"
+msgstr ""
+
+#: python/debug_log_viewer.py:106
+msgid "Level"
+msgstr ""
+
+#: python/debug_log_viewer.py:119
+msgid "Reason"
+msgstr ""
+
+#: python/debug_log_viewer.py:135
+msgid "Filter by text"
+msgstr ""
+
+#: python/debug_log_viewer.py:176
+msgid "Clear log"
+msgstr ""
+
+#: python/debug_log_viewer.py:184
+msgid "Auto-scroll"
+msgstr ""
+
+#: python/debug_log_viewer.py:194
+msgid "Reverse order"
+msgstr ""
+
+#: python/debug_log_viewer.py:254
+msgid "Clear debug log?"
+msgstr ""
+
+#: python/debug_log_viewer.py:256
+msgid "All log entries will be permanently deleted."
+msgstr ""
+
+#: python/nemo_add_bookmark.py:61
+msgid "Error adding to favorites"
+msgstr ""
+
+#: python/nemo_add_bookmark.py:62
+msgid "Could not process image:"
+msgstr ""
+
+#: python/nemo_add_bookmark.py:74
+msgid "Image is already in favorites."
+msgstr ""
+
+#: python/main.py:250
+msgid "Favorite deleted"
+msgstr ""
+
+#: python/main.py:251
+msgid "Preset"
+msgstr ""
+
+#: python/main.py:251
+msgid "deleted successfully."
+msgstr ""
+
+#: python/main.py:276
+msgid "Changes detected"
+msgstr ""
+
+#: python/main.py:278
+msgid "No changes"
+msgstr ""
+
+#: python/main.py:285
+msgid "Synchronization"
+msgstr ""
+
+#: python/main.py:321
+msgid "Favorite added"
+msgstr ""
+
+#: python/main.py:322
+msgid "added successfully."
+msgstr ""
+
+#: python/main.py:480
+msgid "Cycle aborted: not enough images available to complete selection."
+msgstr ""
+
+#: python/main.py:483
+msgid "No images available"
+msgstr ""
+
+#: python/main.py:484
+msgid "Check status of Image Sources in Control Panel."
+msgstr ""
+
+#: python/main.py:515
+#, python-brace-format
+msgid "Image: '{image}' from preset: '{preset}' not found."
+msgstr ""
+
+#: python/main.py:518
+msgid "PRESET image not found"
+msgstr ""
+
+#: python/main.py:519
+msgid "Assigning a random one"
+msgstr ""
+
+#: python/add_bookmark.py:55
+msgid "Add Favorite Preset"
+msgstr ""
+
+#: python/add_bookmark.py:103
+msgid "Error loading data. Please restart panel"
+msgstr ""
+
+#: python/add_bookmark.py:118
+msgid "Preset name:"
+msgstr ""
+
+#: python/add_bookmark.py:187 python/panel.py:777
+msgid "A Preset with that name already exists!"
+msgstr ""
+
+#: python/add_bookmark.py:189
+msgid "Error saving"
+msgstr ""
+
+#: python/panel.py:255
+msgid "Restart engine and panel"
+msgstr ""
+
+#: python/panel.py:261
+msgid "Open Debug Log Viewer"
+msgstr ""
+
+#: python/panel.py:267
+msgid "Open Help"
+msgstr ""
+
+#: python/panel.py:275
+msgid ""
+"If enabled, the wallpaper is changed at startup; if disabled, the last "
+"wallpaper is kept."
+msgstr ""
+
+#: python/panel.py:278
+msgid "Change wallpaper on startup"
+msgstr ""
+
+#: python/panel.py:283
+msgid "Span image across all active screens (Only if more than one)"
+msgstr ""
+
+#: python/panel.py:306
+msgid "Image Effect:"
+msgstr ""
+
+#: python/panel.py:316
+msgid "Background Effect:"
+msgstr ""
+
+#: python/panel.py:326
+msgid "Gradient H"
+msgstr ""
+
+#: python/panel.py:326
+msgid "Gradient V"
+msgstr ""
+
+#: python/panel.py:338
+msgid "Horizontal gradient start color"
+msgstr ""
+
+#: python/panel.py:341
+msgid "Horizontal gradient end color"
+msgstr ""
+
+#: python/panel.py:345
+msgid "Vertical gradient start color"
+msgstr ""
+
+#: python/panel.py:348
+msgid "Vertical gradient end color"
+msgstr ""
+
+#: python/panel.py:360
+msgid "Enable/Disable Timer"
+msgstr ""
+
+#: python/panel.py:368
+msgid "Max. Frequency"
+msgstr ""
+
+#: python/panel.py:377
+msgid "Slideshow every"
+msgstr ""
+
+#: python/panel.py:386
+msgid "Sync: All Screens change at once"
+msgstr ""
+
+#: python/panel.py:386
+msgid "Async: Change by turns"
+msgstr ""
+
+#: python/panel.py:390
+msgid "Slideshow mode:"
+msgstr ""
+
+#: python/panel.py:590
+msgid "Synchronized"
+msgstr ""
+
+#: python/panel.py:591 python/panel.py:643
+msgid "Presets"
+msgstr ""
+
+#: python/panel.py:591
+msgid "All"
+msgstr ""
+
+#: python/panel.py:593
+msgid "Asynchronous"
+msgstr ""
+
+#: python/panel.py:594
+msgid "Single"
+msgstr ""
+
+#: python/panel.py:630
+msgid "Slideshow only among favorite images"
+msgstr ""
+
+#: python/panel.py:668
+msgid "Delete selected preset/image"
+msgstr ""
+
+#: python/panel.py:703
+msgid "Delete selected image from favorites"
+msgstr ""
+
+#: python/panel.py:800
+msgid "Delete preset"
+msgstr ""
+
+#: python/panel.py:802
+msgid "Load on screens"
+msgstr ""
+
+#: python/panel.py:810
+msgid "Delete image"
+msgstr ""
+
+#: python/panel.py:911
+msgid "Editing"
+msgstr ""
+
+#: python/panel.py:994
+msgid "images"
+msgstr ""
+
+#: python/panel.py:1098
+msgid "Image Sources"
+msgstr ""
+
+#: python/panel.py:1107
+msgid "Source"
+msgstr ""
+
+#: python/panel.py:1118
+msgid "Recursive"
+msgstr ""
+
+#: python/panel.py:1130
+msgid "Resync Image Sources"
+msgstr ""
+
+#: python/panel.py:1147
+msgid "Add Image Source"
+msgstr ""
+
+#: python/panel.py:1150
+msgid "Delete Image Source"
+msgstr ""
+
+#: python/panel.py:1313 python/panel.py:1468 python/panel.py:1474
+msgid "Scanning"
+msgstr ""
+
+#: python/panel.py:1313
+msgid "folders"
+msgstr ""
+
+#: python/panel.py:1332
+msgid "Activate subfolders"
+msgstr ""
+
+#: python/panel.py:1336
+msgid "Deactivate subfolders"
+msgstr ""
+
+#: python/panel.py:1342
+msgid "Deactivate folder"
+msgstr ""
+
+#: python/panel.py:1342
+msgid "Activate folder"
+msgstr ""
+
+#: python/panel.py:1348
+msgid "Delete cache"
+msgstr ""
+
+#: python/panel.py:1372
+msgid "Delete cache of this folder?"
+msgstr ""
+
+#: python/panel.py:1375
+msgid "Will be removed from your library"
+msgstr ""
+
+#: python/panel.py:1377 python/panel.py:1500
+msgid "Images will no longer be available"
+msgstr ""
+
+#: python/panel.py:1386
+msgid "Cache deleted"
+msgstr ""
+
+#: python/panel.py:1387
+msgid "thumbnails have been removed from cache"
+msgstr ""
+
+#: python/panel.py:1392
+msgid "No cache"
+msgstr ""
+
+#: python/panel.py:1393
+msgid "No thumbnails found in cache for this folder."
+msgstr ""
+
+#: python/panel.py:1423
+msgid "Resynchronizing library"
+msgstr ""
+
+#: python/panel.py:1426
+msgid "Scanning sources"
+msgstr ""
+
+#: python/panel.py:1438
+msgid "Select Image Folder"
+msgstr ""
+
+#: python/panel.py:1443
+msgid "Add Source"
+msgstr ""
+
+#: python/panel.py:1453
+msgid "Include subfolders (Recursive)"
+msgstr ""
+
+#: python/panel.py:1496
+msgid "Delete image source?"
+msgstr ""
+
+#: python/panel.py:1499
+msgid "will be removed from your library"
+msgstr ""
+
+#: python/panel.py:1518 applet.js:142 applet.js:181 applet.js:240
+msgid "Displays"
+msgstr ""
+
+#: python/panel.py:1606
+msgid "Enable/disable screen editing mode"
+msgstr ""
+
+#: python/panel.py:1613 python/panel.py:1617
+msgid "Editing Mode"
+msgstr ""
+
+#: python/panel.py:1630
+msgid "Span image across all active screens"
+msgstr ""
+
+#: python/panel.py:1636
+msgid "for current composition"
+msgstr ""
+
+#: python/panel.py:1655
+msgid "Aspect ratio:"
+msgstr ""
+
+#: python/panel.py:1675
+msgid "Create/update preset on accept"
+msgstr ""
+
+#: python/panel.py:1680
+msgid "Save composition as preset"
+msgstr ""
+
+#: python/panel.py:1686
+msgid "Refresh real display status"
+msgstr ""
+
+#: python/panel.py:1918
+msgid "Enable/disable image"
+msgstr ""
+
+#: python/panel.py:2243
+msgid "editing"
+msgstr ""
+
+#: python/panel.py:2360
+msgid "Horizontal"
+msgstr ""
+
+#: python/panel.py:2367
+msgid "Vertical"
+msgstr ""
+
+#: python/panel.py:2373
+msgid "Reload thumbnails"
+msgstr ""
+
+#: python/panel.py:2402 python/panel.py:2453
+msgid "No images found."
+msgstr ""
+
+#: python/panel.py:2407
+msgid "Generating thumbnails"
+msgstr ""
+
+#: python/panel.py:2423
+msgid "Processing"
+msgstr ""
+
+#: python/nemo_send_to_monitor.py:68
+msgid "Send to Monitor"
+msgstr ""
+
+#: python/nemo_send_to_monitor.py:85
+msgid "Select a monitor:"
+msgstr ""
+
+#: python/nemo_send_to_monitor.py:197
+msgid "No monitors"
+msgstr ""
+
+#: python/nemo_send_to_monitor.py:198
+msgid "No active monitors found"
+msgstr ""
+
+#: python/nemo_send_to_monitor.py:238
+msgid "Image sent to monitor"
+msgstr ""
+
+#: python/nemo_send_to_monitor.py:239
+msgid "Image '{name}' assigned to monitor {monitor}."
+msgstr ""
+
+#: wmm_platform/cinnamon.py:158
+msgid "Configuration issue"
+msgstr ""
+
+#: wmm_platform/cinnamon.py:159
+msgid ""
+"For WMM to function correctly, please check the following settings in "
+"'System Settings > Backgrounds':"
+msgstr ""
+
+#: applet.js:48
+msgid "Wallpaper Multi-Monitor Manager"
+msgstr ""
+
+#: applet.js:99
+msgid "Favorites Only"
+msgstr ""
+
+#: applet.js:111
+msgid "Add Preset Favorite"
+msgstr ""
+
+#: applet.js:142 applet.js:181 applet.js:240
+msgid "ASYNC (One)"
+msgstr ""
+
+#: applet.js:146
+msgid "Spanned Mode"
+msgstr ""
+
+#: applet.js:181 applet.js:240
+msgid "SYNC (All)"
+msgstr ""
+
+#: applet.js:188
+msgid "Sync Library"
+msgstr ""
+
+#: applet.js:274
+msgid "Error loading favorites"
+msgstr ""
+
+#: applet.js:282
+msgid "No saved favorites"
+msgstr ""
+
+#: applet.js:356
+msgid "Delete favorite"
+msgstr ""
