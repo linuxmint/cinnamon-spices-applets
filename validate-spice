@@ -151,6 +151,8 @@ def exit_status(valid):
 if sys.argv[1] == "--all":
     valid = True
     for uuid in os.listdir("."):
+        if any(char.isspace() for char in uuid):
+            raise CheckError(f"Invalid whitespace in path '{uuid}'")
         if os.path.isdir(uuid) and not uuid.startswith("."):
             valid = validate_xlet(uuid) and valid
 else:

@@ -174,7 +174,7 @@
     },
     "values_fontsize": {
         "type": "spinbutton",
-        "default": 8,
+        "default": 9,
         "min": 6,
         "max": 20,
         "step": 1,
@@ -184,7 +184,7 @@
     },
     "values_color": {
         "type": "colorchooser",
-        "default": "rgb(255,255,255)",
+        "default": "rgba(255,255,255,0.6)",
         "description": "Text color",
         "dependency": "show_values"
     },

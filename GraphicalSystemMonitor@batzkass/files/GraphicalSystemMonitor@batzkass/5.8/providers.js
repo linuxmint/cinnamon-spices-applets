@@ -182,14 +182,22 @@ class NetData extends Provider {
         this.up_last = up;
         var d_down = Math.round(down_delta/1024)
         var d_up = Math.round(up_delta/1024)
-        var unity = this.unity
-        if (d_down+d_up>=1024) {
-            unity = this.high_unity
-            d_down = Math.round(d_down/1024)
-            d_up = Math.round(d_up/1024)
+        var d_unity = this.unity
+        var u_unity = this.unity
+        if (d_down >= 1024) {
+            d_down /= 1024
+            d_unity = this.high_unity
+            const decimals = d_down>=100 ? 0 : 1
+            d_down = d_down.toFixed(decimals)
         }
-        this.text = "↓" + d_down + " / ↑" + d_up + ' ' + unity;
-        this.short_text = "↓" + d_down + " ↑" + d_up + ' ' + unity;
+        if (d_up >= 1024) {
+            d_up /= 1024
+            u_unity = this.high_unity
+            const decimals = d_up>=100 ? 0 : 1
+            d_up = d_up.toFixed(decimals)
+        }
+        this.text = "↓" + d_down + d_unity + " ↑" + d_up + ' ' + u_unity;
+        this.short_text = "↓" + d_down + d_unity[0] + " ↑" + d_up + u_unity[0];
         return [down_delta, up_delta];
     }
 

@@ -1,0 +1,133 @@
+/* ============================================================
+   yasm@sniemetz — Panel + Tooltip stylesheet
+   Edit to taste. Reload Cinnamon (or remove/re-add the applet) to apply.
+   ============================================================
+
+   Panel classes:
+     .yasm-box           main actor (shares Cinnamon's 'applet-box')
+     .yasm-label         each tile (BoxLayout: icon + text)
+     .yasm-tile-icon     icon inside a tile
+     .yasm-sep           separator between tiles
+     .yasm-label-vertical  tile overrides on a vertical panel
+     .threshold-ok/warn/alert      tile background at threshold levels
+
+   Tooltip classes:
+     .yasm-tooltip       popup container (background, border, padding)
+     .yasm-tooltip-text  monospace text rows (uptime, core table, etc.)
+     .yasm-graph-row     each [label | canvas | label] row
+     .yasm-graph-label   left and right axis labels
+     .yasm-graph-canvas  the Cairo drawing area
+
+   Notes:
+     • Tile padding/border-width are set in code, scaled to panel height.
+     • A graph row with extra spacing uses an inline margin-top override
+       on top of the class default — override it here with !important if needed.
+     • .yasm-box shares 'applet-box' with the Cinnamon theme.
+       The theme's '.applet-box:hover' overrides background unless you also
+       define the compound selector below.
+   ============================================================ */
+
+/* Wrapper around all sections */
+.yasm-box {
+  spacing: 0px;
+  padding: 2px 2px;
+  border-top:    0px solid rgba(0, 0, 0, 0.55);
+  border-left:   0px solid rgba(0, 0, 0, 0.55);
+  border-bottom: 0px solid rgba(200, 200, 200, 0.20);
+  border-right:  0px solid rgba(200, 200, 200, 0.20);
+  border-radius: 5px;
+  /* background-color here; repeat it in :hover below or the theme wipes it */
+  background-color: rgba(65, 65, 65, 0.6);
+}
+/*
+ * Use compound selector (no space = same element, 2-class specificity beats
+ * theme's 1-class '.applet-box:hover'). Mirror whatever background-color you
+ * set above. Space-separated ('.applet-box:hover .yasm-box') is a
+ * descendant selector and never matches since they are the same element.
+ */
+.applet-box.yasm-box:hover {
+  background-color: rgb(65, 65, 65);
+}
+
+/* Each section tile — uniform border avoids Clutter corner-seam artifacts
+   that appear when directional border colors differ at a border-radius corner */
+.yasm-label {
+  margin: 0 1px;
+  /* padding, border-width, spacing set dynamically in code proportional to icon size */
+  border-style: solid;
+  border-color: rgba(127, 127, 127, 0.55);
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.6);
+  -cinnamon-align: 0.5;
+}
+
+/* Each icon inside a tile — add margin/padding here to space the icon */
+.yasm-tile-icon {
+  margin: 0 2px;
+}
+
+/* Separator between sections */
+.yasm-sep {
+  padding: 0 0px;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* Threshold background colours */
+.threshold-ok     { background-color: transparent; }
+.threshold-warn   { background-color: rgba(255, 200, 0,   0.50); }
+.threshold-alert  { background-color: rgba(255, 60,  60,  0.50); }
+
+/* ─── Tooltip popup ──────────────────────────────────────── */
+
+/* Popup container */
+.yasm-tooltip {
+  background-color: rgba(0, 0, 0, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+  padding: 8px 12px;
+  min-width: 240px;
+}
+
+/* Monospace text rows: uptime header, CPU core table, battery details, etc. */
+.yasm-tooltip-text {
+  font-family: monospace;
+  font-size: 0.9em;
+  color: #eeeeee;
+}
+
+/* Each graph row — default top spacing; spaced rows override via inline style */
+.yasm-graph-row {
+  margin: 0
+}
+
+/* Left and right axis labels flanking the canvas.
+   min-width keeps the canvas stable for short static labels (TX↑, I/O…).
+   Numeric labels use padStart() in code for exact fixed char-width. */
+.yasm-graph-label {
+  font-family: monospace;
+  font-size: 0.85em;
+  color: #cccccc;
+  min-width: 32px;
+}
+
+/* Cairo canvas between the labels */
+.yasm-graph-canvas {
+  border: 1px solid #ddd;
+  border-top: none;
+  border-right: none;
+  margin: 0 6px;
+}
+.yasm-graph-canvas.down {
+  border-top: none;
+  border-bottom: none;
+}
+
+/* ─── Panel tile text ────────────────────────────────────── */
+/* Inner text label — font-size, color, etc. */
+/* Use spacing: Npx on .yasm-label to adjust icon-to-text gap. */
+
+/* ─── Vertical panel overrides ───────────────────────────── */
+.yasm-label-vertical {
+  padding: 2px 8px 2px 1px;
+  min-width: 0;
+}
