@@ -1,3 +1,6 @@
+### v16.4.1~20260612
+  * Do not display the OSD interface when an application is in full-screen mode.
+
 ### v16.4.0~20260529
   * Ready for Linux Mint 23.
 
