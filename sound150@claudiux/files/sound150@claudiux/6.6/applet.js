@@ -773,6 +773,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._on_maxVolume_changed(mv);
     }
 
+    is_fullscreen() {
+        return global.display.get_monitor_in_fullscreen(this.panel.monitorIndex);
+    }
+
     _onBoxResized(width, height) {
         this.menu.actor.set_width(width);
         this.menu.actor.set_height(height);
@@ -1614,7 +1618,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 iconName += "overamplified";
             this._outputIcon = iconName;
 
-            if (this.showMediaKeysOSD) {
+            if (this.showMediaKeysOSD && !this.is_fullscreen()) {
                 icon = Gio.Icon.new_for_string(this._outputIcon);
                 _bar_level = null;
                 _volume_str = "";
@@ -1643,7 +1647,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             //~ if (this.actor && this.actor.get_stage() != null && !this.keepAlbumArtIcon)
             if (this.actor && this.actor.get_stage() != null)
                 this.set_applet_icon_symbolic_name(this._outputIcon);
-            if (this.showMediaKeysOSD) {
+            if (this.showMediaKeysOSD && !this.is_fullscreen()) {
                 icon = Gio.Icon.new_for_string(this._outputIcon);
                 if (typeof(this.volume) == "string") {
                     if (this.volume.endsWith("%"))
@@ -1804,7 +1808,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (this.showBarLevel === true)
                 _bar_level = volume;
             let _maxLevel = Math.round(this._volumeMax / this._volumeNorm * 100) / 100;
-            if (this.showOSD && (this.showOSDonStartup || volume != parseInt(this.old_volume.slice(0, -1)))) {
+            if (this.showOSD && !this.is_fullscreen() && (this.showOSDonStartup || volume != parseInt(this.old_volume.slice(0, -1)))) {
                 try {
                     if (IS_OSD150_ENABLED())
                         Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
@@ -2979,7 +2983,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (!this.actor || this.actor.get_stage() == null) return;
 
         //~ logDebug("volume_near_icon(comesFrom="+ comesFrom +")");
-        if (this.showMediaKeysOSD &&
+        if (this.showMediaKeysOSD && !this.is_fullscreen() &&
             this.alreadyCalledBysetAppletTooltip &&
             comesFrom === "setAppletTooltip()" &&
             this.volume !== this.old_volume
