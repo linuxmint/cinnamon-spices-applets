@@ -1,0 +1,127 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidiaprime@pdcurtis 3.3.5\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-06-12 23:40+08:00\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:123 3.8/applet.js:123
+msgid "Waiting for nvidia"
+msgstr "正在等待 NVIDIA"
+
+#: applet.js:183 3.8/applet.js:183
+msgid "Open Power Statistics"
+msgstr "開啟電源統計資料"
+
+#: applet.js:189 3.8/applet.js:189
+msgid "Open System Monitor"
+msgstr "開啟系統監視器"
+
+#: applet.js:207 3.8/applet.js:207
+msgid "Housekeeping and System Sub Menu"
+msgstr "維護功能與系統子選單"
+
+#: applet.js:210 3.8/applet.js:210
+msgid "View the Changelog"
+msgstr "檢視更新記錄"
+
+#: applet.js:216 3.8/applet.js:216
+msgid "Open the Help file"
+msgstr "開啟說明文件"
+
+#: applet.js:258 3.8/applet.js:258
+msgid "NVidia based GPU is Off"
+msgstr "NVIDIA GPU 已關閉"
+
+#: applet.js:281 3.8/applet.js:281
+msgid "NVidia based GPU is On and Core Temperature is"
+msgstr "NVIDIA GPU 已開啟，核心溫度為"
+
+#: applet.js:289 3.8/applet.js:289
+msgid "Err"
+msgstr "錯誤"
+
+#: applet.js:290 3.8/applet.js:290
+msgid ""
+"Nvidia Prime is not set up correctly - are the nvidia drivers and nvidia-"
+"prime  installed?"
+msgstr ""
+"nVidia Prime 未正確設定，您是否已正確安裝 NVIDIA 驅動程式與 nvidia-prime 套件？"
+
+#. metadata.json->description
+msgid ""
+"Displays which Graphics processor is active and nVidia GPU Temperature when "
+"active and in a horizontal panel"
+msgstr ""
+"顯示目前作用中的圖形處理器，以及 nVidia GPU 啟用時在水平面板上的溫度"
+
+#. metadata.json->name
+msgid "nVidia Prime GPU Display"
+msgstr "nVidia Prime GPU 顯示"
+
+#. settings-schema.json->head->description
+#. 3.8->settings-schema.json->head->description
+msgid "General Settings for the nVidia Prime Monitoring Applet"
+msgstr "nVidia Prime 監控小程式的一般設定"
+
+#. settings-schema.json->refreshInterval-spinner->units
+#. 3.8->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "秒"
+
+#. settings-schema.json->refreshInterval-spinner->description
+#. 3.8->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "顯示更新間隔："
+
+#. settings-schema.json->refreshInterval-spinner->tooltip
+#. 3.8->settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"調整此數值以變更顯示更新間隔 — 若您的電腦較慢，建議使用較長的更新間隔"
+
+#. settings-schema.json->showGpuTemp->description
+#. 3.8->settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature as well as icon"
+msgstr "同時顯示 GPU 溫度與圖示"
+
+#. settings-schema.json->showGpuTemp->tooltip
+#. 3.8->settings-schema.json->showGpuTemp->tooltip
+msgid ""
+"Available in Horizontal and Vertical Panels. Display is in Degrees "
+"Centigrade."
+msgstr ""
+"適用於水平與垂直面板，溫度以攝氏度顯示。"
+
+#. settings-schema.json->head2->description
+#. 3.8->settings-schema.json->head2->description
+msgid "Additional Functionality"
+msgstr "額外功能"
+
+#. settings-schema.json->displayExtra->description
+#. 3.8->settings-schema.json->displayExtra->description
+msgid ""
+"Access enhanced functionality through Context Menu - needs Cinnamon Restart"
+msgstr ""
+"透過右鍵選單存取進階功能 — 需重新啟動 Cinnamon"
+
+#. settings-schema.json->displayExtra->tooltip
+#. 3.8->settings-schema.json->displayExtra->tooltip
+msgid ""
+"Currently  adds glxspheres64 Graphics Processor Test - VirtualGL needs to be "
+"installed"
+msgstr ""
+"目前會新增 glxspheres64 圖形處理器測試 — 需安裝 VirtualGL"

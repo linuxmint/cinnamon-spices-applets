@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: calc-js@ptandler 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-12-08 00:21+0000\n"
+"PO-Revision-Date: 2025-10-09 00:48+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+msgid "Mini-Calc Applet"
+msgstr "Tiện ích Mini-Calc"
+
+#. metadata.json->description
+msgid ""
+"Very simple and minimalistic but yet powerful calculator that evaluates "
+"JavaScript expressions."
+msgstr ""
+"Máy tính rất đơn giản và tối giản nhưng mạnh mẽ, cho phép tính toán các biểu thức JavaScript."
+
+#. settings-schema.json->panel-options->title
+msgid "Settings"
+msgstr "Cài đặt"
+
+#. settings-schema.json->keyboard-section->title
+msgid "Keyboard"
+msgstr "Bàn phím"
+
+#. settings-schema.json->input-section->title
+msgid "Number Format"
+msgstr "Định dạng số"
+
+#. settings-schema.json->history-section->title
+msgid "Expression and Result History"
+msgstr "Lịch sử biểu thức và kết quả"
+
+#. settings-schema.json->keyToggle->description
+msgid "Show / hide mini calculator"
+msgstr "Hiện / ẩn máy tính mini"
+
+#. settings-schema.json->convertLocaleNumberSeparators->description
+msgid "Convert numbers in current locale's format to JS numbers"
+msgstr "Chuyển đổi số theo định dạng địa phương sang số JS"
+
+#. settings-schema.json->convertLocaleNumberSeparatorsHelp->description
+msgid ""
+"e.g. for the German locale convert `1,2 + 3,4` to `1.2 + 3.4`. Makes pasting "
+"number easier."
+msgstr ""
+"Ví dụ, với định dạng Đức sẽ chuyển `1,2 + 3,4` thành `1.2 + 3.4`. Giúp việc dán số dễ dàng hơn."
+
+#. settings-schema.json->recentHistoryMaxLength->description
+msgid "Max number of recent expressions"
+msgstr "Số lượng biểu thức gần đây tối đa"
+
+#. settings-schema.json->historyMaxDisplayLength->description
+msgid "Max length of expression history"
+msgstr "Độ dài tối đa của lịch sử biểu thức"
+

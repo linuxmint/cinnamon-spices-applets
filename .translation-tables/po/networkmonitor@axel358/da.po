@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-05 13:20-0400\n"
+"PO-Revision-Date: 2023-12-28 07:55+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:32
+msgid "Open System Monitor"
+msgstr "Åbn systemovervågning"
+
+#. metadata.json->name
+msgid "Network Monitor"
+msgstr "Netværksovervågning"
+
+#. metadata.json->description
+msgid "Monitor network traffic"
+msgstr "Overvåg netværkstrafik"
+
+#. settings-schema.json->head->description
+msgid "Settings"
+msgstr "Indstillinger"
+
+#. settings-schema.json->display-style->description
+msgid "Speed display style"
+msgstr "Visningsstil for hastighed"
+
+#. settings-schema.json->display-style->options
+msgid "Combined"
+msgstr "Kombineret"
+
+#. settings-schema.json->display-style->options
+msgid "Column"
+msgstr "Kolonne"
+
+#. settings-schema.json->display-style->options
+msgid "Side by side"
+msgstr "Side om side"
+
+#. settings-schema.json->display-style->options
+msgid "Download only"
+msgstr "Kun download"
+
+#. settings-schema.json->display-style->options
+msgid "Upload only"
+msgstr "Kun upload"
+
+#. settings-schema.json->display-style->tooltip
+msgid "Whether to show download and upload speeds separately or combined"
+msgstr ""
+"Om download- og uploadhastigheder skal vises adskilt eller kombineret"
+
+#. settings-schema.json->refresh-interval->units
+msgid "milliseconds"
+msgstr "millisekunder"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh interval"
+msgstr "Opdateringsinterval"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid "Time between data refeshes"
+msgstr "Tid mellem opdateringer"
+
+#. settings-schema.json->decimal-places->description
+msgid "Decimal places"
+msgstr "Antal decimaler"
+
+#. settings-schema.json->decimal-places->tooltip
+msgid "Number of decimal places to show"
+msgstr "Antallet af decimaler der skal vises"
+
+#. settings-schema.json->hide-umbral->units
+msgid "bytes per second"
+msgstr "byte pr. sekund"
+
+#. settings-schema.json->hide-umbral->description
+msgid "Hide speed if network traffic is less than"
+msgstr "Skjul hastighed, hvis netværkstrafikken er mindre end"
+
+#. settings-schema.json->hide-umbral->tooltip
+msgid ""
+"Use a compact display style if network traffic is less than the specified "
+"amount"
+msgstr ""
+"Brug en kompakt visningsstil, hvis netværkstrafikken er mindre end angivet"

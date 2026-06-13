@@ -1,0 +1,32 @@
+# MULTI-CORE SYSTEM MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# ccadeptic23, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-06-07 12:11+0200\n"
+"PO-Revision-Date: 2026-05-18 17:22+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: po\n"
+
+#. 5.6->settings-schema.json->quickTooltip->description
+msgid "Show the tooltip immediately"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_total1decimal->description
+#. 5.6->settings-schema.json->Disk_speed1decimal->description
+msgid "Show 1 decimal"
+msgstr ""

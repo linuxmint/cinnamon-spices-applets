@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: applet.js:96
+msgid "Process started"
+msgstr ""
+
+#. settings-schema.json->command->description
+#: applet.js:96 applet.js:149
+msgid "Command"
+msgstr ""
+
+#: applet.js:149
+msgid "Process ended"
+msgstr ""
+
+#. metadata.json->description
+msgid "Lets you to run command-line commands with the click of a button"
+msgstr ""
+
+#. settings-schema.json->apearance->description
+msgid "Appearance and behavior"
+msgstr ""
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr ""
+
+#. settings-schema.json->tooltipText->description
+msgid "Tooltip"
+msgstr ""
+
+#. settings-schema.json->keyLaunch->description
+msgid "Keyboard shortcut"
+msgstr ""
+
+#. settings-schema.json->showNotifications->description
+msgid "Show notifications on completion"
+msgstr ""
+
+#. settings-schema.json->commandTitle->description
+msgid "Command settings"
+msgstr ""
+
+#. settings-schema.json->useAltEnv->description
+msgid "Run in alternate directory"
+msgstr ""
+
+#. settings-schema.json->altEnv->description
+msgid "Environment path"
+msgstr ""

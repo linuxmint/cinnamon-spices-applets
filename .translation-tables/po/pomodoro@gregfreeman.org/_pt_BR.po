@@ -1,0 +1,60 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Augusto Bennemann <gutobenn@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-25 20:30+1000\n"
+"PO-Revision-Date: 2021-10-02 21:15-0300\n"
+"Last-Translator: Marcelo Aof\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0\n"
+
+#: applet.js:787
+msgid "Skip To Next Timer"
+msgstr ""
+
+#: applet.js:953
+msgid "Start break"
+msgstr ""
+
+#: applet.js:970
+msgid "Pomodoro finished, ready to take a break?"
+msgstr ""
+
+#. settings-schema.json->start_automatically_on_load->description
+msgid "Start the pomodoro timer as soon as the applet loads"
+msgstr ""
+
+#. settings-schema.json->auto_start_after_pomodoro_ends->description
+msgid "Auto start after a pomodoro ends"
+msgstr ""
+
+#. settings-schema.json->hotkey->description
+msgid "Set the keybinding to open the applet menu"
+msgstr ""
+
+#. settings-schema.json->head_scripts->description
+msgid "Scripts"
+msgstr ""
+
+#. settings-schema.json->enable_scripts->description
+msgid "Enable scripts"
+msgstr ""
+
+#. settings-schema.json->custom_short_break_script->description
+msgid "Execute this custom script when a short break starts"
+msgstr ""
+
+#. settings-schema.json->custom_long_break_script->description
+msgid "Execute this custom script when a long break starts"
+msgstr ""

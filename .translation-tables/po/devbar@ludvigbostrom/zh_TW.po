@@ -1,0 +1,32 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: devbar@ludvigbostrom 1.0\n"
+"POT-Creation-Date: 2025-04-26 23:07+0800\n"
+"PO-Revision-Date: 2025-04-26 23:07+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "DevBar"
+msgstr "DevBar"
+
+#. metadata.json->description
+msgid "This applet helps you keep track of your development workflow."
+msgstr "這個小程式可以協助你掌握開發流程。"
+
+#. settings-schema.json->url->description
+msgid "Url to fetch information from"
+msgstr "要擷取資訊的網址"
+
+#. settings-schema.json->appendUsername->description
+msgid "Append your username to url"
+msgstr "在網址後附加您的使用者名稱"
+
+#. settings-schema.json->interval->description
+msgid "Update interval in seconds"
+msgstr "更新間隔（秒）"

@@ -1,0 +1,198 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2024-04-21 10:51+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:45 applet.js:46
+msgid "GitHub Explorer"
+msgstr "GitHub Verkenner"
+
+#. applet.js:45
+msgid "Attempting to Load your GitHub Repos"
+msgstr "Probeert je GitHub-repositories te laden"
+
+#. applet.js:46
+#, javascript-format
+msgid "Successfully Loaded GitHub Repos for user %s"
+msgstr "GitHub-repositories succesvol geladen voor gebruiker %s"
+
+#. applet.js:47
+msgid "ERROR:: GitHub Explorer ::ERROR"
+msgstr "FOUT:: GitHub Verkenner ::FOUT"
+
+#. applet.js:47
+msgid "Failed to load GitHub Repositories! Check applet Configuration"
+msgstr "GitHub-repositories laden mislukt! Controleer de appletconfiguratie"
+
+#. applet.js:166
+msgid "Settings"
+msgstr "Instellingen"
+
+#. applet.js:177 applet.js:270
+msgid "Check Applet Configuration"
+msgstr "Controleer appletconfiguratie"
+
+#. applet.js:266
+msgid "API Rate Exceeded will try again once we are allowed"
+msgstr "API-limiet overschreden, we proberen het opnieuw zodra toegestaan"
+
+#. applet.js:281
+msgid "Click here to open GitHub"
+msgstr "Klik hier om GitHub te openen"
+
+#. applet.js:331
+msgid "Open Repo In Browser"
+msgstr "Open repo in browser"
+
+#. applet.js:339
+msgid "Project Home"
+msgstr "Project home"
+
+#. applet.js:346
+msgid "Details"
+msgstr "Details"
+
+#. applet.js:349
+msgid "Watchers"
+msgstr "Volgers"
+
+#. applet.js:356
+msgid "Open Issues"
+msgstr "Open kwesties"
+
+#. applet.js:363
+msgid "Forks"
+msgstr "Forks"
+
+#. settings-schema.json->open-github-homepage-button->description
+#. applet.js:393
+msgid "Open GitHub Home"
+msgstr "Open GitHub home"
+
+#. applet.js:401
+msgid "Create A Gist"
+msgstr "Maak een Gist aan"
+
+#. metadata.json->name
+msgid "Github Explorer"
+msgstr "Github Verkenner"
+
+#. metadata.json->description
+msgid "Click on the applet to explore your Public Github repositories"
+msgstr "Klik op de applet om je openbare GitHub-repositories te verkennen"
+
+#. settings-schema.json->head->description
+msgid "User Settings"
+msgstr "Gebruikersinstellingen"
+
+#. settings-schema.json->username->description
+msgid "GitHub username:"
+msgstr "GitHub-gebruikersnaam:"
+
+#. settings-schema.json->username->tooltip
+msgid "Set a username which you want to display public repositories for"
+msgstr ""
+"Stel een gebruikersnaam in waarvan u openbare repositories wilt weergeven"
+
+#. settings-schema.json->head1->description
+msgid "Usage Settings"
+msgstr "Gebruiksinstellingen"
+
+#. settings-schema.json->enable-auto-refresh->description
+msgid "Check this to enable automatic refreshing"
+msgstr "Vink dit aan om automatisch vernieuwen in te schakelen"
+
+#. settings-schema.json->enable-auto-refresh->tooltip
+msgid ""
+"Checking this will mean the applet will update itself according to your "
+"refresh interval"
+msgstr ""
+"Vink dit aan om de applet automatisch te laten bijwerken volgens uw "
+"vernieuwingsinterval"
+
+#. settings-schema.json->enable-verbose-logging->description
+msgid "Check this to enable lots of logging in Looking Glass"
+msgstr "Vink dit aan om veel logging in Looking Glass in te schakelen"
+
+#. settings-schema.json->enable-verbose-logging->tooltip
+msgid "Checking this will enable lots of logging"
+msgstr "Vink dit aan om veel logging in te schakelen"
+
+#. settings-schema.json->enable-github-change-notifications->description
+msgid ""
+"Check this to enable notifications about changes to Watchers, Forks and "
+"Issues"
+msgstr ""
+"Vink dit aan om meldingen in te schakelen over wijzigingen in Volgers, Forks "
+"en Kwesties"
+
+#. settings-schema.json->enable-github-change-notifications->tooltip
+msgid "Checking this will enable more notification messages"
+msgstr "Vink dit aan om meer meldingsberichten in te schakelen"
+
+#. settings-schema.json->show-issues-icon-on-repo-name->description
+msgid "Check this show the number of open issues next to the repository"
+msgstr ""
+"Vink dit aan om het aantal open kwesties naast de repository weer te geven"
+
+#. settings-schema.json->show-issues-icon-on-repo-name->tooltip
+msgid "Checking this show the number of issues next to each repository"
+msgstr "Vink dit aan om het aantal kwesties naast elk repository weer te geven"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh Interval:"
+msgstr "Vernieuwingsinterval:"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid ""
+"Change the amount of time between checking GitHub for changes to your "
+"Repositories"
+msgstr ""
+"Wijzig de tijd tussen het controleren van GitHub op wijzigingen in uw "
+"repositories"
+
+#. settings-schema.json->head2->description
+msgid "Version Details"
+msgstr "Versiedetails"
+
+#. settings-schema.json->applet-version->description
+msgid "Applet Version:"
+msgstr "Appletversie:"
+
+#. settings-schema.json->applet-version->tooltip
+msgid "Current version installed"
+msgstr "Huidige geïnstalleerde versie"
+
+#. settings-schema.json->open-cinnamon-homepage-button->description
+msgid "Visit Cinnamon Applet Home"
+msgstr "Bezoek Cinnamon Applet Home"
+
+#. settings-schema.json->open-cinnamon-homepage-button->tooltip
+msgid "Open cinnamon.com - rate the application"
+msgstr "Open cinnamon.com - beoordeel de applicatie"
+
+#. settings-schema.json->open-github-homepage-button->tooltip
+msgid "Open github.com - fork the code or add features"
+msgstr "Open github.com - fork de code of voeg functies toe"
+
+#. settings-schema.json->open-developer-homepage-button->description
+msgid "Open Developer Home"
+msgstr "Open ontwikkelaarshome"
+
+#. settings-schema.json->open-developer-homepage-button->tooltip
+msgid "Open morgan-design.com - my personal blog"
+msgstr "Open morgan-design.com - mijn persoonlijke blog"

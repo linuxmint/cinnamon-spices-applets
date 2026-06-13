@@ -1,0 +1,38 @@
+# TIMER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Severga, 2023
+#
+msgid ""
+msgstr ""
+
+#. applet.js:95
+msgid "Run command | turn off computer on timer"
+msgstr ""
+
+#. settings-schema.json->customCommand->description
+msgid "Command to run on timer (empty for turn off)"
+msgstr ""
+
+#. settings-schema.json->customCommand->tooltip
+msgid ""
+"Custom command to run on timer. Leave empty to turn off the computer on timer"
+msgstr ""
+
+#. settings-schema.json->cancelTurnOffOption->description
+msgid "Cancel run command (turn off) option"
+msgstr ""
+
+#. settings-schema.json->cancelTurnOffOption->tooltip
+msgid ""
+"Cancel the option to run command or turn off for subsequent use (triggers "
+"only at the moment count down finished)"
+msgstr ""
+
+#. settings-schema.json->customText->description
+msgid "Custom notification text"
+msgstr ""
+
+#. settings-schema.json->customText->tooltip
+msgid "Custom text of the system notification on timer"
+msgstr ""

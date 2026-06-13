@@ -1,0 +1,133 @@
+# GPASTE RELOADED
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# feuerfuchs, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-12-27 14:39-0500\n"
+"PO-Revision-Date: 2024-12-27 22:30-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. GPasteNewItemDialog.js:53
+msgid "Please enter the text you want to add to the current history:"
+msgstr "Introduzca el texto que desea añadir al historial actual:"
+
+#. GPasteNewItemDialog.js:59 GPasteNotInstalledDialog.js:32
+msgid "OK"
+msgstr "OK"
+
+#. GPasteNewItemDialog.js:63
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. GPasteNotInstalledDialog.js:27
+msgid ""
+"GPaste is not installed. Please install the necessary packages and then "
+"restart Cinnamon for this applet to start working."
+msgstr ""
+"GPaste no está instalado. Por favor, instale los paquetes necesarios y "
+"reinicie Cinnamon para que este applet empiece a funcionar."
+
+#. GPasteSearchItem.js:34
+msgid "Type to search..."
+msgstr "Escriba para buscar..."
+
+#. applet.js:73
+msgid "[GPaste is not installed]"
+msgstr "[GPaste no está instalado]"
+
+#. applet.js:109
+msgid "GPaste clipboard"
+msgstr "Portapapeles GPaste"
+
+#. settings-schema.json->gpaste-settings->description
+#. applet.js:115 applet.js:153
+msgid "GPaste Main Program"
+msgstr "Programa principal de GPaste"
+
+#. applet.js:120
+msgid "Select History"
+msgstr "Seleccionar historial"
+
+#. applet.js:129
+msgid "Track clipboard changes"
+msgstr "Seguir los cambios en el portapapeles"
+
+#. applet.js:137
+msgid "(Empty)"
+msgstr "(Vacío)"
+
+#. applet.js:140
+msgid "(No results)"
+msgstr "(Sin resultados)"
+
+#. applet.js:145
+msgid "New item"
+msgstr "Nuevo item"
+
+#. applet.js:148
+msgid "Empty history"
+msgstr "Borrar historial"
+
+#. applet.js:471
+msgid "Do you really want to empty the current history?"
+msgstr "¿Realmente quiere vaciar el historial actual?"
+
+#. metadata.json->description
+msgid "Instantly access and manage your clipboard history."
+msgstr "Acceda y gestione al instante el historial de su portapapeles."
+
+#. metadata.json->name
+msgid "GPaste Reloaded"
+msgstr "GPaste recargado"
+
+#. settings-schema.json->shown-entries->description
+msgid "Shown entries"
+msgstr "Entradas visualizadas"
+
+#. settings-schema.json->always-show-icon->description
+msgid "Show tray icon, even when the applet is not in use"
+msgstr ""
+"Mostrar el icono de la bandeja, incluso cuando el applet no está en uso"
+
+#. settings-schema.json->display-track-switch->description
+msgid "Display 'Track clipboard changes'"
+msgstr "Mostrar 'Seguir los cambios en el portapapeles'"
+
+#. settings-schema.json->display-new-item->description
+msgid "Display 'New item'"
+msgstr "Mostrar 'Nuevo item'"
+
+#. settings-schema.json->display-searchbar->description
+msgid "Display search bar"
+msgstr "Mostrar barra de búsqueda"
+
+#. settings-schema.json->display-gpaste-ui->description
+msgid "Display 'GPaste Main Program'"
+msgstr "Mostrar 'Programa principal de GPaste'"
+
+#. settings-schema.json->display-empty-history->description
+msgid "Display 'Empty history'"
+msgstr "Mostrar 'Borrar historial'"
+
+#. settings-schema.json->key-bindings->description
+msgid "Key bindings"
+msgstr "Atajos de teclado"
+
+#. settings-schema.json->kb-show-history->description
+msgid "Show history"
+msgstr "Mostrar historial"
+
+#. settings-schema.json->other->description
+msgid "Other"
+msgstr "Otro"

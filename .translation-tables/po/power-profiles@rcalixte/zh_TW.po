@@ -1,0 +1,172 @@
+# POWER PROFILES
+# This file is put in the public domain.
+# rcalixte, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: power-profiles@rcalixte 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-15 02:11-0100\n"
+"PO-Revision-Date: 2025-06-14 00:09+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. 5.4/applet.js:28
+msgid "Power Saver"
+msgstr "省電模式"
+
+#. 5.4/applet.js:29
+msgid "Balanced"
+msgstr "平衡模式"
+
+#. 5.4/applet.js:30
+msgid "Performance"
+msgstr "高效能模式"
+
+#. 5.4/applet.js:63 5.4/applet.js:70
+msgid ""
+"Please make sure the power-profiles-daemon package is installed and the "
+"service is running."
+msgstr "請確認 power-profiles-daemon 套件已安裝且其服務正在運作中。"
+
+#. 5.4/applet.js:64
+msgid "exception:"
+msgstr "例外狀況："
+
+#. 5.4/applet.js:117
+msgid "Power Profiles Applet Error"
+msgstr "Power Profiles 小程式發生錯誤"
+
+#. 5.4/applet.js:118
+msgid ""
+"The system package 'power-profiles-daemon' is not installed.\n"
+"\n"
+"Please install it and reload the applet."
+msgstr "系統尚未安裝 power-profiles-daemon 套件，請安裝後重新載入這個小程式。"
+
+#. 5.4/applet.js:120
+msgid "Open README"
+msgstr "開啟 README"
+
+#. 5.4/applet.js:121
+msgid "Open Website"
+msgstr "開啟網站"
+
+#. 5.4/applet.js:151
+msgid "Current Profile:"
+msgstr "目前設定檔："
+
+#. 5.4/applet.js:156
+msgid "Performance Degraded:"
+msgstr "效能已降低："
+
+#. 5.4/applet.js:167
+msgid "Active Profile Holds:"
+msgstr "作用中設定檔鎖定："
+
+#. metadata.json->description
+msgid ""
+"An applet to modify the current system power profile as determined by power-"
+"profiles-daemon"
+msgstr "一個可根據 power-profiles-daemon 調整目前系統電源設定檔的小程式"
+
+#. metadata.json->name
+msgid "Power Profiles"
+msgstr "Power Profiles"
+
+#. 5.4->settings-schema.json->section0->description
+msgid "General"
+msgstr ""
+
+#. 5.4->settings-schema.json->cycleProfiles->description
+#, fuzzy
+msgid "Cycle through profiles when using keyboard shortcuts or scroll wheel"
+msgstr "使用鍵盤快速鍵時循環切換電源設定檔"
+
+#. 5.4->settings-schema.json->cycleProfiles->tooltip
+msgid ""
+"If enabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the next profile would be "
+"'Performance' (or 'Balanced' on some systems).\n"
+"\n"
+"If disabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the profile would not change."
+msgstr ""
+"若啟用，當目前電源設定檔為「省電模式」且使用「上一個電源設定檔」鍵盤快速鍵"
+"時，下一個電源設定檔將為「高效能模式」（在某些系統上則為「平衡模式」）。\n"
+"\n"
+"若停用，當目前電源設定檔為「省電模式」且使用「上一個電源設定檔」鍵盤快速鍵"
+"時，電源設定檔將不會變更。"
+
+#. 5.4->settings-schema.json->scrollBehavior->description
+msgid "Scroll wheel behavior"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Nothing"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+#, fuzzy
+msgid "Switch profiles"
+msgstr "下一個電源設定檔"
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles (reversed)"
+msgstr ""
+
+#. 5.4->settings-schema.json->section1->description
+msgid "Keyboard Shortcuts"
+msgstr "鍵盤快速鍵"
+
+#. 5.4->settings-schema.json->previousProfileKey->description
+msgid "Previous profile"
+msgstr "上一個電源設定檔"
+
+#. 5.4->settings-schema.json->previousProfileKey->tooltip
+msgid "Set keybinding(s) to switch to previous power profile."
+msgstr "設定組合鍵以切換至上一個電源設定檔。"
+
+#. 5.4->settings-schema.json->nextProfileKey->description
+msgid "Next profile"
+msgstr "下一個電源設定檔"
+
+#. 5.4->settings-schema.json->nextProfileKey->tooltip
+msgid "Set keybinding(s) to switch to next power profile."
+msgstr "設定組合鍵以切換至下一個電源設定檔。"
+
+#. 5.4->settings-schema.json->showOSD->description
+msgid "On-screen display for keyboard shortcuts"
+msgstr "使用鍵盤快速鍵時顯示螢幕提示"
+
+#. 5.4->settings-schema.json->showOSD->tooltip
+msgid ""
+"Show on-screen display of the new profile when using the keyboard shortcuts"
+msgstr "使用鍵盤快速鍵時，在螢幕上顯示新的電源設定檔"
+
+#. 5.4->settings-schema.json->section2->description
+msgid "Appearance"
+msgstr "外觀"
+
+#. 5.4->settings-schema.json->iconStyle->description
+msgid "Icon Style"
+msgstr "圖示樣式"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Classic"
+msgstr "傳統"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Papirus"
+msgstr "Papirus"
+
+#. 5.4->settings-schema.json->iconStyle->tooltip
+msgid ""
+"Choose the style of the applet's icon. This is used for the panel and the on-"
+"screen display."
+msgstr "選擇小程式圖示的樣式，此樣式將用於面板及螢幕顯示畫面。"

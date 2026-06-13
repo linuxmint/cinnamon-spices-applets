@@ -1,0 +1,127 @@
+# SYSTEM MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# orcuscz, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-04-20 17:45+0200\n"
+"PO-Revision-Date: 2025-05-13 14:50+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. 6.6/providers.js:44
+msgid "%"
+msgstr ""
+
+#. 6.6/providers.js:83
+msgid "MEM"
+msgstr ""
+
+#. 6.6/providers.js:84 6.6/providers.js:108
+msgid "GiB"
+msgstr ""
+
+#. 6.6/providers.js:107
+msgid "SW"
+msgstr ""
+
+#. 6.6/providers.js:129
+msgid "Network:"
+msgstr ""
+
+#. 6.6/providers.js:130
+msgid "NET"
+msgstr ""
+
+#. 6.6/providers.js:131
+msgid "KiB/s"
+msgstr ""
+
+#. 6.6->settings-schema.json->net_minimum_graph_scale->units
+#. 6.6/providers.js:132
+msgid "MiB/s"
+msgstr ""
+
+#. 6.6/providers.js:200
+msgid "LOAD"
+msgstr ""
+
+#. metadata.json->name
+msgid "Graphical System Monitor"
+msgstr ""
+
+#. 6.6->settings-schema.json->tooltip_page->title
+msgid "Tooltip"
+msgstr ""
+
+#. 6.6->settings-schema.json->graph_width->description
+msgid "Common graph size"
+msgstr ""
+
+#. 6.6->settings-schema.json->graph_width->tooltip
+msgid "Graphs width for horizontal panel, graphs height for vertical panel."
+msgstr ""
+
+#. 6.6->settings-schema.json->graph_spacing->tooltip
+msgid "The number of pixels between each graph."
+msgstr ""
+
+#. 6.6->settings-schema.json->show_values->description
+msgid "Show data on the graphs"
+msgstr ""
+
+#. 6.6->settings-schema.json->values_fontsize->description
+msgid "Data font size"
+msgstr ""
+
+#. 6.6->settings-schema.json->values_color->description
+msgid "Text color"
+msgstr ""
+
+#. 6.6->settings-schema.json->cpu_override_graph_width->description
+#. 6.6->settings-schema.json->mem_override_graph_width->description
+#. 6.6->settings-schema.json->swap_override_graph_width->description
+#. 6.6->settings-schema.json->net_override_graph_width->description
+#. 6.6->settings-schema.json->load_override_graph_width->description
+msgid "Override graph size"
+msgstr ""
+
+#. 6.6->settings-schema.json->cpu_graph_width->description
+#. 6.6->settings-schema.json->mem_graph_width->description
+#. 6.6->settings-schema.json->swap_graph_width->description
+#. 6.6->settings-schema.json->net_graph_width->description
+#. 6.6->settings-schema.json->load_graph_width->description
+msgid "Graph size"
+msgstr ""
+
+#. 6.6->settings-schema.json->tooltip_background_color->description
+msgid "Tooltip background color"
+msgstr ""
+
+#. 6.6->settings-schema.json->tooltip_label_color->description
+msgid "Tooltip label color"
+msgstr ""
+
+#. 6.6->settings-schema.json->tooltip_tick_labels_border_color->description
+msgid "Tooltip tick labels and border color"
+msgstr ""
+
+#. 6.6->settings-schema.json->tooltip_grid_color->description
+msgid "Tooltip horizontal and vertical grid color"
+msgstr ""
+
+#. 6.6->settings-schema.json->tooltip_history_seconds->description
+msgid "Tooltip graph horizontal scale"
+msgstr ""
+
+#. 6.6->settings-schema.json->tooltip_history_seconds->units
+msgid "seconds"
+msgstr ""
