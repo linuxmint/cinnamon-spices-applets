@@ -1,14 +1,12 @@
 {
   "uuid": "wmm-applet@maki",
   "name": "WMM Manager",
-  "description": "Wallpaper Multi-Monitor Manager",
-  "icon": "video-display",
+  "description": "Wallpaper Multi-Monitor Manager"
   "version": "0.9.2",
   "url": "https://github.com/makimanson/wmm",
   "cinnamon-version": [
     "5.0"
   ],
   "author": "makimanson",
-  "multiversion": false,
-  "last-edited": 1781237512
+  "multiversion": false
 }
