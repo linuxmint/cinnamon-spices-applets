@@ -65,7 +65,7 @@ class WMMApplet extends Applet.IconApplet {
                 if (open) this._refreshSettingsFromDisk();
             });
 
-            Util.spawnCommandLine(["python3", this.enginePath]);
+            Util.spawn(["python3", this.enginePath]);
 
         } catch (e) {
             global.logError("WMM Constructor Error: " + e.message);
@@ -110,7 +110,7 @@ class WMMApplet extends Applet.IconApplet {
             // Botón añadir favorito
             let itemAddBookmark = new PopupMenu.PopupMenuItem(_("Add Preset Favorite"));
             itemAddBookmark.connect('activate', () => {
-                Util.spawnCommandLine(["python3", this.appletPath + "/python/add_bookmark.py"]);
+                Util.spawn(["python3", this.appletPath + "/python/add_bookmark.py"]);
             });
 
             this.menuBookmarks.menu.addMenuItem(itemAddBookmark);
@@ -194,7 +194,7 @@ class WMMApplet extends Applet.IconApplet {
             // --- 2.6 AYUDA ---
             let itemHelp = new PopupMenu.PopupMenuItem(_("Help"));
             itemHelp.connect('activate', () => {
-                Util.spawnCommandLine(["python3", this.appletPath + "/python/help_viewer.py"]);
+                Util.spawn(["python3", this.appletPath + "/python/help_viewer.py"]);
             });
             this._applet_context_menu.addMenuItem(itemHelp);
 
@@ -416,7 +416,7 @@ class WMMApplet extends Applet.IconApplet {
             let file = Gio.File.new_for_path(this.commandsPath);
             let rawContent = JSON.stringify(command, null, 4);
             file.replace_contents(rawContent, null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null);
-            Util.spawnCommandLine(["pkill", "-USR1", "-f", "main.py"]);
+            Util.spawn(["pkill", "-USR1", "-f", "main.py"]);
         } catch (e) {
             global.logError("WMM Send Error: " + e.message);
         }
@@ -468,8 +468,8 @@ class WMMApplet extends Applet.IconApplet {
                 if (success) {
                     let pid = content.toString().trim();
                     // kill -9 garantiza la muerte inmediata del proceso
-                    Util.spawnCommandLine(["kill", "-9", pid]);
-                    Util.spawnCommandLine(["rm", pidPath]);
+                    Util.spawn(["kill", "-9", pid]);
+                    Util.spawn(["rm", pidPath]);
                     global.logError(" [WMM] Applet eliminado. Proceso " + pid + " finalizado y rastro borrado.");
                 }
             } catch (e) {
